@@ -165,7 +165,7 @@ private void createGroupDossier() {
 	buttonParcourir
 	.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 		public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-			System.out.println("RAZ"); // TODO Auto-generated Event stub widgetSelected()
+			System.out.println("parcourir"); 
 			
 			
 		String nomRepertoire;
@@ -174,9 +174,7 @@ private void createGroupDossier() {
 		nomRepertoire = dialog.open();
 		if (nomRepertoire != null){
 			textDossier.setText(nomRepertoire);
-			//Utils.findFiles(nomRepertoire);
-		//labelDescription.setText("Dossier-->");
-		//textAreaDescription.setText(Utils.texteBrut);
+
 			}
 		else { 
 			
