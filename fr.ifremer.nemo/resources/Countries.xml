@@ -1,0 +1,1355 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0" class="java.beans.XMLDecoder"> 
+ <object class="java.util.ArrayList"> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>72</string> 
+    </void> 
+    <void property="name"> 
+     <string>ALBANIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>AL</string> 
+    </void> 
+    <void property="name"> 
+     <string>ALGERIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>AN</string> 
+    </void> 
+    <void property="name"> 
+     <string>ANGOLA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>08</string> 
+    </void> 
+    <void property="name"> 
+     <string>ARGENTINA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>09</string> 
+    </void> 
+    <void property="name"> 
+     <string>AUSTRALIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>10</string> 
+    </void> 
+    <void property="name"> 
+     <string>AUSTRIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>BH</string> 
+    </void> 
+    <void property="name"> 
+     <string>BAHAMAS</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>BN</string> 
+    </void> 
+    <void property="name"> 
+     <string>BANGLADESH</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>BR</string> 
+    </void> 
+    <void property="name"> 
+     <string>BARBADOS</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>11</string> 
+    </void> 
+    <void property="name"> 
+     <string>BELGIUM</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>DA</string> 
+    </void> 
+    <void property="name"> 
+     <string>BENIN (DAHOMEY)</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>13</string> 
+    </void> 
+    <void property="name"> 
+     <string>BOLIVIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>14</string> 
+    </void> 
+    <void property="name"> 
+     <string>BRAZIL</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>15</string> 
+    </void> 
+    <void property="name"> 
+     <string>BULGARIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>17</string> 
+    </void> 
+    <void property="name"> 
+     <string>CAMEROON</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>18</string> 
+    </void> 
+    <void property="name"> 
+     <string>CANADA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>CV</string> 
+    </void> 
+    <void property="name"> 
+     <string>CAPE VERDE</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>20</string> 
+    </void> 
+    <void property="name"> 
+     <string>CHILE</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>76</string> 
+    </void> 
+    <void property="name"> 
+     <string>CHINA, PEOPLE&apos;S REPUBLIC OF</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>21</string> 
+    </void> 
+    <void property="name"> 
+     <string>CHINA (TAIWAN)</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>22</string> 
+    </void> 
+    <void property="name"> 
+     <string>COLOMBIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>RC</string> 
+    </void> 
+    <void property="name"> 
+     <string>CONGO</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>CR</string> 
+    </void> 
+    <void property="name"> 
+     <string>COSTA RICA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>CT</string> 
+    </void> 
+    <void property="name"> 
+     <string>CROATIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>HR</string> 
+    </void> 
+    <void property="name"> 
+     <string>CROATIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>CU</string> 
+    </void> 
+    <void property="name"> 
+     <string>CUBA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>CY</string> 
+    </void> 
+    <void property="name"> 
+     <string>CYPRUS</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>26</string> 
+    </void> 
+    <void property="name"> 
+     <string>DENMARK</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>70</string> 
+    </void> 
+    <void property="name"> 
+     <string>DOMINICAN REPUBLIC</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>28</string> 
+    </void> 
+    <void property="name"> 
+     <string>ECUADOR</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>27</string> 
+    </void> 
+    <void property="name"> 
+     <string>EGYPT</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>75</string> 
+    </void> 
+    <void property="name"> 
+     <string>EL SALVADOR</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>ES</string> 
+    </void> 
+    <void property="name"> 
+     <string>ESTONIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>ET</string> 
+    </void> 
+    <void property="name"> 
+     <string>ETHIOPIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>FJ</string> 
+    </void> 
+    <void property="name"> 
+     <string>FIJI</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>34</string> 
+    </void> 
+    <void property="name"> 
+     <string>FINLAND</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>35</string> 
+    </void> 
+    <void property="name"> 
+     <string>FRANCE</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>GA</string> 
+    </void> 
+    <void property="name"> 
+     <string>GABON</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>GM</string> 
+    </void> 
+    <void property="name"> 
+     <string>GAMBIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>GE</string> 
+    </void> 
+    <void property="name"> 
+     <string>GEORGIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>06</string> 
+    </void> 
+    <void property="name"> 
+     <string>GERMANY</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>96</string> 
+    </void> 
+    <void property="name"> 
+     <string>GERMANY/FGDR</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>GH</string> 
+    </void> 
+    <void property="name"> 
+     <string>GHANA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>36</string> 
+    </void> 
+    <void property="name"> 
+     <string>GREECE</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>37</string> 
+    </void> 
+    <void property="name"> 
+     <string>GUATEMALA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>GU</string> 
+    </void> 
+    <void property="name"> 
+     <string>GUINEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>GN</string> 
+    </void> 
+    <void property="name"> 
+     <string>GUINEA-BISSAU</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>GY</string> 
+    </void> 
+    <void property="name"> 
+     <string>GUYANA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>38</string> 
+    </void> 
+    <void property="name"> 
+     <string>HAITI</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>HO</string> 
+    </void> 
+    <void property="name"> 
+     <string>HONDURAS</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>HU</string> 
+    </void> 
+    <void property="name"> 
+     <string>HUNGARY</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>46</string> 
+    </void> 
+    <void property="name"> 
+     <string>ICELAND</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>41</string> 
+    </void> 
+    <void property="name"> 
+     <string>INDIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>42</string> 
+    </void> 
+    <void property="name"> 
+     <string>INDONESIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>IN</string> 
+    </void> 
+    <void property="name"> 
+     <string>INTERGOVERNMENTAL/INTERNATIONL</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>44</string> 
+    </void> 
+    <void property="name"> 
+     <string>IRAN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>43</string> 
+    </void> 
+    <void property="name"> 
+     <string>IRAQ</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>45</string> 
+    </void> 
+    <void property="name"> 
+     <string>IRELAND</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>47</string> 
+    </void> 
+    <void property="name"> 
+     <string>ISRAEL</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>48</string> 
+    </void> 
+    <void property="name"> 
+     <string>ITALY</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>IC</string> 
+    </void> 
+    <void property="name"> 
+     <string>IVORY COAST</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>JA</string> 
+    </void> 
+    <void property="name"> 
+     <string>JAMAICA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>49</string> 
+    </void> 
+    <void property="name"> 
+     <string>JAPAN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>50</string> 
+    </void> 
+    <void property="name"> 
+     <string>JORDAN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>KE</string> 
+    </void> 
+    <void property="name"> 
+     <string>KENYA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>KR</string> 
+    </void> 
+    <void property="name"> 
+     <string>KOREA, DEMOCRATIC PEOPLE&apos;S REP</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>24</string> 
+    </void> 
+    <void property="name"> 
+     <string>KOREA, REPUBLIC OF</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>KU</string> 
+    </void> 
+    <void property="name"> 
+     <string>KUWAIT</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>LA</string> 
+    </void> 
+    <void property="name"> 
+     <string>LATVIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>52</string> 
+    </void> 
+    <void property="name"> 
+     <string>LEBANON</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>LT</string> 
+    </void> 
+    <void property="name"> 
+     <string>LITHUANIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>53</string> 
+    </void> 
+    <void property="name"> 
+     <string>LYBIAN ARAB JAMAIHIRIYA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>55</string> 
+    </void> 
+    <void property="name"> 
+     <string>MADAGASCAR</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>MS</string> 
+    </void> 
+    <void property="name"> 
+     <string>MALAYSIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>MD</string> 
+    </void> 
+    <void property="name"> 
+     <string>MALDIVES</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>ML</string> 
+    </void> 
+    <void property="name"> 
+     <string>MALTA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>MU</string> 
+    </void> 
+    <void property="name"> 
+     <string>MAURITANIA, ISLAMIC REPUBLIC</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>MA</string> 
+    </void> 
+    <void property="name"> 
+     <string>MAURITIUS</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>57</string> 
+    </void> 
+    <void property="name"> 
+     <string>MEXICO</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>MO</string> 
+    </void> 
+    <void property="name"> 
+     <string>MONACO</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>56</string> 
+    </void> 
+    <void property="name"> 
+     <string>MOROCCO</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>MZ</string> 
+    </void> 
+    <void property="name"> 
+     <string>MOZAMBIQUE</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>12</string> 
+    </void> 
+    <void property="name"> 
+     <string>MYANMAR</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>64</string> 
+    </void> 
+    <void property="name"> 
+     <string>NETHERLANDS</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>59</string> 
+    </void> 
+    <void property="name"> 
+     <string>NEW CALEDONIA (FRANCE)</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>61</string> 
+    </void> 
+    <void property="name"> 
+     <string>NEW ZEALAND</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>NC</string> 
+    </void> 
+    <void property="name"> 
+     <string>NICARAGUA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>NI</string> 
+    </void> 
+    <void property="name"> 
+     <string>NIGERIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>58</string> 
+    </void> 
+    <void property="name"> 
+     <string>NORWAY</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>OM</string> 
+    </void> 
+    <void property="name"> 
+     <string>OMAN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>62</string> 
+    </void> 
+    <void property="name"> 
+     <string>PAKISTAN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>PA</string> 
+    </void> 
+    <void property="name"> 
+     <string>PANAMA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>65</string> 
+    </void> 
+    <void property="name"> 
+     <string>PERU</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>66</string> 
+    </void> 
+    <void property="name"> 
+     <string>PHILIPPINES</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>67</string> 
+    </void> 
+    <void property="name"> 
+     <string>POLAND</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>68</string> 
+    </void> 
+    <void property="name"> 
+     <string>PORTUGAL</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>QA</string> 
+    </void> 
+    <void property="name"> 
+     <string>QATAR</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>73</string> 
+    </void> 
+    <void property="name"> 
+     <string>ROMANIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>RU</string> 
+    </void> 
+    <void property="name"> 
+     <string>RUSSIAN FEDERATION</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>90</string> 
+    </void> 
+    <void property="name"> 
+     <string>RUSSIAN FEDERATION/FSU</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>SA</string> 
+    </void> 
+    <void property="name"> 
+     <string>SAUDI ARABIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>SE</string> 
+    </void> 
+    <void property="name"> 
+     <string>SENEGAL</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>SC</string> 
+    </void> 
+    <void property="name"> 
+     <string>SEYCHELLES</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>SL</string> 
+    </void> 
+    <void property="name"> 
+     <string>SIERRA LEONE</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>SI</string> 
+    </void> 
+    <void property="name"> 
+     <string>SINGAPORE</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>SN</string> 
+    </void> 
+    <void property="name"> 
+     <string>SLOVENIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>SO</string> 
+    </void> 
+    <void property="name"> 
+     <string>SOLOMON ISLANDS</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>SM</string> 
+    </void> 
+    <void property="name"> 
+     <string>SOMALIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>91</string> 
+    </void> 
+    <void property="name"> 
+     <string>SOUTH AFRICA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>29</string> 
+    </void> 
+    <void property="name"> 
+     <string>SPAIN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>19</string> 
+    </void> 
+    <void property="name"> 
+     <string>SRI LANKA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>SU</string> 
+    </void> 
+    <void property="name"> 
+     <string>SUDAN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>79</string> 
+    </void> 
+    <void property="name"> 
+     <string>SURINAME</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>77</string> 
+    </void> 
+    <void property="name"> 
+     <string>SWEDEN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>78</string> 
+    </void> 
+    <void property="name"> 
+     <string>SWITZERLAND</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>80</string> 
+    </void> 
+    <void property="name"> 
+     <string>SYRIAN ARAB REPUBLIC</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>ZA</string> 
+    </void> 
+    <void property="name"> 
+     <string>TANZANIA, UNITED REPUBLIC OF</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>86</string> 
+    </void> 
+    <void property="name"> 
+     <string>THAILAND</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>87</string> 
+    </void> 
+    <void property="name"> 
+     <string>TOGO</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>TN</string> 
+    </void> 
+    <void property="name"> 
+     <string>TONGA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>TT</string> 
+    </void> 
+    <void property="name"> 
+     <string>TRINIDAD AND TOBAGO</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>88</string> 
+    </void> 
+    <void property="name"> 
+     <string>TUNISIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>89</string> 
+    </void> 
+    <void property="name"> 
+     <string>TURKEY</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>UR</string> 
+    </void> 
+    <void property="name"> 
+     <string>UKRAINE</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>UA</string> 
+    </void> 
+    <void property="name"> 
+     <string>UNITED ARAB EMIRATES</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>74</string> 
+    </void> 
+    <void property="name"> 
+     <string>UNITED KINGDOM</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>31</string> 
+    </void> 
+    <void property="name"> 
+     <string>UNITED STATES OF AMERICA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>99</string> 
+    </void> 
+    <void property="name"> 
+     <string>UNKNOWN/UNSPECIFIED</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>92</string> 
+    </void> 
+    <void property="name"> 
+     <string>URUGUAY</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>32</string> 
+    </void> 
+    <void property="name"> 
+     <string>U.S.A.</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>93</string> 
+    </void> 
+    <void property="name"> 
+     <string>VENEZUELA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>94</string> 
+    </void> 
+    <void property="name"> 
+     <string>VIETNAM</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>WS</string> 
+    </void> 
+    <void property="name"> 
+     <string>WESTERN SAMOA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>YM</string> 
+    </void> 
+    <void property="name"> 
+     <string>YEMEN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSCountry"> 
+    <void property="code"> 
+     <string>95</string> 
+    </void> 
+    <void property="name"> 
+     <string>YOUGOSLAVIA</string> 
+    </void> 
+   </object> 
+  </void> 
+ </object> 
+</java> 

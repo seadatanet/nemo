@@ -1,0 +1,1164 @@
+package fr.ifremer.nemo.ui;
+
+import java.text.ParseException;
+import java.util.regex.Pattern;
+
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.forms.widgets.ScrolledForm;
+
+import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.domain.DataType;
+import fr.ifremer.nemo.domain.Parameter;
+import fr.ifremer.nemo.domain.Station;
+import fr.ifremer.nemo.domain.Survey;
+import fr.ifremer.nemo.input.DirectoryBasedSurvey;
+import fr.ifremer.nemo.input.HeaderFragment;
+import fr.ifremer.nemo.input.InputModel;
+import fr.ifremer.nemo.input.LineFragment;
+import fr.ifremer.nemo.input.ParameterModel;
+import fr.ifremer.nemo.input.PropertyModel;
+import fr.ifremer.nemo.input.SingleFileSurvey;
+import fr.ifremer.nemo.input.StationModel;
+import fr.ifremer.nemo.ws.WSDataType;
+import fr.ifremer.nemo.ws.WSParameter;
+import fr.ifremer.nemo.util.DateTimeFormat;
+import fr.ifremer.nemo.util.LatitudeFormat;
+import fr.ifremer.nemo.util.LongitudeFormat;
+
+public class DataModel {
+
+	public static InputModel inputModel, inputModel_modele;
+	public static StationModel stationModel, stationModel_modele;
+	public static SingleFileSurvey singleSurvey, singleSurvey_modele;
+	public static DirectoryBasedSurvey dirSurvey, dirSurvey_modele;
+	public static Station station, station_modele;
+	public static WSParameter[] listeWSParameters, listeWSParameters_modele;
+	public static WSDataType[] listeWSDataTypes, listeWSDataTypes_modele;
+	public static WSDataType wsDatatypeStation, wsDatatypeStation_modele; 
+	public static Boolean ouverture;
+	
+	
+public static void initModele(Boolean fichier, Boolean timeSeries, String nomFich){
+		
+		//ouverture = false;
+	
+		if (!fichier){
+			//fichier campagne
+		initFichier(timeSeries, nomFich);
+		//singleSurvey.
+		
+					
+		}else{
+			initDossier(timeSeries, nomFich);
+			//dossier campagne
+						
+		}
+						
+	}
+
+public static void initDossier(Boolean timeSeries, String nomDossier){
+	
+	inputModel = new InputModel();
+	inputModel.initFoDirectoryBased(timeSeries);
+	dirSurvey = (DirectoryBasedSurvey)inputModel.getMedia();
+	dirSurvey.setDirectory(nomDossier);
+	
+	initDesc();
+}
+
+
+public static void initFichier(Boolean timeSeries, String nomFich){
+//	acceder aux proprietes de survey
+	//singleSurvey.getModel().setmachin...
+//	singleSurvey.getStationModel().
+	
+	inputModel = new InputModel();
+	inputModel.initForSingleFile(timeSeries);
+	singleSurvey = (SingleFileSurvey)inputModel.getMedia();
+	singleSurvey.setFile(nomFich);
+	
+	
+	
+	initDesc();
+	//singleSurvey.getModel().set
+
+	}	
+
+
+public static void initDesc(){
+	
+//	taille du header fichier
+	if (ViewFile.dossierCampagne){
+		dirSurvey.setDirectory(ViewFile.nomRepertoire);
+		stationModel = dirSurvey.getStationModel();
+	}
+	else{
+		singleSurvey.setHeaderLinesNumber(Integer.valueOf(EditDesc.lignesEnteteFichier.getText()));
+		stationModel = singleSurvey.getStationModel();
+	}
+	
+	
+	//nombre lignes entete station
+	stationModel.setNumberOfLines(Integer.valueOf(EditDesc.lignesEnteteStation.getText()));
+	
+	
+	//nombre de lignes de fin
+	stationModel.setEndData(Integer.valueOf(EditDesc.lignesFinStation.getText()));
+	
+	//metaInData
+	stationModel.setMetaInData(false);
+	
+	//attribut pattern fin donnees en accès direct
+	
+	
+	//si manuel -> direct sinon passer par propertyModel
+	//PropertyModel propertyModel = stationModel.propertiesAt("endDataPattern");
+	if (EditDesc.buttonIndicFinDonnees.getSelection()){
+		
+		//pattern
+		stationModel.setEndOnPattern(true);
+		//propertyModel.setUserProvided(true);
+		
+		if (EditDesc.comboIndicRuptureDonnees.getItem(EditDesc.comboIndicRuptureDonnees.getSelectionIndex()).matches("EOF")){
+			stationModel.setEndDataPattern("^$");
+		} else {
+		
+		stationModel.setEndDataPattern(EditDesc.comboIndicRuptureDonnees.getItem(EditDesc.comboIndicRuptureDonnees.getSelectionIndex()));}
+		
+		
+	}else{
+		//nombre de mesures dans le fichier
+		stationModel.setEndOnPattern(false);
+		stationModel.setRowNumber(EditDesc.nbreLignesMesures.getText());
+		
+		
+		//propertyModel.setUserProvided(false); //erreur ?
+		
+		//HeaderFragment frag = propertyModel.getFragment();
+					
+					
+//		String ligne, debut, fin;
+//		ligne = "" + (Integer.valueOf(EditDesc.ruptureDonneesNoLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
+//		debut = EditDesc.ruptureDonneesDebut.getText();
+//		fin = EditDesc.ruptureDonneesFin.getText();
+					
+//		frag.setFirstLine(ligne);
+//		frag.setLastLine(ligne);
+//		frag.setFirstCharOffset(debut);
+//		frag.setLastCharOffset(fin);
+					
+			}
+	
+	//on initialise les dataTypes et paramters en prévision des onglets Campagne et Data 
+	
+	listeWSDataTypes = NemoLists.getDataTypes();
+	listeWSParameters = NemoLists.getParameters();
+	
+//	Lancement de la table des paramètres, onglet DATA
+	TableData.go();
+	
+	//flag "validee" à 1
+	EditDesc.validee = 1;
+	
+	
+}
+
+
+public static void initSurvey(){
+	Survey survey;
+	if (ViewFile.dossierCampagne){
+		survey = dirSurvey.getModel();
+	} else {
+		survey = singleSurvey.getModel();	
+	}
+	 
+	station = stationModel.getModel();
+	
+	//injection des valeurs de l'IHM -> datamodel
+	//référence
+	survey.setReference(EditSurvey.textCampagne.getText());
+	survey.setName(EditSurvey.textNom.getText());
+	survey.setShipCode(EditSurvey.textCodeNavire.getText());
+	survey.setShipName(EditSurvey.textNomNavire.getText());
+	
+	//Localisation
+	survey.setStartDate(EditSurvey.textDateDebut.getText());
+	survey.setEndDate(EditSurvey.textDateFin.getText());
+	survey.setRegionName(EditSurvey.textRegion.getText());
+	
+	//Source de données
+	survey.setCountryCode(EditSurvey.textPays.getText());
+	survey.setLaboratories(EditSurvey.textLabo.getText());
+	survey.setChiefScientist(EditSurvey.textChef.getText());
+	survey.setProjectName(EditSurvey.textProjet.getText());
+	
+	//Centre d'archivage
+	survey.setDataCentre(EditSurvey.textCentre.getText());
+	survey.setAvailability(EditSurvey.textConfidentiel.getText());
+		
+	//Commentaire
+	survey.setComment(EditSurvey.textCommentaire.getText());
+	
+	//remplissage de la liste des dataTypes de la campagne
+	//parcours de la liste des dataTypes de l'IHM et création d'un DataType à chaque fois
+	int taille = TableDataSurvey.types.size();
+	
+	for (int i=0; i<taille;i++){
+		TypeSurvey typeSurvey = TableDataSurvey.types.get(i);
+		DataType dataType = new DataType();
+		dataType.setCode(typeSurvey.getCode());
+		dataType.setNumberOfProfiles(typeSurvey.getNombre());
+		dataType.setQc(typeSurvey.getQc());
+		dataType.setSensor(typeSurvey.getSensor());
+		
+		//test par rapport aux types deja présents dans le DataModel  
+		//si l'étape a déjà été validée
+		
+		survey.addDataType(dataType);
+		
+//		
+//		DataType[] dataTypes = survey.getDataTypes();
+//		Boolean found = false;
+//		int nbreTypes = dataTypes.length;
+//		if (nbreTypes ==0){survey.addDataType(dataType);}
+//		else{
+//		for (int j=0;j<nbreTypes;j++){
+//			String codeModele, codeActuel;
+//			codeActuel = typeSurvey.getCode();
+//			codeModele = dataTypes[j].getCode();
+//			
+//			if (codeActuel.matches(codeModele)){
+//				found = true;	
+//				}
+//		}
+//		if (found == false){		//si le code n'est pas deja présent, on ajoute ce type là
+//			survey.addDataType(dataType);}
+//		}
+		
+		
+	}
+
+	//flag "validee" à 1
+	EditSurvey.validee = 1;
+	
+}
+
+	
+
+public static void initStation(){
+	
+//numéro de station
+	
+	station = stationModel.getModel();
+	
+	if (EditStation.buttonRefStationIncremente.getSelection()){
+		stationModel.setIncrementRef(true);
+		station.setReference("0");
+		
+	}else
+	{
+		stationModel.setIncrementRef(false);
+		station.setReference("");
+		
+		//le propertymodel de la ref est en accès direct
+		PropertyModel propertyModel = stationModel.getReferenceProperty();
+		HeaderFragment frag = propertyModel.getFragment();
+		
+		String ligne, debut, fin;
+		ligne = "" + (Integer.valueOf(EditStation.textRefStationLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
+		debut = EditStation.textRefStationDebut.getText();
+		fin = EditStation.textRefStationFin.getText();
+					
+		frag.setFirstLine(ligne);
+		frag.setLastLine(ligne);
+		frag.setFirstCharOffset(debut);
+		frag.setLastCharOffset(fin);
+		
+	}
+	
+//type de donnée
+	
+//	DataType datatype = new DataType();
+//	station.setDataType(datatype);
+	//récupérer le bon datatype avant de l'affecter
+	
+	//on récupère la sélection du combo de station puis le code + libellé
+	String typeCombo  = EditStation.comboRefStationType.getItem(EditStation.comboRefStationType.getSelectionIndex());
+	
+	DataType dataType = new DataType();
+	String code;
+	//si on a ouvert un modèle, on a le code direct !
+	if (DataModel.ouverture){
+			code = typeCombo;
+	}
+	else{
+	Pattern p  = Pattern.compile(" - ");
+	String mots[] = p.split(typeCombo);
+	code = mots[0];
+	String libelle = mots[1];
+	}
+	//création d'un nouveau Datatype avec les infos récupérées au dessus.
+	
+	dataType.setCode(code);
+	
+	for (int i=0;i<TableDataSurvey.types.size();i++){
+		
+		if (typeCombo.contentEquals(TableDataSurvey.types.get(i).getCode())){
+			//c'est le bon dataType et on récupère le nombre de mesures et le QC
+			
+			dataType.setNumberOfProfiles(TableDataSurvey.types.get(i).getNombre());
+			dataType.setQc(TableDataSurvey.types.get(i).getQc());
+			dataType.setSensor(TableDataSurvey.types.get(i).getSensor());
+			
+		}
+			
+	}
+	
+	station.setDataType(dataType);
+
+//historique acquisition1 et 2
+	PropertyModel propertyModel = stationModel.propertiesAt("dcHistory1");
+	PropertyModel propertyModel2 = stationModel.propertiesAt("dcHistory2");
+	if (EditStation.buttonHistoriqueAcqSaisie.getSelection()){
+		//saisie manuelle
+		station.setDcHistory1(EditStation.textHistorique1.getText());
+		station.setDcHistory2(EditStation.textHistorique2.getText());
+		propertyModel.setUserProvided(true);
+		propertyModel2.setUserProvided(true);
+		
+	} else {
+		propertyModel.setUserProvided(false);
+		propertyModel2.setUserProvided(false);
+		//position dans fichier
+		HeaderFragment frag = propertyModel.getFragment();
+		HeaderFragment frag2 = propertyModel2.getFragment();
+		
+		String ligne, debut, fin;
+		ligne = "" + (Integer.valueOf(EditStation.textHistoriqueAcqLigne1.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
+		debut = EditStation.textHistoriqueAcqDebut1.getText();
+		fin = EditStation.textHistoriqueAcqFin1.getText();
+					
+		frag.setFirstLine(ligne);
+		frag.setLastLine(ligne);
+		frag.setFirstCharOffset(debut);
+		frag.setLastCharOffset(fin);
+		
+		String ligne2, debut2, fin2;
+		ligne2 = "" + (Integer.valueOf(EditStation.textHistoriqueAcqLigne2.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
+		debut2 = EditStation.textHistoriqueAcqDebut2.getText();
+		fin2 = EditStation.textHistoriqueAcqFin2.getText();
+					
+		frag2.setFirstLine(ligne2);
+		frag2.setLastLine(ligne2);
+		frag2.setFirstCharOffset(debut2);
+		frag2.setLastCharOffset(fin2);
+		
+		
+	}
+	
+//commentaire
+	 propertyModel = stationModel.propertiesAt("comment");
+	if (EditStation.buttonCommentaireSaisie.getSelection()){
+		//saisie manuelle du texte
+		station.setComment(EditStation.textCommentaire.getText());
+		propertyModel.setUserProvided(true);
+		
+	}else{
+		//surlignement et injection ligne debut fin
+		
+		propertyModel.setUserProvided(false);
+		HeaderFragment frag = propertyModel.getFragment();
+		
+		String ligne, debut, fin;
+		ligne = "" + (Integer.valueOf(EditStation.textCommentaireLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
+		debut = EditStation.textCommentaireDebut.getText();
+		fin = EditStation.textCommentaireFin.getText();
+					
+		frag.setFirstLine(ligne);
+		frag.setLastLine(ligne);
+		frag.setFirstCharOffset(debut);
+		frag.setLastCharOffset(fin);
+		
+	}
+	
+	
+//echantillon surface
+	propertyModel = stationModel.propertiesAt("surfaceSamples1");
+	propertyModel2 = stationModel.propertiesAt("surfaceSamples2");
+	if (EditStation.buttonSurfaceSaisie.getSelection()){
+		//saisie manuelle
+		station.setSurfaceSamples1(EditStation.textSurface1.getText());
+		station.setSurfaceSamples2(EditStation.textSurface2.getText());
+		propertyModel.setUserProvided(true);
+		propertyModel2.setUserProvided(true);
+		
+	} else {
+		propertyModel.setUserProvided(false);
+		propertyModel2.setUserProvided(false);
+		//position dans fichier
+		HeaderFragment frag = propertyModel.getFragment();
+		HeaderFragment frag2 = propertyModel2.getFragment();
+		
+		String ligne, debut, fin;
+		ligne = "" + (Integer.valueOf(EditStation.textSurfaceLigne1.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
+		debut = EditStation.textSurfaceDebut1.getText();
+		fin = EditStation.textSurfaceFin1.getText();
+					
+		frag.setFirstLine(ligne);
+		frag.setLastLine(ligne);
+		frag.setFirstCharOffset(debut);
+		frag.setLastCharOffset(fin);
+		
+		String ligne2, debut2, fin2;
+		ligne2 = "" + (Integer.valueOf(EditStation.textSurfaceLigne2.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
+		debut2 = EditStation.textSurfaceDebut2.getText();
+		fin2 = EditStation.textSurfaceFin2.getText();
+					
+		frag2.setFirstLine(ligne2);
+		frag2.setLastLine(ligne2);
+		frag2.setFirstCharOffset(debut2);
+		frag2.setLastCharOffset(fin2);
+	}
+	
+		
+//décallage TU
+	propertyModel = stationModel.propertiesAt("offsetTU");
+	//if (EditStation.buttonTUSaisie.getSelection()){
+		if (true){
+			//mise à true pour passage obligatoire ! TODO
+		//saisie manuelle
+		station.setLatitude(EditStation.textTU.getText());
+		propertyModel.setUserProvided(true);
+		
+	} else {
+		propertyModel.setUserProvided(false);
+		//position dans fichier
+		
+		HeaderFragment frag = propertyModel.getFragment();
+		
+		String ligne, debut, fin;
+		ligne = "" + (Integer.valueOf(EditStation.textTULigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
+		debut = EditStation.textTUDebut.getText();
+		fin = EditStation.textTUFin.getText();
+					
+		frag.setFirstLine(ligne);
+		frag.setLastLine(ligne);
+		frag.setFirstCharOffset(debut);
+		frag.setLastCharOffset(fin);
+		
+	}
+	
+	
+	
+//heure en LONG
+		propertyModel = stationModel.propertiesAt("time");
+		propertyModel.setUserProvided(false);
+	
+		//position dans fichier
+		
+		HeaderFragment frag = propertyModel.getFragment();
+		//frag.isSingleLine();
+		
+		String ligne, debut, fin;
+		ligne = "" + (Integer.valueOf(EditStation.textHeureLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
+		debut = EditStation.textHeureDebut.getText();
+		fin = EditStation.textHeureFin.getText();
+					
+		frag.setFirstLine(ligne);
+		frag.setLastLine(ligne);
+		frag.setFirstCharOffset(debut);
+		frag.setLastCharOffset(fin);
+		
+		//format heure
+		DateTimeFormat timeFormat = (DateTimeFormat)propertyModel.getFormat();
+		try {
+			timeFormat.setFormatString(EditStation.comboHeure.getText());
+		} catch (ParseException e) {
+		
+			e.printStackTrace();
+		}
+		
+		
+//date en LONG
+		propertyModel = stationModel.propertiesAt("date");
+		propertyModel.setUserProvided(false);
+
+		// position dans fichier
+
+		frag = propertyModel.getFragment();
+		// frag.isSingleLine();
+
+		ligne = ""
+				+ (Integer.valueOf(EditStation.textDateLigne.getText()) - Integer
+						.valueOf(EditDesc.lignesEnteteFichier.getText()));
+		debut = EditStation.textDateDebut.getText();
+		fin = EditStation.textDateFin.getText();
+
+		frag.setFirstLine(ligne);
+		frag.setLastLine(ligne);
+		frag.setFirstCharOffset(debut);
+		frag.setLastCharOffset(fin);
+		
+		//format date
+		DateTimeFormat dateFormat = (DateTimeFormat)propertyModel.getFormat();
+		try {
+			dateFormat.setFormatString(EditStation.comboDate.getText());
+		} catch (ParseException e) {
+			// 
+			e.printStackTrace();
+		}
+		
+		
+		
+//latitude
+		propertyModel = stationModel.propertiesAt("latitude");
+		if (EditStation.buttonLatSaisie.getSelection()){
+			//saisie manuelle
+			station.setLatitude(EditStation.textLatitude.getText());
+			propertyModel.setUserProvided(true);
+			
+		} else {
+			propertyModel.setUserProvided(false);
+			//position dans fichier
+			
+			frag = propertyModel.getFragment();
+			
+			ligne = "" + (Integer.valueOf(EditStation.textLatitudeLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
+			debut = EditStation.textLatitudeDebut.getText();
+			fin = EditStation.textLatitudeFin.getText();
+						
+			frag.setFirstLine(ligne);
+			frag.setLastLine(ligne);
+			frag.setFirstCharOffset(debut);
+			frag.setLastCharOffset(fin);
+			
+		}
+		
+	//format de la latitude à mettre dans le datamodel
+	LatitudeFormat latitudeFormat = (LatitudeFormat)propertyModel.getFormat();
+	try {
+		latitudeFormat.setFormatString(EditStation.comboLatitude.getText());
+	} catch (ParseException e) {
+		// 
+		e.printStackTrace();
+	}
+	
+//longitude
+	
+	propertyModel = stationModel.propertiesAt("longitude");
+	if (EditStation.buttonLongSaisie.getSelection()){
+		//saisie manuelle
+		station.setLongitude(EditStation.textLongitude.getText());
+		propertyModel.setUserProvided(true);
+		
+	} else {
+		propertyModel.setUserProvided(false);
+		//position dans fichier
+		frag = propertyModel.getFragment();
+		
+		
+		ligne = "" + (Integer.valueOf(EditStation.textLongitudeLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
+		debut = EditStation.textLongitudeDebut.getText();
+		fin = EditStation.textLongitudeFin.getText();
+					
+		frag.setFirstLine(ligne);
+		frag.setLastLine(ligne);
+		frag.setFirstCharOffset(debut);
+		frag.setLastCharOffset(fin);
+		
+	}
+	
+	//format de la latitude à mettre dans le datamodel
+	LongitudeFormat longitudeFormat = (LongitudeFormat)propertyModel.getFormat();
+	try {
+		longitudeFormat.setFormatString(EditStation.comboLongitude.getText());
+	} catch (ParseException e) {
+		// 
+		e.printStackTrace();
+	}
+	
+//profondeur
+	propertyModel = stationModel.propertiesAt("bottomDepth");
+	if (EditStation.buttonProfondeurSaisie.getSelection()){
+		//saisie manuelle
+		station.setBottomDepth(EditStation.textProfondeur.getText());
+		propertyModel.setUserProvided(true);
+		
+	} else {
+		propertyModel.setUserProvided(false);
+		//position dans fichier
+		frag = propertyModel.getFragment();
+		
+		
+		ligne = "" + (Integer.valueOf(EditStation.textProfondeurLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
+		debut = EditStation.textProfondeurDebut.getText();
+		fin = EditStation.textProfondeurFin.getText();
+					
+		frag.setFirstLine(ligne);
+		frag.setLastLine(ligne);
+		frag.setFirstCharOffset(debut);
+		frag.setLastCharOffset(fin);
+		
+	}
+
+	//flag validation à 1
+	EditStation.validee = 1;
+	
+	
+}
+
+
+public static void initData(){
+	
+	//remplissage des paramètres mesurés
+	int nbreParam = TableData.types.size();
+		
+	for (int i=0;i<nbreParam;i++){
+		TypeData typeCourant = TableData.types.get(i);
+		
+		//code / fullName / sortie / format
+		Parameter para = new Parameter();
+		ParameterModel parameterModel = new ParameterModel();
+		parameterModel.setModel(para);
+		
+		
+		//split sur " - "
+		Pattern p  = Pattern.compile(" - ");
+		String mots[] = p.split(typeCourant.getCode());
+		String code = mots[0];
+		String nom = mots[1];
+		
+		//code, nom, unité
+		para.setCode(code);
+		para.setFullName(nom);
+		para.setUnit(typeCourant.getUnite());
+		
+		para.setDefault(typeCourant.getSortie());
+		para.setFormat(typeCourant.getFormat());
+		
+		//conversion / entree
+		parameterModel.setConversionFormula(typeCourant.getConversion());
+		parameterModel.setInputDefault(typeCourant.getEntree());
+		
+		//fragment du paramètre
+		LineFragment frag = new LineFragment();
+		frag.setFirstCharOffset(typeCourant.getDebut());
+		frag.setLastCharOffset(typeCourant.getFin());
+		parameterModel.setFragment(frag);
+		
+		
+		//test par / au DataModel puis ajout du paramètre ou non
+		ParameterModel[] parametersModels = stationModel.getParameterModels();
+		int nbre = parametersModels.length;
+		Boolean found = false;
+		
+		if (nbre ==0){stationModel.addParameterModel(parameterModel);}
+		else
+		{
+		for (int j=0; j<nbre;j++){
+			String codeModele, codeActuel;
+			codeModele = parametersModels[j].getModel().getCode();
+			codeActuel = code;
+			System.out.println("Code Modèle = "+codeModele);
+			System.out.println("Code Actuel = "+codeActuel);
+			
+			if (code.matches(codeModele)){
+				found = true;				
+			}
+			
+		}
+		
+		if (found == false){
+			stationModel.addParameterModel(parameterModel);
+		System.out.println(">>Ajout du paramètre " + typeCourant.getCode() + " ... OK");}
+		
+		}
+		
+		//station.
+	
+	}
+	
+	//flag validation à 1
+	EditData.validee = 1;
+	
+	
+}
+
+
+public static void ouvertureModele(InputModel input){
+	//fonction d'ouverture d'un modele de campagne
+	
+	DataModel.ouverture = true;
+	inputModel_modele = new InputModel();
+	inputModel_modele = input;
+	
+	//lancement du processus sur le premier onglet
+	fillDesc();
+		
+}
+
+public static void fillDesc(){
+	//remplissage auto de l'IHM Desc
+	
+	if (ViewFile.dossierCampagne){
+		dirSurvey_modele = (DirectoryBasedSurvey)inputModel_modele.getMedia();
+		stationModel_modele = dirSurvey_modele.getStationModel();
+		
+	}else{
+		singleSurvey_modele = (SingleFileSurvey)inputModel_modele.getMedia();
+		stationModel_modele = singleSurvey_modele.getStationModel();
+		//lignes entete fichier
+		EditDesc.lignesEnteteFichier.setText(""+singleSurvey_modele.getHeaderLinesNumber());
+	}
+	
+	//nombre lignes entete station
+	EditDesc.lignesEnteteStation.setText(""+stationModel_modele.getNumberOfLines());
+	
+	//nombre de lignes de fin
+	EditDesc.lignesFinStation.setText(""+stationModel_modele.getEndData());
+	
+//	metaInData
+	//stationModel.setMetaInData(false);
+	
+
+	//pattern de fin fourni ou pas
+	if (stationModel_modele.getEndDataPattern().matches("")){
+		//pas de pattern de fin donc nombre de mesures dans le fichier
+		EditDesc.nbreLignesMesures.setText(""+stationModel_modele.getRowNumber());
+		
+	}else{
+		//pattern de fin
+		EditDesc.buttonIndicFinDonnees.setSelection(true);
+		EditDesc.buttonIndicFinDonneesPosition.setSelection(false);
+		//on rajoute met le pattern en début de liste et on le sélectionne
+		EditDesc.comboIndicRuptureDonnees.setItem(0, stationModel_modele.getEndDataPattern());
+		EditDesc.comboIndicRuptureDonnees.select(0);
+	}
+
+	
+	System.out.println("Fin remplissage onglet Desc");
+	
+	//refresh de la zone d'édition
+	EditDesc.razEdition();
+	EditDesc.DrawingBack();
+	
+	DataModel.ouverture = true;
+	
+}
+
+public static void fillSurvey(){
+	
+	System.out.println("Remplissage onglet survey");
+	
+	
+	Survey survey; 
+	if (ViewFile.dossierCampagne){
+		survey = dirSurvey_modele.getModel();
+	} else {
+		survey = singleSurvey_modele.getModel();	
+	}
+	 
+	//station = stationModel.getModel();
+	
+	//injection des valeurs de l'IHM -> datamodel
+	//référence
+	EditSurvey.textCampagne.setText(survey.getReference());
+	EditSurvey.textNom.setText(survey.getName());
+	EditSurvey.textCodeNavire.setText(survey.getShipCode());
+	EditSurvey.textNomNavire.setText(survey.getShipName());
+	
+	//Localisation
+	EditSurvey.textDateDebut.setText(""+survey.getStartDate());
+	EditSurvey.textDateFin.setText(""+survey.getEndDate());
+	EditSurvey.textRegion.setText(survey.getRegionName());
+	
+	//Source de données
+	EditSurvey.textPays.setText(survey.getCountryCode());
+	EditSurvey.textLabo.setText(survey.getLaboratories());
+	EditSurvey.textChef.setText(survey.getChiefScientist());
+	EditSurvey.textProjet.setText(survey.getProjectName());
+	
+	
+	//Centre d'archivage
+	EditSurvey.textCentre.setText(survey.getDataCentre());
+	EditSurvey.textConfidentiel.setText(""+survey.getAvailability());
+	
+	//Commentaire
+	EditSurvey.textCommentaire.setText(survey.getComment());
+	
+	//Remplissage de la liste des dataTypes de la campagne
+	
+	DataType[] dataTypes = survey.getDataTypes();
+	int taille = dataTypes.length;
+	
+	for (int i=0; i<taille;i++){
+		TypeSurvey typeSurvey = new TypeSurvey();
+		typeSurvey.setCode(dataTypes[i].getCode());
+		typeSurvey.setNombre(dataTypes[i].getNumberOfProfiles());
+		typeSurvey.setQc(""+dataTypes[i].isQc());
+		typeSurvey.setSensor(dataTypes[i].isSensor());
+		
+		TableDataSurvey.types.add(typeSurvey);
+		
+		System.out.println("TypeSurvey " +typeSurvey.getCode()+" ajouté");
+		
+	}
+	
+	
+	EditSurvey.razEdition();
+	EditSurvey.DrawingBack();
+	
+	//////////////////////////////////////////
+	//refresh de la liste des dataTypes
+	TableDataSurvey.razTableData();
+	TableDataSurvey.creationTable();
+	Composite c = EditSurvey.sectionType;
+    while (c != null) {
+		c.setRedraw(false);
+		c = c.getParent();
+		if (c instanceof ScrolledForm) {
+			break;
+		}
+	}
+	c = EditSurvey.sectionType;
+	while (c != null) {
+		c.layout(true);
+		c = c.getParent();
+		if (c instanceof ScrolledForm) {
+			((ScrolledForm) c).reflow(true);
+			break;
+		}
+	}
+	c = EditSurvey.sectionType;
+	while (c != null) {
+		c.setRedraw(true);
+		c = c.getParent();
+		if (c instanceof ScrolledForm) {
+			break;
+		}
+	}
+	
+	//////////////////////////////////////////
+	
+	System.out.println("Fin remplissage onglet Survey");
+	
+}
+
+public static void fillStation(){
+
+	station_modele = stationModel_modele.getModel();
+	
+	
+	
+	//numéro de station
+	if (stationModel_modele.isIncrementRef()){
+		EditStation.buttonRefStationIncremente.setSelection(true);
+	}else{
+
+		//EditStation.buttonRefStationIncremente.setSelection(false); 		//pas obligatoire pour la première ligne? TODO
+		EditStation.buttonRefStationIncremente.setSelection(false);
+		EditStation.buttonRefStationPos.setSelection(true);
+				
+		//valeurs de ligne/debut/fin
+		PropertyModel propertyModel = stationModel_modele.getReferenceProperty();
+		HeaderFragment frag = propertyModel.getFragment();
+		
+		int ligne = frag.getFirstLine();
+		int debut = frag.getFirstCharOffset();
+		int fin = frag.getLastCharOffset();
+		int real_ligne = ligne + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+		
+		EditStation.textRefStationLigne.setText(""+real_ligne);
+		EditStation.textRefStationDebut.setText(""+debut);
+		EditStation.textRefStationFin.setText(""+fin);
+		
+		
+	}
+
+	//type de donnée
+	DataType dataType = station_modele.getDataType();
+	String code = dataType.getCode();
+	EditStation.comboRefStationType.add(code,0);
+	EditStation.comboRefStationType.select(0);
+	
+	
+	//historique acquisition1 et 2
+	PropertyModel propertyModel = stationModel_modele.propertiesAt("dcHistory1");
+	PropertyModel propertyModel2 = stationModel_modele.propertiesAt("dcHistory2");
+	
+	if (propertyModel.isUserProvided()){
+		//historique 1&2 tapés manuellement
+		EditStation.buttonHistoriqueAcqSaisie.setSelection(true);
+		EditStation.textHistorique1.setText(station_modele.getDcHistory1());
+		EditStation.textHistorique2.setText(station_modele.getDcHistory2());
+		
+	}else{
+		EditStation.buttonHistoriqueAcqPos.setSelection(true);
+		EditStation.buttonHistoriqueAcqSaisie.setSelection(false);
+		
+		HeaderFragment frag = propertyModel.getFragment();
+		HeaderFragment frag2 = propertyModel2.getFragment();
+		
+		int ligne1 = frag.getFirstLine();
+		int debut1 = frag.getFirstCharOffset();
+		int fin1 = frag.getLastCharOffset();
+		int real_ligne1 = ligne1 + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+		
+		int ligne2 = frag.getFirstLine();
+		int debut2 = frag.getFirstCharOffset();
+		int fin2 = frag.getLastCharOffset();
+		int real_ligne2 = ligne2 + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+		
+		EditStation.textHistoriqueAcqLigne1.setText(""+ligne1);
+		EditStation.textHistoriqueAcqDebut1.setText(""+debut1);
+		EditStation.textHistoriqueAcqFin1.setText(""+fin1);
+		
+		EditStation.textHistoriqueAcqLigne2.setText(""+ligne2);
+		EditStation.textHistoriqueAcqDebut2.setText(""+debut2);
+		EditStation.textHistoriqueAcqFin2.setText(""+fin2);
+	}
+	
+	
+//commentaire
+	 	propertyModel = stationModel_modele.propertiesAt("comment");
+		
+	 	if (propertyModel.isUserProvided()){
+	 		//entrée manuelle du commentaire
+	 		EditStation.buttonCommentaireSaisie.setSelection(true);
+	 		EditStation.textCommentaire.setText(station_modele.getComment());
+	 		
+	 	}else{
+	 		EditStation.buttonCommentaireSaisie.setSelection(false);
+	 		EditStation.buttonCommentairePos.setSelection(true);
+	 		HeaderFragment frag = propertyModel.getFragment();
+	 		
+	 		int ligne = frag.getFirstLine();
+			int debut = frag.getFirstCharOffset();
+			int fin = frag.getLastCharOffset();
+			int real_ligne = ligne + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+			
+			EditStation.textCommentaireLigne.setText(""+ligne);
+			EditStation.textCommentaireDebut.setText(""+debut);
+			EditStation.textCommentaireFin.setText(""+fin);
+	 		
+	 	}
+	 	
+//echantillon surface
+		propertyModel = stationModel_modele.propertiesAt("surfaceSamples1");
+		propertyModel2 = stationModel_modele.propertiesAt("surfaceSamples2");
+		
+		if (propertyModel.isUserProvided()){
+			//entrée manuelle echantillon surface
+			EditStation.buttonSurfaceSaisie.setSelection(true);
+			EditStation.textSurface1.setText(station_modele.getSurfaceSamples1());
+			EditStation.textSurface2.setText(station_modele.getSurfaceSamples2());
+			
+		}else{
+			//position dans fichier
+			EditStation.buttonSurfaceSaisie.setSelection(false);
+			EditStation.buttonSurfacePos.setSelection(true);
+			
+			HeaderFragment frag = propertyModel.getFragment();
+			HeaderFragment frag2 = propertyModel2.getFragment();
+			
+			int ligne1 = frag.getFirstLine();
+			int debut1 = frag.getFirstCharOffset();
+			int fin1 = frag.getLastCharOffset();
+			int real_ligne1 = ligne1 + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+			
+			int ligne2 = frag.getFirstLine();
+			int debut2 = frag.getFirstCharOffset();
+			int fin2 = frag.getLastCharOffset();
+			int real_ligne2 = ligne2 + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+			
+			EditStation.textSurfaceLigne1.setText(""+ligne1);
+			EditStation.textSurfaceDebut1.setText(""+debut1);
+			EditStation.textSurfaceFin1.setText(""+fin1);
+			
+			EditStation.textSurfaceLigne2.setText(""+ligne2);
+			EditStation.textSurfaceDebut2.setText(""+debut2);
+			EditStation.textSurfaceFin2.setText(""+fin2);
+			
+			
+		}
+		
+		
+//		heure en LONG
+		propertyModel = stationModel_modele.propertiesAt("time");
+		HeaderFragment frag = propertyModel.getFragment();
+		
+		DateTimeFormat dateFormat = (DateTimeFormat)propertyModel.getFormat();
+		EditStation.comboHeure.add(dateFormat.getFormatString(),0);
+		EditStation.comboHeure.select(0);
+		
+		int ligne = frag.getFirstLine();
+		int debut = frag.getFirstCharOffset();
+		int fin = frag.getLastCharOffset();
+		int real_ligne = ligne + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+		
+		EditStation.textHeureLigne.setText(""+ligne);
+		EditStation.textHeureDebut.setText(""+debut);
+		EditStation.textHeureFin.setText(""+fin);
+		
+	
+//		date en LONG
+		propertyModel = stationModel_modele.propertiesAt("date");
+		frag = propertyModel.getFragment();
+		dateFormat = (DateTimeFormat)propertyModel.getFormat();
+		
+		EditStation.comboDate.add(dateFormat.getFormatString(),0);
+		EditStation.comboDate.select(0);
+				
+		ligne = frag.getFirstLine();
+		debut = frag.getFirstCharOffset();
+		fin = frag.getLastCharOffset();
+		real_ligne = ligne + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+		
+		EditStation.textDateLigne.setText(""+ligne);
+		EditStation.textDateDebut.setText(""+debut);
+		EditStation.textDateFin.setText(""+fin);
+
+		
+//latitude
+		propertyModel = stationModel_modele.propertiesAt("latitude");
+		LatitudeFormat latitudeFormat = (LatitudeFormat)propertyModel.getFormat();
+		
+		EditStation.comboLatitude.add(latitudeFormat.getFormatString(), 0);
+		EditStation.comboLatitude.select(0);
+		
+		if (propertyModel.isUserProvided()){
+			//saisie manuelle latitude
+			EditStation.buttonLatSaisie.setSelection(true);
+			EditStation.textLatitude.setText(""+station_modele.getLatitude());
+			
+			
+		}else{
+			//position latitude dans fichier
+			EditStation.buttonLatSaisie.setSelection(false);
+			EditStation.buttonLatPos.setSelection(true);
+			frag = propertyModel.getFragment();
+			
+			ligne = frag.getFirstLine();
+			debut = frag.getFirstCharOffset();
+			fin = frag.getLastCharOffset();
+			real_ligne = ligne + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+			
+			EditStation.textLatitudeLigne.setText(""+ligne);
+			EditStation.textLatitudeDebut.setText(""+debut);
+			EditStation.textLatitudeFin.setText(""+fin);
+			
+		}
+	
+	
+// longitude 
+		propertyModel = stationModel_modele.propertiesAt("longitude");
+		LongitudeFormat longitudeFormat = (LongitudeFormat)propertyModel.getFormat();
+		
+		EditStation.comboLongitude.add(longitudeFormat.getFormatString(), 0);
+		EditStation.comboLongitude.select(0);
+		
+		if (propertyModel.isUserProvided()){
+			//saisie manuelle latitude
+			EditStation.buttonLongSaisie.setSelection(true);
+			EditStation.textLongitude.setText(""+station_modele.getLongitude());
+			
+			
+		}else{
+			//position latitude dans fichier
+			EditStation.buttonLongSaisie.setSelection(false);
+			EditStation.buttonLongPos.setSelection(true);
+			frag = propertyModel.getFragment();
+			
+			ligne = frag.getFirstLine();
+			debut = frag.getFirstCharOffset();
+			fin = frag.getLastCharOffset();
+			real_ligne = ligne + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+			
+			EditStation.textLongitudeLigne.setText(""+ligne);
+			EditStation.textLongitudeDebut.setText(""+debut);
+			EditStation.textLongitudeFin.setText(""+fin);
+			
+		}
+	
+		
+		
+// profondeur
+		propertyModel = stationModel_modele.propertiesAt("bottomDepth");
+		
+		if (propertyModel.isUserProvided()){
+			//profondeur manuelle
+			EditStation.buttonProfondeurSaisie.setSelection(true);
+			EditStation.textProfondeur.setText(""+station_modele.getBottomDepth());
+			
+		}else{
+			EditStation.buttonProfondeurSaisie.setSelection(false);
+			EditStation.buttonProfondeurPos.setSelection(true);
+			frag = propertyModel.getFragment();
+			
+			ligne = frag.getFirstLine();
+			debut = frag.getFirstCharOffset();
+			fin = frag.getLastCharOffset();
+			real_ligne = ligne + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+			
+			EditStation.textProfondeurLigne.setText(""+ligne);
+			EditStation.textProfondeurDebut.setText(""+debut);
+			EditStation.textProfondeurFin.setText(""+fin);
+			
+		}
+		
+	
+//		refresh de la zone d'édition
+		EditStation.razEdition();
+		EditStation.DrawingBack();
+		
+	System.out.println("Fin remplissage onglet Station");
+		
+	
+}
+
+public static void fillData(){
+	///////////////////////////////////
+	
+	ParameterModel[] parameterModels = stationModel_modele.getParameterModels();
+	
+	
+//	remplissage des paramètres mesurés
+	int nbreParam = parameterModels.length;
+		
+	for (int i=0;i<nbreParam;i++){
+		TypeData typeData = new TypeData();
+		ParameterModel paraCourant = parameterModels[i];
+		Parameter modeleCourant = paraCourant.getModel();
+		LineFragment frag = paraCourant.getFragment();
+		
+		
+//		code / fullName / sortie / format
+		typeData.setCode(modeleCourant.getCode()+ " - "+ modeleCourant.getFullName());
+		typeData.setNom(modeleCourant.getFullName());
+		typeData.setConversion(paraCourant.getConversionFormula());
+		typeData.setDebut(frag.getFirstCharOffset());
+		typeData.setFin(frag.getLastCharOffset());
+		typeData.setEntree(modeleCourant.getDefault());
+		//typeData.setSensor(paraCourant.get);
+		typeData.setUnite(modeleCourant.getUnit());
+		typeData.setFormat(modeleCourant.getFormat());
+		typeData.setSortie(modeleCourant.getDefault());
+		
+	
+		TableData.types.add(typeData);
+		
+	}
+
+	
+	//refresh de la table de l'onglet Data
+	 //razTableData
+	 TableData.razTableData();
+	 
+	 //refresh de la table
+	 //initTable();
+	 TableData.creationTable();
+	
+	
+}
+
+}

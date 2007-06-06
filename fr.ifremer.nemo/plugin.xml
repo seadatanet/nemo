@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         id="nemoid"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="fr.ifremer.nemo.ui.Application">
+         </run>
+      </application>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            name="Perspective"
+            class="fr.ifremer.nemo.ui.Perspective"
+            id="fr.ifremer.nemo.ui.perspective">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            name="fr.ifremer.nemo.ui.View"
+            class="fr.ifremer.nemo.ui.View"
+            id="fr.ifremer.nemo.ui.View">
+      </view>
+      <view
+            class="fr.ifremer.nemo.ui.ViewFile"
+            id="fr.ifremer.nemo.ui.ViewFile"
+            name="fr.ifremer.nemo.ui.ViewFile"/>
+      <view
+            class="fr.ifremer.nemo.ui.ViewLog"
+            id="fr.ifremer.nemo.ui.ViewLog"
+            name="fr.ifremer.nemo.ui.ViewLog"/>
+      <view
+            class="fr.ifremer.nemo.ui.ViewEdit"
+            id="fr.ifremer.nemo.ui.ViewEdit"
+            name="fr.ifremer.nemo.ui.ViewEdit"/>
+   </extension>
+   <extension
+         id="productnemo"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="fr.ifremer.nemo.nemoid"
+            name="NEMO"/>
+   </extension>
+
+</plugin>
