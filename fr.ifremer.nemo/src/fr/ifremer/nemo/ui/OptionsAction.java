@@ -155,8 +155,9 @@ private void createGroupDossier() {
 	groupDossier.setText("Dossier des modèles");
 	groupDossier.setBounds(new Rectangle(176, 10, 242, 65));
 	buttonParcourir = new Button(groupDossier, SWT.NONE);
-	buttonParcourir.setBounds(new Rectangle(170, 38, 64, 23));
+	buttonParcourir.setBounds(new Rectangle(170, 38, 64, 23)); //64
 	buttonParcourir.setText("Parcourir");
+	buttonParcourir.pack();
 	textDossier = new Text(groupDossier, SWT.BORDER);
 	textDossier.setBounds(new Rectangle(5, 16, 229, 19));
 	
@@ -202,7 +203,7 @@ private void createGroupLangue() {
 	groupLangue.setLayout(null);
 	groupLangue.setText("Choix de langue");
 	createComboLangue();
-	groupLangue.setBounds(new Rectangle(4, 10, 166, 65));
+	groupLangue.setBounds(new Rectangle(4, 10, 168, 65)); //166
 	
 }
 
@@ -231,9 +232,11 @@ private void createGroupWS() {
 	labelNemo = new Label(groupWS, SWT.NONE);
 	labelNemo.setBounds(new Rectangle(13, 40, 62, 13));
 	labelNemo.setText("NEMO");
+	labelNemo.pack();
 	labelNautilus = new Label(groupWS, SWT.NONE);
 	labelNautilus.setBounds(new Rectangle(13, 100, 62, 13));
 	labelNautilus.setText("NAUTILUS");
+	labelNautilus.pack();
 	textAreaNemo = new Text(groupWS, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL);
 	textAreaNemo.setBounds(new Rectangle(85, 18, 316, 55));
 	textAreaNautilus = new Text(groupWS, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL);
@@ -249,11 +252,12 @@ public void createPartControl(Composite parent) {
 	createGroupLangue();
 	createGroupWS();
 	buttonCancel = new Button(top, SWT.NONE);
-	buttonCancel.setBounds(new Rectangle(224, 233, 66, 23));
+	buttonCancel.setBounds(new Rectangle(224, 233, 69, 23)); //66
 	buttonCancel.setText("Annuler");
+	buttonCancel.pack();
 	
 	buttonValider = new Button(top, SWT.NONE);
-	buttonValider.setBounds(new Rectangle(139, 233, 66, 23));
+	buttonValider.setBounds(new Rectangle(139, 233, 69, 23));
 	buttonValider.setText("Valider");
 	buttonValider.pack();
 	
