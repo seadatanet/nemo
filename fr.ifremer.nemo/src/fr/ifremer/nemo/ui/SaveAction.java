@@ -76,7 +76,7 @@ public void run(){
 public static void choixFichierSortie(){
 	
 	Shell shell = new Shell();
-	FileDialog dialog = new FileDialog(shell, SWT.SAVE);
+	FileDialog dialog = new FileDialog(shell, SWT.SAVE |SWT.APPLICATION_MODAL);
 	dialog.setText("Entrez un nom pour le fichier de sortie");
 	 nomFichierSortieXML = dialog.open();
 	
@@ -86,7 +86,7 @@ public static void choixFichierSortie(){
 		
 		Shell shell2 = new Shell();
 		
-		MessageBox mb = new MessageBox(shell2, SWT.ICON_WARNING |  SWT.YES | SWT.NO );
+		MessageBox mb = new MessageBox(shell2, SWT.ICON_WARNING |  SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
 		mb.setMessage("Le fichier de sortie spécifié existe déjà ! Voulez-vous l'écraser ?");
 		
 		int reponse = mb.open();
