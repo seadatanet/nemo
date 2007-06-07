@@ -62,6 +62,8 @@ public void run(){
 	
 	Shell shell = new Shell();
 	FileDialog dialog = new FileDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
+	dialog.setFilterPath(Utils.configuration.getModelsDirectory()+"\\");
+	dialog.setText("Fichier modèle à charger");
 	nomModele = dialog.open();
 	if (nomModele == null) {}else{
 		
@@ -92,9 +94,6 @@ public void run(){
 }
 
 public void selectionChanged(IWorkbenchPart part, ISelection incoming){}
-
-
-
 
 
 
