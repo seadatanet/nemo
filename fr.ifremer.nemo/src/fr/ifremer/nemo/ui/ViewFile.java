@@ -99,6 +99,9 @@ public class ViewFile extends ViewPart {
 		//validation de chaque étape
 		EditDesc.validee = 0;
 		
+		//chargement de la configuration
+		Utils.initConfig();
+				
 		//ouverture de modèle à false
 		DataModel.ouverture = false;
 		
@@ -306,7 +309,7 @@ public class ViewFile extends ViewPart {
 							dossierCampagne = false;
 							
 							Shell shell = new Shell();
-							FileDialog dialog = new FileDialog(shell, SWT.OPEN);
+							FileDialog dialog = new FileDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
 							nomFichier = dialog.open();
 							if (nomFichier != null){
 								
@@ -342,7 +345,7 @@ public class ViewFile extends ViewPart {
 								dossierCampagne = true;
 								
 								Shell shell = new Shell();
-								DirectoryDialog dialog = new DirectoryDialog(shell, SWT.OPEN);
+								DirectoryDialog dialog = new DirectoryDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
 								nomRepertoire = dialog.open();
 								if (nomRepertoire != null){
 									fileLoaded = true;

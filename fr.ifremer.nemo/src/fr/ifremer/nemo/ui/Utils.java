@@ -16,6 +16,8 @@ import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
+
+import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.input.*;
 
 public class Utils {
@@ -28,6 +30,8 @@ public class Utils {
 
 	public static int[] taillesCumLignes;
 
+	public static Configuration configuration;
+	
 	public static StyleRange[] stylesCouleurs;
 
 	public static Font font;
@@ -759,4 +763,41 @@ public class Utils {
 
 	}
 
+	
+	public static void initConfig(){
+		//chargement de la config
+		if (configuration == null){
+		configuration = Configuration.getSingleton();}
+		else{
+			//configuration.save();
+			configuration.releaseSingleton();
+			configuration = Configuration.getSingleton();
+		}
+		
+		}
+	
+	
+	public static void saveConfig(){
+		//sauvegarde de la config dans le fichier qui va bien
+		//CONTACT
+		configuration.setContact("");
+		//DOSSIER
+		configuration.setModelsDirectory(OptionsAction.textDossier.getText());
+		//LANGUE
+		if (OptionsAction.comboLangue.getItem(OptionsAction.comboLangue.getSelectionIndex()).matches("Français")){
+			configuration.setLang("fr_FR");			
+		}else{
+			configuration.setLang("en_GB");
+		}
+		
+		//WS
+		configuration.setNautilusWebServiceURL(OptionsAction.textAreaNautilus.getText());
+		configuration.setNemoWebServiceURL(OptionsAction.textAreaNemo.getText());
+
+		configuration.save();
+		
+		System.out.println("sauvegarde options... ok");
+		
+	}
+	
 }

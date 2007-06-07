@@ -3,6 +3,8 @@ package fr.ifremer.nemo.config;
 import fr.ifremer.nemo.ws.*;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.net.URL;
 
@@ -1283,7 +1285,8 @@ public  class NemoLists implements Cloneable {
   public static void initCountries ( ) {
     XMLDecoder decoder =  null;
     try {
-    	decoder = new XMLDecoder(NemoLists.class.getResourceAsStream("/resources/Countries.xml"));
+    	decoder = new XMLDecoder(new FileInputStream("resources/Countries.xml"));
+    	//decoder = new XMLDecoder(NemoLists.class.getResourceAsStream("/resources/Countries.xml"));
     	_countries = (java.util.List<WSCountry>)decoder.readObject();
     } catch (Exception e) {
     	e.printStackTrace();
@@ -1300,7 +1303,8 @@ public  class NemoLists implements Cloneable {
   public static void initDataTypes ( ) {
     XMLDecoder decoder =  null;
     try {
-    	decoder = new XMLDecoder(NemoLists.class.getResourceAsStream("/resources/DataTypes.xml"));
+    	decoder = new XMLDecoder(new FileInputStream("resources/DataTypes.xml"));
+    	//decoder = new XMLDecoder(NemoLists.class.getResourceAsStream("/resources/DataTypes.xml"));
     	_dataTypes = (java.util.List<WSDataType>)decoder.readObject();
     } catch (Exception e) {
     	e.printStackTrace();
@@ -1330,7 +1334,8 @@ public  class NemoLists implements Cloneable {
   public static void initParameters ( ) {
     XMLDecoder decoder =  null;
     try {
-    	decoder = new XMLDecoder(NemoLists.class.getResourceAsStream("/resources/Parameters.xml"));
+    	decoder = new XMLDecoder(new FileInputStream("resources/Parameters.xml"));
+    	//decoder = new XMLDecoder(NemoLists.class.getResourceAsStream("/resources/Parameters.xml"));
     	_parameters = (java.util.List<WSParameter>)decoder.readObject();
     } catch (Exception e) {
     	e.printStackTrace();
@@ -1347,7 +1352,9 @@ public  class NemoLists implements Cloneable {
   public static void initRegions ( ) {
     XMLDecoder decoder =  null;
     try {
-    	decoder = new XMLDecoder(NemoLists.class.getResourceAsStream("/resources/Regions.xml"));
+    	decoder = new XMLDecoder(new FileInputStream("resources/Regions.xml"));
+    	
+    	//decoder = new XMLDecoder(NemoLists.class.getResourceAsStream("/resources/Regions.xml"));
     	_regions = (java.util.List<WSRegion>)decoder.readObject();
     } catch (Exception e) {
     	e.printStackTrace();
@@ -1364,7 +1371,8 @@ public  class NemoLists implements Cloneable {
   public static void initShips ( ) {
     XMLDecoder decoder =  null;
     try {
-    	decoder = new XMLDecoder(NemoLists.class.getResourceAsStream("/resources/Ships.xml"));
+    	decoder = new XMLDecoder(new FileInputStream("resources/Ships.xml"));
+    	//decoder = new XMLDecoder(NemoLists.class.getResourceAsStream("/resources/Ships.xml"));
     	_ships = (java.util.List<WSShip>)decoder.readObject();
     } catch (Exception e) {
     	e.printStackTrace();
@@ -1381,7 +1389,8 @@ public  class NemoLists implements Cloneable {
   public static void initSurveys ( ) {
     XMLDecoder decoder =  null;
     try {
-    	decoder = new XMLDecoder(NemoLists.class.getResourceAsStream("/resources/Surveys.xml"));
+    	//decoder = new XMLDecoder(NemoLists.class.getResourceAsStream("/resources/Surveys.xml"));
+    	decoder = new XMLDecoder(new FileInputStream("resources/Surveys.xml"));
     	_surveys = (java.util.List<WSSurveyDescription>)decoder.readObject();
     } catch (Exception e) {
     	e.printStackTrace();
@@ -1398,7 +1407,8 @@ public  class NemoLists implements Cloneable {
   public static void intDataCentres ( ) {
     XMLDecoder decoder =  null;
     try {
-    	decoder = new XMLDecoder(NemoLists.class.getResourceAsStream("/resources/DataCentres.xml"));
+    	//decoder = new XMLDecoder(NemoLists.class.getResourceAsStream("/resources/DataCentres.xml"));
+    	decoder = new XMLDecoder(new FileInputStream("resources/DataCentres.xml"));
     	_dataCentres = (java.util.List<WSDataCentre>)decoder.readObject();
     } catch (Exception e) {
     	e.printStackTrace();
@@ -1437,9 +1447,13 @@ public  class NemoLists implements Cloneable {
     	for (int i=0; i<countries.length; i++) {
     		addCountry(countries[i]);
     	}
-    	URL url = NemoLists.class.getResource("/resources/Countries.xml");
-    	String file = url.getFile();
-    	stream = new FileOutputStream(file);
+    	
+    	File file= new java.io.File("resources/Countries.xml");
+    	stream = new FileOutputStream(file.toString());
+    	    	
+    	//URL url = NemoLists.class.getResource("/resources/Countries.xml");
+    	//String file = url.getFile();
+    	//stream = new FileOutputStream(file);
     	encoder = new XMLEncoder(stream);
     	encoder.writeObject(_countries);
     } catch (Exception e) {
@@ -1468,9 +1482,14 @@ public  class NemoLists implements Cloneable {
     	for (int i=0; i<types.length; i++) {
     		addDataCentre(types[i]);
     	}
-    	URL url = NemoLists.class.getResource("/resources/DataCentres.xml");
-    	String file = url.getFile();
-    	stream = new FileOutputStream(file);
+    	
+    	File file= new java.io.File("resources/DataCentres.xml");
+    	stream = new FileOutputStream(file.toString());
+    	   	
+    	    	
+    	//URL url = NemoLists.class.getResource("/resources/DataCentres.xml");
+    	//String file = url.getFile();
+    	//stream = new FileOutputStream(file);
     	encoder = new XMLEncoder(stream);
     	encoder.writeObject(_dataCentres);
     } catch (Exception e) {
@@ -1499,9 +1518,13 @@ public  class NemoLists implements Cloneable {
     	for (int i=0; i<types.length; i++) {
     		addDataType(types[i]);
     	}
-    	URL url = NemoLists.class.getResource("/resources/DataTypes.xml");
-    	String file = url.getFile();
-    	stream = new FileOutputStream(file);
+    	
+    	File file= new java.io.File("resources/DataTypes.xml");
+    	stream = new FileOutputStream(file.toString());
+    	    	
+    	//URL url = NemoLists.class.getResource("/resources/DataTypes.xml");
+    	//String file = url.getFile();
+    	//stream = new FileOutputStream(file);
     	encoder = new XMLEncoder(stream);
     	encoder.writeObject(_dataTypes);
     } catch (Exception e) {
@@ -1530,9 +1553,13 @@ public  class NemoLists implements Cloneable {
     	for (int i=0; i<parameters.length; i++) {
     		addParameter(parameters[i]);
     	}
-    	URL url = NemoLists.class.getResource("/resources/Parameters.xml");
-    	String file = url.getFile();
-    	stream = new FileOutputStream(file);
+    	
+    	File file= new java.io.File("resources/Parameters.xml");
+    	stream = new FileOutputStream(file.toString());
+    	
+    	//URL url = NemoLists.class.getResource("/resources/Parameters.xml");
+    	//String file = url.getFile();
+    	//stream = new FileOutputStream(file);
     	encoder = new XMLEncoder(stream);
     	encoder.writeObject(_parameters);
     } catch (Exception e) {
@@ -1561,9 +1588,13 @@ public  class NemoLists implements Cloneable {
     	for (int i=0; i<regions.length; i++) {
     		addRegion(regions[i]);
     	}
-    	URL url = NemoLists.class.getResource("/resources/Regions.xml");
-    	String file = url.getFile();
-    	stream = new FileOutputStream(file);
+    	
+    	File file= new java.io.File("resources/Regions.xml");
+    	stream = new FileOutputStream(file.toString());
+    	
+    	//URL url = NemoLists.class.getResource("/resources/Regions.xml");
+    	//String file = url.getFile();
+    	//stream = new FileOutputStream(file);
     	encoder = new XMLEncoder(stream);
     	encoder.writeObject(_regions);
     } catch (Exception e) {
@@ -1592,9 +1623,13 @@ public  class NemoLists implements Cloneable {
     	for (int i=0; i<ships.length; i++) {
     		addShip(ships[i]);
     	}
-    	URL url = NemoLists.class.getResource("/resources/Ships.xml");
-    	String file = url.getFile();
-    	stream = new FileOutputStream(file);
+    	
+    	File file= new java.io.File("resources/Ships.xml");
+    	stream = new FileOutputStream(file.toString());
+    	
+    	//URL url = NemoLists.class.getResource("/resources/Ships.xml");
+    	//String file = url.getFile();
+    	//stream = new FileOutputStream(file);
     	encoder = new XMLEncoder(stream);
     	encoder.writeObject(_ships);
     } catch (Exception e) {
@@ -1623,9 +1658,13 @@ public  class NemoLists implements Cloneable {
     	for (int i=0; i<surveys.length; i++) {
     		addSurvey(surveys[i]);
     	}
-    	URL url = NemoLists.class.getResource("/resources/Surveys.xml");
-    	String file = url.getFile();
-    	stream = new FileOutputStream(file);
+    	
+    	File file= new java.io.File("resources/Surveys.xml");
+    	stream = new FileOutputStream(file.toString());
+    	
+    	//URL url = NemoLists.class.getResource("/resources/Surveys.xml");
+    	//String file = url.getFile();
+    	//stream = new FileOutputStream(file);
     	encoder = new XMLEncoder(stream);
     	encoder.writeObject(_surveys);
     } catch (Exception e) {

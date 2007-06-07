@@ -385,7 +385,15 @@ public  class Configuration
     if (_singleton == null) {
     	_singleton = new Configuration();
     	XMLBootstrapParser parser = new XMLBootstrapParser(_singleton);
-    	parser.parse( Configuration.class.getResourceAsStream("/resources/NemoConfiguration.xml"), false);
+    	try {
+			parser.parse( new FileInputStream("resources/NemoConfiguration.xml"), false);
+		} catch (FileNotFoundException e) {
+			
+			e.printStackTrace();
+		}
+    	//parser.parse( Configuration.class.getResourceAsStream("resources/NemoConfiguration.xml"), false);
+  
+    
     }
     return _singleton;
   }
@@ -401,14 +409,21 @@ public  class Configuration
   /**
    *
    */
-  public void save ( ) {
+  public void save () {
     FileOutputStream stream = null;
     try {
-    	URL url = Configuration.class.getResource("/resources/NemoConfiguration.xml");
-    	String file = url.getFile();
-    	stream = new FileOutputStream(file);
+    	//FileOutputStream fich2 =  new FileOutputStream(new File("D:/NemoConfiguration.xml"));
+    	
+    	//creation nouveau dossier puis creation fichier config TODO
+    	File fich2= new java.io.File("resources/NemoConfiguration.xml");
+    	//URL url = Configuration.class.getResource("/NemoConfiguration.xml");
+    	//URL url = Configuration.class.getResource("/resources/NemoConfiguration.xml");
+    	//String file = url.getFile();
+    	stream = new FileOutputStream(fich2.toString());
+    	//stream = new FileOutputStream(file);
     	writeXMLOn(stream);
     } catch (Exception e) {
+    	e.printStackTrace();
     } finally {
     	if (stream != null) {
     		try { stream.close(); } catch (Exception ex) {}

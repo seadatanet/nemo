@@ -61,7 +61,7 @@ public void run(){
 	InputModel inputModel = new InputModel();
 	
 	Shell shell = new Shell();
-	FileDialog dialog = new FileDialog(shell, SWT.OPEN);
+	FileDialog dialog = new FileDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
 	nomModele = dialog.open();
 	if (nomModele == null) {}else{
 		

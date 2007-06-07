@@ -5,6 +5,10 @@ import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.FocusListener;
+import org.eclipse.swt.events.ShellEvent;
+import org.eclipse.swt.events.ShellListener;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
@@ -23,67 +27,15 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.actions.ActionFactory;
 
 public class OptionsAction extends Action implements ISelectionListener, ActionFactory.IWorkbenchAction { //implements ISelectionListener, ActionFactory.IWorkbenchAction 
+
 private final IWorkbenchWindow window;
 
-/*
-/////////////
-
-private Composite top = null;
-
-private Combo combo = null;
-
-private ComboViewer comboViewer = null;
-
-private Group group = null;
-
-private ComboViewer comboViewer1 = null;
-
-private Group group1 = null;
-
-private Text textArea = null;
-
-private Button button = null;
-
-private Group group2 = null;
-
-private Button button1 = null;
-
-private Button button2 = null;
-
-private Text textArea1, textArea2 = null;
-*/
-
-
-private Composite top = null;
-
-private Group groupDossier = null;
-
-private Button buttonParcourir = null;
-
-public static Text textDossier = null;
-
-private Group groupLangue = null;
-
-private Combo comboLangue = null;
-
-private Group groupWS = null;
-
-private Button buttonCancel = null;
-
-private Button buttonValider = null;
-
-private Label labelNemo = null;
-
-private Label labelNautilus = null;
-
-public static Text textAreaNemo = null;
-
-public static Text textAreaNautilus = null;
-
-
-
-
-////////////
+public static Composite top = null;
+public static Group groupLangue, groupWS, groupDossier = null;
+public static Combo comboLangue = null;
+public static Button buttonCancel,buttonValider, buttonParcourir  = null;
+public static Label labelNemo, labelNautilus = null;
+public static Text textAreaNemo, textAreaNautilus, textDossier = null;
 
 public final static String ID = "fr.ifremer.nemo.ui.OptionsAction";
 
@@ -114,33 +66,51 @@ public void dispose(){
 
 
 public void run(){
+	//lancement IHM options
 	System.out.println("Menu options");
 	
-	if (options == 0){	
-	
-	shelloptions = new Shell(Application.display, SWT.BORDER | SWT.TITLE);
+	shelloptions = new Shell(Application.display, SWT.BORDER | SWT.TITLE | SWT.APPLICATION_MODAL);
 
-	
 	//shelloptions = new Shell();
 	shelloptions.setSize(400, 400);
 	shelloptions.setText("Configuration de Nemo");
 	shelloptions.setLayout(new GridLayout());
 	//top = new Composite(shelloptions, SWT.NONE);
-	
-	
+
 	createPartControl(shelloptions);
 	//shelloptions.redraw();
 	shelloptions.pack();
 	shelloptions.open();
 	options =1;
-	}
-	else { Utils.messageErreur("Vous avez déjà ouvert une fenêtre d'options");}
-	// shell repack !!
+	
+//	chargement des options
+	Utils.initConfig();
+	
+	remplissageOptions();
 	
 }
 
 
-
+public void remplissageOptions(){
+//	 remplissage IHM avec les valeurs du fichier de config
+	
+	//DOSSIER
+	textDossier.setText(Utils.configuration.getModelsDirectory());
+		
+	//LANGUE
+	if (Utils.configuration.getLocale().toString().matches("fr_FR")){
+		//on met la combo langue à FR
+		comboLangue.select(0);
+	} else{
+		//on met la combo langue à GB
+		comboLangue.select(1);
+	}
+	
+	//WS
+	textAreaNemo.setText(Utils.configuration.getNemoWebServiceURL());
+	textAreaNautilus.setText(Utils.configuration.getNautilusWebServiceURL());
+	
+}
 
 
 public void selectionChanged(IWorkbenchPart part, ISelection incoming){}
@@ -170,7 +140,7 @@ private void createGroupDossier() {
 			
 		String nomRepertoire;
 	    Shell shell = new Shell();
-		DirectoryDialog dialog = new DirectoryDialog(shell, SWT.OPEN);
+		DirectoryDialog dialog = new DirectoryDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
 		nomRepertoire = dialog.open();
 		if (nomRepertoire != null){
 			textDossier.setText(nomRepertoire);
@@ -263,21 +233,23 @@ public void createPartControl(Composite parent) {
 	
 	
 	
-	//listener valider
+	//listener cancel
 	buttonCancel.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 		public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
 			System.out.println("options cancel"); // TODO Auto-generated Event stub widgetSelected()
-			options = 0;
+			
 			shelloptions.close();
 			
 		}
 	});
 
-	//listener annuler
+	//listener valider
 	buttonValider.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 		public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
 			System.out.println("options valider"); // TODO Auto-generated Event stub widgetSelected()
-			options = 0;
+			
+			//sauvegarde de la config
+			Utils.saveConfig();
 			
 			shelloptions.close();
 			
@@ -285,6 +257,7 @@ public void createPartControl(Composite parent) {
 	});
 	
 	
+
 }
 
 
