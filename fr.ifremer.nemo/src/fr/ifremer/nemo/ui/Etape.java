@@ -1,8 +1,11 @@
 package fr.ifremer.nemo.ui;
 
+import java.text.ParseException;
 import java.util.regex.*;
 
 import org.eclipse.swt.widgets.Table;
+
+import fr.ifremer.nemo.util.DateTimeFormat;
 
 
 public class Etape {
@@ -50,7 +53,6 @@ public class Etape {
 		resultat = Regexp.checkTextValeur(EditDesc.lignesFinStation, "Fin de station");
 		ok = ok && resultat;
 		
-		
 		//section fin de données
 		if (!EditDesc.buttonIndicFinDonnees.getSelection()){
 			resultat = Regexp.checkTextValeur(EditDesc.nbreLignesMesures, "Fin de station");
@@ -66,13 +68,18 @@ public class Etape {
 		
 	
 	public static void validationSurvey(){
-//		 test de toutes les valeurs de Survey	
+		//	test de toutes les valeurs de Survey	
 		
 		Boolean ok, resultat;
 		ok = true;
 		
-//		raz du message d'erreurs
+		//	raz du message d'erreurs
 		Utils.messageErreur("");
+		
+		if (TableDataSurvey.types.size() == 0){
+			Utils.messageErreur("Vous devez choisir au moins un type de données avant de valider l'étape...");
+		ok = false;}
+		
 		
 		if (ok){ 	
 			okSurvey();
@@ -91,6 +98,81 @@ public class Etape {
 		
 //		raz du message d'erreurs
 		Utils.messageErreur("");
+	
+		if (EditStation.buttonRefStationPos.getSelection()){
+			//position dans le fichier, vérif des valeurs
+		ok = ok && Regexp.checkLigneDebutfin(EditStation.textRefStationLigne, EditStation.textRefStationDebut, EditStation.textRefStationFin, "Numéro de Station");
+				
+		}
+		
+		if (EditStation.buttonHistoriqueAcqPos.getSelection()){
+			//position dans fichier, verif des valeurs
+		ok = ok && Regexp.checkLigneDebutfin(EditStation.textHistoriqueAcqLigne1, EditStation.textHistoriqueAcqDebut1, EditStation.textHistoriqueAcqFin1, "Historique Acquisition ligne 1");
+		ok = ok && Regexp.checkLigneDebutfin(EditStation.textHistoriqueAcqLigne2, EditStation.textHistoriqueAcqDebut2, EditStation.textHistoriqueAcqFin2, "Historique Acquisition ligne 2");	
+			
+		}
+		
+		if (EditStation.buttonCommentairePos.getSelection()){
+			
+			ok = ok && Regexp.checkLigneDebutfin(EditStation.textCommentaireLigne, EditStation.textCommentaireDebut, EditStation.textCommentaireFin, "Commentaire");
+		}
+		
+		
+		if (EditStation.buttonSurfacePos.getSelection()){
+			
+			ok = ok && Regexp.checkLigneDebutfin(EditStation.textSurfaceLigne1, EditStation.textSurfaceDebut1, EditStation.textSurfaceFin1, "Echantillon de surface ligne 1");
+			ok = ok && Regexp.checkLigneDebutfin(EditStation.textSurfaceLigne2, EditStation.textSurfaceDebut2, EditStation.textSurfaceFin2, "Echantillon de surface ligne 2");
+			
+		}
+		
+		
+		
+		
+		if (EditStation.buttonProfondeurPos.getSelection()){
+			
+			ok = ok && Regexp.checkLigneDebutfin(EditStation.textProfondeurLigne, EditStation.textProfondeurDebut, EditStation.textProfondeurFin, "Profondeur");
+		} else {
+			
+			if (Float.parseFloat(EditStation.textProfondeur.getText()) > 0){
+				ok = ok && true;
+			} else {
+				ok = ok && false;
+			}
+			
+		}
+		
+		
+		//HEURE
+		Utils.messageErreurAppend("\n===[Check section : Heure]===\n");
+		try {
+			DateTimeFormat format = new DateTimeFormat(EditStation.comboHeure.getItem(EditStation.comboHeure.getSelectionIndex()));
+		} catch (ParseException e) {
+			
+			Utils.messageErreurAppend("Erreur de format d'Heure");
+			//e.printStackTrace();
+			//Utils.messageErreurAppend(e.)
+		}
+		
+		
+		
+		//DATE
+		Utils.messageErreurAppend("\n===[Check section : Date]===\n");
+		try {
+			DateTimeFormat format = new DateTimeFormat(EditStation.comboDate.getItem(EditStation.comboDate.getSelectionIndex()));
+		} catch (ParseException e) {
+			
+			Utils.messageErreurAppend("Erreur de format de Date");
+			//e.printStackTrace();
+			//Utils.messageErreurAppend(e.)
+		}
+		
+		
+		//TYPE DE DONNEES
+		if (EditStation.comboRefStationType.getSelectionIndex() == -1){
+			Utils.messageErreurAppend("Vous devez choisir un type de données à associer à la station...");
+		ok = false;
+		}
+		
 		
 		if (ok){ 	
 			okStation();
@@ -139,6 +221,8 @@ public class Etape {
 		
 		DataModel.initSurvey();
 		ViewFile.tabItem1.setText("[Campagne]");
+		
+		Utils.messageErreur("Etape validée, vous pouvez passer à la suivante...");
 		
 		//validation etape 2
 		ViewFile.etape = 2;

@@ -315,11 +315,12 @@ public  class DateTimeFormat extends ExternalizableFormat implements Cloneable {
     	System.out.println("base: "+outFormat.format(baseTime));
     	System.out.println("out: "+outFormat.format(value.getTime()));
 */
-    	DateTimeFormat format = new DateTimeFormat("MMM dd yyyy");
+    	DateTimeFormat format = new DateTimeFormat("MMM_ dd yyyy");
     	Long dateLong = (Long)format.parseObject("JUN 02 2007");
     	System.out.println(new Date( dateLong.longValue()));
     } catch (Exception e) {
     	e.printStackTrace();
+    	System.out.println(">>>>"+e.getMessage());
     }
   }
 

@@ -172,7 +172,7 @@ public static Boolean checkLigneDebutfin(Text ligne, Text debut, Text fin, Strin
 	if (Pattern.matches("^[1-9][0-9]*$", lign)){
 		System.out.println("ligne de la section " + nomSection + " ==> ok");
 		ok = ok && true;
-		log = log + "Valeur de ligne ok\n";
+		//log = log + "Valeur de ligne ok\n";
 		} 
 	else { 
 		ok = ok && false;
@@ -184,7 +184,7 @@ public static Boolean checkLigneDebutfin(Text ligne, Text debut, Text fin, Strin
 	if (Pattern.matches("^[1-9][0-9]*$", debu)){
 		System.out.println("debut de la section " + nomSection + " ==> ok");
 		ok = ok && true;
-		log = log + "Valeur de début ok\n";
+		//log = log + "Valeur de début ok\n";
 	} else { 
 		ok = ok && false;
 		log = log + "Erreur valeur/format de début\n";
@@ -195,7 +195,7 @@ public static Boolean checkLigneDebutfin(Text ligne, Text debut, Text fin, Strin
 	if (Pattern.matches("^[1-9][0-9]*$", fi)){
 		System.out.println("fin de la section " + nomSection + " ==> ok");
 		ok = ok && true;
-		log = log + "Valeur de fin ok\n";
+		//log = log + "Valeur de fin ok\n";
 	} else { 
 		ok = ok && false;
 		log = log + "Erreur valeur/format de fin\n";
@@ -227,9 +227,9 @@ public static Boolean checkTextValeur(Text text, String nomSection){
 	
 	
 	if (Pattern.matches("^[0-9][0-9]*$", valeur)){
-		System.out.println("valeur de la section " + nomSection + " ==> ok");
+		//System.out.println("valeur de la section " + nomSection + " ==> ok");
 		ok = ok && true;
-		log = log + "Valeur ok\n";
+		//log = log + "Valeur ok\n";
 	} else { 
 		ok = ok && false;
 		log = log + "Erreur valeur/format\n";
