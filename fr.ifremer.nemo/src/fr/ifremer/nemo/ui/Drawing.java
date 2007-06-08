@@ -946,11 +946,9 @@ public static void sectionLabelTextInjectNbreLignes(ScrolledForm form,String nom
 					 Composite sectionClient = ViewEdit.toolkitEdition.createComposite(section);
 					 GridLayout grid = new GridLayout();
 					 grid.numColumns = 1;
+
 					 sectionClient.setLayout(grid);
-				
-					 
-					
-					  
+				 
 					  //label avec le texte de "description"
 					  Label label1 = new Label(section, SWT.NULL);
 					  label1.setText(description);
@@ -969,8 +967,6 @@ public static void sectionLabelTextInjectNbreLignes(ScrolledForm form,String nom
 					 
 					  section.setClient(sectionClient);		
 					  
-				
-					  
 					  //listener bouton inject
 					  buttonInject
 						.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -983,7 +979,8 @@ public static void sectionLabelTextInjectNbreLignes(ScrolledForm form,String nom
 							}
 						});
 					  
-				
+					  section.pack();
+					  //sectionClient.pack();
 					  
 					  //ajout de la section dans la liste des sections de description
 					  ajoutSectionDansListeDesc(section);  

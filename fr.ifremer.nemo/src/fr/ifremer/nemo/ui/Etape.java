@@ -45,6 +45,10 @@ public class Etape {
 		ok = ok && resultat;
 		
 		//section entete station
+		resultat = Regexp.checkTextValeur(EditDesc.lignesEnteteStation, "Entête de station");
+			ok = ok && resultat;
+		
+		/*
 		if (EditDesc.buttonLignesEnteteStation.getSelection()){
 			resultat = Regexp.checkTextValeur(EditDesc.lignesEnteteStation, "Entête de station");	
 		ok = ok && resultat;
@@ -52,7 +56,8 @@ public class Etape {
 			resultat = Regexp.checkLigneDebutfin(EditDesc.octetsEnteteStationLigne, EditDesc.octetsEnteteStationDebut, EditDesc.octetsEnteteStationFin, "Entête Station");
 			ok = ok && resultat; 
 		}
-	
+		*/
+		
 //		section fin de station
 		resultat = Regexp.checkTextValeur(EditDesc.lignesFinStation, "Fin de station");
 		ok = ok && resultat;
@@ -98,60 +103,57 @@ public class Etape {
 		
 		System.out.println("Debut check station");
 		
-		Boolean ok, resultat;
+		Boolean ok, resultat1, resultat2;
 		ok = true;
 		
 //		raz du message d'erreurs
 		Utils.messageErreur("");
 	
+		//NUMERO STATION
 		if (EditStation.buttonRefStationPos.getSelection()){
 			//position dans le fichier, vérif des valeurs
-			
-		ok = ok && Regexp.checkLigneDebutfin(EditStation.textRefStationLigne, EditStation.textRefStationDebut, EditStation.textRefStationFin, "Numéro de Station");
+		resultat1 = Regexp.checkLigneDebutfin(EditStation.textRefStationLigne, EditStation.textRefStationDebut, EditStation.textRefStationFin, "Numéro de Station"); 	
+		ok = ok && resultat1;
 				
 		}
 		
+		
+		//TYPE DE DONNEES
+		if (EditStation.comboRefStationType.getSelectionIndex() == -1){
+			Utils.messageErreurAppend("Vous devez choisir un type de données à associer à la station...");
+		ok = false;
+		}
+		
+		
 		if (EditStation.buttonHistoriqueAcqPos.getSelection()){
 			//position dans fichier, verif des valeurs
-		ok = ok && Regexp.checkLigneDebutfin(EditStation.textHistoriqueAcqLigne1, EditStation.textHistoriqueAcqDebut1, EditStation.textHistoriqueAcqFin1, "Historique Acquisition ligne 1");
-		ok = ok && Regexp.checkLigneDebutfin(EditStation.textHistoriqueAcqLigne2, EditStation.textHistoriqueAcqDebut2, EditStation.textHistoriqueAcqFin2, "Historique Acquisition ligne 2");	
+		resultat1 = Regexp.checkLigneDebutfin(EditStation.textHistoriqueAcqLigne1, EditStation.textHistoriqueAcqDebut1, EditStation.textHistoriqueAcqFin1, "Historique Acquisition ligne 1"); 
+		resultat2 = Regexp.checkLigneDebutfin(EditStation.textHistoriqueAcqLigne2, EditStation.textHistoriqueAcqDebut2, EditStation.textHistoriqueAcqFin2, "Historique Acquisition ligne 2"); 
+		ok = ok && resultat1;
+		ok = ok && 	resultat2;
 			
 		}
 		
 		if (EditStation.buttonCommentairePos.getSelection()){
-			
-			ok = ok && Regexp.checkLigneDebutfin(EditStation.textCommentaireLigne, EditStation.textCommentaireDebut, EditStation.textCommentaireFin, "Commentaire");
+		resultat1 = Regexp.checkLigneDebutfin(EditStation.textCommentaireLigne, EditStation.textCommentaireDebut, EditStation.textCommentaireFin, "Commentaire");	
+			ok = ok && resultat1; 
 		}
 		
 		
 		if (EditStation.buttonSurfacePos.getSelection()){
-			
-			ok = ok && Regexp.checkLigneDebutfin(EditStation.textSurfaceLigne1, EditStation.textSurfaceDebut1, EditStation.textSurfaceFin1, "Echantillon de surface ligne 1");
-			ok = ok && Regexp.checkLigneDebutfin(EditStation.textSurfaceLigne2, EditStation.textSurfaceDebut2, EditStation.textSurfaceFin2, "Echantillon de surface ligne 2");
-			
-		}
-		
-		
-		
-		Utils.messageErreurAppend("\n===[Check section : Profondeur]===\n");
-		if (EditStation.buttonProfondeurPos.getSelection()){
-			
-			ok = ok && Regexp.checkLigneDebutfin(EditStation.textProfondeurLigne, EditStation.textProfondeurDebut, EditStation.textProfondeurFin, "Profondeur");
-		} else {
-			
-			if (Float.parseFloat(EditStation.textProfondeur.getText()) > 0){
-				ok = ok && true;
-			} else {
-				ok = ok && false;
-				Utils.messageErreurAppend("Erreur sur la profondeur");
-			}
+			resultat1 =Regexp.checkLigneDebutfin(EditStation.textSurfaceLigne1, EditStation.textSurfaceDebut1, EditStation.textSurfaceFin1, "Echantillon de surface ligne 1");
+			resultat2 =Regexp.checkLigneDebutfin(EditStation.textSurfaceLigne2, EditStation.textSurfaceDebut2, EditStation.textSurfaceFin2, "Echantillon de surface ligne 2");
+						
+			ok = ok && resultat1;
+			ok = ok && resultat2;
 			
 		}
 		
-		
+			
 		//HEURE
 			//check valeurs ligne/debut/fin
-		ok = ok && Regexp.checkLigneDebutfin(EditStation.textHeureLigne, EditStation.textHeureDebut, EditStation.textHeureFin, "Heure");
+		resultat1 =Regexp.checkLigneDebutfin(EditStation.textHeureLigne, EditStation.textHeureDebut, EditStation.textHeureFin, "Heure"); 
+		ok = ok && resultat1;
 		
 		String ligne, string=null;
 		//Utils.messageErreurAppend("\n===[Check section : Heure]===\n");
@@ -181,7 +183,8 @@ public class Etape {
 		
 		//DATE
 //		check valeurs ligne/debut/fin
-		ok = ok && Regexp.checkLigneDebutfin(EditStation.textDateLigne, EditStation.textDateDebut, EditStation.textDateFin, "Date");
+		resultat1 = Regexp.checkLigneDebutfin(EditStation.textDateLigne, EditStation.textDateDebut, EditStation.textDateFin, "Date"); 
+		ok = ok && resultat1;
 		
 		//Utils.messageErreurAppend("\n===[Check section : Date]===\n");
 		System.out.println("format date = "+EditStation.comboDate.getText());
@@ -207,10 +210,19 @@ public class Etape {
 		}
 		
 		
-		//TYPE DE DONNEES
-		if (EditStation.comboRefStationType.getSelectionIndex() == -1){
-			Utils.messageErreurAppend("Vous devez choisir un type de données à associer à la station...");
-		ok = false;
+		Utils.messageErreurAppend("\n===[Check section : Profondeur]===\n");
+		if (EditStation.buttonProfondeurPos.getSelection()){
+			resultat1 =Regexp.checkLigneDebutfin(EditStation.textProfondeurLigne, EditStation.textProfondeurDebut, EditStation.textProfondeurFin, "Profondeur"); 
+			ok = ok && resultat1;
+		} else {
+			
+			if (Float.parseFloat(EditStation.textProfondeur.getText()) > 0){
+				ok = ok && true;
+			} else {
+				ok = ok && false;
+				Utils.messageErreurAppend("Erreur sur la profondeur");
+			}
+			
 		}
 		
 		

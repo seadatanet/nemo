@@ -102,6 +102,7 @@ public static void initDesc(){
 	stationModel.setNumberOfLines(Integer.valueOf(EditDesc.lignesEnteteStation.getText()));
 	
 	
+	
 	//nombre de lignes de fin
 	stationModel.setEndData(Integer.valueOf(EditDesc.lignesFinStation.getText()));
 	
@@ -119,11 +120,11 @@ public static void initDesc(){
 		stationModel.setEndOnPattern(true);
 		//propertyModel.setUserProvided(true);
 		
-		if (EditDesc.comboIndicRuptureDonnees.getItem(EditDesc.comboIndicRuptureDonnees.getSelectionIndex()).matches("EOF")){
+		if (EditDesc.comboIndicRuptureDonnees.getText().matches("EOF")){
 			stationModel.setEndDataPattern("^$");
 		} else {
 		
-		stationModel.setEndDataPattern(EditDesc.comboIndicRuptureDonnees.getItem(EditDesc.comboIndicRuptureDonnees.getSelectionIndex()));}
+		stationModel.setEndDataPattern(EditDesc.comboIndicRuptureDonnees.getText());}
 		
 		
 	}else{
@@ -283,7 +284,7 @@ public static void initStation(){
 	//récupérer le bon datatype avant de l'affecter
 	
 	//on récupère la sélection du combo de station puis le code + libellé
-	String typeCombo  = EditStation.comboRefStationType.getItem(EditStation.comboRefStationType.getSelectionIndex());
+	String typeCombo  = EditStation.comboRefStationType.getText();
 	
 	DataType dataType = new DataType();
 	String code;

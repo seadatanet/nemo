@@ -127,8 +127,8 @@ Drawing.sectionLabelTextInjectNbreLignes(formEdition, "Entête de Fichier        
 
 
 //section entete station
-Drawing.sectionRadioManuelRadioSimpleInjectLigneDebutFinInject(formEdition, "Entête Station                         ", "Donnez le nombre de lignes de l'entête station ou précisez que le nombre d'octets est présent sur la première ligne de données", sectionEnteteStation, lignesEnteteStation , buttonLignesEnteteStation, "Nombre de lignes", "Nombre octets sur 1ere ligne données", octetsEnteteStationLigne, octetsEnteteStationDebut, octetsEnteteStationFin);
-
+//Drawing.sectionRadioManuelRadioSimpleInjectLigneDebutFinInject(formEdition, "Entête Station                         ", "Donnez le nombre de lignes de l'entête station ou précisez que le nombre d'octets est présent sur la première ligne de données", sectionEnteteStation, lignesEnteteStation , buttonLignesEnteteStation, "Nombre de lignes", "Nombre octets sur 1ere ligne données", octetsEnteteStationLigne, octetsEnteteStationDebut, octetsEnteteStationFin);
+Drawing.sectionLabelTextInjectNbreLignes(formEdition,"Entête Station                         ","Nombre de lignes entête Station: surlignez les lignes puis cliquez sur injecter", sectionEnteteStation, lignesEnteteStation);
 
 
 
@@ -169,6 +169,7 @@ buttonExpandDesc
 			if (expand == 0){ 
 			EditDesc.listeSectionsDesc.get(i).setExpanded(true);
 			//EditDesc.listeSectionsDesc.get(i).setParent(s);
+			EditDesc.listeSectionsDesc.get(i).pack();
 			} 
 			else{
 				EditDesc.listeSectionsDesc.get(i).setExpanded(false);
