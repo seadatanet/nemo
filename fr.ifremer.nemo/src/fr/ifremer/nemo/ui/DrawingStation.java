@@ -956,7 +956,8 @@ public static void sectionHeure(String nomSection, String description, Section s
 							//System.out.println("valeur de ligne lign==> " + lign.getText());
 							//System.out.println("valeur de ligne de ViewEdit.ligneTest ==> " + ViewEdit.ligneTest.getText());
 						Utils.inject(lign, debu, fi, ViewFile.styledTextStation);
-						
+						EditStation.offsetDebutHeure = ViewFile.styledTextStation.getSelection().x;
+						EditStation.offsetFinHeure = ViewFile.styledTextStation.getSelection().y;
 						}
 					});
 				  
@@ -1075,6 +1076,8 @@ public static void sectionDate(String nomSection, String description, Section se
 							//System.out.println("valeur de ligne lign==> " + lign.getText());
 							//System.out.println("valeur de ligne de ViewEdit.ligneTest ==> " + ViewEdit.ligneTest.getText());
 						Utils.inject(lign, debu, fi, ViewFile.styledTextStation);
+						EditStation.offsetDebutDate = ViewFile.styledTextStation.getSelection().x;
+						EditStation.offsetFinDate = ViewFile.styledTextStation.getSelection().y;
 						
 						}
 					});

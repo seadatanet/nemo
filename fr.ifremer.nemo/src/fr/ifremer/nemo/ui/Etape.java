@@ -6,6 +6,7 @@ import java.util.regex.*;
 import org.eclipse.swt.widgets.Table;
 
 import fr.ifremer.nemo.util.DateTimeFormat;
+import fr.ifremer.nemo.util.DateTimeFormatParser;
 
 
 public class Etape {
@@ -47,6 +48,9 @@ public class Etape {
 		if (EditDesc.buttonLignesEnteteStation.getSelection()){
 			resultat = Regexp.checkTextValeur(EditDesc.lignesEnteteStation, "Entête de station");	
 		ok = ok && resultat;
+		}else{
+			resultat = Regexp.checkLigneDebutfin(EditDesc.octetsEnteteStationLigne, EditDesc.octetsEnteteStationDebut, EditDesc.octetsEnteteStationFin, "Entête Station");
+			ok = ok && resultat; 
 		}
 	
 //		section fin de station
@@ -92,6 +96,7 @@ public class Etape {
 	public static void validationStation(){
 //		test des valeurs de Station
 		
+		System.out.println("Debut check station");
 		
 		Boolean ok, resultat;
 		ok = true;
@@ -101,6 +106,7 @@ public class Etape {
 	
 		if (EditStation.buttonRefStationPos.getSelection()){
 			//position dans le fichier, vérif des valeurs
+			
 		ok = ok && Regexp.checkLigneDebutfin(EditStation.textRefStationLigne, EditStation.textRefStationDebut, EditStation.textRefStationFin, "Numéro de Station");
 				
 		}
@@ -127,7 +133,7 @@ public class Etape {
 		
 		
 		
-		
+		Utils.messageErreurAppend("\n===[Check section : Profondeur]===\n");
 		if (EditStation.buttonProfondeurPos.getSelection()){
 			
 			ok = ok && Regexp.checkLigneDebutfin(EditStation.textProfondeurLigne, EditStation.textProfondeurDebut, EditStation.textProfondeurFin, "Profondeur");
@@ -137,32 +143,66 @@ public class Etape {
 				ok = ok && true;
 			} else {
 				ok = ok && false;
+				Utils.messageErreurAppend("Erreur sur la profondeur");
 			}
 			
 		}
 		
 		
 		//HEURE
-		Utils.messageErreurAppend("\n===[Check section : Heure]===\n");
+			//check valeurs ligne/debut/fin
+		ok = ok && Regexp.checkLigneDebutfin(EditStation.textHeureLigne, EditStation.textHeureDebut, EditStation.textHeureFin, "Heure");
+		
+		String ligne, string=null;
+		//Utils.messageErreurAppend("\n===[Check section : Heure]===\n");
+		System.out.println("format heure = "+EditStation.comboHeure.getText()); //Item(EditStation.comboHeure.getSelectionIndex()));
 		try {
-			DateTimeFormat format = new DateTimeFormat(EditStation.comboHeure.getItem(EditStation.comboHeure.getSelectionIndex()));
-		} catch (ParseException e) {
+			System.out.println("format heure = "+EditStation.comboHeure.getText());
+			DateTimeFormat format = new DateTimeFormat(EditStation.comboHeure.getText());
 			
-			Utils.messageErreurAppend("Erreur de format d'Heure");
-			//e.printStackTrace();
+			//récupérer le texte en question et creer une nouvelle heure
+			ligne = Utils.lignesBrutes.get(Integer.parseInt(EditStation.textHeureLigne.getText())-1);
+			string = ligne.substring(Integer.parseInt(EditStation.textHeureDebut.getText())-1, Integer.parseInt(EditStation.textHeureFin.getText()));
+			System.out.println(ligne);
+			System.out.println(string);
+			Long hourLong = (Long)format.parseObject(string);
+			
+			
+		} catch (ParseException e) {
+			System.out.println("erreur format Heure ");
+			Utils.messageErreurAppend("Erreur de format d'Heure : Attendu => "+string+" Lu => "+EditStation.comboHeure.getText());
+			
+			ok = ok && false;
+			e.printStackTrace();
 			//Utils.messageErreurAppend(e.)
 		}
 		
 		
 		
 		//DATE
-		Utils.messageErreurAppend("\n===[Check section : Date]===\n");
+//		check valeurs ligne/debut/fin
+		ok = ok && Regexp.checkLigneDebutfin(EditStation.textDateLigne, EditStation.textDateDebut, EditStation.textDateFin, "Date");
+		
+		//Utils.messageErreurAppend("\n===[Check section : Date]===\n");
+		System.out.println("format date = "+EditStation.comboDate.getText());
 		try {
-			DateTimeFormat format = new DateTimeFormat(EditStation.comboDate.getItem(EditStation.comboDate.getSelectionIndex()));
-		} catch (ParseException e) {
 			
-			Utils.messageErreurAppend("Erreur de format de Date");
-			//e.printStackTrace();
+			DateTimeFormat format = new DateTimeFormat(EditStation.comboDate.getText());
+			
+			//récupérer le texte en question et creer une nouvelle heure
+			//on a ligne debut fin donc parcours lignes de texte
+			ligne = Utils.lignesBrutes.get(Integer.parseInt(EditStation.textDateLigne.getText())-1);
+			string = ligne.substring(Integer.parseInt(EditStation.textDateDebut.getText())-1, Integer.parseInt(EditStation.textDateFin.getText()));
+			System.out.println(ligne);
+			System.out.println(string);
+			Long dateLong = (Long)format.parseObject(string);
+			
+			
+		} catch (ParseException e) {
+			System.out.println("erreur format date ");
+			Utils.messageErreurAppend("\nErreur de format de Date : Attendu => "+string+" Lu => "+EditStation.comboDate.getText());
+			ok = ok && false;
+			e.printStackTrace();
 			//Utils.messageErreurAppend(e.)
 		}
 		
@@ -181,7 +221,7 @@ public class Etape {
 		
 		
 		
-		okStation();
+		//okStation();
 	}
 
 	
@@ -235,6 +275,7 @@ public class Etape {
 	private static void okStation(){
 		
 //		envoi des valeurs dans le modèle	
+		Utils.messageErreur("Etape validée, vous pouvez passer à la suivante...");
 		DataModel.initStation();
 		ViewFile.tabItem2.setText("[Station]");
 		ViewFile.etape = 3;

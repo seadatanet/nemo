@@ -156,6 +156,7 @@ public static Boolean checkLigneDebutfin(Text ligne, Text debut, Text fin, Strin
 	ok = true;
 	log = "\n===[Check section : " + nomSection + "]===\n";
 	
+	System.out.println(nomSection);
 	
 	//valeurs des champs
 	lign = ligne.getText();
@@ -176,7 +177,7 @@ public static Boolean checkLigneDebutfin(Text ligne, Text debut, Text fin, Strin
 		} 
 	else { 
 		ok = ok && false;
-		log = log + "Erreur valeur/format de ligne\n";
+		log = log + "   Erreur valeur/format de ligne\n";
 		
 		}
 
@@ -187,7 +188,7 @@ public static Boolean checkLigneDebutfin(Text ligne, Text debut, Text fin, Strin
 		//log = log + "Valeur de début ok\n";
 	} else { 
 		ok = ok && false;
-		log = log + "Erreur valeur/format de début\n";
+		log = log + "   Erreur valeur/format de début\n";
 		
 		}
 
@@ -198,18 +199,22 @@ public static Boolean checkLigneDebutfin(Text ligne, Text debut, Text fin, Strin
 		//log = log + "Valeur de fin ok\n";
 	} else { 
 		ok = ok && false;
-		log = log + "Erreur valeur/format de fin\n";
+		log = log + "   Erreur valeur/format de fin";
 		
 		}
 		
 	//tests des relations des champs
 	//int i = Integer.parseInt(str);
+	if (!debu.matches("")&&(!fi.matches(""))){
 	if (Integer.parseInt(debu) > Integer.parseInt(fi)){
 		ok = ok && false; 
-		log = log + "La position de début doit être inférieure à celle de la fin";
+		log = log + "\n   La position de début doit être inférieure à celle de la fin";
 		}
+	}
 	
-
+if (ok){
+	log = log+"...ok";
+	}
 	
 Utils.messageErreurAppend(log);	
 	return ok;
@@ -232,9 +237,14 @@ public static Boolean checkTextValeur(Text text, String nomSection){
 		//log = log + "Valeur ok\n";
 	} else { 
 		ok = ok && false;
-		log = log + "Erreur valeur/format\n";
+		log = log + "   Erreur valeur/format";
 		
 		}
+	
+	if (ok){
+		log = log + "...ok";
+	}
+	
 Utils.messageErreurAppend(log);
 	return ok;
 }

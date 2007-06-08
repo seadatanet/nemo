@@ -351,9 +351,10 @@ public class EditSurvey {
 			//TODO à faire !
 			
 			//interrogation WService
+			NemoLists.updateCountries();
 			NemoLists.updateDataTypes();
 			NemoLists.updateRegions();
-			NemoLists.updateCountries();
+		
 			NemoLists.updateShips();
 			NemoLists.updateDataCentres();
 			NemoLists.updateParameters();

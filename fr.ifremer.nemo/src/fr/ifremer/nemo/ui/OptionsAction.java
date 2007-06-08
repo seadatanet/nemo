@@ -69,7 +69,7 @@ public void run(){
 	//lancement IHM options
 	System.out.println("Menu options");
 	
-	shelloptions = new Shell(Application.display, SWT.BORDER | SWT.TITLE | SWT.APPLICATION_MODAL);
+	shelloptions = new Shell(Application.display, SWT.BORDER | SWT.TITLE |SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);
 
 	//shelloptions = new Shell();
 	shelloptions.setSize(400, 400);

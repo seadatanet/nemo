@@ -46,7 +46,7 @@ public static void go(){
 	if (listeOuverte == 1){Utils.messageErreur("Vous avez déjà ouvert une liste de sélection");}
 	else{
 	
-	shell = new Shell(Application.display, SWT.BORDER | SWT.TITLE);
+	shell = new Shell(Application.display, SWT.BORDER | SWT.TITLE |SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);
 	shell.setSize(300, 500);
 	
 	

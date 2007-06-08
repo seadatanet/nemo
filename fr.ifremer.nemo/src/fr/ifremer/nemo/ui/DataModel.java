@@ -872,6 +872,9 @@ public static void fillStation(){
 		EditStation.textRefStationDebut.setText(""+debut);
 		EditStation.textRefStationFin.setText(""+fin);
 		
+		//activation de la zone des valeurs
+		
+		
 		
 	}
 

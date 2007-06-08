@@ -1440,8 +1440,11 @@ public  class NemoLists implements Cloneable {
     FileOutputStream stream = null;
     XMLEncoder encoder = null;
     try {
-    	NemoWS service = new NemoWSServiceLocator().getNEMO(
-    	                     new java.net.URL(Configuration.getSingleton().getNemoWebServiceURL()));
+    	java.net.URL toto = new java.net.URL(Configuration.getSingleton().getNemoWebServiceURL());
+    	
+    	NemoWSServiceLocator servicews = new NemoWSServiceLocator();
+    	NemoWS service = servicews.getNEMO(toto);
+    	                     //new java.net.URL(Configuration.getSingleton().getNemoWebServiceURL()));
     	WSCountry[] countries = service.getCountries();
     	releaseCountries();
     	for (int i=0; i<countries.length; i++) {

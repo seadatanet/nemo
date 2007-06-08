@@ -34,7 +34,7 @@ public static ArrayList <Section> listeSectionsStation, listeSectionsParam;
 public static ArrayList <String> listeSectionsNoms, listeTypeDonnees;
 public static ArrayList <Label> listeSectionsLabel;
 public static ArrayList <Text> listeTextStation;
-public static int expand, validee, loaded;
+public static int expand, validee, loaded, offsetDebutHeure, offsetFinHeure, offsetDebutDate, offsetFinDate;
 public static List listeType;
 public static ScrolledForm formEdition;
 
