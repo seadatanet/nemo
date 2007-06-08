@@ -248,7 +248,10 @@ public class Etape {
 		Boolean ok = true;
 		int nbreParam = TableData.types.size();
 		int []debuts, fins;
-		int cptDebut=0, cptFin=0;
+		int cptDebut=0;
+		int cptFin=0;
+		
+		Utils.messageErreur("");
 		
 		debuts = new int[nbreParam];
 		fins = new int[nbreParam];
@@ -261,19 +264,21 @@ public class Etape {
 		
 		}
 		
-		
-		
+				
 		//parcours des listes et test des valeurs
 		for (int i=0;i<nbreParam;i++){
 			for (int j=0; j<nbreParam;j++){
-				if (debuts[i]==debuts[j]){cptDebut = cptDebut+1;}
-				if (fins[i]==debuts[j]){cptFin = cptFin +1;}
+				System.out.println(debuts[i]+"<=>"+debuts[j] + "###"+ fins[i] +"<=>"+ fins[j]);
+				if (debuts[i]==debuts[j]){
+					
+					cptDebut = cptDebut+1;}
+				if (fins[i]==fins[j]){cptFin = cptFin +1;}
 								
 			}
 						
 		}
-		if ((cptDebut >=2)||(cptFin >=2)){
-			Utils.messageErreur("Certaines valeurs de début ou de fin sont en double ! Attention !");
+		if ((cptDebut >nbreParam)||(cptFin >nbreParam)){
+			Utils.messageErreur("Certaines valeurs de début ou de fin sont en double !");
 		ok = false;
 		}
 		
@@ -334,6 +339,7 @@ public class Etape {
 	
 
 	private static void okData(){
+		Utils.messageErreur("Etape validée, vous pouvez passer à la suivante...");
 		DataModel.initData();
 		ViewFile.tabItem3.setText("[Données]");
 		ViewFile.etape = 4;
