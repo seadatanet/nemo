@@ -212,15 +212,20 @@ public class Etape {
 		
 		Utils.messageErreurAppend("\n===[Check section : Profondeur]===\n");
 		if (EditStation.buttonProfondeurPos.getSelection()){
-			resultat1 =Regexp.checkLigneDebutfin(EditStation.textProfondeurLigne, EditStation.textProfondeurDebut, EditStation.textProfondeurFin, "Profondeur"); 
+			resultat1 = Regexp.checkLigneDebutfin(EditStation.textProfondeurLigne, EditStation.textProfondeurDebut, EditStation.textProfondeurFin, "Profondeur"); 
 			ok = ok && resultat1;
+			if (resultat1){
+				Utils.messageErreurAppend("...ok");
+			}
+			
 		} else {
 			
 			if (Float.parseFloat(EditStation.textProfondeur.getText()) > 0){
 				ok = ok && true;
+				Utils.messageErreurAppend("...ok");
 			} else {
 				ok = ok && false;
-				Utils.messageErreurAppend("Erreur sur la profondeur");
+				Utils.messageErreurAppend("   Erreur sur la profondeur");
 			}
 			
 		}

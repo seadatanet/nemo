@@ -118,7 +118,7 @@ DrawingStation.sectionHistoriqueAcquisition("Historique Acquisition             
 
 
 //section commentaire
-DrawingStation.sectionCommentaireLigneDebutFinInject("Commentaire                            ", "", sectionCommentaire, textCommentaireLigne, textCommentaireDebut, textCommentaireFin, textCommentaire, buttonCommentaireSaisie);
+DrawingStation.sectionCommentaireLigneDebutFinInject("Commentaire                            ", "", sectionCommentaire, textCommentaireLigne, textCommentaireDebut, textCommentaireFin, textCommentaire, buttonCommentaireSaisie, buttonCommentairePos);
 
 
 //section surface sample : identique à historique acquisition

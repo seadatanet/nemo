@@ -668,7 +668,7 @@ section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition.getBody(
 	}
 
 
-public static void sectionCommentaireLigneDebutFinInject(String nomSection, String description, Section section, Text ligne, Text debut, Text fin, Text manuel, Button radio){
+public static void sectionCommentaireLigneDebutFinInject(String nomSection, String description, Section section, Text ligne, Text debut, Text fin, Text manuel, Button radio, Button position){
 		
 	//ppar manuel = zone de commentaire
 	final Text lign, debu, fi;
@@ -727,7 +727,8 @@ public static void sectionCommentaireLigneDebutFinInject(String nomSection, Stri
 					  //bouton radio "position"
 					 //radio.setParent(sectionClient);
 					  //radio.setText("Position");
-					  Button position = ViewEdit.toolkitEdition.createButton(sectionClient, "Position", SWT.RADIO);
+					  position.setParent(sectionClient);
+					  position.setText("position");
 						
 					  
 					 

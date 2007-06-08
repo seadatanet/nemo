@@ -107,9 +107,9 @@ public class ViewLog extends ViewPart {
 		tabItem1.setText("Infos");
 		TabItem tabItem2 = new TabItem(tabFolderLog, SWT.NONE);
 		tabItem2.setText("Aide");
-		styledTextLogErreurs = new StyledText(tabFolderLog, SWT.MULTI | SWT.V_SCROLL);
-		styledTextLogInfos = new StyledText(tabFolderLog, SWT.MULTI | SWT.V_SCROLL);
-		styledTextLogHelp = new StyledText(tabFolderLog, SWT.MULTI | SWT.V_SCROLL);
+		styledTextLogErreurs = new StyledText(tabFolderLog, SWT.MULTI | SWT.V_SCROLL |SWT.READ_ONLY);
+		styledTextLogInfos = new StyledText(tabFolderLog, SWT.MULTI | SWT.V_SCROLL |SWT.READ_ONLY);
+		styledTextLogHelp = new StyledText(tabFolderLog, SWT.MULTI | SWT.V_SCROLL |SWT.READ_ONLY);
 		tabItem2.setControl(styledTextLogHelp);
 		tabItem1.setControl(styledTextLogInfos);
 		tabItem.setControl(styledTextLogErreurs);
