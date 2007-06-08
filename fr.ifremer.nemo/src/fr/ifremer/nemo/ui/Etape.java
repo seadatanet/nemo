@@ -244,9 +244,43 @@ public class Etape {
 	
 	
 	public static void validationData(){
-//		 test de toutes les valeurs de Data
+//		 test de toutes les valeurs debut / fin des Data
+		Boolean ok = true;
+		int nbreParam = TableData.types.size();
+		int []debuts, fins;
+		int cptDebut=0, cptFin=0;
 		
-		okData();
+		debuts = new int[nbreParam];
+		fins = new int[nbreParam];
+		
+		//remplissage des listes
+		for (int i=0;i<nbreParam;i++){
+			TypeData typeCourant = TableData.types.get(i);
+			debuts[i]=typeCourant.getDebut();
+			fins[i]=typeCourant.getFin();
+		
+		}
+		
+		
+		
+		//parcours des listes et test des valeurs
+		for (int i=0;i<nbreParam;i++){
+			for (int j=0; j<nbreParam;j++){
+				if (debuts[i]==debuts[j]){cptDebut = cptDebut+1;}
+				if (fins[i]==debuts[j]){cptFin = cptFin +1;}
+								
+			}
+						
+		}
+		if ((cptDebut >=2)||(cptFin >=2)){
+			Utils.messageErreur("Certaines valeurs de début ou de fin sont en double ! Attention !");
+		ok = false;
+		}
+		
+		
+		
+		if (ok){
+			okData();}
 	}
 	
 	
