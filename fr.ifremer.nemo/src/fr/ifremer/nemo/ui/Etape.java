@@ -160,11 +160,14 @@ public class Etape {
 		System.out.println("format heure = "+EditStation.comboHeure.getText()); //Item(EditStation.comboHeure.getSelectionIndex()));
 		try {
 			System.out.println("format heure = "+EditStation.comboHeure.getText());
-			DateTimeFormat format = new DateTimeFormat(EditStation.comboHeure.getText());
 			
-			//récupérer le texte en question et creer une nouvelle heure
+//			récupérer le texte en question et creer une nouvelle heure
 			ligne = Utils.lignesBrutes.get(Integer.parseInt(EditStation.textHeureLigne.getText())-1);
 			string = ligne.substring(Integer.parseInt(EditStation.textHeureDebut.getText())-1, Integer.parseInt(EditStation.textHeureFin.getText()));
+			
+			DateTimeFormat format = new DateTimeFormat(EditStation.comboHeure.getText());
+			
+			
 			System.out.println(ligne);
 			System.out.println(string);
 			Long hourLong = (Long)format.parseObject(string);
@@ -172,7 +175,7 @@ public class Etape {
 			
 		} catch (ParseException e) {
 			System.out.println("erreur format Heure ");
-			Utils.messageErreurAppend("Erreur de format d'Heure : Attendu => "+string+" Lu => "+EditStation.comboHeure.getText());
+			Utils.messageErreurAppend("\nErreur de format d'Heure : Attendu => "+string+" Lu => "+EditStation.comboHeure.getText());
 			
 			ok = ok && false;
 			e.printStackTrace();
@@ -190,12 +193,14 @@ public class Etape {
 		System.out.println("format date = "+EditStation.comboDate.getText());
 		try {
 			
-			DateTimeFormat format = new DateTimeFormat(EditStation.comboDate.getText());
-			
-			//récupérer le texte en question et creer une nouvelle heure
+//			récupérer le texte en question et creer une nouvelle heure
 			//on a ligne debut fin donc parcours lignes de texte
 			ligne = Utils.lignesBrutes.get(Integer.parseInt(EditStation.textDateLigne.getText())-1);
 			string = ligne.substring(Integer.parseInt(EditStation.textDateDebut.getText())-1, Integer.parseInt(EditStation.textDateFin.getText()));
+			
+			DateTimeFormat format = new DateTimeFormat(EditStation.comboDate.getText());
+			
+			
 			System.out.println(ligne);
 			System.out.println(string);
 			Long dateLong = (Long)format.parseObject(string);
