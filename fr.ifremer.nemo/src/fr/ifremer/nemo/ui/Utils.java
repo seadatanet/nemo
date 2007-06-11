@@ -415,7 +415,9 @@ public class Utils {
 			} else {
 				if (EditStation.validee == 1) {
 					EditDesc.razEdition();
-					EditData.affichageEdition();
+					
+					if (EditData.loaded ==1){EditData.DrawingBack();}else{EditData.affichageEdition();}
+					
 				} else {
 					if (EditDesc.loaded == 1) {
 						EditDesc.razEdition();
@@ -481,7 +483,10 @@ public class Utils {
 			} else {
 				if (EditStation.validee == 1) {
 					EditSurvey.razEdition();
-					EditData.affichageEdition();
+					
+					if (EditData.loaded ==1){EditData.DrawingBack();}else{EditData.affichageEdition();}
+					
+					
 				} else {
 					if (EditSurvey.loaded == 1) {
 						EditSurvey.razEdition();
@@ -512,7 +517,9 @@ public class Utils {
 			} else {
 				if (EditStation.validee == 1) {
 					EditStation.razEdition();
-					EditData.affichageEdition();
+					
+					if (EditData.loaded ==1){EditData.DrawingBack();}else{EditData.affichageEdition();}
+					
 				} else {
 					if (EditStation.loaded == 1) {
 						EditStation.razEdition();
@@ -675,7 +682,7 @@ public class Utils {
 				EditData.DrawingBack();
 			} else {
 				if (EditData.loaded == 1) {
-					EditData.affichageEdition();
+					EditData.DrawingBack();
 				}
 				ViewFile.affiche = 3;
 			}

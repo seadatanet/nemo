@@ -160,7 +160,7 @@ public static void initDesc(){
 	
 	//flag "validee" à 1
 	EditDesc.validee = 1;
-	
+
 	
 }
 
@@ -241,6 +241,7 @@ public static void initSurvey(){
 
 	//flag "validee" à 1
 	EditSurvey.validee = 1;
+
 	
 }
 
@@ -604,6 +605,7 @@ public static void initStation(){
 
 	//flag validation à 1
 	EditStation.validee = 1;
+
 	
 	
 }
@@ -682,6 +684,7 @@ public static void initData(){
 	//flag validation à 1
 	EditData.validee = 1;
 	
+
 	
 }
 
