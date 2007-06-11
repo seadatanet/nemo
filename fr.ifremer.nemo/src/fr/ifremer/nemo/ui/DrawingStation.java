@@ -176,7 +176,177 @@ public class DrawingStation {
 			
 		}	
 	
-	
+public static void sectionManuelLigneDebutFinInjectFreqEchant(String nomSection, String description, Section section, Text ligne, Text debut, Text fin, Text manuel, Button radio, Button position, Text conversion, Text testConversion){
+		
+		final Text lign, debu, fi, conversio, testConversio;
+		final Button inject;
+		final String nomSec;
+		final Text manu;
+
+		nomSec = nomSection;
+
+
+			section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition.getBody(), 
+					  Section.DESCRIPTION|Section.TITLE_BAR|
+					  Section.TWISTIE|Section.COMPACT);
+			
+		System.out.println("sectionManuelLigneDebutFinInject DrawingStation ==> ok");
+			
+			  section.addExpansionListener(new ExpansionAdapter() {
+					  public void expansionStateChanged(ExpansionEvent e) {
+						  EditStation.formEdition.reflow(true);
+					  }
+					 });
+			  Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL );
+			  section.setFont(font);
+			  section.setText(nomSection);
+			  
+			  section.setDescription(description);
+					 Composite sectionClient = ViewEdit.toolkitEdition.createComposite(section);
+					 sectionClient.setLayout(new GridLayout());
+									 					  
+					  GridLayout gridLayout = new GridLayout();
+					  gridLayout.numColumns = 4;
+					  
+					  Group groupeConv = new Group(sectionClient, SWT.NONE);
+					  groupeConv.setText("Conversion");
+					  groupeConv.setLayout(gridLayout);
+					  
+					 	//zone de conversion et test de conversion
+					 Label labelConv= new Label(groupeConv, SWT.NONE);
+					 labelConv.setText("Formule");
+					 conversion.setParent(groupeConv);
+					 
+					 Label labelTest= new Label(groupeConv, SWT.NONE);
+					 labelTest.setText("Test");
+					 testConversion.setParent(groupeConv);
+					 
+					 
+					 
+					  radio.setParent(sectionClient);
+					  radio.setText("Saisie manuelle");
+					  
+					  manuel.setParent(sectionClient);
+					  manu = manuel;
+					  manuel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+					  
+					//radio position 
+					 //Button position = ViewEdit.toolkitEdition.createButton(sectionClient, "Position", SWT.RADIO);
+					position.setParent(sectionClient);
+					position.setText("Position");
+					  
+					  
+					    GridLayout gridLayout1 = new GridLayout();
+					  gridLayout1.numColumns = 6;
+					Group groupe = new Group(sectionClient, SWT.NONE);
+						 groupe.setText("Localisation");
+						 groupe.setLayout(gridLayout1);
+					  grou = groupe;
+					  
+					  //ligne
+					  Label label1 = new Label(groupe, SWT.CENTER);
+					  label1.setText("Ligne");
+					  ligne.setParent(groupe);
+					  //ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+				
+					  //debut
+					  Label label2 = new Label(groupe, SWT.CENTER);
+					  label2.setText("Début");
+					  debut.setParent(groupe);
+					  //debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+					  
+					  //fin
+					  Label label3 = new Label(groupe, SWT.CENTER);
+					  label3.setText("Fin");
+					  fin.setParent(groupe);
+					  //fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+					  
+					  //groupe non visible de base
+					  //groupe.setVisible(false);
+					  
+					  
+					  //bouton d'injection de la position des valeurs
+					  	Button buttonInject = new Button(groupe, SWT.CENTER);
+						buttonInject.setText("Injecter");
+					
+						inject = buttonInject;
+						
+						section.setClient(sectionClient);		
+					  
+						// une fois les éléments initialisés, on les passe en static pour y accéder à 
+						//partir des listeners
+						lign = ligne; 
+						debu = debut;
+						fi = fin;
+						
+					  
+					  //listeners
+					  
+					  //radio saisie
+					  radio
+						 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+								public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+									System.out.println("saisie manuelle section " + nomSec); // TODO Auto-generated Event stub widgetSelected()
+									//raz de la valeur manuelle
+									manu.setEnabled(true);
+									//grou.setVisible(false);
+									lign.setEnabled(false);
+									debu.setEnabled(false);
+									fi.setEnabled(false);
+									inject.setEnabled(false);
+								}
+							});
+					  
+					  //radio position
+					  position
+						 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+								public void widgetSelected(org.eclipse.swt.events.SelectionEvent f) {
+									System.out.println("position dans fichier section " + nomSec); // TODO Auto-generated Event stub widgetSelected()
+									//raz de la valeur manuelle
+									
+									manu.setText("");
+									manu.setEnabled(false);
+									//grou.setVisible(true);
+									
+									//raz valeurs manuelles
+//									raz des valeurs injectees
+									lign.setText("");
+									debu.setText("");
+									fi.setText("");
+									lign.setEnabled(true);
+									debu.setEnabled(true);
+									fi.setEnabled(true);
+									inject.setEnabled(true);
+								}
+							});
+			
+					  
+					  //bouton inject
+					  buttonInject
+						.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+							public void widgetSelected(org.eclipse.swt.events.SelectionEvent g) {
+								System.out.println("bouton injection"); // TODO Auto-generated Event stub widgetSelected()
+								//System.out.println("valeur de ligne lign==> " + lign.getText());
+								//System.out.println("valeur de ligne de ViewEdit.ligneTest ==> " + ViewEdit.ligneTest.getText());
+							Utils.inject(lign, debu, fi, ViewFile.styledTextStation);
+							
+							}
+						});
+					  
+					  
+					  //par défaut manuel
+					  radio.setSelection(true);
+					  lign.setEnabled(false);
+					  debu.setEnabled(false);
+					  fi.setEnabled(false);
+					  inject.setEnabled(false);
+					  					  
+					  //ajout de la section dans la liste des sections de description
+					  ajoutSectionDansListeStation(section);
+					  
+					  
+			
+		}	
 	
 public static void sectionIncrementeLigneDebutFinInject(String nomSection, String description, Section section, Text ligne, Text debut, Text fin, Button radio, Button position){
 		
@@ -890,12 +1060,29 @@ public static void sectionHeure(String nomSection, String description, Section s
 				sectionClient.setLayout(new GridLayout());
 				  
 				
-				  //conversion
-				  label.setParent(sectionClient);
-				  label.setText("Formule de conversion");
+				  GridLayout gridLayout = new GridLayout();
+				  gridLayout.numColumns = 4;
 				  
-				  EditStation.textConversionHeure.setParent(sectionClient);
-				  EditStation.textConversionHeure.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+				  Group groupeConv = new Group(sectionClient, SWT.NONE);
+				  groupeConv.setText("Conversion");
+				  groupeConv.setLayout(gridLayout);
+				  
+				 	//zone de conversion et test de conversion
+				 Label labelConv= new Label(groupeConv, SWT.NONE);
+				 labelConv.setText("Formule");
+				 EditStation.textConversionHeure.setParent(groupeConv);
+				 
+				 Label labelTest= new Label(groupeConv, SWT.NONE);
+				 labelTest.setText("Test");
+				 EditStation.textTestConvHeure.setParent(groupeConv);
+				
+				
+				  //conversion
+//				  label.setParent(sectionClient);
+//				  label.setText("Formule de conversion");
+				  
+//				  EditStation.textConversionHeure.setParent(sectionClient);
+//				  EditStation.textConversionHeure.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 				  
 				 	  
 				  GridLayout gridLayout1 = new GridLayout();
@@ -1006,16 +1193,33 @@ public static void sectionDate(String nomSection, String description, Section se
 		  		section.setDescription(description);
 				Composite sectionClient = ViewEdit.toolkitEdition.createComposite(section);
 				sectionClient.setLayout(new GridLayout());
-				GridData gd = new GridData();
-				gd.horizontalSpan = 2;
+//				GridData gd = new GridData();
+//				gd.horizontalSpan = 2;
 				  
+				 GridLayout gridLayout = new GridLayout();
+				  gridLayout.numColumns = 4;
+				
+				  Group groupeConv = new Group(sectionClient, SWT.NONE);
+				  groupeConv.setText("Conversion");
+				  groupeConv.setLayout(gridLayout);
+				  
+				 	//zone de conversion et test de conversion
+				 Label labelConv= new Label(groupeConv, SWT.NONE);
+				 labelConv.setText("Formule");
+				 EditStation.textConversionDate.setParent(groupeConv);
+				 
+				 Label labelTest= new Label(groupeConv, SWT.NONE);
+				 labelTest.setText("Test");
+				 EditStation.textTestConvDate.setParent(groupeConv);
+				
+				
 				
 				  //conversion
-				  label.setParent(sectionClient);
-				  label.setText("Formule de conversion");
+//				  label.setParent(sectionClient);
+//				  label.setText("Formule de conversion");
 				  
-				  EditStation.textConversionDate.setParent(sectionClient);
-				  EditStation.textConversionDate.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+//				  EditStation.textConversionDate.setParent(sectionClient);
+//				  EditStation.textConversionDate.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 				  
 				  	  
 				  GridLayout gridLayout1 = new GridLayout();
@@ -1110,7 +1314,7 @@ public static void sectionManuelLigneDebutFinInjectLatLongComboFormat(String nom
 				  Section.DESCRIPTION|Section.TITLE_BAR|
 				  Section.TWISTIE|Section.COMPACT);
 		
-	System.out.println("HOP");
+
 		
 		  section.addExpansionListener(new ExpansionAdapter() {
 				  public void expansionStateChanged(ExpansionEvent e) {
@@ -1123,8 +1327,12 @@ public static void sectionManuelLigneDebutFinInjectLatLongComboFormat(String nom
 		  section.setDescription(description);
 				 Composite sectionClient = ViewEdit.toolkitEdition.createComposite(section);
 				 sectionClient.setLayout(new GridLayout());
-				GridData gd = new GridData();
-				  gd.horizontalSpan = 2;
+				
+				 Group groupFormat = new Group(sectionClient, SWT.NONE);
+				 groupFormat.setText("Format");
+				 groupFormat.setLayout(new GridLayout());
+				 //combo format
+				 combo.setParent(groupFormat);
 				  
 				  //saisie manuelle
 				  //faire groupe et radios
@@ -1152,8 +1360,7 @@ public static void sectionManuelLigneDebutFinInjectLatLongComboFormat(String nom
 				 //radio.setParent(sectionClient);
 				  //radio.setText("Position");
 				  
-				  //combo format
-				  combo.setParent(sectionClient);
+				
 				  
 				  
 				  position.setParent(sectionClient);
@@ -1281,7 +1488,192 @@ public static void sectionManuelLigneDebutFinInjectLatLongComboFormat(String nom
 
 
 
+public static void sectionManuelLigneDebutFinInjectLatLongFin(String nomSection, String description, Section section, Text ligne, Text debut, Text fin, Text manuel, Button radio, Button position){	
+	final String nomSec;
+	final Text manu;
+	final Text lign, debu, fi;
+	final Button inject;
+	
+	nomSec = nomSection;
+//	manu = manuel;
 
+
+	section.setParent(EditDesc.formEdition);
+
+		section = ViewEdit.toolkitEdition.createSection(EditDesc.formEdition.getBody(), 
+				  Section.DESCRIPTION|Section.TITLE_BAR|
+				  Section.TWISTIE|Section.COMPACT);
+		
+
+		
+		  section.addExpansionListener(new ExpansionAdapter() {
+				  public void expansionStateChanged(ExpansionEvent e) {
+					  EditDesc.formEdition.reflow(true);
+				  }
+				 });
+		  section.setText(nomSection);
+		  Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL );
+		  section.setFont(font);
+		  section.setDescription(description);
+				 Composite sectionClient = ViewEdit.toolkitEdition.createComposite(section);
+				 sectionClient.setLayout(new GridLayout());
+				
+//				 Group groupFormat = new Group(sectionClient, SWT.NONE);
+//				 groupFormat.setText("Format");
+//				 //combo format
+//				 combo.setParent(groupFormat);
+				  
+				  //saisie manuelle
+				  //faire groupe et radios
+				 
+				  //bouton radio "saisie manuelle"
+				  //c'est lui qui est passé en ppar
+				  
+				  radio.setParent(sectionClient);
+				  radio.setText("Saisie manuelle");
+				  
+				  //Button saisieManuelle = ViewEdit.toolkitEdition.createButton(sectionClient, "Saisie manuelle", SWT.RADIO);
+				
+				
+				  manuel = new Text(sectionClient, SWT.BORDER);
+				  
+				  //manuel.setParent(sectionClient);
+				  manuel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+				  
+				
+				  manu = manuel;
+				  
+				 
+				  
+				  //bouton radio "position"
+				 //radio.setParent(sectionClient);
+				  //radio.setText("Position");
+				  
+				
+				  
+				  
+				  position.setParent(sectionClient);
+				  position.setText("Position");
+				  //Button position = ViewEdit.toolkitEdition.createButton(sectionClient, "Position", SWT.RADIO);
+					
+				  
+				 
+				  
+				  GridLayout gridLayout1 = new GridLayout();
+				  gridLayout1.numColumns = 6;
+				Group groupe = new Group(sectionClient, SWT.NONE);
+					 groupe.setText("Localisation");
+					 groupe.setLayout(gridLayout1);
+				  grou = groupe;
+				  
+				  //ligne
+				  Label label1 = new Label(groupe, SWT.NULL);
+				  label1.setText("Ligne");
+				  ligne.setParent(groupe);
+				  //ligne = new Text(groupe, SWT.BORDER);
+				  ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+			
+				  //debut
+				  Label label2 = new Label(groupe, SWT.NULL);
+				  label2.setText("Début");
+				  debut.setParent(groupe);
+				  //= new Text(groupe, SWT.BORDER);
+				  debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+				  
+				  //fin
+				  Label label3 = new Label(groupe, SWT.NULL);
+				  label3.setText("Fin");
+				  fin.setParent(groupe);
+				  //= new Text(groupe, SWT.BORDER);
+				  fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+				  
+				  //groupe non visible de base
+				 // groupe.setVisible(false);
+				  
+				  
+				  //bouton d'injection de la position des valeurs
+				  	Button buttonInject = new Button(groupe, SWT.NONE);
+					buttonInject.setText("Injecter");
+					inject = buttonInject;
+					
+					section.setClient(sectionClient);		
+				  
+					// une fois les éléments initialisés, on les passe en static pour y accéder à 
+					//partir des listeners
+					lign = ligne; 
+					debu = debut;
+					fi = fin;
+					
+				  
+				  //listeners
+				  
+				  //radio saisie
+				  radio
+					 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+							public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+								System.out.println("saisie manuelle section " + nomSec); // TODO Auto-generated Event stub widgetSelected()
+								//raz de la valeur manuelle
+								manu.setEnabled(true);
+								//grou.setVisible(false);
+								lign.setEnabled(false); 
+								debu.setEnabled(false); 
+								fi.setEnabled(false); 
+								inject.setEnabled(false); 
+							}
+						});
+				  
+				  //radio position
+				  position
+					 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+							public void widgetSelected(org.eclipse.swt.events.SelectionEvent f) {
+								System.out.println("position dans fichier section " + nomSec); // TODO Auto-generated Event stub widgetSelected()
+								//raz de la valeur manuelle
+								
+								manu.setText("");
+								manu.setEnabled(false);
+								grou.setVisible(true);
+								
+								//raz valeurs manuelles
+//								raz des valeurs injectees
+								lign.setText("");
+								debu.setText("");
+								fi.setText("");
+								
+								lign.setEnabled(true); 
+								debu.setEnabled(true); 
+								fi.setEnabled(true); 
+								inject.setEnabled(true); 
+							}
+						});
+		
+				  
+				  //bouton inject
+				  buttonInject
+					.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+						public void widgetSelected(org.eclipse.swt.events.SelectionEvent g) {
+							System.out.println("bouton injection"); // TODO Auto-generated Event stub widgetSelected()
+							//System.out.println("valeur de ligne lign==> " + lign.getText());
+							//System.out.println("valeur de ligne de ViewEdit.ligneTest ==> " + ViewEdit.ligneTest.getText());
+						Utils.inject(lign, debu, fi, ViewFile.styledTextStation);
+						
+						}
+					});
+				  
+				  
+				  //saisie manuelle par défaut
+				  radio.setSelection(true);
+					lign.setEnabled(false); 
+					debu.setEnabled(false); 
+					fi.setEnabled(false); 
+					inject.setEnabled(false); 
+				  
+				  
+				  //ajout de la section dans la liste des sections de description
+				  ajoutSectionDansListeStation(section);
+				  
+				  
+		
+	}	
 
 	
 	

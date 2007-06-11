@@ -19,10 +19,13 @@ public class EditStation {
 ///////////////////////////////////////////
 
 	public static Text textRefStationLigne, textRefStationDebut, textRefStationFin, textHistoriqueAcquisition1, textHistoriqueAcquisition2, textCommentaire, textHistoriqueAcqLigne1,textHistoriqueAcqLigne2, textHistoriqueAcqDebut1, textHistoriqueAcqDebut2, textHistoriqueAcqFin1, textHistoriqueAcqFin2, textHistorique1, textHistorique2, textConversionHeure, textConversionDate, textTU, textTULigne, textTUDebut, textTUFin, textHeureLigne, textHeureDebut, textHeureFin, textSurface1, textSurface2, textSurfaceLigne1, textSurfaceLigne2, textSurfaceDebut1, textSurfaceDebut2, textSurfaceFin1, textSurfaceFin2, textDateLigne, textDateDebut, textDateFin, textLatitude, textLatitudeLigne, textLatitudeDebut, textLatitudeFin, textLongitude, textLongitudeLigne, textLongitudeDebut, textLongitudeFin, textProfondeur, textProfondeurLigne, textProfondeurDebut, textProfondeurFin, textCommentaireLigne, textCommentaireDebut, textCommentaireFin;
+	public static Text textLatFin, textLatFinLigne, textLatFinDebut, textLatFinFin, textLongFin, textLongFinLigne, textLongFinDebut, textLongFinFin, textProfFin, textProfFinLigne, textProfFinDebut, textProfFinFin, textProfCapteur, textProfCapteurLigne, textProfCapteurDebut, textProfCapteurFin, textDeclinMagnet, textDeclinMagnetLigne, textDeclinMagnetDebut, textDeclinMagnetFin, textFreqEchant, textFreqEchantLigne, textFreqEchantDebut, textFreqEchantFin, textFreqEchantConv, textFreqEchantTest, textTestConvHeure, textTestConvDate;
 	public static Button buttonValidate, buttonRAZ, buttonExpand, buttonExpand2, buttonRefStationIncremente, buttonHistoriqueAcqSaisie, buttonSurfaceSaisie, buttonTUSaisie, buttonLatSaisie, buttonLongSaisie, buttonProfondeurSaisie, buttonCommentaireSaisie;
 	public static Button buttonHistoriqueAcqPos,buttonRefStationPos,buttonSurfacePos,buttonLatPos,buttonLongPos,buttonCommentairePos,buttonProfondeurPos;
+	public static Button buttonLatFinPos, buttonLongFinPos, buttonProfFinPos, buttonProfCapteurPos, buttonDeclinMagnetPos, buttonFreqEchantPos, buttonLatFinSaisie, buttonLongFinSaisie, buttonProfFinSaisie, buttonProfCapteurSaisie, buttonDeclinMagnetSaisie, buttonFreqEchantSaisie;
 	public static Combo comboRefStationType, comboHeure, comboDate, comboLatitude, comboLongitude;
 	public static Section sectionStation, sectionTypeDonnees, sectionHistorique, sectionCommentaire, sectionSurface, sectionHeure, sectionDate, sectionTU, sectionLatitude, sectionLongitude, sectionProfondeur;
+	public static Section sectionLatFin, sectionLongFin, sectionProfFin, sectionProfCapteur, sectionDeclinMagnet, sectionFreqEchant;
 	public static Label labelConversionHeure, labelConversionDate;
 	
 	
@@ -140,14 +143,46 @@ DrawingStation.sectionDate("Date                                   ", "", sectio
 //section Latitude
 DrawingStation.sectionManuelLigneDebutFinInjectLatLongComboFormat("Latitude                               ", "", sectionLatitude, textLatitudeLigne, textLatitudeDebut, textLatitudeFin, textLatitude, buttonLatSaisie, comboLatitude, buttonLatPos);
 
+if (ViewFile.checkBoxTempo.getSelection()){
+	//section latitude de fin
+	DrawingStation.sectionManuelLigneDebutFinInjectLatLongFin("Latitude de fin                        ", "", sectionLatFin,textLatFinLigne, textLatFinDebut, textLatFinFin, textLatFin, buttonLatFinSaisie, buttonLatFinPos);
+}
 
 //section longitude
 DrawingStation.sectionManuelLigneDebutFinInjectLatLongComboFormat("Longitude                              ", "", sectionLongitude, textLongitudeLigne, textLongitudeDebut, textLongitudeFin, textLongitude, buttonLongSaisie, comboLongitude, buttonLongPos);
 
+if (ViewFile.checkBoxTempo.getSelection()){
+	//section llongitude de fin
+	DrawingStation.sectionManuelLigneDebutFinInjectLatLongFin("Longitude de fin                       ", "", sectionLongFin, textLongFinLigne, textLongFinDebut,textLongFinFin, textLongFin, buttonLongFinSaisie,  buttonLongFinPos);	
+}
+
+
 //section profondeur
 DrawingStation.sectionManuelLigneDebutFinInject("Profondeur                             ", "", sectionProfondeur, textProfondeurLigne, textProfondeurDebut, textProfondeurFin, textProfondeur, buttonProfondeurSaisie, buttonProfondeurPos);
 
+if (ViewFile.checkBoxTempo.getSelection()){
+	//section profondeur de fin
+	DrawingStation.sectionManuelLigneDebutFinInject("Profondeur de fin                      ","", sectionProfFin, textProfFinLigne, textProfFinDebut, textProfFinFin, textProfFin, buttonProfFinSaisie, buttonProfFinPos);
+
+	//section profondeur de capteur
+	DrawingStation.sectionManuelLigneDebutFinInject("Profondeur du capteur                  ", "", sectionProfCapteur, textProfCapteurLigne, textProfCapteurDebut, textProfCapteurFin, textProfCapteur, buttonProfCapteurSaisie, buttonProfCapteurPos);
+
+	//section déclinaison magnétique
+	DrawingStation.sectionManuelLigneDebutFinInject("Déclinaison magnétique                 ", "", sectionDeclinMagnet, textDeclinMagnetLigne, textDeclinMagnetDebut, textDeclinMagnetFin, textDeclinMagnet, buttonDeclinMagnetSaisie, buttonDeclinMagnetPos);
+	
+	//section fréquence échantillonnage
+	DrawingStation.sectionManuelLigneDebutFinInjectFreqEchant("Fréquence échantillonnage            ", "", sectionFreqEchant, textFreqEchantLigne, textFreqEchantDebut, textFreqEchantFin, textFreqEchant, buttonFreqEchantSaisie, buttonFreqEchantPos, textFreqEchantConv, textFreqEchantTest);
+}	
+
+
+
+
+
 //TODO : section flags date/heure
+
+//section séries temporelles
+//DrawingStation.sectionSerieTempo();
+
 
 buttonExpand2.setParent(ViewEdit.formEdition.getBody());
 buttonExpand2.setText("+");
@@ -390,6 +425,13 @@ sectionDate = new Section(shell, SWT.NONE);
 sectionTU = new Section(shell, SWT.NONE);
 sectionLatitude = new Section(shell, SWT.NONE);
 sectionLongitude = new Section(shell, SWT.NONE);
+sectionProfondeur = new Section(shell, SWT.NONE);
+sectionLatFin =  new Section(shell, SWT.NONE);
+sectionLongFin = new Section(shell, SWT.NONE);
+sectionProfFin= new Section(shell, SWT.NONE);
+sectionProfCapteur= new Section(shell, SWT.NONE);
+sectionDeclinMagnet= new Section(shell, SWT.NONE);
+sectionFreqEchant= new Section(shell, SWT.NONE);
 
 }
 
@@ -398,12 +440,9 @@ public static void initText(){
 
 Shell shell = new Shell();
 
-
 textRefStationLigne = new Text(shell, SWT.BORDER);
 textRefStationDebut = new Text(shell, SWT.BORDER);
 textRefStationFin = new Text(shell, SWT.BORDER);
-
-
 
 textHistoriqueAcqLigne1= new Text(shell, SWT.BORDER);
 textHistoriqueAcqLigne2= new Text(shell, SWT.BORDER);
@@ -423,6 +462,8 @@ textCommentaireFin = new Text(shell, SWT.BORDER);
 
 textConversionDate  = new Text(shell, SWT.BORDER);
 textConversionHeure  = new Text(shell, SWT.BORDER);
+textTestConvHeure = new Text(shell, SWT.BORDER);
+textTestConvDate = new Text(shell, SWT.BORDER);
 
 textHeureLigne = new Text(shell, SWT.BORDER);
 textHeureDebut = new Text(shell, SWT.BORDER);
@@ -432,18 +473,49 @@ textDateLigne = new Text(shell, SWT.BORDER);
 textDateDebut = new Text(shell, SWT.BORDER);
 textDateFin  = new Text(shell, SWT.BORDER);
 
+textLatitude = new Text(shell, SWT.BORDER);
 textLatitudeLigne= new Text(shell, SWT.BORDER);
 textLatitudeDebut= new Text(shell, SWT.BORDER);
 textLatitudeFin = new Text(shell, SWT.BORDER);
+textLatFinLigne= new Text(shell, SWT.BORDER);
+textLatFinDebut= new Text(shell, SWT.BORDER);
+textLatFinFin= new Text(shell, SWT.BORDER);
+textLatFin = new Text(shell, SWT.BORDER);
 
+textLongitude = new Text(shell, SWT.BORDER);
 textLongitudeLigne = new Text(shell, SWT.BORDER);
 textLongitudeDebut = new Text(shell, SWT.BORDER);
 textLongitudeFin  = new Text(shell, SWT.BORDER);
+textLongFinLigne = new Text(shell, SWT.BORDER);
+textLongFinDebut = new Text(shell, SWT.BORDER);
+textLongFinFin = new Text(shell, SWT.BORDER);
+textLongFin = new Text(shell, SWT.BORDER);
 
 textProfondeur = new Text(shell, SWT.BORDER);
 textProfondeurLigne = new Text(shell, SWT.BORDER);
 textProfondeurDebut = new Text(shell, SWT.BORDER);
 textProfondeurFin = new Text(shell, SWT.BORDER);
+textProfFin = new Text(shell, SWT.BORDER);
+textProfFinLigne = new Text(shell, SWT.BORDER);
+textProfFinDebut = new Text(shell, SWT.BORDER);
+textProfFinFin = new Text(shell, SWT.BORDER);
+textProfCapteur = new Text(shell, SWT.BORDER);
+textProfCapteurLigne = new Text(shell, SWT.BORDER);
+textProfCapteurDebut = new Text(shell, SWT.BORDER);
+textProfCapteurFin = new Text(shell, SWT.BORDER);
+
+textDeclinMagnet = new Text(shell, SWT.BORDER);
+textDeclinMagnetLigne = new Text(shell, SWT.BORDER);
+textDeclinMagnetDebut = new Text(shell, SWT.BORDER);
+textDeclinMagnetFin = new Text(shell, SWT.BORDER);
+
+textFreqEchant = new Text(shell, SWT.BORDER);
+textFreqEchantLigne = new Text(shell, SWT.BORDER);
+textFreqEchantDebut = new Text(shell, SWT.BORDER);
+textFreqEchantFin = new Text(shell, SWT.BORDER);
+textFreqEchantConv = new Text(shell, SWT.BORDER);
+textFreqEchantTest = new Text(shell, SWT.BORDER);
+
 
 textSurface1 = new Text(shell, SWT.BORDER);
 textSurface2= new Text(shell, SWT.BORDER);
@@ -488,15 +560,32 @@ buttonTUSaisie  = new Button(shell, SWT.RADIO);
 
 buttonLatSaisie  = new Button(shell, SWT.RADIO);
 buttonLatPos  = new Button(shell, SWT.RADIO);
+buttonLatFinPos = new Button(shell, SWT.RADIO);
+buttonLatFinSaisie = new Button(shell, SWT.RADIO);
 
 buttonLongSaisie  = new Button(shell, SWT.RADIO);
 buttonLongPos  = new Button(shell, SWT.RADIO);
+buttonLongFinPos = new Button(shell, SWT.RADIO);
+buttonLongFinSaisie = new Button(shell, SWT.RADIO);
 
 buttonCommentaireSaisie  = new Button(shell, SWT.RADIO);
 buttonCommentairePos  = new Button(shell, SWT.RADIO);
 
 buttonProfondeurSaisie  = new Button(shell, SWT.RADIO);
 buttonProfondeurPos  = new Button(shell, SWT.RADIO);
+buttonProfFinPos = new Button(shell, SWT.RADIO);
+buttonProfFinSaisie = new Button(shell, SWT.RADIO);
+
+buttonProfCapteurPos = new Button(shell, SWT.RADIO);
+buttonProfCapteurSaisie = new Button(shell, SWT.RADIO);
+
+buttonDeclinMagnetPos = new Button(shell, SWT.RADIO);
+buttonDeclinMagnetSaisie = new Button(shell, SWT.RADIO);
+
+buttonFreqEchantPos = new Button(shell, SWT.RADIO);
+buttonFreqEchantSaisie = new Button(shell, SWT.RADIO);
+
+
 }
 
 

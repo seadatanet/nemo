@@ -180,7 +180,7 @@ private void createGroupLangue() {
  *
  */
 private void createComboLangue() {
-	comboLangue = new Combo(groupLangue, SWT.NONE);
+	comboLangue = new Combo(groupLangue, SWT.READ_ONLY);
 	comboLangue.setBounds(new Rectangle(2, 16, 160, 21));
 	
 	comboLangue.add("Français");

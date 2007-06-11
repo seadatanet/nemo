@@ -300,7 +300,7 @@ public class Etape {
 		//attention aux boutons radio
 	
 //		puis remplissage du modèle avec les valeurs de l'IHM
-		DataModel.initModele(ViewFile.dossierCampagne, ViewFile.checkBox.getSelection(), ViewFile.nomFichier);
+		DataModel.initModele(ViewFile.dossierCampagne, ViewFile.checkBoxTempo.getSelection(), ViewFile.nomFichier);
 		
 		Utils.messageErreur("Etape validée, vous pouvez passer à la suivante...");
 		

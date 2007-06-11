@@ -52,7 +52,7 @@ public class ViewFile extends ViewPart {
 
 	private Composite composite12 = null;
 
-	public static Button checkBox, medatlas, odv = null;
+	public static Button checkBoxTempo, medatlas, odv = null;
 
 	private Button radioFichier = null;
 
@@ -281,12 +281,12 @@ public class ViewFile extends ViewPart {
 	
 		buttonParcourir = new Button(composite11, SWT.NONE);
 		buttonParcourir.setText("Parcourir");
-		checkBox = new Button(composite11, SWT.CHECK);
-		checkBox.setText("Série temporelle");
-		checkBox.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+		checkBoxTempo = new Button(composite11, SWT.CHECK);
+		checkBoxTempo.setText("Série temporelle");
+		checkBoxTempo.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
 				//si pas coché on active le groupTempo sinon on grise
-				if (checkBox.getSelection()){
+				if (checkBoxTempo.getSelection()){
 				System.out.println("série temporelle"); // 
 				groupTempo.setVisible(true);}else{groupTempo.setVisible(false);}
 			
@@ -441,10 +441,10 @@ public class ViewFile extends ViewPart {
 	 *
 	 */
 	private void createComboTempoDate() {
-		comboTempoDate = new Combo(groupTempo, SWT.READ_ONLY);
-		comboTempoDate.add("DD/MM/YYYY");
-		comboTempoDate.add("MM/DD/YYYY");
-		comboTempoDate.add("YYYY/DD/MM");
+		comboTempoDate = new Combo(groupTempo, SWT.NONE);
+		comboTempoDate.add("dd/MM/yyyy");
+		comboTempoDate.add("MM/dd/yyyy");
+		comboTempoDate.add("yyyy/dd/MM");
 		comboTempoDate.select(0);
 	}
 
@@ -453,10 +453,10 @@ public class ViewFile extends ViewPart {
 	 *
 	 */
 	private void createComboTempoHeure() {
-		comboTempoHeure = new Combo(groupTempo, SWT.READ_ONLY);
-		comboTempoHeure.add("HH24:MI");
-		comboTempoHeure.add("HH12:MI");
-		comboTempoHeure.add("HH24MI");
+		comboTempoHeure = new Combo(groupTempo, SWT.NONE);
+		comboTempoHeure.add("hh24:mm");
+		comboTempoHeure.add("hh:mm");
+		comboTempoHeure.add("hh24mm");
 		comboTempoHeure.select(0);
 	}
 
