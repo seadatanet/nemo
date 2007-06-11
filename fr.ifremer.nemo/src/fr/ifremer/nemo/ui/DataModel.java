@@ -693,6 +693,15 @@ public static void ouvertureModele(InputModel input){
 	inputModel_modele = new InputModel();
 	inputModel_modele = input;
 	
+	//forcage affichage onglet 0
+	ViewFile.tabFolder.setSelection(0);
+	
+	//RAZ global
+	Utils.razGlobal();
+	
+	//reset de l'étape de conversion
+	ViewFile.etape = 0;
+	
 	//lancement du processus sur le premier onglet
 	fillDesc();
 		

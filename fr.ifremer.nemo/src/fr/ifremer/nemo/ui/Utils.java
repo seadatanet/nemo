@@ -800,4 +800,110 @@ public class Utils {
 		
 	}
 	
+	
+	public static void razGlobal(){
+		//efface tous les onglets qui ont été affichés jusque là en préparation du chargement
+		//d'un nouveau modèle
+	
+	//si au moins une des sections d'un onglet est créée alors on peut les effacer toutes
+//		if (EditDesc.sectionEnteteFichier != null){
+//			//effacement boutons
+//			EditDesc.buttonExpandDesc.dispose();
+//			EditDesc.buttonExpandDesc2.dispose();
+//			EditDesc.buttonRAZ.dispose();
+//			EditDesc.buttonValidateDesc.dispose();
+//			//effacement sections
+//			for (int i=0;i<=EditDesc.listeSectionsDesc.size()-1;i++){
+//				EditDesc.listeSectionsDesc.get(i).dispose();
+//				System.out.println("effacement zone edition etape description fichier ==> ok");
+//				}
+//			//effacement titre formulaire
+//			ViewEdit.formEdition.setText("");
+//			
+//			//refresh global
+//			ViewEdit.formEdition.reflow(true);
+//		}
+		
+		
+		
+	
+		if (EditSurvey.sectionReference !=null){
+			
+
+//			effacement des boutons valider/expand/init serveur
+			EditSurvey.buttonExpand.dispose();
+			EditSurvey.buttonExpand2.dispose();
+			EditSurvey.buttonValidate.dispose();
+			EditSurvey.buttonInitServeur.dispose();
+			EditSurvey.buttonRAZ.dispose();
+			
+			for (int i=0;i<=EditSurvey.listeSectionsSurvey.size()-1;i++){
+				EditSurvey.listeSectionsSurvey.get(i).dispose();
+					}
+			//effacement titre formulaire
+			ViewEdit.formEdition.setText("");
+			
+			//refresh global
+			ViewEdit.formEdition.reflow(true);
+			
+			EditSurvey.validee = 0;
+			EditSurvey.loaded = 0;
+			
+		}
+	
+		
+		if (EditStation.sectionTypeDonnees != null){
+			
+
+//			effacement des boutons valider/expand/init serveur
+			EditStation.buttonExpand.dispose();
+			EditStation.buttonExpand2.dispose();
+			EditStation.buttonValidate.dispose();
+			EditStation.buttonRAZ.dispose();
+
+			for (int i=0;i<=EditStation.listeSectionsStation.size()-1;i++){
+			EditStation.listeSectionsStation.get(i).dispose();
+			}
+
+//			titre à vide
+			ViewEdit.formEdition.setText("");
+
+//			refresh global
+			ViewEdit.formEdition.reflow(true);
+			
+			EditStation.loaded = 0;
+			EditStation.validee = 0;
+		}
+		
+		//		effacement de la table data
+		if (EditDesc.validee == 1){ViewFile.tableData.dispose();};
+
+		EditDesc.validee = 0;
+		
+		if (EditData.buttonValidate != null){
+			
+			EditData.buttonValidate.dispose();
+			
+			
+			
+			EditData.loaded = 0;
+			EditData.validee = 0;
+			
+			
+		
+			
+		}
+		
+		
+		//reset des noms des onglets
+		ViewFile.tabItem.setText("Description de fichier");
+		ViewFile.tabItem1.setText("Description de campagne");
+		ViewFile.tabItem2.setText("Description de station");
+		ViewFile.tabItem3.setText("Description de données");
+		ViewFile.tabItem9.setText("Conversion");
+		
+		
+	}
+	
+	
 }
