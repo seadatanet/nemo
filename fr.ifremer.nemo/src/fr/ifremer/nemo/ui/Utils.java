@@ -896,10 +896,10 @@ public class Utils {
 		
 		
 		//reset des noms des onglets
-		ViewFile.tabItem.setText("Description de fichier");
-		ViewFile.tabItem1.setText("Description de campagne");
-		ViewFile.tabItem2.setText("Description de station");
-		ViewFile.tabItem3.setText("Description de données");
+		ViewFile.tabItem.setText("Description");
+		ViewFile.tabItem1.setText("Campagne");
+		ViewFile.tabItem2.setText("Station");
+		ViewFile.tabItem3.setText("Données");
 		ViewFile.tabItem9.setText("Conversion");
 		
 		

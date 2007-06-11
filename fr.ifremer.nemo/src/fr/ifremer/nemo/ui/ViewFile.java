@@ -38,7 +38,7 @@ public class ViewFile extends ViewPart {
 			
 	public static Composite top = null;
 
-	private TabFolder tabFolder = null;
+	public static TabFolder tabFolder = null;
 
 	private Composite composite1 = null;
 
