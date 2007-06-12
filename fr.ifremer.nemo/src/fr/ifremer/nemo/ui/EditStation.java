@@ -168,10 +168,10 @@ if (ViewFile.checkBoxTempo.getSelection()){
 	DrawingStation.sectionManuelLigneDebutFinInject("Profondeur du capteur                  ", "", sectionProfCapteur, textProfCapteurLigne, textProfCapteurDebut, textProfCapteurFin, textProfCapteur, buttonProfCapteurSaisie, buttonProfCapteurPos);
 
 	//section déclinaison magnétique
-	DrawingStation.sectionManuelLigneDebutFinInject("Déclinaison magnétique                 ", "", sectionDeclinMagnet, textDeclinMagnetLigne, textDeclinMagnetDebut, textDeclinMagnetFin, textDeclinMagnet, buttonDeclinMagnetSaisie, buttonDeclinMagnetPos);
+			  DrawingStation.sectionManuelLigneDebutFinInject("Déclinaison magnétique                 ", "", sectionDeclinMagnet, textDeclinMagnetLigne, textDeclinMagnetDebut, textDeclinMagnetFin, textDeclinMagnet, buttonDeclinMagnetSaisie, buttonDeclinMagnetPos);
 	
 	//section fréquence échantillonnage
-	DrawingStation.sectionManuelLigneDebutFinInjectFreqEchant("Fréquence échantillonnage            ", "", sectionFreqEchant, textFreqEchantLigne, textFreqEchantDebut, textFreqEchantFin, textFreqEchant, buttonFreqEchantSaisie, buttonFreqEchantPos, textFreqEchantConv, textFreqEchantTest);
+	DrawingStation.sectionManuelLigneDebutFinInjectFreqEchant("Fréquence échantillonnage              ", "", sectionFreqEchant, textFreqEchantLigne, textFreqEchantDebut, textFreqEchantFin, textFreqEchant, buttonFreqEchantSaisie, buttonFreqEchantPos, textFreqEchantConv, textFreqEchantTest);
 }	
 
 

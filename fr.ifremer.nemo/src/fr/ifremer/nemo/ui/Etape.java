@@ -77,7 +77,7 @@ public class Etape {
 				Long HourLong = (Long)format.parseObject(ViewFile.textTempoHeureRef.getText());
 			} catch (ParseException e) {
 				System.out.println(ViewFile.comboTempoHeure.getText() +"<==>"+ ViewFile.textTempoHeureRef.getText());
-				Utils.messageErreurAppend("Erreur de format d'heure série temporelle");
+				Utils.messageErreurAppend("\nErreur de format d'heure série temporelle");
 				ok = false;
 			}
 			
@@ -86,7 +86,7 @@ public class Etape {
 				Long DateLong = (Long)format.parseObject(ViewFile.textTempoDateRef.getText());
 			} catch (ParseException e) {
 				System.out.println(ViewFile.comboTempoDate.getText() +"<==>"+ ViewFile.textTempoDateRef.getText());
-				Utils.messageErreurAppend("Erreur de format de date série temporelle");
+				Utils.messageErreurAppend("\nErreur de format de date série temporelle");
 				ok = false;
 			}
 			
@@ -257,6 +257,37 @@ public class Etape {
 				ok = ok && false;
 				Utils.messageErreurAppend("   Erreur sur la profondeur");
 			}
+			
+		}
+		
+		//LATITUDE
+		
+		
+		
+		
+		
+		
+		
+		//LONGITUDE
+		
+		
+		
+		
+		
+		//SERIE TEMPO
+		if (ViewFile.checkBoxTempo.getSelection()){
+			
+			//LATITUDE DE FIN
+			if (EditStation.buttonLatFinSaisie.getSelection()){
+				//saisie manuelle
+				
+			}
+			
+			
+			
+			
+			
+			
 			
 		}
 		

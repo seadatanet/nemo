@@ -11,6 +11,7 @@ import fr.ifremer.nemo.domain.DataType;
 import fr.ifremer.nemo.domain.Parameter;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
+import fr.ifremer.nemo.domain.TimeSeriesInformation;
 import fr.ifremer.nemo.input.DirectoryBasedSurvey;
 import fr.ifremer.nemo.input.HeaderFragment;
 import fr.ifremer.nemo.input.InputModel;
@@ -36,6 +37,7 @@ public class DataModel {
 	public static WSDataType[] listeWSDataTypes, listeWSDataTypes_modele;
 	public static WSDataType wsDatatypeStation, wsDatatypeStation_modele; 
 	public static Boolean ouverture;
+	public static TimeSeriesInformation timeSeriesInformation;
 	
 	
 public static void initModele(Boolean fichier, Boolean timeSeries, String nomFich){
@@ -606,6 +608,156 @@ public static void initStation(){
 		
 	}
 
+	
+	//SERIE TEMPORELLE
+	timeSeriesInformation = stationModel.getTimeSeriesModel().getTimeSeriesInformation();
+		
+	timeSeriesInformation.setEndDate(EditStation.textDateFin.getText());
+	timeSeriesInformation.setEndTime(EditStation.textHeureFin.getText());
+	
+	
+	//FREQUENCE ECHANTILLONNAGE
+	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("SamplingRate");
+	
+	if (EditStation.buttonFreqEchantSaisie.getSelection()){
+		propertyModel.setUserProvided(true);
+		//valeur manuelle
+		timeSeriesInformation.setSamplingRate(EditStation.textLatFin.getText());
+	}else{
+		//position dans fichier
+		frag = propertyModel.getFragment();
+		propertyModel.setUserProvided(false);
+		
+		ligne = "" + (Integer.valueOf(EditStation.textFreqEchantLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
+		debut = EditStation.textFreqEchantDebut.getText();
+		fin = EditStation.textFreqEchantFin.getText();
+					
+		frag.setFirstLine(ligne);
+		frag.setLastLine(ligne);
+		frag.setFirstCharOffset(debut);
+		frag.setLastCharOffset(fin);
+	}
+	
+	
+	//DECLINAISON MAGNETIQUE
+	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("MagneticDeclination");
+	
+	if (EditStation.buttonDeclinMagnetSaisie.getSelection()){
+		propertyModel.setUserProvided(true);
+		//valeur manuelle
+		timeSeriesInformation.setMagneticDeclination(EditStation.textLatFin.getText());
+	}else{
+		//position dans fichier
+		frag = propertyModel.getFragment();
+		propertyModel.setUserProvided(false);
+		
+		ligne = "" + (Integer.valueOf(EditStation.textDeclinMagnetLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
+		debut = EditStation.textDeclinMagnetDebut.getText();
+		fin = EditStation.textDeclinMagnetFin.getText();
+					
+		frag.setFirstLine(ligne);
+		frag.setLastLine(ligne);
+		frag.setFirstCharOffset(debut);
+		frag.setLastCharOffset(fin);
+	}
+	
+	//PROFONDEUR DE FIN
+	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("EndDepth");
+	
+	if (EditStation.buttonProfFinSaisie.getSelection()){
+		propertyModel.setUserProvided(true);
+		//valeur manuelle
+		timeSeriesInformation.setEndDepth(EditStation.textLatFin.getText());
+	}else{
+		//position dans fichier
+		frag = propertyModel.getFragment();
+		propertyModel.setUserProvided(false);
+		
+		ligne = "" + (Integer.valueOf(EditStation.textProfFinLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
+		debut = EditStation.textProfFinDebut.getText();
+		fin = EditStation.textProfFinFin.getText();
+					
+		frag.setFirstLine(ligne);
+		frag.setLastLine(ligne);
+		frag.setFirstCharOffset(debut);
+		frag.setLastCharOffset(fin);
+	}
+	
+	
+	
+	//LATITUDE DE FIN
+	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("EndLatitude");
+	
+	if (EditStation.buttonLatFinSaisie.getSelection()){
+		propertyModel.setUserProvided(true);
+		//valeur manuelle
+		timeSeriesInformation.setEndLatitude(EditStation.textLatFin.getText());
+	}else{
+		//position dans fichier
+		frag = propertyModel.getFragment();
+		propertyModel.setUserProvided(false);
+		
+		
+		ligne = "" + (Integer.valueOf(EditStation.textLatFinLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
+		debut = EditStation.textLatFinDebut.getText();
+		fin = EditStation.textLatFinFin.getText();
+					
+		frag.setFirstLine(ligne);
+		frag.setLastLine(ligne);
+		frag.setFirstCharOffset(debut);
+		frag.setLastCharOffset(fin);
+	}
+	
+	
+	//LONGITUDE DE FIN
+	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("EndLongitude");
+	
+	if (EditStation.buttonLongFinSaisie.getSelection()){
+		propertyModel.setUserProvided(true);
+		//valeur manuelle
+		timeSeriesInformation.setEndLongitude(EditStation.textLatFin.getText());
+	}else{
+		//position dans fichier
+		frag = propertyModel.getFragment();
+		propertyModel.setUserProvided(false);
+		
+		
+		ligne = "" + (Integer.valueOf(EditStation.textLongFinLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
+		debut = EditStation.textLongFinDebut.getText();
+		fin = EditStation.textLongFinFin.getText();
+					
+		frag.setFirstLine(ligne);
+		frag.setLastLine(ligne);
+		frag.setFirstCharOffset(debut);
+		frag.setLastCharOffset(fin);
+	}
+	
+	
+	//PROFONDEUR CAPTEUR
+	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("SensorDepth");
+	
+	if (EditStation.buttonProfCapteurSaisie.getSelection()){
+		propertyModel.setUserProvided(true);
+		//valeur manuelle
+		timeSeriesInformation.setSensorDepth(EditStation.textProfCapteur.getText());
+	}else{
+		//position dans fichier
+		frag = propertyModel.getFragment();
+		propertyModel.setUserProvided(false);
+		
+		
+		ligne = "" + (Integer.valueOf(EditStation.textProfCapteurLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
+		debut = EditStation.textProfCapteurDebut.getText();
+		fin = EditStation.textProfCapteurFin.getText();
+					
+		frag.setFirstLine(ligne);
+		frag.setLastLine(ligne);
+		frag.setFirstCharOffset(debut);
+		frag.setLastCharOffset(fin);
+	}
+	
+	
+	
 	//flag validation à 1
 	EditStation.validee = 1;
 
