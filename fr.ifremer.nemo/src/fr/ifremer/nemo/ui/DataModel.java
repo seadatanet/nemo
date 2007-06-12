@@ -617,7 +617,7 @@ public static void initStation(){
 	
 	
 	//FREQUENCE ECHANTILLONNAGE
-	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("SamplingRate");
+	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("samplingRate");
 	
 	if (EditStation.buttonFreqEchantSaisie.getSelection()){
 		propertyModel.setUserProvided(true);
@@ -640,7 +640,7 @@ public static void initStation(){
 	
 	
 	//DECLINAISON MAGNETIQUE
-	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("MagneticDeclination");
+	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("magneticDeclination");
 	
 	if (EditStation.buttonDeclinMagnetSaisie.getSelection()){
 		propertyModel.setUserProvided(true);
@@ -662,7 +662,7 @@ public static void initStation(){
 	}
 	
 	//PROFONDEUR DE FIN
-	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("EndDepth");
+	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("endDepth");
 	
 	if (EditStation.buttonProfFinSaisie.getSelection()){
 		propertyModel.setUserProvided(true);
@@ -686,7 +686,7 @@ public static void initStation(){
 	
 	
 	//LATITUDE DE FIN
-	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("EndLatitude");
+	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("endLatitude");
 	
 	if (EditStation.buttonLatFinSaisie.getSelection()){
 		propertyModel.setUserProvided(true);
@@ -710,7 +710,7 @@ public static void initStation(){
 	
 	
 	//LONGITUDE DE FIN
-	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("EndLongitude");
+	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("endLongitude");
 	
 	if (EditStation.buttonLongFinSaisie.getSelection()){
 		propertyModel.setUserProvided(true);
@@ -734,7 +734,7 @@ public static void initStation(){
 	
 	
 	//PROFONDEUR CAPTEUR
-	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("SensorDepth");
+	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("sensorDepth");
 	
 	if (EditStation.buttonProfCapteurSaisie.getSelection()){
 		propertyModel.setUserProvided(true);
@@ -761,8 +761,7 @@ public static void initStation(){
 	//flag validation à 1
 	EditStation.validee = 1;
 
-	
-	
+		
 }
 
 

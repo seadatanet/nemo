@@ -7,6 +7,8 @@ import org.eclipse.swt.widgets.Table;
 
 import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.DateTimeFormatParser;
+import fr.ifremer.nemo.util.LatitudeFormat;
+import fr.ifremer.nemo.util.LongitudeFormat;
 
 
 public class Etape {
@@ -149,7 +151,7 @@ public class Etape {
 		ok = false;
 		}
 		
-		
+		//HISTORIQUE ACQUISITION
 		if (EditStation.buttonHistoriqueAcqPos.getSelection()){
 			//position dans fichier, verif des valeurs
 		resultat1 = Regexp.checkLigneDebutfin(EditStation.textHistoriqueAcqLigne1, EditStation.textHistoriqueAcqDebut1, EditStation.textHistoriqueAcqFin1, "Historique Acquisition ligne 1"); 
@@ -159,12 +161,13 @@ public class Etape {
 			
 		}
 		
+		//COMMENTAIRE
 		if (EditStation.buttonCommentairePos.getSelection()){
 		resultat1 = Regexp.checkLigneDebutfin(EditStation.textCommentaireLigne, EditStation.textCommentaireDebut, EditStation.textCommentaireFin, "Commentaire");	
 			ok = ok && resultat1; 
 		}
 		
-		
+		//ECHANTILLON SURFACE
 		if (EditStation.buttonSurfacePos.getSelection()){
 			resultat1 =Regexp.checkLigneDebutfin(EditStation.textSurfaceLigne1, EditStation.textSurfaceDebut1, EditStation.textSurfaceFin1, "Echantillon de surface ligne 1");
 			resultat2 =Regexp.checkLigneDebutfin(EditStation.textSurfaceLigne2, EditStation.textSurfaceDebut2, EditStation.textSurfaceFin2, "Echantillon de surface ligne 2");
@@ -240,6 +243,7 @@ public class Etape {
 		}
 		
 		
+		//PROFONDEUR
 		Utils.messageErreurAppend("\n===[Check section : Profondeur]===\n");
 		if (EditStation.buttonProfondeurPos.getSelection()){
 			resultat1 = Regexp.checkLigneDebutfin(EditStation.textProfondeurLigne, EditStation.textProfondeurDebut, EditStation.textProfondeurFin, "Profondeur"); 
@@ -261,17 +265,42 @@ public class Etape {
 		}
 		
 		//LATITUDE
-		
-		
+		if (EditStation.buttonLatSaisie.getSelection()){
+			//saisie manuelle
+		try {
+			LatitudeFormat latitudeFormat = new LatitudeFormat(EditStation.comboLatitude.getText());
+			latitudeFormat.parseObject(EditStation.textLatitude.getText());
+		} catch (ParseException e) {
+			ok = false;
+			Utils.messageErreurAppend("\nErreur de format Latitude");
+			e.printStackTrace();
+					}
+		} else{
+			//position dans fichier
+			resultat1 = Regexp.checkLigneDebutfin(EditStation.textLatitudeLigne, EditStation.textLatitudeDebut, EditStation.textLatitudeFin, "Latitude");
+		ok = ok && resultat1;
+		}
 		
 		
 		
 		
 		
 		//LONGITUDE
-		
-		
-		
+		if (EditStation.buttonLongSaisie.getSelection()){
+			//saisie manuelle
+		try {
+			LongitudeFormat longitudeFormat = new LongitudeFormat(EditStation.comboLongitude.getText());
+			longitudeFormat.parseObject(EditStation.textLongitude.getText());
+		} catch (ParseException e) {
+			ok = false;
+			Utils.messageErreurAppend("\nErreur de format Longitude");
+			e.printStackTrace();
+					}
+		} else{
+			//position dans fichier
+			resultat1 = Regexp.checkLigneDebutfin(EditStation.textLongitudeLigne, EditStation.textLongitudeDebut, EditStation.textLongitudeFin, "Longitude");
+		ok = ok && resultat1;
+		}	
 		
 		
 		//SERIE TEMPO
@@ -280,16 +309,110 @@ public class Etape {
 			//LATITUDE DE FIN
 			if (EditStation.buttonLatFinSaisie.getSelection()){
 				//saisie manuelle
+				if (!EditStation.textLatFin.getText().matches("")){
+				try {
+					LatitudeFormat latitudeFormat = new LatitudeFormat(EditStation.comboLatitude.getText());
+					latitudeFormat.parseObject(EditStation.textLatFin.getText());
+				} catch (ParseException e) {
+					
+					Utils.messageErreurAppend("\nErreur de format de Latitude de fin");
+					e.printStackTrace();
+				}
+				}
+			}else{
+				//position dans fichier
+				resultat1 = Regexp.checkLigneDebutfin(EditStation.textLatFinLigne, EditStation.textLatFinDebut, EditStation.textLatFinFin, "Latitude de fin");
+				ok = ok && resultat1;
+				}
+			
+			//LONGITUDE DE FIN
+			if (EditStation.buttonLongFinSaisie.getSelection()){
+				//saisie manuelle
+				if (!EditStation.textLongFin.getText().matches("")){
+			try {
+				LongitudeFormat longitudeFormat = new LongitudeFormat(EditStation.comboLongitude.getText());
+				longitudeFormat.parseObject(EditStation.textLongFin.getText());
+			} catch (ParseException e) {
+				ok = false;
+				Utils.messageErreurAppend("\nErreur de format Longitude de fin");
+				e.printStackTrace();
+						}
+			}
+			} else{
+				//position dans fichier
+				resultat1 = Regexp.checkLigneDebutfin(EditStation.textLongFinLigne, EditStation.textLongFinDebut, EditStation.textLongFinFin, "Longitude de fin");
+			ok = ok && resultat1;
+			}	
+			
+			
+			//PROFONDEUR DE FIN
+			
+			if (EditStation.buttonProfFinPos.getSelection()){
+				resultat1 = Regexp.checkLigneDebutfin(EditStation.textProfFinLigne, EditStation.textProfFinDebut, EditStation.textProfFinFin, "Profondeur de fin"); 
+				ok = ok && resultat1;
+				if (resultat1){
+					Utils.messageErreurAppend("...ok");
+				}
+				
+			} else {
+				Utils.messageErreurAppend("\n===[Check section : Profondeur de fin]===\n");
+				if (Float.parseFloat(EditStation.textProfFin.getText()) > 0){
+					ok = ok && true;
+					Utils.messageErreurAppend("...ok");
+				} else {
+					ok = ok && false;
+					Utils.messageErreurAppend("   Erreur sur la profondeur");
+				}
+				
+			}
+			
+		
+			//PROFONDEUR DU CAPTEUR
+
+			if (EditStation.buttonProfCapteurPos.getSelection()){
+				resultat1 = Regexp.checkLigneDebutfin(EditStation.textProfCapteurLigne, EditStation.textProfCapteurDebut, EditStation.textProfCapteurFin, "Profondeur du capteur"); 
+				ok = ok && resultat1;
+				if (resultat1){
+					Utils.messageErreurAppend("...ok");
+				}
+				
+			} else {
+				Utils.messageErreurAppend("\n===[Check section : Profondeur du capteur]===\n");
+				if (EditStation.textProfCapteur.getText().matches("")){
+				Utils.messageErreurAppend("\nProfondeur du capteur manquante");
+				}else{
+				if (Float.parseFloat(EditStation.textProfCapteur.getText()) > 0){
+					ok = ok && true;
+					Utils.messageErreurAppend("...ok");
+				} else {
+					ok = ok && false;
+					Utils.messageErreurAppend("   Erreur sur la profondeur de fin");
+				}
+				}
+			}
+			
+			
+			//DECLINAISON MAGNETIQUE
+			if (EditStation.buttonDeclinMagnetPos.getSelection()){
+				resultat1 = Regexp.checkLigneDebutfin(EditStation.textDeclinMagnetLigne, EditStation.textDeclinMagnetDebut, EditStation.textDeclinMagnetFin, "Déclinaison magnétique"); 
+				ok = ok && resultat1;
+				if (resultat1){
+					Utils.messageErreurAppend("...ok");
+				}
+				
+			} else {
+				Utils.messageErreurAppend("\n===[Check section : Déclinaison magnétique]===\n");
+				
 				
 			}
 			
 			
+			//FREQUENCE ECHANTILLONNAGE
+			//que si date n'est pas dans fichier en entrée
 			
 			
 			
-			
-			
-		}
+		} //fin série tempo
 		
 		
 		if (ok){ 	
