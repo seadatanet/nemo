@@ -150,6 +150,9 @@ public static void initDesc(){
 					
 			}
 	
+	
+
+	
 	//on initialise les dataTypes et paramters en prévision des onglets Campagne et Data 
 	
 	listeWSDataTypes = NemoLists.getDataTypes();

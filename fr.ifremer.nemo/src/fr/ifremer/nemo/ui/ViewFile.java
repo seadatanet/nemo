@@ -74,17 +74,17 @@ public class ViewFile extends ViewPart {
 
 	public static Group groupTempo = null;
 
-	private Text textTempoDateRef = null;
+	public static Text textTempoDateRef = null;
 
 	private Label labelDateRef = null;
 
 	private Label labelHeureRef = null;
 
-	private Text textTempoHeureRef = null;
+	public static Text textTempoHeureRef = null;
 
-	private Combo comboTempoDate = null;
+	public static Combo comboTempoDate = null;
 
-	private Combo comboTempoHeure = null;
+	public static Combo comboTempoHeure = null;
 	
 	public static String nomFichier, nomRepertoire;
 	public static File dossier;
@@ -424,12 +424,12 @@ public class ViewFile extends ViewPart {
 		labelDateRef = new Label(groupTempo, SWT.NONE);
 		labelDateRef.setText("Date de référence");
 		Label filler3 = new Label(groupTempo, SWT.NONE);
-		textTempoHeureRef = new Text(groupTempo, SWT.BORDER);
+		textTempoDateRef = new Text(groupTempo, SWT.BORDER);
 		createComboTempoDate();
 		labelHeureRef = new Label(groupTempo, SWT.NONE);
 		labelHeureRef.setText("Heure de référence");
 		Label filler2 = new Label(groupTempo, SWT.NONE);
-		textTempoDateRef = new Text(groupTempo, SWT.BORDER);
+		textTempoHeureRef = new Text(groupTempo, SWT.BORDER);
 		
 		//on le désactive de base
 		groupTempo.setVisible(false);

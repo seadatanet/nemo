@@ -69,6 +69,31 @@ public class Etape {
 		ok = ok && resultat;
 		}
 		
+		//check des valeurs date/heure séries tempo
+		if (ViewFile.checkBoxTempo.getSelection()){
+						
+			try {
+				DateTimeFormat format = new DateTimeFormat(ViewFile.comboTempoHeure.getText());
+				Long HourLong = (Long)format.parseObject(ViewFile.textTempoHeureRef.getText());
+			} catch (ParseException e) {
+				System.out.println(ViewFile.comboTempoHeure.getText() +"<==>"+ ViewFile.textTempoHeureRef.getText());
+				Utils.messageErreurAppend("Erreur de format d'heure série temporelle");
+				ok = false;
+			}
+			
+			try {
+				DateTimeFormat format = new DateTimeFormat(ViewFile.comboTempoDate.getText());
+				Long DateLong = (Long)format.parseObject(ViewFile.textTempoDateRef.getText());
+			} catch (ParseException e) {
+				System.out.println(ViewFile.comboTempoDate.getText() +"<==>"+ ViewFile.textTempoDateRef.getText());
+				Utils.messageErreurAppend("Erreur de format de date série temporelle");
+				ok = false;
+			}
+			
+			
+		}
+		
+		
 		if (ok){ 	
 			okDesc();
 			}else {ViewFile.tabItem.setText("*** Description ***");
