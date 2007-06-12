@@ -299,7 +299,7 @@ public static void DrawingBack(){
 	for (i=0;i<=EditData.listeSectionsData.size()-1;i++){
 
 
-		EditData.listeSectionsData.get(i).setExpanded(true);
+		EditData.listeSectionsData.get(i).setExpanded(false);
 	System.out.println("===> " + EditData.listeSectionsData.get(i).getText());
 	EditData.listeSectionsData.get(i).setParent(s.getBody());
 	System.out.println("reaffichage zone edition etape description campagne ==> ok");

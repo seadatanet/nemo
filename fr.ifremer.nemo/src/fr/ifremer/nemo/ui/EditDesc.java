@@ -362,7 +362,7 @@ nomNemo();
 		for (i=0;i<=EditDesc.listeSectionsDesc.size()-1;i++){
 			
 			
-			//EditDesc.listeSectionsDesc.get(i).setExpanded(true);
+			EditDesc.listeSectionsDesc.get(i).setExpanded(false);
 			EditDesc.listeSectionsDesc.get(i).setParent(s.getBody());
 			System.out.println("Affichage section etape description fichier ==> ok");
 			}

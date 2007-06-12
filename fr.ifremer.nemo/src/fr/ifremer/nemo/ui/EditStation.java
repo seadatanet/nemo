@@ -390,7 +390,7 @@ public static void DrawingBack(){
 	for (i=0;i<=EditStation.listeSectionsStation.size()-1;i++){
 
 
-	EditStation.listeSectionsStation.get(i).setExpanded(true);
+	EditStation.listeSectionsStation.get(i).setExpanded(false);
 	System.out.println("===> " + EditStation.listeSectionsStation.get(i).getText());
 	EditStation.listeSectionsStation.get(i).setParent(s.getBody());
 	System.out.println("reaffichage zone edition etape description station ==> ok");

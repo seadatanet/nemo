@@ -566,7 +566,7 @@ public class EditSurvey {
 			for (i=0;i<=EditSurvey.listeSectionsSurvey.size()-1;i++){
 				
 				
-				EditSurvey.listeSectionsSurvey.get(i).setExpanded(true);
+				EditSurvey.listeSectionsSurvey.get(i).setExpanded(false);
 				System.out.println("===> " + EditSurvey.listeSectionsSurvey.get(i).getText());
 				EditSurvey.listeSectionsSurvey.get(i).setParent(s.getBody());
 				System.out.println("re-affichage zone edition etape description campagne ==> ok");
