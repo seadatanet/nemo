@@ -1076,7 +1076,20 @@ public static void sectionHeure(String nomSection, String description, Section s
 				 labelTest.setText("Test");
 				 EditStation.textTestConvHeure.setParent(groupeConv);
 				
-				
+				  
+				  
+				  if (ViewFile.checkBoxTempo.getSelection()){
+					  //zone série tempo
+					
+					  EditStation.buttonHeureReference.setParent(sectionClient);
+					  EditStation.buttonHeureReference.setText("Heure de référence");
+					  EditStation.buttonHeureReference.setSelection(true);
+					  EditStation.buttonHeureReferencePos.setParent(sectionClient);
+					  EditStation.buttonHeureReferencePos.setText("Position");
+					  EditStation.buttonHeureReferencePos.setSelection(false);
+				 }
+				 
+				 
 				  //conversion
 //				  label.setParent(sectionClient);
 //				  label.setText("Formule de conversion");
@@ -1149,6 +1162,58 @@ public static void sectionHeure(String nomSection, String description, Section s
 						}
 					});
 				  
+				
+				  if (ViewFile.checkBoxTempo.getSelection()){
+				  
+					  inject = buttonInject;
+					  
+				  EditStation.buttonHeureReference
+					 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+							public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+								System.out.println("saisie manuelle section " + nomSec); // TODO Auto-generated Event stub widgetSelected()
+								
+								
+								//grou.setVisible(false);
+								//grou.setEnabled(false);
+								lign.setEnabled(false); 
+								debu.setEnabled(false); 
+								fi.setEnabled(false); 
+								inject.setEnabled(false);
+								 
+								lign.setText("");
+								debu.setText("");
+								fi.setText("");
+								
+								
+							}
+						});
+				  
+				  //de base position est desactivée
+				  //grou.setEnabled(false);
+				 buttonInject.setEnabled(false);
+				 
+				 
+				 
+				  EditStation.buttonHeureReferencePos 
+				  .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+						public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+							System.out.println("saisie position ");
+							//raz de la valeur manuelle
+							//grou.setVisible(true);
+							lign.setEnabled(true); 
+							debu.setEnabled(true); 
+							fi.setEnabled(true);
+							inject.setEnabled(true);
+							
+							lign.setText("");
+							debu.setText("");
+							fi.setText("");
+							
+							
+						}
+					});
+				  
+				  } //fin if tempo
 				  
 				  //ajout de la section dans la liste des sections de description
 				  ajoutSectionDansListeStation(section);
@@ -1189,7 +1254,7 @@ public static void sectionDate(String nomSection, String description, Section se
 				 });
 		  		section.setText(nomSection);
 		  		Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL );
-		  	  section.setFont(font);
+		  		section.setFont(font);
 		  		section.setDescription(description);
 				Composite sectionClient = ViewEdit.toolkitEdition.createComposite(section);
 				sectionClient.setLayout(new GridLayout());
@@ -1212,16 +1277,23 @@ public static void sectionDate(String nomSection, String description, Section se
 				 labelTest.setText("Test");
 				 EditStation.textTestConvDate.setParent(groupeConv);
 				
-				
-				
+				  if (ViewFile.checkBoxTempo.getSelection()){
+					  //zone série tempo
+					
+					  EditStation.buttonDateReference.setParent(sectionClient);
+					  EditStation.buttonDateReference.setText("Heure de référence");
+					  EditStation.buttonDateReference.setSelection(true);
+					  EditStation.buttonDateReferencePos.setParent(sectionClient);
+					  EditStation.buttonDateReferencePos.setText("Position");
+					  EditStation.buttonDateReferencePos.setSelection(false);
+				 }
 				  //conversion
 //				  label.setParent(sectionClient);
 //				  label.setText("Formule de conversion");
 				  
 //				  EditStation.textConversionDate.setParent(sectionClient);
 //				  EditStation.textConversionDate.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-				  
-				  	  
+				    
 				  GridLayout gridLayout1 = new GridLayout();
 				  gridLayout1.numColumns = 6;
 				  Group groupe = new Group(sectionClient, SWT.NONE);
@@ -1286,6 +1358,62 @@ public static void sectionDate(String nomSection, String description, Section se
 						
 						}
 					});
+				  
+				  
+				  if (ViewFile.checkBoxTempo.getSelection()){
+					  
+					  inject = buttonInject;
+					  
+				  EditStation.buttonDateReference
+					 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+							public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+								System.out.println("saisie manuelle section " + nomSec); // TODO Auto-generated Event stub widgetSelected()
+								
+								
+								//grou.setVisible(false);
+								//grou.setEnabled(false);
+								lign.setEnabled(false); 
+								debu.setEnabled(false); 
+								fi.setEnabled(false); 
+								inject.setEnabled(false);
+								 
+								lign.setText("");
+								debu.setText("");
+								fi.setText("");
+								
+								
+							}
+						});
+				  
+				  //de base position est desactivée
+				  //grou.setEnabled(false);
+				 buttonInject.setEnabled(false);
+				 
+				 
+				 
+				  EditStation.buttonDateReferencePos 
+				  .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+						public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+							System.out.println("saisie position ");
+							//raz de la valeur manuelle
+							//grou.setVisible(true);
+							lign.setEnabled(true); 
+							debu.setEnabled(true); 
+							fi.setEnabled(true);
+							inject.setEnabled(true);
+							
+							lign.setText("");
+							debu.setText("");
+							fi.setText("");
+							
+							
+						}
+					});
+				  
+				  } //fin if tempo
+				  
+				  
+				  
 				  
 				  
 				  //ajout de la section dans la liste des sections de description

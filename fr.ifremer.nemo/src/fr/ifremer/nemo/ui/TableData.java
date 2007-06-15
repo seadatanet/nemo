@@ -170,12 +170,30 @@ public static void initTypes(){
 		type.setEntree(wsParameter.getDefaultValue());
 		type.setSortie(wsParameter.getDefaultValue());
 		
-		//type.ssetQc("N");
+		//type.setQc("N");
 		
 				
 		//ajout dans liste
 		typesWS.add(type);
+		
+		
+		
+		if (wsParameter.getCode().matches("PRES")){
+			
+			if (DataModel.ouverture == false){
+				//pas de modèle chargé donc on rajoute pression de base
+				types.add(type);
+			}	
+			
+			
+		}
+		
+		
+		
 	}
+	
+	
+	//ajout de PRESSION dans types car obligatoire
 	
 	
 	

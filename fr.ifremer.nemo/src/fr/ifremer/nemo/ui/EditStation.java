@@ -23,6 +23,7 @@ public class EditStation {
 	public static Button buttonValidate, buttonRAZ, buttonExpand, buttonExpand2, buttonRefStationIncremente, buttonHistoriqueAcqSaisie, buttonSurfaceSaisie, buttonTUSaisie, buttonLatSaisie, buttonLongSaisie, buttonProfondeurSaisie, buttonCommentaireSaisie;
 	public static Button buttonHistoriqueAcqPos,buttonRefStationPos,buttonSurfacePos,buttonLatPos,buttonLongPos,buttonCommentairePos,buttonProfondeurPos;
 	public static Button buttonLatFinPos, buttonLongFinPos, buttonProfFinPos, buttonProfCapteurPos, buttonDeclinMagnetPos, buttonFreqEchantPos, buttonLatFinSaisie, buttonLongFinSaisie, buttonProfFinSaisie, buttonProfCapteurSaisie, buttonDeclinMagnetSaisie, buttonFreqEchantSaisie;
+	public static Button buttonHeureReference, buttonDateReference, buttonHeureReferencePos, buttonDateReferencePos;
 	public static Combo comboRefStationType, comboHeure, comboDate, comboLatitude, comboLongitude;
 	public static Section sectionStation, sectionTypeDonnees, sectionHistorique, sectionCommentaire, sectionSurface, sectionHeure, sectionDate, sectionTU, sectionLatitude, sectionLongitude, sectionProfondeur;
 	public static Section sectionLatFin, sectionLongFin, sectionProfFin, sectionProfCapteur, sectionDeclinMagnet, sectionFreqEchant;
@@ -585,7 +586,10 @@ buttonDeclinMagnetSaisie = new Button(shell, SWT.RADIO);
 buttonFreqEchantPos = new Button(shell, SWT.RADIO);
 buttonFreqEchantSaisie = new Button(shell, SWT.RADIO);
 
-
+buttonDateReference= new Button(shell, SWT.RADIO);
+buttonHeureReference= new Button(shell, SWT.RADIO);
+buttonHeureReferencePos =  new Button(shell, SWT.RADIO);
+buttonDateReferencePos =  new Button(shell, SWT.RADIO);
 }
 
 

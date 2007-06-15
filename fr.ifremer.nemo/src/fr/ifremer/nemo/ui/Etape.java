@@ -177,13 +177,21 @@ public class Etape {
 			
 		}
 		
+		String ligne, string=null;
 			
 		//HEURE
 			//check valeurs ligne/debut/fin
+		
+		//si heure de référence alors c'est deja validé normalement
+		if (ViewFile.checkBoxTempo.getSelection() && !ViewFile.textTempoHeureRef.getText().matches(""))
+		{ 
+			}
+		else
+		{
 		resultat1 =Regexp.checkLigneDebutfin(EditStation.textHeureLigne, EditStation.textHeureDebut, EditStation.textHeureFin, "Heure"); 
 		ok = ok && resultat1;
 		
-		String ligne, string=null;
+		
 		//Utils.messageErreurAppend("\n===[Check section : Heure]===\n");
 		System.out.println("format heure = "+EditStation.comboHeure.getText()); //Item(EditStation.comboHeure.getSelectionIndex()));
 		try {
@@ -210,9 +218,16 @@ public class Etape {
 			//Utils.messageErreurAppend(e.)
 		}
 		
-		
+		}
 		
 		//DATE
+		
+		if (ViewFile.checkBoxTempo.getSelection() && !ViewFile.textTempoHeureRef.getText().matches(""))
+		{ 
+			}
+		else
+		{		
+		
 //		check valeurs ligne/debut/fin
 		resultat1 = Regexp.checkLigneDebutfin(EditStation.textDateLigne, EditStation.textDateDebut, EditStation.textDateFin, "Date"); 
 		ok = ok && resultat1;
@@ -241,7 +256,7 @@ public class Etape {
 			e.printStackTrace();
 			//Utils.messageErreurAppend(e.)
 		}
-		
+		}
 		
 		//PROFONDEUR
 		Utils.messageErreurAppend("\n===[Check section : Profondeur]===\n");
@@ -318,7 +333,11 @@ public class Etape {
 					Utils.messageErreurAppend("\nErreur de format de Latitude de fin");
 					e.printStackTrace();
 				}
-				}
+				}else
+				{
+					//valeur non rentrée
+						ok = ok && true;
+					}
 			}else{
 				//position dans fichier
 				resultat1 = Regexp.checkLigneDebutfin(EditStation.textLatFinLigne, EditStation.textLatFinDebut, EditStation.textLatFinFin, "Latitude de fin");
@@ -337,7 +356,12 @@ public class Etape {
 				Utils.messageErreurAppend("\nErreur de format Longitude de fin");
 				e.printStackTrace();
 						}
-			}
+				}
+				else
+				{
+				//valeur non rentrée
+					ok = ok && true;
+				}
 			} else{
 				//position dans fichier
 				resultat1 = Regexp.checkLigneDebutfin(EditStation.textLongFinLigne, EditStation.textLongFinDebut, EditStation.textLongFinFin, "Longitude de fin");
@@ -355,6 +379,7 @@ public class Etape {
 				}
 				
 			} else {
+				if (!EditStation.textProfFin.getText().matches("")){
 				Utils.messageErreurAppend("\n===[Check section : Profondeur de fin]===\n");
 				if (Float.parseFloat(EditStation.textProfFin.getText()) > 0){
 					ok = ok && true;
@@ -363,7 +388,10 @@ public class Etape {
 					ok = ok && false;
 					Utils.messageErreurAppend("   Erreur sur la profondeur");
 				}
-				
+				} else {
+					//valeur non rentrée
+					ok = ok && true;
+				}
 			}
 			
 		
@@ -402,12 +430,12 @@ public class Etape {
 				
 			} else {
 				Utils.messageErreurAppend("\n===[Check section : Déclinaison magnétique]===\n");
-				
+				ok = ok && true;
 				
 			}
 			
 			
-			//FREQUENCE ECHANTILLONNAGE
+			//FREQUENCE ECHANTILLONNAGE --> voir heure !
 			//que si date n'est pas dans fichier en entrée
 			
 			

@@ -255,6 +255,9 @@ public static void initSurvey(){
 public static void initStation(){
 	
 //numéro de station
+	String ligne, debut, fin;
+	HeaderFragment frag;
+	
 	
 	station = stationModel.getModel();
 	
@@ -269,9 +272,9 @@ public static void initStation(){
 		
 		//le propertymodel de la ref est en accès direct
 		PropertyModel propertyModel = stationModel.getReferenceProperty();
-		HeaderFragment frag = propertyModel.getFragment();
+		 frag = propertyModel.getFragment();
 		
-		String ligne, debut, fin;
+		
 		ligne = "" + (Integer.valueOf(EditStation.textRefStationLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
 		debut = EditStation.textRefStationDebut.getText();
 		fin = EditStation.textRefStationFin.getText();
@@ -337,10 +340,10 @@ public static void initStation(){
 		propertyModel.setUserProvided(false);
 		propertyModel2.setUserProvided(false);
 		//position dans fichier
-		HeaderFragment frag = propertyModel.getFragment();
+		frag = propertyModel.getFragment();
 		HeaderFragment frag2 = propertyModel2.getFragment();
 		
-		String ligne, debut, fin;
+		
 		ligne = "" + (Integer.valueOf(EditStation.textHistoriqueAcqLigne1.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
 		debut = EditStation.textHistoriqueAcqDebut1.getText();
 		fin = EditStation.textHistoriqueAcqFin1.getText();
@@ -374,9 +377,9 @@ public static void initStation(){
 		//surlignement et injection ligne debut fin
 		
 		propertyModel.setUserProvided(false);
-		HeaderFragment frag = propertyModel.getFragment();
+		 frag = propertyModel.getFragment();
 		
-		String ligne, debut, fin;
+	
 		ligne = "" + (Integer.valueOf(EditStation.textCommentaireLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
 		debut = EditStation.textCommentaireDebut.getText();
 		fin = EditStation.textCommentaireFin.getText();
@@ -403,10 +406,10 @@ public static void initStation(){
 		propertyModel.setUserProvided(false);
 		propertyModel2.setUserProvided(false);
 		//position dans fichier
-		HeaderFragment frag = propertyModel.getFragment();
+		 frag = propertyModel.getFragment();
 		HeaderFragment frag2 = propertyModel2.getFragment();
 		
-		String ligne, debut, fin;
+	
 		ligne = "" + (Integer.valueOf(EditStation.textSurfaceLigne1.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
 		debut = EditStation.textSurfaceDebut1.getText();
 		fin = EditStation.textSurfaceFin1.getText();
@@ -441,9 +444,9 @@ public static void initStation(){
 		propertyModel.setUserProvided(false);
 		//position dans fichier
 		
-		HeaderFragment frag = propertyModel.getFragment();
+		frag = propertyModel.getFragment();
 		
-		String ligne, debut, fin;
+		
 		ligne = "" + (Integer.valueOf(EditStation.textTULigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
 		debut = EditStation.textTUDebut.getText();
 		fin = EditStation.textTUFin.getText();
@@ -459,14 +462,85 @@ public static void initStation(){
 	
 //heure en LONG
 		propertyModel = stationModel.propertiesAt("time");
-		propertyModel.setUserProvided(false);
+		
+		if (ViewFile.checkBoxTempo.getSelection()){
+			//serie temporelle
+			if (!ViewFile.textTempoHeureRef.getText().matches("")){
+				//si y'a une heure de ref
+				propertyModel.setUserProvided(true);
+				stationModel.getTimeSeriesInformation().setEndTime(ViewFile.textTempoHeureRef.getText());
+				
+				//frequence echantillonnage
+				propertyModel = stationModel.getTimeSeriesModel().propertiesAt("samplingRate");
+				
+				if (EditStation.buttonFreqEchantSaisie.getSelection()){
+					//saisie manuelle
+				stationModel.getTimeSeriesInformation().setSamplingRate(EditStation.textFreqEchant.getText());
+				propertyModel.setUserProvided(true);
+				
+				}else{
+					//position dans fichier
+					propertyModel.setUserProvided(false);
+					
+					 frag = propertyModel.getFragment();
+
+					
+					ligne = "" + (Integer.valueOf(EditStation.textFreqEchantLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
+					debut = EditStation.textFreqEchantDebut.getText();
+					fin = EditStation.textFreqEchantFin.getText();
+								
+					frag.setFirstLine(ligne);
+					frag.setLastLine(ligne);
+					frag.setFirstCharOffset(debut);
+					frag.setLastCharOffset(fin);}
+				
+				//conversion JEP de la fréquence
+				if (!EditStation.textFreqEchantConv.getText().matches("")){
+					//formule de conversion
+					stationModel.getTimeSeriesModel().setSampleRateConversion(EditStation.textFreqEchantConv.getText());
+					}
+				
+				}else{
+				//pas d'heure de référence donc position normale dans fichier	
+					propertyModel.setUserProvided(false); 
+					
+					//position dans fichier
+					
+					frag = propertyModel.getFragment();
+					//frag.isSingleLine();
+					
+				
+					ligne = "" + (Integer.valueOf(EditStation.textHeureLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
+					debut = EditStation.textHeureDebut.getText();
+					fin = EditStation.textHeureFin.getText();
+								
+					frag.setFirstLine(ligne);
+					frag.setLastLine(ligne);
+					frag.setFirstCharOffset(debut);
+					frag.setLastCharOffset(fin);
+					
+					//format heure
+					DateTimeFormat timeFormat = (DateTimeFormat)propertyModel.getFormat();
+					try {
+						timeFormat.setFormatString(EditStation.comboHeure.getText());
+					} catch (ParseException e) {
+					
+						e.printStackTrace();
+					}	
+					
+				}
+		} else {
+			//pas de série tempo donc position de l'heure dans le fichier
+		
+		propertyModel = stationModel.propertiesAt("time");
+		propertyModel.setUserProvided(false); 
 	
 		//position dans fichier
 		
-		HeaderFragment frag = propertyModel.getFragment();
+	frag = propertyModel.getFragment();
 		//frag.isSingleLine();
 		
-		String ligne, debut, fin;
+	
 		ligne = "" + (Integer.valueOf(EditStation.textHeureLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
 		debut = EditStation.textHeureDebut.getText();
 		fin = EditStation.textHeureFin.getText();
@@ -485,21 +559,69 @@ public static void initStation(){
 			e.printStackTrace();
 		}
 		
+		}//fin if serie tempo
 		
 //date en LONG
+		propertyModel = stationModel.propertiesAt("date");
+		
+		if (ViewFile.checkBoxTempo.getSelection()){
+			//série tempo
+			if (!ViewFile.textTempoDateRef.getText().matches("")){
+				//si y'a une heure de ref
+				propertyModel.setUserProvided(true);
+				stationModel.getTimeSeriesInformation().setEndTime(ViewFile.textTempoDateRef.getText());
+				
+				
+				
+				}else{
+				//pas de date de référence donc position normale dans fichier
+					propertyModel.setUserProvided(false);
+
+					// position dans fichier
+
+					 frag = propertyModel.getFragment();
+					// frag.isSingleLine();
+
+					 ligne = ""
+							+ (Integer.valueOf(EditStation.textDateLigne.getText()) - Integer
+									.valueOf(EditDesc.lignesEnteteFichier.getText()));
+					 debut = EditStation.textDateDebut.getText();
+					 fin = EditStation.textDateFin.getText();
+
+					frag.setFirstLine(ligne);
+					frag.setLastLine(ligne);
+					frag.setFirstCharOffset(debut);
+					frag.setLastCharOffset(fin);
+					
+					//format date
+					DateTimeFormat dateFormat = (DateTimeFormat)propertyModel.getFormat();
+					try {
+						dateFormat.setFormatString(EditStation.comboDate.getText());
+					} catch (ParseException e) {
+						// 
+						e.printStackTrace();
+					}
+					
+					
+				}
+		}
+		
+		else{
+		
+		//pas de série tempo donc position dans fichier
 		propertyModel = stationModel.propertiesAt("date");
 		propertyModel.setUserProvided(false);
 
 		// position dans fichier
 
-		frag = propertyModel.getFragment();
+		 frag = propertyModel.getFragment();
 		// frag.isSingleLine();
 
-		ligne = ""
+		 ligne = ""
 				+ (Integer.valueOf(EditStation.textDateLigne.getText()) - Integer
 						.valueOf(EditDesc.lignesEnteteFichier.getText()));
-		debut = EditStation.textDateDebut.getText();
-		fin = EditStation.textDateFin.getText();
+		 debut = EditStation.textDateDebut.getText();
+		 fin = EditStation.textDateFin.getText();
 
 		frag.setFirstLine(ligne);
 		frag.setLastLine(ligne);
@@ -515,7 +637,7 @@ public static void initStation(){
 			e.printStackTrace();
 		}
 		
-		
+		} //fin if serie tempo
 		
 //latitude
 		propertyModel = stationModel.propertiesAt("latitude");
@@ -528,11 +650,11 @@ public static void initStation(){
 			propertyModel.setUserProvided(false);
 			//position dans fichier
 			
-			frag = propertyModel.getFragment();
+			 frag = propertyModel.getFragment();
 			
-			ligne = "" + (Integer.valueOf(EditStation.textLatitudeLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
-			debut = EditStation.textLatitudeDebut.getText();
-			fin = EditStation.textLatitudeFin.getText();
+			 ligne = "" + (Integer.valueOf(EditStation.textLatitudeLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
+			 debut = EditStation.textLatitudeDebut.getText();
+			 fin = EditStation.textLatitudeFin.getText();
 						
 			frag.setFirstLine(ligne);
 			frag.setLastLine(ligne);
@@ -608,14 +730,14 @@ public static void initStation(){
 		
 	}
 
-	
+	/*
 	//SERIE TEMPORELLE
 	timeSeriesInformation = stationModel.getTimeSeriesModel().getTimeSeriesInformation();
 		
 	timeSeriesInformation.setEndDate(EditStation.textDateFin.getText());
 	timeSeriesInformation.setEndTime(EditStation.textHeureFin.getText());
-	
-	
+	*/
+	/*
 	//FREQUENCE ECHANTILLONNAGE
 	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("samplingRate");
 	
@@ -637,8 +759,10 @@ public static void initStation(){
 		frag.setFirstCharOffset(debut);
 		frag.setLastCharOffset(fin);
 	}
+	*/
 	
 	
+if (ViewFile.checkBoxTempo.getSelection()){	
 	//DECLINAISON MAGNETIQUE
 	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("magneticDeclination");
 	
@@ -756,7 +880,7 @@ public static void initStation(){
 		frag.setLastCharOffset(fin);
 	}
 	
-	
+}	
 	
 	//flag validation à 1
 	EditStation.validee = 1;
@@ -877,6 +1001,16 @@ public static void fillDesc(){
 		//lignes entete fichier
 		EditDesc.lignesEnteteFichier.setText(""+singleSurvey_modele.getHeaderLinesNumber());
 	}
+	
+	//test si série tempo
+	if (stationModel_modele.getTimeSeriesInformation() != null){
+		//c'est une série tempo donc on coche la case qui va bien
+		ViewFile.checkBoxTempo.setSelection(true);
+		
+		//heure et date de ref
+		//ViewFile.
+	}
+	
 	
 	//nombre lignes entete station
 	EditDesc.lignesEnteteStation.setText(""+stationModel_modele.getNumberOfLines());
@@ -1013,6 +1147,8 @@ public static void fillSurvey(){
 
 public static void fillStation(){
 
+	int ligne, debut, fin, real_ligne;
+	
 	station_modele = stationModel_modele.getModel();
 	
 	
@@ -1030,10 +1166,10 @@ public static void fillStation(){
 		PropertyModel propertyModel = stationModel_modele.getReferenceProperty();
 		HeaderFragment frag = propertyModel.getFragment();
 		
-		int ligne = frag.getFirstLine();
-		int debut = frag.getFirstCharOffset();
-		int fin = frag.getLastCharOffset();
-		int real_ligne = ligne + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+		ligne = frag.getFirstLine();
+		 debut = frag.getFirstCharOffset();
+		 fin = frag.getLastCharOffset();
+		 real_ligne = ligne + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 		
 		EditStation.textRefStationLigne.setText(""+real_ligne);
 		EditStation.textRefStationDebut.setText(""+debut);
@@ -1102,10 +1238,10 @@ public static void fillStation(){
 	 		EditStation.buttonCommentairePos.setSelection(true);
 	 		HeaderFragment frag = propertyModel.getFragment();
 	 		
-	 		int ligne = frag.getFirstLine();
-			int debut = frag.getFirstCharOffset();
-			int fin = frag.getLastCharOffset();
-			int real_ligne = ligne + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+	 		 ligne = frag.getFirstLine();
+			 debut = frag.getFirstCharOffset();
+			 fin = frag.getLastCharOffset();
+			 real_ligne = ligne + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 			
 			EditStation.textCommentaireLigne.setText(""+ligne);
 			EditStation.textCommentaireDebut.setText(""+debut);
@@ -1157,37 +1293,61 @@ public static void fillStation(){
 		propertyModel = stationModel_modele.propertiesAt("time");
 		HeaderFragment frag = propertyModel.getFragment();
 		
+		if (ViewFile.checkBoxTempo.getSelection()){
+			//série tempo
+			if (!ViewFile.textTempoHeureRef.getText().matches("")){
+				//heure/date de référence (à charger du modèle ?)
+				EditStation.buttonHeureReference.setSelection(true);
+				EditStation.buttonHeureReferencePos.setSelection(false);
+				EditStation.textHeureLigne.setText("");
+				EditStation.textHeureDebut.setText("");
+				EditStation.textHeureFin.setText("");
+				EditStation.textHeureLigne.setEnabled(false);
+				EditStation.textHeureDebut.setEnabled(false);
+				EditStation.textHeureFin.setEnabled(false);
+				
+				
+			}else{
+				//on charge la date et heure du modèle
+			}
+		}else {
+		
+		
 		DateTimeFormat dateFormat = (DateTimeFormat)propertyModel.getFormat();
 		EditStation.comboHeure.add(dateFormat.getFormatString(),0);
 		EditStation.comboHeure.select(0);
 		
-		int ligne = frag.getFirstLine();
-		int debut = frag.getFirstCharOffset();
-		int fin = frag.getLastCharOffset();
-		int real_ligne = ligne + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+		 ligne = frag.getFirstLine();
+		 debut = frag.getFirstCharOffset();
+		 fin = frag.getLastCharOffset();
+		 real_ligne = ligne + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 		
 		EditStation.textHeureLigne.setText(""+ligne);
 		EditStation.textHeureDebut.setText(""+debut);
 		EditStation.textHeureFin.setText(""+fin);
 		
+		}
+		
+	
 	
 //		date en LONG
 		propertyModel = stationModel_modele.propertiesAt("date");
 		frag = propertyModel.getFragment();
-		dateFormat = (DateTimeFormat)propertyModel.getFormat();
+		DateTimeFormat dateFormat = (DateTimeFormat)propertyModel.getFormat();
 		
 		EditStation.comboDate.add(dateFormat.getFormatString(),0);
 		EditStation.comboDate.select(0);
 				
-		ligne = frag.getFirstLine();
-		debut = frag.getFirstCharOffset();
-		fin = frag.getLastCharOffset();
-		real_ligne = ligne + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+		 ligne = frag.getFirstLine();
+		 debut = frag.getFirstCharOffset();
+		 fin = frag.getLastCharOffset();
+		 real_ligne = ligne + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 		
 		EditStation.textDateLigne.setText(""+ligne);
 		EditStation.textDateDebut.setText(""+debut);
 		EditStation.textDateFin.setText(""+fin);
 
+		
 		
 //latitude
 		propertyModel = stationModel_modele.propertiesAt("latitude");
