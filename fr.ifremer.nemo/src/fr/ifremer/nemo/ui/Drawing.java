@@ -945,7 +945,7 @@ public static void sectionLabelTextInjectNbreLignes(ScrolledForm form,String nom
 			  section.setDescription(description);
 					 Composite sectionClient = ViewEdit.toolkitEdition.createComposite(section);
 					 GridLayout grid = new GridLayout();
-					 grid.numColumns = 1;
+					// grid.numColumns = 1;
 
 					 sectionClient.setLayout(grid);
 				 

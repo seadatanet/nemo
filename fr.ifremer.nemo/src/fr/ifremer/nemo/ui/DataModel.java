@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
+import sun.security.util.BitArray;
+
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.DataType;
 import fr.ifremer.nemo.domain.Parameter;
@@ -20,6 +22,7 @@ import fr.ifremer.nemo.input.ParameterModel;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.input.SingleFileSurvey;
 import fr.ifremer.nemo.input.StationModel;
+import fr.ifremer.nemo.input.TimeSeriesModel;
 import fr.ifremer.nemo.ws.WSDataType;
 import fr.ifremer.nemo.ws.WSParameter;
 import fr.ifremer.nemo.util.DateTimeFormat;
@@ -100,10 +103,27 @@ public static void initDesc(){
 	}
 	
 	
+//	serie temporelle
+	if (ViewFile.checkBoxTempo.getSelection()){
+		timeSeriesInformation = stationModel.getTimeSeriesInformation();
+		
+		if (!ViewFile.textTempoHeureRef.getText().matches("")){
+		inputModel.setRefDateBased(true);
+		inputModel.setRefDate(ViewFile.textTempoDateRef.getText());
+		inputModel.setRefTime(ViewFile.textTempoHeureRef.getText());
+		} else {
+			//pas d'heure de ref
+			inputModel.setRefDateBased(false);
+			
+		}
+		
+	}
+	
+	
 	//nombre lignes entete station
 	stationModel.setNumberOfLines(Integer.valueOf(EditDesc.lignesEnteteStation.getText()));
 	
-	
+
 	
 	//nombre de lignes de fin
 	stationModel.setEndData(Integer.valueOf(EditDesc.lignesFinStation.getText()));
@@ -463,14 +483,12 @@ public static void initStation(){
 //heure en LONG
 		propertyModel = stationModel.propertiesAt("time");
 		
-		if (ViewFile.checkBoxTempo.getSelection()){
-			//serie temporelle
-			if (!ViewFile.textTempoHeureRef.getText().matches("")){
-				//si y'a une heure de ref
-				propertyModel.setUserProvided(true);
-				stationModel.getTimeSeriesInformation().setEndTime(ViewFile.textTempoHeureRef.getText());
+		
+			
+			if (inputModel.isRefDateBased()){
+				//date/heure de ref
 				
-				//frequence echantillonnage
+//				frequence echantillonnage
 				propertyModel = stationModel.getTimeSeriesModel().propertiesAt("samplingRate");
 				
 				if (EditStation.buttonFreqEchantSaisie.getSelection()){
@@ -500,38 +518,49 @@ public static void initStation(){
 					stationModel.getTimeSeriesModel().setSampleRateConversion(EditStation.textFreqEchantConv.getText());
 					}
 				
-				}else{
-				//pas d'heure de référence donc position normale dans fichier	
-					propertyModel.setUserProvided(false); 
-					
-					//position dans fichier
-					
-					frag = propertyModel.getFragment();
-					//frag.isSingleLine();
-					
-				
-					ligne = "" + (Integer.valueOf(EditStation.textHeureLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
-					debut = EditStation.textHeureDebut.getText();
-					fin = EditStation.textHeureFin.getText();
-								
-					frag.setFirstLine(ligne);
-					frag.setLastLine(ligne);
-					frag.setFirstCharOffset(debut);
-					frag.setLastCharOffset(fin);
-					
-					//format heure
-					DateTimeFormat timeFormat = (DateTimeFormat)propertyModel.getFormat();
-					try {
-						timeFormat.setFormatString(EditStation.comboHeure.getText());
-					} catch (ParseException e) {
-					
-						e.printStackTrace();
-					}	
-					
-				}
-		} else {
-			//pas de série tempo donc position de l'heure dans le fichier
+			}
+			
 		
+			
+//			if (!ViewFile.textTempoHeureRef.getText().matches("")){
+//				//si y'a une heure de ref
+//				propertyModel.setUserProvided(true);
+//				//stationModel.getTimeSeriesInformation().setEndTime(ViewFile.textTempoHeureRef.getText());
+//				
+//				
+//				}else{
+//				//pas d'heure de référence donc position normale dans fichier	
+//					propertyModel.setUserProvided(false); 
+//					
+//					//position dans fichier
+//					
+//					frag = propertyModel.getFragment();
+//					//frag.isSingleLine();
+//					
+//				
+//					ligne = "" + (Integer.valueOf(EditStation.textHeureLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
+//					debut = EditStation.textHeureDebut.getText();
+//					fin = EditStation.textHeureFin.getText();
+//								
+//					frag.setFirstLine(ligne);
+//					frag.setLastLine(ligne);
+//					frag.setFirstCharOffset(debut);
+//					frag.setLastCharOffset(fin);
+//					
+//					//format heure
+//					DateTimeFormat timeFormat = (DateTimeFormat)propertyModel.getFormat();
+//					try {
+//						timeFormat.setFormatString(EditStation.comboHeure.getText());
+//					} catch (ParseException e) {
+//					
+//						e.printStackTrace();
+//					}	
+//					
+//				}
+		//} else {
+			//pas de série tempo donc position de l'heure dans le fichier
+	
+		//	
 		propertyModel = stationModel.propertiesAt("time");
 		propertyModel.setUserProvided(false); 
 	
@@ -559,54 +588,54 @@ public static void initStation(){
 			e.printStackTrace();
 		}
 		
-		}//fin if serie tempo
+	//	}//fin if serie tempo
 		
 //date en LONG
 		propertyModel = stationModel.propertiesAt("date");
 		
-		if (ViewFile.checkBoxTempo.getSelection()){
-			//série tempo
-			if (!ViewFile.textTempoDateRef.getText().matches("")){
-				//si y'a une heure de ref
-				propertyModel.setUserProvided(true);
-				stationModel.getTimeSeriesInformation().setEndTime(ViewFile.textTempoDateRef.getText());
-				
-				
-				
-				}else{
-				//pas de date de référence donc position normale dans fichier
-					propertyModel.setUserProvided(false);
-
-					// position dans fichier
-
-					 frag = propertyModel.getFragment();
-					// frag.isSingleLine();
-
-					 ligne = ""
-							+ (Integer.valueOf(EditStation.textDateLigne.getText()) - Integer
-									.valueOf(EditDesc.lignesEnteteFichier.getText()));
-					 debut = EditStation.textDateDebut.getText();
-					 fin = EditStation.textDateFin.getText();
-
-					frag.setFirstLine(ligne);
-					frag.setLastLine(ligne);
-					frag.setFirstCharOffset(debut);
-					frag.setLastCharOffset(fin);
-					
-					//format date
-					DateTimeFormat dateFormat = (DateTimeFormat)propertyModel.getFormat();
-					try {
-						dateFormat.setFormatString(EditStation.comboDate.getText());
-					} catch (ParseException e) {
-						// 
-						e.printStackTrace();
-					}
-					
-					
-				}
-		}
-		
-		else{
+//		if (ViewFile.checkBoxTempo.getSelection()){
+//			//série tempo
+//			if (!ViewFile.textTempoDateRef.getText().matches("")){
+//				//si y'a une heure de ref
+//				propertyModel.setUserProvided(true);
+//				stationModel.getTimeSeriesInformation().setEndTime(ViewFile.textTempoDateRef.getText());
+//				
+//				
+//				
+//				}else{
+//				//pas de date de référence donc position normale dans fichier
+//					propertyModel.setUserProvided(false);
+//
+//					// position dans fichier
+//
+//					 frag = propertyModel.getFragment();
+//					// frag.isSingleLine();
+//
+//					 ligne = ""
+//							+ (Integer.valueOf(EditStation.textDateLigne.getText()) - Integer
+//									.valueOf(EditDesc.lignesEnteteFichier.getText()));
+//					 debut = EditStation.textDateDebut.getText();
+//					 fin = EditStation.textDateFin.getText();
+//
+//					frag.setFirstLine(ligne);
+//					frag.setLastLine(ligne);
+//					frag.setFirstCharOffset(debut);
+//					frag.setLastCharOffset(fin);
+//					
+//					//format date
+//					DateTimeFormat dateFormat = (DateTimeFormat)propertyModel.getFormat();
+//					try {
+//						dateFormat.setFormatString(EditStation.comboDate.getText());
+//					} catch (ParseException e) {
+//						// 
+//						e.printStackTrace();
+//					}
+//					
+//					
+//				}
+//		}
+//		
+//		else{
 		
 		//pas de série tempo donc position dans fichier
 		propertyModel = stationModel.propertiesAt("date");
@@ -637,7 +666,7 @@ public static void initStation(){
 			e.printStackTrace();
 		}
 		
-		} //fin if serie tempo
+//		} //fin if serie tempo
 		
 //latitude
 		propertyModel = stationModel.propertiesAt("latitude");
@@ -769,7 +798,7 @@ if (ViewFile.checkBoxTempo.getSelection()){
 	if (EditStation.buttonDeclinMagnetSaisie.getSelection()){
 		propertyModel.setUserProvided(true);
 		//valeur manuelle
-		timeSeriesInformation.setMagneticDeclination(EditStation.textLatFin.getText());
+		timeSeriesInformation.setMagneticDeclination(EditStation.textDeclinMagnet.getText());
 	}else{
 		//position dans fichier
 		frag = propertyModel.getFragment();
@@ -994,6 +1023,8 @@ public static void fillDesc(){
 	if (ViewFile.dossierCampagne){
 		dirSurvey_modele = (DirectoryBasedSurvey)inputModel_modele.getMedia();
 		stationModel_modele = dirSurvey_modele.getStationModel();
+		//lignes entete fichier = 0
+		EditDesc.lignesEnteteFichier.setText("0");
 		
 	}else{
 		singleSurvey_modele = (SingleFileSurvey)inputModel_modele.getMedia();
@@ -1006,13 +1037,27 @@ public static void fillDesc(){
 	if (stationModel_modele.getTimeSeriesInformation() != null){
 		//c'est une série tempo donc on coche la case qui va bien
 		ViewFile.checkBoxTempo.setSelection(true);
+		ViewFile.groupTempo.setVisible(true);
 		
 		//heure et date de ref
-		//ViewFile.
+		
+		if (inputModel_modele.isRefDateBased()){
+			//date de ref / heure de ref
+			
+			ViewFile.textTempoDateRef.setText(""+inputModel_modele.getRefDate());
+			ViewFile.textTempoHeureRef.setText(""+inputModel_modele.getRefTime());
+			
+			
+		}else{
+			//pas de date de ref
+			
+		}
+
 	}
 	
 	
 	//nombre lignes entete station
+	
 	EditDesc.lignesEnteteStation.setText(""+stationModel_modele.getNumberOfLines());
 	
 	//nombre de lignes de fin
@@ -1293,24 +1338,65 @@ public static void fillStation(){
 		propertyModel = stationModel_modele.propertiesAt("time");
 		HeaderFragment frag = propertyModel.getFragment();
 		
+//		if (ViewFile.checkBoxTempo.getSelection()){
+//			//série tempo
+//			if (!ViewFile.textTempoHeureRef.getText().matches("")){
+//				//heure/date de référence (à charger du modèle ?)
+//				EditStation.buttonHeureReference.setSelection(true);
+//				EditStation.buttonHeureReferencePos.setSelection(false);
+//				EditStation.textHeureLigne.setText("");
+//				EditStation.textHeureDebut.setText("");
+//				EditStation.textHeureFin.setText("");
+//				EditStation.textHeureLigne.setEnabled(false);
+//				EditStation.textHeureDebut.setEnabled(false);
+//				EditStation.textHeureFin.setEnabled(false);
+//				
+//				
+//			}else{
+//				//on charge la date et heure du modèle
+//			}
+//		}else {
+		
+	
+		//frequence echantillonnage
 		if (ViewFile.checkBoxTempo.getSelection()){
-			//série tempo
-			if (!ViewFile.textTempoHeureRef.getText().matches("")){
-				//heure/date de référence (à charger du modèle ?)
-				EditStation.buttonHeureReference.setSelection(true);
-				EditStation.buttonHeureReferencePos.setSelection(false);
-				EditStation.textHeureLigne.setText("");
-				EditStation.textHeureDebut.setText("");
-				EditStation.textHeureFin.setText("");
-				EditStation.textHeureLigne.setEnabled(false);
-				EditStation.textHeureDebut.setEnabled(false);
-				EditStation.textHeureFin.setEnabled(false);
-				
-				
-			}else{
-				//on charge la date et heure du modèle
-			}
-		}else {
+		propertyModel = stationModel_modele.propertiesAt("samplingRate");
+		
+		EditStation.textFreqEchantConv.setText(stationModel_modele.getTimeSeriesModel().getSampleRateConversion());
+		
+		
+		if (propertyModel.isUserProvided()){
+			//saisie manuelle
+			EditStation.buttonFreqEchantSaisie.setSelection(true);
+			EditStation.buttonFreqEchantPos.setSelection(false);
+			
+			EditStation.textFreqEchant.setText(""+stationModel_modele.getTimeSeriesInformation().getSamplingRate());	
+			
+		}else{
+			//position dans fichier
+			EditStation.buttonFreqEchantSaisie.setSelection(false);
+			EditStation.buttonFreqEchantPos.setSelection(true);
+			
+			frag = propertyModel.getFragment();
+			
+			 ligne = frag.getFirstLine();
+			 debut = frag.getFirstCharOffset();
+			 fin = frag.getLastCharOffset();
+			 real_ligne = ligne + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+			
+			 EditStation.textFreqEchantLigne.setText(""+ligne);
+			 EditStation.textFreqEchantDebut.setText(""+debut);
+			 EditStation.textFreqEchantFin.setText(""+fin);
+			
+		}
+		
+		
+		
+		//
+		
+		
+		
+		}
 		
 		
 		DateTimeFormat dateFormat = (DateTimeFormat)propertyModel.getFormat();
@@ -1326,14 +1412,14 @@ public static void fillStation(){
 		EditStation.textHeureDebut.setText(""+debut);
 		EditStation.textHeureFin.setText(""+fin);
 		
-		}
+//		}
 		
 	
 	
 //		date en LONG
 		propertyModel = stationModel_modele.propertiesAt("date");
 		frag = propertyModel.getFragment();
-		DateTimeFormat dateFormat = (DateTimeFormat)propertyModel.getFormat();
+		dateFormat = (DateTimeFormat)propertyModel.getFormat();
 		
 		EditStation.comboDate.add(dateFormat.getFormatString(),0);
 		EditStation.comboDate.select(0);

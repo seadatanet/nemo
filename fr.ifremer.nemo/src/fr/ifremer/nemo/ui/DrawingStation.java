@@ -1029,7 +1029,7 @@ public static void sectionCommentaireLigneDebutFinInject(String nomSection, Stri
 	
 	
 
-public static void sectionHeure(String nomSection, String description, Section section, Text ligne, Text debut, Text fin, Label label){
+public static void sectionHeure(String nomSection, String description, Section section, Text ligne, Text debut, Text fin, Text heureSaisie, Label label){
 	
 	
 	//garder le groupe 
@@ -1044,7 +1044,7 @@ public static void sectionHeure(String nomSection, String description, Section s
 		section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition.getBody(), 
 				  Section.DESCRIPTION|Section.TITLE_BAR|
 				  Section.TWISTIE|Section.COMPACT);
-		
+
 	System.out.println("section heure station ==> ok");
 		
 		  section.addExpansionListener(new ExpansionAdapter() {
@@ -1064,7 +1064,7 @@ public static void sectionHeure(String nomSection, String description, Section s
 				  gridLayout.numColumns = 4;
 				  
 				  Group groupeConv = new Group(sectionClient, SWT.NONE);
-				  groupeConv.setText("Conversion");
+				 groupeConv.setText("Conversion");
 				  groupeConv.setLayout(gridLayout);
 				  
 				 	//zone de conversion et test de conversion
@@ -1075,8 +1075,18 @@ public static void sectionHeure(String nomSection, String description, Section s
 				 Label labelTest= new Label(groupeConv, SWT.NONE);
 				 labelTest.setText("Test");
 				 EditStation.textTestConvHeure.setParent(groupeConv);
+				 
+				 Group groupeFormat =  new Group(sectionClient, SWT.NONE);
+				 groupeFormat.setLayout(new GridLayout());
+				 groupeFormat.setText("Format");
+				 
+//				combo format de l'heure
+				  EditStation.comboHeure.setParent(groupeFormat);
 				
 				  
+				  
+				  
+				/*  
 				  
 				  if (ViewFile.checkBoxTempo.getSelection()){
 					  //zone série tempo
@@ -1089,7 +1099,7 @@ public static void sectionHeure(String nomSection, String description, Section s
 					  EditStation.buttonHeureReferencePos.setSelection(false);
 				 }
 				 
-				 
+				 */
 				  //conversion
 //				  label.setParent(sectionClient);
 //				  label.setText("Formule de conversion");
@@ -1127,8 +1137,7 @@ public static void sectionHeure(String nomSection, String description, Section s
 				  fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 				  
 				  
-				  //combo format de l'heure
-				  EditStation.comboHeure.setParent(groupe);
+				  
 				  
 				  
 				  
@@ -1145,6 +1154,10 @@ public static void sectionHeure(String nomSection, String description, Section s
 					debu = debut;
 					fi = fin;
 					
+					lign.setEnabled(true); 
+					debu.setEnabled(true); 
+					fi.setEnabled(true);
+					buttonInject.setEnabled(true);
 				  
 				  //listeners
 			
@@ -1162,7 +1175,7 @@ public static void sectionHeure(String nomSection, String description, Section s
 						}
 					});
 				  
-				
+				/*
 				  if (ViewFile.checkBoxTempo.getSelection()){
 				  
 					  inject = buttonInject;
@@ -1215,6 +1228,8 @@ public static void sectionHeure(String nomSection, String description, Section s
 				  
 				  } //fin if tempo
 				  
+				  */
+				  
 				  //ajout de la section dans la liste des sections de description
 				  ajoutSectionDansListeStation(section);
 				  
@@ -1223,7 +1238,7 @@ public static void sectionHeure(String nomSection, String description, Section s
 	}	
 
 
-public static void sectionDate(String nomSection, String description, Section section, Text ligne, Text debut, Text fin, Label label){
+public static void sectionDate(String nomSection, String description, Section section, Text ligne, Text debut, Text fin, Text dateSaisie, Label label){
 	
 	
 	//garder le groupe 
@@ -1245,7 +1260,7 @@ public static void sectionDate(String nomSection, String description, Section se
 				  Section.DESCRIPTION|Section.TITLE_BAR|
 				  Section.TWISTIE|Section.COMPACT);
 		
-	System.out.println("section date station");
+	//System.out.println("section date station");
 		
 		  section.addExpansionListener(new ExpansionAdapter() {
 				  public void expansionStateChanged(ExpansionEvent e) {
@@ -1277,6 +1292,8 @@ public static void sectionDate(String nomSection, String description, Section se
 				 labelTest.setText("Test");
 				 EditStation.textTestConvDate.setParent(groupeConv);
 				
+				 
+				 /*
 				  if (ViewFile.checkBoxTempo.getSelection()){
 					  //zone série tempo
 					
@@ -1287,6 +1304,9 @@ public static void sectionDate(String nomSection, String description, Section se
 					  EditStation.buttonDateReferencePos.setText("Position");
 					  EditStation.buttonDateReferencePos.setSelection(false);
 				 }
+				 
+				 */
+				 
 				  //conversion
 //				  label.setParent(sectionClient);
 //				  label.setText("Formule de conversion");
@@ -1341,6 +1361,10 @@ public static void sectionDate(String nomSection, String description, Section se
 					debu = debut;
 					fi = fin;
 					
+					lign.setEnabled(true); 
+					debu.setEnabled(true); 
+					fi.setEnabled(true);
+					buttonInject.setEnabled(true);
 				  
 				  //listeners
 			
@@ -1349,7 +1373,7 @@ public static void sectionDate(String nomSection, String description, Section se
 				  buttonInject
 					.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 						public void widgetSelected(org.eclipse.swt.events.SelectionEvent g) {
-							System.out.println("bouton injection"); // TODO Auto-generated Event stub widgetSelected()
+							//System.out.println("bouton injection"); // TODO Auto-generated Event stub widgetSelected()
 							//System.out.println("valeur de ligne lign==> " + lign.getText());
 							//System.out.println("valeur de ligne de ViewEdit.ligneTest ==> " + ViewEdit.ligneTest.getText());
 						Utils.inject(lign, debu, fi, ViewFile.styledTextStation);
@@ -1359,6 +1383,7 @@ public static void sectionDate(String nomSection, String description, Section se
 						}
 					});
 				  
+				 /*
 				  
 				  if (ViewFile.checkBoxTempo.getSelection()){
 					  
@@ -1412,7 +1437,7 @@ public static void sectionDate(String nomSection, String description, Section se
 				  
 				  } //fin if tempo
 				  
-				  
+				  */
 				  
 				  
 				  

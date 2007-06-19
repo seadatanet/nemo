@@ -177,23 +177,39 @@ public static void initTypes(){
 		typesWS.add(type);
 		
 		
-		
+		//ajout systématique de PRES
 		if (wsParameter.getCode().matches("PRES")){
-			
-			if (DataModel.ouverture == false){
-				//pas de modèle chargé donc on rajoute pression de base
+						
+			if ((DataModel.ouverture == false)&&(!ViewFile.checkBoxTempo.getSelection())){
+				//pas de modèle chargé donc on rajoute PRES
 				types.add(type);
 			}	
+			
+		}
+		
+		//test pour ajout de YEAR, MNTH, DAYX, TIME
+		if (ViewFile.checkBoxTempo.getSelection() && ViewFile.textTempoHeureRef.getText().matches("")){
+			//si serie temporelle et que pas de date/heure de ref alors on ajoute les 4 paramètres
+			if (wsParameter.getCode().matches("YEAR")||wsParameter.getCode().matches("MNTH")||wsParameter.getCode().matches("DAYX")||
+					wsParameter.getCode().matches("TIME")){
+				
+				if (DataModel.ouverture == false){
+					//pas de modèle chargé donc on rajoute pression de base
+					types.add(type);
+				}	
+				
+			}
+			
 			
 			
 		}
 		
-		
+				
 		
 	}
 	
 	
-	//ajout de PRESSION dans types car obligatoire
+
 	
 	
 	

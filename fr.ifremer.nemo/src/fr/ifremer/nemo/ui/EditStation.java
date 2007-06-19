@@ -19,7 +19,7 @@ public class EditStation {
 ///////////////////////////////////////////
 
 	public static Text textRefStationLigne, textRefStationDebut, textRefStationFin, textHistoriqueAcquisition1, textHistoriqueAcquisition2, textCommentaire, textHistoriqueAcqLigne1,textHistoriqueAcqLigne2, textHistoriqueAcqDebut1, textHistoriqueAcqDebut2, textHistoriqueAcqFin1, textHistoriqueAcqFin2, textHistorique1, textHistorique2, textConversionHeure, textConversionDate, textTU, textTULigne, textTUDebut, textTUFin, textHeureLigne, textHeureDebut, textHeureFin, textSurface1, textSurface2, textSurfaceLigne1, textSurfaceLigne2, textSurfaceDebut1, textSurfaceDebut2, textSurfaceFin1, textSurfaceFin2, textDateLigne, textDateDebut, textDateFin, textLatitude, textLatitudeLigne, textLatitudeDebut, textLatitudeFin, textLongitude, textLongitudeLigne, textLongitudeDebut, textLongitudeFin, textProfondeur, textProfondeurLigne, textProfondeurDebut, textProfondeurFin, textCommentaireLigne, textCommentaireDebut, textCommentaireFin;
-	public static Text textLatFin, textLatFinLigne, textLatFinDebut, textLatFinFin, textLongFin, textLongFinLigne, textLongFinDebut, textLongFinFin, textProfFin, textProfFinLigne, textProfFinDebut, textProfFinFin, textProfCapteur, textProfCapteurLigne, textProfCapteurDebut, textProfCapteurFin, textDeclinMagnet, textDeclinMagnetLigne, textDeclinMagnetDebut, textDeclinMagnetFin, textFreqEchant, textFreqEchantLigne, textFreqEchantDebut, textFreqEchantFin, textFreqEchantConv, textFreqEchantTest, textTestConvHeure, textTestConvDate;
+	public static Text textLatFin, textLatFinLigne, textLatFinDebut, textLatFinFin, textLongFin, textLongFinLigne, textLongFinDebut, textLongFinFin, textProfFin, textProfFinLigne, textProfFinDebut, textProfFinFin, textProfCapteur, textProfCapteurLigne, textProfCapteurDebut, textProfCapteurFin, textDeclinMagnet, textDeclinMagnetLigne, textDeclinMagnetDebut, textDeclinMagnetFin, textFreqEchant, textFreqEchantLigne, textFreqEchantDebut, textFreqEchantFin, textFreqEchantConv, textFreqEchantTest, textTestConvHeure, textTestConvDate, textHeureSaisie, textDateSaisie;
 	public static Button buttonValidate, buttonRAZ, buttonExpand, buttonExpand2, buttonRefStationIncremente, buttonHistoriqueAcqSaisie, buttonSurfaceSaisie, buttonTUSaisie, buttonLatSaisie, buttonLongSaisie, buttonProfondeurSaisie, buttonCommentaireSaisie;
 	public static Button buttonHistoriqueAcqPos,buttonRefStationPos,buttonSurfacePos,buttonLatPos,buttonLongPos,buttonCommentairePos,buttonProfondeurPos;
 	public static Button buttonLatFinPos, buttonLongFinPos, buttonProfFinPos, buttonProfCapteurPos, buttonDeclinMagnetPos, buttonFreqEchantPos, buttonLatFinSaisie, buttonLongFinSaisie, buttonProfFinSaisie, buttonProfCapteurSaisie, buttonDeclinMagnetSaisie, buttonFreqEchantSaisie;
@@ -134,11 +134,11 @@ DrawingStation.sectionHistoriqueAcquisition("Echantillon de surface             
 
 
 //section heure
-DrawingStation.sectionHeure("Heure                                  ", "", sectionHeure, textHeureLigne, textHeureDebut, textHeureFin, labelConversionHeure);
+DrawingStation.sectionHeure("Heure                                  ", "", sectionHeure, textHeureLigne, textHeureDebut, textHeureFin, textHeureSaisie, labelConversionHeure);
 
 
 //section date
-DrawingStation.sectionDate("Date                                   ", "", sectionDate, textDateLigne, textDateDebut, textDateFin, labelConversionDate);
+DrawingStation.sectionDate("Date                                   ", "", sectionDate, textDateLigne, textDateDebut, textDateFin, textDateSaisie, labelConversionDate);
 
 
 //section Latitude
@@ -171,13 +171,12 @@ if (ViewFile.checkBoxTempo.getSelection()){
 	//section déclinaison magnétique
 			  DrawingStation.sectionManuelLigneDebutFinInject("Déclinaison magnétique                 ", "", sectionDeclinMagnet, textDeclinMagnetLigne, textDeclinMagnetDebut, textDeclinMagnetFin, textDeclinMagnet, buttonDeclinMagnetSaisie, buttonDeclinMagnetPos);
 	
+			  
+	//if (!ViewFile.textTempoHeureRef.getText().matches("")){		  
 	//section fréquence échantillonnage
 	DrawingStation.sectionManuelLigneDebutFinInjectFreqEchant("Fréquence échantillonnage              ", "", sectionFreqEchant, textFreqEchantLigne, textFreqEchantDebut, textFreqEchantFin, textFreqEchant, buttonFreqEchantSaisie, buttonFreqEchantPos, textFreqEchantConv, textFreqEchantTest);
+	//}
 }	
-
-
-
-
 
 //TODO : section flags date/heure
 
@@ -469,10 +468,12 @@ textTestConvDate = new Text(shell, SWT.BORDER);
 textHeureLigne = new Text(shell, SWT.BORDER);
 textHeureDebut = new Text(shell, SWT.BORDER);
 textHeureFin  = new Text(shell, SWT.BORDER);
+textHeureSaisie   = new Text(shell, SWT.BORDER);
 
 textDateLigne = new Text(shell, SWT.BORDER);
 textDateDebut = new Text(shell, SWT.BORDER);
 textDateFin  = new Text(shell, SWT.BORDER);
+textDateSaisie   = new Text(shell, SWT.BORDER);
 
 textLatitude = new Text(shell, SWT.BORDER);
 textLatitudeLigne= new Text(shell, SWT.BORDER);

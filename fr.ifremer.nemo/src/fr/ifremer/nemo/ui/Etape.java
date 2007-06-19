@@ -73,7 +73,7 @@ public class Etape {
 		
 		//check des valeurs date/heure séries tempo
 		if (ViewFile.checkBoxTempo.getSelection()){
-						
+			if (!ViewFile.textTempoHeureRef.getText().matches("")){			
 			try {
 				DateTimeFormat format = new DateTimeFormat(ViewFile.comboTempoHeure.getText());
 				Long HourLong = (Long)format.parseObject(ViewFile.textTempoHeureRef.getText());
@@ -82,7 +82,8 @@ public class Etape {
 				Utils.messageErreurAppend("\nErreur de format d'heure série temporelle");
 				ok = false;
 			}
-			
+			} //fin tempoHeureRef ""
+			if (!ViewFile.textTempoDateRef.getText().matches("")){
 			try {
 				DateTimeFormat format = new DateTimeFormat(ViewFile.comboTempoDate.getText());
 				Long DateLong = (Long)format.parseObject(ViewFile.textTempoDateRef.getText());
@@ -91,9 +92,9 @@ public class Etape {
 				Utils.messageErreurAppend("\nErreur de format de date série temporelle");
 				ok = false;
 			}
+			}
 			
-			
-		}
+		} //fin tempo
 		
 		
 		if (ok){ 	

@@ -1,10 +1,13 @@
 package fr.ifremer.nemo.ui;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import javax.xml.rpc.ServiceException;
+import javax.xml.transform.TransformerException;
 
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.layout.FillLayout;
@@ -13,6 +16,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
@@ -26,6 +30,7 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.ui.forms.widgets.TableWrapData;
 import org.eclipse.ui.part.ViewPart;
+import org.xml.sax.SAXException;
 
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.DataType;
@@ -41,7 +46,7 @@ public class EditSurvey {
 	public static Section sectionReference, sectionLocalisation, sectionSource, sectionCentre, sectionType, sectionCommentaire;
 	public static Text textCampagne, textNom, textCodeNavire, textNomNavire, textDateDebut, textDateFin, textRegion, textPays, textLabo, textChef, textProjet, textCentre, textConfidentiel, textType, textNbre, textCommentaire;
 	public static Label labelCampagne, labelNom, labelCodeNavire, labelNomNavire, labelDateDebut, labelDateFin, labelRegion, labelPays, labelLabo, labelChef,labelProjet, labelCentre, labelConfidentiel, labelType, labelNbre;
-	public static Button buttonRAZ, buttonInitServeur, buttonValidate, buttonExpand, buttonExpand2;
+	public static Button buttonRAZ, buttonInitServeur, buttonValidate, buttonXML, buttonExpand, buttonExpand2;
 	public static ArrayList <Section> listeSectionsSurvey, listeSectionsParam;
 	public static ArrayList <String> listeSectionsNoms, listeTypeDonnees;
 	public static ArrayList <Label> listeSectionsLabel;
@@ -119,6 +124,10 @@ public class EditSurvey {
 			//bouton serveur
 		buttonInitServeur.setParent(ViewEdit.formEdition.getBody());
 		buttonInitServeur.setText("Initialisation serveur");
+		
+			//bouton XML
+		buttonXML.setParent(ViewEdit.formEdition.getBody());
+		buttonXML.setText("Initialisation XML");
 		
 //		bouton validate
 		buttonValidate.setParent(ViewEdit.formEdition.getBody());
@@ -317,6 +326,14 @@ public class EditSurvey {
 			}
 	});
 	
+	buttonXML
+	.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+		public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+			System.out.println("description XML"); 
+				ouvertureDescriptionXML();
+			}
+	});
+	
 	
 	//raz du message d'erreurs
 	Utils.messageErreur("");
@@ -405,6 +422,82 @@ public class EditSurvey {
 			
 			
 		}
+		
+		public static void ouvertureDescriptionXML(){
+			
+			String nomFichierXML, nomXML;
+			File fich;
+			
+			//remplissage du dataModel à partir des valeurs du fichier XML de description
+			System.out.println("Menu open xml");
+			
+			//vérifier que un fichier est chargé avant d'ouvrir un modèle
+			if ((EditDesc.validee !=1)&&(EditSurvey.loaded !=1)){
+				Utils.messageErreur("Veuillez valider la première étape avant de charger une description XML de Campagne !");
+			}
+			else{
+			Shell shell = new Shell();
+			FileDialog dialog = new FileDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
+			//dialog.setFilterPath(Utils.configuration.getModelsDirectory()+"\\");
+			dialog.setText("Fichier modèle à charger");
+			nomXML = dialog.open();
+			if (nomXML == null) {}else{
+			
+				fich = new File(nomXML);
+				nomFichierXML = fich.getName();
+				
+				EditSurvey.chargementXML(fich);
+			
+				
+				
+				}
+			
+			
+			
+			}	
+			
+		}
+		
+
+public static void chargementXML(File fichier){
+
+	if (ViewFile.dossierCampagne){
+		
+			try {
+				DataModel.dirSurvey.getModel().importFromXML(fichier);
+			} catch (FileNotFoundException e) {
+				// TODO Bloc catch auto-généré
+				e.printStackTrace();
+			} catch (SAXException e) {
+				// TODO Bloc catch auto-généré
+				e.printStackTrace();
+			} catch (TransformerException e) {
+				// TODO Bloc catch auto-généré
+				e.printStackTrace();
+			}
+		
+	}else{
+	
+		try {
+			DataModel.singleSurvey.getModel().importFromXML(fichier);
+		} catch (FileNotFoundException e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		} catch (SAXException e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		} catch (TransformerException e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		}
+
+	}
+	
+	//mise à jour de l'onglet courant
+	majApresWS();
+}
+
+
 		
 		public static void majApresWS(){
 			System.out.println("Remplissage onglet survey");
@@ -518,6 +611,7 @@ public class EditSurvey {
 			EditSurvey.buttonExpand2.setParent(s);
 			EditSurvey.buttonValidate.setParent(s);
 			EditSurvey.buttonInitServeur.setParent(s);
+			EditSurvey.buttonXML.setParent(s);
 			EditSurvey.buttonRAZ.setParent(s);
 			
 			
@@ -559,6 +653,7 @@ public class EditSurvey {
 			
 			EditSurvey.buttonValidate.setParent(s.getBody());
 			EditSurvey.buttonInitServeur.setParent(s.getBody());
+			EditSurvey.buttonXML.setParent(s.getBody());
 			EditSurvey.buttonRAZ.setParent(s.getBody());
 			
 			
@@ -651,6 +746,7 @@ public class EditSurvey {
 		buttonExpand = new Button(shell, SWT.NONE);
 		buttonExpand2 = new Button(shell, SWT.NONE);
 		buttonValidate = new Button(shell, SWT.NONE);
+		buttonXML = new Button(shell, SWT.NONE);
 				
 	}
 		
