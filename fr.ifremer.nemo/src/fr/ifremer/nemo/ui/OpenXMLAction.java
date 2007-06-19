@@ -17,17 +17,17 @@ import org.eclipse.ui.actions.ActionFactory;
 
 import fr.ifremer.nemo.input.InputModel;
 
-public class OpenXML extends Action implements ISelectionListener, ActionFactory.IWorkbenchAction { //implements ISelectionListener, ActionFactory.IWorkbenchAction 
+public class OpenXMLAction extends Action implements ISelectionListener, ActionFactory.IWorkbenchAction { //implements ISelectionListener, ActionFactory.IWorkbenchAction 
 private final IWorkbenchWindow window;
 
-public final static String ID = "fr.ifremer.nemo.ui.OpenXML";
+public final static String ID = "fr.ifremer.nemo.ui.OpenXMLAction";
 
 //vars nécessaires à la fenêtre d'options
 //public static 
 public static Shell shelloptions;
 public static String nomXML, nomFichierXML;
 
-public OpenXML(IWorkbenchWindow window){
+public OpenXMLAction(IWorkbenchWindow window){
 	
 	this.window = window;
 	setId(ID);

@@ -21,7 +21,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 	// them
 	// in the fill methods. This ensures that the actions aren't recreated
 	// when fillActionBars is called with FILL_PROXY.
-	private IWorkbenchAction newAction, updateAction, exitAction, aboutAction, openAction, optionsAction, helpAction, saveAction, saveAsAction;
+	private IWorkbenchAction newAction, updateAction, exitAction, aboutAction, openAction,openXMLAction, saveXMLAction, optionsAction, helpAction, saveAction, saveAsAction;
 	
 
 	public ApplicationActionBarAdvisor(IActionBarConfigurer configurer) {
@@ -42,6 +42,9 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 		//newAction = new SaveAction(window);
 		openAction = new OpenAction(window);
 		aboutAction = ActionFactory.ABOUT.create(window);
+		
+		openXMLAction = new OpenXMLAction(window);
+		saveXMLAction = new SaveXMLAction(window);
 		
 		helpAction = ActionFactory.HELP_CONTENTS.create(window);
 	
@@ -72,6 +75,12 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 		fileMenu.add(saveAction);
 		
 		//fileMenu.add(saveAsAction);
+		fileMenu.add(new Separator());
+		
+		fileMenu.add(openXMLAction);
+		fileMenu.add(saveXMLAction);
+		
+		
 		fileMenu.add(new Separator());
 		fileMenu.add(exitAction);
 		
