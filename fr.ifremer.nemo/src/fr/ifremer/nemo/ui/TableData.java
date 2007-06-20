@@ -103,7 +103,7 @@ public static void creationTable(){
 	
 //	Shell shell = new Shell();
 //	table.setParent(shell);
-	System.out.println("table cachée => ok");
+	//System.out.println("table cachée => ok");
 	
 //	table.setParent(ViewFile.compositeData);
 	
@@ -128,7 +128,7 @@ public static void creationTable(){
 
 	//ViewFile.compositeData.getShell().;
 	
-	System.out.println("table visible => ok");
+	//System.out.println("table visible => ok");
 	
 	//ViewFile.top.getv
 	//ViewFile.top.getParent().getDisplay().update();
@@ -668,12 +668,15 @@ public static void initTable(){
 	 nbre = ViewFile.tableData.getItemCount();
 	 for (int i = 0; i <nbre; i++){
 		 
-		 if (!ViewFile.tableData.getItem(i).getText(4).matches("")){
-		//on a sélectionné un début et une fin
+		 if ((!ViewFile.tableData.getItem(i).getText(4).matches(""))&&(!ViewFile.tableData.getItem(i).getText(2).matches(""))){
+		//on a sélectionné un début et une fin et il y a une conversion à faire
 			 
 		//on récupère le data
 	ligne = Utils.lignesBrutes.get(Integer.valueOf(EditDesc.lignesEnteteFichier.getText())+Integer.valueOf(EditDesc.lignesEnteteStation.getText()))+1;
-	selection = ligne.trim().substring(Integer.valueOf(ViewFile.tableData.getItem(i).getText(4)), Integer.valueOf(ViewFile.tableData.getItem(i).getText(5)));
+	selection = ligne.substring(Integer.valueOf(ViewFile.tableData.getItem(i).getText(4)), Integer.valueOf(ViewFile.tableData.getItem(i).getText(5))).trim();
+	
+	System.out.println("ligne lue = "+ligne );
+	System.out.println("sélection dans la ligne ="+selection);
 	
 		//on formate puis on reaffiche la liste
 	if (selection.matches(ViewFile.tableData.getItem(i).getText(7))){
@@ -694,6 +697,7 @@ public static void initTable(){
 	
 	types.get(i).setTest(resultat);
 	
+	System.out.println("resultat conversion = "+resultat);
 		 }
 	  
 	 System.out.println("maj types data : ok");
@@ -724,11 +728,12 @@ public static void initTable(){
 		 System.out.println("CODE de l'item ########## ==>"+ViewFile.tableData.getItem(i).getText(0));
 		 System.out.println("unite de l'item ==>"+ViewFile.tableData.getItem(i).getText(1));
 		 System.out.println("conversion de l'item ==>"+ViewFile.tableData.getItem(i).getText(2));
-		 System.out.println("debut de l'item ==>"+ViewFile.tableData.getItem(i).getText(3));
-		 System.out.println("fin de l'item ==>"+ViewFile.tableData.getItem(i).getText(4));
-		 System.out.println("format de l'item ==>"+ViewFile.tableData.getItem(i).getText(5));
-		 System.out.println("entree de l'item ==>"+ViewFile.tableData.getItem(i).getText(6));
-		 System.out.println("sortie de l'item ==>"+ViewFile.tableData.getItem(i).getText(7));
+		 System.out.println("test de l'item ==>"+ViewFile.tableData.getItem(i).getText(3));
+		 System.out.println("debut de l'item ==>"+ViewFile.tableData.getItem(i).getText(4));
+		 System.out.println("fin de l'item ==>"+ViewFile.tableData.getItem(i).getText(5));
+		 System.out.println("format de l'item ==>"+ViewFile.tableData.getItem(i).getText(6));
+		 System.out.println("entree de l'item ==>"+ViewFile.tableData.getItem(i).getText(7));
+		 System.out.println("sortie de l'item ==>"+ViewFile.tableData.getItem(i).getText(8));
 		 
 		types.get(i).setCode(ViewFile.tableData.getItem(i).getText(0));
 		types.get(i).setUnite(ViewFile.tableData.getItem(i).getText(1));

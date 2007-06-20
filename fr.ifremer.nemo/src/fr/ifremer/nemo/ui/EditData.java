@@ -412,8 +412,10 @@ public static void DrawingBack(){
 	
 	EditData.buttonValidate.setParent(s.getBody());
 	EditData.buttonReset.setParent(s.getBody());
+	
+	if (ViewFile.checkBoxTempo.getSelection()){
 	buttonFreqEchant.setParent(s.getBody());
-	buttonLigneDonnees.setParent(s.getBody());
+	buttonLigneDonnees.setParent(s.getBody());}
 
 	System.out.println("expand ? = " + expand);
 	for (i=0;i<=EditData.listeSectionsData.size()-1;i++){
