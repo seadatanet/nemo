@@ -24,6 +24,8 @@ public class EditStation {
 	public static Button buttonHistoriqueAcqPos,buttonRefStationPos,buttonSurfacePos,buttonLatPos,buttonLongPos,buttonCommentairePos,buttonProfondeurPos;
 	public static Button buttonLatFinPos, buttonLongFinPos, buttonProfFinPos, buttonProfCapteurPos, buttonDeclinMagnetPos, buttonFreqEchantPos, buttonLatFinSaisie, buttonLongFinSaisie, buttonProfFinSaisie, buttonProfCapteurSaisie, buttonDeclinMagnetSaisie, buttonFreqEchantSaisie;
 	public static Button buttonHeureReference, buttonDateReference, buttonHeureReferencePos, buttonDateReferencePos;
+	public static Button buttonHeurePos, buttonHeureSaisie, buttonDatePos, buttonDateSaisie;
+
 	public static Combo comboRefStationType, comboHeure, comboDate, comboLatitude, comboLongitude;
 	public static Section sectionStation, sectionTypeDonnees, sectionHistorique, sectionCommentaire, sectionSurface, sectionHeure, sectionDate, sectionTU, sectionLatitude, sectionLongitude, sectionProfondeur;
 	public static Section sectionLatFin, sectionLongFin, sectionProfFin, sectionProfCapteur, sectionDeclinMagnet, sectionFreqEchant;
@@ -533,7 +535,8 @@ textTULigne = new Text(shell, SWT.BORDER);
 textTUDebut = new Text(shell, SWT.BORDER);
 textTUFin = new Text(shell, SWT.BORDER);
 
-//remplissage de la arrayList
+//remplissage de la arrayList pour le reset 
+//TODO
 
 
 
@@ -589,6 +592,10 @@ buttonFreqEchantSaisie = new Button(shell, SWT.RADIO);
 
 buttonDateReference= new Button(shell, SWT.RADIO);
 buttonHeureReference= new Button(shell, SWT.RADIO);
+buttonHeureSaisie= new Button(shell, SWT.RADIO);
+buttonDateSaisie= new Button(shell, SWT.RADIO);
+buttonHeurePos= new Button(shell, SWT.RADIO);
+buttonDatePos= new Button(shell, SWT.RADIO);
 buttonHeureReferencePos =  new Button(shell, SWT.RADIO);
 buttonDateReferencePos =  new Button(shell, SWT.RADIO);
 }

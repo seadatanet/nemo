@@ -419,7 +419,7 @@ public class ViewFile extends ViewPart {
 		GridLayout gridLayout1 = new GridLayout();
 		gridLayout1.numColumns = 2;
 		groupTempo = new Group(composite11, SWT.NONE);
-		groupTempo.setText("Série temporelle");
+		groupTempo.setText("Heure/Date relatives");
 		groupTempo.setLayout(gridLayout1);
 		labelDateRef = new Label(groupTempo, SWT.NONE);
 		labelDateRef.setText("Date de référence");

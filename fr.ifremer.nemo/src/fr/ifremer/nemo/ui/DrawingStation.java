@@ -1,6 +1,7 @@
 package fr.ifremer.nemo.ui;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -1082,36 +1083,24 @@ public static void sectionHeure(String nomSection, String description, Section s
 				 
 //				combo format de l'heure
 				  EditStation.comboHeure.setParent(groupeFormat);
-				
+					  
+				  EditStation.buttonHeureSaisie.setParent(sectionClient);
+				  EditStation.buttonHeureSaisie.setText("Saisie manuelle");
+				  EditStation.buttonHeureSaisie.setSelection(true);
+				  				  
+//				  Group groupeSaisie = new Group(sectionClient, SWT.NONE);
+//				  groupeSaisie.setText("");
+//				  groupeSaisie.setLayout(new GridLayout());
+				  EditStation.textHeureSaisie.setParent(sectionClient);
+				  EditStation.textHeureSaisie.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));	
 				  
+				  EditStation.buttonHeurePos.setParent(sectionClient);
+				  EditStation.buttonHeurePos.setText("Position");
 				  
-				  
-				/*  
-				  
-				  if (ViewFile.checkBoxTempo.getSelection()){
-					  //zone série tempo
-					
-					  EditStation.buttonHeureReference.setParent(sectionClient);
-					  EditStation.buttonHeureReference.setText("Heure de référence");
-					  EditStation.buttonHeureReference.setSelection(true);
-					  EditStation.buttonHeureReferencePos.setParent(sectionClient);
-					  EditStation.buttonHeureReferencePos.setText("Position");
-					  EditStation.buttonHeureReferencePos.setSelection(false);
-				 }
-				 
-				 */
-				  //conversion
-//				  label.setParent(sectionClient);
-//				  label.setText("Formule de conversion");
-				  
-//				  EditStation.textConversionHeure.setParent(sectionClient);
-//				  EditStation.textConversionHeure.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-				  
-				 	  
 				  GridLayout gridLayout1 = new GridLayout();
 				  gridLayout1.numColumns = 6;
 				  Group groupe = new Group(sectionClient, SWT.NONE);
-				  groupe.setText("Position");
+				  groupe.setText("Localisation");
 				  groupe.setLayout(gridLayout1);
 				  grou = groupe;
 				  
@@ -1137,36 +1126,100 @@ public static void sectionHeure(String nomSection, String description, Section s
 				  fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 				  
 				  
-				  
-				  
-				  
-				  
-				  
 				  //bouton d'injection de la position des valeurs
 				  	Button buttonInject = new Button(groupe, SWT.NONE);
 					buttonInject.setText("Injecter");
 				
 					section.setClient(sectionClient);		
 				  
+					
+					inject = buttonInject;
+					
 					// une fois les éléments initialisés, on les passe en static pour y accéder à 
 					//partir des listeners
 					lign = ligne; 
 					debu = debut;
 					fi = fin;
 					
-					lign.setEnabled(true); 
-					debu.setEnabled(true); 
-					fi.setEnabled(true);
-					buttonInject.setEnabled(true);
+					lign.setEnabled(false); 
+					debu.setEnabled(false); 
+					fi.setEnabled(false);
+					buttonInject.setEnabled(false);
 				  
-				  //listeners
-			
+					//listener zone de test
+					EditStation.textTestConvHeure
+					.addMouseListener(new org.eclipse.swt.events.MouseListener() {
+						public void widgetSelected(org.eclipse.swt.events.SelectionEvent g) {
+							System.out.println("mise à jour champ test conversion"); 
+							//System.out.println("valeur de ligne lign==> " + lign.getText());
+							//System.out.println("valeur de ligne de ViewEdit.ligneTest ==> " + ViewEdit.ligneTest.getText());
+					
+							
+							
+						}
+
+						public void mouseDoubleClick(MouseEvent e) {
+							// TODO Raccord de méthode auto-généré
+							System.out.println("mise à jour champ test conversion"); 
+						}
+
+						public void mouseDown(MouseEvent e) {
+							// TODO Raccord de méthode auto-généré
+							System.out.println("mise à jour champ test conversion"); 
+						}
+
+						public void mouseUp(MouseEvent e) {
+							// TODO Raccord de méthode auto-généré
+							System.out.println("mise à jour champ test conversion"); 
+						}
+					});
+					
+				  //listeners boutons
+					 EditStation.buttonHeureSaisie
+						.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+							public void widgetSelected(org.eclipse.swt.events.SelectionEvent g) {
+								System.out.println("bouton saisie heure"); 
+								//System.out.println("valeur de ligne lign==> " + lign.getText());
+								//System.out.println("valeur de ligne de ViewEdit.ligneTest ==> " + ViewEdit.ligneTest.getText());
+						
+								EditStation.textHeureSaisie.setEnabled(true);
+								lign.setEnabled(false); 
+								debu.setEnabled(false); 
+								fi.setEnabled(false); 
+								inject.setEnabled(false);
+								 
+								lign.setText("");
+								debu.setText("");
+								fi.setText("");
+								
+							}
+						});
 				  
+					 EditStation.buttonHeurePos
+						.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+							public void widgetSelected(org.eclipse.swt.events.SelectionEvent g) {
+								System.out.println("bouton position heure"); 
+								//System.out.println("valeur de ligne lign==> " + lign.getText());
+								//System.out.println("valeur de ligne de ViewEdit.ligneTest ==> " + ViewEdit.ligneTest.getText());
+						
+								EditStation.textHeureSaisie.setEnabled(false);
+								lign.setEnabled(true); 
+								debu.setEnabled(true); 
+								fi.setEnabled(true); 
+								inject.setEnabled(true);
+								 
+								EditStation.textHeureSaisie.setText("");
+								
+							}
+						}); 
+					 
+					 
+					 
 				  //bouton inject
 				  buttonInject
 					.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 						public void widgetSelected(org.eclipse.swt.events.SelectionEvent g) {
-							System.out.println("bouton injection"); // TODO Auto-generated Event stub widgetSelected()
+							System.out.println("bouton injection"); 
 							//System.out.println("valeur de ligne lign==> " + lign.getText());
 							//System.out.println("valeur de ligne de ViewEdit.ligneTest ==> " + ViewEdit.ligneTest.getText());
 						Utils.inject(lign, debu, fi, ViewFile.styledTextStation);
@@ -1300,29 +1353,17 @@ public static void sectionDate(String nomSection, String description, Section se
 //				combo format de l'heure
 				  EditStation.comboDate.setParent(groupeFormat);
 				
-				 
-				 
-				 /*
-				  if (ViewFile.checkBoxTempo.getSelection()){
-					  //zone série tempo
-					
-					  EditStation.buttonDateReference.setParent(sectionClient);
-					  EditStation.buttonDateReference.setText("Heure de référence");
-					  EditStation.buttonDateReference.setSelection(true);
-					  EditStation.buttonDateReferencePos.setParent(sectionClient);
-					  EditStation.buttonDateReferencePos.setText("Position");
-					  EditStation.buttonDateReferencePos.setSelection(false);
-				 }
-				 
-				 */
-				 
-				  //conversion
-//				  label.setParent(sectionClient);
-//				  label.setText("Formule de conversion");
+				  EditStation.buttonDateSaisie.setParent(sectionClient);
+				  EditStation.buttonDateSaisie.setText("Saisie manuelle");
+				  EditStation.buttonDateSaisie.setSelection(true);
+			
+				  EditStation.textDateSaisie.setParent(sectionClient);
+				  EditStation.textDateSaisie.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));	
 				  
-//				  EditStation.textConversionDate.setParent(sectionClient);
-//				  EditStation.textConversionDate.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-				    
+				  EditStation.buttonDatePos.setParent(sectionClient);
+				  EditStation.buttonDatePos.setText("Position");  
+				  
+				  
 				  GridLayout gridLayout1 = new GridLayout();
 				  gridLayout1.numColumns = 6;
 				  Group groupe = new Group(sectionClient, SWT.NONE);
@@ -1367,13 +1408,82 @@ public static void sectionDate(String nomSection, String description, Section se
 					debu = debut;
 					fi = fin;
 					
-					lign.setEnabled(true); 
-					debu.setEnabled(true); 
-					fi.setEnabled(true);
-					buttonInject.setEnabled(true);
+					lign.setEnabled(false); 
+					debu.setEnabled(false); 
+					fi.setEnabled(false);
+					buttonInject.setEnabled(false);
 				  
 				  //listeners
-			
+					 inject = buttonInject;
+					 
+//					listener zone de test
+					EditStation.textTestConvDate
+					.addMouseListener(new org.eclipse.swt.events.MouseListener() {
+						public void widgetSelected(org.eclipse.swt.events.SelectionEvent g) {
+							System.out.println("mise à jour champ test conversion"); 
+							//System.out.println("valeur de ligne lign==> " + lign.getText());
+							//System.out.println("valeur de ligne de ViewEdit.ligneTest ==> " + ViewEdit.ligneTest.getText());
+					
+							
+							
+						}
+
+						public void mouseDoubleClick(MouseEvent e) {
+							// TODO Raccord de méthode auto-généré
+							System.out.println("mise à jour champ test conversion"); 
+						}
+
+						public void mouseDown(MouseEvent e) {
+							// TODO Raccord de méthode auto-généré
+							System.out.println("mise à jour champ test conversion"); 
+						}
+
+						public void mouseUp(MouseEvent e) {
+							// TODO Raccord de méthode auto-généré
+							System.out.println("mise à jour champ test conversion"); 
+						}
+					});
+					
+				  //listeners boutons
+					 EditStation.buttonDateSaisie
+						.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+							public void widgetSelected(org.eclipse.swt.events.SelectionEvent g) {
+								System.out.println("bouton saisie date"); 
+								//System.out.println("valeur de ligne lign==> " + lign.getText());
+								//System.out.println("valeur de ligne de ViewEdit.ligneTest ==> " + ViewEdit.ligneTest.getText());
+						
+								EditStation.textDateSaisie.setEnabled(true);
+								lign.setEnabled(false); 
+								debu.setEnabled(false); 
+								fi.setEnabled(false); 
+								inject.setEnabled(false);
+								 
+								lign.setText("");
+								debu.setText("");
+								fi.setText("");
+								
+							}
+						});
+				  
+					 EditStation.buttonDatePos
+						.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+							public void widgetSelected(org.eclipse.swt.events.SelectionEvent g) {
+								System.out.println("bouton position heure"); 
+								//System.out.println("valeur de ligne lign==> " + lign.getText());
+								//System.out.println("valeur de ligne de ViewEdit.ligneTest ==> " + ViewEdit.ligneTest.getText());
+						
+								EditStation.textDateSaisie.setEnabled(false);
+								lign.setEnabled(true); 
+								debu.setEnabled(true); 
+								fi.setEnabled(true); 
+								inject.setEnabled(true);
+								 
+								EditStation.textDateSaisie.setText("");
+								
+							}
+						}); 
+					
+					
 				  
 				  //bouton inject
 				  buttonInject
