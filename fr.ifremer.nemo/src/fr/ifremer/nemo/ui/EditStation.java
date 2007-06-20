@@ -654,7 +654,7 @@ public static void initCombos(){
 	comboDate.add("ddMMyy");
 	comboDate.add("MMddyy");
 	comboDate.add("yyddMM");
-	comboDate.add("DD:mm:yyyy");
+	comboDate.add("dd:MM:yyyy");
 	comboDate.add("dd:MM:yy");
 	comboDate.add("dd/MM/yy");
 	comboDate.add("dd/MM/yyyy");

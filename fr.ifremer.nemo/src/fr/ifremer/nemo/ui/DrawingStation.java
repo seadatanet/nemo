@@ -1293,6 +1293,15 @@ public static void sectionDate(String nomSection, String description, Section se
 				 EditStation.textTestConvDate.setParent(groupeConv);
 				
 				 
+				 Group groupeFormat =  new Group(sectionClient, SWT.NONE);
+				 groupeFormat.setLayout(new GridLayout());
+				 groupeFormat.setText("Format");
+				 
+//				combo format de l'heure
+				  EditStation.comboDate.setParent(groupeFormat);
+				
+				 
+				 
 				 /*
 				  if (ViewFile.checkBoxTempo.getSelection()){
 					  //zone série tempo
@@ -1343,10 +1352,7 @@ public static void sectionDate(String nomSection, String description, Section se
 				  fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 				  
 				  
-				  //combo format date
-				  EditStation.comboDate.setParent(groupe);
-				  
-				  
+					  
 				  
 				  
 				  //bouton d'injection de la position des valeurs

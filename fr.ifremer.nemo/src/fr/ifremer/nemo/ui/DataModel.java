@@ -1360,7 +1360,7 @@ public static void fillStation(){
 	
 		//frequence echantillonnage
 		if (ViewFile.checkBoxTempo.getSelection()){
-		propertyModel = stationModel_modele.propertiesAt("samplingRate");
+		propertyModel = stationModel_modele.getTimeSeriesModel().propertiesAt("samplingRate");
 		
 		EditStation.textFreqEchantConv.setText(stationModel_modele.getTimeSeriesModel().getSampleRateConversion());
 		
@@ -1373,6 +1373,7 @@ public static void fillStation(){
 			EditStation.textFreqEchant.setText(""+stationModel_modele.getTimeSeriesInformation().getSamplingRate());	
 			
 		}else{
+			
 			//position dans fichier
 			EditStation.buttonFreqEchantSaisie.setSelection(false);
 			EditStation.buttonFreqEchantPos.setSelection(true);
@@ -1398,7 +1399,8 @@ public static void fillStation(){
 		
 		}
 		
-		
+		propertyModel = stationModel_modele.propertiesAt("time");
+		frag = propertyModel.getFragment();
 		DateTimeFormat dateFormat = (DateTimeFormat)propertyModel.getFormat();
 		EditStation.comboHeure.add(dateFormat.getFormatString(),0);
 		EditStation.comboHeure.select(0);

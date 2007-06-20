@@ -19,6 +19,270 @@ public class DrawingData {
 //	private static Text lign, debu, fi;
 	
 	
+
+	public static void sectionDate(String nomSection, String description, Section section, Text ligne, Text debut, Text fin){
+		
+		
+		//garder le groupe 
+		//virer le second bouton radio !
+		//ajouter combo de format heure
+		
+		final Text lign, debu, fi;
+		final Button inject;
+		final String nomSec;
+		final Text manu;
+
+		nomSec = nomSection;
+//		manu = manuel;
+
+
+		section.setParent(EditDesc.formEdition);
+
+			section = ViewEdit.toolkitEdition.createSection(EditDesc.formEdition.getBody(), 
+					  Section.DESCRIPTION|Section.TITLE_BAR|
+					  Section.TWISTIE|Section.COMPACT);
+			
+		//System.out.println("section date station");
+			
+			  section.addExpansionListener(new ExpansionAdapter() {
+					  public void expansionStateChanged(ExpansionEvent e) {
+						  EditDesc.formEdition.reflow(true);
+					  }
+					 });
+			  		section.setText(nomSection);
+			  		Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL );
+			  		section.setFont(font);
+			  		section.setDescription(description);
+					Composite sectionClient = ViewEdit.toolkitEdition.createComposite(section);
+					sectionClient.setLayout(new GridLayout());
+//					GridData gd = new GridData();
+//					gd.horizontalSpan = 2;
+					
+					/*
+					 GridLayout gridLayout = new GridLayout();
+					  gridLayout.numColumns = 4;
+					
+					  Group groupeConv = new Group(sectionClient, SWT.NONE);
+					  groupeConv.setText("Conversion");
+					  groupeConv.setLayout(gridLayout);
+					  
+					 	//zone de conversion et test de conversion
+					 Label labelConv= new Label(groupeConv, SWT.NONE);
+					 labelConv.setText("Formule");
+					 EditStation.textConversionDate.setParent(groupeConv);
+					 
+					 Label labelTest= new Label(groupeConv, SWT.NONE);
+					 labelTest.setText("Test");
+					 EditStation.textTestConvDate.setParent(groupeConv);
+					  
+					   */
+					
+					 
+					 Group groupeFormat =  new Group(sectionClient, SWT.NONE);
+					 groupeFormat.setLayout(new GridLayout());
+					 groupeFormat.setText("Format");
+					 
+//					combo format de l'heure
+					  EditData.comboDate.setParent(groupeFormat);
+					
+					
+					
+					  GridLayout gridLayout1 = new GridLayout();
+					  gridLayout1.numColumns = 6;
+					  Group groupe = new Group(sectionClient, SWT.NONE);
+					  groupe.setText("Position");
+					  groupe.setLayout(gridLayout1);
+					  grou = groupe;
+					  
+					  //ligne
+					  Label label1 = new Label(groupe, SWT.NULL);
+					  label1.setText("Ligne");
+					  ligne.setParent(groupe);
+					  //ligne = new Text(groupe, SWT.BORDER);
+					  ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+				
+					  //debut
+					  Label label2 = new Label(groupe, SWT.NULL);
+					  label2.setText("Début");
+					  debut.setParent(groupe);
+					  //= new Text(groupe, SWT.BORDER);
+					  debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+					  
+					  //fin
+					  Label label3 = new Label(groupe, SWT.NULL);
+					  label3.setText("Fin");
+					  fin.setParent(groupe);
+					  //= new Text(groupe, SWT.BORDER);
+					  fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+					  
+					  
+					  //combo format date
+				//	  EditData.comboDate.setParent(groupe);
+					  
+					  
+					  //bouton d'injection de la position des valeurs
+					  	Button buttonInject = new Button(groupe, SWT.NONE);
+						buttonInject.setText("Injecter");
+					
+						section.setClient(sectionClient);		
+					  
+						// une fois les éléments initialisés, on les passe en static pour y accéder à 
+						//partir des listeners
+						lign = ligne; 
+						debu = debut;
+						fi = fin;
+						
+						lign.setEnabled(true); 
+						debu.setEnabled(true); 
+						fi.setEnabled(true);
+						buttonInject.setEnabled(true);
+					  
+					  //listeners
+				
+					  
+					  //bouton inject
+					  buttonInject
+						.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+							public void widgetSelected(org.eclipse.swt.events.SelectionEvent g) {
+								//System.out.println("bouton injection"); // TODO Auto-generated Event stub widgetSelected()
+								//System.out.println("valeur de ligne lign==> " + lign.getText());
+								//System.out.println("valeur de ligne de ViewEdit.ligneTest ==> " + ViewEdit.ligneTest.getText());
+							Utils.inject(lign, debu, fi, ViewFile.styledTextData);
+							
+							
+							}
+						});
+					  
+				
+					  //ajout de la section dans la liste des sections de description
+					  ajoutSectionDansListeData(section);
+					  
+					  
+			
+		}	
+
+		
+	
+
+	public static void sectionHeure(String nomSection, String description, Section section, Text ligne, Text debut, Text fin){
+		
+		
+		//garder le groupe 
+		//virer le second bouton radio !
+		//ajouter combo de format heure
+		
+		final String nomSec;
+		final Text lign, debu, fi;
+		final Button inject;
+
+		nomSec = nomSection;
+			section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition.getBody(), 
+					  Section.DESCRIPTION|Section.TITLE_BAR|
+					  Section.TWISTIE|Section.COMPACT);
+	
+			  section.addExpansionListener(new ExpansionAdapter() {
+					  public void expansionStateChanged(ExpansionEvent e) {
+						  EditStation.formEdition.reflow(true);
+					  }
+					 });
+			  		section.setText(nomSection);
+			  		Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL );
+			  	  section.setFont(font);
+			  		section.setDescription(description);
+					Composite sectionClient = ViewEdit.toolkitEdition.createComposite(section);
+					sectionClient.setLayout(new GridLayout());
+					  
+					
+					  GridLayout gridLayout = new GridLayout();
+					  gridLayout.numColumns = 4;
+					  
+					  Group groupeConv = new Group(sectionClient, SWT.NONE);
+					 groupeConv.setText("Conversion");
+					  groupeConv.setLayout(gridLayout);
+					  
+					 	//zone de conversion et test de conversion
+					 Label labelConv= new Label(groupeConv, SWT.NONE);
+					 labelConv.setText("Formule");
+					 EditData.textHeureConversion.setParent(groupeConv);
+					 
+					 Label labelTest= new Label(groupeConv, SWT.NONE);
+					 labelTest.setText("Test");
+					 EditData.textHeureTest.setParent(groupeConv);
+					 
+					 Group groupeFormat =  new Group(sectionClient, SWT.NONE);
+					 groupeFormat.setLayout(new GridLayout());
+					 groupeFormat.setText("Format");
+					 
+//					combo format de l'heure
+					  EditData.comboHeure.setParent(groupeFormat);
+						  
+					  GridLayout gridLayout1 = new GridLayout();
+					  gridLayout1.numColumns = 6;
+					  Group groupe = new Group(sectionClient, SWT.NONE);
+					  groupe.setText("Position");
+					  groupe.setLayout(gridLayout1);
+					  grou = groupe;
+					  
+					  //ligne
+					  Label label1 = new Label(groupe, SWT.NULL);
+					  label1.setText("Ligne");
+					  ligne.setParent(groupe);
+					  //ligne = new Text(groupe, SWT.BORDER);
+					  ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+				
+					  //debut
+					  Label label2 = new Label(groupe, SWT.NULL);
+					  label2.setText("Début");
+					  debut.setParent(groupe);
+					  //= new Text(groupe, SWT.BORDER);
+					  debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+					  
+					  //fin
+					  Label label3 = new Label(groupe, SWT.NULL);
+					  label3.setText("Fin");
+					  fin.setParent(groupe);
+					  //= new Text(groupe, SWT.BORDER);
+					  fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+					  //bouton d'injection de la position des valeurs
+					  	Button buttonInject = new Button(groupe, SWT.NONE);
+						buttonInject.setText("Injecter");
+					
+						section.setClient(sectionClient);		
+					  
+						// une fois les éléments initialisés, on les passe en static pour y accéder à 
+						//partir des listeners
+						lign = ligne; 
+						debu = debut;
+						fi = fin;
+						
+						lign.setEnabled(true); 
+						debu.setEnabled(true); 
+						fi.setEnabled(true);
+						buttonInject.setEnabled(true);
+					  
+					  //listeners
+				
+					  
+					  //bouton inject
+					  buttonInject
+						.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+							public void widgetSelected(org.eclipse.swt.events.SelectionEvent g) {
+								System.out.println("bouton injection"); // TODO Auto-generated Event stub widgetSelected()
+								//System.out.println("valeur de ligne lign==> " + lign.getText());
+								//System.out.println("valeur de ligne de ViewEdit.ligneTest ==> " + ViewEdit.ligneTest.getText());
+							Utils.inject(lign, debu, fi, ViewFile.styledTextData);
+							
+							}
+						});
+					  
+			 
+					  //ajout de la section dans la liste des sections de description
+					  ajoutSectionDansListeData(section);
+					  
+			
+		}	
+
+	
 	
 	
 	public static void sectionTypeCourant(Section section, Text code, Text unite, Text conversion, Text debut, Text fin, Text format, Text entree, Text sortie){

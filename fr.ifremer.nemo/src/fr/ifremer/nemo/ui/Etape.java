@@ -212,7 +212,7 @@ public class Etape {
 			
 		} catch (ParseException e) {
 			System.out.println("erreur format Heure ");
-			Utils.messageErreurAppend("\nErreur de format d'Heure : Attendu => "+string+" Lu => "+EditStation.comboHeure.getText());
+			Utils.messageErreurAppend("\nErreur de format d'Heure : Attendu => "+EditStation.comboHeure.getText()+" Lu => "+string);
 			
 			ok = ok && false;
 			e.printStackTrace();
@@ -252,7 +252,7 @@ public class Etape {
 			
 		} catch (ParseException e) {
 			System.out.println("erreur format date ");
-			Utils.messageErreurAppend("\nErreur de format de Date : Attendu => "+string+" Lu => "+EditStation.comboDate.getText());
+			Utils.messageErreurAppend("\nErreur de format de Date : Attendu => "+EditStation.comboDate.getText()+" Lu => "+string);
 			ok = ok && false;
 			e.printStackTrace();
 			//Utils.messageErreurAppend(e.)

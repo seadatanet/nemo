@@ -44,7 +44,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 		aboutAction = ActionFactory.ABOUT.create(window);
 		
 		openXMLAction = new OpenXMLAction(window);
-		saveXMLAction = new SaveXMLAction(window);
+		//saveXMLAction = new SaveXMLAction(window);
 		
 		helpAction = ActionFactory.HELP_CONTENTS.create(window);
 	
@@ -59,7 +59,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 		
 		
 		register(exitAction);
-		
+		register(openXMLAction);
 		register(aboutAction);
 		register(saveAction);
 		
@@ -78,7 +78,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 		fileMenu.add(new Separator());
 		
 		fileMenu.add(openXMLAction);
-		fileMenu.add(saveXMLAction);
+		//fileMenu.add(saveXMLAction);
 		
 		
 		fileMenu.add(new Separator());
