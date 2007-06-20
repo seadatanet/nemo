@@ -459,6 +459,9 @@ public class Etape {
 	public static void validationData(){
 //		 test de toutes les valeurs debut / fin des Data
 		Boolean ok = true;
+		Boolean resultat;
+		String string=null, ligne=null;
+		
 		int nbreParam = TableData.types.size();
 		int []debuts, fins;
 		int cptDebut=0;
@@ -493,6 +496,86 @@ public class Etape {
 		if ((cptDebut >nbreParam)||(cptFin >nbreParam)){
 			Utils.messageErreur("Certaines valeurs de début ou de fin sont en double !");
 		ok = false;
+		}
+		
+		
+		
+		if ((ViewFile.checkBoxTempo.getSelection())&&(EditData.buttonLigneDonnees.getSelection())){
+			//check valeurs série tempo
+
+			//HEURE TEMPO
+
+			resultat =Regexp.checkLigneDebutfin(EditData.textHeureLigne, EditData.textHeureDebut, EditData.textHeureFin, "Heure"); 
+			ok = ok && resultat;
+			
+			
+			//Utils.messageErreurAppend("\n===[Check section : Heure]===\n");
+			System.out.println("format heure = "+EditStation.comboHeure.getText()); //Item(EditStation.comboHeure.getSelectionIndex()));
+			try {
+				System.out.println("format heure = "+EditStation.comboHeure.getText());
+				
+//				récupérer le texte en question et creer une nouvelle heure
+				ligne = Utils.lignesBrutes.get(Integer.parseInt(EditData.textHeureLigne.getText())-1);
+				string = ligne.substring(Integer.parseInt(EditData.textHeureDebut.getText())-1, Integer.parseInt(EditData.textHeureFin.getText()));
+				
+				DateTimeFormat format = new DateTimeFormat(EditData.comboHeure.getText());
+				
+				
+				System.out.println(ligne);
+				System.out.println(string);
+				Long hourLong = (Long)format.parseObject(string);
+				
+				
+			} catch (ParseException e) {
+				System.out.println("erreur format Heure ");
+				Utils.messageErreurAppend("\nErreur de format d'Heure : Attendu => "+EditData.comboHeure.getText()+" Lu => "+string);
+				
+				ok = ok && false;
+				e.printStackTrace();
+				//Utils.messageErreurAppend(e.)
+			}
+			
+			
+			//DATE TEMPO
+			
+			
+			
+//			check valeurs ligne/debut/fin
+			resultat = Regexp.checkLigneDebutfin(EditData.textDateLigne, EditData.textDateDebut, EditData.textDateFin, "Date"); 
+			ok = ok && resultat;
+			
+			//Utils.messageErreurAppend("\n===[Check section : Date]===\n");
+			System.out.println("format date = "+EditData.comboDate.getText());
+			try {
+				
+//				récupérer le texte en question et creer une nouvelle heure
+				//on a ligne debut fin donc parcours lignes de texte
+				ligne = Utils.lignesBrutes.get(Integer.parseInt(EditData.textDateLigne.getText())-1);
+				string = ligne.substring(Integer.parseInt(EditData.textDateDebut.getText())-1, Integer.parseInt(EditData.textDateFin.getText()));
+				
+				DateTimeFormat format = new DateTimeFormat(EditData.comboDate.getText());
+				
+				
+				System.out.println(ligne);
+				System.out.println(string);
+				Long dateLong = (Long)format.parseObject(string);
+				
+				
+			} catch (ParseException e) {
+				System.out.println("erreur format date ");
+				Utils.messageErreurAppend("\nErreur de format de Date : Attendu => "+EditData.comboDate.getText()+" Lu => "+string);
+				ok = ok && false;
+				e.printStackTrace();
+				//Utils.messageErreurAppend(e.)
+			}
+			
+			
+			
+			
+			
+			
+			
+			
 		}
 		
 		

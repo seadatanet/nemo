@@ -188,7 +188,7 @@ public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
 buttonExpand
 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-System.out.println("expand/collapse all"); // TODO Auto-generated Event stub widgetSelected()
+System.out.println("expand/collapse all"); // 
 //raz de la valeur manuelle
 int i;
 
@@ -231,7 +231,7 @@ formEdition.reflow(true);
 buttonExpand2
 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-System.out.println("expand/collapse all"); // TODO Auto-generated Event stub widgetSelected()
+System.out.println("expand/collapse all"); // 
 //raz de la valeur manuelle
 int i;
 
@@ -275,7 +275,7 @@ formEdition.reflow(true);
 buttonValidate
 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-System.out.println("validation"); // TODO Auto-generated Event stub widgetSelected()
+System.out.println("validation"); // 
 
 //on passe en ppar l'étape à laquelle on se trouve
 Etape.etape(1);	
@@ -487,6 +487,9 @@ textDateDebut= new Text(shell, SWT.BORDER);
 textDateFin= new Text(shell, SWT.BORDER);
 
 textTempo = new Text(shell, SWT.BORDER);
+
+//ajout des zones de texte dans la liste pour activer le reset
+//TODO
 
 }	
 
