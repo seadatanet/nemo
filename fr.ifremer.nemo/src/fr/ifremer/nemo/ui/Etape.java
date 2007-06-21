@@ -183,14 +183,25 @@ public class Etape {
 		//HEURE
 			//check valeurs ligne/debut/fin
 		
-		//si heure de référence alors c'est deja validé normalement
-		if (ViewFile.checkBoxTempo.getSelection() && !ViewFile.textTempoHeureRef.getText().matches(""))
-		{ 
+		if (EditStation.buttonHeureSaisie.getSelection()){
+			//saisie à la main
+			try {
+				DateTimeFormat format = new DateTimeFormat(EditStation.comboHeure.getText());
+				Long hourLong = (Long)format.parseObject(EditStation.textHeureSaisie.getText());
+			} catch (ParseException e) {
+				System.out.println("erreur format Heure ");
+				Utils.messageErreurAppend("\nErreur de format d'Heure : Attendu => "+EditStation.comboHeure.getText()+" Lu => "+EditStation.textHeureSaisie.getText());
+				
+				ok = ok && false;
+				e.printStackTrace();
+								e.printStackTrace();
 			}
-		else
-		{
-		resultat1 =Regexp.checkLigneDebutfin(EditStation.textHeureLigne, EditStation.textHeureDebut, EditStation.textHeureFin, "Heure"); 
-		ok = ok && resultat1;
+			
+		}else{
+			//position dans fichier
+			
+				resultat1 =Regexp.checkLigneDebutfin(EditStation.textHeureLigne, EditStation.textHeureDebut, EditStation.textHeureFin, "Heure"); 
+				ok = ok && resultat1;
 		
 		
 		//Utils.messageErreurAppend("\n===[Check section : Heure]===\n");
@@ -219,15 +230,26 @@ public class Etape {
 			//Utils.messageErreurAppend(e.)
 		}
 		
-		}
+		}	
 		
 		//DATE
 		
-		if (ViewFile.checkBoxTempo.getSelection() && !ViewFile.textTempoHeureRef.getText().matches(""))
-		{ 
-			}
-		else
-		{		
+	if (EditStation.buttonDateSaisie.getSelection()){
+		//saisie manuelle
+		try {
+			DateTimeFormat format = new DateTimeFormat(EditStation.comboDate.getText());
+			Long dateLong = (Long)format.parseObject(EditStation.textDateSaisie.getText());
+		} catch (ParseException e) {
+			System.out.println("erreur format date ");
+			Utils.messageErreurAppend("\nErreur de format de Date : Attendu => "+EditStation.comboDate.getText()+" Lu => "+EditStation.textDateSaisie.getText());
+			e.printStackTrace();
+		}
+	}	
+	else{
+		//position dans fichier
+		
+		
+	
 		
 //		check valeurs ligne/debut/fin
 		resultat1 = Regexp.checkLigneDebutfin(EditStation.textDateLigne, EditStation.textDateDebut, EditStation.textDateFin, "Date"); 
@@ -257,8 +279,9 @@ public class Etape {
 			e.printStackTrace();
 			//Utils.messageErreurAppend(e.)
 		}
-		}
-		
+	
+	}
+	
 		//PROFONDEUR
 		Utils.messageErreurAppend("\n===[Check section : Profondeur]===\n");
 		if (EditStation.buttonProfondeurPos.getSelection()){
@@ -298,9 +321,6 @@ public class Etape {
 		}
 		
 		
-		
-		
-		
 		//LONGITUDE
 		if (EditStation.buttonLongSaisie.getSelection()){
 			//saisie manuelle
@@ -325,19 +345,20 @@ public class Etape {
 			//LATITUDE DE FIN
 			if (EditStation.buttonLatFinSaisie.getSelection()){
 				//saisie manuelle
-				if (!EditStation.textLatFin.getText().matches("")){
-				try {
-					LatitudeFormat latitudeFormat = new LatitudeFormat(EditStation.comboLatitude.getText());
-					latitudeFormat.parseObject(EditStation.textLatFin.getText());
-				} catch (ParseException e) {
-					
-					Utils.messageErreurAppend("\nErreur de format de Latitude de fin");
-					e.printStackTrace();
-				}
+				if (EditStation.textLatFin.getText().matches("")){
+//					valeur non rentrée
+					ok = ok && true;
 				}else
 				{
-					//valeur non rentrée
-						ok = ok && true;
+					try {
+						LatitudeFormat latitudeFormat = new LatitudeFormat(EditStation.comboLatitude.getText());
+						latitudeFormat.parseObject(EditStation.textLatFin.getText());
+					} catch (ParseException e) {
+						
+						Utils.messageErreurAppend("\nErreur de format de Latitude de fin");
+						e.printStackTrace();
+					}
+					
 					}
 			}else{
 				//position dans fichier
@@ -348,20 +369,21 @@ public class Etape {
 			//LONGITUDE DE FIN
 			if (EditStation.buttonLongFinSaisie.getSelection()){
 				//saisie manuelle
-				if (!EditStation.textLongFin.getText().matches("")){
-			try {
-				LongitudeFormat longitudeFormat = new LongitudeFormat(EditStation.comboLongitude.getText());
-				longitudeFormat.parseObject(EditStation.textLongFin.getText());
-			} catch (ParseException e) {
-				ok = false;
-				Utils.messageErreurAppend("\nErreur de format Longitude de fin");
-				e.printStackTrace();
-						}
+				if (EditStation.textLongFin.getText().matches("")){
+					//valeur non rentrée
+					ok = ok && true;
 				}
 				else
 				{
-				//valeur non rentrée
-					ok = ok && true;
+					try {
+						LongitudeFormat longitudeFormat = new LongitudeFormat(EditStation.comboLongitude.getText());
+						longitudeFormat.parseObject(EditStation.textLongFin.getText());
+					} catch (ParseException e) {
+						ok = false;
+						Utils.messageErreurAppend("\nErreur de format Longitude de fin");
+						e.printStackTrace();
+								}
+			
 				}
 			} else{
 				//position dans fichier
@@ -409,7 +431,8 @@ public class Etape {
 				Utils.messageErreurAppend("\n===[Check section : Profondeur du capteur]===\n");
 				if (EditStation.textProfCapteur.getText().matches("")){
 				Utils.messageErreurAppend("\nProfondeur du capteur manquante");
-				}else{
+				}
+				else{
 				if (Float.parseFloat(EditStation.textProfCapteur.getText()) > 0){
 					ok = ok && true;
 					Utils.messageErreurAppend("...ok");

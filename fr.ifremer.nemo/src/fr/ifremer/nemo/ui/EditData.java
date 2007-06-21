@@ -19,7 +19,8 @@ public class EditData {
 
 ///////////////////////////////////////////
 
-public static Section sectionTypeCourant, sectionTypeAjouter, sectionHeure, sectionDate;
+public static Section sectionTypeCourant, sectionTypeAjouter, sectionHeure, sectionDate, sectionTotal;
+public static Text textTotalLigne, textTotalDebut, textTotalFin;
 public static Text textTempo, textTypeCourantCode, textTypeCourantUnite, textTypeCourantConversion, textTypeCourantDebut, textTypeCourantFin, textTypeCourantFormat, textTypeCourantEntree, textTypeCourantSortie, textTypeCourantLigne, textTypeAjouterCode, textTypeAjouterUnite, textTypeAjouterConversion, textTypeAjouterDebut, textTypeAjouterFin, textTypeAjouterLigne, textTypeAjouterEntree, textTypeAjouterSortie, textTypeAjouterFormat;
 public static Text textHeureLigne, textHeureDebut, textHeureFin, textDateLigne, textDateDebut, textDateFin, textHeureConversion, textHeureTest;
 public static Label labelTypeCourantCode, labelTypeCourantUnite, labelTypeCourantConversion, labelTypeCourantDebut, labelTypeCourantFin, labelTypeCourantFormat, labelTypeCourantEntree, labelTypeCourantSortie; 
@@ -30,7 +31,7 @@ public static ArrayList <Label> listeSectionsLabel;
 public static int expand, validee, loaded;
 public static List listeType;
 public static ScrolledForm formEdition;
-public static Combo comboHeure, comboDate;
+public static Combo comboHeure, comboDate, comboTotal;
 
 ////////////////////////////////////////////
 
@@ -99,9 +100,9 @@ if (ViewFile.checkBoxTempo.getSelection()){
 	buttonLigneDonnees.setText("Informations temporelles présentes dans les données");
 	
 	//on cree les sections puis on les cache dans un autre shell et on les re-affiche only si bouton coché
-	DrawingData.sectionHeure("Heure                                  ", "Sélectionnez l'heure présente dans les lignes de données", sectionHeure, textHeureLigne, textHeureDebut, textHeureFin);
-	DrawingData.sectionDate("Date                                   ", "Sélectionnez la date présente dans les lignes de données", sectionDate, textDateLigne, textDateDebut, textDateFin);
-	
+//	DrawingData.sectionHeure("Heure                                  ", "Sélectionnez l'heure présente dans les lignes de données", sectionHeure, textHeureLigne, textHeureDebut, textHeureFin);
+//	DrawingData.sectionDate("Date                                   ", "Sélectionnez la date présente dans les lignes de données", sectionDate, textDateLigne, textDateDebut, textDateFin);
+	DrawingData.sectionTotal("Date/Heure                             ", "Sélectionnez la date et l'heure présentes dans les lignes de données", sectionTotal, textTotalLigne, textTotalDebut, textTotalFin);
 	
 	
 	buttonFreqEchant.setSelection(true);
@@ -451,6 +452,7 @@ sectionTypeCourant  = new Section(shell, SWT.NONE);
 sectionTypeAjouter  = new Section(shell, SWT.NONE);
 sectionHeure = new Section(shell, SWT.NONE);
 sectionDate  = new Section(shell, SWT.NONE);
+sectionTotal = new Section(shell, SWT.NONE);
 }
 
 
@@ -487,6 +489,9 @@ textHeureTest= new Text(shell, SWT.BORDER);
 textDateLigne= new Text(shell, SWT.BORDER);
 textDateDebut= new Text(shell, SWT.BORDER);
 textDateFin= new Text(shell, SWT.BORDER);
+textTotalLigne= new Text(shell, SWT.BORDER);
+textTotalDebut= new Text(shell, SWT.BORDER);
+textTotalFin= new Text(shell, SWT.BORDER);
 
 textTempo = new Text(shell, SWT.BORDER);
 
@@ -540,6 +545,14 @@ public static void initCombos(){
 	comboDate.add("dd:MM:yy");
 	comboDate.add("dd/MM/yy");
 	comboDate.add("dd/MM/yyyy");
+	
+	comboTotal = new Combo(shell, SWT.NONE);
+	comboTotal.add("ddMMyyyy hh:mm:ss");
+	comboTotal.add("ddMMyyyy hh24:mm");
+	comboTotal.add("ddMMyyyy hh24mm");
+	comboDate.add("dd/MM/yyyy hh:mm:ss");
+	comboDate.add("dd/MM/yyyy hh24:mm");
+	comboDate.add("dd/MM/yyyy hh24mm");
 	
 
 }	

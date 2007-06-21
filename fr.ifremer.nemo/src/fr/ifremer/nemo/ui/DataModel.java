@@ -16,6 +16,7 @@ import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.domain.TimeSeriesInformation;
 import fr.ifremer.nemo.input.DirectoryBasedSurvey;
 import fr.ifremer.nemo.input.HeaderFragment;
+import fr.ifremer.nemo.input.HorodatedParameterModel;
 import fr.ifremer.nemo.input.InputModel;
 import fr.ifremer.nemo.input.LineFragment;
 import fr.ifremer.nemo.input.ParameterModel;
@@ -562,11 +563,18 @@ public static void initStation(){
 	
 		//	
 		propertyModel = stationModel.propertiesAt("time");
+		
+		if (EditStation.buttonHeureSaisie.getSelection()){
+			//saisie heure manuelle
+			propertyModel.setUserProvided(true);
+		}else{
+			//position heure dans fichier
+		
 		propertyModel.setUserProvided(false); 
 	
 		//position dans fichier
 		
-	frag = propertyModel.getFragment();
+		frag = propertyModel.getFragment();
 		//frag.isSingleLine();
 		
 	
@@ -587,55 +595,19 @@ public static void initStation(){
 		
 			e.printStackTrace();
 		}
-		
+		}	
 	//	}//fin if serie tempo
 		
 //date en LONG
 		propertyModel = stationModel.propertiesAt("date");
 		
-//		if (ViewFile.checkBoxTempo.getSelection()){
-//			//série tempo
-//			if (!ViewFile.textTempoDateRef.getText().matches("")){
-//				//si y'a une heure de ref
-//				propertyModel.setUserProvided(true);
-//				stationModel.getTimeSeriesInformation().setEndTime(ViewFile.textTempoDateRef.getText());
-//				
-//				
-//				
-//				}else{
-//				//pas de date de référence donc position normale dans fichier
-//					propertyModel.setUserProvided(false);
-//
-//					// position dans fichier
-//
-//					 frag = propertyModel.getFragment();
-//					// frag.isSingleLine();
-//
-//					 ligne = ""
-//							+ (Integer.valueOf(EditStation.textDateLigne.getText()) - Integer
-//									.valueOf(EditDesc.lignesEnteteFichier.getText()));
-//					 debut = EditStation.textDateDebut.getText();
-//					 fin = EditStation.textDateFin.getText();
-//
-//					frag.setFirstLine(ligne);
-//					frag.setLastLine(ligne);
-//					frag.setFirstCharOffset(debut);
-//					frag.setLastCharOffset(fin);
-//					
-//					//format date
-//					DateTimeFormat dateFormat = (DateTimeFormat)propertyModel.getFormat();
-//					try {
-//						dateFormat.setFormatString(EditStation.comboDate.getText());
-//					} catch (ParseException e) {
-//						// 
-//						e.printStackTrace();
-//					}
-//					
-//					
-//				}
-//		}
-//		
-//		else{
+		
+		if (EditStation.buttonDateSaisie.getSelection()){
+			//saisie date manuelle
+			propertyModel.setUserProvided(true);
+			
+		}else{
+	
 		
 		//pas de série tempo donc position dans fichier
 		propertyModel = stationModel.propertiesAt("date");
@@ -665,7 +637,7 @@ public static void initStation(){
 			// 
 			e.printStackTrace();
 		}
-		
+		}	
 //		} //fin if serie tempo
 		
 //latitude
@@ -987,6 +959,32 @@ public static void initData(){
 		//station.
 	
 	}
+	
+	
+	//gestion des séries temporelles
+	if (EditData.buttonFreqEchant.getSelection()){
+		//calcul à partir fréquence échantillonnage
+		stationModel.getTimestampModel().setComputed(true);
+				
+	}else{
+		//calcul position date/heure dans les données
+		HorodatedParameterModel horoDatedParameterModel = stationModel.getTimestampModel();
+		try {
+			horoDatedParameterModel.setFormat(new DateTimeFormat(EditData.comboTotal.getText()));
+		} catch (ParseException e) {
+			
+			e.printStackTrace();
+		}
+		LineFragment lineFragment = horoDatedParameterModel.getDateTimeFragment();
+		lineFragment.setFirstCharOffset(EditData.textTotalDebut.getText());
+		lineFragment.setLastCharOffset(EditData.textTotalFin.getText());
+		
+		
+	}
+	
+	
+	
+	
 	
 	//flag validation à 1
 	EditData.validee = 1;
