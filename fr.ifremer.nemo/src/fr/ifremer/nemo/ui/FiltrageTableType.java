@@ -112,6 +112,7 @@ if (ViewFile.affiche ==3){
 	labelText = new Label(top, SWT.NONE);
 	labelText.setBounds(new Rectangle(3, 4, 298, 13));
 	labelText.setText("Tapez le nom à filter");
+	labelText.pack();
 	
 	filtreButtonSelectionner = new Button(top, SWT.NONE);
 	filtreButtonSelectionner.setBounds(new Rectangle(62, 289, 65, 23));

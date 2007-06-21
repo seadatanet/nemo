@@ -155,7 +155,7 @@ if (ViewFile.checkBoxTempo.getSelection()){
 DrawingStation.sectionManuelLigneDebutFinInjectLatLongComboFormat("Longitude                              ", "", sectionLongitude, textLongitudeLigne, textLongitudeDebut, textLongitudeFin, textLongitude, buttonLongSaisie, comboLongitude, buttonLongPos);
 
 if (ViewFile.checkBoxTempo.getSelection()){
-	//section llongitude de fin
+	//section longitude de fin
 	DrawingStation.sectionManuelLigneDebutFinInjectLatLongFin("Longitude de fin                       ", "", sectionLongFin, textLongFinLigne, textLongFinDebut,textLongFinFin, textLongFin, buttonLongFinSaisie,  buttonLongFinPos);	
 }
 

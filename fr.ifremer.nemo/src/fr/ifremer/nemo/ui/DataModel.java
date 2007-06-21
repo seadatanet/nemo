@@ -451,7 +451,7 @@ public static void initStation(){
 		frag2.setLastCharOffset(fin2);
 	}
 	
-		
+/*		
 //décallage TU
 	propertyModel = stationModel.propertiesAt("offsetTU");
 	//if (EditStation.buttonTUSaisie.getSelection()){
@@ -479,7 +479,7 @@ public static void initStation(){
 		
 	}
 	
-	
+*/	
 	
 //		frequence echantillonnage		
 if (ViewFile.checkBoxTempo.getSelection()){
