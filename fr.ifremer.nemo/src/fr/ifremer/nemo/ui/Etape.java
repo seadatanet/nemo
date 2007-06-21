@@ -5,6 +5,7 @@ import java.util.regex.*;
 
 import org.eclipse.swt.widgets.Table;
 
+import fr.ifremer.nemo.input.HorodatedParameterModel;
 import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.DateTimeFormatParser;
 import fr.ifremer.nemo.util.LatitudeFormat;
@@ -526,6 +527,22 @@ public class Etape {
 		if ((ViewFile.checkBoxTempo.getSelection())&&(EditData.buttonLigneDonnees.getSelection())){
 			//check valeurs série tempo
 
+			
+			resultat =Regexp.checkLigneDebutfin(EditData.textTotalLigne, EditData.textTotalDebut, EditData.textTotalFin, "Date/Heure"); 
+			ok = ok && resultat;
+			
+			try {
+				DateTimeFormat format = new DateTimeFormat(EditData.comboHeure.getText());
+				HorodatedParameterModel horo = new HorodatedParameterModel();
+				horo.setFormat(format);
+			} catch (ParseException e) {
+				System.out.println("Erreur format date+heure");
+				e.printStackTrace();
+			}
+			
+			
+			
+			/*
 			//HEURE TEMPO
 
 			resultat =Regexp.checkLigneDebutfin(EditData.textHeureLigne, EditData.textHeureDebut, EditData.textHeureFin, "Heure"); 
@@ -593,7 +610,7 @@ public class Etape {
 			}
 			
 			
-			
+			*/
 			
 			
 			

@@ -481,15 +481,9 @@ public static void initStation(){
 	
 	
 	
-//heure en LONG
-		propertyModel = stationModel.propertiesAt("time");
-		
-		
-			
-			if (inputModel.isRefDateBased()){
-				//date/heure de ref
-				
-//				frequence echantillonnage
+//		frequence echantillonnage		
+if (ViewFile.checkBoxTempo.getSelection()){
+
 				propertyModel = stationModel.getTimeSeriesModel().propertiesAt("samplingRate");
 				
 				if (EditStation.buttonFreqEchantSaisie.getSelection()){
@@ -519,54 +513,18 @@ public static void initStation(){
 					stationModel.getTimeSeriesModel().setSampleRateConversion(EditStation.textFreqEchantConv.getText());
 					}
 				
-			}
 			
-		
-			
-//			if (!ViewFile.textTempoHeureRef.getText().matches("")){
-//				//si y'a une heure de ref
-//				propertyModel.setUserProvided(true);
-//				//stationModel.getTimeSeriesInformation().setEndTime(ViewFile.textTempoHeureRef.getText());
-//				
-//				
-//				}else{
-//				//pas d'heure de référence donc position normale dans fichier	
-//					propertyModel.setUserProvided(false); 
-//					
-//					//position dans fichier
-//					
-//					frag = propertyModel.getFragment();
-//					//frag.isSingleLine();
-//					
-//				
-//					ligne = "" + (Integer.valueOf(EditStation.textHeureLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
-//					debut = EditStation.textHeureDebut.getText();
-//					fin = EditStation.textHeureFin.getText();
-//								
-//					frag.setFirstLine(ligne);
-//					frag.setLastLine(ligne);
-//					frag.setFirstCharOffset(debut);
-//					frag.setLastCharOffset(fin);
-//					
-//					//format heure
-//					DateTimeFormat timeFormat = (DateTimeFormat)propertyModel.getFormat();
-//					try {
-//						timeFormat.setFormatString(EditStation.comboHeure.getText());
-//					} catch (ParseException e) {
-//					
-//						e.printStackTrace();
-//					}	
-//					
-//				}
-		//} else {
-			//pas de série tempo donc position de l'heure dans le fichier
+}	
+
 	
-		//	
+		//HEURE	
 		propertyModel = stationModel.propertiesAt("time");
 		
 		if (EditStation.buttonHeureSaisie.getSelection()){
 			//saisie heure manuelle
 			propertyModel.setUserProvided(true);
+			stationModel.getModel().setTime(EditStation.textHeureSaisie.getText());
+			
 		}else{
 			//position heure dans fichier
 		
@@ -605,6 +563,7 @@ public static void initStation(){
 		if (EditStation.buttonDateSaisie.getSelection()){
 			//saisie date manuelle
 			propertyModel.setUserProvided(true);
+			stationModel.getModel().setDate(EditStation.textDateSaisie.getText());
 			
 		}else{
 	
