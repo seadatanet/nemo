@@ -77,6 +77,22 @@ public class EditSurvey {
 			//de base les sections sont refermées
 			expand = 0;
 			
+			if (loaded ==0){
+			
+			//INFOS sur les fichiers utilisés
+			if (ViewFile.radioFichier.getSelection()){
+				//fichier campagne
+				Utils.messageInfoAppend("Fichier de campagne");
+			}else{
+				//dossier campagne
+				Utils.messageInfoAppend("Dossier de campagne : "+ViewFile.nomRepertoire);
+			}
+			
+			if (ViewFile.checkBoxTempo.getSelection()){
+				Utils.messageInfoAppend("Série temporelle");
+			}
+			
+			}
 			loaded = 1;
 			
 			/* recreer un formEdition sur le toolkit principal

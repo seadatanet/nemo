@@ -969,7 +969,8 @@ public static void ouvertureModele(InputModel input){
 	//reset de l'étape de conversion
 	ViewFile.etape = 0;
 	
-	//lancement du processus sur le premier onglet
+	//lancement du processus sur le premier onglet et effacement préventif si besoin
+	
 	fillDesc();
 		
 }
@@ -1699,6 +1700,33 @@ public static void fillData(){
 	 //refresh de la table
 	 //initTable();
 	 TableData.creationTable();
+	 
+	 if (ViewFile.checkBoxTempo.getSelection()){
+		 //série tempo
+		 if( stationModel_modele.getTimestampModel().isComputed()){
+			 //saisie manuelle
+			 EditData.buttonFreqEchant.setSelection(true);
+			 EditData.buttonLigneDonnees.setSelection(false);
+		 }else{
+			 //position heure/date dans fichier
+			 EditData.buttonFreqEchant.setSelection(false);
+			 EditData.buttonLigneDonnees.setSelection(true);
+			
+			 EditData.textTotalDebut.setText(""+stationModel_modele.getTimestampModel().getDateTimeFragment().getFirstCharOffset());
+			 EditData.textTotalFin.setText(""+stationModel_modele.getTimestampModel().getDateTimeFragment().getLastCharOffset());
+			
+		 }
+		
+		 
+		 
+		 
+		 
+		 
+		 
+	 }
+	 
+	 
+	 
 	
 	
 }

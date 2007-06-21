@@ -86,6 +86,8 @@ public void run(){
 		DataModel.ouvertureModele(inputModel);
 		DataModel.ouverture = true;
 		
+		ViewLog.styledTextLogInfos.append("\n\nModèle chargé : "+nomModele);
+		
 		
 	}
 	

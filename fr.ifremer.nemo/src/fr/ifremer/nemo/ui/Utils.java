@@ -124,6 +124,7 @@ public class Utils {
 		ViewLog.styledTextLogErreurs.setText("Chargement du fichier réussi.");
 
 		// début d'infos du fichier
+		
 		ViewLog.styledTextLogInfos.setText("Localisation du fichier : " + fich);
 		ViewLog.styledTextLogInfos.append("\nNombre de lignes : " + nbreLignes);
 
@@ -813,8 +814,9 @@ public class Utils {
 		//d'un nouveau modèle
 	
 	//si au moins une des sections d'un onglet est créée alors on peut les effacer toutes
-//		if (EditDesc.sectionEnteteFichier != null){
+		if (EditDesc.sectionEnteteFichier != null){
 //			//effacement boutons
+			EditDesc.razEdition();
 //			EditDesc.buttonExpandDesc.dispose();
 //			EditDesc.buttonExpandDesc2.dispose();
 //			EditDesc.buttonRAZ.dispose();
@@ -829,7 +831,7 @@ public class Utils {
 //			
 //			//refresh global
 //			ViewEdit.formEdition.reflow(true);
-//		}
+		}
 		
 		
 		
@@ -910,7 +912,17 @@ public class Utils {
 		ViewFile.tabItem9.setText("Conversion");
 		
 		
+		ViewEdit.formEdition.reflow(true);
+		
 	}
+	
+	public static void messageInfo(String message){
+		ViewLog.styledTextLogInfos.setText(message);
+	} 
+	
+public static void messageInfoAppend(String message){
+		ViewLog.styledTextLogInfos.append("\n"+message);
+	} 
 	
 	
 }

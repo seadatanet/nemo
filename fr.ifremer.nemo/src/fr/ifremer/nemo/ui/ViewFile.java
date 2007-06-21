@@ -54,9 +54,9 @@ public class ViewFile extends ViewPart {
 
 	public static Button checkBoxTempo, medatlas, odv = null;
 
-	private Button radioFichier = null;
+	public static Button radioFichier = null;
 
-	private Button radioDossier = null;
+	public static Button radioDossier = null;
 
 	private Button buttonParcourir = null;
 	
@@ -366,6 +366,7 @@ public class ViewFile extends ViewPart {
 					
 							
 //							affichage etape0 dans formulaire d'édition de paramètres
+							Utils.razGlobal();
 							EditDesc.affichageEdition();		
 					
 					}
