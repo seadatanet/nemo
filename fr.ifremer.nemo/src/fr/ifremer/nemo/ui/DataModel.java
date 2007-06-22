@@ -848,6 +848,8 @@ if (ViewFile.checkBoxTempo.getSelection()){
 	if (EditStation.buttonLatFinSaisie.getSelection()){
 		propertyModel.setUserProvided(true);
 		//valeur manuelle
+	
+		if (!EditStation.textLatFin.getText().matches("")){
 		
 		//conversion en double
 		try {
@@ -856,6 +858,7 @@ if (ViewFile.checkBoxTempo.getSelection()){
 		} catch (ParseException e) {
 			
 			e.printStackTrace();
+		}
 		}
 	}else{
 		//position dans fichier
@@ -893,15 +896,16 @@ if (ViewFile.checkBoxTempo.getSelection()){
 		propertyModel.setUserProvided(true);
 		//valeur manuelle
 //		conversion en double
+		if (!EditStation.textLongFin.getText().matches("")){
 		try {
-			double longitudeFinDouble = ((Number)longitudeFormatFin.parseObject(EditStation.textLatFin.getText())).doubleValue();
+			double longitudeFinDouble = ((Number)longitudeFormatFin.parseObject(EditStation.textLongFin.getText())).doubleValue();
 			timeSeriesInformation.setEndLongitude(longitudeFinDouble);
 		} catch (ParseException e) {
 			
 			e.printStackTrace();
 		}
 		
-		
+		}
 		
 		
 	}else{
@@ -1571,8 +1575,12 @@ public static void fillStation(){
 				
 		
 //latitude
+		
+		
+		
 		propertyModel = stationModel_modele.propertiesAt("latitude");
 		LatitudeFormat latitudeFormat = (LatitudeFormat)propertyModel.getFormat();
+		String formatLat = latitudeFormat.getFormatString();
 		
 		EditStation.comboLatitude.add(latitudeFormat.getFormatString(), 0);
 		EditStation.comboLatitude.select(0);
@@ -1615,6 +1623,7 @@ public static void fillStation(){
 // longitude 
 		propertyModel = stationModel_modele.propertiesAt("longitude");
 		LongitudeFormat longitudeFormat = (LongitudeFormat)propertyModel.getFormat();
+		String formatLong = longitudeFormat.getFormatString();
 		
 		EditStation.comboLongitude.add(longitudeFormat.getFormatString(), 0);
 		EditStation.comboLongitude.select(0);
@@ -1724,7 +1733,7 @@ public static void fillStation(){
 				Formatter formatter = new Formatter();
 				
 				try {
-					EditStation.textLatFin.setText(formatter.formatLatitude(latitudeFormat.getFormatString(), stationModel_modele.getTimeSeriesInformation().getEndLatitude()));
+					EditStation.textLatFin.setText(formatter.formatLatitude(formatLat, stationModel_modele.getTimeSeriesInformation().getEndLatitude()));
 				} catch (ParseException e) {
 
 					e.printStackTrace();
@@ -1757,7 +1766,7 @@ public static void fillStation(){
 				Formatter formatter = new Formatter();
 				
 				try {
-					EditStation.textLongFin.setText(formatter.formatLatitude(longitudeFormat.getFormatString(), stationModel_modele.getTimeSeriesInformation().getEndLongitude()));
+					EditStation.textLongFin.setText(formatter.formatLatitude(formatLong, stationModel_modele.getTimeSeriesInformation().getEndLongitude()));
 				} catch (ParseException e) {
 
 					e.printStackTrace();
