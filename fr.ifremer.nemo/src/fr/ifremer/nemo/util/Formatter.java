@@ -20,7 +20,7 @@ public  class Formatter implements Cloneable {
     /**
      *
      */
-  protected Formatter ( ) {
+  public Formatter ( ) {
     
   }
 

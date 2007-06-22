@@ -313,6 +313,7 @@ public class Etape {
 		} catch (ParseException e) {
 			ok = false;
 			Utils.messageErreurAppend("\nErreur de format Latitude");
+			System.out.println("format latitude>"+EditStation.comboLatitude.getText()+"< latitude entrée >"+EditStation.textLatitude.getText()+"<");
 			e.printStackTrace();
 					}
 		} else{

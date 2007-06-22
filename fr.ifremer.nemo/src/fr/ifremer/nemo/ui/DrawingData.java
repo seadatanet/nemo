@@ -219,6 +219,8 @@ public static void sectionTotal(String nomSection, String description, Section s
 					  
 						// une fois les éléments initialisés, on les passe en static pour y accéder à 
 						//partir des listeners
+						ligne.setText("1"); //valeur bidon pour la ligne
+						
 						lign = ligne; 
 						debu = debut;
 						fi = fin;

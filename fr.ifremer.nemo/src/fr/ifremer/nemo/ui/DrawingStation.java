@@ -1088,9 +1088,7 @@ public static void sectionHeure(String nomSection, String description, Section s
 				  EditStation.buttonHeureSaisie.setText("Saisie manuelle");
 				  EditStation.buttonHeureSaisie.setSelection(true);
 				  				  
-//				  Group groupeSaisie = new Group(sectionClient, SWT.NONE);
-//				  groupeSaisie.setText("");
-//				  groupeSaisie.setLayout(new GridLayout());
+
 				  EditStation.textHeureSaisie.setParent(sectionClient);
 				  EditStation.textHeureSaisie.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));	
 				  
@@ -1108,21 +1106,21 @@ public static void sectionHeure(String nomSection, String description, Section s
 				  Label label1 = new Label(groupe, SWT.NULL);
 				  label1.setText("Ligne");
 				  ligne.setParent(groupe);
-				  //ligne = new Text(groupe, SWT.BORDER);
+				  
 				  ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 			
 				  //debut
 				  Label label2 = new Label(groupe, SWT.NULL);
 				  label2.setText("Début");
 				  debut.setParent(groupe);
-				  //= new Text(groupe, SWT.BORDER);
+				
 				  debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 				  
 				  //fin
 				  Label label3 = new Label(groupe, SWT.NULL);
 				  label3.setText("Fin");
 				  fin.setParent(groupe);
-				  //= new Text(groupe, SWT.BORDER);
+				
 				  fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 				  
 				  
@@ -1574,7 +1572,7 @@ public static void sectionManuelLigneDebutFinInjectLatLongComboFormat(String nom
 	final Button inject;
 	
 	nomSec = nomSection;
-//	manu = manuel;
+manu = manuel;
 
 
 	section.setParent(EditDesc.formEdition);
@@ -1615,13 +1613,13 @@ public static void sectionManuelLigneDebutFinInjectLatLongComboFormat(String nom
 				  //Button saisieManuelle = ViewEdit.toolkitEdition.createButton(sectionClient, "Saisie manuelle", SWT.RADIO);
 				
 				
-				  manuel = new Text(sectionClient, SWT.BORDER);
+				  //manuel = new Text(sectionClient, SWT.BORDER);
 				  
-				  //manuel.setParent(sectionClient);
+				  manuel.setParent(sectionClient);
 				  manuel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 				  
 				
-				  manu = manuel;
+				  
 				  
 				 
 				  
@@ -1804,9 +1802,9 @@ public static void sectionManuelLigneDebutFinInjectLatLongFin(String nomSection,
 				  //Button saisieManuelle = ViewEdit.toolkitEdition.createButton(sectionClient, "Saisie manuelle", SWT.RADIO);
 				
 				
-				  manuel = new Text(sectionClient, SWT.BORDER);
 				  
-				  //manuel.setParent(sectionClient);
+				  
+				  manuel.setParent(sectionClient);
 				  manuel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 				  
 				

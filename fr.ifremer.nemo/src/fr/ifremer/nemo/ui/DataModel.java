@@ -27,6 +27,7 @@ import fr.ifremer.nemo.input.TimeSeriesModel;
 import fr.ifremer.nemo.ws.WSDataType;
 import fr.ifremer.nemo.ws.WSParameter;
 import fr.ifremer.nemo.util.DateTimeFormat;
+import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.LatitudeFormat;
 import fr.ifremer.nemo.util.LongitudeFormat;
 
@@ -110,8 +111,34 @@ public static void initDesc(){
 		
 		if (!ViewFile.textTempoHeureRef.getText().matches("")){
 		inputModel.setRefDateBased(true);
-		inputModel.setRefDate(ViewFile.textTempoDateRef.getText());
-		inputModel.setRefTime(ViewFile.textTempoHeureRef.getText());
+		
+		//conversion en LONG avant injection dans dataModel
+		//DATE REF
+		DateTimeFormat dateFormat;
+		Long dateLong=null, timeLong=null;
+		try {
+			dateFormat = new DateTimeFormat();
+			dateFormat.setFormatString(ViewFile.comboTempoDate.getText());
+			dateLong = (Long)dateFormat.parseObject(ViewFile.textTempoDateRef.getText());
+		} catch (ParseException e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		}
+						
+		inputModel.setRefDate(dateLong);
+		
+		
+		//HEURE REF
+		try {
+			DateTimeFormat timeFormat = new DateTimeFormat();
+			timeFormat.setFormatString(ViewFile.comboTempoHeure.getText());
+			timeLong = (Long)timeFormat.parseObject(ViewFile.textTempoHeureRef.getText());
+		} catch (ParseException e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		}
+		
+		inputModel.setRefTime(timeLong);
 		} else {
 			//pas d'heure de ref
 			inputModel.setRefDateBased(false);
@@ -279,7 +306,6 @@ public static void initStation(){
 	String ligne, debut, fin;
 	HeaderFragment frag;
 	
-	
 	station = stationModel.getModel();
 	
 	if (EditStation.buttonRefStationIncremente.getSelection()){
@@ -293,8 +319,7 @@ public static void initStation(){
 		
 		//le propertymodel de la ref est en accès direct
 		PropertyModel propertyModel = stationModel.getReferenceProperty();
-		 frag = propertyModel.getFragment();
-		
+		frag = propertyModel.getFragment();
 		
 		ligne = "" + (Integer.valueOf(EditStation.textRefStationLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
 		debut = EditStation.textRefStationDebut.getText();
@@ -497,7 +522,6 @@ if (ViewFile.checkBoxTempo.getSelection()){
 					
 					 frag = propertyModel.getFragment();
 
-					
 					ligne = "" + (Integer.valueOf(EditStation.textFreqEchantLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
 					debut = EditStation.textFreqEchantDebut.getText();
 					fin = EditStation.textFreqEchantFin.getText();
@@ -512,8 +536,6 @@ if (ViewFile.checkBoxTempo.getSelection()){
 					//formule de conversion
 					stationModel.getTimeSeriesModel().setSampleRateConversion(EditStation.textFreqEchantConv.getText());
 					}
-				
-			
 }	
 
 	
@@ -522,20 +544,27 @@ if (ViewFile.checkBoxTempo.getSelection()){
 		
 		if (EditStation.buttonHeureSaisie.getSelection()){
 			//saisie heure manuelle
+			
 			propertyModel.setUserProvided(true);
-			stationModel.getModel().setTime(EditStation.textHeureSaisie.getText());
+			
+			try {
+				DateTimeFormat timeFormat = (DateTimeFormat)propertyModel.getFormat();
+				timeFormat.setFormatString(EditStation.comboHeure.getText());
+				Long timeLong = (Long)timeFormat.parseObject(EditStation.textHeureSaisie.getText());
+				stationModel.getModel().setTime(timeLong);
+			} catch (ParseException e) {
+				
+				e.printStackTrace();
+			}
 			
 		}else{
 			//position heure dans fichier
 		
 		propertyModel.setUserProvided(false); 
-	
-		//position dans fichier
 		
 		frag = propertyModel.getFragment();
 		//frag.isSingleLine();
-		
-	
+			
 		ligne = "" + (Integer.valueOf(EditStation.textHeureLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
 		debut = EditStation.textHeureDebut.getText();
 		fin = EditStation.textHeureFin.getText();
@@ -563,13 +592,27 @@ if (ViewFile.checkBoxTempo.getSelection()){
 		if (EditStation.buttonDateSaisie.getSelection()){
 			//saisie date manuelle
 			propertyModel.setUserProvided(true);
-			stationModel.getModel().setDate(EditStation.textDateSaisie.getText());
+			stationModel.getReferenceProperty();
+			
+			
+			System.out.println("############################# date = "+EditStation.textDateSaisie.getText());
+			DateTimeFormat dateFormat = (DateTimeFormat)propertyModel.getFormat();
+			try {
+				dateFormat.setFormatString(EditStation.comboDate.getText());
+				Long dateLong = (Long)dateFormat.parseObject(EditStation.textDateSaisie.getText());
+				stationModel.getModel().setDate(dateLong);
+				
+			} catch (ParseException e) {
+				// 
+				e.printStackTrace();
+			}
+			
 			
 		}else{
 	
 		
 		//pas de série tempo donc position dans fichier
-		propertyModel = stationModel.propertiesAt("date");
+		
 		propertyModel.setUserProvided(false);
 
 		// position dans fichier
@@ -597,14 +640,33 @@ if (ViewFile.checkBoxTempo.getSelection()){
 			e.printStackTrace();
 		}
 		}	
-//		} //fin if serie tempo
+
 		
 //latitude
 		propertyModel = stationModel.propertiesAt("latitude");
+		
+//		format de la latitude à mettre dans le datamodel
+		LatitudeFormat latitudeFormat = (LatitudeFormat)propertyModel.getFormat();
+		try {
+			latitudeFormat.setFormatString(EditStation.comboLatitude.getText());
+		} catch (ParseException e) {
+			// 
+			e.printStackTrace();
+		}
+		
+				
 		if (EditStation.buttonLatSaisie.getSelection()){
 			//saisie manuelle
-			station.setLatitude(EditStation.textLatitude.getText());
-			propertyModel.setUserProvided(true);
+			
+			//conversion en DOUBLE avant injection DataModel
+			try {
+				double latitudeDouble = ((Number)latitudeFormat.parseObject(EditStation.textLatitude.getText())).doubleValue();
+				station.setLatitude(latitudeDouble);
+				propertyModel.setUserProvided(true);
+			} catch (ParseException e) {
+				// TODO Bloc catch auto-généré
+				e.printStackTrace();
+			}
 			
 		} else {
 			propertyModel.setUserProvided(false);
@@ -623,22 +685,33 @@ if (ViewFile.checkBoxTempo.getSelection()){
 			
 		}
 		
-	//format de la latitude à mettre dans le datamodel
-	LatitudeFormat latitudeFormat = (LatitudeFormat)propertyModel.getFormat();
+	
+	
+//longitude
+	
+	propertyModel = stationModel.propertiesAt("longitude");
+	
+//	format de la longitude à mettre dans le datamodel
+	LongitudeFormat longitudeFormat = (LongitudeFormat)propertyModel.getFormat();
 	try {
-		latitudeFormat.setFormatString(EditStation.comboLatitude.getText());
+		longitudeFormat.setFormatString(EditStation.comboLongitude.getText());
 	} catch (ParseException e) {
 		// 
 		e.printStackTrace();
 	}
 	
-//longitude
-	
-	propertyModel = stationModel.propertiesAt("longitude");
 	if (EditStation.buttonLongSaisie.getSelection()){
 		//saisie manuelle
-		station.setLongitude(EditStation.textLongitude.getText());
-		propertyModel.setUserProvided(true);
+		
+		//conversion en double
+		try {
+			double longitudeDouble = ((Number)longitudeFormat.parseObject(EditStation.textLongitude.getText())).doubleValue();
+			station.setLongitude(longitudeDouble);
+			propertyModel.setUserProvided(true);
+		} catch (ParseException e) {
+			
+			e.printStackTrace();
+		}
 		
 	} else {
 		propertyModel.setUserProvided(false);
@@ -657,14 +730,7 @@ if (ViewFile.checkBoxTempo.getSelection()){
 		
 	}
 	
-	//format de la latitude à mettre dans le datamodel
-	LongitudeFormat longitudeFormat = (LongitudeFormat)propertyModel.getFormat();
-	try {
-		longitudeFormat.setFormatString(EditStation.comboLongitude.getText());
-	} catch (ParseException e) {
-		// 
-		e.printStackTrace();
-	}
+	
 	
 //profondeur
 	propertyModel = stationModel.propertiesAt("bottomDepth");
@@ -771,15 +837,34 @@ if (ViewFile.checkBoxTempo.getSelection()){
 	
 	//LATITUDE DE FIN
 	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("endLatitude");
+
+	//	format de la latitude de fin à mettre dans le datamodel
+	LatitudeFormat latitudeFormatFin = (LatitudeFormat)propertyModel.getFormat();
+	try {
+		latitudeFormatFin.setFormatString(EditStation.comboLatitude.getText());
+	} catch (ParseException e) {
+		// 
+		e.printStackTrace();
+	}
+	
 	
 	if (EditStation.buttonLatFinSaisie.getSelection()){
 		propertyModel.setUserProvided(true);
 		//valeur manuelle
-		timeSeriesInformation.setEndLatitude(EditStation.textLatFin.getText());
+		
+		//conversion en double
+		try {
+			double latitudeFinDouble = ((Number)latitudeFormatFin.parseObject(EditStation.textLatFin.getText())).doubleValue();
+			timeSeriesInformation.setEndLatitude(latitudeFinDouble);
+		} catch (ParseException e) {
+			
+			e.printStackTrace();
+		}
 	}else{
 		//position dans fichier
 		frag = propertyModel.getFragment();
 		propertyModel.setUserProvided(false);
+		
 		
 		
 		ligne = "" + (Integer.valueOf(EditStation.textLatFinLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
@@ -792,14 +877,36 @@ if (ViewFile.checkBoxTempo.getSelection()){
 		frag.setLastCharOffset(fin);
 	}
 	
+
 	
 	//LONGITUDE DE FIN
 	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("endLongitude");
 	
+	
+//	format de la longitude à mettre dans le datamodel
+	LongitudeFormat longitudeFormatFin = (LongitudeFormat)propertyModel.getFormat();
+	try {
+		longitudeFormatFin.setFormatString(EditStation.comboLongitude.getText());
+	} catch (ParseException e) {
+		// 
+		e.printStackTrace();
+	}
+		
 	if (EditStation.buttonLongFinSaisie.getSelection()){
 		propertyModel.setUserProvided(true);
 		//valeur manuelle
-		timeSeriesInformation.setEndLongitude(EditStation.textLatFin.getText());
+//		conversion en double
+		try {
+			double longitudeFinDouble = ((Number)longitudeFormatFin.parseObject(EditStation.textLatFin.getText())).doubleValue();
+			timeSeriesInformation.setEndLongitude(longitudeFinDouble);
+		} catch (ParseException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+		
+		
 	}else{
 		//position dans fichier
 		frag = propertyModel.getFragment();
@@ -815,6 +922,8 @@ if (ViewFile.checkBoxTempo.getSelection()){
 		frag.setFirstCharOffset(debut);
 		frag.setLastCharOffset(fin);
 	}
+	
+	
 	
 	
 	//PROFONDEUR CAPTEUR
@@ -919,7 +1028,8 @@ public static void initData(){
 	
 	}
 	
-	
+
+	if(ViewFile.checkBoxTempo.getSelection()){
 	//gestion des séries temporelles
 	if (EditData.buttonFreqEchant.getSelection()){
 		//calcul à partir fréquence échantillonnage
@@ -940,7 +1050,7 @@ public static void initData(){
 		
 		
 	}
-	
+	}	
 	
 	
 	
@@ -1002,8 +1112,34 @@ public static void fillDesc(){
 		if (inputModel_modele.isRefDateBased()){
 			//date de ref / heure de ref
 			
-			ViewFile.textTempoDateRef.setText(""+inputModel_modele.getRefDate());
-			ViewFile.textTempoHeureRef.setText(""+inputModel_modele.getRefTime());
+			//reconversion de LONG vers format normal
+			Formatter formatter = new Formatter();
+			
+			try {
+				ViewFile.textTempoDateRef.setText(formatter.formatDateTime("dd/MM/yyyy", inputModel_modele.getRefDate()));
+			} catch (ParseException e) {
+				
+				e.printStackTrace();
+			}
+			//le format de la comboList correspondant est en 0
+			ViewFile.comboTempoDate.select(0);
+			
+			
+			
+			
+//			reconversion de LONG vers format normal
+			formatter = new Formatter();
+			
+			try {
+				ViewFile.textTempoHeureRef.setText(formatter.formatDateTime("hh24:mm", inputModel_modele.getRefTime()));
+			} catch (ParseException e) {
+				
+				e.printStackTrace();
+			}
+			//le format de la comboList correspondant est en 0
+			ViewFile.comboTempoHeure.select(0);
+			
+			
 			
 			
 		}else{
@@ -1293,27 +1429,6 @@ public static void fillStation(){
 		
 		
 		HeaderFragment frag;
-		
-		
-//		if (ViewFile.checkBoxTempo.getSelection()){
-//			//série tempo
-//			if (!ViewFile.textTempoHeureRef.getText().matches("")){
-//				//heure/date de référence (à charger du modèle ?)
-//				EditStation.buttonHeureReference.setSelection(true);
-//				EditStation.buttonHeureReferencePos.setSelection(false);
-//				EditStation.textHeureLigne.setText("");
-//				EditStation.textHeureDebut.setText("");
-//				EditStation.textHeureFin.setText("");
-//				EditStation.textHeureLigne.setEnabled(false);
-//				EditStation.textHeureDebut.setEnabled(false);
-//				EditStation.textHeureFin.setEnabled(false);
-//				
-//				
-//			}else{
-//				//on charge la date et heure du modèle
-//			}
-//		}else {
-		
 	
 		//frequence echantillonnage
 		if (ViewFile.checkBoxTempo.getSelection()){
@@ -1356,10 +1471,23 @@ public static void fillStation(){
 		//HEURE
 		propertyModel = stationModel_modele.propertiesAt("time");
 		
+		DateTimeFormat timeFormat = (DateTimeFormat)propertyModel.getFormat();
+		EditStation.comboHeure.add(timeFormat.getFormatString(),0);
+		EditStation.comboHeure.select(0);
 		
 		if (propertyModel.isUserProvided()){
 			//saisie manuelle
-			EditStation.textHeureSaisie.setText(""+station_modele.getTime());
+			
+			//reconversion de LONG vers format normal
+			Formatter formatter = new Formatter();
+			try {
+				EditStation.textHeureSaisie.setText(formatter.formatDateTime(timeFormat.getFormatString(), station_modele.getTime()));
+			} catch (ParseException e) {
+				
+				e.printStackTrace();
+			}
+			
+			
 			
 			//desactivation du champ manuel
 			EditStation.buttonHeureSaisie.setSelection(true);
@@ -1388,9 +1516,7 @@ public static void fillStation(){
 			EditStation.textHeureFin.setText(""+fin);
 		}
 		
-		DateTimeFormat dateFormat = (DateTimeFormat)propertyModel.getFormat();
-		EditStation.comboHeure.add(dateFormat.getFormatString(),0);
-		EditStation.comboHeure.select(0);
+		
 		
 		
 	
@@ -1398,9 +1524,21 @@ public static void fillStation(){
 //		date en LONG
 		propertyModel = stationModel_modele.propertiesAt("date");
 		
+		DateTimeFormat dateFormat = (DateTimeFormat)propertyModel.getFormat();
+		
+		EditStation.comboDate.add(dateFormat.getFormatString(),0);
+		EditStation.comboDate.select(0);
+		
 		if (propertyModel.isUserProvided()){
 			//saisie manuelle
-			EditStation.textDateSaisie.setText(""+station_modele.getDate());
+			
+			Formatter formatter = new Formatter();
+			try {
+				EditStation.textDateSaisie.setText(formatter.formatDateTime(dateFormat.getFormatString(), station_modele.getDate()));
+			} catch (ParseException e) {
+				
+				e.printStackTrace();
+			}
 			
 //			desactivation du champ manuel
 			EditStation.buttonDateSaisie.setSelection(true);
@@ -1432,10 +1570,7 @@ public static void fillStation(){
 		}
 		
 		
-		dateFormat = (DateTimeFormat)propertyModel.getFormat();
 		
-		EditStation.comboDate.add(dateFormat.getFormatString(),0);
-		EditStation.comboDate.select(0);
 				
 		
 //latitude
@@ -1447,8 +1582,19 @@ public static void fillStation(){
 		
 		if (propertyModel.isUserProvided()){
 			//saisie manuelle latitude
+			
+			//reconversion double vers format normal
+			Formatter formatter = new Formatter();
+			
+			try {
+				EditStation.textLatitude.setText(formatter.formatLatitude(latitudeFormat.getFormatString(), station_modele.getLatitude()));
+			} catch (ParseException e) {
+
+				e.printStackTrace();
+			}
+			
 			EditStation.buttonLatSaisie.setSelection(true);
-			EditStation.textLatitude.setText(""+station_modele.getLatitude());
+
 			
 			
 		}else{
@@ -1479,7 +1625,16 @@ public static void fillStation(){
 		if (propertyModel.isUserProvided()){
 			//saisie manuelle latitude
 			EditStation.buttonLongSaisie.setSelection(true);
-			EditStation.textLongitude.setText(""+station_modele.getLongitude());
+			
+			//reconversion double vers format normal
+			Formatter formatter = new Formatter();
+			
+			try {
+				EditStation.textLongitude.setText(formatter.formatLatitude(longitudeFormat.getFormatString(), station_modele.getLongitude()));
+			} catch (ParseException e) {
+
+				e.printStackTrace();
+			}
 			
 			
 		}else{
@@ -1565,7 +1720,18 @@ public static void fillStation(){
 			propertyModel = stationModel_modele.getTimeSeriesModel().propertiesAt("endLatitude");
 			if (propertyModel.isUserProvided()){
 				//saisie manuelle
-				EditStation.textLatFin.setText(""+stationModel_modele.getTimeSeriesInformation().getEndLatitude());
+				
+				
+//				reconversion double vers format normal
+				latitudeFormat = (LatitudeFormat)propertyModel.getFormat();
+				Formatter formatter = new Formatter();
+				
+				try {
+					EditStation.textLatFin.setText(formatter.formatLatitude(latitudeFormat.getFormatString(), stationModel_modele.getTimeSeriesInformation().getEndLatitude()));
+				} catch (ParseException e) {
+
+					e.printStackTrace();
+				}
 				
 			}else{
 				//position dans fichier
@@ -1588,7 +1754,17 @@ public static void fillStation(){
 			propertyModel = stationModel_modele.getTimeSeriesModel().propertiesAt("endLongitude");
 			if (propertyModel.isUserProvided()){
 				//saisie manuelle
-				EditStation.textLongFin.setText(""+stationModel_modele.getTimeSeriesInformation().getEndLongitude());
+				
+//				reconversion double vers format normal
+				longitudeFormat = (LongitudeFormat)propertyModel.getFormat();
+				Formatter formatter = new Formatter();
+				
+				try {
+					EditStation.textLongFin.setText(formatter.formatLatitude(longitudeFormat.getFormatString(), stationModel_modele.getTimeSeriesInformation().getEndLongitude()));
+				} catch (ParseException e) {
+
+					e.printStackTrace();
+				}
 				
 			}else{
 				//position dans fichier
@@ -1659,6 +1835,39 @@ public static void fillStation(){
 	
 }
 
+public static void main ( String[] args) {
+    try {
+/*
+    	//	long baseTime = System.currentTimeMillis();
+    	long baseTime = 0;
+    	System.out.println("TimeZone: "+TimeZone.getDefault().getID());
+    	DateTimeFormat format = new DateTimeFormat( args[0], baseTime );
+    	Date value = new Date(((Long)format.parseObject(args[2])).longValue());
+    	System.out.println(value.getTime());
+    	DateTimeFormat outFormat = new DateTimeFormat( args[1] );
+    	System.out.println("base: "+outFormat.format(baseTime));
+    	System.out.println("out: "+outFormat.format(value.getTime()));
+*/
+    	DateTimeFormat format = new DateTimeFormat("MMM dd yyyy");
+    	format.toString();
+    	Long dateLong = (Long)format.parseObject("JUN 02 2007");
+    	 	
+    	
+    	Formatter formatter = new Formatter();
+    	System.out.println(">>>>>>"+formatter.formatDateTime("MM/dd/yyyy", dateLong));
+   
+    	
+    	
+    	//System.out.println(new Date( dateLong.longValue()));
+    } catch (Exception e) {
+    	e.printStackTrace();
+    	System.out.println(">>>>"+e.getMessage());
+    }
+  }
+
+
+
+
 public static void fillData(){
 	///////////////////////////////////
 	
@@ -1712,6 +1921,9 @@ public static void fillData(){
 			 EditData.buttonFreqEchant.setSelection(false);
 			 EditData.buttonLigneDonnees.setSelection(true);
 			
+			 EditData.comboTotal.add(stationModel_modele.getTimestampModel().getFormat().getFormatString(),0);
+			 EditData.comboTotal.select(0);
+			 
 			 EditData.textTotalDebut.setText(""+stationModel_modele.getTimestampModel().getDateTimeFragment().getFirstCharOffset());
 			 EditData.textTotalFin.setText(""+stationModel_modele.getTimestampModel().getDateTimeFragment().getLastCharOffset());
 			
