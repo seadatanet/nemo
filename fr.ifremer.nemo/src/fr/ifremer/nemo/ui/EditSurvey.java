@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import javax.xml.rpc.ServiceException;
@@ -35,6 +36,7 @@ import org.xml.sax.SAXException;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.DataType;
 import fr.ifremer.nemo.domain.Survey;
+import fr.ifremer.nemo.util.Formatter;
 
 
 
@@ -536,8 +538,25 @@ public static void chargementXML(File fichier){
 			EditSurvey.textNomNavire.setText(survey.getShipName());
 			
 			//Localisation
-			EditSurvey.textDateDebut.setText(""+survey.getStartDate());
-			EditSurvey.textDateFin.setText(""+survey.getEndDate());
+			Formatter formatter = new Formatter();
+			
+			try {
+				EditSurvey.textDateDebut.setText(formatter.formatDateTime("dd/MM/yyyy", survey.getStartDate()));
+			} catch (ParseException e) {
+				
+				e.printStackTrace();
+			}
+			
+			formatter = new Formatter();
+			
+			try {
+				EditSurvey.textDateFin.setText(formatter.formatDateTime("dd/MM/yyyy", survey.getEndDate()));
+			} catch (ParseException e) {
+				
+				e.printStackTrace();
+			}
+			//EditSurvey.textDateDebut.setText(""+survey.getStartDate());
+			//EditSurvey.textDateFin.setText(""+survey.getEndDate());
 			EditSurvey.textRegion.setText(survey.getRegionName());
 			
 			//Source de données

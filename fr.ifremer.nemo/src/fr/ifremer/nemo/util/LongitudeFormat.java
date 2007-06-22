@@ -309,6 +309,7 @@ public  class LongitudeFormat extends ExternalizableFormat implements Cloneable 
     					break;
     				}
     				case CHARS: {
+    					System.out.println("LongitudeFormat/parseObject() : Source ==>"+source);
     					String tmp = source.substring( index, index+_elements[i]._element.length());
     					if (!tmp.equals(_elements[i]._element)) {
     						throw new ParseException( "Charactere invalide, chaine attendue: \""+_elements[i]._element+"\""+" lue: \""+tmp+"\"", index);

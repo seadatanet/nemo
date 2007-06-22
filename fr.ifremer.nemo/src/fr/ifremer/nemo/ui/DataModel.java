@@ -1231,8 +1231,26 @@ public static void fillSurvey(){
 	EditSurvey.textNomNavire.setText(survey.getShipName());
 	
 	//Localisation
-	EditSurvey.textDateDebut.setText(""+survey.getStartDate());
-	EditSurvey.textDateFin.setText(""+survey.getEndDate());
+	
+	//DATES
+	Formatter formatter = new Formatter();
+	
+	try {
+		EditSurvey.textDateDebut.setText(formatter.formatDateTime("dd/MM/yyyy", survey.getStartDate()));
+	} catch (ParseException e) {
+		
+		e.printStackTrace();
+	}
+	
+	formatter = new Formatter();
+	
+	try {
+		EditSurvey.textDateFin.setText(formatter.formatDateTime("dd/MM/yyyy", survey.getEndDate()));
+	} catch (ParseException e) {
+		
+		e.printStackTrace();
+	}
+
 	EditSurvey.textRegion.setText(survey.getRegionName());
 	
 	//Source de données
@@ -1240,7 +1258,6 @@ public static void fillSurvey(){
 	EditSurvey.textLabo.setText(survey.getLaboratories());
 	EditSurvey.textChef.setText(survey.getChiefScientist());
 	EditSurvey.textProjet.setText(survey.getProjectName());
-	
 	
 	//Centre d'archivage
 	EditSurvey.textCentre.setText(survey.getDataCentre());
@@ -1266,7 +1283,6 @@ public static void fillSurvey(){
 		System.out.println("TypeSurvey " +typeSurvey.getCode()+" ajouté");
 		
 	}
-	
 	
 	EditSurvey.razEdition();
 	EditSurvey.DrawingBack();

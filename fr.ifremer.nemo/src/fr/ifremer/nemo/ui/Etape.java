@@ -365,6 +365,7 @@ public class Etape {
 			//Utils.messageErreurAppend("Erreur de format de longitude : lu ==>" +string+"< attendu ==>" +EditStation.comboLongitude.getText()+ "<");
 			System.out.println("Erreur de format de latitude");
 			e.printStackTrace();
+			ok = false;
 		}
 		
 			
@@ -399,6 +400,7 @@ public class Etape {
 			Utils.messageErreurAppend("Erreur de format de longitude : lu ==>" +string+"< attendu ==>" +EditStation.comboLongitude.getText()+ "<");
 			System.out.println("Erreur de format de longitude");
 			e.printStackTrace();
+			ok = false;
 		}
 		
 		
