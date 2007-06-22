@@ -344,9 +344,11 @@ public  class HeaderFragment
   public String retreive ( String[] a_Header) {
     if (_firstLine == 0) {
     	if (_lastCharOffset == -1) {
-    		return a_Header[0].substring( _firstCharOffset-1 ).trim();
+    		//return a_Header[0].substring( _firstCharOffset-1 ).trim();
+    		return a_Header[0].substring( _firstCharOffset-1 );
     	} else {
-    		return a_Header[0].substring( _firstCharOffset-1, _lastCharOffset-_firstCharOffset+1 ).trim();
+    		//return a_Header[0].substring( _firstCharOffset-1, _lastCharOffset-_firstCharOffset+1 ).trim();
+    		return a_Header[0].substring( _firstCharOffset-1, _lastCharOffset-_firstCharOffset+1 );
     	}
     } else {
     	StringWriter stringWriter = new StringWriter();
@@ -367,12 +369,15 @@ public  class HeaderFragment
     			}
     		}
     		if (end == -1) {
-    			writer.println( a_Header[i].substring( start ).trim());
+    			//writer.println( a_Header[i].substring( start ).trim());
+    			writer.println( a_Header[i].substring( start ));
     		} else {
-    			writer.println( a_Header[i].substring( start, end+1 ).trim());
+    			//writer.println( a_Header[i].substring( start, end+1 ).trim());
+    			writer.println( a_Header[i].substring( start, end+1 ));
     		}
     	}
-    	return stringWriter.toString().trim();
+    	//return stringWriter.toString().trim();
+    	return stringWriter.toString();
     }
   }
 

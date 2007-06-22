@@ -135,7 +135,7 @@ public  class AngleFormatParser extends AbstractParser implements Cloneable {
     	typeTable[i] = XDEFAULT;
     }
     
-    String separators = " \r\n\t";
+    String separators = "\r\n\t";
     for (int i=0; i<separators.length(); i++) {
     	typeTable[(int)separators.charAt(i)] = XDELIMITER;
     }
@@ -169,6 +169,7 @@ public  class AngleFormatParser extends AbstractParser implements Cloneable {
     typeTable[(int)'}'] = XLETTER;
     typeTable[(int)'^'] = XLETTER;
     typeTable[(int)'|'] = XLETTER;
+   // typeTable[(int) ' '] = XLETTER;
     
     typeTable[(int) 'N'] = XHEMISPHERE;
     typeTable[(int) 'D'] = XDEGREE;

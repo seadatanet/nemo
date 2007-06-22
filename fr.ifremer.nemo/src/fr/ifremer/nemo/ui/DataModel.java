@@ -236,6 +236,28 @@ public static void initSurvey(){
 	survey.setShipName(EditSurvey.textNomNavire.getText());
 	
 	//Localisation
+	
+	//DATE DE DEBUT
+	try {
+		DateTimeFormat dateFormat = new DateTimeFormat();
+		dateFormat.setFormatString("dd/MM/yyyy");
+		Long dateLong = (Long)dateFormat.parseObject(EditSurvey.textDateDebut.getText());
+		survey.setStartDate(dateLong);
+	} catch (ParseException e) {
+		
+		e.printStackTrace();
+	}
+	
+	//DATE DE FIN
+	try {
+		DateTimeFormat dateFormat = new DateTimeFormat();
+		dateFormat.setFormatString("dd/MM/yyyy");
+		Long dateLong = (Long)dateFormat.parseObject(EditSurvey.textDateFin.getText());
+		survey.setStartDate(dateLong);
+	} catch (ParseException e) {
+		
+		e.printStackTrace();
+	}
 	survey.setStartDate(EditSurvey.textDateDebut.getText());
 	survey.setEndDate(EditSurvey.textDateFin.getText());
 	survey.setRegionName(EditSurvey.textRegion.getText());

@@ -167,8 +167,8 @@ public class EditSurvey {
 		
 			
 		//section localisation		
-		listeText.add(textDateDebut); listeNoms.add("Date de début");
-		listeText.add(textDateFin); listeNoms.add("Date de fin");
+		listeText.add(textDateDebut); listeNoms.add("Date de début : dd/MM/yyyy");
+		listeText.add(textDateFin); listeNoms.add("Date de fin : dd/MM/yyyy");
 		listeText.add(textRegion); listeNoms.add("Région");
 		Drawing.sectionNlabelsNtext(sectionLocalisation, "Localisation                           ", listeText, listeNoms, "Décrivez la localisation de la campagne");	
 		listeText.clear();

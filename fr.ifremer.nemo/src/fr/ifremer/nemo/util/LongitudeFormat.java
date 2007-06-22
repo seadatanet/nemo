@@ -298,7 +298,7 @@ public  class LongitudeFormat extends ExternalizableFormat implements Cloneable 
     				}
     				case SIGN: {
     					String tmp = source.substring( index, index+1);
-    					if (tmp.equals("+")) {
+    					if ((tmp.equals("+")) || (tmp.equals(" ")) || (tmp.equals(""))) {
     						sign = 1.0;
     					} else if (tmp.equals("-")) {
     						sign = -1.0;

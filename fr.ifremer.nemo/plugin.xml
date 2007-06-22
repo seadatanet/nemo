@@ -44,7 +44,17 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="fr.ifremer.nemo.nemoid"
-            name="NEMO"/>
+            name="NEMO">
+         <property
+               name="startupForegroundColor"
+               value="000000"/>
+         <property
+               name="startupMessageRect"
+               value="0,0,0,0"/>
+         <property
+               name="startupProgressRect"
+               value="0,0,0,0"/>
+      </product>
    </extension>
 
 </plugin>
