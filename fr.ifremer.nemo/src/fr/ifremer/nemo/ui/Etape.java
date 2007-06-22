@@ -310,6 +310,7 @@ public class Etape {
 		try {
 			LatitudeFormat latitudeFormat = new LatitudeFormat(EditStation.comboLatitude.getText());
 			latitudeFormat.parseObject(EditStation.textLatitude.getText());
+			System.out.println("format latitude>"+EditStation.comboLatitude.getText()+"< latitude entrée >"+EditStation.textLatitude.getText()+"<");
 		} catch (ParseException e) {
 			ok = false;
 			Utils.messageErreurAppend("\nErreur de format Latitude");
@@ -320,6 +321,27 @@ public class Etape {
 			//position dans fichier
 			resultat1 = Regexp.checkLigneDebutfin(EditStation.textLatitudeLigne, EditStation.textLatitudeDebut, EditStation.textLatitudeFin, "Latitude");
 		ok = ok && resultat1;
+		
+		////////////////////////////////////////////////
+		
+		//récupérer le texte en question et creer une nouvelle latitude
+		//on a ligne debut fin donc parcours lignes de texte
+		ligne = Utils.lignesBrutes.get(Integer.parseInt(EditStation.textLatitudeLigne.getText())-1);
+		string = ligne.substring(Integer.parseInt(EditStation.textLatitudeDebut.getText())-1, Integer.parseInt(EditStation.textLatitudeFin.getText()));
+		
+		try {
+			LatitudeFormat latitudeFormat = new LatitudeFormat(EditStation.comboLatitude.getText());
+			latitudeFormat.parseObject(string);
+			System.out.println("format latitude>"+EditStation.comboLatitude.getText()+"< latitude lue >"+string+"<");
+		} catch (ParseException e) {
+			Utils.messageErreurAppend("format latitude>"+EditStation.comboLatitude.getText()+"< latitude lue >"+string+"<");
+			//Utils.messageErreurAppend("Erreur de format de longitude : lu ==>" +string+"< attendu ==>" +EditStation.comboLongitude.getText()+ "<");
+			System.out.println("Erreur de format de latitude");
+			e.printStackTrace();
+		}
+		
+			
+		////////////////////////////////////////////////
 		}
 		
 		
@@ -338,6 +360,23 @@ public class Etape {
 			//position dans fichier
 			resultat1 = Regexp.checkLigneDebutfin(EditStation.textLongitudeLigne, EditStation.textLongitudeDebut, EditStation.textLongitudeFin, "Longitude");
 		ok = ok && resultat1;
+		
+		ligne = Utils.lignesBrutes.get(Integer.parseInt(EditStation.textLongitudeLigne.getText())-1);
+		string = ligne.substring(Integer.parseInt(EditStation.textLongitudeDebut.getText())-1, Integer.parseInt(EditStation.textLongitudeFin.getText()));
+		
+		try {
+			LongitudeFormat longitudeFormat = new LongitudeFormat(EditStation.comboLongitude.getText());
+			longitudeFormat.parseObject(string);
+			System.out.println("Erreur de format de longitude : lu ==>" +string+"< attendu ==>" +EditStation.comboLongitude.getText()+ "<");
+		} catch (ParseException e) {
+			Utils.messageErreurAppend("Erreur de format de longitude : lu ==>" +string+"< attendu ==>" +EditStation.comboLongitude.getText()+ "<");
+			System.out.println("Erreur de format de longitude");
+			e.printStackTrace();
+		}
+		
+		
+		
+		
 		}	
 		
 		

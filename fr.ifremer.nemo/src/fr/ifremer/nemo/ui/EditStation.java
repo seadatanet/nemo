@@ -668,17 +668,19 @@ public static void initCombos(){
 	
 	comboLatitude = new Combo(shell, SWT.NONE);
 	comboLatitude.add("DDD MM ss.s");
-	comboLatitude.add("DDD MM.MMM");
+	comboLatitude.add("DDD MM.mmm");
 	comboLatitude.add("DDD.DDDDD");
 	comboLatitude.add("DDD.DD");
 	comboLatitude.add("NDD MM.mm");
+	comboLatitude.add("+DD.mmm");
 	
 	comboLongitude = new Combo(shell, SWT.NONE);
 	comboLongitude.add("DDD MM ss.s");
-	comboLongitude.add("DDD MM.MMM");
+	comboLongitude.add("DDD MM.mmm");
 	comboLongitude.add("DDD.DDDDD");
 	comboLongitude.add("DDD.DD");
 	comboLongitude.add("NDDD MM.mm");
+	comboLongitude.add("+DDD.mmm");
 
 }
 
