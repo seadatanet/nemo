@@ -114,6 +114,33 @@ public class Etape {
 		//	raz du message d'erreurs
 		Utils.messageErreur("");
 		
+		//CHECK DATES
+		if (!EditSurvey.textDateDebut.getText().matches("")){
+		try {
+			DateTimeFormat dateFormat = new DateTimeFormat();
+			dateFormat.setFormatString("dd/MM/yyyy");
+			Long dateLong = (Long)dateFormat.parseObject(EditSurvey.textDateDebut.getText());
+			
+		} catch (ParseException e) {
+			Utils.messageErreurAppend("Erreur de format de date de début");
+			ok = false;
+			e.printStackTrace();
+		}
+		}
+		if (!EditSurvey.textDateFin.getText().matches("")){
+		try {
+			DateTimeFormat dateFormat = new DateTimeFormat();
+			dateFormat.setFormatString("dd/MM/yyyy");
+			Long dateLong = (Long)dateFormat.parseObject(EditSurvey.textDateFin.getText());
+			
+		} catch (ParseException e) {
+			Utils.messageErreurAppend("Erreur de format de date de fin");
+			ok = false;
+			e.printStackTrace();
+		}
+		
+		}
+		
 		if (TableDataSurvey.types.size() == 0){
 			Utils.messageErreur("Vous devez choisir au moins un type de données avant de valider l'étape...");
 		ok = false;}
