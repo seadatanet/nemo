@@ -1,8 +1,0 @@
-<NemoConfiguration lang="fr_FR">
-  <nemoWsURL>http://localhost:8080/nemo/services/NEMO</nemoWsURL>
-  <nautilusWsURL>http://localhost:8080/nautilus/services/NAUTILUS</nautilusWsURL>
-  <showRule>true</showRule>
-  <contact></contact>
-  <modelsDirectory>D:/Projets/CONVMED/Donnees</modelsDirectory>
-  <outputDirectory>D:/Projets/CONVMED/Donnees/Output</outputDirectory>
-</NemoConfiguration>
