@@ -802,11 +802,11 @@ public static void chargementXML(File fichier){
 		}
 		
 		//effacement de la liste des types de données dans la table
-		TableDataSurvey.types.clear();
-		TableDataSurvey.majTypeData();
-		  
+		TableDataSurvey.types = new ArrayList<TypeSurvey>();
 		  //razTableData
 		TableDataSurvey.razTableData();
+		  
+		
 			 
 			 //refresh de la table
 			 //initTable();

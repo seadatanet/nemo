@@ -582,6 +582,20 @@ public static void razText(ArrayList <Text> liste){
 		liste.get(i).setText("");
 				
 	}
+	
+	//raz de la table de parameters
+//	effacement de la liste des types de données dans la table
+	TableData.types = new ArrayList<TypeData>();
+	  //razTableData
+	TableData.razTableData();
+		 
+		 //refresh de la table
+		 //initTable();
+	TableData.creationTable();
+	
+	
+	
+	
 }
 
 	
