@@ -281,8 +281,42 @@ public static void sectionManuelLigneDebutFinInjectFreqEchant(String nomSection,
 						fi = fin;
 						
 					  
-					  //listeners
+						//listeners
 					  
+						//listener zone de test
+						testConversion
+						.addMouseListener(new org.eclipse.swt.events.MouseListener() {
+							public void widgetSelected(org.eclipse.swt.events.SelectionEvent g) {
+								System.out.println("mise à jour champ test conversion freq echant");
+								
+								//System.out.println("valeur de ligne lign==> " + lign.getText());
+								//System.out.println("valeur de ligne de ViewEdit.ligneTest ==> " + ViewEdit.ligneTest.getText());
+						
+								
+								
+							}
+
+							public void mouseDoubleClick(MouseEvent e) {
+								// TODO Raccord de méthode auto-généré
+								EditStation.conversionFreqEchant();
+							
+								System.out.println("mise à jour champ test conversion"); 
+							}
+
+							public void mouseDown(MouseEvent e) {
+								// TODO Raccord de méthode auto-généré
+								System.out.println("mise à jour champ test conversion"); 
+							}
+
+							public void mouseUp(MouseEvent e) {
+								// TODO Raccord de méthode auto-généré
+								System.out.println("mise à jour champ test conversion"); 
+							}
+						});	
+						
+						
+						
+						
 					  //radio saisie
 					  radio
 						 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -1063,7 +1097,8 @@ public static void sectionHeure(String nomSection, String description, Section s
 				
 				  GridLayout gridLayout = new GridLayout();
 				  gridLayout.numColumns = 4;
-				  
+				
+				/*  
 				  Group groupeConv = new Group(sectionClient, SWT.NONE);
 				 groupeConv.setText("Conversion");
 				  groupeConv.setLayout(gridLayout);
@@ -1076,7 +1111,8 @@ public static void sectionHeure(String nomSection, String description, Section s
 				 Label labelTest= new Label(groupeConv, SWT.NONE);
 				 labelTest.setText("Test");
 				 EditStation.textTestConvHeure.setParent(groupeConv);
-				 
+			*/
+				  
 				 Group groupeFormat =  new Group(sectionClient, SWT.NONE);
 				 groupeFormat.setLayout(new GridLayout());
 				 groupeFormat.setText("Format");
@@ -1329,7 +1365,8 @@ public static void sectionDate(String nomSection, String description, Section se
 				  
 				 GridLayout gridLayout = new GridLayout();
 				  gridLayout.numColumns = 4;
-				
+			
+				  /*
 				  Group groupeConv = new Group(sectionClient, SWT.NONE);
 				  groupeConv.setText("Conversion");
 				  groupeConv.setLayout(gridLayout);
@@ -1342,7 +1379,8 @@ public static void sectionDate(String nomSection, String description, Section se
 				 Label labelTest= new Label(groupeConv, SWT.NONE);
 				 labelTest.setText("Test");
 				 EditStation.textTestConvDate.setParent(groupeConv);
-				
+				*/
+				  
 				 
 				 Group groupeFormat =  new Group(sectionClient, SWT.NONE);
 				 groupeFormat.setLayout(new GridLayout());

@@ -176,7 +176,7 @@ if (ViewFile.checkBoxTempo.getSelection()){
 			  
 	//if (!ViewFile.textTempoHeureRef.getText().matches("")){		  
 	//section fréquence échantillonnage
-	DrawingStation.sectionManuelLigneDebutFinInjectFreqEchant("Fréquence échantillonnage              ", "", sectionFreqEchant, textFreqEchantLigne, textFreqEchantDebut, textFreqEchantFin, textFreqEchant, buttonFreqEchantSaisie, buttonFreqEchantPos, textFreqEchantConv, textFreqEchantTest);
+	DrawingStation.sectionManuelLigneDebutFinInjectFreqEchant("Fréquence échantillonnage              ", "En général elle est à convertir en secondes... Double-cliquez sur le champ test pour le mettre à jour.", sectionFreqEchant, textFreqEchantLigne, textFreqEchantDebut, textFreqEchantFin, textFreqEchant, buttonFreqEchantSaisie, buttonFreqEchantPos, textFreqEchantConv, textFreqEchantTest);
 	//}
 }	
 
@@ -705,5 +705,55 @@ public static void razText(ArrayList <Text> liste){
 	}
 	
 }
+
+public static void conversionFreqEchant(){
+	
+	if (!textFreqEchantConv.getText().matches("")){
+		//il y a une formule de conversion
+		
+		if ((buttonFreqEchantSaisie.getSelection()) && (!textFreqEchant.getText().matches(""))){
+			//saisie manuelle 
+			
+			
+			org.nfunk.jep.JEP parser = new org.nfunk.jep.JEP();
+			parser.addStandardFunctions();
+			parser.addStandardConstants();
+			parser.addVariable("x", Float.valueOf(textFreqEchant.getText()));
+			parser.parseExpression(textFreqEchantConv.getText());
+			double resultJEP = parser.getValue();
+			
+			//String resultat = String.format(ViewFile.tableData.getItem(i).getText(6), resultJEP);
+			
+			EditStation.textFreqEchantTest.setText(""+resultJEP);
+			
+		}
+		if ((buttonFreqEchantPos.getSelection())&&(Regexp.checkLigneDebutfin(textFreqEchantLigne, textFreqEchantDebut, 
+				textFreqEchantFin, "Fréquence échantillonnage"))){
+			//position dans fichier
+			
+			//récupérer le texte en question et creer une nouvelle heure
+			String ligne = Utils.lignesBrutes.get(Integer.parseInt(EditStation.textFreqEchantLigne.getText())-1);
+			String string = ligne.substring(Integer.parseInt(EditStation.textFreqEchantDebut.getText())-1, Integer.parseInt(EditStation.textFreqEchantFin.getText()));
+			
+			org.nfunk.jep.JEP parser = new org.nfunk.jep.JEP();
+			parser.addStandardFunctions();
+			parser.addStandardConstants();
+			parser.addVariable("x", Float.valueOf(string));
+			parser.parseExpression(textFreqEchantConv.getText());
+			double resultJEP = parser.getValue();
+			
+			//String resultat = String.format(ViewFile.tableData.getItem(i).getText(6), resultJEP);
+			
+			EditStation.textFreqEchantTest.setText(""+resultJEP);
+			
+		}
+		
+		
+	}
+	
+	
+	
+}
+
 
 }
