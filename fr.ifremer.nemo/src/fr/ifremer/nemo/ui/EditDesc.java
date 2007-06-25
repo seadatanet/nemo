@@ -402,40 +402,26 @@ public static void initSections(){
 public static void initText(){
 	
 	Shell shell = new Shell();
-	lignesEnteteFichier = new Text(shell, SWT.BORDER);
-	lignesEnteteStation = new Text(shell, SWT.BORDER);
-	octetsEnteteStationLigne = new Text(shell, SWT.BORDER); 
-	octetsEnteteStationDebut = new Text(shell, SWT.BORDER);
-	octetsEnteteStationFin = new Text(shell, SWT.BORDER);
-	lignesFinStation = new Text(shell, SWT.BORDER);
-	enteteDonnees = new Text(shell, SWT.BORDER);
-	upletDonnees = new Text(shell, SWT.BORDER);
-	finDonnees = new Text(shell, SWT.BORDER);
-	indicFinDonnees = new Text(shell, SWT.BORDER);
-	ruptureDonneesNoLigne = new Text(shell, SWT.BORDER);
-	ruptureDonneesDebut = new Text(shell, SWT.BORDER);
-	ruptureDonneesFin = new Text(shell, SWT.BORDER);
-	ligneNbreMesures  = new Text(shell, SWT.BORDER);
-	debutNbreMesures  = new Text(shell, SWT.BORDER);
-	finNbreMesures  = new Text(shell, SWT.BORDER);
-	nbreLignesMesures = new Text(shell, SWT.BORDER);
+	lignesEnteteFichier = new Text(shell, SWT.BORDER);listeTextDesc.add(lignesEnteteFichier);
+	lignesEnteteStation = new Text(shell, SWT.BORDER);listeTextDesc.add(lignesEnteteStation);
+	octetsEnteteStationLigne = new Text(shell, SWT.BORDER); listeTextDesc.add(octetsEnteteStationLigne);
+	octetsEnteteStationDebut = new Text(shell, SWT.BORDER);listeTextDesc.add(octetsEnteteStationDebut);
+	octetsEnteteStationFin = new Text(shell, SWT.BORDER);listeTextDesc.add(octetsEnteteStationFin);
+	lignesFinStation = new Text(shell, SWT.BORDER);listeTextDesc.add(lignesFinStation);
+	enteteDonnees = new Text(shell, SWT.BORDER);listeTextDesc.add(enteteDonnees);
+	upletDonnees = new Text(shell, SWT.BORDER);listeTextDesc.add(upletDonnees);
+	finDonnees = new Text(shell, SWT.BORDER);listeTextDesc.add(finDonnees);
+	indicFinDonnees = new Text(shell, SWT.BORDER);listeTextDesc.add(indicFinDonnees);
+	ruptureDonneesNoLigne = new Text(shell, SWT.BORDER);listeTextDesc.add(ruptureDonneesNoLigne);
+	ruptureDonneesDebut = new Text(shell, SWT.BORDER);listeTextDesc.add(ruptureDonneesDebut);
+	ruptureDonneesFin = new Text(shell, SWT.BORDER);listeTextDesc.add(ruptureDonneesFin);
+	ligneNbreMesures  = new Text(shell, SWT.BORDER);listeTextDesc.add(ligneNbreMesures);
+	debutNbreMesures  = new Text(shell, SWT.BORDER);listeTextDesc.add(debutNbreMesures);
+	finNbreMesures  = new Text(shell, SWT.BORDER);listeTextDesc.add(finNbreMesures);
+	nbreLignesMesures = new Text(shell, SWT.BORDER);listeTextDesc.add(nbreLignesMesures);
 	
 	//remplissage de la liste des textes
-	listeTextDesc.add(lignesEnteteFichier);
-	listeTextDesc.add(lignesEnteteStation);
-	listeTextDesc.add(lignesFinStation);
-	listeTextDesc.add(enteteDonnees);
-	listeTextDesc.add(upletDonnees);
-	listeTextDesc.add(finDonnees);
-	listeTextDesc.add(indicFinDonnees);
-	listeTextDesc.add(ruptureDonneesNoLigne);
-	listeTextDesc.add(ruptureDonneesDebut);
-	listeTextDesc.add(ruptureDonneesFin);
-	listeTextDesc.add(ligneNbreMesures);
-	listeTextDesc.add(debutNbreMesures);
-	listeTextDesc.add(finNbreMesures);
-	
-	
+
 }	
 	
 public static void initBoutons(){

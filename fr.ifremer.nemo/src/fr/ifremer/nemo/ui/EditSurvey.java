@@ -735,40 +735,40 @@ public static void chargementXML(File fichier){
 		
 		Shell shell = new Shell();
 		
-		textCampagne= new Text(shell, SWT.BORDER);
-		textNom = new Text(shell, SWT.BORDER);
-		textCodeNavire = new Text(shell, SWT.BORDER);
-		textNomNavire = new Text(shell, SWT.BORDER);
-		textDateDebut = new Text(shell, SWT.BORDER);
-		textDateFin = new Text(shell, SWT.BORDER);
-		textRegion = new Text(shell, SWT.BORDER);
-		textPays = new Text(shell, SWT.BORDER);
-		textLabo = new Text(shell, SWT.BORDER);
-		textChef= new Text(shell, SWT.BORDER);
-		textProjet = new Text(shell, SWT.BORDER);
-		textCentre = new Text(shell, SWT.BORDER);
-		textConfidentiel = new Text(shell, SWT.BORDER);
-		textType = new Text(shell, SWT.BORDER);
-		textNbre = new Text(shell, SWT.BORDER);
-		textCommentaire = new Text(shell, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+		textCampagne= new Text(shell, SWT.BORDER);listeTextSurvey.add(textCampagne);
+		textNom = new Text(shell, SWT.BORDER);listeTextSurvey.add(textNom);
+		textCodeNavire = new Text(shell, SWT.BORDER);		listeTextSurvey.add(textCodeNavire);
+		textNomNavire = new Text(shell, SWT.BORDER);listeTextSurvey.add(textNomNavire);
+		textDateDebut = new Text(shell, SWT.BORDER);listeTextSurvey.add(textDateDebut);
+		textDateFin = new Text(shell, SWT.BORDER);listeTextSurvey.add(textDateFin);
+		textRegion = new Text(shell, SWT.BORDER);listeTextSurvey.add(textRegion);
+		textPays = new Text(shell, SWT.BORDER);listeTextSurvey.add(textPays);
+		textLabo = new Text(shell, SWT.BORDER);listeTextSurvey.add(textLabo);
+		textChef= new Text(shell, SWT.BORDER);listeTextSurvey.add(textChef);
+		textProjet = new Text(shell, SWT.BORDER);listeTextSurvey.add(textProjet);
+		textCentre = new Text(shell, SWT.BORDER);listeTextSurvey.add(textCentre);
+		textConfidentiel = new Text(shell, SWT.BORDER);listeTextSurvey.add(textConfidentiel);
+		textType = new Text(shell, SWT.BORDER);listeTextSurvey.add(textType);
+		textNbre = new Text(shell, SWT.BORDER);listeTextSurvey.add(textNbre);
+		textCommentaire = new Text(shell, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);listeTextSurvey.add(textCommentaire);
 		
 		//remplissage de la liste des textes
-		listeTextSurvey.add(textCampagne);
-		listeTextSurvey.add(textNom);
-		listeTextSurvey.add(textCodeNavire);
-		listeTextSurvey.add(textNomNavire);
-		listeTextSurvey.add(textDateDebut);
-		listeTextSurvey.add(textDateFin);
-		listeTextSurvey.add(textRegion);
-		listeTextSurvey.add(textPays);
-		listeTextSurvey.add(textLabo);
-		listeTextSurvey.add(textChef);
-		listeTextSurvey.add(textProjet);
-		listeTextSurvey.add(textCentre);
-		listeTextSurvey.add(textConfidentiel);
-		listeTextSurvey.add(textType);
-		listeTextSurvey.add(textNbre);
-		listeTextSurvey.add(textCommentaire);
+		
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 	}	
@@ -800,6 +800,45 @@ public static void chargementXML(File fichier){
 			liste.get(i).setText("");
 					
 		}
+		
+		//effacement de la liste des types de données dans la table
+		TableDataSurvey.types.clear();
+		TableDataSurvey.majTypeData();
+		  
+		  //razTableData
+		TableDataSurvey.razTableData();
+			 
+			 //refresh de la table
+			 //initTable();
+		TableDataSurvey.creationTable();
+		
+		   Composite c = EditSurvey.sectionType;
+	        while (c != null) {
+				c.setRedraw(false);
+				c = c.getParent();
+				if (c instanceof ScrolledForm) {
+					break;
+				}
+			}
+			c = EditSurvey.sectionType;
+			while (c != null) {
+				c.layout(true);
+				c = c.getParent();
+				if (c instanceof ScrolledForm) {
+					((ScrolledForm) c).reflow(true);
+					break;
+				}
+			}
+			c = EditSurvey.sectionType;
+			while (c != null) {
+				c.setRedraw(true);
+				c = c.getParent();
+				if (c instanceof ScrolledForm) {
+					break;
+				}
+			}
+		
+		
 		
 	}
 	

@@ -301,6 +301,19 @@ formEdition.reflow(true);
 });
 
 
+
+buttonRAZ
+.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+	public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+		System.out.println("RAZ"); // 
+		
+		razText(listeTextStation);
+		
+
+	}
+});
+
+
 //raz du message d'erreurs
 Utils.messageErreur("");
 
@@ -442,101 +455,101 @@ public static void initText(){
 
 Shell shell = new Shell();
 
-textRefStationLigne = new Text(shell, SWT.BORDER);
-textRefStationDebut = new Text(shell, SWT.BORDER);
-textRefStationFin = new Text(shell, SWT.BORDER);
+textRefStationLigne = new Text(shell, SWT.BORDER);listeTextStation.add(textRefStationLigne);
+textRefStationDebut = new Text(shell, SWT.BORDER);listeTextStation.add(textRefStationDebut);
+textRefStationFin = new Text(shell, SWT.BORDER);listeTextStation.add(textRefStationFin);
 
-textHistoriqueAcqLigne1= new Text(shell, SWT.BORDER);
-textHistoriqueAcqLigne2= new Text(shell, SWT.BORDER);
-textHistoriqueAcqDebut1 = new Text(shell, SWT.BORDER);
-textHistoriqueAcqDebut2= new Text(shell, SWT.BORDER);
-textHistoriqueAcqFin1= new Text(shell, SWT.BORDER);
-textHistoriqueAcqFin2 = new Text(shell, SWT.BORDER);
-textHistorique1 = new Text(shell, SWT.BORDER);
-textHistorique2  = new Text(shell, SWT.BORDER);
-textHistoriqueAcquisition1 = new Text(shell, SWT.BORDER);
-textHistoriqueAcquisition2 = new Text(shell, SWT.BORDER);
+textHistoriqueAcqLigne1= new Text(shell, SWT.BORDER);listeTextStation.add(textHistoriqueAcqLigne1);
+textHistoriqueAcqLigne2= new Text(shell, SWT.BORDER);listeTextStation.add(textHistoriqueAcqLigne2);
+textHistoriqueAcqDebut1 = new Text(shell, SWT.BORDER);listeTextStation.add(textHistoriqueAcqDebut1);
+textHistoriqueAcqDebut2= new Text(shell, SWT.BORDER);listeTextStation.add(textHistoriqueAcqDebut2);
+textHistoriqueAcqFin1= new Text(shell, SWT.BORDER);listeTextStation.add(textHistoriqueAcqFin1);
+textHistoriqueAcqFin2 = new Text(shell, SWT.BORDER);listeTextStation.add(textHistoriqueAcqFin2);
+textHistorique1 = new Text(shell, SWT.BORDER);listeTextStation.add(textHistorique1);
+textHistorique2  = new Text(shell, SWT.BORDER);listeTextStation.add(textHistorique2);
+textHistoriqueAcquisition1 = new Text(shell, SWT.BORDER);listeTextStation.add(textHistoriqueAcquisition1);
+textHistoriqueAcquisition2 = new Text(shell, SWT.BORDER);listeTextStation.add(textHistoriqueAcquisition2);
 
-textCommentaire = new Text(shell, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-textCommentaireLigne= new Text(shell, SWT.BORDER);
-textCommentaireDebut= new Text(shell, SWT.BORDER);
-textCommentaireFin = new Text(shell, SWT.BORDER);
+textCommentaire = new Text(shell, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);listeTextStation.add(textCommentaire);
+textCommentaireLigne= new Text(shell, SWT.BORDER);listeTextStation.add(textCommentaireLigne);
+textCommentaireDebut= new Text(shell, SWT.BORDER);listeTextStation.add(textCommentaireDebut);
+textCommentaireFin = new Text(shell, SWT.BORDER);listeTextStation.add(textCommentaireFin);
 
-textConversionDate  = new Text(shell, SWT.BORDER);
-textConversionHeure  = new Text(shell, SWT.BORDER);
-textTestConvHeure = new Text(shell, SWT.BORDER);
-textTestConvDate = new Text(shell, SWT.BORDER);
+textConversionDate  = new Text(shell, SWT.BORDER);listeTextStation.add(textConversionDate);
+textConversionHeure  = new Text(shell, SWT.BORDER);listeTextStation.add(textConversionHeure);
+textTestConvHeure = new Text(shell, SWT.BORDER);listeTextStation.add(textTestConvHeure);
+textTestConvDate = new Text(shell, SWT.BORDER);listeTextStation.add(textTestConvDate);
 
-textHeureLigne = new Text(shell, SWT.BORDER);
-textHeureDebut = new Text(shell, SWT.BORDER);
-textHeureFin  = new Text(shell, SWT.BORDER);
-textHeureSaisie   = new Text(shell, SWT.BORDER);
+textHeureLigne = new Text(shell, SWT.BORDER);listeTextStation.add(textHeureLigne);
+textHeureDebut = new Text(shell, SWT.BORDER);listeTextStation.add(textHeureDebut);
+textHeureFin  = new Text(shell, SWT.BORDER);listeTextStation.add(textHeureFin);
+textHeureSaisie   = new Text(shell, SWT.BORDER);listeTextStation.add(textHeureSaisie);
 
-textDateLigne = new Text(shell, SWT.BORDER);
-textDateDebut = new Text(shell, SWT.BORDER);
-textDateFin  = new Text(shell, SWT.BORDER);
-textDateSaisie   = new Text(shell, SWT.BORDER);
+textDateLigne = new Text(shell, SWT.BORDER);listeTextStation.add(textDateLigne);
+textDateDebut = new Text(shell, SWT.BORDER);listeTextStation.add(textDateDebut);
+textDateFin  = new Text(shell, SWT.BORDER);listeTextStation.add(textDateFin);
+textDateSaisie   = new Text(shell, SWT.BORDER);listeTextStation.add(textDateSaisie);
 
-textLatitude = new Text(shell, SWT.BORDER);
-textLatitudeLigne= new Text(shell, SWT.BORDER);
-textLatitudeDebut= new Text(shell, SWT.BORDER);
-textLatitudeFin = new Text(shell, SWT.BORDER);
-textLatFinLigne= new Text(shell, SWT.BORDER);
-textLatFinDebut= new Text(shell, SWT.BORDER);
-textLatFinFin= new Text(shell, SWT.BORDER);
-textLatFin = new Text(shell, SWT.BORDER);
+textLatitude = new Text(shell, SWT.BORDER);listeTextStation.add(textLatitude);
+textLatitudeLigne= new Text(shell, SWT.BORDER);listeTextStation.add(textLatitudeLigne);
+textLatitudeDebut= new Text(shell, SWT.BORDER);listeTextStation.add(textLatitudeDebut);
+textLatitudeFin = new Text(shell, SWT.BORDER);listeTextStation.add(textLatitudeFin);
+textLatFinLigne= new Text(shell, SWT.BORDER);listeTextStation.add(textLatFinLigne);
+textLatFinDebut= new Text(shell, SWT.BORDER);listeTextStation.add(textLatFinDebut);
+textLatFinFin= new Text(shell, SWT.BORDER);listeTextStation.add(textLatFinFin);
+textLatFin = new Text(shell, SWT.BORDER);listeTextStation.add(textLatFin);
 
-textLongitude = new Text(shell, SWT.BORDER);
-textLongitudeLigne = new Text(shell, SWT.BORDER);
-textLongitudeDebut = new Text(shell, SWT.BORDER);
-textLongitudeFin  = new Text(shell, SWT.BORDER);
-textLongFinLigne = new Text(shell, SWT.BORDER);
-textLongFinDebut = new Text(shell, SWT.BORDER);
-textLongFinFin = new Text(shell, SWT.BORDER);
-textLongFin = new Text(shell, SWT.BORDER);
+textLongitude = new Text(shell, SWT.BORDER);listeTextStation.add(textLongitude);
+textLongitudeLigne = new Text(shell, SWT.BORDER);listeTextStation.add(textLongitudeLigne);
+textLongitudeDebut = new Text(shell, SWT.BORDER);listeTextStation.add(textLongitudeDebut);
+textLongitudeFin  = new Text(shell, SWT.BORDER);listeTextStation.add(textLongitudeFin);
+textLongFinLigne = new Text(shell, SWT.BORDER);listeTextStation.add(textLongFinLigne);
+textLongFinDebut = new Text(shell, SWT.BORDER);listeTextStation.add(textLongFinDebut);
+textLongFinFin = new Text(shell, SWT.BORDER);listeTextStation.add(textLongFinFin);
+textLongFin = new Text(shell, SWT.BORDER);listeTextStation.add(textLongFin);
 
-textProfondeur = new Text(shell, SWT.BORDER);
-textProfondeurLigne = new Text(shell, SWT.BORDER);
-textProfondeurDebut = new Text(shell, SWT.BORDER);
-textProfondeurFin = new Text(shell, SWT.BORDER);
-textProfFin = new Text(shell, SWT.BORDER);
-textProfFinLigne = new Text(shell, SWT.BORDER);
-textProfFinDebut = new Text(shell, SWT.BORDER);
-textProfFinFin = new Text(shell, SWT.BORDER);
-textProfCapteur = new Text(shell, SWT.BORDER);
-textProfCapteurLigne = new Text(shell, SWT.BORDER);
-textProfCapteurDebut = new Text(shell, SWT.BORDER);
-textProfCapteurFin = new Text(shell, SWT.BORDER);
+textProfondeur = new Text(shell, SWT.BORDER);listeTextStation.add(textProfondeur);
+textProfondeurLigne = new Text(shell, SWT.BORDER);listeTextStation.add(textProfondeurLigne);
+textProfondeurDebut = new Text(shell, SWT.BORDER);listeTextStation.add(textProfondeurDebut);
+textProfondeurFin = new Text(shell, SWT.BORDER);listeTextStation.add(textProfondeurFin);
+textProfFin = new Text(shell, SWT.BORDER);listeTextStation.add(textProfFin);
+textProfFinLigne = new Text(shell, SWT.BORDER);listeTextStation.add(textProfFinLigne);
+textProfFinDebut = new Text(shell, SWT.BORDER);listeTextStation.add(textProfFinDebut);
+textProfFinFin = new Text(shell, SWT.BORDER);listeTextStation.add(textProfFinFin);
+textProfCapteur = new Text(shell, SWT.BORDER);listeTextStation.add(textProfCapteur);
+textProfCapteurLigne = new Text(shell, SWT.BORDER);listeTextStation.add(textProfCapteurLigne);
+textProfCapteurDebut = new Text(shell, SWT.BORDER);listeTextStation.add(textProfCapteurDebut);
+textProfCapteurFin = new Text(shell, SWT.BORDER);listeTextStation.add(textProfCapteurFin);
 
-textDeclinMagnet = new Text(shell, SWT.BORDER);
-textDeclinMagnetLigne = new Text(shell, SWT.BORDER);
-textDeclinMagnetDebut = new Text(shell, SWT.BORDER);
-textDeclinMagnetFin = new Text(shell, SWT.BORDER);
+textDeclinMagnet = new Text(shell, SWT.BORDER);listeTextStation.add(textDeclinMagnet);
+textDeclinMagnetLigne = new Text(shell, SWT.BORDER);listeTextStation.add(textDeclinMagnetLigne);
+textDeclinMagnetDebut = new Text(shell, SWT.BORDER);listeTextStation.add(textDeclinMagnetDebut);
+textDeclinMagnetFin = new Text(shell, SWT.BORDER);listeTextStation.add(textDeclinMagnetFin);
 
-textFreqEchant = new Text(shell, SWT.BORDER);
-textFreqEchantLigne = new Text(shell, SWT.BORDER);
-textFreqEchantDebut = new Text(shell, SWT.BORDER);
-textFreqEchantFin = new Text(shell, SWT.BORDER);
-textFreqEchantConv = new Text(shell, SWT.BORDER);
-textFreqEchantTest = new Text(shell, SWT.BORDER);
+textFreqEchant = new Text(shell, SWT.BORDER);listeTextStation.add(textFreqEchant);
+textFreqEchantLigne = new Text(shell, SWT.BORDER);listeTextStation.add(textFreqEchantLigne);
+textFreqEchantDebut = new Text(shell, SWT.BORDER);listeTextStation.add(textFreqEchantDebut);
+textFreqEchantFin = new Text(shell, SWT.BORDER);listeTextStation.add(textFreqEchantFin);
+textFreqEchantConv = new Text(shell, SWT.BORDER);listeTextStation.add(textFreqEchantConv);
+textFreqEchantTest = new Text(shell, SWT.BORDER);listeTextStation.add(textFreqEchantTest);
 
 
-textSurface1 = new Text(shell, SWT.BORDER);
-textSurface2= new Text(shell, SWT.BORDER);
-textSurfaceDebut1= new Text(shell, SWT.BORDER);
-textSurfaceDebut2= new Text(shell, SWT.BORDER);
-textSurfaceFin1= new Text(shell, SWT.BORDER);
-textSurfaceFin2= new Text(shell, SWT.BORDER);
-textSurfaceLigne1= new Text(shell, SWT.BORDER);
-textSurfaceLigne2= new Text(shell, SWT.BORDER);
+textSurface1 = new Text(shell, SWT.BORDER);listeTextStation.add(textSurface1);
+textSurface2= new Text(shell, SWT.BORDER);listeTextStation.add(textSurface2);
+textSurfaceDebut1= new Text(shell, SWT.BORDER);listeTextStation.add(textSurfaceDebut1);
+textSurfaceDebut2= new Text(shell, SWT.BORDER);listeTextStation.add(textSurfaceDebut2);
+textSurfaceFin1= new Text(shell, SWT.BORDER);listeTextStation.add(textSurfaceFin1);
+textSurfaceFin2= new Text(shell, SWT.BORDER);listeTextStation.add(textSurfaceFin2);
+textSurfaceLigne1= new Text(shell, SWT.BORDER);listeTextStation.add(textSurfaceLigne1);
+textSurfaceLigne2= new Text(shell, SWT.BORDER);listeTextStation.add(textSurfaceLigne2);
 
-textTU = new Text(shell, SWT.BORDER);
-textTULigne = new Text(shell, SWT.BORDER);
-textTUDebut = new Text(shell, SWT.BORDER);
-textTUFin = new Text(shell, SWT.BORDER);
+textTU = new Text(shell, SWT.BORDER);listeTextStation.add(textTU);
+textTULigne = new Text(shell, SWT.BORDER);listeTextStation.add(textTULigne);
+textTUDebut = new Text(shell, SWT.BORDER);listeTextStation.add(textTUDebut);
+textTUFin = new Text(shell, SWT.BORDER);listeTextStation.add(textTUFin);
 
 //remplissage de la arrayList pour le reset 
-//TODO
+
 
 
 

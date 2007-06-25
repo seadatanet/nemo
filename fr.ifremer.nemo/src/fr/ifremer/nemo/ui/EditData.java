@@ -24,10 +24,11 @@ public static Text textTotalLigne, textTotalDebut, textTotalFin;
 public static Text textTempo, textTypeCourantCode, textTypeCourantUnite, textTypeCourantConversion, textTypeCourantDebut, textTypeCourantFin, textTypeCourantFormat, textTypeCourantEntree, textTypeCourantSortie, textTypeCourantLigne, textTypeAjouterCode, textTypeAjouterUnite, textTypeAjouterConversion, textTypeAjouterDebut, textTypeAjouterFin, textTypeAjouterLigne, textTypeAjouterEntree, textTypeAjouterSortie, textTypeAjouterFormat;
 public static Text textHeureLigne, textHeureDebut, textHeureFin, textDateLigne, textDateDebut, textDateFin, textHeureConversion, textHeureTest;
 public static Label labelTypeCourantCode, labelTypeCourantUnite, labelTypeCourantConversion, labelTypeCourantDebut, labelTypeCourantFin, labelTypeCourantFormat, labelTypeCourantEntree, labelTypeCourantSortie; 
-public static Button buttonReset, buttonValidate, buttonExpand, buttonExpand2, buttonLigneDonnees, buttonFreqEchant;
+public static Button buttonRAZ, buttonReset, buttonValidate, buttonExpand, buttonExpand2, buttonLigneDonnees, buttonFreqEchant;
 public static ArrayList <Section> listeSectionsData, listeSectionsParam;
 public static ArrayList <String> listeSectionsNoms, listeTypeDonnees;
 public static ArrayList <Label> listeSectionsLabel;
+public static ArrayList <Text> listeTextData;
 public static int expand, validee, loaded;
 public static List listeType;
 public static ScrolledForm formEdition;
@@ -39,6 +40,8 @@ public static void affichageEdition(){
 // initialisation zone édition pour étape description de fichier 
 
 formEdition = ViewEdit.formEdition;
+
+listeTextData = new ArrayList <Text>();
 
 //raz message erreur
 Utils.messageErreur("");
@@ -82,15 +85,18 @@ ArrayList <String> listeNoms = new ArrayList <String> ();
 
 //boutons collapse all / expand all
 //buttonExpand.setParent(ViewEdit.formEdition.getBody());
-buttonExpand.setText("+");
+//buttonExpand.setText("+");
+
+
+//reset
+buttonRAZ.setParent(ViewEdit.formEdition.getBody());
+buttonRAZ.setText("Reset");
 
 //bouton validate
 buttonValidate.setParent(ViewEdit.formEdition.getBody());
 buttonValidate.setText("Valider étape");
 
-//reset
-buttonReset.setParent(ViewEdit.formEdition.getBody());
-buttonReset.setText("Reset");
+
 
 if (ViewFile.checkBoxTempo.getSelection()){
 	//série temporelle
@@ -291,6 +297,18 @@ formEdition.reflow(true);
 });
 
 
+buttonRAZ
+.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+	public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+		System.out.println("RAZ"); // 
+		
+		razText(listeTextData);
+		
+
+	}
+});
+
+
 //raz du message d'erreurs
 Utils.messageErreur("");
 
@@ -371,7 +389,7 @@ Shell s = new Shell();
 EditData.buttonExpand.setParent(s);
 EditData.buttonExpand2.setParent(s);
 EditData.buttonValidate.setParent(s);
-EditData.buttonReset.setParent(s);
+EditData.buttonRAZ.setParent(s);
 
 buttonFreqEchant.setParent(s);
 buttonLigneDonnees.setParent(s);
@@ -411,8 +429,9 @@ public static void DrawingBack(){
 //	effacement des boutons valider/expand/init serveur
 	//EditData.buttonExpand.setParent(s.getBody());
 	
+	EditData.buttonRAZ.setParent(s.getBody());
 	EditData.buttonValidate.setParent(s.getBody());
-	EditData.buttonReset.setParent(s.getBody());
+	
 	
 	if (ViewFile.checkBoxTempo.getSelection()){
 	buttonFreqEchant.setParent(s.getBody());
@@ -460,43 +479,43 @@ public static void initText(){
 
 Shell shell = new Shell();
 
-textTypeCourantCode = new Text(shell, SWT.BORDER);
-textTypeCourantConversion = new Text(shell, SWT.BORDER);
-textTypeCourantLigne = new Text(shell, SWT.BORDER);
-textTypeCourantDebut = new Text(shell, SWT.BORDER);
-textTypeCourantEntree= new Text(shell, SWT.BORDER);
-textTypeCourantFin= new Text(shell, SWT.BORDER);
-textTypeCourantFormat = new Text(shell, SWT.BORDER);
-textTypeCourantSortie= new Text(shell, SWT.BORDER);
-textTypeCourantUnite= new Text(shell, SWT.BORDER);
+textTypeCourantCode = new Text(shell, SWT.BORDER);listeTextData.add(textTypeCourantCode);
+textTypeCourantConversion = new Text(shell, SWT.BORDER);listeTextData.add(textTypeCourantConversion);
+textTypeCourantLigne = new Text(shell, SWT.BORDER);listeTextData.add(textTypeCourantLigne);
+textTypeCourantDebut = new Text(shell, SWT.BORDER);listeTextData.add(textTypeCourantDebut);
+textTypeCourantEntree= new Text(shell, SWT.BORDER);listeTextData.add(textTypeCourantEntree);
+textTypeCourantFin= new Text(shell, SWT.BORDER);listeTextData.add(textTypeCourantFin);
+textTypeCourantFormat = new Text(shell, SWT.BORDER);listeTextData.add(textTypeCourantFormat);
+textTypeCourantSortie= new Text(shell, SWT.BORDER);listeTextData.add(textTypeCourantSortie);
+textTypeCourantUnite= new Text(shell, SWT.BORDER);listeTextData.add(textTypeCourantUnite);
 
-textTypeAjouterCode= new Text(shell, SWT.BORDER);
-textTypeAjouterConversion= new Text(shell, SWT.BORDER);
-textTypeAjouterLigne= new Text(shell, SWT.BORDER);
-textTypeAjouterDebut= new Text(shell, SWT.BORDER);
-textTypeAjouterEntree= new Text(shell, SWT.BORDER);
-textTypeAjouterFin= new Text(shell, SWT.BORDER);
-textTypeAjouterFormat= new Text(shell, SWT.BORDER);
-textTypeAjouterSortie= new Text(shell, SWT.BORDER);
-textTypeAjouterUnite= new Text(shell, SWT.BORDER);
+textTypeAjouterCode= new Text(shell, SWT.BORDER);listeTextData.add(textTypeAjouterCode);
+textTypeAjouterConversion= new Text(shell, SWT.BORDER);listeTextData.add(textTypeAjouterConversion);
+textTypeAjouterLigne= new Text(shell, SWT.BORDER);listeTextData.add(textTypeAjouterLigne);
+textTypeAjouterDebut= new Text(shell, SWT.BORDER);listeTextData.add(textTypeAjouterDebut);
+textTypeAjouterEntree= new Text(shell, SWT.BORDER);listeTextData.add(textTypeAjouterEntree);
+textTypeAjouterFin= new Text(shell, SWT.BORDER);listeTextData.add(textTypeAjouterFin);
+textTypeAjouterFormat= new Text(shell, SWT.BORDER);listeTextData.add(textTypeAjouterFormat);
+textTypeAjouterSortie= new Text(shell, SWT.BORDER);listeTextData.add(textTypeAjouterSortie);
+textTypeAjouterUnite= new Text(shell, SWT.BORDER);listeTextData.add(textTypeAjouterUnite);
 
-textHeureLigne= new Text(shell, SWT.BORDER);
-textHeureDebut= new Text(shell, SWT.BORDER);
-textHeureFin= new Text(shell, SWT.BORDER);
-textHeureConversion= new Text(shell, SWT.BORDER);
-textHeureTest= new Text(shell, SWT.BORDER);
+textHeureLigne= new Text(shell, SWT.BORDER);listeTextData.add(textHeureLigne);
+textHeureDebut= new Text(shell, SWT.BORDER);listeTextData.add(textHeureDebut);
+textHeureFin= new Text(shell, SWT.BORDER);listeTextData.add(textHeureFin);
+textHeureConversion= new Text(shell, SWT.BORDER);listeTextData.add(textHeureConversion);
+textHeureTest= new Text(shell, SWT.BORDER);listeTextData.add(textHeureTest);
 
-textDateLigne= new Text(shell, SWT.BORDER);
-textDateDebut= new Text(shell, SWT.BORDER);
-textDateFin= new Text(shell, SWT.BORDER);
-textTotalLigne= new Text(shell, SWT.BORDER);
-textTotalDebut= new Text(shell, SWT.BORDER);
-textTotalFin= new Text(shell, SWT.BORDER);
+textDateLigne= new Text(shell, SWT.BORDER);listeTextData.add(textDateLigne);
+textDateDebut= new Text(shell, SWT.BORDER);listeTextData.add(textDateDebut);
+textDateFin= new Text(shell, SWT.BORDER);listeTextData.add(textDateFin);
+textTotalLigne= new Text(shell, SWT.BORDER);listeTextData.add(textTotalLigne);
+textTotalDebut= new Text(shell, SWT.BORDER);listeTextData.add(textTotalDebut);
+textTotalFin= new Text(shell, SWT.BORDER);listeTextData.add(textTotalFin);
 
-textTempo = new Text(shell, SWT.BORDER);
+textTempo = new Text(shell, SWT.BORDER);listeTextData.add(textTempo);
 
 //ajout des zones de texte dans la liste pour activer le reset
-//TODO
+
 
 }	
 
@@ -508,7 +527,7 @@ buttonExpand = new Button(shell, SWT.NONE);
 buttonExpand2 = new Button(shell, SWT.NONE);
 buttonValidate = new Button(shell, SWT.NONE);
 buttonReset = new Button(shell, SWT.NONE);
-
+buttonRAZ= new Button(shell, SWT.NONE);
 buttonLigneDonnees = new Button(shell, SWT.RADIO);
 buttonFreqEchant = new Button(shell, SWT.RADIO);
 
@@ -556,6 +575,14 @@ public static void initCombos(){
 	
 
 }	
+
+public static void razText(ArrayList <Text> liste){
 	
+	for (int i =0; i< liste.size(); i++){
+		liste.get(i).setText("");
+				
+	}
+}
+
 	
 }
