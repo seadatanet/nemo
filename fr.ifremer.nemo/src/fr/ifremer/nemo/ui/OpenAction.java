@@ -88,7 +88,6 @@ public void run(){
 		
 		ViewLog.styledTextLogInfos.append("\n\nModèle chargé : "+nomModele);
 		
-		
 	}
 	
 	}
