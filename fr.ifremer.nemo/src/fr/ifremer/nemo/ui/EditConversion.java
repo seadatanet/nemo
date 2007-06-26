@@ -71,12 +71,13 @@ public class EditConversion extends Thread {
     		shell.open();
     		
     		final ProgressBar progressbar = new ProgressBar(shell,
-  				  SWT.HORIZONTAL | SWT.SMOOTH);
+  				  SWT.HORIZONTAL | SWT.SMOOTH | SWT.APPLICATION_MODAL);
   				progressbar.setMinimum(0);
   				progressbar.setMaximum(100);
   				//progressbar.setSize(200,20);
   				
   				progressbar.setBounds(0,0, 200, 20);
+  				shell.setText("Conversion en cours... Veuillez patienter...");
   				shell.pack();
     		
     		
