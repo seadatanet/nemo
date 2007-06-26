@@ -65,9 +65,9 @@ public class EditConversion extends Thread {
 		//test pour savoir si on est en campagne ou pas
 			choixFichierSortie();
 		
-			shell = new Shell();	
+			shell = new Shell(Application.display);	
 			shell.setSize(200, 20);
-    		shell.setBounds(50, 50, 200, 20);
+    		shell.setBounds(100, 100, 200, 20);
     		shell.open();
     		
     		final ProgressBar progressbar = new ProgressBar(shell,

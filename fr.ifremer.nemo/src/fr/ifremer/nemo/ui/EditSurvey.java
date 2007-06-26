@@ -21,6 +21,7 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.events.ExpansionAdapter;
@@ -382,8 +383,19 @@ public class EditSurvey {
 		
 		public static void webServiceUpdate(){
 			
-			//chargement de la config dans le dataModel
-			//TODO à faire !
+			Shell shell = new Shell();	
+			shell.setSize(200, 20);
+    		shell.setBounds(50, 50, 200, 20);
+    		shell.open();
+    		
+    		final ProgressBar progressbar = new ProgressBar(shell,
+  				  SWT.HORIZONTAL | SWT.SMOOTH | SWT.INDETERMINATE | SWT.APPLICATION_MODAL);
+  				progressbar.setMinimum(0);
+  				progressbar.setMaximum(100);
+  				//progressbar.setSize(200,20);
+  				
+  				progressbar.setBounds(0,0, 200, 20);
+  				shell.pack();
 			
 			//interrogation WService
 			NemoLists.updateCountries();
@@ -395,6 +407,7 @@ public class EditSurvey {
 			NemoLists.updateParameters();
 			NemoLists.updateSurveys();
 			
+			shell.close();
 		}
 		
 		public static void init_webService(){
