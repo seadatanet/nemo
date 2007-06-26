@@ -3,6 +3,8 @@ package test.nemo;
 import fr.ifremer.nemo.domain.*;
 import fr.ifremer.nemo.input.*;
 import fr.ifremer.nemo.output.ProgressNotification;
+import fr.ifremer.nemo.ui.Application;
+
 import javax.swing.*;
 
 /**
@@ -68,7 +70,8 @@ public  class TestNemo implements Cloneable {
     ProgressNotification notifier = new ProgressNotification() {
     	                                public void progress(final int val) {
     		                                try {
-    			                                SwingUtilities.invokeAndWait( new Runnable() {
+    		                                	
+    		                                	Application.display.syncExec( new Runnable() {
     				                                                              public void run() {
     					                                                              progress.setValue(val);
     				                                                              }

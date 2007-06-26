@@ -13,6 +13,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
@@ -26,6 +27,7 @@ public class EditConversion extends Thread {
 	public static Button buttonConversion;
 	public static int validee, loaded;
 	public static String nomFichierSortie;
+	public static Shell shell;
 	
 	
 	public void run(){
@@ -62,14 +64,33 @@ public class EditConversion extends Thread {
 				
 		//test pour savoir si on est en campagne ou pas
 			choixFichierSortie();
-			
+		
+			shell = new Shell();	
+			shell.setSize(200, 20);
+    		shell.setBounds(50, 50, 200, 20);
+    		shell.open();
+    		
+    		final ProgressBar progressbar = new ProgressBar(shell,
+  				  SWT.HORIZONTAL | SWT.SMOOTH);
+  				progressbar.setMinimum(0);
+  				progressbar.setMaximum(100);
+  				//progressbar.setSize(200,20);
+  				
+  				progressbar.setBounds(0,0, 200, 20);
+  				shell.pack();
+    		
+    		
 			java.io.FileInputStream stream = null;
-			ProgressNotification progress = new ProgressNotification() {
+			ProgressNotification notifier = new ProgressNotification() {
                 public void progress(final int val) {
                 	try {
-                        SwingUtilities.invokeAndWait( new Runnable() {
+                		
+                				Application.display.syncExec( new Runnable() {
                                                           public void run() {
-                                                              //progress.setValue(val);
+                                                              progressbar.setSelection(val);
+                                                              System.out.println(">>>"+ val);
+                                                              shell.pack();
+                                                              
                                                           }
                                                       });
                     } catch (Exception e) {
@@ -77,19 +98,18 @@ public class EditConversion extends Thread {
                 }
             };
 			try {
-				Survey survey = DataModel.inputModel.convert(progress);
+				Survey survey = DataModel.inputModel.convert(notifier);
 				
 				//survey.writeXMLOn(new FileOutputStream(new File("D:/tmp.xml")));
-				
 				
 				fr.ifremer.nemo.medatlas.MedatlasSurveyWriter writerMed;
 				fr.ifremer.nemo.odv.ODVSurveyWriter writerODV;
 				
 				if (ViewFile.medatlas.getSelection()){
 				 writerMed = new fr.ifremer.nemo.medatlas.MedatlasSurveyWriter();
-				 progress.progress(0);
+				 notifier.progress(0);
 			    	try {
-						writerMed.writeSurvey ( survey, new java.io.File(nomFichierSortie), progress);
+						writerMed.writeSurvey ( survey, new java.io.File(nomFichierSortie), notifier);
 					} catch (GenerationException e1) {
 						System.out.println("Erreur de  génération de fichier de sortie!");
 						e1.printStackTrace();
@@ -97,9 +117,9 @@ public class EditConversion extends Thread {
 					}
 				else {
 					 writerODV = new fr.ifremer.nemo.odv.ODVSurveyWriter();
-					 progress.progress(0);
+					 notifier.progress(0);
 				    	try {
-							writerODV.writeSurvey ( survey, new java.io.File(nomFichierSortie), progress);
+							writerODV.writeSurvey ( survey, new java.io.File(nomFichierSortie), notifier);
 						} catch (GenerationException e1) {
 							System.out.println("Erreur de  génération de fichier de sortie!");
 							e1.printStackTrace();
@@ -119,6 +139,7 @@ public class EditConversion extends Thread {
 		Utils.messageErreur("==== Fin de conversion en ODV ====");}
 		else {Utils.messageErreur("==== Fin de conversion en Medatlas ====");}
 		
+		shell.close();
 		
 //			//dossier de campagne
 //			
