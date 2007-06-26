@@ -116,8 +116,7 @@ public class EditSurvey {
 			listeTextSurvey = new ArrayList <Text> ();
 			ArrayList <Text> listeText = new ArrayList <Text> ();
 			ArrayList <String> listeNoms = new ArrayList <String> ();
-			
-			
+						
 			//init composants IHM
 			initSections();
 			initText();
@@ -161,7 +160,6 @@ public class EditSurvey {
 		Drawing.sectionNlabelsNtext(sectionReference, "Référence                              ", listeText, listeNoms, "Décrivez les références de la campagne");	
 		listeText.clear();	
 		listeNoms.clear();
-		
 		
 		
 			
