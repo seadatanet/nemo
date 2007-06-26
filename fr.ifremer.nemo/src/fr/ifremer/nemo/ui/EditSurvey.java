@@ -566,30 +566,40 @@ public static void chargementXML(File fichier){
 	if (ViewFile.dossierCampagne){
 		
 			try {
+				DataModel.dirSurvey.getModel().releaseDataTypes();
 				DataModel.dirSurvey.getModel().importFromXML(fichier);
 			} catch (FileNotFoundException e) {
-				// TODO Bloc catch auto-généré
+				// 
 				e.printStackTrace();
 			} catch (SAXException e) {
-				// TODO Bloc catch auto-généré
+				// 
 				e.printStackTrace();
 			} catch (TransformerException e) {
-				// TODO Bloc catch auto-généré
+				//
 				e.printStackTrace();
 			}
 		
 	}else{
 	
 		try {
-			DataModel.singleSurvey.getModel().importFromXML(fichier);
+			DataModel.singleSurvey.releaseModel();
+			
+			//getModel().releaseDataTypes();
+			Survey survey = new Survey();
+			survey.importFromXML(fichier);
+			
+			DataModel.singleSurvey.setModel(survey);
+			
+			//DataModel.singleSurvey.getModel().importFromXML(fichier);
+			DataModel.singleSurvey.getModel();
 		} catch (FileNotFoundException e) {
-			// TODO Bloc catch auto-généré
+			// 
 			e.printStackTrace();
 		} catch (SAXException e) {
-			// TODO Bloc catch auto-généré
+			// 
 			e.printStackTrace();
 		} catch (TransformerException e) {
-			// TODO Bloc catch auto-généré
+			// 
 			e.printStackTrace();
 		}
 
@@ -661,6 +671,9 @@ public static void chargementXML(File fichier){
 			
 			DataType[] dataTypes = survey.getDataTypes();
 			int taille = dataTypes.length;
+			
+			//reset de la liste des dataTypes de l'IHM
+			TableDataSurvey.types.clear();
 			
 			for (int i=0; i<taille;i++){
 				TypeSurvey typeSurvey = new TypeSurvey();
