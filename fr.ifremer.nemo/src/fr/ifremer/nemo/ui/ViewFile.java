@@ -28,7 +28,7 @@ import org.eclipse.swt.widgets.Combo;
 
 public class ViewFile extends ViewPart {
 
-	public static final String ID = "fr.ifremer.nemo.ui.ViewFile"; // 
+	public static final String ID = "fr.ifremer.nemo.ui.ViewFile"; //  //$NON-NLS-1$
 
 	public static int etape, ongletCourant, affiche, tailleCompositeData;
 	public static boolean dossierCampagne, fileLoaded;
@@ -152,12 +152,12 @@ public class ViewFile extends ViewPart {
 		tabFolder.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
 			
-				System.out.println("affichage courant " + affiche);
+				System.out.println("affichage courant " + affiche); //$NON-NLS-1$
 				int tmp = tabFolder.getSelectionIndex();
 				
 				//tabFolder.setSelection(0);
 				Utils.validationEtape(tmp);
-				System.out.println("onglet sélectionné " + tmp); 
+				System.out.println("onglet sélectionné " + tmp);  //$NON-NLS-1$
 				 
 				
 				//rajouter test de validation au changement d'onglet
@@ -165,20 +165,20 @@ public class ViewFile extends ViewPart {
 			}
 		});
 		 tabItem = new TabItem(tabFolder, SWT.NONE);
-		tabItem.setText("Description");
+		tabItem.setText(Messages.getString("ViewFile.description")); //$NON-NLS-1$
 		tabItem.setControl(composite1);
 		 tabItem1 = new TabItem(tabFolder, SWT.NONE);
-		tabItem1.setText("Campagne");
+		tabItem1.setText(Messages.getString("ViewFile.campagne")); //$NON-NLS-1$
 		tabItem1.setControl(composite2);
 		
 		 tabItem2 = new TabItem(tabFolder, SWT.NONE);
-		tabItem2.setText("Station");
+		tabItem2.setText(Messages.getString("ViewFile.station")); //$NON-NLS-1$
 		tabItem2.setControl(composite3);
 		 tabItem3 = new TabItem(tabFolder, SWT.NONE);
-		tabItem3.setText("Données");
+		tabItem3.setText(Messages.getString("ViewFile.donnees")); //$NON-NLS-1$
 		tabItem3.setControl(composite4);
 		 tabItem9 = new TabItem(tabFolder, SWT.NONE);
-		tabItem9.setText("Conversion");
+		tabItem9.setText(Messages.getString("ViewFile.conversion")); //$NON-NLS-1$
 		tabItem9.setControl(compositeConversion);
 		
 	}
@@ -220,7 +220,7 @@ public class ViewFile extends ViewPart {
 	 *
 	 */
 	private void createComposite3() {
-		Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL );
+		Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL ); //$NON-NLS-1$
 		composite3 = new Composite(tabFolder, SWT.NONE);
 		composite3.setLayout(new FillLayout());
 		styledTextStation = new StyledText(composite3, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL |SWT.READ_ONLY );
@@ -232,7 +232,7 @@ public class ViewFile extends ViewPart {
 	 *
 	 */
 	private void createComposite4() {
-		Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL );
+		Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL ); //$NON-NLS-1$
 		composite4 = new Composite(tabFolder, SWT.NONE);
 		composite4.setLayout(new FillLayout(SWT.VERTICAL));
 		styledTextData = new StyledText(composite4, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL |SWT.READ_ONLY );
@@ -255,13 +255,13 @@ public class ViewFile extends ViewPart {
 		
 		radioFichier = new Button(composite11, SWT.RADIO);
 		radioFichier.setSelection(true);
-		radioFichier.setText("fichier campagne");
+		radioFichier.setText(Messages.getString("ViewFile.fichierCampagne")); //$NON-NLS-1$
 		radioDossier = new Button(composite11, SWT.RADIO);
-		radioDossier.setText("dossier campagne");
+		radioDossier.setText(Messages.getString("ViewFile.dossierCampagne")); //$NON-NLS-1$
 		radioFichier
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("fichier campagne"); // 
+						System.out.println("fichier campagne"); //  //$NON-NLS-1$
 					}
 				});
 		
@@ -273,21 +273,21 @@ public class ViewFile extends ViewPart {
 		radioDossier
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("dossier campagne)"); // 
+						System.out.println("dossier campagne)"); //  //$NON-NLS-1$
 					}
 				});
 	
 	
 	
 		buttonParcourir = new Button(composite11, SWT.NONE);
-		buttonParcourir.setText("Parcourir");
+		buttonParcourir.setText(Messages.getString("ViewFile.parcourir")); //$NON-NLS-1$
 		checkBoxTempo = new Button(composite11, SWT.CHECK);
-		checkBoxTempo.setText("Série temporelle");
+		checkBoxTempo.setText(Messages.getString("ViewFile.serieTempo")); //$NON-NLS-1$
 		checkBoxTempo.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
 				//si pas coché on active le groupTempo sinon on grise
 				if (checkBoxTempo.getSelection()){
-				System.out.println("série temporelle"); // 
+				System.out.println("série temporelle"); //  //$NON-NLS-1$
 				groupTempo.setVisible(true);}else{groupTempo.setVisible(false);}
 			
 			}
@@ -296,7 +296,7 @@ public class ViewFile extends ViewPart {
 		buttonParcourir
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("parcourir"); // 
+						System.out.println("parcourir"); //  //$NON-NLS-1$
 					
 					//parcours des fichiers/dossiers
 								//si fichier campagne
@@ -335,8 +335,8 @@ public class ViewFile extends ViewPart {
 														
 							} else { 
 								fileLoaded = false;
-								System.out.println("pas de fichier sélectionné");
-								ViewLog.styledTextLogErreurs.setText("\nVeuillez sélectionner un fichier pour continuer.");
+								System.out.println("pas de fichier sélectionné"); //$NON-NLS-1$
+								ViewLog.styledTextLogErreurs.setText(Messages.getString("ViewFile.selectionnezFichier")); //$NON-NLS-1$
 								
 							}
 							}
@@ -356,8 +356,8 @@ public class ViewFile extends ViewPart {
 									}
 								 else { 
 										fileLoaded = false;
-										System.out.println("pas de dossier sélectionné");
-										ViewLog.styledTextLogErreurs.setText("\nVeuillez sélectionner un dossier pour continuer.");
+										System.out.println("pas de dossier sélectionné"); //$NON-NLS-1$
+										ViewLog.styledTextLogErreurs.setText(Messages.getString("ViewFile.selectionnezDossier")); //$NON-NLS-1$
 										
 									}
 								
@@ -379,7 +379,7 @@ public class ViewFile extends ViewPart {
 	 */
 	private void createComposite12() {
 		
-		Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL );
+		Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL ); //$NON-NLS-1$
 		
 		composite12 = new Composite(composite1, SWT.NONE);
 		composite12.setLayout(new FillLayout());
@@ -399,17 +399,17 @@ public class ViewFile extends ViewPart {
 		compositeConversion.setLayout(layout);
 		
 		Group group = new Group(compositeConversion, SWT.NONE);
-		group.setText("Choix du format de sortie");
+		group.setText(Messages.getString("ViewFile.choixFormatSortie")); //$NON-NLS-1$
 		group.setLayout(layout);
 		
 //		Label label = new Label(compositeConversion, SWT.NONE);
 //		label.setText("Choix du format de sortie...");
 		
 		medatlas = new Button(group, SWT.RADIO);
-		medatlas.setText("Medatlas");
+		medatlas.setText("Medatlas"); //$NON-NLS-1$
 		medatlas.setSelection(true);
 		odv = new Button(group, SWT.RADIO);
-		odv.setText("ODV");
+		odv.setText("ODV"); //$NON-NLS-1$
 	}
 
 	/**
@@ -420,15 +420,15 @@ public class ViewFile extends ViewPart {
 		GridLayout gridLayout1 = new GridLayout();
 		gridLayout1.numColumns = 2;
 		groupTempo = new Group(composite11, SWT.NONE);
-		groupTempo.setText("Date et Heure relatives");
+		groupTempo.setText(Messages.getString("ViewFile.dateHeureRelatives")); //$NON-NLS-1$
 		groupTempo.setLayout(gridLayout1);
 		labelDateRef = new Label(groupTempo, SWT.NONE);
-		labelDateRef.setText("Date de référence");
+		labelDateRef.setText(Messages.getString("ViewFile.dateRef")); //$NON-NLS-1$
 		Label filler3 = new Label(groupTempo, SWT.NONE);
 		textTempoDateRef = new Text(groupTempo, SWT.BORDER);
 		createComboTempoDate();
 		labelHeureRef = new Label(groupTempo, SWT.NONE);
-		labelHeureRef.setText("Heure de référence");
+		labelHeureRef.setText(Messages.getString("ViewFile.heureRef")); //$NON-NLS-1$
 		Label filler2 = new Label(groupTempo, SWT.NONE);
 		textTempoHeureRef = new Text(groupTempo, SWT.BORDER);
 		
@@ -443,9 +443,9 @@ public class ViewFile extends ViewPart {
 	 */
 	private void createComboTempoDate() {
 		comboTempoDate = new Combo(groupTempo, SWT.NONE);
-		comboTempoDate.add("dd/MM/yyyy");
-		comboTempoDate.add("MM/dd/yyyy");
-		comboTempoDate.add("yyyy/dd/MM");
+		comboTempoDate.add("dd/MM/yyyy"); //$NON-NLS-1$
+		comboTempoDate.add("MM/dd/yyyy"); //$NON-NLS-1$
+		comboTempoDate.add("yyyy/dd/MM"); //$NON-NLS-1$
 		comboTempoDate.select(0);
 	}
 
@@ -455,9 +455,9 @@ public class ViewFile extends ViewPart {
 	 */
 	private void createComboTempoHeure() {
 		comboTempoHeure = new Combo(groupTempo, SWT.NONE);
-		comboTempoHeure.add("hh24:mm");
-		comboTempoHeure.add("hh:mm");
-		comboTempoHeure.add("hh24mm");
+		comboTempoHeure.add("hh24:mm"); //$NON-NLS-1$
+		comboTempoHeure.add("hh:mm"); //$NON-NLS-1$
+		comboTempoHeure.add("hh24mm"); //$NON-NLS-1$
 		comboTempoHeure.select(0);
 	}
 

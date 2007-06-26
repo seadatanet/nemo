@@ -49,7 +49,7 @@ public static ScrolledForm formEdition;
 		formEdition = ViewEdit.formEdition;
 		
 		//raz message erreur
-		Utils.messageErreur("");
+		Utils.messageErreur(""); //$NON-NLS-1$
 				
 		//de base les sections sont refermées
 		expand = 0;
@@ -78,8 +78,8 @@ public static ScrolledForm formEdition;
 		  gridlayout.numColumns = 1;
 		  formEdition.getBody().setLayout(gridlayout);
 		
-		formEdition.setText("Description de fichier");
-		System.out.println("ok editDesc");
+		formEdition.setText(Messages.getString("EditDesc.descriptiondeFichier")); //$NON-NLS-1$
+		System.out.println("ok editDesc"); //$NON-NLS-1$
 	
 		
 	
@@ -103,67 +103,67 @@ public static ScrolledForm formEdition;
 		
 		//boutons collapse all / expand all
 		buttonExpandDesc.setParent(formEdition.getBody());
-		buttonExpandDesc.setText("+");
+		buttonExpandDesc.setText("+"); //$NON-NLS-1$
 		
 		//bouton RAZ
 		buttonRAZ.setParent(formEdition.getBody());
-		buttonRAZ.setText("Reset");
+		buttonRAZ.setText("Reset"); //$NON-NLS-1$
 		
 //		bouton "valider étaper"
 		buttonValidateDesc.setParent(formEdition.getBody());
-		buttonValidateDesc.setText("Valider l'étape");
+		buttonValidateDesc.setText(Messages.getString("EditDesc.validerLetape")); //$NON-NLS-1$
 		
 		formEdition.redraw();
 		formEdition.reflow(true);
 		//formEdition.
 		
-		System.out.println("ok editDesc 2");
+		System.out.println("ok editDesc 2"); //$NON-NLS-1$
 		
 	// initialisation   liste des sections de la partie description fichier
 		
 
 //section entete fichier 
-Drawing.sectionLabelTextInjectNbreLignes(formEdition, "Entête de Fichier                      ", "Nombre de lignes : surlignez les lignes puis cliquez sur injecter", sectionEnteteFichier, lignesEnteteFichier);
+Drawing.sectionLabelTextInjectNbreLignes(formEdition, Messages.getString("EditDesc.enteteFichier"), Messages.getString("EditDesc.surlignezLignes"), sectionEnteteFichier, lignesEnteteFichier); //$NON-NLS-1$ //$NON-NLS-2$
 
 
 //section entete station
 //Drawing.sectionRadioManuelRadioSimpleInjectLigneDebutFinInject(formEdition, "Entête Station                         ", "Donnez le nombre de lignes de l'entête station ou précisez que le nombre d'octets est présent sur la première ligne de données", sectionEnteteStation, lignesEnteteStation , buttonLignesEnteteStation, "Nombre de lignes", "Nombre octets sur 1ere ligne données", octetsEnteteStationLigne, octetsEnteteStationDebut, octetsEnteteStationFin);
-Drawing.sectionLabelTextInjectNbreLignes(formEdition,"Entête Station                         ","Nombre de lignes entête Station: surlignez les lignes puis cliquez sur injecter", sectionEnteteStation, lignesEnteteStation);
+Drawing.sectionLabelTextInjectNbreLignes(formEdition,Messages.getString("EditDesc.enteteStation"),Messages.getString("EditDesc.nbreLignesEntete"), sectionEnteteStation, lignesEnteteStation); //$NON-NLS-1$ //$NON-NLS-2$
 
 
 
 //section fin de station
-Drawing.sectionLabelTextInjectNbreLignes(formEdition,"Fin de Station                         ","Nombre de lignes : surlignez les lignes puis cliquez sur injecter", sectionFinStation, lignesFinStation);
+Drawing.sectionLabelTextInjectNbreLignes(formEdition,Messages.getString("EditDesc.finStation"),Messages.getString("EditDesc.nbreLignesFinStation"), sectionFinStation, lignesFinStation); //$NON-NLS-1$ //$NON-NLS-2$
 
 //Drawing.sectionManuelLigneDebutFinInject("test", "blabla description", sectionTest, enteteDonnees, upletDonnees, finDonnees, indicFinDonnees, buttonLignesEnteteStation);
 
 //section rupture données + remplissage du combo list
 //Drawing.sectionComboLigneDebutFinInject(formEdition,"Indicateur de Fin de Données           ", "Indiquez ici quel est l'indicateur de rupture de données, ou surlignez les lignes de mesures puis cliquez sur injecter", sectionRuptureDonnees, ruptureDonneesNoLigne, ruptureDonneesDebut, ruptureDonneesFin, buttonIndicFinDonnees, comboIndicRuptureDonnees);
-Drawing.sectionComboInjectNbreLignes(formEdition, "Indicateur de Fin de Données           ", "Indiquez ici quel est l'indicateur de rupture de données, ou surlignez les lignes de mesures puis cliquez sur injecter", sectionRuptureDonnees, nbreLignesMesures, buttonIndicFinDonnees, comboIndicRuptureDonnees);
+Drawing.sectionComboInjectNbreLignes(formEdition, Messages.getString("EditDesc.indicFinDonnees"), Messages.getString("EditDesc.indiquezIndicFinDonnees"), sectionRuptureDonnees, nbreLignesMesures, buttonIndicFinDonnees, comboIndicRuptureDonnees); //$NON-NLS-1$ //$NON-NLS-2$
 //comboIndicRuptureDonnees.add("");
-comboIndicRuptureDonnees.add("Ligne vide");
-comboIndicRuptureDonnees.add("EOF");
-comboIndicRuptureDonnees.add("END");
+comboIndicRuptureDonnees.add(Messages.getString("EditDesc.ligneVide")); //$NON-NLS-1$
+comboIndicRuptureDonnees.add("EOF"); //$NON-NLS-1$
+comboIndicRuptureDonnees.add("END"); //$NON-NLS-1$
 
 
 //Drawing.sectionLabelText("automatique","numéro de ligne", sectionTest2, indicFinDonnees);											  
 
 //boutons collapse all / expand all
 buttonExpandDesc2.setParent(formEdition.getBody());
-buttonExpandDesc2.setText("+");
+buttonExpandDesc2.setText("+"); //$NON-NLS-1$
 
 //listeners
 
 buttonExpandDesc
 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 	public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-		System.out.println("expand/collapse all"); // TODO Auto-generated Event stub widgetSelected()
+		System.out.println("expand/collapse all"); // TODO Auto-generated Event stub widgetSelected() //$NON-NLS-1$
 		//raz de la valeur manuelle
 		int i;
 		
 		//Shell s = new Shell();
 		
-		System.out.println("expand ? = " + expand);
+		System.out.println("expand ? = " + expand); //$NON-NLS-1$
 		for (i=0;i<=EditDesc.listeSectionsDesc.size()-1;i++){
 			
 			if (expand == 0){ 
@@ -180,15 +180,15 @@ buttonExpandDesc
 			
 		}
 		if (expand == 0) {
-			System.out.println("expand passe à 1");
+			System.out.println("expand passe à 1"); //$NON-NLS-1$
 			
 			expand = 1;
-			buttonExpandDesc.setText("-");
-			buttonExpandDesc2.setText("-");}
+			buttonExpandDesc.setText("-"); //$NON-NLS-1$
+			buttonExpandDesc2.setText("-");} //$NON-NLS-1$
 		else{expand = 0;
-		System.out.println("expand passe à 0");
-		buttonExpandDesc.setText("+");
-		buttonExpandDesc2.setText("+");
+		System.out.println("expand passe à 0"); //$NON-NLS-1$
+		buttonExpandDesc.setText("+"); //$NON-NLS-1$
+		buttonExpandDesc2.setText("+"); //$NON-NLS-1$
 		} 
 		
 		//refresh global
@@ -201,13 +201,13 @@ buttonExpandDesc
 buttonExpandDesc2
 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 	public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-		System.out.println("expand/collapse all"); // TODO Auto-generated Event stub widgetSelected()
+		System.out.println("expand/collapse all"); // TODO Auto-generated Event stub widgetSelected() //$NON-NLS-1$
 		//raz de la valeur manuelle
 		int i;
 		
 		//Shell s = new Shell();
 		
-		System.out.println("expand ? = " + expand);
+		System.out.println("expand ? = " + expand); //$NON-NLS-1$
 		for (i=0;i<=EditDesc.listeSectionsDesc.size()-1;i++){
 			
 			if (expand == 0){ 
@@ -223,15 +223,15 @@ buttonExpandDesc2
 			
 		}
 		if (expand == 0) {
-			System.out.println("expand passe à 1");
+			System.out.println("expand passe à 1"); //$NON-NLS-1$
 			
 			expand = 1;
-			buttonExpandDesc2.setText("-");
-			buttonExpandDesc.setText("-");}
+			buttonExpandDesc2.setText("-"); //$NON-NLS-1$
+			buttonExpandDesc.setText("-");} //$NON-NLS-1$
 		else{expand = 0;
-		System.out.println("expand passe à 0");
-		buttonExpandDesc2.setText("+");
-		buttonExpandDesc.setText("+");
+		System.out.println("expand passe à 0"); //$NON-NLS-1$
+		buttonExpandDesc2.setText("+"); //$NON-NLS-1$
+		buttonExpandDesc.setText("+"); //$NON-NLS-1$
 		} 
 		
 		//refresh global
@@ -244,7 +244,7 @@ buttonExpandDesc2
 buttonValidateDesc
 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 	public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-		System.out.println("validation"); // TODO Auto-generated Event stub widgetSelected()
+		System.out.println("validation"); // TODO Auto-generated Event stub widgetSelected() //$NON-NLS-1$
 		
 		//on passe en ppar l'étape à laquelle on se trouve
 		Etape.etape(0);	
@@ -264,7 +264,7 @@ buttonValidateDesc
 buttonRAZ
 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 	public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-		System.out.println("RAZ"); // TODO Auto-generated Event stub widgetSelected()
+		System.out.println("RAZ"); // TODO Auto-generated Event stub widgetSelected() //$NON-NLS-1$
 		
 		razText(listeTextDesc);
 		
@@ -309,19 +309,19 @@ nomNemo();
 		//effacement bouton valider etape
 		buttonValidateDesc.setParent(s);
 		
-		System.out.println("expand ? = " + expand);
+		System.out.println("expand ? = " + expand); //$NON-NLS-1$
 		for (i=0;i<=EditDesc.listeSectionsDesc.size()-1;i++){
 			
 			
 			EditDesc.listeSectionsDesc.get(i).setExpanded(true);
 			EditDesc.listeSectionsDesc.get(i).setParent(s);
-			System.out.println("effacement zone edition etape description fichier ==> ok");
+			System.out.println("effacement zone edition etape description fichier ==> ok"); //$NON-NLS-1$
 			}
 	
 		
 		
 		//effacement titre formulaire
-		ViewEdit.formEdition.setText("");
+		ViewEdit.formEdition.setText(""); //$NON-NLS-1$
 		
 		//refresh global
 		ViewEdit.formEdition.reflow(true);
@@ -347,7 +347,7 @@ nomNemo();
 	nomNemo();
 	
 //	raz message erreur
-	Utils.messageErreur("");
+	Utils.messageErreur(""); //$NON-NLS-1$
 	
 		ScrolledForm s;
 		s = ViewEdit.formEdition;
@@ -358,19 +358,19 @@ nomNemo();
 		//affichage bouton valider etape
 		buttonValidateDesc.setParent(s.getBody());
 		
-		System.out.println("expand ? = " + expand);
+		System.out.println("expand ? = " + expand); //$NON-NLS-1$
 		for (i=0;i<=EditDesc.listeSectionsDesc.size()-1;i++){
 			
 			
 			EditDesc.listeSectionsDesc.get(i).setExpanded(false);
 			EditDesc.listeSectionsDesc.get(i).setParent(s.getBody());
-			System.out.println("Affichage section etape description fichier ==> ok");
+			System.out.println("Affichage section etape description fichier ==> ok"); //$NON-NLS-1$
 			}
 	
 		buttonExpandDesc2.setParent(s.getBody());
 		
 		//effacement titre formulaire
-		ViewEdit.formEdition.setText("Description de Fichier");
+		ViewEdit.formEdition.setText(Messages.getString("EditDesc.descriptionFichier")); //$NON-NLS-1$
 		
 		//refresh global
 		ViewEdit.formEdition.reflow(true);
@@ -395,7 +395,7 @@ public static void initSections(){
 	 sectionTest= new Section(shell, SWT.NONE);
 	 sectionTest2= new Section(shell, SWT.NONE);
 	 
-	System.out.println("init section ok");
+	System.out.println("init section ok"); //$NON-NLS-1$
 	}
 	
 	
@@ -449,7 +449,7 @@ public static void initCombos(){
 public static void razText(ArrayList <Text> liste){
 	
 	for (int i =0; i< liste.size(); i++){
-		liste.get(i).setText("");
+		liste.get(i).setText(""); //$NON-NLS-1$
 				
 	}
 	
@@ -461,14 +461,14 @@ public static void nomNemo(){
 	if (ViewFile.dossierCampagne){
 		//dossier campagne
 		
-		System.out.println(">>>>"+ViewFile.nomRepertoire);
+		System.out.println(">>>>"+ViewFile.nomRepertoire); //$NON-NLS-1$
 		File fich = new File(ViewFile.nomRepertoire);
 		if (DataModel.ouverture){
-			ApplicationWorkbenchWindowAdvisor.configurer_titre.setTitle("NEMO - [Dossier "+fich.getName()+" ]=====[ Modèle "+OpenAction.nomFichierModele+" ]");
+			ApplicationWorkbenchWindowAdvisor.configurer_titre.setTitle(Messages.getString("EditDesc.nemoDossier")+fich.getName()+Messages.getString("EditDesc.modele")+OpenAction.nomFichierModele+" ]"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			
 			
 		}else{
-			ApplicationWorkbenchWindowAdvisor.configurer_titre.setTitle("NEMO - [ Dossier "+fich.getName()+" ]");			
+			ApplicationWorkbenchWindowAdvisor.configurer_titre.setTitle(Messages.getString("EditDesc.dossier")+fich.getName()+" ]");			 //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		
 		
@@ -478,9 +478,9 @@ public static void nomNemo(){
 		fich = new File(ViewFile.nomFichier);
 				
 		if (DataModel.ouverture){
-			ApplicationWorkbenchWindowAdvisor.configurer_titre.setTitle("NEMO - [ Fichier "+fich.getName()+" ]=====[ Modèle "+OpenAction.nomFichierModele+" ]");
+			ApplicationWorkbenchWindowAdvisor.configurer_titre.setTitle(Messages.getString("EditDesc.fichier")+fich.getName()+Messages.getString("EditDesc.modele")+OpenAction.nomFichierModele+" ]"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 		}else{
-			ApplicationWorkbenchWindowAdvisor.configurer_titre.setTitle("NEMO - [ Fichier "+fich.getName()+" ]");
+			ApplicationWorkbenchWindowAdvisor.configurer_titre.setTitle(Messages.getString("EditDesc.fichier")+fich.getName()+" ]"); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 	}
 	

@@ -279,6 +279,9 @@ public static void initSurvey(){
 	//parcours de la liste des dataTypes de l'IHM et création d'un DataType à chaque fois
 	int taille = TableDataSurvey.types.size();
 	
+	//reset préventif des dataTypes
+	survey.releaseDataTypes();
+	
 	for (int i=0; i<taille;i++){
 		TypeSurvey typeSurvey = TableDataSurvey.types.get(i);
 		DataType dataType = new DataType();
@@ -983,9 +986,23 @@ if (ViewFile.checkBoxTempo.getSelection()){
 
 public static void initData(){
 	
+//	mise à jour des types avant validation
+	 TableData.majTypeData();	
+	
 	//remplissage des paramètres mesurés
 	int nbreParam = TableData.types.size();
-		
+	
+	//reset systématique des parametres stockés dans le dataModel
+	stationModel.releaseParameterModels();
+	
+//	int nbreDataModel = stationModel.getParameterModels().length;
+//	for (int i =0; i<nbreDataModel;i++){
+//		stationModel.getParameterModels().release();
+//		//stationModel.getParameterModels()[i].releaseModel();
+//		
+//	}
+	
+	
 	for (int i=0;i<nbreParam;i++){
 		TypeData typeCourant = TableData.types.get(i);
 		
@@ -994,6 +1011,7 @@ public static void initData(){
 		ParameterModel parameterModel = new ParameterModel();
 		parameterModel.setModel(para);
 		
+		parameterModel.setModel(para);
 		
 		//split sur " - "
 		Pattern p  = Pattern.compile(" - ");
@@ -1021,10 +1039,11 @@ public static void initData(){
 		
 		
 		//test par / au DataModel puis ajout du paramètre ou non
-		ParameterModel[] parametersModels = stationModel.getParameterModels();
-		int nbre = parametersModels.length;
-		Boolean found = false;
+//		ParameterModel[] parametersModels = stationModel.getParameterModels();
+//		int nbre = parametersModels.length;
+//		Boolean found = false;
 		
+		/*
 		if (nbre ==0){stationModel.addParameterModel(parameterModel);}
 		else
 		{
@@ -1042,10 +1061,13 @@ public static void initData(){
 		}
 		
 		if (found == false){
+		*/
+			
 			stationModel.addParameterModel(parameterModel);
-		System.out.println(">>Ajout du paramètre " + typeCourant.getCode() + " ... OK");}
+			System.out.println(">>Ajout du paramètre " + typeCourant.getCode() + " ... OK");
+		//System.out.println(">>Ajout du paramètre " + typeCourant.getCode() + " ... OK");}
 		
-		}
+		//}
 		
 		//station.
 	

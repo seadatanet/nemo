@@ -142,7 +142,20 @@ dicoRegexp.put("YY/MM/DD", tabYYiMMiDD);
 dicoRegexp.put("MM/YY/DD", tabMMiYYiDD);
 	
 }	
+
+
+public static Boolean checkPresenceValeurObligatoire(Text text, String nomSection){
 	
+	Boolean ok=true;
+	
+	if (text.getText().matches("")){
+	Utils.messageErreurAppend("La valeur de la section "+nomSection+" est obligatoire !");
+	ok = false;
+	}
+	
+	return ok;
+}
+
 public static Boolean checkLigneDebutfin(Text ligne, Text debut, Text fin, String nomSection){
 	
 	String lign, debu, fi, log;
