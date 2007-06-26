@@ -19,13 +19,13 @@ public class ViewLog extends ViewPart {
 
 	private Composite top = null;
 
-	private TabFolder tabFolder = null;
+	public static TabFolder tabFolder = null;
 
-	private TabFolder tabFolder1 = null;
+	public static TabFolder tabFolder1 = null;
 
-	private TabFolder tabFolder2 = null;
+	public static TabFolder tabFolder2 = null;
 
-	private TabFolder tabFolder3 = null;
+	public static TabFolder tabFolder3 = null;
 
 	
 
@@ -39,7 +39,7 @@ public class ViewLog extends ViewPart {
 
 	private Button buttonLogConversion = null;
 
-	private TabFolder tabFolderLog = null;
+	public static TabFolder tabFolderLog = null;
 
 	public static StyledText styledTextLogErreurs, styledTextLogInfos, styledTextLogHelp = null;
 

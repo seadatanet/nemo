@@ -149,7 +149,7 @@ public static Boolean checkPresenceValeurObligatoire(Text text, String nomSectio
 	Boolean ok=true;
 	
 	if (text.getText().matches("")){
-	Utils.messageErreurAppend("La valeur de la section "+nomSection+" est obligatoire !");
+	Utils.messageErreurAppend("La valeur de la section "+nomSection+" est obligatoire !\n");
 	ok = false;
 	}
 	

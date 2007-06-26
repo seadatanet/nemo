@@ -36,6 +36,12 @@ public class Etape {
 	
 	
 	public static void validationDesc(){
+		
+		//retour à l'onglet message d'erreur
+		ViewLog.tabFolderLog.setSelection(0);
+		
+		
+		
 		Boolean ok, resultat;
 		ok = true;
 		Table table;
@@ -108,11 +114,42 @@ public class Etape {
 	public static void validationSurvey(){
 		//	test de toutes les valeurs de Survey	
 		
+		
+		//retour à l'onglet message d'erreur
+		ViewLog.tabFolderLog.setSelection(0);
+		
+		
 		Boolean ok, resultat;
 		ok = true;
 		
 		//	raz du message d'erreurs
 		Utils.messageErreur("");
+		
+		//check valeurs obligatoires
+		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textCampagne, "Référence / campagne");
+		ok = ok && resultat;
+		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textNom, "Référence / nom");
+		ok = ok && resultat;
+		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textCodeNavire, "Référence / code navire");
+		ok = ok && resultat;
+		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textNomNavire, "Référence / nom navire");
+		ok = ok && resultat;
+		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textDateDebut, "Localisation / date début");
+		ok = ok && resultat;
+		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textDateFin, "Localisation / date fin");
+		ok = ok && resultat;
+		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textRegion, "Localisation / région");
+		ok = ok && resultat;
+		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textPays, "Source / pays");
+		ok = ok && resultat;
+		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textChef, "Source / chef mission");
+		ok = ok && resultat;
+		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textCentre, "Centre / centre de données");
+		ok = ok && resultat;
+		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textConfidentiel, "Centre / confidentialité");
+		ok = ok && resultat;
+		
+		
 		
 		//CHECK DATES
 		if (!EditSurvey.textDateDebut.getText().matches("")){
@@ -156,6 +193,10 @@ public class Etape {
 
 	public static void validationStation(){
 //		test des valeurs de Station
+		
+		//retour à l'onglet message d'erreur
+		ViewLog.tabFolderLog.setSelection(0);
+		
 		
 		System.out.println("Debut check station");
 		
@@ -552,8 +593,12 @@ public class Etape {
 	public static void validationData(){
 //		 test de toutes les valeurs debut / fin des Data
 		Boolean ok = true;
-		Boolean resultat;
+		Boolean resultat, valeurNonRemplie=false;
 		String string=null, ligne=null;
+		
+		//retour à l'onglet message d'erreur
+		ViewLog.tabFolderLog.setSelection(0);
+		
 		
 		int nbreParam = TableData.types.size();
 		int []debuts, fins;
@@ -579,7 +624,7 @@ public class Etape {
 			for (int j=0; j<nbreParam;j++){
 				System.out.println(debuts[i]+"<=>"+debuts[j] + "###"+ fins[i] +"<=>"+ fins[j]);
 				if (debuts[i]==debuts[j]){
-					
+					if (debuts[i]==0){valeurNonRemplie = true;}
 					cptDebut = cptDebut+1;}
 				if (fins[i]==fins[j]){cptFin = cptFin +1;}
 								
@@ -588,9 +633,14 @@ public class Etape {
 		}
 		if ((cptDebut >nbreParam)||(cptFin >nbreParam)){
 			Utils.messageErreur("Certaines valeurs de début ou de fin sont en double !");
+			
 		ok = false;
 		}
 		
+		if (valeurNonRemplie){
+			Utils.messageErreurAppend("Certains paramètres ont encore leurs valeurs par défaut !");
+			ok = false;
+		}
 		
 		
 		if ((ViewFile.checkBoxTempo.getSelection())&&(EditData.buttonLigneDonnees.getSelection())){
