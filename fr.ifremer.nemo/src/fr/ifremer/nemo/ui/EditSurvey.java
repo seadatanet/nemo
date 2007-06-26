@@ -124,10 +124,6 @@ public class EditSurvey {
 			initBoutons();
 			initListeType();
 			
-			
-			
-			
-			
 			//boutons collapse all / expand all
 			
 			buttonExpand.setParent(ViewEdit.formEdition.getBody());
@@ -449,7 +445,7 @@ public class EditSurvey {
     	    		            }
     	    		          });
     		    	  
-    		          shell.close();
+    		          
     		        
     		        
     		      }
@@ -458,7 +454,7 @@ public class EditSurvey {
     		
     		
     		
-    		
+    		    shell.close();	
     		
     		
     		
