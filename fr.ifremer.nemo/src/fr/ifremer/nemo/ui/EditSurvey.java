@@ -383,19 +383,94 @@ public class EditSurvey {
 		
 		public static void webServiceUpdate(){
 			
-			Shell shell = new Shell();	
+			final Shell shell = new Shell();	
 			shell.setSize(200, 20);
     		shell.setBounds(50, 50, 200, 20);
     		shell.open();
     		
     		final ProgressBar progressbar = new ProgressBar(shell,
-  				  SWT.HORIZONTAL | SWT.SMOOTH | SWT.INDETERMINATE | SWT.APPLICATION_MODAL);
-  				progressbar.setMinimum(0);
-  				progressbar.setMaximum(100);
-  				//progressbar.setSize(200,20);
-  				
-  				progressbar.setBounds(0,0, 200, 20);
-  				shell.pack();
+    				  SWT.HORIZONTAL | SWT.SMOOTH  | SWT.APPLICATION_MODAL);
+    				progressbar.setMinimum(0);
+    				progressbar.setMaximum(100);
+    				//progressbar.setSize(200,20);
+    				
+    				progressbar.setBounds(0,0, 200, 20);
+    				shell.pack();
+    				shell.setText("Interrogation des WebServices... Veuillez patienter...");
+    		
+    		////////////////////////////////////////////
+    		
+    		
+    		new Thread() {
+    		      public void run() {
+    		       
+//    		    	interrogation WService
+    					NemoLists.updateCountries();
+    					  Application.display.asyncExec(new Runnable() {
+    	    		            public void run() {
+    	    		              progressbar.setSelection(14);
+    	    		            }
+    	    		          });
+    					NemoLists.updateDataTypes();
+    					  Application.display.asyncExec(new Runnable() {
+    	    		            public void run() {
+    	    		              progressbar.setSelection(28);
+    	    		            }
+    	    		          });
+    					NemoLists.updateRegions();
+    					  Application.display.asyncExec(new Runnable() {
+    	    		            public void run() {
+    	    		              progressbar.setSelection(42);
+    	    		            }
+    	    		          });
+    				
+    					NemoLists.updateShips();
+    					  Application.display.asyncExec(new Runnable() {
+    	    		            public void run() {
+    	    		              progressbar.setSelection(56);
+    	    		            }
+    	    		          });
+    					NemoLists.updateDataCentres();
+    					  Application.display.asyncExec(new Runnable() {
+    	    		            public void run() {
+    	    		              progressbar.setSelection(70);
+    	    		            }
+    	    		          });
+    					NemoLists.updateParameters();
+    					  Application.display.asyncExec(new Runnable() {
+    	    		            public void run() {
+    	    		              progressbar.setSelection(84);
+    	    		            }
+    	    		          });
+    					NemoLists.updateSurveys();
+    					  Application.display.asyncExec(new Runnable() {
+    	    		            public void run() {
+    	    		              progressbar.setSelection(100);
+    	    		            }
+    	    		          });
+    		    	  
+    		          shell.close();
+    		        
+    		        
+    		      }
+    		    }.start();
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+    		
+    		//////////////////////////////////////////
+    		
+    		
+    	/*
 			
 			//interrogation WService
 			NemoLists.updateCountries();
@@ -408,6 +483,8 @@ public class EditSurvey {
 			NemoLists.updateSurveys();
 			
 			shell.close();
+			*/
+			
 		}
 		
 		public static void init_webService(){
