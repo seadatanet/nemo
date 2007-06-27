@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.events.ExpansionAdapter;
 import org.eclipse.ui.forms.events.ExpansionEvent;
+import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
 public class DrawingStation {
@@ -878,8 +879,6 @@ section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition.getBody(
 		final Text zone;
 		zone = text;
 		
-		section.setParent(EditDesc.formEdition);
-		
 		section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition.getBody(), 
 				  Section.DESCRIPTION|Section.TITLE_BAR|
 				  Section.TWISTIE|Section.COMPACT);
@@ -899,6 +898,8 @@ section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition.getBody(
 		Composite sectionClient = ViewEdit.toolkitEdition.createComposite(section);
 		sectionClient.setLayout(new GridLayout());
 		
+		Button button = new Button(sectionClient, SWT.RADIO);
+		button.setText("essai");
 		text.setParent(sectionClient);
 		text.setTextLimit(1);
 		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -1879,23 +1880,11 @@ public static void sectionManuelLigneDebutFinInjectLatLongFin(String nomSection,
 				  
 				  //Button saisieManuelle = ViewEdit.toolkitEdition.createButton(sectionClient, "Saisie manuelle", SWT.RADIO);
 				
-				
-				  
-				  
 				  manuel.setParent(sectionClient);
 				  manuel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 				  
 				
 				  manu = manuel;
-				  
-				 
-				  
-				  //bouton radio "position"
-				 //radio.setParent(sectionClient);
-				  //radio.setText("Position");
-				  
-				
-				  
 				  
 				  position.setParent(sectionClient);
 				  position.setText("Position");
@@ -2029,7 +2018,64 @@ public static void sectionManuelLigneDebutFinInjectLatLongFin(String nomSection,
 		
 	}
 	
+	public static void sectionDateQC(String nomSection, String description, Section section){
+		
+				section.setParent(ViewEdit.formEdition);
+				section = ViewEdit.toolkitEdition.createSection(ViewEdit.formEdition.getBody(), 
+						  Section.DESCRIPTION|Section.TITLE_BAR|
+						  Section.TWISTIE|Section.COMPACT);
+				
+				  section.addExpansionListener(new ExpansionAdapter() {
+						  public void expansionStateChanged(ExpansionEvent e) {
+							  ViewEdit.formEdition.reflow(true);
+						  }
+						 });
+				  Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL );
+				  section.setFont(font);
+				  section.setText(nomSection);
+				  section.setDescription(description);
+						 Composite sectionClient = ViewEdit.toolkitEdition.createComposite(section);
+						 GridLayout gridLayout = new GridLayout();
+						 gridLayout.numColumns = 2;
+						 sectionClient.setLayout(gridLayout);
+						
+						  //label avec le texte de "description"
+						  Label label1 = new Label(sectionClient, SWT.NULL);
+						  label1.setText("Flag QC Date/Heure");					
+						  EditStation.textQCDate.setParent(sectionClient);
+						 // EditStation.textQCDate.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+						  EditStation.textQCDate.setTextLimit(1);
+						  
+						  Label label2 = new Label(sectionClient, SWT.NULL);
+						  label2.setText("Flag QC Latitude");					
+						  EditStation.textQCLat.setParent(sectionClient);
+						 // EditStation.textQCDate.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+						  EditStation.textQCLat.setTextLimit(1);
+						  
+						  Label label3 = new Label(sectionClient, SWT.NULL);
+						  label3.setText("Flag QC Longitude");					
+						  EditStation.textQCLong.setParent(sectionClient);
+						 // EditStation.textQCDate.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+						  EditStation.textQCLong.setTextLimit(1);
+						  
+						  Label label4 = new Label(sectionClient, SWT.NULL);
+						  label4.setText("Flag QC Profondeur");					
+						  EditStation.textQCProf.setParent(sectionClient);
+						 // EditStation.textQCDate.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+						  EditStation.textQCProf.setTextLimit(1);
+						  
+						  
+						  section.setClient(sectionClient);		
+					
+						  
+						  //ajout de la section dans la liste des sections de description
+						  ajoutSectionDansListeStation(section);  
+					
 	
+	
+	
+}
+
 	
 	
 	

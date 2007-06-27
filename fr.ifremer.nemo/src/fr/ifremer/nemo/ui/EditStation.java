@@ -144,17 +144,8 @@ DrawingStation.sectionHeure("Heure                                  ", "", secti
 //section date
 DrawingStation.sectionDate("Date                                   ", "", sectionDate, textDateLigne, textDateDebut, textDateFin, textDateSaisie, labelConversionDate);
 
-//flag QC date
-//DrawingStation.sectionFlagQC(sectionQCDate, "Date QC                                ", "Entrez le flag QC de la date", textQCDate);
-
-//flag QC lat
-//DrawingStation.sectionFlagQC(sectionQCLat, "Latitude QC                            ", "Entrez le flag QC de la latitude", textQCDate);
-
-//flag QC long
-//DrawingStation.sectionFlagQC(sectionQCLong, "Longitude QC                           ", "Entrez le flag QC de la longitude", textQCDate);
-
-//flag QC prof
-//DrawingStation.sectionFlagQC(sectionQCDate, "Profondeur QC                          ", "Entrez le flag QC de la profondeur", textQCDate);
+//flags QC
+DrawingStation.sectionDateQC("QC Flags                               ", "Entrez ici les flags QC pour la date, la latitude, la longitude et la profondeur", sectionQCDate);
 
 //section Latitude
 DrawingStation.sectionManuelLigneDebutFinInjectLatLongComboFormat("Latitude                               ", "", sectionLatitude, textLatitudeLigne, textLatitudeDebut, textLatitudeFin, textLatitude, buttonLatSaisie, comboLatitude, buttonLatPos);
