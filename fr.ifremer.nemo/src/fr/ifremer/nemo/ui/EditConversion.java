@@ -67,7 +67,7 @@ public class EditConversion extends Thread {
 		
 		
 			
-			shell = new Shell(Application.display);	
+			shell = new Shell(SWT.NONE);	
 			shell.setSize(500, 20);
     		shell.setBounds(100, 100, 500, 20);
     		shell.open();

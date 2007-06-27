@@ -378,7 +378,7 @@ public class EditSurvey {
 		
 		public static void webServiceUpdate(){
 			
-			shell = new Shell();	
+			shell = new Shell(SWT.NONE);	
 			shell.setSize(200, 20);
     		shell.setBounds(50, 50, 500, 20);
     		shell.open();

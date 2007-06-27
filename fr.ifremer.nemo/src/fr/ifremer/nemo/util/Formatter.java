@@ -172,7 +172,7 @@ public  class Formatter implements Cloneable {
     if (a_String.length() > length) {
     	return a_String.substring( 0, length);
     }
-    return a_String;
+    return a_String.trim();
   }
 
   /**
