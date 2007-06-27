@@ -89,7 +89,7 @@ public class EditConversion extends Thread {
                 				Application.display.syncExec( new Runnable() {
                                                           public void run() {
                                                               progressbar.setSelection(val);
-                                                              System.out.println(">>>"+ val);
+                                                              System.out.println(">>>"+ val+"%");
                                                               shell.pack();
                                                               
                                                           }

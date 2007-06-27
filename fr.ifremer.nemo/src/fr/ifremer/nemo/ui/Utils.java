@@ -127,6 +127,16 @@ public class Utils {
 		
 		ViewLog.styledTextLogInfos.setText("Localisation du fichier : " + fich);
 		ViewLog.styledTextLogInfos.append("\nNombre de lignes : " + nbreLignes);
+		
+		
+		//réactivation de l'option série temporelle onglet DESC
+		ViewFile.checkBoxTempo.setEnabled(true);
+		
+//		RAZ global si réouverture fichier en cours de processus
+		Utils.razGlobal();
+		
+		//reset de l'étape de conversion
+		ViewFile.etape = 0;
 
 	}
 
@@ -882,6 +892,36 @@ public class Utils {
 			
 			EditStation.loaded = 0;
 			EditStation.validee = 0;
+		}
+		
+		
+		if (EditData.sectionTotal != null){
+//			effacement des boutons valider/expand/init serveur
+			//EditData.buttonExpand.dispose();
+			//EditData.buttonExpand2.dispose();
+			EditData.buttonValidate.dispose();
+			EditData.buttonRAZ.dispose();
+			
+			
+			//effacement des boutons radio
+			EditData.buttonFreqEchant.dispose();
+			EditData.buttonLigneDonnees.dispose();
+			//EditData.sectionTotal.dispose();
+			for (int i=0;i<=EditData.listeSectionsData.size()-1;i++){
+				EditData.listeSectionsData.get(i).dispose();
+				}
+			
+//				titre à vide
+				ViewEdit.formEdition.setText("");
+
+//				refresh global
+				ViewEdit.formEdition.reflow(true);
+				
+				EditData.loaded = 0;
+				EditData.validee = 0;
+			
+			
+			
 		}
 		
 		//		effacement de la table data

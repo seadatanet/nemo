@@ -29,6 +29,6 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		configurer_titre = configurer;
 		
 		configurer_titre.setTitle("Nemo");
-		//configurer.setShellStyle(SWT.CLOSE | SWT);
+		//configurer.setShellStyle(SWT.BORDER | SWT.MIN | SWT.MAX);
 	}
 }

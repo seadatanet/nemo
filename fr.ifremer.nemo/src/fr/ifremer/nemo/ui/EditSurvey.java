@@ -379,7 +379,7 @@ public class EditSurvey {
 			
 			final Shell shell = new Shell();	
 			shell.setSize(200, 20);
-    		shell.setBounds(50, 50, 200, 20);
+    		shell.setBounds(50, 50, 500, 20);
     		shell.open();
     		
     		final ProgressBar progressbar = new ProgressBar(shell,
@@ -388,7 +388,7 @@ public class EditSurvey {
     				progressbar.setMaximum(100);
     				//progressbar.setSize(200,20);
     				
-    				progressbar.setBounds(0,0, 200, 20);
+    				progressbar.setBounds(0,0, 500, 20);
     				shell.pack();
     				shell.setText("Interrogation des WebServices... Veuillez patienter...");
     		

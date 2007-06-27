@@ -121,7 +121,7 @@ public static void initDesc(){
 			dateFormat.setFormatString(ViewFile.comboTempoDate.getText());
 			dateLong = (Long)dateFormat.parseObject(ViewFile.textTempoDateRef.getText());
 		} catch (ParseException e) {
-			// TODO Bloc catch auto-généré
+			// 
 			e.printStackTrace();
 		}
 						
@@ -134,7 +134,7 @@ public static void initDesc(){
 			timeFormat.setFormatString(ViewFile.comboTempoHeure.getText());
 			timeLong = (Long)timeFormat.parseObject(ViewFile.textTempoHeureRef.getText());
 		} catch (ParseException e) {
-			// TODO Bloc catch auto-généré
+			// 
 			e.printStackTrace();
 		}
 		
@@ -208,8 +208,15 @@ public static void initDesc(){
 	listeWSDataTypes = NemoLists.getDataTypes();
 	listeWSParameters = NemoLists.getParameters();
 	
-//	Lancement de la table des paramètres, onglet DATA
-	TableData.go();
+//	Lancement de la table des paramètres, onglet DATA, si pas deja créée
+	if (ViewFile.tableData == null){
+		TableData.go();	
+	}
+	
+	
+//vérouillage de l'option serieTemporelle pour éviter les changements
+	ViewFile.checkBoxTempo.setEnabled(false);
+	
 	
 	//flag "validee" à 1
 	EditDesc.validee = 1;
@@ -504,12 +511,17 @@ public static void initStation(){
 		
 //décallage TU
 	propertyModel = stationModel.propertiesAt("offsetTU");
+	propertyModel.setUserProvided(true);
+	station.setOffsetTU("0.0");
+	
+	/*
 	//if (EditStation.buttonTUSaisie.getSelection()){
 		if (true){
 			//mise à true pour passage obligatoire ! TODO
 		//saisie manuelle
-		station.setLatitude(EditStation.textTU.getText());
-		propertyModel.setUserProvided(true);
+		//station.setLatitude(EditStation.textTU.getText());
+		station.setOffsetTU("0.0");
+			propertyModel.setUserProvided(true);
 		
 	} else {
 		propertyModel.setUserProvided(false);
@@ -528,7 +540,7 @@ public static void initStation(){
 		frag.setLastCharOffset(fin);
 		
 	}
-	
+	*/
 
 	
 //		frequence echantillonnage		
@@ -686,7 +698,7 @@ if (ViewFile.checkBoxTempo.getSelection()){
 				station.setLatitude(latitudeDouble);
 				propertyModel.setUserProvided(true);
 			} catch (ParseException e) {
-				// TODO Bloc catch auto-généré
+				// 
 				e.printStackTrace();
 			}
 			
@@ -839,7 +851,7 @@ if (ViewFile.checkBoxTempo.getSelection()){
 	if (EditStation.buttonProfFinSaisie.getSelection()){
 		propertyModel.setUserProvided(true);
 		//valeur manuelle
-		timeSeriesInformation.setEndDepth(EditStation.textLatFin.getText());
+		timeSeriesInformation.setEndDepth(EditStation.textProfFin.getText());
 	}else{
 		//position dans fichier
 		frag = propertyModel.getFragment();
@@ -890,8 +902,6 @@ if (ViewFile.checkBoxTempo.getSelection()){
 		frag = propertyModel.getFragment();
 		propertyModel.setUserProvided(false);
 		
-		
-		
 		ligne = "" + (Integer.valueOf(EditStation.textLatFinLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
 		debut = EditStation.textLatFinDebut.getText();
 		fin = EditStation.textLatFinFin.getText();
@@ -906,8 +916,7 @@ if (ViewFile.checkBoxTempo.getSelection()){
 	
 	//LONGITUDE DE FIN
 	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("endLongitude");
-	
-	
+		
 //	format de la longitude à mettre dans le datamodel
 	LongitudeFormat longitudeFormatFin = (LongitudeFormat)propertyModel.getFormat();
 	try {
@@ -938,7 +947,6 @@ if (ViewFile.checkBoxTempo.getSelection()){
 		frag = propertyModel.getFragment();
 		propertyModel.setUserProvided(false);
 		
-		
 		ligne = "" + (Integer.valueOf(EditStation.textLongFinLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
 		debut = EditStation.textLongFinDebut.getText();
 		fin = EditStation.textLongFinFin.getText();
@@ -948,8 +956,6 @@ if (ViewFile.checkBoxTempo.getSelection()){
 		frag.setFirstCharOffset(debut);
 		frag.setLastCharOffset(fin);
 	}
-	
-	
 	
 	
 	//PROFONDEUR CAPTEUR
@@ -1228,6 +1234,10 @@ public static void fillDesc(){
 	EditDesc.DrawingBack();
 	
 	DataModel.ouverture = true;
+	
+	
+	//désactivation option série tempo
+	ViewFile.checkBoxTempo.setEnabled(false);
 	
 }
 

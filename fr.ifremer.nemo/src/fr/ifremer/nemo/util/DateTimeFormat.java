@@ -366,7 +366,8 @@ public  class DateTimeFormat extends ExternalizableFormat implements Cloneable {
   public Long parseObject ( String source, ParsePosition pos) {
     int index = pos.getIndex();
     
-    System.out.println("parseObject(): Source parsée ==>"+source+"<==");
+    System.out.println("DateTimeFormat/parseObject(): Source parsée ==>"+source);
+    System.out.println("chaine date ");
     
     TimeZone tz = TimeZone.getTimeZone("GMT");
     Calendar cal = Calendar.getInstance(tz);
@@ -408,6 +409,9 @@ public  class DateTimeFormat extends ExternalizableFormat implements Cloneable {
     				}
     				case DAY: {
     					String tmp = source.substring( index, index+_elements[i]._element.length());
+    					
+    					
+    					
     					int day = Integer.parseInt(tmp);
     					cal.set( Calendar.DAY_OF_MONTH, day);
     					index += _elements[i]._element.length();

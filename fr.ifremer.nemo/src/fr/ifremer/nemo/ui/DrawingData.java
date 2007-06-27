@@ -186,8 +186,8 @@ public static void sectionTotal(String nomSection, String description, Section s
 					  grou = groupe;
 					  
 					  //ligne
-					  Label label1 = new Label(groupe, SWT.NULL);
-					  label1.setText("Ligne");
+					 // Label label1 = new Label(groupe, SWT.NULL);
+					 // label1.setText("Ligne");
 					 // ligne.setParent(groupe);
 					  //ligne = new Text(groupe, SWT.BORDER);
 					  ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
