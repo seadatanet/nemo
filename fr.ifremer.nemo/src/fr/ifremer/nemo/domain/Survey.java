@@ -9,6 +9,7 @@ import java.io.*;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import javax.xml.rpc.ServiceException;
 import javax.xml.transform.Result;
@@ -914,6 +915,14 @@ public  class Survey
     	Element2Field setter = new Element2Field( this, "setEndDate");
     	return setter;
     }
+    if (a_LocalName.equals("formattedStartDate")) {
+    	Element2Field setter = new Element2Field( this, "setFormattedStartDate");
+    	return setter;
+    }
+    if (a_LocalName.equals("formattedEndDate")) {
+    	Element2Field setter = new Element2Field( this, "setFormattedEndDate");
+    	return setter;
+    }
     if (a_LocalName.equals("regionName")) {
     	Element2Field setter = new Element2Field( this, "setRegionName");
     	return setter;
@@ -1101,7 +1110,7 @@ public  class Survey
   public static void main ( String[] args) {
     try {
     	Survey survey = new Survey();
-    	survey.fillFromSISMER( args[0]);
+    	survey.importFromXML( new File(args[0]));
     	survey.writeXMLOn( System.out );
     } catch (Exception e) {
     	e.printStackTrace();
@@ -1114,8 +1123,8 @@ public  class Survey
    * @exception  ParseException
    */
   public void setFormattedEndDate ( String a_EndDate) throws ParseException {
-    DateTimeFormat fmt = new DateTimeFormat("yyyy-MM-dd");
-    java.util.Date value = (java.util.Date)fmt.parseObject(a_EndDate);
+    SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+    java.util.Date value = fmt.parse(a_EndDate);
     setEndDate( value.getTime());
   }
 
@@ -1125,8 +1134,8 @@ public  class Survey
    * @exception  ParseException
    */
   public void setFormattedStartDate ( String a_StartDate) throws ParseException {
-    DateTimeFormat fmt = new DateTimeFormat("yyyy-MM-dd");
-    java.util.Date value = (java.util.Date)fmt.parseObject(a_StartDate);
+	SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+    java.util.Date value = fmt.parse(a_StartDate);
     setStartDate( value.getTime());
   }
 

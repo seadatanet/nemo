@@ -566,8 +566,14 @@ public static void chargementXML(File fichier){
 	if (ViewFile.dossierCampagne){
 		
 			try {
-				DataModel.dirSurvey.getModel().releaseDataTypes();
-				DataModel.dirSurvey.getModel().importFromXML(fichier);
+				DataModel.dirSurvey.releaseModel();
+				Survey survey = new Survey();
+				survey.importFromXML(fichier);
+				
+				//DataModel.dirSurvey.getModel().importFromXML(fichier);
+				DataModel.dirSurvey.setModel(survey);
+				
+				
 			} catch (FileNotFoundException e) {
 				// 
 				e.printStackTrace();
@@ -633,7 +639,7 @@ public static void chargementXML(File fichier){
 			
 			//Localisation
 			Formatter formatter = new Formatter();
-			
+			/*
 			try {
 				EditSurvey.textDateDebut.setText(formatter.formatDateTime("dd/MM/yyyy", survey.getStartDate()));
 			} catch (ParseException e) {
@@ -649,8 +655,19 @@ public static void chargementXML(File fichier){
 				
 				e.printStackTrace();
 			}
-			//EditSurvey.textDateDebut.setText(""+survey.getStartDate());
-			//EditSurvey.textDateFin.setText(""+survey.getEndDate());
+			*/
+			
+			
+			
+			
+			try {
+				EditSurvey.textDateDebut.setText(survey.getFormattedStartDate());
+				EditSurvey.textDateFin.setText(survey.getFormattedEndDate());
+			} catch (ParseException e) {
+				// 
+				e.printStackTrace();
+			}
+			
 			EditSurvey.textRegion.setText(survey.getRegionName());
 			
 			//Source de données
