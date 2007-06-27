@@ -12,7 +12,7 @@
    <windowImages/>
 
 
-   <launcher>
+   <launcher name="nemo">
       <solaris/>
       <win useIco="false">
          <bmp/>

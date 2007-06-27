@@ -29,3 +29,4 @@ Bundle-ClassPath: .,
  lib_axis_14/log4j-1.2.8.jar,
  lib_axis_14/saaj.jar,
  lib_axis_14/wsdl4j-1.5.1.jar
+Bundle-Vendor: IFREMER
