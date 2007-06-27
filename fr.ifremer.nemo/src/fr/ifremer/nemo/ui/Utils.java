@@ -135,6 +135,9 @@ public class Utils {
 //		RAZ global si réouverture fichier en cours de processus
 		Utils.razGlobal();
 		
+		EditDesc.nomNemo();
+		DataModel.ouverture = false;
+		
 		//reset de l'étape de conversion
 		ViewFile.etape = 0;
 
@@ -925,24 +928,14 @@ public class Utils {
 		}
 		
 		//		effacement de la table data
-		if (EditDesc.validee == 1){ViewFile.tableData.dispose();};
+		if (ViewFile.tableData != null){ViewFile.tableData.dispose();};
 
 		EditDesc.validee = 0;
 		
-		if (EditData.buttonValidate != null){
-			
-			EditData.buttonValidate.dispose();
-			
-			
-			
-			EditData.loaded = 0;
-			EditData.validee = 0;
-			
-			
-		
-			
-		}
-		
+
+		//effacement des listes des onglets Survey et Data
+		if (TableDataSurvey.types != null){TableDataSurvey.types = new ArrayList<TypeSurvey>();}
+		if (TableData.types != null){TableData.types = new ArrayList<TypeData>();}	
 		
 		//reset des noms des onglets
 		ViewFile.tabItem.setText("Description");

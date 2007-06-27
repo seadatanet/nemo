@@ -1,6 +1,7 @@
 package fr.ifremer.nemo.ui;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import org.eclipse.swt.widgets.Composite;
@@ -23,6 +24,7 @@ import fr.ifremer.nemo.input.ParameterModel;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.input.SingleFileSurvey;
 import fr.ifremer.nemo.input.StationModel;
+import fr.ifremer.nemo.input.SurveyMedia;
 import fr.ifremer.nemo.input.TimeSeriesModel;
 import fr.ifremer.nemo.ws.WSDataType;
 import fr.ifremer.nemo.ws.WSParameter;
@@ -468,6 +470,15 @@ public static void initStation(){
 		frag.setLastCharOffset(fin);
 		
 	}
+	
+//DM history 1&2
+	/*propertyModel = stationModel.propertiesAt("dmHistory1");
+	propertyModel2 = stationModel.propertiesAt("dmHistory2");
+	propertyModel.setUserProvided(true);
+	propertyModel.setUserProvided(true);
+	*/
+	station.setDmHistory1("");
+	station.setDmHistory2("");
 	
 	
 //echantillon surface
@@ -933,6 +944,7 @@ if (ViewFile.checkBoxTempo.getSelection()){
 		if (!EditStation.textLongFin.getText().matches("")){
 		try {
 			double longitudeFinDouble = ((Number)longitudeFormatFin.parseObject(EditStation.textLongFin.getText())).doubleValue();
+			System.out.println("longitude de fin ="+EditStation.textLongFin.getText());
 			timeSeriesInformation.setEndLongitude(longitudeFinDouble);
 		} catch (ParseException e) {
 			
@@ -958,8 +970,17 @@ if (ViewFile.checkBoxTempo.getSelection()){
 	}
 	
 	
+	//DATE / HEURE DE FIN
+	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("endDate");
+	propertyModel.setUserProvided(true);
+	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("endTime");
+	propertyModel.setUserProvided(true);
+	
+	
+	
 	//PROFONDEUR CAPTEUR
 	propertyModel = stationModel.getTimeSeriesModel().propertiesAt("sensorDepth");
+	
 	
 	if (EditStation.buttonProfCapteurSaisie.getSelection()){
 		propertyModel.setUserProvided(true);
@@ -1117,6 +1138,8 @@ public static void initData(){
 public static void ouvertureModele(InputModel input){
 	//fonction d'ouverture d'un modele de campagne
 	
+	if (inputModel_modele!=null){inputModel_modele.release();}
+	
 	DataModel.ouverture = true;
 	inputModel_modele = new InputModel();
 	inputModel_modele = input;
@@ -1130,6 +1153,8 @@ public static void ouvertureModele(InputModel input){
 	//reset de l'étape de conversion
 	ViewFile.etape = 0;
 	
+	
+	
 	//lancement du processus sur le premier onglet et effacement préventif si besoin
 	
 	fillDesc();
@@ -1140,12 +1165,19 @@ public static void fillDesc(){
 	//remplissage auto de l'IHM Desc
 	
 	if (ViewFile.dossierCampagne){
-		dirSurvey_modele = (DirectoryBasedSurvey)inputModel_modele.getMedia();
+		
+		try {
+			dirSurvey_modele = (DirectoryBasedSurvey)inputModel_modele.getMedia();
+		} catch (RuntimeException e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+		}
 		stationModel_modele = dirSurvey_modele.getStationModel();
 		//lignes entete fichier = 0
 		EditDesc.lignesEnteteFichier.setText("0");
 		
 	}else{
+		
 		singleSurvey_modele = (SingleFileSurvey)inputModel_modele.getMedia();
 		stationModel_modele = singleSurvey_modele.getStationModel();
 		//lignes entete fichier
@@ -1706,7 +1738,7 @@ public static void fillStation(){
 			Formatter formatter = new Formatter();
 			
 			try {
-				EditStation.textLongitude.setText(formatter.formatLatitude(longitudeFormat.getFormatString(), station_modele.getLongitude()));
+				EditStation.textLongitude.setText(formatter.formatLongitude(longitudeFormat.getFormatString(), station_modele.getLongitude()));
 			} catch (ParseException e) {
 
 				e.printStackTrace();
@@ -1836,7 +1868,7 @@ public static void fillStation(){
 				Formatter formatter = new Formatter();
 				
 				try {
-					EditStation.textLongFin.setText(formatter.formatLatitude(formatLong, stationModel_modele.getTimeSeriesInformation().getEndLongitude()));
+					EditStation.textLongFin.setText(formatter.formatLongitude(formatLong, stationModel_modele.getTimeSeriesInformation().getEndLongitude()));
 				} catch (ParseException e) {
 
 					e.printStackTrace();

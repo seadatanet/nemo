@@ -436,7 +436,7 @@ public class Etape {
 		try {
 			LongitudeFormat longitudeFormat = new LongitudeFormat(EditStation.comboLongitude.getText());
 			longitudeFormat.parseObject(string);
-			System.out.println("Erreur de format de longitude : lu ==>" +string+"< attendu ==>" +EditStation.comboLongitude.getText()+ "<");
+			System.out.println("format de longitude : lu ==>" +string+"< attendu ==>" +EditStation.comboLongitude.getText()+ "<");
 		} catch (ParseException e) {
 			Utils.messageErreurAppend("Erreur de format de longitude : lu ==>" +string+"< attendu ==>" +EditStation.comboLongitude.getText()+ "<");
 			System.out.println("Erreur de format de longitude");

@@ -97,10 +97,6 @@ public static ScrolledForm formEdition;
 		initCombos();
 		
 		
-		
-
-		
-		
 		//boutons collapse all / expand all
 		buttonExpandDesc.setParent(formEdition.getBody());
 		buttonExpandDesc.setText("+"); //$NON-NLS-1$

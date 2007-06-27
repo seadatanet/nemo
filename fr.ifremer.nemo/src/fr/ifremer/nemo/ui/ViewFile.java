@@ -210,9 +210,11 @@ public class ViewFile extends ViewPart {
 	 *
 	 */
 	private void createComposite2() {
+		Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL );
 		composite2 = new Composite(tabFolder, SWT.NONE);
 		composite2.setLayout(new FillLayout());
 		styledTextCampagne = new StyledText(composite2, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL |SWT.READ_ONLY );
+		styledTextCampagne.setFont(font);
 	}
 
 	/**

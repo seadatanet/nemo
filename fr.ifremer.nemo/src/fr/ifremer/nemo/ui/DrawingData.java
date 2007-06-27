@@ -241,7 +241,8 @@ public static void sectionTotal(String nomSection, String description, Section s
 								//System.out.println("valeur de ligne lign==> " + lign.getText());
 								//System.out.println("valeur de ligne de ViewEdit.ligneTest ==> " + ViewEdit.ligneTest.getText());
 							Utils.inject(lign, debu, fi, ViewFile.styledTextData);
-							
+							debu.pack();
+							fi.pack();
 							
 							}
 						});

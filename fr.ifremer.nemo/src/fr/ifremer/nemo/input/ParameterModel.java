@@ -324,7 +324,7 @@ public  class ParameterModel
 	  
     String fragmnt = _fragment.retreive( a_Line);
     
-    System.out.println("===========>"+fragmnt);
+    //System.out.println("===========>"+fragmnt);
     
     double val = Double.parseDouble(fragmnt);
     if ((float)val == _inputDefault) {

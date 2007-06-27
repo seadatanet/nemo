@@ -65,32 +65,34 @@ public class EditConversion extends Thread {
 		//test pour savoir si on est en campagne ou pas
 			choixFichierSortie();
 		
+		
+			
 			shell = new Shell(Application.display);	
-			shell.setSize(200, 20);
-    		shell.setBounds(100, 100, 200, 20);
+			shell.setSize(500, 20);
+    		shell.setBounds(100, 100, 500, 20);
     		shell.open();
     		
     		final ProgressBar progressbar = new ProgressBar(shell,
-  				  SWT.HORIZONTAL | SWT.SMOOTH | SWT.APPLICATION_MODAL);
+  				  SWT.HORIZONTAL | SWT.SMOOTH);
   				progressbar.setMinimum(0);
   				progressbar.setMaximum(100);
   				//progressbar.setSize(200,20);
   				
-  				progressbar.setBounds(0,0, 200, 20);
+  				progressbar.setBounds(0,0, 500, 20);
   				shell.setText("Conversion en cours... Veuillez patienter...");
   				shell.pack();
     		
-    		
 			java.io.FileInputStream stream = null;
-			ProgressNotification notifier = new ProgressNotification() {
+		final ProgressNotification notifier = new ProgressNotification() {
                 public void progress(final int val) {
-                	try {
-                		
-                				Application.display.syncExec( new Runnable() {
+                	try {	
+                			Application.display.syncExec( new Runnable() {
                                                           public void run() {
                                                               progressbar.setSelection(val);
                                                               System.out.println(">>>"+ val+"%");
-                                                              shell.pack();
+                                                              progressbar.update();
+                                                              progressbar.getParent().update();
+                                                              //update();
                                                               
                                                           }
                                                       });
@@ -99,32 +101,51 @@ public class EditConversion extends Thread {
                 }
             };
 			try {
-				Survey survey = DataModel.inputModel.convert(notifier);
+				final Survey survey = DataModel.inputModel.convert(notifier);
 				
 				//survey.writeXMLOn(new FileOutputStream(new File("D:/tmp.xml")));
 				
-				fr.ifremer.nemo.medatlas.MedatlasSurveyWriter writerMed;
-				fr.ifremer.nemo.odv.ODVSurveyWriter writerODV;
+				final fr.ifremer.nemo.medatlas.MedatlasSurveyWriter writerMed;
+				final fr.ifremer.nemo.odv.ODVSurveyWriter writerODV;
 				
 				if (ViewFile.medatlas.getSelection()){
 				 writerMed = new fr.ifremer.nemo.medatlas.MedatlasSurveyWriter();
 				 notifier.progress(0);
-			    	try {
-						writerMed.writeSurvey ( survey, new java.io.File(nomFichierSortie), notifier);
-					} catch (GenerationException e1) {
-						System.out.println("Erreur de  génération de fichier de sortie!");
-						e1.printStackTrace();
-					}
+			    	new Thread(){@Override
+					public void run() {
+						try {
+							writerMed.writeSurvey ( survey, new java.io.File(nomFichierSortie), notifier);
+							
+						} catch (IOException e) {
+							// 
+							e.printStackTrace();
+						} catch (GenerationException e) {
+							System.out.println("Erreur de génération de fichier de sortie!");
+							
+							// 
+							e.printStackTrace();
+						}
+					}}.start();
 					}
 				else {
 					 writerODV = new fr.ifremer.nemo.odv.ODVSurveyWriter();
 					 notifier.progress(0);
-				    	try {
-							writerODV.writeSurvey ( survey, new java.io.File(nomFichierSortie), notifier);
-						} catch (GenerationException e1) {
-							System.out.println("Erreur de  génération de fichier de sortie!");
-							e1.printStackTrace();
-						}
+				    	new Thread(){@Override
+						public void run() {
+							try {
+								writerODV.writeSurvey ( survey, new java.io.File(nomFichierSortie), notifier);
+								
+							} catch (IOException e) {
+								// 
+								e.printStackTrace();
+							} catch (GenerationException e) {
+								System.out.println("Erreur de génération de fichier de sortie!");
+								// 
+								e.printStackTrace();
+							}
+							// 
+							
+						}}.start();
 				}
 		    	
 			

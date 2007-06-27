@@ -318,17 +318,22 @@ public  class DateTimeFormat extends ExternalizableFormat implements Cloneable {
     //	DateTimeFormat format = new DateTimeFormat("MMM dd yyyy");
     //	format.toString();
     	
-    	DateTimeFormat format2 = new DateTimeFormat("hh24:mm:ss");
-    	String timeConvertie = format2.format("23:15");
-    	System.out.println("Heure 23:15 convertie en hh24:mm:ss = "+timeConvertie);
+//    	DateTimeFormat format2 = new DateTimeFormat("hh24:mm:ss");
+//    	String timeConvertie = format2.format("23:15");
+//    	System.out.println("Heure 23:15 convertie en hh24:mm:ss = "+timeConvertie);
     	
+    	//N125 06.66
+    	
+//    	LongitudeFormat longitudeFormat = (LongitudeFormat)propertyModel.getFormat();
+//		Formatter formatter = new Formatter();
     	
     	//Long dateLong = (Long)format.parseObject("JUN 02 2007");
-    	 	
-    	
-    	
     	
     	Formatter formatter = new Formatter();
+    	System.out.println("latitude ===>"+formatter.formatLatitude("NDD MM.mm", -66.111)); 
+    	System.out.println("longitude ===>"+formatter.formatLongitude("NDDD MM.mm", 126.111)); 
+    	
+    	
     	//System.out.println(">>>>>>"+formatter.formatDateTime("MM/dd/yyyy", dateLong));
    
     	
@@ -367,7 +372,7 @@ public  class DateTimeFormat extends ExternalizableFormat implements Cloneable {
     int index = pos.getIndex();
     
     System.out.println("DateTimeFormat/parseObject(): Source parsée ==>"+source);
-    System.out.println("chaine date ");
+
     
     TimeZone tz = TimeZone.getTimeZone("GMT");
     Calendar cal = Calendar.getInstance(tz);

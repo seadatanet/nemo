@@ -1200,6 +1200,8 @@ public  class StationModel
     	addProperty( new PropertyModel( "bottomDepth", _model, new FloatFormat("%4.0f")));
     	addProperty( new PropertyModel( "dcHistory1", _model));
     	addProperty( new PropertyModel( "dcHistory2", _model));
+    	//addProperty( new PropertyModel( "dmHistory1", _model));
+    	//addProperty( new PropertyModel( "dmHistory2", _model));
     	addProperty( new PropertyModel( "surfaceSamples1", _model));
     	addProperty( new PropertyModel( "surfaceSamples2", _model));
     	addProperty( new PropertyModel( "comment", _model));

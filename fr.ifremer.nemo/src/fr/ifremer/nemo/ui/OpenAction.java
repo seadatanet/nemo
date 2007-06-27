@@ -74,7 +74,7 @@ public void run(){
 		try {
 			stream = new java.io.FileInputStream(nomModele);
 		} catch (FileNotFoundException e) {
-			// TODO Bloc catch auto-généré
+			// 
 			e.printStackTrace();
 		}
 		System.out.println("Ouverture du modèle : "+nomModele);
