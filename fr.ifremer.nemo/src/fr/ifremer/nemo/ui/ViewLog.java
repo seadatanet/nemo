@@ -115,6 +115,24 @@ public class ViewLog extends ViewPart {
 		tabItem.setControl(styledTextLogErreurs);
 	}
 
+public static void aideDesc(){
+ViewLog.styledTextLogHelp.setText(
+		"Onglet Description de Campagne\n\n" +
+		"Le principe est de décrire une campagne en délimitant les zones des métadonnées au sein des entetes fichier ou station.\n" +
+		"Pour un fichier de campagne : il faut bien différencier l'entete du fichier global et l'entete d'une station.");	
+}	
+
+public static void aideSurvey(){
 	
+}
+
+public static void aideStation(){
+	
+}
+
+public static void aideData(){
+	
+}
+
 
 }

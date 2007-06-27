@@ -64,7 +64,11 @@ public void run(){
 	FileDialog dialog = new FileDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
 	dialog.setFilterPath(Utils.configuration.getModelsDirectory()+"\\");
 	dialog.setText("Fichier modèle à charger");
+	String extensions[] = new String[1];
+	extensions[0]="*.xml";
+	dialog.setFilterExtensions(extensions);
 	nomModele = dialog.open();
+	
 	if (nomModele == null) {}else{
 		
 		//ouverture du fichier XML de modèle

@@ -563,6 +563,9 @@ public class EditSurvey {
 			FileDialog dialog = new FileDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
 			//dialog.setFilterPath(Utils.configuration.getModelsDirectory()+"\\");
 			dialog.setText("Fichier modèle à charger");
+			String extensions[] = new String[1];
+			extensions[0]="*.xml";
+			dialog.setFilterExtensions(extensions);
 			nomXML = dialog.open();
 			if (nomXML == null) {}else{
 			

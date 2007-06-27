@@ -120,7 +120,7 @@ public static void initDesc(){
 		Long dateLong=null, timeLong=null;
 		try {
 			dateFormat = new DateTimeFormat();
-			dateFormat.setFormatString(ViewFile.comboTempoDate.getText());
+			dateFormat.setFormatString("dd/MM/yyyy");
 			dateLong = (Long)dateFormat.parseObject(ViewFile.textTempoDateRef.getText());
 		} catch (ParseException e) {
 			// 
@@ -133,7 +133,7 @@ public static void initDesc(){
 		//HEURE REF
 		try {
 			DateTimeFormat timeFormat = new DateTimeFormat();
-			timeFormat.setFormatString(ViewFile.comboTempoHeure.getText());
+			timeFormat.setFormatString("hh24:mm");
 			timeLong = (Long)timeFormat.parseObject(ViewFile.textTempoHeureRef.getText());
 		} catch (ParseException e) {
 			// 

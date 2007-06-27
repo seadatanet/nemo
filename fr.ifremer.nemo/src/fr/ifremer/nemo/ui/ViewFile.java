@@ -425,18 +425,18 @@ public class ViewFile extends ViewPart {
 		groupTempo.setText(Messages.getString("ViewFile.dateHeureRelatives")); //$NON-NLS-1$
 		groupTempo.setLayout(gridLayout1);
 		labelDateRef = new Label(groupTempo, SWT.NONE);
-		labelDateRef.setText(Messages.getString("ViewFile.dateRef")); //$NON-NLS-1$
-		Label filler3 = new Label(groupTempo, SWT.NONE);
+		labelDateRef.setText(Messages.getString("ViewFile.dateRef")+": dd/MM/yyyy"); //$NON-NLS-1$
+		
 		textTempoDateRef = new Text(groupTempo, SWT.BORDER);
-		createComboTempoDate();
+		//createComboTempoDate();
 		labelHeureRef = new Label(groupTempo, SWT.NONE);
-		labelHeureRef.setText(Messages.getString("ViewFile.heureRef")); //$NON-NLS-1$
-		Label filler2 = new Label(groupTempo, SWT.NONE);
+		labelHeureRef.setText(Messages.getString("ViewFile.heureRef")+ ": hh24:mm"); //$NON-NLS-1$
+		
 		textTempoHeureRef = new Text(groupTempo, SWT.BORDER);
 		
 		//on le désactive de base
 		groupTempo.setVisible(false);
-		createComboTempoHeure();
+		//createComboTempoHeure();
 	}
 
 	/**
