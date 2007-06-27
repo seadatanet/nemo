@@ -945,6 +945,12 @@ public class Utils {
 		ViewFile.tabItem9.setText("Conversion");
 		
 		
+		//effacement du bouton conversion
+		if (EditConversion.buttonConversion != null){
+			EditConversion.razEdition();
+		}
+		
+		
 		ViewEdit.formEdition.reflow(true);
 		
 	}

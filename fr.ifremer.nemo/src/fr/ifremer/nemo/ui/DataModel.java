@@ -446,6 +446,14 @@ public static void initStation(){
 		
 	}
 	
+	
+//FLAGS QC
+	station.setDateQC(EditStation.textQCDate.getText());
+	station.setDepthQC(EditStation.textQCProf.getText());
+	station.setLatQC(EditStation.textQCLat.getText());
+	station.setLongQC(EditStation.textQCLong.getText());
+		
+	
 //commentaire
 	 propertyModel = stationModel.propertiesAt("comment");
 	if (EditStation.buttonCommentaireSaisie.getSelection()){
@@ -1490,6 +1498,15 @@ public static void fillStation(){
 			EditStation.textCommentaireFin.setText(""+fin);
 	 		
 	 	}
+	 	
+	 	
+//	 	FLAGS QC
+		EditStation.textQCDate.setText(""+station.getDateQC());
+		EditStation.textQCLat.setText(""+station.getLatQC());
+		EditStation.textQCLong.setText(""+station.getLongQC());
+		EditStation.textQCProf.setText(""+station.getDepthQC());	
+	 	
+	 	
 	 	
 //echantillon surface
 		propertyModel = stationModel_modele.propertiesAt("surfaceSamples1");

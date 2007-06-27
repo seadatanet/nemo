@@ -58,6 +58,7 @@ public class EditSurvey {
 	public static List listeType;
 	public static Boolean ws;
 	public static ScrolledForm formEdition;
+	public static Shell shell;
 
 //////////////////////////////////////////	//
 		
@@ -377,7 +378,7 @@ public class EditSurvey {
 		
 		public static void webServiceUpdate(){
 			
-			final Shell shell = new Shell();	
+			shell = new Shell();	
 			shell.setSize(200, 20);
     		shell.setBounds(50, 50, 500, 20);
     		shell.open();
@@ -394,62 +395,82 @@ public class EditSurvey {
     		
     		////////////////////////////////////////////
     		
-    		
+    	/*	
     		new Thread() {
     		      public void run() {
     		       
 //    		    	interrogation WService
-    					NemoLists.updateCountries();
+    		    	  NemoLists.updateCountries();
+    		    	  progressbar.setSelection(14);
+    		    	  NemoLists.updateDataTypes();
+    		    	  progressbar.setSelection(28);
+    		    	  NemoLists.updateRegions();   
+    		    	  progressbar.setSelection(42);
+    		    	  NemoLists.updateShips();
+    		    	  progressbar.setSelection(56);
+    		    	  NemoLists.updateDataCentres();
+    		    	  progressbar.setSelection(70);
+    		    	  NemoLists.updateParameters();
+    		    	  progressbar.setSelection(84);
+    		    	  NemoLists.updateSurveys();
+    		    	  progressbar.setSelection(100);
+    		    
     					  Application.display.asyncExec(new Runnable() {
     	    		            public void run() {
-    	    		              progressbar.setSelection(14);
-    	    		            }
-    	    		          });
-    					NemoLists.updateDataTypes();
-    					  Application.display.asyncExec(new Runnable() {
-    	    		            public void run() {
-    	    		              progressbar.setSelection(28);
-    	    		            }
-    	    		          });
-    					NemoLists.updateRegions();
-    					  Application.display.asyncExec(new Runnable() {
-    	    		            public void run() {
-    	    		              progressbar.setSelection(42);
+    	    		             
     	    		            }
     	    		          });
     				
-    					NemoLists.updateShips();
+    					
     					  Application.display.asyncExec(new Runnable() {
     	    		            public void run() {
-    	    		              progressbar.setSelection(56);
+    	    		              
     	    		            }
     	    		          });
-    					NemoLists.updateDataCentres();
+    					
     					  Application.display.asyncExec(new Runnable() {
     	    		            public void run() {
-    	    		              progressbar.setSelection(70);
+    	    		             
     	    		            }
     	    		          });
-    					NemoLists.updateParameters();
+    	    		      
+    					
     					  Application.display.asyncExec(new Runnable() {
     	    		            public void run() {
-    	    		              progressbar.setSelection(84);
+    	    		             
     	    		            }
     	    		          });
-    					NemoLists.updateSurveys();
+    					
     					  Application.display.asyncExec(new Runnable() {
     	    		            public void run() {
-    	    		              progressbar.setSelection(100);
+    	    		             
     	    		            }
     	    		          });
     		    	  
     		          
     		        
     		        
-    		      }
+    		      }   
+    		    	  
     		    }.start();
     		
     		
+    		*/
+    		
+    				 NemoLists.updateCountries();
+   		    	  progressbar.setSelection(14);
+   		    	  NemoLists.updateDataTypes();
+   		    	  progressbar.setSelection(28);
+   		    	  NemoLists.updateRegions();   
+   		    	  progressbar.setSelection(42);
+   		    	  NemoLists.updateShips();
+   		    	  progressbar.setSelection(56);
+   		    	  NemoLists.updateDataCentres();
+   		    	  progressbar.setSelection(70);
+   		    	  NemoLists.updateParameters();
+   		    	  progressbar.setSelection(84);
+   		    	  NemoLists.updateSurveys();
+   		    	  progressbar.setSelection(100);
     		
     		
     		    shell.close();	

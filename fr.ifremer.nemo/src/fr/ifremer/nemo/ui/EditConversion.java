@@ -89,9 +89,9 @@ public class EditConversion extends Thread {
                 			Application.display.syncExec( new Runnable() {
                                                           public void run() {
                                                               progressbar.setSelection(val);
-                                                              System.out.println(">>>"+ val+"%");
+                                                             // System.out.println(">>>"+ val+"%");
                                                               progressbar.update();
-                                                              progressbar.getParent().update();
+                                                             // progressbar.getParent().update();
                                                               //update();
                                                               
                                                           }
@@ -111,7 +111,18 @@ public class EditConversion extends Thread {
 				if (ViewFile.medatlas.getSelection()){
 				 writerMed = new fr.ifremer.nemo.medatlas.MedatlasSurveyWriter();
 				 notifier.progress(0);
-			    	new Thread(){@Override
+				 
+				 try {
+					writerMed.writeSurvey ( survey, new java.io.File(nomFichierSortie), notifier);
+				} catch (GenerationException e1) {
+					// 
+					e1.printStackTrace();
+					System.out.println("Erreur de génération de fichier de sortie!");
+					Utils.messageErreur("Erreur de génération de fichier de sortie!");
+				}
+				 
+			/*    
+			 new Thread(){@Override
 					public void run() {
 						try {
 							writerMed.writeSurvey ( survey, new java.io.File(nomFichierSortie), notifier);
@@ -126,6 +137,7 @@ public class EditConversion extends Thread {
 							e.printStackTrace();
 						}
 					}}.start();
+					*/
 					}
 				else {
 					 writerODV = new fr.ifremer.nemo.odv.ODVSurveyWriter();

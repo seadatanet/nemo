@@ -873,6 +873,46 @@ section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition.getBody(
 	}
 
 
+	public static void sectionFlagQC(Section section, String nomSection, String description, Text text){
+		
+		final Text zone;
+		zone = text;
+		
+		section.setParent(EditDesc.formEdition);
+		
+		section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition.getBody(), 
+				  Section.DESCRIPTION|Section.TITLE_BAR|
+				  Section.TWISTIE|Section.COMPACT);
+
+	
+		section.addExpansionListener(new ExpansionAdapter() {
+				  public void expansionStateChanged(ExpansionEvent e) {
+					  EditDesc.formEdition.reflow(true);
+				  }
+				 });
+		
+		section.setText(nomSection);
+		Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL );
+		section.setFont(font);
+		section.setDescription(description);
+		
+		Composite sectionClient = ViewEdit.toolkitEdition.createComposite(section);
+		sectionClient.setLayout(new GridLayout());
+		
+		text.setParent(sectionClient);
+		text.setTextLimit(1);
+		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		
+		 
+		 //ajout de la section dans la liste des sections de description
+		 ajoutSectionDansListeStation(section);   
+					 
+					  
+					  
+		}	
+	
+	
+	
 public static void sectionCommentaireLigneDebutFinInject(String nomSection, String description, Section section, Text ligne, Text debut, Text fin, Text manuel, Button radio, Button position){
 		
 	//ppar manuel = zone de commentaire
@@ -891,7 +931,7 @@ public static void sectionCommentaireLigneDebutFinInject(String nomSection, Stri
 					  Section.DESCRIPTION|Section.TITLE_BAR|
 					  Section.TWISTIE|Section.COMPACT);
 			
-		System.out.println("HOP");
+	
 			
 			  section.addExpansionListener(new ExpansionAdapter() {
 					  public void expansionStateChanged(ExpansionEvent e) {
