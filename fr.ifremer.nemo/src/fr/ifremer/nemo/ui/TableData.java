@@ -70,68 +70,36 @@ public static void creationTable(){
 	  TableColumn tableColumn = new TableColumn(table, SWT.NONE);
 		tableColumn.setWidth(110);
 		//taille = 60
-		tableColumn.setText("CODE");
+		tableColumn.setText(Messages.getString("TableData.0")); //$NON-NLS-1$
 		TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);
 		tableColumn1.setWidth(90);
-		tableColumn1.setText("Unité");
+		tableColumn1.setText(Messages.getString("TableData.1")); //$NON-NLS-1$
 		TableColumn tableColumn2 = new TableColumn(table, SWT.NONE);
 		tableColumn2.setWidth(100);
-		tableColumn2.setText("Conversion");
+		tableColumn2.setText(Messages.getString("TableData.2")); //$NON-NLS-1$
 		TableColumn tableColumn8 = new TableColumn(table, SWT.NONE);
 		tableColumn8.setWidth(50);
-		tableColumn8.setText("Test");
+		tableColumn8.setText(Messages.getString("TableData.3")); //$NON-NLS-1$
 		TableColumn tableColumn3 = new TableColumn(table, SWT.NONE);
 		tableColumn3.setWidth(50);
-		tableColumn3.setText("Début");
+		tableColumn3.setText(Messages.getString("TableData.4")); //$NON-NLS-1$
 		TableColumn tableColumn4 = new TableColumn(table, SWT.NONE);
 		tableColumn4.setWidth(50);
-		tableColumn4.setText("Fin");
+		tableColumn4.setText(Messages.getString("TableData.5")); //$NON-NLS-1$
 		TableColumn tableColumn5 = new TableColumn(table, SWT.NONE);
 		tableColumn5.setWidth(100);
-		tableColumn5.setText("Format");
+		tableColumn5.setText(Messages.getString("TableData.6")); //$NON-NLS-1$
 		TableColumn tableColumn6 = new TableColumn(table, SWT.NONE);
 		tableColumn6.setWidth(100);
-		tableColumn6.setText("Entrée");
+		tableColumn6.setText(Messages.getString("TableData.7")); //$NON-NLS-1$
 		TableColumn tableColumn7 = new TableColumn(table, SWT.NONE);
 		tableColumn7.setWidth(100);
-		tableColumn7.setText("Sortie");
+		tableColumn7.setText(Messages.getString("TableData.8")); //$NON-NLS-1$
 	
 	initTable();
 	
-	//ViewFile.compositeData.pack(true);
-	//ViewFile.tableData.getShell().pack();
-	
-//	Shell shell = new Shell();
-//	table.setParent(shell);
-	//System.out.println("table cachée => ok");
-	
-//	table.setParent(ViewFile.compositeData);
-	
-	
-	
-//	ViewFile.compositeData.setVisible(false);
-	
-//	ViewFile.compositeData.update();
-//	ViewFile.compositeData.pack();
-//	ViewFile.compositeData.redraw();
-//	
-	
-//	ViewFile.compositeData.setSize(ViewFile.compositeData.getSize());
-	//ViewFile.compositeData.setSize(1000, 1000);
-	//ViewFile.compositeData.setVisible(true);
-	//ViewFile.composite4.re
-	
-	
-//	ViewFile.compositeData.getShell().setRedraw(true);
-//	ViewFile.compositeData.getShell().redraw();
 	ViewFile.compositeData.getShell().layout();
 
-	//ViewFile.compositeData.getShell().;
-	
-	//System.out.println("table visible => ok");
-	
-	//ViewFile.top.getv
-	//ViewFile.top.getParent().getDisplay().update();
 }	
 	
 	
@@ -141,17 +109,6 @@ public static void initTypes(){
 	types = new ArrayList<TypeData>();
 	typesWS = new ArrayList<TypeData>();
 	
-	//temporairement création manuelle
-//	TypeData type1 = new TypeData("H2O","m^3","", "","","","9999","9999", "");
-//	TypeData type2 = new TypeData("H5N1","mmol/l","", "", "","","9999","999", "");
-//	TypeData type3 = new TypeData("CO2","m/l","","","","","999","99", "");
-//	TypeData type4 = new TypeData("B8WXT12","unité","","","","","9999","-99999", "");
-//	
-//	
-//	types.add(type1);
-//	types.add(type2);
-//	types.add(type3);
-//	types.add(type4);
 	
 	
 	int taille = DataModel.listeWSParameters.length;
@@ -164,7 +121,7 @@ public static void initTypes(){
 		TypeData type = new TypeData();
 
 		//paramètres
-		type.setCode(wsParameter.getCode()+" - "+wsParameter.getName());
+		type.setCode(wsParameter.getCode()+" - "+wsParameter.getName()); //$NON-NLS-1$
 		type.setUnite(wsParameter.getUnit());
 		type.setFormat(wsParameter.getFormat());
 		type.setEntree(wsParameter.getDefaultValue());
@@ -178,7 +135,7 @@ public static void initTypes(){
 		
 		
 		//ajout systématique de PRES
-		if (wsParameter.getCode().matches("PRES")){
+		if (wsParameter.getCode().matches("PRES")){ //$NON-NLS-1$
 						
 			if ((DataModel.ouverture == false)&&(!ViewFile.checkBoxTempo.getSelection())){
 				//pas de modèle chargé donc on rajoute PRES
@@ -186,7 +143,7 @@ public static void initTypes(){
 			}	
 			
 		}
-		
+	/*	
 		//test pour ajout de YEAR, MNTH, DAYX, TIME
 		if (ViewFile.checkBoxTempo.getSelection() && ViewFile.textTempoHeureRef.getText().matches("")){
 			//si serie temporelle et que pas de date/heure de ref alors on ajoute les 4 paramètres
@@ -203,7 +160,7 @@ public static void initTypes(){
 			
 			
 		}
-		
+		*/
 				
 		
 	}
@@ -225,14 +182,7 @@ public static void initTable(){
 	final Table table;
 	table = ViewFile.tableData;
 	  
-	/*
-		//menu
-		MenuManager popupMenu = new MenuManager();
-	    IAction newRowAction = new NewRowAction();
-	    popupMenu.add(newRowAction);
-	    Menu menu = popupMenu.createContextMenu(table);
-	    table.setMenu(menu);
-	*/
+
 		
 		//REMPLISSAGE temporaire de la table
 		initTableData();
@@ -265,10 +215,10 @@ public static void initTable(){
 		            return;
 		          for (int i = 0; i < table.getColumnCount(); i++) {
 		            Rectangle rect = item.getBounds(i);
-		            System.out.println("calcul num ligne===> "+i);
+		          //  System.out.println("calcul num ligne===> "+i);
 		            if (rect.contains(pt)) {
 		              int index = table.indexOf(item);
-		              System.out.println("Elément " + index + "-" + i);
+		          //    System.out.println("Elément " + index + "-" + i);
 		            }
 		          }
 		    	  
@@ -290,11 +240,11 @@ public static void initTable(){
 		            return;
 		        for (int i = 0; i < table.getColumnCount(); i++) {
 		            Rectangle rect = item.getBounds(i);
-		            System.out.println("rect===> "+rect);
-		            System.out.println("calcul num ligne===> "+i);
+		          //  System.out.println("rect===> "+rect);
+		          //  System.out.println("calcul num ligne===> "+i);
 		            if (rect.contains(pt)) {
 		              int indexTmp = table.indexOf(item);
-		              System.out.println("LigneSelec =>" + indexTmp + "- ColonneSelec =>" + i);
+		       //       System.out.println("LigneSelec =>" + indexTmp + "- ColonneSelec =>" + i);
 		              ligneSelec = indexTmp;
 		              colonneSelec = i;
 		            }
@@ -360,20 +310,20 @@ public static void initTable(){
 		//création du menu
 		Menu menu = new Menu(table.getShell(), SWT.POP_UP);
 		MenuItem itemInject = new MenuItem(menu, SWT.NONE);
-	    itemInject.setText("Injecter début/fin");
+	    itemInject.setText(Messages.getString("TableData.11")); //$NON-NLS-1$
 	    MenuItem itemMaj = new MenuItem(menu, SWT.NONE);
-	    itemMaj.setText("Maj. champ test");
+	    itemMaj.setText(Messages.getString("TableData.12")); //$NON-NLS-1$
 	    MenuItem itemList = new MenuItem(menu, SWT.NONE);
-	    itemList.setText("Sélection liste");
+	    itemList.setText(Messages.getString("TableData.13")); //$NON-NLS-1$
 		MenuItem itemNew = new MenuItem(menu, SWT.NONE);
-	    itemNew.setText("Nouveau type");
+	    itemNew.setText(Messages.getString("TableData.14")); //$NON-NLS-1$
 	    MenuItem itemUp = new MenuItem(menu, SWT.NONE);
-	    itemUp.setText("Monter type sélectionné");
+	    itemUp.setText(Messages.getString("TableData.15")); //$NON-NLS-1$
 	    MenuItem itemDown = new MenuItem(menu, SWT.NONE);
-	    itemDown.setText("Descendre type sélectionné");
+	    itemDown.setText(Messages.getString("TableData.16")); //$NON-NLS-1$
 	    //MenuItem tmp = new Separator();
 	    MenuItem itemDel = new MenuItem(menu, SWT.NONE);
-	    itemDel.setText("Supprimer type sélectionné");
+	    itemDel.setText(Messages.getString("TableData.17")); //$NON-NLS-1$
 		table.setMenu(menu);
 		
 		//ajouter des listeners sur les menu items ^^
@@ -382,16 +332,16 @@ public static void initTable(){
 		
 		itemInject.addListener(SWT.Selection, new Listener() {
 	          public void handleEvent(Event e) {
-	            System.out.println("injection debut/fin");
+	         //   System.out.println("injection debut/fin");
 	           
 	           
 	            Utils.injectData(ViewFile.styledTextData);
 	            	
 	            //debut
-	            table.getItems()[ligneSelec].setText(4, ""+debut);
+	            table.getItems()[ligneSelec].setText(4, ""+debut); //$NON-NLS-1$
 	            
 	            //fin
-	            table.getItems()[ligneSelec].setText(5, ""+fin);
+	            table.getItems()[ligneSelec].setText(5, ""+fin); //$NON-NLS-1$
 	            
 	            majTypeData();
 	            //razTableData
@@ -407,7 +357,7 @@ public static void initTable(){
 		
 		itemMaj.addListener(SWT.Selection, new Listener() {
 	          public void handleEvent(Event e) {
-	            System.out.println("Maj champ test");
+	         //   System.out.println("Maj champ test");
 	            majChampTest();
 	            
 	          }
@@ -416,7 +366,7 @@ public static void initTable(){
 		
 		itemList.addListener(SWT.Selection, new Listener() {
 	          public void handleEvent(Event e) {
-	            System.out.println("sélection liste");
+	         //   System.out.println("sélection liste");
 	            FiltrageTableType.go();
 	            
 	          }
@@ -424,25 +374,25 @@ public static void initTable(){
 		
 		itemNew.addListener(SWT.Selection, new Listener() {
 	          public void handleEvent(Event e) {
-	            System.out.println("nouveau type");
+	      //      System.out.println("nouveau type");
 	            nouvelElt();
 	          }
 	        });
 		itemUp.addListener(SWT.Selection, new Listener() {
 	          public void handleEvent(Event e) {
-	            System.out.println("up");
+	       //     System.out.println("up");
 	            monterEltTableData(ligneSelec);
 	          }
 	        });
 		itemDown.addListener(SWT.Selection, new Listener() {
 	          public void handleEvent(Event e) {
-	            System.out.println("down");
+	       //    System.out.println("down");
 	            descendreEltTableData(ligneSelec);
 	          }
 	        });
 		itemDel.addListener(SWT.Selection, new Listener() {
 	          public void handleEvent(Event e) {
-	            System.out.println("suppression");
+	        //    System.out.println("suppression");
 	            supprEltTableData(ligneSelec);
 	            //remplirTableData();
 	          }
@@ -467,8 +417,8 @@ public static void initTable(){
 	  //nouvelle création des items
 	  for (int i = 0; i < nbre; i++) {
 	      TableItem item = new TableItem(table, SWT.NONE);
-	      item.setText(new String[] { types.get(i).getCode(), types.get(i).getUnite() , types.get(i).getConversion(),types.get(i).getTest() ,""+types.get(i).getDebut(),
-	    		  ""+types.get(i).getFin(), types.get(i).getFormat(), types.get(i).getEntree(), types.get(i).getSortie() });
+	      item.setText(new String[] { types.get(i).getCode(), types.get(i).getUnite() , types.get(i).getConversion(),types.get(i).getTest() ,""+types.get(i).getDebut(), //$NON-NLS-1$
+	    		  ""+types.get(i).getFin(), types.get(i).getFormat(), types.get(i).getEntree(), types.get(i).getSortie() }); //$NON-NLS-1$
 	       
 	    }  
 	
@@ -497,11 +447,7 @@ public static void initTable(){
 	  
 	 ViewFile.tableData.dispose();
 	 
-	 //effacement et recréation du composite4 qui porte tableData
-//	 ViewFile.compositeData.dispose();
-//	 ViewFile.compositeData = new Composite(ViewFile.composite4, SWT.NONE);
-//	 ViewFile.compositeData.setLayout(new FillLayout());
-//	 ViewFile.compositeData.pack();
+
 	 
  } 
   
@@ -668,15 +614,15 @@ public static void initTable(){
 	 nbre = ViewFile.tableData.getItemCount();
 	 for (int i = 0; i <nbre; i++){
 		 
-		 if ((!ViewFile.tableData.getItem(i).getText(4).matches(""))&&(!ViewFile.tableData.getItem(i).getText(2).matches(""))){
+		 if ((!ViewFile.tableData.getItem(i).getText(4).matches(""))&&(!ViewFile.tableData.getItem(i).getText(2).matches(""))){ //$NON-NLS-1$ //$NON-NLS-2$
 		//on a sélectionné un début et une fin et il y a une conversion à faire
 			 
 		//on récupère le data
 	ligne = Utils.lignesBrutes.get(Integer.valueOf(EditDesc.lignesEnteteFichier.getText())+Integer.valueOf(EditDesc.lignesEnteteStation.getText()))+1;
 	selection = ligne.substring(Integer.valueOf(ViewFile.tableData.getItem(i).getText(4)), Integer.valueOf(ViewFile.tableData.getItem(i).getText(5))).trim();
 	
-	System.out.println("ligne lue = "+ligne );
-	System.out.println("sélection dans la ligne ="+selection);
+//	System.out.println("ligne lue = "+ligne );
+	//System.out.println("sélection dans la ligne ="+selection);
 	
 		//on formate puis on reaffiche la liste
 	if (selection.matches(ViewFile.tableData.getItem(i).getText(7))){
@@ -689,7 +635,7 @@ public static void initTable(){
 	org.nfunk.jep.JEP parser = new org.nfunk.jep.JEP();
 	parser.addStandardFunctions();
 	parser.addStandardConstants();
-	parser.addVariable("x", Float.valueOf(selection));
+	parser.addVariable("x", Float.valueOf(selection)); //$NON-NLS-1$
 	parser.parseExpression(ViewFile.tableData.getItem(i).getText(2));
 	resultJEP = parser.getValue();
 	
@@ -697,10 +643,10 @@ public static void initTable(){
 	
 	types.get(i).setTest(resultat);
 	
-	System.out.println("resultat conversion = "+resultat);
+	//System.out.println("resultat conversion = "+resultat);
 		 }
 	  
-	 System.out.println("maj types data : ok");
+	// System.out.println("maj types data : ok");
 	 }
 	 
 	 //razTableData
@@ -725,15 +671,15 @@ public static void initTable(){
 	 for (int i = 0; i <nbre; i++){
 		 
 		 
-		 System.out.println("CODE de l'item ########## ==>"+ViewFile.tableData.getItem(i).getText(0));
-		 System.out.println("unite de l'item ==>"+ViewFile.tableData.getItem(i).getText(1));
-		 System.out.println("conversion de l'item ==>"+ViewFile.tableData.getItem(i).getText(2));
-		 System.out.println("test de l'item ==>"+ViewFile.tableData.getItem(i).getText(3));
-		 System.out.println("debut de l'item ==>"+ViewFile.tableData.getItem(i).getText(4));
-		 System.out.println("fin de l'item ==>"+ViewFile.tableData.getItem(i).getText(5));
-		 System.out.println("format de l'item ==>"+ViewFile.tableData.getItem(i).getText(6));
-		 System.out.println("entree de l'item ==>"+ViewFile.tableData.getItem(i).getText(7));
-		 System.out.println("sortie de l'item ==>"+ViewFile.tableData.getItem(i).getText(8));
+//		 System.out.println("CODE de l'item ########## ==>"+ViewFile.tableData.getItem(i).getText(0));
+//		 System.out.println("unite de l'item ==>"+ViewFile.tableData.getItem(i).getText(1));
+//		 System.out.println("conversion de l'item ==>"+ViewFile.tableData.getItem(i).getText(2));
+//		 System.out.println("test de l'item ==>"+ViewFile.tableData.getItem(i).getText(3));
+//		 System.out.println("debut de l'item ==>"+ViewFile.tableData.getItem(i).getText(4));
+//		 System.out.println("fin de l'item ==>"+ViewFile.tableData.getItem(i).getText(5));
+//		 System.out.println("format de l'item ==>"+ViewFile.tableData.getItem(i).getText(6));
+//		 System.out.println("entree de l'item ==>"+ViewFile.tableData.getItem(i).getText(7));
+//		 System.out.println("sortie de l'item ==>"+ViewFile.tableData.getItem(i).getText(8));
 		 
 		types.get(i).setCode(ViewFile.tableData.getItem(i).getText(0));
 		types.get(i).setUnite(ViewFile.tableData.getItem(i).getText(1));
@@ -746,13 +692,13 @@ public static void initTable(){
 		types.get(i).setSortie(ViewFile.tableData.getItem(i).getText(8));
 		 }
 	  
-	 System.out.println("maj types data : ok");
+	// System.out.println("maj types data : ok");
 	  
   } 
   
   
   public static void ajouterCode(int indice){
-	  //TODO à compléter
+	  //
 	  
 	  
   }

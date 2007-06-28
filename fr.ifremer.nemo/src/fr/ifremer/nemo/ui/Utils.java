@@ -52,8 +52,8 @@ public class Utils {
 		
 		tailleLigne = 0;
 		tailleMax = 0;
-		texteBrut = "";
-		texteFinal = "";
+		texteBrut = ""; //$NON-NLS-1$
+		texteFinal = ""; //$NON-NLS-1$
 		tailleOctets = tailleOctetsTot = tailleLigneOctets = 0;
 		nbreLignes = 0;
 
@@ -65,7 +65,7 @@ public class Utils {
 		
 		File objFich = new File(fich);
 		tailleOctetsTot = objFich.length();
-		System.out.println("taille fichier ==>" + objFich.length());
+		//System.out.println("taille fichier ==>" + objFich.length());
 	
 
 		// lecture et concaténation
@@ -79,19 +79,19 @@ public class Utils {
 
 				lignesBrutes.add(ligne);
 				stringBuffer.append(ligne);
-				stringBuffer.append("\n");
+				stringBuffer.append("\n"); //$NON-NLS-1$
 				
 				nbreLignes = nbreLignes + 1;
 				// System.out.println(nbreLignes % 50);
 				if ((nbreLignes % 100) == 0) {
-					System.out.println("ligne lue : " + nbreLignes);
+					//System.out.println("ligne lue : " + nbreLignes);
 				}
 
 			}
 			
 		} while (ligne != null);
 		entree.close();
-		System.out.println("Fin lecture fichier " + fich);
+		//System.out.println("Fin lecture fichier " + fich);
 
 		// calcul des tailles cumulées
 		taillesCumLignes = new int[nbreLignes];
@@ -109,11 +109,11 @@ public class Utils {
 		texteBrut = stringBuffer.toString();
 		
 		// affichage
-		System.out.println("Fin de insertText ()");
+		//System.out.println("Fin de insertText ()");
 
 		// affichage texte
 		// changement de font
-		font = new Font(Application.display, "Courier", 10, SWT.NORMAL);
+		font = new Font(Application.display, "Courier", 10, SWT.NORMAL); //$NON-NLS-1$
 		zone.setFont(font);
 
 		// zone.getHorizontalBar().
@@ -121,12 +121,12 @@ public class Utils {
 		// zone.setText(texteFinal);
 
 		// log ok
-		ViewLog.styledTextLogErreurs.setText("Chargement du fichier réussi.");
+		ViewLog.styledTextLogErreurs.setText(Messages.getString("Utils.4")); //$NON-NLS-1$
 
 		// début d'infos du fichier
 		
-		ViewLog.styledTextLogInfos.setText("Localisation du fichier : " + fich);
-		ViewLog.styledTextLogInfos.append("\nNombre de lignes : " + nbreLignes);
+		ViewLog.styledTextLogInfos.setText(Messages.getString("Utils.5") + fich); //$NON-NLS-1$
+		ViewLog.styledTextLogInfos.append(Messages.getString("Utils.6") + nbreLignes); //$NON-NLS-1$
 		
 		
 		//réactivation de l'option série temporelle onglet DESC
@@ -192,7 +192,7 @@ public class Utils {
 			
 			String tmp = lignesBrutes.get(i);
 			stringBuffer.append(tmp);
-			stringBuffer.append("\n");
+			stringBuffer.append("\n"); //$NON-NLS-1$
 		
 		}
 		
@@ -205,7 +205,7 @@ public class Utils {
 		// max des lignes en entrée puis seulement rajouter
 		// la règle concaténée au début du texteBrut
 
-		texteBrut = "";
+		texteBrut = ""; //$NON-NLS-1$
 
 		// ViewFich2.zone.setText(texteBrut);
 
@@ -222,8 +222,8 @@ public class Utils {
 		deb = styledtext.getSelection().x;
 		fi = styledtext.getSelection().y;
 
-		System.out.println("deb clic = " + deb);
-		System.out.println("fi clic = " + fi);
+		//System.out.println("deb clic = " + deb);
+	//	System.out.println("fi clic = " + fi);
 
 		lign = 1;
 		// calcul de la ligne en fonction de la valeur de x
@@ -244,12 +244,12 @@ public class Utils {
 				break;
 			}
 
-			System.out.println("cumul = " + taillesCumLignes[i] + "i= " + i);
+			//System.out.println("cumul = " + taillesCumLignes[i] + "i= " + i);
 
 		}
 
 		// remplissage ligne dans interface
-		ligne.setText("" + lign);
+		ligne.setText("" + lign); //$NON-NLS-1$
 
 		deb = deb - taillesCumLignes[lign - 1] + 1; // debut reel sur ligne :
 		// nbre caracs par rapport
@@ -257,8 +257,8 @@ public class Utils {
 		fi = fi - taillesCumLignes[lign - 1]; // fin reelle sur ligne
 
 		// remplissage debut et fin dans interface
-		debut.setText("" + deb);
-		fin.setText("" + fi);
+		debut.setText("" + deb); //$NON-NLS-1$
+		fin.setText("" + fi); //$NON-NLS-1$
 
 	}
 
@@ -269,8 +269,8 @@ public class Utils {
 		deb = styledtext.getSelection().x;
 		fi = styledtext.getSelection().y;
 
-		System.out.println("deb clic = " + deb);
-		System.out.println("fi clic = " + fi);
+	//	System.out.println("deb clic = " + deb);
+	//	System.out.println("fi clic = " + fi);
 
 		lign = 1;
 		// calcul de la ligne en fonction de la valeur de x
@@ -291,7 +291,7 @@ public class Utils {
 				break;
 			}
 
-			System.out.println("cumul = " + taillesCumLignes[i] + " i= " + i);
+		//	System.out.println("cumul = " + taillesCumLignes[i] + " i= " + i);
 
 		}
 
@@ -309,8 +309,8 @@ public class Utils {
 		TableData.debut = deb;
 		TableData.fin = fi;
 
-		System.out.println("DEBUT data= " + TableData.debut + " FIN data= "
-				+ TableData.fin);
+//		System.out.println("DEBUT data= " + TableData.debut + " FIN data= "
+//				+ TableData.fin);
 
 	}
 
@@ -321,8 +321,8 @@ public class Utils {
 		deb = styledtext.getSelection().x;
 		fi = styledtext.getSelection().y;
 
-		System.out.println("deb clic = " + deb);
-		System.out.println("fi clic = " + fi);
+		//System.out.println("deb clic = " + deb);
+		//System.out.println("fi clic = " + fi);
 
 		lignDepart = 1;
 		lignFin = 1;
@@ -349,7 +349,7 @@ public class Utils {
 
 		}
 
-		System.out.println("ligne depart = " + lignDepart);
+		//System.out.println("ligne depart = " + lignDepart);
 
 		// calcul ligne fin
 
@@ -370,10 +370,10 @@ public class Utils {
 
 		}
 
-		System.out.println("ligne fin = " + lignFin);
+		//System.out.println("ligne fin = " + lignFin);
 
 		// remplissage nbreLignes dans interface
-		nbrelignes.setText("" + (lignFin - lignDepart + 1));
+		nbrelignes.setText("" + (lignFin - lignDepart + 1)); //$NON-NLS-1$
 
 	}
 
@@ -708,11 +708,11 @@ public class Utils {
 		File directory = new File(directoryPath);
 
 		File[] subfiles = directory.listFiles();
-		ViewFile.nomFichier = directoryPath + "\\" + subfiles[0].getName();
+		ViewFile.nomFichier = directoryPath + "\\" + subfiles[0].getName(); //$NON-NLS-1$
 		ViewFile.nomRepertoire = directoryPath;
 
-		System.out.println("Le chemin ==>" + directoryPath);
-		System.out.println("Le fichier ==>" + ViewFile.nomFichier);
+		//System.out.println("Le chemin ==>" + directoryPath);
+		//System.out.println("Le fichier ==>" + ViewFile.nomFichier);
 
 		try {
 			Utils.insertTextFich(ViewFile.nomFichier,
@@ -801,14 +801,14 @@ public class Utils {
 	public static void saveConfig(){
 		//sauvegarde de la config dans le fichier qui va bien
 		//CONTACT
-		configuration.setContact("");
+		configuration.setContact(""); //$NON-NLS-1$
 		//DOSSIER
 		configuration.setModelsDirectory(OptionsAction.textDossier.getText());
 		//LANGUE
-		if (OptionsAction.comboLangue.getItem(OptionsAction.comboLangue.getSelectionIndex()).matches("Français")){
-			configuration.setLang("fr_FR");			
+		if (OptionsAction.comboLangue.getItem(OptionsAction.comboLangue.getSelectionIndex()).matches("Français")){ //$NON-NLS-1$
+			configuration.setLang("fr_FR");			 //$NON-NLS-1$
 		}else{
-			configuration.setLang("en_GB");
+			configuration.setLang("en_GB"); //$NON-NLS-1$
 		}
 		
 		//WS
@@ -817,7 +817,7 @@ public class Utils {
 
 		configuration.save();
 		
-		System.out.println("sauvegarde options... ok");
+		//System.out.println("sauvegarde options... ok");
 		
 	}
 	
@@ -863,7 +863,7 @@ public class Utils {
 				EditSurvey.listeSectionsSurvey.get(i).dispose();
 					}
 			//effacement titre formulaire
-			ViewEdit.formEdition.setText("");
+			ViewEdit.formEdition.setText(""); //$NON-NLS-1$
 			
 			//refresh global
 			ViewEdit.formEdition.reflow(true);
@@ -888,7 +888,7 @@ public class Utils {
 			}
 
 //			titre à vide
-			ViewEdit.formEdition.setText("");
+			ViewEdit.formEdition.setText(""); //$NON-NLS-1$
 
 //			refresh global
 			ViewEdit.formEdition.reflow(true);
@@ -915,7 +915,7 @@ public class Utils {
 				}
 			
 //				titre à vide
-				ViewEdit.formEdition.setText("");
+				ViewEdit.formEdition.setText(""); //$NON-NLS-1$
 
 //				refresh global
 				ViewEdit.formEdition.reflow(true);
@@ -938,11 +938,11 @@ public class Utils {
 		if (TableData.types != null){TableData.types = new ArrayList<TypeData>();}	
 		
 		//reset des noms des onglets
-		ViewFile.tabItem.setText("Description");
-		ViewFile.tabItem1.setText("Campagne");
-		ViewFile.tabItem2.setText("Station");
-		ViewFile.tabItem3.setText("Données");
-		ViewFile.tabItem9.setText("Conversion");
+		ViewFile.tabItem.setText(Messages.getString("Utils.21")); //$NON-NLS-1$
+		ViewFile.tabItem1.setText(Messages.getString("Utils.22")); //$NON-NLS-1$
+		ViewFile.tabItem2.setText(Messages.getString("Utils.23")); //$NON-NLS-1$
+		ViewFile.tabItem3.setText(Messages.getString("Utils.24")); //$NON-NLS-1$
+		ViewFile.tabItem9.setText(Messages.getString("Utils.25")); //$NON-NLS-1$
 		
 		
 		//effacement du bouton conversion
@@ -960,7 +960,7 @@ public class Utils {
 	} 
 	
 public static void messageInfoAppend(String message){
-		ViewLog.styledTextLogInfos.append("\n"+message);
+		ViewLog.styledTextLogInfos.append("\n"+message); //$NON-NLS-1$
 	} 
 	
 	

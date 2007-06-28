@@ -20,7 +20,7 @@ import fr.ifremer.nemo.input.InputModel;
 public class OpenXMLAction extends Action implements ISelectionListener, ActionFactory.IWorkbenchAction { //implements ISelectionListener, ActionFactory.IWorkbenchAction 
 private final IWorkbenchWindow window;
 
-public final static String ID = "fr.ifremer.nemo.ui.OpenXMLAction";
+public final static String ID = "fr.ifremer.nemo.ui.OpenXMLAction"; //$NON-NLS-1$
 
 //vars nécessaires à la fenêtre d'options
 //public static 
@@ -31,7 +31,7 @@ public OpenXMLAction(IWorkbenchWindow window){
 	
 	this.window = window;
 	setId(ID);
-	setText("Ouvrir Description XML");
+	setText(Messages.getString("OpenXMLAction.1")); //$NON-NLS-1$
 	window.getSelectionService().addSelectionListener(this);
 
 

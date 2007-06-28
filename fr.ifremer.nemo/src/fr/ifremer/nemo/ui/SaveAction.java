@@ -19,7 +19,7 @@ import org.eclipse.ui.actions.ActionFactory;
 public class SaveAction extends Action implements ISelectionListener, ActionFactory.IWorkbenchAction { //implements ISelectionListener, ActionFactory.IWorkbenchAction 
 private final IWorkbenchWindow window;
 
-public final static String ID = "fr.ifremer.nemo.ui.SaveAction";
+public final static String ID = "fr.ifremer.nemo.ui.SaveAction"; //$NON-NLS-1$
 
 //vars nécessaires à la fenêtre d'options
 //public static 
@@ -33,7 +33,7 @@ public SaveAction(IWorkbenchWindow window){
 	
 this.window = window;
 setId(ID);
-setText("Enregistrer le modèle");
+setText(Messages.getString("SaveAction.1")); //$NON-NLS-1$
 window.getSelectionService().addSelectionListener(this);
 
 
@@ -49,12 +49,12 @@ public void dispose(){
 
 public void run(){
 	//sauvegarde du modèle
-	System.out.println("Menu save");
+	System.out.println("Menu save"); //$NON-NLS-1$
 	
 	FileOutputStream fileOutputStream= null;
 	
 	if (EditData.validee ==0){
-		Utils.messageErreur("Veuillez valider toutes les étapes avant d'enregistrer votre modèle...");
+		Utils.messageErreur(Messages.getString("SaveAction.3")); //$NON-NLS-1$
 	}else{
 		
 		choixFichierSortie();
@@ -66,7 +66,7 @@ public void run(){
 			e.printStackTrace();
 		}
 		DataModel.inputModel.writeXMLOn(fileOutputStream);
-		Utils.messageErreur("==== Fin d'enregistrement du modèle XML ====");
+		Utils.messageErreur(Messages.getString("SaveAction.4")); //$NON-NLS-1$
 	}
 	
 }
@@ -77,7 +77,7 @@ public static void choixFichierSortie(){
 	
 	Shell shell = new Shell();
 	FileDialog dialog = new FileDialog(shell, SWT.SAVE |SWT.APPLICATION_MODAL);
-	dialog.setText("Entrez un nom pour le fichier de sortie");
+	dialog.setText(Messages.getString("SaveAction.5")); //$NON-NLS-1$
 	 nomFichierSortieXML = dialog.open();
 	
 	fichierSortieXML = new File(nomFichierSortieXML);
@@ -87,7 +87,7 @@ public static void choixFichierSortie(){
 		Shell shell2 = new Shell();
 		
 		MessageBox mb = new MessageBox(shell2, SWT.ICON_WARNING |  SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
-		mb.setMessage("Le fichier de sortie spécifié existe déjà ! Voulez-vous l'écraser ?");
+		mb.setMessage(Messages.getString("SaveAction.6")); //$NON-NLS-1$
 		
 		int reponse = mb.open();
 		if (reponse == SWT.NO){

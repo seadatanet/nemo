@@ -79,7 +79,7 @@ public static ScrolledForm formEdition;
 		  formEdition.getBody().setLayout(gridlayout);
 		
 		formEdition.setText(Messages.getString("EditDesc.descriptiondeFichier")); //$NON-NLS-1$
-		System.out.println("ok editDesc"); //$NON-NLS-1$
+		//System.out.println("ok editDesc"); //$NON-NLS-1$
 	
 		
 	
@@ -113,7 +113,7 @@ public static ScrolledForm formEdition;
 		formEdition.reflow(true);
 		//formEdition.
 		
-		System.out.println("ok editDesc 2"); //$NON-NLS-1$
+		//System.out.println("ok editDesc 2"); //$NON-NLS-1$
 		
 	// initialisation   liste des sections de la partie description fichier
 		
@@ -153,13 +153,13 @@ buttonExpandDesc2.setText("+"); //$NON-NLS-1$
 buttonExpandDesc
 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 	public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-		System.out.println("expand/collapse all"); // TODO Auto-generated Event stub widgetSelected() //$NON-NLS-1$
+		//System.out.println("expand/collapse all"); // 
 		//raz de la valeur manuelle
 		int i;
 		
 		//Shell s = new Shell();
 		
-		System.out.println("expand ? = " + expand); //$NON-NLS-1$
+		//System.out.println("expand ? = " + expand); //$NON-NLS-1$
 		for (i=0;i<=EditDesc.listeSectionsDesc.size()-1;i++){
 			
 			if (expand == 0){ 
@@ -176,13 +176,13 @@ buttonExpandDesc
 			
 		}
 		if (expand == 0) {
-			System.out.println("expand passe à 1"); //$NON-NLS-1$
+			//System.out.println("expand passe à 1"); //$NON-NLS-1$
 			
 			expand = 1;
 			buttonExpandDesc.setText("-"); //$NON-NLS-1$
 			buttonExpandDesc2.setText("-");} //$NON-NLS-1$
 		else{expand = 0;
-		System.out.println("expand passe à 0"); //$NON-NLS-1$
+		//System.out.println("expand passe à 0"); //$NON-NLS-1$
 		buttonExpandDesc.setText("+"); //$NON-NLS-1$
 		buttonExpandDesc2.setText("+"); //$NON-NLS-1$
 		} 
@@ -197,13 +197,12 @@ buttonExpandDesc
 buttonExpandDesc2
 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 	public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-		System.out.println("expand/collapse all"); // TODO Auto-generated Event stub widgetSelected() //$NON-NLS-1$
+		//System.out.println("expand/collapse all"); // 
 		//raz de la valeur manuelle
 		int i;
 		
-		//Shell s = new Shell();
-		
-		System.out.println("expand ? = " + expand); //$NON-NLS-1$
+			
+		//System.out.println("expand ? = " + expand); //$NON-NLS-1$
 		for (i=0;i<=EditDesc.listeSectionsDesc.size()-1;i++){
 			
 			if (expand == 0){ 
@@ -219,13 +218,13 @@ buttonExpandDesc2
 			
 		}
 		if (expand == 0) {
-			System.out.println("expand passe à 1"); //$NON-NLS-1$
+			//System.out.println("expand passe à 1"); //$NON-NLS-1$
 			
 			expand = 1;
 			buttonExpandDesc2.setText("-"); //$NON-NLS-1$
 			buttonExpandDesc.setText("-");} //$NON-NLS-1$
 		else{expand = 0;
-		System.out.println("expand passe à 0"); //$NON-NLS-1$
+		//System.out.println("expand passe à 0"); //$NON-NLS-1$
 		buttonExpandDesc2.setText("+"); //$NON-NLS-1$
 		buttonExpandDesc.setText("+"); //$NON-NLS-1$
 		} 
@@ -240,13 +239,11 @@ buttonExpandDesc2
 buttonValidateDesc
 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 	public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-		System.out.println("validation"); // TODO Auto-generated Event stub widgetSelected() //$NON-NLS-1$
+		//System.out.println("validation"); // 
 		
 		//on passe en ppar l'étape à laquelle on se trouve
 		Etape.etape(0);	
 		
-		
-		//TODO remettre validation normale
 		//razEdition();
 		
 		//EditData.affichageEdition();
@@ -260,7 +257,7 @@ buttonValidateDesc
 buttonRAZ
 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 	public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-		System.out.println("RAZ"); // TODO Auto-generated Event stub widgetSelected() //$NON-NLS-1$
+		//System.out.println("RAZ"); // TODO Auto-generated Event stub widgetSelected() //$NON-NLS-1$
 		
 		razText(listeTextDesc);
 		
@@ -305,13 +302,13 @@ nomNemo();
 		//effacement bouton valider etape
 		buttonValidateDesc.setParent(s);
 		
-		System.out.println("expand ? = " + expand); //$NON-NLS-1$
+		//System.out.println("expand ? = " + expand); //$NON-NLS-1$
 		for (i=0;i<=EditDesc.listeSectionsDesc.size()-1;i++){
 			
 			
 			EditDesc.listeSectionsDesc.get(i).setExpanded(true);
 			EditDesc.listeSectionsDesc.get(i).setParent(s);
-			System.out.println("effacement zone edition etape description fichier ==> ok"); //$NON-NLS-1$
+			//System.out.println("effacement zone edition etape description fichier ==> ok"); //$NON-NLS-1$
 			}
 	
 		
@@ -354,13 +351,13 @@ nomNemo();
 		//affichage bouton valider etape
 		buttonValidateDesc.setParent(s.getBody());
 		
-		System.out.println("expand ? = " + expand); //$NON-NLS-1$
+		//System.out.println("expand ? = " + expand); //$NON-NLS-1$
 		for (i=0;i<=EditDesc.listeSectionsDesc.size()-1;i++){
 			
 			
 			EditDesc.listeSectionsDesc.get(i).setExpanded(false);
 			EditDesc.listeSectionsDesc.get(i).setParent(s.getBody());
-			System.out.println("Affichage section etape description fichier ==> ok"); //$NON-NLS-1$
+			//System.out.println("Affichage section etape description fichier ==> ok"); //$NON-NLS-1$
 			}
 	
 		buttonExpandDesc2.setParent(s.getBody());
@@ -391,7 +388,7 @@ public static void initSections(){
 	 sectionTest= new Section(shell, SWT.NONE);
 	 sectionTest2= new Section(shell, SWT.NONE);
 	 
-	System.out.println("init section ok"); //$NON-NLS-1$
+	//System.out.println("init section ok"); //$NON-NLS-1$
 	}
 	
 	
@@ -457,7 +454,7 @@ public static void nomNemo(){
 	if (ViewFile.dossierCampagne){
 		//dossier campagne
 		
-		System.out.println(">>>>"+ViewFile.nomRepertoire); //$NON-NLS-1$
+		//System.out.println(">>>>"+ViewFile.nomRepertoire); //$NON-NLS-1$
 		File fich = new File(ViewFile.nomRepertoire);
 		if (DataModel.ouverture){
 			ApplicationWorkbenchWindowAdvisor.configurer_titre.setTitle(Messages.getString("EditDesc.nemoDossier")+fich.getName()+Messages.getString("EditDesc.modele")+OpenAction.nomFichierModele+" ]"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$

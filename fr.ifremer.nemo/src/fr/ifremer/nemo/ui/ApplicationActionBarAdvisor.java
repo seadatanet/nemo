@@ -71,7 +71,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 	}
 
 	protected void fillMenuBar(IMenuManager menuBar) {
-		MenuManager fileMenu = new MenuManager("&Modèle", "Modèle");
+		MenuManager fileMenu = new MenuManager(Messages.getString("ApplicationActionBarAdvisor.0"), Messages.getString("ApplicationActionBarAdvisor.1")); 
 		//fileMenu.add(newAction);
 		fileMenu.add(openAction);
 		fileMenu.add(saveAction);
@@ -87,11 +87,11 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 		fileMenu.add(exitAction);
 		
 		
-		MenuManager optionsMenu = new MenuManager("&Options", "Options");
+		MenuManager optionsMenu = new MenuManager(Messages.getString("ApplicationActionBarAdvisor.2"), Messages.getString("ApplicationActionBarAdvisor.3")); //$NON-NLS-1$ //$NON-NLS-2$
 		optionsMenu.add(optionsAction);
 		optionsMenu.add(updateAction);
 		
-		MenuManager helpMenu = new MenuManager("&?", "?");
+		MenuManager helpMenu = new MenuManager("&?", "?"); //$NON-NLS-1$ //$NON-NLS-2$
 		//helpMenu.add(helpAction);
 		helpMenu.add(aboutAction);
 		

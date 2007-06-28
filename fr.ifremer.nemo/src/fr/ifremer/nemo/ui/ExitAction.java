@@ -21,7 +21,7 @@ import fr.ifremer.nemo.input.InputModel;
 public class ExitAction extends Action implements ISelectionListener, ActionFactory.IWorkbenchAction { //implements ISelectionListener, ActionFactory.IWorkbenchAction 
 private final IWorkbenchWindow window;
 
-public final static String ID = "fr.ifremer.nemo.ui.ExitAction";
+public final static String ID = "fr.ifremer.nemo.ui.ExitAction"; //$NON-NLS-1$
 
 //vars nécessaires à la fenêtre d'options
 //public static 
@@ -34,7 +34,7 @@ public ExitAction(IWorkbenchWindow window){
 	
 this.window = window;
 setId(ID);
-setText("Quitter");
+setText(Messages.getString("ExitAction.1")); //$NON-NLS-1$
 window.getSelectionService().addSelectionListener(this);
 
 
@@ -53,7 +53,7 @@ public void run(){
 	int reponse = 0;
 	
 	MessageBox mb = new MessageBox(s, SWT.ICON_QUESTION |SWT.YES | SWT.NO);
-	mb.setMessage("Voulez-vous vraiment quitter ?");
+	mb.setMessage(Messages.getString("ExitAction.2")); //$NON-NLS-1$
 	reponse = mb.open();
 	
 	if (reponse == SWT.YES){

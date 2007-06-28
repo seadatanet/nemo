@@ -43,10 +43,10 @@ public class EditConversion extends Thread {
 		formEdition = ViewEdit.formEdition;
 	
 //		raz message erreur
-		Utils.messageErreur("");		
+		Utils.messageErreur("");		 //$NON-NLS-1$
 		
 		ViewEdit.formEdition.getBody().setLayout(new GridLayout());
-		ViewEdit.formEdition.setText("Conversion...");
+		ViewEdit.formEdition.setText(Messages.getString("EditConversion.1")); //$NON-NLS-1$
 		
 		initBoutons();
 		
@@ -54,13 +54,13 @@ public class EditConversion extends Thread {
 		
 		//bouton conversion
 		buttonConversion.setParent(formEdition.getBody());
-		buttonConversion.setText("Lancer la conversion...");
+		buttonConversion.setText(Messages.getString("EditConversion.2")); //$NON-NLS-1$
 		
 		//listener sur le bouton conversion
 		buttonConversion
 		.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 		public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-		System.out.println("conversion !"); 
+		//System.out.println("conversion !"); 
 				
 		//test pour savoir si on est en campagne ou pas
 			choixFichierSortie();
@@ -79,7 +79,7 @@ public class EditConversion extends Thread {
   				//progressbar.setSize(200,20);
   				
   				progressbar.setBounds(0,0, 500, 20);
-  				shell.setText("Conversion en cours... Veuillez patienter...");
+  				shell.setText(Messages.getString("EditConversion.3")); //$NON-NLS-1$
   				shell.pack();
     		
 			java.io.FileInputStream stream = null;
@@ -117,8 +117,8 @@ public class EditConversion extends Thread {
 				} catch (GenerationException e1) {
 					// 
 					e1.printStackTrace();
-					System.out.println("Erreur de génération de fichier de sortie!");
-					Utils.messageErreur("Erreur de génération de fichier de sortie!");
+					//System.out.println("Erreur de génération de fichier de sortie!");
+					Utils.messageErreur(Messages.getString("EditConversion.4")); //$NON-NLS-1$
 				}
 				 
 			/*    
@@ -151,8 +151,8 @@ public class EditConversion extends Thread {
 								// 
 								e.printStackTrace();
 							} catch (GenerationException e) {
-								System.out.println("Erreur de génération de fichier de sortie!");
-								// 
+								//System.out.println("Erreur de génération de fichier de sortie!");
+								Utils.messageErreur(Messages.getString("EditConversion.5")); //$NON-NLS-1$
 								e.printStackTrace();
 							}
 							// 
@@ -164,60 +164,19 @@ public class EditConversion extends Thread {
 			
 			
 			}
-			catch (FileNotFoundException e1) {e1.printStackTrace(); System.out.println("Fichier non trouvé ! <EditConversion>");}
-			catch (IOException e1) {e1.printStackTrace(); System.out.println("Fichier non trouvé ! <EditConversion>");}
-			catch (ParseException e1) {e1.printStackTrace(); System.out.println("Erreur de format ! <EditConversion>");}
+			catch (FileNotFoundException e1) {e1.printStackTrace(); Utils.messageErreur(Messages.getString("EditConversion.6"));} //$NON-NLS-1$
+			catch (IOException e1) {e1.printStackTrace(); Utils.messageErreur(Messages.getString("EditConversion.7"));} //$NON-NLS-1$
+			catch (ParseException e1) {e1.printStackTrace(); Utils.messageErreur(Messages.getString("EditConversion.8"));} //$NON-NLS-1$
 			
-		System.out.println("==== Fin de conversion ====");	
+		//System.out.println("==== Fin de conversion ====");	
 		if (ViewFile.odv.getSelection()){
-		Utils.messageErreur("==== Fin de conversion en ODV ====");}
-		else {Utils.messageErreur("==== Fin de conversion en Medatlas ====");}
+		Utils.messageErreur(Messages.getString("EditConversion.9"));} //$NON-NLS-1$
+		else {Utils.messageErreur(Messages.getString("EditConversion.10"));} //$NON-NLS-1$
 		
 		shell.close();
+
 		
-//			//dossier de campagne
-//			
-//			choixFichierSortie();
-//			
-//			java.io.FileInputStream stream = null;
-//			ProgressNotification progress = new ProgressNotification() {
-//                public void progress(final int val) {
-//                	try {
-//                        SwingUtilities.invokeAndWait( new Runnable() {
-//                                                          public void run() {
-//                                                              //progress.setValue(val);
-//                                                          }
-//                                                      });
-//                    } catch (Exception e) {
-//                    }
-//                }
-//            };
-//			try {
-//				Survey survey = DataModel.inputModel.convert(progress);
-//				fr.ifremer.nemo.medatlas.MedatlasSurveyWriter writer = new fr.ifremer.nemo.medatlas.MedatlasSurveyWriter();
-//		    	progress.progress(0);
-//		    	try {
-//					writer.writeSurvey ( survey, new java.io.File(nomFichierSortie), progress);
-//				} catch (GenerationException e1) {
-//					System.out.println("Erreur de  génération de fichier de sortie!");
-//					e1.printStackTrace();
-//				}
-//			
-//			
-//			
-//			}
-//			catch (FileNotFoundException e1) {e1.printStackTrace(); System.out.println("Fichier non trouvé ! <EditConversion>");}
-//			catch (IOException e1) {e1.printStackTrace(); System.out.println("Fichier non trouvé ! <EditConversion>");}
-//			catch (ParseException e1) {e1.printStackTrace(); System.out.println("Erreur de format ! <EditConversion>" + e1.getMessage() + "###" +e1.getCause());}
-//			
-//		System.out.println("==== Fin de conversion ====");	
-//			
-//			
-//			
-//			
-//		}
 		
-		//lancement de la conversion
 		
 		}
 		});
@@ -242,7 +201,7 @@ public class EditConversion extends Thread {
 		
 		buttonConversion.setParent(shell);
 		formEdition.reflow(true);
-		ViewEdit.formEdition.setText("");
+		ViewEdit.formEdition.setText(""); //$NON-NLS-1$
 		
 		
 	}
@@ -254,7 +213,7 @@ public static void DrawingBack(){
 	
 		buttonConversion.setParent(s.getBody());
 		
-		s.setText("Conversion...");
+		s.setText(Messages.getString("EditConversion.12")); //$NON-NLS-1$
 		
 		formEdition.reflow(true);
 		
@@ -268,7 +227,7 @@ public static void choixFichierSortie(){
 	
 	Shell shell = new Shell();
 	FileDialog dialog = new FileDialog(shell, SWT.SAVE |SWT.APPLICATION_MODAL);
-	dialog.setText("Entrez un nom pour le fichier de sortie");
+	dialog.setText(Messages.getString("EditConversion.13")); //$NON-NLS-1$
 	nomFichierSortie = dialog.open();
 	
 	File fich = new File(nomFichierSortie);
@@ -278,7 +237,7 @@ public static void choixFichierSortie(){
 		Shell shell2 = new Shell();
 		
 		MessageBox mb = new MessageBox(shell2, SWT.ICON_WARNING |  SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
-		mb.setMessage("Le fichier de sortie spécifié existe déjà ! Voulez-vous l'écraser ?");
+		mb.setMessage(Messages.getString("EditConversion.14")); //$NON-NLS-1$
 		
 		int reponse = mb.open();
 		if (reponse == SWT.NO){

@@ -40,10 +40,10 @@ public class FiltrageTableType {
 public static void go(){
 //	raz message d'erreur
 	
-	Utils.messageErreur("");
+	Utils.messageErreur(""); //$NON-NLS-1$
 	
 	
-	if (listeOuverte == 1){Utils.messageErreur("Vous avez déjà ouvert une liste de sélection");}
+	if (listeOuverte == 1){Utils.messageErreur(Messages.getString("FiltrageTableType.1"));} //$NON-NLS-1$
 	else{
 	
 	shell = new Shell(Application.display, SWT.BORDER | SWT.TITLE |SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);
@@ -53,15 +53,15 @@ public static void go(){
 if (ViewFile.affiche == 1){
 	if (EditSurvey.ws){
 //		onglet survey et selection ref. par WS
-		shell.setText("Sélection de la référence campagne");
+		shell.setText(Messages.getString("FiltrageTableType.2")); //$NON-NLS-1$
 	}
 	else{
-		shell.setText("Sélection des Types de Données");}
+		shell.setText(Messages.getString("FiltrageTableType.3"));} //$NON-NLS-1$
 	
 if (ViewFile.affiche ==3){
 	
 	
-		shell.setText("Sélection des Paramètres mesurés");
+		shell.setText(Messages.getString("FiltrageTableType.4")); //$NON-NLS-1$
 	}
 }
 	//else {}
@@ -84,8 +84,8 @@ if (ViewFile.affiche ==3){
 	TableWS_Survey.listeFiltree = new ArrayList<String>();
 	TableWS_Survey.refsWS = new ArrayList<String>();
 	for (int i=0;i<TableWS_Survey.surveysWS.length;i++){
-		TableWS_Survey.refsWS.add(TableWS_Survey.surveysWS[i].getReference() + " - "+TableWS_Survey.surveysWS[i].getName());
-		TableWS_Survey.listeFiltree.add(TableWS_Survey.surveysWS[i].getReference() + " - "+TableWS_Survey.surveysWS[i].getName());
+		TableWS_Survey.refsWS.add(TableWS_Survey.surveysWS[i].getReference() + " - "+TableWS_Survey.surveysWS[i].getName()); //$NON-NLS-1$
+		TableWS_Survey.listeFiltree.add(TableWS_Survey.surveysWS[i].getReference() + " - "+TableWS_Survey.surveysWS[i].getName()); //$NON-NLS-1$
 	}
 	
 	//liste filtree initialisée à typesWS au depart
@@ -108,19 +108,19 @@ if (ViewFile.affiche ==3){
 	
 	filtreText = new Text(top, SWT.BORDER);
 	filtreText.setBounds(new Rectangle(3, 21, 298, 19));
-	filtreText.setText("");
+	filtreText.setText(""); //$NON-NLS-1$
 	labelText = new Label(top, SWT.NONE);
 	labelText.setBounds(new Rectangle(3, 4, 298, 13));
-	labelText.setText("Tapez le nom à filter");
+	labelText.setText(Messages.getString("FiltrageTableType.8")); //$NON-NLS-1$
 	labelText.pack();
 	
 	filtreButtonSelectionner = new Button(top, SWT.NONE);
 	filtreButtonSelectionner.setBounds(new Rectangle(62, 289, 65, 23));
-	filtreButtonSelectionner.setText("Sélectionner");
+	filtreButtonSelectionner.setText(Messages.getString("FiltrageTableType.9")); //$NON-NLS-1$
 	filtreButtonSelectionner.pack();
 	filtreButtonCancel = new Button(top, SWT.NONE);
 	filtreButtonCancel.setBounds(new Rectangle(168, 289, 65, 23));
-	filtreButtonCancel.setText("Annuler");
+	filtreButtonCancel.setText(Messages.getString("FiltrageTableType.10")); //$NON-NLS-1$
 	filtreButtonCancel.pack();
 	
 //	affichage des tables
@@ -138,7 +138,7 @@ if (ViewFile.affiche ==3){
 	
 	filtreButtonCancel.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 		public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-			 System.out.println("valider cancel liste");
+		//	 System.out.println("valider cancel liste");
 	          shell.close();
 	          listeOuverte = 0;
 	          
@@ -150,7 +150,7 @@ if (ViewFile.affiche ==3){
 	
 	filtreButtonSelectionner.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 		public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-			 System.out.println("valider sélection liste");
+			// System.out.println("valider sélection liste");
 	         
 	          listeOuverte = 0;
 	          if (ViewFile.affiche == 1){
@@ -160,12 +160,12 @@ if (ViewFile.affiche ==3){
 	  	      			 
 	  	      			int index = TableWS_Survey.filtreTable.getSelectionIndex();
 	  	 	 	        String reference = TableWS_Survey.listeFiltree.get(index);	
-	  	 	 	        Pattern p  = Pattern.compile(" - ");
+	  	 	 	        Pattern p  = Pattern.compile(" - "); //$NON-NLS-1$
 	  		    		
 	  	 	 	        String mots[] = p.split(reference);
-	  		    		System.out.println("Lancement WS sur la référence :"+mots[0]);
+	  		    	//	System.out.println("Lancement WS sur la référence :"+mots[0]);
 	  		    		EditSurvey.webService(reference);
-	  		    		System.out.println("Fin de WS sur la référence :"+mots[0]);
+	  		    	//	System.out.println("Fin de WS sur la référence :"+mots[0]);
 	  		    		
 	  		    	  shell.close(); 
 	  		        if (EditSurvey.ws){
@@ -178,7 +178,7 @@ if (ViewFile.affiche ==3){
 	      		//ajout d'un dataType dans l'onglet Survey
 	        TypeSurvey typeSurvey = new TypeSurvey();
 	        
-	        System.out.println("INDEX =>"+TableDataSurvey.filtreTable.getSelectionIndex());
+	   //     System.out.println("INDEX =>"+TableDataSurvey.filtreTable.getSelectionIndex());
 	        int index = TableDataSurvey.filtreTable.getSelectionIndex();
 	        typeSurvey = TableDataSurvey.listeFiltree.get(index);
 	        
@@ -193,7 +193,7 @@ if (ViewFile.affiche ==3){
 	        for (int i=0; i<taille;i++){
 	        	
 //	        	split sur " - "
-	    		Pattern p  = Pattern.compile(" - ");
+	    		Pattern p  = Pattern.compile(" - "); //$NON-NLS-1$
 	    		String mots[] = p.split(typeSurvey.getCode());
 	    		String codeActuel = mots[0];
 	    		
@@ -206,7 +206,7 @@ if (ViewFile.affiche ==3){
 	        if (found == false){	        
 	        TableDataSurvey.types.add(typeSurvey);}
 	        else{
-	        Utils.messageErreur("Le type de données choisi existe déjà. Veuillez en choisir un autre...");	
+	        Utils.messageErreur(Messages.getString("FiltrageTableType.13"));	 //$NON-NLS-1$
 	        }
 	        }else{
 	        	TableDataSurvey.types.add(typeSurvey);
@@ -282,7 +282,7 @@ if (ViewFile.affiche ==3){
 		        String codeModele, codeActuel;
 		        
 		     	//		split sur " - "
-	    		Pattern p  = Pattern.compile(" - ");
+	    		Pattern p  = Pattern.compile(" - "); //$NON-NLS-1$
 	    		String mots[] = p.split(typeData.getCode());
 	    		codeActuel = mots[0];
 	    		
@@ -295,7 +295,7 @@ if (ViewFile.affiche ==3){
 		        if (found == false){	        
 		        	TableData.types.add(typeData);}
 		        else{
-		        Utils.messageErreur("Le paramètre choisi existe déjà. Veuillez en choisir un autre...");	
+		        Utils.messageErreur(Messages.getString("FiltrageTableType.15"));	 //$NON-NLS-1$
 		        }
 		        }
 		        else{
@@ -329,10 +329,10 @@ if (ViewFile.affiche ==3){
 	//listener keypressed sur le champ text
 	filtreText.addListener(SWT.KeyUp, new Listener() {
         public void handleEvent(Event e) {
-          System.out.println("touche appuyée");
-          System.out.println("texte courant =>"+ filtreText.getText());
+     //     System.out.println("touche appuyée");
+      //    System.out.println("texte courant =>"+ filtreText.getText());
           
-          if (filtreText.getText().matches("")){}
+          if (filtreText.getText().matches("")){} //$NON-NLS-1$
           else
           {
           
@@ -373,7 +373,7 @@ public static void creationTableData(){
 	TableColumn tableColumn = new TableColumn(table, SWT.NONE);
 	 tableColumn.setWidth(290);
 		//taille = 60
-	 tableColumn.setText("CODE - NOM");
+	 tableColumn.setText(Messages.getString("FiltrageTableType.17")); //$NON-NLS-1$
 //	 TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);
 //	 tableColumn1.setWidth(300);
 //	 tableColumn1.setText("Nom");
@@ -417,17 +417,17 @@ public static void creationTableSurvey(){
 	 TableColumn tableColumn = new TableColumn(table, SWT.NONE);
 	 tableColumn.setWidth(100);
 		//taille = 60
-	 tableColumn.setText("CODE");
+	 tableColumn.setText(Messages.getString("FiltrageTableType.18")); //$NON-NLS-1$
 	 TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);
 	 tableColumn1.setWidth(100);
-	 tableColumn1.setText("Nombre");
+	 tableColumn1.setText(Messages.getString("FiltrageTableType.19")); //$NON-NLS-1$
 	 TableColumn tableColumn2 = new TableColumn(table, SWT.NONE);
 	 tableColumn2.setWidth(100);
-	 tableColumn2.setText("QC");
+	 tableColumn2.setText(Messages.getString("FiltrageTableType.20")); //$NON-NLS-1$
 	
 	  for (int i = 0; i < nbre; i++) {
 	      TableItem item = new TableItem(table, SWT.NONE);
-	      item.setText(new String[] { TableDataSurvey.listeFiltree.get(i).getCode(), ""+TableDataSurvey.listeFiltree.get(i).getNombre(),
+	      item.setText(new String[] { TableDataSurvey.listeFiltree.get(i).getCode(), ""+TableDataSurvey.listeFiltree.get(i).getNombre(), //$NON-NLS-1$
 	    		  TableDataSurvey.listeFiltree.get(i).getQc() });
 	    
 	    }  
@@ -459,16 +459,16 @@ public static void filtrageListeData(String chaine){
 	origine = TableData.typesWS;
 	
 	nbre = origine.size();
-	System.out.println("Nombre de types = "+nbre);
+//	System.out.println("Nombre de types = "+nbre);
 	
 	//remplissage de la liste filtree
 	for (int i=0;i<nbre;i++){
 		
 		//Pattern.matches(chaine,origine.get(i).getCode() )
 		//(Pattern.matches("^[1-9][0-9]*$", valeur))
-		regexp = "^.*"+chaine+".*$";
-		System.out.println(""+chaine+"<=>"+origine.get(i).getCode());
-		System.out.println(Pattern.matches(regexp,origine.get(i).getCode()));
+		regexp = "^.*"+chaine+".*$"; //$NON-NLS-1$ //$NON-NLS-2$
+	//	System.out.println(""+chaine+"<=>"+origine.get(i).getCode());
+	//	System.out.println(Pattern.matches(regexp,origine.get(i).getCode()));
 		
 
 		Pattern p = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE);
@@ -477,7 +477,7 @@ public static void filtrageListeData(String chaine){
 		if (m.matches()){
 		
 		//if (Pattern.matches(regexp,origine.get(i).getCode())){
-			System.out.println("On ajoute le type "+origine.get(i).getCode());
+	//		System.out.println("On ajoute le type "+origine.get(i).getCode());
 
 			//ajout dans la liste filtrée
 			filtree.add(origine.get(i));
@@ -487,7 +487,7 @@ public static void filtrageListeData(String chaine){
 	TableData.listeFiltree = filtree;
 	//affichage de la liste filtree
 	
-	System.out.println(">>>>>>>>>"+TableData.filtreTable);
+//	System.out.println(">>>>>>>>>"+TableData.filtreTable);
 	
 	razTable(TableData.filtreTable);
 	creationTableData();
@@ -506,23 +506,23 @@ public static void filtrageListeDataSurvey(String chaine){
 	origine = TableDataSurvey.typesWS;
 	
 	nbre = origine.size();
-	System.out.println("Nombre de types = "+nbre);
+//	System.out.println("Nombre de types = "+nbre);
 	
 	//remplissage de la liste filtree
 	for (int i=0;i<nbre;i++){
 		
 		//Pattern.matches(chaine,origine.get(i).getCode() )
 		//(Pattern.matches("^[1-9][0-9]*$", valeur))
-		regexp = "^.*"+chaine+".*$";
-		System.out.println(""+chaine+"<=>"+origine.get(i).getCode());
-		System.out.println(Pattern.matches(regexp,origine.get(i).getCode()));
+		regexp = "^.*"+chaine+".*$"; //$NON-NLS-1$ //$NON-NLS-2$
+	//	System.out.println(""+chaine+"<=>"+origine.get(i).getCode());
+	//	System.out.println(Pattern.matches(regexp,origine.get(i).getCode()));
 		
 		Pattern p = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE);
 		Matcher m = p.matcher(origine.get(i).getCode());
 		
 		//if (Pattern.matches(regexp,origine.get(i).getCode())){
 		if (m.matches()){
-			System.out.println("On ajoute le type "+origine.get(i).getCode());
+	//		System.out.println("On ajoute le type "+origine.get(i).getCode());
 
 			//ajout dans la liste filtrée
 			filtree.add(origine.get(i));
@@ -532,7 +532,7 @@ public static void filtrageListeDataSurvey(String chaine){
 	TableDataSurvey.listeFiltree = filtree;
 	//affichage de la liste filtree
 	
-	System.out.println(">>>>>>>>>"+TableDataSurvey.filtreTable);
+	//System.out.println(">>>>>>>>>"+TableDataSurvey.filtreTable);
 	
 	razTable(TableDataSurvey.filtreTable);
 	creationTableSurvey();
@@ -549,14 +549,14 @@ public static void filtrageListeWS_Survey(String chaine){
 	origine = TableWS_Survey.refsWS;
 	
 	nbre = origine.size();
-	System.out.println("Nombre de refs = "+nbre);
+	//System.out.println("Nombre de refs = "+nbre);
 	
 	//remplissage de la liste filtree
 	for (int i=0;i<nbre;i++){
 		
 		//Pattern.matches(chaine,origine.get(i).getCode() )
 		//(Pattern.matches("^[1-9][0-9]*$", valeur))
-		regexp = "^.*"+chaine+".*$";
+		regexp = "^.*"+chaine+".*$"; //$NON-NLS-1$ //$NON-NLS-2$
 		
 		
 		Pattern p = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE);
@@ -564,7 +564,7 @@ public static void filtrageListeWS_Survey(String chaine){
 		
 		//if (Pattern.matches(regexp,origine.get(i).getCode())){
 		if (m.matches()){
-			System.out.println("On ajoute le type "+origine.get(i));
+			System.out.println("On ajoute le type "+origine.get(i)); //$NON-NLS-1$
 
 			//ajout dans la liste filtrée
 			filtree.add(origine.get(i));
@@ -574,7 +574,7 @@ public static void filtrageListeWS_Survey(String chaine){
 	TableWS_Survey.listeFiltree = filtree;
 	//affichage de la liste filtree
 	
-	System.out.println(">>>>>>>>>"+TableWS_Survey.filtreTable);
+	//System.out.println(">>>>>>>>>"+TableWS_Survey.filtreTable);
 	
 	razTable(TableWS_Survey.filtreTable);
 	creationTableWS_Survey();
@@ -608,7 +608,7 @@ public static void creationTableWS_Survey(){
 	TableColumn tableColumn = new TableColumn(table, SWT.NONE);
 	 tableColumn.setWidth(290);
 		//taille = 60
-	 tableColumn.setText("REFERENCE - NOM");
+	 tableColumn.setText(Messages.getString("FiltrageTableType.29")); //$NON-NLS-1$
 //	 TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);
 //	 tableColumn1.setWidth(300);
 //	 tableColumn1.setText("Nom");

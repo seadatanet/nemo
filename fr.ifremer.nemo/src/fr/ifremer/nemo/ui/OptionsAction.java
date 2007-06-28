@@ -37,7 +37,7 @@ public static Button buttonCancel,buttonValider, buttonParcourir  = null;
 public static Label labelNemo, labelNautilus = null;
 public static Text textAreaNemo, textAreaNautilus, textDossier = null;
 
-public final static String ID = "fr.ifremer.nemo.ui.OptionsAction";
+public final static String ID = "fr.ifremer.nemo.ui.OptionsAction"; //$NON-NLS-1$
 
 //vars nécessaires à la fenêtre d'options
 //public static 
@@ -50,7 +50,7 @@ public OptionsAction(IWorkbenchWindow window){
 	
 this.window = window;
 setId(ID);
-setText("Configurer");
+setText(Messages.getString("OptionsAction.1")); //$NON-NLS-1$
 window.getSelectionService().addSelectionListener(this);
 
 
@@ -67,13 +67,13 @@ public void dispose(){
 
 public void run(){
 	//lancement IHM options
-	System.out.println("Menu options");
+	System.out.println("Menu options"); //$NON-NLS-1$
 	
 	shelloptions = new Shell(Application.display, SWT.BORDER | SWT.TITLE |SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);
 
 	//shelloptions = new Shell();
 	shelloptions.setSize(400, 400);
-	shelloptions.setText("Configuration de Nemo");
+	shelloptions.setText(Messages.getString("OptionsAction.3")); //$NON-NLS-1$
 	shelloptions.setLayout(new GridLayout());
 	//top = new Composite(shelloptions, SWT.NONE);
 
@@ -98,7 +98,7 @@ public void remplissageOptions(){
 	textDossier.setText(Utils.configuration.getModelsDirectory());
 		
 	//LANGUE
-	if (Utils.configuration.getLocale().toString().matches("fr_FR")){
+	if (Utils.configuration.getLocale().toString().matches("fr_FR")){ //$NON-NLS-1$
 		//on met la combo langue à FR
 		comboLangue.select(0);
 	} else{
@@ -122,11 +122,11 @@ public void selectionChanged(IWorkbenchPart part, ISelection incoming){}
 private void createGroupDossier() {
 	groupDossier = new Group(top, SWT.NONE);
 	groupDossier.setLayout(null);
-	groupDossier.setText("Dossier des modèles");
+	groupDossier.setText(Messages.getString("OptionsAction.5")); //$NON-NLS-1$
 	groupDossier.setBounds(new Rectangle(176, 10, 242, 65));
 	buttonParcourir = new Button(groupDossier, SWT.NONE);
 	buttonParcourir.setBounds(new Rectangle(170, 38, 64, 23)); //64
-	buttonParcourir.setText("Parcourir");
+	buttonParcourir.setText(Messages.getString("OptionsAction.6")); //$NON-NLS-1$
 	buttonParcourir.pack();
 	textDossier = new Text(groupDossier, SWT.BORDER);
 	textDossier.setBounds(new Rectangle(5, 16, 229, 19));
@@ -135,7 +135,7 @@ private void createGroupDossier() {
 	buttonParcourir
 	.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 		public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-			System.out.println("parcourir"); 
+			System.out.println(Messages.getString("OptionsAction.7"));  //$NON-NLS-1$
 			
 			
 		String nomRepertoire;
@@ -148,8 +148,8 @@ private void createGroupDossier() {
 			}
 		else { 
 			
-			System.out.println("pas de dossier sélectionné");
-			ViewLog.styledTextLogErreurs.setText("\nVeuillez sélectionner un dossier pour continuer.");
+			System.out.println("pas de dossier sélectionné"); //$NON-NLS-1$
+			ViewLog.styledTextLogErreurs.setText(Messages.getString("OptionsAction.9")); //$NON-NLS-1$
 			
 		}
 
@@ -169,7 +169,7 @@ private void createGroupDossier() {
 private void createGroupLangue() {
 	groupLangue = new Group(top, SWT.NONE);
 	groupLangue.setLayout(null);
-	groupLangue.setText("Choix de langue");
+	groupLangue.setText(Messages.getString("OptionsAction.10")); //$NON-NLS-1$
 	createComboLangue();
 	groupLangue.setBounds(new Rectangle(4, 10, 168, 65)); //166
 	
@@ -183,8 +183,8 @@ private void createComboLangue() {
 	comboLangue = new Combo(groupLangue, SWT.READ_ONLY);
 	comboLangue.setBounds(new Rectangle(2, 16, 160, 21));
 	
-	comboLangue.add("Français");
-	comboLangue.add("English");
+	comboLangue.add(Messages.getString("OptionsAction.11")); //$NON-NLS-1$
+	comboLangue.add(Messages.getString("OptionsAction.12")); //$NON-NLS-1$
 	comboLangue.select(0);
 }
 
@@ -195,15 +195,15 @@ private void createComboLangue() {
 private void createGroupWS() {
 	groupWS = new Group(top, SWT.NONE);
 	groupWS.setLayout(null);
-	groupWS.setText("Web Services");
+	groupWS.setText("Web Services"); //$NON-NLS-1$
 	groupWS.setBounds(new Rectangle(4, 79, 414, 146));
 	labelNemo = new Label(groupWS, SWT.NONE);
 	labelNemo.setBounds(new Rectangle(13, 40, 62, 13));
-	labelNemo.setText("NEMO");
+	labelNemo.setText("NEMO"); //$NON-NLS-1$
 	labelNemo.pack();
 	labelNautilus = new Label(groupWS, SWT.NONE);
 	labelNautilus.setBounds(new Rectangle(13, 100, 62, 13));
-	labelNautilus.setText("NAUTILUS");
+	labelNautilus.setText("NAUTILUS"); //$NON-NLS-1$
 	labelNautilus.pack();
 	textAreaNemo = new Text(groupWS, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL);
 	textAreaNemo.setBounds(new Rectangle(85, 18, 316, 55));
@@ -221,12 +221,12 @@ public void createPartControl(Composite parent) {
 	createGroupWS();
 	buttonCancel = new Button(top, SWT.NONE);
 	buttonCancel.setBounds(new Rectangle(224, 233, 69, 23)); //66
-	buttonCancel.setText("Annuler");
+	buttonCancel.setText(Messages.getString("OptionsAction.16")); //$NON-NLS-1$
 	buttonCancel.pack();
 	
 	buttonValider = new Button(top, SWT.NONE);
 	buttonValider.setBounds(new Rectangle(139, 233, 69, 23));
-	buttonValider.setText("Valider");
+	buttonValider.setText(Messages.getString("OptionsAction.17")); //$NON-NLS-1$
 	buttonValider.pack();
 	
 	
@@ -236,7 +236,7 @@ public void createPartControl(Composite parent) {
 	//listener cancel
 	buttonCancel.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 		public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-			System.out.println("options cancel"); // TODO Auto-generated Event stub widgetSelected()
+			System.out.println("options cancel"); // TODO Auto-generated Event stub widgetSelected() //$NON-NLS-1$
 			
 			shelloptions.close();
 			
@@ -246,7 +246,7 @@ public void createPartControl(Composite parent) {
 	//listener valider
 	buttonValider.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 		public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-			System.out.println("options valider"); // TODO Auto-generated Event stub widgetSelected()
+			System.out.println("options valider"); // TODO Auto-generated Event stub widgetSelected() //$NON-NLS-1$
 			
 			//sauvegarde de la config
 			Utils.saveConfig();

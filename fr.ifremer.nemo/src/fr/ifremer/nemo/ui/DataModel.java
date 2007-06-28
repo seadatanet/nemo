@@ -237,6 +237,10 @@ public static void initSurvey(){
 	 
 	station = stationModel.getModel();
 	
+	//maj des dataTypes
+	TableDataSurvey.majTypeData();
+	
+	
 	//injection des valeurs de l'IHM -> datamodel
 	//référence
 	survey.setReference(EditSurvey.textCampagne.getText());
@@ -262,13 +266,13 @@ public static void initSurvey(){
 		DateTimeFormat dateFormat = new DateTimeFormat();
 		dateFormat.setFormatString("dd/MM/yyyy");
 		Long dateLong = (Long)dateFormat.parseObject(EditSurvey.textDateFin.getText());
-		survey.setStartDate(dateLong);
+		survey.setEndDate(dateLong);
 	} catch (ParseException e) {
 		
 		e.printStackTrace();
 	}
-	survey.setStartDate(EditSurvey.textDateDebut.getText());
-	survey.setEndDate(EditSurvey.textDateFin.getText());
+	//survey.setStartDate(EditSurvey.textDateDebut.getText());
+	//survey.setEndDate(EditSurvey.textDateFin.getText());
 	survey.setRegionName(EditSurvey.textRegion.getText());
 	
 	//Source de données
@@ -329,10 +333,7 @@ public static void initSurvey(){
 	//flag "validee" à 1
 	EditSurvey.validee = 1;
 
-	
 }
-
-	
 
 public static void initStation(){
 	

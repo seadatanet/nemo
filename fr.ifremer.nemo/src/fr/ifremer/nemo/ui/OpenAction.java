@@ -20,7 +20,7 @@ import fr.ifremer.nemo.input.InputModel;
 public class OpenAction extends Action implements ISelectionListener, ActionFactory.IWorkbenchAction { //implements ISelectionListener, ActionFactory.IWorkbenchAction 
 private final IWorkbenchWindow window;
 
-public final static String ID = "fr.ifremer.nemo.ui.OpenAction";
+public final static String ID = "fr.ifremer.nemo.ui.OpenAction"; //$NON-NLS-1$
 
 //vars nécessaires à la fenêtre d'options
 //public static 
@@ -33,7 +33,7 @@ public OpenAction(IWorkbenchWindow window){
 	
 this.window = window;
 setId(ID);
-setText("Ouvrir un modèle");
+setText(Messages.getString("OpenAction.1")); //$NON-NLS-1$
 window.getSelectionService().addSelectionListener(this);
 
 
@@ -49,11 +49,11 @@ public void dispose(){
 
 public void run(){
 	FileInputStream stream = null;
-	System.out.println("Menu open");
+	System.out.println("Menu open"); //$NON-NLS-1$
 	
 	//vérifier que un fichier est chargé avant d'ouvrir un modèle
 	if (EditDesc.loaded ==0){
-		Utils.messageErreur("Veuillez charger un fichier avant de sélectionner un modèle !");
+		Utils.messageErreur(Messages.getString("OpenAction.3")); //$NON-NLS-1$
 	}
 	else{
 	
@@ -62,10 +62,10 @@ public void run(){
 	
 	Shell shell = new Shell();
 	FileDialog dialog = new FileDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
-	dialog.setFilterPath(Utils.configuration.getModelsDirectory()+"\\");
-	dialog.setText("Fichier modèle à charger");
+	dialog.setFilterPath(Utils.configuration.getModelsDirectory()+"\\"); //$NON-NLS-1$
+	dialog.setText(Messages.getString("OpenAction.5")); //$NON-NLS-1$
 	String extensions[] = new String[1];
-	extensions[0]="*.xml";
+	extensions[0]="*.xml"; //$NON-NLS-1$
 	dialog.setFilterExtensions(extensions);
 	nomModele = dialog.open();
 	
@@ -81,7 +81,7 @@ public void run(){
 			// 
 			e.printStackTrace();
 		}
-		System.out.println("Ouverture du modèle : "+nomModele);
+		System.out.println("Ouverture du modèle : "+nomModele); //$NON-NLS-1$
 		parser.parse(stream, false);
 
 		File fich = new File(nomModele);
@@ -90,7 +90,7 @@ public void run(){
 		DataModel.ouvertureModele(inputModel);
 		DataModel.ouverture = true;
 		
-		ViewLog.styledTextLogInfos.append("\n\nModèle chargé : "+nomModele);
+		ViewLog.styledTextLogInfos.append(Messages.getString("OpenAction.8")+nomModele); //$NON-NLS-1$
 		
 	}
 	

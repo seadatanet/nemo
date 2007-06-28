@@ -44,7 +44,7 @@ formEdition = ViewEdit.formEdition;
 listeTextData = new ArrayList <Text>();
 
 //raz message erreur
-Utils.messageErreur("");
+Utils.messageErreur(""); //$NON-NLS-1$
 
 //affichage du texte dans la zone de gauche
 
@@ -65,7 +65,7 @@ expand = 0;
 
 //formEdition = ViewEdit.toolkitEdition.createScrolledForm(ViewEdit.top);
 ViewEdit.formEdition.getBody().setLayout(new GridLayout());
-ViewEdit.formEdition.setText("Description des données");
+ViewEdit.formEdition.setText(Messages.getString("EditData.1")); //$NON-NLS-1$
 
 //init composants IHM
 initSections();
@@ -90,25 +90,25 @@ ArrayList <String> listeNoms = new ArrayList <String> ();
 
 //reset
 buttonRAZ.setParent(ViewEdit.formEdition.getBody());
-buttonRAZ.setText("Reset");
+buttonRAZ.setText("Reset"); //$NON-NLS-1$
 
 //bouton validate
 buttonValidate.setParent(ViewEdit.formEdition.getBody());
-buttonValidate.setText("Valider étape");
+buttonValidate.setText(Messages.getString("EditData.3")); //$NON-NLS-1$
 
 
 
 if (ViewFile.checkBoxTempo.getSelection()){
 	//série temporelle
 	buttonFreqEchant.setParent(ViewEdit.formEdition.getBody());
-	buttonFreqEchant.setText("Calcul temporel par fréquence d'échantillonnage");
+	buttonFreqEchant.setText(Messages.getString("EditData.4")); //$NON-NLS-1$
 	buttonLigneDonnees.setParent(ViewEdit.formEdition.getBody());
-	buttonLigneDonnees.setText("Informations temporelles présentes dans les données");
+	buttonLigneDonnees.setText(Messages.getString("EditData.5")); //$NON-NLS-1$
 	
 	//on cree les sections puis on les cache dans un autre shell et on les re-affiche only si bouton coché
 //	DrawingData.sectionHeure("Heure                                  ", "Sélectionnez l'heure présente dans les lignes de données", sectionHeure, textHeureLigne, textHeureDebut, textHeureFin);
 //	DrawingData.sectionDate("Date                                   ", "Sélectionnez la date présente dans les lignes de données", sectionDate, textDateLigne, textDateDebut, textDateFin);
-	DrawingData.sectionTotal("Date/Heure                             ", "Sélectionnez la date et l'heure présentes dans les lignes de données", sectionTotal, textTotalLigne, textTotalDebut, textTotalFin);
+	DrawingData.sectionTotal(Messages.getString("EditData.6"), Messages.getString("EditData.7"), sectionTotal, textTotalLigne, textTotalDebut, textTotalFin); //$NON-NLS-1$ //$NON-NLS-2$
 	
 	
 	buttonFreqEchant.setSelection(true);
@@ -148,7 +148,7 @@ formEdition.reflow(true);
 
 //bouton expand
 //buttonExpand2.setParent(ViewEdit.formEdition.getBody());
-buttonExpand2.setText("+");
+buttonExpand2.setText("+"); //$NON-NLS-1$
 
 ViewFile.affiche = 3;
 ViewEdit.formEdition.reflow(true);
@@ -158,7 +158,7 @@ buttonFreqEchant
 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
 
-	System.out.println("bouton freq echant");
+	//System.out.println("bouton freq echant");
 
 test();
 
@@ -173,7 +173,7 @@ buttonLigneDonnees
 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
 
-	System.out.println("bouton lignes données");
+	//System.out.println("bouton lignes données");
 	
 	//buttonFreqEchant.setSelection(false);
 //	EditData.sectionHeure.setEnabled(true);
@@ -195,13 +195,13 @@ public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
 buttonExpand
 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-System.out.println("expand/collapse all"); // 
+//System.out.println("expand/collapse all"); // 
 //raz de la valeur manuelle
 int i;
 
 Shell s = new Shell();
 
-System.out.println("expand ? = " + expand);
+//System.out.println("expand ? = " + expand);
 for (i=0;i<=EditData.listeSectionsData.size()-1;i++){
 
 if (expand == 0){ 
@@ -217,15 +217,15 @@ else{
 
 }
 if (expand == 0) {
-System.out.println("expand passe à 1");
-buttonExpand.setText("-");
-buttonExpand2.setText("-");
+//System.out.println("expand passe à 1");
+buttonExpand.setText("-"); //$NON-NLS-1$
+buttonExpand2.setText("-"); //$NON-NLS-1$
 
 expand = 1;}
 else{expand = 0;
-System.out.println("expand passe à 0");
-buttonExpand.setText("+");
-buttonExpand2.setText("+");
+//System.out.println("expand passe à 0");
+buttonExpand.setText("+"); //$NON-NLS-1$
+buttonExpand2.setText("+"); //$NON-NLS-1$
 } 
 
 //refresh global
@@ -238,13 +238,13 @@ formEdition.reflow(true);
 buttonExpand2
 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-System.out.println("expand/collapse all"); // 
+//System.out.println("expand/collapse all"); // 
 //raz de la valeur manuelle
 int i;
 
 Shell s = new Shell();
 
-System.out.println("expand ? = " + expand);
+//System.out.println("expand ? = " + expand);
 for (i=0;i<=EditData.listeSectionsData.size()-1;i++){
 
 if (expand == 0){ 
@@ -260,15 +260,15 @@ else{
 
 }
 if (expand == 0) {
-System.out.println("expand passe à 1");
-buttonExpand.setText("-");
-buttonExpand2.setText("-");
+//System.out.println("expand passe à 1");
+buttonExpand.setText("-"); //$NON-NLS-1$
+buttonExpand2.setText("-"); //$NON-NLS-1$
 
 expand = 1;}
 else{expand = 0;
-System.out.println("expand passe à 0");
-buttonExpand.setText("+");
-buttonExpand2.setText("+");
+//System.out.println("expand passe à 0");
+buttonExpand.setText("+"); //$NON-NLS-1$
+buttonExpand2.setText("+"); //$NON-NLS-1$
 } 
 
 //refresh global
@@ -282,7 +282,7 @@ formEdition.reflow(true);
 buttonValidate
 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-System.out.println("validation"); // 
+//System.out.println("validation"); // 
 
 //on passe en ppar l'étape à laquelle on se trouve
 Etape.etape(1);	
@@ -300,7 +300,7 @@ formEdition.reflow(true);
 buttonRAZ
 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 	public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-		System.out.println("RAZ"); // 
+		//System.out.println("RAZ"); // 
 		
 		razText(listeTextData);
 		
@@ -310,7 +310,7 @@ buttonRAZ
 
 
 //raz du message d'erreurs
-Utils.messageErreur("");
+Utils.messageErreur(""); //$NON-NLS-1$
 
 
 
@@ -327,7 +327,7 @@ ViewFile.affiche = 3;
 
 
 //remplissage de l'IHM par le modèle chargé ?
-System.out.println("Valeur de DataModel.ouverture = "+ DataModel.ouverture);			 
+//System.out.println("Valeur de DataModel.ouverture = "+ DataModel.ouverture);			 
 			 
  if (DataModel.ouverture){
 	 DataModel.fillData();
@@ -343,12 +343,12 @@ public static void test(){
 
 
 
-	System.out.println("expand ? = " + expand);
+	//System.out.println("expand ? = " + expand);
 	for (i=0;i<=EditData.listeSectionsData.size()-1;i++){
 
-	System.out.println("===> " + EditData.listeSectionsData.get(i).getText());
+	//System.out.println("===> " + EditData.listeSectionsData.get(i).getText());
 	EditData.listeSectionsData.get(i).setEnabled(false); //Parent(s);
-	System.out.println("EditData.test()... ok");
+	//System.out.println("EditData.test()... ok");
 	}
 
 
@@ -363,12 +363,12 @@ public static void test2(){
 
 
 
-	System.out.println("expand ? = " + expand);
+	//System.out.println("expand ? = " + expand);
 	for (i=0;i<=EditData.listeSectionsData.size()-1;i++){
 
-	System.out.println("===> " + EditData.listeSectionsData.get(i).getText());
+	//System.out.println("===> " + EditData.listeSectionsData.get(i).getText());
 	EditData.listeSectionsData.get(i).setEnabled(true); //Parent(s);
-	System.out.println("EditData.test()... ok");
+	//System.out.println("EditData.test()... ok");
 	}
 
 
@@ -395,20 +395,20 @@ buttonFreqEchant.setParent(s);
 buttonLigneDonnees.setParent(s);
 
 
-System.out.println("expand ? = " + expand);
+//System.out.println("expand ? = " + expand);
 for (i=0;i<=EditData.listeSectionsData.size()-1;i++){
 
 
 	//EditData.listeSectionsData.get(i).setExpanded(true);
-System.out.println("===> " + EditData.listeSectionsData.get(i).getText());
+//System.out.println("===> " + EditData.listeSectionsData.get(i).getText());
 EditData.listeSectionsData.get(i).setParent(s);
-System.out.println("effacement zone edition etape description campagne ==> ok");
+//System.out.println("effacement zone edition etape description campagne ==> ok");
 }
 
 
 
 //effacement titre formulaire
-ViewEdit.formEdition.setText("");
+ViewEdit.formEdition.setText(""); //$NON-NLS-1$
 
 //refresh global
 ViewEdit.formEdition.reflow(true);
@@ -425,7 +425,7 @@ public static void DrawingBack(){
 	ScrolledForm s;
 	s = ViewEdit.formEdition;
 //	raz message erreur
-	Utils.messageErreur("");
+	Utils.messageErreur(""); //$NON-NLS-1$
 //	effacement des boutons valider/expand/init serveur
 	//EditData.buttonExpand.setParent(s.getBody());
 	
@@ -437,19 +437,19 @@ public static void DrawingBack(){
 	buttonFreqEchant.setParent(s.getBody());
 	buttonLigneDonnees.setParent(s.getBody());}
 
-	System.out.println("expand ? = " + expand);
+	//System.out.println("expand ? = " + expand);
 	for (i=0;i<=EditData.listeSectionsData.size()-1;i++){
 
 
 		EditData.listeSectionsData.get(i).setExpanded(false);
-	System.out.println("===> " + EditData.listeSectionsData.get(i).getText());
+	//System.out.println("===> " + EditData.listeSectionsData.get(i).getText());
 	EditData.listeSectionsData.get(i).setParent(s.getBody());
-	System.out.println("reaffichage zone edition etape description campagne ==> ok");
+	//System.out.println("reaffichage zone edition etape description campagne ==> ok");
 	}
 
 	//EditData.buttonExpand2.setParent(s.getBody());
 
-	ViewEdit.formEdition.setText("Description de Données");
+	ViewEdit.formEdition.setText(Messages.getString("EditData.20")); //$NON-NLS-1$
 	
 //	refresh global
 	ViewEdit.formEdition.reflow(true);
@@ -548,30 +548,30 @@ public static void initCombos(){
 	Shell shell = new Shell();
 	
 	comboHeure = new Combo(shell, SWT.NONE);
-	comboHeure.add("hh:mm:ss");
-	comboHeure.add("hh:mm");
-	comboHeure.add("hh24:mm:ss");
-	comboHeure.add("hh24:mm");
-	comboHeure.add("hh24mmss");
-	comboHeure.add("hh24mm");
+	comboHeure.add("hh:mm:ss"); //$NON-NLS-1$
+	comboHeure.add("hh:mm"); //$NON-NLS-1$
+	comboHeure.add("hh24:mm:ss"); //$NON-NLS-1$
+	comboHeure.add("hh24:mm"); //$NON-NLS-1$
+	comboHeure.add("hh24mmss"); //$NON-NLS-1$
+	comboHeure.add("hh24mm"); //$NON-NLS-1$
 
 	comboDate = new Combo(shell, SWT.NONE);
-	comboDate.add("ddMMyyyy");
-	comboDate.add("ddMMyy");
-	comboDate.add("MMddyy");
-	comboDate.add("yyddMM");
-	comboDate.add("dd:MM:yyyy");
-	comboDate.add("dd:MM:yy");
-	comboDate.add("dd/MM/yy");
-	comboDate.add("dd/MM/yyyy");
+	comboDate.add("ddMMyyyy"); //$NON-NLS-1$
+	comboDate.add("ddMMyy"); //$NON-NLS-1$
+	comboDate.add("MMddyy"); //$NON-NLS-1$
+	comboDate.add("yyddMM"); //$NON-NLS-1$
+	comboDate.add("dd:MM:yyyy"); //$NON-NLS-1$
+	comboDate.add("dd:MM:yy"); //$NON-NLS-1$
+	comboDate.add("dd/MM/yy"); //$NON-NLS-1$
+	comboDate.add("dd/MM/yyyy"); //$NON-NLS-1$
 	
 	comboTotal = new Combo(shell, SWT.NONE);
-	comboTotal.add("ddMMyyyy hh:mm:ss");
-	comboTotal.add("ddMMyyyy hh24:mm");
-	comboTotal.add("ddMMyyyy hh24mm");
-	comboDate.add("dd/MM/yyyy hh:mm:ss");
-	comboDate.add("dd/MM/yyyy hh24:mm");
-	comboDate.add("dd/MM/yyyy hh24mm");
+	comboTotal.add("ddMMyyyy hh:mm:ss"); //$NON-NLS-1$
+	comboTotal.add("ddMMyyyy hh24:mm"); //$NON-NLS-1$
+	comboTotal.add("ddMMyyyy hh24mm"); //$NON-NLS-1$
+	comboDate.add("dd/MM/yyyy hh:mm:ss"); //$NON-NLS-1$
+	comboDate.add("dd/MM/yyyy hh24:mm"); //$NON-NLS-1$
+	comboDate.add("dd/MM/yyyy hh24mm"); //$NON-NLS-1$
 	
 
 }	
@@ -579,7 +579,7 @@ public static void initCombos(){
 public static void razText(ArrayList <Text> liste){
 	
 	for (int i =0; i< liste.size(); i++){
-		liste.get(i).setText("");
+		liste.get(i).setText(""); //$NON-NLS-1$
 				
 	}
 	

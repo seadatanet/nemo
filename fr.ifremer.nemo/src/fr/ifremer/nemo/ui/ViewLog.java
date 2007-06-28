@@ -15,7 +15,7 @@ import org.eclipse.swt.layout.RowLayout;
 
 public class ViewLog extends ViewPart {
 
-	public static final String ID = "fr.ifremer.nemo.ui.ViewLog"; // TODO Needs to be whatever is mentioned in plugin.xml
+	public static final String ID = "fr.ifremer.nemo.ui.ViewLog"; //$NON-NLS-1$
 
 	private Composite top = null;
 
@@ -98,15 +98,15 @@ public class ViewLog extends ViewPart {
 		tabFolderLog
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("widgetSelected()"); // TODO Auto-generated Event stub widgetSelected()
+						System.out.println("widgetSelected()"); // TODO Auto-generated Event stub widgetSelected() //$NON-NLS-1$
 					}
 				});
 		TabItem tabItem = new TabItem(tabFolderLog, SWT.NONE);
-		tabItem.setText("Erreurs");
+		tabItem.setText(Messages.getString("ViewLog.2")); //$NON-NLS-1$
 		TabItem tabItem1 = new TabItem(tabFolderLog, SWT.NONE);
-		tabItem1.setText("Infos");
+		tabItem1.setText(Messages.getString("ViewLog.3")); //$NON-NLS-1$
 		TabItem tabItem2 = new TabItem(tabFolderLog, SWT.NONE);
-		tabItem2.setText("Aide");
+		tabItem2.setText(Messages.getString("ViewLog.4")); //$NON-NLS-1$
 		styledTextLogErreurs = new StyledText(tabFolderLog, SWT.MULTI | SWT.V_SCROLL |SWT.READ_ONLY);
 		styledTextLogInfos = new StyledText(tabFolderLog, SWT.MULTI | SWT.V_SCROLL |SWT.READ_ONLY);
 		styledTextLogHelp = new StyledText(tabFolderLog, SWT.MULTI | SWT.V_SCROLL |SWT.READ_ONLY);
@@ -117,9 +117,10 @@ public class ViewLog extends ViewPart {
 
 public static void aideDesc(){
 ViewLog.styledTextLogHelp.setText(
-		"Onglet Description de Campagne\n\n" +
-		"Le principe est de décrire une campagne en délimitant les zones des métadonnées au sein des entetes fichier ou station.\n" +
-		"Pour un fichier de campagne : il faut bien différencier l'entete du fichier global et l'entete d'une station.");	
+		"Onglet Description de Campagne\n\n" + //$NON-NLS-1$
+		"Le principe est de décrire une campagne en délimitant les zones des métadonnées au sein des entetes fichier ou station.\n" + //$NON-NLS-1$
+		"Pour un fichier de campagne : il faut bien différencier l'entete du fichier global et l'entete d'une station.\n"+ //$NON-NLS-1$
+		"L'entete Station est l'ensemble des lignes précédant les données.\n");	 //$NON-NLS-1$
 }	
 
 public static void aideSurvey(){

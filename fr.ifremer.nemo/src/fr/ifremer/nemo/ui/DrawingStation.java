@@ -553,7 +553,7 @@ public static void sectionIncrementeLigneDebutFinInject(String nomSection, Strin
 	
 	
 	
-public static void sectionTypeDonnees(Section section){
+public static void sectionTypeDonnees(Section section, String nom){
 
 	//EditStation.sectionTypeDonnees.setParent(EditStation.formEdition);
 	section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition.getBody(), 
@@ -567,7 +567,7 @@ section.addExpansionListener(new ExpansionAdapter() {
 				  EditStation.formEdition.reflow(true);
 			  }
 			 });
-section.setText("Type de données                        ");
+section.setText(nom);
 Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL );
 section.setFont(font);
 section.setDescription("Sélectionnez ici dans la liste le type des données mesurées");

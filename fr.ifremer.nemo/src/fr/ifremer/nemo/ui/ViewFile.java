@@ -152,12 +152,12 @@ public class ViewFile extends ViewPart {
 		tabFolder.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
 			
-				System.out.println("affichage courant " + affiche); //$NON-NLS-1$
+			//	System.out.println("affichage courant " + affiche); //$NON-NLS-1$
 				int tmp = tabFolder.getSelectionIndex();
 				
 				//tabFolder.setSelection(0);
 				Utils.validationEtape(tmp);
-				System.out.println("onglet sélectionné " + tmp);  //$NON-NLS-1$
+			//	System.out.println("onglet sélectionné " + tmp);  //$NON-NLS-1$
 				 
 				
 				//rajouter test de validation au changement d'onglet
@@ -263,7 +263,7 @@ public class ViewFile extends ViewPart {
 		radioFichier
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("fichier campagne"); //  //$NON-NLS-1$
+						//System.out.println("fichier campagne"); //  //$NON-NLS-1$
 					}
 				});
 		
@@ -275,7 +275,7 @@ public class ViewFile extends ViewPart {
 		radioDossier
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("dossier campagne)"); //  //$NON-NLS-1$
+					//	System.out.println("dossier campagne)"); //  //$NON-NLS-1$
 					}
 				});
 	
@@ -289,7 +289,7 @@ public class ViewFile extends ViewPart {
 			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
 				//si pas coché on active le groupTempo sinon on grise
 				if (checkBoxTempo.getSelection()){
-				System.out.println("série temporelle"); //  //$NON-NLS-1$
+			//	System.out.println("série temporelle"); //  //$NON-NLS-1$
 				groupTempo.setVisible(true);}else{groupTempo.setVisible(false);}
 			
 			}
@@ -298,7 +298,7 @@ public class ViewFile extends ViewPart {
 		buttonParcourir
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("parcourir"); //  //$NON-NLS-1$
+				//		System.out.println("parcourir"); //  //$NON-NLS-1$
 					
 					//parcours des fichiers/dossiers
 								//si fichier campagne
@@ -337,7 +337,7 @@ public class ViewFile extends ViewPart {
 														
 							} else { 
 								fileLoaded = false;
-								System.out.println("pas de fichier sélectionné"); //$NON-NLS-1$
+							//	System.out.println("pas de fichier sélectionné"); //$NON-NLS-1$
 								ViewLog.styledTextLogErreurs.setText(Messages.getString("ViewFile.selectionnezFichier")); //$NON-NLS-1$
 								
 							}
@@ -358,7 +358,7 @@ public class ViewFile extends ViewPart {
 									}
 								 else { 
 										fileLoaded = false;
-										System.out.println("pas de dossier sélectionné"); //$NON-NLS-1$
+									//	System.out.println("pas de dossier sélectionné"); //$NON-NLS-1$
 										ViewLog.styledTextLogErreurs.setText(Messages.getString("ViewFile.selectionnezDossier")); //$NON-NLS-1$
 										
 									}
@@ -468,17 +468,7 @@ public class ViewFile extends ViewPart {
 		compositeData = new Composite(compo, SWT.NONE);
 		compositeData.setLayout(new FillLayout());
 		//compositeData.setLayout(new GridLayout());
-		//compositeData.setLayout(null);
-		
-		//ajout de la liste des donnees
-		//tableData = new Table(compositeData, SWT.BORDER | SWT.FULL_SELECTION);
-		
-		//TableData.go();
-		
-//		tableData.setHeaderVisible(true);
-//	    tableData.setLinesVisible(true);
-//		//listeData = new List(compositeData, SWT.V_SCROLL | SWT.H_SCROLL | SWT.MULTI);
-		
+	
 		
 	}
 	

@@ -54,7 +54,7 @@ private Text textArea1, textArea2 = null;
 
 ////////////
 
-public final static String ID = "fr.ifremer.nemo.ui.UpdateAction";
+public final static String ID = "fr.ifremer.nemo.ui.UpdateAction"; //$NON-NLS-1$
 
 //vars nécessaires à la fenêtre d'options
 //public static 
@@ -67,7 +67,7 @@ public UpdateAction(IWorkbenchWindow window){
 	
 this.window = window;
 setId(ID);
-setText("Mise à jour Constantes");
+setText(Messages.getString("UpdateAction.1")); //$NON-NLS-1$
 window.getSelectionService().addSelectionListener(this);
 
 
@@ -82,7 +82,7 @@ public void dispose(){
 
 
 public void run(){
-	System.out.println("Menu update WebServices");
+	System.out.println("Menu update WebServices"); //$NON-NLS-1$
 	EditSurvey.webServiceUpdate();
 	
 	
@@ -97,18 +97,18 @@ public void run(){
  */
 private void createCombo() {
 	combo = new Combo(group, SWT.FILL);
-	combo.setText("Langue");
+	combo.setText("Langue"); //$NON-NLS-1$
 	combo.setBounds(new Rectangle(4, 28, 76, 21));
 	
-	combo.add("Français");
-	combo.add("English");
+	combo.add("Français"); //$NON-NLS-1$
+	combo.add("English"); //$NON-NLS-1$
 }
 
 
 private void createGroup() {
 	group = new Group(top, SWT.NONE);
 	group.setLayout(null);
-	group.setText("Langue");
+	group.setText("Langue"); //$NON-NLS-1$
 	createCombo();
 	group.setBounds(new Rectangle(4, 4, 91, 69));
 }
@@ -117,13 +117,13 @@ private void createGroup() {
 private void createGroup1() {
 	group1 = new Group(top, SWT.NONE);
 	group1.setLayout(null);
-	group1.setText("Dossier des modèles");
+	group1.setText("Dossier des modèles"); //$NON-NLS-1$
 	group1.setBounds(new Rectangle(105, 4, 178, 69));
 	textArea = new Text(group1, SWT.MULTI | SWT.WRAP);
 	textArea.setBounds(new Rectangle(6, 15, 163, 18));
 	button = new Button(group1, SWT.NONE);
 	button.setBounds(new Rectangle(110, 36, 59, 23));
-	button.setText("Parcourir");
+	button.setText("Parcourir"); //$NON-NLS-1$
 }
 
 /**
@@ -133,7 +133,7 @@ private void createGroup1() {
 private void createGroup2() {
 	group2 = new Group(top, SWT.NONE);
 	group2.setLayout(null);
-	group2.setText("Web Service");
+	group2.setText("Web Service"); //$NON-NLS-1$
 	group2.setBounds(new Rectangle(4, 78, 278, 61));
 	textArea1 = new Text(group2, SWT.MULTI | SWT.V_SCROLL);
 	
@@ -155,16 +155,16 @@ public void createPartControl(Composite parent) {
 	createGroup2();
 	button1 = new Button(top, SWT.NONE);
 	button1.setBounds(new Rectangle(180, 143, 56, 23));
-	button1.setText("Annuler");
+	button1.setText("Annuler"); //$NON-NLS-1$
 	button2 = new Button(top, SWT.NONE);
 	button2.setBounds(new Rectangle(62, 143, 56, 23));
-	button2.setText("Valider");
+	button2.setText("Valider"); //$NON-NLS-1$
 	
 	
 	//listener valider
 	button1.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 		public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-			System.out.println("options valider"); // TODO Auto-generated Event stub widgetSelected()
+			System.out.println("options valider"); // TODO Auto-generated Event stub widgetSelected() //$NON-NLS-1$
 			options = 0;
 			shelloptions.close();
 			
@@ -174,7 +174,7 @@ public void createPartControl(Composite parent) {
 	//listener annuler
 	button2.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 		public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-			System.out.println("options annuler"); // TODO Auto-generated Event stub widgetSelected()
+			System.out.println("options annuler"); // TODO Auto-generated Event stub widgetSelected() //$NON-NLS-1$
 			options = 0;
 			
 			shelloptions.close();

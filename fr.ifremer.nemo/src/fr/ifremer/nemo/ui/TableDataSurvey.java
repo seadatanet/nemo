@@ -47,20 +47,20 @@ public static void creationTable(){
 	 
 	 
 	 table =  TableDataSurvey.tableTypeSurvey;
-		System.out.println("=========creationTable()=======");
+		System.out.println("=========creationTable()======="); //$NON-NLS-1$
 	   
 	  table.setHeaderVisible(true);
 	  table.setLinesVisible(true);  
 	  TableColumn tableColumn = new TableColumn(table, SWT.NONE);
 	  tableColumn.setWidth(100);
 		//taille = 60
-		tableColumn.setText("CODE");
+		tableColumn.setText(Messages.getString("TableDataSurvey.1")); //$NON-NLS-1$
 		TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);
 		tableColumn1.setWidth(100);
-		tableColumn1.setText("Nombre");
+		tableColumn1.setText(Messages.getString("TableDataSurvey.2")); //$NON-NLS-1$
 		TableColumn tableColumn2 = new TableColumn(table, SWT.NONE);
 		tableColumn2.setWidth(100);
-		tableColumn2.setText("QC");
+		tableColumn2.setText("QC"); //$NON-NLS-1$
 		
 	
 	initTable();
@@ -70,24 +70,12 @@ public static void creationTable(){
 	
 public static void initTypes(){
 	
-	System.out.println("=========initTypes()=======");
+	//System.out.println("=========initTypes()=======");
 	
 	//initialisation de la ArrayList des types des données à partir du datamodel
 	types = new ArrayList<TypeSurvey>();
 	typesWS = new ArrayList<TypeSurvey>();
 
-	
-	//temporairement création manuelle
-//	TypeSurvey type1 = new TypeSurvey("H2O",35, "P");
-//	TypeSurvey type2 = new TypeSurvey("H5N1",12,"N");
-//	TypeSurvey type3 = new TypeSurvey("BCWXTZ",15,"N");
-//	TypeSurvey type4 = new TypeSurvey("X12",150,"X");
-//	
-//	
-//	types.add(type1);
-//	types.add(type2);
-//	types.add(type3);
-//	types.add(type4);
 	
 	int taille = DataModel.listeWSDataTypes.length;
 	
@@ -99,8 +87,8 @@ public static void initTypes(){
 		TypeSurvey type = new TypeSurvey();
 
 		//paramètres
-		type.setCode(wsDatatype.getCode()+" - "+wsDatatype.getLibelle());
-		type.setQc("N");
+		type.setCode(wsDatatype.getCode()+" - "+wsDatatype.getLibelle()); //$NON-NLS-1$
+		type.setQc(Messages.getString("TableDataSurvey.5")); //$NON-NLS-1$
 			
 		//ajout dans liste
 		typesWS.add(type);
@@ -121,7 +109,7 @@ public static void initTable(){
 	final Table table;
 	table = TableDataSurvey.tableTypeSurvey;
 	  
-	System.out.println("=========initTable()=======");
+	//System.out.println("=========initTable()=======");
 	
 	
 	/*
@@ -164,10 +152,10 @@ public static void initTable(){
 		            return;
 		          for (int i = 0; i < table.getColumnCount(); i++) {
 		            Rectangle rect = item.getBounds(i);
-		            System.out.println("calcul num ligne===> "+i);
+		         //   System.out.println("calcul num ligne===> "+i);
 		            if (rect.contains(pt)) {
 		              int index = table.indexOf(item);
-		              System.out.println("Elément " + index + "-" + i);
+		           //   System.out.println("Elément " + index + "-" + i);
 		            }
 		          }
 		    	  
@@ -189,11 +177,11 @@ public static void initTable(){
 		            return;
 		        for (int i = 0; i < table.getColumnCount(); i++) {
 		            Rectangle rect = item.getBounds(i);
-		            System.out.println("rect===> "+rect);
-		            System.out.println("calcul num ligne===> "+i);
+		        //    System.out.println("rect===> "+rect);
+		        //    System.out.println("calcul num ligne===> "+i);
 		            if (rect.contains(pt)) {
 		              int indexTmp = table.indexOf(item);
-		              System.out.println("LigneSelec =>" + indexTmp + "- ColonneSelec =>" + i);
+		        //      System.out.println("LigneSelec =>" + indexTmp + "- ColonneSelec =>" + i);
 		              ligneSelec = indexTmp;
 		              colonneSelec = i;
 		            }
@@ -260,20 +248,20 @@ public static void initTable(){
 		Menu menu = new Menu(table.getShell(), SWT.POP_UP);
 				
 	    MenuItem itemNew = new MenuItem(menu, SWT.NONE);
-	    itemNew.setText("Nouveau type");
+	    itemNew.setText(Messages.getString("TableDataSurvey.6")); //$NON-NLS-1$
 	   
 	    MenuItem itemList = new MenuItem(menu, SWT.NONE);
-	    itemList.setText("Sélection liste");
+	    itemList.setText(Messages.getString("TableDataSurvey.7")); //$NON-NLS-1$
 	    
 	    MenuItem itemUp = new MenuItem(menu, SWT.NONE);
-	    itemUp.setText("Monter type sélectionné");
+	    itemUp.setText(Messages.getString("TableDataSurvey.8")); //$NON-NLS-1$
 	    
 	    MenuItem itemDown = new MenuItem(menu, SWT.NONE);
-	    itemDown.setText("Descendre type sélectionné");
+	    itemDown.setText(Messages.getString("TableDataSurvey.9")); //$NON-NLS-1$
 	    //MenuItem tmp = new Separator();
 	    
 	    MenuItem itemDel = new MenuItem(menu, SWT.NONE);
-	    itemDel.setText("Supprimer type sélectionné");
+	    itemDel.setText(Messages.getString("TableDataSurvey.10")); //$NON-NLS-1$
 		table.setMenu(menu);
 		
 		//ajouter des listeners sur les menu items ^^
@@ -281,7 +269,7 @@ public static void initTable(){
 	
 		itemNew.addListener(SWT.Selection, new Listener() {
 	          public void handleEvent(Event e) {
-	            System.out.println("nouveau type");
+	       //     System.out.println("nouveau type");
 	            nouvelElt();
 	          
 	          }
@@ -289,7 +277,7 @@ public static void initTable(){
 		
 		itemList.addListener(SWT.Selection, new Listener() {
 	          public void handleEvent(Event e) {
-	            System.out.println("sélection liste");
+	      //      System.out.println("sélection liste");
 	            FiltrageTableType.go();
 	            
 	          }
@@ -297,19 +285,19 @@ public static void initTable(){
 		
 		itemUp.addListener(SWT.Selection, new Listener() {
 	          public void handleEvent(Event e) {
-	            System.out.println("up");
+	         //   System.out.println("up");
 	            monterEltTableData(ligneSelec);
 	          }
 	        });
 		itemDown.addListener(SWT.Selection, new Listener() {
 	          public void handleEvent(Event e) {
-	            System.out.println("down");
+	         //   System.out.println("down");
 	            descendreEltTableData(ligneSelec);
 	          }
 	        });
 		itemDel.addListener(SWT.Selection, new Listener() {
 	          public void handleEvent(Event e) {
-	            System.out.println("suppression");
+	       //     System.out.println("suppression");
 	            supprEltTableData(ligneSelec);
 	            //remplirTableData();
 	          }
@@ -329,7 +317,7 @@ public static void initTable(){
 	  int nbre;
 	  nbre = types.size();
 	
-		System.out.println("=========initTableData()=======");
+	//	System.out.println("=========initTableData()=======");
 	  
 	  Table table;
 	  table = TableDataSurvey.tableTypeSurvey;
@@ -337,7 +325,7 @@ public static void initTable(){
 	  //nouvelle création des items
 	  for (int i = 0; i < nbre; i++) {
 	      TableItem item = new TableItem(table, SWT.NONE);
-	      item.setText(new String[] { types.get(i).getCode(), ""+types.get(i).getNombre(),
+	      item.setText(new String[] { types.get(i).getCode(), ""+types.get(i).getNombre(), //$NON-NLS-1$
 	    		  types.get(i).getQc() });
 	       
 	    }  
@@ -593,7 +581,7 @@ public static void initTable(){
 		
 		 }
 	  
-	 System.out.println("maj types data : ok");
+	 //System.out.println("maj types data : ok");
 	  
   } 	
 

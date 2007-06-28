@@ -55,7 +55,7 @@ public static void affichageEdition(){
 formEdition = ViewEdit.formEdition;
 
 //raz message erreur
-Utils.messageErreur("");
+Utils.messageErreur(""); //$NON-NLS-1$
 
 //affichage du texte dans la zone de gauche
 
@@ -76,7 +76,7 @@ expand = 0;
 
 //formEdition = ViewEdit.toolkitEdition.createScrolledForm(ViewEdit.top);
 ViewEdit.formEdition.getBody().setLayout(new GridLayout());
-ViewEdit.formEdition.setText("Description de station");
+ViewEdit.formEdition.setText(Messages.getString("EditStation.1")); //$NON-NLS-1$
 
 
 //init de la arrayList des sections
@@ -95,42 +95,42 @@ initLabels();
 
 //boutons collapse all / expand all
 buttonExpand.setParent(ViewEdit.formEdition.getBody());
-buttonExpand.setText("+");
+buttonExpand.setText("+"); //$NON-NLS-1$
 formEdition.redraw();
 formEdition.reflow(true);
 //formEdition.
 
 buttonRAZ.setParent(ViewEdit.formEdition.getBody());
-buttonRAZ.setText("Reset");
+buttonRAZ.setText("Reset"); //$NON-NLS-1$
 
 
 //bouton validate
 buttonValidate.setParent(ViewEdit.formEdition.getBody());
-buttonValidate.setText("Valider étape");
+buttonValidate.setText(Messages.getString("EditStation.4")); //$NON-NLS-1$
 
 formEdition.reflow(true);
 
 // initialisation liste des sections de la partie description fichier
 
 //section reference station
-DrawingStation.sectionIncrementeLigneDebutFinInject("Numéro de station                      ", "Choisissez si le numéro de station est calculé ou lu dans le fichier.", EditStation.sectionStation, textRefStationLigne, textRefStationDebut, textRefStationFin, buttonRefStationIncremente, buttonRefStationPos);
+DrawingStation.sectionIncrementeLigneDebutFinInject(Messages.getString("EditStation.5"), Messages.getString("EditStation.6"), EditStation.sectionStation, textRefStationLigne, textRefStationDebut, textRefStationFin, buttonRefStationIncremente, buttonRefStationPos); //$NON-NLS-1$ //$NON-NLS-2$
 
 
 
 //section reference type de données
-DrawingStation.sectionTypeDonnees(sectionTypeDonnees);
+DrawingStation.sectionTypeDonnees(sectionTypeDonnees, Messages.getString("EditStation.0"));
 
 
 //section historique acquisition
-DrawingStation.sectionHistoriqueAcquisition("Historique Acquisition                 ", "Entrez ici les lignes correspondant à l'historique des mesures...", sectionHistorique, textHistoriqueAcqLigne1, textHistoriqueAcqDebut1, textHistoriqueAcqFin1, textHistoriqueAcqLigne2, textHistoriqueAcqDebut2, textHistoriqueAcqFin2, textHistorique1, textHistorique2, buttonHistoriqueAcqSaisie, buttonHistoriqueAcqPos );
+DrawingStation.sectionHistoriqueAcquisition(Messages.getString("EditStation.7"), Messages.getString("EditStation.8"), sectionHistorique, textHistoriqueAcqLigne1, textHistoriqueAcqDebut1, textHistoriqueAcqFin1, textHistoriqueAcqLigne2, textHistoriqueAcqDebut2, textHistoriqueAcqFin2, textHistorique1, textHistorique2, buttonHistoriqueAcqSaisie, buttonHistoriqueAcqPos ); //$NON-NLS-1$ //$NON-NLS-2$
 
 
 //section commentaire
-DrawingStation.sectionCommentaireLigneDebutFinInject("Commentaire                            ", "", sectionCommentaire, textCommentaireLigne, textCommentaireDebut, textCommentaireFin, textCommentaire, buttonCommentaireSaisie, buttonCommentairePos);
+DrawingStation.sectionCommentaireLigneDebutFinInject(Messages.getString("EditStation.9"), Messages.getString("EditStation.10"), sectionCommentaire, textCommentaireLigne, textCommentaireDebut, textCommentaireFin, textCommentaire, buttonCommentaireSaisie, buttonCommentairePos); //$NON-NLS-1$ //$NON-NLS-2$
 
 
 //section surface sample : identique à historique acquisition
-DrawingStation.sectionHistoriqueAcquisition("Echantillon de surface                 ", "", sectionSurface, textSurfaceLigne1, textSurfaceDebut1, textSurfaceFin1, textSurfaceLigne2, textSurfaceDebut2, textSurfaceFin2, textSurface1, textSurface2, buttonSurfaceSaisie, buttonSurfacePos);
+DrawingStation.sectionHistoriqueAcquisition(Messages.getString("EditStation.11"), Messages.getString("EditStation.12"), sectionSurface, textSurfaceLigne1, textSurfaceDebut1, textSurfaceFin1, textSurfaceLigne2, textSurfaceDebut2, textSurfaceFin2, textSurface1, textSurface2, buttonSurfaceSaisie, buttonSurfacePos); //$NON-NLS-1$ //$NON-NLS-2$
 
 
 //section décallage TU
@@ -138,60 +138,60 @@ DrawingStation.sectionHistoriqueAcquisition("Echantillon de surface             
 
 
 //section heure
-DrawingStation.sectionHeure("Heure                                  ", "", sectionHeure, textHeureLigne, textHeureDebut, textHeureFin, textHeureSaisie, labelConversionHeure);
+DrawingStation.sectionHeure(Messages.getString("EditStation.13"), Messages.getString("EditStation.14"), sectionHeure, textHeureLigne, textHeureDebut, textHeureFin, textHeureSaisie, labelConversionHeure); //$NON-NLS-1$ //$NON-NLS-2$
 
 
 //section date
-DrawingStation.sectionDate("Date                                   ", "", sectionDate, textDateLigne, textDateDebut, textDateFin, textDateSaisie, labelConversionDate);
+DrawingStation.sectionDate(Messages.getString("EditStation.15"), Messages.getString("EditStation.16"), sectionDate, textDateLigne, textDateDebut, textDateFin, textDateSaisie, labelConversionDate); //$NON-NLS-1$ //$NON-NLS-2$
 
 //flags QC
-DrawingStation.sectionDateQC("QC Flags                               ", "Entrez ici les flags QC pour la date, la latitude, la longitude et la profondeur", sectionQCDate);
+DrawingStation.sectionDateQC(Messages.getString("EditStation.17"), Messages.getString("EditStation.18"), sectionQCDate); //$NON-NLS-1$ //$NON-NLS-2$
 
 //section Latitude
-DrawingStation.sectionManuelLigneDebutFinInjectLatLongComboFormat("Latitude                               ", "", sectionLatitude, textLatitudeLigne, textLatitudeDebut, textLatitudeFin, textLatitude, buttonLatSaisie, comboLatitude, buttonLatPos);
+DrawingStation.sectionManuelLigneDebutFinInjectLatLongComboFormat(Messages.getString("EditStation.19"), Messages.getString("EditStation.20"), sectionLatitude, textLatitudeLigne, textLatitudeDebut, textLatitudeFin, textLatitude, buttonLatSaisie, comboLatitude, buttonLatPos); //$NON-NLS-1$ //$NON-NLS-2$
 
 if (ViewFile.checkBoxTempo.getSelection()){
 	//section latitude de fin
-	DrawingStation.sectionManuelLigneDebutFinInjectLatLongFin("Latitude de fin                        ", "", sectionLatFin,textLatFinLigne, textLatFinDebut, textLatFinFin, textLatFin, buttonLatFinSaisie, buttonLatFinPos);
+	DrawingStation.sectionManuelLigneDebutFinInjectLatLongFin(Messages.getString("EditStation.21"), "", sectionLatFin,textLatFinLigne, textLatFinDebut, textLatFinFin, textLatFin, buttonLatFinSaisie, buttonLatFinPos); //$NON-NLS-1$ //$NON-NLS-2$
 }
 
 //section longitude
-DrawingStation.sectionManuelLigneDebutFinInjectLatLongComboFormat("Longitude                              ", "", sectionLongitude, textLongitudeLigne, textLongitudeDebut, textLongitudeFin, textLongitude, buttonLongSaisie, comboLongitude, buttonLongPos);
+DrawingStation.sectionManuelLigneDebutFinInjectLatLongComboFormat(Messages.getString("EditStation.23"), Messages.getString("EditStation.24"), sectionLongitude, textLongitudeLigne, textLongitudeDebut, textLongitudeFin, textLongitude, buttonLongSaisie, comboLongitude, buttonLongPos); //$NON-NLS-1$ //$NON-NLS-2$
 
 if (ViewFile.checkBoxTempo.getSelection()){
 	//section longitude de fin
-	DrawingStation.sectionManuelLigneDebutFinInjectLatLongFin("Longitude de fin                       ", "", sectionLongFin, textLongFinLigne, textLongFinDebut,textLongFinFin, textLongFin, buttonLongFinSaisie,  buttonLongFinPos);	
+	DrawingStation.sectionManuelLigneDebutFinInjectLatLongFin(Messages.getString("EditStation.25"), "", sectionLongFin, textLongFinLigne, textLongFinDebut,textLongFinFin, textLongFin, buttonLongFinSaisie,  buttonLongFinPos);	 //$NON-NLS-1$ //$NON-NLS-2$
 }
 
 
 //section profondeur
-DrawingStation.sectionManuelLigneDebutFinInject("Profondeur                             ", "", sectionProfondeur, textProfondeurLigne, textProfondeurDebut, textProfondeurFin, textProfondeur, buttonProfondeurSaisie, buttonProfondeurPos);
+DrawingStation.sectionManuelLigneDebutFinInject(Messages.getString("EditStation.27"), Messages.getString("EditStation.28"), sectionProfondeur, textProfondeurLigne, textProfondeurDebut, textProfondeurFin, textProfondeur, buttonProfondeurSaisie, buttonProfondeurPos); //$NON-NLS-1$ //$NON-NLS-2$
 
 if (ViewFile.checkBoxTempo.getSelection()){
 	//section profondeur de fin
-	DrawingStation.sectionManuelLigneDebutFinInject("Profondeur de fin                      ","", sectionProfFin, textProfFinLigne, textProfFinDebut, textProfFinFin, textProfFin, buttonProfFinSaisie, buttonProfFinPos);
+	DrawingStation.sectionManuelLigneDebutFinInject(Messages.getString("EditStation.29"),"", sectionProfFin, textProfFinLigne, textProfFinDebut, textProfFinFin, textProfFin, buttonProfFinSaisie, buttonProfFinPos); //$NON-NLS-1$ //$NON-NLS-2$
 
 	//section profondeur de capteur
-	DrawingStation.sectionManuelLigneDebutFinInject("Profondeur du capteur                  ", "", sectionProfCapteur, textProfCapteurLigne, textProfCapteurDebut, textProfCapteurFin, textProfCapteur, buttonProfCapteurSaisie, buttonProfCapteurPos);
+	DrawingStation.sectionManuelLigneDebutFinInject(Messages.getString("EditStation.31"), Messages.getString("EditStation.32"), sectionProfCapteur, textProfCapteurLigne, textProfCapteurDebut, textProfCapteurFin, textProfCapteur, buttonProfCapteurSaisie, buttonProfCapteurPos); //$NON-NLS-1$ //$NON-NLS-2$
 
 	//section déclinaison magnétique
-			  DrawingStation.sectionManuelLigneDebutFinInject("Déclinaison magnétique                 ", "", sectionDeclinMagnet, textDeclinMagnetLigne, textDeclinMagnetDebut, textDeclinMagnetFin, textDeclinMagnet, buttonDeclinMagnetSaisie, buttonDeclinMagnetPos);
+			  DrawingStation.sectionManuelLigneDebutFinInject(Messages.getString("EditStation.33"), Messages.getString("EditStation.34"), sectionDeclinMagnet, textDeclinMagnetLigne, textDeclinMagnetDebut, textDeclinMagnetFin, textDeclinMagnet, buttonDeclinMagnetSaisie, buttonDeclinMagnetPos); //$NON-NLS-1$ //$NON-NLS-2$
 	
 			  
 	//if (!ViewFile.textTempoHeureRef.getText().matches("")){		  
 	//section fréquence échantillonnage
-	DrawingStation.sectionManuelLigneDebutFinInjectFreqEchant("Fréquence échantillonnage              ", "En général elle est à convertir en secondes... Double-cliquez sur le champ test pour le mettre à jour.", sectionFreqEchant, textFreqEchantLigne, textFreqEchantDebut, textFreqEchantFin, textFreqEchant, buttonFreqEchantSaisie, buttonFreqEchantPos, textFreqEchantConv, textFreqEchantTest);
+	DrawingStation.sectionManuelLigneDebutFinInjectFreqEchant(Messages.getString("EditStation.35"), Messages.getString("EditStation.36"), sectionFreqEchant, textFreqEchantLigne, textFreqEchantDebut, textFreqEchantFin, textFreqEchant, buttonFreqEchantSaisie, buttonFreqEchantPos, textFreqEchantConv, textFreqEchantTest); //$NON-NLS-1$ //$NON-NLS-2$
 	//}
 }	
 
-//TODO : section flags date/heure
+
 
 //section séries temporelles
 //DrawingStation.sectionSerieTempo();
 
 
 buttonExpand2.setParent(ViewEdit.formEdition.getBody());
-buttonExpand2.setText("+");
+buttonExpand2.setText("+"); //$NON-NLS-1$
 
 
 ViewEdit.formEdition.reflow(true);
@@ -206,13 +206,13 @@ ViewEdit.formEdition.reflow(true);
 buttonExpand
 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-System.out.println("expand/collapse all"); 
+//System.out.println("expand/collapse all"); 
 //raz de la valeur manuelle
 int i;
 
 Shell s = new Shell();
 
-System.out.println("expand ? = " + expand);
+//System.out.println("expand ? = " + expand);
 for (i=0;i<=EditStation.listeSectionsStation.size()-1;i++){
 
 if (expand == 0){ 
@@ -228,14 +228,14 @@ else{
 
 }
 if (expand == 0) {
-System.out.println("expand passe à 1");
-buttonExpand.setText("-");
-buttonExpand2.setText("-");
+//System.out.println("expand passe à 1");
+buttonExpand.setText("-"); //$NON-NLS-1$
+buttonExpand2.setText("-"); //$NON-NLS-1$
 expand = 1;}
 else{expand = 0;
-System.out.println("expand passe à 0");
-buttonExpand.setText("+");
-buttonExpand2.setText("+");
+//System.out.println("expand passe à 0");
+buttonExpand.setText("+"); //$NON-NLS-1$
+buttonExpand2.setText("+"); //$NON-NLS-1$
 } 
 
 //refresh global
@@ -248,13 +248,13 @@ formEdition.reflow(true);
 buttonExpand2
 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-System.out.println("expand/collapse all"); 
+//System.out.println("expand/collapse all"); 
 //raz de la valeur manuelle
 int i;
 
 Shell s = new Shell();
 
-System.out.println("expand ? = " + expand);
+//System.out.println("expand ? = " + expand);
 for (i=0;i<=EditStation.listeSectionsStation.size()-1;i++){
 
 if (expand == 0){ 
@@ -270,14 +270,14 @@ else{
 
 }
 if (expand == 0) {
-System.out.println("expand passe à 1");
-buttonExpand.setText("-");
-buttonExpand2.setText("-");
+System.out.println("expand passe à 1"); //$NON-NLS-1$
+buttonExpand.setText("-"); //$NON-NLS-1$
+buttonExpand2.setText("-"); //$NON-NLS-1$
 expand = 1;}
 else{expand = 0;
-System.out.println("expand passe à 0");
-buttonExpand.setText("+");
-buttonExpand2.setText("+");
+System.out.println("expand passe à 0"); //$NON-NLS-1$
+buttonExpand.setText("+"); //$NON-NLS-1$
+buttonExpand2.setText("+"); //$NON-NLS-1$
 } 
 
 //refresh global
@@ -290,7 +290,7 @@ formEdition.reflow(true);
 buttonValidate
 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-System.out.println("validation"); // 
+//System.out.println("validation"); // 
 
 //on passe en ppar l'étape à laquelle on se trouve
 Etape.etape(2);	
@@ -309,7 +309,7 @@ formEdition.reflow(true);
 buttonRAZ
 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 	public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-		System.out.println("RAZ"); // 
+		//System.out.println("RAZ"); // 
 		
 		razText(listeTextStation);
 		
@@ -319,7 +319,7 @@ buttonRAZ
 
 
 //raz du message d'erreurs
-Utils.messageErreur("");
+Utils.messageErreur(""); //$NON-NLS-1$
 
 
 
@@ -338,7 +338,7 @@ formEdition.reflow(true);
 ViewFile.affiche = 2;
 
 //remplissage de l'IHM par le modèle chargé ?
-System.out.println("Valeur de DataModel.ouverture = "+ DataModel.ouverture);			 
+//System.out.println("Valeur de DataModel.ouverture = "+ DataModel.ouverture);			 
 			 
  if (DataModel.ouverture){
 	 DataModel.fillStation();
@@ -365,18 +365,18 @@ EditStation.buttonValidate.setParent(s);
 EditStation.buttonRAZ.setParent(s);
 
 
-System.out.println("expand ? = " + expand);
+//System.out.println("expand ? = " + expand);
 for (i=0;i<=EditStation.listeSectionsStation.size()-1;i++){
 
 
 EditStation.listeSectionsStation.get(i).setExpanded(true);
-System.out.println("===> " + EditStation.listeSectionsStation.get(i).getText());
+//System.out.println("===> " + EditStation.listeSectionsStation.get(i).getText());
 EditStation.listeSectionsStation.get(i).setParent(s);
-System.out.println("effacement zone edition etape description station ==> ok");
+//System.out.println("effacement zone edition etape description station ==> ok");
 }
 
 //titre à vide
-ViewEdit.formEdition.setText("");
+ViewEdit.formEdition.setText(""); //$NON-NLS-1$
 
 //refresh global
 ViewEdit.formEdition.reflow(true);
@@ -396,7 +396,7 @@ public static void DrawingBack(){
 	ScrolledForm s;
 	s = ViewEdit.formEdition;
 //	raz message erreur
-	Utils.messageErreur("");
+	Utils.messageErreur(""); //$NON-NLS-1$
 
 //	effacement des boutons valider/expand/init serveur
 	EditStation.buttonExpand.setParent(s.getBody());
@@ -405,19 +405,19 @@ public static void DrawingBack(){
 	EditStation.buttonRAZ.setParent(s.getBody());
 
 
-	System.out.println("expand ? = " + expand);
+	//System.out.println("expand ? = " + expand);
 	for (i=0;i<=EditStation.listeSectionsStation.size()-1;i++){
 
 
 	EditStation.listeSectionsStation.get(i).setExpanded(false);
-	System.out.println("===> " + EditStation.listeSectionsStation.get(i).getText());
+	//System.out.println("===> " + EditStation.listeSectionsStation.get(i).getText());
 	EditStation.listeSectionsStation.get(i).setParent(s.getBody());
-	System.out.println("reaffichage zone edition etape description station ==> ok");
+	//System.out.println("reaffichage zone edition etape description station ==> ok");
 	}
 
 	EditStation.buttonExpand2.setParent(s.getBody());
 	
-	ViewEdit.formEdition.setText("Description de Station");
+	ViewEdit.formEdition.setText(Messages.getString("EditStation.51")); //$NON-NLS-1$
 	
 	
 //	refresh global
@@ -652,9 +652,9 @@ public static void initComboType(){
 	taille = DataModel.listeWSDataTypes.length;
 		
 	for (int i =0; i<taille; i++){
-		String chaine = "";
+		String chaine = ""; //$NON-NLS-1$
 		
-		chaine = chaine + DataModel.listeWSDataTypes[i].getCode() + " - " + DataModel.listeWSDataTypes[i].getLibelle();
+		chaine = chaine + DataModel.listeWSDataTypes[i].getCode() + " - " + DataModel.listeWSDataTypes[i].getLibelle(); //$NON-NLS-1$
 		comboRefStationType.add(chaine);
 		
 			}
@@ -675,45 +675,45 @@ public static void initCombos(){
 	
 	
 	comboHeure = new Combo(shell, SWT.NONE);
-	comboHeure.add("hh:mm:ss");
-	comboHeure.add("hh:mm");
-	comboHeure.add("hh24:mm:ss");
-	comboHeure.add("hh24:mm");
-	comboHeure.add("hh24mmss");
-	comboHeure.add("hh24mm");
+	comboHeure.add("hh:mm:ss"); //$NON-NLS-1$
+	comboHeure.add("hh:mm"); //$NON-NLS-1$
+	comboHeure.add("hh24:mm:ss"); //$NON-NLS-1$
+	comboHeure.add("hh24:mm"); //$NON-NLS-1$
+	comboHeure.add("hh24mmss"); //$NON-NLS-1$
+	comboHeure.add("hh24mm"); //$NON-NLS-1$
 
 	comboDate = new Combo(shell, SWT.NONE);
-	comboDate.add("ddMMyyyy");
-	comboDate.add("ddMMyy");
-	comboDate.add("MMddyy");
-	comboDate.add("yyddMM");
-	comboDate.add("dd:MM:yyyy");
-	comboDate.add("dd:MM:yy");
-	comboDate.add("dd/MM/yy");
-	comboDate.add("dd/MM/yyyy");
+	comboDate.add("ddMMyyyy"); //$NON-NLS-1$
+	comboDate.add("ddMMyy"); //$NON-NLS-1$
+	comboDate.add("MMddyy"); //$NON-NLS-1$
+	comboDate.add("yyddMM"); //$NON-NLS-1$
+	comboDate.add("dd:MM:yyyy"); //$NON-NLS-1$
+	comboDate.add("dd:MM:yy"); //$NON-NLS-1$
+	comboDate.add("dd/MM/yy"); //$NON-NLS-1$
+	comboDate.add("dd/MM/yyyy"); //$NON-NLS-1$
 	
 	comboLatitude = new Combo(shell, SWT.NONE);
-	comboLatitude.add("DDD MM ss.s");
-	comboLatitude.add("DDD MM.mmm");
-	comboLatitude.add("DDD.DDDDD");
-	comboLatitude.add("DDD.DD");
-	comboLatitude.add("NDD MM.mm");
-	comboLatitude.add("+DD.mmm");
+	comboLatitude.add("DDD MM ss.s"); //$NON-NLS-1$
+	comboLatitude.add("DDD MM.mmm"); //$NON-NLS-1$
+	comboLatitude.add("DDD.DDDDD"); //$NON-NLS-1$
+	comboLatitude.add("DDD.DD"); //$NON-NLS-1$
+	comboLatitude.add("NDD MM.mm"); //$NON-NLS-1$
+	comboLatitude.add("+DD.mmm"); //$NON-NLS-1$
 	
 	comboLongitude = new Combo(shell, SWT.NONE);
-	comboLongitude.add("DDD MM ss.s");
-	comboLongitude.add("DDD MM.mmm");
-	comboLongitude.add("DDD.DDDDD");
-	comboLongitude.add("DDD.DD");
-	comboLongitude.add("NDDD MM.mm");
-	comboLongitude.add("+DDD.mmm");
+	comboLongitude.add("DDD MM ss.s"); //$NON-NLS-1$
+	comboLongitude.add("DDD MM.mmm"); //$NON-NLS-1$
+	comboLongitude.add("DDD.DDDDD"); //$NON-NLS-1$
+	comboLongitude.add("DDD.DD"); //$NON-NLS-1$
+	comboLongitude.add("NDDD MM.mm"); //$NON-NLS-1$
+	comboLongitude.add("+DDD.mmm"); //$NON-NLS-1$
 
 }
 
 public static void razText(ArrayList <Text> liste){
 	
 	for (int i =0; i< liste.size(); i++){
-		liste.get(i).setText("");
+		liste.get(i).setText(""); //$NON-NLS-1$
 				
 	}
 	
@@ -721,27 +721,27 @@ public static void razText(ArrayList <Text> liste){
 
 public static void conversionFreqEchant(){
 	
-	if (!textFreqEchantConv.getText().matches("")){
+	if (!textFreqEchantConv.getText().matches("")){ //$NON-NLS-1$
 		//il y a une formule de conversion
 		
-		if ((buttonFreqEchantSaisie.getSelection()) && (!textFreqEchant.getText().matches(""))){
+		if ((buttonFreqEchantSaisie.getSelection()) && (!textFreqEchant.getText().matches(""))){ //$NON-NLS-1$
 			//saisie manuelle 
 			
 			
 			org.nfunk.jep.JEP parser = new org.nfunk.jep.JEP();
 			parser.addStandardFunctions();
 			parser.addStandardConstants();
-			parser.addVariable("x", Float.valueOf(textFreqEchant.getText()));
+			parser.addVariable("x", Float.valueOf(textFreqEchant.getText())); //$NON-NLS-1$
 			parser.parseExpression(textFreqEchantConv.getText());
 			double resultJEP = parser.getValue();
 			
 			//String resultat = String.format(ViewFile.tableData.getItem(i).getText(6), resultJEP);
 			
-			EditStation.textFreqEchantTest.setText(""+resultJEP);
+			EditStation.textFreqEchantTest.setText(""+resultJEP); //$NON-NLS-1$
 			
 		}
 		if ((buttonFreqEchantPos.getSelection())&&(Regexp.checkLigneDebutfin(textFreqEchantLigne, textFreqEchantDebut, 
-				textFreqEchantFin, "Fréquence échantillonnage"))){
+				textFreqEchantFin, Messages.getString("EditStation.85")))){ //$NON-NLS-1$
 			//position dans fichier
 			
 			//récupérer le texte en question et creer une nouvelle heure
@@ -751,13 +751,13 @@ public static void conversionFreqEchant(){
 			org.nfunk.jep.JEP parser = new org.nfunk.jep.JEP();
 			parser.addStandardFunctions();
 			parser.addStandardConstants();
-			parser.addVariable("x", Float.valueOf(string));
+			parser.addVariable("x", Float.valueOf(string)); //$NON-NLS-1$
 			parser.parseExpression(textFreqEchantConv.getText());
 			double resultJEP = parser.getValue();
 			
 			//String resultat = String.format(ViewFile.tableData.getItem(i).getText(6), resultJEP);
 			
-			EditStation.textFreqEchantTest.setText(""+resultJEP);
+			EditStation.textFreqEchantTest.setText(""+resultJEP); //$NON-NLS-1$
 			
 		}
 		

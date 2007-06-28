@@ -18,6 +18,7 @@ public class Application implements IPlatformRunnable {
 	public Object run(Object args) throws Exception {
 		display = PlatformUI.createDisplay();
 		try {
+			Utils.initConfig();
 			int returnCode = PlatformUI.createAndRunWorkbench(display, new ApplicationWorkbenchAdvisor());
 			if (returnCode == PlatformUI.RETURN_RESTART) {
 				return IPlatformRunnable.EXIT_RESTART;
