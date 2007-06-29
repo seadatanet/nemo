@@ -221,6 +221,14 @@ public class Utils {
 
 		deb = styledtext.getSelection().x;
 		fi = styledtext.getSelection().y;
+		
+		System.out.println("deb clic = " + deb);
+		System.out.println("fi clic = " + fi);
+		
+		if (deb == fi){
+			Utils.messageErreur(Messages.getString("Utils.26"));
+			
+		}else{
 
 		//System.out.println("deb clic = " + deb);
 	//	System.out.println("fi clic = " + fi);
@@ -260,6 +268,8 @@ public class Utils {
 		debut.setText("" + deb); //$NON-NLS-1$
 		fin.setText("" + fi); //$NON-NLS-1$
 
+		Utils.messageErreur("");
+		}
 	}
 
 	public static void injectData(StyledText styledtext) {
@@ -272,6 +282,12 @@ public class Utils {
 	//	System.out.println("deb clic = " + deb);
 	//	System.out.println("fi clic = " + fi);
 
+		if (deb == fi){
+			Utils.messageErreur(Messages.getString("Utils.26"));
+			
+		}else{
+
+		
 		lign = 1;
 		// calcul de la ligne en fonction de la valeur de x
 		// parcours du tableau des tailles de lignes cumulées
@@ -311,7 +327,8 @@ public class Utils {
 
 //		System.out.println("DEBUT data= " + TableData.debut + " FIN data= "
 //				+ TableData.fin);
-
+		Utils.messageErreur("");
+		}
 	}
 
 	public static void injectNbreLignes(Text nbrelignes, StyledText styledtext) {
@@ -329,6 +346,12 @@ public class Utils {
 		// calcul de la ligne en fonction de la valeur de x
 		// parcours du tableau des tailles de lignes cumulées
 
+		if (deb == fi){
+			Utils.messageErreur(Messages.getString("Utils.26"));
+			
+		}else{
+
+		
 		// calcul ligne depart
 		for (i = 0; i < lignesBrutes.size(); i++) {
 
@@ -374,9 +397,85 @@ public class Utils {
 
 		// remplissage nbreLignes dans interface
 		nbrelignes.setText("" + (lignFin - lignDepart + 1)); //$NON-NLS-1$
-
+		
+		Utils.messageErreur("");
+		}
 	}
 
+	
+	public static void calculNbreLignesPuisRemplissageFrag(HeaderFragment frag) {
+		int deb, fi, lignDepart, lignFin, i, nbrelignes;
+
+		// on récupère les coordonnées de la sélection
+		deb = frag.getFirstCharOffset();
+		fi = frag.getLastCharOffset();
+
+		//System.out.println("deb clic = " + deb);
+		//System.out.println("fi clic = " + fi);
+
+		lignDepart = 1;
+		lignFin = 1;
+		// calcul de la ligne en fonction de la valeur de x
+		// parcours du tableau des tailles de lignes cumulées
+
+	
+			
+		// calcul ligne depart
+		for (i = 0; i < lignesBrutes.size(); i++) {
+
+			if (deb == taillesCumLignes[i]) {
+				lignDepart = i + 1;
+				break;
+			}
+			if (i == (lignesBrutes.size() - 1)) {
+				lignDepart = i + 1;
+				break;
+			}
+			if ((deb >= taillesCumLignes[i]) && (deb < taillesCumLignes[i + 1])) {
+				lignDepart = i + 1;
+				break;
+			}
+
+			// System.out.println("cumul = " + taillesCumLignes[i] + "i= " + i);
+
+		}
+
+		//System.out.println("ligne depart = " + lignDepart);
+
+		// calcul ligne fin
+
+		for (i = 0; i < lignesBrutes.size(); i++) {
+
+			if (fi == taillesCumLignes[i]) {
+				lignFin = i + 1;
+				break;
+			}
+			if (i == (lignesBrutes.size() - 1)) {
+				lignFin = i + 1;
+				break;
+			}
+			if ((fi >= taillesCumLignes[i]) && (fi < taillesCumLignes[i + 1])) {
+				lignFin = i + 1;
+				break;
+			}
+
+		}
+
+		//System.out.println("ligne fin = " + lignFin);
+
+		//nbre de lignes effectif
+		nbrelignes= (lignFin - lignDepart + 1); 
+		
+		if (nbrelignes == 1){
+			frag.setSingleLine(true);
+		}else{
+			frag.setSingleLine(false);
+			frag.setLastLine(frag.getFirstLine()+nbrelignes);
+		}
+				
+	}
+	
+	
 	public static void validationEtape(int onglet) {
 		// messageErreur("Vous devez impérativement terminer la ou les étapes
 		// précédentes avant de continuer." +"\n==>étapes " + tmp + " à " +
@@ -752,6 +851,7 @@ public class Utils {
 		style.foreground = truc;
 
 		ViewLog.styledTextLogErreurs.setStyleRange(style);
+		
 		/*
 		 * mettre en gras et en couleur only le texte du message !
 		 * message.length et ensuite new styleRange() de 0 à length

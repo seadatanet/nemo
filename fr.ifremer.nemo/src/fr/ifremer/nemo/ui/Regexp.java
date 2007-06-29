@@ -119,9 +119,9 @@ public static Boolean checkLigneDebutfin(Text ligne, Text debut, Text fin, Strin
 	
 if (ok){
 	//log = log+"...ok";
-	}
+	}else{
 	
-Utils.messageErreurAppend(log);	
+Utils.messageErreurAppend(log);	}
 	return ok;
 	
 }
@@ -149,9 +149,9 @@ public static Boolean checkTextValeur(Text text, String nomSection){
 	
 	if (ok){
 		//log = log + "...ok";
-	}
+	}else{
 	
-Utils.messageErreurAppend(log);
+Utils.messageErreurAppend(log);}
 	return ok;
 }
 

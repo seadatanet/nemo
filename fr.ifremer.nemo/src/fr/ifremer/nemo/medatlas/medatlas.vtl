@@ -15,7 +15,7 @@ $line
 
 #end
 #foreach( $station in $survey.stations )
-*$formatter.padString( $survey.reference, 13)$formatter.formatInt( "%04d", $station.getReferenceInteger())0 Data Type=$formatter.padString($station.dataType.code, 3)
+*$formatter.padString( $survey.reference, 13)$formatter.limitString($station.reference, 20)0 Data Type=$formatter.padString($station.dataType.code, 3)
 *DATE=$formatter.formatDateTime("ddMMyyyy", $station.fullDate) TIME=$formatter.formatDateTime("hh24mm", $station.correctedTime, "9999") LAT=$formatter.formatLatitude("NDD MM.mm", $station.latitude) LON=$formatter.formatLongitude("NDDD MM.mm", $station.longitude) DEPTH=$formatter.formatInt("%-5d", $station.bottomDepth)  QC=0000
 *NB PARAMETERS=#if($station.parametersNumber<10)0#end$formatter.formatInt("%-2d", $station.parametersNumber) RECORD LINES=$formatter.formatInt("%05d", $station.parametersAt(0).valuesSize())
 #if ($survey.isTimeSeriesSurvey())
@@ -33,9 +33,10 @@ $line
 *DM HISTORY=$formatter.limitString( $station.dmHistory1, 68)
 *$formatter.limitString( $station.dmHistory2, 80)
 *COMMENT
-#foreach ($line in $station.commentLines)
-*$formatter.limitString( $line, 80)
-#end
+##foreach ($line in $station.commentLines)
+*$station.comment
+##$formatter.limitString( $line, 80)
+##end
 * 
 #if ($survey.isTimeSeriesSurvey())
 *ADDITIONAL INFORMATION - TIME SERIES

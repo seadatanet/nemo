@@ -468,15 +468,17 @@ public static void initStation(){
 		propertyModel.setUserProvided(false);
 		 frag = propertyModel.getFragment();
 		
-	
 		ligne = "" + (Integer.valueOf(EditStation.textCommentaireLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
 		debut = EditStation.textCommentaireDebut.getText();
 		fin = EditStation.textCommentaireFin.getText();
 					
 		frag.setFirstLine(ligne);
-		frag.setLastLine(ligne);
+		//frag.setLastLine(ligne);
 		frag.setFirstCharOffset(debut);
 		frag.setLastCharOffset(fin);
+		
+		Utils.calculNbreLignesPuisRemplissageFrag(frag);
+		
 		
 	}
 	
@@ -1350,7 +1352,7 @@ public static void fillSurvey(){
 		typeSurvey.setNombre(dataTypes[i].getNumberOfProfiles());
 		typeSurvey.setQc(""+dataTypes[i].isQc());
 		typeSurvey.setSensor(dataTypes[i].isSensor());
-		
+				
 		TableDataSurvey.types.add(typeSurvey);
 		
 		System.out.println("TypeSurvey " +typeSurvey.getCode()+" ajouté");

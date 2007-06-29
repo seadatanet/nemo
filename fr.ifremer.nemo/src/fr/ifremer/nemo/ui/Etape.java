@@ -118,6 +118,8 @@ public class Etape {
 		//retour à l'onglet message d'erreur
 		ViewLog.tabFolderLog.setSelection(0);
 		
+		//mise à jour de la table
+		TableDataSurvey.majTypeData();
 		
 		Boolean ok, resultat;
 		ok = true;
@@ -709,7 +711,7 @@ public class Etape {
 //		puis remplissage du modèle avec les valeurs de l'IHM
 		DataModel.initModele(ViewFile.dossierCampagne, ViewFile.checkBoxTempo.getSelection(), ViewFile.nomFichier);
 		
-		Utils.messageErreur(Messages.getString("Etape.90")); //$NON-NLS-1$
+		Utils.messageOK(Messages.getString("Etape.90")); //$NON-NLS-1$
 		
 		//on rajoute "ok" dans l'onglet description
 		ViewFile.tabItem.setText(Messages.getString("Etape.91")); //$NON-NLS-1$
@@ -730,7 +732,7 @@ public class Etape {
 		DataModel.initSurvey();
 		ViewFile.tabItem1.setText(Messages.getString("Etape.92")); //$NON-NLS-1$
 		
-		Utils.messageErreur(Messages.getString("Etape.93")); //$NON-NLS-1$
+		Utils.messageOK(Messages.getString("Etape.93")); //$NON-NLS-1$
 		
 		//validation etape 2
 		ViewFile.etape = 2;
@@ -743,7 +745,7 @@ public class Etape {
 	private static void okStation(){
 		
 //		envoi des valeurs dans le modèle	
-		Utils.messageErreur(Messages.getString("Etape.94")); //$NON-NLS-1$
+		Utils.messageOK(Messages.getString("Etape.94")); //$NON-NLS-1$
 		DataModel.initStation();
 		ViewFile.tabItem2.setText(Messages.getString("Etape.95")); //$NON-NLS-1$
 		ViewFile.etape = 3;
@@ -751,7 +753,7 @@ public class Etape {
 	
 
 	private static void okData(){
-		Utils.messageErreur(Messages.getString("Etape.96")); //$NON-NLS-1$
+		Utils.messageOK(Messages.getString("Etape.96")); //$NON-NLS-1$
 		DataModel.initData();
 		ViewFile.tabItem3.setText(Messages.getString("Etape.97")); //$NON-NLS-1$
 		ViewFile.etape = 4;

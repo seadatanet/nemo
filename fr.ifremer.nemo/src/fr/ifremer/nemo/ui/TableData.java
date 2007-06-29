@@ -65,39 +65,54 @@ public static void creationTable(){
 	 table =  ViewFile.tableData;
 	  
 	   
-	  table.setHeaderVisible(true);
-	  table.setLinesVisible(true);  
-	  TableColumn tableColumn = new TableColumn(table, SWT.NONE);
+	  	table.setHeaderVisible(true);
+	  	table.setLinesVisible(true);  
+	  	TableColumn tableColumn = new TableColumn(table, SWT.NONE);
 		tableColumn.setWidth(110);
-		//taille = 60
 		tableColumn.setText(Messages.getString("TableData.0")); //$NON-NLS-1$
+		
 		TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);
 		tableColumn1.setWidth(90);
 		tableColumn1.setText(Messages.getString("TableData.1")); //$NON-NLS-1$
+		
 		TableColumn tableColumn2 = new TableColumn(table, SWT.NONE);
 		tableColumn2.setWidth(100);
 		tableColumn2.setText(Messages.getString("TableData.2")); //$NON-NLS-1$
+		tableColumn2.setAlignment(SWT.RIGHT);
+		
 		TableColumn tableColumn8 = new TableColumn(table, SWT.NONE);
 		tableColumn8.setWidth(50);
 		tableColumn8.setText(Messages.getString("TableData.3")); //$NON-NLS-1$
+		tableColumn8.setAlignment(SWT.RIGHT);
+		
 		TableColumn tableColumn3 = new TableColumn(table, SWT.NONE);
 		tableColumn3.setWidth(50);
 		tableColumn3.setText(Messages.getString("TableData.4")); //$NON-NLS-1$
+		tableColumn3.setAlignment(SWT.RIGHT);
+		
 		TableColumn tableColumn4 = new TableColumn(table, SWT.NONE);
 		tableColumn4.setWidth(50);
 		tableColumn4.setText(Messages.getString("TableData.5")); //$NON-NLS-1$
+		tableColumn4.setAlignment(SWT.RIGHT);
+		
 		TableColumn tableColumn5 = new TableColumn(table, SWT.NONE);
 		tableColumn5.setWidth(100);
 		tableColumn5.setText(Messages.getString("TableData.6")); //$NON-NLS-1$
+		tableColumn5.setAlignment(SWT.RIGHT);
+		
 		TableColumn tableColumn6 = new TableColumn(table, SWT.NONE);
 		tableColumn6.setWidth(100);
 		tableColumn6.setText(Messages.getString("TableData.7")); //$NON-NLS-1$
+		tableColumn6.setAlignment(SWT.RIGHT);
+		
 		TableColumn tableColumn7 = new TableColumn(table, SWT.NONE);
 		tableColumn7.setWidth(100);
 		tableColumn7.setText(Messages.getString("TableData.8")); //$NON-NLS-1$
-	
+		tableColumn7.setAlignment(SWT.RIGHT);
+		
 	initTable();
 	
+	//agrandissement de la table
 	ViewFile.compositeData.getShell().layout();
 
 }	
