@@ -404,7 +404,8 @@ public  class NemoWSImpl
     	String statement =
     	    "select CAM_CAMREF, CAM_CRNOM "+
     	    "from CAM "+
-    	    "order by CAM_DATDEB desc";
+    	    "where CAM_CAMTYP != 'PV' "+
+    	    "order by CAM_DATDEB desc ";    	    
     	stmt = conn.createStatement();
     	result = stmt.executeQuery(statement);
     	Vector<WSSurveyDescription> surveys = new Vector<WSSurveyDescription>();
