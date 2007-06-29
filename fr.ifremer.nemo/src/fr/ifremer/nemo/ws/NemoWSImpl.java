@@ -155,7 +155,7 @@ public  class NemoWSImpl
     
     	String statement =
     	    "select c.CODE_CENTRE, c.NOM_CENTRE, p.PAY_NOMPAY "+
-    	    "from PAY p, SCOOP.CENTRE c "+
+    	    "from PAY p, TSTSCOOP.CENTRE c "+
     	    "where  c.CODE_PAYS = p.PAY_CPAYS "+
     	    "order by p.PAY_NOMPAY, c.CODE_CENTRE";
     	stmt = conn.createStatement();
@@ -255,7 +255,7 @@ public  class NemoWSImpl
     	String statement =
     	    "select p.CODE_PARAMETRE, p.NOM_PARAMETRE, p.UNITE_PARAMETRE, "+
     	    "p.FORMAT_EDITION, p.VAL_DEFAUT "+
-    	    "from SCOOP.PARAMETRE p "+
+    	    "from TSTSCOOP.PARAMETRE p "+
     	    "order by p.CODE_PARAMETRE";
     	stmt = conn.createStatement();
     	result = stmt.executeQuery(statement);
@@ -355,7 +355,7 @@ public  class NemoWSImpl
     
     	String statement =
     	    "select n.CODE_NAVIRE, n.NOM_NAV "+
-    	    "from SCOOP.NAVIRE n "+
+    	    "from TSTSCOOP.NAVIRE n "+
     	    "order by n.CODE_NAVIRE";
     	stmt = conn.createStatement();
     	result = stmt.executeQuery(statement);
