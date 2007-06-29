@@ -599,6 +599,8 @@ public class Etape {
 		//retour à l'onglet message d'erreur
 		ViewLog.tabFolderLog.setSelection(0);
 		
+		//mise à jour avant toute chose
+		TableData.majTypeData();
 		
 		int nbreParam = TableData.types.size();
 		int []debuts, fins;
@@ -616,9 +618,16 @@ public class Etape {
 			debuts[i]=typeCourant.getDebut();
 			fins[i]=typeCourant.getFin();
 		
+//			check des valeurs début<fin
+			if (typeCourant.getDebut()>typeCourant.getFin()){
+				Utils.messageErreurAppend(Messages.getString("Etape.98")+" "+typeCourant.getCode()); //$NON-NLS-1$
+				ok = false;
+			}
 		}
 		
-				
+		
+		
+		
 		//parcours des listes et test des valeurs
 		for (int i=0;i<nbreParam;i++){
 			for (int j=0; j<nbreParam;j++){
@@ -631,18 +640,25 @@ public class Etape {
 			}
 						
 		}
+		
+		
+		
+		
+		/*//test des doublons 
 		if ((cptDebut >nbreParam)||(cptFin >nbreParam)){
 			Utils.messageErreur(Messages.getString("Etape.87")); //$NON-NLS-1$
 			
 		ok = false;
 		}
-		
+		*/
 		if (valeurNonRemplie){
 			Utils.messageErreurAppend(Messages.getString("Etape.88")); //$NON-NLS-1$
 			ok = false;
 		}
 		
 		
+		
+		//SERIE TEMPO
 		if ((ViewFile.checkBoxTempo.getSelection())&&(EditData.buttonLigneDonnees.getSelection())){
 			//check valeurs série tempo
 
@@ -660,78 +676,7 @@ public class Etape {
 			}
 			
 			
-			
-			/*
-			//HEURE TEMPO
-
-			resultat =Regexp.checkLigneDebutfin(EditData.textHeureLigne, EditData.textHeureDebut, EditData.textHeureFin, "Heure"); 
-			ok = ok && resultat;
-			
-			
-			//Utils.messageErreurAppend("\n===[Check section : Heure]===\n");
-			System.out.println("format heure = "+EditStation.comboHeure.getText()); //Item(EditStation.comboHeure.getSelectionIndex()));
-			try {
-				System.out.println("format heure = "+EditStation.comboHeure.getText());
-				
-//				récupérer le texte en question et creer une nouvelle heure
-				ligne = Utils.lignesBrutes.get(Integer.parseInt(EditData.textHeureLigne.getText())-1);
-				string = ligne.substring(Integer.parseInt(EditData.textHeureDebut.getText())-1, Integer.parseInt(EditData.textHeureFin.getText()));
-				
-				DateTimeFormat format = new DateTimeFormat(EditData.comboHeure.getText());
-				
-				
-				System.out.println(ligne);
-				System.out.println(string);
-				Long hourLong = (Long)format.parseObject(string);
-				
-				
-			} catch (ParseException e) {
-				System.out.println("erreur format Heure ");
-				Utils.messageErreurAppend("\nErreur de format d'Heure : Attendu => "+EditData.comboHeure.getText()+" Lu => "+string);
-				
-				ok = ok && false;
-				e.printStackTrace();
-				//Utils.messageErreurAppend(e.)
-			}
-			
-			
-			//DATE TEMPO
-			
-			
-			
-//			check valeurs ligne/debut/fin
-			resultat = Regexp.checkLigneDebutfin(EditData.textDateLigne, EditData.textDateDebut, EditData.textDateFin, "Date"); 
-			ok = ok && resultat;
-			
-			//Utils.messageErreurAppend("\n===[Check section : Date]===\n");
-			System.out.println("format date = "+EditData.comboDate.getText());
-			try {
-				
-//				récupérer le texte en question et creer une nouvelle heure
-				//on a ligne debut fin donc parcours lignes de texte
-				ligne = Utils.lignesBrutes.get(Integer.parseInt(EditData.textDateLigne.getText())-1);
-				string = ligne.substring(Integer.parseInt(EditData.textDateDebut.getText())-1, Integer.parseInt(EditData.textDateFin.getText()));
-				
-				DateTimeFormat format = new DateTimeFormat(EditData.comboDate.getText());
-				
-				
-				System.out.println(ligne);
-				System.out.println(string);
-				Long dateLong = (Long)format.parseObject(string);
-				
-				
-			} catch (ParseException e) {
-				System.out.println("erreur format date ");
-				Utils.messageErreurAppend("\nErreur de format de Date : Attendu => "+EditData.comboDate.getText()+" Lu => "+string);
-				ok = ok && false;
-				e.printStackTrace();
-				//Utils.messageErreurAppend(e.)
-			}
-			
-			
-			*/
-			
-			
+		
 			
 			
 			

@@ -23,6 +23,7 @@ public class Application implements IPlatformRunnable {
 			if (returnCode == PlatformUI.RETURN_RESTART) {
 				return IPlatformRunnable.EXIT_RESTART;
 			}
+			
 			return IPlatformRunnable.EXIT_OK;
 		} finally {
 			display.dispose();

@@ -24,11 +24,12 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		IWorkbenchWindowConfigurer configurer = getWindowConfigurer();
 		configurer.setInitialSize(new Point(1024, 768));
 		configurer.setShowCoolBar(false);
-		configurer.setShowStatusLine(false);
+		configurer.setShowStatusLine(true);
 		
 		configurer_titre = configurer;
 		
 		configurer_titre.setTitle("Nemo");
+		
 		//configurer.setShellStyle(SWT.BORDER | SWT.MIN | SWT.MAX);
 	}
 }

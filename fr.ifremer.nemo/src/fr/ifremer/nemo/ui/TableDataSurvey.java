@@ -247,8 +247,8 @@ public static void initTable(){
 		//création du menu
 		Menu menu = new Menu(table.getShell(), SWT.POP_UP);
 				
-	    MenuItem itemNew = new MenuItem(menu, SWT.NONE);
-	    itemNew.setText(Messages.getString("TableDataSurvey.6")); //$NON-NLS-1$
+//	    MenuItem itemNew = new MenuItem(menu, SWT.NONE);
+//	    itemNew.setText(Messages.getString("TableDataSurvey.6")); //$NON-NLS-1$
 	   
 	    MenuItem itemList = new MenuItem(menu, SWT.NONE);
 	    itemList.setText(Messages.getString("TableDataSurvey.7")); //$NON-NLS-1$
@@ -266,7 +266,7 @@ public static void initTable(){
 		
 		//ajouter des listeners sur les menu items ^^
 		
-	
+	/*
 		itemNew.addListener(SWT.Selection, new Listener() {
 	          public void handleEvent(Event e) {
 	       //     System.out.println("nouveau type");
@@ -274,7 +274,7 @@ public static void initTable(){
 	          
 	          }
 	        });
-		
+		*/
 		itemList.addListener(SWT.Selection, new Listener() {
 	          public void handleEvent(Event e) {
 	      //      System.out.println("sélection liste");

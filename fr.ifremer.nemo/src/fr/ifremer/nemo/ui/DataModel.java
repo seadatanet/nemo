@@ -343,17 +343,17 @@ public static void initStation(){
 	
 	station = stationModel.getModel();
 	
+	PropertyModel propertyModel = stationModel.getReferenceProperty();
+	
 	if (EditStation.buttonRefStationIncremente.getSelection()){
 		stationModel.setIncrementRef(true);
-		station.setReference("0");
+		propertyModel.setUserProvided(true);		
 		
 	}else
 	{
 		stationModel.setIncrementRef(false);
-		station.setReference("");
+		propertyModel.setUserProvided(false);
 		
-		//le propertymodel de la ref est en accès direct
-		PropertyModel propertyModel = stationModel.getReferenceProperty();
 		frag = propertyModel.getFragment();
 		
 		ligne = "" + (Integer.valueOf(EditStation.textRefStationLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
@@ -408,7 +408,7 @@ public static void initStation(){
 	station.setDataType(dataType);
 
 //historique acquisition1 et 2
-	PropertyModel propertyModel = stationModel.propertiesAt("dcHistory1");
+ propertyModel = stationModel.propertiesAt("dcHistory1");
 	PropertyModel propertyModel2 = stationModel.propertiesAt("dcHistory2");
 	if (EditStation.buttonHistoriqueAcqSaisie.getSelection()){
 		//saisie manuelle
@@ -1407,6 +1407,7 @@ public static void fillStation(){
 	//numéro de station
 	if (stationModel_modele.isIncrementRef()){
 		EditStation.buttonRefStationIncremente.setSelection(true);
+		EditStation.buttonRefStationPos.setSelection(false);
 	}else{
 
 		//EditStation.buttonRefStationIncremente.setSelection(false); 		//pas obligatoire pour la première ligne? TODO

@@ -288,10 +288,12 @@ public class ViewFile extends ViewPart {
 		checkBoxTempo.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
 				//si pas coché on active le groupTempo sinon on grise
+			
+			/*	
 				if (checkBoxTempo.getSelection()){
 			//	System.out.println("série temporelle"); //  //$NON-NLS-1$
 				groupTempo.setVisible(true);}else{groupTempo.setVisible(false);}
-			
+			*/
 			}
 		});
 		createGroupTempo();

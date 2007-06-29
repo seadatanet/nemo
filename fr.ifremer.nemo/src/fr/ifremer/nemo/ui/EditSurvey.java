@@ -126,7 +126,7 @@ public class EditSurvey {
 			
 			//boutons collapse all / expand all
 			
-			buttonExpand.setParent(ViewEdit.formEdition.getBody());
+			//buttonExpand.setParent(ViewEdit.formEdition.getBody());
 			buttonExpand.setText("+"); //$NON-NLS-1$
 					
 			buttonRAZ.setParent(ViewEdit.formEdition.getBody());
@@ -208,7 +208,7 @@ public class EditSurvey {
 		Drawing.sectionCommentaireSurvey(sectionCommentaire, Messages.getString("EditSurvey.35"), textCommentaire, Messages.getString("EditSurvey.36")); //$NON-NLS-1$ //$NON-NLS-2$
 		
 
-		buttonExpand2.setParent(ViewEdit.formEdition.getBody());
+		//buttonExpand2.setParent(ViewEdit.formEdition.getBody());
 		buttonExpand2.setText("+"); //$NON-NLS-1$
 		
 
@@ -782,7 +782,7 @@ public static void chargementXML(File fichier){
 			Utils.messageErreur(""); //$NON-NLS-1$
 			
 			//reaffichage des boutons valider/expand/init serveur
-			EditSurvey.buttonExpand.setParent(s.getBody());
+			//EditSurvey.buttonExpand.setParent(s.getBody());
 			
 			EditSurvey.buttonValidate.setParent(s.getBody());
 			EditSurvey.buttonInitServeur.setParent(s.getBody());
@@ -799,7 +799,7 @@ public static void chargementXML(File fichier){
 			//	System.out.println("re-affichage zone edition etape description campagne ==> ok");
 				}
 		
-			EditSurvey.buttonExpand2.setParent(s.getBody());
+			//EditSurvey.buttonExpand2.setParent(s.getBody());
 			
 			
 			ViewEdit.formEdition.setText(Messages.getString("EditSurvey.61")); //$NON-NLS-1$

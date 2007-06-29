@@ -94,7 +94,7 @@ initLabels();
 
 
 //boutons collapse all / expand all
-buttonExpand.setParent(ViewEdit.formEdition.getBody());
+//buttonExpand.setParent(ViewEdit.formEdition.getBody());
 buttonExpand.setText("+"); //$NON-NLS-1$
 formEdition.redraw();
 formEdition.reflow(true);
@@ -145,7 +145,7 @@ DrawingStation.sectionHeure(Messages.getString("EditStation.13"), Messages.getSt
 DrawingStation.sectionDate(Messages.getString("EditStation.15"), Messages.getString("EditStation.16"), sectionDate, textDateLigne, textDateDebut, textDateFin, textDateSaisie, labelConversionDate); //$NON-NLS-1$ //$NON-NLS-2$
 
 //flags QC
-DrawingStation.sectionDateQC(Messages.getString("EditStation.17"), Messages.getString("EditStation.18"), sectionQCDate); //$NON-NLS-1$ //$NON-NLS-2$
+//DrawingStation.sectionDateQC(Messages.getString("EditStation.17"), Messages.getString("EditStation.18"), sectionQCDate); //$NON-NLS-1$ //$NON-NLS-2$
 
 //section Latitude
 DrawingStation.sectionManuelLigneDebutFinInjectLatLongComboFormat(Messages.getString("EditStation.19"), Messages.getString("EditStation.20"), sectionLatitude, textLatitudeLigne, textLatitudeDebut, textLatitudeFin, textLatitude, buttonLatSaisie, comboLatitude, buttonLatPos); //$NON-NLS-1$ //$NON-NLS-2$
@@ -190,7 +190,7 @@ if (ViewFile.checkBoxTempo.getSelection()){
 //DrawingStation.sectionSerieTempo();
 
 
-buttonExpand2.setParent(ViewEdit.formEdition.getBody());
+//buttonExpand2.setParent(ViewEdit.formEdition.getBody());
 buttonExpand2.setText("+"); //$NON-NLS-1$
 
 
@@ -399,7 +399,7 @@ public static void DrawingBack(){
 	Utils.messageErreur(""); //$NON-NLS-1$
 
 //	effacement des boutons valider/expand/init serveur
-	EditStation.buttonExpand.setParent(s.getBody());
+	//EditStation.buttonExpand.setParent(s.getBody());
 	
 	EditStation.buttonValidate.setParent(s.getBody());
 	EditStation.buttonRAZ.setParent(s.getBody());
@@ -415,7 +415,7 @@ public static void DrawingBack(){
 	//System.out.println("reaffichage zone edition etape description station ==> ok");
 	}
 
-	EditStation.buttonExpand2.setParent(s.getBody());
+	//EditStation.buttonExpand2.setParent(s.getBody());
 	
 	ViewEdit.formEdition.setText(Messages.getString("EditStation.51")); //$NON-NLS-1$
 	

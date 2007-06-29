@@ -36,7 +36,7 @@ public class TypeData extends Object{
 	public TypeData() {
 		
 	this.setCode("Code");
-	this.setConversion("");
+	this.setConversion("x*1");
 	this.setEntree("Entrée");
 	this.setFormat("Format");
 	this.setSortie("Sortie");

@@ -98,7 +98,7 @@ public static ScrolledForm formEdition;
 		
 		
 		//boutons collapse all / expand all
-		buttonExpandDesc.setParent(formEdition.getBody());
+		//buttonExpandDesc.setParent(formEdition.getBody());
 		buttonExpandDesc.setText("+"); //$NON-NLS-1$
 		
 		//bouton RAZ
@@ -145,7 +145,7 @@ comboIndicRuptureDonnees.add("END"); //$NON-NLS-1$
 //Drawing.sectionLabelText("automatique","numéro de ligne", sectionTest2, indicFinDonnees);											  
 
 //boutons collapse all / expand all
-buttonExpandDesc2.setParent(formEdition.getBody());
+//buttonExpandDesc2.setParent(formEdition.getBody());
 buttonExpandDesc2.setText("+"); //$NON-NLS-1$
 
 //listeners
@@ -345,7 +345,7 @@ nomNemo();
 		ScrolledForm s;
 		s = ViewEdit.formEdition;
 		//affichage boutons expand
-		buttonExpandDesc.setParent(s.getBody());
+		//buttonExpandDesc.setParent(s.getBody());
 		buttonRAZ.setParent(s.getBody());
 		
 		//affichage bouton valider etape
@@ -360,7 +360,7 @@ nomNemo();
 			//System.out.println("Affichage section etape description fichier ==> ok"); //$NON-NLS-1$
 			}
 	
-		buttonExpandDesc2.setParent(s.getBody());
+		//buttonExpandDesc2.setParent(s.getBody());
 		
 		//effacement titre formulaire
 		ViewEdit.formEdition.setText(Messages.getString("EditDesc.descriptionFichier")); //$NON-NLS-1$
