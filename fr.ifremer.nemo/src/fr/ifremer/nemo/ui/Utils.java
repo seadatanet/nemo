@@ -23,7 +23,9 @@ import fr.ifremer.nemo.input.*;
 public class Utils {
 
 	public static String texteBrut, texteFinal; // texte brut entier et texte
+
 	public static StringBuffer stringBuffer;
+
 	// avec regle dynamique
 
 	public static ArrayList<String> lignesBrutes; // lignes du texte
@@ -31,7 +33,7 @@ public class Utils {
 	public static int[] taillesCumLignes;
 
 	public static Configuration configuration;
-	
+
 	public static StyleRange[] stylesCouleurs;
 
 	public static Font font;
@@ -49,7 +51,6 @@ public class Utils {
 		long tailleLigneOctets, tailleOctets, tailleOctetsTot;
 		String ligne;
 
-		
 		tailleLigne = 0;
 		tailleMax = 0;
 		texteBrut = ""; //$NON-NLS-1$
@@ -62,11 +63,10 @@ public class Utils {
 		// pour le moment 1000 max
 		lignesBrutes = new ArrayList<String>();
 		stringBuffer = new StringBuffer();
-		
+
 		File objFich = new File(fich);
 		tailleOctetsTot = objFich.length();
-		//System.out.println("taille fichier ==>" + objFich.length());
-	
+		// System.out.println("taille fichier ==>" + objFich.length());
 
 		// lecture et concaténation
 		BufferedReader entree = new BufferedReader(new FileReader(fich));
@@ -80,18 +80,18 @@ public class Utils {
 				lignesBrutes.add(ligne);
 				stringBuffer.append(ligne);
 				stringBuffer.append("\n"); //$NON-NLS-1$
-				
+
 				nbreLignes = nbreLignes + 1;
 				// System.out.println(nbreLignes % 50);
 				if ((nbreLignes % 100) == 0) {
-					//System.out.println("ligne lue : " + nbreLignes);
+					// System.out.println("ligne lue : " + nbreLignes);
 				}
 
 			}
-			
+
 		} while (ligne != null);
 		entree.close();
-		//System.out.println("Fin lecture fichier " + fich);
+		// System.out.println("Fin lecture fichier " + fich);
 
 		// calcul des tailles cumulées
 		taillesCumLignes = new int[nbreLignes];
@@ -105,11 +105,10 @@ public class Utils {
 
 		}
 
-		
 		texteBrut = stringBuffer.toString();
-		
+
 		// affichage
-		//System.out.println("Fin de insertText ()");
+		// System.out.println("Fin de insertText ()");
 
 		// affichage texte
 		// changement de font
@@ -124,81 +123,66 @@ public class Utils {
 		ViewLog.styledTextLogErreurs.setText(Messages.getString("Utils.4")); //$NON-NLS-1$
 
 		// début d'infos du fichier
-		
-		ViewLog.styledTextLogInfos.setText(Messages.getString("Utils.5") + fich); //$NON-NLS-1$
-		ViewLog.styledTextLogInfos.append(Messages.getString("Utils.6") + nbreLignes); //$NON-NLS-1$
-		
-		
-		//réactivation de l'option série temporelle onglet DESC
+
+		ViewLog.styledTextLogInfos
+				.setText(Messages.getString("Utils.5") + fich); //$NON-NLS-1$
+		ViewLog.styledTextLogInfos
+				.append(Messages.getString("Utils.6") + nbreLignes); //$NON-NLS-1$
+
+		// réactivation de l'option série temporelle onglet DESC
 		ViewFile.checkBoxTempo.setEnabled(true);
-		
-//		RAZ global si réouverture fichier en cours de processus
+
+		// RAZ global si réouverture fichier en cours de processus
 		Utils.razGlobal();
-		
+
 		EditDesc.nomNemo();
 		DataModel.ouverture = false;
-		
-		//reset de l'étape de conversion
+
+		// reset de l'étape de conversion
 		ViewFile.etape = 0;
 
 	}
 
-	
-	public static void remplissageTexte(StyledText styledText){
+	public static void remplissageTexte(StyledText styledText) {
 		int taille;
 		taille = lignesBrutes.size();
-	
+
 		/*
-		if (taille >= 1000){
-			for (int i =0; i<500;i++){
-				
-				String tmp = lignesBrutes.get(i);
-				stringBuffer.append(tmp);
-				//texteBrut = texteBrut + tmp;
-				stringBuffer.append("\n");
-				//texteBrut = texteBrut + "\n";
-				System.out.println(""+i/5+"%");
-//				styledText.append(tmp);
-//				styledText.append("\n");
-			}
-			
-			
-			
-			for (int i =(taille-500); i<taille;i++){
-				String tmp = lignesBrutes.get(i);
-				stringBuffer.append(tmp);
-				stringBuffer.append("\n");
-//				texteBrut = texteBrut + tmp;
-//				texteBrut = texteBrut + "\n";
-//				styledText.append(tmp);
-//				styledText.append("\n");
-				System.out.println(""+(taille-i)/5+"%");
-			}
-			
-			
-			
-		}else{
-		
-		for (int i =0; i<taille;i++){
-			String tmp = lignesBrutes.get(i);
-			texteBrut = texteBrut + tmp;
-			styledText.append(tmp);
-			styledText.append("\n");
-		}
-		}
-		*/
-		
-		for (int i =0; i<taille;i++){
-			
+		 * if (taille >= 1000){ for (int i =0; i<500;i++){
+		 * 
+		 * String tmp = lignesBrutes.get(i); stringBuffer.append(tmp);
+		 * //texteBrut = texteBrut + tmp; stringBuffer.append("\n"); //texteBrut =
+		 * texteBrut + "\n"; System.out.println(""+i/5+"%"); //
+		 * styledText.append(tmp); // styledText.append("\n"); }
+		 * 
+		 * 
+		 * 
+		 * for (int i =(taille-500); i<taille;i++){ String tmp =
+		 * lignesBrutes.get(i); stringBuffer.append(tmp);
+		 * stringBuffer.append("\n"); // texteBrut = texteBrut + tmp; //
+		 * texteBrut = texteBrut + "\n"; // styledText.append(tmp); //
+		 * styledText.append("\n"); System.out.println(""+(taille-i)/5+"%"); }
+		 * 
+		 * 
+		 * 
+		 * }else{
+		 * 
+		 * for (int i =0; i<taille;i++){ String tmp = lignesBrutes.get(i);
+		 * texteBrut = texteBrut + tmp; styledText.append(tmp);
+		 * styledText.append("\n"); } }
+		 */
+
+		for (int i = 0; i < taille; i++) {
+
 			String tmp = lignesBrutes.get(i);
 			stringBuffer.append(tmp);
 			stringBuffer.append("\n"); //$NON-NLS-1$
-		
+
 		}
-		
+
 		texteBrut = stringBuffer.toString();
 	}
-	
+
 	public static void insertTexte(String chaine) {
 
 		// affichage de la règle de numéros 161 caractères (calculer la taille
@@ -221,54 +205,61 @@ public class Utils {
 
 		deb = styledtext.getSelection().x;
 		fi = styledtext.getSelection().y;
-		
+
 		System.out.println("deb clic = " + deb);
 		System.out.println("fi clic = " + fi);
-		
-		if (deb == fi){
+
+		if (deb == fi) {
 			Utils.messageErreur(Messages.getString("Utils.26"));
-			
-		}else{
 
-		//System.out.println("deb clic = " + deb);
-	//	System.out.println("fi clic = " + fi);
+		} else {
 
-		lign = 1;
-		// calcul de la ligne en fonction de la valeur de x
-		// parcours du tableau des tailles de lignes cumulées
+			// System.out.println("deb clic = " + deb);
+			// System.out.println("fi clic = " + fi);
 
-		for (i = 0; i < lignesBrutes.size(); i++) {
+			lign = 1;
+			// calcul de la ligne en fonction de la valeur de x
+			// parcours du tableau des tailles de lignes cumulées
 
-			if (deb == taillesCumLignes[i]) {
-				lign = i + 1;
-				break;
+			for (i = 0; i < lignesBrutes.size(); i++) {
+
+				if (deb == taillesCumLignes[i]) {
+					lign = i + 1;
+					break;
+				}
+				if (i == (lignesBrutes.size() - 1)) {
+					lign = i + 1;
+					break;
+				}
+				if ((deb >= taillesCumLignes[i])
+						&& (deb < taillesCumLignes[i + 1])) {
+					lign = i + 1;
+					break;
+				}
+
+				// System.out.println("cumul = " + taillesCumLignes[i] + "i= " +
+				// i);
+
 			}
-			if (i == (lignesBrutes.size() - 1)) {
-				lign = i + 1;
-				break;
-			}
-			if ((deb >= taillesCumLignes[i]) && (deb < taillesCumLignes[i + 1])) {
-				lign = i + 1;
-				break;
-			}
 
-			//System.out.println("cumul = " + taillesCumLignes[i] + "i= " + i);
+			// remplissage ligne dans interface
+			ligne.setText("" + lign); //$NON-NLS-1$
 
-		}
+			deb = deb - taillesCumLignes[lign - 1] + 1; // debut reel sur ligne
+														// :
+			// nbre caracs par rapport
+			// debut de ligne
+			fi = fi - taillesCumLignes[lign - 1]; // fin reelle sur ligne
 
-		// remplissage ligne dans interface
-		ligne.setText("" + lign); //$NON-NLS-1$
+			// remplissage debut et fin dans interface
+			debut.setText("" + deb); //$NON-NLS-1$
+			fin.setText("" + fi); //$NON-NLS-1$
 
-		deb = deb - taillesCumLignes[lign - 1] + 1; // debut reel sur ligne :
-		// nbre caracs par rapport
-		// debut de ligne
-		fi = fi - taillesCumLignes[lign - 1]; // fin reelle sur ligne
+			debut.pack();
+			ligne.pack();
+			fin.pack();
 
-		// remplissage debut et fin dans interface
-		debut.setText("" + deb); //$NON-NLS-1$
-		fin.setText("" + fi); //$NON-NLS-1$
-
-		Utils.messageErreur("");
+			Utils.messageErreur("");
 		}
 	}
 
@@ -279,55 +270,58 @@ public class Utils {
 		deb = styledtext.getSelection().x;
 		fi = styledtext.getSelection().y;
 
-	//	System.out.println("deb clic = " + deb);
-	//	System.out.println("fi clic = " + fi);
+		// System.out.println("deb clic = " + deb);
+		// System.out.println("fi clic = " + fi);
 
-		if (deb == fi){
+		if (deb == fi) {
 			Utils.messageErreur(Messages.getString("Utils.26"));
-			
-		}else{
 
-		
-		lign = 1;
-		// calcul de la ligne en fonction de la valeur de x
-		// parcours du tableau des tailles de lignes cumulées
+		} else {
 
-		for (i = 0; i < lignesBrutes.size(); i++) {
+			lign = 1;
+			// calcul de la ligne en fonction de la valeur de x
+			// parcours du tableau des tailles de lignes cumulées
 
-			if (deb == taillesCumLignes[i]) {
-				lign = i + 1;
-				break;
+			for (i = 0; i < lignesBrutes.size(); i++) {
+
+				if (deb == taillesCumLignes[i]) {
+					lign = i + 1;
+					break;
+				}
+				if (i == (lignesBrutes.size() - 1)) {
+					lign = i + 1;
+					break;
+				}
+				if ((deb >= taillesCumLignes[i])
+						&& (deb < taillesCumLignes[i + 1])) {
+					lign = i + 1;
+					break;
+				}
+
+				// System.out.println("cumul = " + taillesCumLignes[i] + " i= "
+				// + i);
+
 			}
-			if (i == (lignesBrutes.size() - 1)) {
-				lign = i + 1;
-				break;
-			}
-			if ((deb >= taillesCumLignes[i]) && (deb < taillesCumLignes[i + 1])) {
-				lign = i + 1;
-				break;
-			}
 
-		//	System.out.println("cumul = " + taillesCumLignes[i] + " i= " + i);
+			// remplissage ligne dans interface
+			// ligne = lign;
 
-		}
+			deb = deb - taillesCumLignes[lign - 1] + 1; // debut reel sur ligne
+														// :
+			// nbre caracs par rapport
+			// debut de ligne
+			fi = fi - taillesCumLignes[lign - 1]; // fin reelle sur ligne
 
-		// remplissage ligne dans interface
-		// ligne = lign;
+			// System.out.println("DEBUT = " + deb + " FIN= " + fi);
 
-		deb = deb - taillesCumLignes[lign - 1] + 1; // debut reel sur ligne :
-		// nbre caracs par rapport
-		// debut de ligne
-		fi = fi - taillesCumLignes[lign - 1]; // fin reelle sur ligne
+			// remplissage debut et fin dans interface
+			TableData.debut = deb;
+			TableData.fin = fi;
 
-		// System.out.println("DEBUT = " + deb + " FIN= " + fi);
-
-		// remplissage debut et fin dans interface
-		TableData.debut = deb;
-		TableData.fin = fi;
-
-//		System.out.println("DEBUT data= " + TableData.debut + " FIN data= "
-//				+ TableData.fin);
-		Utils.messageErreur("");
+			// System.out.println("DEBUT data= " + TableData.debut + " FIN data=
+			// "
+			// + TableData.fin);
+			Utils.messageErreur("");
 		}
 	}
 
@@ -338,71 +332,72 @@ public class Utils {
 		deb = styledtext.getSelection().x;
 		fi = styledtext.getSelection().y;
 
-		//System.out.println("deb clic = " + deb);
-		//System.out.println("fi clic = " + fi);
+		// System.out.println("deb clic = " + deb);
+		// System.out.println("fi clic = " + fi);
 
 		lignDepart = 1;
 		lignFin = 1;
 		// calcul de la ligne en fonction de la valeur de x
 		// parcours du tableau des tailles de lignes cumulées
 
-		if (deb == fi){
+		if (deb == fi) {
 			Utils.messageErreur(Messages.getString("Utils.26"));
-			
-		}else{
 
-		
-		// calcul ligne depart
-		for (i = 0; i < lignesBrutes.size(); i++) {
+		} else {
 
-			if (deb == taillesCumLignes[i]) {
-				lignDepart = i + 1;
-				break;
-			}
-			if (i == (lignesBrutes.size() - 1)) {
-				lignDepart = i + 1;
-				break;
-			}
-			if ((deb >= taillesCumLignes[i]) && (deb < taillesCumLignes[i + 1])) {
-				lignDepart = i + 1;
-				break;
-			}
+			// calcul ligne depart
+			for (i = 0; i < lignesBrutes.size(); i++) {
 
-			// System.out.println("cumul = " + taillesCumLignes[i] + "i= " + i);
+				if (deb == taillesCumLignes[i]) {
+					lignDepart = i + 1;
+					break;
+				}
+				if (i == (lignesBrutes.size() - 1)) {
+					lignDepart = i + 1;
+					break;
+				}
+				if ((deb >= taillesCumLignes[i])
+						&& (deb < taillesCumLignes[i + 1])) {
+					lignDepart = i + 1;
+					break;
+				}
 
-		}
+				// System.out.println("cumul = " + taillesCumLignes[i] + "i= " +
+				// i);
 
-		//System.out.println("ligne depart = " + lignDepart);
-
-		// calcul ligne fin
-
-		for (i = 0; i < lignesBrutes.size(); i++) {
-
-			if (fi == taillesCumLignes[i]) {
-				lignFin = i + 1;
-				break;
-			}
-			if (i == (lignesBrutes.size() - 1)) {
-				lignFin = i + 1;
-				break;
-			}
-			if ((fi >= taillesCumLignes[i]) && (fi < taillesCumLignes[i + 1])) {
-				lignFin = i + 1;
-				break;
 			}
 
-		}
+			// System.out.println("ligne depart = " + lignDepart);
 
-		//System.out.println("ligne fin = " + lignFin);
+			// calcul ligne fin
 
-		// remplissage nbreLignes dans interface
-		nbrelignes.setText("" + (lignFin - lignDepart + 1)); //$NON-NLS-1$
-		
-		Utils.messageErreur("");
+			for (i = 0; i < lignesBrutes.size(); i++) {
+
+				if (fi == taillesCumLignes[i]) {
+					lignFin = i + 1;
+					break;
+				}
+				if (i == (lignesBrutes.size() - 1)) {
+					lignFin = i + 1;
+					break;
+				}
+				if ((fi >= taillesCumLignes[i])
+						&& (fi < taillesCumLignes[i + 1])) {
+					lignFin = i + 1;
+					break;
+				}
+
+			}
+
+			// System.out.println("ligne fin = " + lignFin);
+
+			// remplissage nbreLignes dans interface
+			nbrelignes.setText("" + (lignFin - lignDepart + 1)); //$NON-NLS-1$
+			nbrelignes.pack();
+			Utils.messageErreur("");
 		}
 	}
 
-	
 	public static void calculNbreLignesPuisRemplissageFrag(HeaderFragment frag) {
 		int deb, fi, lignDepart, lignFin, i, nbrelignes;
 
@@ -410,16 +405,14 @@ public class Utils {
 		deb = frag.getFirstCharOffset();
 		fi = frag.getLastCharOffset();
 
-		//System.out.println("deb clic = " + deb);
-		//System.out.println("fi clic = " + fi);
+		// System.out.println("deb clic = " + deb);
+		// System.out.println("fi clic = " + fi);
 
 		lignDepart = 1;
 		lignFin = 1;
 		// calcul de la ligne en fonction de la valeur de x
 		// parcours du tableau des tailles de lignes cumulées
 
-	
-			
 		// calcul ligne depart
 		for (i = 0; i < lignesBrutes.size(); i++) {
 
@@ -440,7 +433,7 @@ public class Utils {
 
 		}
 
-		//System.out.println("ligne depart = " + lignDepart);
+		// System.out.println("ligne depart = " + lignDepart);
 
 		// calcul ligne fin
 
@@ -461,21 +454,20 @@ public class Utils {
 
 		}
 
-		//System.out.println("ligne fin = " + lignFin);
+		// System.out.println("ligne fin = " + lignFin);
 
-		//nbre de lignes effectif
-		nbrelignes= (lignFin - lignDepart + 1); 
-		
-		if (nbrelignes == 1){
+		// nbre de lignes effectif
+		nbrelignes = (lignFin - lignDepart + 1);
+
+		if (nbrelignes == 1) {
 			frag.setSingleLine(true);
-		}else{
+		} else {
 			frag.setSingleLine(false);
-			frag.setLastLine(frag.getFirstLine()+nbrelignes);
+			frag.setLastLine(frag.getFirstLine() + nbrelignes);
 		}
-				
+
 	}
-	
-	
+
 	public static void validationEtape(int onglet) {
 		// messageErreur("Vous devez impérativement terminer la ou les étapes
 		// précédentes avant de continuer." +"\n==>étapes " + tmp + " à " +
@@ -528,9 +520,13 @@ public class Utils {
 			} else {
 				if (EditStation.validee == 1) {
 					EditDesc.razEdition();
-					
-					if (EditData.loaded ==1){EditData.DrawingBack();}else{EditData.affichageEdition();}
-					
+
+					if (EditData.loaded == 1) {
+						EditData.DrawingBack();
+					} else {
+						EditData.affichageEdition();
+					}
+
 				} else {
 					if (EditDesc.loaded == 1) {
 						EditDesc.razEdition();
@@ -596,10 +592,13 @@ public class Utils {
 			} else {
 				if (EditStation.validee == 1) {
 					EditSurvey.razEdition();
-					
-					if (EditData.loaded ==1){EditData.DrawingBack();}else{EditData.affichageEdition();}
-					
-					
+
+					if (EditData.loaded == 1) {
+						EditData.DrawingBack();
+					} else {
+						EditData.affichageEdition();
+					}
+
 				} else {
 					if (EditSurvey.loaded == 1) {
 						EditSurvey.razEdition();
@@ -630,9 +629,13 @@ public class Utils {
 			} else {
 				if (EditStation.validee == 1) {
 					EditStation.razEdition();
-					
-					if (EditData.loaded ==1){EditData.DrawingBack();}else{EditData.affichageEdition();}
-					
+
+					if (EditData.loaded == 1) {
+						EditData.DrawingBack();
+					} else {
+						EditData.affichageEdition();
+					}
+
 				} else {
 					if (EditStation.loaded == 1) {
 						EditStation.razEdition();
@@ -810,8 +813,8 @@ public class Utils {
 		ViewFile.nomFichier = directoryPath + "\\" + subfiles[0].getName(); //$NON-NLS-1$
 		ViewFile.nomRepertoire = directoryPath;
 
-		//System.out.println("Le chemin ==>" + directoryPath);
-		//System.out.println("Le fichier ==>" + ViewFile.nomFichier);
+		// System.out.println("Le chemin ==>" + directoryPath);
+		// System.out.println("Le fichier ==>" + ViewFile.nomFichier);
 
 		try {
 			Utils.insertTextFich(ViewFile.nomFichier,
@@ -851,7 +854,7 @@ public class Utils {
 		style.foreground = truc;
 
 		ViewLog.styledTextLogErreurs.setStyleRange(style);
-		
+
 		/*
 		 * mettre en gras et en couleur only le texte du message !
 		 * message.length et ensuite new styleRange() de 0 à length
@@ -886,9 +889,8 @@ public class Utils {
 
 	public static void messageOK(String message) {
 
-		
 		ViewLog.styledTextLogErreurs.setText(message);
-		Color truc = new Color(Application.display, 87, 168, 98);
+		Color truc = new Color(Application.display, 0, 151, 0);
 		// ViewLog.styledTextLogErreurs.setLineBackground(0, 1, truc);
 
 		StyleRange style = new StyleRange();
@@ -909,9 +911,8 @@ public class Utils {
 
 	public static void messageOKAppend(String message) {
 
-		
 		ViewLog.styledTextLogErreurs.append(message);
-		Color truc = new Color(Application.display, 87, 168, 98);
+		Color truc = new Color(Application.display, 0, 151, 0);
 		// ViewLog.styledTextLogErreurs.setLineBackground(0, 1, truc);
 
 		StyleRange style = new StyleRange();
@@ -930,186 +931,181 @@ public class Utils {
 
 	}
 
-	
-	
-	
-	public static void initConfig(){
-		//chargement de la config
-		if (configuration == null){
-		configuration = Configuration.getSingleton();}
-		else{
-			//configuration.save();
+	public static void initConfig() {
+		// chargement de la config
+		if (configuration == null) {
+			configuration = Configuration.getSingleton();
+		} else {
+			// configuration.save();
 			configuration.releaseSingleton();
 			configuration = Configuration.getSingleton();
 		}
-		
-		}
-	
-	
-	public static void saveConfig(){
-		//sauvegarde de la config dans le fichier qui va bien
-		//CONTACT
+
+	}
+
+	public static void saveConfig() {
+		// sauvegarde de la config dans le fichier qui va bien
+		// CONTACT
 		configuration.setContact(""); //$NON-NLS-1$
-		//DOSSIER
+		// DOSSIER
 		configuration.setModelsDirectory(OptionsAction.textDossier.getText());
-		//LANGUE
-		if (OptionsAction.comboLangue.getItem(OptionsAction.comboLangue.getSelectionIndex()).matches("Français")){ //$NON-NLS-1$
-			configuration.setLang("fr_FR");			 //$NON-NLS-1$
-		}else{
+		// LANGUE
+		if (OptionsAction.comboLangue.getItem(
+				OptionsAction.comboLangue.getSelectionIndex()).matches(
+				"Français")) { //$NON-NLS-1$
+			configuration.setLang("fr_FR"); //$NON-NLS-1$
+		} else {
 			configuration.setLang("en_GB"); //$NON-NLS-1$
 		}
-		
-		//WS
-		configuration.setNautilusWebServiceURL(OptionsAction.textAreaNautilus.getText());
-		configuration.setNemoWebServiceURL(OptionsAction.textAreaNemo.getText());
+
+		// WS
+		configuration.setNautilusWebServiceURL(OptionsAction.textAreaNautilus
+				.getText());
+		configuration
+				.setNemoWebServiceURL(OptionsAction.textAreaNemo.getText());
 
 		configuration.save();
-		
-		//System.out.println("sauvegarde options... ok");
-		
-	}
-	
-	
-	public static void razGlobal(){
-		//efface tous les onglets qui ont été affichés jusque là en préparation du chargement
-		//d'un nouveau modèle
-	
-	//si au moins une des sections d'un onglet est créée alors on peut les effacer toutes
-		if (EditDesc.sectionEnteteFichier != null){
-//			//effacement boutons
-			EditDesc.razEdition();
-//			EditDesc.buttonExpandDesc.dispose();
-//			EditDesc.buttonExpandDesc2.dispose();
-//			EditDesc.buttonRAZ.dispose();
-//			EditDesc.buttonValidateDesc.dispose();
-//			//effacement sections
-//			for (int i=0;i<=EditDesc.listeSectionsDesc.size()-1;i++){
-//				EditDesc.listeSectionsDesc.get(i).dispose();
-//				System.out.println("effacement zone edition etape description fichier ==> ok");
-//				}
-//			//effacement titre formulaire
-//			ViewEdit.formEdition.setText("");
-//			
-//			//refresh global
-//			ViewEdit.formEdition.reflow(true);
-		}
-		
-		
-		
-	
-		if (EditSurvey.sectionReference !=null){
-			
 
-//			effacement des boutons valider/expand/init serveur
+		// System.out.println("sauvegarde options... ok");
+
+	}
+
+	public static void razGlobal() {
+		// efface tous les onglets qui ont été affichés jusque là en préparation
+		// du chargement
+		// d'un nouveau modèle
+
+		// si au moins une des sections d'un onglet est créée alors on peut les
+		// effacer toutes
+		if (EditDesc.sectionEnteteFichier != null) {
+			// //effacement boutons
+			EditDesc.razEdition();
+			// EditDesc.buttonExpandDesc.dispose();
+			// EditDesc.buttonExpandDesc2.dispose();
+			// EditDesc.buttonRAZ.dispose();
+			// EditDesc.buttonValidateDesc.dispose();
+			// //effacement sections
+			// for (int i=0;i<=EditDesc.listeSectionsDesc.size()-1;i++){
+			// EditDesc.listeSectionsDesc.get(i).dispose();
+			// System.out.println("effacement zone edition etape description
+			// fichier ==> ok");
+			// }
+			// //effacement titre formulaire
+			// ViewEdit.formEdition.setText("");
+			//			
+			// //refresh global
+			// ViewEdit.formEdition.reflow(true);
+		}
+
+		if (EditSurvey.sectionReference != null) {
+
+			// effacement des boutons valider/expand/init serveur
 			EditSurvey.buttonExpand.dispose();
 			EditSurvey.buttonExpand2.dispose();
 			EditSurvey.buttonValidate.dispose();
 			EditSurvey.buttonInitServeur.dispose();
 			EditSurvey.buttonRAZ.dispose();
-			
-			for (int i=0;i<=EditSurvey.listeSectionsSurvey.size()-1;i++){
+
+			for (int i = 0; i <= EditSurvey.listeSectionsSurvey.size() - 1; i++) {
 				EditSurvey.listeSectionsSurvey.get(i).dispose();
-					}
-			//effacement titre formulaire
+			}
+			// effacement titre formulaire
 			ViewEdit.formEdition.setText(""); //$NON-NLS-1$
-			
-			//refresh global
+
+			// refresh global
 			ViewEdit.formEdition.reflow(true);
-			
+
 			EditSurvey.validee = 0;
 			EditSurvey.loaded = 0;
-			
-		}
-	
-		
-		if (EditStation.sectionTypeDonnees != null){
-			
 
-//			effacement des boutons valider/expand/init serveur
+		}
+
+		if (EditStation.sectionTypeDonnees != null) {
+
+			// effacement des boutons valider/expand/init serveur
 			EditStation.buttonExpand.dispose();
 			EditStation.buttonExpand2.dispose();
 			EditStation.buttonValidate.dispose();
 			EditStation.buttonRAZ.dispose();
 
-			for (int i=0;i<=EditStation.listeSectionsStation.size()-1;i++){
-			EditStation.listeSectionsStation.get(i).dispose();
+			for (int i = 0; i <= EditStation.listeSectionsStation.size() - 1; i++) {
+				EditStation.listeSectionsStation.get(i).dispose();
 			}
 
-//			titre à vide
+			// titre à vide
 			ViewEdit.formEdition.setText(""); //$NON-NLS-1$
 
-//			refresh global
+			// refresh global
 			ViewEdit.formEdition.reflow(true);
-			
+
 			EditStation.loaded = 0;
 			EditStation.validee = 0;
 		}
-		
-		
-		if (EditData.sectionTotal != null){
-//			effacement des boutons valider/expand/init serveur
-			//EditData.buttonExpand.dispose();
-			//EditData.buttonExpand2.dispose();
+
+		if (EditData.sectionTotal != null) {
+			// effacement des boutons valider/expand/init serveur
+			// EditData.buttonExpand.dispose();
+			// EditData.buttonExpand2.dispose();
 			EditData.buttonValidate.dispose();
 			EditData.buttonRAZ.dispose();
-			
-			
-			//effacement des boutons radio
+
+			// effacement des boutons radio
 			EditData.buttonFreqEchant.dispose();
 			EditData.buttonLigneDonnees.dispose();
-			//EditData.sectionTotal.dispose();
-			for (int i=0;i<=EditData.listeSectionsData.size()-1;i++){
+			// EditData.sectionTotal.dispose();
+			for (int i = 0; i <= EditData.listeSectionsData.size() - 1; i++) {
 				EditData.listeSectionsData.get(i).dispose();
-				}
-			
-//				titre à vide
-				ViewEdit.formEdition.setText(""); //$NON-NLS-1$
+			}
 
-//				refresh global
-				ViewEdit.formEdition.reflow(true);
-				
-				EditData.loaded = 0;
-				EditData.validee = 0;
-			
-			
-			
+			// titre à vide
+			ViewEdit.formEdition.setText(""); //$NON-NLS-1$
+
+			// refresh global
+			ViewEdit.formEdition.reflow(true);
+
+			EditData.loaded = 0;
+			EditData.validee = 0;
+
 		}
-		
-		//		effacement de la table data
-		if (ViewFile.tableData != null){ViewFile.tableData.dispose();};
+
+		// effacement de la table data
+		if (ViewFile.tableData != null) {
+			ViewFile.tableData.dispose();
+		}
+		;
 
 		EditDesc.validee = 0;
-		
 
-		//effacement des listes des onglets Survey et Data
-		if (TableDataSurvey.types != null){TableDataSurvey.types = new ArrayList<TypeSurvey>();}
-		if (TableData.types != null){TableData.types = new ArrayList<TypeData>();}	
-		
-		//reset des noms des onglets
+		// effacement des listes des onglets Survey et Data
+		if (TableDataSurvey.types != null) {
+			TableDataSurvey.types = new ArrayList<TypeSurvey>();
+		}
+		if (TableData.types != null) {
+			TableData.types = new ArrayList<TypeData>();
+		}
+
+		// reset des noms des onglets
 		ViewFile.tabItem.setText(Messages.getString("Utils.21")); //$NON-NLS-1$
 		ViewFile.tabItem1.setText(Messages.getString("Utils.22")); //$NON-NLS-1$
 		ViewFile.tabItem2.setText(Messages.getString("Utils.23")); //$NON-NLS-1$
 		ViewFile.tabItem3.setText(Messages.getString("Utils.24")); //$NON-NLS-1$
 		ViewFile.tabItem9.setText(Messages.getString("Utils.25")); //$NON-NLS-1$
-		
-		
-		//effacement du bouton conversion
-		if (EditConversion.buttonConversion != null){
+
+		// effacement du bouton conversion
+		if (EditConversion.buttonConversion != null) {
 			EditConversion.razEdition();
 		}
-		
-		
+
 		ViewEdit.formEdition.reflow(true);
-		
+
 	}
-	
-	public static void messageInfo(String message){
+
+	public static void messageInfo(String message) {
 		ViewLog.styledTextLogInfos.setText(message);
-	} 
-	
-public static void messageInfoAppend(String message){
-		ViewLog.styledTextLogInfos.append("\n"+message); //$NON-NLS-1$
-	} 
-	
-	
+	}
+
+	public static void messageInfoAppend(String message) {
+		ViewLog.styledTextLogInfos.append("\n" + message); //$NON-NLS-1$
+	}
+
 }

@@ -170,8 +170,8 @@ public class EditConversion extends Thread {
 			
 		//System.out.println("==== Fin de conversion ====");	
 		if (ViewFile.odv.getSelection()){
-		Utils.messageErreur(Messages.getString("EditConversion.9"));} //$NON-NLS-1$
-		else {Utils.messageErreur(Messages.getString("EditConversion.10"));} //$NON-NLS-1$
+		Utils.messageOK(Messages.getString("EditConversion.9"));} //$NON-NLS-1$
+		else {Utils.messageOK(Messages.getString("EditConversion.10"));} //$NON-NLS-1$
 		
 		shell.close();
 

@@ -139,7 +139,7 @@ public static void initTypes(){
 		type.setCode(wsParameter.getCode()+" - "+wsParameter.getName()); //$NON-NLS-1$
 		type.setUnite(wsParameter.getUnit());
 		type.setFormat(wsParameter.getFormat());
-		type.setEntree(wsParameter.getDefaultValue());
+		type.setEntree("");
 		type.setSortie(wsParameter.getDefaultValue());
 		
 		//type.setQc("N");
