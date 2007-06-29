@@ -784,6 +784,54 @@ public class Utils {
 
 	}
 
+	public static void messageOK(String message) {
+
+		
+		ViewLog.styledTextLogErreurs.setText(message);
+		Color truc = new Color(Application.display, 87, 168, 98);
+		// ViewLog.styledTextLogErreurs.setLineBackground(0, 1, truc);
+
+		StyleRange style = new StyleRange();
+		style.start = 0;
+		style.length = ViewLog.styledTextLogErreurs.getText().length();
+		// style.fontStyle = SWT.BOLD;
+		style.foreground = truc;
+
+		ViewLog.styledTextLogErreurs.setStyleRange(style);
+		/*
+		 * mettre en gras et en couleur only le texte du message !
+		 * message.length et ensuite new styleRange() de 0 à length
+		 * 
+		 * 
+		 */
+
+	}
+
+	public static void messageOKAppend(String message) {
+
+		
+		ViewLog.styledTextLogErreurs.append(message);
+		Color truc = new Color(Application.display, 87, 168, 98);
+		// ViewLog.styledTextLogErreurs.setLineBackground(0, 1, truc);
+
+		StyleRange style = new StyleRange();
+		style.start = 0;
+		style.length = ViewLog.styledTextLogErreurs.getText().length();
+		// style.fontStyle = SWT.BOLD;
+		style.foreground = truc;
+
+		ViewLog.styledTextLogErreurs.setStyleRange(style);
+		/*
+		 * mettre en gras et en couleur only le texte du message !
+		 * message.length et ensuite new styleRange() de 0 à length
+		 * 
+		 * 
+		 */
+
+	}
+
+	
+	
 	
 	public static void initConfig(){
 		//chargement de la config

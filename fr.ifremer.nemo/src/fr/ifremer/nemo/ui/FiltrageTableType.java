@@ -164,9 +164,10 @@ if (ViewFile.affiche ==3){
 	  		    		
 	  	 	 	        String mots[] = p.split(reference);
 	  		    	//	System.out.println("Lancement WS sur la référence :"+mots[0]);
-	  		    		EditSurvey.webService(reference);
+	  	 	 	        
+	  		    		EditSurvey.webService(mots[0]);
 	  		    	//	System.out.println("Fin de WS sur la référence :"+mots[0]);
-	  		    		
+	  		    		Utils.messageOK(Messages.getString("FiltrageTableType.21"));
 	  		    	  shell.close(); 
 	  		        if (EditSurvey.ws){
 	  	      			EditSurvey.ws = false;}

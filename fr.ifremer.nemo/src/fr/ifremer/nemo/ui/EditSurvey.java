@@ -195,6 +195,8 @@ public class EditSurvey {
 		Drawing.sectionNlabelsNtext(sectionCentre, Messages.getString("EditSurvey.29"), listeText, listeNoms, Messages.getString("EditSurvey.30"));	 //$NON-NLS-1$ //$NON-NLS-2$
 		listeText.clear();	
 		listeNoms.clear();
+		//FI par défaut pour le centre de données
+		textCentre.setText("FI");
 									  
 		
 		

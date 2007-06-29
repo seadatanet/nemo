@@ -180,7 +180,19 @@ public class Etape {
 		
 		if (TableDataSurvey.types.size() == 0){
 			Utils.messageErreur(Messages.getString("Etape.28")); //$NON-NLS-1$
-		ok = false;}
+		ok = false;}else{
+			//vérif si pas de "nombre=0"
+		int taille = TableDataSurvey.types.size();
+		for(int i =0; i<taille;i++){
+			int nbre = TableDataSurvey.types.get(i).getNombre();
+			if( nbre ==0){
+				Utils.messageErreur(Messages.getString("Etape.99")); //$NON-NLS-1$
+				ok = false;
+			}
+		}
+			
+			
+		}
 		
 		
 		if (ok){ 	
