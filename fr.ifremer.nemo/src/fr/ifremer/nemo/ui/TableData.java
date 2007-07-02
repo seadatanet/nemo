@@ -5,6 +5,7 @@ package fr.ifremer.nemo.ui;
 
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
@@ -414,6 +415,11 @@ public static void initTable(){
 	        });
 		
 
+		
+
+
+		
+	//agrandissement de la table	
 	ViewFile.compositeData.getParent().layout(true, true);
 	table.setLayout(new FillLayout());
 	table.redraw();
@@ -603,7 +609,18 @@ public static void initTable(){
 	 majTypeData();
 	 
 	 //on supprime l'élément à l'indice donné
-	 types.remove(indice);
+	 //	split sur " - "
+		Pattern p  = Pattern.compile(" - ");
+		String mots[] = p.split(types.get(indice).getCode());
+		String code = mots[0];
+		String nom = mots[1];
+	
+	if (!code.matches("PRES")){
+		types.remove(indice);	
+	}else{
+		Utils.messageErreur(Messages.getString("TableData.18"));
+	}
+	 
 	 
 	 //razTableData
 	 razTableData();

@@ -253,7 +253,7 @@ public static void initSurvey(){
 	//DATE DE DEBUT
 	try {
 		DateTimeFormat dateFormat = new DateTimeFormat();
-		dateFormat.setFormatString("dd/MM/yyyy");
+		dateFormat.setFormatString("yyyy-MM-dd");
 		Long dateLong = (Long)dateFormat.parseObject(EditSurvey.textDateDebut.getText());
 		survey.setStartDate(dateLong);
 	} catch (ParseException e) {
@@ -264,7 +264,7 @@ public static void initSurvey(){
 	//DATE DE FIN
 	try {
 		DateTimeFormat dateFormat = new DateTimeFormat();
-		dateFormat.setFormatString("dd/MM/yyyy");
+		dateFormat.setFormatString("yyyy-MM-dd");
 		Long dateLong = (Long)dateFormat.parseObject(EditSurvey.textDateFin.getText());
 		survey.setEndDate(dateLong);
 	} catch (ParseException e) {
@@ -873,7 +873,30 @@ if (ViewFile.checkBoxTempo.getSelection()){
 	if (EditStation.buttonProfFinSaisie.getSelection()){
 		propertyModel.setUserProvided(true);
 		//valeur manuelle
+		if (EditStation.textProfFin.getText().matches("")){
+			//on recopie profondeur dans profondeur de fin
+			PropertyModel propModelProfNormale = stationModel.getTimeSeriesModel().propertiesAt("bottomDepth");
+			if (propModelProfNormale.isUserProvided()){
+				//on recopie la valeur entrée par l'utilisateur
+				propertyModel.setUserProvided(true);
+				timeSeriesInformation.setEndDepth(EditStation.textProfondeur.getText());
+				
+			}else{
+				//memes valeurs de ligne/debut/fin que profondeur
+				HeaderFragment fragProf = propModelProfNormale.getFragment();
+				
+				propertyModel.setUserProvided(false);
+				frag = propertyModel.getFragment();
+				frag.setFirstLine(fragProf.getFirstLine());
+				frag.setLastLine(fragProf.getLastLine());
+				frag.setFirstCharOffset(fragProf.getFirstCharOffset());
+				frag.setLastCharOffset(fragProf.getLastCharOffset());
+			}
+		}
+		else{
+		
 		timeSeriesInformation.setEndDepth(EditStation.textProfFin.getText());
+		}
 	}else{
 		//position dans fichier
 		frag = propertyModel.getFragment();
@@ -908,17 +931,39 @@ if (ViewFile.checkBoxTempo.getSelection()){
 		propertyModel.setUserProvided(true);
 		//valeur manuelle
 	
-		if (!EditStation.textLatFin.getText().matches("")){
-		
-		//conversion en double
-		try {
-			double latitudeFinDouble = ((Number)latitudeFormatFin.parseObject(EditStation.textLatFin.getText())).doubleValue();
-			timeSeriesInformation.setEndLatitude(latitudeFinDouble);
-		} catch (ParseException e) {
+		if (!EditStation.textLongFin.getText().matches("")){
+			try {
+				double longitudeFinDouble = ((Number)latitudeFormatFin.parseObject(EditStation.textLongFin.getText())).doubleValue();
+				System.out.println("longitude de fin ="+EditStation.textLongFin.getText());
+				timeSeriesInformation.setEndLongitude(longitudeFinDouble);
+			} catch (ParseException e) {
+				
+				e.printStackTrace();
+			}
 			
-			e.printStackTrace();
-		}
-		}
+			}else{
+				//vide donc on recopie latitude dans latitude de fin
+				PropertyModel propLat = stationModel.getTimeSeriesModel().propertiesAt("latitude");
+				
+				if (propLat.isUserProvided()){
+					//on récupère le double de la latitude
+					propertyModel.setUserProvided(true);
+					stationModel.getTimeSeriesInformation().setEndLatitude(station.getLatitude());
+				}else{
+					//on remplit le frag
+					HeaderFragment fragLat = propLat.getFragment();
+					frag = propertyModel.getFragment();
+					propertyModel.setUserProvided(false);
+					frag.setFirstCharOffset(fragLat.getFirstCharOffset());
+					frag.setLastCharOffset(fragLat.getLastCharOffset());
+					frag.setFirstLine(fragLat.getFirstLine());
+					frag.setLastLine(fragLat.getLastLine());
+					
+				}
+				
+				
+			}
+			
 	}else{
 		//position dans fichier
 		frag = propertyModel.getFragment();
@@ -962,6 +1007,30 @@ if (ViewFile.checkBoxTempo.getSelection()){
 			e.printStackTrace();
 		}
 		
+		}else{
+			//vide donc on recopie la longitude comme longitude de fin
+			PropertyModel propLong = stationModel.propertiesAt("longitude");
+			
+			if (propLong.isUserProvided()){
+				//on recopie le double de la longitude
+				propertyModel.setUserProvided(true);
+				
+				stationModel.getTimeSeriesInformation().setEndLongitude(station.getLongitude());
+				
+			}else{
+				//on recopie le frag correspondant
+				propertyModel.setUserProvided(false);
+				
+				HeaderFragment fragLong = propLong.getFragment();
+				frag = propertyModel.getFragment();
+				
+				frag.setFirstCharOffset(fragLong.getFirstCharOffset());
+				frag.setLastCharOffset(fragLong.getLastCharOffset());
+				frag.setFirstLine(fragLong.getFirstLine());
+				frag.setLastLine(fragLong.getLastLine());
+							
+			}
+			
 		}
 		
 		
@@ -1199,7 +1268,7 @@ public static void fillDesc(){
 	if (stationModel_modele.getTimeSeriesInformation() != null){
 		//c'est une série tempo donc on coche la case qui va bien
 		ViewFile.checkBoxTempo.setSelection(true);
-		ViewFile.groupTempo.setVisible(true);
+		//ViewFile.groupTempo.setVisible(true);
 		
 		//heure et date de ref
 		
@@ -1311,7 +1380,7 @@ public static void fillSurvey(){
 	Formatter formatter = new Formatter();
 	
 	try {
-		EditSurvey.textDateDebut.setText(formatter.formatDateTime("dd/MM/yyyy", survey.getStartDate()));
+		EditSurvey.textDateDebut.setText(formatter.formatDateTime("yyyy-MM-dd", survey.getStartDate()));
 	} catch (ParseException e) {
 		
 		e.printStackTrace();
@@ -1320,7 +1389,7 @@ public static void fillSurvey(){
 	formatter = new Formatter();
 	
 	try {
-		EditSurvey.textDateFin.setText(formatter.formatDateTime("dd/MM/yyyy", survey.getEndDate()));
+		EditSurvey.textDateFin.setText(formatter.formatDateTime("yyyy-MM-dd", survey.getEndDate()));
 	} catch (ParseException e) {
 		
 		e.printStackTrace();
@@ -1455,6 +1524,8 @@ public static void fillStation(){
 	}else{
 		EditStation.buttonHistoriqueAcqPos.setSelection(true);
 		EditStation.buttonHistoriqueAcqSaisie.setSelection(false);
+		EditStation.textHistorique1.setEditable(false);
+		EditStation.textHistorique2.setEditable(false);
 		
 		HeaderFragment frag = propertyModel.getFragment();
 		HeaderFragment frag2 = propertyModel2.getFragment();

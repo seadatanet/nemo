@@ -76,6 +76,15 @@ public class Etape {
 			resultat = Regexp.checkTextValeur(EditDesc.nbreLignesMesures, Messages.getString("Etape.4")); //$NON-NLS-1$
 			//resultat = Regexp.checkLigneDebutfin(EditDesc.ruptureDonneesNoLigne, EditDesc.ruptureDonneesDebut, EditDesc.ruptureDonneesFin, "Indicateur de fin de données");
 		ok = ok && resultat;
+		}else{
+			//format de la combolist
+			if (EditDesc.comboIndicRuptureDonnees.getText().matches("")){
+				Utils.messageErreurAppend(Messages.getString("Etape.100"));
+				ok = false;
+			}
+			
+			
+			
 		}
 		
 		//check des valeurs date/heure séries tempo
@@ -157,7 +166,7 @@ public class Etape {
 		if (!EditSurvey.textDateDebut.getText().matches("")){ //$NON-NLS-1$
 		try {
 			DateTimeFormat dateFormat = new DateTimeFormat();
-			dateFormat.setFormatString("dd/MM/yyyy"); //$NON-NLS-1$
+			dateFormat.setFormatString("yyyy-MM-dd"); //$NON-NLS-1$
 			Long dateLong = (Long)dateFormat.parseObject(EditSurvey.textDateDebut.getText());
 			
 		} catch (ParseException e) {
@@ -169,7 +178,7 @@ public class Etape {
 		if (!EditSurvey.textDateFin.getText().matches("")){ //$NON-NLS-1$
 		try {
 			DateTimeFormat dateFormat = new DateTimeFormat();
-			dateFormat.setFormatString("dd/MM/yyyy"); //$NON-NLS-1$
+			dateFormat.setFormatString("yyyy-MM-dd"); //$NON-NLS-1$
 			Long dateLong = (Long)dateFormat.parseObject(EditSurvey.textDateFin.getText());
 			
 		} catch (ParseException e) {
@@ -277,7 +286,7 @@ public class Etape {
 				
 				ok = ok && false;
 				e.printStackTrace();
-								e.printStackTrace();
+								
 			}
 			
 		}else{
@@ -371,17 +380,18 @@ public class Etape {
 			resultat1 = Regexp.checkLigneDebutfin(EditStation.textProfondeurLigne, EditStation.textProfondeurDebut, EditStation.textProfondeurFin, Messages.getString("Etape.49"));  //$NON-NLS-1$
 			ok = ok && resultat1;
 			if (resultat1){
-				Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
+				//Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
 			}
 			
 		} else {
-			
+			if (!EditStation.textProfondeur.getText().matches("")){
 			if (Float.parseFloat(EditStation.textProfondeur.getText()) > 0){
 				ok = ok && true;
 				Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
 			} else {
 				ok = ok && false;
 				Utils.messageErreurAppend(Messages.getString("Etape.52")); //$NON-NLS-1$
+			}
 			}
 			
 		}

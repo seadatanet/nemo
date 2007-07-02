@@ -866,7 +866,10 @@ public class Utils {
 
 	public static void messageErreurAppend(String message) {
 
-		// TO DO : remettre en couleur les messages !!!
+	
+		
+		ViewLog.styledTextLogErreurs.append("\n");
+		
 		ViewLog.styledTextLogErreurs.append(message);
 		Color truc = new Color(Application.display, 255, 0, 0);
 		// ViewLog.styledTextLogErreurs.setLineBackground(0, 1, truc);

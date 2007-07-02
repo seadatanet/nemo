@@ -54,13 +54,13 @@ public void run(){
 	
 	MessageBox mb = new MessageBox(s, SWT.ICON_QUESTION |SWT.YES | SWT.NO);
 	mb.setMessage(Messages.getString("ExitAction.2")); //$NON-NLS-1$
-	reponse = mb.open();
+	//reponse = mb.open();
 	
-	if (reponse == SWT.YES){
+	//if (reponse == SWT.YES){
 		ApplicationActionBarAdvisor.exitActionQuit.run();
 		//Application.display.dispose();
 		
-	}
+//	}
 	
 }
 
