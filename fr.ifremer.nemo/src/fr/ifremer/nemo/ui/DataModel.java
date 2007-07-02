@@ -473,11 +473,11 @@ public static void initStation(){
 		fin = EditStation.textCommentaireFin.getText();
 					
 		frag.setFirstLine(ligne);
-		frag.setLastLine(ligne);
+		//frag.setLastLine(ligne);
 		frag.setFirstCharOffset(debut);
 		frag.setLastCharOffset(fin);
 		
-		//Utils.calculNbreLignesPuisRemplissageFrag(frag);
+		Utils.calculNbreLignesPuisRemplissageFrag(frag);
 		
 		
 	}

@@ -463,7 +463,7 @@ public class Utils {
 			frag.setSingleLine(true);
 		} else {
 			frag.setSingleLine(false);
-			frag.setLastLine(frag.getFirstLine() + nbrelignes);
+			frag.setLastLine(frag.getFirstLine() + nbrelignes-1);
 		}
 
 	}
