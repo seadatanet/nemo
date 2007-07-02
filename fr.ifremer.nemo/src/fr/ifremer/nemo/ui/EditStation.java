@@ -25,7 +25,7 @@ public class EditStation {
 	public static Button buttonHistoriqueAcqPos,buttonRefStationPos,buttonSurfacePos,buttonLatPos,buttonLongPos,buttonCommentairePos,buttonProfondeurPos;
 	public static Button buttonLatFinPos, buttonLongFinPos, buttonProfFinPos, buttonProfCapteurPos, buttonDeclinMagnetPos, buttonFreqEchantPos, buttonLatFinSaisie, buttonLongFinSaisie, buttonProfFinSaisie, buttonProfCapteurSaisie, buttonDeclinMagnetSaisie, buttonFreqEchantSaisie;
 	public static Button buttonHeureReference, buttonDateReference, buttonHeureReferencePos, buttonDateReferencePos;
-	public static Button buttonHeurePos, buttonHeureSaisie, buttonDatePos, buttonDateSaisie;
+	public static Button buttonHeurePos, buttonHeureSaisie, buttonDatePos, buttonDateSaisie, buttonTUPos;
 
 	public static Combo comboRefStationType, comboHeure, comboDate, comboLatitude, comboLongitude;
 	public static Section sectionQCDate ,sectionQCLat, sectionQCLong ,sectionQCProf;
@@ -134,7 +134,7 @@ DrawingStation.sectionHistoriqueAcquisition(Messages.getString("EditStation.11")
 
 
 //section décallage TU
-//DrawingStation.sectionManuelLigneDebutFinInject("Décallage/TU                           ", "", sectionTU, textTULigne, textTUDebut, textTUFin, textTU, buttonTUSaisie);
+DrawingStation.sectionManuelLigneDebutFinInject(Messages.getString("EditStation.86"), "", sectionTU, textTULigne, textTUDebut, textTUFin, textTU, buttonTUSaisie, buttonTUPos);
 
 
 //section heure
@@ -588,6 +588,7 @@ buttonSurfaceSaisie = new Button(shell, SWT.RADIO);
 buttonSurfacePos = new Button(shell, SWT.RADIO);
 
 buttonTUSaisie  = new Button(shell, SWT.RADIO);
+buttonTUPos  = new Button(shell, SWT.RADIO);
 
 buttonLatSaisie  = new Button(shell, SWT.RADIO);
 buttonLatPos  = new Button(shell, SWT.RADIO);

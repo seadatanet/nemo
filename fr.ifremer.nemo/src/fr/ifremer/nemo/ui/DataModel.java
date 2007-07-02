@@ -533,19 +533,21 @@ public static void initStation(){
 		
 //décallage TU
 	propertyModel = stationModel.propertiesAt("offsetTU");
-	propertyModel.setUserProvided(true);
-	station.setOffsetTU("0.0");
+	//propertyModel.setUserProvided(true);
+	//station.setOffsetTU("0.0");
 	
-	/*
-	//if (EditStation.buttonTUSaisie.getSelection()){
-		if (true){
+	
+	if (EditStation.buttonTUSaisie.getSelection()){
+		//if (true){
 			//mise à true pour passage obligatoire ! TODO
 		//saisie manuelle
 		//station.setLatitude(EditStation.textTU.getText());
-		station.setOffsetTU("0.0");
+			station.setOffsetTU(EditStation.textTU.getText());
 			propertyModel.setUserProvided(true);
 		
-	} else {
+	//} 
+	}
+	else {
 		propertyModel.setUserProvided(false);
 		//position dans fichier
 		
@@ -562,7 +564,7 @@ public static void initStation(){
 		frag.setLastCharOffset(fin);
 		
 	}
-	*/
+	
 
 	
 //		frequence echantillonnage		
@@ -931,11 +933,11 @@ if (ViewFile.checkBoxTempo.getSelection()){
 		propertyModel.setUserProvided(true);
 		//valeur manuelle
 	
-		if (!EditStation.textLongFin.getText().matches("")){
+		if (!EditStation.textLatFin.getText().matches("")){
 			try {
-				double longitudeFinDouble = ((Number)latitudeFormatFin.parseObject(EditStation.textLongFin.getText())).doubleValue();
-				System.out.println("longitude de fin ="+EditStation.textLongFin.getText());
-				timeSeriesInformation.setEndLongitude(longitudeFinDouble);
+				double latitudeFinDouble = ((Number)latitudeFormatFin.parseObject(EditStation.textLatFin.getText())).doubleValue();
+				System.out.println("longitude de fin ="+EditStation.textLatFin.getText());
+				timeSeriesInformation.setEndLatitude(latitudeFinDouble);
 			} catch (ParseException e) {
 				
 				e.printStackTrace();
@@ -943,7 +945,7 @@ if (ViewFile.checkBoxTempo.getSelection()){
 			
 			}else{
 				//vide donc on recopie latitude dans latitude de fin
-				PropertyModel propLat = stationModel.getTimeSeriesModel().propertiesAt("latitude");
+				PropertyModel propLat = stationModel.propertiesAt("latitude");
 				
 				if (propLat.isUserProvided()){
 					//on récupère le double de la latitude
@@ -2028,9 +2030,41 @@ public static void fillStation(){
 		}		
 		
 		
+	//DECALLAGE TU
+	propertyModel = stationModel_modele.propertiesAt("offsetTU");
+	if (propertyModel.isUserProvided()){
+		//saisie utilisateur
+		EditStation.buttonTUSaisie.setSelection(true);
+		EditStation.buttonTUPos.setSelection(false);
+		EditStation.textTUDebut.setEnabled(false);
+		EditStation.textTULigne.setEnabled(false);
+		EditStation.textTUFin.setEnabled(false);
+		EditStation.textTU.setText(""+station_modele.getOffsetTU());
 		
 		
-	System.out.println("Fin remplissage onglet Station");
+		
+	}else{
+		//position fichier
+		frag = propertyModel.getFragment();
+		
+		EditStation.buttonTUSaisie.setSelection(false);
+		EditStation.buttonTUPos.setSelection(true);
+		EditStation.textTUDebut.setEnabled(true);
+		EditStation.textTULigne.setEnabled(true);
+		EditStation.textTUFin.setEnabled(true);
+		
+		EditStation.textTULigne.setText(""+frag.getFirstLine());
+		EditStation.textTUDebut.setText(""+frag.getFirstCharOffset());
+		EditStation.textTUFin.setText(""+frag.getLastCharOffset());
+		
+		
+		
+		
+	}
+		
+		
+		
+	//System.out.println("Fin remplissage onglet Station");
 		
 	
 }
