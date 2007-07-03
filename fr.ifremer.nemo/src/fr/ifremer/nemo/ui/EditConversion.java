@@ -72,7 +72,8 @@ public class EditConversion extends Thread {
 			choixFichierSortie();
 			
 			java.io.FileInputStream stream = null;
-				
+		
+		Utils.messageErreur("");
 		new SWTProgress().run();
 			
 		//System.out.println("==== Fin de conversion ====");	

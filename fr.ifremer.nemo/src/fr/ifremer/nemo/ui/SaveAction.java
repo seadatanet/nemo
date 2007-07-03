@@ -49,7 +49,7 @@ public void dispose(){
 
 public void run(){
 	//sauvegarde du modèle
-	System.out.println("Menu save"); //$NON-NLS-1$
+	//System.out.println("Menu save"); //$NON-NLS-1$
 	
 	FileOutputStream fileOutputStream= null;
 	
@@ -66,7 +66,7 @@ public void run(){
 			e.printStackTrace();
 		}
 		DataModel.inputModel.writeXMLOn(fileOutputStream);
-		Utils.messageErreur(Messages.getString("SaveAction.4")); //$NON-NLS-1$
+		Utils.messageOK(Messages.getString("SaveAction.4")); //$NON-NLS-1$
 	}
 	
 }

@@ -29,14 +29,13 @@ public class SWTProcess implements IRunnableWithProgress{
 	public static ODVSurveyWriter writerODV;
 	public static MedatlasSurveyWriter writerMed;
 	public static Boolean odv;
+	public static IProgressMonitor monitor2;
 
 	  public void run(IProgressMonitor monitor) throws InvocationTargetException, 
 	                                                   InterruptedException {
 	    monitor.beginTask(Messages.getString("SWTProcess.1"), IProgressMonitor.UNKNOWN);
 	    
 	    
-	    final IProgressMonitor monitor2;
-	  
 	    monitor2 = monitor;
 
 	    //NOTIFIER
@@ -45,20 +44,18 @@ public class SWTProcess implements IRunnableWithProgress{
             	try {	
             			Application.display.syncExec( new Runnable() {
                                                       public void run() {
-                                                   	 // monitor2.worked((Integer)val/100);
-                                                         monitor2.subTask(Messages.getString("SWTProcess.2")+val+"%");
-                                                   	  //monitor2.worked(1);
-                                                      }
+                                                   	 monitor2.subTask(Messages.getString("SWTProcess.2")+val+"%");
+                                                   	   }
                                                   });
                 } catch (Exception e) {
                 }
             }
         };
 	    
-	    
 	    //TACHE A EFFECTUER
 	
 		try {
+			notifier.progress(0);
 			monitor.setTaskName(Messages.getString("SWTProcess.3"));
 			survey = DataModel.inputModel.convert(notifier);
 		} catch (FileNotFoundException e) {
@@ -74,10 +71,10 @@ public class SWTProcess implements IRunnableWithProgress{
 		
 		writerODV = new fr.ifremer.nemo.odv.ODVSurveyWriter();
 		writerMed = new fr.ifremer.nemo.medatlas.MedatlasSurveyWriter();
-		notifier.progress(0);
+		
 		
 		try {
-			monitor.setTaskName(Messages.getString("SWTProcess.4"));
+			monitor2.setTaskName(Messages.getString("SWTProcess.4"));
 			
 			if (!odv){
 				//MEDATLAS
@@ -96,8 +93,13 @@ public class SWTProcess implements IRunnableWithProgress{
 			e.printStackTrace();
 		}
 		
+		//nettoyage memoire
+		if (odv){writerODV.release();}else{writerMed.release();}
+		survey.release();
+		
 	    monitor.done();
 	 
+	    
 	  }
 	
 }

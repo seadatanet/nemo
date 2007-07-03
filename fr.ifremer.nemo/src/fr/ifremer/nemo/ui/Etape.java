@@ -533,7 +533,7 @@ public class Etape {
 				resultat1 = Regexp.checkLigneDebutfin(EditStation.textProfFinLigne, EditStation.textProfFinDebut, EditStation.textProfFinFin, Messages.getString("Etape.69"));  //$NON-NLS-1$
 				ok = ok && resultat1;
 				if (resultat1){
-					Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
+					//Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
 				}
 				
 			} else {
@@ -541,7 +541,7 @@ public class Etape {
 				Utils.messageErreurAppend(Messages.getString("Etape.72")); //$NON-NLS-1$
 				if (Float.parseFloat(EditStation.textProfFin.getText()) > 0){
 					ok = ok && true;
-					Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
+					//Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
 				} else {
 					ok = ok && false;
 					Utils.messageErreurAppend(Messages.getString("Etape.74")); //$NON-NLS-1$
@@ -559,7 +559,7 @@ public class Etape {
 				resultat1 = Regexp.checkLigneDebutfin(EditStation.textProfCapteurLigne, EditStation.textProfCapteurDebut, EditStation.textProfCapteurFin, Messages.getString("Etape.75"));  //$NON-NLS-1$
 				ok = ok && resultat1;
 				if (resultat1){
-					Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
+					//Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
 				}
 				
 			} else {
@@ -570,7 +570,7 @@ public class Etape {
 				else{
 				if (Float.parseFloat(EditStation.textProfCapteur.getText()) > 0){
 					ok = ok && true;
-					Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
+					//Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
 				} else {
 					ok = ok && false;
 					Utils.messageErreurAppend(Messages.getString("Etape.81")); //$NON-NLS-1$
@@ -584,7 +584,7 @@ public class Etape {
 				resultat1 = Regexp.checkLigneDebutfin(EditStation.textDeclinMagnetLigne, EditStation.textDeclinMagnetDebut, EditStation.textDeclinMagnetFin, Messages.getString("Etape.82"));  //$NON-NLS-1$
 				ok = ok && resultat1;
 				if (resultat1){
-					Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
+					//Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
 				}
 				
 			} else {

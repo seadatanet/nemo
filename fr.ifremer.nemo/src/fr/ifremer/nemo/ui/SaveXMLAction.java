@@ -48,7 +48,7 @@ public void dispose(){
 
 public void run(){
 	//sauvegarde du modèle
-	System.out.println("Menu save");
+	//System.out.println("Menu save");
 	
 	FileOutputStream fileOutputStream= null;
 	

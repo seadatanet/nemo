@@ -1589,10 +1589,10 @@ public static void fillStation(){
 	 	
 	 	
 //	 	FLAGS QC
-		EditStation.textQCDate.setText(""+station.getDateQC());
-		EditStation.textQCLat.setText(""+station.getLatQC());
-		EditStation.textQCLong.setText(""+station.getLongQC());
-		EditStation.textQCProf.setText(""+station.getDepthQC());	
+//		EditStation.textQCDate.setText(""+station.getDateQC());
+//		EditStation.textQCLat.setText(""+station.getLatQC());
+//		EditStation.textQCLong.setText(""+station.getLongQC());
+//		EditStation.textQCProf.setText(""+station.getDepthQC());	
 	 	
 	 	
 	 	
