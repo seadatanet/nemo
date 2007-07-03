@@ -106,6 +106,7 @@ public static void creationTable(){
 		tableColumn6.setText(Messages.getString("TableData.7")); //$NON-NLS-1$
 		tableColumn6.setAlignment(SWT.RIGHT);
 		
+		
 		TableColumn tableColumn7 = new TableColumn(table, SWT.NONE);
 		tableColumn7.setWidth(100);
 		tableColumn7.setText(Messages.getString("TableData.8")); //$NON-NLS-1$

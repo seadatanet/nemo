@@ -45,6 +45,9 @@
       <product
             application="fr.ifremer.nemo.nemoid"
             name="NEMO">
+         <property
+               name="windowImages"
+               value="nemo16.gif,nemo32.gif"/>
       </product>
    </extension>
 
