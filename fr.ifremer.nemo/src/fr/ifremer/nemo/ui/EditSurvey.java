@@ -55,6 +55,7 @@ public class EditSurvey {
 	public static ArrayList <Label> listeSectionsLabel;
 	public static ArrayList <Text> listeTextSurvey;
 	public static int expand, validee, loaded;
+	public static Combo comboConfid;
 	public static List listeType;
 	public static Boolean ws;
 	public static ScrolledForm formEdition;
@@ -123,6 +124,7 @@ public class EditSurvey {
 			initText();
 			initBoutons();
 			initListeType();
+			initCombos();
 			
 			//boutons collapse all / expand all
 			
@@ -191,8 +193,8 @@ public class EditSurvey {
 			
 		//section centre archivage
 		listeText.add(textCentre); listeNoms.add(Messages.getString("EditSurvey.27")); //$NON-NLS-1$
-		listeText.add(textConfidentiel); listeNoms.add(Messages.getString("EditSurvey.28")); //$NON-NLS-1$
-		Drawing.sectionNlabelsNtext(sectionCentre, Messages.getString("EditSurvey.29"), listeText, listeNoms, Messages.getString("EditSurvey.30"));	 //$NON-NLS-1$ //$NON-NLS-2$
+		//listeText.add(textConfidentiel); listeNoms.add(Messages.getString("EditSurvey.28")); //$NON-NLS-1$
+		Drawing.sectionNlabelsNtextConfidentialite(sectionCentre, Messages.getString("EditSurvey.29"), listeText, listeNoms, Messages.getString("EditSurvey.30"), comboConfid);	 //$NON-NLS-1$ //$NON-NLS-2$
 		listeText.clear();	
 		listeNoms.clear();
 		//FI par défaut pour le centre de données
@@ -853,23 +855,6 @@ public static void chargementXML(File fichier){
 		
 		//remplissage de la liste des textes
 		
-		
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}	
 		
 	public static void initBoutons(){
@@ -884,7 +869,15 @@ public static void chargementXML(File fichier){
 				
 	}
 		
-
+	public static void initCombos(){
+		Shell shell = new Shell();
+		comboConfid = new Combo(shell, SWT.READ_ONLY);
+		comboConfid.add("P - Public");
+		comboConfid.add("L - Limited");
+		comboConfid.add("C - Confidential");
+		comboConfid.select(0);
+	}
+	
 	public static void initListeType(){
 		
 		Shell shell = new Shell();

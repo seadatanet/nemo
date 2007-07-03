@@ -1146,7 +1146,68 @@ public static void sectionNlabelsNtext(Section section, String nomSection, Array
 	
 }
 
+public static void sectionNlabelsNtextConfidentialite(Section section, String nomSection, ArrayList <Text> listeText, ArrayList <String> listeNoms, String descriptionSection, Combo confidentialite){
+	
+	int nbre, i;	
+	final String nomSec;
+	final ScrolledForm forme;
 
+
+	
+	nbre = listeText.size();
+	System.out.println("=================ok1===========<<<" + nbre);
+
+	
+	
+	//affichage section
+	section.setParent(ViewEdit.formEdition);
+	section = ViewEdit.toolkitEdition.createSection(ViewEdit.formEdition.getBody(), 
+			  Section.DESCRIPTION|Section.TITLE_BAR|
+			  Section.TWISTIE|Section.COMPACT);
+	
+
+	
+	  section.addExpansionListener(new ExpansionAdapter() {
+			  public void expansionStateChanged(ExpansionEvent e) {
+				  ViewEdit.formEdition.reflow(true);
+			  }
+			 });
+	  section.setText(nomSection);
+	  Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL );
+	  section.setFont(font);
+	  section.setDescription(descriptionSection);
+			 Composite sectionClient = ViewEdit.toolkitEdition.createComposite(section);
+			 sectionClient.setLayout(new GridLayout());
+			GridData gd = new GridData();
+			  gd.horizontalSpan = 2;
+	
+				System.out.println("=================ok1===========");
+	for (i=0; i<nbre; i++){
+
+		//label avec le texte de "description"
+		Label label = new Label(sectionClient, SWT.NULL);
+		label.setText(listeNoms.get(i));
+		System.out.println("creation de" + listeNoms.get(i));
+		
+		
+		//affichage zone texte dans la section
+		listeText.get(i).setParent(sectionClient);
+		listeText.get(i).setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+			
+	}
+	
+	//ajout de la combolist confidentialite
+	Label label2 = new Label(sectionClient, SWT.NULL);
+	label2.setText(Messages.getString("EditSurvey.28"));
+	confidentialite.setParent(sectionClient);
+	
+	
+	section.setClient(sectionClient);
+	 //ajout de la section dans la liste des sections de description
+	  ajoutSectionDansListeSurvey(section);  
+	  ViewEdit.formEdition.reflow(true);
+	
+}
 
 public static void sectionNlabelsNtextListe(Section section, String nomSection, ArrayList <Text> listeText, ArrayList <String> listeNoms, String descriptionSection, List liste){
 	

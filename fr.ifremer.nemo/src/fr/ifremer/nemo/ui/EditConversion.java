@@ -70,49 +70,16 @@ public class EditConversion extends Thread {
 				
 		//test pour savoir si on est en campagne ou pas
 			choixFichierSortie();
-		
-		
 			
-			shell = new Shell(SWT.NONE);	
-			shell.setSize(500, 20);
-    		shell.setBounds(100, 100, 500, 20);
-    		//shell.open();
-    		
-    		final ProgressBar progressbar = new ProgressBar(shell,
-  				  SWT.HORIZONTAL | SWT.SMOOTH);
-  				progressbar.setMinimum(0);
-  				progressbar.setMaximum(100);
-  				//progressbar.setSize(200,20);
-  				
-  				progressbar.setBounds(0,0, 500, 20);
-  				shell.setText(Messages.getString("EditConversion.3")); //$NON-NLS-1$
-  				shell.pack();
-    		
 			java.io.FileInputStream stream = null;
-	
-		
-			Utils.progression = 0;
-			
-			
-			
-			
+				
 		new SWTProgress().run();
-		
-			
-		
-			
 			
 		//System.out.println("==== Fin de conversion ====");	
 		if (ViewFile.odv.getSelection()){
 		Utils.messageOK(Messages.getString("EditConversion.9"));} //$NON-NLS-1$
 		else {Utils.messageOK(Messages.getString("EditConversion.10"));} //$NON-NLS-1$
-		
-		shell.close();
-
-		
-		
-		
-		}
+				}
 		});
 	
 		ViewFile.affiche = 4;

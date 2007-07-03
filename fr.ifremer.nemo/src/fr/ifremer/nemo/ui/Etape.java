@@ -157,8 +157,8 @@ public class Etape {
 		ok = ok && resultat;
 		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textCentre, Messages.getString("Etape.20")); //$NON-NLS-1$
 		ok = ok && resultat;
-		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textConfidentiel, Messages.getString("Etape.21")); //$NON-NLS-1$
-		ok = ok && resultat;
+		//resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textConfidentiel, Messages.getString("Etape.21")); //$NON-NLS-1$
+		//ok = ok && resultat;
 		
 		
 		

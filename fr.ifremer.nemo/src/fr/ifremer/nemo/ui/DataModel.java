@@ -283,7 +283,11 @@ public static void initSurvey(){
 	
 	//Centre d'archivage
 	survey.setDataCentre(EditSurvey.textCentre.getText());
-	survey.setAvailability(EditSurvey.textConfidentiel.getText());
+	
+	//confidentialité
+	if (EditSurvey.comboConfid.getText().matches("P - Public")){survey.setAvailability("publicly");}
+	if (EditSurvey.comboConfid.getText().matches("L - Limited")){survey.setAvailability("limited");}
+	if (EditSurvey.comboConfid.getText().matches("C - Confidential")){survey.setAvailability("confidential");}
 		
 	//Commentaire
 	survey.setComment(EditSurvey.textCommentaire.getText());
@@ -1407,7 +1411,14 @@ public static void fillSurvey(){
 	
 	//Centre d'archivage
 	EditSurvey.textCentre.setText(survey.getDataCentre());
-	EditSurvey.textConfidentiel.setText(""+survey.getAvailability());
+	
+	//confidentialité
+	String code = survey.getAvailabilityCode();
+	if (code.matches("P")){EditSurvey.comboConfid.select(0);}
+	if (code.matches("L")){EditSurvey.comboConfid.select(1);}
+	if (code.matches("C")){EditSurvey.comboConfid.select(2);}
+	
+	
 	
 	//Commentaire
 	EditSurvey.textCommentaire.setText(survey.getComment());

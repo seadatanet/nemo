@@ -32,8 +32,9 @@ public class SWTProcess implements IRunnableWithProgress{
 
 	  public void run(IProgressMonitor monitor) throws InvocationTargetException, 
 	                                                   InterruptedException {
-	    monitor.beginTask("Conversion en cours... Veuillez patienter...", IProgressMonitor.UNKNOWN);
-	  
+	    monitor.beginTask(Messages.getString("SWTProcess.1"), IProgressMonitor.UNKNOWN);
+	    
+	    
 	    final IProgressMonitor monitor2;
 	  
 	    monitor2 = monitor;
@@ -45,7 +46,7 @@ public class SWTProcess implements IRunnableWithProgress{
             			Application.display.syncExec( new Runnable() {
                                                       public void run() {
                                                    	 // monitor2.worked((Integer)val/100);
-                                                         monitor2.subTask("Avancement : "+val+"%");
+                                                         monitor2.subTask(Messages.getString("SWTProcess.2")+val+"%");
                                                    	  //monitor2.worked(1);
                                                       }
                                                   });
@@ -58,7 +59,7 @@ public class SWTProcess implements IRunnableWithProgress{
 	    //TACHE A EFFECTUER
 	
 		try {
-			monitor.setTaskName("Conversion du fichier en mémoire...");
+			monitor.setTaskName(Messages.getString("SWTProcess.3"));
 			survey = DataModel.inputModel.convert(notifier);
 		} catch (FileNotFoundException e) {
 			//
@@ -76,7 +77,7 @@ public class SWTProcess implements IRunnableWithProgress{
 		notifier.progress(0);
 		
 		try {
-			monitor.setTaskName("Ecriture du fichier sur le disque...");
+			monitor.setTaskName(Messages.getString("SWTProcess.4"));
 			
 			if (!odv){
 				//MEDATLAS
