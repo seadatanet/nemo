@@ -387,7 +387,7 @@ public class Etape {
 			if (!EditStation.textProfondeur.getText().matches("")){
 			if (Float.parseFloat(EditStation.textProfondeur.getText()) > 0){
 				ok = ok && true;
-				Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
+				//Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
 			} else {
 				ok = ok && false;
 				Utils.messageErreurAppend(Messages.getString("Etape.52")); //$NON-NLS-1$
@@ -485,6 +485,7 @@ public class Etape {
 					ok = ok && true;
 				}else
 				{
+					if (!EditStation.textLatFin.getText().matches("")){
 					try {
 						LatitudeFormat latitudeFormat = new LatitudeFormat(EditStation.comboLatitude.getText());
 						latitudeFormat.parseObject(EditStation.textLatFin.getText());
@@ -493,7 +494,7 @@ public class Etape {
 						Utils.messageErreurAppend(Messages.getString("Etape.64")); //$NON-NLS-1$
 						e.printStackTrace();
 					}
-					
+				}
 					}
 			}else{
 				//position dans fichier
@@ -510,6 +511,7 @@ public class Etape {
 				}
 				else
 				{
+					if (!EditStation.textLongFin.getText().matches("")){
 					try {
 						LongitudeFormat longitudeFormat = new LongitudeFormat(EditStation.comboLongitude.getText());
 						longitudeFormat.parseObject(EditStation.textLongFin.getText());
@@ -518,7 +520,7 @@ public class Etape {
 						Utils.messageErreurAppend(Messages.getString("Etape.67")); //$NON-NLS-1$
 						e.printStackTrace();
 								}
-			
+					}
 				}
 			} else{
 				//position dans fichier
@@ -588,7 +590,7 @@ public class Etape {
 				}
 				
 			} else {
-				Utils.messageErreurAppend(Messages.getString("Etape.84")); //$NON-NLS-1$
+				//Utils.messageErreurAppend(Messages.getString("Etape.84")); //$NON-NLS-1$
 				ok = ok && true;
 				
 			}

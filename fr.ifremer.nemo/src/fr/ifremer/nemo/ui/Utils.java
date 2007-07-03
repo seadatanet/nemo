@@ -133,6 +133,7 @@ public class Utils {
 
 		// réactivation de l'option série temporelle onglet DESC
 		ViewFile.checkBoxTempo.setEnabled(true);
+		ViewFile.checkBoxTempo.setSelection(false);
 
 		// RAZ global si réouverture fichier en cours de processus
 		Utils.razGlobal();
