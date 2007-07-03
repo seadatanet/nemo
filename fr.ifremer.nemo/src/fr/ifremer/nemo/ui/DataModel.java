@@ -304,7 +304,13 @@ public static void initSurvey(){
 		DataType dataType = new DataType();
 		dataType.setCode(typeSurvey.getCode());
 		dataType.setNumberOfProfiles(typeSurvey.getNombre());
-		dataType.setQc(typeSurvey.getQc());
+		
+		if (typeSurvey.getQc().matches("Y")){
+			dataType.setQc(true);
+		}else{
+			dataType.setQc(false);
+		}
+		//dataType.setQc(typeSurvey.getQc());
 		dataType.setSensor(typeSurvey.getSensor());
 		
 		//test par rapport aux types deja présents dans le DataModel  
@@ -1432,7 +1438,13 @@ public static void fillSurvey(){
 		TypeSurvey typeSurvey = new TypeSurvey();
 		typeSurvey.setCode(dataTypes[i].getCode());
 		typeSurvey.setNombre(dataTypes[i].getNumberOfProfiles());
-		typeSurvey.setQc(""+dataTypes[i].isQc());
+		
+		//QC
+		if (dataTypes[i].isQc()){typeSurvey.setQc("Y");}
+		else{typeSurvey.setQc("N");}
+		//typeSurvey.setQc(""+dataTypes[i].isQc());
+		
+		
 		typeSurvey.setSensor(dataTypes[i].isSensor());
 				
 		TableDataSurvey.types.add(typeSurvey);
