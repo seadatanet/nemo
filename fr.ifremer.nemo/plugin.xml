@@ -48,6 +48,12 @@
          <property
                name="windowImages"
                value="nemo16.gif,nemo32.gif"/>
+         <property
+               name="aboutImage"
+               value="nemoAbout.gif"/>
+         <property
+               name="aboutText"
+               value="%aboutText"/>
       </product>
    </extension>
 

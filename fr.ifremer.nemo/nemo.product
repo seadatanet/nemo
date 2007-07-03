@@ -3,6 +3,12 @@
 
 <product name="NEMO" id="fr.ifremer.nemo.productnemo" application="fr.ifremer.nemo.nemoid" useFeatures="false">
 
+   <aboutInfo>
+      <image path="/NEMO_product/nemoAbout.gif"/>
+      <text>
+         %aboutText
+      </text>
+   </aboutInfo>
 
    <configIni use="default"/>
 
