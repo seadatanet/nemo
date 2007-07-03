@@ -64,25 +64,24 @@ public  class TestNemo implements Cloneable {
    * @param  args  
    */
   public static void main ( String[] args) {
-    JFrame frame = new JFrame("Test NEMO");
-    final JProgressBar progress =  new JProgressBar( 0, 100);
-    frame.getContentPane().add(progress);
-    ProgressNotification notifier = new ProgressNotification() {
-    	                                public void progress(final int val) {
-    		                                try {
-    		                                	
-    		                                	Application.display.syncExec( new Runnable() {
-    				                                                              public void run() {
-    					                                                              progress.setValue(val);
-    				                                                              }
-    			                                                              });
-    		                                } catch (Exception e) {
-    		                                }
-    	                                }
-                                    };
-    frame.pack();
-    frame.setVisible(true);
-    doConvert( args[0], args[1], notifier );
-  }
+	    JFrame frame = new JFrame("Test NEMO");
+	    final JProgressBar progress =  new JProgressBar( 0, 100);
+	    frame.getContentPane().add(progress);
+	    ProgressNotification notifier = new ProgressNotification() {
+	    	                                public void progress(final int val) {
+	    		                                try {
+	    			                                SwingUtilities.invokeAndWait( new Runnable() {
+	    				                                                              public void run() {
+	    					                                                              progress.setValue(val);
+	    				                                                              }
+	    			                                                              });
+	    		                                } catch (Exception e) {
+	    		                                }
+	    	                                }
+	                                    };
+	    frame.pack();
+	    frame.setVisible(true);
+	    doConvert( args[0], args[1], notifier );
+	  }
 
 } /* End of class: TestNemo */

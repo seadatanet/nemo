@@ -52,7 +52,7 @@ public class ViewFile extends ViewPart {
 
 	private Composite composite12 = null;
 
-	public static Button checkBoxTempo, medatlas, odv = null;
+	public static Button checkBoxTempo, medatlas, odv;
 
 	public static Button radioFichier = null;
 
@@ -101,7 +101,8 @@ public class ViewFile extends ViewPart {
 		
 		//chargement de la configuration
 		Utils.initConfig();
-				
+		
+	
 		//ouverture de modèle à false
 		DataModel.ouverture = false;
 		

@@ -25,6 +25,8 @@ public class Utils {
 	public static String texteBrut, texteFinal; // texte brut entier et texte
 
 	public static StringBuffer stringBuffer;
+	
+	public static int progression;
 
 	// avec regle dynamique
 

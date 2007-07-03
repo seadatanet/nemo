@@ -11,6 +11,7 @@ import javax.swing.SwingUtilities;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.ProgressBar;
@@ -18,6 +19,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 import fr.ifremer.nemo.domain.Survey;
+import fr.ifremer.nemo.medatlas.MedatlasSurveyWriter;
+import fr.ifremer.nemo.odv.ODVSurveyWriter;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.ProgressNotification;
 
@@ -28,6 +31,8 @@ public class EditConversion extends Thread {
 	public static int validee, loaded;
 	public static String nomFichierSortie;
 	public static Shell shell;
+	
+	public static ProgressNotification notifier;
 	
 	
 	public void run(){
@@ -41,6 +46,7 @@ public class EditConversion extends Thread {
 //		 initialisation zone édition pour étape description de fichier 
 
 		formEdition = ViewEdit.formEdition;
+		nomFichierSortie="";
 	
 //		raz message erreur
 		Utils.messageErreur("");		 //$NON-NLS-1$
@@ -70,7 +76,7 @@ public class EditConversion extends Thread {
 			shell = new Shell(SWT.NONE);	
 			shell.setSize(500, 20);
     		shell.setBounds(100, 100, 500, 20);
-    		shell.open();
+    		//shell.open();
     		
     		final ProgressBar progressbar = new ProgressBar(shell,
   				  SWT.HORIZONTAL | SWT.SMOOTH);
@@ -83,90 +89,18 @@ public class EditConversion extends Thread {
   				shell.pack();
     		
 			java.io.FileInputStream stream = null;
-		final ProgressNotification notifier = new ProgressNotification() {
-                public void progress(final int val) {
-                	try {	
-                			Application.display.syncExec( new Runnable() {
-                                                          public void run() {
-                                                              progressbar.setSelection(val);
-                                                             // System.out.println(">>>"+ val+"%");
-                                                              progressbar.update();
-                                                             // progressbar.getParent().update();
-                                                              //update();
-                                                              
-                                                          }
-                                                      });
-                    } catch (Exception e) {
-                    }
-                }
-            };
-			try {
-				final Survey survey = DataModel.inputModel.convert(notifier);
-				
-				//survey.writeXMLOn(new FileOutputStream(new File("D:/tmp.xml")));
-				
-				final fr.ifremer.nemo.medatlas.MedatlasSurveyWriter writerMed;
-				final fr.ifremer.nemo.odv.ODVSurveyWriter writerODV;
-				
-				if (ViewFile.medatlas.getSelection()){
-				 writerMed = new fr.ifremer.nemo.medatlas.MedatlasSurveyWriter();
-				 notifier.progress(0);
-				 
-				 try {
-					writerMed.writeSurvey ( survey, new java.io.File(nomFichierSortie), notifier);
-				} catch (GenerationException e1) {
-					// 
-					e1.printStackTrace();
-					//System.out.println("Erreur de génération de fichier de sortie!");
-					Utils.messageErreur(Messages.getString("EditConversion.4")); //$NON-NLS-1$
-				}
-				 
-			/*    
-			 new Thread(){@Override
-					public void run() {
-						try {
-							writerMed.writeSurvey ( survey, new java.io.File(nomFichierSortie), notifier);
-							
-						} catch (IOException e) {
-							// 
-							e.printStackTrace();
-						} catch (GenerationException e) {
-							System.out.println("Erreur de génération de fichier de sortie!");
-							
-							// 
-							e.printStackTrace();
-						}
-					}}.start();
-					*/
-					}
-				else {
-					 writerODV = new fr.ifremer.nemo.odv.ODVSurveyWriter();
-					 notifier.progress(0);
-				    	new Thread(){@Override
-						public void run() {
-							try {
-								writerODV.writeSurvey ( survey, new java.io.File(nomFichierSortie), notifier);
-								
-							} catch (IOException e) {
-								// 
-								e.printStackTrace();
-							} catch (GenerationException e) {
-								//System.out.println("Erreur de génération de fichier de sortie!");
-								Utils.messageErreur(Messages.getString("EditConversion.5")); //$NON-NLS-1$
-								e.printStackTrace();
-							}
-							// 
-							
-						}}.start();
-				}
-		    	
+	
+		
+			Utils.progression = 0;
 			
 			
 			
-			}
-			catch (FileNotFoundException e1) {e1.printStackTrace(); Utils.messageErreur(Messages.getString("EditConversion.6"));} //$NON-NLS-1$
-			catch (IOException e1) {e1.printStackTrace(); Utils.messageErreur(Messages.getString("EditConversion.7"));} //$NON-NLS-1$
-			catch (ParseException e1) {e1.printStackTrace(); Utils.messageErreur(Messages.getString("EditConversion.8"));} //$NON-NLS-1$
+			
+		new SWTProgress().run();
+		
+			
+		
+			
 			
 		//System.out.println("==== Fin de conversion ====");	
 		if (ViewFile.odv.getSelection()){
@@ -205,6 +139,10 @@ public class EditConversion extends Thread {
 		
 		
 	}
+	
+	
+	
+
 	
 public static void DrawingBack(){
 		
@@ -253,3 +191,4 @@ public static void choixFichierSortie(){
 }
 
 }
+
