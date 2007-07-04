@@ -1084,7 +1084,7 @@ public  class Survey
     Source source = new SAXSource( reader, new InputSource(new FileReader(xmlFile)));
     XMLBootstrapParser parser = new XMLBootstrapParser(this);
     Result result = new SAXResult(parser);
-    java.io.InputStream inputStream = getClass().getResourceAsStream("/resources/survey.xsl");
+    java.io.InputStream inputStream = new FileInputStream("/resources/survey.xsl"); //getClass().getResourceAsStream("/resources/survey.xsl");
     Source style = new StreamSource( new InputStreamReader( inputStream));
     TransformerFactory transFactory = TransformerFactory.newInstance();
     Transformer trans = transFactory.newTransformer(style);

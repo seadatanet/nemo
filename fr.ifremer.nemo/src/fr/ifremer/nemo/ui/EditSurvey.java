@@ -512,7 +512,7 @@ public class EditSurvey {
 			
 				fich = new File(nomXML);
 				nomFichierXML = fich.getName();
-				
+				Utils.messageErreur("fiche:"+fich);
 				EditSurvey.chargementXML(fich);
 			
 				
@@ -597,40 +597,60 @@ public static void chargementXML(File fichier){
 			
 			//injection des valeurs de l'IHM -> datamodel
 			//référence
-			EditSurvey.textCampagne.setText(survey.getReference());
-			EditSurvey.textNom.setText(survey.getName());
-			EditSurvey.textCodeNavire.setText(survey.getShipCode());
-			EditSurvey.textNomNavire.setText(survey.getShipName());
+			if (survey.getReference()!=null){
+			EditSurvey.textCampagne.setText(survey.getReference());}
+			if (survey.getName()!=null){
+			EditSurvey.textNom.setText(survey.getName());}
+			if (survey.getShipCode()!=null){
+			EditSurvey.textCodeNavire.setText(survey.getShipCode());}
+			if (survey.getShipName()!=null){
+			EditSurvey.textNomNavire.setText(survey.getShipName());}
 			
 			//Localisation
 			Formatter formatter = new Formatter();
 			
 			try {
-				EditSurvey.textDateDebut.setText(survey.getFormattedStartDate());
-				EditSurvey.textDateFin.setText(survey.getFormattedEndDate());
+				if (survey.getFormattedStartDate()!=null){
+				EditSurvey.textDateDebut.setText(survey.getFormattedStartDate());}
+				if (survey.getFormattedEndDate()!=null){
+				EditSurvey.textDateFin.setText(survey.getFormattedEndDate());}
 			} catch (ParseException e) {
 				// 
 				e.printStackTrace();
 			}
 			
-			EditSurvey.textRegion.setText(survey.getRegionName());
+			if (survey.getRegionName()!=null){
+			EditSurvey.textRegion.setText(survey.getRegionName());}
 			
 			//Source de données
-			EditSurvey.textPays.setText(survey.getCountryCode());
-			EditSurvey.textLabo.setText(survey.getLaboratories());
-			EditSurvey.textChef.setText(survey.getChiefScientist());
-			EditSurvey.textProjet.setText(survey.getProjectName());
+			if (survey.getCountryCode()!=null){
+			EditSurvey.textPays.setText(survey.getCountryCode());}
+			if (survey.getLaboratories()!=null){
+			EditSurvey.textLabo.setText(survey.getLaboratories());}
+			if (survey.getChiefScientist()!=null){
+			EditSurvey.textChef.setText(survey.getChiefScientist());}
+			if (survey.getProjectName()!=null){
+			EditSurvey.textProjet.setText(survey.getProjectName());}
 			
 			
 			//Centre d'archivage
-			EditSurvey.textCentre.setText(survey.getDataCentre());
-			EditSurvey.textConfidentiel.setText(""+survey.getAvailability()); //$NON-NLS-1$
+			if (survey.getDataCentre()!=null){
+			EditSurvey.textCentre.setText(survey.getDataCentre());}
+			
+			if (survey.getAvailabilityCode()!=null){
+				if (survey.getAvailabilityCode().matches("P")){EditSurvey.comboConfid.select(0);}
+				if (survey.getAvailabilityCode().matches("L")){EditSurvey.comboConfid.select(1);}
+				if (survey.getAvailabilityCode().matches("C")){EditSurvey.comboConfid.select(2);}
+			}
+			
 			
 			//Commentaire
-			EditSurvey.textCommentaire.setText(survey.getComment());
+			if (survey.getComment()!=null){
+			EditSurvey.textCommentaire.setText(survey.getComment());}
 			
 			//Remplissage de la liste des dataTypes de la campagne
 			
+			if (survey.getDataTypes()!=null){
 			DataType[] dataTypes = survey.getDataTypes();
 			int taille = dataTypes.length;
 			
@@ -649,7 +669,7 @@ public static void chargementXML(File fichier){
 				//System.out.println("TypeSurvey " +typeSurvey.getCode()+" ajouté");
 				
 			}
-			
+			}
 			
 			EditSurvey.razEdition();
 			EditSurvey.DrawingBack();
