@@ -88,7 +88,7 @@ public  class NautilusSurveyWSImpl
     ResultSet result =  null;
     try {
     	String statement =
-    	    "select c.CPA_CPAR, c.CPA_NOBS, p.PAR_INSTRUMENT_E from CPA c, PAR p "+
+    	    "select c.CPA_CPAR, c.CPA_NOBS, p.PAR_INSTRUMENT_E, p.PAR_LIBEL_E from CPA c, PAR p "+
     	    "where ((CPA_TYPTAB='C') and (CPA_NO=?) and (c.CPA_CPAR=p.PAR_CPAR))";
     	pstmt = a_Connection.prepareStatement(statement);
     	pstmt.setString( 1, a_Cam_CRNO);
@@ -96,7 +96,9 @@ public  class NautilusSurveyWSImpl
     	Vector<WSCollectedData> datas = new Vector<WSCollectedData>();
     	while (result.next()) {
     		WSCollectedData data = new WSCollectedData();
-    		data.setCode( result.getString(1));
+    		String codeConcat = "";
+    		codeConcat = result.getString(1)+" - " + result.getString(4);
+    		data.setCode( codeConcat);
     		data.setObservationNumber( result.getInt(2));
     		String pInst = result.getString(3);
     		char c = data.getCode().charAt(0);

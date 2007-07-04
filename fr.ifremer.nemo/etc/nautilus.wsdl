@@ -92,7 +92,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       <wsdl:port binding="impl:NAUTILUSSoapBinding" name="NAUTILUS">
 
-         <wsdlsoap:address location="http://localhost:8080/nautilus/services/NAUTILUS"/>
+         <wsdlsoap:address location="http://localhost:8888/nautilus/services/NAUTILUS"/>
 
       </wsdl:port>
 

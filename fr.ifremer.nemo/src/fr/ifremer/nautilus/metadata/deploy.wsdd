@@ -27,6 +27,14 @@
 
       <typeMapping
         xmlns:ns="nautilus"
+        qname="ns:WSSurvey"
+        type="java:fr.ifremer.nautilus.metadata.WSSurvey"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="nautilus"
         qname="ns:WSCollectedData"
         type="java:fr.ifremer.nautilus.metadata.WSCollectedData"
         serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
@@ -38,14 +46,6 @@
         qname="ns:ArrayOfWSCollectedData"
         type="java:fr.ifremer.nautilus.metadata.WSCollectedData[]"
         innerType="cmp-ns:WSCollectedData" xmlns:cmp-ns="nautilus"
-        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
-      />
-      <typeMapping
-        xmlns:ns="nautilus"
-        qname="ns:WSSurvey"
-        type="java:fr.ifremer.nautilus.metadata.WSSurvey"
-        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
-        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
         encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
       />
   </service>

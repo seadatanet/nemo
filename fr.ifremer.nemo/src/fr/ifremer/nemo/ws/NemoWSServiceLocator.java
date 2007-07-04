@@ -22,7 +22,7 @@ public class NemoWSServiceLocator extends org.apache.axis.client.Service impleme
     }
 
     // Use to get a proxy class for NEMO
-    private java.lang.String NEMO_address = "http://localhost:8080/nemo/services/NEMO";
+    private java.lang.String NEMO_address = "http://localhost:8888/nemo/services/NEMO";
 
     public java.lang.String getNEMOAddress() {
         return NEMO_address;

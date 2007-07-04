@@ -24,13 +24,22 @@ public class NEMOSoapBindingStub extends org.apache.axis.client.Stub implements 
         org.apache.axis.description.OperationDesc oper;
         org.apache.axis.description.ParameterDesc param;
         oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("getParameters");
+        oper.setReturnType(new javax.xml.namespace.QName("nemo", "ArrayOfWSParameter"));
+        oper.setReturnClass(fr.ifremer.nemo.ws.WSParameter[].class);
+        oper.setReturnQName(new javax.xml.namespace.QName("", "getParametersReturn"));
+        oper.setStyle(org.apache.axis.constants.Style.RPC);
+        oper.setUse(org.apache.axis.constants.Use.ENCODED);
+        _operations[0] = oper;
+
+        oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getCountries");
         oper.setReturnType(new javax.xml.namespace.QName("nemo", "ArrayOfWSCountry"));
         oper.setReturnClass(fr.ifremer.nemo.ws.WSCountry[].class);
         oper.setReturnQName(new javax.xml.namespace.QName("", "getCountriesReturn"));
         oper.setStyle(org.apache.axis.constants.Style.RPC);
         oper.setUse(org.apache.axis.constants.Use.ENCODED);
-        _operations[0] = oper;
+        _operations[1] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getDataCentres");
@@ -39,7 +48,7 @@ public class NEMOSoapBindingStub extends org.apache.axis.client.Stub implements 
         oper.setReturnQName(new javax.xml.namespace.QName("", "getDataCentresReturn"));
         oper.setStyle(org.apache.axis.constants.Style.RPC);
         oper.setUse(org.apache.axis.constants.Use.ENCODED);
-        _operations[1] = oper;
+        _operations[2] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getDataTypes");
@@ -48,7 +57,7 @@ public class NEMOSoapBindingStub extends org.apache.axis.client.Stub implements 
         oper.setReturnQName(new javax.xml.namespace.QName("", "getDataTypesReturn"));
         oper.setStyle(org.apache.axis.constants.Style.RPC);
         oper.setUse(org.apache.axis.constants.Use.ENCODED);
-        _operations[2] = oper;
+        _operations[3] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getRegions");
@@ -57,7 +66,7 @@ public class NEMOSoapBindingStub extends org.apache.axis.client.Stub implements 
         oper.setReturnQName(new javax.xml.namespace.QName("", "getRegionsReturn"));
         oper.setStyle(org.apache.axis.constants.Style.RPC);
         oper.setUse(org.apache.axis.constants.Use.ENCODED);
-        _operations[3] = oper;
+        _operations[4] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getShips");
@@ -66,22 +75,13 @@ public class NEMOSoapBindingStub extends org.apache.axis.client.Stub implements 
         oper.setReturnQName(new javax.xml.namespace.QName("", "getShipsReturn"));
         oper.setStyle(org.apache.axis.constants.Style.RPC);
         oper.setUse(org.apache.axis.constants.Use.ENCODED);
-        _operations[4] = oper;
+        _operations[5] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("getSurveyList");
         oper.setReturnType(new javax.xml.namespace.QName("nemo", "ArrayOfWSSurveyDescription"));
         oper.setReturnClass(fr.ifremer.nemo.ws.WSSurveyDescription[].class);
         oper.setReturnQName(new javax.xml.namespace.QName("", "getSurveyListReturn"));
-        oper.setStyle(org.apache.axis.constants.Style.RPC);
-        oper.setUse(org.apache.axis.constants.Use.ENCODED);
-        _operations[5] = oper;
-
-        oper = new org.apache.axis.description.OperationDesc();
-        oper.setName("getParameters");
-        oper.setReturnType(new javax.xml.namespace.QName("nemo", "ArrayOfWSParameter"));
-        oper.setReturnClass(fr.ifremer.nemo.ws.WSParameter[].class);
-        oper.setReturnQName(new javax.xml.namespace.QName("", "getParametersReturn"));
         oper.setStyle(org.apache.axis.constants.Style.RPC);
         oper.setUse(org.apache.axis.constants.Use.ENCODED);
         _operations[6] = oper;
@@ -296,12 +296,43 @@ public class NEMOSoapBindingStub extends org.apache.axis.client.Stub implements 
         }
     }
 
-    public fr.ifremer.nemo.ws.WSCountry[] getCountries() throws java.rmi.RemoteException {
+    public fr.ifremer.nemo.ws.WSParameter[] getParameters() throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
         _call.setOperation(_operations[0]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("");
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("nemo", "getParameters"));
+
+        setRequestHeaders(_call);
+        setAttachments(_call);
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {});
+
+        if (_resp instanceof java.rmi.RemoteException) {
+            throw (java.rmi.RemoteException)_resp;
+        }
+        else {
+            extractAttachments(_call);
+            try {
+                return (fr.ifremer.nemo.ws.WSParameter[]) _resp;
+            } catch (java.lang.Exception _exception) {
+                return (fr.ifremer.nemo.ws.WSParameter[]) org.apache.axis.utils.JavaUtils.convert(_resp, fr.ifremer.nemo.ws.WSParameter[].class);
+            }
+        }
+  } catch (org.apache.axis.AxisFault axisFaultException) {
+  throw axisFaultException;
+}
+    }
+
+    public fr.ifremer.nemo.ws.WSCountry[] getCountries() throws java.rmi.RemoteException {
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[1]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
@@ -332,7 +363,7 @@ public class NEMOSoapBindingStub extends org.apache.axis.client.Stub implements 
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[1]);
+        _call.setOperation(_operations[2]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
@@ -363,7 +394,7 @@ public class NEMOSoapBindingStub extends org.apache.axis.client.Stub implements 
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[2]);
+        _call.setOperation(_operations[3]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
@@ -394,7 +425,7 @@ public class NEMOSoapBindingStub extends org.apache.axis.client.Stub implements 
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[3]);
+        _call.setOperation(_operations[4]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
@@ -425,7 +456,7 @@ public class NEMOSoapBindingStub extends org.apache.axis.client.Stub implements 
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[4]);
+        _call.setOperation(_operations[5]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
@@ -456,7 +487,7 @@ public class NEMOSoapBindingStub extends org.apache.axis.client.Stub implements 
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[5]);
+        _call.setOperation(_operations[6]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
@@ -475,37 +506,6 @@ public class NEMOSoapBindingStub extends org.apache.axis.client.Stub implements 
                 return (fr.ifremer.nemo.ws.WSSurveyDescription[]) _resp;
             } catch (java.lang.Exception _exception) {
                 return (fr.ifremer.nemo.ws.WSSurveyDescription[]) org.apache.axis.utils.JavaUtils.convert(_resp, fr.ifremer.nemo.ws.WSSurveyDescription[].class);
-            }
-        }
-  } catch (org.apache.axis.AxisFault axisFaultException) {
-  throw axisFaultException;
-}
-    }
-
-    public fr.ifremer.nemo.ws.WSParameter[] getParameters() throws java.rmi.RemoteException {
-        if (super.cachedEndpoint == null) {
-            throw new org.apache.axis.NoEndPointException();
-        }
-        org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[6]);
-        _call.setUseSOAPAction(true);
-        _call.setSOAPActionURI("");
-        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
-        _call.setOperationName(new javax.xml.namespace.QName("nemo", "getParameters"));
-
-        setRequestHeaders(_call);
-        setAttachments(_call);
- try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {});
-
-        if (_resp instanceof java.rmi.RemoteException) {
-            throw (java.rmi.RemoteException)_resp;
-        }
-        else {
-            extractAttachments(_call);
-            try {
-                return (fr.ifremer.nemo.ws.WSParameter[]) _resp;
-            } catch (java.lang.Exception _exception) {
-                return (fr.ifremer.nemo.ws.WSParameter[]) org.apache.axis.utils.JavaUtils.convert(_resp, fr.ifremer.nemo.ws.WSParameter[].class);
             }
         }
   } catch (org.apache.axis.AxisFault axisFaultException) {

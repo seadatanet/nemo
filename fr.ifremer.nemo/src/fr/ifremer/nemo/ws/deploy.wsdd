@@ -20,6 +20,8 @@
       <parameter name="className" value="fr.ifremer.nemo.ws.NemoWSImpl"/>
       <parameter name="wsdlPortType" value="NemoWS"/>
       <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="getParameters" qname="operNS:getParameters" xmlns:operNS="nemo" returnQName="getParametersReturn" returnType="rtns:ArrayOfWSParameter" xmlns:rtns="nemo" returnItemType="tns2:WSParameter" xmlns:tns2="nemo" soapAction="" >
+      </operation>
       <operation name="getCountries" qname="operNS:getCountries" xmlns:operNS="nemo" returnQName="getCountriesReturn" returnType="rtns:ArrayOfWSCountry" xmlns:rtns="nemo" returnItemType="tns2:WSCountry" xmlns:tns2="nemo" soapAction="" >
       </operation>
       <operation name="getDataCentres" qname="operNS:getDataCentres" xmlns:operNS="nemo" returnQName="getDataCentresReturn" returnType="rtns:ArrayOfWSDataCentre" xmlns:rtns="nemo" returnItemType="tns2:WSDataCentre" xmlns:tns2="nemo" soapAction="" >
@@ -32,23 +34,36 @@
       </operation>
       <operation name="getSurveyList" qname="operNS:getSurveyList" xmlns:operNS="nemo" returnQName="getSurveyListReturn" returnType="rtns:ArrayOfWSSurveyDescription" xmlns:rtns="nemo" returnItemType="tns2:WSSurveyDescription" xmlns:tns2="nemo" soapAction="" >
       </operation>
-      <operation name="getParameters" qname="operNS:getParameters" xmlns:operNS="nemo" returnQName="getParametersReturn" returnType="rtns:ArrayOfWSParameter" xmlns:rtns="nemo" returnItemType="tns2:WSParameter" xmlns:tns2="nemo" soapAction="" >
-      </operation>
-      <parameter name="allowedMethods" value="getParameters getCountries getShips getDataCentres getSurveyList getRegions getDataTypes"/>
+      <parameter name="allowedMethods" value="getCountries getShips getRegions getSurveyList getParameters getDataTypes getDataCentres"/>
 
+      <arrayMapping
+        xmlns:ns="nemo"
+        qname="ns:ArrayOfWSSurveyDescription"
+        type="java:fr.ifremer.nemo.ws.WSSurveyDescription[]"
+        innerType="cmp-ns:WSSurveyDescription" xmlns:cmp-ns="nemo"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
       <typeMapping
         xmlns:ns="nemo"
-        qname="ns:WSRegion"
-        type="java:fr.ifremer.nemo.ws.WSRegion"
+        qname="ns:WSDataType"
+        type="java:fr.ifremer.nemo.ws.WSDataType"
         serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
         deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
         encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
       />
       <arrayMapping
         xmlns:ns="nemo"
-        qname="ns:ArrayOfWSDataCentre"
-        type="java:fr.ifremer.nemo.ws.WSDataCentre[]"
-        innerType="cmp-ns:WSDataCentre" xmlns:cmp-ns="nemo"
+        qname="ns:ArrayOfWSCountry"
+        type="java:fr.ifremer.nemo.ws.WSCountry[]"
+        innerType="cmp-ns:WSCountry" xmlns:cmp-ns="nemo"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="nemo"
+        qname="ns:WSParameter"
+        type="java:fr.ifremer.nemo.ws.WSParameter"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
         encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
       />
       <arrayMapping
@@ -60,23 +75,23 @@
       />
       <arrayMapping
         xmlns:ns="nemo"
-        qname="ns:ArrayOfWSSurveyDescription"
-        type="java:fr.ifremer.nemo.ws.WSSurveyDescription[]"
-        innerType="cmp-ns:WSSurveyDescription" xmlns:cmp-ns="nemo"
+        qname="ns:ArrayOfWSRegion"
+        type="java:fr.ifremer.nemo.ws.WSRegion[]"
+        innerType="cmp-ns:WSRegion" xmlns:cmp-ns="nemo"
         encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
       />
       <typeMapping
         xmlns:ns="nemo"
-        qname="ns:WSSurveyDescription"
-        type="java:fr.ifremer.nemo.ws.WSSurveyDescription"
+        qname="ns:WSRegion"
+        type="java:fr.ifremer.nemo.ws.WSRegion"
         serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
         deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
         encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
       />
       <typeMapping
         xmlns:ns="nemo"
-        qname="ns:WSParameter"
-        type="java:fr.ifremer.nemo.ws.WSParameter"
+        qname="ns:WSShip"
+        type="java:fr.ifremer.nemo.ws.WSShip"
         serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
         deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
         encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
@@ -91,6 +106,14 @@
       />
       <typeMapping
         xmlns:ns="nemo"
+        qname="ns:WSSurveyDescription"
+        type="java:fr.ifremer.nemo.ws.WSSurveyDescription"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="nemo"
         qname="ns:WSCountry"
         type="java:fr.ifremer.nemo.ws.WSCountry"
         serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
@@ -99,32 +122,9 @@
       />
       <arrayMapping
         xmlns:ns="nemo"
-        qname="ns:ArrayOfWSCountry"
-        type="java:fr.ifremer.nemo.ws.WSCountry[]"
-        innerType="cmp-ns:WSCountry" xmlns:cmp-ns="nemo"
-        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
-      />
-      <arrayMapping
-        xmlns:ns="nemo"
         qname="ns:ArrayOfWSShip"
         type="java:fr.ifremer.nemo.ws.WSShip[]"
         innerType="cmp-ns:WSShip" xmlns:cmp-ns="nemo"
-        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
-      />
-      <typeMapping
-        xmlns:ns="nemo"
-        qname="ns:WSDataType"
-        type="java:fr.ifremer.nemo.ws.WSDataType"
-        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
-        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
-        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
-      />
-      <typeMapping
-        xmlns:ns="nemo"
-        qname="ns:WSShip"
-        type="java:fr.ifremer.nemo.ws.WSShip"
-        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
-        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
         encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
       />
       <arrayMapping
@@ -136,9 +136,9 @@
       />
       <arrayMapping
         xmlns:ns="nemo"
-        qname="ns:ArrayOfWSRegion"
-        type="java:fr.ifremer.nemo.ws.WSRegion[]"
-        innerType="cmp-ns:WSRegion" xmlns:cmp-ns="nemo"
+        qname="ns:ArrayOfWSDataCentre"
+        type="java:fr.ifremer.nemo.ws.WSDataCentre[]"
+        innerType="cmp-ns:WSDataCentre" xmlns:cmp-ns="nemo"
         encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
       />
   </service>

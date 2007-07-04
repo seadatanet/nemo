@@ -22,7 +22,7 @@ public class NautilusSurveyWSServiceLocator extends org.apache.axis.client.Servi
     }
 
     // Use to get a proxy class for NAUTILUS
-    private java.lang.String NAUTILUS_address = "http://localhost:8080/nautilus/services/NAUTILUS";
+    private java.lang.String NAUTILUS_address = "http://localhost:8888/nautilus/services/NAUTILUS";
 
     public java.lang.String getNAUTILUSAddress() {
         return NAUTILUS_address;

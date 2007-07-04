@@ -60,6 +60,7 @@ public class EditSurvey {
 	public static Boolean ws;
 	public static ScrolledForm formEdition;
 	public static Shell shell;
+	
 
 //////////////////////////////////////////	//
 		
@@ -382,6 +383,11 @@ public class EditSurvey {
 		
 		public static void webServiceUpdate(){
 			
+			SWTProcessWS.fichiersConstantes = true;
+			
+			new SWTProgressWS().run();
+			
+			/*
 			shell = new Shell(SWT.NONE);	
 			shell.setSize(200, 20);
     		shell.setBounds(50, 50, 500, 20);
@@ -397,69 +403,7 @@ public class EditSurvey {
     				shell.pack();
     				shell.setText(Messages.getString("EditSurvey.47")); //$NON-NLS-1$
     		
-    		////////////////////////////////////////////
-    		
-    	/*	
-    		new Thread() {
-    		      public void run() {
-    		       
-//    		    	interrogation WService
-    		    	  NemoLists.updateCountries();
-    		    	  progressbar.setSelection(14);
-    		    	  NemoLists.updateDataTypes();
-    		    	  progressbar.setSelection(28);
-    		    	  NemoLists.updateRegions();   
-    		    	  progressbar.setSelection(42);
-    		    	  NemoLists.updateShips();
-    		    	  progressbar.setSelection(56);
-    		    	  NemoLists.updateDataCentres();
-    		    	  progressbar.setSelection(70);
-    		    	  NemoLists.updateParameters();
-    		    	  progressbar.setSelection(84);
-    		    	  NemoLists.updateSurveys();
-    		    	  progressbar.setSelection(100);
-    		    
-    					  Application.display.asyncExec(new Runnable() {
-    	    		            public void run() {
-    	    		             
-    	    		            }
-    	    		          });
-    				
-    					
-    					  Application.display.asyncExec(new Runnable() {
-    	    		            public void run() {
-    	    		              
-    	    		            }
-    	    		          });
-    					
-    					  Application.display.asyncExec(new Runnable() {
-    	    		            public void run() {
-    	    		             
-    	    		            }
-    	    		          });
-    	    		      
-    					
-    					  Application.display.asyncExec(new Runnable() {
-    	    		            public void run() {
-    	    		             
-    	    		            }
-    	    		          });
-    					
-    					  Application.display.asyncExec(new Runnable() {
-    	    		            public void run() {
-    	    		             
-    	    		            }
-    	    		          });
-    		    	  
-    		          
-    		        
-    		        
-    		      }   
-    		    	  
-    		    }.start();
-    		
-    		
-    		*/
+   
     		
     				 NemoLists.updateCountries();
    		    	  progressbar.setSelection(14);
@@ -479,7 +423,7 @@ public class EditSurvey {
     		
     		    shell.close();	
     		
-    
+    */
 			
 		}
 		
@@ -493,7 +437,19 @@ public class EditSurvey {
 		public static void webService(String reference){
 			//remplissage du dataModel à partir des valeurs du ws
 			
+			SWTProcessWS.referenceWS = reference;
+			SWTProcessWS.fichiersConstantes = false;
+			
 			if (ViewFile.dossierCampagne){
+				SWTProcessWS.dossier = true;}
+			else{
+					SWTProcessWS.dossier = false;}
+			
+			new SWTProgressWS().run();
+			
+		/*	
+			if (ViewFile.dossierCampagne){
+				SWTProcessWS.dossier = true;
 				try {
 					DataModel.dirSurvey.getModel().fillFromSISMER(reference);
 				} catch (MalformedURLException e) {
@@ -511,6 +467,7 @@ public class EditSurvey {
 				}
 			}else{
 			try {
+				SWTProcessWS.dossier = false;
 				DataModel.singleSurvey.getModel().fillFromSISMER(reference);
 			} catch (MalformedURLException e) {
 				Utils.messageErreur(Messages.getString("EditSurvey.51")); //$NON-NLS-1$
@@ -523,7 +480,7 @@ public class EditSurvey {
 				e.printStackTrace();
 			}
 			}
-			
+			*/
 			//mise à jour de l'onglet courant
 			majApresWS();
 			

@@ -1,7 +1,6 @@
 package fr.ifremer.nemo.util;
 
 import fr.ifremer.nemo.output.ProgressNotification;
-import fr.ifremer.nemo.ui.Utils;
 
 /**
  * Class SizeBasedProgressNotifier
@@ -146,7 +145,6 @@ public  class SizeBasedProgressNotifier implements Cloneable {
   public void progress ( long a_Value) {
     if (_progress != null) {
     	_progress.progress( (int)((a_Value+_offset)*100/_size));
-    	Utils.progression =  (int)((a_Value+_offset)*100/_size);
     }
   }
 

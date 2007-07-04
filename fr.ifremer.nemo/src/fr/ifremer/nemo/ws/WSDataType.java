@@ -105,7 +105,6 @@ public class WSDataType  implements java.io.Serializable {
              (this.libelle!=null &&
               this.libelle.equals(other.getLibelle()))) &&
             this.sensor == other.isSensor();
-        
         __equalsCalc = null;
         return _equals;
     }
