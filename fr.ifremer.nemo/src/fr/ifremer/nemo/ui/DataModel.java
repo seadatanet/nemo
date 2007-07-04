@@ -67,6 +67,8 @@ public static void initModele(Boolean fichier, Boolean timeSeries, String nomFic
 
 public static void initDossier(Boolean timeSeries, String nomDossier){
 	
+	if (inputModel!=null){inputModel.release();}
+	
 	inputModel = new InputModel();
 	inputModel.initFoDirectoryBased(timeSeries);
 	dirSurvey = (DirectoryBasedSurvey)inputModel.getMedia();
@@ -80,6 +82,8 @@ public static void initFichier(Boolean timeSeries, String nomFich){
 //	acceder aux proprietes de survey
 	//singleSurvey.getModel().setmachin...
 //	singleSurvey.getStationModel().
+	
+	if (inputModel!=null){inputModel.release();}
 	
 	inputModel = new InputModel();
 	inputModel.initForSingleFile(timeSeries);
@@ -1255,10 +1259,13 @@ public static void ouvertureModele(InputModel input){
 
 public static void fillDesc(){
 	//remplissage auto de l'IHM Desc
+	if (dirSurvey_modele!=null){dirSurvey_modele.releaseInputModel();}
+	if (singleSurvey_modele!=null){singleSurvey_modele.releaseInputModel();}
 	
 	if (ViewFile.dossierCampagne){
 		
 		try {
+			dirSurvey_modele = new DirectoryBasedSurvey();
 			dirSurvey_modele = (DirectoryBasedSurvey)inputModel_modele.getMedia();
 		} catch (RuntimeException e) {
 			// TODO Bloc catch auto-généré
@@ -1269,7 +1276,7 @@ public static void fillDesc(){
 		EditDesc.lignesEnteteFichier.setText("0");
 		
 	}else{
-		
+		singleSurvey_modele = new SingleFileSurvey();
 		singleSurvey_modele = (SingleFileSurvey)inputModel_modele.getMedia();
 		stationModel_modele = singleSurvey_modele.getStationModel();
 		//lignes entete fichier
