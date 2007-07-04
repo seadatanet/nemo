@@ -43,7 +43,7 @@ public static ScrolledForm formEdition;
 
 	public static void affichageEdition(){
 		// initialisation zone édition pour étape description de fichier 
-	
+	ViewLog.aideDesc();
 		if (ViewFile.fileLoaded){
 			
 		formEdition = ViewEdit.formEdition;
@@ -336,7 +336,7 @@ nomNemo();
 		//on retire toutes les sections et les boutons expand et validation
 				
 	int i;
-
+	ViewLog.aideDesc();
 	nomNemo();
 	
 //	raz message erreur

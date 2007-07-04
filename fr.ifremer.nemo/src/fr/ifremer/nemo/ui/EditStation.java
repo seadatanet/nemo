@@ -53,7 +53,7 @@ public static void affichageEdition(){
 // initialisation zone édition pour étape description de fichier 
 
 formEdition = ViewEdit.formEdition;
-
+ViewLog.aideStation();
 //raz message erreur
 Utils.messageErreur(""); //$NON-NLS-1$
 
@@ -390,7 +390,7 @@ public static void DrawingBack(){
 //	 reset de toute la zone d'édition après étape descriptioon de fichier
 //	on retire toutes les sections et les boutons expand et validation
 
-
+	ViewLog.aideStation();
 	int i;
 
 	ScrolledForm s;

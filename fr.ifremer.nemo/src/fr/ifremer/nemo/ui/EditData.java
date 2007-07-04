@@ -40,7 +40,7 @@ public static void affichageEdition(){
 // initialisation zone édition pour étape description de fichier 
 
 formEdition = ViewEdit.formEdition;
-
+ViewLog.aideData();
 listeTextData = new ArrayList <Text>();
 
 //raz message erreur
@@ -419,7 +419,7 @@ public static void DrawingBack(){
 //	 reset de toute la zone d'édition après étape descriptioon de fichier
 //	on retire toutes les sections et les boutons expand et validation
 
-
+	ViewLog.aideData();
 	int i;
 
 	ScrolledForm s;

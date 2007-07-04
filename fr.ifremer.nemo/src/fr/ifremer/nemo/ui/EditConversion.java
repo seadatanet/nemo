@@ -44,7 +44,7 @@ public class EditConversion extends Thread {
 	
 	public static void affichageEdition(){
 //		 initialisation zone édition pour étape description de fichier 
-
+ViewLog.aideConversion();
 		formEdition = ViewEdit.formEdition;
 		nomFichierSortie="";
 	
@@ -116,7 +116,7 @@ public static void DrawingBack(){
 		
 	ScrolledForm s;
 	s = ViewEdit.formEdition;
-	
+	ViewLog.aideConversion();
 		buttonConversion.setParent(s.getBody());
 		
 		s.setText(Messages.getString("EditConversion.12")); //$NON-NLS-1$

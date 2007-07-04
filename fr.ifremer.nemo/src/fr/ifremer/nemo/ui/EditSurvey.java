@@ -69,7 +69,7 @@ public class EditSurvey {
 			// initialisation zone édition pour étape description de fichier 
 		
 			formEdition = ViewEdit.formEdition;
-			
+			ViewLog.aideSurvey();
 			ws = false;
 			
 			//affichage du texte dans la zone de gauche
@@ -767,7 +767,7 @@ public static void chargementXML(File fichier){
 			// reset de toute la zone d'édition après étape descriptioon de fichier
 			//on retire toutes les sections et les boutons expand et validation
 			
-			
+			ViewLog.aideSurvey();
 		int i;
 			ScrolledForm s;
 			s = ViewEdit.formEdition;
