@@ -887,7 +887,7 @@ if (ViewFile.checkBoxTempo.getSelection()){
 		//valeur manuelle
 		if (EditStation.textProfFin.getText().matches("")){
 			//on recopie profondeur dans profondeur de fin
-			PropertyModel propModelProfNormale = stationModel.getTimeSeriesModel().propertiesAt("bottomDepth");
+			PropertyModel propModelProfNormale = stationModel.propertiesAt("bottomDepth");
 			if (propModelProfNormale.isUserProvided()){
 				//on recopie la valeur entrée par l'utilisateur
 				propertyModel.setUserProvided(true);
