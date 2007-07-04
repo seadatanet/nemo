@@ -47,7 +47,7 @@ $param.code#end
 $formatter.limitString($survey.name, 20);$formatter.limitString($station.reference, 20);$typeBC;##
 $formatter.formatDateTime("MM/dd/yyyy", $station.fullDate)##
 ;$formatter.formatDateTime("hh24mm", $station.correctedTime, "9999");$formatter.formatLongitude("+DDD.ddd", $station.longitude);$formatter.formatLatitude("+DD.ddd ", $station.latitude);#if ($station.bottomDepth.toString() == "NaN")0#else$station.bottomDepth#end##
-#foreach( $param in $station.parameters );$formatter.formatFloat( $param.format, $param.valuesAt($i).getValue())#end
+#foreach( $param in $station.parameters );#if($param.valuesAt($i).getValue().toString() == $param.default)-1e10#else$formatter.formatFloat( $param.format, $param.valuesAt($i).getValue())#end#end
 
 #set( $count = $count + 1 )
 #set( $result = $notifier.progress( $count ))
