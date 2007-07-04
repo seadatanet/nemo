@@ -116,6 +116,8 @@ public class ViewLog extends ViewPart {
 	}
 
 public static void aideDesc(){
+	String langue = Utils.configuration.getLang();
+	if (langue.matches("fr_FR")){
 ViewLog.styledTextLogHelp.setText("##MENUS##" +
 		"1/Modèle/Ouvrir modèle : charge un modèle en mémoire à condition d'avoir déjà ouvert une campagne\n" +
 		"2/Modèle/Enregistrer modèle : créé sur le disque un fichier modèle XML correspondant aux valeurs entrées dans les différentes étapes. N'est fonctionnel qu'après avoir validé les 4 premières étapes.\n" +
@@ -135,17 +137,29 @@ ViewLog.styledTextLogHelp.setText("##MENUS##" +
 										"8/ L'onglet 'aide' affiche à chaque étape l'aide correspondante.\n" +
 												"9/ Une fois les valeurs remplies, cliquer sur 'valider' pour passer à l'étape suivante. Si des erreurs ont été commises, des messages apparaitront en rouge dans l'onglet 'erreurs'.\n" +
 														"10/ Le bouton 'reset' permet d'effacer toutes les valeurs de l'étape en cours.\n");	 //$NON-NLS-1$
-}	
+	}else{
+		//aide anglaise
+		ViewLog.styledTextLogHelp.setText("");
+	}
+	}	
 
 public static void aideSurvey(){
+	String langue = Utils.configuration.getLang();
+	if (langue.matches("fr_FR")){
 	ViewLog.styledTextLogHelp.setText("##DESCRIPTION CAMPAGNE##\n" +
 			"3 possibilités de remplissage de cette étape : entrer toutes les valeurs manuellement, interroger les Webservices ou charger un fichier XML.\n" +
 			"1/ Manuellement : remplir les sections 'référence', 'localisation', 'Sources des données' et 'Commentaires éventuels'. Pour la section 'Centre d'archivage', choisir la confidentialité dans la combo list. Pour la section 'types de données', un clic droit sur la table vide fait apparaitre un menu qui permet d'ajouter un nouveau type ('Sélection liste'), de déplacer ou de supprimer le type sélectionné. Ne pas tenter de cliquer gauche pour choisir une ligne puis de cliquer droit pour faire apparaitre le menu mais au contraire faire un clic droit directement. Sinon on passe en mode édition. La fenêtre de sélection des types de données permet d'effectuer une recherche à la fois sur le code et sur le nom du type.\n" +
 			"2/ Webservices, bouton 'initialisation serveur' : la fenêtre de sélection des campagnes permet d'effectuer une recherche à la fois sur le code et sur le nom de la campagne.\n" +
 			"3/ Fichier XML, bouton 'initialisation XML' : choisir un fichier XML de campagne.\n\n");
-}
+	}else{
+		//aide anglaise
+		ViewLog.styledTextLogHelp.setText("");
+	}
+	}
 
 public static void aideStation(){
+	String langue = Utils.configuration.getLang();
+	if (langue.matches("fr_FR")){
 	ViewLog.styledTextLogHelp.setText("##DESCRIPTION DE STATION##\n" +
 			"Même principe que les étapes précédentes à la différence que certaines valeurs à injecter demandent des valeurs sur 'ligne', 'début' et 'fin'. Dans le cas d'un fichier campagne, toujours effectuer les injections sur la première station ! Dans tous les cas, la sélection devra se limiter à une ligne unique (date, heure, latitude, profondeur, etc.) sauf pour le 'commentaire' où la possibilité de surligner plusieurs lignes est offerte." +
 			"Pour les formats d'heure, de date, de latitude et de longitude, on peut entrer ses propres formats.\n" +
@@ -181,20 +195,37 @@ public static void aideStation(){
 			"Des caractères supplémentaires quelconques peuvent être insérés entre les différentes clés. Ceux-ci seront attendus tel quel en entrée et rendus tel quel en sortie\n" +
 			"\nExemples :\n" +
 			"NDDD MM.mm ==> W123 10.25\n" +
-			"DDD MM SS N ==> 123 10 30 W\n");
+			"DDD MM SS N ==> 123 10 30 W\n");}
+	else{
+		//aide anglaise
+		ViewLog.styledTextLogHelp.setText("");
+	}
 }
 
 public static void aideData(){
+	String langue = Utils.configuration.getLang();
+	if (langue.matches("fr_FR")){
 	ViewLog.styledTextLogHelp.setText("##DESCRIPTION DONNEES##\n" +
 			"Même principe que pour les types de données : on ajoute ici les paramètres mesurés.\n" +
 			"Dans le cas d'une série temporelle :\n" +
 			"*les paramètres DATE, YEAR, MONTH, DAYX, TIME sont rajoutés automatiquement à la génération donc attention à ne pas les ajouter manuellement.\n" +
 			"*on peut choisir si le calcul des dates/heures est basé sur les dates/heures entrées à l'étape Station et la fréquence d'échantillonnage ou si les informations sont présentes au sein de la ligne des données (auquel cas préciser le format).\n" +
-			"\n");
+			"\n");}
+	else{
+		//aide anglaise
+		ViewLog.styledTextLogHelp.setText("");
+	}
 }
 public static void aideConversion(){
+	String langue = Utils.configuration.getLang();
+	if (langue.matches("fr_FR")){
 	ViewLog.styledTextLogHelp.setText("##CONVERSION##\n" +
 			"Choisir le format de sortie. On peut générer les deux formats à la suite sans devoir revalider toutes les étapes.");
-}
+
+	}else{
+		//aide anglaise
+		ViewLog.styledTextLogHelp.setText("");
+	}
+	}
 
 }
