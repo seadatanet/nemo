@@ -1268,7 +1268,7 @@ public static void fillDesc(){
 			dirSurvey_modele = new DirectoryBasedSurvey();
 			dirSurvey_modele = (DirectoryBasedSurvey)inputModel_modele.getMedia();
 		} catch (RuntimeException e) {
-			// TODO Bloc catch auto-généré
+			// 
 			e.printStackTrace();
 		}
 		stationModel_modele = dirSurvey_modele.getStationModel();
