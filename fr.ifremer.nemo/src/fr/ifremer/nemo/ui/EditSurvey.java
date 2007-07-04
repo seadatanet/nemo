@@ -437,6 +437,8 @@ public class EditSurvey {
 		public static void webService(String reference){
 			//remplissage du dataModel à partir des valeurs du ws
 			
+			TableDataSurvey.types.clear();
+			
 			SWTProcessWS.referenceWS = reference;
 			SWTProcessWS.fichiersConstantes = false;
 			
@@ -528,6 +530,10 @@ public class EditSurvey {
 
 public static void chargementXML(File fichier){
 
+	//reset de la liste des dataTypes
+	TableDataSurvey.types.clear();
+	
+	
 	if (ViewFile.dossierCampagne){
 		
 			try {
@@ -584,7 +590,6 @@ public static void chargementXML(File fichier){
 		
 		public static void majApresWS(){
 			//System.out.println("Remplissage onglet survey");
-			
 			
 			Survey survey; 
 			if (ViewFile.dossierCampagne){
@@ -656,12 +661,19 @@ public static void chargementXML(File fichier){
 			
 			//reset de la liste des dataTypes de l'IHM
 			TableDataSurvey.types.clear();
+			TableDataSurvey.types = new ArrayList<TypeSurvey>();
 			
 			for (int i=0; i<taille;i++){
 				TypeSurvey typeSurvey = new TypeSurvey();
 				typeSurvey.setCode(dataTypes[i].getCode());
 				typeSurvey.setNombre(dataTypes[i].getNumberOfProfiles());
-				typeSurvey.setQc(""+dataTypes[i].isQc()); //$NON-NLS-1$
+				if (dataTypes[i].isQc()){
+					typeSurvey.setQc("Y");
+				}
+				else{
+					typeSurvey.setQc("N");
+				}
+				
 				typeSurvey.setSensor(dataTypes[i].isSensor());
 				
 				TableDataSurvey.types.add(typeSurvey);
