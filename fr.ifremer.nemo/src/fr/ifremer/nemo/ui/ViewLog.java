@@ -109,7 +109,7 @@ public class ViewLog extends ViewPart {
 		tabItem2.setText(Messages.getString("ViewLog.4")); //$NON-NLS-1$
 		styledTextLogErreurs = new StyledText(tabFolderLog, SWT.MULTI | SWT.V_SCROLL |SWT.READ_ONLY);
 		styledTextLogInfos = new StyledText(tabFolderLog, SWT.MULTI | SWT.V_SCROLL |SWT.READ_ONLY);
-		styledTextLogHelp = new StyledText(tabFolderLog, SWT.MULTI | SWT.V_SCROLL |SWT.READ_ONLY);
+		styledTextLogHelp = new StyledText(tabFolderLog, SWT.MULTI | SWT.V_SCROLL |SWT.WRAP|SWT.READ_ONLY);
 		tabItem2.setControl(styledTextLogHelp);
 		tabItem1.setControl(styledTextLogInfos);
 		tabItem.setControl(styledTextLogErreurs);

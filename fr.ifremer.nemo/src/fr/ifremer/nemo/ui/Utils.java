@@ -481,6 +481,7 @@ public class Utils {
 		// à partir de onglet 0
 
 		if ((onglet == 1) && (ViewFile.affiche == 0)) {
+			ViewLog.aideSurvey();
 			if (EditSurvey.validee == 1) {
 				EditDesc.razEdition();
 				EditSurvey.DrawingBack();
@@ -499,6 +500,7 @@ public class Utils {
 		}
 
 		if ((onglet == 2) && (ViewFile.affiche == 0)) {
+			ViewLog.aideStation();
 			if (EditStation.validee == 1) {
 				EditDesc.razEdition();
 				EditStation.DrawingBack();
@@ -517,6 +519,7 @@ public class Utils {
 		}
 
 		if ((onglet == 3) && (ViewFile.affiche == 0)) {
+			ViewLog.aideData();
 			if (EditData.validee == 1) {
 				EditDesc.razEdition();
 				EditData.DrawingBack();
@@ -541,6 +544,7 @@ public class Utils {
 		}
 
 		if ((onglet == 4) && (ViewFile.affiche == 0)) {
+			ViewLog.aideConversion();
 			if (EditData.validee == 1) {
 				EditDesc.razEdition();
 				EditSurvey.affichageEdition();
@@ -556,6 +560,7 @@ public class Utils {
 		// à partir de onglet 1
 
 		if ((onglet == 2) && (ViewFile.affiche == 1)) {
+			ViewLog.aideStation();
 			if (EditStation.validee == 1) {
 				EditSurvey.razEdition();
 				EditStation.DrawingBack();
@@ -574,6 +579,7 @@ public class Utils {
 		}
 
 		if ((onglet == 0) && (ViewFile.affiche == 1)) {
+			ViewLog.aideDesc();
 			if (EditDesc.validee == 1) {
 				if (EditSurvey.loaded == 1) {
 					EditSurvey.razEdition();
@@ -589,6 +595,7 @@ public class Utils {
 		}
 
 		if ((onglet == 3) && (ViewFile.affiche == 1)) {
+			ViewLog.aideData();
 			if (EditData.validee == 1) {
 				EditSurvey.razEdition();
 				EditData.DrawingBack();
@@ -613,6 +620,7 @@ public class Utils {
 		}
 
 		if ((onglet == 4) && (ViewFile.affiche == 1)) {
+			ViewLog.aideConversion();
 			if (EditData.validee == 1) {
 				EditSurvey.razEdition();
 				EditConversion.affichageEdition();
@@ -626,6 +634,7 @@ public class Utils {
 		// à partir de onglet 2
 
 		if ((onglet == 3) && (ViewFile.affiche == 2)) {
+			ViewLog.aideData();
 			if (EditData.validee == 1) {
 				EditStation.razEdition();
 				EditData.DrawingBack();
@@ -650,6 +659,7 @@ public class Utils {
 		}
 
 		if ((onglet == 1) && (ViewFile.affiche == 2)) {
+			ViewLog.aideSurvey();
 			if (EditSurvey.validee == 1) {
 				if (EditStation.loaded == 1) {
 					EditStation.razEdition();
@@ -664,6 +674,7 @@ public class Utils {
 		}
 
 		if ((onglet == 0) && (ViewFile.affiche == 2)) {
+			ViewLog.aideDesc();
 			if (EditDesc.validee == 1) {
 				if (EditStation.loaded == 1) {
 					EditStation.razEdition();
@@ -678,6 +689,7 @@ public class Utils {
 		}
 
 		if ((onglet == 4) && (ViewFile.affiche == 2)) {
+			ViewLog.aideConversion();
 			if (EditData.validee == 1) {
 				EditStation.razEdition();
 				EditConversion.affichageEdition();
@@ -695,6 +707,7 @@ public class Utils {
 
 		// à partir de onglet 3
 		if ((onglet == 0) && (ViewFile.affiche == 3)) {
+			ViewLog.aideDesc();
 			if (EditDesc.validee == 1) {
 				if (EditData.loaded == 1) {
 					EditData.razEdition();
@@ -709,6 +722,7 @@ public class Utils {
 		}
 
 		if ((onglet == 1) && (ViewFile.affiche == 3)) {
+			ViewLog.aideSurvey();
 			if (EditSurvey.validee == 1) {
 				if (EditData.loaded == 1) {
 					EditData.razEdition();
@@ -723,6 +737,7 @@ public class Utils {
 		}
 
 		if ((onglet == 2) && (ViewFile.affiche == 3)) {
+			ViewLog.aideStation();
 			if (EditStation.validee == 1) {
 				if (EditData.loaded == 1) {
 					EditData.razEdition();
@@ -737,6 +752,7 @@ public class Utils {
 		}
 
 		if ((onglet == 4) && (ViewFile.affiche == 3)) {
+			ViewLog.aideConversion();
 			if (EditData.validee == 1) {
 				EditData.razEdition();
 				EditConversion.affichageEdition();
@@ -752,6 +768,7 @@ public class Utils {
 		// *********************************************************************//
 
 		if ((onglet == 0) && (ViewFile.affiche == 4)) {
+			ViewLog.aideDesc();
 			if (EditDesc.validee == 1) {
 				if (EditConversion.loaded == 1) {
 					EditConversion.razEdition();
@@ -766,6 +783,7 @@ public class Utils {
 		}
 
 		if ((onglet == 1) && (ViewFile.affiche == 4)) {
+			ViewLog.aideSurvey();
 			if (EditSurvey.validee == 1) {
 				if (EditConversion.loaded == 1) {
 					EditConversion.razEdition();
@@ -780,6 +798,7 @@ public class Utils {
 		}
 
 		if ((onglet == 2) && (ViewFile.affiche == 4)) {
+			ViewLog.aideStation();
 			if (EditStation.validee == 1) {
 				if (EditConversion.loaded == 1) {
 					EditConversion.razEdition();
@@ -794,6 +813,7 @@ public class Utils {
 		}
 
 		if ((onglet == 3) && (ViewFile.affiche == 4)) {
+			ViewLog.aideData();
 			if (EditData.validee == 1) {
 				if (EditConversion.loaded == 1) {
 					EditConversion.razEdition();
