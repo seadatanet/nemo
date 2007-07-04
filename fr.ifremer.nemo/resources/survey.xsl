@@ -11,7 +11,7 @@
 <xsl:stylesheet version="1.0"
       xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
+<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes" cdata-section-elements="comment"/>
 
 <!-- on supprime tout les espaces -->
 <xsl:strip-space elements="*"/>
@@ -30,6 +30,7 @@
     <laboratory><xsl:value-of select="Metadata/dataIdInfo/idPoC/rpOrgNameId"/></laboratory>
     <chiefScientist><xsl:value-of select="Metadata/dataIdInfo/idPoC/rpIndName"/></chiefScientist>
     <projectName><xsl:value-of select="Metadata/dataIdInfo/idCitation/datasetSeries/seriesName"/></projectName>
+    <comment><xsl:value-of select="Metadata/dataIdInfo/idAbs"/></comment>    
     <dataCentre/>
     <xsl:for-each select="Metadata/dataIdInfo/resConst/Consts">
       	<xsl:choose>
@@ -48,7 +49,7 @@
     <xsl:for-each select="Metadata/dataIdInfo/descKeys/keyTyp/KeyTypCd">
       	<xsl:choose>
           <xsl:when test="@value='number_element'">
-              <dataType><code><xsl:value-of select="./../../../idCitation/resAltTitle"/></code></dataType>
+              <DataType><xsl:attribute name="code"><xsl:value-of select="./../../../idCitation/resAltTitle"/> - <xsl:value-of select="./../../../idCitation/resTitle"/></xsl:attribute></DataType>
           </xsl:when>
         </xsl:choose>
     </xsl:for-each>
@@ -57,4 +58,3 @@
 </xsl:template>
 
 </xsl:stylesheet>
-
