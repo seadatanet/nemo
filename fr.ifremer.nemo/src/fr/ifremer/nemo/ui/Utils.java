@@ -857,7 +857,7 @@ public class Utils {
 		style.foreground = truc;
 
 		ViewLog.styledTextLogErreurs.setStyleRange(style);
-
+		ViewLog.tabFolderLog.setSelection(0);
 		/*
 		 * mettre en gras et en couleur only le texte du message !
 		 * message.length et ensuite new styleRange() de 0 à length
@@ -884,6 +884,7 @@ public class Utils {
 		style.foreground = truc;
 
 		ViewLog.styledTextLogErreurs.setStyleRange(style);
+		ViewLog.tabFolderLog.setSelection(0);
 		/*
 		 * mettre en gras et en couleur only le texte du message !
 		 * message.length et ensuite new styleRange() de 0 à length
@@ -906,6 +907,7 @@ public class Utils {
 		style.foreground = truc;
 
 		ViewLog.styledTextLogErreurs.setStyleRange(style);
+		ViewLog.tabFolderLog.setSelection(0);
 		/*
 		 * mettre en gras et en couleur only le texte du message !
 		 * message.length et ensuite new styleRange() de 0 à length
@@ -928,6 +930,7 @@ public class Utils {
 		style.foreground = truc;
 
 		ViewLog.styledTextLogErreurs.setStyleRange(style);
+		ViewLog.tabFolderLog.setSelection(0);
 		/*
 		 * mettre en gras et en couleur only le texte du message !
 		 * message.length et ensuite new styleRange() de 0 à length
