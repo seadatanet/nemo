@@ -418,6 +418,7 @@ public  class NemoWSImpl
     	WSSurveyDescription[] surveyArray = new WSSurveyDescription[surveys.size()];
     	return surveys.toArray(surveyArray);
     } catch (Exception e) {
+    	
     	_logger.error( "Erreur de récupération de la liste des Campagnes: "+ e);
     } finally {
     	if (result != null) {

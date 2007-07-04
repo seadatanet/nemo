@@ -973,21 +973,32 @@ public  class Survey
                                    new java.net.URL(Configuration.getSingleton().getNautilusWebServiceURL()));
     WSSurvey wssurvey = service.getSurvey(a_Reference);
     setReference(a_Reference);
-    setName( wssurvey.getName());
-    setShipCode( wssurvey.getShipCode());
-    setShipName( wssurvey.getShipName());
+    if (wssurvey.getName()!=null){
+    setName( wssurvey.getName());}
+    if (wssurvey.getShipCode()!=null){
+    setShipCode( wssurvey.getShipCode());}
+    if (wssurvey.getShipName()!=null){
+    setShipName( wssurvey.getShipName());}
     setStartDate(  wssurvey.getStartDate());
     setEndDate(  wssurvey.getEndDate());
-    setRegionName(  wssurvey.getRegionName());
-    setCountryCode(  wssurvey.getCountryCode());
-    setLaboratories(  wssurvey.getLaboratories());
-    setChiefScientist(  wssurvey.getChiefScientist());
-    setProjectName(  wssurvey.getProjectName());
-    setDataCentre(  wssurvey.getDataCentre());
+    if (wssurvey.getRegionName()!=null){
+    setRegionName(  wssurvey.getRegionName());}
+    if (wssurvey.getCountryCode()!=null){
+    setCountryCode(  wssurvey.getCountryCode());}
+    if (wssurvey.getLaboratories()!=null){
+    setLaboratories(  wssurvey.getLaboratories());}
+    if (wssurvey.getChiefScientist()!=null){
+    setChiefScientist(  wssurvey.getChiefScientist());}
+    if (wssurvey.getProjectName()!=null){
+    setProjectName(  wssurvey.getProjectName());}
+    if (wssurvey.getDataCentre()!=null){
+    setDataCentre(  wssurvey.getDataCentre());}
     setAvailability( Availability.publicly);
     setComment( "");
+    
     WSCollectedData[] datas = wssurvey.getDataTypes();
     releaseDataTypes();
+    if (datas!=null){
     for (int i=0; i<datas.length; i++) {
     	WSCollectedData data = datas[i];
     	DataType dataType = new DataType();
@@ -995,6 +1006,7 @@ public  class Survey
     	dataType.setNumberOfProfiles( data.getObservationNumber());
     	dataType.setSensor( data.isSensor());
     	addDataType(dataType);
+    }
     }
   }
 
