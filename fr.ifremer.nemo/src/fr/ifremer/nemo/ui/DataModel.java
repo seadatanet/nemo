@@ -2151,7 +2151,11 @@ public static void fillData(){
 //		code / fullName / sortie / format
 		typeData.setCode(modeleCourant.getCode()+ " - "+ modeleCourant.getFullName());
 		typeData.setNom(modeleCourant.getFullName());
-		typeData.setConversion(paraCourant.getConversionFormula());
+		
+		if (paraCourant.getConversionFormula().matches("")){
+			typeData.setConversion("x");
+		}else{
+		typeData.setConversion(paraCourant.getConversionFormula());}
 		typeData.setDebut(frag.getFirstCharOffset());
 		typeData.setFin(frag.getLastCharOffset());
 		typeData.setEntree(modeleCourant.getDefault());
