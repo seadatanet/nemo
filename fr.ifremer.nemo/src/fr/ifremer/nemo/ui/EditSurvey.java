@@ -199,7 +199,9 @@ public class EditSurvey {
 		listeText.clear();	
 		listeNoms.clear();
 		//FI par défaut pour le centre de données
+		textCentre.setTextLimit(2);
 		textCentre.setText("FI");
+		
 									  
 		
 		
@@ -881,6 +883,10 @@ public static void chargementXML(File fichier){
 			liste.get(i).setText(""); //$NON-NLS-1$
 					
 		}
+		
+		textCentre.setText("FI");
+		validee = 0;
+		
 		
 		//effacement de la liste des types de données dans la table
 		TableDataSurvey.types = new ArrayList<TypeSurvey>();

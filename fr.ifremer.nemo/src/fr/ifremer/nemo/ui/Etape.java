@@ -385,7 +385,8 @@ public class Etape {
 			
 		} else {
 			if (!EditStation.textProfondeur.getText().matches("")){
-			if (Float.parseFloat(EditStation.textProfondeur.getText()) > 0){
+				//Pattern.matches("^[0-9][0-9]*$", lign)
+			if (Pattern.matches("^[0-9][0-9]*$",EditStation.textProfondeur.getText())){
 				ok = ok && true;
 				//Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
 			} else {

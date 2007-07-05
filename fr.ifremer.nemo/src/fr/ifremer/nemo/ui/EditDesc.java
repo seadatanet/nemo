@@ -130,6 +130,7 @@ Drawing.sectionLabelTextInjectNbreLignes(formEdition,Messages.getString("EditDes
 
 //section fin de station
 Drawing.sectionLabelTextInjectNbreLignes(formEdition,Messages.getString("EditDesc.finStation"),Messages.getString("EditDesc.nbreLignesFinStation"), sectionFinStation, lignesFinStation); //$NON-NLS-1$ //$NON-NLS-2$
+lignesFinStation.setText("0");
 
 //Drawing.sectionManuelLigneDebutFinInject("test", "blabla description", sectionTest, enteteDonnees, upletDonnees, finDonnees, indicFinDonnees, buttonLignesEnteteStation);
 
@@ -445,7 +446,7 @@ public static void razText(ArrayList <Text> liste){
 		liste.get(i).setText(""); //$NON-NLS-1$
 				
 	}
-	
+	lignesFinStation.setText("0");
 }
 
 

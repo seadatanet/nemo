@@ -135,7 +135,7 @@ DrawingStation.sectionHistoriqueAcquisition(Messages.getString("EditStation.11")
 
 //section décallage TU
 DrawingStation.sectionManuelLigneDebutFinInject(Messages.getString("EditStation.86"), "", sectionTU, textTULigne, textTUDebut, textTUFin, textTU, buttonTUSaisie, buttonTUPos);
-
+textTU.setText("0.0");
 
 //section heure
 DrawingStation.sectionHeure(Messages.getString("EditStation.13"), Messages.getString("EditStation.14"), sectionHeure, textHeureLigne, textHeureDebut, textHeureFin, textHeureSaisie, labelConversionHeure); //$NON-NLS-1$ //$NON-NLS-2$
@@ -646,7 +646,7 @@ labelConversionDate  = new Label(shell, SWT.NONE);
 	
 }
 
-
+/*
 public static void initComboType(){
 	//remplissage de la combobox avec code + libellé séparés par " - " ==> "HO9 - Bouteilles"
 	int taille;
@@ -661,7 +661,7 @@ public static void initComboType(){
 			}
 	
 } 
-
+*/
 
 public static void initCombos(){
 	
@@ -717,7 +717,7 @@ public static void razText(ArrayList <Text> liste){
 		liste.get(i).setText(""); //$NON-NLS-1$
 				
 	}
-	
+	textTU.setText("0.0");
 }
 
 public static void conversionFreqEchant(){

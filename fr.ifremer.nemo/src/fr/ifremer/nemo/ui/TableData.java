@@ -332,8 +332,7 @@ public static void initTable(){
 	    itemMaj.setText(Messages.getString("TableData.12")); //$NON-NLS-1$
 	    MenuItem itemList = new MenuItem(menu, SWT.NONE);
 	    itemList.setText(Messages.getString("TableData.13")); //$NON-NLS-1$
-		MenuItem itemNew = new MenuItem(menu, SWT.NONE);
-	    itemNew.setText(Messages.getString("TableData.14")); //$NON-NLS-1$
+//		itemNew.setText(Messages.getString("TableData.14")); //$NON-NLS-1$
 	    MenuItem itemUp = new MenuItem(menu, SWT.NONE);
 	    itemUp.setText(Messages.getString("TableData.15")); //$NON-NLS-1$
 	    MenuItem itemDown = new MenuItem(menu, SWT.NONE);
@@ -388,13 +387,17 @@ public static void initTable(){
 	            
 	          }
 	        });
-		
+	
+		/*
 		itemNew.addListener(SWT.Selection, new Listener() {
 	          public void handleEvent(Event e) {
 	      //      System.out.println("nouveau type");
 	            nouvelElt();
 	          }
 	        });
+		*/
+		
+		
 		itemUp.addListener(SWT.Selection, new Listener() {
 	          public void handleEvent(Event e) {
 	       //     System.out.println("up");

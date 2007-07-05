@@ -566,19 +566,25 @@ public static void initTable(){
   public static void majTypeData(){
 	  //on met à jour tous les types de données dans l'ArrayList global
 	  //à partir des valeurs de la table
-	  // table.getItems()[2].setText(4, "ça marche super!");
+	 
 	 	 
 	 int nbre;
+	 //types = null;
+	 //types = new ArrayList<TypeSurvey>();
 	 
 	 nbre = TableDataSurvey.tableTypeSurvey.getItemCount();
 	 for (int i = 0; i <nbre; i++){
 		 
-
+//		 TypeSurvey type = new TypeSurvey();
+//		 type.setCode(TableDataSurvey.tableTypeSurvey.getItem(i).getText(0));
+//		 type.setNombre(Integer.valueOf(TableDataSurvey.tableTypeSurvey.getItem(i).getText(1)));
+//		 type.setQc(TableDataSurvey.tableTypeSurvey.getItem(i).getText(2));
 		 
 		types.get(i).setCode(TableDataSurvey.tableTypeSurvey.getItem(i).getText(0));
 		types.get(i).setNombre(Integer.valueOf(TableDataSurvey.tableTypeSurvey.getItem(i).getText(1)));
 		types.get(i).setQc(TableDataSurvey.tableTypeSurvey.getItem(i).getText(2));
 		
+		// types.add(type);
 		 }
 	  
 	 //System.out.println("maj types data : ok");

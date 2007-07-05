@@ -176,7 +176,7 @@ public  class NautilusSurveyWSImpl
     	    "select distinct cp.CAM_CRNOM,n.NAV_CODNOD,n.NAV_NOMNAV,cp.CAM_DATDEB,cp.CAM_DATFIN,"+
     	    "c.COD_LIBEL,cp.CAM_CPAYS,cp.CAM_ORGPAR,SUBSTR(cp.CAM_CAMREF,1,2),r.RSP_NOM, cp.CAM_CPRJ,cp.CAM_CRNO "+
     	    "from CAM cp,NAV n, COD c, RSP r, MIS m "+
-    	    "where ((cp.CAM_CAMREF = ?) and (cp.CAM_NAVIRE = n.NAV_NOMNAV) and (c.COD_CODE=cp.CAM_CZONE) "+
+    	    "where ((cp.CAM_CAMREF = ?) and (cp.CAM_NAVIRE = n.NAV_NAVIRE) and (c.COD_CODE=cp.CAM_CZONE) "+
     	    "and (c.COD_NOLIST=23) and (c.COD_LANGUE='E') and (r.RSP_CRSP=m.MIS_CRSP) and "+
     	    "(m.MIS_CRNO=cp.CAM_CRNO) and (m.MIS_NORANG=1))";
     	pstmt = conn.prepareStatement(statement);

@@ -111,9 +111,15 @@ if (ViewFile.checkBoxTempo.getSelection()){
 	DrawingData.sectionTotal(Messages.getString("EditData.6"), Messages.getString("EditData.7"), sectionTotal, textTotalLigne, textTotalDebut, textTotalFin); //$NON-NLS-1$ //$NON-NLS-2$
 	
 	
-	buttonFreqEchant.setSelection(true);
+	buttonFreqEchant.setSelection(false);
+	buttonLigneDonnees.setSelection(true);
+	
+	
 	//sections désactivées de base
 	test();
+	
+	sectionTotal.setEnabled(true);
+	
 	
 	formEdition.redraw();
 	formEdition.reflow(true);
@@ -585,6 +591,7 @@ public static void razText(ArrayList <Text> liste){
 	
 	//raz de la table de parameters
 //	effacement de la liste des types de données dans la table
+	TableData.types = null;
 	TableData.types = new ArrayList<TypeData>();
 	  //razTableData
 	TableData.razTableData();

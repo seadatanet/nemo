@@ -391,7 +391,8 @@ public static void initStation(){
 	String typeCombo  = EditStation.comboRefStationType.getText();
 	
 	DataType dataType = new DataType();
-	String code;
+	String code ="";
+	String libelle = "";
 	//si on a ouvert un modèle, on a le code direct !
 	if (DataModel.ouverture){
 			code = typeCombo;
@@ -399,8 +400,12 @@ public static void initStation(){
 	else{
 	Pattern p  = Pattern.compile(" - ");
 	String mots[] = p.split(typeCombo);
-	code = mots[0];
-	String libelle = mots[1];
+	
+	int taille = mots.length;
+	if (taille ==1){code = mots[0];}
+	if (taille >1){code = mots[0]; libelle = mots[1]; }
+	
+	
 	}
 	//création d'un nouveau Datatype avec les infos récupérées au dessus.
 	
@@ -1539,9 +1544,32 @@ public static void fillStation(){
 	//type de donnée
 	DataType dataType = station_modele.getDataType();
 	String code = dataType.getCode();
-	EditStation.comboRefStationType.add(code,0);
-	EditStation.comboRefStationType.select(0);
+	//faire un split sur - au cas où et n'avoir QUE le code
 	
+	Pattern p  = Pattern.compile(" - ");
+	String mots[] = p.split(code);
+	String vraiCode = mots[0];
+		
+//	EditStation.comboRefStationType.add(code,0);
+//	EditStation.comboRefStationType.select(0);
+	
+	//avant de charger le type de données, vérifier qu'il existe bien dans la liste mise à jour!!
+	int taille = TableDataSurvey.types.size();
+	Boolean ok = false;
+	for (int i=0;i<taille;i++){
+		//check si le type existe toujours ou pas
+		Pattern pat  = Pattern.compile(" - ");
+		String motsType[] = p.split(TableDataSurvey.types.get(i).getCode());
+		String vraiCodeType = motsType[0];
+				
+		if (vraiCode.matches(vraiCodeType)){ok = true;}
+	}
+	
+	//ajout du parametre ou non du coup
+	if (ok){
+		EditStation.comboRefStationType.add(code,0);
+		EditStation.comboRefStationType.select(0);
+	}
 	
 	//historique acquisition1 et 2
 	PropertyModel propertyModel = stationModel_modele.propertiesAt("dcHistory1");

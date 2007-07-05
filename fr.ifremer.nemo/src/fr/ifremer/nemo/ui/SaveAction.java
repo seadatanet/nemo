@@ -78,7 +78,11 @@ public static void choixFichierSortie(){
 	Shell shell = new Shell();
 	FileDialog dialog = new FileDialog(shell, SWT.SAVE |SWT.APPLICATION_MODAL);
 	dialog.setText(Messages.getString("SaveAction.5")); //$NON-NLS-1$
-	 nomFichierSortieXML = dialog.open();
+	String extensions[] = new String[1];
+	extensions[0]="*.xml"; //$NON-NLS-1$
+	dialog.setFilterExtensions(extensions);
+	
+	nomFichierSortieXML = dialog.open();
 	
 	fichierSortieXML = new File(nomFichierSortieXML);
 	if (fichierSortieXML.exists()){

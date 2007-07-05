@@ -974,25 +974,25 @@ public  class Survey
     WSSurvey wssurvey = service.getSurvey(a_Reference);
     setReference(a_Reference);
     if (wssurvey.getName()!=null){
-    setName( wssurvey.getName());}
+    setName( wssurvey.getName());}else{ setName("");   }
     if (wssurvey.getShipCode()!=null){
-    setShipCode( wssurvey.getShipCode());}
+    setShipCode( wssurvey.getShipCode());}else{ setShipCode("");   }
     if (wssurvey.getShipName()!=null){
-    setShipName( wssurvey.getShipName());}
+    setShipName( wssurvey.getShipName());}else{ setShipName("");   }
     setStartDate(  wssurvey.getStartDate());
     setEndDate(  wssurvey.getEndDate());
     if (wssurvey.getRegionName()!=null){
-    setRegionName(  wssurvey.getRegionName());}
+    setRegionName(  wssurvey.getRegionName());}else{ setRegionName("");   }
     if (wssurvey.getCountryCode()!=null){
-    setCountryCode(  wssurvey.getCountryCode());}
+    setCountryCode(  wssurvey.getCountryCode());}else{   setCountryCode(""); }
     if (wssurvey.getLaboratories()!=null){
-    setLaboratories(  wssurvey.getLaboratories());}
+    setLaboratories(  wssurvey.getLaboratories());}else{  setLaboratories("");  }
     if (wssurvey.getChiefScientist()!=null){
-    setChiefScientist(  wssurvey.getChiefScientist());}
+    setChiefScientist(  wssurvey.getChiefScientist());}else{  setChiefScientist("");  }
     if (wssurvey.getProjectName()!=null){
-    setProjectName(  wssurvey.getProjectName());}
+    setProjectName(  wssurvey.getProjectName());}else{  setProjectName("");  }
     if (wssurvey.getDataCentre()!=null){
-    setDataCentre(  wssurvey.getDataCentre());}
+    setDataCentre(  wssurvey.getDataCentre());}else{  setDataCentre("");  }
     setAvailability( Availability.publicly);
     setComment( "");
     
