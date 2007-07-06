@@ -648,7 +648,7 @@ public class Etape {
 			
 			//vérification que on a bien une valeur d'entree et de sortie et un format
 			if (typeCourant.getEntree().matches("")){ok = false;
-			Utils.messageErreurAppend(Messages.getString("Etape.98"));
+			Utils.messageErreurAppend(Messages.getString("Etape.101"));
 			}
 		
 //			check des valeurs début<fin
