@@ -26,6 +26,7 @@ import fr.ifremer.nemo.input.SingleFileSurvey;
 import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.input.SurveyMedia;
 import fr.ifremer.nemo.input.TimeSeriesModel;
+import fr.ifremer.nemo.ws.WSDataCentre;
 import fr.ifremer.nemo.ws.WSDataType;
 import fr.ifremer.nemo.ws.WSParameter;
 import fr.ifremer.nemo.util.DateTimeFormat;
@@ -43,6 +44,7 @@ public class DataModel {
 	public static WSParameter[] listeWSParameters, listeWSParameters_modele;
 	public static WSDataType[] listeWSDataTypes, listeWSDataTypes_modele;
 	public static WSDataType wsDatatypeStation, wsDatatypeStation_modele; 
+	public static WSDataCentre[] listeWSCenters;
 	public static Boolean ouverture;
 	public static TimeSeriesInformation timeSeriesInformation, timeSeriesInformation_modele;
 	
@@ -209,10 +211,11 @@ public static void initDesc(){
 	
 
 	
-	//on initialise les dataTypes et paramters en prévision des onglets Campagne et Data 
+	//on initialise les dataTypes, centers et parameters en prévision des onglets Campagne et Data 
 	
 	listeWSDataTypes = NemoLists.getDataTypes();
 	listeWSParameters = NemoLists.getParameters();
+	listeWSCenters = NemoLists.getDataCentres();
 	
 //	Lancement de la table des paramètres, onglet DATA, si pas deja créée
 	if (ViewFile.tableData == null){
@@ -257,7 +260,7 @@ public static void initSurvey(){
 	//DATE DE DEBUT
 	try {
 		DateTimeFormat dateFormat = new DateTimeFormat();
-		dateFormat.setFormatString("yyyy-MM-dd");
+		dateFormat.setFormatString("dd/MM/yy");
 		Long dateLong = (Long)dateFormat.parseObject(EditSurvey.textDateDebut.getText());
 		survey.setStartDate(dateLong);
 	} catch (ParseException e) {
@@ -268,7 +271,7 @@ public static void initSurvey(){
 	//DATE DE FIN
 	try {
 		DateTimeFormat dateFormat = new DateTimeFormat();
-		dateFormat.setFormatString("yyyy-MM-dd");
+		dateFormat.setFormatString("dd/MM/yy");
 		Long dateLong = (Long)dateFormat.parseObject(EditSurvey.textDateFin.getText());
 		survey.setEndDate(dateLong);
 	} catch (ParseException e) {
@@ -286,7 +289,12 @@ public static void initSurvey(){
 	survey.setProjectName(EditSurvey.textProjet.getText());
 	
 	//Centre d'archivage
-	survey.setDataCentre(EditSurvey.textCentre.getText());
+	//split sur le " - "
+	Pattern p  = Pattern.compile(" - ");
+	String mots[] = p.split(EditSurvey.comboDataCentres.getText());
+	String code = mots[0];
+	
+	survey.setDataCentre(code);
 	
 	//confidentialité
 	if (EditSurvey.comboConfid.getText().matches("P - Public")){survey.setAvailability("publicly");}
@@ -1405,7 +1413,7 @@ public static void fillSurvey(){
 	Formatter formatter = new Formatter();
 	
 	try {
-		EditSurvey.textDateDebut.setText(formatter.formatDateTime("yyyy-MM-dd", survey.getStartDate()));
+		EditSurvey.textDateDebut.setText(formatter.formatDateTime("dd/MM/yy", survey.getStartDate()));
 	} catch (ParseException e) {
 		
 		e.printStackTrace();
@@ -1414,7 +1422,7 @@ public static void fillSurvey(){
 	formatter = new Formatter();
 	
 	try {
-		EditSurvey.textDateFin.setText(formatter.formatDateTime("yyyy-MM-dd", survey.getEndDate()));
+		EditSurvey.textDateFin.setText(formatter.formatDateTime("dd/MM/yy", survey.getEndDate()));
 	} catch (ParseException e) {
 		
 		e.printStackTrace();
@@ -1429,7 +1437,23 @@ public static void fillSurvey(){
 	EditSurvey.textProjet.setText(survey.getProjectName());
 	
 	//Centre d'archivage
-	EditSurvey.textCentre.setText(survey.getDataCentre());
+	
+	
+	
+//	
+//	survey.setDataCentre(code);
+	int taille = DataModel.listeWSCenters.length;
+	int position = 0;
+	for (int i=0; i<taille;i++){
+		Pattern pat  = Pattern.compile(" - ");
+		String mots[] = pat.split(EditSurvey.comboDataCentres.getItem(i));
+		if (survey.getDataCentre().matches(mots[0])){
+			position = i;		
+		break;}
+	}
+	EditSurvey.comboDataCentres.select(position);
+	
+	//EditSurvey.textCentre.setText(survey.getDataCentre());
 	
 	//confidentialité
 	String code = survey.getAvailabilityCode();
@@ -1445,7 +1469,7 @@ public static void fillSurvey(){
 	//Remplissage de la liste des dataTypes de la campagne
 	
 	DataType[] dataTypes = survey.getDataTypes();
-	int taille = dataTypes.length;
+	taille = dataTypes.length;
 	
 	for (int i=0; i<taille;i++){
 		TypeSurvey typeSurvey = new TypeSurvey();

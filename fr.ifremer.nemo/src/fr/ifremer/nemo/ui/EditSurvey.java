@@ -55,7 +55,7 @@ public class EditSurvey {
 	public static ArrayList <Label> listeSectionsLabel;
 	public static ArrayList <Text> listeTextSurvey;
 	public static int expand, validee, loaded;
-	public static Combo comboConfid;
+	public static Combo comboConfid, comboDataCentres;
 	public static List listeType;
 	public static Boolean ws;
 	public static ScrolledForm formEdition;
@@ -867,6 +867,15 @@ public static void chargementXML(File fichier){
 		comboConfid.add("L - Limited");
 		comboConfid.add("C - Confidential");
 		comboConfid.select(0);
+				
+		comboDataCentres = new Combo(shell, SWT.READ_ONLY);
+		//remplissage des centres de données
+		int taille = DataModel.listeWSCenters.length;
+		for (int i=0; i<taille;i++){
+			comboDataCentres.add(DataModel.listeWSCenters[i].getCode() + " - "+DataModel.listeWSCenters[i].getName());
+		}
+		
+		
 	}
 	
 	public static void initListeType(){

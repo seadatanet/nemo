@@ -55,9 +55,12 @@ public static void creationTable(){
 	  tableColumn.setWidth(100);
 		//taille = 60
 		tableColumn.setText(Messages.getString("TableDataSurvey.1")); //$NON-NLS-1$
+		
 		TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);
 		tableColumn1.setWidth(100);
 		tableColumn1.setText(Messages.getString("TableDataSurvey.2")); //$NON-NLS-1$
+		
+		
 		TableColumn tableColumn2 = new TableColumn(table, SWT.NONE);
 		tableColumn2.setWidth(100);
 		tableColumn2.setText("QC"); //$NON-NLS-1$
@@ -256,13 +259,15 @@ public static void initTable(){
 	    MenuItem itemUp = new MenuItem(menu, SWT.NONE);
 	    itemUp.setText(Messages.getString("TableDataSurvey.8")); //$NON-NLS-1$
 	    
+	    
 	    MenuItem itemDown = new MenuItem(menu, SWT.NONE);
 	    itemDown.setText(Messages.getString("TableDataSurvey.9")); //$NON-NLS-1$
 	    //MenuItem tmp = new Separator();
 	    
 	    MenuItem itemDel = new MenuItem(menu, SWT.NONE);
 	    itemDel.setText(Messages.getString("TableDataSurvey.10")); //$NON-NLS-1$
-		table.setMenu(menu);
+		
+	    table.setMenu(menu);
 		
 		//ajouter des listeners sur les menu items ^^
 		
@@ -327,7 +332,7 @@ public static void initTable(){
 	      TableItem item = new TableItem(table, SWT.NONE);
 	      item.setText(new String[] { types.get(i).getCode(), ""+types.get(i).getNombre(), //$NON-NLS-1$
 	    		  types.get(i).getQc() });
-	       
+	      
 	    }  
 	
   }

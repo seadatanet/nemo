@@ -1180,8 +1180,7 @@ public static void sectionNlabelsNtextConfidentialite(Section section, String no
 			 sectionClient.setLayout(new GridLayout());
 			GridData gd = new GridData();
 			  gd.horizontalSpan = 2;
-	
-				System.out.println("=================ok1===========");
+	/*
 	for (i=0; i<nbre; i++){
 
 		//label avec le texte de "description"
@@ -1195,7 +1194,12 @@ public static void sectionNlabelsNtextConfidentialite(Section section, String no
 		listeText.get(i).setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 			
 	}
-	
+	*/
+	//combolist centres de données
+	Label label = new Label(sectionClient, SWT.NULL);
+	label.setText(Messages.getString("EditSurvey.62"));
+	EditSurvey.comboDataCentres.setParent(sectionClient);
+			  
 	//ajout de la combolist confidentialite
 	Label label2 = new Label(sectionClient, SWT.NULL);
 	label2.setText(Messages.getString("EditSurvey.28"));
