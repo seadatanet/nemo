@@ -645,6 +645,11 @@ public class Etape {
 			TypeData typeCourant = TableData.types.get(i);
 			debuts[i]=typeCourant.getDebut();
 			fins[i]=typeCourant.getFin();
+			
+			//vérification que on a bien une valeur d'entree et de sortie et un format
+			if (typeCourant.getEntree().matches("")){ok = false;
+			Utils.messageErreurAppend(Messages.getString("Etape.98"));
+			}
 		
 //			check des valeurs début<fin
 			if (typeCourant.getDebut()>typeCourant.getFin()){
