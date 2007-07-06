@@ -24,7 +24,7 @@ public class SWTProgress extends ApplicationWindow{
 		 if (ViewFile.odv.getSelection()){SWTProcess.odv = true;}else{SWTProcess.odv = false;}
 		 
 		  try {
-	          new ProgressMonitorDialog(shell).run(true, false, new SWTProcess());
+	          new ProgressMonitorDialog(shell).run(true, true, new SWTProcess());
 	        } catch (InvocationTargetException e) {
 	         
 	        } catch (InterruptedException e) {

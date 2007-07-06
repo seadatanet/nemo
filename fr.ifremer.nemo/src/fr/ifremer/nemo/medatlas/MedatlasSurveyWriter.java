@@ -51,9 +51,9 @@ public  class MedatlasSurveyWriter
    * @exception  GenerationException
    */
   public void writeSurvey ( Survey a_Survey, File a_Filename, ProgressNotification a_Progress) throws IOException, GenerationException {
-    FileWriter writer = null;
+    Writer writer = null;
     try {
-    	writer = new FileWriter(a_Filename);
+    	writer = new PrintWriter(new FileWriter(a_Filename), true);
     	writeSurvey ( a_Survey, writer, a_Progress);
     } finally {
     	if (writer != null) {

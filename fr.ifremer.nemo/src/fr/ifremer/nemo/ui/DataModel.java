@@ -232,7 +232,7 @@ public static void initDesc(){
 	}
 	
 	
-//vérouillage de l'option serieTemporelle pour éviter les changements
+//verrouillage de l'option serieTemporelle pour éviter les changements
 	ViewFile.checkBoxTempo.setEnabled(false);
 	
 	
@@ -1495,7 +1495,7 @@ public static void fillSurvey(){
 				
 		TableDataSurvey.types.add(typeSurvey);
 		
-		System.out.println("TypeSurvey " +typeSurvey.getCode()+" ajouté");
+		//System.out.println("TypeSurvey " +typeSurvey.getCode()+" ajouté");
 		
 	}
 	

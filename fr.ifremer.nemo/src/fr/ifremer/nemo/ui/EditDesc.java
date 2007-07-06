@@ -450,6 +450,31 @@ public static void razText(ArrayList <Text> liste){
 				
 	}
 	lignesFinStation.setText("0");
+	
+	//remise du nom onglet à valeur par défaut
+	ViewFile.tabItem.setText(Messages.getString("EditDesc.descriptionFichier"));
+	
+	//invalidation de l'étape
+	//validee = 0;
+	/*
+	//on invalide toutes les étapes suivantes
+	if (EditSurvey.validee == 1){
+		//EditSurvey.validee = 0;
+		ViewFile.tabFolder.getItems()[1].
+		ViewFile.tabItem1.setText(Messages.getString("EditSurvey.4"));
+		EditSurvey.loaded = 1;
+	}
+	if (EditStation.validee == 1){
+		//EditStation.validee = 0;
+		ViewFile.tabItem2.setText(Messages.getString("EditStation.1"));
+		EditStation.loaded = 1;
+	}
+	if (EditData.validee == 1){
+		//EditData.validee = 0;
+		ViewFile.tabItem3.setText(Messages.getString("EditData.1"));
+		EditData.loaded = 1;
+	}
+	*/
 }
 
 

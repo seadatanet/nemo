@@ -96,8 +96,15 @@ public class ViewFile extends ViewPart {
 		top = new Composite(parent, SWT.NONE);
 		top.setLayout(new FillLayout());
 
-		//validation de chaque étape
+		//invalidation de chaque étape
 		EditDesc.validee = 0;
+		EditDesc.loaded = 0;
+		EditSurvey.validee = 0;
+		EditSurvey.loaded = 0;
+		EditStation.validee = 0;
+		EditStation.loaded = 0;
+		EditData.validee = 0;
+		EditData.loaded = 0;
 		
 		//chargement de la configuration
 		Utils.initConfig();
@@ -109,13 +116,6 @@ public class ViewFile extends ViewPart {
 		//étape de départ
 		etape = 0;
 		OptionsAction.options = 0;
-		
-		//aucune étape n'est affichée
-		EditDesc.loaded = 0;
-		EditSurvey.loaded =0;
-		EditStation.loaded = 0;
-		EditData.loaded = 0;
-		EditConversion.loaded = 0;
 		
 		createTabFolder();
 	
