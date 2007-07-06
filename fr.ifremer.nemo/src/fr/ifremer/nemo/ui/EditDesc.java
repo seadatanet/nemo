@@ -120,7 +120,10 @@ public static ScrolledForm formEdition;
 
 //section entete fichier 
 Drawing.sectionLabelTextInjectNbreLignes(formEdition, Messages.getString("EditDesc.enteteFichier"), Messages.getString("EditDesc.surlignezLignes"), sectionEnteteFichier, lignesEnteteFichier); //$NON-NLS-1$ //$NON-NLS-2$
-
+if (ViewFile.dossierCampagne){
+	//dossier donc entete fichier à 0 de base
+	EditDesc.lignesEnteteFichier.setText("0");
+}
 
 //section entete station
 //Drawing.sectionRadioManuelRadioSimpleInjectLigneDebutFinInject(formEdition, "Entête Station                         ", "Donnez le nombre de lignes de l'entête station ou précisez que le nombre d'octets est présent sur la première ligne de données", sectionEnteteStation, lignesEnteteStation , buttonLignesEnteteStation, "Nombre de lignes", "Nombre octets sur 1ere ligne données", octetsEnteteStationLigne, octetsEnteteStationDebut, octetsEnteteStationFin);

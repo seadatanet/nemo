@@ -26,9 +26,12 @@ import fr.ifremer.nemo.input.SingleFileSurvey;
 import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.input.SurveyMedia;
 import fr.ifremer.nemo.input.TimeSeriesModel;
+import fr.ifremer.nemo.ws.WSCountry;
 import fr.ifremer.nemo.ws.WSDataCentre;
 import fr.ifremer.nemo.ws.WSDataType;
 import fr.ifremer.nemo.ws.WSParameter;
+import fr.ifremer.nemo.ws.WSRegion;
+import fr.ifremer.nemo.ws.WSShip;
 import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.LatitudeFormat;
@@ -45,6 +48,9 @@ public class DataModel {
 	public static WSDataType[] listeWSDataTypes, listeWSDataTypes_modele;
 	public static WSDataType wsDatatypeStation, wsDatatypeStation_modele; 
 	public static WSDataCentre[] listeWSCenters;
+	public static WSRegion[] listeWSRegions;
+	public static WSShip[] listeWSShips;
+	public static WSCountry[] listeWSCountries;
 	public static Boolean ouverture;
 	public static TimeSeriesInformation timeSeriesInformation, timeSeriesInformation_modele;
 	
@@ -216,6 +222,9 @@ public static void initDesc(){
 	listeWSDataTypes = NemoLists.getDataTypes();
 	listeWSParameters = NemoLists.getParameters();
 	listeWSCenters = NemoLists.getDataCentres();
+	listeWSShips = NemoLists.getShips();
+	listeWSCountries = NemoLists.getCountries();
+	listeWSRegions = NemoLists.getRegions();
 	
 //	Lancement de la table des paramètres, onglet DATA, si pas deja créée
 	if (ViewFile.tableData == null){

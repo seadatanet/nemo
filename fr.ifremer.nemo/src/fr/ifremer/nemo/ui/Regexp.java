@@ -75,7 +75,7 @@ public static Boolean checkLigneDebutfin(Text ligne, Text debut, Text fin, Strin
 	
 	//format des différents champs
 	//ligne
-	if (Pattern.matches("^[1-9][0-9]*$", lign)){ //$NON-NLS-1$
+	if (Pattern.matches("^[0-9][0-9]*$", lign)){ //$NON-NLS-1$
 		//System.out.println("ligne de la section " + nomSection + " ==> ok");
 		ok = ok && true;
 		//log = log + "Valeur de ligne ok\n";
