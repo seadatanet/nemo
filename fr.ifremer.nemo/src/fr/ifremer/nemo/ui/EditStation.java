@@ -673,7 +673,8 @@ public static void initCombos(){
 	for (int i=0;i<taille;i++){
 		//on n'ajoute que les sensors
 		if (TableDataSurvey.types.get(i).getSensor()){
-		comboRefStationType.add(TableDataSurvey.types.get(i).getCode());}
+		comboRefStationType.add(TableDataSurvey.types.get(i).getCode());
+		}
 	}
 	
 	

@@ -60,11 +60,14 @@ public static void creationTable(){
 		tableColumn1.setWidth(100);
 		tableColumn1.setText(Messages.getString("TableDataSurvey.2")); //$NON-NLS-1$
 		
-		
 		TableColumn tableColumn2 = new TableColumn(table, SWT.NONE);
 		tableColumn2.setWidth(100);
 		tableColumn2.setText("QC"); //$NON-NLS-1$
 		
+		TableColumn tableColumn3 = new TableColumn(table, SWT.READ_ONLY);
+		//mise à zero de la largeur de la colonne avec isSensor() pour ne pas qu'on puisse la modifier!!
+		tableColumn3.setWidth(0);
+		tableColumn3.setText(Messages.getString("TableDataSurvey.11")); //$NON-NLS-1$
 	
 	initTable();
 	
@@ -92,7 +95,8 @@ public static void initTypes(){
 		//paramètres
 		type.setCode(wsDatatype.getCode()+" - "+wsDatatype.getLibelle()); //$NON-NLS-1$
 		type.setQc(Messages.getString("TableDataSurvey.5")); //$NON-NLS-1$
-			
+		
+		type.setSensor(wsDatatype.isSensor());	
 		//ajout dans liste
 		typesWS.add(type);
 	}
@@ -331,7 +335,7 @@ public static void initTable(){
 	  for (int i = 0; i < nbre; i++) {
 	      TableItem item = new TableItem(table, SWT.NONE);
 	      item.setText(new String[] { types.get(i).getCode(), ""+types.get(i).getNombre(), //$NON-NLS-1$
-	    		  types.get(i).getQc() });
+	    		  types.get(i).getQc(), ""+types.get(i).getSensor() });
 	      
 	    }  
 	
@@ -588,6 +592,7 @@ public static void initTable(){
 		types.get(i).setCode(TableDataSurvey.tableTypeSurvey.getItem(i).getText(0));
 		types.get(i).setNombre(Integer.valueOf(TableDataSurvey.tableTypeSurvey.getItem(i).getText(1)));
 		types.get(i).setQc(TableDataSurvey.tableTypeSurvey.getItem(i).getText(2));
+		types.get(i).setSensor(Boolean.parseBoolean(TableDataSurvey.tableTypeSurvey.getItem(i).getText(3)));
 		
 		// types.add(type);
 		 }

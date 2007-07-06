@@ -425,7 +425,8 @@ public static void creationTableSurvey(){
 	 TableColumn tableColumn2 = new TableColumn(table, SWT.NONE);
 	 tableColumn2.setWidth(100);
 	 tableColumn2.setText(Messages.getString("FiltrageTableType.20")); //$NON-NLS-1$
-	
+	 
+	 
 	  for (int i = 0; i < nbre; i++) {
 	      TableItem item = new TableItem(table, SWT.NONE);
 	      item.setText(new String[] { TableDataSurvey.listeFiltree.get(i).getCode(), ""+TableDataSurvey.listeFiltree.get(i).getNombre(), //$NON-NLS-1$

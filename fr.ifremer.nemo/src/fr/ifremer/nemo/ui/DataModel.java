@@ -1589,20 +1589,23 @@ public static void fillStation(){
 	
 	//avant de charger le type de données, vérifier qu'il existe bien dans la liste mise à jour!!
 	int taille = TableDataSurvey.types.size();
-	Boolean ok = false;
+	Boolean ok=false, capteur = false;
 	for (int i=0;i<taille;i++){
 		//check si le type existe toujours ou pas
 		Pattern pat  = Pattern.compile(" - ");
 		String motsType[] = p.split(TableDataSurvey.types.get(i).getCode());
 		String vraiCodeType = motsType[0];
 				
-		if (vraiCode.matches(vraiCodeType)){ok = true;}
+		if (vraiCode.matches(vraiCodeType)){ok = true;
+		if (TableDataSurvey.types.get(i).getSensor()){capteur = true;} }
 	}
 	
 	//ajout du parametre ou non du coup
 	if (ok){
+		//ajouté que si c'est un capteur
+		if (capteur){
 		EditStation.comboRefStationType.add(code,0);
-		EditStation.comboRefStationType.select(0);
+		EditStation.comboRefStationType.select(0);}
 	}
 	
 	//historique acquisition1 et 2
