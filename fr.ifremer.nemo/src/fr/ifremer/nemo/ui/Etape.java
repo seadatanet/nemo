@@ -386,7 +386,7 @@ public class Etape {
 		} else {
 			if (!EditStation.textProfondeur.getText().matches("")){
 				//Pattern.matches("^[0-9][0-9]*$", lign)
-			if (Pattern.matches("^[0-9][0-9]*$",EditStation.textProfondeur.getText())){
+			if (Pattern.matches("^[0-9]*[0-9].*[0-9][0-9]*$",EditStation.textProfondeur.getText())){
 				ok = ok && true;
 				//Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
 			} else {
@@ -542,7 +542,8 @@ public class Etape {
 			} else {
 				if (!EditStation.textProfFin.getText().matches("")){ //$NON-NLS-1$
 				Utils.messageErreurAppend(Messages.getString("Etape.72")); //$NON-NLS-1$
-				if (Float.parseFloat(EditStation.textProfFin.getText()) > 0){
+				
+				if (Pattern.matches("^[0-9]*[0-9].*[0-9][0-9]*$",EditStation.textProfFin.getText())){
 					ok = ok && true;
 					//Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
 				} else {

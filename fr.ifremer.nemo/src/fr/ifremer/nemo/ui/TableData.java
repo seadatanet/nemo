@@ -657,9 +657,9 @@ public static void initTable(){
 	ligne = Utils.lignesBrutes.get(Integer.valueOf(EditDesc.lignesEnteteFichier.getText())+Integer.valueOf(EditDesc.lignesEnteteStation.getText()))+1;
 	selection = ligne.substring(Integer.valueOf(ViewFile.tableData.getItem(i).getText(4))-1, Integer.valueOf(ViewFile.tableData.getItem(i).getText(5))).trim();
 	
-	System.out.println("ligne lue = "+ligne );
-	System.out.println("debut="+Integer.valueOf(ViewFile.tableData.getItem(i).getText(4))+" fin="+Integer.valueOf(ViewFile.tableData.getItem(i).getText(5)));
-	System.out.println("sélection dans la ligne =>"+selection+"<");
+//	System.out.println("ligne lue = "+ligne );
+//	System.out.println("debut="+Integer.valueOf(ViewFile.tableData.getItem(i).getText(4))+" fin="+Integer.valueOf(ViewFile.tableData.getItem(i).getText(5)));
+//	System.out.println("sélection dans la ligne =>"+selection+"<");
 	
 		//on formate puis on reaffiche la liste
 	if (selection.matches(ViewFile.tableData.getItem(i).getText(7))){

@@ -136,6 +136,7 @@ public static void choixFichierSortie(){
 	dialog.setText(Messages.getString("EditConversion.13")); //$NON-NLS-1$
 	nomFichierSortie = dialog.open();
 	
+	if (nomFichierSortie!=null){
 	File fich = new File(nomFichierSortie);
 	if (fich.exists()){
 		shell.close();
@@ -153,7 +154,7 @@ public static void choixFichierSortie(){
 		
 	}
 	
-	
+	}
 	
 	
 }

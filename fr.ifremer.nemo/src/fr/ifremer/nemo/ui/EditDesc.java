@@ -138,7 +138,7 @@ lignesFinStation.setText("0");
 //Drawing.sectionComboLigneDebutFinInject(formEdition,"Indicateur de Fin de Données           ", "Indiquez ici quel est l'indicateur de rupture de données, ou surlignez les lignes de mesures puis cliquez sur injecter", sectionRuptureDonnees, ruptureDonneesNoLigne, ruptureDonneesDebut, ruptureDonneesFin, buttonIndicFinDonnees, comboIndicRuptureDonnees);
 Drawing.sectionComboInjectNbreLignes(formEdition, Messages.getString("EditDesc.indicFinDonnees"), Messages.getString("EditDesc.indiquezIndicFinDonnees"), sectionRuptureDonnees, nbreLignesMesures, buttonIndicFinDonnees, comboIndicRuptureDonnees); //$NON-NLS-1$ //$NON-NLS-2$
 //comboIndicRuptureDonnees.add("");
-comboIndicRuptureDonnees.add(Messages.getString("EditDesc.ligneVide")); //$NON-NLS-1$
+//comboIndicRuptureDonnees.add(Messages.getString("EditDesc.ligneVide")); //$NON-NLS-1$
 comboIndicRuptureDonnees.add("EOF"); //$NON-NLS-1$
 comboIndicRuptureDonnees.add("END"); //$NON-NLS-1$
 
