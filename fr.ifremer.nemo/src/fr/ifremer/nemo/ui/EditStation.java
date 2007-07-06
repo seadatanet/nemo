@@ -671,7 +671,9 @@ public static void initCombos(){
 	
 	int taille = TableDataSurvey.types.size();
 	for (int i=0;i<taille;i++){
-		comboRefStationType.add(TableDataSurvey.types.get(i).getCode());
+		//on n'ajoute que les sensors
+		if (TableDataSurvey.types.get(i).getSensor()){
+		comboRefStationType.add(TableDataSurvey.types.get(i).getCode());}
 	}
 	
 	

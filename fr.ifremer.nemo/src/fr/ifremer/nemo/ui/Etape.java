@@ -166,7 +166,7 @@ public class Etape {
 		if (!EditSurvey.textDateDebut.getText().matches("")){ //$NON-NLS-1$
 		try {
 			DateTimeFormat dateFormat = new DateTimeFormat();
-			dateFormat.setFormatString("yyyy-MM-dd"); //$NON-NLS-1$
+			dateFormat.setFormatString("dd/MM/yy"); //$NON-NLS-1$
 			Long dateLong = (Long)dateFormat.parseObject(EditSurvey.textDateDebut.getText());
 			
 		} catch (ParseException e) {
@@ -178,7 +178,7 @@ public class Etape {
 		if (!EditSurvey.textDateFin.getText().matches("")){ //$NON-NLS-1$
 		try {
 			DateTimeFormat dateFormat = new DateTimeFormat();
-			dateFormat.setFormatString("yyyy-MM-dd"); //$NON-NLS-1$
+			dateFormat.setFormatString("dd/MM/yy"); //$NON-NLS-1$
 			Long dateLong = (Long)dateFormat.parseObject(EditSurvey.textDateFin.getText());
 			
 		} catch (ParseException e) {
