@@ -558,7 +558,7 @@ public static void initStation(){
 	
 	if (EditStation.buttonTUSaisie.getSelection()){
 		//if (true){
-			//mise à true pour passage obligatoire ! TODO
+			//mise à true pour passage obligatoire ! 
 		//saisie manuelle
 		//station.setLatitude(EditStation.textTU.getText());
 			station.setOffsetTU(EditStation.textTU.getText());
@@ -1210,6 +1210,7 @@ public static void initData(){
 				
 	}else{
 		//calcul position date/heure dans les données
+		stationModel.getTimestampModel().setComputed(false);
 		HorodatedParameterModel horoDatedParameterModel = stationModel.getTimestampModel();
 		try {
 			horoDatedParameterModel.setFormat(new DateTimeFormat(EditData.comboTotal.getText()));
@@ -2181,7 +2182,7 @@ public static void fillData(){
 		typeData.setNom(modeleCourant.getFullName());
 		
 		if (paraCourant.getConversionFormula().matches("")){
-			typeData.setConversion("x");
+			typeData.setConversion("x*1");
 		}else{
 		typeData.setConversion(paraCourant.getConversionFormula());}
 		typeData.setDebut(frag.getFirstCharOffset());
