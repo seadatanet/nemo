@@ -114,6 +114,7 @@ public class Etape {
 		
 		
 		if (ok){ 	
+			EditDesc.okApresReset = true;
 			okDesc();
 			}else {ViewFile.tabItem.setText(Messages.getString("Etape.9")); //$NON-NLS-1$
 			ViewFile.etape = 0;}
@@ -206,7 +207,8 @@ public class Etape {
 		}
 		
 		
-		if (ok){ 	
+		if (ok){ 
+			EditSurvey.okApresReset = true;
 			okSurvey();
 			}else {ViewFile.tabItem1.setText(Messages.getString("Etape.29")); //$NON-NLS-1$
 			ViewFile.etape = 1;}
@@ -606,7 +608,8 @@ public class Etape {
 		} //fin série tempo
 		
 		
-		if (ok){ 	
+		if (ok){ 
+			EditStation.okApresReset = true;
 			okStation();
 			}else {ViewFile.tabItem2.setText(Messages.getString("Etape.85")); //$NON-NLS-1$
 			ViewFile.etape = 2;}
@@ -718,6 +721,7 @@ public class Etape {
 		
 		
 		if (ok){
+			EditData.okApresReset = true;
 			okData();}
 	}
 	

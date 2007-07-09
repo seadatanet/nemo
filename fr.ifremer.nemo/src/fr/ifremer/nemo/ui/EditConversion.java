@@ -67,11 +67,13 @@ ViewLog.aideConversion();
 		.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 		public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
 		//System.out.println("conversion !"); 
-				
-		//test pour savoir si on est en campagne ou pas
-			choixFichierSortie();
+		
+		if (EditDesc.okApresReset && EditSurvey.okApresReset && EditStation.okApresReset && EditData.okApresReset){	
 			
-			java.io.FileInputStream stream = null;
+		//test pour savoir si on est en campagne ou pas
+		choixFichierSortie();
+			
+		java.io.FileInputStream stream = null;
 		
 		Utils.messageErreur("");
 		new SWTProgress().run();
@@ -80,9 +82,14 @@ ViewLog.aideConversion();
 		if (ViewFile.odv.getSelection()){
 		Utils.messageOK(Messages.getString("EditConversion.9"));} //$NON-NLS-1$
 		else {Utils.messageOK(Messages.getString("EditConversion.10"));} //$NON-NLS-1$
+				}else{
+					Utils.messageErreur(Messages.getString("EditConversion.15"));
 				}
+		}
+		
 		});
 	
+		
 		ViewFile.affiche = 4;
 		formEdition.reflow(true);	
 		

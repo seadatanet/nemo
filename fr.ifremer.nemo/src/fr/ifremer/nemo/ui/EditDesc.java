@@ -32,6 +32,7 @@ public static Group groupRuptureDonnees;
 public static Combo comboIndicRuptureDonnees;
 public static ArrayList <Text> listeTextDesc;
 public static ArrayList <Section> listeSectionsDesc;
+public static Boolean okApresReset;
 public static int expand, validee, loaded;
 //expand : savoir si sections ouvertes ou non
 //validee : si etape validee
@@ -47,6 +48,8 @@ public static ScrolledForm formEdition;
 		if (ViewFile.fileLoaded){
 			
 		formEdition = ViewEdit.formEdition;
+		
+		okApresReset = true;
 		
 		//raz message erreur
 		Utils.messageErreur(""); //$NON-NLS-1$
@@ -452,27 +455,37 @@ public static void razText(ArrayList <Text> liste){
 	lignesFinStation.setText("0");
 	
 	//remise du nom onglet à valeur par défaut
+	EditDesc.okApresReset = false;
 	ViewFile.tabItem.setText(Messages.getString("EditDesc.descriptionFichier"));
 	
 	//invalidation de l'étape
 	//validee = 0;
+	
+	//on invalide toutes les étapes suivantes avec le second flag okApresReset à false
+	EditSurvey.okApresReset = false;
+	ViewFile.tabItem1.setText(Messages.getString("EditSurvey.4"));
+	EditStation.okApresReset = false;
+	ViewFile.tabItem2.setText(Messages.getString("EditStation.1"));
+	EditData.okApresReset = false;
+	ViewFile.tabItem3.setText(Messages.getString("EditData.1"));
+	
+	
 	/*
-	//on invalide toutes les étapes suivantes
 	if (EditSurvey.validee == 1){
-		//EditSurvey.validee = 0;
-		ViewFile.tabFolder.getItems()[1].
+		//EditSurvey.
+		
 		ViewFile.tabItem1.setText(Messages.getString("EditSurvey.4"));
-		EditSurvey.loaded = 1;
+		//EditSurvey.loaded = 1;
 	}
 	if (EditStation.validee == 1){
 		//EditStation.validee = 0;
 		ViewFile.tabItem2.setText(Messages.getString("EditStation.1"));
-		EditStation.loaded = 1;
+		//EditStation.loaded = 1;
 	}
 	if (EditData.validee == 1){
 		//EditData.validee = 0;
 		ViewFile.tabItem3.setText(Messages.getString("EditData.1"));
-		EditData.loaded = 1;
+		//EditData.loaded = 1;
 	}
 	*/
 }

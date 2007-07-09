@@ -58,6 +58,7 @@ public class EditSurvey {
 	public static Combo comboConfid, comboDataCentres;
 	public static List listeType;
 	public static Boolean ws;
+	public static Boolean okApresReset;
 	public static ScrolledForm formEdition;
 	public static Shell shell;
 	
@@ -71,7 +72,7 @@ public class EditSurvey {
 			formEdition = ViewEdit.formEdition;
 			ViewLog.aideSurvey();
 			ws = false;
-			
+			okApresReset = true;
 			//affichage du texte dans la zone de gauche
 			
 			//Utils.remplissageTexte(ViewFile.styledTextCampagne);
@@ -935,6 +936,15 @@ public static void chargementXML(File fichier){
 			}
 		
 		
+			EditSurvey.okApresReset = false;
+			ViewFile.tabItem1.setText(Messages.getString("EditSurvey.4"));
+			EditStation.okApresReset = false;
+			ViewFile.tabItem2.setText(Messages.getString("EditStation.1"));
+			EditData.okApresReset = false;
+			ViewFile.tabItem3.setText(Messages.getString("EditData.1"));	
+			
+			
+			
 		
 	}
 	

@@ -31,6 +31,7 @@ public static ArrayList <Label> listeSectionsLabel;
 public static ArrayList <Text> listeTextData;
 public static int expand, validee, loaded;
 public static List listeType;
+public static Boolean okApresReset;
 public static ScrolledForm formEdition;
 public static Combo comboHeure, comboDate, comboTotal;
 
@@ -42,6 +43,7 @@ public static void affichageEdition(){
 formEdition = ViewEdit.formEdition;
 ViewLog.aideData();
 listeTextData = new ArrayList <Text>();
+okApresReset = true;
 
 //raz message erreur
 Utils.messageErreur(""); //$NON-NLS-1$
@@ -554,12 +556,13 @@ public static void initCombos(){
 	Shell shell = new Shell();
 	
 	comboHeure = new Combo(shell, SWT.NONE);
-	comboHeure.add("hh:mm:ss"); //$NON-NLS-1$
-	comboHeure.add("hh:mm"); //$NON-NLS-1$
-	comboHeure.add("hh24:mm:ss"); //$NON-NLS-1$
 	comboHeure.add("hh24:mm"); //$NON-NLS-1$
 	comboHeure.add("hh24mmss"); //$NON-NLS-1$
 	comboHeure.add("hh24mm"); //$NON-NLS-1$
+	comboHeure.add("hh:mm:ss"); //$NON-NLS-1$
+	comboHeure.add("hh:mm"); //$NON-NLS-1$
+	comboHeure.add("hh24:mm:ss"); //$NON-NLS-1$
+	
 
 	comboDate = new Combo(shell, SWT.NONE);
 	comboDate.add("ddMMyyyy"); //$NON-NLS-1$
@@ -600,7 +603,8 @@ public static void razText(ArrayList <Text> liste){
 		 //initTable();
 	TableData.creationTable();
 	
-	
+	EditData.okApresReset = false;
+	ViewFile.tabItem3.setText(Messages.getString("EditData.1"));
 	
 	
 }

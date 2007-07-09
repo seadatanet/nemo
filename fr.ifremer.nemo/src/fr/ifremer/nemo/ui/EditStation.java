@@ -32,6 +32,7 @@ public class EditStation {
 	public static Section sectionStation, sectionTypeDonnees, sectionHistorique, sectionCommentaire, sectionSurface, sectionHeure, sectionDate, sectionTU, sectionLatitude, sectionLongitude, sectionProfondeur;
 	public static Section sectionLatFin, sectionLongFin, sectionProfFin, sectionProfCapteur, sectionDeclinMagnet, sectionFreqEchant;
 	public static Label labelConversionHeure, labelConversionDate;
+	public static Boolean okApresReset;
 	
 	
 	
@@ -56,6 +57,7 @@ formEdition = ViewEdit.formEdition;
 ViewLog.aideStation();
 //raz message erreur
 Utils.messageErreur(""); //$NON-NLS-1$
+okApresReset = true;
 
 //affichage du texte dans la zone de gauche
 
@@ -679,37 +681,39 @@ public static void initCombos(){
 	
 	
 	comboHeure = new Combo(shell, SWT.NONE);
-	comboHeure.add("hh:mm:ss"); //$NON-NLS-1$
-	comboHeure.add("hh:mm"); //$NON-NLS-1$
-	comboHeure.add("hh24:mm:ss"); //$NON-NLS-1$
 	comboHeure.add("hh24:mm"); //$NON-NLS-1$
 	comboHeure.add("hh24mmss"); //$NON-NLS-1$
 	comboHeure.add("hh24mm"); //$NON-NLS-1$
+	comboHeure.add("hh:mm:ss"); //$NON-NLS-1$
+	comboHeure.add("hh:mm"); //$NON-NLS-1$
+	comboHeure.add("hh24:mm:ss"); //$NON-NLS-1$
+	
 
 	comboDate = new Combo(shell, SWT.NONE);
+	comboDate.add("dd/MM/yy"); //$NON-NLS-1$
+	comboDate.add("dd/MM/yyyy"); //$NON-NLS-1$
 	comboDate.add("ddMMyyyy"); //$NON-NLS-1$
 	comboDate.add("ddMMyy"); //$NON-NLS-1$
 	comboDate.add("MMddyy"); //$NON-NLS-1$
 	comboDate.add("yyddMM"); //$NON-NLS-1$
 	comboDate.add("dd:MM:yyyy"); //$NON-NLS-1$
 	comboDate.add("dd:MM:yy"); //$NON-NLS-1$
-	comboDate.add("dd/MM/yy"); //$NON-NLS-1$
-	comboDate.add("dd/MM/yyyy"); //$NON-NLS-1$
+	
 	
 	comboLatitude = new Combo(shell, SWT.NONE);
+	comboLatitude.add("NDD MM.mm"); //$NON-NLS-1$
 	comboLatitude.add("DDD MM ss.s"); //$NON-NLS-1$
 	comboLatitude.add("DDD MM.mmm"); //$NON-NLS-1$
 	comboLatitude.add("DDD.DDDDD"); //$NON-NLS-1$
 	comboLatitude.add("DDD.DD"); //$NON-NLS-1$
-	comboLatitude.add("NDD MM.mm"); //$NON-NLS-1$
 	comboLatitude.add("+DD.mmm"); //$NON-NLS-1$
 	
 	comboLongitude = new Combo(shell, SWT.NONE);
+	comboLongitude.add("NDDD MM.mm"); //$NON-NLS-1$
 	comboLongitude.add("DDD MM ss.s"); //$NON-NLS-1$
 	comboLongitude.add("DDD MM.mmm"); //$NON-NLS-1$
 	comboLongitude.add("DDD.DDDDD"); //$NON-NLS-1$
 	comboLongitude.add("DDD.DD"); //$NON-NLS-1$
-	comboLongitude.add("NDDD MM.mm"); //$NON-NLS-1$
 	comboLongitude.add("+DDD.mmm"); //$NON-NLS-1$
 
 }
@@ -721,6 +725,11 @@ public static void razText(ArrayList <Text> liste){
 				
 	}
 	textTU.setText("0.0");
+	EditStation.okApresReset = false;
+	ViewFile.tabItem2.setText(Messages.getString("EditStation.1"));
+	EditData.okApresReset = false;
+	ViewFile.tabItem3.setText(Messages.getString("EditData.1"));
+	
 }
 
 public static void conversionFreqEchant(){
