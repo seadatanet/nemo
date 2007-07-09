@@ -39,6 +39,8 @@ public  class ParameterModel
    */
   protected LineFragment _fragment;
 
+  protected org.nfunk.jep.JEP _jepParser;
+  
   /**
    * Représente le paramètre modélisé par ce ParameterModel
    */
@@ -315,6 +317,15 @@ public  class ParameterModel
     _model = x;
   }
 
+  
+  protected org.nfunk.jep.JEP getJepParser() {
+	    return _jepParser;
+	  }
+	  
+	  protected void setJepParser(  org.nfunk.jep.JEP parser) {
+	    _jepParser = parser;
+	  }
+  
   /**
    *
    * @param  a_Line  
@@ -322,26 +333,32 @@ public  class ParameterModel
    */
   public void convert ( String a_Line, ParameterValue a_ParameterValue) {
 	  
-    String fragmnt = _fragment.retreive( a_Line);
-    
-    //System.out.println("===========>"+fragmnt);
-    
-    double val = Double.parseDouble(fragmnt);
-    if ((float)val == _inputDefault) {
-    	a_ParameterValue.setValue( Float.parseFloat(_model.getDefault()));
-    } else {
-    	if (_conversionFormula.trim().length() > 0) {
-    		org.nfunk.jep.JEP parser = new org.nfunk.jep.JEP();
-    		parser.addStandardFunctions();
-    		parser.addStandardConstants();
-    		parser.addVariable("x", val);
-    		parser.parseExpression(_conversionFormula.trim());
-    		double result = parser.getValue();
-    		a_ParameterValue.setValue( (float)result);
-    	} else {
-    		a_ParameterValue.setValue(  (float)val);
-    	}
-    }
+	  org.nfunk.jep.JEP parser = null;
+	    String fragmnt = _fragment.retreive( a_Line);
+	    double val = Double.parseDouble(fragmnt);
+	    if ((float)val == _inputDefault) {
+	    	a_ParameterValue.setValue( Float.parseFloat(_model.getDefault()));
+	    } else {
+	    	if (_conversionFormula.trim().length() > 0) {
+	    	 if (getJepParser() == null) {
+	      		parser = new org.nfunk.jep.JEP();
+	      		parser.addStandardFunctions();
+	      		parser.addStandardConstants();
+	      		parser.addVariable("x", val);
+	      		parser.parseExpression(_conversionFormula.trim());
+	      		setJepParser(parser);
+	      		double result = parser.getValue();
+	      		a_ParameterValue.setValue( (float)result);
+	    		} else {
+	    		  parser = getJepParser();
+	      		parser.addVariable("x", val);
+	      		double result = parser.getValue();
+	      		a_ParameterValue.setValue( (float)result);
+	        }
+	    	} else {
+	    		a_ParameterValue.setValue(  (float)val);
+	    	}
+	    }
   }
 
   /**

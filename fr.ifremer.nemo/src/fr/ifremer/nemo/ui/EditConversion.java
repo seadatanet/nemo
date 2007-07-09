@@ -73,15 +73,12 @@ ViewLog.aideConversion();
 		//test pour savoir si on est en campagne ou pas
 		choixFichierSortie();
 			
-		java.io.FileInputStream stream = null;
 		
-		Utils.messageErreur("");
-		new SWTProgress().run();
 			
 		//System.out.println("==== Fin de conversion ====");	
-		if (ViewFile.odv.getSelection()){
-		Utils.messageOK(Messages.getString("EditConversion.9"));} //$NON-NLS-1$
-		else {Utils.messageOK(Messages.getString("EditConversion.10"));} //$NON-NLS-1$
+		//if (ViewFile.odv.getSelection()){
+		//Utils.messageOK(Messages.getString("EditConversion.9"));} //$NON-NLS-1$
+		//else {Utils.messageOK(Messages.getString("EditConversion.10"));} //$NON-NLS-1$
 				}else{
 					Utils.messageErreur(Messages.getString("EditConversion.15"));
 				}
@@ -155,14 +152,29 @@ public static void choixFichierSortie(){
 		
 		int reponse = mb.open();
 		if (reponse == SWT.NO){
+			//on n'écrase pas le fichier
 			choixFichierSortie();
+			}else{
+		//on écrase le fichier
+		java.io.FileInputStream stream = null;
+		
+		Utils.messageErreur("");
+		new SWTProgress().run();
+		
+		if (ViewFile.odv.getSelection()){
+			Utils.messageOK(Messages.getString("EditConversion.9"));}
+		else {Utils.messageOK(Messages.getString("EditConversion.10"));} 
+		
+		
+		
+		
 			}
-		
-		
 	}
 	
 	}
-	else{choixFichierSortie();}
+	else{
+		
+	}
 	
 	
 }

@@ -12,7 +12,9 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
 public class SWTProgress extends ApplicationWindow{
-
+	public static SWTProcess swtProcess;
+	
+	
 	  public SWTProgress() {
 		    super(null);
 		  }
@@ -21,14 +23,16 @@ public class SWTProgress extends ApplicationWindow{
 	   
 		 final Shell shell = new Shell();
 	    
-		 if (ViewFile.odv.getSelection()){SWTProcess.odv = true;}else{SWTProcess.odv = false;}
+		 if (ViewFile.odv.getSelection()){SWTProcess.odv = true;}
+		 else{SWTProcess.odv = false;}
 		 
 		  try {
-	          new ProgressMonitorDialog(shell).run(true, true, new SWTProcess());
+			  swtProcess = new SWTProcess();
+	          new ProgressMonitorDialog(shell).run(true, true, swtProcess);
 	        } catch (InvocationTargetException e) {
 	         
 	        } catch (InterruptedException e) {
-	       
+	        	System.out.println("STOP");
 	        }
 	    
 	  }

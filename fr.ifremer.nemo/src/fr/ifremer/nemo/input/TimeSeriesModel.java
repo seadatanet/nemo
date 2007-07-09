@@ -27,6 +27,8 @@ public  class TimeSeriesModel
   protected String  _sampleRateConversion;
 
   protected StationModel _stationModel;
+  
+  protected org.nfunk.jep.JEP _jepParser;
 
   protected java.util.Map<String, PropertyModel> _properties;
 
@@ -357,14 +359,30 @@ public  class TimeSeriesModel
    * @param  a_TimeSeriesInformation  
    */
   public void convertSampleRate ( TimeSeriesInformation a_TimeSeriesInformation) {
-    if (_sampleRateConversion.trim().length() > 0 && !propertiesAt("samplingRate").isUserProvided()) {
-    	org.nfunk.jep.JEP parser = new org.nfunk.jep.JEP();
+	  
+	  org.nfunk.jep.JEP parser = null;
+	  
+	  
+	  if (_sampleRateConversion.trim().length() > 0 && !propertiesAt("samplingRate").isUserProvided()) {
+    	
+		  if (getJepParser() == null) {  
+		  
+		parser = new org.nfunk.jep.JEP();
     	parser.addStandardFunctions();
     	parser.addStandardConstants();
     	parser.addVariable("x", a_TimeSeriesInformation.getSamplingRate());
     	parser.parseExpression(_sampleRateConversion.trim());
+    	setJepParser(parser);
     	double result = parser.getValue();
     	a_TimeSeriesInformation.setSamplingRate( (float)result);
+		  }else{
+			  	parser = getJepParser();
+	      		parser.addVariable("x", a_TimeSeriesInformation.getSamplingRate());
+	      		double result = parser.getValue();  
+	      		a_TimeSeriesInformation.setSamplingRate( (float)result);
+			  
+		  	}
+		  
     }
   }
 
@@ -397,6 +415,16 @@ public  class TimeSeriesModel
     return null;
   }
 
+  
+  protected org.nfunk.jep.JEP getJepParser() {
+	    return _jepParser;
+	  }
+	  
+	  protected void setJepParser(  org.nfunk.jep.JEP parser) {
+	    _jepParser = parser;
+	  }
+  
+  
   /**
    *
    */

@@ -6,6 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Shell;
@@ -34,10 +35,8 @@ public class SWTProcess implements IRunnableWithProgress{
 	  public void run(IProgressMonitor monitor) throws InvocationTargetException, 
 	                                                   InterruptedException {
 	    monitor.beginTask(Messages.getString("SWTProcess.1"), IProgressMonitor.UNKNOWN);
-	    
-	    
 	    monitor2 = monitor;
-
+	    
 	    //NOTIFIER
 	    notifier = new ProgressNotification() {
             public void progress(final int val) {
@@ -45,6 +44,11 @@ public class SWTProcess implements IRunnableWithProgress{
             			Application.display.syncExec( new Runnable() {
                                                       public void run() {
                                                    	 monitor2.subTask(Messages.getString("SWTProcess.2")+val+"%");
+                                                   	 if (monitor2.isCanceled()){
+                                                   		//throw new OperationCanceledException();
+                                                   		System.out.println("STOPPPP");
+                                                   	
+                                                   	 }
                                                    	   }
                                                   });
                 } catch (Exception e) {
@@ -53,8 +57,7 @@ public class SWTProcess implements IRunnableWithProgress{
         };
 	    
 	    //TACHE A EFFECTUER
-	
-		try {
+        try {
 			notifier.progress(0);
 			monitor.setTaskName(Messages.getString("SWTProcess.3"));
 			survey = DataModel.inputModel.convert(notifier);
@@ -66,6 +69,10 @@ public class SWTProcess implements IRunnableWithProgress{
 			e.printStackTrace();
 		} catch (ParseException e) {
 			//
+			e.printStackTrace();
+		} catch (OperationCanceledException e) {
+			
+			System.out.println("STOPPPP");
 			e.printStackTrace();
 		}
 		
