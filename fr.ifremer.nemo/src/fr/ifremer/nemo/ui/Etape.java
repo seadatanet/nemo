@@ -798,7 +798,21 @@ public class Etape {
 		}
 		
 		
-		//TEST ENTREE DEFAUT SORTIE
+		//TEST pour savoir si PRES est bien en premier
+		TypeData premierType = TableData.types.get(0);
+		
+//		split sur " - "
+		Pattern p  = Pattern.compile(" - ");
+		String mots[] = p.split(premierType.getCode());
+		String code = mots[0];
+		
+		if (!code.matches("PRES")){
+			//PRES n'est pas en premier
+			Utils.messageErreurAppend(Messages.getString("Etape.107"));
+			ok = ok && false;
+		}else{
+			ok = ok && true;
+		}
 		
 		
 		
