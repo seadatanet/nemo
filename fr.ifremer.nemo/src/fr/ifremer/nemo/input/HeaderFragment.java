@@ -348,14 +348,14 @@ public  class HeaderFragment
     		return a_Header[0].substring( _firstCharOffset-1 );
     	} else {
     		//return a_Header[0].substring( _firstCharOffset-1, _lastCharOffset-_firstCharOffset+1 ).trim();
-    		return a_Header[0].substring( _firstCharOffset-1, _lastCharOffset-_firstCharOffset+1 );
+    		return a_Header[0].substring( _firstCharOffset-1, _lastCharOffset );
     	}
     } else {
     	StringWriter stringWriter = new StringWriter();
     	PrintWriter writer = new PrintWriter(stringWriter, true);
-    	System.out.println("firstline ==>" + _firstLine);
-    	System.out.println("lastline ==>" + _lastLine);
-    	System.out.println("lenght ==>" + a_Header.length);
+    	//System.out.println("firstline ==>" + _firstLine);
+    	//System.out.println("lastline ==>" + _lastLine);
+    //	System.out.println("lenght ==>" + a_Header.length);
     	
     	for ( int i=_firstLine-1; i<_lastLine; i++) {
     		int start = 0;

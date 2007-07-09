@@ -236,6 +236,16 @@ public static void initTable(){
 		              editor.setEditor(text, itemTmp, i);
 		              text.setText(itemTmp.getText(i));
 		              text.selectAll();
+		              
+		            //invalidation de l'étape quand modif  
+		          	EditSurvey.okApresReset = false;
+					ViewFile.tabItem1.setText(Messages.getString("EditSurvey.4"));
+					EditStation.okApresReset = false;
+					ViewFile.tabItem2.setText(Messages.getString("EditStation.1"));
+					EditData.okApresReset = false;
+					ViewFile.tabItem3.setText(Messages.getString("EditData.1"));	
+		              
+		              
 		              text.setFocus();
 		              return;
 		            }

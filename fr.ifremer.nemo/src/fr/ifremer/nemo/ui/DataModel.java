@@ -386,13 +386,14 @@ public static void initStation(){
 		propertyModel.setUserProvided(false);
 		
 		frag = propertyModel.getFragment();
+		frag.setSingleLine(true);
 		
 		ligne = "" + (Integer.valueOf(EditStation.textRefStationLigne.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
 		debut = EditStation.textRefStationDebut.getText();
 		fin = EditStation.textRefStationFin.getText();
 					
 		frag.setFirstLine(ligne);
-		frag.setLastLine(ligne);
+		//frag.setLastLine(ligne);
 		frag.setFirstCharOffset(debut);
 		frag.setLastCharOffset(fin);
 		

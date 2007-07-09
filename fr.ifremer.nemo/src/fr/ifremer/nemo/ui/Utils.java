@@ -143,6 +143,8 @@ public class Utils {
 
 		// reset de l'étape de conversion
 		ViewFile.etape = 0;
+		
+	
 
 	}
 
