@@ -309,6 +309,16 @@ public static void initTable(){
 		              editor.setEditor(text, itemTmp, i);
 		              text.setText(itemTmp.getText(i));
 		              text.selectAll();
+		              
+		              //test pour invalidation de l'étape dès modif d'un élément
+		              /////////////////////////////////////
+		              
+		              EditData.okApresReset = false;
+		          	ViewFile.tabItem3.setText(Messages.getString("EditData.1"));
+		              
+		              /////////////////////////////////////
+		              
+		              
 		              text.setFocus();
 		              return;
 		            }
@@ -324,6 +334,8 @@ public static void initTable(){
 		    });
 		
 		
+	    
+	    
 		//création du menu
 		Menu menu = new Menu(table.getShell(), SWT.POP_UP);
 		MenuItem itemInject = new MenuItem(menu, SWT.NONE);
