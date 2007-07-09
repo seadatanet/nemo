@@ -128,29 +128,34 @@ public class EditSurvey {
 			initListeType();
 			initCombos();
 			
+			
+//			bouton validate
+			buttonValidate.setParent(ViewEdit.formEdition.getBody());
+			buttonValidate.setText(Messages.getString("EditSurvey.9")); //$NON-NLS-1$
+			
 			//boutons collapse all / expand all
 			
-			//buttonExpand.setParent(ViewEdit.formEdition.getBody());
-			buttonExpand.setText("+"); //$NON-NLS-1$
+//			bouton serveur
+			buttonInitServeur.setParent(ViewEdit.formEdition.getBody());
+			buttonInitServeur.setText(Messages.getString("EditSurvey.7")); //$NON-NLS-1$
+			
+				//bouton XML
+			buttonXML.setParent(ViewEdit.formEdition.getBody());
+			buttonXML.setText(Messages.getString("EditSurvey.8")); //$NON-NLS-1$
 					
 			buttonRAZ.setParent(ViewEdit.formEdition.getBody());
 			buttonRAZ.setText("Reset"); //$NON-NLS-1$
+			
+			buttonExpand.setParent(ViewEdit.formEdition.getBody());
+			buttonExpand.setText("+"); //$NON-NLS-1$
 			
 			formEdition.redraw();
 			formEdition.reflow(true);
 			//formEdition.
 		
-			//bouton serveur
-		buttonInitServeur.setParent(ViewEdit.formEdition.getBody());
-		buttonInitServeur.setText(Messages.getString("EditSurvey.7")); //$NON-NLS-1$
+			
 		
-			//bouton XML
-		buttonXML.setParent(ViewEdit.formEdition.getBody());
-		buttonXML.setText(Messages.getString("EditSurvey.8")); //$NON-NLS-1$
-		
-//		bouton validate
-		buttonValidate.setParent(ViewEdit.formEdition.getBody());
-		buttonValidate.setText(Messages.getString("EditSurvey.9")); //$NON-NLS-1$
+
 		
 		formEdition.reflow(true);
 				
@@ -778,13 +783,12 @@ public static void chargementXML(File fichier){
 			Utils.messageErreur(""); //$NON-NLS-1$
 			
 			//reaffichage des boutons valider/expand/init serveur
-			//EditSurvey.buttonExpand.setParent(s.getBody());
 			
 			EditSurvey.buttonValidate.setParent(s.getBody());
 			EditSurvey.buttonInitServeur.setParent(s.getBody());
 			EditSurvey.buttonXML.setParent(s.getBody());
 			EditSurvey.buttonRAZ.setParent(s.getBody());
-			
+			EditSurvey.buttonExpand.setParent(s.getBody());
 			
 			for (i=0;i<=EditSurvey.listeSectionsSurvey.size()-1;i++){
 				

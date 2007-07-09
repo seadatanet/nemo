@@ -96,19 +96,20 @@ initLabels();
 
 
 //boutons collapse all / expand all
-//buttonExpand.setParent(ViewEdit.formEdition.getBody());
-buttonExpand.setText("+"); //$NON-NLS-1$
+
 formEdition.redraw();
 formEdition.reflow(true);
 //formEdition.
 
-buttonRAZ.setParent(ViewEdit.formEdition.getBody());
-buttonRAZ.setText("Reset"); //$NON-NLS-1$
-
-
 //bouton validate
 buttonValidate.setParent(ViewEdit.formEdition.getBody());
 buttonValidate.setText(Messages.getString("EditStation.4")); //$NON-NLS-1$
+
+buttonRAZ.setParent(ViewEdit.formEdition.getBody());
+buttonRAZ.setText("Reset"); //$NON-NLS-1$
+
+buttonExpand.setParent(ViewEdit.formEdition.getBody());
+buttonExpand.setText("+"); //$NON-NLS-1$
 
 formEdition.reflow(true);
 
@@ -401,11 +402,11 @@ public static void DrawingBack(){
 	Utils.messageErreur(""); //$NON-NLS-1$
 
 //	effacement des boutons valider/expand/init serveur
-	//EditStation.buttonExpand.setParent(s.getBody());
+	
 	
 	EditStation.buttonValidate.setParent(s.getBody());
 	EditStation.buttonRAZ.setParent(s.getBody());
-
+	EditStation.buttonExpand.setParent(s.getBody());
 
 	//System.out.println("expand ? = " + expand);
 	for (i=0;i<=EditStation.listeSectionsStation.size()-1;i++){

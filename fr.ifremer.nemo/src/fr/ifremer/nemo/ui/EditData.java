@@ -89,14 +89,15 @@ ArrayList <String> listeNoms = new ArrayList <String> ();
 //buttonExpand.setParent(ViewEdit.formEdition.getBody());
 //buttonExpand.setText("+");
 
+//bouton validate
+buttonValidate.setParent(ViewEdit.formEdition.getBody());
+buttonValidate.setText(Messages.getString("EditData.3")); //$NON-NLS-1$
 
 //reset
 buttonRAZ.setParent(ViewEdit.formEdition.getBody());
 buttonRAZ.setText("Reset"); //$NON-NLS-1$
 
-//bouton validate
-buttonValidate.setParent(ViewEdit.formEdition.getBody());
-buttonValidate.setText(Messages.getString("EditData.3")); //$NON-NLS-1$
+
 
 
 
@@ -437,8 +438,9 @@ public static void DrawingBack(){
 //	effacement des boutons valider/expand/init serveur
 	//EditData.buttonExpand.setParent(s.getBody());
 	
-	EditData.buttonRAZ.setParent(s.getBody());
 	EditData.buttonValidate.setParent(s.getBody());
+	EditData.buttonRAZ.setParent(s.getBody());
+
 	
 	
 	if (ViewFile.checkBoxTempo.getSelection()){

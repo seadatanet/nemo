@@ -78,8 +78,8 @@ public static ScrolledForm formEdition;
 		
 		//formEdition = ViewEdit.toolkitEdition.createScrolledForm(ViewEdit.top);
 		GridLayout gridlayout = new GridLayout();
-		  gridlayout.numColumns = 1;
-		  formEdition.getBody().setLayout(gridlayout);
+		gridlayout.numColumns = 1;
+		formEdition.getBody().setLayout(gridlayout);
 		
 		formEdition.setText(Messages.getString("EditDesc.descriptiondeFichier")); //$NON-NLS-1$
 		//System.out.println("ok editDesc"); //$NON-NLS-1$
@@ -99,18 +99,22 @@ public static ScrolledForm formEdition;
 		initBoutons();
 		initCombos();
 		
-		
-		//boutons collapse all / expand all
-		//buttonExpandDesc.setParent(formEdition.getBody());
-		buttonExpandDesc.setText("+"); //$NON-NLS-1$
-		
-		//bouton RAZ
-		buttonRAZ.setParent(formEdition.getBody());
-		buttonRAZ.setText("Reset"); //$NON-NLS-1$
-		
+	
 //		bouton "valider étaper"
 		buttonValidateDesc.setParent(formEdition.getBody());
 		buttonValidateDesc.setText(Messages.getString("EditDesc.validerLetape")); //$NON-NLS-1$
+		
+//		bouton RAZ
+		buttonRAZ.setParent(formEdition.getBody());
+		buttonRAZ.setText("Reset"); //$NON-NLS-1$
+		
+		//boutons collapse all / expand all
+		buttonExpandDesc.setParent(formEdition.getBody());
+		buttonExpandDesc.setText("+"); //$NON-NLS-1$
+		
+		
+		
+
 		
 		formEdition.redraw();
 		formEdition.reflow(true);
@@ -351,12 +355,14 @@ nomNemo();
 	
 		ScrolledForm s;
 		s = ViewEdit.formEdition;
-		//affichage boutons expand
-		//buttonExpandDesc.setParent(s.getBody());
-		buttonRAZ.setParent(s.getBody());
 		
-		//affichage bouton valider etape
+//		affichage bouton valider etape
 		buttonValidateDesc.setParent(s.getBody());
+		//affichage boutons expand
+		
+		buttonRAZ.setParent(s.getBody());
+		buttonExpandDesc.setParent(s.getBody());
+		
 		
 		//System.out.println("expand ? = " + expand); //$NON-NLS-1$
 		for (i=0;i<=EditDesc.listeSectionsDesc.size()-1;i++){

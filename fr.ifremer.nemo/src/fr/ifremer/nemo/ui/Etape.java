@@ -694,10 +694,45 @@ public class Etape {
 			fins[i]=typeCourant.getFin();
 			
 			//vérification que on a bien une valeur d'entree et de sortie et un format
-			if (typeCourant.getEntree().matches("")){ok = false;
-			Utils.messageErreurAppend(Messages.getString("Etape.101"));
+//			if (typeCourant.getEntree().matches("") || typeCourant.getSortie().matches("")){ok = false;
+//			Utils.messageErreurAppend(Messages.getString("Etape.101"));
+//			}
+			
+			//test direct sur valeur entree
+			if (Pattern.matches("^?[0-9]*[0-9].*[0-9][0-9]*$",typeCourant.getEntree())){
+				//ok
+				ok = ok && true;
+				
+			}else{
+				//erreur
+				ok = ok && false;
+				Utils.messageErreurAppend(Messages.getString("Etape.105")); //$NON-NLS-1$
 			}
-		
+			
+//			test direct sur valeur sortie
+			if (Pattern.matches("^?[0-9]*[0-9].*[0-9][0-9]*$",typeCourant.getSortie())){
+				//ok
+				ok = ok && true;
+				
+			}else{
+				//erreur
+				ok = ok && false;
+				Utils.messageErreurAppend(Messages.getString("Etape.106")); //$NON-NLS-1$
+			}
+			
+			/*
+			//test direct sur format
+			if (Pattern.matches("^[0-9].*[0-9][0-9]*$",typeCourant.getFormat())){
+				//ok
+				ok = ok && true;
+				
+			}else{
+				//erreur
+				ok = ok && false;
+				Utils.messageErreurAppend(Messages.getString("Etape.106")); //$NON-NLS-1$
+			}
+			*/
+			
 //			check des valeurs début<fin
 			if (typeCourant.getDebut()>typeCourant.getFin()){
 				Utils.messageErreurAppend(Messages.getString("Etape.98")+" "+typeCourant.getCode()); //$NON-NLS-1$
@@ -761,6 +796,10 @@ public class Etape {
 			
 			
 		}
+		
+		
+		//TEST ENTREE DEFAUT SORTIE
+		
 		
 		
 		
