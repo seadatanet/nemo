@@ -156,8 +156,8 @@ public class Etape {
 		ok = ok && resultat;
 		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textChef, Messages.getString("Etape.19")); //$NON-NLS-1$
 		ok = ok && resultat;
-		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textCentre, Messages.getString("Etape.20")); //$NON-NLS-1$
-		ok = ok && resultat;
+		//resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textCentre, Messages.getString("Etape.20")); //$NON-NLS-1$
+		//ok = ok && resultat;
 		//resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textConfidentiel, Messages.getString("Etape.21")); //$NON-NLS-1$
 		//ok = ok && resultat;
 		
@@ -250,8 +250,14 @@ public class Etape {
 		if (EditStation.buttonHistoriqueAcqPos.getSelection()){
 			//position dans fichier, verif des valeurs
 		resultat1 = Regexp.checkLigneDebutfin(EditStation.textHistoriqueAcqLigne1, EditStation.textHistoriqueAcqDebut1, EditStation.textHistoriqueAcqFin1, Messages.getString("Etape.33"));  //$NON-NLS-1$
-		resultat2 = Regexp.checkLigneDebutfin(EditStation.textHistoriqueAcqLigne2, EditStation.textHistoriqueAcqDebut2, EditStation.textHistoriqueAcqFin2, Messages.getString("Etape.34"));  //$NON-NLS-1$
 		ok = ok && resultat1;
+		
+		//on permet de n'utiliser qu'une ligne sur les deux!
+		if (!EditStation.textHistoriqueAcqLigne2.getText().matches(""))
+		{resultat2 = Regexp.checkLigneDebutfin(EditStation.textHistoriqueAcqLigne2, EditStation.textHistoriqueAcqDebut2, EditStation.textHistoriqueAcqFin2, Messages.getString("Etape.34"));}
+		else{
+			resultat2 = true;
+		}
 		ok = ok && 	resultat2;
 			
 		}
@@ -265,9 +271,14 @@ public class Etape {
 		//ECHANTILLON SURFACE
 		if (EditStation.buttonSurfacePos.getSelection()){
 			resultat1 =Regexp.checkLigneDebutfin(EditStation.textSurfaceLigne1, EditStation.textSurfaceDebut1, EditStation.textSurfaceFin1, Messages.getString("Etape.36")); //$NON-NLS-1$
-			resultat2 =Regexp.checkLigneDebutfin(EditStation.textSurfaceLigne2, EditStation.textSurfaceDebut2, EditStation.textSurfaceFin2, Messages.getString("Etape.37")); //$NON-NLS-1$
-						
 			ok = ok && resultat1;
+			
+			//permettre une seule ligne sur les deux!
+			if (!EditStation.textSurfaceLigne2.getText().matches("")){
+			resultat2 =Regexp.checkLigneDebutfin(EditStation.textSurfaceLigne2, EditStation.textSurfaceDebut2, EditStation.textSurfaceFin2, Messages.getString("Etape.37"));}
+			else{
+				resultat2 = true;
+			}	
 			ok = ok && resultat2;
 			
 		}
@@ -483,12 +494,12 @@ public class Etape {
 			//LATITUDE DE FIN
 			if (EditStation.buttonLatFinSaisie.getSelection()){
 				//saisie manuelle
-				if (EditStation.textLatFin.getText().matches(Messages.getString("Etape.63"))){ //$NON-NLS-1$
+				if (EditStation.textLatFin.getText().matches("")){ //$NON-NLS-1$
 //					valeur non rentrée
 					ok = ok && true;
 				}else
 				{
-					if (!EditStation.textLatFin.getText().matches("")){
+					if (!EditStation.textLatFin.getText().matches("")){//$NON-NLS-1$
 					try {
 						LatitudeFormat latitudeFormat = new LatitudeFormat(EditStation.comboLatitude.getText());
 						latitudeFormat.parseObject(EditStation.textLatFin.getText());
@@ -574,7 +585,7 @@ public class Etape {
 				Utils.messageErreurAppend(Messages.getString("Etape.79")); //$NON-NLS-1$
 				}
 				else{
-				if (Float.parseFloat(EditStation.textProfCapteur.getText()) > 0){
+				if (Pattern.matches("^[0-9]*[0-9].*[0-9][0-9]*$",EditStation.textProfCapteur.getText())){
 					ok = ok && true;
 					//Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
 				} else {
@@ -594,15 +605,48 @@ public class Etape {
 				}
 				
 			} else {
+				if (!EditStation.textDeclinMagnet.getText().matches("")){
+					//vérif de ce qui est entré par l'utilisateur
+					if (Pattern.matches("^?[0-9]*[0-9].*[0-9][0-9]*$",EditStation.textDeclinMagnet.getText())){
+						//ok
+						ok = ok && true;
+						
+					}else{
+						//erreur
+						ok = ok && false;
+						Utils.messageErreurAppend(Messages.getString("Etape.102")); //$NON-NLS-1$
+					}
+					
+				}else{
 				//Utils.messageErreurAppend(Messages.getString("Etape.84")); //$NON-NLS-1$
-				ok = ok && true;
+				ok = ok && true;}
 				
 			}
 			
 			
 			//FREQUENCE ECHANTILLONNAGE --> voir heure !
 			//que si date n'est pas dans fichier en entrée
-			
+			if (EditStation.buttonFreqEchantPos.getSelection()){
+				//position dans le fichier
+				resultat1 = Regexp.checkLigneDebutfin(EditStation.textFreqEchantLigne, EditStation.textFreqEchantDebut, EditStation.textFreqEchantFin, Messages.getString("Etape.104"));  //$NON-NLS-1$
+				ok = ok && resultat1;
+				if (resultat1){
+					//Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
+				}
+				
+			}else{
+				//saisie manuelle
+				if (Pattern.matches("^[0-9]*[0-9].*[0-9][0-9]*$",EditStation.textFreqEchant.getText())){
+					//ok
+					ok = ok && true;
+					
+				}else{
+					//erreur
+					ok = ok && false;
+					Utils.messageErreurAppend(Messages.getString("Etape.103")); //$NON-NLS-1$
+				}
+				
+			}
 			
 			
 		} //fin série tempo
