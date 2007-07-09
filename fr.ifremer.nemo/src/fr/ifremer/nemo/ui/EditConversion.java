@@ -162,6 +162,7 @@ public static void choixFichierSortie(){
 	}
 	
 	}
+	else{choixFichierSortie();}
 	
 	
 }

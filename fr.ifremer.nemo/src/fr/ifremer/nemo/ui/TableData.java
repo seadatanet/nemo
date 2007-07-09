@@ -509,6 +509,8 @@ public static void initTable(){
 	 //on monte d'un cran l'élément à la position indice
 	 //swap (indice-1) <-> indice
 	 // 
+	 
+	 Utils.messageErreur("");
 	 int nbre;
 	 ArrayList <TypeData> listeTempo;
 	 TypeData typeTempo;
@@ -516,7 +518,15 @@ public static void initTable(){
 	 //TableItem[] items, itemsTempo;
 	 
 	 nbre = types.size();
-	 listeTempo = new ArrayList();
+	 
+	 //si l'indice est 0, on ne fait rien
+	 if (indice == 0){
+		 }
+	 
+	 else{
+	 
+	 
+	  listeTempo = new ArrayList();
 	 
 	 //mise à jour préalable
 	 majTypeData();
@@ -556,7 +566,7 @@ public static void initTable(){
 	 //initTable();
 	 creationTable();
 	 
-	
+	 }
 	  
 	 
  }
@@ -574,6 +584,17 @@ public static void initTable(){
 	 //TableItem[] items, itemsTempo;
 	 
 	 nbre = types.size();
+
+	 //	verif si c'est PRES
+	 TypeData type_a_Deplacer = types.get(indice);
+	 //		split sur " - "
+	Pattern p  = Pattern.compile(" - ");
+	String mots[] = p.split(type_a_Deplacer.getCode());
+	String code = mots[0];
+	
+	if (!code.matches("PRES")){
+		
+	 
 	 listeTempo = new ArrayList();
 	 
 	 //mise à jour préalable
@@ -614,7 +635,10 @@ public static void initTable(){
 	 //initTable();
 	 creationTable();
 	 
-	 
+	}else{
+		//si c'est PRES qu'on veut descendre alors c'est non
+		Utils.messageErreurAppend(Messages.getString("TableData.19"));
+	}
  }
  
  
