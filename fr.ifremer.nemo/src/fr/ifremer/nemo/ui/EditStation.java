@@ -3,6 +3,8 @@ package fr.ifremer.nemo.ui;
 import java.util.ArrayList;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
@@ -564,13 +566,44 @@ textTULigne = new Text(shell, SWT.BORDER);listeTextStation.add(textTULigne);
 textTUDebut = new Text(shell, SWT.BORDER);listeTextStation.add(textTUDebut);
 textTUFin = new Text(shell, SWT.BORDER);listeTextStation.add(textTUFin);
 
-//remplissage de la arrayList pour le reset 
+//remplissage de la liste des textes et ajout listeners
+ajoutModifyListenerText(listeTextStation);
 
 
 
 
 
 }	
+
+
+public static void ajoutModifyListenerText(ArrayList <Text> liste){
+	int taille = liste.size();
+	for (int i = 0; i<taille;i++){
+	liste.get(i).addModifyListener(new ModifyListener(){
+	      public void modifyText(ModifyEvent event) {
+	        // on modifie la valeur du champ texte
+	        //Text text = (Text) event.widget;
+	        //System.out.println(text.getText());
+	    	  
+	    	//dès qu'on modifie une valeur, on invalide l'étape
+//	    	remise du nom onglet à valeur par défaut
+	    					    		
+	    		//on invalide toutes les étapes suivantes avec le second flag okApresReset à false
+	    		EditStation.okApresReset = false;
+	    		ViewFile.tabItem2.setText(Messages.getString("EditStation.1"));
+	    		EditData.okApresReset = false;
+	    		ViewFile.tabItem3.setText(Messages.getString("EditData.1"));
+	    	  
+	    	  
+	      }
+	    });
+	
+	}
+}
+
+
+
+
 
 public static void initBoutons(){
 

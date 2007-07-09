@@ -11,6 +11,8 @@ import javax.xml.rpc.ServiceException;
 import javax.xml.transform.TransformerException;
 
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.SWT;
@@ -770,7 +772,37 @@ public static void chargementXML(File fichier){
 			
 		}
 		
-	
+		public static void ajoutModifyListenerText(ArrayList <Text> liste){
+			int taille = liste.size();
+			for (int i = 0; i<taille;i++){
+			liste.get(i).addModifyListener(new ModifyListener(){
+			      public void modifyText(ModifyEvent event) {
+			        // on modifie la valeur du champ texte
+			        //Text text = (Text) event.widget;
+			        //System.out.println(text.getText());
+			    	  
+			    	//dès qu'on modifie une valeur, on invalide l'étape
+//			    	remise du nom onglet à valeur par défaut
+			    					    		
+			    		//on invalide toutes les étapes suivantes avec le second flag okApresReset à false
+			    		EditSurvey.okApresReset = false;
+			    		ViewFile.tabItem1.setText(Messages.getString("EditSurvey.4"));
+			    		EditStation.okApresReset = false;
+			    		ViewFile.tabItem2.setText(Messages.getString("EditStation.1"));
+			    		EditData.okApresReset = false;
+			    		ViewFile.tabItem3.setText(Messages.getString("EditData.1"));
+			    	  
+			    	  
+			      }
+			    });
+			
+			}
+		}
+		
+		
+		
+		
+		
 		public static void DrawingBack(){
 			// reset de toute la zone d'édition après étape descriptioon de fichier
 			//on retire toutes les sections et les boutons expand et validation
@@ -849,7 +881,8 @@ public static void chargementXML(File fichier){
 		textNbre = new Text(shell, SWT.BORDER);listeTextSurvey.add(textNbre);
 		textCommentaire = new Text(shell, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);listeTextSurvey.add(textCommentaire);
 		
-		//remplissage de la liste des textes
+		//remplissage de la liste des textes et ajout listeners
+		ajoutModifyListenerText(listeTextSurvey);
 		
 	}	
 		

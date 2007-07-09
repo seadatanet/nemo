@@ -607,7 +607,7 @@ public class Etape {
 			} else {
 				if (!EditStation.textDeclinMagnet.getText().matches("")){
 					//vérif de ce qui est entré par l'utilisateur
-					if (Pattern.matches("^?[0-9]*[0-9].*[0-9][0-9]*$",EditStation.textDeclinMagnet.getText())){
+					if (Pattern.matches("^.{0,1}[0-9]*[0-9].*[0-9][0-9]*$",EditStation.textDeclinMagnet.getText())){
 						//ok
 						ok = ok && true;
 						
@@ -699,7 +699,7 @@ public class Etape {
 //			}
 			
 			//test direct sur valeur entree
-			if (Pattern.matches("^?[0-9]*[0-9].*[0-9][0-9]*$",typeCourant.getEntree())){
+			if (Pattern.matches("^.{0,1}[0-9]*[0-9].*[0-9][0-9]*$",typeCourant.getEntree())){
 				//ok
 				ok = ok && true;
 				
@@ -710,7 +710,7 @@ public class Etape {
 			}
 			
 //			test direct sur valeur sortie
-			if (Pattern.matches("^?[0-9]*[0-9].*[0-9][0-9]*$",typeCourant.getSortie())){
+			if (Pattern.matches("^.{0,1}[0-9]*[0-9].*[0-9][0-9]*$",typeCourant.getSortie())){
 				//ok
 				ok = ok && true;
 				

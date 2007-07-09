@@ -3,6 +3,8 @@ package fr.ifremer.nemo.ui;
 import java.util.ArrayList;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
@@ -424,6 +426,36 @@ ViewEdit.formEdition.reflow(true);
 
 }
 
+
+public static void ajoutModifyListenerText(ArrayList <Text> liste){
+	int taille = liste.size();
+	for (int i = 0; i<taille;i++){
+	liste.get(i).addModifyListener(new ModifyListener(){
+	      public void modifyText(ModifyEvent event) {
+	        // on modifie la valeur du champ texte
+	        //Text text = (Text) event.widget;
+	        //System.out.println(text.getText());
+	    	  
+	    	//dès qu'on modifie une valeur, on invalide l'étape
+//	    	remise du nom onglet à valeur par défaut
+	    					    		
+	    		//on invalide toutes les étapes suivantes avec le second flag okApresReset à false
+	    		EditData.okApresReset = false;
+	    		ViewFile.tabItem3.setText(Messages.getString("EditData.1"));
+	    	  
+	    	  
+	      }
+	    });
+	
+	}
+}
+
+
+
+
+
+
+
 public static void DrawingBack(){
 //	 reset de toute la zone d'édition après étape descriptioon de fichier
 //	on retire toutes les sections et les boutons expand et validation
@@ -524,8 +556,8 @@ textTotalFin= new Text(shell, SWT.BORDER);listeTextData.add(textTotalFin);
 
 textTempo = new Text(shell, SWT.BORDER);listeTextData.add(textTempo);
 
-//ajout des zones de texte dans la liste pour activer le reset
-
+//remplissage de la liste des textes et ajout listeners
+ajoutModifyListenerText(listeTextData);
 
 }	
 
