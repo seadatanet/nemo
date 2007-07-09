@@ -31,11 +31,13 @@ public class SWTProcess implements IRunnableWithProgress{
 	public static MedatlasSurveyWriter writerMed;
 	public static Boolean odv;
 	public static IProgressMonitor monitor2;
+	//public static 
 
 	  public void run(IProgressMonitor monitor) throws InvocationTargetException, 
 	                                                   InterruptedException {
 	    monitor.beginTask(Messages.getString("SWTProcess.1"), IProgressMonitor.UNKNOWN);
 	    monitor2 = monitor;
+	    
 	    
 	    //NOTIFIER
 	    notifier = new ProgressNotification() {
@@ -47,7 +49,8 @@ public class SWTProcess implements IRunnableWithProgress{
                                                    	 if (monitor2.isCanceled()){
                                                    		//throw new OperationCanceledException();
                                                    		System.out.println("STOPPPP");
-                                                   	
+                                                   		//((Thread)SWTProgress.swtProcess).interrupt();
+                                                   		
                                                    	 }
                                                    	   }
                                                   });
@@ -57,6 +60,7 @@ public class SWTProcess implements IRunnableWithProgress{
         };
 	    
 	    //TACHE A EFFECTUER
+             
         try {
 			notifier.progress(0);
 			monitor.setTaskName(Messages.getString("SWTProcess.3"));
@@ -70,9 +74,9 @@ public class SWTProcess implements IRunnableWithProgress{
 		} catch (ParseException e) {
 			//
 			e.printStackTrace();
-		} catch (OperationCanceledException e) {
+		} catch (Exception e) {
 			
-			System.out.println("STOPPPP");
+			System.out.println("STOPPPP444");
 			e.printStackTrace();
 		}
 		
