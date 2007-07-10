@@ -57,6 +57,7 @@ public class NemoWSServiceLocator extends org.apache.axis.client.Service impleme
             return _stub;
         }
         catch (org.apache.axis.AxisFault e) {
+        	
             return null;
         }
     }

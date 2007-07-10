@@ -28,7 +28,8 @@ public  class NemoLists implements Cloneable {
   static protected java.util.List<WSRegion> _regions = new java.util.ArrayList<WSRegion>();
 
   static protected java.util.List<WSSurveyDescription> _surveys = new java.util.ArrayList<WSSurveyDescription>();
-
+  public static Boolean okCountries, okShips, okSurveys, okDataCentres, okParameters, okRegions, okDataTypes;
+  
   static {
     initLists();
   }
@@ -1439,6 +1440,7 @@ public  class NemoLists implements Cloneable {
   public static void updateCountries ( ) {
     FileOutputStream stream = null;
     XMLEncoder encoder = null;
+    okCountries = false;
     try {
     	java.net.URL toto = new java.net.URL(Configuration.getSingleton().getNemoWebServiceURL());
     	
@@ -1459,7 +1461,10 @@ public  class NemoLists implements Cloneable {
     	//stream = new FileOutputStream(file);
     	encoder = new XMLEncoder(stream);
     	encoder.writeObject(_countries);
+    	okCountries = true;
     } catch (Exception e) {
+    	okCountries = false;
+    	System.out.println("WS countries failed");
     	e.printStackTrace();
     } finally {
     	if (encoder != null) {
@@ -1477,6 +1482,7 @@ public  class NemoLists implements Cloneable {
   public static void updateDataCentres ( ) {
     FileOutputStream stream = null;
     XMLEncoder encoder = null;
+    okDataCentres = false;
     try {
     	NemoWS service = new NemoWSServiceLocator().getNEMO(
     	                     new java.net.URL(Configuration.getSingleton().getNemoWebServiceURL()));
@@ -1495,7 +1501,9 @@ public  class NemoLists implements Cloneable {
     	//stream = new FileOutputStream(file);
     	encoder = new XMLEncoder(stream);
     	encoder.writeObject(_dataCentres);
+    	okDataCentres = true;
     } catch (Exception e) {
+    	okDataCentres = false;
     	e.printStackTrace();
     } finally {
     	if (encoder != null) {
@@ -1513,6 +1521,7 @@ public  class NemoLists implements Cloneable {
   public static void updateDataTypes ( ) {
     FileOutputStream stream = null;
     XMLEncoder encoder = null;
+    okDataTypes = false;
     try {
     	NemoWS service = new NemoWSServiceLocator().getNEMO(
     	                     new java.net.URL(Configuration.getSingleton().getNemoWebServiceURL()));
@@ -1530,7 +1539,9 @@ public  class NemoLists implements Cloneable {
     	//stream = new FileOutputStream(file);
     	encoder = new XMLEncoder(stream);
     	encoder.writeObject(_dataTypes);
+    	okDataTypes = true;
     } catch (Exception e) {
+    	 okDataTypes = false;
     	e.printStackTrace();
     } finally {
     	if (encoder != null) {
@@ -1546,6 +1557,7 @@ public  class NemoLists implements Cloneable {
    *
    */
   public static void updateParameters ( ) {
+	  okParameters = false;
     FileOutputStream stream = null;
     XMLEncoder encoder = null;
     try {
@@ -1565,7 +1577,9 @@ public  class NemoLists implements Cloneable {
     	//stream = new FileOutputStream(file);
     	encoder = new XMLEncoder(stream);
     	encoder.writeObject(_parameters);
+    	okParameters = true;
     } catch (Exception e) {
+    	okParameters = false;
     	e.printStackTrace();
     } finally {
     	if (encoder != null) {
@@ -1581,6 +1595,7 @@ public  class NemoLists implements Cloneable {
    *
    */
   public static void updateRegions ( ) {
+	  okRegions = false;
     FileOutputStream stream = null;
     XMLEncoder encoder = null;
     try {
@@ -1600,7 +1615,9 @@ public  class NemoLists implements Cloneable {
     	//stream = new FileOutputStream(file);
     	encoder = new XMLEncoder(stream);
     	encoder.writeObject(_regions);
+    	 okRegions = true;
     } catch (Exception e) {
+    	 okRegions = false;
     	e.printStackTrace();
     } finally {
     	if (encoder != null) {
@@ -1616,6 +1633,7 @@ public  class NemoLists implements Cloneable {
    *
    */
   public static void updateShips ( ) {
+	  okShips = false;
     FileOutputStream stream = null;
     XMLEncoder encoder = null;
     try {
@@ -1635,7 +1653,9 @@ public  class NemoLists implements Cloneable {
     	//stream = new FileOutputStream(file);
     	encoder = new XMLEncoder(stream);
     	encoder.writeObject(_ships);
+    	 okShips = true;
     } catch (Exception e) {
+    	 okShips = false;
     	e.printStackTrace();
     } finally {
     	if (encoder != null) {
@@ -1651,6 +1671,7 @@ public  class NemoLists implements Cloneable {
    *
    */
   public static void updateSurveys ( ) {
+	  okSurveys = false;
     FileOutputStream stream = null;
     XMLEncoder encoder = null;
     try {
@@ -1670,7 +1691,9 @@ public  class NemoLists implements Cloneable {
     	//stream = new FileOutputStream(file);
     	encoder = new XMLEncoder(stream);
     	encoder.writeObject(_surveys);
+    	okSurveys = true;
     } catch (Exception e) {
+    	okSurveys = false;
     	e.printStackTrace();
     } finally {
     	if (encoder != null) {

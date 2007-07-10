@@ -50,16 +50,22 @@ public class SWTProcessWS implements IRunnableWithProgress{
 	    	//mise à jour fichiers constantes
 	    	monitor.subTask(Messages.getString("SWTProcessWS.2"));
 	    	NemoLists.updateCountries();
+	    	
 	   	 	monitor.subTask(Messages.getString("SWTProcessWS.3"));
 	    	NemoLists.updateDataTypes();
+	    	
 	    	monitor.subTask(Messages.getString("SWTProcessWS.4"));
 	    	NemoLists.updateRegions();  
+	    	
 	    	monitor.subTask(Messages.getString("SWTProcessWS.5"));
 	    	NemoLists.updateShips();
+	    	
 	    	monitor.subTask(Messages.getString("SWTProcessWS.6"));
 	    	NemoLists.updateDataCentres();
+	    	
 	    	monitor.subTask(Messages.getString("SWTProcessWS.7"));
 	    	NemoLists.updateParameters();
+	    	
 	    	monitor.subTask(Messages.getString("SWTProcessWS.8"));
 	    	NemoLists.updateSurveys();
 	    	

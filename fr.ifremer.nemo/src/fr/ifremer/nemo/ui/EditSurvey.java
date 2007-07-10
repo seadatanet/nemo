@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.xml.rpc.ServiceException;
 import javax.xml.transform.TransformerException;
 
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -397,43 +398,57 @@ public class EditSurvey {
 			
 			new SWTProgressWS().run();
 			
-			/*
-			shell = new Shell(SWT.NONE);	
-			shell.setSize(200, 20);
-    		shell.setBounds(50, 50, 500, 20);
-    		shell.open();
-    		
-    		final ProgressBar progressbar = new ProgressBar(shell,
-    				  SWT.HORIZONTAL | SWT.SMOOTH  | SWT.APPLICATION_MODAL);
-    				progressbar.setMinimum(0);
-    				progressbar.setMaximum(100);
-    				//progressbar.setSize(200,20);
-    				
-    				progressbar.setBounds(0,0, 500, 20);
-    				shell.pack();
-    				shell.setText(Messages.getString("EditSurvey.47")); //$NON-NLS-1$
-    		
-   
-    		
-    				 NemoLists.updateCountries();
-   		    	  progressbar.setSelection(14);
-   		    	  NemoLists.updateDataTypes();
-   		    	  progressbar.setSelection(28);
-   		    	  NemoLists.updateRegions();   
-   		    	  progressbar.setSelection(42);
-   		    	  NemoLists.updateShips();
-   		    	  progressbar.setSelection(56);
-   		    	  NemoLists.updateDataCentres();
-   		    	  progressbar.setSelection(70);
-   		    	  NemoLists.updateParameters();
-   		    	  progressbar.setSelection(84);
-   		    	  NemoLists.updateSurveys();
-   		    	  progressbar.setSelection(100);
-    		
-    		
-    		    shell.close();	
-    		
-    */
+			
+			//affichage du résultat des mises à jour des fichiers
+			Shell shell = new Shell();
+			String message = "";
+			
+			if (NemoLists.okCountries){
+				message = message+Messages.getString("EditSurvey.63")+ "  OK";
+			}else{
+				message = message+Messages.getString("EditSurvey.63")+ "  FAILED";
+			}
+			
+			if (NemoLists.okDataCentres){
+				message = message+Messages.getString("EditSurvey.64")+ "  OK";
+			}else{
+				message = message+Messages.getString("EditSurvey.64")+ "  FAILED";
+			}
+			
+			if (NemoLists.okDataTypes){
+				message = message+Messages.getString("EditSurvey.65")+ "  OK";
+			}else{
+				message = message+Messages.getString("EditSurvey.65")+ "  FAILED";
+			}
+			
+			if (NemoLists.okParameters){
+				message = message+Messages.getString("EditSurvey.66")+ "  OK";
+			}else{
+				message = message+Messages.getString("EditSurvey.66")+ "  FAILED";
+			}
+			
+			if (NemoLists.okRegions){
+				message = message+Messages.getString("EditSurvey.67")+ "  OK";
+			}else{
+				message = message+Messages.getString("EditSurvey.67")+ "  FAILED";
+			}
+			
+			if (NemoLists.okShips){
+				message = message+Messages.getString("EditSurvey.68")+ "  OK";
+			}else{
+				message = message+Messages.getString("EditSurvey.68")+ "  FAILED";
+			}
+			
+			if (NemoLists.okSurveys){
+				message = message+Messages.getString("EditSurvey.69")+ "  OK";
+			}else{
+				message = message+Messages.getString("EditSurvey.69")+ "  FAILED";
+			}
+			
+			
+			MessageDialog.openInformation(shell, "WebServices Info", message);
+			
+			
 			
 		}
 		
