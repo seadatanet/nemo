@@ -265,7 +265,17 @@ public class Etape {
 		//COMMENTAIRE
 		if (EditStation.buttonCommentairePos.getSelection()){
 		resultat1 = Regexp.checkLigneDebutfin(EditStation.textCommentaireLigne, EditStation.textCommentaireDebut, EditStation.textCommentaireFin, Messages.getString("Etape.35"));	 //$NON-NLS-1$
-			ok = ok && resultat1; 
+			ok = ok && resultat1;
+		
+			if (resultat1){
+				//VERIF si le commentaire ne dépasse pas le nombre de lignes d'entete station!
+				int nbreLignes = Utils.calculNbreLignes(Integer.parseInt(EditStation.textCommentaireDebut.getText()), Integer.parseInt(EditStation.textCommentaireFin.getText()));
+				if (nbreLignes > DataModel.stationModel.getNumberOfLines()){
+					ok = ok && false;
+					Utils.messageErreurAppend(Messages.getString("Etape.108"));
+				}
+			}
+			
 		}
 		
 		//ECHANTILLON SURFACE

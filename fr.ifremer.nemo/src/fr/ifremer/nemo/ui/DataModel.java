@@ -165,8 +165,6 @@ public static void initDesc(){
 	//nombre lignes entete station
 	stationModel.setNumberOfLines(Integer.valueOf(EditDesc.lignesEnteteStation.getText()));
 	
-
-	
 	//nombre de lignes de fin
 	stationModel.setEndData(Integer.valueOf(EditDesc.lignesFinStation.getText()));
 	

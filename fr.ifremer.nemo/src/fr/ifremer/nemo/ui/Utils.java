@@ -330,6 +330,75 @@ public class Utils {
 		}
 	}
 
+	
+	public static int calculNbreLignes(int deb, int fi){
+		int nbre=0, lignDepart, lignFin;
+		
+		lignDepart = 1;
+		lignFin = 1;
+		// calcul de la ligne en fonction de la valeur de x
+		// parcours du tableau des tailles de lignes cumulées
+
+		if (deb == fi) {
+			Utils.messageErreur(Messages.getString("Utils.26"));
+
+		} else {
+
+			// calcul ligne depart
+			for (int i = 0; i < lignesBrutes.size(); i++) {
+
+				if (deb == taillesCumLignes[i]) {
+					lignDepart = i + 1;
+					break;
+				}
+				if (i == (lignesBrutes.size() - 1)) {
+					lignDepart = i + 1;
+					break;
+				}
+				if ((deb >= taillesCumLignes[i])
+						&& (deb < taillesCumLignes[i + 1])) {
+					lignDepart = i + 1;
+					break;
+				}
+
+				// System.out.println("cumul = " + taillesCumLignes[i] + "i= " +
+				// i);
+
+			}
+
+			// System.out.println("ligne depart = " + lignDepart);
+
+			// calcul ligne fin
+
+			for (int i = 0; i < lignesBrutes.size(); i++) {
+
+				if (fi == taillesCumLignes[i]) {
+					lignFin = i + 1;
+					break;
+				}
+				if (i == (lignesBrutes.size() - 1)) {
+					lignFin = i + 1;
+					break;
+				}
+				if ((fi >= taillesCumLignes[i])
+						&& (fi < taillesCumLignes[i + 1])) {
+					lignFin = i + 1;
+					break;
+				}
+
+			}
+
+			// System.out.println("ligne fin = " + lignFin);
+
+			// remplissage nbreLignes dans interface
+			nbre = (lignFin - lignDepart + 1); //$NON-NLS-1$
+			
+		}
+		
+		
+		return nbre;
+	}
+	
 	public static void injectNbreLignes(Text nbrelignes, StyledText styledtext) {
 		int deb, fi, lignDepart, lignFin, i;
 
