@@ -959,7 +959,8 @@ public static void sectionCommentaireLigneDebutFinInject(String nomSection, Stri
 					  
 					  //Button saisieManuelle = ViewEdit.toolkitEdition.createButton(sectionClient, "Saisie manuelle", SWT.RADIO);
 					
-					  manuel = new Text(sectionClient, SWT.BORDER);
+					  //manuel = new Text(sectionClient, SWT.BORDER);
+					  manuel.setParent(sectionClient);
 					  manu = manuel;
 					  manuel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 					  {
