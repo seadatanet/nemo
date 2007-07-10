@@ -252,9 +252,77 @@ public class Etape {
 		resultat1 = Regexp.checkLigneDebutfin(EditStation.textHistoriqueAcqLigne1, EditStation.textHistoriqueAcqDebut1, EditStation.textHistoriqueAcqFin1, Messages.getString("Etape.33"));  //$NON-NLS-1$
 		ok = ok && resultat1;
 		
+		if (resultat1){
+			int nbreLignes = Utils.calculNbreLignes(EditStation.posxHistoriqueAcq1, EditStation.posyHistoriqueAcq1);
+			
+			if (nbreLignes > 1){
+				ok = ok && false;
+				Utils.messageErreurAppend(Messages.getString("Etape.113"));
+			}else{
+				//nbre de ligne bon mais est-ce au bon endroit ?
+				//////////////
+				int ligneFin = Integer.parseInt(EditStation.textHistoriqueAcqLigne1.getText())+nbreLignes-1;
+				int enteteFichier;
+				if (ViewFile.dossierCampagne){
+					//dossier
+					enteteFichier = 0;
+				}else{
+					//fichier campagne
+					enteteFichier = DataModel.singleSurvey.getHeaderLinesNumber();
+				}
+				int ligneLimite = enteteFichier + DataModel.stationModel.getNumberOfLines();
+				
+				if (ligneFin > ligneLimite){
+					ok = ok && false;
+					Utils.messageErreurAppend(Messages.getString("Etape.114"));
+				}else{
+					ok = ok && true;
+				}
+				//////////////
+			}
+		}
+		
+		
+		
+		
+		
 		//on permet de n'utiliser qu'une ligne sur les deux!
-		if (!EditStation.textHistoriqueAcqLigne2.getText().matches(""))
-		{resultat2 = Regexp.checkLigneDebutfin(EditStation.textHistoriqueAcqLigne2, EditStation.textHistoriqueAcqDebut2, EditStation.textHistoriqueAcqFin2, Messages.getString("Etape.34"));}
+		if (!EditStation.textHistoriqueAcqLigne2.getText().matches("")){
+			resultat2 = Regexp.checkLigneDebutfin(EditStation.textHistoriqueAcqLigne2, EditStation.textHistoriqueAcqDebut2, EditStation.textHistoriqueAcqFin2, Messages.getString("Etape.34"));
+			
+			if (resultat2){
+				int nbreLignes = Utils.calculNbreLignes(EditStation.posxHistoriqueAcq2, EditStation.posyHistoriqueAcq2);
+				
+				if (nbreLignes > 1){
+					ok = ok && false;
+					Utils.messageErreurAppend(Messages.getString("Etape.115"));
+				}else{
+					//nbre de ligne bon mais est-ce au bon endroit ?
+					//////////////
+					int ligneFin = Integer.parseInt(EditStation.textHistoriqueAcqLigne2.getText())+nbreLignes-1;
+					int enteteFichier;
+					if (ViewFile.dossierCampagne){
+						//dossier
+						enteteFichier = 0;
+					}else{
+						//fichier campagne
+						enteteFichier = DataModel.singleSurvey.getHeaderLinesNumber();
+					}
+					int ligneLimite = enteteFichier + DataModel.stationModel.getNumberOfLines();
+					
+					if (ligneFin > ligneLimite){
+						ok = ok && false;
+						Utils.messageErreurAppend(Messages.getString("Etape.116"));
+					}else{
+						ok = ok && true;
+					}
+					//////////////
+				}
+			}
+		
+		
+		
+		}
 		else{
 			resultat2 = true;
 		}
