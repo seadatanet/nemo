@@ -61,12 +61,12 @@ public static void creationTable(){
 		tableColumn1.setText(Messages.getString("TableDataSurvey.2")); //$NON-NLS-1$
 		
 		TableColumn tableColumn2 = new TableColumn(table, SWT.NONE);
-		tableColumn2.setWidth(100);
+		tableColumn2.setWidth(50);
 		tableColumn2.setText("QC"); //$NON-NLS-1$
 		
 		TableColumn tableColumn3 = new TableColumn(table, SWT.READ_ONLY);
 		//mise à zero de la largeur de la colonne avec isSensor() pour ne pas qu'on puisse la modifier!!
-		tableColumn3.setWidth(0);
+		tableColumn3.setWidth(50);
 		tableColumn3.setText(Messages.getString("TableDataSurvey.11")); //$NON-NLS-1$
 	
 	initTable();

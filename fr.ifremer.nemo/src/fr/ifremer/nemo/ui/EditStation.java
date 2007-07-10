@@ -593,7 +593,7 @@ public static void ajoutModifyListenerText(ArrayList <Text> liste){
 	    		ViewFile.tabItem2.setText(Messages.getString("EditStation.1"));
 	    		EditData.okApresReset = false;
 	    		ViewFile.tabItem3.setText(Messages.getString("EditData.1"));
-	    	  
+	    		Utils.messageErreur("");
 	    	  
 	      }
 	    });
@@ -763,6 +763,7 @@ public static void razText(ArrayList <Text> liste){
 	ViewFile.tabItem2.setText(Messages.getString("EditStation.1"));
 	EditData.okApresReset = false;
 	ViewFile.tabItem3.setText(Messages.getString("EditData.1"));
+	Utils.messageErreur("");
 	
 }
 

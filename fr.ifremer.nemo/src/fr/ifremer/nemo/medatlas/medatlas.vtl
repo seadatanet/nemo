@@ -34,11 +34,13 @@ $line
 *DM HISTORY=$formatter.limitString( $station.dmHistory1, 68)
 *$formatter.limitString( $station.dmHistory2, 80)
 *COMMENT
-##foreach ($line in $station.commentLines)
-*$station.comment
-##$formatter.limitString( $line, 80)
-##end
-* 
+#foreach ($line in $station.commentLines)
+##*$line
+##*$station.comment
+*$formatter.limitString( $line, 80)
+##*$formatter.limitString( $station.getComment(), 80)
+#end
+##* 
 #if ($survey.isTimeSeriesSurvey())
 *ADDITIONAL INFORMATION - TIME SERIES
 *EDATE=$formatter.formatDateTime("ddMMyyyy", $station.timeSeriesInformation.endDate) ETIME=$formatter.formatDateTime("hh24mm", $station.timeSeriesInformation.endTime) ELAT=$formatter.formatLatitude("NDD MM.mm", $station.timeSeriesInformation.endLatitude) ELON=$formatter.formatLongitude("NDDD MM.mm", $station.timeSeriesInformation.endLongitude) EDEPTH=$formatter.formatInt("%-5d", $station.timeSeriesInformation.endDepth)  QC=00000

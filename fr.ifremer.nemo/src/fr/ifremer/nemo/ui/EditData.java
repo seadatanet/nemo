@@ -442,7 +442,7 @@ public static void ajoutModifyListenerText(ArrayList <Text> liste){
 	    		//on invalide toutes les étapes suivantes avec le second flag okApresReset à false
 	    		EditData.okApresReset = false;
 	    		ViewFile.tabItem3.setText(Messages.getString("EditData.1"));
-	    	  
+	    		Utils.messageErreur("");
 	    	  
 	      }
 	    });
@@ -639,7 +639,7 @@ public static void razText(ArrayList <Text> liste){
 	
 	EditData.okApresReset = false;
 	ViewFile.tabItem3.setText(Messages.getString("EditData.1"));
-	
+	Utils.messageErreur("");
 	
 }
 

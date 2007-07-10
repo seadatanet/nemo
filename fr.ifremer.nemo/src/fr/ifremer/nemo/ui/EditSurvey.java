@@ -641,9 +641,13 @@ public static void chargementXML(File fichier){
 			
 			try {
 				if (survey.getFormattedStartDate()!=null){
-				EditSurvey.textDateDebut.setText(survey.getFormattedStartDate());}
+				EditSurvey.textDateDebut.setText(formatter.formatDateTime("dd/MM/yy", survey.getStartDate()));
+				//EditSurvey.textDateDebut.setText(survey.getFormattedStartDate());
+				}
 				if (survey.getFormattedEndDate()!=null){
-				EditSurvey.textDateFin.setText(survey.getFormattedEndDate());}
+					EditSurvey.textDateFin.setText(formatter.formatDateTime("dd/MM/yy", survey.getEndDate()));
+					//EditSurvey.textDateFin.setText(survey.getFormattedEndDate());
+					}
 			} catch (ParseException e) {
 				// 
 				e.printStackTrace();
@@ -806,7 +810,7 @@ public static void chargementXML(File fichier){
 			    		ViewFile.tabItem2.setText(Messages.getString("EditStation.1"));
 			    		EditData.okApresReset = false;
 			    		ViewFile.tabItem3.setText(Messages.getString("EditData.1"));
-			    	  
+			    		Utils.messageErreur("");
 			    	  
 			      }
 			    });
@@ -995,7 +999,7 @@ public static void chargementXML(File fichier){
 			EditData.okApresReset = false;
 			ViewFile.tabItem3.setText(Messages.getString("EditData.1"));	
 			
-			
+			Utils.messageErreur("");
 			
 		
 	}

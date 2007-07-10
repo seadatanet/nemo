@@ -471,6 +471,12 @@ public static void initStation(){
 		frag.setFirstCharOffset(debut);
 		frag.setLastCharOffset(fin);
 		
+		if (EditStation.textHistoriqueAcqLigne2.getText().matches("")){
+			//on a injecté que la ligne 1
+			propertyModel2.setUserProvided(true);
+			station.setDcHistory2(EditStation.textHistorique2.getText());
+		}else{
+		
 		String ligne2, debut2, fin2;
 		ligne2 = "" + (Integer.valueOf(EditStation.textHistoriqueAcqLigne2.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
 		debut2 = EditStation.textHistoriqueAcqDebut2.getText();
@@ -480,7 +486,7 @@ public static void initStation(){
 		frag2.setLastLine(ligne2);
 		frag2.setFirstCharOffset(debut2);
 		frag2.setLastCharOffset(fin2);
-		
+		}
 		
 	}
 	
@@ -556,6 +562,12 @@ public static void initStation(){
 		frag.setFirstCharOffset(debut);
 		frag.setLastCharOffset(fin);
 		
+		if (EditStation.textSurfaceLigne2.getText().matches("")){
+			//si on a injecté que la ligne 1
+			propertyModel2.setUserProvided(true);
+			station.setSurfaceSamples2(EditStation.textSurface2.getText());
+		}else{
+		
 		String ligne2, debut2, fin2;
 		ligne2 = "" + (Integer.valueOf(EditStation.textSurfaceLigne2.getText()) - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())); 
 		debut2 = EditStation.textSurfaceDebut2.getText();
@@ -565,6 +577,7 @@ public static void initStation(){
 		frag2.setLastLine(ligne2);
 		frag2.setFirstCharOffset(debut2);
 		frag2.setLastCharOffset(fin2);
+		}
 	}
 	
 		

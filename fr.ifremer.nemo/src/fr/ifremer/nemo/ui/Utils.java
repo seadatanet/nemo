@@ -464,11 +464,26 @@ public class Utils {
 		// nbre de lignes effectif
 		nbrelignes = (lignFin - lignDepart + 1);
 
+			
 		if (nbrelignes == 1) {
-			frag.setSingleLine(true);
+			//frag.setSingleLine(true);
+			frag.setLastLine(lignDepart);
 		} else {
 			frag.setSingleLine(false);
 			frag.setLastLine(frag.getFirstLine() + nbrelignes-1);
+		
+//			calcul de l'offset réel sur la dernière ligne
+			int cpt = fi;
+			for (int j=lignDepart-1;j<lignFin-1;j++){
+				cpt = cpt - Utils.lignesBrutes.get(j).length();
+			}
+			//en sortie de boucle, cpt a la valeur de l'offset de fin sur la dernière ligne du commentaire
+			System.out.println("offset en ligne fin = "+cpt);
+			System.out.println("igne fin = "+lignFin);
+			System.out.println("igne debut = "+lignDepart);
+			
+			if (cpt>0){cpt = cpt - (nbrelignes-1);}
+			frag.setLastCharOffset(cpt);
 		}
 
 	}
