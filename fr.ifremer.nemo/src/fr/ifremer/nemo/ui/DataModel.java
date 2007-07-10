@@ -111,6 +111,7 @@ public static void initDesc(){
 //	taille du header fichier
 	if (ViewFile.dossierCampagne){
 		dirSurvey.setDirectory(ViewFile.nomRepertoire);
+		
 		stationModel = dirSurvey.getStationModel();
 	}
 	else{
@@ -518,7 +519,7 @@ public static void initStation(){
 		frag.setFirstCharOffset(debut);
 		frag.setLastCharOffset(fin);
 		
-		Utils.calculNbreLignesPuisRemplissageFrag(frag);
+		Utils.calculNbreLignesPuisRemplissageFragClic(frag, EditStation.posxCommentaire, EditStation.posyCommentaire);
 		
 		
 	}

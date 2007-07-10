@@ -35,6 +35,7 @@ public class EditStation {
 	public static Section sectionLatFin, sectionLongFin, sectionProfFin, sectionProfCapteur, sectionDeclinMagnet, sectionFreqEchant;
 	public static Label labelConversionHeure, labelConversionDate;
 	public static Boolean okApresReset;
+	public static int posxCommentaire, posyCommentaire, posxEchantillon1, posyEchantillon1, posxEchantillon2, posyEchantillon2, posxHistoriqueAcq1, posyHistoriqueAcq1, posxHistoriqueAcq2, posyHistoriqueAcq2;
 	
 	
 	
@@ -135,7 +136,7 @@ DrawingStation.sectionCommentaireLigneDebutFinInject(Messages.getString("EditSta
 
 
 //section surface sample : identique à historique acquisition
-DrawingStation.sectionHistoriqueAcquisition(Messages.getString("EditStation.11"), Messages.getString("EditStation.12"), sectionSurface, textSurfaceLigne1, textSurfaceDebut1, textSurfaceFin1, textSurfaceLigne2, textSurfaceDebut2, textSurfaceFin2, textSurface1, textSurface2, buttonSurfaceSaisie, buttonSurfacePos); //$NON-NLS-1$ //$NON-NLS-2$
+DrawingStation.sectionSurfaceSample(Messages.getString("EditStation.11"), Messages.getString("EditStation.12"), sectionSurface, textSurfaceLigne1, textSurfaceDebut1, textSurfaceFin1, textSurfaceLigne2, textSurfaceDebut2, textSurfaceFin2, textSurface1, textSurface2, buttonSurfaceSaisie, buttonSurfacePos); //$NON-NLS-1$ //$NON-NLS-2$
 
 
 //section décallage TU

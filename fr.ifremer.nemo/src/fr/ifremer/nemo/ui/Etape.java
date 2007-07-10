@@ -269,11 +269,32 @@ public class Etape {
 		
 			if (resultat1){
 				//VERIF si le commentaire ne dépasse pas le nombre de lignes d'entete station!
-				int nbreLignes = Utils.calculNbreLignes(Integer.parseInt(EditStation.textCommentaireDebut.getText()), Integer.parseInt(EditStation.textCommentaireFin.getText()));
-				if (nbreLignes > DataModel.stationModel.getNumberOfLines()){
+				
+				int nbreLignes = Utils.calculNbreLignes(EditStation.posxCommentaire, EditStation.posyCommentaire);
+				int ligneFin = Integer.parseInt(EditStation.textCommentaireLigne.getText())+nbreLignes-1;
+				int enteteFichier;
+				if (ViewFile.dossierCampagne){
+					//dossier
+					enteteFichier = 0;
+				}else{
+					//fichier campagne
+					enteteFichier = DataModel.singleSurvey.getHeaderLinesNumber();
+				}
+				int ligneLimite = enteteFichier + DataModel.stationModel.getNumberOfLines();
+				
+				if (ligneFin > ligneLimite){
 					ok = ok && false;
 					Utils.messageErreurAppend(Messages.getString("Etape.108"));
+				}else{
+					ok = ok && true;
 				}
+				
+				
+				//if (ligneFin >)
+//				if (nbreLignes > DataModel.stationModel.getNumberOfLines()){
+//					ok = ok && false;
+//					Utils.messageErreurAppend(Messages.getString("Etape.108"));
+//				}
 			}
 			
 		}
@@ -282,10 +303,74 @@ public class Etape {
 		if (EditStation.buttonSurfacePos.getSelection()){
 			resultat1 =Regexp.checkLigneDebutfin(EditStation.textSurfaceLigne1, EditStation.textSurfaceDebut1, EditStation.textSurfaceFin1, Messages.getString("Etape.36")); //$NON-NLS-1$
 			ok = ok && resultat1;
+			if (resultat1){
+				int nbreLignes = Utils.calculNbreLignes(EditStation.posxEchantillon1, EditStation.posyEchantillon1);
+				
+				if (nbreLignes > 1){
+					ok = ok && false;
+					Utils.messageErreurAppend(Messages.getString("Etape.109"));
+				}else{
+					//nbre de ligne bon mais est-ce au bon endroit ?
+					//////////////
+					int ligneFin = Integer.parseInt(EditStation.textSurfaceLigne1.getText())+nbreLignes-1;
+					int enteteFichier;
+					if (ViewFile.dossierCampagne){
+						//dossier
+						enteteFichier = 0;
+					}else{
+						//fichier campagne
+						enteteFichier = DataModel.singleSurvey.getHeaderLinesNumber();
+					}
+					int ligneLimite = enteteFichier + DataModel.stationModel.getNumberOfLines();
+					
+					if (ligneFin > ligneLimite){
+						ok = ok && false;
+						Utils.messageErreurAppend(Messages.getString("Etape.110"));
+					}else{
+						ok = ok && true;
+					}
+					//////////////
+				}
+			}
 			
 			//permettre une seule ligne sur les deux!
 			if (!EditStation.textSurfaceLigne2.getText().matches("")){
-			resultat2 =Regexp.checkLigneDebutfin(EditStation.textSurfaceLigne2, EditStation.textSurfaceDebut2, EditStation.textSurfaceFin2, Messages.getString("Etape.37"));}
+			resultat2 =Regexp.checkLigneDebutfin(EditStation.textSurfaceLigne2, EditStation.textSurfaceDebut2, EditStation.textSurfaceFin2, Messages.getString("Etape.37"));
+			
+				if (resultat2){
+				
+					int nbreLignes = Utils.calculNbreLignes(EditStation.posxEchantillon2, EditStation.posyEchantillon2);
+					
+					if (nbreLignes > 1){
+						ok = ok && false;
+						Utils.messageErreurAppend(Messages.getString("Etape.112"));
+					}else{
+					
+					
+					int ligneFin = Integer.parseInt(EditStation.textSurfaceLigne2.getText())+nbreLignes-1;
+					int enteteFichier;
+					if (ViewFile.dossierCampagne){
+						//dossier
+						enteteFichier = 0;
+					}else{
+						//fichier campagne
+						enteteFichier = DataModel.singleSurvey.getHeaderLinesNumber();
+					}
+					int ligneLimite = enteteFichier + DataModel.stationModel.getNumberOfLines();
+					
+					if (ligneFin > ligneLimite){
+						ok = ok && false;
+						Utils.messageErreurAppend(Messages.getString("Etape.111"));
+					}else{
+						ok = ok && true;
+					}
+				
+					}
+				
+				}
+			
+			}
+					
 			else{
 				resultat2 = true;
 			}	

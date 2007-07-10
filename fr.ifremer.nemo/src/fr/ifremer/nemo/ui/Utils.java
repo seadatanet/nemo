@@ -482,6 +482,7 @@ public class Utils {
 		// System.out.println("deb clic = " + deb);
 		// System.out.println("fi clic = " + fi);
 
+		//lignDepart = frag.getFirstLine();
 		lignDepart = 1;
 		lignFin = 1;
 		// calcul de la ligne en fonction de la valeur de x
@@ -548,8 +549,8 @@ public class Utils {
 			}
 			//en sortie de boucle, cpt a la valeur de l'offset de fin sur la dernière ligne du commentaire
 			System.out.println("offset en ligne fin = "+cpt);
-			System.out.println("igne fin = "+lignFin);
-			System.out.println("igne debut = "+lignDepart);
+			System.out.println("ligne fin = "+lignFin);
+			System.out.println("ligne debut = "+lignDepart);
 			
 			if (cpt>0){cpt = cpt - (nbrelignes-1);}
 			frag.setLastCharOffset(cpt);
@@ -557,6 +558,94 @@ public class Utils {
 
 	}
 
+	
+	public static void calculNbreLignesPuisRemplissageFragClic(HeaderFragment frag, int clicX, int clicY) {
+		int deb, fi, lignDepart, lignFin, i, nbrelignes;
+
+		// on récupère les coordonnées de la sélection
+		deb = clicX;
+		fi = clicY;
+
+		// System.out.println("deb clic = " + deb);
+		// System.out.println("fi clic = " + fi);
+
+		//lignDepart = frag.getFirstLine();
+		lignDepart = 1;
+		lignFin = 1;
+		// calcul de la ligne en fonction de la valeur de x
+		// parcours du tableau des tailles de lignes cumulées
+
+		// calcul ligne depart
+		for (i = 0; i < lignesBrutes.size(); i++) {
+
+			if (deb == taillesCumLignes[i]) {
+				lignDepart = i + 1;
+				break;
+			}
+			if (i == (lignesBrutes.size() - 1)) {
+				lignDepart = i + 1;
+				break;
+			}
+			if ((deb >= taillesCumLignes[i]) && (deb < taillesCumLignes[i + 1])) {
+				lignDepart = i + 1;
+				break;
+			}
+
+			// System.out.println("cumul = " + taillesCumLignes[i] + "i= " + i);
+
+		}
+
+		// System.out.println("ligne depart = " + lignDepart);
+
+		// calcul ligne fin
+
+		for (i = 0; i < lignesBrutes.size(); i++) {
+
+			if (fi == taillesCumLignes[i]) {
+				lignFin = i + 1;
+				break;
+			}
+			if (i == (lignesBrutes.size() - 1)) {
+				lignFin = i + 1;
+				break;
+			}
+			if ((fi >= taillesCumLignes[i]) && (fi < taillesCumLignes[i + 1])) {
+				lignFin = i + 1;
+				break;
+			}
+
+		}
+
+		// System.out.println("ligne fin = " + lignFin);
+
+		// nbre de lignes effectif
+		nbrelignes = (lignFin - lignDepart + 1);
+
+			
+		if (nbrelignes == 1) {
+			//frag.setSingleLine(true);
+			frag.setLastLine(lignDepart);
+		} else {
+			frag.setSingleLine(false);
+			frag.setLastLine(frag.getFirstLine() + nbrelignes-1);
+		
+//			calcul de l'offset réel sur la dernière ligne
+			int cpt = fi;
+			for (int j=lignDepart-1;j<lignFin-1;j++){
+				cpt = cpt - Utils.lignesBrutes.get(j).length();
+			}
+			//en sortie de boucle, cpt a la valeur de l'offset de fin sur la dernière ligne du commentaire
+			System.out.println("offset en ligne fin = "+cpt);
+			System.out.println("ligne fin = "+lignFin);
+			System.out.println("ligne debut = "+lignDepart);
+			
+			if (cpt>0){cpt = cpt - (nbrelignes-1);}
+			frag.setLastCharOffset(cpt);
+		}
+
+	}
+	
+	
 	public static void validationEtape(int onglet) {
 		// messageErreur("Vous devez impérativement terminer la ou les étapes
 		// précédentes avant de continuer." +"\n==>étapes " + tmp + " à " +

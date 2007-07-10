@@ -1048,7 +1048,7 @@ public  class StationModel
     				}
     			}
     			for (PropertyModel m : getProperties()) {
-    				//System.out.println("@DEBUG propertyModel courant :"+m.getProperty());
+    				System.out.println("@DEBUG propertyModel courant :"+m.getProperty());
     				m.applyOn ( station, header);
     			}
     			if (_timeSeriesModel != null) {
