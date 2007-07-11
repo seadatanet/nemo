@@ -371,7 +371,7 @@ public  class DateTimeFormat extends ExternalizableFormat implements Cloneable {
   public Long parseObject ( String source, ParsePosition pos) {
     int index = pos.getIndex();
     
-    System.out.println("DateTimeFormat/parseObject(): Source parsée ==>"+source);
+    //System.out.println("DateTimeFormat/parseObject(): Source parsée ==>"+source);
 
     
     TimeZone tz = TimeZone.getTimeZone("GMT");
