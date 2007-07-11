@@ -502,7 +502,7 @@ textHistorique2  = new Text(shell, SWT.BORDER);listeTextStation.add(textHistoriq
 textHistoriqueAcquisition1 = new Text(shell, SWT.BORDER);listeTextStation.add(textHistoriqueAcquisition1);
 textHistoriqueAcquisition2 = new Text(shell, SWT.BORDER);listeTextStation.add(textHistoriqueAcquisition2);
 
-textCommentaire = new Text(shell, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);listeTextStation.add(textCommentaire);
+textCommentaire = new Text(shell, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.WRAP);listeTextStation.add(textCommentaire);
 textCommentaireLigne= new Text(shell, SWT.BORDER);listeTextStation.add(textCommentaireLigne);
 textCommentaireDebut= new Text(shell, SWT.BORDER);listeTextStation.add(textCommentaireDebut);
 textCommentaireFin = new Text(shell, SWT.BORDER);listeTextStation.add(textCommentaireFin);

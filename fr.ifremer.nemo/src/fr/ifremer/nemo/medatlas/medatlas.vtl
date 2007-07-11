@@ -40,7 +40,7 @@ $line
 *$formatter.limitString( $line, 80)
 ##*$formatter.limitString( $station.getComment(), 80)
 #end
-##* 
+* 
 #if ($survey.isTimeSeriesSurvey())
 *ADDITIONAL INFORMATION - TIME SERIES
 *EDATE=$formatter.formatDateTime("ddMMyyyy", $station.timeSeriesInformation.endDate) ETIME=$formatter.formatDateTime("hh24mm", $station.timeSeriesInformation.endTime) ELAT=$formatter.formatLatitude("NDD MM.mm", $station.timeSeriesInformation.endLatitude) ELON=$formatter.formatLongitude("NDDD MM.mm", $station.timeSeriesInformation.endLongitude) EDEPTH=$formatter.formatInt("%-5d", $station.timeSeriesInformation.endDepth)  QC=00000
