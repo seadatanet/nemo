@@ -331,14 +331,13 @@ public  class InputModel
   /**
    *
    * @param  a_ProgressNotifier  
-   * @return  Survey
+ * @return 
    * @exception  FileNotFoundException
    * @exception  IOException
    * @exception  ParseException
    */
   public Survey convert ( ProgressNotification a_ProgressNotifier) throws FileNotFoundException, IOException, ParseException {
-    // TODO: Error reporting
-    // TODO: Localize Errors
+  
     if (isRefDateBased()) {
     	TimeZone tz = TimeZone.getTimeZone("GMT");
     	Calendar cal = Calendar.getInstance(tz);
@@ -350,10 +349,24 @@ public  class InputModel
     	cal.set( Calendar.HOUR_OF_DAY, cal2.get( Calendar.HOUR_OF_DAY));
     	cal.set( Calendar.MINUTE, cal2.get( Calendar.MINUTE));
     	cal.set( Calendar.SECOND, cal2.get( Calendar.SECOND));
-    	return _media.convert( _refDateBased, cal.getTimeInMillis(), a_ProgressNotifier);
+    	
+    	try {
+			return _media.convert( _refDateBased, cal.getTimeInMillis(), a_ProgressNotifier);
+		} catch (Exception e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+			System.out.println("interrompu !");
+		}
     } else {
-    	return _media.convert( _refDateBased, 0, a_ProgressNotifier);
+    	try {
+			return _media.convert( _refDateBased, 0, a_ProgressNotifier);
+		} catch (Exception e) {
+			// TODO Bloc catch auto-généré
+			e.printStackTrace();
+			System.out.println("interrompu !");
+		}
     }
+	return null;
   }
 
   /**

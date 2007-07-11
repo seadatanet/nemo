@@ -4,6 +4,7 @@ import com.ago.xml.*;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.output.ProgressNotification;
+import fr.ifremer.nemo.ui.SWTProcess;
 import fr.ifremer.nemo.util.SizeBasedProgressNotifier;
 import java.io.*;
 import java.text.ParseException;
@@ -265,17 +266,17 @@ public  class DirectoryBasedSurvey extends SurveyMedia
    * @param  a_RefDate  
    * @param  a_Progress  
    * @return  Survey
-   * @exception  FileNotFoundException
-   * @exception  IOException
-   * @exception  java.text.ParseException
+ * @throws ParseException 
+ * @throws IOException 
+ * @throws Exception 
    */
-  public Survey convert ( boolean isRefDateBased, long a_RefDate, ProgressNotification a_Progress) throws FileNotFoundException, IOException, ParseException {
+  public Survey convert ( boolean isRefDateBased, long a_RefDate, ProgressNotification a_Progress) throws IOException, ParseException{
     try {
     	Survey survey = (Survey)_model.clone();
     	File dir = new File(_directory);
     	String[] files = dir.list();
     	_stationModel.initRef();
-    	if (files != null) {
+    	if ((files != null)){
     		long offset = 0;
     		long size = 0;
     		for (int i=0; i<files.length; i++) {
@@ -283,6 +284,11 @@ public  class DirectoryBasedSurvey extends SurveyMedia
     			size += file.length();
     		}
     		for (int i=0; i<files.length; i++) {
+    			//if (SWTProcess.monitor2.isCanceled()){
+    			if (SurveyMedia.interrompu){
+    				//demande d'annulation
+    				throw new IOException("interruption");
+    			}else{
     			File file = new File( dir, files[i]);
     			SizeBasedProgressNotifier notifier = new SizeBasedProgressNotifier( size, offset, a_Progress);
     			offset += file.length();
@@ -296,6 +302,10 @@ public  class DirectoryBasedSurvey extends SurveyMedia
     					try { reader.close(); } catch (Exception ioExc) {}
     				}
     			}
+    		
+    			}
+    		
+    		
     		}
     	}
     	return survey;
