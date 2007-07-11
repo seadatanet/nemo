@@ -56,6 +56,19 @@ public static ScrolledForm formEdition;
 public static void affichageEdition(){
 // initialisation zone édition pour étape description de fichier 
 
+	
+	posxCommentaire =0;
+	posyCommentaire=0;
+	posxEchantillon1=0;
+	posyEchantillon1=0;
+	posxEchantillon2=0;
+	posyEchantillon2=0;
+	posxHistoriqueAcq1=0;
+	posyHistoriqueAcq1=0;
+	posxHistoriqueAcq2=0;
+	posyHistoriqueAcq2=0;	
+	
+	
 formEdition = ViewEdit.formEdition;
 ViewLog.aideStation();
 //raz message erreur
