@@ -184,6 +184,7 @@ public static void aideStation(){
 	ViewLog.styledTextLogHelp.setText("##DESCRIPTION DE STATION##\n" +
 			"Même principe que les étapes précédentes à la différence que certaines valeurs à injecter demandent des valeurs sur 'ligne', 'début' et 'fin'. Dans le cas d'un fichier campagne, toujours effectuer les injections sur la première station ! Dans tous les cas, la sélection devra se limiter à une ligne unique (date, heure, latitude, profondeur, etc.) sauf pour le 'commentaire' où la possibilité de surligner plusieurs lignes est offerte." +
 			"Pour les formats d'heure, de date, de latitude et de longitude, on peut entrer ses propres formats.\n" +
+			"\nSi le numéro de station est situé dans le nom du fichier, introduire 0 comme numéro de ligne\n"+
 			"\n\n##FORMATS HEURE / DATE##\n" +
 			"*yy ou yyyy : année exprimée sur 2 ou 4 digits\n" +
 			"*MM : mois exprimé sur 2 digits\n" +
@@ -222,6 +223,7 @@ public static void aideStation(){
 		ViewLog.styledTextLogHelp.setText("##STATION DESCRIPTION##\n" +
 				"It's the same principle than for the previous steps, only here some values to inject ask values on 'line', 'start' and 'end'. In the case of a cruise file, always carry out the injections on the first station ! In any case, the selection will have to be limited to a single line (date, time, latitude, depth, etc.) with the exception of the 'comment' where the possibility of highlighting several lines is proposed.\n" +
 				"For the time, date, latitude and longitude formats, you can enter your own formats.\n" +
+				"\nIf station's number is located within the filename, use 0 as line number\n"+
 				"\n##TIME / DATE FORMATS##\n" +
 				"*yy oR yyyy : the year expressed in 2 or 4 digits\n" +
 				"*MM : month expressed in 2 digits\n" +
@@ -263,6 +265,7 @@ public static void aideData(){
 	if (langue.matches("fr_FR")){
 	ViewLog.styledTextLogHelp.setText("##DESCRIPTION DONNEES##\n" +
 			"Même principe que pour les types de données : on ajoute ici les paramètres mesurés.\n" +
+			"\nLa formule de conversion doit être du style x*1000+3 ; x étant la valeur lue dans le fichier\n\n"+
 			"Dans le cas d'une série temporelle :\n" +
 			"*les paramètres DATE, YEAR, MONTH, DAYX, TIME sont rajoutés automatiquement à la génération donc attention à ne pas les ajouter manuellement.\n" +
 			"*on peut choisir si le calcul des dates/heures est basé sur les dates/heures entrées à l'étape Station et la fréquence d'échantillonnage ou si les informations sont présentes au sein de la ligne des données (auquel cas préciser le format).\n" +
@@ -271,6 +274,7 @@ public static void aideData(){
 		//aide anglaise
 		ViewLog.styledTextLogHelp.setText("##DATA DESCRIPTION##\n" +
 				"It's the same principle than for the type of data: you add here the measured parametres.\n" +
+				"\nConversion formula should be like x*1000+3 ; with x the value read in file\n\n"+
 				"In the case of a temporal series :\n" +
 				"*DATE, YEAR, MONTH, DAYX, TIME parameters are automatically generated so pay attention not to add them manually.\n" +
 				"*you can choose if the time/date computation is based on the date/hours entered at the Station step and the sampling rate or if the information are included into the line of data  (in which case you need to precise the format).\n" +
@@ -281,13 +285,18 @@ public static void aideConversion(){
 	String langue = Utils.configuration.getLang();
 	if (langue.matches("fr_FR")){
 	ViewLog.styledTextLogHelp.setText("##CONVERSION##\n" +
-			"Choisir le format de sortie. On peut générer les deux formats à la suite sans devoir revalider toutes les étapes.");
+			"Choisir le format de sortie. On peut générer les deux formats à la suite sans devoir revalider toutes les étapes."
+			+"\n\nLa conversion est divisée en deux étapes successives :\n"+
+			"1-conversion du fichier en mémoire : on peut annuler le processus pendant cette étape !\n"+
+			"2-écriture du fichier sur le disque : on ne peut plus annuler le processus une fois engagé !");
 
 	}else{
 		//aide anglaise
 		ViewLog.styledTextLogHelp.setText("##CONVERSION##\n" +
 				"Choose the output format. You can generate both formats consecutively without revalidating all the steps.\n" +
-				"");
+				"\n\nConversion is divided in two steps:\n"+
+				"1-file conversion into memory : you still can cancel all the conversion process!\n"+
+				"2-file writing on disk : you can't cancel the conversion process no more while this step is loading!");
 	}
 	}
 
