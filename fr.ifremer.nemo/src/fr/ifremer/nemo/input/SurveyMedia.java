@@ -21,6 +21,8 @@ public abstract class SurveyMedia
        SAXConsumer {
 
   protected InputModel _inputModel;
+  public static Boolean interrompu=false;
+  
 
   public SurveyMedia() {
     _inputModel = null;
@@ -81,8 +83,9 @@ public abstract class SurveyMedia
    * @exception  FileNotFoundException
    * @exception  IOException
    * @exception  java.text.ParseException
+ * @throws Exception 
    */
-  public abstract Survey convert ( boolean isRefDateBased, long a_RefDate, ProgressNotification a_Progress) throws FileNotFoundException, IOException, ParseException;
+  public abstract Survey convert ( boolean isRefDateBased, long a_RefDate, ProgressNotification a_Progress) throws FileNotFoundException, IOException, ParseException, Exception;
   /**
    *
    * @return  Survey

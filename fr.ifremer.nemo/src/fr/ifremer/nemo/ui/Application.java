@@ -9,7 +9,7 @@ import org.eclipse.ui.PlatformUI;
  */
 public class Application implements IPlatformRunnable {
 	
-	
+	public static PlatformUI platformUI;
 	public static Display display;
 
 	/* (non-Javadoc)

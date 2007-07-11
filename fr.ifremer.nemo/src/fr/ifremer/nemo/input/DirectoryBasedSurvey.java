@@ -4,7 +4,6 @@ import com.ago.xml.*;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.output.ProgressNotification;
-import fr.ifremer.nemo.ui.SWTProcess;
 import fr.ifremer.nemo.util.SizeBasedProgressNotifier;
 import java.io.*;
 import java.text.ParseException;

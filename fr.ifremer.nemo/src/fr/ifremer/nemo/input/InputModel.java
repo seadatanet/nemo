@@ -353,7 +353,7 @@ public  class InputModel
     	try {
 			return _media.convert( _refDateBased, cal.getTimeInMillis(), a_ProgressNotifier);
 		} catch (Exception e) {
-			// TODO Bloc catch auto-généré
+			// 
 			e.printStackTrace();
 			System.out.println("interrompu !");
 		}
@@ -361,7 +361,7 @@ public  class InputModel
     	try {
 			return _media.convert( _refDateBased, 0, a_ProgressNotifier);
 		} catch (Exception e) {
-			// TODO Bloc catch auto-généré
+			// 
 			e.printStackTrace();
 			System.out.println("interrompu !");
 		}

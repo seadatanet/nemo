@@ -331,11 +331,11 @@ public  class SingleFileSurvey extends SurveyMedia
    * @param  a_RefDate  
    * @param  a_Progress  
    * @return  Survey
-   * @exception  FileNotFoundException
-   * @exception  IOException
-   * @exception  java.text.ParseException
+ * @throws IOException 
+ * @throws ParseException 
+ * @throws Exception 
    */
-  public Survey convert ( boolean isRefDateBased, long a_RefDate, ProgressNotification a_Progress) throws FileNotFoundException, IOException, ParseException {
+  public Survey convert ( boolean isRefDateBased, long a_RefDate, ProgressNotification a_Progress) throws IOException, ParseException {
     try {
     	Survey survey = (Survey)_model.clone();
     	_stationModel.initRef();
@@ -349,12 +349,18 @@ public  class SingleFileSurvey extends SurveyMedia
     		reader = new RandomAccessFile( file, "r");
     		consumeHeader( reader);
     		Station station = null;
+    		
     		while ((station = _stationModel.convert( reader, null, isRefDateBased, a_RefDate, notifier)) != null) {
+    			if (SurveyMedia.interrompu){throw new IOException("");}
     			survey.addStation( station);
+    			 
     		}
+    		
     	} finally {
     		if (reader != null) {
-    			try { reader.close(); } catch (Exception ioExc) {}
+    			try { reader.close(); 
+    			}
+    			catch (Exception ioExc) {}
     		}
     	}
     	return survey;

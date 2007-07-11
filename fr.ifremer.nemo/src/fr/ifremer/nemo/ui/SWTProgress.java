@@ -11,8 +11,11 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 
+import fr.ifremer.nemo.output.ProgressNotification;
+
 public class SWTProgress extends ApplicationWindow{
 	public static SWTProcess swtProcess;
+	public static ProgressNotification notifier;
 	
 	
 	  public SWTProgress() {
@@ -27,12 +30,13 @@ public class SWTProgress extends ApplicationWindow{
 		 else{SWTProcess.odv = false;}
 		 
 		  try {
+			  
 			  swtProcess = new SWTProcess();
-	          new ProgressMonitorDialog(shell).run(true, true, swtProcess);
+	          new ProgressMonitorDialog(Application.display.getActiveShell()).run(true, true, swtProcess);
 	        } catch (InvocationTargetException e) {
 	         
 	        } catch (InterruptedException e) {
-	        	System.out.println("STOP");
+	        	
 	        }
 	    
 	  }

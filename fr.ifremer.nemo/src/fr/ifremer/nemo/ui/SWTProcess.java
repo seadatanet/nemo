@@ -7,12 +7,15 @@ import java.text.ParseException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 import fr.ifremer.nemo.domain.Survey;
+import fr.ifremer.nemo.input.SurveyMedia;
 import fr.ifremer.nemo.medatlas.MedatlasSurveyWriter;
 import fr.ifremer.nemo.odv.ODVSurveyWriter;
 import fr.ifremer.nemo.output.GenerationException;
@@ -29,7 +32,7 @@ public class SWTProcess implements IRunnableWithProgress{
 	public static Survey survey;
 	public static ODVSurveyWriter writerODV;
 	public static MedatlasSurveyWriter writerMed;
-	public static Boolean odv;
+	public static Boolean odv, interrompu;
 	public static IProgressMonitor monitor2;
 	//public static 
 
@@ -37,8 +40,10 @@ public class SWTProcess implements IRunnableWithProgress{
 	                                                   InterruptedException {
 	    monitor.beginTask(Messages.getString("SWTProcess.1"), IProgressMonitor.UNKNOWN);
 	    monitor2 = monitor;
-	    
-	    
+	    interrompu = false;
+	    SurveyMedia.interrompu = false;
+	    EditConversion.interrompu = false;
+	  
 	    //NOTIFIER
 	    notifier = new ProgressNotification() {
             public void progress(final int val) {
@@ -47,9 +52,8 @@ public class SWTProcess implements IRunnableWithProgress{
                                                       public void run() {
                                                    	 monitor2.subTask(Messages.getString("SWTProcess.2")+val+"%");
                                                    	 if (monitor2.isCanceled()){
-                                                   		//throw new OperationCanceledException();
-                                                   		System.out.println("STOPPPP");
-                                                   		//((Thread)SWTProgress.swtProcess).interrupt();
+                                                   		SurveyMedia.interrompu = true;
+                                                   		
                                                    		
                                                    	 }
                                                    	   }
@@ -58,9 +62,11 @@ public class SWTProcess implements IRunnableWithProgress{
                 }
             }
         };
-	    
+	  
 	    //TACHE A EFFECTUER
-             
+           
+       
+        
         try {
 			notifier.progress(0);
 			monitor.setTaskName(Messages.getString("SWTProcess.3"));
@@ -74,11 +80,7 @@ public class SWTProcess implements IRunnableWithProgress{
 		} catch (ParseException e) {
 			//
 			e.printStackTrace();
-		} catch (Exception e) {
-			
-			System.out.println("STOPPPP444");
-			e.printStackTrace();
-		}
+		} 
 		
 		writerODV = new fr.ifremer.nemo.odv.ODVSurveyWriter();
 		writerMed = new fr.ifremer.nemo.medatlas.MedatlasSurveyWriter();
@@ -86,7 +88,7 @@ public class SWTProcess implements IRunnableWithProgress{
 		
 		try {
 			monitor2.setTaskName(Messages.getString("SWTProcess.4"));
-			
+		if (!monitor2.isCanceled()){	
 			if (!odv){
 				//MEDATLAS
 				writerMed.writeSurvey ( survey, new java.io.File(EditConversion.nomFichierSortie), notifier);
@@ -95,6 +97,10 @@ public class SWTProcess implements IRunnableWithProgress{
 				//ODV
 				writerODV.writeSurvey( survey, new java.io.File(EditConversion.nomFichierSortie), notifier);
 				
+				}
+			}else{
+				//interruption
+				interrompu = true;
 			}
 		} catch (IOException e) {
 			// 
@@ -106,7 +112,9 @@ public class SWTProcess implements IRunnableWithProgress{
 		
 		//nettoyage memoire
 		if (odv){writerODV.release();}else{writerMed.release();}
-		survey.release();
+		if (!interrompu){
+		survey.release();}
+		
 		
 	    monitor.done();
 	 

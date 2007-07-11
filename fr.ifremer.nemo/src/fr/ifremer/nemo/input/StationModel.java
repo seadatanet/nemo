@@ -1061,6 +1061,7 @@ public  class StationModel
     			}
     			consumeFooter(a_Reader);
     			a_Notifier.progress( a_Reader.getFilePointer());
+
     			return station;
     		}
     	}
