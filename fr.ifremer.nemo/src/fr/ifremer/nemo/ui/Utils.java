@@ -472,6 +472,24 @@ public class Utils {
 		}
 	}
 
+	
+	public static void calculPosxPosy(HeaderFragment frag, int x, int y){
+		//reconstitue la position x et y du surlignement souris à partir du fragment
+		
+		int offsetDebut, offsetFin, ligneDebut, ligneFin;
+		
+		ligneDebut = frag.getFirstLine();
+		ligneFin = frag.getLastLine();
+		offsetDebut = frag.getFirstCharOffset();
+		offsetFin = frag.getLastCharOffset();
+		
+		x = taillesCumLignes[ligneDebut - 1]+offsetDebut;
+		y = taillesCumLignes[ligneFin - 1]+offsetFin;
+		
+		
+	}
+	
+	
 	public static void calculNbreLignesPuisRemplissageFrag(HeaderFragment frag) {
 		int deb, fi, lignDepart, lignFin, i, nbrelignes;
 

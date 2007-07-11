@@ -1634,29 +1634,41 @@ public static void fillStation(){
 	}else{
 		EditStation.buttonHistoriqueAcqPos.setSelection(true);
 		EditStation.buttonHistoriqueAcqSaisie.setSelection(false);
-		EditStation.textHistorique1.setEditable(false);
-		EditStation.textHistorique2.setEditable(false);
+		EditStation.textHistorique1.setEnabled(false);
+		EditStation.textHistorique2.setEnabled(false);
 		
 		HeaderFragment frag = propertyModel.getFragment();
 		HeaderFragment frag2 = propertyModel2.getFragment();
 		
+		Utils.calculPosxPosy(frag, EditStation.posxHistoriqueAcq1, EditStation.posyHistoriqueAcq1);
 		int ligne1 = frag.getFirstLine();
 		int debut1 = frag.getFirstCharOffset();
 		int fin1 = frag.getLastCharOffset();
 		int real_ligne1 = ligne1 + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 		
+		EditStation.textHistoriqueAcqLigne1.setText(""+ligne1);
+		EditStation.textHistoriqueAcqDebut1.setText(""+debut1);
+		EditStation.textHistoriqueAcqFin1.setText(""+fin1);
+		
+		if (propertyModel2.isUserProvided()){
+		//on a rentré que la ligne 1 donc les valeurs de ligne 2 sont vides
+			EditStation.textHistoriqueAcqLigne2.setText("");
+			EditStation.textHistoriqueAcqDebut2.setText("");
+			EditStation.textHistoriqueAcqFin2.setText("");
+		}
+		else{
+			
+		Utils.calculPosxPosy(frag2, EditStation.posxHistoriqueAcq2, EditStation.posyHistoriqueAcq2);
+		//on a aussi rentré la ligne 2
 		int ligne2 = frag2.getFirstLine();
 		int debut2 = frag2.getFirstCharOffset();
 		int fin2 = frag2.getLastCharOffset();
 		int real_ligne2 = ligne2 + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 		
-		EditStation.textHistoriqueAcqLigne1.setText(""+ligne1);
-		EditStation.textHistoriqueAcqDebut1.setText(""+debut1);
-		EditStation.textHistoriqueAcqFin1.setText(""+fin1);
-		
 		EditStation.textHistoriqueAcqLigne2.setText(""+ligne2);
 		EditStation.textHistoriqueAcqDebut2.setText(""+debut2);
 		EditStation.textHistoriqueAcqFin2.setText(""+fin2);
+		}
 	}
 	
 	
@@ -1669,9 +1681,13 @@ public static void fillStation(){
 	 		EditStation.textCommentaire.setText(station_modele.getComment());
 	 		
 	 	}else{
+	 		//calcul du surlignement souris
+	 		HeaderFragment frag = propertyModel.getFragment();
+	 		Utils.calculPosxPosy(frag, EditStation.posxCommentaire, EditStation.posyCommentaire);
+	 		
 	 		EditStation.buttonCommentaireSaisie.setSelection(false);
 	 		EditStation.buttonCommentairePos.setSelection(true);
-	 		HeaderFragment frag = propertyModel.getFragment();
+	 		
 	 		
 	 		 ligne = frag.getFirstLine();
 			 debut = frag.getFirstCharOffset();
@@ -1709,6 +1725,8 @@ public static void fillStation(){
 			EditStation.buttonSurfacePos.setSelection(true);
 			
 			HeaderFragment frag = propertyModel.getFragment();
+			Utils.calculPosxPosy(frag, EditStation.posxEchantillon1, EditStation.posyEchantillon1);
+			
 			HeaderFragment frag2 = propertyModel2.getFragment();
 			
 			int ligne1 = frag.getFirstLine();
@@ -1716,19 +1734,29 @@ public static void fillStation(){
 			int fin1 = frag.getLastCharOffset();
 			int real_ligne1 = ligne1 + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 			
+			EditStation.textSurfaceLigne1.setText(""+ligne1);
+			EditStation.textSurfaceDebut1.setText(""+debut1);
+			EditStation.textSurfaceFin1.setText(""+fin1);
+			
+			if (propertyModel2.isUserProvided()){
+				//on a rentré que la ligne 1
+				EditStation.textSurfaceLigne2.setText("");
+				EditStation.textSurfaceDebut2.setText("");
+				EditStation.textSurfaceFin2.setText("");
+			}else{
+				//on a rentré aussi ligne 2
+			
+			Utils.calculPosxPosy(frag2, EditStation.posxEchantillon2, EditStation.posyEchantillon2);
+			
 			int ligne2 = frag2.getFirstLine();
 			int debut2 = frag2.getFirstCharOffset();
 			int fin2 = frag2.getLastCharOffset();
 			int real_ligne2 = ligne2 + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 			
-			EditStation.textSurfaceLigne1.setText(""+ligne1);
-			EditStation.textSurfaceDebut1.setText(""+debut1);
-			EditStation.textSurfaceFin1.setText(""+fin1);
-			
 			EditStation.textSurfaceLigne2.setText(""+ligne2);
 			EditStation.textSurfaceDebut2.setText(""+debut2);
 			EditStation.textSurfaceFin2.setText(""+fin2);
-			
+			}
 			
 		}
 		
