@@ -560,9 +560,9 @@ public class Etape {
 			}
 			
 		} else {
-			if (!EditStation.textProfondeur.getText().matches("")){
+			if (!EditStation.textProfondeur.getText().matches("") && !EditStation.textProfondeur.getText().matches("NaN")){
 				//Pattern.matches("^[0-9][0-9]*$", lign)
-			if (Pattern.matches("^[0-9]*[0-9].*[0-9][0-9]*$",EditStation.textProfondeur.getText())){
+			if (Pattern.matches("^[0-9]*[0-9].*[0-9]*[0-9]*$",EditStation.textProfondeur.getText())){
 				ok = ok && true;
 				//Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
 			} else {

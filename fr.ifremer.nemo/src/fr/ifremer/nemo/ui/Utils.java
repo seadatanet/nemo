@@ -489,6 +489,21 @@ public class Utils {
 		
 	}
 	
+	public static void calculOffsetDebOffsetFin(HeaderFragment frag, int posx, int posy){
+		//calcule debut et fin à partir du surlignement souris
+		int offsetDebut, offsetFin, ligneDebut, ligneFin;
+		
+		ligneDebut = frag.getFirstLine();
+		ligneFin = frag.getLastLine();
+		
+		offsetDebut = posx - taillesCumLignes[ligneDebut -1];
+		offsetFin = posy - taillesCumLignes[ligneFin -1];
+		
+		frag.setFirstCharOffset(offsetDebut);
+		if (offsetFin > 0){
+		frag.setLastCharOffset(offsetFin);}
+		
+	}
 	
 	public static void calculNbreLignesPuisRemplissageFrag(HeaderFragment frag) {
 		int deb, fi, lignDepart, lignFin, i, nbrelignes;
@@ -590,6 +605,7 @@ public class Utils {
 		//lignDepart = frag.getFirstLine();
 		lignDepart = 1;
 		lignFin = 1;
+		//lignFin =frag.getFirstLine();
 		// calcul de la ligne en fonction de la valeur de x
 		// parcours du tableau des tailles de lignes cumulées
 
@@ -647,19 +663,23 @@ public class Utils {
 			frag.setSingleLine(false);
 			frag.setLastLine(frag.getFirstLine() + nbrelignes-1);
 		
-//			calcul de l'offset réel sur la dernière ligne
-			int cpt = fi;
-			for (int j=lignDepart-1;j<lignFin-1;j++){
-				cpt = cpt - Utils.lignesBrutes.get(j).length();
-			}
-			//en sortie de boucle, cpt a la valeur de l'offset de fin sur la dernière ligne du commentaire
-			System.out.println("offset en ligne fin = "+cpt);
-			System.out.println("ligne fin = "+lignFin);
-			System.out.println("ligne debut = "+lignDepart);
-			
-			if (cpt>0){cpt = cpt - (nbrelignes-1);}
-			frag.setLastCharOffset(cpt);
 		}
+			calculOffsetDebOffsetFin(frag, clicX, clicY);
+			
+		
+//			calcul de l'offset réel sur la dernière ligne
+//			int cpt = fi;
+//			for (int j=lignDepart-1;j<lignFin-1;j++){
+//				cpt = cpt - Utils.lignesBrutes.get(j).length();
+//			}
+//			//en sortie de boucle, cpt a la valeur de l'offset de fin sur la dernière ligne du commentaire
+//			System.out.println("offset en ligne fin = "+cpt);
+//			System.out.println("ligne fin = "+lignFin);
+//			System.out.println("ligne debut = "+lignDepart);
+//			
+//			if (cpt>0){cpt = cpt - (nbrelignes-1);}
+//			frag.setLastCharOffset(cpt);
+//		}
 
 	}
 	
