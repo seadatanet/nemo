@@ -496,10 +496,11 @@ public class Utils {
 		ligneDebut = frag.getFirstLine();
 		ligneFin = frag.getLastLine();
 		
-		offsetDebut = posx - taillesCumLignes[ligneDebut -1];
+		offsetDebut = posx - taillesCumLignes[ligneDebut -1]+1;
 		offsetFin = posy - taillesCumLignes[ligneFin -1];
-		
-		frag.setFirstCharOffset(offsetDebut);
+		System.out.println("offsetdebut ="+offsetDebut+"  offsetfin="+offsetFin);
+		if (offsetDebut <0){frag.setFirstCharOffset(1);}else{
+		frag.setFirstCharOffset(offsetDebut);}
 		if (offsetFin > 0){
 		frag.setLastCharOffset(offsetFin);}
 		
@@ -1245,6 +1246,7 @@ public class Utils {
 			EditSurvey.buttonExpand.dispose();
 			EditSurvey.buttonExpand2.dispose();
 			EditSurvey.buttonValidate.dispose();
+			EditSurvey.buttonXML.dispose();
 			EditSurvey.buttonInitServeur.dispose();
 			EditSurvey.buttonRAZ.dispose();
 

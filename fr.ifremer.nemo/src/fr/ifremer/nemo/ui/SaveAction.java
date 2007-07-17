@@ -73,6 +73,8 @@ public void run(){
 		Utils.messageOK(Messages.getString("SaveAction.4")); //$NON-NLS-1$
 	
 	
+			}else{
+				Utils.messageErreur(Messages.getString("SaveAction.3"));
 			}
 		}
 	}
