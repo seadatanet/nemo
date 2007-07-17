@@ -2264,7 +2264,7 @@ public static void fillData(){
 		typeData.setConversion(paraCourant.getConversionFormula());}
 		typeData.setDebut(frag.getFirstCharOffset());
 		typeData.setFin(frag.getLastCharOffset());
-		typeData.setEntree(modeleCourant.getDefault());
+		typeData.setEntree(""+paraCourant.getInputDefault());
 		//typeData.setSensor(paraCourant.get);
 		typeData.setUnite(modeleCourant.getUnit());
 		typeData.setFormat(modeleCourant.getFormat());
