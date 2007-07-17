@@ -960,8 +960,8 @@ public class Etape {
 			
 		}
 		
-		
-		//TEST pour savoir si PRES est bien en premier
+	if (!ViewFile.checkBoxTempo.getSelection()){	
+		//TEST pour savoir si PRES est bien en premier mais pas pour séries tempo
 		TypeData premierType = TableData.types.get(0);
 		
 //		split sur " - "
@@ -977,7 +977,7 @@ public class Etape {
 			ok = ok && true;
 		}
 		
-		
+	}
 		
 		
 		if (ok){

@@ -56,20 +56,26 @@ public void run(){
 	if (EditData.validee ==0){
 		Utils.messageErreur(Messages.getString("SaveAction.3")); //$NON-NLS-1$
 	}else{
-		
+		if (EditDesc.okApresReset && EditSurvey.okApresReset && 
+				EditStation.okApresReset && EditData.okApresReset){
 		choixFichierSortie();
-		
 		try {
 			fileOutputStream = new FileOutputStream(fichierSortieXML);
 		} catch (FileNotFoundException e) {
-			
+			//
 			e.printStackTrace();
 		}
+	
+			
+			
+		
 		DataModel.inputModel.writeXMLOn(fileOutputStream);
 		Utils.messageOK(Messages.getString("SaveAction.4")); //$NON-NLS-1$
-	}
 	
-}
+	
+			}
+		}
+	}
 
 
 

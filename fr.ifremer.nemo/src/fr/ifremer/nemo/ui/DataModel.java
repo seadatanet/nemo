@@ -705,7 +705,7 @@ if (ViewFile.checkBoxTempo.getSelection()){
 			stationModel.getReferenceProperty();
 			
 			
-			System.out.println("############################# date = "+EditStation.textDateSaisie.getText());
+			//System.out.println("############################# date = "+EditStation.textDateSaisie.getText());
 			DateTimeFormat dateFormat = (DateTimeFormat)propertyModel.getFormat();
 			try {
 				dateFormat.setFormatString(EditStation.comboDate.getText());
