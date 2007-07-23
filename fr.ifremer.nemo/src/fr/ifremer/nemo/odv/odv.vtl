@@ -48,7 +48,7 @@ $formatter.limitString($survey.name, 20);$formatter.limitString($station.referen
 #if ($survey.isTimeSeriesSurvey())$formatter.formatInt( "%02d", $station.parametersAt(0).valuesAt($i).month)/$formatter.formatInt( "%02d", $station.parametersAt(0).valuesAt($i).day)/$formatter.formatInt("%4d", $station.parametersAt(0).valuesAt($i).year);$formatter.formatDateTime( "hh24:mm", $station.parametersAt(0).valuesAt($i).date )##
 #else$formatter.formatDateTime("MM/dd/yyyy", $station.fullDate);$formatter.formatDateTime("hh24:mm", $station.correctedTime, "9999")#end##
 ;$formatter.formatLongitude("+DDD.ddd", $station.longitude);$formatter.formatLatitude("+DD.ddd ", $station.latitude);#if ($station.bottomDepth.toString() == "NaN")0#else$station.bottomDepth#end##
-#foreach( $param in $station.parameters );#if($param.valuesAt($i).getValue().toString() == $param.default)-1e10#else$formatter.formatFloat( $param.format, $param.valuesAt($i).getValue())#end#end
+#foreach( $param in $station.parameters );#if($param.valuesAt($i).getValue().toString() == $param.default)-1.e10#else$formatter.formatFloat( $param.format, $param.valuesAt($i).getValue())#end#end
 
 #set( $count = $count + 1 )
 #set( $result = $notifier.progress( $count ))
