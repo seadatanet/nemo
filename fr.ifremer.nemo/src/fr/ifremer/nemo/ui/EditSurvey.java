@@ -641,11 +641,11 @@ public static void chargementXML(File fichier){
 			
 			try {
 				if (survey.getFormattedStartDate()!=null){
-				EditSurvey.textDateDebut.setText(formatter.formatDateTime("dd/MM/yy", survey.getStartDate()));
+				EditSurvey.textDateDebut.setText(formatter.formatDateTime("dd/MM/yyyy", survey.getStartDate()));
 				//EditSurvey.textDateDebut.setText(survey.getFormattedStartDate());
 				}
 				if (survey.getFormattedEndDate()!=null){
-					EditSurvey.textDateFin.setText(formatter.formatDateTime("dd/MM/yy", survey.getEndDate()));
+					EditSurvey.textDateFin.setText(formatter.formatDateTime("dd/MM/yyyy", survey.getEndDate()));
 					//EditSurvey.textDateFin.setText(survey.getFormattedEndDate());
 					}
 			} catch (ParseException e) {

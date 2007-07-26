@@ -39,6 +39,34 @@ public static void remplirArrayList(ArrayList<String> liste, String chaine, int 
 	}
 
 
+public static Boolean depassementHeaderStation(int ligne, String zone){
+	//verifie que la métadonnée injectée ne se situe pas au delà de l'entete station+fichier
+	//retourne true quand ca dépasse
+	
+	Boolean depasse = false;
+	int enteteFichier;
+	
+	if (ViewFile.dossierCampagne){
+		//dossier
+		enteteFichier = 0;
+	}else{
+		//fichier campagne
+		enteteFichier = DataModel.singleSurvey.getHeaderLinesNumber();
+	}
+	int ligneLimite = enteteFichier + DataModel.stationModel.getNumberOfLines();
+	
+	if (ligne > ligneLimite){
+		depasse = true;
+		Utils.messageErreurAppend(zone+ " "+ Messages.getString("Regexp.19"));
+	}
+	 
+	
+	
+	return depasse;
+	
+	
+}
+
 public static Boolean checkPresenceValeurObligatoire(Text text, String nomSection){
 	
 	Boolean ok=true;

@@ -600,7 +600,10 @@ public static void initTable(){
 //		 type.setQc(TableDataSurvey.tableTypeSurvey.getItem(i).getText(2));
 		 
 		types.get(i).setCode(TableDataSurvey.tableTypeSurvey.getItem(i).getText(0));
-		types.get(i).setNombre(Integer.valueOf(TableDataSurvey.tableTypeSurvey.getItem(i).getText(1)));
+		if (TableDataSurvey.tableTypeSurvey.getItem(i).getText(1).matches("")){
+			types.get(i).setNombre(0);
+		}else{
+		types.get(i).setNombre(Integer.valueOf(TableDataSurvey.tableTypeSurvey.getItem(i).getText(1)));}
 		types.get(i).setQc(TableDataSurvey.tableTypeSurvey.getItem(i).getText(2));
 		types.get(i).setSensor(Boolean.parseBoolean(TableDataSurvey.tableTypeSurvey.getItem(i).getText(3)));
 		

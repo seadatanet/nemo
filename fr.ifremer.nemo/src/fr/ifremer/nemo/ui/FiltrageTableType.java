@@ -184,7 +184,7 @@ if (ViewFile.affiche ==3){
 	        typeSurvey = TableDataSurvey.listeFiltree.get(index);
 	        
 	        
-	        
+	    
 	        //test avant ajout pour doublons
 	        int taille = TableDataSurvey.types.size();
 	        Boolean found = false;
@@ -294,13 +294,13 @@ if (ViewFile.affiche ==3){
 		        }
 		        
 		        if (found == false){	        
-		        	TableData.types.add(typeData);}
+		        	TableData.types.add(new TypeData(typeData));}
 		        else{
 		        Utils.messageErreur(Messages.getString("FiltrageTableType.15"));	 //$NON-NLS-1$
 		        }
 		        }
 		        else{
-		        	TableData.types.add(typeData);
+		        	TableData.types.add(new TypeData(typeData));
 		        }
 		        	
 	 	       	 	        

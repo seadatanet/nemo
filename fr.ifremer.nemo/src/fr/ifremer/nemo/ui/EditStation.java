@@ -15,6 +15,8 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
+import fr.ifremer.nemo.domain.DataType;
+
 public class EditStation {
 //	 fonctions de remplissage de la zone d'édition pour les campagnes
 
@@ -35,7 +37,7 @@ public class EditStation {
 	public static Section sectionLatFin, sectionLongFin, sectionProfFin, sectionProfCapteur, sectionDeclinMagnet, sectionFreqEchant;
 	public static Label labelConversionHeure, labelConversionDate;
 	public static Boolean okApresReset;
-	public static int posxCommentaire, posyCommentaire, posxEchantillon1, posyEchantillon1, posxEchantillon2, posyEchantillon2, posxHistoriqueAcq1, posyHistoriqueAcq1, posxHistoriqueAcq2, posyHistoriqueAcq2;
+	//public static int posxCommentaire, posyCommentaire, posxEchantillon1, posyEchantillon1, posxEchantillon2, posyEchantillon2, posxHistoriqueAcq1, posyHistoriqueAcq1, posxHistoriqueAcq2, posyHistoriqueAcq2;
 	
 	
 	
@@ -46,9 +48,12 @@ public static ArrayList <Section> listeSectionsStation, listeSectionsParam;
 public static ArrayList <String> listeSectionsNoms, listeTypeDonnees;
 public static ArrayList <Label> listeSectionsLabel;
 public static ArrayList <Text> listeTextStation;
+public static ArrayList <Button> listeBoutonsPos;
+public static ArrayList <Button> listeBoutonsManuel;
 public static int expand, validee, loaded, offsetDebutHeure, offsetFinHeure, offsetDebutDate, offsetFinDate;
 public static List listeType;
 public static ScrolledForm formEdition;
+public static Cursor cursCommentaire, cursEchant1, cursEchant2, cursHistorique1, cursHistorique2;
 
 ////////////////////////////////////////////
 
@@ -56,17 +61,23 @@ public static ScrolledForm formEdition;
 public static void affichageEdition(){
 // initialisation zone édition pour étape description de fichier 
 
+	cursCommentaire = new Cursor();
+	cursEchant1 = new Cursor();
+	cursEchant2 = new Cursor();
+	cursHistorique1 = new Cursor();
+	cursHistorique2 = new Cursor();
 	
-	posxCommentaire =0;
-	posyCommentaire=0;
-	posxEchantillon1=0;
-	posyEchantillon1=0;
-	posxEchantillon2=0;
-	posyEchantillon2=0;
-	posxHistoriqueAcq1=0;
-	posyHistoriqueAcq1=0;
-	posxHistoriqueAcq2=0;
-	posyHistoriqueAcq2=0;	
+	
+//	posxCommentaire =0;
+//	posyCommentaire=0;
+//	posxEchantillon1=0;
+//	posyEchantillon1=0;
+//	posxEchantillon2=0;
+//	posyEchantillon2=0;
+//	posxHistoriqueAcq1=0;
+//	posyHistoriqueAcq1=0;
+//	posxHistoriqueAcq2=0;
+//	posyHistoriqueAcq2=0;	
 	
 	
 formEdition = ViewEdit.formEdition;
@@ -101,6 +112,9 @@ ViewEdit.formEdition.setText(Messages.getString("EditStation.1")); //$NON-NLS-1$
 listeSectionsStation = new ArrayList <Section> ();
 listeSectionsNoms = new ArrayList <String> ();
 listeTextStation =  new ArrayList <Text> ();
+listeBoutonsManuel =  new ArrayList <Button> ();
+listeBoutonsPos =  new ArrayList <Button> ();
+
 
 //init composants IHM
 initSections();
@@ -194,7 +208,7 @@ if (ViewFile.checkBoxTempo.getSelection()){
 	DrawingStation.sectionManuelLigneDebutFinInject(Messages.getString("EditStation.31"), Messages.getString("EditStation.32"), sectionProfCapteur, textProfCapteurLigne, textProfCapteurDebut, textProfCapteurFin, textProfCapteur, buttonProfCapteurSaisie, buttonProfCapteurPos); //$NON-NLS-1$ //$NON-NLS-2$
 
 	//section déclinaison magnétique
-			  DrawingStation.sectionManuelLigneDebutFinInject(Messages.getString("EditStation.33"), Messages.getString("EditStation.34"), sectionDeclinMagnet, textDeclinMagnetLigne, textDeclinMagnetDebut, textDeclinMagnetFin, textDeclinMagnet, buttonDeclinMagnetSaisie, buttonDeclinMagnetPos); //$NON-NLS-1$ //$NON-NLS-2$
+	DrawingStation.sectionManuelLigneDebutFinInject(Messages.getString("EditStation.33"), Messages.getString("EditStation.34"), sectionDeclinMagnet, textDeclinMagnetLigne, textDeclinMagnetDebut, textDeclinMagnetFin, textDeclinMagnet, buttonDeclinMagnetSaisie, buttonDeclinMagnetPos); //$NON-NLS-1$ //$NON-NLS-2$
 	
 			  
 	//if (!ViewFile.textTempoHeureRef.getText().matches("")){		  
@@ -418,6 +432,16 @@ public static void DrawingBack(){
 	Utils.messageErreur(""); //$NON-NLS-1$
 
 //	effacement des boutons valider/expand/init serveur
+	DataType dataType;
+	initTypes();
+	if (DataModel.ouverture){
+		dataType = DataModel.station_modele.getDataType();
+	}else{
+	//re-remplissage et sélection du type de la station
+	dataType = DataModel.station.getDataType();}
+	String code = dataType.getCode();
+	comboRefStationType.add(code, 0);
+	comboRefStationType.select(0);
 	
 	
 	EditStation.buttonValidate.setParent(s.getBody());
@@ -628,53 +652,56 @@ buttonExpand = new Button(shell, SWT.NONE);
 buttonExpand2 = new Button(shell, SWT.NONE);
 buttonValidate = new Button(shell, SWT.NONE);
 
-buttonHistoriqueAcqSaisie = new Button(shell, SWT.RADIO);
-buttonHistoriqueAcqPos = new Button(shell, SWT.RADIO);
+buttonHistoriqueAcqSaisie = new Button(shell, SWT.RADIO);listeBoutonsManuel.add(buttonHistoriqueAcqSaisie);
+buttonHistoriqueAcqPos = new Button(shell, SWT.RADIO);listeBoutonsPos.add(buttonHistoriqueAcqPos);
 
-buttonRefStationIncremente = new Button(shell, SWT.RADIO);
-buttonRefStationPos = new Button(shell, SWT.RADIO);
+buttonRefStationIncremente = new Button(shell, SWT.RADIO);listeBoutonsManuel.add(buttonRefStationIncremente);
+buttonRefStationPos = new Button(shell, SWT.RADIO);listeBoutonsPos.add(buttonRefStationPos);
 
-buttonSurfaceSaisie = new Button(shell, SWT.RADIO);
-buttonSurfacePos = new Button(shell, SWT.RADIO);
+buttonSurfaceSaisie = new Button(shell, SWT.RADIO);listeBoutonsManuel.add(buttonSurfaceSaisie);
+buttonSurfacePos = new Button(shell, SWT.RADIO);listeBoutonsPos.add(buttonSurfacePos);
 
-buttonTUSaisie  = new Button(shell, SWT.RADIO);
-buttonTUPos  = new Button(shell, SWT.RADIO);
+buttonTUSaisie  = new Button(shell, SWT.RADIO);listeBoutonsManuel.add(buttonTUSaisie);
+buttonTUPos  = new Button(shell, SWT.RADIO);listeBoutonsPos.add(buttonTUPos);
 
-buttonLatSaisie  = new Button(shell, SWT.RADIO);
-buttonLatPos  = new Button(shell, SWT.RADIO);
-buttonLatFinPos = new Button(shell, SWT.RADIO);
-buttonLatFinSaisie = new Button(shell, SWT.RADIO);
+buttonLatSaisie  = new Button(shell, SWT.RADIO);listeBoutonsManuel.add(buttonLatSaisie);
+buttonLatPos  = new Button(shell, SWT.RADIO);listeBoutonsPos.add(buttonLatPos);
+buttonLatFinPos = new Button(shell, SWT.RADIO);listeBoutonsPos.add(buttonLatFinPos);
+buttonLatFinSaisie = new Button(shell, SWT.RADIO);listeBoutonsManuel.add(buttonLatFinSaisie);
 
-buttonLongSaisie  = new Button(shell, SWT.RADIO);
-buttonLongPos  = new Button(shell, SWT.RADIO);
-buttonLongFinPos = new Button(shell, SWT.RADIO);
-buttonLongFinSaisie = new Button(shell, SWT.RADIO);
+buttonLongSaisie  = new Button(shell, SWT.RADIO);listeBoutonsManuel.add(buttonLongSaisie);
+buttonLongPos  = new Button(shell, SWT.RADIO);listeBoutonsPos.add(buttonLongPos);
+buttonLongFinPos = new Button(shell, SWT.RADIO);listeBoutonsPos.add(buttonLongFinPos);
+buttonLongFinSaisie = new Button(shell, SWT.RADIO);listeBoutonsManuel.add(buttonLongFinSaisie);
 
-buttonCommentaireSaisie  = new Button(shell, SWT.RADIO);
-buttonCommentairePos  = new Button(shell, SWT.RADIO);
+buttonCommentaireSaisie  = new Button(shell, SWT.RADIO);listeBoutonsManuel.add(buttonCommentaireSaisie);
+buttonCommentairePos  = new Button(shell, SWT.RADIO);listeBoutonsPos.add(buttonCommentairePos);
 
-buttonProfondeurSaisie  = new Button(shell, SWT.RADIO);
-buttonProfondeurPos  = new Button(shell, SWT.RADIO);
-buttonProfFinPos = new Button(shell, SWT.RADIO);
-buttonProfFinSaisie = new Button(shell, SWT.RADIO);
+buttonProfondeurSaisie  = new Button(shell, SWT.RADIO);listeBoutonsManuel.add(buttonProfondeurSaisie);
+buttonProfondeurPos  = new Button(shell, SWT.RADIO);listeBoutonsPos.add(buttonProfondeurPos);
+buttonProfFinPos = new Button(shell, SWT.RADIO);listeBoutonsPos.add(buttonProfFinPos);
+buttonProfFinSaisie = new Button(shell, SWT.RADIO);listeBoutonsManuel.add(buttonProfFinSaisie);
 
-buttonProfCapteurPos = new Button(shell, SWT.RADIO);
-buttonProfCapteurSaisie = new Button(shell, SWT.RADIO);
+buttonProfCapteurPos = new Button(shell, SWT.RADIO);listeBoutonsPos.add(buttonProfCapteurPos);
+buttonProfCapteurSaisie = new Button(shell, SWT.RADIO);listeBoutonsManuel.add(buttonProfCapteurSaisie);
 
-buttonDeclinMagnetPos = new Button(shell, SWT.RADIO);
-buttonDeclinMagnetSaisie = new Button(shell, SWT.RADIO);
+buttonDeclinMagnetPos = new Button(shell, SWT.RADIO);listeBoutonsPos.add(buttonDeclinMagnetPos);
+buttonDeclinMagnetSaisie = new Button(shell, SWT.RADIO);listeBoutonsManuel.add(buttonDeclinMagnetSaisie);
 
-buttonFreqEchantPos = new Button(shell, SWT.RADIO);
-buttonFreqEchantSaisie = new Button(shell, SWT.RADIO);
+buttonFreqEchantPos = new Button(shell, SWT.RADIO);listeBoutonsPos.add(buttonFreqEchantPos);
+buttonFreqEchantSaisie = new Button(shell, SWT.RADIO);listeBoutonsManuel.add(buttonFreqEchantSaisie);
 
 buttonDateReference= new Button(shell, SWT.RADIO);
 buttonHeureReference= new Button(shell, SWT.RADIO);
-buttonHeureSaisie= new Button(shell, SWT.RADIO);
-buttonDateSaisie= new Button(shell, SWT.RADIO);
-buttonHeurePos= new Button(shell, SWT.RADIO);
-buttonDatePos= new Button(shell, SWT.RADIO);
-buttonHeureReferencePos =  new Button(shell, SWT.RADIO);
-buttonDateReferencePos =  new Button(shell, SWT.RADIO);
+
+buttonHeureSaisie= new Button(shell, SWT.RADIO);listeBoutonsManuel.add(buttonHeureSaisie);
+
+buttonDateSaisie= new Button(shell, SWT.RADIO);listeBoutonsManuel.add(buttonDateSaisie);
+
+buttonHeurePos= new Button(shell, SWT.RADIO);listeBoutonsPos.add(buttonHeurePos);
+buttonDatePos= new Button(shell, SWT.RADIO);listeBoutonsPos.add(buttonDatePos);
+buttonHeureReferencePos =  new Button(shell, SWT.RADIO);listeBoutonsPos.add(buttonHeureReferencePos);
+buttonDateReferencePos =  new Button(shell, SWT.RADIO);listeBoutonsPos.add(buttonDateReferencePos);
 }
 
 
@@ -712,6 +739,22 @@ public static void initComboType(){
 	
 } 
 */
+
+public static void initTypes(){
+	//Shell shell = new Shell();
+	
+	comboRefStationType.removeAll();
+	//comboRefStationType = new Combo(shell, SWT.READ_ONLY);
+	//remplissage avec les dataTypes de la campagne
+	
+	int taille = TableDataSurvey.types.size();
+	for (int i=0;i<taille;i++){
+		//on n'ajoute que les sensors
+		if (TableDataSurvey.types.get(i).getSensor()){
+		comboRefStationType.add(TableDataSurvey.types.get(i).getCode());
+		}
+	}	
+}
 
 public static void initCombos(){
 	
@@ -778,6 +821,20 @@ public static void razText(ArrayList <Text> liste){
 	EditData.okApresReset = false;
 	ViewFile.tabItem3.setText(Messages.getString("EditData.1"));
 	Utils.messageErreur("");
+	
+	//boutons manuels sélectionnés par défaut
+	int nbreManu = listeBoutonsManuel.size();
+	int nbrePos = listeBoutonsPos.size();
+
+	
+	for (int i=0;i<nbrePos;i++){
+		listeBoutonsPos.get(i).setSelection(false);
+	}
+	
+	for (int i=0;i<nbreManu;i++){
+		listeBoutonsManuel.get(i).setSelection(true);
+	}
+
 	
 }
 

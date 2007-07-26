@@ -32,6 +32,20 @@ public class TypeData extends Object{
 		
 		}
 	
+	public TypeData(TypeData typeData) {
+		
+		this.setCode(typeData.code);
+		this.setConversion(typeData.conversion);
+		this.setEntree(typeData.entree);
+		this.setFormat(typeData.format);
+		this.setSortie(typeData.sortie);
+		this.setUnite(typeData.unite);
+		
+		
+		
+		}
+	
+	
 	
 	public TypeData() {
 		

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
@@ -331,7 +332,8 @@ public class Utils {
 	}
 
 	
-	public static int calculNbreLignes(int deb, int fi){
+	public static int calculNbreLignes(Cursor cursor){
+
 		int nbre=0, lignDepart, lignFin;
 		
 		lignDepart = 1;
@@ -339,7 +341,7 @@ public class Utils {
 		// calcul de la ligne en fonction de la valeur de x
 		// parcours du tableau des tailles de lignes cumulées
 
-		if (deb == fi) {
+		if (cursor.getX() == cursor.getY()) {
 			Utils.messageErreur(Messages.getString("Utils.26"));
 
 		} else {
@@ -347,7 +349,7 @@ public class Utils {
 			// calcul ligne depart
 			for (int i = 0; i < lignesBrutes.size(); i++) {
 
-				if (deb == taillesCumLignes[i]) {
+				if (cursor.getX() == taillesCumLignes[i]) {
 					lignDepart = i + 1;
 					break;
 				}
@@ -355,8 +357,8 @@ public class Utils {
 					lignDepart = i + 1;
 					break;
 				}
-				if ((deb >= taillesCumLignes[i])
-						&& (deb < taillesCumLignes[i + 1])) {
+				if ((cursor.getX() >= taillesCumLignes[i])
+						&& (cursor.getX() < taillesCumLignes[i + 1])) {
 					lignDepart = i + 1;
 					break;
 				}
@@ -372,7 +374,7 @@ public class Utils {
 
 			for (int i = 0; i < lignesBrutes.size(); i++) {
 
-				if (fi == taillesCumLignes[i]) {
+				if (cursor.getY() == taillesCumLignes[i]) {
 					lignFin = i + 1;
 					break;
 				}
@@ -380,8 +382,8 @@ public class Utils {
 					lignFin = i + 1;
 					break;
 				}
-				if ((fi >= taillesCumLignes[i])
-						&& (fi < taillesCumLignes[i + 1])) {
+				if ((cursor.getY() >= taillesCumLignes[i])
+						&& (cursor.getY() < taillesCumLignes[i + 1])) {
 					lignFin = i + 1;
 					break;
 				}
@@ -473,7 +475,24 @@ public class Utils {
 	}
 
 	
-	public static void calculPosxPosy(HeaderFragment frag, int x, int y){
+//	public static void calculPosxPosy(HeaderFragment frag, Integer x, Integer y){
+//		//reconstitue la position x et y du surlignement souris à partir du fragment
+//		
+//		int offsetDebut, offsetFin, ligneDebut, ligneFin;
+//		
+//		ligneDebut = frag.getFirstLine();
+//		ligneFin = frag.getLastLine();
+//		offsetDebut = frag.getFirstCharOffset();
+//		offsetFin = frag.getLastCharOffset();
+//		
+//		x = taillesCumLignes[ligneDebut - 1]+offsetDebut;
+//		y = taillesCumLignes[ligneFin - 1]+offsetFin;
+//		
+//		
+//	}
+	
+	
+	public static void calculPosxPosy(HeaderFragment frag, Cursor cursor){
 		//reconstitue la position x et y du surlignement souris à partir du fragment
 		
 		int offsetDebut, offsetFin, ligneDebut, ligneFin;
@@ -483,21 +502,21 @@ public class Utils {
 		offsetDebut = frag.getFirstCharOffset();
 		offsetFin = frag.getLastCharOffset();
 		
-		x = taillesCumLignes[ligneDebut - 1]+offsetDebut;
-		y = taillesCumLignes[ligneFin - 1]+offsetFin;
+		cursor.setX(taillesCumLignes[ligneDebut - 1]+offsetDebut);
+		cursor.setY(taillesCumLignes[ligneFin - 1]+offsetFin);
 		
 		
 	}
 	
-	public static void calculOffsetDebOffsetFin(HeaderFragment frag, int posx, int posy){
+	public static void calculOffsetDebOffsetFin(HeaderFragment frag, Cursor cursor){
 		//calcule debut et fin à partir du surlignement souris
 		int offsetDebut, offsetFin, ligneDebut, ligneFin;
 		
 		ligneDebut = frag.getFirstLine();
 		ligneFin = frag.getLastLine();
 		
-		offsetDebut = posx - taillesCumLignes[ligneDebut -1]+1;
-		offsetFin = posy - taillesCumLignes[ligneFin -1];
+		offsetDebut = cursor.getX() - taillesCumLignes[ligneDebut -1]+1;
+		offsetFin = cursor.getY() - taillesCumLignes[ligneFin -1];
 		System.out.println("offsetdebut ="+offsetDebut+"  offsetfin="+offsetFin);
 		if (offsetDebut <0){frag.setFirstCharOffset(1);}else{
 		frag.setFirstCharOffset(offsetDebut);}
@@ -593,12 +612,15 @@ public class Utils {
 	}
 
 	
-	public static void calculNbreLignesPuisRemplissageFragClic(HeaderFragment frag, int clicX, int clicY) {
+	public static void calculNbreLignesPuisRemplissageFragClic(HeaderFragment frag, Cursor cursor) {
 		int deb, fi, lignDepart, lignFin, i, nbrelignes;
-
+		//int clicX, int clicY
+		//calcul nbre ligne/debut/fin en fonction de la zone de surlignement souris 
+		
+		
 		// on récupère les coordonnées de la sélection
-		deb = clicX;
-		fi = clicY;
+		deb = cursor.getX();
+		fi = cursor.getY();
 
 		// System.out.println("deb clic = " + deb);
 		// System.out.println("fi clic = " + fi);
@@ -665,7 +687,7 @@ public class Utils {
 			frag.setLastLine(frag.getFirstLine() + nbrelignes-1);
 		
 		}
-			calculOffsetDebOffsetFin(frag, clicX, clicY);
+			calculOffsetDebOffsetFin(frag, cursor);
 			
 		
 //			calcul de l'offset réel sur la dernière ligne
@@ -1046,7 +1068,45 @@ public class Utils {
 	public static void findFiles(String directoryPath) {
 		File directory = new File(directoryPath);
 
+		
+		Boolean ok = true;
+		
+		
 		File[] subfiles = directory.listFiles();
+		
+		int nbre = subfiles.length;
+		String nom = subfiles[0].getName();
+		
+		
+		
+		//verif sur l'extension de tous les fichiers du dossier
+		Pattern p  = Pattern.compile("[.]");
+		String[] mots = p.split(nom);
+		String ext;
+		if (mots.length == 1){
+			ext="";
+		}else{ 
+		ext = mots[1];}
+		
+		for (int i=0;i<nbre;i++){
+			Pattern p1 = Pattern.compile("[.]");
+			String mots1[] = p.split(subfiles[i].getName());
+			String ext1;
+			if (mots1.length == 1){
+				ext1="";
+			}else{ 
+			ext1 = mots1[1];}
+			
+				
+			if (!ext.matches(ext1)){
+				ok = false;
+				Utils.messageErreur(Messages.getString("Utils.27"));
+			}			
+			
+		}
+		
+		if (ok){
+		
 		ViewFile.nomFichier = directoryPath + "\\" + subfiles[0].getName(); //$NON-NLS-1$
 		ViewFile.nomRepertoire = directoryPath;
 
@@ -1061,6 +1121,9 @@ public class Utils {
 			e.printStackTrace();
 		}
 
+		
+		}
+		
 		// if (!directory.exists()) {
 		// System.out.println("Le fichier/répertoire '" + directoryPath
 		// + "' n'existe pas");

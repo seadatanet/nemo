@@ -268,7 +268,7 @@ public static void initSurvey(){
 	//DATE DE DEBUT
 	try {
 		DateTimeFormat dateFormat = new DateTimeFormat();
-		dateFormat.setFormatString("dd/MM/yy");
+		dateFormat.setFormatString("dd/MM/yyyy");
 		Long dateLong = (Long)dateFormat.parseObject(EditSurvey.textDateDebut.getText());
 		survey.setStartDate(dateLong);
 	} catch (ParseException e) {
@@ -279,7 +279,7 @@ public static void initSurvey(){
 	//DATE DE FIN
 	try {
 		DateTimeFormat dateFormat = new DateTimeFormat();
-		dateFormat.setFormatString("dd/MM/yy");
+		dateFormat.setFormatString("dd/MM/yyyy");
 		Long dateLong = (Long)dateFormat.parseObject(EditSurvey.textDateFin.getText());
 		survey.setEndDate(dateLong);
 	} catch (ParseException e) {
@@ -519,8 +519,8 @@ public static void initStation(){
 		frag.setFirstCharOffset(debut);
 		frag.setLastCharOffset(fin);
 		
-		Utils.calculNbreLignesPuisRemplissageFragClic(frag, EditStation.posxCommentaire, EditStation.posyCommentaire);
-		
+		//Utils.calculNbreLignesPuisRemplissageFragClic(frag, EditStation.posxCommentaire, EditStation.posyCommentaire);
+		Utils.calculNbreLignesPuisRemplissageFragClic(frag, EditStation.cursCommentaire);
 		
 	}
 	
@@ -1435,7 +1435,7 @@ public static void fillSurvey(){
 	Formatter formatter = new Formatter();
 	
 	try {
-		EditSurvey.textDateDebut.setText(formatter.formatDateTime("dd/MM/yy", survey.getStartDate()));
+		EditSurvey.textDateDebut.setText(formatter.formatDateTime("dd/MM/yyyy", survey.getStartDate()));
 	} catch (ParseException e) {
 		
 		e.printStackTrace();
@@ -1444,7 +1444,7 @@ public static void fillSurvey(){
 	formatter = new Formatter();
 	
 	try {
-		EditSurvey.textDateFin.setText(formatter.formatDateTime("dd/MM/yy", survey.getEndDate()));
+		EditSurvey.textDateFin.setText(formatter.formatDateTime("dd/MM/yyyy", survey.getEndDate()));
 	} catch (ParseException e) {
 		
 		e.printStackTrace();
@@ -1574,9 +1574,9 @@ public static void fillStation(){
 		HeaderFragment frag = propertyModel.getFragment();
 		
 		ligne = frag.getFirstLine();
-		 debut = frag.getFirstCharOffset();
-		 fin = frag.getLastCharOffset();
-		 real_ligne = ligne + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+		debut = frag.getFirstCharOffset();
+		fin = frag.getLastCharOffset();
+		real_ligne = ligne + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 		
 		EditStation.textRefStationLigne.setText(""+real_ligne);
 		EditStation.textRefStationDebut.setText(""+debut);
@@ -1639,8 +1639,10 @@ public static void fillStation(){
 		
 		HeaderFragment frag = propertyModel.getFragment();
 		HeaderFragment frag2 = propertyModel2.getFragment();
+				
+		//Utils.calculPosxPosy(frag, EditStation.posxHistoriqueAcq1, EditStation.posyHistoriqueAcq1);
+		Utils.calculPosxPosy(frag, EditStation.cursHistorique1);
 		
-		Utils.calculPosxPosy(frag, EditStation.posxHistoriqueAcq1, EditStation.posyHistoriqueAcq1);
 		int ligne1 = frag.getFirstLine();
 		int debut1 = frag.getFirstCharOffset();
 		int fin1 = frag.getLastCharOffset();
@@ -1658,7 +1660,8 @@ public static void fillStation(){
 		}
 		else{
 			
-		Utils.calculPosxPosy(frag2, EditStation.posxHistoriqueAcq2, EditStation.posyHistoriqueAcq2);
+	//	Utils.calculPosxPosy(frag2, EditStation.posxHistoriqueAcq2, EditStation.posyHistoriqueAcq2);
+			Utils.calculPosxPosy(frag2, EditStation.cursHistorique2);
 		//on a aussi rentré la ligne 2
 		int ligne2 = frag2.getFirstLine();
 		int debut2 = frag2.getFirstCharOffset();
@@ -1683,7 +1686,8 @@ public static void fillStation(){
 	 	}else{
 	 		//calcul du surlignement souris
 	 		HeaderFragment frag = propertyModel.getFragment();
-	 		Utils.calculPosxPosy(frag, EditStation.posxCommentaire, EditStation.posyCommentaire);
+	// 		Utils.calculPosxPosy(frag, EditStation.posxCommentaire, EditStation.posyCommentaire);
+	 		Utils.calculPosxPosy(frag, EditStation.cursCommentaire);
 	 		
 	 		EditStation.buttonCommentaireSaisie.setSelection(false);
 	 		EditStation.buttonCommentairePos.setSelection(true);
@@ -1725,7 +1729,8 @@ public static void fillStation(){
 			EditStation.buttonSurfacePos.setSelection(true);
 			
 			HeaderFragment frag = propertyModel.getFragment();
-			Utils.calculPosxPosy(frag, EditStation.posxEchantillon1, EditStation.posyEchantillon1);
+//			Utils.calculPosxPosy(frag, EditStation.posxEchantillon1, EditStation.posyEchantillon1);
+			Utils.calculPosxPosy(frag, EditStation.cursEchant1);
 			
 			HeaderFragment frag2 = propertyModel2.getFragment();
 			
@@ -1746,8 +1751,9 @@ public static void fillStation(){
 			}else{
 				//on a rentré aussi ligne 2
 			
-			Utils.calculPosxPosy(frag2, EditStation.posxEchantillon2, EditStation.posyEchantillon2);
-			
+	//		Utils.calculPosxPosy(frag2, EditStation.posxEchantillon2, EditStation.posyEchantillon2);
+			Utils.calculPosxPosy(frag2, EditStation.cursEchant2);
+				
 			int ligne2 = frag2.getFirstLine();
 			int debut2 = frag2.getFirstCharOffset();
 			int fin2 = frag2.getLastCharOffset();

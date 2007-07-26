@@ -592,7 +592,7 @@ public static void initTable(){
 	String mots[] = p.split(type_a_Deplacer.getCode());
 	String code = mots[0];
 	
-	if (!code.matches("PRES")){
+	if (!code.matches("PRES") || ViewFile.checkBoxTempo.getSelection()){
 		
 	 
 	 listeTempo = new ArrayList();
@@ -653,14 +653,16 @@ public static void initTable(){
 		Pattern p  = Pattern.compile(" - ");
 		String mots[] = p.split(types.get(indice).getCode());
 		String code = mots[0];
-		String nom = mots[1];
+
+	 //pas forcément de - dans le nom du type
+	 //	String nom = mots[1];
 	
-	if (!code.matches("PRES")){
+	if (!code.matches("PRES") ||ViewFile.checkBoxTempo.getSelection() ){
 		types.remove(indice);	
 	}else{
 		Utils.messageErreur(Messages.getString("TableData.18"));
 	}
-	 
+	
 	 
 	 //razTableData
 	 razTableData();

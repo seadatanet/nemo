@@ -47,7 +47,7 @@ public class DrawingStation {
 			  section.setText(nomSection);
 			  
 			  section.setDescription(description);
-					 Composite sectionClient = ViewEdit.toolkitEdition.createComposite(section);
+			  Composite sectionClient = ViewEdit.toolkitEdition.createComposite(section);
 					 sectionClient.setLayout(new GridLayout());
 									 
 					  //bouton radio "saisie manuelle"
@@ -66,12 +66,12 @@ public class DrawingStation {
 					position.setText("Position");
 					  
 					  
-					    GridLayout gridLayout1 = new GridLayout();
-					  gridLayout1.numColumns = 6;
+					GridLayout gridLayout1 = new GridLayout();
+					gridLayout1.numColumns = 6;
 					Group groupe = new Group(sectionClient, SWT.NONE);
-						 groupe.setText("Localisation");
-						 groupe.setLayout(gridLayout1);
-					  grou = groupe;
+					groupe.setText("Localisation");
+					groupe.setLayout(gridLayout1);
+					grou = groupe;
 					  
 					  //ligne
 					  Label label1 = new Label(groupe, SWT.CENTER);
@@ -789,8 +789,8 @@ section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition.getBody(
 							//System.out.println("valeur de ligne lign==> " + lign.getText());
 							//System.out.println("valeur de ligne de ViewEdit.ligneTest ==> " + ViewEdit.ligneTest.getText());
 						Utils.inject(lign1, debu1, fi1, ViewFile.styledTextStation);
-						EditStation.posxHistoriqueAcq1 = ViewFile.styledTextStation.getSelection().x;
-						EditStation.posyHistoriqueAcq1 = ViewFile.styledTextStation.getSelection().y;
+						EditStation.cursHistorique1.setX(ViewFile.styledTextStation.getSelection().x);
+						EditStation.cursHistorique1.setY(ViewFile.styledTextStation.getSelection().y);
 						}
 					});
 				  
@@ -803,8 +803,8 @@ section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition.getBody(
 							//System.out.println("valeur de ligne lign==> " + lign.getText());
 							//System.out.println("valeur de ligne de ViewEdit.ligneTest ==> " + ViewEdit.ligneTest.getText());
 						Utils.inject(lign2, debu2, fi2, ViewFile.styledTextStation);
-						EditStation.posxHistoriqueAcq2 = ViewFile.styledTextStation.getSelection().x;
-						EditStation.posyHistoriqueAcq2 = ViewFile.styledTextStation.getSelection().y;
+						EditStation.cursHistorique2.setX(ViewFile.styledTextStation.getSelection().x);
+						EditStation.cursHistorique2.setY(ViewFile.styledTextStation.getSelection().y);
 						
 						}
 					});
@@ -1037,8 +1037,9 @@ section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition.getBody(
 							//System.out.println("valeur de ligne lign==> " + lign.getText());
 							//System.out.println("valeur de ligne de ViewEdit.ligneTest ==> " + ViewEdit.ligneTest.getText());
 						Utils.inject(lign1, debu1, fi1, ViewFile.styledTextStation);
-						EditStation.posxEchantillon1 = ViewFile.styledTextStation.getSelection().x;
-						EditStation.posyEchantillon1 = ViewFile.styledTextStation.getSelection().y;
+						EditStation.cursEchant1.setX(ViewFile.styledTextStation.getSelection().x);
+						EditStation.cursEchant1.setY(ViewFile.styledTextStation.getSelection().y);
+						
 						}
 					});
 				  
@@ -1051,8 +1052,9 @@ section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition.getBody(
 							//System.out.println("valeur de ligne lign==> " + lign.getText());
 							//System.out.println("valeur de ligne de ViewEdit.ligneTest ==> " + ViewEdit.ligneTest.getText());
 						Utils.inject(lign2, debu2, fi2, ViewFile.styledTextStation);
-						EditStation.posxEchantillon2 = ViewFile.styledTextStation.getSelection().x;
-						EditStation.posyEchantillon2 = ViewFile.styledTextStation.getSelection().y;
+						
+						EditStation.cursEchant2.setX(ViewFile.styledTextStation.getSelection().x);
+						EditStation.cursEchant2.setY(ViewFile.styledTextStation.getSelection().y);
 						}
 					});
 				  
@@ -1329,8 +1331,9 @@ public static void sectionCommentaireLigneDebutFinInject(String nomSection, Stri
 								//System.out.println("valeur de ligne lign==> " + lign.getText());
 								//System.out.println("valeur de ligne de ViewEdit.ligneTest ==> " + ViewEdit.ligneTest.getText());
 							Utils.inject(lign, debu, fi, ViewFile.styledTextStation);
-							EditStation.posxCommentaire = ViewFile.styledTextStation.getSelection().x;
-							EditStation.posyCommentaire = ViewFile.styledTextStation.getSelection().y;
+							EditStation.cursCommentaire.setX(ViewFile.styledTextStation.getSelection().x);
+							EditStation.cursCommentaire.setY(ViewFile.styledTextStation.getSelection().y);
+							
 							}
 						});
 					  
