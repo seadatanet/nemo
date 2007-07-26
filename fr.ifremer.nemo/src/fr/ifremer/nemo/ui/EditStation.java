@@ -1,6 +1,7 @@
 package fr.ifremer.nemo.ui;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -433,7 +434,9 @@ public static void DrawingBack(){
 
 //	effacement des boutons valider/expand/init serveur
 	DataType dataType;
-	initTypes();
+	//initTypes();
+	
+	/*
 	if (DataModel.ouverture){
 		dataType = DataModel.station_modele.getDataType();
 	}else{
@@ -442,7 +445,7 @@ public static void DrawingBack(){
 	String code = dataType.getCode();
 	comboRefStationType.add(code, 0);
 	comboRefStationType.select(0);
-	
+	*/
 	
 	EditStation.buttonValidate.setParent(s.getBody());
 	EditStation.buttonRAZ.setParent(s.getBody());

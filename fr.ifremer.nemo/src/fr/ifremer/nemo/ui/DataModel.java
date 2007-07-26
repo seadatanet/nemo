@@ -360,6 +360,10 @@ public static void initSurvey(){
 		
 	}
 
+	if (EditStation.loaded == 1){
+	EditStation.initTypes();}
+	
+	
 	//flag "validee" à 1
 	EditSurvey.validee = 1;
 
@@ -1606,7 +1610,7 @@ public static void fillStation(){
 	for (int i=0;i<taille;i++){
 		//check si le type existe toujours ou pas
 		Pattern pat  = Pattern.compile(" - ");
-		String motsType[] = p.split(TableDataSurvey.types.get(i).getCode());
+		String motsType[] = pat.split(TableDataSurvey.types.get(i).getCode());
 		String vraiCodeType = motsType[0];
 				
 		if (vraiCode.matches(vraiCodeType)){ok = true;
