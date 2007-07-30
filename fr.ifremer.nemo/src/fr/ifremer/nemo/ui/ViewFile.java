@@ -156,15 +156,11 @@ public class ViewFile extends ViewPart {
 							org.eclipse.swt.events.SelectionEvent e) {
 
 						// System.out.println("affichage courant " + affiche);
-						// //$NON-NLS-1$
+
 						int tmp = tabFolder.getSelectionIndex();
 
-						// tabFolder.setSelection(0);
 						Utils.validationEtape(tmp);
 						// System.out.println("onglet sélectionné " + tmp);
-						// //$NON-NLS-1$
-
-						// rajouter test de validation au changement d'onglet
 
 					}
 				});
@@ -194,12 +190,6 @@ public class ViewFile extends ViewPart {
 	private void createComposite1() {
 		composite1 = new Composite(tabFolder, SWT.NONE);
 		composite1.setLayout(new FillLayout(SWT.VERTICAL));
-
-		// séries temporelles
-
-		// bouton fichier
-
-		// bouton dossier
 
 		createComposite12();
 		createComposite11();
@@ -268,20 +258,16 @@ public class ViewFile extends ViewPart {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
 						// System.out.println("fichier campagne"); //
-						// //$NON-NLS-1$
+
 					}
 				});
-
-		// labelDescription = new Label(composite11, SWT.NONE);
-		// labelDescription.setText("Sélection-->");
-		// labelDescription.setLayoutData(gridData);
 
 		radioDossier
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
 						// System.out.println("dossier campagne)"); //
-						// //$NON-NLS-1$
+
 					}
 				});
 
@@ -295,12 +281,6 @@ public class ViewFile extends ViewPart {
 							org.eclipse.swt.events.SelectionEvent e) {
 						// si pas coché on active le groupTempo sinon on grise
 
-						/*
-						 * if (checkBoxTempo.getSelection()){ //
-						 * System.out.println("série temporelle"); //
-						 * //$NON-NLS-1$
-						 * groupTempo.setVisible(true);}else{groupTempo.setVisible(false);}
-						 */
 					}
 				});
 		createGroupTempo();
@@ -323,14 +303,9 @@ public class ViewFile extends ViewPart {
 							nomFichier = dialog.open();
 							if (nomFichier != null) {
 
-								// labelDescription.setText("Fichier-->");
-								// textAreaDescription.setText(nomFichier);
-
 								fileLoaded = true;
 
 								// init du modèle
-								// Utils.initModele(true,
-								// checkBox.getSelection(), nomFichier);
 
 								// affichage du fichier campagne dans onglet
 								// Campagne
@@ -354,7 +329,7 @@ public class ViewFile extends ViewPart {
 							} else {
 								fileLoaded = false;
 								// System.out.println("pas de fichier
-								// sélectionné"); //$NON-NLS-1$
+
 								ViewLog.styledTextLogErreurs
 										.setText(Messages
 												.getString("ViewFile.selectionnezFichier")); //$NON-NLS-1$
@@ -373,8 +348,6 @@ public class ViewFile extends ViewPart {
 								fileLoaded = true;
 								Utils.findFiles(nomRepertoire);
 								textAreaDescription.setText(Utils.texteBrut);
-								// labelDescription.setText("Dossier-->");
-								// textAreaDescription.setText(Utils.texteBrut);
 
 								// affichage etape0 dans formulaire d'édition de
 								// paramètres
@@ -426,9 +399,6 @@ public class ViewFile extends ViewPart {
 		group.setText(Messages.getString("ViewFile.choixFormatSortie")); //$NON-NLS-1$
 		group.setLayout(layout);
 
-		// Label label = new Label(compositeConversion, SWT.NONE);
-		// label.setText("Choix du format de sortie...");
-
 		medatlas = new Button(group, SWT.RADIO);
 		medatlas.setText("Medatlas"); //$NON-NLS-1$
 		medatlas.setSelection(true);
@@ -451,7 +421,7 @@ public class ViewFile extends ViewPart {
 				.setText(Messages.getString("ViewFile.dateRef") + ": dd/MM/yyyy"); //$NON-NLS-1$
 
 		textTempoDateRef = new Text(groupTempo, SWT.BORDER);
-		// createComboTempoDate();
+
 		labelHeureRef = new Label(groupTempo, SWT.NONE);
 		labelHeureRef
 				.setText(Messages.getString("ViewFile.heureRef") + ": hh24:mm"); //$NON-NLS-1$
@@ -460,7 +430,7 @@ public class ViewFile extends ViewPart {
 
 		// on le désactive de base
 		groupTempo.setVisible(false);
-		// createComboTempoHeure();
+
 	}
 
 	/**
@@ -490,7 +460,6 @@ public class ViewFile extends ViewPart {
 	private void createCompositeData(Composite compo) {
 		compositeData = new Composite(compo, SWT.NONE);
 		compositeData.setLayout(new FillLayout());
-		// compositeData.setLayout(new GridLayout());
 
 	}
 

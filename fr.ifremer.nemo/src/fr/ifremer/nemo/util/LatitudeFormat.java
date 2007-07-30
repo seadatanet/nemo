@@ -11,393 +11,441 @@ import org.xml.sax.SAXException;
 
 /**
  * Class LatitudeFormat
- *
- *
- * @author	Gerard BUNEL
+ * 
+ * 
+ * @author Gerard BUNEL
  */
-public  class LatitudeFormat extends ExternalizableFormat implements Cloneable {
-  protected ParseElement[]  _elements;
+public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
+	protected ParseElement[] _elements;
 
-  protected String  _formatString;
+	protected String _formatString;
 
-  public LatitudeFormat() {
-    super();
-    _formatString = "";
-  }
+	public LatitudeFormat() {
+		super();
+		_formatString = "";
+	}
 
-    /**
-     *
-     * @param	a_Format 	
-     * @exception	ParseException
-     */
-  public LatitudeFormat ( String a_Format) throws ParseException {
-    this();
-    setFormatString(a_Format);
-  }
+	/**
+	 * 
+	 * @param a_Format
+	 * @exception ParseException
+	 */
+	public LatitudeFormat(String a_Format) throws ParseException {
+		this();
+		setFormatString(a_Format);
+	}
 
-  /**
-   * 
-   * A new XML Element as been found. Parse it.
-   *
-   * @param  a_URI  XML Namespace (SAX 2)
-   * @param  a_LocalName  Tag name
-   * @param  a_QName  Qualified tag name
-   * @param  a_Attributes XML Element attributes
-   * @return  SAXConsumer
-   *
-   */
-  public SAXConsumer consumeElement(String a_URI, String a_LocalName, String a_QName, Attributes a_Attributes) throws SAXException {
-    return null;
-  }
+	/**
+	 * 
+	 * A new XML Element as been found. Parse it.
+	 * 
+	 * @param a_URI
+	 *            XML Namespace (SAX 2)
+	 * @param a_LocalName
+	 *            Tag name
+	 * @param a_QName
+	 *            Qualified tag name
+	 * @param a_Attributes
+	 *            XML Element attributes
+	 * @return SAXConsumer
+	 * 
+	 */
+	public SAXConsumer consumeElement(String a_URI, String a_LocalName,
+			String a_QName, Attributes a_Attributes) throws SAXException {
+		return null;
+	}
 
+	/**
+	 * 
+	 * The XML Element is a CDATA filled element
+	 * 
+	 * @param a_Characters
+	 *            The CDATA content
+	 * 
+	 */
+	public void consumeCharacters(String a_Characters) throws SAXException {
+	}
 
-  /**
-   * 
-   * The XML Element is a CDATA filled element
-   *
-   * @param  a_Characters  The CDATA content
-   *
-   */
-  public void consumeCharacters( String a_Characters) throws SAXException {
-  }
+	/**
+	 * 
+	 * Generate XML defintion on a Stream
+	 * 
+	 * @param a_Writer
+	 *            XMLOutputWriter to which to write the XML Definition
+	 * 
+	 */
+	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
+		a_Writer.putAttribute("formatString", getFormatString());
+	}
 
-  /**
-   * 
-   * Generate XML defintion on a Stream
-   *
-   * @param  a_Writer  XMLOutputWriter to which to write the XML Definition
-   *
-   */
-  public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
-    a_Writer.putAttribute( "formatString", getFormatString());
-  }
+	/**
+	 * 
+	 * Generate XML defintion on a XMLOutputWriter
+	 * 
+	 * @param a_Writer
+	 *            the XMLOutputWriter to which to write the XML Definition
+	 * 
+	 */
+	public void writeXMLOn(XMLOutputWriter a_Writer) {
+		a_Writer.openTag("LatitudeFormat");
+		writeXMLBodyOn(a_Writer);
+		a_Writer.closeTag();
+	}
 
-  /**
-   * 
-   * Generate XML defintion on a XMLOutputWriter
-   *
-   * @param  a_Writer  the XMLOutputWriter to which to write the XML Definition
-   *
-   */
-  public void writeXMLOn(XMLOutputWriter a_Writer) {
-    a_Writer.openTag("LatitudeFormat");
-    writeXMLBodyOn(a_Writer);
-    a_Writer.closeTag();
-  }
+	/**
+	 * 
+	 * Generate XML defintion on a Stream
+	 * 
+	 * @param a_Stream
+	 *            the OutptStream to which to write the XML Definition
+	 * 
+	 */
+	public void writeXMLOn(OutputStream a_Stream) {
+		XMLOutputWriter writer = new XMLOutputWriter(a_Stream);
+		writeXMLOn(writer);
+	}
 
-  /**
-   * 
-   * Generate XML defintion on a Stream
-   *
-   * @param  a_Stream  the OutptStream to which to write the XML Definition
-   *
-   */
-  public void writeXMLOn(OutputStream a_Stream) {
-    XMLOutputWriter writer = new XMLOutputWriter(a_Stream);
-    writeXMLOn(writer);
-  }
+	/**
+	 * Read accessor (getter) for attribute _formatString
+	 * 
+	 * @return String
+	 * @see LatitudeFormat#_formatString
+	 */
+	public String getFormatString() {
+		return _formatString;
+	}
 
-  /**
-   * Read accessor (getter) for attribute _formatString
-   *
-   * @return  String
-   * @see LatitudeFormat#_formatString
-   */
-  public  String getFormatString() {
-    return _formatString;
-  }
+	/**
+	 * 
+	 * @param a_URI
+	 * @param a_LocalName
+	 * @param a_QName
+	 * @param a_Attributes
+	 * @exception SAXException
+	 */
+	public void buildFromElement(String a_URI, String a_LocalName,
+			String a_QName, Attributes a_Attributes) throws SAXException {
+		try {
+			String tmp;
+			if ((tmp = a_Attributes.getValue("formatString")) != null) {
+				setFormatString(tmp);
+			}
+		} catch (Exception e) {
+			throw new SAXException(e);
+		}
+	}
 
-  /**
-   *
-   * @param  a_URI  
-   * @param  a_LocalName  
-   * @param  a_QName  
-   * @param  a_Attributes  
-   * @exception  SAXException
-   */
-  public void buildFromElement ( String a_URI, String a_LocalName, String a_QName, Attributes a_Attributes) throws SAXException {
-    try {
-    	String tmp;
-    	if ((tmp = a_Attributes.getValue("formatString")) != null) {
-    		setFormatString(tmp);
-    	}
-    } catch (Exception e) {
-    	throw new SAXException(e);
-    }
-  }
+	/**
+	 * 
+	 * @return Object
+	 */
+	public Object clone() {
+		try {
+			return new LatitudeFormat(new String(_formatString));
+		} catch (Exception e) {
+			return null;
+		}
+	}
 
-  /**
-   *
-   * @return  Object
-   */
-  public Object clone ( ) {
-    try {
-    	return new LatitudeFormat( new String(_formatString));
-    } catch (Exception e) {
-    	return null;
-    }
-  }
+	/**
+	 * 
+	 * @param obj
+	 * @param toAppendTo
+	 * @param pos
+	 * @return StringBuffer
+	 */
+	public StringBuffer format(Object obj, StringBuffer toAppendTo,
+			FieldPosition pos) {
+		double value = ((Double) obj).doubleValue();
+		java.util.Locale locale = java.util.Locale.US;
+		java.text.DecimalFormatSymbols symbols = new java.text.DecimalFormatSymbols(
+				locale);
+		int size = 0;
+		for (int i = 0; i < _elements.length; i++) {
+			size = _elements[i]._element.length();
+			switch (_elements[i]._type) {
+			case HEMISPHERE: {
+				if (value >= 0.0) {
+					toAppendTo.append('N');
+				} else {
+					toAppendTo.append('S');
+				}
+				break;
+			}
+			case SIGN: {
+				if (value >= 0.0) {
+					toAppendTo.append('+');
+				} else {
+					toAppendTo.append('-');
+				}
+				break;
+			}
+			case CHARS: {
+				toAppendTo.append(_elements[i]._element);
+				break;
+			}
+			case DEGREES: {
+				double val = Math.abs(value);
+				double degrees = Math.floor(val);
+				DecimalFormat format = new DecimalFormat(_elements[i]._element,
+						symbols);
+				toAppendTo.append(padded(format.format(degrees), size));
+				break;
+			}
+			case DEGREES_DECIMAL: {
+				double val = Math.abs(value);
+				DecimalFormat format = new DecimalFormat(_elements[i]._element,
+						symbols);
+				toAppendTo.append(padded(format.format(val), size));
+				break;
+			}
+			case MINUTES: {
+				double val = Math.abs(value);
+				double degrees = Math.floor(val);
+				double minutes = (val - degrees) * 60.0D;
+				double mins = Math.floor(minutes);
+				DecimalFormat format = new DecimalFormat(_elements[i]._element,
+						symbols);
+				toAppendTo.append(padded(format.format(mins), size));
+				break;
+			}
+			case MINUTES_DECIMAL: {
+				double val = Math.abs(value);
+				double degrees = Math.floor(val);
+				double minutes = (val - degrees) * 60.0D;
+				DecimalFormat format = new DecimalFormat(_elements[i]._element,
+						symbols);
+				toAppendTo.append(padded(format.format(minutes), size));
+				break;
+			}
+			case SECONDS: {
+				double val = Math.abs(value);
+				double degrees = Math.floor(val);
+				double minutes = (val - degrees) * 60.0D;
+				double mins = Math.floor(minutes);
+				double seconds = (minutes - mins) * 60.0D;
+				DecimalFormat format = new DecimalFormat(_elements[i]._element,
+						symbols);
+				toAppendTo.append(padded(format.format(seconds), size));
+				break;
+			}
+			}
+		}
+		return toAppendTo;
+	}
 
-  /**
-   *
-   * @param  obj  
-   * @param  toAppendTo  
-   * @param  pos  
-   * @return  StringBuffer
-   */
-  public StringBuffer format ( Object obj, StringBuffer toAppendTo, FieldPosition pos) {
-    double value = ((Double)obj).doubleValue();
-    java.util.Locale locale = java.util.Locale.US;
-    java.text.DecimalFormatSymbols symbols = new java.text.DecimalFormatSymbols(locale);
-    int size = 0;
-    for (int i=0; i<_elements.length; i++) {
-    	size = _elements[i]._element.length();
-    	switch (_elements[i]._type) {
-    			case HEMISPHERE: {
-    				if (value >= 0.0) {
-    					toAppendTo.append('N');
-    				} else {
-    					toAppendTo.append('S');
-    				}
-    				break;
-    			}
-    			case SIGN: {
-    				if (value >= 0.0) {
-    					toAppendTo.append('+');
-    				} else {
-    					toAppendTo.append('-');
-    				}
-    				break;
-    			}
-    			case CHARS: {
-    				toAppendTo.append(_elements[i]._element);
-    				break;
-    			}
-    			case DEGREES: {
-    				double val = Math.abs(value);
-    				double degrees = Math.floor(val);
-    				DecimalFormat format= new DecimalFormat(_elements[i]._element, symbols);
-    				toAppendTo.append(padded(format.format(degrees), size));
-    				break;
-    			}
-    			case DEGREES_DECIMAL: {
-    				double val = Math.abs(value);
-    				DecimalFormat format= new DecimalFormat(_elements[i]._element, symbols);
-    				toAppendTo.append(padded(format.format(val), size));
-    				break;
-    			}
-    			case MINUTES: {
-    				double val = Math.abs(value);
-    				double degrees = Math.floor(val);
-    				double minutes = (val-degrees)*60.0D;
-    				double mins = Math.floor(minutes);
-    				DecimalFormat format= new DecimalFormat(_elements[i]._element, symbols);
-    				toAppendTo.append(padded(format.format(mins), size));
-    				break;
-    			}
-    			case MINUTES_DECIMAL: {
-    				double val = Math.abs(value);
-    				double degrees = Math.floor(val);
-    				double minutes = (val-degrees)*60.0D;
-    				DecimalFormat format= new DecimalFormat(_elements[i]._element, symbols);
-    				toAppendTo.append(padded(format.format(minutes), size));
-    				break;
-    			}
-    			case SECONDS: {
-    				double val = Math.abs(value);
-    				double degrees = Math.floor(val);
-    				double minutes = (val-degrees)*60.0D;
-    				double mins = Math.floor(minutes);
-    				double seconds = (minutes-mins)*60.0D;
-    				DecimalFormat format= new DecimalFormat(_elements[i]._element, symbols);
-    				toAppendTo.append(padded(format.format(seconds), size));
-    				break;
-    			}
-    	}
-    }
-    return toAppendTo;
-  }
+	/**
+	 * 
+	 * @param a_URI
+	 * @param a_LocalName
+	 * @param a_QName
+	 * @param a_Attributes
+	 * @return SAXConsumer
+	 * @exception SAXException
+	 */
+	public static SAXConsumer fromElement(String a_URI, String a_LocalName,
+			String a_QName, Attributes a_Attributes) throws SAXException {
+		try {
+			LatitudeFormat tmp = new LatitudeFormat();
+			tmp.buildFromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+			return (SAXConsumer) tmp;
+		} catch (Exception e) {
+			throw new SAXException(e);
+		}
+	}
 
-  /**
-   *
-   * @param  a_URI  
-   * @param  a_LocalName  
-   * @param  a_QName  
-   * @param  a_Attributes  
-   * @return  SAXConsumer
-   * @exception  SAXException
-   */
-  public static SAXConsumer fromElement ( String a_URI, String a_LocalName, String a_QName, Attributes a_Attributes) throws SAXException {
-    try {
-    	LatitudeFormat tmp = new LatitudeFormat();
-    	tmp.buildFromElement( a_URI,  a_LocalName,  a_QName,  a_Attributes);
-    	return (SAXConsumer)tmp;
-    } catch (Exception e) {
-    	throw new SAXException(e);
-    }
-  }
+	/**
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		try {
+			LatitudeFormat format = new LatitudeFormat(args[0]);
+			double value = ((Number) format.parseObject(args[1])).doubleValue();
+			System.out.println(value);
+			System.out.println("out: " + format.format(value));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-  /**
-   *
-   * @param  args  
-   */
-  public static void main ( String[] args) {
-    try {
-    	LatitudeFormat format = new LatitudeFormat( args[0] );
-    	double value = ((Number)format.parseObject(args[1])).doubleValue();
-    	System.out.println(value);
-    	System.out.println("out: "+format.format(value));
-    } catch (Exception e) {
-    	e.printStackTrace();
-    }
-  }
+	/**
+	 * 
+	 * @param a_String
+	 * @param a_Size
+	 * @return String
+	 */
+	public String padded(String a_String, int a_Size) {
+		StringBuffer buf = new StringBuffer();
+		int index = a_String.length();
+		while (index < a_Size) {
+			buf.append(' ');
+			index++;
+		}
+		buf.append(a_String);
+		return buf.toString();
+	}
 
-  /**
-   *
-   * @param  a_String  
-   * @param  a_Size  
-   * @return  String
-   */
-  public String padded ( String a_String, int a_Size) {
-    StringBuffer buf = new StringBuffer();
-    int index = a_String.length();
-    while (index < a_Size) {
-    	buf.append(' ');
-    	index++;
-    }
-    buf.append(a_String);
-    return buf.toString();
-  }
+	/**
+	 * 
+	 * @param source
+	 * @param pos
+	 * @return Object
+	 */
+	public Object parseObject(String source, ParsePosition pos) {
+		double value = 0.0;
+		double sign = 1.0;
+		int index = pos.getIndex();
+		java.util.Locale locale = java.util.Locale.US;
+		java.text.DecimalFormatSymbols symbols = new java.text.DecimalFormatSymbols(
+				locale);
+		try {
+			for (int i = 0; i < _elements.length && index < source.length(); i++) {
+				switch (_elements[i]._type) {
+				case HEMISPHERE: {
+					String tmp = source.substring(index, index + 1);
+					if (tmp.equals("N")) {
+						sign = 1.0;
+					} else if (tmp.equals("S")) {
+						sign = -1.0;
+					} else {
+						throw new ParseException(
+								"Charactere invalide, 'N' ou 'S' attendu",
+								index);
+					}
+					index += 1;
+					break;
+				}
+				case SIGN: {
+					String tmp = source.substring(index, index + 1);
+					if (tmp.equals("+") || tmp.equals(" ") || tmp.equals("")) {
+						sign = 1.0;
+					} else if (tmp.equals("-")) {
+						sign = -1.0;
+					} else {
+						throw new ParseException(
+								"Charactere invalide, signe (+/-) attendu",
+								index);
+					}
+					index += 1;
+					break;
+				}
+				case CHARS: {
+					String tmp = source.substring(index, index
+							+ _elements[i]._element.length());
+					if (!tmp.equals(_elements[i]._element)) {
+						throw new ParseException(
+								"Charactere invalide, chaine attendue: \""
+										+ _elements[i]._element + "\""
+										+ " lue: \"" + tmp + "\"", index);
+					}
+					index += _elements[i]._element.length();
+					break;
+				}
+				case DEGREES: {
+					String tmp = source.substring(index, index
+							+ _elements[i]._element.length());
+					if (tmp.matches("\\s*\\d+\\s*")) {
+						DecimalFormat format = new DecimalFormat(
+								_elements[i]._element);
+						value += ((Number) format.parseObject(tmp.trim()))
+								.doubleValue();
+					} else {
+						throw new ParseException("Degres attendus au format: "
+								+ _elements[i]._element, index);
+					}
+					index += _elements[i]._element.length();
+					break;
+				}
+				case DEGREES_DECIMAL: {
+					String tmp = source.substring(index, index
+							+ _elements[i]._element.length());
+					if (tmp.matches("\\s*\\d+\\.\\d+\\s*")) {
+						DecimalFormat format = new DecimalFormat(
+								_elements[i]._element, symbols);
+						value += ((Number) format.parseObject(tmp.trim()))
+								.doubleValue();
+					} else {
+						throw new ParseException("Degres attendus au format: "
+								+ _elements[i]._element, index);
+					}
+					index += _elements[i]._element.length();
+					break;
+				}
+				case MINUTES: {
+					String tmp = source.substring(index, index
+							+ _elements[i]._element.length());
+					if (tmp.matches("\\s*\\d+\\s*")) {
+						DecimalFormat format = new DecimalFormat(
+								_elements[i]._element);
+						value += ((Number) format.parseObject(tmp.trim()))
+								.doubleValue() / 60.0;
+					} else {
+						throw new ParseException(
+								"Minutes attendues au format: "
+										+ _elements[i]._element, index);
+					}
+					index += _elements[i]._element.length();
+					break;
+				}
+				case MINUTES_DECIMAL: {
+					String tmp = source.substring(index, index
+							+ _elements[i]._element.length());
+					if (tmp.matches("\\s*\\d+\\.\\d+\\s*")) {
+						DecimalFormat format = new DecimalFormat(
+								_elements[i]._element, symbols);
+						value += ((Number) format.parseObject(tmp.trim()))
+								.doubleValue() / 60.0;
+					} else {
+						throw new ParseException("Minutes attendus au format: "
+								+ _elements[i]._element, index);
+					}
+					index += _elements[i]._element.length();
+					break;
+				}
+				case SECONDS: {
+					String tmp = source.substring(index, index
+							+ _elements[i]._element.length());
+					if (tmp.matches("\\s*\\d+\\s*")) {
+						DecimalFormat format = new DecimalFormat(
+								_elements[i]._element);
+						value += ((Number) format.parseObject(tmp.trim()))
+								.doubleValue() / 3600.0;
+					} else {
+						throw new ParseException(
+								"Secondes attendues au format: "
+										+ _elements[i]._element, index);
+					}
+					index += _elements[i]._element.length();
+					break;
+				}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		value *= sign;
+		pos.setIndex(index);
+		return new Double(value);
+	}
 
-  /**
-   *
-   * @param  source  
-   * @param  pos  
-   * @return  Object
-   */
-  public Object parseObject ( String source, ParsePosition pos) {
-    double value = 0.0;
-    double sign = 1.0;
-    int index = pos.getIndex();
-    java.util.Locale locale = java.util.Locale.US;
-    java.text.DecimalFormatSymbols symbols = new java.text.DecimalFormatSymbols(locale);
-    try {
-    	for (int i=0; i<_elements.length && index < source.length(); i++) {
-    		switch (_elements[i]._type) {
-    				case HEMISPHERE: {
-    					String tmp = source.substring( index, index+1);
-    					if (tmp.equals("N")) {
-    						sign = 1.0;
-    					} else if (tmp.equals("S")) {
-    						sign = -1.0;
-    					} else {
-    						throw new ParseException( "Charactere invalide, 'N' ou 'S' attendu", index);
-    					}
-    					index += 1;
-    					break;
-    				}
-    				case SIGN: {
-    					String tmp = source.substring( index, index+1);
-    					if (tmp.equals("+") || tmp.equals(" ")|| tmp.equals("")) {
-    						sign = 1.0;
-    					} else if (tmp.equals("-")) {
-    						sign = -1.0;
-    					} else {
-    						throw new ParseException( "Charactere invalide, signe (+/-) attendu", index);
-    					}
-    					index += 1;
-    					break;
-    				}
-    				case CHARS: {
-    					String tmp = source.substring( index, index+_elements[i]._element.length());
-    					if (!tmp.equals(_elements[i]._element)) {
-    						throw new ParseException( "Charactere invalide, chaine attendue: \""+_elements[i]._element+"\""+" lue: \""+tmp+"\"", index);
-    					}
-    					index += _elements[i]._element.length();
-    					break;
-    				}
-    				case DEGREES: {
-    					String tmp = source.substring( index, index+_elements[i]._element.length());
-    					if (tmp.matches("\\s*\\d+\\s*")) {
-    						DecimalFormat format= new DecimalFormat(_elements[i]._element);
-    						value += ((Number)format.parseObject(tmp.trim())).doubleValue();
-    					} else {
-    						throw new ParseException( "Degres attendus au format: "+_elements[i]._element, index);
-    					}
-    					index += _elements[i]._element.length();
-    					break;
-    				}
-    				case DEGREES_DECIMAL: {
-    					String tmp = source.substring( index, index+_elements[i]._element.length());
-    					if (tmp.matches("\\s*\\d+\\.\\d+\\s*")) {
-    						DecimalFormat format= new DecimalFormat(_elements[i]._element, symbols);
-    						value += ((Number)format.parseObject(tmp.trim())).doubleValue();
-    					} else {
-    						throw new ParseException( "Degres attendus au format: "+_elements[i]._element, index);
-    					}
-    					index += _elements[i]._element.length();
-    					break;
-    				}
-    				case MINUTES: {
-    					String tmp = source.substring( index, index+_elements[i]._element.length());
-    					if (tmp.matches("\\s*\\d+\\s*")) {
-    						DecimalFormat format= new DecimalFormat(_elements[i]._element);
-    						value += ((Number)format.parseObject(tmp.trim())).doubleValue()/60.0;
-    					} else {
-    						throw new ParseException( "Minutes attendues au format: "+_elements[i]._element, index);
-    					}
-    					index += _elements[i]._element.length();
-    					break;
-    				}
-    				case MINUTES_DECIMAL: {
-    					String tmp = source.substring( index, index+_elements[i]._element.length());
-    					if (tmp.matches("\\s*\\d+\\.\\d+\\s*")) {
-    						DecimalFormat format= new DecimalFormat(_elements[i]._element, symbols);
-    						value += ((Number)format.parseObject(tmp.trim())).doubleValue()/60.0;
-    					} else {
-    						throw new ParseException( "Minutes attendus au format: "+_elements[i]._element, index);
-    					}
-    					index += _elements[i]._element.length();
-    					break;
-    				}
-    				case SECONDS: {
-    					String tmp = source.substring( index, index+_elements[i]._element.length());
-    					if (tmp.matches("\\s*\\d+\\s*")) {
-    						DecimalFormat format= new DecimalFormat(_elements[i]._element);
-    						value += ((Number)format.parseObject(tmp.trim())).doubleValue()/3600.0;
-    					} else {
-    						throw new ParseException( "Secondes attendues au format: "+_elements[i]._element, index);
-    					}
-    					index += _elements[i]._element.length();
-    					break;
-    				}
-    		}
-    	}
-    } catch (Exception e) {
-    	e.printStackTrace();
-    	return null;
-    }
-    value *= sign;
-    pos.setIndex(index);
-    return new Double(value);
-  }
+	/**
+	 * 
+	 * @param a_Format
+	 * @exception ParseException
+	 */
+	public void setFormatString(String a_Format) throws ParseException {
+		_formatString = a_Format;
+		_elements = AngleFormatParser.parseFormat(a_Format);
+	}
 
-  /**
-   *
-   * @param  a_Format  
-   * @exception  ParseException
-   */
-  public void setFormatString ( String a_Format) throws ParseException {
-    _formatString = a_Format;
-    _elements = AngleFormatParser.parseFormat(a_Format);
-  }
-
-  /**
-   *
-   * @return  the format string
-   */
-  public String toString ( ) {
-    return _formatString;
-  }
+	/**
+	 * 
+	 * @return the format string
+	 */
+	public String toString() {
+		return _formatString;
+	}
 
 } /* End of class: LatitudeFormat */

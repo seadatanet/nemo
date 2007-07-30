@@ -43,8 +43,6 @@ public class SWTProcess implements IRunnableWithProgress {
 
 	public static IProgressMonitor monitor2;
 
-	// public static
-
 	public void run(IProgressMonitor monitor) throws InvocationTargetException,
 			InterruptedException {
 		monitor.beginTask(Messages.getString("SWTProcess.1"),

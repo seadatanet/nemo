@@ -22,14 +22,10 @@ public class Progress implements Runnable {
 			public void run() {
 				ProgressBar progressbar = new ProgressBar(shell, SWT.HORIZONTAL
 						| SWT.SMOOTH | SWT.INDETERMINATE);
-
-				// progressbar.setMaximum((int)(tailleOctets));
 				progressbar.setSize(200, 20);
 				shell.pack();
 			}
 		});
-
-		// shell.open();
 
 	}
 }

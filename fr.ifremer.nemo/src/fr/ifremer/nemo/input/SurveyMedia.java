@@ -11,94 +11,98 @@ import java.text.ParseException;
 
 /**
  * Class SurveyMedia
- *
- *
- * @author	Gerard BUNEL
+ * 
+ * 
+ * @author Gerard BUNEL
  */
-public abstract class SurveyMedia
-    implements
-       Cloneable,
-       SAXConsumer {
+public abstract class SurveyMedia implements Cloneable, SAXConsumer {
 
-  protected InputModel _inputModel;
-  public static Boolean interrompu=false;
-  
+	protected InputModel _inputModel;
 
-  public SurveyMedia() {
-    _inputModel = null;
-  }
+	public static Boolean interrompu = false;
 
-  /**
-   * Returns a copy of this Object
-   *
-   * @return  a copy of this object
-   */
-  public Object clone() throws CloneNotSupportedException {
-    SurveyMedia copy = null;
-    copy = (SurveyMedia) super.clone();
-    copy._inputModel = null;
-    return copy;
-  }
+	public SurveyMedia() {
+		_inputModel = null;
+	}
 
-  /**
-   * Remove any link for role inputModel
-   */
-  public void releaseInputModel() {
-    setInputModel( null );
-  }
+	/**
+	 * Returns a copy of this Object
+	 * 
+	 * @return a copy of this object
+	 */
+	public Object clone() throws CloneNotSupportedException {
+		SurveyMedia copy = null;
+		copy = (SurveyMedia) super.clone();
+		copy._inputModel = null;
+		return copy;
+	}
 
-  /**
-   * returns the linked object for role <% aRole name%>
-   *
-   * @return  the object linked
-   */
-   public InputModel getInputModel() {
-    return _inputModel;
-  }
+	/**
+	 * Remove any link for role inputModel
+	 */
+	public void releaseInputModel() {
+		setInputModel(null);
+	}
 
-  /**
-   * Create a new link with x for role inputModel
-   *
-   * @param  x  the object to link with
-   */
-  public  void setInputModel(InputModel x) {
-    if (_inputModel == x) return;
-    InputModel old = _inputModel;
-    if (_inputModel != null) {
-      _inputModel = null;
-      old.setMedia(null);
-    }
-    _inputModel = x;
-    if (x != null) {
-      x.setMedia(this);
-    }
-  }
+	/**
+	 * returns the linked object for role <% aRole name%>
+	 * 
+	 * @return the object linked
+	 */
+	public InputModel getInputModel() {
+		return _inputModel;
+	}
 
-  /**
-   *
-   * @param  isRefDateBased  
-   * @param  a_RefDate  
-   * @param  a_Progress  
-   * @return  Survey
-   * @exception  FileNotFoundException
-   * @exception  IOException
-   * @exception  java.text.ParseException
- * @throws Exception 
-   */
-  public abstract Survey convert ( boolean isRefDateBased, long a_RefDate, ProgressNotification a_Progress) throws FileNotFoundException, IOException, ParseException, Exception;
-  /**
-   *
-   * @return  Survey
-   */
-  public abstract Survey getModel ( );
-  /**
-   *
-   * @return  StationModel
-   */
-  public abstract StationModel getStationModel ( );
-  /**
-   *
-   * @param  a_Writer  
-   */
-  public abstract void writeXMLOn ( XMLOutputWriter a_Writer);
+	/**
+	 * Create a new link with x for role inputModel
+	 * 
+	 * @param x
+	 *            the object to link with
+	 */
+	public void setInputModel(InputModel x) {
+		if (_inputModel == x)
+			return;
+		InputModel old = _inputModel;
+		if (_inputModel != null) {
+			_inputModel = null;
+			old.setMedia(null);
+		}
+		_inputModel = x;
+		if (x != null) {
+			x.setMedia(this);
+		}
+	}
+
+	/**
+	 * 
+	 * @param isRefDateBased
+	 * @param a_RefDate
+	 * @param a_Progress
+	 * @return Survey
+	 * @exception FileNotFoundException
+	 * @exception IOException
+	 * @exception java.text.ParseException
+	 * @throws Exception
+	 */
+	public abstract Survey convert(boolean isRefDateBased, long a_RefDate,
+			ProgressNotification a_Progress) throws FileNotFoundException,
+			IOException, ParseException, Exception;
+
+	/**
+	 * 
+	 * @return Survey
+	 */
+	public abstract Survey getModel();
+
+	/**
+	 * 
+	 * @return StationModel
+	 */
+	public abstract StationModel getStationModel();
+
+	/**
+	 * 
+	 * @param a_Writer
+	 */
+	public abstract void writeXMLOn(XMLOutputWriter a_Writer);
 } /* End of class: SurveyMedia */

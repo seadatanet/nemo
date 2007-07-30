@@ -17,8 +17,6 @@ public class DrawingData {
 
 	private static Group grou;
 
-	// private static Text lign, debu, fi;
-
 	public static void sectionDate(String nomSection, String description,
 			Section section, Text ligne, Text debut, Text fin) {
 
@@ -28,15 +26,12 @@ public class DrawingData {
 		final Text manu;
 
 		nomSec = nomSection;
-		// manu = manuel;
 
 		section.setParent(EditDesc.formEdition);
 
 		section = ViewEdit.toolkitEdition.createSection(EditDesc.formEdition
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
 				| Section.TWISTIE | Section.COMPACT);
-
-		// System.out.println("section date station");
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			public void expansionStateChanged(ExpansionEvent e) {
@@ -69,21 +64,21 @@ public class DrawingData {
 		Label label1 = new Label(groupe, SWT.NULL);
 		label1.setText("Ligne");
 		ligne.setParent(groupe);
-		// ligne = new Text(groupe, SWT.BORDER);
+
 		ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// debut
 		Label label2 = new Label(groupe, SWT.NULL);
 		label2.setText("Début");
 		debut.setParent(groupe);
-		// = new Text(groupe, SWT.BORDER);
+
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
 		Label label3 = new Label(groupe, SWT.NULL);
 		label3.setText("Fin");
 		fin.setParent(groupe);
-		// = new Text(groupe, SWT.BORDER);
+
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// combo format date
@@ -114,13 +109,7 @@ public class DrawingData {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						// System.out.println("bouton injection"); // TODO
-						// Auto-generated Event stub widgetSelected()
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
+
 						Utils.inject(lign, debu, fi, ViewFile.styledTextData);
 
 					}
@@ -147,8 +136,6 @@ public class DrawingData {
 		section = ViewEdit.toolkitEdition.createSection(EditDesc.formEdition
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
 				| Section.TWISTIE | Section.COMPACT);
-
-		// System.out.println("section date station");
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			public void expansionStateChanged(ExpansionEvent e) {
@@ -177,29 +164,21 @@ public class DrawingData {
 		groupe.setLayout(gridLayout1);
 		grou = groupe;
 
-		// ligne
-		// Label label1 = new Label(groupe, SWT.NULL);
-		// label1.setText("Ligne");
-		// ligne.setParent(groupe);
-		// ligne = new Text(groupe, SWT.BORDER);
 		ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// debut
 		Label label2 = new Label(groupe, SWT.NULL);
 		label2.setText("Début");
 		debut.setParent(groupe);
-		// = new Text(groupe, SWT.BORDER);
+
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
 		Label label3 = new Label(groupe, SWT.NULL);
 		label3.setText("Fin");
 		fin.setParent(groupe);
-		// = new Text(groupe, SWT.BORDER);
-		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		// combo format date
-		// EditData.comboDate.setParent(groupe);
+		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// bouton d'injection de la position des valeurs
 		Button buttonInject = new Button(groupe, SWT.NONE);
@@ -228,13 +207,7 @@ public class DrawingData {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						// System.out.println("bouton injection"); // TODO
-						// Auto-generated Event stub widgetSelected()
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
+
 						Utils.inject(lign, debu, fi, ViewFile.styledTextData);
 						debu.pack();
 						fi.pack();
@@ -306,21 +279,21 @@ public class DrawingData {
 		Label label1 = new Label(groupe, SWT.NULL);
 		label1.setText("Ligne");
 		ligne.setParent(groupe);
-		// ligne = new Text(groupe, SWT.BORDER);
+
 		ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// debut
 		Label label2 = new Label(groupe, SWT.NULL);
 		label2.setText("Début");
 		debut.setParent(groupe);
-		// = new Text(groupe, SWT.BORDER);
+
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
 		Label label3 = new Label(groupe, SWT.NULL);
 		label3.setText("Fin");
 		fin.setParent(groupe);
-		// = new Text(groupe, SWT.BORDER);
+
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		// bouton d'injection de la position des valeurs
 		Button buttonInject = new Button(groupe, SWT.NONE);
@@ -347,15 +320,7 @@ public class DrawingData {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out.println("bouton injection"); // TODO
-																// Auto-generated
-																// Event stub
-																// widgetSelected()
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
+
 						Utils.inject(lign, debu, fi, ViewFile.styledTextData);
 
 					}
@@ -468,7 +433,7 @@ public class DrawingData {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out.println("bouton injection");
+						// System.out.println("bouton injection");
 
 						Utils.inject(EditData.textTempo, debu, fi,
 								ViewFile.styledTextData);
@@ -486,8 +451,6 @@ public class DrawingData {
 			Text entree, Text sortie) {
 		final String nomSec;
 		final Text manu, debu, lign, fi;
-
-		// manu = manuel;
 
 		section.setParent(EditData.formEdition);
 

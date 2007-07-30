@@ -25,7 +25,6 @@ public class TableData {
 
 	public static int ligneSelec, colonneSelec, debut, fin, ligneBidon;
 
-	// public static String[][]tableTypes;
 	public static ArrayList<TypeData> types, listeFiltree, typesWS;
 
 	public static void go() {
@@ -42,10 +41,6 @@ public class TableData {
 		debut = 0;
 		fin = 0;
 
-		// ViewFile.compositeData.dispose();
-		// ViewFile.compositeData = new Composite(ViewFile.composite4,
-		// SWT.NONE);
-		// ViewFile.compositeData.setLayout(new FillLayout());
 		ViewFile.tableData = new Table(ViewFile.compositeData,
 				SWT.FULL_SELECTION | SWT.H_SCROLL);
 
@@ -106,7 +101,7 @@ public class TableData {
 	public static void initTypes() {
 
 		// initialisation de la ArrayList des types des données à partir du
-		// datamodel
+
 		types = new ArrayList<TypeData>();
 		typesWS = new ArrayList<TypeData>();
 
@@ -141,22 +136,6 @@ public class TableData {
 				}
 
 			}
-			/*
-			 * //test pour ajout de YEAR, MNTH, DAYX, TIME if
-			 * (ViewFile.checkBoxTempo.getSelection() &&
-			 * ViewFile.textTempoHeureRef.getText().matches("")){ //si serie
-			 * temporelle et que pas de date/heure de ref alors on ajoute les 4
-			 * paramètres if
-			 * (wsParameter.getCode().matches("YEAR")||wsParameter.getCode().matches("MNTH")||wsParameter.getCode().matches("DAYX")||
-			 * wsParameter.getCode().matches("TIME")){
-			 * 
-			 * if (DataModel.ouverture == false){ //pas de modèle chargé donc on
-			 * rajoute pression de base types.add(type); }
-			 *  }
-			 * 
-			 * 
-			 *  }
-			 */
 
 		}
 
@@ -179,7 +158,6 @@ public class TableData {
 		// LINK des editors
 
 		// accès direct aux valeurs des colonnes des items
-		// table.getItems()[2].setText(4, "ça marche super!");
 
 		final TableEditor editor = new TableEditor(table);
 
@@ -212,12 +190,6 @@ public class TableData {
 				Rectangle clientArea = table.getClientArea();
 				// Point pt = new Point(event.x, event.y);
 				int index = table.getTopIndex();
-
-				// System.out.println("index= " + index + "table.getItemCount()=
-				// " + table.getItemCount());
-				// table.getItem(6).setText("coucou");
-				// System.out.println("items de la table [6] ==>"+
-				// table.getItems());
 
 				// TableItem item = table.getItem(pt);
 				if (item == null)
@@ -271,15 +243,9 @@ public class TableData {
 							text.setText(itemTmp.getText(i));
 							text.selectAll();
 
-							// test pour invalidation de l'étape dès modif d'un
-							// élément
-							// ///////////////////////////////////
-
 							EditData.okApresReset = false;
 							ViewFile.tabItem3.setText(Messages
 									.getString("EditData.1"));
-
-							// ///////////////////////////////////
 
 							text.setFocus();
 							return;
@@ -334,7 +300,6 @@ public class TableData {
 				razTableData();
 
 				// refresh de la table
-				// initTable();
 				creationTable();
 
 			}
@@ -355,12 +320,6 @@ public class TableData {
 
 			}
 		});
-
-		/*
-		 * itemNew.addListener(SWT.Selection, new Listener() { public void
-		 * handleEvent(Event e) { // System.out.println("nouveau type");
-		 * nouvelElt(); } });
-		 */
 
 		itemUp.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
@@ -419,14 +378,6 @@ public class TableData {
 		Table table;
 
 		table = ViewFile.tableData;
-		/*
-		 * //effacement de l'intérieur de la table items = table.getItems();
-		 * 
-		 * int nbre = items.length;
-		 * 
-		 * //on supprime tous les items for (int i=0; i<nbre; i++){
-		 * items[i].dispose(); }
-		 */
 
 		ViewFile.tableData.dispose();
 
@@ -457,7 +408,6 @@ public class TableData {
 		ArrayList<TypeData> listeTempo;
 		TypeData typeTempo;
 		Table table, tableTempo;
-		// TableItem[] items, itemsTempo;
 
 		nbre = types.size();
 
@@ -500,7 +450,6 @@ public class TableData {
 			razTableData();
 
 			// refresh de la table
-			// initTable();
 			creationTable();
 
 		}
@@ -561,7 +510,6 @@ public class TableData {
 			razTableData();
 
 			// refresh de la table
-			// initTable();
 			creationTable();
 
 		} else {
@@ -583,8 +531,6 @@ public class TableData {
 		String code = mots[0];
 
 		// pas forcément de - dans le nom du type
-		// String nom = mots[1];
-
 		if (!code.matches("PRES") || ViewFile.checkBoxTempo.getSelection()) {
 			types.remove(indice);
 		} else {
@@ -595,7 +541,6 @@ public class TableData {
 		razTableData();
 
 		// refresh de la table
-		// initTable();
 		creationTable();
 
 	}
@@ -626,12 +571,6 @@ public class TableData {
 								.getText(4)) - 1,
 						Integer.valueOf(ViewFile.tableData.getItem(i)
 								.getText(5))).trim();
-
-				// System.out.println("ligne lue = "+ligne );
-				// System.out.println("debut="+Integer.valueOf(ViewFile.tableData.getItem(i).getText(4))+"
-				// fin="+Integer.valueOf(ViewFile.tableData.getItem(i).getText(5)));
-				// System.out.println("sélection dans la ligne
-				// =>"+selection+"<");
 
 				// on formate puis on reaffiche la liste
 				if (selection.matches(ViewFile.tableData.getItem(i).getText(7))) {
@@ -667,7 +606,6 @@ public class TableData {
 		razTableData();
 
 		// refresh de la table
-		// initTable();
 		creationTable();
 
 	}
@@ -675,7 +613,6 @@ public class TableData {
 	public static void majTypeData() {
 		// on met à jour tous les types de données dans l'ArrayList global
 		// à partir des valeurs de la table
-		// table.getItems()[2].setText(4, "ça marche super!");
 
 		int nbre;
 

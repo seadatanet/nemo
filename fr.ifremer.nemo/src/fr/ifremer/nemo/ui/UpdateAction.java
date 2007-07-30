@@ -17,11 +17,8 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.actions.ActionFactory;
 
 public class UpdateAction extends Action implements ISelectionListener,
-		ActionFactory.IWorkbenchAction { // implements ISelectionListener,
-											// ActionFactory.IWorkbenchAction
+		ActionFactory.IWorkbenchAction {
 	private final IWorkbenchWindow window;
-
-	// ///////////
 
 	private Composite top = null;
 
@@ -47,17 +44,13 @@ public class UpdateAction extends Action implements ISelectionListener,
 
 	private Text textArea1, textArea2 = null;
 
-	// //////////
-
 	public final static String ID = "fr.ifremer.nemo.ui.UpdateAction"; //$NON-NLS-1$
 
 	// vars nécessaires à la fenêtre d'options
-	// public static
+
 	public static Shell shelloptions;
 
 	public static int options;
-
-	// private IStructuredSelection selection;
 
 	public UpdateAction(IWorkbenchWindow window) {
 
@@ -74,7 +67,7 @@ public class UpdateAction extends Action implements ISelectionListener,
 	}
 
 	public void run() {
-		System.out.println("Menu update WebServices"); //$NON-NLS-1$
+		// System.out.println("Menu update WebServices"); //$NON-NLS-1$
 		EditSurvey.webServiceUpdate();
 
 	}
@@ -149,11 +142,7 @@ public class UpdateAction extends Action implements ISelectionListener,
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("options valider"); // TODO
-																// Auto-generated
-																// Event stub
-																// widgetSelected()
-																// //$NON-NLS-1$
+						System.out.println("options valider");
 						options = 0;
 						shelloptions.close();
 
@@ -165,11 +154,7 @@ public class UpdateAction extends Action implements ISelectionListener,
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("options annuler"); // TODO
-																// Auto-generated
-																// Event stub
-																// widgetSelected()
-																// //$NON-NLS-1$
+						System.out.println("options annuler");
 						options = 0;
 
 						shelloptions.close();

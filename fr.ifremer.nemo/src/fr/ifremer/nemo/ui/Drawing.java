@@ -93,21 +93,21 @@ public class Drawing {
 		Label label1 = new Label(groupe, SWT.NULL);
 		label1.setText("Ligne");
 		ligne.setParent(groupe);
-		
+
 		ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// debut
 		Label label2 = new Label(groupe, SWT.NULL);
 		label2.setText("Début");
 		debut.setParent(groupe);
-		
+
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
 		Label label3 = new Label(groupe, SWT.NULL);
 		label3.setText("Fin");
 		fin.setParent(groupe);
-		
+
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// groupe non visible de base
@@ -289,21 +289,21 @@ public class Drawing {
 		Label label1 = new Label(groupe, SWT.NULL);
 		label1.setText("Ligne");
 		ligne.setParent(groupe);
-		// = new Text(groupe, SWT.BORDER);
+
 		ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// debut
 		Label label2 = new Label(groupe, SWT.NULL);
 		label2.setText("Début");
 		debut.setParent(groupe);
-		// = new Text(groupe, SWT.BORDER);
+
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
 		Label label3 = new Label(groupe, SWT.NULL);
 		label3.setText("Fin");
 		fin.setParent(groupe);
-		// = new Text(groupe, SWT.BORDER);
+
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// sasie par défaut et groupe désactivé
@@ -389,7 +389,6 @@ public class Drawing {
 		Label label1 = new Label(groupe, SWT.NULL);
 		label1.setText("Ligne");
 
-		// ligne = new Text(groupe, SWT.BORDER);
 		ligne.setParent(groupe);
 
 		ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -402,14 +401,13 @@ public class Drawing {
 		System.out.println("parent ?====> " + tmp);
 		EditDesc.debutNbreMesures.setText("test");
 
-		// = new Text(groupe, SWT.BORDER);
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
 		Label label3 = new Label(groupe, SWT.NULL);
 		label3.setText("Fin");
 		fin.setParent(groupe);
-		// = new Text(groupe, SWT.BORDER);
+
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// groupe non visible de base
@@ -475,11 +473,7 @@ public class Drawing {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
 						System.out.println("bouton injection"); // 
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
+
 						Utils.inject(lign, debu, fi,
 								ViewFile.textAreaDescription);
 
@@ -544,16 +538,11 @@ public class Drawing {
 		radio.setParent(sectionClient);
 		radio.setText("Indicateur manuel");
 
-		// Button saisieManuelle =
-		// ViewEdit.toolkitEdition.createButton(sectionClient, "Saisie
-		// manuelle", SWT.RADIO);
-
 		combo.setParent(sectionClient);
 		comboList = combo;
 
 		// bouton radio "position"
-		// radio.setParent(sectionClient);
-		// radio.setText("Position");
+
 		Button position = ViewEdit.toolkitEdition.createButton(sectionClient,
 				"Données", SWT.RADIO);
 
@@ -564,7 +553,6 @@ public class Drawing {
 		groupe.setLayout(gridLayout1);
 		grou = groupe;
 
-		// ligne = new Text(groupe, SWT.BORDER);
 		nbreLignes.setParent(groupe);
 
 		nbreLignes.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -624,11 +612,7 @@ public class Drawing {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
 						System.out.println("bouton injection"); // 
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
+
 						Utils.injectNbreLignes(lign,
 								ViewFile.textAreaDescription);
 
@@ -750,8 +734,6 @@ public class Drawing {
 		Button radio2 = new Button(sectionClient, SWT.RADIO);
 		radio2.setText(txtRadio2);
 
-		// ///////////
-
 		GridLayout gridLayout1 = new GridLayout();
 		gridLayout1.numColumns = 6;
 		Group groupe = new Group(sectionClient, SWT.NONE);
@@ -776,14 +758,13 @@ public class Drawing {
 		System.out.println("parent ?====> " + tmp);
 		EditDesc.debutNbreMesures.setText("test");
 
-		// = new Text(groupe, SWT.BORDER);
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
 		Label label3 = new Label(groupe, SWT.NULL);
 		label3.setText("Fin");
 		fin.setParent(groupe);
-		// = new Text(groupe, SWT.BORDER);
+
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// groupe non visible de base
@@ -795,8 +776,6 @@ public class Drawing {
 		inject2 = buttonInject2;
 
 		groupe.setEnabled(false);
-
-		// /////////////
 
 		section.setClient(sectionClient);
 
@@ -837,11 +816,7 @@ public class Drawing {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
 						System.out.println("bouton injection"); // 
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
+
 						Utils.injectNbreLignes(manu,
 								ViewFile.textAreaDescription);
 
@@ -858,11 +833,7 @@ public class Drawing {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
 						System.out.println("bouton injection"); // 
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
+
 						Utils.inject(lign, debu, fi,
 								ViewFile.textAreaDescription);
 
@@ -870,9 +841,7 @@ public class Drawing {
 				});
 
 		// saisie par défaut et groupe désactivé
-		// lign.setEnabled(true);
-		// debu.setEnabled(true);
-		// fi.setEnabled(true);
+
 		inject.setEnabled(true);
 		radio.setSelection(true);
 
@@ -925,7 +894,6 @@ public class Drawing {
 		// zone d'édition
 		manuel.setParent(sectionClient);
 
-		// = new Text(sectionClient, SWT.BORDER);
 		manuel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// bouton d'injection de la position des valeurs
@@ -948,7 +916,6 @@ public class Drawing {
 				});
 
 		section.pack();
-		// sectionClient.pack();
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeDesc(section);
@@ -998,7 +965,6 @@ public class Drawing {
 		// zone d'édition
 		manuel.setParent(sectionClient);
 
-		// = new Text(sectionClient, SWT.BORDER);
 		manuel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// bouton d'injection de la position des valeurs
@@ -1125,19 +1091,7 @@ public class Drawing {
 		sectionClient.setLayout(new GridLayout());
 		GridData gd = new GridData();
 		gd.horizontalSpan = 2;
-		/*
-		 * for (i=0; i<nbre; i++){
-		 * 
-		 * //label avec le texte de "description" Label label = new
-		 * Label(sectionClient, SWT.NULL); label.setText(listeNoms.get(i));
-		 * System.out.println("creation de" + listeNoms.get(i));
-		 * 
-		 * 
-		 * //affichage zone texte dans la section
-		 * listeText.get(i).setParent(sectionClient);
-		 * listeText.get(i).setLayoutData(new
-		 * GridData(GridData.FILL_HORIZONTAL)); }
-		 */
+
 		// combolist centres de données
 		Label label = new Label(sectionClient, SWT.NULL);
 		label.setText(Messages.getString("EditSurvey.62"));
@@ -1210,18 +1164,6 @@ public class Drawing {
 		// ajout liste et boutons déplacement des éléments
 		// mettre les listeners dessus !!!!!
 
-		/*
-		 * // remplissage des types
-		 * 
-		 * EditSurvey.listeType.setParent(sectionClient);
-		 * EditSurvey.listeType.setLayoutData(new GridData(GridData.FILL_BOTH));
-		 * 
-		 * Button up = new Button(sectionClient, SWT.NULL);
-		 * up.setText("Monter"); Button down = new Button(sectionClient,
-		 * SWT.NULL); down.setText("Descendre"); Button del = new
-		 * Button(sectionClient, SWT.NULL); del.setText("Supprimer");
-		 */
-
 		section.setClient(sectionClient);
 
 		// ajout de la section dans la liste des sections de description
@@ -1270,18 +1212,6 @@ public class Drawing {
 		// ajout liste et boutons déplacement des éléments
 		// mettre les listeners dessus !!!!!
 
-		/*
-		 * // remplissage des types
-		 * 
-		 * EditSurvey.listeType.setParent(sectionClient);
-		 * EditSurvey.listeType.setLayoutData(new GridData(GridData.FILL_BOTH));
-		 * 
-		 * Button up = new Button(sectionClient, SWT.NULL);
-		 * up.setText("Monter"); Button down = new Button(sectionClient,
-		 * SWT.NULL); down.setText("Descendre"); Button del = new
-		 * Button(sectionClient, SWT.NULL); del.setText("Supprimer");
-		 */
-
 		section.setClient(sectionClient);
 
 		// ajout de la section dans la liste des sections de description
@@ -1314,8 +1244,6 @@ public class Drawing {
 		gd.horizontalSpan = 2;
 		gd.verticalSpan = 2;
 
-		// commentaire.setText("\n\n\n\n\n\n\n");
-
 		commentaire.setParent(sectionClient);
 		commentaire.setLayoutData(new GridData(GridData.FILL_BOTH));
 		commentaire.setTextLimit(50000);
@@ -1327,11 +1255,6 @@ public class Drawing {
 			commentaire.setLayoutData(gridData);
 		}
 
-		// commentaire = new Text(sectionClient, SWT.MULTI | SWT.WRAP |
-		// SWT.V_SCROLL | Window.getDefaultOrientation() | SWT.BORDER);
-		// commentaire.setText("Mon commentaire.");
-
-		// commentaire.setToolTipText("Commentaire");
 		{
 			GridData gridData = new GridData(SWT.FILL, SWT.FILL, true, true, 3,
 					1);

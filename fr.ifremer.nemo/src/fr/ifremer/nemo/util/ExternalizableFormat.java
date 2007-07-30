@@ -6,30 +6,29 @@ import java.text.Format;
 
 /**
  * Class ExternalizableFormat
- *
- *
- * @author	Gerard BUNEL
+ * 
+ * 
+ * @author Gerard BUNEL
  */
-public abstract class ExternalizableFormat extends Format
-    implements
-       Cloneable,
-       SAXConsumer {
+public abstract class ExternalizableFormat extends Format implements Cloneable,
+		SAXConsumer {
 
-  public ExternalizableFormat() {
-    super();
-  }
+	public ExternalizableFormat() {
+		super();
+	}
 
-  /**
-   *
-   * @return  Object
-   */
-  public abstract Object clone ( );
-  /**
-   *
-   * @param  a_Writer  
-   */
-  public void writeXMLOn ( XMLOutputWriter a_Writer) {
-    
-  }
+	/**
+	 * 
+	 * @return Object
+	 */
+	public abstract Object clone();
+
+	/**
+	 * 
+	 * @param a_Writer
+	 */
+	public void writeXMLOn(XMLOutputWriter a_Writer) {
+
+	}
 
 } /* End of class: ExternalizableFormat */

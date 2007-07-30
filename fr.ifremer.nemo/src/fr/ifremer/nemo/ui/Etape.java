@@ -18,17 +18,6 @@ public class Etape {
 	 * 
 	 */
 
-	public static void controle() {
-
-	}
-
-	public static void etape(int numero) {
-		// numero est l'etape à laquelle on voudrait passer en validant l'étape
-		// courante
-		// ViewFile.etape
-
-	}
-
 	public static void validationDesc() {
 
 		// retour à l'onglet message d'erreur
@@ -51,15 +40,6 @@ public class Etape {
 				Messages.getString("Etape.2")); //$NON-NLS-1$
 		ok = ok && resultat;
 
-		/*
-		 * if (EditDesc.buttonLignesEnteteStation.getSelection()){ resultat =
-		 * Regexp.checkTextValeur(EditDesc.lignesEnteteStation, "Entête de
-		 * station"); ok = ok && resultat; }else{ resultat =
-		 * Regexp.checkLigneDebutfin(EditDesc.octetsEnteteStationLigne,
-		 * EditDesc.octetsEnteteStationDebut, EditDesc.octetsEnteteStationFin,
-		 * "Entête Station"); ok = ok && resultat; }
-		 */
-
 		// section fin de station
 		resultat = Regexp.checkTextValeur(EditDesc.lignesFinStation, Messages
 				.getString("Etape.3")); //$NON-NLS-1$
@@ -69,10 +49,7 @@ public class Etape {
 		if (!EditDesc.buttonIndicFinDonnees.getSelection()) {
 			resultat = Regexp.checkTextValeur(EditDesc.nbreLignesMesures,
 					Messages.getString("Etape.4")); //$NON-NLS-1$
-			// resultat =
-			// Regexp.checkLigneDebutfin(EditDesc.ruptureDonneesNoLigne,
-			// EditDesc.ruptureDonneesDebut, EditDesc.ruptureDonneesFin,
-			// "Indicateur de fin de données");
+
 			ok = ok && resultat;
 		} else {
 			// format de la combolist
@@ -92,8 +69,7 @@ public class Etape {
 					Long HourLong = (Long) format
 							.parseObject(ViewFile.textTempoHeureRef.getText());
 				} catch (ParseException e) {
-					// System.out.println(ViewFile.comboTempoHeure.getText()
-					// +"<==>"+ ViewFile.textTempoHeureRef.getText());
+
 					Utils.messageErreurAppend(Messages.getString("Etape.6")); //$NON-NLS-1$
 					ok = false;
 				}
@@ -105,8 +81,7 @@ public class Etape {
 					Long DateLong = (Long) format
 							.parseObject(ViewFile.textTempoDateRef.getText());
 				} catch (ParseException e) {
-					// System.out.println(ViewFile.comboTempoDate.getText()
-					// +"<==>"+ ViewFile.textTempoDateRef.getText());
+
 					Utils.messageErreurAppend(Messages.getString("Etape.8")); //$NON-NLS-1$
 					ok = false;
 				}
@@ -166,14 +141,6 @@ public class Etape {
 		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textChef,
 				Messages.getString("Etape.19")); //$NON-NLS-1$
 		ok = ok && resultat;
-		// resultat =
-		// Regexp.checkPresenceValeurObligatoire(EditSurvey.textCentre,
-		// Messages.getString("Etape.20")); //$NON-NLS-1$
-		// ok = ok && resultat;
-		// resultat =
-		// Regexp.checkPresenceValeurObligatoire(EditSurvey.textConfidentiel,
-		// Messages.getString("Etape.21")); //$NON-NLS-1$
-		// ok = ok && resultat;
 
 		// CHECK DATES
 		if (!EditSurvey.textDateDebut.getText().matches("")) { //$NON-NLS-1$
@@ -285,9 +252,6 @@ public class Etape {
 
 			if (resultat1) {
 
-				// int nbreLignes =
-				// Utils.calculNbreLignes(EditStation.posxHistoriqueAcq1,
-				// EditStation.posyHistoriqueAcq1);
 				int nbreLignes = Utils
 						.calculNbreLignes(EditStation.cursHistorique1);
 
@@ -341,8 +305,7 @@ public class Etape {
 						Utils.messageErreurAppend(Messages
 								.getString("Etape.115"));
 					} else {
-						// nbre de ligne bon mais est-ce au bon endroit ?
-						// ////////////
+						// nbre de ligne bon mais est-ce au bon endroit
 						int ligneFin = Integer
 								.parseInt(EditStation.textHistoriqueAcqLigne2
 										.getText())
@@ -366,7 +329,7 @@ public class Etape {
 						} else {
 							ok = ok && true;
 						}
-						// ////////////
+
 					}
 				}
 
@@ -414,11 +377,6 @@ public class Etape {
 					ok = ok && true;
 				}
 
-				// if (ligneFin >)
-				// if (nbreLignes > DataModel.stationModel.getNumberOfLines()){
-				// ok = ok && false;
-				// Utils.messageErreurAppend(Messages.getString("Etape.108"));
-				// }
 			}
 
 		}
@@ -439,7 +397,7 @@ public class Etape {
 					Utils.messageErreurAppend(Messages.getString("Etape.109"));
 				} else {
 					// nbre de ligne bon mais est-ce au bon endroit ?
-					// ////////////
+
 					int ligneFin = Integer
 							.parseInt(EditStation.textSurfaceLigne1.getText())
 							+ nbreLignes - 1;
@@ -462,7 +420,7 @@ public class Etape {
 					} else {
 						ok = ok && true;
 					}
-					// ////////////
+
 				}
 			}
 
@@ -535,7 +493,7 @@ public class Etape {
 				Long hourLong = (Long) format
 						.parseObject(EditStation.textHeureSaisie.getText());
 			} catch (ParseException e) {
-				// System.out.println("erreur format Heure ");
+
 				Utils
 						.messageErreurAppend(Messages.getString("Etape.38") + EditStation.comboHeure.getText() + Messages.getString("Etape.39") + EditStation.textHeureSaisie.getText()); //$NON-NLS-1$ //$NON-NLS-2$
 
@@ -565,13 +523,7 @@ public class Etape {
 				ok = ok && resultat1;
 			}
 
-			// Utils.messageErreurAppend("\n===[Check section : Heure]===\n");
-			// System.out.println("format heure =
-			// "+EditStation.comboHeure.getText());
-			// //Item(EditStation.comboHeure.getSelectionIndex()));
 			try {
-				// System.out.println("format heure =
-				// "+EditStation.comboHeure.getText());
 
 				// récupérer le texte en question et creer une nouvelle heure
 				ligne = Utils.lignesBrutes.get(Integer
@@ -583,8 +535,6 @@ public class Etape {
 				DateTimeFormat format = new DateTimeFormat(
 						EditStation.comboHeure.getText());
 
-				// System.out.println(ligne);
-				// System.out.println(string);
 				Long hourLong = (Long) format.parseObject(string);
 
 			} catch (ParseException e) {
@@ -594,7 +544,7 @@ public class Etape {
 
 				ok = ok && false;
 				e.printStackTrace();
-				// Utils.messageErreurAppend(e.)
+
 			}
 
 		}
@@ -609,7 +559,7 @@ public class Etape {
 				Long dateLong = (Long) format
 						.parseObject(EditStation.textDateSaisie.getText());
 			} catch (ParseException e) {
-				// System.out.println("erreur format date ");
+
 				Utils
 						.messageErreurAppend(Messages.getString("Etape.43") + EditStation.comboDate.getText() + Messages.getString("Etape.44") + EditStation.textDateSaisie.getText()); //$NON-NLS-1$ //$NON-NLS-2$
 				e.printStackTrace();
@@ -636,9 +586,6 @@ public class Etape {
 				ok = ok && resultat1;
 			}
 
-			// Utils.messageErreurAppend("\n===[Check section : Date]===\n");
-			// System.out.println("format date =
-			// "+EditStation.comboDate.getText());
 			try {
 
 				// récupérer le texte en question et creer une nouvelle heure
@@ -652,8 +599,6 @@ public class Etape {
 				DateTimeFormat format = new DateTimeFormat(
 						EditStation.comboDate.getText());
 
-				// System.out.println(ligne);
-				// System.out.println(string);
 				Long dateLong = (Long) format.parseObject(string);
 
 			} catch (ParseException e) {
@@ -662,13 +607,13 @@ public class Etape {
 						.messageErreurAppend(Messages.getString("Etape.46") + EditStation.comboDate.getText() + Messages.getString("Etape.47") + string); //$NON-NLS-1$ //$NON-NLS-2$
 				ok = ok && false;
 				e.printStackTrace();
-				// Utils.messageErreurAppend(e.)
+
 			}
 
 		}
 
 		// PROFONDEUR
-		// Utils.messageErreurAppend(Messages.getString("Etape.48"));
+
 		// //$NON-NLS-1$
 		if (EditStation.buttonProfondeurPos.getSelection()) {
 			resultat1 = Regexp.checkLigneDebutfin(
@@ -694,7 +639,7 @@ public class Etape {
 				if (Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", string
 						.trim())) {
 					ok = ok && true;
-					// Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
+
 				} else {
 					ok = ok && false;
 					Utils.messageErreurAppend(Messages.getString("Etape.52")); //$NON-NLS-1$
@@ -709,17 +654,17 @@ public class Etape {
 			}
 
 			if (resultat1) {
-				// Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
+
 			}
 
 		} else {
 			if (!EditStation.textProfondeur.getText().matches("")
 					&& !EditStation.textProfondeur.getText().matches("NaN")) {
-				// Pattern.matches("^[0-9][0-9]*$", lign)
+
 				if (Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$",
 						EditStation.textProfondeur.getText())) {
 					ok = ok && true;
-					// Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
+
 				} else {
 					ok = ok && false;
 					Utils.messageErreurAppend(Messages.getString("Etape.52")); //$NON-NLS-1$
@@ -747,7 +692,7 @@ public class Etape {
 				if (Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", string
 						.trim())) {
 					ok = ok && true;
-					// Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
+
 				} else {
 					ok = ok && false;
 					Utils.messageErreurAppend(Messages.getString("Etape.119")); //$NON-NLS-1$
@@ -762,17 +707,17 @@ public class Etape {
 			}
 
 			if (resultat1) {
-				// Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
+
 			}
 
 		} else {
 			if (!EditStation.textTU.getText().matches("")
 					&& !EditStation.textTU.getText().matches("NaN")) {
-				// Pattern.matches("^[0-9][0-9]*$", lign)
+
 				if (Pattern.matches("^[0-9]*[0-9][.]?[0-9]*$",
 						EditStation.textTU.getText())) {
 					ok = ok && true;
-					// Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
+
 				} else {
 					ok = ok && false;
 					Utils.messageErreurAppend(Messages.getString("Etape.119")); //$NON-NLS-1$
@@ -788,15 +733,11 @@ public class Etape {
 				LatitudeFormat latitudeFormat = new LatitudeFormat(
 						EditStation.comboLatitude.getText());
 				latitudeFormat.parseObject(EditStation.textLatitude.getText());
-				// System.out.println("format
-				// latitude>"+EditStation.comboLatitude.getText()+"< latitude
-				// entrée >"+EditStation.textLatitude.getText()+"<");
+
 			} catch (ParseException e) {
 				ok = false;
 				Utils.messageErreurAppend(Messages.getString("Etape.53")); //$NON-NLS-1$
-				// System.out.println("format
-				// latitude>"+EditStation.comboLatitude.getText()+"< latitude
-				// entrée >"+EditStation.textLatitude.getText()+"<");
+
 				e.printStackTrace();
 			}
 		} else {
@@ -819,8 +760,6 @@ public class Etape {
 				ok = ok && resultat1;
 			}
 
-			// //////////////////////////////////////////////
-
 			// récupérer le texte en question et creer une nouvelle latitude
 			// on a ligne debut fin donc parcours lignes de texte
 
@@ -834,16 +773,11 @@ public class Etape {
 				LatitudeFormat latitudeFormat = new LatitudeFormat(
 						EditStation.comboLatitude.getText());
 				latitudeFormat.parseObject(string);
-				// System.out.println("format
-				// latitude>"+EditStation.comboLatitude.getText()+"< latitude
-				// lue >"+string+"<");
+
 			} catch (ParseException e) {
 				Utils
 						.messageErreurAppend(Messages.getString("Etape.55") + EditStation.comboLatitude.getText() + Messages.getString("Etape.56") + string + "<"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				// Utils.messageErreurAppend("Erreur de format de longitude : lu
-				// ==>" +string+"< attendu ==>"
-				// +EditStation.comboLongitude.getText()+ "<");
-				// System.out.println("Erreur de format de latitude");
+
 				e.printStackTrace();
 				ok = false;
 			}
@@ -895,8 +829,7 @@ public class Etape {
 				LongitudeFormat longitudeFormat = new LongitudeFormat(
 						EditStation.comboLongitude.getText());
 				longitudeFormat.parseObject(string);
-				// System.out.println("format de longitude : lu ==>" +string+"<
-				// attendu ==>" +EditStation.comboLongitude.getText()+ "<");
+
 			} catch (ParseException e) {
 				Utils
 						.messageErreurAppend(Messages.getString("Etape.60") + string + Messages.getString("Etape.61") + EditStation.comboLongitude.getText() + "<"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -914,7 +847,7 @@ public class Etape {
 			if (EditStation.buttonLatFinSaisie.getSelection()) {
 				// saisie manuelle
 				if (EditStation.textLatFin.getText().matches("")) { //$NON-NLS-1$
-				// valeur non rentrée
+					// valeur non rentrée
 					ok = ok && true;
 				} else {
 					if (!EditStation.textLatFin.getText().matches("")) {//$NON-NLS-1$
@@ -1039,13 +972,11 @@ public class Etape {
 
 			} else {
 				if (!EditStation.textProfFin.getText().matches("")) { //$NON-NLS-1$
-					// Utils.messageErreurAppend(Messages.getString("Etape.72"));
-					// //$NON-NLS-1$
 
 					if (Pattern.matches("^[0-9]*[0-9][.]?[0-9][0-9]*$",
 							EditStation.textProfFin.getText())) {
 						ok = ok && true;
-						// Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
+
 					} else {
 						ok = ok && false;
 						Utils.messageErreurAppend(Messages
@@ -1084,7 +1015,7 @@ public class Etape {
 					if (Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", string
 							.trim())) {
 						ok = ok && true;
-						// Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
+
 					} else {
 						ok = ok && false;
 						Utils.messageErreurAppend(Messages
@@ -1099,7 +1030,7 @@ public class Etape {
 					ok = ok && resultat1;
 				}
 				if (resultat1) {
-					// Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
+
 				}
 
 			} else {
@@ -1110,7 +1041,7 @@ public class Etape {
 					if (Pattern.matches("^[0-9]*[0-9][.]?[0-9][0-9]*$",
 							EditStation.textProfCapteur.getText())) {
 						ok = ok && true;
-						// Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
+
 					} else {
 						ok = ok && false;
 						Utils.messageErreurAppend(Messages
@@ -1144,7 +1075,7 @@ public class Etape {
 					if (Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", string
 							.trim())) {
 						ok = ok && true;
-						// Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
+
 					} else {
 						ok = ok && false;
 						Utils.messageErreurAppend(Messages
@@ -1159,7 +1090,7 @@ public class Etape {
 					ok = ok && resultat1;
 				}
 				if (resultat1) {
-					// Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
+
 				}
 
 			} else {
@@ -1179,8 +1110,7 @@ public class Etape {
 					}
 
 				} else {
-					// Utils.messageErreurAppend(Messages.getString("Etape.84"));
-					// //$NON-NLS-1$
+
 					ok = ok && true;
 				}
 
@@ -1292,13 +1222,6 @@ public class Etape {
 				debuts[i] = typeCourant.getDebut();
 				fins[i] = typeCourant.getFin();
 
-				// vérification que on a bien une valeur d'entree et de sortie
-				// et un format
-				// if (typeCourant.getEntree().matches("") ||
-				// typeCourant.getSortie().matches("")){ok = false;
-				// Utils.messageErreurAppend(Messages.getString("Etape.101"));
-				// }
-
 				// test direct sur valeur entree
 				if (Pattern.matches("^.{0,1}[0-9]*[0-9].*[0-9][0-9]*$",
 						typeCourant.getEntree())) {
@@ -1322,16 +1245,6 @@ public class Etape {
 					ok = ok && false;
 					Utils.messageErreurAppend(Messages.getString("Etape.106")); //$NON-NLS-1$
 				}
-
-				/*
-				 * //test direct sur format if
-				 * (Pattern.matches("^[0-9].*[0-9][0-9]*$",typeCourant.getFormat())){
-				 * //ok ok = ok && true;
-				 * 
-				 * }else{ //erreur ok = ok && false;
-				 * Utils.messageErreurAppend(Messages.getString("Etape.106"));
-				 * //$NON-NLS-1$ }
-				 */
 
 				// check des valeurs début<fin
 				if (typeCourant.getDebut() > typeCourant.getFin()) {
@@ -1360,14 +1273,6 @@ public class Etape {
 
 			}
 
-			/*
-			 * //test des doublons if ((cptDebut >nbreParam)||(cptFin
-			 * >nbreParam)){
-			 * Utils.messageErreur(Messages.getString("Etape.87"));
-			 * //$NON-NLS-1$
-			 * 
-			 * ok = false; }
-			 */
 			if (valeurNonRemplie) {
 				Utils.messageErreurAppend(Messages.getString("Etape.88")); //$NON-NLS-1$
 				ok = false;

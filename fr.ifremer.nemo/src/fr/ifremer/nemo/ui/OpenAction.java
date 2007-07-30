@@ -17,19 +17,16 @@ import org.eclipse.ui.actions.ActionFactory;
 import fr.ifremer.nemo.input.InputModel;
 
 public class OpenAction extends Action implements ISelectionListener,
-		ActionFactory.IWorkbenchAction { // implements ISelectionListener,
-											// ActionFactory.IWorkbenchAction
+		ActionFactory.IWorkbenchAction {
 	private final IWorkbenchWindow window;
 
 	public final static String ID = "fr.ifremer.nemo.ui.OpenAction"; //$NON-NLS-1$
 
 	// vars nécessaires à la fenêtre d'options
-	// public static
+
 	public static Shell shelloptions;
 
 	public static String nomModele, nomFichierModele;
-
-	// private IStructuredSelection selection;
 
 	public OpenAction(IWorkbenchWindow window) {
 

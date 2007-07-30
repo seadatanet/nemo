@@ -80,7 +80,6 @@ public class EditData {
 
 		// affichage du texte dans la zone de gauche
 
-		// Utils.remplissageTexte(ViewFile.styledTextData);
 		ViewFile.styledTextData.setText(Utils.texteBrut);
 
 		loaded = 1;
@@ -94,9 +93,6 @@ public class EditData {
 		 * réafficher par la suite dans DrawingBack.
 		 */
 
-		// ViewEdit.formEdition.dispose();
-		// formEdition =
-		// ViewEdit.toolkitEdition.createScrolledForm(ViewEdit.top);
 		ViewEdit.formEdition.getBody().setLayout(new GridLayout());
 		ViewEdit.formEdition.setText(Messages.getString("EditData.1")); //$NON-NLS-1$
 
@@ -135,12 +131,7 @@ public class EditData {
 
 			// on cree les sections puis on les cache dans un autre shell et on
 			// les re-affiche only si bouton coché
-			// DrawingData.sectionHeure("Heure ", "Sélectionnez l'heure présente
-			// dans les lignes de données", sectionHeure, textHeureLigne,
-			// textHeureDebut, textHeureFin);
-			// DrawingData.sectionDate("Date ", "Sélectionnez la date présente
-			// dans les lignes de données", sectionDate, textDateLigne,
-			// textDateDebut, textDateFin);
+
 			DrawingData
 					.sectionTotal(
 							Messages.getString("EditData.6"), Messages.getString("EditData.7"), sectionTotal, textTotalLigne, textTotalDebut, textTotalFin); //$NON-NLS-1$ //$NON-NLS-2$
@@ -156,28 +147,10 @@ public class EditData {
 			formEdition.redraw();
 			formEdition.reflow(true);
 
-			// Shell s = new Shell();
-			// sectionHeure.setParent(s);
-			// sectionDate.setParent(s);
-
 		}
 
 		formEdition.reflow(true);
 
-		// section type courant
-		// DrawingData.sectionTypeCourant(sectionTypeCourant,
-		// textTypeCourantCode, textTypeCourantUnite, textTypeCourantConversion,
-		// textTypeCourantDebut, textTypeCourantFin, textTypeCourantFormat,
-		// textTypeCourantEntree, textTypeCourantSortie);
-
-		// section type ajouter
-		// DrawingData.sectionTypeAjouter(sectionTypeAjouter,
-		// textTypeAjouterCode, textTypeAjouterUnite, textTypeAjouterConversion,
-		// textTypeAjouterDebut, textTypeAjouterFin, textTypeAjouterFormat,
-		// textTypeAjouterEntree, textTypeAjouterSortie);
-
-		// bouton expand
-		// buttonExpand2.setParent(ViewEdit.formEdition.getBody());
 		buttonExpand2.setText("+"); //$NON-NLS-1$
 
 		ViewFile.affiche = 3;
@@ -188,8 +161,6 @@ public class EditData {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-
-						// System.out.println("bouton freq echant");
 
 						test();
 
@@ -203,14 +174,6 @@ public class EditData {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
 
-						// System.out.println("bouton lignes données");
-
-						// buttonFreqEchant.setSelection(false);
-						// EditData.sectionHeure.setEnabled(true);
-						// EditData.sectionDate.setEnabled(true);
-						// EditData.sectionHeure.setParent(ViewEdit.formEdition.getBody());
-						// EditData.sectionDate.setParent(ViewEdit.formEdition.getBody());
-
 						test2();
 						formEdition.reflow(true);
 					}
@@ -222,7 +185,7 @@ public class EditData {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						// System.out.println("expand/collapse all"); //
+
 						// raz de la valeur manuelle
 						int i;
 
@@ -265,8 +228,7 @@ public class EditData {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						// System.out.println("expand/collapse all"); //
-						// raz de la valeur manuelle
+
 						int i;
 
 						Shell s = new Shell();
@@ -308,10 +270,9 @@ public class EditData {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						// System.out.println("validation"); //
 
 						// on passe en ppar l'étape à laquelle on se trouve
-						Etape.etape(1);
+						// Etape.etape(1);
 
 						Etape.validationData();
 
@@ -343,8 +304,8 @@ public class EditData {
 		// affichage courant
 		ViewFile.affiche = 3;
 
-		// remplissage de l'IHM par le modèle chargé ?
-		// System.out.println("Valeur de DataModel.ouverture = "+
+		// remplissage de l'IHM par le modèle chargé
+
 		// DataModel.ouverture);
 
 		if (DataModel.ouverture) {
@@ -358,13 +319,10 @@ public class EditData {
 
 		Shell s = new Shell();
 
-		// System.out.println("expand ? = " + expand);
 		for (i = 0; i <= EditData.listeSectionsData.size() - 1; i++) {
 
-			// System.out.println("===> " +
-			// EditData.listeSectionsData.get(i).getText());
 			EditData.listeSectionsData.get(i).setEnabled(false); // Parent(s);
-			// System.out.println("EditData.test()... ok");
+
 		}
 
 		// refresh global
@@ -376,13 +334,10 @@ public class EditData {
 
 		Shell s = new Shell();
 
-		// System.out.println("expand ? = " + expand);
 		for (i = 0; i <= EditData.listeSectionsData.size() - 1; i++) {
 
-			// System.out.println("===> " +
-			// EditData.listeSectionsData.get(i).getText());
 			EditData.listeSectionsData.get(i).setEnabled(true); // Parent(s);
-			// System.out.println("EditData.test()... ok");
+
 		}
 
 		// refresh global
@@ -409,12 +364,8 @@ public class EditData {
 		// System.out.println("expand ? = " + expand);
 		for (i = 0; i <= EditData.listeSectionsData.size() - 1; i++) {
 
-			// EditData.listeSectionsData.get(i).setExpanded(true);
-			// System.out.println("===> " +
-			// EditData.listeSectionsData.get(i).getText());
 			EditData.listeSectionsData.get(i).setParent(s);
-			// System.out.println("effacement zone edition etape description
-			// campagne ==> ok");
+
 		}
 
 		// effacement titre formulaire
@@ -431,8 +382,6 @@ public class EditData {
 			liste.get(i).addModifyListener(new ModifyListener() {
 				public void modifyText(ModifyEvent event) {
 					// on modifie la valeur du champ texte
-					// Text text = (Text) event.widget;
-					// System.out.println(text.getText());
 
 					// dès qu'on modifie une valeur, on invalide l'étape
 					// remise du nom onglet à valeur par défaut
@@ -475,11 +424,9 @@ public class EditData {
 		for (i = 0; i <= EditData.listeSectionsData.size() - 1; i++) {
 
 			EditData.listeSectionsData.get(i).setExpanded(false);
-			// System.out.println("===> " +
-			// EditData.listeSectionsData.get(i).getText());
+
 			EditData.listeSectionsData.get(i).setParent(s.getBody());
-			// System.out.println("reaffichage zone edition etape description
-			// campagne ==> ok");
+
 		}
 
 		// EditData.buttonExpand2.setParent(s.getBody());

@@ -19,8 +19,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.actions.ActionFactory;
 
 public class OptionsAction extends Action implements ISelectionListener,
-		ActionFactory.IWorkbenchAction { // implements ISelectionListener,
-											// ActionFactory.IWorkbenchAction
+		ActionFactory.IWorkbenchAction {
 
 	private final IWorkbenchWindow window;
 
@@ -39,12 +38,10 @@ public class OptionsAction extends Action implements ISelectionListener,
 	public final static String ID = "fr.ifremer.nemo.ui.OptionsAction"; //$NON-NLS-1$
 
 	// vars nécessaires à la fenêtre d'options
-	// public static
+
 	public static Shell shelloptions;
 
 	public static int options;
-
-	// private IStructuredSelection selection;
 
 	public OptionsAction(IWorkbenchWindow window) {
 
@@ -67,14 +64,12 @@ public class OptionsAction extends Action implements ISelectionListener,
 		shelloptions = new Shell(Application.display, SWT.BORDER | SWT.TITLE
 				| SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);
 
-		// shelloptions = new Shell();
 		shelloptions.setSize(400, 400);
 		shelloptions.setText(Messages.getString("OptionsAction.3")); //$NON-NLS-1$
 		shelloptions.setLayout(new GridLayout());
-		// top = new Composite(shelloptions, SWT.NONE);
 
 		createPartControl(shelloptions);
-		// shelloptions.redraw();
+
 		shelloptions.pack();
 		shelloptions.open();
 		options = 1;
@@ -228,11 +223,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("options cancel"); // TODO
-																// Auto-generated
-																// Event stub
-																// widgetSelected()
-																// //$NON-NLS-1$
+						System.out.println("options cancel");
 
 						shelloptions.close();
 
@@ -244,11 +235,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("options valider"); // TODO
-																// Auto-generated
-																// Event stub
-																// widgetSelected()
-																// //$NON-NLS-1$
+						System.out.println("options valider");
 
 						// sauvegarde de la config
 						Utils.saveConfig();

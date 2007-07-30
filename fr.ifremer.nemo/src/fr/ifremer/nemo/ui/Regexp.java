@@ -80,7 +80,6 @@ public class Regexp {
 		Boolean ok;
 
 		// raz du message d'erreurs
-		// Utils.messageErreur("");
 
 		ok = true;
 		// log = "\n===[Check section : " + nomSection + "]===\n";
@@ -131,7 +130,7 @@ public class Regexp {
 		}
 
 		// tests des relations des champs
-		// int i = Integer.parseInt(str);
+
 		if (!debu.matches("") && (!fi.matches(""))) { //$NON-NLS-1$ //$NON-NLS-2$
 			if (Integer.parseInt(debu) > Integer.parseInt(fi)) {
 				ok = ok && false;

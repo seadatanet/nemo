@@ -173,12 +173,9 @@ public class FiltrageTableType {
 									Pattern p = Pattern.compile(" - "); //$NON-NLS-1$
 
 									String mots[] = p.split(reference);
-									// System.out.println("Lancement WS sur la
-									// référence :"+mots[0]);
 
 									EditSurvey.webService(mots[0]);
-									// System.out.println("Fin de WS sur la
-									// référence :"+mots[0]);
+
 									Utils.messageOK(Messages
 											.getString("FiltrageTableType.21"));
 									shell.close();
@@ -191,8 +188,6 @@ public class FiltrageTableType {
 									// ajout d'un dataType dans l'onglet Survey
 									TypeSurvey typeSurvey = new TypeSurvey();
 
-									// System.out.println("INDEX
-									// =>"+TableDataSurvey.filtreTable.getSelectionIndex());
 									int index = TableDataSurvey.filtreTable
 											.getSelectionIndex();
 									typeSurvey = TableDataSurvey.listeFiltree
@@ -240,7 +235,6 @@ public class FiltrageTableType {
 									TableDataSurvey.razTableData();
 
 									// refresh de la table
-									// initTable();
 									TableDataSurvey.creationTable();
 
 									EditSurvey.sectionType.pack();
@@ -286,8 +280,6 @@ public class FiltrageTableType {
 
 								TypeData typeData = new TypeData();
 
-								// System.out.println("INDEX
-								// =>"+TableDataSurvey.filtreTable.getSelectionIndex());
 								int index = TableData.filtreTable
 										.getSelectionIndex();
 								typeData = TableData.listeFiltree.get(index);
@@ -336,7 +328,6 @@ public class FiltrageTableType {
 								TableData.razTableData();
 
 								// refresh de la table
-								// initTable();
 								TableData.creationTable();
 
 								shell.close();
@@ -353,10 +344,6 @@ public class FiltrageTableType {
 			// listener keypressed sur le champ text
 			filtreText.addListener(SWT.KeyUp, new Listener() {
 				public void handleEvent(Event e) {
-					// System.out.println("touche appuyée");
-					// System.out.println("texte courant =>"+
-					// filtreText.getText());
-
 					if (filtreText.getText().matches("")) {} //$NON-NLS-1$
 					else {
 
@@ -387,7 +374,7 @@ public class FiltrageTableType {
 		int nbre;
 
 		TableData.filtreTable = new Table(top, SWT.FULL_SELECTION);
-		// filtreTableData = new Table(top, SWT.FULL_SELECTION);
+
 		table = TableData.filtreTable;
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
@@ -417,7 +404,6 @@ public class FiltrageTableType {
 		// ajout listeners sur la table
 		table.addListener(SWT.MouseDown, new Listener() {
 			public void handleEvent(Event event) {
-				// int tmp =table.getSelectionIndex();
 
 				// System.out.println("index sélectionné ="+ tmp);
 
@@ -464,9 +450,6 @@ public class FiltrageTableType {
 		// ajout listeners sur la table
 		table.addListener(SWT.MouseDown, new Listener() {
 			public void handleEvent(Event event) {
-				// int tmp =table.getSelectionIndex();
-
-				// System.out.println("index sélectionné ="+ tmp);
 
 			}
 		});
@@ -488,20 +471,12 @@ public class FiltrageTableType {
 		// remplissage de la liste filtree
 		for (int i = 0; i < nbre; i++) {
 
-			// Pattern.matches(chaine,origine.get(i).getCode() )
-			// (Pattern.matches("^[1-9][0-9]*$", valeur))
 			regexp = "^.*" + chaine + ".*$"; //$NON-NLS-1$ //$NON-NLS-2$
-			// System.out.println(""+chaine+"<=>"+origine.get(i).getCode());
-			// System.out.println(Pattern.matches(regexp,origine.get(i).getCode()));
 
 			Pattern p = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE);
 			Matcher m = p.matcher(origine.get(i).getCode());
 
 			if (m.matches()) {
-
-				// if (Pattern.matches(regexp,origine.get(i).getCode())){
-				// System.out.println("On ajoute le type
-				// "+origine.get(i).getCode());
 
 				// ajout dans la liste filtrée
 				filtree.add(origine.get(i));
@@ -510,8 +485,6 @@ public class FiltrageTableType {
 
 		TableData.listeFiltree = filtree;
 		// affichage de la liste filtree
-
-		// System.out.println(">>>>>>>>>"+TableData.filtreTable);
 
 		razTable(TableData.filtreTable);
 		creationTableData();
@@ -532,19 +505,12 @@ public class FiltrageTableType {
 		// remplissage de la liste filtree
 		for (int i = 0; i < nbre; i++) {
 
-			// Pattern.matches(chaine,origine.get(i).getCode() )
-			// (Pattern.matches("^[1-9][0-9]*$", valeur))
 			regexp = "^.*" + chaine + ".*$"; //$NON-NLS-1$ //$NON-NLS-2$
-			// System.out.println(""+chaine+"<=>"+origine.get(i).getCode());
-			// System.out.println(Pattern.matches(regexp,origine.get(i).getCode()));
 
 			Pattern p = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE);
 			Matcher m = p.matcher(origine.get(i).getCode());
 
-			// if (Pattern.matches(regexp,origine.get(i).getCode())){
 			if (m.matches()) {
-				// System.out.println("On ajoute le type
-				// "+origine.get(i).getCode());
 
 				// ajout dans la liste filtrée
 				filtree.add(origine.get(i));
@@ -553,8 +519,6 @@ public class FiltrageTableType {
 
 		TableDataSurvey.listeFiltree = filtree;
 		// affichage de la liste filtree
-
-		// System.out.println(">>>>>>>>>"+TableDataSurvey.filtreTable);
 
 		razTable(TableDataSurvey.filtreTable);
 		creationTableSurvey();
@@ -570,19 +534,15 @@ public class FiltrageTableType {
 		origine = TableWS_Survey.refsWS;
 
 		nbre = origine.size();
-		// System.out.println("Nombre de refs = "+nbre);
 
 		// remplissage de la liste filtree
 		for (int i = 0; i < nbre; i++) {
 
-			// Pattern.matches(chaine,origine.get(i).getCode() )
-			// (Pattern.matches("^[1-9][0-9]*$", valeur))
 			regexp = "^.*" + chaine + ".*$"; //$NON-NLS-1$ //$NON-NLS-2$
 
 			Pattern p = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE);
 			Matcher m = p.matcher(origine.get(i));
 
-			// if (Pattern.matches(regexp,origine.get(i).getCode())){
 			if (m.matches()) {
 				System.out.println("On ajoute le type " + origine.get(i)); //$NON-NLS-1$
 
@@ -593,8 +553,6 @@ public class FiltrageTableType {
 
 		TableWS_Survey.listeFiltree = filtree;
 		// affichage de la liste filtree
-
-		// System.out.println(">>>>>>>>>"+TableWS_Survey.filtreTable);
 
 		razTable(TableWS_Survey.filtreTable);
 		creationTableWS_Survey();
@@ -642,9 +600,6 @@ public class FiltrageTableType {
 		// ajout listeners sur la table
 		table.addListener(SWT.MouseDown, new Listener() {
 			public void handleEvent(Event event) {
-				// int tmp =table.getSelectionIndex();
-
-				// System.out.println("index sélectionné ="+ tmp);
 
 			}
 		});

@@ -71,7 +71,6 @@ public class DataModel {
 		if (!fichier) {
 			// fichier campagne
 			initFichier(timeSeries, nomFich);
-			
 
 		} else {
 			initDossier(timeSeries, nomFich);
@@ -97,7 +96,6 @@ public class DataModel {
 
 	public static void initFichier(Boolean timeSeries, String nomFich) {
 		// acceder aux proprietes de survey
-		
 
 		if (inputModel != null) {
 			inputModel.release();
@@ -109,7 +107,6 @@ public class DataModel {
 		singleSurvey.setFile(nomFich);
 
 		initDesc();
-		
 
 	}
 
@@ -183,7 +180,7 @@ public class DataModel {
 		// attribut pattern fin donnees en accès direct
 
 		// si manuel -> direct sinon passer par propertyModel
-		
+
 		if (EditDesc.buttonIndicFinDonnees.getSelection()) {
 
 			// pattern
@@ -204,7 +201,6 @@ public class DataModel {
 			stationModel.setEndOnPattern(false);
 			stationModel.setRowNumber(EditDesc.nbreLignesMesures.getText());
 
-			
 		}
 
 		// on initialise les dataTypes, centers et parameters en prévision des
@@ -275,7 +271,7 @@ public class DataModel {
 
 			e.printStackTrace();
 		}
-		
+
 		survey.setRegionName(EditSurvey.textRegion.getText());
 
 		// Source de données
@@ -333,7 +329,6 @@ public class DataModel {
 
 			survey.addDataType(dataType);
 
-		
 		}
 
 		if (EditStation.loaded == 1) {
@@ -578,7 +573,6 @@ public class DataModel {
 
 		// décallage TU
 		propertyModel = stationModel.propertiesAt("offsetTU");
-		
 
 		if (EditStation.buttonTUSaisie.getSelection()) {
 			// if (true){
@@ -872,7 +866,6 @@ public class DataModel {
 
 		}
 
-		
 		if (ViewFile.checkBoxTempo.getSelection()) {
 			// DECLINAISON MAGNETIQUE
 			propertyModel = stationModel.getTimeSeriesModel().propertiesAt(
@@ -1161,8 +1154,6 @@ public class DataModel {
 		// reset systématique des parametres stockés dans le dataModel
 		stationModel.releaseParameterModels();
 
-	
-
 		for (int i = 0; i < nbreParam; i++) {
 			TypeData typeCourant = TableData.types.get(i);
 
@@ -1203,14 +1194,12 @@ public class DataModel {
 			// int nbre = parametersModels.length;
 			// Boolean found = false;
 
-			
-
 			stationModel.addParameterModel(parameterModel);
-			
+
 			/*
-			System.out.println(">>Ajout du paramètre " + typeCourant.getCode()
-					+ " ... OK");
-		*/
+			 * System.out.println(">>Ajout du paramètre " +
+			 * typeCourant.getCode() + " ... OK");
+			 */
 
 		}
 
@@ -1403,8 +1392,6 @@ public class DataModel {
 			survey = singleSurvey_modele.getModel();
 		}
 
-		
-
 		// injection des valeurs de l'IHM -> datamodel
 		// référence
 		EditSurvey.textCampagne.setText(survey.getReference());
@@ -1555,7 +1542,7 @@ public class DataModel {
 		} else {
 
 			// EditStation.buttonRefStationIncremente.setSelection(false); //pas
-			// obligatoire pour la première ligne? 
+			// obligatoire pour la première ligne?
 			EditStation.buttonRefStationIncremente.setSelection(false);
 			EditStation.buttonRefStationPos.setSelection(true);
 
@@ -1636,7 +1623,6 @@ public class DataModel {
 			HeaderFragment frag = propertyModel.getFragment();
 			HeaderFragment frag2 = propertyModel2.getFragment();
 
-			
 			Utils.calculPosxPosy(frag, EditStation.cursHistorique1);
 
 			int ligne1 = frag.getFirstLine();
@@ -1657,7 +1643,6 @@ public class DataModel {
 				EditStation.textHistoriqueAcqFin2.setText("");
 			} else {
 
-				
 				Utils.calculPosxPosy(frag2, EditStation.cursHistorique2);
 				// on a aussi rentré la ligne 2
 				int ligne2 = frag2.getFirstLine();
@@ -1683,7 +1668,7 @@ public class DataModel {
 		} else {
 			// calcul du surlignement souris
 			HeaderFragment frag = propertyModel.getFragment();
-			
+
 			Utils.calculPosxPosy(frag, EditStation.cursCommentaire);
 
 			EditStation.buttonCommentaireSaisie.setSelection(false);
@@ -1749,7 +1734,6 @@ public class DataModel {
 			} else {
 				// on a rentré aussi ligne 2
 
-				
 				Utils.calculPosxPosy(frag2, EditStation.cursEchant2);
 
 				int ligne2 = frag2.getFirstLine();
@@ -2221,7 +2205,7 @@ public class DataModel {
 
 	public static void main(String[] args) {
 		try {
-			
+
 			DateTimeFormat format = new DateTimeFormat("MMM dd yyyy");
 			format.toString();
 			Long dateLong = (Long) format.parseObject("JUN 02 2007");

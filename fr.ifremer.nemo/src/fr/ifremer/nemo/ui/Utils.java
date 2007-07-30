@@ -27,8 +27,6 @@ public class Utils {
 
 	public static int progression;
 
-	// avec regle dynamique
-
 	public static ArrayList<String> lignesBrutes; // lignes du texte
 
 	public static int[] taillesCumLignes;
@@ -46,8 +44,6 @@ public class Utils {
 	public static void insertTextFich(String fich, StyledText zone)
 			throws IOException {
 
-		// int maxLignes;
-
 		int nbreLignes, tailleLigne, tailleMax, nbreRegle, i, j, k, tmp, cumul, indexMax;
 		long tailleLigneOctets, tailleOctets, tailleOctetsTot;
 		String ligne;
@@ -59,15 +55,11 @@ public class Utils {
 		tailleOctets = tailleOctetsTot = tailleLigneOctets = 0;
 		nbreLignes = 0;
 
-		// initialisation du tableau de lignes en fonction des préférences de
-		// Nemo (nbre max de lignes)
-		// pour le moment 1000 max
 		lignesBrutes = new ArrayList<String>();
 		stringBuffer = new StringBuffer();
 
 		File objFich = new File(fich);
 		tailleOctetsTot = objFich.length();
-		// System.out.println("taille fichier ==>" + objFich.length());
 
 		// lecture et concaténation
 		BufferedReader entree = new BufferedReader(new FileReader(fich));
@@ -83,16 +75,11 @@ public class Utils {
 				stringBuffer.append("\n"); //$NON-NLS-1$
 
 				nbreLignes = nbreLignes + 1;
-				// System.out.println(nbreLignes % 50);
-				if ((nbreLignes % 100) == 0) {
-					// System.out.println("ligne lue : " + nbreLignes);
-				}
 
 			}
 
 		} while (ligne != null);
 		entree.close();
-		// System.out.println("Fin lecture fichier " + fich);
 
 		// calcul des tailles cumulées
 		taillesCumLignes = new int[nbreLignes];
@@ -108,17 +95,10 @@ public class Utils {
 
 		texteBrut = stringBuffer.toString();
 
-		// affichage
-		// System.out.println("Fin de insertText ()");
-
 		// affichage texte
 		// changement de font
 		font = new Font(Application.display, "Courier", 10, SWT.NORMAL); //$NON-NLS-1$
 		zone.setFont(font);
-
-		// zone.getHorizontalBar().
-
-		// zone.setText(texteFinal);
 
 		// log ok
 		ViewLog.styledTextLogErreurs.setText(Messages.getString("Utils.4")); //$NON-NLS-1$
@@ -149,31 +129,6 @@ public class Utils {
 		int taille;
 		taille = lignesBrutes.size();
 
-		/*
-		 * if (taille >= 1000){ for (int i =0; i<500;i++){
-		 * 
-		 * String tmp = lignesBrutes.get(i); stringBuffer.append(tmp);
-		 * //texteBrut = texteBrut + tmp; stringBuffer.append("\n"); //texteBrut =
-		 * texteBrut + "\n"; System.out.println(""+i/5+"%"); //
-		 * styledText.append(tmp); // styledText.append("\n"); }
-		 * 
-		 * 
-		 * 
-		 * for (int i =(taille-500); i<taille;i++){ String tmp =
-		 * lignesBrutes.get(i); stringBuffer.append(tmp);
-		 * stringBuffer.append("\n"); // texteBrut = texteBrut + tmp; //
-		 * texteBrut = texteBrut + "\n"; // styledText.append(tmp); //
-		 * styledText.append("\n"); System.out.println(""+(taille-i)/5+"%"); }
-		 * 
-		 * 
-		 * 
-		 * }else{
-		 * 
-		 * for (int i =0; i<taille;i++){ String tmp = lignesBrutes.get(i);
-		 * texteBrut = texteBrut + tmp; styledText.append(tmp);
-		 * styledText.append("\n"); } }
-		 */
-
 		for (int i = 0; i < taille; i++) {
 
 			String tmp = lignesBrutes.get(i);
@@ -192,10 +147,6 @@ public class Utils {
 		// la règle concaténée au début du texteBrut
 
 		texteBrut = ""; //$NON-NLS-1$
-
-		// ViewFich2.zone.setText(texteBrut);
-
-		// miseCouleurMot(22, 27, ViewFich2.zone);
 
 	}
 
@@ -239,16 +190,13 @@ public class Utils {
 					break;
 				}
 
-				// System.out.println("cumul = " + taillesCumLignes[i] + "i= " +
-				// i);
-
 			}
 
 			// remplissage ligne dans interface
 			ligne.setText("" + lign); //$NON-NLS-1$
 
 			deb = deb - taillesCumLignes[lign - 1] + 1; // debut reel sur ligne
-			// :
+
 			// nbre caracs par rapport
 			// debut de ligne
 			fi = fi - taillesCumLignes[lign - 1]; // fin reelle sur ligne
@@ -300,9 +248,6 @@ public class Utils {
 					break;
 				}
 
-				// System.out.println("cumul = " + taillesCumLignes[i] + " i= "
-				// + i);
-
 			}
 
 			// remplissage ligne dans interface
@@ -320,9 +265,6 @@ public class Utils {
 			TableData.debut = deb;
 			TableData.fin = fi;
 
-			// System.out.println("DEBUT data= " + TableData.debut + " FIN data=
-			// "
-			// + TableData.fin);
 			Utils.messageErreur("");
 		}
 	}
@@ -358,12 +300,7 @@ public class Utils {
 					break;
 				}
 
-				// System.out.println("cumul = " + taillesCumLignes[i] + "i= " +
-				// i);
-
 			}
-
-			// System.out.println("ligne depart = " + lignDepart);
 
 			// calcul ligne fin
 
@@ -384,8 +321,6 @@ public class Utils {
 				}
 
 			}
-
-			// System.out.println("ligne fin = " + lignFin);
 
 			// remplissage nbreLignes dans interface
 			nbre = (lignFin - lignDepart + 1); //$NON-NLS-1$
@@ -432,12 +367,7 @@ public class Utils {
 					break;
 				}
 
-				// System.out.println("cumul = " + taillesCumLignes[i] + "i= " +
-				// i);
-
 			}
-
-			// System.out.println("ligne depart = " + lignDepart);
 
 			// calcul ligne fin
 
@@ -467,24 +397,6 @@ public class Utils {
 			Utils.messageErreur("");
 		}
 	}
-
-	// public static void calculPosxPosy(HeaderFragment frag, Integer x, Integer
-	// y){
-	// //reconstitue la position x et y du surlignement souris à partir du
-	// fragment
-	//		
-	// int offsetDebut, offsetFin, ligneDebut, ligneFin;
-	//		
-	// ligneDebut = frag.getFirstLine();
-	// ligneFin = frag.getLastLine();
-	// offsetDebut = frag.getFirstCharOffset();
-	// offsetFin = frag.getLastCharOffset();
-	//		
-	// x = taillesCumLignes[ligneDebut - 1]+offsetDebut;
-	// y = taillesCumLignes[ligneFin - 1]+offsetFin;
-	//		
-	//		
-	// }
 
 	public static void calculPosxPosy(HeaderFragment frag, Cursor cursor) {
 		// reconstitue la position x et y du surlignement souris à partir du
@@ -557,8 +469,6 @@ public class Utils {
 				break;
 			}
 
-			// System.out.println("cumul = " + taillesCumLignes[i] + "i= " + i);
-
 		}
 
 		// System.out.println("ligne depart = " + lignDepart);
@@ -616,7 +526,7 @@ public class Utils {
 	public static void calculNbreLignesPuisRemplissageFragClic(
 			HeaderFragment frag, Cursor cursor) {
 		int deb, fi, lignDepart, lignFin, i, nbrelignes;
-		// int clicX, int clicY
+
 		// calcul nbre ligne/debut/fin en fonction de la zone de surlignement
 		// souris
 
@@ -631,6 +541,7 @@ public class Utils {
 		lignDepart = 1;
 		lignFin = 1;
 		// lignFin =frag.getFirstLine();
+
 		// calcul de la ligne en fonction de la valeur de x
 		// parcours du tableau des tailles de lignes cumulées
 
@@ -689,21 +600,6 @@ public class Utils {
 
 		}
 		calculOffsetDebOffsetFin(frag, cursor);
-
-		// calcul de l'offset réel sur la dernière ligne
-		// int cpt = fi;
-		// for (int j=lignDepart-1;j<lignFin-1;j++){
-		// cpt = cpt - Utils.lignesBrutes.get(j).length();
-		// }
-		// //en sortie de boucle, cpt a la valeur de l'offset de fin sur la
-		// dernière ligne du commentaire
-		// System.out.println("offset en ligne fin = "+cpt);
-		// System.out.println("ligne fin = "+lignFin);
-		// System.out.println("ligne debut = "+lignDepart);
-		//			
-		// if (cpt>0){cpt = cpt - (nbrelignes-1);}
-		// frag.setLastCharOffset(cpt);
-		// }
 
 	}
 
@@ -1107,9 +1003,6 @@ public class Utils {
 			ViewFile.nomFichier = directoryPath + "\\" + subfiles[0].getName(); //$NON-NLS-1$
 			ViewFile.nomRepertoire = directoryPath;
 
-			// System.out.println("Le chemin ==>" + directoryPath);
-			// System.out.println("Le fichier ==>" + ViewFile.nomFichier);
-
 			try {
 				Utils.insertTextFich(ViewFile.nomFichier,
 						ViewFile.textAreaDescription);
@@ -1120,22 +1013,6 @@ public class Utils {
 
 		}
 
-		// if (!directory.exists()) {
-		// System.out.println("Le fichier/répertoire '" + directoryPath
-		// + "' n'existe pas");
-		// } else if (!directory.isDirectory()) {
-		// System.out.println("Le chemin '" + directoryPath
-		// + "' correspond à un fichier et non à un répertoire");
-		// } else {
-		// File[] subfiles = directory.listFiles();
-		// String message = "Le répertoire '" + directoryPath + "' contient "
-		// + subfiles.length + " fichier"
-		// + (subfiles.length > 1 ? "s" : "");
-		// System.out.println(message);
-		// for (int i = 0; i < subfiles.length; i++) {
-		// System.out.println(subfiles[i].getName());
-		// }
-		// }
 	}
 
 	public static void messageErreur(String message) {
@@ -1146,17 +1023,11 @@ public class Utils {
 		StyleRange style = new StyleRange();
 		style.start = 0;
 		style.length = message.length();
-		// style.fontStyle = SWT.BOLD;
+
 		style.foreground = truc;
 
 		ViewLog.styledTextLogErreurs.setStyleRange(style);
 		ViewLog.tabFolderLog.setSelection(0);
-		/*
-		 * mettre en gras et en couleur only le texte du message !
-		 * message.length et ensuite new styleRange() de 0 à length
-		 * 
-		 * 
-		 */
 
 	}
 
@@ -1166,22 +1037,15 @@ public class Utils {
 
 		ViewLog.styledTextLogErreurs.append(message);
 		Color truc = new Color(Application.display, 255, 0, 0);
-		// ViewLog.styledTextLogErreurs.setLineBackground(0, 1, truc);
 
 		StyleRange style = new StyleRange();
 		style.start = 0;
 		style.length = ViewLog.styledTextLogErreurs.getText().length();
-		// style.fontStyle = SWT.BOLD;
+
 		style.foreground = truc;
 
 		ViewLog.styledTextLogErreurs.setStyleRange(style);
 		ViewLog.tabFolderLog.setSelection(0);
-		/*
-		 * mettre en gras et en couleur only le texte du message !
-		 * message.length et ensuite new styleRange() de 0 à length
-		 * 
-		 * 
-		 */
 
 	}
 
@@ -1189,22 +1053,15 @@ public class Utils {
 
 		ViewLog.styledTextLogErreurs.setText(message);
 		Color truc = new Color(Application.display, 0, 151, 0);
-		// ViewLog.styledTextLogErreurs.setLineBackground(0, 1, truc);
 
 		StyleRange style = new StyleRange();
 		style.start = 0;
 		style.length = ViewLog.styledTextLogErreurs.getText().length();
-		// style.fontStyle = SWT.BOLD;
+
 		style.foreground = truc;
 
 		ViewLog.styledTextLogErreurs.setStyleRange(style);
 		ViewLog.tabFolderLog.setSelection(0);
-		/*
-		 * mettre en gras et en couleur only le texte du message !
-		 * message.length et ensuite new styleRange() de 0 à length
-		 * 
-		 * 
-		 */
 
 	}
 
@@ -1212,22 +1069,15 @@ public class Utils {
 
 		ViewLog.styledTextLogErreurs.append(message);
 		Color truc = new Color(Application.display, 0, 151, 0);
-		// ViewLog.styledTextLogErreurs.setLineBackground(0, 1, truc);
 
 		StyleRange style = new StyleRange();
 		style.start = 0;
 		style.length = ViewLog.styledTextLogErreurs.getText().length();
-		// style.fontStyle = SWT.BOLD;
+
 		style.foreground = truc;
 
 		ViewLog.styledTextLogErreurs.setStyleRange(style);
 		ViewLog.tabFolderLog.setSelection(0);
-		/*
-		 * mettre en gras et en couleur only le texte du message !
-		 * message.length et ensuite new styleRange() de 0 à length
-		 * 
-		 * 
-		 */
 
 	}
 
@@ -1236,7 +1086,7 @@ public class Utils {
 		if (configuration == null) {
 			configuration = Configuration.getSingleton();
 		} else {
-			// configuration.save();
+
 			configuration.releaseSingleton();
 			configuration = Configuration.getSingleton();
 		}
@@ -1345,8 +1195,7 @@ public class Utils {
 
 		if (EditData.sectionTotal != null) {
 			// effacement des boutons valider/expand/init serveur
-			// EditData.buttonExpand.dispose();
-			// EditData.buttonExpand2.dispose();
+
 			EditData.buttonValidate.dispose();
 			EditData.buttonRAZ.dispose();
 

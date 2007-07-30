@@ -93,12 +93,6 @@ public class EditStation {
 
 	public static Boolean okApresReset;
 
-	// public static int posxCommentaire, posyCommentaire, posxEchantillon1,
-	// posyEchantillon1, posxEchantillon2, posyEchantillon2, posxHistoriqueAcq1,
-	// posyHistoriqueAcq1, posxHistoriqueAcq2, posyHistoriqueAcq2;
-
-	// /////////////////////////////////////////
-
 	public static ArrayList<Section> listeSectionsStation, listeSectionsParam;
 
 	public static ArrayList<String> listeSectionsNoms, listeTypeDonnees;
@@ -121,8 +115,6 @@ public class EditStation {
 	public static Cursor cursCommentaire, cursEchant1, cursEchant2,
 			cursHistorique1, cursHistorique2;
 
-	// //////////////////////////////////////////
-
 	public static void affichageEdition() {
 		// initialisation zone édition pour étape description de fichier
 
@@ -131,17 +123,6 @@ public class EditStation {
 		cursEchant2 = new Cursor();
 		cursHistorique1 = new Cursor();
 		cursHistorique2 = new Cursor();
-
-		// posxCommentaire =0;
-		// posyCommentaire=0;
-		// posxEchantillon1=0;
-		// posyEchantillon1=0;
-		// posxEchantillon2=0;
-		// posyEchantillon2=0;
-		// posxHistoriqueAcq1=0;
-		// posyHistoriqueAcq1=0;
-		// posxHistoriqueAcq2=0;
-		// posyHistoriqueAcq2=0;
 
 		formEdition = ViewEdit.formEdition;
 		ViewLog.aideStation();
@@ -165,9 +146,6 @@ public class EditStation {
 		 * réafficher par la suite dans DrawingBack.
 		 */
 
-		// ViewEdit.formEdition.dispose();
-		// formEdition =
-		// ViewEdit.toolkitEdition.createScrolledForm(ViewEdit.top);
 		ViewEdit.formEdition.getBody().setLayout(new GridLayout());
 		ViewEdit.formEdition.setText(Messages.getString("EditStation.1")); //$NON-NLS-1$
 
@@ -304,10 +282,6 @@ public class EditStation {
 			// }
 		}
 
-		// section séries temporelles
-		// DrawingStation.sectionSerieTempo();
-
-		// buttonExpand2.setParent(ViewEdit.formEdition.getBody());
 		buttonExpand2.setText("+"); //$NON-NLS-1$
 
 		ViewEdit.formEdition.reflow(true);
@@ -361,7 +335,7 @@ public class EditStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						// System.out.println("expand/collapse all");
+
 						// raz de la valeur manuelle
 						int i;
 
@@ -404,10 +378,9 @@ public class EditStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						// System.out.println("validation"); //
 
 						// on passe en ppar l'étape à laquelle on se trouve
-						Etape.etape(2);
+						// Etape.etape(2);
 
 						Etape.validationStation();
 
@@ -421,7 +394,6 @@ public class EditStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						// System.out.println("RAZ"); //
 
 						razText(listeTextStation);
 
@@ -438,9 +410,7 @@ public class EditStation {
 		// affichage courant
 		ViewFile.affiche = 2;
 
-		// remplissage de l'IHM par le modèle chargé ?
-		// System.out.println("Valeur de DataModel.ouverture = "+
-		// DataModel.ouverture);
+		// remplissage de l'IHM par le modèle chargé
 
 		if (DataModel.ouverture) {
 			DataModel.fillStation();
@@ -466,11 +436,9 @@ public class EditStation {
 		for (i = 0; i <= EditStation.listeSectionsStation.size() - 1; i++) {
 
 			EditStation.listeSectionsStation.get(i).setExpanded(true);
-			// System.out.println("===> " +
-			// EditStation.listeSectionsStation.get(i).getText());
+
 			EditStation.listeSectionsStation.get(i).setParent(s);
-			// System.out.println("effacement zone edition etape description
-			// station ==> ok");
+
 		}
 
 		// titre à vide
@@ -495,15 +463,6 @@ public class EditStation {
 
 		// effacement des boutons valider/expand/init serveur
 		DataType dataType;
-		// initTypes();
-
-		/*
-		 * if (DataModel.ouverture){ dataType =
-		 * DataModel.station_modele.getDataType(); }else{ //re-remplissage et
-		 * sélection du type de la station dataType =
-		 * DataModel.station.getDataType();} String code = dataType.getCode();
-		 * comboRefStationType.add(code, 0); comboRefStationType.select(0);
-		 */
 
 		EditStation.buttonValidate.setParent(s.getBody());
 		EditStation.buttonRAZ.setParent(s.getBody());
@@ -513,11 +472,9 @@ public class EditStation {
 		for (i = 0; i <= EditStation.listeSectionsStation.size() - 1; i++) {
 
 			EditStation.listeSectionsStation.get(i).setExpanded(false);
-			// System.out.println("===> " +
-			// EditStation.listeSectionsStation.get(i).getText());
+
 			EditStation.listeSectionsStation.get(i).setParent(s.getBody());
-			// System.out.println("reaffichage zone edition etape description
-			// station ==> ok");
+
 		}
 
 		// EditStation.buttonExpand2.setParent(s.getBody());
@@ -755,9 +712,6 @@ public class EditStation {
 			liste.get(i).addModifyListener(new ModifyListener() {
 				public void modifyText(ModifyEvent event) {
 					// on modifie la valeur du champ texte
-					// Text text = (Text) event.widget;
-					// System.out.println(text.getText());
-
 					// dès qu'on modifie une valeur, on invalide l'étape
 					// remise du nom onglet à valeur par défaut
 
@@ -886,25 +840,10 @@ public class EditStation {
 
 	}
 
-	/*
-	 * public static void initComboType(){ //remplissage de la combobox avec
-	 * code + libellé séparés par " - " ==> "HO9 - Bouteilles" int taille;
-	 * taille = DataModel.listeWSDataTypes.length;
-	 * 
-	 * for (int i =0; i<taille; i++){ String chaine = ""; //$NON-NLS-1$
-	 * 
-	 * chaine = chaine + DataModel.listeWSDataTypes[i].getCode() + " - " +
-	 * DataModel.listeWSDataTypes[i].getLibelle(); //$NON-NLS-1$
-	 * comboRefStationType.add(chaine);
-	 *  }
-	 *  }
-	 */
-
 	public static void initTypes() {
-		// Shell shell = new Shell();
 
 		comboRefStationType.removeAll();
-		// comboRefStationType = new Combo(shell, SWT.READ_ONLY);
+
 		// remplissage avec les dataTypes de la campagne
 
 		int taille = TableDataSurvey.types.size();
@@ -1011,10 +950,6 @@ public class EditStation {
 				parser.parseExpression(textFreqEchantConv.getText());
 				double resultJEP = parser.getValue();
 
-				// String resultat =
-				// String.format(ViewFile.tableData.getItem(i).getText(6),
-				// resultJEP);
-
 				EditStation.textFreqEchantTest.setText("" + resultJEP); //$NON-NLS-1$
 
 			}
@@ -1040,10 +975,6 @@ public class EditStation {
 				parser.addVariable("x", Float.valueOf(string)); //$NON-NLS-1$
 				parser.parseExpression(textFreqEchantConv.getText());
 				double resultJEP = parser.getValue();
-
-				// String resultat =
-				// String.format(ViewFile.tableData.getItem(i).getText(6),
-				// resultJEP);
 
 				EditStation.textFreqEchantTest.setText("" + resultJEP); //$NON-NLS-1$
 

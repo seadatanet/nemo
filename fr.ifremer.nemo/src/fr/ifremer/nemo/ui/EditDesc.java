@@ -91,16 +91,12 @@ public class EditDesc {
 			 * les réafficher par la suite dans DrawingBack.
 			 */
 
-			// ViewEdit.formEdition.dispose();
-			// formEdition =
-			// ViewEdit.toolkitEdition.createScrolledForm(ViewEdit.top);
 			GridLayout gridlayout = new GridLayout();
 			gridlayout.numColumns = 1;
 			formEdition.getBody().setLayout(gridlayout);
 
 			formEdition.setText(Messages
 					.getString("EditDesc.descriptiondeFichier")); //$NON-NLS-1$
-			// System.out.println("ok editDesc"); //$NON-NLS-1$
 
 			// init de la arrayList des sections
 			listeSectionsDesc = new ArrayList<Section>();
@@ -131,8 +127,6 @@ public class EditDesc {
 			formEdition.reflow(true);
 			// formEdition.
 
-			// System.out.println("ok editDesc 2"); //$NON-NLS-1$
-
 			// initialisation liste des sections de la partie description
 			// fichier
 
@@ -146,15 +140,6 @@ public class EditDesc {
 				EditDesc.lignesEnteteFichier.setText("0");
 			}
 
-			// section entete station
-			// Drawing.sectionRadioManuelRadioSimpleInjectLigneDebutFinInject(formEdition,
-			// "Entête Station ", "Donnez le nombre de lignes de l'entête
-			// station ou précisez que le nombre d'octets est présent sur la
-			// première ligne de données", sectionEnteteStation,
-			// lignesEnteteStation , buttonLignesEnteteStation, "Nombre de
-			// lignes", "Nombre octets sur 1ere ligne données",
-			// octetsEnteteStationLigne, octetsEnteteStationDebut,
-			// octetsEnteteStationFin);
 			Drawing
 					.sectionLabelTextInjectNbreLignes(
 							formEdition,
@@ -167,29 +152,14 @@ public class EditDesc {
 							Messages.getString("EditDesc.finStation"), Messages.getString("EditDesc.nbreLignesFinStation"), sectionFinStation, lignesFinStation); //$NON-NLS-1$ //$NON-NLS-2$
 			lignesFinStation.setText("0");
 
-			// Drawing.sectionManuelLigneDebutFinInject("test", "blabla
-			// description", sectionTest, enteteDonnees, upletDonnees,
-			// finDonnees, indicFinDonnees, buttonLignesEnteteStation);
-
-			// section rupture données + remplissage du combo list
-			// Drawing.sectionComboLigneDebutFinInject(formEdition,"Indicateur
-			// de Fin de Données ", "Indiquez ici quel est l'indicateur de
-			// rupture de données, ou surlignez les lignes de mesures puis
-			// cliquez sur injecter", sectionRuptureDonnees,
-			// ruptureDonneesNoLigne, ruptureDonneesDebut, ruptureDonneesFin,
-			// buttonIndicFinDonnees, comboIndicRuptureDonnees);
 			Drawing
 					.sectionComboInjectNbreLignes(
 							formEdition,
 							Messages.getString("EditDesc.indicFinDonnees"), Messages.getString("EditDesc.indiquezIndicFinDonnees"), sectionRuptureDonnees, nbreLignesMesures, buttonIndicFinDonnees, comboIndicRuptureDonnees); //$NON-NLS-1$ //$NON-NLS-2$
-			// comboIndicRuptureDonnees.add("");
-			// comboIndicRuptureDonnees.add(Messages.getString("EditDesc.ligneVide"));
+
 			// //$NON-NLS-1$
 			comboIndicRuptureDonnees.add("EOF"); //$NON-NLS-1$
 			comboIndicRuptureDonnees.add("END"); //$NON-NLS-1$
-
-			// Drawing.sectionLabelText("automatique","numéro de ligne",
-			// sectionTest2, indicFinDonnees);
 
 			// boutons collapse all / expand all
 			// buttonExpandDesc2.setParent(formEdition.getBody());
@@ -294,15 +264,10 @@ public class EditDesc {
 					.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 						public void widgetSelected(
 								org.eclipse.swt.events.SelectionEvent e) {
-							// System.out.println("validation"); //
 
 							// on passe en ppar l'étape à laquelle on se trouve
-							Etape.etape(0);
+							// Etape.etape(0);
 
-							// razEdition();
-
-							// EditData.affichageEdition();
-							// EditStation.affichageEdition();
 							Etape.validationDesc();
 
 						}
@@ -312,8 +277,6 @@ public class EditDesc {
 					.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 						public void widgetSelected(
 								org.eclipse.swt.events.SelectionEvent e) {
-							// System.out.println("RAZ"); // TODO Auto-generated
-							// Event stub widgetSelected() //$NON-NLS-1$
 
 							razText(listeTextDesc);
 
@@ -359,8 +322,7 @@ public class EditDesc {
 
 			EditDesc.listeSectionsDesc.get(i).setExpanded(true);
 			EditDesc.listeSectionsDesc.get(i).setParent(s);
-			// System.out.println("effacement zone edition etape description
-			// fichier ==> ok"); //$NON-NLS-1$
+
 		}
 
 		// effacement titre formulaire
@@ -403,8 +365,7 @@ public class EditDesc {
 
 			EditDesc.listeSectionsDesc.get(i).setExpanded(false);
 			EditDesc.listeSectionsDesc.get(i).setParent(s.getBody());
-			// System.out.println("Affichage section etape description fichier
-			// ==> ok"); //$NON-NLS-1$
+
 		}
 
 		// buttonExpandDesc2.setParent(s.getBody());
@@ -434,7 +395,6 @@ public class EditDesc {
 		sectionTest = new Section(shell, SWT.NONE);
 		sectionTest2 = new Section(shell, SWT.NONE);
 
-		// System.out.println("init section ok"); //$NON-NLS-1$
 	}
 
 	public static void initText() {
@@ -506,8 +466,6 @@ public class EditDesc {
 			liste.get(i).addModifyListener(new ModifyListener() {
 				public void modifyText(ModifyEvent event) {
 					// on modifie la valeur du champ texte
-					// Text text = (Text) event.widget;
-					// System.out.println(text.getText());
 
 					// dès qu'on modifie une valeur, on invalide l'étape
 					// remise du nom onglet à valeur par défaut
@@ -564,18 +522,6 @@ public class EditDesc {
 
 		Utils.messageErreur("");
 
-		/*
-		 * if (EditSurvey.validee == 1){ //EditSurvey.
-		 * 
-		 * ViewFile.tabItem1.setText(Messages.getString("EditSurvey.4"));
-		 * //EditSurvey.loaded = 1; } if (EditStation.validee == 1){
-		 * //EditStation.validee = 0;
-		 * ViewFile.tabItem2.setText(Messages.getString("EditStation.1"));
-		 * //EditStation.loaded = 1; } if (EditData.validee == 1){
-		 * //EditData.validee = 0;
-		 * ViewFile.tabItem3.setText(Messages.getString("EditData.1"));
-		 * //EditData.loaded = 1; }
-		 */
 	}
 
 	public static void nomNemo() {
@@ -583,7 +529,6 @@ public class EditDesc {
 		if (ViewFile.dossierCampagne) {
 			// dossier campagne
 
-			// System.out.println(">>>>"+ViewFile.nomRepertoire); //$NON-NLS-1$
 			File fich = new File(ViewFile.nomRepertoire);
 			if (DataModel.ouverture) {
 				ApplicationWorkbenchWindowAdvisor.configurer_titre

@@ -8,14 +8,7 @@ import org.eclipse.ui.part.ViewPart;
 
 public class ViewEdit extends ViewPart {
 
-	public static final String ID = "fr.ifremer.nemo.ui.ViewEdit"; // TODO
-																	// Needs to
-																	// be
-																	// whatever
-																	// is
-																	// mentioned
-																	// in
-																	// plugin.xml
+	public static final String ID = "fr.ifremer.nemo.ui.ViewEdit";
 
 	public static Composite top;
 
@@ -29,20 +22,17 @@ public class ViewEdit extends ViewPart {
 	public void createPartControl(Composite parent) {
 		// TODO Raccord de méthode auto-généré
 		top = parent;
-		// top = new Composite(parent, SWT.NONE);
 
 		parent.setLayout(new FillLayout());
 
 		toolkitEdition = new FormToolkit(parent.getDisplay());
 
 		formEdition = toolkitEdition.createScrolledForm(parent);
-		// formEdition.setText("init debut");
 
 	}
 
 	@Override
 	public void setFocus() {
-		// TODO Raccord de méthode auto-généré
 
 	}
 

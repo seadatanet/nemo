@@ -8,5 +8,6 @@
 package fr.ifremer.nautilus.metadata;
 
 public interface NautilusSurveyWS extends java.rmi.Remote {
-    public fr.ifremer.nautilus.metadata.WSSurvey getSurvey(java.lang.String in0) throws java.rmi.RemoteException;
+	public fr.ifremer.nautilus.metadata.WSSurvey getSurvey(java.lang.String in0)
+			throws java.rmi.RemoteException;
 }

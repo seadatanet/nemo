@@ -40,7 +40,7 @@ public class ViewLog extends ViewPart {
 
 	@Override
 	public void createPartControl(Composite parent) {
-		// TODO Raccord de méthode auto-généré
+		// 
 		top = new Composite(parent, SWT.NONE);
 		top.setLayout(new FillLayout());
 		createCompositeLogGauche();
@@ -50,7 +50,7 @@ public class ViewLog extends ViewPart {
 
 	@Override
 	public void setFocus() {
-		// TODO Raccord de méthode auto-généré
+		// 
 
 	}
 
@@ -64,21 +64,6 @@ public class ViewLog extends ViewPart {
 		createTabFolderLog();
 	}
 
-	/*
-	 * 
-	 * 
-	 * private void createCompositeLogDroite() { compositeLogDroite = new
-	 * Composite(top, SWT.NONE); compositeLogDroite.setLayout(new RowLayout());
-	 * buttonLogBack = new Button(compositeLogDroite, SWT.NONE);
-	 * buttonLogBack.setText("Précédent"); buttonLogBack.setEnabled(false);
-	 * buttonLogNext = new Button(compositeLogDroite, SWT.NONE);
-	 * buttonLogNext.setText("Suivant"); buttonLogConversion = new
-	 * Button(compositeLogDroite, SWT.NONE);
-	 * buttonLogConversion.setText("Conversion");
-	 * buttonLogConversion.setEnabled(false); }
-	 * 
-	 */
-
 	/**
 	 * This method initializes tabFolderLog
 	 * 
@@ -89,11 +74,7 @@ public class ViewLog extends ViewPart {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("widgetSelected()"); // TODO
-																// Auto-generated
-																// Event stub
-																// widgetSelected()
-																// //$NON-NLS-1$
+						System.out.println("widgetSelected()");
 					}
 				});
 		TabItem tabItem = new TabItem(tabFolderLog, SWT.NONE);

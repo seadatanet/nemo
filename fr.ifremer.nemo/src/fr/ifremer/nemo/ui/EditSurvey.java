@@ -34,8 +34,6 @@ import fr.ifremer.nemo.util.Formatter;
 public class EditSurvey {
 	// fonctions de remplissage de la zone d'édition pour les campagnes
 
-	// /////////////////////////////////////////
-
 	public static Section sectionReference, sectionLocalisation, sectionSource,
 			sectionCentre, sectionType, sectionCommentaire;
 
@@ -74,8 +72,6 @@ public class EditSurvey {
 
 	public static Shell shell;
 
-	// //////////////////////////////////////// //
-
 	public static void affichageEdition() {
 		// initialisation zone édition pour étape description de fichier
 
@@ -85,7 +81,6 @@ public class EditSurvey {
 		okApresReset = true;
 		// affichage du texte dans la zone de gauche
 
-		// Utils.remplissageTexte(ViewFile.styledTextCampagne);
 		ViewFile.styledTextCampagne.setText(Utils.texteBrut);
 
 		// raz message erreur
@@ -119,9 +114,6 @@ public class EditSurvey {
 		 * réafficher par la suite dans DrawingBack.
 		 */
 
-		// ViewEdit.formEdition.dispose();
-		// formEdition =
-		// ViewEdit.toolkitEdition.createScrolledForm(ViewEdit.top);
 		ViewEdit.formEdition.getBody().setLayout(new GridLayout());
 		ViewEdit.formEdition.setText(Messages.getString("EditSurvey.4")); //$NON-NLS-1$
 
@@ -161,7 +153,6 @@ public class EditSurvey {
 
 		formEdition.redraw();
 		formEdition.reflow(true);
-		// formEdition.
 
 		formEdition.reflow(true);
 
@@ -198,11 +189,6 @@ public class EditSurvey {
 		listeText.clear();
 		listeNoms.clear();
 
-		/*
-		 * Text label = new Text(ViewEdit.formEdition.getBody(), SWT.BORDER);
-		 * label.setText("hop");
-		 */
-
 		ViewEdit.formEdition.reflow(true);
 
 		// section source des donnees
@@ -224,8 +210,7 @@ public class EditSurvey {
 		// section centre archivage
 		listeText.add(textCentre);
 		listeNoms.add(Messages.getString("EditSurvey.27")); //$NON-NLS-1$
-		// listeText.add(textConfidentiel);
-		// listeNoms.add(Messages.getString("EditSurvey.28")); //$NON-NLS-1$
+
 		Drawing
 				.sectionNlabelsNtextConfidentialite(
 						sectionCentre,
@@ -261,13 +246,12 @@ public class EditSurvey {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						// System.out.println("expand/collapse all"); //
+
 						// raz de la valeur manuelle
 						int i;
 
 						Shell s = new Shell();
 
-						// System.out.println("expand ? = " + expand);
 						for (i = 0; i <= EditSurvey.listeSectionsSurvey.size() - 1; i++) {
 
 							if (expand == 0) {
@@ -282,13 +266,13 @@ public class EditSurvey {
 
 						}
 						if (expand == 0) {
-							// System.out.println("expand passe à 1");
+
 							buttonExpand.setText("-"); //$NON-NLS-1$
 							buttonExpand2.setText("-"); //$NON-NLS-1$
 							expand = 1;
 						} else {
 							expand = 0;
-							// System.out.println("expand passe à 0");
+
 							buttonExpand.setText("+"); //$NON-NLS-1$
 							buttonExpand2.setText("+"); //$NON-NLS-1$
 						}
@@ -303,13 +287,12 @@ public class EditSurvey {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						// System.out.println("expand/collapse all"); //
+
 						// raz de la valeur manuelle
 						int i;
 
 						Shell s = new Shell();
 
-						// System.out.println("expand ? = " + expand);
 						for (i = 0; i <= EditSurvey.listeSectionsSurvey.size() - 1; i++) {
 
 							if (expand == 0) {
@@ -324,13 +307,13 @@ public class EditSurvey {
 
 						}
 						if (expand == 0) {
-							// System.out.println("expand passe à 1");
+
 							buttonExpand.setText("-"); //$NON-NLS-1$
 							buttonExpand2.setText("-"); //$NON-NLS-1$
 							expand = 1;
 						} else {
 							expand = 0;
-							// System.out.println("expand passe à 0");
+
 							buttonExpand.setText("+"); //$NON-NLS-1$
 							buttonExpand2.setText("+"); //$NON-NLS-1$
 						}
@@ -345,10 +328,9 @@ public class EditSurvey {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						// System.out.println("validation"); //
 
 						// on passe en ppar l'étape à laquelle on se trouve
-						Etape.etape(1);
+						// Etape.etape(1);
 
 						Etape.validationSurvey();
 
@@ -362,7 +344,6 @@ public class EditSurvey {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						// System.out.println("RAZ"); //
 
 						razText(listeTextSurvey);
 
@@ -373,7 +354,7 @@ public class EditSurvey {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						// System.out.println("WebService");
+
 						init_webService();
 					}
 				});
@@ -382,7 +363,7 @@ public class EditSurvey {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						// System.out.println("description XML");
+
 						ouvertureDescriptionXML();
 					}
 				});
@@ -397,9 +378,7 @@ public class EditSurvey {
 		// affichage courant
 		ViewFile.affiche = 1;
 
-		// remplissage de l'IHM par le modèle chargé ?
-		// System.out.println("Valeur de DataModel.ouverture = "+
-		// DataModel.ouverture);
+		// remplissage de l'IHM par le modèle chargé
 
 		if (DataModel.ouverture) {
 			DataModel.fillSurvey();
@@ -493,26 +472,6 @@ public class EditSurvey {
 
 		new SWTProgressWS().run();
 
-		/*
-		 * if (ViewFile.dossierCampagne){ SWTProcessWS.dossier = true; try {
-		 * DataModel.dirSurvey.getModel().fillFromSISMER(reference); } catch
-		 * (MalformedURLException e) { //
-		 * Utils.messageErreur(Messages.getString("EditSurvey.48"));
-		 * //$NON-NLS-1$ e.printStackTrace(); } catch (RemoteException e) { //
-		 * Utils.messageErreur(Messages.getString("EditSurvey.49"));
-		 * //$NON-NLS-1$ e.printStackTrace(); } catch (ServiceException e) { //
-		 * Utils.messageErreur(Messages.getString("EditSurvey.50"));
-		 * //$NON-NLS-1$ e.printStackTrace(); } }else{ try {
-		 * SWTProcessWS.dossier = false;
-		 * DataModel.singleSurvey.getModel().fillFromSISMER(reference); } catch
-		 * (MalformedURLException e) {
-		 * Utils.messageErreur(Messages.getString("EditSurvey.51"));
-		 * //$NON-NLS-1$ e.printStackTrace(); } catch (RemoteException e) {
-		 * Utils.messageErreur(Messages.getString("EditSurvey.52"));
-		 * //$NON-NLS-1$ e.printStackTrace(); } catch (ServiceException e) {
-		 * Utils.messageErreur(Messages.getString("EditSurvey.53"));
-		 * //$NON-NLS-1$ e.printStackTrace(); } }
-		 */
 		// mise à jour de l'onglet courant
 		majApresWS();
 
@@ -525,7 +484,6 @@ public class EditSurvey {
 
 		// remplissage du dataModel à partir des valeurs du fichier XML de
 		// description
-		// System.out.println("Menu open xml");
 
 		// vérifier que un fichier est chargé avant d'ouvrir un modèle
 		if ((EditDesc.validee != 1) && (EditSurvey.loaded != 1)) {
@@ -566,7 +524,6 @@ public class EditSurvey {
 				Survey survey = new Survey();
 				survey.importFromXML(fichier);
 
-				// DataModel.dirSurvey.getModel().importFromXML(fichier);
 				DataModel.dirSurvey.setModel(survey);
 
 			} catch (FileNotFoundException e) {
@@ -585,13 +542,11 @@ public class EditSurvey {
 			try {
 				DataModel.singleSurvey.releaseModel();
 
-				// getModel().releaseDataTypes();
 				Survey survey = new Survey();
 				survey.importFromXML(fichier);
 
 				DataModel.singleSurvey.setModel(survey);
 
-				// DataModel.singleSurvey.getModel().importFromXML(fichier);
 				DataModel.singleSurvey.getModel();
 			} catch (FileNotFoundException e) {
 				// 
@@ -611,7 +566,6 @@ public class EditSurvey {
 	}
 
 	public static void majApresWS() {
-		// System.out.println("Remplissage onglet survey");
 
 		Survey survey;
 		if (ViewFile.dossierCampagne) {
@@ -721,16 +675,12 @@ public class EditSurvey {
 
 				TableDataSurvey.types.add(typeSurvey);
 
-				// System.out.println("TypeSurvey " +typeSurvey.getCode()+"
-				// ajouté");
-
 			}
 		}
 
 		EditSurvey.razEdition();
 		EditSurvey.DrawingBack();
 
-		// ////////////////////////////////////////
 		// refresh de la liste des dataTypes
 		TableDataSurvey.razTableData();
 		TableDataSurvey.creationTable();
@@ -760,10 +710,6 @@ public class EditSurvey {
 			}
 		}
 
-		// ////////////////////////////////////////
-
-		// System.out.println("Fin remplissage onglet Survey");
-
 	}
 
 	public static void razEdition() {
@@ -785,11 +731,9 @@ public class EditSurvey {
 		for (i = 0; i <= EditSurvey.listeSectionsSurvey.size() - 1; i++) {
 
 			EditSurvey.listeSectionsSurvey.get(i).setExpanded(true);
-			// System.out.println("===> " +
-			// EditSurvey.listeSectionsSurvey.get(i).getText());
+
 			EditSurvey.listeSectionsSurvey.get(i).setParent(s);
-			// System.out.println("effacement zone edition etape description
-			// campagne ==> ok");
+
 		}
 
 		// effacement titre formulaire
@@ -806,8 +750,6 @@ public class EditSurvey {
 			liste.get(i).addModifyListener(new ModifyListener() {
 				public void modifyText(ModifyEvent event) {
 					// on modifie la valeur du champ texte
-					// Text text = (Text) event.widget;
-					// System.out.println(text.getText());
 
 					// dès qu'on modifie une valeur, on invalide l'étape
 					// remise du nom onglet à valeur par défaut
@@ -852,11 +794,9 @@ public class EditSurvey {
 		for (i = 0; i <= EditSurvey.listeSectionsSurvey.size() - 1; i++) {
 
 			EditSurvey.listeSectionsSurvey.get(i).setExpanded(false);
-			// System.out.println("===> " +
-			// EditSurvey.listeSectionsSurvey.get(i).getText());
+
 			EditSurvey.listeSectionsSurvey.get(i).setParent(s.getBody());
-			// System.out.println("re-affichage zone edition etape description
-			// campagne ==> ok");
+
 		}
 
 		// EditSurvey.buttonExpand2.setParent(s.getBody());
@@ -980,7 +920,6 @@ public class EditSurvey {
 		TableDataSurvey.razTableData();
 
 		// refresh de la table
-		// initTable();
 		TableDataSurvey.creationTable();
 
 		Composite c = EditSurvey.sectionType;

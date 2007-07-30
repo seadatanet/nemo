@@ -15,1206 +15,1329 @@ import org.xml.sax.SAXException;
 
 /**
  * Class StationModel
- *
+ * 
  * Modèle de station utilisé dans la campagne
- *
- * @author	Gerard BUNEL
+ * 
+ * @author Gerard BUNEL
  */
-public  class StationModel
-    implements
-       Cloneable,
-       PathElementHandler,
-       SAXConsumer {
-
-  /**
-   * Nombre de lignes entre la fin des donnees et le debut de la station suivante
-   */
-  protected int  _endData;
-
-  /**
-   * Motif de fin de station
-   */
-  protected String  _endDataPattern;
-
-  /**
-   * Booléen indiquant si la fin de station doit être détectée par un motif. 
-   * S'il est à false, l'information de fin de station est obtenue à l'aide de l'attribut endData
-   */
-  protected boolean  _endOnPattern;
-
-  /**
-   * Definit si le numero de reference est automatiquement incremente
-   */
-  protected boolean  _incrementRef;
-
-  /**
-   * Indique si le fichier correspond à un fichier dont les metadata station se trouvent dans 
-   * la première ligne des données
-   */
-  protected boolean  _metaInData;
-
-  /**
-   * Nombre de ligne du header Station
-   */
-  protected int  _numberOfLines;
-
-  protected transient int  _ref;
-
-  /**
-   * Nombre de mesures réalisées sur la station
-   */
-  protected int  _rowNumber;
-
-  /**
-   * Station servant de modèle pour stocker les informations de l'entête station
-   */
-  protected Station _model;
-
-  protected PropertyModel _referenceProperty;
-
-  /**
-   * Liste des propriété permettant de récupérer les informations de l'entête station
-   */
-  protected java.util.Map<String, PropertyModel> _properties;
-
-  protected TimeSeriesModel _timeSeriesModel;
-
-  /**
-   * Liste, ordonnée, des paramètres mesurés sur la station
-   */
-  protected java.util.List<ParameterModel> _parameterModels;
-
-  /**
-   * Modèle pour les informations propres aux séries temporelles. Optionnel
-   */
-  protected HorodatedParameterModel _timestampModel;
-
-  public StationModel() {
-    _endDataPattern = "";
-    _model = null;
-    _parameterModels = new java.util.ArrayList<ParameterModel>();
-    _properties = new java.util.LinkedHashMap<String, PropertyModel>();
-    _referenceProperty = null;
-    _timeSeriesModel = null;
-    _timestampModel = null;
-  }
-
-    /**
-     *
-     * @param	isTimeSeries 	
-     */
-  public StationModel ( boolean isTimeSeries) {
-    this();
-    setModel( new Station(isTimeSeries));
-    if (isTimeSeries) {
-    	setTimeSeriesModel( new TimeSeriesModel(this));
-    	setTimestampModel( new HorodatedParameterModel());
-    }
-    initProperties();
-  }
-
-  /**
-   * 
-   * Build object from its XML defintion
-   *
-   * @param  a_URI  Element Namespace (SAX 2)
-   * @param  a_LocalName  Tag name
-   * @param  a_QName  qualified tag name
-   * @param  a_Attributes   XML Element attributes
-   * @return  SAXConsumer
-   *
-   */
-  public static SAXConsumer fromElement(String a_URI, String a_LocalName, String a_QName, Attributes a_Attributes) throws SAXException {
-    StationModel tmp = new StationModel();
-    tmp.buildFromElement( a_URI,  a_LocalName,  a_QName,  a_Attributes);
-    return (SAXConsumer)tmp;
-  }
-
-  /**
-   * 
-   * Retrieve attributes values from their XML defintion
-   *
-   * @param  a_URI  Element Namespace (SAX 2)
-   * @param  a_LocalName  Tag name
-   * @param  a_QName  qualified tag name
-   * @param  a_Attributes   XML Element attributes
-   *
-   */
-  public void buildFromElement(String a_URI, String a_LocalName, String a_QName, Attributes a_Attributes) throws SAXException {
-    String tmp;
-    if ((tmp = a_Attributes.getValue("lineNumber")) != null) {
-      setNumberOfLines(tmp);
-    }
-    if ((tmp = a_Attributes.getValue("endOnPattern")) != null) {
-      setEndOnPattern(tmp);
-    }
-  }
-
-  /**
-   * 
-   * A new XML Element as been found. Parse it.
-   *
-   * @param  a_URI  XML Namespace (SAX 2)
-   * @param  a_LocalName  Tag name
-   * @param  a_QName  Qualified tag name
-   * @param  a_Attributes XML Element attributes
-   * @return  SAXConsumer
-   *
-   */
-  public SAXConsumer consumeElement(String a_URI, String a_LocalName, String a_QName, Attributes a_Attributes) throws SAXException {
-    if (a_LocalName.equals("incrementRef")) {
-      Element2Field setter = new Element2Field( this, "setIncrementRef");
-      return setter;
-    }
-    if (a_LocalName.equals("endDataPattern")) {
-      Element2Field setter = new Element2Field( this, "setEndDataPattern");
-      return setter;
-    }
-    if (a_LocalName.equals("rowNumber")) {
-      Element2Field setter = new Element2Field( this, "setRowNumber");
-      return setter;
-    }
-    if (a_LocalName.equals("endData")) {
-      Element2Field setter = new Element2Field( this, "setEndData");
-      return setter;
-    }
-    if (a_LocalName.equals("metaInData")) {
-      Element2Field setter = new Element2Field( this, "setMetaInData");
-      return setter;
-    }
-    if (a_LocalName.equals("Station")) {
-      Station l = (Station)Station.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
-      setModel(l);
-      return (SAXConsumer)l;
-    }
-    if (a_LocalName.equals("referenceProperty")) {
-      return new PathElementConsumer( "referenceProperty", this);
-    }
-    if (a_LocalName.equals("properties")) {
-      return new PathElementConsumer( "properties", this);
-    }
-    if (a_LocalName.equals("TimeSeriesModel")) {
-      TimeSeriesModel l = (TimeSeriesModel)TimeSeriesModel.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
-      setTimeSeriesModel(l);
-      return (SAXConsumer)l;
-    }
-    if (a_LocalName.equals("parameters")) {
-      return new PathElementConsumer( "parameters", this);
-    }
-    if (a_LocalName.equals("HorodatedParameterModel")) {
-      HorodatedParameterModel l = (HorodatedParameterModel)HorodatedParameterModel.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
-      setTimestampModel(l);
-      return (SAXConsumer)l;
-    }
-    return null;
-  }
-
-
-  /**
-   * 
-   * The XML Element is a CDATA filled element
-   *
-   * @param  a_Characters  The CDATA content
-   *
-   */
-  public void consumeCharacters( String a_Characters) throws SAXException {
-  }
-
-  /**
-   * 
-   * Generate XML defintion on a Stream
-   *
-   * @param  a_Writer  XMLOutputWriter to which to write the XML Definition
-   *
-   */
-  public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
-    a_Writer.putAttribute( "lineNumber", getNumberOfLines());
-    a_Writer.putAttribute( "endOnPattern", isEndOnPattern());
-    a_Writer.putTag( "incrementRef", isIncrementRef());
-    a_Writer.putTag( "endDataPattern", getEndDataPattern());
-    a_Writer.putTag( "rowNumber", getRowNumber());
-    a_Writer.putTag( "endData", getEndData());
-    a_Writer.putTag( "metaInData", isMetaInData());
-    if (getModel() != null) {
-      getModel().writeXMLOn(a_Writer);
-    }
-    a_Writer.openTag( "parameters");
-    for (ParameterModel t : getParameterModels()) {
-      t.writeXMLOn(a_Writer);
-    }
-    a_Writer.closeTag();
-    a_Writer.openTag( "properties");
-    for (PropertyModel t : getProperties()) {
-      t.writeXMLOn(a_Writer);
-    }
-    a_Writer.closeTag();
-    if (getReferenceProperty() != null) {
-      a_Writer.openTag( "referenceProperty");
-      getReferenceProperty().writeXMLOn(a_Writer);
-      a_Writer.closeTag();
-    }
-    if (getTimeSeriesModel() != null) {
-      getTimeSeriesModel().writeXMLOn(a_Writer);
-    }
-    if (getTimestampModel() != null) {
-      getTimestampModel().writeXMLOn(a_Writer);
-    }
-  }
-
-  /**
-   * 
-   * Generate XML defintion on a XMLOutputWriter
-   *
-   * @param  a_Writer  the XMLOutputWriter to which to write the XML Definition
-   *
-   */
-  public void writeXMLOn(XMLOutputWriter a_Writer) {
-    a_Writer.openTag("StationModel");
-    writeXMLBodyOn(a_Writer);
-    a_Writer.closeTag();
-  }
-
-  /**
-   * 
-   * Generate XML defintion on a Stream
-   *
-   * @param  a_Stream  the OutptStream to which to write the XML Definition
-   *
-   */
-  public void writeXMLOn(OutputStream a_Stream) {
-    XMLOutputWriter writer = new XMLOutputWriter(a_Stream);
-    writeXMLOn(writer);
-  }
-
-  /**
-   * Returns a copy of this Object
-   *
-   * @return  a copy of this object
-   */
-  public Object clone() throws CloneNotSupportedException {
-    StationModel copy = null;
-    copy = (StationModel) super.clone();
-    copy._model = null;
-    if (getModel() != null) {
-      copy.setModel( (Station)getModel().clone());
-    }
-    copy._referenceProperty = null;
-    if (getReferenceProperty() != null) {
-      copy.setReferenceProperty( (PropertyModel)getReferenceProperty().clone());
-    }
-    copy._properties = new java.util.LinkedHashMap<String, PropertyModel>();
-    for (PropertyModel t0 : getProperties()) {
-      copy.addProperty( (PropertyModel) t0.clone());
-    }
-    copy._timeSeriesModel = null;
-    if (getTimeSeriesModel() != null) {
-      copy.setTimeSeriesModel( (TimeSeriesModel)getTimeSeriesModel().clone());
-    }
-    copy._parameterModels = new java.util.ArrayList<ParameterModel>();
-    for (ParameterModel t1 : getParameterModels()) {
-      copy.addParameterModel( (ParameterModel) t1.clone());
-    }
-    copy._timestampModel = null;
-    if (getTimestampModel() != null) {
-      copy.setTimestampModel( (HorodatedParameterModel)getTimestampModel().clone());
-    }
-    return copy;
-  }
-
-  /**
-   * Remove any associated links
-   */
-  public void release() {
-    releaseModel();
-    releaseParameterModels();
-    releaseProperties();
-    releaseReferenceProperty();
-    releaseTimeSeriesModel();
-    releaseTimestampModel();
-  }
-
-  /**
-   * Read accessor (getter) for attribute _endData
-   *
-   * @return  int
-   * @see StationModel#_endData
-   */
-  public  int getEndData() {
-    return _endData;
-  }
-
-  /**
-   * Write accessor (setter) for attribute _endData
-   *
-   * @param  x  new value for _endData
-   * @see StationModel#_endData
-   */
-  public void setEndData(int x) {
-    _endData = x;
-  }
-
-  /**
-   * Write accessor (setter) for attribute _endData
-   *
-   * @param  a_String  new value for _endData as String
-   * @see StationModel#_endData
-   */
-  public void setEndData( String a_String) {
-    try { setEndData(Integer.parseInt(a_String)); } catch (Exception e) {}
-  }
-
-  /**
-   * Read accessor (getter) for attribute _endDataPattern
-   *
-   * @return  String
-   * @see StationModel#_endDataPattern
-   */
-  public  String getEndDataPattern() {
-    return _endDataPattern;
-  }
-
-  /**
-   * Write accessor (setter) for attribute _endDataPattern
-   *
-   * @param  x  new value for _endDataPattern
-   * @see StationModel#_endDataPattern
-   */
-  public void setEndDataPattern(String x) {
-    _endDataPattern = x;
-  }
-
-  /**
-   * Read accessor (getter) for attribute _endOnPattern
-   *
-   * @return  boolean
-   * @see StationModel#_endOnPattern
-   */
-  public boolean isEndOnPattern() {
-    return _endOnPattern;
-  }
-
-  /**
-   * Write accessor (setter) for attribute _endOnPattern
-   *
-   * @param  x  new value for _endOnPattern
-   * @see StationModel#_endOnPattern
-   */
-  public void setEndOnPattern(boolean x) {
-    _endOnPattern = x;
-  }
-
-  /**
-   * Write accessor (setter) for attribute _endOnPattern
-   *
-   * @param  a_String  new value for _endOnPattern as String
-   * @see StationModel#_endOnPattern
-   */
-  public void setEndOnPattern( String a_String) {
-    setEndOnPattern(new Boolean(a_String).booleanValue());
-  }
-
-  /**
-   * Read accessor (getter) for attribute _incrementRef
-   *
-   * @return  boolean
-   * @see StationModel#_incrementRef
-   */
-  public boolean isIncrementRef() {
-    return _incrementRef;
-  }
-
-  /**
-   * Write accessor (setter) for attribute _incrementRef
-   *
-   * @param  x  new value for _incrementRef
-   * @see StationModel#_incrementRef
-   */
-  public void setIncrementRef(boolean x) {
-    _incrementRef = x;
-  }
-
-  /**
-   * Write accessor (setter) for attribute _incrementRef
-   *
-   * @param  a_String  new value for _incrementRef as String
-   * @see StationModel#_incrementRef
-   */
-  public void setIncrementRef( String a_String) {
-    setIncrementRef(new Boolean(a_String).booleanValue());
-  }
-
-  /**
-   * Read accessor (getter) for attribute _metaInData
-   *
-   * @return  boolean
-   * @see StationModel#_metaInData
-   */
-  public boolean isMetaInData() {
-    return _metaInData;
-  }
-
-  /**
-   * Write accessor (setter) for attribute _metaInData
-   *
-   * @param  x  new value for _metaInData
-   * @see StationModel#_metaInData
-   */
-  public void setMetaInData(boolean x) {
-    _metaInData = x;
-  }
-
-  /**
-   * Write accessor (setter) for attribute _metaInData
-   *
-   * @param  a_String  new value for _metaInData as String
-   * @see StationModel#_metaInData
-   */
-  public void setMetaInData( String a_String) {
-    setMetaInData(new Boolean(a_String).booleanValue());
-  }
-
-  /**
-   * Read accessor (getter) for attribute _numberOfLines
-   *
-   * @return  int
-   * @see StationModel#_numberOfLines
-   */
-  public  int getNumberOfLines() {
-    return _numberOfLines;
-  }
-
-  /**
-   * Write accessor (setter) for attribute _numberOfLines
-   *
-   * @param  x  new value for _numberOfLines
-   * @see StationModel#_numberOfLines
-   */
-  public void setNumberOfLines(int x) {
-    _numberOfLines = x;
-  }
-
-  /**
-   * Write accessor (setter) for attribute _numberOfLines
-   *
-   * @param  a_String  new value for _numberOfLines as String
-   * @see StationModel#_numberOfLines
-   */
-  public void setNumberOfLines( String a_String) {
-    try { setNumberOfLines(Integer.parseInt(a_String)); } catch (Exception e) {}
-  }
-
-  /**
-   * Read accessor (getter) for attribute _ref
-   *
-   * @return  int
-   * @see StationModel#_ref
-   */
-  public  int getRef() {
-    return _ref;
-  }
-
-  /**
-   * Write accessor (setter) for attribute _ref
-   *
-   * @param  x  new value for _ref
-   * @see StationModel#_ref
-   */
-  public void setRef(int x) {
-    _ref = x;
-  }
-
-  /**
-   * Read accessor (getter) for attribute _rowNumber
-   *
-   * @return  int
-   * @see StationModel#_rowNumber
-   */
-  public  int getRowNumber() {
-    return _rowNumber;
-  }
-
-  /**
-   * Write accessor (setter) for attribute _rowNumber
-   *
-   * @param  x  new value for _rowNumber
-   * @see StationModel#_rowNumber
-   */
-  public void setRowNumber(int x) {
-    _rowNumber = x;
-  }
-
-  /**
-   * Write accessor (setter) for attribute _rowNumber
-   *
-   * @param  a_String  new value for _rowNumber as String
-   * @see StationModel#_rowNumber
-   */
-  public void setRowNumber( String a_String) {
-    try { setRowNumber(Integer.parseInt(a_String)); } catch (Exception e) {}
-  }
-
-  /**
-   * Remove any link for role model
-   */
-  public void releaseModel() {
-    setModel( null );
-  }
-
-  /**
-   * returns the linked object for role <% aRole name%>
-   *
-   * @return  the object linked
-   */
-   public Station getModel() {
-    return _model;
-  }
-
-  /**
-   * Create a new link with x for role model
-   *
-   * @param  x  the object to link with
-   */
-  public void setModel(Station x) {
-    if (_model == x) return;
-    _model = x;
-  }
-
-  /**
-   * Remove any link for role referenceProperty
-   */
-  public void releaseReferenceProperty() {
-    setReferenceProperty( null );
-  }
-
-  /**
-   * returns the linked object for role <% aRole name%>
-   *
-   * @return  the object linked
-   */
-   public PropertyModel getReferenceProperty() {
-    return _referenceProperty;
-  }
-
-  /**
-   * Create a new link with x for role referenceProperty
-   *
-   * @param  x  the object to link with
-   */
-  public void setReferenceProperty(PropertyModel x) {
-    if (_referenceProperty == x) return;
-    _referenceProperty = x;
-  }
-
-  /**
-   * release all links for role "properties"
-   */
-  public void releaseProperties() {
-    for (PropertyModel t : getProperties()) {
-      removeProperty(t);
-    }
-  }
-
-  /**
-   * remove link with x for role "properties"
-   *
-   * @param  x  the linked object to unlink
-   */
-  public void removeProperty (PropertyModel x) {
-    if (!propertiesIncludes(x)) return;
-    nocheckRemoveProperty(x);
-  }
-
-  /**
-   * Add a link for role "properties"
-   *
-   * @param  x  the object to link with
-   */
-  public void addProperty(PropertyModel  x) {
-    if (propertiesIncludes(x)) return;
-    nocheckAddProperty(x);
-  }
-
-  /**
-   * Returns the collection of linked objects for role "properties"
-   *
-   * @return  Array of linked objects
-   */
-  public PropertyModel[] getProperties() {
-    PropertyModel[] v = new PropertyModel[_properties.size()];
-    _properties.values().toArray(v);
-    return v;
-  }
-
-  /**
-   * Returns linked object for role "properties" at index i
-   *
-   * @param  i  the index of the linked object
-   * @return  linked object at index i
-   */
-  public PropertyModel propertiesAt(String i) {
-    return _properties.get(i);
-  }
-
-  /**
-   * remove x from the linked objects for role "properties"
-   *
-   * DO NOT USE. use non privileged method instead
-   * @param  x  the object to link with
-   * @see  StationModel#removeProperty(PropertyModel)
-   */
-  protected void nocheckRemoveProperty(PropertyModel x) {
-    _properties.remove(x.getProperty());
-  }
-
-  /**
-   * adds x to the linked objects for role "properties"
-   *
-   * DO NOT USE. use non privileged method instead
-   * @param  x  the object to link with
-   * @see    StationModel#addProperty(PropertyModel)
-   */
-  protected void nocheckAddProperty(PropertyModel x) {
-    _properties.put(x.getProperty(), x);
-  }
-
-  /**
-   * returns the number of linked objects for role "properties"
-   *
-   * @return  the number of linked objects
-   */
-  public int propertiesSize() {
-    return _properties.size();
-  }
-
-  /**
-   * returns true if x is linked to the receiver for role "properties"
-   *
-   * @param x an instance of PropertyModel
-   */
-  public boolean propertiesIncludes( PropertyModel x ) {
-    return _properties.containsKey(x.getProperty());
-  }
-
-  /**
-   * returns an Iterator to iterate over the elements of "properties"
-   *
-   */
-  public java.util.Iterator<PropertyModel> propertiesIterator() {
-    return _properties.values().iterator();
-
-  }
-
-  /**
-   * Remove any link for role timeSeriesModel
-   */
-  public void releaseTimeSeriesModel() {
-    setTimeSeriesModel( null );
-  }
-
-  /**
-   * returns the linked object for role <% aRole name%>
-   *
-   * @return  the object linked
-   */
-   public TimeSeriesModel getTimeSeriesModel() {
-    return _timeSeriesModel;
-  }
-
-  /**
-   * Create a new link with x for role timeSeriesModel
-   *
-   * @param  x  the object to link with
-   */
-  public  void setTimeSeriesModel(TimeSeriesModel x) {
-    if (_timeSeriesModel == x) return;
-    TimeSeriesModel old = _timeSeriesModel;
-    if (_timeSeriesModel != null) {
-      _timeSeriesModel = null;
-      old.setStationModel(null);
-    }
-    _timeSeriesModel = x;
-    if (x != null) {
-      x.setStationModel(this);
-    }
-  }
-
-  /**
-   * release all links for role "parameterModels"
-   */
-  public void releaseParameterModels() {
-    for (ParameterModel t : getParameterModels()) {
-      removeParameterModel(t);
-    }
-  }
-
-  /**
-   * remove link with x for role "parameterModels"
-   *
-   * @param  x  the linked object to unlink
-   */
-  public void removeParameterModel (ParameterModel x) {
-    if (!parameterModelsIncludes(x)) return;
-    nocheckRemoveParameterModel(x);
-  }
-
-  /**
-   * Add a link for role "parameterModels"
-   *
-   * @param  x  the object to link with
-   */
-  public void addParameterModel(ParameterModel  x) {
-    if (parameterModelsIncludes(x)) return;
-    nocheckAddParameterModel(x);
-  }
-
-  /**
-   * Returns the collection of linked objects for role "parameterModels"
-   *
-   * @return  Array of linked objects
-   */
-  public ParameterModel[] getParameterModels() {
-    ParameterModel[] v = new ParameterModel[_parameterModels.size()];
-    _parameterModels.toArray(v);
-    return v;
-  }
-
-  /**
-   * Returns linked object for role "parameterModels" at index i
-   *
-   * @param  i  the index of the linked object
-   * @return  linked object at index i
-   */
-  public ParameterModel parameterModelsAt(int i) {
-    return (ParameterModel)_parameterModels.get(i);
-  }
-
-  /**
-   * returns index of object x in "parameterModels"
-   *
-   * @param  x  the linked object
-   */
-  public int parameterModelsIndexOf(ParameterModel x) {
-    if (!parameterModelsIncludes(x)) return -1;
-      for (int i=0 ; i < parameterModelsSize () ; i++) {
-        if (parameterModelsAt(i) == x) {
-          return i;
-        }
-      }
-      return -1;
-  }
-
-  /**
-   * move x one index before in the list for role "parameterModels"
-   *
-   * @param  x  the object to move
-   */
-  public void parameterModelsMoveUp(ParameterModel x) {
-    int index;
-    index = parameterModelsIndexOf(x);
-    if (index < 1) return;
-    nocheckMoveParameterModelAt( x, index-1);
-  }
-
-  /**
-   * move x to the top of list for role "parameterModels"
-   *
-   * @param  x  the object to move
-   */
-  public void parameterModelsMoveTop(ParameterModel x) {
-    int index;
-    index = parameterModelsIndexOf(x);
-    if (index < 1) return;
-    nocheckMoveParameterModelAt( x, 0);
-  }
-
-  /**
-   * move x one index more in the list for role "parameterModels"
-   *
-   * @param  x  the object to move
-   */
-  public void parameterModelsMoveDown(ParameterModel x) {
-    int index;
-    index = parameterModelsIndexOf(x);
-    if (index < 0 || index > parameterModelsSize()-2) return;
-    nocheckMoveParameterModelAt( x, index+1);
-  }
-
-  /**
-   * move x to the bottom of list for role "parameterModels"
-   *
-   * @param  x  the object to move
-   */
-  public void parameterModelsMoveBottom(ParameterModel x) {
-    int index;
-    index = parameterModelsIndexOf(x);
-    if (index < 0 || index > parameterModelsSize()-2) return;
-    nocheckMoveParameterModelAt( x, parameterModelsSize()-1);
-  }
-
-  /**
-   * move x one index more in the list for role "parameterModels"
-   *
-   * @param  x  the object to move
-   */
-  public void nocheckMoveParameterModelAt(ParameterModel x, int a_Index) {
-    int index;
-    ParameterModel tmp;
-    index = parameterModelsIndexOf(x);
-    tmp = _parameterModels.get(index);
-    _parameterModels.remove(index);
-    _parameterModels.add( a_Index,  tmp);
-  }
-
-  /**
-   * remove x from the linked objects for role "parameterModels"
-   *
-   * DO NOT USE. use non privileged method instead
-   * @param  x  the object to link with
-   * @see  StationModel#removeParameterModel(ParameterModel)
-   */
-  protected void nocheckRemoveParameterModel(ParameterModel x) {
-    _parameterModels.remove(x);
-  }
-
-  /**
-   * adds x to the linked objects for role "parameterModels"
-   *
-   * DO NOT USE. use non privileged method instead
-   * @param  x  the object to link with
-   * @see    StationModel#addParameterModel(ParameterModel)
-   */
-  protected void nocheckAddParameterModel(ParameterModel x) {
-    _parameterModels.add(x);
-  }
-
-  /**
-   * returns the number of linked objects for role "parameterModels"
-   *
-   * @return  the number of linked objects
-   */
-  public int parameterModelsSize() {
-    return _parameterModels.size();
-  }
-
-  /**
-   * returns true if x is linked to the receiver for role "parameterModels"
-   *
-   * @param x an instance of ParameterModel
-   */
-  public boolean parameterModelsIncludes( ParameterModel x ) {
-    return _parameterModels.contains(x);
-  }
-
-  /**
-   * returns an Iterator to iterate over the elements of "parameterModels"
-   *
-   */
-  public java.util.Iterator<ParameterModel> parameterModelsIterator() {
-    return _parameterModels.iterator();
-
-  }
-
-  /**
-   * Remove any link for role timestampModel
-   */
-  public void releaseTimestampModel() {
-    setTimestampModel( null );
-  }
-
-  /**
-   * returns the linked object for role <% aRole name%>
-   *
-   * @return  the object linked
-   */
-   public HorodatedParameterModel getTimestampModel() {
-    return _timestampModel;
-  }
-
-  /**
-   * Create a new link with x for role timestampModel
-   *
-   * @param  x  the object to link with
-   */
-  public void setTimestampModel(HorodatedParameterModel x) {
-    if (_timestampModel == x) return;
-    _timestampModel = x;
-  }
-
-  /**
-   *
-   * @param  a_Station  
-   */
-  public void computeEndDate ( Station a_Station) {
-    TimeSeriesInformation timeSeries = a_Station.getTimeSeriesInformation();
-    if (Float.isNaN(timeSeries.getEndDate())) {
-    	long rate = new Float( timeSeries.getSamplingRate()*1000.0f).longValue();
-    	int size = a_Station.parametersAt(0).valuesSize()-1;
-    	long date = a_Station.getFullDate()+(size*rate);
-    	TimeZone tz = TimeZone.getTimeZone("GMT");
-    	Calendar cal = Calendar.getInstance(tz);
-    	cal.clear();
-    	cal.setTimeInMillis( date);
-    	Calendar cal2 = Calendar.getInstance(tz);
-    	cal2.clear();
-    	cal2.setTimeZone(tz);
-    	cal2.set( Calendar.HOUR_OF_DAY, cal.get( Calendar.HOUR_OF_DAY));
-    	cal2.set( Calendar.MINUTE, cal.get( Calendar.MINUTE));
-    	cal2.set( Calendar.SECOND, cal.get( Calendar.SECOND));
-    	timeSeries.setEndTime( cal2.getTimeInMillis());
-    	cal2.clear();
-    	cal2.setTimeZone(tz);
-    	cal2.set( Calendar.YEAR, cal.get( Calendar.YEAR));
-    	cal2.set( Calendar.MONTH, cal.get( Calendar.MONTH));
-    	cal2.set( Calendar.DAY_OF_MONTH, cal.get( Calendar.DAY_OF_MONTH));
-    	timeSeries.setEndDate( cal2.getTimeInMillis());
-    }
-  }
-
-  /**
-   *
-   * @param  a_Reader  
-   * @return  String[]
-   * @exception  java.io.IOException
-   */
-  public String[] consumeFooter ( RandomAccessFile a_Reader) throws IOException {
-    Vector<String> v = new Vector<String>();
-    for (int i=0; i<_endData; i++) {
-    	String line = a_Reader.readLine();
-    	if (line != null) {
-    		v.add(line);
-    	}
-    }
-    String[] lines = new String[v.size()];
-    return v.toArray(lines);
-  }
-
-  /**
-   *
-   * @param  a_Reader  
-   * @return  String[]
-   * @exception  java.io.IOException
-   */
-  public String[] consumeHeader ( RandomAccessFile a_Reader) throws IOException {
-    Vector<String> v = new Vector<String>();
-    for (int i=0; i<_numberOfLines; i++) {
-    	String line = a_Reader.readLine();
-    	if (line != null) {
-    		v.add(line);
-    	} else {
-    		return null;
-    	}
-    }
-    String[] lines = new String[v.size()];
-    return v.toArray(lines);
-  }
-
-  /**
-   *
-   * @param  a_Reader  
-   * @param  a_Filename  
-   * @param  isRefDateBased  
-   * @param  a_RefDate  
-   * @param  a_Notifier  
-   * @return  Station
-   * @exception  IOException
-   * @exception  java.text.ParseException
-   */
-  public Station convert ( RandomAccessFile a_Reader, String a_Filename, boolean isRefDateBased, long a_RefDate, SizeBasedProgressNotifier a_Notifier) throws IOException, ParseException {
-    Station station = null;
-    String[] header = null;
-    try {
-    	station = (Station)_model.clone();
-    	if (_metaInData) {
-    		consumeHeader( a_Reader);
-    		a_Notifier.progress( a_Reader.getFilePointer());
-    		convertParameters( a_Reader, station, isRefDateBased, a_RefDate, a_Notifier);
-    		if (_timeSeriesModel != null && Float.isNaN(station.getTimeSeriesInformation().getEndDate())) {
-    			computeEndDate(station);
-    		}
-    		a_Notifier.progress( a_Reader.getFilePointer());
-    		consumeFooter(a_Reader);
-    		a_Notifier.progress( a_Reader.getFilePointer());
-    		return station;
-    	} else {
-    		if ((header = consumeHeader( a_Reader)) != null) {
-    			a_Notifier.progress( a_Reader.getFilePointer());
-    			if (getReferenceProperty().getFragment().getFirstLine() == 0 && a_Filename != null) {
-    				getReferenceProperty().applyOn( station, new String[]{ a_Filename });
-    			} else {
-    				if (isIncrementRef()) {
-    					station.setReference( Integer.toString(_ref++));
-    				} else {
-    					getReferenceProperty().applyOn( station, header);
-    				}
-    			}
-    			for (PropertyModel m : getProperties()) {
-    				//System.out.println("@DEBUG propertyModel courant :"+m.getProperty());
-    				m.applyOn ( station, header);
-    			}
-    			if (_timeSeriesModel != null) {
-    				_timeSeriesModel.convert( station, header, isRefDateBased, a_RefDate);
-    			}
-    			a_Notifier.progress( a_Reader.getFilePointer());
-    			convertParameters( a_Reader, station, isRefDateBased, a_RefDate, a_Notifier);
-    			if (_timeSeriesModel != null && Float.isNaN(station.getTimeSeriesInformation().getEndDate())) {
-    				computeEndDate(station);
-    			}
-    			consumeFooter(a_Reader);
-    			a_Notifier.progress( a_Reader.getFilePointer());
-
-    			return station;
-    		}
-    	}
-    } catch (CloneNotSupportedException e) {
-    	e.printStackTrace();
-    } catch (IntrospectionException e) {
-    	e.printStackTrace();
-    } catch (IllegalAccessException e) {
-    	e.printStackTrace();
-    } catch (InvocationTargetException e) {
-    	e.printStackTrace();
-    }
-    return null;
-  }
-
-  /**
-   *
-   * @param  a_Reader  
-   * @param  a_Station  
-   * @param  isRefDateBased  
-   * @param  a_RefDate  
-   * @param  a_Notifier  
-   * @exception  IOException
-   * @exception  ParseException
-   */
-  public void convertParameters ( RandomAccessFile a_Reader, Station a_Station, boolean isRefDateBased, long a_RefDate, SizeBasedProgressNotifier a_Notifier) throws IOException, ParseException {
-    long rate = 0;
-    if (a_Station.getTimeSeriesInformation() != null) {
-    	rate = new Float( a_Station.getTimeSeriesInformation().getSamplingRate()*1000.0f).longValue();
-    }
-    try {
-    	for (ParameterModel pm : _parameterModels) {
-    		a_Station.addParameter( (Parameter)pm.getModel().clone());
-    	}
-    	String line = null;
-    	for (int index = 0;
-    	        (line = a_Reader.readLine()) != null && (!(_endOnPattern && line.matches(_endDataPattern)) || (index < _rowNumber));
-    	        index++) {
-    		if (index == 0 && _metaInData) {
-    			String[] header = new String[]{ line };
-    			if (isIncrementRef()) {
-    				a_Station.setReference( Long.toString(_ref++));
-    			} else {
-    				getReferenceProperty().applyOn( a_Station, header);
-    			}
-    			for (PropertyModel m : getProperties()) {
-    				m.applyOn ( a_Station, header);
-    			}
-    			if (_timeSeriesModel != null) {
-    				_timeSeriesModel.convert( a_Station, header, isRefDateBased, a_RefDate);
-    			}
-    		}
-    		int paramIndex = 0;
-    		for (ParameterModel pm : _parameterModels) {
-    			Parameter p = a_Station.parametersAt(paramIndex);
-    			ParameterValue value = null;
-    			if (_timestampModel != null) {
-    				HorodatedValue hValue = new HorodatedValue();
-    				if (_timestampModel.isComputed()) {
-    					hValue.setDate( a_Station.getFullDate()+(index*rate));
-    				} else {
-    					long time = _timestampModel.convertTimestamp ( line, a_RefDate);
-    					hValue.setDate( a_Station.getGMTDate(time));
-    				}
-    				value = hValue;
-    			} else {
-    				value = new ParameterValue();
-    			}
-    			pm.convert( line, value);
-    			p.addValue(value);
-    			paramIndex++;
-    		}
-    		a_Notifier.progress( a_Reader.getFilePointer());
-    	}
-    } catch (CloneNotSupportedException e) {
-    	e.printStackTrace();
-    } catch (IntrospectionException e) {
-    	e.printStackTrace();
-    } catch (IllegalAccessException e) {
-    	e.printStackTrace();
-    } catch (InvocationTargetException e) {
-    	e.printStackTrace();
-    }
-  }
-
-  /**
-   *
-   * @return  TimeSeriesInformation
-   */
-  public TimeSeriesInformation getTimeSeriesInformation ( ) {
-    return getModel().getTimeSeriesInformation();
-  }
-
-  /**
-   *
-   * @param  path  the association path name
-   * @param  a_URI  a_URI  XML Namespace (SAX 2)
-   * @param  a_LocalName  Tag name
-   * @param  a_QName  Qualified tag name
-   * @param  a_Attributes  XML Element attributes
-   * @return  SAXConsumer
-   * @exception  SAXException
-   */
-  public SAXConsumer handlePathElement ( String path, String a_URI, String a_LocalName, String a_QName, Attributes a_Attributes) throws SAXException {
-    SAXConsumer c = null;
-    if (path.equals("parameters")) {
-    	c =  ParameterModel.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
-    	addParameterModel( (ParameterModel)c );
-    	return c;
-    }
-    if (path.equals("properties")) {
-    	c =  PropertyModel.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
-    	((PropertyModel)c).setSource(_model);
-    	addProperty( (PropertyModel)c );
-    	return c;
-    }
-    if (path.equals("referenceProperty")) {
-    	c =  PropertyModel.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
-    	((PropertyModel)c).setSource(_model);
-    	setReferenceProperty( (PropertyModel)c );
-    	return c;
-    }
-    return null;
-  }
-
-  /**
-   *
-   */
-  public void initProperties ( ) {
-    try {
-    	setReferenceProperty( new PropertyModel( "reference", _model));
-    	addProperty( new PropertyModel( "date", _model, new DateTimeFormat("dd/MM/yyyy")));
-    	addProperty( new PropertyModel( "time", _model, new DateTimeFormat("hh:mm AM")));
-    	addProperty( new PropertyModel( "offsetTU", _model, new FloatFormat("%4.1f")));
-    	addProperty( new PropertyModel( "latitude", _model, new LatitudeFormat("NDD MM SS")));
-    	addProperty( new PropertyModel( "longitude", _model, new LongitudeFormat("NDDD MM SS")));
-    	addProperty( new PropertyModel( "bottomDepth", _model, new FloatFormat("%4.0f")));
-    	addProperty( new PropertyModel( "dcHistory1", _model));
-    	addProperty( new PropertyModel( "dcHistory2", _model));
-    	//addProperty( new PropertyModel( "dmHistory1", _model));
-    	//addProperty( new PropertyModel( "dmHistory2", _model));
-    	addProperty( new PropertyModel( "surfaceSamples1", _model));
-    	addProperty( new PropertyModel( "surfaceSamples2", _model));
-    	addProperty( new PropertyModel( "comment", _model));
-    } catch (Exception e) {
-    }
-  }
-
-  /**
-   *
-   */
-  public void initRef ( ) {
-    _ref = 1;
-  }
+public class StationModel implements Cloneable, PathElementHandler, SAXConsumer {
+
+	/**
+	 * Nombre de lignes entre la fin des donnees et le debut de la station
+	 * suivante
+	 */
+	protected int _endData;
+
+	/**
+	 * Motif de fin de station
+	 */
+	protected String _endDataPattern;
+
+	/**
+	 * Booléen indiquant si la fin de station doit être détectée par un motif.
+	 * S'il est à false, l'information de fin de station est obtenue à l'aide de
+	 * l'attribut endData
+	 */
+	protected boolean _endOnPattern;
+
+	/**
+	 * Definit si le numero de reference est automatiquement incremente
+	 */
+	protected boolean _incrementRef;
+
+	/**
+	 * Indique si le fichier correspond à un fichier dont les metadata station
+	 * se trouvent dans la première ligne des données
+	 */
+	protected boolean _metaInData;
+
+	/**
+	 * Nombre de ligne du header Station
+	 */
+	protected int _numberOfLines;
+
+	protected transient int _ref;
+
+	/**
+	 * Nombre de mesures réalisées sur la station
+	 */
+	protected int _rowNumber;
+
+	/**
+	 * Station servant de modèle pour stocker les informations de l'entête
+	 * station
+	 */
+	protected Station _model;
+
+	protected PropertyModel _referenceProperty;
+
+	/**
+	 * Liste des propriété permettant de récupérer les informations de l'entête
+	 * station
+	 */
+	protected java.util.Map<String, PropertyModel> _properties;
+
+	protected TimeSeriesModel _timeSeriesModel;
+
+	/**
+	 * Liste, ordonnée, des paramètres mesurés sur la station
+	 */
+	protected java.util.List<ParameterModel> _parameterModels;
+
+	/**
+	 * Modèle pour les informations propres aux séries temporelles. Optionnel
+	 */
+	protected HorodatedParameterModel _timestampModel;
+
+	public StationModel() {
+		_endDataPattern = "";
+		_model = null;
+		_parameterModels = new java.util.ArrayList<ParameterModel>();
+		_properties = new java.util.LinkedHashMap<String, PropertyModel>();
+		_referenceProperty = null;
+		_timeSeriesModel = null;
+		_timestampModel = null;
+	}
+
+	/**
+	 * 
+	 * @param isTimeSeries
+	 */
+	public StationModel(boolean isTimeSeries) {
+		this();
+		setModel(new Station(isTimeSeries));
+		if (isTimeSeries) {
+			setTimeSeriesModel(new TimeSeriesModel(this));
+			setTimestampModel(new HorodatedParameterModel());
+		}
+		initProperties();
+	}
+
+	/**
+	 * 
+	 * Build object from its XML defintion
+	 * 
+	 * @param a_URI
+	 *            Element Namespace (SAX 2)
+	 * @param a_LocalName
+	 *            Tag name
+	 * @param a_QName
+	 *            qualified tag name
+	 * @param a_Attributes
+	 *            XML Element attributes
+	 * @return SAXConsumer
+	 * 
+	 */
+	public static SAXConsumer fromElement(String a_URI, String a_LocalName,
+			String a_QName, Attributes a_Attributes) throws SAXException {
+		StationModel tmp = new StationModel();
+		tmp.buildFromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+		return (SAXConsumer) tmp;
+	}
+
+	/**
+	 * 
+	 * Retrieve attributes values from their XML defintion
+	 * 
+	 * @param a_URI
+	 *            Element Namespace (SAX 2)
+	 * @param a_LocalName
+	 *            Tag name
+	 * @param a_QName
+	 *            qualified tag name
+	 * @param a_Attributes
+	 *            XML Element attributes
+	 * 
+	 */
+	public void buildFromElement(String a_URI, String a_LocalName,
+			String a_QName, Attributes a_Attributes) throws SAXException {
+		String tmp;
+		if ((tmp = a_Attributes.getValue("lineNumber")) != null) {
+			setNumberOfLines(tmp);
+		}
+		if ((tmp = a_Attributes.getValue("endOnPattern")) != null) {
+			setEndOnPattern(tmp);
+		}
+	}
+
+	/**
+	 * 
+	 * A new XML Element as been found. Parse it.
+	 * 
+	 * @param a_URI
+	 *            XML Namespace (SAX 2)
+	 * @param a_LocalName
+	 *            Tag name
+	 * @param a_QName
+	 *            Qualified tag name
+	 * @param a_Attributes
+	 *            XML Element attributes
+	 * @return SAXConsumer
+	 * 
+	 */
+	public SAXConsumer consumeElement(String a_URI, String a_LocalName,
+			String a_QName, Attributes a_Attributes) throws SAXException {
+		if (a_LocalName.equals("incrementRef")) {
+			Element2Field setter = new Element2Field(this, "setIncrementRef");
+			return setter;
+		}
+		if (a_LocalName.equals("endDataPattern")) {
+			Element2Field setter = new Element2Field(this, "setEndDataPattern");
+			return setter;
+		}
+		if (a_LocalName.equals("rowNumber")) {
+			Element2Field setter = new Element2Field(this, "setRowNumber");
+			return setter;
+		}
+		if (a_LocalName.equals("endData")) {
+			Element2Field setter = new Element2Field(this, "setEndData");
+			return setter;
+		}
+		if (a_LocalName.equals("metaInData")) {
+			Element2Field setter = new Element2Field(this, "setMetaInData");
+			return setter;
+		}
+		if (a_LocalName.equals("Station")) {
+			Station l = (Station) Station.fromElement(a_URI, a_LocalName,
+					a_QName, a_Attributes);
+			setModel(l);
+			return (SAXConsumer) l;
+		}
+		if (a_LocalName.equals("referenceProperty")) {
+			return new PathElementConsumer("referenceProperty", this);
+		}
+		if (a_LocalName.equals("properties")) {
+			return new PathElementConsumer("properties", this);
+		}
+		if (a_LocalName.equals("TimeSeriesModel")) {
+			TimeSeriesModel l = (TimeSeriesModel) TimeSeriesModel.fromElement(
+					a_URI, a_LocalName, a_QName, a_Attributes);
+			setTimeSeriesModel(l);
+			return (SAXConsumer) l;
+		}
+		if (a_LocalName.equals("parameters")) {
+			return new PathElementConsumer("parameters", this);
+		}
+		if (a_LocalName.equals("HorodatedParameterModel")) {
+			HorodatedParameterModel l = (HorodatedParameterModel) HorodatedParameterModel
+					.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+			setTimestampModel(l);
+			return (SAXConsumer) l;
+		}
+		return null;
+	}
+
+	/**
+	 * 
+	 * The XML Element is a CDATA filled element
+	 * 
+	 * @param a_Characters
+	 *            The CDATA content
+	 * 
+	 */
+	public void consumeCharacters(String a_Characters) throws SAXException {
+	}
+
+	/**
+	 * 
+	 * Generate XML defintion on a Stream
+	 * 
+	 * @param a_Writer
+	 *            XMLOutputWriter to which to write the XML Definition
+	 * 
+	 */
+	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
+		a_Writer.putAttribute("lineNumber", getNumberOfLines());
+		a_Writer.putAttribute("endOnPattern", isEndOnPattern());
+		a_Writer.putTag("incrementRef", isIncrementRef());
+		a_Writer.putTag("endDataPattern", getEndDataPattern());
+		a_Writer.putTag("rowNumber", getRowNumber());
+		a_Writer.putTag("endData", getEndData());
+		a_Writer.putTag("metaInData", isMetaInData());
+		if (getModel() != null) {
+			getModel().writeXMLOn(a_Writer);
+		}
+		a_Writer.openTag("parameters");
+		for (ParameterModel t : getParameterModels()) {
+			t.writeXMLOn(a_Writer);
+		}
+		a_Writer.closeTag();
+		a_Writer.openTag("properties");
+		for (PropertyModel t : getProperties()) {
+			t.writeXMLOn(a_Writer);
+		}
+		a_Writer.closeTag();
+		if (getReferenceProperty() != null) {
+			a_Writer.openTag("referenceProperty");
+			getReferenceProperty().writeXMLOn(a_Writer);
+			a_Writer.closeTag();
+		}
+		if (getTimeSeriesModel() != null) {
+			getTimeSeriesModel().writeXMLOn(a_Writer);
+		}
+		if (getTimestampModel() != null) {
+			getTimestampModel().writeXMLOn(a_Writer);
+		}
+	}
+
+	/**
+	 * 
+	 * Generate XML defintion on a XMLOutputWriter
+	 * 
+	 * @param a_Writer
+	 *            the XMLOutputWriter to which to write the XML Definition
+	 * 
+	 */
+	public void writeXMLOn(XMLOutputWriter a_Writer) {
+		a_Writer.openTag("StationModel");
+		writeXMLBodyOn(a_Writer);
+		a_Writer.closeTag();
+	}
+
+	/**
+	 * 
+	 * Generate XML defintion on a Stream
+	 * 
+	 * @param a_Stream
+	 *            the OutptStream to which to write the XML Definition
+	 * 
+	 */
+	public void writeXMLOn(OutputStream a_Stream) {
+		XMLOutputWriter writer = new XMLOutputWriter(a_Stream);
+		writeXMLOn(writer);
+	}
+
+	/**
+	 * Returns a copy of this Object
+	 * 
+	 * @return a copy of this object
+	 */
+	public Object clone() throws CloneNotSupportedException {
+		StationModel copy = null;
+		copy = (StationModel) super.clone();
+		copy._model = null;
+		if (getModel() != null) {
+			copy.setModel((Station) getModel().clone());
+		}
+		copy._referenceProperty = null;
+		if (getReferenceProperty() != null) {
+			copy.setReferenceProperty((PropertyModel) getReferenceProperty()
+					.clone());
+		}
+		copy._properties = new java.util.LinkedHashMap<String, PropertyModel>();
+		for (PropertyModel t0 : getProperties()) {
+			copy.addProperty((PropertyModel) t0.clone());
+		}
+		copy._timeSeriesModel = null;
+		if (getTimeSeriesModel() != null) {
+			copy.setTimeSeriesModel((TimeSeriesModel) getTimeSeriesModel()
+					.clone());
+		}
+		copy._parameterModels = new java.util.ArrayList<ParameterModel>();
+		for (ParameterModel t1 : getParameterModels()) {
+			copy.addParameterModel((ParameterModel) t1.clone());
+		}
+		copy._timestampModel = null;
+		if (getTimestampModel() != null) {
+			copy
+					.setTimestampModel((HorodatedParameterModel) getTimestampModel()
+							.clone());
+		}
+		return copy;
+	}
+
+	/**
+	 * Remove any associated links
+	 */
+	public void release() {
+		releaseModel();
+		releaseParameterModels();
+		releaseProperties();
+		releaseReferenceProperty();
+		releaseTimeSeriesModel();
+		releaseTimestampModel();
+	}
+
+	/**
+	 * Read accessor (getter) for attribute _endData
+	 * 
+	 * @return int
+	 * @see StationModel#_endData
+	 */
+	public int getEndData() {
+		return _endData;
+	}
+
+	/**
+	 * Write accessor (setter) for attribute _endData
+	 * 
+	 * @param x
+	 *            new value for _endData
+	 * @see StationModel#_endData
+	 */
+	public void setEndData(int x) {
+		_endData = x;
+	}
+
+	/**
+	 * Write accessor (setter) for attribute _endData
+	 * 
+	 * @param a_String
+	 *            new value for _endData as String
+	 * @see StationModel#_endData
+	 */
+	public void setEndData(String a_String) {
+		try {
+			setEndData(Integer.parseInt(a_String));
+		} catch (Exception e) {
+		}
+	}
+
+	/**
+	 * Read accessor (getter) for attribute _endDataPattern
+	 * 
+	 * @return String
+	 * @see StationModel#_endDataPattern
+	 */
+	public String getEndDataPattern() {
+		return _endDataPattern;
+	}
+
+	/**
+	 * Write accessor (setter) for attribute _endDataPattern
+	 * 
+	 * @param x
+	 *            new value for _endDataPattern
+	 * @see StationModel#_endDataPattern
+	 */
+	public void setEndDataPattern(String x) {
+		_endDataPattern = x;
+	}
+
+	/**
+	 * Read accessor (getter) for attribute _endOnPattern
+	 * 
+	 * @return boolean
+	 * @see StationModel#_endOnPattern
+	 */
+	public boolean isEndOnPattern() {
+		return _endOnPattern;
+	}
+
+	/**
+	 * Write accessor (setter) for attribute _endOnPattern
+	 * 
+	 * @param x
+	 *            new value for _endOnPattern
+	 * @see StationModel#_endOnPattern
+	 */
+	public void setEndOnPattern(boolean x) {
+		_endOnPattern = x;
+	}
+
+	/**
+	 * Write accessor (setter) for attribute _endOnPattern
+	 * 
+	 * @param a_String
+	 *            new value for _endOnPattern as String
+	 * @see StationModel#_endOnPattern
+	 */
+	public void setEndOnPattern(String a_String) {
+		setEndOnPattern(new Boolean(a_String).booleanValue());
+	}
+
+	/**
+	 * Read accessor (getter) for attribute _incrementRef
+	 * 
+	 * @return boolean
+	 * @see StationModel#_incrementRef
+	 */
+	public boolean isIncrementRef() {
+		return _incrementRef;
+	}
+
+	/**
+	 * Write accessor (setter) for attribute _incrementRef
+	 * 
+	 * @param x
+	 *            new value for _incrementRef
+	 * @see StationModel#_incrementRef
+	 */
+	public void setIncrementRef(boolean x) {
+		_incrementRef = x;
+	}
+
+	/**
+	 * Write accessor (setter) for attribute _incrementRef
+	 * 
+	 * @param a_String
+	 *            new value for _incrementRef as String
+	 * @see StationModel#_incrementRef
+	 */
+	public void setIncrementRef(String a_String) {
+		setIncrementRef(new Boolean(a_String).booleanValue());
+	}
+
+	/**
+	 * Read accessor (getter) for attribute _metaInData
+	 * 
+	 * @return boolean
+	 * @see StationModel#_metaInData
+	 */
+	public boolean isMetaInData() {
+		return _metaInData;
+	}
+
+	/**
+	 * Write accessor (setter) for attribute _metaInData
+	 * 
+	 * @param x
+	 *            new value for _metaInData
+	 * @see StationModel#_metaInData
+	 */
+	public void setMetaInData(boolean x) {
+		_metaInData = x;
+	}
+
+	/**
+	 * Write accessor (setter) for attribute _metaInData
+	 * 
+	 * @param a_String
+	 *            new value for _metaInData as String
+	 * @see StationModel#_metaInData
+	 */
+	public void setMetaInData(String a_String) {
+		setMetaInData(new Boolean(a_String).booleanValue());
+	}
+
+	/**
+	 * Read accessor (getter) for attribute _numberOfLines
+	 * 
+	 * @return int
+	 * @see StationModel#_numberOfLines
+	 */
+	public int getNumberOfLines() {
+		return _numberOfLines;
+	}
+
+	/**
+	 * Write accessor (setter) for attribute _numberOfLines
+	 * 
+	 * @param x
+	 *            new value for _numberOfLines
+	 * @see StationModel#_numberOfLines
+	 */
+	public void setNumberOfLines(int x) {
+		_numberOfLines = x;
+	}
+
+	/**
+	 * Write accessor (setter) for attribute _numberOfLines
+	 * 
+	 * @param a_String
+	 *            new value for _numberOfLines as String
+	 * @see StationModel#_numberOfLines
+	 */
+	public void setNumberOfLines(String a_String) {
+		try {
+			setNumberOfLines(Integer.parseInt(a_String));
+		} catch (Exception e) {
+		}
+	}
+
+	/**
+	 * Read accessor (getter) for attribute _ref
+	 * 
+	 * @return int
+	 * @see StationModel#_ref
+	 */
+	public int getRef() {
+		return _ref;
+	}
+
+	/**
+	 * Write accessor (setter) for attribute _ref
+	 * 
+	 * @param x
+	 *            new value for _ref
+	 * @see StationModel#_ref
+	 */
+	public void setRef(int x) {
+		_ref = x;
+	}
+
+	/**
+	 * Read accessor (getter) for attribute _rowNumber
+	 * 
+	 * @return int
+	 * @see StationModel#_rowNumber
+	 */
+	public int getRowNumber() {
+		return _rowNumber;
+	}
+
+	/**
+	 * Write accessor (setter) for attribute _rowNumber
+	 * 
+	 * @param x
+	 *            new value for _rowNumber
+	 * @see StationModel#_rowNumber
+	 */
+	public void setRowNumber(int x) {
+		_rowNumber = x;
+	}
+
+	/**
+	 * Write accessor (setter) for attribute _rowNumber
+	 * 
+	 * @param a_String
+	 *            new value for _rowNumber as String
+	 * @see StationModel#_rowNumber
+	 */
+	public void setRowNumber(String a_String) {
+		try {
+			setRowNumber(Integer.parseInt(a_String));
+		} catch (Exception e) {
+		}
+	}
+
+	/**
+	 * Remove any link for role model
+	 */
+	public void releaseModel() {
+		setModel(null);
+	}
+
+	/**
+	 * returns the linked object for role <% aRole name%>
+	 * 
+	 * @return the object linked
+	 */
+	public Station getModel() {
+		return _model;
+	}
+
+	/**
+	 * Create a new link with x for role model
+	 * 
+	 * @param x
+	 *            the object to link with
+	 */
+	public void setModel(Station x) {
+		if (_model == x)
+			return;
+		_model = x;
+	}
+
+	/**
+	 * Remove any link for role referenceProperty
+	 */
+	public void releaseReferenceProperty() {
+		setReferenceProperty(null);
+	}
+
+	/**
+	 * returns the linked object for role <% aRole name%>
+	 * 
+	 * @return the object linked
+	 */
+	public PropertyModel getReferenceProperty() {
+		return _referenceProperty;
+	}
+
+	/**
+	 * Create a new link with x for role referenceProperty
+	 * 
+	 * @param x
+	 *            the object to link with
+	 */
+	public void setReferenceProperty(PropertyModel x) {
+		if (_referenceProperty == x)
+			return;
+		_referenceProperty = x;
+	}
+
+	/**
+	 * release all links for role "properties"
+	 */
+	public void releaseProperties() {
+		for (PropertyModel t : getProperties()) {
+			removeProperty(t);
+		}
+	}
+
+	/**
+	 * remove link with x for role "properties"
+	 * 
+	 * @param x
+	 *            the linked object to unlink
+	 */
+	public void removeProperty(PropertyModel x) {
+		if (!propertiesIncludes(x))
+			return;
+		nocheckRemoveProperty(x);
+	}
+
+	/**
+	 * Add a link for role "properties"
+	 * 
+	 * @param x
+	 *            the object to link with
+	 */
+	public void addProperty(PropertyModel x) {
+		if (propertiesIncludes(x))
+			return;
+		nocheckAddProperty(x);
+	}
+
+	/**
+	 * Returns the collection of linked objects for role "properties"
+	 * 
+	 * @return Array of linked objects
+	 */
+	public PropertyModel[] getProperties() {
+		PropertyModel[] v = new PropertyModel[_properties.size()];
+		_properties.values().toArray(v);
+		return v;
+	}
+
+	/**
+	 * Returns linked object for role "properties" at index i
+	 * 
+	 * @param i
+	 *            the index of the linked object
+	 * @return linked object at index i
+	 */
+	public PropertyModel propertiesAt(String i) {
+		return _properties.get(i);
+	}
+
+	/**
+	 * remove x from the linked objects for role "properties"
+	 * 
+	 * DO NOT USE. use non privileged method instead
+	 * 
+	 * @param x
+	 *            the object to link with
+	 * @see StationModel#removeProperty(PropertyModel)
+	 */
+	protected void nocheckRemoveProperty(PropertyModel x) {
+		_properties.remove(x.getProperty());
+	}
+
+	/**
+	 * adds x to the linked objects for role "properties"
+	 * 
+	 * DO NOT USE. use non privileged method instead
+	 * 
+	 * @param x
+	 *            the object to link with
+	 * @see StationModel#addProperty(PropertyModel)
+	 */
+	protected void nocheckAddProperty(PropertyModel x) {
+		_properties.put(x.getProperty(), x);
+	}
+
+	/**
+	 * returns the number of linked objects for role "properties"
+	 * 
+	 * @return the number of linked objects
+	 */
+	public int propertiesSize() {
+		return _properties.size();
+	}
+
+	/**
+	 * returns true if x is linked to the receiver for role "properties"
+	 * 
+	 * @param x
+	 *            an instance of PropertyModel
+	 */
+	public boolean propertiesIncludes(PropertyModel x) {
+		return _properties.containsKey(x.getProperty());
+	}
+
+	/**
+	 * returns an Iterator to iterate over the elements of "properties"
+	 * 
+	 */
+	public java.util.Iterator<PropertyModel> propertiesIterator() {
+		return _properties.values().iterator();
+
+	}
+
+	/**
+	 * Remove any link for role timeSeriesModel
+	 */
+	public void releaseTimeSeriesModel() {
+		setTimeSeriesModel(null);
+	}
+
+	/**
+	 * returns the linked object for role <% aRole name%>
+	 * 
+	 * @return the object linked
+	 */
+	public TimeSeriesModel getTimeSeriesModel() {
+		return _timeSeriesModel;
+	}
+
+	/**
+	 * Create a new link with x for role timeSeriesModel
+	 * 
+	 * @param x
+	 *            the object to link with
+	 */
+	public void setTimeSeriesModel(TimeSeriesModel x) {
+		if (_timeSeriesModel == x)
+			return;
+		TimeSeriesModel old = _timeSeriesModel;
+		if (_timeSeriesModel != null) {
+			_timeSeriesModel = null;
+			old.setStationModel(null);
+		}
+		_timeSeriesModel = x;
+		if (x != null) {
+			x.setStationModel(this);
+		}
+	}
+
+	/**
+	 * release all links for role "parameterModels"
+	 */
+	public void releaseParameterModels() {
+		for (ParameterModel t : getParameterModels()) {
+			removeParameterModel(t);
+		}
+	}
+
+	/**
+	 * remove link with x for role "parameterModels"
+	 * 
+	 * @param x
+	 *            the linked object to unlink
+	 */
+	public void removeParameterModel(ParameterModel x) {
+		if (!parameterModelsIncludes(x))
+			return;
+		nocheckRemoveParameterModel(x);
+	}
+
+	/**
+	 * Add a link for role "parameterModels"
+	 * 
+	 * @param x
+	 *            the object to link with
+	 */
+	public void addParameterModel(ParameterModel x) {
+		if (parameterModelsIncludes(x))
+			return;
+		nocheckAddParameterModel(x);
+	}
+
+	/**
+	 * Returns the collection of linked objects for role "parameterModels"
+	 * 
+	 * @return Array of linked objects
+	 */
+	public ParameterModel[] getParameterModels() {
+		ParameterModel[] v = new ParameterModel[_parameterModels.size()];
+		_parameterModels.toArray(v);
+		return v;
+	}
+
+	/**
+	 * Returns linked object for role "parameterModels" at index i
+	 * 
+	 * @param i
+	 *            the index of the linked object
+	 * @return linked object at index i
+	 */
+	public ParameterModel parameterModelsAt(int i) {
+		return (ParameterModel) _parameterModels.get(i);
+	}
+
+	/**
+	 * returns index of object x in "parameterModels"
+	 * 
+	 * @param x
+	 *            the linked object
+	 */
+	public int parameterModelsIndexOf(ParameterModel x) {
+		if (!parameterModelsIncludes(x))
+			return -1;
+		for (int i = 0; i < parameterModelsSize(); i++) {
+			if (parameterModelsAt(i) == x) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	/**
+	 * move x one index before in the list for role "parameterModels"
+	 * 
+	 * @param x
+	 *            the object to move
+	 */
+	public void parameterModelsMoveUp(ParameterModel x) {
+		int index;
+		index = parameterModelsIndexOf(x);
+		if (index < 1)
+			return;
+		nocheckMoveParameterModelAt(x, index - 1);
+	}
+
+	/**
+	 * move x to the top of list for role "parameterModels"
+	 * 
+	 * @param x
+	 *            the object to move
+	 */
+	public void parameterModelsMoveTop(ParameterModel x) {
+		int index;
+		index = parameterModelsIndexOf(x);
+		if (index < 1)
+			return;
+		nocheckMoveParameterModelAt(x, 0);
+	}
+
+	/**
+	 * move x one index more in the list for role "parameterModels"
+	 * 
+	 * @param x
+	 *            the object to move
+	 */
+	public void parameterModelsMoveDown(ParameterModel x) {
+		int index;
+		index = parameterModelsIndexOf(x);
+		if (index < 0 || index > parameterModelsSize() - 2)
+			return;
+		nocheckMoveParameterModelAt(x, index + 1);
+	}
+
+	/**
+	 * move x to the bottom of list for role "parameterModels"
+	 * 
+	 * @param x
+	 *            the object to move
+	 */
+	public void parameterModelsMoveBottom(ParameterModel x) {
+		int index;
+		index = parameterModelsIndexOf(x);
+		if (index < 0 || index > parameterModelsSize() - 2)
+			return;
+		nocheckMoveParameterModelAt(x, parameterModelsSize() - 1);
+	}
+
+	/**
+	 * move x one index more in the list for role "parameterModels"
+	 * 
+	 * @param x
+	 *            the object to move
+	 */
+	public void nocheckMoveParameterModelAt(ParameterModel x, int a_Index) {
+		int index;
+		ParameterModel tmp;
+		index = parameterModelsIndexOf(x);
+		tmp = _parameterModels.get(index);
+		_parameterModels.remove(index);
+		_parameterModels.add(a_Index, tmp);
+	}
+
+	/**
+	 * remove x from the linked objects for role "parameterModels"
+	 * 
+	 * DO NOT USE. use non privileged method instead
+	 * 
+	 * @param x
+	 *            the object to link with
+	 * @see StationModel#removeParameterModel(ParameterModel)
+	 */
+	protected void nocheckRemoveParameterModel(ParameterModel x) {
+		_parameterModels.remove(x);
+	}
+
+	/**
+	 * adds x to the linked objects for role "parameterModels"
+	 * 
+	 * DO NOT USE. use non privileged method instead
+	 * 
+	 * @param x
+	 *            the object to link with
+	 * @see StationModel#addParameterModel(ParameterModel)
+	 */
+	protected void nocheckAddParameterModel(ParameterModel x) {
+		_parameterModels.add(x);
+	}
+
+	/**
+	 * returns the number of linked objects for role "parameterModels"
+	 * 
+	 * @return the number of linked objects
+	 */
+	public int parameterModelsSize() {
+		return _parameterModels.size();
+	}
+
+	/**
+	 * returns true if x is linked to the receiver for role "parameterModels"
+	 * 
+	 * @param x
+	 *            an instance of ParameterModel
+	 */
+	public boolean parameterModelsIncludes(ParameterModel x) {
+		return _parameterModels.contains(x);
+	}
+
+	/**
+	 * returns an Iterator to iterate over the elements of "parameterModels"
+	 * 
+	 */
+	public java.util.Iterator<ParameterModel> parameterModelsIterator() {
+		return _parameterModels.iterator();
+
+	}
+
+	/**
+	 * Remove any link for role timestampModel
+	 */
+	public void releaseTimestampModel() {
+		setTimestampModel(null);
+	}
+
+	/**
+	 * returns the linked object for role <% aRole name%>
+	 * 
+	 * @return the object linked
+	 */
+	public HorodatedParameterModel getTimestampModel() {
+		return _timestampModel;
+	}
+
+	/**
+	 * Create a new link with x for role timestampModel
+	 * 
+	 * @param x
+	 *            the object to link with
+	 */
+	public void setTimestampModel(HorodatedParameterModel x) {
+		if (_timestampModel == x)
+			return;
+		_timestampModel = x;
+	}
+
+	/**
+	 * 
+	 * @param a_Station
+	 */
+	public void computeEndDate(Station a_Station) {
+		TimeSeriesInformation timeSeries = a_Station.getTimeSeriesInformation();
+		if (Float.isNaN(timeSeries.getEndDate())) {
+			long rate = new Float(timeSeries.getSamplingRate() * 1000.0f)
+					.longValue();
+			int size = a_Station.parametersAt(0).valuesSize() - 1;
+			long date = a_Station.getFullDate() + (size * rate);
+			TimeZone tz = TimeZone.getTimeZone("GMT");
+			Calendar cal = Calendar.getInstance(tz);
+			cal.clear();
+			cal.setTimeInMillis(date);
+			Calendar cal2 = Calendar.getInstance(tz);
+			cal2.clear();
+			cal2.setTimeZone(tz);
+			cal2.set(Calendar.HOUR_OF_DAY, cal.get(Calendar.HOUR_OF_DAY));
+			cal2.set(Calendar.MINUTE, cal.get(Calendar.MINUTE));
+			cal2.set(Calendar.SECOND, cal.get(Calendar.SECOND));
+			timeSeries.setEndTime(cal2.getTimeInMillis());
+			cal2.clear();
+			cal2.setTimeZone(tz);
+			cal2.set(Calendar.YEAR, cal.get(Calendar.YEAR));
+			cal2.set(Calendar.MONTH, cal.get(Calendar.MONTH));
+			cal2.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH));
+			timeSeries.setEndDate(cal2.getTimeInMillis());
+		}
+	}
+
+	/**
+	 * 
+	 * @param a_Reader
+	 * @return String[]
+	 * @exception java.io.IOException
+	 */
+	public String[] consumeFooter(RandomAccessFile a_Reader) throws IOException {
+		Vector<String> v = new Vector<String>();
+		for (int i = 0; i < _endData; i++) {
+			String line = a_Reader.readLine();
+			if (line != null) {
+				v.add(line);
+			}
+		}
+		String[] lines = new String[v.size()];
+		return v.toArray(lines);
+	}
+
+	/**
+	 * 
+	 * @param a_Reader
+	 * @return String[]
+	 * @exception java.io.IOException
+	 */
+	public String[] consumeHeader(RandomAccessFile a_Reader) throws IOException {
+		Vector<String> v = new Vector<String>();
+		for (int i = 0; i < _numberOfLines; i++) {
+			String line = a_Reader.readLine();
+			if (line != null) {
+				v.add(line);
+			} else {
+				return null;
+			}
+		}
+		String[] lines = new String[v.size()];
+		return v.toArray(lines);
+	}
+
+	/**
+	 * 
+	 * @param a_Reader
+	 * @param a_Filename
+	 * @param isRefDateBased
+	 * @param a_RefDate
+	 * @param a_Notifier
+	 * @return Station
+	 * @exception IOException
+	 * @exception java.text.ParseException
+	 */
+	public Station convert(RandomAccessFile a_Reader, String a_Filename,
+			boolean isRefDateBased, long a_RefDate,
+			SizeBasedProgressNotifier a_Notifier) throws IOException,
+			ParseException {
+		Station station = null;
+		String[] header = null;
+		try {
+			station = (Station) _model.clone();
+			if (_metaInData) {
+				consumeHeader(a_Reader);
+				a_Notifier.progress(a_Reader.getFilePointer());
+				convertParameters(a_Reader, station, isRefDateBased, a_RefDate,
+						a_Notifier);
+				if (_timeSeriesModel != null
+						&& Float.isNaN(station.getTimeSeriesInformation()
+								.getEndDate())) {
+					computeEndDate(station);
+				}
+				a_Notifier.progress(a_Reader.getFilePointer());
+				consumeFooter(a_Reader);
+				a_Notifier.progress(a_Reader.getFilePointer());
+				return station;
+			} else {
+				if ((header = consumeHeader(a_Reader)) != null) {
+					a_Notifier.progress(a_Reader.getFilePointer());
+					if (getReferenceProperty().getFragment().getFirstLine() == 0
+							&& a_Filename != null) {
+						getReferenceProperty().applyOn(station,
+								new String[] { a_Filename });
+					} else {
+						if (isIncrementRef()) {
+							station.setReference(Integer.toString(_ref++));
+						} else {
+							getReferenceProperty().applyOn(station, header);
+						}
+					}
+					for (PropertyModel m : getProperties()) {
+						// System.out.println("@DEBUG propertyModel courant
+						// :"+m.getProperty());
+						m.applyOn(station, header);
+					}
+					if (_timeSeriesModel != null) {
+						_timeSeriesModel.convert(station, header,
+								isRefDateBased, a_RefDate);
+					}
+					a_Notifier.progress(a_Reader.getFilePointer());
+					convertParameters(a_Reader, station, isRefDateBased,
+							a_RefDate, a_Notifier);
+					if (_timeSeriesModel != null
+							&& Float.isNaN(station.getTimeSeriesInformation()
+									.getEndDate())) {
+						computeEndDate(station);
+					}
+					consumeFooter(a_Reader);
+					a_Notifier.progress(a_Reader.getFilePointer());
+
+					return station;
+				}
+			}
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		} catch (IntrospectionException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	/**
+	 * 
+	 * @param a_Reader
+	 * @param a_Station
+	 * @param isRefDateBased
+	 * @param a_RefDate
+	 * @param a_Notifier
+	 * @exception IOException
+	 * @exception ParseException
+	 */
+	public void convertParameters(RandomAccessFile a_Reader, Station a_Station,
+			boolean isRefDateBased, long a_RefDate,
+			SizeBasedProgressNotifier a_Notifier) throws IOException,
+			ParseException {
+		long rate = 0;
+		if (a_Station.getTimeSeriesInformation() != null) {
+			rate = new Float(a_Station.getTimeSeriesInformation()
+					.getSamplingRate() * 1000.0f).longValue();
+		}
+		try {
+			for (ParameterModel pm : _parameterModels) {
+				a_Station.addParameter((Parameter) pm.getModel().clone());
+			}
+			String line = null;
+			for (int index = 0; (line = a_Reader.readLine()) != null
+					&& (!(_endOnPattern && line.matches(_endDataPattern)) || (index < _rowNumber)); index++) {
+				if (index == 0 && _metaInData) {
+					String[] header = new String[] { line };
+					if (isIncrementRef()) {
+						a_Station.setReference(Long.toString(_ref++));
+					} else {
+						getReferenceProperty().applyOn(a_Station, header);
+					}
+					for (PropertyModel m : getProperties()) {
+						m.applyOn(a_Station, header);
+					}
+					if (_timeSeriesModel != null) {
+						_timeSeriesModel.convert(a_Station, header,
+								isRefDateBased, a_RefDate);
+					}
+				}
+				int paramIndex = 0;
+				for (ParameterModel pm : _parameterModels) {
+					Parameter p = a_Station.parametersAt(paramIndex);
+					ParameterValue value = null;
+					if (_timestampModel != null) {
+						HorodatedValue hValue = new HorodatedValue();
+						if (_timestampModel.isComputed()) {
+							hValue.setDate(a_Station.getFullDate()
+									+ (index * rate));
+						} else {
+							long time = _timestampModel.convertTimestamp(line,
+									a_RefDate);
+							hValue.setDate(a_Station.getGMTDate(time));
+						}
+						value = hValue;
+					} else {
+						value = new ParameterValue();
+					}
+					pm.convert(line, value);
+					p.addValue(value);
+					paramIndex++;
+				}
+				a_Notifier.progress(a_Reader.getFilePointer());
+			}
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		} catch (IntrospectionException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 
+	 * @return TimeSeriesInformation
+	 */
+	public TimeSeriesInformation getTimeSeriesInformation() {
+		return getModel().getTimeSeriesInformation();
+	}
+
+	/**
+	 * 
+	 * @param path
+	 *            the association path name
+	 * @param a_URI
+	 *            a_URI XML Namespace (SAX 2)
+	 * @param a_LocalName
+	 *            Tag name
+	 * @param a_QName
+	 *            Qualified tag name
+	 * @param a_Attributes
+	 *            XML Element attributes
+	 * @return SAXConsumer
+	 * @exception SAXException
+	 */
+	public SAXConsumer handlePathElement(String path, String a_URI,
+			String a_LocalName, String a_QName, Attributes a_Attributes)
+			throws SAXException {
+		SAXConsumer c = null;
+		if (path.equals("parameters")) {
+			c = ParameterModel.fromElement(a_URI, a_LocalName, a_QName,
+					a_Attributes);
+			addParameterModel((ParameterModel) c);
+			return c;
+		}
+		if (path.equals("properties")) {
+			c = PropertyModel.fromElement(a_URI, a_LocalName, a_QName,
+					a_Attributes);
+			((PropertyModel) c).setSource(_model);
+			addProperty((PropertyModel) c);
+			return c;
+		}
+		if (path.equals("referenceProperty")) {
+			c = PropertyModel.fromElement(a_URI, a_LocalName, a_QName,
+					a_Attributes);
+			((PropertyModel) c).setSource(_model);
+			setReferenceProperty((PropertyModel) c);
+			return c;
+		}
+		return null;
+	}
+
+	/**
+	 * 
+	 */
+	public void initProperties() {
+		try {
+			setReferenceProperty(new PropertyModel("reference", _model));
+			addProperty(new PropertyModel("date", _model, new DateTimeFormat(
+					"dd/MM/yyyy")));
+			addProperty(new PropertyModel("time", _model, new DateTimeFormat(
+					"hh:mm AM")));
+			addProperty(new PropertyModel("offsetTU", _model, new FloatFormat(
+					"%4.1f")));
+			addProperty(new PropertyModel("latitude", _model,
+					new LatitudeFormat("NDD MM SS")));
+			addProperty(new PropertyModel("longitude", _model,
+					new LongitudeFormat("NDDD MM SS")));
+			addProperty(new PropertyModel("bottomDepth", _model,
+					new FloatFormat("%4.0f")));
+			addProperty(new PropertyModel("dcHistory1", _model));
+			addProperty(new PropertyModel("dcHistory2", _model));
+			// addProperty( new PropertyModel( "dmHistory1", _model));
+			// addProperty( new PropertyModel( "dmHistory2", _model));
+			addProperty(new PropertyModel("surfaceSamples1", _model));
+			addProperty(new PropertyModel("surfaceSamples2", _model));
+			addProperty(new PropertyModel("comment", _model));
+		} catch (Exception e) {
+		}
+	}
+
+	/**
+	 * 
+	 */
+	public void initRef() {
+		_ref = 1;
+	}
 
 } /* End of class: StationModel */

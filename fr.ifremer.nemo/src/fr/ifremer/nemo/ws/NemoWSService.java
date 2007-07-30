@@ -8,9 +8,11 @@
 package fr.ifremer.nemo.ws;
 
 public interface NemoWSService extends javax.xml.rpc.Service {
-    public java.lang.String getNEMOAddress();
+	public java.lang.String getNEMOAddress();
 
-    public fr.ifremer.nemo.ws.NemoWS getNEMO() throws javax.xml.rpc.ServiceException;
+	public fr.ifremer.nemo.ws.NemoWS getNEMO()
+			throws javax.xml.rpc.ServiceException;
 
-    public fr.ifremer.nemo.ws.NemoWS getNEMO(java.net.URL portAddress) throws javax.xml.rpc.ServiceException;
+	public fr.ifremer.nemo.ws.NemoWS getNEMO(java.net.URL portAddress)
+			throws javax.xml.rpc.ServiceException;
 }

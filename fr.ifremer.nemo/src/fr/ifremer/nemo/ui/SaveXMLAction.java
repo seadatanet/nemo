@@ -16,21 +16,18 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.actions.ActionFactory;
 
 public class SaveXMLAction extends Action implements ISelectionListener,
-		ActionFactory.IWorkbenchAction { // implements ISelectionListener,
-											// ActionFactory.IWorkbenchAction
+		ActionFactory.IWorkbenchAction {
 	private final IWorkbenchWindow window;
 
 	public final static String ID = "fr.ifremer.nemo.ui.SaveXMLAction";
 
 	// vars nécessaires à la fenêtre d'options
-	// public static
+
 	public static Shell shelloptions;
 
 	public static String nomFichierSortieXML;
 
 	public static File fichierSortieXML;
-
-	// private IStructuredSelection selection;
 
 	public SaveXMLAction(IWorkbenchWindow window) {
 
@@ -48,7 +45,6 @@ public class SaveXMLAction extends Action implements ISelectionListener,
 
 	public void run() {
 		// sauvegarde du modèle
-		// System.out.println("Menu save");
 
 		FileOutputStream fileOutputStream = null;
 

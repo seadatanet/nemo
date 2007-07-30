@@ -69,14 +69,6 @@ public class EditConversion extends Thread {
 							// test pour savoir si on est en campagne ou pas
 							choixFichierSortie();
 
-							// System.out.println("==== Fin de conversion
-							// ====");
-							// if (ViewFile.odv.getSelection()){
-							// Utils.messageOK(Messages.getString("EditConversion.9"));}
-							// //$NON-NLS-1$
-							// else
-							// {Utils.messageOK(Messages.getString("EditConversion.10"));}
-							// //$NON-NLS-1$
 						} else {
 							Utils.messageErreur(Messages
 									.getString("EditConversion.15"));
@@ -185,42 +177,5 @@ public class EditConversion extends Thread {
 		}
 
 	}
-
-	//	
-	//	
-	// if (nomFichierSortie!=null){
-	// File fich = new File(nomFichierSortie);
-	// if (fich.exists()){
-	// shell.close();
-	//		
-	// Shell shell2 = new Shell();
-	//		
-	// MessageBox mb = new MessageBox(shell2, SWT.ICON_WARNING | SWT.YES |
-	// SWT.NO | SWT.APPLICATION_MODAL);
-	// mb.setMessage(Messages.getString("EditConversion.14")); //$NON-NLS-1$
-	//		
-	// int reponse = mb.open();
-	// if (reponse == SWT.NO){
-	// //on n'écrase pas le fichier
-	// choixFichierSortie();
-	// }else{
-	// //on écrase le fichier
-	// java.io.FileInputStream stream = null;
-	//		
-	// Utils.messageErreur("");
-	// SWTProcess.interrompu = false;
-	// new SWTProgress().run();
-	//		
-	//		
-	// if (ViewFile.odv.getSelection()){
-	// Utils.messageOK(Messages.getString("EditConversion.9"));}
-	// else {Utils.messageOK(Messages.getString("EditConversion.10"));}
-	//			
-	//			
-	// // fin on ecrase le fichier
-	//	
-	//	
-	//	
-	// }//fin fichier pas nul
 
 }

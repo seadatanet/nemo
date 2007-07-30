@@ -9,14 +9,13 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.actions.ActionFactory;
 
 public class OpenXMLAction extends Action implements ISelectionListener,
-		ActionFactory.IWorkbenchAction { // implements ISelectionListener,
-											// ActionFactory.IWorkbenchAction
+		ActionFactory.IWorkbenchAction {
 	private final IWorkbenchWindow window;
 
 	public final static String ID = "fr.ifremer.nemo.ui.OpenXMLAction"; //$NON-NLS-1$
 
 	// vars nécessaires à la fenêtre d'options
-	// public static
+
 	public static Shell shelloptions;
 
 	public static String nomXML, nomFichierXML;

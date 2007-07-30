@@ -12,7 +12,7 @@ import org.eclipse.ui.actions.ActionFactory;
 
 public class ExitAction extends Action implements ISelectionListener,
 		ActionFactory.IWorkbenchAction { // implements ISelectionListener,
-											// ActionFactory.IWorkbenchAction
+	// ActionFactory.IWorkbenchAction
 	private final IWorkbenchWindow window;
 
 	public final static String ID = "fr.ifremer.nemo.ui.ExitAction"; //$NON-NLS-1$

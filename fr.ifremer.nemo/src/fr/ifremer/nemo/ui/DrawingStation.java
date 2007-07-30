@@ -19,8 +19,6 @@ public class DrawingStation {
 
 	private static Group grou;
 
-	// private static Text lign, debu, fi;
-
 	public static void sectionManuelLigneDebutFinInject(String nomSection,
 			String description, Section section, Text ligne, Text debut,
 			Text fin, Text manuel, Button radio, Button position) {
@@ -63,9 +61,6 @@ public class DrawingStation {
 		manu = manuel;
 		manuel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		// radio position
-		// Button position = ViewEdit.toolkitEdition.createButton(sectionClient,
-		// "Position", SWT.RADIO);
 		position.setParent(sectionClient);
 		position.setText("Position");
 
@@ -92,7 +87,6 @@ public class DrawingStation {
 		Label label3 = new Label(groupe, SWT.CENTER);
 		label3.setText("Fin");
 		fin.setParent(groupe);
-		// fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// groupe non visible de base
 		// groupe.setVisible(false);
@@ -119,11 +113,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("saisie manuelle section " + nomSec); // TODO
-																					// Auto-generated
-																					// Event
-																					// stub
-																					// widgetSelected()
+
 						// raz de la valeur manuelle
 						manu.setEnabled(true);
 						// grou.setVisible(false);
@@ -139,9 +129,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent f) {
-						System.out.println("position dans fichier section "
-								+ nomSec); // TODO Auto-generated Event stub
-											// widgetSelected()
+
 						// raz de la valeur manuelle
 
 						manu.setText("");
@@ -165,15 +153,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out.println("bouton injection"); // TODO
-																// Auto-generated
-																// Event stub
-																// widgetSelected()
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
+
 						Utils
 								.inject(lign, debu, fi,
 										ViewFile.styledTextStation);
@@ -250,8 +230,7 @@ public class DrawingStation {
 		manuel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// radio position
-		// Button position = ViewEdit.toolkitEdition.createButton(sectionClient,
-		// "Position", SWT.RADIO);
+
 		position.setParent(sectionClient);
 		position.setText("Position");
 
@@ -266,19 +245,16 @@ public class DrawingStation {
 		Label label1 = new Label(groupe, SWT.CENTER);
 		label1.setText("Ligne");
 		ligne.setParent(groupe);
-		// ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// debut
 		Label label2 = new Label(groupe, SWT.CENTER);
 		label2.setText("Début");
 		debut.setParent(groupe);
-		// debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
 		Label label3 = new Label(groupe, SWT.CENTER);
 		label3.setText("Fin");
 		fin.setParent(groupe);
-		// fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// groupe non visible de base
 		// groupe.setVisible(false);
@@ -305,31 +281,23 @@ public class DrawingStation {
 				.addMouseListener(new org.eclipse.swt.events.MouseListener() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out
-								.println("mise à jour champ test conversion freq echant");
-
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
 
 					}
 
 					public void mouseDoubleClick(MouseEvent e) {
-						// TODO Raccord de méthode auto-généré
+						// 
 						EditStation.conversionFreqEchant();
 
 						System.out.println("mise à jour champ test conversion");
 					}
 
 					public void mouseDown(MouseEvent e) {
-						// TODO Raccord de méthode auto-généré
+
 						System.out.println("mise à jour champ test conversion");
 					}
 
 					public void mouseUp(MouseEvent e) {
-						// TODO Raccord de méthode auto-généré
+						// 
 						System.out.println("mise à jour champ test conversion");
 					}
 				});
@@ -339,11 +307,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("saisie manuelle section " + nomSec); // TODO
-																					// Auto-generated
-																					// Event
-																					// stub
-																					// widgetSelected()
+
 						// raz de la valeur manuelle
 						manu.setEnabled(true);
 						// grou.setVisible(false);
@@ -359,9 +323,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent f) {
-						System.out.println("position dans fichier section "
-								+ nomSec); // TODO Auto-generated Event stub
-											// widgetSelected()
+
 						// raz de la valeur manuelle
 
 						manu.setText("");
@@ -385,15 +347,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out.println("bouton injection"); // TODO
-																// Auto-generated
-																// Event stub
-																// widgetSelected()
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
+
 						Utils
 								.inject(lign, debu, fi,
 										ViewFile.styledTextStation);
@@ -424,8 +378,6 @@ public class DrawingStation {
 
 		nomSec = nomSection;
 
-		// section.setParent(EditStation.formEdition);
-
 		section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
 				| Section.TWISTIE | Section.COMPACT);
@@ -446,8 +398,6 @@ public class DrawingStation {
 		Composite sectionClient = ViewEdit.toolkitEdition
 				.createComposite(section);
 		sectionClient.setLayout(new GridLayout());
-		// GridData gd = new GridData();
-		// gd.horizontalSpan = 2;
 
 		// bouton radio "saisie manuelle"
 		// c'est lui qui est passé en ppar
@@ -461,8 +411,6 @@ public class DrawingStation {
 		// Button position = new Button(sectionClient, SWT.RADIO);
 		position.setParent(sectionClient);
 		position.setText("Position fixée");
-		// Button position = ViewEdit.toolkitEdition.createButton(sectionClient,
-		// "Position", SWT.RADIO);
 
 		GridLayout gridLayout1 = new GridLayout();
 		gridLayout1.numColumns = 6;
@@ -475,21 +423,21 @@ public class DrawingStation {
 		Label label1 = new Label(groupe, SWT.NULL);
 		label1.setText("Ligne");
 		ligne.setParent(groupe);
-		// ligne = new Text(groupe, SWT.BORDER);
+
 		ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// debut
 		Label label2 = new Label(groupe, SWT.NULL);
 		label2.setText("Début");
 		debut.setParent(groupe);
-		// = new Text(groupe, SWT.BORDER);
+
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
 		Label label3 = new Label(groupe, SWT.NULL);
 		label3.setText("Fin");
 		fin.setParent(groupe);
-		// = new Text(groupe, SWT.BORDER);
+
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// groupe non visible de base
@@ -517,11 +465,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("saisie manuelle section " + nomSec); // TODO
-																					// Auto-generated
-																					// Event
-																					// stub
-																					// widgetSelected()
+
 						// raz de la valeur manuelle
 						// grou.setVisible(false);
 						lign.setEnabled(false);
@@ -538,7 +482,7 @@ public class DrawingStation {
 							org.eclipse.swt.events.SelectionEvent f) {
 						System.out.println("position dans fichier section "
 								+ nomSec); // TODO Auto-generated Event stub
-											// widgetSelected()
+						// widgetSelected()
 						// raz de la valeur manuelle
 
 						grou.setVisible(true);
@@ -560,15 +504,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out.println("bouton injection"); // TODO
-																// Auto-generated
-																// Event stub
-																// widgetSelected()
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
+
 						Utils
 								.inject(lign, debu, fi,
 										ViewFile.styledTextStation);
@@ -616,8 +552,6 @@ public class DrawingStation {
 		sectionClient.setLayout(new GridLayout());
 
 		EditStation.comboRefStationType.setParent(sectionClient);
-		// EditStation.comboRefStationType.setLayoutData(new
-		// GridData(GridData.FILL_HORIZONTAL));
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -662,10 +596,6 @@ public class DrawingStation {
 		radio.setParent(sectionClient);
 		radio.setText("Saisie manuelle");
 
-		// Button saisieManuelle =
-		// ViewEdit.toolkitEdition.createButton(sectionClient, "Saisie
-		// manuelle", SWT.RADIO);
-
 		// ligne 1
 		Label label3 = new Label(sectionClient, SWT.NULL);
 		label3.setText("Ligne 1");
@@ -680,13 +610,8 @@ public class DrawingStation {
 
 		zone2.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		// bouton radio "position"
-		// radio.setParent(sectionClient);
-		// radio.setText("Position");
 		position.setParent(sectionClient);
 		position.setText("Position");
-		// Button position = ViewEdit.toolkitEdition.createButton(sectionClient,
-		// "Position", SWT.RADIO);
 
 		GridLayout gridLayout1 = new GridLayout();
 		gridLayout1.numColumns = 6;
@@ -764,11 +689,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("saisie manuelle section " + nomSec); // TODO
-																					// Auto-generated
-																					// Event
-																					// stub
-																					// widgetSelected()
+
 						// raz de la valeur manuelle
 						zon1.setEnabled(true);
 						zon2.setEnabled(true);
@@ -790,9 +711,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent f) {
-						System.out.println("position dans fichier section "
-								+ nomSec); // TODO Auto-generated Event stub
-											// widgetSelected()
+
 						// raz de la valeur manuelle
 
 						zon1.setText("");
@@ -827,15 +746,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out.println("bouton injection"); // TODO
-																// Auto-generated
-																// Event stub
-																// widgetSelected()
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
+
 						Utils.inject(lign1, debu1, fi1,
 								ViewFile.styledTextStation);
 						EditStation.cursHistorique1
@@ -850,15 +761,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out.println("bouton injection"); // TODO
-																// Auto-generated
-																// Event stub
-																// widgetSelected()
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
+
 						Utils.inject(lign2, debu2, fi2,
 								ViewFile.styledTextStation);
 						EditStation.cursHistorique2
@@ -927,10 +830,6 @@ public class DrawingStation {
 		radio.setParent(sectionClient);
 		radio.setText("Saisie manuelle");
 
-		// Button saisieManuelle =
-		// ViewEdit.toolkitEdition.createButton(sectionClient, "Saisie
-		// manuelle", SWT.RADIO);
-
 		// ligne 1
 		Label label3 = new Label(sectionClient, SWT.NULL);
 		label3.setText("Ligne 1");
@@ -945,13 +844,8 @@ public class DrawingStation {
 
 		zone2.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		// bouton radio "position"
-		// radio.setParent(sectionClient);
-		// radio.setText("Position");
 		position.setParent(sectionClient);
 		position.setText("Position");
-		// Button position = ViewEdit.toolkitEdition.createButton(sectionClient,
-		// "Position", SWT.RADIO);
 
 		GridLayout gridLayout1 = new GridLayout();
 		gridLayout1.numColumns = 6;
@@ -1029,11 +923,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("saisie manuelle section " + nomSec); // TODO
-																					// Auto-generated
-																					// Event
-																					// stub
-																					// widgetSelected()
+
 						// raz de la valeur manuelle
 						zon1.setEnabled(true);
 						zon2.setEnabled(true);
@@ -1055,9 +945,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent f) {
-						System.out.println("position dans fichier section "
-								+ nomSec); // TODO Auto-generated Event stub
-											// widgetSelected()
+
 						// raz de la valeur manuelle
 
 						zon1.setText("");
@@ -1092,15 +980,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out.println("bouton injection"); // TODO
-																// Auto-generated
-																// Event stub
-																// widgetSelected()
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
+
 						Utils.inject(lign1, debu1, fi1,
 								ViewFile.styledTextStation);
 						EditStation.cursEchant1.setX(ViewFile.styledTextStation
@@ -1116,15 +996,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out.println("bouton injection"); // TODO
-																// Auto-generated
-																// Event stub
-																// widgetSelected()
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
+
 						Utils.inject(lign2, debu2, fi2,
 								ViewFile.styledTextStation);
 
@@ -1180,15 +1052,6 @@ public class DrawingStation {
 
 		EditStation.textCommentaire.setParent(sectionClient);
 		EditStation.textCommentaire.setTextLimit(500);
-		// EditStation.textCommentaire.setLayoutData(new
-		// GridData(GridData.FILL_BOTH));
-		// {
-		// GridData gridData = new GridData(SWT.FILL, SWT.FILL, true, true, 3,
-		// 1);
-		// gridData.minimumHeight = 40;
-		// gridData.minimumWidth = 50;
-		// EditStation.textCommentaire.setLayoutData(gridData);
-		// }
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -1274,10 +1137,6 @@ public class DrawingStation {
 		radio.setParent(sectionClient);
 		radio.setText("Saisie manuelle");
 
-		// Button saisieManuelle =
-		// ViewEdit.toolkitEdition.createButton(sectionClient, "Saisie
-		// manuelle", SWT.RADIO);
-
 		// manuel = new Text(sectionClient, SWT.BORDER);
 		manuel.setParent(sectionClient);
 		manu = manuel;
@@ -1290,9 +1149,6 @@ public class DrawingStation {
 			manuel.setLayoutData(gridData);
 		}
 
-		// bouton radio "position"
-		// radio.setParent(sectionClient);
-		// radio.setText("Position");
 		position.setParent(sectionClient);
 		position.setText("position");
 
@@ -1347,11 +1203,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("saisie manuelle section " + nomSec); // TODO
-																					// Auto-generated
-																					// Event
-																					// stub
-																					// widgetSelected()
+
 						// raz de la valeur manuelle
 						manu.setEnabled(true);
 						// grou.setVisible(false);
@@ -1369,9 +1221,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent f) {
-						System.out.println("position dans fichier section "
-								+ nomSec); // TODO Auto-generated Event stub
-											// widgetSelected()
+
 						// raz de la valeur manuelle
 
 						manu.setText("");
@@ -1397,15 +1247,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out.println("bouton injection"); // TODO
-																// Auto-generated
-																// Event stub
-																// widgetSelected()
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
+
 						Utils
 								.inject(lign, debu, fi,
 										ViewFile.styledTextStation);
@@ -1463,19 +1305,6 @@ public class DrawingStation {
 
 		GridLayout gridLayout = new GridLayout();
 		gridLayout.numColumns = 4;
-
-		/*
-		 * Group groupeConv = new Group(sectionClient, SWT.NONE);
-		 * groupeConv.setText("Conversion"); groupeConv.setLayout(gridLayout);
-		 * 
-		 * //zone de conversion et test de conversion Label labelConv= new
-		 * Label(groupeConv, SWT.NONE); labelConv.setText("Formule");
-		 * EditStation.textConversionHeure.setParent(groupeConv);
-		 * 
-		 * Label labelTest= new Label(groupeConv, SWT.NONE);
-		 * labelTest.setText("Test");
-		 * EditStation.textTestConvHeure.setParent(groupeConv);
-		 */
 
 		Group groupeFormat = new Group(sectionClient, SWT.NONE);
 		groupeFormat.setLayout(new GridLayout());
@@ -1548,28 +1377,19 @@ public class DrawingStation {
 				.addMouseListener(new org.eclipse.swt.events.MouseListener() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out.println("mise à jour champ test conversion");
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
 
 					}
 
 					public void mouseDoubleClick(MouseEvent e) {
-						// TODO Raccord de méthode auto-généré
-						System.out.println("mise à jour champ test conversion");
+
 					}
 
 					public void mouseDown(MouseEvent e) {
-						// TODO Raccord de méthode auto-généré
-						System.out.println("mise à jour champ test conversion");
+
 					}
 
 					public void mouseUp(MouseEvent e) {
-						// TODO Raccord de méthode auto-généré
-						System.out.println("mise à jour champ test conversion");
+
 					}
 				});
 
@@ -1578,12 +1398,6 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out.println("bouton saisie heure");
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
 
 						EditStation.textHeureSaisie.setEnabled(true);
 						lign.setEnabled(false);
@@ -1602,13 +1416,6 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out.println("bouton position heure");
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
-
 						EditStation.textHeureSaisie.setEnabled(false);
 						lign.setEnabled(true);
 						debu.setEnabled(true);
@@ -1625,12 +1432,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out.println("bouton injection");
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
+
 						Utils
 								.inject(lign, debu, fi,
 										ViewFile.styledTextStation);
@@ -1640,45 +1442,6 @@ public class DrawingStation {
 								.getSelection().y;
 					}
 				});
-
-		/*
-		 * if (ViewFile.checkBoxTempo.getSelection()){
-		 * 
-		 * inject = buttonInject;
-		 * 
-		 * EditStation.buttonHeureReference .addSelectionListener(new
-		 * org.eclipse.swt.events.SelectionAdapter() { public void
-		 * widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-		 * System.out.println("saisie manuelle section " + nomSec); // TODO
-		 * Auto-generated Event stub widgetSelected()
-		 * 
-		 * 
-		 * //grou.setVisible(false); //grou.setEnabled(false);
-		 * lign.setEnabled(false); debu.setEnabled(false); fi.setEnabled(false);
-		 * inject.setEnabled(false);
-		 * 
-		 * lign.setText(""); debu.setText(""); fi.setText("");
-		 * 
-		 *  } });
-		 * 
-		 * //de base position est desactivée //grou.setEnabled(false);
-		 * buttonInject.setEnabled(false);
-		 * 
-		 * 
-		 * 
-		 * EditStation.buttonHeureReferencePos .addSelectionListener(new
-		 * org.eclipse.swt.events.SelectionAdapter() { public void
-		 * widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-		 * System.out.println("saisie position "); //raz de la valeur manuelle
-		 * //grou.setVisible(true); lign.setEnabled(true);
-		 * debu.setEnabled(true); fi.setEnabled(true); inject.setEnabled(true);
-		 * 
-		 * lign.setText(""); debu.setText(""); fi.setText("");
-		 * 
-		 *  } });
-		 *  } //fin if tempo
-		 * 
-		 */
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -1726,19 +1489,6 @@ public class DrawingStation {
 
 		GridLayout gridLayout = new GridLayout();
 		gridLayout.numColumns = 4;
-
-		/*
-		 * Group groupeConv = new Group(sectionClient, SWT.NONE);
-		 * groupeConv.setText("Conversion"); groupeConv.setLayout(gridLayout);
-		 * 
-		 * //zone de conversion et test de conversion Label labelConv= new
-		 * Label(groupeConv, SWT.NONE); labelConv.setText("Formule");
-		 * EditStation.textConversionDate.setParent(groupeConv);
-		 * 
-		 * Label labelTest= new Label(groupeConv, SWT.NONE);
-		 * labelTest.setText("Test");
-		 * EditStation.textTestConvDate.setParent(groupeConv);
-		 */
 
 		Group groupeFormat = new Group(sectionClient, SWT.NONE);
 		groupeFormat.setLayout(new GridLayout());
@@ -1812,28 +1562,19 @@ public class DrawingStation {
 				.addMouseListener(new org.eclipse.swt.events.MouseListener() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out.println("mise à jour champ test conversion");
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
 
 					}
 
 					public void mouseDoubleClick(MouseEvent e) {
-						// TODO Raccord de méthode auto-généré
-						System.out.println("mise à jour champ test conversion");
+
 					}
 
 					public void mouseDown(MouseEvent e) {
-						// TODO Raccord de méthode auto-généré
-						System.out.println("mise à jour champ test conversion");
+
 					}
 
 					public void mouseUp(MouseEvent e) {
-						// TODO Raccord de méthode auto-généré
-						System.out.println("mise à jour champ test conversion");
+
 					}
 				});
 
@@ -1842,12 +1583,6 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out.println("bouton saisie date");
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
 
 						EditStation.textDateSaisie.setEnabled(true);
 						lign.setEnabled(false);
@@ -1866,12 +1601,6 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out.println("bouton position heure");
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
 
 						EditStation.textDateSaisie.setEnabled(false);
 						lign.setEnabled(true);
@@ -1889,13 +1618,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						// System.out.println("bouton injection"); // TODO
-						// Auto-generated Event stub widgetSelected()
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
+
 						Utils
 								.inject(lign, debu, fi,
 										ViewFile.styledTextStation);
@@ -1906,46 +1629,6 @@ public class DrawingStation {
 
 					}
 				});
-
-		/*
-		 * 
-		 * if (ViewFile.checkBoxTempo.getSelection()){
-		 * 
-		 * inject = buttonInject;
-		 * 
-		 * EditStation.buttonDateReference .addSelectionListener(new
-		 * org.eclipse.swt.events.SelectionAdapter() { public void
-		 * widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-		 * System.out.println("saisie manuelle section " + nomSec); // TODO
-		 * Auto-generated Event stub widgetSelected()
-		 * 
-		 * 
-		 * //grou.setVisible(false); //grou.setEnabled(false);
-		 * lign.setEnabled(false); debu.setEnabled(false); fi.setEnabled(false);
-		 * inject.setEnabled(false);
-		 * 
-		 * lign.setText(""); debu.setText(""); fi.setText("");
-		 * 
-		 *  } });
-		 * 
-		 * //de base position est desactivée //grou.setEnabled(false);
-		 * buttonInject.setEnabled(false);
-		 * 
-		 * 
-		 * 
-		 * EditStation.buttonDateReferencePos .addSelectionListener(new
-		 * org.eclipse.swt.events.SelectionAdapter() { public void
-		 * widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-		 * System.out.println("saisie position "); //raz de la valeur manuelle
-		 * //grou.setVisible(true); lign.setEnabled(true);
-		 * debu.setEnabled(true); fi.setEnabled(true); inject.setEnabled(true);
-		 * 
-		 * lign.setText(""); debu.setText(""); fi.setText("");
-		 * 
-		 *  } });
-		 *  } //fin if tempo
-		 * 
-		 */
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -1998,23 +1681,11 @@ public class DrawingStation {
 		radio.setParent(sectionClient);
 		radio.setText("Saisie manuelle");
 
-		// Button saisieManuelle =
-		// ViewEdit.toolkitEdition.createButton(sectionClient, "Saisie
-		// manuelle", SWT.RADIO);
-
-		// manuel = new Text(sectionClient, SWT.BORDER);
-
 		manuel.setParent(sectionClient);
 		manuel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		// bouton radio "position"
-		// radio.setParent(sectionClient);
-		// radio.setText("Position");
-
 		position.setParent(sectionClient);
 		position.setText("Position");
-		// Button position = ViewEdit.toolkitEdition.createButton(sectionClient,
-		// "Position", SWT.RADIO);
 
 		GridLayout gridLayout1 = new GridLayout();
 		gridLayout1.numColumns = 6;
@@ -2068,11 +1739,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("saisie manuelle section " + nomSec); // TODO
-																					// Auto-generated
-																					// Event
-																					// stub
-																					// widgetSelected()
+
 						// raz de la valeur manuelle
 						manu.setEnabled(true);
 						// grou.setVisible(false);
@@ -2088,9 +1755,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent f) {
-						System.out.println("position dans fichier section "
-								+ nomSec); // TODO Auto-generated Event stub
-											// widgetSelected()
+
 						// raz de la valeur manuelle
 
 						manu.setText("");
@@ -2115,15 +1780,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out.println("bouton injection"); // TODO
-																// Auto-generated
-																// Event stub
-																// widgetSelected()
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
+
 						Utils
 								.inject(lign, debu, fi,
 										ViewFile.styledTextStation);
@@ -2173,23 +1830,8 @@ public class DrawingStation {
 				.createComposite(section);
 		sectionClient.setLayout(new GridLayout());
 
-		// Group groupFormat = new Group(sectionClient, SWT.NONE);
-		// groupFormat.setText("Format");
-		// //combo format
-		// combo.setParent(groupFormat);
-
-		// saisie manuelle
-		// faire groupe et radios
-
-		// bouton radio "saisie manuelle"
-		// c'est lui qui est passé en ppar
-
 		radio.setParent(sectionClient);
 		radio.setText("Saisie manuelle");
-
-		// Button saisieManuelle =
-		// ViewEdit.toolkitEdition.createButton(sectionClient, "Saisie
-		// manuelle", SWT.RADIO);
 
 		manuel.setParent(sectionClient);
 		manuel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -2198,8 +1840,6 @@ public class DrawingStation {
 
 		position.setParent(sectionClient);
 		position.setText("Position");
-		// Button position = ViewEdit.toolkitEdition.createButton(sectionClient,
-		// "Position", SWT.RADIO);
 
 		GridLayout gridLayout1 = new GridLayout();
 		gridLayout1.numColumns = 6;
@@ -2212,25 +1852,22 @@ public class DrawingStation {
 		Label label1 = new Label(groupe, SWT.NULL);
 		label1.setText("Ligne");
 		ligne.setParent(groupe);
-		// ligne = new Text(groupe, SWT.BORDER);
+
 		ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// debut
 		Label label2 = new Label(groupe, SWT.NULL);
 		label2.setText("Début");
 		debut.setParent(groupe);
-		// = new Text(groupe, SWT.BORDER);
+
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
 		Label label3 = new Label(groupe, SWT.NULL);
 		label3.setText("Fin");
 		fin.setParent(groupe);
-		// = new Text(groupe, SWT.BORDER);
-		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		// groupe non visible de base
-		// groupe.setVisible(false);
+		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// bouton d'injection de la position des valeurs
 		Button buttonInject = new Button(groupe, SWT.NONE);
@@ -2253,11 +1890,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("saisie manuelle section " + nomSec); // TODO
-																					// Auto-generated
-																					// Event
-																					// stub
-																					// widgetSelected()
+
 						// raz de la valeur manuelle
 						manu.setEnabled(true);
 						// grou.setVisible(false);
@@ -2273,9 +1906,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent f) {
-						System.out.println("position dans fichier section "
-								+ nomSec); // TODO Auto-generated Event stub
-											// widgetSelected()
+
 						// raz de la valeur manuelle
 
 						manu.setText("");
@@ -2300,15 +1931,7 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out.println("bouton injection"); // TODO
-																// Auto-generated
-																// Event stub
-																// widgetSelected()
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
+
 						Utils
 								.inject(lign, debu, fi,
 										ViewFile.styledTextStation);
@@ -2362,29 +1985,25 @@ public class DrawingStation {
 		Label label1 = new Label(sectionClient, SWT.NULL);
 		label1.setText("Flag QC Date/Heure");
 		EditStation.textQCDate.setParent(sectionClient);
-		// EditStation.textQCDate.setLayoutData(new
-		// GridData(GridData.FILL_HORIZONTAL));
+
 		EditStation.textQCDate.setTextLimit(1);
 
 		Label label2 = new Label(sectionClient, SWT.NULL);
 		label2.setText("Flag QC Latitude");
 		EditStation.textQCLat.setParent(sectionClient);
-		// EditStation.textQCDate.setLayoutData(new
-		// GridData(GridData.FILL_HORIZONTAL));
+
 		EditStation.textQCLat.setTextLimit(1);
 
 		Label label3 = new Label(sectionClient, SWT.NULL);
 		label3.setText("Flag QC Longitude");
 		EditStation.textQCLong.setParent(sectionClient);
-		// EditStation.textQCDate.setLayoutData(new
-		// GridData(GridData.FILL_HORIZONTAL));
+
 		EditStation.textQCLong.setTextLimit(1);
 
 		Label label4 = new Label(sectionClient, SWT.NULL);
 		label4.setText("Flag QC Profondeur");
 		EditStation.textQCProf.setParent(sectionClient);
-		// EditStation.textQCDate.setLayoutData(new
-		// GridData(GridData.FILL_HORIZONTAL));
+
 		EditStation.textQCProf.setTextLimit(1);
 
 		section.setClient(sectionClient);

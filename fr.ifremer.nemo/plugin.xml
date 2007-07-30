@@ -22,11 +22,6 @@
    <extension
          point="org.eclipse.ui.views">
       <view
-            name="fr.ifremer.nemo.ui.View"
-            class="fr.ifremer.nemo.ui.View"
-            id="fr.ifremer.nemo.ui.View">
-      </view>
-      <view
             class="fr.ifremer.nemo.ui.ViewFile"
             id="fr.ifremer.nemo.ui.ViewFile"
             name="fr.ifremer.nemo.ui.ViewFile"/>

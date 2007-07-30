@@ -47,7 +47,6 @@ public class TableDataSurvey {
 				SWT.FULL_SELECTION | SWT.FILL);
 
 		table = TableDataSurvey.tableTypeSurvey;
-		System.out.println("=========creationTable()======="); //$NON-NLS-1$
 
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
@@ -75,8 +74,6 @@ public class TableDataSurvey {
 	}
 
 	public static void initTypes() {
-
-		// System.out.println("=========initTypes()=======");
 
 		// initialisation de la ArrayList des types des données à partir du
 		// datamodel
@@ -115,14 +112,6 @@ public class TableDataSurvey {
 		final Table table;
 		table = TableDataSurvey.tableTypeSurvey;
 
-		// System.out.println("=========initTable()=======");
-
-		/*
-		 * //menu MenuManager popupMenu = new MenuManager(); IAction
-		 * newRowAction = new NewRowAction(); popupMenu.add(newRowAction); Menu
-		 * menu = popupMenu.createContextMenu(table); table.setMenu(menu);
-		 */
-
 		// REMPLISSAGE temporaire de la table
 		initTableData();
 		// remplirTableData();
@@ -130,7 +119,6 @@ public class TableDataSurvey {
 		// LINK des editors
 
 		// accès direct aux valeurs des colonnes des items
-		// table.getItems()[2].setText(4, "ça marche super!");
 
 		final TableEditor editor = new TableEditor(table);
 
@@ -164,13 +152,6 @@ public class TableDataSurvey {
 				// Point pt = new Point(event.x, event.y);
 				int index = table.getTopIndex();
 
-				// System.out.println("index= " + index + "table.getItemCount()=
-				// " + table.getItemCount());
-				// table.getItem(6).setText("coucou");
-				// System.out.println("items de la table [6] ==>"+
-				// table.getItems());
-
-				// TableItem item = table.getItem(pt);
 				if (item == null)
 					return;
 				for (int i = 0; i < table.getColumnCount(); i++) {
@@ -252,7 +233,6 @@ public class TableDataSurvey {
 
 		// MenuItem itemNew = new MenuItem(menu, SWT.NONE);
 		// itemNew.setText(Messages.getString("TableDataSurvey.6"));
-		// //$NON-NLS-1$
 
 		MenuItem itemList = new MenuItem(menu, SWT.NONE);
 		itemList.setText(Messages.getString("TableDataSurvey.7")); //$NON-NLS-1$
@@ -274,8 +254,7 @@ public class TableDataSurvey {
 		/*
 		 * itemNew.addListener(SWT.Selection, new Listener() { public void
 		 * handleEvent(Event e) { // System.out.println("nouveau type");
-		 * nouvelElt();
-		 *  } });
+		 * nouvelElt(); } });
 		 */
 		itemList.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
@@ -305,8 +284,6 @@ public class TableDataSurvey {
 			}
 		});
 
-		// ViewFile.compositeData.redraw();
-		// ViewFile.compositeData.getDisplay().update();
 		table.setLayout(new FillLayout());
 		table.redraw();
 	}
@@ -316,8 +293,6 @@ public class TableDataSurvey {
 
 		int nbre;
 		nbre = types.size();
-
-		// System.out.println("=========initTableData()=======");
 
 		Table table;
 		table = TableDataSurvey.tableTypeSurvey;
@@ -339,14 +314,6 @@ public class TableDataSurvey {
 		Table table;
 
 		table = TableDataSurvey.tableTypeSurvey;
-		/*
-		 * //effacement de l'intérieur de la table items = table.getItems();
-		 * 
-		 * int nbre = items.length;
-		 * 
-		 * //on supprime tous les items for (int i=0; i<nbre; i++){
-		 * items[i].dispose(); }
-		 */
 
 		table.dispose();
 
@@ -364,7 +331,6 @@ public class TableDataSurvey {
 		razTableData();
 
 		// refresh de la table
-		// initTable();
 		creationTable();
 
 		Composite c = EditSurvey.sectionType;
@@ -403,7 +369,6 @@ public class TableDataSurvey {
 		ArrayList<TypeSurvey> listeTempo;
 		TypeSurvey typeTempo;
 		Table table, tableTempo;
-		// TableItem[] items, itemsTempo;
 
 		nbre = types.size();
 		listeTempo = new ArrayList();
@@ -488,7 +453,6 @@ public class TableDataSurvey {
 		razTableData();
 
 		// refresh de la table
-		// initTable();
 		creationTable();
 
 	}
@@ -506,7 +470,6 @@ public class TableDataSurvey {
 		razTableData();
 
 		// refresh de la table
-		// initTable();
 		creationTable();
 
 		Composite c = EditSurvey.sectionType;
@@ -548,11 +511,6 @@ public class TableDataSurvey {
 		nbre = TableDataSurvey.tableTypeSurvey.getItemCount();
 		for (int i = 0; i < nbre; i++) {
 
-			// TypeSurvey type = new TypeSurvey();
-			// type.setCode(TableDataSurvey.tableTypeSurvey.getItem(i).getText(0));
-			// type.setNombre(Integer.valueOf(TableDataSurvey.tableTypeSurvey.getItem(i).getText(1)));
-			// type.setQc(TableDataSurvey.tableTypeSurvey.getItem(i).getText(2));
-
 			types.get(i).setCode(
 					TableDataSurvey.tableTypeSurvey.getItem(i).getText(0));
 			if (TableDataSurvey.tableTypeSurvey.getItem(i).getText(1).matches(
@@ -569,7 +527,6 @@ public class TableDataSurvey {
 					Boolean.parseBoolean(TableDataSurvey.tableTypeSurvey
 							.getItem(i).getText(3)));
 
-			// types.add(type);
 		}
 
 		// System.out.println("maj types data : ok");
@@ -577,7 +534,7 @@ public class TableDataSurvey {
 	}
 
 	public static void ajouterCode(int indice) {
-		// TODO à compléter
+		// 
 
 	}
 

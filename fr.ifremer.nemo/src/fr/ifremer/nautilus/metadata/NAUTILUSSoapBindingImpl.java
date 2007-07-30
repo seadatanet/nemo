@@ -7,9 +7,11 @@
 
 package fr.ifremer.nautilus.metadata;
 
-public class NAUTILUSSoapBindingImpl implements fr.ifremer.nautilus.metadata.NautilusSurveyWS{
-    public fr.ifremer.nautilus.metadata.WSSurvey getSurvey(java.lang.String in0) throws java.rmi.RemoteException {
-        return null;
-    }
+public class NAUTILUSSoapBindingImpl implements
+		fr.ifremer.nautilus.metadata.NautilusSurveyWS {
+	public fr.ifremer.nautilus.metadata.WSSurvey getSurvey(java.lang.String in0)
+			throws java.rmi.RemoteException {
+		return null;
+	}
 
 }

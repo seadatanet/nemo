@@ -37,7 +37,6 @@ public class DrawingBack {
 		final Text manu;
 
 		nomSec = nomSection;
-		// manu = manuel;
 
 		section.setParent(EditDesc.formEdition);
 
@@ -69,17 +68,10 @@ public class DrawingBack {
 		radio.setParent(sectionClient);
 		radio.setText("Saisie manuelle");
 
-		// Button saisieManuelle =
-		// ViewEdit.toolkitEdition.createButton(sectionClient, "Saisie
-		// manuelle", SWT.RADIO);
-
 		manuel = new Text(sectionClient, SWT.BORDER);
 		manu = manuel;
 		manuel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		// bouton radio "position"
-		// radio.setParent(sectionClient);
-		// radio.setText("Position");
 		Button position = ViewEdit.toolkitEdition.createButton(sectionClient,
 				"Position", SWT.RADIO);
 
@@ -94,21 +86,21 @@ public class DrawingBack {
 		Label label1 = new Label(groupe, SWT.NULL);
 		label1.setText("Ligne");
 		ligne.setParent(groupe);
-		// ligne = new Text(groupe, SWT.BORDER);
+
 		ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// debut
 		Label label2 = new Label(groupe, SWT.NULL);
 		label2.setText("Début");
 		debut.setParent(groupe);
-		// = new Text(groupe, SWT.BORDER);
+
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
 		Label label3 = new Label(groupe, SWT.NULL);
 		label3.setText("Fin");
 		fin.setParent(groupe);
-		// = new Text(groupe, SWT.BORDER);
+
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// groupe non visible de base
@@ -168,11 +160,7 @@ public class DrawingBack {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
 						System.out.println("bouton injection"); // 
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
+
 						Utils.inject(lign, debu, fi,
 								ViewFile.textAreaDescription);
 
@@ -261,21 +249,21 @@ public class DrawingBack {
 		Label label1 = new Label(groupe, SWT.NULL);
 		label1.setText("Ligne");
 		ligne.setParent(groupe);
-		// = new Text(groupe, SWT.BORDER);
+
 		ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// debut
 		Label label2 = new Label(groupe, SWT.NULL);
 		label2.setText("Début");
 		debut.setParent(groupe);
-		// = new Text(groupe, SWT.BORDER);
+
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
 		Label label3 = new Label(groupe, SWT.NULL);
 		label3.setText("Fin");
 		fin.setParent(groupe);
-		// = new Text(groupe, SWT.BORDER);
+
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// groupe non visible de base
@@ -284,87 +272,6 @@ public class DrawingBack {
 		section.setClient(sectionClient);
 
 	}
-
-	/*
-	 * public static void sectionComboLigneDebutFinInject(String nomSection,
-	 * String description, Section section, Text ligne, Text debut, Text fin,
-	 * Combo combo){ //choix du format dans un combo list //ou alors position en
-	 * ligne debut fin
-	 * 
-	 * final String nomSec;
-	 * 
-	 * 
-	 * nomSec = nomSection;
-	 * 
-	 * section = ViewEdit.toolkitEdition.createSection(form.getBody(),
-	 * Section.DESCRIPTION|Section.TITLE_BAR| Section.TWISTIE|Section.COMPACT);
-	 * 
-	 * 
-	 * section.addExpansionListener(new ExpansionAdapter() { public void
-	 * expansionStateChanged(ExpansionEvent e) { form.reflow(true); } });
-	 * section.setText(nomSection); section.setDescription(description);
-	 * Composite sectionClient =
-	 * ViewEdit.toolkitEdition.createComposite(EditDesc.sectionDonnees);
-	 * sectionClient.setLayout(new GridLayout()); GridData gd = new GridData();
-	 * gd.horizontalSpan = 2;
-	 * 
-	 * //saisie manuelle //faire groupe et radios
-	 * 
-	 * //bouton radio "saisie manuelle" Button saisieManuelle =
-	 * ViewEdit.toolkitEdition.createButton(sectionClient, "Saisie manuelle",
-	 * SWT.RADIO); saisieManuelle .addSelectionListener(new
-	 * org.eclipse.swt.events.SelectionAdapter() { public void
-	 * widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-	 * System.out.println("saisie manuelle section " + nomSec); // //raz de la
-	 * valeur manuelle grou.setVisible(false); } });
-	 * 
-	 * 
-	 * //combo list combo.setParent(section);
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * //bouton radio "position" Button position =
-	 * ViewEdit.toolkitEdition.createButton(sectionClient, "Position",
-	 * SWT.RADIO); position .addSelectionListener(new
-	 * org.eclipse.swt.events.SelectionAdapter() { public void
-	 * widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-	 * System.out.println("position dans fichier section " + nomSec); // //raz
-	 * de la valeur manuelle
-	 * 
-	 * grou.setVisible(true); } });
-	 * 
-	 * 
-	 * 
-	 * GridLayout gridLayout1 = new GridLayout(); gridLayout1.numColumns = 2;
-	 * Group groupe = new Group(sectionClient, SWT.NONE);
-	 * EditDesc.groupRuptureDonnees.setText("Localisation");
-	 * EditDesc.groupRuptureDonnees.setLayout(gridLayout1); grou = groupe;
-	 * 
-	 * //ligne Label label1 = new Label(groupe, SWT.NULL);
-	 * label1.setText("Ligne"); ligne.setParent(groupe); //= new Text(groupe,
-	 * SWT.BORDER); ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-	 * 
-	 * //debut Label label2 = new Label(groupe, SWT.NULL);
-	 * label2.setText("Début"); debut.setParent(groupe); //= new Text(groupe,
-	 * SWT.BORDER); debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-	 * 
-	 * //fin Label label3 = new Label(groupe, SWT.NULL); label3.setText("Fin");
-	 * fin.setParent(groupe); //= new Text(groupe, SWT.BORDER);
-	 * fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-	 * 
-	 * //groupe non visible de base groupe.setVisible(false);
-	 * 
-	 * section.setClient(sectionClient);
-	 * 
-	 * 
-	 * 
-	 *  }
-	 * 
-	 */
 
 	public static void sectionComboLigneDebutFinInject(ScrolledForm form,
 			String nomSection, String description, Section section, Text ligne,
@@ -412,18 +319,11 @@ public class DrawingBack {
 		radio.setParent(sectionClient);
 		radio.setText("Sélection manuelle");
 
-		// Button saisieManuelle =
-		// ViewEdit.toolkitEdition.createButton(sectionClient, "Saisie
-		// manuelle", SWT.RADIO);
-
 		combo.setParent(sectionClient);
 		comboList = combo;
 
 		ligne.setText("toto");
 
-		// bouton radio "position"
-		// radio.setParent(sectionClient);
-		// radio.setText("Position");
 		Button position = ViewEdit.toolkitEdition.createButton(sectionClient,
 				"Position", SWT.RADIO);
 
@@ -438,7 +338,6 @@ public class DrawingBack {
 		Label label1 = new Label(groupe, SWT.NULL);
 		label1.setText("Ligne");
 
-		// ligne = new Text(groupe, SWT.BORDER);
 		ligne.setParent(groupe);
 
 		ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -451,14 +350,13 @@ public class DrawingBack {
 		System.out.println("parent ?====> " + tmp);
 		EditDesc.debutNbreMesures.setText("test");
 
-		// = new Text(groupe, SWT.BORDER);
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
 		Label label3 = new Label(groupe, SWT.NULL);
 		label3.setText("Fin");
 		fin.setParent(groupe);
-		// = new Text(groupe, SWT.BORDER);
+
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// groupe non visible de base
@@ -515,11 +413,7 @@ public class DrawingBack {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
 						System.out.println("bouton injection"); // 
-						// System.out.println("valeur de ligne lign==> " +
-						// lign.getText());
-						// System.out.println("valeur de ligne de
-						// ViewEdit.ligneTest ==> " +
-						// ViewEdit.ligneTest.getText());
+
 						Utils.inject(lig, debu, fi,
 								ViewFile.textAreaDescription);
 
@@ -681,7 +575,6 @@ public class DrawingBack {
 		// zone d'édition
 		manuel.setParent(sectionClient);
 
-		// = new Text(sectionClient, SWT.BORDER);
 		manuel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// bouton d'injection de la position des valeurs
