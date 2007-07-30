@@ -1,13 +1,12 @@
 package fr.ifremer.nemo.ui;
 
 import java.text.ParseException;
-import java.util.regex.*;
+import java.util.regex.Pattern;
 
 import org.eclipse.swt.widgets.Table;
 
 import fr.ifremer.nemo.input.HorodatedParameterModel;
 import fr.ifremer.nemo.util.DateTimeFormat;
-import fr.ifremer.nemo.util.DateTimeFormatParser;
 import fr.ifremer.nemo.util.LatitudeFormat;
 import fr.ifremer.nemo.util.LongitudeFormat;
 

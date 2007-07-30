@@ -1,17 +1,19 @@
 package fr.ifremer.nemo.util;
 
-import com.ago.xml.*;
-import java.io.*;
+import java.io.OutputStream;
 import java.text.DecimalFormat;
 import java.text.FieldPosition;
 import java.text.ParseException;
 import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+
+import com.ago.xml.SAXConsumer;
+import com.ago.xml.XMLOutputWriter;
 
 /**
  * Class DateTimeFormat

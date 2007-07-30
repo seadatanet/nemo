@@ -1,11 +1,14 @@
 package fr.ifremer.nemo.util;
 
-import com.ago.xml.*;
-import java.io.*;
+import java.io.OutputStream;
 import java.text.FieldPosition;
 import java.text.ParsePosition;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+
+import com.ago.xml.SAXConsumer;
+import com.ago.xml.XMLOutputWriter;
 
 /**
  * Class FloatFormat

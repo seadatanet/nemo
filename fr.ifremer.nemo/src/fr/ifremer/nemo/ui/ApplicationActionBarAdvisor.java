@@ -3,7 +3,6 @@ package fr.ifremer.nemo.ui;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
-import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
@@ -21,8 +20,9 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 	// them
 	// in the fill methods. This ensures that the actions aren't recreated
 	// when fillActionBars is called with FILL_PROXY.
-	public static IWorkbenchAction newAction, updateAction, exitAction, exitActionQuit, aboutAction, openAction,openXMLAction, saveXMLAction, optionsAction, helpAction, saveAction, saveAsAction;
-	
+	public static IWorkbenchAction newAction, updateAction, exitAction,
+			exitActionQuit, aboutAction, openAction, openXMLAction,
+			saveXMLAction, optionsAction, helpAction, saveAction, saveAsAction;
 
 	public ApplicationActionBarAdvisor(IActionBarConfigurer configurer) {
 		super(configurer);
@@ -35,79 +35,73 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 		// file.
 		// Registering also provides automatic disposal of the actions when
 		// the window is closed.
-		
-		
+
 		exitActionQuit = ActionFactory.QUIT.create(window);
-		
+
 		exitAction = new ExitAction(window);
-		//newAction = new SaveAction(window);
+		// newAction = new SaveAction(window);
 		openAction = new OpenAction(window);
 		aboutAction = ActionFactory.ABOUT.create(window);
-		
-		//openXMLAction = new OpenXMLAction(window);
-		//saveXMLAction = new SaveXMLAction(window);
-		
+
+		// openXMLAction = new OpenXMLAction(window);
+		// saveXMLAction = new SaveXMLAction(window);
+
 		helpAction = ActionFactory.HELP_CONTENTS.create(window);
-	
+
 		optionsAction = new OptionsAction(window);
-		//register(optionsAction);
-		
+		// register(optionsAction);
+
 		updateAction = new UpdateAction(window);
 		saveAction = new SaveAction(window);
-		
-		
-		//saveAsAction = ActionFactory.SAVE_AS.create(window);	
-		
-		
+
+		// saveAsAction = ActionFactory.SAVE_AS.create(window);
+
 		register(exitAction);
-		//register(openXMLAction);
+		// register(openXMLAction);
 		register(aboutAction);
 		register(saveAction);
 		register(exitActionQuit);
-		
-		//register(helpAction);
-		
-		
+
+		// register(helpAction);
+
 	}
 
 	protected void fillMenuBar(IMenuManager menuBar) {
-		MenuManager fileMenu = new MenuManager(Messages.getString("ApplicationActionBarAdvisor.0"), Messages.getString("ApplicationActionBarAdvisor.1")); 
-		//fileMenu.add(newAction);
+		MenuManager fileMenu = new MenuManager(Messages
+				.getString("ApplicationActionBarAdvisor.0"), Messages
+				.getString("ApplicationActionBarAdvisor.1"));
+		// fileMenu.add(newAction);
 		fileMenu.add(openAction);
 		fileMenu.add(saveAction);
-		
-		//fileMenu.add(saveAsAction);
-		//fileMenu.add(new Separator());
-		
-		//fileMenu.add(openXMLAction);
-		//fileMenu.add(saveXMLAction);
-		
-		
+
+		// fileMenu.add(saveAsAction);
+		// fileMenu.add(new Separator());
+
+		// fileMenu.add(openXMLAction);
+		// fileMenu.add(saveXMLAction);
+
 		fileMenu.add(new Separator());
 		fileMenu.add(exitAction);
-		
-		
-		MenuManager optionsMenu = new MenuManager(Messages.getString("ApplicationActionBarAdvisor.2"), Messages.getString("ApplicationActionBarAdvisor.3")); //$NON-NLS-1$ //$NON-NLS-2$
+
+		MenuManager optionsMenu = new MenuManager(
+				Messages.getString("ApplicationActionBarAdvisor.2"), Messages.getString("ApplicationActionBarAdvisor.3")); //$NON-NLS-1$ //$NON-NLS-2$
 		optionsMenu.add(optionsAction);
 		optionsMenu.add(updateAction);
-		
+
 		MenuManager helpMenu = new MenuManager("&?", "?"); //$NON-NLS-1$ //$NON-NLS-2$
-		//helpMenu.add(helpAction);
+		// helpMenu.add(helpAction);
 		helpMenu.add(aboutAction);
-		
-		//MenuManager aboutMenu = new MenuManager("?", "?");
-		//aboutMenu.add(aboutAction);
-		
+
+		// MenuManager aboutMenu = new MenuManager("?", "?");
+		// aboutMenu.add(aboutAction);
+
 		menuBar.add(fileMenu);
 		menuBar.add(optionsMenu);
 		menuBar.add(helpMenu);
-		//menuBar.add(aboutMenu);
-		
-		
+		// menuBar.add(aboutMenu);
+
 		saveAction.setEnabled(true);
-		
-		
-		
+
 	}
 
 }

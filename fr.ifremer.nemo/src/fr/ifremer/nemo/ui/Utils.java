@@ -12,14 +12,12 @@ import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.ProgressBar;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.config.Configuration;
-import fr.ifremer.nemo.input.*;
+import fr.ifremer.nemo.input.HeaderFragment;
+import fr.ifremer.nemo.input.InputModel;
 
 public class Utils {
 

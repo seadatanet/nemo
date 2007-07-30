@@ -1,11 +1,8 @@
 package fr.ifremer.nemo.ui;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
-import java.text.ParseException;
 
 import javax.xml.rpc.ServiceException;
 
@@ -19,7 +16,6 @@ import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.medatlas.MedatlasSurveyWriter;
 import fr.ifremer.nemo.odv.ODVSurveyWriter;
-import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.ProgressNotification;
 
 public class SWTProcessWS implements IRunnableWithProgress{

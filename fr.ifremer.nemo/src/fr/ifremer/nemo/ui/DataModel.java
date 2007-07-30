@@ -1,13 +1,10 @@
 package fr.ifremer.nemo.ui;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
-
-import sun.security.util.BitArray;
 
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.DataType;
@@ -24,18 +21,16 @@ import fr.ifremer.nemo.input.ParameterModel;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.input.SingleFileSurvey;
 import fr.ifremer.nemo.input.StationModel;
-import fr.ifremer.nemo.input.SurveyMedia;
-import fr.ifremer.nemo.input.TimeSeriesModel;
+import fr.ifremer.nemo.util.DateTimeFormat;
+import fr.ifremer.nemo.util.Formatter;
+import fr.ifremer.nemo.util.LatitudeFormat;
+import fr.ifremer.nemo.util.LongitudeFormat;
 import fr.ifremer.nemo.ws.WSCountry;
 import fr.ifremer.nemo.ws.WSDataCentre;
 import fr.ifremer.nemo.ws.WSDataType;
 import fr.ifremer.nemo.ws.WSParameter;
 import fr.ifremer.nemo.ws.WSRegion;
 import fr.ifremer.nemo.ws.WSShip;
-import fr.ifremer.nemo.util.DateTimeFormat;
-import fr.ifremer.nemo.util.Formatter;
-import fr.ifremer.nemo.util.LatitudeFormat;
-import fr.ifremer.nemo.util.LongitudeFormat;
 
 public class DataModel {
 
@@ -1650,7 +1645,7 @@ public static void fillStation(){
 		int ligne1 = frag.getFirstLine();
 		int debut1 = frag.getFirstCharOffset();
 		int fin1 = frag.getLastCharOffset();
-		int real_ligne1 = ligne1 + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+		//int real_ligne1 = ligne1 + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 		
 		EditStation.textHistoriqueAcqLigne1.setText(""+ligne1);
 		EditStation.textHistoriqueAcqDebut1.setText(""+debut1);
@@ -1670,7 +1665,7 @@ public static void fillStation(){
 		int ligne2 = frag2.getFirstLine();
 		int debut2 = frag2.getFirstCharOffset();
 		int fin2 = frag2.getLastCharOffset();
-		int real_ligne2 = ligne2 + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+		//int real_ligne2 = ligne2 + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 		
 		EditStation.textHistoriqueAcqLigne2.setText(""+ligne2);
 		EditStation.textHistoriqueAcqDebut2.setText(""+debut2);
@@ -1741,7 +1736,7 @@ public static void fillStation(){
 			int ligne1 = frag.getFirstLine();
 			int debut1 = frag.getFirstCharOffset();
 			int fin1 = frag.getLastCharOffset();
-			int real_ligne1 = ligne1 + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+			//int real_ligne1 = ligne1 + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 			
 			EditStation.textSurfaceLigne1.setText(""+ligne1);
 			EditStation.textSurfaceDebut1.setText(""+debut1);
@@ -1761,7 +1756,7 @@ public static void fillStation(){
 			int ligne2 = frag2.getFirstLine();
 			int debut2 = frag2.getFirstCharOffset();
 			int fin2 = frag2.getLastCharOffset();
-			int real_ligne2 = ligne2 + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+		//	int real_ligne2 = ligne2 + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 			
 			EditStation.textSurfaceLigne2.setText(""+ligne2);
 			EditStation.textSurfaceDebut2.setText(""+debut2);

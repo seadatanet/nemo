@@ -1,7 +1,6 @@
 package fr.ifremer.nemo.ui;
 
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;

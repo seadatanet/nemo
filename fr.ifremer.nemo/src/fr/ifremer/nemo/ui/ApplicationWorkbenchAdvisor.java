@@ -40,7 +40,7 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 			if (EditData.validee == 1) {
 				if (EditDesc.okApresReset && EditSurvey.okApresReset
 						&& EditStation.okApresReset && EditData.okApresReset) {
-					
+
 					Shell shell2 = new Shell();
 
 					MessageBox mbox = new MessageBox(shell2, SWT.ICON_WARNING
@@ -49,10 +49,8 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 							.getString("ApplicationWorkbenchAdvisor.1"));
 					int reponse_mbox = mbox.open();
 					if (reponse_mbox == SWT.YES) {
-					
-					SaveAction.choixFichierSortie();
 
-					
+						SaveAction.choixFichierSortie();
 
 						if (SaveAction.fichierSortieXML != null) {
 							try {

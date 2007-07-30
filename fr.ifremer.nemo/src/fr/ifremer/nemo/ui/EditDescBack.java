@@ -1,6 +1,5 @@
 package fr.ifremer.nemo.ui;
 
-import org.eclipse.swt.widgets.Shell;
 
 public class EditDescBack {
 	
