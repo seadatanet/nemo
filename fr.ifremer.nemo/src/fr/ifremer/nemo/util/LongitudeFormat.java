@@ -154,7 +154,7 @@ public  class LongitudeFormat extends ExternalizableFormat implements Cloneable 
     	size = _elements[i]._element.length();
     	switch (_elements[i]._type) {
     			case HEMISPHERE: {
-    				if (value > 0.0) {
+    				if (value >= 0.0) {
     					toAppendTo.append('E');
     				} else {
     					toAppendTo.append('W');
@@ -162,7 +162,7 @@ public  class LongitudeFormat extends ExternalizableFormat implements Cloneable 
     				break;
     			}
     			case SIGN: {
-    				if (value > 0.0) {
+    				if (value >= 0.0) {
     					toAppendTo.append('+');
     				} else {
     					toAppendTo.append('-');
