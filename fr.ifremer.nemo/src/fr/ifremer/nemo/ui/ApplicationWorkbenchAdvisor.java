@@ -1,5 +1,8 @@
 package fr.ifremer.nemo.ui;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
@@ -22,30 +25,61 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 
 	@Override
 	public boolean preShutdown() {
-		
+
 		Shell s = new Shell();
+		FileOutputStream fileOutputStream = null;
 		int reponse = 0;
-		
-		MessageBox mb = new MessageBox(s, SWT.ICON_QUESTION |SWT.YES | SWT.NO |SWT.APPLICATION_MODAL );
+
+		MessageBox mb = new MessageBox(s, SWT.ICON_QUESTION | SWT.YES | SWT.NO
+				| SWT.APPLICATION_MODAL);
 		mb.setMessage(Messages.getString("ExitAction.2")); //$NON-NLS-1$
 		reponse = mb.open();
-		
-		if (reponse == SWT.YES){
-			//test pour savoir si modèle modifié ou pas
-			//if (DataModel.ouverture && )
-			
-			
+
+		if (reponse == SWT.YES) {
+			// demande pour sauver le modèle
+			if (EditData.validee == 1) {
+				if (EditDesc.okApresReset && EditSurvey.okApresReset
+						&& EditStation.okApresReset && EditData.okApresReset) {
+					
+					Shell shell2 = new Shell();
+
+					MessageBox mbox = new MessageBox(shell2, SWT.ICON_WARNING
+							| SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
+					mbox.setMessage(Messages
+							.getString("ApplicationWorkbenchAdvisor.1"));
+					int reponse_mbox = mbox.open();
+					if (reponse_mbox == SWT.YES) {
+					
+					SaveAction.choixFichierSortie();
+
+					
+
+						if (SaveAction.fichierSortieXML != null) {
+							try {
+								fileOutputStream = new FileOutputStream(
+										SaveAction.fichierSortieXML);
+							} catch (FileNotFoundException e) {
+								//
+								e.printStackTrace();
+							}
+
+							if (fileOutputStream != null) {
+								DataModel.inputModel
+										.writeXMLOn(fileOutputStream);
+								Utils.messageOK(Messages
+										.getString("SaveAction.4")); //$NON-NLS-1$
+							}
+						}
+					}
+
+				}
+
+			}
+
 			return true;
-			
-			
 		}
 		return false;
+
 	}
 
-	
-	
-	
-	
-	
-	
 }

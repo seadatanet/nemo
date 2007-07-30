@@ -93,6 +93,7 @@ public static void choixFichierSortie(){
 	
 	nomFichierSortieXML = dialog.open();
 	
+	if (nomFichierSortieXML != null){
 	fichierSortieXML = new File(nomFichierSortieXML);
 	if (fichierSortieXML.exists()){
 		shell.close();
@@ -110,7 +111,7 @@ public static void choixFichierSortie(){
 		
 	}
 	
-	
+	}
 	
 	
 }

@@ -106,6 +106,8 @@ public class ViewFile extends ViewPart {
 		EditData.validee = 0;
 		EditData.loaded = 0;
 		
+		
+		
 		//chargement de la configuration
 		Utils.initConfig();
 		
