@@ -6,25 +6,25 @@ import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.window.ApplicationWindow;
 import org.eclipse.swt.widgets.Shell;
 
-public class SWTProgressWS extends ApplicationWindow{
+public class SWTProgressWS extends ApplicationWindow {
 
-	  public SWTProgressWS() {
-		    super(null);
-		  }
-	
+	public SWTProgressWS() {
+		super(null);
+	}
+
 	public void run() {
-	   
-		 final Shell shell = new Shell();
-	     
-		  try {
-	          new ProgressMonitorDialog(shell).run(true, false, new SWTProcessWS());
-	        } catch (InvocationTargetException e) {
-	         
-	        } catch (InterruptedException e) {
-	       
-	        }
-	    
-	  }
-	
-	
+
+		final Shell shell = new Shell();
+
+		try {
+			new ProgressMonitorDialog(shell).run(true, false,
+					new SWTProcessWS());
+		} catch (InvocationTargetException e) {
+
+		} catch (InterruptedException e) {
+
+		}
+
+	}
+
 }

@@ -1,62 +1,54 @@
 package fr.ifremer.nemo.ui;
 
-public class TypeData extends Object{
+public class TypeData extends Object {
 
-	
 	private String code, unite, conversion, format, entree, sortie, test, nom;
+
 	private int position, debut, fin;
+
 	private Boolean sensor;
 
-	
-	
 	public Boolean getSensor() {
 		return sensor;
 	}
-
 
 	public void setSensor(Boolean sensor) {
 		this.sensor = sensor;
 	}
 
+	public TypeData(String code, String unite, String conversion, String debut,
+			String fin, String format, String entree, String sortie, String test) {
 
-	public TypeData(String code, String unite, String conversion, String debut, String fin, String format, String entree,  String sortie, String test) {
-		
 		this.setCode(code);
 		this.setConversion(conversion);
 		this.setEntree(entree);
 		this.setFormat(format);
 		this.setSortie(sortie);
 		this.setUnite(unite);
-		
-		
-		
-		}
-	
+
+	}
+
 	public TypeData(TypeData typeData) {
-		
+
 		this.setCode(typeData.code);
 		this.setConversion(typeData.conversion);
 		this.setEntree(typeData.entree);
 		this.setFormat(typeData.format);
 		this.setSortie(typeData.sortie);
 		this.setUnite(typeData.unite);
-		
-		
-		
-		}
-	
-	
-	
+
+	}
+
 	public TypeData() {
-		
-	this.setCode("Code");
-	this.setConversion("x*1");
-	this.setEntree("Entrée");
-	this.setFormat("Format");
-	this.setSortie("Sortie");
-	this.setUnite("Unité");
-	this.setTest("");
-		
+
+		this.setCode("Code");
+		this.setConversion("x*1");
+		this.setEntree("Entrée");
+		this.setFormat("Format");
+		this.setSortie("Sortie");
+		this.setUnite("Unité");
+		this.setTest("");
+
 	}
 
 	public String getCode() {
@@ -131,28 +123,20 @@ public class TypeData extends Object{
 		this.unite = unite;
 	}
 
-
 	public String getTest() {
 		return test;
 	}
-
 
 	public void setTest(String test) {
 		this.test = test;
 	}
 
-
 	public String getNom() {
 		return nom;
 	}
-
 
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 
-	
-	
-	
-	
 }

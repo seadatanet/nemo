@@ -24,8 +24,6 @@ public class Drawing {
 
 	private static Group grou;
 
-	// private static Text lign, debu, fi;
-
 	public static void sectionManuelLigneDebutFinInject(String nomSection,
 			String description, Section section, Text ligne, Text debut,
 			Text fin, Text manuel, Button radio) {
@@ -95,21 +93,21 @@ public class Drawing {
 		Label label1 = new Label(groupe, SWT.NULL);
 		label1.setText("Ligne");
 		ligne.setParent(groupe);
-		// ligne = new Text(groupe, SWT.BORDER);
+		
 		ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// debut
 		Label label2 = new Label(groupe, SWT.NULL);
 		label2.setText("Début");
 		debut.setParent(groupe);
-		// = new Text(groupe, SWT.BORDER);
+		
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
 		Label label3 = new Label(groupe, SWT.NULL);
 		label3.setText("Fin");
 		fin.setParent(groupe);
-		// = new Text(groupe, SWT.BORDER);
+		
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// groupe non visible de base
@@ -1138,8 +1136,7 @@ public class Drawing {
 		 * //affichage zone texte dans la section
 		 * listeText.get(i).setParent(sectionClient);
 		 * listeText.get(i).setLayoutData(new
-		 * GridData(GridData.FILL_HORIZONTAL));
-		 *  }
+		 * GridData(GridData.FILL_HORIZONTAL)); }
 		 */
 		// combolist centres de données
 		Label label = new Label(sectionClient, SWT.NULL);
@@ -1214,7 +1211,7 @@ public class Drawing {
 		// mettre les listeners dessus !!!!!
 
 		/*
-		 *  // remplissage des types
+		 * // remplissage des types
 		 * 
 		 * EditSurvey.listeType.setParent(sectionClient);
 		 * EditSurvey.listeType.setLayoutData(new GridData(GridData.FILL_BOTH));
@@ -1274,7 +1271,7 @@ public class Drawing {
 		// mettre les listeners dessus !!!!!
 
 		/*
-		 *  // remplissage des types
+		 * // remplissage des types
 		 * 
 		 * EditSurvey.listeType.setParent(sectionClient);
 		 * EditSurvey.listeType.setLayoutData(new GridData(GridData.FILL_BOTH));

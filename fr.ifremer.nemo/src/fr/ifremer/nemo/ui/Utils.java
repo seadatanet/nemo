@@ -24,7 +24,7 @@ public class Utils {
 	public static String texteBrut, texteFinal; // texte brut entier et texte
 
 	public static StringBuffer stringBuffer;
-	
+
 	public static int progression;
 
 	// avec regle dynamique
@@ -142,8 +142,6 @@ public class Utils {
 
 		// reset de l'étape de conversion
 		ViewFile.etape = 0;
-		
-	
 
 	}
 
@@ -250,7 +248,7 @@ public class Utils {
 			ligne.setText("" + lign); //$NON-NLS-1$
 
 			deb = deb - taillesCumLignes[lign - 1] + 1; // debut reel sur ligne
-														// :
+			// :
 			// nbre caracs par rapport
 			// debut de ligne
 			fi = fi - taillesCumLignes[lign - 1]; // fin reelle sur ligne
@@ -311,7 +309,7 @@ public class Utils {
 			// ligne = lign;
 
 			deb = deb - taillesCumLignes[lign - 1] + 1; // debut reel sur ligne
-														// :
+			// :
 			// nbre caracs par rapport
 			// debut de ligne
 			fi = fi - taillesCumLignes[lign - 1]; // fin reelle sur ligne
@@ -329,11 +327,10 @@ public class Utils {
 		}
 	}
 
-	
-	public static int calculNbreLignes(Cursor cursor){
+	public static int calculNbreLignes(Cursor cursor) {
 
-		int nbre=0, lignDepart, lignFin;
-		
+		int nbre = 0, lignDepart, lignFin;
+
 		lignDepart = 1;
 		lignFin = 1;
 		// calcul de la ligne en fonction de la valeur de x
@@ -392,13 +389,12 @@ public class Utils {
 
 			// remplissage nbreLignes dans interface
 			nbre = (lignFin - lignDepart + 1); //$NON-NLS-1$
-			
+
 		}
-		
-		
+
 		return nbre;
 	}
-	
+
 	public static void injectNbreLignes(Text nbrelignes, StyledText styledtext) {
 		int deb, fi, lignDepart, lignFin, i;
 
@@ -472,57 +468,63 @@ public class Utils {
 		}
 	}
 
-	
-//	public static void calculPosxPosy(HeaderFragment frag, Integer x, Integer y){
-//		//reconstitue la position x et y du surlignement souris à partir du fragment
-//		
-//		int offsetDebut, offsetFin, ligneDebut, ligneFin;
-//		
-//		ligneDebut = frag.getFirstLine();
-//		ligneFin = frag.getLastLine();
-//		offsetDebut = frag.getFirstCharOffset();
-//		offsetFin = frag.getLastCharOffset();
-//		
-//		x = taillesCumLignes[ligneDebut - 1]+offsetDebut;
-//		y = taillesCumLignes[ligneFin - 1]+offsetFin;
-//		
-//		
-//	}
-	
-	
-	public static void calculPosxPosy(HeaderFragment frag, Cursor cursor){
-		//reconstitue la position x et y du surlignement souris à partir du fragment
-		
+	// public static void calculPosxPosy(HeaderFragment frag, Integer x, Integer
+	// y){
+	// //reconstitue la position x et y du surlignement souris à partir du
+	// fragment
+	//		
+	// int offsetDebut, offsetFin, ligneDebut, ligneFin;
+	//		
+	// ligneDebut = frag.getFirstLine();
+	// ligneFin = frag.getLastLine();
+	// offsetDebut = frag.getFirstCharOffset();
+	// offsetFin = frag.getLastCharOffset();
+	//		
+	// x = taillesCumLignes[ligneDebut - 1]+offsetDebut;
+	// y = taillesCumLignes[ligneFin - 1]+offsetFin;
+	//		
+	//		
+	// }
+
+	public static void calculPosxPosy(HeaderFragment frag, Cursor cursor) {
+		// reconstitue la position x et y du surlignement souris à partir du
+		// fragment
+
 		int offsetDebut, offsetFin, ligneDebut, ligneFin;
-		
+
 		ligneDebut = frag.getFirstLine();
 		ligneFin = frag.getLastLine();
 		offsetDebut = frag.getFirstCharOffset();
 		offsetFin = frag.getLastCharOffset();
-		
-		cursor.setX(taillesCumLignes[ligneDebut - 1]+offsetDebut);
-		cursor.setY(taillesCumLignes[ligneFin - 1]+offsetFin);
-		
-		
+
+		cursor.setX(taillesCumLignes[ligneDebut - 1] + offsetDebut);
+		cursor.setY(taillesCumLignes[ligneFin - 1] + offsetFin);
+
 	}
-	
-	public static void calculOffsetDebOffsetFin(HeaderFragment frag, Cursor cursor){
-		//calcule debut et fin à partir du surlignement souris
+
+	public static void calculOffsetDebOffsetFin(HeaderFragment frag,
+			Cursor cursor) {
+		// calcule debut et fin à partir du surlignement souris
 		int offsetDebut, offsetFin, ligneDebut, ligneFin;
-		
+
 		ligneDebut = frag.getFirstLine();
 		ligneFin = frag.getLastLine();
-		
-		offsetDebut = cursor.getX() - taillesCumLignes[ligneDebut -1]+1;
-		offsetFin = cursor.getY() - taillesCumLignes[ligneFin -1];
-		System.out.println("offsetdebut ="+offsetDebut+"  offsetfin="+offsetFin);
-		if (offsetDebut <0){frag.setFirstCharOffset(1);}else{
-		frag.setFirstCharOffset(offsetDebut);}
-		if (offsetFin > 0){
-		frag.setLastCharOffset(offsetFin);}
-		
+
+		offsetDebut = cursor.getX() - taillesCumLignes[ligneDebut - 1] + 1;
+		offsetFin = cursor.getY() - taillesCumLignes[ligneFin - 1];
+		System.out.println("offsetdebut =" + offsetDebut + "  offsetfin="
+				+ offsetFin);
+		if (offsetDebut < 0) {
+			frag.setFirstCharOffset(1);
+		} else {
+			frag.setFirstCharOffset(offsetDebut);
+		}
+		if (offsetFin > 0) {
+			frag.setLastCharOffset(offsetFin);
+		}
+
 	}
-	
+
 	public static void calculNbreLignesPuisRemplissageFrag(HeaderFragment frag) {
 		int deb, fi, lignDepart, lignFin, i, nbrelignes;
 
@@ -533,7 +535,7 @@ public class Utils {
 		// System.out.println("deb clic = " + deb);
 		// System.out.println("fi clic = " + fi);
 
-		//lignDepart = frag.getFirstLine();
+		// lignDepart = frag.getFirstLine();
 		lignDepart = 1;
 		lignFin = 1;
 		// calcul de la ligne en fonction de la valeur de x
@@ -585,37 +587,39 @@ public class Utils {
 		// nbre de lignes effectif
 		nbrelignes = (lignFin - lignDepart + 1);
 
-			
 		if (nbrelignes == 1) {
-			//frag.setSingleLine(true);
+			// frag.setSingleLine(true);
 			frag.setLastLine(lignDepart);
 		} else {
 			frag.setSingleLine(false);
-			frag.setLastLine(frag.getFirstLine() + nbrelignes-1);
-		
-//			calcul de l'offset réel sur la dernière ligne
+			frag.setLastLine(frag.getFirstLine() + nbrelignes - 1);
+
+			// calcul de l'offset réel sur la dernière ligne
 			int cpt = fi;
-			for (int j=lignDepart-1;j<lignFin-1;j++){
+			for (int j = lignDepart - 1; j < lignFin - 1; j++) {
 				cpt = cpt - Utils.lignesBrutes.get(j).length();
 			}
-			//en sortie de boucle, cpt a la valeur de l'offset de fin sur la dernière ligne du commentaire
-			System.out.println("offset en ligne fin = "+cpt);
-			System.out.println("ligne fin = "+lignFin);
-			System.out.println("ligne debut = "+lignDepart);
-			
-			if (cpt>0){cpt = cpt - (nbrelignes-1);}
+			// en sortie de boucle, cpt a la valeur de l'offset de fin sur la
+			// dernière ligne du commentaire
+			System.out.println("offset en ligne fin = " + cpt);
+			System.out.println("ligne fin = " + lignFin);
+			System.out.println("ligne debut = " + lignDepart);
+
+			if (cpt > 0) {
+				cpt = cpt - (nbrelignes - 1);
+			}
 			frag.setLastCharOffset(cpt);
 		}
 
 	}
 
-	
-	public static void calculNbreLignesPuisRemplissageFragClic(HeaderFragment frag, Cursor cursor) {
+	public static void calculNbreLignesPuisRemplissageFragClic(
+			HeaderFragment frag, Cursor cursor) {
 		int deb, fi, lignDepart, lignFin, i, nbrelignes;
-		//int clicX, int clicY
-		//calcul nbre ligne/debut/fin en fonction de la zone de surlignement souris 
-		
-		
+		// int clicX, int clicY
+		// calcul nbre ligne/debut/fin en fonction de la zone de surlignement
+		// souris
+
 		// on récupère les coordonnées de la sélection
 		deb = cursor.getX();
 		fi = cursor.getY();
@@ -623,10 +627,10 @@ public class Utils {
 		// System.out.println("deb clic = " + deb);
 		// System.out.println("fi clic = " + fi);
 
-		//lignDepart = frag.getFirstLine();
+		// lignDepart = frag.getFirstLine();
 		lignDepart = 1;
 		lignFin = 1;
-		//lignFin =frag.getFirstLine();
+		// lignFin =frag.getFirstLine();
 		// calcul de la ligne en fonction de la valeur de x
 		// parcours du tableau des tailles de lignes cumulées
 
@@ -676,35 +680,33 @@ public class Utils {
 		// nbre de lignes effectif
 		nbrelignes = (lignFin - lignDepart + 1);
 
-			
 		if (nbrelignes == 1) {
-			//frag.setSingleLine(true);
+			// frag.setSingleLine(true);
 			frag.setLastLine(lignDepart);
 		} else {
 			frag.setSingleLine(false);
-			frag.setLastLine(frag.getFirstLine() + nbrelignes-1);
-		
+			frag.setLastLine(frag.getFirstLine() + nbrelignes - 1);
+
 		}
-			calculOffsetDebOffsetFin(frag, cursor);
-			
-		
-//			calcul de l'offset réel sur la dernière ligne
-//			int cpt = fi;
-//			for (int j=lignDepart-1;j<lignFin-1;j++){
-//				cpt = cpt - Utils.lignesBrutes.get(j).length();
-//			}
-//			//en sortie de boucle, cpt a la valeur de l'offset de fin sur la dernière ligne du commentaire
-//			System.out.println("offset en ligne fin = "+cpt);
-//			System.out.println("ligne fin = "+lignFin);
-//			System.out.println("ligne debut = "+lignDepart);
-//			
-//			if (cpt>0){cpt = cpt - (nbrelignes-1);}
-//			frag.setLastCharOffset(cpt);
-//		}
+		calculOffsetDebOffsetFin(frag, cursor);
+
+		// calcul de l'offset réel sur la dernière ligne
+		// int cpt = fi;
+		// for (int j=lignDepart-1;j<lignFin-1;j++){
+		// cpt = cpt - Utils.lignesBrutes.get(j).length();
+		// }
+		// //en sortie de boucle, cpt a la valeur de l'offset de fin sur la
+		// dernière ligne du commentaire
+		// System.out.println("offset en ligne fin = "+cpt);
+		// System.out.println("ligne fin = "+lignFin);
+		// System.out.println("ligne debut = "+lignDepart);
+		//			
+		// if (cpt>0){cpt = cpt - (nbrelignes-1);}
+		// frag.setLastCharOffset(cpt);
+		// }
 
 	}
-	
-	
+
 	public static void validationEtape(int onglet) {
 		// messageErreur("Vous devez impérativement terminer la ou les étapes
 		// précédentes avant de continuer." +"\n==>étapes " + tmp + " à " +
@@ -1066,62 +1068,58 @@ public class Utils {
 	public static void findFiles(String directoryPath) {
 		File directory = new File(directoryPath);
 
-		
 		Boolean ok = true;
-		
-		
+
 		File[] subfiles = directory.listFiles();
-		
+
 		int nbre = subfiles.length;
 		String nom = subfiles[0].getName();
-		
-		
-		
-		//verif sur l'extension de tous les fichiers du dossier
-		Pattern p  = Pattern.compile("[.]");
+
+		// verif sur l'extension de tous les fichiers du dossier
+		Pattern p = Pattern.compile("[.]");
 		String[] mots = p.split(nom);
 		String ext;
-		if (mots.length == 1){
-			ext="";
-		}else{ 
-		ext = mots[1];}
-		
-		for (int i=0;i<nbre;i++){
+		if (mots.length == 1) {
+			ext = "";
+		} else {
+			ext = mots[1];
+		}
+
+		for (int i = 0; i < nbre; i++) {
 			Pattern p1 = Pattern.compile("[.]");
 			String mots1[] = p.split(subfiles[i].getName());
 			String ext1;
-			if (mots1.length == 1){
-				ext1="";
-			}else{ 
-			ext1 = mots1[1];}
-			
-				
-			if (!ext.matches(ext1)){
+			if (mots1.length == 1) {
+				ext1 = "";
+			} else {
+				ext1 = mots1[1];
+			}
+
+			if (!ext.matches(ext1)) {
 				ok = false;
 				Utils.messageErreur(Messages.getString("Utils.27"));
-			}			
-			
-		}
-		
-		if (ok){
-		
-		ViewFile.nomFichier = directoryPath + "\\" + subfiles[0].getName(); //$NON-NLS-1$
-		ViewFile.nomRepertoire = directoryPath;
+			}
 
-		// System.out.println("Le chemin ==>" + directoryPath);
-		// System.out.println("Le fichier ==>" + ViewFile.nomFichier);
-
-		try {
-			Utils.insertTextFich(ViewFile.nomFichier,
-					ViewFile.textAreaDescription);
-		} catch (IOException e) {
-
-			e.printStackTrace();
 		}
 
-		
+		if (ok) {
+
+			ViewFile.nomFichier = directoryPath + "\\" + subfiles[0].getName(); //$NON-NLS-1$
+			ViewFile.nomRepertoire = directoryPath;
+
+			// System.out.println("Le chemin ==>" + directoryPath);
+			// System.out.println("Le fichier ==>" + ViewFile.nomFichier);
+
+			try {
+				Utils.insertTextFich(ViewFile.nomFichier,
+						ViewFile.textAreaDescription);
+			} catch (IOException e) {
+
+				e.printStackTrace();
+			}
+
 		}
-		
+
 		// if (!directory.exists()) {
 		// System.out.println("Le fichier/répertoire '" + directoryPath
 		// + "' n'existe pas");
@@ -1164,10 +1162,8 @@ public class Utils {
 
 	public static void messageErreurAppend(String message) {
 
-	
-		
 		ViewLog.styledTextLogErreurs.append("\n");
-		
+
 		ViewLog.styledTextLogErreurs.append(message);
 		Color truc = new Color(Application.display, 255, 0, 0);
 		// ViewLog.styledTextLogErreurs.setLineBackground(0, 1, truc);

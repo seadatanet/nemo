@@ -7,11 +7,13 @@ import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
 import org.eclipse.ui.application.WorkbenchWindowAdvisor;
 
 public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
-	
+
 	public static IWorkbenchWindowConfigurer configurer_titre;
+
 	public static IWorkbenchWindowConfigurer configurer;
 
-	public ApplicationWorkbenchWindowAdvisor(IWorkbenchWindowConfigurer configurer) {
+	public ApplicationWorkbenchWindowAdvisor(
+			IWorkbenchWindowConfigurer configurer) {
 		super(configurer);
 	}
 
@@ -21,18 +23,15 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 	}
 
 	public void preWindowOpen() {
-		 configurer = getWindowConfigurer();
+		configurer = getWindowConfigurer();
 		configurer.setInitialSize(new Point(1024, 768));
 		configurer.setShowCoolBar(false);
 		configurer.setShowStatusLine(false);
 		configurer.setShowProgressIndicator(false);
-		
+
 		configurer_titre = configurer;
-		
+
 		configurer_titre.setTitle("Nemo");
-		
-		//configurer.getWindow().get
-		
-		//configurer.setShellStyle(SWT.BORDER | SWT.MIN | SWT.MAX);
+
 	}
 }
