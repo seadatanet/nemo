@@ -31,6 +31,10 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 		reponse = mb.open();
 		
 		if (reponse == SWT.YES){
+			//test pour savoir si modèle modifié ou pas
+			//if (DataModel.ouverture && )
+			
+			
 			return true;
 			
 			

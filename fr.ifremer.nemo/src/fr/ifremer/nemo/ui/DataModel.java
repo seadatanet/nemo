@@ -51,7 +51,7 @@ public class DataModel {
 	public static WSRegion[] listeWSRegions;
 	public static WSShip[] listeWSShips;
 	public static WSCountry[] listeWSCountries;
-	public static Boolean ouverture;
+	public static Boolean ouverture, reset;
 	public static TimeSeriesInformation timeSeriesInformation, timeSeriesInformation_modele;
 	
 	

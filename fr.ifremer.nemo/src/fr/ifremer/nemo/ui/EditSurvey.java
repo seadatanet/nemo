@@ -4,9 +4,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
+import java.sql.Date;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
+import javax.swing.text.DateFormatter;
 import javax.xml.rpc.ServiceException;
 import javax.xml.transform.TransformerException;
 
@@ -640,18 +644,21 @@ public static void chargementXML(File fichier){
 			Formatter formatter = new Formatter();
 			
 			try {
+				SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
 				if (survey.getFormattedStartDate()!=null){
-				EditSurvey.textDateDebut.setText(formatter.formatDateTime("dd/MM/yyyy", survey.getStartDate()));
+					EditSurvey.textDateDebut.setText(formatDate.format(new Date(survey.getStartDate())));
 				//EditSurvey.textDateDebut.setText(survey.getFormattedStartDate());
 				}
 				if (survey.getFormattedEndDate()!=null){
-					EditSurvey.textDateFin.setText(formatter.formatDateTime("dd/MM/yyyy", survey.getEndDate()));
+					EditSurvey.textDateFin.setText(formatDate.format(new Date(survey.getEndDate())));
 					//EditSurvey.textDateFin.setText(survey.getFormattedEndDate());
 					}
 			} catch (ParseException e) {
 				// 
 				e.printStackTrace();
 			}
+					
+			
 			
 			if (survey.getRegionName()!=null){
 			EditSurvey.textRegion.setText(survey.getRegionName());}

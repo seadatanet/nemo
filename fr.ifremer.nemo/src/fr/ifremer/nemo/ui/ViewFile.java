@@ -116,6 +116,7 @@ public class ViewFile extends ViewPart {
 		//étape de départ
 		etape = 0;
 		OptionsAction.options = 0;
+		DataModel.reset = false;
 		
 		createTabFolder();
 	
@@ -333,6 +334,11 @@ public class ViewFile extends ViewPart {
 								Utils.insertTextFich(nomFichier, styledTextCampagne);
 								//Utils.remplissageTexte(textAreaDescription);
 								textAreaDescription.setText(Utils.texteBrut);
+								
+//								affichage etape0 dans formulaire d'édition de paramètres
+								Utils.razGlobal();
+								EditDesc.affichageEdition();	
+								
 							} catch (IOException e1) {
 								// 
 								e1.printStackTrace();
@@ -358,6 +364,10 @@ public class ViewFile extends ViewPart {
 									textAreaDescription.setText(Utils.texteBrut);
 								//labelDescription.setText("Dossier-->");
 								//textAreaDescription.setText(Utils.texteBrut);
+									
+//									affichage etape0 dans formulaire d'édition de paramètres
+									Utils.razGlobal();
+									EditDesc.affichageEdition();	
 									}
 								 else { 
 										fileLoaded = false;
@@ -370,9 +380,7 @@ public class ViewFile extends ViewPart {
 								}
 					
 							
-//							affichage etape0 dans formulaire d'édition de paramètres
-							Utils.razGlobal();
-							EditDesc.affichageEdition();		
+		
 					
 					}
 				});
