@@ -604,7 +604,7 @@ public class DrawingBack {
 	public static void ajoutSectionDansListeDesc(Section section) {
 
 		EditDesc.listeSectionsDesc.add(section);
-		System.out.println("ajout section ok");
+		//System.out.println("ajout section ok");
 
 	}
 

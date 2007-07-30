@@ -307,22 +307,26 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 					File file = new File(dir, files[i]);
 					size += file.length();
 				}
+				
+				SizeBasedProgressNotifier notifierStation = new SizeBasedProgressNotifier(size, offset, a_Progress);
+								
 				for (int i = 0; i < files.length; i++) {
-					// if (SWTProcess.monitor2.isCanceled()){
+
 					if (SurveyMedia.interrompu) {
 						// demande d'annulation
 						throw new IOException("interruption");
 					} else {
 						File file = new File(dir, files[i]);
-						SizeBasedProgressNotifier notifier = new SizeBasedProgressNotifier(
-								size, offset, a_Progress);
+						//SizeBasedProgressNotifier notifier = new SizeBasedProgressNotifier(
+						 notifierStation.setOffset(offset);
 						offset += file.length();
 						RandomAccessFile reader = null;
 						try {
 							reader = new RandomAccessFile(file, "r");
+							
 							Station station = _stationModel.convert(reader,
 									files[i], isRefDateBased, a_RefDate,
-									notifier);
+									notifierStation);
 							survey.addStation(station);
 						} finally {
 							if (reader != null) {

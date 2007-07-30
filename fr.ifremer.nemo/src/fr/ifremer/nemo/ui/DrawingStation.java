@@ -1954,7 +1954,7 @@ public class DrawingStation {
 	public static void ajoutSectionDansListeStation(Section section) {
 
 		EditStation.listeSectionsStation.add(section);
-		System.out.println("ajout section ok");
+		//System.out.println("ajout section ok");
 
 	}
 

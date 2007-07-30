@@ -1,4 +1,4 @@
-<NemoConfiguration lang="fr_FR">
+<NemoConfiguration lang="en_GB">
   <nemoWsURL>http://localhost:8080/nemo/services/NEMO</nemoWsURL>
   <nautilusWsURL>http://localhost:8080/nautilus/services/NAUTILUS</nautilusWsURL>
   <showRule>true</showRule>

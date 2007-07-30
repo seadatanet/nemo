@@ -994,14 +994,14 @@ public class Drawing {
 	public static void ajoutSectionDansListeDesc(Section section) {
 
 		EditDesc.listeSectionsDesc.add(section);
-		System.out.println("ajout section ok");
+		//System.out.println("ajout section ok");
 
 	}
 
 	public static void ajoutSectionDansListeSurvey(Section section) {
 
 		EditSurvey.listeSectionsSurvey.add(section);
-		System.out.println("ajout section ok");
+		//System.out.println("ajout section ok");
 
 	}
 

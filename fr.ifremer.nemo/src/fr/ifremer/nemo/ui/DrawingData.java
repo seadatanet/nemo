@@ -560,7 +560,7 @@ public class DrawingData {
 	public static void ajoutSectionDansListeData(Section section) {
 
 		EditData.listeSectionsData.add(section);
-		System.out.println("ajout section ok");
+		//System.out.println("ajout section ok");
 
 	}
 
