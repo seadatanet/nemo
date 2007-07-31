@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.6.0" class="java.beans.XMLDecoder"> 
+<java version="1.5.0_09" class="java.beans.XMLDecoder"> 
  <object class="java.util.ArrayList"> 
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSShip"> 
@@ -117,7 +117,7 @@
      <string>CYPV</string> 
     </void> 
     <void property="name"> 
-     <string>PRINCESA VICTORIA</string> 
+     <string>PRINCESSA VICTORIA</string> 
     </void> 
    </object> 
   </void> 
@@ -157,7 +157,7 @@
      <string>ICCO</string> 
     </void> 
     <void property="name"> 
-     <string>CORYPHENE</string> 
+     <string>LA CORYPHENE</string> 
     </void> 
    </object> 
   </void> 
@@ -237,7 +237,7 @@
      <string>MOPM</string> 
     </void> 
     <void property="name"> 
-     <string>PRINCIPE ALBERTO</string> 
+     <string>PRINC. ALBERTO DE MONACO</string> 
     </void> 
    </object> 
   </void> 
@@ -268,16 +268,6 @@
     </void> 
     <void property="name"> 
      <string>THIERRY</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSShip"> 
-    <void property="code"> 
-     <string>O8BD</string> 
-    </void> 
-    <void property="name"> 
-     <string>CAPITAN OCA BALDA</string> 
     </void> 
    </object> 
   </void> 
@@ -577,7 +567,7 @@
      <string>06CC</string> 
     </void> 
     <void property="name"> 
-     <string>COLUMBUS CANTERBURRY</string> 
+     <string>COLUMBUS CANTERBURY</string> 
     </void> 
    </object> 
   </void> 
@@ -774,6 +764,16 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSShip"> 
     <void property="code"> 
+     <string>06ZG</string> 
+    </void> 
+    <void property="name"> 
+     <string>MONTE OLIVIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSShip"> 
+    <void property="code"> 
      <string>06ZI</string> 
     </void> 
     <void property="name"> 
@@ -878,6 +878,16 @@
     </void> 
     <void property="name"> 
      <string>A. V. HUMBOLDT</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSShip"> 
+    <void property="code"> 
+     <string>08BD</string> 
+    </void> 
+    <void property="name"> 
+     <string>CAPITAN OCA BALDA</string> 
     </void> 
    </object> 
   </void> 
@@ -997,7 +1007,7 @@
      <string>09B7</string> 
     </void> 
     <void property="name"> 
-     <string>ALBANY (COASTAL STATION)</string> 
+     <string>ALBANY</string> 
     </void> 
    </object> 
   </void> 
@@ -1047,7 +1057,7 @@
      <string>09Z5</string> 
     </void> 
     <void property="name"> 
-     <string>DIAMOND HEAD (COASTAL ST)</string> 
+     <string>DIAMOND HEAD</string> 
     </void> 
    </object> 
   </void> 
@@ -1077,7 +1087,7 @@
      <string>11NV</string> 
     </void> 
     <void property="name"> 
-     <string>NAVAL VESSELS</string> 
+     <string>BELGIAN NAVAL VESSELS</string> 
     </void> 
    </object> 
   </void> 
@@ -1097,7 +1107,7 @@
      <string>1199</string> 
     </void> 
     <void property="name"> 
-     <string>UNKNOWN PLATFORMS OF BELG</string> 
+     <string>UNKNOWN PLATFORMS BELGIUM</string> 
     </void> 
    </object> 
   </void> 
@@ -1627,7 +1637,7 @@
      <string>2790</string> 
     </void> 
     <void property="name"> 
-     <string>MULTIPLE SHI:qPS</string> 
+     <string>MULTIPLE SHIPS</string> 
     </void> 
    </object> 
   </void> 
@@ -1637,7 +1647,7 @@
      <string>2799</string> 
     </void> 
     <void property="name"> 
-     <string>UNKNOWN</string> 
+     <string>UNKNOWN PLATFORMS EGYPT</string> 
     </void> 
    </object> 
   </void> 
@@ -1924,16 +1934,6 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSShip"> 
     <void property="code"> 
-     <string>29XX</string> 
-    </void> 
-    <void property="name"> 
-     <string>UNKNOWN</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSShip"> 
-    <void property="code"> 
      <string>297F</string> 
     </void> 
     <void property="name"> 
@@ -1947,7 +1947,7 @@
      <string>2999</string> 
     </void> 
     <void property="name"> 
-     <string>UNKNOWN</string> 
+     <string>FIXED PLATFORMS OF SPAIN</string> 
     </void> 
    </object> 
   </void> 
@@ -2177,7 +2177,7 @@
      <string>31CG</string> 
     </void> 
     <void property="name"> 
-     <string>C.H. GILBERT</string> 
+     <string>C. H. GILBERT</string> 
     </void> 
    </object> 
   </void> 
@@ -2287,7 +2287,7 @@
      <string>31DF</string> 
     </void> 
     <void property="name"> 
-     <string>C.F. ADAMS</string> 
+     <string>C. F. ADAMS</string> 
     </void> 
    </object> 
   </void> 
@@ -2487,7 +2487,7 @@
      <string>31EH</string> 
     </void> 
     <void property="name"> 
-     <string>ELLISON, H. J.</string> 
+     <string>H. J. ELLISON</string> 
     </void> 
    </object> 
   </void> 
@@ -2587,7 +2587,7 @@
      <string>31E8</string> 
     </void> 
     <void property="name"> 
-     <string>S.B. ROBERTS</string> 
+     <string>S. B. ROBERTS</string> 
     </void> 
    </object> 
   </void> 
@@ -2597,7 +2597,7 @@
      <string>31FB</string> 
     </void> 
     <void property="name"> 
-     <string>F.T. BERRY</string> 
+     <string>F. T. BERRY</string> 
     </void> 
    </object> 
   </void> 
@@ -2667,7 +2667,7 @@
      <string>31FX</string> 
     </void> 
     <void property="name"> 
-     <string>M.C. FOX</string> 
+     <string>M. C. FOX</string> 
     </void> 
    </object> 
   </void> 
@@ -2677,7 +2677,7 @@
      <string>31FZ</string> 
     </void> 
     <void property="name"> 
-     <string>E.F. LARSON</string> 
+     <string>E. F. LARSON</string> 
     </void> 
    </object> 
   </void> 
@@ -2747,7 +2747,7 @@
      <string>31GJ</string> 
     </void> 
     <void property="name"> 
-     <string>T.J. GARY</string> 
+     <string>T. J. GARY</string> 
     </void> 
    </object> 
   </void> 
@@ -2827,7 +2827,7 @@
      <string>31G5</string> 
     </void> 
     <void property="name"> 
-     <string>E.A. GREENE</string> 
+     <string>E. A. GREENE</string> 
     </void> 
    </object> 
   </void> 
@@ -2877,7 +2877,7 @@
      <string>31HV</string> 
     </void> 
     <void property="name"> 
-     <string>F.V. HUNT</string> 
+     <string>F. V. HUNT</string> 
     </void> 
    </object> 
   </void> 
@@ -2927,7 +2927,7 @@
      <string>31H7</string> 
     </void> 
     <void property="name"> 
-     <string>R.K. HUNTINGTON</string> 
+     <string>R. K. HUNTINGTON</string> 
     </void> 
    </object> 
   </void> 
@@ -2947,7 +2947,7 @@
      <string>31ID</string> 
     </void> 
     <void property="name"> 
-     <string>K.D. BAILEY</string> 
+     <string>K. D. BAILEY</string> 
     </void> 
    </object> 
   </void> 
@@ -3107,7 +3107,7 @@
      <string>31JN</string> 
     </void> 
     <void property="name"> 
-     <string>J.P. JONES</string> 
+     <string>J. P. JONES</string> 
     </void> 
    </object> 
   </void> 
@@ -3137,7 +3137,7 @@
      <string>31JR</string> 
     </void> 
     <void property="name"> 
-     <string>J.R. PIERCE</string> 
+     <string>J. R. PIERCE</string> 
     </void> 
    </object> 
   </void> 
@@ -3157,7 +3157,7 @@
      <string>31JY</string> 
     </void> 
     <void property="name"> 
-     <string>J.P. KENNEDY JR.</string> 
+     <string>J. P. KENNEDY JR.</string> 
     </void> 
    </object> 
   </void> 
@@ -3167,7 +3167,7 @@
      <string>31JZ</string> 
     </void> 
     <void property="name"> 
-     <string>G.K. MCKENZIE</string> 
+     <string>G. K. MCKENZIE</string> 
     </void> 
    </object> 
   </void> 
@@ -3207,7 +3207,7 @@
      <string>31J5</string> 
     </void> 
     <void property="name"> 
-     <string>C.P. CECIL</string> 
+     <string>C. P. CECIL</string> 
     </void> 
    </object> 
   </void> 
@@ -3277,7 +3277,7 @@
      <string>31KU</string> 
     </void> 
     <void property="name"> 
-     <string>R.E. KRAUS</string> 
+     <string>R. E. KRAUS</string> 
     </void> 
    </object> 
   </void> 
@@ -3377,7 +3377,7 @@
      <string>31LG</string> 
     </void> 
     <void property="name"> 
-     <string>E.G. SMALL</string> 
+     <string>E. G. SMALL</string> 
     </void> 
    </object> 
   </void> 
@@ -3487,7 +3487,7 @@
      <string>31L7</string> 
     </void> 
     <void property="name"> 
-     <string>W.A. LEE</string> 
+     <string>W. A. LEE</string> 
     </void> 
    </object> 
   </void> 
@@ -3527,7 +3527,7 @@
      <string>31MH</string> 
     </void> 
     <void property="name"> 
-     <string>R.H. MCCARD</string> 
+     <string>R. H. MCCARD</string> 
     </void> 
    </object> 
   </void> 
@@ -3757,7 +3757,7 @@
      <string>31OJ</string> 
     </void> 
     <void property="name"> 
-     <string>R.O. HALE</string> 
+     <string>R. O. HALE</string> 
     </void> 
    </object> 
   </void> 
@@ -3817,7 +3817,7 @@
      <string>31O1</string> 
     </void> 
     <void property="name"> 
-     <string>J.C. OWENS</string> 
+     <string>J. C. OWENS</string> 
     </void> 
    </object> 
   </void> 
@@ -3877,7 +3877,7 @@
      <string>31PD</string> 
     </void> 
     <void property="name"> 
-     <string>GEN A.M. PATCH</string> 
+     <string>GEN. A. M. PATCH</string> 
     </void> 
    </object> 
   </void> 
@@ -4027,7 +4027,7 @@
      <string>31QW</string> 
     </void> 
     <void property="name"> 
-     <string>PRATT, W. V.</string> 
+     <string>W. V. PRATT</string> 
     </void> 
    </object> 
   </void> 
@@ -4077,7 +4077,7 @@
      <string>31Q8</string> 
     </void> 
     <void property="name"> 
-     <string>H.R. DICKSON</string> 
+     <string>H. R. DICKSON</string> 
     </void> 
    </object> 
   </void> 
@@ -4088,6 +4088,16 @@
     </void> 
     <void property="name"> 
      <string>ROCKAWAY</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSShip"> 
+    <void property="code"> 
+     <string>31RD</string> 
+    </void> 
+    <void property="name"> 
+     <string>R. CONRAD</string> 
     </void> 
    </object> 
   </void> 
@@ -4127,7 +4137,7 @@
      <string>31RJ</string> 
     </void> 
     <void property="name"> 
-     <string>W.R. RUSH</string> 
+     <string>W. R. RUSH</string> 
     </void> 
    </object> 
   </void> 
@@ -4187,7 +4197,7 @@
      <string>31RZ</string> 
     </void> 
     <void property="name"> 
-     <string>C.K. BRONSON</string> 
+     <string>C. K. BRONSON</string> 
     </void> 
    </object> 
   </void> 
@@ -4197,7 +4207,7 @@
      <string>31R5</string> 
     </void> 
     <void property="name"> 
-     <string>F.M. ROBINSON</string> 
+     <string>F. M. ROBINSON</string> 
     </void> 
    </object> 
   </void> 
@@ -4347,7 +4357,7 @@
      <string>31TJ</string> 
     </void> 
     <void property="name"> 
-     <string>H.J. THOMAS</string> 
+     <string>H. J. THOMAS</string> 
     </void> 
    </object> 
   </void> 
@@ -4777,7 +4787,7 @@
      <string>31WJ</string> 
     </void> 
     <void property="name"> 
-     <string>J.W. WEEKS</string> 
+     <string>J. W. WEEKS</string> 
     </void> 
    </object> 
   </void> 
@@ -4807,7 +4817,7 @@
      <string>31WS</string> 
     </void> 
     <void property="name"> 
-     <string>R.L. WILSON</string> 
+     <string>R. L. WILSON</string> 
     </void> 
    </object> 
   </void> 
@@ -4837,7 +4847,7 @@
      <string>31W1</string> 
     </void> 
     <void property="name"> 
-     <string>C.R. WARE</string> 
+     <string>C. R. WARE</string> 
     </void> 
    </object> 
   </void> 
@@ -4867,7 +4877,7 @@
      <string>31W8</string> 
     </void> 
     <void property="name"> 
-     <string>WILLIS, J.</string> 
+     <string>J. WILLIS</string> 
     </void> 
    </object> 
   </void> 
@@ -4877,7 +4887,7 @@
      <string>31W9</string> 
     </void> 
     <void property="name"> 
-     <string>W.M. WOOD</string> 
+     <string>M. W. WOOD</string> 
     </void> 
    </object> 
   </void> 
@@ -4887,7 +4897,7 @@
      <string>31XD</string> 
     </void> 
     <void property="name"> 
-     <string>D.H. FOX</string> 
+     <string>D. H. FOX</string> 
     </void> 
    </object> 
   </void> 
@@ -4987,7 +4997,7 @@
      <string>31XV</string> 
     </void> 
     <void property="name"> 
-     <string>N.K. PERRY</string> 
+     <string>N. K. PERRY</string> 
     </void> 
    </object> 
   </void> 
@@ -5027,7 +5037,7 @@
      <string>31X3</string> 
     </void> 
     <void property="name"> 
-     <string>C.V. RICKETTS</string> 
+     <string>C. V. RICKETTS</string> 
     </void> 
    </object> 
   </void> 
@@ -5047,7 +5057,7 @@
      <string>31X9</string> 
     </void> 
     <void property="name"> 
-     <string>W.C. LAWE</string> 
+     <string>W. C. LAWE</string> 
     </void> 
    </object> 
   </void> 
@@ -5147,7 +5157,7 @@
      <string>31YR</string> 
     </void> 
     <void property="name"> 
-     <string>R.E. BYRD</string> 
+     <string>R. E. BYRD</string> 
     </void> 
    </object> 
   </void> 
@@ -5157,7 +5167,7 @@
      <string>31YS</string> 
     </void> 
     <void property="name"> 
-     <string>C.H. SPERRY</string> 
+     <string>C. H. SPERRY</string> 
     </void> 
    </object> 
   </void> 
@@ -5287,7 +5297,7 @@
      <string>31ZI</string> 
     </void> 
     <void property="name"> 
-     <string>J.W. WILKE</string> 
+     <string>J. W. WILKE</string> 
     </void> 
    </object> 
   </void> 
@@ -5297,7 +5307,7 @@
      <string>31ZJ</string> 
     </void> 
     <void property="name"> 
-     <string>A.M. SUMNER</string> 
+     <string>A. M. SUMNER</string> 
     </void> 
    </object> 
   </void> 
@@ -5357,7 +5367,7 @@
      <string>31Z8</string> 
     </void> 
     <void property="name"> 
-     <string>USS RICHMOND k. TURNER</string> 
+     <string>USS RICHMOND K. TURNER</string> 
     </void> 
    </object> 
   </void> 
@@ -5447,7 +5457,7 @@
      <string>311O</string> 
     </void> 
     <void property="name"> 
-     <string>R.A. OWENS</string> 
+     <string>R. A. OWENS</string> 
     </void> 
    </object> 
   </void> 
@@ -5557,7 +5567,7 @@
      <string>312R</string> 
     </void> 
     <void property="name"> 
-     <string>C.H. ROAN</string> 
+     <string>C. H. ROAN</string> 
     </void> 
    </object> 
   </void> 
@@ -5947,7 +5957,7 @@
      <string>317T</string> 
     </void> 
     <void property="name"> 
-     <string>TRACER (JOHN HOPKINS)</string> 
+     <string>TRACER</string> 
     </void> 
    </object> 
   </void> 
@@ -5987,7 +5997,7 @@
      <string>3175</string> 
     </void> 
     <void property="name"> 
-     <string>MALCOM BALDRIDGE</string> 
+     <string>MALCOLM BALDRIDGE</string> 
     </void> 
    </object> 
   </void> 
@@ -6367,7 +6377,7 @@
      <string>32D6</string> 
     </void> 
     <void property="name"> 
-     <string>INDEPENDENCE (CVA-62)</string> 
+     <string>INDEPENDENCE</string> 
     </void> 
    </object> 
   </void> 
@@ -6557,7 +6567,7 @@
      <string>32H2</string> 
     </void> 
     <void property="name"> 
-     <string>HEERMAN</string> 
+     <string>HEERMANN</string> 
     </void> 
    </object> 
   </void> 
@@ -6627,7 +6637,7 @@
      <string>32IP</string> 
     </void> 
     <void property="name"> 
-     <string>INDEPENDENCE (TB)</string> 
+     <string>INDEPENDENCE</string> 
     </void> 
    </object> 
   </void> 
@@ -7177,7 +7187,7 @@
      <string>32UQ</string> 
     </void> 
     <void property="name"> 
-     <string>SEALIFT ARTIC</string> 
+     <string>SEALIFT ARCTIC</string> 
     </void> 
    </object> 
   </void> 
@@ -7287,7 +7297,7 @@
      <string>32XF</string> 
     </void> 
     <void property="name"> 
-     <string>ROOSEVELT PRESIDENT</string> 
+     <string>PRESIDENT ROOSEVELT</string> 
     </void> 
    </object> 
   </void> 
@@ -7328,16 +7338,6 @@
     </void> 
     <void property="name"> 
      <string>USS UNDERWOOD</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSShip"> 
-    <void property="code"> 
-     <string>32ZG</string> 
-    </void> 
-    <void property="name"> 
-     <string>MONTE OLIVIA</string> 
     </void> 
    </object> 
   </void> 
@@ -7407,7 +7407,7 @@
      <string>321E</string> 
     </void> 
     <void property="name"> 
-     <string>ESTOCIN (USN)</string> 
+     <string>ESTOCIN</string> 
     </void> 
    </object> 
   </void> 
@@ -7427,7 +7427,7 @@
      <string>321H</string> 
     </void> 
     <void property="name"> 
-     <string>SCOTT, USS</string> 
+     <string>USS SCOOT</string> 
     </void> 
    </object> 
   </void> 
@@ -7627,7 +7627,7 @@
      <string>327V</string> 
     </void> 
     <void property="name"> 
-     <string>AUDREY FITCH</string> 
+     <string>AUBREY FITCH</string> 
     </void> 
    </object> 
   </void> 
@@ -7757,7 +7757,7 @@
      <string>33A2</string> 
     </void> 
     <void property="name"> 
-     <string>ATOLL II</string> 
+     <string>ATOLL III</string> 
     </void> 
    </object> 
   </void> 
@@ -8347,7 +8347,7 @@
      <string>35BT</string> 
     </void> 
     <void property="name"> 
-     <string>BRIGITTE THERESE</string> 
+     <string>BRIGITTE-THERESE</string> 
     </void> 
    </object> 
   </void> 
@@ -8364,7 +8364,7 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSShip"> 
     <void property="code"> 
-     <string>35B4</string> 
+     <string>35B8</string> 
     </void> 
     <void property="name"> 
      <string>BORDA</string> 
@@ -8547,7 +8547,17 @@
      <string>35ED</string> 
     </void> 
     <void property="name"> 
-     <string>E.V. HENRY</string> 
+     <string>ENSEIGNE VAISSEAU HENRY</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSShip"> 
+    <void property="code"> 
+     <string>35EH</string> 
+    </void> 
+    <void property="name"> 
+     <string>ECHO 2</string> 
     </void> 
    </object> 
   </void> 
@@ -8618,6 +8628,16 @@
     </void> 
     <void property="name"> 
      <string>FRANCE II</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSShip"> 
+    <void property="code"> 
+     <string>35FB</string> 
+    </void> 
+    <void property="name"> 
+     <string>FRANCOIS BLANC</string> 
     </void> 
    </object> 
   </void> 
@@ -8897,7 +8917,7 @@
      <string>35LD</string> 
     </void> 
     <void property="name"> 
-     <string>PASSEUR DU PRINTEMPS</string> 
+     <string>LE PASSEUR DU PRINTEMPS</string> 
     </void> 
    </object> 
   </void> 
@@ -8937,7 +8957,7 @@
      <string>35LH</string> 
     </void> 
     <void property="name"> 
-     <string>PERLE</string> 
+     <string>LA PERLE</string> 
     </void> 
    </object> 
   </void> 
@@ -9004,6 +9024,16 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSShip"> 
     <void property="code"> 
+     <string>35LQ</string> 
+    </void> 
+    <void property="name"> 
+     <string>LA COQUILLE</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSShip"> 
+    <void property="code"> 
      <string>35LR</string> 
     </void> 
     <void property="name"> 
@@ -9058,6 +9088,16 @@
     </void> 
     <void property="name"> 
      <string>MARIA GEESJE</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSShip"> 
+    <void property="code"> 
+     <string>35MH</string> 
+    </void> 
+    <void property="name"> 
+     <string>MARCEL LE BIHAN</string> 
     </void> 
    </object> 
   </void> 
@@ -9217,7 +9257,7 @@
      <string>35OM</string> 
     </void> 
     <void property="name"> 
-     <string>ORSOM I</string> 
+     <string>L&apos;ORSOM I</string> 
     </void> 
    </object> 
   </void> 
@@ -9307,7 +9347,7 @@
      <string>35PL</string> 
     </void> 
     <void property="name"> 
-     <string>PROFESSEUR LACAZE DUTHIER</string> 
+     <string>PROF. LACAZE DUTHIERS</string> 
     </void> 
    </object> 
   </void> 
@@ -9357,7 +9397,7 @@
      <string>35PT</string> 
     </void> 
     <void property="name"> 
-     <string>THEODORE TISSIER</string> 
+     <string>PRES. THEODORE TISSIER</string> 
     </void> 
    </object> 
   </void> 
@@ -9647,7 +9687,7 @@
      <string>351E</string> 
     </void> 
     <void property="name"> 
-     <string>DUGUAY TROUIN</string> 
+     <string>DUGUAY-TROUIN</string> 
     </void> 
    </object> 
   </void> 
@@ -9757,7 +9797,7 @@
      <string>351R</string> 
     </void> 
     <void property="name"> 
-     <string>LA GALISONIERE</string> 
+     <string>LA GALISSONNIERE</string> 
     </void> 
    </object> 
   </void> 
@@ -10148,6 +10188,16 @@
     </void> 
     <void property="name"> 
      <string>NICOLAS</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSShip"> 
+    <void property="code"> 
+     <string>354C</string> 
+    </void> 
+    <void property="name"> 
+     <string>LA CONFIANCE</string> 
     </void> 
    </object> 
   </void> 
@@ -10677,7 +10727,7 @@
      <string>48PL</string> 
     </void> 
     <void property="name"> 
-     <string>D.R. PLATANO</string> 
+     <string>D. R. PLATANO</string> 
     </void> 
    </object> 
   </void> 
@@ -11057,7 +11107,7 @@
      <string>57IB</string> 
     </void> 
     <void property="name"> 
-     <string>BEACH &amp; INTERTIDAL SITES</string> 
+     <string>BEACH AN INTERTIDAL SITES</string> 
     </void> 
    </object> 
   </void> 
@@ -11117,7 +11167,7 @@
      <string>58GS</string> 
     </void> 
     <void property="name"> 
-     <string>G.O. SARS</string> 
+     <string>G. O. SARS</string> 
     </void> 
    </object> 
   </void> 
@@ -11534,16 +11584,6 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSShip"> 
     <void property="code"> 
-     <string>67OC</string> 
-    </void> 
-    <void property="name"> 
-     <string>OCEANIA</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSShip"> 
-    <void property="code"> 
      <string>68AD</string> 
     </void> 
     <void property="name"> 
@@ -11688,16 +11728,6 @@
     </void> 
     <void property="name"> 
      <string>CHARLES DARWIN</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSShip"> 
-    <void property="code"> 
-     <string>74AD</string> 
-    </void> 
-    <void property="name"> 
-     <string>ANTONIA JOHNSON</string> 
     </void> 
    </object> 
   </void> 
@@ -12997,7 +13027,7 @@
      <string>74WS</string> 
     </void> 
     <void property="name"> 
-     <string>W. SCORESKY</string> 
+     <string>RRS WILLIAM SCORESBY</string> 
     </void> 
    </object> 
   </void> 
@@ -13117,7 +13147,7 @@
      <string>7440</string> 
     </void> 
     <void property="name"> 
-     <string>NEWTON</string> 
+     <string>HMAS NEWTON</string> 
     </void> 
    </object> 
   </void> 
@@ -13237,7 +13267,7 @@
      <string>89BL</string> 
     </void> 
     <void property="name"> 
-     <string>BILLIM</string> 
+     <string>BILIM</string> 
     </void> 
    </object> 
   </void> 
@@ -13537,7 +13567,7 @@
      <string>90BN</string> 
     </void> 
     <void property="name"> 
-     <string>AKADEMIK ALEKSANDR VINOGR</string> 
+     <string>AK. ALEKSANDR VINOGRADOV</string> 
     </void> 
    </object> 
   </void> 
@@ -13717,7 +13747,7 @@
      <string>90C2</string> 
     </void> 
     <void property="name"> 
-     <string>PROFESSOR SERGEY DOROFEYE</string> 
+     <string>PROF.SERGEY DOROFEYEV</string> 
     </void> 
    </object> 
   </void> 
@@ -13827,7 +13857,7 @@
      <string>90D7</string> 
     </void> 
     <void property="name"> 
-     <string>KONSTANTINBOLDYREV</string> 
+     <string>KONSTANTIN BOLDYREV</string> 
     </void> 
    </object> 
   </void> 
@@ -14147,7 +14177,7 @@
      <string>90NS</string> 
     </void> 
     <void property="name"> 
-     <string>A.N.STRAKHOV</string> 
+     <string>AK. NIKOLAY. STRAKHOV</string> 
     </void> 
    </object> 
   </void> 
@@ -14437,7 +14467,7 @@
      <string>90SG</string> 
     </void> 
     <void property="name"> 
-     <string>SERGEY VAVILOV</string> 
+     <string>AKADEMIK SERGEY VAVILOV</string> 
     </void> 
    </object> 
   </void> 
@@ -14477,7 +14507,7 @@
      <string>90T3</string> 
     </void> 
     <void property="name"> 
-     <string>TAYFUN</string> 
+     <string>TAIFUN</string> 
     </void> 
    </object> 
   </void> 
@@ -14627,7 +14657,7 @@
      <string>90VV</string> 
     </void> 
     <void property="name"> 
-     <string>V.VOROBYEV</string> 
+     <string>V. VOROBYEV</string> 
     </void> 
    </object> 
   </void> 
@@ -14817,7 +14847,7 @@
      <string>9020</string> 
     </void> 
     <void property="name"> 
-     <string>UNKNOWN</string> 
+     <string>GIGROMETR</string> 
     </void> 
    </object> 
   </void> 

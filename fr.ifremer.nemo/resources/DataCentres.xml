@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.6.0" class="java.beans.XMLDecoder"> 
+<java version="1.5.0_09" class="java.beans.XMLDecoder"> 
  <object class="java.util.ArrayList"> 
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSDataCentre"> 
@@ -56,13 +56,26 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSDataCentre"> 
     <void property="code"> 
+     <string>BV</string> 
+    </void> 
+    <void property="countryName"> 
+     <string>BELGIQUE</string> 
+    </void> 
+    <void property="name"> 
+     <string>VLIZ - Flanders Marine Institute</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSDataCentre"> 
+    <void property="code"> 
      <string>BM</string> 
     </void> 
     <void property="countryName"> 
      <string>BULGARIE</string> 
     </void> 
     <void property="name"> 
-     <string>National Institute Meteorology and Hydrology, NIMH</string> 
+     <string>NIMH National Institute Meteorology and Hydrology</string> 
     </void> 
    </object> 
   </void> 
@@ -147,6 +160,19 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSDataCentre"> 
     <void property="code"> 
+     <string>DN</string> 
+    </void> 
+    <void property="countryName"> 
+     <string>DANEMARK</string> 
+    </void> 
+    <void property="name"> 
+     <string>NERI - Nat. Environmental Research Institute</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSDataCentre"> 
+    <void property="code"> 
      <string>EN</string> 
     </void> 
     <void property="countryName"> 
@@ -192,7 +218,20 @@
      <string>ESPAGNE</string> 
     </void> 
     <void property="name"> 
-     <string>IEO</string> 
+     <string>IEO - Instituto Espanol de Oceanografia</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSDataCentre"> 
+    <void property="code"> 
+     <string>EM</string> 
+    </void> 
+    <void property="countryName"> 
+     <string>ESTONIE</string> 
+    </void> 
+    <void property="name"> 
+     <string>MSI - Marine Systems Institute</string> 
     </void> 
    </object> 
   </void> 
@@ -277,6 +316,32 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSDataCentre"> 
     <void property="code"> 
+     <string>IR</string> 
+    </void> 
+    <void property="countryName"> 
+     <string>IRLANDE</string> 
+    </void> 
+    <void property="name"> 
+     <string>Marine Insitute</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSDataCentre"> 
+    <void property="code"> 
+     <string>IC</string> 
+    </void> 
+    <void property="countryName"> 
+     <string>ISLANDE</string> 
+    </void> 
+    <void property="name"> 
+     <string>MRI - Marine Research Institute</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSDataCentre"> 
+    <void property="code"> 
      <string>IL</string> 
     </void> 
     <void property="countryName"> 
@@ -329,6 +394,19 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSDataCentre"> 
     <void property="code"> 
+     <string>LI</string> 
+    </void> 
+    <void property="countryName"> 
+     <string>LETTONIE</string> 
+    </void> 
+    <void property="name"> 
+     <string>IAE/UL - Institute of Aquatic Ecology</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSDataCentre"> 
+    <void property="code"> 
      <string>LB</string> 
     </void> 
     <void property="countryName"> 
@@ -336,6 +414,19 @@
     </void> 
     <void property="name"> 
      <string>NCSR, National Centre for Marine Sciences</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSDataCentre"> 
+    <void property="code"> 
+     <string>LC</string> 
+    </void> 
+    <void property="countryName"> 
+     <string>LITHUANIE</string> 
+    </void> 
+    <void property="name"> 
+     <string>CMR -Center of Marine Research</string> 
     </void> 
    </object> 
   </void> 
@@ -368,13 +459,39 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSDataCentre"> 
     <void property="code"> 
+     <string>NI</string> 
+    </void> 
+    <void property="countryName"> 
+     <string>NORVEGE</string> 
+    </void> 
+    <void property="name"> 
+     <string>IMR - Institute of Marine Research</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSDataCentre"> 
+    <void property="code"> 
      <string>RI</string> 
     </void> 
     <void property="countryName"> 
      <string>PAYS-BAS</string> 
     </void> 
     <void property="name"> 
-     <string>RIKZ</string> 
+     <string>RIKZ - Nat. Inst. for Coastal &amp; Marine Management</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSDataCentre"> 
+    <void property="code"> 
+     <string>PM</string> 
+    </void> 
+    <void property="countryName"> 
+     <string>POLOGNE</string> 
+    </void> 
+    <void property="name"> 
+     <string>IMGW Inst. of Meteorology and Water management</string> 
     </void> 
    </object> 
   </void> 
@@ -388,6 +505,19 @@
     </void> 
     <void property="name"> 
      <string>IHPT - Hydrographic Institute</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSDataCentre"> 
+    <void property="code"> 
+     <string>RN</string> 
+    </void> 
+    <void property="countryName"> 
+     <string>ROUMANIE</string> 
+    </void> 
+    <void property="name"> 
+     <string>NIMRD Nat. Inst. for Marine Research &amp; Development</string> 
     </void> 
    </object> 
   </void> 
@@ -420,6 +550,19 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSDataCentre"> 
     <void property="code"> 
+     <string>RS</string> 
+    </void> 
+    <void property="countryName"> 
+     <string>RUSSIE FED./FSU</string> 
+    </void> 
+    <void property="name"> 
+     <string>SIO/RAS - Shirshov Institute of Oceanology</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSDataCentre"> 
+    <void property="code"> 
      <string>WB</string> 
     </void> 
     <void property="countryName"> 
@@ -440,6 +583,19 @@
     </void> 
     <void property="name"> 
      <string>Centre de recherches oceanographiques de Dakar</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSDataCentre"> 
+    <void property="code"> 
+     <string>SN</string> 
+    </void> 
+    <void property="countryName"> 
+     <string>SLOVENIE</string> 
+    </void> 
+    <void property="name"> 
+     <string>NIB/MBS Nat. Inst. Biology/Marine Biology Station</string> 
     </void> 
    </object> 
   </void> 
