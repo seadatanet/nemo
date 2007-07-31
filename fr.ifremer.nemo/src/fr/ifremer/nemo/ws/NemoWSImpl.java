@@ -445,13 +445,20 @@ public class NemoWSImpl implements Cloneable, NemoWS {
 			_logger.debug("NemoWSImpl.getSurveyList()");
 		}
 		try {
+			System.out.println("AVANT REQ");
+			
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
 			DataSource ds = (DataSource) envCtx.lookup("SISMER");
 			conn = ds.getConnection();
 
-			String statement = "select CAM_CAMREF, CAM_CRNOM " + "from CAM "
+			
+			
+			String statement = "select CAM_CRNO, CAM_CRNOM " + "from CAM "
 					+ "where CAM_CAMTYP != 'PV' " + "order by CAM_DATDEB desc ";
+			
+			System.out.println("APRES REQ");
+			
 			stmt = conn.createStatement();
 			result = stmt.executeQuery(statement);
 			Vector<WSSurveyDescription> surveys = new Vector<WSSurveyDescription>();
