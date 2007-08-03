@@ -1,0 +1,35 @@
+# Set root logger level to INFO and its only appender to A1.
+log4j.rootLogger=INFO, A1
+
+#log4j.logger.org.apache.axis.enterprise=DEBUG, A1
+
+log4j.logger.fr.ifremer.nemo=DEBUG, NEMO
+log4j.logger.fr.ifremer.nautilus=DEBUG, NAUTILUS
+
+log4j.appender.A1=org.apache.log4j.ConsoleAppender
+log4j.appender.A1.layout=org.apache.log4j.PatternLayout
+log4j.appender.A1.layout.ConversionPattern=%d{dd MMM yyyy HH:mm:ss,SSS} [%p] (%c) %m%n
+log4j.additivity.A1=false
+
+#log4j.appender.A2=org.apache.log4j.net.SyslogAppender
+#log4j.appender.A2.layout=org.apache.log4j.PatternLayout
+#log4j.appender.A2.layout.ConversionPattern=%d{HH:mm:ss,SSS} (%c) %m%n
+#log4j.appender.A2.SyslogHost=mendu
+#log4j.appender.A2.Facility=KERN
+#log4j.additivity.A2=false
+
+log4j.appender.NEMO=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.NEMO.File=###LOGPATTERN###
+log4j.appender.NEMO.DatePattern='.'yyyy-MM-dd
+log4j.appender.NEMO.Append=true
+log4j.appender.NEMO.layout=org.apache.log4j.PatternLayout
+log4j.appender.NEMO.layout.ConversionPattern=%d{dd MMM yyyy HH:mm:ss,SSS} [%p] (%c) %m%n
+log4j.additivity.NEMO=false
+
+log4j.appender.NAUTILUS=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.NAUTILUS.File=###LOGPATTERN###
+log4j.appender.NAUTILUS.DatePattern='.'yyyy-MM-dd
+log4j.appender.NAUTILUS.Append=true
+log4j.appender.NAUTILUS.layout=org.apache.log4j.PatternLayout
+log4j.appender.NAUTILUS.layout.ConversionPattern=%d{dd MMM yyyy HH:mm:ss,SSS} [%p] (%c) %m%n
+log4j.additivity.NAUTILUS=false

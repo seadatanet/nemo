@@ -2,7 +2,7 @@
 Projet: CONVMED
 Code projet: 9064780
 Auteur: ATLANTIDE
-Date: $Id: buildWS.xml,v 1.4 2007-06-29 15:09:57 pkervell Exp $
+Date: $Id: buildWS.xml,v 1.5 2007-08-03 12:34:22 pkervell Exp $
 Description: build pour la generation, le deploiement et le test du Web Services NEMO
 Usage: ant [-f buildWS.xml] option
        avec option:
@@ -61,14 +61,16 @@ Usage: ant [-f buildWS.xml] option
   <property name="javadoc.dir" value="${basedir}/ws-deploy/javadoc"/>
   <property name="output.dir" value="${basedir}/ws-deploy/output"/>
 
-<!-- configuration IFREMER
+<!-- configuration IFREMER -->
   <property name="the_hostname" value="alboran5.ifremer.fr" />
   <property name="the_portnumber" value="8081" />
--->
-<!-- configuration ALTRAN OUEST -->
+  <property name="the_log4jpath" value="/home/alboran/logiciels/apache-tomcat-5.5.17/webapps/nemo/logs/nemo.log" />  
+
+<!-- configuration ALTRAN OUEST
    <property name="the_hostname" value="localhost" />
    <property name="the_portnumber" value="8888" />
-
+   <property name="the_log4jpath" value="c:/tmp/logs/nemo.log" />
+ -->
 
   <!-- librairies d AXIS -->
   <path id="axis.classpath">
@@ -224,6 +226,10 @@ Usage: ant [-f buildWS.xml] option
   
   <!-- target: war de nemo-war -->
   <target name="nemo-war" depends="compile" description="war de nemo-war">
+
+  	<copy file="${etc.dir}/log4j.properties.template" tofile="${etc.dir}/log4j.properties" />
+    <replace file="${etc.dir}/log4j.properties" token="###LOGPATTERN###" value="${the_log4jpath}"/>
+  	
      <war
           destfile="${jars.dir}/nemo.war"
           webxml="${etc.dir}/WEB-INF-NEMO/web.xml"
@@ -265,6 +271,10 @@ Usage: ant [-f buildWS.xml] option
 
   <!-- target: war de nautilus-war -->
   <target name="nautilus-war" depends="compile" description="war de nautilus-war">
+
+  	<copy file="${etc.dir}/log4j.properties.template" tofile="${etc.dir}/log4j.properties" />
+    <replace file="${etc.dir}/log4j.properties" token="###LOGPATTERN###" value="${the_log4jpath}"/>
+  		
      <war
           destfile="${jars.dir}/nautilus.war"
           webxml="${etc.dir}/WEB-INF-NAUTILUS/web.xml"
