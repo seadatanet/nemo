@@ -346,7 +346,7 @@ public class DrawingData {
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
 				| Section.TWISTIE | Section.COMPACT);
 
-		System.out.println("section type courant DrawingData");
+//		System.out.println("section type courant DrawingData");
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			public void expansionStateChanged(ExpansionEvent e) {
@@ -458,7 +458,7 @@ public class DrawingData {
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
 				| Section.TWISTIE | Section.COMPACT);
 
-		System.out.println("section type ajouter DrawingData");
+//		System.out.println("section type ajouter DrawingData");
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			public void expansionStateChanged(ExpansionEvent e) {
@@ -542,7 +542,7 @@ public class DrawingData {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out.println("bouton injection");
+//						System.out.println("bouton injection");
 
 						// le textTempo c'est pour simuler une variable ligne
 						// dont on n'a pas besoin ici!

@@ -142,7 +142,7 @@ public class UpdateAction extends Action implements ISelectionListener,
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("options valider");
+//						System.out.println("options valider");
 						options = 0;
 						shelloptions.close();
 
@@ -154,7 +154,7 @@ public class UpdateAction extends Action implements ISelectionListener,
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("options annuler");
+//						System.out.println("options annuler");
 						options = 0;
 
 						shelloptions.close();

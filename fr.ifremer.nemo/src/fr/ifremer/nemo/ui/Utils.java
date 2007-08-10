@@ -159,8 +159,8 @@ public class Utils {
 		deb = styledtext.getSelection().x;
 		fi = styledtext.getSelection().y;
 
-		System.out.println("deb clic = " + deb);
-		System.out.println("fi clic = " + fi);
+//		System.out.println("deb clic = " + deb);
+//		System.out.println("fi clic = " + fi);
 
 		if (deb == fi) {
 			Utils.messageErreur(Messages.getString("Utils.26"));
@@ -424,8 +424,8 @@ public class Utils {
 
 		offsetDebut = cursor.getX() - taillesCumLignes[ligneDebut - 1] + 1;
 		offsetFin = cursor.getY() - taillesCumLignes[ligneFin - 1];
-		System.out.println("offsetdebut =" + offsetDebut + "  offsetfin="
-				+ offsetFin);
+//		System.out.println("offsetdebut =" + offsetDebut + "  offsetfin="
+//				+ offsetFin);
 		if (offsetDebut < 0) {
 			frag.setFirstCharOffset(1);
 		} else {
@@ -511,9 +511,9 @@ public class Utils {
 			}
 			// en sortie de boucle, cpt a la valeur de l'offset de fin sur la
 			// dernière ligne du commentaire
-			System.out.println("offset en ligne fin = " + cpt);
-			System.out.println("ligne fin = " + lignFin);
-			System.out.println("ligne debut = " + lignDepart);
+//			System.out.println("offset en ligne fin = " + cpt);
+//			System.out.println("ligne fin = " + lignFin);
+//			System.out.println("ligne debut = " + lignDepart);
 
 			if (cpt > 0) {
 				cpt = cpt - (nbrelignes - 1);

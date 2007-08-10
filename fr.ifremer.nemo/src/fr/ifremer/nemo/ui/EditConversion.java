@@ -127,7 +127,7 @@ public class EditConversion extends Thread {
 
 		if (nomFichierSortie != null) {
 
-			System.out.println("Fichier = " + nomFichierSortie);
+//			System.out.println("Fichier = " + nomFichierSortie);
 
 			File fich = new File(nomFichierSortie);
 			if (fich.exists()) {

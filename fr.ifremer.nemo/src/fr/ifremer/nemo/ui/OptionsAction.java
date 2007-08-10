@@ -59,7 +59,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 	public void run() {
 		// lancement IHM options
-		System.out.println("Menu options"); //$NON-NLS-1$
+//		System.out.println("Menu options"); //$NON-NLS-1$
 
 		shelloptions = new Shell(Application.display, SWT.BORDER | SWT.TITLE
 				| SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);
@@ -127,8 +127,8 @@ public class OptionsAction extends Action implements ISelectionListener,
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println(Messages
-								.getString("OptionsAction.7")); //$NON-NLS-1$
+//						System.out.println(Messages
+//								.getString("OptionsAction.7")); //$NON-NLS-1$
 
 						String nomRepertoire;
 						Shell shell = new Shell();
@@ -140,7 +140,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 						} else {
 
-							System.out.println("pas de dossier sélectionné"); //$NON-NLS-1$
+//							System.out.println("pas de dossier sélectionné"); //$NON-NLS-1$
 							ViewLog.styledTextLogErreurs.setText(Messages
 									.getString("OptionsAction.9")); //$NON-NLS-1$
 
@@ -223,7 +223,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("options cancel");
+//						System.out.println("options cancel");
 
 						shelloptions.close();
 
@@ -235,7 +235,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("options valider");
+//						System.out.println("options valider");
 
 						// sauvegarde de la config
 						Utils.saveConfig();

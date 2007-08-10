@@ -972,8 +972,8 @@ public class DataModel {
 						double latitudeFinDouble = ((Number) latitudeFormatFin
 								.parseObject(EditStation.textLatFin.getText()))
 								.doubleValue();
-						System.out.println("longitude de fin ="
-								+ EditStation.textLatFin.getText());
+//						System.out.println("longitude de fin ="
+//								+ EditStation.textLatFin.getText());
 						timeSeriesInformation.setEndLatitude(latitudeFinDouble);
 					} catch (ParseException e) {
 
@@ -1046,8 +1046,8 @@ public class DataModel {
 						double longitudeFinDouble = ((Number) longitudeFormatFin
 								.parseObject(EditStation.textLongFin.getText()))
 								.doubleValue();
-						System.out.println("longitude de fin ="
-								+ EditStation.textLongFin.getText());
+//						System.out.println("longitude de fin ="
+//								+ EditStation.textLongFin.getText());
 						timeSeriesInformation
 								.setEndLongitude(longitudeFinDouble);
 					} catch (ParseException e) {
@@ -1368,7 +1368,7 @@ public class DataModel {
 			EditDesc.comboIndicRuptureDonnees.select(0);
 		}
 
-		System.out.println("Fin remplissage onglet Desc");
+//		System.out.println("Fin remplissage onglet Desc");
 
 		// refresh de la zone d'édition
 		EditDesc.razEdition();
@@ -1383,7 +1383,7 @@ public class DataModel {
 
 	public static void fillSurvey() {
 
-		System.out.println("Remplissage onglet survey");
+//		System.out.println("Remplissage onglet survey");
 
 		Survey survey;
 		if (ViewFile.dossierCampagne) {
@@ -1525,7 +1525,7 @@ public class DataModel {
 
 		// ////////////////////////////////////////
 
-		System.out.println("Fin remplissage onglet Survey");
+//		System.out.println("Fin remplissage onglet Survey");
 
 	}
 
@@ -2211,8 +2211,8 @@ public class DataModel {
 			Long dateLong = (Long) format.parseObject("JUN 02 2007");
 
 			Formatter formatter = new Formatter();
-			System.out.println(">>>>>>"
-					+ formatter.formatDateTime("MM/dd/yyyy", dateLong));
+//			System.out.println(">>>>>>"
+//					+ formatter.formatDateTime("MM/dd/yyyy", dateLong));
 
 			// System.out.println(new Date( dateLong.longValue()));
 		} catch (Exception e) {

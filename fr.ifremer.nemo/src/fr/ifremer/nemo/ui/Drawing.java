@@ -134,7 +134,7 @@ public class Drawing {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("saisie manuelle section " + nomSec); // 
+//						System.out.println("saisie manuelle section " + nomSec); // 
 						// raz de la valeur manuelle
 						manu.setEnabled(true);
 						// grou.setVisible(false);
@@ -150,8 +150,8 @@ public class Drawing {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent f) {
-						System.out.println("position dans fichier section "
-								+ nomSec);
+//						System.out.println("position dans fichier section "
+//								+ nomSec);
 						// raz de la valeur manuelle
 
 						manu.setText("");
@@ -174,7 +174,7 @@ public class Drawing {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out.println("bouton injection"); // 
+//						System.out.println("bouton injection"); // 
 						// System.out.println("valeur de ligne lign==> " +
 						// lign.getText());
 						// System.out.println("valeur de ligne de
@@ -244,7 +244,7 @@ public class Drawing {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("saisie manuelle section " + nomSec); // 
+//						System.out.println("saisie manuelle section " + nomSec); // 
 						// raz de la valeur manuelle
 						// grou.setVisible(false);
 						lign.setEnabled(false);
@@ -267,8 +267,8 @@ public class Drawing {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("position dans fichier section "
-								+ nomSec); // 
+//						System.out.println("position dans fichier section "
+//								+ nomSec); // 
 						// raz de la valeur manuelle
 
 						// grou.setVisible(true);
@@ -339,7 +339,7 @@ public class Drawing {
 				Section.DESCRIPTION | Section.TITLE_BAR | Section.TWISTIE
 						| Section.COMPACT);
 
-		System.out.println("sectionComboLigneDebutFinInject");
+//		System.out.println("sectionComboLigneDebutFinInject");
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			public void expansionStateChanged(ExpansionEvent e) {
@@ -398,7 +398,7 @@ public class Drawing {
 		label2.setText("Début");
 
 		Boolean tmp = debut.setParent(groupe);
-		System.out.println("parent ?====> " + tmp);
+//		System.out.println("parent ?====> " + tmp);
 		EditDesc.debutNbreMesures.setText("test");
 
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -431,7 +431,7 @@ public class Drawing {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("saisie manuelle section " + nomSec); // 
+//						System.out.println("saisie manuelle section " + nomSec); // 
 						// raz de la valeur manuelle
 						comboList.setEnabled(true);
 						// grou.setVisible(false);
@@ -448,8 +448,8 @@ public class Drawing {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent f) {
-						System.out.println("position dans fichier : section "
-								+ nomSec); // 
+//						System.out.println("position dans fichier : section "
+//								+ nomSec); // 
 						// raz de la valeur manuelle
 
 						comboList.setEnabled(false);
@@ -472,7 +472,7 @@ public class Drawing {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out.println("bouton injection"); // 
+//						System.out.println("bouton injection"); // 
 
 						Utils.inject(lign, debu, fi,
 								ViewFile.textAreaDescription);
@@ -512,7 +512,7 @@ public class Drawing {
 				Section.DESCRIPTION | Section.TITLE_BAR | Section.TWISTIE
 						| Section.COMPACT);
 
-		System.out.println("sectionComboLigneDebutFinInject");
+//		System.out.println("sectionComboLigneDebutFinInject");
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			public void expansionStateChanged(ExpansionEvent e) {
@@ -576,7 +576,7 @@ public class Drawing {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						System.out.println("saisie manuelle section " + nomSec); // 
+//						System.out.println("saisie manuelle section " + nomSec); // 
 						// raz de la valeur manuelle
 						comboList.setEnabled(true);
 						// grou.setVisible(false);
@@ -591,8 +591,8 @@ public class Drawing {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent f) {
-						System.out.println("position dans fichier : section "
-								+ nomSec); // 
+//						System.out.println("position dans fichier : section "
+						//		+ nomSec); // 
 						// raz de la valeur manuelle
 
 						comboList.setEnabled(false);
@@ -611,7 +611,7 @@ public class Drawing {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out.println("bouton injection"); // 
+						//System.out.println("bouton injection"); // 
 
 						Utils.injectNbreLignes(lign,
 								ViewFile.textAreaDescription);
@@ -755,7 +755,7 @@ public class Drawing {
 		label2.setText("Début");
 
 		Boolean tmp = debut.setParent(groupe);
-		System.out.println("parent ?====> " + tmp);
+//		System.out.println("parent ?====> " + tmp);
 		EditDesc.debutNbreMesures.setText("test");
 
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -787,8 +787,8 @@ public class Drawing {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent h) {
-						System.out
-								.println("saisie manuel nbre lignes entete station"); // 
+//						System.out
+//								.println("saisie manuel nbre lignes entete station"); // 
 						manu.setEnabled(true);
 						inject.setEnabled(true);
 						group.setEnabled(false);
@@ -800,8 +800,8 @@ public class Drawing {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent h) {
-						System.out
-								.println("bouton nbre octets 1ere ligne entete station"); // 
+//						System.out
+//								.println("bouton nbre octets 1ere ligne entete station"); // 
 						manu.setText("");
 						manu.setEnabled(false);
 						inject.setEnabled(false);
@@ -815,7 +815,7 @@ public class Drawing {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out.println("bouton injection"); // 
+//						System.out.println("bouton injection"); // 
 
 						Utils.injectNbreLignes(manu,
 								ViewFile.textAreaDescription);
@@ -832,7 +832,7 @@ public class Drawing {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						System.out.println("bouton injection"); // 
+//						System.out.println("bouton injection"); // 
 
 						Utils.inject(lign, debu, fi,
 								ViewFile.textAreaDescription);
@@ -907,7 +907,7 @@ public class Drawing {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent h) {
-						System.out.println("bouton injection nbre lignes"); // 
+//						System.out.println("bouton injection nbre lignes"); // 
 
 						Utils.injectNbreLignes(manu,
 								ViewFile.textAreaDescription);
@@ -978,7 +978,7 @@ public class Drawing {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent h) {
-						System.out.println("bouton injection nbre lignes"); // 
+//						System.out.println("bouton injection nbre lignes"); // 
 
 						Utils.injectNbreLignes(manu,
 								ViewFile.textAreaDescription);
@@ -1014,7 +1014,7 @@ public class Drawing {
 		final ScrolledForm forme;
 
 		nbre = listeText.size();
-		System.out.println("=================ok1===========<<<" + nbre);
+//		System.out.println("=================ok1===========<<<" + nbre);
 
 		// affichage section
 		section.setParent(ViewEdit.formEdition);
@@ -1037,13 +1037,13 @@ public class Drawing {
 		GridData gd = new GridData();
 		gd.horizontalSpan = 2;
 
-		System.out.println("=================ok1===========");
+//		System.out.println("=================ok1===========");
 		for (i = 0; i < nbre; i++) {
 
 			// label avec le texte de "description"
 			Label label = new Label(sectionClient, SWT.NULL);
 			label.setText(listeNoms.get(i));
-			System.out.println("creation de" + listeNoms.get(i));
+//			System.out.println("creation de" + listeNoms.get(i));
 
 			// affichage zone texte dans la section
 			listeText.get(i).setParent(sectionClient);
@@ -1069,7 +1069,7 @@ public class Drawing {
 		final ScrolledForm forme;
 
 		nbre = listeText.size();
-		System.out.println("=================ok1===========<<<" + nbre);
+//		System.out.println("=================ok1===========<<<" + nbre);
 
 		// affichage section
 		section.setParent(ViewEdit.formEdition);
@@ -1117,7 +1117,7 @@ public class Drawing {
 		final String nomSec;
 		final ScrolledForm forme;
 
-		System.out.println("=================ok1===========");
+//		System.out.println("=================ok1===========");
 
 		nbre = listeText.size();
 
@@ -1179,7 +1179,7 @@ public class Drawing {
 		final String nomSec;
 		final ScrolledForm forme;
 
-		System.out.println("=================ok1===========");
+//		System.out.println("=================ok1===========");
 
 		nbre = listeText.size();
 

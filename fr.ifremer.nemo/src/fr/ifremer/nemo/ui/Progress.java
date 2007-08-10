@@ -14,10 +14,10 @@ public class Progress implements Runnable {
 
 	public void run() {
 
-		System.out.println("passage dans run");
+//		System.out.println("passage dans run");
 		// ouverture de la fenetre de progression
 		shell = new Shell(Application.display, SWT.BORDER);
-		System.out.println("passage dans run2");
+//		System.out.println("passage dans run2");
 		shell.getDisplay().syncExec(new Runnable() {
 			public void run() {
 				ProgressBar progressbar = new ProgressBar(shell, SWT.HORIZONTAL

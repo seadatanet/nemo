@@ -544,7 +544,7 @@ public class FiltrageTableType {
 			Matcher m = p.matcher(origine.get(i));
 
 			if (m.matches()) {
-				System.out.println("On ajoute le type " + origine.get(i)); //$NON-NLS-1$
+				//System.out.println("On ajoute le type " + origine.get(i)); //$NON-NLS-1$
 
 				// ajout dans la liste filtrée
 				filtree.add(origine.get(i));

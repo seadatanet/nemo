@@ -357,13 +357,13 @@ public class EditStation {
 
 						}
 						if (expand == 0) {
-							System.out.println("expand passe à 1"); //$NON-NLS-1$
+//							System.out.println("expand passe à 1"); //$NON-NLS-1$
 							buttonExpand.setText("-"); //$NON-NLS-1$
 							buttonExpand2.setText("-"); //$NON-NLS-1$
 							expand = 1;
 						} else {
 							expand = 0;
-							System.out.println("expand passe à 0"); //$NON-NLS-1$
+//							System.out.println("expand passe à 0"); //$NON-NLS-1$
 							buttonExpand.setText("+"); //$NON-NLS-1$
 							buttonExpand2.setText("+"); //$NON-NLS-1$
 						}

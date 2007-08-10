@@ -44,7 +44,7 @@ public class OpenAction extends Action implements ISelectionListener,
 
 	public void run() {
 		FileInputStream stream = null;
-		System.out.println("Menu open"); //$NON-NLS-1$
+//		System.out.println("Menu open"); //$NON-NLS-1$
 
 		// vérifier que un fichier est chargé avant d'ouvrir un modèle
 		if (EditDesc.loaded == 0) {
@@ -78,7 +78,7 @@ public class OpenAction extends Action implements ISelectionListener,
 					// 
 					e.printStackTrace();
 				}
-				System.out.println("Ouverture du modèle : " + nomModele); //$NON-NLS-1$
+//				System.out.println("Ouverture du modèle : " + nomModele); //$NON-NLS-1$
 				parser.parse(stream, false);
 
 				File fich = new File(nomModele);

@@ -34,8 +34,7 @@ public class DrawingStation {
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
 				| Section.TWISTIE | Section.COMPACT);
 
-		System.out
-				.println("sectionManuelLigneDebutFinInject DrawingStation ==> ok");
+		//System.out.println("sectionManuelLigneDebutFinInject DrawingStation ==> ok");
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			public void expansionStateChanged(ExpansionEvent e) {
@@ -189,8 +188,8 @@ public class DrawingStation {
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
 				| Section.TWISTIE | Section.COMPACT);
 
-		System.out
-				.println("sectionManuelLigneDebutFinInject DrawingStation ==> ok");
+//		System.out
+//				.println("sectionManuelLigneDebutFinInject DrawingStation ==> ok");
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			public void expansionStateChanged(ExpansionEvent e) {
@@ -288,17 +287,17 @@ public class DrawingStation {
 						// 
 						EditStation.conversionFreqEchant();
 
-						System.out.println("mise à jour champ test conversion");
+//						System.out.println("mise à jour champ test conversion");
 					}
 
 					public void mouseDown(MouseEvent e) {
 
-						System.out.println("mise à jour champ test conversion");
+//						System.out.println("mise à jour champ test conversion");
 					}
 
 					public void mouseUp(MouseEvent e) {
 						// 
-						System.out.println("mise à jour champ test conversion");
+//						System.out.println("mise à jour champ test conversion");
 					}
 				});
 
@@ -382,8 +381,8 @@ public class DrawingStation {
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
 				| Section.TWISTIE | Section.COMPACT);
 
-		System.out
-				.println("sectionIncrementeLigneDebutFinInject() DrawingStation ==> ok : section créée");
+//		System.out
+//				.println("sectionIncrementeLigneDebutFinInject() DrawingStation ==> ok : section créée");
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			public void expansionStateChanged(ExpansionEvent e) {
@@ -480,8 +479,8 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent f) {
-						System.out.println("position dans fichier section "
-								+ nomSec); // TODO Auto-generated Event stub
+//						System.out.println("position dans fichier section "
+//								+ nomSec); // TODO Auto-generated Event stub
 						// widgetSelected()
 						// raz de la valeur manuelle
 
@@ -531,8 +530,8 @@ public class DrawingStation {
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
 				| Section.TWISTIE | Section.COMPACT);
 
-		System.out
-				.println("sectionTypeDonnees() DrawingStation ==> ok : section créée");
+//		System.out
+//				.println("sectionTypeDonnees() DrawingStation ==> ok : section créée");
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			public void expansionStateChanged(ExpansionEvent e) {
@@ -1033,7 +1032,7 @@ public class DrawingStation {
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
 				| Section.TWISTIE | Section.COMPACT);
 
-		System.out.println("sectionCommentaire() DrawingStation");
+//		System.out.println("sectionCommentaire() DrawingStation");
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			public void expansionStateChanged(ExpansionEvent e) {
@@ -1288,7 +1287,7 @@ public class DrawingStation {
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
 				| Section.TWISTIE | Section.COMPACT);
 
-		System.out.println("section heure station ==> ok");
+//		System.out.println("section heure station ==> ok");
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			public void expansionStateChanged(ExpansionEvent e) {
