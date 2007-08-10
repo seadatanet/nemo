@@ -29,6 +29,7 @@ import org.xml.sax.SAXException;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.DataType;
 import fr.ifremer.nemo.domain.Survey;
+import fr.ifremer.nemo.input.SurveyMedia;
 import fr.ifremer.nemo.util.Formatter;
 
 public class EditSurvey {
@@ -568,6 +569,8 @@ public class EditSurvey {
 	public static void majApresWS() {
 
 		Survey survey;
+		String refLite="", refComplete="";
+		
 		if (ViewFile.dossierCampagne) {
 			survey = DataModel.dirSurvey.getModel();
 		} else {
@@ -579,7 +582,9 @@ public class EditSurvey {
 		// injection des valeurs de l'IHM -> datamodel
 		// référence
 		if (survey.getReference() != null) {
+			
 			EditSurvey.textCampagne.setText(survey.getReference());
+						
 		}
 		if (survey.getName() != null) {
 			EditSurvey.textNom.setText(survey.getName());

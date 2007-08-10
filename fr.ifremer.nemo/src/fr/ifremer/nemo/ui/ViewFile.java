@@ -346,13 +346,13 @@ public class ViewFile extends ViewPart {
 							nomRepertoire = dialog.open();
 							if (nomRepertoire != null) {
 								fileLoaded = true;
-								Utils.findFiles(nomRepertoire);
+								if (Utils.findFiles(nomRepertoire)){
 								textAreaDescription.setText(Utils.texteBrut);
 
 								// affichage etape0 dans formulaire d'édition de
 								// paramètres
 								Utils.razGlobal();
-								EditDesc.affichageEdition();
+								EditDesc.affichageEdition();}
 							} else {
 								fileLoaded = false;
 								// System.out.println("pas de dossier

@@ -189,7 +189,7 @@ public class NautilusSurveyWSImpl implements Cloneable, NautilusSurveyWS {
 			conn = ds.getConnection();
 
 			String statement = "select distinct cp.CAM_CRNOM, n.NAV_CODNOD,n.NAV_NOMNAV,cp.CAM_DATDEB,cp.CAM_DATFIN,"
-					+ "c.COD_LIBEL,cp.CAM_CPAYS,cp.CAM_ORGPAR,SUBSTR(cp.CAM_CAMREF,1,2),r.RSP_NOM, cp.CAM_CPRJ,cp.CAM_CRNO "
+					+ "c.COD_LIBEL,cp.CAM_CPAYS,cp.CAM_ORGPAR,SUBSTR(cp.CAM_CAMREF,1,2),r.RSP_NOM, cp.CAM_CPRJ,cp.CAM_CRNO,cp.CAM_CAMREF "
 					+ "from CAM cp,NAV n, COD c, RSP r, MIS m "
 					+ "where ((cp.CAM_CRNO = ?) and (cp.CAM_NAVIRE = n.NAV_NAVIRE) and (c.COD_CODE=cp.CAM_CZONE) "
 					+ "and (c.COD_NOLIST=23) and (c.COD_LANGUE='E') and (r.RSP_CRSP=m.MIS_CRSP) and "
@@ -198,7 +198,7 @@ public class NautilusSurveyWSImpl implements Cloneable, NautilusSurveyWS {
 			pstmt.setString(1, a_SurveyRef);
 			result = pstmt.executeQuery();
 			if (result.next()) {
-				survey.setReference(a_SurveyRef);
+//				survey.setReference(a_SurveyRef);
 				survey.setName(result.getString(1));
 				survey.setShipCode(result.getString(2));
 				survey.setShipName(result.getString(3));
@@ -211,9 +211,14 @@ public class NautilusSurveyWSImpl implements Cloneable, NautilusSurveyWS {
 				survey.setChiefScientist(result.getString(10));
 				String cprj = result.getString(11);
 				String crno = result.getString(12);
+				String ref = result.getString(13);
+				survey.setReference(ref);
 				survey.setComment("");
 				survey.setProjectName(getProjectName(cprj, conn));
 				survey.setDataTypes(getDataTypeFor(crno, conn));
+				
+				System.out.println("reference >>>>>"+ref);
+				_logger.error("reference >>>>" + ref);
 			}
 			return survey;
 		} catch (Exception e) {

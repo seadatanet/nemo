@@ -1049,7 +1049,11 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 				.getNAUTILUS(new java.net.URL(Configuration.getSingleton()
 						.getNautilusWebServiceURL()));
 		WSSurvey wssurvey = service.getSurvey(a_Reference);
-		setReference(a_Reference);
+		if (wssurvey.getReference() != null){
+		
+			setReference(wssurvey.getReference());}else{
+				setReference("");
+			}
 		if (wssurvey.getName() != null) {
 			setName(wssurvey.getName());
 		} else {

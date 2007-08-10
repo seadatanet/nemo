@@ -961,7 +961,7 @@ public class Utils {
 
 	}
 
-	public static void findFiles(String directoryPath) {
+	public static Boolean findFiles(String directoryPath) {
 		File directory = new File(directoryPath);
 
 		Boolean ok = true;
@@ -1013,6 +1013,8 @@ public class Utils {
 
 		}
 
+		return ok;
+		
 	}
 
 	public static void messageErreur(String message) {
