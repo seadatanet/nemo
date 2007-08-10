@@ -637,6 +637,21 @@ public class EditSurvey {
 		// Centre d'archivage
 		if (survey.getDataCentre() != null) {
 			EditSurvey.textCentre.setText(survey.getDataCentre());
+			
+			//sélection dans la comboList
+			int taille = DataModel.listeWSCenters.length;
+			int index = 0;
+			for (int i=0;i<taille;i++){
+				if (DataModel.listeWSCenters[i].getCode().matches(survey.getDataCentre())){
+					index = i;
+					break;
+				}
+				
+			}
+			
+			EditSurvey.comboDataCentres.select(index);
+			
+			
 		}
 
 		if (survey.getAvailabilityCode() != null) {
