@@ -2,7 +2,7 @@
 Projet: CONVMED
 Code projet: 9064780
 Auteur: ATLANTIDE
-Date: $Id: buildWS.xml,v 1.5 2007-08-03 12:34:22 pkervell Exp $
+Date: $Id: buildWS.xml,v 1.6 2007-09-04 12:02:14 pkervell Exp $
 Description: build pour la generation, le deploiement et le test du Web Services NEMO
 Usage: ant [-f buildWS.xml] option
        avec option:
@@ -64,12 +64,12 @@ Usage: ant [-f buildWS.xml] option
 <!-- configuration IFREMER -->
   <property name="the_hostname" value="alboran5.ifremer.fr" />
   <property name="the_portnumber" value="8081" />
-  <property name="the_log4jpath" value="/home/alboran/logiciels/apache-tomcat-5.5.17/webapps/nemo/logs/nemo.log" />  
+  <property name="the_log4jpath" value="/home/alboran/logiciels/apache-tomcat-5.5.17/webapps" />  
 
 <!-- configuration ALTRAN OUEST
    <property name="the_hostname" value="localhost" />
    <property name="the_portnumber" value="8888" />
-   <property name="the_log4jpath" value="c:/tmp/logs/nemo.log" />
+   <property name="the_log4jpath" value="c:/tmp" />
  -->
 
   <!-- librairies d AXIS -->
