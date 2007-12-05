@@ -28,7 +28,11 @@ public class AngleFormatParser extends AbstractParser implements Cloneable {
 	static protected final String MINUTES = "MINUTES".intern();
 
 	static protected final String MINUTES_DECIMAL = "MINUTES_DECIMAL".intern();
-
+	
+	static protected final String MINUTES_DECIMAL_SANS_POINT = "MINUTES_DECIMAL_SANS_POINT".intern();
+	
+	static protected final String DEGREES_DECIMAL_SANS_POINT = "DEGREES_DECIMAL_SANS_POINT".intern();
+	
 	static protected final String MINUTES_FRACTION = "MINUTES_FRACTION"
 			.intern();
 
@@ -94,9 +98,47 @@ public class AngleFormatParser extends AbstractParser implements Cloneable {
 	/**
 	 * 
 	 * @return boolean
+	 * @exception ParseException
+	 */
+	public boolean degreesDecimalSansPoint() throws ParseException {
+		if (peekForType(DEGREES_DECIMAL_SANS_POINT)) {
+			_stack.add(new ParseElement(ParseElementType.DEGREES_DECIMAL_SANS_POINT,
+					(String) _stack.pop()));
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * 
+	 * @return boolean
 	 * @exception java.text.ParseException
 	 */
 	public boolean format() throws ParseException {
+		
+		boolean res = true;
+		
+// En fait il faut pouvoir accepter beaucoup plus de formats
+// Par contre moins de cas pouvant poser problème sont détectés
+		
+		spaces();
+		hemisphere();
+		sign();
+		spaces();
+		degrees();
+		degreesDecimal();
+		degreesDecimalSansPoint();
+		spaces();
+		minutes();
+		minutesDecimal();
+		minutesDecimalSansPoint();
+		spaces();
+		seconds();
+		spaces();
+		
+		return res;
+		
+		/*
 		spaces();
 		if (sign()) {
 			spaces();
@@ -114,7 +156,8 @@ public class AngleFormatParser extends AbstractParser implements Cloneable {
 			spaces();
 			return hemisphere();
 		}
-		return false;
+		return false;*/
+		
 	}
 
 	/**
@@ -222,13 +265,32 @@ public class AngleFormatParser extends AbstractParser implements Cloneable {
 	 * @exception ParseException
 	 */
 	public boolean minutesDecimal() throws ParseException {
-		if (peekForType(MINUTES_DECIMAL)) {
+		if (peekForType(MINUTES_DECIMAL )) {
 			_stack.add(new ParseElement(ParseElementType.MINUTES_DECIMAL,
 					(String) _stack.pop()));
 			return true;
 		}
+				
 		return false;
 	}
+	
+	/**
+	 * 
+	 * @return boolean
+	 * @exception ParseException
+	 */
+	public boolean minutesDecimalSansPoint() throws ParseException {
+
+		if (peekForType(MINUTES_DECIMAL_SANS_POINT)) {
+			_stack.add(new ParseElement(ParseElementType.MINUTES_DECIMAL_SANS_POINT,
+					(String) _stack.pop()));
+			return true;
+		}
+				
+		return false;
+	}
+	
+	
 
 	/**
 	 * 
@@ -310,10 +372,12 @@ public class AngleFormatParser extends AbstractParser implements Cloneable {
 				if (!seconds()) {
 					throw new ParseException("Secondes manquantes", mark);
 				}
-			} else if (!minutesDecimal()) {
-				throw new ParseException("Minutes manquantes", mark);
+			} else if (!minutesDecimal()){ 
+				if (!minutesDecimalSansPoint())
+					throw new ParseException("Minutes manquantes", mark);
 			}
 		} else if (!degreesDecimal()) {
+			if (!degreesDecimalSansPoint())
 			throw new ParseException("Valeur manquantes", mark);
 		}
 		return true;
@@ -331,6 +395,7 @@ public class AngleFormatParser extends AbstractParser implements Cloneable {
 				throw new ParseException("Secondes manquantes", mark);
 			}
 		} else if (!minutesDecimal()) {
+			if (!minutesDecimalSansPoint())
 			throw new ParseException("Minutes manquantes", mark);
 		}
 		return true;
@@ -363,9 +428,29 @@ public class AngleFormatParser extends AbstractParser implements Cloneable {
 			}
 			token = buff.toString();
 			token = ((String) token).replace('#', '0');
+			
+//			 nouveau cas pas de point entre DD et dd !!!
+					}
+					else {
+						if (hereChar > 0 && (typeTable[hereChar] == DEGREE_FRACTION)) {
+
+							String entier = buff.toString();
+							buff = new StringBuffer();
+							buff.append(entier.substring(0, entier.length() - 1));
+							buff.append('0');
+							tokenType = DEGREES_DECIMAL_SANS_POINT;
+							buff.append(".");
+							while (hereChar > 0 && (typeTable[hereChar] == DEGREE_FRACTION)) {
+								buff.append('0');
+								step();
+							}
+							token = buff.toString();
+							token = ((String) token).replace('#', '0');
+			
 		} else {
 			token = buff.toString();
 		}
+					}
 	}
 
 	/**
@@ -405,8 +490,28 @@ public class AngleFormatParser extends AbstractParser implements Cloneable {
 			}
 			token = buff.toString();
 			token = ((String) token).replace('#', '0');
-		} else {
+			
+// nouveau cas pas de point entre MM et mm !!!
+		}
+		else {
+			if (hereChar > 0 && (typeTable[hereChar] == MINUTE_FRACTION)) {
+
+				String entier = buff.toString();
+				buff = new StringBuffer();
+				buff.append(entier.substring(0, entier.length() - 1));
+				buff.append('0');
+				tokenType = MINUTES_DECIMAL_SANS_POINT;
+				buff.append(".");
+				while (hereChar > 0 && (typeTable[hereChar] == MINUTE_FRACTION)) {
+					buff.append('0');
+					step();
+				}
+				token = buff.toString();
+				token = ((String) token).replace('#', '0');
+		}
+		else {
 			token = buff.toString();
+		}
 		}
 	}
 

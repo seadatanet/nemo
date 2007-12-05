@@ -20,8 +20,6 @@
       <parameter name="className" value="fr.ifremer.nemo.ws.NemoWSImpl"/>
       <parameter name="wsdlPortType" value="NemoWS"/>
       <parameter name="typeMappingVersion" value="1.2"/>
-      <operation name="getParameters" qname="operNS:getParameters" xmlns:operNS="nemo" returnQName="getParametersReturn" returnType="rtns:ArrayOfWSParameter" xmlns:rtns="nemo" returnItemType="tns2:WSParameter" xmlns:tns2="nemo" soapAction="" >
-      </operation>
       <operation name="getCountries" qname="operNS:getCountries" xmlns:operNS="nemo" returnQName="getCountriesReturn" returnType="rtns:ArrayOfWSCountry" xmlns:rtns="nemo" returnItemType="tns2:WSCountry" xmlns:tns2="nemo" soapAction="" >
       </operation>
       <operation name="getDataCentres" qname="operNS:getDataCentres" xmlns:operNS="nemo" returnQName="getDataCentresReturn" returnType="rtns:ArrayOfWSDataCentre" xmlns:rtns="nemo" returnItemType="tns2:WSDataCentre" xmlns:tns2="nemo" soapAction="" >
@@ -33,6 +31,8 @@
       <operation name="getShips" qname="operNS:getShips" xmlns:operNS="nemo" returnQName="getShipsReturn" returnType="rtns:ArrayOfWSShip" xmlns:rtns="nemo" returnItemType="tns2:WSShip" xmlns:tns2="nemo" soapAction="" >
       </operation>
       <operation name="getSurveyList" qname="operNS:getSurveyList" xmlns:operNS="nemo" returnQName="getSurveyListReturn" returnType="rtns:ArrayOfWSSurveyDescription" xmlns:rtns="nemo" returnItemType="tns2:WSSurveyDescription" xmlns:tns2="nemo" soapAction="" >
+      </operation>
+      <operation name="getParameters" qname="operNS:getParameters" xmlns:operNS="nemo" returnQName="getParametersReturn" returnType="rtns:ArrayOfWSParameter" xmlns:rtns="nemo" returnItemType="tns2:WSParameter" xmlns:tns2="nemo" soapAction="" >
       </operation>
       <parameter name="allowedMethods" value="getCountries getShips getRegions getSurveyList getParameters getDataTypes getDataCentres"/>
 

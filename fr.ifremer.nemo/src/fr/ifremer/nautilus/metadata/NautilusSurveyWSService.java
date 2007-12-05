@@ -8,11 +8,9 @@
 package fr.ifremer.nautilus.metadata;
 
 public interface NautilusSurveyWSService extends javax.xml.rpc.Service {
-	public java.lang.String getNAUTILUSAddress();
+    public java.lang.String getNAUTILUSAddress();
 
-	public fr.ifremer.nautilus.metadata.NautilusSurveyWS getNAUTILUS()
-			throws javax.xml.rpc.ServiceException;
+    public fr.ifremer.nautilus.metadata.NautilusSurveyWS getNAUTILUS() throws javax.xml.rpc.ServiceException;
 
-	public fr.ifremer.nautilus.metadata.NautilusSurveyWS getNAUTILUS(
-			java.net.URL portAddress) throws javax.xml.rpc.ServiceException;
+    public fr.ifremer.nautilus.metadata.NautilusSurveyWS getNAUTILUS(java.net.URL portAddress) throws javax.xml.rpc.ServiceException;
 }

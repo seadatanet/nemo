@@ -341,7 +341,7 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 	 * @return String[]
 	 * @exception java.io.IOException
 	 */
-	public String[] consumeHeader(RandomAccessFile a_Reader) throws IOException {
+	public String[] consumeHeader(BufferedReader a_Reader) throws IOException {
 		Vector<String> v = new Vector<String>();
 		for (int i = 0; i < _headerLinesNumber; i++) {
 			String line = a_Reader.readLine();
@@ -371,19 +371,27 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 			Survey survey = (Survey) _model.clone();
 			_stationModel.initRef();
 			File file = new File(_file);
-			RandomAccessFile reader = null;
+			//RandomAccessFile reader = null;
+			BufferedReader reader2 = null;
 			SizeBasedProgressNotifier notifier = new SizeBasedProgressNotifier(
 					file.length(), 0, a_Progress);
 			try {
 
 				System.out.println("nom du fichier campagne ===>"
 						+ file.getName());
-
-				reader = new RandomAccessFile(file, "r");
-				consumeHeader(reader);
+				
+				// test CDL FAE01
+				FileReader reader  = new FileReader(file);
+				reader2 = new BufferedReader(reader);
+				
+				
+				//reader = new RandomAccessFile(file, "r");
+				consumeHeader(reader2);
 				Station station = null;
+				
 
-				while ((station = _stationModel.convert(reader, null,
+				
+				while ((station = _stationModel.convert(reader2, null,
 						isRefDateBased, a_RefDate, notifier)) != null) {
 					if (SurveyMedia.interrompu) {
 						throw new IOException("");
@@ -393,9 +401,9 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 				}
 
 			} finally {
-				if (reader != null) {
+				if (reader2 != null) {
 					try {
-						reader.close();
+						reader2.close();
 					} catch (Exception ioExc) {
 					}
 				}

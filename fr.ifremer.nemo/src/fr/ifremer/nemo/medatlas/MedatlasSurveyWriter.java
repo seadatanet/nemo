@@ -1,13 +1,22 @@
 package fr.ifremer.nemo.medatlas;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.Writer;
+
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
+
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.ProgressNotification;
 import fr.ifremer.nemo.output.SurveyWriter;
 import fr.ifremer.nemo.util.SizeBasedProgressNotifier;
-import java.io.*;
-import org.apache.velocity.*;
-import org.apache.velocity.app.*;
 
 /**
  * Class MedatlasSurveyWriter
@@ -54,9 +63,16 @@ public class MedatlasSurveyWriter implements Cloneable, SurveyWriter {
 	public void writeSurvey(Survey a_Survey, File a_Filename,
 			ProgressNotification a_Progress) throws IOException,
 			GenerationException {
-		Writer writer = null;
+		//Writer writer = null;
+		BufferedWriter writer = null;
 		try {
-			writer = new PrintWriter(new FileWriter(a_Filename), true);
+			//FAE01 problème de performances réseau
+			
+			
+		//	writer = new PrintWriter(new FileWriter(a_Filename), true);
+		//	writer = new PrintWriter(new BufferedWriter(new FileWriter(a_Filename)));
+			writer = new BufferedWriter(new FileWriter(a_Filename));
+			
 			writeSurvey(a_Survey, writer, a_Progress);
 		} finally {
 			if (writer != null) {

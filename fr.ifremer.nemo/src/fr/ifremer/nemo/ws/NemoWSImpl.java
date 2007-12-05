@@ -161,7 +161,7 @@ public class NemoWSImpl implements Cloneable, NemoWS {
 			conn = ds.getConnection();
 
 			String statement = "select c.CODE_CENTRE, c.NOM_CENTRE, p.PAY_NOMPAY "
-					+ "from PAY p, TSTSCOOP.CENTRE c "
+					+ "from PAY p, CENTRE c "
 					+ "where  c.CODE_PAYS = p.PAY_CPAYS "
 					+ "order by p.PAY_NOMPAY, c.CODE_CENTRE";
 			stmt = conn.createStatement();
@@ -280,7 +280,7 @@ public class NemoWSImpl implements Cloneable, NemoWS {
 
 			String statement = "select p.CODE_PARAMETRE, p.NOM_PARAMETRE, p.UNITE_PARAMETRE, "
 					+ "p.FORMAT_EDITION, p.VAL_DEFAUT "
-					+ "from TSTSCOOP.PARAMETRE p "
+					+ "from PARAMETRE p "
 					+ "order by p.CODE_PARAMETRE";
 			stmt = conn.createStatement();
 			result = stmt.executeQuery(statement);
@@ -396,7 +396,7 @@ public class NemoWSImpl implements Cloneable, NemoWS {
 			conn = ds.getConnection();
 
 			String statement = "select n.CODE_NAVIRE, n.NOM_NAV "
-					+ "from TSTSCOOP.NAVIRE n " + "order by n.CODE_NAVIRE";
+					+ "from NAVIRE n " + "order by n.CODE_NAVIRE";
 			stmt = conn.createStatement();
 			result = stmt.executeQuery(statement);
 			Vector<WSShip> ships = new Vector<WSShip>();

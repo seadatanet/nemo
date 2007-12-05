@@ -1064,7 +1064,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * @return String[]
 	 * @exception java.io.IOException
 	 */
-	public String[] consumeFooter(RandomAccessFile a_Reader) throws IOException {
+	public String[] consumeFooter(BufferedReader a_Reader) throws IOException {
 		Vector<String> v = new Vector<String>();
 		for (int i = 0; i < _endData; i++) {
 			String line = a_Reader.readLine();
@@ -1082,7 +1082,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * @return String[]
 	 * @exception java.io.IOException
 	 */
-	public String[] consumeHeader(RandomAccessFile a_Reader) throws IOException {
+	public String[] consumeHeader(BufferedReader a_Reader) throws IOException {
 		Vector<String> v = new Vector<String>();
 		for (int i = 0; i < _numberOfLines; i++) {
 			String line = a_Reader.readLine();
@@ -1107,7 +1107,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * @exception IOException
 	 * @exception java.text.ParseException
 	 */
-	public Station convert(RandomAccessFile a_Reader, String a_Filename,
+	public Station convert(BufferedReader a_Reader, String a_Filename,
 			boolean isRefDateBased, long a_RefDate,
 			SizeBasedProgressNotifier a_Notifier) throws IOException,
 			ParseException {
@@ -1117,7 +1117,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			station = (Station) _model.clone();
 			if (_metaInData) {
 				consumeHeader(a_Reader);
-				a_Notifier.progress(a_Reader.getFilePointer());
+				
 				convertParameters(a_Reader, station, isRefDateBased, a_RefDate,
 						a_Notifier);
 				if (_timeSeriesModel != null
@@ -1125,13 +1125,14 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 								.getEndDate())) {
 					computeEndDate(station);
 				}
-				a_Notifier.progress(a_Reader.getFilePointer());
+			//	a_Notifier.progress(a_Reader.getFilePointer());
+				
 				consumeFooter(a_Reader);
-				a_Notifier.progress(a_Reader.getFilePointer());
+			//	a_Notifier.progress(a_Reader.getFilePointer());
 				return station;
 			} else {
 				if ((header = consumeHeader(a_Reader)) != null) {
-					a_Notifier.progress(a_Reader.getFilePointer());
+			//		a_Notifier.progress(a_Reader.getFilePointer());
 					if (getReferenceProperty().getFragment().getFirstLine() == 0
 							&& a_Filename != null) {
 						getReferenceProperty().applyOn(station,
@@ -1152,7 +1153,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 						_timeSeriesModel.convert(station, header,
 								isRefDateBased, a_RefDate);
 					}
-					a_Notifier.progress(a_Reader.getFilePointer());
+			//		a_Notifier.progress(a_Reader.getFilePointer());
 					convertParameters(a_Reader, station, isRefDateBased,
 							a_RefDate, a_Notifier);
 					if (_timeSeriesModel != null
@@ -1161,7 +1162,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 						computeEndDate(station);
 					}
 					consumeFooter(a_Reader);
-					a_Notifier.progress(a_Reader.getFilePointer());
+			//		a_Notifier.progress(a_Reader.getFilePointer());
 
 					return station;
 				}
@@ -1188,7 +1189,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * @exception IOException
 	 * @exception ParseException
 	 */
-	public void convertParameters(RandomAccessFile a_Reader, Station a_Station,
+	public void convertParameters(BufferedReader a_Reader, Station a_Station,
 			boolean isRefDateBased, long a_RefDate,
 			SizeBasedProgressNotifier a_Notifier) throws IOException,
 			ParseException {
@@ -1204,6 +1205,9 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			String line = null;
 			for (int index = 0; (line = a_Reader.readLine()) != null
 					&& (!(_endOnPattern && line.matches(_endDataPattern)) || (index < _rowNumber)); index++) {
+
+				a_Notifier.progress(line.length());
+				
 				if (index == 0 && _metaInData) {
 					String[] header = new String[] { line };
 					if (isIncrementRef()) {
@@ -1241,7 +1245,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 					p.addValue(value);
 					paramIndex++;
 				}
-				a_Notifier.progress(a_Reader.getFilePointer());
+		//		a_Notifier.progress(a_Reader.getFilePointer());
 			}
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();

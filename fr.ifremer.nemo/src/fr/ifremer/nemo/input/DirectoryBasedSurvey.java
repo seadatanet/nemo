@@ -1,14 +1,24 @@
 package fr.ifremer.nemo.input;
 
-import com.ago.xml.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.text.ParseException;
+
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+
+import com.ago.xml.SAXConsumer;
+import com.ago.xml.XMLOutputWriter;
+
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.output.ProgressNotification;
 import fr.ifremer.nemo.util.SizeBasedProgressNotifier;
-import java.io.*;
-import java.text.ParseException;
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
 
 /**
  * Class DirectoryBasedSurvey
@@ -316,22 +326,27 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 						// demande d'annulation
 						throw new IOException("interruption");
 					} else {
+						
 						File file = new File(dir, files[i]);
-						//SizeBasedProgressNotifier notifier = new SizeBasedProgressNotifier(
-						 notifierStation.setOffset(offset);
+					    notifierStation.setOffset(offset);
 						offset += file.length();
-						RandomAccessFile reader = null;
+					//	RandomAccessFile reader = null;
+						BufferedReader reader2 = null;
 						try {
-							reader = new RandomAccessFile(file, "r");
+					//		reader = new RandomAccessFile(file, "r");
+							// test CDL FAE01
+							FileReader reader  = new FileReader(file);
+							reader2 = new BufferedReader(reader);
+
 							
-							Station station = _stationModel.convert(reader,
+							Station station = _stationModel.convert(reader2,
 									files[i], isRefDateBased, a_RefDate,
 									notifierStation);
 							survey.addStation(station);
 						} finally {
-							if (reader != null) {
+							if (reader2 != null) {
 								try {
-									reader.close();
+									reader2.close();
 								} catch (Exception ioExc) {
 								}
 							}

@@ -290,9 +290,9 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
 	 * 
 	 * @param source
 	 * @param pos
-	 * @return Double
+	 * @return Object
 	 */
-	public Double parseObject(String source, ParsePosition pos) {
+	public Object parseObject(String source, ParsePosition pos) {
 		double value = 0.0;
 		double sign = 1.0;
 		int index = pos.getIndex();
@@ -318,8 +318,7 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
 				}
 				case SIGN: {
 					String tmp = source.substring(index, index + 1);
-					if ((tmp.equals("+")) || (tmp.equals(" "))
-							|| (tmp.equals(""))) {
+					if (tmp.equals("+") || tmp.equals(" ") || tmp.equals("")) {
 						sign = 1.0;
 					} else if (tmp.equals("-")) {
 						sign = -1.0;
@@ -332,15 +331,20 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
 					break;
 				}
 				case CHARS: {
-					// System.out.println("LongitudeFormat/parseObject() :
-					// Source ==>"+source);
 					String tmp = source.substring(index, index
 							+ _elements[i]._element.length());
-					if (!tmp.equals(_elements[i]._element)) {
-						throw new ParseException(
-								"Charactere invalide, chaine attendue: \""
-										+ _elements[i]._element + "\""
-										+ " lue: \"" + tmp + "\"", index);
+
+					if (_elements[i]._element.length() == 1
+							&& _elements[i]._element.equals(" ")) {
+						// cas particulier si on rencontre un espace, n'importe
+						// quel caractère est possible
+					} else {
+						if (!tmp.equals(_elements[i]._element)) {
+							throw new ParseException(
+									"Charactere invalide, chaine attendue: \""
+											+ _elements[i]._element + "\""
+											+ " lue: \"" + tmp + "\"", index);
+						}
 					}
 					index += _elements[i]._element.length();
 					break;
@@ -367,6 +371,27 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
 						DecimalFormat format = new DecimalFormat(
 								_elements[i]._element, symbols);
 						value += ((Number) format.parseObject(tmp.trim()))
+								.doubleValue();
+					} else {
+						throw new ParseException("Degres attendus au format: "
+								+ _elements[i]._element, index);
+					}
+					index += _elements[i]._element.length();
+					break;
+				}
+				case DEGREES_DECIMAL_SANS_POINT: {
+					
+					int indexOfPoint = _elements[i]._element.indexOf(".");
+					
+					String tmp = source.substring(index, index
+							+ _elements[i]._element.length() - 1);
+					
+					String tmpPlusPoint = tmp.substring(0,indexOfPoint) + "." + tmp.substring(indexOfPoint);							
+					
+					if (tmpPlusPoint.matches("\\s*\\d+\\.\\d+\\s*")) {
+						DecimalFormat format = new DecimalFormat(
+								_elements[i]._element, symbols);
+						value += ((Number) format.parseObject(tmpPlusPoint.trim()))
 								.doubleValue();
 					} else {
 						throw new ParseException("Degres attendus au format: "
@@ -404,6 +429,27 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
 								+ _elements[i]._element, index);
 					}
 					index += _elements[i]._element.length();
+					break;
+				}
+				case MINUTES_DECIMAL_SANS_POINT: {
+					
+					int indexOfPoint = _elements[i]._element.indexOf(".");
+										
+					String tmp = source.substring(index, index
+							+ _elements[i]._element.length() - 1);
+					
+					String tmpPlusPoint = tmp.substring(0,indexOfPoint) + "." + tmp.substring(indexOfPoint);							
+					
+					if (tmpPlusPoint.matches("\\s*\\d+\\.\\d+\\s*")) {
+						DecimalFormat format = new DecimalFormat(
+								_elements[i]._element, symbols);
+						value += ((Number) format.parseObject(tmpPlusPoint.trim()))
+								.doubleValue() / 60.0;
+					} else {
+						throw new ParseException("Minutes attendus au format: "
+								+ _elements[i]._element, index);
+					}
+					index += _elements[i]._element.length() - 1;
 					break;
 				}
 				case SECONDS: {
