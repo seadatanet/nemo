@@ -490,6 +490,7 @@ public class Etape {
 			try {
 				DateTimeFormat format = new DateTimeFormat(
 						EditStation.comboHeure.getText());
+				
 				Long hourLong = (Long) format
 						.parseObject(EditStation.textHeureSaisie.getText());
 			} catch (ParseException e) {
@@ -1222,17 +1223,18 @@ public class Etape {
 				debuts[i] = typeCourant.getDebut();
 				fins[i] = typeCourant.getFin();
 
-				// test direct sur valeur entree
-				if (Pattern.matches("^.{0,1}[0-9]*[0-9].*[0-9][0-9]*$",
-						typeCourant.getEntree())) {
-					// ok
-					ok = ok && true;
+				/*
+				 * // test direct sur valeur entree if
+				 * (Pattern.matches("^.{0,1}[0-9]*[0-9].*[0-9][0-9]*$",
+				 * typeCourant.getEntree())) { // ok ok = ok && true;
+				 *  } else { // erreur ok = ok && false;
+				 * Utils.messageErreurAppend(Messages.getString("Etape.105"));
+				 * //$NON-NLS-1$ }
+				 */
 
-				} else {
-					// erreur
-					ok = ok && false;
-					Utils.messageErreurAppend(Messages.getString("Etape.105")); //$NON-NLS-1$
-				}
+				// test direct sur valeur entree
+				// ok
+				ok = ok && true;
 
 				// test direct sur valeur sortie
 				if (Pattern.matches("^.{0,1}[0-9]*[0-9].*[0-9][0-9]*$",

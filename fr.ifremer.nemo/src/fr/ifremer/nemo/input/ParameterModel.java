@@ -28,7 +28,7 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 	 */
 	protected String _conversionFormula;
 
-	public float _inputDefault;
+	public String _inputDefault;
 
 	/**
 	 * Représente le fragment de ligne du fichier d'entrée où la valeur du
@@ -56,7 +56,7 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 	public ParameterModel(Parameter a_Parameter) {
 		this();
 		setModel(a_Parameter);
-		_inputDefault = Float.parseFloat(a_Parameter.getDefault());
+		_inputDefault = a_Parameter.getDefault();
 	}
 
 	/**
@@ -260,7 +260,7 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 	 * @return float
 	 * @see ParameterModel#_inputDefault
 	 */
-	public float getInputDefault() {
+	public String getInputDefault() {
 		return _inputDefault;
 	}
 
@@ -271,7 +271,7 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 	 *            new value for _inputDefault
 	 * @see ParameterModel#_inputDefault
 	 */
-	public void setInputDefault(float x) {
+	public void setInputDefault(String x) {
 		_inputDefault = x;
 	}
 
@@ -282,13 +282,13 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 	 *            new value for _inputDefault as String
 	 * @see ParameterModel#_inputDefault
 	 */
-	public void setInputDefault(String a_String) {
+	/*public void setInputDefault(String a_String) {
 		try {
 			setInputDefault(Float.parseFloat(a_String));
 		} catch (Exception e) {
-		}
+		}		
 	}
-
+*/
 	/**
 	 * Remove any link for role fragment
 	 */
@@ -358,14 +358,23 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 	 * @param a_Line
 	 * @param a_ParameterValue
 	 */
-	public void convert(String a_Line, ParameterValue a_ParameterValue) {
+	public void convert(String a_Line, ParameterValue a_ParameterValue)  {
 
 		org.nfunk.jep.JEP parser = null;
 		String fragmnt = _fragment.retreive(a_Line);
-		double val = Double.parseDouble(fragmnt);
-		if ((float) val == _inputDefault) {
+
+		if (_inputDefault.trim().equals(fragmnt)){
 			a_ParameterValue.setValue(Float.parseFloat(_model.getDefault()));
-		} else {
+		}
+			
+
+		
+	/*	if ((float) val == _inputDefault) {
+			a_ParameterValue.setValue(Float.parseFloat(_model.getDefault()));
+		}*/ else {
+			
+			double val = Double.parseDouble(fragmnt);
+			
 			if (_conversionFormula.trim().length() > 0) {
 				if (getJepParser() == null) {
 					parser = new org.nfunk.jep.JEP();

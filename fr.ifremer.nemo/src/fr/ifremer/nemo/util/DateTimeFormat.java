@@ -472,10 +472,13 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 					String tmp = source.substring(index, index
 							+ _elements[i]._element.length());
 					if (!tmp.equals(_elements[i]._element)) {
+						if (!_elements[i]._element.equals(" "))
+						{
 						throw new ParseException(
 								"Charactere invalide, chaine attendue: \""
 										+ _elements[i]._element + "\""
 										+ " lue: \"" + tmp + "\"", index);
+						}
 					}
 					index += _elements[i]._element.length();
 					break;
