@@ -560,7 +560,7 @@ public class EditSurvey {
 				e.printStackTrace();
 			}
 
-		}
+		} 
 
 		// mise à jour de l'onglet courant
 		majApresWS();

@@ -192,7 +192,7 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 				double degrees = Math.floor(val);
 				DecimalFormat format = new DecimalFormat(_elements[i]._element,
 						symbols);
-				toAppendTo.append(padded(format.format(degrees), size));
+				toAppendTo.append(paddedZeros(format.format(degrees), size));
 				break;
 			}
 			case DEGREES_DECIMAL: {
@@ -288,7 +288,23 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 		buf.append(a_String);
 		return buf.toString();
 	}
-
+	
+	/**
+	 * 
+	 * @param a_String
+	 * @param a_Size
+	 * @return String
+	 */
+	public String paddedZeros(String a_String, int a_Size) {
+		StringBuffer buf = new StringBuffer();
+		int index = a_String.length();
+		while (index < a_Size) {
+			buf.append('0');
+			index++;
+		}
+		buf.append(a_String);
+		return buf.toString();
+	}
 	/**
 	 * 
 	 * @param source

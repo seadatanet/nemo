@@ -1,30 +1,57 @@
 package fr.ifremer.nemo.domain;
 
-import com.ago.xml.*;
-import fr.ifremer.nautilus.metadata.*;
-import fr.ifremer.nemo.config.Configuration;
-import fr.ifremer.nemo.util.*;
-import fr.ifremer.nemo.ws.WSShip;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
+import java.io.OutputStream;
+import java.io.Serializable;
+import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
+
 import javax.xml.rpc.ServiceException;
 import javax.xml.transform.Result;
-import javax.xml.transform.sax.SAXResult;
-import javax.xml.transform.sax.SAXSource;
 import javax.xml.transform.Source;
-import javax.xml.transform.stream.StreamSource;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.sax.SAXResult;
+import javax.xml.transform.sax.SAXSource;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
+
 import org.xml.sax.Attributes;
-import org.xml.sax.helpers.XMLReaderFactory;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
+import org.xml.sax.helpers.XMLReaderFactory;
+
+import com.ago.xml.Element2Field;
+import com.ago.xml.PathElementConsumer;
+import com.ago.xml.PathElementHandler;
+import com.ago.xml.RootSAXConsumer;
+import com.ago.xml.SAXConsumer;
+import com.ago.xml.XMLBootstrapParser;
+import com.ago.xml.XMLOutputWriter;
+
+import fr.ifremer.nautilus.metadata.NautilusSurveyWS;
+import fr.ifremer.nautilus.metadata.NautilusSurveyWSServiceLocator;
+import fr.ifremer.nautilus.metadata.WSCollectedData;
+import fr.ifremer.nautilus.metadata.WSSurvey;
+import fr.ifremer.nemo.config.Configuration;
+import fr.ifremer.nemo.ui.Messages;
+import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.util.Formatter;
+import fr.ifremer.nemo.ws.WSShip;
 
 /**
  * Class Survey
@@ -1049,11 +1076,12 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 				.getNAUTILUS(new java.net.URL(Configuration.getSingleton()
 						.getNautilusWebServiceURL()));
 		WSSurvey wssurvey = service.getSurvey(a_Reference);
-		if (wssurvey.getReference() != null){
-		
-			setReference(wssurvey.getReference());}else{
-				setReference("");
-			}
+		if (wssurvey.getReference() != null) {
+
+			setReference(wssurvey.getReference());
+		} else {
+			setReference("");
+		}
 		if (wssurvey.getName() != null) {
 			setName(wssurvey.getName());
 		} else {
@@ -1207,6 +1235,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 		reader.setFeature("http://xml.org/sax/features/namespaces", true);
 		reader.setFeature("http://xml.org/sax/features/namespace-prefixes",
 				false);
+
 		Source source = new SAXSource(reader, new InputSource(new FileReader(
 				xmlFile)));
 		XMLBootstrapParser parser = new XMLBootstrapParser(this);
@@ -1215,9 +1244,43 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 				"resources/survey.xsl");
 		getClass().getResourceAsStream("/resources/survey.xsl");
 		Source style = new StreamSource(new InputStreamReader(inputStream));
-		TransformerFactory transFactory = TransformerFactory.newInstance();
-		Transformer trans = transFactory.newTransformer(style);
-		trans.transform(source, result);
+
+		if (checkSchema(source)) {
+			TransformerFactory transFactory = TransformerFactory.newInstance();
+			Transformer trans = transFactory.newTransformer(style);
+			source = new SAXSource(reader, new InputSource(new FileReader(xmlFile)));
+			trans.transform(source, result);
+		}
+	}
+
+	private Boolean checkSchema(Source xmlFile) throws SAXException {
+
+		// 1. Lookup a factory for the W3C XML Schema language
+		SchemaFactory factory = SchemaFactory
+				.newInstance("http://www.w3.org/2001/XMLSchema");
+
+		// 2. Compile the schema.
+		// Here the schema is loaded from a java.io.File, but you could use
+		// a java.net.URL or a javax.xml.transform.Source instead.
+		File schemaLocation = new File("resources/CSR_sdn_V1.0.xsd");
+		Schema schema = factory.newSchema(schemaLocation);
+
+		// 3. Get a validator from the schema.
+		Validator validator = schema.newValidator();
+
+		// 4. Check the document
+		try {
+			validator.validate(xmlFile);
+			return true;
+
+		} catch (SAXException ex) {
+			Utils.messageErreurAppend("Le fichier XML n'est pas valide :");
+			Utils.messageErreurAppend(ex.getMessage());
+			throw ex;
+		} catch (IOException ex) {
+			return false;
+		}
+
 	}
 
 	/**

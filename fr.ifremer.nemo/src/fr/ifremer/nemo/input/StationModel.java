@@ -162,7 +162,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 	/**
 	 * 
-	 * A new XML Element as been found. Parse it.
+	 * A new XML Element has been found. Parse it.
 	 * 
 	 * @param a_URI
 	 *            XML Namespace (SAX 2)

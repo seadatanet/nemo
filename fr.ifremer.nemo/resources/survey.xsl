@@ -1,60 +1,109 @@
 <?xml version="1.0"?>
 
 <!-- Projet: CONVMED / IFREMER /SISMER.                                                -->
-<!-- Auteur: G.BUNEL                                                        -->
-<!-- Version: 1.0                                                               -->
-<!-- Date: 07/11/20006                                                          -->
+<!-- Auteur: G.BUNEL, Y.CAUDAL                                                        -->
+<!-- Version: 1.1                                                               -->
+<!-- Date: 07/11/20006, Rvision: 06/12/2007                                                          -->
 <!-- Description: conversion d un fichier XML de description de campagne        -->
 <!--              provenant de l'ifremer en information campagne exploitable    -->
 
 
 <xsl:stylesheet version="1.0"
-      xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    
+    <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes" cdata-section-elements="comment"/>
+    
+    <!-- on supprime tout les espaces -->
+    <xsl:strip-space elements="*"/>
+    
+    <!-- point d entree sur fichier -->
+    <xsl:template match="/">
+        <!-- tag root -->
+        <Survey>
+            <reference><xsl:value-of select="Metadata/dataIdInfo/idCitation/resAltTitle"/></reference>
+            <name><xsl:value-of select="Metadata/dataIdInfo/idCitation/resTitle"/></name>
 
-<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes" cdata-section-elements="comment"/>
+            <!-- FAE021 Evolution : changement de format du fichier xml   -->
+            <xsl:for-each select="Metadata/dataIdInfo/descKeys">
+                <xsl:if test="keyTyp/KeyTypCd/@value =  'platform'">
+                <shipName><xsl:value-of select="keyword"/></shipName> 
+                </xsl:if>
+            </xsl:for-each>      
+            <!-- FAE021 Fin -->
+            
+            <formattedStartDate><xsl:value-of select="Metadata/dataIdInfo/dataExt/tempEle/TempExtent/exTemp/TM_GeometricPrimitive/TM_Period/begin"/></formattedStartDate>
+            <formattedEndDate><xsl:value-of select="Metadata/dataIdInfo/dataExt/tempEle/TempExtent/exTemp/TM_GeometricPrimitive/TM_Period/end"/></formattedEndDate>
+   
+            <!-- FAE021 Evolution : changement de format du fichier xml   -->
+            <xsl:for-each select="Metadata/dataIdInfo/descKeys">
+                <xsl:if test="keyTyp/KeyTypCd/@value =  'place'">
+                    <regionName><xsl:value-of select="keyword"/></regionName> 
+                </xsl:if>
+            </xsl:for-each>     
+            <!-- FAE021 Fin -->      
+                        
+            <country/>
+    
+            <!-- FAE021 Evolution : changement de format du fichier xml   -->
+            <xsl:for-each select="Metadata/dataIdInfo/idCitation/citRespParty">
+                <xsl:if test="role/RoleCd/@value =  'originator'">
+                    <laboratory><xsl:value-of select="rpOrgName"/></laboratory> 
+                </xsl:if>
+            </xsl:for-each>     
+            <!-- FAE021 Fin -->   
+                       
+            <!-- FAE021 Evolution : changement de format du fichier xml   -->
+            <xsl:for-each select="Metadata/dataIdInfo/idCitation/citRespParty">
+                <xsl:if test="role/RoleCd/@value =  'pointOfContact'">
+                    <chiefScientist><xsl:value-of select="rpIndName"/></chiefScientist> 
+                </xsl:if>
+            </xsl:for-each>     
+            <!-- FAE021 Fin -->   
+            
+            <!-- FAE021 Evolution : changement de format du fichier xml   -->
+            <xsl:for-each select="Metadata/dataIdInfo/descKeys">
+                <xsl:if test="keyTyp/KeyTypCd/@value =  'project'">
+                    <projectName><xsl:value-of select="keyword"/></projectName> 
+                </xsl:if>
+            </xsl:for-each>     
+            <!-- FAE021 Fin -->      
+            
+            <comment/>    
+            <dataCentre/>
+            
+            <!-- FAE021 Evolution : changement de format du fichier xml   -->
+                <xsl:choose>
+                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/Consts/useLimit/@SDNIdent ,'UN')">
+                        <availability>publicly</availability>
+                    </xsl:when>
+                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/Consts/useLimit/@SDNIdent ,'UK')">
+                        <availability>publicly</availability>
+                    </xsl:when>                  
+                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/Consts/useLimit/@SDNIdent ,'NA')">
+                        <availability>confidential</availability>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <availability>restricted</availability>
+                    </xsl:otherwise>
+                </xsl:choose>
+            <!-- FAE021 Fin -->  
+            
 
-<!-- on supprime tout les espaces -->
-<xsl:strip-space elements="*"/>
 
-<!-- point d entree sur fichier -->
-<xsl:template match="/">
-  <!-- tag root -->
-  <Survey>
-    <reference><xsl:value-of select="Metadata/dataIdInfo/idCitation/resAltTitle"/></reference>
-    <name><xsl:value-of select="Metadata/dataIdInfo/idCitation/resTitle"/></name>
-    <shipName><xsl:value-of select="Metadata/dataIdInfo/aggrInfo/aggrDSName/resTitle"/></shipName>
-    <formattedStartDate><xsl:value-of select="Metadata/dataIdInfo/dataExt/tempEle/TempExtent/exTemp/TM_GeometricPrimitive/TM_Period/begin"/></formattedStartDate>
-    <formattedEndDate><xsl:value-of select="Metadata/dataIdInfo/dataExt/tempEle/TempExtent/exTemp/TM_GeometricPrimitive/TM_Period/end"/></formattedEndDate>
-    <regionName><xsl:value-of select="Metadata/dataIdInfo/dataExt/geoEle/GeoDesc/geoId/identCode"/></regionName>
-    <country/>
-    <laboratory><xsl:value-of select="Metadata/dataIdInfo/idPoC/rpOrgNameId"/></laboratory>
-    <chiefScientist><xsl:value-of select="Metadata/dataIdInfo/idPoC/rpIndName"/></chiefScientist>
-    <projectName><xsl:value-of select="Metadata/dataIdInfo/idCitation/datasetSeries/seriesName"/></projectName>
-    <comment><xsl:value-of select="Metadata/dataIdInfo/idAbs"/></comment>    
-    <dataCentre/>
-    <xsl:for-each select="Metadata/dataIdInfo/resConst/Consts">
-      	<xsl:choose>
-          <xsl:when test="useLimit='No'">
-              <availability>confidential</availability>
-          </xsl:when>
-          <xsl:when test="useLimit='Yes'">
-              <availability>publicly</availability>
-          </xsl:when>
-          <xsl:otherwise>
-              <availability>restricted</availability>
-          </xsl:otherwise>
-        </xsl:choose>
-    </xsl:for-each>
-    <dataTypes>
-    <xsl:for-each select="Metadata/dataIdInfo/descKeys/keyTyp/KeyTypCd">
-      	<xsl:choose>
-          <xsl:when test="@value='number_element'">
-              <DataType><xsl:attribute name="code"><xsl:value-of select="./../../../idCitation/resAltTitle"/> - <xsl:value-of select="./../../../idCitation/resTitle"/></xsl:attribute></DataType>
-          </xsl:when>
-        </xsl:choose>
-    </xsl:for-each>
-    </dataTypes>
-  </Survey>
-</xsl:template>
-
+            <dataTypes>
+                <xsl:for-each select="Metadata/dataIdInfo">
+                    <xsl:if test="aggrInfo/initType/InitTypCd/@value =  'operation'">
+                        
+                        <DataType>
+                            <xsl:attribute name="code">
+                                <xsl:value-of select="substring-after(substring-after(substring-after(idCitation/resTitle/@SDNIdent,':'),':'),':')"/> - <xsl:value-of select="idCitation/resTitle"/>
+                            </xsl:attribute>
+                        </DataType>
+                    </xsl:if>
+                </xsl:for-each>
+            </dataTypes>
+            
+        </Survey>
+    </xsl:template>
+    
 </xsl:stylesheet>

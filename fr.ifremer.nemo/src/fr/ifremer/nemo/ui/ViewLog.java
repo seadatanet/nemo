@@ -182,7 +182,7 @@ public class ViewLog extends ViewPart {
 							+ "*L’ordre entre la date et l’heure est libre (date heure, heure date)\n"
 							+ "*Des caractères supplémentaires quelconques peuvent être insérés entre les différentes clés. Ceux-ci seront attendus tel quel en entrée et rendus tel quel en sortie\n"
 							+ "\nExemples:\n"
-							+ "yyy/MM/dd hh:mm:ss ==> 1986/07/10 09:23:10\n"
+							+ "yyyy/MM/dd hh:mm:ss ==> 1986/07/10 09:23:10\n"
 							+ "hh:mm ==> 09:23\n"
 							+ "yy-MM-dd ==> 86-07-10\n"
 							+ "\n\n==FORMATS LATITUDE / LONGITUDE==\n"
