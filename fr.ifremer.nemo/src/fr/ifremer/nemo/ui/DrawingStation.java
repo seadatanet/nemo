@@ -170,12 +170,25 @@ public class DrawingStation {
 					}
 				});
 
-		// par défaut manuel
-		radio.setSelection(true);
-		lign.setEnabled(false);
-		debu.setEnabled(false);
-		fi.setEnabled(false);
-		inject.setEnabled(false);
+		
+		
+		if (DataModel.ouverture) {
+			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("offsetTU");
+			
+			boolean blnProvided = propertyModel.isUserProvided();
+			radio.setSelection(blnProvided);
+			lign.setEnabled(!blnProvided);
+			debu.setEnabled(!blnProvided);
+			fi.setEnabled(!blnProvided);
+			inject.setEnabled(!blnProvided);
+		} else {
+			// par défaut manuel
+			radio.setSelection(true);
+			lign.setEnabled(false);
+			debu.setEnabled(false);
+			fi.setEnabled(false);
+			inject.setEnabled(false);
+		}
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -370,6 +383,24 @@ public class DrawingStation {
 		debu.setEnabled(false);
 		fi.setEnabled(false);
 		inject.setEnabled(false);
+		
+		if (DataModel.ouverture) {
+			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("samplingRate");
+			
+			boolean blnProvided = propertyModel.isUserProvided();
+			radio.setSelection(blnProvided);
+			lign.setEnabled(!blnProvided);
+			debu.setEnabled(!blnProvided);
+			fi.setEnabled(!blnProvided);
+			inject.setEnabled(!blnProvided);
+		} else {
+			// par défaut manuel
+			radio.setSelection(true);
+			lign.setEnabled(false);
+			debu.setEnabled(false);
+			fi.setEnabled(false);
+			inject.setEnabled(false);
+		}
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -556,15 +587,24 @@ public class DrawingStation {
 		debu.setEnabled(false);
 		fi.setEnabled(false);
 		inject.setEnabled(false);*/
-		
-		PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("dcHistory1");
-		
-		boolean blnProvided = propertyModel.isUserProvided();
-		radio.setSelection(!blnProvided);
-		lign.setEnabled(blnProvided);
-		debu.setEnabled(blnProvided);
-		fi.setEnabled(blnProvided);
-		inject.setEnabled(blnProvided);
+				
+		if (DataModel.ouverture) {
+			PropertyModel propertyModel = DataModel.stationModel_modele.getReferenceProperty();
+			
+			boolean blnProvided = propertyModel.isUserProvided();
+			radio.setSelection(blnProvided);
+			lign.setEnabled(!blnProvided);
+			debu.setEnabled(!blnProvided);
+			fi.setEnabled(!blnProvided);
+			inject.setEnabled(!blnProvided);
+		} else {
+			// saisie manuelle par défaut
+			radio.setSelection(true);
+			lign.setEnabled(false);
+			debu.setEnabled(false);
+			fi.setEnabled(false);
+			inject.setEnabled(false);
+		}
 		
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -819,21 +859,39 @@ public class DrawingStation {
 					}
 				});
 
-		// par défaut saisie manuelle
-		radio.setSelection(true);
-		zon1.setEnabled(true);
-		zon2.setEnabled(true);
-		// grou.setVisible(false);
-		lign1.setEnabled(false);
-		debu1.setEnabled(false);
-		fi1.setEnabled(false);
-		lign2.setEnabled(false);
-		debu2.setEnabled(false);
-		fi2.setEnabled(false);
+		
+		if (DataModel.ouverture) {
+			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("dcHistory1");
+			
+			boolean blnProvided = propertyModel.isUserProvided();
+			radio.setSelection(blnProvided);
+			zon1.setEnabled(blnProvided);
+			zon2.setEnabled(blnProvided);
+			lign1.setEnabled(!blnProvided);
+			debu1.setEnabled(!blnProvided);
+			fi1.setEnabled(!blnProvided);
+			lign2.setEnabled(!blnProvided);
+			debu2.setEnabled(!blnProvided);
+			fi2.setEnabled(!blnProvided);
+			inject1.setEnabled(!blnProvided);
+			inject2.setEnabled(!blnProvided);
+		} else {
+			// par défaut saisie manuelle
+			radio.setSelection(true);
+			zon1.setEnabled(true);
+			zon2.setEnabled(true);
+			// grou.setVisible(false);
+			lign1.setEnabled(false);
+			debu1.setEnabled(false);
+			fi1.setEnabled(false);
+			lign2.setEnabled(false);
+			debu2.setEnabled(false);
+			fi2.setEnabled(false);
 
-		inject1.setEnabled(false);
-		inject2.setEnabled(false);
-
+			inject1.setEnabled(false);
+			inject2.setEnabled(false);
+		}
+		
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
 
@@ -1054,20 +1112,39 @@ public class DrawingStation {
 					}
 				});
 
-		// par défaut saisie manuelle
-		radio.setSelection(true);
-		zon1.setEnabled(true);
-		zon2.setEnabled(true);
-		// grou.setVisible(false);
-		lign1.setEnabled(false);
-		debu1.setEnabled(false);
-		fi1.setEnabled(false);
-		lign2.setEnabled(false);
-		debu2.setEnabled(false);
-		fi2.setEnabled(false);
+		
+		if (DataModel.ouverture) {
+			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("surfaceSamples1");
+			
+			boolean blnProvided = propertyModel.isUserProvided();
+			radio.setSelection(blnProvided);
+			zon1.setEnabled(blnProvided);
+			zon2.setEnabled(blnProvided);
+			lign1.setEnabled(!blnProvided);
+			debu1.setEnabled(!blnProvided);
+			fi1.setEnabled(!blnProvided);
+			lign2.setEnabled(!blnProvided);
+			debu2.setEnabled(!blnProvided);
+			fi2.setEnabled(!blnProvided);
 
-		inject1.setEnabled(false);
-		inject2.setEnabled(false);
+			inject1.setEnabled(!blnProvided);
+			inject2.setEnabled(!blnProvided);
+		} else {
+//			 par défaut saisie manuelle
+			radio.setSelection(true);
+			zon1.setEnabled(true);
+			zon2.setEnabled(true);
+			// grou.setVisible(false);
+			lign1.setEnabled(false);
+			debu1.setEnabled(false);
+			fi1.setEnabled(false);
+			lign2.setEnabled(false);
+			debu2.setEnabled(false);
+			fi2.setEnabled(false);
+
+			inject1.setEnabled(false);
+			inject2.setEnabled(false);
+		}
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -1099,6 +1176,24 @@ public class DrawingStation {
 
 		EditStation.textCommentaire.setParent(sectionClient);
 		EditStation.textCommentaire.setTextLimit(500);
+		
+		if (DataModel.ouverture) {
+			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("comment");
+			
+			boolean blnProvided = propertyModel.isUserProvided();
+			EditStation.buttonCommentaireSaisie.setSelection(blnProvided);
+			EditStation.textCommentaire.setEnabled(!blnProvided);
+			EditStation.textCommentaireDebut.setEnabled(!blnProvided);
+			EditStation.textCommentaireFin.setEnabled(!blnProvided);
+			EditStation.buttonCommentairePos.setEnabled(!blnProvided);
+		} else {
+			// par défaut manuel
+			EditStation.buttonCommentaireSaisie.setSelection(true);
+			EditStation.textCommentaire.setEnabled(false);
+			EditStation.textCommentaireDebut.setEnabled(false);
+			EditStation.textCommentaireFin.setEnabled(false);
+			EditStation.buttonCommentairePos.setEnabled(false);
+		}
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -1305,24 +1400,27 @@ public class DrawingStation {
 
 					}
 				});
-
-		/*// saisie manuelle par défaut
-		radio.setSelection(true);
-		lign.setEnabled(false);
-		debu.setEnabled(false);
-		fi.setEnabled(false);
-		inject.setEnabled(false);*/
 		
-		PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("dcHistory1");
+		if (DataModel.ouverture) {
+			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("comment");
+			
+			boolean blnProvided = propertyModel.isUserProvided();
+			radio.setSelection(blnProvided);
+			manu.setEnabled(blnProvided);
+			lign.setEnabled(!blnProvided);
+			debu.setEnabled(!blnProvided);
+			fi.setEnabled(!blnProvided);
+			inject.setEnabled(!blnProvided);
+		} else {
+			// saisie manuelle par défaut
+			radio.setSelection(true);
+			manu.setEnabled(true);
+			lign.setEnabled(false);
+			debu.setEnabled(false);
+			fi.setEnabled(false);
+			inject.setEnabled(false);
+		}
 		
-		boolean blnProvided = propertyModel.isUserProvided();
-		radio.setSelection(!blnProvided);
-		manu.setEnabled(!blnProvided);
-		lign.setEnabled(blnProvided);
-		debu.setEnabled(blnProvided);
-		fi.setEnabled(blnProvided);
-		inject.setEnabled(blnProvided);
-
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
 
@@ -1550,15 +1648,23 @@ public class DrawingStation {
 					}
 				});
 		
-		PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("dcHistory1");
-		
-		boolean blnProvided = propertyModel.isUserProvided();
-		EditStation.buttonHeureSaisie.setSelection(!blnProvided);
-		EditStation.textHeureSaisie.setEnabled(!blnProvided);
-		lign.setEnabled(blnProvided);
-		debu.setEnabled(blnProvided);
-		fi.setEnabled(blnProvided);
-		inject.setEnabled(blnProvided);
+		if (DataModel.ouverture) {
+			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("time");
+			
+			boolean blnProvided = propertyModel.isUserProvided();
+			EditStation.buttonHeureSaisie.setSelection(blnProvided);
+			lign.setEnabled(!blnProvided);
+			debu.setEnabled(!blnProvided);
+			fi.setEnabled(!blnProvided);
+			inject.setEnabled(!blnProvided);
+		} else {
+			// par défaut manuel
+			EditStation.buttonHeureSaisie.setSelection(true);
+			lign.setEnabled(false);
+			debu.setEnabled(false);
+			fi.setEnabled(false);
+			inject.setEnabled(false);
+		}
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -1774,15 +1880,23 @@ public class DrawingStation {
 					}
 				});
 		
-		PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("dcHistory1");
-		
-		boolean blnProvided = propertyModel.isUserProvided();
-		EditStation.buttonDateSaisie.setSelection(!blnProvided);
-		EditStation.textDateSaisie.setEnabled(!blnProvided);
-		lign.setEnabled(blnProvided);
-		debu.setEnabled(blnProvided);
-		fi.setEnabled(blnProvided);
-		inject.setEnabled(blnProvided);
+		if (DataModel.ouverture) {
+			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("date");
+			
+			boolean blnProvided = propertyModel.isUserProvided();
+			EditStation.buttonDateSaisie.setSelection(blnProvided);
+			lign.setEnabled(!blnProvided);
+			debu.setEnabled(!blnProvided);
+			fi.setEnabled(!blnProvided);
+			inject.setEnabled(!blnProvided);
+		} else {
+			// par défaut manuel
+			EditStation.buttonDateSaisie.setSelection(true);
+			lign.setEnabled(false);
+			debu.setEnabled(false);
+			fi.setEnabled(false);
+			inject.setEnabled(false);
+		}
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -1976,15 +2090,23 @@ public class DrawingStation {
 		fi.setEnabled(false);
 		inject.setEnabled(false);*/
 		
-		PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("dcHistory1");
-		
-		boolean blnProvided = propertyModel.isUserProvided();
-		radio.setSelection(!blnProvided);
-		manu.setEnabled(!blnProvided);
-		lign.setEnabled(blnProvided);
-		debu.setEnabled(blnProvided);
-		fi.setEnabled(blnProvided);
-		inject.setEnabled(blnProvided);
+		if (DataModel.ouverture) {
+			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("latitude");
+			
+			boolean blnProvided = propertyModel.isUserProvided();
+			radio.setSelection(blnProvided);
+			lign.setEnabled(!blnProvided);
+			debu.setEnabled(!blnProvided);
+			fi.setEnabled(!blnProvided);
+			inject.setEnabled(!blnProvided);
+		} else {
+			// par défaut manuel
+			radio.setSelection(true);
+			lign.setEnabled(false);
+			debu.setEnabled(false);
+			fi.setEnabled(false);
+			inject.setEnabled(false);
+		}
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -2164,15 +2286,23 @@ public class DrawingStation {
 		fi.setEnabled(false);
 		inject.setEnabled(false);*/
 		
-		PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("dcHistory1");
-		
-		boolean blnProvided = propertyModel.isUserProvided();
-		radio.setSelection(!blnProvided);
-		manu.setEnabled(!blnProvided);
-		lign.setEnabled(blnProvided);
-		debu.setEnabled(blnProvided);
-		fi.setEnabled(blnProvided);
-		inject.setEnabled(blnProvided);
+		if (DataModel.ouverture) {
+			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("longitude");
+			
+			boolean blnProvided = propertyModel.isUserProvided();
+			radio.setSelection(blnProvided);
+			lign.setEnabled(!blnProvided);
+			debu.setEnabled(!blnProvided);
+			fi.setEnabled(!blnProvided);
+			inject.setEnabled(!blnProvided);
+		} else {
+			// par défaut manuel
+			radio.setSelection(true);
+			lign.setEnabled(false);
+			debu.setEnabled(false);
+			fi.setEnabled(false);
+			inject.setEnabled(false);
+		}
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
