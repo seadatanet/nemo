@@ -519,7 +519,11 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 	 * @see Survey#_laboratories
 	 */
 	public void setLaboratories(String x) {
-		_laboratories = x;
+		if (x.length() > 75)
+			_laboratories = x.substring(0, 75);
+		else
+			_laboratories = x;
+
 	}
 
 	/**
