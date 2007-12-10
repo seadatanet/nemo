@@ -1434,6 +1434,7 @@ public class DataModel {
 
 		//	
 		// survey.setDataCentre(code);
+		
 		int taille = DataModel.listeWSCenters.length;
 		int position = 0;
 		for (int i = 0; i < taille; i++) {
@@ -1444,7 +1445,8 @@ public class DataModel {
 				break;
 			}
 		}
-		EditSurvey.comboDataCentres.select(position);
+		EditSurvey.comboDataCentres.select(position);		
+		
 
 		// EditSurvey.textCentre.setText(survey.getDataCentre());
 

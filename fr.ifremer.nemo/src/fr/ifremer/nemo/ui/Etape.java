@@ -68,6 +68,7 @@ public class Etape {
 							ViewFile.comboTempoHeure.getText());
 					Long HourLong = (Long) format
 							.parseObject(ViewFile.textTempoHeureRef.getText());
+					
 				} catch (ParseException e) {
 
 					Utils.messageErreurAppend(Messages.getString("Etape.6")); //$NON-NLS-1$

@@ -380,9 +380,18 @@ public class EditSurvey {
 		ViewFile.affiche = 1;
 
 		// remplissage de l'IHM par le modèle chargé
-
 		if (DataModel.ouverture) {
 			DataModel.fillSurvey();
+		} else {
+			int taille = DataModel.listeWSCenters.length;
+			int k = 0;
+			EditSurvey.comboDataCentres.select(k);
+			String dataCenter = Utils.configuration.getDataCenter();
+			int j = dataCenter.length();
+			while (k < taille && !EditSurvey.comboDataCentres.getText().substring(0,j).equals(dataCenter)) {
+				k++;
+				EditSurvey.comboDataCentres.select(k);
+			}
 		}
 
 	}
@@ -398,52 +407,59 @@ public class EditSurvey {
 		String message = "";
 
 		if (NemoLists.okCountries) {
-			message = message + Messages.getString("EditSurvey.63") + "  OK";
+			message = message + Messages.getString("EditSurvey.63")
+					+ "  OK - " + NemoLists.nbCountries + " " + Messages.getString("EditSurvey.70");
 		} else {
 			message = message + Messages.getString("EditSurvey.63")
-					+ "  FAILED";
+					+ "  " + Messages.getString("EditSurvey.71");
 		}
 
 		if (NemoLists.okDataCentres) {
-			message = message + Messages.getString("EditSurvey.64") + "  OK";
+			message = message + Messages.getString("EditSurvey.64")
+					+ "  OK - " + NemoLists.nbDataCentres + " " + Messages.getString("EditSurvey.70");
 		} else {
 			message = message + Messages.getString("EditSurvey.64")
-					+ "  FAILED";
+					+ "  " + Messages.getString("EditSurvey.71");
 		}
 
 		if (NemoLists.okDataTypes) {
-			message = message + Messages.getString("EditSurvey.65") + "  OK";
+			message = message + Messages.getString("EditSurvey.65")
+					+ "  OK - " + NemoLists.nbDataTypes + " " + Messages.getString("EditSurvey.70");
 		} else {
 			message = message + Messages.getString("EditSurvey.65")
-					+ "  FAILED";
+					+ "  " + Messages.getString("EditSurvey.71");
 		}
 
 		if (NemoLists.okParameters) {
-			message = message + Messages.getString("EditSurvey.66") + "  OK";
+			message = message + Messages.getString("EditSurvey.66") 
+					+ "  OK - " + NemoLists.nbParameters + " " + Messages.getString("EditSurvey.70");
 		} else {
 			message = message + Messages.getString("EditSurvey.66")
-					+ "  FAILED";
+					+ "  " + Messages.getString("EditSurvey.71");
 		}
 
 		if (NemoLists.okRegions) {
-			message = message + Messages.getString("EditSurvey.67") + "  OK";
+			message = message + Messages.getString("EditSurvey.67")
+					+ "  OK - " + NemoLists.nbRegions + " " + Messages.getString("EditSurvey.70");
 		} else {
 			message = message + Messages.getString("EditSurvey.67")
-					+ "  FAILED";
+					+ "  " + Messages.getString("EditSurvey.71");
 		}
 
 		if (NemoLists.okShips) {
-			message = message + Messages.getString("EditSurvey.68") + "  OK";
+			message = message + Messages.getString("EditSurvey.68") 
+					+ "  OK - " + NemoLists.nbShips + " " + Messages.getString("EditSurvey.70");
 		} else {
 			message = message + Messages.getString("EditSurvey.68")
-					+ "  FAILED";
+					+ "  " + Messages.getString("EditSurvey.71");
 		}
 
 		if (NemoLists.okSurveys) {
-			message = message + Messages.getString("EditSurvey.69") + "  OK";
+			message = message + Messages.getString("EditSurvey.69") 
+					+ "  OK - " + NemoLists.nbSurveys + " " + Messages.getString("EditSurvey.70");
 		} else {
 			message = message + Messages.getString("EditSurvey.69")
-					+ "  FAILED";
+					+ "  " + Messages.getString("EditSurvey.71");
 		}
 
 		MessageDialog.openInformation(shell, "WebServices Info", message);
@@ -650,7 +666,6 @@ public class EditSurvey {
 			}
 			
 			EditSurvey.comboDataCentres.select(index);
-			
 			
 		}
 
@@ -914,7 +929,8 @@ public class EditSurvey {
 			comboDataCentres.add(DataModel.listeWSCenters[i].getCode() + " - "
 					+ DataModel.listeWSCenters[i].getName());
 		}
-
+		
+		
 	}
 
 	public static void initListeType() {

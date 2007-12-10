@@ -1,5 +1,9 @@
 package fr.ifremer.nemo.ui;
 
+import java.text.ParseException;
+
+import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.graphics.Font;
@@ -15,9 +19,15 @@ import org.eclipse.ui.forms.events.ExpansionAdapter;
 import org.eclipse.ui.forms.events.ExpansionEvent;
 import org.eclipse.ui.forms.widgets.Section;
 
+import fr.ifremer.nemo.input.PropertyModel;
+import fr.ifremer.nemo.util.DateTimeFormat;
+import fr.ifremer.nemo.util.Formatter;
+
 public class DrawingStation {
 
 	private static Group grou;
+	
+	// private static Text txtTest;
 
 	public static void sectionManuelLigneDebutFinInject(String nomSection,
 			String description, Section section, Text ligne, Text debut,
@@ -372,7 +382,7 @@ public class DrawingStation {
 
 		// le ppar radio est le pointeur du bouton "incremente"
 		final String nomSec;
-		final Text lign, debu, fi;
+		final Text lign, debu, fi, test;
 		final Button inject;
 
 		nomSec = nomSection;
@@ -445,17 +455,30 @@ public class DrawingStation {
 		// bouton d'injection de la position des valeurs
 		Button buttonInject = new Button(groupe, SWT.NONE);
 		buttonInject.setText("Injecter");
-
 		inject = buttonInject;
 
+		inject.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		
 		section.setClient(sectionClient);
-
+		
+//		 Zone de test
+		Composite compoTest = new Composite(sectionClient,SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoTest);
+		
+		Button btnTest = new Button(compoTest,SWT.NONE);
+		btnTest.setText("Test");
+		
+		Text txtTest = new Text(compoTest, SWT.BORDER);
+		txtTest.setEnabled(false);
+		txtTest.setText("");
+		
 		// une fois les éléments initialisés, on les passe en static pour y
 		// accéder à
 		// partir des listeners
 		lign = ligne;
 		debu = debut;
 		fi = fin;
+		test = txtTest;
 
 		// listeners
 
@@ -511,13 +534,38 @@ public class DrawingStation {
 					}
 				});
 
-		// saisie manuelle par défaut
+		// bouton test
+		btnTest
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(
+							org.eclipse.swt.events.SelectionEvent g) {
+						if (EditStation.buttonHeureSaisie.getSelection()) {
+							Utils.test(test, EditStation.textHeureSaisie);
+						} else {
+							Utils.test(test, ViewFile.styledTextStation, debu,
+									fi);
+						}
+					}
+				});
+		
+		
+		
+		/*// saisie manuelle par défaut
 		radio.setSelection(true);
 		lign.setEnabled(false);
 		debu.setEnabled(false);
 		fi.setEnabled(false);
-		inject.setEnabled(false);
-
+		inject.setEnabled(false);*/
+		
+		PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("dcHistory1");
+		
+		boolean blnProvided = propertyModel.isUserProvided();
+		radio.setSelection(!blnProvided);
+		lign.setEnabled(blnProvided);
+		debu.setEnabled(blnProvided);
+		fi.setEnabled(blnProvided);
+		inject.setEnabled(blnProvided);
+		
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
 
@@ -1258,12 +1306,22 @@ public class DrawingStation {
 					}
 				});
 
-		// saisie manuelle par défaut
+		/*// saisie manuelle par défaut
 		radio.setSelection(true);
 		lign.setEnabled(false);
 		debu.setEnabled(false);
 		fi.setEnabled(false);
-		inject.setEnabled(false);
+		inject.setEnabled(false);*/
+		
+		PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("dcHistory1");
+		
+		boolean blnProvided = propertyModel.isUserProvided();
+		radio.setSelection(!blnProvided);
+		manu.setEnabled(!blnProvided);
+		lign.setEnabled(blnProvided);
+		debu.setEnabled(blnProvided);
+		fi.setEnabled(blnProvided);
+		inject.setEnabled(blnProvided);
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -1279,9 +1337,9 @@ public class DrawingStation {
 		// ajouter combo de format heure
 
 		final String nomSec;
-		final Text lign, debu, fi;
+		final Text lign, debu, fi, test;
 		final Button inject;
-
+		
 		nomSec = nomSection;
 		section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
@@ -1358,6 +1416,18 @@ public class DrawingStation {
 		section.setClient(sectionClient);
 
 		inject = buttonInject;
+		
+		// Zone de test
+		Composite compoTest = new Composite(sectionClient,SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoTest);
+		
+		Button btnTest = new Button(compoTest,SWT.NONE);
+		btnTest.setText("Test");
+		
+		Text txtTest = new Text(compoTest, SWT.BORDER);
+		txtTest.setEnabled(false);
+		txtTest.setText("");
+		
 
 		// une fois les éléments initialisés, on les passe en static pour y
 		// accéder à
@@ -1365,6 +1435,7 @@ public class DrawingStation {
 		lign = ligne;
 		debu = debut;
 		fi = fin;
+		test = txtTest;
 
 		lign.setEnabled(false);
 		debu.setEnabled(false);
@@ -1441,6 +1512,53 @@ public class DrawingStation {
 								.getSelection().y;
 					}
 				});
+		
+		// bouton test
+		btnTest
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(
+							org.eclipse.swt.events.SelectionEvent g) {
+						if (EditStation.buttonHeureSaisie.getSelection()) {
+							Utils.test(test, EditStation.textHeureSaisie);
+						} else {
+							Utils.test(test, ViewFile.styledTextStation, debu, fi);
+						}
+						
+						/*try {
+							
+							
+							DateTimeFormat format = new DateTimeFormat(
+									EditStation.comboHeure.getText());
+							
+							Long HourLong = (Long) format
+									.parseObject(test.getText());
+							
+							Formatter formatter;
+							
+							formatter = Formatter.getSingleton();
+							
+							test.setText(formatter.formatDateTime("hh24:mm", HourLong, "9999"));
+							
+							
+						} catch (ParseException e) {
+
+							Utils.messageErreurAppend(Messages
+									.getString("Etape.6")); //$NON-NLS-1$
+						}*/
+						test.pack();
+						
+					}
+				});
+		
+		PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("dcHistory1");
+		
+		boolean blnProvided = propertyModel.isUserProvided();
+		EditStation.buttonHeureSaisie.setSelection(!blnProvided);
+		EditStation.textHeureSaisie.setEnabled(!blnProvided);
+		lign.setEnabled(blnProvided);
+		debu.setEnabled(blnProvided);
+		fi.setEnabled(blnProvided);
+		inject.setEnabled(blnProvided);
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -1455,7 +1573,7 @@ public class DrawingStation {
 		// virer le second bouton radio !
 		// ajouter combo de format heure
 
-		final Text lign, debu, fi;
+		final Text lign, debu, fi, test;
 		final Button inject;
 		final String nomSec;
 		final Text manu;
@@ -1540,6 +1658,17 @@ public class DrawingStation {
 		buttonInject.setText("Injecter");
 
 		section.setClient(sectionClient);
+		
+		// Zone de test
+		Composite compoTest = new Composite(sectionClient,SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoTest);
+		
+		Button btnTest = new Button(compoTest,SWT.NONE);
+		btnTest.setText("Test");
+		
+		Text txtTest = new Text(compoTest, SWT.BORDER);
+		txtTest.setEnabled(false);
+		txtTest.setText("");
 
 		// une fois les éléments initialisés, on les passe en static pour y
 		// accéder à
@@ -1547,6 +1676,7 @@ public class DrawingStation {
 		lign = ligne;
 		debu = debut;
 		fi = fin;
+		test = txtTest;
 
 		lign.setEnabled(false);
 		debu.setEnabled(false);
@@ -1628,6 +1758,31 @@ public class DrawingStation {
 
 					}
 				});
+		
+		// bouton test
+		btnTest
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(
+							org.eclipse.swt.events.SelectionEvent g) {
+						if (EditStation.buttonHeureSaisie.getSelection()) {
+							Utils.test(test, EditStation.textHeureSaisie);
+						} else {
+							Utils.test(test, ViewFile.styledTextStation, debu, fi);
+						}
+						
+						test.pack();
+					}
+				});
+		
+		PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("dcHistory1");
+		
+		boolean blnProvided = propertyModel.isUserProvided();
+		EditStation.buttonDateSaisie.setSelection(!blnProvided);
+		EditStation.textDateSaisie.setEnabled(!blnProvided);
+		lign.setEnabled(blnProvided);
+		debu.setEnabled(blnProvided);
+		fi.setEnabled(blnProvided);
+		inject.setEnabled(blnProvided);
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -1640,7 +1795,7 @@ public class DrawingStation {
 			Button position) {
 		final String nomSec;
 		final Text manu;
-		final Text lign, debu, fi;
+		final Text lign, debu, fi, test;
 		final Button inject;
 
 		nomSec = nomSection;
@@ -1723,6 +1878,17 @@ public class DrawingStation {
 		inject = buttonInject;
 
 		section.setClient(sectionClient);
+		
+//		 Zone de test
+		Composite compoTest = new Composite(sectionClient,SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoTest);
+		
+		Button btnTest = new Button(compoTest,SWT.NONE);
+		btnTest.setText("Test");
+		
+		Text txtTest = new Text(compoTest, SWT.BORDER);
+		txtTest.setEnabled(false);
+		txtTest.setText("");
 
 		// une fois les éléments initialisés, on les passe en static pour y
 		// accéder à
@@ -1730,6 +1896,7 @@ public class DrawingStation {
 		lign = ligne;
 		debu = debut;
 		fi = fin;
+		test = txtTest;
 
 		// listeners
 
@@ -1786,13 +1953,38 @@ public class DrawingStation {
 
 					}
 				});
+		
+//		 bouton test
+		btnTest
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(
+							org.eclipse.swt.events.SelectionEvent g) {
+						if (EditStation.buttonHeureSaisie.getSelection()) {
+							Utils.test(test, EditStation.textHeureSaisie);
+						} else {
+							Utils.test(test, ViewFile.styledTextStation, debu, fi);
+						}
+						
+						test.pack();
+					}
+				});
 
-		// saisie manuelle par défaut
+		/*// saisie manuelle par défaut
 		radio.setSelection(true);
 		lign.setEnabled(false);
 		debu.setEnabled(false);
 		fi.setEnabled(false);
-		inject.setEnabled(false);
+		inject.setEnabled(false);*/
+		
+		PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("dcHistory1");
+		
+		boolean blnProvided = propertyModel.isUserProvided();
+		radio.setSelection(!blnProvided);
+		manu.setEnabled(!blnProvided);
+		lign.setEnabled(blnProvided);
+		debu.setEnabled(blnProvided);
+		fi.setEnabled(blnProvided);
+		inject.setEnabled(blnProvided);
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -1804,7 +1996,7 @@ public class DrawingStation {
 			Text debut, Text fin, Text manuel, Button radio, Button position) {
 		final String nomSec;
 		final Text manu;
-		final Text lign, debu, fi;
+		final Text lign, debu, fi, test;
 		final Button inject;
 
 		nomSec = nomSection;
@@ -1874,6 +2066,17 @@ public class DrawingStation {
 		inject = buttonInject;
 
 		section.setClient(sectionClient);
+		
+//		 Zone de test
+		Composite compoTest = new Composite(sectionClient,SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoTest);
+		
+		Button btnTest = new Button(compoTest,SWT.NONE);
+		btnTest.setText("Test");
+		
+		Text txtTest = new Text(compoTest, SWT.BORDER);
+		txtTest.setEnabled(false);
+		txtTest.setText("");
 
 		// une fois les éléments initialisés, on les passe en static pour y
 		// accéder à
@@ -1881,6 +2084,7 @@ public class DrawingStation {
 		lign = ligne;
 		debu = debut;
 		fi = fin;
+		test = txtTest;
 
 		// listeners
 
@@ -1937,13 +2141,38 @@ public class DrawingStation {
 
 					}
 				});
+		
+//		 bouton test
+		btnTest
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(
+							org.eclipse.swt.events.SelectionEvent g) {
+						if (EditStation.buttonHeureSaisie.getSelection()) {
+							Utils.test(test, EditStation.textHeureSaisie);
+						} else {
+							Utils.test(test, ViewFile.styledTextStation, debu, fi);
+						}
+						
+						test.pack();
+					}
+				});
 
-		// saisie manuelle par défaut
+		/*// saisie manuelle par défaut
 		radio.setSelection(true);
 		lign.setEnabled(false);
 		debu.setEnabled(false);
 		fi.setEnabled(false);
-		inject.setEnabled(false);
+		inject.setEnabled(false);*/
+		
+		PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("dcHistory1");
+		
+		boolean blnProvided = propertyModel.isUserProvided();
+		radio.setSelection(!blnProvided);
+		manu.setEnabled(!blnProvided);
+		lign.setEnabled(blnProvided);
+		debu.setEnabled(blnProvided);
+		fi.setEnabled(blnProvided);
+		inject.setEnabled(blnProvided);
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);

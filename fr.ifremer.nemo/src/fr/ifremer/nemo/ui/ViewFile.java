@@ -300,6 +300,7 @@ public class ViewFile extends ViewPart {
 							Shell shell = new Shell();
 							FileDialog dialog = new FileDialog(shell, SWT.OPEN
 									| SWT.APPLICATION_MODAL);
+							dialog.setFilterPath(Utils.configuration.getCruisesDirectory()); //$NON-NLS-1$
 							nomFichier = dialog.open();
 							if (nomFichier != null) {
 
@@ -343,6 +344,7 @@ public class ViewFile extends ViewPart {
 							Shell shell = new Shell();
 							DirectoryDialog dialog = new DirectoryDialog(shell,
 									SWT.OPEN | SWT.APPLICATION_MODAL);
+							dialog.setFilterPath(Utils.configuration.getCruisesDirectory()); //$NON-NLS-1$
 							nomRepertoire = dialog.open();
 							if (nomRepertoire != null) {
 								fileLoaded = true;

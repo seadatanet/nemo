@@ -31,6 +31,10 @@ public class NemoLists implements Cloneable {
 
 	public static Boolean okCountries, okShips, okSurveys, okDataCentres,
 			okParameters, okRegions, okDataTypes;
+	
+	public static int nbCountries, nbShips, nbSurveys, nbDataCentres,
+			nbParameters, nbRegions, nbDataTypes;
+	
 
 	static {
 		initLists();
@@ -1649,6 +1653,7 @@ public class NemoLists implements Cloneable {
 			encoder = new XMLEncoder(stream);
 			encoder.writeObject(_countries);
 			okCountries = true;
+			nbCountries = countries.length;
 		} catch (Exception e) {
 			okCountries = false;
 			System.out.println("WS countries failed");
@@ -1696,6 +1701,7 @@ public class NemoLists implements Cloneable {
 			encoder = new XMLEncoder(stream);
 			encoder.writeObject(_dataCentres);
 			okDataCentres = true;
+			nbDataCentres = types.length;
 		} catch (Exception e) {
 			okDataCentres = false;
 			e.printStackTrace();
@@ -1742,6 +1748,7 @@ public class NemoLists implements Cloneable {
 			encoder = new XMLEncoder(stream);
 			encoder.writeObject(_dataTypes);
 			okDataTypes = true;
+			nbDataTypes = types.length;
 		} catch (Exception e) {
 			okDataTypes = false;
 			e.printStackTrace();
@@ -1788,6 +1795,7 @@ public class NemoLists implements Cloneable {
 			encoder = new XMLEncoder(stream);
 			encoder.writeObject(_parameters);
 			okParameters = true;
+			nbParameters = parameters.length;
 		} catch (Exception e) {
 			okParameters = false;
 			e.printStackTrace();
@@ -1833,6 +1841,7 @@ public class NemoLists implements Cloneable {
 			encoder = new XMLEncoder(stream);
 			encoder.writeObject(_regions);
 			okRegions = true;
+			nbRegions = regions.length;
 		} catch (Exception e) {
 			okRegions = false;
 			e.printStackTrace();
@@ -1878,6 +1887,7 @@ public class NemoLists implements Cloneable {
 			encoder = new XMLEncoder(stream);
 			encoder.writeObject(_ships);
 			okShips = true;
+			nbShips = ships.length;
 		} catch (Exception e) {
 			okShips = false;
 			e.printStackTrace();
@@ -1923,6 +1933,7 @@ public class NemoLists implements Cloneable {
 			encoder = new XMLEncoder(stream);
 			encoder.writeObject(_surveys);
 			okSurveys = true;
+			nbSurveys = surveys.length;
 		} catch (Exception e) {
 			okSurveys = false;
 			e.printStackTrace();

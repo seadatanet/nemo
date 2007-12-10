@@ -419,7 +419,7 @@ public class EditStation {
 	}
 
 	public static void razEdition() {
-		// reset de toute la zone d'édition après étape descriptioon de fichier
+		// reset de toute la zone d'édition après étape description de fichier
 		// on retire toutes les sections et les boutons expand et validation
 
 		int i;

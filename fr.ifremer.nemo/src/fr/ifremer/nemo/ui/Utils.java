@@ -212,6 +212,34 @@ public class Utils {
 			Utils.messageErreur("");
 		}
 	}
+	
+	public static void test(Text test, StyledText styledtext, Text debut, Text fin) {
+		int deb, fi;
+
+		/*// on récupère les coordonnées de la sélection
+		deb = styledtext.getSelection().x;
+		fi = styledtext.getSelection().y;*/
+		
+		deb = Integer.parseInt(debut.getText());
+		fi = Integer.parseInt(fin.getText());
+
+		styledtext.setSelection(deb-1, fi);
+		
+		if (deb == fi) {
+			Utils.messageErreur(Messages.getString("Utils.28"));
+
+		} else {
+//			 remplissage test dans interface
+			test.setText(styledtext.getText(deb-1, fi-1));
+			test.pack();
+		}
+	}
+	
+	public static void test(Text test, Text saisie) {
+		test.setText(saisie.getText());
+
+		test.pack();
+	}
 
 	public static void injectData(StyledText styledtext) {
 		int deb, fi, lign, i;
@@ -1099,8 +1127,11 @@ public class Utils {
 		// sauvegarde de la config dans le fichier qui va bien
 		// CONTACT
 		configuration.setContact(""); //$NON-NLS-1$
-		// DOSSIER
-		configuration.setModelsDirectory(OptionsAction.textDossier.getText());
+		
+		// DOSSIERS
+		configuration.setModelsDirectory(OptionsAction.textDossierModèle.getText());
+		configuration.setCruisesDirectory(OptionsAction.textDossierCampagne.getText());
+		
 		// LANGUE
 		if (OptionsAction.comboLangue.getItem(
 				OptionsAction.comboLangue.getSelectionIndex()).matches(
@@ -1109,6 +1140,11 @@ public class Utils {
 		} else {
 			configuration.setLang("en_GB"); //$NON-NLS-1$
 		}
+		
+		// CENTRE DE DONNEES
+		String dataCenter = OptionsAction.comboCentreDonnees.getText();
+		dataCenter = dataCenter.substring(0,dataCenter.indexOf(" "));
+		configuration.setDataCenter(dataCenter);
 
 		// WS
 		configuration.setNautilusWebServiceURL(OptionsAction.textAreaNautilus

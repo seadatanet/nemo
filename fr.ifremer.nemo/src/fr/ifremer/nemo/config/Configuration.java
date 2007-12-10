@@ -26,6 +26,10 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	 * Répertoire de base des fichiers modèles
 	 */
 	protected String _modelsDirectory;
+	
+	protected String _cruisesDirectory;
+	
+	protected String _dataCenter;
 
 	protected String _nautilusWebServiceURL;
 
@@ -45,6 +49,8 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	public Configuration() {
 		_contact = "";
 		_modelsDirectory = "";
+		_cruisesDirectory = "";
+		_dataCenter = "";
 		_nautilusWebServiceURL = "";
 		_nemoWebServiceURL = "";
 		_outputDirectory = "";
@@ -123,6 +129,10 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 					"setNautilusWebServiceURL");
 			return setter;
 		}
+		if (a_LocalName.equals("dataCenter")) {
+			Element2Field setter = new Element2Field(this, "setDataCenter");
+			return setter;
+		}
 		if (a_LocalName.equals("showRule")) {
 			Element2Field setter = new Element2Field(this, "setShowRule");
 			return setter;
@@ -133,6 +143,10 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		}
 		if (a_LocalName.equals("modelsDirectory")) {
 			Element2Field setter = new Element2Field(this, "setModelsDirectory");
+			return setter;
+		}
+		if (a_LocalName.equals("cruisesDirectory")) {
+			Element2Field setter = new Element2Field(this, "setCruisesDirectory");
 			return setter;
 		}
 		if (a_LocalName.equals("outputDirectory")) {
@@ -163,11 +177,13 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	 */
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
 		a_Writer.putAttribute("lang", getLang());
+		a_Writer.putTag("dataCenter", getDataCenter());
 		a_Writer.putTag("nemoWsURL", getNemoWebServiceURL());
 		a_Writer.putTag("nautilusWsURL", getNautilusWebServiceURL());
 		a_Writer.putTag("showRule", isShowRule());
 		a_Writer.putTag("contact", getContact());
 		a_Writer.putTag("modelsDirectory", getModelsDirectory());
+		a_Writer.putTag("cruisesDirectory", getCruisesDirectory());
 		a_Writer.putTag("outputDirectory", getOutputDirectory());
 	}
 
@@ -240,7 +256,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	public String getModelsDirectory() {
 		return _modelsDirectory;
 	}
-
+	
 	/**
 	 * Write accessor (setter) for attribute _modelsDirectory
 	 * 
@@ -250,6 +266,48 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	 */
 	public void setModelsDirectory(String x) {
 		_modelsDirectory = x;
+	}
+	
+	/**
+	 * Read accessor (getter) for attribute _cruisesDirectory
+	 * 
+	 * @return String
+	 * @see Configuration#_cruisesDirectory
+	 */
+	public String getCruisesDirectory() {
+		return _cruisesDirectory;
+	}
+
+	/**
+	 * Write accessor (setter) for attribute _cruisesDirectory
+	 * 
+	 * @param x
+	 *            new value for _cruisesDirectory
+	 * @see Configuration#_cruisesDirectory
+	 */
+	public void setCruisesDirectory(String x) {
+		_cruisesDirectory = x;
+	}
+	
+	/**
+	 * Read accessor (getter) for attribute _dataCenter
+	 * 
+	 * @return String
+	 * @see Configuration#_dataCenter
+	 */
+	public String getDataCenter() {
+		return _dataCenter;
+	}
+
+	/**
+	 * Write accessor (setter) for attribute _dataCenter
+	 * 
+	 * @param x
+	 *            new value for _dataCenter
+	 * @see Configuration#_dataCenter
+	 */
+	public void setDataCenter(String x) {
+		_dataCenter = x;
 	}
 
 	/**
