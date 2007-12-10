@@ -44,21 +44,18 @@
                         
             <country/>
     
-            <!-- FAE021 Evolution : changement de format du fichier xml   -->
-            <xsl:for-each select="Metadata/dataIdInfo/idCitation/citRespParty">
-                <xsl:if test="role/RoleCd/@value =  'originator'">
-                    <laboratory><xsl:value-of select="rpOrgName"/></laboratory> 
-                </xsl:if>
-            </xsl:for-each>     
+
+            <!-- FAE021 Evolution : changement de format du fichier xml  -->
+            <laboratories><xsl:if test="Metadata/dataIdInfo/idCitation/citRespParty/role/RoleCd/@value =  'originator'"><xsl:value-of select="Metadata/dataIdInfo/idCitation/citRespParty/rpOrgName"/></xsl:if><xsl:for-each select="Metadata/dataIdInfo/idCitation/citRespParty"><xsl:if test="role/RoleCd/@value =  'originator'"> - <xsl:value-of select="rpOrgName"/></xsl:if></xsl:for-each></laboratories> 
             <!-- FAE021 Fin -->   
                        
             <!-- FAE021 Evolution : changement de format du fichier xml   -->
-            <xsl:for-each select="Metadata/dataIdInfo/idCitation/citRespParty">
-                <xsl:if test="role/RoleCd/@value =  'pointOfContact'">
-                    <chiefScientist><xsl:value-of select="rpIndName"/></chiefScientist> 
+            <!-- <xsl:for-each select="Metadata/dataIdInfo/idCitation/citRespParty"> -->
+                <xsl:if test="Metadata/dataIdInfo/idCitation/citRespParty/role/RoleCd/@value =  'pointOfContact'">
+                    <chiefScientist><xsl:value-of select="Metadata/dataIdInfo/idCitation/citRespParty/rpIndName"/></chiefScientist> 
                 </xsl:if>
-            </xsl:for-each>     
-            <!-- FAE021 Fin -->   
+            <!-- </xsl:for-each> -->     
+            <!-- FAE021 Fin -->      
             
             <!-- FAE021 Evolution : changement de format du fichier xml   -->
             <xsl:for-each select="Metadata/dataIdInfo/descKeys">
