@@ -372,7 +372,7 @@ public class DataModel {
 			frag.setLastLine(ligne);
 			frag.setFirstCharOffset(debut);
 			frag.setLastCharOffset(fin);
-
+			
 		}
 
 		// type de donnée
@@ -504,7 +504,9 @@ public class DataModel {
 			// frag.setLastLine(ligne);
 			frag.setFirstCharOffset(debut);
 			frag.setLastCharOffset(fin);
-
+			
+			frag.setVariable(EditStation.buttonVar.getSelection());
+			
 			// Utils.calculNbreLignesPuisRemplissageFragClic(frag,
 			// EditStation.posxCommentaire, EditStation.posyCommentaire);
 			Utils.calculNbreLignesPuisRemplissageFragClic(frag,
@@ -1534,6 +1536,7 @@ public class DataModel {
 	public static void fillStation() {
 
 		int ligne, debut, fin, real_ligne;
+		boolean var;
 
 		station_modele = stationModel_modele.getModel();
 
@@ -1679,12 +1682,15 @@ public class DataModel {
 			ligne = frag.getFirstLine();
 			debut = frag.getFirstCharOffset();
 			fin = frag.getLastCharOffset();
+			var = frag.isVariable();
+			
 			real_ligne = ligne
 					+ Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 
 			EditStation.textCommentaireLigne.setText("" + ligne);
 			EditStation.textCommentaireDebut.setText("" + debut);
 			EditStation.textCommentaireFin.setText("" + fin);
+			EditStation.buttonVar.setSelection(var);
 
 		}
 

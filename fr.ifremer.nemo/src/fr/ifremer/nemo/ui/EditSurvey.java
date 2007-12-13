@@ -369,6 +369,49 @@ public class EditSurvey {
 					}
 				});
 
+		textCommentaire
+				.addFocusListener(new org.eclipse.swt.events.FocusListener() {
+					public void focusGained(org.eclipse.swt.events.FocusEvent e) {
+
+					}
+
+					public void focusLost(org.eclipse.swt.events.FocusEvent e) {
+						
+						int lastIndex = 1;
+						int lastIndexOfSpace = 1;
+						int indexOfCR = 1;
+						String tamponOrigine = textCommentaire.getText();
+						String tampon80 = "";
+						String tamponSortie = "";
+
+						while (tamponOrigine.length() > 80) {
+							
+							tampon80 = tamponOrigine.substring(0, 80);
+							
+								lastIndexOfSpace = tampon80.lastIndexOf(" ");
+								indexOfCR = tampon80.indexOf("\r");
+								
+								if (indexOfCR > -1) {
+									lastIndex = indexOfCR;
+									tamponOrigine = tamponOrigine.substring(lastIndex+2);
+								} else {
+									lastIndex = lastIndexOfSpace;
+									tamponOrigine = tamponOrigine.substring(lastIndex+1);
+								}
+
+								tamponSortie += tampon80.substring(0, lastIndex).trim()+ "\r\n";
+								
+						}
+
+						tamponSortie += tamponOrigine;
+						// System.out.println(tamponSortie);
+						textCommentaire.setText(tamponSortie);
+						textCommentaire.pack();
+
+					}
+
+				});
+
 		// raz du message d'erreurs
 		Utils.messageErreur(""); //$NON-NLS-1$
 
@@ -388,7 +431,9 @@ public class EditSurvey {
 			EditSurvey.comboDataCentres.select(k);
 			String dataCenter = Utils.configuration.getDataCenter();
 			int j = dataCenter.length();
-			while (k < taille && !EditSurvey.comboDataCentres.getText().substring(0,j).equals(dataCenter)) {
+			while (k < taille
+					&& !EditSurvey.comboDataCentres.getText().substring(0, j)
+							.equals(dataCenter)) {
 				k++;
 				EditSurvey.comboDataCentres.select(k);
 			}
@@ -407,59 +452,66 @@ public class EditSurvey {
 		String message = "";
 
 		if (NemoLists.okCountries) {
-			message = message + Messages.getString("EditSurvey.63")
-					+ "  OK - " + NemoLists.nbCountries + " " + Messages.getString("EditSurvey.70");
+			message = message + Messages.getString("EditSurvey.63") + "  OK - "
+					+ NemoLists.nbCountries + " "
+					+ Messages.getString("EditSurvey.70");
 		} else {
-			message = message + Messages.getString("EditSurvey.63")
-					+ "  " + Messages.getString("EditSurvey.71");
+			message = message + Messages.getString("EditSurvey.63") + "  "
+					+ Messages.getString("EditSurvey.71");
 		}
 
 		if (NemoLists.okDataCentres) {
-			message = message + Messages.getString("EditSurvey.64")
-					+ "  OK - " + NemoLists.nbDataCentres + " " + Messages.getString("EditSurvey.70");
+			message = message + Messages.getString("EditSurvey.64") + "  OK - "
+					+ NemoLists.nbDataCentres + " "
+					+ Messages.getString("EditSurvey.70");
 		} else {
-			message = message + Messages.getString("EditSurvey.64")
-					+ "  " + Messages.getString("EditSurvey.71");
+			message = message + Messages.getString("EditSurvey.64") + "  "
+					+ Messages.getString("EditSurvey.71");
 		}
 
 		if (NemoLists.okDataTypes) {
-			message = message + Messages.getString("EditSurvey.65")
-					+ "  OK - " + NemoLists.nbDataTypes + " " + Messages.getString("EditSurvey.70");
+			message = message + Messages.getString("EditSurvey.65") + "  OK - "
+					+ NemoLists.nbDataTypes + " "
+					+ Messages.getString("EditSurvey.70");
 		} else {
-			message = message + Messages.getString("EditSurvey.65")
-					+ "  " + Messages.getString("EditSurvey.71");
+			message = message + Messages.getString("EditSurvey.65") + "  "
+					+ Messages.getString("EditSurvey.71");
 		}
 
 		if (NemoLists.okParameters) {
-			message = message + Messages.getString("EditSurvey.66") 
-					+ "  OK - " + NemoLists.nbParameters + " " + Messages.getString("EditSurvey.70");
+			message = message + Messages.getString("EditSurvey.66") + "  OK - "
+					+ NemoLists.nbParameters + " "
+					+ Messages.getString("EditSurvey.70");
 		} else {
-			message = message + Messages.getString("EditSurvey.66")
-					+ "  " + Messages.getString("EditSurvey.71");
+			message = message + Messages.getString("EditSurvey.66") + "  "
+					+ Messages.getString("EditSurvey.71");
 		}
 
 		if (NemoLists.okRegions) {
-			message = message + Messages.getString("EditSurvey.67")
-					+ "  OK - " + NemoLists.nbRegions + " " + Messages.getString("EditSurvey.70");
+			message = message + Messages.getString("EditSurvey.67") + "  OK - "
+					+ NemoLists.nbRegions + " "
+					+ Messages.getString("EditSurvey.70");
 		} else {
-			message = message + Messages.getString("EditSurvey.67")
-					+ "  " + Messages.getString("EditSurvey.71");
+			message = message + Messages.getString("EditSurvey.67") + "  "
+					+ Messages.getString("EditSurvey.71");
 		}
 
 		if (NemoLists.okShips) {
-			message = message + Messages.getString("EditSurvey.68") 
-					+ "  OK - " + NemoLists.nbShips + " " + Messages.getString("EditSurvey.70");
+			message = message + Messages.getString("EditSurvey.68") + "  OK - "
+					+ NemoLists.nbShips + " "
+					+ Messages.getString("EditSurvey.70");
 		} else {
-			message = message + Messages.getString("EditSurvey.68")
-					+ "  " + Messages.getString("EditSurvey.71");
+			message = message + Messages.getString("EditSurvey.68") + "  "
+					+ Messages.getString("EditSurvey.71");
 		}
 
 		if (NemoLists.okSurveys) {
-			message = message + Messages.getString("EditSurvey.69") 
-					+ "  OK - " + NemoLists.nbSurveys + " " + Messages.getString("EditSurvey.70");
+			message = message + Messages.getString("EditSurvey.69") + "  OK - "
+					+ NemoLists.nbSurveys + " "
+					+ Messages.getString("EditSurvey.70");
 		} else {
-			message = message + Messages.getString("EditSurvey.69")
-					+ "  " + Messages.getString("EditSurvey.71");
+			message = message + Messages.getString("EditSurvey.69") + "  "
+					+ Messages.getString("EditSurvey.71");
 		}
 
 		MessageDialog.openInformation(shell, "WebServices Info", message);
@@ -576,7 +628,7 @@ public class EditSurvey {
 				e.printStackTrace();
 			}
 
-		} 
+		}
 
 		// mise à jour de l'onglet courant
 		majApresWS();
@@ -585,8 +637,8 @@ public class EditSurvey {
 	public static void majApresWS() {
 
 		Survey survey;
-		String refLite="", refComplete="";
-		
+		String refLite = "", refComplete = "";
+
 		if (ViewFile.dossierCampagne) {
 			survey = DataModel.dirSurvey.getModel();
 		} else {
@@ -598,9 +650,9 @@ public class EditSurvey {
 		// injection des valeurs de l'IHM -> datamodel
 		// référence
 		if (survey.getReference() != null) {
-			
+
 			EditSurvey.textCampagne.setText(survey.getReference());
-						
+
 		}
 		if (survey.getName() != null) {
 			EditSurvey.textNom.setText(survey.getName());
@@ -653,20 +705,21 @@ public class EditSurvey {
 		// Centre d'archivage
 		if (survey.getDataCentre() != null) {
 			EditSurvey.textCentre.setText(survey.getDataCentre());
-			
-			//sélection dans la comboList
+
+			// sélection dans la comboList
 			int taille = DataModel.listeWSCenters.length;
 			int index = 0;
-			for (int i=0;i<taille;i++){
-				if (DataModel.listeWSCenters[i].getCode().matches(survey.getDataCentre())){
+			for (int i = 0; i < taille; i++) {
+				if (DataModel.listeWSCenters[i].getCode().matches(
+						survey.getDataCentre())) {
 					index = i;
 					break;
 				}
-				
+
 			}
-			
+
 			EditSurvey.comboDataCentres.select(index);
-			
+
 		}
 
 		if (survey.getAvailabilityCode() != null) {
@@ -929,8 +982,7 @@ public class EditSurvey {
 			comboDataCentres.add(DataModel.listeWSCenters[i].getCode() + " - "
 					+ DataModel.listeWSCenters[i].getName());
 		}
-		
-		
+
 	}
 
 	public static void initListeType() {

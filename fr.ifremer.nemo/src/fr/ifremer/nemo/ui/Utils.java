@@ -213,15 +213,15 @@ public class Utils {
 		}
 	}
 	
-	public static void test(Text test, StyledText styledtext, Text debut, Text fin) {
+	public static void test(Text test, StyledText styledtext, Text ligne, Text debut, Text fin) {
 		int deb, fi;
 
 		/*// on récupère les coordonnées de la sélection
 		deb = styledtext.getSelection().x;
 		fi = styledtext.getSelection().y;*/
 		
-		deb = Integer.parseInt(debut.getText());
-		fi = Integer.parseInt(fin.getText());
+		deb = Integer.parseInt(debut.getText()) + taillesCumLignes[Integer.parseInt(ligne.getText()) - 1];
+		fi = Integer.parseInt(fin.getText()) + taillesCumLignes[Integer.parseInt(ligne.getText()) - 1];
 
 		styledtext.setSelection(deb-1, fi);
 		
@@ -310,7 +310,6 @@ public class Utils {
 			Utils.messageErreur(Messages.getString("Utils.26"));
 
 		} else {
-
 			// calcul ligne depart
 			for (int i = 0; i < lignesBrutes.size(); i++) {
 
@@ -329,9 +328,8 @@ public class Utils {
 				}
 
 			}
-
+			
 			// calcul ligne fin
-
 			for (int i = 0; i < lignesBrutes.size(); i++) {
 
 				if (cursor.getY() == taillesCumLignes[i]) {
@@ -436,7 +434,7 @@ public class Utils {
 		ligneFin = frag.getLastLine();
 		offsetDebut = frag.getFirstCharOffset();
 		offsetFin = frag.getLastCharOffset();
-
+		
 		cursor.setX(taillesCumLignes[ligneDebut - 1] + offsetDebut);
 		cursor.setY(taillesCumLignes[ligneFin - 1] + offsetFin);
 
@@ -459,9 +457,16 @@ public class Utils {
 		} else {
 			frag.setFirstCharOffset(offsetDebut);
 		}
+		
 		if (offsetFin > 0) {
 			frag.setLastCharOffset(offsetFin);
 		}
+		
+		/*if (EditStation.buttonVar.getSelection()) {
+			frag.setLastCharOffset(-1);
+		} else {
+			frag.setLastCharOffset(offsetFin);
+		}*/
 
 	}
 
@@ -546,6 +551,7 @@ public class Utils {
 			if (cpt > 0) {
 				cpt = cpt - (nbrelignes - 1);
 			}
+			
 			frag.setLastCharOffset(cpt);
 		}
 
@@ -1152,8 +1158,17 @@ public class Utils {
 		configuration
 				.setNemoWebServiceURL(OptionsAction.textAreaNemo.getText());
 
+		// CDI
+		configuration.setIdEdmoRespCdi(OptionsAction.textIdEdmoRespCdi.getText());
+		configuration.setCodeEdmoDonnées(OptionsAction.textCodeEdmoDonnées.getText());
+		configuration.setIdEdmoRespDonnées(OptionsAction.textIdEdmoRespDonnées.getText());
+		configuration.setIdEdmoDistDonnées(OptionsAction.textIdEdmoDistDonnées.getText());
+		configuration.setCdiURL(OptionsAction.textUrlCdi.getText());
+		configuration.setCdiMethod(OptionsAction.textMethodeCdi.getText());
+		
+		// Enregistrement de la configuration
 		configuration.save();
-
+		
 		// System.out.println("sauvegarde options... ok");
 
 	}

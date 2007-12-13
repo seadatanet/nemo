@@ -19,6 +19,7 @@ import org.eclipse.ui.forms.events.ExpansionAdapter;
 import org.eclipse.ui.forms.events.ExpansionEvent;
 import org.eclipse.ui.forms.widgets.Section;
 
+import fr.ifremer.nemo.input.HeaderFragment;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.Formatter;
@@ -31,7 +32,7 @@ public class DrawingStation {
 
 	public static void sectionManuelLigneDebutFinInject(String nomSection,
 			String description, Section section, Text ligne, Text debut,
-			Text fin, Text manuel, Button radio, Button position) {
+			Text fin, Text manuel, Button radio, Button position, boolean blnManuel) {
 
 		final Text lign, debu, fi;
 		final Button inject;
@@ -169,26 +170,20 @@ public class DrawingStation {
 
 					}
 				});
-
 		
+		/*// par défaut manuel
+		radio.setSelection(true);
+		lign.setEnabled(false);
+		debu.setEnabled(false);
+		fi.setEnabled(false);
+		inject.setEnabled(false);*/
 		
-		if (DataModel.ouverture) {
-			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("offsetTU");
-			
-			boolean blnProvided = propertyModel.isUserProvided();
-			radio.setSelection(blnProvided);
-			lign.setEnabled(!blnProvided);
-			debu.setEnabled(!blnProvided);
-			fi.setEnabled(!blnProvided);
-			inject.setEnabled(!blnProvided);
-		} else {
-			// par défaut manuel
-			radio.setSelection(true);
-			lign.setEnabled(false);
-			debu.setEnabled(false);
-			fi.setEnabled(false);
-			inject.setEnabled(false);
-		}
+		radio.setSelection(blnManuel);
+		manu.setEnabled(!blnManuel);
+		lign.setEnabled(!blnManuel);
+		debu.setEnabled(!blnManuel);
+		fi.setEnabled(!blnManuel);
+		inject.setEnabled(!blnManuel);
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -198,7 +193,7 @@ public class DrawingStation {
 	public static void sectionManuelLigneDebutFinInjectFreqEchant(
 			String nomSection, String description, Section section, Text ligne,
 			Text debut, Text fin, Text manuel, Button radio, Button position,
-			Text conversion, Text testConversion) {
+			Text conversion, Text testConversion, boolean blnManuel) {
 
 		final Text lign, debu, fi, conversio, testConversio;
 		final Button inject;
@@ -377,30 +372,20 @@ public class DrawingStation {
 					}
 				});
 
-		// par défaut manuel
+		/*// par défaut manuel
 		radio.setSelection(true);
 		lign.setEnabled(false);
 		debu.setEnabled(false);
 		fi.setEnabled(false);
-		inject.setEnabled(false);
+		inject.setEnabled(false);*/
 		
-		if (DataModel.ouverture) {
-			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("samplingRate");
-			
-			boolean blnProvided = propertyModel.isUserProvided();
-			radio.setSelection(blnProvided);
-			lign.setEnabled(!blnProvided);
-			debu.setEnabled(!blnProvided);
-			fi.setEnabled(!blnProvided);
-			inject.setEnabled(!blnProvided);
-		} else {
-			// par défaut manuel
-			radio.setSelection(true);
-			lign.setEnabled(false);
-			debu.setEnabled(false);
-			fi.setEnabled(false);
-			inject.setEnabled(false);
-		}
+		radio.setSelection(blnManuel);
+		manu.setEnabled(!blnManuel);
+		lign.setEnabled(!blnManuel);
+		debu.setEnabled(!blnManuel);
+		fi.setEnabled(!blnManuel);
+		inject.setEnabled(!blnManuel);
+		
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -409,7 +394,7 @@ public class DrawingStation {
 
 	public static void sectionIncrementeLigneDebutFinInject(String nomSection,
 			String description, Section section, Text ligne, Text debut,
-			Text fin, Button radio, Button position) {
+			Text fin, Button radio, Button position, boolean blnManuel) {
 
 		// le ppar radio est le pointeur du bouton "incremente"
 		final String nomSec;
@@ -573,9 +558,12 @@ public class DrawingStation {
 						if (EditStation.buttonHeureSaisie.getSelection()) {
 							Utils.test(test, EditStation.textHeureSaisie);
 						} else {
-							Utils.test(test, ViewFile.styledTextStation, debu,
+							Utils.test(test, ViewFile.styledTextStation, lign, debu,
 									fi);
 						}
+						
+						test.setText(test.getText().format("%05d", Integer.parseInt(test.getText().trim())));
+						test.pack();
 					}
 				});
 		
@@ -588,23 +576,13 @@ public class DrawingStation {
 		fi.setEnabled(false);
 		inject.setEnabled(false);*/
 				
-		if (DataModel.ouverture) {
-			PropertyModel propertyModel = DataModel.stationModel_modele.getReferenceProperty();
-			
-			boolean blnProvided = propertyModel.isUserProvided();
-			radio.setSelection(blnProvided);
-			lign.setEnabled(!blnProvided);
-			debu.setEnabled(!blnProvided);
-			fi.setEnabled(!blnProvided);
-			inject.setEnabled(!blnProvided);
-		} else {
-			// saisie manuelle par défaut
-			radio.setSelection(true);
-			lign.setEnabled(false);
-			debu.setEnabled(false);
-			fi.setEnabled(false);
-			inject.setEnabled(false);
-		}
+		
+		radio.setSelection(blnManuel);
+		lign.setEnabled(!blnManuel);
+		debu.setEnabled(!blnManuel);
+		fi.setEnabled(!blnManuel);
+		inject.setEnabled(!blnManuel);
+		
 		
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -648,7 +626,7 @@ public class DrawingStation {
 	public static void sectionHistoriqueAcquisition(String nomSection,
 			String description, Section section, Text ligne1, Text debut1,
 			Text fin1, Text ligne2, Text debut2, Text fin2, Text zone1,
-			Text zone2, Button radio, Button position) {
+			Text zone2, Button radio, Button position, boolean blnManuel) {
 
 		final String nomSec;
 		final Text lign, debu, fi;
@@ -860,37 +838,32 @@ public class DrawingStation {
 				});
 
 		
-		if (DataModel.ouverture) {
-			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("dcHistory1");
-			
-			boolean blnProvided = propertyModel.isUserProvided();
-			radio.setSelection(blnProvided);
-			zon1.setEnabled(blnProvided);
-			zon2.setEnabled(blnProvided);
-			lign1.setEnabled(!blnProvided);
-			debu1.setEnabled(!blnProvided);
-			fi1.setEnabled(!blnProvided);
-			lign2.setEnabled(!blnProvided);
-			debu2.setEnabled(!blnProvided);
-			fi2.setEnabled(!blnProvided);
-			inject1.setEnabled(!blnProvided);
-			inject2.setEnabled(!blnProvided);
-		} else {
-			// par défaut saisie manuelle
-			radio.setSelection(true);
-			zon1.setEnabled(true);
-			zon2.setEnabled(true);
-			// grou.setVisible(false);
-			lign1.setEnabled(false);
-			debu1.setEnabled(false);
-			fi1.setEnabled(false);
-			lign2.setEnabled(false);
-			debu2.setEnabled(false);
-			fi2.setEnabled(false);
+		radio.setSelection(blnManuel);
+		zon1.setEnabled(blnManuel);
+		zon2.setEnabled(blnManuel);
+		lign1.setEnabled(!blnManuel);
+		debu1.setEnabled(!blnManuel);
+		fi1.setEnabled(!blnManuel);
+		lign2.setEnabled(!blnManuel);
+		debu2.setEnabled(!blnManuel);
+		fi2.setEnabled(!blnManuel);
+		inject1.setEnabled(!blnManuel);
+		inject2.setEnabled(!blnManuel);
+		
+		/*// par défaut saisie manuelle
+		radio.setSelection(true);
+		zon1.setEnabled(true);
+		zon2.setEnabled(true);
+		// grou.setVisible(false);
+		lign1.setEnabled(false);
+		debu1.setEnabled(false);
+		fi1.setEnabled(false);
+		lign2.setEnabled(false);
+		debu2.setEnabled(false);
+		fi2.setEnabled(false);
 
-			inject1.setEnabled(false);
-			inject2.setEnabled(false);
-		}
+		inject1.setEnabled(false);
+		inject2.setEnabled(false);*/
 		
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -900,7 +873,7 @@ public class DrawingStation {
 	public static void sectionSurfaceSample(String nomSection,
 			String description, Section section, Text ligne1, Text debut1,
 			Text fin1, Text ligne2, Text debut2, Text fin2, Text zone1,
-			Text zone2, Button radio, Button position) {
+			Text zone2, Button radio, Button position, boolean blnManuel) {
 
 		final String nomSec;
 		final Text lign, debu, fi;
@@ -1113,38 +1086,32 @@ public class DrawingStation {
 				});
 
 		
-		if (DataModel.ouverture) {
-			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("surfaceSamples1");
-			
-			boolean blnProvided = propertyModel.isUserProvided();
-			radio.setSelection(blnProvided);
-			zon1.setEnabled(blnProvided);
-			zon2.setEnabled(blnProvided);
-			lign1.setEnabled(!blnProvided);
-			debu1.setEnabled(!blnProvided);
-			fi1.setEnabled(!blnProvided);
-			lign2.setEnabled(!blnProvided);
-			debu2.setEnabled(!blnProvided);
-			fi2.setEnabled(!blnProvided);
-
-			inject1.setEnabled(!blnProvided);
-			inject2.setEnabled(!blnProvided);
-		} else {
-//			 par défaut saisie manuelle
-			radio.setSelection(true);
-			zon1.setEnabled(true);
-			zon2.setEnabled(true);
-			// grou.setVisible(false);
-			lign1.setEnabled(false);
-			debu1.setEnabled(false);
-			fi1.setEnabled(false);
-			lign2.setEnabled(false);
-			debu2.setEnabled(false);
-			fi2.setEnabled(false);
-
-			inject1.setEnabled(false);
-			inject2.setEnabled(false);
-		}
+		
+		radio.setSelection(blnManuel);
+		zon1.setEnabled(blnManuel);
+		zon2.setEnabled(blnManuel);
+		lign1.setEnabled(!blnManuel);
+		debu1.setEnabled(!blnManuel);
+		fi1.setEnabled(!blnManuel);
+		lign2.setEnabled(!blnManuel);
+		debu2.setEnabled(!blnManuel);
+		fi2.setEnabled(!blnManuel);
+		inject1.setEnabled(!blnManuel);
+		inject2.setEnabled(!blnManuel);
+		
+		/*// par défaut saisie manuelle
+		radio.setSelection(true);
+		zon1.setEnabled(true);
+		zon2.setEnabled(true);
+		// grou.setVisible(false);
+		lign1.setEnabled(false);
+		debu1.setEnabled(false);
+		fi1.setEnabled(false);
+		lign2.setEnabled(false);
+		debu2.setEnabled(false);
+		fi2.setEnabled(false);
+		inject1.setEnabled(false);
+		inject2.setEnabled(false);*/
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -1238,11 +1205,11 @@ public class DrawingStation {
 
 	public static void sectionCommentaireLigneDebutFinInject(String nomSection,
 			String description, Section section, Text ligne, Text debut,
-			Text fin, Text manuel, Button radio, Button position) {
+			Text fin, Text manuel, Button radio, Button position, Button buttonVar, boolean blnManuel) {
 
 		// ppar manuel = zone de commentaire
 		final Text lign, debu, fi;
-		final Button inject;
+		final Button inject, var;
 		final String nomSec;
 		final Text manu;
 
@@ -1328,8 +1295,13 @@ public class DrawingStation {
 		// bouton d'injection de la position des valeurs
 		Button buttonInject = new Button(groupe, SWT.NONE);
 		buttonInject.setText("Injecter");
-		inject = buttonInject;
 		section.setClient(sectionClient);
+		
+		// bouton de fin de ligne variable
+		// buttonVar = new Button(groupe, SWT.CHECK);
+		buttonVar.setText("Var");
+		buttonVar.setParent(groupe);
+		buttonVar.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// une fois les éléments initialisés, on les passe en static pour y
 		// accéder à
@@ -1337,6 +1309,8 @@ public class DrawingStation {
 		lign = ligne;
 		debu = debut;
 		fi = fin;
+		inject = buttonInject;
+		var = buttonVar;
 
 		// listeners
 
@@ -1354,6 +1328,7 @@ public class DrawingStation {
 						debu.setEnabled(false);
 						fi.setEnabled(false);
 						inject.setEnabled(false);
+						var.setEnabled(false);
 
 					}
 				});
@@ -1380,6 +1355,7 @@ public class DrawingStation {
 						debu.setEnabled(true);
 						fi.setEnabled(true);
 						inject.setEnabled(true);
+						var.setEnabled(true);
 
 					}
 				});
@@ -1401,25 +1377,44 @@ public class DrawingStation {
 					}
 				});
 		
+		// bouton Var
+		buttonVar
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(
+							org.eclipse.swt.events.SelectionEvent g) {
+						fi.setEnabled(!var.getSelection());
+
+					}
+				});
+		
+		
+		radio.setSelection(blnManuel);
+		manu.setEnabled(blnManuel);
+		lign.setEnabled(!blnManuel);
+		debu.setEnabled(!blnManuel);
+		fi.setEnabled(!blnManuel);
+		inject.setEnabled(!blnManuel);
+		var.setEnabled(!blnManuel);
+		
 		if (DataModel.ouverture) {
 			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("comment");
 			
-			boolean blnProvided = propertyModel.isUserProvided();
-			radio.setSelection(blnProvided);
-			manu.setEnabled(blnProvided);
-			lign.setEnabled(!blnProvided);
-			debu.setEnabled(!blnProvided);
-			fi.setEnabled(!blnProvided);
-			inject.setEnabled(!blnProvided);
-		} else {
-			// saisie manuelle par défaut
-			radio.setSelection(true);
-			manu.setEnabled(true);
-			lign.setEnabled(false);
-			debu.setEnabled(false);
-			fi.setEnabled(false);
-			inject.setEnabled(false);
+			if (!propertyModel.isUserProvided()) {
+				HeaderFragment frag = propertyModel.getFragment();
+				
+				fi.setEnabled(!frag.isVariable());
+				
+			}
 		}
+	
+		/*// saisie manuelle par défaut
+		radio.setSelection(true);
+		manu.setEnabled(true);
+		lign.setEnabled(false);
+		debu.setEnabled(false);
+		fi.setEnabled(false);
+		inject.setEnabled(false);
+		var.setEnabled(false);*/
 		
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -1428,7 +1423,7 @@ public class DrawingStation {
 
 	public static void sectionHeure(String nomSection, String description,
 			Section section, Text ligne, Text debut, Text fin,
-			Text heureSaisie, Label label) {
+			Text heureSaisie, Label label, boolean blnManuel) {
 
 		// garder le groupe
 		// virer le second bouton radio !
@@ -1619,10 +1614,10 @@ public class DrawingStation {
 						if (EditStation.buttonHeureSaisie.getSelection()) {
 							Utils.test(test, EditStation.textHeureSaisie);
 						} else {
-							Utils.test(test, ViewFile.styledTextStation, debu, fi);
+							Utils.test(test, ViewFile.styledTextStation, lign, debu, fi);
 						}
 						
-						/*try {
+						try {
 							
 							
 							DateTimeFormat format = new DateTimeFormat(
@@ -1635,36 +1630,33 @@ public class DrawingStation {
 							
 							formatter = Formatter.getSingleton();
 							
-							test.setText(formatter.formatDateTime("hh24:mm", HourLong, "9999"));
+							test.setText(formatter.formatDateTime("hh24mm", HourLong, "9999"));
 							
 							
 						} catch (ParseException e) {
 
 							Utils.messageErreurAppend(Messages
 									.getString("Etape.6")); //$NON-NLS-1$
-						}*/
+						}
 						test.pack();
 						
 					}
 				});
 		
-		if (DataModel.ouverture) {
-			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("time");
-			
-			boolean blnProvided = propertyModel.isUserProvided();
-			EditStation.buttonHeureSaisie.setSelection(blnProvided);
-			lign.setEnabled(!blnProvided);
-			debu.setEnabled(!blnProvided);
-			fi.setEnabled(!blnProvided);
-			inject.setEnabled(!blnProvided);
-		} else {
-			// par défaut manuel
-			EditStation.buttonHeureSaisie.setSelection(true);
-			lign.setEnabled(false);
-			debu.setEnabled(false);
-			fi.setEnabled(false);
-			inject.setEnabled(false);
-		}
+		
+		EditStation.buttonHeureSaisie.setSelection(blnManuel);
+		EditStation.textHeureSaisie.setEnabled(blnManuel);
+		lign.setEnabled(!blnManuel);
+		debu.setEnabled(!blnManuel);
+		fi.setEnabled(!blnManuel);
+		inject.setEnabled(!blnManuel);
+	
+		/*// par défaut manuel
+		EditStation.buttonHeureSaisie.setSelection(true);
+		lign.setEnabled(false);
+		debu.setEnabled(false);
+		fi.setEnabled(false);
+		inject.setEnabled(false);*/
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -1673,7 +1665,7 @@ public class DrawingStation {
 
 	public static void sectionDate(String nomSection, String description,
 			Section section, Text ligne, Text debut, Text fin, Text dateSaisie,
-			Label label) {
+			Label label, boolean blnManuel) {
 
 		// garder le groupe
 		// virer le second bouton radio !
@@ -1873,30 +1865,46 @@ public class DrawingStation {
 						if (EditStation.buttonHeureSaisie.getSelection()) {
 							Utils.test(test, EditStation.textHeureSaisie);
 						} else {
-							Utils.test(test, ViewFile.styledTextStation, debu, fi);
+							Utils.test(test, ViewFile.styledTextStation, lign, debu, fi);
 						}
 						
+						try {
+							DateTimeFormat format = new DateTimeFormat(
+									EditStation.comboDate.getText());
+							
+							Long DateLong = (Long) format
+									.parseObject(test.getText());
+							
+							Formatter formatter;
+							
+							formatter = Formatter.getSingleton();
+							
+							test.setText(formatter.formatDateTime("ddMMyyyy", DateLong));
+							
+							
+						} catch (ParseException e) {
+
+							Utils.messageErreurAppend(Messages
+									.getString("Etape.6")); //$NON-NLS-1$
+						}
 						test.pack();
 					}
 				});
 		
-		if (DataModel.ouverture) {
-			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("date");
-			
-			boolean blnProvided = propertyModel.isUserProvided();
-			EditStation.buttonDateSaisie.setSelection(blnProvided);
-			lign.setEnabled(!blnProvided);
-			debu.setEnabled(!blnProvided);
-			fi.setEnabled(!blnProvided);
-			inject.setEnabled(!blnProvided);
-		} else {
-			// par défaut manuel
-			EditStation.buttonDateSaisie.setSelection(true);
-			lign.setEnabled(false);
-			debu.setEnabled(false);
-			fi.setEnabled(false);
-			inject.setEnabled(false);
-		}
+		
+		EditStation.buttonDateSaisie.setSelection(blnManuel);
+		EditStation.textDateSaisie.setEnabled(blnManuel);
+		lign.setEnabled(!blnManuel);
+		debu.setEnabled(!blnManuel);
+		fi.setEnabled(!blnManuel);
+		inject.setEnabled(!blnManuel);
+	
+		/*// par défaut manuel
+		EditStation.buttonDateSaisie.setSelection(true);
+		lign.setEnabled(false);
+		debu.setEnabled(false);
+		fi.setEnabled(false);
+		inject.setEnabled(false);*/
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -1906,11 +1914,12 @@ public class DrawingStation {
 	public static void sectionManuelLigneDebutFinInjectLatLongComboFormat(
 			String nomSection, String description, Section section, Text ligne,
 			Text debut, Text fin, Text manuel, Button radio, Combo combo,
-			Button position) {
+			Button position, boolean blnManuel, boolean blnLatitude) {
 		final String nomSec;
 		final Text manu;
 		final Text lign, debu, fi, test;
 		final Button inject;
+		final boolean latitude;
 
 		nomSec = nomSection;
 		manu = manuel;
@@ -2011,6 +2020,7 @@ public class DrawingStation {
 		debu = debut;
 		fi = fin;
 		test = txtTest;
+		latitude = blnLatitude;
 
 		// listeners
 
@@ -2076,12 +2086,52 @@ public class DrawingStation {
 						if (EditStation.buttonHeureSaisie.getSelection()) {
 							Utils.test(test, EditStation.textHeureSaisie);
 						} else {
-							Utils.test(test, ViewFile.styledTextStation, debu, fi);
+							Utils.test(test, ViewFile.styledTextStation, lign, debu, fi);
 						}
 						
+						try {
+							if (latitude) {
+								fr.ifremer.nemo.util.LatitudeFormat format = new fr.ifremer.nemo.util.LatitudeFormat(
+										EditStation.comboLatitude.getText());
+								
+								Double latitudeDouble = (Double) format
+										.parseObject(test.getText());
+								
+								Formatter formatter;
+								
+								formatter = Formatter.getSingleton();
+								
+								test.setText(formatter.formatLatitude("NDD MM.mm", latitudeDouble));
+								
+							} else {
+								fr.ifremer.nemo.util.LongitudeFormat format = new fr.ifremer.nemo.util.LongitudeFormat(
+										EditStation.comboLongitude.getText());
+								
+								Double longitudeDouble = (Double) format
+										.parseObject(test.getText());
+								
+								Formatter formatter;
+								
+								formatter = Formatter.getSingleton();
+								
+								test.setText(formatter.formatLongitude("NDDD MM.mm", longitudeDouble));
+							}	
+							
+						} catch (ParseException e) {
+
+							Utils.messageErreurAppend(Messages
+									.getString("Etape.6")); //$NON-NLS-1$
+						}
 						test.pack();
 					}
 				});
+		
+		radio.setSelection(blnManuel);
+		manu.setEnabled(blnManuel);
+		lign.setEnabled(!blnManuel);
+		debu.setEnabled(!blnManuel);
+		fi.setEnabled(!blnManuel);
+		inject.setEnabled(!blnManuel);
 
 		/*// saisie manuelle par défaut
 		radio.setSelection(true);
@@ -2090,24 +2140,6 @@ public class DrawingStation {
 		fi.setEnabled(false);
 		inject.setEnabled(false);*/
 		
-		if (DataModel.ouverture) {
-			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("latitude");
-			
-			boolean blnProvided = propertyModel.isUserProvided();
-			radio.setSelection(blnProvided);
-			lign.setEnabled(!blnProvided);
-			debu.setEnabled(!blnProvided);
-			fi.setEnabled(!blnProvided);
-			inject.setEnabled(!blnProvided);
-		} else {
-			// par défaut manuel
-			radio.setSelection(true);
-			lign.setEnabled(false);
-			debu.setEnabled(false);
-			fi.setEnabled(false);
-			inject.setEnabled(false);
-		}
-
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
 
@@ -2115,7 +2147,7 @@ public class DrawingStation {
 
 	public static void sectionManuelLigneDebutFinInjectLatLongFin(
 			String nomSection, String description, Section section, Text ligne,
-			Text debut, Text fin, Text manuel, Button radio, Button position) {
+			Text debut, Text fin, Text manuel, Button radio, Button position, boolean blnManuel) {
 		final String nomSec;
 		final Text manu;
 		final Text lign, debu, fi, test;
@@ -2272,7 +2304,7 @@ public class DrawingStation {
 						if (EditStation.buttonHeureSaisie.getSelection()) {
 							Utils.test(test, EditStation.textHeureSaisie);
 						} else {
-							Utils.test(test, ViewFile.styledTextStation, debu, fi);
+							Utils.test(test, ViewFile.styledTextStation, lign, debu, fi);
 						}
 						
 						test.pack();
@@ -2286,23 +2318,12 @@ public class DrawingStation {
 		fi.setEnabled(false);
 		inject.setEnabled(false);*/
 		
-		if (DataModel.ouverture) {
-			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("longitude");
-			
-			boolean blnProvided = propertyModel.isUserProvided();
-			radio.setSelection(blnProvided);
-			lign.setEnabled(!blnProvided);
-			debu.setEnabled(!blnProvided);
-			fi.setEnabled(!blnProvided);
-			inject.setEnabled(!blnProvided);
-		} else {
-			// par défaut manuel
-			radio.setSelection(true);
-			lign.setEnabled(false);
-			debu.setEnabled(false);
-			fi.setEnabled(false);
-			inject.setEnabled(false);
-		}
+		radio.setSelection(blnManuel);
+		manu.setEnabled(blnManuel);
+		lign.setEnabled(!blnManuel);
+		debu.setEnabled(!blnManuel);
+		fi.setEnabled(!blnManuel);
+		inject.setEnabled(!blnManuel);
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -2316,7 +2337,7 @@ public class DrawingStation {
 
 	}
 
-	public static void sectionDateQC(String nomSection, String description,
+	public static void sectionQC(String nomSection, String description,
 			Section section) {
 
 		section.setParent(ViewEdit.formEdition);

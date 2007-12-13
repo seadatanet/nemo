@@ -32,15 +32,20 @@ public class OptionsAction extends Action implements ISelectionListener,
 	public static Composite top, compoHaut, compoLCD, compoBouton = null;
 	
 	public static Group groupLangue, groupCentreDonnees, groupWS, 
-			groupDossier, groupDossier1, groupDossier2 = null;
+			groupDossier, groupDossier1, groupDossier2, groupCDI = null;
 
 	public static Combo comboLangue, comboCentreDonnees = null;
 
-	public static Button buttonCancel, buttonValider, buttonParcourirModèle, buttonParcourirCampagne = null;
+	public static Button buttonCancel, buttonValider, buttonParcourirModèle,
+			buttonParcourirCampagne = null;
 
-	public static Label labelNemo, labelNautilus, labelModèle, labelCampagne = null;
+	public static Label labelNemo, labelNautilus, labelModèle, labelCampagne,
+			labelIdEdmoRespCdi, labelUrlCdi, labelMethodeCdi,
+			labelCodeEdmoDonnées, labelIdEdmoRespDonnées, labelIdEdmoDistDonnées = null;
 
-	public static Text textAreaNemo, textAreaNautilus, textDossierModèle, textDossierCampagne = null;
+	public static Text textAreaNemo, textAreaNautilus, textDossierModèle, textDossierCampagne, 
+			textIdEdmoRespCdi, textUrlCdi, textMethodeCdi,
+			textCodeEdmoDonnées, textIdEdmoRespDonnées, textIdEdmoDistDonnées = null;
 
 	public final static String ID = "fr.ifremer.nemo.ui.OptionsAction"; //$NON-NLS-1$
 
@@ -71,7 +76,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		shelloptions = new Shell(Application.display, SWT.BORDER | SWT.TITLE
 				| SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);
 
-		shelloptions.setSize(600, 300);
+		shelloptions.setSize(600, 500);
 		shelloptions.setText(Messages.getString("OptionsAction.3")); //$NON-NLS-1$
 		shelloptions.setLayout(new GridLayout());
 		
@@ -124,6 +129,14 @@ public class OptionsAction extends Action implements ISelectionListener,
 		textAreaNemo.setText(Utils.configuration.getNemoWebServiceURL());
 		textAreaNautilus
 				.setText(Utils.configuration.getNautilusWebServiceURL());
+		
+		// CDI
+		textIdEdmoRespCdi.setText(Utils.configuration.getIdEdmoRespCdi());
+		textCodeEdmoDonnées.setText(Utils.configuration.getCodeEdmoDonnées());
+		textIdEdmoRespDonnées.setText(Utils.configuration.getIdEdmoRespDonnées());
+		textIdEdmoDistDonnées.setText(Utils.configuration.getIdEdmoDistDonnées());
+		textUrlCdi.setText(Utils.configuration.getCdiURL());
+		textMethodeCdi.setText(Utils.configuration.getCdiMethod());
 
 	}
 
@@ -369,6 +382,61 @@ public class OptionsAction extends Action implements ISelectionListener,
 //		textAreaNautilus.setBounds(new Rectangle(85, 82, 316, 55));
 		GridDataFactory.fillDefaults().grab(true,true).applyTo(textAreaNautilus);
 	}
+	
+	/**
+	 * This method initializes groupCDI
+	 * 
+	 */
+	private void createGroupCDI() {
+		groupCDI = new Group(top, SWT.NONE);
+		groupCDI.setText("CDI");
+
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(groupCDI);
+		GridDataFactory.fillDefaults().grab(true,true).applyTo(groupCDI);
+		
+		labelIdEdmoRespCdi = new Label(groupCDI, SWT.NONE);
+		labelIdEdmoRespCdi.setText(Messages.getString("OptionsAction.21"));
+		labelIdEdmoRespCdi.pack();
+		
+		textIdEdmoRespCdi = new Text(groupCDI, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textIdEdmoRespCdi);
+		
+		labelCodeEdmoDonnées = new Label(groupCDI, SWT.NONE);
+		labelCodeEdmoDonnées.setText(Messages.getString("OptionsAction.24"));
+		labelCodeEdmoDonnées.pack();
+		
+		textCodeEdmoDonnées = new Text(groupCDI, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textCodeEdmoDonnées);
+		
+		labelIdEdmoRespDonnées = new Label(groupCDI, SWT.NONE);
+		labelIdEdmoRespDonnées.setText(Messages.getString("OptionsAction.25"));
+		labelIdEdmoRespDonnées.pack();
+		
+		textIdEdmoRespDonnées = new Text(groupCDI, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textIdEdmoRespDonnées);
+		
+		labelIdEdmoDistDonnées = new Label(groupCDI, SWT.NONE);
+		labelIdEdmoDistDonnées.setText(Messages.getString("OptionsAction.26"));
+		labelIdEdmoDistDonnées.pack();
+		
+		textIdEdmoDistDonnées = new Text(groupCDI, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textIdEdmoDistDonnées);
+		
+		labelUrlCdi = new Label(groupCDI, SWT.NONE);
+		labelUrlCdi.setText(Messages.getString("OptionsAction.22"));
+		labelUrlCdi.pack();
+		
+		textUrlCdi = new Text(groupCDI, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textUrlCdi);
+		
+		labelMethodeCdi = new Label(groupCDI, SWT.NONE);
+		labelMethodeCdi.setText(Messages.getString("OptionsAction.23"));
+		labelMethodeCdi.pack();
+		
+		textMethodeCdi = new Text(groupCDI, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textMethodeCdi);
+		
+	}
 
 	public void createPartControl(Composite parent) {
 
@@ -382,6 +450,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		createGroupDossier();*/
 		createCompoHaut();
 		createGroupWS();
+		createGroupCDI();
 		createCompoBouton();
 		/*buttonCancel = new Button(top, SWT.NONE);
 //		buttonCancel.setBounds(new Rectangle(224, 333, 69, 23)); // 66

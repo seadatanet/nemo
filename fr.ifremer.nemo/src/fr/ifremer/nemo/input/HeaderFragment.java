@@ -9,7 +9,7 @@ import org.xml.sax.SAXException;
  * Class HeaderFragment
  * 
  * Représente un fragment du fichier d'entrée. Le fragment est définit par une
- * position de début et de fin. comme illsutré ci-dessous | | | v début | | |
+ * position de début et de fin. comme illustré ci-dessous | | | v début | | |
  * XXXXXXXXXXXXXX| | XXXXXXXXXXXXXXXXX| | XXXXXXXXXXXXXXXXX| | XXXXXXXXXXXX| | | ^
  * fin | | |
  * 
@@ -40,6 +40,11 @@ public class HeaderFragment implements Cloneable, SAXConsumer {
 	protected int _lastLine;
 
 	protected boolean _singleLine;
+	
+	/**
+	 * Indique si la longueur de la derniere ligne est variable
+	 */
+	protected boolean _variable;
 
 	public HeaderFragment() {
 		_firstCharOffset = 1;
@@ -47,6 +52,7 @@ public class HeaderFragment implements Cloneable, SAXConsumer {
 		_lastCharOffset = 1;
 		_lastLine = 1;
 		_singleLine = false;
+		_variable = false;
 	}
 
 	/**
@@ -91,6 +97,9 @@ public class HeaderFragment implements Cloneable, SAXConsumer {
 		if ((tmp = a_Attributes.getValue("isSingleLine")) != null) {
 			setSingleLine(tmp);
 		}
+		if ((tmp = a_Attributes.getValue("isVariable")) != null) {
+			setVariable(tmp);
+		}
 	}
 
 	/**
@@ -126,6 +135,10 @@ public class HeaderFragment implements Cloneable, SAXConsumer {
 			Element2Field setter = new Element2Field(this, "setLastCharOffset");
 			return setter;
 		}
+		if (a_LocalName.equals("variable")) {
+			Element2Field setter = new Element2Field(this, "setVariable");
+			return setter;
+		}
 		return null;
 	}
 
@@ -150,6 +163,7 @@ public class HeaderFragment implements Cloneable, SAXConsumer {
 	 */
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
 		a_Writer.putAttribute("isSingleLine", isSingleLine());
+		a_Writer.putAttribute("isVariable", isVariable());
 		a_Writer.putTag("firstLine", getFirstLine());
 		a_Writer.putTag("lastLine", getLastLine());
 		a_Writer.putTag("firstCharOffset", getFirstCharOffset());
@@ -365,6 +379,38 @@ public class HeaderFragment implements Cloneable, SAXConsumer {
 	public void setSingleLine(String a_String) {
 		setSingleLine(new Boolean(a_String).booleanValue());
 	}
+	
+	/**
+	 * Read accessor (getter) for attribute _variable
+	 * 
+	 * @return boolean
+	 * @see HeaderFragment#_variable
+	 */
+	public boolean isVariable() {
+		return _variable;
+	}
+	
+	/**
+	 * Write accessor (setter) for attribute _variable
+	 * 
+	 * @param x
+	 *            new value for _variable
+	 * @see HeaderFragment#_variable
+	 */
+	public void setVariable(boolean x) {
+		_variable = x;
+	}
+	
+	/**
+	 * Write accessor (setter) for attribute _variable
+	 * 
+	 * @param a_String
+	 *            new value for _variable as String
+	 * @see HeaderFragment#_variable
+	 */
+	public void setVariable(String a_String) {
+		setVariable(new Boolean(a_String).booleanValue());
+	}
 
 	/**
 	 * 
@@ -373,7 +419,7 @@ public class HeaderFragment implements Cloneable, SAXConsumer {
 	 */
 	public String retreive(String[] a_Header) {
 		if (_firstLine == 0) {
-			if (_lastCharOffset == -1) {
+			if (_lastCharOffset == -1 || _variable == true) {
 				// return a_Header[0].substring( _firstCharOffset-1 ).trim();
 				return a_Header[0].substring(_firstCharOffset - 1);
 			} else {
@@ -392,14 +438,16 @@ public class HeaderFragment implements Cloneable, SAXConsumer {
 			for (int i = _firstLine - 1; i < _lastLine; i++) {
 				int start = 0;
 				int end = -1;
+				
 				if (i == _firstLine - 1) {
 					start = _firstCharOffset - 1;
 				}
 				if (i == _lastLine - 1) {
-					if (_lastCharOffset != -1) {
+					if (_lastCharOffset != -1 && _variable == false) {
 						end = _lastCharOffset - 1;
 					}
 				}
+					
 				if (end == -1) {
 					// writer.println( a_Header[i].substring( start ).trim());
 					writer.println(a_Header[i].substring(start));
@@ -408,6 +456,7 @@ public class HeaderFragment implements Cloneable, SAXConsumer {
 					// ).trim());
 					writer.println(a_Header[i].substring(start, end + 1));
 				}
+				
 			}
 			// return stringWriter.toString().trim();
 			return stringWriter.toString();

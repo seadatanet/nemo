@@ -255,8 +255,10 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 
 		typeTable[(int) '.'] = DOT;
 		typeTable[(int) 'y'] = XYEAR;
+		typeTable[(int) 'Y'] = XYEAR;		
 		typeTable[(int) 'M'] = XMONTH;
 		typeTable[(int) 'd'] = XDAY;
+		typeTable[(int) 'D'] = XDAY;
 		typeTable[(int) 'h'] = XHOUR;
 		typeTable[(int) 'm'] = XMINUTE;
 		typeTable[(int) 's'] = XSECOND;

@@ -16,6 +16,7 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
 import fr.ifremer.nemo.domain.DataType;
+import fr.ifremer.nemo.input.PropertyModel;
 
 public class EditStation {
 	// fonctions de remplissage de la zone d'édition pour les campagnes
@@ -57,7 +58,7 @@ public class EditStation {
 			buttonExpand2, buttonRefStationIncremente,
 			buttonHistoriqueAcqSaisie, buttonSurfaceSaisie, buttonTUSaisie,
 			buttonLatSaisie, buttonLongSaisie, buttonProfondeurSaisie,
-			buttonCommentaireSaisie;
+			buttonCommentaireSaisie, buttonVar;
 
 	public static Button buttonHistoriqueAcqPos, buttonRefStationPos,
 			buttonSurfacePos, buttonLatPos, buttonLongPos,
@@ -183,46 +184,90 @@ public class EditStation {
 		formEdition.reflow(true);
 
 		// initialisation liste des sections de la partie description fichier
-
+		boolean blnModeleOuvert = DataModel.ouverture;
+		boolean blnManuel = true;
+		
 		// section reference station
+		blnManuel = true;
+		if (blnModeleOuvert) {
+			PropertyModel propertyModel = DataModel.stationModel_modele.getReferenceProperty();
+			blnManuel = propertyModel.isUserProvided();
+		}
+		
 		DrawingStation
 				.sectionIncrementeLigneDebutFinInject(
-						Messages.getString("EditStation.5"), Messages.getString("EditStation.6"), EditStation.sectionStation, textRefStationLigne, textRefStationDebut, textRefStationFin, buttonRefStationIncremente, buttonRefStationPos); //$NON-NLS-1$ //$NON-NLS-2$
+						Messages.getString("EditStation.5"), Messages.getString("EditStation.6"), EditStation.sectionStation, textRefStationLigne, textRefStationDebut, textRefStationFin, buttonRefStationIncremente, buttonRefStationPos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 
 		// section reference type de données
 		DrawingStation.sectionTypeDonnees(sectionTypeDonnees, Messages
 				.getString("EditStation.0"));
 
 		// section historique acquisition
+		blnManuel = true;
+		if (blnModeleOuvert) {
+			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("dcHistory1");
+			blnManuel = propertyModel.isUserProvided();
+		}
+		
 		DrawingStation
 				.sectionHistoriqueAcquisition(
-						Messages.getString("EditStation.7"), Messages.getString("EditStation.8"), sectionHistorique, textHistoriqueAcqLigne1, textHistoriqueAcqDebut1, textHistoriqueAcqFin1, textHistoriqueAcqLigne2, textHistoriqueAcqDebut2, textHistoriqueAcqFin2, textHistorique1, textHistorique2, buttonHistoriqueAcqSaisie, buttonHistoriqueAcqPos); //$NON-NLS-1$ //$NON-NLS-2$
+						Messages.getString("EditStation.7"), Messages.getString("EditStation.8"), sectionHistorique, textHistoriqueAcqLigne1, textHistoriqueAcqDebut1, textHistoriqueAcqFin1, textHistoriqueAcqLigne2, textHistoriqueAcqDebut2, textHistoriqueAcqFin2, textHistorique1, textHistorique2, buttonHistoriqueAcqSaisie, buttonHistoriqueAcqPos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 
 		// section commentaire
+		blnManuel = true;
+		if (blnModeleOuvert) {
+			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("comment");
+			blnManuel = propertyModel.isUserProvided();
+		}
+		
 		DrawingStation
 				.sectionCommentaireLigneDebutFinInject(
-						Messages.getString("EditStation.9"), Messages.getString("EditStation.10"), sectionCommentaire, textCommentaireLigne, textCommentaireDebut, textCommentaireFin, textCommentaire, buttonCommentaireSaisie, buttonCommentairePos); //$NON-NLS-1$ //$NON-NLS-2$
+						Messages.getString("EditStation.9"), Messages.getString("EditStation.10"), sectionCommentaire, textCommentaireLigne, textCommentaireDebut, textCommentaireFin, textCommentaire, buttonCommentaireSaisie, buttonCommentairePos, buttonVar, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 
 		// section surface sample : identique à historique acquisition
+		blnManuel = true;
+		if (blnModeleOuvert) {
+			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("surfaceSamples1");
+			blnManuel = propertyModel.isUserProvided();
+		}
+		
 		DrawingStation
 				.sectionSurfaceSample(
-						Messages.getString("EditStation.11"), Messages.getString("EditStation.12"), sectionSurface, textSurfaceLigne1, textSurfaceDebut1, textSurfaceFin1, textSurfaceLigne2, textSurfaceDebut2, textSurfaceFin2, textSurface1, textSurface2, buttonSurfaceSaisie, buttonSurfacePos); //$NON-NLS-1$ //$NON-NLS-2$
+						Messages.getString("EditStation.11"), Messages.getString("EditStation.12"), sectionSurface, textSurfaceLigne1, textSurfaceDebut1, textSurfaceFin1, textSurfaceLigne2, textSurfaceDebut2, textSurfaceFin2, textSurface1, textSurface2, buttonSurfaceSaisie, buttonSurfacePos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 
 		// section décallage TU
+		blnManuel = true;
+		if (blnModeleOuvert) {
+			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("offsetTU");
+			blnManuel = propertyModel.isUserProvided();
+		}
+		
 		DrawingStation.sectionManuelLigneDebutFinInject(Messages
 				.getString("EditStation.86"), "", sectionTU, textTULigne,
-				textTUDebut, textTUFin, textTU, buttonTUSaisie, buttonTUPos);
+				textTUDebut, textTUFin, textTU, buttonTUSaisie, buttonTUPos, blnManuel);
 		textTU.setText("0.0");
 
 		// section heure
+		blnManuel = true;
+		if (blnModeleOuvert) {
+			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("time");
+			blnManuel = propertyModel.isUserProvided();
+		}
+		
 		DrawingStation
 				.sectionHeure(
-						Messages.getString("EditStation.13"), Messages.getString("EditStation.14"), sectionHeure, textHeureLigne, textHeureDebut, textHeureFin, textHeureSaisie, labelConversionHeure); //$NON-NLS-1$ //$NON-NLS-2$
+						Messages.getString("EditStation.13"), Messages.getString("EditStation.14"), sectionHeure, textHeureLigne, textHeureDebut, textHeureFin, textHeureSaisie, labelConversionHeure, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 
 		// section date
+		blnManuel = true;
+		if (blnModeleOuvert) {
+			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("date");
+			blnManuel = propertyModel.isUserProvided();
+		}
+		
 		DrawingStation
 				.sectionDate(
-						Messages.getString("EditStation.15"), Messages.getString("EditStation.16"), sectionDate, textDateLigne, textDateDebut, textDateFin, textDateSaisie, labelConversionDate); //$NON-NLS-1$ //$NON-NLS-2$
+						Messages.getString("EditStation.15"), Messages.getString("EditStation.16"), sectionDate, textDateLigne, textDateDebut, textDateFin, textDateSaisie, labelConversionDate, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 
 		// flags QC
 		// DrawingStation.sectionDateQC(Messages.getString("EditStation.17"),
@@ -230,55 +275,110 @@ public class EditStation {
 		// //$NON-NLS-2$
 
 		// section Latitude
+		blnManuel = true;
+		if (blnModeleOuvert) {
+			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("latitude");
+			blnManuel = propertyModel.isUserProvided();
+		}
+		
 		DrawingStation
 				.sectionManuelLigneDebutFinInjectLatLongComboFormat(
-						Messages.getString("EditStation.19"), Messages.getString("EditStation.20"), sectionLatitude, textLatitudeLigne, textLatitudeDebut, textLatitudeFin, textLatitude, buttonLatSaisie, comboLatitude, buttonLatPos); //$NON-NLS-1$ //$NON-NLS-2$
+						Messages.getString("EditStation.19"), Messages.getString("EditStation.20"), sectionLatitude, textLatitudeLigne, textLatitudeDebut, textLatitudeFin, textLatitude, buttonLatSaisie, comboLatitude, buttonLatPos, blnManuel, true); //$NON-NLS-1$ //$NON-NLS-2$
 
 		if (ViewFile.checkBoxTempo.getSelection()) {
 			// section latitude de fin
+			blnManuel = true;
+			if (blnModeleOuvert) {
+				PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("endLatitude");
+				blnManuel = propertyModel.isUserProvided();
+			}
+			
 			DrawingStation
 					.sectionManuelLigneDebutFinInjectLatLongFin(
-							Messages.getString("EditStation.21"), "", sectionLatFin, textLatFinLigne, textLatFinDebut, textLatFinFin, textLatFin, buttonLatFinSaisie, buttonLatFinPos); //$NON-NLS-1$ //$NON-NLS-2$
+							Messages.getString("EditStation.21"), "", sectionLatFin, textLatFinLigne, textLatFinDebut, textLatFinFin, textLatFin, buttonLatFinSaisie, buttonLatFinPos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// section longitude
+		blnManuel = true;
+		if (blnModeleOuvert) {
+			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("longitude");
+			blnManuel = propertyModel.isUserProvided();
+		}
+		
 		DrawingStation
 				.sectionManuelLigneDebutFinInjectLatLongComboFormat(
-						Messages.getString("EditStation.23"), Messages.getString("EditStation.24"), sectionLongitude, textLongitudeLigne, textLongitudeDebut, textLongitudeFin, textLongitude, buttonLongSaisie, comboLongitude, buttonLongPos); //$NON-NLS-1$ //$NON-NLS-2$
+						Messages.getString("EditStation.23"), Messages.getString("EditStation.24"), sectionLongitude, textLongitudeLigne, textLongitudeDebut, textLongitudeFin, textLongitude, buttonLongSaisie, comboLongitude, buttonLongPos, blnManuel, false); //$NON-NLS-1$ //$NON-NLS-2$
 
 		if (ViewFile.checkBoxTempo.getSelection()) {
 			// section longitude de fin
+			blnManuel = true;
+			if (blnModeleOuvert) {
+				PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("endLongitude");
+				blnManuel = propertyModel.isUserProvided();
+			}
+			
 			DrawingStation
 					.sectionManuelLigneDebutFinInjectLatLongFin(
-							Messages.getString("EditStation.25"), "", sectionLongFin, textLongFinLigne, textLongFinDebut, textLongFinFin, textLongFin, buttonLongFinSaisie, buttonLongFinPos); //$NON-NLS-1$ //$NON-NLS-2$
+							Messages.getString("EditStation.25"), "", sectionLongFin, textLongFinLigne, textLongFinDebut, textLongFinFin, textLongFin, buttonLongFinSaisie, buttonLongFinPos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// section profondeur
+		blnManuel = true;
+		if (blnModeleOuvert) {
+			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("bottomDepth");
+			blnManuel = propertyModel.isUserProvided();
+		}
+		
 		DrawingStation
 				.sectionManuelLigneDebutFinInject(
-						Messages.getString("EditStation.27"), Messages.getString("EditStation.28"), sectionProfondeur, textProfondeurLigne, textProfondeurDebut, textProfondeurFin, textProfondeur, buttonProfondeurSaisie, buttonProfondeurPos); //$NON-NLS-1$ //$NON-NLS-2$
+						Messages.getString("EditStation.27"), Messages.getString("EditStation.28"), sectionProfondeur, textProfondeurLigne, textProfondeurDebut, textProfondeurFin, textProfondeur, buttonProfondeurSaisie, buttonProfondeurPos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 
 		if (ViewFile.checkBoxTempo.getSelection()) {
 			// section profondeur de fin
+			blnManuel = true;
+			if (blnModeleOuvert) {
+				PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("endDepth");
+				blnManuel = propertyModel.isUserProvided();
+			}
+
 			DrawingStation
 					.sectionManuelLigneDebutFinInject(
-							Messages.getString("EditStation.29"), "", sectionProfFin, textProfFinLigne, textProfFinDebut, textProfFinFin, textProfFin, buttonProfFinSaisie, buttonProfFinPos); //$NON-NLS-1$ //$NON-NLS-2$
+							Messages.getString("EditStation.29"), "", sectionProfFin, textProfFinLigne, textProfFinDebut, textProfFinFin, textProfFin, buttonProfFinSaisie, buttonProfFinPos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 
+			
 			// section profondeur de capteur
+			blnManuel = true;
+			if (blnModeleOuvert) {
+				PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("sensorDepth");
+				blnManuel = propertyModel.isUserProvided();
+			}
 			DrawingStation
 					.sectionManuelLigneDebutFinInject(
-							Messages.getString("EditStation.31"), Messages.getString("EditStation.32"), sectionProfCapteur, textProfCapteurLigne, textProfCapteurDebut, textProfCapteurFin, textProfCapteur, buttonProfCapteurSaisie, buttonProfCapteurPos); //$NON-NLS-1$ //$NON-NLS-2$
+							Messages.getString("EditStation.31"), Messages.getString("EditStation.32"), sectionProfCapteur, textProfCapteurLigne, textProfCapteurDebut, textProfCapteurFin, textProfCapteur, buttonProfCapteurSaisie, buttonProfCapteurPos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 
+
+			
 			// section déclinaison magnétique
+			blnManuel = true;
+			if (blnModeleOuvert) {
+				PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("magneticDeclination");
+				blnManuel = propertyModel.isUserProvided();
+			}
 			DrawingStation
 					.sectionManuelLigneDebutFinInject(
-							Messages.getString("EditStation.33"), Messages.getString("EditStation.34"), sectionDeclinMagnet, textDeclinMagnetLigne, textDeclinMagnetDebut, textDeclinMagnetFin, textDeclinMagnet, buttonDeclinMagnetSaisie, buttonDeclinMagnetPos); //$NON-NLS-1$ //$NON-NLS-2$
+							Messages.getString("EditStation.33"), Messages.getString("EditStation.34"), sectionDeclinMagnet, textDeclinMagnetLigne, textDeclinMagnetDebut, textDeclinMagnetFin, textDeclinMagnet, buttonDeclinMagnetSaisie, buttonDeclinMagnetPos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 
 			// if (!ViewFile.textTempoHeureRef.getText().matches("")){
 			// section fréquence échantillonnage
+			blnManuel = true;
+			if (blnModeleOuvert) {
+				PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("samplingRate");
+				blnManuel = propertyModel.isUserProvided();
+			}
+			
 			DrawingStation
 					.sectionManuelLigneDebutFinInjectFreqEchant(
-							Messages.getString("EditStation.35"), Messages.getString("EditStation.36"), sectionFreqEchant, textFreqEchantLigne, textFreqEchantDebut, textFreqEchantFin, textFreqEchant, buttonFreqEchantSaisie, buttonFreqEchantPos, textFreqEchantConv, textFreqEchantTest); //$NON-NLS-1$ //$NON-NLS-2$
+							Messages.getString("EditStation.35"), Messages.getString("EditStation.36"), sectionFreqEchant, textFreqEchantLigne, textFreqEchantDebut, textFreqEchantFin, textFreqEchant, buttonFreqEchantSaisie, buttonFreqEchantPos, textFreqEchantConv, textFreqEchantTest, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 			// }
 		}
 
@@ -781,6 +881,8 @@ public class EditStation {
 		listeBoutonsManuel.add(buttonCommentaireSaisie);
 		buttonCommentairePos = new Button(shell, SWT.RADIO);
 		listeBoutonsPos.add(buttonCommentairePos);
+		
+		buttonVar = new Button(shell, SWT.CHECK);
 
 		buttonProfondeurSaisie = new Button(shell, SWT.RADIO);
 		listeBoutonsManuel.add(buttonProfondeurSaisie);
@@ -870,38 +972,42 @@ public class EditStation {
 		}
 
 		comboHeure = new Combo(shell, SWT.NONE);
+		comboHeure.add("hh:mm PM"); //$NON-NLS-1$
+		comboHeure.add("hh:mm:ss PM"); //$NON-NLS-1$
 		comboHeure.add("hh24:mm"); //$NON-NLS-1$
-		comboHeure.add("hh24mmss"); //$NON-NLS-1$
-		comboHeure.add("hh24mm"); //$NON-NLS-1$
-		comboHeure.add("hh:mm:ss"); //$NON-NLS-1$
-		comboHeure.add("hh:mm"); //$NON-NLS-1$
 		comboHeure.add("hh24:mm:ss"); //$NON-NLS-1$
+		comboHeure.add("hh24mm"); //$NON-NLS-1$
+		comboHeure.add("hh24mmss"); //$NON-NLS-1$
+		comboHeure.add("hh24 mm"); //$NON-NLS-1$
+		comboHeure.add("HH:hh"); //$NON-NLS-1$
+		comboHeure.add("sssss"); //$NON-NLS-1$
 
 		comboDate = new Combo(shell, SWT.NONE);
 		comboDate.add("dd/MM/yy"); //$NON-NLS-1$
 		comboDate.add("dd/MM/yyyy"); //$NON-NLS-1$
-		comboDate.add("ddMMyyyy"); //$NON-NLS-1$
 		comboDate.add("ddMMyy"); //$NON-NLS-1$
-		comboDate.add("MMddyy"); //$NON-NLS-1$
-		comboDate.add("yyddMM"); //$NON-NLS-1$
-		comboDate.add("dd:MM:yyyy"); //$NON-NLS-1$
-		comboDate.add("dd:MM:yy"); //$NON-NLS-1$
+		comboDate.add("ddMMyyyy"); //$NON-NLS-1$
+		comboDate.add("MMM dd yyyy"); //$NON-NLS-1$
+		comboDate.add("yy/MM/dd"); //$NON-NLS-1$
+		comboDate.add("yyMMdd"); //$NON-NLS-1$
+		comboDate.add("yyyy/MM/dd"); //$NON-NLS-1$
+		comboDate.add("yyyyMMdd"); //$NON-NLS-1$
 
 		comboLatitude = new Combo(shell, SWT.NONE);
+		comboLatitude.add("+DD MM.mm"); //$NON-NLS-1$
+		comboLatitude.add("+DD.ddd"); //$NON-NLS-1$
+		comboLatitude.add("+DDMMSS"); //$NON-NLS-1$
 		comboLatitude.add("NDD MM.mm"); //$NON-NLS-1$
-		comboLatitude.add("DDD MM ss.s"); //$NON-NLS-1$
-		comboLatitude.add("DDD MM.mmm"); //$NON-NLS-1$
-		comboLatitude.add("DDD.DDDDD"); //$NON-NLS-1$
-		comboLatitude.add("DDD.DD"); //$NON-NLS-1$
-		comboLatitude.add("+DD.mmm"); //$NON-NLS-1$
+		comboLatitude.add("NDD.ddd"); //$NON-NLS-1$
+		comboLatitude.add("NDDMMSS"); //$NON-NLS-1$
 
 		comboLongitude = new Combo(shell, SWT.NONE);
+		comboLongitude.add("+DDD MM.mm"); //$NON-NLS-1$
+		comboLongitude.add("+DDD.ddd"); //$NON-NLS-1$
+		comboLongitude.add("+DDDMMSS"); //$NON-NLS-1$
 		comboLongitude.add("NDDD MM.mm"); //$NON-NLS-1$
-		comboLongitude.add("DDD MM ss.s"); //$NON-NLS-1$
-		comboLongitude.add("DDD MM.mmm"); //$NON-NLS-1$
-		comboLongitude.add("DDD.DDDDD"); //$NON-NLS-1$
-		comboLongitude.add("DDD.DD"); //$NON-NLS-1$
-		comboLongitude.add("+DDD.mmm"); //$NON-NLS-1$
+		comboLongitude.add("NDDD.ddd"); //$NON-NLS-1$
+		comboLongitude.add("NDDDMMSS"); //$NON-NLS-1$
 
 	}
 

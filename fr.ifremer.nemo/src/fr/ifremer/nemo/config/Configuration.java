@@ -34,6 +34,18 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	protected String _nautilusWebServiceURL;
 
 	protected String _nemoWebServiceURL;
+	
+	protected String _idEdmoRespCdi;
+	
+	protected String _codeEdmoDonnées;
+	
+	protected String _idEdmoRespDonnées;
+	
+	protected String _idEdmoDistDonnées;
+	
+	protected String _cdiURL;
+	
+	protected String _cdiMethod;
 
 	/**
 	 * Répertoire de base des fichier de sortie
@@ -54,6 +66,12 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		_nautilusWebServiceURL = "";
 		_nemoWebServiceURL = "";
 		_outputDirectory = "";
+		_idEdmoRespCdi = "";
+		_codeEdmoDonnées = "";
+		_idEdmoRespDonnées = "";
+		_idEdmoDistDonnées = "";
+		_cdiURL = "";
+		_cdiMethod = "";
 		_showRule = true;
 		_locale = null;
 	}
@@ -153,6 +171,30 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			Element2Field setter = new Element2Field(this, "setOutputDirectory");
 			return setter;
 		}
+		if (a_LocalName.equals("idEdmoRespCdi")) {
+			Element2Field setter = new Element2Field(this, "setIdEdmoRespCdi");
+			return setter;
+		}
+		if (a_LocalName.equals("codeEdmoDonnées")) {
+			Element2Field setter = new Element2Field(this, "setCodeEdmoDonnées");
+			return setter;
+		}
+		if (a_LocalName.equals("idEdmoRespDonnées")) {
+			Element2Field setter = new Element2Field(this, "setIdEdmoRespDonnées");
+			return setter;
+		}
+		if (a_LocalName.equals("idEdmoDistDonnées")) {
+			Element2Field setter = new Element2Field(this, "setIdEdmoDistDonnées");
+			return setter;
+		}
+		if (a_LocalName.equals("cdiURL")) {
+			Element2Field setter = new Element2Field(this, "setCdiURL");
+			return setter;
+		}
+		if (a_LocalName.equals("cdiMethod")) {
+			Element2Field setter = new Element2Field(this, "setCdiMethod");
+			return setter;
+		}
 		return null;
 	}
 
@@ -185,6 +227,12 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		a_Writer.putTag("modelsDirectory", getModelsDirectory());
 		a_Writer.putTag("cruisesDirectory", getCruisesDirectory());
 		a_Writer.putTag("outputDirectory", getOutputDirectory());
+		a_Writer.putTag("idEdmoRespCdi", getIdEdmoRespCdi());
+		a_Writer.putTag("codeEdmoDonnées", getCodeEdmoDonnées());
+		a_Writer.putTag("idEdmoRespDonnées", getIdEdmoRespDonnées());
+		a_Writer.putTag("idEdmoDistDonnées", getIdEdmoDistDonnées());
+		a_Writer.putTag("cdiURL", getCdiURL());
+		a_Writer.putTag("cdiMethod", getCdiMethod());
 	}
 
 	/**
@@ -372,7 +420,133 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	public void setOutputDirectory(String x) {
 		_outputDirectory = x;
 	}
-
+	
+	/**
+	 * Read accessor (getter) for attribute _idEdmoRespCdi
+	 * 
+	 * @return String
+	 * @see Configuration#_idEdmoRespCdi
+	 */
+	public String getIdEdmoRespCdi() {
+		return _idEdmoRespCdi;
+	}
+	
+	/**
+	 * Write accessor (setter) for attribute _idEdmoRespCdi
+	 * 
+	 * @param x
+	 *            new value for _idEdmoRespCdi
+	 * @see Configuration#_idEdmoRespCdi
+	 */
+	public void setIdEdmoRespCdi(String x) {
+		_idEdmoRespCdi = x;
+	}
+	
+	/**
+	 * Read accessor (getter) for attribute _codeEdmoDonnées
+	 * 
+	 * @return String
+	 * @see Configuration#_codeEdmoDonnées
+	 */
+	public String getCodeEdmoDonnées() {
+		return _codeEdmoDonnées;
+	}
+	
+	/**
+	 * Write accessor (setter) for attribute _codeEdmoDonnées
+	 * 
+	 * @param x
+	 *            new value for _codeEdmoDonnées
+	 * @see Configuration#_codeEdmoDonnées
+	 */
+	public void setCodeEdmoDonnées(String x) {
+		_codeEdmoDonnées = x;
+	}
+	
+	/**
+	 * Read accessor (getter) for attribute _idEdmoRespDonnées
+	 * 
+	 * @return String
+	 * @see Configuration#_idEdmoRespDonnées
+	 */
+	public String getIdEdmoRespDonnées() {
+		return _idEdmoRespDonnées;
+	}
+	
+	/**
+	 * Write accessor (setter) for attribute _idEdmoRespDonnées
+	 * 
+	 * @param x
+	 *            new value for _idEdmoRespDonnées
+	 * @see Configuration#_idEdmoRespDonnées
+	 */
+	public void setIdEdmoRespDonnées(String x) {
+		_idEdmoRespDonnées = x;
+	}
+	
+	/**
+	 * Read accessor (getter) for attribute _idEdmoDistDonnées
+	 * 
+	 * @return String
+	 * @see Configuration#_idEdmoDistDonnées
+	 */
+	public String getIdEdmoDistDonnées() {
+		return _idEdmoDistDonnées;
+	}
+	
+	/**
+	 * Write accessor (setter) for attribute _idEdmoDistDonnées
+	 * 
+	 * @param x
+	 *            new value for _idEdmoDistDonnées
+	 * @see Configuration#_idEdmoDistDonnées
+	 */
+	public void setIdEdmoDistDonnées(String x) {
+		_idEdmoDistDonnées = x;
+	}
+	
+	/**
+	 * Read accessor (getter) for attribute _cdiURL
+	 * 
+	 * @return String
+	 * @see Configuration#_cdiURL
+	 */
+	public String getCdiURL() {
+		return _cdiURL;
+	}
+	
+	/**
+	 * Write accessor (setter) for attribute _cdiURL
+	 * 
+	 * @param x
+	 *            new value for _cdiURL
+	 * @see Configuration#_cdiURL
+	 */
+	public void setCdiURL(String x) {
+		_cdiURL = x;
+	}
+	
+	/**
+	 * Read accessor (getter) for attribute _cdiMethod
+	 * 
+	 * @return String
+	 * @see Configuration#_cdiMethod
+	 */
+	public String getCdiMethod() {
+		return _cdiMethod;
+	}
+	
+	/**
+	 * Write accessor (setter) for attribute _cdiMethod
+	 * 
+	 * @param x
+	 *            new value for _cdiMethod
+	 * @see Configuration#_cdiMethod
+	 */
+	public void setCdiMethod(String x) {
+		_cdiMethod = x;
+	}
+	
 	/**
 	 * Read accessor (getter) for attribute _showRule
 	 * 

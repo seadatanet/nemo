@@ -123,6 +123,7 @@ public class EditConversion extends Thread {
 		FileDialog dialog = new FileDialog(shell, SWT.SAVE
 				| SWT.APPLICATION_MODAL);
 		dialog.setText(Messages.getString("EditConversion.13")); //$NON-NLS-1$
+		dialog.setFilterPath(Utils.configuration.getCruisesDirectory());
 		nomFichierSortie = dialog.open();
 
 		if (nomFichierSortie != null) {

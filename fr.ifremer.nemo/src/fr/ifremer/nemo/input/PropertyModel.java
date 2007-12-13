@@ -1,6 +1,8 @@
 package fr.ifremer.nemo.input;
 
 import com.ago.xml.*;
+
+import fr.ifremer.nemo.ui.EditStation;
 import fr.ifremer.nemo.util.*;
 import java.beans.*;
 import java.io.*;

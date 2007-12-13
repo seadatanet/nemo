@@ -13,7 +13,7 @@ import org.xml.sax.SAXException;
  * 
  * Représente un fragment d'une ligne du fichier d'entrée. Le fragment est
  * définit par un offset de début et de fin. L'offset de fin est optionnel, dans
- * ce cas sa valeur vaut -1 et la ligne est lue jusqu'à la fin comme illsutré
+ * ce cas sa valeur vaut -1 et la ligne est lue jusqu'à la fin comme illustré
  * ci-dessous
  * 
  * v début du fragment | | XXXXXXXXX| | ^ fin du fragment
