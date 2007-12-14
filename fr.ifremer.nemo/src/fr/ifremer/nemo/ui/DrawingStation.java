@@ -1636,7 +1636,10 @@ public class DrawingStation {
 						} catch (ParseException e) {
 
 							Utils.messageErreurAppend(Messages
-									.getString("Etape.6")); //$NON-NLS-1$
+									.getString("Etape.122")); //$NON-NLS-1$
+							test.setText(Messages
+									.getString("Etape.120"));
+							test.pack();
 						}
 						test.pack();
 						
@@ -1885,7 +1888,10 @@ public class DrawingStation {
 						} catch (ParseException e) {
 
 							Utils.messageErreurAppend(Messages
-									.getString("Etape.6")); //$NON-NLS-1$
+									.getString("Etape.122")); //$NON-NLS-1$
+							test.setText(Messages
+									.getString("Etape.120"));
+							test.pack();
 						}
 						test.pack();
 					}
@@ -2089,39 +2095,53 @@ public class DrawingStation {
 							Utils.test(test, ViewFile.styledTextStation, lign, debu, fi);
 						}
 						
-						try {
-							if (latitude) {
+						if (latitude) {
+							try {
 								fr.ifremer.nemo.util.LatitudeFormat format = new fr.ifremer.nemo.util.LatitudeFormat(
 										EditStation.comboLatitude.getText());
-								
+
 								Double latitudeDouble = (Double) format
 										.parseObject(test.getText());
-								
+
 								Formatter formatter;
-								
+
 								formatter = Formatter.getSingleton();
-								
-								test.setText(formatter.formatLatitude("NDD MM.mm", latitudeDouble));
-								
-							} else {
+
+								test.setText(formatter.formatLatitude(
+										"NDD MM.mm", latitudeDouble));
+							} catch (ParseException e) {
+
+								Utils.messageErreurAppend(Messages
+										.getString("Etape.53")); //$NON-NLS-1$
+								test.setText(Messages
+										.getString("Etape.120"));
+								test.pack();
+							}
+
+						} else {
+							try {
 								fr.ifremer.nemo.util.LongitudeFormat format = new fr.ifremer.nemo.util.LongitudeFormat(
 										EditStation.comboLongitude.getText());
-								
+
 								Double longitudeDouble = (Double) format
 										.parseObject(test.getText());
-								
-								Formatter formatter;
-								
-								formatter = Formatter.getSingleton();
-								
-								test.setText(formatter.formatLongitude("NDDD MM.mm", longitudeDouble));
-							}	
-							
-						} catch (ParseException e) {
 
-							Utils.messageErreurAppend(Messages
-									.getString("Etape.6")); //$NON-NLS-1$
-						}
+								Formatter formatter;
+
+								formatter = Formatter.getSingleton();
+
+								test.setText(formatter.formatLongitude(
+										"NDDD MM.mm", longitudeDouble));
+							} catch (ParseException e) {
+
+								Utils.messageErreurAppend(Messages
+										.getString("Etape.58")); //$NON-NLS-1$
+								test.setText(Messages
+										.getString("Etape.120"));
+								test.pack();
+							}
+						}	
+						
 						test.pack();
 					}
 				});

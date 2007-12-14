@@ -413,53 +413,53 @@ public class ViewFile extends ViewPart {
 		odv = new Button(group, SWT.RADIO);
 		odv.setText("ODV"); //$NON-NLS-1$
 		
-		Group grpCDI = new Group(compositeConversion, SWT.NONE);
-		GridLayoutFactory.fillDefaults().applyTo(grpCDI);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(grpCDI);
-
-		checkCDI = new Button (grpCDI, SWT.CHECK);
-		checkCDI.setText(Messages.getString("ViewFile.choixResumeCDI"));
-		
-		Composite cmpCDI = new Composite(grpCDI, SWT.NONE);
-		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(cmpCDI);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(cmpCDI);
-		
-		lblCompteurCDI = new Label(cmpCDI, SWT.NONE);
-		lblCompteurCDI.setText(Messages.getString("ViewFile.compteurCDI"));
-		txtCompteurCDI = new Text(cmpCDI, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(txtCompteurCDI);
-		
-		lblTypePlateForme = new Label(cmpCDI, SWT.NONE);
-		lblTypePlateForme.setText(Messages.getString("ViewFile.typePlateForme"));
-		txtTypePlateForme = new Text(cmpCDI, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(txtTypePlateForme);
-		
-		lblAccèsDonnées = new Label(cmpCDI, SWT.NONE);
-		lblAccèsDonnées.setText(Messages.getString("ViewFile.accesDonnees"));
-		txtAccèsDonnées = new Text(cmpCDI, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(txtAccèsDonnées);
-		
-		// Par défaut
-		lblCompteurCDI.setEnabled(checkCDI.getSelection());
-		txtCompteurCDI.setEnabled(checkCDI.getSelection());
-		lblTypePlateForme.setEnabled(checkCDI.getSelection());
-		txtTypePlateForme.setEnabled(checkCDI.getSelection());
-		lblAccèsDonnées.setEnabled(checkCDI.getSelection());
-		txtAccèsDonnées.setEnabled(checkCDI.getSelection());
-		
-		// bouton checkCDI
-		checkCDI
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent g) {
-						lblCompteurCDI.setEnabled(checkCDI.getSelection());
-						txtCompteurCDI.setEnabled(checkCDI.getSelection());
-						lblTypePlateForme.setEnabled(checkCDI.getSelection());
-						txtTypePlateForme.setEnabled(checkCDI.getSelection());
-						lblAccèsDonnées.setEnabled(checkCDI.getSelection());
-						txtAccèsDonnées.setEnabled(checkCDI.getSelection());
-					}
-				});
+//		Group grpCDI = new Group(compositeConversion, SWT.NONE);
+//		GridLayoutFactory.fillDefaults().applyTo(grpCDI);
+//		GridDataFactory.fillDefaults().grab(true,false).applyTo(grpCDI);
+//
+//		checkCDI = new Button (grpCDI, SWT.CHECK);
+//		checkCDI.setText(Messages.getString("ViewFile.choixResumeCDI"));
+//		
+//		Composite cmpCDI = new Composite(grpCDI, SWT.NONE);
+//		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(cmpCDI);
+//		GridDataFactory.fillDefaults().grab(true,false).applyTo(cmpCDI);
+//		
+//		lblCompteurCDI = new Label(cmpCDI, SWT.NONE);
+//		lblCompteurCDI.setText(Messages.getString("ViewFile.compteurCDI"));
+//		txtCompteurCDI = new Text(cmpCDI, SWT.BORDER);
+//		GridDataFactory.fillDefaults().grab(true,false).applyTo(txtCompteurCDI);
+//		
+//		lblTypePlateForme = new Label(cmpCDI, SWT.NONE);
+//		lblTypePlateForme.setText(Messages.getString("ViewFile.typePlateForme"));
+//		txtTypePlateForme = new Text(cmpCDI, SWT.BORDER);
+//		GridDataFactory.fillDefaults().grab(true,false).applyTo(txtTypePlateForme);
+//		
+//		lblAccèsDonnées = new Label(cmpCDI, SWT.NONE);
+//		lblAccèsDonnées.setText(Messages.getString("ViewFile.accesDonnees"));
+//		txtAccèsDonnées = new Text(cmpCDI, SWT.BORDER);
+//		GridDataFactory.fillDefaults().grab(true,false).applyTo(txtAccèsDonnées);
+//		
+//		// Par défaut
+//		lblCompteurCDI.setEnabled(checkCDI.getSelection());
+//		txtCompteurCDI.setEnabled(checkCDI.getSelection());
+//		lblTypePlateForme.setEnabled(checkCDI.getSelection());
+//		txtTypePlateForme.setEnabled(checkCDI.getSelection());
+//		lblAccèsDonnées.setEnabled(checkCDI.getSelection());
+//		txtAccèsDonnées.setEnabled(checkCDI.getSelection());
+//		
+//		// bouton checkCDI
+//		checkCDI
+//				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+//					public void widgetSelected(
+//							org.eclipse.swt.events.SelectionEvent g) {
+//						lblCompteurCDI.setEnabled(checkCDI.getSelection());
+//						txtCompteurCDI.setEnabled(checkCDI.getSelection());
+//						lblTypePlateForme.setEnabled(checkCDI.getSelection());
+//						txtTypePlateForme.setEnabled(checkCDI.getSelection());
+//						lblAccèsDonnées.setEnabled(checkCDI.getSelection());
+//						txtAccèsDonnées.setEnabled(checkCDI.getSelection());
+//					}
+//				});
 	}
 
 	/**

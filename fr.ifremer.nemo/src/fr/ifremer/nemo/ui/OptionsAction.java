@@ -76,7 +76,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		shelloptions = new Shell(Application.display, SWT.BORDER | SWT.TITLE
 				| SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);
 
-		shelloptions.setSize(600, 500);
+		shelloptions.setSize(600, 300);
 		shelloptions.setText(Messages.getString("OptionsAction.3")); //$NON-NLS-1$
 		shelloptions.setLayout(new GridLayout());
 		
@@ -450,7 +450,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		createGroupDossier();*/
 		createCompoHaut();
 		createGroupWS();
-		createGroupCDI();
+		//TODO createGroupCDI();
 		createCompoBouton();
 		/*buttonCancel = new Button(top, SWT.NONE);
 //		buttonCancel.setBounds(new Rectangle(224, 333, 69, 23)); // 66
