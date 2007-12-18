@@ -90,6 +90,11 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * Modèle pour les informations propres aux séries temporelles. Optionnel
 	 */
 	protected HorodatedParameterModel _timestampModel;
+	
+	/**
+	 * Modèle pour les informations propres au CDI
+	 */
+	protected Cdi _cdi;
 
 	public StationModel() {
 		_endDataPattern = "";
@@ -99,6 +104,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		_referenceProperty = null;
 		_timeSeriesModel = null;
 		_timestampModel = null;
+		_cdi = null;
 	}
 
 	/**
@@ -199,6 +205,12 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			Element2Field setter = new Element2Field(this, "setMetaInData");
 			return setter;
 		}
+		if (a_LocalName.equals("Cdi")) {
+			Cdi l = (Cdi) Cdi.fromElement(a_URI, a_LocalName,
+					a_QName, a_Attributes);
+			setCdi(l);
+			return (SAXConsumer) l;		
+		}
 		if (a_LocalName.equals("Station")) {
 			Station l = (Station) Station.fromElement(a_URI, a_LocalName,
 					a_QName, a_Attributes);
@@ -256,6 +268,18 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		a_Writer.putTag("rowNumber", getRowNumber());
 		a_Writer.putTag("endData", getEndData());
 		a_Writer.putTag("metaInData", isMetaInData());
+		if (ViewFile.checkCDI.getSelection()) {
+			if (getCdi() != null) {
+				getCdi().writeXMLOn(a_Writer);
+			} else {
+				Cdi cdi = new Cdi();
+				cdi.setCompteur(ViewFile.txtCompteurCDI.getText());
+				cdi.setTypePlateForme(ViewFile.txtTypePlateForme.getText());
+				cdi.setAccesDonnees(ViewFile.txtAccèsDonnées.getText());
+				setCdi(cdi);
+				getCdi().writeXMLOn(a_Writer);
+			}
+		}
 		if (getModel() != null) {
 			getModel().writeXMLOn(a_Writer);
 		}
@@ -353,6 +377,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 */
 	public void release() {
 		releaseModel();
+		releaseCdi();
 		releaseParameterModels();
 		releaseProperties();
 		releaseReferenceProperty();
@@ -629,6 +654,34 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		if (_model == x)
 			return;
 		_model = x;
+	}
+	
+	/**
+	 * Remove any link for role CDI
+	 */
+	public void releaseCdi() {
+		setCdi(null);
+	}
+	
+	/**
+	 * returns the linked object for role <% aRole name%>
+	 * 
+	 * @return the object linked
+	 */
+	public Cdi getCdi() {
+		return _cdi;
+	}
+
+	/**
+	 * Create a new link with x for role model
+	 * 
+	 * @param x
+	 *            the object to link with
+	 */
+	public void setCdi(Cdi x) {
+		if (_cdi == x)
+			return;
+		_cdi = x;
 	}
 
 	/**

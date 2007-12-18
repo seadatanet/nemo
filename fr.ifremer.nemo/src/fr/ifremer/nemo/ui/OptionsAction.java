@@ -392,7 +392,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		groupCDI.setText("CDI");
 
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(groupCDI);
-		GridDataFactory.fillDefaults().grab(true,true).applyTo(groupCDI);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(groupCDI);
 		
 		labelIdEdmoRespCdi = new Label(groupCDI, SWT.NONE);
 		labelIdEdmoRespCdi.setText(Messages.getString("OptionsAction.21"));

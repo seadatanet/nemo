@@ -2212,6 +2212,10 @@ public class DataModel {
 			EditStation.textTUFin.setText("" + frag.getLastCharOffset());
 
 		}
+		
+		ViewFile.txtCompteurCDI.setText(stationModel_modele.getCdi().getCompteur());
+		ViewFile.txtTypePlateForme.setText(stationModel_modele.getCdi().getTypePlateForme());
+		ViewFile.txtAccèsDonnées.setText(stationModel_modele.getCdi().getAccesDonnees());
 
 		// System.out.println("Fin remplissage onglet Station");
 

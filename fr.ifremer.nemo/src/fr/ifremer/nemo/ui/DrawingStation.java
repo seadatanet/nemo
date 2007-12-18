@@ -179,7 +179,7 @@ public class DrawingStation {
 		inject.setEnabled(false);*/
 		
 		radio.setSelection(blnManuel);
-		manu.setEnabled(!blnManuel);
+		manu.setEnabled(blnManuel);
 		lign.setEnabled(!blnManuel);
 		debu.setEnabled(!blnManuel);
 		fi.setEnabled(!blnManuel);
@@ -2089,11 +2089,20 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						if (EditStation.buttonHeureSaisie.getSelection()) {
-							Utils.test(test, EditStation.textHeureSaisie);
-						} else {
-							Utils.test(test, ViewFile.styledTextStation, lign, debu, fi);
-						}
+						
+							if (latitude) {
+								if (EditStation.buttonLatSaisie.getSelection()) {
+									Utils.test(test, EditStation.textLatitude);
+								} else {
+									Utils.test(test, ViewFile.styledTextStation, lign, debu, fi);
+								}
+							} else {
+								if (EditStation.buttonLongSaisie.getSelection()) {
+								Utils.test(test, EditStation.textLongitude);
+								} else {
+									Utils.test(test, ViewFile.styledTextStation, lign, debu, fi);
+								}
+							}
 						
 						if (latitude) {
 							try {
