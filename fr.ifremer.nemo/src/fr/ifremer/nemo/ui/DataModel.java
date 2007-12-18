@@ -406,23 +406,28 @@ public class DataModel {
 
 		dataType.setCode(code);
 
-		for (int i = 0; i < TableDataSurvey.types.size(); i++) {
+		// FAE 022
+		if (!ViewFile.isCollection()) {
+			for (int i = 0; i < TableDataSurvey.types.size(); i++) {
 
-			if (typeCombo.contentEquals(TableDataSurvey.types.get(i).getCode())) {
-				// c'est le bon dataType et on récupère le nombre de mesures et
-				// le QC
+				if (typeCombo.contentEquals(TableDataSurvey.types.get(i)
+						.getCode())) {
+					// c'est le bon dataType et on récupère le nombre de mesures
+					// et
+					// le QC
 
-				dataType.setNumberOfProfiles(TableDataSurvey.types.get(i)
-						.getNombre());
-				dataType.setQc(TableDataSurvey.types.get(i).getQc());
-				dataType.setSensor(TableDataSurvey.types.get(i).getSensor());
+					dataType.setNumberOfProfiles(TableDataSurvey.types.get(i)
+							.getNombre());
+					dataType.setQc(TableDataSurvey.types.get(i).getQc());
+					dataType
+							.setSensor(TableDataSurvey.types.get(i).getSensor());
+
+				}
 
 			}
 
+			station.setDataType(dataType);
 		}
-
-		station.setDataType(dataType);
-
 		// historique acquisition1 et 2
 		propertyModel = stationModel.propertiesAt("dcHistory1");
 		PropertyModel propertyModel2 = stationModel.propertiesAt("dcHistory2");
@@ -974,8 +979,8 @@ public class DataModel {
 						double latitudeFinDouble = ((Number) latitudeFormatFin
 								.parseObject(EditStation.textLatFin.getText()))
 								.doubleValue();
-//						System.out.println("longitude de fin ="
-//								+ EditStation.textLatFin.getText());
+						// System.out.println("longitude de fin ="
+						// + EditStation.textLatFin.getText());
 						timeSeriesInformation.setEndLatitude(latitudeFinDouble);
 					} catch (ParseException e) {
 
@@ -1048,8 +1053,8 @@ public class DataModel {
 						double longitudeFinDouble = ((Number) longitudeFormatFin
 								.parseObject(EditStation.textLongFin.getText()))
 								.doubleValue();
-//						System.out.println("longitude de fin ="
-//								+ EditStation.textLongFin.getText());
+						// System.out.println("longitude de fin ="
+						// + EditStation.textLongFin.getText());
 						timeSeriesInformation
 								.setEndLongitude(longitudeFinDouble);
 					} catch (ParseException e) {
@@ -1370,7 +1375,7 @@ public class DataModel {
 			EditDesc.comboIndicRuptureDonnees.select(0);
 		}
 
-//		System.out.println("Fin remplissage onglet Desc");
+		// System.out.println("Fin remplissage onglet Desc");
 
 		// refresh de la zone d'édition
 		EditDesc.razEdition();
@@ -1385,7 +1390,7 @@ public class DataModel {
 
 	public static void fillSurvey() {
 
-//		System.out.println("Remplissage onglet survey");
+		// System.out.println("Remplissage onglet survey");
 
 		Survey survey;
 		if (ViewFile.dossierCampagne) {
@@ -1436,7 +1441,6 @@ public class DataModel {
 
 		//	
 		// survey.setDataCentre(code);
-		
 		int taille = DataModel.listeWSCenters.length;
 		int position = 0;
 		for (int i = 0; i < taille; i++) {
@@ -1447,8 +1451,7 @@ public class DataModel {
 				break;
 			}
 		}
-		EditSurvey.comboDataCentres.select(position);		
-		
+		EditSurvey.comboDataCentres.select(position);
 
 		// EditSurvey.textCentre.setText(survey.getDataCentre());
 
@@ -1529,7 +1532,7 @@ public class DataModel {
 
 		// ////////////////////////////////////////
 
-//		System.out.println("Fin remplissage onglet Survey");
+		// System.out.println("Fin remplissage onglet Survey");
 
 	}
 
@@ -1571,42 +1574,45 @@ public class DataModel {
 		}
 
 		// type de donnée
-		DataType dataType = station_modele.getDataType();
-		String code = dataType.getCode();
-		// faire un split sur - au cas où et n'avoir QUE le code
+		// FAE022
+		if (!ViewFile.isCollection()) {
+			DataType dataType = station_modele.getDataType();
+			String code = dataType.getCode();
+			// faire un split sur - au cas où et n'avoir QUE le code
 
-		Pattern p = Pattern.compile(" - ");
-		String mots[] = p.split(code);
-		String vraiCode = mots[0];
+			Pattern p = Pattern.compile(" - ");
+			String mots[] = p.split(code);
+			String vraiCode = mots[0];
 
-		// avant de charger le type de données, vérifier qu'il existe bien dans
-		// la liste mise à jour!!
-		int taille = TableDataSurvey.types.size();
-		Boolean ok = false, capteur = false;
-		for (int i = 0; i < taille; i++) {
-			// check si le type existe toujours ou pas
-			Pattern pat = Pattern.compile(" - ");
-			String motsType[] = pat.split(TableDataSurvey.types.get(i)
-					.getCode());
-			String vraiCodeType = motsType[0];
+			// avant de charger le type de données, vérifier qu'il existe bien
+			// dans
+			// la liste mise à jour!!
+			int taille = TableDataSurvey.types.size();
+			Boolean ok = false, capteur = false;
+			for (int i = 0; i < taille; i++) {
+				// check si le type existe toujours ou pas
+				Pattern pat = Pattern.compile(" - ");
+				String motsType[] = pat.split(TableDataSurvey.types.get(i)
+						.getCode());
+				String vraiCodeType = motsType[0];
 
-			if (vraiCode.matches(vraiCodeType)) {
-				ok = true;
-				if (TableDataSurvey.types.get(i).getSensor()) {
-					capteur = true;
+				if (vraiCode.matches(vraiCodeType)) {
+					ok = true;
+					if (TableDataSurvey.types.get(i).getSensor()) {
+						capteur = true;
+					}
+				}
+			}
+
+			// ajout du parametre ou non du coup
+			if (ok) {
+				// ajouté que si c'est un capteur
+				if (capteur) {
+					EditStation.comboRefStationType.add(code, 0);
+					EditStation.comboRefStationType.select(0);
 				}
 			}
 		}
-
-		// ajout du parametre ou non du coup
-		if (ok) {
-			// ajouté que si c'est un capteur
-			if (capteur) {
-				EditStation.comboRefStationType.add(code, 0);
-				EditStation.comboRefStationType.select(0);
-			}
-		}
-
 		// historique acquisition1 et 2
 		PropertyModel propertyModel = stationModel_modele
 				.propertiesAt("dcHistory1");
@@ -2219,8 +2225,8 @@ public class DataModel {
 			Long dateLong = (Long) format.parseObject("JUN 02 2007");
 
 			Formatter formatter = new Formatter();
-//			System.out.println(">>>>>>"
-//					+ formatter.formatDateTime("MM/dd/yyyy", dateLong));
+			// System.out.println(">>>>>>"
+			// + formatter.formatDateTime("MM/dd/yyyy", dateLong));
 
 			// System.out.println(new Date( dateLong.longValue()));
 		} catch (Exception e) {

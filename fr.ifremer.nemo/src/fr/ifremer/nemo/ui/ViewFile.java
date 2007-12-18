@@ -32,6 +32,7 @@ public class ViewFile extends ViewPart {
 
 	public static int etape, ongletCourant, affiche, tailleCompositeData;
 
+
 	public static boolean dossierCampagne, fileLoaded;
 
 	public static Composite compositeData;
@@ -57,6 +58,18 @@ public class ViewFile extends ViewPart {
 	public static Button radioFichier = null;
 
 	public static Button radioDossier = null;
+
+	public static Label labelCampagne;
+
+	public static Label labelCollection;
+
+	public static Button radioCollectCas1 = null;
+
+	public static Button radioCollectCasN = null;
+
+	public static boolean collectionCas1;
+
+	public static boolean collectionCasN;
 
 	private Button buttonParcourir = null;
 
@@ -98,6 +111,8 @@ public class ViewFile extends ViewPart {
 	
 	public static Text txtCompteurCDI, txtTypePlateForme, txtAccèsDonnées ;
 
+	public static Group grpCDI;
+	public static boolean writeResume;
 	@Override
 	public void createPartControl(Composite parent) {
 		// 
@@ -165,18 +180,21 @@ public class ViewFile extends ViewPart {
 
 						int tmp = tabFolder.getSelectionIndex();
 
+						if (isCollection() && tabFolder.getSelectionIndex() > 0)
+							tmp++;
+
 						Utils.validationEtape(tmp);
 						// System.out.println("onglet sélectionné " + tmp);
 
 					}
 				});
+
 		tabItem = new TabItem(tabFolder, SWT.NONE);
 		tabItem.setText(Messages.getString("ViewFile.description")); //$NON-NLS-1$
 		tabItem.setControl(composite1);
 		tabItem1 = new TabItem(tabFolder, SWT.NONE);
 		tabItem1.setText(Messages.getString("ViewFile.campagne")); //$NON-NLS-1$
 		tabItem1.setControl(composite2);
-
 		tabItem2 = new TabItem(tabFolder, SWT.NONE);
 		tabItem2.setText(Messages.getString("ViewFile.station")); //$NON-NLS-1$
 		tabItem2.setControl(composite3);
@@ -254,11 +272,27 @@ public class ViewFile extends ViewPart {
 		composite11 = new Composite(composite1, SWT.NONE);
 		composite11.setLayout(gridLayout);
 
+		labelCampagne = new Label(composite11, SWT.NONE);
+		labelCampagne.setText(Messages.getString("ViewFile.traiterCampagne"));  //$NON-NLS-1$
+
 		radioFichier = new Button(composite11, SWT.RADIO);
 		radioFichier.setSelection(true);
 		radioFichier.setText(Messages.getString("ViewFile.fichierCampagne")); //$NON-NLS-1$
 		radioDossier = new Button(composite11, SWT.RADIO);
 		radioDossier.setText(Messages.getString("ViewFile.dossierCampagne")); //$NON-NLS-1$
+
+		new Label(composite11, SWT.NONE);
+
+		labelCollection = new Label(composite11, SWT.NONE);
+		labelCollection.setText(Messages.getString("ViewFile.traiterCollection"));  //$NON-NLS-1$
+
+		radioCollectCas1 = new Button(composite11, SWT.RADIO);
+		radioCollectCas1.setText(Messages.getString("ViewFile.collectionCas1")); //$NON-NLS-1$
+		radioCollectCasN = new Button(composite11, SWT.RADIO);
+		radioCollectCasN.setText(Messages.getString("ViewFile.collectionCasN")); //$NON-NLS-1$
+
+		new Label(composite11, SWT.NONE);
+
 		radioFichier
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
@@ -289,6 +323,7 @@ public class ViewFile extends ViewPart {
 
 					}
 				});
+
 		createGroupTempo();
 		buttonParcourir
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -301,12 +336,25 @@ public class ViewFile extends ViewPart {
 
 						if (radioFichier.getSelection()) {
 
+							// Si on a supprimé l'onglet campagne pour une
+							// colleciton on le réaffiche
+							// vu qu'on selectionne maintenant fichier campagne
+							if (tabItem1.isDisposed()) {
+								tabItem1 = new TabItem(tabFolder, SWT.NONE, 1);
+								tabItem1.setText(Messages
+										.getString("ViewFile.campagne")); //$NON-NLS-1$
+								tabItem1.setControl(composite2);
+							}
+
 							dossierCampagne = false;
+							collectionCas1 = false;
+							collectionCasN = false;
 
 							Shell shell = new Shell();
 							FileDialog dialog = new FileDialog(shell, SWT.OPEN
 									| SWT.APPLICATION_MODAL);
-							dialog.setFilterPath(Utils.configuration.getCruisesDirectory()); //$NON-NLS-1$
+							dialog.setFilterPath(Utils.configuration
+									.getCruisesDirectory()); //$NON-NLS-1$
 							nomFichier = dialog.open();
 							if (nomFichier != null) {
 
@@ -333,6 +381,9 @@ public class ViewFile extends ViewPart {
 									e1.printStackTrace();
 								}
 
+								medatlas.setEnabled(true);
+								grpCDI.setVisible(false);
+
 							} else {
 								fileLoaded = false;
 								// System.out.println("pas de fichier
@@ -345,22 +396,44 @@ public class ViewFile extends ViewPart {
 						}
 						// si dossier campagne
 						if (radioDossier.getSelection()) {
+
+							// Si on a supprimé l'onglet campagne pour une
+							// colleciton on le réaffiche
+							// vu qu'on selectionne maintenant dossier
+							if (tabItem1.isDisposed()) {
+								tabItem1 = new TabItem(tabFolder, SWT.NONE, 1);
+								tabItem1.setText(Messages
+										.getString("ViewFile.campagne")); //$NON-NLS-1$
+								tabItem1.setControl(composite2);
+							}
 							dossierCampagne = true;
+							collectionCas1 = false;
+							collectionCasN = false;
 
 							Shell shell = new Shell();
 							DirectoryDialog dialog = new DirectoryDialog(shell,
 									SWT.OPEN | SWT.APPLICATION_MODAL);
-							dialog.setFilterPath(Utils.configuration.getCruisesDirectory()); //$NON-NLS-1$
+							dialog.setFilterPath(Utils.configuration
+									.getCruisesDirectory()); //$NON-NLS-1$
 							nomRepertoire = dialog.open();
 							if (nomRepertoire != null) {
 								fileLoaded = true;
-								if (Utils.findFiles(nomRepertoire)){
-								textAreaDescription.setText(Utils.texteBrut);
 
-								// affichage etape0 dans formulaire d'édition de
-								// paramètres
-								Utils.razGlobal();
-								EditDesc.affichageEdition();}
+								if (Utils.findFiles(nomRepertoire)) {
+									textAreaDescription
+											.setText(Utils.texteBrut);
+
+									// affichage etape0 dans formulaire
+									// d'édition de
+									// paramètres
+									Utils.razGlobal();
+									EditDesc.affichageEdition();
+
+								}
+
+								medatlas.setEnabled(true);
+								grpCDI.setVisible(false);
+
 							} else {
 								fileLoaded = false;
 								// System.out.println("pas de dossier
@@ -373,7 +446,98 @@ public class ViewFile extends ViewPart {
 
 						}
 
+						if (radioCollectCas1.getSelection()) {
+
+							dossierCampagne = true;
+							collectionCas1 = true;
+							collectionCasN = false;
+
+							Shell shell = new Shell();
+							DirectoryDialog dialog = new DirectoryDialog(shell,
+									SWT.OPEN | SWT.APPLICATION_MODAL);
+							nomRepertoire = dialog.open();
+							if (nomRepertoire != null) {
+								fileLoaded = true;
+
+								if (Utils.findFilesCollectCas1(nomRepertoire)) {
+									textAreaDescription
+											.setText(Utils.texteBrut);
+
+								}
+
+								// affichage etape0 dans formulaire
+								// d'édition de
+								// paramètres
+								Utils.razGlobal();
+								EditDesc.affichageEdition();
+
+								tabItem1.dispose();
+
+								// dans le cas d'une collection, on ne peut
+								// generer que le format ODV
+								medatlas.setEnabled(false);
+								medatlas.setSelection(false);
+								odv.setSelection(true);
+								grpCDI.setVisible(true);
+							}
+
+							else {
+								fileLoaded = false;
+								// System.out.println("pas de dossier
+								// sélectionné"); //$NON-NLS-1$
+								ViewLog.styledTextLogErreurs
+										.setText(Messages
+												.getString("ViewFile.selectionnezDossier")); //$NON-NLS-1$
+
+							}
+						}
+						if (radioCollectCasN.getSelection()) {
+
+							dossierCampagne = false;
+							collectionCas1 = false;
+							collectionCasN = true;
+
+							Shell shell = new Shell();
+							DirectoryDialog dialog = new DirectoryDialog(shell,
+									SWT.OPEN | SWT.APPLICATION_MODAL);
+							nomRepertoire = dialog.open();
+							if (nomRepertoire != null) {
+								fileLoaded = true;
+
+								if (Utils.findFiles(nomRepertoire)) {
+									textAreaDescription
+											.setText(Utils.texteBrut);
+
+								}
+
+								// affichage etape0 dans formulaire
+								// d'édition de
+								// paramètres
+								Utils.razGlobal();
+								EditDesc.affichageEdition();
+
+								tabItem1.dispose();
+
+								// dans le cas d'une collection, on ne peut
+								// generer que le format ODV
+								medatlas.setEnabled(false);
+								medatlas.setSelection(false);
+								odv.setSelection(true);
+								grpCDI.setVisible(true);
+							}
+
+							else {
+								fileLoaded = false;
+								// System.out.println("pas de dossier
+								// sélectionné"); //$NON-NLS-1$
+								ViewLog.styledTextLogErreurs
+										.setText(Messages
+												.getString("ViewFile.selectionnezDossier")); //$NON-NLS-1$
+
+							}
+						}
 					}
+
 				});
 	}
 
@@ -412,54 +576,64 @@ public class ViewFile extends ViewPart {
 		medatlas.setSelection(true);
 		odv = new Button(group, SWT.RADIO);
 		odv.setText("ODV"); //$NON-NLS-1$
+
+		if (isCollection()) {
+			medatlas.setEnabled(false);
+
+		}
+	
+		grpCDI = new Group(compositeConversion, SWT.NONE);
+		GridLayoutFactory.fillDefaults().applyTo(grpCDI);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(grpCDI);
+
+		checkCDI = new Button (grpCDI, SWT.CHECK);
+		checkCDI.setText(Messages.getString("ViewFile.choixResumeCDI"));
 		
-//		Group grpCDI = new Group(compositeConversion, SWT.NONE);
-//		GridLayoutFactory.fillDefaults().applyTo(grpCDI);
-//		GridDataFactory.fillDefaults().grab(true,false).applyTo(grpCDI);
-//
-//		checkCDI = new Button (grpCDI, SWT.CHECK);
-//		checkCDI.setText(Messages.getString("ViewFile.choixResumeCDI"));
-//		
-//		Composite cmpCDI = new Composite(grpCDI, SWT.NONE);
-//		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(cmpCDI);
-//		GridDataFactory.fillDefaults().grab(true,false).applyTo(cmpCDI);
-//		
-//		lblCompteurCDI = new Label(cmpCDI, SWT.NONE);
-//		lblCompteurCDI.setText(Messages.getString("ViewFile.compteurCDI"));
-//		txtCompteurCDI = new Text(cmpCDI, SWT.BORDER);
-//		GridDataFactory.fillDefaults().grab(true,false).applyTo(txtCompteurCDI);
-//		
-//		lblTypePlateForme = new Label(cmpCDI, SWT.NONE);
-//		lblTypePlateForme.setText(Messages.getString("ViewFile.typePlateForme"));
-//		txtTypePlateForme = new Text(cmpCDI, SWT.BORDER);
-//		GridDataFactory.fillDefaults().grab(true,false).applyTo(txtTypePlateForme);
-//		
-//		lblAccèsDonnées = new Label(cmpCDI, SWT.NONE);
-//		lblAccèsDonnées.setText(Messages.getString("ViewFile.accesDonnees"));
-//		txtAccèsDonnées = new Text(cmpCDI, SWT.BORDER);
-//		GridDataFactory.fillDefaults().grab(true,false).applyTo(txtAccèsDonnées);
-//		
-//		// Par défaut
-//		lblCompteurCDI.setEnabled(checkCDI.getSelection());
-//		txtCompteurCDI.setEnabled(checkCDI.getSelection());
-//		lblTypePlateForme.setEnabled(checkCDI.getSelection());
-//		txtTypePlateForme.setEnabled(checkCDI.getSelection());
-//		lblAccèsDonnées.setEnabled(checkCDI.getSelection());
-//		txtAccèsDonnées.setEnabled(checkCDI.getSelection());
-//		
-//		// bouton checkCDI
-//		checkCDI
-//				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-//					public void widgetSelected(
-//							org.eclipse.swt.events.SelectionEvent g) {
-//						lblCompteurCDI.setEnabled(checkCDI.getSelection());
-//						txtCompteurCDI.setEnabled(checkCDI.getSelection());
-//						lblTypePlateForme.setEnabled(checkCDI.getSelection());
-//						txtTypePlateForme.setEnabled(checkCDI.getSelection());
-//						lblAccèsDonnées.setEnabled(checkCDI.getSelection());
-//						txtAccèsDonnées.setEnabled(checkCDI.getSelection());
-//					}
-//				});
+		Composite cmpCDI = new Composite(grpCDI, SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(cmpCDI);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(cmpCDI);
+		
+		lblCompteurCDI = new Label(cmpCDI, SWT.NONE);
+		lblCompteurCDI.setText(Messages.getString("ViewFile.compteurCDI"));
+		txtCompteurCDI = new Text(cmpCDI, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(txtCompteurCDI);
+		
+		lblTypePlateForme = new Label(cmpCDI, SWT.NONE);
+		lblTypePlateForme.setText(Messages.getString("ViewFile.typePlateForme"));
+		txtTypePlateForme = new Text(cmpCDI, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(txtTypePlateForme);
+		
+		lblAccèsDonnées = new Label(cmpCDI, SWT.NONE);
+		lblAccèsDonnées.setText(Messages.getString("ViewFile.accesDonnees"));
+		txtAccèsDonnées = new Text(cmpCDI, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(txtAccèsDonnées);
+		
+		// Par défaut
+		lblCompteurCDI.setEnabled(checkCDI.getSelection());
+		txtCompteurCDI.setEnabled(checkCDI.getSelection());
+		lblTypePlateForme.setEnabled(checkCDI.getSelection());
+		txtTypePlateForme.setEnabled(checkCDI.getSelection());
+		lblAccèsDonnées.setEnabled(checkCDI.getSelection());
+		txtAccèsDonnées.setEnabled(checkCDI.getSelection());
+		writeResume = checkCDI.getSelection();
+		
+		// bouton checkCDI
+		checkCDI
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(
+							org.eclipse.swt.events.SelectionEvent g) {
+						lblCompteurCDI.setEnabled(checkCDI.getSelection());
+						txtCompteurCDI.setEnabled(checkCDI.getSelection());
+						lblTypePlateForme.setEnabled(checkCDI.getSelection());
+						txtTypePlateForme.setEnabled(checkCDI.getSelection());
+						lblAccèsDonnées.setEnabled(checkCDI.getSelection());
+						txtAccèsDonnées.setEnabled(checkCDI.getSelection());
+						writeResume = checkCDI.getSelection();
+					}
+				});
+		
+		grpCDI.setVisible(false);
+				
 	}
 
 	/**
@@ -489,34 +663,16 @@ public class ViewFile extends ViewPart {
 
 	}
 
-	/**
-	 * This method initializes comboTempoDate
-	 * 
-	 */
-	private void createComboTempoDate() {
-		comboTempoDate = new Combo(groupTempo, SWT.NONE);
-		comboTempoDate.add("dd/MM/yyyy"); //$NON-NLS-1$
-		comboTempoDate.add("MM/dd/yyyy"); //$NON-NLS-1$
-		comboTempoDate.add("yyyy/dd/MM"); //$NON-NLS-1$
-		comboTempoDate.select(0);
-	}
 
-	/**
-	 * This method initializes comboTempoHeure
-	 * 
-	 */
-	private void createComboTempoHeure() {
-		comboTempoHeure = new Combo(groupTempo, SWT.NONE);
-		comboTempoHeure.add("hh24:mm"); //$NON-NLS-1$
-		comboTempoHeure.add("hh:mm"); //$NON-NLS-1$
-		comboTempoHeure.add("hh24mm"); //$NON-NLS-1$
-		comboTempoHeure.select(0);
-	}
 
 	private void createCompositeData(Composite compo) {
 		compositeData = new Composite(compo, SWT.NONE);
 		compositeData.setLayout(new FillLayout());
 
+	}
+
+	public static boolean isCollection() {
+		return (collectionCas1 || collectionCasN);
 	}
 
 }

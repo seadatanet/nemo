@@ -4,6 +4,8 @@ import com.ago.xml.*;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.output.ProgressNotification;
+import fr.ifremer.nemo.ui.Messages;
+import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.SizeBasedProgressNotifier;
 import java.io.*;
 import java.text.ParseException;
@@ -366,7 +368,7 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 	 * @throws Exception
 	 */
 	public Survey convert(boolean isRefDateBased, long a_RefDate,
-			ProgressNotification a_Progress) throws IOException, ParseException {
+			ProgressNotification a_Progress) throws IOException, ParseException, StringIndexOutOfBoundsException {
 		try {
 			Survey survey = (Survey) _model.clone();
 			_stationModel.initRef();
@@ -375,6 +377,9 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 			BufferedReader reader2 = null;
 			SizeBasedProgressNotifier notifier = new SizeBasedProgressNotifier(
 					file.length(), 0, a_Progress);
+			
+			Station station = null;
+			
 			try {
 
 				System.out.println("nom du fichier campagne ===>"
@@ -387,7 +392,6 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 				
 				//reader = new RandomAccessFile(file, "r");
 				consumeHeader(reader2);
-				Station station = null;
 				
 
 				
@@ -400,7 +404,24 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 
 				}
 
-			} finally {
+			}
+			catch(StringIndexOutOfBoundsException e)
+			{
+				throw new StringIndexOutOfBoundsException(e.getMessage() + Messages.getString("SingleFileSurvey.1") + file.getName());
+			}
+			catch(NumberFormatException e)
+			{
+				
+				e.printStackTrace();
+				throw new NumberFormatException(e.getMessage() + Messages.getString("SingleFileSurvey.1") + file.getName());
+			}
+			catch(ParseException e)
+			{
+				
+				e.printStackTrace();
+				throw new ParseException(e.getMessage() + Messages.getString("SingleFileSurvey.1") + file.getName(),0);
+			}
+			finally {
 				if (reader2 != null) {
 					try {
 						reader2.close();

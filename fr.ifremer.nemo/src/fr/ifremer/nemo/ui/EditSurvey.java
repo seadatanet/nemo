@@ -720,6 +720,8 @@ public class EditSurvey {
 
 			EditSurvey.comboDataCentres.select(index);
 
+			
+
 		}
 
 		if (survey.getAvailabilityCode() != null) {
@@ -845,8 +847,10 @@ public class EditSurvey {
 					// on invalide toutes les étapes suivantes avec le second
 					// flag okApresReset à false
 					EditSurvey.okApresReset = false;
-					ViewFile.tabItem1.setText(Messages
-							.getString("EditSurvey.4"));
+					if (!ViewFile.tabItem1.isDisposed()) {
+						ViewFile.tabItem1.setText(Messages
+								.getString("EditSurvey.4"));
+					}
 					EditStation.okApresReset = false;
 					ViewFile.tabItem2.setText(Messages
 							.getString("EditStation.1"));

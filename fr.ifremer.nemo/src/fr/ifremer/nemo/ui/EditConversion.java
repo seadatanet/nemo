@@ -1,16 +1,19 @@
 package fr.ifremer.nemo.ui;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 import fr.ifremer.nemo.input.SurveyMedia;
+import fr.ifremer.nemo.output.CDIResumeWriter;
 import fr.ifremer.nemo.output.ProgressNotification;
 
 public class EditConversion extends Thread {
@@ -21,7 +24,7 @@ public class EditConversion extends Thread {
 
 	public static int validee, loaded;
 
-	public static String nomFichierSortie;
+	public static String nomFichierSortie, nomDossierSortie;
 
 	public static Shell shell;
 
@@ -39,6 +42,7 @@ public class EditConversion extends Thread {
 		ViewLog.aideConversion();
 		formEdition = ViewEdit.formEdition;
 		nomFichierSortie = "";
+		nomDossierSortie = "";
 		interrompu = false;
 
 		// raz message erreur
@@ -67,7 +71,24 @@ public class EditConversion extends Thread {
 								&& EditData.okApresReset) {
 
 							// test pour savoir si on est en campagne ou pas
-							choixFichierSortie();
+							if (ViewFile.isCollection()) {
+
+								if (ViewFile.checkCDI.getSelection()) {
+									CDIResumeWriter.getInstance().reset();
+								}
+
+								choixDossierSortie();
+
+								if (ViewFile.checkCDI.getSelection()) {
+									try {
+										CDIResumeWriter.getInstance()
+												.writeResume();
+									} catch (IOException ex) {
+										ex.printStackTrace();
+									}
+								}
+							} else
+								choixFichierSortie();
 
 						} else {
 							Utils.messageErreur(Messages
@@ -128,7 +149,7 @@ public class EditConversion extends Thread {
 
 		if (nomFichierSortie != null) {
 
-//			System.out.println("Fichier = " + nomFichierSortie);
+			// System.out.println("Fichier = " + nomFichierSortie);
 
 			File fich = new File(nomFichierSortie);
 			if (fich.exists()) {
@@ -150,7 +171,15 @@ public class EditConversion extends Thread {
 
 					Utils.messageErreur("");
 					SWTProcess.interrompu = false;
-					new SWTProgress().run();
+					try
+					{
+						new SWTProgress().run();
+					}
+					catch (InterruptedException e)
+					{
+						Utils.messageErreur(e.getMessage());
+						SurveyMedia.interrompu = true;
+					}
 				}
 
 			} else {
@@ -161,7 +190,13 @@ public class EditConversion extends Thread {
 				SWTProcess.interrompu = false;
 				SurveyMedia.interrompu = false;
 
+				try{
 				new SWTProgress().run();
+				}
+				catch (Exception e)
+				{
+					Utils.messageErreur(e.getMessage());
+				}
 			}
 
 			// affichage des résultats en fin de conversion
@@ -172,11 +207,83 @@ public class EditConversion extends Thread {
 					Utils.messageOK(Messages.getString("EditConversion.10"));
 				}
 			} else {
-				Utils.messageErreur(Messages.getString("EditConversion.16"));
+			//	Utils.messageErreur(Messages.getString("EditConversion.16"));
 			}
 
 		}
 
 	}
 
+	public static void choixDossierSortie() {
+
+		nomDossierSortie = "";
+
+		Shell shell = new Shell();
+		DirectoryDialog dialog = new DirectoryDialog(shell, SWT.SAVE
+				| SWT.APPLICATION_MODAL);
+		dialog.setText(Messages.getString("EditConversion.13")); //$NON-NLS-1$
+		nomDossierSortie = dialog.open();
+
+		if (nomDossierSortie != null) {
+
+			File fich = new File(nomDossierSortie);
+			if (fich.exists()) {
+				// fichier existe
+				shell.close();
+				Shell shell2 = new Shell();
+
+				MessageBox mb = new MessageBox(shell2, SWT.ICON_WARNING
+						| SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
+				mb.setMessage(Messages.getString("EditConversion.14")); //$NON-NLS-1$
+
+				int reponse = mb.open();
+				if (reponse == SWT.NO) {
+					// on n'écrase pas le fichier
+					choixFichierSortie();
+				} else {
+					// on écrase le fichier
+					java.io.FileInputStream stream = null;
+
+					Utils.messageErreur("");
+					SWTProcess.interrompu = false;
+					try {
+						new SWTProgress().run();
+					}
+					catch (Exception e)
+					{
+						Utils.messageErreur(e.getMessage());
+					}
+				}
+
+			} else {
+				// le fichier n'existe pas, on le cree
+				java.io.FileInputStream stream = null;
+
+				Utils.messageErreur("");
+				SWTProcess.interrompu = false;
+				SurveyMedia.interrompu = false;
+
+				try {
+					new SWTProgress().run();
+				}
+				catch (Exception e)
+				{
+					Utils.messageErreur(e.getMessage());
+				}
+			}
+
+			// affichage des résultats en fin de conversion
+			if (!SurveyMedia.interrompu) {
+				if (ViewFile.odv.getSelection()) {
+					Utils.messageOK(Messages.getString("EditConversion.9"));
+				} else {
+					Utils.messageOK(Messages.getString("EditConversion.10"));
+				}
+			} else {
+		//		Utils.messageErreur(Messages.getString("EditConversion.16"));
+			}
+
+		}
+
+	}
 }

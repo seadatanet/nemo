@@ -15,12 +15,13 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
+import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.DataType;
+import fr.ifremer.nemo.ws.WSDataType;
 import fr.ifremer.nemo.input.PropertyModel;
 
 public class EditStation {
 	// fonctions de remplissage de la zone d'édition pour les campagnes
-
 	// /////////////////////////////////////////
 
 	public static Text textRefStationLigne, textRefStationDebut,
@@ -198,9 +199,11 @@ public class EditStation {
 				.sectionIncrementeLigneDebutFinInject(
 						Messages.getString("EditStation.5"), Messages.getString("EditStation.6"), EditStation.sectionStation, textRefStationLigne, textRefStationDebut, textRefStationFin, buttonRefStationIncremente, buttonRefStationPos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 
-		// section reference type de données
-		DrawingStation.sectionTypeDonnees(sectionTypeDonnees, Messages
-				.getString("EditStation.0"));
+		if (!ViewFile.isCollection()) {
+			// section reference type de données
+			DrawingStation.sectionTypeDonnees(sectionTypeDonnees, Messages
+					.getString("EditStation.0"));
+		}
 
 		// section historique acquisition
 		blnManuel = true;
@@ -457,13 +460,15 @@ public class EditStation {
 
 						}
 						if (expand == 0) {
-//							System.out.println("expand passe à 1"); //$NON-NLS-1$
+							// System.out.println("expand passe à 1");
+							// //$NON-NLS-1$
 							buttonExpand.setText("-"); //$NON-NLS-1$
 							buttonExpand2.setText("-"); //$NON-NLS-1$
 							expand = 1;
 						} else {
 							expand = 0;
-//							System.out.println("expand passe à 0"); //$NON-NLS-1$
+							// System.out.println("expand passe à 0");
+							// //$NON-NLS-1$
 							buttonExpand.setText("+"); //$NON-NLS-1$
 							buttonExpand2.setText("+"); //$NON-NLS-1$
 						}
@@ -519,7 +524,7 @@ public class EditStation {
 	}
 
 	public static void razEdition() {
-		// reset de toute la zone d'édition après étape description de fichier
+		// reset de toute la zone d'édition après étape descriptioon de fichier
 		// on retire toutes les sections et les boutons expand et validation
 
 		int i;
@@ -963,14 +968,20 @@ public class EditStation {
 		comboRefStationType = new Combo(shell, SWT.READ_ONLY);
 		// remplissage avec les dataTypes de la campagne
 
-		int taille = TableDataSurvey.types.size();
-		for (int i = 0; i < taille; i++) {
-			// on n'ajoute que les sensors
-			if (TableDataSurvey.types.get(i).getSensor()) {
-				comboRefStationType.add(TableDataSurvey.types.get(i).getCode());
+		WSDataType[] liste = NemoLists.getDataTypes();
+
+		//FAE022
+		if (!ViewFile.isCollection()) {
+
+			int taille = TableDataSurvey.types.size();
+			for (int i = 0; i < taille; i++) {
+				// on n'ajoute que les sensors
+				if (TableDataSurvey.types.get(i).getSensor()) {
+					comboRefStationType.add(TableDataSurvey.types.get(i)
+							.getCode());
+				}
 			}
 		}
-
 		comboHeure = new Combo(shell, SWT.NONE);
 		comboHeure.add("hh:mm PM"); //$NON-NLS-1$
 		comboHeure.add("hh:mm:ss PM"); //$NON-NLS-1$

@@ -37,11 +37,11 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	
 	protected String _idEdmoRespCdi;
 	
-	protected String _codeEdmoDonnées;
+	protected String _codeEdmoDonnees;
 	
-	protected String _idEdmoRespDonnées;
+	protected String _idEdmoRespDonnees;
 	
-	protected String _idEdmoDistDonnées;
+	protected String _idEdmoDistDonnees;
 	
 	protected String _cdiURL;
 	
@@ -67,9 +67,9 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		_nemoWebServiceURL = "";
 		_outputDirectory = "";
 		_idEdmoRespCdi = "";
-		_codeEdmoDonnées = "";
-		_idEdmoRespDonnées = "";
-		_idEdmoDistDonnées = "";
+		_codeEdmoDonnees = "";
+		_idEdmoRespDonnees = "";
+		_idEdmoDistDonnees = "";
 		_cdiURL = "";
 		_cdiMethod = "";
 		_showRule = true;
@@ -175,16 +175,16 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			Element2Field setter = new Element2Field(this, "setIdEdmoRespCdi");
 			return setter;
 		}
-		if (a_LocalName.equals("codeEdmoDonnées")) {
-			Element2Field setter = new Element2Field(this, "setCodeEdmoDonnées");
+		if (a_LocalName.equals("codeEdmoDonnees")) {
+			Element2Field setter = new Element2Field(this, "setCodeEdmoDonnees");
 			return setter;
 		}
-		if (a_LocalName.equals("idEdmoRespDonnées")) {
-			Element2Field setter = new Element2Field(this, "setIdEdmoRespDonnées");
+		if (a_LocalName.equals("idEdmoRespDonnees")) {
+			Element2Field setter = new Element2Field(this, "setIdEdmoRespDonnees");
 			return setter;
 		}
-		if (a_LocalName.equals("idEdmoDistDonnées")) {
-			Element2Field setter = new Element2Field(this, "setIdEdmoDistDonnées");
+		if (a_LocalName.equals("idEdmoDistDonnees")) {
+			Element2Field setter = new Element2Field(this, "setIdEdmoDistDonnees");
 			return setter;
 		}
 		if (a_LocalName.equals("cdiURL")) {
@@ -228,9 +228,9 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		a_Writer.putTag("cruisesDirectory", getCruisesDirectory());
 		a_Writer.putTag("outputDirectory", getOutputDirectory());
 		a_Writer.putTag("idEdmoRespCdi", getIdEdmoRespCdi());
-		a_Writer.putTag("codeEdmoDonnées", getCodeEdmoDonnées());
-		a_Writer.putTag("idEdmoRespDonnées", getIdEdmoRespDonnées());
-		a_Writer.putTag("idEdmoDistDonnées", getIdEdmoDistDonnées());
+		a_Writer.putTag("codeEdmoDonnees", getCodeEdmoDonnees());
+		a_Writer.putTag("idEdmoRespDonnees", getIdEdmoRespDonnees());
+		a_Writer.putTag("idEdmoDistDonnees", getIdEdmoDistDonnees());
 		a_Writer.putTag("cdiURL", getCdiURL());
 		a_Writer.putTag("cdiMethod", getCdiMethod());
 	}
@@ -443,66 +443,66 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	}
 	
 	/**
-	 * Read accessor (getter) for attribute _codeEdmoDonnées
+	 * Read accessor (getter) for attribute _codeEdmoDonnees
 	 * 
 	 * @return String
-	 * @see Configuration#_codeEdmoDonnées
+	 * @see Configuration#_codeEdmoDonnees
 	 */
-	public String getCodeEdmoDonnées() {
-		return _codeEdmoDonnées;
+	public String getCodeEdmoDonnees() {
+		return _codeEdmoDonnees;
 	}
 	
 	/**
-	 * Write accessor (setter) for attribute _codeEdmoDonnées
+	 * Write accessor (setter) for attribute _codeEdmoDonnees
 	 * 
 	 * @param x
-	 *            new value for _codeEdmoDonnées
-	 * @see Configuration#_codeEdmoDonnées
+	 *            new value for _codeEdmoDonnees
+	 * @see Configuration#_codeEdmoDonnees
 	 */
-	public void setCodeEdmoDonnées(String x) {
-		_codeEdmoDonnées = x;
+	public void setCodeEdmoDonnees(String x) {
+		_codeEdmoDonnees = x;
 	}
 	
 	/**
-	 * Read accessor (getter) for attribute _idEdmoRespDonnées
+	 * Read accessor (getter) for attribute _idEdmoRespDonnees
 	 * 
 	 * @return String
-	 * @see Configuration#_idEdmoRespDonnées
+	 * @see Configuration#_idEdmoRespDonnees
 	 */
-	public String getIdEdmoRespDonnées() {
-		return _idEdmoRespDonnées;
+	public String getIdEdmoRespDonnees() {
+		return _idEdmoRespDonnees;
 	}
 	
 	/**
-	 * Write accessor (setter) for attribute _idEdmoRespDonnées
+	 * Write accessor (setter) for attribute _idEdmoRespDonnees
 	 * 
 	 * @param x
-	 *            new value for _idEdmoRespDonnées
-	 * @see Configuration#_idEdmoRespDonnées
+	 *            new value for _idEdmoRespDonnees
+	 * @see Configuration#_idEdmoRespDonnees
 	 */
-	public void setIdEdmoRespDonnées(String x) {
-		_idEdmoRespDonnées = x;
+	public void setIdEdmoRespDonnees(String x) {
+		_idEdmoRespDonnees = x;
 	}
 	
 	/**
-	 * Read accessor (getter) for attribute _idEdmoDistDonnées
+	 * Read accessor (getter) for attribute _idEdmoDistDonnees
 	 * 
 	 * @return String
-	 * @see Configuration#_idEdmoDistDonnées
+	 * @see Configuration#_idEdmoDistDonnees
 	 */
-	public String getIdEdmoDistDonnées() {
-		return _idEdmoDistDonnées;
+	public String getIdEdmoDistDonnees() {
+		return _idEdmoDistDonnees;
 	}
 	
 	/**
-	 * Write accessor (setter) for attribute _idEdmoDistDonnées
+	 * Write accessor (setter) for attribute _idEdmoDistDonnees
 	 * 
 	 * @param x
-	 *            new value for _idEdmoDistDonnées
-	 * @see Configuration#_idEdmoDistDonnées
+	 *            new value for _idEdmoDistDonnees
+	 * @see Configuration#_idEdmoDistDonnees
 	 */
-	public void setIdEdmoDistDonnées(String x) {
-		_idEdmoDistDonnées = x;
+	public void setIdEdmoDistDonnees(String x) {
+		_idEdmoDistDonnees = x;
 	}
 	
 	/**

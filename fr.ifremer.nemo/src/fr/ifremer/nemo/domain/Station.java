@@ -16,6 +16,10 @@ import org.xml.sax.SAXException;
  */
 public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 
+	
+
+	
+	
 	/**
 	 * Profondeur fond. MEDATLAS: bottom depth in metres (nothing if unknown) (6
 	 * char max)
@@ -1480,5 +1484,6 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	public String getSortCriteria() {
 		return Long.toString(getFullDate()) + getReference();
 	}
+
 
 } /* End of class: Station */

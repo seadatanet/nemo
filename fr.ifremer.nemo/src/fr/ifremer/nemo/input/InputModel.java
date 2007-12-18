@@ -376,7 +376,7 @@ public class InputModel implements Cloneable, PathElementHandler,
 	 * @exception ParseException
 	 */
 	public Survey convert(ProgressNotification a_ProgressNotifier)
-			throws FileNotFoundException, IOException, ParseException {
+			throws NumberFormatException, IOException, ParseException, StringIndexOutOfBoundsException {
 
 		if (isRefDateBased()) {
 			TimeZone tz = TimeZone.getTimeZone("GMT");
@@ -393,7 +393,11 @@ public class InputModel implements Cloneable, PathElementHandler,
 			try {
 				return _media.convert(_refDateBased, cal.getTimeInMillis(),
 						a_ProgressNotifier);
-			} catch (Exception e) {
+			} 
+			catch (ParseException e)
+			{
+				throw e;
+			}catch (Exception e) {
 				// 
 				e.printStackTrace();
 				System.out.println("interrompu !");
@@ -401,7 +405,21 @@ public class InputModel implements Cloneable, PathElementHandler,
 		} else {
 			try {
 				return _media.convert(_refDateBased, 0, a_ProgressNotifier);
-			} catch (Exception e) {
+			} 
+			catch (ParseException e)
+			{
+				throw e;
+			}
+			catch (NumberFormatException e)
+			{
+				throw e;
+			}
+			catch (StringIndexOutOfBoundsException e)
+			{
+				throw e;
+			}
+			catch (Exception e) {
+			
 				// 
 				e.printStackTrace();
 				System.out.println("interrompu !");
@@ -416,7 +434,7 @@ public class InputModel implements Cloneable, PathElementHandler,
 	 */
 	public void initFoDirectoryBased(boolean isTimeSeries) {
 		setMedia(new DirectoryBasedSurvey(isTimeSeries));
-	}
+	}	
 
 	/**
 	 * 

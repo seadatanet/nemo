@@ -1050,6 +1050,95 @@ public class Utils {
 		return ok;
 		
 	}
+	
+	public static Boolean findFilesCollectCas1(String directoryPath) {
+		File directory = new File(directoryPath);
+
+		Boolean ok = true;
+
+		File[] subfiles = directory.listFiles();
+
+		int nbre = subfiles.length;
+		String nom = subfiles[0].getName();
+
+		// verif sur l'extension de tous les fichiers du dossier
+		Pattern p = Pattern.compile("[.]");
+		String[] mots = p.split(nom);
+		String ext;
+		if (mots.length == 1) {
+			ext = "";
+		} else {
+			ext = mots[1];
+		}
+
+		for (int i = 0; i < nbre; i++) {
+			Pattern p1 = Pattern.compile("[.]");
+			String mots1[] = p.split(subfiles[i].getName());
+			String ext1;
+			if (mots1.length == 1) {
+				ext1 = "";
+			} else {
+				ext1 = mots1[1];
+			}
+
+			if (!ext.matches(ext1)) {
+				ok = false;
+				Utils.messageErreur(Messages.getString("Utils.27"));
+			}
+
+		}
+
+		File[] subsubfiles = subfiles[0].listFiles();
+
+		int nbre2 = subsubfiles.length;
+		String nom2 = subsubfiles[0].getName();
+
+		// verif sur l'extension de tous les fichiers du dossier
+		mots = p.split(nom2);
+
+		if (mots.length == 1) {
+			ext = "";
+		} else {
+			ext = mots[1];
+		}
+
+		for (int i = 0; i < nbre; i++) {
+			Pattern p1 = Pattern.compile("[.]");
+			String mots1[] = p.split(subsubfiles[i].getName());
+			String ext1;
+			if (mots1.length == 1) {
+				ext1 = "";
+			} else {
+				ext1 = mots1[1];
+			}
+
+			if (!ext.matches(ext1)) {
+				ok = false;
+				Utils.messageErreur(Messages.getString("Utils.27"));
+			}
+
+		}
+		
+		if (ok) {
+
+			ViewFile.nomFichier = directoryPath + "/" + subfiles[0].getName() + "/" +  subsubfiles[0].getName(); //$NON-NLS-1$
+			ViewFile.nomRepertoire = directoryPath;
+
+			try {
+				Utils.insertTextFich(ViewFile.nomFichier,
+						ViewFile.textAreaDescription);
+			} catch (IOException e) {
+
+				e.printStackTrace();
+			}
+
+		}
+
+		return ok;
+		
+	}
+	
+
 
 	public static void messageErreur(String message) {
 		ViewLog.styledTextLogErreurs.setText(message);
@@ -1135,7 +1224,7 @@ public class Utils {
 		configuration.setContact(""); //$NON-NLS-1$
 		
 		// DOSSIERS
-		configuration.setModelsDirectory(OptionsAction.textDossierModèle.getText());
+		configuration.setModelsDirectory(OptionsAction.textDossierModele.getText());
 		configuration.setCruisesDirectory(OptionsAction.textDossierCampagne.getText());
 		
 		// LANGUE
@@ -1160,9 +1249,9 @@ public class Utils {
 
 		// CDI
 		configuration.setIdEdmoRespCdi(OptionsAction.textIdEdmoRespCdi.getText());
-		configuration.setCodeEdmoDonnées(OptionsAction.textCodeEdmoDonnées.getText());
-		configuration.setIdEdmoRespDonnées(OptionsAction.textIdEdmoRespDonnées.getText());
-		configuration.setIdEdmoDistDonnées(OptionsAction.textIdEdmoDistDonnées.getText());
+		configuration.setCodeEdmoDonnees(OptionsAction.textCodeEdmoDonnees.getText());
+		configuration.setIdEdmoRespDonnees(OptionsAction.textIdEdmoRespDonnees.getText());
+		configuration.setIdEdmoDistDonnees(OptionsAction.textIdEdmoDistDonnees.getText());
 		configuration.setCdiURL(OptionsAction.textUrlCdi.getText());
 		configuration.setCdiMethod(OptionsAction.textMethodeCdi.getText());
 		
@@ -1289,11 +1378,16 @@ public class Utils {
 
 		// reset des noms des onglets
 		ViewFile.tabItem.setText(Messages.getString("Utils.21")); //$NON-NLS-1$
-		ViewFile.tabItem1.setText(Messages.getString("Utils.22")); //$NON-NLS-1$
+		if (!ViewFile.tabItem1.isDisposed())
+		{
+			ViewFile.tabItem1.setText(Messages.getString("Utils.22")); //$NON-NLS-1$		
+		}
 		ViewFile.tabItem2.setText(Messages.getString("Utils.23")); //$NON-NLS-1$
 		ViewFile.tabItem3.setText(Messages.getString("Utils.24")); //$NON-NLS-1$
 		ViewFile.tabItem9.setText(Messages.getString("Utils.25")); //$NON-NLS-1$
 
+
+		
 		// effacement du bouton conversion
 		if (EditConversion.buttonConversion != null) {
 			EditConversion.razEdition();

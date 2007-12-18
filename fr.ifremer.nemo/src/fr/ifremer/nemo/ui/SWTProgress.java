@@ -17,7 +17,7 @@ public class SWTProgress extends ApplicationWindow {
 		super(null);
 	}
 
-	public void run() {
+	public void run() throws InterruptedException{
 
 		final Shell shell = new Shell();
 
@@ -35,7 +35,7 @@ public class SWTProgress extends ApplicationWindow {
 		} catch (InvocationTargetException e) {
 
 		} catch (InterruptedException e) {
-
+			throw e;
 		}
 
 	}

@@ -22,7 +22,9 @@ import fr.ifremer.nemo.ws.WSDataType;
 
 public class TableDataSurvey {
 
-	public static Table tableTypeSurvey, filtreTable;
+	public static Table tableTypeSurvey;
+
+	public static Table filtreTable;
 
 	public static int ligneSelec, colonneSelec, debut, fin, ligneBidon;
 
@@ -205,8 +207,10 @@ public class TableDataSurvey {
 
 							// invalidation de l'étape quand modif
 							EditSurvey.okApresReset = false;
-							ViewFile.tabItem1.setText(Messages
-									.getString("EditSurvey.4"));
+							if (!ViewFile.tabItem1.isDisposed()) {
+								ViewFile.tabItem1.setText(Messages
+										.getString("EditSurvey.4"));
+							}
 							EditStation.okApresReset = false;
 							ViewFile.tabItem2.setText(Messages
 									.getString("EditStation.1"));

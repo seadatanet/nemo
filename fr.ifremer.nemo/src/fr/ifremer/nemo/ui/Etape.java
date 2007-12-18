@@ -68,7 +68,6 @@ public class Etape {
 							ViewFile.comboTempoHeure.getText());
 					Long HourLong = (Long) format
 							.parseObject(ViewFile.textTempoHeureRef.getText());
-					
 				} catch (ParseException e) {
 
 					Utils.messageErreurAppend(Messages.getString("Etape.6")); //$NON-NLS-1$
@@ -192,7 +191,9 @@ public class Etape {
 			EditSurvey.okApresReset = true;
 			okSurvey();
 		} else {
-			ViewFile.tabItem1.setText(Messages.getString("Etape.29")); //$NON-NLS-1$
+			if (!ViewFile.tabItem1.isDisposed()) {
+				ViewFile.tabItem1.setText(Messages.getString("Etape.29")); //$NON-NLS-1$
+			}
 			ViewFile.etape = 1;
 		}
 
@@ -235,12 +236,14 @@ public class Etape {
 
 		}
 
-		// TYPE DE DONNEES
-		if (EditStation.comboRefStationType.getSelectionIndex() == -1) {
-			Utils.messageErreurAppend(Messages.getString("Etape.32")); //$NON-NLS-1$
-			ok = false;
+		// FAE022
+		if (!ViewFile.isCollection()) {
+			// TYPE DE DONNEES
+			if (EditStation.comboRefStationType.getSelectionIndex() == -1) {
+				Utils.messageErreurAppend(Messages.getString("Etape.32")); //$NON-NLS-1$
+				ok = false;
+			}
 		}
-
 		// HISTORIQUE ACQUISITION
 		if (EditStation.buttonHistoriqueAcqPos.getSelection()) {
 			// position dans fichier, verif des valeurs
@@ -491,7 +494,7 @@ public class Etape {
 			try {
 				DateTimeFormat format = new DateTimeFormat(
 						EditStation.comboHeure.getText());
-				
+
 				Long hourLong = (Long) format
 						.parseObject(EditStation.textHeureSaisie.getText());
 			} catch (ParseException e) {
@@ -1227,8 +1230,8 @@ public class Etape {
 				/*
 				 * // test direct sur valeur entree if
 				 * (Pattern.matches("^.{0,1}[0-9]*[0-9].*[0-9][0-9]*$",
-				 * typeCourant.getEntree())) { // ok ok = ok && true;
-				 *  } else { // erreur ok = ok && false;
+				 * typeCourant.getEntree())) { // ok ok = ok && true; } else { //
+				 * erreur ok = ok && false;
 				 * Utils.messageErreurAppend(Messages.getString("Etape.105"));
 				 * //$NON-NLS-1$ }
 				 */
@@ -1271,9 +1274,7 @@ public class Etape {
 					if (fins[i] == fins[j]) {
 						cptFin = cptFin + 1;
 					}
-
 				}
-
 			}
 
 			if (valeurNonRemplie) {
@@ -1344,9 +1345,17 @@ public class Etape {
 		ViewFile.tabItem.setText(Messages.getString("Etape.91")); //$NON-NLS-1$
 
 		// on valide l'étape 1
-		ViewFile.etape = 1;
 		EditDesc.validee = 1;
 
+		// FAE 022
+		if (ViewFile.isCollection()) {
+			EditSurvey.okApresReset = true;
+			EditSurvey.validee = 1;
+			DataModel.initSurvey();
+			ViewFile.etape = 2;
+		} else {
+			ViewFile.etape = 1;
+		}
 		// System.out.println("Etape.okDesc()");
 
 	}
@@ -1354,8 +1363,9 @@ public class Etape {
 	private static void okSurvey() {
 
 		DataModel.initSurvey();
-		ViewFile.tabItem1.setText(Messages.getString("Etape.92")); //$NON-NLS-1$
-
+		if (!ViewFile.tabItem1.isDisposed()) {
+			ViewFile.tabItem1.setText(Messages.getString("Etape.92")); //$NON-NLS-1$
+		}
 		Utils.messageOK(Messages.getString("Etape.93")); //$NON-NLS-1$
 
 		// validation etape 2

@@ -2,6 +2,8 @@ package fr.ifremer.nemo.input;
 
 import com.ago.xml.*;
 import fr.ifremer.nemo.domain.*;
+import fr.ifremer.nemo.ui.Messages;
+import fr.ifremer.nemo.ui.ViewFile;
 import fr.ifremer.nemo.util.*;
 import java.beans.IntrospectionException;
 import java.io.*;
@@ -1110,7 +1112,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	public Station convert(BufferedReader a_Reader, String a_Filename,
 			boolean isRefDateBased, long a_RefDate,
 			SizeBasedProgressNotifier a_Notifier) throws IOException,
-			ParseException {
+			ParseException, StringIndexOutOfBoundsException {
 		Station station = null;
 		String[] header = null;
 		try {
@@ -1133,8 +1135,8 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			} else {
 				if ((header = consumeHeader(a_Reader)) != null) {
 			//		a_Notifier.progress(a_Reader.getFilePointer());
-					if (getReferenceProperty().getFragment().getFirstLine() == 0
-							&& a_Filename != null) {
+					if ((getReferenceProperty().getFragment().getFirstLine() == 0
+							&& (a_Filename != null))/* || ViewFile.collectionCasN*/) {
 						getReferenceProperty().applyOn(station,
 								new String[] { a_Filename });
 					} else {
@@ -1167,7 +1169,9 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 					return station;
 				}
 			}
-		} catch (CloneNotSupportedException e) {
+		} catch (StringIndexOutOfBoundsException e) {
+			throw e;
+		}catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 		} catch (IntrospectionException e) {
 			e.printStackTrace();
@@ -1198,12 +1202,14 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			rate = new Float(a_Station.getTimeSeriesInformation()
 					.getSamplingRate() * 1000.0f).longValue();
 		}
+		int index = 0;
 		try {
 			for (ParameterModel pm : _parameterModels) {
 				a_Station.addParameter((Parameter) pm.getModel().clone());
 			}
 			String line = null;
-			for (int index = 0; (line = a_Reader.readLine()) != null
+			
+			for (index = 0; (line = a_Reader.readLine()) != null
 					&& (!(_endOnPattern && line.matches(_endDataPattern)) || (index < _rowNumber)); index++) {
 
 				a_Notifier.progress(line.length());
@@ -1240,14 +1246,24 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 						value = hValue;
 					} else {
 						value = new ParameterValue();
-					}
+					}					
 					pm.convert(line, value);
 					p.addValue(value);
 					paramIndex++;
 				}
 		//		a_Notifier.progress(a_Reader.getFilePointer());
 			}
-		} catch (CloneNotSupportedException e) {
+		} catch (NumberFormatException e)
+		{
+			throw new NumberFormatException(e.getMessage() + Messages.getString("StationModel.1") + a_Station.getReference().trim() + Messages.getString("StationModel.2") + (index+1) + "\r\n");
+		} catch (ParseException e)
+		{
+			throw new ParseException(e.getMessage() + Messages.getString("StationModel.1") + a_Station.getReference().trim() + Messages.getString("StationModel.2") + (index+1) + "\r\n",0);
+		} catch (StringIndexOutOfBoundsException e)
+		{
+			throw new StringIndexOutOfBoundsException(Messages.getString("StationModel.1") + a_Station.getReference().trim() + Messages.getString("StationModel.2") + (index+1) + Messages.getString("StationModel.3"));
+		}		
+		catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 		} catch (IntrospectionException e) {
 			e.printStackTrace();

@@ -489,9 +489,9 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 				}
 				}
 			}
-		} catch (Exception e) {
+		} catch (ParseException e) {
 			e.printStackTrace();
-			return null;
+		//	throw e;
 		}
 		value *= sign;
 		pos.setIndex(index);

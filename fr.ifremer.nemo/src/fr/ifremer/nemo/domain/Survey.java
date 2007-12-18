@@ -64,6 +64,12 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 		Serializable {
 
 	/**
+	 * Taille du fichier de la campagne correspondant en Mo
+	 * Utilisé pour le résumé CDI dans le cas d'une collection 
+	 */
+	protected float _dataSize;
+	
+	/**
 	 * Data Availability code (MEDATLAS: 1 char = P/L/C)
 	 */
 	protected Availability _availability;
@@ -1344,4 +1350,11 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 		setShipName(a_WSShip.getName());
 	}
 
+	public float getDataSize() {
+		return _dataSize;
+	}
+
+	public void setDataSize(float size) {
+		_dataSize = size;
+	}
 } /* End of class: Survey */

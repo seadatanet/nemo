@@ -3,6 +3,7 @@ package fr.ifremer.nemo.input;
 import com.ago.xml.*;
 
 import fr.ifremer.nemo.ui.EditStation;
+import fr.ifremer.nemo.ui.Messages;
 import fr.ifremer.nemo.util.*;
 import java.beans.*;
 import java.io.*;
@@ -463,7 +464,19 @@ public class PropertyModel implements Cloneable, PathElementHandler,
 		} else {
 			String r = _fragment.retreive(a_Header);
 			if (_format != null) {
-				writer.invoke(a_Destination, _format.parseObject(r));
+				try {
+					writer.invoke(a_Destination, _format.parseObject(r));
+				}
+				catch (ParseException e)
+				{
+					if (_format instanceof LatitudeFormat)
+						throw new ParseException(Messages.getString("PropertyModel.1"),0);
+					else if (_format instanceof LongitudeFormat)
+						throw new ParseException(Messages.getString("PropertyModel.2"),0);
+					else if (_format instanceof DateTimeFormat)
+						throw new ParseException(Messages.getString("PropertyModel.3"),0);
+						
+				}
 			} else {
 				writer.invoke(a_Destination, r);
 			}

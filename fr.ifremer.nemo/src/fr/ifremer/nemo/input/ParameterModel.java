@@ -358,9 +358,10 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 	 * @param a_Line
 	 * @param a_ParameterValue
 	 */
-	public void convert(String a_Line, ParameterValue a_ParameterValue)  {
+	public void convert(String a_Line, ParameterValue a_ParameterValue) throws StringIndexOutOfBoundsException {
 
 		org.nfunk.jep.JEP parser = null;
+		
 		String fragmnt = _fragment.retreive(a_Line);
 
 		if (_inputDefault.trim().equals(fragmnt)){
@@ -372,9 +373,14 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 	/*	if ((float) val == _inputDefault) {
 			a_ParameterValue.setValue(Float.parseFloat(_model.getDefault()));
 		}*/ else {
-			
-			double val = Double.parseDouble(fragmnt);
-			
+			double val;
+			try {
+			val = Double.parseDouble(fragmnt);
+			}
+			catch (NumberFormatException e)
+			{
+				throw new NumberFormatException("Erreur lors du traitement de la donnée\r\nProblème de conversion de la chaine " + e.getMessage().substring(e.getMessage().indexOf("\""),e.getMessage().lastIndexOf("\"")) + "\" en valeur décimale" + "\r\n");
+			}
 			if (_conversionFormula.trim().length() > 0) {
 				if (getJepParser() == null) {
 					parser = new org.nfunk.jep.JEP();
