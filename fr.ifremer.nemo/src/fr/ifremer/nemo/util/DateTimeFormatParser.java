@@ -264,6 +264,7 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 		typeTable[(int) 's'] = XSECOND;
 		typeTable[(int) ' '] = XLETTER;
 		typeTable[(int) 'A'] = XAMPM;
+		typeTable[(int) 'P'] = XAMPM;
 	}
 
 	/**

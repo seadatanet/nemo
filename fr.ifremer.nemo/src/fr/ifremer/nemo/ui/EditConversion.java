@@ -65,35 +65,44 @@ public class EditConversion extends Thread {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
 						// System.out.println("conversion !");
+						
+						// test pour savoir si le compteur CDI est un numérique
+						try {
+							Integer.parseInt(ViewFile.txtCompteurCDI.getText());
+							
+							if (EditDesc.okApresReset && EditSurvey.okApresReset
+									&& EditStation.okApresReset
+									&& EditData.okApresReset) {
+								
+								// test pour savoir si on est en campagne ou pas
+								if (ViewFile.isCollection()) {
 
-						if (EditDesc.okApresReset && EditSurvey.okApresReset
-								&& EditStation.okApresReset
-								&& EditData.okApresReset) {
-
-							// test pour savoir si on est en campagne ou pas
-							if (ViewFile.isCollection()) {
-
-								if (ViewFile.checkCDI.getSelection()) {
-									CDIResumeWriter.getInstance().reset();
-								}
-
-								choixDossierSortie();
-
-								if (ViewFile.checkCDI.getSelection()) {
-									try {
-										CDIResumeWriter.getInstance()
-												.writeResume();
-									} catch (IOException ex) {
-										ex.printStackTrace();
+									if (ViewFile.checkCDI.getSelection()) {
+										CDIResumeWriter.getInstance().reset();
 									}
-								}
-							} else
-								choixFichierSortie();
 
-						} else {
+									choixDossierSortie();
+
+									if (ViewFile.checkCDI.getSelection()) {
+										try {
+											CDIResumeWriter.getInstance()
+													.writeResume();
+										} catch (IOException ex) {
+											ex.printStackTrace();
+										}
+									}
+								} else
+									choixFichierSortie();
+
+							} else {
+								Utils.messageErreur(Messages
+										.getString("EditConversion.15"));
+							}
+						} catch (NumberFormatException ex) {
 							Utils.messageErreur(Messages
-									.getString("EditConversion.15"));
+									.getString("EditConversion.17"));
 						}
+						
 					}
 
 				});

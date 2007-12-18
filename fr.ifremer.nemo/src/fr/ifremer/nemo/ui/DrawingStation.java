@@ -1865,8 +1865,8 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						if (EditStation.buttonHeureSaisie.getSelection()) {
-							Utils.test(test, EditStation.textHeureSaisie);
+						if (EditStation.buttonDateSaisie.getSelection()) {
+							Utils.test(test, EditStation.textDateSaisie);
 						} else {
 							Utils.test(test, ViewFile.styledTextStation, lign, debu, fi);
 						}
