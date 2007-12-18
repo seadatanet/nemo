@@ -1,13 +1,18 @@
 package fr.ifremer.nemo.input;
 
-import com.ago.xml.*;
-import fr.ifremer.nemo.domain.Parameter;
-import fr.ifremer.nemo.domain.ParameterValue;
-import fr.ifremer.nemo.util.*;
-import fr.ifremer.nemo.ws.WSParameter;
-import java.io.*;
+import java.io.OutputStream;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+
+import com.ago.xml.Element2Field;
+import com.ago.xml.SAXConsumer;
+import com.ago.xml.XMLOutputWriter;
+
+import fr.ifremer.nemo.domain.Parameter;
+import fr.ifremer.nemo.domain.ParameterValue;
+import fr.ifremer.nemo.ui.Messages;
+import fr.ifremer.nemo.ws.WSParameter;
 
 /**
  * Class ParameterModel
@@ -379,7 +384,7 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 			}
 			catch (NumberFormatException e)
 			{
-				throw new NumberFormatException("Erreur lors du traitement de la donnée\r\nProblème de conversion de la chaine " + e.getMessage().substring(e.getMessage().indexOf("\""),e.getMessage().lastIndexOf("\"")) + "\" en valeur décimale" + "\r\n");
+				throw new NumberFormatException(Messages.getString("ParameterModel.1") + e.getMessage().substring(e.getMessage().indexOf("\""),e.getMessage().lastIndexOf("\"")) + Messages.getString("ParameterModel.2") + "\r\n");
 			}
 			if (_conversionFormula.trim().length() > 0) {
 				if (getJepParser() == null) {
