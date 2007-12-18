@@ -66,9 +66,12 @@ public class EditConversion extends Thread {
 							org.eclipse.swt.events.SelectionEvent e) {
 						// System.out.println("conversion !");
 						
+						Utils.messageErreur("");
+						
 						// test pour savoir si le compteur CDI est un numérique
 						try {
-							Integer.parseInt(ViewFile.txtCompteurCDI.getText());
+							if (ViewFile.checkCDI.getSelection())
+								Integer.parseInt(ViewFile.txtCompteurCDI.getText());
 							
 							if (EditDesc.okApresReset && EditSurvey.okApresReset
 									&& EditStation.okApresReset
