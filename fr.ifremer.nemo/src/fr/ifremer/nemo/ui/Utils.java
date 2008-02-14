@@ -12,12 +12,14 @@ import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.input.HeaderFragment;
 import fr.ifremer.nemo.input.InputModel;
+import fr.ifremer.nemo.util.Messages;
 
 public class Utils {
 
@@ -222,17 +224,12 @@ public class Utils {
 		
 		deb = Integer.parseInt(debut.getText()) + taillesCumLignes[Integer.parseInt(ligne.getText()) - 1];
 		fi = Integer.parseInt(fin.getText()) + taillesCumLignes[Integer.parseInt(ligne.getText()) - 1];
-
+		
 		styledtext.setSelection(deb-1, fi);
 		
-		if (deb == fi) {
-			Utils.messageErreur(Messages.getString("Utils.28"));
-
-		} else {
-//			 remplissage test dans interface
-			test.setText(styledtext.getText(deb-1, fi-1));
-			test.pack();
-		}
+		// remplissage test dans interface
+		test.setText(styledtext.getText(deb-1, fi-1));
+		test.pack();
 	}
 	
 	public static void test(Text test, Text saisie) {
@@ -1405,4 +1402,18 @@ public class Utils {
 		ViewLog.styledTextLogInfos.append("\n" + message); //$NON-NLS-1$
 	}
 
+	public static void selectComboValeur(Combo combo, String valeur) {
+		int i = 0;
+		combo.select(i);
+		
+		while (i < combo.getItemCount() && !combo.getText().equals(valeur)) {
+			i++;
+			combo.select(i);
+		}
+		
+		if (!combo.getText().equals(valeur)) {
+			combo.add(valeur);
+			combo.select(combo.getItemCount() - 1 );
+		}
+	}
 }

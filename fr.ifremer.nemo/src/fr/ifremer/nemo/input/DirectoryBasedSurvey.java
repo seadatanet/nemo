@@ -302,7 +302,7 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 	 * @throws Exception
 	 */
 	public Survey convert(boolean isRefDateBased, long a_RefDate,
-			ProgressNotification a_Progress) throws IOException, ParseException {
+			ProgressNotification a_Progress) throws IOException, ParseException, InterruptedException {
 		try {
 			Survey survey = (Survey) _model.clone();
 			File dir = new File(_directory);
@@ -322,7 +322,7 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 
 					if (SurveyMedia.interrompu) {
 						// demande d'annulation
-						throw new IOException("interruption");
+						throw new InterruptedException("Interruption");
 					} else {
 						
 						File file = new File(dir, files[i]);

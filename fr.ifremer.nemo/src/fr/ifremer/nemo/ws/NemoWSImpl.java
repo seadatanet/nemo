@@ -1,18 +1,14 @@
 package fr.ifremer.nemo.ws;
 
-import fr.ifremer.nemo.ws.WSCountry;
-import fr.ifremer.nemo.ws.WSDataCentre;
-import fr.ifremer.nemo.ws.WSDataType;
-import fr.ifremer.nemo.ws.WSRegion;
-import fr.ifremer.nemo.ws.WSShip;
-import fr.ifremer.nemo.ws.WSSurveyDescription;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Vector;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
-import org.apache.commons.logging.LogFactory;
+
 import org.apache.log4j.Logger;
 
 /**

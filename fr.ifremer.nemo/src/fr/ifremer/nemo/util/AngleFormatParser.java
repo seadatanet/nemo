@@ -1,8 +1,8 @@
 package fr.ifremer.nemo.util;
 
-import com.ago.parsing.AbstractParser;
-import fr.ifremer.nemo.util.ParseElement;
 import java.text.ParseException;
+
+import com.ago.parsing.AbstractParser;
 
 /**
  * Class AngleFormatParser

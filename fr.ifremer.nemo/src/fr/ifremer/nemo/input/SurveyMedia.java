@@ -1,13 +1,14 @@
 package fr.ifremer.nemo.input;
 
-import com.ago.xml.SAXConsumer;
-import com.ago.xml.XMLOutputWriter;
-import fr.ifremer.nemo.domain.Survey;
-import fr.ifremer.nemo.input.StationModel;
-import fr.ifremer.nemo.output.ProgressNotification;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
+
+import com.ago.xml.SAXConsumer;
+import com.ago.xml.XMLOutputWriter;
+
+import fr.ifremer.nemo.domain.Survey;
+import fr.ifremer.nemo.output.ProgressNotification;
 
 /**
  * Class SurveyMedia

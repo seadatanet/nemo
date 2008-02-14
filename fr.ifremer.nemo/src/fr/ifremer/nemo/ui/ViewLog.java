@@ -9,6 +9,8 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.ui.part.ViewPart;
 
+import fr.ifremer.nemo.util.Messages;
+
 public class ViewLog extends ViewPart {
 
 	public static final String ID = "fr.ifremer.nemo.ui.ViewLog"; //$NON-NLS-1$

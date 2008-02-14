@@ -11,7 +11,7 @@ import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.domain.Parameter;
 import fr.ifremer.nemo.domain.ParameterValue;
-import fr.ifremer.nemo.ui.Messages;
+import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSParameter;
 
 /**

@@ -1,6 +1,7 @@
 package com.ago.xml;
 
-import java.io.*;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 
 public class XMLOutputWriter {
 

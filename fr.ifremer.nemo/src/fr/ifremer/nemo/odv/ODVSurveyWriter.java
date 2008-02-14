@@ -1,13 +1,20 @@
 package fr.ifremer.nemo.odv;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Writer;
+
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.VelocityEngine;
+
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.ProgressNotification;
 import fr.ifremer.nemo.output.SurveyWriter;
 import fr.ifremer.nemo.util.SizeBasedProgressNotifier;
-import java.io.*;
-import org.apache.velocity.*;
-import org.apache.velocity.app.*;
 
 /**
  * Class ODVSurveyWriter

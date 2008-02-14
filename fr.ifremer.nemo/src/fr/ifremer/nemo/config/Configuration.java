@@ -1,13 +1,21 @@
 package fr.ifremer.nemo.config;
 
-import com.ago.xml.*;
-import fr.ifremer.nemo.config.Configuration;
-import java.io.*;
-import java.net.URL;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.Locale;
 import java.util.StringTokenizer;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+
+import com.ago.xml.Element2Field;
+import com.ago.xml.RootSAXConsumer;
+import com.ago.xml.SAXConsumer;
+import com.ago.xml.XMLBootstrapParser;
+import com.ago.xml.XMLOutputWriter;
 
 /**
  * Class Configuration

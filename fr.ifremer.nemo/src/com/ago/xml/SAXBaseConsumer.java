@@ -3,8 +3,6 @@
 package com.ago.xml;
 
 // Package libraries inclusion
-import com.ago.xml.SAXConsumer;
-import java.lang.String;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 

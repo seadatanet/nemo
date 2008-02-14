@@ -5,7 +5,6 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
@@ -20,9 +19,8 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.actions.ActionFactory;
 
-import com.ago.xml.Element2Field;
-
 import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.util.Messages;
 
 public class OptionsAction extends Action implements ISelectionListener,
 		ActionFactory.IWorkbenchAction {

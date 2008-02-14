@@ -3,7 +3,7 @@ package test.nemo;
 import fr.ifremer.nemo.domain.*;
 import fr.ifremer.nemo.input.*;
 import fr.ifremer.nemo.output.ProgressNotification;
-import fr.ifremer.nemo.ui.Application;
+//import fr.ifremer.nemo.ui.Application;
 
 import javax.swing.*;
 

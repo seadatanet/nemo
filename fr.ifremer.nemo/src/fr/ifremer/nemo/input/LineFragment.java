@@ -1,12 +1,12 @@
 package fr.ifremer.nemo.input;
 
-import com.ago.xml.*;
-import fr.ifremer.nemo.util.*;
-import java.io.*;
-import java.text.Format;
-import java.text.ParseException;
+import java.io.OutputStream;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+
+import com.ago.xml.SAXConsumer;
+import com.ago.xml.XMLOutputWriter;
 
 /**
  * Class LineFragment

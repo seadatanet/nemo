@@ -3,10 +3,8 @@
 package com.ago.xml;
 
 // Package libraries inclusion
-import com.ago.xml.SAXConsumer;
-import java.lang.Object;
-import java.lang.reflect.*;
-import java.lang.String;
+import java.lang.reflect.Method;
+
 import org.xml.sax.Attributes;
 
 /**

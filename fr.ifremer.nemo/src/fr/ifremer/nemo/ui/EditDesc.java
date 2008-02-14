@@ -8,7 +8,6 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
@@ -16,8 +15,10 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
-public class EditDesc {
+import fr.ifremer.nemo.util.Messages;
 
+public class EditDesc {
+	
 	// /////////////////////////////////////////
 
 	public static Section sectionEnteteFichier, sectionEnteteStation,
@@ -30,7 +31,7 @@ public class EditDesc {
 			upletDonnees, finDonnees, indicFinDonnees, ruptureDonneesNoLigne,
 			ruptureDonneesDebut, ruptureDonneesFin, ligneNbreMesures,
 			debutNbreMesures, finNbreMesures, ligneTest, debutTest, finTest,
-			manuelTest, manuelTest2, nbreLignesMesures = null;
+			manuelTest, manuelTest2, nbreLignesMesures, txtManuel = null;
 
 	public static Label labelEnteteFichier, labelEnteteStation,
 			labelFinStation, labelDonneesEntete, labelDonneesUplet,
@@ -40,11 +41,15 @@ public class EditDesc {
 
 	public static Button buttonRAZ, buttonExpandDesc, buttonExpandDesc2,
 			buttonValidateDesc, buttonLignesEnteteStation,
-			buttonIndicFinDonnees, buttonIndicFinDonneesPosition;
+//			buttonIndicFinDonnees, buttonIndicFinDonneesPosition,
+			buttonPreformat, btnInjectFin,
+			radEOF, radLigne, radManuel;
+
 
 	public static Group groupRuptureDonnees;
 
-	public static Combo comboIndicRuptureDonnees;
+//	FAE 33
+// 	public static Combo comboIndicRuptureDonnees;
 
 	public static ArrayList<Text> listeTextDesc;
 
@@ -108,9 +113,10 @@ public class EditDesc {
 			initSections();
 			initText();
 			initBoutons();
-			initCombos();
+//			FAE 33
+//			initCombos();
 
-			// bouton "valider étaper"
+			// bouton "valider étape"
 			buttonValidateDesc.setParent(formEdition.getBody());
 			buttonValidateDesc.setText(Messages
 					.getString("EditDesc.validerLetape")); //$NON-NLS-1$
@@ -122,6 +128,11 @@ public class EditDesc {
 			// boutons collapse all / expand all
 			buttonExpandDesc.setParent(formEdition.getBody());
 			buttonExpandDesc.setText("+"); //$NON-NLS-1$
+			
+			// Bouton préformatage
+			buttonPreformat.setParent(formEdition.getBody());
+			buttonPreformat.setText("Preformat");
+			buttonPreformat.setVisible(ViewFile.checkSeparateur.getSelection());
 
 			formEdition.redraw();
 			formEdition.reflow(true);
@@ -152,19 +163,22 @@ public class EditDesc {
 							Messages.getString("EditDesc.finStation"), Messages.getString("EditDesc.nbreLignesFinStation"), sectionFinStation, lignesFinStation); //$NON-NLS-1$ //$NON-NLS-2$
 			lignesFinStation.setText("0");
 
+			
 			Drawing
 					.sectionComboInjectNbreLignes(
 							formEdition,
-							Messages.getString("EditDesc.indicFinDonnees"), Messages.getString("EditDesc.indiquezIndicFinDonnees"), sectionRuptureDonnees, nbreLignesMesures, buttonIndicFinDonnees, comboIndicRuptureDonnees); //$NON-NLS-1$ //$NON-NLS-2$
+							Messages.getString("EditDesc.indicFinDonnees"), Messages.getString("EditDesc.indiquezIndicFinDonnees"), sectionRuptureDonnees, radEOF, radLigne, radManuel, txtManuel, btnInjectFin); //$NON-NLS-1$ //$NON-NLS-2$
 
-			// //$NON-NLS-1$
-			comboIndicRuptureDonnees.add("EOF"); //$NON-NLS-1$
-			comboIndicRuptureDonnees.add("END"); //$NON-NLS-1$
+//			FAE 33
+//			// //$NON-NLS-1$
+//			comboIndicRuptureDonnees.add("EOF"); //$NON-NLS-1$
+//			comboIndicRuptureDonnees.add("END"); //$NON-NLS-1$
 
 			// boutons collapse all / expand all
 			// buttonExpandDesc2.setParent(formEdition.getBody());
 			buttonExpandDesc2.setText("+"); //$NON-NLS-1$
-
+		
+			
 			// listeners
 
 			buttonExpandDesc
@@ -282,6 +296,20 @@ public class EditDesc {
 
 						}
 					});
+			
+			buttonPreformat
+					.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+						public void widgetSelected(
+								org.eclipse.swt.events.SelectionEvent e) {
+							
+							try {
+								fr.ifremer.nemo.util.Preformat.run();
+							} catch (Exception ex){
+								Utils.messageErreur(Messages.getString("Etape.120"));
+								ex.printStackTrace();
+							}
+						}
+					});
 
 			// refresh du formulaire
 			formEdition.reflow(true);
@@ -316,6 +344,9 @@ public class EditDesc {
 
 		// effacement bouton valider etape
 		buttonValidateDesc.setParent(s);
+		
+		// effacement bouton Preformat
+		buttonPreformat.setParent(s);
 
 		// System.out.println("expand ? = " + expand); //$NON-NLS-1$
 		for (i = 0; i <= EditDesc.listeSectionsDesc.size() - 1; i++) {
@@ -359,6 +390,7 @@ public class EditDesc {
 
 		buttonRAZ.setParent(s.getBody());
 		buttonExpandDesc.setParent(s.getBody());
+		buttonPreformat.setParent(s.getBody());
 
 		// System.out.println("expand ? = " + expand); //$NON-NLS-1$
 		for (i = 0; i <= EditDesc.listeSectionsDesc.size() - 1; i++) {
@@ -434,7 +466,8 @@ public class EditDesc {
 		listeTextDesc.add(finNbreMesures);
 		nbreLignesMesures = new Text(shell, SWT.BORDER);
 		listeTextDesc.add(nbreLignesMesures);
-
+		txtManuel = new Text(shell, SWT.BORDER);
+		
 		// remplissage de la liste des textes et ajout des listeners
 		ajoutModifyListenerText(listeTextDesc);
 
@@ -445,18 +478,24 @@ public class EditDesc {
 		Shell shell = new Shell();
 		buttonRAZ = new Button(shell, SWT.NONE);
 		buttonLignesEnteteStation = new Button(shell, SWT.RADIO);
-		buttonIndicFinDonnees = new Button(shell, SWT.RADIO);
-		buttonIndicFinDonneesPosition = new Button(shell, SWT.RADIO);
+//		FAE 33
+//		buttonIndicFinDonnees = new Button(shell, SWT.RADIO);
+//		buttonIndicFinDonneesPosition = new Button(shell, SWT.RADIO);
 		buttonExpandDesc = new Button(shell, SWT.NONE);
 		buttonExpandDesc2 = new Button(shell, SWT.NONE);
 		buttonValidateDesc = new Button(shell, SWT.NONE);
-
+		buttonPreformat = new Button(shell, SWT.NONE);
+		radEOF = new Button(shell, SWT.RADIO);
+		radLigne = new Button(shell, SWT.RADIO);
+		radManuel = new Button(shell, SWT.RADIO);
+		btnInjectFin = new Button(shell, SWT.NONE);
 	}
 
 	public static void initCombos() {
 
 		Shell shell = new Shell();
-		comboIndicRuptureDonnees = new Combo(shell, SWT.NONE);
+//		FAE 33
+//		comboIndicRuptureDonnees = new Combo(shell, SWT.NONE);
 
 	}
 
@@ -557,6 +596,41 @@ public class EditDesc {
 			}
 		}
 
+	}
+	
+	public static void selectComboEnd(Button radio) {
+		if (radio == EditDesc.radEOF) {
+			EditDesc.radEOF.setSelection(true);
+			EditDesc.radLigne.setSelection(false);
+			EditDesc.radManuel.setSelection(false);
+
+			EditDesc.txtManuel.setEnabled(false);
+			EditDesc.btnInjectFin.setEnabled(false);
+			
+		} else if (radio == EditDesc.radLigne) {
+			EditDesc.radEOF.setSelection(false);
+			EditDesc.radLigne.setSelection(true);
+			EditDesc.radManuel.setSelection(false);
+
+			EditDesc.txtManuel.setEnabled(false);
+			EditDesc.btnInjectFin.setEnabled(false);
+			
+		} else if (radio == EditDesc.radManuel) {
+			EditDesc.radEOF.setSelection(false);
+			EditDesc.radLigne.setSelection(false);
+			EditDesc.radManuel.setSelection(true);
+			
+			EditDesc.txtManuel.setEnabled(true);
+			EditDesc.btnInjectFin.setEnabled(true);
+			
+		} else {
+			EditDesc.radEOF.setSelection(true);
+			EditDesc.radLigne.setSelection(false);
+			EditDesc.radManuel.setSelection(false);
+
+			EditDesc.txtManuel.setEnabled(false);
+			EditDesc.btnInjectFin.setEnabled(false);
+		}
 	}
 
 }

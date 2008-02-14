@@ -15,6 +15,8 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
+import fr.ifremer.nemo.util.Messages;
+
 public class EditData {
 
 	// fonctions de remplissage de la zone d'édition pour les campagnes

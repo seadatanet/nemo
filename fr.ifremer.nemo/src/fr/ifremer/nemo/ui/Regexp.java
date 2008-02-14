@@ -6,6 +6,8 @@ import java.util.regex.Pattern;
 
 import org.eclipse.swt.widgets.Text;
 
+import fr.ifremer.nemo.util.Messages;
+
 public class Regexp {
 	/*
 	 * Test des valeurs des champs de l'IHM par utilisation de regexp
@@ -176,5 +178,17 @@ public class Regexp {
 		}
 		return ok;
 	}
-
+	
+//	public static Boolean checkNonVide(Text text) {
+//		Boolean ok = true;
+//		
+//		if (EditDesc.radManuel.getSelection()) {
+//			if (EditDesc.txtManuel.getText().matches("")) {
+//				ok = false;
+//				Utils.messageErreurAppend(Messages.getString("EditDesc.indicateurVide"));
+//			}
+//		}
+//		
+//		return ok;
+//	}
 }

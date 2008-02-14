@@ -1,15 +1,23 @@
 package fr.ifremer.nemo.input;
 
-import com.ago.xml.*;
-import fr.ifremer.nemo.domain.Survey;
-import fr.ifremer.nemo.input.SurveyMedia;
-import fr.ifremer.nemo.output.ProgressNotification;
-import java.io.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.TimeZone;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+
+import com.ago.xml.PathElementConsumer;
+import com.ago.xml.PathElementHandler;
+import com.ago.xml.RootSAXConsumer;
+import com.ago.xml.SAXConsumer;
+import com.ago.xml.XMLOutputWriter;
+
+import fr.ifremer.nemo.domain.Survey;
+import fr.ifremer.nemo.output.ProgressNotification;
 
 /**
  * Class InputModel
@@ -376,7 +384,7 @@ public class InputModel implements Cloneable, PathElementHandler,
 	 * @exception ParseException
 	 */
 	public Survey convert(ProgressNotification a_ProgressNotifier)
-			throws NumberFormatException, IOException, ParseException, StringIndexOutOfBoundsException {
+			throws NumberFormatException, IOException, ParseException, StringIndexOutOfBoundsException, InterruptedException {
 
 		if (isRefDateBased()) {
 			TimeZone tz = TimeZone.getTimeZone("GMT");
@@ -406,6 +414,10 @@ public class InputModel implements Cloneable, PathElementHandler,
 			try {
 				return _media.convert(_refDateBased, 0, a_ProgressNotifier);
 			} 
+			catch (InterruptedException e)
+			{
+				throw e;
+			}
 			catch (ParseException e)
 			{
 				throw e;
@@ -418,6 +430,7 @@ public class InputModel implements Cloneable, PathElementHandler,
 			{
 				throw e;
 			}
+
 			catch (Exception e) {
 			
 				// 

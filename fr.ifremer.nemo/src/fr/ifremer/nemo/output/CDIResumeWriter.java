@@ -17,8 +17,9 @@ import org.eclipse.swt.widgets.Shell;
 
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
-import fr.ifremer.nemo.ui.Messages;
+import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.ui.ViewFile;
 import fr.ifremer.nemo.util.Formatter;
 
@@ -96,11 +97,14 @@ public class CDIResumeWriter {
 					writer.write("\r\n");
 					
 					// CDI ID
-					writer.write(Utils.configuration.getDataCenter() + "_"
+//					writer.write(Utils.configuration.getDataCenter() + "_"
+//							+ String.valueOf(cdiId++));
+					writer.write(Configuration.getSingleton().getDataCenter() + "_"
 							+ String.valueOf(cdiId++));
 
 					// EDMO author
-					writer.write(";" + Utils.configuration.getIdEdmoRespCdi());
+// 					writer.write(";" + Utils.configuration.getIdEdmoRespCdi());
+					writer.write(";" + Configuration.getSingleton().getIdEdmoRespCdi());
 
 					// Area Type
 					writer.write(";" + "Point");
@@ -119,17 +123,20 @@ public class CDIResumeWriter {
 					writer.write(";" + stringDate);
 
 					// Edmo originator
-					writer
-							.write(";"
-									+ Utils.configuration.getCodeEdmoDonnees());
+//					writer.write(";"
+//									+ Utils.configuration.getCodeEdmoDonnees());
+					writer.write(";"
+							+ Configuration.getSingleton().getCodeEdmoDonnees());
 
 					// Dataset ABS
 					writer.write(";" + "Not Specified");
 
 					// EDMO Custodian
+//					writer.write(";"
+//							+ Utils.configuration.getIdEdmoRespDonnees());
 					writer.write(";"
-							+ Utils.configuration.getIdEdmoRespDonnees());
-
+							+ Configuration.getSingleton().getIdEdmoRespDonnees());
+					
 					// PDV code
 					writer.write(";" + "");
 
@@ -137,7 +144,7 @@ public class CDIResumeWriter {
 					writer.write(";" + ViewFile.txtTypePlateForme.getText());
 
 					// Dataset Access
-					writer.write(";" + ViewFile.txtAccèsDonnées.getText());
+					writer.write(";" + ViewFile.txtAccesDonnees.getText());
 
 					// Cruise name
 					if (ViewFile.collectionCas1)
@@ -164,17 +171,21 @@ public class CDIResumeWriter {
 									.getDate()));
 
 					// edmo distributor
+//					writer.write(";"
+//							+ Utils.configuration.getIdEdmoDistDonnees());
 					writer.write(";"
-							+ Utils.configuration.getIdEdmoDistDonnees());
-
+							+ Configuration.getSingleton().getIdEdmoDistDonnees());
+					
 					// data size
 					writer.write(";" + String.valueOf(survey.getDataSize()));
 
 					// DIST website
-					writer.write(";" + Utils.configuration.getCdiURL());
+//					writer.write(";" + Utils.configuration.getCdiURL());
+					writer.write(";" + Configuration.getSingleton().getCdiURL());
 
 					// DIST methode
-					writer.write(";" + Utils.configuration.getCdiMethod());
+//					writer.write(";" + Utils.configuration.getCdiMethod());
+					writer.write(";" + Configuration.getSingleton().getCdiMethod());
 
 				}
 
@@ -200,7 +211,11 @@ public class CDIResumeWriter {
 		FileDialog dialog = new FileDialog(shell, SWT.SAVE
 				| SWT.APPLICATION_MODAL);
 		dialog.setText(Messages.getString("CDIResumeWriter.choixFichier")); //$NON-NLS-1$
-		dialog.setFilterPath(Utils.configuration.getCruisesDirectory());
+//		dialog.setFilterPath(Utils.configuration.getCruisesDirectory());
+		dialog.setFilterPath(Configuration.getSingleton().getCruisesDirectory());
+		String extensions[] = new String[1];
+		extensions[0] = "*.csv"; //$NON-NLS-1$
+		dialog.setFilterExtensions(extensions);
 		nomFichierSortie = dialog.open();
 
 		if (nomFichierSortie != null) {

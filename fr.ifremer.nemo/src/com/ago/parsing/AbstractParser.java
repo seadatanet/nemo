@@ -1,9 +1,12 @@
 package com.ago.parsing;
 
+import java.text.ParseException;
+import java.util.EmptyStackException;
+import java.util.Stack;
+import java.util.Vector;
+
 import com.ago.io.PositionableByteArrayInputStream;
 import com.ago.io.PositionableStream;
-import java.text.ParseException;
-import java.util.*;
 
 /**
  * class AbstractParser

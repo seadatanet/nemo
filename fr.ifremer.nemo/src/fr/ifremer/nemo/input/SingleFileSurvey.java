@@ -1,17 +1,24 @@
 package fr.ifremer.nemo.input;
 
-import com.ago.xml.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.text.ParseException;
+import java.util.Vector;
+
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+
+import com.ago.xml.SAXConsumer;
+import com.ago.xml.XMLOutputWriter;
+
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.output.ProgressNotification;
-import fr.ifremer.nemo.ui.Messages;
-import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.SizeBasedProgressNotifier;
-import java.io.*;
-import java.text.ParseException;
-import java.util.Vector;
-import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
 
 /**
  * Class SingleFileSurvey

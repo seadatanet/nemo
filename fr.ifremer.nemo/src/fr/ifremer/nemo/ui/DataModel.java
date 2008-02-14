@@ -75,7 +75,6 @@ public class DataModel {
 		} else {
 			initDossier(timeSeries, nomFich);
 			// dossier campagne
-
 		}
 
 	}
@@ -119,7 +118,7 @@ public class DataModel {
 			stationModel = dirSurvey.getStationModel();
 		} else {
 			singleSurvey.setHeaderLinesNumber(Integer
-					.valueOf(EditDesc.lignesEnteteFichier.getText()));
+					.parseInt(EditDesc.lignesEnteteFichier.getText()));
 			stationModel = singleSurvey.getStationModel();
 		}
 
@@ -168,10 +167,10 @@ public class DataModel {
 
 		// nombre lignes entete station
 		stationModel.setNumberOfLines(Integer
-				.valueOf(EditDesc.lignesEnteteStation.getText()));
+				.parseInt(EditDesc.lignesEnteteStation.getText()));
 
 		// nombre de lignes de fin
-		stationModel.setEndData(Integer.valueOf(EditDesc.lignesFinStation
+		stationModel.setEndData(Integer.parseInt(EditDesc.lignesFinStation
 				.getText()));
 
 		// metaInData
@@ -180,28 +179,38 @@ public class DataModel {
 		// attribut pattern fin donnees en accès direct
 
 		// si manuel -> direct sinon passer par propertyModel
-
-		if (EditDesc.buttonIndicFinDonnees.getSelection()) {
-
-			// pattern
+		if (EditDesc.radEOF.getSelection()) {
+			stationModel.setEndOnEOF(true);
+		} else if (EditDesc.radLigne.getSelection()) {
+			stationModel.setEndOnEmptyLine(true);
+		} else if (EditDesc.radManuel.getSelection()) {
 			stationModel.setEndOnPattern(true);
-			// propertyModel.setUserProvided(true);
-
-			if (EditDesc.comboIndicRuptureDonnees.getText().matches("EOF")) {
-				stationModel.setEndDataPattern("^$");
-			} else {
-
-				stationModel
-						.setEndDataPattern(EditDesc.comboIndicRuptureDonnees
-								.getText());
-			}
-
-		} else {
-			// nombre de mesures dans le fichier
-			stationModel.setEndOnPattern(false);
-			stationModel.setRowNumber(EditDesc.nbreLignesMesures.getText());
-
+			
+			stationModel.setEndDataPattern(EditDesc.txtManuel.getText());
 		}
+		
+//		FAE 33
+//		if (EditDesc.buttonIndicFinDonnees.getSelection()) {
+//
+//			// pattern
+//			stationModel.setEndOnPattern(true);
+//			// propertyModel.setUserProvided(true);
+//
+//			if (EditDesc.comboIndicRuptureDonnees.getText().matches("EOF")) {
+//				stationModel.setEndDataPattern("^$");
+//			} else {
+//
+//				stationModel
+//						.setEndDataPattern(EditDesc.comboIndicRuptureDonnees
+//								.getText());
+//			}
+//
+//		} else {
+//			// nombre de mesures dans le fichier
+//			stationModel.setEndOnPattern(false);
+//			stationModel.setRowNumber(EditDesc.nbreLignesMesures.getText());
+//
+//		}
 
 		// on initialise les dataTypes, centers et parameters en prévision des
 		// onglets Campagne et Data
@@ -275,7 +284,10 @@ public class DataModel {
 		survey.setRegionName(EditSurvey.textRegion.getText());
 
 		// Source de données
-		survey.setCountryCode(EditSurvey.textPays.getText());
+//		survey.setCountryCode(EditSurvey.textPays.getText());
+		String country = EditSurvey.comboCountries.getText();		
+		survey.setCountryCode(country.substring(0, country.indexOf(" - ")));
+		
 		survey.setLaboratories(EditSurvey.textLabo.getText());
 		survey.setChiefScientist(EditSurvey.textChef.getText());
 		survey.setProjectName(EditSurvey.textProjet.getText());
@@ -1358,22 +1370,35 @@ public class DataModel {
 
 		// metaInData
 		// stationModel.setMetaInData(false);
-
+		
 		// pattern de fin fourni ou pas
-		if (stationModel_modele.getEndDataPattern().matches("")) {
-			// pas de pattern de fin donc nombre de mesures dans le fichier
-			EditDesc.nbreLignesMesures.setText(""
-					+ stationModel_modele.getRowNumber());
 
-		} else {
-			// pattern de fin
-			EditDesc.buttonIndicFinDonnees.setSelection(true);
-			EditDesc.buttonIndicFinDonneesPosition.setSelection(false);
-			// on rajoute met le pattern en début de liste et on le sélectionne
-			EditDesc.comboIndicRuptureDonnees.setItem(0, stationModel_modele
-					.getEndDataPattern());
-			EditDesc.comboIndicRuptureDonnees.select(0);
+		if (stationModel_modele.isEndOnEOF()) {
+			EditDesc.selectComboEnd(EditDesc.radEOF);
+		} else if (stationModel_modele.isEndOnEmptyLine()){
+			EditDesc.selectComboEnd(EditDesc.radLigne);
+		} else if (stationModel_modele.isEndOnPattern()) {
+			EditDesc.selectComboEnd(EditDesc.radManuel);
+			
+			EditDesc.txtManuel.setText(stationModel_modele.getEndDataPattern());
 		}
+		
+//		FAE 33
+//		// pattern de fin fourni ou pas
+//		if (stationModel_modele.getEndDataPattern().matches("")) {
+//			// pas de pattern de fin donc nombre de mesures dans le fichier
+//			EditDesc.nbreLignesMesures.setText(""
+//					+ stationModel_modele.getRowNumber());
+//
+//		} else {
+//			// pattern de fin
+//			EditDesc.buttonIndicFinDonnees.setSelection(true);
+//			EditDesc.buttonIndicFinDonneesPosition.setSelection(false);
+//			// on rajoute met le pattern en début de liste et on le sélectionne
+//			EditDesc.comboIndicRuptureDonnees.setItem(0, stationModel_modele
+//					.getEndDataPattern());
+//			EditDesc.comboIndicRuptureDonnees.select(0);
+//		}
 
 		// System.out.println("Fin remplissage onglet Desc");
 
@@ -1432,7 +1457,19 @@ public class DataModel {
 		EditSurvey.textRegion.setText(survey.getRegionName());
 
 		// Source de données
-		EditSurvey.textPays.setText(survey.getCountryCode());
+// 		EditSurvey.textPays.setText(survey.getCountryCode());
+		int taille = DataModel.listeWSCountries.length;
+		int k = 0;
+		EditSurvey.comboCountries.select(k);
+		String countryCode = survey.getCountryCode();
+		int j = countryCode.length();
+		while (k < taille
+				&& !EditSurvey.comboCountries.getText().substring(0, j)
+						.equals(countryCode)) {
+			k++;
+			EditSurvey.comboCountries.select(k);
+		}
+		
 		EditSurvey.textLabo.setText(survey.getLaboratories());
 		EditSurvey.textChef.setText(survey.getChiefScientist());
 		EditSurvey.textProjet.setText(survey.getProjectName());
@@ -1441,7 +1478,7 @@ public class DataModel {
 
 		//	
 		// survey.setDataCentre(code);
-		int taille = DataModel.listeWSCenters.length;
+		taille = DataModel.listeWSCenters.length;
 		int position = 0;
 		for (int i = 0; i < taille; i++) {
 			Pattern pat = Pattern.compile(" - ");
@@ -1809,9 +1846,11 @@ public class DataModel {
 		propertyModel = stationModel_modele.propertiesAt("time");
 
 		DateTimeFormat timeFormat = (DateTimeFormat) propertyModel.getFormat();
-		EditStation.comboHeure.add(timeFormat.getFormatString(), 0);
-		EditStation.comboHeure.select(0);
-
+		Utils.selectComboValeur(EditStation.comboHeure, timeFormat.getFormatString());
+//		EditStation.comboHeure.add(timeFormat.getFormatString(), 0);
+//		EditStation.comboHeure.select(0);
+		
+		
 		if (propertyModel.isUserProvided()) {
 			// saisie manuelle
 
@@ -1858,8 +1897,9 @@ public class DataModel {
 
 		DateTimeFormat dateFormat = (DateTimeFormat) propertyModel.getFormat();
 
-		EditStation.comboDate.add(dateFormat.getFormatString(), 0);
-		EditStation.comboDate.select(0);
+		Utils.selectComboValeur(EditStation.comboDate, dateFormat.getFormatString());
+//		EditStation.comboDate.add(dateFormat.getFormatString(), 0);
+//		EditStation.comboDate.select(0);
 
 		if (propertyModel.isUserProvided()) {
 			// saisie manuelle
@@ -1908,8 +1948,9 @@ public class DataModel {
 				.getFormat();
 		String formatLat = latitudeFormat.getFormatString();
 
-		EditStation.comboLatitude.add(latitudeFormat.getFormatString(), 0);
-		EditStation.comboLatitude.select(0);
+		Utils.selectComboValeur(EditStation.comboLatitude, latitudeFormat.getFormatString());
+//		EditStation.comboLatitude.add(latitudeFormat.getFormatString(), 0);
+//		EditStation.comboLatitude.select(0);
 
 		if (propertyModel.isUserProvided()) {
 			// saisie manuelle latitude
@@ -1952,8 +1993,9 @@ public class DataModel {
 				.getFormat();
 		String formatLong = longitudeFormat.getFormatString();
 
-		EditStation.comboLongitude.add(longitudeFormat.getFormatString(), 0);
-		EditStation.comboLongitude.select(0);
+		Utils.selectComboValeur(EditStation.comboLongitude, longitudeFormat.getFormatString());
+//		EditStation.comboLongitude.add(longitudeFormat.getFormatString(), 0);
+//		EditStation.comboLongitude.select(0);
 
 		if (propertyModel.isUserProvided()) {
 			// saisie manuelle latitude
@@ -2215,7 +2257,7 @@ public class DataModel {
 		
 		ViewFile.txtCompteurCDI.setText(stationModel_modele.getCdi().getCompteur());
 		ViewFile.txtTypePlateForme.setText(stationModel_modele.getCdi().getTypePlateForme());
-		ViewFile.txtAccèsDonnées.setText(stationModel_modele.getCdi().getAccesDonnees());
+		ViewFile.txtAccesDonnees.setText(stationModel_modele.getCdi().getAccesDonnees());
 
 		// System.out.println("Fin remplissage onglet Station");
 

@@ -15,6 +15,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.actions.ActionFactory;
 
 import fr.ifremer.nemo.input.InputModel;
+import fr.ifremer.nemo.util.Messages;
 
 public class OpenAction extends Action implements ISelectionListener,
 		ActionFactory.IWorkbenchAction {

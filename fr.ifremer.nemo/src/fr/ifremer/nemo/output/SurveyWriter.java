@@ -1,10 +1,10 @@
 package fr.ifremer.nemo.output;
 
-import fr.ifremer.nemo.domain.Survey;
-import fr.ifremer.nemo.output.ProgressNotification;
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
+
+import fr.ifremer.nemo.domain.Survey;
 
 /**
  * Interface SurveyWriter

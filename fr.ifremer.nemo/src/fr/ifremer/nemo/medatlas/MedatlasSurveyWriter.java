@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.io.Writer;
 
 import org.apache.velocity.VelocityContext;
@@ -74,6 +73,8 @@ public class MedatlasSurveyWriter implements Cloneable, SurveyWriter {
 			writer = new BufferedWriter(new FileWriter(a_Filename));
 			
 			writeSurvey(a_Survey, writer, a_Progress);
+		} catch (Exception e){
+			throw new GenerationException(e);
 		} finally {
 			if (writer != null) {
 				try {

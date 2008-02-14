@@ -1,11 +1,13 @@
 package fr.ifremer.nemo.domain;
 
-import com.ago.xml.*;
-import java.io.*;
-import java.sql.Date;
-import java.sql.Time;
+import java.io.OutputStream;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+
+import com.ago.xml.Element2Field;
+import com.ago.xml.SAXConsumer;
+import com.ago.xml.XMLOutputWriter;
 
 /**
  * Class TimeSeriesInformation

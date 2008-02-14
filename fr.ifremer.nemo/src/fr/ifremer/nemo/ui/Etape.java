@@ -3,12 +3,11 @@ package fr.ifremer.nemo.ui;
 import java.text.ParseException;
 import java.util.regex.Pattern;
 
-import org.eclipse.swt.widgets.Table;
-
 import fr.ifremer.nemo.input.HorodatedParameterModel;
 import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.LatitudeFormat;
 import fr.ifremer.nemo.util.LongitudeFormat;
+import fr.ifremer.nemo.util.Messages;
 
 public class Etape {
 
@@ -25,7 +24,7 @@ public class Etape {
 
 		Boolean ok, resultat;
 		ok = true;
-		Table table;
+		//Table table;
 
 		// raz du message d'erreurs
 		Utils.messageErreur(""); //$NON-NLS-1$
@@ -45,20 +44,30 @@ public class Etape {
 				.getString("Etape.3")); //$NON-NLS-1$
 		ok = ok && resultat;
 
-		// section fin de données
-		if (!EditDesc.buttonIndicFinDonnees.getSelection()) {
-			resultat = Regexp.checkTextValeur(EditDesc.nbreLignesMesures,
-					Messages.getString("Etape.4")); //$NON-NLS-1$
+		
+		// section fin de données	
 
-			ok = ok && resultat;
-		} else {
-			// format de la combolist
-			if (EditDesc.comboIndicRuptureDonnees.getText().matches("")) {
-				Utils.messageErreurAppend(Messages.getString("Etape.100"));
+		if (EditDesc.radManuel.getSelection()) {
+			if (EditDesc.txtManuel.getText().matches("")) {
 				ok = false;
+				Utils.messageErreurAppend(Messages.getString("EditDesc.indicateurVide"));
 			}
-
 		}
+		
+//		FAE 33
+//		if (!EditDesc.buttonIndicFinDonnees.getSelection()) {
+//			resultat = Regexp.checkTextValeur(EditDesc.nbreLignesMesures,
+//					Messages.getString("Etape.4")); //$NON-NLS-1$
+//
+//			ok = ok && resultat;
+//		} else {
+//			// format de la combolist
+//			if (EditDesc.comboIndicRuptureDonnees.getText().matches("")) {
+//				Utils.messageErreurAppend(Messages.getString("Etape.100"));
+//				ok = false;
+//			}
+//
+//		}
 
 		// check des valeurs date/heure séries tempo
 		if (ViewFile.checkBoxTempo.getSelection()) {
@@ -135,8 +144,8 @@ public class Etape {
 		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textRegion,
 				Messages.getString("Etape.17")); //$NON-NLS-1$
 		ok = ok && resultat;
-		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textPays,
-				Messages.getString("Etape.18")); //$NON-NLS-1$
+//		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textPays,
+//				Messages.getString("Etape.18")); //$NON-NLS-1$
 		ok = ok && resultat;
 		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textChef,
 				Messages.getString("Etape.19")); //$NON-NLS-1$

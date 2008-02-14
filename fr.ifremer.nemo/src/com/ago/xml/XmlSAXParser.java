@@ -3,14 +3,17 @@
 package com.ago.xml;
 
 // Package libraries inclusion
-import com.ago.xml.SAXConsumer;
-import java.io.*;
-import java.lang.String;
-import java.lang.StringBuffer;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Stack;
-import org.xml.sax.*;
-import org.xml.sax.helpers.*;
+
+import org.xml.sax.Attributes;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
+import org.xml.sax.helpers.DefaultHandler;
+import org.xml.sax.helpers.XMLReaderFactory;
 
 /**
  * Classe abstraite de parsing de fichier XML utilisant l'API SAX

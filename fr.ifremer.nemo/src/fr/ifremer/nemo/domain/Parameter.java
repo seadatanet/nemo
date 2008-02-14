@@ -1,10 +1,17 @@
 package fr.ifremer.nemo.domain;
 
-import com.ago.xml.*;
-import fr.ifremer.nemo.ws.WSParameter;
-import java.io.*;
+import java.io.OutputStream;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+
+import com.ago.xml.Element2Field;
+import com.ago.xml.PathElementConsumer;
+import com.ago.xml.PathElementHandler;
+import com.ago.xml.SAXConsumer;
+import com.ago.xml.XMLOutputWriter;
+
+import fr.ifremer.nemo.ws.WSParameter;
 
 /**
  * Class Parameter

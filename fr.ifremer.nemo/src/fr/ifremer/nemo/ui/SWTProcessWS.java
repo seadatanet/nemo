@@ -17,6 +17,7 @@ import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.medatlas.MedatlasSurveyWriter;
 import fr.ifremer.nemo.odv.ODVSurveyWriter;
 import fr.ifremer.nemo.output.ProgressNotification;
+import fr.ifremer.nemo.util.Messages;
 
 public class SWTProcessWS implements IRunnableWithProgress {
 	public static ScrolledForm formEdition;

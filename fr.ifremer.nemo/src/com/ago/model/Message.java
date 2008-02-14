@@ -3,9 +3,6 @@ package com.ago.model;
 /* From Jack Version V1.5 on October 21, 1999 at 7:54:48 am */
 
 // Package libraries inclusion
-import java.lang.Class;
-import java.lang.Object;
-import java.lang.String;
 import java.lang.reflect.InvocationTargetException;
 
 /**

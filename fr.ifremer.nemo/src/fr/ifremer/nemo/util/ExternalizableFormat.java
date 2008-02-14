@@ -1,8 +1,9 @@
 package fr.ifremer.nemo.util;
 
+import java.text.Format;
+
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
-import java.text.Format;
 
 /**
  * Class ExternalizableFormat

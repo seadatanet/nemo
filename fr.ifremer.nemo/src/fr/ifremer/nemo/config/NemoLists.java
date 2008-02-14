@@ -1,12 +1,20 @@
 package fr.ifremer.nemo.config;
 
-import fr.ifremer.nemo.ws.*;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.net.URL;
+
+import fr.ifremer.nemo.ws.NemoWS;
+import fr.ifremer.nemo.ws.NemoWSServiceLocator;
+import fr.ifremer.nemo.ws.WSCountry;
+import fr.ifremer.nemo.ws.WSDataCentre;
+import fr.ifremer.nemo.ws.WSDataType;
+import fr.ifremer.nemo.ws.WSParameter;
+import fr.ifremer.nemo.ws.WSRegion;
+import fr.ifremer.nemo.ws.WSShip;
+import fr.ifremer.nemo.ws.WSSurveyDescription;
 
 /**
  * Class NemoLists
@@ -1822,7 +1830,8 @@ public class NemoLists implements Cloneable {
 		okRegions = false;
 		FileOutputStream stream = null;
 		XMLEncoder encoder = null;
-		try {
+		try { 
+			int j;
 			NemoWS service = new NemoWSServiceLocator()
 					.getNEMO(new java.net.URL(Configuration.getSingleton()
 							.getNemoWebServiceURL()));

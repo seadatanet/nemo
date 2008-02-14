@@ -26,6 +26,8 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
+import fr.ifremer.nemo.util.Messages;
+
 public class ViewFile extends ViewPart {
 
 	public static final String ID = "fr.ifremer.nemo.ui.ViewFile"; // //$NON-NLS-1$
@@ -52,13 +54,26 @@ public class ViewFile extends ViewPart {
 	private Composite composite11 = null;
 
 	private Composite composite12 = null;
+	
+	private Composite compositeSeparateur = null;
+	
+	private Composite compositeSeparateurAutre = null;
+	
+	private Composite compositeChoixFichier = null;
 
 	public static Button checkBoxTempo, medatlas, odv, checkCDI;
 
 	public static Button radioFichier = null;
 
 	public static Button radioDossier = null;
+	
+	public static Button checkSeparateur = null;
+	
+	public static Button radioTabulation, radioPointVirgule, 
+						radioVirgule, radioEspace, radioSeparateurAutre = null;
 
+	public static Text textSeparateur = null;
+	
 	public static Label labelCampagne;
 
 	public static Label labelCollection;
@@ -107,11 +122,14 @@ public class ViewFile extends ViewPart {
 
 	public static Table tableData;
 	
-	public static Label lblCompteurCDI, lblTypePlateForme, lblAccèsDonnées ;
+	public static Label lblCompteurCDI, lblTypePlateForme, lblAccesDonnees ;
 	
-	public static Text txtCompteurCDI, txtTypePlateForme, txtAccèsDonnées ;
+	public static Text txtCompteurCDI, txtTypePlateForme, txtAccesDonnees ;
 
 	public static Group grpCDI;
+	
+	private static Group grpSeparateur;
+	
 	public static boolean writeResume;
 	@Override
 	public void createPartControl(Composite parent) {
@@ -271,28 +289,30 @@ public class ViewFile extends ViewPart {
 		gridLayout.numColumns = 1;
 		composite11 = new Composite(composite1, SWT.NONE);
 		composite11.setLayout(gridLayout);
+		
+		compositeChoixFichier = new Composite(composite11, SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compositeChoixFichier);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(compositeChoixFichier);
+		
+		labelCampagne = new Label(compositeChoixFichier, SWT.NONE);
+		labelCampagne.setText(Messages.getString("ViewFile.traiterCampagne")+"           ");  //$NON-NLS-1$
 
-		labelCampagne = new Label(composite11, SWT.NONE);
-		labelCampagne.setText(Messages.getString("ViewFile.traiterCampagne"));  //$NON-NLS-1$
-
-		radioFichier = new Button(composite11, SWT.RADIO);
+		labelCollection = new Label(compositeChoixFichier, SWT.NONE);
+		labelCollection.setText(Messages.getString("ViewFile.traiterCollection"));  //$NON-NLS-1$
+		
+		radioFichier = new Button(compositeChoixFichier, SWT.RADIO);
 		radioFichier.setSelection(true);
 		radioFichier.setText(Messages.getString("ViewFile.fichierCampagne")); //$NON-NLS-1$
-		radioDossier = new Button(composite11, SWT.RADIO);
-		radioDossier.setText(Messages.getString("ViewFile.dossierCampagne")); //$NON-NLS-1$
-
-		new Label(composite11, SWT.NONE);
-
-		labelCollection = new Label(composite11, SWT.NONE);
-		labelCollection.setText(Messages.getString("ViewFile.traiterCollection"));  //$NON-NLS-1$
-
-		radioCollectCas1 = new Button(composite11, SWT.RADIO);
+		
+		radioCollectCas1 = new Button(compositeChoixFichier, SWT.RADIO);
 		radioCollectCas1.setText(Messages.getString("ViewFile.collectionCas1")); //$NON-NLS-1$
-		radioCollectCasN = new Button(composite11, SWT.RADIO);
+		
+		radioDossier = new Button(compositeChoixFichier, SWT.RADIO);
+		radioDossier.setText(Messages.getString("ViewFile.dossierCampagne")); //$NON-NLS-1$
+		
+		radioCollectCasN = new Button(compositeChoixFichier, SWT.RADIO);
 		radioCollectCasN.setText(Messages.getString("ViewFile.collectionCasN")); //$NON-NLS-1$
-
-		new Label(composite11, SWT.NONE);
-
+		
 		radioFichier
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
@@ -310,11 +330,32 @@ public class ViewFile extends ViewPart {
 
 					}
 				});
+		
+		radioCollectCas1
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(
+							org.eclipse.swt.events.SelectionEvent e) {
+						// System.out.println("dossier campagne)"); //
+
+					}
+				});
+		
+		radioCollectCasN
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(
+							org.eclipse.swt.events.SelectionEvent e) {
+						// System.out.println("dossier campagne)"); //
+					}
+				});
+		
+		createGroupeSeparateur();
 
 		buttonParcourir = new Button(composite11, SWT.NONE);
 		buttonParcourir.setText(Messages.getString("ViewFile.parcourir")); //$NON-NLS-1$
 		checkBoxTempo = new Button(composite11, SWT.CHECK);
 		checkBoxTempo.setText(Messages.getString("ViewFile.serieTempo")); //$NON-NLS-1$
+	
+		
 		checkBoxTempo
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
@@ -325,6 +366,7 @@ public class ViewFile extends ViewPart {
 				});
 
 		createGroupTempo();
+		
 		buttonParcourir
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
@@ -332,12 +374,12 @@ public class ViewFile extends ViewPart {
 						// System.out.println("parcourir"); // //$NON-NLS-1$
 
 						// parcours des fichiers/dossiers
+						
 						// si fichier campagne
-
 						if (radioFichier.getSelection()) {
 
 							// Si on a supprimé l'onglet campagne pour une
-							// colleciton on le réaffiche
+							// collection on le réaffiche
 							// vu qu'on selectionne maintenant fichier campagne
 							if (tabItem1.isDisposed()) {
 								tabItem1 = new TabItem(tabFolder, SWT.NONE, 1);
@@ -394,6 +436,7 @@ public class ViewFile extends ViewPart {
 
 							}
 						}
+						
 						// si dossier campagne
 						if (radioDossier.getSelection()) {
 
@@ -455,6 +498,8 @@ public class ViewFile extends ViewPart {
 							Shell shell = new Shell();
 							DirectoryDialog dialog = new DirectoryDialog(shell,
 									SWT.OPEN | SWT.APPLICATION_MODAL);
+							dialog.setFilterPath(Utils.configuration
+									.getCruisesDirectory());
 							nomRepertoire = dialog.open();
 							if (nomRepertoire != null) {
 								fileLoaded = true;
@@ -491,6 +536,7 @@ public class ViewFile extends ViewPart {
 
 							}
 						}
+						
 						if (radioCollectCasN.getSelection()) {
 
 							dossierCampagne = false;
@@ -500,6 +546,8 @@ public class ViewFile extends ViewPart {
 							Shell shell = new Shell();
 							DirectoryDialog dialog = new DirectoryDialog(shell,
 									SWT.OPEN | SWT.APPLICATION_MODAL);
+							dialog.setFilterPath(Utils.configuration
+									.getCruisesDirectory());
 							nomRepertoire = dialog.open();
 							if (nomRepertoire != null) {
 								fileLoaded = true;
@@ -603,18 +651,18 @@ public class ViewFile extends ViewPart {
 		txtTypePlateForme = new Text(cmpCDI, SWT.BORDER);
 		GridDataFactory.fillDefaults().grab(true,false).applyTo(txtTypePlateForme);
 		
-		lblAccèsDonnées = new Label(cmpCDI, SWT.NONE);
-		lblAccèsDonnées.setText(Messages.getString("ViewFile.accesDonnees"));
-		txtAccèsDonnées = new Text(cmpCDI, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(txtAccèsDonnées);
+		lblAccesDonnees = new Label(cmpCDI, SWT.NONE);
+		lblAccesDonnees.setText(Messages.getString("ViewFile.accesDonnees"));
+		txtAccesDonnees = new Text(cmpCDI, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(txtAccesDonnees);
 		
 		// Par défaut
 		lblCompteurCDI.setEnabled(checkCDI.getSelection());
 		txtCompteurCDI.setEnabled(checkCDI.getSelection());
 		lblTypePlateForme.setEnabled(checkCDI.getSelection());
 		txtTypePlateForme.setEnabled(checkCDI.getSelection());
-		lblAccèsDonnées.setEnabled(checkCDI.getSelection());
-		txtAccèsDonnées.setEnabled(checkCDI.getSelection());
+		lblAccesDonnees.setEnabled(checkCDI.getSelection());
+		txtAccesDonnees.setEnabled(checkCDI.getSelection());
 		writeResume = checkCDI.getSelection();
 		
 		// bouton checkCDI
@@ -626,8 +674,8 @@ public class ViewFile extends ViewPart {
 						txtCompteurCDI.setEnabled(checkCDI.getSelection());
 						lblTypePlateForme.setEnabled(checkCDI.getSelection());
 						txtTypePlateForme.setEnabled(checkCDI.getSelection());
-						lblAccèsDonnées.setEnabled(checkCDI.getSelection());
-						txtAccèsDonnées.setEnabled(checkCDI.getSelection());
+						lblAccesDonnees.setEnabled(checkCDI.getSelection());
+						txtAccesDonnees.setEnabled(checkCDI.getSelection());
 						writeResume = checkCDI.getSelection();
 					}
 				});
@@ -663,12 +711,55 @@ public class ViewFile extends ViewPart {
 
 	}
 
-
-
 	private void createCompositeData(Composite compo) {
 		compositeData = new Composite(compo, SWT.NONE);
 		compositeData.setLayout(new FillLayout());
 
+	}
+	
+	private void createGroupeSeparateur() {	
+		grpSeparateur = new Group(composite11, SWT.NONE);
+		GridLayoutFactory.fillDefaults().applyTo(grpSeparateur);
+		GridDataFactory.fillDefaults().grab(false,false).applyTo(grpSeparateur);
+		
+		checkSeparateur = new Button(grpSeparateur, SWT.CHECK);
+		checkSeparateur.setText(Messages.getString("Preformat.3"));
+		
+		compositeSeparateur = new Composite(grpSeparateur, SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(3).applyTo(compositeSeparateur);
+		GridDataFactory.fillDefaults().grab(false,false).applyTo(compositeSeparateur);
+		
+		radioTabulation = new Button(compositeSeparateur, SWT.RADIO);
+		radioTabulation.setText(Messages.getString("Preformat.4"));
+		radioTabulation.setSelection(true);
+		
+		radioPointVirgule = new Button(compositeSeparateur, SWT.RADIO);
+		radioPointVirgule.setText(Messages.getString("Preformat.5"));
+		
+		radioVirgule = new Button(compositeSeparateur, SWT.RADIO);
+		radioVirgule.setText(Messages.getString("Preformat.6"));
+		
+		radioEspace = new Button(compositeSeparateur, SWT.RADIO);
+		radioEspace.setText(Messages.getString("Preformat.7"));
+		
+//		compositeSeparateurAutre = new Composite(compositeSeparateur, SWT.NONE);
+//		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compositeSeparateurAutre);
+//		GridDataFactory.fillDefaults().grab(false,false).applyTo(compositeSeparateurAutre);
+		
+		radioSeparateurAutre = new Button(compositeSeparateur, SWT.RADIO);
+		radioSeparateurAutre.setText(Messages.getString("Preformat.8"));
+		textSeparateur = new Text(compositeSeparateur, SWT.BORDER);
+		
+		// Par défaut
+		compositeSeparateur.setVisible(false);
+		
+		checkSeparateur
+		.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+			public void widgetSelected(
+					org.eclipse.swt.events.SelectionEvent g) {
+				compositeSeparateur.setVisible(checkSeparateur.getSelection());
+			}
+		});
 	}
 
 	public static boolean isCollection() {

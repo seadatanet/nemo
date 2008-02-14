@@ -13,6 +13,8 @@ import org.eclipse.ui.forms.events.ExpansionAdapter;
 import org.eclipse.ui.forms.events.ExpansionEvent;
 import org.eclipse.ui.forms.widgets.Section;
 
+import fr.ifremer.nemo.util.Messages;
+
 public class DrawingData {
 
 	private static Group grou;
@@ -56,27 +58,27 @@ public class DrawingData {
 		GridLayout gridLayout1 = new GridLayout();
 		gridLayout1.numColumns = 6;
 		Group groupe = new Group(sectionClient, SWT.NONE);
-		groupe.setText("Position");
+		groupe.setText(Messages.getString("Drawing.7"));
 		groupe.setLayout(gridLayout1);
 		grou = groupe;
 
 		// ligne
 		Label label1 = new Label(groupe, SWT.NULL);
-		label1.setText("Ligne");
+		label1.setText(Messages.getString("Drawing.10"));
 		ligne.setParent(groupe);
 
 		ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// debut
 		Label label2 = new Label(groupe, SWT.NULL);
-		label2.setText("Début");
+		label2.setText(Messages.getString("Drawing.11"));
 		debut.setParent(groupe);
 
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
 		Label label3 = new Label(groupe, SWT.NULL);
-		label3.setText("Fin");
+		label3.setText(Messages.getString("Drawing.12"));
 		fin.setParent(groupe);
 
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -86,7 +88,7 @@ public class DrawingData {
 
 		// bouton d'injection de la position des valeurs
 		Button buttonInject = new Button(groupe, SWT.NONE);
-		buttonInject.setText("Injecter");
+		buttonInject.setText(Messages.getString("Drawing.1"));
 
 		section.setClient(sectionClient);
 
@@ -160,7 +162,7 @@ public class DrawingData {
 		GridLayout gridLayout1 = new GridLayout();
 		gridLayout1.numColumns = 6;
 		Group groupe = new Group(sectionClient, SWT.NONE);
-		groupe.setText("Position");
+		groupe.setText(Messages.getString("Drawing.7"));
 		groupe.setLayout(gridLayout1);
 		grou = groupe;
 
@@ -168,21 +170,21 @@ public class DrawingData {
 
 		// debut
 		Label label2 = new Label(groupe, SWT.NULL);
-		label2.setText("Début");
+		label2.setText(Messages.getString("Drawing.11"));
 		debut.setParent(groupe);
 
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
 		Label label3 = new Label(groupe, SWT.NULL);
-		label3.setText("Fin");
+		label3.setText(Messages.getString("Drawing.12"));
 		fin.setParent(groupe);
 
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// bouton d'injection de la position des valeurs
 		Button buttonInject = new Button(groupe, SWT.NONE);
-		buttonInject.setText("Injecter");
+		buttonInject.setText(Messages.getString("Drawing.1"));
 
 		section.setClient(sectionClient);
 
@@ -271,33 +273,33 @@ public class DrawingData {
 		GridLayout gridLayout1 = new GridLayout();
 		gridLayout1.numColumns = 6;
 		Group groupe = new Group(sectionClient, SWT.NONE);
-		groupe.setText("Position");
+		groupe.setText(Messages.getString("Drawing.7"));
 		groupe.setLayout(gridLayout1);
 		grou = groupe;
 
 		// ligne
 		Label label1 = new Label(groupe, SWT.NULL);
-		label1.setText("Ligne");
+		label1.setText(Messages.getString("Drawing.10"));
 		ligne.setParent(groupe);
 
 		ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// debut
 		Label label2 = new Label(groupe, SWT.NULL);
-		label2.setText("Début");
+		label2.setText(Messages.getString("Drawing.11"));
 		debut.setParent(groupe);
 
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
 		Label label3 = new Label(groupe, SWT.NULL);
-		label3.setText("Fin");
+		label3.setText(Messages.getString("Drawing.12"));
 		fin.setParent(groupe);
 
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		// bouton d'injection de la position des valeurs
 		Button buttonInject = new Button(groupe, SWT.NONE);
-		buttonInject.setText("Injecter");
+		buttonInject.setText(Messages.getString("Drawing.1"));
 
 		section.setClient(sectionClient);
 
@@ -390,25 +392,25 @@ public class DrawingData {
 		format.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		Group groupe = new Group(sectionClient, SWT.NONE);
-		groupe.setText("Position");
+		groupe.setText(Messages.getString("Drawing.7"));
 		groupe.setLayout(gridLayout1);
 		grou = groupe;
 
 		// debut
 		Label label2 = new Label(groupe, SWT.NULL);
-		label2.setText("Début");
+		label2.setText(Messages.getString("Drawing.11"));
 		debut.setParent(groupe);
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
 		Label label3 = new Label(groupe, SWT.NULL);
-		label3.setText("Fin");
+		label3.setText(Messages.getString("Drawing.12"));
 		fin.setParent(groupe);
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// bouton d'injection de la position des valeurs
 		Button buttonInject = new Button(groupe, SWT.NONE);
-		buttonInject.setText("Injecter");
+		buttonInject.setText(Messages.getString("Drawing.1"));
 
 		// bouton supprimer / modifier
 		Button buttonModifier = new Button(sectionClient, SWT.NONE);
@@ -502,25 +504,25 @@ public class DrawingData {
 		format.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		Group groupe = new Group(sectionClient, SWT.NONE);
-		groupe.setText("Position");
+		groupe.setText(Messages.getString("Drawing.7"));
 		groupe.setLayout(gridLayout1);
 		grou = groupe;
 
 		// debut
 		Label label2 = new Label(groupe, SWT.NULL);
-		label2.setText("Début");
+		label2.setText(Messages.getString("Drawing.11"));
 		debut.setParent(groupe);
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
 		Label label3 = new Label(groupe, SWT.NULL);
-		label3.setText("Fin");
+		label3.setText(Messages.getString("Drawing.12"));
 		fin.setParent(groupe);
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// bouton d'injection de la position des valeurs
 		Button buttonInject = new Button(groupe, SWT.NONE);
-		buttonInject.setText("Injecter");
+		buttonInject.setText(Messages.getString("Drawing.1"));
 
 		// bouton supprimer / modifier
 		Button buttonModifier = new Button(sectionClient, SWT.NONE);

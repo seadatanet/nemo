@@ -10,9 +10,16 @@
 
 package com.ago.xml;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Stack;
-import org.xml.sax.*;
+
+import org.xml.sax.Attributes;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
 
 public class XMLBootstrapParser extends XmlSAXParser {
 

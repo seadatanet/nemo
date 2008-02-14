@@ -1,10 +1,12 @@
 package com.ago.parsing;
 
-import com.ago.model.MessageSend;
-import com.ago.io.*;
-import java.util.Vector;
-import java.text.ParseException;
 import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
+import java.util.Vector;
+
+import com.ago.io.PositionableByteArrayInputStream;
+import com.ago.io.PositionableStream;
+import com.ago.model.MessageSend;
 
 /**
  * StreamScanner scans a stream picking out syntactic token.s It looks one

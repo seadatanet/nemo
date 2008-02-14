@@ -1,11 +1,17 @@
 package fr.ifremer.nemo.input;
 
-import com.ago.xml.*;
-import fr.ifremer.nemo.util.*;
-import java.io.*;
+import java.io.OutputStream;
 import java.text.ParseException;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+
+import com.ago.xml.PathElementConsumer;
+import com.ago.xml.PathElementHandler;
+import com.ago.xml.SAXConsumer;
+import com.ago.xml.XMLOutputWriter;
+
+import fr.ifremer.nemo.util.DateTimeFormat;
 
 /**
  * Class HorodatedParameterModel

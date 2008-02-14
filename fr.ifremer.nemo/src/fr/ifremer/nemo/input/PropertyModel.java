@@ -1,17 +1,29 @@
 package fr.ifremer.nemo.input;
 
-import com.ago.xml.*;
-
-import fr.ifremer.nemo.ui.EditStation;
-import fr.ifremer.nemo.ui.Messages;
-import fr.ifremer.nemo.util.*;
-import java.beans.*;
-import java.io.*;
+import java.beans.BeanInfo;
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.ParseException;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+
+import com.ago.xml.PathElementConsumer;
+import com.ago.xml.PathElementHandler;
+import com.ago.xml.SAXConsumer;
+import com.ago.xml.XMLOutputWriter;
+
+import fr.ifremer.nemo.util.DateTimeFormat;
+import fr.ifremer.nemo.util.ExternalizableFormat;
+import fr.ifremer.nemo.util.FloatFormat;
+import fr.ifremer.nemo.util.IntegerFormat;
+import fr.ifremer.nemo.util.LatitudeFormat;
+import fr.ifremer.nemo.util.LongitudeFormat;
+import fr.ifremer.nemo.util.Messages;
 
 /**
  * Class PropertyModel

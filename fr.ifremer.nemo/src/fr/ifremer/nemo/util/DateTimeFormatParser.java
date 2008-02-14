@@ -1,8 +1,8 @@
 package fr.ifremer.nemo.util;
 
-import com.ago.parsing.AbstractParser;
-import fr.ifremer.nemo.util.ParseElement;
 import java.text.ParseException;
+
+import com.ago.parsing.AbstractParser;
 
 /**
  * Class DateTimeFormatParser
@@ -22,24 +22,32 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 	static protected final String HOURS12 = "HOURS12".intern();
 
 	static protected final String HOURS24 = "HOURS24".intern();
-
+	
+	static protected final String HOURSDEC = "HOURSDEC".intern();
+	
 	static protected final String MINUTES = "MINUTES".intern();
 
 	static protected final String MONTH = "MONTH".intern();
 
 	static protected final String SECONDS = "SECONDS".intern();
+	
+	static protected final String SECONDSD = "SECONDSD".intern();
 
 	static protected final String XAMPM = "xAmPm".intern();
 
 	static protected final String XDAY = "xDay".intern();
 
 	static protected final String XHOUR = "xHour".intern();
+	
+	static protected final String XHOURDEC = "xHourDec".intern();
 
 	static protected final String XMINUTE = "xMinute".intern();
 
 	static protected final String XMONTH = "xMonth".intern();
 
 	static protected final String XSECOND = "xSecond".intern();
+	
+	static protected final String XSECONDD = "xSecondD".intern();
 
 	static protected final String XYEAR = "xYear".intern();
 
@@ -87,6 +95,7 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 		}
 		return false;
 	}
+	
 
 	/**
 	 * 
@@ -209,6 +218,34 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 		}
 		return false;
 	}
+	
+	/**
+	 * 
+	 * @return boolean
+	 * @exception ParseException
+	 */
+	public boolean hoursDec() throws ParseException {
+		if (peekForType(HOURSDEC)) {
+			_stack.add(new ParseElement(ParseElementType.HOURSDEC,
+					(String) _stack.pop()));
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * 
+	 * @return boolean
+	 * @exception ParseException
+	 */
+	public boolean secondsD() throws ParseException {
+		if (peekForType(SECONDSD)) {
+			_stack.add(new ParseElement(ParseElementType.SECONDSD,
+					(String) _stack.pop()));
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * 
@@ -260,8 +297,10 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 		typeTable[(int) 'd'] = XDAY;
 		typeTable[(int) 'D'] = XDAY;
 		typeTable[(int) 'h'] = XHOUR;
+		typeTable[(int) 'H'] = XHOURDEC;
 		typeTable[(int) 'm'] = XMINUTE;
 		typeTable[(int) 's'] = XSECOND;
+		typeTable[(int) 'S'] = XSECONDD;
 		typeTable[(int) ' '] = XLETTER;
 		typeTable[(int) 'A'] = XAMPM;
 		typeTable[(int) 'P'] = XAMPM;
@@ -274,7 +313,7 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 	public static void main(String[] args) {
 		ParseElement[] elements = null;
 		try {
-			elements = DateTimeFormatParser.parseFormat("dd/MM/dfdqsfyyyy");
+			elements = DateTimeFormatParser.parseFormat("dd/MM/yyyy");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -394,14 +433,18 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 					throw new ParseException("Marker AM/PM manquant", mark);
 				}
 			}
-		} else if (hours24()) {
+		} else if (hours24()) {			
 			characters();
 			if (minutes()) {
 				characters();
 				return (seconds() || nothing());
-			} else {
+			}  else {
 				return characters();
 			}
+		} else if (hoursDec()) {
+			return true;
+		} else if (secondsD()) {
+			return true;
 		}
 		return false;
 	}
@@ -426,7 +469,7 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 		}
 	}
 
-	/**
+	/**	
 	 * 
 	 * @exception java.text.ParseException
 	 */
@@ -478,6 +521,33 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 		}
 		token = buff.toString();
 	}
+	
+	/**
+	 * 
+	 * @exception java.text.ParseException
+	 */
+	public void xHourDec() throws ParseException {
+		StringBuffer buff = new StringBuffer();
+		tokenType = HOURSDEC;
+		buff.append('H');
+		step();
+		while (hereChar > 0 && (typeTable[hereChar] == XHOURDEC)) {
+			buff.append('H');
+			step();			
+		}
+		if (typeTable[hereChar] == XLETTER){
+			buff.append(':');
+			step();
+		}
+			
+		
+		while (hereChar > 0 && (typeTable[hereChar] == XHOUR)) {
+			buff.append('h');
+			step();
+		}
+		
+		token = buff.toString();
+	}
 
 	/**
 	 * 
@@ -522,6 +592,22 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 		step();
 		while (hereChar > 0 && (typeTable[hereChar] == XSECOND)) {
 			buff.append('s');
+			step();
+		}
+		token = buff.toString();
+	}
+	
+	/**
+	 * 
+	 * @exception java.text.ParseException
+	 */
+	public void xSecondD() throws ParseException {
+		StringBuffer buff = new StringBuffer();
+		tokenType = SECONDSD;
+		buff.append('S');
+		step();
+		while (hereChar > 0 && (typeTable[hereChar] == XSECONDD)) {
+			buff.append('S');
 			step();
 		}
 		token = buff.toString();

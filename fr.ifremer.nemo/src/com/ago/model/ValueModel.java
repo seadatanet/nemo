@@ -3,11 +3,9 @@ package com.ago.model;
 /* From Jack Version V1.5 on October 21, 1999 at 7:54:49 am */
 
 // Package libraries inclusion
-import com.ago.model.Message;
-import com.ago.model.MessageSend;
-import java.beans.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 public class ValueModel implements PropertyChangeListener, Performer {
 

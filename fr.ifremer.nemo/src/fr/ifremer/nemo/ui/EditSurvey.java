@@ -1,7 +1,10 @@
 package fr.ifremer.nemo.ui;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,8 +32,9 @@ import org.xml.sax.SAXException;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.DataType;
 import fr.ifremer.nemo.domain.Survey;
-import fr.ifremer.nemo.input.SurveyMedia;
 import fr.ifremer.nemo.util.Formatter;
+import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.ws.WSDataType;
 
 public class EditSurvey {
 	// fonctions de remplissage de la zone d'édition pour les campagnes
@@ -61,7 +65,7 @@ public class EditSurvey {
 
 	public static int expand, validee, loaded;
 
-	public static Combo comboConfid, comboDataCentres;
+	public static Combo comboConfid, comboDataCentres, comboCountries;
 
 	public static List listeType;
 
@@ -172,7 +176,7 @@ public class EditSurvey {
 		Drawing
 				.sectionNlabelsNtext(
 						sectionReference,
-						Messages.getString("EditSurvey.14"), listeText, listeNoms, Messages.getString("EditSurvey.15")); //$NON-NLS-1$ //$NON-NLS-2$
+						Messages.getString("EditSurvey.14"), listeText, listeNoms, Messages.getString("EditSurvey.15"), false); //$NON-NLS-1$ //$NON-NLS-2$
 		listeText.clear();
 		listeNoms.clear();
 
@@ -186,15 +190,15 @@ public class EditSurvey {
 		Drawing
 				.sectionNlabelsNtext(
 						sectionLocalisation,
-						Messages.getString("EditSurvey.19"), listeText, listeNoms, Messages.getString("EditSurvey.20")); //$NON-NLS-1$ //$NON-NLS-2$
+						Messages.getString("EditSurvey.19"), listeText, listeNoms, Messages.getString("EditSurvey.20"), false); //$NON-NLS-1$ //$NON-NLS-2$
 		listeText.clear();
 		listeNoms.clear();
 
 		ViewEdit.formEdition.reflow(true);
 
 		// section source des donnees
-		listeText.add(textPays);
-		listeNoms.add(Messages.getString("EditSurvey.21")); //$NON-NLS-1$
+//		listeText.add(textPays);
+//		listeNoms.add(Messages.getString("EditSurvey.21")); //$NON-NLS-1$
 		listeText.add(textLabo);
 		listeNoms.add(Messages.getString("EditSurvey.22")); //$NON-NLS-1$
 		listeText.add(textChef);
@@ -204,7 +208,7 @@ public class EditSurvey {
 		Drawing
 				.sectionNlabelsNtext(
 						sectionSource,
-						Messages.getString("EditSurvey.25"), listeText, listeNoms, Messages.getString("EditSurvey.26")); //$NON-NLS-1$ //$NON-NLS-2$
+						Messages.getString("EditSurvey.25"), listeText, listeNoms, Messages.getString("EditSurvey.26"), true); //$NON-NLS-1$ //$NON-NLS-2$
 		listeText.clear();
 		listeNoms.clear();
 
@@ -586,13 +590,34 @@ public class EditSurvey {
 		// reset de la liste des dataTypes
 		TableDataSurvey.types.clear();
 
+		// Liste des capteurs
+		ArrayList<String> listSensor = new ArrayList<String>();
+		WSDataType[] listWSDT = NemoLists.getDataTypes();
+		for (int i = 0 ; i < listWSDT.length ; i++) {
+			if (listWSDT[i].isSensor()) {
+				listSensor.add(listWSDT[i].getCode());
+			}
+		}
+		
+//		System.out.println("");
+//		for (String temp : listSensor)
+//		{
+//			System.out.println(temp);
+//		}
+		
 		if (ViewFile.dossierCampagne) {
 
 			try {
 				DataModel.dirSurvey.releaseModel();
 				Survey survey = new Survey();
 				survey.importFromXML(fichier);
-
+				survey.setDataCentre(Utils.configuration.getDataCenter());
+				
+				// Màj des types de données capteurs
+				for (int index = 0 ; index < survey.getDataTypes().length ; index++) {
+					survey.dataTypesAt(index).setSensor(listSensor.contains(survey.dataTypesAt(index).getCode().substring(0,3)));
+				}
+				
 				DataModel.dirSurvey.setModel(survey);
 
 			} catch (FileNotFoundException e) {
@@ -613,7 +638,13 @@ public class EditSurvey {
 
 				Survey survey = new Survey();
 				survey.importFromXML(fichier);
-
+				survey.setDataCentre(Utils.configuration.getDataCenter());
+				
+				// Màj des types de données capteurs
+				for (int index = 0 ; index < survey.getDataTypes().length ; index++) {
+					survey.dataTypesAt(index).setSensor(listSensor.contains(survey.dataTypesAt(index).getCode().substring(0,3)));
+				}
+				
 				DataModel.singleSurvey.setModel(survey);
 
 				DataModel.singleSurvey.getModel();
@@ -689,15 +720,33 @@ public class EditSurvey {
 		}
 
 		// Source de données
+//		if (survey.getCountryCode() != null) {
+//			EditSurvey.textPays.setText(survey.getCountryCode());
+//		}
 		if (survey.getCountryCode() != null) {
-			EditSurvey.textPays.setText(survey.getCountryCode());
+//			 sélection dans la comboList
+			int taille = DataModel.listeWSCountries.length;
+			int index = 0;
+			for (int i = 0; i < taille; i++) {
+				if (DataModel.listeWSCountries[i].getCode().matches(
+						survey.getCountryCode())) {
+					index = i;
+					break;
+				}
+
+			}
+
+			EditSurvey.comboCountries.select(index);
 		}
+		
 		if (survey.getLaboratories() != null) {
 			EditSurvey.textLabo.setText(survey.getLaboratories());
 		}
+		
 		if (survey.getChiefScientist() != null) {
 			EditSurvey.textChef.setText(survey.getChiefScientist());
 		}
+		
 		if (survey.getProjectName() != null) {
 			EditSurvey.textProjet.setText(survey.getProjectName());
 		}
@@ -719,9 +768,6 @@ public class EditSurvey {
 			}
 
 			EditSurvey.comboDataCentres.select(index);
-
-			
-
 		}
 
 		if (survey.getAvailabilityCode() != null) {
@@ -934,8 +980,8 @@ public class EditSurvey {
 		listeTextSurvey.add(textDateFin);
 		textRegion = new Text(shell, SWT.BORDER);
 		listeTextSurvey.add(textRegion);
-		textPays = new Text(shell, SWT.BORDER);
-		listeTextSurvey.add(textPays);
+		// textPays = new Text(shell, SWT.BORDER);
+		// listeTextSurvey.add(textPays);
 		textLabo = new Text(shell, SWT.BORDER);
 		listeTextSurvey.add(textLabo);
 		textChef = new Text(shell, SWT.BORDER);
@@ -972,6 +1018,8 @@ public class EditSurvey {
 	}
 
 	public static void initCombos() {
+		int taille, i;
+		
 		Shell shell = new Shell();
 		comboConfid = new Combo(shell, SWT.READ_ONLY);
 		comboConfid.add("P - Public");
@@ -981,12 +1029,11 @@ public class EditSurvey {
 
 		comboDataCentres = new Combo(shell, SWT.READ_ONLY);
 		// remplissage des centres de données
-		int taille = DataModel.listeWSCenters.length;
-		for (int i = 0; i < taille; i++) {
+		taille = DataModel.listeWSCenters.length;
+		for (i = 0; i < taille; i++) {
 			comboDataCentres.add(DataModel.listeWSCenters[i].getCode() + " - "
 					+ DataModel.listeWSCenters[i].getName());
 		}
-
 	}
 
 	public static void initListeType() {
@@ -1050,5 +1097,40 @@ public class EditSurvey {
 		Utils.messageErreur("");
 
 	}
+	
+//	private static void listSensor() {
+//		BufferedReader lecteurAvecBuffer = null;
+//		String ligneLue = ""; 
+//		int numLigne = 0;
+//		listSensor = new ArrayList<String>();
+//				
+//		try {
+//			lecteurAvecBuffer = new BufferedReader(new FileReader(
+//					"resources/liste_capteur.txt"));
+//			
+//			// Lecture des lignes d'en-tête
+//			while ((ligneLue = lecteurAvecBuffer.readLine()) != null) {
+//				numLigne++;
+//				if (numLigne == 2) {
+//					break;
+//				}
+//			}
+//			
+//			// Lecture des lignes
+//			while ((ligneLue = lecteurAvecBuffer.readLine()) != null) {
+//				listSensor.add(ligneLue.substring(0,3));
+//			}
+//			
+//		} catch (IOException exc) {
+//			Utils
+//					.messageErreur(Messages.getString("Etape.120"));
+//		} 
+//				
+//		System.out.println("");
+//		for (String temp : listSensor)
+//		{
+//			System.out.println(temp);
+//		}
+//	}
 
 }

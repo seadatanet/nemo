@@ -22,10 +22,17 @@
         <Survey>
             <reference><xsl:value-of select="Metadata/dataIdInfo/idCitation/resAltTitle"/></reference>
             <name><xsl:value-of select="Metadata/dataIdInfo/idCitation/resTitle"/></name>
+			
+			
 
             <!-- FAE021 Evolution : changement de format du fichier xml   -->
             <xsl:for-each select="Metadata/dataIdInfo/descKeys">
                 <xsl:if test="keyTyp/KeyTypCd/@value =  'platform'">
+                
+                <!-- FAE030 Evolution : récupération du code navire   -->
+				<shipCode><xsl:value-of select="substring-after(substring-after(substring-after(keyword/@SDNIdent,':'),':'),':')"/></shipCode>
+                <!-- FAE030 Fin   -->
+                 
                 <shipName><xsl:value-of select="keyword"/></shipName> 
                 </xsl:if>
             </xsl:for-each>      
@@ -41,9 +48,11 @@
                 </xsl:if>
             </xsl:for-each>     
             <!-- FAE021 Fin -->      
-                        
-            <country/>
-    
+                      
+            <!-- FAE028 Evolution : code pays  -->     
+            <country><xsl:value-of select="Metadata/dataIdInfo/idCitation/citRespParty/rpCntInfo/cntAddress/country"/></country>
+            <countryName><xsl:value-of select="Metadata/dataIdInfo/idCitation/citRespParty/rpCntInfo/cntAddress/country"/></countryName>
+    		<!-- FAE028 Fin -->  
 
             <!-- FAE021 Evolution : changement de format du fichier xml  -->
             <laboratories><xsl:if test="Metadata/dataIdInfo/idCitation/citRespParty/role/RoleCd/@value =  'originator'"><xsl:value-of select="Metadata/dataIdInfo/idCitation/citRespParty/rpOrgName"/></xsl:if><xsl:for-each select="Metadata/dataIdInfo/idCitation/citRespParty"><xsl:if test="role/RoleCd/@value =  'originator'"> - <xsl:value-of select="rpOrgName"/></xsl:if></xsl:for-each></laboratories> 
@@ -70,15 +79,53 @@
             
             <!-- FAE021 Evolution : changement de format du fichier xml   -->
                 <xsl:choose>
+                	<!-- FAE034 Evolution : changement de format du fichier xml   -->
+                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/Consts/useLimit/@SDNIdent ,'CC')">
+                        <availability>limited</availability>
+                    </xsl:when>
+                    
+                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/Consts/useLimit/@SDNIdent ,'FE')">
+                        <availability>limited</availability>
+                    </xsl:when>
+                    
+                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/Consts/useLimit/@SDNIdent ,'LI')">
+                        <availability>limited</availability>
+                    </xsl:when>
+                    
+                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/Consts/useLimit/@SDNIdent ,'MO')">
+                        <availability>limited</availability>
+                    </xsl:when>
+                    
+                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/Consts/useLimit/@SDNIdent ,'NC')">
+                        <availability>limited</availability>
+                    </xsl:when>
+                    
+                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/Consts/useLimit/@SDNIdent ,'OG')">
+                        <availability>limited</availability>
+                    </xsl:when>
+                    
+                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/Consts/useLimit/@SDNIdent ,'RS')">
+                        <availability>limited</availability>
+                    </xsl:when>
+                    
+                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/Consts/useLimit/@SDNIdent ,'SR')">
+                        <availability>limited</availability>
+                    </xsl:when>
+                    
+                    <!-- FAE034 Fin --> 
+                    
                     <xsl:when test="contains(Metadata/dataIdInfo/resConst/Consts/useLimit/@SDNIdent ,'UN')">
                         <availability>publicly</availability>
                     </xsl:when>
+                    
                     <xsl:when test="contains(Metadata/dataIdInfo/resConst/Consts/useLimit/@SDNIdent ,'UK')">
                         <availability>publicly</availability>
-                    </xsl:when>                  
+                    </xsl:when> 
+                                     
                     <xsl:when test="contains(Metadata/dataIdInfo/resConst/Consts/useLimit/@SDNIdent ,'NA')">
                         <availability>confidential</availability>
                     </xsl:when>
+                    
                     <xsl:otherwise>
                         <availability>restricted</availability>
                     </xsl:otherwise>
@@ -95,6 +142,7 @@
                             <xsl:attribute name="code">
                                 <xsl:value-of select="substring-after(substring-after(substring-after(idCitation/resTitle/@SDNIdent,':'),':'),':')"/> - <xsl:value-of select="idCitation/resTitle"/>
                             </xsl:attribute>
+                            <profiles><xsl:value-of select="suppInfo"/></profiles>
                         </DataType>
                     </xsl:if>
                 </xsl:for-each>

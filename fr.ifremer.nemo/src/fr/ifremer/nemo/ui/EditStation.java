@@ -17,8 +17,9 @@ import org.eclipse.ui.forms.widgets.Section;
 
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.DataType;
-import fr.ifremer.nemo.ws.WSDataType;
 import fr.ifremer.nemo.input.PropertyModel;
+import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.ws.WSDataType;
 
 public class EditStation {
 	// fonctions de remplissage de la zone d'édition pour les campagnes
@@ -991,7 +992,7 @@ public class EditStation {
 		comboHeure.add("hh24mmss"); //$NON-NLS-1$
 		comboHeure.add("hh24 mm"); //$NON-NLS-1$
 		comboHeure.add("HH:hh"); //$NON-NLS-1$
-		comboHeure.add("sssss"); //$NON-NLS-1$
+		comboHeure.add("SSSSS"); //$NON-NLS-1$
 
 		comboDate = new Combo(shell, SWT.NONE);
 		comboDate.add("dd/MM/yy"); //$NON-NLS-1$

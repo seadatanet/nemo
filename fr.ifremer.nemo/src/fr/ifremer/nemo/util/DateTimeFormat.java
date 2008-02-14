@@ -535,6 +535,40 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 					index += _elements[i]._element.length();
 					break;
 				}
+				case HOURSDEC: {
+					String tmp = source.substring(index, index
+							+ 2);
+					index += 3;
+					int hours = Integer.parseInt(tmp.trim());
+					
+					tmp = source.substring(index, index
+							+ 2);
+					index += 2;
+					int minutes = Integer.parseInt(tmp.trim()) * 60 / 100 ;
+					
+					cal.set(Calendar.HOUR, hours);
+					cal.set(Calendar.MINUTE, minutes);
+										
+					break;
+				}
+				case SECONDSD: {
+					Calendar calTemp = Calendar.getInstance();
+					calTemp.clear();
+					
+					String tmp = source.substring(index, index
+							+ 5);
+					
+					calTemp.add(Calendar.SECOND, Integer.parseInt(tmp.trim()));
+					
+					cal.set(Calendar.HOUR, calTemp.get(Calendar.HOUR_OF_DAY));
+					cal.set(Calendar.MINUTE, calTemp.get(Calendar.MINUTE));
+					cal.set(Calendar.SECOND, calTemp.get(Calendar.SECOND));
+					
+					index +=5;
+					
+					break;
+				}
+				
 				}
 			}
 		} catch (Exception e) {

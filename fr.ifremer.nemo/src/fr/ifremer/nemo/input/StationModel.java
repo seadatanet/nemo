@@ -1,19 +1,37 @@
 package fr.ifremer.nemo.input;
 
-import com.ago.xml.*;
-import fr.ifremer.nemo.domain.*;
-import fr.ifremer.nemo.ui.Messages;
-import fr.ifremer.nemo.ui.ViewFile;
-import fr.ifremer.nemo.util.*;
 import java.beans.IntrospectionException;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.TimeZone;
 import java.util.Vector;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+
+import com.ago.xml.Element2Field;
+import com.ago.xml.PathElementConsumer;
+import com.ago.xml.PathElementHandler;
+import com.ago.xml.SAXConsumer;
+import com.ago.xml.XMLOutputWriter;
+
+import fr.ifremer.nemo.domain.Cdi;
+import fr.ifremer.nemo.domain.HorodatedValue;
+import fr.ifremer.nemo.domain.Parameter;
+import fr.ifremer.nemo.domain.ParameterValue;
+import fr.ifremer.nemo.domain.Station;
+import fr.ifremer.nemo.domain.TimeSeriesInformation;
+import fr.ifremer.nemo.ui.ViewFile;
+import fr.ifremer.nemo.util.DateTimeFormat;
+import fr.ifremer.nemo.util.FloatFormat;
+import fr.ifremer.nemo.util.LatitudeFormat;
+import fr.ifremer.nemo.util.LongitudeFormat;
+import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.util.SizeBasedProgressNotifier;
 
 /**
  * Class StationModel
@@ -41,6 +59,10 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * l'attribut endData
 	 */
 	protected boolean _endOnPattern;
+	
+	protected boolean _endOnEOF;
+	
+	protected boolean _endOnEmptyLine;
 
 	/**
 	 * Definit si le numero de reference est automatiquement incremente
@@ -98,6 +120,9 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 	public StationModel() {
 		_endDataPattern = "";
+		_endOnEOF = false;
+		_endOnEmptyLine = false;
+		_endOnPattern = false;
 		_model = null;
 		_parameterModels = new java.util.ArrayList<ParameterModel>();
 		_properties = new java.util.LinkedHashMap<String, PropertyModel>();
@@ -162,6 +187,12 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		String tmp;
 		if ((tmp = a_Attributes.getValue("lineNumber")) != null) {
 			setNumberOfLines(tmp);
+		}
+		if ((tmp = a_Attributes.getValue("endOnEOF")) != null) {
+			setEndOnEOF(tmp);
+		}
+		if ((tmp = a_Attributes.getValue("endOnEmptyLine")) != null) {
+			setEndOnEmptyLine(tmp);
 		}
 		if ((tmp = a_Attributes.getValue("endOnPattern")) != null) {
 			setEndOnPattern(tmp);
@@ -262,6 +293,8 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 */
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
 		a_Writer.putAttribute("lineNumber", getNumberOfLines());
+		a_Writer.putAttribute("endOnEOF", isEndOnEOF());
+		a_Writer.putAttribute("endOnEmptyLine", isEndOnEmptyLine());
 		a_Writer.putAttribute("endOnPattern", isEndOnPattern());
 		a_Writer.putTag("incrementRef", isIncrementRef());
 		a_Writer.putTag("endDataPattern", getEndDataPattern());
@@ -275,7 +308,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 				Cdi cdi = new Cdi();
 				cdi.setCompteur(ViewFile.txtCompteurCDI.getText());
 				cdi.setTypePlateForme(ViewFile.txtTypePlateForme.getText());
-				cdi.setAccesDonnees(ViewFile.txtAccèsDonnées.getText());
+				cdi.setAccesDonnees(ViewFile.txtAccesDonnees.getText());
 				setCdi(cdi);
 				getCdi().writeXMLOn(a_Writer);
 			}
@@ -461,7 +494,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	public void setEndOnPattern(boolean x) {
 		_endOnPattern = x;
 	}
-
+	
 	/**
 	 * Write accessor (setter) for attribute _endOnPattern
 	 * 
@@ -471,6 +504,70 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 */
 	public void setEndOnPattern(String a_String) {
 		setEndOnPattern(new Boolean(a_String).booleanValue());
+	}
+	
+	/**
+	 * Read accessor (getter) for attribute _endOnEOF
+	 * 
+	 * @return boolean
+	 * @see StationModel#_endOnEOF
+	 */
+	public boolean isEndOnEOF() {
+		return _endOnEOF;
+	}
+
+	/**
+	 * Write accessor (setter) for attribute _endOnEOF
+	 * 
+	 * @param x
+	 *            new value for _endOnEOF
+	 * @see StationModel#_endOnEOF
+	 */
+	public void setEndOnEOF(boolean x) {
+		_endOnEOF = x;
+	}
+	
+	/**
+	 * Write accessor (setter) for attribute _endOnEOF
+	 * 
+	 * @param a_String
+	 *            new value for _endOnEOF as String
+	 * @see StationModel#_endOnEOF
+	 */
+	public void setEndOnEOF(String a_String) {
+		setEndOnEOF(new Boolean(a_String).booleanValue());
+	}
+	
+	/**
+	 * Read accessor (getter) for attribute _endOnEmptyLine
+	 * 
+	 * @return boolean
+	 * @see StationModel#_endOnEmptyLine
+	 */
+	public boolean isEndOnEmptyLine() {
+		return _endOnEmptyLine;
+	}
+
+	/**
+	 * Write accessor (setter) for attribute _endOnEmptyLine
+	 * 
+	 * @param x
+	 *            new value for _endOnEmptyLine
+	 * @see StationModel#_endOnEmptyLine
+	 */
+	public void setEndOnEmptyLine(boolean x) {
+		_endOnEmptyLine = x;
+	}
+
+	/**
+	 * Write accessor (setter) for attribute _endOnEmptyLine
+	 * 
+	 * @param a_String
+	 *            new value for _endOnEmptyLine as String
+	 * @see StationModel#_endOnEmptyLine
+	 */
+	public void setEndOnEmptyLine(String a_String) {
+		setEndOnEmptyLine(new Boolean(a_String).booleanValue());
 	}
 
 	/**
@@ -1263,7 +1360,9 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			String line = null;
 			
 			for (index = 0; (line = a_Reader.readLine()) != null
-					&& (!(_endOnPattern && line.matches(_endDataPattern)) || (index < _rowNumber)); index++) {
+					&& (!(_endOnEmptyLine && line.trim().matches("^$"))
+					&& !(_endOnPattern && line.matches("^" + _endDataPattern + "$"))
+					|| (index < _rowNumber)); index++) {
 
 				a_Notifier.progress(line.length());
 				

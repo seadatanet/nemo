@@ -48,7 +48,7 @@ import fr.ifremer.nautilus.metadata.NautilusSurveyWSServiceLocator;
 import fr.ifremer.nautilus.metadata.WSCollectedData;
 import fr.ifremer.nautilus.metadata.WSSurvey;
 import fr.ifremer.nemo.config.Configuration;
-import fr.ifremer.nemo.ui.Messages;
+import fr.ifremer.nemo.ui.DataModel;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.ws.WSShip;
@@ -88,6 +88,11 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 	 * Source laboratory country code (MEDATLAS: 2 char max)
 	 */
 	protected String _countryCode;
+	
+	/**
+	 * Source laboratory country name
+	 */
+	protected String _countryName;
 
 	/**
 	 * regional archiving centre code (MEDATLAS: 2 char max)
@@ -164,6 +169,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 		_chiefScientist = "UNKNOWN";
 		_comment = "";
 		_countryCode = "";
+		_countryName = "";
 		_dataCentre = "";
 		_endDate = System.currentTimeMillis();
 		_laboratories = "";
@@ -280,6 +286,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 		a_Writer.putTag("endDate", getEndDate());
 		a_Writer.putTag("regionName", getRegionName());
 		a_Writer.putTag("country", getCountryCode());
+		a_Writer.putTag("countryName", getCountryName());
 		a_Writer.putTag("laboratories", getLaboratories());
 		a_Writer.putTag("chiefScientist", getChiefScientist());
 		a_Writer.putTag("projectName", getProjectName());
@@ -449,6 +456,40 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 	 */
 	public void setCountryCode(String x) {
 		_countryCode = x;
+	}
+	
+	/**
+	 * Read accessor (getter) for attribute _countryName
+	 * 
+	 * @return String
+	 * @see Survey#_countryName
+	 */
+	public String getCountryName() {
+		return _countryName;
+	}
+
+	/**
+	 * Write accessor (setter) for attribute _countryName
+	 * 
+	 * @param x
+	 *            new value for _countryName
+	 * @see Survey#_countryName
+	 */
+	public void setCountryName(String x) {
+		_countryName = x;
+		
+		// country code (MEDATLAS: 2 char max)
+		if (getCountryCode().length() > 2) {
+			int taille = DataModel.listeWSCountries.length;
+			int index = 0;
+			for (int i = 0; i < taille; i++) {
+				if (DataModel.listeWSCountries[i].getName().compareToIgnoreCase(_countryName) == 0) {
+					index = i;
+					break;
+				}
+			}
+			setCountryCode(DataModel.listeWSCountries[index].getCode());
+		}
 	}
 
 	/**
@@ -1042,6 +1083,10 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 			Element2Field setter = new Element2Field(this, "setCountryCode");
 			return setter;
 		}
+		if (a_LocalName.equals("countryName")) {
+			Element2Field setter = new Element2Field(this, "setCountryName");
+			return setter;
+		}
 		if (a_LocalName.equals("laboratories")) {
 			Element2Field setter = new Element2Field(this, "setLaboratories");
 			return setter;
@@ -1119,6 +1164,11 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 		} else {
 			setCountryCode("");
 		}
+//		if (wssurvey.getCountryName() != null) {
+//			setCountryName(wssurvey.getCountryName());
+//		} else {
+//			setCountryName("");
+//		}
 		if (wssurvey.getLaboratories() != null) {
 			setLaboratories(wssurvey.getLaboratories());
 		} else {

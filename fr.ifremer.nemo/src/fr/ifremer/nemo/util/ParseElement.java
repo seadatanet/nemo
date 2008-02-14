@@ -1,6 +1,5 @@
 package fr.ifremer.nemo.util;
 
-import fr.ifremer.nemo.util.ParseElementType;
 
 /**
  * Class ParseElement

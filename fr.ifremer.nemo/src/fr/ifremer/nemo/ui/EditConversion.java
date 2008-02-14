@@ -15,6 +15,7 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import fr.ifremer.nemo.input.SurveyMedia;
 import fr.ifremer.nemo.output.CDIResumeWriter;
 import fr.ifremer.nemo.output.ProgressNotification;
+import fr.ifremer.nemo.util.Messages;
 
 public class EditConversion extends Thread {
 
@@ -86,7 +87,7 @@ public class EditConversion extends Thread {
 
 									choixDossierSortie();
 
-									if (ViewFile.checkCDI.getSelection()) {
+									if (ViewFile.checkCDI.getSelection() && !SurveyMedia.interrompu && !SWTProcess.interrompu) {
 										try {
 											CDIResumeWriter.getInstance()
 													.writeResume();
@@ -171,7 +172,7 @@ public class EditConversion extends Thread {
 
 				MessageBox mb = new MessageBox(shell2, SWT.ICON_WARNING
 						| SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
-				mb.setMessage(Messages.getString("EditConversion.14")); //$NON-NLS-1$
+				mb.setMessage(Messages.getString("EditConversion.18")); //$NON-NLS-1$
 
 				int reponse = mb.open();
 				if (reponse == SWT.NO) {
@@ -202,17 +203,15 @@ public class EditConversion extends Thread {
 				SWTProcess.interrompu = false;
 				SurveyMedia.interrompu = false;
 
-				try{
-				new SWTProgress().run();
-				}
-				catch (Exception e)
-				{
+				try {
+					new SWTProgress().run();
+				} catch (InterruptedException e) {
 					Utils.messageErreur(e.getMessage());
 				}
 			}
 
 			// affichage des résultats en fin de conversion
-			if (!SurveyMedia.interrompu) {
+			if (!SurveyMedia.interrompu && !SWTProcess.interrompu) {
 				if (ViewFile.odv.getSelection()) {
 					Utils.messageOK(Messages.getString("EditConversion.9"));
 				} else {
@@ -237,9 +236,9 @@ public class EditConversion extends Thread {
 		nomDossierSortie = dialog.open();
 
 		if (nomDossierSortie != null) {
-
+			
 			File fich = new File(nomDossierSortie);
-			if (fich.exists()) {
+			if (fich.exists() && fich.listFiles().length != 0) {
 				// fichier existe
 				shell.close();
 				Shell shell2 = new Shell();
@@ -264,6 +263,7 @@ public class EditConversion extends Thread {
 					catch (Exception e)
 					{
 						Utils.messageErreur(e.getMessage());
+						SWTProcess.interrompu = true;
 					}
 				}
 
@@ -285,14 +285,14 @@ public class EditConversion extends Thread {
 			}
 
 			// affichage des résultats en fin de conversion
-			if (!SurveyMedia.interrompu) {
+			if (!SurveyMedia.interrompu && !SWTProcess.interrompu) {
 				if (ViewFile.odv.getSelection()) {
 					Utils.messageOK(Messages.getString("EditConversion.9"));
 				} else {
 					Utils.messageOK(Messages.getString("EditConversion.10"));
 				}
 			} else {
-		//		Utils.messageErreur(Messages.getString("EditConversion.16"));
+				//	Utils.messageErreur(Messages.getString("EditConversion.16"));
 			}
 
 		}

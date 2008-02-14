@@ -1,7 +1,5 @@
 package fr.ifremer.nemo.domain;
 
-import fr.ifremer.nemo.util.DateTimeFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 

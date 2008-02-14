@@ -18,6 +18,8 @@ import org.eclipse.ui.forms.events.ExpansionEvent;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
+import fr.ifremer.nemo.util.Messages;
+
 public class Drawing {
 
 	public static Composite sectionClientType;
@@ -66,7 +68,7 @@ public class Drawing {
 		// c'est lui qui est passé en ppar
 
 		radio.setParent(sectionClient);
-		radio.setText("Saisie manuelle");
+		radio.setText(Messages.getString("Drawing.4"));
 
 		// Button saisieManuelle =
 		// ViewEdit.toolkitEdition.createButton(sectionClient, "Saisie
@@ -80,32 +82,32 @@ public class Drawing {
 		// radio.setParent(sectionClient);
 		// radio.setText("Position");
 		Button position = ViewEdit.toolkitEdition.createButton(sectionClient,
-				"Position", SWT.RADIO);
+				Messages.getString("Drawing.7"), SWT.RADIO);
 
 		GridLayout gridLayout1 = new GridLayout();
 		gridLayout1.numColumns = 4;
 		Group groupe = new Group(sectionClient, SWT.NONE);
-		groupe.setText("Localisation");
+		groupe.setText(Messages.getString("Drawing.9"));
 		groupe.setLayout(gridLayout1);
 		grou = groupe;
 
 		// ligne
 		Label label1 = new Label(groupe, SWT.NULL);
-		label1.setText("Ligne");
+		label1.setText(Messages.getString("Drawing.10"));
 		ligne.setParent(groupe);
 
 		ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// debut
 		Label label2 = new Label(groupe, SWT.NULL);
-		label2.setText("Début");
+		label2.setText(Messages.getString("Drawing.11"));
 		debut.setParent(groupe);
 
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
 		Label label3 = new Label(groupe, SWT.NULL);
-		label3.setText("Fin");
+		label3.setText(Messages.getString("Drawing.12"));
 		fin.setParent(groupe);
 
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -115,7 +117,7 @@ public class Drawing {
 
 		// bouton d'injection de la position des valeurs
 		Button buttonInject = new Button(groupe, SWT.NONE);
-		buttonInject.setText("Injecter");
+		buttonInject.setText(Messages.getString("Drawing.1"));
 		inject = buttonInject;
 
 		section.setClient(sectionClient);
@@ -239,7 +241,7 @@ public class Drawing {
 
 		// bouton radio "saisie manuelle"
 		Button saisieManuelle = ViewEdit.toolkitEdition.createButton(
-				sectionClient, "Saisie manuelle", SWT.RADIO);
+				sectionClient, Messages.getString("Drawing.4"), SWT.RADIO);
 		saisieManuelle
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
@@ -262,7 +264,7 @@ public class Drawing {
 
 		// bouton radio "position"
 		Button position = ViewEdit.toolkitEdition.createButton(sectionClient,
-				"Position", SWT.RADIO);
+				Messages.getString("Drawing.7"), SWT.RADIO);
 		position
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
@@ -281,27 +283,27 @@ public class Drawing {
 		GridLayout gridLayout1 = new GridLayout();
 		gridLayout1.numColumns = 2;
 		Group groupe = new Group(sectionClient, SWT.NONE);
-		EditDesc.groupRuptureDonnees.setText("Localisation");
+		EditDesc.groupRuptureDonnees.setText(Messages.getString("Drawing.9"));
 		EditDesc.groupRuptureDonnees.setLayout(gridLayout1);
 		grou = groupe;
 
 		// ligne
 		Label label1 = new Label(groupe, SWT.NULL);
-		label1.setText("Ligne");
+		label1.setText(Messages.getString("Drawing.10"));
 		ligne.setParent(groupe);
 
 		ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// debut
 		Label label2 = new Label(groupe, SWT.NULL);
-		label2.setText("Début");
+		label2.setText(Messages.getString("Drawing.11"));
 		debut.setParent(groupe);
 
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
 		Label label3 = new Label(groupe, SWT.NULL);
-		label3.setText("Fin");
+		label3.setText(Messages.getString("Drawing.12"));
 		fin.setParent(groupe);
 
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -363,7 +365,7 @@ public class Drawing {
 		// c'est lui qui est passé en ppar
 
 		radio.setParent(sectionClient);
-		radio.setText("Sélection manuelle");
+		radio.setText(Messages.getString("Drawing.5"));
 
 		// Button saisieManuelle =
 		// ViewEdit.toolkitEdition.createButton(sectionClient, "Saisie
@@ -376,18 +378,18 @@ public class Drawing {
 		// radio.setParent(sectionClient);
 		// radio.setText("Position");
 		Button position = ViewEdit.toolkitEdition.createButton(sectionClient,
-				"Position", SWT.RADIO);
+				Messages.getString("Drawing.7"), SWT.RADIO);
 
 		GridLayout gridLayout1 = new GridLayout();
 		gridLayout1.numColumns = 6;
 		Group groupe = new Group(sectionClient, SWT.NONE);
-		groupe.setText("Localisation");
+		groupe.setText(Messages.getString("Drawing.9"));
 		groupe.setLayout(gridLayout1);
 		grou = groupe;
 
 		// ligne
 		Label label1 = new Label(groupe, SWT.NULL);
-		label1.setText("Ligne");
+		label1.setText(Messages.getString("Drawing.10"));
 
 		ligne.setParent(groupe);
 
@@ -395,7 +397,7 @@ public class Drawing {
 
 		// debut
 		Label label2 = new Label(groupe, SWT.NULL);
-		label2.setText("Début");
+		label2.setText(Messages.getString("Drawing.11"));
 
 		Boolean tmp = debut.setParent(groupe);
 //		System.out.println("parent ?====> " + tmp);
@@ -405,7 +407,7 @@ public class Drawing {
 
 		// fin
 		Label label3 = new Label(groupe, SWT.NULL);
-		label3.setText("Fin");
+		label3.setText(Messages.getString("Drawing.12"));
 		fin.setParent(groupe);
 
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -415,7 +417,7 @@ public class Drawing {
 
 		// bouton d'injection de la position des valeurs
 		Button buttonInject = new Button(groupe, SWT.NONE);
-		buttonInject.setText("Injecter");
+		buttonInject.setText(Messages.getString("Drawing.1"));
 		inject = buttonInject;
 
 		section.setClient(sectionClient);
@@ -494,14 +496,14 @@ public class Drawing {
 
 	public static void sectionComboInjectNbreLignes(ScrolledForm form,
 			String nomSection, String description, Section section,
-			Text nbreLignes, Button radio, Combo combo) {
+			Button radEOF, Button radLigne, Button radManuel, Text txtManuel, Button btnInject) {
 
 		final String nomSec;
 		final Combo comboList;
-		final Text lign;
+		final Text lign, manuel;
 		final ScrolledForm forme;
 		final Button inject;
-
+		
 		forme = form;
 
 		nomSec = nomSection;
@@ -532,97 +534,153 @@ public class Drawing {
 		// saisie manuelle
 		// faire groupe et radios
 
-		// bouton radio "saisie manuelle"
-		// c'est lui qui est passé en ppar
-
-		radio.setParent(sectionClient);
-		radio.setText("Indicateur manuel");
-
-		combo.setParent(sectionClient);
-		comboList = combo;
-
-		// bouton radio "position"
-
-		Button position = ViewEdit.toolkitEdition.createButton(sectionClient,
-				"Données", SWT.RADIO);
-
-		GridLayout gridLayout1 = new GridLayout();
-		gridLayout1.numColumns = 6;
-		Group groupe = new Group(sectionClient, SWT.NONE);
-		groupe.setText("Nombre de lignes");
-		groupe.setLayout(gridLayout1);
-		grou = groupe;
-
-		nbreLignes.setParent(groupe);
-
-		nbreLignes.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		lign = nbreLignes;
-
+		// EOF
+		radEOF.setParent(sectionClient);
+		radEOF.setText("EOF");
+		
+		// Ligne vide
+		radLigne.setParent(sectionClient);
+		radLigne.setText(Messages.getString("EditDesc.ligneVide"));
+		
+		// Indicateur manuel
+		radManuel.setParent(sectionClient);
+		radManuel.setText(Messages.getString("EditDesc.indicateur"));
+		
+		txtManuel.setParent(sectionClient);
+		manuel = txtManuel;
+		
 		// bouton d'injection de la position des valeurs
-		Button buttonInject = new Button(groupe, SWT.NONE);
-		buttonInject.setText("Injecter");
-		inject = buttonInject;
-
+		btnInject.setParent(sectionClient);
+		btnInject.setText(Messages.getString("Drawing.1"));
+		inject = btnInject;
+		
 		section.setClient(sectionClient);
-
-		// une fois les éléments initialisés, on les passe en static pour y
-		// accéder à
-		// partir des listeners
-
-		// listeners
-
-		// radio saisie
-		radio
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent e) {
-//						System.out.println("saisie manuelle section " + nomSec); // 
-						// raz de la valeur manuelle
-						comboList.setEnabled(true);
-						// grou.setVisible(false);
-						lign.setEnabled(false);
-
-					}
-				});
-
-		// radio position
-
-		position
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent f) {
-//						System.out.println("position dans fichier : section "
-						//		+ nomSec); // 
-						// raz de la valeur manuelle
-
-						comboList.setEnabled(false);
-
-						grou.setVisible(true);
-						// raz des valeurs injectees
-						lign.setText("");
-						lign.setEnabled(true);
-						inject.setEnabled(true);
-
-					}
-				});
-
-		// bouton inject
-		buttonInject
+		
+//		FAE 33 : suppression de la partie "Injecter nbre de lignes"
+//		// bouton radio "saisie manuelle"
+//		// c'est lui qui est passé en ppar
+//		radio.setParent(sectionClient);
+//		radio.setText("Indicateur manuel");
+//
+//		combo.setParent(sectionClient);
+//		comboList = combo;
+//
+//		// bouton radio "position"
+//		Button position = ViewEdit.toolkitEdition.createButton(sectionClient,
+//				"Données", SWT.RADIO);
+//
+//		GridLayout gridLayout1 = new GridLayout();
+//		gridLayout1.numColumns = 6;
+//		Group groupe = new Group(sectionClient, SWT.NONE);
+//		groupe.setText("Nombre de lignes");
+//		groupe.setLayout(gridLayout1);
+//		grou = groupe;
+//
+//		nbreLignes.setParent(groupe);
+//
+//		nbreLignes.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+//		lign = nbreLignes;
+//
+//		// bouton d'injection de la position des valeurs
+//		Button buttonInject = new Button(groupe, SWT.NONE);
+//		buttonInject.setText(Messages.getString("Drawing.1"));
+//		inject = buttonInject;
+//
+//		// une fois les éléments initialisés, on les passe en static pour y
+//		// accéder à
+//		// partir des listeners
+//
+//		// listeners
+//		// radio saisie
+//		radio
+//				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+//					public void widgetSelected(
+//							org.eclipse.swt.events.SelectionEvent e) {
+////						System.out.println("saisie manuelle section " + nomSec); // 
+//						// raz de la valeur manuelle
+//						comboList.setEnabled(true);
+//						// grou.setVisible(false);
+//						// lign.setEnabled(false);
+//
+//					}
+//				});
+//
+//		// radio position
+//		position
+//				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+//					public void widgetSelected(
+//							org.eclipse.swt.events.SelectionEvent f) {
+////						System.out.println("position dans fichier : section "
+//						//		+ nomSec); // 
+//						// raz de la valeur manuelle
+//
+//						comboList.setEnabled(false);
+//
+//						grou.setVisible(true);
+//						// raz des valeurs injectees
+//						lign.setText("");
+//						lign.setEnabled(true);
+//						inject.setEnabled(true);
+//
+//					}
+//				});
+//
+		radEOF
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						//System.out.println("bouton injection"); // 
-
-						Utils.injectNbreLignes(lign,
-								ViewFile.textAreaDescription);
-
+						inject.setEnabled(false);
+						manuel.setEnabled(false);
+					}
+				});
+		
+		radLigne
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(
+							org.eclipse.swt.events.SelectionEvent g) {
+						inject.setEnabled(false);
+						manuel.setEnabled(false);
 					}
 				});
 
+		radManuel
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(
+							org.eclipse.swt.events.SelectionEvent g) {
+						inject.setEnabled(true);
+						manuel.setEnabled(true);
+					}
+				});
+		
+		// bouton inject
+		btnInject
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(
+							org.eclipse.swt.events.SelectionEvent g) {
+						manuel.setText(ViewFile.textAreaDescription.getText().substring(
+								ViewFile.textAreaDescription.getSelection().x, 
+								ViewFile.textAreaDescription.getSelection().y));
+						manuel.pack();
+
+					}
+				});
+		
+
 		// saisie manuelle par défaut et groupe désactivé
-		radio.setSelection(true);
-		lign.setEnabled(false);
-		inject.setEnabled(false);
+		if (DataModel.ouverture) {
+			if (DataModel.stationModel_modele.isEndOnEOF()) {
+				EditDesc.selectComboEnd(EditDesc.radEOF);
+			} else if (DataModel.stationModel_modele.isEndOnEOF()) {
+				EditDesc.selectComboEnd(EditDesc.radLigne);
+			} else if (DataModel.stationModel_modele.isEndOnEOF()) {
+				EditDesc.selectComboEnd(EditDesc.radManuel);
+			}
+		} else {
+			// par défaut manuel
+			EditDesc.selectComboEnd(EditDesc.radEOF);
+		}
+		
+		
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeDesc(section);
@@ -726,7 +784,7 @@ public class Drawing {
 
 		// bouton d'injection de la position des valeurs
 		Button buttonInject = new Button(sectionClient, SWT.NONE);
-		buttonInject.setText("Injecter");
+		buttonInject.setText(Messages.getString("Drawing.1"));
 
 		inject = buttonInject;
 
@@ -737,13 +795,13 @@ public class Drawing {
 		GridLayout gridLayout1 = new GridLayout();
 		gridLayout1.numColumns = 6;
 		Group groupe = new Group(sectionClient, SWT.NONE);
-		groupe.setText("Localisation");
+		groupe.setText(Messages.getString("Drawing.9"));
 		groupe.setLayout(gridLayout1);
 		group = groupe;
 
 		// ligne
 		Label label1 = new Label(groupe, SWT.NULL);
-		label1.setText("Ligne");
+		label1.setText(Messages.getString("Drawing.10"));
 
 		// ligne = new Text(groupe, SWT.BORDER);
 		ligne.setParent(groupe);
@@ -752,7 +810,7 @@ public class Drawing {
 
 		// debut
 		Label label2 = new Label(groupe, SWT.NULL);
-		label2.setText("Début");
+		label2.setText(Messages.getString("Drawing.11"));
 
 		Boolean tmp = debut.setParent(groupe);
 //		System.out.println("parent ?====> " + tmp);
@@ -762,7 +820,7 @@ public class Drawing {
 
 		// fin
 		Label label3 = new Label(groupe, SWT.NULL);
-		label3.setText("Fin");
+		label3.setText(Messages.getString("Drawing.12"));
 		fin.setParent(groupe);
 
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -772,7 +830,7 @@ public class Drawing {
 
 		// bouton d'injection de la position des valeurs
 		Button buttonInject2 = new Button(groupe, SWT.NONE);
-		buttonInject2.setText("Injecter");
+		buttonInject2.setText(Messages.getString("Drawing.1"));
 		inject2 = buttonInject2;
 
 		groupe.setEnabled(false);
@@ -898,7 +956,7 @@ public class Drawing {
 
 		// bouton d'injection de la position des valeurs
 		Button buttonInject = new Button(sectionClient, SWT.NONE);
-		buttonInject.setText("Injecter");
+		buttonInject.setText(Messages.getString("Drawing.1"));
 
 		section.setClient(sectionClient);
 
@@ -969,7 +1027,7 @@ public class Drawing {
 
 		// bouton d'injection de la position des valeurs
 		Button buttonInject = new Button(sectionClient, SWT.NONE);
-		buttonInject.setText("Injecter");
+		buttonInject.setText(Messages.getString("Drawing.1"));
 
 		section.setClient(sectionClient);
 
@@ -1007,7 +1065,7 @@ public class Drawing {
 
 	public static void sectionNlabelsNtext(Section section, String nomSection,
 			ArrayList<Text> listeText, ArrayList<String> listeNoms,
-			String descriptionSection) {
+			String descriptionSection, boolean blnPays) {
 
 		int nbre, i;
 		final String nomSec;
@@ -1038,6 +1096,25 @@ public class Drawing {
 		gd.horizontalSpan = 2;
 
 //		System.out.println("=================ok1===========");
+		
+//		 Combo pays
+		if (blnPays) {
+			int taille;
+			Label labelPays = new Label(sectionClient, SWT.NULL);
+			labelPays.setText(Messages.getString("EditSurvey.21"));
+			labelPays.setParent(sectionClient);
+			labelPays.setLayoutData(
+					new GridData(GridData.FILL_HORIZONTAL));
+			
+			EditSurvey.comboCountries = new Combo(sectionClient, SWT.NONE);
+			// remplissage des pays
+			taille = DataModel.listeWSCountries.length;
+			for (i = 0 ; i < taille ; i++) {
+				EditSurvey.comboCountries.add(DataModel.listeWSCountries[i].getCode() + " - "
+						+ DataModel.listeWSCountries[i].getName());
+			}
+		}
+			
 		for (i = 0; i < nbre; i++) {
 
 			// label avec le texte de "description"

@@ -1,14 +1,14 @@
 package fr.ifremer.nautilus.metadata;
 
-import fr.ifremer.nautilus.metadata.WSCollectedData;
-import fr.ifremer.nautilus.metadata.WSSurvey;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Vector;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
-import org.apache.commons.logging.LogFactory;
+
 import org.apache.log4j.Logger;
 
 /**

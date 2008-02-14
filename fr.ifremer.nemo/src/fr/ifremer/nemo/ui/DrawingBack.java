@@ -14,6 +14,8 @@ import org.eclipse.ui.forms.events.ExpansionEvent;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
+import fr.ifremer.nemo.util.Messages;
+
 public class DrawingBack {
 
 	/*
@@ -66,39 +68,39 @@ public class DrawingBack {
 		// c'est lui qui est passé en ppar
 
 		radio.setParent(sectionClient);
-		radio.setText("Saisie manuelle");
+		radio.setText(Messages.getString("Drawing.4"));
 
 		manuel = new Text(sectionClient, SWT.BORDER);
 		manu = manuel;
 		manuel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		Button position = ViewEdit.toolkitEdition.createButton(sectionClient,
-				"Position", SWT.RADIO);
+				Messages.getString("Drawing.7"), SWT.RADIO);
 
 		GridLayout gridLayout1 = new GridLayout();
 		gridLayout1.numColumns = 2;
 		Group groupe = new Group(sectionClient, SWT.NONE);
-		groupe.setText("Localisation");
+		groupe.setText(Messages.getString("Drawing.9"));
 		groupe.setLayout(gridLayout1);
 		grou = groupe;
 
 		// ligne
 		Label label1 = new Label(groupe, SWT.NULL);
-		label1.setText("Ligne");
+		label1.setText(Messages.getString("Drawing.10"));
 		ligne.setParent(groupe);
 
 		ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// debut
 		Label label2 = new Label(groupe, SWT.NULL);
-		label2.setText("Début");
+		label2.setText(Messages.getString("Drawing.11"));
 		debut.setParent(groupe);
 
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
 		Label label3 = new Label(groupe, SWT.NULL);
-		label3.setText("Fin");
+		label3.setText(Messages.getString("Drawing.12"));
 		fin.setParent(groupe);
 
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -108,7 +110,7 @@ public class DrawingBack {
 
 		// bouton d'injection de la position des valeurs
 		Button buttonInject = new Button(groupe, SWT.NONE);
-		buttonInject.setText("Injecter");
+		buttonInject.setText(Messages.getString("Drawing.1"));
 
 		section.setClient(sectionClient);
 
@@ -205,7 +207,7 @@ public class DrawingBack {
 
 		// bouton radio "saisie manuelle"
 		Button saisieManuelle = ViewEdit.toolkitEdition.createButton(
-				sectionClient, "Saisie manuelle", SWT.RADIO);
+				sectionClient, Messages.getString("Drawing.4"), SWT.RADIO);
 		saisieManuelle
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
@@ -225,7 +227,7 @@ public class DrawingBack {
 
 		// bouton radio "position"
 		Button position = ViewEdit.toolkitEdition.createButton(sectionClient,
-				"Position", SWT.RADIO);
+				Messages.getString("Drawing.7"), SWT.RADIO);
 		position
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
@@ -241,27 +243,27 @@ public class DrawingBack {
 		GridLayout gridLayout1 = new GridLayout();
 		gridLayout1.numColumns = 2;
 		Group groupe = new Group(sectionClient, SWT.NONE);
-		EditDesc.groupRuptureDonnees.setText("Localisation");
+		EditDesc.groupRuptureDonnees.setText(Messages.getString("Drawing.9"));
 		EditDesc.groupRuptureDonnees.setLayout(gridLayout1);
 		grou = groupe;
 
 		// ligne
 		Label label1 = new Label(groupe, SWT.NULL);
-		label1.setText("Ligne");
+		label1.setText(Messages.getString("Drawing.10"));
 		ligne.setParent(groupe);
 
 		ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// debut
 		Label label2 = new Label(groupe, SWT.NULL);
-		label2.setText("Début");
+		label2.setText(Messages.getString("Drawing.11"));
 		debut.setParent(groupe);
 
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
 		Label label3 = new Label(groupe, SWT.NULL);
-		label3.setText("Fin");
+		label3.setText(Messages.getString("Drawing.12"));
 		fin.setParent(groupe);
 
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -317,7 +319,7 @@ public class DrawingBack {
 		// c'est lui qui est passé en ppar
 
 		radio.setParent(sectionClient);
-		radio.setText("Sélection manuelle");
+		radio.setText(Messages.getString("Drawing.5"));
 
 		combo.setParent(sectionClient);
 		comboList = combo;
@@ -325,18 +327,18 @@ public class DrawingBack {
 		ligne.setText("toto");
 
 		Button position = ViewEdit.toolkitEdition.createButton(sectionClient,
-				"Position", SWT.RADIO);
+				Messages.getString("Drawing.7"), SWT.RADIO);
 
 		GridLayout gridLayout1 = new GridLayout();
 		gridLayout1.numColumns = 2;
 		Group groupe = new Group(sectionClient, SWT.NONE);
-		groupe.setText("Localisation");
+		groupe.setText(Messages.getString("Drawing.9"));
 		groupe.setLayout(gridLayout1);
 		grou = groupe;
 
 		// ligne
 		Label label1 = new Label(groupe, SWT.NULL);
-		label1.setText("Ligne");
+		label1.setText(Messages.getString("Drawing.10"));
 
 		ligne.setParent(groupe);
 
@@ -344,7 +346,7 @@ public class DrawingBack {
 
 		// debut
 		Label label2 = new Label(groupe, SWT.NULL);
-		label2.setText("Début");
+		label2.setText(Messages.getString("Drawing.11"));
 
 		Boolean tmp = debut.setParent(groupe);
 		System.out.println("parent ?====> " + tmp);
@@ -354,7 +356,7 @@ public class DrawingBack {
 
 		// fin
 		Label label3 = new Label(groupe, SWT.NULL);
-		label3.setText("Fin");
+		label3.setText(Messages.getString("Drawing.12"));
 		fin.setParent(groupe);
 
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -364,7 +366,7 @@ public class DrawingBack {
 
 		// bouton d'injection de la position des valeurs
 		Button buttonInject = new Button(groupe, SWT.NONE);
-		buttonInject.setText("Injecter");
+		buttonInject.setText(Messages.getString("Drawing.1"));
 
 		section.setClient(sectionClient);
 
@@ -513,7 +515,7 @@ public class DrawingBack {
 
 		// bouton d'injection de la position des valeurs
 		Button buttonInject = new Button(sectionClient, SWT.NONE);
-		buttonInject.setText("Injecter");
+		buttonInject.setText(Messages.getString("Drawing.1"));
 
 		section.setClient(sectionClient);
 
@@ -579,7 +581,7 @@ public class DrawingBack {
 
 		// bouton d'injection de la position des valeurs
 		Button buttonInject = new Button(sectionClient, SWT.NONE);
-		buttonInject.setText("Injecter");
+		buttonInject.setText(Messages.getString("Drawing.1"));
 
 		section.setClient(sectionClient);
 

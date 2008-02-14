@@ -16,7 +16,7 @@ $line
 
 #end
 #foreach( $station in $survey.stations )
-*$formatter.padString( $survey.reference, 13)$formatter.formatInt("%05d",$Integer.parseInt($station.reference.trim())) Data Type=$formatter.padString($station.dataType.code, 3)
+*$formatter.padString( $survey.reference, 13)$formatter.padZero($station.reference.trim(), 5) Data Type=$formatter.padString($station.dataType.code, 3)
 *DATE=$formatter.formatDateTime("ddMMyyyy", $station.fullDate) TIME=$formatter.formatDateTime("hh24mm", $station.correctedTime, "9999") LAT=$formatter.formatLatitude("NDD MM.mm", $station.latitude) LON=$formatter.formatLongitude("NDDD MM.mm", $station.longitude) DEPTH=#if($station.bottomDepth == 0) #else$formatter.formatInt("%-5d", $station.bottomDepth)#end  QC=0000
 *NB PARAMETERS=$formatter.formatInt("%02d", $station.parametersNumber) RECORD LINES=$formatter.formatInt("%05d", $station.parametersAt(0).valuesSize())
 #if ($survey.isTimeSeriesSurvey())
