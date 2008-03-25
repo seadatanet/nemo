@@ -1644,6 +1644,7 @@ public class NemoLists implements Cloneable {
 		updateDataCentres();
 		updateParameters();
 		updateSurveys();
+		updateVocabLists();
 	}
 
 	/**
@@ -2028,11 +2029,41 @@ public class NemoLists implements Cloneable {
 		return _vocabList.get(listName);
 	}
 
-	static void initVocabLists() {
+	/**
+	 * 
+	 */
+	public static void updateVocabLists() {
 		Iterator<String> keys = Configuration.getSingleton().getVocabLists().keySet().iterator();
 		while (keys.hasNext()) {
 			String listName = keys.next();
-			updateVocabList( listName);
+			updateVocabList(listName);
 		}
 	}
+		
+	/**
+	 * 
+	 */
+	public static void initVocabLists() {
+		XMLDecoder decoder = null;
+		Iterator<String> keys = Configuration.getSingleton().getVocabLists().keySet().iterator();
+		while (keys.hasNext()) {
+			String listName = keys.next();
+			try {
+				decoder = new XMLDecoder(new FileInputStream(
+						String.format("resources/Vocab/%s.xml", listName)));
+				_vocabList.put( listName, (CodeTableRecordType[]) decoder.readObject());
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (decoder != null) {
+					try {
+						decoder.close();
+					} catch (Exception ex) {
+					}
+				}
+			}
+		}
+	}
+
+
 } /* End of class: NemoLists */
