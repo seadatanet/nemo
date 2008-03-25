@@ -2025,7 +2025,7 @@ public class NemoLists implements Cloneable {
 		}
 	}
 
-	CodeTableRecordType[] getVocabList(String listName) {
+	public static CodeTableRecordType[] getVocabList(String listName) {
 		return _vocabList.get(listName);
 	}
 

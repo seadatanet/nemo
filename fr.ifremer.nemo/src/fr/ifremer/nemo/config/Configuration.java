@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
@@ -213,6 +214,15 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			Element2Field setter = new Element2Field(this, "setVocabURL");
 			return setter;
 		}
+		if (a_LocalName.equals("VocabListURL")) {
+	    String name = null;
+	    String value = null;
+	    if ((name = a_Attributes.getValue("name")) != null &&
+	    		(value = a_Attributes.getValue("value")) != null) {
+	      _vocabLists.put(name, value);
+	    }
+			return this;
+		}
 		return null;
 	}
 
@@ -252,6 +262,14 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		a_Writer.putTag("cdiURL", getCdiURL());
 		a_Writer.putTag("cdiMethod", getCdiMethod());
 		a_Writer.putTag("vocabURL", getVocabURL());
+		Iterator<String> keys = getVocabLists().keySet().iterator();
+		while (keys.hasNext()) {
+			String listName = keys.next();
+			a_Writer.openTag("VocabListURL");
+			a_Writer.putAttribute("name", listName);
+			a_Writer.putAttribute("value", _vocabLists.get(listName));
+			a_Writer.closeTag();
+		}
 	}
 
 	/**
