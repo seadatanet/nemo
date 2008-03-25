@@ -27,7 +27,8 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 	private final IWorkbenchWindow window;
 
-	public static Composite top, compoHaut, compoLCD, compoBouton = null;
+	public static Composite top, compoHaut, compoLCD, compoBouton,
+					compoWS, compoWSVocab1, compoWSVocab2= null;
 	
 	public static Group groupLangue, groupCentreDonnees, groupWS, 
 			groupDossier, groupDossier1, groupDossier2, groupCDI = null;
@@ -39,11 +40,17 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 	public static Label labelNemo, labelNautilus, labelModèle, labelCampagne,
 			labelIdEdmoRespCdi, labelUrlCdi, labelMethodeCdi,
-			labelCodeEdmoDonnees, labelIdEdmoRespDonnees, labelIdEdmoDistDonnees = null;
+			labelCodeEdmoDonnees, labelIdEdmoRespDonnees, labelIdEdmoDistDonnees,
+			labelWSVocab,
+			labelL011, labelL021, labelL031, labelL041, labelL051, 
+			labelL061, labelL071, labelL081, labelL091 = null;
 
 	public static Text textAreaNemo, textAreaNautilus, textDossierModele, textDossierCampagne, 
 			textIdEdmoRespCdi, textUrlCdi, textMethodeCdi,
-			textCodeEdmoDonnees, textIdEdmoRespDonnees, textIdEdmoDistDonnees = null;
+			textCodeEdmoDonnees, textIdEdmoRespDonnees, textIdEdmoDistDonnees,
+			textWSVocab,
+			textL011, textL021, textL031, textL041, textL051,
+			textL061, textL071, textL081, textL091 = null;
 
 	public final static String ID = "fr.ifremer.nemo.ui.OptionsAction"; //$NON-NLS-1$
 
@@ -74,7 +81,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		shelloptions = new Shell(Application.display, SWT.BORDER | SWT.TITLE
 				| SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);
 
-		shelloptions.setSize(600, 500);
+		shelloptions.setSize(600, 600);
 		shelloptions.setText(Messages.getString("OptionsAction.3")); //$NON-NLS-1$
 		shelloptions.setLayout(new GridLayout());
 		
@@ -358,27 +365,91 @@ public class OptionsAction extends Action implements ISelectionListener,
 //		groupWS.setLayout(null);
 		groupWS.setText("Web Services"); //$NON-NLS-1$
 //		groupWS.setBounds(new Rectangle(4, 169, 414, 146));
-		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(groupWS);
+		GridLayoutFactory.fillDefaults().applyTo(groupWS);
 		GridDataFactory.fillDefaults().grab(true,true).applyTo(groupWS);
 
-		labelNemo = new Label(groupWS, SWT.NONE);
+		compoWS = new Composite(groupWS, SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoWS);
+		GridDataFactory.fillDefaults().grab(true,true).applyTo(compoWS);
+		
+		labelNemo = new Label(compoWS, SWT.NONE);
 //		labelNemo.setBounds(new Rectangle(13, 40, 62, 13));
 		labelNemo.setText("NEMO"); //$NON-NLS-1$
 		labelNemo.pack();
 
-		textAreaNemo = new Text(groupWS, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL);
+		textAreaNemo = new Text(compoWS, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL);
 //		textAreaNemo.setBounds(new Rectangle(85, 18, 316, 55));
 		GridDataFactory.fillDefaults().grab(true,true).applyTo(textAreaNemo);
 		
-		labelNautilus = new Label(groupWS, SWT.NONE);
+		labelNautilus = new Label(compoWS, SWT.NONE);
 //		labelNautilus.setBounds(new Rectangle(13, 100, 62, 13));
 		labelNautilus.setText("NAUTILUS"); //$NON-NLS-1$
 		labelNautilus.pack();
 				
-		textAreaNautilus = new Text(groupWS, SWT.MULTI | SWT.WRAP
+		textAreaNautilus = new Text(compoWS, SWT.MULTI | SWT.WRAP
 				| SWT.V_SCROLL);
 //		textAreaNautilus.setBounds(new Rectangle(85, 82, 316, 55));
 		GridDataFactory.fillDefaults().grab(true,true).applyTo(textAreaNautilus);
+		
+		// WS Vocab		
+		compoWSVocab1 = new Composite(groupWS, SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoWSVocab1);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(compoWSVocab1);
+		
+		labelWSVocab = new Label(compoWSVocab1, SWT.NONE);
+		labelWSVocab.setText("WS Vocab");
+		textWSVocab = new Text(compoWSVocab1, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textWSVocab);
+		
+		compoWSVocab2 = new Composite(groupWS, SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(4).applyTo(compoWSVocab2);
+		GridDataFactory.fillDefaults().grab(true,true).applyTo(compoWSVocab2);
+		
+		labelL011 = new Label(compoWSVocab2, SWT.NONE);
+		labelL011.setText("L011");
+		textL011 = new Text(compoWSVocab2, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL011);
+		
+		labelL021 = new Label(compoWSVocab2, SWT.NONE);
+		labelL021.setText("L021");
+		textL021 = new Text(compoWSVocab2, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL021);
+		
+		labelL031 = new Label(compoWSVocab2, SWT.NONE);
+		labelL031.setText("L031");
+		textL031 = new Text(compoWSVocab2, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL031);
+		
+		labelL041 = new Label(compoWSVocab2, SWT.NONE);
+		labelL041.setText("L041");
+		textL041 = new Text(compoWSVocab2, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL041);
+		
+		labelL051 = new Label(compoWSVocab2, SWT.NONE);
+		labelL051.setText("L051");
+		textL051 = new Text(compoWSVocab2, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL051);
+		
+		labelL061 = new Label(compoWSVocab2, SWT.NONE);
+		labelL061.setText("L061");
+		textL061 = new Text(compoWSVocab2, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL061);
+		
+		labelL071 = new Label(compoWSVocab2, SWT.NONE);
+		labelL071.setText("L071");
+		textL071 = new Text(compoWSVocab2, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL071);
+		
+		labelL081 = new Label(compoWSVocab2, SWT.NONE);
+		labelL081.setText("L081");
+		textL081 = new Text(compoWSVocab2, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL081);
+		
+		labelL091 = new Label(compoWSVocab2, SWT.NONE);
+		labelL091.setText("L091");
+		textL091 = new Text(compoWSVocab2, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL091);
+		
 	}
 	
 	/**
