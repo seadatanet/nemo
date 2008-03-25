@@ -135,6 +135,8 @@ public class AngleFormatParser extends AbstractParser implements Cloneable {
 		spaces();
 		seconds();
 		spaces();
+		hemisphere();		// FAE 54 DEBUT
+		spaces();			// FAE 54 DEBUT
 		
 		return res;
 		

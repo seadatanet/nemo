@@ -24,6 +24,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.sax.SAXSource;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
@@ -51,6 +52,7 @@ import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.ui.DataModel;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Formatter;
+import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSShip;
 
 /**
@@ -1290,6 +1292,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 	 */
 	public void importFromXML(File xmlFile) throws SAXException,
 			TransformerException, FileNotFoundException {
+		/*
 		XMLReader reader = XMLReaderFactory.createXMLReader();
 		reader.setFeature("http://xml.org/sax/features/validation", false);
 		reader.setFeature("http://xml.org/sax/features/namespaces", true);
@@ -1298,6 +1301,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 
 		Source source = new SAXSource(reader, new InputSource(new FileReader(
 				xmlFile)));
+		
 		XMLBootstrapParser parser = new XMLBootstrapParser(this);
 		Result result = new SAXResult(parser);
 		java.io.InputStream inputStream = new FileInputStream(
@@ -1311,6 +1315,22 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 			source = new SAXSource(reader, new InputSource(new FileReader(xmlFile)));
 			trans.transform(source, result);
 		}
+		*/
+		
+		StreamSource xmlSource = new StreamSource(xmlFile);
+
+		StreamSource xslSource = new StreamSource(new File("resources/survey.xsl"));
+		
+		XMLBootstrapParser parser = new XMLBootstrapParser(this);
+		Result result = new SAXResult(parser);
+		
+		if (checkSchema(xmlSource))	{
+			TransformerFactory factory = TransformerFactory.newInstance();
+			Transformer transformer = factory.newTransformer(xslSource);
+			transformer.transform(xmlSource,result);
+		}
+		
+		
 	}
 
 	private Boolean checkSchema(Source xmlFile) throws SAXException {
@@ -1334,7 +1354,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 			return true;
 
 		} catch (SAXException ex) {
-			Utils.messageErreurAppend("Le fichier XML n'est pas valide :");
+			Utils.messageErreurAppend(Messages.getString("EditSurvey.72"));
 			Utils.messageErreurAppend(ex.getMessage());
 			throw ex;
 		} catch (IOException ex) {

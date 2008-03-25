@@ -17,6 +17,8 @@ import com.ago.xml.XMLOutputWriter;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.output.ProgressNotification;
+import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.ui.ViewFile;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.SizeBasedProgressNotifier;
 
@@ -400,9 +402,8 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 				//reader = new RandomAccessFile(file, "r");
 				consumeHeader(reader2);
 				
-
 				
-				while ((station = _stationModel.convert(reader2, null,
+				while ((station = _stationModel.convert(reader2, Utils.extraitFichierChemin(ViewFile.nomFichier),
 						isRefDateBased, a_RefDate, notifier)) != null) {
 					if (SurveyMedia.interrompu) {
 						throw new IOException("");

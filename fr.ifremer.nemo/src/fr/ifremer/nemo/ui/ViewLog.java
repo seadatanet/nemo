@@ -131,7 +131,7 @@ public class ViewLog extends ViewPart {
 							+ "2/ 'Browse' Button  and choose a file or directory.\n"
 							+ "3/ If needed, load a model via the model/ open a model menu and by choosing the XML file of the model corresponding to the current cruise.\n"
 							+ "4/ The description of file zone appears. Click on each section and modify the values.\n"
-							+ "5/ To indicate a number of lines, highlight with the mouse the lines concerned on the left part of the window then click on the butten 'inject' of the considered section.\n"
+							+ "5/ To indicate a number of lines, highlight with the mouse the lines concerned on the left part of the window then click on the butten 'set' of the considered section.\n"
 							+ "6/ The end of data pattern can be entered by the user.\n"
 							+ "    END will be translated by NEMO into ^END$\n"
 							+ "    EOF will be translated by NEMO into ^$\n"
@@ -157,7 +157,7 @@ public class ViewLog extends ViewPart {
 			ViewLog.styledTextLogHelp
 					.setText("==CRUISE DESCRIPTION==\n"
 							+ "3 possibilities for fulfilling this step: entering all the values manually, asking the webservices or loading a XML file.\n"
-							+ "1/ Manually : filling the 'reference', 'location', 'data source '  and 'possible comments' sections. For the 'archiving centre' section , choose confidentiality in the combo list. For the 'data type' section, a right click on the blank table makes a menu appear. It will enable to add a new type ('list Selection') to move or erase the selected type.  Don't try to left-click to choose a line then to right-click to make the menu appear. On the contrary do a right-clik directly, otherwise you will start the edition mode. The type of data selection's window enables to make searches on both the code and the name of the type.\n"
+							+ "1/ Manually : filling the 'reference', 'location', 'data source '  and 'Comments' sections. For the 'archiving centre' section , choose confidentiality in the combo list. For the 'data type' section, a right click on the blank table makes a menu appear. It will enable to add a new type ('list Selection') to move or erase the selected type.  Don't try to left-click to choose a line then to right-click to make the menu appear. On the contrary do a right-clik directly, otherwise you will start the edition mode. The type of data selection's window enables to make searches on both the code and the name of the type.\n"
 							+ "2/ Webservices, 'server initialisation' button : the survey's selection window enables to make searches using the code or the name of the cruise.\n"
 							+ "3/ XML file, 'XML initialisation' button : choose a cruise XML file.\n");
 		}
@@ -207,7 +207,7 @@ public class ViewLog extends ViewPart {
 			// aide anglaise
 			ViewLog.styledTextLogHelp
 					.setText("==STATION DESCRIPTION==\n"
-							+ "It's the same principle than for the previous steps, only here some values to inject ask values on 'line', 'start' and 'end'. In the case of a cruise file, always carry out the injections on the first station ! In any case, the selection will have to be limited to a single line (date, time, latitude, depth, etc.) with the exception of the 'comment' where the possibility of highlighting several lines is proposed.\n"
+							+ "It's the same principle than for the previous steps, only here some values to inject ask values on 'line', 'start' and 'end'. In the case of a cruise file, always carry out the injections on the first station ! In any case, the selection will have to be limited to a single line (date, time, latitude, depth, etc.) with the exception of the 'comments' where the possibility of highlighting several lines is proposed.\n"
 							+ "For the time, date, latitude and longitude formats, you can enter your own formats.\n"
 							+ "\nIf station's number is located within the filename, use 0 as line number\n"
 							+ "\n==TIME / DATE FORMATS==\n"

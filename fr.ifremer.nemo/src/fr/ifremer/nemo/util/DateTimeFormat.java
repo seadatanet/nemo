@@ -404,6 +404,8 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 		TimeZone tz = TimeZone.getTimeZone("GMT");
 		Calendar cal = Calendar.getInstance(tz);
 		cal.clear();
+		cal.setLenient(false);
+		
 		try {
 			for (int i = 0; i < _elements.length && index < source.length(); i++) {
 				switch (_elements[i]._type) {
@@ -438,6 +440,7 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 						int month = Integer.parseInt(tmp);
 						cal.set(Calendar.MONTH, month - 1);
 					}
+
 					index += _elements[i]._element.length();
 					break;
 				}
@@ -447,6 +450,7 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 
 					int day = Integer.parseInt(tmp);
 					cal.set(Calendar.DAY_OF_MONTH, day);
+
 					index += _elements[i]._element.length();
 					break;
 				}
@@ -465,6 +469,7 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 					cal.add(Calendar.HOUR_OF_DAY, hour);
 					cal.add(Calendar.MINUTE, mins);
 					cal.add(Calendar.SECOND, seconds);
+					
 					index += _elements[i]._element.length();
 					break;
 				}
@@ -472,7 +477,8 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 					String tmp = source.substring(index, index
 							+ _elements[i]._element.length());
 					if (!tmp.equals(_elements[i]._element)) {
-						if (!_elements[i]._element.equals(" "))
+						if (!_elements[i]._element.trim().equals(""))
+						// if (!_elements[i]._element.equals(" "))
 						{
 						throw new ParseException(
 								"Charactere invalide, chaine attendue: \""
@@ -556,7 +562,7 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 					calTemp.clear();
 					
 					String tmp = source.substring(index, index
-							+ 5);
+							+ _elements[i]._element.length());
 					
 					calTemp.add(Calendar.SECOND, Integer.parseInt(tmp.trim()));
 					
@@ -564,12 +570,12 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 					cal.set(Calendar.MINUTE, calTemp.get(Calendar.MINUTE));
 					cal.set(Calendar.SECOND, calTemp.get(Calendar.SECOND));
 					
-					index +=5;
+					index +=_elements[i]._element.length();
 					
 					break;
+				}				
 				}
-				
-				}
+				cal.getTime();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

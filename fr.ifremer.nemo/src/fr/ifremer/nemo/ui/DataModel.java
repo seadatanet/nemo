@@ -25,6 +25,7 @@ import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.LatitudeFormat;
 import fr.ifremer.nemo.util.LongitudeFormat;
+import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSCountry;
 import fr.ifremer.nemo.ws.WSDataCentre;
 import fr.ifremer.nemo.ws.WSDataType;
@@ -246,6 +247,7 @@ public class DataModel {
 		station = stationModel.getModel();
 
 		// maj des dataTypes
+		
 		TableDataSurvey.majTypeData();
 
 		// injection des valeurs de l'IHM -> datamodel
@@ -1276,12 +1278,10 @@ public class DataModel {
 
 		// lancement du processus sur le premier onglet et effacement préventif
 		// si besoin
-
 		fillDesc();
-
 	}
 
-	public static void fillDesc() {
+	public static void fillDesc() throws RuntimeException {
 		// remplissage auto de l'IHM Desc
 		if (dirSurvey_modele != null) {
 			dirSurvey_modele.releaseInputModel();
@@ -1297,21 +1297,29 @@ public class DataModel {
 				dirSurvey_modele = (DirectoryBasedSurvey) inputModel_modele
 						.getMedia();
 			} catch (RuntimeException e) {
-				// 
+				Utils.messageErreurAppend(Messages.getString("Etape.124"));
 				e.printStackTrace();
+				throw e;
 			}
 			stationModel_modele = dirSurvey_modele.getStationModel();
 			// lignes entete fichier = 0
 			EditDesc.lignesEnteteFichier.setText("0");
 
 		} else {
-			singleSurvey_modele = new SingleFileSurvey();
-			singleSurvey_modele = (SingleFileSurvey) inputModel_modele
-					.getMedia();
+			try {
+				singleSurvey_modele = new SingleFileSurvey();
+				singleSurvey_modele = (SingleFileSurvey) inputModel_modele
+						.getMedia();
+			} catch (RuntimeException e) {
+				Utils.messageErreurAppend(Messages.getString("Etape.124"));
+				e.printStackTrace();
+				throw e;
+			}
 			stationModel_modele = singleSurvey_modele.getStationModel();
 			// lignes entete fichier
 			EditDesc.lignesEnteteFichier.setText(""
 					+ singleSurvey_modele.getHeaderLinesNumber());
+			
 		}
 
 		// test si série tempo

@@ -16,6 +16,7 @@ import com.ago.xml.XMLOutputWriter;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.output.ProgressNotification;
+import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.SizeBasedProgressNotifier;
 
 /**
@@ -340,6 +341,8 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 									files[i], isRefDateBased, a_RefDate,
 									notifierStation);
 							survey.addStation(station);
+						} catch (Exception e) {
+							throw new InterruptedException (e.getMessage() + Messages.getString("SingleFileSurvey.1") + file.getName());
 						} finally {
 							if (reader2 != null) {
 								try {

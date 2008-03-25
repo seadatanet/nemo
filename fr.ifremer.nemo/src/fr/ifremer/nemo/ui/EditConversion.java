@@ -104,7 +104,10 @@ public class EditConversion extends Thread {
 							}
 						} catch (NumberFormatException ex) {
 							Utils.messageErreur(Messages
-									.getString("EditConversion.17"));
+									.getString("EditConversion.17"));							
+						} catch (Exception ex) {
+							Utils.messageErreur(Messages
+									.getString("EditConversion.17"));	
 						}
 						
 					}
@@ -157,7 +160,9 @@ public class EditConversion extends Thread {
 		FileDialog dialog = new FileDialog(shell, SWT.SAVE
 				| SWT.APPLICATION_MODAL);
 		dialog.setText(Messages.getString("EditConversion.13")); //$NON-NLS-1$
-		dialog.setFilterPath(Utils.configuration.getCruisesDirectory());
+		// FAE45
+		// dialog.setFilterPath(Utils.configuration.getCruisesDirectory());
+		dialog.setFilterPath(ViewFile.nomFichier);
 		nomFichierSortie = dialog.open();
 
 		if (nomFichierSortie != null) {
@@ -233,6 +238,7 @@ public class EditConversion extends Thread {
 		DirectoryDialog dialog = new DirectoryDialog(shell, SWT.SAVE
 				| SWT.APPLICATION_MODAL);
 		dialog.setText(Messages.getString("EditConversion.13")); //$NON-NLS-1$
+		dialog.setFilterPath(ViewFile.nomRepertoire);
 		nomDossierSortie = dialog.open();
 
 		if (nomDossierSortie != null) {
@@ -281,6 +287,7 @@ public class EditConversion extends Thread {
 				catch (Exception e)
 				{
 					Utils.messageErreur(e.getMessage());
+					SWTProcess.interrompu=true;
 				}
 			}
 

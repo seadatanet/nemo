@@ -184,6 +184,12 @@ public class EditStation {
 		buttonExpand.setText("+"); //$NON-NLS-1$
 
 		formEdition.reflow(true);
+		
+		// Initialisation du tableau de paramètres si étape onglet Campagne "sautée"
+		if (ViewFile.radioCollectCasN.getSelection() || ViewFile.radioCollectCas1.getSelection()) {
+			TableDataSurvey.initTypes();
+			// TableDataSurvey.majTypeData();
+		}
 
 		// initialisation liste des sections de la partie description fichier
 		boolean blnModeleOuvert = DataModel.ouverture;
@@ -293,7 +299,7 @@ public class EditStation {
 			// section latitude de fin
 			blnManuel = true;
 			if (blnModeleOuvert) {
-				PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("endLatitude");
+				PropertyModel propertyModel = DataModel.stationModel_modele.getTimeSeriesModel().propertiesAt("endLatitude");
 				blnManuel = propertyModel.isUserProvided();
 			}
 			
@@ -317,7 +323,7 @@ public class EditStation {
 			// section longitude de fin
 			blnManuel = true;
 			if (blnModeleOuvert) {
-				PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("endLongitude");
+				PropertyModel propertyModel = DataModel.stationModel_modele.getTimeSeriesModel().propertiesAt("endLongitude");
 				blnManuel = propertyModel.isUserProvided();
 			}
 			
@@ -341,7 +347,7 @@ public class EditStation {
 			// section profondeur de fin
 			blnManuel = true;
 			if (blnModeleOuvert) {
-				PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("endDepth");
+				PropertyModel propertyModel = DataModel.stationModel_modele.getTimeSeriesModel().propertiesAt("endDepth");
 				blnManuel = propertyModel.isUserProvided();
 			}
 
@@ -353,7 +359,7 @@ public class EditStation {
 			// section profondeur de capteur
 			blnManuel = true;
 			if (blnModeleOuvert) {
-				PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("sensorDepth");
+				PropertyModel propertyModel = DataModel.stationModel_modele.getTimeSeriesModel().propertiesAt("sensorDepth");
 				blnManuel = propertyModel.isUserProvided();
 			}
 			DrawingStation
@@ -365,7 +371,7 @@ public class EditStation {
 			// section déclinaison magnétique
 			blnManuel = true;
 			if (blnModeleOuvert) {
-				PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("magneticDeclination");
+				PropertyModel propertyModel = DataModel.stationModel_modele.getTimeSeriesModel().propertiesAt("magneticDeclination");
 				blnManuel = propertyModel.isUserProvided();
 			}
 			DrawingStation
@@ -376,7 +382,7 @@ public class EditStation {
 			// section fréquence échantillonnage
 			blnManuel = true;
 			if (blnModeleOuvert) {
-				PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("samplingRate");
+				PropertyModel propertyModel = DataModel.stationModel_modele.getTimeSeriesModel().propertiesAt("samplingRate");
 				blnManuel = propertyModel.isUserProvided();
 			}
 			

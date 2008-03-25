@@ -68,6 +68,8 @@ public class Preformat {
 	// Contenu des colonnes
 	private static String[] _colonne;
 	
+	// Préformatage réussi
+	private static boolean _preformatOK;
 	
 	//////////////
 	// Méthodes //
@@ -76,7 +78,8 @@ public class Preformat {
 	public static void run() throws IOException {
 		int i;		
 		
-		_nbColonne = 1;		
+		_nbColonne = 1;	
+		_preformatOK = false;
 		
 		if (ViewFile.radioFichier.getSelection()) {
 			_ficEntree = ViewFile.nomFichier.substring(ViewFile.nomFichier.lastIndexOf('\\')+1);
@@ -253,25 +256,18 @@ public class Preformat {
 			}
 		}
 		
-		// remplissage de l'IHM par le modèle chargé ?
-		if (DataModel.ouverture) {
-			DataModel.fillDesc();
-		}
+		_preformatOK = true;
 
-		// affichage etape0 dans formulaire
-		// d'édition de
-		// paramètres
-		Utils.razGlobal();
-		EditDesc.affichageEdition();
-
-		ViewFile.tabItem1.dispose();
-
-//		// dans le cas d'une collection, on ne peut
-//		// generer que le format ODV
-//		ViewFile.medatlas.setEnabled(false);
-//		ViewFile.medatlas.setSelection(false);
-//		ViewFile.odv.setSelection(true);
-//		ViewFile.grpCDI.setVisible(true);
+//		// affichage etape0 dans formulaire
+//		// d'édition de
+//		// paramètres
+//		Utils.razGlobal();
+//		EditDesc.affichageEdition();
+//
+//		// remplissage de l'IHM par le modèle chargé ?
+//		if (DataModel.ouverture) {
+//			DataModel.fillDesc();
+//		}
 	}
 	
 	private static void analyseLigne(String ligneLue) {
@@ -489,4 +485,9 @@ public class Preformat {
 			Utils.messageOK(Messages.getString("Preformat.1"));
 		}
 	}
+
+	public static boolean isPreformat() {
+		return _preformatOK;
+	}
+	
 }

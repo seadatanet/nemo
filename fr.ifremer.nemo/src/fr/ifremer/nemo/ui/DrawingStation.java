@@ -1,7 +1,9 @@
 package fr.ifremer.nemo.ui;
 
+import java.io.File;
 import java.text.ParseException;
 
+import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.MouseEvent;
@@ -179,6 +181,7 @@ public class DrawingStation {
 		inject.setEnabled(false);*/
 		
 		radio.setSelection(blnManuel);
+		position.setSelection(!blnManuel);
 		manu.setEnabled(blnManuel);
 		lign.setEnabled(!blnManuel);
 		debu.setEnabled(!blnManuel);
@@ -380,7 +383,8 @@ public class DrawingStation {
 		inject.setEnabled(false);*/
 		
 		radio.setSelection(blnManuel);
-		manu.setEnabled(!blnManuel);
+		position.setSelection(!blnManuel);
+		manu.setEnabled(blnManuel);
 		lign.setEnabled(!blnManuel);
 		debu.setEnabled(!blnManuel);
 		fi.setEnabled(!blnManuel);
@@ -399,7 +403,7 @@ public class DrawingStation {
 		// le ppar radio est le pointeur du bouton "incremente"
 		final String nomSec;
 		final Text lign, debu, fi, test;
-		final Button inject;
+		final Button inject, pos;
 
 		nomSec = nomSection;
 
@@ -495,6 +499,7 @@ public class DrawingStation {
 		debu = debut;
 		fi = fin;
 		test = txtTest;
+		pos = position;
 
 		// listeners
 
@@ -555,13 +560,27 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						if (EditStation.buttonRefStationPos.getSelection()) {
-							Utils.test(test, ViewFile.styledTextStation, lign, debu,
-									fi);
+						if (pos.getSelection()) {
+							if (lign.getText().equals("0")) {
+								// On récupère le numéro de station dans le nom du fichier
+								String strFichier = "";
+								if (ViewFile.radioFichier.getSelection()) {
+									strFichier = Utils.extraitFichierChemin(ViewFile.nomFichier);
+								} else {
+									File directory = new File(ViewFile.nomRepertoire);
+									File[] subfiles = directory.listFiles();
+									strFichier = subfiles[0].getName();
+								}
+								
+								test.setText(strFichier.substring(Integer.parseInt(debu.getText()), Integer.parseInt(fi.getText())));
+							} else {
+								Utils.test(test, ViewFile.styledTextStation, lign, debu, fi);
+							}
+							
+							// test.setText(test.getText().format("%05d", Integer.parseInt(test.getText().trim())));
+							test.setText(Formatter.getSingleton().padZero(test.getText().trim(), 5));
+							test.pack();
 						}
-						
-						test.setText(test.getText().format("%05d", Integer.parseInt(test.getText().trim())));
-						test.pack();
 					}
 				});
 		
@@ -576,6 +595,7 @@ public class DrawingStation {
 				
 		
 		radio.setSelection(blnManuel);
+		position.setSelection(!blnManuel);
 		lign.setEnabled(!blnManuel);
 		debu.setEnabled(!blnManuel);
 		fi.setEnabled(!blnManuel);
@@ -661,14 +681,14 @@ public class DrawingStation {
 
 		// ligne 1
 		Label label3 = new Label(sectionClient, SWT.NULL);
-		label3.setText("Ligne 1");
+		label3.setText(Messages.getString("Drawing.14"));
 		zone1.setParent(sectionClient);
 
 		zone1.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// ligne 2
 		Label label4 = new Label(sectionClient, SWT.NULL);
-		label4.setText("Ligne 2");
+		label4.setText(Messages.getString("Drawing.15"));
 		zone2.setParent(sectionClient);
 
 		zone2.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -685,37 +705,37 @@ public class DrawingStation {
 
 		// ligne 1
 		Label label11 = new Label(groupe, SWT.NULL);
-		label11.setText("Ligne 1");
+		label11.setText(Messages.getString("Drawing.14"));
 		ligne1.setParent(groupe);
 		ligne1.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// debut1
 		Label label21 = new Label(groupe, SWT.NULL);
-		label21.setText("Début 1");
+		label21.setText(Messages.getString("Drawing.16"));
 		debut1.setParent(groupe);
 		debut1.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin1
 		Label label31 = new Label(groupe, SWT.NULL);
-		label31.setText("Fin 1");
+		label31.setText(Messages.getString("Drawing.18"));
 		fin1.setParent(groupe);
 		fin1.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// ligne2
 		Label label12 = new Label(groupe, SWT.NULL);
-		label12.setText("Ligne 2");
+		label12.setText(Messages.getString("Drawing.15"));
 		ligne2.setParent(groupe);
 		ligne2.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// debut2
 		Label label22 = new Label(groupe, SWT.NULL);
-		label22.setText("Début 2");
+		label22.setText(Messages.getString("Drawing.17"));
 		debut2.setParent(groupe);
 		debut2.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin2
 		Label label32 = new Label(groupe, SWT.NULL);
-		label32.setText("Fin 2");
+		label32.setText(Messages.getString("Drawing.19"));
 		fin2.setParent(groupe);
 		fin2.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
@@ -837,6 +857,7 @@ public class DrawingStation {
 
 		
 		radio.setSelection(blnManuel);
+		position.setSelection(!blnManuel);
 		zon1.setEnabled(blnManuel);
 		zon2.setEnabled(blnManuel);
 		lign1.setEnabled(!blnManuel);
@@ -908,14 +929,14 @@ public class DrawingStation {
 
 		// ligne 1
 		Label label3 = new Label(sectionClient, SWT.NULL);
-		label3.setText("Ligne 1");
+		label3.setText(Messages.getString("Drawing.14"));
 		zone1.setParent(sectionClient);
 
 		zone1.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// ligne 2
 		Label label4 = new Label(sectionClient, SWT.NULL);
-		label4.setText("Ligne 2");
+		label4.setText(Messages.getString("Drawing.15"));
 		zone2.setParent(sectionClient);
 
 		zone2.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -932,37 +953,37 @@ public class DrawingStation {
 
 		// ligne 1
 		Label label11 = new Label(groupe, SWT.NULL);
-		label11.setText("Ligne 1");
+		label11.setText(Messages.getString("Drawing.14"));
 		ligne1.setParent(groupe);
 		ligne1.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// debut1
 		Label label21 = new Label(groupe, SWT.NULL);
-		label21.setText("Début 1");
+		label21.setText(Messages.getString("Drawing.16"));
 		debut1.setParent(groupe);
 		debut1.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin1
 		Label label31 = new Label(groupe, SWT.NULL);
-		label31.setText("Fin 1");
+		label31.setText(Messages.getString("Drawing.18"));
 		fin1.setParent(groupe);
 		fin1.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// ligne2
 		Label label12 = new Label(groupe, SWT.NULL);
-		label12.setText("Ligne 2");
+		label12.setText(Messages.getString("Drawing.15"));
 		ligne2.setParent(groupe);
 		ligne2.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// debut2
 		Label label22 = new Label(groupe, SWT.NULL);
-		label22.setText("Début 2");
+		label22.setText(Messages.getString("Drawing.17"));
 		debut2.setParent(groupe);
 		debut2.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin2
 		Label label32 = new Label(groupe, SWT.NULL);
-		label32.setText("Fin 2");
+		label32.setText(Messages.getString("Drawing.19"));
 		fin2.setParent(groupe);
 		fin2.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
@@ -1086,6 +1107,7 @@ public class DrawingStation {
 		
 		
 		radio.setSelection(blnManuel);
+		position.setSelection(!blnManuel);
 		zon1.setEnabled(blnManuel);
 		zon2.setEnabled(blnManuel);
 		lign1.setEnabled(!blnManuel);
@@ -1259,48 +1281,65 @@ public class DrawingStation {
 		position.setParent(sectionClient);
 		position.setText(Messages.getString("Drawing.7"));
 
-		GridLayout gridLayout1 = new GridLayout();
-		gridLayout1.numColumns = 6;
+		// GridLayout gridLayout1 = new GridLayout();
+		// gridLayout1.numColumns = 6;
 		Group groupe = new Group(sectionClient, SWT.NONE);
 		groupe.setText(Messages.getString("Drawing.9"));
-		groupe.setLayout(gridLayout1);
+		// groupe.setLayout(gridLayout1);
 		grou = groupe;
-
+		
+		GridLayoutFactory.fillDefaults().applyTo(groupe);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(groupe);
+		
+		Composite compo1 = new Composite(groupe,SWT.NONE);		
+		GridLayoutFactory.fillDefaults().numColumns(6).applyTo(compo1);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(compo1);
+		
 		// ligne
-		Label label1 = new Label(groupe, SWT.NULL);
+		Label label1 = new Label(compo1, SWT.NULL);
 		label1.setText(Messages.getString("Drawing.10"));
-		ligne.setParent(groupe);
+		ligne.setParent(compo1);
 		// ligne = new Text(groupe, SWT.BORDER);
-		ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		// ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// debut
-		Label label2 = new Label(groupe, SWT.NULL);
+		Label label2 = new Label(compo1, SWT.NULL);
 		label2.setText(Messages.getString("Drawing.11"));
-		debut.setParent(groupe);
+		debut.setParent(compo1);
 		// = new Text(groupe, SWT.BORDER);
-		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		// debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
-		Label label3 = new Label(groupe, SWT.NULL);
+		Label label3 = new Label(compo1, SWT.NULL);
 		label3.setText(Messages.getString("Drawing.12"));
-		fin.setParent(groupe);
+		fin.setParent(compo1);
 		// = new Text(groupe, SWT.BORDER);
-		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		// fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// groupe non visible de base
 		// groupe.setVisible(false);
-
+		
+		Composite compo2 = new Composite(groupe,SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo2);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(compo2);
+		
 		// bouton d'injection de la position des valeurs
-		Button buttonInject = new Button(groupe, SWT.NONE);
+		Button buttonInject = new Button(compo2, SWT.NONE);
 		buttonInject.setText(Messages.getString("Drawing.1"));
-		section.setClient(sectionClient);
+		
+		GridDataFactory.fillDefaults().grab(true, false).align(SWT.BEGINNING, SWT.CENTER).applyTo(buttonInject);
+		
 		
 		// bouton de fin de ligne variable
 		// buttonVar = new Button(groupe, SWT.CHECK);
-		buttonVar.setText("Var");
-		buttonVar.setParent(groupe);
-		buttonVar.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-
+		buttonVar.setText(Messages.getString("Drawing.20"));
+		buttonVar.setParent(compo2);
+		// buttonVar.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		
+		GridDataFactory.fillDefaults().grab(true, false).align(SWT.END, SWT.CENTER).applyTo(buttonVar);
+		
+		section.setClient(sectionClient);
+		
 		// une fois les éléments initialisés, on les passe en static pour y
 		// accéder à
 		// partir des listeners
@@ -1387,6 +1426,7 @@ public class DrawingStation {
 		
 		
 		radio.setSelection(blnManuel);
+		position.setSelection(!blnManuel);
 		manu.setEnabled(blnManuel);
 		lign.setEnabled(!blnManuel);
 		debu.setEnabled(!blnManuel);
@@ -1616,8 +1656,6 @@ public class DrawingStation {
 						}
 						
 						try {
-							
-							
 							DateTimeFormat format = new DateTimeFormat(
 									EditStation.comboHeure.getText());
 							
@@ -1629,7 +1667,6 @@ public class DrawingStation {
 							formatter = Formatter.getSingleton();
 							
 							test.setText(formatter.formatDateTime("hh24mm", HourLong, "9999"));
-							
 							
 						} catch (ParseException e) {
 
@@ -2154,6 +2191,7 @@ public class DrawingStation {
 				});
 		
 		radio.setSelection(blnManuel);
+		position.setSelection(!blnManuel);
 		manu.setEnabled(blnManuel);
 		lign.setEnabled(!blnManuel);
 		debu.setEnabled(!blnManuel);
@@ -2346,7 +2384,8 @@ public class DrawingStation {
 		inject.setEnabled(false);*/
 		
 		radio.setSelection(blnManuel);
-		manu.setEnabled(blnManuel);
+		position.setSelection(!blnManuel);
+		manu.setEnabled(!blnManuel);
 		lign.setEnabled(!blnManuel);
 		debu.setEnabled(!blnManuel);
 		fi.setEnabled(!blnManuel);

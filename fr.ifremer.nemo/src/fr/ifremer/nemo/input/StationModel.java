@@ -1359,10 +1359,8 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			}
 			String line = null;
 			
-			for (index = 0; (line = a_Reader.readLine()) != null
-					&& (!(_endOnEmptyLine && line.trim().matches("^$"))
-					&& !(_endOnPattern && line.matches("^" + _endDataPattern + "$"))
-					|| (index < _rowNumber)); index++) {
+			for (index = 0; (line = a_Reader.readLine()) != null 
+					&& (!(_endOnEmptyLine && line.trim().matches("^$"))) && (!(_endOnPattern && line.matches("^" + _endDataPattern + "$"))) || (index < _rowNumber); index++) {
 
 				a_Notifier.progress(line.length());
 				

@@ -2,7 +2,7 @@
 Projet: CONVMED
 Code projet: 9064780
 Auteur: ATLANTIDE
-Date: $Id: buildWS.xml,v 1.6 2007-09-04 12:02:14 pkervell Exp $
+Date: $Id: buildWS.xml,v 1.7 2008-03-25 08:26:59 htaniou Exp $
 Description: build pour la generation, le deploiement et le test du Web Services NEMO
 Usage: ant [-f buildWS.xml] option
        avec option:
@@ -61,16 +61,17 @@ Usage: ant [-f buildWS.xml] option
   <property name="javadoc.dir" value="${basedir}/ws-deploy/javadoc"/>
   <property name="output.dir" value="${basedir}/ws-deploy/output"/>
 
-<!-- configuration IFREMER -->
+<!-- configuration IFREMER 
   <property name="the_hostname" value="alboran5.ifremer.fr" />
   <property name="the_portnumber" value="8081" />
   <property name="the_log4jpath" value="/home/alboran/logiciels/apache-tomcat-5.5.17/webapps" />  
-
-<!-- configuration ALTRAN OUEST
+-->
+	
+<!-- configuration ALTRAN OUEST -->
    <property name="the_hostname" value="localhost" />
-   <property name="the_portnumber" value="8888" />
+   <property name="the_portnumber" value="8080" />
    <property name="the_log4jpath" value="c:/tmp" />
- -->
+ 
 
   <!-- librairies d AXIS -->
   <path id="axis.classpath">
@@ -225,7 +226,7 @@ Usage: ant [-f buildWS.xml] option
   </target>
   
   <!-- target: war de nemo-war -->
-  <target name="nemo-war" depends="compile" description="war de nemo-war">
+  <target name="nemo-war" depends="compileWS" description="war de nemo-war">
 
   	<copy file="${etc.dir}/log4j.properties.template" tofile="${etc.dir}/log4j.properties" />
     <replace file="${etc.dir}/log4j.properties" token="###LOGPATTERN###" value="${the_log4jpath}"/>

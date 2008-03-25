@@ -8,6 +8,7 @@ import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.LatitudeFormat;
 import fr.ifremer.nemo.util.LongitudeFormat;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.util.Preformat;
 
 public class Etape {
 
@@ -18,7 +19,16 @@ public class Etape {
 	 */
 
 	public static void validationDesc() {
-
+		// Fichier avec séparateur
+		if (ViewFile.checkSeparateur.getSelection() && !Preformat.isPreformat()) {
+			try {
+				fr.ifremer.nemo.util.Preformat.run();
+			} catch (Exception ex){
+				Utils.messageErreur(Messages.getString("Etape.120"));
+				ex.printStackTrace();
+			}
+		}
+		
 		// retour à l'onglet message d'erreur
 		ViewLog.tabFolderLog.setSelection(0);
 
@@ -1356,15 +1366,22 @@ public class Etape {
 		// on valide l'étape 1
 		EditDesc.validee = 1;
 
-		// FAE 022
-		if (ViewFile.isCollection()) {
-			EditSurvey.okApresReset = true;
-			EditSurvey.validee = 1;
-			DataModel.initSurvey();
-			ViewFile.etape = 2;
-		} else {
-			ViewFile.etape = 1;
+		try {
+//			 FAE 022
+			if (ViewFile.isCollection()) {
+				EditSurvey.okApresReset = true;
+				EditSurvey.validee = 1;
+				
+				//TableDataSurvey.creationTable();
+				//DataModel.initSurvey();
+				ViewFile.etape = 2;
+			} else {
+				ViewFile.etape = 1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		
 		// System.out.println("Etape.okDesc()");
 
 	}

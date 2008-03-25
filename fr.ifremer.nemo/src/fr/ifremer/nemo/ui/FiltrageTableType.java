@@ -93,21 +93,26 @@ public class FiltrageTableType {
 			}
 
 			// liste filtree initialisée à typesWS au depart
-			int taille = TableDataSurvey.typesWS.size();
-			for (int i = 0; i < taille; i++) {
-				TableDataSurvey.listeFiltree
-						.add(TableDataSurvey.typesWS.get(i));
+			try {
+				int taille = TableDataSurvey.typesWS.size();
+				
+				for (int i = 0; i < taille; i++) {
+					TableDataSurvey.listeFiltree
+							.add(TableDataSurvey.typesWS.get(i));
+				}
+
+				// TableDataSurvey.listeFiltree = TableDataSurvey.typesWS;
+
+				TableData.listeFiltree = new ArrayList<TypeData>();
+				// liste filtree initialisée à typesWS au depart
+				taille = TableData.typesWS.size();
+				for (int i = 0; i < taille; i++) {
+					TableData.listeFiltree.add(TableData.typesWS.get(i));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-
-			// TableDataSurvey.listeFiltree = TableDataSurvey.typesWS;
-
-			TableData.listeFiltree = new ArrayList<TypeData>();
-			// liste filtree initialisée à typesWS au depart
-			taille = TableData.typesWS.size();
-			for (int i = 0; i < taille; i++) {
-				TableData.listeFiltree.add(TableData.typesWS.get(i));
-			}
-
+			
 			filtreText = new Text(top, SWT.BORDER);
 			filtreText.setBounds(new Rectangle(3, 21, 298, 19));
 			filtreText.setText(""); //$NON-NLS-1$

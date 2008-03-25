@@ -41,8 +41,8 @@ public class EditDesc {
 
 	public static Button buttonRAZ, buttonExpandDesc, buttonExpandDesc2,
 			buttonValidateDesc, buttonLignesEnteteStation,
-//			buttonIndicFinDonnees, buttonIndicFinDonneesPosition,
-			buttonPreformat, btnInjectFin,
+//			buttonIndicFinDonnees, buttonIndicFinDonneesPosition, buttonPreformat,
+			btnInjectFin,
 			radEOF, radLigne, radManuel;
 
 
@@ -130,9 +130,9 @@ public class EditDesc {
 			buttonExpandDesc.setText("+"); //$NON-NLS-1$
 			
 			// Bouton préformatage
-			buttonPreformat.setParent(formEdition.getBody());
-			buttonPreformat.setText("Preformat");
-			buttonPreformat.setVisible(ViewFile.checkSeparateur.getSelection());
+//			buttonPreformat.setParent(formEdition.getBody());
+//			buttonPreformat.setText("Preformat");
+//			buttonPreformat.setVisible(ViewFile.checkSeparateur.getSelection());
 
 			formEdition.redraw();
 			formEdition.reflow(true);
@@ -146,16 +146,18 @@ public class EditDesc {
 					.sectionLabelTextInjectNbreLignes(
 							formEdition,
 							Messages.getString("EditDesc.enteteFichier"), Messages.getString("EditDesc.surlignezLignes"), sectionEnteteFichier, lignesEnteteFichier); //$NON-NLS-1$ //$NON-NLS-2$
-			if (ViewFile.dossierCampagne) {
+			// FAE046 : En-tête de fichier à 0 par défaut
+			// if (ViewFile.dossierCampagne) {
 				// dossier donc entete fichier à 0 de base
 				EditDesc.lignesEnteteFichier.setText("0");
-			}
+			//}
 
 			Drawing
 					.sectionLabelTextInjectNbreLignes(
 							formEdition,
 							Messages.getString("EditDesc.enteteStation"), Messages.getString("EditDesc.nbreLignesEntete"), sectionEnteteStation, lignesEnteteStation); //$NON-NLS-1$ //$NON-NLS-2$
-
+			EditDesc.lignesEnteteStation.setText("0");
+			
 			// section fin de station
 			Drawing
 					.sectionLabelTextInjectNbreLignes(
@@ -278,10 +280,9 @@ public class EditDesc {
 					.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 						public void widgetSelected(
 								org.eclipse.swt.events.SelectionEvent e) {
-
 							// on passe en ppar l'étape à laquelle on se trouve
 							// Etape.etape(0);
-
+							
 							Etape.validationDesc();
 
 						}
@@ -297,19 +298,19 @@ public class EditDesc {
 						}
 					});
 			
-			buttonPreformat
-					.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-						public void widgetSelected(
-								org.eclipse.swt.events.SelectionEvent e) {
-							
-							try {
-								fr.ifremer.nemo.util.Preformat.run();
-							} catch (Exception ex){
-								Utils.messageErreur(Messages.getString("Etape.120"));
-								ex.printStackTrace();
-							}
-						}
-					});
+//			buttonPreformat
+//					.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+//						public void widgetSelected(
+//								org.eclipse.swt.events.SelectionEvent e) {
+//							
+//							try {
+//								fr.ifremer.nemo.util.Preformat.run();
+//							} catch (Exception ex){
+//								Utils.messageErreur(Messages.getString("Etape.120"));
+//								ex.printStackTrace();
+//							}
+//						}
+//					});
 
 			// refresh du formulaire
 			formEdition.reflow(true);
@@ -346,7 +347,7 @@ public class EditDesc {
 		buttonValidateDesc.setParent(s);
 		
 		// effacement bouton Preformat
-		buttonPreformat.setParent(s);
+//		buttonPreformat.setParent(s);
 
 		// System.out.println("expand ? = " + expand); //$NON-NLS-1$
 		for (i = 0; i <= EditDesc.listeSectionsDesc.size() - 1; i++) {
@@ -390,7 +391,7 @@ public class EditDesc {
 
 		buttonRAZ.setParent(s.getBody());
 		buttonExpandDesc.setParent(s.getBody());
-		buttonPreformat.setParent(s.getBody());
+//		buttonPreformat.setParent(s.getBody());
 
 		// System.out.println("expand ? = " + expand); //$NON-NLS-1$
 		for (i = 0; i <= EditDesc.listeSectionsDesc.size() - 1; i++) {
@@ -484,7 +485,7 @@ public class EditDesc {
 		buttonExpandDesc = new Button(shell, SWT.NONE);
 		buttonExpandDesc2 = new Button(shell, SWT.NONE);
 		buttonValidateDesc = new Button(shell, SWT.NONE);
-		buttonPreformat = new Button(shell, SWT.NONE);
+//		buttonPreformat = new Button(shell, SWT.NONE);
 		radEOF = new Button(shell, SWT.RADIO);
 		radLigne = new Button(shell, SWT.RADIO);
 		radManuel = new Button(shell, SWT.RADIO);

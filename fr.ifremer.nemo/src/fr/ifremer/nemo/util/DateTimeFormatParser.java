@@ -113,6 +113,13 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 				} else {
 					throw new ParseException("Format du jour manquant", mark);
 				}
+			} else if (day()) {
+				characters();
+				if (month()) {
+					return (time() || nothing());
+				} else {
+					throw new ParseException("Format du mois manquant", mark);
+				}
 			} else {
 				throw new ParseException("Format du mois manquant", mark);
 			}
@@ -126,6 +133,14 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 				} else {
 					throw new ParseException("Format de l'année manquant", mark);
 				}
+			} else if (year()) {
+				characters();
+				if (month()) {
+					characters();
+					return (time() || nothing());
+				} else {
+					throw new ParseException("Format du mois manquant", mark);
+				}
 			} else {
 				throw new ParseException("Format du mois manquant", mark);
 			}
@@ -138,6 +153,13 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 					return (time() || nothing());
 				} else {
 					throw new ParseException("Format de l'année manquant", mark);
+				}
+			} else if (year()) {
+				characters();
+				if (day()) {
+					return (time() || nothing());
+				} else {
+					throw new ParseException("Format du jour manquant", mark);
 				}
 			} else {
 				throw new ParseException("Format du jour manquant", mark);

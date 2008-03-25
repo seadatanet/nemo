@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 import org.eclipse.swt.SWT;
@@ -999,6 +1000,8 @@ public class Utils {
 
 		File[] subfiles = directory.listFiles();
 
+		Arrays.sort(subfiles);
+		
 		int nbre = subfiles.length;
 		String nom = subfiles[0].getName();
 
@@ -1054,6 +1057,8 @@ public class Utils {
 		Boolean ok = true;
 
 		File[] subfiles = directory.listFiles();
+		
+		Arrays.sort(subfiles);
 
 		int nbre = subfiles.length;
 		String nom = subfiles[0].getName();
@@ -1086,6 +1091,8 @@ public class Utils {
 		}
 
 		File[] subsubfiles = subfiles[0].listFiles();
+		
+		Arrays.sort(subsubfiles);
 
 		int nbre2 = subsubfiles.length;
 		String nom2 = subsubfiles[0].getName();
@@ -1415,5 +1422,9 @@ public class Utils {
 			combo.add(valeur);
 			combo.select(combo.getItemCount() - 1 );
 		}
+	}
+	
+	public static String extraitFichierChemin(String chemin) {
+		return chemin.substring(chemin.lastIndexOf('\\')+1);
 	}
 }
