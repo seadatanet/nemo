@@ -755,7 +755,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		_vocabURL = x;
 	}
 
-	public HashMap getVocabLists() {
+	public HashMap<String, String> getVocabLists() {
 		return _vocabLists;
 	}
 

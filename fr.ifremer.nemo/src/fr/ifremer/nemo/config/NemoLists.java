@@ -5,6 +5,13 @@ import java.beans.XMLEncoder;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Iterator;
+
+import javax.xml.rpc.holders.BooleanHolder;
+
+import org.apache.axis.client.Service;
 
 import fr.ifremer.nemo.ws.NemoWS;
 import fr.ifremer.nemo.ws.NemoWSServiceLocator;
@@ -15,6 +22,11 @@ import fr.ifremer.nemo.ws.WSParameter;
 import fr.ifremer.nemo.ws.WSRegion;
 import fr.ifremer.nemo.ws.WSShip;
 import fr.ifremer.nemo.ws.WSSurveyDescription;
+import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
+import fr.ifremer.nemo.wsVocab.vocab.holders.CodeTableRecordTypeArrayHolder;
+import fr.ifremer.nemo.wsVocab.vocab_pkg.VocabLocator;
+import fr.ifremer.nemo.wsVocab.vocab_pkg.VocabPortType;
+import fr.ifremer.nemo.wsVocab.vocab_pkg.VocabSoapBindingStub;
 
 /**
  * Class NemoLists
@@ -43,6 +55,9 @@ public class NemoLists implements Cloneable {
 	public static int nbCountries, nbShips, nbSurveys, nbDataCentres,
 			nbParameters, nbRegions, nbDataTypes;
 	
+	static protected HashMap<String, CodeTableRecordType[]> _vocabList = new HashMap<String, CodeTableRecordType[]>();
+	
+	static protected HashMap<String, Integer> _vocabListStatus = new HashMap<String, Integer>();
 
 	static {
 		initLists();
@@ -1498,6 +1513,7 @@ public class NemoLists implements Cloneable {
 		intDataCentres();
 		initParameters();
 		initSurveys();
+		initVocabLists();
 	}
 
 	/**
@@ -1962,4 +1978,61 @@ public class NemoLists implements Cloneable {
 		}
 	}
 
+	/**
+	 * 
+	 */
+	public static void updateVocabList(String listName) {
+		//okSurveys = false;
+		FileOutputStream stream = null;
+		XMLEncoder encoder = null;
+		CodeTableRecordTypeArrayHolder table = new CodeTableRecordTypeArrayHolder();
+		javax.xml.rpc.holders.BooleanHolder error = new BooleanHolder();
+		try {
+			VocabSoapBindingStub vocab = new VocabSoapBindingStub(
+					new java.net.URL(Configuration.getSingleton().getVocabURL()),
+					new Service());
+			vocab.getList(new String[]{Configuration.getSingleton().getVocabListURL(listName)}, null, table, error );
+			_vocabList.put(listName, table.value);
+			
+			
+			File dir = new java.io.File("resources/Vocab");
+			if (!dir.exists()) {
+				dir.mkdirs();
+			}
+			File file = new java.io.File(dir, listName+".xml");
+			stream = new FileOutputStream(file.toString());
+
+			encoder = new XMLEncoder(stream);
+			encoder.writeObject(table);
+			_vocabListStatus.put(listName, table.value.length);
+		} catch (Exception e) {
+			_vocabListStatus.put(listName, -1);
+			e.printStackTrace();
+		} finally {
+			if (encoder != null) {
+				try {
+					encoder.close();
+				} catch (Exception ex) {
+				}
+			}
+			if (stream != null) {
+				try {
+					stream.close();
+				} catch (Exception ex) {
+				}
+			}
+		}
+	}
+
+	CodeTableRecordType[] getVocabList(String listName) {
+		return _vocabList.get(listName);
+	}
+
+	static void initVocabLists() {
+		Iterator<String> keys = Configuration.getSingleton().getVocabLists().keySet().iterator();
+		while (keys.hasNext()) {
+			String listName = keys.next();
+			updateVocabList( listName);
+		}
+	}
 } /* End of class: NemoLists */
