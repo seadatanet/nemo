@@ -1250,6 +1250,7 @@ public class Utils {
 				.getText());
 		configuration
 				.setNemoWebServiceURL(OptionsAction.textAreaNemo.getText());
+		configuration.setVocabURL(OptionsAction.textVocabURL.getText());
 
 		// CDI
 		configuration.setIdEdmoRespCdi(OptionsAction.textIdEdmoRespCdi.getText());

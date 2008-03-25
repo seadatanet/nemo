@@ -209,6 +209,10 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			Element2Field setter = new Element2Field(this, "setCdiMethod");
 			return setter;
 		}
+		if (a_LocalName.equals("vocabURL")) {
+			Element2Field setter = new Element2Field(this, "setVocabURL");
+			return setter;
+		}
 		return null;
 	}
 
@@ -247,6 +251,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		a_Writer.putTag("idEdmoDistDonnees", getIdEdmoDistDonnees());
 		a_Writer.putTag("cdiURL", getCdiURL());
 		a_Writer.putTag("cdiMethod", getCdiMethod());
+		a_Writer.putTag("vocabURL", getVocabURL());
 	}
 
 	/**

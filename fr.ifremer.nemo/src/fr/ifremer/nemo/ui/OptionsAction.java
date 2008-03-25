@@ -48,7 +48,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 	public static Text textAreaNemo, textAreaNautilus, textDossierModele, textDossierCampagne, 
 			textIdEdmoRespCdi, textUrlCdi, textMethodeCdi,
 			textCodeEdmoDonnees, textIdEdmoRespDonnees, textIdEdmoDistDonnees,
-			textWSVocab,
+			textVocabURL,
 			textL011, textL021, textL031, textL041, textL051,
 			textL061, textL071, textL081, textL091 = null;
 
@@ -135,6 +135,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		textAreaNautilus
 				.setText(Utils.configuration.getNautilusWebServiceURL());
 		
+		textVocabURL.setText(Utils.configuration.getVocabURL());
 		
 		// CDI
 		textIdEdmoRespCdi.setText(Utils.configuration.getIdEdmoRespCdi());
@@ -399,8 +400,8 @@ public class OptionsAction extends Action implements ISelectionListener,
 		
 		labelWSVocab = new Label(compoWSVocab1, SWT.NONE);
 		labelWSVocab.setText("WS Vocab");
-		textWSVocab = new Text(compoWSVocab1, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(textWSVocab);
+		textVocabURL = new Text(compoWSVocab1, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textVocabURL);
 		
 		compoWSVocab2 = new Composite(groupWS, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(4).applyTo(compoWSVocab2);
