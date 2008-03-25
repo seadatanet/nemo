@@ -1251,6 +1251,16 @@ public class Utils {
 		configuration
 				.setNemoWebServiceURL(OptionsAction.textAreaNemo.getText());
 		configuration.setVocabURL(OptionsAction.textVocabURL.getText());
+		configuration.setVocabListURL("L011", OptionsAction.textL011.getText());
+		configuration.setVocabListURL("L021", OptionsAction.textL021.getText());
+		configuration.setVocabListURL("L031", OptionsAction.textL031.getText());
+		configuration.setVocabListURL("L041", OptionsAction.textL041.getText());
+		configuration.setVocabListURL("L051", OptionsAction.textL051.getText());
+		configuration.setVocabListURL("L061", OptionsAction.textL061.getText());
+		configuration.setVocabListURL("L071", OptionsAction.textL071.getText());
+		configuration.setVocabListURL("L081", OptionsAction.textL081.getText());
+		configuration.setVocabListURL("L091", OptionsAction.textL091.getText());
+		
 
 		// CDI
 		configuration.setIdEdmoRespCdi(OptionsAction.textIdEdmoRespCdi.getText());

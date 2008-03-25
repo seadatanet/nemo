@@ -215,12 +215,12 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			return setter;
 		}
 		if (a_LocalName.equals("VocabListURL")) {
-	    String name = null;
-	    String value = null;
-	    if ((name = a_Attributes.getValue("name")) != null &&
-	    		(value = a_Attributes.getValue("value")) != null) {
-	      _vocabLists.put(name, value);
-	    }
+			String name = null;
+			String value = null;
+			if ((name = a_Attributes.getValue("name")) != null &&
+					(value = a_Attributes.getValue("value")) != null) {
+				_vocabLists.put(name, value);
+			}
 			return this;
 		}
 		return null;

@@ -136,6 +136,16 @@ public class OptionsAction extends Action implements ISelectionListener,
 				.setText(Utils.configuration.getNautilusWebServiceURL());
 		
 		textVocabURL.setText(Utils.configuration.getVocabURL());
+		textL011.setText(Utils.configuration.getVocabListURL("L011"));
+		textL021.setText(Utils.configuration.getVocabListURL("L021"));
+		textL031.setText(Utils.configuration.getVocabListURL("L031"));
+		textL041.setText(Utils.configuration.getVocabListURL("L041"));
+		textL051.setText(Utils.configuration.getVocabListURL("L051"));
+		textL061.setText(Utils.configuration.getVocabListURL("L061"));
+		textL071.setText(Utils.configuration.getVocabListURL("L071"));
+		textL081.setText(Utils.configuration.getVocabListURL("L081"));
+		textL091.setText(Utils.configuration.getVocabListURL("L091"));
+		
 		
 		// CDI
 		textIdEdmoRespCdi.setText(Utils.configuration.getIdEdmoRespCdi());
