@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
@@ -54,6 +55,10 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	protected String _cdiURL;
 	
 	protected String _cdiMethod;
+	
+	protected String _vocabURL;
+	
+	protected HashMap<String, String> _vocabLists = new HashMap<String, String>();
 
 	/**
 	 * Répertoire de base des fichier de sortie
@@ -82,6 +87,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		_cdiMethod = "";
 		_showRule = true;
 		_locale = null;
+		_vocabURL = "";
 	}
 
 	/**
@@ -729,4 +735,41 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		}
 	}
 
+	/**
+	 * Read accessor (getter) for attribute _vocabURL
+	 * 
+	 * @return String
+	 * @see Configuration#_vocabURL
+	 */
+	public String getVocabURL() {
+		return _vocabURL;
+	}
+
+	/**
+	 * Write accessor (setter) for attribute _vocabURL
+	 * 
+	 * @param x  new value for _vocabURL
+	 * @see Configuration#_vocabURL
+	 */
+	public void setVocabURL(String x) {
+		_vocabURL = x;
+	}
+
+	public HashMap getVocabLists() {
+		return _vocabLists;
+	}
+
+	public void setVocabLists(HashMap<String, String> lists) {
+		_vocabLists = lists;
+	}
+
+	public String getVocabListURL(String listName) {
+		return _vocabLists.get(listName);
+	}
+
+	public void setVocabListURL(String listName, String a_URL) {
+		_vocabLists.put(listName, a_URL);
+	}
+
+	
 } /* End of class: Configuration */
