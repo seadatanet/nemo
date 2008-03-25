@@ -1993,22 +1993,26 @@ public class NemoLists implements Cloneable {
 					new java.net.URL(Configuration.getSingleton().getVocabURL()),
 					new Service());
 			vocab.getList(new String[]{Configuration.getSingleton().getVocabListURL(listName)}, null, table, error );
-			if (table.value != null) {
-				_vocabList.put(listName, table.value);
-				
-				
-				File dir = new java.io.File("resources/Vocab");
-				if (!dir.exists()) {
-					dir.mkdirs();
+			if (!error.value) {
+				if (table.value != null) {
+					_vocabList.put(listName, table.value);
+					
+					
+					File dir = new java.io.File("resources/Vocab");
+					if (!dir.exists()) {
+						dir.mkdirs();
+					}
+					File file = new java.io.File(dir, listName+".xml");
+					stream = new FileOutputStream(file.toString());
+		
+					encoder = new XMLEncoder(stream);
+					encoder.writeObject(table.value);
+					_vocabListStatus.put(listName, table.value.length);
+				} else {
+					_vocabListStatus.put(listName, 0);
 				}
-				File file = new java.io.File(dir, listName+".xml");
-				stream = new FileOutputStream(file.toString());
-	
-				encoder = new XMLEncoder(stream);
-				encoder.writeObject(table.value);
-				_vocabListStatus.put(listName, table.value.length);
 			} else {
-				_vocabListStatus.put(listName, 0);
+				_vocabListStatus.put(listName, -1);
 			}
 		} catch (Exception e) {
 			_vocabListStatus.put(listName, -1);
