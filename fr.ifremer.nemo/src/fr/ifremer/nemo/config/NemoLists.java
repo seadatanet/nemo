@@ -1993,19 +1993,23 @@ public class NemoLists implements Cloneable {
 					new java.net.URL(Configuration.getSingleton().getVocabURL()),
 					new Service());
 			vocab.getList(new String[]{Configuration.getSingleton().getVocabListURL(listName)}, null, table, error );
-			_vocabList.put(listName, table.value);
-			
-			
-			File dir = new java.io.File("resources/Vocab");
-			if (!dir.exists()) {
-				dir.mkdirs();
+			if (table.value != null) {
+				_vocabList.put(listName, table.value);
+				
+				
+				File dir = new java.io.File("resources/Vocab");
+				if (!dir.exists()) {
+					dir.mkdirs();
+				}
+				File file = new java.io.File(dir, listName+".xml");
+				stream = new FileOutputStream(file.toString());
+	
+				encoder = new XMLEncoder(stream);
+				encoder.writeObject(table.value);
+				_vocabListStatus.put(listName, table.value.length);
+			} else {
+				_vocabListStatus.put(listName, 0);
 			}
-			File file = new java.io.File(dir, listName+".xml");
-			stream = new FileOutputStream(file.toString());
-
-			encoder = new XMLEncoder(stream);
-			encoder.writeObject(table);
-			_vocabListStatus.put(listName, table.value.length);
 		} catch (Exception e) {
 			_vocabListStatus.put(listName, -1);
 			e.printStackTrace();
@@ -2049,9 +2053,13 @@ public class NemoLists implements Cloneable {
 		while (keys.hasNext()) {
 			String listName = keys.next();
 			try {
-				decoder = new XMLDecoder(new FileInputStream(
-						String.format("resources/Vocab/%s.xml", listName)));
-				_vocabList.put( listName, (CodeTableRecordType[]) decoder.readObject());
+				String fileName = String.format("resources/Vocab/%s.xml", listName);
+				File file = new File(fileName);
+				if (file.exists()) {
+					decoder = new XMLDecoder(new FileInputStream(
+							file));
+					_vocabList.put( listName, (CodeTableRecordType[]) decoder.readObject());
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {

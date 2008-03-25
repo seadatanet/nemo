@@ -78,6 +78,7 @@ public class SWTProcessWS implements IRunnableWithProgress {
 			monitor.subTask(Messages.getString("SWTProcessWS.8"));
 			NemoLists.updateSurveys();
 
+			NemoLists.updateVocabLists();
 		} else {
 
 			if (dossier) {
