@@ -135,6 +135,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		textAreaNautilus
 				.setText(Utils.configuration.getNautilusWebServiceURL());
 		
+		
 		// CDI
 		textIdEdmoRespCdi.setText(Utils.configuration.getIdEdmoRespCdi());
 		textCodeEdmoDonnees.setText(Utils.configuration.getCodeEdmoDonnees());
