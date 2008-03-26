@@ -517,7 +517,11 @@ public class EditSurvey {
 			message = message + Messages.getString("EditSurvey.69") + "  "
 					+ Messages.getString("EditSurvey.71");
 		}
-
+		
+		message = message + Messages.getString("EditSurvey.73") + "  OK - "
+		+ NemoLists.nbVocabLists + " "
+		+ Messages.getString("EditSurvey.70");
+		
 		MessageDialog.openInformation(shell, "WebServices Info", message);
 
 	}

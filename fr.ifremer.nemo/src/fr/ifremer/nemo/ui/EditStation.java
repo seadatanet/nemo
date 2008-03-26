@@ -305,7 +305,7 @@ public class EditStation {
 			
 			DrawingStation
 					.sectionManuelLigneDebutFinInjectLatLongFin(
-							Messages.getString("EditStation.21"), "", sectionLatFin, textLatFinLigne, textLatFinDebut, textLatFinFin, textLatFin, buttonLatFinSaisie, buttonLatFinPos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
+							Messages.getString("EditStation.21"), "", sectionLatFin, textLatFinLigne, textLatFinDebut, textLatFinFin, textLatFin, buttonLatFinSaisie, buttonLatFinPos, blnManuel, true); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// section longitude
@@ -329,7 +329,7 @@ public class EditStation {
 			
 			DrawingStation
 					.sectionManuelLigneDebutFinInjectLatLongFin(
-							Messages.getString("EditStation.25"), "", sectionLongFin, textLongFinLigne, textLongFinDebut, textLongFinFin, textLongFin, buttonLongFinSaisie, buttonLongFinPos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
+							Messages.getString("EditStation.25"), "", sectionLongFin, textLongFinLigne, textLongFinDebut, textLongFinFin, textLongFin, buttonLongFinSaisie, buttonLongFinPos, blnManuel, false); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// section profondeur

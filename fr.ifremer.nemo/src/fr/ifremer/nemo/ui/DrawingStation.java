@@ -2212,14 +2212,15 @@ public class DrawingStation {
 
 	public static void sectionManuelLigneDebutFinInjectLatLongFin(
 			String nomSection, String description, Section section, Text ligne,
-			Text debut, Text fin, Text manuel, Button radio, Button position, boolean blnManuel) {
+			Text debut, Text fin, Text manuel, Button radio, Button position, boolean blnManuel, boolean blnLatitude) {
 		final String nomSec;
 		final Text manu;
 		final Text lign, debu, fi, test;
-		final Button inject;
+		final Button inject, rad;
+		final boolean latitude;
 
 		nomSec = nomSection;
-		// manu = manuel;
+		manu = manuel;
 
 		section.setParent(EditDesc.formEdition);
 
@@ -2246,7 +2247,7 @@ public class DrawingStation {
 		manuel.setParent(sectionClient);
 		manuel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		manu = manuel;
+		// manu = manuel;
 
 		position.setParent(sectionClient);
 		position.setText(Messages.getString("Drawing.7"));
@@ -2304,6 +2305,8 @@ public class DrawingStation {
 		debu = debut;
 		fi = fin;
 		test = txtTest;
+		rad = radio;
+		latitude = blnLatitude;
 
 		// listeners
 
@@ -2366,11 +2369,58 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						if (EditStation.buttonHeureSaisie.getSelection()) {
-							Utils.test(test, EditStation.textHeureSaisie);
+						if (rad.getSelection()) {
+							Utils.test(test, manu);
 						} else {
 							Utils.test(test, ViewFile.styledTextStation, lign, debu, fi);
 						}
+						
+						if (latitude) {
+							try {
+								fr.ifremer.nemo.util.LatitudeFormat format = new fr.ifremer.nemo.util.LatitudeFormat(
+										EditStation.comboLatitude.getText());
+
+								Double latitudeDouble = (Double) format
+										.parseObject(test.getText());
+
+								Formatter formatter;
+
+								formatter = Formatter.getSingleton();
+
+								test.setText(formatter.formatLatitude(
+										"NDD MM.mm", latitudeDouble));
+							} catch (ParseException e) {
+
+								Utils.messageErreurAppend(Messages
+										.getString("Etape.53")); //$NON-NLS-1$
+								test.setText(Messages
+										.getString("Etape.120"));
+								test.pack();
+							}
+
+						} else {
+							try {
+								fr.ifremer.nemo.util.LongitudeFormat format = new fr.ifremer.nemo.util.LongitudeFormat(
+										EditStation.comboLongitude.getText());
+
+								Double longitudeDouble = (Double) format
+										.parseObject(test.getText());
+
+								Formatter formatter;
+
+								formatter = Formatter.getSingleton();
+
+								test.setText(formatter.formatLongitude(
+										"NDDD MM.mm", longitudeDouble));
+							} catch (ParseException e) {
+
+								Utils.messageErreurAppend(Messages
+										.getString("Etape.58")); //$NON-NLS-1$
+								test.setText(Messages
+										.getString("Etape.120"));
+								test.pack();
+							}
+						}	
 						
 						test.pack();
 					}
