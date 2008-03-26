@@ -79,7 +79,7 @@ public class EditStation {
 			buttonDateSaisie, buttonTUPos;
 
 	public static Combo comboRefStationType, comboHeure, comboDate,
-			comboLatitude, comboLongitude;
+			comboLatitude, comboLongitude, comboLatitudeFin, comboLongitudeFin;
 
 	public static Section sectionQCDate, sectionQCLat, sectionQCLong,
 			sectionQCProf;
@@ -305,7 +305,7 @@ public class EditStation {
 			
 			DrawingStation
 					.sectionManuelLigneDebutFinInjectLatLongFin(
-							Messages.getString("EditStation.21"), "", sectionLatFin, textLatFinLigne, textLatFinDebut, textLatFinFin, textLatFin, buttonLatFinSaisie, buttonLatFinPos, blnManuel, true); //$NON-NLS-1$ //$NON-NLS-2$
+							Messages.getString("EditStation.21"), "", sectionLatFin, comboLatitudeFin, textLatFinLigne, textLatFinDebut, textLatFinFin, textLatFin, buttonLatFinSaisie, buttonLatFinPos, blnManuel, true); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// section longitude
@@ -329,7 +329,7 @@ public class EditStation {
 			
 			DrawingStation
 					.sectionManuelLigneDebutFinInjectLatLongFin(
-							Messages.getString("EditStation.25"), "", sectionLongFin, textLongFinLigne, textLongFinDebut, textLongFinFin, textLongFin, buttonLongFinSaisie, buttonLongFinPos, blnManuel, false); //$NON-NLS-1$ //$NON-NLS-2$
+							Messages.getString("EditStation.25"), "", sectionLongFin, comboLongitudeFin, textLongFinLigne, textLongFinDebut, textLongFinFin, textLongFin, buttonLongFinSaisie, buttonLongFinPos, blnManuel, false); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// section profondeur
@@ -1026,6 +1026,22 @@ public class EditStation {
 		comboLongitude.add("NDDD MM.mm"); //$NON-NLS-1$
 		comboLongitude.add("NDDD.ddd"); //$NON-NLS-1$
 		comboLongitude.add("NDDDMMSS"); //$NON-NLS-1$
+		
+		comboLatitudeFin = new Combo(shell, SWT.NONE);
+		comboLatitudeFin.add("+DD MM.mm"); //$NON-NLS-1$
+		comboLatitudeFin.add("+DD.ddd"); //$NON-NLS-1$
+		comboLatitudeFin.add("+DDMMSS"); //$NON-NLS-1$
+		comboLatitudeFin.add("NDD MM.mm"); //$NON-NLS-1$
+		comboLatitudeFin.add("NDD.ddd"); //$NON-NLS-1$
+		comboLatitudeFin.add("NDDMMSS"); //$NON-NLS-1$
+
+		comboLongitudeFin = new Combo(shell, SWT.NONE);
+		comboLongitudeFin.add("+DDD MM.mm"); //$NON-NLS-1$
+		comboLongitudeFin.add("+DDD.ddd"); //$NON-NLS-1$
+		comboLongitudeFin.add("+DDDMMSS"); //$NON-NLS-1$
+		comboLongitudeFin.add("NDDD MM.mm"); //$NON-NLS-1$
+		comboLongitudeFin.add("NDDD.ddd"); //$NON-NLS-1$
+		comboLongitudeFin.add("NDDDMMSS"); //$NON-NLS-1$
 
 	}
 

@@ -2211,7 +2211,7 @@ public class DrawingStation {
 	}
 
 	public static void sectionManuelLigneDebutFinInjectLatLongFin(
-			String nomSection, String description, Section section, Text ligne,
+			String nomSection, String description, Section section, Combo combo, Text ligne,
 			Text debut, Text fin, Text manuel, Button radio, Button position, boolean blnManuel, boolean blnLatitude) {
 		final String nomSec;
 		final Text manu;
@@ -2241,6 +2241,12 @@ public class DrawingStation {
 				.createComposite(section);
 		sectionClient.setLayout(new GridLayout());
 
+		Group groupFormat = new Group(sectionClient, SWT.NONE);
+		groupFormat.setText("Format");
+		groupFormat.setLayout(new GridLayout());
+		// combo format
+		combo.setParent(groupFormat);
+		
 		radio.setParent(sectionClient);
 		radio.setText(Messages.getString("Drawing.4"));
 

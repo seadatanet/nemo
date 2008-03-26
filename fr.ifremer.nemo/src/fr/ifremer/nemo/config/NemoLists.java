@@ -50,10 +50,10 @@ public class NemoLists implements Cloneable {
 	static protected java.util.List<WSSurveyDescription> _surveys = new java.util.ArrayList<WSSurveyDescription>();
 
 	public static Boolean okCountries, okShips, okSurveys, okDataCentres,
-			okParameters, okRegions, okDataTypes;
+			okParameters, okRegions, okDataTypes, okVocabLists;
 	
 	public static int nbCountries, nbShips, nbSurveys, nbDataCentres,
-			nbParameters, nbRegions, nbDataTypes;
+			nbParameters, nbRegions, nbDataTypes, nbVocabLists;
 	
 	static protected HashMap<String, CodeTableRecordType[]> _vocabList = new HashMap<String, CodeTableRecordType[]>();
 	
@@ -1984,6 +1984,7 @@ public class NemoLists implements Cloneable {
 	 */
 	public static void updateVocabList(String listName) {
 		//okSurveys = false;
+		okVocabLists = true;
 		FileOutputStream stream = null;
 		XMLEncoder encoder = null;
 		CodeTableRecordTypeArrayHolder table = new CodeTableRecordTypeArrayHolder();
@@ -2012,12 +2013,17 @@ public class NemoLists implements Cloneable {
 					_vocabListStatus.put(listName, 0);
 				}
 			} else {
+				okVocabLists = false;
 				_vocabListStatus.put(listName, -1);
 			}
 		} catch (Exception e) {
 			_vocabListStatus.put(listName, -1);
+			okVocabLists = false;
 			e.printStackTrace();
 		} finally {
+			if (okVocabLists) {
+				nbVocabLists++;
+			}
 			if (encoder != null) {
 				try {
 					encoder.close();
@@ -2042,6 +2048,7 @@ public class NemoLists implements Cloneable {
 	 */
 	public static void updateVocabLists() {
 		Iterator<String> keys = Configuration.getSingleton().getVocabLists().keySet().iterator();
+		nbVocabLists = 0;
 		while (keys.hasNext()) {
 			String listName = keys.next();
 			updateVocabList(listName);
