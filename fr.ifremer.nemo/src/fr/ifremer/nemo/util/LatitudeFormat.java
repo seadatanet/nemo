@@ -22,6 +22,8 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 	protected ParseElement[] _elements;
 
 	protected String _formatString;
+	
+	protected boolean _variableLength = false;
 
 	public LatitudeFormat() {
 		super();
@@ -79,6 +81,9 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 	 */
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
 		a_Writer.putAttribute("formatString", getFormatString());
+		if (_variableLength) {
+			a_Writer.putAttribute("variable", _variableLength);
+		}
 	}
 
 	/**
@@ -132,6 +137,9 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 			String tmp;
 			if ((tmp = a_Attributes.getValue("formatString")) != null) {
 				setFormatString(tmp);
+			}
+			if ((tmp = a_Attributes.getValue("variable")) != null) {
+				setVariableLength(tmp);
 			}
 		} catch (Exception e) {
 			throw new SAXException(e);
@@ -305,6 +313,7 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 		buf.append(a_String);
 		return buf.toString();
 	}
+
 	/**
 	 * 
 	 * @param source
@@ -312,6 +321,129 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 	 * @return Object
 	 */
 	public Object parseObject(String source, ParsePosition pos) {
+		if (_variableLength) {
+			return parseObjectVariableLength(source, pos);
+		} else {
+			return parseObjectFixedLength(source, pos);
+		}
+	}
+
+	/**
+	 * 
+	 * @param source
+	 * @param pos
+	 * @return Object
+	 */
+	public Object parseObjectVariableLength(String source, ParsePosition pos) {
+		double value = 0.0;
+		double sign = 1.0;
+		int index = pos.getIndex();
+		java.util.Locale locale = java.util.Locale.US;
+		java.text.DecimalFormatSymbols symbols = new java.text.DecimalFormatSymbols(
+				locale);
+		try {
+			for (int i = 0; i < _elements.length && index < source.length(); i++) {
+				switch (_elements[i]._type) {
+				case HEMISPHERE: {
+					String tmp = source.substring(index, index + 1);
+					if (tmp.equals("E")) {
+						sign = 1.0;
+					} else if (tmp.equals("W") || tmp.equals("O")) {
+						sign = -1.0;
+					} else {
+						throw new ParseException(
+								"Charactere invalide, 'E', 'O' ou 'W' attendu",
+								index);
+					}
+					index += 1;
+					break;
+				}
+				case SIGN: {
+					String tmp = source.substring(index, index + 1);
+					if (tmp.equals("+") || tmp.equals(" ") || tmp.equals("")) {
+						sign = 1.0;
+					} else if (tmp.equals("-")) {
+						sign = -1.0;
+					} else {
+						throw new ParseException(
+								"Charactere invalide, signe (+/-) attendu",
+								index);
+					}
+					index += 1;
+					break;
+				}
+				case CHARS: {
+					String tmp = source.substring(index, index
+							+ _elements[i]._element.length());
+
+					if (_elements[i]._element.length() == 1
+							&& _elements[i]._element.equals(" ")) {
+						// cas particulier si on rencontre un espace, n'importe
+						// quel caractère est possible
+					} else {
+						if (!tmp.equals(_elements[i]._element)) {
+							throw new ParseException(
+									"Charactere invalide, chaine attendue: \""
+											+ _elements[i]._element + "\""
+											+ " lue: \"" + tmp + "\"", index);
+						}
+					}
+					index += _elements[i]._element.length();
+					break;
+				}
+				case DEGREES: {
+					DecimalFormat format = new DecimalFormat(
+							_elements[i]._element);
+					value += ((Number) format.parseObject( source, pos)).doubleValue();
+					index = pos.getIndex();
+					break;
+				}
+				case DEGREES_DECIMAL: {
+						DecimalFormat format = new DecimalFormat(
+								_elements[i]._element, symbols);
+						value += ((Number) format.parseObject(source, pos)).doubleValue();
+						index = pos.getIndex();
+					break;
+				}
+				case MINUTES: {
+						DecimalFormat format = new DecimalFormat(
+								_elements[i]._element);
+						value += ((Number) format.parseObject(source, pos)).doubleValue() / 60.0;
+						index = pos.getIndex();
+					break;
+				}
+				case MINUTES_DECIMAL: {
+					DecimalFormat format = new DecimalFormat(
+							_elements[i]._element, symbols);
+					value += ((Number) format.parseObject(source, pos)).doubleValue() / 60.0;
+					index = pos.getIndex();
+					break;
+				}
+				case SECONDS: {
+						DecimalFormat format = new DecimalFormat(
+								_elements[i]._element);
+						value += ((Number) format.parseObject(source, pos)).doubleValue() / 3600.0;
+						index = pos.getIndex();
+					break;
+				}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		value *= sign;
+		pos.setIndex(index);
+		return new Double(value);
+	}
+
+	/**
+	 * 
+	 * @param source
+	 * @param pos
+	 * @return Object
+	 */
+	public Object parseObjectFixedLength(String source, ParsePosition pos) {
 		double value = 0.0;
 		double sign = 1.0;
 		int index = pos.getIndex();
@@ -514,6 +646,18 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 	 */
 	public String toString() {
 		return _formatString;
+	}
+
+	public boolean isVariableLength() {
+		return _variableLength;
+	}
+
+	public void setVariableLength(boolean length) {
+		_variableLength = length;
+	}
+
+	public void setVariableLength(String a_String) {
+		setVariableLength(new Boolean(a_String).booleanValue());
 	}
 
 } /* End of class: LatitudeFormat */
