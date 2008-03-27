@@ -1985,12 +1985,15 @@ public class DataModel {
 			ligne = frag.getFirstLine();
 			debut = frag.getFirstCharOffset();
 			fin = frag.getLastCharOffset();
+			var = frag.isVariable();
+			
 			real_ligne = ligne
 					+ Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 
 			EditStation.textLatitudeLigne.setText("" + ligne);
 			EditStation.textLatitudeDebut.setText("" + debut);
 			EditStation.textLatitudeFin.setText("" + fin);
+			EditStation.buttonVarLat.setSelection(var);
 
 		}
 
@@ -2029,13 +2032,15 @@ public class DataModel {
 			ligne = frag.getFirstLine();
 			debut = frag.getFirstCharOffset();
 			fin = frag.getLastCharOffset();
+			var = frag.isVariable();
+			
 			real_ligne = ligne
 					+ Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 
 			EditStation.textLongitudeLigne.setText("" + ligne);
 			EditStation.textLongitudeDebut.setText("" + debut);
 			EditStation.textLongitudeFin.setText("" + fin);
-
+			EditStation.buttonVarLong.setSelection(var);
 		}
 
 		// profondeur
