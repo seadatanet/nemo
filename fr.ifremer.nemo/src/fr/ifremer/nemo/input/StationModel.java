@@ -1194,6 +1194,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			Calendar cal = Calendar.getInstance(tz);
 			cal.clear();
 			cal.setTimeInMillis(date);
+/*
 			Calendar cal2 = Calendar.getInstance(tz);
 			cal2.clear();
 			cal2.setTimeZone(tz);
@@ -1201,12 +1202,17 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			cal2.set(Calendar.MINUTE, cal.get(Calendar.MINUTE));
 			cal2.set(Calendar.SECOND, cal.get(Calendar.SECOND));
 			timeSeries.setEndTime(cal2.getTimeInMillis());
+*/
+			timeSeries.setEndTime(cal.getTimeInMillis());
+/*
 			cal2.clear();
 			cal2.setTimeZone(tz);
 			cal2.set(Calendar.YEAR, cal.get(Calendar.YEAR));
 			cal2.set(Calendar.MONTH, cal.get(Calendar.MONTH));
 			cal2.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH));
 			timeSeries.setEndDate(cal2.getTimeInMillis());
+*/
+			timeSeries.setEndDate(cal.getTimeInMillis());
 		}
 	}
 

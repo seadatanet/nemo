@@ -1425,12 +1425,17 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		cal.clear();
 		cal.setTimeInMillis(_date);
 		if (!Float.isNaN(_time)) {
+/*
 			Calendar cal2 = Calendar.getInstance(tz);
 			cal2.clear();
 			cal2.setTimeInMillis(new Float(_time).longValue());
 			cal.set(Calendar.HOUR_OF_DAY, cal2.get(Calendar.HOUR_OF_DAY));
 			cal.set(Calendar.MINUTE, cal2.get(Calendar.MINUTE));
 			cal.set(Calendar.SECOND, cal2.get(Calendar.SECOND));
+*/
+			cal.setTimeInMillis(_date + (new Float(_time).longValue()));
+		} else {
+			cal.setTimeInMillis(_date);
 		}
 		return getGMTDate(cal.getTimeInMillis());
 	}
