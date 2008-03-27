@@ -1954,12 +1954,12 @@ public class DrawingStation {
 
 	public static void sectionManuelLigneDebutFinInjectLatLongComboFormat(
 			String nomSection, String description, Section section, Text ligne,
-			Text debut, Text fin, Text manuel, Button radio, Combo combo,
+			Text debut, Text fin, Button buttonVar, Text manuel, Button radio, Combo combo,
 			Button position, boolean blnManuel, boolean blnLatitude) {
 		final String nomSec;
 		final Text manu;
 		final Text lign, debu, fi, test;
-		final Button inject;
+		final Button inject, var;
 		final boolean latitude;
 
 		nomSec = nomSection;
@@ -2005,41 +2005,57 @@ public class DrawingStation {
 		position.setParent(sectionClient);
 		position.setText(Messages.getString("Drawing.7"));
 
-		GridLayout gridLayout1 = new GridLayout();
-		gridLayout1.numColumns = 6;
+		// GridLayout gridLayout1 = new GridLayout();
+		// gridLayout1.numColumns = 6;
 		Group groupe = new Group(sectionClient, SWT.NONE);
 		groupe.setText(Messages.getString("Drawing.9"));
-		groupe.setLayout(gridLayout1);
+		// groupe.setLayout(gridLayout1);
 		grou = groupe;
-
+		
+		GridLayoutFactory.fillDefaults().applyTo(groupe);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(groupe);
+				
+		Composite compo1 = new Composite(groupe,SWT.NONE);		
+		GridLayoutFactory.fillDefaults().numColumns(6).applyTo(compo1);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(compo1);
+		
 		// ligne
-		Label label1 = new Label(groupe, SWT.NULL);
+		Label label1 = new Label(compo1, SWT.NULL);
 		label1.setText(Messages.getString("Drawing.10"));
-		ligne.setParent(groupe);
+		ligne.setParent(compo1);
 		// ligne = new Text(groupe, SWT.BORDER);
 		ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// debut
-		Label label2 = new Label(groupe, SWT.NULL);
+		Label label2 = new Label(compo1, SWT.NULL);
 		label2.setText(Messages.getString("Drawing.11"));
-		debut.setParent(groupe);
+		debut.setParent(compo1);
 		// = new Text(groupe, SWT.BORDER);
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
-		Label label3 = new Label(groupe, SWT.NULL);
+		Label label3 = new Label(compo1, SWT.NULL);
 		label3.setText(Messages.getString("Drawing.12"));
-		fin.setParent(groupe);
+		fin.setParent(compo1);
 		// = new Text(groupe, SWT.BORDER);
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// groupe non visible de base
 		// groupe.setVisible(false);
 
+		Composite compo2 = new Composite(groupe,SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo2);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(compo2);
+		
 		// bouton d'injection de la position des valeurs
-		Button buttonInject = new Button(groupe, SWT.NONE);
+		Button buttonInject = new Button(compo2, SWT.NONE);
 		buttonInject.setText(Messages.getString("Drawing.1"));
 		inject = buttonInject;
+
+		// bouton de fin de ligne variable
+		buttonVar = new Button(compo2, SWT.CHECK);
+		buttonVar.setText(Messages.getString("Drawing.20"));
+		GridDataFactory.fillDefaults().grab(true, false).align(SWT.END, SWT.CENTER).applyTo(buttonVar);
 
 		section.setClient(sectionClient);
 		
@@ -2062,6 +2078,7 @@ public class DrawingStation {
 		fi = fin;
 		test = txtTest;
 		latitude = blnLatitude;
+		var = buttonVar;
 
 		// listeners
 
@@ -2115,6 +2132,16 @@ public class DrawingStation {
 						Utils
 								.inject(lign, debu, fi,
 										ViewFile.styledTextStation);
+
+					}
+				});
+		
+//		 bouton Var
+		buttonVar
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(
+							org.eclipse.swt.events.SelectionEvent g) {
+						fi.setEnabled(!var.getSelection());
 
 					}
 				});
@@ -2197,6 +2224,7 @@ public class DrawingStation {
 		debu.setEnabled(!blnManuel);
 		fi.setEnabled(!blnManuel);
 		inject.setEnabled(!blnManuel);
+		var.setEnabled(!blnManuel);
 
 		/*// saisie manuelle par défaut
 		radio.setSelection(true);
@@ -2212,11 +2240,11 @@ public class DrawingStation {
 
 	public static void sectionManuelLigneDebutFinInjectLatLongFin(
 			String nomSection, String description, Section section, Combo combo, Text ligne,
-			Text debut, Text fin, Text manuel, Button radio, Button position, boolean blnManuel, boolean blnLatitude) {
+			Text debut, Text fin, Button buttonVar, Text manuel, Button radio, Button position, boolean blnManuel, boolean blnLatitude) {
 		final String nomSec;
 		final Text manu;
 		final Text lign, debu, fi, test;
-		final Button inject, rad;
+		final Button inject, rad, var;
 		final boolean latitude;
 
 		nomSec = nomSection;
@@ -2258,38 +2286,54 @@ public class DrawingStation {
 		position.setParent(sectionClient);
 		position.setText(Messages.getString("Drawing.7"));
 
-		GridLayout gridLayout1 = new GridLayout();
-		gridLayout1.numColumns = 6;
+		// GridLayout gridLayout1 = new GridLayout();
+		// gridLayout1.numColumns = 6;
 		Group groupe = new Group(sectionClient, SWT.NONE);
 		groupe.setText(Messages.getString("Drawing.9"));
-		groupe.setLayout(gridLayout1);
+		// groupe.setLayout(gridLayout1);
 		grou = groupe;
 
+		GridLayoutFactory.fillDefaults().applyTo(groupe);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(groupe);
+		
+		Composite compo1 = new Composite(groupe,SWT.NONE);		
+		GridLayoutFactory.fillDefaults().numColumns(6).applyTo(compo1);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(compo1);
+		
 		// ligne
-		Label label1 = new Label(groupe, SWT.NULL);
+		Label label1 = new Label(compo1, SWT.NULL);
 		label1.setText(Messages.getString("Drawing.10"));
-		ligne.setParent(groupe);
+		ligne.setParent(compo1);
 
 		ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// debut
-		Label label2 = new Label(groupe, SWT.NULL);
+		Label label2 = new Label(compo1, SWT.NULL);
 		label2.setText(Messages.getString("Drawing.11"));
-		debut.setParent(groupe);
+		debut.setParent(compo1);
 
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// fin
-		Label label3 = new Label(groupe, SWT.NULL);
+		Label label3 = new Label(compo1, SWT.NULL);
 		label3.setText(Messages.getString("Drawing.12"));
-		fin.setParent(groupe);
+		fin.setParent(compo1);
 
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
+		Composite compo2 = new Composite(groupe,SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo2);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(compo2);
+		
 		// bouton d'injection de la position des valeurs
-		Button buttonInject = new Button(groupe, SWT.NONE);
+		Button buttonInject = new Button(compo2, SWT.NONE);
 		buttonInject.setText(Messages.getString("Drawing.1"));
 		inject = buttonInject;
+		
+//		 bouton de fin de ligne variable
+		buttonVar = new Button(compo2, SWT.CHECK);
+		buttonVar.setText(Messages.getString("Drawing.20"));
+		GridDataFactory.fillDefaults().grab(true, false).align(SWT.END, SWT.CENTER).applyTo(buttonVar);
 
 		section.setClient(sectionClient);
 		
@@ -2313,6 +2357,7 @@ public class DrawingStation {
 		test = txtTest;
 		rad = radio;
 		latitude = blnLatitude;
+		var = buttonVar;
 
 		// listeners
 
@@ -2366,6 +2411,16 @@ public class DrawingStation {
 						Utils
 								.inject(lign, debu, fi,
 										ViewFile.styledTextStation);
+
+					}
+				});
+		
+//		 bouton Var
+		buttonVar
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(
+							org.eclipse.swt.events.SelectionEvent g) {
+						fi.setEnabled(!var.getSelection());
 
 					}
 				});
@@ -2447,6 +2502,7 @@ public class DrawingStation {
 		debu.setEnabled(!blnManuel);
 		fi.setEnabled(!blnManuel);
 		inject.setEnabled(!blnManuel);
+		var.setEnabled(!blnManuel);
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
