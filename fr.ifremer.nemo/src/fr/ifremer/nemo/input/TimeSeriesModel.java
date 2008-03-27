@@ -480,15 +480,13 @@ public class TimeSeriesModel implements Cloneable, PathElementHandler,
 	public void initProperties() {
 		try {
 			addProperty(new PropertyModel("endDate",
-					getTimeSeriesInformation(),
-					new DateTimeFormat("dd/MM/yyyy")));
+					getTimeSeriesInformation(),	new DateTimeFormat("dd/MM/yyyy")));
 			addProperty(new PropertyModel("endTime",
 					getTimeSeriesInformation(), new DateTimeFormat("hh24:mm")));
 			addProperty(new PropertyModel("endLatitude",
 					getTimeSeriesInformation(), new LatitudeFormat("NDD MM SS")));
 			addProperty(new PropertyModel("endLongitude",
-					getTimeSeriesInformation(), new LongitudeFormat(
-							"NDDD MM SS")));
+					getTimeSeriesInformation(), new LongitudeFormat("NDDD MM SS")));
 			addProperty(new PropertyModel("endDepth",
 					getTimeSeriesInformation(), new FloatFormat("%4.0f")));
 			addProperty(new PropertyModel("sensorDepth",

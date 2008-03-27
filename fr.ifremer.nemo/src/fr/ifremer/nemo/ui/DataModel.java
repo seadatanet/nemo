@@ -977,7 +977,7 @@ public class DataModel {
 			LatitudeFormat latitudeFormatFin = (LatitudeFormat) propertyModel
 					.getFormat();
 			try {
-				latitudeFormatFin.setFormatString(EditStation.comboLatitude
+				latitudeFormatFin.setFormatString(EditStation.comboLatitudeFin
 						.getText());
 			} catch (ParseException e) {
 				// 
@@ -1051,7 +1051,7 @@ public class DataModel {
 			LongitudeFormat longitudeFormatFin = (LongitudeFormat) propertyModel
 					.getFormat();
 			try {
-				longitudeFormatFin.setFormatString(EditStation.comboLongitude
+				longitudeFormatFin.setFormatString(EditStation.comboLongitudeFin
 						.getText());
 			} catch (ParseException e) {
 				// 
@@ -2104,7 +2104,6 @@ public class DataModel {
 
 		// LATITUDE DE FIN
 		if (ViewFile.checkBoxTempo.getSelection()) {
-
 			propertyModel = stationModel_modele.getTimeSeriesModel()
 					.propertiesAt("endLatitude");
 			if (propertyModel.isUserProvided()) {
@@ -2112,6 +2111,9 @@ public class DataModel {
 
 				// reconversion double vers format normal
 				latitudeFormat = (LatitudeFormat) propertyModel.getFormat();
+				formatLat = latitudeFormat.getFormatString();
+				Utils.selectComboValeur(EditStation.comboLatitudeFin, formatLat);
+				
 				Formatter formatter = new Formatter();
 
 				try {
@@ -2151,6 +2153,9 @@ public class DataModel {
 
 				// reconversion double vers format normal
 				longitudeFormat = (LongitudeFormat) propertyModel.getFormat();
+				formatLong = longitudeFormat.getFormatString();
+				Utils.selectComboValeur(EditStation.comboLongitudeFin, formatLong);
+				
 				Formatter formatter = new Formatter();
 
 				try {

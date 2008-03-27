@@ -877,7 +877,7 @@ public class Etape {
 					if (!EditStation.textLatFin.getText().matches("")) {//$NON-NLS-1$
 						try {
 							LatitudeFormat latitudeFormat = new LatitudeFormat(
-									EditStation.comboLatitude.getText());
+									EditStation.comboLatitudeFin.getText());
 							latitudeFormat.parseObject(EditStation.textLatFin
 									.getText());
 						} catch (ParseException e) {
@@ -919,7 +919,7 @@ public class Etape {
 					if (!EditStation.textLongFin.getText().matches("")) {
 						try {
 							LongitudeFormat longitudeFormat = new LongitudeFormat(
-									EditStation.comboLongitude.getText());
+									EditStation.comboLongitudeFin.getText());
 							longitudeFormat.parseObject(EditStation.textLongFin
 									.getText());
 						} catch (ParseException e) {
