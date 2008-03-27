@@ -59,6 +59,8 @@ public class NemoLists implements Cloneable {
 	
 	static protected HashMap<String, Integer> _vocabListStatus = new HashMap<String, Integer>();
 
+	static protected CodeTableRecordType[] _vocabMap = null;
+	
 	static {
 		initLists();
 	}
@@ -1514,6 +1516,7 @@ public class NemoLists implements Cloneable {
 		initParameters();
 		initSurveys();
 		initVocabLists();
+		initVocabMap();
 	}
 
 	/**
@@ -2082,6 +2085,101 @@ public class NemoLists implements Cloneable {
 				}
 			}
 		}
+	}
+
+	/**
+	 * 
+	 */
+	public static void initVocabMap() {
+		XMLDecoder decoder = null;
+		try {
+			String fileName = "resources/Vocab/VocabMap.xml";
+			File file = new File(fileName);
+			if (file.exists()) {
+				decoder = new XMLDecoder(new FileInputStream(
+						file));
+				_vocabMap = (CodeTableRecordType[]) decoder.readObject();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (decoder != null) {
+				try {
+					decoder.close();
+				} catch (Exception ex) {
+				}
+			}
+		}
+	}
+
+	/**
+	 * 
+	 */
+	public static void updateVocabMap() {
+		//okSurveys = false;
+		FileOutputStream stream = null;
+		XMLEncoder encoder = null;
+		CodeTableRecordTypeArrayHolder table = new CodeTableRecordTypeArrayHolder();
+		javax.xml.rpc.holders.BooleanHolder error = new BooleanHolder();
+		try {
+			VocabSoapBindingStub vocab = new VocabSoapBindingStub(
+					new java.net.URL(Configuration.getSingleton().getVocabURL()),
+					new Service());
+			vocab.getMap(
+					//new String[]{Configuration.getSingleton().getVocabListURL("P031")},
+					new String[]{"http://vocab.ndg.nerc.ac.uk/list/P031/current"},
+					2,
+					//new String[]{Configuration.getSingleton().getVocabListURL("P021")},
+					new String[]{"http://vocab.ndg.nerc.ac.uk/list/P021/current"},
+					"false",
+					table,
+					error);
+			if (!error.value) {
+				if (table.value != null) {
+					_vocabMap = table.value;
+					
+					
+					File dir = new java.io.File("resources/Vocab");
+					if (!dir.exists()) {
+						dir.mkdirs();
+					}
+					File file = new java.io.File(dir, "VocabMap.xml");
+					stream = new FileOutputStream(file.toString());
+		
+					encoder = new XMLEncoder(stream);
+					encoder.writeObject(table.value);
+//					_vocabListStatus.put(listName, table.value.length);
+				} else {
+//					_vocabListStatus.put(listName, 0);
+				}
+			} else {
+//				_vocabListStatus.put(listName, -1);
+			}
+		} catch (Exception e) {
+//			_vocabListStatus.put(listName, -1);
+			e.printStackTrace();
+		} finally {
+			if (encoder != null) {
+				try {
+					encoder.close();
+				} catch (Exception ex) {
+				}
+			}
+			if (stream != null) {
+				try {
+					stream.close();
+				} catch (Exception ex) {
+				}
+			}
+		}
+	}
+
+	public static CodeTableRecordType[] getVocabMap() {
+		return _vocabMap;
+	}
+
+	public static void setVocabMap(CodeTableRecordType[] map) {
+		_vocabMap = map;
 	}
 
 

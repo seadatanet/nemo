@@ -143,7 +143,7 @@ public class Formatter implements Cloneable {
 		if (Float.isNaN(a_Float)) {
 			return formatInt(format, 0).replace('0', ' ');
 		} else {
-			return formatInt(format, (int) a_Float);
+			return formatInt(format, Math.round(a_Float));
 		}
 	}
 
