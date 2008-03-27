@@ -520,7 +520,7 @@ public class DataModel {
 			fin = EditStation.textCommentaireFin.getText();
 
 			frag.setFirstLine(ligne);
-			// frag.setLastLine(ligne);
+			frag.setLastLine(ligne);
 			frag.setFirstCharOffset(debut);
 			frag.setLastCharOffset(fin);
 			
@@ -528,8 +528,7 @@ public class DataModel {
 			
 			// Utils.calculNbreLignesPuisRemplissageFragClic(frag,
 			// EditStation.posxCommentaire, EditStation.posyCommentaire);
-			Utils.calculNbreLignesPuisRemplissageFragClic(frag,
-					EditStation.cursCommentaire);
+			//Utils.calculNbreLignesPuisRemplissageFragClic(frag, EditStation.cursCommentaire);
 
 		}
 
