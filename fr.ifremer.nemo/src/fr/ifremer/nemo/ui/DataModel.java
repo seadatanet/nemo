@@ -2110,14 +2110,14 @@ public class DataModel {
 		if (ViewFile.checkBoxTempo.getSelection()) {
 			propertyModel = stationModel_modele.getTimeSeriesModel()
 					.propertiesAt("endLatitude");
+			
+			// reconversion double vers format normal
+			latitudeFormat = (LatitudeFormat) propertyModel.getFormat();
+			formatLat = latitudeFormat.getFormatString();
+			Utils.selectComboValeur(EditStation.comboLatitudeFin, formatLat);
+			
 			if (propertyModel.isUserProvided()) {
-				// saisie manuelle
-
-				// reconversion double vers format normal
-				latitudeFormat = (LatitudeFormat) propertyModel.getFormat();
-				formatLat = latitudeFormat.getFormatString();
-				Utils.selectComboValeur(EditStation.comboLatitudeFin, formatLat);
-				
+				// saisie manuelle				
 				Formatter formatter = new Formatter();
 
 				try {
@@ -2130,12 +2130,14 @@ public class DataModel {
 					e.printStackTrace();
 				}
 
-			} else {
+			} else {				
 				// position dans fichier
 				frag = propertyModel.getFragment();
 				ligne = frag.getFirstLine();
 				debut = frag.getFirstCharOffset();
 				fin = frag.getLastCharOffset();
+				var = frag.isVariable();
+				
 				real_ligne = ligne
 						+ Integer.valueOf(EditDesc.lignesEnteteFichier
 								.getText());
@@ -2143,6 +2145,7 @@ public class DataModel {
 				EditStation.textLatFinLigne.setText("" + ligne);
 				EditStation.textLatFinDebut.setText("" + debut);
 				EditStation.textLatFinFin.setText("" + fin);
+				EditStation.buttonVarLatFin.setSelection(var);
 			}
 
 		}
@@ -2152,14 +2155,14 @@ public class DataModel {
 
 			propertyModel = stationModel_modele.getTimeSeriesModel()
 					.propertiesAt("endLongitude");
+			
+			// reconversion double vers format normal
+			longitudeFormat = (LongitudeFormat) propertyModel.getFormat();
+			formatLong = longitudeFormat.getFormatString();
+			Utils.selectComboValeur(EditStation.comboLongitudeFin, formatLong);
+			
 			if (propertyModel.isUserProvided()) {
-				// saisie manuelle
-
-				// reconversion double vers format normal
-				longitudeFormat = (LongitudeFormat) propertyModel.getFormat();
-				formatLong = longitudeFormat.getFormatString();
-				Utils.selectComboValeur(EditStation.comboLongitudeFin, formatLong);
-				
+				// saisie manuelle			
 				Formatter formatter = new Formatter();
 
 				try {
@@ -2178,6 +2181,8 @@ public class DataModel {
 				ligne = frag.getFirstLine();
 				debut = frag.getFirstCharOffset();
 				fin = frag.getLastCharOffset();
+				var = frag.isVariable();
+				
 				real_ligne = ligne
 						+ Integer.valueOf(EditDesc.lignesEnteteFichier
 								.getText());
@@ -2185,6 +2190,7 @@ public class DataModel {
 				EditStation.textLongFinLigne.setText("" + ligne);
 				EditStation.textLongFinDebut.setText("" + debut);
 				EditStation.textLongFinFin.setText("" + fin);
+				EditStation.buttonVarLongFin.setSelection(var);
 			}
 
 		}
