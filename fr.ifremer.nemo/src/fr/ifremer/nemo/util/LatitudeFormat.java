@@ -42,6 +42,17 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 
 	/**
 	 * 
+	 * @param a_Format
+	 * @exception ParseException
+	 */
+	public LatitudeFormat(String a_Format, boolean a_VariableLength) throws ParseException {
+		this();
+		setFormatString(a_Format);
+		setVariableLength(a_VariableLength);
+	}
+
+	/**
+	 * 
 	 * A new XML Element as been found. Parse it.
 	 * 
 	 * @param a_URI
@@ -152,7 +163,7 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 	 */
 	public Object clone() {
 		try {
-			return new LatitudeFormat(new String(_formatString));
+			return new LatitudeFormat(new String(_formatString), _variableLength);
 		} catch (Exception e) {
 			return null;
 		}
@@ -427,13 +438,13 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 					break;
 				}
 				}
+				pos.setIndex(index);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
 		value *= sign;
-		pos.setIndex(index);
 		return new Double(value);
 	}
 

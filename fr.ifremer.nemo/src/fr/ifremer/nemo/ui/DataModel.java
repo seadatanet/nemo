@@ -809,6 +809,7 @@ public class DataModel {
 			frag.setFirstCharOffset(debut);
 			frag.setLastCharOffset(fin);
 			frag.setVariable(EditStation.buttonVarLat.getSelection());
+			latitudeFormat.setVariableLength(EditStation.buttonVarLat.getSelection());
 		}
 
 		// longitude
@@ -858,6 +859,7 @@ public class DataModel {
 			frag.setFirstCharOffset(debut);
 			frag.setLastCharOffset(fin);
 			frag.setVariable(EditStation.buttonVarLong.getSelection());
+			longitudeFormat.setVariableLength(EditStation.buttonVarLong.getSelection());
 
 		}
 
@@ -1042,6 +1044,7 @@ public class DataModel {
 				frag.setFirstCharOffset(debut);
 				frag.setLastCharOffset(fin);
 				frag.setVariable(EditStation.buttonVarLatFin.getSelection());
+				latitudeFormatFin.setVariableLength(EditStation.buttonVarLatFin.getSelection());
 			}
 
 			// LONGITUDE DE FIN
@@ -1121,6 +1124,7 @@ public class DataModel {
 				frag.setFirstCharOffset(debut);
 				frag.setLastCharOffset(fin);
 				frag.setVariable(EditStation.buttonVarLongFin.getSelection());
+				longitudeFormatFin.setVariableLength(EditStation.buttonVarLongFin.getSelection());
 			}
 
 			// DATE / HEURE DE FIN

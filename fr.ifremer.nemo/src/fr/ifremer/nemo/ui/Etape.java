@@ -848,9 +848,13 @@ public class Etape {
 
 			ligne = Utils.lignesBrutes.get(Integer
 					.parseInt(EditStation.textLongitudeLigne.getText()) - 1);
+			int endLine = Integer.parseInt(EditStation.textLongitudeFin.getText());
+			if (ligne.length() < endLine) {
+				endLine = ligne.length();
+			}
 			string = ligne.substring(Integer
 					.parseInt(EditStation.textLongitudeDebut.getText()) - 1,
-					Integer.parseInt(EditStation.textLongitudeFin.getText()));
+					endLine);
 
 			try {
 				LongitudeFormat longitudeFormat = new LongitudeFormat(
