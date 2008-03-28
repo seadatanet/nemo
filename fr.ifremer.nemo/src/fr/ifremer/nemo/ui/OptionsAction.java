@@ -422,23 +422,26 @@ public class OptionsAction extends Action implements ISelectionListener,
 		GridLayoutFactory.fillDefaults().applyTo(compoWSVocab2);
 		GridDataFactory.fillDefaults().grab(true,true).applyTo(compoWSVocab2);
 		
-		tableWSVocab = new Table(compoWSVocab2, SWT.BORDER | SWT.FULL_SELECTION);
+		tableWSVocab = new Table(compoWSVocab2, SWT.FULL_SELECTION | SWT.H_SCROLL | SWT.BORDER);
 		tableWSVocab.setHeaderVisible(true);
 		tableWSVocab.setLinesVisible(true);
-		tableWSVocab.setFocus();
-		tableWSVocab.setEnabled(true);
 		GridDataFactory.fillDefaults().grab(true,true).applyTo(tableWSVocab);
 		
-		TableColumn colListName = new TableColumn(tableWSVocab, SWT.LEFT);
+		TableColumn colListName = new TableColumn(tableWSVocab, SWT.NONE);
 		colListName.setText("Code");
 		colListName.setWidth(100);
 		
 		
-		TableColumn colListURL = new TableColumn(tableWSVocab, SWT.LEFT);
+		TableColumn colListURL = new TableColumn(tableWSVocab, SWT.NONE);
 		colListURL.setText("URL");
 		colListURL.setWidth(300);
 		
-		TableEditor edit = new TableEditor(tableWSVocab);
+		TableEditor editTable = new TableEditor(tableWSVocab);
+		
+		editTable.horizontalAlignment = SWT.LEFT;
+		editTable.grabHorizontal = true;
+		
+		
 		
 		
 //		labelL011 = new Label(compoWSVocab2, SWT.NONE);
