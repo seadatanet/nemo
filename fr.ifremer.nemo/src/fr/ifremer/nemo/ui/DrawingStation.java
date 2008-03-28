@@ -1954,8 +1954,8 @@ public class DrawingStation {
 
 	public static void sectionManuelLigneDebutFinInjectLatLongComboFormat(
 			String nomSection, String description, Section section, Text ligne,
-			Text debut, Text fin, Button buttonVar, Text manuel, Button radio, Combo combo,
-			Button position, boolean blnManuel, boolean blnLatitude) {
+			Text debut, Text fin, Text manuel, Button radio, Combo combo,
+			Button position, Button buttonVar, boolean blnManuel, boolean blnLatitude) {
 		final String nomSec;
 		final Text manu;
 		final Text lign, debu, fi, test;
@@ -2053,8 +2053,8 @@ public class DrawingStation {
 		inject = buttonInject;
 
 		// bouton de fin de ligne variable
-		buttonVar = new Button(compo2, SWT.CHECK);
 		buttonVar.setText(Messages.getString("Drawing.20"));
+		buttonVar.setParent(compo2);
 		GridDataFactory.fillDefaults().grab(true, false).align(SWT.END, SWT.CENTER).applyTo(buttonVar);
 
 		section.setClient(sectionClient);
@@ -2095,6 +2095,7 @@ public class DrawingStation {
 						debu.setEnabled(false);
 						fi.setEnabled(false);
 						inject.setEnabled(false);
+						var.setEnabled(false);
 					}
 				});
 
@@ -2120,6 +2121,7 @@ public class DrawingStation {
 						debu.setEnabled(true);
 						fi.setEnabled(true);
 						inject.setEnabled(true);
+						var.setEnabled(true);
 					}
 				});
 
@@ -2142,7 +2144,6 @@ public class DrawingStation {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
 						fi.setEnabled(!var.getSelection());
-
 					}
 				});
 		
@@ -2151,7 +2152,6 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						
 							if (latitude) {
 								if (EditStation.buttonLatSaisie.getSelection()) {
 									Utils.test(test, EditStation.textLatitude);
@@ -2225,6 +2225,22 @@ public class DrawingStation {
 		fi.setEnabled(!blnManuel);
 		inject.setEnabled(!blnManuel);
 		var.setEnabled(!blnManuel);
+		
+		if (DataModel.ouverture) {
+			PropertyModel propertyModel;
+			if (latitude) {
+				propertyModel = DataModel.stationModel_modele.propertiesAt("latitude");
+			} else {
+				propertyModel = DataModel.stationModel_modele.propertiesAt("longitude");
+			}
+			
+			if (!propertyModel.isUserProvided()) {
+				HeaderFragment frag = propertyModel.getFragment();
+				
+				fi.setEnabled(!frag.isVariable());
+				
+			}
+		}
 
 		/*// saisie manuelle par défaut
 		radio.setSelection(true);
@@ -2240,7 +2256,7 @@ public class DrawingStation {
 
 	public static void sectionManuelLigneDebutFinInjectLatLongFin(
 			String nomSection, String description, Section section, Combo combo, Text ligne,
-			Text debut, Text fin, Button buttonVar, Text manuel, Button radio, Button position, boolean blnManuel, boolean blnLatitude) {
+			Text debut, Text fin, Text manuel, Button radio, Button position, Button buttonVar, boolean blnManuel, boolean blnLatitude) {
 		final String nomSec;
 		final Text manu;
 		final Text lign, debu, fi, test;
@@ -2331,8 +2347,8 @@ public class DrawingStation {
 		inject = buttonInject;
 		
 //		 bouton de fin de ligne variable
-		buttonVar = new Button(compo2, SWT.CHECK);
 		buttonVar.setText(Messages.getString("Drawing.20"));
+		buttonVar.setParent(compo2);
 		GridDataFactory.fillDefaults().grab(true, false).align(SWT.END, SWT.CENTER).applyTo(buttonVar);
 
 		section.setClient(sectionClient);
@@ -2503,6 +2519,22 @@ public class DrawingStation {
 		fi.setEnabled(!blnManuel);
 		inject.setEnabled(!blnManuel);
 		var.setEnabled(!blnManuel);
+		
+		if (DataModel.ouverture) {
+			PropertyModel propertyModel;
+			if (latitude) {
+				propertyModel = propertyModel = DataModel.stationModel_modele.getTimeSeriesModel().propertiesAt("endLatitude");
+			} else {
+				propertyModel = propertyModel = DataModel.stationModel_modele.getTimeSeriesModel().propertiesAt("endLongitude");
+			}
+			
+			if (!propertyModel.isUserProvided()) {
+				HeaderFragment frag = propertyModel.getFragment();
+				
+				fi.setEnabled(!frag.isVariable());
+				
+			}
+		}
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);

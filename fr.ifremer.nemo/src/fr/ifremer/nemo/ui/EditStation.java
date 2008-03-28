@@ -294,7 +294,7 @@ public class EditStation {
 		
 		DrawingStation
 				.sectionManuelLigneDebutFinInjectLatLongComboFormat(
-						Messages.getString("EditStation.19"), Messages.getString("EditStation.20"), sectionLatitude, textLatitudeLigne, textLatitudeDebut, textLatitudeFin, buttonVarLat, textLatitude, buttonLatSaisie, comboLatitude, buttonLatPos, blnManuel, true); //$NON-NLS-1$ //$NON-NLS-2$
+						Messages.getString("EditStation.19"), Messages.getString("EditStation.20"), sectionLatitude, textLatitudeLigne, textLatitudeDebut, textLatitudeFin, textLatitude, buttonLatSaisie, comboLatitude, buttonLatPos, buttonVarLat, blnManuel, true); //$NON-NLS-1$ //$NON-NLS-2$
 
 		if (ViewFile.checkBoxTempo.getSelection()) {
 			// section latitude de fin
@@ -306,7 +306,7 @@ public class EditStation {
 			
 			DrawingStation
 					.sectionManuelLigneDebutFinInjectLatLongFin(
-							Messages.getString("EditStation.21"), "", sectionLatFin, comboLatitudeFin, textLatFinLigne, textLatFinDebut, textLatFinFin, buttonVarLatFin, textLatFin, buttonLatFinSaisie, buttonLatFinPos, blnManuel, true); //$NON-NLS-1$ //$NON-NLS-2$
+							Messages.getString("EditStation.21"), "", sectionLatFin, comboLatitudeFin, textLatFinLigne, textLatFinDebut, textLatFinFin, textLatFin, buttonLatFinSaisie, buttonLatFinPos, buttonVarLatFin, blnManuel, true); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// section longitude
@@ -318,7 +318,7 @@ public class EditStation {
 		
 		DrawingStation
 				.sectionManuelLigneDebutFinInjectLatLongComboFormat(
-						Messages.getString("EditStation.23"), Messages.getString("EditStation.24"), sectionLongitude, textLongitudeLigne, textLongitudeDebut, textLongitudeFin, buttonVarLong, textLongitude, buttonLongSaisie, comboLongitude, buttonLongPos, blnManuel, false); //$NON-NLS-1$ //$NON-NLS-2$
+						Messages.getString("EditStation.23"), Messages.getString("EditStation.24"), sectionLongitude, textLongitudeLigne, textLongitudeDebut, textLongitudeFin, textLongitude, buttonLongSaisie, comboLongitude, buttonLongPos, buttonVarLong, blnManuel, false); //$NON-NLS-1$ //$NON-NLS-2$
 
 		if (ViewFile.checkBoxTempo.getSelection()) {
 			// section longitude de fin
@@ -330,7 +330,7 @@ public class EditStation {
 			
 			DrawingStation
 					.sectionManuelLigneDebutFinInjectLatLongFin(
-							Messages.getString("EditStation.25"), "", sectionLongFin, comboLongitudeFin, textLongFinLigne, textLongFinDebut, textLongFinFin, buttonVarLongFin,textLongFin, buttonLongFinSaisie, buttonLongFinPos, blnManuel, false); //$NON-NLS-1$ //$NON-NLS-2$
+							Messages.getString("EditStation.25"), "", sectionLongFin, comboLongitudeFin, textLongFinLigne, textLongFinDebut, textLongFinFin, textLongFin, buttonLongFinSaisie, buttonLongFinPos, buttonVarLongFin, blnManuel, false); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		// section profondeur
