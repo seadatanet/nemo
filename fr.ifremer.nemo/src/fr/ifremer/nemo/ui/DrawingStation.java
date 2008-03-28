@@ -2170,7 +2170,8 @@ public class DrawingStation {
 							try {
 								fr.ifremer.nemo.util.LatitudeFormat format = new fr.ifremer.nemo.util.LatitudeFormat(
 										EditStation.comboLatitude.getText());
-
+								format.setVariableLength(var.getSelection());
+								
 								Double latitudeDouble = (Double) format
 										.parseObject(test.getText());
 
@@ -2193,6 +2194,7 @@ public class DrawingStation {
 							try {
 								fr.ifremer.nemo.util.LongitudeFormat format = new fr.ifremer.nemo.util.LongitudeFormat(
 										EditStation.comboLongitude.getText());
+								format.setVariableLength(var.getSelection());
 
 								Double longitudeDouble = (Double) format
 										.parseObject(test.getText());
@@ -2456,6 +2458,7 @@ public class DrawingStation {
 							try {
 								fr.ifremer.nemo.util.LatitudeFormat format = new fr.ifremer.nemo.util.LatitudeFormat(
 										EditStation.comboLatitudeFin.getText());
+								format.setVariableLength(var.getSelection());
 
 								Double latitudeDouble = (Double) format
 										.parseObject(test.getText());
@@ -2479,6 +2482,7 @@ public class DrawingStation {
 							try {
 								fr.ifremer.nemo.util.LongitudeFormat format = new fr.ifremer.nemo.util.LongitudeFormat(
 										EditStation.comboLongitudeFin.getText());
+								format.setVariableLength(var.getSelection());
 
 								Double longitudeDouble = (Double) format
 										.parseObject(test.getText());

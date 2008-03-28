@@ -756,6 +756,7 @@ public class Etape {
 			try {
 				LatitudeFormat latitudeFormat = new LatitudeFormat(
 						EditStation.comboLatitude.getText());
+				latitudeFormat.setVariableLength(EditStation.buttonVarLat.getSelection());
 				latitudeFormat.parseObject(EditStation.textLatitude.getText());
 
 			} catch (ParseException e) {
@@ -796,6 +797,7 @@ public class Etape {
 			try {
 				LatitudeFormat latitudeFormat = new LatitudeFormat(
 						EditStation.comboLatitude.getText());
+				latitudeFormat.setVariableLength(EditStation.buttonVarLat.getSelection());
 				latitudeFormat.parseObject(string);
 
 			} catch (ParseException e) {
@@ -815,6 +817,7 @@ public class Etape {
 			try {
 				LongitudeFormat longitudeFormat = new LongitudeFormat(
 						EditStation.comboLongitude.getText());
+				longitudeFormat.setVariableLength(EditStation.buttonVarLong.getSelection());
 				longitudeFormat
 						.parseObject(EditStation.textLongitude.getText());
 			} catch (ParseException e) {
@@ -852,6 +855,7 @@ public class Etape {
 			try {
 				LongitudeFormat longitudeFormat = new LongitudeFormat(
 						EditStation.comboLongitude.getText());
+				longitudeFormat.setVariableLength(EditStation.buttonVarLong.getSelection());
 				longitudeFormat.parseObject(string);
 
 			} catch (ParseException e) {
@@ -878,6 +882,7 @@ public class Etape {
 						try {
 							LatitudeFormat latitudeFormat = new LatitudeFormat(
 									EditStation.comboLatitudeFin.getText());
+							latitudeFormat.setVariableLength(EditStation.buttonVarLatFin.getSelection());
 							latitudeFormat.parseObject(EditStation.textLatFin
 									.getText());
 						} catch (ParseException e) {
@@ -920,6 +925,7 @@ public class Etape {
 						try {
 							LongitudeFormat longitudeFormat = new LongitudeFormat(
 									EditStation.comboLongitudeFin.getText());
+							longitudeFormat.setVariableLength(EditStation.buttonVarLongFin.getSelection());
 							longitudeFormat.parseObject(EditStation.textLongFin
 									.getText());
 						} catch (ParseException e) {
