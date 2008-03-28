@@ -790,9 +790,13 @@ public class Etape {
 
 			ligne = Utils.lignesBrutes.get(Integer
 					.parseInt(EditStation.textLatitudeLigne.getText()) - 1);
+			int endLine = Integer.parseInt(EditStation.textLatitudeDebut.getText());
+			if (ligne.length() < endLine) {
+				endLine = ligne.length();
+			}
 			string = ligne.substring(Integer
 					.parseInt(EditStation.textLatitudeDebut.getText()) - 1,
-					Integer.parseInt(EditStation.textLatitudeFin.getText()));
+					endLine);
 
 			try {
 				LatitudeFormat latitudeFormat = new LatitudeFormat(
