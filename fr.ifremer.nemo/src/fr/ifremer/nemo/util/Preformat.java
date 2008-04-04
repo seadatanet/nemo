@@ -88,9 +88,7 @@ public class Preformat {
 			_ficEntree = "";
 			_repEntree = ViewFile.nomRepertoire;
 		}
-		
-		
-		
+				
 		_enTeteFichier = Integer.parseInt(EditDesc.lignesEnteteFichier.getText());
 		_enTeteStation = Integer.parseInt(EditDesc.lignesEnteteStation.getText());
 		_finStation = Integer.parseInt(EditDesc.lignesFinStation.getText());
@@ -256,14 +254,14 @@ public class Preformat {
 			}
 		}
 		
-		_preformatOK = true;
+		setPreformat(true);
 
-//		// affichage etape0 dans formulaire
-//		// d'édition de
-//		// paramètres
+		// affichage etape0 dans formulaire
+		// d'édition de
+		// paramètres
 //		Utils.razGlobal();
-//		EditDesc.affichageEdition();
-//
+		EditDesc.affichageEdition();
+
 //		// remplissage de l'IHM par le modèle chargé ?
 //		if (DataModel.ouverture) {
 //			DataModel.fillDesc();
@@ -488,6 +486,10 @@ public class Preformat {
 
 	public static boolean isPreformat() {
 		return _preformatOK;
+	}
+	
+	public static void setPreformat(boolean blnPreformat) {
+		_preformatOK = blnPreformat;
 	}
 	
 }

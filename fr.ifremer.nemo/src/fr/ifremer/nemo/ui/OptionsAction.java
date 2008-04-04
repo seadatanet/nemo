@@ -422,72 +422,69 @@ public class OptionsAction extends Action implements ISelectionListener,
 		GridLayoutFactory.fillDefaults().applyTo(compoWSVocab2);
 		GridDataFactory.fillDefaults().grab(true,true).applyTo(compoWSVocab2);
 		
-		tableWSVocab = new Table(compoWSVocab2, SWT.FULL_SELECTION | SWT.H_SCROLL | SWT.BORDER);
-		tableWSVocab.setHeaderVisible(true);
-		tableWSVocab.setLinesVisible(true);
-		GridDataFactory.fillDefaults().grab(true,true).applyTo(tableWSVocab);
-		
-		TableColumn colListName = new TableColumn(tableWSVocab, SWT.NONE);
-		colListName.setText("Code");
-		colListName.setWidth(100);
-		
-		
-		TableColumn colListURL = new TableColumn(tableWSVocab, SWT.NONE);
-		colListURL.setText("URL");
-		colListURL.setWidth(300);
-		
-		TableEditor editTable = new TableEditor(tableWSVocab);
-		
-		editTable.horizontalAlignment = SWT.LEFT;
-		editTable.grabHorizontal = true;
-		
-		
-		
-		
-//		labelL011 = new Label(compoWSVocab2, SWT.NONE);
-//		labelL011.setText("L011");
-//		textL011 = new Text(compoWSVocab2, SWT.BORDER);
-//		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL011);
+//		tableWSVocab = new Table(compoWSVocab2, SWT.FULL_SELECTION | SWT.H_SCROLL | SWT.BORDER);
+//		tableWSVocab.setHeaderVisible(true);
+//		tableWSVocab.setLinesVisible(true);
+//		GridDataFactory.fillDefaults().grab(true,true).applyTo(tableWSVocab);
 //		
-//		labelL021 = new Label(compoWSVocab2, SWT.NONE);
-//		labelL021.setText("L021");
-//		textL021 = new Text(compoWSVocab2, SWT.BORDER);
-//		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL021);
+//		TableColumn colListName = new TableColumn(tableWSVocab, SWT.NONE);
+//		colListName.setText("Code");
+//		colListName.setWidth(100);
 //		
-//		labelL031 = new Label(compoWSVocab2, SWT.NONE);
-//		labelL031.setText("L031");
-//		textL031 = new Text(compoWSVocab2, SWT.BORDER);
-//		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL031);
 //		
-//		labelL041 = new Label(compoWSVocab2, SWT.NONE);
-//		labelL041.setText("L041");
-//		textL041 = new Text(compoWSVocab2, SWT.BORDER);
-//		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL041);
+//		TableColumn colListURL = new TableColumn(tableWSVocab, SWT.NONE);
+//		colListURL.setText("URL");
+//		colListURL.setWidth(300);
 //		
-//		labelL051 = new Label(compoWSVocab2, SWT.NONE);
-//		labelL051.setText("L051");
-//		textL051 = new Text(compoWSVocab2, SWT.BORDER);
-//		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL051);
+//		TableEditor editTable = new TableEditor(tableWSVocab);
 //		
-//		labelL061 = new Label(compoWSVocab2, SWT.NONE);
-//		labelL061.setText("L061");
-//		textL061 = new Text(compoWSVocab2, SWT.BORDER);
-//		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL061);
-//		
-//		labelL071 = new Label(compoWSVocab2, SWT.NONE);
-//		labelL071.setText("L071");
-//		textL071 = new Text(compoWSVocab2, SWT.BORDER);
-//		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL071);
-//		
-//		labelL081 = new Label(compoWSVocab2, SWT.NONE);
-//		labelL081.setText("L081");
-//		textL081 = new Text(compoWSVocab2, SWT.BORDER);
-//		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL081);
-//		
-//		labelL091 = new Label(compoWSVocab2, SWT.NONE);
-//		labelL091.setText("L091");
-//		textL091 = new Text(compoWSVocab2, SWT.BORDER);
-//		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL091);
+//		editTable.horizontalAlignment = SWT.LEFT;
+//		editTable.grabHorizontal = true;
+		
+		labelL011 = new Label(compoWSVocab2, SWT.NONE);
+		labelL011.setText("L011");
+		textL011 = new Text(compoWSVocab2, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL011);
+		
+		labelL021 = new Label(compoWSVocab2, SWT.NONE);
+		labelL021.setText("L021");
+		textL021 = new Text(compoWSVocab2, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL021);
+		
+		labelL031 = new Label(compoWSVocab2, SWT.NONE);
+		labelL031.setText("L031");
+		textL031 = new Text(compoWSVocab2, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL031);
+		
+		labelL041 = new Label(compoWSVocab2, SWT.NONE);
+		labelL041.setText("L041");
+		textL041 = new Text(compoWSVocab2, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL041);
+		
+		labelL051 = new Label(compoWSVocab2, SWT.NONE);
+		labelL051.setText("L051");
+		textL051 = new Text(compoWSVocab2, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL051);
+		
+		labelL061 = new Label(compoWSVocab2, SWT.NONE);
+		labelL061.setText("L061");
+		textL061 = new Text(compoWSVocab2, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL061);
+		
+		labelL071 = new Label(compoWSVocab2, SWT.NONE);
+		labelL071.setText("L071");
+		textL071 = new Text(compoWSVocab2, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL071);
+		
+		labelL081 = new Label(compoWSVocab2, SWT.NONE);
+		labelL081.setText("L081");
+		textL081 = new Text(compoWSVocab2, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL081);
+		
+		labelL091 = new Label(compoWSVocab2, SWT.NONE);
+		labelL091.setText("L091");
+		textL091 = new Text(compoWSVocab2, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL091);
 		
 	}
 	

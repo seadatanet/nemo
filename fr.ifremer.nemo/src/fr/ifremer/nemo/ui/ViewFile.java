@@ -35,6 +35,7 @@ import org.eclipse.ui.part.ViewPart;
 import com.sun.org.apache.xalan.internal.xsltc.runtime.Hashtable;
 
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.util.Preformat;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 import fr.ifremer.nemo.wsVocab.vocab.holders.CodeTableRecordTypeArrayHolder;
 import fr.ifremer.nemo.wsVocab.vocab_pkg.VocabSoapBindingStub;
@@ -457,6 +458,7 @@ public class ViewFile extends ViewPart {
 							org.eclipse.swt.events.SelectionEvent e) {
 						// System.out.println("parcourir"); // //$NON-NLS-1$
 
+						Preformat.setPreformat(false);
 						// parcours des fichiers/dossiers
 						
 						// si fichier campagne

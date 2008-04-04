@@ -121,6 +121,7 @@ public class Utils {
 		Utils.razGlobal();
 
 		EditDesc.nomNemo();
+		
 		DataModel.ouverture = false;
 
 		// reset de l'étape de conversion
@@ -1401,8 +1402,6 @@ public class Utils {
 		ViewFile.tabItem3.setText(Messages.getString("Utils.24")); //$NON-NLS-1$
 		ViewFile.tabItem9.setText(Messages.getString("Utils.25")); //$NON-NLS-1$
 
-
-		
 		// effacement du bouton conversion
 		if (EditConversion.buttonConversion != null) {
 			EditConversion.razEdition();

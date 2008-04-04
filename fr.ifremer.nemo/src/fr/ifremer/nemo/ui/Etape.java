@@ -17,8 +17,22 @@ public class Etape {
 	 * fenêtre principale et des différentes étapes.
 	 * 
 	 */
+	
+	private static String _pfEnTeteStation, _pfEnTeteFichier, _pfFinFichier, _pfIndicateurFin;
+	
+	private static boolean _pfEOF, _pfLigneVide, _pfManuel;
 
 	public static void validationDesc() {
+
+		// Sauvegarde des valeurs saisies pour réécriture après mise à jour fichier
+		_pfEnTeteFichier = EditDesc.lignesEnteteFichier.getText();
+		_pfEnTeteStation = EditDesc.lignesEnteteStation.getText();
+		_pfFinFichier = EditDesc.lignesFinStation.getText();
+		_pfIndicateurFin = EditDesc.txtManuel.getText();
+		_pfEOF = EditDesc.radEOF.getSelection();
+		_pfLigneVide = EditDesc.radLigne.getSelection();
+		_pfManuel = EditDesc.radManuel.getSelection();
+		
 		// Fichier avec séparateur
 		if (ViewFile.checkSeparateur.getSelection() && !Preformat.isPreformat()) {
 			try {
@@ -53,10 +67,8 @@ public class Etape {
 		resultat = Regexp.checkTextValeur(EditDesc.lignesFinStation, Messages
 				.getString("Etape.3")); //$NON-NLS-1$
 		ok = ok && resultat;
-
 		
 		// section fin de données	
-
 		if (EditDesc.radManuel.getSelection()) {
 			if (EditDesc.txtManuel.getText().matches("")) {
 				ok = false;
@@ -108,6 +120,24 @@ public class Etape {
 
 		} // fin tempo
 
+		if (ViewFile.checkSeparateur.getSelection()) {
+			EditDesc.lignesEnteteFichier.setText(_pfEnTeteFichier);
+			EditDesc.lignesEnteteStation.setText(_pfEnTeteStation);
+			EditDesc.lignesFinStation.setText(_pfFinFichier);
+			EditDesc.txtManuel.setText(_pfIndicateurFin);
+			EditDesc.radEOF.setSelection(_pfEOF);
+			EditDesc.radLigne.setSelection(_pfLigneVide);
+			EditDesc.radManuel.setSelection(_pfManuel);
+			
+			if (_pfEOF) {
+				EditDesc.selectComboEnd(EditDesc.radEOF);
+			} else if (_pfLigneVide) {
+				EditDesc.selectComboEnd(EditDesc.radLigne);
+			} else {
+				EditDesc.selectComboEnd(EditDesc.radManuel);
+			}
+		}
+		
 		if (ok) {
 			EditDesc.okApresReset = true;
 			okDesc();
@@ -790,7 +820,7 @@ public class Etape {
 
 			ligne = Utils.lignesBrutes.get(Integer
 					.parseInt(EditStation.textLatitudeLigne.getText()) - 1);
-			int endLine = Integer.parseInt(EditStation.textLatitudeDebut.getText());
+			int endLine = Integer.parseInt(EditStation.textLatitudeFin.getText());
 			if (ligne.length() < endLine) {
 				endLine = ligne.length();
 			}
@@ -1201,7 +1231,9 @@ public class Etape {
 
 			} else {
 				// saisie manuelle
-				if (Pattern.matches("^[0-9]*[0-9][.]?[0-9][0-9]*$",
+				if (	//FAE 066
+						//Pattern.matches("^[0-9]*[0-9][.]?[0-9][0-9]*$",
+					Pattern.matches("^[0-9]*[0-9][.]?[0-9]*$",
 						EditStation.textFreqEchant.getText())) {
 					// ok
 					ok = ok && true;
@@ -1381,13 +1413,12 @@ public class Etape {
 		EditDesc.validee = 1;
 
 		try {
-//			 FAE 022
+			// FAE 022
 			if (ViewFile.isCollection()) {
 				EditSurvey.okApresReset = true;
 				EditSurvey.validee = 1;
 				
-				//TableDataSurvey.creationTable();
-				//DataModel.initSurvey();
+				DataModel.initSurvey();
 				ViewFile.etape = 2;
 			} else {
 				ViewFile.etape = 1;
