@@ -572,7 +572,7 @@ public class DrawingStation {
 									strFichier = subfiles[0].getName();
 								}
 								
-								test.setText(strFichier.substring(Integer.parseInt(debu.getText()), Integer.parseInt(fi.getText())));
+								test.setText(strFichier.substring(Integer.parseInt(debu.getText()) - 1, Integer.parseInt(fi.getText())));
 							} else {
 								Utils.test(test, ViewFile.styledTextStation, lign, debu, fi);
 							}

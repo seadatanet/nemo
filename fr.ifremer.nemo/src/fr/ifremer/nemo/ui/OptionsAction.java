@@ -86,7 +86,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		shelloptions = new Shell(Application.display, SWT.BORDER | SWT.TITLE
 				| SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);
 
-		shelloptions.setSize(600, 600);
+		shelloptions.setSize(600, 700);
 		shelloptions.setText(Messages.getString("OptionsAction.3")); //$NON-NLS-1$
 		shelloptions.setLayout(new GridLayout());
 		
@@ -419,7 +419,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		GridDataFactory.fillDefaults().grab(true,false).applyTo(textVocabURL);
 		
 		compoWSVocab2 = new Composite(groupWS, SWT.NONE);
-		GridLayoutFactory.fillDefaults().applyTo(compoWSVocab2);
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoWSVocab2);
 		GridDataFactory.fillDefaults().grab(true,true).applyTo(compoWSVocab2);
 		
 //		tableWSVocab = new Table(compoWSVocab2, SWT.FULL_SELECTION | SWT.H_SCROLL | SWT.BORDER);
