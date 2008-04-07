@@ -1041,7 +1041,7 @@ public class Etape {
 			} else {
 				if (!EditStation.textProfFin.getText().matches("")) { //$NON-NLS-1$
 
-					if (Pattern.matches("^[0-9]*[0-9][.]?[0-9][0-9]*$",
+					if (Pattern.matches("^[0-9]*[0-9][.]?[0-9]*$",
 							EditStation.textProfFin.getText())) {
 						ok = ok && true;
 
@@ -1080,7 +1080,7 @@ public class Etape {
 											.getText()) - 1, Integer
 									.parseInt(EditStation.textProfCapteurFin
 											.getText()));
-					if (Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", string
+					if (Pattern.matches("^[0-9]*[0-9][.]?[0-9]*$", string
 							.trim())) {
 						ok = ok && true;
 
@@ -1106,7 +1106,7 @@ public class Etape {
 				if (EditStation.textProfCapteur.getText().matches("")) { //$NON-NLS-1$
 					Utils.messageErreurAppend(Messages.getString("Etape.79")); //$NON-NLS-1$
 				} else {
-					if (Pattern.matches("^[0-9]*[0-9][.]?[0-9][0-9]*$",
+					if (Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$",
 							EditStation.textProfCapteur.getText())) {
 						ok = ok && true;
 
@@ -1165,7 +1165,7 @@ public class Etape {
 				if (!EditStation.textDeclinMagnet.getText().matches("")) {
 					// vérif de ce qui est entré par l'utilisateur
 					if (Pattern.matches(
-							"^[+-]{0,1}[0-9]*[0-9][.]?[0-9][0-9]*$",
+							"^[+-]{0,1}[0-9]*[0-9][.]?[0-9]*[0-9]*$",
 							EditStation.textDeclinMagnet.getText())) {
 						// ok
 						ok = ok && true;
@@ -1231,9 +1231,9 @@ public class Etape {
 
 			} else {
 				// saisie manuelle
-				if (	//FAE 066
+				if (	//FAE 066 / 064
 						//Pattern.matches("^[0-9]*[0-9][.]?[0-9][0-9]*$",
-					Pattern.matches("^[0-9]*[0-9][.]?[0-9]*$",
+					Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$",
 						EditStation.textFreqEchant.getText())) {
 					// ok
 					ok = ok && true;
