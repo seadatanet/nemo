@@ -319,8 +319,8 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			} else {
 				Cdi cdi = new Cdi();
 				cdi.setCompteur(ViewFile.txtCompteurCDI.getText());
-				cdi.setTypePlateForme(ViewFile.txtTypePlateForme.getText());
-				cdi.setAccesDonnees(ViewFile.txtAccesDonnees.getText());
+				cdi.setTypePlateForme(ViewFile.comboTypePlateForme.getText());
+				cdi.setAccesDonnees(ViewFile.comboAccesDonnees.getText());
 				setCdi(cdi);
 				getCdi().writeXMLOn(a_Writer);
 			}

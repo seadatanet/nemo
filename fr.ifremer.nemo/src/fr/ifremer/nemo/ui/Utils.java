@@ -1264,12 +1264,12 @@ public class Utils {
 		
 
 		// CDI
-		configuration.setIdEdmoRespCdi(OptionsAction.textIdEdmoRespCdi.getText());
-		configuration.setCodeEdmoDonnees(OptionsAction.textCodeEdmoDonnees.getText());
-		configuration.setIdEdmoRespDonnees(OptionsAction.textIdEdmoRespDonnees.getText());
-		configuration.setIdEdmoDistDonnees(OptionsAction.textIdEdmoDistDonnees.getText());
+		configuration.setIdEdmoRespCdi(OptionsAction.comboIdEdmoRespCdi.getText());
+		configuration.setCodeEdmoDonnees(OptionsAction.comboCodeEdmoDonnees.getText());
+		configuration.setIdEdmoRespDonnees(OptionsAction.comboIdEdmoRespDonnees.getText());
+		configuration.setIdEdmoDistDonnees(OptionsAction.comboIdEdmoDistDonnees.getText());
 		configuration.setCdiURL(OptionsAction.textUrlCdi.getText());
-		configuration.setCdiMethod(OptionsAction.textMethodeCdi.getText());
+		configuration.setCdiMethod(OptionsAction.comboMethodeCdi.getText());
 		
 		// Enregistrement de la configuration
 		configuration.save();

@@ -1,11 +1,12 @@
 package fr.ifremer.nemo.ui;
 
+import java.util.TreeSet;
+
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
@@ -15,7 +16,6 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
@@ -24,6 +24,7 @@ import org.eclipse.ui.actions.ActionFactory;
 
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
 public class OptionsAction extends Action implements ISelectionListener,
 		ActionFactory.IWorkbenchAction {
@@ -36,7 +37,8 @@ public class OptionsAction extends Action implements ISelectionListener,
 	public static Group groupLangue, groupCentreDonnees, groupWS, 
 			groupDossier, groupDossier1, groupDossier2, groupCDI = null;
 
-	public static Combo comboLangue, comboCentreDonnees = null;
+	public static Combo comboLangue, comboCentreDonnees, comboIdEdmoRespCdi,
+				comboMethodeCdi,comboCodeEdmoDonnees, comboIdEdmoRespDonnees, comboIdEdmoDistDonnees = null;
 
 	public static Button buttonCancel, buttonValider, buttonParcourirModele,
 			buttonParcourirCampagne = null;
@@ -49,8 +51,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 			labelL061, labelL071, labelL081, labelL091 = null;
 
 	public static Text textAreaNemo, textAreaNautilus, textDossierModele, textDossierCampagne, 
-			textIdEdmoRespCdi, textUrlCdi, textMethodeCdi,
-			textCodeEdmoDonnees, textIdEdmoRespDonnees, textIdEdmoDistDonnees,
+			textUrlCdi, 
 			textVocabURL,
 			textL011, textL021, textL031, textL041, textL051,
 			textL061, textL071, textL081, textL091 = null;
@@ -153,13 +154,36 @@ public class OptionsAction extends Action implements ISelectionListener,
 		
 		
 		// CDI
-		textIdEdmoRespCdi.setText(Utils.configuration.getIdEdmoRespCdi());
-		textCodeEdmoDonnees.setText(Utils.configuration.getCodeEdmoDonnees());
-		textIdEdmoRespDonnees.setText(Utils.configuration.getIdEdmoRespDonnees());
-		textIdEdmoDistDonnees.setText(Utils.configuration.getIdEdmoDistDonnees());
-		textUrlCdi.setText(Utils.configuration.getCdiURL());
-		textMethodeCdi.setText(Utils.configuration.getCdiMethod());
 
+		
+		
+		
+		comboIdEdmoRespCdi.setText(Utils.configuration.getIdEdmoRespCdi());
+		comboCodeEdmoDonnees.setText(Utils.configuration.getCodeEdmoDonnees());
+		comboIdEdmoRespDonnees.setText(Utils.configuration.getIdEdmoRespDonnees());
+		comboIdEdmoDistDonnees.setText(Utils.configuration.getIdEdmoDistDonnees());
+		textUrlCdi.setText(Utils.configuration.getCdiURL());
+		
+//		 FAE 58 CDL 09/04/08
+		
+		CodeTableRecordType[] records = NemoLists.getVocabList("L071");
+		
+		TreeSet<String> champsMethodesCdi = new TreeSet<String>();
+			
+		for (CodeTableRecordType record : records)
+		{	
+			String champCombo = "";
+			System.out.println(record.getEntryKey());
+			String contenuCleDecoup[] = record.getEntryKey().split("/");
+			champCombo += contenuCleDecoup[contenuCleDecoup.length - 1];
+			champCombo += " - " + record.getEntryTerm();
+			champsMethodesCdi.add(champCombo);
+		}
+		
+		for (String champ : champsMethodesCdi)
+			comboMethodeCdi.add(champ);
+		
+		comboMethodeCdi.setText(Utils.configuration.getCdiMethod());
 	}
 
 	public void selectionChanged(IWorkbenchPart part, ISelection incoming) {
@@ -503,29 +527,29 @@ public class OptionsAction extends Action implements ISelectionListener,
 		labelIdEdmoRespCdi.setText(Messages.getString("OptionsAction.21"));
 		labelIdEdmoRespCdi.pack();
 		
-		textIdEdmoRespCdi = new Text(groupCDI, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(textIdEdmoRespCdi);
+		comboIdEdmoRespCdi = new Combo(groupCDI, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(comboIdEdmoRespCdi);
 		
 		labelCodeEdmoDonnees = new Label(groupCDI, SWT.NONE);
 		labelCodeEdmoDonnees.setText(Messages.getString("OptionsAction.24"));
 		labelCodeEdmoDonnees.pack();
 		
-		textCodeEdmoDonnees = new Text(groupCDI, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(textCodeEdmoDonnees);
+		comboCodeEdmoDonnees = new Combo(groupCDI, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(comboCodeEdmoDonnees);
 		
 		labelIdEdmoRespDonnees = new Label(groupCDI, SWT.NONE);
 		labelIdEdmoRespDonnees.setText(Messages.getString("OptionsAction.25"));
 		labelIdEdmoRespDonnees.pack();
 		
-		textIdEdmoRespDonnees = new Text(groupCDI, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(textIdEdmoRespDonnees);
+		comboIdEdmoRespDonnees = new Combo(groupCDI, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(comboIdEdmoRespDonnees);
 		
 		labelIdEdmoDistDonnees = new Label(groupCDI, SWT.NONE);
 		labelIdEdmoDistDonnees.setText(Messages.getString("OptionsAction.26"));
 		labelIdEdmoDistDonnees.pack();
 		
-		textIdEdmoDistDonnees = new Text(groupCDI, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(textIdEdmoDistDonnees);
+		comboIdEdmoDistDonnees = new Combo(groupCDI, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(comboIdEdmoDistDonnees);
 		
 		labelUrlCdi = new Label(groupCDI, SWT.NONE);
 		labelUrlCdi.setText(Messages.getString("OptionsAction.22"));
@@ -538,8 +562,8 @@ public class OptionsAction extends Action implements ISelectionListener,
 		labelMethodeCdi.setText(Messages.getString("OptionsAction.23"));
 		labelMethodeCdi.pack();
 		
-		textMethodeCdi = new Text(groupCDI, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(textMethodeCdi);
+		comboMethodeCdi = new Combo(groupCDI, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(comboMethodeCdi);
 		
 	}
 

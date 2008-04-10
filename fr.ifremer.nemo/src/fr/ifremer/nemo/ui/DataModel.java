@@ -2288,8 +2288,8 @@ public class DataModel {
 		}
 		
 		ViewFile.txtCompteurCDI.setText(stationModel_modele.getCdi().getCompteur());
-		ViewFile.txtTypePlateForme.setText(stationModel_modele.getCdi().getTypePlateForme());
-		ViewFile.txtAccesDonnees.setText(stationModel_modele.getCdi().getAccesDonnees());
+		ViewFile.comboTypePlateForme.setText(stationModel_modele.getCdi().getTypePlateForme());
+		ViewFile.comboAccesDonnees.setText(stationModel_modele.getCdi().getAccesDonnees());
 
 		// System.out.println("Fin remplissage onglet Station");
 

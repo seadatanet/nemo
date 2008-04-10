@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.TreeSet;
 
 import javax.xml.rpc.holders.BooleanHolder;
 
@@ -32,8 +33,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
-import com.sun.org.apache.xalan.internal.xsltc.runtime.Hashtable;
-
+import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
@@ -138,8 +138,10 @@ public class ViewFile extends ViewPart {
 	
 	public static Label lblCompteurCDI, lblTypePlateForme, lblAccesDonnees ;
 	
-	public static Text txtCompteurCDI, txtTypePlateForme, txtAccesDonnees ;
+	public static Text txtCompteurCDI ;
 
+	public static Combo comboTypePlateForme, comboAccesDonnees;
+	
 	public static Group grpCDI;
 	
 	private static Group grpSeparateur;
@@ -730,25 +732,67 @@ public class ViewFile extends ViewPart {
 		lblCompteurCDI = new Label(cmpCDI, SWT.NONE);
 		lblCompteurCDI.setText(Messages.getString("ViewFile.compteurCDI"));
 		txtCompteurCDI = new Text(cmpCDI, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(txtCompteurCDI);
+		GridDataFactory.fillDefaults().grab(false,false).applyTo(txtCompteurCDI);
 		
 		lblTypePlateForme = new Label(cmpCDI, SWT.NONE);
 		lblTypePlateForme.setText(Messages.getString("ViewFile.typePlateForme"));
-		txtTypePlateForme = new Text(cmpCDI, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(txtTypePlateForme);
+		
+//		 FAE 59 CDL 09/04/08
+		
+		comboTypePlateForme = new Combo(cmpCDI, SWT.BORDER);
+		
+		CodeTableRecordType[] records = NemoLists.getVocabList("L061");
+		
+		TreeSet<String> champsMethodesCdi = new TreeSet<String>();
+			
+		for (CodeTableRecordType record : records)
+		{	
+			String champCombo = "";
+			System.out.println(record.getEntryKey());
+			String contenuCleDecoup[] = record.getEntryKey().split("/");
+			champCombo += contenuCleDecoup[contenuCleDecoup.length - 1];
+			champCombo += " - " + record.getEntryTerm();
+			champsMethodesCdi.add(champCombo);
+		}
+		
+		for (String champ : champsMethodesCdi)
+			comboTypePlateForme.add(champ);
+		
+		GridDataFactory.fillDefaults().grab(false,false).applyTo(comboTypePlateForme);
 		
 		lblAccesDonnees = new Label(cmpCDI, SWT.NONE);
 		lblAccesDonnees.setText(Messages.getString("ViewFile.accesDonnees"));
-		txtAccesDonnees = new Text(cmpCDI, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(txtAccesDonnees);
+				
+		comboAccesDonnees = new Combo(cmpCDI, SWT.BORDER);
+
+		records = NemoLists.getVocabList("L081");
+		
+		champsMethodesCdi = new TreeSet<String>();
+			
+		for (CodeTableRecordType record : records)
+		{	
+			String champCombo = "";
+			System.out.println(record.getEntryKey());
+			String contenuCleDecoup[] = record.getEntryKey().split("/");
+			champCombo += contenuCleDecoup[contenuCleDecoup.length - 1];
+			champCombo += " - " + record.getEntryTerm();
+			champsMethodesCdi.add(champCombo);
+		}
+		
+		for (String champ : champsMethodesCdi)
+			comboAccesDonnees.add(champ);
+		
+		
+		
+		GridDataFactory.fillDefaults().grab(false,false).applyTo(comboAccesDonnees);
 		
 		// Par défaut
 		lblCompteurCDI.setEnabled(checkCDI.getSelection());
 		txtCompteurCDI.setEnabled(checkCDI.getSelection());
 		lblTypePlateForme.setEnabled(checkCDI.getSelection());
-		txtTypePlateForme.setEnabled(checkCDI.getSelection());
+		comboTypePlateForme.setEnabled(checkCDI.getSelection());
 		lblAccesDonnees.setEnabled(checkCDI.getSelection());
-		txtAccesDonnees.setEnabled(checkCDI.getSelection());
+		comboAccesDonnees.setEnabled(checkCDI.getSelection());
 		writeResume = checkCDI.getSelection();
 		
 		// bouton checkCDI
@@ -759,13 +803,17 @@ public class ViewFile extends ViewPart {
 						lblCompteurCDI.setEnabled(checkCDI.getSelection());
 						txtCompteurCDI.setEnabled(checkCDI.getSelection());
 						lblTypePlateForme.setEnabled(checkCDI.getSelection());
-						txtTypePlateForme.setEnabled(checkCDI.getSelection());
+						comboTypePlateForme.setEnabled(checkCDI.getSelection());
 						lblAccesDonnees.setEnabled(checkCDI.getSelection());
-						txtAccesDonnees.setEnabled(checkCDI.getSelection());
+						comboAccesDonnees.setEnabled(checkCDI.getSelection());
 						writeResume = checkCDI.getSelection();
 					}
 				});
 		
+		txtCompteurCDI.pack();
+		comboAccesDonnees.pack();
+		comboTypePlateForme.pack();
+		grpCDI.pack();
 		grpCDI.setVisible(false);
 				
 	}

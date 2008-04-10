@@ -99,7 +99,7 @@ public class CDIResumeWriter {
 					// CDI ID
 //					writer.write(Utils.configuration.getDataCenter() + "_"
 //							+ String.valueOf(cdiId++));
-					writer.write(Configuration.getSingleton().getDataCenter() + "_"
+					writer.write(Configuration.getSingleton().getIdEdmoRespCdi() + "_"
 							+ String.valueOf(cdiId++));
 
 					// EDMO author
@@ -141,10 +141,10 @@ public class CDIResumeWriter {
 					writer.write(";" + "");
 
 					// Platform Type
-					writer.write(";" + ViewFile.txtTypePlateForme.getText());
+					writer.write(";" + ViewFile.comboTypePlateForme.getText());
 
 					// Dataset Access
-					writer.write(";" + ViewFile.txtAccesDonnees.getText());
+					writer.write(";" + ViewFile.comboAccesDonnees.getText());
 
 					// Cruise name
 					if (ViewFile.collectionCas1)
@@ -166,10 +166,13 @@ public class CDIResumeWriter {
 									.getLongitude()));
 
 					// station date
+					Formatter format = new Formatter();
+					SimpleDateFormat dateFormat2 = new  SimpleDateFormat("yyyy:MM:dd'T'");
 					writer.write(";"
-							+ formatter.formatDateTime("MM/dd/yyyy", station
-									.getDate()));
-
+							+ dateFormat2.format(new Date(station.getDate())) + format.formatDateTime("hh24:mm:ss", station.getCorrectedTime()));
+		
+					station.getOffsetTU();
+					station.getParameters()[0].getStation().getTime();
 					// edmo distributor
 //					writer.write(";"
 //							+ Utils.configuration.getIdEdmoDistDonnees());
@@ -177,7 +180,7 @@ public class CDIResumeWriter {
 							+ Configuration.getSingleton().getIdEdmoDistDonnees());
 					
 					// data size
-					writer.write(";" + String.valueOf(survey.getDataSize()));
+					writer.write(";" + String.format("%.3f",survey.getDataSize()));
 
 					// DIST website
 //					writer.write(";" + Utils.configuration.getCdiURL());
