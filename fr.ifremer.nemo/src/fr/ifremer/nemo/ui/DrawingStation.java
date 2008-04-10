@@ -397,12 +397,12 @@ public class DrawingStation {
 	}
 
 	public static void sectionIncrementeLigneDebutFinInject(String nomSection,
-			String description, Section section, Text ligne, Text debut,
+			String description, Section section, Text numero, Text ligne, Text debut,
 			Text fin, Button radio, Button position, boolean blnManuel) {
 
 		// le ppar radio est le pointeur du bouton "incremente"
 		final String nomSec;
-		final Text lign, debu, fi, test;
+		final Text num, lign, debu, fi, test;
 		final Button inject, pos;
 
 		nomSec = nomSection;
@@ -428,17 +428,23 @@ public class DrawingStation {
 				.createComposite(section);
 		sectionClient.setLayout(new GridLayout());
 
+		Composite compo1 = new Composite(sectionClient, SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo1);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(compo1);
+		
 		// bouton radio "saisie manuelle"
 		// c'est lui qui est passé en ppar
-		radio.setParent(sectionClient);
+		radio.setParent(compo1);
 		radio.setText(Messages.getString("Drawing.6"));
 
+		numero.setParent(compo1);
+		
 		// bouton radio "position"
 		// radio.setParent(sectionClient);
 		// radio.setText("Position");
 
 		// Button position = new Button(sectionClient, SWT.RADIO);
-		position.setParent(sectionClient);
+		position.setParent(compo1);
 		position.setText(Messages.getString("Drawing.8"));
 
 		GridLayout gridLayout1 = new GridLayout();
@@ -500,6 +506,7 @@ public class DrawingStation {
 		fi = fin;
 		test = txtTest;
 		pos = position;
+		num = numero;
 
 		// listeners
 
@@ -510,7 +517,10 @@ public class DrawingStation {
 							org.eclipse.swt.events.SelectionEvent e) {
 
 						// raz de la valeur manuelle
+						num.setText("1");
+						
 						// grou.setVisible(false);
+						num.setEnabled(true);
 						lign.setEnabled(false);
 						debu.setEnabled(false);
 						fi.setEnabled(false);
@@ -535,6 +545,7 @@ public class DrawingStation {
 						lign.setText("");
 						debu.setText("");
 						fi.setText("");
+						num.setEnabled(false);
 						lign.setEnabled(true);
 						debu.setEnabled(true);
 						fi.setEnabled(true);
@@ -580,7 +591,10 @@ public class DrawingStation {
 							// test.setText(test.getText().format("%05d", Integer.parseInt(test.getText().trim())));
 							test.setText(Formatter.getSingleton().padZero(test.getText().trim(), 5));
 							test.pack();
-						}
+						} else {
+							test.setText(Formatter.getSingleton().padZero(num.getText().trim(), 5));
+							test.pack();
+						}	
 					}
 				});
 		
@@ -595,6 +609,7 @@ public class DrawingStation {
 				
 		
 		radio.setSelection(blnManuel);
+		numero.setEnabled(blnManuel);
 		position.setSelection(!blnManuel);
 		lign.setEnabled(!blnManuel);
 		debu.setEnabled(!blnManuel);

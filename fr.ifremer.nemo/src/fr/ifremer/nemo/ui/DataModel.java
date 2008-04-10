@@ -366,6 +366,7 @@ public class DataModel {
 
 		if (EditStation.buttonRefStationIncremente.getSelection()) {
 			stationModel.setIncrementRef(true);
+			stationModel.setIncrementNumber(EditStation.textRefStationNumero.getText());
 			propertyModel.setUserProvided(true);
 
 		} else {
@@ -1596,12 +1597,14 @@ public class DataModel {
 		// numéro de station
 		if (stationModel_modele.isIncrementRef()) {
 			EditStation.buttonRefStationIncremente.setSelection(true);
+			EditStation.textRefStationNumero.setText(String.valueOf(stationModel_modele.getIncrementNumber()));
 			EditStation.buttonRefStationPos.setSelection(false);
 		} else {
 
 			// EditStation.buttonRefStationIncremente.setSelection(false); //pas
 			// obligatoire pour la première ligne?
 			EditStation.buttonRefStationIncremente.setSelection(false);
+			EditStation.textRefStationNumero.setText("");
 			EditStation.buttonRefStationPos.setSelection(true);
 
 			// valeurs de ligne/debut/fin

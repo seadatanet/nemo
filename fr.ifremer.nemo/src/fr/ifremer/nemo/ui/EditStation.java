@@ -25,7 +25,7 @@ public class EditStation {
 	// fonctions de remplissage de la zone d'édition pour les campagnes
 	// /////////////////////////////////////////
 
-	public static Text textRefStationLigne, textRefStationDebut,
+	public static Text textRefStationNumero, textRefStationLigne, textRefStationDebut,
 			textRefStationFin, textHistoriqueAcquisition1,
 			textHistoriqueAcquisition2, textCommentaire,
 			textHistoriqueAcqLigne1, textHistoriqueAcqLigne2,
@@ -205,7 +205,7 @@ public class EditStation {
 		
 		DrawingStation
 				.sectionIncrementeLigneDebutFinInject(
-						Messages.getString("EditStation.5"), Messages.getString("EditStation.6"), EditStation.sectionStation, textRefStationLigne, textRefStationDebut, textRefStationFin, buttonRefStationIncremente, buttonRefStationPos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
+						Messages.getString("EditStation.5"), Messages.getString("EditStation.6"), EditStation.sectionStation, textRefStationNumero, textRefStationLigne, textRefStationDebut, textRefStationFin, buttonRefStationIncremente, buttonRefStationPos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 
 		if (!ViewFile.isCollection()) {
 			// section reference type de données
@@ -642,6 +642,8 @@ public class EditStation {
 		textQCProf = new Text(shell, SWT.BORDER);
 		listeTextStation.add(textQCProf);
 
+		textRefStationNumero = new Text(shell, SWT.BORDER);
+		listeTextStation.add(textRefStationNumero);
 		textRefStationLigne = new Text(shell, SWT.BORDER);
 		listeTextStation.add(textRefStationLigne);
 		textRefStationDebut = new Text(shell, SWT.BORDER);

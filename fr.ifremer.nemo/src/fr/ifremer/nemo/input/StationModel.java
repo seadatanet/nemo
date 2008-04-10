@@ -68,6 +68,12 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * Definit si le numero de reference est automatiquement incremente
 	 */
 	protected boolean _incrementRef;
+	
+	/**
+	 * Definit le numero de reference a incrementer
+	 */
+	protected int _incrementNumber;
+	
 
 	/**
 	 * Indique si le fichier correspond à un fichier dont les metadata station
@@ -119,6 +125,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	protected Cdi _cdi;
 
 	public StationModel() {
+		_incrementNumber = 1;
 		_endDataPattern = "";
 		_endOnEOF = false;
 		_endOnEmptyLine = false;
@@ -220,6 +227,10 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			Element2Field setter = new Element2Field(this, "setIncrementRef");
 			return setter;
 		}
+		if (a_LocalName.equals("incrementNumber")) {
+			Element2Field setter = new Element2Field(this, "setIncrementNumber");
+			return setter;
+		}
 		if (a_LocalName.equals("endDataPattern")) {
 			Element2Field setter = new Element2Field(this, "setEndDataPattern");
 			return setter;
@@ -297,6 +308,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		a_Writer.putAttribute("endOnEmptyLine", isEndOnEmptyLine());
 		a_Writer.putAttribute("endOnPattern", isEndOnPattern());
 		a_Writer.putTag("incrementRef", isIncrementRef());
+		a_Writer.putTag("incrementNumber", getIncrementNumber());
 		a_Writer.putTag("endDataPattern", getEndDataPattern());
 		a_Writer.putTag("rowNumber", getRowNumber());
 		a_Writer.putTag("endData", getEndData());
@@ -602,6 +614,18 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		setIncrementRef(new Boolean(a_String).booleanValue());
 	}
 
+
+	/**
+	 * 
+	 */
+	public int getIncrementNumber() {
+		return _incrementNumber;
+	}
+
+	public void setIncrementNumber(String number) {
+		_incrementNumber = Integer.parseInt(number);
+	}
+	
 	/**
 	 * Read accessor (getter) for attribute _metaInData
 	 * 
@@ -1513,7 +1537,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * 
 	 */
 	public void initRef() {
-		_ref = 1;
+		_ref = getIncrementNumber();
 	}
-
+	
 } /* End of class: StationModel */
