@@ -25,6 +25,7 @@ import fr.ifremer.nemo.domain.Parameter;
 import fr.ifremer.nemo.domain.ParameterValue;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.TimeSeriesInformation;
+import fr.ifremer.nemo.ui.DataModel;
 import fr.ifremer.nemo.ui.ViewFile;
 import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.FloatFormat;
@@ -86,7 +87,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 */
 	protected int _numberOfLines;
 
-	protected transient int _ref;
+	protected static transient int _ref = -1;
 
 	/**
 	 * Nombre de mesures réalisées sur la station
@@ -1316,8 +1317,15 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 				if ((header = consumeHeader(a_Reader)) != null) {
 			//		a_Notifier.progress(a_Reader.getFilePointer());
 					if ((getReferenceProperty().getFragment().getFirstLine() == 0
-							&& (a_Filename != null))/* || ViewFile.collectionCasN*/) {
-						getReferenceProperty().applyOn(station,
+							&& (a_Filename != null) && !(isIncrementRef()))) {
+						if (ViewFile.collectionCasN)
+						{
+							String[] filename = DataModel.singleSurvey.getFile().split("/");
+							getReferenceProperty().applyOn(station,
+								new String[] { filename[filename.length - 1] });
+						}
+						else							
+							getReferenceProperty().applyOn(station,
 								new String[] { a_Filename });
 					} else {
 						if (isIncrementRef()) {
@@ -1537,7 +1545,8 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * 
 	 */
 	public void initRef() {
-		_ref = getIncrementNumber();
+		if (_ref == -1)
+			_ref = getIncrementNumber();
 	}
 	
 } /* End of class: StationModel */

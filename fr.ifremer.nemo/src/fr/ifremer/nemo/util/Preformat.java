@@ -181,7 +181,7 @@ public class Preformat {
 		}
 		
 		for (i = 0 ; i < _nbColonne ; i++) {
-			System.out.println("Colonne " + (i+1) + '\t' + ":" + " entier : " + _maxEntier[i] + " - décimales : " + _maxDecimale[i]);
+		//	System.out.println("Colonne " + (i+1) + '\t' + ":" + " entier : " + _maxEntier[i] + " - décimales : " + _maxDecimale[i]);
 		}
 		
 		///////////////////////////////////////

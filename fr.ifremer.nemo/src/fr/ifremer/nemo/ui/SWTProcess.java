@@ -375,7 +375,7 @@ public class SWTProcess implements IRunnableWithProgress {
 					writerODV.writeSurvey(survey, fichierSortie,
 							notifier);
 					
-					survey.setDataSize(fichierSortie.length());
+					survey.setDataSize(fichierSortie.length() / 1024f / 1024f);
 					
 					if (ViewFile.writeResume) {
 						CDIResumeWriter.getInstance().addSurvey(survey);
