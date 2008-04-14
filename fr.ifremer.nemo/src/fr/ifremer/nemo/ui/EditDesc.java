@@ -320,7 +320,7 @@ public class EditDesc {
 
 			// remplissage de l'IHM par le modèle chargé ?
 			if (DataModel.ouverture) {
-				DataModel.fillDesc();
+				DataModel.fillDesc(false);
 			}
 
 			// nom de l'application

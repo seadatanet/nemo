@@ -18,20 +18,8 @@ public class Etape {
 	 * 
 	 */
 	
-	private static String _pfEnTeteStation, _pfEnTeteFichier, _pfFinFichier, _pfIndicateurFin;
-	
-	private static boolean _pfEOF, _pfLigneVide, _pfManuel;
-
 	public static void validationDesc() {
 
-		// Sauvegarde des valeurs saisies pour réécriture après mise à jour fichier
-		_pfEnTeteFichier = EditDesc.lignesEnteteFichier.getText();
-		_pfEnTeteStation = EditDesc.lignesEnteteStation.getText();
-		_pfFinFichier = EditDesc.lignesFinStation.getText();
-		_pfIndicateurFin = EditDesc.txtManuel.getText();
-		_pfEOF = EditDesc.radEOF.getSelection();
-		_pfLigneVide = EditDesc.radLigne.getSelection();
-		_pfManuel = EditDesc.radManuel.getSelection();
 		
 		// Fichier avec séparateur
 		if (ViewFile.checkSeparateur.getSelection() && !Preformat.isPreformat()) {
@@ -119,24 +107,6 @@ public class Etape {
 			}
 
 		} // fin tempo
-
-		if (ViewFile.checkSeparateur.getSelection()) {
-			EditDesc.lignesEnteteFichier.setText(_pfEnTeteFichier);
-			EditDesc.lignesEnteteStation.setText(_pfEnTeteStation);
-			EditDesc.lignesFinStation.setText(_pfFinFichier);
-			EditDesc.txtManuel.setText(_pfIndicateurFin);
-			EditDesc.radEOF.setSelection(_pfEOF);
-			EditDesc.radLigne.setSelection(_pfLigneVide);
-			EditDesc.radManuel.setSelection(_pfManuel);
-			
-			if (_pfEOF) {
-				EditDesc.selectComboEnd(EditDesc.radEOF);
-			} else if (_pfLigneVide) {
-				EditDesc.selectComboEnd(EditDesc.radLigne);
-			} else {
-				EditDesc.selectComboEnd(EditDesc.radManuel);
-			}
-		}
 		
 		if (ok) {
 			EditDesc.okApresReset = true;
