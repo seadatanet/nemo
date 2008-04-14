@@ -43,7 +43,7 @@ public class Utils {
 	public static ProgressBar progressbar;
 
 	public static InputModel inputModel;
-
+	
 	public static void insertTextFich(String fich, StyledText zone, boolean raz)
 			throws IOException {
 
@@ -104,7 +104,7 @@ public class Utils {
 		zone.setFont(font);
 
 		// log ok
-		ViewLog.styledTextLogErreurs.setText(Messages.getString("Utils.4")); //$NON-NLS-1$
+	//	ViewLog.styledTextLogErreurs.setText(Messages.getString("Utils.4")); //$NON-NLS-1$
 
 		// début d'infos du fichier
 
@@ -1160,6 +1160,7 @@ public class Utils {
 		ViewLog.styledTextLogErreurs.setStyleRange(style);
 		ViewLog.tabFolderLog.setSelection(0);
 
+		ViewLog.styledTextLogErreurs.update();
 	}
 
 	public static void messageErreurAppend(String message) {
@@ -1177,6 +1178,8 @@ public class Utils {
 
 		ViewLog.styledTextLogErreurs.setStyleRange(style);
 		ViewLog.tabFolderLog.setSelection(0);
+		
+		ViewLog.styledTextLogErreurs.update();
 
 	}
 
@@ -1194,6 +1197,7 @@ public class Utils {
 		ViewLog.styledTextLogErreurs.setStyleRange(style);
 		ViewLog.tabFolderLog.setSelection(0);
 
+		ViewLog.styledTextLogErreurs.update();
 	}
 
 	public static void messageOKAppend(String message) {
@@ -1209,6 +1213,8 @@ public class Utils {
 
 		ViewLog.styledTextLogErreurs.setStyleRange(style);
 		ViewLog.tabFolderLog.setSelection(0);
+		
+		ViewLog.styledTextLogErreurs.update();
 
 	}
 

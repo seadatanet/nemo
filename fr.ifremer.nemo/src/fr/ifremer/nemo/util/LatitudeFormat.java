@@ -332,11 +332,15 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 	 * @return Object
 	 */
 	public Object parseObject(String source, ParsePosition pos) {
+
 		if (_variableLength) {
 			return parseObjectVariableLength(source, pos);
 		} else {
 			return parseObjectFixedLength(source, pos);
 		}
+
+
+
 	}
 
 	/**
@@ -357,13 +361,13 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 				switch (_elements[i]._type) {
 				case HEMISPHERE: {
 					String tmp = source.substring(index, index + 1);
-					if (tmp.equals("E")) {
+					if (tmp.equals("N")) {
 						sign = 1.0;
-					} else if (tmp.equals("W") || tmp.equals("O")) {
+					} else if (tmp.equals("S")) {
 						sign = -1.0;
 					} else {
 						throw new ParseException(
-								"Charactere invalide, 'E', 'O' ou 'W' attendu",
+								"Charactere invalide, 'N' ou 'S' attendu",
 								index);
 					}
 					index += 1;

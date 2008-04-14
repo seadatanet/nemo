@@ -24,7 +24,7 @@ public class Etape {
 		// Fichier avec séparateur
 		if (ViewFile.checkSeparateur.getSelection() && !Preformat.isPreformat()) {
 			try {
-				fr.ifremer.nemo.util.Preformat.run();
+				Preformat.run();
 			} catch (Exception ex){
 				Utils.messageErreur(Messages.getString("Etape.120"));
 				ex.printStackTrace();

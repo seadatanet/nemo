@@ -9,7 +9,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import fr.ifremer.nemo.ui.DataModel;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.PlatformUI;
+
 import fr.ifremer.nemo.ui.EditDesc;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.ViewFile;
@@ -71,13 +74,70 @@ public class Preformat {
 	// Préformatage réussi
 	private static boolean _preformatOK;
 	
+
+	public static String messagePreformat;
+	
 	//////////////
 	// Méthodes //
 	//////////////
 	
+
+	
+	
+	public static void refreshEtatAvancement(Double pourcentEtape1, Double pourcentEtape2)
+	{
+		messagePreformat = "Préformatage en cours";
+		messagePreformat += "\r\n";
+		if (pourcentEtape1 != 100d) {
+			messagePreformat += "Analyse des données \t: "
+					+ pourcentEtape1.intValue() + "%";
+
+			messagePreformat += "\t";
+			int i = 0;
+
+			messagePreformat += "[";
+			for (; i < ((Double) (pourcentEtape1 / 2d)).intValue(); i++)
+				messagePreformat += "|";
+			for (; i < 50; i++)
+				messagePreformat += "-";
+			messagePreformat += "]";
+		} else {
+			messagePreformat += "Analyse des données \t: " + "OK";
+		}
+
+		messagePreformat += "\r\n";
+
+		if (pourcentEtape2 != 100d) {
+			messagePreformat += "Ecriture des fichiers \t: "
+					+ pourcentEtape2.intValue() + "%";
+
+			messagePreformat += "\t";
+
+			messagePreformat += "[";
+			int i = 0;
+			for (; i < ((Double) (pourcentEtape2 / 2d)).intValue(); i++)
+				messagePreformat += "|";
+			for (; i < 50; i++)
+				messagePreformat += "-";
+
+			messagePreformat += "]";
+		} else {
+			messagePreformat += "Ecriture des fichiers \t: " + "OK";
+		}
+
+		// System.out.println(messagePreformat);
+		Utils.messageOK(messagePreformat);
+	}
+	
+	
 	public static void run() throws IOException {
-		int i;		
+		int i;				
+		Double pourcentEtape1 = 0d;
+		Double pourcentEtape2 = 0d;
+		int nbFic = 0;
 		
+		Utils.messageOK("Préformatage en cours");
+				
 		_nbColonne = 1;	
 		_preformatOK = false;
 		
@@ -121,7 +181,7 @@ public class Preformat {
 			_separateur = ViewFile.textSeparateur.getText().toCharArray()[0];
 		}
 		
-		Utils.messageErreur("");
+//		Utils.messageErreur("");
 		
 		/////////////////////////////////////////
 		// Récupération du nombres de colonnes //
@@ -133,6 +193,7 @@ public class Preformat {
 			for (String repertoire : _listeRepertoires) {
 				_repEntree = ViewFile.nomRepertoire+"\\"+repertoire;
 				_listeFichiers = new File(_repEntree).list();
+				
 				
 				for (String fichier : _listeFichiers) {
 					nombreColonnes(fichier);
@@ -166,19 +227,28 @@ public class Preformat {
 		if (ViewFile.radioFichier.getSelection()) {
 			getMax(_ficEntree);
 		} else if (ViewFile.radioCollectCas1.getSelection()) {
+			
 			for (String repertoire : _listeRepertoires) {
 				_repEntree = ViewFile.nomRepertoire+"\\"+repertoire;
 				_listeFichiers = new File(_repEntree).list();
+				nbFic = _listeFichiers.length;
 				
 				for (String fichier : _listeFichiers) {
+					pourcentEtape1 += 100d / nbFic;
+					refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
 					getMax(fichier);
 				}
 			}
 		} else {
+			nbFic = _listeFichiers.length;
 			for (String fichier : _listeFichiers) {
+				pourcentEtape1 += 100d / nbFic;
+				refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
 				getMax(fichier);
 			}
 		}
+		
+		pourcentEtape1 = 100d;
 		
 		for (i = 0 ; i < _nbColonne ; i++) {
 		//	System.out.println("Colonne " + (i+1) + '\t' + ":" + " entier : " + _maxEntier[i] + " - décimales : " + _maxDecimale[i]);
@@ -223,10 +293,21 @@ public class Preformat {
 			}
 			
 			// Ecriture des fichiers
+			nbFic = _listeFichiers.length;
+			
 			for (String fichier : _listeFichiers) {
+				
+				pourcentEtape2 += 100d / nbFic;
+				
+				refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
+							
 				ecritureFichier(fichier, _repSortie.getAbsolutePath());
 			}
 		}	
+		
+		pourcentEtape2 = 100d;		
+		
+		refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
 		
 		/////////////////////////////////////
 		// Affichage du fichier préformaté //
@@ -480,7 +561,7 @@ public class Preformat {
 		} finally {
 			lecteurAvecBuffer.close();
 			fichPreformat.close();
-			Utils.messageOK(Messages.getString("Preformat.1"));
+		//	Utils.messageOK(Messages.getString("Preformat.1"));
 		}
 	}
 
