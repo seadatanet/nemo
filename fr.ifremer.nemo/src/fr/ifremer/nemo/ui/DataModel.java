@@ -1284,15 +1284,15 @@ public class DataModel {
 
 		// lancement du processus sur le premier onglet et effacement préventif
 		// si besoin
-		fillDesc();
+		fillDesc(true);
 	}
 
-	public static void fillDesc() throws RuntimeException {
+	public static void fillDesc(boolean raz) throws RuntimeException {
 		// remplissage auto de l'IHM Desc
 		if (dirSurvey_modele != null) {
 			dirSurvey_modele.releaseInputModel();
 		}
-		if (singleSurvey_modele != null) {
+		if (singleSurvey_modele != null && raz) {
 			singleSurvey_modele.releaseInputModel();
 		}
 

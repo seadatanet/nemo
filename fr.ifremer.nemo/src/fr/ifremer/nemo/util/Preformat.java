@@ -196,7 +196,7 @@ public class Preformat {
 			if (!_repSortie.exists()) {
 				_repSortie.mkdirs(); 
 			}
-			
+		
 			for (String repertoire : _listeRepertoires) {
 				_repEntree = ViewFile.nomRepertoire+"\\"+repertoire;
 				_listeFichiers = new File(_repEntree).list();
@@ -240,15 +240,15 @@ public class Preformat {
 		ViewFile.fileLoaded = true;
 
 		if (ViewFile.radioFichier.getSelection()) {
-			Utils.insertTextFich(ViewFile.nomFichier, ViewFile.styledTextCampagne);
+			Utils.insertTextFich(ViewFile.nomFichier, ViewFile.styledTextCampagne, false);
 			ViewFile.textAreaDescription.setText(Utils.texteBrut);
 		} else if (ViewFile.radioCollectCas1.getSelection()) {
-			if (Utils.findFilesCollectCas1(ViewFile.nomRepertoire)) {
+			if (Utils.findFilesCollectCas1(ViewFile.nomRepertoire, true)) {
 				ViewFile.textAreaDescription
 						.setText(Utils.texteBrut);
 			}
 		} else {
-			if (Utils.findFiles(ViewFile.nomRepertoire)) {
+			if (Utils.findFiles(ViewFile.nomRepertoire, false)) {
 				ViewFile.textAreaDescription
 						.setText(Utils.texteBrut);
 			}
@@ -260,7 +260,7 @@ public class Preformat {
 		// d'édition de
 		// paramètres
 //		Utils.razGlobal();
-		EditDesc.affichageEdition();
+ 		EditDesc.affichageEdition();
 
 //		// remplissage de l'IHM par le modèle chargé ?
 //		if (DataModel.ouverture) {

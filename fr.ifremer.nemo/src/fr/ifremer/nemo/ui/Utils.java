@@ -44,7 +44,7 @@ public class Utils {
 
 	public static InputModel inputModel;
 
-	public static void insertTextFich(String fich, StyledText zone)
+	public static void insertTextFich(String fich, StyledText zone, boolean raz)
 			throws IOException {
 
 		int nbreLignes, tailleLigne, tailleMax, nbreRegle, i, j, k, tmp, cumul, indexMax;
@@ -122,11 +122,12 @@ public class Utils {
 
 		EditDesc.nomNemo();
 		
-		DataModel.ouverture = false;
-
-		// reset de l'étape de conversion
-		ViewFile.etape = 0;
-
+		if (raz) {
+			DataModel.ouverture = false;
+			
+			// reset de l'étape de conversion
+			ViewFile.etape = 0;
+		}
 	}
 
 	public static void remplissageTexte(StyledText styledText) {
@@ -994,7 +995,7 @@ public class Utils {
 
 	}
 
-	public static Boolean findFiles(String directoryPath) {
+	public static Boolean findFiles(String directoryPath, boolean raz) {
 		File directory = new File(directoryPath);
 
 		Boolean ok = true;
@@ -1040,7 +1041,7 @@ public class Utils {
 
 			try {
 				Utils.insertTextFich(ViewFile.nomFichier,
-						ViewFile.textAreaDescription);
+						ViewFile.textAreaDescription, raz);
 			} catch (IOException e) {
 
 				e.printStackTrace();
@@ -1052,7 +1053,7 @@ public class Utils {
 		
 	}
 	
-	public static Boolean findFilesCollectCas1(String directoryPath) {
+	public static Boolean findFilesCollectCas1(String directoryPath, boolean raz) {
 		File directory = new File(directoryPath);
 
 		Boolean ok = true;
@@ -1131,7 +1132,7 @@ public class Utils {
 
 			try {
 				Utils.insertTextFich(ViewFile.nomFichier,
-						ViewFile.textAreaDescription);
+						ViewFile.textAreaDescription, raz);
 			} catch (IOException e) {
 
 				e.printStackTrace();

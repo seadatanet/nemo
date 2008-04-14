@@ -496,7 +496,7 @@ public class ViewFile extends ViewPart {
 								// Campagne
 								try {
 									Utils.insertTextFich(nomFichier,
-											styledTextCampagne);
+											styledTextCampagne, true);
 									// Utils.remplissageTexte(textAreaDescription);
 									textAreaDescription
 											.setText(Utils.texteBrut);
@@ -550,7 +550,7 @@ public class ViewFile extends ViewPart {
 							if (nomRepertoire != null) {
 								fileLoaded = true;
 
-								if (Utils.findFiles(nomRepertoire)) {
+								if (Utils.findFiles(nomRepertoire, true)) {
 									textAreaDescription
 											.setText(Utils.texteBrut);
 
@@ -592,7 +592,7 @@ public class ViewFile extends ViewPart {
 							if (nomRepertoire != null) {
 								fileLoaded = true;
 
-								if (Utils.findFilesCollectCas1(nomRepertoire)) {
+								if (Utils.findFilesCollectCas1(nomRepertoire, false)) {
 									textAreaDescription
 											.setText(Utils.texteBrut);
 
@@ -640,7 +640,7 @@ public class ViewFile extends ViewPart {
 							if (nomRepertoire != null) {
 								fileLoaded = true;
 
-								if (Utils.findFiles(nomRepertoire)) {
+								if (Utils.findFiles(nomRepertoire, true)) {
 									textAreaDescription
 											.setText(Utils.texteBrut);
 
