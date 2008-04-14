@@ -9,10 +9,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.PlatformUI;
-
 import fr.ifremer.nemo.ui.EditDesc;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.ViewFile;
@@ -86,10 +82,10 @@ public class Preformat {
 	
 	public static void refreshEtatAvancement(Double pourcentEtape1, Double pourcentEtape2)
 	{
-		messagePreformat = "Préformatage en cours";
+		messagePreformat = Messages.getString("Preformat.9");
 		messagePreformat += "\r\n";
 		if (pourcentEtape1 != 100d) {
-			messagePreformat += "Analyse des données \t: "
+			messagePreformat += Messages.getString("Preformat.10")
 					+ pourcentEtape1.intValue() + "%";
 
 			messagePreformat += "\t";
@@ -102,13 +98,13 @@ public class Preformat {
 				messagePreformat += "-";
 			messagePreformat += "]";
 		} else {
-			messagePreformat += "Analyse des données \t: " + "OK";
+			messagePreformat += Messages.getString("Preformat.10") + "OK";
 		}
 
 		messagePreformat += "\r\n";
 
 		if (pourcentEtape2 != 100d) {
-			messagePreformat += "Ecriture des fichiers \t: "
+			messagePreformat += Messages.getString("Preformat.11")
 					+ pourcentEtape2.intValue() + "%";
 
 			messagePreformat += "\t";
@@ -122,7 +118,7 @@ public class Preformat {
 
 			messagePreformat += "]";
 		} else {
-			messagePreformat += "Ecriture des fichiers \t: " + "OK";
+			messagePreformat += Messages.getString("Preformat.11") + "OK";
 		}
 
 		// System.out.println(messagePreformat);
