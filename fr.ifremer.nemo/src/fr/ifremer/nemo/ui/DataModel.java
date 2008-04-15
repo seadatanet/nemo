@@ -252,6 +252,9 @@ public class DataModel {
 
 		// injection des valeurs de l'IHM -> datamodel
 		// référence
+		if (EditSurvey.textCampagne == null )
+			return;
+		
 		survey.setReference(EditSurvey.textCampagne.getText());
 		survey.setName(EditSurvey.textNom.getText());
 		survey.setShipCode(EditSurvey.textCodeNavire.getText());
