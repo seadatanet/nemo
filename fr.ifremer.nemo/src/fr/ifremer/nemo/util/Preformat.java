@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import fr.ifremer.nemo.ui.Application;
 import fr.ifremer.nemo.ui.EditDesc;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.ViewFile;
@@ -123,7 +124,12 @@ public class Preformat {
 
 		// System.out.println(messagePreformat);
 		Utils.messageOK(messagePreformat);
+		
+		Application.display.update();
+		
 	}
+	
+
 	
 	
 	public static void run() throws IOException {
@@ -240,6 +246,7 @@ public class Preformat {
 			for (String fichier : _listeFichiers) {
 				pourcentEtape1 += 100d / nbFic;
 				refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
+				
 				getMax(fichier);
 			}
 		}

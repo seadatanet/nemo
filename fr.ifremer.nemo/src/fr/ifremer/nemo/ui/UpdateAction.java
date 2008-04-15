@@ -1,7 +1,6 @@
 package fr.ifremer.nemo.ui;
 
 import org.eclipse.jface.action.Action;
-import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Rectangle;
@@ -26,11 +25,7 @@ public class UpdateAction extends Action implements ISelectionListener,
 
 	private Combo combo = null;
 
-	private ComboViewer comboViewer = null;
-
 	private Group group = null;
-
-	private ComboViewer comboViewer1 = null;
 
 	private Group group1 = null;
 

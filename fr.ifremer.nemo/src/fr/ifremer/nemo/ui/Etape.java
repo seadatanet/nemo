@@ -85,8 +85,9 @@ public class Etape {
 				try {
 					DateTimeFormat format = new DateTimeFormat(
 							ViewFile.comboTempoHeure.getText());
-					Long HourLong = (Long) format
-							.parseObject(ViewFile.textTempoHeureRef.getText());
+					
+					format.parseObject(ViewFile.textTempoHeureRef.getText());
+				
 				} catch (ParseException e) {
 
 					Utils.messageErreurAppend(Messages.getString("Etape.6")); //$NON-NLS-1$
@@ -97,8 +98,9 @@ public class Etape {
 				try {
 					DateTimeFormat format = new DateTimeFormat(
 							ViewFile.comboTempoDate.getText());
-					Long DateLong = (Long) format
-							.parseObject(ViewFile.textTempoDateRef.getText());
+					
+					format.parseObject(ViewFile.textTempoDateRef.getText());
+				
 				} catch (ParseException e) {
 
 					Utils.messageErreurAppend(Messages.getString("Etape.8")); //$NON-NLS-1$
@@ -166,9 +168,9 @@ public class Etape {
 			try {
 				DateTimeFormat dateFormat = new DateTimeFormat();
 				dateFormat.setFormatString("dd/MM/yyyy"); //$NON-NLS-1$
-				Long dateLong = (Long) dateFormat
-						.parseObject(EditSurvey.textDateDebut.getText());
-
+				
+				dateFormat.parseObject(EditSurvey.textDateDebut.getText());
+						
 			} catch (ParseException e) {
 				Utils.messageErreurAppend(Messages.getString("Etape.24")); //$NON-NLS-1$
 				ok = false;
@@ -179,8 +181,8 @@ public class Etape {
 			try {
 				DateTimeFormat dateFormat = new DateTimeFormat();
 				dateFormat.setFormatString("dd/MM/yyyy"); //$NON-NLS-1$
-				Long dateLong = (Long) dateFormat
-						.parseObject(EditSurvey.textDateFin.getText());
+				
+				dateFormat.parseObject(EditSurvey.textDateFin.getText());
 
 			} catch (ParseException e) {
 				Utils.messageErreurAppend(Messages.getString("Etape.27")); //$NON-NLS-1$
@@ -514,8 +516,8 @@ public class Etape {
 				DateTimeFormat format = new DateTimeFormat(
 						EditStation.comboHeure.getText());
 
-				Long hourLong = (Long) format
-						.parseObject(EditStation.textHeureSaisie.getText());
+				format.parseObject(EditStation.textHeureSaisie.getText());
+			
 			} catch (ParseException e) {
 
 				Utils
@@ -559,8 +561,7 @@ public class Etape {
 				DateTimeFormat format = new DateTimeFormat(
 						EditStation.comboHeure.getText());
 
-				Long hourLong = (Long) format.parseObject(string);
-
+				format.parseObject(string);
 			} catch (ParseException e) {
 				// System.out.println("erreur format Heure ");
 				Utils
@@ -580,8 +581,9 @@ public class Etape {
 			try {
 				DateTimeFormat format = new DateTimeFormat(
 						EditStation.comboDate.getText());
-				Long dateLong = (Long) format
-						.parseObject(EditStation.textDateSaisie.getText());
+				
+				format.parseObject(EditStation.textDateSaisie.getText());
+			
 			} catch (ParseException e) {
 
 				Utils
@@ -623,7 +625,7 @@ public class Etape {
 				DateTimeFormat format = new DateTimeFormat(
 						EditStation.comboDate.getText());
 
-				Long dateLong = (Long) format.parseObject(string);
+				format.parseObject(string);
 
 			} catch (ParseException e) {
 				// System.out.println("erreur format date ");
@@ -1233,8 +1235,6 @@ public class Etape {
 		// test de toutes les valeurs debut / fin des Data
 		Boolean ok = true;
 		Boolean resultat, valeurNonRemplie = false;
-		String string = null, ligne = null;
-
 		// retour à l'onglet message d'erreur
 		ViewLog.tabFolderLog.setSelection(0);
 

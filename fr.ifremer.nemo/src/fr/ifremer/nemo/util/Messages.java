@@ -6,10 +6,6 @@ import java.util.ResourceBundle;
 import fr.ifremer.nemo.config.Configuration;
 
 public class Messages {
-	private static final String BUNDLE_NAME_FR = "fr.ifremer.nemo.util.messages_fr_FR"; //$NON-NLS-1$
-
-	private static final String BUNDLE_NAME_GB = "fr.ifremer.nemo.util.messages_en_GB";
-
 	private static ResourceBundle RESOURCE_BUNDLE;
 
 	private Messages() {

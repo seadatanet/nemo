@@ -30,13 +30,9 @@ public class Drawing {
 			String description, Section section, Text ligne, Text debut,
 			Text fin, Text manuel, Button radio) {
 
-		final String nomSec;
 		final Text manu;
 		final Text lign, debu, fi;
 		final Button inject;
-
-		nomSec = nomSection;
-		// manu = manuel;
 
 		section.setParent(EditDesc.formEdition);
 
@@ -204,18 +200,13 @@ public class Drawing {
 			String nomSection, String description, Section section, Text ligne,
 			Text debut, Text fin, Text manuel) {
 
-		final String nomSec;
 		final ScrolledForm forme;
 		final Text lign, debu, fi;
-		final Button inject;
-
 		forme = form;
 
 		lign = ligne;
 		debu = debut;
 		fi = fin;
-
-		nomSec = nomSection;
 
 		section = ViewEdit.toolkitEdition.createSection(form.getBody(),
 				Section.DESCRIPTION | Section.TITLE_BAR | Section.TWISTIE
@@ -254,9 +245,6 @@ public class Drawing {
 						fi.setEnabled(false);
 					}
 				});
-
-		// combo list
-		Combo combo = new Combo(section, SWT.READ_ONLY);
 
 		// saisie manuelle
 		manuel = new Text(sectionClient, SWT.BORDER);
@@ -322,7 +310,6 @@ public class Drawing {
 			String nomSection, String description, Section section, Text ligne,
 			Text debut, Text fin, Button radio, Combo combo) {
 
-		final String nomSec;
 		final Combo comboList;
 		final Text lign, debu, fi;
 		final ScrolledForm forme;
@@ -333,8 +320,6 @@ public class Drawing {
 		lign = ligne;
 		debu = debut;
 		fi = fin;
-		nomSec = nomSection;
-
 		section.setParent(form);
 
 		section = ViewEdit.toolkitEdition.createSection(form.getBody(),
@@ -498,15 +483,11 @@ public class Drawing {
 			String nomSection, String description, Section section,
 			Button radEOF, Button radLigne, Button radManuel, Text txtManuel, Button btnInject) {
 
-		final String nomSec;
-		final Combo comboList;
-		final Text lign, manuel;
+		final Text manuel;
 		final ScrolledForm forme;
 		final Button inject;
 		
 		forme = form;
-
-		nomSec = nomSection;
 
 		section.setParent(form);
 
@@ -692,13 +673,8 @@ public class Drawing {
 		// creation d'une section simple avec 1 label description et une zone de
 		// texte
 
-		final String nomSec;
 		final ScrolledForm forme;
-		final Text lign, debu, fi;
-
 		forme = form;
-		nomSec = nomSection;
-
 		section.setParent(form);
 		section = ViewEdit.toolkitEdition.createSection(form.getBody(),
 				Section.DESCRIPTION | Section.TITLE_BAR | Section.TWISTIE
@@ -739,19 +715,14 @@ public class Drawing {
 			Section section, Text manuel, Button radio, String txtRadio1,
 			String txtRadio2, Text ligne, Text debut, Text fin) {
 
-		final String nomSec;
 		final ScrolledForm forme;
-		final Button bouton, bouton2, inject, inject2;
+		final Button inject;
 		final Text manu;
 		final Text lign, debu, fi;
 		final Group group;
 
 		manu = manuel;
 		forme = form;
-		nomSec = nomSection;
-		bouton = radio;
-
-		GridLayout layout = new GridLayout(4, false);
 
 		section.setParent(form);
 		section = ViewEdit.toolkitEdition.createSection(form.getBody(),
@@ -831,15 +802,11 @@ public class Drawing {
 		// bouton d'injection de la position des valeurs
 		Button buttonInject2 = new Button(groupe, SWT.NONE);
 		buttonInject2.setText(Messages.getString("Drawing.1"));
-		inject2 = buttonInject2;
-
 		groupe.setEnabled(false);
 
 		section.setClient(sectionClient);
 
 		// listener sur le premier radio global
-
-		bouton2 = radio2;
 
 		radio
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -913,14 +880,9 @@ public class Drawing {
 		// creation d'une section simple avec 1 label description et une zone de
 		// texte
 
-		final String nomSec;
 		final Text manu;
 		final ScrolledForm forme;
-		final Text lign, debu, fi;
-
 		forme = form;
-		nomSec = nomSection;
-
 		manu = manuel;
 
 		section.setParent(form);
@@ -986,14 +948,9 @@ public class Drawing {
 		// creation d'une section simple avec 1 label description et une zone de
 		// texte
 
-		final String nomSec;
 		final Text manu;
 		final ScrolledForm forme;
-		final Text lign, debu, fi;
-
 		forme = form;
-		nomSec = nomSection;
-
 		manu = manuel;
 
 		section.setParent(form);
@@ -1068,9 +1025,6 @@ public class Drawing {
 			String descriptionSection, boolean blnPays) {
 
 		int nbre, i;
-		final String nomSec;
-		final ScrolledForm forme;
-
 		nbre = listeText.size();
 //		System.out.println("=================ok1===========<<<" + nbre);
 
@@ -1141,10 +1095,7 @@ public class Drawing {
 			ArrayList<String> listeNoms, String descriptionSection,
 			Combo confidentialite) {
 
-		int nbre, i;
-		final String nomSec;
-		final ScrolledForm forme;
-
+		int nbre;
 		nbre = listeText.size();
 //		System.out.println("=================ok1===========<<<" + nbre);
 
@@ -1191,11 +1142,6 @@ public class Drawing {
 			ArrayList<String> listeNoms, String descriptionSection, List liste) {
 
 		int nbre, i;
-		final String nomSec;
-		final ScrolledForm forme;
-
-//		System.out.println("=================ok1===========");
-
 		nbre = listeText.size();
 
 		// affichage section
@@ -1252,12 +1198,7 @@ public class Drawing {
 			ArrayList<Text> listeText, ArrayList<String> listeNoms,
 			String descriptionSection, List liste) {
 
-		int nbre, i;
-		final String nomSec;
-		final ScrolledForm forme;
-
-//		System.out.println("=================ok1===========");
-
+		int nbre;
 		nbre = listeText.size();
 
 		// affichage section

@@ -219,7 +219,7 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 			FieldPosition pos) {
 		Long dateTime = (Long) obj;
 		Date value = new Date(dateTime.longValue());
-		int size = 0;
+
 		DecimalFormat format = null;
 		TimeZone tz = TimeZone.getTimeZone("GMT");
 		java.util.Locale locale = java.util.Locale.US;
@@ -228,7 +228,7 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 		Calendar cal = Calendar.getInstance(tz);
 		cal.setTime(value);
 		for (int i = 0; i < _elements.length; i++) {
-			size = _elements[i]._element.length();
+
 			switch (_elements[i]._type) {
 			case YEAR: {
 				format = new DecimalFormat(_elements[i]._element.replace('y',

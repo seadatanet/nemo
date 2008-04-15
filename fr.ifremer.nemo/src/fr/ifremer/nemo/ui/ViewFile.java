@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.TreeSet;
 
 import javax.xml.rpc.holders.BooleanHolder;
@@ -34,6 +33,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
 import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.ns_ws_edmo.Edmo_webserviceLocator;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
@@ -69,8 +69,6 @@ public class ViewFile extends ViewPart {
 	
 	private Composite compositeSeparateur = null;
 	
-	private Composite compositeSeparateurAutre = null;
-	
 	private Composite compositeChoixFichier = null;
 
 	public static Button checkBoxTempo, medatlas, odv, checkCDI;
@@ -105,8 +103,6 @@ public class ViewFile extends ViewPart {
 	public static List listeData;
 
 	// private Text textAreaDescription = null;
-
-	private Label labelDescription = null;
 
 	public static StyledText styledTextCampagne, textAreaDescription,
 			styledTextStation, styledTextData;

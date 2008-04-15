@@ -3,7 +3,6 @@ package fr.ifremer.nemo.ui;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
@@ -26,14 +25,6 @@ public class ViewLog extends ViewPart {
 	public static TabFolder tabFolder3 = null;
 
 	private Composite compositeLogGauche = null;
-
-	private Composite compositeLogDroite = null;
-
-	private Button buttonLogBack = null;
-
-	private Button buttonLogNext = null;
-
-	private Button buttonLogConversion = null;
 
 	public static TabFolder tabFolderLog = null;
 

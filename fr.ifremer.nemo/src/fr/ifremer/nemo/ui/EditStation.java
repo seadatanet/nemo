@@ -16,7 +16,6 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
 import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.domain.DataType;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSDataType;
@@ -407,7 +406,6 @@ public class EditStation {
 						// raz de la valeur manuelle
 						int i;
 
-						Shell s = new Shell();
 
 						// System.out.println("expand ? = " + expand);
 						for (i = 0; i <= EditStation.listeSectionsStation
@@ -449,8 +447,6 @@ public class EditStation {
 
 						// raz de la valeur manuelle
 						int i;
-
-						Shell s = new Shell();
 
 						// System.out.println("expand ? = " + expand);
 						for (i = 0; i <= EditStation.listeSectionsStation
@@ -573,9 +569,6 @@ public class EditStation {
 		s = ViewEdit.formEdition;
 		// raz message erreur
 		Utils.messageErreur(""); //$NON-NLS-1$
-
-		// effacement des boutons valider/expand/init serveur
-		DataType dataType;
 
 		EditStation.buttonValidate.setParent(s.getBody());
 		EditStation.buttonRAZ.setParent(s.getBody());
@@ -982,7 +975,6 @@ public class EditStation {
 		comboRefStationType = new Combo(shell, SWT.READ_ONLY);
 		// remplissage avec les dataTypes de la campagne
 
-		WSDataType[] liste = NemoLists.getDataTypes();
 
 		//FAE022
 		if (!ViewFile.isCollection()) {

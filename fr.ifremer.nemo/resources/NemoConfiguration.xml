@@ -4,15 +4,15 @@
   <nautilusWsURL>http://localhost:8080/nautilus/services/NAUTILUS</nautilusWsURL>
   <showRule>true</showRule>
   <contact></contact>
-  <modelsDirectory>D:\Donnees_pour_conmed\diapalis2_bot\travail</modelsDirectory>
-  <cruisesDirectory>D:\Donnees_pour_conmed\diapalis2_bot\travail</cruisesDirectory>
+  <modelsDirectory>D:\NEMO new\Donnees_pour_conmed\diapalis2_bot\travail</modelsDirectory>
+  <cruisesDirectory>D:\NEMO new\Donnees_pour_conmed\diapalis2_bot\travail</cruisesDirectory>
   <outputDirectory>D:/Projets/CONVMED/Donnees/Output</outputDirectory>
-  <idEdmoRespCdi></idEdmoRespCdi>
+  <idEdmoRespCdi>jacky</idEdmoRespCdi>
   <codeEdmoDonnees></codeEdmoDonnees>
   <idEdmoRespDonnees></idEdmoRespDonnees>
   <idEdmoDistDonnees></idEdmoDistDonnees>
   <cdiURL></cdiURL>
-  <cdiMethod></cdiMethod>
+  <cdiMethod>CDIMTH04 - delayed online access</cdiMethod>
   <vocabURL>http://vocab.ndg.nerc.ac.uk/1.1/VocabServerAPI_dl.wsdl</vocabURL>
   <VocabListURL name="L021" value="http://vocab.ndg.nerc.ac.uk/list/L021/current"/>
   <VocabListURL name="L071" value="http://vocab.ndg.nerc.ac.uk/list/L071/current"/>

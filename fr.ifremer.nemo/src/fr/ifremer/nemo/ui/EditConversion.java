@@ -184,9 +184,6 @@ public class EditConversion extends Thread {
 					// on n'écrase pas le fichier
 					choixFichierSortie();
 				} else {
-					// on écrase le fichier
-					java.io.FileInputStream stream = null;
-
 					Utils.messageErreur("");
 					SWTProcess.interrompu = false;
 					try
@@ -201,9 +198,6 @@ public class EditConversion extends Thread {
 				}
 
 			} else {
-				// le fichier n'existe pas, on le cree
-				java.io.FileInputStream stream = null;
-
 				Utils.messageErreur("");
 				SWTProcess.interrompu = false;
 				SurveyMedia.interrompu = false;
@@ -258,9 +252,6 @@ public class EditConversion extends Thread {
 					// on n'écrase pas le fichier
 					choixFichierSortie();
 				} else {
-					// on écrase le fichier
-					java.io.FileInputStream stream = null;
-
 					Utils.messageErreur("");
 					SWTProcess.interrompu = false;
 					try {
@@ -274,9 +265,6 @@ public class EditConversion extends Thread {
 				}
 
 			} else {
-				// le fichier n'existe pas, on le cree
-				java.io.FileInputStream stream = null;
-
 				Utils.messageErreur("");
 				SWTProcess.interrompu = false;
 				SurveyMedia.interrompu = false;

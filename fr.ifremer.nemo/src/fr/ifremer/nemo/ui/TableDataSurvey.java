@@ -372,9 +372,6 @@ public class TableDataSurvey {
 		// 
 		int nbre;
 		ArrayList<TypeSurvey> listeTempo;
-		TypeSurvey typeTempo;
-		Table table, tableTempo;
-
 		nbre = types.size();
 		listeTempo = new ArrayList();
 
@@ -420,10 +417,6 @@ public class TableDataSurvey {
 
 		int nbre;
 		ArrayList<TypeSurvey> listeTempo;
-		TypeSurvey typeTempo;
-		Table table, tableTempo;
-		// TableItem[] items, itemsTempo;
-
 		nbre = types.size();
 		listeTempo = new ArrayList();
 

@@ -15,13 +15,13 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 
+import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
-import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.ui.ViewFile;
 import fr.ifremer.nemo.util.Formatter;
+import fr.ifremer.nemo.util.Messages;
 
 public class CDIResumeWriter {
 

@@ -1,7 +1,6 @@
 package fr.ifremer.nemo.ui;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.swt.widgets.Text;
@@ -77,8 +76,6 @@ public class Regexp {
 			String nomSection) {
 
 		String lign, debu, fi, log;
-		Pattern pattern;
-		Matcher matcher;
 		Boolean ok;
 
 		// raz du message d'erreurs

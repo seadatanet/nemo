@@ -1,0 +1,2018 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.5.0_09" class="java.beans.XMLDecoder"> 
+ <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="61"> 
+  <void index="0"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/9A</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>DUKW</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A six-wheel drive amphibious truck developed during the second World War.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1203552000000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="1"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/62</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>aeroplane</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A fixed-wing self-propelled aircraft.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="2"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/54</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>airship</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A self-propelled container filled with a gas that is lighter than air.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="3"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/96</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>amphibious crawler</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A self-propelled vehicle capable of operation on land or the seabed (e.g. beach crawler)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="4"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/69</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>autogyro</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>An aircraft without wings that obtains its lift from the rotation of overhead blades, but obtains forward populsion from a fixed propellor.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="5"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/3B</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>autonomous surface water vehicle</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A self-propelled vehicle operating on the sea surface with no human occupants.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1163548800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="6"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/25</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>autonomous underwater vehicle</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A free-roving platform operating in the water column with propulsion but no human operator on board (e.g. Autosub, Glider).</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="7"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/13</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>beach/intertidal zone structure</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A structure to which instrumentation may be attached that is either in air or under water depending on the state of the tide and weather conditions.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="8"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/75</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>cetacean</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A mammal that exists within the water column but needing to regularly surface to breathe (i.e. dolphins and whales).</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="9"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/17</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>coastal structure</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A fixed man-made structure permanently linked to land with access to water at all states of the tide to which instrumentation may be attached (e.g. pier)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1156287600000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="10"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/72</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>diver</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A human being with self-contained equipment or surface-connected suit enabling operation within the water column.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="11"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/24</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>drifting manned submersible</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A platform operating in the water column attached to a mothership by an umbilical but with no means of propulsion that has at least one human operator on board (e.g. bathysphere).</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="12"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/44</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>drifting subsurface float</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>An unmanned instrumented platform drifting freely in the water column at a depth governed by its density (e.g. Swallow float)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="13"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/46</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>drifting subsurface profiling float</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>An unmanned instrumented platform drifting freely in the water column that periodically makes vertical traverses through the water column (e.g. Argo float)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="14"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/42</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>drifting surface float</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>An unmanned instrumented platform operating on the surface of the water column often attached to a drogue to track currents rather than winds (e.g. Argos buoy).</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="15"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/76</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>fish</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A free-swimming creature that exists totally within the water column.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="16"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/36</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>fishing vessel</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A platform operating on the surface of the water column whose primary purpose is the commercial harevsting of fish or shellfish but may be engaged in scientific activities such as fish stock surveys or mooring deployments and recoveries.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="17"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/11</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>fixed benthic node</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A collection of oceanographic instruments mounted at a fixed position on the seabed (e.g. POL Monitoring Platform, seabed ADCP)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="18"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/45</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>fixed subsurface vertical profiler</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A platform that periodically makes an automated vertical traverse of the water column at a predetermined fixed location. (e.g. YSI vertical profiler, HOMER CTD)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="19"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/73</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>flightless bird</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A bird that is unable to fly with the ability to exist within the water column (e.g. penguin).</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="20"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/52</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>free-floating balloon</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A container filled with a gas that is lighter than air, which is free to drift in the atmosphere.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="21"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/51</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>free-rising balloon</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A container filled with a gas that is lighter than air, which is constrained to rise vertically at a fixed location.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="22"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/64</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>geostationary orbiting satellite</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A vehicle operating beyond the Earth&apos;s atmosphere without human occupants that orbits the Earth at the same rate as the Earth&apos;s rotation keeping it over a fixed location on the Earth&apos;s surface..</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="23"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/6A</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>glider</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A fixed-wing aircraft with no propulsion.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="24"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/67</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>helicopter</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>An aircraft without wings that obtains its lift from the rotation of overhead blades.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="25"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/9B</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>hovercraft</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A craft capable of moving over water or land on a downwardly-propelled cushion of air.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1203552000000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="26"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/71</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>human</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A human being without specialised equipment operating on land or the surface of the water column.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="27"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/91</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>ice island</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A floating ice sheet detached from the coast.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="28"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/92</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>ice shelf</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A floating ice sheet attached to the coast.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="29"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/6B</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>kite</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>An aerofoil tethered to the ground held aloft by the wind.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="30"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/77</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>land-sea mammals</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A mammal that exists both on land and within the water column. Includes seals, sealions, sea-otters and walruses.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="31"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/14</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>land/onshore structure</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A fixed man-made structure on land to which instrumentation may be attached (e.g. meteorolgical tower)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="32"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/15</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>land/onshore vehicle</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>An instrumented land vehicle (e.g. mobile meteorological station, land crawler)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="33"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/38</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>man-powered boat</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A platform operating on the surface of the water column that is manually propelled and may not be easily removed from the water (e.g. trireme).</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="34"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/3A</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>man-powered small boat</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A platform operating on the surface of the water column that is manually propelled and may be easily removed from the water (e.g. rowing boat, canoe).</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="35"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/66</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>manned spacecraft</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A vehicle operating beyond the Earth&apos;s atmosphere with human occupants.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="36"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/19</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>mesocosm bag</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A large polythene bag containing a water sample suspended in the natural environment so that it shares ambient physical conditions such as temperature and light levels, but is chemically isolated to allow experiments such as fertilisation.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="37"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/41</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>moored surface buoy</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>An unmanned instrumented platform operating on the surface of the water column loosely tethered to the seafloor to maintain a fixed position (e.g. ODAS buoy)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="38"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/39</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>naval vessel</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A platform operating on the surface of the water column in unpredictable locations that is primarily equipped, manned and operated for military purposes.  Includes surface warships of all sizes and logistic support vessels.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="39"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/16</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>offshore structure</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A fixed (for the duration of the measurements) man-made structure away from the coast to which instrumentation may be attached (e.g. oil rig, gas rig or jack-up barge)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1168560000000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="40"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/65</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>orbiting satellite</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A vehicle operating beyond the Earth&apos;s atmosphere without human occupants that orbits the Earth at a different rate to the Earth&apos;s rotation so it moves over the Earth&apos;s surface..</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="41"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/6C</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>parachute</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A fabric sheet designed to slow the descent of an object through the atmosphere.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="42"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/21</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>propelled manned submersible</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A platform operating in the water column that has both self-contained propulsion and at least one human operator on board (e.g. submarine)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="43"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/22</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>propelled unmanned submersible</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A platform operating in the water column attached to a mothership by an umbilical with limited propulsion and no human operator on board (e.g. ROV).</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="44"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/61</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>research aeroplane</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A fixed-wing self-propelled aircraft that is equipped, manned and operated for atmospheric, meteorological or oceanographic research.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="45"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/31</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>research vessel</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A platform of any size operating on the surface of the water column in unpredictable locations that is specifically equipped, manned and operated for scientific, usually oceanographic, research.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="46"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/18</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>river station</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>An instrumented structure in a river upstream of its tidal limit.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1156287600000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="47"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/63</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>rocket</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A rocket is a vehicle, missile or aircraft which obtains thrust by the reaction to the ejection of fast moving exhaust gas from within a rocket engine.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="48"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/68</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>satellite</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A vehicle operating beyond the Earth&apos;s atmosphere without human occupants that orbits the Earth.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="49"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/12</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>sea bed vehicle</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>An instrumented platform that is propelled on wheels or tracks on the seabed (e.g benthic crawler).</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="50"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/74</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>seabird and duck</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A flighted bird that is able to exist on the water column surface and dive into the water column (e.g. cormorants, auks, ducks and gulls).</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="51"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/37</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>self-propelled boat</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A small self-propelled platform operating on the surface of the water column in unpredictable locations that is smaller than a ship, but too large to easily remove from the water.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="52"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/33</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>self-propelled small boat</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A small self-propelled platform operating on the surface of the water column that may be easily removed from the water (e.g. shore-based RIBs, ships&apos; boats).</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="53"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/30</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>ship</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A large platform operating on the surface of the water column. Objective definitions for guidelines: &gt;50m length (EU), &gt;100 foot length (USA), &gt;300 GRT weight (SOLAS). Subjective definition: a ship is a vessel big enough to carry a boat.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="54"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/43</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>subsurface mooring</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A collection of oceanographic instruments attached to wires suspended between anchors on the seabed and buoyant spheres in the water column.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="55"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/53</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>tethered balloon</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A container filled with a gas that is lighter than air, which is tethered at a fixed height and location.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="56"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/23</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>towed unmanned submersible</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A vehicle towed by rigid cable through the water column at fixed or varying depth with no propulsion and no human operator (e.g. Towfish, Scanfish, UOR, SeaSoar)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="57"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/0</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>unknown</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>The correct value is not known to, and not computable by, the creator of this information. However, a correct value probably exists.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="58"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/34</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>vessel at fixed position</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A platform of any size occupying a fixed location on the surface of the water column for prolonged periods collecting scientific (oceanographic and meteorological) data as a primary or secondary mission.  Includes light vessels and weather ships.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="59"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/32</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>vessel of opportunity</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A platform for purpose of commerce of any size operating on the surface of the water column in unpredictable locations that regularly collects scientific (oceanographic and meteorological) data (e.g. an instrumented cargo vessel).</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="60"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L061/6/35</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>vessel of opportunity on fixed route</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A platform repeatedly following a predictable fixed track on the surface of the water column that collects scientific (oceanographic and meteorological) data (e.g. an instrumented ferry).</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1152226800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L061/6</string> 
+    </void> 
+   </object> 
+  </void> 
+ </array> 
+</java> 

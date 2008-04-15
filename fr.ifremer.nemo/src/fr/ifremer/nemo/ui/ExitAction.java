@@ -44,8 +44,6 @@ public class ExitAction extends Action implements ISelectionListener,
 	public void run() {
 
 		Shell s = new Shell();
-		int reponse = 0;
-
 		MessageBox mb = new MessageBox(s, SWT.ICON_QUESTION | SWT.YES | SWT.NO);
 		mb.setMessage(Messages.getString("ExitAction.2")); //$NON-NLS-1$
 		// reponse = mb.open();

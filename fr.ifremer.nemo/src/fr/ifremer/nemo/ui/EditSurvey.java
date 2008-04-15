@@ -1,10 +1,7 @@
 package fr.ifremer.nemo.ui;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -556,7 +553,7 @@ public class EditSurvey {
 
 	public static void ouvertureDescriptionXML() {
 
-		String nomFichierXML, nomXML;
+		String  nomXML;
 		File fich;
 
 		// remplissage du dataModel à partir des valeurs du fichier XML de
@@ -579,7 +576,7 @@ public class EditSurvey {
 			} else {
 
 				fich = new File(nomXML);
-				nomFichierXML = fich.getName();
+
 				Utils.messageErreur("fiche:" + fich);
 				EditSurvey.chargementXML(fich);
 
@@ -672,8 +669,6 @@ public class EditSurvey {
 	public static void majApresWS() {
 
 		Survey survey;
-		String refLite = "", refComplete = "";
-
 		if (ViewFile.dossierCampagne) {
 			survey = DataModel.dirSurvey.getModel();
 		} else {

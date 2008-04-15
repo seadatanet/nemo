@@ -1,0 +1,797 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.5.0_09" class="java.beans.XMLDecoder"> 
+ <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="24"> 
+  <void index="0"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/13</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>aerosol samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device that collects a sample of aerosol (dry particles or liquid droplets) from the atmosphere</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="1"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/24</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>benthos samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A net or sledge dragged across the seabed designed to sample benthic fauna.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="2"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/58</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>continuous air samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device that continuously supplies a flow of air either to an analytical instrument, over a sensor or from which discrete samples may be drawn</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="3"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/31</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>continuous water samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device that continuously supplies a flow of water either to an analytical instrument, over a sensor or from which samples may be drawn</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="4"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/11</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>discrete air samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device that collects a sample of air from the atmosphere and stores it, usually under pressure, for subsequent analysis</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="5"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/30</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>discrete water samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device that collects an in-situ discrete water sample from any depth and returns it to the surface without contamination by the waters through which it passes, such as a water bottle</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="6"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/12</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>fog samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device that condenses a sample of fog from the atmosphere</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="7"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/90</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>manual biota samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A simple tool like a hammer, saw or even just a hand for the collection of biota samples</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="8"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/57</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>manual rock samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A simple tool like a hammer, saw or even just a hand for the collection of rock samples</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="9"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/51</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>mud corers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device designed to collect a sample of mud from between the surface and depths from a metre to 10s of metres with minimal disturbance of the sediment structure</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="10"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/182</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>not applicable</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>There is no appropriate value. To be used in cases where metadata elements cannot be set null due to schema constraints.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="11"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/32</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>particulates samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A system that collects samples of water column particulates such as in-situ high volume filtration systems liks SAPs.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="12"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/23</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>pelagic trawl nets</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A net towed through the water column designed to sample free-swimming nekton or fish.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="13"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/22</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>plankton nets</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A fine-meshed net designed for sampling microzooplankton, mesozooplankton or nekton.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="14"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/21</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>plankton recorders</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device that continuously samples a flow of water, separating and fixing plankton for subsequent identification and counting</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="15"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/14</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>precipitation samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device that collects a sample of precipitation (rain, hail or snow) as it falls</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="16"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/53</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>rock corers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device that drills into rock extracting a cylindrical sample</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="17"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/54</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>rock dredges</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device dragged across the seabed designed to collect loose rock samples.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="18"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/50</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>sediment grabs</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device that collects a sample of surface sediment including manually deployed equipment like a shovel or bucket.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="19"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/52</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>sediment porewater samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device that collects samples of pore water from various horizons below the seabed.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="20"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/55</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>sediment settling tubes</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A specialised water bottle that both collects water samples and provides a settling velocity experiment apparatus.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="21"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/33</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>sediment traps</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A collector of particulates as they sink through the water column</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="22"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/56</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>snow and ice samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device that collects a sample of frozen seawater or accumulated frozen precipitation</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="23"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/999</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>unknown</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>The correct value is not known to and not computable by the creator of this information. However a correct value probably exists.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195516800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+ </array> 
+</java> 

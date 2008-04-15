@@ -1,5 +1,8 @@
 package fr.ifremer.nemo.ui;
 
+import java.text.ParseException;
+
+import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridData;
@@ -13,22 +16,16 @@ import org.eclipse.ui.forms.events.ExpansionAdapter;
 import org.eclipse.ui.forms.events.ExpansionEvent;
 import org.eclipse.ui.forms.widgets.Section;
 
+import fr.ifremer.nemo.util.DateTimeFormat;
+import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Messages;
 
 public class DrawingData {
-
-	private static Group grou;
 
 	public static void sectionDate(String nomSection, String description,
 			Section section, Text ligne, Text debut, Text fin) {
 
 		final Text lign, debu, fi;
-		final Button inject;
-		final String nomSec;
-		final Text manu;
-
-		nomSec = nomSection;
-
 		section.setParent(EditDesc.formEdition);
 
 		section = ViewEdit.toolkitEdition.createSection(EditDesc.formEdition
@@ -60,8 +57,6 @@ public class DrawingData {
 		Group groupe = new Group(sectionClient, SWT.NONE);
 		groupe.setText(Messages.getString("Drawing.7"));
 		groupe.setLayout(gridLayout1);
-		grou = groupe;
-
 		// ligne
 		Label label1 = new Label(groupe, SWT.NULL);
 		label1.setText(Messages.getString("Drawing.10"));
@@ -123,16 +118,10 @@ public class DrawingData {
 	}
 
 	public static void sectionTotal(String nomSection, String description,
-			Section section, Text ligne, Text debut, Text fin) {
+			Section section, Text ligne, Text debut, Text fin,
+			Button buttonTestConversion, Text textTestConversion) {
 
 		final Text lign, debu, fi;
-		final Button inject;
-		final String nomSec;
-		final Text manu;
-
-		nomSec = nomSection;
-		// manu = manuel;
-
 		section.setParent(EditDesc.formEdition);
 
 		section = ViewEdit.toolkitEdition.createSection(EditDesc.formEdition
@@ -164,8 +153,6 @@ public class DrawingData {
 		Group groupe = new Group(sectionClient, SWT.NONE);
 		groupe.setText(Messages.getString("Drawing.7"));
 		groupe.setLayout(gridLayout1);
-		grou = groupe;
-
 		ligne.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// debut
@@ -220,16 +207,56 @@ public class DrawingData {
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeData(section);
 
+		Composite compoTest = new Composite(sectionClient, SWT.NONE);
+		GridLayoutFactory.swtDefaults().numColumns(2).applyTo(compoTest);
+		buttonTestConversion.setParent(compoTest);
+		buttonTestConversion.setText("Test");
+		textTestConversion.setParent(compoTest);
+		textTestConversion.setEnabled(false);
+		
+		buttonTestConversion.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+			public void widgetSelected(
+					org.eclipse.swt.events.SelectionEvent g) {
+
+					EditData.textTotalLigne.setText(String.valueOf(1 + Integer.parseInt(EditDesc.lignesEnteteFichier.getText()) + Integer.parseInt(EditDesc.lignesEnteteStation.getText())) );
+					Utils.test(EditData.textTestDateHeure, ViewFile.styledTextStation, EditData.textTotalLigne, EditData.textTotalDebut, EditData.textTotalFin);
+					System.out.println(EditData.textTestDateHeure.getText());
+				
+				try {
+					DateTimeFormat format = new DateTimeFormat(
+							EditData.comboTotal.getText());
+					
+					
+					
+					Long DateLong = (Long) format
+							.parseObject(EditData.textTestDateHeure.getText());
+					
+					Formatter formatter;
+					
+					formatter = Formatter.getSingleton();
+					
+					EditData.textTestDateHeure.setText(formatter.formatDateTime("yyyy MM dd  hh24mmss", DateLong));
+					
+					
+				} catch (ParseException e) {
+
+					Utils.messageErreurAppend(Messages
+							.getString("Etape.122")); //$NON-NLS-1$
+					EditData.textTestDateHeure.setText(Messages
+							.getString("Etape.120"));
+					EditData.textTestDateHeure.pack();
+				}
+				EditData.textTestDateHeure.pack();
+				EditData.textTestDateHeure.getParent().pack();
+			}
+		});
+
 	}
 
 	public static void sectionHeure(String nomSection, String description,
 			Section section, Text ligne, Text debut, Text fin) {
 
-		final String nomSec;
 		final Text lign, debu, fi;
-		final Button inject;
-
-		nomSec = nomSection;
 		section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
 				| Section.TWISTIE | Section.COMPACT);
@@ -275,8 +302,6 @@ public class DrawingData {
 		Group groupe = new Group(sectionClient, SWT.NONE);
 		groupe.setText(Messages.getString("Drawing.7"));
 		groupe.setLayout(gridLayout1);
-		grou = groupe;
-
 		// ligne
 		Label label1 = new Label(groupe, SWT.NULL);
 		label1.setText(Messages.getString("Drawing.10"));
@@ -336,9 +361,7 @@ public class DrawingData {
 	public static void sectionTypeCourant(Section section, Text code,
 			Text unite, Text conversion, Text debut, Text fin, Text format,
 			Text entree, Text sortie) {
-		final String nomSec;
-		final Text manu;
-		final Text lign, debu, fi;
+		final Text debu, fi;
 
 		// manu = manuel;
 
@@ -348,7 +371,7 @@ public class DrawingData {
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
 				| Section.TWISTIE | Section.COMPACT);
 
-//		System.out.println("section type courant DrawingData");
+		// System.out.println("section type courant DrawingData");
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			public void expansionStateChanged(ExpansionEvent e) {
@@ -394,8 +417,6 @@ public class DrawingData {
 		Group groupe = new Group(sectionClient, SWT.NONE);
 		groupe.setText(Messages.getString("Drawing.7"));
 		groupe.setLayout(gridLayout1);
-		grou = groupe;
-
 		// debut
 		Label label2 = new Label(groupe, SWT.NULL);
 		label2.setText(Messages.getString("Drawing.11"));
@@ -451,8 +472,7 @@ public class DrawingData {
 	public static void sectionTypeAjouter(Section section, Text code,
 			Text unite, Text conversion, Text debut, Text fin, Text format,
 			Text entree, Text sortie) {
-		final String nomSec;
-		final Text manu, debu, lign, fi;
+		final Text debu, fi;
 
 		section.setParent(EditData.formEdition);
 
@@ -460,7 +480,7 @@ public class DrawingData {
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
 				| Section.TWISTIE | Section.COMPACT);
 
-//		System.out.println("section type ajouter DrawingData");
+		// System.out.println("section type ajouter DrawingData");
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			public void expansionStateChanged(ExpansionEvent e) {
@@ -506,8 +526,6 @@ public class DrawingData {
 		Group groupe = new Group(sectionClient, SWT.NONE);
 		groupe.setText(Messages.getString("Drawing.7"));
 		groupe.setLayout(gridLayout1);
-		grou = groupe;
-
 		// debut
 		Label label2 = new Label(groupe, SWT.NULL);
 		label2.setText(Messages.getString("Drawing.11"));
@@ -544,7 +562,7 @@ public class DrawingData {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-//						System.out.println("bouton injection");
+						// System.out.println("bouton injection");
 
 						// le textTempo c'est pour simuler une variable ligne
 						// dont on n'a pas besoin ici!
@@ -562,7 +580,7 @@ public class DrawingData {
 	public static void ajoutSectionDansListeData(Section section) {
 
 		EditData.listeSectionsData.add(section);
-		//System.out.println("ajout section ok");
+		// System.out.println("ajout section ok");
 
 	}
 

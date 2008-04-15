@@ -399,7 +399,6 @@ public class DataModel {
 
 		DataType dataType = new DataType();
 		String code = "";
-		String libelle = "";
 		// si on a ouvert un modèle, on a le code direct !
 		if (DataModel.ouverture) {
 			code = typeCombo;
@@ -408,12 +407,8 @@ public class DataModel {
 			String mots[] = p.split(typeCombo);
 
 			int taille = mots.length;
-			if (taille == 1) {
+			if (taille >= 1) {
 				code = mots[0];
-			}
-			if (taille > 1) {
-				code = mots[0];
-				libelle = mots[1];
 			}
 
 		}
@@ -2300,13 +2295,7 @@ public class DataModel {
 
 			DateTimeFormat format = new DateTimeFormat("MMM dd yyyy");
 			format.toString();
-			Long dateLong = (Long) format.parseObject("JUN 02 2007");
 
-			Formatter formatter = new Formatter();
-			// System.out.println(">>>>>>"
-			// + formatter.formatDateTime("MM/dd/yyyy", dateLong));
-
-			// System.out.println(new Date( dateLong.longValue()));
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(">>>>" + e.getMessage());

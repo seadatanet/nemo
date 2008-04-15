@@ -38,10 +38,7 @@ public class DrawingStation {
 
 		final Text lign, debu, fi;
 		final Button inject;
-		final String nomSec;
 		final Text manu;
-
-		nomSec = nomSection;
 
 		section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
@@ -198,12 +195,10 @@ public class DrawingStation {
 			Text debut, Text fin, Text manuel, Button radio, Button position,
 			Text conversion, Text testConversion, boolean blnManuel) {
 
-		final Text lign, debu, fi, conversio, testConversio;
+		final Text lign, debu, fi;
 		final Button inject;
-		final String nomSec;
 		final Text manu;
 
-		nomSec = nomSection;
 
 		section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
@@ -401,11 +396,9 @@ public class DrawingStation {
 			Text fin, Button radio, Button position, boolean blnManuel) {
 
 		// le ppar radio est le pointeur du bouton "incremente"
-		final String nomSec;
 		final Text num, lign, debu, fi, test;
 		final Button inject, pos;
 
-		nomSec = nomSection;
 
 		section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
@@ -661,13 +654,10 @@ public class DrawingStation {
 			Text fin1, Text ligne2, Text debut2, Text fin2, Text zone1,
 			Text zone2, Button radio, Button position, boolean blnManuel) {
 
-		final String nomSec;
-		final Text lign, debu, fi;
 		final Button inject1, inject2;
-		final Text manu, lign1, lign2, fi1, fi2, debu1, debu2, zon1, zon2;
+		final Text  lign1, lign2, fi1, fi2, debu1, debu2, zon1, zon2;
 
-		nomSec = nomSection;
-		// manu = manuel;
+
 
 		section.setParent(EditStation.formEdition);
 
@@ -909,13 +899,9 @@ public class DrawingStation {
 			Text fin1, Text ligne2, Text debut2, Text fin2, Text zone1,
 			Text zone2, Button radio, Button position, boolean blnManuel) {
 
-		final String nomSec;
-		final Text lign, debu, fi;
 		final Button inject1, inject2;
-		final Text manu, lign1, lign2, fi1, fi2, debu1, debu2, zon1, zon2;
+		final Text  lign1, lign2, fi1, fi2, debu1, debu2, zon1, zon2;
 
-		nomSec = nomSection;
-		// manu = manuel;
 
 		section.setParent(EditStation.formEdition);
 
@@ -1205,8 +1191,6 @@ public class DrawingStation {
 	public static void sectionFlagQC(Section section, String nomSection,
 			String description, Text text) {
 
-		final Text zone;
-		zone = text;
 
 		section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
@@ -1245,11 +1229,9 @@ public class DrawingStation {
 		// ppar manuel = zone de commentaire
 		final Text lign, debu, fi;
 		final Button inject, var;
-		final String nomSec;
 		final Text manu;
 
-		nomSec = nomSection;
-		// manu = manuel;
+
 
 		section.setParent(EditDesc.formEdition);
 
@@ -1482,11 +1464,10 @@ public class DrawingStation {
 		// virer le second bouton radio !
 		// ajouter combo de format heure
 
-		final String nomSec;
+
 		final Text lign, debu, fi, test;
 		final Button inject;
-		
-		nomSec = nomSection;
+
 		section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
 				| Section.TWISTIE | Section.COMPACT);
@@ -1726,11 +1707,8 @@ public class DrawingStation {
 
 		final Text lign, debu, fi, test;
 		final Button inject;
-		final String nomSec;
-		final Text manu;
 
-		nomSec = nomSection;
-		// manu = manuel;
+
 
 		section.setParent(EditDesc.formEdition);
 
@@ -1971,13 +1949,11 @@ public class DrawingStation {
 			String nomSection, String description, Section section, Text ligne,
 			Text debut, Text fin, Text manuel, Button radio, Combo combo,
 			Button position, Button buttonVar, boolean blnManuel, boolean blnLatitude) {
-		final String nomSec;
 		final Text manu;
 		final Text lign, debu, fi, test;
 		final Button inject, var;
 		final boolean latitude;
 
-		nomSec = nomSection;
 		manu = manuel;
 
 		section.setParent(EditDesc.formEdition);
@@ -2274,13 +2250,12 @@ public class DrawingStation {
 	public static void sectionManuelLigneDebutFinInjectLatLongFin(
 			String nomSection, String description, Section section, Combo combo, Text ligne,
 			Text debut, Text fin, Text manuel, Button radio, Button position, Button buttonVar, boolean blnManuel, boolean blnLatitude) {
-		final String nomSec;
+
 		final Text manu;
 		final Text lign, debu, fi, test;
 		final Button inject, rad, var;
 		final boolean latitude;
 
-		nomSec = nomSection;
 		manu = manuel;
 
 		section.setParent(EditDesc.formEdition);
@@ -2542,9 +2517,9 @@ public class DrawingStation {
 		if (DataModel.ouverture) {
 			PropertyModel propertyModel;
 			if (latitude) {
-				propertyModel = propertyModel = DataModel.stationModel_modele.getTimeSeriesModel().propertiesAt("endLatitude");
+				propertyModel = DataModel.stationModel_modele.getTimeSeriesModel().propertiesAt("endLatitude");
 			} else {
-				propertyModel = propertyModel = DataModel.stationModel_modele.getTimeSeriesModel().propertiesAt("endLongitude");
+				propertyModel = DataModel.stationModel_modele.getTimeSeriesModel().propertiesAt("endLongitude");
 			}
 			
 			if (!propertyModel.isUserProvided()) {

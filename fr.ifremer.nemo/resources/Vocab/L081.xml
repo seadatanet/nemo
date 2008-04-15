@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.5.0_09" class="java.beans.XMLDecoder"> 
+ <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="11"> 
+  <void index="0"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L081/1/SR</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>academic</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>academic</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>The data are freely available for research and education purposes.  Usage acknowledgement is usually expected.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1165276800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L081/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="1"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L081/1/CC</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>collection cost charge</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>collection_charge</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A charge is made related to the cost of collecting the data.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1165276800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L081/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="2"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L081/1/FE</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>commercial charge</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>commercial_charge</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A charge significantly exceeding the cost of data collection and delivery is made for usage of the data.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1165276800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L081/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="3"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L081/1/NC</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>distribution cost charge</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>distribution_charge</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A charge is made to cover the costs of delivering data to the user.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1165276800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L081/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="4"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L081/1/LI</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>licence</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>licence</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Conditions of supply and usage of the data are specified in a formal agreement.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1165276800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L081/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="5"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L081/1/MO</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>moratorium</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>moratorium</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Data are initially restricted, but the access condition relaxes to academic or unrestricted once a specified period of time after an event (such as collection, publication, completion of QC procedures or project cessation) has elapsed.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1165276800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L081/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="6"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L081/1/NA</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>no access</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>none</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Access to the data cannot be negotiated.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1165276800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L081/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="7"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L081/1/OG</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>organisation</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>organisation</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>The data are unrestricted to members of an organisation or a virtual organisation (such as project or cruise participants) but restricted to anybody else.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1165276800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L081/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="8"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L081/1/RS</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>restricted</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>restricted</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>The data are witheld from general circulation and disclosure but access may be obtained on a case-by-case basis through negotiation.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1165276800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L081/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="9"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L081/1/UK</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>unknown</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>unknown</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>The correct value is not known to and not computable by the creator of this information. However a correct value probably exists.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1165276800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L081/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="10"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L081/1/UN</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>unrestricted</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>unrestricted</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>The data are freely available to anybody and may be used for any purpose. Usage acknowledgement may be required.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1165276800000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L081/1</string> 
+    </void> 
+   </object> 
+  </void> 
+ </array> 
+</java> 

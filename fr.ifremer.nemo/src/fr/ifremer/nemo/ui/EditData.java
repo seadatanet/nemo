@@ -66,6 +66,10 @@ public class EditData {
 	public static ScrolledForm formEdition;
 
 	public static Combo comboHeure, comboDate, comboTotal;
+	
+	public static Button buttonTestDateHeure;
+	
+	public static Text textTestDateHeure;
 
 	// //////////////////////////////////////////
 
@@ -134,9 +138,10 @@ public class EditData {
 			// on cree les sections puis on les cache dans un autre shell et on
 			// les re-affiche only si bouton coché
 
+
 			DrawingData
 					.sectionTotal(
-							Messages.getString("EditData.6"), Messages.getString("EditData.7"), sectionTotal, textTotalLigne, textTotalDebut, textTotalFin); //$NON-NLS-1$ //$NON-NLS-2$
+							Messages.getString("EditData.6"), Messages.getString("EditData.7"), sectionTotal, textTotalLigne, textTotalDebut, textTotalFin, buttonTestDateHeure,textTestDateHeure ); //$NON-NLS-1$ //$NON-NLS-2$
 
 			buttonFreqEchant.setSelection(false);
 			buttonLigneDonnees.setSelection(true);
@@ -232,8 +237,6 @@ public class EditData {
 							org.eclipse.swt.events.SelectionEvent e) {
 
 						int i;
-
-						Shell s = new Shell();
 
 						// System.out.println("expand ? = " + expand);
 						for (i = 0; i <= EditData.listeSectionsData.size() - 1; i++) {
@@ -522,6 +525,8 @@ public class EditData {
 
 		textTempo = new Text(shell, SWT.BORDER);
 		listeTextData.add(textTempo);
+		
+		textTestDateHeure = new Text(shell, SWT.BORDER);
 
 		// remplissage de la liste des textes et ajout listeners
 		ajoutModifyListenerText(listeTextData);
@@ -539,7 +544,8 @@ public class EditData {
 		buttonRAZ = new Button(shell, SWT.NONE);
 		buttonLigneDonnees = new Button(shell, SWT.RADIO);
 		buttonFreqEchant = new Button(shell, SWT.RADIO);
-
+		
+		buttonTestDateHeure = new Button(shell, SWT.PUSH);
 	}
 
 	public static void initListeType() {

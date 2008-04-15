@@ -1,7 +1,7 @@
 package com.ago.io;
 
-import java.io.RandomAccessFile;
 import java.io.File;
+import java.io.RandomAccessFile;
 
 /**
  * PositionableFileInputStream.java

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.5.0_09" class="java.beans.XMLDecoder"> 
+ <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="3"> 
+  <void index="0"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L021/1/003</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>curve</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Bounded, 1-dimensional geometric primitive, representing the continuous image of a line</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1198022400000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L021/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="1"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L021/1/004</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>point</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Zero-dimensional geometric primitive, representing a position but not having an extent</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1198022400000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L021/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="2"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L021/1/006</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>surface</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Bounded, connected 2-dimensional geometric primitive, representing the continuous image of a region of a plane</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1198022400000</long> 
+       </object> 
+      </void> 
+      <void property="timeZone"> 
+       <void property="ID"> 
+        <string>GMT</string> 
+       </void> 
+       <void property="rawOffset"> 
+        <int>0</int> 
+       </void> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L021/1</string> 
+    </void> 
+   </object> 
+  </void> 
+ </array> 
+</java> 

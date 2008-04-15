@@ -218,8 +218,6 @@ public class DrawingBack {
 					}
 				});
 
-		// combo list
-		Combo combo = new Combo(section, SWT.READ_ONLY);
 
 		// saisie manuelle
 		manuel = new Text(sectionClient, SWT.BORDER);
@@ -432,12 +430,9 @@ public class DrawingBack {
 		// creation d'une section simple avec 1 label description et une zone de
 		// texte
 
-		final String nomSec;
 		final ScrolledForm forme;
 
 		forme = form;
-		nomSec = nomSection;
-
 		section.setParent(form);
 		section = ViewEdit.toolkitEdition.createSection(form.getBody(),
 				Section.DESCRIPTION | Section.TITLE_BAR | Section.TWISTIE
@@ -476,13 +471,10 @@ public class DrawingBack {
 		// creation d'une section simple avec 1 label description et une zone de
 		// texte
 
-		final String nomSec;
 		final Text manu;
 		final ScrolledForm forme;
 
 		forme = form;
-		nomSec = nomSection;
-
 		manu = manuel;
 
 		section.setParent(form);
@@ -543,13 +535,10 @@ public class DrawingBack {
 		// creation d'une section simple avec 1 label description et une zone de
 		// texte
 
-		final String nomSec;
 		final Text manu;
 		final ScrolledForm forme;
 
 		forme = form;
-		nomSec = nomSection;
-
 		manu = manuel;
 
 		section.setParent(form);

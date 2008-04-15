@@ -282,8 +282,6 @@ public class TableData {
 
 		// ajouter des listeners sur les menu items ^^
 
-		final MenuItem item = itemInject;
-
 		itemInject.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				// System.out.println("injection debut/fin");
@@ -376,10 +374,6 @@ public class TableData {
 	public static void razTableData() {
 		// effacement de tous les items de la table
 
-		Table table;
-
-		table = ViewFile.tableData;
-
 		ViewFile.tableData.dispose();
 
 	}
@@ -407,9 +401,6 @@ public class TableData {
 		Utils.messageErreur("");
 		int nbre;
 		ArrayList<TypeData> listeTempo;
-		TypeData typeTempo;
-		Table table, tableTempo;
-
 		nbre = types.size();
 
 		// si l'indice est 0, on ne fait rien
@@ -463,10 +454,6 @@ public class TableData {
 
 		int nbre;
 		ArrayList<TypeData> listeTempo;
-		TypeData typeTempo;
-		Table table, tableTempo;
-		// TableItem[] items, itemsTempo;
-
 		nbre = types.size();
 
 		// verif si c'est PRES

@@ -5,7 +5,6 @@ import java.beans.XMLEncoder;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -24,8 +23,6 @@ import fr.ifremer.nemo.ws.WSShip;
 import fr.ifremer.nemo.ws.WSSurveyDescription;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 import fr.ifremer.nemo.wsVocab.vocab.holders.CodeTableRecordTypeArrayHolder;
-import fr.ifremer.nemo.wsVocab.vocab_pkg.VocabLocator;
-import fr.ifremer.nemo.wsVocab.vocab_pkg.VocabPortType;
 import fr.ifremer.nemo.wsVocab.vocab_pkg.VocabSoapBindingStub;
 
 /**
@@ -1851,7 +1848,6 @@ public class NemoLists implements Cloneable {
 		FileOutputStream stream = null;
 		XMLEncoder encoder = null;
 		try { 
-			int j;
 			NemoWS service = new NemoWSServiceLocator()
 					.getNEMO(new java.net.URL(Configuration.getSingleton()
 							.getNemoWebServiceURL()));

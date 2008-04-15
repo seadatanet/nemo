@@ -47,15 +47,14 @@ public class Utils {
 	public static void insertTextFich(String fich, StyledText zone, boolean raz)
 			throws IOException {
 
-		int nbreLignes, tailleLigne, tailleMax, nbreRegle, i, j, k, tmp, cumul, indexMax;
-		long tailleLigneOctets, tailleOctets, tailleOctetsTot;
+		int nbreLignes, tailleLigne, i, cumul, indexMax;
+		long tailleOctets, tailleOctetsTot;
 		String ligne;
 
 		tailleLigne = 0;
-		tailleMax = 0;
 		texteBrut = ""; //$NON-NLS-1$
 		texteFinal = ""; //$NON-NLS-1$
-		tailleOctets = tailleOctetsTot = tailleLigneOctets = 0;
+		tailleOctets = tailleOctetsTot = 0;
 		nbreLignes = 0;
 
 		lignesBrutes = new ArrayList<String>();
@@ -1096,7 +1095,6 @@ public class Utils {
 		
 		Arrays.sort(subsubfiles);
 
-		int nbre2 = subsubfiles.length;
 		String nom2 = subsubfiles[0].getName();
 
 		// verif sur l'extension de tous les fichiers du dossier
