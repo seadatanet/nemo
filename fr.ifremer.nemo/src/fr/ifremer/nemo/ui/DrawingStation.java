@@ -294,10 +294,6 @@ public class DrawingStation {
 		// listener zone de test
 		testConversion
 				.addMouseListener(new org.eclipse.swt.events.MouseListener() {
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent g) {
-
-					}
 
 					public void mouseDoubleClick(MouseEvent e) {
 						// 
@@ -1572,10 +1568,6 @@ public class DrawingStation {
 		// listener zone de test
 		EditStation.textTestConvHeure
 				.addMouseListener(new org.eclipse.swt.events.MouseListener() {
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent g) {
-
-					}
 
 					public void mouseDoubleClick(MouseEvent e) {
 
@@ -1818,10 +1810,6 @@ public class DrawingStation {
 		// listener zone de test
 		EditStation.textTestConvDate
 				.addMouseListener(new org.eclipse.swt.events.MouseListener() {
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent g) {
-
-					}
 
 					public void mouseDoubleClick(MouseEvent e) {
 

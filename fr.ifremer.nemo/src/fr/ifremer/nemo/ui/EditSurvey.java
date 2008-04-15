@@ -29,7 +29,6 @@ import org.xml.sax.SAXException;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.DataType;
 import fr.ifremer.nemo.domain.Survey;
-import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSDataType;
 
@@ -252,8 +251,6 @@ public class EditSurvey {
 						// raz de la valeur manuelle
 						int i;
 
-						Shell s = new Shell();
-
 						for (i = 0; i <= EditSurvey.listeSectionsSurvey.size() - 1; i++) {
 
 							if (expand == 0) {
@@ -292,8 +289,6 @@ public class EditSurvey {
 
 						// raz de la valeur manuelle
 						int i;
-
-						Shell s = new Shell();
 
 						for (i = 0; i <= EditSurvey.listeSectionsSurvey.size() - 1; i++) {
 
@@ -694,8 +689,6 @@ public class EditSurvey {
 			EditSurvey.textNomNavire.setText(survey.getShipName());
 		}
 
-		// Localisation
-		Formatter formatter = new Formatter();
 
 		try {
 			SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");

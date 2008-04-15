@@ -384,8 +384,6 @@ public class Drawing {
 		Label label2 = new Label(groupe, SWT.NULL);
 		label2.setText(Messages.getString("Drawing.11"));
 
-		Boolean tmp = debut.setParent(groupe);
-//		System.out.println("parent ?====> " + tmp);
 		EditDesc.debutNbreMesures.setText("test");
 
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -783,8 +781,6 @@ public class Drawing {
 		Label label2 = new Label(groupe, SWT.NULL);
 		label2.setText(Messages.getString("Drawing.11"));
 
-		Boolean tmp = debut.setParent(groupe);
-//		System.out.println("parent ?====> " + tmp);
 		EditDesc.debutNbreMesures.setText("test");
 
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -1095,9 +1091,6 @@ public class Drawing {
 			ArrayList<String> listeNoms, String descriptionSection,
 			Combo confidentialite) {
 
-		int nbre;
-		nbre = listeText.size();
-//		System.out.println("=================ok1===========<<<" + nbre);
 
 		// affichage section
 		section.setParent(ViewEdit.formEdition);
@@ -1197,9 +1190,6 @@ public class Drawing {
 	public static void sectionTypeDonnees(Section section, String nomSection,
 			ArrayList<Text> listeText, ArrayList<String> listeNoms,
 			String descriptionSection, List liste) {
-
-		int nbre;
-		nbre = listeText.size();
 
 		// affichage section
 		section.setParent(ViewEdit.formEdition);

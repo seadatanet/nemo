@@ -2,13 +2,8 @@ package fr.ifremer.nemo.ui;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.Calendar;
 import java.util.TreeSet;
 
-import javax.xml.rpc.holders.BooleanHolder;
-
-import org.apache.axis.client.Service;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
@@ -33,12 +28,9 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.part.ViewPart;
 
 import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.ns_ws_edmo.Edmo_webserviceLocator;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
-import fr.ifremer.nemo.wsVocab.vocab.holders.CodeTableRecordTypeArrayHolder;
-import fr.ifremer.nemo.wsVocab.vocab_pkg.VocabSoapBindingStub;
 
 public class ViewFile extends ViewPart {
 

@@ -15,10 +15,8 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
-import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.nemo.ws.WSDataType;
 
 public class EditStation {
 	// fonctions de remplissage de la zone d'édition pour les campagnes

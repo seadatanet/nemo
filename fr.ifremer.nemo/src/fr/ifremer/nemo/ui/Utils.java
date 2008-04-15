@@ -47,21 +47,15 @@ public class Utils {
 	public static void insertTextFich(String fich, StyledText zone, boolean raz)
 			throws IOException {
 
-		int nbreLignes, tailleLigne, i, cumul, indexMax;
-		long tailleOctets, tailleOctetsTot;
+		int nbreLignes,  i, cumul, indexMax;
 		String ligne;
 
-		tailleLigne = 0;
 		texteBrut = ""; //$NON-NLS-1$
 		texteFinal = ""; //$NON-NLS-1$
-		tailleOctets = tailleOctetsTot = 0;
 		nbreLignes = 0;
 
 		lignesBrutes = new ArrayList<String>();
 		stringBuffer = new StringBuffer();
-
-		File objFich = new File(fich);
-		tailleOctetsTot = objFich.length();
 
 		// lecture et concaténation
 		BufferedReader entree = new BufferedReader(new FileReader(fich));
@@ -70,7 +64,6 @@ public class Utils {
 			ligne = entree.readLine();
 
 			if (ligne != null) {
-				tailleLigne = ligne.length();
 
 				lignesBrutes.add(ligne);
 				stringBuffer.append(ligne);
@@ -1017,7 +1010,7 @@ public class Utils {
 		}
 
 		for (int i = 0; i < nbre; i++) {
-			Pattern p1 = Pattern.compile("[.]");
+
 			String mots1[] = p.split(subfiles[i].getName());
 			String ext1;
 			if (mots1.length == 1) {
@@ -1075,7 +1068,7 @@ public class Utils {
 		}
 
 		for (int i = 0; i < nbre; i++) {
-			Pattern p1 = Pattern.compile("[.]");
+
 			String mots1[] = p.split(subfiles[i].getName());
 			String ext1;
 			if (mots1.length == 1) {
@@ -1107,7 +1100,7 @@ public class Utils {
 		}
 
 		for (int i = 0; i < nbre; i++) {
-			Pattern p1 = Pattern.compile("[.]");
+
 			String mots1[] = p.split(subsubfiles[i].getName());
 			String ext1;
 			if (mots1.length == 1) {
@@ -1222,7 +1215,7 @@ public class Utils {
 			configuration = Configuration.getSingleton();
 		} else {
 
-			configuration.releaseSingleton();
+			Configuration.releaseSingleton();
 			configuration = Configuration.getSingleton();
 		}
 

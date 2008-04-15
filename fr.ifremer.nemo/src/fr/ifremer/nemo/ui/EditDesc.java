@@ -494,7 +494,6 @@ public class EditDesc {
 
 	public static void initCombos() {
 
-		Shell shell = new Shell();
 //		FAE 33
 //		comboIndicRuptureDonnees = new Combo(shell, SWT.NONE);
 

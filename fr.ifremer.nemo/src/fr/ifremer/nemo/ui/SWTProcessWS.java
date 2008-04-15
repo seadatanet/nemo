@@ -30,8 +30,6 @@ public class SWTProcessWS implements IRunnableWithProgress {
 
 	public static Shell shell;
 
-	private static final int NB_ITERATION = 100;
-
 	public static ProgressNotification notifier;
 
 	public static Survey survey;

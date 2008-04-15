@@ -37,9 +37,6 @@ public class EditData {
 			textTypeAjouterEntree, textTypeAjouterSortie,
 			textTypeAjouterFormat;
 
-	public static Text textHeureLigne, textHeureDebut, textHeureFin,
-			textDateLigne, textDateDebut, textDateFin, textHeureConversion,
-			textHeureTest;
 
 	public static Label labelTypeCourantCode, labelTypeCourantUnite,
 			labelTypeCourantConversion, labelTypeCourantDebut,
@@ -112,9 +109,6 @@ public class EditData {
 		// init de la arrayList des sections
 		listeSectionsData = new ArrayList<Section>();
 		listeSectionsNoms = new ArrayList<String>();
-
-		ArrayList<Text> listeText = new ArrayList<Text>();
-		ArrayList<String> listeNoms = new ArrayList<String>();
 
 		// boutons collapse all / expand all
 		// buttonExpand.setParent(ViewEdit.formEdition.getBody());
@@ -195,8 +189,6 @@ public class EditData {
 
 						// raz de la valeur manuelle
 						int i;
-
-						Shell s = new Shell();
 
 						// System.out.println("expand ? = " + expand);
 						for (i = 0; i <= EditData.listeSectionsData.size() - 1; i++) {
@@ -322,8 +314,6 @@ public class EditData {
 	public static void test() {
 		int i;
 
-		Shell s = new Shell();
-
 		for (i = 0; i <= EditData.listeSectionsData.size() - 1; i++) {
 
 			EditData.listeSectionsData.get(i).setEnabled(false); // Parent(s);
@@ -336,8 +326,6 @@ public class EditData {
 
 	public static void test2() {
 		int i;
-
-		Shell s = new Shell();
 
 		for (i = 0; i <= EditData.listeSectionsData.size() - 1; i++) {
 
@@ -499,23 +487,7 @@ public class EditData {
 		textTypeAjouterUnite = new Text(shell, SWT.BORDER);
 		listeTextData.add(textTypeAjouterUnite);
 
-		textHeureLigne = new Text(shell, SWT.BORDER);
-		listeTextData.add(textHeureLigne);
-		textHeureDebut = new Text(shell, SWT.BORDER);
-		listeTextData.add(textHeureDebut);
-		textHeureFin = new Text(shell, SWT.BORDER);
-		listeTextData.add(textHeureFin);
-		textHeureConversion = new Text(shell, SWT.BORDER);
-		listeTextData.add(textHeureConversion);
-		textHeureTest = new Text(shell, SWT.BORDER);
-		listeTextData.add(textHeureTest);
 
-		textDateLigne = new Text(shell, SWT.BORDER);
-		listeTextData.add(textDateLigne);
-		textDateDebut = new Text(shell, SWT.BORDER);
-		listeTextData.add(textDateDebut);
-		textDateFin = new Text(shell, SWT.BORDER);
-		listeTextData.add(textDateFin);
 		textTotalLigne = new Text(shell, SWT.BORDER);
 		listeTextData.add(textTotalLigne);
 		textTotalDebut = new Text(shell, SWT.BORDER);

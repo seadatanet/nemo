@@ -140,14 +140,6 @@ public class TableDataSurvey {
 				// System.out.println("===> "+item.getText());
 				if (item == null)
 					return;
-				for (int i = 0; i < table.getColumnCount(); i++) {
-					Rectangle rect = item.getBounds(i);
-					// System.out.println("calcul num ligne===> "+i);
-					if (rect.contains(pt)) {
-						int index = table.indexOf(item);
-						// System.out.println("Elément " + index + "-" + i);
-					}
-				}
 
 				// édition directe de l'élément sélectionné
 
