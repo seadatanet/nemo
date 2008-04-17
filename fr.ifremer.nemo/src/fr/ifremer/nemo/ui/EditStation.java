@@ -209,6 +209,7 @@ public class EditStation {
 			DrawingStation.sectionTypeDonnees(sectionTypeDonnees, Messages
 					.getString("EditStation.0"));
 		}
+		textRefStationNumero.setText("1");
 
 		// section historique acquisition
 		blnManuel = true;

@@ -110,11 +110,12 @@ public class Utils {
 		ViewFile.checkBoxTempo.setSelection(false);
 
 		// RAZ global si réouverture fichier en cours de processus
-		Utils.razGlobal();
 
 		EditDesc.nomNemo();
 		
 		if (raz) {
+			Utils.razGlobal();
+			
 			DataModel.ouverture = false;
 			
 			// reset de l'étape de conversion

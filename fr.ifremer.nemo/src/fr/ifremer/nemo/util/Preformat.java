@@ -344,7 +344,7 @@ public class Preformat {
 		// d'édition de
 		// paramètres
 //		Utils.razGlobal();
- 		EditDesc.affichageEdition();
+// 		EditDesc.affichageEdition();
 
 //		// remplissage de l'IHM par le modèle chargé ?
 //		if (DataModel.ouverture) {
