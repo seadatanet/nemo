@@ -1298,7 +1298,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		String[] header = null;
 		try {
 			station = (Station) _model.clone();
-			if (_metaInData) {
+			if (isMetaInData()) {
 				consumeHeader(a_Reader);
 				
 				convertParameters(a_Reader, station, isRefDateBased, a_RefDate,
@@ -1402,7 +1402,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 				a_Notifier.progress(line.length());
 				
-				if (index == 0 && _metaInData) {
+				if (index == 0 && isMetaInData()) {
 					String[] header = new String[] { line };
 					if (isIncrementRef()) {
 						a_Station.setReference(Long.toString(_ref++));

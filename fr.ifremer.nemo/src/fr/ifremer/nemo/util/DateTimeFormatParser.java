@@ -52,6 +52,10 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 	static protected final String XYEAR = "xYear".intern();
 
 	static protected final String YEAR = "YEAR".intern();
+	
+	static protected final String YEAR19 = "YEAR19".intern();
+	
+	static protected final String XYEAR19 = "xYear19".intern();
 
 	public DateTimeFormatParser() {
 		super();
@@ -103,7 +107,7 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 	 * @exception java.text.ParseException
 	 */
 	public boolean date() throws ParseException {
-		if (year()) {
+		if (year() || year19()) {
 			characters();
 			if (month()) {
 				characters();
@@ -127,13 +131,13 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 			characters();
 			if (month()) {
 				characters();
-				if (year()) {
+				if (year() || year19()) {
 					characters();
 					return (time() || nothing());
 				} else {
 					throw new ParseException("Format de l'année manquant", mark);
 				}
-			} else if (year()) {
+			} else if (year() || year19()) {
 				characters();
 				if (month()) {
 					characters();
@@ -148,13 +152,13 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 			characters();
 			if (day()) {
 				characters();
-				if (year()) {
+				if (year() || year19()) {
 					characters();
 					return (time() || nothing());
 				} else {
 					throw new ParseException("Format de l'année manquant", mark);
 				}
-			} else if (year()) {
+			} else if (year() || year19()) {
 				characters();
 				if (day()) {
 					return (time() || nothing());
@@ -314,15 +318,21 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 
 		typeTable[(int) '.'] = DOT;
 		typeTable[(int) 'y'] = XYEAR;
-		typeTable[(int) 'Y'] = XYEAR;		
+		typeTable[(int) 'Y'] = XYEAR;
+		typeTable[(int) 'r'] = XYEAR19;
+		typeTable[(int) 'R'] = XYEAR19;
 		typeTable[(int) 'M'] = XMONTH;
 		typeTable[(int) 'd'] = XDAY;
 		typeTable[(int) 'D'] = XDAY;
 		typeTable[(int) 'h'] = XHOUR;
-		typeTable[(int) 'H'] = XHOURDEC;
+		typeTable[(int) 'H'] = XHOUR;
+		typeTable[(int) 'c'] = XHOURDEC;
+		typeTable[(int) 'C'] = XHOURDEC;
 		typeTable[(int) 'm'] = XMINUTE;
 		typeTable[(int) 's'] = XSECOND;
-		typeTable[(int) 'S'] = XSECONDD;
+		typeTable[(int) 'S'] = XSECOND;
+		typeTable[(int) 't'] = XSECONDD;
+		typeTable[(int) 'T'] = XSECONDD;
 		typeTable[(int) ' '] = XLETTER;
 		typeTable[(int) 'A'] = XAMPM;
 		typeTable[(int) 'P'] = XAMPM;
@@ -430,7 +440,7 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 	public boolean time() throws ParseException {
 		if (hours12()) {
 			characters();
-			if (minutes()) {
+			if (minutes() || hoursDec()) {
 				characters();
 				if (seconds()) {
 					characters();
@@ -457,7 +467,7 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 			}
 		} else if (hours24()) {			
 			characters();
-			if (minutes()) {
+			if (minutes() || hoursDec()) {
 				characters();
 				return (seconds() || nothing());
 			}  else {
@@ -469,6 +479,48 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 			return true;
 		}
 		return false;
+		
+//		if (hours12()) {
+//			characters();
+//			if (minutes()) {
+//				characters();
+//				if (seconds()) {
+//					characters();
+//					if (amPmMarker()) {
+//						return true;
+//					} else {
+//						throw new ParseException("Marker AM/PM manquant", mark);
+//					}
+//				} else {
+//					characters();
+//					if (amPmMarker()) {
+//						return true;
+//					} else {
+//						throw new ParseException("Marker AM/PM manquant", mark);
+//					}
+//				}
+//			} else {
+//				characters();
+//				if (amPmMarker()) {
+//					return true;
+//				} else {
+//					throw new ParseException("Marker AM/PM manquant", mark);
+//				}
+//			}
+//		} else if (hours24()) {			
+//			characters();
+//			if (minutes()) {
+//				characters();
+//				return (seconds() || nothing());
+//			}  else {
+//				return characters();
+//			}
+//		} else if (hoursDec()) {
+//			return true;
+//		} else if (secondsD()) {
+//			return true;
+//		}
+//		return false;
 	}
 
 	/**
@@ -551,24 +603,34 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 	public void xHourDec() throws ParseException {
 		StringBuffer buff = new StringBuffer();
 		tokenType = HOURSDEC;
-		buff.append('H');
+		buff.append('c');
 		step();
 		while (hereChar > 0 && (typeTable[hereChar] == XHOURDEC)) {
-			buff.append('H');
+			buff.append('c');
 			step();			
-		}
-		if (typeTable[hereChar] == XLETTER){
-			buff.append(':');
-			step();
-		}
-			
-		
-		while (hereChar > 0 && (typeTable[hereChar] == XHOUR)) {
-			buff.append('h');
-			step();
 		}
 		
 		token = buff.toString();
+		
+//		StringBuffer buff = new StringBuffer();
+//		tokenType = HOURSDEC;
+//		buff.append('h');
+//		step();
+//		while (hereChar > 0 && (typeTable[hereChar] == XHOURDEC)) {
+//			buff.append('h');
+//			step();			
+//		}
+//		if (typeTable[hereChar] == XLETTER){
+//			buff.append(':');
+//			step();
+//		}
+//			
+//		while (hereChar > 0 && (typeTable[hereChar] == XHOUR)) {
+//			buff.append('c');
+//			step();
+//		}
+//		
+//		token = buff.toString();
 	}
 
 	/**
@@ -650,6 +712,22 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 		}
 		token = buff.toString();
 	}
+	
+	/**
+	 * 
+	 * @exception java.text.ParseException
+	 */
+	public void xYear19() throws ParseException {
+		StringBuffer buff = new StringBuffer();
+		tokenType = YEAR19;
+		buff.append('r');
+		step();
+		while (hereChar > 0 && (typeTable[hereChar] == XYEAR19)) {
+			buff.append('r');
+			step();
+		}
+		token = buff.toString();
+	}
 
 	/**
 	 * 
@@ -659,6 +737,20 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 	public boolean year() throws ParseException {
 		if (peekForType(YEAR)) {
 			_stack.add(new ParseElement(ParseElementType.YEAR, (String) _stack
+					.pop()));
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * 
+	 * @return boolean
+	 * @exception ParseException
+	 */
+	public boolean year19() throws ParseException {
+		if (peekForType(YEAR19)) {
+			_stack.add(new ParseElement(ParseElementType.YEAR19, (String) _stack
 					.pop()));
 			return true;
 		}

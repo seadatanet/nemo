@@ -244,6 +244,18 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 				toAppendTo.append(format.format(year));
 				break;
 			}
+			
+			case YEAR19: {
+				format = new DecimalFormat(_elements[i]._element.replace('r',
+						'0'));
+				int year = cal.get(Calendar.YEAR);
+				if (_elements[i]._element.length() <= 2) {
+					year -= 1900;
+				}
+				toAppendTo.append(format.format(year));
+				break;
+			}
+			
 			case MONTH: {
 				format = new DecimalFormat(_elements[i]._element.replace('M',
 						'0'));
@@ -424,6 +436,17 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 					index += _elements[i]._element.length();
 					break;
 				}
+				case YEAR19: {
+					String tmp = source.substring(index, index
+							+ _elements[i]._element.length());
+					int year = Integer.parseInt(tmp);
+					if (_elements[i]._element.length() <= 2) {
+						year = 1900 + year;
+					}
+					cal.set(Calendar.YEAR, year);
+					index += _elements[i]._element.length();
+					break;
+				}
 				case MONTH: {
 					String tmp = source.substring(index, index
 							+ _elements[i]._element.length());
@@ -543,19 +566,29 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 				}
 				case HOURSDEC: {
 					String tmp = source.substring(index, index
-							+ 2);
-					index += 3;
-					int hours = Integer.parseInt(tmp.trim());
-					
-					tmp = source.substring(index, index
-							+ 2);
-					index += 2;
-					int minutes = Integer.parseInt(tmp.trim()) * 60 / 100 ;
-					
-					cal.set(Calendar.HOUR, hours);
+							+ _elements[i]._element.length());
+					int minutes = 0;
+					if (tmp.trim().length() > 0) {
+						minutes = Integer.parseInt(tmp.trim()) * 60 / 100 ;
+					}
 					cal.set(Calendar.MINUTE, minutes);
-										
+					index += _elements[i]._element.length();
 					break;
+					
+//					String tmp = source.substring(index, index
+//							+ 2);
+//					index += 3;
+//					int hours = Integer.parseInt(tmp.trim());
+//					
+//					tmp = source.substring(index, index
+//							+ 2);
+//					index += 2;
+//					int minutes = Integer.parseInt(tmp.trim()) * 60 / 100 ;
+//					
+//					cal.set(Calendar.HOUR, hours);
+//					cal.set(Calendar.MINUTE, minutes);
+//										
+//					break;
 				}
 				case SECONDSD: {
 					Calendar calTemp = Calendar.getInstance();
