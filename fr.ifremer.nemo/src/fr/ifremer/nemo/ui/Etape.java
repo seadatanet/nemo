@@ -1011,7 +1011,8 @@ public class Etape {
 				}
 
 			} else {
-				if (!EditStation.textProfFin.getText().matches("")) { //$NON-NLS-1$
+				if (!EditStation.textProfFin.getText().matches("")
+						&& !EditStation.textProfFin.getText().matches("NaN")) { //$NON-NLS-1$
 
 					if (Pattern.matches("^[0-9]*[0-9][.]?[0-9]*$",
 							EditStation.textProfFin.getText())) {
@@ -1020,7 +1021,7 @@ public class Etape {
 					} else {
 						ok = ok && false;
 						Utils.messageErreurAppend(Messages
-								.getString("Etape.74")); //$NON-NLS-1$
+								.getString("Etape.70")); //$NON-NLS-1$
 					}
 				} else {
 					// valeur non rentrée

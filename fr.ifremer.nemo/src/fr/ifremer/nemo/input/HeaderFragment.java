@@ -425,7 +425,7 @@ public class HeaderFragment implements Cloneable, SAXConsumer {
 	 */
 	public String retreive(String[] a_Header) {
 		if (_firstLine == 0) {
-			if (_lastCharOffset == -1 || _variable == true) {
+			if (_lastCharOffset == -1 || isVariable()) {
 				// return a_Header[0].substring( _firstCharOffset-1 ).trim();
 				return a_Header[0].substring(_firstCharOffset - 1);
 			} else {
@@ -449,7 +449,7 @@ public class HeaderFragment implements Cloneable, SAXConsumer {
 					start = _firstCharOffset - 1;
 				}
 				if (i == _lastLine - 1) {
-					if (_lastCharOffset != -1 && _variable == false) {
+					if (_lastCharOffset != -1 && !isVariable()) {
 						end = _lastCharOffset - 1;
 					}
 				}
