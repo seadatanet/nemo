@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
+import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.util.Messages;
 
@@ -76,9 +77,11 @@ public class EditStation {
 	public static Button buttonHeurePos, buttonHeureSaisie, buttonDatePos,
 			buttonDateSaisie, buttonTUPos;
 
-	public static Combo comboRefStationType, comboHeure, comboDate,
+	public static Combo comboHeure, comboDate,
 			comboLatitude, comboLongitude, comboLatitudeFin, comboLongitudeFin;
 
+	public static Combo comboRefStationType;
+	
 	public static Section sectionQCDate, sectionQCLat, sectionQCLong,
 			sectionQCProf;
 
@@ -203,13 +206,13 @@ public class EditStation {
 		DrawingStation
 				.sectionIncrementeLigneDebutFinInject(
 						Messages.getString("EditStation.5"), Messages.getString("EditStation.6"), EditStation.sectionStation, textRefStationNumero, textRefStationLigne, textRefStationDebut, textRefStationFin, buttonRefStationIncremente, buttonRefStationPos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
-
+		textRefStationNumero.setText("1");
+		
 		if (!ViewFile.isCollection()) {
 			// section reference type de données
 			DrawingStation.sectionTypeDonnees(sectionTypeDonnees, Messages
-					.getString("EditStation.0"));
+					.getString("EditStation.0"), comboRefStationType);
 		}
-		textRefStationNumero.setText("1");
 
 		// section historique acquisition
 		blnManuel = true;
@@ -261,6 +264,8 @@ public class EditStation {
 		if (blnModeleOuvert) {
 			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("time");
 			blnManuel = propertyModel.isUserProvided();
+		} else {
+			blnManuel = false;
 		}
 		
 		DrawingStation
@@ -272,6 +277,8 @@ public class EditStation {
 		if (blnModeleOuvert) {
 			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("date");
 			blnManuel = propertyModel.isUserProvided();
+		} else {
+			blnManuel = false;
 		}
 		
 		DrawingStation
@@ -288,6 +295,8 @@ public class EditStation {
 		if (blnModeleOuvert) {
 			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("latitude");
 			blnManuel = propertyModel.isUserProvided();
+		} else {
+			blnManuel = false;
 		}
 		
 		DrawingStation
@@ -300,6 +309,8 @@ public class EditStation {
 			if (blnModeleOuvert) {
 				PropertyModel propertyModel = DataModel.stationModel_modele.getTimeSeriesModel().propertiesAt("endLatitude");
 				blnManuel = propertyModel.isUserProvided();
+			} else {
+				blnManuel = false;
 			}
 			
 			DrawingStation
@@ -312,6 +323,8 @@ public class EditStation {
 		if (blnModeleOuvert) {
 			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("longitude");
 			blnManuel = propertyModel.isUserProvided();
+		} else {
+			blnManuel = false;
 		}
 		
 		DrawingStation
@@ -324,6 +337,8 @@ public class EditStation {
 			if (blnModeleOuvert) {
 				PropertyModel propertyModel = DataModel.stationModel_modele.getTimeSeriesModel().propertiesAt("endLongitude");
 				blnManuel = propertyModel.isUserProvided();
+			} else {
+				blnManuel = false;
 			}
 			
 			DrawingStation
@@ -581,7 +596,11 @@ public class EditStation {
 			EditStation.listeSectionsStation.get(i).setParent(s.getBody());
 
 		}
-
+		
+		if (DataModel.station.getDataType() != null) {
+			Utils.selectComboValeur(EditStation.comboRefStationType, DataModel.station.getDataType().getCode());
+		}
+		
 		// EditStation.buttonExpand2.setParent(s.getBody());
 
 		ViewEdit.formEdition.setText(Messages.getString("EditStation.51")); //$NON-NLS-1$

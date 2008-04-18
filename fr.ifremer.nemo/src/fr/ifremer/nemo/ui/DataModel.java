@@ -1659,8 +1659,9 @@ public class DataModel {
 			if (ok) {
 				// ajouté que si c'est un capteur
 				if (capteur) {
-					EditStation.comboRefStationType.add(code, 0);
-					EditStation.comboRefStationType.select(0);
+					Utils.selectComboValeur(EditStation.comboRefStationType, code);
+//					EditStation.comboRefStationType.add(code, 0);
+//					EditStation.comboRefStationType.select(0);
 				}
 			}
 		}

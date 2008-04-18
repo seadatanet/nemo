@@ -611,7 +611,7 @@ public class DrawingStation {
 
 	}
 
-	public static void sectionTypeDonnees(Section section, String nom) {
+	public static void sectionTypeDonnees(Section section, String nom, Combo cmbRefType) {
 
 		// EditStation.sectionTypeDonnees.setParent(EditStation.formEdition);
 		section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition
@@ -638,8 +638,9 @@ public class DrawingStation {
 
 		sectionClient.setLayout(new GridLayout());
 
-		EditStation.comboRefStationType.setParent(sectionClient);
-
+		// EditStation.comboRefStationType.setParent(sectionClient);
+		cmbRefType.setParent(sectionClient);
+		
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
 
@@ -1672,6 +1673,7 @@ public class DrawingStation {
 		
 		EditStation.buttonHeureSaisie.setSelection(blnManuel);
 		EditStation.textHeureSaisie.setEnabled(blnManuel);
+		EditStation.buttonHeurePos.setSelection(!blnManuel);
 		lign.setEnabled(!blnManuel);
 		debu.setEnabled(!blnManuel);
 		fi.setEnabled(!blnManuel);
@@ -1916,6 +1918,7 @@ public class DrawingStation {
 		
 		EditStation.buttonDateSaisie.setSelection(blnManuel);
 		EditStation.textDateSaisie.setEnabled(blnManuel);
+		EditStation.buttonDatePos.setSelection(!blnManuel);
 		lign.setEnabled(!blnManuel);
 		debu.setEnabled(!blnManuel);
 		fi.setEnabled(!blnManuel);
@@ -2199,8 +2202,8 @@ public class DrawingStation {
 				});
 		
 		radio.setSelection(blnManuel);
-		position.setSelection(!blnManuel);
 		manu.setEnabled(blnManuel);
+		position.setSelection(!blnManuel);
 		lign.setEnabled(!blnManuel);
 		debu.setEnabled(!blnManuel);
 		fi.setEnabled(!blnManuel);
