@@ -68,6 +68,7 @@ public class EditData {
 	
 	public static Text textTestDateHeure;
 
+	private static Shell shell = new Shell();
 	// //////////////////////////////////////////
 
 	public static void affichageEdition() {
@@ -75,7 +76,7 @@ public class EditData {
 
 		formEdition = ViewEdit.formEdition;
 		ViewLog.aideData();
-		listeTextData = new ArrayList<Text>();
+		
 		okApresReset = true;
 
 		// raz message erreur
@@ -99,6 +100,10 @@ public class EditData {
 		ViewEdit.formEdition.getBody().setLayout(new GridLayout());
 		ViewEdit.formEdition.setText(Messages.getString("EditData.1")); //$NON-NLS-1$
 
+		disposeElements();
+		
+		listeTextData = new ArrayList<Text>();
+		
 		// init composants IHM
 		initSections();
 		initCombos();
@@ -343,21 +348,20 @@ public class EditData {
 
 		int i;
 
-		Shell s = new Shell();
 
 		// effacement des boutons valider/expand/init serveur
-		EditData.buttonExpand.setParent(s);
-		EditData.buttonExpand2.setParent(s);
-		EditData.buttonValidate.setParent(s);
-		EditData.buttonRAZ.setParent(s);
+		EditData.buttonExpand.setParent(shell);
+		EditData.buttonExpand2.setParent(shell);
+		EditData.buttonValidate.setParent(shell);
+		EditData.buttonRAZ.setParent(shell);
 
-		buttonFreqEchant.setParent(s);
-		buttonLigneDonnees.setParent(s);
+		buttonFreqEchant.setParent(shell);
+		buttonLigneDonnees.setParent(shell);
 
 		// System.out.println("expand ? = " + expand);
 		for (i = 0; i <= EditData.listeSectionsData.size() - 1; i++) {
 
-			EditData.listeSectionsData.get(i).setParent(s);
+			EditData.listeSectionsData.get(i).setParent(shell);
 
 		}
 
@@ -436,7 +440,6 @@ public class EditData {
 
 	public static void initSections() {
 
-		Shell shell = new Shell();
 
 		sectionTypeCourant = new Section(shell, SWT.NONE);
 		sectionTypeAjouter = new Section(shell, SWT.NONE);
@@ -447,7 +450,6 @@ public class EditData {
 
 	public static void initText() {
 
-		Shell shell = new Shell();
 
 		textTypeCourantCode = new Text(shell, SWT.BORDER);
 		listeTextData.add(textTypeCourantCode);
@@ -507,7 +509,6 @@ public class EditData {
 
 	public static void initBoutons() {
 
-		Shell shell = new Shell();
 
 		buttonExpand = new Button(shell, SWT.NONE);
 		buttonExpand2 = new Button(shell, SWT.NONE);
@@ -522,14 +523,12 @@ public class EditData {
 
 	public static void initListeType() {
 
-		Shell shell = new Shell();
 		listeType = new List(shell, SWT.BORDER);
 
 	}
 
 	public static void initCombos() {
 
-		Shell shell = new Shell();
 
 		comboHeure = new Combo(shell, SWT.NONE);
 		comboHeure.add("hh24:mm"); //$NON-NLS-1$
@@ -583,4 +582,46 @@ public class EditData {
 
 	}
 
+	private static void disposeElements()
+	{
+		shell.close();
+		
+		shell = new Shell();
+
+		if (sectionTypeCourant != null) {
+			sectionTypeCourant.dispose();
+			sectionTypeAjouter.dispose();
+			sectionHeure.dispose();
+			sectionDate.dispose();
+			sectionTotal.dispose();
+		}
+
+		if (buttonExpand != null) {
+			buttonExpand.dispose();
+			buttonExpand2.dispose();
+			buttonValidate.dispose();
+			buttonReset.dispose();
+			buttonRAZ.dispose();
+			buttonLigneDonnees.dispose();
+			buttonFreqEchant.dispose();
+			buttonTestDateHeure.dispose();
+		}
+
+		if (listeTextData != null) {
+			for (Text element : listeTextData) {
+				element.dispose();
+			}
+		}
+		if (comboDate != null) {
+			comboDate.dispose();
+			comboHeure.dispose();
+			comboTotal.dispose();
+		}
+		
+		if (listeType != null)
+		{
+			listeType.dispose();
+		}
+	}
+	
 }

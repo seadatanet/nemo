@@ -25,6 +25,7 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
 import fr.ifremer.nemo.config.NemoLists;
@@ -287,6 +288,9 @@ public class ViewFile extends ViewPart {
 	 * 
 	 */
 	private void createComposite11() {
+		
+		
+		
 		GridData gridData = new GridData();
 		gridData.verticalSpan = 2;
 		GridLayout gridLayout = new GridLayout();
@@ -368,77 +372,7 @@ public class ViewFile extends ViewPart {
 
 					}
 				});
-	
-/////////////////////////
-// A SUPPRIMER : DEBUT //
-/////////////////////////
-//
-//		// Test du WS Vocab
-//		btnTestWS = new Button(composite11, SWT.NONE);
-//		btnTestWS.setText("Test");
-//		
-//		btnTestWS 
-//			.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-//			public void widgetSelected(
-//					org.eclipse.swt.events.SelectionEvent e) {
-//				System.out.println("Début Test WS");
-//				
-//				String[] tabString21 = new String[1];
-//				tabString21[0]="http://vocab.ndg.nerc.ac.uk/list/P021/current";
-//
-//				String[] tabString31 = new String[1];
-//				tabString31[0]="http://vocab.ndg.nerc.ac.uk/list/P031/current";
-//				
-//				String[] tabStringMapping = new String[1];
-//				tabStringMapping[0]="http://vocab.ndg.nerc.ac.uk/list/P021/current";
-//				
-//				Calendar calTemp = null;//new GregorianCalendar();
-//				// calTemp.clear();
-//				// calTemp.set(2005,02,01,0,0,0);
-//				// calTemp.set(Calendar.YEAR, 2003);
-//				
-//				CodeTableRecordTypeArrayHolder table21 = new CodeTableRecordTypeArrayHolder();
-//				CodeTableRecordTypeArrayHolder table31 = new CodeTableRecordTypeArrayHolder();
-//				
-//				javax.xml.rpc.holders.BooleanHolder error = new BooleanHolder();
-//				
-//				try {
-//					VocabSoapBindingStub vocab = new VocabSoapBindingStub(
-//							new URL("http://vocab.ndg.nerc.ac.uk/1.1/VocabServerAPI_dl.wsdl"),
-//							new Service());
-//
-//					vocab.getList(tabString21, calTemp, table21, error);
-//					vocab.getList(tabString31, calTemp, table31, error);
-//					// vocab.getMap(tabString21, predicate, objectList, inference, codeTableRecord, error)
-//				} catch (Exception ex) {
-//					ex.printStackTrace();
-//				}
-//				
-//				HashMap<String, String> hash21 = new HashMap<String, String>();
-//				
-//				for (int i = 0 ; i < table21.value.length ; i++) {
-//					hash21.put(table21.value[i].getEntryKey().substring(table21.value[i].getEntryKey().lastIndexOf('/')+1), table21.value[i].getEntryTerm());
-//				}
-//				
-//				HashMap<String, String> hash31 = new HashMap<String, String>();
-//				
-//				for (int i = 0 ; i < table31.value.length ; i++) {
-//					hash31.put(table31.value[i].getEntryKey().substring(table31.value[i].getEntryKey().lastIndexOf('/')+1), table31.value[i].getEntryTerm());
-//				}
-//				
-//				HashMap<String, String> hashMappging = new HashMap<String, String>();
-//				
-//				
-//				
-//				System.out.println(hash21.containsKey("TEMP"));
-//				
-//				System.out.println("Fin Test WS");
-//				}
-//			});
-//	
-///////////////////////
-// A SUPPRIMER : FIN //
-///////////////////////
+
 		
 		createGroupTempo();
 		
@@ -468,7 +402,8 @@ public class ViewFile extends ViewPart {
 							collectionCas1 = false;
 							collectionCasN = false;
 
-							Shell shell = new Shell();
+							Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+							
 							FileDialog dialog = new FileDialog(shell, SWT.OPEN
 									| SWT.APPLICATION_MODAL);
 							dialog.setFilterPath(Utils.configuration
@@ -529,7 +464,7 @@ public class ViewFile extends ViewPart {
 							collectionCas1 = false;
 							collectionCasN = false;
 
-							Shell shell = new Shell();
+							Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 							DirectoryDialog dialog = new DirectoryDialog(shell,
 									SWT.OPEN | SWT.APPLICATION_MODAL);
 							dialog.setFilterPath(Utils.configuration
@@ -571,7 +506,7 @@ public class ViewFile extends ViewPart {
 							collectionCas1 = true;
 							collectionCasN = false;
 
-							Shell shell = new Shell();
+							Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 							DirectoryDialog dialog = new DirectoryDialog(shell,
 									SWT.OPEN | SWT.APPLICATION_MODAL);
 							dialog.setFilterPath(Utils.configuration
@@ -619,7 +554,7 @@ public class ViewFile extends ViewPart {
 							collectionCas1 = false;
 							collectionCasN = true;
 
-							Shell shell = new Shell();
+							Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 							DirectoryDialog dialog = new DirectoryDialog(shell,
 									SWT.OPEN | SWT.APPLICATION_MODAL);
 							dialog.setFilterPath(Utils.configuration
@@ -840,6 +775,10 @@ public class ViewFile extends ViewPart {
 	}
 	
 	private void createGroupeSeparateur() {	
+		
+		
+
+		
 		grpSeparateur = new Group(composite11, SWT.NONE);
 		GridLayoutFactory.fillDefaults().applyTo(grpSeparateur);
 		GridDataFactory.fillDefaults().grab(false,false).applyTo(grpSeparateur);

@@ -8,6 +8,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 
 import fr.ifremer.nemo.util.Messages;
@@ -43,7 +44,7 @@ public class ExitAction extends Action implements ISelectionListener,
 
 	public void run() {
 
-		Shell s = new Shell();
+		Shell s = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		MessageBox mb = new MessageBox(s, SWT.ICON_QUESTION | SWT.YES | SWT.NO);
 		mb.setMessage(Messages.getString("ExitAction.2")); //$NON-NLS-1$
 		// reponse = mb.open();

@@ -10,6 +10,7 @@ import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 import fr.ifremer.nemo.input.SurveyMedia;
@@ -120,7 +121,7 @@ public class EditConversion extends Thread {
 	}
 
 	public static void initBoutons() {
-		Shell shell = new Shell();
+		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 
 		buttonConversion = new Button(shell, SWT.NONE);
 
@@ -128,7 +129,7 @@ public class EditConversion extends Thread {
 
 	public static void razEdition() {
 
-		Shell shell = new Shell();
+		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 
 		buttonConversion.setParent(shell);
 		formEdition.reflow(true);
@@ -156,7 +157,7 @@ public class EditConversion extends Thread {
 
 		nomFichierSortie = "";
 
-		Shell shell = new Shell();
+		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		FileDialog dialog = new FileDialog(shell, SWT.SAVE
 				| SWT.APPLICATION_MODAL);
 		dialog.setText(Messages.getString("EditConversion.13")); //$NON-NLS-1$
@@ -172,8 +173,8 @@ public class EditConversion extends Thread {
 			File fich = new File(nomFichierSortie);
 			if (fich.exists()) {
 				// fichier existe
-				shell.close();
-				Shell shell2 = new Shell();
+			//	shell.close();
+				Shell shell2 = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 
 				MessageBox mb = new MessageBox(shell2, SWT.ICON_WARNING
 						| SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
@@ -228,7 +229,7 @@ public class EditConversion extends Thread {
 
 		nomDossierSortie = "";
 
-		Shell shell = new Shell();
+		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		DirectoryDialog dialog = new DirectoryDialog(shell, SWT.SAVE
 				| SWT.APPLICATION_MODAL);
 		dialog.setText(Messages.getString("EditConversion.13")); //$NON-NLS-1$
@@ -240,8 +241,8 @@ public class EditConversion extends Thread {
 			File fich = new File(nomDossierSortie);
 			if (fich.exists() && fich.listFiles().length != 0) {
 				// fichier existe
-				shell.close();
-				Shell shell2 = new Shell();
+			//	shell.close();
+				Shell shell2 = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 
 				MessageBox mb = new MessageBox(shell2, SWT.ICON_WARNING
 						| SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);

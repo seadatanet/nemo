@@ -71,8 +71,8 @@ public class EditSurvey {
 
 	public static ScrolledForm formEdition;
 
-	public static Shell shell;
-
+	private static Shell shell = new Shell();
+	
 	public static void affichageEdition() {
 		// initialisation zone édition pour étape description de fichier
 
@@ -118,6 +118,9 @@ public class EditSurvey {
 		ViewEdit.formEdition.getBody().setLayout(new GridLayout());
 		ViewEdit.formEdition.setText(Messages.getString("EditSurvey.4")); //$NON-NLS-1$
 
+		
+		disposeElements();
+		
 		// init de la arrayList des sections
 		listeSectionsSurvey = new ArrayList<Section>();
 		listeSectionsNoms = new ArrayList<String>();
@@ -444,7 +447,6 @@ public class EditSurvey {
 		new SWTProgressWS().run();
 
 		// affichage du résultat des mises à jour des fichiers
-		Shell shell = new Shell();
 		String message = "";
 
 		if (NemoLists.okCountries) {
@@ -558,7 +560,6 @@ public class EditSurvey {
 		if ((EditDesc.validee != 1) && (EditSurvey.loaded != 1)) {
 			Utils.messageErreur(Messages.getString("EditSurvey.54")); //$NON-NLS-1$
 		} else {
-			Shell shell = new Shell();
 			FileDialog dialog = new FileDialog(shell, SWT.OPEN
 					| SWT.APPLICATION_MODAL);
 			// dialog.setFilterPath(Utils.configuration.getModelsDirectory()+"\\");
@@ -846,21 +847,20 @@ public class EditSurvey {
 
 		int i;
 
-		Shell s = new Shell();
 
 		// effacement des boutons valider/expand/init serveur
-		EditSurvey.buttonExpand.setParent(s);
-		EditSurvey.buttonExpand2.setParent(s);
-		EditSurvey.buttonValidate.setParent(s);
-		EditSurvey.buttonInitServeur.setParent(s);
-		EditSurvey.buttonXML.setParent(s);
-		EditSurvey.buttonRAZ.setParent(s);
+		EditSurvey.buttonExpand.setParent(shell);
+		EditSurvey.buttonExpand2.setParent(shell);
+		EditSurvey.buttonValidate.setParent(shell);
+		EditSurvey.buttonInitServeur.setParent(shell);
+		EditSurvey.buttonXML.setParent(shell);
+		EditSurvey.buttonRAZ.setParent(shell);
 
 		for (i = 0; i <= EditSurvey.listeSectionsSurvey.size() - 1; i++) {
 
 			EditSurvey.listeSectionsSurvey.get(i).setExpanded(true);
 
-			EditSurvey.listeSectionsSurvey.get(i).setParent(s);
+			EditSurvey.listeSectionsSurvey.get(i).setParent(shell);
 
 		}
 
@@ -943,7 +943,6 @@ public class EditSurvey {
 
 	public static void initSections() {
 
-		Shell shell = new Shell();
 
 		sectionReference = new Section(shell, SWT.NONE);
 		sectionLocalisation = new Section(shell, SWT.NONE);
@@ -956,7 +955,6 @@ public class EditSurvey {
 
 	public static void initText() {
 
-		Shell shell = new Shell();
 
 		textCampagne = new Text(shell, SWT.BORDER);
 		listeTextSurvey.add(textCampagne);
@@ -999,7 +997,6 @@ public class EditSurvey {
 
 	public static void initBoutons() {
 
-		Shell shell = new Shell();
 		buttonRAZ = new Button(shell, SWT.NONE);
 		buttonInitServeur = new Button(shell, SWT.NONE);
 		buttonExpand = new Button(shell, SWT.NONE);
@@ -1012,7 +1009,6 @@ public class EditSurvey {
 	public static void initCombos() {
 		int taille, i;
 		
-		Shell shell = new Shell();
 		comboConfid = new Combo(shell, SWT.READ_ONLY);
 		comboConfid.add("P - Public");
 		comboConfid.add("L - Limited");
@@ -1030,7 +1026,6 @@ public class EditSurvey {
 
 	public static void initListeType() {
 
-		Shell shell = new Shell();
 		listeType = new List(shell, SWT.BORDER);
 
 	}
@@ -1090,39 +1085,69 @@ public class EditSurvey {
 
 	}
 	
-//	private static void listSensor() {
-//		BufferedReader lecteurAvecBuffer = null;
-//		String ligneLue = ""; 
-//		int numLigne = 0;
-//		listSensor = new ArrayList<String>();
-//				
-//		try {
-//			lecteurAvecBuffer = new BufferedReader(new FileReader(
-//					"resources/liste_capteur.txt"));
-//			
-//			// Lecture des lignes d'en-tête
-//			while ((ligneLue = lecteurAvecBuffer.readLine()) != null) {
-//				numLigne++;
-//				if (numLigne == 2) {
-//					break;
-//				}
-//			}
-//			
-//			// Lecture des lignes
-//			while ((ligneLue = lecteurAvecBuffer.readLine()) != null) {
-//				listSensor.add(ligneLue.substring(0,3));
-//			}
-//			
-//		} catch (IOException exc) {
-//			Utils
-//					.messageErreur(Messages.getString("Etape.120"));
-//		} 
-//				
-//		System.out.println("");
-//		for (String temp : listSensor)
-//		{
-//			System.out.println(temp);
-//		}
-//	}
+	
+	private static void disposeElements()
+	{
+		
+		shell.close();
+		
+		shell = new Shell();
+		
+		if (listeSectionsLabel != null) {
+			for (Label element : listeSectionsLabel) {
+				element.dispose();
+			}
+		}
+
+		if (listeSectionsParam != null) {
+			for (Section element : listeSectionsParam) {
+				element.dispose();
+			}
+		}
+
+		if (listeSectionsSurvey != null) {
+			for (Section element : listeSectionsSurvey) {
+				element.dispose();
+			}
+		}
+
+		if (listeTextSurvey != null) {
+			for (Text element : listeTextSurvey) {
+				element.dispose();
+			}
+		}
+		
+		if (comboConfid != null)
+			comboConfid.dispose();
+
+		if (comboCountries != null)
+			comboCountries.dispose();
+
+		if (comboDataCentres != null)
+			comboDataCentres.dispose();
+			
+		if (sectionReference != null) {
+			sectionReference.dispose();
+			sectionLocalisation.dispose();
+			sectionSource.dispose();
+			sectionCentre.dispose();
+			sectionType.dispose();
+			sectionCommentaire.dispose();
+		}
+		
+		if (buttonRAZ != null) {
+			buttonRAZ.dispose();
+			buttonInitServeur.dispose();
+			buttonExpand.dispose();
+			buttonExpand2.dispose();
+			buttonValidate.dispose();
+			buttonXML.dispose();
+		}
+		
+		if (listeType != null)
+			listeType.dispose();
+		
+	}
+
 
 }

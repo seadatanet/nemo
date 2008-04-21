@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.window.ApplicationWindow;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 
 public class SWTProgressWS extends ApplicationWindow {
 
@@ -14,7 +15,7 @@ public class SWTProgressWS extends ApplicationWindow {
 
 	public void run() {
 
-		final Shell shell = new Shell();
+		final Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 
 		try {
 			new ProgressMonitorDialog(shell).run(true, false,

@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
 import org.eclipse.ui.application.WorkbenchAdvisor;
 import org.eclipse.ui.application.WorkbenchWindowAdvisor;
@@ -28,11 +29,11 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 	@Override
 	public boolean preShutdown() {
 
-		Shell s = new Shell();
+	
 		FileOutputStream fileOutputStream = null;
 		int reponse = 0;
 
-		MessageBox mb = new MessageBox(s, SWT.ICON_QUESTION | SWT.YES | SWT.NO
+		MessageBox mb = new MessageBox(PlatformUI.getWorkbench().getDisplay().getActiveShell(), SWT.ICON_QUESTION | SWT.YES | SWT.NO
 				| SWT.APPLICATION_MODAL);
 		mb.setMessage(Messages.getString("ExitAction.2")); //$NON-NLS-1$
 		reponse = mb.open();
@@ -43,7 +44,7 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 				if (EditDesc.okApresReset && EditSurvey.okApresReset
 						&& EditStation.okApresReset && EditData.okApresReset) {
 
-					Shell shell2 = new Shell();
+					Shell shell2 = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 
 					MessageBox mbox = new MessageBox(shell2, SWT.ICON_WARNING
 							| SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);

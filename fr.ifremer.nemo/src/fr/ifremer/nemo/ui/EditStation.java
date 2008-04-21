@@ -15,7 +15,6 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
-import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.util.Messages;
 
@@ -23,6 +22,8 @@ public class EditStation {
 	// fonctions de remplissage de la zone d'édition pour les campagnes
 	// /////////////////////////////////////////
 
+	private static Shell shell = new Shell();
+	
 	public static Text textRefStationNumero, textRefStationLigne, textRefStationDebut,
 			textRefStationFin, textHistoriqueAcquisition1,
 			textHistoriqueAcquisition2, textCommentaire,
@@ -153,6 +154,8 @@ public class EditStation {
 		ViewEdit.formEdition.getBody().setLayout(new GridLayout());
 		ViewEdit.formEdition.setText(Messages.getString("EditStation.1")); //$NON-NLS-1$
 
+		disposeElements();
+		
 		// init de la arrayList des sections
 		listeSectionsStation = new ArrayList<Section>();
 		listeSectionsNoms = new ArrayList<String>();
@@ -160,6 +163,8 @@ public class EditStation {
 		listeBoutonsManuel = new ArrayList<Button>();
 		listeBoutonsPos = new ArrayList<Button>();
 
+		
+		
 		// init composants IHM
 		initSections();
 		initCombos();
@@ -547,20 +552,19 @@ public class EditStation {
 
 		int i;
 
-		Shell s = new Shell();
 
 		// effacement des boutons valider/expand/init serveur
-		EditStation.buttonExpand.setParent(s);
-		EditStation.buttonExpand2.setParent(s);
-		EditStation.buttonValidate.setParent(s);
-		EditStation.buttonRAZ.setParent(s);
+		EditStation.buttonExpand.setParent(shell);
+		EditStation.buttonExpand2.setParent(shell);
+		EditStation.buttonValidate.setParent(shell);
+		EditStation.buttonRAZ.setParent(shell);
 
 		// System.out.println("expand ? = " + expand);
 		for (i = 0; i <= EditStation.listeSectionsStation.size() - 1; i++) {
 
 			EditStation.listeSectionsStation.get(i).setExpanded(true);
 
-			EditStation.listeSectionsStation.get(i).setParent(s);
+			EditStation.listeSectionsStation.get(i).setParent(shell);
 
 		}
 
@@ -615,7 +619,6 @@ public class EditStation {
 
 	public static void initSections() {
 
-		Shell shell = new Shell();
 		sectionQCDate = new Section(shell, SWT.NONE);
 		sectionQCLat = new Section(shell, SWT.NONE);
 		sectionQCLong = new Section(shell, SWT.NONE);
@@ -641,8 +644,6 @@ public class EditStation {
 	}
 
 	public static void initText() {
-
-		Shell shell = new Shell();
 
 		textQCDate = new Text(shell, SWT.BORDER);
 		listeTextStation.add(textQCDate);
@@ -858,7 +859,6 @@ public class EditStation {
 
 	public static void initBoutons() {
 
-		Shell shell = new Shell();
 
 		buttonRAZ = new Button(shell, SWT.NONE);
 		buttonExpand = new Button(shell, SWT.NONE);
@@ -959,14 +959,12 @@ public class EditStation {
 
 	public static void initListeType() {
 
-		Shell shell = new Shell();
 		listeType = new List(shell, SWT.BORDER);
 
 	}
 
 	public static void initLabels() {
 
-		Shell shell = new Shell();
 		labelConversionHeure = new Label(shell, SWT.NONE);
 		labelConversionDate = new Label(shell, SWT.NONE);
 
@@ -989,7 +987,6 @@ public class EditStation {
 
 	public static void initCombos() {
 
-		Shell shell = new Shell();
 		comboRefStationType = new Combo(shell, SWT.READ_ONLY);
 		// remplissage avec les dataTypes de la campagne
 
@@ -1141,4 +1138,80 @@ public class EditStation {
 
 	}
 
+	private static void disposeElements()
+	{
+		
+	shell.close();
+	
+	shell = new Shell();
+		
+	if (listeBoutonsManuel != null)
+	{
+		for (Button element : listeBoutonsManuel)
+		{
+			element.dispose();
+		}
+	}
+		
+	if (listeBoutonsPos != null)
+	{
+		for (Button element : listeBoutonsPos)
+		{
+			element.dispose();
+		}
+	}
+	
+	if (listeSectionsLabel != null)
+	{
+		for (Label element : listeSectionsLabel)
+		{
+			element.dispose();
+		}
+	}
+	
+	if (listeSectionsParam != null)
+	{
+		for (Section element : listeSectionsParam)
+		{
+			element.dispose();
+		}
+	}
+	
+	if (listeSectionsStation != null)
+	{
+		for (Section element : listeSectionsStation)
+		{
+			element.dispose();
+		}
+	}
+	
+	if (listeTextStation != null)
+	{
+		for (Text element : listeTextStation)
+		{
+			element.dispose();
+		}
+	}
+
+		if (comboDate != null)
+			comboDate.dispose();
+
+		if (comboHeure != null)
+			comboHeure.dispose();
+
+		if (comboLatitude != null)
+			comboLatitude.dispose();
+
+		if (comboLatitudeFin != null)
+			comboLatitudeFin.dispose();
+
+		if (comboLongitude != null)
+			comboLongitude.dispose();
+
+		if (comboLongitudeFin != null)
+			comboLongitudeFin.dispose();
+
+		if (comboRefStationType != null)
+			comboRefStationType.dispose();
+	}
 }

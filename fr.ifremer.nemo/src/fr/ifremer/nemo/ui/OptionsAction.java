@@ -20,6 +20,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 
 import fr.ifremer.nemo.config.NemoLists;
@@ -351,7 +352,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 //								.getString("OptionsAction.7")); //$NON-NLS-1$
 
 						String nomRepertoire;
-						Shell shell = new Shell();
+						Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 						DirectoryDialog dialog = new DirectoryDialog(shell,
 								SWT.OPEN | SWT.APPLICATION_MODAL);
 						nomRepertoire = dialog.open();
@@ -378,7 +379,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 //								.getString("OptionsAction.7")); //$NON-NLS-1$
 
 						String nomRepertoire;
-						Shell shell = new Shell();
+						Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 						DirectoryDialog dialog = new DirectoryDialog(shell,
 								SWT.OPEN | SWT.APPLICATION_MODAL);
 						nomRepertoire = dialog.open();

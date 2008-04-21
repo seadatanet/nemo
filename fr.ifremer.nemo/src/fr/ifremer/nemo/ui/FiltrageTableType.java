@@ -150,7 +150,7 @@ public class FiltrageTableType {
 						public void widgetSelected(
 								org.eclipse.swt.events.SelectionEvent e) {
 							// System.out.println("valider cancel liste");
-							shell.close();
+						//	shell.close();
 							listeOuverte = 0;
 
 							if (EditSurvey.ws) {
@@ -184,7 +184,7 @@ public class FiltrageTableType {
 
 									Utils.messageOK(Messages
 											.getString("FiltrageTableType.21"));
-									shell.close();
+								//	shell.close();
 									if (EditSurvey.ws) {
 										EditSurvey.ws = false;
 									}
@@ -272,7 +272,7 @@ public class FiltrageTableType {
 										}
 									}
 
-									shell.close();
+							//		shell.close();
 									if (EditSurvey.ws) {
 										EditSurvey.ws = false;
 									}
@@ -336,7 +336,7 @@ public class FiltrageTableType {
 								// refresh de la table
 								TableData.creationTable();
 
-								shell.close();
+							//	shell.close();
 
 								if (EditSurvey.ws) {
 									EditSurvey.ws = false;

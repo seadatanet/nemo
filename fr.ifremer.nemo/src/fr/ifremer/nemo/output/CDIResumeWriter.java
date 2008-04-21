@@ -14,6 +14,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 
 import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.domain.Station;
@@ -210,7 +211,7 @@ public class CDIResumeWriter {
 	public void choixFichierSortie() {
 		nomFichierSortie = "";
 
-		Shell shell = new Shell();
+		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		FileDialog dialog = new FileDialog(shell, SWT.SAVE
 				| SWT.APPLICATION_MODAL);
 		dialog.setText(Messages.getString("CDIResumeWriter.choixFichier")); //$NON-NLS-1$
@@ -227,8 +228,8 @@ public class CDIResumeWriter {
 			File fich = new File(nomFichierSortie);
 			if (fich.exists()) {
 				// fichier existe
-				shell.close();
-				Shell shell2 = new Shell();
+			//	shell.close();
+				Shell shell2 = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 
 				MessageBox mb = new MessageBox(shell2, SWT.ICON_WARNING
 						| SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);

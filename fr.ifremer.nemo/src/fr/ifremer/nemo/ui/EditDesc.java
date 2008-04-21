@@ -66,6 +66,8 @@ public class EditDesc {
 
 	// //////////////////////////////////////////
 
+	private static Shell shell = new Shell();
+	
 	public static void affichageEdition() {
 		// initialisation zone édition pour étape description de fichier
 		ViewLog.aideDesc();
@@ -110,6 +112,8 @@ public class EditDesc {
 			listeTextDesc = new ArrayList<Text>();
 
 			// init composants IHM
+			disposeElements();
+			
 			initSections();
 			initText();
 			initBoutons();
@@ -191,7 +195,6 @@ public class EditDesc {
 							// raz de la valeur manuelle
 							int i;
 
-							// Shell s = new Shell();
 
 							// System.out.println("expand ? = " + expand);
 							// //$NON-NLS-1$
@@ -336,15 +339,13 @@ public class EditDesc {
 
 		int i;
 
-		Shell s = new Shell();
-
 		// effacement boutons expand
-		buttonExpandDesc.setParent(s);
-		buttonExpandDesc2.setParent(s);
-		buttonRAZ.setParent(s);
+		buttonExpandDesc.setParent(shell);
+		buttonExpandDesc2.setParent(shell);
+		buttonRAZ.setParent(shell);
 
 		// effacement bouton valider etape
-		buttonValidateDesc.setParent(s);
+		buttonValidateDesc.setParent(shell);
 		
 		// effacement bouton Preformat
 //		buttonPreformat.setParent(s);
@@ -353,7 +354,7 @@ public class EditDesc {
 		for (i = 0; i <= EditDesc.listeSectionsDesc.size() - 1; i++) {
 
 			EditDesc.listeSectionsDesc.get(i).setExpanded(true);
-			EditDesc.listeSectionsDesc.get(i).setParent(s);
+			EditDesc.listeSectionsDesc.get(i).setParent(shell);
 
 		}
 
@@ -416,8 +417,7 @@ public class EditDesc {
 	}
 
 	public static void initSections() {
-
-		Shell shell = new Shell();
+		
 		sectionEnteteFichier = new Section(shell, SWT.NONE);
 		sectionEnteteStation = new Section(shell, SWT.NONE);
 		sectionFinStation = new Section(shell, SWT.NONE);
@@ -432,7 +432,10 @@ public class EditDesc {
 
 	public static void initText() {
 
-		Shell shell = new Shell();
+	
+		System.out.println("ICI  " + shell.getChildren().length);
+	
+		
 		lignesEnteteFichier = new Text(shell, SWT.BORDER);
 		listeTextDesc.add(lignesEnteteFichier);
 		lignesEnteteStation = new Text(shell, SWT.BORDER);
@@ -475,8 +478,7 @@ public class EditDesc {
 	}
 
 	public static void initBoutons() {
-
-		Shell shell = new Shell();
+		
 		buttonRAZ = new Button(shell, SWT.NONE);
 		buttonLignesEnteteStation = new Button(shell, SWT.RADIO);
 //		FAE 33
@@ -633,4 +635,57 @@ public class EditDesc {
 		}
 	}
 
+	private static void disposeElements()
+	{
+		
+		shell.close();
+		
+		shell = new Shell();
+		
+		if (lignesEnteteFichier != null) {
+			lignesEnteteFichier.dispose();
+			lignesEnteteStation.dispose();
+			octetsEnteteStationLigne.dispose();
+			octetsEnteteStationDebut.dispose();
+			octetsEnteteStationFin.dispose();
+			lignesFinStation.dispose();
+			enteteDonnees.dispose();
+			upletDonnees.dispose();
+			finDonnees.dispose();
+			indicFinDonnees.dispose();
+			ruptureDonneesNoLigne.dispose();
+			ruptureDonneesDebut.dispose();
+			ruptureDonneesFin.dispose();
+			ligneNbreMesures.dispose();
+			debutNbreMesures.dispose();
+			finNbreMesures.dispose();
+			nbreLignesMesures.dispose();
+			txtManuel.dispose();
+		}
+
+		if (buttonRAZ != null) {
+			buttonRAZ.dispose();
+			buttonLignesEnteteStation.dispose();
+			buttonExpandDesc.dispose();
+			buttonExpandDesc2.dispose();
+			buttonValidateDesc.dispose();
+			radEOF.dispose();
+			radLigne.dispose();
+			radManuel.dispose();
+			btnInjectFin.dispose();
+		}
+
+		if (sectionEnteteFichier != null) {
+			sectionEnteteFichier.dispose();
+			sectionEnteteStation.dispose();
+			sectionFinStation.dispose();
+			sectionDate.dispose();
+			sectionHeure.dispose();
+			sectionDonnees.dispose();
+			sectionRuptureDonnees.dispose();
+			sectionTest.dispose();
+			sectionTest2.dispose();
+		}
+	}
+	
 }

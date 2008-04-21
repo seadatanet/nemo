@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 
 import fr.ifremer.nemo.util.Messages;
@@ -74,7 +75,7 @@ public class SaveAction extends Action implements ISelectionListener,
 
 	public static void choixFichierSortie() {
 
-		Shell shell = new Shell();
+		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		FileDialog dialog = new FileDialog(shell, SWT.SAVE
 				| SWT.APPLICATION_MODAL);
 		dialog.setText(Messages.getString("SaveAction.5")); //$NON-NLS-1$
@@ -88,9 +89,9 @@ public class SaveAction extends Action implements ISelectionListener,
 		if (nomFichierSortieXML != null) {
 			fichierSortieXML = new File(nomFichierSortieXML);
 			if (fichierSortieXML.exists()) {
-				shell.close();
+	//			shell.close();
 
-				Shell shell2 = new Shell();
+				Shell shell2 = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 
 				MessageBox mb = new MessageBox(shell2, SWT.ICON_WARNING
 						| SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);

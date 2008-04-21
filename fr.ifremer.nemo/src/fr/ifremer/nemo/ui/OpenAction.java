@@ -12,6 +12,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 
 import fr.ifremer.nemo.input.InputModel;
@@ -54,7 +55,7 @@ public class OpenAction extends Action implements ISelectionListener,
 
 			InputModel inputModel = new InputModel();
 
-			Shell shell = new Shell();
+			Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 			FileDialog dialog = new FileDialog(shell, SWT.OPEN
 					| SWT.APPLICATION_MODAL);
 			dialog.setFilterPath(Utils.configuration.getModelsDirectory()
