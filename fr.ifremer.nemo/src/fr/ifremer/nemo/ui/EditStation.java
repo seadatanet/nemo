@@ -30,7 +30,7 @@ public class EditStation {
 			textHistoriqueAcqLigne1, textHistoriqueAcqLigne2,
 			textHistoriqueAcqDebut1, textHistoriqueAcqDebut2,
 			textHistoriqueAcqFin1, textHistoriqueAcqFin2, textHistorique1,
-			textHistorique2, textConversionHeure, textConversionDate, textTU,
+			textHistorique2, /*textConversionHeure,*/ textConversionDate, textTU,
 			textTULigne, textTUDebut, textTUFin, textHeureLigne,
 			textHeureDebut, textHeureFin, textSurface1, textSurface2,
 			textSurfaceLigne1, textSurfaceLigne2, textSurfaceDebut1,
@@ -275,7 +275,7 @@ public class EditStation {
 		
 		DrawingStation
 				.sectionHeure(
-						Messages.getString("EditStation.13"), Messages.getString("EditStation.14"), sectionHeure, textHeureLigne, textHeureDebut, textHeureFin, textHeureSaisie, labelConversionHeure, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
+						Messages.getString("EditStation.13"), Messages.getString("EditStation.14"), sectionHeure, textHeureLigne, textHeureDebut, textHeureFin, textHeureSaisie, labelConversionHeure, textTestConvHeure, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 
 		// section date
 		blnManuel = true;
@@ -288,7 +288,7 @@ public class EditStation {
 		
 		DrawingStation
 				.sectionDate(
-						Messages.getString("EditStation.15"), Messages.getString("EditStation.16"), sectionDate, textDateLigne, textDateDebut, textDateFin, textDateSaisie, labelConversionDate, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
+						Messages.getString("EditStation.15"), Messages.getString("EditStation.16"), sectionDate, textDateLigne, textDateDebut, textDateFin, textDateSaisie, labelConversionDate, textTestConvDate, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 
 		// flags QC
 		// DrawingStation.sectionDateQC(Messages.getString("EditStation.17"),
@@ -696,8 +696,8 @@ public class EditStation {
 
 		textConversionDate = new Text(shell, SWT.BORDER);
 		listeTextStation.add(textConversionDate);
-		textConversionHeure = new Text(shell, SWT.BORDER);
-		listeTextStation.add(textConversionHeure);
+//		textConversionHeure = new Text(shell, SWT.BORDER);
+//		listeTextStation.add(textConversionHeure);
 		textTestConvHeure = new Text(shell, SWT.BORDER);
 		listeTextStation.add(textTestConvHeure);
 		textTestConvDate = new Text(shell, SWT.BORDER);

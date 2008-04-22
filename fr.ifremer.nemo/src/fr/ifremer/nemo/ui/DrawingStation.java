@@ -2,6 +2,8 @@ package fr.ifremer.nemo.ui;
 
 import java.io.File;
 import java.text.ParseException;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
@@ -230,11 +232,15 @@ public class DrawingStation {
 
 		// zone de conversion et test de conversion
 		Label labelConv = new Label(groupeConv, SWT.NONE);
-		labelConv.setText("Formule");
+		labelConv.setText(Messages.getString("EditStation.37"));
 		conversion.setParent(groupeConv);
-
-		Label labelTest = new Label(groupeConv, SWT.NONE);
-		labelTest.setText("Test");
+		
+//		FAE066
+//		Label labelTest = new Label(groupeConv, SWT.NONE);
+//		labelTest.setText("Test");
+		
+		Button btnTest = new Button(groupeConv,SWT.NONE);
+		btnTest.setText("Test");
 		testConversion.setParent(groupeConv);
 
 		radio.setParent(sectionClient);
@@ -358,11 +364,19 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-
 						Utils
 								.inject(lign, debu, fi,
 										ViewFile.styledTextStation);
 
+					}
+				});
+		
+		// bouton test
+		btnTest
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(
+							org.eclipse.swt.events.SelectionEvent g) {
+						EditStation.conversionFreqEchant();
 					}
 				});
 
@@ -1455,7 +1469,7 @@ public class DrawingStation {
 
 	public static void sectionHeure(String nomSection, String description,
 			Section section, Text ligne, Text debut, Text fin,
-			Text heureSaisie, Label label, boolean blnManuel) {
+			Text heureSaisie, Label label, Text heure, boolean blnManuel) {
 
 		// garder le groupe
 		// virer le second bouton radio !
@@ -1548,9 +1562,9 @@ public class DrawingStation {
 		Button btnTest = new Button(compoTest,SWT.NONE);
 		btnTest.setText("Test");
 		
-		Text txtTest = new Text(compoTest, SWT.BORDER);
-		txtTest.setEnabled(false);
-		txtTest.setText("");
+		heure.setParent(compoTest);
+		heure.setEnabled(false);
+		heure.setText("");
 		
 
 		// une fois les éléments initialisés, on les passe en static pour y
@@ -1559,7 +1573,7 @@ public class DrawingStation {
 		lign = ligne;
 		debu = debut;
 		fi = fin;
-		test = txtTest;
+		test = heure;
 
 		lign.setEnabled(false);
 		debu.setEnabled(false);
@@ -1648,8 +1662,12 @@ public class DrawingStation {
 							DateTimeFormat format = new DateTimeFormat(
 									EditStation.comboHeure.getText());
 							
+							Float flDecalTU = Float.parseFloat(EditStation.textTU.getText()) * 3600 * 1000;
+							
+							Long lgDecalTU = flDecalTU.longValue();
+							
 							Long HourLong = (Long) format
-									.parseObject(test.getText());
+									.parseObject(test.getText()) + lgDecalTU;
 							
 							Formatter formatter;
 							
@@ -1657,6 +1675,7 @@ public class DrawingStation {
 							
 							test.setText(formatter.formatDateTime("hh24mm", HourLong, "9999"));
 							
+							test.pack();
 						} catch (ParseException e) {
 
 							Utils.messageErreurAppend(Messages
@@ -1665,8 +1684,6 @@ public class DrawingStation {
 									.getString("Etape.120"));
 							test.pack();
 						}
-						test.pack();
-						
 					}
 				});
 		
@@ -1693,7 +1710,7 @@ public class DrawingStation {
 
 	public static void sectionDate(String nomSection, String description,
 			Section section, Text ligne, Text debut, Text fin, Text dateSaisie,
-			Label label, boolean blnManuel) {
+			Label label, Text date, boolean blnManuel) {
 
 		// garder le groupe
 		// virer le second bouton radio !
@@ -1789,9 +1806,9 @@ public class DrawingStation {
 		Button btnTest = new Button(compoTest,SWT.NONE);
 		btnTest.setText("Test");
 		
-		Text txtTest = new Text(compoTest, SWT.BORDER);
-		txtTest.setEnabled(false);
-		txtTest.setText("");
+		date.setParent(compoTest);
+		date.setEnabled(false);
+		date.setText("");
 
 		// une fois les éléments initialisés, on les passe en static pour y
 		// accéder à
@@ -1799,7 +1816,7 @@ public class DrawingStation {
 		lign = ligne;
 		debu = debut;
 		fi = fin;
-		test = txtTest;
+		test = date;
 
 		lign.setEnabled(false);
 		debu.setEnabled(false);
@@ -1883,6 +1900,12 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
+						TimeZone tz = TimeZone.getTimeZone("GMT");
+						Calendar cal = Calendar.getInstance(tz);
+						cal.clear();
+						cal.setLenient(false);
+						
+						// TEST DATE
 						if (EditStation.buttonDateSaisie.getSelection()) {
 							Utils.test(test, EditStation.textDateSaisie);
 						} else {
@@ -1896,13 +1919,55 @@ public class DrawingStation {
 							Long DateLong = (Long) format
 									.parseObject(test.getText());
 							
+							
+							// TEST HEURE (pour decalage TU)
+							if (EditStation.buttonHeureSaisie.getSelection()) {
+								Utils.test(EditStation.textTestConvHeure, EditStation.textHeureSaisie);
+							} else {
+								Utils.test(EditStation.textTestConvHeure, ViewFile.styledTextStation, EditStation.textHeureLigne, EditStation.textHeureDebut, EditStation.textHeureFin);
+							}
+							
+							try {
+								DateTimeFormat formatHeure = new DateTimeFormat(
+										EditStation.comboHeure.getText());
+								
+								Float flDecalTU = Float.parseFloat(EditStation.textTU.getText()) * 3600 * 1000;
+								
+								Long lgDecalTU = flDecalTU.longValue();
+								
+								Long HourLong = (Long) formatHeure
+										.parseObject(EditStation.textTestConvHeure.getText()) + lgDecalTU;
+								
+								cal.setTimeInMillis(DateLong + HourLong);
+								
+								Formatter formatter;
+								
+								formatter = Formatter.getSingleton();
+								
+								EditStation.textTestConvHeure.setText(formatter.formatDateTime("hh24mm", HourLong, "9999"));
+								EditStation.textTestConvHeure.pack();
+								
+							} catch (ParseException e) {
+
+								Utils.messageErreurAppend(Messages
+										.getString("Etape.121")); //$NON-NLS-1$
+								EditStation.textTestConvHeure.setText(Messages
+										.getString("Etape.120"));
+								EditStation.textTestConvHeure.pack();
+							}
+							
+							if (!EditStation.buttonDateSaisie.getSelection()) {
+								Utils.test(test, ViewFile.styledTextStation, lign, debu, fi);
+							}
+							
+							DateLong = cal.getTimeInMillis();
+							
 							Formatter formatter;
 							
 							formatter = Formatter.getSingleton();
 							
 							test.setText(formatter.formatDateTime("ddMMyyyy", DateLong));
-							
-							
+							test.pack();
 						} catch (ParseException e) {
 
 							Utils.messageErreurAppend(Messages
@@ -1911,7 +1976,8 @@ public class DrawingStation {
 									.getString("Etape.120"));
 							test.pack();
 						}
-						test.pack();
+						
+						
 					}
 				});
 		

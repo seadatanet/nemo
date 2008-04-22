@@ -2057,8 +2057,12 @@ public class DataModel {
 		if (propertyModel.isUserProvided()) {
 			// profondeur manuelle
 			EditStation.buttonProfondeurSaisie.setSelection(true);
+			if (Float.isNaN(station_modele.getBottomDepth())) {
+				EditStation.textProfondeur.setText("");
+			} else {
 			EditStation.textProfondeur.setText(""
 					+ station_modele.getBottomDepth());
+			}
 
 		} else {
 			EditStation.buttonProfondeurSaisie.setSelection(false);
@@ -2210,9 +2214,14 @@ public class DataModel {
 					.propertiesAt("endDepth");
 			if (propertyModel.isUserProvided()) {
 				// saisie manuelle
-				EditStation.textProfFin.setText(""
-						+ stationModel_modele.getTimeSeriesInformation()
-								.getEndDepth());
+				if (Float.isNaN(stationModel_modele.getTimeSeriesInformation()
+								.getEndDepth())) {
+					EditStation.textProfFin.setText("");
+				} else {
+					EditStation.textProfFin.setText(""
+							+ stationModel_modele.getTimeSeriesInformation()
+									.getEndDepth());
+				}
 
 			} else {
 				// position dans fichier

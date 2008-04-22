@@ -534,8 +534,13 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 */
 	public void setBottomDepth(String a_String) {
 		try {
-			setBottomDepth(Float.parseFloat(a_String));
+			if (a_String.trim().equals("")) {
+				setBottomDepth(Float.NaN);
+			} else {
+				setBottomDepth(Float.parseFloat(a_String));
+			}
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 

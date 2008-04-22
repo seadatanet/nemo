@@ -740,7 +740,7 @@ public class Etape {
 			if (!EditStation.textTU.getText().matches("")
 					&& !EditStation.textTU.getText().matches("NaN")) {
 
-				if (Pattern.matches("^[0-9]*[0-9][.]?[0-9]*$",
+				if (Pattern.matches("^[+-]?[0-9]*[0-9][.]?[0-9]*$",
 						EditStation.textTU.getText())) {
 					ok = ok && true;
 
