@@ -1241,9 +1241,7 @@ public class Utils {
 		}
 		
 		// CENTRE DE DONNEES
-		String dataCenter = OptionsAction.comboCentreDonnees.getText();
-		dataCenter = dataCenter.substring(0,dataCenter.indexOf(" "));
-		configuration.setDataCenter(dataCenter);
+		configuration.setDataCenter(Utils.extraitCode(OptionsAction.comboCentreDonnees.getText()));
 
 		// WS
 		configuration.setNautilusWebServiceURL(OptionsAction.textAreaNautilus
@@ -1263,12 +1261,12 @@ public class Utils {
 		
 
 		// CDI
-		configuration.setIdEdmoRespCdi(OptionsAction.comboIdEdmoRespCdi.getText());
-		configuration.setCodeEdmoDonnees(OptionsAction.comboCodeEdmoDonnees.getText());
-		configuration.setIdEdmoRespDonnees(OptionsAction.comboIdEdmoRespDonnees.getText());
-		configuration.setIdEdmoDistDonnees(OptionsAction.comboIdEdmoDistDonnees.getText());
+		configuration.setIdEdmoRespCdi(Utils.extraitCode(OptionsAction.comboIdEdmoRespCdi.getText()));
+		configuration.setCodeEdmoDonnees(Utils.extraitCode(OptionsAction.comboCodeEdmoDonnees.getText()));
+		configuration.setIdEdmoRespDonnees(Utils.extraitCode(OptionsAction.comboIdEdmoRespDonnees.getText()));
+		configuration.setIdEdmoDistDonnees(Utils.extraitCode(OptionsAction.comboIdEdmoDistDonnees.getText()));
 		configuration.setCdiURL(OptionsAction.textUrlCdi.getText());
-		configuration.setCdiMethod(OptionsAction.comboMethodeCdi.getText());
+		configuration.setCdiMethod(Utils.extraitCode(OptionsAction.comboMethodeCdi.getText()));
 		
 		// Enregistrement de la configuration
 		configuration.save();
@@ -1420,6 +1418,8 @@ public class Utils {
 
 	public static void selectComboValeur(Combo combo, String valeur) {
 		int i = 0;
+		int size = combo.getItemCount();
+		
 		combo.select(i);
 		
 		while (i < combo.getItemCount() && !combo.getText().equals(valeur)) {
@@ -1431,6 +1431,28 @@ public class Utils {
 			combo.add(valeur);
 			combo.select(combo.getItemCount() - 1 );
 		}
+	}
+	
+	public static void selectComboCode(Combo combo, String code) {
+		int i = 0;
+		int length = code.length();
+		int size = combo.getItemCount();
+		
+		combo.select(i);
+		
+		while (i < size && !combo.getText().substring(0,Math.min(combo.getText().length(),length)).equals(code)) {
+			i++;
+			combo.select(i);
+		}
+		
+		if (!combo.getText().substring(0,length).equals(code)) {
+			combo.add(code);
+			combo.select(combo.getItemCount() - 1 );
+		}
+	}
+	
+	public static String extraitCode(String valeur) {
+		return valeur.substring(0,valeur.indexOf(" "));
 	}
 	
 	public static String extraitFichierChemin(String chemin) {

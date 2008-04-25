@@ -5,13 +5,19 @@ import java.beans.XMLEncoder;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import javax.xml.parsers.SAXParserFactory;
+import javax.xml.rpc.ServiceException;
 import javax.xml.rpc.holders.BooleanHolder;
 
 import org.apache.axis.client.Service;
 
+import fr.ifremer.nemo.ns_ws_edmo.Edmo_webservice;
+import fr.ifremer.nemo.ns_ws_edmo.Edmo_webserviceLocator;
+import fr.ifremer.nemo.ns_ws_edmo.Edmo_webserviceSoap;
 import fr.ifremer.nemo.ws.NemoWS;
 import fr.ifremer.nemo.ws.NemoWSServiceLocator;
 import fr.ifremer.nemo.ws.WSCountry;
@@ -45,12 +51,14 @@ public class NemoLists implements Cloneable {
 	static protected java.util.List<WSRegion> _regions = new java.util.ArrayList<WSRegion>();
 
 	static protected java.util.List<WSSurveyDescription> _surveys = new java.util.ArrayList<WSSurveyDescription>();
-
+	
+	static protected java.util.HashMap<Integer, String> _edmo = new java.util.HashMap<Integer, String>();
+	
 	public static Boolean okCountries, okShips, okSurveys, okDataCentres,
-			okParameters, okRegions, okDataTypes, okVocabLists;
+			okParameters, okRegions, okDataTypes, okVocabLists, okEdmo;
 	
 	public static int nbCountries, nbShips, nbSurveys, nbDataCentres,
-			nbParameters, nbRegions, nbDataTypes, nbVocabLists;
+			nbParameters, nbRegions, nbDataTypes, nbVocabLists, nbEdmo;
 	
 	static protected HashMap<String, CodeTableRecordType[]> _vocabList = new HashMap<String, CodeTableRecordType[]>();
 	
@@ -1514,6 +1522,7 @@ public class NemoLists implements Cloneable {
 		initSurveys();
 		initVocabLists();
 		initVocabMap();
+		initEdmo();
 	}
 
 	/**
@@ -1645,6 +1654,7 @@ public class NemoLists implements Cloneable {
 		updateParameters();
 		updateSurveys();
 		updateVocabLists();
+		updateEdmo();
 	}
 
 	/**
@@ -1977,6 +1987,63 @@ public class NemoLists implements Cloneable {
 			}
 		}
 	}
+	
+	public static void initEdmo() {
+		XMLDecoder decoder = null;
+		try {
+						
+			EdmoHandler edmoH = new EdmoHandler();
+						
+			SAXParserFactory.newInstance().newSAXParser().parse(new FileInputStream(
+			"resources/Edmo.xml"), edmoH);
+			
+			_edmo.putAll(edmoH.get_valeurs());
+			nbEdmo = _edmo.size();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (decoder != null) {
+				try {
+					decoder.close();
+				} catch (Exception ex) {
+				}
+			}
+		}
+	}
+	
+	public static void updateEdmo() {
+		okEdmo = false;
+		FileOutputStream stream = null;
+		XMLEncoder encoder = null;
+		
+		try {
+			Edmo_webservice service = new Edmo_webserviceLocator();
+			Edmo_webserviceSoap port = service.getedmo_webserviceSoap12();
+			String result = port.ws_edmo_get_list();
+			
+			if (!result.equals("")) {
+				
+				File file = new java.io.File("resources/Edmo.xml");
+				
+				stream = new FileOutputStream(file.toString());
+				OutputStreamWriter osw = new OutputStreamWriter(stream, "UTF-8");
+				osw.write(result);
+				osw.flush();
+				osw.close();
+				
+				initEdmo();
+				
+				okEdmo = true;
+			}
+			
+		} catch (ServiceException ex1) {
+			ex1.printStackTrace();
+		} catch (java.rmi.RemoteException ex2) {
+			ex2.printStackTrace();
+		} catch (Exception exG) {
+			exG.printStackTrace();
+		}
+	}
 
 	/**
 	 * 
@@ -2176,6 +2243,10 @@ public class NemoLists implements Cloneable {
 
 	public static void setVocabMap(CodeTableRecordType[] map) {
 		_vocabMap = map;
+	}
+
+	public static java.util.HashMap<Integer, String> getEdmo() {
+		return _edmo;
 	}
 
 

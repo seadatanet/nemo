@@ -1429,12 +1429,20 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 						} else {
 							long time = _timestampModel.convertTimestamp(line,
 									a_RefDate);
-							hValue.setDate(a_Station.getGMTDate(time));
+							hValue.setDate(a_Station.getGMTDate(time));	
+							
+							// FAE086 START
+							long ecart = (time - a_Station.getFullDate())/1000;
+							
+							if (ecart > 0 && a_Station.getTimeSeriesInformation().getSamplingRate() == 0) {
+								a_Station.getTimeSeriesInformation().setSamplingRate(ecart);
+							}
+							// FAE086 END
 						}
 						value = hValue;
 					} else {
 						value = new ParameterValue();
-					}					
+					}		
 					pm.convert(line, value);
 					p.addValue(value);
 					paramIndex++;

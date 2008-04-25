@@ -513,8 +513,17 @@ public class EditSurvey {
 		}
 		
 		message = message + Messages.getString("EditSurvey.73") + "  OK - "
-		+ NemoLists.nbVocabLists + " "
-		+ Messages.getString("EditSurvey.70");
+				+ NemoLists.nbVocabLists + " "
+				+ Messages.getString("EditSurvey.70");
+		
+		if (NemoLists.okEdmo) {
+			message = message + Messages.getString("EditSurvey.74") + "  OK - "
+					+ NemoLists.nbEdmo + " "
+					+ Messages.getString("EditSurvey.70");
+		} else {
+			message = message + Messages.getString("EditSurvey.74") + "  "
+			+ Messages.getString("EditSurvey.71");
+		}
 		
 		MessageDialog.openInformation(shell, "WebServices Info", message);
 

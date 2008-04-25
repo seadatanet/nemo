@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.TreeSet;
 
+import javax.xml.rpc.ServiceException;
+
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
@@ -32,6 +34,7 @@ import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
+import fr.ifremer.nemo.ns_ws_edmo.*;
 
 public class ViewFile extends ViewPart {
 
@@ -211,7 +214,6 @@ public class ViewFile extends ViewPart {
 
 					}
 				});
-
 		tabItem = new TabItem(tabFolder, SWT.NONE);
 		tabItem.setText(Messages.getString("ViewFile.description")); //$NON-NLS-1$
 		tabItem.setControl(composite1);
@@ -373,6 +375,31 @@ public class ViewFile extends ViewPart {
 					}
 				});
 
+		
+		// TEST WS START
+//		Button btnTestWS = new Button(composite11,SWT.NONE);
+//		btnTestWS.setText("Test");
+//		
+//		btnTestWS 
+//				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+//					public void widgetSelected(
+//							org.eclipse.swt.events.SelectionEvent e) {
+//						try {
+//							Edmo_webservice service = new Edmo_webserviceLocator();
+//							Edmo_webserviceSoap port = service.getedmo_webserviceSoap12();
+//							String result = port.ws_edmo_get_list();
+//							System.out.println(result);
+//						} catch (ServiceException ex1) {
+//							ex1.printStackTrace();
+//						} catch (java.rmi.RemoteException ex2) {
+//							ex2.printStackTrace();
+//						}
+//
+//				}
+//			}
+//		);
+		
+		// TEST WS END
 		
 		createGroupTempo();
 		
@@ -671,7 +698,7 @@ public class ViewFile extends ViewPart {
 		for (CodeTableRecordType record : records)
 		{	
 			String champCombo = "";
-			System.out.println(record.getEntryKey());
+			// System.out.println(record.getEntryKey());
 			String contenuCleDecoup[] = record.getEntryKey().split("/");
 			champCombo += contenuCleDecoup[contenuCleDecoup.length - 1];
 			champCombo += " - " + record.getEntryTerm();
@@ -695,7 +722,7 @@ public class ViewFile extends ViewPart {
 		for (CodeTableRecordType record : records)
 		{	
 			String champCombo = "";
-			System.out.println(record.getEntryKey());
+			// System.out.println(record.getEntryKey());
 			String contenuCleDecoup[] = record.getEntryKey().split("/");
 			champCombo += contenuCleDecoup[contenuCleDecoup.length - 1];
 			champCombo += " - " + record.getEntryTerm();
