@@ -14,6 +14,15 @@ COMMENT
 $line
 #end
 
+SDN_URN_resolution_URL
+http://www.seadatanet.org/urnurl/
+Note: concatenate this URL to a SeaDataNet URN to obtain corresponding URL
+
+SDN_parameter_mapping
+#foreach( $dataType in $survey.dataTypes )
+<subject>SDN:LOCAL:$formatter.padString($dataType.code, 3)</subject><object>SDN:P011::
+#end
+
 #end
 #foreach( $station in $survey.stations )
 *$formatter.padString( $survey.reference, 13)$formatter.padZero($station.reference.trim(), 5) Data Type=$formatter.padString($station.dataType.code, 3)

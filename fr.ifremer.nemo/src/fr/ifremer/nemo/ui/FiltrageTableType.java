@@ -452,7 +452,7 @@ public class FiltrageTableType {
 		nbre = EdmoHandler.listeFiltree.size();
 		// création des colonnes...
 		TableColumn tableColumn = new TableColumn(table, SWT.NONE);
-		tableColumn.setWidth(290);
+		tableColumn.setWidth(280);
 		// taille = 60
 		tableColumn.setText(Messages.getString("FiltrageTableType.17")); //$NON-NLS-1$
 		// TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);

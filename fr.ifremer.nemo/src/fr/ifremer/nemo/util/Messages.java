@@ -4,6 +4,7 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import fr.ifremer.nemo.config.Configuration;
+import fr.ifremer.nemo.ui.Utils;
 
 public class Messages {
 	private static final String BUNDLE_NAME_FR = "fr.ifremer.nemo.util.messages_fr_FR"; //$NON-NLS-1$
@@ -20,7 +21,7 @@ public class Messages {
 			// check config de la langue
 
 			// String langue = Utils.configuration.getLang();
-			String langue = Configuration.getSingleton().getLang();
+			String langue = Utils.configuration.getLang();
 			if (langue.matches("fr_FR")) {
 				ResourceBundle.getBundle(BUNDLE_NAME_FR);
 				RESOURCE_BUNDLE = ResourceBundle

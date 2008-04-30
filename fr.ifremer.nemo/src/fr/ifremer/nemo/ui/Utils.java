@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
 import org.eclipse.swt.SWT;
@@ -1215,11 +1216,9 @@ public class Utils {
 		if (configuration == null) {
 			configuration = Configuration.getSingleton();
 		} else {
-
 			Configuration.releaseSingleton();
 			configuration = Configuration.getSingleton();
 		}
-
 	}
 
 	public static void saveConfig() {
@@ -1249,15 +1248,9 @@ public class Utils {
 		configuration
 				.setNemoWebServiceURL(OptionsAction.textAreaNemo.getText());
 		configuration.setVocabURL(OptionsAction.textVocabURL.getText());
-		configuration.setVocabListURL("L011", OptionsAction.textL011.getText());
-		configuration.setVocabListURL("L021", OptionsAction.textL021.getText());
-		configuration.setVocabListURL("L031", OptionsAction.textL031.getText());
-		configuration.setVocabListURL("L041", OptionsAction.textL041.getText());
-		configuration.setVocabListURL("L051", OptionsAction.textL051.getText());
-		configuration.setVocabListURL("L061", OptionsAction.textL061.getText());
-		configuration.setVocabListURL("L071", OptionsAction.textL071.getText());
-		configuration.setVocabListURL("L081", OptionsAction.textL081.getText());
-		configuration.setVocabListURL("L091", OptionsAction.textL091.getText());
+		for (Entry<String, String> currentEntry : Utils.configuration.getVocabLists().entrySet()) {
+			configuration.setVocabListURL(currentEntry.getKey());
+		}
 		
 
 		// CDI
@@ -1267,6 +1260,8 @@ public class Utils {
 		configuration.setIdEdmoDistDonnees(Utils.extraitCode(OptionsAction.comboIdEdmoDistDonnees.getText()));
 		configuration.setCdiURL(OptionsAction.textUrlCdi.getText());
 		configuration.setCdiMethod(Utils.extraitCode(OptionsAction.comboMethodeCdi.getText()));
+		configuration.setPredicate(OptionsAction.textWSPredicate.getText());
+		configuration.setMatch(OptionsAction.comboWSTag.getText());
 		
 		// Enregistrement de la configuration
 		configuration.save();

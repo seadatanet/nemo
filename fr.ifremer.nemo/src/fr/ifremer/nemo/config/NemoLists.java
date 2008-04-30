@@ -18,6 +18,7 @@ import org.apache.axis.client.Service;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webservice;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webserviceLocator;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webserviceSoap;
+import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ws.NemoWS;
 import fr.ifremer.nemo.ws.NemoWSServiceLocator;
 import fr.ifremer.nemo.ws.WSCountry;
@@ -1665,13 +1666,13 @@ public class NemoLists implements Cloneable {
 		XMLEncoder encoder = null;
 		okCountries = false;
 		try {
-			java.net.URL toto = new java.net.URL(Configuration.getSingleton()
+			java.net.URL toto = new java.net.URL(Utils.configuration
 					.getNemoWebServiceURL());
 
 			NemoWSServiceLocator servicews = new NemoWSServiceLocator();
 			NemoWS service = servicews.getNEMO(toto);
 			// new
-			// java.net.URL(Configuration.getSingleton().getNemoWebServiceURL()));
+			// java.net.URL(Utils.configuration.getNemoWebServiceURL()));
 			WSCountry[] countries = service.getCountries();
 			releaseCountries();
 			for (int i = 0; i < countries.length; i++) {
@@ -1718,7 +1719,7 @@ public class NemoLists implements Cloneable {
 		okDataCentres = false;
 		try {
 			NemoWS service = new NemoWSServiceLocator()
-					.getNEMO(new java.net.URL(Configuration.getSingleton()
+					.getNEMO(new java.net.URL(Utils.configuration
 							.getNemoWebServiceURL()));
 			WSDataCentre[] types = service.getDataCentres();
 			releaseDataCentres();
@@ -1765,7 +1766,7 @@ public class NemoLists implements Cloneable {
 		okDataTypes = false;
 		try {
 			NemoWS service = new NemoWSServiceLocator()
-					.getNEMO(new java.net.URL(Configuration.getSingleton()
+					.getNEMO(new java.net.URL(Utils.configuration
 							.getNemoWebServiceURL()));
 			WSDataType[] types = service.getDataTypes();
 			releaseDataTypes();
@@ -1812,7 +1813,7 @@ public class NemoLists implements Cloneable {
 		XMLEncoder encoder = null;
 		try {
 			NemoWS service = new NemoWSServiceLocator()
-					.getNEMO(new java.net.URL(Configuration.getSingleton()
+					.getNEMO(new java.net.URL(Utils.configuration
 							.getNemoWebServiceURL()));
 			WSParameter[] parameters = service.getParameters();
 			releaseParameters();
@@ -1859,7 +1860,7 @@ public class NemoLists implements Cloneable {
 		XMLEncoder encoder = null;
 		try { 
 			NemoWS service = new NemoWSServiceLocator()
-					.getNEMO(new java.net.URL(Configuration.getSingleton()
+					.getNEMO(new java.net.URL(Utils.configuration
 							.getNemoWebServiceURL()));
 			WSRegion[] regions = service.getRegions();
 			releaseRegions();
@@ -1905,7 +1906,7 @@ public class NemoLists implements Cloneable {
 		XMLEncoder encoder = null;
 		try {
 			NemoWS service = new NemoWSServiceLocator()
-					.getNEMO(new java.net.URL(Configuration.getSingleton()
+					.getNEMO(new java.net.URL(Utils.configuration
 							.getNemoWebServiceURL()));
 			WSShip[] ships = service.getShips();
 			releaseShips();
@@ -1951,7 +1952,7 @@ public class NemoLists implements Cloneable {
 		XMLEncoder encoder = null;
 		try {
 			NemoWS service = new NemoWSServiceLocator()
-					.getNEMO(new java.net.URL(Configuration.getSingleton()
+					.getNEMO(new java.net.URL(Utils.configuration
 							.getNemoWebServiceURL()));
 			WSSurveyDescription[] surveys = service.getSurveyList();
 			releaseSurveys();
@@ -2057,9 +2058,9 @@ public class NemoLists implements Cloneable {
 		javax.xml.rpc.holders.BooleanHolder error = new BooleanHolder();
 		try {
 			VocabSoapBindingStub vocab = new VocabSoapBindingStub(
-					new java.net.URL(Configuration.getSingleton().getVocabURL()),
+					new java.net.URL(Utils.configuration.getVocabURL()),
 					new Service());
-			vocab.getList(new String[]{Configuration.getSingleton().getVocabListURL(listName)}, null, table, error );
+			vocab.getList(new String[]{Utils.configuration.getVocabListURL(listName)}, null, table, error );
 			if (!error.value) {
 				if (table.value != null) {
 					_vocabList.put(listName, table.value);
@@ -2113,7 +2114,7 @@ public class NemoLists implements Cloneable {
 	 * 
 	 */
 	public static void updateVocabLists() {
-		Iterator<String> keys = Configuration.getSingleton().getVocabLists().keySet().iterator();
+		Iterator<String> keys = Utils.configuration.getVocabLists().keySet().iterator();
 		nbVocabLists = 0;
 		while (keys.hasNext()) {
 			String listName = keys.next();
@@ -2126,7 +2127,7 @@ public class NemoLists implements Cloneable {
 	 */
 	public static void initVocabLists() {
 		XMLDecoder decoder = null;
-		Iterator<String> keys = Configuration.getSingleton().getVocabLists().keySet().iterator();
+		Iterator<String> keys = Utils.configuration.getVocabLists().keySet().iterator();
 		while (keys.hasNext()) {
 			String listName = keys.next();
 			try {
@@ -2186,14 +2187,14 @@ public class NemoLists implements Cloneable {
 		javax.xml.rpc.holders.BooleanHolder error = new BooleanHolder();
 		try {
 			VocabSoapBindingStub vocab = new VocabSoapBindingStub(
-					new java.net.URL(Configuration.getSingleton().getVocabURL()),
+					new java.net.URL(Utils.configuration.getVocabURL()),
 					new Service());
 			vocab.getMap(
-					//new String[]{Configuration.getSingleton().getVocabListURL("P031")},
-					new String[]{"http://vocab.ndg.nerc.ac.uk/list/P031/current"},
-					2,
-					//new String[]{Configuration.getSingleton().getVocabListURL("P021")},
-					new String[]{"http://vocab.ndg.nerc.ac.uk/list/P021/current"},
+					new String[]{Utils.configuration.getVocabListURL("P091")},
+					// new String[]{"http://vocab.ndg.nerc.ac.uk/list/P031/current"},
+					Integer.parseInt(Utils.configuration.getPredicate().trim()),
+					new String[]{Utils.configuration.getVocabListURL("P021")},
+					// new String[]{"http://vocab.ndg.nerc.ac.uk/list/P021/current"},
 					"false",
 					table,
 					error);

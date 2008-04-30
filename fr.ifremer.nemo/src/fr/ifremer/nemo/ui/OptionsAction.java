@@ -2,7 +2,6 @@ package fr.ifremer.nemo.ui;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.Map.Entry;
@@ -12,7 +11,6 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
@@ -35,6 +33,7 @@ import org.eclipse.ui.actions.ActionFactory;
 
 import fr.ifremer.nemo.config.EdmoHandler;
 import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.config.Configuration.enumMatch;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
@@ -50,7 +49,8 @@ public class OptionsAction extends Action implements ISelectionListener,
 			groupDossier, groupDossier1, groupDossier2, groupCDI = null;
 
 	public static Combo comboLangue, comboCentreDonnees, comboIdEdmoRespCdi, comboRecherche,
-				comboMethodeCdi,comboCodeEdmoDonnees, comboIdEdmoRespDonnees, comboIdEdmoDistDonnees = null;
+				comboMethodeCdi,comboCodeEdmoDonnees, comboIdEdmoRespDonnees, comboIdEdmoDistDonnees, 
+				comboWSTag = null;
 
 	public static Button buttonCancel, buttonValider, buttonParcourirModele,
 			buttonParcourirCampagne = null;
@@ -58,15 +58,10 @@ public class OptionsAction extends Action implements ISelectionListener,
 	public static Label labelNemo, labelNautilus, labelModèle, labelCampagne,
 			labelIdEdmoRespCdi, labelUrlCdi, labelMethodeCdi,
 			labelCodeEdmoDonnees, labelIdEdmoRespDonnees, labelIdEdmoDistDonnees,
-			labelWSVocab,
-			labelL011, labelL021, labelL031, labelL041, labelL051, 
-			labelL061, labelL071, labelL081, labelL091 = null;
+			labelWSVocab, labelWSPredicate, labelWSTag = null;
 
 	public static Text textAreaNemo, textAreaNautilus, textDossierModele, textDossierCampagne, 
-			textUrlCdi, 
-			textVocabURL,
-			textL011, textL021, textL031, textL041, textL051,
-			textL061, textL071, textL081, textL091 = null;
+			textUrlCdi, textVocabURL, textWSPredicate = null;
 	
 	public static Table tableWSVocab;
 
@@ -99,7 +94,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		shelloptions = new Shell(Application.display, SWT.BORDER | SWT.TITLE
 				| SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);
 
-		shelloptions.setSize(600, 700);
+		shelloptions.setSize(600, 550);
 		shelloptions.setText(Messages.getString("OptionsAction.3")); //$NON-NLS-1$
 		shelloptions.setLayout(new GridLayout());
 		
@@ -155,15 +150,22 @@ public class OptionsAction extends Action implements ISelectionListener,
 				.setText(Utils.configuration.getNautilusWebServiceURL());
 		
 		textVocabURL.setText(Utils.configuration.getVocabURL());
-		textL011.setText(Utils.configuration.getVocabListURL("L011"));
-		textL021.setText(Utils.configuration.getVocabListURL("L021"));
-		textL031.setText(Utils.configuration.getVocabListURL("L031"));
-		textL041.setText(Utils.configuration.getVocabListURL("L041"));
-		textL051.setText(Utils.configuration.getVocabListURL("L051"));
-		textL061.setText(Utils.configuration.getVocabListURL("L061"));
-		textL071.setText(Utils.configuration.getVocabListURL("L071"));
-		textL081.setText(Utils.configuration.getVocabListURL("L081"));
-		textL091.setText(Utils.configuration.getVocabListURL("L091"));
+		textWSPredicate.setText(Utils.configuration.getPredicate());
+		
+		for (enumMatch match : enumMatch.values()) {
+			comboWSTag.add(match.name());
+		}
+		Utils.selectComboValeur(comboWSTag,Utils.configuration.getMatch());
+		
+//		textL011.setText(Utils.configuration.getVocabListURL("L011"));
+//		textL021.setText(Utils.configuration.getVocabListURL("L021"));
+//		textL031.setText(Utils.configuration.getVocabListURL("L031"));
+//		textL041.setText(Utils.configuration.getVocabListURL("L041"));
+//		textL051.setText(Utils.configuration.getVocabListURL("L051"));
+//		textL061.setText(Utils.configuration.getVocabListURL("L061"));
+//		textL071.setText(Utils.configuration.getVocabListURL("L071"));
+//		textL081.setText(Utils.configuration.getVocabListURL("L081"));
+//		textL091.setText(Utils.configuration.getVocabListURL("L091"));
 		
 		
 		// CDI
@@ -469,78 +471,23 @@ public class OptionsAction extends Action implements ISelectionListener,
 		GridDataFactory.fillDefaults().grab(true,false).applyTo(compoWSVocab1);
 		
 		labelWSVocab = new Label(compoWSVocab1, SWT.NONE);
-		labelWSVocab.setText("WS Vocab");
+		labelWSVocab.setText(Messages.getString("OptionsAction.28"));
 		textVocabURL = new Text(compoWSVocab1, SWT.BORDER);
 		GridDataFactory.fillDefaults().grab(true,false).applyTo(textVocabURL);
 		
-		compoWSVocab2 = new Composite(groupWS, SWT.NONE);
-		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoWSVocab2);
-		GridDataFactory.fillDefaults().grab(true,true).applyTo(compoWSVocab2);
+//		compoWSVocab2 = new Composite(groupWS, SWT.NONE);
+//		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoWSVocab2);
+//		GridDataFactory.fillDefaults().grab(true,true).applyTo(compoWSVocab2);
 		
-//		tableWSVocab = new Table(compoWSVocab2, SWT.FULL_SELECTION | SWT.H_SCROLL | SWT.BORDER);
-//		tableWSVocab.setHeaderVisible(true);
-//		tableWSVocab.setLinesVisible(true);
-//		GridDataFactory.fillDefaults().grab(true,true).applyTo(tableWSVocab);
-//		
-//		TableColumn colListName = new TableColumn(tableWSVocab, SWT.NONE);
-//		colListName.setText("Code");
-//		colListName.setWidth(100);
-//		
-//		
-//		TableColumn colListURL = new TableColumn(tableWSVocab, SWT.NONE);
-//		colListURL.setText("URL");
-//		colListURL.setWidth(300);
-//		
-//		TableEditor editTable = new TableEditor(tableWSVocab);
-//		
-//		editTable.horizontalAlignment = SWT.LEFT;
-//		editTable.grabHorizontal = true;
+		labelWSPredicate = new Label(compoWSVocab1, SWT.NONE);
+		labelWSPredicate.setText(Messages.getString("OptionsAction.29"));
 		
-		labelL011 = new Label(compoWSVocab2, SWT.NONE);
-		labelL011.setText("L011");
-		textL011 = new Text(compoWSVocab2, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL011);
+		textWSPredicate = new Text(compoWSVocab1,SWT.BORDER);
 		
-		labelL021 = new Label(compoWSVocab2, SWT.NONE);
-		labelL021.setText("L021");
-		textL021 = new Text(compoWSVocab2, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL021);
+		labelWSTag = new Label(compoWSVocab1, SWT.NONE);
+		labelWSTag.setText(Messages.getString("OptionsAction.30"));
 		
-		labelL031 = new Label(compoWSVocab2, SWT.NONE);
-		labelL031.setText("L031");
-		textL031 = new Text(compoWSVocab2, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL031);
-		
-		labelL041 = new Label(compoWSVocab2, SWT.NONE);
-		labelL041.setText("L041");
-		textL041 = new Text(compoWSVocab2, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL041);
-		
-		labelL051 = new Label(compoWSVocab2, SWT.NONE);
-		labelL051.setText("L051");
-		textL051 = new Text(compoWSVocab2, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL051);
-		
-		labelL061 = new Label(compoWSVocab2, SWT.NONE);
-		labelL061.setText("L061");
-		textL061 = new Text(compoWSVocab2, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL061);
-		
-		labelL071 = new Label(compoWSVocab2, SWT.NONE);
-		labelL071.setText("L071");
-		textL071 = new Text(compoWSVocab2, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL071);
-		
-		labelL081 = new Label(compoWSVocab2, SWT.NONE);
-		labelL081.setText("L081");
-		textL081 = new Text(compoWSVocab2, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL081);
-		
-		labelL091 = new Label(compoWSVocab2, SWT.NONE);
-		labelL091.setText("L091");
-		textL091 = new Text(compoWSVocab2, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(textL091);
-		
+		comboWSTag = new Combo(compoWSVocab1, SWT.READ_ONLY);
 	}
 	
 	/**
@@ -652,7 +599,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
 //						System.out.println("options cancel");
-
+						OptionsAction.options = 0;
 						shelloptions.close();
 
 					}
@@ -668,6 +615,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 						// sauvegarde de la config
 						Utils.saveConfig();
 
+						OptionsAction.options = 0;
 						shelloptions.close();
 
 					}

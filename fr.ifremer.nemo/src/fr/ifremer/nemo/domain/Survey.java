@@ -1122,7 +1122,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 	public void fillFromSISMER(String a_Reference) throws ServiceException,
 			MalformedURLException, RemoteException {
 		NautilusSurveyWS service = new NautilusSurveyWSServiceLocator()
-				.getNAUTILUS(new java.net.URL(Configuration.getSingleton()
+				.getNAUTILUS(new java.net.URL(Utils.configuration
 						.getNautilusWebServiceURL()));
 		WSSurvey wssurvey = service.getSurvey(a_Reference);
 		if (wssurvey.getReference() != null) {

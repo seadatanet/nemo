@@ -16,9 +16,17 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
+import com.sun.mail.handlers.message_rfc822;
+
 import fr.ifremer.nemo.config.Configuration;
+import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.config.Configuration.enumMatch;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
+import fr.ifremer.nemo.ui.DataModel;
+import fr.ifremer.nemo.ui.TableData;
+import fr.ifremer.nemo.ui.TableDataSurvey;
+import fr.ifremer.nemo.ui.TypeData;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.ViewFile;
 import fr.ifremer.nemo.util.Formatter;
@@ -68,7 +76,7 @@ public class CDIResumeWriter {
 
 			Formatter formatter = Formatter.getSingleton();
 
-			int cdiId = Integer.parseInt(ViewFile.txtCompteurCDI.getText());
+			Integer cdiId = Integer.parseInt(ViewFile.txtCompteurCDI.getText());
 
 			writer.write("CDI ID;" +
 					"EDMO AUTHOR;" +
@@ -94,107 +102,155 @@ public class CDIResumeWriter {
 			
 			for (Survey survey : surveys) {
 				for (Station station : survey.getStations()) {
-					
-					writer.write("\r\n");
-					
-					// CDI ID
-//					writer.write(Utils.configuration.getDataCenter() + "_"
-//							+ String.valueOf(cdiId++));
-					writer.write(Configuration.getSingleton().getIdEdmoRespCdi() + "_"
-							+ String.valueOf(cdiId++));
+					for (TypeData type : TableData.types) {
+						writer.write("\r\n");
+						
+						// CDI ID
+						writer.write(Utils.configuration.getDataCenter() + "_"
+								+ String.valueOf(cdiId++));
+//						writer.write(Configuration.getSingleton().getIdEdmoRespCdi() + "_"
+//								+ String.valueOf(cdiId++));
 
-					// EDMO author
-// 					writer.write(";" + Utils.configuration.getIdEdmoRespCdi());
-					writer.write(";" + Configuration.getSingleton().getIdEdmoRespCdi());
+						// EDMO author
+	 					writer.write(";" + Utils.configuration.getIdEdmoRespCdi());
+//						writer.write(";" + Configuration.getSingleton().getIdEdmoRespCdi());
 
-					// Area Type
-					writer.write(";" + "Point");
+						// Area Type
+						writer.write(";" + "Point");
 
-					// Dataset name
-					writer.write(";" + "Not Specified");
+						// Dataset name
+						writer.write(";" + Messages.getString("CDIResumeWriter.notSpecified"));
 
-					// Dataset ID
-					writer.write(";" + "Not Specified");
+						// Dataset ID
+						writer.write(";" + Messages.getString("CDIResumeWriter.notSpecified"));
 
-					// Dataset Rev Date
-					Calendar calendrier = Calendar.getInstance();
-					Date dateEcriture = calendrier.getTime();
-					SimpleDateFormat dateFormat = new  SimpleDateFormat("yyyy:MM:dd'T'HH:mm:ss");
-					String stringDate = dateFormat.format(dateEcriture);
-					writer.write(";" + stringDate);
+						// Dataset Rev Date
+						Calendar calendrier = Calendar.getInstance();
+						Date dateEcriture = calendrier.getTime();
+						SimpleDateFormat dateFormat = new  SimpleDateFormat("yyyy:MM:dd'T'HH:mm:ss");
+						String stringDate = dateFormat.format(dateEcriture);
+						writer.write(";" + stringDate);
 
-					// Edmo originator
-//					writer.write(";"
-//									+ Utils.configuration.getCodeEdmoDonnees());
-					writer.write(";"
-							+ Configuration.getSingleton().getCodeEdmoDonnees());
+						// Edmo originator
+						writer.write(";"
+										+ Utils.configuration.getCodeEdmoDonnees());
+//						writer.write(";"
+//								+ Configuration.getSingleton().getCodeEdmoDonnees());
 
-					// Dataset ABS
-					writer.write(";" + "Not Specified");
+						// Dataset ABS
+						writer.write(";" + Messages.getString("CDIResumeWriter.notSpecified"));
 
-					// EDMO Custodian
-//					writer.write(";"
-//							+ Utils.configuration.getIdEdmoRespDonnees());
-					writer.write(";"
-							+ Configuration.getSingleton().getIdEdmoRespDonnees());
-					
-					// PDV code
-					writer.write(";" + "");
+						// EDMO Custodian
+						writer.write(";"
+								+ Utils.configuration.getIdEdmoRespDonnees());
+//						writer.write(";"
+//								+ Configuration.getSingleton().getIdEdmoRespDonnees());
+						
+						// PDV code
+						String pdvCode = "";
+						int intLength = NemoLists.getVocabMap().length;
+						for (int i = 0; i < intLength; i++) {
+							if (NemoLists.getVocabMap()[i].getEntryTermAbbr().equals(Utils.extraitCode(type.getCode()))) {
+								try {
+									switch (enumMatch
+											.valueOf(Utils.configuration
+													.getMatch())) {
+									case broadMatch:
+										pdvCode = NemoLists.getVocabMap()[i]
+												.getBroadMatch()[0]
+												.getEntryKey();
+										break;
 
-					// Platform Type
-					writer.write(";" + ViewFile.comboTypePlateForme.getText());
+									case exactMatch:
+										pdvCode = NemoLists.getVocabMap()[i]
+												.getExactMatch()[0]
+												.getEntryKey();
+										break;
 
-					// Dataset Access
-					writer.write(";" + ViewFile.comboAccesDonnees.getText());
+									case majorMatch:
+										pdvCode = NemoLists.getVocabMap()[i]
+												.getMajorMatch()[0]
+												.getEntryKey();
+										break;
 
-					// Cruise name
-					if (ViewFile.collectionCas1)
-						writer.write(";" + survey.getName());
-					else
-						writer.write(";" + "Not specified");
+									case minorMatch:
+										pdvCode = NemoLists.getVocabMap()[i]
+												.getMinorMatch()[0]
+												.getEntryKey();
+										break;
 
-					// Station name
-					writer.write(";" + station.getReference().trim());
-					
-					// station latitude
-					writer.write(";"
-							+ formatter.formatLatitude("+DD.ddd ", station
-									.getLatitude()));
+									case narrowMatch:
+										pdvCode = NemoLists.getVocabMap()[i]
+												.getNarrowMatch()[0]
+												.getEntryKey();
+										break;
 
-					// station longitude
-					writer.write(";"
-							+ formatter.formatLongitude("+DDD.ddd", station
-									.getLongitude()));
+									default:
+										pdvCode = Messages.getString("CDIResumeWriter.notSpecified");
+										break;
+									}
+								} catch (Exception e) {
+									pdvCode = Messages.getString("CDIResumeWriter.notSpecified");
+									e.printStackTrace();
+								}
+								break;
+							}
+						}
+						
+						writer.write(";" + pdvCode + "");
 
-					// station date
-					Formatter format = new Formatter();
-					SimpleDateFormat dateFormat2 = new  SimpleDateFormat("yyyy:MM:dd'T'");
-					writer.write(";"
-							+ dateFormat2.format(new Date(station.getDate())) + format.formatDateTime("hh24:mm:ss", station.getCorrectedTime()));
-		
-					station.getOffsetTU();
-					station.getParameters()[0].getStation().getTime();
-					// edmo distributor
-//					writer.write(";"
-//							+ Utils.configuration.getIdEdmoDistDonnees());
-					writer.write(";"
-							+ Configuration.getSingleton().getIdEdmoDistDonnees());
-					
-					// data size
-					writer.write(";" + String.format("%.3f",survey.getDataSize()));
+						// Platform Type
+						writer.write(";" + ViewFile.comboTypePlateForme.getText());
 
-					// DIST website
-//					writer.write(";" + Utils.configuration.getCdiURL());
-					writer.write(";" + Configuration.getSingleton().getCdiURL());
+						// Dataset Access
+						writer.write(";" + ViewFile.comboAccesDonnees.getText());
 
-					// DIST methode
-//					writer.write(";" + Utils.configuration.getCdiMethod());
-					writer.write(";" + Configuration.getSingleton().getCdiMethod());
+						// Cruise name
+						if (ViewFile.collectionCas1)
+							writer.write(";" + survey.getName());
+						else
+							writer.write(";" + Messages.getString("CDIResumeWriter.notSpecified"));
 
+						// Station name
+						writer.write(";" + station.getReference().trim());
+						
+						// station latitude
+						writer.write(";"
+								+ formatter.formatLatitude("+DD.ddd ", station
+										.getLatitude()));
+
+						// station longitude
+						writer.write(";"
+								+ formatter.formatLongitude("+DDD.ddd", station
+										.getLongitude()));
+
+						// station date
+						Formatter format = new Formatter();
+						SimpleDateFormat dateFormat2 = new  SimpleDateFormat("yyyy:MM:dd'T'");
+						writer.write(";"
+								+ dateFormat2.format(new Date(station.getDate())) + format.formatDateTime("hh24:mm:ss", station.getCorrectedTime()));
+			
+						station.getOffsetTU();
+						station.getParameters()[0].getStation().getTime();
+						// edmo distributor
+						writer.write(";"
+								+ Utils.configuration.getIdEdmoDistDonnees());
+//						writer.write(";"
+//								+ Configuration.getSingleton().getIdEdmoDistDonnees());
+						
+						// data size
+						writer.write(";" + String.format("%.3f",survey.getDataSize()));
+
+						// DIST website
+						writer.write(";" + Utils.configuration.getCdiURL());
+//						writer.write(";" + Configuration.getSingleton().getCdiURL());
+
+						// DIST methode
+						writer.write(";" + Utils.configuration.getCdiMethod());
+//						writer.write(";" + Configuration.getSingleton().getCdiMethod());
+					}	
 				}
-
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ParseException e) {
@@ -215,8 +271,8 @@ public class CDIResumeWriter {
 		FileDialog dialog = new FileDialog(shell, SWT.SAVE
 				| SWT.APPLICATION_MODAL);
 		dialog.setText(Messages.getString("CDIResumeWriter.choixFichier")); //$NON-NLS-1$
-//		dialog.setFilterPath(Utils.configuration.getCruisesDirectory());
-		dialog.setFilterPath(Configuration.getSingleton().getCruisesDirectory());
+		dialog.setFilterPath(Utils.configuration.getCruisesDirectory());
+//		dialog.setFilterPath(Configuration.getSingleton().getCruisesDirectory());
 		String extensions[] = new String[1];
 		extensions[0] = "*.csv"; //$NON-NLS-1$
 		dialog.setFilterExtensions(extensions);

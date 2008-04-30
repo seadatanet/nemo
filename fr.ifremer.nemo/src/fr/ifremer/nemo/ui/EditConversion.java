@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
+import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.input.SurveyMedia;
 import fr.ifremer.nemo.output.CDIResumeWriter;
 import fr.ifremer.nemo.output.ProgressNotification;
@@ -108,7 +109,7 @@ public class EditConversion extends Thread {
 									.getString("EditConversion.17"));							
 						} catch (Exception ex) {
 							Utils.messageErreur(Messages
-									.getString("EditConversion.17"));	
+									.getString("EditConversion.19"));	
 						}
 						
 					}

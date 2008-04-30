@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.StringTokenizer;
+import java.util.TreeSet;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -18,6 +19,8 @@ import com.ago.xml.RootSAXConsumer;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLBootstrapParser;
 import com.ago.xml.XMLOutputWriter;
+
+import fr.ifremer.nemo.ui.Utils;
 
 /**
  * Class Configuration
@@ -59,6 +62,14 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	
 	protected String _vocabURL;
 	
+	protected String _predicate;
+	
+	public enum enumMatch {
+		broadMatch, exactMatch, majorMatch, minorMatch, narrowMatch;
+	}
+	
+	protected String _match;
+	
 	protected HashMap<String, String> _vocabLists = new HashMap<String, String>();
 
 	/**
@@ -89,6 +100,19 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		_showRule = true;
 		_locale = null;
 		_vocabURL = "";
+		
+		_vocabLists = new HashMap<String, String>();
+		_vocabLists.put("L021", "");
+		_vocabLists.put("L031", "");
+		_vocabLists.put("L051", "");
+		_vocabLists.put("L061", "");
+		_vocabLists.put("L071", "");
+		_vocabLists.put("L081", "");
+		_vocabLists.put("P011", "");
+		_vocabLists.put("P021", "");
+		_vocabLists.put("P091", "");
+		
+		_match = "";
 	}
 
 	/**
@@ -223,6 +247,14 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			}
 			return this;
 		}
+		if (a_LocalName.equals("predicate")) {
+			Element2Field setter = new Element2Field(this, "setPredicate");
+			return setter;
+		}
+		if (a_LocalName.equals("match")) {
+			Element2Field setter = new Element2Field(this, "setMatch");
+			return setter;
+		}
 		return null;
 	}
 
@@ -270,6 +302,8 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			a_Writer.putAttribute("value", _vocabLists.get(listName));
 			a_Writer.closeTag();
 		}
+		a_Writer.putTag("predicate", getPredicate());
+		a_Writer.putTag("match", getMatch());
 	}
 
 	/**
@@ -790,9 +824,27 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		return _vocabLists.get(listName);
 	}
 
-	public void setVocabListURL(String listName, String a_URL) {
-		_vocabLists.put(listName, a_URL);
+	public void setVocabListURL(String listName) {
+		String VocabUrl = Utils.configuration.getVocabURL();
+		String ListUrl = VocabUrl.substring(0, VocabUrl.indexOf('/',7) + 1) + "list/" + listName + "/current";
+		
+		_vocabLists.put(listName, ListUrl);
+	}
+	
+	public String getMatch() {
+		return _match;
 	}
 
+	public void setMatch(String _match) {
+		this._match = _match;
+	}
+
+	public String getPredicate() {
+		return _predicate;
+	}
+
+	public void setPredicate(String _predicate) {
+		this._predicate = _predicate;
+	}
 	
 } /* End of class: Configuration */
