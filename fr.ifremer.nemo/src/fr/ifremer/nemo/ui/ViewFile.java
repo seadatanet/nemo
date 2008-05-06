@@ -670,19 +670,24 @@ public class ViewFile extends ViewPart {
 	
 		grpCDI = new Group(compositeConversion, SWT.NONE);
 		GridLayoutFactory.fillDefaults().applyTo(grpCDI);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(grpCDI);
+		GridDataFactory.fillDefaults().grab(false,false).applyTo(grpCDI);
 
 		checkCDI = new Button (grpCDI, SWT.CHECK);
 		checkCDI.setText(Messages.getString("ViewFile.choixResumeCDI"));
 		
+		Composite cmpCompteur = new Composite(grpCDI, SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(cmpCompteur);
+		GridDataFactory.fillDefaults().grab(false,false).applyTo(cmpCompteur);
+		
+		lblCompteurCDI = new Label(cmpCompteur, SWT.NONE);
+		lblCompteurCDI.setText(Messages.getString("ViewFile.compteurCDI"));
+		
+		txtCompteurCDI = new Text(cmpCompteur, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(false,false).applyTo(txtCompteurCDI);
+		
 		Composite cmpCDI = new Composite(grpCDI, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(cmpCDI);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(cmpCDI);
-		
-		lblCompteurCDI = new Label(cmpCDI, SWT.NONE);
-		lblCompteurCDI.setText(Messages.getString("ViewFile.compteurCDI"));
-		txtCompteurCDI = new Text(cmpCDI, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(false,false).applyTo(txtCompteurCDI);
+		GridDataFactory.fillDefaults().grab(false,false).applyTo(cmpCDI);
 		
 		lblTypePlateForme = new Label(cmpCDI, SWT.NONE);
 		lblTypePlateForme.setText(Messages.getString("ViewFile.typePlateForme"));
@@ -732,13 +737,12 @@ public class ViewFile extends ViewPart {
 		for (String champ : champsMethodesCdi)
 			comboAccesDonnees.add(champ);
 		
-		
-		
 		GridDataFactory.fillDefaults().grab(false,false).applyTo(comboAccesDonnees);
 		
 		// Par défaut
 		lblCompteurCDI.setEnabled(checkCDI.getSelection());
-		txtCompteurCDI.setEnabled(checkCDI.getSelection());
+		txtCompteurCDI.setEnabled(checkCDI.getSelection());		
+		
 		lblTypePlateForme.setEnabled(checkCDI.getSelection());
 		comboTypePlateForme.setEnabled(checkCDI.getSelection());
 		lblAccesDonnees.setEnabled(checkCDI.getSelection());
@@ -765,7 +769,8 @@ public class ViewFile extends ViewPart {
 		comboTypePlateForme.pack();
 		grpCDI.pack();
 		grpCDI.setVisible(false);
-				
+			
+		txtCompteurCDI.setLocation(comboTypePlateForme.getLocation().x, txtCompteurCDI.getLocation().y);
 	}
 
 	/**

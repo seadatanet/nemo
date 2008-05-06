@@ -158,7 +158,7 @@ public class EditData {
 		formEdition.reflow(true);
 
 		buttonExpand2.setText("+"); //$NON-NLS-1$
-
+		
 		ViewFile.affiche = 3;
 		ViewEdit.formEdition.reflow(true);
 
@@ -305,9 +305,9 @@ public class EditData {
 
 		// affichage courant
 		ViewFile.affiche = 3;
-
+		
 		// remplissage de l'IHM par le modèle chargé
-
+		
 		// DataModel.ouverture);
 
 		if (DataModel.ouverture) {

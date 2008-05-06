@@ -71,6 +71,9 @@ public class EditConversion extends Thread {
 						
 						Utils.messageErreur("");
 						
+						// RAZ du numéro de station incrémenté
+						DataModel.stationModel.resetRef();
+						
 						// test pour savoir si le compteur CDI est un numérique
 						try {
 							if (ViewFile.checkCDI.getSelection())

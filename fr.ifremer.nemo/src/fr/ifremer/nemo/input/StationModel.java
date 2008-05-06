@@ -1553,8 +1553,12 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * 
 	 */
 	public void initRef() {
-		// if (_ref == -1)
+		if (_ref == -1)
 			_ref = getIncrementNumber();
+	}
+	
+	public void resetRef() {
+		_ref = -1;
 	}
 	
 } /* End of class: StationModel */

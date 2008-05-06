@@ -13,6 +13,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 import fr.ifremer.nemo.domain.Survey;
+import fr.ifremer.nemo.input.SingleFileSurvey;
+import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.input.SurveyMedia;
 import fr.ifremer.nemo.medatlas.MedatlasSurveyWriter;
 import fr.ifremer.nemo.odv.ODVSurveyWriter;

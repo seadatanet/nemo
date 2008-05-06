@@ -2364,6 +2364,7 @@ public class DataModel {
 				// saisie manuelle
 				EditData.buttonFreqEchant.setSelection(true);
 				EditData.buttonLigneDonnees.setSelection(false);
+				EditData.test();
 			} else {
 				// position heure/date dans fichier
 				EditData.buttonFreqEchant.setSelection(false);
@@ -2379,7 +2380,7 @@ public class DataModel {
 				EditData.textTotalFin.setText(""
 						+ stationModel_modele.getTimestampModel()
 								.getDateTimeFragment().getLastCharOffset());
-
+				EditData.test2();
 			}
 
 		}
