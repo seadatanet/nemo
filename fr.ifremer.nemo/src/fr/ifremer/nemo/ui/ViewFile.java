@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.TreeSet;
 
-import javax.xml.rpc.ServiceException;
-
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
@@ -34,7 +32,6 @@ import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
-import fr.ifremer.nemo.ns_ws_edmo.*;
 
 public class ViewFile extends ViewPart {
 
