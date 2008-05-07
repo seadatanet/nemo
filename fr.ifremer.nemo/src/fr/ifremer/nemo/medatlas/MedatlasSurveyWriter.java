@@ -109,6 +109,7 @@ public class MedatlasSurveyWriter implements Cloneable, SurveyWriter {
 			context.put("survey", a_Survey);
 			context.put("formatter", fr.ifremer.nemo.util.Formatter
 					.getSingleton());
+			context.put("nemoLists", fr.ifremer.nemo.config.NemoLists.class.newInstance());
 			context.put("star", "*");
 			context.put("cr", System.getProperty("line.separator"));
 			stream = getClass().getResourceAsStream("medatlas.vtl");

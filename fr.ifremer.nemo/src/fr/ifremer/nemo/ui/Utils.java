@@ -1440,17 +1440,34 @@ public class Utils {
 			combo.select(i);
 		}
 		
-		if (!combo.getText().substring(0,length).equals(code)) {
+		if (!combo.getText().substring(0,Math.min(combo.getText().length(),length)).equals(code)) {
 			combo.add(code);
 			combo.select(combo.getItemCount() - 1 );
 		}
 	}
 	
 	public static String extraitCode(String valeur) {
-		return valeur.substring(0,valeur.indexOf(" "));
+		if (valeur.indexOf(" ") > -1) {
+			return valeur.substring(0,valeur.indexOf(" "));
+		} else {
+			return "";
+		}
+	}
+	
+	public static String extraitCodeURN(String valeur) {
+		if (valeur.lastIndexOf('/') > -1) {
+			return valeur.substring(valeur.lastIndexOf('/') + 1);
+		} else {
+			return "";
+		}
+		
 	}
 	
 	public static String extraitFichierChemin(String chemin) {
-		return chemin.substring(chemin.lastIndexOf('\\')+1);
+		if (chemin.lastIndexOf('\\') > -1) {
+			return chemin.substring(chemin.lastIndexOf('\\')+1);
+		} else {
+			return "";
+		}
 	}
 }

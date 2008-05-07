@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.TreeSet;
 
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.rpc.ServiceException;
@@ -15,10 +16,13 @@ import javax.xml.rpc.holders.BooleanHolder;
 
 import org.apache.axis.client.Service;
 
+import fr.ifremer.nemo.config.Configuration.enumMatch;
+import fr.ifremer.nemo.domain.Parameter;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webservice;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webserviceLocator;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webserviceSoap;
 import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.NemoWS;
 import fr.ifremer.nemo.ws.NemoWSServiceLocator;
 import fr.ifremer.nemo.ws.WSCountry;
@@ -2248,6 +2252,119 @@ public class NemoLists implements Cloneable {
 
 	public static java.util.HashMap<Integer, String> getEdmo() {
 		return _edmo;
+	}
+	
+	public static String parameterMap(Parameter param) {
+		String pdvCode = "";
+		int intLength = NemoLists.getVocabMap().length;
+		for (int i = 0; i < intLength; i++) {
+			if (NemoLists.getVocabMap()[i].getEntryTermAbbr().equals(param.getCode())) {
+				try {
+					switch (enumMatch
+							.valueOf(Utils.configuration
+									.getMatch())) {
+					case broadMatch:
+						pdvCode = NemoLists.getVocabMap()[i]
+								.getBroadMatch()[0]
+								.getEntryKey();
+						break;
+
+					case exactMatch:
+						pdvCode = NemoLists.getVocabMap()[i]
+								.getExactMatch()[0]
+								.getEntryKey();
+						break;
+
+					case majorMatch:
+						pdvCode = NemoLists.getVocabMap()[i]
+								.getMajorMatch()[0]
+								.getEntryKey();
+						break;
+
+					case minorMatch:
+						pdvCode = NemoLists.getVocabMap()[i]
+								.getMinorMatch()[0]
+								.getEntryKey();
+						break;
+
+					case narrowMatch:
+						pdvCode = NemoLists.getVocabMap()[i]
+								.getNarrowMatch()[0]
+								.getEntryKey();
+						break;
+
+					default:
+						pdvCode = Messages.getString("NemoLists.unknown");
+						break;
+					}
+				} catch (Exception e) {
+					pdvCode = Messages.getString("NemoLists.unknown");
+					e.printStackTrace();
+				}
+				break;
+			}
+		}
+				
+		return 	"<subject>SDN:LOCAL:" + 
+				param.getCode() +
+				"</subject><object>SDN:P021::" + 
+				Utils.extraitCodeURN(pdvCode) +
+				"</object><unit>SDN:P061::" +
+				"</unit>";
+	}
+	
+	public static String parameterMapCdi(Parameter param) {
+		String pdvCode = "";
+		int intLength = NemoLists.getVocabMap().length;
+		for (int i = 0; i < intLength; i++) {
+			if (NemoLists.getVocabMap()[i].getEntryTermAbbr().equals(param.getCode())) {
+				try {
+					switch (enumMatch
+							.valueOf(Utils.configuration
+									.getMatch())) {
+					case broadMatch:
+						pdvCode = NemoLists.getVocabMap()[i]
+								.getBroadMatch()[0]
+								.getEntryKey();
+						break;
+
+					case exactMatch:
+						pdvCode = NemoLists.getVocabMap()[i]
+								.getExactMatch()[0]
+								.getEntryKey();
+						break;
+
+					case majorMatch:
+						pdvCode = NemoLists.getVocabMap()[i]
+								.getMajorMatch()[0]
+								.getEntryKey();
+						break;
+
+					case minorMatch:
+						pdvCode = NemoLists.getVocabMap()[i]
+								.getMinorMatch()[0]
+								.getEntryKey();
+						break;
+
+					case narrowMatch:
+						pdvCode = NemoLists.getVocabMap()[i]
+								.getNarrowMatch()[0]
+								.getEntryKey();
+						break;
+
+					default:
+						pdvCode = Messages.getString("CDIResumeWriter.notSpecified");
+						break;
+					}
+				} catch (Exception e) {
+					pdvCode = Messages.getString("CDIResumeWriter.notSpecified");
+					e.printStackTrace();
+				}
+				break;
+			}
+		}
+		
+		return pdvCode;
 	}
 
 

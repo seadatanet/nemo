@@ -16,17 +16,11 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
-import com.sun.mail.handlers.message_rfc822;
-
-import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.config.Configuration.enumMatch;
+import fr.ifremer.nemo.domain.Parameter;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
-import fr.ifremer.nemo.ui.DataModel;
-import fr.ifremer.nemo.ui.TableData;
-import fr.ifremer.nemo.ui.TableDataSurvey;
-import fr.ifremer.nemo.ui.TypeData;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.ViewFile;
 import fr.ifremer.nemo.util.Formatter;
@@ -102,7 +96,7 @@ public class CDIResumeWriter {
 			
 			for (Survey survey : surveys) {
 				for (Station station : survey.getStations()) {
-					for (TypeData type : TableData.types) {
+					for (Parameter param : station.getParameters()) {
 						writer.write("\r\n");
 						
 						// CDI ID
@@ -147,57 +141,7 @@ public class CDIResumeWriter {
 //								+ Configuration.getSingleton().getIdEdmoRespDonnees());
 						
 						// PDV code
-						String pdvCode = "";
-						int intLength = NemoLists.getVocabMap().length;
-						for (int i = 0; i < intLength; i++) {
-							if (NemoLists.getVocabMap()[i].getEntryTermAbbr().equals(Utils.extraitCode(type.getCode()))) {
-								try {
-									switch (enumMatch
-											.valueOf(Utils.configuration
-													.getMatch())) {
-									case broadMatch:
-										pdvCode = NemoLists.getVocabMap()[i]
-												.getBroadMatch()[0]
-												.getEntryKey();
-										break;
-
-									case exactMatch:
-										pdvCode = NemoLists.getVocabMap()[i]
-												.getExactMatch()[0]
-												.getEntryKey();
-										break;
-
-									case majorMatch:
-										pdvCode = NemoLists.getVocabMap()[i]
-												.getMajorMatch()[0]
-												.getEntryKey();
-										break;
-
-									case minorMatch:
-										pdvCode = NemoLists.getVocabMap()[i]
-												.getMinorMatch()[0]
-												.getEntryKey();
-										break;
-
-									case narrowMatch:
-										pdvCode = NemoLists.getVocabMap()[i]
-												.getNarrowMatch()[0]
-												.getEntryKey();
-										break;
-
-									default:
-										pdvCode = Messages.getString("CDIResumeWriter.notSpecified");
-										break;
-									}
-								} catch (Exception e) {
-									pdvCode = Messages.getString("CDIResumeWriter.notSpecified");
-									e.printStackTrace();
-								}
-								break;
-							}
-						}
-						
-						writer.write(";" + pdvCode + "");
+						writer.write(";" + NemoLists.parameterMapCdi(param) + "");
 
 						// Platform Type
 						writer.write(";" + ViewFile.comboTypePlateForme.getText());
@@ -254,6 +198,8 @@ public class CDIResumeWriter {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ParseException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			for (Survey survey : surveys)
