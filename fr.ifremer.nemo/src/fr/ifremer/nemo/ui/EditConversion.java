@@ -14,6 +14,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.input.SurveyMedia;
 import fr.ifremer.nemo.output.CDIResumeWriter;
 import fr.ifremer.nemo.output.ProgressNotification;
@@ -73,6 +74,12 @@ public class EditConversion extends Thread {
 						
 						// RAZ du numéro de station incrémenté
 						DataModel.stationModel.resetRef();
+						
+						if (ViewFile.medatlas.getSelection()) {
+							NemoLists.writeSdnParameters("*");
+						} else {
+							NemoLists.writeSdnParameters("//");
+						}
 						
 						// test pour savoir si le compteur CDI est un numérique
 						try {

@@ -18,9 +18,13 @@ import org.apache.axis.client.Service;
 
 import fr.ifremer.nemo.config.Configuration.enumMatch;
 import fr.ifremer.nemo.domain.Parameter;
+import fr.ifremer.nemo.domain.Station;
+import fr.ifremer.nemo.domain.Survey;
+import fr.ifremer.nemo.input.ParameterModel;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webservice;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webserviceLocator;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webserviceSoap;
+import fr.ifremer.nemo.ui.DataModel;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.NemoWS;
@@ -70,6 +74,8 @@ public class NemoLists implements Cloneable {
 	static protected HashMap<String, Integer> _vocabListStatus = new HashMap<String, Integer>();
 
 	static protected CodeTableRecordType[] _vocabMap = null;
+	
+	static protected String _sdnParameters;
 	
 	static {
 		initLists();
@@ -2254,6 +2260,14 @@ public class NemoLists implements Cloneable {
 		return _edmo;
 	}
 	
+	public static void writeSdnParameters(String debut) {
+		setSdnParameters(debut + "SDN_parameter_mapping");
+		
+		for (ParameterModel param : DataModel.stationModel.getParameterModels()) {
+			_sdnParameters += "\n" + debut + parameterMap(param.getModel()) ;
+		}
+	}
+	
 	public static String parameterMap(Parameter param) {
 		String pdvCode = "";
 		int intLength = NemoLists.getVocabMap().length;
@@ -2365,6 +2379,14 @@ public class NemoLists implements Cloneable {
 		}
 		
 		return pdvCode;
+	}
+
+	public static String getSdnParameters() {
+		return _sdnParameters;
+	}
+
+	public static void setSdnParameters(String parameters) {
+		_sdnParameters = parameters;
 	}
 
 

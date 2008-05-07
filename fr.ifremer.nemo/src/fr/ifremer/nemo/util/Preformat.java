@@ -426,7 +426,7 @@ public class Preformat {
 				}
 			}
 			
-			System.out.println("Nombre de colonnes : " + _nbColonne);
+//			System.out.println("Nombre de colonnes : " + _nbColonne);
 			
 		} catch (FileNotFoundException exc) {
 			Utils

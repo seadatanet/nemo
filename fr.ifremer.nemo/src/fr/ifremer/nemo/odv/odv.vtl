@@ -7,6 +7,9 @@
 //$line
 #end
 #end
+//
+$nemoLists.getSdnParameters()
+//
 Cruise;Station;Type;mon/day/yr;hh:mm;Longitude [degrees_east];Latitude [degrees_north];Bot. Depth [m]##
 #foreach( $param in $survey.getStations().parameters )
 $param.code#end

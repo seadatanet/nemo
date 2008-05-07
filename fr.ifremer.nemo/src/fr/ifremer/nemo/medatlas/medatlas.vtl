@@ -47,10 +47,7 @@ $line
 *DURATION=$formatter.formatInt("%-5d", $station.timeSeriesInformation.duration) (day)                                                   QC=0
 *SAMPLING RATE=$formatter.formatInt("%-5d", $station.timeSeriesInformation.samplingRate) (second)          MAGNETIC DECLINATION=$formatter.formatFloat("%-4.0f", $station.timeSeriesInformation.getMagneticDeclination()) (degree)
 #end
-*SDN_parameter_mapping
-#foreach( $param in $station.parameters )
-*$nemoLists.parameterMap($param)
-#end
+$nemoLists.getSdnParameters()
 *SURFACE SAMPLES=$formatter.limitString( $station.surfaceSamples1, 63)
 *$formatter.limitString( $station.surfaceSamples2, 80)
 #set( $limit = $station.parametersAt(0).valuesSize() - 1 )
