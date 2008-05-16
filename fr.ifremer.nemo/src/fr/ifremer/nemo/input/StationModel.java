@@ -81,6 +81,12 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * se trouvent dans la première ligne des données
 	 */
 	protected boolean _metaInData;
+	
+	/**
+	 * Indique si le fichier correspond à un fichier dont les metadata station
+	 * se trouvent dans la première ligne des données
+	 */
+	protected boolean _metaInData2;
 
 	/**
 	 * Nombre de ligne du header Station
@@ -151,6 +157,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			setTimeSeriesModel(new TimeSeriesModel(this));
 			setTimestampModel(new HorodatedParameterModel());
 		}
+		setTimestampModel(new HorodatedParameterModel());
 		initProperties();
 	}
 
@@ -1278,6 +1285,26 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		String[] lines = new String[v.size()];
 		return v.toArray(lines);
 	}
+	
+	/**
+	 * 
+	 * @param a_Reader
+	 * @return String[]
+	 * @exception java.io.IOException
+	 */
+	public String[] consumeHeader2(BufferedReader a_Reader) throws IOException {
+		Vector<String> v = new Vector<String>();
+		for (int i = 0; i < _numberOfLines + 1; i++) {
+			String line = a_Reader.readLine();
+			if (line != null) {
+				v.add(line);
+			} else {
+				return null;
+			}
+		}
+		String[] lines = new String[v.size()];
+		return v.toArray(lines);
+	}
 
 	/**
 	 * 
@@ -1298,7 +1325,58 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		String[] header = null;
 		try {
 			station = (Station) _model.clone();
-			if (isMetaInData()) {
+			if (ViewFile.checkBoxTempo.getSelection()) {
+				// Marquage du fichier au debut
+				a_Reader.mark(a_Reader.toString().length());
+				if ((header = consumeHeader2(a_Reader)) != null) {
+					// a_Notifier.progress(a_Reader.getFilePointer());
+					if ((getReferenceProperty().getFragment().getFirstLine() == 0
+							&& (a_Filename != null) && !(isIncrementRef()))) {
+						if (ViewFile.collectionCasN)
+						{
+							String[] filename = DataModel.singleSurvey.getFile().split("/");
+							getReferenceProperty().applyOn(station,
+								new String[] { filename[filename.length - 1] });
+						}
+						else							
+							getReferenceProperty().applyOn(station,
+								new String[] { a_Filename });
+					} else {
+						if (isIncrementRef()) {
+							station.setReference(Integer.toString(_ref++));
+						} else {
+							getReferenceProperty().applyOn(station, header);
+						}
+					}
+					for (PropertyModel m : getProperties()) {
+						// System.out.println("@DEBUG propertyModel
+						// courant
+						// :"+m.getProperty());
+						m.applyOn(station, header);
+					}
+					if (_timeSeriesModel != null) {
+						_timeSeriesModel.convert(station, header,
+								isRefDateBased, a_RefDate);
+					}
+					// a_Notifier.progress(a_Reader.getFilePointer());
+					
+					// Retour au debut du fichier et depassement du header
+					a_Reader.reset();
+					consumeHeader(a_Reader);
+					
+					convertParameters(a_Reader, station, isRefDateBased,
+							a_RefDate, a_Notifier);
+					if (_timeSeriesModel != null
+							&& Float.isNaN(station.getTimeSeriesInformation()
+									.getEndDate())) {
+						computeEndDate(station);
+					}
+					consumeFooter(a_Reader);
+					// a_Notifier.progress(a_Reader.getFilePointer());
+
+					return station;
+				}
+			} else if (isMetaInData()) {
 				consumeHeader(a_Reader);
 				
 				convertParameters(a_Reader, station, isRefDateBased, a_RefDate,
@@ -1389,6 +1467,17 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		if (a_Station.getTimeSeriesInformation() != null) {
 			rate = new Float(a_Station.getTimeSeriesInformation()
 					.getSamplingRate() * 1000.0f).longValue();
+			org.nfunk.jep.JEP parser = new org.nfunk.jep.JEP();
+			parser.addStandardFunctions();
+			parser.addStandardConstants();
+			parser.addVariable(
+					"x", rate); //$NON-NLS-1$
+			parser.parseExpression("x" + getTimeSeriesModel().getSampleRateConversion());
+
+			Double resultJEP = parser.getValue();
+			rate = resultJEP.longValue();
+			
+			a_Station.getTimeSeriesInformation().setSamplingRate(rate / 1000);
 		}
 		int index = 0;
 		try {
@@ -1559,6 +1648,14 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	
 	public void resetRef() {
 		_ref = -1;
+	}
+
+	public boolean isMetaInData2() {
+		return _metaInData2;
+	}
+
+	public void setMetaInData2(boolean inData2) {
+		_metaInData2 = inData2;
 	}
 	
 } /* End of class: StationModel */

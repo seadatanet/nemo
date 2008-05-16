@@ -16,6 +16,7 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
 import fr.ifremer.nemo.input.PropertyModel;
+import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.util.Messages;
 
 public class EditStation {
@@ -77,6 +78,8 @@ public class EditStation {
 
 	public static Button buttonHeurePos, buttonHeureSaisie, buttonDatePos,
 			buttonDateSaisie, buttonTUPos;
+	
+	public static Button btnMetaInData;
 
 	public static Combo comboHeure, comboDate,
 			comboLatitude, comboLongitude, comboLatitudeFin, comboLongitudeFin;
@@ -185,6 +188,9 @@ public class EditStation {
 
 		buttonRAZ.setParent(ViewEdit.formEdition.getBody());
 		buttonRAZ.setText("Reset"); //$NON-NLS-1$
+		
+		btnMetaInData.setParent(ViewEdit.formEdition.getBody());
+		btnMetaInData.setText("Meta In Data");
 
 		buttonExpand.setParent(ViewEdit.formEdition.getBody());
 		buttonExpand.setText("+"); //$NON-NLS-1$
@@ -527,6 +533,18 @@ public class EditStation {
 
 					}
 				});
+		
+		btnMetaInData
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(
+							org.eclipse.swt.events.SelectionEvent e) {
+						try {
+							DataModel.stationModel.setMetaInData2(btnMetaInData.getSelection());
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
+					}
+				});
 
 		// raz du message d'erreurs
 		Utils.messageErreur(""); //$NON-NLS-1$
@@ -558,6 +576,7 @@ public class EditStation {
 		EditStation.buttonExpand2.setParent(shell);
 		EditStation.buttonValidate.setParent(shell);
 		EditStation.buttonRAZ.setParent(shell);
+		EditStation.btnMetaInData.setParent(shell);
 
 		// System.out.println("expand ? = " + expand);
 		for (i = 0; i <= EditStation.listeSectionsStation.size() - 1; i++) {
@@ -591,6 +610,7 @@ public class EditStation {
 		EditStation.buttonValidate.setParent(s.getBody());
 		EditStation.buttonRAZ.setParent(s.getBody());
 		EditStation.buttonExpand.setParent(s.getBody());
+		EditStation.btnMetaInData.setParent(s.getBody());
 
 		// System.out.println("expand ? = " + expand);
 		for (i = 0; i <= EditStation.listeSectionsStation.size() - 1; i++) {
@@ -859,11 +879,11 @@ public class EditStation {
 
 	public static void initBoutons() {
 
-
 		buttonRAZ = new Button(shell, SWT.NONE);
 		buttonExpand = new Button(shell, SWT.NONE);
 		buttonExpand2 = new Button(shell, SWT.NONE);
 		buttonValidate = new Button(shell, SWT.NONE);
+		btnMetaInData = new Button(shell, SWT.CHECK);
 
 		buttonHistoriqueAcqSaisie = new Button(shell, SWT.RADIO);
 		listeBoutonsManuel.add(buttonHistoriqueAcqSaisie);
@@ -1098,10 +1118,10 @@ public class EditStation {
 				org.nfunk.jep.JEP parser = new org.nfunk.jep.JEP();
 				parser.addStandardFunctions();
 				parser.addStandardConstants();
-				parser
-						.addVariable(
-								"x", Float.valueOf(textFreqEchant.getText())); //$NON-NLS-1$
-				parser.parseExpression(textFreqEchantConv.getText());
+				parser.addVariable(
+						"x", Float.valueOf(textFreqEchant.getText().trim())); //$NON-NLS-1$
+				parser.parseExpression("x" + textFreqEchantConv.getText().trim());
+
 				double resultJEP = parser.getValue();
 
 				EditStation.textFreqEchantTest.setText("" + resultJEP); //$NON-NLS-1$
@@ -1127,7 +1147,7 @@ public class EditStation {
 				parser.addStandardFunctions();
 				parser.addStandardConstants();
 				parser.addVariable("x", Float.valueOf(string)); //$NON-NLS-1$
-				parser.parseExpression(textFreqEchantConv.getText());
+				parser.parseExpression("x" + textFreqEchantConv.getText());
 				double resultJEP = parser.getValue();
 
 				EditStation.textFreqEchantTest.setText("" + resultJEP); //$NON-NLS-1$

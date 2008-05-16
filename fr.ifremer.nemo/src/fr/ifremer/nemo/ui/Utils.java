@@ -1470,4 +1470,8 @@ public class Utils {
 			return "";
 		}
 	}
+	
+	public static boolean isSerieTempo() {
+		return ViewFile.checkBoxTempo.getSelection();
+	}
 }

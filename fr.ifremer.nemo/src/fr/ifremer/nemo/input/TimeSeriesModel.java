@@ -413,7 +413,7 @@ public class TimeSeriesModel implements Cloneable, PathElementHandler,
 				parser.addStandardConstants();
 				parser.addVariable("x", a_TimeSeriesInformation
 						.getSamplingRate());
-				parser.parseExpression(_sampleRateConversion.trim());
+				parser.parseExpression("x" + _sampleRateConversion.trim());
 				setJepParser(parser);
 				double result = parser.getValue();
 				a_TimeSeriesInformation.setSamplingRate((float) result);

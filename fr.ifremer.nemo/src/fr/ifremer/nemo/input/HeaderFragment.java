@@ -11,6 +11,8 @@ import com.ago.xml.Element2Field;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.ui.DataModel;
+
 /**
  * Class HeaderFragment
  * 
@@ -453,7 +455,11 @@ public class HeaderFragment implements Cloneable, SAXConsumer {
 						end = _lastCharOffset - 1;
 					}
 				}
-					
+				
+				if (DataModel.stationModel.isMetaInData()) {
+					i = 1;
+				}
+				
 				if (end == -1) {
 					// writer.println( a_Header[i].substring( start ).trim());
 					writer.println(a_Header[i].substring(start));
@@ -464,6 +470,7 @@ public class HeaderFragment implements Cloneable, SAXConsumer {
 				}
 				
 			}
+			
 			// return stringWriter.toString().trim();
 			return stringWriter.toString();
 		}

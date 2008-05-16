@@ -3,6 +3,7 @@ package fr.ifremer.nemo.ui;
 import java.text.ParseException;
 import java.util.regex.Pattern;
 
+import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.input.HorodatedParameterModel;
 import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.LatitudeFormat;
@@ -228,9 +229,10 @@ public class Etape {
 
 		// System.out.println("Debut check station");
 
-		Boolean ok, resultat1, resultat2, depasse;
+		Boolean ok, resultat1, resultat2, depasse, metaInData2;
 		ok = true;
 		depasse = false;
+		metaInData2 = DataModel.stationModel.isMetaInData2();
 
 		// raz du message d'erreurs
 		Utils.messageErreur(""); //$NON-NLS-1$
@@ -243,7 +245,7 @@ public class Etape {
 					EditStation.textRefStationDebut,
 					EditStation.textRefStationFin, Messages
 							.getString("Etape.31")); //$NON-NLS-1$
-			if (resultat1) {
+			if (resultat1 && !metaInData2) {
 				depasse = Regexp.depassementHeaderStation(Integer
 						.parseInt(EditStation.textRefStationLigne.getText()),
 						Messages.getString("Etape.31"));
@@ -535,7 +537,7 @@ public class Etape {
 					EditStation.textHeureDebut, EditStation.textHeureFin,
 					Messages.getString("Etape.40")); //$NON-NLS-1$
 
-			if (resultat1) {
+			if (resultat1 && !(metaInData2 || ViewFile.checkBoxTempo.getSelection())) {
 				depasse = Regexp.depassementHeaderStation(Integer
 						.parseInt(EditStation.textHeureLigne.getText()),
 						Messages.getString("Etape.40"));
@@ -598,7 +600,7 @@ public class Etape {
 					EditStation.textDateDebut, EditStation.textDateFin,
 					Messages.getString("Etape.45")); //$NON-NLS-1$
 
-			if (resultat1) {
+			if (resultat1 && !(metaInData2 || ViewFile.checkBoxTempo.getSelection())) {
 				depasse = Regexp.depassementHeaderStation(Integer
 						.parseInt(EditStation.textDateLigne.getText()),
 						Messages.getString("Etape.45"));
@@ -648,7 +650,7 @@ public class Etape {
 					EditStation.textProfondeurFin, Messages
 							.getString("Etape.49")); //$NON-NLS-1$
 
-			if (resultat1) {
+			if (resultat1 && !metaInData2) {
 				depasse = Regexp.depassementHeaderStation(Integer
 						.parseInt(EditStation.textProfondeurLigne.getText()),
 						Messages.getString("Etape.49"));
@@ -705,7 +707,7 @@ public class Etape {
 					EditStation.textTUDebut, EditStation.textTUFin, Messages
 							.getString("Etape.118")); //$NON-NLS-1$
 
-			if (resultat1) {
+			if (resultat1 && !metaInData2) {
 				depasse = Regexp.depassementHeaderStation(Integer
 						.parseInt(EditStation.textTULigne.getText()), Messages
 						.getString("Etape.118"));
@@ -773,7 +775,7 @@ public class Etape {
 					EditStation.textLatitudeLigne,
 					EditStation.textLatitudeDebut, EditStation.textLatitudeFin,
 					Messages.getString("Etape.54")); //$NON-NLS-1$
-			if (resultat1) {
+			if (resultat1 && !metaInData2) {
 				depasse = Regexp.depassementHeaderStation(Integer
 						.parseInt(EditStation.textLatitudeLigne.getText()),
 						Messages.getString("Etape.54"));
@@ -838,7 +840,7 @@ public class Etape {
 					EditStation.textLongitudeDebut,
 					EditStation.textLongitudeFin, Messages
 							.getString("Etape.59")); //$NON-NLS-1$
-			if (resultat1) {
+			if (resultat1 && !metaInData2) {
 				depasse = Regexp.depassementHeaderStation(Integer
 						.parseInt(EditStation.textLongitudeLigne.getText()),
 						Messages.getString("Etape.59"));
@@ -909,7 +911,7 @@ public class Etape {
 						EditStation.textLatFinLigne,
 						EditStation.textLatFinDebut, EditStation.textLatFinFin,
 						Messages.getString("Etape.65")); //$NON-NLS-1$
-				if (resultat1) {
+				if (resultat1 && !metaInData2) {
 					depasse = Regexp.depassementHeaderStation(Integer
 							.parseInt(EditStation.textLatFinLigne.getText()),
 							Messages.getString("Etape.65"));
@@ -953,7 +955,7 @@ public class Etape {
 						EditStation.textLongFinDebut,
 						EditStation.textLongFinFin, Messages
 								.getString("Etape.68")); //$NON-NLS-1$
-				if (resultat1) {
+				if (resultat1 && !metaInData2) {
 					depasse = Regexp.depassementHeaderStation(Integer
 							.parseInt(EditStation.textLongFinLigne.getText()),
 							Messages.getString("Etape.68"));
@@ -976,7 +978,7 @@ public class Etape {
 						EditStation.textProfFinDebut,
 						EditStation.textProfFinFin, Messages
 								.getString("Etape.69")); //$NON-NLS-1$
-				if (resultat1) {
+				if (resultat1 && !metaInData2) {
 					depasse = Regexp.depassementHeaderStation(Integer
 							.parseInt(EditStation.textProfFinLigne.getText()),
 							Messages.getString("Etape.69"));
@@ -1037,7 +1039,7 @@ public class Etape {
 						EditStation.textProfCapteurDebut,
 						EditStation.textProfCapteurFin, Messages
 								.getString("Etape.75")); //$NON-NLS-1$
-				if (resultat1) {
+				if (resultat1 && !metaInData2) {
 					depasse = Regexp
 							.depassementHeaderStation(Integer
 									.parseInt(EditStation.textProfCapteurLigne
@@ -1098,7 +1100,7 @@ public class Etape {
 						EditStation.textDeclinMagnetDebut,
 						EditStation.textDeclinMagnetFin, Messages
 								.getString("Etape.82")); //$NON-NLS-1$
-				if (resultat1) {
+				if (resultat1 && !metaInData2) {
 					depasse = Regexp
 							.depassementHeaderStation(Integer
 									.parseInt(EditStation.textDeclinMagnetLigne
@@ -1166,7 +1168,7 @@ public class Etape {
 						EditStation.textFreqEchantDebut,
 						EditStation.textFreqEchantFin, Messages
 								.getString("Etape.104")); //$NON-NLS-1$
-				if (resultat1) {
+				if (resultat1 && !metaInData2) {
 					depasse = Regexp.depassementHeaderStation(
 							Integer.parseInt(EditStation.textFreqEchantLigne
 									.getText()), Messages
