@@ -79,7 +79,7 @@ public class EditStation {
 	public static Button buttonHeurePos, buttonHeureSaisie, buttonDatePos,
 			buttonDateSaisie, buttonTUPos;
 	
-	public static Button btnMetaInData;
+	public static Button btnMetaInData2;
 
 	public static Combo comboHeure, comboDate,
 			comboLatitude, comboLongitude, comboLatitudeFin, comboLongitudeFin;
@@ -189,8 +189,8 @@ public class EditStation {
 		buttonRAZ.setParent(ViewEdit.formEdition.getBody());
 		buttonRAZ.setText("Reset"); //$NON-NLS-1$
 		
-		btnMetaInData.setParent(ViewEdit.formEdition.getBody());
-		btnMetaInData.setText("Meta In Data");
+		btnMetaInData2.setParent(ViewEdit.formEdition.getBody());
+		btnMetaInData2.setText("Meta In Data");
 
 		buttonExpand.setParent(ViewEdit.formEdition.getBody());
 		buttonExpand.setText("+"); //$NON-NLS-1$
@@ -534,15 +534,15 @@ public class EditStation {
 					}
 				});
 		
-		btnMetaInData
+		btnMetaInData2
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						try {
-							DataModel.stationModel.setMetaInData2(btnMetaInData.getSelection());
-						} catch (Exception ex) {
-							ex.printStackTrace();
-						}
+//						try {
+//							DataModel.stationModel.setMetaInData2(btnMetaInData2.getSelection());
+//						} catch (Exception ex) {
+//							ex.printStackTrace();
+//						}
 					}
 				});
 
@@ -576,7 +576,7 @@ public class EditStation {
 		EditStation.buttonExpand2.setParent(shell);
 		EditStation.buttonValidate.setParent(shell);
 		EditStation.buttonRAZ.setParent(shell);
-		EditStation.btnMetaInData.setParent(shell);
+		EditStation.btnMetaInData2.setParent(shell);
 
 		// System.out.println("expand ? = " + expand);
 		for (i = 0; i <= EditStation.listeSectionsStation.size() - 1; i++) {
@@ -610,7 +610,7 @@ public class EditStation {
 		EditStation.buttonValidate.setParent(s.getBody());
 		EditStation.buttonRAZ.setParent(s.getBody());
 		EditStation.buttonExpand.setParent(s.getBody());
-		EditStation.btnMetaInData.setParent(s.getBody());
+		EditStation.btnMetaInData2.setParent(s.getBody());
 
 		// System.out.println("expand ? = " + expand);
 		for (i = 0; i <= EditStation.listeSectionsStation.size() - 1; i++) {
@@ -883,7 +883,7 @@ public class EditStation {
 		buttonExpand = new Button(shell, SWT.NONE);
 		buttonExpand2 = new Button(shell, SWT.NONE);
 		buttonValidate = new Button(shell, SWT.NONE);
-		btnMetaInData = new Button(shell, SWT.CHECK);
+		btnMetaInData2 = new Button(shell, SWT.CHECK);
 
 		buttonHistoriqueAcqSaisie = new Button(shell, SWT.RADIO);
 		listeBoutonsManuel.add(buttonHistoriqueAcqSaisie);

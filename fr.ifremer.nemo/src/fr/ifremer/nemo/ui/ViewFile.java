@@ -371,32 +371,6 @@ public class ViewFile extends ViewPart {
 
 					}
 				});
-
-		
-		// TEST WS START
-//		Button btnTestWS = new Button(composite11,SWT.NONE);
-//		btnTestWS.setText("Test");
-//		
-//		btnTestWS 
-//				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-//					public void widgetSelected(
-//							org.eclipse.swt.events.SelectionEvent e) {
-//						try {
-//							Edmo_webservice service = new Edmo_webserviceLocator();
-//							Edmo_webserviceSoap port = service.getedmo_webserviceSoap12();
-//							String result = port.ws_edmo_get_list();
-//							System.out.println(result);
-//						} catch (ServiceException ex1) {
-//							ex1.printStackTrace();
-//						} catch (java.rmi.RemoteException ex2) {
-//							ex2.printStackTrace();
-//						}
-//
-//				}
-//			}
-//		);
-		
-		// TEST WS END
 		
 		createGroupTempo();
 		

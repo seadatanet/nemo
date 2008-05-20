@@ -232,7 +232,7 @@ public class Etape {
 		Boolean ok, resultat1, resultat2, depasse, metaInData2;
 		ok = true;
 		depasse = false;
-		metaInData2 = DataModel.stationModel.isMetaInData2();
+		metaInData2 = EditStation.btnMetaInData2.getSelection();
 
 		// raz du message d'erreurs
 		Utils.messageErreur(""); //$NON-NLS-1$

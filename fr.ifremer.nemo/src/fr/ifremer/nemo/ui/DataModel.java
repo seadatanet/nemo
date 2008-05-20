@@ -364,6 +364,8 @@ public class DataModel {
 		HeaderFragment frag;
 
 		station = stationModel.getModel();
+		
+		stationModel.setMetaInData2(EditStation.btnMetaInData2.getSelection());
 
 		PropertyModel propertyModel = stationModel.getReferenceProperty();
 
@@ -1591,6 +1593,8 @@ public class DataModel {
 		boolean var;
 
 		station_modele = stationModel_modele.getModel();
+		
+		EditStation.btnMetaInData2.setSelection(stationModel_modele.isMetaInData2());
 
 		// numéro de station
 		if (stationModel_modele.isIncrementRef()) {

@@ -455,11 +455,7 @@ public class HeaderFragment implements Cloneable, SAXConsumer {
 						end = _lastCharOffset - 1;
 					}
 				}
-				
-				if (DataModel.stationModel.isMetaInData()) {
-					i = 1;
-				}
-				
+								
 				if (end == -1) {
 					// writer.println( a_Header[i].substring( start ).trim());
 					writer.println(a_Header[i].substring(start));

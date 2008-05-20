@@ -26,6 +26,7 @@ import fr.ifremer.nemo.domain.ParameterValue;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.TimeSeriesInformation;
 import fr.ifremer.nemo.ui.DataModel;
+import fr.ifremer.nemo.ui.EditData;
 import fr.ifremer.nemo.ui.ViewFile;
 import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.FloatFormat;
@@ -130,6 +131,16 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * Modèle pour les informations propres au CDI
 	 */
 	protected Cdi _cdi;
+	
+	/**
+	 * Dernier numero de station (mode "ODV")
+	 */
+	protected String _lastRef;
+	
+	/**
+	 * Nombre de lignes lues (mode "ODV")
+	 */
+	protected int _compteur;
 
 	public StationModel() {
 		_incrementNumber = 1;
@@ -144,6 +155,8 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		_timeSeriesModel = null;
 		_timestampModel = null;
 		_cdi = null;
+		_lastRef = null;
+		_compteur = 0;
 	}
 
 	/**
@@ -255,6 +268,10 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			Element2Field setter = new Element2Field(this, "setMetaInData");
 			return setter;
 		}
+		if (a_LocalName.equals("metaInData2")) {
+			Element2Field setter = new Element2Field(this, "setMetaInData2");
+			return setter;
+		}
 		if (a_LocalName.equals("Cdi")) {
 			Cdi l = (Cdi) Cdi.fromElement(a_URI, a_LocalName,
 					a_QName, a_Attributes);
@@ -321,6 +338,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		a_Writer.putTag("rowNumber", getRowNumber());
 		a_Writer.putTag("endData", getEndData());
 		a_Writer.putTag("metaInData", isMetaInData());
+		a_Writer.putTag("metaInData2", isMetaInData2());
 		if (ViewFile.checkCDI.getSelection()) {
 			if (getCdi() != null) {
 				getCdi().writeXMLOn(a_Writer);
@@ -1325,7 +1343,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		String[] header = null;
 		try {
 			station = (Station) _model.clone();
-			if (ViewFile.checkBoxTempo.getSelection()) {
+			if (_timeSeriesModel != null && _timestampModel.isComputed() && !isMetaInData2()) {
 				// Marquage du fichier au debut
 				a_Reader.mark(a_Reader.toString().length());
 				if ((header = consumeHeader2(a_Reader)) != null) {
@@ -1376,6 +1394,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 					return station;
 				}
+				
 			} else if (isMetaInData()) {
 				consumeHeader(a_Reader);
 				
@@ -1391,9 +1410,62 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 				consumeFooter(a_Reader);
 			//	a_Notifier.progress(a_Reader.getFilePointer());
 				return station;
+				
+			} else if (isMetaInData2()) {
+				// Marquage du fichier au debut
+				a_Reader.mark(a_Reader.toString().length());
+				if ((header = consumeHeader2(a_Reader)) != null) {
+					// a_Notifier.progress(a_Reader.getFilePointer());
+					if ((getReferenceProperty().getFragment().getFirstLine() == 0
+							&& (a_Filename != null) && !(isIncrementRef()))) {
+						if (ViewFile.collectionCasN)
+						{
+							String[] filename = DataModel.singleSurvey.getFile().split("/");
+							getReferenceProperty().applyOn(station,
+								new String[] { filename[filename.length - 1] });
+						}
+						else							
+							getReferenceProperty().applyOn(station,
+								new String[] { a_Filename });
+					} else {
+						if (isIncrementRef()) {
+							station.setReference(Integer.toString(_ref++));
+						} else {
+							getReferenceProperty().applyOn(station, header);
+						}
+					}
+					for (PropertyModel m : getProperties()) {
+						// System.out.println("@DEBUG propertyModel
+						// courant
+						// :"+m.getProperty());
+						m.applyOn(station, header);
+					}
+					if (_timeSeriesModel != null) {
+						_timeSeriesModel.convert(station, header,
+								isRefDateBased, a_RefDate);
+					}
+					// a_Notifier.progress(a_Reader.getFilePointer());
+					
+					// Retour au debut du fichier et depassement du header
+					a_Reader.reset();
+					consumeHeader(a_Reader);
+					
+					convertParameters2(a_Reader, station, isRefDateBased,
+							a_RefDate, a_Notifier);
+					if (_timeSeriesModel != null
+							&& Float.isNaN(station.getTimeSeriesInformation()
+									.getEndDate())) {
+						computeEndDate(station);
+					}
+					consumeFooter(a_Reader);
+					// a_Notifier.progress(a_Reader.getFilePointer());
+
+					return station;
+				}
+				
 			} else {
 				if ((header = consumeHeader(a_Reader)) != null) {
-			//		a_Notifier.progress(a_Reader.getFilePointer());
+					// a_Notifier.progress(a_Reader.getFilePointer());
 					if ((getReferenceProperty().getFragment().getFirstLine() == 0
 							&& (a_Filename != null) && !(isIncrementRef()))) {
 						if (ViewFile.collectionCasN)
@@ -1421,7 +1493,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 						_timeSeriesModel.convert(station, header,
 								isRefDateBased, a_RefDate);
 					}
-			//		a_Notifier.progress(a_Reader.getFilePointer());
+					// a_Notifier.progress(a_Reader.getFilePointer());
 					convertParameters(a_Reader, station, isRefDateBased,
 							a_RefDate, a_Notifier);
 					if (_timeSeriesModel != null
@@ -1430,7 +1502,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 						computeEndDate(station);
 					}
 					consumeFooter(a_Reader);
-			//		a_Notifier.progress(a_Reader.getFilePointer());
+					// a_Notifier.progress(a_Reader.getFilePointer());
 
 					return station;
 				}
@@ -1487,7 +1559,9 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			String line = null;
 			
 			for (index = 0; (line = a_Reader.readLine()) != null 
-					&& (!(_endOnEmptyLine && line.trim().matches("^$"))) && (!(_endOnPattern && line.matches("^" + _endDataPattern + "$"))) || (index < _rowNumber); index++) {
+					&& (!(_endOnEmptyLine && line.trim().matches("^$")))
+					&& (!(_endOnPattern && line.matches("^" + _endDataPattern + "$")))
+					|| (index < _rowNumber); index++) {
 
 				a_Notifier.progress(line.length());
 				
@@ -1510,28 +1584,150 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 				for (ParameterModel pm : _parameterModels) {
 					Parameter p = a_Station.parametersAt(paramIndex);
 					ParameterValue value = null;
-					if (_timestampModel != null) {
-						HorodatedValue hValue = new HorodatedValue();
-						if (_timestampModel.isComputed()) {
-							hValue.setDate(a_Station.getFullDate()
-									+ (index * rate));
-						} else {
-							long time = _timestampModel.convertTimestamp(line,
-									a_RefDate);
-							hValue.setDate(a_Station.getGMTDate(time));	
-							
-							// FAE086 START
-							long ecart = (time - a_Station.getFullDate())/1000;
-							
-							if (ecart > 0 && a_Station.getTimeSeriesInformation().getSamplingRate() == 0) {
-								a_Station.getTimeSeriesInformation().setSamplingRate(ecart);
+					if (_timeSeriesModel != null) {
+						if (_timestampModel != null) {
+							HorodatedValue hValue = new HorodatedValue();
+							if (_timestampModel.isComputed()) {
+								hValue.setDate(a_Station.getFullDate()
+										+ (index * rate));
+							} else {
+								long time = _timestampModel.convertTimestamp(line,
+										a_RefDate);
+								hValue.setDate(a_Station.getGMTDate(time));	
+								
+								// FAE086 START
+								long ecart = (time - a_Station.getFullDate())/1000;
+								
+								if (ecart > 0 && a_Station.getTimeSeriesInformation().getSamplingRate() == 0) {
+									a_Station.getTimeSeriesInformation().setSamplingRate(ecart);
+								}
+								// FAE086 END
 							}
-							// FAE086 END
-						}
-						value = hValue;
+							value = hValue;
+						} else {
+							value = new ParameterValue();
+						}		
 					} else {
 						value = new ParameterValue();
-					}		
+					}
+					
+					pm.convert(line, value);
+					p.addValue(value);
+					paramIndex++;
+				}
+		//		a_Notifier.progress(a_Reader.getFilePointer());
+			}
+		} catch (NumberFormatException e)
+		{
+			throw new NumberFormatException(e.getMessage() + Messages.getString("StationModel.1") + a_Station.getReference().trim() + Messages.getString("StationModel.2") + (index+1) + "\r\n");
+		} catch (ParseException e)
+		{
+			throw new ParseException(e.getMessage() + Messages.getString("StationModel.1") + a_Station.getReference().trim() + Messages.getString("StationModel.2") + (index+1) + "\r\n",0);
+		} catch (StringIndexOutOfBoundsException e)
+		{
+			throw new StringIndexOutOfBoundsException(Messages.getString("StationModel.1") + a_Station.getReference().trim() + Messages.getString("StationModel.2") + (index+1) + Messages.getString("StationModel.3"));
+		}		
+		catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		} catch (IntrospectionException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 
+	 * @param a_Reader
+	 * @param a_Station
+	 * @param isRefDateBased
+	 * @param a_RefDate
+	 * @param a_Notifier
+	 * @exception IOException
+	 * @exception ParseException
+	 */
+	public void convertParameters2(BufferedReader a_Reader, Station a_Station,
+			boolean isRefDateBased, long a_RefDate,
+			SizeBasedProgressNotifier a_Notifier) throws IOException,
+			ParseException {
+		long rate = 0;
+		if (a_Station.getTimeSeriesInformation() != null) {
+			rate = new Float(a_Station.getTimeSeriesInformation()
+					.getSamplingRate() * 1000.0f).longValue();
+			org.nfunk.jep.JEP parser = new org.nfunk.jep.JEP();
+			parser.addStandardFunctions();
+			parser.addStandardConstants();
+			parser.addVariable(
+					"x", rate); //$NON-NLS-1$
+			parser.parseExpression("x" + getTimeSeriesModel().getSampleRateConversion());
+
+			Double resultJEP = parser.getValue();
+			rate = resultJEP.longValue();
+			
+			a_Station.getTimeSeriesInformation().setSamplingRate(rate / 1000);
+		}
+		int index = 0;
+		try {
+			for (ParameterModel pm : _parameterModels) {
+				a_Station.addParameter((Parameter) pm.getModel().clone());
+			}
+			String line = null;
+			
+			for (index = 0; (line = a_Reader.readLine()) != null 
+					&& (!(_endOnEmptyLine && line.trim().matches("^$")))
+					&& (!(_endOnPattern && line.matches("^" + _endDataPattern + "$")))
+					|| (index < _rowNumber); index++) {
+
+				a_Notifier.progress(line.length());
+				
+				if (index == 0 && isMetaInData()) {
+					String[] header = new String[] { line };
+					if (isIncrementRef()) {
+						a_Station.setReference(Long.toString(_ref++));
+					} else {
+						getReferenceProperty().applyOn(a_Station, header);
+					}
+					for (PropertyModel m : getProperties()) {
+						m.applyOn(a_Station, header);
+					}
+					if (_timeSeriesModel != null) {
+						_timeSeriesModel.convert(a_Station, header,
+								isRefDateBased, a_RefDate);
+					}
+				}
+				int paramIndex = 0;
+				for (ParameterModel pm : _parameterModels) {
+					Parameter p = a_Station.parametersAt(paramIndex);
+					ParameterValue value = null;
+					if (_timeSeriesModel != null) {
+						if (_timestampModel != null) {
+							HorodatedValue hValue = new HorodatedValue();
+							if (_timestampModel.isComputed()) {
+								hValue.setDate(a_Station.getFullDate()
+										+ (index * rate));
+							} else {
+								long time = _timestampModel.convertTimestamp(line,
+										a_RefDate);
+								hValue.setDate(a_Station.getGMTDate(time));	
+								
+								// FAE086 START
+								long ecart = (time - a_Station.getFullDate())/1000;
+								
+								if (ecart > 0 && a_Station.getTimeSeriesInformation().getSamplingRate() == 0) {
+									a_Station.getTimeSeriesInformation().setSamplingRate(ecart);
+								}
+								// FAE086 END
+							}
+							value = hValue;
+						} else {
+							value = new ParameterValue();
+						}		
+					} else {
+						value = new ParameterValue();
+					}
+					
 					pm.convert(line, value);
 					p.addValue(value);
 					paramIndex++;
@@ -1656,6 +1852,17 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 	public void setMetaInData2(boolean inData2) {
 		_metaInData2 = inData2;
+	}
+	
+	/**
+	 * Write accessor (setter) for attribute _metaInData2
+	 * 
+	 * @param a_String
+	 *            new value for _metaInData2 as String
+	 * @see StationModel#_metaInData2
+	 */
+	public void setMetaInData2(String a_String) {
+		setMetaInData2(new Boolean(a_String).booleanValue());
 	}
 	
 } /* End of class: StationModel */
