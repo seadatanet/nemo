@@ -327,6 +327,7 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 					} else {
 						
 						File file = new File(dir, files[i]);
+						_stationModel.setTaille((int) file.length());
 					    notifierStation.setOffset(offset);
 						offset += file.length();
 					//	RandomAccessFile reader = null;

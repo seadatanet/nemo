@@ -386,6 +386,8 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 			BufferedReader reader2 = null;
 			SizeBasedProgressNotifier notifier = new SizeBasedProgressNotifier(
 					file.length(), 0, a_Progress);
+
+			_stationModel.setTaille((int) file.length());
 			
 			Station station = null;
 			
@@ -398,6 +400,10 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 				FileReader reader  = new FileReader(file);
 				reader2 = new BufferedReader(reader);
 				
+				reader2.skip(0);
+				if (reader2.markSupported()) {
+					reader2.mark((int) file.length());
+				}
 				
 				//reader = new RandomAccessFile(file, "r");
 				consumeHeader(reader2);

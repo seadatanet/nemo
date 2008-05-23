@@ -361,8 +361,7 @@ public class ViewFile extends ViewPart {
 		buttonParcourir.setText(Messages.getString("ViewFile.parcourir")); //$NON-NLS-1$
 		checkBoxTempo = new Button(composite11, SWT.CHECK);
 		checkBoxTempo.setText(Messages.getString("ViewFile.serieTempo")); //$NON-NLS-1$
-	
-		
+
 		checkBoxTempo
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(

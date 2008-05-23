@@ -15,6 +15,7 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.Survey;
+import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.input.SurveyMedia;
 import fr.ifremer.nemo.output.CDIResumeWriter;
 import fr.ifremer.nemo.output.ProgressNotification;
@@ -74,6 +75,9 @@ public class EditConversion extends Thread {
 						
 						// RAZ du numéro de station incrémenté
 						DataModel.stationModel.resetRef();
+						
+						DataModel.stationModel.setCompteur(1);
+						DataModel.stationModel.setLastRef(null);
 						
 						if (ViewFile.medatlas.getSelection()) {
 							NemoLists.writeSdnParameters("*");
