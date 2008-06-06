@@ -102,12 +102,14 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		_vocabURL = "";
 		
 		_vocabLists = new HashMap<String, String>();
+		_vocabLists.put("C180", "");
 		_vocabLists.put("L021", "");
 		_vocabLists.put("L031", "");
 		_vocabLists.put("L051", "");
 		_vocabLists.put("L061", "");
 		_vocabLists.put("L071", "");
 		_vocabLists.put("L081", "");
+		_vocabLists.put("L300", "");
 		_vocabLists.put("P021", "");
 		_vocabLists.put("P091", "");
 		

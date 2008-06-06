@@ -1,7 +1,12 @@
 package fr.ifremer.nemo.ui;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.Map.Entry;
 
+import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridData;
@@ -18,7 +23,9 @@ import org.eclipse.ui.forms.events.ExpansionEvent;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
+import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
 public class Drawing {
 
@@ -1057,11 +1064,25 @@ public class Drawing {
 					new GridData(GridData.FILL_HORIZONTAL));
 			
 			EditSurvey.comboCountries = new Combo(sectionClient, SWT.NONE);
+			
 			// remplissage des pays
-			taille = DataModel.listeWSCountries.length;
-			for (i = 0 ; i < taille ; i++) {
-				EditSurvey.comboCountries.add(DataModel.listeWSCountries[i].getCode() + " - "
-						+ DataModel.listeWSCountries[i].getName());
+//			taille = DataModel.listeWSCountries.length;
+//			for (i = 0 ; i < taille ; i++) {
+//				EditSurvey.comboCountries.add(DataModel.listeWSCountries[i].getCode() + " - "
+//						+ DataModel.listeWSCountries[i].getName());
+//			}
+			
+			CodeTableRecordType[] records = NemoLists.getVocabList("C180");
+			
+			TreeMap<String, String> treePays = new TreeMap<String, String>();
+				
+			for (CodeTableRecordType record : records)
+			{	
+				treePays.put(record.getEntryTerm(), Utils.extraitCodeURN(record.getEntryKey()));
+			}
+			
+			for (Entry<String, String> currentEntry : treePays.entrySet()) {
+				EditSurvey.comboCountries.add(currentEntry.getValue() + " - " + currentEntry.getKey());
 			}
 		}
 			
@@ -1104,6 +1125,10 @@ public class Drawing {
 			}
 		});
 		section.setText(nomSection);
+		
+		GridLayoutFactory.fillDefaults().applyTo(section);
+		GridDataFactory.fillDefaults().grab(false,false).applyTo(section);
+		
 		Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL);
 		section.setFont(font);
 		section.setDescription(descriptionSection);
@@ -1112,12 +1137,18 @@ public class Drawing {
 		sectionClient.setLayout(new GridLayout());
 		GridData gd = new GridData();
 		gd.horizontalSpan = 2;
-
+		
+		GridLayoutFactory.fillDefaults().applyTo(sectionClient);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(sectionClient);
+		
 		// combolist centres de données
 		Label label = new Label(sectionClient, SWT.NULL);
 		label.setText(Messages.getString("EditSurvey.62"));
-		EditSurvey.comboDataCentres.setParent(sectionClient);
-
+		EditSurvey.comboDataCentres.setParent(sectionClient); 		
+		
+		GridLayoutFactory.fillDefaults().applyTo(EditSurvey.comboDataCentres);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(EditSurvey.comboDataCentres);
+		
 		// ajout de la combolist confidentialite
 		Label label2 = new Label(sectionClient, SWT.NULL);
 		label2.setText(Messages.getString("EditSurvey.28"));

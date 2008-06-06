@@ -91,6 +91,8 @@ public class EditDesc {
 			EditData.validee = 0;
 			EditConversion.validee = 0;
 
+			
+			
 			loaded = 1;
 
 			/*

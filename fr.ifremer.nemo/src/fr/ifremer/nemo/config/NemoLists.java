@@ -2261,11 +2261,13 @@ public class NemoLists implements Cloneable {
 	}
 	
 	public static void writeSdnParameters(String debut) {
-		setSdnParameters(debut + "SDN_parameter_mapping");
-		
-		for (ParameterModel param : DataModel.stationModel.getParameterModels()) {
-			_sdnParameters += "\n" + debut + parameterMap(param.getModel()) ;
-		}
+		setSdnParameters(debut);
+//		ANNULATION TEMPORAIRE DES LIGNES
+//		setSdnParameters(debut + "SDN_parameter_mapping");
+//		
+//		for (ParameterModel param : DataModel.stationModel.getParameterModels()) {
+//			_sdnParameters += "\n" + debut + parameterMap(param.getModel()) ;
+//		}
 	}
 	
 	public static String parameterMap(Parameter param) {

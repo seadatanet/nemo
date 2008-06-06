@@ -64,7 +64,9 @@ public class ViewFile extends ViewPart {
 	
 	private Composite compositeChoixFichier = null;
 
-	public static Button checkBoxTempo, medatlas, odv, checkCDI;
+	public static Button checkBoxTempo;
+	
+	public static Button medatlas, odv, checkCDI;
 
 	public static Button radioFichier = null;
 
@@ -100,8 +102,10 @@ public class ViewFile extends ViewPart {
 	public static StyledText styledTextCampagne, textAreaDescription,
 			styledTextStation, styledTextData;
 
-	public static TabItem tabItem, tabItem1, tabItem2, tabItem3, tabItem4,
+	public static TabItem tabItem, /*tabItem1,*/ tabItem2, tabItem3, tabItem4,
 			tabItem9;
+	
+	public static TabItem tabItem1;
 
 	public static Composite compositeConversion = null;
 
@@ -226,7 +230,6 @@ public class ViewFile extends ViewPart {
 		tabItem9 = new TabItem(tabFolder, SWT.NONE);
 		tabItem9.setText(Messages.getString("ViewFile.conversion")); //$NON-NLS-1$
 		tabItem9.setControl(compositeConversion);
-
 	}
 
 	/**
@@ -755,7 +758,7 @@ public class ViewFile extends ViewPart {
 		groupTempo.setLayout(gridLayout1);
 		labelDateRef = new Label(groupTempo, SWT.NONE);
 		labelDateRef
-				.setText(Messages.getString("ViewFile.dateRef") + ": dd/MM/yyyy"); //$NON-NLS-1$
+				.setText(Messages.getString("ViewFile.dateRef") + ": DD/MM/YYYY"); //$NON-NLS-1$
 
 		textTempoDateRef = new Text(groupTempo, SWT.BORDER);
 

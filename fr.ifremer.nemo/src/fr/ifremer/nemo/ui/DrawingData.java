@@ -235,7 +235,7 @@ public class DrawingData {
 					
 					formatter = Formatter.getSingleton();
 					
-					EditData.textTestDateHeure.setText(formatter.formatDateTime("yyyy MM dd  hh24mmss", DateLong));
+					EditData.textTestDateHeure.setText(formatter.formatDateTime("YYYY MM DD  hh24mmss", DateLong));
 					
 					
 				} catch (ParseException e) {

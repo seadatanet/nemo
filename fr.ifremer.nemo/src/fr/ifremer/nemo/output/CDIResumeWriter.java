@@ -121,7 +121,7 @@ public class CDIResumeWriter {
 						// Dataset Rev Date
 						Calendar calendrier = Calendar.getInstance();
 						Date dateEcriture = calendrier.getTime();
-						SimpleDateFormat dateFormat = new  SimpleDateFormat("yyyy:MM:dd'T'HH:mm:ss");
+						SimpleDateFormat dateFormat = new  SimpleDateFormat("YYYY-MM-DD'T'hh:mm:ss");
 						String stringDate = dateFormat.format(dateEcriture);
 						writer.write(";" + stringDate);
 
@@ -170,7 +170,7 @@ public class CDIResumeWriter {
 
 						// station date
 						Formatter format = new Formatter();
-						SimpleDateFormat dateFormat2 = new  SimpleDateFormat("yyyy:MM:dd'T'");
+						SimpleDateFormat dateFormat2 = new  SimpleDateFormat("YYYY-MM-DD'T'");
 						writer.write(";"
 								+ dateFormat2.format(new Date(station.getDate())) + format.formatDateTime("hh24:mm:ss", station.getCorrectedTime()));
 			

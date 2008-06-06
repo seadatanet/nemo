@@ -26,6 +26,7 @@ import fr.ifremer.nemo.domain.ParameterValue;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.TimeSeriesInformation;
 import fr.ifremer.nemo.ui.DataModel;
+import fr.ifremer.nemo.ui.EditConversion;
 import fr.ifremer.nemo.ui.EditData;
 import fr.ifremer.nemo.ui.ViewFile;
 import fr.ifremer.nemo.util.DateTimeFormat;
@@ -1278,9 +1279,12 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * @exception java.io.IOException
 	 */
 	public String[] consumeFooter(BufferedReader a_Reader) throws IOException {
+		EditConversion.incrementErreurLigne();
 		Vector<String> v = new Vector<String>();
 		for (int i = 0; i < _endData; i++) {
 			String line = a_Reader.readLine();
+			EditConversion.incrementErreurLigne();
+			EditConversion.setErreurChaine(line);
 			if (line != null) {
 				v.add(line);
 			}
@@ -1299,6 +1303,8 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		Vector<String> v = new Vector<String>();
 		for (int i = 0; i < _numberOfLines; i++) {
 			String line = a_Reader.readLine();
+			EditConversion.incrementErreurLigne();
+			EditConversion.setErreurChaine(line);
 			if (line != null) {
 				v.add(line);
 			} else {
@@ -1316,10 +1322,13 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * @exception java.io.IOException
 	 */
 	public String[] consumeHeader2(BufferedReader a_Reader, int compteur) throws IOException {
+		EditConversion.setErreurLigne(0);
 		Vector<String> v = new Vector<String>();
 		String line = null;
 		for (int i = 0; i < _numberOfLines; i++) {
 			line = a_Reader.readLine();
+			EditConversion.incrementErreurLigne();
+			EditConversion.setErreurChaine(line);
 			if (line != null) {
 				v.add(line);
 			} else {
@@ -1424,7 +1433,6 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 				return station;
 				
 			} else if (isMetaInData2()) {
-				// DEBUT
 				int index;
 				String line = null;
 				boolean initStation = false;
@@ -1433,11 +1441,12 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 						&& (!(_endOnEmptyLine && line.trim().matches("^$")))
 						&& (!(_endOnPattern && line.matches("^" + _endDataPattern + "$")))
 						|| (index < _rowNumber); index++) {
-										
+							
 					a_Reader.reset();
 					
 					header = consumeHeader2(a_Reader, getCompteur());
-					
+					EditConversion.setErreurLigne(getCompteur());
+					EditConversion.setErreurChaine(line);
 					// Recuperation du numero de station
 					getReferenceProperty().applyOn(station, header);
 					String refTemp = station.getReference();
@@ -1533,63 +1542,11 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 					}
 				}
 				
-				if (line != null) {
-					consumeFooter(a_Reader);
+				if (line == null && !station.getReference().equals("")) {
+					// consumeFooter(a_Reader);
 					
 					return station;
 				}
-				// FIN
-				
-//				// Marquage du fichier au debut
-//				a_Reader.mark(a_Reader.toString().length());
-//				if ((header = consumeHeader2(a_Reader, 1)) != null) {
-//					// a_Notifier.progress(a_Reader.getFilePointer());
-//					if ((getReferenceProperty().getFragment().getFirstLine() == 0
-//							&& (a_Filename != null) && !(isIncrementRef()))) {
-//						if (ViewFile.collectionCasN)
-//						{
-//							String[] filename = DataModel.singleSurvey.getFile().split("/");
-//							getReferenceProperty().applyOn(station,
-//								new String[] { filename[filename.length - 1] });
-//						}
-//						else							
-//							getReferenceProperty().applyOn(station,
-//								new String[] { a_Filename });
-//					} else {
-//						if (isIncrementRef()) {
-//							station.setReference(Integer.toString(_ref++));
-//						} else {
-//							getReferenceProperty().applyOn(station, header);
-//						}
-//					}
-//					for (PropertyModel m : getProperties()) {
-//						// System.out.println("@DEBUG propertyModel
-//						// courant
-//						// :"+m.getProperty());
-//						m.applyOn(station, header);
-//					}
-//					if (_timeSeriesModel != null) {
-//						_timeSeriesModel.convert(station, header,
-//								isRefDateBased, a_RefDate);
-//					}
-//					// a_Notifier.progress(a_Reader.getFilePointer());
-//					
-//					// Retour au debut du fichier et depassement du header
-//					a_Reader.reset();
-//					consumeHeader(a_Reader);
-//					
-//					convertParameters(a_Reader, station, isRefDateBased,
-//							a_RefDate, a_Notifier);
-//					if (_timeSeriesModel != null
-//							&& Float.isNaN(station.getTimeSeriesInformation()
-//									.getEndDate())) {
-//						computeEndDate(station);
-//					}
-//					consumeFooter(a_Reader);
-//					// a_Notifier.progress(a_Reader.getFilePointer());
-//
-//					return station;
-//				}
 				
 			} else {
 				if ((header = consumeHeader(a_Reader)) != null) {
@@ -1692,6 +1649,9 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 					|| (index < _rowNumber); index++) {
 
 				a_Notifier.progress(line.length());
+				
+				EditConversion.incrementErreurLigne();
+				EditConversion.setErreurChaine(line);
 				
 				if (index == 0 && isMetaInData()) {
 					String[] header = new String[] { line };
@@ -1823,7 +1783,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		try {
 			setReferenceProperty(new PropertyModel("reference", _model));
 			addProperty(new PropertyModel("date", _model, new DateTimeFormat(
-					"dd/MM/yyyy")));
+					"DD/MM/YYYY")));
 			addProperty(new PropertyModel("time", _model, new DateTimeFormat(
 					"hh:mm AM")));
 			addProperty(new PropertyModel("offsetTU", _model, new FloatFormat(

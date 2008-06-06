@@ -621,8 +621,8 @@ public class EditStation {
 
 		}
 		
-		if (DataModel.station.getDataType() != null) {
-			Utils.selectComboValeur(EditStation.comboRefStationType, DataModel.station.getDataType().getCode());
+		if (DataModel.station_modele.getDataType() != null) {
+			Utils.selectComboCode(EditStation.comboRefStationType, DataModel.station_modele.getDataType().getCode());
 		}
 		
 		// EditStation.buttonExpand2.setParent(s.getBody());
@@ -1031,19 +1031,19 @@ public class EditStation {
 		comboHeure.add("hh24mm"); //$NON-NLS-1$
 		comboHeure.add("hh24mmss"); //$NON-NLS-1$
 		comboHeure.add("hh24 mm"); //$NON-NLS-1$
-		comboHeure.add("HH:hh"); //$NON-NLS-1$
-		comboHeure.add("SSSSS"); //$NON-NLS-1$
+		comboHeure.add("hh24:cc"); //$NON-NLS-1$
+		comboHeure.add("ttttt"); //$NON-NLS-1$
 
 		comboDate = new Combo(shell, SWT.NONE);
-		comboDate.add("dd/MM/yy"); //$NON-NLS-1$
-		comboDate.add("dd/MM/yyyy"); //$NON-NLS-1$
-		comboDate.add("ddMMyy"); //$NON-NLS-1$
-		comboDate.add("ddMMyyyy"); //$NON-NLS-1$
-		comboDate.add("MMM dd yyyy"); //$NON-NLS-1$
-		comboDate.add("yy/MM/dd"); //$NON-NLS-1$
-		comboDate.add("yyMMdd"); //$NON-NLS-1$
-		comboDate.add("yyyy/MM/dd"); //$NON-NLS-1$
-		comboDate.add("yyyyMMdd"); //$NON-NLS-1$
+		comboDate.add("DD/MM/YY"); //$NON-NLS-1$
+		comboDate.add("DD/MM/YYYY"); //$NON-NLS-1$
+		comboDate.add("DDMMYY"); //$NON-NLS-1$
+		comboDate.add("DDMMYYYY"); //$NON-NLS-1$
+		comboDate.add("MMM DD YYYY"); //$NON-NLS-1$
+		comboDate.add("YY/MM/DD"); //$NON-NLS-1$
+		comboDate.add("YYMMDD"); //$NON-NLS-1$
+		comboDate.add("YYYY/MM/DD"); //$NON-NLS-1$
+		comboDate.add("YYYYMMDD"); //$NON-NLS-1$
 
 		comboLatitude = new Combo(shell, SWT.NONE);
 		comboLatitude.add("+DD MM.mm"); //$NON-NLS-1$

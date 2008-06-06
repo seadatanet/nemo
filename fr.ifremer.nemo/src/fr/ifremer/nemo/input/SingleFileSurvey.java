@@ -17,6 +17,7 @@ import com.ago.xml.XMLOutputWriter;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.output.ProgressNotification;
+import fr.ifremer.nemo.ui.EditConversion;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.ViewFile;
 import fr.ifremer.nemo.util.Messages;
@@ -356,6 +357,7 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 		Vector<String> v = new Vector<String>();
 		for (int i = 0; i < _headerLinesNumber; i++) {
 			String line = a_Reader.readLine();
+			EditConversion.incrementErreurLigne();
 			if (line != null) {
 				v.add(line);
 			} else {
@@ -388,6 +390,8 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 					file.length(), 0, a_Progress);
 
 			_stationModel.setTaille((int) file.length());
+			EditConversion.setErreurFichier(file.getName());
+			EditConversion.setErreurLigne(0);
 			
 			Station station = null;
 			
@@ -407,7 +411,6 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 				
 				//reader = new RandomAccessFile(file, "r");
 				consumeHeader(reader2);
-				
 				
 				while ((station = _stationModel.convert(reader2, Utils.extraitFichierChemin(ViewFile.nomFichier),
 						isRefDateBased, a_RefDate, notifier)) != null) {

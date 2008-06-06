@@ -531,30 +531,34 @@ public class EditData {
 
 
 		comboHeure = new Combo(shell, SWT.NONE);
+		comboHeure.add("hh:mm PM"); //$NON-NLS-1$
+		comboHeure.add("hh:mm:ss PM"); //$NON-NLS-1$
 		comboHeure.add("hh24:mm"); //$NON-NLS-1$
-		comboHeure.add("hh24mmss"); //$NON-NLS-1$
-		comboHeure.add("hh24mm"); //$NON-NLS-1$
-		comboHeure.add("hh:mm:ss"); //$NON-NLS-1$
-		comboHeure.add("hh:mm"); //$NON-NLS-1$
 		comboHeure.add("hh24:mm:ss"); //$NON-NLS-1$
+		comboHeure.add("hh24mm"); //$NON-NLS-1$
+		comboHeure.add("hh24mmss"); //$NON-NLS-1$
+		comboHeure.add("hh24 mm"); //$NON-NLS-1$
+		comboHeure.add("hh24:cc"); //$NON-NLS-1$
+		comboHeure.add("ttttt"); //$NON-NLS-1$
 
 		comboDate = new Combo(shell, SWT.NONE);
-		comboDate.add("ddMMyyyy"); //$NON-NLS-1$
-		comboDate.add("ddMMyy"); //$NON-NLS-1$
-		comboDate.add("MMddyy"); //$NON-NLS-1$
-		comboDate.add("yyddMM"); //$NON-NLS-1$
-		comboDate.add("dd:MM:yyyy"); //$NON-NLS-1$
-		comboDate.add("dd:MM:yy"); //$NON-NLS-1$
-		comboDate.add("dd/MM/yy"); //$NON-NLS-1$
-		comboDate.add("dd/MM/yyyy"); //$NON-NLS-1$
+		comboDate.add("DD/MM/YY"); //$NON-NLS-1$
+		comboDate.add("DD/MM/YYYY"); //$NON-NLS-1$
+		comboDate.add("DDMMYY"); //$NON-NLS-1$
+		comboDate.add("DDMMYYYY"); //$NON-NLS-1$
+		comboDate.add("MMM DD YYYY"); //$NON-NLS-1$
+		comboDate.add("YY/MM/DD"); //$NON-NLS-1$
+		comboDate.add("YYMMDD"); //$NON-NLS-1$
+		comboDate.add("YYYY/MM/DD"); //$NON-NLS-1$
+		comboDate.add("YYYYMMDD"); //$NON-NLS-1$
 
 		comboTotal = new Combo(shell, SWT.NONE);
-		comboTotal.add("ddMMyyyy hh:mm:ss"); //$NON-NLS-1$
-		comboTotal.add("ddMMyyyy hh24:mm"); //$NON-NLS-1$
-		comboTotal.add("ddMMyyyy hh24mm"); //$NON-NLS-1$
-		comboDate.add("dd/MM/yyyy hh:mm:ss"); //$NON-NLS-1$
-		comboDate.add("dd/MM/yyyy hh24:mm"); //$NON-NLS-1$
-		comboDate.add("dd/MM/yyyy hh24mm"); //$NON-NLS-1$
+		comboTotal.add("DDMMYYYY hh:mm:ss"); //$NON-NLS-1$
+		comboTotal.add("DDMMYYYY hh24:mm"); //$NON-NLS-1$
+		comboTotal.add("DDMMYYYY hh24mm"); //$NON-NLS-1$
+		comboTotal.add("DD/MM/YYYY hh:mm:ss"); //$NON-NLS-1$
+		comboTotal.add("DD/MM/YYYY hh24:mm"); //$NON-NLS-1$
+		comboTotal.add("DD/MM/YYYY hh24mm"); //$NON-NLS-1$
 
 	}
 

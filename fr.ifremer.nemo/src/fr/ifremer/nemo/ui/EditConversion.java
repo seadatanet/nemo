@@ -33,9 +33,24 @@ public class EditConversion extends Thread {
 
 	public static Shell shell;
 
-	public static Boolean interrompu;
+//	public static Boolean interrompu;
 
 	public static ProgressNotification notifier;
+	
+	/**
+	 * Nom du fichier lu à retourner en cas d'erreur
+	 */
+	protected static String _erreurFichier;
+	
+	/**
+	 * Nombre de lignes lues à retourner en cas d'erreur
+	 */
+	protected static int _erreurLigne;
+	
+	/**
+	 * Chaine lue à retourner en cas d'erreur
+	 */
+	protected static String _erreurChaine;
 
 	public void run() {
 
@@ -48,7 +63,7 @@ public class EditConversion extends Thread {
 		formEdition = ViewEdit.formEdition;
 		nomFichierSortie = "";
 		nomDossierSortie = "";
-		interrompu = false;
+//		interrompu = false;
 
 		// raz message erreur
 		Utils.messageErreur(""); //$NON-NLS-1$
@@ -209,7 +224,7 @@ public class EditConversion extends Thread {
 					catch (InterruptedException e)
 					{
 						Utils.messageErreur(e.getMessage());
-						SurveyMedia.interrompu = true;
+						SWTProcess.interrompu = true;
 					}
 				}
 
@@ -222,6 +237,7 @@ public class EditConversion extends Thread {
 					new SWTProgress().run();
 				} catch (InterruptedException e) {
 					Utils.messageErreur(e.getMessage());
+					SWTProcess.interrompu = true;
 				}
 			}
 
@@ -233,7 +249,8 @@ public class EditConversion extends Thread {
 					Utils.messageOK(Messages.getString("EditConversion.10"));
 				}
 			} else {
-			//	Utils.messageErreur(Messages.getString("EditConversion.16"));
+				Utils.messageErreurAppend(messageErreur());
+			// Utils.messageErreur(Messages.getString("EditConversion.16"));
 			}
 
 		}
@@ -304,9 +321,62 @@ public class EditConversion extends Thread {
 				}
 			} else {
 				//	Utils.messageErreur(Messages.getString("EditConversion.16"));
+				Utils.messageErreurAppend(messageErreur());
 			}
 
 		}
 
+	}
+	
+	public static String getErreurFichier() {
+		return _erreurFichier;
+	}
+
+	public static void setErreurFichier(String fichier) {
+		_erreurFichier = fichier;
+	}
+
+	public static int getErreurLigne() {
+		return _erreurLigne;
+	}
+
+	public static void setErreurLigne(int ligne) {
+		_erreurLigne = ligne;
+	}
+	
+	public static void incrementErreurLigne() {
+		_erreurLigne ++;
+	}
+
+	public static String getErreurChaine() {
+		return _erreurChaine;
+	}
+
+	public static void setErreurChaine(String chaine) {
+		_erreurChaine = chaine;
+	}
+	
+	public static String messageErreur() {
+		String message = "";
+		
+		if (getErreurFichier() != null)
+			if (!getErreurFichier().trim().equals(""))
+				message += Messages.getString("EditConversion.20") + "\t : \t"
+				+ getErreurFichier() + "\r\n";
+		
+		if (getErreurLigne() != 0)
+			message += Messages.getString("EditConversion.21") + "\t : \t"
+			+ getErreurLigne() + "\r\n";
+		
+		if (getErreurChaine() != null)
+			if (!getErreurChaine().trim().equals(""))
+				message += Messages.getString("EditConversion.22") + "\t : \t"
+				+ getErreurChaine();
+		
+		if (!message.equals(""))
+			message = "\r\n" + Messages.getString("EditConversion.23")
+				+ "\r\n" + message;
+		
+		return message;
 	}
 }

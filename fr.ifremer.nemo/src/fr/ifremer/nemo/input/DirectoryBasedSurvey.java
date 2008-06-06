@@ -16,6 +16,7 @@ import com.ago.xml.XMLOutputWriter;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.output.ProgressNotification;
+import fr.ifremer.nemo.ui.EditConversion;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.SizeBasedProgressNotifier;
 
@@ -325,8 +326,9 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 						// demande d'annulation
 						throw new InterruptedException("Interruption");
 					} else {
-						
 						File file = new File(dir, files[i]);
+						EditConversion.setErreurFichier(file.getName());
+						EditConversion.setErreurLigne(0);
 						_stationModel.setTaille((int) file.length());
 					    notifierStation.setOffset(offset);
 						offset += file.length();

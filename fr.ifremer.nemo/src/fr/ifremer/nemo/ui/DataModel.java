@@ -136,7 +136,7 @@ public class DataModel {
 				Long dateLong = null, timeLong = null;
 				try {
 					dateFormat = new DateTimeFormat();
-					dateFormat.setFormatString("dd/MM/yyyy");
+					dateFormat.setFormatString("DD/MM/YYYY");
 					dateLong = (Long) dateFormat
 							.parseObject(ViewFile.textTempoDateRef.getText());
 				} catch (ParseException e) {
@@ -265,7 +265,7 @@ public class DataModel {
 		// DATE DE DEBUT
 		try {
 			DateTimeFormat dateFormat = new DateTimeFormat();
-			dateFormat.setFormatString("dd/MM/yyyy");
+			dateFormat.setFormatString("DD/MM/YYYY");
 			Long dateLong = (Long) dateFormat
 					.parseObject(EditSurvey.textDateDebut.getText());
 			survey.setStartDate(dateLong);
@@ -277,7 +277,7 @@ public class DataModel {
 		// DATE DE FIN
 		try {
 			DateTimeFormat dateFormat = new DateTimeFormat();
-			dateFormat.setFormatString("dd/MM/yyyy");
+			dateFormat.setFormatString("DD/MM/YYYY");
 			Long dateLong = (Long) dateFormat
 					.parseObject(EditSurvey.textDateFin.getText());
 			survey.setEndDate(dateLong);
@@ -288,10 +288,8 @@ public class DataModel {
 
 		survey.setRegionName(EditSurvey.textRegion.getText());
 
-		// Source de données
-//		survey.setCountryCode(EditSurvey.textPays.getText());
-		String country = EditSurvey.comboCountries.getText();		
-		survey.setCountryCode(country.substring(0, country.indexOf(" - ")));
+		// Source de données	
+		survey.setCountryCode(Utils.extraitCode(EditSurvey.comboCountries.getText()));
 		
 		survey.setLaboratories(EditSurvey.textLabo.getText());
 		survey.setChiefScientist(EditSurvey.textChef.getText());
@@ -299,11 +297,10 @@ public class DataModel {
 
 		// Centre d'archivage
 		// split sur le " - "
-		Pattern p = Pattern.compile(" - ");
-		String mots[] = p.split(EditSurvey.comboDataCentres.getText());
-		String code = mots[0];
-
-		survey.setDataCentre(code);
+//		Pattern p = Pattern.compile(" - ");
+//		String mots[] = p.split(EditSurvey.comboDataCentres.getText());
+//		String code = mots[0];
+		survey.setDataCentre(Utils.extraitCode(EditSurvey.comboDataCentres.getText()));
 
 		// confidentialité
 		if (EditSurvey.comboConfid.getText().matches("P - Public")) {
@@ -381,10 +378,16 @@ public class DataModel {
 			frag = propertyModel.getFragment();
 			// frag.setSingleLine(true);
 
-			ligne = ""
+			if (Integer.valueOf(EditStation.textRefStationLigne
+							.getText()) == 0) {
+				ligne = "0";
+			} else {
+				ligne = ""
 					+ (Integer.valueOf(EditStation.textRefStationLigne
 							.getText()) - Integer
 							.valueOf(EditDesc.lignesEnteteFichier.getText()));
+			}
+			
 			debut = EditStation.textRefStationDebut.getText();
 			fin = EditStation.textRefStationFin.getText();
 
@@ -1344,7 +1347,7 @@ public class DataModel {
 
 				try {
 					ViewFile.textTempoDateRef.setText(formatter.formatDateTime(
-							"dd/MM/yyyy", inputModel_modele.getRefDate()));
+							"DD/MM/YYYY", inputModel_modele.getRefDate()));
 				} catch (ParseException e) {
 
 					e.printStackTrace();
@@ -1452,7 +1455,7 @@ public class DataModel {
 
 		try {
 			EditSurvey.textDateDebut.setText(formatter.formatDateTime(
-					"dd/MM/yyyy", survey.getStartDate()));
+					"DD/MM/YYYY", survey.getStartDate()));
 		} catch (ParseException e) {
 
 			e.printStackTrace();
@@ -1462,7 +1465,7 @@ public class DataModel {
 
 		try {
 			EditSurvey.textDateFin.setText(formatter.formatDateTime(
-					"dd/MM/yyyy", survey.getEndDate()));
+					"DD/MM/YYYY", survey.getEndDate()));
 		} catch (ParseException e) {
 
 			e.printStackTrace();
@@ -1472,17 +1475,19 @@ public class DataModel {
 
 		// Source de données
 // 		EditSurvey.textPays.setText(survey.getCountryCode());
-		int taille = DataModel.listeWSCountries.length;
-		int k = 0;
-		EditSurvey.comboCountries.select(k);
-		String countryCode = survey.getCountryCode();
-		int j = countryCode.length();
-		while (k < taille
-				&& !EditSurvey.comboCountries.getText().substring(0, j)
-						.equals(countryCode)) {
-			k++;
-			EditSurvey.comboCountries.select(k);
-		}
+//		int taille = DataModel.listeWSCountries.length;
+//		int k = 0;
+//		EditSurvey.comboCountries.select(k);
+//		String countryCode = survey.getCountryCode();
+//		int j = countryCode.length();
+//		while (k < taille
+//				&& !EditSurvey.comboCountries.getText().substring(0, j)
+//						.equals(countryCode)) {
+//			k++;
+//			EditSurvey.comboCountries.select(k);
+//		}
+		Utils.selectComboCode(EditSurvey.comboCountries, survey.getCountryCode());
+		
 		
 		EditSurvey.textLabo.setText(survey.getLaboratories());
 		EditSurvey.textChef.setText(survey.getChiefScientist());
@@ -1492,17 +1497,18 @@ public class DataModel {
 
 		//	
 		// survey.setDataCentre(code);
-		taille = DataModel.listeWSCenters.length;
-		int position = 0;
-		for (int i = 0; i < taille; i++) {
-			Pattern pat = Pattern.compile(" - ");
-			String mots[] = pat.split(EditSurvey.comboDataCentres.getItem(i));
-			if (survey.getDataCentre().matches(mots[0])) {
-				position = i;
-				break;
-			}
-		}
-		EditSurvey.comboDataCentres.select(position);
+//		int taille = DataModel.listeWSCenters.length;
+//		int position = 0;
+//		for (int i = 0; i < taille; i++) {
+//			Pattern pat = Pattern.compile(" - ");
+//			String mots[] = pat.split(EditSurvey.comboDataCentres.getItem(i));
+//			if (survey.getDataCentre().matches(mots[0])) {
+//				position = i;
+//				break;
+//			}
+//		}
+//		EditSurvey.comboDataCentres.select(position);
+		Utils.selectComboCode(EditSurvey.comboDataCentres, survey.getDataCentre());
 
 		// EditSurvey.textCentre.setText(survey.getDataCentre());
 
@@ -1524,7 +1530,7 @@ public class DataModel {
 		// Remplissage de la liste des dataTypes de la campagne
 
 		DataType[] dataTypes = survey.getDataTypes();
-		taille = dataTypes.length;
+		int taille = dataTypes.length;
 
 		for (int i = 0; i < taille; i++) {
 			TypeSurvey typeSurvey = new TypeSurvey();
@@ -1617,8 +1623,13 @@ public class DataModel {
 			ligne = frag.getFirstLine();
 			debut = frag.getFirstCharOffset();
 			fin = frag.getLastCharOffset();
-			real_ligne = ligne
-					+ Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+			
+			if (ligne == 0) {
+				real_ligne = 0;
+			} else {
+				real_ligne = ligne
+				+ Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+			}
 
 			EditStation.textRefStationLigne.setText("" + real_ligne);
 			EditStation.textRefStationDebut.setText("" + debut);
@@ -1663,7 +1674,7 @@ public class DataModel {
 			if (ok) {
 				// ajouté que si c'est un capteur
 				if (capteur) {
-					Utils.selectComboValeur(EditStation.comboRefStationType, code);
+					Utils.selectComboCode(EditStation.comboRefStationType, code);
 //					EditStation.comboRefStationType.add(code, 0);
 //					EditStation.comboRefStationType.select(0);
 				}
@@ -1695,10 +1706,10 @@ public class DataModel {
 			int ligne1 = frag.getFirstLine();
 			int debut1 = frag.getFirstCharOffset();
 			int fin1 = frag.getLastCharOffset();
-			// int real_ligne1 = ligne1 +
-			// Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+			int real_ligne1 = ligne1 +
+				Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 
-			EditStation.textHistoriqueAcqLigne1.setText("" + ligne1);
+			EditStation.textHistoriqueAcqLigne1.setText("" + real_ligne1);
 			EditStation.textHistoriqueAcqDebut1.setText("" + debut1);
 			EditStation.textHistoriqueAcqFin1.setText("" + fin1);
 
@@ -1715,10 +1726,10 @@ public class DataModel {
 				int ligne2 = frag2.getFirstLine();
 				int debut2 = frag2.getFirstCharOffset();
 				int fin2 = frag2.getLastCharOffset();
-				// int real_ligne2 = ligne2 +
-				// Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+				int real_ligne2 = ligne2 +
+					Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 
-				EditStation.textHistoriqueAcqLigne2.setText("" + ligne2);
+				EditStation.textHistoriqueAcqLigne2.setText("" + real_ligne2);
 				EditStation.textHistoriqueAcqDebut2.setText("" + debut2);
 				EditStation.textHistoriqueAcqFin2.setText("" + fin2);
 			}
@@ -1749,7 +1760,7 @@ public class DataModel {
 			real_ligne = ligne
 					+ Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 
-			EditStation.textCommentaireLigne.setText("" + ligne);
+			EditStation.textCommentaireLigne.setText("" + real_ligne);
 			EditStation.textCommentaireDebut.setText("" + debut);
 			EditStation.textCommentaireFin.setText("" + fin);
 			EditStation.buttonVar.setSelection(var);
@@ -1789,10 +1800,10 @@ public class DataModel {
 			int ligne1 = frag.getFirstLine();
 			int debut1 = frag.getFirstCharOffset();
 			int fin1 = frag.getLastCharOffset();
-			// int real_ligne1 = ligne1 +
-			// Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+			int real_ligne1 = ligne1 +
+				Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 
-			EditStation.textSurfaceLigne1.setText("" + ligne1);
+			EditStation.textSurfaceLigne1.setText("" + real_ligne1);
 			EditStation.textSurfaceDebut1.setText("" + debut1);
 			EditStation.textSurfaceFin1.setText("" + fin1);
 
@@ -1809,10 +1820,10 @@ public class DataModel {
 				int ligne2 = frag2.getFirstLine();
 				int debut2 = frag2.getFirstCharOffset();
 				int fin2 = frag2.getLastCharOffset();
-				// int real_ligne2 = ligne2 +
-				// Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+				int real_ligne2 = ligne2 +
+					Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 
-				EditStation.textSurfaceLigne2.setText("" + ligne2);
+				EditStation.textSurfaceLigne2.setText("" + real_ligne2);
 				EditStation.textSurfaceDebut2.setText("" + debut2);
 				EditStation.textSurfaceFin2.setText("" + fin2);
 			}
@@ -1853,7 +1864,7 @@ public class DataModel {
 						+ Integer.valueOf(EditDesc.lignesEnteteFichier
 								.getText());
 
-				EditStation.textFreqEchantLigne.setText("" + ligne);
+				EditStation.textFreqEchantLigne.setText("" + real_ligne);
 				EditStation.textFreqEchantDebut.setText("" + debut);
 				EditStation.textFreqEchantFin.setText("" + fin);
 
@@ -1906,7 +1917,7 @@ public class DataModel {
 			real_ligne = ligne
 					+ Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 
-			EditStation.textHeureLigne.setText("" + ligne);
+			EditStation.textHeureLigne.setText("" + real_ligne);
 			EditStation.textHeureDebut.setText("" + debut);
 			EditStation.textHeureFin.setText("" + fin);
 		}
@@ -1955,7 +1966,7 @@ public class DataModel {
 			EditStation.textDateDebut.setEnabled(true);
 			EditStation.textDateFin.setEnabled(true);
 
-			EditStation.textDateLigne.setText("" + ligne);
+			EditStation.textDateLigne.setText("" + real_ligne);
 			EditStation.textDateDebut.setText("" + debut);
 			EditStation.textDateFin.setText("" + fin);
 		}
@@ -2002,7 +2013,7 @@ public class DataModel {
 			real_ligne = ligne
 					+ Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 
-			EditStation.textLatitudeLigne.setText("" + ligne);
+			EditStation.textLatitudeLigne.setText("" + real_ligne);
 			EditStation.textLatitudeDebut.setText("" + debut);
 			EditStation.textLatitudeFin.setText("" + fin);
 			EditStation.buttonVarLat.setSelection(var);
@@ -2049,7 +2060,7 @@ public class DataModel {
 			real_ligne = ligne
 					+ Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 
-			EditStation.textLongitudeLigne.setText("" + ligne);
+			EditStation.textLongitudeLigne.setText("" + real_ligne);
 			EditStation.textLongitudeDebut.setText("" + debut);
 			EditStation.textLongitudeFin.setText("" + fin);
 			EditStation.buttonVarLong.setSelection(var);
@@ -2079,7 +2090,7 @@ public class DataModel {
 			real_ligne = ligne
 					+ Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 
-			EditStation.textProfondeurLigne.setText("" + ligne);
+			EditStation.textProfondeurLigne.setText("" + real_ligne);
 			EditStation.textProfondeurDebut.setText("" + debut);
 			EditStation.textProfondeurFin.setText("" + fin);
 
@@ -2115,7 +2126,7 @@ public class DataModel {
 				EditStation.buttonProfCapteurSaisie.setSelection(false);
 				EditStation.buttonProfCapteurPos.setSelection(true);
 
-				EditStation.textProfCapteurLigne.setText("" + ligne);
+				EditStation.textProfCapteurLigne.setText("" + real_ligne);
 				EditStation.textProfCapteurDebut.setText("" + debut);
 				EditStation.textProfCapteurFin.setText("" + fin);
 			}
@@ -2158,7 +2169,7 @@ public class DataModel {
 						+ Integer.valueOf(EditDesc.lignesEnteteFichier
 								.getText());
 
-				EditStation.textLatFinLigne.setText("" + ligne);
+				EditStation.textLatFinLigne.setText("" + real_ligne);
 				EditStation.textLatFinDebut.setText("" + debut);
 				EditStation.textLatFinFin.setText("" + fin);
 				EditStation.buttonVarLatFin.setSelection(var);
@@ -2203,7 +2214,7 @@ public class DataModel {
 						+ Integer.valueOf(EditDesc.lignesEnteteFichier
 								.getText());
 
-				EditStation.textLongFinLigne.setText("" + ligne);
+				EditStation.textLongFinLigne.setText("" + real_ligne);
 				EditStation.textLongFinDebut.setText("" + debut);
 				EditStation.textLongFinFin.setText("" + fin);
 				EditStation.buttonVarLongFin.setSelection(var);
@@ -2237,7 +2248,7 @@ public class DataModel {
 						+ Integer.valueOf(EditDesc.lignesEnteteFichier
 								.getText());
 
-				EditStation.textProfFinLigne.setText("" + ligne);
+				EditStation.textProfFinLigne.setText("" + real_ligne);
 				EditStation.textProfFinDebut.setText("" + debut);
 				EditStation.textProfFinFin.setText("" + fin);
 			}
@@ -2265,7 +2276,7 @@ public class DataModel {
 						+ Integer.valueOf(EditDesc.lignesEnteteFichier
 								.getText());
 
-				EditStation.textDeclinMagnetLigne.setText("" + ligne);
+				EditStation.textDeclinMagnetLigne.setText("" + real_ligne);
 				EditStation.textDeclinMagnetDebut.setText("" + debut);
 				EditStation.textDeclinMagnetFin.setText("" + fin);
 			}
@@ -2310,7 +2321,7 @@ public class DataModel {
 	public static void main(String[] args) {
 		try {
 
-			DateTimeFormat format = new DateTimeFormat("MMM dd yyyy");
+			DateTimeFormat format = new DateTimeFormat("MMM DD YYYY");
 			format.toString();
 
 		} catch (Exception e) {

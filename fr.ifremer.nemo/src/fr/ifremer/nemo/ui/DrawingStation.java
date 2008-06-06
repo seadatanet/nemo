@@ -1966,7 +1966,7 @@ public class DrawingStation {
 							
 							formatter = Formatter.getSingleton();
 							
-							test.setText(formatter.formatDateTime("ddMMyyyy", DateLong));
+							test.setText(formatter.formatDateTime("DDMMYYYY", DateLong));
 							test.pack();
 						} catch (ParseException e) {
 

@@ -6,6 +6,8 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.TreeMap;
+import java.util.Map.Entry;
 
 import javax.xml.transform.TransformerException;
 
@@ -31,6 +33,7 @@ import fr.ifremer.nemo.domain.DataType;
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSDataType;
+import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
 public class EditSurvey {
 	// fonctions de remplissage de la zone d'édition pour les campagnes
@@ -40,7 +43,7 @@ public class EditSurvey {
 
 	public static Text textCampagne, textNom, textCodeNavire, textNomNavire,
 			textDateDebut, textDateFin, textRegion, textPays, textLabo,
-			textChef, textProjet, textCentre, textConfidentiel, textType,
+			textChef, textProjet, /*textCentre,*/ textConfidentiel, textType,
 			textNbre, textCommentaire;
 
 	public static Label labelCampagne, labelNom, labelCodeNavire,
@@ -212,7 +215,7 @@ public class EditSurvey {
 		listeNoms.clear();
 
 		// section centre archivage
-		listeText.add(textCentre);
+		//listeText.add(textCentre);
 		listeNoms.add(Messages.getString("EditSurvey.27")); //$NON-NLS-1$
 
 		Drawing
@@ -222,8 +225,8 @@ public class EditSurvey {
 		listeText.clear();
 		listeNoms.clear();
 		// FI par défaut pour le centre de données
-		textCentre.setTextLimit(2);
-		textCentre.setText("FI");
+		//textCentre.setTextLimit(2);
+		//textCentre.setText("FI");
 
 		// section types de données
 		listeText.add(textNbre);
@@ -425,17 +428,18 @@ public class EditSurvey {
 		if (DataModel.ouverture) {
 			DataModel.fillSurvey();
 		} else {
-			int taille = DataModel.listeWSCenters.length;
-			int k = 0;
-			EditSurvey.comboDataCentres.select(k);
-			String dataCenter = Utils.configuration.getDataCenter();
-			int j = dataCenter.length();
-			while (k < taille
-					&& !EditSurvey.comboDataCentres.getText().substring(0, j)
-							.equals(dataCenter)) {
-				k++;
-				EditSurvey.comboDataCentres.select(k);
-			}
+//			int taille = DataModel.listeWSCenters.length;
+//			int k = 0;
+//			EditSurvey.comboDataCentres.select(k);
+//			String dataCenter = Utils.configuration.getDataCenter();
+//			int j = dataCenter.length();
+//			while (k < taille
+//					&& !EditSurvey.comboDataCentres.getText().substring(0, j)
+//							.equals(dataCenter)) {
+//				k++;
+//				EditSurvey.comboDataCentres.select(k);
+//			}
+			Utils.selectComboCode(EditSurvey.comboDataCentres,Utils.configuration.getDataCenter());
 		}
 
 	}
@@ -701,7 +705,7 @@ public class EditSurvey {
 
 
 		try {
-			SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat formatDate = new SimpleDateFormat("DD/MM/YYYY");
 			if (survey.getFormattedStartDate() != null) {
 				EditSurvey.textDateDebut.setText(formatDate.format(new Date(
 						survey.getStartDate())));
@@ -726,19 +730,7 @@ public class EditSurvey {
 //			EditSurvey.textPays.setText(survey.getCountryCode());
 //		}
 		if (survey.getCountryCode() != null) {
-//			 sélection dans la comboList
-			int taille = DataModel.listeWSCountries.length;
-			int index = 0;
-			for (int i = 0; i < taille; i++) {
-				if (DataModel.listeWSCountries[i].getCode().matches(
-						survey.getCountryCode())) {
-					index = i;
-					break;
-				}
-
-			}
-
-			EditSurvey.comboCountries.select(index);
+			Utils.selectComboCode(EditSurvey.comboCountries,survey.getCountryCode());
 		}
 		
 		if (survey.getLaboratories() != null) {
@@ -755,21 +747,22 @@ public class EditSurvey {
 
 		// Centre d'archivage
 		if (survey.getDataCentre() != null) {
-			EditSurvey.textCentre.setText(survey.getDataCentre());
+			//EditSurvey.textCentre.setText(survey.getDataCentre());
 
 			// sélection dans la comboList
-			int taille = DataModel.listeWSCenters.length;
-			int index = 0;
-			for (int i = 0; i < taille; i++) {
-				if (DataModel.listeWSCenters[i].getCode().matches(
-						survey.getDataCentre())) {
-					index = i;
-					break;
-				}
-
-			}
-
-			EditSurvey.comboDataCentres.select(index);
+//			int taille = DataModel.listeWSCenters.length;
+//			int index = 0;
+//			for (int i = 0; i < taille; i++) {
+//				if (DataModel.listeWSCenters[i].getCode().matches(
+//						survey.getDataCentre())) {
+//					index = i;
+//					break;
+//				}
+//
+//			}
+//
+//			EditSurvey.comboDataCentres.select(index);
+			Utils.selectComboCode(EditSurvey.comboDataCentres, survey.getDataCentre());
 		}
 
 		if (survey.getAvailabilityCode() != null) {
@@ -987,8 +980,8 @@ public class EditSurvey {
 		listeTextSurvey.add(textChef);
 		textProjet = new Text(shell, SWT.BORDER);
 		listeTextSurvey.add(textProjet);
-		textCentre = new Text(shell, SWT.BORDER);
-		listeTextSurvey.add(textCentre);
+		//textCentre = new Text(shell, SWT.BORDER);
+		//listeTextSurvey.add(textCentre);
 		textConfidentiel = new Text(shell, SWT.BORDER);
 		listeTextSurvey.add(textConfidentiel);
 		textType = new Text(shell, SWT.BORDER);
@@ -1026,10 +1019,23 @@ public class EditSurvey {
 
 		comboDataCentres = new Combo(shell, SWT.READ_ONLY);
 		// remplissage des centres de données
-		taille = DataModel.listeWSCenters.length;
-		for (i = 0; i < taille; i++) {
-			comboDataCentres.add(DataModel.listeWSCenters[i].getCode() + " - "
-					+ DataModel.listeWSCenters[i].getName());
+//		taille = DataModel.listeWSCenters.length;
+//		for (i = 0; i < taille; i++) {
+//			comboDataCentres.add(DataModel.listeWSCenters[i].getCode() + " - "
+//					+ DataModel.listeWSCenters[i].getName());
+//		}
+		
+		CodeTableRecordType[] records = NemoLists.getVocabList("L300");
+		
+		TreeMap<String, String> treeCentre = new TreeMap<String, String>();
+		
+		for (CodeTableRecordType record : records)
+		{	
+			treeCentre.put(Utils.extraitCodeURN(record.getEntryKey()), record.getEntryTerm());
+		}
+		
+		for (Entry<String, String> currentEntry : treeCentre.entrySet()) {
+			EditSurvey.comboDataCentres.add(currentEntry.getValue() + " - " + currentEntry.getKey());
 		}
 	}
 
@@ -1046,7 +1052,7 @@ public class EditSurvey {
 
 		}
 
-		textCentre.setText("FI");
+		//textCentre.setText("FI");
 		validee = 0;
 
 		// effacement de la liste des types de données dans la table

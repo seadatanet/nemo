@@ -101,7 +101,7 @@ public class SWTProcess implements IRunnableWithProgress {
 		monitor2 = monitor;
 		interrompu = false;
 		SurveyMedia.interrompu = false;
-		EditConversion.interrompu = false;
+//		EditConversion.interrompu = false;
 
 		// NOTIFIER
 		notifier = new ProgressNotification() {
@@ -196,7 +196,7 @@ public class SWTProcess implements IRunnableWithProgress {
 		monitor2 = monitor;
 		interrompu = false;
 		SurveyMedia.interrompu = false;
-		EditConversion.interrompu = false;
+//		EditConversion.interrompu = false;
 
 		int numDossier = 0;
 		
@@ -301,7 +301,7 @@ public class SWTProcess implements IRunnableWithProgress {
 		monitor2 = monitor;
 		interrompu = false;
 		SurveyMedia.interrompu = false;
-		EditConversion.interrompu = false;
+//		EditConversion.interrompu = false;
 		
 		int numFichier = 0;
 

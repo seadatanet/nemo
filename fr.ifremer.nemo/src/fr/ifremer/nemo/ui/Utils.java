@@ -108,7 +108,9 @@ public class Utils {
 
 		// réactivation de l'option série temporelle onglet DESC
 		ViewFile.checkBoxTempo.setEnabled(true);
-		ViewFile.checkBoxTempo.setSelection(false);
+		
+		// FAE 089
+		// ViewFile.checkBoxTempo.setSelection(false);
 
 		// RAZ global si réouverture fichier en cours de processus
 
@@ -1328,6 +1330,7 @@ public class Utils {
 			EditStation.buttonExpand2.dispose();
 			EditStation.buttonValidate.dispose();
 			EditStation.buttonRAZ.dispose();
+			EditStation.btnMetaInData2.dispose();
 
 			for (int i = 0; i <= EditStation.listeSectionsStation.size() - 1; i++) {
 				EditStation.listeSectionsStation.get(i).dispose();
