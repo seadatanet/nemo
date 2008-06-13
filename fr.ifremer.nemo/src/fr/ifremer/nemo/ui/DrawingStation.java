@@ -239,10 +239,6 @@ public class DrawingStation {
 //		Label labelTest = new Label(groupeConv, SWT.NONE);
 //		labelTest.setText("Test");
 		
-		Button btnTest = new Button(groupeConv,SWT.NONE);
-		btnTest.setText("Test");
-		testConversion.setParent(groupeConv);
-
 		radio.setParent(sectionClient);
 		radio.setText(Messages.getString("Drawing.4"));
 
@@ -285,6 +281,16 @@ public class DrawingStation {
 		buttonInject.setText(Messages.getString("Drawing.1"));
 
 		inject = buttonInject;
+		
+		Composite compoTest = new Composite (sectionClient,SWT.NONE);
+		
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoTest);
+		GridDataFactory.fillDefaults().grab(false,false).applyTo(compoTest);
+		
+		Button btnTest = new Button(compoTest,SWT.NONE);
+		btnTest.setText("Test");
+		testConversion.setEnabled(false);
+		testConversion.setParent(compoTest);
 
 		section.setClient(sectionClient);
 

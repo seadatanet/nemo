@@ -22,7 +22,7 @@ public class ParameterValue implements Cloneable, SAXConsumer {
 	/**
 	 * Valeur de la mesure
 	 */
-	protected float _value;
+	protected Double _value;
 
 	/**
 	 * Parametre pour lequel la mesure a ete effectuee
@@ -198,7 +198,7 @@ public class ParameterValue implements Cloneable, SAXConsumer {
 	 * @return float
 	 * @see ParameterValue#_value
 	 */
-	public float getValue() {
+	public Double getValue() {
 		return _value;
 	}
 
@@ -209,7 +209,7 @@ public class ParameterValue implements Cloneable, SAXConsumer {
 	 *            new value for _value
 	 * @see ParameterValue#_value
 	 */
-	public void setValue(float x) {
+	public void setValue(Double x) {
 		_value = x;
 	}
 
@@ -222,7 +222,7 @@ public class ParameterValue implements Cloneable, SAXConsumer {
 	 */
 	public void setValue(String a_String) {
 		try {
-			setValue(Float.parseFloat(a_String));
+			setValue(Double.parseDouble(a_String));
 		} catch (Exception e) {
 		}
 	}

@@ -705,7 +705,7 @@ public class EditSurvey {
 
 
 		try {
-			SimpleDateFormat formatDate = new SimpleDateFormat("DD/MM/YYYY");
+			SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
 			if (survey.getFormattedStartDate() != null) {
 				EditSurvey.textDateDebut.setText(formatDate.format(new Date(
 						survey.getStartDate())));

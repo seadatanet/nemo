@@ -130,6 +130,23 @@ public class Formatter implements Cloneable {
 			return String.format(java.util.Locale.US, format, a_Float);
 		}
 	}
+	
+	/**
+	 * 
+	 * @param format
+	 *            Le format de sortie
+	 * @param a_Float
+	 *            la valeur double a formater
+	 * @return String
+	 */
+	public String formatDouble(String format, Double a_Double) {
+		if (Double.isNaN(a_Double)) {
+			return String.format(java.util.Locale.US, format, a_Double).replace(
+					"NaN", "   ");
+		} else {
+			return String.format(java.util.Locale.US, format, a_Double);
+		}
+	}
 
 	/**
 	 * 

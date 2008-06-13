@@ -87,6 +87,7 @@ public class FiltrageTableType {
 
 				// init de la liste des references campagne à partir des listesWS
 				TableWS_Survey.surveysWS = NemoLists.getSurveys();
+			
 
 				// remplissage des noms + ref
 				// liste filtree initialisée à surveysWS au depart
@@ -201,7 +202,7 @@ public class FiltrageTableType {
 
 										Utils.messageOK(Messages
 												.getString("FiltrageTableType.21"));
-									//	shell.close();
+										shell.close();
 										if (EditSurvey.ws) {
 											EditSurvey.ws = false;
 										}

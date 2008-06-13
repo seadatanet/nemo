@@ -370,7 +370,7 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 		String fragmnt = _fragment.retreive(a_Line);
 
 		if (_inputDefault.trim().equals(fragmnt)){
-			a_ParameterValue.setValue(Float.parseFloat(_model.getDefault()));
+			a_ParameterValue.setValue(Double.parseDouble(_model.getDefault()));
 		}
 			
 
@@ -395,15 +395,15 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 					parser.parseExpression(_conversionFormula.trim());
 					setJepParser(parser);
 					double result = parser.getValue();
-					a_ParameterValue.setValue((float) result);
+					a_ParameterValue.setValue((Double) result);
 				} else {
 					parser = getJepParser();
 					parser.addVariable("x", val);
 					double result = parser.getValue();
-					a_ParameterValue.setValue((float) result);
+					a_ParameterValue.setValue((Double) result);
 				}
 			} else {
-				a_ParameterValue.setValue((float) val);
+				a_ParameterValue.setValue((Double) val);
 			}
 		}
 	}
