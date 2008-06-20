@@ -37,7 +37,6 @@ public class EditData {
 			textTypeAjouterEntree, textTypeAjouterSortie,
 			textTypeAjouterFormat;
 
-
 	public static Label labelTypeCourantCode, labelTypeCourantUnite,
 			labelTypeCourantConversion, labelTypeCourantDebut,
 			labelTypeCourantFin, labelTypeCourantFormat,
@@ -136,7 +135,6 @@ public class EditData {
 
 			// on cree les sections puis on les cache dans un autre shell et on
 			// les re-affiche only si bouton coché
-
 
 			DrawingData
 					.sectionTotal(

@@ -553,25 +553,31 @@ public class TableData {
 								.getText(5))).trim();
 
 				// on formate puis on reaffiche la liste
-				if (selection.matches(ViewFile.tableData.getItem(i).getText(7))) {
-					// entrée par défaut, le test est la valeur de sortie par
-					// défaut formatée
-					resultat = String.format(ViewFile.tableData.getItem(i)
-							.getText(6), ViewFile.tableData.getItem(i).getText(
-							8));
-				} else {
-					// valeur normale, on applique la formule puis formatage
-
-					org.nfunk.jep.JEP parser = new org.nfunk.jep.JEP();
-					parser.addStandardFunctions();
-					parser.addStandardConstants();
-					parser.addVariable("x", Float.valueOf(selection)); //$NON-NLS-1$
-					parser.parseExpression(ViewFile.tableData.getItem(i)
-							.getText(2));
-					resultJEP = parser.getValue();
-
-					resultat = String.format(ViewFile.tableData.getItem(i)
-							.getText(6), resultJEP);
+				try {
+					if (selection.matches(ViewFile.tableData.getItem(i).getText(7))) {
+						// entrée par défaut, le test est la valeur de sortie par
+						// défaut formatée
+						resultat = String.format(ViewFile.tableData.getItem(i)
+								.getText(6), ViewFile.tableData.getItem(i).getText(
+								8));
+						
+					} else {
+						// valeur normale, on applique la formule puis formatage
+	
+						org.nfunk.jep.JEP parser = new org.nfunk.jep.JEP();
+						parser.addStandardFunctions();
+						parser.addStandardConstants();
+						parser.addVariable("x", Float.valueOf(selection)); //$NON-NLS-1$
+						parser.parseExpression(ViewFile.tableData.getItem(i)
+								.getText(2));
+						resultJEP = parser.getValue();
+	
+						resultat = String.format(ViewFile.tableData.getItem(i)
+								.getText(6), resultJEP);
+					}
+				} catch (Exception e) {
+					resultat = Messages.getString("TableData.20");
+					e.printStackTrace();
 				}
 
 				types.get(i).setTest(resultat);

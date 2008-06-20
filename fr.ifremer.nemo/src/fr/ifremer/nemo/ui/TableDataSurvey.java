@@ -35,7 +35,6 @@ public class TableDataSurvey {
 	public static void go() {
 		initTypes();
 		creationTable();
-
 	}
 
 	public static void creationTable() {
@@ -47,7 +46,7 @@ public class TableDataSurvey {
 		fin = 0;
 
 		TableDataSurvey.tableTypeSurvey = new Table(Drawing.sectionClientType,
-				SWT.FULL_SELECTION | SWT.FILL);
+				SWT.FULL_SELECTION | SWT.FILL | SWT.MULTI);
 
 		table = TableDataSurvey.tableTypeSurvey;
 
