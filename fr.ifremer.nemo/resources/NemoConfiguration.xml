@@ -20,6 +20,8 @@
   <VocabListURL name="L081" value="http://vocab.ndg.nerc.ac.uk/list/L081/current"/>
   <VocabListURL name="P091" value="http://vocab.ndg.nerc.ac.uk/list/P091/current"/>
   <VocabListURL name="P021" value="http://vocab.ndg.nerc.ac.uk/list/P021/current"/>
+  <VocabListURL name="C180" value="http://vocab.ndg.nerc.ac.uk/list/C180/current"/>
+  <VocabListURL name="L300" value="http://vocab.ndg.nerc.ac.uk/list/L300/current"/>
   <VocabListURL name="L061" value="http://vocab.ndg.nerc.ac.uk/list/L061/current"/>
   <VocabListURL name="L051" value="http://vocab.ndg.nerc.ac.uk/list/L051/current"/>
   <predicate>4</predicate>
