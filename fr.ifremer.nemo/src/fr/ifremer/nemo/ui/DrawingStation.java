@@ -439,7 +439,7 @@ public class DrawingStation {
 
 		Composite compo1 = new Composite(sectionClient, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo1);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(compo1);
+		GridDataFactory.fillDefaults().grab(false,false).applyTo(compo1);
 		
 		// bouton radio "saisie manuelle"
 		// c'est lui qui est passé en ppar
@@ -1972,7 +1972,7 @@ public class DrawingStation {
 							
 							formatter = Formatter.getSingleton();
 							
-							test.setText(formatter.formatDateTime("DDMMYYYY", DateLong));
+							test.setText(formatter.formatDateTime("ddMMyyyy", DateLong));
 							test.pack();
 						} catch (ParseException e) {
 

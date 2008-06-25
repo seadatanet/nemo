@@ -136,7 +136,7 @@ public class DataModel {
 				Long dateLong = null, timeLong = null;
 				try {
 					dateFormat = new DateTimeFormat();
-					dateFormat.setFormatString("DD/MM/YYYY");
+					dateFormat.setFormatString("dd/MM/yyyy");
 					dateLong = (Long) dateFormat
 							.parseObject(ViewFile.textTempoDateRef.getText());
 				} catch (ParseException e) {
@@ -265,7 +265,7 @@ public class DataModel {
 		// DATE DE DEBUT
 		try {
 			DateTimeFormat dateFormat = new DateTimeFormat();
-			dateFormat.setFormatString("DD/MM/YYYY");
+			dateFormat.setFormatString("dd/MM/yyyy");
 			Long dateLong = (Long) dateFormat
 					.parseObject(EditSurvey.textDateDebut.getText());
 			survey.setStartDate(dateLong);
@@ -277,7 +277,7 @@ public class DataModel {
 		// DATE DE FIN
 		try {
 			DateTimeFormat dateFormat = new DateTimeFormat();
-			dateFormat.setFormatString("DD/MM/YYYY");
+			dateFormat.setFormatString("dd/MM/yyyy");
 			Long dateLong = (Long) dateFormat
 					.parseObject(EditSurvey.textDateFin.getText());
 			survey.setEndDate(dateLong);
@@ -534,6 +534,7 @@ public class DataModel {
 			// EditStation.posxCommentaire, EditStation.posyCommentaire);
 			Utils.calculNbreLignesPuisRemplissageFragClic(frag, EditStation.cursCommentaire);
 
+			frag.toString();
 		}
 
 		// DM history 1&2
@@ -1347,7 +1348,7 @@ public class DataModel {
 
 				try {
 					ViewFile.textTempoDateRef.setText(formatter.formatDateTime(
-							"DD/MM/YYYY", inputModel_modele.getRefDate()));
+							"dd/MM/yyyy", inputModel_modele.getRefDate()));
 				} catch (ParseException e) {
 
 					e.printStackTrace();
@@ -1455,7 +1456,7 @@ public class DataModel {
 
 		try {
 			EditSurvey.textDateDebut.setText(formatter.formatDateTime(
-					"DD/MM/YYYY", survey.getStartDate()));
+					"dd/MM/yyyy", survey.getStartDate()));
 		} catch (ParseException e) {
 
 			e.printStackTrace();
@@ -1465,7 +1466,7 @@ public class DataModel {
 
 		try {
 			EditSurvey.textDateFin.setText(formatter.formatDateTime(
-					"DD/MM/YYYY", survey.getEndDate()));
+					"dd/MM/yyyy", survey.getEndDate()));
 		} catch (ParseException e) {
 
 			e.printStackTrace();
@@ -2307,12 +2308,13 @@ public class DataModel {
 			EditStation.textTULigne.setText("" + frag.getFirstLine());
 			EditStation.textTUDebut.setText("" + frag.getFirstCharOffset());
 			EditStation.textTUFin.setText("" + frag.getLastCharOffset());
-
 		}
 		
-		ViewFile.txtCompteurCDI.setText(stationModel_modele.getCdi().getCompteur());
-		ViewFile.comboTypePlateForme.setText(stationModel_modele.getCdi().getTypePlateForme());
-		ViewFile.comboAccesDonnees.setText(stationModel_modele.getCdi().getAccesDonnees());
+		if (stationModel_modele.getCdi() != null) {
+			ViewFile.txtCompteurCDI.setText(stationModel_modele.getCdi().getCompteur());
+			ViewFile.comboTypePlateForme.setText(stationModel_modele.getCdi().getTypePlateForme());
+			ViewFile.comboAccesDonnees.setText(stationModel_modele.getCdi().getAccesDonnees());
+		}
 
 		// System.out.println("Fin remplissage onglet Station");
 
@@ -2321,7 +2323,7 @@ public class DataModel {
 	public static void main(String[] args) {
 		try {
 
-			DateTimeFormat format = new DateTimeFormat("MMM DD YYYY");
+			DateTimeFormat format = new DateTimeFormat("MMM dd yyyy");
 			format.toString();
 
 		} catch (Exception e) {

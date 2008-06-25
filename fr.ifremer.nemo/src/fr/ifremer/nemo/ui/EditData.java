@@ -311,7 +311,6 @@ public class EditData {
 		if (DataModel.ouverture) {
 			DataModel.fillData();
 		}
-
 	}
 
 	public static void test() {

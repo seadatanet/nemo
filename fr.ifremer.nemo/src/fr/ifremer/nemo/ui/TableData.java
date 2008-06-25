@@ -98,7 +98,7 @@ public class TableData {
 		ViewFile.compositeData.getShell().layout();
 
 	}
-
+	
 	public static void initTypes() {
 
 		// initialisation de la ArrayList des types des données à partir du

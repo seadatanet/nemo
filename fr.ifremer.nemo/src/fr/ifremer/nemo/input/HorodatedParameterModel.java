@@ -44,7 +44,7 @@ public class HorodatedParameterModel implements Cloneable, PathElementHandler,
 		_computed = false;
 		_dateTimeFragment = new LineFragment();
 		try {
-			_format = new DateTimeFormat("DD/MM/YYYY hh24:mm:ss");
+			_format = new DateTimeFormat("dd/MM/yyyy hh24:mm:ss");
 		} catch (Exception e) {
 		}
 	}

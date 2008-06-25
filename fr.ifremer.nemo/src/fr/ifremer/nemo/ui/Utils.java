@@ -431,7 +431,7 @@ public class Utils {
 		offsetDebut = frag.getFirstCharOffset();
 		offsetFin = frag.getLastCharOffset();
 		
-		cursor.setX(taillesCumLignes[ligneDebut - 1] + offsetDebut);
+		cursor.setX(taillesCumLignes[ligneDebut - 1] + offsetDebut - 1);
 		cursor.setY(taillesCumLignes[ligneFin - 1] + offsetFin);
 
 	}

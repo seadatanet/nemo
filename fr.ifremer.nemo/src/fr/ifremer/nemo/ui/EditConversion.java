@@ -114,8 +114,9 @@ public class EditConversion extends Thread {
 
 									if (ViewFile.checkCDI.getSelection()) {
 										CDIResumeWriter.getInstance().reset();
+										CDIResumeWriter.getInstance().choixFichierSortie();
 									}
-
+									
 									choixDossierSortie();
 
 									if (ViewFile.checkCDI.getSelection() && !SurveyMedia.interrompu && !SWTProcess.interrompu) {

@@ -38,7 +38,6 @@ public class TableDataSurvey {
 	}
 
 	public static void creationTable() {
-
 		final Table table;
 
 		ligneBidon = 0;
@@ -46,12 +45,13 @@ public class TableDataSurvey {
 		fin = 0;
 
 		TableDataSurvey.tableTypeSurvey = new Table(Drawing.sectionClientType,
-				SWT.FULL_SELECTION | SWT.FILL | SWT.MULTI);
+				SWT.MULTI | SWT.FULL_SELECTION | SWT.FILL);
 
 		table = TableDataSurvey.tableTypeSurvey;
 
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
+				
 		TableColumn tableColumn = new TableColumn(table, SWT.NONE);
 		tableColumn.setWidth(100);
 		// taille = 60
@@ -72,7 +72,6 @@ public class TableDataSurvey {
 		tableColumn3.setText(Messages.getString("TableDataSurvey.11")); //$NON-NLS-1$
 
 		initTable();
-
 	}
 
 	public static void initTypes() {
@@ -92,8 +91,7 @@ public class TableDataSurvey {
 			TypeSurvey type = new TypeSurvey();
 
 			// paramètres
-			type
-					.setCode(wsDatatype.getCode()
+			type.setCode(wsDatatype.getCode()
 							+ " - " + wsDatatype.getLibelle()); //$NON-NLS-1$
 			type.setQc(Messages.getString("TableDataSurvey.5")); //$NON-NLS-1$
 

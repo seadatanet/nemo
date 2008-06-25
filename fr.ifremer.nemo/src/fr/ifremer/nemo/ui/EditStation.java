@@ -24,7 +24,7 @@ public class EditStation {
 	// /////////////////////////////////////////
 
 	private static Shell shell = new Shell();
-	
+		
 	public static Text textRefStationNumero, textRefStationLigne, textRefStationDebut,
 			textRefStationFin, textHistoriqueAcquisition1,
 			textHistoriqueAcquisition2, textCommentaire,
@@ -119,8 +119,8 @@ public class EditStation {
 	public static List listeType;
 
 	public static ScrolledForm formEdition;
-
-	public static Cursor cursCommentaire, cursEchant1, cursEchant2,
+	
+	public static Cursor cursCommentaire,cursEchant1, cursEchant2,
 			cursHistorique1, cursHistorique2;
 
 	public static void affichageEdition() {
@@ -621,9 +621,15 @@ public class EditStation {
 
 		}
 		
-		if (DataModel.station_modele.getDataType() != null) {
-			Utils.selectComboCode(EditStation.comboRefStationType, DataModel.station_modele.getDataType().getCode());
-		}
+		if (DataModel.station_modele != null) {
+			if (DataModel.station_modele.getDataType() != null) {
+				Utils.selectComboCode(EditStation.comboRefStationType, DataModel.station_modele.getDataType().getCode());
+			}
+		} else if (DataModel.station != null) {
+			if (DataModel.station.getDataType() != null) {
+				Utils.selectComboCode(EditStation.comboRefStationType, DataModel.station.getDataType().getCode());
+			}
+		}		
 		
 		// EditStation.buttonExpand2.setParent(s.getBody());
 

@@ -758,7 +758,7 @@ public class ViewFile extends ViewPart {
 		groupTempo.setLayout(gridLayout1);
 		labelDateRef = new Label(groupTempo, SWT.NONE);
 		labelDateRef
-				.setText(Messages.getString("ViewFile.dateRef") + ": DD/MM/YYYY"); //$NON-NLS-1$
+				.setText(Messages.getString("ViewFile.dateRef") + ": dd/MM/yyyy"); //$NON-NLS-1$
 
 		textTempoDateRef = new Text(groupTempo, SWT.BORDER);
 
@@ -776,7 +776,6 @@ public class ViewFile extends ViewPart {
 	private void createCompositeData(Composite compo) {
 		compositeData = new Composite(compo, SWT.NONE);
 		compositeData.setLayout(new FillLayout());
-
 	}
 	
 	private void createGroupeSeparateur() {	

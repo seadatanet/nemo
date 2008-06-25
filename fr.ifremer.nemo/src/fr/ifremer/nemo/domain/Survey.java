@@ -1250,7 +1250,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 	 */
 	public String getFormattedEndDate() throws ParseException {
 		Formatter fmt = Formatter.getSingleton();
-		return fmt.formatDateTime("YYYY-MM-DD", getEndDate());
+		return fmt.formatDateTime("yyyy-MM-dd", getEndDate());
 	}
 
 	/**
@@ -1260,7 +1260,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 	 */
 	public String getFormattedStartDate() throws ParseException {
 		Formatter fmt = Formatter.getSingleton();
-		return fmt.formatDateTime("YYYY-MM-DD", getStartDate());
+		return fmt.formatDateTime("yyyy-MM-dd", getStartDate());
 	}
 
 	/**
@@ -1387,7 +1387,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 	 * @exception ParseException
 	 */
 	public void setFormattedEndDate(String a_EndDate) throws ParseException {
-		SimpleDateFormat fmt = new SimpleDateFormat("YYYY-MM-DD");
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
 		java.util.Date value = fmt.parse(a_EndDate);
 		setEndDate(value.getTime());
 	}
@@ -1398,7 +1398,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 	 * @exception ParseException
 	 */
 	public void setFormattedStartDate(String a_StartDate) throws ParseException {
-		SimpleDateFormat fmt = new SimpleDateFormat("YYYY-MM-DD");
+		SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
 		java.util.Date value = fmt.parse(a_StartDate);
 		setStartDate(value.getTime());
 	}

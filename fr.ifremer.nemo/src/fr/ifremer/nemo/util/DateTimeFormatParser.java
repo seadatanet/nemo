@@ -345,7 +345,7 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 	public static void main(String[] args) {
 	
 		try {
-			DateTimeFormatParser.parseFormat("DD/MM/YYYY");
+			DateTimeFormatParser.parseFormat("dd/MM/yyyy");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

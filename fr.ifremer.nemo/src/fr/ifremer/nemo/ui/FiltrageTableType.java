@@ -290,7 +290,7 @@ public class FiltrageTableType {
 											}
 										}
 
-								//		shell.close();
+										shell.close();
 										if (EditSurvey.ws) {
 											EditSurvey.ws = false;
 										}

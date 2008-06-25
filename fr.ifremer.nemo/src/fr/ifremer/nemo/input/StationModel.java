@@ -1783,7 +1783,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		try {
 			setReferenceProperty(new PropertyModel("reference", _model));
 			addProperty(new PropertyModel("date", _model, new DateTimeFormat(
-					"DD/MM/YYYY")));
+					"dd/MM/yyyy")));
 			addProperty(new PropertyModel("time", _model, new DateTimeFormat(
 					"hh:mm AM")));
 			addProperty(new PropertyModel("offsetTU", _model, new FloatFormat(
