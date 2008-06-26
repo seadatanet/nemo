@@ -90,7 +90,6 @@ public class EditConversion extends Thread {
 						
 						// RAZ du numéro de station incrémenté
 						DataModel.stationModel.resetRef();
-						
 						DataModel.stationModel.setLastRef(null);
 						
 						if (ViewFile.medatlas.getSelection()) {

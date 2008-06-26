@@ -335,7 +335,7 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 					//	RandomAccessFile reader = null;
 						BufferedReader reader2 = null;
 						try {
-					//		reader = new RandomAccessFile(file, "r");
+							// reader = new RandomAccessFile(file, "r");
 							// test CDL FAE01
 							FileReader reader  = new FileReader(file);
 							reader2 = new BufferedReader(reader);

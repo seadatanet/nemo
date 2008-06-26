@@ -27,7 +27,6 @@ import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.TimeSeriesInformation;
 import fr.ifremer.nemo.ui.DataModel;
 import fr.ifremer.nemo.ui.EditConversion;
-import fr.ifremer.nemo.ui.EditData;
 import fr.ifremer.nemo.ui.ViewFile;
 import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.FloatFormat;
