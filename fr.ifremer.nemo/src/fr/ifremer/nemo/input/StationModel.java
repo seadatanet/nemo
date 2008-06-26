@@ -139,9 +139,9 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	protected String _lastRef;
 	
 	/**
-	 * Nombre de lignes lues (mode "ODV")
+	 * En-tête de station plus 1 ligne de données (mode "ODV")
 	 */
-	protected int _compteur;
+	protected String[] _headerPlus;
 	
 	/**
 	 * Nombre de caractères du fichier
@@ -162,7 +162,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		_timestampModel = null;
 		_cdi = null;
 		_lastRef = null;
-		_compteur = 0;
+		_headerPlus = null;
 	}
 
 	/**
@@ -1321,7 +1321,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * @return String[]
 	 * @exception java.io.IOException
 	 */
-	public String[] consumeHeader2(BufferedReader a_Reader, int compteur) throws IOException {
+	public String[] consumeHeaderPlusOne(BufferedReader a_Reader) throws IOException {
 		EditConversion.setErreurLigne(0);
 		Vector<String> v = new Vector<String>();
 		String line = null;
@@ -1335,14 +1335,38 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 				return null;
 			}
 		}
-		
-		for (int i = 0; i < compteur; i++) {
-			line = a_Reader.readLine();
-		}
+		line = a_Reader.readLine();
+		EditConversion.incrementErreurLigne();
+		EditConversion.setErreurChaine(line);
 		v.add(line);
 		
 		String[] lines = new String[v.size()];
 		return v.toArray(lines);
+	}
+	
+	/**
+	 * 
+	 * @param a_Reader
+	 * @return String[]
+	 * @exception java.io.IOException
+	 */
+	public void consumeHeaderPlus(BufferedReader a_Reader) throws IOException {
+		Vector<String> v = new Vector<String>();
+		for (int i = 0; i < _numberOfLines; i++) {
+			String line = a_Reader.readLine();
+			EditConversion.incrementErreurLigne();
+			EditConversion.setErreurChaine(line);
+			if (line != null) {
+				v.add(line);
+			} else {
+				_headerPlus = null;
+			}
+		}
+		
+		v.add("");
+		
+		String[] lines = new String[v.size()];
+		_headerPlus = v.toArray(lines);
 	}
 
 	/**
@@ -1362,12 +1386,13 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			ParseException, StringIndexOutOfBoundsException {
 		Station station = null;
 		String[] header = null;
+		
 		try {
 			station = (Station) _model.clone();
 			if (_timeSeriesModel != null && _timestampModel.isComputed() && !isMetaInData2()) {
 				// Marquage du fichier au debut
 				a_Reader.mark(getTaille());
-				if ((header = consumeHeader2(a_Reader, 1)) != null) {
+				if ((header = consumeHeaderPlusOne(a_Reader)) != null) {
 					// a_Notifier.progress(a_Reader.getFilePointer());
 					if ((getReferenceProperty().getFragment().getFirstLine() == 0
 							&& (a_Filename != null) && !(isIncrementRef()))) {
@@ -1441,20 +1466,20 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 						&& (!(_endOnEmptyLine && line.trim().matches("^$")))
 						&& (!(_endOnPattern && line.matches("^" + _endDataPattern + "$")))
 						|| (index < _rowNumber); index++) {
-							
-					a_Reader.reset();
-					
-					header = consumeHeader2(a_Reader, getCompteur());
-					EditConversion.setErreurLigne(getCompteur());
+										
+					_headerPlus[_headerPlus.length - 1] = line;
+					EditConversion.incrementErreurLigne();
 					EditConversion.setErreurChaine(line);
+					
 					// Recuperation du numero de station
-					getReferenceProperty().applyOn(station, header);
+					getReferenceProperty().applyOn(station, _headerPlus);
 					String refTemp = station.getReference();
 					
 					// Comparaison du numero de station en cours avec celui de la derniere station
 					if (!initStation) {
+						
 						for (PropertyModel m : getProperties()) {
-							m.applyOn(station, header);
+							m.applyOn(station, _headerPlus);
 						}
 						
 						for (ParameterModel pm : _parameterModels) {
@@ -1462,7 +1487,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 						}
 						
 						if (_timeSeriesModel != null) {
-							_timeSeriesModel.convert(station, header,
+							_timeSeriesModel.convert(station, _headerPlus,
 									isRefDateBased, a_RefDate);
 						}
 						
@@ -1474,14 +1499,16 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 							station.setReference(getLastRef());
 							setLastRef(refTemp);
 							
+							a_Reader.reset();
+							EditConversion.setErreurLigne(EditConversion.getErreurLigne() - 1);
 							return station;
 						}
 					} else {
 						setLastRef(station.getReference());
 					}
-					
-					setCompteur(getCompteur()+1);
 				
+					a_Reader.mark(getTaille());
+					
 					long rate = 0;
 					if (station.getTimeSeriesInformation() != null) {
 						rate = new Float(station.getTimeSeriesInformation()
@@ -1510,7 +1537,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 									hValue.setDate(station.getFullDate()
 											+ (index * rate));
 								} else {
-									long time = _timestampModel.convertTimestamp(header[header.length-1],
+									long time = _timestampModel.convertTimestamp(_headerPlus[_headerPlus.length-1],
 											a_RefDate);
 									hValue.setDate(station.getGMTDate(time));	
 									
@@ -1530,7 +1557,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 							value = new ParameterValue();
 						}
 						
-						pm.convert(header[header.length-1], value);
+						pm.convert(_headerPlus[_headerPlus.length-1], value);
 						p.addValue(value);
 						paramIndex++;
 					}
@@ -1842,14 +1869,6 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 	public void setLastRef(String ref) {
 		_lastRef = ref;
-	}
-
-	public int getCompteur() {
-		return _compteur;
-	}
-
-	public void setCompteur(int _compteur) {
-		this._compteur = _compteur;
 	}
 
 	public int getTaille() {

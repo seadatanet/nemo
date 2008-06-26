@@ -28,6 +28,8 @@ public class TableDataSurvey {
 	public static Table filtreTable;
 
 	public static int ligneSelec, colonneSelec, debut, fin, ligneBidon;
+	
+	public static int[] lignesSelec;
 
 	// public static String[][]tableTypes;
 	public static ArrayList<TypeSurvey> types, listeFiltree, typesWS;
@@ -45,7 +47,7 @@ public class TableDataSurvey {
 		fin = 0;
 
 		TableDataSurvey.tableTypeSurvey = new Table(Drawing.sectionClientType,
-				SWT.MULTI | SWT.FULL_SELECTION | SWT.FILL);
+				SWT.MULTI | SWT.FULL_SELECTION);
 
 		table = TableDataSurvey.tableTypeSurvey;
 
@@ -273,7 +275,8 @@ public class TableDataSurvey {
 		itemDel.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				// System.out.println("suppression");
-				supprEltTableData(ligneSelec);
+				// supprEltTableData(ligneSelec);
+				supprEltTableData(table.getSelectionIndices());
 				// remplirTableData();
 			}
 		});
@@ -359,45 +362,48 @@ public class TableDataSurvey {
 		// on monte d'un cran l'élément à la position indice
 		// swap (indice-1) <-> indice
 		// 
-		int nbre;
-		ArrayList<TypeSurvey> listeTempo;
-		nbre = types.size();
-		listeTempo = new ArrayList();
+		
+		// On teste si ce n'est pas le premier élément
+		if (indice > 0) {
+			int nbre;
+			ArrayList<TypeSurvey> listeTempo;
+			nbre = types.size();
+			listeTempo = new ArrayList();
 
-		// mise à jour préalable
-		majTypeData();
+			// mise à jour préalable
+			majTypeData();
 
-		// parcours de la liste
-		for (int i = 0; i < (indice - 1); i++) {
-			listeTempo.add(types.get(i));
+			// parcours de la liste
+			for (int i = 0; i < (indice - 1); i++) {
+				listeTempo.add(types.get(i));
+			}
+			// swap des 2
+			listeTempo.add(types.get(indice));
+			listeTempo.add(types.get(indice - 1));
+
+			// fin de parcours
+			for (int i = (indice + 1); i < nbre; i++) {
+				listeTempo.add(types.get(i));
+			}
+
+			// effacement de la liste principale avant re-remplissage
+			for (int i = 0; i < nbre; i++) {
+				types.remove(0);
+			}
+
+			// re-remplissage de la liste principale
+			nbre = listeTempo.size();
+			for (int i = 0; i < nbre; i++) {
+				types.add(listeTempo.get(i));
+			}
+
+			// razTableData
+			razTableData();
+
+			// refresh de la table
+			// initTable();
+			creationTable();
 		}
-		// swap des 2
-		listeTempo.add(types.get(indice));
-		listeTempo.add(types.get(indice - 1));
-
-		// fin de parcours
-		for (int i = (indice + 1); i < nbre; i++) {
-			listeTempo.add(types.get(i));
-		}
-
-		// effacement de la liste principale avant re-remplissage
-		for (int i = 0; i < nbre; i++) {
-			types.remove(0);
-		}
-
-		// re-remplissage de la liste principale
-		nbre = listeTempo.size();
-		for (int i = 0; i < nbre; i++) {
-			types.add(listeTempo.get(i));
-		}
-
-		// razTableData
-		razTableData();
-
-		// refresh de la table
-		// initTable();
-		creationTable();
-
 	}
 
 	public static void descendreEltTableData(int indice) {
@@ -405,53 +411,58 @@ public class TableDataSurvey {
 		// swap (indice-1) <-> indice
 
 		int nbre;
-		ArrayList<TypeSurvey> listeTempo;
 		nbre = types.size();
-		listeTempo = new ArrayList();
+		
+		if (indice < nbre - 1) {
+			ArrayList<TypeSurvey> listeTempo;
+			listeTempo = new ArrayList();
 
-		// mise à jour préalable
-		majTypeData();
+			// mise à jour préalable
+			majTypeData();
 
-		// parcours de la liste
-		for (int i = 0; i < indice; i++) {
-			listeTempo.add(types.get(i));
+			// parcours de la liste
+			for (int i = 0; i < indice; i++) {
+				listeTempo.add(types.get(i));
+			}
+			// swap des 2
+			listeTempo.add(types.get(indice + 1));
+			listeTempo.add(types.get(indice));
+
+			// fin de parcours
+			for (int i = (indice + 2); i < nbre; i++) {
+				listeTempo.add(types.get(i));
+			}
+
+			// effacement de la liste principale avant re-remplissage
+			for (int i = 0; i < nbre; i++) {
+				types.remove(0);
+			}
+
+			// re-remplissage de la liste principale
+			nbre = listeTempo.size();
+			for (int i = 0; i < nbre; i++) {
+				types.add(listeTempo.get(i));
+			}
+
+			// razTableData
+			razTableData();
+
+			// refresh de la table
+			creationTable();
 		}
-		// swap des 2
-		listeTempo.add(types.get(indice + 1));
-		listeTempo.add(types.get(indice));
-
-		// fin de parcours
-		for (int i = (indice + 2); i < nbre; i++) {
-			listeTempo.add(types.get(i));
-		}
-
-		// effacement de la liste principale avant re-remplissage
-		for (int i = 0; i < nbre; i++) {
-			types.remove(0);
-		}
-
-		// re-remplissage de la liste principale
-		nbre = listeTempo.size();
-		for (int i = 0; i < nbre; i++) {
-			types.add(listeTempo.get(i));
-		}
-
-		// razTableData
-		razTableData();
-
-		// refresh de la table
-		creationTable();
-
 	}
 
-	public static void supprEltTableData(int indice) {
+	public static void supprEltTableData(int[] indice) {
 		// suppression de la ligne sélectionnée
-
+		int i;
+		
 		// d'abord mise à jour des données
 		majTypeData();
 
 		// on supprime l'élément à l'indice donné
-		types.remove(indice);
+		for (i = indice.length - 1; i > -1; i--) {
+			types.remove(indice[i]);
+		}
 
 		// razTableData
 		razTableData();

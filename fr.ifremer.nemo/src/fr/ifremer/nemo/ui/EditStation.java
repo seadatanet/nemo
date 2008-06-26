@@ -640,7 +640,6 @@ public class EditStation {
 
 		// affichage courant
 		ViewFile.affiche = 2;
-
 	}
 
 	public static void initSections() {

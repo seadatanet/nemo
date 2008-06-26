@@ -403,14 +403,13 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 				// test CDL FAE01
 				FileReader reader  = new FileReader(file);
 				reader2 = new BufferedReader(reader);
-				
-				reader2.skip(0);
-				if (reader2.markSupported()) {
-					reader2.mark((int) file.length());
-				}
-				
+								
 				//reader = new RandomAccessFile(file, "r");
 				consumeHeader(reader2);
+				
+				if (_stationModel.isMetaInData2()) {
+					_stationModel.consumeHeaderPlus(reader2);
+				}
 				
 				while ((station = _stationModel.convert(reader2, Utils.extraitFichierChemin(ViewFile.nomFichier),
 						isRefDateBased, a_RefDate, notifier)) != null) {

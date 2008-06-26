@@ -339,7 +339,11 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 							// test CDL FAE01
 							FileReader reader  = new FileReader(file);
 							reader2 = new BufferedReader(reader);
-
+														
+							if (_stationModel.isMetaInData2()) {
+								_stationModel.consumeHeaderPlus(reader2);
+							}
+							
 							Station station = _stationModel.convert(reader2,
 									files[i], isRefDateBased, a_RefDate,
 									notifierStation);
