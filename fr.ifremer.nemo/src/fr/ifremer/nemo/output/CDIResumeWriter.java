@@ -17,7 +17,6 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
 import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.config.Configuration.enumMatch;
 import fr.ifremer.nemo.domain.Parameter;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
@@ -145,7 +144,7 @@ public class CDIResumeWriter {
 //								+ Configuration.getSingleton().getIdEdmoRespDonnees());
 						
 						// PDV code
-						writer.write(sep + Utils.extraitCodeURN(NemoLists.parameterMapCdi(param)) + "");
+						writer.write(sep + Utils.extraitCodeURN(NemoLists.getVocabMatch("P091", "P021", param.getCode(), Messages.getString("CDIResumeWriter.notSpecified"))) + "");
 
 						// Platform Type
 						writer.write(sep + Utils.extraitCode(ViewFile.comboTypePlateForme.getText()));

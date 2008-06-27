@@ -24,6 +24,4 @@
   <VocabListURL name="L300" value="http://vocab.ndg.nerc.ac.uk/list/L300/current"/>
   <VocabListURL name="L061" value="http://vocab.ndg.nerc.ac.uk/list/L061/current"/>
   <VocabListURL name="L051" value="http://vocab.ndg.nerc.ac.uk/list/L051/current"/>
-  <predicate>4</predicate>
-  <match>broadMatch</match>
 </NemoConfiguration>

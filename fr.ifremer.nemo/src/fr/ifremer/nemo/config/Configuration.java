@@ -62,16 +62,10 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	
 	protected String _vocabURL;
 	
-	protected String _predicate;
-	
-	public enum enumMatch {
-		broadMatch, exactMatch, majorMatch, minorMatch, narrowMatch;
-	}
-	
-	protected String _match;
-	
+	protected int _predicate;
+		
 	protected HashMap<String, String> _vocabLists = new HashMap<String, String>();
-
+	
 	/**
 	 * Répertoire de base des fichier de sortie
 	 */
@@ -100,6 +94,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		_showRule = true;
 		_locale = null;
 		_vocabURL = "";
+		_predicate = 255;
 		
 		_vocabLists = new HashMap<String, String>();
 		_vocabLists.put("C180", "");
@@ -113,7 +108,6 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		_vocabLists.put("P021", "");
 		_vocabLists.put("P091", "");
 		
-		_match = "";
 	}
 
 	/**
@@ -248,14 +242,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			}
 			return this;
 		}
-		if (a_LocalName.equals("predicate")) {
-			Element2Field setter = new Element2Field(this, "setPredicate");
-			return setter;
-		}
-		if (a_LocalName.equals("match")) {
-			Element2Field setter = new Element2Field(this, "setMatch");
-			return setter;
-		}
+		
 		return null;
 	}
 
@@ -303,8 +290,6 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			a_Writer.putAttribute("value", _vocabLists.get(listName));
 			a_Writer.closeTag();
 		}
-		a_Writer.putTag("predicate", getPredicate());
-		a_Writer.putTag("match", getMatch());
 	}
 
 	/**
@@ -831,21 +816,13 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		
 		_vocabLists.put(listName, ListUrl);
 	}
-	
-	public String getMatch() {
-		return _match;
-	}
 
-	public void setMatch(String _match) {
-		this._match = _match;
-	}
-
-	public String getPredicate() {
+	public int getPredicate() {
 		return _predicate;
 	}
 
-	public void setPredicate(String _predicate) {
-		this._predicate = _predicate;
-	}
+//	public void setPredicate(String _predicate) {
+//		this._predicate = _predicate;
+//	}
 	
 } /* End of class: Configuration */

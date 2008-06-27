@@ -1262,8 +1262,6 @@ public class Utils {
 		configuration.setIdEdmoDistDonnees(Utils.extraitCode(OptionsAction.comboIdEdmoDistDonnees.getText()));
 		configuration.setCdiURL(OptionsAction.textUrlCdi.getText());
 		configuration.setCdiMethod(Utils.extraitCode(OptionsAction.comboMethodeCdi.getText()));
-		configuration.setPredicate(OptionsAction.textWSPredicate.getText());
-		configuration.setMatch(OptionsAction.comboWSTag.getText());
 		
 		// Enregistrement de la configuration
 		configuration.save();
@@ -1472,5 +1470,9 @@ public class Utils {
 		} else {
 			return "";
 		}
+	}
+	
+	public static String concat(String list1, String list2) {
+		return list1 + "_" + list2;
 	}
 }

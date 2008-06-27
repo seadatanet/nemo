@@ -23,7 +23,6 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
@@ -33,7 +32,6 @@ import org.eclipse.ui.actions.ActionFactory;
 
 import fr.ifremer.nemo.config.EdmoHandler;
 import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.config.Configuration.enumMatch;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
@@ -49,8 +47,8 @@ public class OptionsAction extends Action implements ISelectionListener,
 			groupDossier, groupDossier1, groupDossier2, groupCDI = null;
 
 	public static Combo comboLangue, comboCentreDonnees, comboIdEdmoRespCdi, comboRecherche,
-				comboMethodeCdi,comboCodeEdmoDonnees, comboIdEdmoRespDonnees, comboIdEdmoDistDonnees, 
-				comboWSTag = null;
+				comboMethodeCdi,comboCodeEdmoDonnees, comboIdEdmoRespDonnees, 
+				comboIdEdmoDistDonnees = null;
 
 	public static Button buttonCancel, buttonValider, buttonParcourirModele,
 			buttonParcourirCampagne = null;
@@ -58,13 +56,11 @@ public class OptionsAction extends Action implements ISelectionListener,
 	public static Label labelNemo, labelNautilus, labelModèle, labelCampagne,
 			labelIdEdmoRespCdi, labelUrlCdi, labelMethodeCdi,
 			labelCodeEdmoDonnees, labelIdEdmoRespDonnees, labelIdEdmoDistDonnees,
-			labelWSVocab, labelWSPredicate, labelWSTag = null;
+			labelWSVocab = null;
 
 	public static Text textAreaNemo, textAreaNautilus, textDossierModele, textDossierCampagne, 
-			textUrlCdi, textVocabURL, textWSPredicate = null;
+			textUrlCdi, textVocabURL = null;
 	
-	public static Table tableWSVocab;
-
 	public final static String ID = "fr.ifremer.nemo.ui.OptionsAction"; //$NON-NLS-1$
 
 	// vars nécessaires à la fenêtre d'options
@@ -150,23 +146,6 @@ public class OptionsAction extends Action implements ISelectionListener,
 				.setText(Utils.configuration.getNautilusWebServiceURL());
 		
 		textVocabURL.setText(Utils.configuration.getVocabURL());
-		textWSPredicate.setText(Utils.configuration.getPredicate());
-		
-		for (enumMatch match : enumMatch.values()) {
-			comboWSTag.add(match.name());
-		}
-		Utils.selectComboValeur(comboWSTag,Utils.configuration.getMatch());
-		
-//		textL011.setText(Utils.configuration.getVocabListURL("L011"));
-//		textL021.setText(Utils.configuration.getVocabListURL("L021"));
-//		textL031.setText(Utils.configuration.getVocabListURL("L031"));
-//		textL041.setText(Utils.configuration.getVocabListURL("L041"));
-//		textL051.setText(Utils.configuration.getVocabListURL("L051"));
-//		textL061.setText(Utils.configuration.getVocabListURL("L061"));
-//		textL071.setText(Utils.configuration.getVocabListURL("L071"));
-//		textL081.setText(Utils.configuration.getVocabListURL("L081"));
-//		textL091.setText(Utils.configuration.getVocabListURL("L091"));
-		
 		
 		// CDI
 		HashMap<Integer, String> edmoHash = NemoLists.getEdmo();
@@ -474,20 +453,6 @@ public class OptionsAction extends Action implements ISelectionListener,
 		labelWSVocab.setText(Messages.getString("OptionsAction.28"));
 		textVocabURL = new Text(compoWSVocab1, SWT.BORDER);
 		GridDataFactory.fillDefaults().grab(true,false).applyTo(textVocabURL);
-		
-//		compoWSVocab2 = new Composite(groupWS, SWT.NONE);
-//		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoWSVocab2);
-//		GridDataFactory.fillDefaults().grab(true,true).applyTo(compoWSVocab2);
-		
-		labelWSPredicate = new Label(compoWSVocab1, SWT.NONE);
-		labelWSPredicate.setText(Messages.getString("OptionsAction.29"));
-		
-		textWSPredicate = new Text(compoWSVocab1,SWT.BORDER);
-		
-		labelWSTag = new Label(compoWSVocab1, SWT.NONE);
-		labelWSTag.setText(Messages.getString("OptionsAction.30"));
-		
-		comboWSTag = new Combo(compoWSVocab1, SWT.READ_ONLY);
 	}
 	
 	/**
