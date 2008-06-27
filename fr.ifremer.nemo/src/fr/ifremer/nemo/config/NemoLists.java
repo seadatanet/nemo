@@ -2318,23 +2318,32 @@ public class NemoLists implements Cloneable {
 	
 	public static String getVocabMatch(String list1, String list2, String value, String errorMessage) {
 		String strReturn = errorMessage;
-		int intLength = NemoLists.getVocabMap(list1, list2).length;
-		for (int i = 0; i < intLength; i++) {
-			if (NemoLists.getVocabMap(list1, list2)[i].getEntryTermAbbr().equals(value)) {
-				try {
-					if (NemoLists.getVocabMap(list1, list2)[i].getExactMatch() != null) {
-						strReturn = NemoLists.getVocabMap(list1, list2)[i].getExactMatch()[0].getEntryKey();
-					} else if (NemoLists.getVocabMap(list1, list2)[i].getNarrowMatch() != null) {
-						strReturn = NemoLists.getVocabMap(list1, list2)[i].getNarrowMatch()[0].getEntryKey();
-					} else if (NemoLists.getVocabMap(list1, list2)[i].getBroadMatch() != null) {
-						strReturn = NemoLists.getVocabMap(list1, list2)[i].getBroadMatch()[0].getEntryKey();
-					} else if (NemoLists.getVocabMap(list1, list2)[i].getMajorMatch() != null) {
-						strReturn = NemoLists.getVocabMap(list1, list2)[i].getMajorMatch()[0].getEntryKey();
+		
+		try {
+			CodeTableRecordType[] tableMap = NemoLists
+					.getVocabMap(list1, list2);
+			int intLength = tableMap.length;
+			
+			for (int i = 0; i < intLength; i++) {
+				if (tableMap[i].getEntryTermAbbr().equals(value)) {
+					if (tableMap[i].getExactMatch() != null) {
+						strReturn = tableMap[i].getExactMatch()[0]
+								.getEntryKey();
+					} else if (tableMap[i].getNarrowMatch() != null) {
+						strReturn = tableMap[i].getNarrowMatch()[0]
+								.getEntryKey();
+					} else if (tableMap[i].getBroadMatch() != null) {
+						strReturn = tableMap[i].getBroadMatch()[0]
+								.getEntryKey();
+					} else if (tableMap[i].getMajorMatch() != null) {
+						strReturn = tableMap[i].getMajorMatch()[0]
+								.getEntryKey();
 					}
-				} catch (Exception e) {
-					e.printStackTrace();
+					break;
 				}
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 		return strReturn;

@@ -97,7 +97,9 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		_predicate = 255;
 		
 		_vocabLists = new HashMap<String, String>();
+		_vocabLists.put("C77", "");
 		_vocabLists.put("C180", "");
+		_vocabLists.put("L05", "");
 		_vocabLists.put("L021", "");
 		_vocabLists.put("L031", "");
 		_vocabLists.put("L051", "");
