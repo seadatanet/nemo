@@ -403,7 +403,6 @@ public class EditStation {
 					.sectionManuelLigneDebutFinInject(
 							Messages.getString("EditStation.33"), Messages.getString("EditStation.34"), sectionDeclinMagnet, textDeclinMagnetLigne, textDeclinMagnetDebut, textDeclinMagnetFin, textDeclinMagnet, buttonDeclinMagnetSaisie, buttonDeclinMagnetPos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 
-			// if (!ViewFile.textTempoHeureRef.getText().matches("")){
 			// section fréquence échantillonnage
 			blnManuel = true;
 			if (blnModeleOuvert) {
@@ -414,7 +413,7 @@ public class EditStation {
 			DrawingStation
 					.sectionManuelLigneDebutFinInjectFreqEchant(
 							Messages.getString("EditStation.35"), Messages.getString("EditStation.36"), sectionFreqEchant, textFreqEchantLigne, textFreqEchantDebut, textFreqEchantFin, textFreqEchant, buttonFreqEchantSaisie, buttonFreqEchantPos, textFreqEchantConv, textFreqEchantTest, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
-			// }
+			textFreqEchantConv.setText("*1");
 		}
 
 		buttonExpand2.setText("+"); //$NON-NLS-1$

@@ -16,6 +16,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DirectoryDialog;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -88,9 +89,9 @@ public class OptionsAction extends Action implements ISelectionListener,
 //		System.out.println("Menu options"); //$NON-NLS-1$
 
 		shelloptions = new Shell(Application.display, SWT.BORDER | SWT.TITLE
-				| SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);
+				| SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL );
 
-		shelloptions.setSize(600, 550);
+		shelloptions.setSize(600, 500);
 		shelloptions.setText(Messages.getString("OptionsAction.3")); //$NON-NLS-1$
 		shelloptions.setLayout(new GridLayout());
 		
@@ -98,13 +99,14 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		// shelloptions.pack();
 		shelloptions.open();
+		
 		options = 1;
 
 		// chargement des options
 		Utils.initConfig();
 
 		remplissageOptions();
-
+		
 	}
 
 	public void remplissageOptions() {
@@ -174,6 +176,23 @@ public class OptionsAction extends Action implements ISelectionListener,
 		Utils.selectComboCode(comboIdEdmoDistDonnees,Utils.configuration.getIdEdmoDistDonnees());
 		
 		textUrlCdi.setText(Utils.configuration.getCdiURL());
+		
+		// Libelles rouges si parametres manquants
+		if (comboIdEdmoRespCdi.getText().equals("")) {
+			labelIdEdmoRespCdi.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
+		}
+		if (comboCodeEdmoDonnees.getText().equals("")) {
+			labelCodeEdmoDonnees.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
+		}
+		if (comboIdEdmoRespDonnees.getText().equals("")) {
+			labelIdEdmoRespDonnees.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
+		}
+		if (comboIdEdmoDistDonnees.getText().equals("")) {
+			labelIdEdmoDistDonnees.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
+		}
+		if (textUrlCdi.getText().equals("")) {
+			labelUrlCdi.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
+		}
 		
 //		 FAE 58 CDL 09/04/08
 		

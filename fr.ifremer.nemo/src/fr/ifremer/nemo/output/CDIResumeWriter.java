@@ -10,7 +10,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.eclipse.jface.dialogs.InputDialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Device;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
@@ -20,6 +25,8 @@ import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.Parameter;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
+import fr.ifremer.nemo.ui.ApplicationActionBarAdvisor;
+import fr.ifremer.nemo.ui.OptionsAction;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.ViewFile;
 import fr.ifremer.nemo.util.Formatter;
@@ -30,6 +37,8 @@ public class CDIResumeWriter {
 	private static CDIResumeWriter instance;
 
 	private String nomFichierSortie;
+	
+	private String _localCdiId;
 
 	private List<Survey> surveys;
 
@@ -69,10 +78,23 @@ public class CDIResumeWriter {
 
 			Formatter formatter = Formatter.getSingleton();
 
-			Integer cdiId = Integer.parseInt(ViewFile.txtCompteurCDI.getText());
 			String sep = Messages.getString("CDIResumeWriter.separateur");
-			String edmoCode = Utils.configuration.getCodeEdmoDonnees();
-
+			String codeEdmoDonnees = Utils.configuration.getCodeEdmoDonnees();
+			String idEdmoRespDonnees = Utils.configuration.getIdEdmoRespDonnees();
+			String idEdmoRespCdi = Utils.configuration.getIdEdmoRespCdi();
+			String idEdmoDistDonnees= Utils.configuration.getIdEdmoDistDonnees();
+			String localCdiId = getLocalCdiId();
+			String codeTypePlateForme = Utils.extraitCode(ViewFile.comboTypePlateForme.getText());
+			String codeAccesDonnees = Utils.extraitCode(ViewFile.comboAccesDonnees.getText());
+			String formatSortie = "";
+			if (ViewFile.odv.getSelection()) {
+				formatSortie = Messages.getString("CDIResumeWriter.odv");
+			} else {
+				formatSortie = Messages.getString("CDIResumeWriter.medatlas");
+			}
+			String cdiUrl = Utils.configuration.getCdiURL();
+			String cdiMethod = Utils.configuration.getCdiMethod();
+			
 			writer.write(
 					"LOCAL_CDI_ID" + sep +
 					"EDMO_AUTHOR" + sep +
@@ -103,13 +125,14 @@ public class CDIResumeWriter {
 						writer.write("\r\n");
 						
 						// CDI ID
-						writer.write(/*station.getReference() + "_" +*/ Utils.configuration.getDataCenter() + "_"
-								+ String.valueOf(cdiId++));
+						writer.write(localCdiId + "_" + station.getReference());
+//						writer.write(/*station.getReference() + "_" +*/ Utils.configuration.getDataCenter() + "_"
+//								+ String.valueOf(cdiId++));
 //						writer.write(Configuration.getSingleton().getIdEdmoRespCdi() + "_"
 //								+ String.valueOf(cdiId++));
 
 						// EDMO author
-	 					writer.write(sep + Utils.configuration.getIdEdmoRespCdi());
+	 					writer.write(sep + idEdmoRespCdi);
 //						writer.write(";" + Configuration.getSingleton().getIdEdmoRespCdi());
 
 						// Area Type
@@ -129,8 +152,7 @@ public class CDIResumeWriter {
 						writer.write(sep + stringDate);
 
 						// Edmo originator
-						writer.write(sep
-										+ Utils.configuration.getCodeEdmoDonnees());
+						writer.write(sep + codeEdmoDonnees);
 //						writer.write(";"
 //								+ Configuration.getSingleton().getCodeEdmoDonnees());
 
@@ -138,8 +160,7 @@ public class CDIResumeWriter {
 						writer.write(sep + Messages.getString("CDIResumeWriter.notSpecified"));
 
 						// EDMO Custodian
-						writer.write(sep
-								+ Utils.configuration.getIdEdmoRespDonnees());
+						writer.write(sep + idEdmoRespDonnees);
 //						writer.write(";"
 //								+ Configuration.getSingleton().getIdEdmoRespDonnees());
 						
@@ -147,10 +168,10 @@ public class CDIResumeWriter {
 						writer.write(sep + Utils.extraitCodeURN(NemoLists.getVocabMatch("P091", "P021", param.getCode(), Messages.getString("CDIResumeWriter.notSpecified"))) + "");
 
 						// Platform Type
-						writer.write(sep + Utils.extraitCode(ViewFile.comboTypePlateForme.getText()));
+						writer.write(sep + codeTypePlateForme);
 
 						// Dataset Access
-						writer.write(sep + Utils.extraitCode(ViewFile.comboAccesDonnees.getText()));
+						writer.write(sep + codeAccesDonnees);
 
 						// Cruise name
 						if (ViewFile.collectionCas1)
@@ -179,28 +200,24 @@ public class CDIResumeWriter {
 			
 						station.getOffsetTU();
 						station.getParameters()[0].getStation().getTime();
+						
 						// edmo distributor
-						writer.write(sep
-								+ Utils.configuration.getIdEdmoDistDonnees());
+						writer.write(sep + idEdmoDistDonnees);
 //						writer.write(";"
 //								+ Configuration.getSingleton().getIdEdmoDistDonnees());
 						
 						// Format
-						if (ViewFile.odv.getSelection()) {
-							writer.write(sep + Messages.getString("CDIResumeWriter.odv"));
-						} else {
-							writer.write(sep + Messages.getString("CDIResumeWriter.medatlas"));
-						}
+						writer.write(sep + formatSortie);
 						
 						// data size
 						writer.write(sep + String.format("%.3f",survey.getDataSize()));
 
 						// DIST website
-						writer.write(sep + Utils.configuration.getCdiURL());
+						writer.write(sep + cdiUrl);
 //						writer.write(";" + Configuration.getSingleton().getCdiURL());
 
 						// DIST methode
-						writer.write(sep + Utils.configuration.getCdiMethod());
+						writer.write(sep + cdiMethod);
 //						writer.write(";" + Configuration.getSingleton().getCdiMethod());
 					}	
 				}
@@ -267,5 +284,73 @@ public class CDIResumeWriter {
 
 		surveys.add(survey);
 
+	}
+
+	public String getLocalCdiId() {
+		return _localCdiId;
+	}
+
+	public boolean setLocalCdiId() {		
+		InputDialog inputCdiId = new InputDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), Messages.getString("CDIResumeWriter.idTitle"), Messages.getString("CDIResumeWriter.idMessage"), "", null);
+		inputCdiId.open();
+		
+		if (inputCdiId.getReturnCode() == InputDialog.OK) {
+			_localCdiId = inputCdiId.getValue();
+			return true;
+		} else {
+			_localCdiId = "";
+			return false;
+		}
+	}
+	
+	public boolean checkConfig() {
+		boolean blnOK = true;
+		String message = Messages.getString("CDIResumeWriter.configMessage");
+		
+		if (Utils.configuration.getIdEdmoRespCdi().equals("")) {
+			message += "\r\n - " + Messages.getString("OptionsAction.21");
+			blnOK = false;
+		}
+		
+		if (Utils.configuration.getCodeEdmoDonnees().equals("")) {
+			message += "\r\n - " + Messages.getString("OptionsAction.24");
+			blnOK = false;
+		}
+
+		if (Utils.configuration.getIdEdmoRespDonnees().equals("")) {
+			message += "\r\n - " + Messages.getString("OptionsAction.25");
+			blnOK = false;
+		}
+		
+		if (Utils.configuration.getIdEdmoDistDonnees().equals("")) {
+			message += "\r\n - " + Messages.getString("OptionsAction.26");
+			blnOK = false;
+		}
+		
+		if (Utils.configuration.getCdiURL().equals("")) {
+			message += "\r\n - " + Messages.getString("OptionsAction.22");
+			blnOK = false;
+		}
+		
+		if (Utils.configuration.getCdiMethod().equals("")) {
+			message += "\r\n - " + Messages.getString("OptionsAction.23");
+			blnOK = false;
+		}
+		
+		if (!blnOK) {
+			try {
+				String[] buttons = new String[1];
+				buttons[0] = "OK";
+				MessageDialog dialog = new MessageDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), Messages.getString("CDIResumeWriter.configTitle"), null, message, MessageDialog.NONE, buttons, 0);
+				dialog.open();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+						
+			ApplicationActionBarAdvisor.optionsAction.run();
+			
+			return false;
+		}
+		return true;
 	}
 }

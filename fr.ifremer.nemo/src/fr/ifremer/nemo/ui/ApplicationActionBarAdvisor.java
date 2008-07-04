@@ -53,7 +53,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 
 		optionsAction = new OptionsAction(window);
 		// register(optionsAction);
-
+	
 		updateAction = new UpdateAction(window);
 		saveAction = new SaveAction(window);
 

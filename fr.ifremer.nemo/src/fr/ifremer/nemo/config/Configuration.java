@@ -109,7 +109,6 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		_vocabLists.put("L300", "");
 		_vocabLists.put("P021", "");
 		_vocabLists.put("P091", "");
-		
 	}
 
 	/**

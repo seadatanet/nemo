@@ -100,9 +100,6 @@ public class EditConversion extends Thread {
 						
 						// test pour savoir si le compteur CDI est un numérique
 						try {
-							if (ViewFile.checkCDI.getSelection())
-								Integer.parseInt(ViewFile.txtCompteurCDI.getText());
-							
 							if (EditDesc.okApresReset && EditSurvey.okApresReset
 									&& EditStation.okApresReset
 									&& EditData.okApresReset) {
@@ -111,8 +108,16 @@ public class EditConversion extends Thread {
 								if (ViewFile.isCollection()) {
 
 									if (ViewFile.checkCDI.getSelection()) {
-										CDIResumeWriter.getInstance().reset();
-										CDIResumeWriter.getInstance().choixFichierSortie();
+										if (!CDIResumeWriter.getInstance().checkConfig()) {
+											throw new Exception("CDI cancelled");
+										}
+										
+										if (CDIResumeWriter.getInstance().setLocalCdiId()) {
+											CDIResumeWriter.getInstance().reset();
+											CDIResumeWriter.getInstance().choixFichierSortie();
+										} else {
+											throw new Exception("CDI cancelled");
+										}
 									}
 									
 									choixDossierSortie();
@@ -131,13 +136,10 @@ public class EditConversion extends Thread {
 							} else {
 								Utils.messageErreur(Messages
 										.getString("EditConversion.15"));
-							}
-						} catch (NumberFormatException ex) {
-							Utils.messageErreur(Messages
-									.getString("EditConversion.17"));							
+							}						
 						} catch (Exception ex) {
 							Utils.messageErreur(Messages
-									.getString("EditConversion.19"));	
+									.getString("EditConversion.16"));	
 						}
 						
 					}

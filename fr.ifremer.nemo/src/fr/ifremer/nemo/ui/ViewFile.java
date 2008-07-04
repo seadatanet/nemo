@@ -129,9 +129,7 @@ public class ViewFile extends ViewPart {
 
 	public static Table tableData;
 	
-	public static Label lblCompteurCDI, lblTypePlateForme, lblAccesDonnees ;
-	
-	public static Text txtCompteurCDI ;
+	public static Label lblTypePlateForme, lblAccesDonnees ;
 
 	public static Combo comboTypePlateForme, comboAccesDonnees;
 	
@@ -648,16 +646,6 @@ public class ViewFile extends ViewPart {
 		checkCDI = new Button (grpCDI, SWT.CHECK);
 		checkCDI.setText(Messages.getString("ViewFile.choixResumeCDI"));
 		
-		Composite cmpCompteur = new Composite(grpCDI, SWT.NONE);
-		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(cmpCompteur);
-		GridDataFactory.fillDefaults().grab(false,false).applyTo(cmpCompteur);
-		
-		lblCompteurCDI = new Label(cmpCompteur, SWT.NONE);
-		lblCompteurCDI.setText(Messages.getString("ViewFile.compteurCDI"));
-		
-		txtCompteurCDI = new Text(cmpCompteur, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(false,false).applyTo(txtCompteurCDI);
-		
 		Composite cmpCDI = new Composite(grpCDI, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(cmpCDI);
 		GridDataFactory.fillDefaults().grab(false,false).applyTo(cmpCDI);
@@ -713,9 +701,6 @@ public class ViewFile extends ViewPart {
 		GridDataFactory.fillDefaults().grab(false,false).applyTo(comboAccesDonnees);
 		
 		// Par défaut
-		lblCompteurCDI.setEnabled(checkCDI.getSelection());
-		txtCompteurCDI.setEnabled(checkCDI.getSelection());		
-		
 		lblTypePlateForme.setEnabled(checkCDI.getSelection());
 		comboTypePlateForme.setEnabled(checkCDI.getSelection());
 		lblAccesDonnees.setEnabled(checkCDI.getSelection());
@@ -727,8 +712,6 @@ public class ViewFile extends ViewPart {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						lblCompteurCDI.setEnabled(checkCDI.getSelection());
-						txtCompteurCDI.setEnabled(checkCDI.getSelection());
 						lblTypePlateForme.setEnabled(checkCDI.getSelection());
 						comboTypePlateForme.setEnabled(checkCDI.getSelection());
 						lblAccesDonnees.setEnabled(checkCDI.getSelection());
@@ -737,13 +720,10 @@ public class ViewFile extends ViewPart {
 					}
 				});
 		
-		txtCompteurCDI.pack();
 		comboAccesDonnees.pack();
 		comboTypePlateForme.pack();
 		grpCDI.pack();
 		grpCDI.setVisible(false);
-			
-		txtCompteurCDI.setLocation(comboTypePlateForme.getLocation().x, txtCompteurCDI.getLocation().y);
 	}
 
 	/**

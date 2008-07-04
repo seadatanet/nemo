@@ -2311,7 +2311,6 @@ public class DataModel {
 		}
 		
 		if (stationModel_modele.getCdi() != null) {
-			ViewFile.txtCompteurCDI.setText(stationModel_modele.getCdi().getCompteur());
 			ViewFile.comboTypePlateForme.setText(stationModel_modele.getCdi().getTypePlateForme());
 			ViewFile.comboAccesDonnees.setText(stationModel_modele.getCdi().getAccesDonnees());
 		}

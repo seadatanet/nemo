@@ -7,11 +7,11 @@
   <modelsDirectory>D:\Donnees_pour_conmed</modelsDirectory>
   <cruisesDirectory>D:\Donnees_pour_conmed</cruisesDirectory>
   <outputDirectory>D:/Projets/CONVMED/Donnees/Output</outputDirectory>
-  <idEdmoRespCdi>106</idEdmoRespCdi>
-  <codeEdmoDonnees>487</codeEdmoDonnees>
-  <idEdmoRespDonnees>667</idEdmoRespDonnees>
-  <idEdmoDistDonnees>1359</idEdmoDistDonnees>
-  <cdiURL>http://test.fr</cdiURL>
+  <idEdmoRespCdi></idEdmoRespCdi>
+  <codeEdmoDonnees></codeEdmoDonnees>
+  <idEdmoRespDonnees></idEdmoRespDonnees>
+  <idEdmoDistDonnees></idEdmoDistDonnees>
+  <cdiURL></cdiURL>
   <cdiMethod>CDIMTH01</cdiMethod>
   <vocabURL>http://vocab.ndg.nerc.ac.uk/1.1/VocabServerAPI_dl.wsdl</vocabURL>
   <VocabListURL name="L071" value="http://vocab.ndg.nerc.ac.uk/list/L071/current"/>
@@ -22,6 +22,8 @@
   <VocabListURL name="P021" value="http://vocab.ndg.nerc.ac.uk/list/P021/current"/>
   <VocabListURL name="C180" value="http://vocab.ndg.nerc.ac.uk/list/C180/current"/>
   <VocabListURL name="L300" value="http://vocab.ndg.nerc.ac.uk/list/L300/current"/>
+  <VocabListURL name="L05" value="http://vocab.ndg.nerc.ac.uk/list/L05/current"/>
+  <VocabListURL name="C77" value="http://vocab.ndg.nerc.ac.uk/list/C77/current"/>
   <VocabListURL name="L061" value="http://vocab.ndg.nerc.ac.uk/list/L061/current"/>
   <VocabListURL name="L051" value="http://vocab.ndg.nerc.ac.uk/list/L051/current"/>
 </NemoConfiguration>

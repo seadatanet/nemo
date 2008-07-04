@@ -1416,16 +1416,20 @@ public class Utils {
 		int i = 0;
 		int size = combo.getItemCount();
 		
-		combo.select(i);
-		
-		while (i < combo.getItemCount() && !combo.getText().equals(valeur)) {
-			i++;
+		if (valeur.equals("")) {
+			combo.select(-1);
+		} else {
 			combo.select(i);
-		}
-		
-		if (!combo.getText().equals(valeur)) {
-			combo.add(valeur);
-			combo.select(combo.getItemCount() - 1 );
+			
+			while (i < size && !combo.getText().equals(valeur)) {
+				i++;
+				combo.select(i);
+			}
+			
+			if (!combo.getText().equals(valeur)) {
+				combo.add(valeur);
+				combo.select(combo.getItemCount() - 1 );
+			}
 		}
 	}
 	
@@ -1434,16 +1438,20 @@ public class Utils {
 		int length = code.length();
 		int size = combo.getItemCount();
 		
-		combo.select(i);
-		
-		while (i < size && !combo.getText().substring(0,Math.min(combo.getText().length(),length)).equals(code)) {
-			i++;
+		if (code.equals("")) {
+			combo.select(-1);
+		} else {
 			combo.select(i);
-		}
-		
-		if (!combo.getText().substring(0,Math.min(combo.getText().length(),length)).equals(code)) {
-			combo.add(code);
-			combo.select(combo.getItemCount() - 1 );
+			
+			while (i < size && !combo.getText().substring(0,Math.min(combo.getText().length(),length)).equals(code)) {
+				i++;
+				combo.select(i);
+			}
+			
+			if (!combo.getText().substring(0,Math.min(combo.getText().length(),length)).equals(code)) {
+				combo.add(code);
+				combo.select(combo.getItemCount() - 1 );
+			}
 		}
 	}
 	
