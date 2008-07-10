@@ -406,9 +406,7 @@ public class InputModel implements Cloneable, PathElementHandler,
 			{
 				throw e;
 			}catch (Exception e) {
-				// 
 				e.printStackTrace();
-				System.out.println("interrompu !");
 			}
 		} else {
 			try {

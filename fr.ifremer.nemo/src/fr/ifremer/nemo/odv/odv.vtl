@@ -36,6 +36,7 @@ $param.code#end
 ##
 ## boucle sur les parametres
 ##
+#if ( !$swtProcess.getOdv() || !$swtProcess.getMonoStation() || ( $swtProcess.getMonoStation() && $swtProcess.getStation() == $station ))
 #set( $limit = $station.parametersAt(0).valuesSize() - 1 )
 #if ($limit <= $limiteTypeBC )
 #set ( $typeBC = "B" )
@@ -55,5 +56,6 @@ $formatter.limitString($survey.name, 20);$formatter.limitString($station.referen
 
 #set( $count = $count + 1 )
 #set( $result = $notifier.progress( $count ))
+#end
 #end
 #end

@@ -3,6 +3,7 @@ package fr.ifremer.nemo.ui;
 import java.io.File;
 import java.io.IOException;
 
+import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -14,7 +15,9 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
+import fr.ifremer.nemo.input.SingleFileSurvey;
 import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.input.SurveyMedia;
 import fr.ifremer.nemo.output.CDIResumeWriter;
@@ -36,6 +39,8 @@ public class EditConversion extends Thread {
 //	public static Boolean interrompu;
 
 	public static ProgressNotification notifier;
+	
+	private static String _dataSetRef;
 	
 	/**
 	 * Nom du fichier lu à retourner en cas d'erreur
@@ -86,19 +91,19 @@ public class EditConversion extends Thread {
 							org.eclipse.swt.events.SelectionEvent e) {
 						// System.out.println("conversion !");
 						
+						setDataSetRef("");
 						Utils.messageErreur("");
 						
 						// RAZ du numéro de station incrémenté
 						DataModel.stationModel.resetRef();
 						DataModel.stationModel.setLastRef(null);
 						
-						if (ViewFile.medatlas.getSelection()) {
+						if (ViewFile.radMedatlas.getSelection()) {
 							NemoLists.writeSdnParameters("*");
 						} else {
 							NemoLists.writeSdnParameters("//");
 						}
 						
-						// test pour savoir si le compteur CDI est un numérique
 						try {
 							if (EditDesc.okApresReset && EditSurvey.okApresReset
 									&& EditStation.okApresReset
@@ -106,17 +111,16 @@ public class EditConversion extends Thread {
 								
 								// test pour savoir si on est en campagne ou pas
 								if (ViewFile.isCollection()) {
-
 									if (ViewFile.checkCDI.getSelection()) {
 										if (!CDIResumeWriter.getInstance().checkConfig()) {
 											throw new Exception("CDI cancelled");
 										}
 										
-										if (CDIResumeWriter.getInstance().setLocalCdiId()) {
+										if (askDataSetRef()) {
 											CDIResumeWriter.getInstance().reset();
 											CDIResumeWriter.getInstance().choixFichierSortie();
 										} else {
-											throw new Exception("CDI cancelled");
+												throw new Exception("CDI cancelled");
 										}
 									}
 									
@@ -130,9 +134,17 @@ public class EditConversion extends Thread {
 											ex.printStackTrace();
 										}
 									}
-								} else
-									choixFichierSortie();
-
+								} else {
+									if (ViewFile.radODV.getSelection() && ViewFile.radMonoStation.getSelection()) {
+										if (askDataSetRef()) {
+											choixDossierSortie();
+										} else {
+											throw new Exception("Conversion cancelled");
+										}
+									} else {
+										choixFichierSortie();
+									}
+								}
 							} else {
 								Utils.messageErreur(Messages
 										.getString("EditConversion.15"));
@@ -187,11 +199,35 @@ public class EditConversion extends Thread {
 	public static void choixFichierSortie() {
 
 		nomFichierSortie = "";
-
+		
 		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		FileDialog dialog = new FileDialog(shell, SWT.SAVE
 				| SWT.APPLICATION_MODAL);
 		dialog.setText(Messages.getString("EditConversion.13")); //$NON-NLS-1$
+		
+		// FAE090
+		if (ViewFile.radODV.getSelection()) {
+			String[] extensions = new String[1];
+			extensions[0] = "*.txt";
+			dialog.setFilterExtensions(extensions);
+			
+			Survey survey = null;
+			if (DataModel.singleSurvey != null) {
+				survey = DataModel.singleSurvey.getModel();
+			} else if (DataModel.dirSurvey != null) {
+				survey = DataModel.dirSurvey.getModel();
+			}
+			
+			if (survey != null) {
+				String fileName = survey.getReference().trim();
+				if (fileName.equals("")) {
+					fileName = survey.getName().trim();
+				}
+				fileName = Utils.validFileName(fileName);
+				dialog.setFileName(fileName);
+			}
+		}
+		
 		// FAE45
 		// dialog.setFilterPath(Utils.configuration.getCruisesDirectory());
 		dialog.setFilterPath(ViewFile.nomFichier);
@@ -204,7 +240,7 @@ public class EditConversion extends Thread {
 			File fich = new File(nomFichierSortie);
 			if (fich.exists()) {
 				// fichier existe
-			//	shell.close();
+				// shell.close();
 				Shell shell2 = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 
 				MessageBox mb = new MessageBox(shell2, SWT.ICON_WARNING
@@ -216,35 +252,15 @@ public class EditConversion extends Thread {
 					// on n'écrase pas le fichier
 					choixFichierSortie();
 				} else {
-					Utils.messageErreur("");
-					SWTProcess.interrompu = false;
-					try
-					{
-						new SWTProgress().run();
-					}
-					catch (InterruptedException e)
-					{
-						Utils.messageErreur(e.getMessage());
-						SWTProcess.interrompu = true;
-					}
+					runSWTProgress();
 				}
-
 			} else {
-				Utils.messageErreur("");
-				SWTProcess.interrompu = false;
-				SurveyMedia.interrompu = false;
-
-				try {
-					new SWTProgress().run();
-				} catch (InterruptedException e) {
-					Utils.messageErreur(e.getMessage());
-					SWTProcess.interrompu = true;
-				}
+				runSWTProgress();
 			}
 
 			// affichage des résultats en fin de conversion
 			if (!SurveyMedia.interrompu && !SWTProcess.interrompu) {
-				if (ViewFile.odv.getSelection()) {
+				if (ViewFile.radODV.getSelection()) {
 					Utils.messageOK(Messages.getString("EditConversion.9"));
 				} else {
 					Utils.messageOK(Messages.getString("EditConversion.10"));
@@ -265,7 +281,7 @@ public class EditConversion extends Thread {
 		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		DirectoryDialog dialog = new DirectoryDialog(shell, SWT.SAVE
 				| SWT.APPLICATION_MODAL);
-		dialog.setText(Messages.getString("EditConversion.13")); //$NON-NLS-1$
+		dialog.setText(Messages.getString("EditConversion.25")); //$NON-NLS-1$
 		dialog.setFilterPath(ViewFile.nomRepertoire);
 		nomDossierSortie = dialog.open();
 
@@ -279,43 +295,23 @@ public class EditConversion extends Thread {
 
 				MessageBox mb = new MessageBox(shell2, SWT.ICON_WARNING
 						| SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
-				mb.setMessage(Messages.getString("EditConversion.14")); //$NON-NLS-1$
+				mb.setMessage(Messages.getString("EditConversion.24")); //$NON-NLS-1$
 
 				int reponse = mb.open();
 				if (reponse == SWT.NO) {
 					// on n'écrase pas le fichier
-					choixFichierSortie();
+					choixDossierSortie();
 				} else {
-					Utils.messageErreur("");
-					SWTProcess.interrompu = false;
-					try {
-						new SWTProgress().run();
-					}
-					catch (Exception e)
-					{
-						Utils.messageErreur(e.getMessage());
-						SWTProcess.interrompu = true;
-					}
+					runSWTProgress();
 				}
 
 			} else {
-				Utils.messageErreur("");
-				SWTProcess.interrompu = false;
-				SurveyMedia.interrompu = false;
-
-				try {
-					new SWTProgress().run();
-				}
-				catch (Exception e)
-				{
-					Utils.messageErreur(e.getMessage());
-					SWTProcess.interrompu=true;
-				}
+				runSWTProgress();
 			}
 
 			// affichage des résultats en fin de conversion
 			if (!SurveyMedia.interrompu && !SWTProcess.interrompu) {
-				if (ViewFile.odv.getSelection()) {
+				if (ViewFile.radODV.getSelection()) {
 					Utils.messageOK(Messages.getString("EditConversion.9"));
 				} else {
 					Utils.messageOK(Messages.getString("EditConversion.10"));
@@ -327,6 +323,19 @@ public class EditConversion extends Thread {
 
 		}
 
+	}
+	
+	public static void runSWTProgress() {
+		Utils.messageErreur("");
+		SWTProcess.interrompu = false;
+		SurveyMedia.interrompu = false;
+
+		try {
+			new SWTProgress().run();
+		} catch (Exception e)	{
+			Utils.messageErreur(e.getMessage());
+			SWTProcess.interrompu=true;
+		}
 	}
 	
 	public static String getErreurFichier() {
@@ -379,5 +388,62 @@ public class EditConversion extends Thread {
 				+ "\r\n" + message;
 		
 		return message;
+	}
+	
+	public static String getDataSetRef() {
+		return _dataSetRef;
+	}
+	
+	public static void setDataSetRef(String value) {
+		_dataSetRef = value;
+	}
+
+	public static boolean askDataSetRef() {	
+		if (getDataSetRef().equals("")) {
+			String strDefault = "";
+			if (DataModel.dirSurvey != null) {
+				strDefault = DataModel.dirSurvey.getModel().getReference();
+			} else if (DataModel.singleSurvey != null) {
+				strDefault = DataModel.singleSurvey.getModel().getReference();
+			}
+			InputDialog inputCdiId = new InputDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), Messages.getString("CDIResumeWriter.idTitle"), Messages.getString("CDIResumeWriter.idMessage"), strDefault, null);
+			inputCdiId.open();
+			
+			if (inputCdiId.getReturnCode() == InputDialog.OK) {
+				_dataSetRef = inputCdiId.getValue();
+				return true;
+			} else {
+				_dataSetRef = "";
+				return false;
+			}
+		} else {
+			return true;
+		}
+	}
+	
+	public static String getLocalCdiId(Station station) {
+		String temp = "";
+		
+		if (!EditConversion.getDataSetRef().equals("")) {
+			temp = EditConversion.getDataSetRef();
+		}
+		
+		if (!station.getReference().trim().equals("")) {
+			if (!temp.equals("")) {
+				temp += "_";
+			}
+			temp += station.getReference().trim();
+		}
+		
+		if (station.getDataType() != null) {
+			if (!station.getDataType().getCode().equals("")) {
+				if (!temp.equals("")) {
+					temp += "_";
+				}
+				temp += station.getDataType().getCode();
+			}
+		}
+		
+		return Utils.validFileName(temp);
 	}
 }

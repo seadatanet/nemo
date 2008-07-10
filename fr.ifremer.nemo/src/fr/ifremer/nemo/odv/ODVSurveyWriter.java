@@ -72,6 +72,7 @@ public class ODVSurveyWriter implements Cloneable, SurveyWriter {
 					writer.flush();
 					writer.close();
 				} catch (Exception ex) {
+					ex.printStackTrace();
 				}
 			}
 		}
@@ -102,6 +103,7 @@ public class ODVSurveyWriter implements Cloneable, SurveyWriter {
 					.getSingleton());
 			context.put("star", "*");
 			context.put("nemoLists", fr.ifremer.nemo.config.NemoLists.class.newInstance());
+			context.put("swtProcess", fr.ifremer.nemo.ui.SWTProcess.class.newInstance());
 			context.put("cr", System.getProperty("line.separator"));
 			stream = getClass().getResourceAsStream("odv.vtl");
 			reader = new InputStreamReader(stream);

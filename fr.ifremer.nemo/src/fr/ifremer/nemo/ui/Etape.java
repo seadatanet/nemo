@@ -101,9 +101,7 @@ public class Etape {
 							ViewFile.comboTempoDate.getText());
 					
 					format.parseObject(ViewFile.textTempoDateRef.getText());
-				
 				} catch (ParseException e) {
-
 					Utils.messageErreurAppend(Messages.getString("Etape.8")); //$NON-NLS-1$
 					ok = false;
 				}

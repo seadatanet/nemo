@@ -17,15 +17,10 @@ public class SWTProgress extends ApplicationWindow {
 	}
 
 	public void run() throws InterruptedException{
-
-		if (ViewFile.odv.getSelection()) {
-			SWTProcess.odv = true;
-		} else {
-			SWTProcess.odv = false;
-		}
+		SWTProcess.odv = ViewFile.radODV.getSelection();
+		SWTProcess.monoStation = ViewFile.radMonoStation.getSelection();
 
 		try {
-
 			swtProcess = new SWTProcess();
 			new ProgressMonitorDialog(Application.display.getActiveShell())
 					.run(true, true, swtProcess);

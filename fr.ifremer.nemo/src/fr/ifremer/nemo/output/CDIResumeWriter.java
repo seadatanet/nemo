@@ -26,7 +26,9 @@ import fr.ifremer.nemo.domain.Parameter;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.ui.ApplicationActionBarAdvisor;
+import fr.ifremer.nemo.ui.EditConversion;
 import fr.ifremer.nemo.ui.OptionsAction;
+import fr.ifremer.nemo.ui.SWTProcess;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.ViewFile;
 import fr.ifremer.nemo.util.Formatter;
@@ -37,8 +39,6 @@ public class CDIResumeWriter {
 	private static CDIResumeWriter instance;
 
 	private String nomFichierSortie;
-	
-	private String _localCdiId;
 
 	private List<Survey> surveys;
 
@@ -73,7 +73,7 @@ public class CDIResumeWriter {
 		FileWriter writer = null;
 		
 		try {
-
+			
 			writer = new FileWriter(output);
 
 			Formatter formatter = Formatter.getSingleton();
@@ -83,11 +83,10 @@ public class CDIResumeWriter {
 			String idEdmoRespDonnees = Utils.configuration.getIdEdmoRespDonnees();
 			String idEdmoRespCdi = Utils.configuration.getIdEdmoRespCdi();
 			String idEdmoDistDonnees= Utils.configuration.getIdEdmoDistDonnees();
-			String localCdiId = getLocalCdiId();
 			String codeTypePlateForme = Utils.extraitCode(ViewFile.comboTypePlateForme.getText());
 			String codeAccesDonnees = Utils.extraitCode(ViewFile.comboAccesDonnees.getText());
 			String formatSortie = "";
-			if (ViewFile.odv.getSelection()) {
+			if (ViewFile.radODV.getSelection()) {
 				formatSortie = Messages.getString("CDIResumeWriter.odv");
 			} else {
 				formatSortie = Messages.getString("CDIResumeWriter.medatlas");
@@ -125,7 +124,7 @@ public class CDIResumeWriter {
 						writer.write("\r\n");
 						
 						// CDI ID
-						writer.write(localCdiId + "_" + station.getReference());
+						writer.write(EditConversion.getLocalCdiId(station));
 //						writer.write(/*station.getReference() + "_" +*/ Utils.configuration.getDataCenter() + "_"
 //								+ String.valueOf(cdiId++));
 //						writer.write(Configuration.getSingleton().getIdEdmoRespCdi() + "_"
@@ -284,23 +283,6 @@ public class CDIResumeWriter {
 
 		surveys.add(survey);
 
-	}
-
-	public String getLocalCdiId() {
-		return _localCdiId;
-	}
-
-	public boolean setLocalCdiId() {		
-		InputDialog inputCdiId = new InputDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), Messages.getString("CDIResumeWriter.idTitle"), Messages.getString("CDIResumeWriter.idMessage"), "", null);
-		inputCdiId.open();
-		
-		if (inputCdiId.getReturnCode() == InputDialog.OK) {
-			_localCdiId = inputCdiId.getValue();
-			return true;
-		} else {
-			_localCdiId = "";
-			return false;
-		}
 	}
 	
 	public boolean checkConfig() {

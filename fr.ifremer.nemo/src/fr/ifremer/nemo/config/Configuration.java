@@ -63,6 +63,10 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	protected String _vocabURL;
 	
 	protected int _predicate;
+	
+	protected String _fichierMapping;
+	
+	protected String _arboMapping;
 		
 	protected HashMap<String, String> _vocabLists = new HashMap<String, String>();
 	
@@ -820,6 +824,22 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 
 	public int getPredicate() {
 		return _predicate;
+	}
+
+	public String getArboMapping() {
+		return _arboMapping;
+	}
+
+	public void setArboMapping(String mapping) {
+		_arboMapping = mapping;
+	}
+
+	public String getFichierMapping() {
+		return _fichierMapping;
+	}
+
+	public void setFichierMapping(String mapping) {
+		_fichierMapping = mapping;
 	}
 
 //	public void setPredicate(String _predicate) {

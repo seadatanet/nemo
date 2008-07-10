@@ -1483,4 +1483,19 @@ public class Utils {
 	public static String concat(String list1, String list2) {
 		return list1 + "_" + list2;
 	}
+	
+	public static String validFileName(String value) {
+		char newChar = '_';		
+		value = value.replace(' ', newChar);
+		value = value.replace('/', newChar);
+		value = value.replace('\\', newChar);
+		value = value.replace(':', newChar);
+		value = value.replace('*', newChar);
+		value = value.replace('?', newChar);
+		value = value.replace('\"', newChar);
+		value = value.replace('<', newChar);
+		value = value.replace('>', newChar);
+		value = value.replace('|', newChar);
+		return value;
+	}
 }

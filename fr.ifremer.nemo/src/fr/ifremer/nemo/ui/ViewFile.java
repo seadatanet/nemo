@@ -66,7 +66,11 @@ public class ViewFile extends ViewPart {
 
 	public static Button checkBoxTempo;
 	
-	public static Button medatlas, odv, checkCDI;
+	public static Button radProfilVertical, radSerieTempo, radTrajectoire;
+	
+	public static Button radMedatlas, radODV, checkCDI;
+	
+	public static Button radMonoFichier, radMonoStation = null;
 
 	public static Button radioFichier = null;
 
@@ -135,7 +139,7 @@ public class ViewFile extends ViewPart {
 	
 	public static Group grpCDI;
 	
-	private static Group grpSeparateur;
+	private static Group grpSeparateur, grpODV;
 	
 	public static boolean writeResume;
 	@Override
@@ -289,8 +293,6 @@ public class ViewFile extends ViewPart {
 	 */
 	private void createComposite11() {
 		
-		
-		
 		GridData gridData = new GridData();
 		gridData.verticalSpan = 2;
 		GridLayout gridLayout = new GridLayout();
@@ -379,7 +381,7 @@ public class ViewFile extends ViewPart {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
 						// System.out.println("parcourir"); // //$NON-NLS-1$
-
+						DataModel.ouverture = false;
 						Preformat.setPreformat(false);
 						// parcours des fichiers/dossiers
 						
@@ -432,7 +434,7 @@ public class ViewFile extends ViewPart {
 									e1.printStackTrace();
 								}
 
-								medatlas.setEnabled(true);
+								radMedatlas.setEnabled(true);
 								grpCDI.setVisible(false);
 
 							} else {
@@ -483,7 +485,7 @@ public class ViewFile extends ViewPart {
 
 								}
 
-								medatlas.setEnabled(true);
+								radMedatlas.setEnabled(true);
 								grpCDI.setVisible(false);
 
 							} else {
@@ -529,9 +531,10 @@ public class ViewFile extends ViewPart {
 
 								// dans le cas d'une collection, on ne peut
 								// generer que le format ODV
-								medatlas.setEnabled(false);
-								medatlas.setSelection(false);
-								odv.setSelection(true);
+								radMedatlas.setEnabled(false);
+								radMedatlas.setSelection(false);
+								radODV.setSelection(true);
+								grpODV.setVisible(true);
 								grpCDI.setVisible(true);
 							}
 
@@ -577,9 +580,10 @@ public class ViewFile extends ViewPart {
 
 								// dans le cas d'une collection, on ne peut
 								// generer que le format ODV
-								medatlas.setEnabled(false);
-								medatlas.setSelection(false);
-								odv.setSelection(true);
+								radMedatlas.setEnabled(false);
+								radMedatlas.setSelection(false);
+								radODV.setSelection(true);
+								grpODV.setVisible(true);
 								grpCDI.setVisible(true);
 							}
 
@@ -621,24 +625,42 @@ public class ViewFile extends ViewPart {
 	private void createComposite14() {
 		compositeConversion = new Composite(tabFolder, SWT.NONE);
 		GridLayout layout = new GridLayout();
-		layout.numColumns = 1;
+		layout.numColumns = 2;
 		compositeConversion.setLayout(layout);
 
+		GridLayout layout2 = new GridLayout();
+		layout.numColumns = 2;
+		
 		Group group = new Group(compositeConversion, SWT.NONE);
 		group.setText(Messages.getString("ViewFile.choixFormatSortie")); //$NON-NLS-1$
 		group.setLayout(layout);
 
-		medatlas = new Button(group, SWT.RADIO);
-		medatlas.setText("Medatlas"); //$NON-NLS-1$
-		medatlas.setSelection(true);
-		odv = new Button(group, SWT.RADIO);
-		odv.setText("ODV"); //$NON-NLS-1$
+		radMedatlas = new Button(group, SWT.RADIO);
+		radMedatlas.setText("Medatlas"); //$NON-NLS-1$
+		radMedatlas.setSelection(true);
+
+		// Composite vide pour mise en page
+		Composite compoVide1 = new Composite(group, SWT.NONE);
+		
+		radODV = new Button(group, SWT.RADIO);
+		radODV.setText("ODV"); //$NON-NLS-1$
+		
+		grpODV = new Group(group, SWT.NONE);
+		grpODV.setLayout(layout2);
+		grpODV.setVisible(false);
+		radMonoFichier = new Button(grpODV, SWT.RADIO);
+		radMonoFichier.setText(Messages.getString("ViewFile.monoFichier"));
+		radMonoFichier.setSelection(true);
+		radMonoStation = new Button(grpODV, SWT.RADIO);
+		radMonoStation.setText(Messages.getString("ViewFile.monoStation"));
 
 		if (isCollection()) {
-			medatlas.setEnabled(false);
-
+			radMedatlas.setEnabled(false);
 		}
 	
+		// Composite vide pour mise en page
+		Composite compoVide2 = new Composite(compositeConversion, SWT.NONE);
+		
 		grpCDI = new Group(compositeConversion, SWT.NONE);
 		GridLayoutFactory.fillDefaults().applyTo(grpCDI);
 		GridDataFactory.fillDefaults().grab(false,false).applyTo(grpCDI);
@@ -720,6 +742,26 @@ public class ViewFile extends ViewPart {
 					}
 				});
 		
+		// bouton radMedatlas
+		radMedatlas
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(
+							org.eclipse.swt.events.SelectionEvent g) {
+						grpODV.setVisible(false);
+					}
+
+				});
+		
+		// bouton radODV
+		radODV
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(
+							org.eclipse.swt.events.SelectionEvent g) {
+						grpODV.setVisible(true);
+					}
+
+				});
+		
 		comboAccesDonnees.pack();
 		comboTypePlateForme.pack();
 		grpCDI.pack();
@@ -759,10 +801,6 @@ public class ViewFile extends ViewPart {
 	}
 	
 	private void createGroupeSeparateur() {	
-		
-		
-
-		
 		grpSeparateur = new Group(composite11, SWT.NONE);
 		GridLayoutFactory.fillDefaults().applyTo(grpSeparateur);
 		GridDataFactory.fillDefaults().grab(false,false).applyTo(grpSeparateur);
