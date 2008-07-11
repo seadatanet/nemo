@@ -22,14 +22,6 @@
         <long>1171645116000</long> 
        </object> 
       </void> 
-      <void property="timeZone"> 
-       <void property="ID"> 
-        <string>GMT</string> 
-       </void> 
-       <void property="rawOffset"> 
-        <int>0</int> 
-       </void> 
-      </void> 
      </object> 
     </void> 
     <void property="listKey"> 
@@ -57,14 +49,6 @@
        <object class="java.util.Date"> 
         <long>1171645116000</long> 
        </object> 
-      </void> 
-      <void property="timeZone"> 
-       <void property="ID"> 
-        <string>GMT</string> 
-       </void> 
-       <void property="rawOffset"> 
-        <int>0</int> 
-       </void> 
       </void> 
      </object> 
     </void> 
@@ -94,14 +78,6 @@
         <long>1171645116000</long> 
        </object> 
       </void> 
-      <void property="timeZone"> 
-       <void property="ID"> 
-        <string>GMT</string> 
-       </void> 
-       <void property="rawOffset"> 
-        <int>0</int> 
-       </void> 
-      </void> 
      </object> 
     </void> 
     <void property="listKey"> 
@@ -130,14 +106,6 @@
         <long>1171645116000</long> 
        </object> 
       </void> 
-      <void property="timeZone"> 
-       <void property="ID"> 
-        <string>GMT</string> 
-       </void> 
-       <void property="rawOffset"> 
-        <int>0</int> 
-       </void> 
-      </void> 
      </object> 
     </void> 
     <void property="listKey"> 
@@ -165,14 +133,6 @@
        <object class="java.util.Date"> 
         <long>1171645116000</long> 
        </object> 
-      </void> 
-      <void property="timeZone"> 
-       <void property="ID"> 
-        <string>GMT</string> 
-       </void> 
-       <void property="rawOffset"> 
-        <int>0</int> 
-       </void> 
       </void> 
      </object> 
     </void> 

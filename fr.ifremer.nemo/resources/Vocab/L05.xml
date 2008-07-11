@@ -1,0 +1,2805 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.5.0_06" class="java.beans.XMLDecoder"> 
+ <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="112"> 
+  <void index="0"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/130</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>CTD profilers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A package lowered and raised vertically from a surface platform, usually a ship, always carrying pressure, temperature and conductivity sensors. Addional optional sensors include fluorometers, transmissometers and radiometers.  The package may also carry water bottles.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="1"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/131</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>CTD undulators</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A package towed at varying depths by a ship, always carrying pressure, temperature and conductivity sensors. Addional optional sensors include fluorometers, transmissometers and radiometers.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="2"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB26</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>X-ray diffractometers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that identify crystalline solids by measuring the characteristic spaces between layers of atoms or molecules in a crystal.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="3"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB25</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>X-ray fluorescence analysers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that identify and quantify the elemental constituents of a sample from the spectrum of electromagnetic radiation emitted by the atoms in the sample when excited by X-ray radiation.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="4"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB17</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>accelerator mass spectrometers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments measuring the mass-to-charge ratio of the products of sample molecule disassociation, atom ionisation and ion acceleration in a particle accelerator.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="5"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L055/2/307</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>accelerometers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that measure non-gravitational accelerations acting upon a spacecraft.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199982112000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L055/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="6"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/183</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>acoustic backscatter sensors</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instrument that measures the amount of sound energy transmitted into the water column returned to the instrument.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="7"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/357</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>acoustic tracking systems</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A network of acoustic sensors that determine the location of a sound source by triangulation such as acoustically active float tracking systems.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="8"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/353</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>active fluorometers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Fluorometers that measure photosynthetic parameters by taking measurements whilst manipulating the phytoplankton with controlled high-intensity illumination such as pump and probe and FRRF</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="9"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/13</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>aerosol samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device that collects a sample of aerosol (dry particles or liquid droplets) from the atmosphere</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195548603000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="10"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/101</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>anemometers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instrument that measures wind speed and direction at a single elevation</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="11"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L055/2/308</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>atmospheric radiometers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Sensors that measure the intensity an nature of electromagnetic radiation in a manner optimised for the quantification of atmospheric phenomena.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199982168000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L055/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="12"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB10</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>atomic absorption spectrometers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that volatilise the sample, illuminate the resultant vapour with light wavelengths matched to the analyte of interest and quantify the radiation absorbed, which is proportional to concentration.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="13"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB04</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>autoanalysers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that continuously draw samples through plumbing adding reagents whilst controlling the environment to produce a chemical reaction before passing the sample to a detector, e.g. the automated colorimetric determination of nutrients.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="14"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB13</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>balances</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Devices that determine the mass of a sample by comparison with a standard mass.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="15"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/132</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>bathythermographs</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that measure vertical profiles of sea temperature by either lowering a pressure plus temperature senor package (MBT) or dropping a free falling disposable sensor (XBT).</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="16"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB23</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>bench fluorometers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that determinesthe amount of chlorophyll in in-vitro samples by measuring the quantity of red light (around 685nm) emitted following excitation by pulses of blue light (around 460-470nm).</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="17"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L052/1/151</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>benthic incubation chambers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device that isolates a portion of seabed plus overlying water from its surroundings. Either returns the entire system to the surface or incorporates sampling devices and/or in-situ sensors.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199980067000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L052/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="18"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/24</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>benthos samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A net or sledge dragged across the seabed designed to sample benthic fauna.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195548603000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="19"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/358</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>bubble detectors</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that measure the concentration and size of air bubbles in the water column.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981711000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="20"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L055/2/311</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>cameras</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>All types of photographic equipment that may be deployed in aircraft or satellites including stills, video, film and digital systems.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199982757000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L055/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="21"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L052/1/83</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>centrifuges</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Devices that separate the liquid and solid phases of a sample through forces exerted by rapid rotation</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199980067000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L052/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="22"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB03</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>colorimeters</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments measuring the amount of light of a given wavelength absorbed by a sample of solution to determine the concentration of a specific coloured solute.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="23"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/58</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>continuous air samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device that continuously supplies a flow of air either to an analytical instrument, over a sensor or from which discrete samples may be drawn</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195548603000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="24"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/31</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>continuous water samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device that continuously supplies a flow of water either to an analytical instrument, over a sensor or from which samples may be drawn</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195548603000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="25"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/114</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>current meters</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instrument that measures current speed and direction at a single depth</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="26"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/115</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>current profilers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instrument that measures current speed and direction at multiple predetermined depths simultaneously</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="27"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/11</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>discrete air samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device that collects a sample of air from the atmosphere and stores it, usually under pressure, for subsequent analysis</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195548603000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="28"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/30</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>discrete water samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device that collects an in-situ discrete water sample from any depth and returns it to the surface without contamination by the waters through which it passes, such as a water bottle</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195548603000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="29"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/351</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>dissolved gas sensors</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instrument that measures the concentration of gases, generally oxygen, dissolved in the water column</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="30"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB08</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>electron microprobes</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that chemically analyse a small area of a sample by bombarding it with electrons and spectroscopically assaying the resulting X-Ray emissions.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="31"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB07</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>electron microscopes</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that generate enlarged images of samples using the phenomena of reflection and absorption of electrons behaving as waves.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="32"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB01</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>elemental analysers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that quantify carbon, nitrogen and sometimes other elements by combusting the sample at very high temperature and assaying the resulting gaseous oxides. Usually used for samples including organic material.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="33"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/354</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>expendable CTDs</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that measure vertical profiles of sea temperature and salinity with a free falling disposable temperature and conductivity sensor package.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="34"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L052/1/84</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>filters</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Devices that separate the liquid and solid phases of a sample by passage through a medium that traps solid particles whilst allowing liquids to pass through</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199980067000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L052/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="35"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB06</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>fluorescence microscopes</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that generate enlarged images of samples using the phenomena of fluorescence and phosphorescence instead of, or in addition to, reflection and absorption of visible light. Includes conventional and inverted instruments.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="36"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/113</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>fluorometers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instrument that measures the amount of stimulated electromagnetic radiation produced by pulses of electromagnetic radiation emitted into the water column</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="37"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/12</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>fog samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device that condenses a sample of fog from the atmosphere</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195548603000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="38"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB22</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>gamma-ray spectrometers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments measuring the relative levels of electromegnetic radiation of different wavelengths in the gamma-ray waveband.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="39"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB19</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>gas chromatograph mass spectrometers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments separating gases, volatile substances or substances dissolved in a volatile solvent by transporting an inert gas through a column packed with a sorbent to a detector for assay by a mass spectrometer.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="40"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB02</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>gas chromatographs</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments separating gases, volatile substances or substances dissolved in a volatile solvent by transporting an inert gas through a column packed with a sorbent to a detector for assay.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="41"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB24</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>gel permeation chromatographs</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that separate components in aqueous or organic solution based on molecular size generally for molecular weight determination.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="42"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/158</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>gravimeters</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instrument that makes measurements of the Earth&apos;s gravity field</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="43"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB11</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>high performance liquid chromatographs</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that separate and analyse mixtures of substances by high pressure pumping the sample through a column packed with microspheres coated with the stationary phase.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="44"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L052/1/82</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>in-situ incubators</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A rig that allows water samples to be retained from where they were collected whilst physically separated from their surroundings.  Includes small-scale incubation rigs and mesocosms.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199980067000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L052/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="45"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB14</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>inductively-coupled plasma atomic emission spectroscopes</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that pass nebulised samples into an inductively-coupled gas plasma (8-10000 K) where they are atomised and excited. The de-excitation optical emissions at characteristic wavelengths are spectroscopically analysed.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="46"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB15</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>inductively-coupled plasma mass spectrometers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that pass nebulised samples into an inductively-coupled gas plasma (8-10000 K) where they are atomised and ionised. Ions of specific mass-to-charge ratios are quantified in a quadrupole mass spectrometer.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="47"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/112</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>inverted echosounders</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that locate acoustic reflectors such as fronts in the water column by transmitting pulses of sound from the seabed and determing reflection return times</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="48"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB09</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>ion microprobes</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that isotopically analyse a small area of sample by bombarding it with ions to form a plasma that is analysed in a mass spectrometer.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="49"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L055/2/310</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>laser altimiters</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that determine the distance between the platform and the Earth&apos;s surface by timing reflected pulses of laser light.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199982676000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L055/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="50"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB21</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>liquid scintillation counters</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments assaying beta radiation by quantitative detection of visible light produced by the passage of rays or particles through a suitable scintillant incorporated into the sample.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="51"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/116</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>lowered current profilers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>An acoustic doppler current meter lowered and raised vertically from a surface platform, typically a ship.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="52"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/159</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>magnetometers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instrument that makes measurements of the Earth&apos;s magnetic field</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="53"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/90</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>manual biota samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A simple tool like a hammer, saw or even just a hand for the collection of biota samples</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195548603000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="54"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/57</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>manual rock samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A simple tool like a hammer, saw or even just a hand for the collection of rock samples</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195548603000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="55"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB16</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>mass spectrometers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments used to measure the mass-to-charge ratio of ions most generally used to find the composition of a sample by generating a mass spectrum representing the masses of sample components.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="56"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/102</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>meteorological packages</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instrument that makes routine meteorological measurements on the atmosphere, typically air pressure, temperature and humidity</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="57"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/51</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>mud corers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device designed to collect a sample of mud from between the surface and depths from a metre to 10s of metres with minimal disturbance of the sediment structure</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195548603000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="58"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/157</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>multi-beam echosounders</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that measure water depth along several tracks parallel to the platform track by timing pulses of sound reflected on the seafloor</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="59"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/154</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>multi-channel seismic reflection systems</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>An energy source plus a multiple strings of towed hydrophones (streamers) that determine geologic structure by detecting waves reflected by subsurface layers.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="60"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/182</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>not applicable</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>There is no appropriate value. To be used in cases where metadata elements cannot be set null due to schema constraints.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195548603000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="61"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB18</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>nuclear magnetic resonance spectrometers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that identify and quantify magnetically active chemical entities by subjecting a sample to orthogonal magnetic and electrical fields.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="62"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/181</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>nutrient analysers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instrument that makes in-situ measurements of one or more of nitrate, nitrite, ammonium, urea, phosphate or silicate dissolved in the water column</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="63"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L055/2/91</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>observers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Humans who estimate a parameter through observation of a phenomenon such as bird counts and visual wave observations</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195549414000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L055/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="64"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L055/2/304</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>ocean colour radiometers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Sensors that measure the intensity and nature of electromagnetic radiation in a manner optimised for the determination of ocean chlorophyll concentration.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981974000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L055/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="65"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/123</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>optical backscatter sensors</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instrument that measures the amount of electromagnetic radiation emitted into the water column returned to the instrument.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="66"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB05</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>optical microscopes</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that generate enlarged images of samples using the phenomena of reflection and absorption of visible light. Includes conventional and inverted instruments.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="67"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/355</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>pH sensors</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that measure the hydrogen ion concentration in the water column</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="68"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/150</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>particle sizers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>An instrument that measures the size spectrum of particles suspended in the water column</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="69"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB27</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>particle sizers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that measure the size spectrum of particulate material suspended in a water sample.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="70"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/32</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>particulates samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A system that collects samples of water column particulates such as in-situ high volume filtration systems liks SAPs.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195548603000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="71"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/23</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>pelagic trawl nets</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A net towed through the water column designed to sample free-swimming nekton or fish.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195548603000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="72"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/352</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>plankton counters</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that categorise and count plankton in the water column</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="73"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/22</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>plankton nets</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A fine-meshed net designed for sampling microzooplankton, mesozooplankton or nekton.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195548603000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="74"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/21</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>plankton recorders</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device that continuously samples a flow of water, separating and fixing plankton for subsequent identification and counting</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195548603000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="75"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/14</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>precipitation samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device that collects a sample of precipitation (rain, hail or snow) as it falls</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195548603000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="76"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L055/2/186</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>radar altimeters</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that determine the distance between the platform and the Earth&apos;s surface by timing reflected electromegnetic radiation, usually microwaves.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195549414000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L055/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="77"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/122</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>radiometers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instrument that measures the intensity of electromagnetic radiation in either the atmosphere or the water column</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="78"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/103</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>radiosondes</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A balloon-borne package equipped with a radio transmitter and meteorological sensors typically measuring temperature, pressure, and humidity.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="79"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/356</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>redox potential sensors</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that measure the tendency of the water column to either gain or lose electrons when it is subject to change by introduction of a new species</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="80"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/53</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>rock corers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device that drills into rock extracting a cylindrical sample</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195548603000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="81"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/54</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>rock dredges</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device dragged across the seabed designed to collect loose rock samples.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195548603000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="82"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L055/2/301</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>satellite positioning systems</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A network of statellites that generate signals that allow a receiver to determine its position such as GPS.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195549414000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L055/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="83"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L055/2/121</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>satellite tracking system</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A network of statellites that determines the position of a transponder by triangulation such as Argos.  Generally used to track surface buoys for the determination of Lagrangian currents.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195549414000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L055/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="84"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L055/2/305</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>scatterometers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Sensors that measure the reflection or scattering effect produced while scanning the surface of the earth. Primarily used to measure near surface winds over the oceans.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195549414000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L055/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="85"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/111</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>sea level recorders</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instrument that make smoothed measuremeants of the elevation of the sea surface relative to a fixed vertical datum</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="86"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L055/2/302</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>sea temperature sensors</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Sensors that measure the intensity and nature of electromagnetic in a manner optimised for the determination of sea surface temperature.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981919000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L055/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="87"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/50</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>sediment grabs</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device that collects a sample of surface sediment including manually deployed equipment like a shovel or bucket.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195548603000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="88"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/52</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>sediment porewater samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device that collects samples of pore water from various horizons below the seabed.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195548603000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="89"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/55</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>sediment settling tubes</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A specialised water bottle that both collects water samples and provides a settling velocity experiment apparatus.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195548603000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="90"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/33</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>sediment traps</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A collector of particulates as they sink through the water column</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195548603000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="91"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/155</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>seismic refraction systems</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A network of seismometers or geophones plus an energy source that determine geologic structure by detecting waves refracted by subsurface layers.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="92"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L052/1/81</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>shipboard incubators</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device mounted on a ship that holds water samples under conditions of controlled temperature or controlled temperature and illumination.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199980067000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L052/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="93"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/152</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>sidescan sonars</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments with directional acoustic transmitters and receivers fitted to an underwater platform that emit fan-shaped pulses down toward the seafloor across a wide angle perpendicular to the path of the platform through the water.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="94"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/156</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>single-beam echosounders</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that measure water depth at a single point below the platform by timing pulses of sound reflected on the seafloor</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="95"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/153</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>single-channel seismic reflection systems</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>An energy source plus a single string of towed hydrophones (streamer) that determine geologic structure by detecting waves reflected by subsurface layers.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="96"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/56</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>snow and ice samplers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A device that collects a sample of frozen seawater or accumulated frozen precipitation</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195548603000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="97"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/185</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>sound velocity sensors</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instrument that measures the velocity of sound in seawater</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="98"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB20</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>spectrophotometers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments measuring the relative absorption of electromegnetic radiation of different wavelengths in the near infra-red, visible and ultraviolet wavebands by samples.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="99"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L055/2/303</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>surface current radars</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that measure the speed and direction of sea surface travel by timing reflected radio waves</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195549414000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L055/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="100"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L055/2/306</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>synthetic aperture radars</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that generate maps of radar reflectivity through the synthesis of multiple pulses from a moving platform.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199982072000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L055/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="101"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L055/2/309</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>terrestrial radiometers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Sensors that measure the intensity and nature of electromagnetic radiation in a manner optimised for the quantification of terrestrial phenomena.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199982233000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L055/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="102"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/135</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>thermistor chains</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A group of rigidly-mounted temperature sensors sampled by a common data logger held at various depths in the water column.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="103"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/133</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>thermosalinographs</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Temperature and conductivity sensors mounted on a sea-surface platform continuously measuring a surface water supply.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="104"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L053/1/LAB12</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>titrators</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instruments that incrementally add quantified aliquites of a reagent to a sample until the end-point of a chemical reaction is reached.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981412000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L053/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="105"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/124</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>transmissometers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Systems that measure the attenuation of electromagnetic radiation by the water column. Includes human observer plus Secchi Disk.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="106"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/184</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>turbulence energy dissipation sensors</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instrument that makes high frequency measurements of kinetic energy in the water column</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="107"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/180</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>underwater cameras</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>All types of photographic equipment that may be deployed underwater including stills, video, film and digital systems</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1199981604000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="108"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/999</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>unknown</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>The correct value is not known to and not computable by the creator of this information. However a correct value probably exists.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195548603000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="109"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/350</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>water temperature and salinity sensors</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instrument that simultaneously measures electrical conductivity and temperature in the water column to provide temperature and salinity data</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="110"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/134</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>water temperature sensors</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>An instrument that measures the temperature of the water with which it is in contact</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="111"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L054/2/110</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>wave recorders</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Instrument that measures water column surface wave parameters including height, period, direction and energy spectra.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1195551280000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L054/2</string> 
+    </void> 
+   </object> 
+  </void> 
+ </array> 
+</java> 
