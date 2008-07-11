@@ -64,7 +64,7 @@ public class EditSurvey {
 
 	public static int expand, validee, loaded;
 
-	public static Combo comboConfid, comboDataCentres, comboCountries;
+	public static Combo comboConfid, comboDataCentres, comboCountries, comboNavire;
 
 	public static List listeType;
 
@@ -166,21 +166,28 @@ public class EditSurvey {
 		// initialisation liste des sections de la partie description fichier
 
 		// section référence
-		listeText.add(textCampagne);
-		listeNoms.add(Messages.getString("EditSurvey.10")); //$NON-NLS-1$
-		listeText.add(textNom);
-		listeNoms.add(Messages.getString("EditSurvey.11")); //$NON-NLS-1$
-		listeText.add(textCodeNavire);
-		listeNoms.add(Messages.getString("EditSurvey.12")); //$NON-NLS-1$
-		listeText.add(textNomNavire);
-		listeNoms.add(Messages.getString("EditSurvey.13")); //$NON-NLS-1$
-
 		Drawing
-				.sectionNlabelsNtext(
-						sectionReference,
-						Messages.getString("EditSurvey.14"), listeText, listeNoms, Messages.getString("EditSurvey.15"), false); //$NON-NLS-1$ //$NON-NLS-2$
-		listeText.clear();
-		listeNoms.clear();
+		.sectionReferenceCampagne(
+				sectionReference, Messages.getString("EditSurvey.14"), Messages.getString("EditSurvey.15"),
+				textCampagne, Messages.getString("EditSurvey.10"),
+				textNom, Messages.getString("EditSurvey.11"),
+				comboNavire, Messages.getString("EditSurvey.ship"));
+		
+//		listeText.add(textCampagne);
+//		listeNoms.add(Messages.getString("EditSurvey.10")); //$NON-NLS-1$
+//		listeText.add(textNom);
+//		listeNoms.add(Messages.getString("EditSurvey.11")); //$NON-NLS-1$
+//		listeText.add(textCodeNavire);
+//		listeNoms.add(Messages.getString("EditSurvey.12")); //$NON-NLS-1$
+//		listeText.add(textNomNavire);
+//		listeNoms.add(Messages.getString("EditSurvey.13")); //$NON-NLS-1$
+//
+//		Drawing
+//				.sectionNlabelsNtext(
+//						sectionReference,
+//						Messages.getString("EditSurvey.14"), listeText, listeNoms, Messages.getString("EditSurvey.15"), false); //$NON-NLS-1$ //$NON-NLS-2$
+//		listeText.clear();
+//		listeNoms.clear();
 
 		// section localisation
 		listeText.add(textDateDebut);
@@ -966,6 +973,7 @@ public class EditSurvey {
 		listeTextSurvey.add(textCodeNavire);
 		textNomNavire = new Text(shell, SWT.BORDER);
 		listeTextSurvey.add(textNomNavire);
+		comboNavire = new Combo(shell, SWT.NONE);
 		textDateDebut = new Text(shell, SWT.BORDER);
 		listeTextSurvey.add(textDateDebut);
 		textDateFin = new Text(shell, SWT.BORDER);

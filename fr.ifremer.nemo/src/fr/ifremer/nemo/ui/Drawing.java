@@ -1021,6 +1021,62 @@ public class Drawing {
 		//System.out.println("ajout section ok");
 
 	}
+	
+	public static void sectionReferenceCampagne(
+			Section section, String nomSection, String descSection,
+			Text txtRefCampagne, String strRefCampagne,
+			Text txtNomCampagne, String strNomCampagne,
+			Combo cmbNavire, String strNavire) {
+		
+		section.setParent(ViewEdit.formEdition);
+		section = ViewEdit.toolkitEdition.createSection(ViewEdit.formEdition
+				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
+				| Section.TWISTIE | Section.COMPACT);
+
+		section.addExpansionListener(new ExpansionAdapter() {
+			public void expansionStateChanged(ExpansionEvent e) {
+				ViewEdit.formEdition.reflow(true);
+			}
+		});
+		section.setText(nomSection);
+		Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL);
+		section.setFont(font);
+		section.setDescription(descSection);
+		Composite sectionClient = ViewEdit.toolkitEdition
+				.createComposite(section);
+		sectionClient.setLayout(new GridLayout());
+		GridData gd = new GridData();
+		gd.horizontalSpan = 2;
+		
+		// Reference campagne
+		Label lblRefCampagne = new Label(sectionClient, SWT.NULL);
+		lblRefCampagne.setText(strRefCampagne);
+
+		txtRefCampagne.setParent(sectionClient);
+		txtRefCampagne.setLayoutData(
+				new GridData(GridData.FILL_HORIZONTAL));
+		
+		// Nom campagne
+		Label lblNomCampagne = new Label(sectionClient, SWT.NULL);
+		lblNomCampagne.setText(strRefCampagne);
+
+		txtNomCampagne.setParent(sectionClient);
+		txtNomCampagne.setLayoutData(
+				new GridData(GridData.FILL_HORIZONTAL));
+		
+		// Navire
+		Label lblNavire = new Label(sectionClient, SWT.NULL);
+		lblNavire.setText(strNavire);
+		
+		cmbNavire.setParent(sectionClient);
+		cmbNavire.setLayoutData(
+				new GridData(GridData.FILL_HORIZONTAL));
+		
+		section.setClient(sectionClient);
+		// ajout de la section dans la liste des sections de description
+		ajoutSectionDansListeSurvey(section);
+		ViewEdit.formEdition.reflow(true);
+	}
 
 	public static void sectionNlabelsNtext(Section section, String nomSection,
 			ArrayList<Text> listeText, ArrayList<String> listeNoms,
