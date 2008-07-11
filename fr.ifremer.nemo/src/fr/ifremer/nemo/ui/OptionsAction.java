@@ -30,6 +30,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
+import org.eclipse.ui.actions.LabelRetargetAction;
 
 import fr.ifremer.nemo.config.EdmoHandler;
 import fr.ifremer.nemo.config.NemoLists;
@@ -52,15 +53,15 @@ public class OptionsAction extends Action implements ISelectionListener,
 				comboIdEdmoDistDonnees = null;
 
 	public static Button buttonCancel, buttonValider, buttonParcourirModele,
-			buttonParcourirCampagne = null;
+			buttonParcourirCampagne, buttonArboMapping = null;
 
 	public static Label labelNemo, labelNautilus, labelModèle, labelCampagne,
 			labelIdEdmoRespCdi, labelUrlCdi, labelMethodeCdi,
 			labelCodeEdmoDonnees, labelIdEdmoRespDonnees, labelIdEdmoDistDonnees,
-			labelWSVocab = null;
+			labelWSVocab, labelFichierMapping, labelArboMapping = null;
 
 	public static Text textAreaNemo, textAreaNautilus, textDossierModele, textDossierCampagne, 
-			textUrlCdi, textVocabURL = null;
+			textUrlCdi, textVocabURL, textFichierMapping, textArboMapping = null;
 	
 	public final static String ID = "fr.ifremer.nemo.ui.OptionsAction"; //$NON-NLS-1$
 
@@ -177,6 +178,9 @@ public class OptionsAction extends Action implements ISelectionListener,
 		
 		textUrlCdi.setText(Utils.configuration.getCdiURL());
 		
+		textFichierMapping.setText(Utils.configuration.getFichierMapping());
+		textArboMapping.setText(Utils.configuration.getArboMapping());
+		
 		// Libelles rouges si parametres manquants
 		if (comboIdEdmoRespCdi.getText().equals("")) {
 			labelIdEdmoRespCdi.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
@@ -192,6 +196,9 @@ public class OptionsAction extends Action implements ISelectionListener,
 		}
 		if (textUrlCdi.getText().equals("")) {
 			labelUrlCdi.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
+		}
+		if (textFichierMapping.getText().equals("")) {
+			labelFichierMapping.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
 		}
 		
 //		 FAE 58 CDL 09/04/08
@@ -481,7 +488,6 @@ public class OptionsAction extends Action implements ISelectionListener,
 	private void createGroupCDI() {
 		groupCDI = new Group(top, SWT.NONE);
 		groupCDI.setText("CDI");
-
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(groupCDI);
 		GridDataFactory.fillDefaults().grab(true,false).applyTo(groupCDI);
 		
@@ -526,12 +532,47 @@ public class OptionsAction extends Action implements ISelectionListener,
 		
 		comboMethodeCdi = new Combo(groupCDI, SWT.BORDER | SWT.READ_ONLY);
 		GridDataFactory.fillDefaults().grab(true,false).applyTo(comboMethodeCdi);
-		
+				
 		// Menu recherche combos
 		createMenu(comboIdEdmoRespCdi);
 		createMenu(comboCodeEdmoDonnees);
 		createMenu(comboIdEdmoRespDonnees);
 		createMenu(comboIdEdmoDistDonnees);
+		
+		// Mapping CDI
+		labelFichierMapping = new Label(groupCDI, SWT.NONE);
+		labelFichierMapping.setText(Messages.getString("OptionsAction.31"));
+		labelFichierMapping.pack();
+		
+		textFichierMapping = new Text(groupCDI, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textFichierMapping);
+		
+		labelArboMapping = new Label(groupCDI, SWT.NONE);
+		labelArboMapping.setText(Messages.getString("OptionsAction.32"));
+		labelArboMapping.pack();
+		
+		Composite compoRep = new Composite(groupCDI, SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoRep);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(compoRep);
+		
+		textArboMapping = new Text(compoRep, SWT.BORDER);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(textArboMapping);
+		
+		buttonArboMapping = new Button(compoRep, SWT.NONE);
+		buttonArboMapping.setText("...");
+		buttonArboMapping.pack();
+		
+		buttonArboMapping
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(
+							org.eclipse.swt.events.SelectionEvent e) {
+						DirectoryDialog dialog = new DirectoryDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), SWT.OPEN
+								| SWT.APPLICATION_MODAL);
+						dialog.setText(Messages.getString("OptionsAction.32")); //$NON-NLS-1$
+						dialog.setFilterPath(textArboMapping.getText());
+						textArboMapping.setText(dialog.open());
+					}
+				});
 	}
 	
 	private void createMenu(Combo combo) {
@@ -548,7 +589,6 @@ public class OptionsAction extends Action implements ISelectionListener,
 			public void handleEvent(Event e) {
 				comboRecherche = comb;
 				FiltrageTableType.go();
-				
 			}
 		});
 	}

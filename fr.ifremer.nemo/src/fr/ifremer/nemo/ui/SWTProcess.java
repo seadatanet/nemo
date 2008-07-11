@@ -17,6 +17,7 @@ import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.input.SurveyMedia;
 import fr.ifremer.nemo.medatlas.MedatlasSurveyWriter;
 import fr.ifremer.nemo.odv.ODVSurveyWriter;
+import fr.ifremer.nemo.output.CDIMappingWriter;
 import fr.ifremer.nemo.output.CDIResumeWriter;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.ProgressNotification;
@@ -42,7 +43,7 @@ public class SWTProcess implements IRunnableWithProgress {
 	public static MedatlasSurveyWriter writerMed;
 
 	public static Boolean odv, interrompu, monoStation;
-	
+
 	public static Station _station;
 
 	public static IProgressMonitor monitor2;
@@ -68,7 +69,7 @@ public class SWTProcess implements IRunnableWithProgress {
 				throw new InterruptedException(Messages
 						.getString("SWTProcess.5")
 						+ e.getMessage());
-			}	
+			}
 		} else {
 			try {
 				runCampagne(monitor);
@@ -92,13 +93,15 @@ public class SWTProcess implements IRunnableWithProgress {
 		}
 	}
 
-	private void runCampagne(IProgressMonitor monitor) throws NumberFormatException, ParseException, InterruptedException, GenerationException {
+	private void runCampagne(IProgressMonitor monitor)
+			throws NumberFormatException, ParseException, InterruptedException,
+			GenerationException {
 		monitor.beginTask(Messages.getString("SWTProcess.1"),
 				IProgressMonitor.UNKNOWN);
 		monitor2 = monitor;
 		interrompu = false;
 		SurveyMedia.interrompu = false;
-//		EditConversion.interrompu = false;
+		// EditConversion.interrompu = false;
 
 		// NOTIFIER
 		notifier = new ProgressNotification() {
@@ -125,11 +128,9 @@ public class SWTProcess implements IRunnableWithProgress {
 			notifier.progress(0);
 			monitor.setTaskName(Messages.getString("SWTProcess.3"));
 			survey = DataModel.inputModel.convert(notifier);
-		}
-		catch (InterruptedException e){
+		} catch (InterruptedException e) {
 			throw e;
-		}
-		catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e) {
 			//
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -138,11 +139,9 @@ public class SWTProcess implements IRunnableWithProgress {
 		} catch (ParseException e) {
 			e.printStackTrace();
 			throw e;
-		}
-	 catch (NumberFormatException e) {
-		throw e;
-	}
-	 catch (StringIndexOutOfBoundsException e) {
+		} catch (NumberFormatException e) {
+			throw e;
+		} catch (StringIndexOutOfBoundsException e) {
 			throw e;
 		}
 		writerODV = new fr.ifremer.nemo.odv.ODVSurveyWriter();
@@ -153,26 +152,54 @@ public class SWTProcess implements IRunnableWithProgress {
 			if (!monitor2.isCanceled()) {
 				if (!odv) {
 					// MEDATLAS
-					writerMed.writeSurvey(survey, new java.io.File(
-							EditConversion.nomFichierSortie), notifier);
+					File fichierSortie = new java.io.File(
+							EditConversion.nomFichierSortie);
+
+					writerMed.writeSurvey(survey, fichierSortie, notifier);
+
+					for (Station station : survey.getStations()) {
+						CDIMappingWriter.getInstance().addMapping(
+								EditConversion.getLocalCdiId(station),
+								fichierSortie.getName());
+					}
 				} else {
 					// ODV
 					if (monoStation) {
 						int i = 0;
 						int totalStations = survey.getStations().length;
-						
+
 						for (Station station : survey.getStations()) {
 							i++;
-							monitor.setTaskName(Messages.getString("SWTProcess.4") + " : " + i + " / " + totalStations);
+							monitor.setTaskName(Messages
+									.getString("SWTProcess.4")
+									+ " : " + i + " / " + totalStations);
 							setStation(station);
-							
-							EditConversion.nomFichierSortie = EditConversion.nomDossierSortie + "\\" + EditConversion.getLocalCdiId(station) + ".txt";
-							writerODV.writeSurvey(survey, new java.io.File(
-									EditConversion.nomFichierSortie), notifier);
+
+							EditConversion.nomFichierSortie = EditConversion.nomDossierSortie
+									+ "\\"
+									+ EditConversion.getLocalCdiId(station)
+									+ ".txt";
+							File fichierSortie = new java.io.File(
+									EditConversion.nomFichierSortie);
+
+							writerODV.writeSurvey(survey, fichierSortie,
+									notifier);
+
+							CDIMappingWriter.getInstance().addMapping(
+									EditConversion.getLocalCdiId(station),
+									fichierSortie.getName());
 						}
 					} else {
-						writerODV.writeSurvey(survey, new java.io.File(
-								EditConversion.nomFichierSortie), notifier);
+						File fichierSortie = new java.io.File(
+								EditConversion.nomFichierSortie);
+
+						writerODV.writeSurvey(survey, fichierSortie, notifier);
+
+						for (Station station : survey.getStations()) {
+							CDIMappingWriter.getInstance().addMapping(
+									EditConversion.getLocalCdiId(station),
+									fichierSortie.getName());
+						}
 					}
 				}
 			} else {
@@ -201,7 +228,8 @@ public class SWTProcess implements IRunnableWithProgress {
 		monitor.done();
 	}
 
-	private void runCollectionCas1 (IProgressMonitor monitor) throws NumberFormatException, ParseException, InterruptedException {
+	private void runCollectionCas1(IProgressMonitor monitor)
+			throws NumberFormatException, ParseException, InterruptedException {
 		monitor.beginTask(Messages.getString("SWTProcess.1"),
 				IProgressMonitor.UNKNOWN);
 		monitor2 = monitor;
@@ -210,7 +238,7 @@ public class SWTProcess implements IRunnableWithProgress {
 		// EditConversion.interrompu = false;
 
 		int numDossier = 0;
-		
+
 		String[] dossiers = new File(ViewFile.nomRepertoire).list();
 
 		for (String dossier : dossiers) {
@@ -242,7 +270,9 @@ public class SWTProcess implements IRunnableWithProgress {
 
 			try {
 				notifier.progress(0);
-				monitor.setTaskName(Messages.getString("SWTProcess.3") + " : " + dossier + " ( " + numDossier + " / " + dossiers.length + " ) ");
+				monitor.setTaskName(Messages.getString("SWTProcess.3") + " : "
+						+ dossier + " ( " + numDossier + " / "
+						+ dossiers.length + " ) ");
 				survey = DataModel.inputModel.convert(notifier);
 
 				survey.setName(dossier);
@@ -250,8 +280,7 @@ public class SWTProcess implements IRunnableWithProgress {
 			} catch (InterruptedException e) {
 				//
 				throw e;
-			} 
-			catch (FileNotFoundException e) {
+			} catch (FileNotFoundException e) {
 				//
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -270,30 +299,51 @@ public class SWTProcess implements IRunnableWithProgress {
 					if (monoStation) {
 						int i = 0;
 						int totalStations = survey.getStations().length;
-						
+
 						for (Station station : survey.getStations()) {
 							i++;
-							monitor.setTaskName(Messages.getString("SWTProcess.4") + " : " + i + " / " + totalStations);
+							monitor.setTaskName(Messages
+									.getString("SWTProcess.4")
+									+ " : " + i + " / " + totalStations);
 							setStation(station);
-							
-							EditConversion.nomFichierSortie = EditConversion.nomDossierSortie + "\\" + EditConversion.getLocalCdiId(station) + ".txt";
-							
+
+							EditConversion.nomFichierSortie = EditConversion.nomDossierSortie
+									+ "\\"
+									+ EditConversion.getLocalCdiId(station)
+									+ ".txt";
+
 							File fichierSortie = new java.io.File(
 									EditConversion.nomFichierSortie);
-							writerODV.writeSurvey(survey, fichierSortie, notifier);
-							survey.setDataSize(fichierSortie.length()/1024f/1024f);
+							writerODV.writeSurvey(survey, fichierSortie,
+									notifier);
+							survey
+									.setDataSize(fichierSortie.length() / 1024f / 1024f);
+
+							CDIMappingWriter.getInstance().addMapping(
+									EditConversion.getLocalCdiId(station),
+									fichierSortie.getName());
 						}
 					} else {
+						EditConversion.nomFichierSortie = EditConversion.nomDossierSortie
+								+ "/" + dossier + ".txt";
 						File fichierSortie = new java.io.File(
-								EditConversion.nomDossierSortie + "/" + dossier
-								+ ".txt");
-						monitor2.setTaskName(Messages.getString("SWTProcess.4") + " : " + dossier + ".txt" + " ( " + numDossier + " / " + dossiers.length + " ) ");
-						
+								EditConversion.nomFichierSortie);
+						monitor2.setTaskName(Messages.getString("SWTProcess.4")
+								+ " : " + dossier + ".txt" + " ( " + numDossier
+								+ " / " + dossiers.length + " ) ");
+
 						writerODV.writeSurvey(survey, fichierSortie, notifier);
 
-						survey.setDataSize(fichierSortie.length()/1024f/1024f);
+						survey
+								.setDataSize(fichierSortie.length() / 1024f / 1024f);
+
+						for (Station station : survey.getStations()) {
+							CDIMappingWriter.getInstance().addMapping(
+									EditConversion.getLocalCdiId(station),
+									fichierSortie.getName());
+						}
 					}
-					
+
 					if (ViewFile.writeResume) {
 						CDIResumeWriter.getInstance().addSurvey(survey);
 					}
@@ -323,14 +373,15 @@ public class SWTProcess implements IRunnableWithProgress {
 
 	}
 
-	private void runCollectionCasN (IProgressMonitor monitor) throws NumberFormatException, ParseException, InterruptedException{
+	private void runCollectionCasN(IProgressMonitor monitor)
+			throws NumberFormatException, ParseException, InterruptedException {
 		monitor.beginTask(Messages.getString("SWTProcess.1"),
 				IProgressMonitor.UNKNOWN);
 		monitor2 = monitor;
 		interrompu = false;
 		SurveyMedia.interrompu = false;
-//		EditConversion.interrompu = false;
-		
+		// EditConversion.interrompu = false;
+
 		int numFichier = 0;
 
 		String[] fichiers = new File(ViewFile.nomRepertoire).list();
@@ -338,7 +389,7 @@ public class SWTProcess implements IRunnableWithProgress {
 		for (String fichier : fichiers) {
 			DataModel.singleSurvey.setFile(ViewFile.nomRepertoire + "/"
 					+ fichier);
-			
+
 			numFichier++;
 
 			// NOTIFIER
@@ -352,7 +403,6 @@ public class SWTProcess implements IRunnableWithProgress {
 										+ val + "%");
 								if (monitor2.isCanceled()) {
 									SurveyMedia.interrompu = true;
-
 								}
 							}
 						});
@@ -365,16 +415,16 @@ public class SWTProcess implements IRunnableWithProgress {
 
 			try {
 				notifier.progress(0);
-				monitor.setTaskName(Messages.getString("SWTProcess.3") + " : " + fichier + " ( " + numFichier + " / " + fichiers.length + " ) ");
+				monitor.setTaskName(Messages.getString("SWTProcess.3") + " : "
+						+ fichier + " ( " + numFichier + " / "
+						+ fichiers.length + " ) ");
 				survey = DataModel.inputModel.convert(notifier);
 
 				survey.setName("UNKNOWN");
 
-			}catch (InterruptedException e)
-			{
+			} catch (InterruptedException e) {
 				throw e;
-			}
-			catch (FileNotFoundException e) {
+			} catch (FileNotFoundException e) {
 				//
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -394,34 +444,54 @@ public class SWTProcess implements IRunnableWithProgress {
 					if (monoStation) {
 						int i = 0;
 						int totalStations = survey.getStations().length;
-						
+
 						for (Station station : survey.getStations()) {
 							i++;
-							monitor.setTaskName(Messages.getString("SWTProcess.4") + " : " + i + " / " + totalStations);
+							monitor.setTaskName(Messages
+									.getString("SWTProcess.4")
+									+ " : " + i + " / " + totalStations);
 							setStation(station);
-							
-							EditConversion.nomFichierSortie = EditConversion.nomDossierSortie + "\\" + EditConversion.getLocalCdiId(station) + ".txt";
-							
+
+							EditConversion.nomFichierSortie = EditConversion.nomDossierSortie
+									+ "\\"
+									+ EditConversion.getLocalCdiId(station)
+									+ ".txt";
+
 							File fichierSortie = new java.io.File(
 									EditConversion.nomFichierSortie);
-							writerODV.writeSurvey(survey, fichierSortie, notifier);
-							survey.setDataSize(fichierSortie.length()/1024f/1024f);
+							writerODV.writeSurvey(survey, fichierSortie,
+									notifier);
+							survey
+									.setDataSize(fichierSortie.length() / 1024f / 1024f);
+
+							CDIMappingWriter.getInstance().addMapping(
+									EditConversion.getLocalCdiId(station),
+									fichierSortie.getName());
 						}
 					} else {
-						File fichierSortie = new java.io.File(
-								EditConversion.nomDossierSortie
+						EditConversion.nomFichierSortie = EditConversion.nomDossierSortie
 								+ "/"
-								+ fichier.substring(0, fichier
-										.lastIndexOf('.')) + ".txt");
+								+ fichier
+										.substring(0, fichier.lastIndexOf('.'))
+								+ ".txt";
+						File fichierSortie = new java.io.File(nomFichierSortie);
 
-						monitor2.setTaskName(Messages.getString("SWTProcess.4") + " : " + fichier + ".txt" + " ( " + numFichier + " / " + fichiers.length + " ) ");
-						
-						writerODV.writeSurvey(survey, fichierSortie,
-								notifier);
-						
-						survey.setDataSize(fichierSortie.length() / 1024f / 1024f);
+						monitor2.setTaskName(Messages.getString("SWTProcess.4")
+								+ " : " + fichier + ".txt" + " ( " + numFichier
+								+ " / " + fichiers.length + " ) ");
+
+						writerODV.writeSurvey(survey, fichierSortie, notifier);
+
+						survey
+								.setDataSize(fichierSortie.length() / 1024f / 1024f);
+
+						for (Station station : survey.getStations()) {
+							CDIMappingWriter.getInstance().addMapping(
+									EditConversion.getLocalCdiId(station),
+									fichierSortie.getName());
+						}
 					}
-					
+
 					if (ViewFile.writeResume) {
 						CDIResumeWriter.getInstance().addSurvey(survey);
 					}

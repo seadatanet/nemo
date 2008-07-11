@@ -1262,6 +1262,8 @@ public class Utils {
 		configuration.setIdEdmoDistDonnees(Utils.extraitCode(OptionsAction.comboIdEdmoDistDonnees.getText()));
 		configuration.setCdiURL(OptionsAction.textUrlCdi.getText());
 		configuration.setCdiMethod(Utils.extraitCode(OptionsAction.comboMethodeCdi.getText()));
+		configuration.setFichierMapping(OptionsAction.textFichierMapping.getText());
+		configuration.setArboMapping(OptionsAction.textArboMapping.getText());
 		
 		// Enregistrement de la configuration
 		configuration.save();
@@ -1459,7 +1461,7 @@ public class Utils {
 		if (valeur.indexOf(" ") > -1) {
 			return valeur.substring(0,valeur.indexOf(" "));
 		} else {
-			return "";
+			return valeur;
 		}
 	}
 	
@@ -1467,7 +1469,7 @@ public class Utils {
 		if (valeur.lastIndexOf('/') > -1) {
 			return valeur.substring(valeur.lastIndexOf('/') + 1);
 		} else {
-			return "";
+			return valeur;
 		}
 		
 	}
@@ -1476,7 +1478,15 @@ public class Utils {
 		if (chemin.lastIndexOf('\\') > -1) {
 			return chemin.substring(chemin.lastIndexOf('\\')+1);
 		} else {
-			return "";
+			return chemin;
+		}
+	}
+	
+	public static String extraitCheminFichier(String chemin) {
+		if (chemin.lastIndexOf('\\') > -1) {
+			return chemin.substring(0, chemin.lastIndexOf('\\'));
+		} else {
+			return chemin;
 		}
 	}
 	

@@ -2,7 +2,6 @@ package fr.ifremer.nemo.ui;
 
 import java.util.ArrayList;
 import java.util.TreeMap;
-import java.util.TreeSet;
 import java.util.Map.Entry;
 
 import org.eclipse.jface.layout.GridDataFactory;

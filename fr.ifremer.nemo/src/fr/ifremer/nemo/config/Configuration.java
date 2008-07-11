@@ -99,6 +99,8 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		_locale = null;
 		_vocabURL = "";
 		_predicate = 255;
+		_fichierMapping = "";
+		_arboMapping = "";
 		
 		_vocabLists = new HashMap<String, String>();
 		_vocabLists.put("C77", "");
@@ -234,6 +236,14 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			Element2Field setter = new Element2Field(this, "setCdiMethod");
 			return setter;
 		}
+		if (a_LocalName.equals("fichierMapping")) {
+			Element2Field setter = new Element2Field(this, "setFichierMapping");
+			return setter;
+		}
+		if (a_LocalName.equals("arboMapping")) {
+			Element2Field setter = new Element2Field(this, "setArboMapping");
+			return setter;
+		}
 		if (a_LocalName.equals("vocabURL")) {
 			Element2Field setter = new Element2Field(this, "setVocabURL");
 			return setter;
@@ -286,6 +296,8 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		a_Writer.putTag("idEdmoDistDonnees", getIdEdmoDistDonnees());
 		a_Writer.putTag("cdiURL", getCdiURL());
 		a_Writer.putTag("cdiMethod", getCdiMethod());
+		a_Writer.putTag("fichierMapping", getFichierMapping());
+		a_Writer.putTag("arboMapping", getArboMapping());
 		a_Writer.putTag("vocabURL", getVocabURL());
 		Iterator<String> keys = getVocabLists().keySet().iterator();
 		while (keys.hasNext()) {
@@ -836,6 +848,10 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 
 	public String getFichierMapping() {
 		return _fichierMapping;
+	}
+	
+	public String getFichierMappingTxt() {
+		return _fichierMapping + ".txt";
 	}
 
 	public void setFichierMapping(String mapping) {

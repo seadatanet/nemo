@@ -16,6 +16,7 @@ import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
+import fr.ifremer.nemo.output.CDIMappingWriter;
 import fr.ifremer.nemo.output.ProgressNotification;
 import fr.ifremer.nemo.ui.EditConversion;
 import fr.ifremer.nemo.ui.Utils;
@@ -417,7 +418,6 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 						throw new IOException("");
 					}
 					survey.addStation(station);
-
 				}
 
 			}

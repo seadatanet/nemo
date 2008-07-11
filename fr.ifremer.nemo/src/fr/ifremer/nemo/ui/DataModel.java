@@ -421,8 +421,7 @@ public class DataModel {
 
 		}
 		// création d'un nouveau Datatype avec les infos récupérées au dessus.
-
-		dataType.setCode(code);
+		dataType.setCode(Utils.extraitCode(code));
 
 		// FAE 022
 		if (!ViewFile.isCollection()) {
