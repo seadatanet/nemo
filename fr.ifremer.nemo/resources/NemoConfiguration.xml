@@ -16,16 +16,17 @@
   <fichierMapping>SDN_CDI_mapping_table</fichierMapping>
   <arboMapping>C:\Documents and Settings\htaniou.ATL\Bureau\Nouveau dossier</arboMapping>
   <vocabURL>http://vocab.ndg.nerc.ac.uk/1.1/VocabServerAPI_dl.wsdl</vocabURL>
-  <VocabListURL name="L071" value="http://vocab.ndg.nerc.ac.uk/list/L071/current"/>
-  <VocabListURL name="L021" value="http://vocab.ndg.nerc.ac.uk/list/L021/current"/>
-  <VocabListURL name="L031" value="http://vocab.ndg.nerc.ac.uk/list/L031/current"/>
-  <VocabListURL name="L081" value="http://vocab.ndg.nerc.ac.uk/list/L081/current"/>
   <VocabListURL name="P091" value="http://vocab.ndg.nerc.ac.uk/list/P091/current"/>
-  <VocabListURL name="P021" value="http://vocab.ndg.nerc.ac.uk/list/P021/current"/>
-  <VocabListURL name="C180" value="http://vocab.ndg.nerc.ac.uk/list/C180/current"/>
   <VocabListURL name="L300" value="http://vocab.ndg.nerc.ac.uk/list/L300/current"/>
-  <VocabListURL name="L05" value="http://vocab.ndg.nerc.ac.uk/list/L05/current"/>
   <VocabListURL name="C77" value="http://vocab.ndg.nerc.ac.uk/list/C77/current"/>
   <VocabListURL name="L061" value="http://vocab.ndg.nerc.ac.uk/list/L061/current"/>
+  <VocabListURL name="L021" value="http://vocab.ndg.nerc.ac.uk/list/L021/current"/>
+  <VocabListURL name="L071" value="http://vocab.ndg.nerc.ac.uk/list/L071/current"/>
+  <VocabListURL name="L031" value="http://vocab.ndg.nerc.ac.uk/list/L031/current"/>
+  <VocabListURL name="L081" value="http://vocab.ndg.nerc.ac.uk/list/L081/current"/>
+  <VocabListURL name="C180" value="http://vocab.ndg.nerc.ac.uk/list/C180/current"/>
+  <VocabListURL name="P021" value="http://vocab.ndg.nerc.ac.uk/list/P021/current"/>
+  <VocabListURL name="L05" value="http://vocab.ndg.nerc.ac.uk/list/L05/current"/>
+  <VocabListURL name="C174" value="http://vocab.ndg.nerc.ac.uk/list/C174/current"/>
   <VocabListURL name="L051" value="http://vocab.ndg.nerc.ac.uk/list/L051/current"/>
 </NemoConfiguration>

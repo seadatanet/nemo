@@ -15,6 +15,10 @@ import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Text;
 
@@ -1457,6 +1461,28 @@ public class Utils {
 		}
 	}
 	
+	public static void selectComboCodePlus(Combo combo, String code, String valeur) {
+		int i = 0;
+		int length = code.length();
+		int size = combo.getItemCount();
+		
+		if (code.equals("")) {
+			combo.select(-1);
+		} else {
+			combo.select(i);
+			
+			while (i < size && !combo.getText().substring(0,Math.min(combo.getText().length(),length)).equals(code)) {
+				i++;
+				combo.select(i);
+			}
+			
+			if (!combo.getText().substring(0,Math.min(combo.getText().length(),length)).equals(code)) {
+				combo.add(code + " - " + valeur);
+				combo.select(combo.getItemCount() - 1 );
+			}
+		}
+	}
+	
 	public static String extraitCode(String valeur) {
 		if (valeur.indexOf(" ") > -1) {
 			return valeur.substring(0,valeur.indexOf(" "));
@@ -1472,6 +1498,14 @@ public class Utils {
 			return valeur;
 		}
 		
+	}
+	
+	public static String extraitValeur(String valeur) {
+		if (valeur.indexOf(" - ") > -1) {
+			return valeur.substring(valeur.indexOf(" - ") + 3);
+		} else {
+			return "";
+		}
 	}
 	
 	public static String extraitFichierChemin(String chemin) {
@@ -1507,5 +1541,24 @@ public class Utils {
 		value = value.replace('>', newChar);
 		value = value.replace('|', newChar);
 		return value;
+	}
+	
+	public static void createSearchMenu(Combo combo, String table) {
+		Menu menu = new Menu(combo.getShell(), SWT.POP_UP);
+		
+		MenuItem itemSearch = new MenuItem(menu, SWT.NONE);
+		itemSearch.setText(Messages.getString("OptionsAction.27")); //$NON-NLS-1$
+		
+		combo.setMenu(menu);
+		
+		final Combo comb = combo;
+		final String tab = table;
+		
+		itemSearch.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
+				FiltrageTableType.comboRecherche = comb;
+				FiltrageTableType.go(tab);
+			}
+		});
 	}
 }

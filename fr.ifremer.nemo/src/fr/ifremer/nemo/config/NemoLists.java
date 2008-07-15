@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -14,6 +15,7 @@ import javax.xml.rpc.ServiceException;
 import javax.xml.rpc.holders.BooleanHolder;
 
 import org.apache.axis.client.Service;
+import org.eclipse.swt.widgets.Table;
 
 import fr.ifremer.nemo.domain.Parameter;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webservice;
@@ -43,12 +45,6 @@ import fr.ifremer.nemo.wsVocab.vocab_pkg.VocabSoapBindingStub;
 public class NemoLists implements Cloneable {
 	static protected java.util.List<WSDataType> _dataTypes = new java.util.ArrayList<WSDataType>();
 
-	static protected java.util.List<WSCountry> _countries = new java.util.ArrayList<WSCountry>();
-
-	static protected java.util.List<WSShip> _ships = new java.util.ArrayList<WSShip>();
-
-	static protected java.util.List<WSDataCentre> _dataCentres = new java.util.ArrayList<WSDataCentre>();
-
 	static protected java.util.List<WSParameter> _parameters = new java.util.ArrayList<WSParameter>();
 
 	static protected java.util.List<WSRegion> _regions = new java.util.ArrayList<WSRegion>();
@@ -57,11 +53,11 @@ public class NemoLists implements Cloneable {
 	
 	static protected java.util.HashMap<Integer, String> _edmo = new java.util.HashMap<Integer, String>();
 	
-	public static Boolean okCountries, okShips, okSurveys, okDataCentres,
-			okParameters, okRegions, okDataTypes, okVocabLists, okEdmo;
+	public static Boolean okSurveys, okParameters, okRegions, 
+			okDataTypes, okVocabLists, okEdmo;
 	
-	public static int nbCountries, nbShips, nbSurveys, nbDataCentres,
-			nbParameters, nbRegions, nbDataTypes, nbVocabLists, nbEdmo;
+	public static int nbSurveys, nbParameters, nbRegions, 
+			nbDataTypes, nbVocabLists, nbEdmo;
 	
 	static protected HashMap<String, CodeTableRecordType[]> _vocabList = new HashMap<String, CodeTableRecordType[]>();
 	
@@ -70,6 +66,12 @@ public class NemoLists implements Cloneable {
 	static protected HashMap<String, CodeTableRecordType[]> _vocabMap = new HashMap<String, CodeTableRecordType[]>();
 	
 	static protected String _sdnParameters;
+	
+	public static Table filtreTable;
+	
+	public static ArrayList<String> listeNavire, listeCentreDonnees;
+	
+	public static ArrayList<String> listeFiltree;
 	
 	static {
 		initLists();
@@ -285,598 +287,7 @@ public class NemoLists implements Cloneable {
 		return _dataTypes.iterator();
 
 	}
-
-	/**
-	 * release all links for role "countries"
-	 */
-	public static void releaseCountries() {
-		for (WSCountry t : getCountries()) {
-			removeCountry(t);
-		}
-	}
-
-	/**
-	 * remove link with x for role "countries"
-	 * 
-	 * @param x
-	 *            the linked object to unlink
-	 */
-	public static void removeCountry(WSCountry x) {
-		if (!countriesIncludes(x))
-			return;
-		nocheckRemoveCountry(x);
-	}
-
-	/**
-	 * Add a link for role "countries"
-	 * 
-	 * @param x
-	 *            the object to link with
-	 */
-	public static void addCountry(WSCountry x) {
-		if (countriesIncludes(x))
-			return;
-		nocheckAddCountry(x);
-	}
-
-	/**
-	 * Returns the collection of linked objects for role "countries"
-	 * 
-	 * @return Array of linked objects
-	 */
-	public static WSCountry[] getCountries() {
-		WSCountry[] v = new WSCountry[_countries.size()];
-		_countries.toArray(v);
-		return v;
-	}
-
-	/**
-	 * Returns linked object for role "countries" at index i
-	 * 
-	 * @param i
-	 *            the index of the linked object
-	 * @return linked object at index i
-	 */
-	public static WSCountry countriesAt(int i) {
-		return (WSCountry) _countries.get(i);
-	}
-
-	/**
-	 * returns index of object x in "countries"
-	 * 
-	 * @param x
-	 *            the linked object
-	 */
-	public static int countriesIndexOf(WSCountry x) {
-		if (!countriesIncludes(x))
-			return -1;
-		for (int i = 0; i < countriesSize(); i++) {
-			if (countriesAt(i) == x) {
-				return i;
-			}
-		}
-		return -1;
-	}
-
-	/**
-	 * move x one index before in the list for role "countries"
-	 * 
-	 * @param x
-	 *            the object to move
-	 */
-	public static void countriesMoveUp(WSCountry x) {
-		int index;
-		index = countriesIndexOf(x);
-		if (index < 1)
-			return;
-		nocheckMoveCountryAt(x, index - 1);
-	}
-
-	/**
-	 * move x to the top of list for role "countries"
-	 * 
-	 * @param x
-	 *            the object to move
-	 */
-	public static void countriesMoveTop(WSCountry x) {
-		int index;
-		index = countriesIndexOf(x);
-		if (index < 1)
-			return;
-		nocheckMoveCountryAt(x, 0);
-	}
-
-	/**
-	 * move x one index more in the list for role "countries"
-	 * 
-	 * @param x
-	 *            the object to move
-	 */
-	public static void countriesMoveDown(WSCountry x) {
-		int index;
-		index = countriesIndexOf(x);
-		if (index < 0 || index > countriesSize() - 2)
-			return;
-		nocheckMoveCountryAt(x, index + 1);
-	}
-
-	/**
-	 * move x to the bottom of list for role "countries"
-	 * 
-	 * @param x
-	 *            the object to move
-	 */
-	public static void countriesMoveBottom(WSCountry x) {
-		int index;
-		index = countriesIndexOf(x);
-		if (index < 0 || index > countriesSize() - 2)
-			return;
-		nocheckMoveCountryAt(x, countriesSize() - 1);
-	}
-
-	/**
-	 * move x one index more in the list for role "countries"
-	 * 
-	 * @param x
-	 *            the object to move
-	 */
-	public static void nocheckMoveCountryAt(WSCountry x, int a_Index) {
-		int index;
-		WSCountry tmp;
-		index = countriesIndexOf(x);
-		tmp = _countries.get(index);
-		_countries.remove(index);
-		_countries.add(a_Index, tmp);
-	}
-
-	/**
-	 * remove x from the linked objects for role "countries"
-	 * 
-	 * DO NOT USE. use non privileged method instead
-	 * 
-	 * @param x
-	 *            the object to link with
-	 * @see NemoLists#removeCountry(WSCountry)
-	 */
-	protected static void nocheckRemoveCountry(WSCountry x) {
-		_countries.remove(x);
-	}
-
-	/**
-	 * adds x to the linked objects for role "countries"
-	 * 
-	 * DO NOT USE. use non privileged method instead
-	 * 
-	 * @param x
-	 *            the object to link with
-	 * @see NemoLists#addCountry(WSCountry)
-	 */
-	protected static void nocheckAddCountry(WSCountry x) {
-		_countries.add(x);
-	}
-
-	/**
-	 * returns the number of linked objects for role "countries"
-	 * 
-	 * @return the number of linked objects
-	 */
-	public static int countriesSize() {
-		return _countries.size();
-	}
-
-	/**
-	 * returns true if x is linked to the receiver for role "countries"
-	 * 
-	 * @param x
-	 *            an instance of WSCountry
-	 */
-	public static boolean countriesIncludes(WSCountry x) {
-		return _countries.contains(x);
-	}
-
-	/**
-	 * returns an Iterator to iterate over the elements of "countries"
-	 * 
-	 */
-	public static java.util.Iterator<WSCountry> countriesIterator() {
-		return _countries.iterator();
-
-	}
-
-	/**
-	 * release all links for role "ships"
-	 */
-	public static void releaseShips() {
-		for (WSShip t : getShips()) {
-			removeShip(t);
-		}
-	}
-
-	/**
-	 * remove link with x for role "ships"
-	 * 
-	 * @param x
-	 *            the linked object to unlink
-	 */
-	public static void removeShip(WSShip x) {
-		if (!shipsIncludes(x))
-			return;
-		nocheckRemoveShip(x);
-	}
-
-	/**
-	 * Add a link for role "ships"
-	 * 
-	 * @param x
-	 *            the object to link with
-	 */
-	public static void addShip(WSShip x) {
-		if (shipsIncludes(x))
-			return;
-		nocheckAddShip(x);
-	}
-
-	/**
-	 * Returns the collection of linked objects for role "ships"
-	 * 
-	 * @return Array of linked objects
-	 */
-	public static WSShip[] getShips() {
-		WSShip[] v = new WSShip[_ships.size()];
-		_ships.toArray(v);
-		return v;
-	}
-
-	/**
-	 * Returns linked object for role "ships" at index i
-	 * 
-	 * @param i
-	 *            the index of the linked object
-	 * @return linked object at index i
-	 */
-	public static WSShip shipsAt(int i) {
-		return (WSShip) _ships.get(i);
-	}
-
-	/**
-	 * returns index of object x in "ships"
-	 * 
-	 * @param x
-	 *            the linked object
-	 */
-	public static int shipsIndexOf(WSShip x) {
-		if (!shipsIncludes(x))
-			return -1;
-		for (int i = 0; i < shipsSize(); i++) {
-			if (shipsAt(i) == x) {
-				return i;
-			}
-		}
-		return -1;
-	}
-
-	/**
-	 * move x one index before in the list for role "ships"
-	 * 
-	 * @param x
-	 *            the object to move
-	 */
-	public static void shipsMoveUp(WSShip x) {
-		int index;
-		index = shipsIndexOf(x);
-		if (index < 1)
-			return;
-		nocheckMoveShipAt(x, index - 1);
-	}
-
-	/**
-	 * move x to the top of list for role "ships"
-	 * 
-	 * @param x
-	 *            the object to move
-	 */
-	public static void shipsMoveTop(WSShip x) {
-		int index;
-		index = shipsIndexOf(x);
-		if (index < 1)
-			return;
-		nocheckMoveShipAt(x, 0);
-	}
-
-	/**
-	 * move x one index more in the list for role "ships"
-	 * 
-	 * @param x
-	 *            the object to move
-	 */
-	public static void shipsMoveDown(WSShip x) {
-		int index;
-		index = shipsIndexOf(x);
-		if (index < 0 || index > shipsSize() - 2)
-			return;
-		nocheckMoveShipAt(x, index + 1);
-	}
-
-	/**
-	 * move x to the bottom of list for role "ships"
-	 * 
-	 * @param x
-	 *            the object to move
-	 */
-	public static void shipsMoveBottom(WSShip x) {
-		int index;
-		index = shipsIndexOf(x);
-		if (index < 0 || index > shipsSize() - 2)
-			return;
-		nocheckMoveShipAt(x, shipsSize() - 1);
-	}
-
-	/**
-	 * move x one index more in the list for role "ships"
-	 * 
-	 * @param x
-	 *            the object to move
-	 */
-	public static void nocheckMoveShipAt(WSShip x, int a_Index) {
-		int index;
-		WSShip tmp;
-		index = shipsIndexOf(x);
-		tmp = _ships.get(index);
-		_ships.remove(index);
-		_ships.add(a_Index, tmp);
-	}
-
-	/**
-	 * remove x from the linked objects for role "ships"
-	 * 
-	 * DO NOT USE. use non privileged method instead
-	 * 
-	 * @param x
-	 *            the object to link with
-	 * @see NemoLists#removeShip(WSShip)
-	 */
-	protected static void nocheckRemoveShip(WSShip x) {
-		_ships.remove(x);
-	}
-
-	/**
-	 * adds x to the linked objects for role "ships"
-	 * 
-	 * DO NOT USE. use non privileged method instead
-	 * 
-	 * @param x
-	 *            the object to link with
-	 * @see NemoLists#addShip(WSShip)
-	 */
-	protected static void nocheckAddShip(WSShip x) {
-		_ships.add(x);
-	}
-
-	/**
-	 * returns the number of linked objects for role "ships"
-	 * 
-	 * @return the number of linked objects
-	 */
-	public static int shipsSize() {
-		return _ships.size();
-	}
-
-	/**
-	 * returns true if x is linked to the receiver for role "ships"
-	 * 
-	 * @param x
-	 *            an instance of WSShip
-	 */
-	public static boolean shipsIncludes(WSShip x) {
-		return _ships.contains(x);
-	}
-
-	/**
-	 * returns an Iterator to iterate over the elements of "ships"
-	 * 
-	 */
-	public static java.util.Iterator<WSShip> shipsIterator() {
-		return _ships.iterator();
-
-	}
-
-	/**
-	 * release all links for role "dataCentres"
-	 */
-	public static void releaseDataCentres() {
-		for (WSDataCentre t : getDataCentres()) {
-			removeDataCentre(t);
-		}
-	}
-
-	/**
-	 * remove link with x for role "dataCentres"
-	 * 
-	 * @param x
-	 *            the linked object to unlink
-	 */
-	public static void removeDataCentre(WSDataCentre x) {
-		if (!dataCentresIncludes(x))
-			return;
-		nocheckRemoveDataCentre(x);
-	}
-
-	/**
-	 * Add a link for role "dataCentres"
-	 * 
-	 * @param x
-	 *            the object to link with
-	 */
-	public static void addDataCentre(WSDataCentre x) {
-		if (dataCentresIncludes(x))
-			return;
-		nocheckAddDataCentre(x);
-	}
-
-	/**
-	 * Returns the collection of linked objects for role "dataCentres"
-	 * 
-	 * @return Array of linked objects
-	 */
-	public static WSDataCentre[] getDataCentres() {
-		WSDataCentre[] v = new WSDataCentre[_dataCentres.size()];
-		_dataCentres.toArray(v);
-		return v;
-	}
-
-	/**
-	 * Returns linked object for role "dataCentres" at index i
-	 * 
-	 * @param i
-	 *            the index of the linked object
-	 * @return linked object at index i
-	 */
-	public static WSDataCentre dataCentresAt(int i) {
-		return (WSDataCentre) _dataCentres.get(i);
-	}
-
-	/**
-	 * returns index of object x in "dataCentres"
-	 * 
-	 * @param x
-	 *            the linked object
-	 */
-	public static int dataCentresIndexOf(WSDataCentre x) {
-		if (!dataCentresIncludes(x))
-			return -1;
-		for (int i = 0; i < dataCentresSize(); i++) {
-			if (dataCentresAt(i) == x) {
-				return i;
-			}
-		}
-		return -1;
-	}
-
-	/**
-	 * move x one index before in the list for role "dataCentres"
-	 * 
-	 * @param x
-	 *            the object to move
-	 */
-	public static void dataCentresMoveUp(WSDataCentre x) {
-		int index;
-		index = dataCentresIndexOf(x);
-		if (index < 1)
-			return;
-		nocheckMoveDataCentreAt(x, index - 1);
-	}
-
-	/**
-	 * move x to the top of list for role "dataCentres"
-	 * 
-	 * @param x
-	 *            the object to move
-	 */
-	public static void dataCentresMoveTop(WSDataCentre x) {
-		int index;
-		index = dataCentresIndexOf(x);
-		if (index < 1)
-			return;
-		nocheckMoveDataCentreAt(x, 0);
-	}
-
-	/**
-	 * move x one index more in the list for role "dataCentres"
-	 * 
-	 * @param x
-	 *            the object to move
-	 */
-	public static void dataCentresMoveDown(WSDataCentre x) {
-		int index;
-		index = dataCentresIndexOf(x);
-		if (index < 0 || index > dataCentresSize() - 2)
-			return;
-		nocheckMoveDataCentreAt(x, index + 1);
-	}
-
-	/**
-	 * move x to the bottom of list for role "dataCentres"
-	 * 
-	 * @param x
-	 *            the object to move
-	 */
-	public static void dataCentresMoveBottom(WSDataCentre x) {
-		int index;
-		index = dataCentresIndexOf(x);
-		if (index < 0 || index > dataCentresSize() - 2)
-			return;
-		nocheckMoveDataCentreAt(x, dataCentresSize() - 1);
-	}
-
-	/**
-	 * move x one index more in the list for role "dataCentres"
-	 * 
-	 * @param x
-	 *            the object to move
-	 */
-	public static void nocheckMoveDataCentreAt(WSDataCentre x, int a_Index) {
-		int index;
-		WSDataCentre tmp;
-		index = dataCentresIndexOf(x);
-		tmp = _dataCentres.get(index);
-		_dataCentres.remove(index);
-		_dataCentres.add(a_Index, tmp);
-	}
-
-	/**
-	 * remove x from the linked objects for role "dataCentres"
-	 * 
-	 * DO NOT USE. use non privileged method instead
-	 * 
-	 * @param x
-	 *            the object to link with
-	 * @see NemoLists#removeDataCentre(WSDataCentre)
-	 */
-	protected static void nocheckRemoveDataCentre(WSDataCentre x) {
-		_dataCentres.remove(x);
-	}
-
-	/**
-	 * adds x to the linked objects for role "dataCentres"
-	 * 
-	 * DO NOT USE. use non privileged method instead
-	 * 
-	 * @param x
-	 *            the object to link with
-	 * @see NemoLists#addDataCentre(WSDataCentre)
-	 */
-	protected static void nocheckAddDataCentre(WSDataCentre x) {
-		_dataCentres.add(x);
-	}
-
-	/**
-	 * returns the number of linked objects for role "dataCentres"
-	 * 
-	 * @return the number of linked objects
-	 */
-	public static int dataCentresSize() {
-		return _dataCentres.size();
-	}
-
-	/**
-	 * returns true if x is linked to the receiver for role "dataCentres"
-	 * 
-	 * @param x
-	 *            an instance of WSDataCentre
-	 */
-	public static boolean dataCentresIncludes(WSDataCentre x) {
-		return _dataCentres.contains(x);
-	}
-
-	/**
-	 * returns an Iterator to iterate over the elements of "dataCentres"
-	 * 
-	 */
-	public static java.util.Iterator<WSDataCentre> dataCentresIterator() {
-		return _dataCentres.iterator();
-
-	}
-
+	
 	/**
 	 * release all links for role "parameters"
 	 */
@@ -1471,29 +882,6 @@ public class NemoLists implements Cloneable {
 	/**
 	 * 
 	 */
-	public static void initCountries() {
-		XMLDecoder decoder = null;
-		try {
-			decoder = new XMLDecoder(new FileInputStream(
-					"resources/Countries.xml"));
-			// decoder = new
-			// XMLDecoder(NemoLists.class.getResourceAsStream("/resources/Countries.xml"));
-			_countries = (java.util.List<WSCountry>) decoder.readObject();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (decoder != null) {
-				try {
-					decoder.close();
-				} catch (Exception ex) {
-				}
-			}
-		}
-	}
-
-	/**
-	 * 
-	 */
 	public static void initDataTypes() {
 		XMLDecoder decoder = null;
 		try {
@@ -1520,9 +908,6 @@ public class NemoLists implements Cloneable {
 	public static void initLists() {
 		initDataTypes();
 		initRegions();
-		initCountries();
-		initShips();
-		intDataCentres();
 		initParameters();
 		initSurveys();
 		initVocabLists();
@@ -1580,28 +965,6 @@ public class NemoLists implements Cloneable {
 	/**
 	 * 
 	 */
-	public static void initShips() {
-		XMLDecoder decoder = null;
-		try {
-			decoder = new XMLDecoder(new FileInputStream("resources/Ships.xml"));
-			// decoder = new
-			// XMLDecoder(NemoLists.class.getResourceAsStream("/resources/Ships.xml"));
-			_ships = (java.util.List<WSShip>) decoder.readObject();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (decoder != null) {
-				try {
-					decoder.close();
-				} catch (Exception ex) {
-				}
-			}
-		}
-	}
-
-	/**
-	 * 
-	 */
 	public static void initSurveys() {
 		XMLDecoder decoder = null;
 		try {
@@ -1625,140 +988,15 @@ public class NemoLists implements Cloneable {
 
 	/**
 	 * 
-	 */
-	public static void intDataCentres() {
-		XMLDecoder decoder = null;
-		try {
-			// decoder = new
-			// XMLDecoder(NemoLists.class.getResourceAsStream("/resources/DataCentres.xml"));
-			decoder = new XMLDecoder(new FileInputStream(
-					"resources/DataCentres.xml"));
-			_dataCentres = (java.util.List<WSDataCentre>) decoder.readObject();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (decoder != null) {
-				try {
-					decoder.close();
-				} catch (Exception ex) {
-				}
-			}
-		}
-	}
-
-	/**
-	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		updateDataTypes();
 		updateRegions();
-		updateCountries();
-		updateShips();
-		updateDataCentres();
 		updateParameters();
 		updateSurveys();
 		updateVocabLists();
 		updateEdmo();
-	}
-
-	/**
-	 * 
-	 */
-	public static void updateCountries() {
-		FileOutputStream stream = null;
-		XMLEncoder encoder = null;
-		okCountries = false;
-		try {
-			java.net.URL toto = new java.net.URL(Utils.configuration
-					.getNemoWebServiceURL());
-
-			NemoWSServiceLocator servicews = new NemoWSServiceLocator();
-			NemoWS service = servicews.getNEMO(toto);
-			// new
-			// java.net.URL(Utils.configuration.getNemoWebServiceURL()));
-			WSCountry[] countries = service.getCountries();
-			releaseCountries();
-			for (int i = 0; i < countries.length; i++) {
-				addCountry(countries[i]);
-			}
-
-			File file = new java.io.File("resources/Countries.xml");
-			stream = new FileOutputStream(file.toString());
-
-			// URL url =
-			// NemoLists.class.getResource("/resources/Countries.xml");
-			// String file = url.getFile();
-			// stream = new FileOutputStream(file);
-			encoder = new XMLEncoder(stream);
-			encoder.writeObject(_countries);
-			okCountries = true;
-			nbCountries = countries.length;
-		} catch (Exception e) {
-			okCountries = false;
-			System.out.println("WS countries failed");
-			e.printStackTrace();
-		} finally {
-			if (encoder != null) {
-				try {
-					encoder.close();
-				} catch (Exception ex) {
-				}
-			}
-			if (stream != null) {
-				try {
-					stream.close();
-				} catch (Exception ex) {
-				}
-			}
-		}
-	}
-
-	/**
-	 * 
-	 */
-	public static void updateDataCentres() {
-		FileOutputStream stream = null;
-		XMLEncoder encoder = null;
-		okDataCentres = false;
-		try {
-			NemoWS service = new NemoWSServiceLocator()
-					.getNEMO(new java.net.URL(Utils.configuration
-							.getNemoWebServiceURL()));
-			WSDataCentre[] types = service.getDataCentres();
-			releaseDataCentres();
-			for (int i = 0; i < types.length; i++) {
-				addDataCentre(types[i]);
-			}
-
-			File file = new java.io.File("resources/DataCentres.xml");
-			stream = new FileOutputStream(file.toString());
-
-			// URL url =
-			// NemoLists.class.getResource("/resources/DataCentres.xml");
-			// String file = url.getFile();
-			// stream = new FileOutputStream(file);
-			encoder = new XMLEncoder(stream);
-			encoder.writeObject(_dataCentres);
-			okDataCentres = true;
-			nbDataCentres = types.length;
-		} catch (Exception e) {
-			okDataCentres = false;
-			e.printStackTrace();
-		} finally {
-			if (encoder != null) {
-				try {
-					encoder.close();
-				} catch (Exception ex) {
-				}
-			}
-			if (stream != null) {
-				try {
-					stream.close();
-				} catch (Exception ex) {
-				}
-			}
-		}
 	}
 
 	/**
@@ -1884,52 +1122,6 @@ public class NemoLists implements Cloneable {
 			nbRegions = regions.length;
 		} catch (Exception e) {
 			okRegions = false;
-			e.printStackTrace();
-		} finally {
-			if (encoder != null) {
-				try {
-					encoder.close();
-				} catch (Exception ex) {
-				}
-			}
-			if (stream != null) {
-				try {
-					stream.close();
-				} catch (Exception ex) {
-				}
-			}
-		}
-	}
-
-	/**
-	 * 
-	 */
-	public static void updateShips() {
-		okShips = false;
-		FileOutputStream stream = null;
-		XMLEncoder encoder = null;
-		try {
-			NemoWS service = new NemoWSServiceLocator()
-					.getNEMO(new java.net.URL(Utils.configuration
-							.getNemoWebServiceURL()));
-			WSShip[] ships = service.getShips();
-			releaseShips();
-			for (int i = 0; i < ships.length; i++) {
-				addShip(ships[i]);
-			}
-
-			File file = new java.io.File("resources/Ships.xml");
-			stream = new FileOutputStream(file.toString());
-
-			// URL url = NemoLists.class.getResource("/resources/Ships.xml");
-			// String file = url.getFile();
-			// stream = new FileOutputStream(file);
-			encoder = new XMLEncoder(stream);
-			encoder.writeObject(_ships);
-			okShips = true;
-			nbShips = ships.length;
-		} catch (Exception e) {
-			okShips = false;
 			e.printStackTrace();
 		} finally {
 			if (encoder != null) {

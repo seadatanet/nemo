@@ -48,7 +48,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 	public static Group groupLangue, groupCentreDonnees, groupWS, 
 			groupDossier, groupDossier1, groupDossier2, groupCDI = null;
 
-	public static Combo comboLangue, comboCentreDonnees, comboIdEdmoRespCdi, comboRecherche,
+	public static Combo comboLangue, comboCentreDonnees, comboIdEdmoRespCdi,
 				comboMethodeCdi,comboCodeEdmoDonnees, comboIdEdmoRespDonnees, 
 				comboIdEdmoDistDonnees = null;
 
@@ -68,8 +68,6 @@ public class OptionsAction extends Action implements ISelectionListener,
 	// vars nécessaires à la fenêtre d'options
 
 	public static Shell shelloptions;
-
-	public static int options;
 
 	public OptionsAction(IWorkbenchWindow window) {
 
@@ -101,8 +99,6 @@ public class OptionsAction extends Action implements ISelectionListener,
 		// shelloptions.pack();
 		shelloptions.open();
 		
-		options = 1;
-
 		// chargement des options
 		Utils.initConfig();
 
@@ -127,21 +123,24 @@ public class OptionsAction extends Action implements ISelectionListener,
 		}
 		
 		// CENTRE DE DONNEES
-		int taille = NemoLists.getDataCentres().length;
-		for (int i = 0; i < taille; i++) {
-			comboCentreDonnees.add(NemoLists.getDataCentres()[i].getCode() + " - "
-					+ NemoLists.getDataCentres()[i].getName());
+		CodeTableRecordType[] centres = NemoLists.getVocabList("L300");
+		
+		TreeMap<String, String> treeCentre = new TreeMap<String, String>();
+		
+		for (CodeTableRecordType record : centres)
+		{	
+			treeCentre.put(Utils.extraitCodeURN(record.getEntryKey()), record.getEntryTerm());
+		}
+		
+		NemoLists.listeCentreDonnees = new ArrayList<String>();
+		String temp = "";
+		for (Entry<String, String> currentEntry : treeCentre.entrySet()) {
+			temp = currentEntry.getKey() + " - " + currentEntry.getValue();
+			NemoLists.listeCentreDonnees.add(temp);
+			comboCentreDonnees.add(temp);
 		}
 
 		Utils.selectComboCode(comboCentreDonnees, Utils.configuration.getDataCenter());
-//		int i = 0;
-//		comboCentreDonnees.select(i);
-//		String dataCenter = Utils.configuration.getDataCenter();
-//		int j = dataCenter.length();
-//		while (i < taille && !comboCentreDonnees.getText().substring(0,j).equals(dataCenter)) {
-//			i++;
-//			comboCentreDonnees.select(i);
-//		}
 
 		// WS
 		textAreaNemo.setText(Utils.configuration.getNemoWebServiceURL());
@@ -304,6 +303,8 @@ public class OptionsAction extends Action implements ISelectionListener,
 		comboCentreDonnees = new Combo(groupCentreDonnees, SWT.READ_ONLY);
 		GridDataFactory.fillDefaults().grab(true,false).applyTo(comboCentreDonnees);
 		comboCentreDonnees.pack();
+		
+		Utils.createSearchMenu(comboCentreDonnees, FiltrageTableType._table.DataCenter.name());
 	}
 	
 	/**
@@ -534,10 +535,10 @@ public class OptionsAction extends Action implements ISelectionListener,
 		GridDataFactory.fillDefaults().grab(true,false).applyTo(comboMethodeCdi);
 				
 		// Menu recherche combos
-		createMenu(comboIdEdmoRespCdi);
-		createMenu(comboCodeEdmoDonnees);
-		createMenu(comboIdEdmoRespDonnees);
-		createMenu(comboIdEdmoDistDonnees);
+		Utils.createSearchMenu(comboIdEdmoRespCdi, FiltrageTableType._table.IdEdmo.name());
+		Utils.createSearchMenu(comboCodeEdmoDonnees, FiltrageTableType._table.IdEdmo.name());
+		Utils.createSearchMenu(comboIdEdmoRespDonnees, FiltrageTableType._table.IdEdmo.name());
+		Utils.createSearchMenu(comboIdEdmoDistDonnees, FiltrageTableType._table.IdEdmo.name());
 		
 		// Mapping CDI
 		labelFichierMapping = new Label(groupCDI, SWT.NONE);
@@ -574,24 +575,6 @@ public class OptionsAction extends Action implements ISelectionListener,
 					}
 				});
 	}
-	
-	private void createMenu(Combo combo) {
-		Menu menu = new Menu(comboIdEdmoRespCdi.getShell(), SWT.POP_UP);
-		
-		MenuItem itemSearch = new MenuItem(menu, SWT.NONE);
-		itemSearch.setText(Messages.getString("OptionsAction.27")); //$NON-NLS-1$
-		
-		combo.setMenu(menu);
-		
-		final Combo comb = combo;
-		
-		itemSearch.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event e) {
-				comboRecherche = comb;
-				FiltrageTableType.go();
-			}
-		});
-	}
 
 	public void createPartControl(Composite parent) {
 
@@ -623,7 +606,6 @@ public class OptionsAction extends Action implements ISelectionListener,
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
 //						System.out.println("options cancel");
-						OptionsAction.options = 0;
 						shelloptions.close();
 
 					}
@@ -639,7 +621,6 @@ public class OptionsAction extends Action implements ISelectionListener,
 						// sauvegarde de la config
 						Utils.saveConfig();
 
-						OptionsAction.options = 0;
 						shelloptions.close();
 
 					}

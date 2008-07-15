@@ -3,6 +3,7 @@ package fr.ifremer.nemo.ui;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.util.Messages;
@@ -58,12 +59,12 @@ public class Regexp {
 
 	}
 
-	public static Boolean checkPresenceValeurObligatoire(Text text,
+	public static Boolean checkPresenceValeurObligatoire(String value,
 			String nomSection) {
 
 		Boolean ok = true;
 
-		if (text.getText().matches("")) { //$NON-NLS-1$
+		if (value.matches("")) { //$NON-NLS-1$
 			Utils
 					.messageErreurAppend(Messages.getString("Regexp.4") + nomSection + Messages.getString("Regexp.5")); //$NON-NLS-1$ //$NON-NLS-2$
 			ok = false;

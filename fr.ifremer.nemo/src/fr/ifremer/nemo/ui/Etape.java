@@ -135,30 +135,27 @@ public class Etape {
 
 		// check valeurs obligatoires
 		resultat = Regexp.checkPresenceValeurObligatoire(
-				EditSurvey.textCampagne, Messages.getString("Etape.11")); //$NON-NLS-1$
+				EditSurvey.textCampagne.getText(), Messages.getString("Etape.11")); //$NON-NLS-1$
 		ok = ok && resultat;
-		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textNom,
+		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textNom.getText(),
 				Messages.getString("Etape.12")); //$NON-NLS-1$
 		ok = ok && resultat;
 		resultat = Regexp.checkPresenceValeurObligatoire(
-				EditSurvey.textCodeNavire, Messages.getString("Etape.13")); //$NON-NLS-1$
+				EditSurvey.comboNavire.getText(), Messages.getString("Etape.13")); //$NON-NLS-1$
 		ok = ok && resultat;
 		resultat = Regexp.checkPresenceValeurObligatoire(
-				EditSurvey.textNomNavire, Messages.getString("Etape.14")); //$NON-NLS-1$
+				EditSurvey.textDateDebut.getText(), Messages.getString("Etape.15")); //$NON-NLS-1$
 		ok = ok && resultat;
 		resultat = Regexp.checkPresenceValeurObligatoire(
-				EditSurvey.textDateDebut, Messages.getString("Etape.15")); //$NON-NLS-1$
+				EditSurvey.textDateFin.getText(), Messages.getString("Etape.16")); //$NON-NLS-1$
 		ok = ok && resultat;
-		resultat = Regexp.checkPresenceValeurObligatoire(
-				EditSurvey.textDateFin, Messages.getString("Etape.16")); //$NON-NLS-1$
-		ok = ok && resultat;
-		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textRegion,
+		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textRegion.getText(),
 				Messages.getString("Etape.17")); //$NON-NLS-1$
 		ok = ok && resultat;
-//		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textPays,
-//				Messages.getString("Etape.18")); //$NON-NLS-1$
+		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.comboCountries.getText(),
+				Messages.getString("Etape.18")); //$NON-NLS-1$
 		ok = ok && resultat;
-		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textChef,
+		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textChef.getText(),
 				Messages.getString("Etape.19")); //$NON-NLS-1$
 		ok = ok && resultat;
 

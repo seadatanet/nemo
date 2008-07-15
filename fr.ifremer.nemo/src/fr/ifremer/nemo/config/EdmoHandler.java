@@ -8,8 +8,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import fr.ifremer.nemo.ui.TypeData;
-
 public class EdmoHandler extends DefaultHandler{
 	
 	private java.util.HashMap<Integer, String> _valeurs = new HashMap<Integer, String>();

@@ -166,7 +166,6 @@ public class ViewFile extends ViewPart {
 
 		// étape de départ
 		etape = 0;
-		OptionsAction.options = 0;
 		DataModel.reset = false;
 
 		createTabFolder();

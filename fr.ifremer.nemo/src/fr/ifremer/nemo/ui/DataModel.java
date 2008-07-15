@@ -51,13 +51,7 @@ public class DataModel {
 
 	public static WSDataType wsDatatypeStation, wsDatatypeStation_modele;
 
-	public static WSDataCentre[] listeWSCenters;
-
 	public static WSRegion[] listeWSRegions;
-
-	public static WSShip[] listeWSShips;
-
-	public static WSCountry[] listeWSCountries;
 
 	public static Boolean ouverture, reset;
 
@@ -190,37 +184,11 @@ public class DataModel {
 			stationModel.setEndDataPattern(EditDesc.txtManuel.getText());
 		}
 		
-//		FAE 33
-//		if (EditDesc.buttonIndicFinDonnees.getSelection()) {
-//
-//			// pattern
-//			stationModel.setEndOnPattern(true);
-//			// propertyModel.setUserProvided(true);
-//
-//			if (EditDesc.comboIndicRuptureDonnees.getText().matches("EOF")) {
-//				stationModel.setEndDataPattern("^$");
-//			} else {
-//
-//				stationModel
-//						.setEndDataPattern(EditDesc.comboIndicRuptureDonnees
-//								.getText());
-//			}
-//
-//		} else {
-//			// nombre de mesures dans le fichier
-//			stationModel.setEndOnPattern(false);
-//			stationModel.setRowNumber(EditDesc.nbreLignesMesures.getText());
-//
-//		}
-
 		// on initialise les dataTypes, centers et parameters en prévision des
 		// onglets Campagne et Data
 
 		listeWSDataTypes = NemoLists.getDataTypes();
 		listeWSParameters = NemoLists.getParameters();
-		listeWSCenters = NemoLists.getDataCentres();
-		listeWSShips = NemoLists.getShips();
-		listeWSCountries = NemoLists.getCountries();
 		listeWSRegions = NemoLists.getRegions();
 
 		// Lancement de la table des paramètres, onglet DATA, si pas deja créée
@@ -257,8 +225,8 @@ public class DataModel {
 		
 		survey.setReference(EditSurvey.textCampagne.getText());
 		survey.setName(EditSurvey.textNom.getText());
-		survey.setShipCode(EditSurvey.textCodeNavire.getText());
-		survey.setShipName(EditSurvey.textNomNavire.getText());
+		survey.setShipCode(Utils.extraitCode(EditSurvey.comboNavire.getText()));
+		survey.setShipName(Utils.extraitValeur(EditSurvey.comboNavire.getText()));
 
 		// Localisation
 
@@ -290,16 +258,11 @@ public class DataModel {
 
 		// Source de données	
 		survey.setCountryCode(Utils.extraitCode(EditSurvey.comboCountries.getText()));
-		
 		survey.setLaboratories(EditSurvey.textLabo.getText());
 		survey.setChiefScientist(EditSurvey.textChef.getText());
 		survey.setProjectName(EditSurvey.textProjet.getText());
 
 		// Centre d'archivage
-		// split sur le " - "
-//		Pattern p = Pattern.compile(" - ");
-//		String mots[] = p.split(EditSurvey.comboDataCentres.getText());
-//		String code = mots[0];
 		survey.setDataCentre(Utils.extraitCode(EditSurvey.comboDataCentres.getText()));
 
 		// confidentialité
@@ -1445,8 +1408,7 @@ public class DataModel {
 		// référence
 		EditSurvey.textCampagne.setText(survey.getReference());
 		EditSurvey.textNom.setText(survey.getName());
-		EditSurvey.textCodeNavire.setText(survey.getShipCode());
-		EditSurvey.textNomNavire.setText(survey.getShipName());
+		Utils.selectComboCodePlus(EditSurvey.comboNavire, survey.getShipCode(), survey.getShipName());
 
 		// Localisation
 
@@ -1474,43 +1436,13 @@ public class DataModel {
 		EditSurvey.textRegion.setText(survey.getRegionName());
 
 		// Source de données
-// 		EditSurvey.textPays.setText(survey.getCountryCode());
-//		int taille = DataModel.listeWSCountries.length;
-//		int k = 0;
-//		EditSurvey.comboCountries.select(k);
-//		String countryCode = survey.getCountryCode();
-//		int j = countryCode.length();
-//		while (k < taille
-//				&& !EditSurvey.comboCountries.getText().substring(0, j)
-//						.equals(countryCode)) {
-//			k++;
-//			EditSurvey.comboCountries.select(k);
-//		}
 		Utils.selectComboCode(EditSurvey.comboCountries, survey.getCountryCode());
-		
-		
 		EditSurvey.textLabo.setText(survey.getLaboratories());
 		EditSurvey.textChef.setText(survey.getChiefScientist());
 		EditSurvey.textProjet.setText(survey.getProjectName());
 
 		// Centre d'archivage
-
-		//	
-		// survey.setDataCentre(code);
-//		int taille = DataModel.listeWSCenters.length;
-//		int position = 0;
-//		for (int i = 0; i < taille; i++) {
-//			Pattern pat = Pattern.compile(" - ");
-//			String mots[] = pat.split(EditSurvey.comboDataCentres.getItem(i));
-//			if (survey.getDataCentre().matches(mots[0])) {
-//				position = i;
-//				break;
-//			}
-//		}
-//		EditSurvey.comboDataCentres.select(position);
 		Utils.selectComboCode(EditSurvey.comboDataCentres, survey.getDataCentre());
-
-		// EditSurvey.textCentre.setText(survey.getDataCentre());
 
 		// confidentialité
 		String code = survey.getAvailabilityCode();

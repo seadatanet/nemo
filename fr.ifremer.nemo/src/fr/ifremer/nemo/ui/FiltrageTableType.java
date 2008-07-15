@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.swing.text.html.Option;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
@@ -32,6 +31,8 @@ public class FiltrageTableType {
 	public static Composite top;
 
 	public static Table filtreTableData, filtreTableSurvey;
+	
+	public static Combo comboRecherche;
 
 	public static Text filtreText;
 
@@ -43,49 +44,62 @@ public class FiltrageTableType {
 
 	public static Button filtreButtonCancel;
 
-	public static void go() {
+	public static enum _table{WSSurvey, IdEdmo, Parameter, DataType, Ship, DataCenter};
+	
+	public static void go(String table) {
 		// raz message d'erreur
-
+		final String tabOrigine = table;
+		
 		Utils.messageErreur(""); //$NON-NLS-1$
 
 		if (listeOuverte == 1) {
-			Utils.messageErreur(Messages.getString("FiltrageTableType.1"));} //$NON-NLS-1$
-		else {
-
+			Utils.messageErreur(Messages.getString("FiltrageTableType.1"));
+		} else {
 			shell = new Shell(Application.display, SWT.BORDER | SWT.TITLE
 					| SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);
 			shell.setSize(300, 500);
 
-			if (OptionsAction.options == 1) {
+			if (tabOrigine.equals(_table.IdEdmo.name())) {
 				shell.setText(Messages.getString("FiltrageTableType.2")); //$NON-NLS-1$
-			} else if (ViewFile.affiche == 1) {
-				if (EditSurvey.ws) {
-					// onglet survey et selection ref. par WS
-					shell.setText(Messages.getString("FiltrageTableType.2")); //$NON-NLS-1$
-				} else {
-					shell.setText(Messages.getString("FiltrageTableType.3")); //$NON-NLS-1$
-				}
-
-				if (ViewFile.affiche == 3) {
-					shell.setText(Messages.getString("FiltrageTableType.4")); //$NON-NLS-1$
-				}
+			} else if (tabOrigine.equals(_table.WSSurvey.name())) {
+				shell.setText(Messages.getString("FiltrageTableType.2")); //$NON-NLS-1$
+			} else if (tabOrigine.equals(_table.DataType.name())) {
+				shell.setText(Messages.getString("FiltrageTableType.3")); //$NON-NLS-1$
+			} else if (tabOrigine.equals(_table.Parameter.name())) {
+				shell.setText(Messages.getString("FiltrageTableType.4")); //$NON-NLS-1$
+			} else if (tabOrigine.equals(_table.Ship.name())) {
+				shell.setText(Messages.getString("FiltrageTableType.5")); //$NON-NLS-1$
+			} else if (tabOrigine.equals(_table.DataCenter.name())) {
+				shell.setText(Messages.getString("FiltrageTableType.6")); //$NON-NLS-1$
 			}
-			// else {}
 
 			shell.setLayout(new FillLayout());
 
 			top = new Composite(shell, SWT.NONE);
 			top.setLayout(null);
 
-			if (OptionsAction.options == 1) {
+			if (tabOrigine.equals(_table.IdEdmo.name())) {
 				EdmoHandler.listeFiltree = new ArrayList<String>();
 				
 				EdmoHandler.listeFiltree.addAll(EdmoHandler.listeOrigine);
+			} else if (tabOrigine.equals(_table.Ship.name())) {
+				NemoLists.listeFiltree = new ArrayList<String>();
+				
+				NemoLists.listeFiltree.addAll(NemoLists.listeNavire);
+			} else if (tabOrigine.equals(_table.DataCenter.name())) {
+				NemoLists.listeFiltree = new ArrayList<String>();
+				
+				NemoLists.listeFiltree.addAll(NemoLists.listeCentreDonnees);
+			} else if (tabOrigine.equals(_table.DataCenter.name())) {
+				NemoLists.listeFiltree = new ArrayList<String>();
+				
+				NemoLists.listeFiltree.addAll(NemoLists.listeNavire);
 			} else {
 				// init des listes filtrées survey + data
 				TableDataSurvey.listeFiltree = new ArrayList<TypeSurvey>();
 
-				// init de la liste des references campagne à partir des listesWS
+				// init de la liste des references campagne à partir des
+				// listesWS
 				TableWS_Survey.surveysWS = NemoLists.getSurveys();
 			
 
@@ -144,17 +158,17 @@ public class FiltrageTableType {
 			filtreButtonCancel.pack();
 
 			// affichage des tables
-			if (OptionsAction.options == 1) {
+			if (tabOrigine.equals(_table.IdEdmo.name())) {
 				creationTableEdmo();
-			} else if (ViewFile.affiche == 1) {
-
-				if (EditSurvey.ws) {
-					creationTableWS_Survey();
-				} else {
-					creationTableSurvey();
-				}
-			} else {
+			} else if (tabOrigine.equals(_table.WSSurvey.name())) {
+				creationTableWS_Survey();
+			} else if (tabOrigine.equals(_table.DataType.name())) {
+				creationTableSurvey();
+			} else if (tabOrigine.equals(_table.Parameter.name())) {
 				creationTableData();
+			} else if (tabOrigine.equals(_table.Ship.name()) || 
+					tabOrigine.equals(_table.DataCenter.name())) {
+				creationTableBODC();
 			}
 
 			filtreButtonCancel
@@ -164,12 +178,6 @@ public class FiltrageTableType {
 							// System.out.println("valider cancel liste");
 							shell.close();
 							listeOuverte = 0;
-
-							if (OptionsAction.options == 1) {
-								
-							} else if (EditSurvey.ws) {
-								EditSurvey.ws = false;
-							}
 						}
 					});
 
@@ -177,193 +185,190 @@ public class FiltrageTableType {
 					.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 						public void widgetSelected(
 								org.eclipse.swt.events.SelectionEvent e) {
-							// System.out.println("valider sélection liste");
 
 							listeOuverte = 0;
-							
-							if (OptionsAction.options == 1) {
-								Utils.selectComboValeur(OptionsAction.comboRecherche,EdmoHandler.filtreTable.getItem(EdmoHandler.filtreTable.getSelectionIndex()).getText());
+
+							if (tabOrigine.equals(_table.IdEdmo.name())) {
+								Utils.selectComboValeur(
+										comboRecherche,
+										EdmoHandler.filtreTable.getItem(
+												EdmoHandler.filtreTable
+														.getSelectionIndex())
+												.getText());
 								shell.close();
-							} else {
-								if (ViewFile.affiche == 1) {
+							} else if (tabOrigine
+									.equals(_table.WSSurvey.name())) {
 
-									if (EditSurvey.ws) {
-										// sélection d'une référence campagne
+								// sélection d'une référence campagne
+								int index = TableWS_Survey.filtreTable
+										.getSelectionIndex();
+								String reference = TableWS_Survey.listeFiltree
+										.get(index);
+								Pattern p = Pattern.compile(" - "); //$NON-NLS-1$
 
-										int index = TableWS_Survey.filtreTable
-												.getSelectionIndex();
-										String reference = TableWS_Survey.listeFiltree
-												.get(index);
+								String mots[] = p.split(reference);
+
+								EditSurvey.webService(mots[0]);
+
+								Utils.messageOK(Messages
+										.getString("FiltrageTableType.21"));
+								shell.close();
+
+							} else if (tabOrigine
+									.equals(_table.DataType.name())) {
+
+								// ajout d'un dataType dans l'onglet Survey
+								TypeSurvey typeSurvey = new TypeSurvey();
+
+								int index = TableDataSurvey.filtreTable
+										.getSelectionIndex();
+								typeSurvey = TableDataSurvey.listeFiltree
+										.get(index);
+
+								// test avant ajout pour doublons
+								int taille = TableDataSurvey.types.size();
+								Boolean found = false;
+
+								if (taille != 0) {
+
+									for (int i = 0; i < taille; i++) {
+
+										// split sur " - "
 										Pattern p = Pattern.compile(" - "); //$NON-NLS-1$
+										String mots[] = p.split(typeSurvey
+												.getCode());
+										String codeActuel = mots[0];
 
-										String mots[] = p.split(reference);
+										String mots2[] = p
+												.split(TableDataSurvey.types
+														.get(i).getCode());
+										String codeModele = mots2[0];
 
-										EditSurvey.webService(mots[0]);
-
-										Utils.messageOK(Messages
-												.getString("FiltrageTableType.21"));
-										shell.close();
-										if (EditSurvey.ws) {
-											EditSurvey.ws = false;
+										if (codeModele.matches(codeActuel)) {
+											found = true;
 										}
+									}
 
+									if (found == false) {
+										TableDataSurvey.types.add(typeSurvey);
 									} else {
+										Utils
+												.messageErreur(Messages
+														.getString("FiltrageTableType.13")); //$NON-NLS-1$
+									}
+								} else {
+									TableDataSurvey.types.add(typeSurvey);
+								}
 
-										// ajout d'un dataType dans l'onglet Survey
-										TypeSurvey typeSurvey = new TypeSurvey();
+								TableDataSurvey.majTypeData();
 
-										int index = TableDataSurvey.filtreTable
-												.getSelectionIndex();
-										typeSurvey = TableDataSurvey.listeFiltree
-												.get(index);
+								// razTableData
+								TableDataSurvey.razTableData();
 
-										// test avant ajout pour doublons
-										int taille = TableDataSurvey.types.size();
-										Boolean found = false;
+								// refresh de la table
+								TableDataSurvey.creationTable();
 
-										if (taille != 0) {
+								EditSurvey.sectionType.pack();
+								EditSurvey.sectionType.redraw();
 
-											for (int i = 0; i < taille; i++) {
+								Composite c = EditSurvey.sectionType;
+								while (c != null) {
+									c.setRedraw(false);
+									c = c.getParent();
+									if (c instanceof ScrolledForm) {
+										break;
+									}
+								}
+								c = EditSurvey.sectionType;
+								while (c != null) {
+									c.layout(true);
+									c = c.getParent();
+									if (c instanceof ScrolledForm) {
+										((ScrolledForm) c).reflow(true);
+										break;
+									}
+								}
+								c = EditSurvey.sectionType;
+								while (c != null) {
+									c.setRedraw(true);
+									c = c.getParent();
+									if (c instanceof ScrolledForm) {
+										break;
+									}
+								}
 
-												// split sur " - "
-												Pattern p = Pattern.compile(" - "); //$NON-NLS-1$
-												String mots[] = p.split(typeSurvey
+								shell.close();
+
+							} else if (tabOrigine.equals(_table.Parameter
+									.name())) {
+
+								// ajout d'un parameter dans l'onglet Data
+
+								TypeData typeData = new TypeData();
+
+								int index = TableData.filtreTable
+										.getSelectionIndex();
+								typeData = TableData.listeFiltree.get(index);
+
+								// test avant ajout pour doublons
+								int taille = TableData.types.size();
+								Boolean found = false;
+
+								if (taille != 0) {
+
+									for (int i = 0; i < taille; i++) {
+										String codeModele, codeActuel;
+
+										// split sur " - "
+										Pattern p = Pattern.compile(" - "); //$NON-NLS-1$
+										String mots[] = p.split(typeData
+												.getCode());
+										codeActuel = mots[0];
+
+										String mots2[] = p
+												.split(TableData.types.get(i)
 														.getCode());
-												String codeActuel = mots[0];
+										codeModele = mots2[0];
 
-												String mots2[] = p
-														.split(TableDataSurvey.types
-																.get(i).getCode());
-												String codeModele = mots2[0];
-
-												if (codeModele.matches(codeActuel)) {
-													found = true;
-												}
-											}
-
-											if (found == false) {
-												TableDataSurvey.types
-														.add(typeSurvey);
-											} else {
-												Utils
-														.messageErreur(Messages
-																.getString("FiltrageTableType.13")); //$NON-NLS-1$
-											}
-										} else {
-											TableDataSurvey.types.add(typeSurvey);
+										if (codeModele.matches(codeActuel)) {
+											found = true;
 										}
-
-										TableDataSurvey.majTypeData();
-
-										// razTableData
-										TableDataSurvey.razTableData();
-
-										// refresh de la table
-										TableDataSurvey.creationTable();
-
-										EditSurvey.sectionType.pack();
-										EditSurvey.sectionType.redraw();
-
-										Composite c = EditSurvey.sectionType;
-										while (c != null) {
-											c.setRedraw(false);
-											c = c.getParent();
-											if (c instanceof ScrolledForm) {
-												break;
-											}
-										}
-										c = EditSurvey.sectionType;
-										while (c != null) {
-											c.layout(true);
-											c = c.getParent();
-											if (c instanceof ScrolledForm) {
-												((ScrolledForm) c).reflow(true);
-												break;
-											}
-										}
-										c = EditSurvey.sectionType;
-										while (c != null) {
-											c.setRedraw(true);
-											c = c.getParent();
-											if (c instanceof ScrolledForm) {
-												break;
-											}
-										}
-
-										shell.close();
-										if (EditSurvey.ws) {
-											EditSurvey.ws = false;
-										}
-
 									}
-								}// fin if ws
 
-								else {
-
-									// ajout d'un parameter dans l'onglet Data
-
-									TypeData typeData = new TypeData();
-
-									int index = TableData.filtreTable
-											.getSelectionIndex();
-									typeData = TableData.listeFiltree.get(index);
-
-									// test avant ajout pour doublons
-									int taille = TableData.types.size();
-									Boolean found = false;
-
-									if (taille != 0) {
-
-										for (int i = 0; i < taille; i++) {
-											String codeModele, codeActuel;
-
-											// split sur " - "
-											Pattern p = Pattern.compile(" - "); //$NON-NLS-1$
-											String mots[] = p.split(typeData
-													.getCode());
-											codeActuel = mots[0];
-
-											String mots2[] = p
-													.split(TableData.types.get(i)
-															.getCode());
-											codeModele = mots2[0];
-
-											if (codeModele.matches(codeActuel)) {
-												found = true;
-											}
-										}
-
-										if (found == false) {
-											TableData.types.add(new TypeData(
-													typeData));
-										} else {
-											Utils
-													.messageErreur(Messages
-															.getString("FiltrageTableType.15")); //$NON-NLS-1$
-										}
+									if (found == false) {
+										TableData.types.add(new TypeData(
+												typeData));
 									} else {
-										TableData.types.add(new TypeData(typeData));
+										Utils
+												.messageErreur(Messages
+														.getString("FiltrageTableType.15")); //$NON-NLS-1$
 									}
+								} else {
+									TableData.types.add(new TypeData(typeData));
+								}
 
-									// TableData.types.add(typeData);
-									TableData.majTypeData();
+								// TableData.types.add(typeData);
+								TableData.majTypeData();
 
-									// razTableData
-									TableData.razTableData();
+								// razTableData
+								TableData.razTableData();
 
-									// refresh de la table
-									TableData.creationTable();
+								// refresh de la table
+								TableData.creationTable();
 
-									shell.close();
-
-									if (EditSurvey.ws) {
-										EditSurvey.ws = false;
-									}
+								shell.close();
+							} else if (tabOrigine.equals(_table.Ship.name()) ||
+									tabOrigine.equals(_table.DataCenter.name())) {
+								Utils.selectComboValeur(
+										comboRecherche,
+										NemoLists.filtreTable.getItem(
+												NemoLists.filtreTable
+														.getSelectionIndex())
+												.getText());
+								shell.close();
 							}
-							
 
-							} // ///////////////FIN
-						}
+						} // ///////////////FIN
 
 					});
 
@@ -372,19 +377,18 @@ public class FiltrageTableType {
 				public void handleEvent(Event e) {
 					if (filtreText.getText().matches("")) {} //$NON-NLS-1$
 					else {
-						if (OptionsAction.options == 1) {
+						if (tabOrigine.equals(_table.IdEdmo.name())) {
 							filtrageListeEdmo(filtreText.getText());
-						} else if (ViewFile.affiche == 1) {
-							if (EditSurvey.ws) {
-								filtrageListeWS_Survey(filtreText.getText());
-							} else {
-
-								filtrageListeDataSurvey(filtreText.getText());
-							}
-						} else {
+						} else if (tabOrigine.equals(_table.WSSurvey.name())) {
+							filtrageListeWS_Survey(filtreText.getText());
+						} else if(tabOrigine.equals(_table.DataType.name())) {
+							filtrageListeDataSurvey(filtreText.getText());
+						} else if (tabOrigine.equals(_table.Parameter.name())){
 							filtrageListeData(filtreText.getText());
+						} else if (tabOrigine.equals(_table.Ship.name()) ||
+								tabOrigine.equals(_table.DataCenter.name())) {
+							filtrageListeBODC(filtreText.getText(), tabOrigine);
 						}
-
 					}
 				}
 			});
@@ -427,16 +431,6 @@ public class FiltrageTableType {
 							.getCode() });
 
 		}
-
-		// ajout listeners sur la table
-		table.addListener(SWT.MouseDown, new Listener() {
-			public void handleEvent(Event event) {
-
-				// System.out.println("index sélectionné ="+ tmp);
-
-			}
-		});
-
 	}
 	
 	public static void creationTableEdmo() {
@@ -456,28 +450,37 @@ public class FiltrageTableType {
 		tableColumn.setWidth(280);
 		// taille = 60
 		tableColumn.setText(Messages.getString("FiltrageTableType.17")); //$NON-NLS-1$
-		// TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);
-		// tableColumn1.setWidth(300);
-		// tableColumn1.setText("Nom");
-		// TableColumn tableColumn2 = new TableColumn(table, SWT.NONE);
-		// tableColumn2.setWidth(100);
-		// tableColumn2.setText("QC");
-
+		
 		for (int i = 0; i < nbre; i++) {
 			TableItem item = new TableItem(table, SWT.NONE);
 			item.setText(EdmoHandler.listeFiltree.get(i));
 
 		}
+	}
+	
+	public static void creationTableBODC() {
+		final Table table;
+		int nbre;
 
-		// ajout listeners sur la table
-		table.addListener(SWT.MouseDown, new Listener() {
-			public void handleEvent(Event event) {
+		NemoLists.filtreTable = new Table(top, SWT.FULL_SELECTION);
 
-				// System.out.println("index sélectionné ="+ tmp);
+		table = NemoLists.filtreTable;
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
+		table.setBounds(new Rectangle(3, 45, 298, 237));
 
-			}
-		});
+		nbre = NemoLists.listeFiltree.size();
+		// création des colonnes...
+		TableColumn tableColumn = new TableColumn(table, SWT.NONE);
+		tableColumn.setWidth(280);
+		// taille = 60
+		tableColumn.setText(Messages.getString("FiltrageTableType.17")); //$NON-NLS-1$
+		
+		for (int i = 0; i < nbre; i++) {
+			TableItem item = new TableItem(table, SWT.NONE);
+			item.setText(NemoLists.listeFiltree.get(i));
 
+		}
 	}
 
 	public static void creationTableSurvey() {
@@ -514,14 +517,6 @@ public class FiltrageTableType {
 					TableDataSurvey.listeFiltree.get(i).getQc() });
 
 		}
-
-		// ajout listeners sur la table
-		table.addListener(SWT.MouseDown, new Listener() {
-			public void handleEvent(Event event) {
-
-			}
-		});
-
 	}
 
 	public static void filtrageListeData(String chaine) {
@@ -594,6 +589,45 @@ public class FiltrageTableType {
 		creationTableEdmo();
 
 	}
+	
+	public static void filtrageListeBODC(String chaine, String liste) {
+
+		ArrayList<String> origine, filtree;
+		int nbre;
+		String regexp;
+
+		filtree = new ArrayList<String>();
+		origine = new ArrayList<String>();
+		if (liste.equals(_table.Ship.name())) {
+			origine = NemoLists.listeNavire;
+		} else if (liste.equals(_table.DataCenter.name())) {
+			origine = NemoLists.listeCentreDonnees;
+		}		
+		
+		nbre = origine.size();
+		// System.out.println("Nombre de types = "+nbre);
+
+		// remplissage de la liste filtree
+		for (int i = 0; i < nbre; i++) {
+
+			regexp = "^.*" + chaine + ".*$"; //$NON-NLS-1$ //$NON-NLS-2$
+
+			Pattern p = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE);
+			Matcher m = p.matcher(origine.get(i));
+
+			if (m.matches()) {
+
+				// ajout dans la liste filtrée
+				filtree.add(origine.get(i));
+			}
+		}
+
+		NemoLists.listeFiltree = filtree;
+		// affichage de la liste filtree
+
+		razTable(NemoLists.filtreTable);
+		creationTableBODC();
+	}
 
 	public static void filtrageListeDataSurvey(String chaine) {
 		ArrayList<TypeSurvey> origine, filtree;
@@ -648,7 +682,8 @@ public class FiltrageTableType {
 			Matcher m = p.matcher(origine.get(i));
 
 			if (m.matches()) {
-				//System.out.println("On ajoute le type " + origine.get(i)); //$NON-NLS-1$
+				// System.out.println("On ajoute le type " + origine.get(i));
+				// //$NON-NLS-1$
 
 				// ajout dans la liste filtrée
 				filtree.add(origine.get(i));
@@ -665,10 +700,6 @@ public class FiltrageTableType {
 	public static void razTable(Table table) {
 		// maj
 		table.dispose();
-	}
-
-	public static void majListeTypes() {
-
 	}
 
 	public static void creationTableWS_Survey() {

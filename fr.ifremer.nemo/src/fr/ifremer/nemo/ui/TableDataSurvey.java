@@ -255,7 +255,7 @@ public class TableDataSurvey {
 		itemList.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				// System.out.println("sélection liste");
-				FiltrageTableType.go();
+				FiltrageTableType.go(FiltrageTableType._table.DataType.name());
 
 			}
 		});

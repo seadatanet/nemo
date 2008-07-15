@@ -463,30 +463,6 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 	}
 
 	/**
-	 * Write accessor (setter) for attribute _countryName
-	 * 
-	 * @param x
-	 *            new value for _countryName
-	 * @see Survey#_countryName
-	 */
-	public void setCountryName(String x) {
-		_countryName = x;
-		
-		// country code (MEDATLAS: 2 char max)
-		if (getCountryCode().length() > 2) {
-			int taille = DataModel.listeWSCountries.length;
-			int index = 0;
-			for (int i = 0; i < taille; i++) {
-				if (DataModel.listeWSCountries[i].getName().compareToIgnoreCase(_countryName) == 0) {
-					index = i;
-					break;
-				}
-			}
-			setCountryCode(DataModel.listeWSCountries[index].getCode());
-		}
-	}
-
-	/**
 	 * Read accessor (getter) for attribute _dataCentre
 	 * 
 	 * @return String

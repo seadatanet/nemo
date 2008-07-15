@@ -13,15 +13,20 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.events.ExpansionAdapter;
 import org.eclipse.ui.forms.events.ExpansionEvent;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
+import fr.ifremer.nemo.config.EdmoHandler;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
@@ -1076,6 +1081,9 @@ public class Drawing {
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeSurvey(section);
 		ViewEdit.formEdition.reflow(true);
+		
+		// Création du menu contextuel pour la recherche filtree
+		Utils.createSearchMenu(cmbNavire, FiltrageTableType._table.Ship.name());
 	}
 
 	public static void sectionNlabelsNtext(Section section, String nomSection,
@@ -1111,7 +1119,6 @@ public class Drawing {
 		
 //		 Combo pays
 		if (blnPays) {
-			int taille;
 			Label labelPays = new Label(sectionClient, SWT.NULL);
 			labelPays.setText(Messages.getString("EditSurvey.21"));
 			labelPays.setParent(sectionClient);
@@ -1121,12 +1128,6 @@ public class Drawing {
 			EditSurvey.comboCountries = new Combo(sectionClient, SWT.NONE);
 			
 			// remplissage des pays
-//			taille = DataModel.listeWSCountries.length;
-//			for (i = 0 ; i < taille ; i++) {
-//				EditSurvey.comboCountries.add(DataModel.listeWSCountries[i].getCode() + " - "
-//						+ DataModel.listeWSCountries[i].getName());
-//			}
-			
 			CodeTableRecordType[] records = NemoLists.getVocabList("C180");
 			
 			TreeMap<String, String> treePays = new TreeMap<String, String>();
