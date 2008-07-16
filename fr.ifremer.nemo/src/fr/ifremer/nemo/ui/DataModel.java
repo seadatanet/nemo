@@ -23,15 +23,13 @@ import fr.ifremer.nemo.input.SingleFileSurvey;
 import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.Formatter;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.LatitudeFormat;
 import fr.ifremer.nemo.util.LongitudeFormat;
 import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.nemo.ws.WSCountry;
-import fr.ifremer.nemo.ws.WSDataCentre;
 import fr.ifremer.nemo.ws.WSDataType;
 import fr.ifremer.nemo.ws.WSParameter;
 import fr.ifremer.nemo.ws.WSRegion;
-import fr.ifremer.nemo.ws.WSShip;
 
 public class DataModel {
 
@@ -116,9 +114,23 @@ public class DataModel {
 					.parseInt(EditDesc.lignesEnteteFichier.getText()));
 			stationModel = singleSurvey.getStationModel();
 		}
-
+		
+		// Type de fichier
+		if (ViewFile.radSerieTempo.getSelection()) {
+			// Serie temporelle
+			stationModel.getModel().setFileType(Global.TIMESERIES);
+		} else if (ViewFile.radSerieTempo.getSelection()) {
+			// Trajectoire
+			stationModel.getModel().setFileType(Global.TRAJECTORY);
+		} else {
+			// Profil
+			stationModel.getModel().setFileType(Global.PROFILE);
+		}
+		
 		// serie temporelle
-		if (ViewFile.checkBoxTempo.getSelection()) {
+		// if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection() ||
+				ViewFile.radTrajectoire.getSelection()) {
 			timeSeriesInformation = stationModel.getTimeSeriesInformation();
 
 			if (!ViewFile.textTempoHeureRef.getText().matches("")) {
@@ -197,8 +209,11 @@ public class DataModel {
 		}
 
 		// verrouillage de l'option serieTemporelle pour éviter les changements
-		ViewFile.checkBoxTempo.setEnabled(false);
-
+//		ViewFile.checkBoxTempo.setEnabled(false);
+		ViewFile.radProfilVertical.setEnabled(false);
+		ViewFile.radSerieTempo.setEnabled(false);
+		ViewFile.radTrajectoire.setEnabled(false);
+		
 		// flag "validee" à 1
 		EditDesc.validee = 1;
 
@@ -590,8 +605,8 @@ public class DataModel {
 		}
 
 		// frequence echantillonnage
-		if (ViewFile.checkBoxTempo.getSelection()) {
-
+//		if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()) {
 			propertyModel = stationModel.getTimeSeriesModel().propertiesAt(
 					"samplingRate");
 
@@ -856,7 +871,8 @@ public class DataModel {
 
 		}
 
-		if (ViewFile.checkBoxTempo.getSelection()) {
+//		if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()) {
 			// DECLINAISON MAGNETIQUE
 			propertyModel = stationModel.getTimeSeriesModel().propertiesAt(
 					"magneticDeclination");
@@ -1196,7 +1212,8 @@ public class DataModel {
 
 		}
 
-		if (ViewFile.checkBoxTempo.getSelection()) {
+//		if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()) {
 			// gestion des séries temporelles
 			if (EditData.buttonFreqEchant.getSelection()) {
 				// calcul à partir fréquence échantillonnage
@@ -1294,10 +1311,30 @@ public class DataModel {
 			
 		}
 
+		// Cochage du sélecteur de type de fichier
+		if (stationModel_modele.getModel().getFileType().equals(Global.TIMESERIES)) {
+			ViewFile.radProfilVertical.setSelection(false);
+			ViewFile.radSerieTempo.setSelection(true);
+			ViewFile.radTrajectoire.setSelection(false);
+		} else if (stationModel_modele.getModel().getFileType().equals(Global.TRAJECTORY)) {
+			ViewFile.radProfilVertical.setSelection(false);
+			ViewFile.radSerieTempo.setSelection(false);
+			ViewFile.radTrajectoire.setSelection(true);
+		} else {
+			if (stationModel_modele.getTimeSeriesInformation() != null) {
+				// Pour exploiter les anciens modèles
+				ViewFile.radProfilVertical.setSelection(false);
+				ViewFile.radSerieTempo.setSelection(true);
+				ViewFile.radTrajectoire.setSelection(false);
+			} else {
+				ViewFile.radProfilVertical.setSelection(true);
+				ViewFile.radSerieTempo.setSelection(false);
+				ViewFile.radTrajectoire.setSelection(false);
+			}
+		}
+		
 		// test si série tempo
 		if (stationModel_modele.getTimeSeriesInformation() != null) {
-			// c'est une série tempo donc on coche la case qui va bien
-			ViewFile.checkBoxTempo.setSelection(true);
 			// ViewFile.groupTempo.setVisible(true);
 
 			// heure et date de ref
@@ -1389,8 +1426,10 @@ public class DataModel {
 		DataModel.ouverture = true;
 
 		// désactivation option série tempo
-		ViewFile.checkBoxTempo.setEnabled(false);
-
+//		ViewFile.checkBoxTempo.setEnabled(false);
+		ViewFile.radProfilVertical.getSelection();
+		ViewFile.radSerieTempo.getSelection();
+		ViewFile.radTrajectoire.getSelection();
 	}
 
 	public static void fillSurvey() {
@@ -1765,7 +1804,8 @@ public class DataModel {
 		HeaderFragment frag;
 
 		// frequence echantillonnage
-		if (ViewFile.checkBoxTempo.getSelection()) {
+//		if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()) {
 			propertyModel = stationModel_modele.getTimeSeriesModel()
 					.propertiesAt("samplingRate");
 
@@ -2033,8 +2073,8 @@ public class DataModel {
 		EditStation.DrawingBack();
 
 		// PROFONDEUR CAPTEUR
-		if (ViewFile.checkBoxTempo.getSelection()) {
-
+//		if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()) {
 			propertyModel = stationModel_modele.getTimeSeriesModel()
 					.propertiesAt("sensorDepth");
 			if (propertyModel.isUserProvided()) {
@@ -2066,7 +2106,8 @@ public class DataModel {
 		}
 
 		// LATITUDE DE FIN
-		if (ViewFile.checkBoxTempo.getSelection()) {
+//		if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()) {
 			propertyModel = stationModel_modele.getTimeSeriesModel()
 					.propertiesAt("endLatitude");
 			
@@ -2110,8 +2151,8 @@ public class DataModel {
 		}
 
 		// LONGITUDE DE FIN
-		if (ViewFile.checkBoxTempo.getSelection()) {
-
+//		if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()) {
 			propertyModel = stationModel_modele.getTimeSeriesModel()
 					.propertiesAt("endLongitude");
 			
@@ -2155,8 +2196,8 @@ public class DataModel {
 		}
 
 		// PROFONDEUR DE FIN
-		if (ViewFile.checkBoxTempo.getSelection()) {
-
+//		if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()) {
 			propertyModel = stationModel_modele.getTimeSeriesModel()
 					.propertiesAt("endDepth");
 			if (propertyModel.isUserProvided()) {
@@ -2188,8 +2229,8 @@ public class DataModel {
 		}
 
 		// DECLINAISON MAGNETIQUE
-		if (ViewFile.checkBoxTempo.getSelection()) {
-
+//		if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()) {
 			propertyModel = stationModel_modele.getTimeSeriesModel()
 					.propertiesAt("magneticDeclination");
 			if (propertyModel.isUserProvided()) {
@@ -2305,7 +2346,8 @@ public class DataModel {
 		// refresh de la table
 		TableData.creationTable();
 
-		if (ViewFile.checkBoxTempo.getSelection()) {
+//		if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()) {
 			// série tempo
 			if (stationModel_modele.getTimestampModel().isComputed()) {
 				// saisie manuelle

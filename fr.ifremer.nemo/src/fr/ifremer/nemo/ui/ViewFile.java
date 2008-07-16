@@ -39,7 +39,6 @@ public class ViewFile extends ViewPart {
 
 	public static int etape, ongletCourant, affiche, tailleCompositeData;
 
-
 	public static boolean dossierCampagne, fileLoaded;
 
 	public static Composite compositeData;
@@ -64,7 +63,7 @@ public class ViewFile extends ViewPart {
 	
 	private Composite compositeChoixFichier = null;
 
-	public static Button checkBoxTempo;
+//	public static Button checkBoxTempo;
 	
 	public static Button radProfilVertical, radSerieTempo, radTrajectoire;
 	
@@ -113,7 +112,7 @@ public class ViewFile extends ViewPart {
 
 	public static Composite compositeConversion = null;
 
-	public static Group groupTempo = null;
+	public static Group groupTempo, grpFichier = null;
 
 	public static Text textTempoDateRef = null;
 
@@ -359,19 +358,21 @@ public class ViewFile extends ViewPart {
 		
 		createGroupeSeparateur();
 
+		createGroupeFichier();
+		
 		buttonParcourir = new Button(composite11, SWT.NONE);
 		buttonParcourir.setText(Messages.getString("ViewFile.parcourir")); //$NON-NLS-1$
-		checkBoxTempo = new Button(composite11, SWT.CHECK);
-		checkBoxTempo.setText(Messages.getString("ViewFile.serieTempo")); //$NON-NLS-1$
-
-		checkBoxTempo
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent e) {
-						// si pas coché on active le groupTempo sinon on grise
-
-					}
-				});
+//		checkBoxTempo = new Button(composite11, SWT.CHECK);
+//		checkBoxTempo.setText(Messages.getString("ViewFile.serieTempo")); //$NON-NLS-1$
+//
+//		checkBoxTempo
+//				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+//					public void widgetSelected(
+//							org.eclipse.swt.events.SelectionEvent e) {
+//						// si pas coché on active le groupTempo sinon on grise
+//
+//					}
+//				});
 		
 		createGroupTempo();
 		
@@ -791,7 +792,31 @@ public class ViewFile extends ViewPart {
 
 		// on le désactive de base
 		groupTempo.setVisible(false);
-
+		
+		// TODO Herve Taniou : ce groupe n'est jamais rendu visible et donc inutile ?
+	}
+	
+	/**
+	 * This method initializes groupFichier
+	 * 
+	 */
+	private void createGroupeFichier() {
+		grpFichier = new Group(composite11,SWT.NONE);
+		grpFichier.setText(Messages.getString("ViewFile.typeFichier"));
+		GridLayoutFactory.fillDefaults().applyTo(grpFichier);
+		GridDataFactory.fillDefaults().grab(true,false).applyTo(grpFichier);
+		
+		radProfilVertical = new Button(grpFichier, SWT.RADIO);
+		radProfilVertical.setText(Messages.getString("ViewFile.profilVert"));
+		
+		radSerieTempo = new Button(grpFichier, SWT.RADIO);
+		radSerieTempo.setText(Messages.getString("ViewFile.serieTempo"));
+		
+		radTrajectoire = new Button(grpFichier, SWT.RADIO);
+		radTrajectoire.setText(Messages.getString("ViewFile.trajectoire"));
+		
+		// Sélection du type par défaut
+		radProfilVertical.setSelection(true);
 	}
 
 	private void createCompositeData(Composite compo) {

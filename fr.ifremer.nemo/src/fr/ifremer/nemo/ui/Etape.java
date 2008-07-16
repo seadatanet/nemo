@@ -81,7 +81,8 @@ public class Etape {
 //		}
 
 		// check des valeurs date/heure séries tempo
-		if (ViewFile.checkBoxTempo.getSelection()) {
+//		if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()) {
 			if (!ViewFile.textTempoHeureRef.getText().matches("")) { //$NON-NLS-1$
 				try {
 					DateTimeFormat format = new DateTimeFormat(
@@ -532,7 +533,8 @@ public class Etape {
 					EditStation.textHeureDebut, EditStation.textHeureFin,
 					Messages.getString("Etape.40")); //$NON-NLS-1$
 
-			if (resultat1 && !(metaInData2 || ViewFile.checkBoxTempo.getSelection())) {
+//			if (resultat1 && !(metaInData2 || ViewFile.checkBoxTempo.getSelection())) {
+			if (resultat1 && !(metaInData2 || ViewFile.radSerieTempo.getSelection())) {
 				depasse = Regexp.depassementHeaderStation(Integer
 						.parseInt(EditStation.textHeureLigne.getText()),
 						Messages.getString("Etape.40"));
@@ -595,7 +597,8 @@ public class Etape {
 					EditStation.textDateDebut, EditStation.textDateFin,
 					Messages.getString("Etape.45")); //$NON-NLS-1$
 
-			if (resultat1 && !(metaInData2 || ViewFile.checkBoxTempo.getSelection())) {
+//			if (resultat1 && !(metaInData2 || ViewFile.checkBoxTempo.getSelection())) {
+			if (resultat1 && !(metaInData2 || ViewFile.radSerieTempo.getSelection())) {
 				depasse = Regexp.depassementHeaderStation(Integer
 						.parseInt(EditStation.textDateLigne.getText()),
 						Messages.getString("Etape.45"));
@@ -876,8 +879,8 @@ public class Etape {
 		}
 
 		// SERIE TEMPO
-		if (ViewFile.checkBoxTempo.getSelection()) {
-
+//		if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()) {
 			// LATITUDE DE FIN
 			if (EditStation.buttonLatFinSaisie.getSelection()) {
 				// saisie manuelle
@@ -1316,7 +1319,9 @@ public class Etape {
 			}
 
 			// SERIE TEMPO
-			if ((ViewFile.checkBoxTempo.getSelection())
+//			if ((ViewFile.checkBoxTempo.getSelection())
+//					&& (EditData.buttonLigneDonnees.getSelection())) {
+			if ((ViewFile.radSerieTempo.getSelection())
 					&& (EditData.buttonLigneDonnees.getSelection())) {
 				// check valeurs série tempo
 
@@ -1337,7 +1342,8 @@ public class Etape {
 
 			}
 
-			if (!ViewFile.checkBoxTempo.getSelection()) {
+//			if (!ViewFile.checkBoxTempo.getSelection()) {
+			if (!ViewFile.radSerieTempo.getSelection()) {
 				// TEST pour savoir si PRES est bien en premier mais pas pour
 				// séries tempo
 				TypeData premierType = TableData.types.get(0);
@@ -1369,9 +1375,11 @@ public class Etape {
 		// attention aux boutons radio
 
 		// puis remplissage du modèle avec les valeurs de l'IHM
-		DataModel.initModele(ViewFile.dossierCampagne, ViewFile.checkBoxTempo
+//		DataModel.initModele(ViewFile.dossierCampagne, ViewFile.checkBoxTempo
+//				.getSelection(), ViewFile.nomFichier);
+		DataModel.initModele(ViewFile.dossierCampagne, ViewFile.radSerieTempo
 				.getSelection(), ViewFile.nomFichier);
-
+		
 		Utils.messageOK(Messages.getString("Etape.90")); //$NON-NLS-1$
 
 		// on rajoute "ok" dans l'onglet description

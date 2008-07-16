@@ -130,8 +130,10 @@ public class TableData {
 			// ajout systématique de PRES
 			if (wsParameter.getCode().matches("PRES")) { //$NON-NLS-1$
 
+//				if ((DataModel.ouverture == false)
+//						&& (!ViewFile.checkBoxTempo.getSelection())) {
 				if ((DataModel.ouverture == false)
-						&& (!ViewFile.checkBoxTempo.getSelection())) {
+						&& (!ViewFile.radSerieTempo.getSelection())) {	
 					// pas de modèle chargé donc on rajoute PRES
 					types.add(type);
 				}
@@ -455,8 +457,8 @@ public class TableData {
 		String mots[] = p.split(type_a_Deplacer.getCode());
 		String code = mots[0];
 
-		if (!code.matches("PRES") || ViewFile.checkBoxTempo.getSelection()) {
-
+//		if (!code.matches("PRES") || ViewFile.checkBoxTempo.getSelection()) {
+		if (!code.matches("PRES") || ViewFile.radSerieTempo.getSelection()) {
 			listeTempo = new ArrayList();
 
 			// mise à jour préalable
@@ -511,7 +513,8 @@ public class TableData {
 		String code = mots[0];
 
 		// pas forcément de - dans le nom du type
-		if (!code.matches("PRES") || ViewFile.checkBoxTempo.getSelection()) {
+//		if (!code.matches("PRES") || ViewFile.checkBoxTempo.getSelection()) {
+		if (!code.matches("PRES") || ViewFile.radSerieTempo.getSelection()) {
 			types.remove(indice);
 		} else {
 			Utils.messageErreur(Messages.getString("TableData.18"));

@@ -111,7 +111,10 @@ public class Utils {
 				.append(Messages.getString("Utils.6") + nbreLignes); //$NON-NLS-1$
 
 		// réactivation de l'option série temporelle onglet DESC
-		ViewFile.checkBoxTempo.setEnabled(true);
+//		ViewFile.checkBoxTempo.setEnabled(true);
+		ViewFile.radProfilVertical.setEnabled(true);
+		ViewFile.radSerieTempo.setEnabled(true);
+		ViewFile.radTrajectoire.setEnabled(true);
 		
 		// FAE 089
 		// ViewFile.checkBoxTempo.setSelection(false);

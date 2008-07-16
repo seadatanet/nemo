@@ -2,12 +2,15 @@ package fr.ifremer.nemo.ui;
 
 import java.util.ArrayList;
 
+import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
@@ -16,7 +19,6 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
 import fr.ifremer.nemo.input.PropertyModel;
-import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.util.Messages;
 
 public class EditStation {
@@ -24,15 +26,15 @@ public class EditStation {
 	// /////////////////////////////////////////
 
 	private static Shell shell = new Shell();
-		
-	public static Text textRefStationNumero, textRefStationLigne, textRefStationDebut,
-			textRefStationFin, textHistoriqueAcquisition1,
+
+	public static Text textRefStationNumero, textRefStationLigne,
+			textRefStationDebut, textRefStationFin, textHistoriqueAcquisition1,
 			textHistoriqueAcquisition2, textCommentaire,
 			textHistoriqueAcqLigne1, textHistoriqueAcqLigne2,
 			textHistoriqueAcqDebut1, textHistoriqueAcqDebut2,
 			textHistoriqueAcqFin1, textHistoriqueAcqFin2, textHistorique1,
-			textHistorique2, /*textConversionHeure,*/ textConversionDate, textTU,
-			textTULigne, textTUDebut, textTUFin, textHeureLigne,
+			textHistorique2, /* textConversionHeure, */textConversionDate,
+			textTU, textTULigne, textTUDebut, textTUFin, textHeureLigne,
 			textHeureDebut, textHeureFin, textSurface1, textSurface2,
 			textSurfaceLigne1, textSurfaceLigne2, textSurfaceDebut1,
 			textSurfaceDebut2, textSurfaceFin1, textSurfaceFin2, textDateLigne,
@@ -60,8 +62,8 @@ public class EditStation {
 			buttonExpand2, buttonRefStationIncremente,
 			buttonHistoriqueAcqSaisie, buttonSurfaceSaisie, buttonTUSaisie,
 			buttonLatSaisie, buttonLongSaisie, buttonProfondeurSaisie,
-			buttonCommentaireSaisie, buttonVar,
-			buttonVarLong, buttonVarLat, buttonVarLongFin, buttonVarLatFin;
+			buttonCommentaireSaisie, buttonVar, buttonVarLong, buttonVarLat,
+			buttonVarLongFin, buttonVarLatFin;
 
 	public static Button buttonHistoriqueAcqPos, buttonRefStationPos,
 			buttonSurfacePos, buttonLatPos, buttonLongPos,
@@ -78,14 +80,18 @@ public class EditStation {
 
 	public static Button buttonHeurePos, buttonHeureSaisie, buttonDatePos,
 			buttonDateSaisie, buttonTUPos;
-	
+
 	public static Button btnMetaInData2;
 
-	public static Combo comboHeure, comboDate,
-			comboLatitude, comboLongitude, comboLatitudeFin, comboLongitudeFin;
+	public static Group grpTrajectoire;
+
+	public static Button radMedatlas, radODV;
+
+	public static Combo comboHeure, comboDate, comboLatitude, comboLongitude,
+			comboLatitudeFin, comboLongitudeFin;
 
 	public static Combo comboRefStationType;
-	
+
 	public static Section sectionQCDate, sectionQCLat, sectionQCLong,
 			sectionQCProf;
 
@@ -119,8 +125,8 @@ public class EditStation {
 	public static List listeType;
 
 	public static ScrolledForm formEdition;
-	
-	public static Cursor cursCommentaire,cursEchant1, cursEchant2,
+
+	public static Cursor cursCommentaire, cursEchant1, cursEchant2,
 			cursHistorique1, cursHistorique2;
 
 	public static void affichageEdition() {
@@ -158,7 +164,7 @@ public class EditStation {
 		ViewEdit.formEdition.setText(Messages.getString("EditStation.1")); //$NON-NLS-1$
 
 		disposeElements();
-		
+
 		// init de la arrayList des sections
 		listeSectionsStation = new ArrayList<Section>();
 		listeSectionsNoms = new ArrayList<String>();
@@ -166,8 +172,6 @@ public class EditStation {
 		listeBoutonsManuel = new ArrayList<Button>();
 		listeBoutonsPos = new ArrayList<Button>();
 
-		
-		
 		// init composants IHM
 		initSections();
 		initCombos();
@@ -188,17 +192,36 @@ public class EditStation {
 
 		buttonRAZ.setParent(ViewEdit.formEdition.getBody());
 		buttonRAZ.setText("Reset"); //$NON-NLS-1$
-		
-		btnMetaInData2.setParent(ViewEdit.formEdition.getBody());
-		btnMetaInData2.setText("Meta In Data");
 
 		buttonExpand.setParent(ViewEdit.formEdition.getBody());
 		buttonExpand.setText("+"); //$NON-NLS-1$
 
+		btnMetaInData2.setParent(ViewEdit.formEdition.getBody());
+		btnMetaInData2.setText("Meta In Data");
+
+		// Selecteur de methode de trajectoire
+		if (ViewFile.radTrajectoire.getSelection()) {
+			grpTrajectoire.setParent(ViewEdit.formEdition.getBody());
+			grpTrajectoire.setText(Messages.getString("ViewFile.trajectoire"));
+			GridLayoutFactory.fillDefaults().applyTo(grpTrajectoire);
+			GridDataFactory.fillDefaults().grab(true, false).applyTo(
+					grpTrajectoire);
+
+			radMedatlas.setParent(grpTrajectoire);
+			radMedatlas.setText(Messages.getString("EditStation.medatlas"));
+			radMedatlas.setSelection(true);
+			
+			radODV.setParent(grpTrajectoire);
+			radODV.setText(Messages.getString("EditStation.odv"));
+			radMedatlas.setSelection(false);
+		}
+
 		formEdition.reflow(true);
-		
-		// Initialisation du tableau de paramètres si étape onglet Campagne "sautée"
-		if (ViewFile.radioCollectCasN.getSelection() || ViewFile.radioCollectCas1.getSelection()) {
+
+		// Initialisation du tableau de paramètres si étape onglet Campagne
+		// "sautée"
+		if (ViewFile.radioCollectCasN.getSelection()
+				|| ViewFile.radioCollectCas1.getSelection()) {
 			TableDataSurvey.initTypes();
 			// TableDataSurvey.majTypeData();
 		}
@@ -206,19 +229,20 @@ public class EditStation {
 		// initialisation liste des sections de la partie description fichier
 		boolean blnModeleOuvert = DataModel.ouverture;
 		boolean blnManuel = true;
-		
+
 		// section reference station
 		blnManuel = true;
 		if (blnModeleOuvert) {
-			PropertyModel propertyModel = DataModel.stationModel_modele.getReferenceProperty();
+			PropertyModel propertyModel = DataModel.stationModel_modele
+					.getReferenceProperty();
 			blnManuel = propertyModel.isUserProvided();
 		}
-		
+
 		DrawingStation
 				.sectionIncrementeLigneDebutFinInject(
 						Messages.getString("EditStation.5"), Messages.getString("EditStation.6"), EditStation.sectionStation, textRefStationNumero, textRefStationLigne, textRefStationDebut, textRefStationFin, buttonRefStationIncremente, buttonRefStationPos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 		textRefStationNumero.setText("1");
-		
+
 		if (!ViewFile.isCollection()) {
 			// section reference type de données
 			DrawingStation.sectionTypeDonnees(sectionTypeDonnees, Messages
@@ -228,10 +252,11 @@ public class EditStation {
 		// section historique acquisition
 		blnManuel = true;
 		if (blnModeleOuvert) {
-			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("dcHistory1");
+			PropertyModel propertyModel = DataModel.stationModel_modele
+					.propertiesAt("dcHistory1");
 			blnManuel = propertyModel.isUserProvided();
 		}
-		
+
 		DrawingStation
 				.sectionHistoriqueAcquisition(
 						Messages.getString("EditStation.7"), Messages.getString("EditStation.8"), sectionHistorique, textHistoriqueAcqLigne1, textHistoriqueAcqDebut1, textHistoriqueAcqFin1, textHistoriqueAcqLigne2, textHistoriqueAcqDebut2, textHistoriqueAcqFin2, textHistorique1, textHistorique2, buttonHistoriqueAcqSaisie, buttonHistoriqueAcqPos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
@@ -239,10 +264,11 @@ public class EditStation {
 		// section commentaire
 		blnManuel = true;
 		if (blnModeleOuvert) {
-			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("comment");
+			PropertyModel propertyModel = DataModel.stationModel_modele
+					.propertiesAt("comment");
 			blnManuel = propertyModel.isUserProvided();
 		}
-		
+
 		DrawingStation
 				.sectionCommentaireLigneDebutFinInject(
 						Messages.getString("EditStation.9"), Messages.getString("EditStation.10"), sectionCommentaire, textCommentaireLigne, textCommentaireDebut, textCommentaireFin, textCommentaire, buttonCommentaireSaisie, buttonCommentairePos, buttonVar, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
@@ -250,10 +276,11 @@ public class EditStation {
 		// section surface sample : identique à historique acquisition
 		blnManuel = true;
 		if (blnModeleOuvert) {
-			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("surfaceSamples1");
+			PropertyModel propertyModel = DataModel.stationModel_modele
+					.propertiesAt("surfaceSamples1");
 			blnManuel = propertyModel.isUserProvided();
 		}
-		
+
 		DrawingStation
 				.sectionSurfaceSample(
 						Messages.getString("EditStation.11"), Messages.getString("EditStation.12"), sectionSurface, textSurfaceLigne1, textSurfaceDebut1, textSurfaceFin1, textSurfaceLigne2, textSurfaceDebut2, textSurfaceFin2, textSurface1, textSurface2, buttonSurfaceSaisie, buttonSurfacePos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
@@ -261,24 +288,27 @@ public class EditStation {
 		// section décallage TU
 		blnManuel = true;
 		if (blnModeleOuvert) {
-			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("offsetTU");
+			PropertyModel propertyModel = DataModel.stationModel_modele
+					.propertiesAt("offsetTU");
 			blnManuel = propertyModel.isUserProvided();
 		}
-		
+
 		DrawingStation.sectionManuelLigneDebutFinInject(Messages
 				.getString("EditStation.86"), "", sectionTU, textTULigne,
-				textTUDebut, textTUFin, textTU, buttonTUSaisie, buttonTUPos, blnManuel);
+				textTUDebut, textTUFin, textTU, buttonTUSaisie, buttonTUPos,
+				blnManuel);
 		textTU.setText("0.0");
 
 		// section heure
 		blnManuel = true;
 		if (blnModeleOuvert) {
-			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("time");
+			PropertyModel propertyModel = DataModel.stationModel_modele
+					.propertiesAt("time");
 			blnManuel = propertyModel.isUserProvided();
 		} else {
 			blnManuel = false;
 		}
-		
+
 		DrawingStation
 				.sectionHeure(
 						Messages.getString("EditStation.13"), Messages.getString("EditStation.14"), sectionHeure, textHeureLigne, textHeureDebut, textHeureFin, textHeureSaisie, labelConversionHeure, textTestConvHeure, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
@@ -286,12 +316,13 @@ public class EditStation {
 		// section date
 		blnManuel = true;
 		if (blnModeleOuvert) {
-			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("date");
+			PropertyModel propertyModel = DataModel.stationModel_modele
+					.propertiesAt("date");
 			blnManuel = propertyModel.isUserProvided();
 		} else {
 			blnManuel = false;
 		}
-		
+
 		DrawingStation
 				.sectionDate(
 						Messages.getString("EditStation.15"), Messages.getString("EditStation.16"), sectionDate, textDateLigne, textDateDebut, textDateFin, textDateSaisie, labelConversionDate, textTestConvDate, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
@@ -304,26 +335,29 @@ public class EditStation {
 		// section Latitude
 		blnManuel = true;
 		if (blnModeleOuvert) {
-			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("latitude");
+			PropertyModel propertyModel = DataModel.stationModel_modele
+					.propertiesAt("latitude");
 			blnManuel = propertyModel.isUserProvided();
 		} else {
 			blnManuel = false;
 		}
-		
+
 		DrawingStation
 				.sectionManuelLigneDebutFinInjectLatLongComboFormat(
 						Messages.getString("EditStation.19"), Messages.getString("EditStation.20"), sectionLatitude, textLatitudeLigne, textLatitudeDebut, textLatitudeFin, textLatitude, buttonLatSaisie, comboLatitude, buttonLatPos, buttonVarLat, blnManuel, true); //$NON-NLS-1$ //$NON-NLS-2$
 
-		if (ViewFile.checkBoxTempo.getSelection()) {
+		// if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()) {
 			// section latitude de fin
 			blnManuel = true;
 			if (blnModeleOuvert) {
-				PropertyModel propertyModel = DataModel.stationModel_modele.getTimeSeriesModel().propertiesAt("endLatitude");
+				PropertyModel propertyModel = DataModel.stationModel_modele
+						.getTimeSeriesModel().propertiesAt("endLatitude");
 				blnManuel = propertyModel.isUserProvided();
 			} else {
 				blnManuel = false;
 			}
-			
+
 			DrawingStation
 					.sectionManuelLigneDebutFinInjectLatLongFin(
 							Messages.getString("EditStation.21"), "", sectionLatFin, comboLatitudeFin, textLatFinLigne, textLatFinDebut, textLatFinFin, textLatFin, buttonLatFinSaisie, buttonLatFinPos, buttonVarLatFin, blnManuel, true); //$NON-NLS-1$ //$NON-NLS-2$
@@ -332,26 +366,29 @@ public class EditStation {
 		// section longitude
 		blnManuel = true;
 		if (blnModeleOuvert) {
-			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("longitude");
+			PropertyModel propertyModel = DataModel.stationModel_modele
+					.propertiesAt("longitude");
 			blnManuel = propertyModel.isUserProvided();
 		} else {
 			blnManuel = false;
 		}
-		
+
 		DrawingStation
 				.sectionManuelLigneDebutFinInjectLatLongComboFormat(
 						Messages.getString("EditStation.23"), Messages.getString("EditStation.24"), sectionLongitude, textLongitudeLigne, textLongitudeDebut, textLongitudeFin, textLongitude, buttonLongSaisie, comboLongitude, buttonLongPos, buttonVarLong, blnManuel, false); //$NON-NLS-1$ //$NON-NLS-2$
 
-		if (ViewFile.checkBoxTempo.getSelection()) {
+		// if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()) {
 			// section longitude de fin
 			blnManuel = true;
 			if (blnModeleOuvert) {
-				PropertyModel propertyModel = DataModel.stationModel_modele.getTimeSeriesModel().propertiesAt("endLongitude");
+				PropertyModel propertyModel = DataModel.stationModel_modele
+						.getTimeSeriesModel().propertiesAt("endLongitude");
 				blnManuel = propertyModel.isUserProvided();
 			} else {
 				blnManuel = false;
 			}
-			
+
 			DrawingStation
 					.sectionManuelLigneDebutFinInjectLatLongFin(
 							Messages.getString("EditStation.25"), "", sectionLongFin, comboLongitudeFin, textLongFinLigne, textLongFinDebut, textLongFinFin, textLongFin, buttonLongFinSaisie, buttonLongFinPos, buttonVarLongFin, blnManuel, false); //$NON-NLS-1$ //$NON-NLS-2$
@@ -360,19 +397,22 @@ public class EditStation {
 		// section profondeur
 		blnManuel = true;
 		if (blnModeleOuvert) {
-			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("bottomDepth");
+			PropertyModel propertyModel = DataModel.stationModel_modele
+					.propertiesAt("bottomDepth");
 			blnManuel = propertyModel.isUserProvided();
 		}
-		
+
 		DrawingStation
 				.sectionManuelLigneDebutFinInject(
 						Messages.getString("EditStation.27"), Messages.getString("EditStation.28"), sectionProfondeur, textProfondeurLigne, textProfondeurDebut, textProfondeurFin, textProfondeur, buttonProfondeurSaisie, buttonProfondeurPos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 
-		if (ViewFile.checkBoxTempo.getSelection()) {
+		// if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()) {
 			// section profondeur de fin
 			blnManuel = true;
 			if (blnModeleOuvert) {
-				PropertyModel propertyModel = DataModel.stationModel_modele.getTimeSeriesModel().propertiesAt("endDepth");
+				PropertyModel propertyModel = DataModel.stationModel_modele
+						.getTimeSeriesModel().propertiesAt("endDepth");
 				blnManuel = propertyModel.isUserProvided();
 			}
 
@@ -380,23 +420,23 @@ public class EditStation {
 					.sectionManuelLigneDebutFinInject(
 							Messages.getString("EditStation.29"), "", sectionProfFin, textProfFinLigne, textProfFinDebut, textProfFinFin, textProfFin, buttonProfFinSaisie, buttonProfFinPos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 
-			
 			// section profondeur de capteur
 			blnManuel = true;
 			if (blnModeleOuvert) {
-				PropertyModel propertyModel = DataModel.stationModel_modele.getTimeSeriesModel().propertiesAt("sensorDepth");
+				PropertyModel propertyModel = DataModel.stationModel_modele
+						.getTimeSeriesModel().propertiesAt("sensorDepth");
 				blnManuel = propertyModel.isUserProvided();
 			}
 			DrawingStation
 					.sectionManuelLigneDebutFinInject(
 							Messages.getString("EditStation.31"), Messages.getString("EditStation.32"), sectionProfCapteur, textProfCapteurLigne, textProfCapteurDebut, textProfCapteurFin, textProfCapteur, buttonProfCapteurSaisie, buttonProfCapteurPos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 
-
-			
 			// section déclinaison magnétique
 			blnManuel = true;
 			if (blnModeleOuvert) {
-				PropertyModel propertyModel = DataModel.stationModel_modele.getTimeSeriesModel().propertiesAt("magneticDeclination");
+				PropertyModel propertyModel = DataModel.stationModel_modele
+						.getTimeSeriesModel().propertiesAt(
+								"magneticDeclination");
 				blnManuel = propertyModel.isUserProvided();
 			}
 			DrawingStation
@@ -406,10 +446,11 @@ public class EditStation {
 			// section fréquence échantillonnage
 			blnManuel = true;
 			if (blnModeleOuvert) {
-				PropertyModel propertyModel = DataModel.stationModel_modele.getTimeSeriesModel().propertiesAt("samplingRate");
+				PropertyModel propertyModel = DataModel.stationModel_modele
+						.getTimeSeriesModel().propertiesAt("samplingRate");
 				blnManuel = propertyModel.isUserProvided();
 			}
-			
+
 			DrawingStation
 					.sectionManuelLigneDebutFinInjectFreqEchant(
 							Messages.getString("EditStation.35"), Messages.getString("EditStation.36"), sectionFreqEchant, textFreqEchantLigne, textFreqEchantDebut, textFreqEchantFin, textFreqEchant, buttonFreqEchantSaisie, buttonFreqEchantPos, textFreqEchantConv, textFreqEchantTest, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
@@ -429,7 +470,6 @@ public class EditStation {
 						// System.out.println("expand/collapse all");
 						// raz de la valeur manuelle
 						int i;
-
 
 						// System.out.println("expand ? = " + expand);
 						for (i = 0; i <= EditStation.listeSectionsStation
@@ -532,16 +572,16 @@ public class EditStation {
 
 					}
 				});
-		
+
 		btnMetaInData2
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-//						try {
-//							DataModel.stationModel.setMetaInData2(btnMetaInData2.getSelection());
-//						} catch (Exception ex) {
-//							ex.printStackTrace();
-//						}
+						// try {
+						// DataModel.stationModel.setMetaInData2(btnMetaInData2.getSelection());
+						// } catch (Exception ex) {
+						// ex.printStackTrace();
+						// }
 					}
 				});
 
@@ -569,13 +609,13 @@ public class EditStation {
 
 		int i;
 
-
 		// effacement des boutons valider/expand/init serveur
-		EditStation.buttonExpand.setParent(shell);
-		EditStation.buttonExpand2.setParent(shell);
-		EditStation.buttonValidate.setParent(shell);
-		EditStation.buttonRAZ.setParent(shell);
-		EditStation.btnMetaInData2.setParent(shell);
+		buttonExpand.setParent(shell);
+		buttonExpand2.setParent(shell);
+		buttonValidate.setParent(shell);
+		buttonRAZ.setParent(shell);
+		btnMetaInData2.setParent(shell);
+		grpTrajectoire.setParent(shell);
 
 		// System.out.println("expand ? = " + expand);
 		for (i = 0; i <= EditStation.listeSectionsStation.size() - 1; i++) {
@@ -606,10 +646,11 @@ public class EditStation {
 		// raz message erreur
 		Utils.messageErreur(""); //$NON-NLS-1$
 
-		EditStation.buttonValidate.setParent(s.getBody());
-		EditStation.buttonRAZ.setParent(s.getBody());
-		EditStation.buttonExpand.setParent(s.getBody());
-		EditStation.btnMetaInData2.setParent(s.getBody());
+		buttonValidate.setParent(s.getBody());
+		buttonRAZ.setParent(s.getBody());
+		buttonExpand.setParent(s.getBody());
+		btnMetaInData2.setParent(s.getBody());
+		grpTrajectoire.setParent(s.getBody());
 
 		// System.out.println("expand ? = " + expand);
 		for (i = 0; i <= EditStation.listeSectionsStation.size() - 1; i++) {
@@ -619,17 +660,19 @@ public class EditStation {
 			EditStation.listeSectionsStation.get(i).setParent(s.getBody());
 
 		}
-		
+
 		if (DataModel.station_modele != null) {
 			if (DataModel.station_modele.getDataType() != null) {
-				Utils.selectComboCode(EditStation.comboRefStationType, DataModel.station_modele.getDataType().getCode());
+				Utils.selectComboCode(EditStation.comboRefStationType,
+						DataModel.station_modele.getDataType().getCode());
 			}
 		} else if (DataModel.station != null) {
 			if (DataModel.station.getDataType() != null) {
-				Utils.selectComboCode(EditStation.comboRefStationType, DataModel.station.getDataType().getCode());
+				Utils.selectComboCode(EditStation.comboRefStationType,
+						DataModel.station.getDataType().getCode());
 			}
-		}		
-		
+		}
+
 		// EditStation.buttonExpand2.setParent(s.getBody());
 
 		ViewEdit.formEdition.setText(Messages.getString("EditStation.51")); //$NON-NLS-1$
@@ -642,7 +685,6 @@ public class EditStation {
 	}
 
 	public static void initSections() {
-
 		sectionQCDate = new Section(shell, SWT.NONE);
 		sectionQCLat = new Section(shell, SWT.NONE);
 		sectionQCLong = new Section(shell, SWT.NONE);
@@ -720,8 +762,8 @@ public class EditStation {
 
 		textConversionDate = new Text(shell, SWT.BORDER);
 		listeTextStation.add(textConversionDate);
-//		textConversionHeure = new Text(shell, SWT.BORDER);
-//		listeTextStation.add(textConversionHeure);
+		// textConversionHeure = new Text(shell, SWT.BORDER);
+		// listeTextStation.add(textConversionHeure);
 		textTestConvHeure = new Text(shell, SWT.BORDER);
 		listeTextStation.add(textTestConvHeure);
 		textTestConvDate = new Text(shell, SWT.BORDER);
@@ -888,6 +930,10 @@ public class EditStation {
 		buttonExpand2 = new Button(shell, SWT.NONE);
 		buttonValidate = new Button(shell, SWT.NONE);
 		btnMetaInData2 = new Button(shell, SWT.CHECK);
+		
+		grpTrajectoire = new Group(shell, SWT.NONE);
+		radMedatlas = new Button(grpTrajectoire, SWT.RADIO);
+		radODV = new Button(grpTrajectoire, SWT.RADIO);
 
 		buttonHistoriqueAcqSaisie = new Button(shell, SWT.RADIO);
 		listeBoutonsManuel.add(buttonHistoriqueAcqSaisie);
@@ -931,13 +977,13 @@ public class EditStation {
 		listeBoutonsManuel.add(buttonCommentaireSaisie);
 		buttonCommentairePos = new Button(shell, SWT.RADIO);
 		listeBoutonsPos.add(buttonCommentairePos);
-		
+
 		buttonVar = new Button(shell, SWT.CHECK);
 		buttonVarLat = new Button(shell, SWT.CHECK);
 		buttonVarLatFin = new Button(shell, SWT.CHECK);
 		buttonVarLong = new Button(shell, SWT.CHECK);
 		buttonVarLongFin = new Button(shell, SWT.CHECK);
-		
+
 		buttonProfondeurSaisie = new Button(shell, SWT.RADIO);
 		listeBoutonsManuel.add(buttonProfondeurSaisie);
 		buttonProfondeurPos = new Button(shell, SWT.RADIO);
@@ -1014,8 +1060,7 @@ public class EditStation {
 		comboRefStationType = new Combo(shell, SWT.READ_ONLY);
 		// remplissage avec les dataTypes de la campagne
 
-
-		//FAE022
+		// FAE022
 		if (!ViewFile.isCollection()) {
 
 			int taille = TableDataSurvey.types.size();
@@ -1064,7 +1109,7 @@ public class EditStation {
 		comboLongitude.add("NDDD MM.mm"); //$NON-NLS-1$
 		comboLongitude.add("NDDD.ddd"); //$NON-NLS-1$
 		comboLongitude.add("NDDDMMSS"); //$NON-NLS-1$
-		
+
 		comboLatitudeFin = new Combo(shell, SWT.NONE);
 		comboLatitudeFin.add("+DD MM.mm"); //$NON-NLS-1$
 		comboLatitudeFin.add("+DD.ddd"); //$NON-NLS-1$
@@ -1124,7 +1169,8 @@ public class EditStation {
 				parser.addStandardConstants();
 				parser.addVariable(
 						"x", Float.valueOf(textFreqEchant.getText().trim())); //$NON-NLS-1$
-				parser.parseExpression("x" + textFreqEchantConv.getText().trim());
+				parser.parseExpression("x"
+						+ textFreqEchantConv.getText().trim());
 
 				double resultJEP = parser.getValue();
 
@@ -1162,60 +1208,47 @@ public class EditStation {
 
 	}
 
-	private static void disposeElements()
-	{
-		
-	shell.close();
-	
-	shell = new Shell();
-		
-	if (listeBoutonsManuel != null)
-	{
-		for (Button element : listeBoutonsManuel)
-		{
-			element.dispose();
+	private static void disposeElements() {
+
+		shell.close();
+
+		shell = new Shell();
+
+		if (listeBoutonsManuel != null) {
+			for (Button element : listeBoutonsManuel) {
+				element.dispose();
+			}
 		}
-	}
-		
-	if (listeBoutonsPos != null)
-	{
-		for (Button element : listeBoutonsPos)
-		{
-			element.dispose();
+
+		if (listeBoutonsPos != null) {
+			for (Button element : listeBoutonsPos) {
+				element.dispose();
+			}
 		}
-	}
-	
-	if (listeSectionsLabel != null)
-	{
-		for (Label element : listeSectionsLabel)
-		{
-			element.dispose();
+
+		if (listeSectionsLabel != null) {
+			for (Label element : listeSectionsLabel) {
+				element.dispose();
+			}
 		}
-	}
-	
-	if (listeSectionsParam != null)
-	{
-		for (Section element : listeSectionsParam)
-		{
-			element.dispose();
+
+		if (listeSectionsParam != null) {
+			for (Section element : listeSectionsParam) {
+				element.dispose();
+			}
 		}
-	}
-	
-	if (listeSectionsStation != null)
-	{
-		for (Section element : listeSectionsStation)
-		{
-			element.dispose();
+
+		if (listeSectionsStation != null) {
+			for (Section element : listeSectionsStation) {
+				element.dispose();
+			}
 		}
-	}
-	
-	if (listeTextStation != null)
-	{
-		for (Text element : listeTextStation)
-		{
-			element.dispose();
+
+		if (listeTextStation != null) {
+			for (Text element : listeTextStation) {
+				element.dispose();
+			}
 		}
-	}
 
 		if (comboDate != null)
 			comboDate.dispose();

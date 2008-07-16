@@ -80,8 +80,8 @@ public class EditSurvey {
 		formEdition = ViewEdit.formEdition;
 		ViewLog.aideSurvey();
 		okApresReset = true;
+		
 		// affichage du texte dans la zone de gauche
-
 		ViewFile.styledTextCampagne.setText(Utils.texteBrut);
 
 		// raz message erreur
@@ -102,7 +102,8 @@ public class EditSurvey {
 						.messageInfoAppend(Messages.getString("EditSurvey.2") + ViewFile.nomRepertoire); //$NON-NLS-1$
 			}
 
-			if (ViewFile.checkBoxTempo.getSelection()) {
+//			if (ViewFile.checkBoxTempo.getSelection()) {
+			if (ViewFile.radSerieTempo.getSelection()) {
 				Utils.messageInfoAppend(Messages.getString("EditSurvey.3")); //$NON-NLS-1$
 			}
 
@@ -118,7 +119,6 @@ public class EditSurvey {
 		ViewEdit.formEdition.getBody().setLayout(new GridLayout());
 		ViewEdit.formEdition.setText(Messages.getString("EditSurvey.4")); //$NON-NLS-1$
 
-		
 		disposeElements();
 		
 		// init de la arrayList des sections
@@ -158,7 +158,7 @@ public class EditSurvey {
 		formEdition.redraw();
 		formEdition.reflow(true);
 
-		formEdition.reflow(true);
+//		formEdition.reflow(true);
 
 		// initialisation liste des sections de la partie description fichier
 
