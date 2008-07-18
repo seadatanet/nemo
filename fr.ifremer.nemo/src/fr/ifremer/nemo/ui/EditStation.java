@@ -19,6 +19,7 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
 import fr.ifremer.nemo.input.PropertyModel;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 public class EditStation {
@@ -204,7 +205,7 @@ public class EditStation {
 			grpTrajectoire.setParent(ViewEdit.formEdition.getBody());
 			grpTrajectoire.setText(Messages.getString("ViewFile.trajectoire"));
 			GridLayoutFactory.fillDefaults().applyTo(grpTrajectoire);
-			GridDataFactory.fillDefaults().grab(true, false).applyTo(
+			GridDataFactory.fillDefaults().grab(false, false).applyTo(
 					grpTrajectoire);
 
 			radMedatlas.setParent(grpTrajectoire);
@@ -213,7 +214,9 @@ public class EditStation {
 			
 			radODV.setParent(grpTrajectoire);
 			radODV.setText(Messages.getString("EditStation.odv"));
-			radMedatlas.setSelection(false);
+			radODV.setSelection(false);
+		} else {
+			grpTrajectoire.setParent(shell);
 		}
 
 		formEdition.reflow(true);
@@ -347,7 +350,7 @@ public class EditStation {
 						Messages.getString("EditStation.19"), Messages.getString("EditStation.20"), sectionLatitude, textLatitudeLigne, textLatitudeDebut, textLatitudeFin, textLatitude, buttonLatSaisie, comboLatitude, buttonLatPos, buttonVarLat, blnManuel, true); //$NON-NLS-1$ //$NON-NLS-2$
 
 		// if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
 			// section latitude de fin
 			blnManuel = true;
 			if (blnModeleOuvert) {
@@ -378,7 +381,7 @@ public class EditStation {
 						Messages.getString("EditStation.23"), Messages.getString("EditStation.24"), sectionLongitude, textLongitudeLigne, textLongitudeDebut, textLongitudeFin, textLongitude, buttonLongSaisie, comboLongitude, buttonLongPos, buttonVarLong, blnManuel, false); //$NON-NLS-1$ //$NON-NLS-2$
 
 		// if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
 			// section longitude de fin
 			blnManuel = true;
 			if (blnModeleOuvert) {
@@ -407,7 +410,7 @@ public class EditStation {
 						Messages.getString("EditStation.27"), Messages.getString("EditStation.28"), sectionProfondeur, textProfondeurLigne, textProfondeurDebut, textProfondeurFin, textProfondeur, buttonProfondeurSaisie, buttonProfondeurPos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 
 		// if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
 			// section profondeur de fin
 			blnManuel = true;
 			if (blnModeleOuvert) {
@@ -1270,5 +1273,13 @@ public class EditStation {
 
 		if (comboRefStationType != null)
 			comboRefStationType.dispose();
+	}
+	
+	public static String typeFichierSortie() {
+		if (radODV.getSelection()) {
+			return Global.ODV;
+		} else {
+			return Global.MEDATLAS;
+		}
 	}
 }

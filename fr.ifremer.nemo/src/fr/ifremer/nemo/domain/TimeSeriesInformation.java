@@ -192,7 +192,7 @@ public class TimeSeriesInformation implements Cloneable, SAXConsumer {
 			Element2Field setter = new Element2Field(this, "setSamplingRate");
 			return setter;
 		}
-		if (a_LocalName.equals("magneticDecination")) {
+		if (a_LocalName.equals("magneticDeclination")) {
 			Element2Field setter = new Element2Field(this,
 					"setMagneticDeclination");
 			return setter;
@@ -230,7 +230,7 @@ public class TimeSeriesInformation implements Cloneable, SAXConsumer {
 		a_Writer.putTag("qc2", getQc2());
 		a_Writer.putTag("qc3", getQc3());
 		a_Writer.putTag("samplingRate", getSamplingRate());
-		a_Writer.putTag("magneticDecination", getMagneticDeclination());
+		a_Writer.putTag("magneticDeclination", getMagneticDeclination());
 	}
 
 	/**

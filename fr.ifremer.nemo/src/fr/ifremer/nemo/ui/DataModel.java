@@ -12,6 +12,7 @@ import fr.ifremer.nemo.domain.Parameter;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.domain.TimeSeriesInformation;
+import fr.ifremer.nemo.domain.Trajectory;
 import fr.ifremer.nemo.input.DirectoryBasedSurvey;
 import fr.ifremer.nemo.input.HeaderFragment;
 import fr.ifremer.nemo.input.HorodatedParameterModel;
@@ -55,38 +56,40 @@ public class DataModel {
 
 	public static TimeSeriesInformation timeSeriesInformation,
 			timeSeriesInformation_modele;
+	
+	public static Trajectory trajectory;
 
-	public static void initModele(Boolean fichier, Boolean timeSeries,
+	public static void initModele(Boolean fichier, String typeFichier,
 			String nomFich) {
 
 		// ouverture = false;
 
 		if (!fichier) {
 			// fichier campagne
-			initFichier(timeSeries, nomFich);
+			initFichier(typeFichier, nomFich);
 
 		} else {
-			initDossier(timeSeries, nomFich);
+			initDossier(typeFichier, nomFich);
 			// dossier campagne
 		}
 
 	}
 
-	public static void initDossier(Boolean timeSeries, String nomDossier) {
+	public static void initDossier(String typeFichier, String nomDossier) {
 
 		if (inputModel != null) {
 			inputModel.release();
 		}
 
 		inputModel = new InputModel();
-		inputModel.initFoDirectoryBased(timeSeries);
+		inputModel.initFoDirectoryBased(typeFichier);
 		dirSurvey = (DirectoryBasedSurvey) inputModel.getMedia();
 		dirSurvey.setDirectory(nomDossier);
 
 		initDesc();
 	}
 
-	public static void initFichier(Boolean timeSeries, String nomFich) {
+	public static void initFichier(String typeFichier, String nomFich) {
 		// acceder aux proprietes de survey
 
 		if (inputModel != null) {
@@ -94,7 +97,7 @@ public class DataModel {
 		}
 
 		inputModel = new InputModel();
-		inputModel.initForSingleFile(timeSeries);
+		inputModel.initForSingleFile(typeFichier);
 		singleSurvey = (SingleFileSurvey) inputModel.getMedia();
 		singleSurvey.setFile(nomFich);
 
@@ -114,23 +117,14 @@ public class DataModel {
 					.parseInt(EditDesc.lignesEnteteFichier.getText()));
 			stationModel = singleSurvey.getStationModel();
 		}
-		
+
 		// Type de fichier
-		if (ViewFile.radSerieTempo.getSelection()) {
-			// Serie temporelle
-			stationModel.getModel().setFileType(Global.TIMESERIES);
-		} else if (ViewFile.radSerieTempo.getSelection()) {
-			// Trajectoire
-			stationModel.getModel().setFileType(Global.TRAJECTORY);
-		} else {
-			// Profil
-			stationModel.getModel().setFileType(Global.PROFILE);
-		}
-		
+		stationModel.setInputType(ViewFile.typeFichierEntree());
+
 		// serie temporelle
 		// if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection() ||
-				ViewFile.radTrajectoire.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()
+				|| ViewFile.radTrajectoire.getSelection()) {
 			timeSeriesInformation = stationModel.getTimeSeriesInformation();
 
 			if (!ViewFile.textTempoHeureRef.getText().matches("")) {
@@ -171,6 +165,11 @@ public class DataModel {
 			}
 
 		}
+		
+		// trajectoire
+		if (ViewFile.radTrajectoire.getSelection()) {
+			trajectory = stationModel.getTrajectory();
+		}
 
 		// nombre lignes entete station
 		stationModel.setNumberOfLines(Integer
@@ -187,15 +186,20 @@ public class DataModel {
 
 		// si manuel -> direct sinon passer par propertyModel
 		if (EditDesc.radEOF.getSelection()) {
+			stationModel.setEndOnEmptyLine(false);
 			stationModel.setEndOnEOF(true);
+			stationModel.setEndOnPattern(false);
 		} else if (EditDesc.radLigne.getSelection()) {
 			stationModel.setEndOnEmptyLine(true);
+			stationModel.setEndOnEOF(false);
+			stationModel.setEndOnPattern(false);
 		} else if (EditDesc.radManuel.getSelection()) {
+			stationModel.setEndOnEmptyLine(false);
+			stationModel.setEndOnEOF(false);
 			stationModel.setEndOnPattern(true);
-			
 			stationModel.setEndDataPattern(EditDesc.txtManuel.getText());
 		}
-		
+
 		// on initialise les dataTypes, centers et parameters en prévision des
 		// onglets Campagne et Data
 
@@ -209,11 +213,11 @@ public class DataModel {
 		}
 
 		// verrouillage de l'option serieTemporelle pour éviter les changements
-//		ViewFile.checkBoxTempo.setEnabled(false);
+		// ViewFile.checkBoxTempo.setEnabled(false);
 		ViewFile.radProfilVertical.setEnabled(false);
 		ViewFile.radSerieTempo.setEnabled(false);
 		ViewFile.radTrajectoire.setEnabled(false);
-		
+
 		// flag "validee" à 1
 		EditDesc.validee = 1;
 
@@ -230,18 +234,19 @@ public class DataModel {
 		station = stationModel.getModel();
 
 		// maj des dataTypes
-		
+
 		TableDataSurvey.majTypeData();
 
 		// injection des valeurs de l'IHM -> datamodel
 		// référence
-		if (EditSurvey.textCampagne == null )
+		if (EditSurvey.textCampagne == null)
 			return;
-		
+
 		survey.setReference(EditSurvey.textCampagne.getText());
 		survey.setName(EditSurvey.textNom.getText());
 		survey.setShipCode(Utils.extraitCode(EditSurvey.comboNavire.getText()));
-		survey.setShipName(Utils.extraitValeur(EditSurvey.comboNavire.getText()));
+		survey.setShipName(Utils
+				.extraitValeur(EditSurvey.comboNavire.getText()));
 
 		// Localisation
 
@@ -271,14 +276,16 @@ public class DataModel {
 
 		survey.setRegionName(EditSurvey.textRegion.getText());
 
-		// Source de données	
-		survey.setCountryCode(Utils.extraitCode(EditSurvey.comboCountries.getText()));
+		// Source de données
+		survey.setCountryCode(Utils.extraitCode(EditSurvey.comboCountries
+				.getText()));
 		survey.setLaboratories(EditSurvey.textLabo.getText());
 		survey.setChiefScientist(EditSurvey.textChef.getText());
 		survey.setProjectName(EditSurvey.textProjet.getText());
 
 		// Centre d'archivage
-		survey.setDataCentre(Utils.extraitCode(EditSurvey.comboDataCentres.getText()));
+		survey.setDataCentre(Utils.extraitCode(EditSurvey.comboDataCentres
+				.getText()));
 
 		// confidentialité
 		if (EditSurvey.comboConfid.getText().matches("P - Public")) {
@@ -339,14 +346,36 @@ public class DataModel {
 		HeaderFragment frag;
 
 		station = stationModel.getModel();
-		
+
 		stationModel.setMetaInData2(EditStation.btnMetaInData2.getSelection());
+
+		// Type de fichier de sortie (trajectoire)
+		if (trajectory != null) {
+			trajectory.setOutputType(
+					EditStation.typeFichierSortie());
+			
+			if (EditStation.typeFichierSortie().equals(Global.ODV)) {
+				ViewFile.radMedatlas.setSelection(false);
+				ViewFile.radMedatlas.setEnabled(false);
+				
+				ViewFile.radODV.setSelection(true);
+				ViewFile.radODV.setEnabled(true);
+			} else {
+				ViewFile.radMedatlas.setSelection(true);
+				ViewFile.radMedatlas.setEnabled(true);
+				
+				ViewFile.radODV.setSelection(false);
+				ViewFile.radODV.setEnabled(false);
+			}
+			ViewFile.afficheGrpODV();
+		}
 
 		PropertyModel propertyModel = stationModel.getReferenceProperty();
 
 		if (EditStation.buttonRefStationIncremente.getSelection()) {
 			stationModel.setIncrementRef(true);
-			stationModel.setIncrementNumber(EditStation.textRefStationNumero.getText());
+			stationModel.setIncrementNumber(EditStation.textRefStationNumero
+					.getText());
 			propertyModel.setUserProvided(true);
 
 		} else {
@@ -356,16 +385,15 @@ public class DataModel {
 			frag = propertyModel.getFragment();
 			// frag.setSingleLine(true);
 
-			if (Integer.valueOf(EditStation.textRefStationLigne
-							.getText()) == 0) {
+			if (Integer.valueOf(EditStation.textRefStationLigne.getText()) == 0) {
 				ligne = "0";
 			} else {
 				ligne = ""
-					+ (Integer.valueOf(EditStation.textRefStationLigne
-							.getText()) - Integer
-							.valueOf(EditDesc.lignesEnteteFichier.getText()));
+						+ (Integer.valueOf(EditStation.textRefStationLigne
+								.getText()) - Integer
+								.valueOf(EditDesc.lignesEnteteFichier.getText()));
 			}
-			
+
 			debut = EditStation.textRefStationDebut.getText();
 			fin = EditStation.textRefStationFin.getText();
 
@@ -373,7 +401,7 @@ public class DataModel {
 			frag.setLastLine(ligne);
 			frag.setFirstCharOffset(debut);
 			frag.setLastCharOffset(fin);
-			
+
 		}
 
 		// type de donnée
@@ -504,12 +532,13 @@ public class DataModel {
 			// frag.setLastLine(ligne);
 			frag.setFirstCharOffset(debut);
 			frag.setLastCharOffset(fin);
-			
+
 			frag.setVariable(EditStation.buttonVar.getSelection());
-			
+
 			// Utils.calculNbreLignesPuisRemplissageFragClic(frag,
 			// EditStation.posxCommentaire, EditStation.posyCommentaire);
-			Utils.calculNbreLignesPuisRemplissageFragClic(frag, EditStation.cursCommentaire);
+			Utils.calculNbreLignesPuisRemplissageFragClic(frag,
+					EditStation.cursCommentaire);
 
 			frag.toString();
 		}
@@ -605,8 +634,8 @@ public class DataModel {
 		}
 
 		// frequence echantillonnage
-//		if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection()) {
+		// if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
 			propertyModel = stationModel.getTimeSeriesModel().propertiesAt(
 					"samplingRate");
 
@@ -791,7 +820,8 @@ public class DataModel {
 			frag.setFirstCharOffset(debut);
 			frag.setLastCharOffset(fin);
 			frag.setVariable(EditStation.buttonVarLat.getSelection());
-			latitudeFormat.setVariableLength(EditStation.buttonVarLat.getSelection());
+			latitudeFormat.setVariableLength(EditStation.buttonVarLat
+					.getSelection());
 		}
 
 		// longitude
@@ -841,7 +871,8 @@ public class DataModel {
 			frag.setFirstCharOffset(debut);
 			frag.setLastCharOffset(fin);
 			frag.setVariable(EditStation.buttonVarLong.getSelection());
-			longitudeFormat.setVariableLength(EditStation.buttonVarLong.getSelection());
+			longitudeFormat.setVariableLength(EditStation.buttonVarLong
+					.getSelection());
 
 		}
 
@@ -871,8 +902,8 @@ public class DataModel {
 
 		}
 
-//		if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection()) {
+		// if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
 			// DECLINAISON MAGNETIQUE
 			propertyModel = stationModel.getTimeSeriesModel().propertiesAt(
 					"magneticDeclination");
@@ -1027,7 +1058,8 @@ public class DataModel {
 				frag.setFirstCharOffset(debut);
 				frag.setLastCharOffset(fin);
 				frag.setVariable(EditStation.buttonVarLatFin.getSelection());
-				latitudeFormatFin.setVariableLength(EditStation.buttonVarLatFin.getSelection());
+				latitudeFormatFin.setVariableLength(EditStation.buttonVarLatFin
+						.getSelection());
 			}
 
 			// LONGITUDE DE FIN
@@ -1038,8 +1070,9 @@ public class DataModel {
 			LongitudeFormat longitudeFormatFin = (LongitudeFormat) propertyModel
 					.getFormat();
 			try {
-				longitudeFormatFin.setFormatString(EditStation.comboLongitudeFin
-						.getText());
+				longitudeFormatFin
+						.setFormatString(EditStation.comboLongitudeFin
+								.getText());
 			} catch (ParseException e) {
 				// 
 				e.printStackTrace();
@@ -1107,7 +1140,9 @@ public class DataModel {
 				frag.setFirstCharOffset(debut);
 				frag.setLastCharOffset(fin);
 				frag.setVariable(EditStation.buttonVarLongFin.getSelection());
-				longitudeFormatFin.setVariableLength(EditStation.buttonVarLongFin.getSelection());
+				longitudeFormatFin
+						.setVariableLength(EditStation.buttonVarLongFin
+								.getSelection());
 			}
 
 			// DATE / HEURE DE FIN
@@ -1212,8 +1247,8 @@ public class DataModel {
 
 		}
 
-//		if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection()) {
+		// if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
 			// gestion des séries temporelles
 			if (EditData.buttonFreqEchant.getSelection()) {
 				// calcul à partir fréquence échantillonnage
@@ -1308,15 +1343,15 @@ public class DataModel {
 			// lignes entete fichier
 			EditDesc.lignesEnteteFichier.setText(""
 					+ singleSurvey_modele.getHeaderLinesNumber());
-			
+
 		}
 
 		// Cochage du sélecteur de type de fichier
-		if (stationModel_modele.getModel().getFileType().equals(Global.TIMESERIES)) {
+		if (stationModel_modele.getInputType().equals(Global.TIMESERIES)) {
 			ViewFile.radProfilVertical.setSelection(false);
 			ViewFile.radSerieTempo.setSelection(true);
 			ViewFile.radTrajectoire.setSelection(false);
-		} else if (stationModel_modele.getModel().getFileType().equals(Global.TRAJECTORY)) {
+		} else if (stationModel_modele.getInputType().equals(Global.TRAJECTORY)) {
 			ViewFile.radProfilVertical.setSelection(false);
 			ViewFile.radSerieTempo.setSelection(false);
 			ViewFile.radTrajectoire.setSelection(true);
@@ -1332,7 +1367,7 @@ public class DataModel {
 				ViewFile.radTrajectoire.setSelection(false);
 			}
 		}
-		
+
 		// test si série tempo
 		if (stationModel_modele.getTimeSeriesInformation() != null) {
 			// ViewFile.groupTempo.setVisible(true);
@@ -1387,37 +1422,18 @@ public class DataModel {
 
 		// metaInData
 		// stationModel.setMetaInData(false);
-		
+
 		// pattern de fin fourni ou pas
 
 		if (stationModel_modele.isEndOnEOF()) {
 			EditDesc.selectComboEnd(EditDesc.radEOF);
-		} else if (stationModel_modele.isEndOnEmptyLine()){
+		} else if (stationModel_modele.isEndOnEmptyLine()) {
 			EditDesc.selectComboEnd(EditDesc.radLigne);
 		} else if (stationModel_modele.isEndOnPattern()) {
 			EditDesc.selectComboEnd(EditDesc.radManuel);
-			
+
 			EditDesc.txtManuel.setText(stationModel_modele.getEndDataPattern());
 		}
-		
-//		FAE 33
-//		// pattern de fin fourni ou pas
-//		if (stationModel_modele.getEndDataPattern().matches("")) {
-//			// pas de pattern de fin donc nombre de mesures dans le fichier
-//			EditDesc.nbreLignesMesures.setText(""
-//					+ stationModel_modele.getRowNumber());
-//
-//		} else {
-//			// pattern de fin
-//			EditDesc.buttonIndicFinDonnees.setSelection(true);
-//			EditDesc.buttonIndicFinDonneesPosition.setSelection(false);
-//			// on rajoute met le pattern en début de liste et on le sélectionne
-//			EditDesc.comboIndicRuptureDonnees.setItem(0, stationModel_modele
-//					.getEndDataPattern());
-//			EditDesc.comboIndicRuptureDonnees.select(0);
-//		}
-
-		// System.out.println("Fin remplissage onglet Desc");
 
 		// refresh de la zone d'édition
 		EditDesc.razEdition();
@@ -1426,10 +1442,10 @@ public class DataModel {
 		DataModel.ouverture = true;
 
 		// désactivation option série tempo
-//		ViewFile.checkBoxTempo.setEnabled(false);
-		ViewFile.radProfilVertical.getSelection();
-		ViewFile.radSerieTempo.getSelection();
-		ViewFile.radTrajectoire.getSelection();
+		// ViewFile.checkBoxTempo.setEnabled(false);
+		ViewFile.radProfilVertical.setEnabled(true);
+		ViewFile.radSerieTempo.setEnabled(true);
+		ViewFile.radTrajectoire.setEnabled(true);
 	}
 
 	public static void fillSurvey() {
@@ -1447,7 +1463,8 @@ public class DataModel {
 		// référence
 		EditSurvey.textCampagne.setText(survey.getReference());
 		EditSurvey.textNom.setText(survey.getName());
-		Utils.selectComboCodePlus(EditSurvey.comboNavire, survey.getShipCode(), survey.getShipName());
+		Utils.selectComboCodePlus(EditSurvey.comboNavire, survey.getShipCode(),
+				survey.getShipName());
 
 		// Localisation
 
@@ -1475,13 +1492,15 @@ public class DataModel {
 		EditSurvey.textRegion.setText(survey.getRegionName());
 
 		// Source de données
-		Utils.selectComboCode(EditSurvey.comboCountries, survey.getCountryCode());
+		Utils.selectComboCode(EditSurvey.comboCountries, survey
+				.getCountryCode());
 		EditSurvey.textLabo.setText(survey.getLaboratories());
 		EditSurvey.textChef.setText(survey.getChiefScientist());
 		EditSurvey.textProjet.setText(survey.getProjectName());
 
 		// Centre d'archivage
-		Utils.selectComboCode(EditSurvey.comboDataCentres, survey.getDataCentre());
+		Utils.selectComboCode(EditSurvey.comboDataCentres, survey
+				.getDataCentre());
 
 		// confidentialité
 		String code = survey.getAvailabilityCode();
@@ -1570,13 +1589,15 @@ public class DataModel {
 		boolean var;
 
 		station_modele = stationModel_modele.getModel();
-		
-		EditStation.btnMetaInData2.setSelection(stationModel_modele.isMetaInData2());
+
+		EditStation.btnMetaInData2.setSelection(stationModel_modele
+				.isMetaInData2());
 
 		// numéro de station
 		if (stationModel_modele.isIncrementRef()) {
 			EditStation.buttonRefStationIncremente.setSelection(true);
-			EditStation.textRefStationNumero.setText(String.valueOf(stationModel_modele.getIncrementNumber()));
+			EditStation.textRefStationNumero.setText(String
+					.valueOf(stationModel_modele.getIncrementNumber()));
 			EditStation.buttonRefStationPos.setSelection(false);
 		} else {
 
@@ -1594,12 +1615,13 @@ public class DataModel {
 			ligne = frag.getFirstLine();
 			debut = frag.getFirstCharOffset();
 			fin = frag.getLastCharOffset();
-			
+
 			if (ligne == 0) {
 				real_ligne = 0;
 			} else {
 				real_ligne = ligne
-				+ Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+						+ Integer.valueOf(EditDesc.lignesEnteteFichier
+								.getText());
 			}
 
 			EditStation.textRefStationLigne.setText("" + real_ligne);
@@ -1645,9 +1667,11 @@ public class DataModel {
 			if (ok) {
 				// ajouté que si c'est un capteur
 				if (capteur) {
-					Utils.selectComboCode(EditStation.comboRefStationType, code);
-//					EditStation.comboRefStationType.add(code, 0);
-//					EditStation.comboRefStationType.select(0);
+					Utils
+							.selectComboCode(EditStation.comboRefStationType,
+									code);
+					// EditStation.comboRefStationType.add(code, 0);
+					// EditStation.comboRefStationType.select(0);
 				}
 			}
 		}
@@ -1677,8 +1701,8 @@ public class DataModel {
 			int ligne1 = frag.getFirstLine();
 			int debut1 = frag.getFirstCharOffset();
 			int fin1 = frag.getLastCharOffset();
-			int real_ligne1 = ligne1 +
-				Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+			int real_ligne1 = ligne1
+					+ Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 
 			EditStation.textHistoriqueAcqLigne1.setText("" + real_ligne1);
 			EditStation.textHistoriqueAcqDebut1.setText("" + debut1);
@@ -1697,8 +1721,9 @@ public class DataModel {
 				int ligne2 = frag2.getFirstLine();
 				int debut2 = frag2.getFirstCharOffset();
 				int fin2 = frag2.getLastCharOffset();
-				int real_ligne2 = ligne2 +
-					Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+				int real_ligne2 = ligne2
+						+ Integer.valueOf(EditDesc.lignesEnteteFichier
+								.getText());
 
 				EditStation.textHistoriqueAcqLigne2.setText("" + real_ligne2);
 				EditStation.textHistoriqueAcqDebut2.setText("" + debut2);
@@ -1727,7 +1752,7 @@ public class DataModel {
 			debut = frag.getFirstCharOffset();
 			fin = frag.getLastCharOffset();
 			var = frag.isVariable();
-			
+
 			real_ligne = ligne
 					+ Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 
@@ -1771,8 +1796,8 @@ public class DataModel {
 			int ligne1 = frag.getFirstLine();
 			int debut1 = frag.getFirstCharOffset();
 			int fin1 = frag.getLastCharOffset();
-			int real_ligne1 = ligne1 +
-				Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+			int real_ligne1 = ligne1
+					+ Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 
 			EditStation.textSurfaceLigne1.setText("" + real_ligne1);
 			EditStation.textSurfaceDebut1.setText("" + debut1);
@@ -1791,8 +1816,9 @@ public class DataModel {
 				int ligne2 = frag2.getFirstLine();
 				int debut2 = frag2.getFirstCharOffset();
 				int fin2 = frag2.getLastCharOffset();
-				int real_ligne2 = ligne2 +
-					Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+				int real_ligne2 = ligne2
+						+ Integer.valueOf(EditDesc.lignesEnteteFichier
+								.getText());
 
 				EditStation.textSurfaceLigne2.setText("" + real_ligne2);
 				EditStation.textSurfaceDebut2.setText("" + debut2);
@@ -1804,8 +1830,8 @@ public class DataModel {
 		HeaderFragment frag;
 
 		// frequence echantillonnage
-//		if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection()) {
+		// if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
 			propertyModel = stationModel_modele.getTimeSeriesModel()
 					.propertiesAt("samplingRate");
 
@@ -1848,11 +1874,11 @@ public class DataModel {
 		propertyModel = stationModel_modele.propertiesAt("time");
 
 		DateTimeFormat timeFormat = (DateTimeFormat) propertyModel.getFormat();
-		Utils.selectComboValeur(EditStation.comboHeure, timeFormat.getFormatString());
-//		EditStation.comboHeure.add(timeFormat.getFormatString(), 0);
-//		EditStation.comboHeure.select(0);
-		
-		
+		Utils.selectComboValeur(EditStation.comboHeure, timeFormat
+				.getFormatString());
+		// EditStation.comboHeure.add(timeFormat.getFormatString(), 0);
+		// EditStation.comboHeure.select(0);
+
 		if (propertyModel.isUserProvided()) {
 			// saisie manuelle
 
@@ -1899,9 +1925,10 @@ public class DataModel {
 
 		DateTimeFormat dateFormat = (DateTimeFormat) propertyModel.getFormat();
 
-		Utils.selectComboValeur(EditStation.comboDate, dateFormat.getFormatString());
-//		EditStation.comboDate.add(dateFormat.getFormatString(), 0);
-//		EditStation.comboDate.select(0);
+		Utils.selectComboValeur(EditStation.comboDate, dateFormat
+				.getFormatString());
+		// EditStation.comboDate.add(dateFormat.getFormatString(), 0);
+		// EditStation.comboDate.select(0);
 
 		if (propertyModel.isUserProvided()) {
 			// saisie manuelle
@@ -1950,9 +1977,10 @@ public class DataModel {
 				.getFormat();
 		String formatLat = latitudeFormat.getFormatString();
 
-		Utils.selectComboValeur(EditStation.comboLatitude, latitudeFormat.getFormatString());
-//		EditStation.comboLatitude.add(latitudeFormat.getFormatString(), 0);
-//		EditStation.comboLatitude.select(0);
+		Utils.selectComboValeur(EditStation.comboLatitude, latitudeFormat
+				.getFormatString());
+		// EditStation.comboLatitude.add(latitudeFormat.getFormatString(), 0);
+		// EditStation.comboLatitude.select(0);
 
 		if (propertyModel.isUserProvided()) {
 			// saisie manuelle latitude
@@ -1981,7 +2009,7 @@ public class DataModel {
 			debut = frag.getFirstCharOffset();
 			fin = frag.getLastCharOffset();
 			var = frag.isVariable();
-			
+
 			real_ligne = ligne
 					+ Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 
@@ -1998,9 +2026,10 @@ public class DataModel {
 				.getFormat();
 		String formatLong = longitudeFormat.getFormatString();
 
-		Utils.selectComboValeur(EditStation.comboLongitude, longitudeFormat.getFormatString());
-//		EditStation.comboLongitude.add(longitudeFormat.getFormatString(), 0);
-//		EditStation.comboLongitude.select(0);
+		Utils.selectComboValeur(EditStation.comboLongitude, longitudeFormat
+				.getFormatString());
+		// EditStation.comboLongitude.add(longitudeFormat.getFormatString(), 0);
+		// EditStation.comboLongitude.select(0);
 
 		if (propertyModel.isUserProvided()) {
 			// saisie manuelle latitude
@@ -2028,7 +2057,7 @@ public class DataModel {
 			debut = frag.getFirstCharOffset();
 			fin = frag.getLastCharOffset();
 			var = frag.isVariable();
-			
+
 			real_ligne = ligne
 					+ Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
 
@@ -2047,8 +2076,8 @@ public class DataModel {
 			if (Float.isNaN(station_modele.getBottomDepth())) {
 				EditStation.textProfondeur.setText("");
 			} else {
-			EditStation.textProfondeur.setText(""
-					+ station_modele.getBottomDepth());
+				EditStation.textProfondeur.setText(""
+						+ station_modele.getBottomDepth());
 			}
 
 		} else {
@@ -2073,8 +2102,8 @@ public class DataModel {
 		EditStation.DrawingBack();
 
 		// PROFONDEUR CAPTEUR
-//		if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection()) {
+		// if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
 			propertyModel = stationModel_modele.getTimeSeriesModel()
 					.propertiesAt("sensorDepth");
 			if (propertyModel.isUserProvided()) {
@@ -2106,18 +2135,18 @@ public class DataModel {
 		}
 
 		// LATITUDE DE FIN
-//		if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection()) {
+		// if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
 			propertyModel = stationModel_modele.getTimeSeriesModel()
 					.propertiesAt("endLatitude");
-			
+
 			// reconversion double vers format normal
 			latitudeFormat = (LatitudeFormat) propertyModel.getFormat();
 			formatLat = latitudeFormat.getFormatString();
 			Utils.selectComboValeur(EditStation.comboLatitudeFin, formatLat);
-			
+
 			if (propertyModel.isUserProvided()) {
-				// saisie manuelle				
+				// saisie manuelle
 				Formatter formatter = new Formatter();
 
 				try {
@@ -2130,14 +2159,14 @@ public class DataModel {
 					e.printStackTrace();
 				}
 
-			} else {				
+			} else {
 				// position dans fichier
 				frag = propertyModel.getFragment();
 				ligne = frag.getFirstLine();
 				debut = frag.getFirstCharOffset();
 				fin = frag.getLastCharOffset();
 				var = frag.isVariable();
-				
+
 				real_ligne = ligne
 						+ Integer.valueOf(EditDesc.lignesEnteteFichier
 								.getText());
@@ -2151,18 +2180,18 @@ public class DataModel {
 		}
 
 		// LONGITUDE DE FIN
-//		if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection()) {
+		// if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
 			propertyModel = stationModel_modele.getTimeSeriesModel()
 					.propertiesAt("endLongitude");
-			
+
 			// reconversion double vers format normal
 			longitudeFormat = (LongitudeFormat) propertyModel.getFormat();
 			formatLong = longitudeFormat.getFormatString();
 			Utils.selectComboValeur(EditStation.comboLongitudeFin, formatLong);
-			
+
 			if (propertyModel.isUserProvided()) {
-				// saisie manuelle			
+				// saisie manuelle
 				Formatter formatter = new Formatter();
 
 				try {
@@ -2182,7 +2211,7 @@ public class DataModel {
 				debut = frag.getFirstCharOffset();
 				fin = frag.getLastCharOffset();
 				var = frag.isVariable();
-				
+
 				real_ligne = ligne
 						+ Integer.valueOf(EditDesc.lignesEnteteFichier
 								.getText());
@@ -2196,14 +2225,14 @@ public class DataModel {
 		}
 
 		// PROFONDEUR DE FIN
-//		if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection()) {
+		// if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
 			propertyModel = stationModel_modele.getTimeSeriesModel()
 					.propertiesAt("endDepth");
 			if (propertyModel.isUserProvided()) {
 				// saisie manuelle
 				if (Float.isNaN(stationModel_modele.getTimeSeriesInformation()
-								.getEndDepth())) {
+						.getEndDepth())) {
 					EditStation.textProfFin.setText("");
 				} else {
 					EditStation.textProfFin.setText(""
@@ -2229,8 +2258,8 @@ public class DataModel {
 		}
 
 		// DECLINAISON MAGNETIQUE
-//		if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection()) {
+		// if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
 			propertyModel = stationModel_modele.getTimeSeriesModel()
 					.propertiesAt("magneticDeclination");
 			if (propertyModel.isUserProvided()) {
@@ -2281,10 +2310,12 @@ public class DataModel {
 			EditStation.textTUDebut.setText("" + frag.getFirstCharOffset());
 			EditStation.textTUFin.setText("" + frag.getLastCharOffset());
 		}
-		
+
 		if (stationModel_modele.getCdi() != null) {
-			ViewFile.comboTypePlateForme.setText(stationModel_modele.getCdi().getTypePlateForme());
-			ViewFile.comboAccesDonnees.setText(stationModel_modele.getCdi().getAccesDonnees());
+			ViewFile.comboTypePlateForme.setText(stationModel_modele.getCdi()
+					.getTypePlateForme());
+			ViewFile.comboAccesDonnees.setText(stationModel_modele.getCdi()
+					.getAccesDonnees());
 		}
 
 		// System.out.println("Fin remplissage onglet Station");
@@ -2346,7 +2377,7 @@ public class DataModel {
 		// refresh de la table
 		TableData.creationTable();
 
-//		if (ViewFile.checkBoxTempo.getSelection()) {
+		// if (ViewFile.checkBoxTempo.getSelection()) {
 		if (ViewFile.radSerieTempo.getSelection()) {
 			// série tempo
 			if (stationModel_modele.getTimestampModel().isComputed()) {

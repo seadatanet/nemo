@@ -13,21 +13,17 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
-import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.events.ExpansionAdapter;
 import org.eclipse.ui.forms.events.ExpansionEvent;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
-import fr.ifremer.nemo.config.EdmoHandler;
 import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
@@ -1083,7 +1079,7 @@ public class Drawing {
 		ViewEdit.formEdition.reflow(true);
 		
 		// Création du menu contextuel pour la recherche filtree
-		Utils.createSearchMenu(cmbNavire, FiltrageTableType._table.Ship.name());
+		Utils.createSearchMenu(cmbNavire, Global.SHIP);
 	}
 
 	public static void sectionNlabelsNtext(Section section, String nomSection,

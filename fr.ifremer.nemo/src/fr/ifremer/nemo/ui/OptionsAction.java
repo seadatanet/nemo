@@ -17,12 +17,8 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.ISelectionListener;
@@ -30,10 +26,10 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
-import org.eclipse.ui.actions.LabelRetargetAction;
 
 import fr.ifremer.nemo.config.EdmoHandler;
 import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
@@ -304,7 +300,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		GridDataFactory.fillDefaults().grab(true,false).applyTo(comboCentreDonnees);
 		comboCentreDonnees.pack();
 		
-		Utils.createSearchMenu(comboCentreDonnees, FiltrageTableType._table.DataCenter.name());
+		Utils.createSearchMenu(comboCentreDonnees, Global.DATACENTRE);
 	}
 	
 	/**
@@ -535,10 +531,10 @@ public class OptionsAction extends Action implements ISelectionListener,
 		GridDataFactory.fillDefaults().grab(true,false).applyTo(comboMethodeCdi);
 				
 		// Menu recherche combos
-		Utils.createSearchMenu(comboIdEdmoRespCdi, FiltrageTableType._table.IdEdmo.name());
-		Utils.createSearchMenu(comboCodeEdmoDonnees, FiltrageTableType._table.IdEdmo.name());
-		Utils.createSearchMenu(comboIdEdmoRespDonnees, FiltrageTableType._table.IdEdmo.name());
-		Utils.createSearchMenu(comboIdEdmoDistDonnees, FiltrageTableType._table.IdEdmo.name());
+		Utils.createSearchMenu(comboIdEdmoRespCdi, Global.IDEDMO);
+		Utils.createSearchMenu(comboCodeEdmoDonnees, Global.IDEDMO);
+		Utils.createSearchMenu(comboIdEdmoRespDonnees, Global.IDEDMO);
+		Utils.createSearchMenu(comboIdEdmoDistDonnees, Global.IDEDMO);
 		
 		// Mapping CDI
 		labelFichierMapping = new Label(groupCDI, SWT.NONE);

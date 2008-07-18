@@ -59,10 +59,10 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 	 * 
 	 * @param isTimeSeries
 	 */
-	public DirectoryBasedSurvey(boolean isTimeSeries) {
+	public DirectoryBasedSurvey(String typeFichier) {
 		this();
 		setModel(new Survey());
-		setStationModel(new StationModel(isTimeSeries));
+		setStationModel(new StationModel(typeFichier));
 	}
 
 	/**

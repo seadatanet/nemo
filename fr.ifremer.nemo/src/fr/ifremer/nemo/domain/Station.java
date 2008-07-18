@@ -166,11 +166,6 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 * campagne a concerne des donnees temporelles.
 	 */
 	protected TimeSeriesInformation _timeSeriesInformation;
-	
-	/**
-	 * Type de fichier : profil vertical, serie temporelle ou trajectoire
-	 */
-	protected String _fileType;
 
 	public Station() {
 		_bottomDepth = Float.NaN;
@@ -190,7 +185,6 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		_parameters = new java.util.ArrayList<Parameter>();
 		_survey = null;
 		_timeSeriesInformation = null;
-		_fileType = Global.PROFILE;
 	}
 
 	/**
@@ -265,10 +259,6 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 */
 	public SAXConsumer consumeElement(String a_URI, String a_LocalName,
 			String a_QName, Attributes a_Attributes) throws SAXException {
-		if (a_LocalName.equals("fileType")) {
-			Element2Field setter = new Element2Field(this, "setFileType");
-			return setter;
-		}
 		if (a_LocalName.equals("date")) {
 			Element2Field setter = new Element2Field(this, "setDate");
 			return setter;
@@ -416,7 +406,6 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
 		a_Writer.putAttribute("reference", getReference());
 		// a_Writer.putAttribute( "", getSortCriteria());
-		a_Writer.putTag("fileType", getFileType());
 		a_Writer.putTag("date", getDate());
 		a_Writer.putTag("time", getTime());
 		a_Writer.putTag("offsetTU", getOffsetTU());
@@ -1510,15 +1499,5 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	public String getSortCriteria() {
 		return Long.toString(getFullDate()) + getReference();
 	}
-	
-	public String getFileType() {
-		return _fileType;
-	}
-	
-
-	public void setFileType(String type) {
-		_fileType = type;
-	}
-
 
 } /* End of class: Station */

@@ -18,6 +18,7 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSDataType;
 
@@ -255,7 +256,7 @@ public class TableDataSurvey {
 		itemList.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				// System.out.println("sélection liste");
-				FiltrageTableType.go(FiltrageTableType._table.DataType.name());
+				FiltrageTableType.go(Global.DATATYPE);
 
 			}
 		});

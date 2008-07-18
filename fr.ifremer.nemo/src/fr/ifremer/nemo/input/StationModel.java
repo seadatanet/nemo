@@ -25,11 +25,13 @@ import fr.ifremer.nemo.domain.Parameter;
 import fr.ifremer.nemo.domain.ParameterValue;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.TimeSeriesInformation;
+import fr.ifremer.nemo.domain.Trajectory;
 import fr.ifremer.nemo.ui.DataModel;
 import fr.ifremer.nemo.ui.EditConversion;
 import fr.ifremer.nemo.ui.ViewFile;
 import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.FloatFormat;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.LatitudeFormat;
 import fr.ifremer.nemo.util.LongitudeFormat;
 import fr.ifremer.nemo.util.Messages;
@@ -133,6 +135,11 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	protected Cdi _cdi;
 	
 	/**
+	 * Modèle pour les informations propres aux trajectoires
+	 */
+	protected Trajectory _trajectory;
+	
+	/**
 	 * Dernier numero de station (mode "ODV")
 	 */
 	protected String _lastRef;
@@ -145,7 +152,11 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	/**
 	 * Nombre de caractères du fichier
 	 */
-	protected int _taille;
+	protected int _taille;/**
+	
+	 * Type de fichier en entrée : profil vertical, serie temporelle ou trajectoire
+	 */
+	protected String _inputType;
 
 	public StationModel() {
 		_incrementNumber = 1;
@@ -160,20 +171,37 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		_timeSeriesModel = null;
 		_timestampModel = null;
 		_cdi = null;
+		_trajectory = null;
 		_lastRef = null;
 		_headerPlus = null;
+		_inputType = Global.PROFILE;
 	}
 
 	/**
 	 * 
 	 * @param isTimeSeries
 	 */
-	public StationModel(boolean isTimeSeries) {
+	public StationModel(String typeFichier) {
 		this();
+		boolean isTimeSeries, isTrajectory;
+		if (typeFichier.equals(Global.TIMESERIES)) {
+			isTimeSeries = true;
+			isTrajectory = false;
+		} else if (typeFichier.equals(Global.TRAJECTORY)) {
+			isTimeSeries = true;
+			isTrajectory = true;
+		} else {
+			isTimeSeries = false;
+			isTrajectory = false;
+		}
+		
 		setModel(new Station(isTimeSeries));
 		if (isTimeSeries) {
 			setTimeSeriesModel(new TimeSeriesModel(this));
 			setTimestampModel(new HorodatedParameterModel());
+		}
+		if (isTrajectory) {
+			setTrajectory(new Trajectory());
 		}
 		setTimestampModel(new HorodatedParameterModel());
 		initProperties();
@@ -249,6 +277,10 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 */
 	public SAXConsumer consumeElement(String a_URI, String a_LocalName,
 			String a_QName, Attributes a_Attributes) throws SAXException {
+		if (a_LocalName.equals("inputType")) {
+			Element2Field setter = new Element2Field(this, "setInputType");
+			return setter;
+		}
 		if (a_LocalName.equals("incrementRef")) {
 			Element2Field setter = new Element2Field(this, "setIncrementRef");
 			return setter;
@@ -301,6 +333,12 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			setTimeSeriesModel(l);
 			return (SAXConsumer) l;
 		}
+		if (a_LocalName.equals("Trajectory")) {
+			Trajectory l = (Trajectory) Trajectory.fromElement(
+					a_URI, a_LocalName, a_QName, a_Attributes);
+			setTrajectory(l);
+			return (SAXConsumer) l;
+		}
 		if (a_LocalName.equals("parameters")) {
 			return new PathElementConsumer("parameters", this);
 		}
@@ -337,6 +375,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		a_Writer.putAttribute("endOnEOF", isEndOnEOF());
 		a_Writer.putAttribute("endOnEmptyLine", isEndOnEmptyLine());
 		a_Writer.putAttribute("endOnPattern", isEndOnPattern());
+		a_Writer.putTag("inputType", getInputType());
 		a_Writer.putTag("incrementRef", isIncrementRef());
 		a_Writer.putTag("incrementNumber", getIncrementNumber());
 		a_Writer.putTag("endDataPattern", getEndDataPattern());
@@ -372,6 +411,9 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			a_Writer.openTag("referenceProperty");
 			getReferenceProperty().writeXMLOn(a_Writer);
 			a_Writer.closeTag();
+		}
+		if (getTrajectory() != null) {
+			getTrajectory().writeXMLOn(a_Writer);
 		}
 		if (getTimeSeriesModel() != null) {
 			getTimeSeriesModel().writeXMLOn(a_Writer);
@@ -457,6 +499,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		releaseProperties();
 		releaseReferenceProperty();
 		releaseTimeSeriesModel();
+		releaseTrajectory();
 		releaseTimestampModel();
 	}
 
@@ -833,6 +876,34 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		if (_cdi == x)
 			return;
 		_cdi = x;
+	}
+	
+	/**
+	 * Remove any link for role Trajectory
+	 */
+	public void releaseTrajectory() {
+		setTrajectory(null);
+	}
+	
+	/**
+	 * returns the linked object for role <% aRole name%>
+	 * 
+	 * @return the object linked
+	 */
+	public Trajectory getTrajectory() {
+		return _trajectory;
+	}
+
+	/**
+	 * Create a new link with x for role model
+	 * 
+	 * @param x
+	 *            the object to link with
+	 */
+	public void setTrajectory(Trajectory x) {
+		if (_trajectory == x)
+			return;
+		_trajectory = x;
 	}
 
 	/**
@@ -1875,6 +1946,14 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 	public void setTaille(int _taille) {
 		this._taille = _taille;
+	}
+	
+	public String getInputType() {
+		return _inputType;
+	}
+	
+	public void setInputType(String type) {
+		_inputType = type;
 	}
 	
 } /* End of class: StationModel */

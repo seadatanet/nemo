@@ -17,6 +17,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSParameter;
 
@@ -309,7 +310,7 @@ public class TableData {
 		itemList.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				// System.out.println("sélection liste");
-				FiltrageTableType.go(FiltrageTableType._table.Parameter.name());
+				FiltrageTableType.go(Global.PARAMETER);
 
 			}
 		});
@@ -514,7 +515,7 @@ public class TableData {
 
 		// pas forcément de - dans le nom du type
 //		if (!code.matches("PRES") || ViewFile.checkBoxTempo.getSelection()) {
-		if (!code.matches("PRES") || ViewFile.radSerieTempo.getSelection()) {
+		if (!code.matches("PRES") || ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
 			types.remove(indice);
 		} else {
 			Utils.messageErreur(Messages.getString("TableData.18"));

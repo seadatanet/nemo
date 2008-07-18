@@ -443,16 +443,16 @@ public class InputModel implements Cloneable, PathElementHandler,
 	 * 
 	 * @param isTimeSeries
 	 */
-	public void initFoDirectoryBased(boolean isTimeSeries) {
-		setMedia(new DirectoryBasedSurvey(isTimeSeries));
+	public void initFoDirectoryBased(String typeFichier) {
+		setMedia(new DirectoryBasedSurvey(typeFichier));
 	}	
 
 	/**
 	 * 
 	 * @param isTimeSeries
 	 */
-	public void initForSingleFile(boolean isTimeSeries) {
-		setMedia(new SingleFileSurvey(isTimeSeries));
+	public void initForSingleFile(String typeFichier) {
+		setMedia(new SingleFileSurvey(typeFichier));
 	}
 
 	/**

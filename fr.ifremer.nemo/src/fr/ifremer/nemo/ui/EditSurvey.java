@@ -31,6 +31,7 @@ import org.xml.sax.SAXException;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.DataType;
 import fr.ifremer.nemo.domain.Survey;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSDataType;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
@@ -485,7 +486,7 @@ public class EditSurvey {
 
 	public static void init_webService() {
 		// sélection de la ref campagne dans une liste
-		FiltrageTableType.go(FiltrageTableType._table.WSSurvey.name());
+		FiltrageTableType.go(Global.WSSURVEY);
 
 	}
 
@@ -964,7 +965,7 @@ public class EditSurvey {
 			NemoLists.listeCentreDonnees.add(temp);
 			comboDataCentres.add(temp);
 		}
-		Utils.createSearchMenu(comboDataCentres, FiltrageTableType._table.DataCenter.name());
+		Utils.createSearchMenu(comboDataCentres, Global.DATACENTRE);
 		
 		// Remplissage liste navires
 		comboNavire = new Combo(shell, SWT.READ_ONLY);

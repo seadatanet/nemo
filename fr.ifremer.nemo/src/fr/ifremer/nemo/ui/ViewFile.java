@@ -29,6 +29,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
 import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
@@ -168,7 +169,6 @@ public class ViewFile extends ViewPart {
 		DataModel.reset = false;
 
 		createTabFolder();
-
 	}
 
 	@Override
@@ -534,8 +534,8 @@ public class ViewFile extends ViewPart {
 								radMedatlas.setEnabled(false);
 								radMedatlas.setSelection(false);
 								radODV.setSelection(true);
-								grpODV.setVisible(true);
 								grpCDI.setVisible(true);
+								afficheGrpODV();
 							}
 
 							else {
@@ -583,7 +583,7 @@ public class ViewFile extends ViewPart {
 								radMedatlas.setEnabled(false);
 								radMedatlas.setSelection(false);
 								radODV.setSelection(true);
-								grpODV.setVisible(true);
+								afficheGrpODV();
 								grpCDI.setVisible(true);
 							}
 
@@ -644,10 +644,12 @@ public class ViewFile extends ViewPart {
 		
 		radODV = new Button(group, SWT.RADIO);
 		radODV.setText("ODV"); //$NON-NLS-1$
+		radODV.setSelection(false);
 		
 		grpODV = new Group(group, SWT.NONE);
 		grpODV.setLayout(layout2);
-		grpODV.setVisible(false);
+		afficheGrpODV();
+		
 		radMonoFichier = new Button(grpODV, SWT.RADIO);
 		radMonoFichier.setText(Messages.getString("ViewFile.monoFichier"));
 		radMonoFichier.setSelection(true);
@@ -747,7 +749,7 @@ public class ViewFile extends ViewPart {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						grpODV.setVisible(false);
+						afficheGrpODV();
 					}
 
 				});
@@ -757,7 +759,7 @@ public class ViewFile extends ViewPart {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						grpODV.setVisible(true);
+						afficheGrpODV();
 					}
 
 				});
@@ -873,4 +875,17 @@ public class ViewFile extends ViewPart {
 		return (collectionCas1 || collectionCasN);
 	}
 
+	public static String typeFichierEntree() {
+		if (radSerieTempo.getSelection()) {
+			return Global.TIMESERIES;
+		} else if (radTrajectoire.getSelection()) {
+			return Global.TRAJECTORY;
+		} else {
+			return Global.PROFILE;
+		}
+	}
+	
+	public static void afficheGrpODV() {
+		grpODV.setVisible(radODV.getSelection());
+	}
 }

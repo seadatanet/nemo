@@ -67,10 +67,10 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 	 * 
 	 * @param isTimeSeries
 	 */
-	public SingleFileSurvey(boolean isTimeSeries) {
+	public SingleFileSurvey(String typeFichier) {
 		this();
 		setModel(new Survey());
-		setStationModel(new StationModel(isTimeSeries));
+		setStationModel(new StationModel(typeFichier));
 	}
 
 	/**
