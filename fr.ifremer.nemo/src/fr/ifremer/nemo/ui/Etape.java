@@ -1321,7 +1321,7 @@ public class Etape {
 			// SERIE TEMPO
 //			if ((ViewFile.checkBoxTempo.getSelection())
 //					&& (EditData.buttonLigneDonnees.getSelection())) {
-			if ((ViewFile.radSerieTempo.getSelection()
+			if (((ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection())
 					&& EditData.buttonLigneDonnees.getSelection())) {
 				// check valeurs série tempo
 
@@ -1346,7 +1346,7 @@ public class Etape {
 			if (!(ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) &&
 					!(ViewFile.radTrajectoire.getSelection() && EditStation.radMedatlas.getSelection())) {
 				// TEST pour savoir si PRES est bien en premier mais pas pour
-				// séries tempo
+				// séries tempo ou trajectoire
 				TypeData premierType = TableData.types.get(0);
 
 				// split sur " - "

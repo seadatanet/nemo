@@ -197,9 +197,12 @@ public class EditStation {
 		buttonExpand.setParent(ViewEdit.formEdition.getBody());
 		buttonExpand.setText("+"); //$NON-NLS-1$
 
-		btnMetaInData2.setParent(ViewEdit.formEdition.getBody());
-		btnMetaInData2.setText("Meta In Data");
-
+		// Case à cocher "Meta In Data"
+		if (ViewFile.radProfilVertical.getSelection()) {
+			btnMetaInData2.setParent(ViewEdit.formEdition.getBody());
+			btnMetaInData2.setText("Meta In Data");
+		}
+		
 		// Selecteur de methode de trajectoire
 		if (ViewFile.radTrajectoire.getSelection()) {
 			grpTrajectoire.setParent(ViewEdit.formEdition.getBody());
@@ -576,18 +579,6 @@ public class EditStation {
 					}
 				});
 
-		btnMetaInData2
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent e) {
-						// try {
-						// DataModel.stationModel.setMetaInData2(btnMetaInData2.getSelection());
-						// } catch (Exception ex) {
-						// ex.printStackTrace();
-						// }
-					}
-				});
-
 		// raz du message d'erreurs
 		Utils.messageErreur(""); //$NON-NLS-1$
 
@@ -652,8 +643,14 @@ public class EditStation {
 		buttonValidate.setParent(s.getBody());
 		buttonRAZ.setParent(s.getBody());
 		buttonExpand.setParent(s.getBody());
-		btnMetaInData2.setParent(s.getBody());
-		grpTrajectoire.setParent(s.getBody());
+		
+		if (ViewFile.radProfilVertical.getSelection()) {
+			btnMetaInData2.setParent(s.getBody());
+		}
+		
+		if (ViewFile.radTrajectoire.getSelection()) {
+			grpTrajectoire.setParent(s.getBody());
+		}
 
 		// System.out.println("expand ? = " + expand);
 		for (i = 0; i <= EditStation.listeSectionsStation.size() - 1; i++) {

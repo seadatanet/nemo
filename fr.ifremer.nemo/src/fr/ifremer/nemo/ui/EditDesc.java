@@ -436,7 +436,7 @@ public class EditDesc {
 	public static void initText() {
 
 	
-		System.out.println("ICI  " + shell.getChildren().length);
+//		System.out.println("ICI  " + shell.getChildren().length);
 	
 		
 		lignesEnteteFichier = new Text(shell, SWT.BORDER);

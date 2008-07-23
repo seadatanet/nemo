@@ -1458,7 +1458,9 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		
 		try {
 			station = (Station) _model.clone();
-			if (_timeSeriesModel != null && _timestampModel.isComputed() && !isMetaInData2()) {
+			if ((_timeSeriesModel != null && _timestampModel.isComputed()) ||
+					(_trajectory != null && _trajectory.getOutputType().equals(Global.MEDATLAS))
+					&& !isMetaInData2()) {
 				// Marquage du fichier au debut
 				a_Reader.mark(getTaille());
 				if ((header = consumeHeaderPlusOne(a_Reader)) != null) {
@@ -1495,6 +1497,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 					
 					// Retour au debut du fichier et depassement du header
 					a_Reader.reset();
+					EditConversion.setErreurLigne(0);
 					consumeHeader(a_Reader);
 					
 					convertParameters(a_Reader, station, isRefDateBased,
@@ -1748,7 +1751,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 				
 				EditConversion.incrementErreurLigne();
 				EditConversion.setErreurChaine(line);
-				
+								
 				if (index == 0 && isMetaInData()) {
 					String[] header = new String[] { line };
 					if (isIncrementRef()) {

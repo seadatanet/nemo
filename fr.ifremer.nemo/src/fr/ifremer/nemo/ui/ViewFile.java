@@ -435,6 +435,8 @@ public class ViewFile extends ViewPart {
 								}
 
 								radMedatlas.setEnabled(true);
+								radODV.setEnabled(true);
+								
 								grpCDI.setVisible(false);
 
 							} else {
@@ -486,6 +488,8 @@ public class ViewFile extends ViewPart {
 								}
 
 								radMedatlas.setEnabled(true);
+								radODV.setEnabled(true);
+																
 								grpCDI.setVisible(false);
 
 							} else {
@@ -533,9 +537,12 @@ public class ViewFile extends ViewPart {
 								// generer que le format ODV
 								radMedatlas.setEnabled(false);
 								radMedatlas.setSelection(false);
+								
+								radODV.setEnabled(true);
 								radODV.setSelection(true);
-								grpCDI.setVisible(true);
 								afficheGrpODV();
+								
+								grpCDI.setVisible(true);
 							}
 
 							else {
@@ -582,8 +589,11 @@ public class ViewFile extends ViewPart {
 								// generer que le format ODV
 								radMedatlas.setEnabled(false);
 								radMedatlas.setSelection(false);
+								
+								radODV.setEnabled(true);
 								radODV.setSelection(true);
 								afficheGrpODV();
+								
 								grpCDI.setVisible(true);
 							}
 
@@ -656,9 +666,9 @@ public class ViewFile extends ViewPart {
 		radMonoStation = new Button(grpODV, SWT.RADIO);
 		radMonoStation.setText(Messages.getString("ViewFile.monoStation"));
 
-		if (isCollection()) {
-			radMedatlas.setEnabled(false);
-		}
+//		if (isCollection()) {
+//			radMedatlas.setEnabled(false);
+//		}
 	
 		// Composite vide pour mise en page
 		Composite compoVide2 = new Composite(compositeConversion, SWT.NONE);

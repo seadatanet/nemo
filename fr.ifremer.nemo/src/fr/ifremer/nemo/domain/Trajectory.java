@@ -43,7 +43,7 @@ public class Trajectory implements Cloneable, SAXConsumer {
 	 */
 	public static SAXConsumer fromElement(String a_URI, String a_LocalName,
 			String a_QName, Attributes a_Attributes) throws SAXException {
-		Cdi tmp = new Cdi();
+		Trajectory tmp = new Trajectory();
 		tmp.consumeElement(a_URI, a_LocalName, a_QName, a_Attributes);
 		return (SAXConsumer) tmp;
 	}

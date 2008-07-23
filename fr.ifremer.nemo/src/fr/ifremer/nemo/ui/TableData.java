@@ -134,7 +134,7 @@ public class TableData {
 //				if ((DataModel.ouverture == false)
 //						&& (!ViewFile.checkBoxTempo.getSelection())) {
 				if ((DataModel.ouverture == false)
-						&& (!ViewFile.radSerieTempo.getSelection())) {	
+						&& (!ViewFile.radSerieTempo.getSelection() || !ViewFile.radTrajectoire.getSelection())) {	
 					// pas de modèle chargé donc on rajoute PRES
 					types.add(type);
 				}
@@ -459,7 +459,7 @@ public class TableData {
 		String code = mots[0];
 
 //		if (!code.matches("PRES") || ViewFile.checkBoxTempo.getSelection()) {
-		if (!code.matches("PRES") || ViewFile.radSerieTempo.getSelection()) {
+		if (!code.matches("PRES") || ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
 			listeTempo = new ArrayList();
 
 			// mise à jour préalable

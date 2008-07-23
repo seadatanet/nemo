@@ -123,8 +123,7 @@ public class DataModel {
 
 		// serie temporelle
 		// if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection()
-				|| ViewFile.radTrajectoire.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
 			timeSeriesInformation = stationModel.getTimeSeriesInformation();
 
 			if (!ViewFile.textTempoHeureRef.getText().matches("")) {
@@ -2378,7 +2377,7 @@ public class DataModel {
 		TableData.creationTable();
 
 		// if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
 			// série tempo
 			if (stationModel_modele.getTimestampModel().isComputed()) {
 				// saisie manuelle
