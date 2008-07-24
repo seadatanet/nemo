@@ -31,7 +31,7 @@ public class Regexp {
 
 	}
 
-	public static Boolean depassementHeaderStation(int ligne, String zone) {
+	public static Boolean depassementHeaderStation(int ligne, String zone, boolean metaInData) {
 		// verifie que la métadonnée injectée ne se situe pas au delà de
 		// l'entete station+fichier
 		// retourne true quand ca dépasse
@@ -46,6 +46,11 @@ public class Regexp {
 			// fichier campagne
 			enteteFichier = DataModel.singleSurvey.getHeaderLinesNumber();
 		}
+		
+		if (metaInData) {
+			enteteFichier++;
+		}
+		
 		int ligneLimite = enteteFichier
 				+ DataModel.stationModel.getNumberOfLines();
 

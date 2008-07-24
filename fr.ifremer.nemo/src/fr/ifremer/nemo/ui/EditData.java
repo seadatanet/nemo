@@ -127,7 +127,7 @@ public class EditData {
 		buttonRAZ.setText("Reset"); //$NON-NLS-1$
 
 //		if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection() || (ViewFile.radTrajectoire.getSelection() && EditStation.radMedatlas.getSelection())) {
 			// série temporelle
 			buttonFreqEchant.setParent(ViewEdit.formEdition.getBody());
 			buttonFreqEchant.setText(Messages.getString("EditData.4")); //$NON-NLS-1$

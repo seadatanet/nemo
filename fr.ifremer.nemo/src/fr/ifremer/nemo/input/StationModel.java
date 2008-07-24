@@ -1458,7 +1458,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		
 		try {
 			station = (Station) _model.clone();
-			if ((_timeSeriesModel != null && _timestampModel.isComputed()) ||
+			if ((_timeSeriesModel != null && _timestampModel.isComputed() && _trajectory == null) ||
 					(_trajectory != null && _trajectory.getOutputType().equals(Global.MEDATLAS))
 					&& !isMetaInData2()) {
 				// Marquage du fichier au debut
@@ -1529,7 +1529,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			//	a_Notifier.progress(a_Reader.getFilePointer());
 				return station;
 				
-			} else if (isMetaInData2()) {
+			} else if (isMetaInData2() || (_trajectory != null && _trajectory.getOutputType().equals(Global.ODV))) {
 				int index;
 				String line = null;
 				boolean initStation = false;
@@ -1544,7 +1544,29 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 					EditConversion.setErreurChaine(line);
 					
 					// Recuperation du numero de station
-					getReferenceProperty().applyOn(station, _headerPlus);
+					if (isMetaInData2()) {
+						getReferenceProperty().applyOn(station, _headerPlus);
+					} else {
+						if ((getReferenceProperty().getFragment().getFirstLine() == 0
+								&& (a_Filename != null) && !(isIncrementRef()))) {
+							if (ViewFile.collectionCasN)
+							{
+								String[] filename = DataModel.singleSurvey.getFile().split("/");
+								getReferenceProperty().applyOn(station,
+									new String[] { filename[filename.length - 1] });
+							}
+							else							
+								getReferenceProperty().applyOn(station,
+									new String[] { a_Filename });
+						} else {
+							if (isIncrementRef()) {
+								station.setReference(Integer.toString(_ref++));
+							} else {
+								getReferenceProperty().applyOn(station, header);
+							}
+						}
+					}
+					
 					String refTemp = station.getReference();
 					
 					// Comparaison du numero de station en cours avec celui de la derniere station
@@ -1573,6 +1595,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 							
 							a_Reader.reset();
 							EditConversion.setErreurLigne(EditConversion.getErreurLigne() - 1);
+							_ref--;
 							return station;
 						}
 					} else {

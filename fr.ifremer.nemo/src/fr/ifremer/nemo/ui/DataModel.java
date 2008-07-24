@@ -1591,6 +1591,14 @@ public class DataModel {
 
 		EditStation.btnMetaInData2.setSelection(stationModel_modele
 				.isMetaInData2());
+		
+		if (stationModel_modele.getInputType().equals(Global.MEDATLAS)) {
+			EditStation.radMedatlas.setSelection(true);
+			EditStation.radODV.setSelection(false);
+		} else {
+			EditStation.radMedatlas.setSelection(false);
+			EditStation.radODV.setSelection(true);
+		}
 
 		// numéro de station
 		if (stationModel_modele.isIncrementRef()) {
