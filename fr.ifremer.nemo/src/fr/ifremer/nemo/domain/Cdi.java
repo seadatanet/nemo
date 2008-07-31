@@ -184,7 +184,7 @@ public class Cdi implements Cloneable, SAXConsumer {
 	 * Read accessor (getter) for attribute _accesDonnees
 	 * 
 	 * @return String
-	 * @see Cdi#_date
+	 * @see Cdi#_accesDonnees
 	 */
 	public String getAccesDonnees() {
 		return _accesDonnees;

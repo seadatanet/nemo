@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
+import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -34,7 +35,7 @@ public class EditStation {
 			textHistoriqueAcqLigne1, textHistoriqueAcqLigne2,
 			textHistoriqueAcqDebut1, textHistoriqueAcqDebut2,
 			textHistoriqueAcqFin1, textHistoriqueAcqFin2, textHistorique1,
-			textHistorique2, /* textConversionHeure, */textConversionDate,
+			textHistorique2, textConversionDate,
 			textTU, textTULigne, textTUDebut, textTUFin, textHeureLigne,
 			textHeureDebut, textHeureFin, textSurface1, textSurface2,
 			textSurfaceLigne1, textSurfaceLigne2, textSurfaceDebut1,
@@ -45,7 +46,7 @@ public class EditStation {
 			textProfondeur, textProfondeurLigne, textProfondeurDebut,
 			textProfondeurFin, textCommentaireLigne, textCommentaireDebut,
 			textCommentaireFin;
-
+	
 	public static Text textLatFin, textLatFinLigne, textLatFinDebut,
 			textLatFinFin, textLongFin, textLongFinLigne, textLongFinDebut,
 			textLongFinFin, textProfFin, textProfFinLigne, textProfFinDebut,
@@ -79,22 +80,19 @@ public class EditStation {
 	public static Button buttonHeureReference, buttonDateReference,
 			buttonHeureReferencePos, buttonDateReferencePos;
 
-	public static Button buttonHeurePos, buttonHeureSaisie, buttonDatePos,
-			buttonDateSaisie, buttonTUPos;
+	public static Button buttonHeurePos, buttonHeureSaisie, buttonHeureInject,
+			buttonDatePos, buttonDateSaisie, buttonDateInject, buttonTUPos;
 
 	public static Button btnMetaInData2;
 
-	public static Group grpTrajectoire;
+	public static Group grpTrajectoire, grpSerieTempo;
 
-	public static Button radMedatlas, radODV;
+	public static Button radMedatlas, radODV, radLigneDonnees, radFreqEchant;
 
 	public static Combo comboHeure, comboDate, comboLatitude, comboLongitude,
 			comboLatitudeFin, comboLongitudeFin;
 
 	public static Combo comboRefStationType;
-
-	public static Section sectionQCDate, sectionQCLat, sectionQCLong,
-			sectionQCProf;
 
 	public static Section sectionStation, sectionTypeDonnees,
 			sectionHistorique, sectionCommentaire, sectionSurface,
@@ -221,8 +219,32 @@ public class EditStation {
 		} else {
 			grpTrajectoire.setParent(shell);
 		}
+				
+		if ((ViewFile.radSerieTempo.getSelection() || (ViewFile.radTrajectoire.getSelection()) && EditStation.radMedatlas.getSelection())) {
+			// série temporelle
+			grpSerieTempo.setParent(ViewEdit.formEdition.getBody());
+			grpSerieTempo.setText(Messages.getString("ViewFile.serieTempo"));
+			GridLayoutFactory.fillDefaults().applyTo(grpSerieTempo);
+			GridDataFactory.fillDefaults().grab(false, false).applyTo(
+					grpSerieTempo);
+			
+			radFreqEchant.setParent(grpSerieTempo);
+			radFreqEchant.setText(Messages.getString("EditData.4")); //$NON-NLS-1$
+			radLigneDonnees.setParent(grpSerieTempo);
+			radLigneDonnees.setText(Messages.getString("EditData.5")); //$NON-NLS-1$
 
-		formEdition.reflow(true);
+			radFreqEchant.setSelection(false);
+			radLigneDonnees.setSelection(true);
+
+
+//			formEdition.redraw();
+//			formEdition.reflow(true);
+		} else {
+			grpSerieTempo.setParent(shell);
+		}
+		
+//		formEdition.redraw();
+//		formEdition.reflow(true);
 
 		// Initialisation du tableau de paramètres si étape onglet Campagne
 		// "sautée"
@@ -468,7 +490,6 @@ public class EditStation {
 		ViewEdit.formEdition.reflow(true);
 
 		// listeners
-
 		buttonExpand
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
@@ -578,6 +599,48 @@ public class EditStation {
 
 					}
 				});
+		
+		// listeners sur les boutons radio
+		radMedatlas
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(
+							org.eclipse.swt.events.SelectionEvent e) {
+
+						activeGrpSerieTempo();
+					}
+				});
+
+		radODV
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(
+							org.eclipse.swt.events.SelectionEvent e) {
+
+						activeGrpSerieTempo();
+					}
+				});	
+		
+		radFreqEchant
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(
+							org.eclipse.swt.events.SelectionEvent e) {
+
+//						test();
+//						formEdition.reflow(true);
+						activeDateHeureManuel();
+
+					}
+				});
+
+		radLigneDonnees
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(
+							org.eclipse.swt.events.SelectionEvent e) {
+
+//						test2();
+//						formEdition.reflow(true);
+						activeDateHeureManuel();
+					}
+				});
 
 		// raz du message d'erreurs
 		Utils.messageErreur(""); //$NON-NLS-1$
@@ -610,6 +673,7 @@ public class EditStation {
 		buttonRAZ.setParent(shell);
 		btnMetaInData2.setParent(shell);
 		grpTrajectoire.setParent(shell);
+		grpSerieTempo.setParent(shell);
 
 		// System.out.println("expand ? = " + expand);
 		for (i = 0; i <= EditStation.listeSectionsStation.size() - 1; i++) {
@@ -651,6 +715,10 @@ public class EditStation {
 		if (ViewFile.radTrajectoire.getSelection()) {
 			grpTrajectoire.setParent(s.getBody());
 		}
+		
+		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
+			grpSerieTempo.setParent(s.getBody());
+		}
 
 		// System.out.println("expand ? = " + expand);
 		for (i = 0; i <= EditStation.listeSectionsStation.size() - 1; i++) {
@@ -685,10 +753,6 @@ public class EditStation {
 	}
 
 	public static void initSections() {
-		sectionQCDate = new Section(shell, SWT.NONE);
-		sectionQCLat = new Section(shell, SWT.NONE);
-		sectionQCLong = new Section(shell, SWT.NONE);
-		sectionQCProf = new Section(shell, SWT.NONE);
 		sectionStation = new Section(shell, SWT.NONE);
 		sectionTypeDonnees = new Section(shell, SWT.NONE);
 		sectionHistorique = new Section(shell, SWT.NONE);
@@ -706,11 +770,17 @@ public class EditStation {
 		sectionProfCapteur = new Section(shell, SWT.NONE);
 		sectionDeclinMagnet = new Section(shell, SWT.NONE);
 		sectionFreqEchant = new Section(shell, SWT.NONE);
-
 	}
 
 	public static void initText() {
 
+//		textTotalLigne = new Text(shell, SWT.BORDER);
+//		listeTextData.add(textTotalLigne);
+//		textTotalDebut = new Text(shell, SWT.BORDER);
+//		listeTextData.add(textTotalDebut);
+//		textTotalFin = new Text(shell, SWT.BORDER);
+//		listeTextData.add(textTotalFin);
+		
 		textQCDate = new Text(shell, SWT.BORDER);
 		listeTextStation.add(textQCDate);
 		textQCLat = new Text(shell, SWT.BORDER);
@@ -931,9 +1001,13 @@ public class EditStation {
 		buttonValidate = new Button(shell, SWT.NONE);
 		btnMetaInData2 = new Button(shell, SWT.CHECK);
 		
+		grpSerieTempo = new Group(shell, SWT.NONE);
+		radLigneDonnees = new Button(shell, SWT.RADIO);
+		radFreqEchant = new Button(shell, SWT.RADIO);
+		
 		grpTrajectoire = new Group(shell, SWT.NONE);
-		radMedatlas = new Button(grpTrajectoire, SWT.RADIO);
-		radODV = new Button(grpTrajectoire, SWT.RADIO);
+		radMedatlas = new Button(shell, SWT.RADIO);
+		radODV = new Button(shell, SWT.RADIO);
 
 		buttonHistoriqueAcqSaisie = new Button(shell, SWT.RADIO);
 		listeBoutonsManuel.add(buttonHistoriqueAcqSaisie);
@@ -1019,8 +1093,16 @@ public class EditStation {
 
 		buttonHeurePos = new Button(shell, SWT.RADIO);
 		listeBoutonsPos.add(buttonHeurePos);
+		
 		buttonDatePos = new Button(shell, SWT.RADIO);
 		listeBoutonsPos.add(buttonDatePos);
+		
+		buttonHeureInject = new Button(shell, SWT.NONE);
+		listeBoutonsManuel.add(buttonHeureInject);
+		
+		buttonDateInject = new Button(shell, SWT.NONE);
+		listeBoutonsManuel.add(buttonDateInject);
+		
 		buttonHeureReferencePos = new Button(shell, SWT.RADIO);
 		listeBoutonsPos.add(buttonHeureReferencePos);
 		buttonDateReferencePos = new Button(shell, SWT.RADIO);
@@ -1159,7 +1241,6 @@ public class EditStation {
 
 		if (!textFreqEchantConv.getText().matches("")) { //$NON-NLS-1$
 			// il y a une formule de conversion
-
 			if ((buttonFreqEchantSaisie.getSelection())
 					&& (!textFreqEchant.getText().matches(""))) { //$NON-NLS-1$
 				// saisie manuelle
@@ -1180,7 +1261,8 @@ public class EditStation {
 			if ((buttonFreqEchantPos.getSelection())
 					&& (Regexp.checkLigneDebutfin(textFreqEchantLigne,
 							textFreqEchantDebut, textFreqEchantFin, Messages
-									.getString("EditStation.85")))) { //$NON-NLS-1$
+									.getString("EditStation.85"), true))) { //$NON-NLS-1$
+				
 				// position dans fichier
 
 				// récupérer le texte en question et creer une nouvelle heure
@@ -1277,6 +1359,116 @@ public class EditStation {
 			return Global.ODV;
 		} else {
 			return Global.MEDATLAS;
+		}
+		
+	}
+	
+	public static void test() {
+		int i;
+
+		for (i = 0; i <= EditData.listeSectionsData.size() - 1; i++) {
+
+			EditData.listeSectionsData.get(i).setEnabled(false); // Parent(s);
+
+		}
+
+		// refresh global
+		ViewEdit.formEdition.reflow(true);
+	}
+	
+	public static void test2() {
+		int i;
+
+		for (i = 0; i <= EditData.listeSectionsData.size() - 1; i++) {
+
+			EditData.listeSectionsData.get(i).setEnabled(true); // Parent(s);
+
+		}
+
+		// refresh global
+		ViewEdit.formEdition.reflow(true);
+	}
+	
+	public static void activeGrpSerieTempo() {
+		if (radMedatlas.getSelection()) {
+			radFreqEchant.setEnabled(true);
+			
+			radLigneDonnees.setEnabled(true);
+		} else {
+			radFreqEchant.setEnabled(false);
+			radFreqEchant.setSelection(false);
+			
+			radLigneDonnees.setEnabled(true);
+			radLigneDonnees.setSelection(true);
+		}
+		
+		activeDateHeureManuel();
+	}
+	
+	public static void activeDateHeureManuel() {
+		if (radFreqEchant.getSelection()) {
+			buttonHeureSaisie.setEnabled(true);
+			buttonHeurePos.setEnabled(true);
+			
+			buttonDateSaisie.setEnabled(true);
+			buttonDatePos.setEnabled(true);
+			
+			sectionFreqEchant.setVisible(true);
+		} else {
+			buttonHeureSaisie.setEnabled(false);
+			buttonHeureSaisie.setSelection(false);
+			buttonHeurePos.setEnabled(true);
+			buttonHeurePos.setSelection(true);
+			
+			buttonDateSaisie.setEnabled(false);
+			buttonDateSaisie.setSelection(false);
+			buttonDatePos.setEnabled(true);
+			buttonDatePos.setSelection(true);
+			
+			sectionFreqEchant.setVisible(false);
+		}
+		
+		activeHeure();
+		activeDate();
+	}
+	
+	public static void activeHeure() {
+		if (buttonHeureSaisie.getSelection()) {
+			textHeureSaisie.setEnabled(true);
+			textHeureDebut.setEnabled(false);
+			textHeureFin.setEnabled(false);
+			textHeureLigne.setEnabled(false);
+			buttonHeureInject.setEnabled(false);
+		} else {
+			textHeureSaisie.setEnabled(false);
+			textHeureDebut.setEnabled(true);
+			textHeureFin.setEnabled(true);
+			if (radFreqEchant.getSelection()) {
+				textHeureLigne.setEnabled(true);
+			} else {
+				textHeureLigne.setEnabled(false);
+			}
+			buttonHeureInject.setEnabled(true);
+		}
+	}
+	
+	public static void activeDate() {
+		if (buttonDateSaisie.getSelection()) {
+			textDateSaisie.setEnabled(true);
+			textDateDebut.setEnabled(false);
+			textDateFin.setEnabled(false);
+			textDateLigne.setEnabled(false);
+			buttonDateInject.setEnabled(false);
+		} else {
+			textDateSaisie.setEnabled(false);
+			textDateDebut.setEnabled(true);
+			textDateFin.setEnabled(true);
+			if (radFreqEchant.getSelection()) {
+				textDateLigne.setEnabled(true);
+			} else {
+				textDateLigne.setEnabled(false);
+			}
+			buttonDateInject.setEnabled(true);
 		}
 	}
 }

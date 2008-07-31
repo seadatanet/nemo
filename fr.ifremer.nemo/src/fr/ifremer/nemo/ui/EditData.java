@@ -23,12 +23,9 @@ public class EditData {
 
 	// /////////////////////////////////////////
 
-	public static Section sectionTypeCourant, sectionTypeAjouter, sectionHeure,
-			sectionDate, sectionTotal;
+	public static Section sectionTypeCourant, sectionTypeAjouter;
 
-	public static Text textTotalLigne, textTotalDebut, textTotalFin;
-
-	public static Text textTempo, textTypeCourantCode, textTypeCourantUnite,
+	public static Text textTypeCourantCode, textTypeCourantUnite,
 			textTypeCourantConversion, textTypeCourantDebut,
 			textTypeCourantFin, textTypeCourantFormat, textTypeCourantEntree,
 			textTypeCourantSortie, textTypeCourantLigne, textTypeAjouterCode,
@@ -42,8 +39,7 @@ public class EditData {
 			labelTypeCourantFin, labelTypeCourantFormat,
 			labelTypeCourantEntree, labelTypeCourantSortie;
 
-	public static Button buttonRAZ, buttonReset, buttonValidate, buttonExpand,
-			buttonExpand2, buttonLigneDonnees, buttonFreqEchant;
+	public static Button buttonRAZ, buttonReset, buttonValidate;
 
 	public static ArrayList<Section> listeSectionsData, listeSectionsParam;
 
@@ -53,19 +49,13 @@ public class EditData {
 
 	public static ArrayList<Text> listeTextData;
 
-	public static int expand, validee, loaded;
+	public static int validee, loaded;
 
 	public static List listeType;
 
 	public static Boolean okApresReset;
 
 	public static ScrolledForm formEdition;
-
-	public static Combo comboHeure, comboDate, comboTotal;
-	
-	public static Button buttonTestDateHeure;
-	
-	public static Text textTestDateHeure;
 
 	private static Shell shell = new Shell();
 	// //////////////////////////////////////////
@@ -87,8 +77,6 @@ public class EditData {
 
 		loaded = 1;
 
-		// de base les sections sont refermées
-		expand = 0;
 
 		/*
 		 * recreer un formEdition sur le toolkit principal pour pouvoir faire un
@@ -105,7 +93,6 @@ public class EditData {
 		
 		// init composants IHM
 		initSections();
-		initCombos();
 		initText();
 		initBoutons();
 		initListeType();
@@ -113,10 +100,6 @@ public class EditData {
 		// init de la arrayList des sections
 		listeSectionsData = new ArrayList<Section>();
 		listeSectionsNoms = new ArrayList<String>();
-
-		// boutons collapse all / expand all
-		// buttonExpand.setParent(ViewEdit.formEdition.getBody());
-		// buttonExpand.setText("+");
 
 		// bouton validate
 		buttonValidate.setParent(ViewEdit.formEdition.getBody());
@@ -126,146 +109,10 @@ public class EditData {
 		buttonRAZ.setParent(ViewEdit.formEdition.getBody());
 		buttonRAZ.setText("Reset"); //$NON-NLS-1$
 
-//		if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection() || (ViewFile.radTrajectoire.getSelection() && EditStation.radMedatlas.getSelection())) {
-			// série temporelle
-			buttonFreqEchant.setParent(ViewEdit.formEdition.getBody());
-			buttonFreqEchant.setText(Messages.getString("EditData.4")); //$NON-NLS-1$
-			buttonLigneDonnees.setParent(ViewEdit.formEdition.getBody());
-			buttonLigneDonnees.setText(Messages.getString("EditData.5")); //$NON-NLS-1$
-
-			// on cree les sections puis on les cache dans un autre shell et on
-			// les re-affiche only si bouton coché
-
-			DrawingData
-					.sectionTotal(
-							Messages.getString("EditData.6"), Messages.getString("EditData.7"), sectionTotal, textTotalLigne, textTotalDebut, textTotalFin, buttonTestDateHeure,textTestDateHeure ); //$NON-NLS-1$ //$NON-NLS-2$
-
-			buttonFreqEchant.setSelection(false);
-			buttonLigneDonnees.setSelection(true);
-
-			// sections désactivées de base
-			test();
-
-			sectionTotal.setEnabled(true);
-
-			formEdition.redraw();
-			formEdition.reflow(true);
-
-		}
-
 		formEdition.reflow(true);
-
-		buttonExpand2.setText("+"); //$NON-NLS-1$
 		
 		ViewFile.affiche = 3;
 		ViewEdit.formEdition.reflow(true);
-
-		// listeners sur les boutons radio
-		buttonFreqEchant
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent e) {
-
-						test();
-
-						formEdition.reflow(true);
-
-					}
-				});
-
-		buttonLigneDonnees
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent e) {
-
-						test2();
-						formEdition.reflow(true);
-					}
-				});
-
-		// listeners
-
-		buttonExpand
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent e) {
-
-						// raz de la valeur manuelle
-						int i;
-
-						// System.out.println("expand ? = " + expand);
-						for (i = 0; i <= EditData.listeSectionsData.size() - 1; i++) {
-
-							if (expand == 0) {
-								EditData.listeSectionsData.get(i).setExpanded(
-										true);
-
-							} else {
-								EditData.listeSectionsData.get(i).setExpanded(
-										false);
-
-							}
-
-						}
-						if (expand == 0) {
-							// System.out.println("expand passe à 1");
-							buttonExpand.setText("-"); //$NON-NLS-1$
-							buttonExpand2.setText("-"); //$NON-NLS-1$
-
-							expand = 1;
-						} else {
-							expand = 0;
-							// System.out.println("expand passe à 0");
-							buttonExpand.setText("+"); //$NON-NLS-1$
-							buttonExpand2.setText("+"); //$NON-NLS-1$
-						}
-
-						// refresh global
-						formEdition.reflow(true);
-
-					}
-				});
-
-		buttonExpand2
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent e) {
-
-						int i;
-
-						// System.out.println("expand ? = " + expand);
-						for (i = 0; i <= EditData.listeSectionsData.size() - 1; i++) {
-
-							if (expand == 0) {
-								EditData.listeSectionsData.get(i).setExpanded(
-										true);
-
-							} else {
-								EditData.listeSectionsData.get(i).setExpanded(
-										false);
-
-							}
-
-						}
-						if (expand == 0) {
-							// System.out.println("expand passe à 1");
-							buttonExpand.setText("-"); //$NON-NLS-1$
-							buttonExpand2.setText("-"); //$NON-NLS-1$
-
-							expand = 1;
-						} else {
-							expand = 0;
-							// System.out.println("expand passe à 0");
-							buttonExpand.setText("+"); //$NON-NLS-1$
-							buttonExpand2.setText("+"); //$NON-NLS-1$
-						}
-
-						// refresh global
-						formEdition.reflow(true);
-
-					}
-				});
 
 		buttonValidate
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -314,53 +161,18 @@ public class EditData {
 		}
 	}
 
-	public static void test() {
-		int i;
-
-		for (i = 0; i <= EditData.listeSectionsData.size() - 1; i++) {
-
-			EditData.listeSectionsData.get(i).setEnabled(false); // Parent(s);
-
-		}
-
-		// refresh global
-		ViewEdit.formEdition.reflow(true);
-	}
-
-	public static void test2() {
-		int i;
-
-		for (i = 0; i <= EditData.listeSectionsData.size() - 1; i++) {
-
-			EditData.listeSectionsData.get(i).setEnabled(true); // Parent(s);
-
-		}
-
-		// refresh global
-		ViewEdit.formEdition.reflow(true);
-	}
-
 	public static void razEdition() {
 		// reset de toute la zone d'édition après étape descriptioon de fichier
 		// on retire toutes les sections et les boutons expand et validation
 
 		int i;
 
-
 		// effacement des boutons valider/expand/init serveur
-		EditData.buttonExpand.setParent(shell);
-		EditData.buttonExpand2.setParent(shell);
 		EditData.buttonValidate.setParent(shell);
 		EditData.buttonRAZ.setParent(shell);
 
-		buttonFreqEchant.setParent(shell);
-		buttonLigneDonnees.setParent(shell);
-
-		// System.out.println("expand ? = " + expand);
 		for (i = 0; i <= EditData.listeSectionsData.size() - 1; i++) {
-
 			EditData.listeSectionsData.get(i).setParent(shell);
-
 		}
 
 		// effacement titre formulaire
@@ -405,18 +217,10 @@ public class EditData {
 		// raz message erreur
 		Utils.messageErreur(""); //$NON-NLS-1$
 		// effacement des boutons valider/expand/init serveur
-		// EditData.buttonExpand.setParent(s.getBody());
 
 		EditData.buttonValidate.setParent(s.getBody());
 		EditData.buttonRAZ.setParent(s.getBody());
 
-//		if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
-			buttonFreqEchant.setParent(s.getBody());
-			buttonLigneDonnees.setParent(s.getBody());
-		}
-
-		// System.out.println("expand ? = " + expand);
 		for (i = 0; i <= EditData.listeSectionsData.size() - 1; i++) {
 
 			EditData.listeSectionsData.get(i).setExpanded(false);
@@ -424,8 +228,6 @@ public class EditData {
 			EditData.listeSectionsData.get(i).setParent(s.getBody());
 
 		}
-
-		// EditData.buttonExpand2.setParent(s.getBody());
 
 		ViewEdit.formEdition.setText(Messages.getString("EditData.20")); //$NON-NLS-1$
 
@@ -438,18 +240,11 @@ public class EditData {
 	}
 
 	public static void initSections() {
-
-
 		sectionTypeCourant = new Section(shell, SWT.NONE);
 		sectionTypeAjouter = new Section(shell, SWT.NONE);
-		sectionHeure = new Section(shell, SWT.NONE);
-		sectionDate = new Section(shell, SWT.NONE);
-		sectionTotal = new Section(shell, SWT.NONE);
 	}
 
 	public static void initText() {
-
-
 		textTypeCourantCode = new Text(shell, SWT.BORDER);
 		listeTextData.add(textTypeCourantCode);
 		textTypeCourantConversion = new Text(shell, SWT.BORDER);
@@ -486,20 +281,7 @@ public class EditData {
 		textTypeAjouterSortie = new Text(shell, SWT.BORDER);
 		listeTextData.add(textTypeAjouterSortie);
 		textTypeAjouterUnite = new Text(shell, SWT.BORDER);
-		listeTextData.add(textTypeAjouterUnite);
-
-
-		textTotalLigne = new Text(shell, SWT.BORDER);
-		listeTextData.add(textTotalLigne);
-		textTotalDebut = new Text(shell, SWT.BORDER);
-		listeTextData.add(textTotalDebut);
-		textTotalFin = new Text(shell, SWT.BORDER);
-		listeTextData.add(textTotalFin);
-
-		textTempo = new Text(shell, SWT.BORDER);
-		listeTextData.add(textTempo);
-		
-		textTestDateHeure = new Text(shell, SWT.BORDER);
+		listeTextData.add(textTypeAjouterUnite);		
 
 		// remplissage de la liste des textes et ajout listeners
 		ajoutModifyListenerText(listeTextData);
@@ -507,57 +289,14 @@ public class EditData {
 	}
 
 	public static void initBoutons() {
-
-
-		buttonExpand = new Button(shell, SWT.NONE);
-		buttonExpand2 = new Button(shell, SWT.NONE);
 		buttonValidate = new Button(shell, SWT.NONE);
 		buttonReset = new Button(shell, SWT.NONE);
 		buttonRAZ = new Button(shell, SWT.NONE);
-		buttonLigneDonnees = new Button(shell, SWT.RADIO);
-		buttonFreqEchant = new Button(shell, SWT.RADIO);
-		
-		buttonTestDateHeure = new Button(shell, SWT.PUSH);
 	}
 
 	public static void initListeType() {
 
 		listeType = new List(shell, SWT.BORDER);
-
-	}
-
-	public static void initCombos() {
-
-
-		comboHeure = new Combo(shell, SWT.NONE);
-		comboHeure.add("hh:mm PM"); //$NON-NLS-1$
-		comboHeure.add("hh:mm:ss PM"); //$NON-NLS-1$
-		comboHeure.add("hh24:mm"); //$NON-NLS-1$
-		comboHeure.add("hh24:mm:ss"); //$NON-NLS-1$
-		comboHeure.add("hh24mm"); //$NON-NLS-1$
-		comboHeure.add("hh24mmss"); //$NON-NLS-1$
-		comboHeure.add("hh24 mm"); //$NON-NLS-1$
-		comboHeure.add("hh24:cc"); //$NON-NLS-1$
-		comboHeure.add("ttttt"); //$NON-NLS-1$
-
-		comboDate = new Combo(shell, SWT.NONE);
-		comboDate.add("DD/MM/YY"); //$NON-NLS-1$
-		comboDate.add("DD/MM/YYYY"); //$NON-NLS-1$
-		comboDate.add("DDMMYY"); //$NON-NLS-1$
-		comboDate.add("DDMMYYYY"); //$NON-NLS-1$
-		comboDate.add("MMM DD YYYY"); //$NON-NLS-1$
-		comboDate.add("YY/MM/DD"); //$NON-NLS-1$
-		comboDate.add("YYMMDD"); //$NON-NLS-1$
-		comboDate.add("YYYY/MM/DD"); //$NON-NLS-1$
-		comboDate.add("YYYYMMDD"); //$NON-NLS-1$
-
-		comboTotal = new Combo(shell, SWT.NONE);
-		comboTotal.add("DDMMYYYY hh:mm:ss"); //$NON-NLS-1$
-		comboTotal.add("DDMMYYYY hh24:mm"); //$NON-NLS-1$
-		comboTotal.add("DDMMYYYY hh24mm"); //$NON-NLS-1$
-		comboTotal.add("DD/MM/YYYY hh:mm:ss"); //$NON-NLS-1$
-		comboTotal.add("DD/MM/YYYY hh24:mm"); //$NON-NLS-1$
-		comboTotal.add("DD/MM/YYYY hh24mm"); //$NON-NLS-1$
 
 	}
 
@@ -594,20 +333,6 @@ public class EditData {
 		if (sectionTypeCourant != null) {
 			sectionTypeCourant.dispose();
 			sectionTypeAjouter.dispose();
-			sectionHeure.dispose();
-			sectionDate.dispose();
-			sectionTotal.dispose();
-		}
-
-		if (buttonExpand != null) {
-			buttonExpand.dispose();
-			buttonExpand2.dispose();
-			buttonValidate.dispose();
-			buttonReset.dispose();
-			buttonRAZ.dispose();
-			buttonLigneDonnees.dispose();
-			buttonFreqEchant.dispose();
-			buttonTestDateHeure.dispose();
 		}
 
 		if (listeTextData != null) {
@@ -615,16 +340,10 @@ public class EditData {
 				element.dispose();
 			}
 		}
-		if (comboDate != null) {
-			comboDate.dispose();
-			comboHeure.dispose();
-			comboTotal.dispose();
-		}
 		
 		if (listeType != null)
 		{
 			listeType.dispose();
 		}
 	}
-	
 }

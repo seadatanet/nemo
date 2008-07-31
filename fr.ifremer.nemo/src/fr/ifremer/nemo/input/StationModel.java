@@ -1458,7 +1458,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		
 		try {
 			station = (Station) _model.clone();
-			if ((_timeSeriesModel != null && _timestampModel.isComputed() && _trajectory == null) ||
+			if ((_timeSeriesModel != null /*&& _timestampModel.isComputed()*/ && _trajectory == null) ||
 					(_trajectory != null && _trajectory.getOutputType().equals(Global.MEDATLAS))
 					&& !isMetaInData2()) {
 				// Marquage du fichier au debut

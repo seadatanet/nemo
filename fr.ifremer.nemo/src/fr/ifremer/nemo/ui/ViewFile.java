@@ -63,8 +63,6 @@ public class ViewFile extends ViewPart {
 	private Composite compositeSeparateur = null;
 	
 	private Composite compositeChoixFichier = null;
-
-//	public static Button checkBoxTempo;
 	
 	public static Button radProfilVertical, radSerieTempo, radTrajectoire;
 	
@@ -106,10 +104,8 @@ public class ViewFile extends ViewPart {
 	public static StyledText styledTextCampagne, textAreaDescription,
 			styledTextStation, styledTextData;
 
-	public static TabItem tabItem, /*tabItem1,*/ tabItem2, tabItem3, tabItem4,
+	public static TabItem tabItem, tabItem1, tabItem2, tabItem3, tabItem4,
 			tabItem9;
-	
-	public static TabItem tabItem1;
 
 	public static Composite compositeConversion = null;
 
@@ -128,8 +124,6 @@ public class ViewFile extends ViewPart {
 	public static Combo comboTempoHeure = null;
 
 	public static String nomFichier, nomRepertoire;
-
-	public static File dossier;
 
 	public static Table tableData;
 	
@@ -362,17 +356,6 @@ public class ViewFile extends ViewPart {
 		
 		buttonParcourir = new Button(composite11, SWT.NONE);
 		buttonParcourir.setText(Messages.getString("ViewFile.parcourir")); //$NON-NLS-1$
-//		checkBoxTempo = new Button(composite11, SWT.CHECK);
-//		checkBoxTempo.setText(Messages.getString("ViewFile.serieTempo")); //$NON-NLS-1$
-//
-//		checkBoxTempo
-//				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-//					public void widgetSelected(
-//							org.eclipse.swt.events.SelectionEvent e) {
-//						// si pas coché on active le groupTempo sinon on grise
-//
-//					}
-//				});
 		
 		createGroupTempo();
 		

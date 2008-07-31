@@ -56,7 +56,7 @@ public class DataModel {
 
 	public static TimeSeriesInformation timeSeriesInformation,
 			timeSeriesInformation_modele;
-	
+
 	public static Trajectory trajectory;
 
 	public static void initModele(Boolean fichier, String typeFichier,
@@ -67,7 +67,6 @@ public class DataModel {
 		if (!fichier) {
 			// fichier campagne
 			initFichier(typeFichier, nomFich);
-
 		} else {
 			initDossier(typeFichier, nomFich);
 			// dossier campagne
@@ -123,7 +122,8 @@ public class DataModel {
 
 		// serie temporelle
 		// if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()
+				|| ViewFile.radTrajectoire.getSelection()) {
 			timeSeriesInformation = stationModel.getTimeSeriesInformation();
 
 			if (!ViewFile.textTempoHeureRef.getText().matches("")) {
@@ -164,7 +164,7 @@ public class DataModel {
 			}
 
 		}
-		
+
 		// trajectoire
 		if (ViewFile.radTrajectoire.getSelection()) {
 			trajectory = stationModel.getTrajectory();
@@ -348,21 +348,32 @@ public class DataModel {
 
 		stationModel.setMetaInData2(EditStation.btnMetaInData2.getSelection());
 
+		if (ViewFile.radSerieTempo.getSelection()
+				|| ViewFile.radTrajectoire.getSelection()) {
+			// gestion des séries temporelles
+			if (EditStation.radFreqEchant.getSelection()) {
+				// calcul à partir fréquence échantillonnage
+				stationModel.getTimestampModel().setComputed(true);
+			} else {
+				// calcul position date/heure dans les données
+				stationModel.getTimestampModel().setComputed(false);
+			}
+		}
+
 		// Type de fichier de sortie (trajectoire)
 		if (trajectory != null) {
-			trajectory.setOutputType(
-					EditStation.typeFichierSortie());
-			
+			trajectory.setOutputType(EditStation.typeFichierSortie());
+
 			if (EditStation.typeFichierSortie().equals(Global.ODV)) {
 				ViewFile.radMedatlas.setSelection(false);
 				ViewFile.radMedatlas.setEnabled(false);
-				
+
 				ViewFile.radODV.setSelection(true);
 				ViewFile.radODV.setEnabled(true);
 			} else {
 				ViewFile.radMedatlas.setSelection(true);
 				ViewFile.radMedatlas.setEnabled(true);
-				
+
 				ViewFile.radODV.setSelection(false);
 				ViewFile.radODV.setEnabled(false);
 			}
@@ -634,7 +645,8 @@ public class DataModel {
 
 		// frequence echantillonnage
 		// if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()
+				|| ViewFile.radTrajectoire.getSelection()) {
 			propertyModel = stationModel.getTimeSeriesModel().propertiesAt(
 					"samplingRate");
 
@@ -687,7 +699,6 @@ public class DataModel {
 						.parseObject(EditStation.textHeureSaisie.getText());
 				stationModel.getModel().setTime(timeLong);
 			} catch (ParseException e) {
-
 				e.printStackTrace();
 			}
 
@@ -699,9 +710,30 @@ public class DataModel {
 			frag = propertyModel.getFragment();
 			// frag.isSingleLine();
 
-			ligne = ""
-					+ (Integer.valueOf(EditStation.textHeureLigne.getText()) - Integer
-							.valueOf(EditDesc.lignesEnteteFichier.getText()));
+			if ((ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire
+					.getSelection())
+					&& EditStation.radLigneDonnees.getSelection()) {
+				ligne = String.valueOf(DataModel.stationModel
+						.getNumberOfLines() + 1);
+				try {
+					stationModel.getTimestampModel().getTimeFormat()
+							.setFormatString(EditStation.comboHeure.getText());
+					stationModel.getTimestampModel().getTimeFragment()
+							.setFirstCharOffset(
+									EditStation.textHeureDebut.getText());
+					stationModel.getTimestampModel().getTimeFragment()
+							.setLastCharOffset(
+									EditStation.textHeureFin.getText());
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			} else {
+				ligne = ""
+						+ (Integer
+								.valueOf(EditStation.textHeureLigne.getText()) - Integer
+								.valueOf(EditDesc.lignesEnteteFichier.getText()));
+			}
+
 			debut = EditStation.textHeureDebut.getText();
 			fin = EditStation.textHeureFin.getText();
 
@@ -720,9 +752,8 @@ public class DataModel {
 				e.printStackTrace();
 			}
 		}
-		// }//fin if serie tempo
 
-		// date en LONG
+		// DATE en LONG
 		propertyModel = stationModel.propertiesAt("date");
 
 		if (EditStation.buttonDateSaisie.getSelection()) {
@@ -752,9 +783,30 @@ public class DataModel {
 			frag = propertyModel.getFragment();
 			// frag.isSingleLine();
 
-			ligne = ""
-					+ (Integer.valueOf(EditStation.textDateLigne.getText()) - Integer
-							.valueOf(EditDesc.lignesEnteteFichier.getText()));
+			if ((ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire
+					.getSelection())
+					&& EditStation.radLigneDonnees.getSelection()) {
+				ligne = String.valueOf(DataModel.stationModel
+						.getNumberOfLines() + 1);
+
+				try {
+					stationModel.getTimestampModel().getDateFormat()
+							.setFormatString(EditStation.comboDate.getText());
+					stationModel.getTimestampModel().getDateFragment()
+							.setFirstCharOffset(
+									EditStation.textDateDebut.getText());
+					stationModel.getTimestampModel().getDateFragment()
+							.setLastCharOffset(
+									EditStation.textDateFin.getText());
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			} else {
+				ligne = ""
+						+ (Integer.valueOf(EditStation.textDateLigne.getText()) - Integer
+								.valueOf(EditDesc.lignesEnteteFichier.getText()));
+			}
+
 			debut = EditStation.textDateDebut.getText();
 			fin = EditStation.textDateFin.getText();
 
@@ -902,7 +954,8 @@ public class DataModel {
 		}
 
 		// if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()
+				|| ViewFile.radTrajectoire.getSelection()) {
 			// DECLINAISON MAGNETIQUE
 			propertyModel = stationModel.getTimeSeriesModel().propertiesAt(
 					"magneticDeclination");
@@ -1246,33 +1299,34 @@ public class DataModel {
 
 		}
 
-		// if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
-			// gestion des séries temporelles
-			if (EditData.buttonFreqEchant.getSelection()) {
-				// calcul à partir fréquence échantillonnage
-				stationModel.getTimestampModel().setComputed(true);
-
-			} else {
-				// calcul position date/heure dans les données
-				stationModel.getTimestampModel().setComputed(false);
-				HorodatedParameterModel horoDatedParameterModel = stationModel
-						.getTimestampModel();
-				try {
-					horoDatedParameterModel.setFormat(new DateTimeFormat(
-							EditData.comboTotal.getText()));
-				} catch (ParseException e) {
-
-					e.printStackTrace();
-				}
-				LineFragment lineFragment = horoDatedParameterModel
-						.getDateTimeFragment();
-				lineFragment.setFirstCharOffset(EditData.textTotalDebut
-						.getText());
-				lineFragment.setLastCharOffset(EditData.textTotalFin.getText());
-
-			}
-		}
+		// // if (ViewFile.checkBoxTempo.getSelection()) {
+		// if (ViewFile.radSerieTempo.getSelection() ||
+		// ViewFile.radTrajectoire.getSelection()) {
+		// // gestion des séries temporelles
+		// if (EditData.buttonFreqEchant.getSelection()) {
+		// // calcul à partir fréquence échantillonnage
+		// stationModel.getTimestampModel().setComputed(true);
+		//
+		// } else {
+		// // calcul position date/heure dans les données
+		// stationModel.getTimestampModel().setComputed(false);
+		// HorodatedParameterModel horoDatedParameterModel = stationModel
+		// .getTimestampModel();
+		// try {
+		// horoDatedParameterModel.setFormat(new DateTimeFormat(
+		// EditData.comboTotal.getText()));
+		// } catch (ParseException e) {
+		//
+		// e.printStackTrace();
+		// }
+		// LineFragment lineFragment = horoDatedParameterModel
+		// .getDateTimeFragment();
+		// lineFragment.setFirstCharOffset(EditData.textTotalDebut
+		// .getText());
+		// lineFragment.setLastCharOffset(EditData.textTotalFin.getText());
+		//
+		// }
+		// }
 
 		// flag validation à 1
 		EditData.validee = 1;
@@ -1591,13 +1645,32 @@ public class DataModel {
 
 		EditStation.btnMetaInData2.setSelection(stationModel_modele
 				.isMetaInData2());
-		
-		if (stationModel_modele.getInputType().equals(Global.MEDATLAS)) {
-			EditStation.radMedatlas.setSelection(true);
-			EditStation.radODV.setSelection(false);
-		} else {
-			EditStation.radMedatlas.setSelection(false);
-			EditStation.radODV.setSelection(true);
+
+		if (stationModel_modele.getInputType().equals(Global.TRAJECTORY)) {
+			if (stationModel_modele.getTrajectory().getOutputType().equals(
+					Global.MEDATLAS)) {
+				EditStation.radMedatlas.setSelection(true);
+				EditStation.radODV.setSelection(false);
+			} else {
+				EditStation.radMedatlas.setSelection(false);
+				EditStation.radODV.setSelection(true);
+			}
+			EditStation.activeGrpSerieTempo();
+		}
+
+		if (ViewFile.radSerieTempo.getSelection()
+				|| ViewFile.radTrajectoire.getSelection()) {
+			// série tempo
+			if (stationModel_modele.getTimestampModel().isComputed()) {
+				// saisie manuelle
+				EditStation.radFreqEchant.setSelection(true);
+				EditStation.radLigneDonnees.setSelection(false);
+			} else {
+				// position heure/date dans fichier
+				EditStation.radFreqEchant.setSelection(false);
+				EditStation.radLigneDonnees.setSelection(true);
+			}
+			EditStation.activeDateHeureManuel();
 		}
 
 		// numéro de station
@@ -1838,7 +1911,8 @@ public class DataModel {
 
 		// frequence echantillonnage
 		// if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()
+				|| ViewFile.radTrajectoire.getSelection()) {
 			propertyModel = stationModel_modele.getTimeSeriesModel()
 					.propertiesAt("samplingRate");
 
@@ -1878,103 +1952,137 @@ public class DataModel {
 		}
 
 		// HEURE
-		propertyModel = stationModel_modele.propertiesAt("time");
+		if ((ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire
+				.getSelection())
+				&& !stationModel_modele.getTimestampModel().isComputed()) {
 
-		DateTimeFormat timeFormat = (DateTimeFormat) propertyModel.getFormat();
-		Utils.selectComboValeur(EditStation.comboHeure, timeFormat
-				.getFormatString());
-		// EditStation.comboHeure.add(timeFormat.getFormatString(), 0);
-		// EditStation.comboHeure.select(0);
-
-		if (propertyModel.isUserProvided()) {
-			// saisie manuelle
-
-			// reconversion de LONG vers format normal
-			Formatter formatter = new Formatter();
-			try {
-				EditStation.textHeureSaisie
-						.setText(formatter.formatDateTime(timeFormat
-								.getFormatString(), station_modele.getTime()));
-			} catch (ParseException e) {
-
-				e.printStackTrace();
-			}
-
-			// desactivation du champ manuel
-			EditStation.buttonHeureSaisie.setSelection(true);
-			EditStation.buttonHeurePos.setSelection(false);
-			EditStation.textHeureLigne.setEnabled(false);
-			EditStation.textHeureDebut.setEnabled(false);
-			EditStation.textHeureFin.setEnabled(false);
-
+			Utils.selectComboValeur(EditStation.comboHeure, stationModel_modele
+					.getTimestampModel().getTimeFormat().getFormatString());
+			EditStation.textHeureLigne.setText("");
+			EditStation.textHeureDebut.setText(String
+					.valueOf(stationModel_modele.getTimestampModel()
+							.getTimeFragment().getFirstCharOffset()));
+			EditStation.textHeureFin
+					.setText(String.valueOf(stationModel_modele
+							.getTimestampModel().getTimeFragment()
+							.getLastCharOffset()));
 		} else {
-			// position heure dans fichier
-			EditStation.buttonHeureSaisie.setSelection(false);
-			EditStation.buttonHeurePos.setSelection(true);
-			EditStation.textHeureLigne.setEnabled(true);
-			EditStation.textHeureDebut.setEnabled(true);
-			EditStation.textHeureFin.setEnabled(true);
+			propertyModel = stationModel_modele.propertiesAt("time");
 
-			frag = propertyModel.getFragment();
-			ligne = frag.getFirstLine();
-			debut = frag.getFirstCharOffset();
-			fin = frag.getLastCharOffset();
-			real_ligne = ligne
-					+ Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+			DateTimeFormat timeFormat = (DateTimeFormat) propertyModel
+					.getFormat();
+			Utils.selectComboValeur(EditStation.comboHeure, timeFormat
+					.getFormatString());
+			// EditStation.comboHeure.add(timeFormat.getFormatString(), 0);
+			// EditStation.comboHeure.select(0);
 
-			EditStation.textHeureLigne.setText("" + real_ligne);
-			EditStation.textHeureDebut.setText("" + debut);
-			EditStation.textHeureFin.setText("" + fin);
+			if (propertyModel.isUserProvided()) {
+				// saisie manuelle
+
+				// reconversion de LONG vers format normal
+				Formatter formatter = new Formatter();
+				try {
+					EditStation.textHeureSaisie.setText(formatter
+							.formatDateTime(timeFormat.getFormatString(),
+									station_modele.getTime()));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+
+				// desactivation du champ manuel
+				EditStation.buttonHeureSaisie.setSelection(true);
+				EditStation.buttonHeurePos.setSelection(false);
+				EditStation.textHeureLigne.setEnabled(false);
+				EditStation.textHeureDebut.setEnabled(false);
+				EditStation.textHeureFin.setEnabled(false);
+
+			} else {
+				// position heure dans fichier
+				EditStation.buttonHeureSaisie.setSelection(false);
+				EditStation.buttonHeurePos.setSelection(true);
+				EditStation.textHeureLigne.setEnabled(true);
+				EditStation.textHeureDebut.setEnabled(true);
+				EditStation.textHeureFin.setEnabled(true);
+
+				frag = propertyModel.getFragment();
+				ligne = frag.getFirstLine();
+				debut = frag.getFirstCharOffset();
+				fin = frag.getLastCharOffset();
+				real_ligne = ligne
+						+ Integer.valueOf(EditDesc.lignesEnteteFichier
+								.getText());
+
+				EditStation.textHeureLigne.setText("" + real_ligne);
+				EditStation.textHeureDebut.setText("" + debut);
+				EditStation.textHeureFin.setText("" + fin);
+			}
 		}
 
 		// date en LONG
-		propertyModel = stationModel_modele.propertiesAt("date");
-
-		DateTimeFormat dateFormat = (DateTimeFormat) propertyModel.getFormat();
-
-		Utils.selectComboValeur(EditStation.comboDate, dateFormat
-				.getFormatString());
-		// EditStation.comboDate.add(dateFormat.getFormatString(), 0);
-		// EditStation.comboDate.select(0);
-
-		if (propertyModel.isUserProvided()) {
-			// saisie manuelle
-
-			Formatter formatter = new Formatter();
-			try {
-				EditStation.textDateSaisie
-						.setText(formatter.formatDateTime(dateFormat
-								.getFormatString(), station_modele.getDate()));
-			} catch (ParseException e) {
-
-				e.printStackTrace();
-			}
-
-			// desactivation du champ manuel
-			EditStation.buttonDateSaisie.setSelection(true);
-			EditStation.buttonDatePos.setSelection(false);
-			EditStation.textDateLigne.setEnabled(false);
-			EditStation.textDateDebut.setEnabled(false);
-			EditStation.textDateFin.setEnabled(false);
-
+		if ((ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire
+				.getSelection())
+				&& !stationModel_modele.getTimestampModel().isComputed()) {
+			Utils.selectComboValeur(EditStation.comboDate, stationModel_modele
+					.getTimestampModel().getDateFormat().getFormatString());
+			EditStation.textDateLigne.setText("");
+			EditStation.textDateDebut.setText(String
+					.valueOf(stationModel_modele.getTimestampModel()
+							.getDateFragment().getFirstCharOffset()));
+			EditStation.textDateFin
+					.setText(String.valueOf(stationModel_modele
+							.getTimestampModel().getDateFragment()
+							.getLastCharOffset()));
 		} else {
-			// position date dans fichier
-			frag = propertyModel.getFragment();
-			ligne = frag.getFirstLine();
-			debut = frag.getFirstCharOffset();
-			fin = frag.getLastCharOffset();
-			real_ligne = ligne
-					+ Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+			propertyModel = stationModel_modele.propertiesAt("date");
 
-			EditStation.buttonDateSaisie.setSelection(false);
-			EditStation.buttonDatePos.setSelection(true);
-			EditStation.textDateLigne.setEnabled(true);
-			EditStation.textDateDebut.setEnabled(true);
-			EditStation.textDateFin.setEnabled(true);
+			DateTimeFormat dateFormat = (DateTimeFormat) propertyModel
+					.getFormat();
 
-			EditStation.textDateLigne.setText("" + real_ligne);
-			EditStation.textDateDebut.setText("" + debut);
-			EditStation.textDateFin.setText("" + fin);
+			Utils.selectComboValeur(EditStation.comboDate, dateFormat
+					.getFormatString());
+			// EditStation.comboDate.add(dateFormat.getFormatString(), 0);
+			// EditStation.comboDate.select(0);
+
+			if (propertyModel.isUserProvided()) {
+				// saisie manuelle
+
+				Formatter formatter = new Formatter();
+				try {
+					EditStation.textDateSaisie.setText(formatter
+							.formatDateTime(dateFormat.getFormatString(),
+									station_modele.getDate()));
+				} catch (ParseException e) {
+
+					e.printStackTrace();
+				}
+
+				// desactivation du champ manuel
+				EditStation.buttonDateSaisie.setSelection(true);
+				EditStation.buttonDatePos.setSelection(false);
+				EditStation.textDateLigne.setEnabled(false);
+				EditStation.textDateDebut.setEnabled(false);
+				EditStation.textDateFin.setEnabled(false);
+
+			} else {
+				// position date dans fichier
+				frag = propertyModel.getFragment();
+				ligne = frag.getFirstLine();
+				debut = frag.getFirstCharOffset();
+				fin = frag.getLastCharOffset();
+				real_ligne = ligne
+						+ Integer.valueOf(EditDesc.lignesEnteteFichier
+								.getText());
+
+				EditStation.buttonDateSaisie.setSelection(false);
+				EditStation.buttonDatePos.setSelection(true);
+				EditStation.textDateLigne.setEnabled(true);
+				EditStation.textDateDebut.setEnabled(true);
+				EditStation.textDateFin.setEnabled(true);
+
+				EditStation.textDateLigne.setText("" + real_ligne);
+				EditStation.textDateDebut.setText("" + debut);
+				EditStation.textDateFin.setText("" + fin);
+			}
 		}
 
 		// latitude
@@ -2110,7 +2218,8 @@ public class DataModel {
 
 		// PROFONDEUR CAPTEUR
 		// if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()
+				|| ViewFile.radTrajectoire.getSelection()) {
 			propertyModel = stationModel_modele.getTimeSeriesModel()
 					.propertiesAt("sensorDepth");
 			if (propertyModel.isUserProvided()) {
@@ -2143,7 +2252,8 @@ public class DataModel {
 
 		// LATITUDE DE FIN
 		// if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()
+				|| ViewFile.radTrajectoire.getSelection()) {
 			propertyModel = stationModel_modele.getTimeSeriesModel()
 					.propertiesAt("endLatitude");
 
@@ -2188,7 +2298,8 @@ public class DataModel {
 
 		// LONGITUDE DE FIN
 		// if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()
+				|| ViewFile.radTrajectoire.getSelection()) {
 			propertyModel = stationModel_modele.getTimeSeriesModel()
 					.propertiesAt("endLongitude");
 
@@ -2233,7 +2344,8 @@ public class DataModel {
 
 		// PROFONDEUR DE FIN
 		// if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()
+				|| ViewFile.radTrajectoire.getSelection()) {
 			propertyModel = stationModel_modele.getTimeSeriesModel()
 					.propertiesAt("endDepth");
 			if (propertyModel.isUserProvided()) {
@@ -2266,7 +2378,8 @@ public class DataModel {
 
 		// DECLINAISON MAGNETIQUE
 		// if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()
+				|| ViewFile.radTrajectoire.getSelection()) {
 			propertyModel = stationModel_modele.getTimeSeriesModel()
 					.propertiesAt("magneticDeclination");
 			if (propertyModel.isUserProvided()) {
@@ -2384,33 +2497,34 @@ public class DataModel {
 		// refresh de la table
 		TableData.creationTable();
 
-		// if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
-			// série tempo
-			if (stationModel_modele.getTimestampModel().isComputed()) {
-				// saisie manuelle
-				EditData.buttonFreqEchant.setSelection(true);
-				EditData.buttonLigneDonnees.setSelection(false);
-				EditData.test();
-			} else {
-				// position heure/date dans fichier
-				EditData.buttonFreqEchant.setSelection(false);
-				EditData.buttonLigneDonnees.setSelection(true);
-
-				EditData.comboTotal.add(stationModel_modele.getTimestampModel()
-						.getFormat().getFormatString(), 0);
-				EditData.comboTotal.select(0);
-
-				EditData.textTotalDebut.setText(""
-						+ stationModel_modele.getTimestampModel()
-								.getDateTimeFragment().getFirstCharOffset());
-				EditData.textTotalFin.setText(""
-						+ stationModel_modele.getTimestampModel()
-								.getDateTimeFragment().getLastCharOffset());
-				EditData.test2();
-			}
-
-		}
+		// // if (ViewFile.checkBoxTempo.getSelection()) {
+		// if (ViewFile.radSerieTempo.getSelection() ||
+		// ViewFile.radTrajectoire.getSelection()) {
+		// // série tempo
+		// if (stationModel_modele.getTimestampModel().isComputed()) {
+		// // saisie manuelle
+		// EditData.buttonFreqEchant.setSelection(true);
+		// EditData.buttonLigneDonnees.setSelection(false);
+		// EditData.test();
+		// } else {
+		// // position heure/date dans fichier
+		// EditData.buttonFreqEchant.setSelection(false);
+		// EditData.buttonLigneDonnees.setSelection(true);
+		//
+		// EditData.comboTotal.add(stationModel_modele.getTimestampModel()
+		// .getFormat().getFormatString(), 0);
+		// EditData.comboTotal.select(0);
+		//
+		// EditData.textTotalDebut.setText(""
+		// + stationModel_modele.getTimestampModel()
+		// .getDateTimeFragment().getFirstCharOffset());
+		// EditData.textTotalFin.setText(""
+		// + stationModel_modele.getTimestampModel()
+		// .getDateTimeFragment().getLastCharOffset());
+		// EditData.test2();
+		// }
+		//
+		// }
 
 	}
 

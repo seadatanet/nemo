@@ -79,7 +79,7 @@ public class Regexp {
 	}
 
 	public static Boolean checkLigneDebutfin(Text ligne, Text debut, Text fin,
-			String nomSection) {
+			String nomSection, boolean blnCheckLigne) {
 
 		String lign, debu, fi, log;
 		Boolean ok;
@@ -99,15 +99,17 @@ public class Regexp {
 
 		// format des différents champs
 		// ligne
-		if (Pattern.matches("^[0-9][0-9]*$", lign)) { //$NON-NLS-1$
-			// System.out.println("ligne de la section " + nomSection + " ==>
-			// ok");
-			ok = ok && true;
-			// log = log + "Valeur de ligne ok\n";
-		} else {
-			ok = ok && false;
-			log = log + "==>" + Messages.getString("Regexp.8"); //$NON-NLS-1$
+		if (blnCheckLigne) {
+			if (Pattern.matches("^[0-9][0-9]*$", lign)) { //$NON-NLS-1$
+				// System.out.println("ligne de la section " + nomSection + " ==>
+				// ok");
+				ok = ok && true;
+				// log = log + "Valeur de ligne ok\n";
+			} else {
+				ok = ok && false;
+				log = log + "==>" + Messages.getString("Regexp.8"); //$NON-NLS-1$
 
+			}
 		}
 
 		// debut

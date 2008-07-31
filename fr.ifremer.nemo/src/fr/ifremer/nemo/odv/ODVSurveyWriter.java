@@ -10,7 +10,7 @@ import java.io.Writer;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
-import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.ProgressNotification;
@@ -104,6 +104,8 @@ public class ODVSurveyWriter implements Cloneable, SurveyWriter {
 			context.put("star", "*");
 			context.put("nemoLists", fr.ifremer.nemo.config.NemoLists.class.newInstance());
 			context.put("swtProcess", fr.ifremer.nemo.ui.SWTProcess.class.newInstance());
+			context.put("editConversion", fr.ifremer.nemo.ui.EditConversion.class.newInstance());
+			context.put("codeEdmo", Configuration.getSingleton().getIdEdmoRespCdi());
 			context.put("cr", System.getProperty("line.separator"));
 			stream = getClass().getResourceAsStream("odv.vtl");
 			reader = new InputStreamReader(stream);

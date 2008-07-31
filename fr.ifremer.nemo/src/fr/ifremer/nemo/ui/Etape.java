@@ -18,26 +18,25 @@ public class Etape {
 	 * fenêtre principale et des différentes étapes.
 	 * 
 	 */
-	
+
 	public static void validationDesc() {
 
-		
 		// Fichier avec séparateur
 		if (ViewFile.checkSeparateur.getSelection() && !Preformat.isPreformat()) {
 			try {
 				Preformat.run();
-			} catch (Exception ex){
+			} catch (Exception ex) {
 				Utils.messageErreur(Messages.getString("Etape.120"));
 				ex.printStackTrace();
 			}
 		}
-		
+
 		// retour à l'onglet message d'erreur
 		ViewLog.tabFolderLog.setSelection(0);
 
 		Boolean ok, resultat;
 		ok = true;
-		//Table table;
+		// Table table;
 
 		// raz du message d'erreurs
 		Utils.messageErreur(""); //$NON-NLS-1$
@@ -56,40 +55,42 @@ public class Etape {
 		resultat = Regexp.checkTextValeur(EditDesc.lignesFinStation, Messages
 				.getString("Etape.3")); //$NON-NLS-1$
 		ok = ok && resultat;
-		
-		// section fin de données	
+
+		// section fin de données
 		if (EditDesc.radManuel.getSelection()) {
 			if (EditDesc.txtManuel.getText().matches("")) {
 				ok = false;
-				Utils.messageErreurAppend(Messages.getString("EditDesc.indicateurVide"));
+				Utils.messageErreurAppend(Messages
+						.getString("EditDesc.indicateurVide"));
 			}
 		}
-		
-//		FAE 33
-//		if (!EditDesc.buttonIndicFinDonnees.getSelection()) {
-//			resultat = Regexp.checkTextValeur(EditDesc.nbreLignesMesures,
-//					Messages.getString("Etape.4")); //$NON-NLS-1$
-//
-//			ok = ok && resultat;
-//		} else {
-//			// format de la combolist
-//			if (EditDesc.comboIndicRuptureDonnees.getText().matches("")) {
-//				Utils.messageErreurAppend(Messages.getString("Etape.100"));
-//				ok = false;
-//			}
-//
-//		}
+
+		// FAE 33
+		// if (!EditDesc.buttonIndicFinDonnees.getSelection()) {
+		// resultat = Regexp.checkTextValeur(EditDesc.nbreLignesMesures,
+		// Messages.getString("Etape.4")); //$NON-NLS-1$
+		//
+		// ok = ok && resultat;
+		// } else {
+		// // format de la combolist
+		// if (EditDesc.comboIndicRuptureDonnees.getText().matches("")) {
+		// Utils.messageErreurAppend(Messages.getString("Etape.100"));
+		// ok = false;
+		// }
+		//
+		// }
 
 		// check des valeurs date/heure séries tempo
-//		if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
+		// if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()
+				|| ViewFile.radTrajectoire.getSelection()) {
 			if (!ViewFile.textTempoHeureRef.getText().matches("")) { //$NON-NLS-1$
 				try {
 					DateTimeFormat format = new DateTimeFormat(
 							ViewFile.comboTempoHeure.getText());
-					
+
 					format.parseObject(ViewFile.textTempoHeureRef.getText());
-				
+
 				} catch (ParseException e) {
 
 					Utils.messageErreurAppend(Messages.getString("Etape.6")); //$NON-NLS-1$
@@ -100,7 +101,7 @@ public class Etape {
 				try {
 					DateTimeFormat format = new DateTimeFormat(
 							ViewFile.comboTempoDate.getText());
-					
+
 					format.parseObject(ViewFile.textTempoDateRef.getText());
 				} catch (ParseException e) {
 					Utils.messageErreurAppend(Messages.getString("Etape.8")); //$NON-NLS-1$
@@ -109,7 +110,7 @@ public class Etape {
 			}
 
 		} // fin tempo
-		
+
 		if (ok) {
 			EditDesc.okApresReset = true;
 			okDesc();
@@ -136,28 +137,31 @@ public class Etape {
 
 		// check valeurs obligatoires
 		resultat = Regexp.checkPresenceValeurObligatoire(
-				EditSurvey.textCampagne.getText(), Messages.getString("Etape.11")); //$NON-NLS-1$
+				EditSurvey.textCampagne.getText(), Messages
+						.getString("Etape.11")); //$NON-NLS-1$
 		ok = ok && resultat;
-		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textNom.getText(),
-				Messages.getString("Etape.12")); //$NON-NLS-1$
+		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textNom
+				.getText(), Messages.getString("Etape.12")); //$NON-NLS-1$
 		ok = ok && resultat;
-		resultat = Regexp.checkPresenceValeurObligatoire(
-				EditSurvey.comboNavire.getText(), Messages.getString("Etape.13")); //$NON-NLS-1$
-		ok = ok && resultat;
-		resultat = Regexp.checkPresenceValeurObligatoire(
-				EditSurvey.textDateDebut.getText(), Messages.getString("Etape.15")); //$NON-NLS-1$
+		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.comboNavire
+				.getText(), Messages.getString("Etape.13")); //$NON-NLS-1$
 		ok = ok && resultat;
 		resultat = Regexp.checkPresenceValeurObligatoire(
-				EditSurvey.textDateFin.getText(), Messages.getString("Etape.16")); //$NON-NLS-1$
+				EditSurvey.textDateDebut.getText(), Messages
+						.getString("Etape.15")); //$NON-NLS-1$
 		ok = ok && resultat;
-		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textRegion.getText(),
-				Messages.getString("Etape.17")); //$NON-NLS-1$
+		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textDateFin
+				.getText(), Messages.getString("Etape.16")); //$NON-NLS-1$
 		ok = ok && resultat;
-		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.comboCountries.getText(),
-				Messages.getString("Etape.18")); //$NON-NLS-1$
+		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textRegion
+				.getText(), Messages.getString("Etape.17")); //$NON-NLS-1$
 		ok = ok && resultat;
-		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textChef.getText(),
-				Messages.getString("Etape.19")); //$NON-NLS-1$
+		resultat = Regexp.checkPresenceValeurObligatoire(
+				EditSurvey.comboCountries.getText(), Messages
+						.getString("Etape.18")); //$NON-NLS-1$
+		ok = ok && resultat;
+		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textChef
+				.getText(), Messages.getString("Etape.19")); //$NON-NLS-1$
 		ok = ok && resultat;
 
 		// CHECK DATES
@@ -165,9 +169,9 @@ public class Etape {
 			try {
 				DateTimeFormat dateFormat = new DateTimeFormat();
 				dateFormat.setFormatString("dd/MM/yyyy"); //$NON-NLS-1$
-				
+
 				dateFormat.parseObject(EditSurvey.textDateDebut.getText());
-						
+
 			} catch (ParseException e) {
 				Utils.messageErreurAppend(Messages.getString("Etape.24")); //$NON-NLS-1$
 				ok = false;
@@ -178,7 +182,7 @@ public class Etape {
 			try {
 				DateTimeFormat dateFormat = new DateTimeFormat();
 				dateFormat.setFormatString("dd/MM/yyyy"); //$NON-NLS-1$
-				
+
 				dateFormat.parseObject(EditSurvey.textDateFin.getText());
 
 			} catch (ParseException e) {
@@ -225,10 +229,11 @@ public class Etape {
 
 		// System.out.println("Debut check station");
 
-		Boolean ok, resultat1, resultat2, depasse, metaInData2;
+		Boolean ok, resultat1, resultat2, depasse, metaInData2, blnCheckLigne;
 		ok = true;
 		depasse = false;
 		metaInData2 = EditStation.btnMetaInData2.getSelection();
+		blnCheckLigne = !((ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) && EditStation.radLigneDonnees.getSelection());
 
 		// raz du message d'erreurs
 		Utils.messageErreur(""); //$NON-NLS-1$
@@ -240,12 +245,11 @@ public class Etape {
 					EditStation.textRefStationLigne,
 					EditStation.textRefStationDebut,
 					EditStation.textRefStationFin, Messages
-							.getString("Etape.31")); //$NON-NLS-1$
+							.getString("Etape.31"), true); //$NON-NLS-1$
 			if (resultat1) {
 				depasse = Regexp.depassementHeaderStation(Integer
 						.parseInt(EditStation.textRefStationLigne.getText()),
-						Messages.getString("Etape.31"),
-						metaInData2);
+						Messages.getString("Etape.31"), metaInData2);
 
 			}
 			if (depasse) {
@@ -271,7 +275,7 @@ public class Etape {
 					EditStation.textHistoriqueAcqLigne1,
 					EditStation.textHistoriqueAcqDebut1,
 					EditStation.textHistoriqueAcqFin1, Messages
-							.getString("Etape.33")); //$NON-NLS-1$
+							.getString("Etape.33"), true); //$NON-NLS-1$
 			ok = ok && resultat1;
 
 			if (resultat1) {
@@ -318,7 +322,7 @@ public class Etape {
 						EditStation.textHistoriqueAcqLigne2,
 						EditStation.textHistoriqueAcqDebut2,
 						EditStation.textHistoriqueAcqFin2, Messages
-								.getString("Etape.34"));
+								.getString("Etape.34"), true);
 
 				if (resultat2) {
 					int nbreLignes = Utils
@@ -370,7 +374,7 @@ public class Etape {
 					EditStation.textCommentaireLigne,
 					EditStation.textCommentaireDebut,
 					EditStation.textCommentaireFin, Messages
-							.getString("Etape.35")); //$NON-NLS-1$
+							.getString("Etape.35"), true); //$NON-NLS-1$
 			ok = ok && resultat1;
 
 			if (resultat1) {
@@ -410,7 +414,7 @@ public class Etape {
 			resultat1 = Regexp.checkLigneDebutfin(
 					EditStation.textSurfaceLigne1,
 					EditStation.textSurfaceDebut1, EditStation.textSurfaceFin1,
-					Messages.getString("Etape.36")); //$NON-NLS-1$
+					Messages.getString("Etape.36"), true); //$NON-NLS-1$
 			ok = ok && resultat1;
 			if (resultat1) {
 				int nbreLignes = Utils
@@ -454,7 +458,7 @@ public class Etape {
 						EditStation.textSurfaceLigne2,
 						EditStation.textSurfaceDebut2,
 						EditStation.textSurfaceFin2, Messages
-								.getString("Etape.37"));
+								.getString("Etape.37"), true);
 
 				if (resultat2) {
 
@@ -508,7 +512,6 @@ public class Etape {
 
 		// HEURE
 		// check valeurs ligne/debut/fin
-
 		if (EditStation.buttonHeureSaisie.getSelection()) {
 			// saisie à la main
 			try {
@@ -516,7 +519,7 @@ public class Etape {
 						EditStation.comboHeure.getText());
 
 				format.parseObject(EditStation.textHeureSaisie.getText());
-			
+
 			} catch (ParseException e) {
 
 				Utils
@@ -526,21 +529,21 @@ public class Etape {
 				e.printStackTrace();
 
 			}
-
 		} else {
 			// position dans fichier
 
 			resultat1 = Regexp.checkLigneDebutfin(EditStation.textHeureLigne,
 					EditStation.textHeureDebut, EditStation.textHeureFin,
-					Messages.getString("Etape.40")); //$NON-NLS-1$
+					Messages.getString("Etape.40"), blnCheckLigne); //$NON-NLS-1$
 
-//			if (resultat1 && !(metaInData2 || ViewFile.checkBoxTempo.getSelection())) {
-			if (resultat1) {
+			// if (resultat1 && !(metaInData2 ||
+			// ViewFile.checkBoxTempo.getSelection())) {
+			if (resultat1 && blnCheckLigne) {
 				depasse = Regexp.depassementHeaderStation(Integer
 						.parseInt(EditStation.textHeureLigne.getText()),
-						Messages.getString("Etape.40"),
-						metaInData2 || ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection());
-
+						Messages.getString("Etape.40"), metaInData2
+								|| ViewFile.radSerieTempo.getSelection()
+								|| ViewFile.radTrajectoire.getSelection());
 			}
 
 			if (depasse) {
@@ -552,9 +555,14 @@ public class Etape {
 
 			try {
 
-				// récupérer le texte en question et creer une nouvelle heure
-				ligne = Utils.lignesBrutes.get(Integer
-						.parseInt(EditStation.textHeureLigne.getText()) - 1);
+				// récupérer le texte en question et creer une nouvelle
+				// heure
+				if (EditStation.textHeureLigne.getText().equals("")) {
+					ligne = Utils.lignesBrutes.get(DataModel.stationModel.getNumberOfLines());
+				} else {
+					ligne = Utils.lignesBrutes.get(Integer
+							.parseInt(EditStation.textHeureLigne.getText()) - 1);
+				}
 				string = ligne.substring(Integer
 						.parseInt(EditStation.textHeureDebut.getText()) - 1,
 						Integer.parseInt(EditStation.textHeureFin.getText()));
@@ -572,7 +580,6 @@ public class Etape {
 				e.printStackTrace();
 
 			}
-
 		}
 
 		// DATE
@@ -581,9 +588,9 @@ public class Etape {
 			try {
 				DateTimeFormat format = new DateTimeFormat(
 						EditStation.comboDate.getText());
-				
+
 				format.parseObject(EditStation.textDateSaisie.getText());
-			
+
 			} catch (ParseException e) {
 
 				Utils
@@ -596,14 +603,16 @@ public class Etape {
 			// check valeurs ligne/debut/fin
 			resultat1 = Regexp.checkLigneDebutfin(EditStation.textDateLigne,
 					EditStation.textDateDebut, EditStation.textDateFin,
-					Messages.getString("Etape.45")); //$NON-NLS-1$
+					Messages.getString("Etape.45"), blnCheckLigne); //$NON-NLS-1$
 
-//			if (resultat1 && !(metaInData2 || ViewFile.checkBoxTempo.getSelection())) {
-			if (resultat1) {
+			// if (resultat1 && !(metaInData2 ||
+			// ViewFile.checkBoxTempo.getSelection())) {
+			if (resultat1 && blnCheckLigne) {
 				depasse = Regexp.depassementHeaderStation(Integer
 						.parseInt(EditStation.textDateLigne.getText()),
-						Messages.getString("Etape.45"),
-						metaInData2 || ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection());
+						Messages.getString("Etape.45"), metaInData2
+								|| ViewFile.radSerieTempo.getSelection()
+								|| ViewFile.radTrajectoire.getSelection());
 
 			}
 
@@ -618,8 +627,13 @@ public class Etape {
 
 				// récupérer le texte en question et creer une nouvelle heure
 				// on a ligne debut fin donc parcours lignes de texte
-				ligne = Utils.lignesBrutes.get(Integer
-						.parseInt(EditStation.textDateLigne.getText()) - 1);
+				if (EditStation.textHeureLigne.getText().equals("")) {
+					ligne = Utils.lignesBrutes.get(DataModel.stationModel.getNumberOfLines());
+				} else {
+					ligne = Utils.lignesBrutes.get(Integer
+							.parseInt(EditStation.textDateLigne.getText()) - 1);
+				}
+				
 				string = ligne.substring(Integer
 						.parseInt(EditStation.textDateDebut.getText()) - 1,
 						Integer.parseInt(EditStation.textDateFin.getText()));
@@ -647,13 +661,12 @@ public class Etape {
 					EditStation.textProfondeurLigne,
 					EditStation.textProfondeurDebut,
 					EditStation.textProfondeurFin, Messages
-							.getString("Etape.49")); //$NON-NLS-1$
+							.getString("Etape.49"), true); //$NON-NLS-1$
 
 			if (resultat1) {
 				depasse = Regexp.depassementHeaderStation(Integer
 						.parseInt(EditStation.textProfondeurLigne.getText()),
-						Messages.getString("Etape.49"),
-						metaInData2);
+						Messages.getString("Etape.49"), metaInData2);
 
 				// check de la valeur lue dans le fichier
 				ligne = Utils.lignesBrutes
@@ -705,13 +718,12 @@ public class Etape {
 		if (EditStation.buttonTUPos.getSelection()) {
 			resultat1 = Regexp.checkLigneDebutfin(EditStation.textTULigne,
 					EditStation.textTUDebut, EditStation.textTUFin, Messages
-							.getString("Etape.118")); //$NON-NLS-1$
+							.getString("Etape.118"), true); //$NON-NLS-1$
 
 			if (resultat1) {
 				depasse = Regexp.depassementHeaderStation(Integer
 						.parseInt(EditStation.textTULigne.getText()), Messages
-						.getString("Etape.118"),
-						metaInData2);
+						.getString("Etape.118"), metaInData2);
 				// check de la valeur lue dans le fichier
 				ligne = Utils.lignesBrutes.get(Integer
 						.parseInt(EditStation.textTULigne.getText()) - 1);
@@ -761,7 +773,8 @@ public class Etape {
 			try {
 				LatitudeFormat latitudeFormat = new LatitudeFormat(
 						EditStation.comboLatitude.getText());
-				latitudeFormat.setVariableLength(EditStation.buttonVarLat.getSelection());
+				latitudeFormat.setVariableLength(EditStation.buttonVarLat
+						.getSelection());
 				latitudeFormat.parseObject(EditStation.textLatitude.getText());
 
 			} catch (ParseException e) {
@@ -775,13 +788,17 @@ public class Etape {
 			resultat1 = Regexp.checkLigneDebutfin(
 					EditStation.textLatitudeLigne,
 					EditStation.textLatitudeDebut, EditStation.textLatitudeFin,
-					Messages.getString("Etape.54")); //$NON-NLS-1$
+					Messages.getString("Etape.54"), true); //$NON-NLS-1$
 			if (resultat1) {
-				depasse = Regexp.depassementHeaderStation(Integer
-						.parseInt(EditStation.textLatitudeLigne.getText()),
-						Messages.getString("Etape.54"),
-						metaInData2 || 
-						(ViewFile.radTrajectoire.getSelection() && EditStation.radODV.getSelection()));
+				depasse = Regexp
+						.depassementHeaderStation(
+								Integer.parseInt(EditStation.textLatitudeLigne
+										.getText()),
+								Messages.getString("Etape.54"),
+								metaInData2
+										|| (ViewFile.radTrajectoire
+												.getSelection() && EditStation.radODV
+												.getSelection()));
 
 			}
 
@@ -797,7 +814,8 @@ public class Etape {
 
 			ligne = Utils.lignesBrutes.get(Integer
 					.parseInt(EditStation.textLatitudeLigne.getText()) - 1);
-			int endLine = Integer.parseInt(EditStation.textLatitudeFin.getText());
+			int endLine = Integer.parseInt(EditStation.textLatitudeFin
+					.getText());
 			if (ligne.length() < endLine) {
 				endLine = ligne.length();
 			}
@@ -808,7 +826,8 @@ public class Etape {
 			try {
 				LatitudeFormat latitudeFormat = new LatitudeFormat(
 						EditStation.comboLatitude.getText());
-				latitudeFormat.setVariableLength(EditStation.buttonVarLat.getSelection());
+				latitudeFormat.setVariableLength(EditStation.buttonVarLat
+						.getSelection());
 				latitudeFormat.parseObject(string);
 
 			} catch (ParseException e) {
@@ -828,7 +847,8 @@ public class Etape {
 			try {
 				LongitudeFormat longitudeFormat = new LongitudeFormat(
 						EditStation.comboLongitude.getText());
-				longitudeFormat.setVariableLength(EditStation.buttonVarLong.getSelection());
+				longitudeFormat.setVariableLength(EditStation.buttonVarLong
+						.getSelection());
 				longitudeFormat
 						.parseObject(EditStation.textLongitude.getText());
 			} catch (ParseException e) {
@@ -842,13 +862,17 @@ public class Etape {
 					EditStation.textLongitudeLigne,
 					EditStation.textLongitudeDebut,
 					EditStation.textLongitudeFin, Messages
-							.getString("Etape.59")); //$NON-NLS-1$
+							.getString("Etape.59"), true); //$NON-NLS-1$
 			if (resultat1 && !metaInData2) {
-				depasse = Regexp.depassementHeaderStation(Integer
-						.parseInt(EditStation.textLongitudeLigne.getText()),
-						Messages.getString("Etape.59"),
-						metaInData2 || 
-						(ViewFile.radTrajectoire.getSelection() && EditStation.radODV.getSelection()));
+				depasse = Regexp
+						.depassementHeaderStation(
+								Integer.parseInt(EditStation.textLongitudeLigne
+										.getText()),
+								Messages.getString("Etape.59"),
+								metaInData2
+										|| (ViewFile.radTrajectoire
+												.getSelection() && EditStation.radODV
+												.getSelection()));
 
 			}
 
@@ -861,7 +885,8 @@ public class Etape {
 
 			ligne = Utils.lignesBrutes.get(Integer
 					.parseInt(EditStation.textLongitudeLigne.getText()) - 1);
-			int endLine = Integer.parseInt(EditStation.textLongitudeFin.getText());
+			int endLine = Integer.parseInt(EditStation.textLongitudeFin
+					.getText());
 			if (ligne.length() < endLine) {
 				endLine = ligne.length();
 			}
@@ -872,7 +897,8 @@ public class Etape {
 			try {
 				LongitudeFormat longitudeFormat = new LongitudeFormat(
 						EditStation.comboLongitude.getText());
-				longitudeFormat.setVariableLength(EditStation.buttonVarLong.getSelection());
+				longitudeFormat.setVariableLength(EditStation.buttonVarLong
+						.getSelection());
 				longitudeFormat.parseObject(string);
 
 			} catch (ParseException e) {
@@ -886,8 +912,9 @@ public class Etape {
 		}
 
 		// SERIE TEMPO
-//		if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
+		// if (ViewFile.checkBoxTempo.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()
+				|| ViewFile.radTrajectoire.getSelection()) {
 			// LATITUDE DE FIN
 			if (EditStation.buttonLatFinSaisie.getSelection()) {
 				// saisie manuelle
@@ -899,7 +926,9 @@ public class Etape {
 						try {
 							LatitudeFormat latitudeFormat = new LatitudeFormat(
 									EditStation.comboLatitudeFin.getText());
-							latitudeFormat.setVariableLength(EditStation.buttonVarLatFin.getSelection());
+							latitudeFormat
+									.setVariableLength(EditStation.buttonVarLatFin
+											.getSelection());
 							latitudeFormat.parseObject(EditStation.textLatFin
 									.getText());
 						} catch (ParseException e) {
@@ -915,12 +944,11 @@ public class Etape {
 				resultat1 = Regexp.checkLigneDebutfin(
 						EditStation.textLatFinLigne,
 						EditStation.textLatFinDebut, EditStation.textLatFinFin,
-						Messages.getString("Etape.65")); //$NON-NLS-1$
+						Messages.getString("Etape.65"), true); //$NON-NLS-1$
 				if (resultat1) {
 					depasse = Regexp.depassementHeaderStation(Integer
 							.parseInt(EditStation.textLatFinLigne.getText()),
-							Messages.getString("Etape.65"),
-							metaInData2);
+							Messages.getString("Etape.65"), metaInData2);
 
 				}
 
@@ -943,7 +971,9 @@ public class Etape {
 						try {
 							LongitudeFormat longitudeFormat = new LongitudeFormat(
 									EditStation.comboLongitudeFin.getText());
-							longitudeFormat.setVariableLength(EditStation.buttonVarLongFin.getSelection());
+							longitudeFormat
+									.setVariableLength(EditStation.buttonVarLongFin
+											.getSelection());
 							longitudeFormat.parseObject(EditStation.textLongFin
 									.getText());
 						} catch (ParseException e) {
@@ -960,7 +990,7 @@ public class Etape {
 						EditStation.textLongFinLigne,
 						EditStation.textLongFinDebut,
 						EditStation.textLongFinFin, Messages
-								.getString("Etape.68")); //$NON-NLS-1$
+								.getString("Etape.68"), true); //$NON-NLS-1$
 				if (resultat1) {
 					depasse = Regexp.depassementHeaderStation(Integer
 							.parseInt(EditStation.textLongFinLigne.getText()),
@@ -983,12 +1013,11 @@ public class Etape {
 						EditStation.textProfFinLigne,
 						EditStation.textProfFinDebut,
 						EditStation.textProfFinFin, Messages
-								.getString("Etape.69")); //$NON-NLS-1$
+								.getString("Etape.69"), true); //$NON-NLS-1$
 				if (resultat1) {
 					depasse = Regexp.depassementHeaderStation(Integer
 							.parseInt(EditStation.textProfFinLigne.getText()),
-							Messages.getString("Etape.69"),
-							metaInData2);
+							Messages.getString("Etape.69"), metaInData2);
 					// check de la valeur lue dans le fichier
 					ligne = Utils.lignesBrutes
 							.get(Integer.parseInt(EditStation.textProfFinLigne
@@ -1045,14 +1074,12 @@ public class Etape {
 						EditStation.textProfCapteurLigne,
 						EditStation.textProfCapteurDebut,
 						EditStation.textProfCapteurFin, Messages
-								.getString("Etape.75")); //$NON-NLS-1$
+								.getString("Etape.75"), true); //$NON-NLS-1$
 				if (resultat1) {
-					depasse = Regexp
-							.depassementHeaderStation(Integer
-									.parseInt(EditStation.textProfCapteurLigne
-											.getText()), Messages
-									.getString("Etape.75"),
-									metaInData2);
+					depasse = Regexp.depassementHeaderStation(Integer
+							.parseInt(EditStation.textProfCapteurLigne
+									.getText()),
+							Messages.getString("Etape.75"), metaInData2);
 					// check de la valeur lue dans le fichier
 					ligne = Utils.lignesBrutes.get(Integer
 							.parseInt(EditStation.textProfCapteurLigne
@@ -1107,14 +1134,12 @@ public class Etape {
 						EditStation.textDeclinMagnetLigne,
 						EditStation.textDeclinMagnetDebut,
 						EditStation.textDeclinMagnetFin, Messages
-								.getString("Etape.82")); //$NON-NLS-1$
+								.getString("Etape.82"), true); //$NON-NLS-1$
 				if (resultat1) {
-					depasse = Regexp
-							.depassementHeaderStation(Integer
-									.parseInt(EditStation.textDeclinMagnetLigne
-											.getText()), Messages
-									.getString("Etape.82"),
-									metaInData2);
+					depasse = Regexp.depassementHeaderStation(Integer
+							.parseInt(EditStation.textDeclinMagnetLigne
+									.getText()),
+							Messages.getString("Etape.82"), metaInData2);
 					// check de la valeur lue dans le fichier
 					ligne = Utils.lignesBrutes.get(Integer
 							.parseInt(EditStation.textDeclinMagnetLigne
@@ -1176,13 +1201,12 @@ public class Etape {
 						EditStation.textFreqEchantLigne,
 						EditStation.textFreqEchantDebut,
 						EditStation.textFreqEchantFin, Messages
-								.getString("Etape.104")); //$NON-NLS-1$
+								.getString("Etape.104"), true); //$NON-NLS-1$
 				if (resultat1) {
 					depasse = Regexp.depassementHeaderStation(
 							Integer.parseInt(EditStation.textFreqEchantLigne
 									.getText()), Messages
-									.getString("Etape.104"),
-									metaInData2);
+									.getString("Etape.104"), metaInData2);
 					// check de la valeur lue dans le fichier
 					ligne = Utils.lignesBrutes
 							.get(Integer
@@ -1216,9 +1240,9 @@ public class Etape {
 
 			} else {
 				// saisie manuelle
-				if (	//FAE 066 / 064
-						//Pattern.matches("^[0-9]*[0-9][.]?[0-9][0-9]*$",
-					Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$",
+				if ( // FAE 066 / 064
+				// Pattern.matches("^[0-9]*[0-9][.]?[0-9][0-9]*$",
+				Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$",
 						EditStation.textFreqEchant.getText())) {
 					// ok
 					ok = ok && true;
@@ -1247,7 +1271,7 @@ public class Etape {
 	public static void validationData() {
 		// test de toutes les valeurs debut / fin des Data
 		Boolean ok = true;
-		Boolean resultat, valeurNonRemplie = false;
+		Boolean valeurNonRemplie = false;
 		// retour à l'onglet message d'erreur
 		ViewLog.tabFolderLog.setSelection(0);
 
@@ -1330,50 +1354,30 @@ public class Etape {
 				ok = false;
 			}
 
-			// SERIE TEMPO
-//			if ((ViewFile.checkBoxTempo.getSelection())
-//					&& (EditData.buttonLigneDonnees.getSelection())) {
-			if (((ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection())
-					&& EditData.buttonLigneDonnees.getSelection())) {
-				// check valeurs série tempo
+			// TEST pour savoir si PRES est bien en premier mais pas pour
+			// séries tempo ou trajectoire
+			TypeData premierType = TableData.types.get(0);
 
-				resultat = Regexp.checkLigneDebutfin(EditData.textTotalLigne,
-						EditData.textTotalDebut, EditData.textTotalFin,
-						Messages.getString("Etape.89")); //$NON-NLS-1$
-				ok = ok && resultat;
-
-				try {
-					DateTimeFormat format = new DateTimeFormat(
-							EditData.comboHeure.getText());
-					HorodatedParameterModel horo = new HorodatedParameterModel();
-					horo.setFormat(format);
-				} catch (ParseException e) {
-					// System.out.println("Erreur format date+heure");
-					e.printStackTrace();
-				}
-
-			}
-
-//			if (!ViewFile.checkBoxTempo.getSelection()) {
-			if (!(ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) &&
-					!(ViewFile.radTrajectoire.getSelection() && EditStation.radMedatlas.getSelection())) {
-				// TEST pour savoir si PRES est bien en premier mais pas pour
-				// séries tempo ou trajectoire
-				TypeData premierType = TableData.types.get(0);
-
-				// split sur " - "
-				Pattern p = Pattern.compile(" - ");
-				String[] mots = p.split(premierType.getCode());
-				String code = mots[0];
-
-				if (!code.matches("PRES")) {
-					// PRES n'est pas en premier
+			// split sur " - "
+			Pattern p = Pattern.compile(" - ");
+			String[] mots = p.split(premierType.getCode());
+			String code = mots[0];
+			
+			if (ViewFile.radProfilVertical.getSelection()) {
+				if (!(code.matches("PRES") || code.matches("DEPH"))) {
+					// PRES ou DEPH n'est pas en premier
 					Utils.messageErreurAppend(Messages.getString("Etape.107"));
 					ok = ok && false;
 				} else {
 					ok = ok && true;
 				}
-
+				
+				// Si PRES n'est pas premier => Medatlas impossible
+				if (!code.matches("PRES")) {
+					ViewFile.radMedatlas.setEnabled(false);
+				} else if (!ViewFile.isCollection()) {
+					ViewFile.radMedatlas.setEnabled(true);
+				}
 			}
 
 		}
@@ -1388,10 +1392,11 @@ public class Etape {
 		// attention aux boutons radio
 
 		// puis remplissage du modèle avec les valeurs de l'IHM
-//		DataModel.initModele(ViewFile.dossierCampagne, ViewFile.checkBoxTempo
-//				.getSelection(), ViewFile.nomFichier);
-		DataModel.initModele(ViewFile.dossierCampagne, ViewFile.typeFichierEntree(), ViewFile.nomFichier);
-		
+		// DataModel.initModele(ViewFile.dossierCampagne, ViewFile.checkBoxTempo
+		// .getSelection(), ViewFile.nomFichier);
+		DataModel.initModele(ViewFile.dossierCampagne, ViewFile
+				.typeFichierEntree(), ViewFile.nomFichier);
+
 		Utils.messageOK(Messages.getString("Etape.90")); //$NON-NLS-1$
 
 		// on rajoute "ok" dans l'onglet description
@@ -1405,7 +1410,7 @@ public class Etape {
 			if (ViewFile.isCollection()) {
 				EditSurvey.okApresReset = true;
 				EditSurvey.validee = 1;
-				
+
 				DataModel.initSurvey();
 				ViewFile.etape = 2;
 			} else {
@@ -1414,7 +1419,7 @@ public class Etape {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		// System.out.println("Etape.okDesc()");
 
 	}

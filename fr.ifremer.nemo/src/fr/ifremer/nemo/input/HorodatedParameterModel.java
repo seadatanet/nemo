@@ -33,19 +33,31 @@ public class HorodatedParameterModel implements Cloneable, PathElementHandler,
 	 * Fragment permettant de récupérer la date de mesure du paramètre dans le
 	 * fichier d'entrée
 	 */
-	protected LineFragment _dateTimeFragment;
+	protected LineFragment _dateFragment;
+	
+	/**
+	 * Fragment permettant de récupérer la date de mesure du paramètre dans le
+	 * fichier d'entrée
+	 */
+	protected LineFragment _timeFragment;
 
-	protected DateTimeFormat _format;
+	protected DateTimeFormat _dateFormat;
+	
+	protected DateTimeFormat _timeFormat;
 
 	/**
 	 * 
 	 */
 	public HorodatedParameterModel() {
 		_computed = false;
-		_dateTimeFragment = new LineFragment();
+		_dateFragment = new LineFragment();
+		_timeFragment = new LineFragment();
+		
 		try {
-			_format = new DateTimeFormat("dd/MM/yyyy hh24:mm:ss");
+			_dateFormat = new DateTimeFormat("dd/MM/yyyy");
+			_timeFormat = new DateTimeFormat("hh24:mm:ss");
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -113,10 +125,19 @@ public class HorodatedParameterModel implements Cloneable, PathElementHandler,
 		if (a_LocalName.equals("dateFragment")) {
 			return new PathElementConsumer("dateFragment", this);
 		}
-		if (a_LocalName.equals("DateTimeFormat")) {
+		if (a_LocalName.equals("timeFragment")) {
+			return new PathElementConsumer("timeFragment", this);
+		}
+		if (a_LocalName.equals("dateFormat")) {
 			DateTimeFormat l = (DateTimeFormat) DateTimeFormat.fromElement(
 					a_URI, a_LocalName, a_QName, a_Attributes);
-			setFormat(l);
+			setDateFormat(l);
+			return (SAXConsumer) l;
+		}
+		if (a_LocalName.equals("timeFormat")) {
+			DateTimeFormat l = (DateTimeFormat) DateTimeFormat.fromElement(
+					a_URI, a_LocalName, a_QName, a_Attributes);
+			setTimeFormat(l);
 			return (SAXConsumer) l;
 		}
 		return null;
@@ -157,7 +178,13 @@ public class HorodatedParameterModel implements Cloneable, PathElementHandler,
 		if (path.equals("dateFragment")) {
 			c = LineFragment.fromElement(a_URI, a_LocalName, a_QName,
 					a_Attributes);
-			setDateTimeFragment((LineFragment) c);
+			setDateFragment((LineFragment) c);
+			return c;
+		}
+		if (path.equals("timeFragment")) {
+			c = LineFragment.fromElement(a_URI, a_LocalName, a_QName,
+					a_Attributes);
+			setTimeFragment((LineFragment) c);
 			return c;
 		}
 		return null;
@@ -173,13 +200,29 @@ public class HorodatedParameterModel implements Cloneable, PathElementHandler,
 	 */
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
 		a_Writer.putAttribute("computed", isComputed());
-		if (getDateTimeFragment() != null) {
-			a_Writer.openTag("dateFragment");
-			getDateTimeFragment().writeXMLOn(a_Writer);
-			a_Writer.closeTag();
-		}
-		if (getFormat() != null) {
-			getFormat().writeXMLOn(a_Writer);
+		if (!isComputed()) {
+			if (getDateFragment() != null) {
+				a_Writer.openTag("dateFragment");
+				getDateFragment().writeXMLOn(a_Writer);
+				a_Writer.closeTag();
+			}
+			if (getDateFragment() != null) {
+				a_Writer.openTag("timeFragment");
+				getTimeFragment().writeXMLOn(a_Writer);
+				a_Writer.closeTag();
+			}
+			if (getDateFormat() != null) {
+//				getDateFormat().writeXMLOn(a_Writer);
+				a_Writer.openTag("dateFormat");
+				getDateFormat().writeXMLBodyOn(a_Writer);
+				a_Writer.closeTag();
+			}
+			if (getTimeFormat() != null) {
+//				getTimeFormat().writeXMLOn(a_Writer);
+				a_Writer.openTag("timeFormat");
+				getTimeFormat().writeXMLBodyOn(a_Writer);
+				a_Writer.closeTag();
+			}
 		}
 	}
 
@@ -218,15 +261,28 @@ public class HorodatedParameterModel implements Cloneable, PathElementHandler,
 	public Object clone() throws CloneNotSupportedException {
 		HorodatedParameterModel copy = null;
 		copy = (HorodatedParameterModel) super.clone();
-		copy._dateTimeFragment = new LineFragment();
-		if (getDateTimeFragment() != null) {
-			copy.setDateTimeFragment((LineFragment) getDateTimeFragment()
+		
+		copy._dateFragment = new LineFragment();
+		if (getDateFragment() != null) {
+			copy.setDateFragment((LineFragment) getDateFragment()
 					.clone());
 		}
-		copy._format = null;
-		if (getFormat() != null) {
-			copy.setFormat((DateTimeFormat) getFormat().clone());
+		
+		copy._timeFragment = new LineFragment();
+		if (getTimeFragment() != null) {
+			copy.setTimeFragment((LineFragment) getTimeFragment()
+					.clone());
 		}
+		
+		copy._dateFormat = null;
+		if (getDateFormat() != null) {
+			copy.setDateFormat((DateTimeFormat) getDateFormat().clone());
+		}
+		copy._timeFormat = null;
+		if (getTimeFormat() != null) {
+			copy.setTimeFormat((DateTimeFormat) getTimeFormat().clone());
+		}
+		
 		return copy;
 	}
 
@@ -274,7 +330,8 @@ public class HorodatedParameterModel implements Cloneable, PathElementHandler,
 	 * Remove any link for role dateTimeFragment
 	 */
 	public void releaseDateTimeFragment() {
-		setDateTimeFragment(null);
+		setDateFragment(null);
+		setTimeFragment(null);
 	}
 
 	/**
@@ -282,8 +339,8 @@ public class HorodatedParameterModel implements Cloneable, PathElementHandler,
 	 * 
 	 * @return the object linked
 	 */
-	public LineFragment getDateTimeFragment() {
-		return _dateTimeFragment;
+	public LineFragment getDateFragment() {
+		return _dateFragment;
 	}
 
 	/**
@@ -292,17 +349,39 @@ public class HorodatedParameterModel implements Cloneable, PathElementHandler,
 	 * @param x
 	 *            the object to link with
 	 */
-	public void setDateTimeFragment(LineFragment x) {
-		if (_dateTimeFragment == x)
+	public void setDateFragment(LineFragment x) {
+		if (_dateFragment == x)
 			return;
-		_dateTimeFragment = x;
+		_dateFragment = x;
+	}
+	
+	/**
+	 * returns the linked object for role <% aRole name%>
+	 * 
+	 * @return the object linked
+	 */
+	public LineFragment getTimeFragment() {
+		return _timeFragment;
+	}
+	
+	/**
+	 * Create a new link with x for role dateTimeFragment
+	 * 
+	 * @param x
+	 *            the object to link with
+	 */
+	public void setTimeFragment(LineFragment x) {
+		if (_timeFragment == x)
+			return;
+		_timeFragment = x;
 	}
 
 	/**
 	 * Remove any link for role format
 	 */
 	public void releaseFormat() {
-		setFormat(null);
+		setDateFormat(null);
+		setTimeFormat(null);
 	}
 
 	/**
@@ -310,8 +389,8 @@ public class HorodatedParameterModel implements Cloneable, PathElementHandler,
 	 * 
 	 * @return the object linked
 	 */
-	public DateTimeFormat getFormat() {
-		return _format;
+	public DateTimeFormat getDateFormat() {
+		return _dateFormat;
 	}
 
 	/**
@@ -320,10 +399,31 @@ public class HorodatedParameterModel implements Cloneable, PathElementHandler,
 	 * @param x
 	 *            the object to link with
 	 */
-	public void setFormat(DateTimeFormat x) {
-		if (_format == x)
+	public void setDateFormat(DateTimeFormat x) {
+		if (_dateFormat == x)
 			return;
-		_format = x;
+		_dateFormat = x;
+	}
+	
+	/**
+	 * returns the linked object for role <% aRole name%>
+	 * 
+	 * @return the object linked
+	 */
+	public DateTimeFormat getTimeFormat() {
+		return _timeFormat;
+	}
+
+	/**
+	 * Create a new link with x for role format
+	 * 
+	 * @param x
+	 *            the object to link with
+	 */
+	public void setTimeFormat(DateTimeFormat x) {
+		if (_timeFormat == x)
+			return;
+		_timeFormat = x;
 	}
 
 	/**
@@ -335,9 +435,12 @@ public class HorodatedParameterModel implements Cloneable, PathElementHandler,
 	 */
 	public long convertTimestamp(String a_Line, long a_RefDate)
 			throws ParseException {
-		String frgmnt = _dateTimeFragment.retreive(a_Line);
-		_format.setRefDate(a_RefDate);
-		return (Long) _format.parseObject(frgmnt);
+		String frgmntDate = getDateFragment().retreive(a_Line);
+		String frgmntTime = getTimeFragment().retreive(a_Line);
+		DateTimeFormat format = new DateTimeFormat();
+		format.setFormatString(getDateFormat().getFormatString() + " " + getTimeFormat().getFormatString());
+		format.setRefDate(a_RefDate);
+		return (Long) format.parseObject(frgmntDate + " " + frgmntTime);
 	}
 
 } /* End of class: HorodatedParameterModel */

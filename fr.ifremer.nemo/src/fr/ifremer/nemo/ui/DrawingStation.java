@@ -206,6 +206,7 @@ public class DrawingStation {
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
 				| Section.TWISTIE | Section.COMPACT);
 
+		EditStation.sectionFreqEchant = section;
 //		System.out
 //				.println("sectionManuelLigneDebutFinInject DrawingStation ==> ok");
 
@@ -1554,12 +1555,10 @@ public class DrawingStation {
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// bouton d'injection de la position des valeurs
-		Button buttonInject = new Button(groupe, SWT.NONE);
-		buttonInject.setText(Messages.getString("Drawing.1"));
+		EditStation.buttonHeureInject.setParent(groupe);
+		EditStation.buttonHeureInject.setText(Messages.getString("Drawing.1"));
 
 		section.setClient(sectionClient);
-
-		inject = buttonInject;
 		
 		// Zone de test
 		Composite compoTest = new Composite(sectionClient,SWT.NONE);
@@ -1580,11 +1579,12 @@ public class DrawingStation {
 		debu = debut;
 		fi = fin;
 		test = heure;
+		inject = EditStation.buttonHeureInject;
 
 		lign.setEnabled(false);
 		debu.setEnabled(false);
 		fi.setEnabled(false);
-		buttonInject.setEnabled(false);
+		EditStation.buttonHeureInject.setEnabled(false);
 
 		// listener zone de test
 		EditStation.textTestConvHeure
@@ -1638,7 +1638,7 @@ public class DrawingStation {
 				});
 
 		// bouton inject
-		buttonInject
+		EditStation.buttonHeureInject
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
@@ -1800,9 +1800,10 @@ public class DrawingStation {
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// bouton d'injection de la position des valeurs
-		Button buttonInject = new Button(groupe, SWT.NONE);
-		buttonInject.setText(Messages.getString("Drawing.1"));
-
+		EditStation.buttonDateInject.setParent(groupe);
+		EditStation.buttonDateInject.setText(Messages.getString("Drawing.1"));
+		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+		
 		section.setClient(sectionClient);
 		
 		// Zone de test
@@ -1827,10 +1828,10 @@ public class DrawingStation {
 		lign.setEnabled(false);
 		debu.setEnabled(false);
 		fi.setEnabled(false);
-		buttonInject.setEnabled(false);
+		EditStation.buttonDateInject.setEnabled(false);
 
 		// listeners
-		inject = buttonInject;
+		inject = EditStation.buttonDateInject;
 
 		// listener zone de test
 		EditStation.textTestConvDate
@@ -1885,7 +1886,7 @@ public class DrawingStation {
 				});
 
 		// bouton inject
-		buttonInject
+		EditStation.buttonDateInject
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {

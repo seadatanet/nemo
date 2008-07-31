@@ -105,6 +105,12 @@ public class EditConversion extends Thread {
 						}
 
 						try {
+							if (ViewFile.radODV.getSelection()) {
+								if (!askDataSetRef()) {
+									throw new Exception("Cancelled");
+								}
+							}
+
 							if (EditDesc.okApresReset
 									&& EditSurvey.okApresReset
 									&& EditStation.okApresReset
@@ -118,14 +124,9 @@ public class EditConversion extends Thread {
 											throw new Exception("CDI cancelled");
 										}
 
-										if (askDataSetRef()) {
-											CDIResumeWriter.getInstance()
-													.reset();
-											CDIResumeWriter.getInstance()
-													.choixFichierSortie();
-										} else {
-											throw new Exception("CDI cancelled");
-										}
+										CDIResumeWriter.getInstance().reset();
+										CDIResumeWriter.getInstance()
+												.choixFichierSortie();
 									}
 
 									choixDossierSortie();
@@ -142,18 +143,7 @@ public class EditConversion extends Thread {
 										}
 									}
 								} else {
-									if (ViewFile.radODV.getSelection()
-											&& ViewFile.radMonoStation
-													.getSelection()) {
-										if (askDataSetRef()) {
-											choixDossierSortie();
-										} else {
-											throw new Exception(
-													"Conversion cancelled");
-										}
-									} else {
-										choixFichierSortie();
-									}
+									choixFichierSortie();
 								}
 							} else {
 								Utils.messageErreur(Messages
@@ -239,13 +229,11 @@ public class EditConversion extends Thread {
 		}
 
 		// FAE45
-		// dialog.setFilterPath(Utils.configuration.getCruisesDirectory());
 		dialog.setFilterPath(ViewFile.nomFichier);
 		nomFichierSortie = dialog.open();
 
 		if (nomFichierSortie != null) {
 			nomDossierSortie = Utils.extraitCheminFichier(nomFichierSortie);
-			// System.out.println("Fichier = " + nomFichierSortie);
 
 			File fich = new File(nomFichierSortie);
 			if (fich.exists()) {
@@ -425,14 +413,14 @@ public class EditConversion extends Thread {
 			} else if (DataModel.singleSurvey != null) {
 				strDefault = DataModel.singleSurvey.getModel().getReference();
 			}
-			InputDialog inputCdiId = new InputDialog(PlatformUI.getWorkbench()
-					.getDisplay().getActiveShell(), Messages
+			InputDialog inputDataSetRef = new InputDialog(PlatformUI
+					.getWorkbench().getDisplay().getActiveShell(), Messages
 					.getString("CDIResumeWriter.idTitle"), Messages
 					.getString("CDIResumeWriter.idMessage"), strDefault, null);
-			inputCdiId.open();
+			inputDataSetRef.open();
 
-			if (inputCdiId.getReturnCode() == InputDialog.OK) {
-				_dataSetRef = inputCdiId.getValue();
+			if (inputDataSetRef.getReturnCode() == InputDialog.OK) {
+				_dataSetRef = inputDataSetRef.getValue();
 				return true;
 			} else {
 				_dataSetRef = "";
@@ -447,7 +435,7 @@ public class EditConversion extends Thread {
 		String temp = "";
 
 		if (SWTProcess.getOdv()) {
-			temp = EditConversion.getDataSetRef();
+			temp = getDataSetRef();
 
 			if (!station.getReference().trim().equals("")) {
 				if (!temp.equals("")) {
@@ -472,5 +460,9 @@ public class EditConversion extends Thread {
 		}
 
 		return Utils.validFileName(temp);
+	}
+	
+	public static String getSep() {
+		return "\t";
 	}
 }

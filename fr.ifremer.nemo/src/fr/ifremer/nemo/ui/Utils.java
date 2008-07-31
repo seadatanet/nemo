@@ -222,14 +222,16 @@ public class Utils {
 	}
 	
 	public static void test(Text test, StyledText styledtext, Text ligne, Text debut, Text fin) {
-		int deb, fi;
+		int deb, fi, lign;
 
-		/*// on récupère les coordonnées de la sélection
-		deb = styledtext.getSelection().x;
-		fi = styledtext.getSelection().y;*/
+		if (ligne.getText().equals("")) {
+			lign = DataModel.stationModel.getNumberOfLines() + 1;
+		} else {
+			lign = Integer.parseInt(ligne.getText());
+		}
 		
-		deb = Integer.parseInt(debut.getText()) + taillesCumLignes[Integer.parseInt(ligne.getText()) - 1];
-		fi = Integer.parseInt(fin.getText()) + taillesCumLignes[Integer.parseInt(ligne.getText()) - 1];
+		deb = Integer.parseInt(debut.getText()) + taillesCumLignes[lign - 1];
+		fi = Integer.parseInt(fin.getText()) + taillesCumLignes[lign - 1];
 		
 		styledtext.setSelection(deb-1, fi);
 		
@@ -1353,30 +1355,30 @@ public class Utils {
 			EditStation.validee = 0;
 		}
 
-		if (EditData.sectionTotal != null) {
-			// effacement des boutons valider/expand/init serveur
-
-			EditData.buttonValidate.dispose();
-			EditData.buttonRAZ.dispose();
-
-			// effacement des boutons radio
-			EditData.buttonFreqEchant.dispose();
-			EditData.buttonLigneDonnees.dispose();
-			// EditData.sectionTotal.dispose();
-			for (int i = 0; i <= EditData.listeSectionsData.size() - 1; i++) {
-				EditData.listeSectionsData.get(i).dispose();
-			}
-
-			// titre à vide
-			ViewEdit.formEdition.setText(""); //$NON-NLS-1$
-
-			// refresh global
-			ViewEdit.formEdition.reflow(true);
-
-			EditData.loaded = 0;
-			EditData.validee = 0;
-
-		}
+//		if (EditData.sectionTotal != null) {
+//			// effacement des boutons valider/expand/init serveur
+//
+//			EditData.buttonValidate.dispose();
+//			EditData.buttonRAZ.dispose();
+//
+//			// effacement des boutons radio
+//			EditData.buttonFreqEchant.dispose();
+//			EditData.buttonLigneDonnees.dispose();
+//			// EditData.sectionTotal.dispose();
+//			for (int i = 0; i <= EditData.listeSectionsData.size() - 1; i++) {
+//				EditData.listeSectionsData.get(i).dispose();
+//			}
+//
+//			// titre à vide
+//			ViewEdit.formEdition.setText(""); //$NON-NLS-1$
+//
+//			// refresh global
+//			ViewEdit.formEdition.reflow(true);
+//
+//			EditData.loaded = 0;
+//			EditData.validee = 0;
+//
+//		}
 
 		// effacement de la table data
 		if (ViewFile.tableData != null) {

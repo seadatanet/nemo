@@ -341,7 +341,7 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 							FileReader reader  = new FileReader(file);
 							reader2 = new BufferedReader(reader);
 														
-							if (_stationModel.isMetaInData2()) {
+							if (_stationModel.isMetaInData2() || (_stationModel.getInputType().equals(Global.TRAJECTORY) && _stationModel.getTrajectory().getOutputType().equals(Global.ODV))) {
 								_stationModel.consumeHeaderPlus(reader2);
 							}
 							
