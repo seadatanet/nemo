@@ -1340,6 +1340,8 @@ public class Utils {
 			EditStation.buttonValidate.dispose();
 			EditStation.buttonRAZ.dispose();
 			EditStation.btnMetaInData2.dispose();
+			EditStation.grpSerieTempo.dispose();
+			EditStation.grpTrajectoire.dispose();
 
 			for (int i = 0; i <= EditStation.listeSectionsStation.size() - 1; i++) {
 				EditStation.listeSectionsStation.get(i).dispose();

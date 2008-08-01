@@ -461,8 +461,4 @@ public class EditConversion extends Thread {
 
 		return Utils.validFileName(temp);
 	}
-	
-	public static String getSep() {
-		return "\t";
-	}
 }

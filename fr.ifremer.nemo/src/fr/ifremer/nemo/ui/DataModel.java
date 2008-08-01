@@ -1249,7 +1249,7 @@ public class DataModel {
 
 		// reset systématique des parametres stockés dans le dataModel
 		stationModel.releaseParameterModels();
-
+	
 		for (int i = 0; i < nbreParam; i++) {
 			TypeData typeCourant = TableData.types.get(i);
 
@@ -2527,5 +2527,4 @@ public class DataModel {
 		// }
 
 	}
-
 }

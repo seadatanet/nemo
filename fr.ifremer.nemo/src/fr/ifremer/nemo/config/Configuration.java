@@ -863,4 +863,8 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 //		this._predicate = _predicate;
 //	}
 	
+	public String getSep() {
+		return "\t";
+	}
+	
 } /* End of class: Configuration */
