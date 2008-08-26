@@ -333,6 +333,16 @@ public class TableData {
 				// remplirTableData();
 			}
 		});
+		
+		final Menu men = menu;
+		table.addListener(SWT.MouseDown, new Listener() {
+			public void handleEvent(Event event) {
+				// Lors d'un clic droit sur le tableau, on force l'affiche du menu contextuel
+				if (event.button == 3) {
+					men.setVisible(true);
+				}
+			}
+		});
 
 		// agrandissement de la table
 		ViewFile.compositeData.getParent().layout(true, true);
@@ -450,15 +460,15 @@ public class TableData {
 		ArrayList<TypeData> listeTempo;
 		nbre = types.size();
 
-		// verif si c'est PRES
-		TypeData type_a_Deplacer = types.get(indice);
-		// split sur " - "
-		Pattern p = Pattern.compile(" - ");
-		String mots[] = p.split(type_a_Deplacer.getCode());
-		String code = mots[0];
+//		// verif si c'est PRES
+//		TypeData type_a_Deplacer = types.get(indice);
+//		// split sur " - "
+//		Pattern p = Pattern.compile(" - ");
+//		String mots[] = p.split(type_a_Deplacer.getCode());
+//		String code = mots[0];
 
 //		if (!code.matches("PRES") || ViewFile.checkBoxTempo.getSelection()) {
-		if (!code.matches("PRES") || ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
+//		if (!code.matches("PRES") || ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
 			listeTempo = new ArrayList();
 
 			// mise à jour préalable
@@ -494,10 +504,10 @@ public class TableData {
 			// refresh de la table
 			creationTable();
 
-		} else {
-			// si c'est PRES qu'on veut descendre alors c'est non
-			Utils.messageErreurAppend(Messages.getString("TableData.19"));
-		}
+//		} else {
+//			// si c'est PRES qu'on veut descendre alors c'est non
+//			Utils.messageErreurAppend(Messages.getString("TableData.19"));
+//		}
 	}
 
 	public static void supprEltTableData(int indice) {

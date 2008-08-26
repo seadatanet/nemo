@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.regex.Pattern;
 
 import fr.ifremer.nemo.util.DateTimeFormat;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.LatitudeFormat;
 import fr.ifremer.nemo.util.LongitudeFormat;
 import fr.ifremer.nemo.util.Messages;
@@ -1361,7 +1362,7 @@ public class Etape {
 			String[] mots = p.split(premierType.getCode());
 			String code = mots[0];
 			
-			if (ViewFile.radProfilVertical.getSelection()) {
+			if (ViewFile.typeFichierEntree().equals(Global.PROFILE)) {
 				if (!(code.matches("PRES") || code.matches("DEPH"))) {
 					// PRES ou DEPH n'est pas en premier
 					Utils.messageErreurAppend(Messages.getString("Etape.107"));

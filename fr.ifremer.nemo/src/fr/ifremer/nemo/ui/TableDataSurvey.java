@@ -243,8 +243,10 @@ public class TableDataSurvey {
 
 		MenuItem itemDel = new MenuItem(menu, SWT.NONE);
 		itemDel.setText(Messages.getString("TableDataSurvey.10")); //$NON-NLS-1$
-
+		
 		table.setMenu(menu);
+		
+		
 
 		// ajouter des listeners sur les menu items ^^
 
@@ -260,7 +262,6 @@ public class TableDataSurvey {
 
 			}
 		});
-
 		itemUp.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				// System.out.println("up");
@@ -279,6 +280,17 @@ public class TableDataSurvey {
 				// supprEltTableData(ligneSelec);
 				supprEltTableData(table.getSelectionIndices());
 				// remplirTableData();
+			}
+		});
+		
+
+		final Menu men = menu;
+		table.addListener(SWT.MouseDown, new Listener() {
+			public void handleEvent(Event event) {
+				// Lors d'un clic droit sur le tableau, on force l'affiche du menu contextuel
+				if (event.button == 3) {
+					men.setVisible(true);
+				}
 			}
 		});
 
