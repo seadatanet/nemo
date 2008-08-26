@@ -32,7 +32,6 @@ public class TableData {
 	public static void go() {
 		initTypes();
 		creationTable();
-
 	}
 
 	public static void creationTable() {
@@ -45,7 +44,7 @@ public class TableData {
 
 		ViewFile.tableData = new Table(ViewFile.compositeData,
 				SWT.FULL_SELECTION | SWT.H_SCROLL);
-
+		
 		table = ViewFile.tableData;
 
 		table.setHeaderVisible(true);

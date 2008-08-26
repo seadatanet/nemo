@@ -19,6 +19,7 @@ import com.ago.xml.PathElementHandler;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.Cdi;
 import fr.ifremer.nemo.domain.HorodatedValue;
 import fr.ifremer.nemo.domain.Parameter;
@@ -33,6 +34,7 @@ import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.ViewFile;
 import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.FloatFormat;
+import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.LatitudeFormat;
 import fr.ifremer.nemo.util.LongitudeFormat;
@@ -163,7 +165,17 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * trajectoire
 	 */
 	protected String _inputType;
-
+	
+	/**
+	 * Index du parametre PRES
+	 */
+	protected int _presIndex;
+	
+	/**
+	 * Format du parametre DEPH
+	 */
+	protected String _dephFormat;
+	
 	public StationModel() {
 		_incrementNumber = 1;
 		_endDataPattern = "";
@@ -1855,10 +1867,6 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 					pm.convert(line, value);
 					p.addValue(value);
-
-					if (pm.getModel().getCode().equals("PRES")) {
-						calculDepth(a_Station, value.getValue());
-					}
 					paramIndex++;
 				}
 				// a_Notifier.progress(a_Reader.getFilePointer());
@@ -2041,27 +2049,72 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 	public String headerDepth() {
 		if (testDepth()) {
+			for (int i = 0; i < NemoLists.getParameters().length; i++) {
+				if (NemoLists.getParameters()[i].getCode().equals("DEPH")) {
+					setDephFormat(NemoLists.getParameters()[i].getFormat());
+					break;
+				}
+			}
+			searchPresIndex();
+			
+			
 			return Utils.configuration.getSep() + "DEPH [m]";
+		} else {
+			setPresIndex(-1);
+			return "";
+		}
+	}
+	
+	// FAE091 : calcul de la profondeur en fonction de la pression
+	public String calculDepth(Station station, int index) {
+		if (testDepth()) {
+			if (getPresIndex() > -1) {
+				double X, Gr, P, Depth;
+				
+				P = station.getParameters()[getPresIndex()].getValues()[index].getValue();
+				X = Math.sin(station.getLatitude() / 57.29578);
+				X = X * X;
+				
+				Gr = 9.780318*(1.0+(5.2788E-3+2.36E-5*X)*X) + 1.092E-6*P;
+				Depth = (((-1.82E-15*P+2.279E-10)*P-2.2512E-5)*P+9.72659)*P;
+				Depth=Depth/Gr;
+				
+				return Utils.configuration.getSep() + Formatter.getSingleton().formatDouble(getDephFormat(), Depth);
+			} else {
+				return Utils.configuration.getSep();
+			}
 		} else {
 			return "";
 		}
 	}
-// TODO FAE091 : calcul de la profondeur en fonction de la pression
-	public String calculDepth(Station station, double pression) {
-		if (testDepth()) {
-			double X, Gr, P, Depth;
+	
+	private void searchPresIndex() {
+		int i;
+		int size = _parameterModels.size();
 		
-			P = pression;
-			X = Math.sin(station.getLatitude()/57.29578);
-			X = X * X;
-			
-			Gr = 9.780318*(1.0+(5.2788E-3+2.36E-5*X)*X) + 1.092E-6*P;
-			Depth = (((-1.82E-15*P+2.279E-10)*P-2.2512E-5)*P+9.72659)*P;
-			Depth=Depth/Gr;
-			
-			return String.valueOf(Depth);
-		} else {
-			return "";
+		for (i = 0 ; i < size ; i++) {
+			if (_parameterModels.get(i).getModel().getCode().equals("PRES")) {
+				setPresIndex(i);
+				return;
+			}
 		}
+
+		setPresIndex(-1);
+	}
+
+	public int getPresIndex() {
+		return _presIndex;
+	}
+
+	public void setPresIndex(int index) {
+		_presIndex = index;
+	}
+
+	public String getDephFormat() {
+		return _dephFormat;
+	}
+
+	public void setDephFormat(String format) {
+		_dephFormat = format;
 	}
 } /* End of class: StationModel */

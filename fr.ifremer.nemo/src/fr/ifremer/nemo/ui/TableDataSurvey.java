@@ -507,7 +507,7 @@ public class TableDataSurvey {
 		// types = null;
 		// types = new ArrayList<TypeSurvey>();
 		try {
-			if (TableDataSurvey.tableTypeSurvey != null) {
+			if (TableDataSurvey.tableTypeSurvey != null && !TableDataSurvey.tableTypeSurvey.isDisposed()) {
 				nbre = TableDataSurvey.tableTypeSurvey.getItemCount();
 				for (int i = 0; i < nbre; i++) {
 

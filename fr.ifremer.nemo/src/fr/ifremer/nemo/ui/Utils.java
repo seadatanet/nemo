@@ -1357,30 +1357,26 @@ public class Utils {
 			EditStation.validee = 0;
 		}
 
-//		if (EditData.sectionTotal != null) {
-//			// effacement des boutons valider/expand/init serveur
-//
-//			EditData.buttonValidate.dispose();
-//			EditData.buttonRAZ.dispose();
-//
-//			// effacement des boutons radio
-//			EditData.buttonFreqEchant.dispose();
-//			EditData.buttonLigneDonnees.dispose();
-//			// EditData.sectionTotal.dispose();
-//			for (int i = 0; i <= EditData.listeSectionsData.size() - 1; i++) {
-//				EditData.listeSectionsData.get(i).dispose();
-//			}
-//
-//			// titre à vide
-//			ViewEdit.formEdition.setText(""); //$NON-NLS-1$
-//
-//			// refresh global
-//			ViewEdit.formEdition.reflow(true);
-//
-//			EditData.loaded = 0;
-//			EditData.validee = 0;
-//
-//		}
+		if (EditData.sectionTypeAjouter != null) {
+			// effacement des boutons valider/expand/init serveur
+
+			EditData.buttonValidate.dispose();
+			EditData.buttonRAZ.dispose();
+
+			// EditData.sectionTotal.dispose();
+			for (int i = 0; i <= EditData.listeSectionsData.size() - 1; i++) {
+				EditData.listeSectionsData.get(i).dispose();
+			}
+
+			// titre à vide
+			ViewEdit.formEdition.setText(""); //$NON-NLS-1$
+
+			// refresh global
+			ViewEdit.formEdition.reflow(true);
+
+			EditData.loaded = 0;
+			EditData.validee = 0;
+		}
 
 		// effacement de la table data
 		if (ViewFile.tableData != null) {

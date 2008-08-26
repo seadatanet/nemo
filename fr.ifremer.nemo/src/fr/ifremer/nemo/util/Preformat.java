@@ -44,8 +44,8 @@ public class Preformat {
 	// Indicateur de fin de station
 	private static String _indicateur;
 	
-	// Nombre de lignes de fin de station
-	private static int _finStation;
+//	// Nombre de lignes de fin de station
+//	private static int _finStation;
 	
 	// Nombre de colonnes
 	private static int _nbColonne;
@@ -153,9 +153,8 @@ public class Preformat {
 				
 		_enTeteFichier = Integer.parseInt(EditDesc.lignesEnteteFichier.getText());
 		_enTeteStation = Integer.parseInt(EditDesc.lignesEnteteStation.getText());
-		_finStation = Integer.parseInt(EditDesc.lignesFinStation.getText());
+//		_finStation = Integer.parseInt(EditDesc.lignesFinStation.getText());
 	
-//TODO
 		if (EditDesc.radEOF.getSelection()) {
 			
 		} else if (EditDesc.radLigne.getSelection()) {
@@ -456,7 +455,6 @@ public class Preformat {
 					
 					if (numLigne > _enTeteFichier + _enTeteStation) {
 						if (!ligneLue.trim().equals("")) {
-//TODO
 							if (EditDesc.radEOF.getSelection()) {
 								analyseOK = true;
 							} else if (EditDesc.radLigne.getSelection()) {

@@ -1,6 +1,5 @@
 package fr.ifremer.nemo.ui;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.TreeSet;
 
@@ -123,7 +122,9 @@ public class ViewFile extends ViewPart {
 
 	public static Combo comboTempoHeure = null;
 
-	public static String nomFichier, nomRepertoire;
+	public static String nomFichier/*, nomRepertoire*/;
+	
+	public static String nomRepertoire;
 
 	public static Table tableData;
 	

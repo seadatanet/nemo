@@ -14,6 +14,7 @@ import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.input.StationModel;
+import fr.ifremer.nemo.input.SurveyMedia;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.ProgressNotification;
 import fr.ifremer.nemo.output.SurveyWriter;
@@ -70,6 +71,8 @@ public class ODVSurveyWriter implements Cloneable, SurveyWriter {
 		try {
 			writer = new FileWriter(a_Filename);
 			writeSurvey(a_Survey, writer, a_Progress);
+		} catch (IOException e) {
+			SurveyMedia.interrompu = true;
 		} finally {
 			if (writer != null) {
 				try {
@@ -110,6 +113,7 @@ public class ODVSurveyWriter implements Cloneable, SurveyWriter {
 			context.put("swtProcess", SWTProcess.class.newInstance());
 			context.put("stationModel", StationModel.getSingleton());
 			context.put("configuration", Configuration.getSingleton());
+			context.put("editConversion", EditConversion.class.newInstance());
 			context.put("cr", System.getProperty("line.separator"));
 			stream = getClass().getResourceAsStream("odv.vtl");
 			reader = new InputStreamReader(stream);

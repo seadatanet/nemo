@@ -752,7 +752,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			// FileOutputStream fich2 = new FileOutputStream(new
 			// File("D:/NemoConfiguration.xml"));
 
-			// creation nouveau dossier puis creation fichier config TODO
+			// creation nouveau dossier puis creation fichier config
 			File fich2 = new java.io.File("resources/NemoConfiguration.xml");
 			// URL url =
 			// Configuration.class.getResource("/NemoConfiguration.xml");

@@ -51,8 +51,8 @@ $configuration.getSep()$param.code [$param.unit]#set ($boucle = 1)##
 $formatter.limitString($survey.name, 20)$configuration.getSep()$formatter.limitString($station.reference, 20)$configuration.getSep()$typeBC$configuration.getSep()##
 #if ($survey.isTimeSeriesSurvey())$formatter.formatInt("%4d", $station.parametersAt(0).valuesAt($i).year)-$formatter.formatInt( "%02d", $station.parametersAt(0).valuesAt($i).month)-$formatter.formatInt( "%02d", $station.parametersAt(0).valuesAt($i).day)T$formatter.formatDateTime( "hh24:mm:ss", $station.parametersAt(0).valuesAt($i).date )##
 #else$formatter.formatDateTime("YYY-MM-DD", $station.fullDate)T$formatter.formatDateTime("hh24:mm:ss", $station.correctedTime, "9999")#end##
-$configuration.getSep()$formatter.formatLongitude("+DDD.dddddd", $station.longitude)$configuration.getSep()$formatter.formatLatitude("+DD.dddddd ", $station.latitude)$configuration.getSep()$configuration.getLocalCdiId($station)$configuration.getSep()$configuration.getIdEdmoRespCdi()$configuration.getSep()#if ($station.bottomDepth.toString() == "NaN")0#else$station.bottomDepth#end##
-#foreach( $param in $station.parameters )$configuration.getSep()#if($param.valuesAt($i).getValue().toString() == $param.default)-1.e10#else$formatter.formatDouble( $param.format, $param.valuesAt($i).getValue())#end#end
+$configuration.getSep()$formatter.formatLongitude("+DDD.dddddd", $station.longitude)$configuration.getSep()$formatter.formatLatitude("+DD.dddddd ", $station.latitude)$configuration.getSep()$editConversion.getLocalCdiId($station)$configuration.getSep()$configuration.getIdEdmoRespCdi()$configuration.getSep()#if ($station.bottomDepth.toString() == "NaN")0#else$station.bottomDepth#end##
+$stationModel.calculDepth($station, $i)#foreach( $param in $station.parameters )$configuration.getSep()#if($param.valuesAt($i).getValue().toString() == $param.default)-1.e10#else$formatter.formatDouble( $param.format, $param.valuesAt($i).getValue())#end#end
 
 #set( $count = $count + 1 )
 #set( $result = $notifier.progress( $count ))

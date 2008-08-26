@@ -15,7 +15,6 @@ import fr.ifremer.nemo.domain.TimeSeriesInformation;
 import fr.ifremer.nemo.domain.Trajectory;
 import fr.ifremer.nemo.input.DirectoryBasedSurvey;
 import fr.ifremer.nemo.input.HeaderFragment;
-import fr.ifremer.nemo.input.HorodatedParameterModel;
 import fr.ifremer.nemo.input.InputModel;
 import fr.ifremer.nemo.input.LineFragment;
 import fr.ifremer.nemo.input.ParameterModel;
@@ -207,7 +206,7 @@ public class DataModel {
 		listeWSRegions = NemoLists.getRegions();
 
 		// Lancement de la table des paramètres, onglet DATA, si pas deja créée
-		if (ViewFile.tableData == null) {
+		if (ViewFile.tableData == null || ViewFile.tableData.isDisposed()) {
 			TableData.go();
 		}
 
@@ -229,7 +228,7 @@ public class DataModel {
 		} else {
 			survey = singleSurvey.getModel();
 		}
-
+		
 		station = stationModel.getModel();
 
 		// maj des dataTypes
@@ -238,8 +237,10 @@ public class DataModel {
 
 		// injection des valeurs de l'IHM -> datamodel
 		// référence
-		if (EditSurvey.textCampagne == null)
+		if (EditSurvey.textCampagne == null || EditSurvey.textCampagne.isDisposed()) {
+			EditSurvey.validee = 1;
 			return;
+		}
 
 		survey.setReference(EditSurvey.textCampagne.getText());
 		survey.setName(EditSurvey.textNom.getText());

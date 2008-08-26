@@ -7,7 +7,6 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
@@ -76,7 +75,6 @@ public class EditData {
 		ViewFile.styledTextData.setText(Utils.texteBrut);
 
 		loaded = 1;
-
 
 		/*
 		 * recreer un formEdition sur le toolkit principal pour pouvoir faire un
@@ -317,7 +315,7 @@ public class EditData {
 		// refresh de la table
 		// initTable();
 		TableData.creationTable();
-
+		
 		EditData.okApresReset = false;
 		ViewFile.tabItem3.setText(Messages.getString("EditData.1"));
 		Utils.messageErreur("");

@@ -3,8 +3,6 @@ package fr.ifremer.nemo.ui;
 import java.text.ParseException;
 import java.util.regex.Pattern;
 
-import fr.ifremer.nemo.domain.Survey;
-import fr.ifremer.nemo.input.HorodatedParameterModel;
 import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.LatitudeFormat;
 import fr.ifremer.nemo.util.LongitudeFormat;
