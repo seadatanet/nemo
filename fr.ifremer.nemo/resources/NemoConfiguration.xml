@@ -4,10 +4,10 @@
   <nautilusWsURL>http://localhost:8080/nautilus/services/NAUTILUS</nautilusWsURL>
   <showRule>true</showRule>
   <contact></contact>
-  <modelsDirectory>D:\Donnees_pour_conmed</modelsDirectory>
-  <cruisesDirectory>D:\Donnees_pour_conmed</cruisesDirectory>
+  <modelsDirectory>D:\Projets\NEMO\Donn&#233;es</modelsDirectory>
+  <cruisesDirectory>D:\Projets\NEMO\Donn&#233;es</cruisesDirectory>
   <outputDirectory>D:/Projets/CONVMED/Donnees/Output</outputDirectory>
-  <idEdmoRespCdi>1</idEdmoRespCdi>
+  <idEdmoRespCdi>666</idEdmoRespCdi>
   <codeEdmoDonnees>2</codeEdmoDonnees>
   <idEdmoRespDonnees>3</idEdmoRespDonnees>
   <idEdmoDistDonnees>4</idEdmoDistDonnees>
