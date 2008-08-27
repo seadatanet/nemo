@@ -1679,7 +1679,7 @@ public class DrawingStation {
 							
 							formatter = Formatter.getSingleton();
 							
-							test.setText(formatter.formatDateTime("hh24mm", HourLong, "9999"));
+							test.setText(formatter.formatDateTime("hh24:mm:ss.sss", HourLong, "9999"));
 							
 							test.pack();
 						} catch (ParseException e) {
@@ -1973,7 +1973,7 @@ public class DrawingStation {
 							
 							formatter = Formatter.getSingleton();
 							
-							test.setText(formatter.formatDateTime("ddMMyyyy", DateLong));
+							test.setText(formatter.formatDateTime("yyyy-MM-dd", DateLong));
 							test.pack();
 						} catch (ParseException e) {
 

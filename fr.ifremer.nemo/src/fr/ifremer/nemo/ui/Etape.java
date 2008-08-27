@@ -626,7 +626,7 @@ public class Etape {
 
 				// récupérer le texte en question et creer une nouvelle heure
 				// on a ligne debut fin donc parcours lignes de texte
-				if (EditStation.textHeureLigne.getText().equals("")) {
+				if (EditStation.textDateLigne.getText().equals("")) {
 					ligne = Utils.lignesBrutes.get(DataModel.stationModel.getNumberOfLines());
 				} else {
 					ligne = Utils.lignesBrutes.get(Integer
