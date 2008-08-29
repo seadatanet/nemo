@@ -10,7 +10,7 @@
 //
 $nemoLists.getSdnParameters()
 //
-Cruise$configuration.getSep()Station$configuration.getSep()Type$configuration.getSep()yyyy-mm-ddThh:mm:ss.sss$configuration.getSep()Longitude [degrees_east]$configuration.getSep()Latitude [degrees_north]$configuration.getSep()LOCAL_CDI_ID$configuration.getSep()EDMO_CODE$configuration.getSep()Bot. Depth [m]$stationModel.headerDepth()##
+Cruise$configuration.getSep()Station$configuration.getSep()Type$configuration.getSep()#if ($survey.isTimeSeriesSurvey())Julian Date#else yyyy-mm-ddThh:mm:ss.sss#end$configuration.getSep()Longitude [degrees_east]$configuration.getSep()Latitude [degrees_north]$configuration.getSep()LOCAL_CDI_ID$configuration.getSep()EDMO_CODE$configuration.getSep()Bot. Depth [m]$stationModel.headerDepth()##
 #foreach( $param in $survey.getStations().parameters )
 $param.code#end
 ##
@@ -49,8 +49,8 @@ $configuration.getSep()$param.code [$param.unit]#set ($boucle = 1)##
 ## traitement particulier de la date francaise / anglaise
 ##
 $formatter.limitString($survey.name, 20)$configuration.getSep()$formatter.limitString($station.reference, 20)$configuration.getSep()$typeBC$configuration.getSep()##
-#if ($survey.isTimeSeriesSurvey())$formatter.formatInt("%4d", $station.parametersAt(0).valuesAt($i).year)-$formatter.formatInt( "%02d", $station.parametersAt(0).valuesAt($i).month)-$formatter.formatInt( "%02d", $station.parametersAt(0).valuesAt($i).day)T$formatter.formatDateTime( "hh24:mm:ss.sss", $station.parametersAt(0).valuesAt($i).date )##
-#else$formatter.formatDateTime("YYY-MM-DD", $station.fullDate)T$formatter.formatDateTime("hh24:mm:ss.sss", $station.correctedTime, "9999")#end##
+#if ($survey.isTimeSeriesSurvey())$stationModel.julianDate($station, $i)##
+#else$formatter.formatDateTime("YYYY-MM-DD", $station.fullDate)T$formatter.formatDateTime("hh24:mm:ss.sss", $station.correctedTime, "9999")#end##
 $configuration.getSep()$formatter.formatLongitude("+DDD.dddddd", $station.longitude)$configuration.getSep()$formatter.formatLatitude("+DD.dddddd ", $station.latitude)$configuration.getSep()$editConversion.getLocalCdiId($station)$configuration.getSep()$configuration.getIdEdmoRespCdi()$configuration.getSep()#if ($station.bottomDepth.toString() == "NaN")0#else$station.bottomDepth#end##
 $stationModel.calculDepth($station, $i)#foreach( $param in $station.parameters )$configuration.getSep()#if($param.valuesAt($i).getValue().toString() == $param.default)-1.e10#else$formatter.formatDouble( $param.format, $param.valuesAt($i).getValue())#end#end
 

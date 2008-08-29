@@ -1041,7 +1041,7 @@ public class Utils {
 
 		if (ok) {
 
-			ViewFile.nomFichier = directoryPath + "/" + subfiles[0].getName(); //$NON-NLS-1$
+			ViewFile.nomFichier = directoryPath + "\\" + subfiles[0].getName(); //$NON-NLS-1$
 			ViewFile.nomRepertoire = directoryPath;
 
 			try {

@@ -390,7 +390,7 @@ public class InputModel implements Cloneable, PathElementHandler,
 			TimeZone tz = TimeZone.getTimeZone("GMT");
 			Calendar cal = Calendar.getInstance(tz);
 			cal.clear();
-			cal.setTimeInMillis(_refDate);
+			cal.setTimeInMillis(getRefDate());
 			Calendar cal2 = Calendar.getInstance(tz);
 			cal2.clear();
 			cal2.setTimeInMillis(_refTime);

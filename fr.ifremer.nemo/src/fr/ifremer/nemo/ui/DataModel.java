@@ -159,7 +159,6 @@ public class DataModel {
 			} else {
 				// pas d'heure de ref
 				inputModel.setRefDateBased(false);
-
 			}
 
 		}

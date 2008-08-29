@@ -44,7 +44,7 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 			throws ParseException {
 		this();
 		setFormatString(a_Format);
-		_refDate = a_RefDate;
+		setRefDate(a_RefDate);
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 	public DateTimeFormat(String a_Format) throws ParseException {
 		this();
 		setFormatString(a_Format);
-		_refDate = 0;
+		setRefDate(0);
 	}
 
 	/**
@@ -490,7 +490,7 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 				case DAY_DECIMAL: {
 					String tmp = source.substring(index, index
 							+ _elements[i]._element.length());
-					cal.setTimeInMillis(_refDate);
+					cal.setTimeInMillis(getRefDate());
 					double day = Double.parseDouble(tmp);
 					int dayInt = (int) Math.floor(day);
 					double hours = (day - dayInt) * 24.0D;

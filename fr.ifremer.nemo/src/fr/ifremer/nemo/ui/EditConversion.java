@@ -105,17 +105,17 @@ public class EditConversion extends Thread {
 						}
 
 						try {
-							if (ViewFile.radODV.getSelection()) {
-								if (!askDataSetRef()) {
-									throw new Exception("Cancelled");
-								}
-							}
-
 							if (EditDesc.okApresReset
 									&& EditSurvey.okApresReset
 									&& EditStation.okApresReset
 									&& EditData.okApresReset) {
-
+								
+								if (ViewFile.radODV.getSelection()) {
+									if (!askDataSetRef()) {
+										throw new Exception("Cancelled");
+									}
+								}
+								
 								// test pour savoir si on est en campagne ou pas
 								if (ViewFile.isCollection()) {
 									if (ViewFile.checkCDI.getSelection()) {
@@ -142,6 +142,8 @@ public class EditConversion extends Thread {
 											ex.printStackTrace();
 										}
 									}
+								} else if (!ViewFile.isCollection() && ViewFile.radODV.getSelection() && ViewFile.radMonoStation.getSelection()) {
+									choixDossierSortie();
 								} else {
 									choixFichierSortie();
 								}
@@ -229,7 +231,12 @@ public class EditConversion extends Thread {
 		}
 
 		// FAE45
-		dialog.setFilterPath(ViewFile.nomFichier);
+		if (ViewFile.radioFichier.getSelection()) {
+			dialog.setFilterPath(ViewFile.nomFichier);
+		} else {
+			dialog.setFilterPath(ViewFile.nomRepertoire.substring(0,ViewFile.nomRepertoire.lastIndexOf('\\')));
+		}
+		
 		nomFichierSortie = dialog.open();
 
 		if (nomFichierSortie != null) {
@@ -278,7 +285,13 @@ public class EditConversion extends Thread {
 		DirectoryDialog dialog = new DirectoryDialog(shell, SWT.SAVE
 				| SWT.APPLICATION_MODAL);
 		dialog.setText(Messages.getString("EditConversion.25")); //$NON-NLS-1$
-		dialog.setFilterPath(ViewFile.nomRepertoire);
+		
+		if (ViewFile.radioFichier.getSelection()) {
+			dialog.setFilterPath(ViewFile.nomRepertoire);
+		} else {
+			dialog.setFilterPath(ViewFile.nomRepertoire.substring(0,ViewFile.nomRepertoire.lastIndexOf('\\')));
+		}
+		
 		nomDossierSortie = dialog.open();
 
 		if (nomDossierSortie != null) {

@@ -5,8 +5,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.TimeZone;
 import java.util.Vector;
 
@@ -36,6 +39,7 @@ import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.FloatFormat;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.JulianDate;
 import fr.ifremer.nemo.util.LatitudeFormat;
 import fr.ifremer.nemo.util.LongitudeFormat;
 import fr.ifremer.nemo.util.Messages;
@@ -176,6 +180,11 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 */
 	protected String _dephFormat;
 	
+	/**
+	 * Format decimal de la date Julienne
+	 */
+	protected DecimalFormat _df;
+	
 	public StationModel() {
 		_incrementNumber = 1;
 		_endDataPattern = "";
@@ -193,6 +202,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		_lastRef = null;
 		_headerPlus = null;
 		_inputType = Global.PROFILE;
+		_df = new DecimalFormat("#0.000000");
 	}
 
 	/**
@@ -2101,6 +2111,17 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 		setPresIndex(-1);
 	}
+	
+	public String julianDate(Station station, int index) {
+		if (station.parametersAt(0).valuesAt(index) instanceof HorodatedValue) {
+			Long date = ((HorodatedValue)station.parametersAt(0).valuesAt(index)).getDate();
+			
+			JulianDate jDate = new JulianDate(date);
+			
+			return getDecimalFormat().format(jDate.getJour());
+		}
+		return "";
+	}
 
 	public int getPresIndex() {
 		return _presIndex;
@@ -2116,5 +2137,13 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 	public void setDephFormat(String format) {
 		_dephFormat = format;
+	}
+
+	public DecimalFormat getDecimalFormat() {
+		return _df;
+	}
+
+	public void setDecimalFormat(DecimalFormat _df) {
+		this._df = _df;
 	}
 } /* End of class: StationModel */
