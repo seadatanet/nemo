@@ -109,13 +109,13 @@ public class EditConversion extends Thread {
 									&& EditSurvey.okApresReset
 									&& EditStation.okApresReset
 									&& EditData.okApresReset) {
-								
+
 								if (ViewFile.radODV.getSelection()) {
 									if (!askDataSetRef()) {
 										throw new Exception("Cancelled");
 									}
 								}
-								
+
 								// test pour savoir si on est en campagne ou pas
 								if (ViewFile.isCollection()) {
 									if (ViewFile.checkCDI.getSelection()) {
@@ -142,7 +142,10 @@ public class EditConversion extends Thread {
 											ex.printStackTrace();
 										}
 									}
-								} else if (!ViewFile.isCollection() && ViewFile.radODV.getSelection() && ViewFile.radMonoStation.getSelection()) {
+								} else if (!ViewFile.isCollection()
+										&& ViewFile.radODV.getSelection()
+										&& ViewFile.radMonoStation
+												.getSelection()) {
 									choixDossierSortie();
 								} else {
 									choixFichierSortie();
@@ -234,13 +237,38 @@ public class EditConversion extends Thread {
 		if (ViewFile.radioFichier.getSelection()) {
 			dialog.setFilterPath(ViewFile.nomFichier);
 		} else {
-			dialog.setFilterPath(ViewFile.nomRepertoire.substring(0,ViewFile.nomRepertoire.lastIndexOf('\\')));
+			dialog.setFilterPath(ViewFile.nomRepertoire.substring(0,
+					ViewFile.nomRepertoire.lastIndexOf('\\')));
 		}
-		
+
 		nomFichierSortie = dialog.open();
 
 		if (nomFichierSortie != null) {
 			nomDossierSortie = Utils.extraitCheminFichier(nomFichierSortie);
+
+			// Teste si le repertoire de sortie est different du repertoire
+			// d'entree
+			if (ViewFile.radioFichier.getSelection()) {
+				if (nomFichierSortie.equals(ViewFile.nomFichier)) {
+					MessageBox mb = new MessageBox(PlatformUI.getWorkbench()
+							.getDisplay().getActiveShell(), SWT.ICON_ERROR
+							| SWT.OK | SWT.APPLICATION_MODAL);
+					mb.setMessage(Messages.getString("EditConversion.27")); //$NON-NLS-1$
+					mb.open();
+
+					choixFichierSortie();
+				}
+			} else {
+				if (nomDossierSortie.equals(ViewFile.nomRepertoire)) {
+					MessageBox mb = new MessageBox(PlatformUI.getWorkbench()
+							.getDisplay().getActiveShell(), SWT.ICON_ERROR
+							| SWT.OK | SWT.APPLICATION_MODAL);
+					mb.setMessage(Messages.getString("EditConversion.26")); //$NON-NLS-1$
+					mb.open();
+
+					choixFichierSortie();
+				}
+			}
 
 			File fich = new File(nomFichierSortie);
 			if (fich.exists()) {
@@ -285,16 +313,30 @@ public class EditConversion extends Thread {
 		DirectoryDialog dialog = new DirectoryDialog(shell, SWT.SAVE
 				| SWT.APPLICATION_MODAL);
 		dialog.setText(Messages.getString("EditConversion.25")); //$NON-NLS-1$
-		
+
 		if (ViewFile.radioFichier.getSelection()) {
 			dialog.setFilterPath(ViewFile.nomRepertoire);
 		} else {
-			dialog.setFilterPath(ViewFile.nomRepertoire.substring(0,ViewFile.nomRepertoire.lastIndexOf('\\')));
+			dialog.setFilterPath(ViewFile.nomRepertoire.substring(0,
+					ViewFile.nomRepertoire.lastIndexOf('\\')));
 		}
-		
+
 		nomDossierSortie = dialog.open();
 
 		if (nomDossierSortie != null) {
+
+			// Teste si le repertoire de sortie est different du repertoire
+			// d'entree
+			if (!ViewFile.radioFichier.getSelection()
+					&& nomDossierSortie.equals(ViewFile.nomRepertoire)) {
+				MessageBox mb = new MessageBox(PlatformUI.getWorkbench()
+						.getDisplay().getActiveShell(), SWT.ICON_ERROR | SWT.OK
+						| SWT.APPLICATION_MODAL);
+				mb.setMessage(Messages.getString("EditConversion.26")); //$NON-NLS-1$
+				mb.open();
+
+				choixDossierSortie();
+			}
 
 			File fich = new File(nomDossierSortie);
 			if (fich.exists() && fich.listFiles().length != 0) {

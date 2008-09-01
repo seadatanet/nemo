@@ -48,6 +48,8 @@ $line
 *SAMPLING RATE=$formatter.formatInt("%-5d", $station.timeSeriesInformation.samplingRate) (second)          MAGNETIC DECLINATION=$formatter.formatFloat("%-4.0f", $station.timeSeriesInformation.getMagneticDeclination()) (degree)
 #end
 $nemoLists.getSdnParameters()
+*EDMO_CODE=$configuration.getIdEdmoRespCdi()
+*LOCAL_CDI_ID=$editConversion.getLocalCdiId($station)
 *SURFACE SAMPLES=$formatter.limitString( $station.surfaceSamples1, 63)
 *$formatter.limitString( $station.surfaceSamples2, 80)
 #set( $limit = $station.parametersAt(0).valuesSize() - 1 )

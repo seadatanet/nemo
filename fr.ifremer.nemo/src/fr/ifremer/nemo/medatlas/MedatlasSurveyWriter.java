@@ -11,10 +11,14 @@ import java.io.Writer;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
+import fr.ifremer.nemo.config.Configuration;
+import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.ProgressNotification;
 import fr.ifremer.nemo.output.SurveyWriter;
+import fr.ifremer.nemo.ui.EditConversion;
+import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.SizeBasedProgressNotifier;
 
 /**
@@ -62,18 +66,18 @@ public class MedatlasSurveyWriter implements Cloneable, SurveyWriter {
 	public void writeSurvey(Survey a_Survey, File a_Filename,
 			ProgressNotification a_Progress) throws IOException,
 			GenerationException {
-		//Writer writer = null;
+		// Writer writer = null;
 		BufferedWriter writer = null;
 		try {
-			//FAE01 problème de performances réseau
-			
-			
-		//	writer = new PrintWriter(new FileWriter(a_Filename), true);
-		//	writer = new PrintWriter(new BufferedWriter(new FileWriter(a_Filename)));
+			// FAE01 problème de performances réseau
+
+			// writer = new PrintWriter(new FileWriter(a_Filename), true);
+			// writer = new PrintWriter(new BufferedWriter(new
+			// FileWriter(a_Filename)));
 			writer = new BufferedWriter(new FileWriter(a_Filename));
-			
+
 			writeSurvey(a_Survey, writer, a_Progress);
-		} catch (Exception e){
+		} catch (Exception e) {
 			throw new GenerationException(e);
 		} finally {
 			if (writer != null) {
@@ -107,9 +111,10 @@ public class MedatlasSurveyWriter implements Cloneable, SurveyWriter {
 			ve.init();
 			VelocityContext context = new VelocityContext();
 			context.put("survey", a_Survey);
-			context.put("formatter", fr.ifremer.nemo.util.Formatter
-					.getSingleton());
-			context.put("nemoLists", fr.ifremer.nemo.config.NemoLists.class.newInstance());
+			context.put("formatter", Formatter.getSingleton());
+			context.put("nemoLists", NemoLists.class.newInstance());
+			context.put("configuration", Configuration.getSingleton());
+			context.put("editConversion", EditConversion.class.newInstance());
 			context.put("star", "*");
 			context.put("cr", System.getProperty("line.separator"));
 			stream = getClass().getResourceAsStream("medatlas.vtl");

@@ -8,8 +8,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.TimeZone;
 import java.util.Vector;
 
@@ -169,22 +167,22 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * trajectoire
 	 */
 	protected String _inputType;
-	
+
 	/**
 	 * Index du parametre PRES
 	 */
 	protected int _presIndex;
-	
+
 	/**
 	 * Format du parametre DEPH
 	 */
 	protected String _dephFormat;
-	
+
 	/**
 	 * Format decimal de la date Julienne
 	 */
 	protected DecimalFormat _df;
-	
+
 	public StationModel() {
 		_incrementNumber = 1;
 		_endDataPattern = "";
@@ -2066,30 +2064,34 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 				}
 			}
 			searchPresIndex();
-			
-			
+
 			return Utils.configuration.getSep() + "DEPH [m]";
 		} else {
 			setPresIndex(-1);
 			return "";
 		}
 	}
-	
+
 	// FAE091 : calcul de la profondeur en fonction de la pression
 	public String calculDepth(Station station, int index) {
 		if (testDepth()) {
 			if (getPresIndex() > -1) {
 				double X, Gr, P, Depth;
-				
-				P = station.getParameters()[getPresIndex()].getValues()[index].getValue();
+
+				P = station.getParameters()[getPresIndex()].getValues()[index]
+						.getValue();
 				X = Math.sin(station.getLatitude() / 57.29578);
 				X = X * X;
-				
-				Gr = 9.780318*(1.0+(5.2788E-3+2.36E-5*X)*X) + 1.092E-6*P;
-				Depth = (((-1.82E-15*P+2.279E-10)*P-2.2512E-5)*P+9.72659)*P;
-				Depth=Depth/Gr;
-				
-				return Utils.configuration.getSep() + Formatter.getSingleton().formatDouble(getDephFormat(), Depth);
+
+				Gr = 9.780318 * (1.0 + (5.2788E-3 + 2.36E-5 * X) * X)
+						+ 1.092E-6 * P;
+				Depth = (((-1.82E-15 * P + 2.279E-10) * P - 2.2512E-5) * P + 9.72659)
+						* P;
+				Depth = Depth / Gr;
+
+				return Utils.configuration.getSep()
+						+ Formatter.getSingleton().formatDouble(
+								getDephFormat(), Depth);
 			} else {
 				return Utils.configuration.getSep();
 			}
@@ -2097,12 +2099,12 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			return "";
 		}
 	}
-	
+
 	private void searchPresIndex() {
 		int i;
 		int size = _parameterModels.size();
-		
-		for (i = 0 ; i < size ; i++) {
+
+		for (i = 0; i < size; i++) {
 			if (_parameterModels.get(i).getModel().getCode().equals("PRES")) {
 				setPresIndex(i);
 				return;
@@ -2111,13 +2113,14 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 		setPresIndex(-1);
 	}
-	
+
 	public String julianDate(Station station, int index) {
 		if (station.parametersAt(0).valuesAt(index) instanceof HorodatedValue) {
-			Long date = ((HorodatedValue)station.parametersAt(0).valuesAt(index)).getDate();
-			
+			Long date = ((HorodatedValue) station.parametersAt(0).valuesAt(
+					index)).getDate();
+
 			JulianDate jDate = new JulianDate(date);
-			
+
 			return getDecimalFormat().format(jDate.getJour());
 		}
 		return "";
