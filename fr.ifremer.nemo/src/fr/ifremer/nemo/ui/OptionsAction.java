@@ -10,16 +10,28 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.TableEditor;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
@@ -29,6 +41,7 @@ import org.eclipse.ui.actions.ActionFactory;
 
 import fr.ifremer.nemo.config.EdmoHandler;
 import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.flag.FlagTable;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
@@ -38,27 +51,35 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 	private final IWorkbenchWindow window;
 
-	public static Composite top, compoHaut, compoLCD, compoBouton,
-					compoWS, compoWSVocab1, compoWSVocab2= null;
-	
-	public static Group groupLangue, groupCentreDonnees, groupWS, 
-			groupDossier, groupDossier1, groupDossier2, groupCDI = null;
+	public static Composite top, compoHaut, compoLCD, compoBouton, compoWS,
+			compoWSVocab1, compoWSVocab2, compoFlag = null;
+
+	public static Group groupLangue, groupCentreDonnees, groupWS, groupDossier,
+			groupDossier1, groupDossier2, groupCDI, grpFlag = null;
 
 	public static Combo comboLangue, comboCentreDonnees, comboIdEdmoRespCdi,
-				comboMethodeCdi,comboCodeEdmoDonnees, comboIdEdmoRespDonnees, 
-				comboIdEdmoDistDonnees = null;
+			comboMethodeCdi, comboCodeEdmoDonnees, comboIdEdmoRespDonnees,
+			comboIdEdmoDistDonnees = null;
 
 	public static Button buttonCancel, buttonValider, buttonParcourirModele,
 			buttonParcourirCampagne, buttonArboMapping = null;
 
 	public static Label labelNemo, labelNautilus, labelModèle, labelCampagne,
 			labelIdEdmoRespCdi, labelUrlCdi, labelMethodeCdi,
-			labelCodeEdmoDonnees, labelIdEdmoRespDonnees, labelIdEdmoDistDonnees,
-			labelWSVocab, labelFichierMapping, labelArboMapping = null;
+			labelCodeEdmoDonnees, labelIdEdmoRespDonnees,
+			labelIdEdmoDistDonnees, labelWSVocab, labelFichierMapping,
+			labelArboMapping = null;
 
-	public static Text textAreaNemo, textAreaNautilus, textDossierModele, textDossierCampagne, 
-			textUrlCdi, textVocabURL, textFichierMapping, textArboMapping = null;
-	
+	public static Text textAreaNemo, textAreaNautilus, textDossierModele,
+			textDossierCampagne, textUrlCdi, textVocabURL, textFichierMapping,
+			textArboMapping = null;
+
+	public static Table tabFlagTable, tabFlag;
+
+	public static TableViewer tbvFlagTable, tbvFlag;
+
+	public static ArrayList<FlagTable> _flagTables = new ArrayList<FlagTable>();
+
 	public final static String ID = "fr.ifremer.nemo.ui.OptionsAction"; //$NON-NLS-1$
 
 	// vars nécessaires à la fenêtre d'options
@@ -71,7 +92,6 @@ public class OptionsAction extends Action implements ISelectionListener,
 		setId(ID);
 		setText(Messages.getString("OptionsAction.1")); //$NON-NLS-1$
 		window.getSelectionService().addSelectionListener(this);
-
 	}
 
 	public void dispose() {
@@ -81,25 +101,31 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 	public void run() {
 		// lancement IHM options
-//		System.out.println("Menu options"); //$NON-NLS-1$
+		// System.out.println("Menu options"); //$NON-NLS-1$
 
 		shelloptions = new Shell(Application.display, SWT.BORDER | SWT.TITLE
-				| SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL );
+				| SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);
 
-		shelloptions.setSize(600, 500);
+		shelloptions.setSize(600, 750);
 		shelloptions.setText(Messages.getString("OptionsAction.3")); //$NON-NLS-1$
 		shelloptions.setLayout(new GridLayout());
-		
+
+		for (int i = 0; i < Utils.configuration.getFlagTables().size(); i++) {
+			FlagTable flagTable = new FlagTable(Utils.configuration
+					.getFlagTables().get(i));
+			_flagTables.add(flagTable);
+		}
+
 		createPartControl(shelloptions);
 
 		// shelloptions.pack();
 		shelloptions.open();
-		
+
 		// chargement des options
 		Utils.initConfig();
 
 		remplissageOptions();
-		
+
 	}
 
 	public void remplissageOptions() {
@@ -117,17 +143,17 @@ public class OptionsAction extends Action implements ISelectionListener,
 			// on met la combo langue à GB
 			comboLangue.select(1);
 		}
-		
+
 		// CENTRE DE DONNEES
 		CodeTableRecordType[] centres = NemoLists.getVocabList("L300");
-		
+
 		TreeMap<String, String> treeCentre = new TreeMap<String, String>();
-		
-		for (CodeTableRecordType record : centres)
-		{	
-			treeCentre.put(Utils.extraitCodeURN(record.getEntryKey()), record.getEntryTerm());
+
+		for (CodeTableRecordType record : centres) {
+			treeCentre.put(Utils.extraitCodeURN(record.getEntryKey()), record
+					.getEntryTerm());
 		}
-		
+
 		NemoLists.listeCentreDonnees = new ArrayList<String>();
 		String temp = "";
 		for (Entry<String, String> currentEntry : treeCentre.entrySet()) {
@@ -136,26 +162,27 @@ public class OptionsAction extends Action implements ISelectionListener,
 			comboCentreDonnees.add(temp);
 		}
 
-		Utils.selectComboCode(comboCentreDonnees, Utils.configuration.getDataCenter());
+		Utils.selectComboCode(comboCentreDonnees, Utils.configuration
+				.getDataCenter());
 
 		// WS
 		textAreaNemo.setText(Utils.configuration.getNemoWebServiceURL());
 		textAreaNautilus
 				.setText(Utils.configuration.getNautilusWebServiceURL());
-		
+
 		textVocabURL.setText(Utils.configuration.getVocabURL());
-		
+
 		// CDI
 		HashMap<Integer, String> edmoHash = NemoLists.getEdmo();
 
 		TreeMap<Integer, String> edmoTree = new TreeMap<Integer, String>();
-		
+
 		EdmoHandler.listeOrigine = new ArrayList<String>();
-		
+
 		for (Entry<Integer, String> currentEntry : edmoHash.entrySet()) {
 			edmoTree.put(currentEntry.getKey(), currentEntry.getValue());
 		}
-	
+
 		String strTemp = "";
 		for (Entry<Integer, String> currentEntry : edmoTree.entrySet()) {
 			strTemp = currentEntry.getKey() + " - " + currentEntry.getValue();
@@ -165,45 +192,54 @@ public class OptionsAction extends Action implements ISelectionListener,
 			comboIdEdmoRespDonnees.add(strTemp);
 			comboIdEdmoDistDonnees.add(strTemp);
 		}
-		
-		Utils.selectComboCode(comboIdEdmoRespCdi,Utils.configuration.getIdEdmoRespCdi());
-		Utils.selectComboCode(comboCodeEdmoDonnees,Utils.configuration.getCodeEdmoDonnees());
-		Utils.selectComboCode(comboIdEdmoRespDonnees,Utils.configuration.getIdEdmoRespDonnees());
-		Utils.selectComboCode(comboIdEdmoDistDonnees,Utils.configuration.getIdEdmoDistDonnees());
-		
+
+		Utils.selectComboCode(comboIdEdmoRespCdi, Utils.configuration
+				.getIdEdmoRespCdi());
+		Utils.selectComboCode(comboCodeEdmoDonnees, Utils.configuration
+				.getCodeEdmoDonnees());
+		Utils.selectComboCode(comboIdEdmoRespDonnees, Utils.configuration
+				.getIdEdmoRespDonnees());
+		Utils.selectComboCode(comboIdEdmoDistDonnees, Utils.configuration
+				.getIdEdmoDistDonnees());
+
 		textUrlCdi.setText(Utils.configuration.getCdiURL());
-		
+
 		textFichierMapping.setText(Utils.configuration.getFichierMapping());
 		textArboMapping.setText(Utils.configuration.getArboMapping());
-		
+
 		// Libelles rouges si parametres manquants
 		if (comboIdEdmoRespCdi.getText().equals("")) {
-			labelIdEdmoRespCdi.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
+			labelIdEdmoRespCdi.setForeground(Display.getCurrent()
+					.getSystemColor(SWT.COLOR_RED));
 		}
 		if (comboCodeEdmoDonnees.getText().equals("")) {
-			labelCodeEdmoDonnees.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
+			labelCodeEdmoDonnees.setForeground(Display.getCurrent()
+					.getSystemColor(SWT.COLOR_RED));
 		}
 		if (comboIdEdmoRespDonnees.getText().equals("")) {
-			labelIdEdmoRespDonnees.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
+			labelIdEdmoRespDonnees.setForeground(Display.getCurrent()
+					.getSystemColor(SWT.COLOR_RED));
 		}
 		if (comboIdEdmoDistDonnees.getText().equals("")) {
-			labelIdEdmoDistDonnees.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
+			labelIdEdmoDistDonnees.setForeground(Display.getCurrent()
+					.getSystemColor(SWT.COLOR_RED));
 		}
 		if (textUrlCdi.getText().equals("")) {
-			labelUrlCdi.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
+			labelUrlCdi.setForeground(Display.getCurrent().getSystemColor(
+					SWT.COLOR_RED));
 		}
 		if (textFichierMapping.getText().equals("")) {
-			labelFichierMapping.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
+			labelFichierMapping.setForeground(Display.getCurrent()
+					.getSystemColor(SWT.COLOR_RED));
 		}
-		
-//		 FAE 58 CDL 09/04/08
-		
+
+		// FAE 58 CDL 09/04/08
+
 		CodeTableRecordType[] records = NemoLists.getVocabList("L071");
-		
+
 		TreeSet<String> champsMethodesCdi = new TreeSet<String>();
-			
-		for (CodeTableRecordType record : records)
-		{	
+
+		for (CodeTableRecordType record : records) {
 			String champCombo = "";
 			// System.out.println(record.getEntryKey());
 			String contenuCleDecoup[] = record.getEntryKey().split("/");
@@ -211,12 +247,16 @@ public class OptionsAction extends Action implements ISelectionListener,
 			champCombo += " - " + record.getEntryTerm();
 			champsMethodesCdi.add(champCombo);
 		}
-		
+
 		for (String champ : champsMethodesCdi) {
 			comboMethodeCdi.add(champ);
 		}
-		
-		Utils.selectComboCode(comboMethodeCdi,Utils.configuration.getCdiMethod());
+
+		Utils.selectComboCode(comboMethodeCdi, Utils.configuration
+				.getCdiMethod());
+
+		// FLags
+		fillFlagTable();
 	}
 
 	public void selectionChanged(IWorkbenchPart part, ISelection incoming) {
@@ -228,40 +268,40 @@ public class OptionsAction extends Action implements ISelectionListener,
 	 */
 	private void createCompoHaut() {
 		compoHaut = new Composite(top, SWT.NONE);
-		
+
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoHaut);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(compoHaut);
-		
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(compoHaut);
+
 		createCompoLCD();
 		createGroupDossier();
 	}
-	
+
 	/**
 	 * This method initializes compoLCD
 	 * 
 	 */
 	private void createCompoLCD() {
 		compoLCD = new Composite(compoHaut, SWT.NONE);
-		
+
 		GridLayoutFactory.fillDefaults().applyTo(compoLCD);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(compoLCD);
-		
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(compoLCD);
+
 		createGroupLangue();
 		createGroupCentreDonnees();
 	}
-	
+
 	/**
 	 * This method initializes groupLangue
 	 * 
 	 */
 	private void createGroupLangue() {
 		groupLangue = new Group(compoLCD, SWT.NONE);
-//		groupLangue.setLayout(null);
+		// groupLangue.setLayout(null);
 		groupLangue.setText(Messages.getString("OptionsAction.10")); //$NON-NLS-1$
 		createComboLangue();
-//		groupLangue.setBounds(new Rectangle(4, 10, 168, 65)); // 166
+		// groupLangue.setBounds(new Rectangle(4, 10, 168, 65)); // 166
 		GridLayoutFactory.fillDefaults().applyTo(groupLangue);
-		GridDataFactory.fillDefaults().grab(true,true).applyTo(groupLangue);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(groupLangue);
 		groupLangue.pack();
 	}
 
@@ -271,13 +311,13 @@ public class OptionsAction extends Action implements ISelectionListener,
 	 */
 	private void createComboLangue() {
 		comboLangue = new Combo(groupLangue, SWT.READ_ONLY);
-//		comboLangue.setBounds(new Rectangle(2, 16, 160, 21));
+		// comboLangue.setBounds(new Rectangle(2, 16, 160, 21));
 
 		comboLangue.add(Messages.getString("OptionsAction.11")); //$NON-NLS-1$
 		comboLangue.add(Messages.getString("OptionsAction.12")); //$NON-NLS-1$
 		comboLangue.select(0);
 	}
-	
+
 	/**
 	 * This method initializes groupCentreDonnees
 	 * 
@@ -286,44 +326,47 @@ public class OptionsAction extends Action implements ISelectionListener,
 		groupCentreDonnees = new Group(compoLCD, SWT.NONE);
 		groupCentreDonnees.setText(Messages.getString("OptionsAction.20"));
 		GridLayoutFactory.fillDefaults().applyTo(groupCentreDonnees);
-		GridDataFactory.fillDefaults().grab(true,true).applyTo(groupCentreDonnees);
-		
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(
+				groupCentreDonnees);
+
 		createComboCentreDonnees();
 	}
-	
+
 	/**
 	 * This method initializes comboCentreDonnees
 	 * 
 	 */
 	private void createComboCentreDonnees() {
 		comboCentreDonnees = new Combo(groupCentreDonnees, SWT.READ_ONLY);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(comboCentreDonnees);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(
+				comboCentreDonnees);
 		comboCentreDonnees.pack();
-		
+
 		Utils.createSearchMenu(comboCentreDonnees, Global.DATACENTRE);
 	}
-	
+
 	/**
 	 * This method initializes groupTop3
 	 * 
 	 */
 	private void createCompoBouton() {
 		compoBouton = new Composite(top, SWT.NONE);
-		
+
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoBouton);
-		GridDataFactory.fillDefaults().grab(true,false).align(SWT.CENTER, SWT.NONE).applyTo(compoBouton);
-		
+		GridDataFactory.fillDefaults().grab(true, false).align(SWT.CENTER,
+				SWT.NONE).applyTo(compoBouton);
+
 		buttonValider = new Button(compoBouton, SWT.NONE);
 		buttonValider.setText(Messages.getString("OptionsAction.17")); //$NON-NLS-1$
 		buttonValider.pack();
-		
+
 		buttonCancel = new Button(compoBouton, SWT.NONE);
 		buttonCancel.setText(Messages.getString("OptionsAction.16")); //$NON-NLS-1$
 		buttonCancel.pack();
-		
+
 		compoBouton.pack();
 	}
-	
+
 	/**
 	 * This method initializes groupDossier
 	 * 
@@ -331,62 +374,69 @@ public class OptionsAction extends Action implements ISelectionListener,
 	private void createGroupDossier() {
 		groupDossier = new Group(compoHaut, SWT.NONE);
 		GridLayoutFactory.fillDefaults().applyTo(groupDossier);
-		GridDataFactory.fillDefaults().grab(true,true).applyTo(groupDossier);
-		
-		
-//		groupDossier.setLayout(null);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(groupDossier);
+
+		// groupDossier.setLayout(null);
 		groupDossier.setText(Messages.getString("OptionsAction.5")); //$NON-NLS-1$
-//		groupDossier.setBounds(new Rectangle(176, 10, 242, 150));
-		
-		/*labelModèle = new Label(groupDossier, SWT.NONE);
-//		labelModèle.setBounds(new Rectangle(13, 15, 62, 13));
-		labelModèle.setText(Messages.getString("OptionsAction.18")); //$NON-NLS-1$
-		labelModèle.pack();*/
-		
+		// groupDossier.setBounds(new Rectangle(176, 10, 242, 150));
+
+		/*
+		 * labelModèle = new Label(groupDossier, SWT.NONE); //
+		 * labelModèle.setBounds(new Rectangle(13, 15, 62, 13));
+		 * labelModèle.setText(Messages.getString("OptionsAction.18"));
+		 * //$NON-NLS-1$ labelModèle.pack();
+		 */
+
 		groupDossier1 = new Group(groupDossier, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(groupDossier1);
-		GridDataFactory.fillDefaults().grab(true,true).applyTo(groupDossier1);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(groupDossier1);
 		groupDossier1.setText(Messages.getString("OptionsAction.18")); //$NON-NLS-1$
 		groupDossier1.pack();
-		
+
 		textDossierModele = new Text(groupDossier1, SWT.BORDER);
-//		textDossierModèle.setBounds(new Rectangle(5, 31, 229, 19));
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(textDossierModele);
+		// textDossierModèle.setBounds(new Rectangle(5, 31, 229, 19));
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(
+				textDossierModele);
 		buttonParcourirModele = new Button(groupDossier1, SWT.NONE);
-//		buttonParcourirModèle.setBounds(new Rectangle(170, 53, 64, 23)); // 64
+		// buttonParcourirModèle.setBounds(new Rectangle(170, 53, 64, 23)); //
+		// 64
 		buttonParcourirModele.setText(Messages.getString("OptionsAction.6")); //$NON-NLS-1$
 		buttonParcourirModele.pack();
-		
-		/*labelCampagne = new Label(groupDossier, SWT.NONE);
-//		labelCampagne.setBounds(new Rectangle(13, 80, 62, 13));
-		labelCampagne.setText(Messages.getString("OptionsAction.19")); //$NON-NLS-1$
-		labelCampagne.pack();*/
-		
+
+		/*
+		 * labelCampagne = new Label(groupDossier, SWT.NONE); //
+		 * labelCampagne.setBounds(new Rectangle(13, 80, 62, 13));
+		 * labelCampagne.setText(Messages.getString("OptionsAction.19"));
+		 * //$NON-NLS-1$ labelCampagne.pack();
+		 */
+
 		groupDossier2 = new Group(groupDossier, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(groupDossier2);
-		GridDataFactory.fillDefaults().grab(true,true).applyTo(groupDossier2);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(groupDossier2);
 		groupDossier2.setText(Messages.getString("OptionsAction.19")); //$NON-NLS-1$
 		groupDossier2.pack();
-		
+
 		textDossierCampagne = new Text(groupDossier2, SWT.BORDER);
-//		textDossierCampagne.setBounds(new Rectangle(5, 96, 229, 19));
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(textDossierCampagne);
+		// textDossierCampagne.setBounds(new Rectangle(5, 96, 229, 19));
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(
+				textDossierCampagne);
 		buttonParcourirCampagne = new Button(groupDossier2, SWT.NONE);
-//		buttonParcourirCampagne.setBounds(new Rectangle(170, 118, 64, 23)); // 64
+		// buttonParcourirCampagne.setBounds(new Rectangle(170, 118, 64, 23));
+		// // 64
 		buttonParcourirCampagne.setText(Messages.getString("OptionsAction.6")); //$NON-NLS-1$
 		buttonParcourirCampagne.pack();
-		
 
 		// listener sur le bouton
 		buttonParcourirModele
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-//						System.out.println(Messages
-//								.getString("OptionsAction.7")); //$NON-NLS-1$
+						// System.out.println(Messages
+						// .getString("OptionsAction.7")); //$NON-NLS-1$
 
 						String nomRepertoire;
-						Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+						Shell shell = PlatformUI.getWorkbench().getDisplay()
+								.getActiveShell();
 						DirectoryDialog dialog = new DirectoryDialog(shell,
 								SWT.OPEN | SWT.APPLICATION_MODAL);
 						nomRepertoire = dialog.open();
@@ -395,7 +445,8 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 						} else {
 
-//							System.out.println("pas de dossier sélectionné"); //$NON-NLS-1$
+							// System.out.println("pas de dossier sélectionné");
+							// //$NON-NLS-1$
 							ViewLog.styledTextLogErreurs.setText(Messages
 									.getString("OptionsAction.9")); //$NON-NLS-1$
 
@@ -404,16 +455,17 @@ public class OptionsAction extends Action implements ISelectionListener,
 					}
 				});
 
-//		 listener sur le bouton
+		// listener sur le bouton
 		buttonParcourirCampagne
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-//						System.out.println(Messages
-//								.getString("OptionsAction.7")); //$NON-NLS-1$
+						// System.out.println(Messages
+						// .getString("OptionsAction.7")); //$NON-NLS-1$
 
 						String nomRepertoire;
-						Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+						Shell shell = PlatformUI.getWorkbench().getDisplay()
+								.getActiveShell();
 						DirectoryDialog dialog = new DirectoryDialog(shell,
 								SWT.OPEN | SWT.APPLICATION_MODAL);
 						nomRepertoire = dialog.open();
@@ -422,7 +474,8 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 						} else {
 
-//							System.out.println("pas de dossier sélectionné"); //$NON-NLS-1$
+							// System.out.println("pas de dossier sélectionné");
+							// //$NON-NLS-1$
 							ViewLog.styledTextLogErreurs.setText(Messages
 									.getString("OptionsAction.9")); //$NON-NLS-1$
 
@@ -438,46 +491,46 @@ public class OptionsAction extends Action implements ISelectionListener,
 	 */
 	private void createGroupWS() {
 		groupWS = new Group(top, SWT.NONE);
-//		groupWS.setLayout(null);
+		// groupWS.setLayout(null);
 		groupWS.setText("Web Services"); //$NON-NLS-1$
-//		groupWS.setBounds(new Rectangle(4, 169, 414, 146));
+		// groupWS.setBounds(new Rectangle(4, 169, 414, 146));
 		GridLayoutFactory.fillDefaults().applyTo(groupWS);
-		GridDataFactory.fillDefaults().grab(true,true).applyTo(groupWS);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(groupWS);
 
 		compoWS = new Composite(groupWS, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoWS);
-		GridDataFactory.fillDefaults().grab(true,true).applyTo(compoWS);
-		
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(compoWS);
+
 		labelNemo = new Label(compoWS, SWT.NONE);
-//		labelNemo.setBounds(new Rectangle(13, 40, 62, 13));
+		// labelNemo.setBounds(new Rectangle(13, 40, 62, 13));
 		labelNemo.setText("NEMO"); //$NON-NLS-1$
 		labelNemo.pack();
 
-		textAreaNemo = new Text(compoWS, SWT.MULTI | SWT.WRAP | SWT.V_SCROLL);
-//		textAreaNemo.setBounds(new Rectangle(85, 18, 316, 55));
-		GridDataFactory.fillDefaults().grab(true,true).applyTo(textAreaNemo);
-		
+		textAreaNemo = new Text(compoWS, SWT.BORDER);
+		// textAreaNemo.setBounds(new Rectangle(85, 18, 316, 55));
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(textAreaNemo);
+
 		labelNautilus = new Label(compoWS, SWT.NONE);
-//		labelNautilus.setBounds(new Rectangle(13, 100, 62, 13));
+		// labelNautilus.setBounds(new Rectangle(13, 100, 62, 13));
 		labelNautilus.setText("NAUTILUS"); //$NON-NLS-1$
 		labelNautilus.pack();
-				
-		textAreaNautilus = new Text(compoWS, SWT.MULTI | SWT.WRAP
-				| SWT.V_SCROLL);
-//		textAreaNautilus.setBounds(new Rectangle(85, 82, 316, 55));
-		GridDataFactory.fillDefaults().grab(true,true).applyTo(textAreaNautilus);
-		
-		// WS Vocab		
+
+		textAreaNautilus = new Text(compoWS, SWT.BORDER);
+		// textAreaNautilus.setBounds(new Rectangle(85, 82, 316, 55));
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(
+				textAreaNautilus);
+
+		// WS Vocab
 		compoWSVocab1 = new Composite(groupWS, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoWSVocab1);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(compoWSVocab1);
-		
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(compoWSVocab1);
+
 		labelWSVocab = new Label(compoWSVocab1, SWT.NONE);
 		labelWSVocab.setText(Messages.getString("OptionsAction.28"));
 		textVocabURL = new Text(compoWSVocab1, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(textVocabURL);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(textVocabURL);
 	}
-	
+
 	/**
 	 * This method initializes groupCDI
 	 * 
@@ -486,85 +539,93 @@ public class OptionsAction extends Action implements ISelectionListener,
 		groupCDI = new Group(top, SWT.NONE);
 		groupCDI.setText("CDI");
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(groupCDI);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(groupCDI);
-		
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(groupCDI);
+
 		labelIdEdmoRespCdi = new Label(groupCDI, SWT.NONE);
 		labelIdEdmoRespCdi.setText(Messages.getString("OptionsAction.21"));
 		labelIdEdmoRespCdi.pack();
-		
+
 		comboIdEdmoRespCdi = new Combo(groupCDI, SWT.BORDER | SWT.READ_ONLY);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(comboIdEdmoRespCdi);
-		
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(
+				comboIdEdmoRespCdi);
+
 		labelCodeEdmoDonnees = new Label(groupCDI, SWT.NONE);
 		labelCodeEdmoDonnees.setText(Messages.getString("OptionsAction.24"));
 		labelCodeEdmoDonnees.pack();
-		
+
 		comboCodeEdmoDonnees = new Combo(groupCDI, SWT.BORDER | SWT.READ_ONLY);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(comboCodeEdmoDonnees);
-		
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(
+				comboCodeEdmoDonnees);
+
 		labelIdEdmoRespDonnees = new Label(groupCDI, SWT.NONE);
 		labelIdEdmoRespDonnees.setText(Messages.getString("OptionsAction.25"));
 		labelIdEdmoRespDonnees.pack();
-		
+
 		comboIdEdmoRespDonnees = new Combo(groupCDI, SWT.BORDER | SWT.READ_ONLY);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(comboIdEdmoRespDonnees);
-		
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(
+				comboIdEdmoRespDonnees);
+
 		labelIdEdmoDistDonnees = new Label(groupCDI, SWT.NONE);
 		labelIdEdmoDistDonnees.setText(Messages.getString("OptionsAction.26"));
 		labelIdEdmoDistDonnees.pack();
-		
+
 		comboIdEdmoDistDonnees = new Combo(groupCDI, SWT.BORDER | SWT.READ_ONLY);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(comboIdEdmoDistDonnees);
-		
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(
+				comboIdEdmoDistDonnees);
+
 		labelUrlCdi = new Label(groupCDI, SWT.NONE);
 		labelUrlCdi.setText(Messages.getString("OptionsAction.22"));
 		labelUrlCdi.pack();
-		
+
 		textUrlCdi = new Text(groupCDI, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(textUrlCdi);
-		
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(textUrlCdi);
+
 		labelMethodeCdi = new Label(groupCDI, SWT.NONE);
 		labelMethodeCdi.setText(Messages.getString("OptionsAction.23"));
 		labelMethodeCdi.pack();
-		
+
 		comboMethodeCdi = new Combo(groupCDI, SWT.BORDER | SWT.READ_ONLY);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(comboMethodeCdi);
-				
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(
+				comboMethodeCdi);
+
 		// Menu recherche combos
 		Utils.createSearchMenu(comboIdEdmoRespCdi, Global.IDEDMO);
 		Utils.createSearchMenu(comboCodeEdmoDonnees, Global.IDEDMO);
 		Utils.createSearchMenu(comboIdEdmoRespDonnees, Global.IDEDMO);
 		Utils.createSearchMenu(comboIdEdmoDistDonnees, Global.IDEDMO);
-		
+
 		// Mapping CDI
 		labelFichierMapping = new Label(groupCDI, SWT.NONE);
 		labelFichierMapping.setText(Messages.getString("OptionsAction.31"));
 		labelFichierMapping.pack();
-		
+
 		textFichierMapping = new Text(groupCDI, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(textFichierMapping);
-		
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(
+				textFichierMapping);
+
 		labelArboMapping = new Label(groupCDI, SWT.NONE);
 		labelArboMapping.setText(Messages.getString("OptionsAction.32"));
 		labelArboMapping.pack();
-		
+
 		Composite compoRep = new Composite(groupCDI, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoRep);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(compoRep);
-		
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(compoRep);
+
 		textArboMapping = new Text(compoRep, SWT.BORDER);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(textArboMapping);
-		
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(
+				textArboMapping);
+
 		buttonArboMapping = new Button(compoRep, SWT.NONE);
 		buttonArboMapping.setText("...");
 		buttonArboMapping.pack();
-		
+
 		buttonArboMapping
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						DirectoryDialog dialog = new DirectoryDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), SWT.OPEN
-								| SWT.APPLICATION_MODAL);
+						DirectoryDialog dialog = new DirectoryDialog(PlatformUI
+								.getWorkbench().getDisplay().getActiveShell(),
+								SWT.OPEN | SWT.APPLICATION_MODAL);
 						dialog.setText(Messages.getString("OptionsAction.32")); //$NON-NLS-1$
 						dialog.setFilterPath(textArboMapping.getText());
 						textArboMapping.setText(dialog.open());
@@ -572,36 +633,210 @@ public class OptionsAction extends Action implements ISelectionListener,
 				});
 	}
 
+	/**
+	 * This method initializes groupFlag
+	 * 
+	 */
+	private void createGroupFlag() {
+		grpFlag = new Group(top, SWT.NONE);
+		grpFlag.setText(Messages.getString("OptionsAction.33"));
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(grpFlag);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(grpFlag);
+
+		// Création du tableau des tables de correspondaces
+		createTableFlagTable();
+
+		// Création du tableau des correspondaces
+		createTableFlag();
+
+	}
+
+	public void createTableFlagTable() {
+		tabFlagTable = new Table(grpFlag, SWT.FULL_SELECTION | SWT.BORDER);
+		tabFlagTable.setHeaderVisible(true);
+		tabFlagTable.setLinesVisible(true);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(tabFlagTable);
+
+		TableColumn tableColumn1 = new TableColumn(tabFlagTable, SWT.NONE);
+		tableColumn1.setWidth(60);
+		tableColumn1.setText(Messages.getString("OptionsAction.34")); //$NON-NLS-1$
+
+		TableColumn tableColumn2 = new TableColumn(tabFlagTable, SWT.NONE);
+		tableColumn2.setWidth(210);
+		tableColumn2.setText(Messages.getString("OptionsAction.35")); //$NON-NLS-1$		
+
+		final TableEditor editor = new TableEditor(tabFlagTable);
+		editor.horizontalAlignment = SWT.LEFT;
+		editor.grabHorizontal = true;
+
+		tabFlagTable.addMouseListener(new MouseAdapter() {
+			public void mouseDown(MouseEvent event) {
+				// On affiche les flags correspondants
+				TableItem[] tabItem = new TableItem[tabFlagTable
+						.getColumnCount()];
+				tabItem = tabFlagTable.getSelection();
+				fillFlag(tabItem[0].getText());
+
+				final FlagTable flagTable = FlagTable.getFlagTable(_flagTables,
+						tabItem[0].getText());
+
+				// Saisie
+				Control old = editor.getEditor();
+				if (old != null)
+					old.dispose();
+
+				Point pt = new Point(event.x, event.y);
+
+				final TableItem item = tabFlagTable.getItem(pt);
+				if (item == null) {
+					return;
+				}
+				int column = -1;
+				for (int i = 0, n = tabFlagTable.getColumnCount(); i < n; i++) {
+					Rectangle rect = item.getBounds(i);
+					if (rect.contains(pt)) {
+						column = i;
+						break;
+					}
+				}
+
+				if (column == -1) {
+					return;
+				}
+
+				final Text text = new Text(tabFlagTable, SWT.NONE);
+				text.setForeground(item.getForeground());
+
+				text.setText(item.getText(column));
+				text.setForeground(item.getForeground());
+				text.selectAll();
+				text.setFocus();
+
+				editor.minimumWidth = text.getBounds().width;
+
+				editor.setEditor(text, item, column);
+
+				final int col = column;
+				text.addModifyListener(new ModifyListener() {
+					public void modifyText(ModifyEvent event) {
+						switch (col) {
+						case 0:
+							flagTable.setCode(text.getText());
+							break;
+						case 1:
+							flagTable.setLibelle(text.getText());
+							break;
+						default:
+						}
+
+						item.setText(col, text.getText());
+					}
+				});
+			}
+		});
+	}
+
+	public void createTableFlag() {
+		tabFlag = new Table(grpFlag, SWT.FULL_SELECTION);
+		tabFlag.setHeaderVisible(true);
+		tabFlag.setLinesVisible(true);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(tabFlag);
+
+		TableColumn flagColumn1 = new TableColumn(tabFlag, SWT.NONE);
+		flagColumn1.setWidth(60);
+		flagColumn1.setText(Messages.getString("OptionsAction.36")); //$NON-NLS-1$
+
+		TableColumn flagColumn2 = new TableColumn(tabFlag, SWT.NONE);
+		flagColumn2.setWidth(210);
+		flagColumn2.setText(Messages.getString("OptionsAction.37")); //$NON-NLS-1$
+
+		final TableEditor editor = new TableEditor(tabFlag);
+		editor.horizontalAlignment = SWT.LEFT;
+		editor.grabHorizontal = true;
+
+		tabFlag.addMouseListener(new MouseAdapter() {
+			public void mouseDown(MouseEvent event) {
+				Control old = editor.getEditor();
+				if (old != null)
+					old.dispose();
+
+				Point pt = new Point(event.x, event.y);
+
+				final TableItem item = tabFlag.getItem(pt);
+				if (item == null) {
+					return;
+				}
+				int column = -1;
+				for (int i = 0, n = tabFlag.getColumnCount(); i < n; i++) {
+					Rectangle rect = item.getBounds(i);
+					if (rect.contains(pt)) {
+						column = i;
+						break;
+					}
+				}
+
+				if (column == -1) {
+					return;
+				}
+
+				final Text text = new Text(tabFlag, SWT.NONE);
+				text.setForeground(item.getForeground());
+
+				text.setText(item.getText(column));
+				text.setForeground(item.getForeground());
+				text.selectAll();
+				text.setFocus();
+
+				editor.minimumWidth = text.getBounds().width;
+
+				editor.setEditor(text, item, column);
+
+				final int col = column;
+				text.addModifyListener(new ModifyListener() {
+					public void modifyText(ModifyEvent event) {
+						item.setText(col, text.getText());
+					}
+				});
+			}
+		});
+	}
+
 	public void createPartControl(Composite parent) {
 
 		top = new Composite(parent, SWT.NONE);
-		
+
 		GridLayoutFactory.fillDefaults().applyTo(top);
-		GridDataFactory.fillDefaults().grab(true,true).applyTo(top);
-		
-//		top.setLayout(null);
-/*		createGroupLangue();
-		createGroupDossier();*/
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(top);
+
+		// top.setLayout(null);
+		/*
+		 * createGroupLangue(); createGroupDossier();
+		 */
 		createCompoHaut();
 		createGroupWS();
 		createGroupCDI();
+		createGroupFlag();
 		createCompoBouton();
-		/*buttonCancel = new Button(top, SWT.NONE);
-//		buttonCancel.setBounds(new Rectangle(224, 333, 69, 23)); // 66
-		buttonCancel.setText(Messages.getString("OptionsAction.16")); //$NON-NLS-1$
-		buttonCancel.pack();*/
+		/*
+		 * buttonCancel = new Button(top, SWT.NONE); //
+		 * buttonCancel.setBounds(new Rectangle(224, 333, 69, 23)); // 66
+		 * buttonCancel.setText(Messages.getString("OptionsAction.16"));
+		 * //$NON-NLS-1$ buttonCancel.pack();
+		 */
 
-		/*buttonValider = new Button(top, SWT.NONE);
-//		buttonValider.setBounds(new Rectangle(139, 333, 69, 23));
-		buttonValider.setText(Messages.getString("OptionsAction.17")); //$NON-NLS-1$
-		buttonValider.pack();*/
+		/*
+		 * buttonValider = new Button(top, SWT.NONE); //
+		 * buttonValider.setBounds(new Rectangle(139, 333, 69, 23));
+		 * buttonValider.setText(Messages.getString("OptionsAction.17"));
+		 * //$NON-NLS-1$ buttonValider.pack();
+		 */
 
 		// listener cancel
 		buttonCancel
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-//						System.out.println("options cancel");
+						// System.out.println("options cancel");
 						shelloptions.close();
 
 					}
@@ -612,7 +847,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-//						System.out.println("options valider");
+						// System.out.println("options valider");
 
 						// sauvegarde de la config
 						Utils.saveConfig();
@@ -621,7 +856,32 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 					}
 				});
-
 	}
 
+	private void fillFlagTable() {
+		int i;
+		ArrayList<FlagTable> flagTables = new ArrayList<FlagTable>();
+		flagTables = Utils.configuration.getFlagTables();
+		for (i = 0; i < flagTables.size(); i++) {
+			TableItem item = new TableItem(tabFlagTable, SWT.NONE);
+			item.setText(0, flagTables.get(i).getCode());
+			item.setText(1, flagTables.get(i).getLibelle());
+		}
+	}
+
+	private void fillFlag(String code) {
+		int i;
+		FlagTable flagTable = new FlagTable();
+		tabFlag.removeAll();
+
+		flagTable = FlagTable.getFlagTable(_flagTables, code);
+
+		if (flagTable != null) {
+			for (i = 0; i < flagTable.getFlags().size(); i++) {
+				TableItem item = new TableItem(tabFlag, SWT.NONE);
+				item.setText(0, flagTable.getFlags().get(i).getLocal());
+				item.setText(1, flagTable.getFlags().get(i).getSdn());
+			}
+		}
+	}
 }

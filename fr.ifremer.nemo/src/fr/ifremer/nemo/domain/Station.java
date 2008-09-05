@@ -3,8 +3,12 @@ package fr.ifremer.nemo.domain;
 import java.io.LineNumberReader;
 import java.io.OutputStream;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.TimeZone;
+import java.util.TreeMap;
+import java.util.Map.Entry;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -15,6 +19,8 @@ import com.ago.xml.PathElementHandler;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.input.StationModel;
+import fr.ifremer.nemo.ui.SWTProcess;
 import fr.ifremer.nemo.util.Global;
 
 /**
@@ -182,7 +188,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		_surfaceSamples2 = "";
 		_time = Float.NaN;
 		_dataType = null;
-		_parameters = new java.util.ArrayList<Parameter>();
+		_parameters = new ArrayList<Parameter>();
 		_survey = null;
 		_timeSeriesInformation = null;
 	}
@@ -1193,6 +1199,22 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		}
 		return -1;
 	}
+	
+	/**
+	 * returns index of parameter according to code
+	 * 
+	 * @param paramCode
+	 *            the linked object
+	 */
+	public int parametersIndexOf(String paramCode) {
+		int i;
+		for (i = 0; i < parametersSize(); i++) {
+			if (parametersAt(i).getCode().equals(paramCode)) {
+				return i;
+			}
+		}
+		return -1;
+	}
 
 	/**
 	 * move x one index before in the list for role "parameters"
@@ -1427,14 +1449,13 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		cal.clear();
 		cal.setTimeInMillis(_date);
 		if (!Float.isNaN(_time)) {
-/*
-			Calendar cal2 = Calendar.getInstance(tz);
-			cal2.clear();
-			cal2.setTimeInMillis(new Float(_time).longValue());
-			cal.set(Calendar.HOUR_OF_DAY, cal2.get(Calendar.HOUR_OF_DAY));
-			cal.set(Calendar.MINUTE, cal2.get(Calendar.MINUTE));
-			cal.set(Calendar.SECOND, cal2.get(Calendar.SECOND));
-*/
+			/*
+			 * Calendar cal2 = Calendar.getInstance(tz); cal2.clear();
+			 * cal2.setTimeInMillis(new Float(_time).longValue());
+			 * cal.set(Calendar.HOUR_OF_DAY, cal2.get(Calendar.HOUR_OF_DAY));
+			 * cal.set(Calendar.MINUTE, cal2.get(Calendar.MINUTE));
+			 * cal.set(Calendar.SECOND, cal2.get(Calendar.SECOND));
+			 */
 			cal.setTimeInMillis(_date + (new Float(_time).longValue()));
 		} else {
 			cal.setTimeInMillis(_date);
@@ -1498,6 +1519,88 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 */
 	public String getSortCriteria() {
 		return Long.toString(getFullDate()) + getReference();
+	}
+
+	/**
+	 * Trie les données de la station par ordre croissant/décroissant
+	 * 
+	 * @param ascendant
+	 */
+	public void tri(boolean ascendant) {
+		ArrayList<Integer> arlIndexes = new ArrayList<Integer>();
+		TreeMap<Double, Integer> tmTri = new TreeMap<Double, Integer>();
+		
+		String paramCode = "";
+		int paramIndex = -1;
+		
+		int i;
+
+		// Choix du paramètre à trier en fonction du type de données en entrée et en sortie
+		if (SWTProcess.odv) {
+			if (StationModel.getSingleton().getInputType().equals(
+					Global.TIMESERIES)) {
+				paramCode = "";
+			} else if (StationModel.getSingleton().getInputType().equals(
+					Global.TRAJECTORY)) {
+				paramCode = "";
+			} else {
+				paramCode = "PRES";
+			}
+		} else {
+			if (StationModel.getSingleton().getInputType().equals(
+					Global.TIMESERIES)) {
+				paramCode = "";
+			} else if (StationModel.getSingleton().getInputType().equals(
+					Global.TRAJECTORY)) {
+				paramCode = "";
+			} else {
+				paramCode = "PRES";
+			}
+		}
+
+		// Ajout des binomes valeur/index dans un TreeMap pour tri sur la valeur
+		if (paramCode.equals("")) {
+			// Cas du tri par date
+			// on utilise la date du 1er paramètre
+			for (i = 0; i < parametersAt(0).valuesSize(); i++) {
+				Long date = ((HorodatedValue) parametersAt(0).valuesAt(i)).getDate();
+				tmTri.put(date.doubleValue(), i);
+			}
+		} else {
+			// Recherche de l'index du paramètre en fonction du code
+			paramIndex = parametersIndexOf(paramCode);
+			
+			if (paramIndex >= 0) {
+				for (i = 0; i < parametersAt(paramIndex).valuesSize(); i++) {
+					tmTri.put(parametersAt(paramIndex).valuesAt(i).getValue(), i);
+				}
+			} else {
+				return;
+			}
+		}
+		
+		// Ajout des indexes triés dans une liste dans l'ordre croissant ou décroissant
+		if (ascendant) {
+			for (Entry<Double, Integer> currentEntry : tmTri.entrySet()) {
+				arlIndexes.add(currentEntry.getValue());
+			}
+		} else {
+			ArrayList<Integer> arrayTri = new ArrayList<Integer>(parametersAt(
+					paramIndex).valuesSize());
+
+			for (Entry<Double, Integer> currentEntry : tmTri.entrySet()) {
+				arrayTri.add(currentEntry.getValue());
+			}
+
+			for (i = arrayTri.size() - 1; i >= 0; i++) {
+				arlIndexes.add(arrayTri.get(i));
+			}
+		}
+		
+		// Tri de tous les paramètres de la station
+		for (Parameter param : getParameters()) {
+			param.triIndexes(arlIndexes);
+		}
 	}
 
 } /* End of class: Station */

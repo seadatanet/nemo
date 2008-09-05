@@ -1259,11 +1259,25 @@ public class Utils {
 		configuration
 				.setNemoWebServiceURL(OptionsAction.textAreaNemo.getText());
 		configuration.setVocabURL(OptionsAction.textVocabURL.getText());
+		
+		configuration.getVocabLists().put("C77", "");
+		configuration.getVocabLists().put("C174", "");
+		configuration.getVocabLists().put("C180", "");
+		configuration.getVocabLists().put("L05", "");
+		configuration.getVocabLists().put("L021", "");
+		configuration.getVocabLists().put("L031", "");
+		configuration.getVocabLists().put("L051", "");
+		configuration.getVocabLists().put("L061", "");
+		configuration.getVocabLists().put("L071", "");
+		configuration.getVocabLists().put("L081", "");
+		configuration.getVocabLists().put("L201", "");
+		configuration.getVocabLists().put("L300", "");
+		configuration.getVocabLists().put("P021", "");
+		configuration.getVocabLists().put("P091", "");
 		for (Entry<String, String> currentEntry : Utils.configuration.getVocabLists().entrySet()) {
 			configuration.setVocabListURL(currentEntry.getKey());
 		}
 		
-
 		// CDI
 		configuration.setIdEdmoRespCdi(Utils.extraitCode(OptionsAction.comboIdEdmoRespCdi.getText()));
 		configuration.setCodeEdmoDonnees(Utils.extraitCode(OptionsAction.comboCodeEdmoDonnees.getText()));
@@ -1273,6 +1287,29 @@ public class Utils {
 		configuration.setCdiMethod(Utils.extraitCode(OptionsAction.comboMethodeCdi.getText()));
 		configuration.setFichierMapping(OptionsAction.textFichierMapping.getText());
 		configuration.setArboMapping(OptionsAction.textArboMapping.getText());
+		
+		// Flags qualite
+//		int i, j;
+//		ArrayList<FlagTable> flagTables = new ArrayList<FlagTable>();
+//		
+//		for (i = 0; i < 4; i++) {
+//			FlagTable tmpTable = new FlagTable();
+//			tmpTable.setCode("C" + i);
+//			tmpTable.setLibelle("L" + i);
+//			
+//			ArrayList<Flag> flags = new ArrayList<Flag>();
+//			for (j = 0; j < 10; j++) {
+//				Flag tmpFlag = new Flag();
+//				tmpFlag.setLocal("loc" + i + "" + j);
+//				tmpFlag.setSdn("sdn" + i + "" + j);
+//				flags.add(tmpFlag);
+//			}
+//			tmpTable.setFlags(flags);
+//			
+//			flagTables.add(tmpTable);
+//		}
+//		configuration.setFlagTables(flagTables);
+		configuration.setFlagTables(OptionsAction._flagTables);
 		
 		// Enregistrement de la configuration
 		configuration.save();
@@ -1563,5 +1600,24 @@ public class Utils {
 				FiltrageTableType.go(tab);
 			}
 		});
+	}
+	
+	
+	public static int calculNbLigne(File file) {
+		int nbLignes = 0;
+		
+		try {
+			FileReader reader = new FileReader(file);
+			BufferedReader readerLigne = new BufferedReader(reader);
+			
+			while (readerLigne.readLine() != null) {
+				nbLignes++;
+			}
+			readerLigne.close();
+			return nbLignes;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 }

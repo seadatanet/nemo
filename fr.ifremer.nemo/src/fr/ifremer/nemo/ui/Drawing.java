@@ -47,7 +47,7 @@ public class Drawing {
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
 				| Section.TWISTIE | Section.COMPACT);
 
-		System.out.println("HOP");
+//		System.out.println("HOP");
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			public void expansionStateChanged(ExpansionEvent e) {
@@ -924,7 +924,6 @@ public class Drawing {
 		buttonInject.setText(Messages.getString("Drawing.1"));
 
 		section.setClient(sectionClient);
-
 		// listener bouton inject
 		buttonInject
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {

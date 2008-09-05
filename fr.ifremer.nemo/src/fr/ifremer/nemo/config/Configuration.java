@@ -5,11 +5,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.StringTokenizer;
-import java.util.TreeSet;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -20,6 +20,8 @@ import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLBootstrapParser;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.flag.Flag;
+import fr.ifremer.nemo.flag.FlagTable;
 import fr.ifremer.nemo.ui.Utils;
 
 /**
@@ -39,6 +41,11 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	 * Répertoire de base des fichiers modèles
 	 */
 	protected String _modelsDirectory;
+	
+	/**
+	 * Répertoire de base des fichier de sortie
+	 */
+	protected String _outputDirectory;
 	
 	protected String _cruisesDirectory;
 	
@@ -69,17 +76,14 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	protected String _arboMapping;
 		
 	protected HashMap<String, String> _vocabLists = new HashMap<String, String>();
-	
-	/**
-	 * Répertoire de base des fichier de sortie
-	 */
-	protected String _outputDirectory;
 
 	protected boolean _showRule;
 
 	static protected Configuration _singleton = null;
 
 	protected Locale _locale;
+	
+	protected ArrayList<FlagTable> _flagTables;
 
 	public Configuration() {
 		_contact = "";
@@ -103,19 +107,8 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		_arboMapping = "";
 		
 		_vocabLists = new HashMap<String, String>();
-		_vocabLists.put("C77", "");
-		_vocabLists.put("C174", "");
-		_vocabLists.put("C180", "");
-		_vocabLists.put("L05", "");
-		_vocabLists.put("L021", "");
-		_vocabLists.put("L031", "");
-		_vocabLists.put("L051", "");
-		_vocabLists.put("L061", "");
-		_vocabLists.put("L071", "");
-		_vocabLists.put("L081", "");
-		_vocabLists.put("L300", "");
-		_vocabLists.put("P021", "");
-		_vocabLists.put("P091", "");
+		
+		_flagTables = new ArrayList<FlagTable>();
 	}
 
 	/**
@@ -258,6 +251,32 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			}
 			return this;
 		}
+		if (a_LocalName.equals("FlagTable")) {
+			String code = null;
+			String label = null;
+			FlagTable flagTable = new FlagTable();
+			
+			if ((code = a_Attributes.getValue("code")) != null &&
+					(label = a_Attributes.getValue("label")) != null) {
+				flagTable.setCode(code);
+				flagTable.setLibelle(label);
+				_flagTables.add(flagTable);
+			}
+			return this;
+		}
+		if (a_LocalName.equals("Flag")) {
+			String local = null;
+			String sdn = null;
+			Flag flag = new Flag();
+			
+			if ((local = a_Attributes.getValue("local")) != null &&
+					(sdn = a_Attributes.getValue("SDN")) != null) {
+				flag.setLocal(local);
+				flag.setSdn(sdn);
+				_flagTables.get(_flagTables.size() - 1).getFlags().add(flag);
+			}
+			return this;
+		}
 		
 		return null;
 	}
@@ -306,6 +325,21 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			a_Writer.openTag("VocabListURL");
 			a_Writer.putAttribute("name", listName);
 			a_Writer.putAttribute("value", _vocabLists.get(listName));
+			a_Writer.closeTag();
+		}
+		int i, j;
+		for (i = 0; i < getFlagTables().size(); i++) {
+			a_Writer.openTag("FlagTable");
+			a_Writer.putAttribute("code", getFlagTables().get(i).getCode());
+			a_Writer.putAttribute("label", getFlagTables().get(i).getLibelle());
+			
+			for (j = 0; j < getFlagTables().get(i).getFlags().size(); j++) {
+				a_Writer.openTag("Flag");
+				a_Writer.putAttribute("local", getFlagTables().get(i).getFlags().get(j).getLocal());
+				a_Writer.putAttribute("SDN", getFlagTables().get(i).getFlags().get(j).getSdn());
+				a_Writer.closeTag();
+			}
+			
 			a_Writer.closeTag();
 		}
 	}
@@ -865,6 +899,14 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	
 	public String getSep() {
 		return "\t";
+	}
+
+	public ArrayList<FlagTable> getFlagTables() {
+		return _flagTables;
+	}
+
+	public void setFlagTables(ArrayList<FlagTable> tables) {
+		_flagTables = tables;
 	}
 	
 } /* End of class: Configuration */

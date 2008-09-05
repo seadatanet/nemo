@@ -348,6 +348,10 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 							Station station = _stationModel.convert(reader2,
 									files[i], isRefDateBased, a_RefDate,
 									notifierStation);
+							
+							// Tri des données de la station par ordre croissant
+							station.tri(true);
+							
 							survey.addStation(station);
 						} catch (Exception e) {
 							throw new InterruptedException (e.getMessage() + Messages.getString("SingleFileSurvey.1") + file.getName());

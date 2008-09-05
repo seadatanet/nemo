@@ -1530,7 +1530,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 					a_Reader.reset();
 					EditConversion.setErreurLigne(0);
 					consumeHeader(a_Reader);
-
+										
 					convertParameters(a_Reader, station, isRefDateBased,
 							a_RefDate, a_Notifier);
 					if (_timeSeriesModel != null
@@ -1576,7 +1576,9 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 					_headerPlus[_headerPlus.length - 1] = line;
 					EditConversion.incrementErreurLigne();
 					EditConversion.setErreurChaine(line);
-
+					
+					a_Notifier.progressLine(EditConversion.getErreurLigne(), EditConversion.getTotalLigne());
+					
 					// Recuperation du numero de station
 					if (isMetaInData2()) {
 						getReferenceProperty().applyOn(station, _headerPlus);
@@ -1813,13 +1815,14 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 				a_Station.addParameter((Parameter) pm.getModel().clone());
 			}
 			String line = null;
-
+			long size = 0;
 			for (index = 0; (line = a_Reader.readLine()) != null
 					&& (!(_endOnEmptyLine && line.trim().matches("^$")))
 					&& (!(_endOnPattern && line.matches("^" + _endDataPattern
 							+ "$"))) || (index < _rowNumber); index++) {
 
-				a_Notifier.progress(line.length());
+				size += line.length();
+				a_Notifier.progress(size);
 
 				EditConversion.incrementErreurLigne();
 				EditConversion.setErreurChaine(line);
@@ -2041,6 +2044,18 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 	public void setInputType(String type) {
 		_inputType = type;
+	}
+	
+	public boolean isProfile() {
+		return _inputType.equals(Global.PROFILE);
+	}
+	
+	public boolean isTimeSeries() {
+		return _inputType.equals(Global.TIMESERIES);
+	}
+	
+	public boolean isTrajectory() {
+		return _inputType.equals(Global.TRAJECTORY);
 	}
 
 	public boolean testDepth() {

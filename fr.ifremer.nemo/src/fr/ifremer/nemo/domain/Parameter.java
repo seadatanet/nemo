@@ -1,6 +1,7 @@
 package fr.ifremer.nemo.domain;
 
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -631,6 +632,24 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 	 */
 	public String toString() {
 		return _code;
+	}
+	
+	/**
+	 * Tri les données d'un paramètre selon une liste d'indexes
+	 * @param indexes
+	 */
+	public void triIndexes(ArrayList<Integer> indexes)
+	{
+		ArrayList<ParameterValue> arlTemp = new ArrayList<ParameterValue>();
+		int i;
+		
+		// On recopie les données dans une liste temporaire dans l'ordre
+		for (i = 0; i < indexes.size(); i++) {
+			arlTemp.add(_values.get(indexes.get(i)));
+		}
+		
+		// On recopie la liste temporaire dans la liste d'origine
+		_values = arlTemp;
 	}
 
 } /* End of class: Parameter */

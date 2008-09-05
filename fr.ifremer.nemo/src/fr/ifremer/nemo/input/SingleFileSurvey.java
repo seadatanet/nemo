@@ -16,7 +16,6 @@ import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
-import fr.ifremer.nemo.output.CDIMappingWriter;
 import fr.ifremer.nemo.output.ProgressNotification;
 import fr.ifremer.nemo.ui.EditConversion;
 import fr.ifremer.nemo.ui.Utils;
@@ -381,12 +380,13 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 	 * @throws Exception
 	 */
 	public Survey convert(boolean isRefDateBased, long a_RefDate,
-			ProgressNotification a_Progress) throws IOException, ParseException, StringIndexOutOfBoundsException {
+			ProgressNotification a_Progress) throws IOException,
+			ParseException, StringIndexOutOfBoundsException {
 		try {
 			Survey survey = (Survey) _model.clone();
 			_stationModel.initRef();
 			File file = new File(_file);
-			//RandomAccessFile reader = null;
+			// RandomAccessFile reader = null;
 			BufferedReader reader2 = null;
 			SizeBasedProgressNotifier notifier = new SizeBasedProgressNotifier(
 					file.length(), 0, a_Progress);
@@ -394,51 +394,62 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 			_stationModel.setTaille((int) file.length());
 			EditConversion.setErreurFichier(file.getName());
 			EditConversion.setErreurLigne(0);
-			
+
 			Station station = null;
-			
+
 			try {
 
-		//		System.out.println("nom du fichier campagne ===>"
-		//				+ file.getName());
-				
+				// System.out.println("nom du fichier campagne ===>"
+				// + file.getName());
+
 				// test CDL FAE01
-				FileReader reader  = new FileReader(file);
+				FileReader reader = new FileReader(file);
 				reader2 = new BufferedReader(reader);
-								
-				//reader = new RandomAccessFile(file, "r");
-				consumeHeader(reader2);
 				
-				if (_stationModel.isMetaInData2() || (_stationModel.getInputType().equals(Global.TRAJECTORY) && _stationModel.getTrajectory().getOutputType().equals(Global.ODV))) {
+				// Calcul du nombre de lignes du fichier
+				EditConversion.setTotalLigne(Utils.calculNbLigne(file));
+				
+				// reader = new RandomAccessFile(file, "r");
+				consumeHeader(reader2);
+
+				if (_stationModel.isMetaInData2()
+						|| (_stationModel.getInputType().equals(
+								Global.TRAJECTORY) && _stationModel
+								.getTrajectory().getOutputType().equals(
+										Global.ODV))) {
 					_stationModel.consumeHeaderPlus(reader2);
 				}
-				
-				while ((station = _stationModel.convert(reader2, Utils.extraitFichierChemin(ViewFile.nomFichier),
+
+				while ((station = _stationModel.convert(reader2, Utils
+						.extraitFichierChemin(ViewFile.nomFichier),
 						isRefDateBased, a_RefDate, notifier)) != null) {
 					if (SurveyMedia.interrompu) {
 						throw new IOException("");
 					}
+
+					// Tri des données de la station par ordre croissant
+					station.tri(true);
+
 					survey.addStation(station);
 				}
 
-			}
-			catch(StringIndexOutOfBoundsException e)
-			{
-				throw new StringIndexOutOfBoundsException(e.getMessage() + Messages.getString("SingleFileSurvey.1") + file.getName());
-			}
-			catch(NumberFormatException e)
-			{
-				
+			} catch (StringIndexOutOfBoundsException e) {
+				throw new StringIndexOutOfBoundsException(e.getMessage()
+						+ Messages.getString("SingleFileSurvey.1")
+						+ file.getName());
+			} catch (NumberFormatException e) {
+
 				e.printStackTrace();
-				throw new NumberFormatException(e.getMessage() + Messages.getString("SingleFileSurvey.1") + file.getName());
-			}
-			catch(ParseException e)
-			{
-				
+				throw new NumberFormatException(e.getMessage()
+						+ Messages.getString("SingleFileSurvey.1")
+						+ file.getName());
+			} catch (ParseException e) {
+
 				e.printStackTrace();
-				throw new ParseException(e.getMessage() + Messages.getString("SingleFileSurvey.1") + file.getName(),0);
-			}
-			finally {
+				throw new ParseException(e.getMessage()
+						+ Messages.getString("SingleFileSurvey.1")
+						+ file.getName(), 0);
+			} finally {
 				if (reader2 != null) {
 					try {
 						reader2.close();

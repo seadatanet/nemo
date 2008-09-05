@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <java version="1.5.0_06" class="java.beans.XMLDecoder"> 
- <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="128"> 
+ <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="222"> 
   <void index="0"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/36AE</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/36AE</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Aegaeo</string> 
@@ -22,14 +22,139 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
   <void index="1"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/34AR</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/RUAT</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Akvanavt</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;UIOJ&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;IMO&gt;7640500&lt;/IMO&gt;&lt;notes&gt;Date of build: 1976, Port of registry Novorossiysk, Length: 34m. May also be spelled Aquanavt.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218641761000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="2"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/321T</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>American Champion</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;KYAZ&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1992-10-01&lt;/commissioned&gt;&lt;decommissioned&gt;1998-07-11&lt;/decommissioned&gt;&lt;IMO&gt;7202554&lt;/IMO&gt;&lt;notes&gt;Built 1970 07, Length 82.7 meters, Former names 1 Jan. 1980-31 Dec.1991 Karen Wood, 1 Jan.1992-30 Sept.1992 Karen June.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518801000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="3"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/48AN</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Andrea</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;class&gt;research vessel&lt;/class&gt;&lt;notes&gt;29m vessel owned by Laboratorio di Biologia Marina e Pesca&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217505068000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="4"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06AD</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Anton Dohrn I</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;FFS&lt;/title&gt;&lt;callsign&gt;DBFO&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1955-03-05&lt;/commissioned&gt;&lt;decommissioned&gt;1972-07-26&lt;/decommissioned&gt;&lt;notes&gt;Renamed Meerkatze 2&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518160000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="5"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06DA</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Anton Dohrn II</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;FFS&lt;/title&gt;&lt;callsign&gt;DBFR&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1972-10-17&lt;/commissioned&gt;&lt;decommissioned&gt;1986-07-30&lt;/decommissioned&gt;&lt;previous_name&gt;Walther Herwig I&lt;/previous_name&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518179000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="6"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/34AR</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Aranda</string> 
@@ -47,14 +172,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="2"> 
+  <void index="7"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/46FR</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/64AB</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Arca</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;MV&lt;/title&gt;&lt;callsign&gt;PDHT&lt;/callsign&gt;&lt;class&gt;vessel of opportunity&lt;/class&gt;&lt;commissioned&gt;1998&lt;/commissioned&gt;&lt;notes&gt;Rijkwaterstaat oil recovery and survey vessel. IMO9167966, built 1998, length 83m.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218642488000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="8"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/46FR</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Arni Fridriksson</string> 
@@ -72,14 +222,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="3"> 
+  <void index="9"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/33H4</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/RUAS</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Ashamba</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;2001&lt;/commissioned&gt;&lt;notes&gt;Date of build: 2001, small boat registry 1979RFB.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218642064000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="10"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/33H4</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Atlantic Explorer</string> 
@@ -97,14 +272,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="4"> 
+  <void index="11"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/33AT</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/33AT</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Atlantis</string> 
@@ -122,14 +297,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="5"> 
+  <void index="12"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/09AR</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/09AR</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Aurora Australis</string> 
@@ -147,14 +322,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="6"> 
+  <void index="13"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/29HE</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/29HE</string> 
     </void> 
     <void property="entryTerm"> 
      <string>BIO Hesperides</string> 
@@ -172,14 +347,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="7"> 
+  <void index="14"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/35B5</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/35B5</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Beautemps-Beaupré</string> 
@@ -197,14 +372,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="8"> 
+  <void index="15"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/11BE</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/35B6</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Beautemps-Beaupré (46-65)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;class&gt;naval vessel&lt;/class&gt;&lt;commissioned&gt;1946&lt;/commissioned&gt;&lt;decommissioned&gt;1965&lt;/decommissioned&gt;&lt;notes&gt;Active from 1946-1965. Was a hydrographic vessel of the French navy. Weight: 2000t, Length: 95m&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217509899000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="16"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/11BE</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Belgica</string> 
@@ -222,14 +422,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="9"> 
+  <void index="17"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/642B</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/642B</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Benguela Stream</string> 
@@ -247,14 +447,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="10"> 
+  <void index="18"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/46BS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/46BS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Bjarni Saemundsson</string> 
@@ -272,14 +472,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="11"> 
+  <void index="19"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/33B1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/33B1</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Blue Heron</string> 
@@ -297,14 +497,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="12"> 
+  <void index="20"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/32KZ</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/18NA</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>CCGS Navicula</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;CCGS&lt;/title&gt;&lt;callsign&gt;CG2364&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;notes&gt;Small Canadian coastguard fisheries research vessel built 1968&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518452000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="21"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/32KZ</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Cape Hatteras</string> 
@@ -322,14 +547,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="13"> 
+  <void index="22"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/45CE</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/48A2</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Castorino 2</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;IMQR&lt;/callsign&gt;&lt;notes&gt;Motorboat length 11m owned by Caressa Nino licence plate TS446&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217505068000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="23"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/45CE</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Celtic Explorer</string> 
@@ -347,14 +597,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="14"> 
+  <void index="24"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/45CV</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/45CV</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Celtic Voyager</string> 
@@ -372,14 +622,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="15"> 
+  <void index="25"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/49Y9</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/49Y9</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Chikyu</string> 
@@ -397,14 +647,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="16"> 
+  <void index="26"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/33CB</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/33CB</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Clifford A. Barnes</string> 
@@ -422,14 +672,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="17"> 
+  <void index="27"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/29CS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/29CS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Cornide de Saavedra</string> 
@@ -447,14 +697,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="18"> 
+  <void index="28"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/68DM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/35QA</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Côte d´Aquitaine</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;FPRI&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1980&lt;/commissioned&gt;&lt;notes&gt;CNRS research vessel. Length 19m&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217519781000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="29"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/68DM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>D. Carlos I</string> 
@@ -472,14 +747,114 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="19"> 
+  <void index="30"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/58D4</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/26DA</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Dana</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;MS&lt;/title&gt;&lt;callsign&gt;OYTJ&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1937&lt;/commissioned&gt;&lt;decommissioned&gt;1980&lt;/decommissioned&gt;&lt;notes&gt;Renamed Dana Researcher from 1980-1984, Esvagt Dana from 1984-2000 and Dana Nyborg from 2000. Length 52m&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218794738000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="31"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/26DN</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Dana</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;RV&lt;/title&gt;&lt;callsign&gt;OXBH&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1981&lt;/commissioned&gt;&lt;IMO&gt;7912680&lt;/IMO&gt;&lt;notes&gt;Length 78.43m.Operated by Danmarks Fiskeriundersøgelser&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218640570000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="32"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/48A3</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Daphne II</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;IWSV&lt;/callsign&gt;&lt;notes&gt;Motorboat owned by ARPA Emilia-Romagna URL www.arpa.emr.it/daphne/motonave.asp&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217505068000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="33"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/58D3</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Dr. Fridtjof Nansen</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;class&gt;research vessel&lt;/class&gt;&lt;callsign&gt;JWVN&lt;/callsign&gt;&lt;commissioned&gt;1974&lt;/commissioned&gt;&lt;decommissioned&gt;1993-09&lt;/decommissioned&gt;&lt;notes&gt;1974 - 1993/09&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218642241000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="34"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/58D4</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Dr. Fridtjof Nansen</string> 
@@ -497,14 +872,89 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="20"> 
+  <void index="35"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/32EV</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/48A1</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Effevigi</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;IMMR&lt;/callsign&gt;&lt;notes&gt;Motorboat owned by ARPA F.V.G. licence plate TS448&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217505068000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="36"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/31ET</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Eltanin</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;USNS&lt;/title&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1962&lt;/commissioned&gt;&lt;decommissioned&gt;1975&lt;/decommissioned&gt; &lt;notes&gt;Built 1957 by U.S. Navy as non-commissioned cargo ship with ice-strengthened double hull, reclassified 1962 as oceanographic research vessel (AGOR-8) and operated by Lamont-Doherty Earth Observatory of Columbia University. Sold 1975 to Argentine Navy, renamed Islas Orcadas. Length 266 feet. IOC Ship Code 31ET. WOD Ship Code 1514.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518818000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="37"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/29EB</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Emma Bardan</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;B/O&lt;/title&gt;&lt;callsign&gt;ECJU&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;2006-01&lt;/commissioned&gt;&lt;notes&gt;Built 2005, Owner: Secretaria General de Pesca Maritima (MAPA) Length: 29 meters. From Lloyds IMO 9335379&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518713000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="38"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/32EV</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Endeavor</string> 
@@ -522,14 +972,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="21"> 
+  <void index="39"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/33WA</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/64EZ</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Esperanza</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;PD6464&lt;/callsign&gt;&lt;class&gt;vessel of opportunity&lt;/class&gt;&lt;commissioned&gt;2002&lt;/commissioned&gt;&lt;previous_name&gt;Echo Fighter&lt;/previous_name&gt;&lt;notes&gt;IMO 8404599, built 1984 and acquired by Greenpeace in 2002&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218642494000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="40"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/33WA</string> 
     </void> 
     <void property="entryTerm"> 
      <string>F.G. Walton Smith</string> 
@@ -547,39 +1022,139 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="22"> 
+  <void index="41"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74NM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06JR</string> 
     </void> 
     <void property="entryTerm"> 
-     <string>FRV Alba Na Mara</string> 
+     <string>FFK Clupea</string> 
     </void> 
     <void property="entryTermDef"> 
-     <string>&lt;title&gt;FRV&lt;/title&gt;&lt;callsign&gt;2AIE4&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;2007&lt;/commissioned&gt;&lt;IMO&gt;9378668&lt;/IMO&gt;&lt;notes&gt;27m vessel operated by FRS Aberdeen Laboratory as a replacement for FRV Clupea. Primarily designed for fishing and camera work but also able to undertake general research work.</string> 
+     <string>&lt;title&gt;FFK&lt;/title&gt;&lt;callsign&gt;DBFN&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1992-01-01&lt;/commissioned&gt;&lt;notes&gt;Built in 1949 as the Erfurt. Then named Clupea with call sign YARZ in service from 1983-01-10 to 1991-12-31 for IHFRO/DDR. Call sign DBFN since 1992-01-01 for IOR/Germany. Active in August 2007. Length 17.6 metres&lt;/notes&gt;</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1208266715000</long> 
+        <long>1217518218000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="23"> 
+  <void index="42"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74CU</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06JS</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>FFK Clupea (83-91)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;FFK&lt;/title&gt;&lt;callsign&gt;YARZ&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1983-01-10&lt;/commissioned&gt;&lt;decommissioned&gt;1991-12-31&lt;/decommissioned&gt;&lt;notes&gt;Built in 1949 as the Erfurt. Then named Clupea with call sign YARZ in service from 1983-01-10 to 1991-12-31 for IHFRO/DDR. Call sign DBFN since 1992-01-01 for IOR/Germany. Active in August 2007. Length 17.6 metres&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518243000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="43"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06S1</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>FFK Solea (74-04)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;FFK&lt;/title&gt;&lt;callsign&gt;DBFI&lt;/callsign&gt;&lt;commissioned&gt;1974-05-16&lt;/commissioned&gt;&lt;decommissioned&gt;2004-06-01&lt;/decommissioned&gt;&lt;notes&gt;Federal Research Centre for Fisheries vessel.  Replaced by new vessel of same name in June 2004. Length 35.37m.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518331000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="44"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06SL</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>FFS Solea</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;FFS&lt;/title&gt;&lt;callsign&gt;DBFH&lt;/callsign&gt;&lt;commissioned&gt;2004-06-11&lt;/commissioned&gt;&lt;notes&gt;Federal Research Centre for Fisheries vessel. Active in August 2007. Length 42.7m, IMO 9314583.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518340000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="45"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74NM</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>FRV Alba Na Mara</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;FRV&lt;/title&gt;&lt;callsign&gt;2AIE4&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;2007&lt;/commissioned&gt;&lt;IMO&gt;9378668&lt;/IMO&gt;&lt;notes&gt;27m vessel operated by FRS Aberdeen Laboratory as a replacement for FRV Clupea. Primarily designed for fishing and camera work but also able to undertake general research work.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217505742000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="46"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74CU</string> 
     </void> 
     <void property="entryTerm"> 
      <string>FRV Clupea</string> 
@@ -600,36 +1175,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="24"> 
+  <void index="47"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74GO</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74GO</string> 
     </void> 
     <void property="entryTerm"> 
      <string>FRV Goldseeker</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1967&lt;/commissioned&gt;&lt;decommissioned&gt;1989&lt;/decommissioned&gt;&lt;notes&gt;Aberdeen Marine Laboratory small inshore fishery research vessel.&lt;/notes&gt;</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1197375472000</long> 
+        <long>1218794061000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="25"> 
+  <void index="48"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/748S</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/748S</string> 
     </void> 
     <void property="entryTerm"> 
      <string>FRV Scotia</string> 
@@ -650,14 +1228,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="26"> 
+  <void index="49"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/747S</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/747S</string> 
     </void> 
     <void property="entryTerm"> 
      <string>FRV Scotia (48-71)</string> 
@@ -678,14 +1256,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="27"> 
+  <void index="50"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/749S</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/749S</string> 
     </void> 
     <void property="entryTerm"> 
      <string>FRV Scotia (71-98)</string> 
@@ -706,14 +1284,189 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="28"> 
+  <void index="51"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/06MM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06A6</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>FS Alkor</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;FS&lt;/title&gt;&lt;callsign&gt;DBND&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1990-05-02&lt;/commissioned&gt;&lt;notes&gt;IFM-GEOMAR research vessel active as of August 2007.  length 55.2m&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518125000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="52"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06A5</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>FS Alkor (66-90)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;FS&lt;/title&gt;&lt;callsign&gt;DBIG&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1966-03-02&lt;/commissioned&gt;&lt;decommissioned&gt;1990-04-19&lt;/decommissioned&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518111000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="53"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06A7</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>FS Atair</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;FS&lt;/title&gt;&lt;callsign&gt;DBBI&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1987-07-13&lt;/commissioned&gt;&lt;notes&gt;In service August 2007. Length=51.5 m; IMO no. 8521426&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518136000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="54"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06A8</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>FS Atair (62-87)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;FS&lt;/title&gt;&lt;callsign&gt;DBBA&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1962-05-04&lt;/commissioned&gt;&lt;decommissioned&gt;1987-04-29&lt;/decommissioned&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518151000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="55"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06G2</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>FS Gauss</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;FS&lt;/title&gt;&lt;callsign&gt;DBBX&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1980-05-06&lt;/commissioned&gt;&lt;decommissioned&gt;2007-05-02&lt;/decommissioned&gt;&lt;notes&gt;Research vessel built 1980, owned by the Federal Ministry of Transport, Building and Housing and operated by the Federal Maritime and Hydrographic Agency until 2007-05-02. Length 68.9m. Lloyds: from 2007-05-03 flag is Gibraltar with name Fugro Gauss and call sign ZDIA4. IMO 7824883.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218794675000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="56"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06G1</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>FS Gauss (49-79)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;FS&lt;/title&gt;&lt;callsign&gt;DBFB&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1949-06-12&lt;/commissioned&gt;&lt;decommissioned&gt;1979-12-20&lt;/decommissioned&gt;&lt;notes&gt;Survey and research ship,owned by the Federal Ministry of Transport, operated by the German Hydrographic Institute. Length 57m.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218794580000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="57"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06HK</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>FS Heincke</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;FS&lt;/title&gt;&lt;callsign&gt;DBCK&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1990&lt;/commissioned&gt;&lt;notes&gt;Built as a research vessel in 1990. Length 54.59m.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217421948000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="58"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06MM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>FS Maria S. Merian</string> 
@@ -731,14 +1484,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="29"> 
+  <void index="59"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/06M3</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06M3</string> 
     </void> 
     <void property="entryTerm"> 
      <string>FS Meteor</string> 
@@ -759,14 +1512,64 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="30"> 
+  <void index="60"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/06AQ</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06ME</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>FS Meteor (46-64)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;class&gt;research vessel&lt;/class&gt;&lt;decommissioned&gt;1964-07&lt;/decommissioned&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217415182000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="61"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06MT</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>FS Meteor (64-86)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;FS&lt;/title&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1964-07&lt;/commissioned&gt;&lt;decommissioned&gt;1986-03-14&lt;/decommissioned&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217415176000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="62"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06AQ</string> 
     </void> 
     <void property="entryTerm"> 
      <string>FS Polarstern</string> 
@@ -784,14 +1587,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="31"> 
+  <void index="63"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/06PO</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06PO</string> 
     </void> 
     <void property="entryTerm"> 
      <string>FS Poseidon</string> 
@@ -812,14 +1615,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="32"> 
+  <void index="64"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/06BE</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06P1</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>FS Poseidon (02-45)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;FS&lt;/title&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1902&lt;/commissioned&gt;&lt;decommissioned&gt;1945&lt;/decommissioned&gt;&lt;notes&gt;Active in fisheries research 1902-1945&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518288000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="65"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06BE</string> 
     </void> 
     <void property="entryTerm"> 
      <string>FS Sonne</string> 
@@ -837,14 +1665,189 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="33"> 
+  <void index="66"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/PAGT</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06AZ</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>FS Valdivia</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;FS&lt;/title&gt;&lt;callsign&gt;DESI&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1975&lt;/commissioned&gt;&lt;decommissioned&gt;1999-07-19&lt;/decommissioned&gt;&lt;previous_name&gt;Viking Bank&lt;/previous_name&gt;&lt;notes&gt;Built as fishing vessel in 1961 named FMS Viking Bank.  Converted to research vessel in 1975.  Sold in 1999 and renamed Jack Kommandor.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218795660000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="67"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/746F</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Flottbek</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;MNVK8&lt;/callsign&gt;&lt;class&gt;vessel of opportunity&lt;/class&gt;&lt;commissioned&gt;2006/09/08&lt;/commissioned&gt;&lt;IMO&gt;9313216&lt;/IMO&gt;&lt;notes&gt;Container ship built May 2005. Until 08 September 2006, German flag with callsign DPXS.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217412505000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="68"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/34FO</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Fortuna</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;OJ3278&lt;/callsign&gt;&lt;class&gt;fishing vessel&lt;/class&gt;&lt;notes&gt;commercial trawler&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518949000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="69"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/FOFA</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Fram</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;OM2100&lt;/callsign&gt;&lt;class&gt;fishing vessel&lt;/class&gt;&lt;commissioned&gt;1988&lt;/commissioned&gt;&lt;pennant&gt;VN390&lt;/pennant&gt;&lt;IMO&gt;8825913&lt;/IMO&gt;&lt;notes&gt;Built 1988, Port of registry Vestmanna. Chartered for FRS Aberdeen Marine Laboratory cruises.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217422500000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="70"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/58G1</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>G.O. Sars (50-70)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1950&lt;/commissioned&gt;&lt;decommissioned&gt;1970-03&lt;/decommissioned&gt;&lt;notes&gt;Original G.O.SARS 1950 - 1970/03&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218642271000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="71"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/58G3</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>G.O. Sars (70-03)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;LLZG&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1970&lt;/commissioned&gt;&lt;decommissioned&gt;2003-02-10&lt;/decommissioned&gt;&lt;notes&gt;Former IMR research vessel sold and renamed Sarsen in 2003&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218642275000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="72"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/29GD</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Garcia Del Cid</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;EHUU&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;notes&gt;, TA-2-166 CSIC Research vessel, built 1977.  Operated by CSIC UTM (Marine Technology Unit).   length 37.2m&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518726000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="73"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/PAGT</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Geco Triton</string> 
@@ -862,14 +1865,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="34"> 
+  <void index="74"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/64LY</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/09LE</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>HMAS Leeuwin</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;HMAS&lt;/title&gt;&lt;callsign&gt;VLSE&lt;/callsign&gt;&lt;class&gt;naval vessel&lt;/class&gt;&lt;commissioned&gt;2000&lt;/commissioned&gt;&lt;pennant&gt;A245&lt;/pennant&gt;&lt;notes&gt;Research vessel A245 of the Australian Hydrographic Service.  Length, 71.2m.  Active as at Mar 2007.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518392000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="75"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/64LY</string> 
     </void> 
     <void property="entryTerm"> 
      <string>HNLMS Luymes</string> 
@@ -887,14 +1915,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="35"> 
+  <void index="76"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/64TM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/64TM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>HRMS Tydeman</string> 
@@ -912,14 +1940,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="36"> 
+  <void index="77"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/35HL</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/35HL</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Haliotis</string> 
@@ -937,14 +1965,64 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="37"> 
+  <void index="78"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/33H5</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/33H2</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Horizon Hawk</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt; WDD6033&lt;/callsign&gt;&lt;class&gt;vessel of opportunity&lt;/class&gt;&lt;commissioned&gt;2007&lt;/commissioned&gt;&lt;notes&gt;IMO 9303819, built 2007&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518833000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="79"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/18HU</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Hudson</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;CCGS&lt;/title&gt;&lt;callsign&gt;CGDG&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1964-02&lt;/commissioned&gt;&lt;notes&gt;Replacement planned in 2014. Length 83.02m.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218795735000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="80"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/33H5</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Hugh R. Sharp</string> 
@@ -962,14 +2040,89 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="38"> 
+  <void index="81"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/49ZR</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/58J1</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Johan Hjort (22-31)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1922&lt;/commissioned&gt;&lt;decommissioned&gt;1931&lt;/decommissioned&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218795003000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="82"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/58J4</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Johan Hjort (32-56)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1932&lt;/commissioned&gt;&lt;decommisioned&gt;1956&lt;/decommisioned&gt;&lt;notes&gt;Renamed Oscar Sund in 1956/57&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218642339000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="83"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/58J2</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Johan Hjort (58-82)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1958&lt;/commissioned&gt;&lt;decommissioned&gt;1982&lt;/decommissioned&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218642336000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="84"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/49ZR</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Kairei</string> 
@@ -987,14 +2140,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="39"> 
+  <void index="85"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/49Q2</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/49F5</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Kaiyo</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;JGBF&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;pennant&gt;HL05&lt;/pennant&gt;&lt;commissioned&gt;1993-10&lt;/commissioned&gt;&lt;notes&gt;Japanese Coast Guard Hydrographic and Oceanographic Department ship. Active as of 2007-06. Length 60m.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518535000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="86"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/49Q2</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Kaiyo</string> 
@@ -1012,14 +2190,64 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="40"> 
+  <void index="87"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/33KB</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/49Q1</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Kaiyo (48-64)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;JKOY&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;pennant&gt;MH01&lt;/pennant&gt;&lt;commissioned&gt;1948-05&lt;/commissioned&gt;&lt;decommissioned&gt;1964-03&lt;/decommissioned&gt;&lt;notes&gt;Japanese Coast Guard Hydrographic and Oceanographic Department ship&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518549000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="88"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/49BE</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Kaiyo (64-93)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;8LYT&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;pennant&gt;HM06&lt;/pennant&gt;&lt;commissioned&gt;1964-03&lt;/commissioned&gt;&lt;decommissioned&gt;1993-09&lt;/decommissioned&gt;&lt;notes&gt;Japanese Coast Guard Hydrographic and Oceanographic Department ship&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518519000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="89"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/33KB</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Kilo Moana</string> 
@@ -1037,14 +2265,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="41"> 
+  <void index="90"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/642A</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/642A</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Klipper Stream</string> 
@@ -1062,14 +2290,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="42"> 
+  <void index="91"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/316N</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/316N</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Knorr</string> 
@@ -1087,14 +2315,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="43"> 
+  <void index="92"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/35A3</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/353L</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>L&apos;Astrolabe</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;FHZI&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1989-05-18&lt;/commissioned&gt;&lt;previous_name&gt;Austral Fish&lt;/previous_name&gt;&lt;notes&gt;Research vessel built 1986 as the Canadian vessel Fort Resolution, re-registered in France and renamed Austral Fish 12 May 1988, renamed L&apos;Astrolabe 18 May 1989.  Re-registered in French Southern Territories between 20 Jun 1995 - 11 Oct 2006, then re-registered in France.  Owned by Bourbon Offshore Surf.  Commissioned by TAAF and Institut Polaire Francais Paul-Emile Victor.  Active as at Dec 2006.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218795267000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="93"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/35A3</string> 
     </void> 
     <void property="entryTerm"> 
      <string>L&apos;Atalante</string> 
@@ -1112,14 +2365,64 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="44"> 
+  <void index="94"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/58LA</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/64LE</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>L&apos;Espoir</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;PFPY&lt;/callsign&gt;&lt;commissioned&gt;1993-08-02&lt;/commissioned&gt;&lt;previous_name&gt;Bon Espoir&lt;/previous_name&gt;&lt;notes&gt;IMO7024550, built 1971 and renamed many times. Operated by Chase Seismic Surveys&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218642519000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="95"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/48LB</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>La Superba</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;ICGK&lt;/callsign&gt;&lt;class&gt;vessel of opportunity on fixed route&lt;/class&gt;&lt;commissioned&gt;2002&lt;/commissioned&gt;&lt;notes&gt;IMO 9214276, Built 2002, Length 211.5m, Passenger/Ro-Ro Ferry&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217505068000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="96"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/58LA</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Lance</string> 
@@ -1137,14 +2440,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="45"> 
+  <void index="97"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/35LU</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/353U</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Le Fougueux</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;pennant&gt;P641&lt;/pennant&gt;&lt;class&gt;naval vessel&lt;/class&gt;&lt;commissioned&gt;1955-07-21&lt;/commissioned&gt;&lt;decommissioned&gt;1975-07&lt;/decommissioned&gt;&lt;notes&gt;Fishery protection vessel.  Half scrapped in 1975 before being adopted by Dutch boy scouts who used her until 2001.  Subsequently restored as a historic warship.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217509753000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="98"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/35LU</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Le Suroit</string> 
@@ -1162,14 +2490,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="46"> 
+  <void index="99"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74NB</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74NB</string> 
     </void> 
     <void property="entryTerm"> 
      <string>MV Bon Entente</string> 
@@ -1187,14 +2515,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="47"> 
+  <void index="100"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74GS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74GS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>MV Dawn Sky</string> 
@@ -1215,43 +2543,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="48"> 
+  <void index="101"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/740A</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/740A</string> 
     </void> 
     <void property="entryTerm"> 
      <string>MV Eastella</string> 
     </void> 
     <void property="entryTermDef"> 
-     <string>&lt;class&gt;research vessel&lt;/class&gt;
-&lt;commissioned&gt;1988-01-13&lt;/commissioned&gt;
-&lt;decommissioned&gt;1990-12-31&lt;/decommissioned&gt;
-&lt;previous_name&gt;Falklands Right, G.A. Reay, Arctic Privateer&lt;/previous_name&gt;
-&lt;notes&gt;Oceanographic research vessel built in 1968 as Arctic Privateer.  Renamed RV G.A.Reay 9 April 1985 until 16 Dec 1986 when she became Falklands Right.  Renamed Eastella 13 Jan 1988.  Renamed Falklands Protector 31 Dec 1990.  Sold, re-registered in Malta and renamed Aquanymph (3 May 1993 til 31 Jan 1996) Sold and renamed Ocean Breeze 1 Feb 1996 (Belize).  Broken on 29 Mar 2001 in India.&lt;/notes&gt;</string> 
+     <string>&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1988-01-13&lt;/commissioned&gt;&lt;decommissioned&gt;1990-12-31&lt;/decommissioned&gt;&lt;previous_name&gt;Falklands Right, G.A. Reay, Arctic Privateer&lt;/previous_name&gt;&lt;notes&gt;Oceanographic research vessel built in 1968 as Arctic Privateer.  Renamed RV G.A.Reay 9 April 1985 until 16 Dec 1986 when she became Falklands Right.  Renamed Eastella 13 Jan 1988.  Renamed Falklands Protector 31 Dec 1990.  Sold, re-registered in Malta and renamed Aquanymph (3 May 1993 til 31 Jan 1996) Sold and renamed Ocean Breeze 1 Feb 1996 (Belize).  Broken on 29 Mar 2001 in India.&lt;/notes&gt;</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1197375472000</long> 
+        <long>1218703133000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="49"> 
+  <void index="102"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74GT</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74GT</string> 
     </void> 
     <void property="entryTerm"> 
      <string>MV Gorsethorn</string> 
@@ -1272,14 +2596,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="50"> 
+  <void index="103"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74MR</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74MR</string> 
     </void> 
     <void property="entryTerm"> 
      <string>MV Mara</string> 
@@ -1301,14 +2625,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="51"> 
+  <void index="104"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74WT</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74WT</string> 
     </void> 
     <void property="entryTerm"> 
      <string>MV Whitethorn</string> 
@@ -1331,14 +2655,89 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="52"> 
+  <void index="105"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/33H3</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/11AE</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Maersk Constantia</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;ONAV&lt;/callsign&gt;&lt;class&gt;ship of opportunity&lt;/class&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518428000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="106"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/067A</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Maersk Damascus</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;DAWC&lt;/callsign&gt;&lt;class&gt;ship of opportunity&lt;/class&gt;&lt;commissioned&gt;2002&lt;/commissioned&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518058000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="107"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/067B</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Maersk Denton</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;DNIC&lt;/callsign&gt;&lt;class&gt;ship of opportunity&lt;/class&gt;&lt;commissioned&gt;2002&lt;/commissioned&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518084000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="108"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/33H3</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Marcus G. Langseth</string> 
@@ -1356,14 +2755,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="53"> 
+  <void index="109"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/73AA</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/73AA</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Mare Nigrum</string> 
@@ -1381,14 +2780,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="54"> 
+  <void index="110"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/35MF</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/35MF</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Marion Dufresne</string> 
@@ -1406,14 +2805,89 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="55"> 
+  <void index="111"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/318M</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/3230</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Maurice Ewing</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;RV&lt;/title&gt;&lt;callsign&gt;WLDZ&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;previous_name&gt;Bernier&lt;/previous_name&gt;&lt;commissioned&gt;1988&lt;/commissioned&gt;&lt;decommissioned&gt;2005&lt;/decommissioned&gt;&lt;IMO&gt;8203153&lt;/IMO&gt;&lt;notes&gt;Built 1983 for Petro Canada as seismic survey ship, christened Bernier. Sold 1988 to Columbia University, renamed Maurice Ewing and refit for general research, operated by Lamont-Doherty Earth Observatory. Titled 1995 to National Science Foundation. Sold 2005 to Western Geophysical. Length 237 feet. IOC Ship Code 3230. WOD Ship Code 3693.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218794916000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="112"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06MR</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Meerkatze</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;DBFM&lt;/callsign&gt;&lt;commissioned&gt;1977-12-09&lt;/commissioned&gt;&lt;notes&gt;Built 1977. Length 77m, IMO 7600574 confirmed active in August 2007&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518262000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="113"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06AI</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Meerkatze II</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;DBFO&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1972-11-01&lt;/commissioned&gt;&lt;decommissioned&gt;1977-12-31&lt;/decommissioned&gt;&lt;previous_name&gt;Anton Dohrn I&lt;/previous_name&gt;&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518168000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="114"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/318M</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Melville</string> 
@@ -1431,14 +2905,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="56"> 
+  <void index="115"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/29MO</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/29MO</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Miguel Oliver</string> 
@@ -1456,14 +2930,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="57"> 
+  <void index="116"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/49NZ</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/49NZ</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Mirai</string> 
@@ -1481,14 +2955,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="58"> 
+  <void index="117"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/33RO</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/316O</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>NOAA Oregon II</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;NOAA&lt;/title&gt;&lt;callsign&gt;WTDO&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1977-03-17&lt;/commissioned&gt;&lt;notes&gt;NOAA ship&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518783000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="118"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/33RO</string> 
     </void> 
     <void property="entryTerm"> 
      <string>NOAA Ronald H. Brown</string> 
@@ -1506,14 +3005,89 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="59"> 
+  <void index="119"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/32NM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/64NA</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Navicula</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;PGCT&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1980&lt;/commissioned&gt;&lt;notes&gt;: S.I. vessel number:5092, Gross tonnage:129, Netto tonnage:38, Year of Build:1980, Length:23.87 metres, Width: 7 metres, Moulded depth:2.40 metres, Draft: 1.03 metres, Propulsion:284  Kw&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218642522000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="120"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/HRNA</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Navicula</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;9A8520&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;2002&lt;/commissioned&gt;&lt;notes&gt;IOF Croatia, Institute of Oceanography and Fisheries research vessel.  Built 2002, callsign 9A8520, length 10.8 m, live as at June 2007.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518659000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="121"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/64NR</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Neeltje</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;PGEK&lt;/callsign&gt;&lt;class&gt;fishing vessel&lt;/class&gt;&lt;notes&gt;Built 1987, length 45.02m&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218642552000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="122"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/32NM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>New Horizon</string> 
@@ -1531,36 +3105,64 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="60"> 
+  <void index="123"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74OC</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/77UT</string> 
     </void> 
     <void property="entryTerm"> 
-     <string>Ocean Crest</string> 
+     <string>Norrbylabb 1</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;notes&gt;Small boat operated by Umea.  Initially entered under the name Uttern but this has subsequently been revealed as a misunderstanding and so the name on this records has been changed.&lt;/notes&gt;</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1197375472000</long> 
+        <long>1217945848000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="61"> 
+  <void index="124"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/32OC</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74OC</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Ocean Crest</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;RV&lt;/title&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;notes&gt;Swansea University research vessel operating in the 1970s and 1980s.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217506061000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="125"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/32OC</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Oceanus</string> 
@@ -1578,14 +3180,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="62"> 
+  <void index="126"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/VUOT</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/VUOT</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Oil Tempest</string> 
@@ -1603,14 +3205,64 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="63"> 
+  <void index="127"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/32PE</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/58O3</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Oscar Sund</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;JXNI&lt;/callsign&gt;&lt;commissioned&gt;1993&lt;/commissioned&gt;&lt;decommissioned&gt;2006&lt;/decommissioned&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218642391000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="128"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/58O1</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Oscar Sund (57-??)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;commissioned&gt;1957&lt;/commissioned&gt;&lt;previous_name&gt;Johan Hjort&lt;/previous_name&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218642387000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="129"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/32PE</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Pelican</string> 
@@ -1628,14 +3280,89 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="64"> 
+  <void index="130"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/32P0</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06P3</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Planet</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;DRLA&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;2005-05-31&lt;/commissioned&gt;&lt;notes&gt;Built 2004, IMO 9245732, length 73 meters, Owned by the German Navy Research Institute (FWG), Kiel.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518308000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="131"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06P2</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Planet (67-81)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;DSCZ&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1967-04-15&lt;/commissioned&gt;&lt;decommissioned&gt;1981-12-31&lt;/decommissioned&gt;&lt;notes&gt;Length 80.6m. Same ship as 06PC, change of governance and callsign on reunification.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518301000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="132"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06PC</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Planet (82-04)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;DRAY&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1982-01-01&lt;/commissioned&gt;&lt;decommissioned&gt;2004-03-31&lt;/decommissioned&gt;&lt;notes&gt;Length 80.6m. Owned by the German Navy Research Institute (FWG), Kiel. Same ship as 06P2, change of governance and callsign on reunification.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518315000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="133"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/32P0</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Point Sur</string> 
@@ -1653,14 +3380,89 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="65"> 
+  <void index="134"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/35PK</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/58PB</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Polar Bird</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;LAVT4&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;notes&gt;Chartered several times for the Australian Antarctic Programme&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218642455000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="135"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/58P3</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Polarfront</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;LDWR&lt;/callsign&gt;&lt;commissioned&gt;1976&lt;/commissioned&gt;&lt;notes&gt;Norwegian ocean weather ship.  Replaced Polarfront I and Polarfront II occupying OWS Mike.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218642451000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="136"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/35PP</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Pourquoi Pas</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;decommissioned&gt;1936&lt;/decommissioned&gt;&lt;notes&gt;Active until 1936, then sunk near Iceland. &lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217509925000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="137"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/35PK</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Pourquoi pas?</string> 
@@ -1678,14 +3480,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="66"> 
+  <void index="138"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74PS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/15PV</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Professor A. Valkanov</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;LZTG&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;notes&gt;Institute of Fisheries and Aquaculture vessel built 1979, length 34m&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518439000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="139"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74PS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RL Sepia</string> 
@@ -1712,40 +3539,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="67"> 
+  <void index="140"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/740F</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/740F</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RL Tamaris</string> 
     </void> 
     <void property="entryTermDef"> 
-     <string>&lt;title&gt;RL&lt;/title&gt;&lt;callsign&gt;2SWL&lt;/callsign&gt;
-&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1974&lt;/commissioned&gt;&lt;decommissioned&gt;2005&lt;/decommissioned&gt;&lt;notes&gt;NERC/Plymouth Marine Laboratory estuarine research vessel, sold at end of 2005.&lt;/notes&gt;</string> 
+     <string>&lt;title&gt;RL&lt;/title&gt;&lt;callsign&gt;2SWL&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1974&lt;/commissioned&gt;&lt;decommissioned&gt;2005&lt;/decommissioned&gt;&lt;notes&gt;NERC/Plymouth Marine Laboratory estuarine research vessel, sold at end of 2005.&lt;/notes&gt;</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1197375472000</long> 
+        <long>1218703171000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="68"> 
+  <void index="141"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74CH</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74CH</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RRS Challenger</string> 
@@ -1770,14 +3596,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="69"> 
+  <void index="142"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74AB</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74AB</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RRS Charles Darwin</string> 
@@ -1798,14 +3624,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="70"> 
+  <void index="143"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74E3</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74E3</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RRS Discovery</string> 
@@ -1831,14 +3657,70 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="71"> 
+  <void index="144"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74EE</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74DI</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>RRS Discovery (25-36)</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>DI</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;RRS&lt;/title&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;decommissioned&gt;1936&lt;/decommissioned&gt;&lt;notes&gt;Original vessel used by Scott from 1901-1904 as &apos;Discovery&apos;. Became &apos;RRS Discovery&apos; after a refit in 1924 and worked in the South Seas 1925-27 and 1929-31.  Withdrawn in 19&lt;title&gt;RRS&lt;/title&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;decommissioned&gt;1936&lt;/decommissioned&gt;&lt;notes&gt;Original vessel used by Scott from 1901-1904 as &apos;Discovery&apos;. Became &apos;RRS Discovery&apos; after a refit in 1924 and worked in the South Seas 1925-27 and 1929-31.  Withdrawn in 1936.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218703652000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="145"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74DS</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>RRS Discovery II</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>DS</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;RRS&lt;/title&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1930&lt;/commissioned&gt;&lt;decommissioned&gt;1960&lt;/decommissioned&gt;&lt;notes&gt;National Institute of Oceanography research vessel operating from the 1930s until the 1960s.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218703866000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="146"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74EE</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RRS Ernest Shackleton</string> 
@@ -1859,14 +3741,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="72"> 
+  <void index="147"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74GG</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74GG</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RRS Frederick Russell</string> 
@@ -1875,30 +3757,26 @@
      <string>FR</string> 
     </void> 
     <void property="entryTermDef"> 
-     <string>&lt;class&gt;research vessel&lt;/class&gt;
-&lt;commissioned&gt;1982-01-09&lt;/commissioned&gt;
-&lt;decommissioned&gt;&lt;1988-05-06/decommissioned&gt;
-&lt;previous_name&gt;Gravignez&lt;/previous_name&gt;
-&lt;notes&gt;UK research vessel built 1974 as the ship Gravignez, renamed Frederick Russell 9 Jan 1982 until 14 Oct 1988 when she became Lough Foyle (til 23 Jun 2005).  Subsequently became Kommandor Iona 24 Jun 2005, still active as at Sept 2006, owned by Hays.&lt;/notes&gt;</string> 
+     <string>&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1982-01-09&lt;/commissioned&gt;&lt;decommissioned&gt;1988-05-06&lt;/decommissioned&gt;&lt;previous_name&gt;Gravignez&lt;/previous_name&gt;&lt;notes&gt;UK research vessel built 1974 as the ship Gravignez, renamed Frederick Russell 9 Jan 1982 until 14 Oct 1988 when she became Lough Foyle (til 23 Jun 2005).  Subsequently became Kommandor Iona 24 Jun 2005, still active as at Sept 2006, owned by Hays.&lt;/notes&gt;</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1197375472000</long> 
+        <long>1218793051000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="73"> 
+  <void index="148"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74JC</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74JC</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RRS James Clark Ross</string> 
@@ -1923,14 +3801,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="74"> 
+  <void index="149"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/740H</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/740H</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RRS James Cook</string> 
@@ -1951,14 +3829,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="75"> 
+  <void index="150"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74JB</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74JB</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RRS John Biscoe</string> 
@@ -1982,14 +3860,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="76"> 
+  <void index="151"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74MJ</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74MJ</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RRS John Murray</string> 
@@ -2010,14 +3888,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="77"> 
+  <void index="152"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/740K</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/740K</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RRS Shackleton (57-70)</string> 
@@ -2026,30 +3904,26 @@
      <string>Shack</string> 
     </void> 
     <void property="entryTermDef"> 
-     <string>&lt;title&gt;RRS&lt;/title&gt;
-&lt;class&gt;research vessel&lt;/class&gt;
-&lt;decommissioned&gt;1970&lt;/decommissioned&gt;
-&lt;notes&gt;British Antarctic Survey base supply vessel from 1957 until it was converted into NERC research vessel in 1970.&lt;/notes&gt;
-</string> 
+     <string>&lt;title&gt;RRS&lt;/title&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;decommissioned&gt;1970&lt;/decommissioned&gt;&lt;notes&gt;British Antarctic Survey base supply vessel from 1957 until it was converted into NERC research vessel in 1970.&lt;/notes&gt;</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1197375472000</long> 
+        <long>1218703227000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="78"> 
+  <void index="153"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/77AR</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/77AR</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Argos</string> 
@@ -2067,14 +3941,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="79"> 
+  <void index="154"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/745R</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/745R</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Calanus</string> 
@@ -2100,14 +3974,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="80"> 
+  <void index="155"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/740I</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/740I</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Calanus (47-80)</string> 
@@ -2128,14 +4002,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="81"> 
+  <void index="156"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74E9</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74E9</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Cefas Endeavour</string> 
@@ -2162,14 +4036,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="82"> 
+  <void index="157"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74CZ</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74CZ</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Cirolana</string> 
@@ -2178,29 +4052,26 @@
      <string>CIR</string> 
     </void> 
     <void property="entryTermDef"> 
-     <string>&lt;title&gt;RV&lt;/title&gt;
-&lt;callsign&gt;GNAM&lt;/callsign&gt;
-&lt;class&gt;research vesel&lt;/class&gt;
-&lt;notes&gt;Centre for Environment, Fisheries and Aquaculture Science (CEFAS) research vessel.&lt;/notes&gt;</string> 
+     <string>&lt;title&gt;RV&lt;/title&gt;&lt;callsign&gt;GNAM&lt;/callsign&gt;&lt;class&gt;research vesel&lt;/class&gt;&lt;notes&gt;Centre for Environment, Fisheries and Aquaculture Science (CEFAS) research vessel.&lt;/notes&gt;</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1197375472000</long> 
+        <long>1218703375000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="83"> 
+  <void index="158"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74CN</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74CN</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Clione</string> 
@@ -2223,14 +4094,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="84"> 
+  <void index="159"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74TC</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74TC</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Colonel Templer</string> 
@@ -2253,14 +4124,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="85"> 
+  <void index="160"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74CX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74CX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Corella</string> 
@@ -2281,14 +4152,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="86"> 
+  <void index="161"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/740J</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/740J</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Corystes</string> 
@@ -2297,26 +4168,26 @@
      <string>CRY</string> 
     </void> 
     <void property="entryTermDef"> 
-     <string>Former CEFAS vessel sold to DARD in 2004 who continued to operate her under the same name.  Still chartered by CEFAS from time to time</string> 
+     <string>&lt;title&gt;RV&lt;/title&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;2004&lt;/commissioned&gt;&lt;notes&gt;Former CEFAS vessel sold to AFBI (Northern Ireland) in 2004 who continued to operate her under the same name.  Still chartered by CEFAS from time to time.&lt;/notes&gt;</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1197375472000</long> 
+        <long>1218792890000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="87"> 
+  <void index="162"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74RY</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74RY</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Corystes (88-04)</string> 
@@ -2341,14 +4212,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="88"> 
+  <void index="163"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74EF</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74EF</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Edward Forbes</string> 
@@ -2363,14 +4234,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="89"> 
+  <void index="164"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74AE</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74AE</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Farnella</string> 
@@ -2388,14 +4259,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="90"> 
+  <void index="165"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74GD</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74GD</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV G A Reay</string> 
@@ -2417,14 +4288,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="91"> 
+  <void index="166"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/58G2</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/48DP</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>RV G. Dalla Porta</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;RV&lt;/title&gt;&lt;callsign&gt;IYVQ&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;notes&gt;ISMAR CNR research vessel length 35m&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217505068000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="167"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/58G2</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV G.O. Sars</string> 
@@ -2442,14 +4338,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="92"> 
+  <void index="168"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/49HH</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/49HH</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Hakuho Maru</string> 
@@ -2467,14 +4363,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="93"> 
+  <void index="169"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/58JM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/58JM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Jan Mayen</string> 
@@ -2492,14 +4388,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="94"> 
+  <void index="170"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/58J3</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/58J3</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Johan Hjort</string> 
@@ -2517,14 +4413,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="95"> 
+  <void index="171"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/76KX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/76KX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Ke Xue San Hao</string> 
@@ -2542,14 +4438,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="96"> 
+  <void index="172"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74LG</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74LG</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Lough Foyle</string> 
@@ -2570,14 +4466,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="97"> 
+  <void index="173"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74LR</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74LR</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Lowland Searcher</string> 
@@ -2595,14 +4491,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="98"> 
+  <void index="174"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/49NB</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/49NB</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Natsushima</string> 
@@ -2620,14 +4516,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="99"> 
+  <void index="175"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/48AZ</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/48AZ</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV OGS Explora</string> 
@@ -2645,14 +4541,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="100"> 
+  <void index="176"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/64PE</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/64PE</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Pelagia</string> 
@@ -2670,14 +4566,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="101"> 
+  <void index="177"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74P2</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/36PH</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>RV Philia</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;RV&lt;/title&gt;&lt;callsign&gt;SW2204&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1986&lt;/commissioned&gt;&lt;notes&gt;IMO8834342&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518492000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="178"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74P2</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Prince Madog</string> 
@@ -2698,14 +4619,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="102"> 
+  <void index="179"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74PD</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74PD</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Prince Madog (68-01)</string> 
@@ -2731,39 +4652,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="103"> 
+  <void index="180"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74SR</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74SR</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Sarsia</string> 
     </void> 
     <void property="entryTermDef"> 
-     <string>callSign HO3952</string> 
+     <string>&lt;title&gt;RV&lt;/title&gt;&lt;callsign&gt;HO3952&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1968&lt;/commissioned&gt;&lt;decommissioned&gt;1982&lt;/decommissioned&gt;&lt;notes&gt;Marine Biological Association (Plymouth) inshore research vessel.&lt;/notes&gt;</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1197375472000</long> 
+        <long>1218794322000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="104"> 
+  <void index="181"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74S9</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74S9</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Sea Vigil</string> 
@@ -2784,14 +4705,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="105"> 
+  <void index="182"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74S5</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74S5</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Seol Mara</string> 
@@ -2809,14 +4730,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="106"> 
+  <void index="183"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/09SS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/09SS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Southern Surveyor</string> 
@@ -2834,42 +4755,64 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="107"> 
+  <void index="184"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/740G</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/740G</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Squilla</string> 
     </void> 
     <void property="entryTermDef"> 
-     <string>&lt;class&gt;research vesse&lt;class&gt;research vessel&lt;/class&gt;
-&lt;callsign&gt;GTHM&lt;/callsign&gt;
-&lt;decommissioned&gt;2004&lt;/decommissioned&gt;
-&lt;notes&gt;NERC/PML coastal research vessel, sold in 2004&lt;/notes&gt;</string> 
+     <string>&lt;callsign&gt;GTHM&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;decommissioned&gt;2004&lt;/decommissioned&gt;&lt;notes&gt;NERC/PML coastal research vessel, sold in 2004&lt;/notes&gt;</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1197375472000</long> 
+        <long>1218794436000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="108"> 
+  <void index="185"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74WN</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/48UN</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>RV Universitatis</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;RV&lt;/title&gt;&lt;callsign&gt;IZVM&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;notes&gt;CoNISMa research vessel length 44.8m, hull reference IMO9262077.  Active as of 2007-06.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217505068000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="186"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74WN</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Water Guardian</string> 
@@ -2895,14 +4838,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="109"> 
+  <void index="187"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/49YP</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/49YP</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Yokosuka</string> 
@@ -2920,14 +4863,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="110"> 
+  <void index="188"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/64ZF</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/64ZF</string> 
     </void> 
     <void property="entryTerm"> 
      <string>RV Zirfaea</string> 
@@ -2945,14 +4888,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="111"> 
+  <void index="189"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/32QU</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/31RD</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Robert D. Conrad</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;RV&lt;/title&gt;&lt;callsign&gt;WHBA&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1962&lt;/commissioned&gt;&lt;decommissioned&gt;1989&lt;/decommissioned&gt; &lt;IMO&gt;7742140&lt;/IMO &gt; &lt;notes&gt;Built 1962 by U.S. Navy as oceanographic research vessel (AGOR-3), operated by Lamont-Doherty Earth Observatory of Columbia University. Retrofitted 1974 with multi-channel seismic (MCS) system. 209 feet. IOC Ship Code 31RD. WOD Ship Code 1965. Changed R. CONRAD to ROBERT D. CONRAD&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518679000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="190"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/32QU</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Robert Gordon Sproul</string> 
@@ -2970,14 +4938,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="112"> 
+  <void index="191"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/33RR</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/33RR</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Roger Revelle</string> 
@@ -2995,14 +4963,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="113"> 
+  <void index="192"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74RT</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74RT</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Russa Taign</string> 
@@ -3020,14 +4988,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="114"> 
+  <void index="193"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/29AH</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/54A5</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Safmarine Zambezi</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;A8CE9&lt;/callsign&gt;&lt;class&gt;vessel of opportunity&lt;/class&gt;&lt;commissioned&gt;2002&lt;/commissioned&gt;&lt;IMO&gt;9239898&lt;/IMO&gt;&lt;notes&gt;Built August 2002&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218795430000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="194"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/29AH</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Sarmiento de Gamboa</string> 
@@ -3045,14 +5038,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="115"> 
+  <void index="195"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/33H6</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/58GT</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Sarsen</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;LLZG&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;2003-02-10&lt;/commissioned&gt;&lt;previous_name&gt;G.O. Sars&lt;/previous_name&gt;&lt;notes&gt;Operated from 1970 until 2003 by IMR Bergen under the name G.O. Sars&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218642306000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="196"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/33H6</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Savannah</string> 
@@ -3070,14 +5088,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="116"> 
+  <void index="197"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/VUSH</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/VUSH</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Schaartor</string> 
@@ -3095,14 +5113,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="117"> 
+  <void index="198"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/33SW</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/33SW</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Seward Johnson</string> 
@@ -3120,14 +5138,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="118"> 
+  <void index="199"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/74S8</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/47SK</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Shikmona</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;4XIY&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1963&lt;/commissioned&gt;&lt;notes&gt;Research vessel built in 1963. Flag: Israel, Port Registry: Haifa, Deadweight: 172 tonnes, Length: 27.13m, Beam: 6.86m, Draft: 3.66m, MMSI: 428000117&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1220264028000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="200"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/74S8</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Sir John Murray</string> 
@@ -3145,14 +5188,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="119"> 
+  <void index="201"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/49TD</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/49TD</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Tansei Maru</string> 
@@ -3170,14 +5213,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="120"> 
+  <void index="202"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/29TR</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/29TR</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Teresa Rosa</string> 
@@ -3195,14 +5238,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="121"> 
+  <void index="203"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/PATE</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/PATE</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Terschelling</string> 
@@ -3220,14 +5263,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="122"> 
+  <void index="204"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/35HT</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/35HT</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Thalassa</string> 
@@ -3245,14 +5288,64 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="123"> 
+  <void index="205"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/3250</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/48TH</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Thetis</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;IJQS&lt;/callsign&gt;&lt;commissioned&gt;1986&lt;/commissioned&gt;&lt;decommissioned&gt;2007-08&lt;/decommissioned&gt;&lt;notes&gt;IMO 8417833 (Lloyds), Built 1986, owned by CNR, sunk in Aug. 2007&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217946162000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="206"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/77TH</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Thetis</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;SEPM&lt;/callsign&gt;&lt;class&gt;fishing vessel&lt;/class&gt;&lt;commissioned&gt;1961&lt;/commissioned&gt;&lt;decommissioned&gt;1984&lt;/decommissioned&gt;&lt;notes&gt;Swedish Fisheries Board trawler sold in autumn 1984 and sank the year after (1985-10-24).  165 GRT; length 31m&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217945841000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="207"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/3250</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Thomas G. Thompson</string> 
@@ -3270,14 +5363,89 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="124"> 
+  <void index="208"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/48UR</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/64T2</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Tridens</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;PBVO&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1992&lt;/commissioned&gt;&lt;notes&gt;Netherlands government ship length 73m hull number IMO8821852.  Active as of 2007-06&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218642579000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="209"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/64T0</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Tridens (68-91)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;PBUG&lt;/callsign&gt;&lt;commissioned&gt;1968&lt;/commissioned&gt;&lt;decommissioned&gt;1991-04-15&lt;/decommissioned&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218642556000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="210"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/64T1</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Tridens I</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;PIAO&lt;/callsign&gt;&lt;commissioned&gt;1991-04-15&lt;/commissioned&gt;&lt;previous_name&gt;Tridens&lt;/previous_name&gt;&lt;notes&gt;Built 1967 or 1968 and operated under the name Tridens until sold and renamed in 1991&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218642575000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="211"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/48UR</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Urania</string> 
@@ -3295,14 +5463,115 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="125"> 
+  <void index="212"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/29VE</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06UN</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Uthörn</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;DBCH&lt;/callsign&gt;&lt;commissioned&gt;1982&lt;/commissioned&gt;&lt;notes&gt;Length 30.5m. From Lloyds IMO 8100648&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518366000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="213"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06U1</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Uthörn (47-82)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;DBFN&lt;/callsign&gt;&lt;commissioned&gt;1947-01-01&lt;/commissioned&gt;&lt;decommissioned&gt;1982-08-20&lt;/decommissioned&gt;&lt;notes&gt;Length 24.02m&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518351000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="214"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/LTVE</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Vejas</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;callsign&gt;LYDS&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1993-01-23&lt;/commissioned&gt;&lt;previous_name&gt;Lev Titov&lt;/previous_name&gt;&lt;notes&gt;Info from Lloyds: IMO number 7833016, Title RV, built 1980. Previous name Lev Titov with U.S.S.R. flag from 16 Dec. 1980-20 Dec. 1991, then name change to Vejas 01 Dec. 1992, and Russian flag from 17 July 1992 - 22 January 1993.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1218642741000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="215"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/31VE</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Vema</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;RV&lt;/title&gt;&lt;callsign&gt;J8RU&lt;/callsign&gt; &lt;class&gt;research vessel&lt;/class&gt;&lt;previous_name&gt;Hussar&lt;/previous_name&gt; &lt;commissioned&gt;1953&lt;/commissioned&gt;&lt;decommissioned&gt;1981&lt;/decommissioned&gt;&lt;IMO&gt;7738383&lt;/IMO&gt;&#13;
+&lt;notes&gt;Built 1923 for E. F. Hutton as private yacht, christened Hussar. Sold 1934 to G. Ungar Vetlesen, renamed Vema. Appropriated by U.S. government for coastal patrol during WWII, later converted to barracks/training for merchant marine. Sold 1953 to Columbia University, converted to research vessel and operated by Lamont-Doherty Earth Observatory, retired 1981 after 1,225,000 nautical miles (world record). Sold 1982 to Windjammer Barefoot Cruises, renamed Mandalay. Length 202 feet. IOC Ship Code 18VM. WOD Ship Code 2110.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518763000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="216"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/29VE</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Vizconde de Eza</string> 
@@ -3320,14 +5589,64 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="126"> 
+  <void index="217"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/06NI</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06W1</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Walther Herwig I</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;FFS&lt;/title&gt;&lt;callsign&gt;DBFR&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1963-10-28&lt;/commissioned&gt;&lt;decommissioned&gt;1972-10-16&lt;/decommissioned&gt;&lt;notes&gt;Used by Federal Research Centre for Fisheries. Renamed Anton Dohrn II in 1972. From Lloyds: IMO 5429469 - Became UK Lancella/Falklands Right/Brucella.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217421279000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="218"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06W2</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Walther Herwig II</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;FFS&lt;/title&gt;&lt;callsign&gt;DBFP&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;1972-10-30&lt;/commissioned&gt;&lt;decommissioned&gt;1994-01-07&lt;/decommissioned&gt;&lt;notes&gt;Used by Federal Research Centre for Fisheries. From Lloyds: IMO 7211438 - Became Norwegian in 1997.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1217518381000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="219"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/06NI</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Walther Herwig III</string> 
@@ -3345,14 +5664,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 
-  <void index="127"> 
+  <void index="220"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C174/10/32WC</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/32WC</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Wecoma</string> 
@@ -3370,7 +5689,32 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C174/10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="221"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C174/18/11ZW</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Zeeleeuw</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>&lt;title&gt;RV&lt;/title&gt;&lt;callsign&gt;ORBB&lt;/callsign&gt;&lt;class&gt;research vessel&lt;/class&gt;&lt;commissioned&gt;2000-11-21&lt;/commissioned&gt;&lt;IMO&gt;8424903&lt;/IMO&gt;&lt;notes&gt;Former pilot tender built 1977 and refitted as a research vessel in 1999-2000. Operated by Flanders Marine Institute. Length 56.6m.&lt;/notes&gt;</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1219303314000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C174/18</string> 
     </void> 
    </object> 
   </void> 

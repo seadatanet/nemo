@@ -56,6 +56,11 @@ public class EditConversion extends Thread {
 	 * Chaine lue à retourner en cas d'erreur
 	 */
 	protected static String _erreurChaine;
+	
+	/**
+	 * Nombre de lignes du fichier lu
+	 */
+	protected static int _totalLigne;
 
 	public void run() {
 
@@ -515,5 +520,13 @@ public class EditConversion extends Thread {
 		}
 
 		return Utils.validFileName(temp);
+	}
+
+	public static int getTotalLigne() {
+		return _totalLigne;
+	}
+
+	public static void setTotalLigne(int ligne) {
+		_totalLigne = ligne;
 	}
 }

@@ -381,7 +381,7 @@ public class ViewFile extends ViewPart {
 
 							JulianDate jDate = new JulianDate(dateOrigine
 									.getTime());
-							System.out.println(jDate.getJour());
+//							System.out.println(jDate.getJour());
 						} catch (Exception ex) {
 
 						}
