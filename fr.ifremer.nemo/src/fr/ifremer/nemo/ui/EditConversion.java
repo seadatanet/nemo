@@ -17,6 +17,7 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
+import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.input.SurveyMedia;
 import fr.ifremer.nemo.output.CDIMappingWriter;
 import fr.ifremer.nemo.output.CDIResumeWriter;
@@ -56,7 +57,7 @@ public class EditConversion extends Thread {
 	 * Chaine lue à retourner en cas d'erreur
 	 */
 	protected static String _erreurChaine;
-	
+
 	/**
 	 * Nombre de lignes du fichier lu
 	 */
@@ -436,23 +437,34 @@ public class EditConversion extends Thread {
 	public static String messageErreur() {
 		String message = "";
 
-		if (getErreurFichier() != null)
-			if (!getErreurFichier().trim().equals(""))
+		if (getErreurFichier() != null) {
+			if (!getErreurFichier().trim().equals("")) {
 				message += Messages.getString("EditConversion.20") + "\t : \t"
 						+ getErreurFichier() + "\r\n";
+			}
+		}
 
-		if (getErreurLigne() != 0)
+		if (getErreurLigne() != 0) {
+			if (getErreurLigne() <= DataModel.stationModel.getNumberOfLines()) {
+				// Si l'erreur se trouve dans l'en-tête de station, la ligne indiquée
+				// n'est pas forcément la bonne, il vaut mieux ne pas l'indiquer
+				return "";
+			}
 			message += Messages.getString("EditConversion.21") + "\t : \t"
 					+ getErreurLigne() + "\r\n";
+		}
 
-		if (getErreurChaine() != null)
-			if (!getErreurChaine().trim().equals(""))
+		if (getErreurChaine() != null) {
+			if (!getErreurChaine().trim().equals("")) {
 				message += Messages.getString("EditConversion.22") + "\t : \t"
 						+ getErreurChaine();
+			}
+		}
 
-		if (!message.equals(""))
+		if (!message.equals("")){
 			message = "\r\n" + Messages.getString("EditConversion.23") + "\r\n"
 					+ message;
+		}
 
 		return message;
 	}

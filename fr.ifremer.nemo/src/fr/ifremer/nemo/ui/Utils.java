@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.config.Configuration;
+import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.input.HeaderFragment;
 import fr.ifremer.nemo.input.InputModel;
 import fr.ifremer.nemo.util.Messages;
@@ -1309,7 +1310,13 @@ public class Utils {
 //			flagTables.add(tmpTable);
 //		}
 //		configuration.setFlagTables(flagTables);
-		configuration.setFlagTables(OptionsAction._flagTables);
+		configuration.setDefaultFlagTable(OptionsAction.getDefaultCode());
+		ArrayList<FlagTable> flagTables = new ArrayList<FlagTable>();
+		for (int i = 0; i < OptionsAction.getFlagTables().size(); i++) {
+			FlagTable flagTable = new FlagTable(OptionsAction.getFlagTables().get(i));
+			flagTables.add(flagTable);
+		}
+		configuration.setFlagTables(flagTables);
 		
 		// Enregistrement de la configuration
 		configuration.save();

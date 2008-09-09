@@ -10,13 +10,13 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridLayout;
@@ -26,8 +26,12 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
@@ -40,8 +44,9 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 
 import fr.ifremer.nemo.config.EdmoHandler;
+import fr.ifremer.nemo.config.Flag;
+import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.flag.FlagTable;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
@@ -76,7 +81,9 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 	public static Table tabFlagTable, tabFlag;
 
-	public static TableViewer tbvFlagTable, tbvFlag;
+	public static String _defaultCode = "";
+
+	public static FlagTable _flagTable = new FlagTable();
 
 	public static ArrayList<FlagTable> _flagTables = new ArrayList<FlagTable>();
 
@@ -110,6 +117,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		shelloptions.setText(Messages.getString("OptionsAction.3")); //$NON-NLS-1$
 		shelloptions.setLayout(new GridLayout());
 
+		_flagTables.clear();
 		for (int i = 0; i < Utils.configuration.getFlagTables().size(); i++) {
 			FlagTable flagTable = new FlagTable(Utils.configuration
 					.getFlagTables().get(i));
@@ -647,8 +655,8 @@ public class OptionsAction extends Action implements ISelectionListener,
 		createTableFlagTable();
 
 		// Création du tableau des correspondaces
-		createTableFlag();
-
+		tabFlag = new Table(grpFlag, SWT.FULL_SELECTION | SWT.BORDER);
+		Flag.createTableFlag(tabFlag, _flagTable, false);
 	}
 
 	public void createTableFlagTable() {
@@ -662,8 +670,18 @@ public class OptionsAction extends Action implements ISelectionListener,
 		tableColumn1.setText(Messages.getString("OptionsAction.34")); //$NON-NLS-1$
 
 		TableColumn tableColumn2 = new TableColumn(tabFlagTable, SWT.NONE);
-		tableColumn2.setWidth(210);
-		tableColumn2.setText(Messages.getString("OptionsAction.35")); //$NON-NLS-1$		
+		tableColumn2.setWidth(200);
+		tableColumn2.setText(Messages.getString("OptionsAction.35")); //$NON-NLS-1$	
+
+		// Menu contextuel
+		Menu menu = new Menu(tabFlagTable.getShell(), SWT.POP_UP);
+		MenuItem itemDefault = new MenuItem(menu, SWT.NONE);
+		itemDefault.setText(Messages.getString("OptionsAction.40"));
+		MenuItem itemAdd = new MenuItem(menu, SWT.NONE);
+		itemAdd.setText(Messages.getString("OptionsAction.38")); //$NON-NLS-1$
+		MenuItem itemRemove = new MenuItem(menu, SWT.NONE);
+		itemRemove.setText(Messages.getString("OptionsAction.39")); //$NON-NLS-1$
+		tabFlagTable.setMenu(menu);
 
 		final TableEditor editor = new TableEditor(tabFlagTable);
 		editor.horizontalAlignment = SWT.LEFT;
@@ -672,13 +690,9 @@ public class OptionsAction extends Action implements ISelectionListener,
 		tabFlagTable.addMouseListener(new MouseAdapter() {
 			public void mouseDown(MouseEvent event) {
 				// On affiche les flags correspondants
-				TableItem[] tabItem = new TableItem[tabFlagTable
-						.getColumnCount()];
-				tabItem = tabFlagTable.getSelection();
-				fillFlag(tabItem[0].getText());
-
-				final FlagTable flagTable = FlagTable.getFlagTable(_flagTables,
-						tabItem[0].getText());
+				_flagTable = FlagTable.getFlagTable(_flagTables, tabFlagTable
+						.getSelection()[0].getText());
+				Flag.fillTable(tabFlag, _flagTable);
 
 				// Saisie
 				Control old = editor.getEditor();
@@ -721,10 +735,10 @@ public class OptionsAction extends Action implements ISelectionListener,
 					public void modifyText(ModifyEvent event) {
 						switch (col) {
 						case 0:
-							flagTable.setCode(text.getText());
+							_flagTable.setCode(text.getText());
 							break;
 						case 1:
-							flagTable.setLibelle(text.getText());
+							_flagTable.setLibelle(text.getText());
 							break;
 						default:
 						}
@@ -734,69 +748,80 @@ public class OptionsAction extends Action implements ISelectionListener,
 				});
 			}
 		});
-	}
 
-	public void createTableFlag() {
-		tabFlag = new Table(grpFlag, SWT.FULL_SELECTION);
-		tabFlag.setHeaderVisible(true);
-		tabFlag.setLinesVisible(true);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(tabFlag);
+		// tabFlagTable
+		// .addFocusListener(new org.eclipse.swt.events.FocusListener() {
+		// public void focusGained(org.eclipse.swt.events.FocusEvent e) {
+		//
+		// }
+		//					
+		// public void focusLost(org.eclipse.swt.events.FocusEvent e) {
+		// if (tabFlagTable.getSelection()[0].getText().trim().equals("")) {
+		// String[] buttons = new String[1];
+		// buttons[0] = "OK";
+		// MessageDialog dialog = new MessageDialog(tabFlagTable.getShell(), ""
+		// , null, Messages.getString("OptionsAction.42"),
+		// MessageDialog.WARNING, buttons, 0);
+		// dialog.open();
+		// final Text text = new Text(tabFlagTable, SWT.NONE);
+		// final TableItem item =
+		// tabFlagTable.getItem(tabFlagTable.getSelectionIndex());
+		// text.setForeground(item.getForeground());
+		//
+		// text.setText(item.getText(0));
+		// text.setForeground(item.getForeground());
+		// text.selectAll();
+		// text.setFocus();
+		// }
+		// }
+		// });
 
-		TableColumn flagColumn1 = new TableColumn(tabFlag, SWT.NONE);
-		flagColumn1.setWidth(60);
-		flagColumn1.setText(Messages.getString("OptionsAction.36")); //$NON-NLS-1$
-
-		TableColumn flagColumn2 = new TableColumn(tabFlag, SWT.NONE);
-		flagColumn2.setWidth(210);
-		flagColumn2.setText(Messages.getString("OptionsAction.37")); //$NON-NLS-1$
-
-		final TableEditor editor = new TableEditor(tabFlag);
-		editor.horizontalAlignment = SWT.LEFT;
-		editor.grabHorizontal = true;
-
-		tabFlag.addMouseListener(new MouseAdapter() {
-			public void mouseDown(MouseEvent event) {
-				Control old = editor.getEditor();
-				if (old != null)
-					old.dispose();
-
-				Point pt = new Point(event.x, event.y);
-
-				final TableItem item = tabFlag.getItem(pt);
-				if (item == null) {
-					return;
-				}
-				int column = -1;
-				for (int i = 0, n = tabFlag.getColumnCount(); i < n; i++) {
-					Rectangle rect = item.getBounds(i);
-					if (rect.contains(pt)) {
-						column = i;
-						break;
+		itemDefault.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
+				setDefaultCode(tabFlagTable.getSelection()[0].getText());
+				// Mise en gras du flagtable par défaut
+				
+				Font normal = new Font(Application.display, "", 8, SWT.NORMAL);
+				Font bold = new Font(Application.display, "", 8, SWT.BOLD);
+				
+				for (int i = 0; i < tabFlagTable.getItemCount(); i++) {
+					if (tabFlagTable.getItem(i).getText(0).equals(getDefaultCode())) {
+						tabFlagTable.getItem(i).setFont(bold);
+					} else {
+						tabFlagTable.getItem(i).setFont(normal);
 					}
+				}				
+			}
+		});
+
+		itemAdd.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
+				TableItem item = new TableItem(tabFlagTable, SWT.NONE);
+				item.setText(0, Messages.getString("OptionsAction.41"));
+				item.setText(1, Messages.getString("OptionsAction.41"));
+
+				FlagTable temp = new FlagTable();
+				temp.setCode(item.getText(0));
+				temp.setLibelle(item.getText(1));
+				getFlagTables().add(temp);
+			}
+		});
+
+		itemRemove.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
+				getFlagTables().remove(_flagTable);
+				tabFlagTable.remove(tabFlagTable.getSelectionIndex());
+			}
+		});
+
+		final Menu men = menu;
+		tabFlagTable.addListener(SWT.MouseDown, new Listener() {
+			public void handleEvent(Event event) {
+				// Lors d'un clic droit sur le tableau, on force l'affiche du
+				// menu contextuel
+				if (event.button == 3) {
+					men.setVisible(true);
 				}
-
-				if (column == -1) {
-					return;
-				}
-
-				final Text text = new Text(tabFlag, SWT.NONE);
-				text.setForeground(item.getForeground());
-
-				text.setText(item.getText(column));
-				text.setForeground(item.getForeground());
-				text.selectAll();
-				text.setFocus();
-
-				editor.minimumWidth = text.getBounds().width;
-
-				editor.setEditor(text, item, column);
-
-				final int col = column;
-				text.addModifyListener(new ModifyListener() {
-					public void modifyText(ModifyEvent event) {
-						item.setText(col, text.getText());
-					}
-				});
 			}
 		});
 	}
@@ -866,22 +891,52 @@ public class OptionsAction extends Action implements ISelectionListener,
 			TableItem item = new TableItem(tabFlagTable, SWT.NONE);
 			item.setText(0, flagTables.get(i).getCode());
 			item.setText(1, flagTables.get(i).getLibelle());
+
+			// Mise en gras du flagtable par défaut
+			if (flagTables.get(i).getCode().equals(
+					Utils.configuration.getDefaultFlagTable())) {
+				setDefaultCode(flagTables.get(i).getCode());
+				Font font = new Font(Application.display, "", 8, SWT.BOLD);
+				item.setFont(font);
+			}
+		}
+
+		if (flagTables.size() > 0) {
+			tabFlagTable.setSelection(0);
+			_flagTable = FlagTable.getFlagTable(_flagTables, tabFlagTable
+					.getSelection()[0].getText());
+			Flag.fillTable(tabFlag, _flagTable);
 		}
 	}
 
-	private void fillFlag(String code) {
-		int i;
-		FlagTable flagTable = new FlagTable();
-		tabFlag.removeAll();
+	// private void fillFlag(String code) {
+	// int i;
+	// tabFlag.removeAll();
+	//
+	// _flagTable = FlagTable.getFlagTable(_flagTables, code);
+	//
+	// if (_flagTable != null) {
+	// for (i = 0; i < _flagTable.getFlags().size(); i++) {
+	// TableItem itemTemp = new TableItem(tabFlag, SWT.NONE);
+	// itemTemp.setText(0, _flagTable.getFlags().get(i).getLocal());
+	// itemTemp.setText(1, _flagTable.getFlags().get(i).getSdn());
+	// }
+	// }
+	// }
 
-		flagTable = FlagTable.getFlagTable(_flagTables, code);
+	public static ArrayList<FlagTable> getFlagTables() {
+		return _flagTables;
+	}
 
-		if (flagTable != null) {
-			for (i = 0; i < flagTable.getFlags().size(); i++) {
-				TableItem item = new TableItem(tabFlag, SWT.NONE);
-				item.setText(0, flagTable.getFlags().get(i).getLocal());
-				item.setText(1, flagTable.getFlags().get(i).getSdn());
-			}
-		}
+	public static void setFlagTables(ArrayList<FlagTable> tables) {
+		_flagTables = tables;
+	}
+
+	public static String getDefaultCode() {
+		return _defaultCode;
+	}
+
+	public static void setDefaultCode(String code) {
+		_defaultCode = code;
 	}
 }

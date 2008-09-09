@@ -20,8 +20,8 @@ import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLBootstrapParser;
 import com.ago.xml.XMLOutputWriter;
 
-import fr.ifremer.nemo.flag.Flag;
-import fr.ifremer.nemo.flag.FlagTable;
+import fr.ifremer.nemo.config.Flag;
+import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.ui.Utils;
 
 /**
@@ -83,6 +83,8 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 
 	protected Locale _locale;
 	
+	protected String _defaultFlagTable;
+	
 	protected ArrayList<FlagTable> _flagTables;
 
 	public Configuration() {
@@ -105,6 +107,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		_predicate = 255;
 		_fichierMapping = "";
 		_arboMapping = "";
+		_defaultFlagTable = "";
 		
 		_vocabLists = new HashMap<String, String>();
 		
@@ -251,6 +254,10 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			}
 			return this;
 		}
+		if (a_LocalName.equals("defaultFlagTable")) {
+			Element2Field setter = new Element2Field(this, "setDefaultFlagTable");
+			return setter;
+		}
 		if (a_LocalName.equals("FlagTable")) {
 			String code = null;
 			String label = null;
@@ -327,13 +334,13 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			a_Writer.putAttribute("value", _vocabLists.get(listName));
 			a_Writer.closeTag();
 		}
-		int i, j;
-		for (i = 0; i < getFlagTables().size(); i++) {
+		a_Writer.putTag("defaultFlagTable", getDefaultFlagTable());
+		for (int i = 0; i < getFlagTables().size(); i++) {
 			a_Writer.openTag("FlagTable");
 			a_Writer.putAttribute("code", getFlagTables().get(i).getCode());
 			a_Writer.putAttribute("label", getFlagTables().get(i).getLibelle());
 			
-			for (j = 0; j < getFlagTables().get(i).getFlags().size(); j++) {
+			for (int j = 0; j < getFlagTables().get(i).getFlags().size(); j++) {
 				a_Writer.openTag("Flag");
 				a_Writer.putAttribute("local", getFlagTables().get(i).getFlags().get(j).getLocal());
 				a_Writer.putAttribute("SDN", getFlagTables().get(i).getFlags().get(j).getSdn());
@@ -907,6 +914,14 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 
 	public void setFlagTables(ArrayList<FlagTable> tables) {
 		_flagTables = tables;
+	}
+
+	public String getDefaultFlagTable() {
+		return _defaultFlagTable;
+	}
+
+	public void setDefaultFlagTable(String flagTable) {
+		_defaultFlagTable = flagTable;
 	}
 	
 } /* End of class: Configuration */

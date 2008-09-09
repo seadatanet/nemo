@@ -30,17 +30,19 @@
   <VocabListURL name="L201" value="http://vocab.ndg.nerc.ac.uk/list/L201/current"/>
   <VocabListURL name="C174" value="http://vocab.ndg.nerc.ac.uk/list/C174/current"/>
   <VocabListURL name="L051" value="http://vocab.ndg.nerc.ac.uk/list/L051/current"/>
+  <defaultFlagTable>C2</defaultFlagTable>
   <FlagTable code="C5" label="L5">
-    <Flag local="loc00" SDN="sdn00"/>
+    <Flag local="loc00" SDN="1 - good value"/>
     <Flag local="loc01" SDN="sdn01"/>
-    <Flag local="loc02" SDN="sdn02"/>
-    <Flag local="loc03" SDN="sdn03"/>
+    <Flag local="loc02" SDN="5 - changed value"/>
+    <Flag local="loc03" SDN="4 - bad value"/>
     <Flag local="loc04" SDN="sdn04"/>
     <Flag local="loc05" SDN="sdn05"/>
     <Flag local="loc06" SDN="sdn06"/>
     <Flag local="loc07" SDN="sdn07"/>
     <Flag local="loc08" SDN="sdn08"/>
     <Flag local="loc09" SDN="sdn09"/>
+    <Flag local="loc10" SDN="A - value phenomenon uncertain"/>
   </FlagTable>
   <FlagTable code="C1" label="L1">
     <Flag local="loc10" SDN="sdn10"/>
@@ -57,25 +59,16 @@
   <FlagTable code="C2" label="L2">
     <Flag local="loc20" SDN="sdn20"/>
     <Flag local="loc21" SDN="sdn21"/>
-    <Flag local="loc22" SDN="sdn22"/>
+    <Flag local="loc22" SDN="2 - probably good value"/>
     <Flag local="loc23" SDN="sdn23"/>
     <Flag local="loc24" SDN="sdn24"/>
-    <Flag local="loc25" SDN="sdn25"/>
     <Flag local="loc26" SDN="sdn26"/>
-    <Flag local="loc27" SDN="sdn27"/>
+    <Flag local="loc27" SDN="8 - interpolated value"/>
     <Flag local="loc28" SDN="sdn28"/>
     <Flag local="loc29" SDN="sdn29"/>
   </FlagTable>
   <FlagTable code="C3" label="L3">
-    <Flag local="loc30" SDN="sdn30"/>
-    <Flag local="loc31" SDN="sdn31"/>
-    <Flag local="loc32" SDN="sdn32"/>
-    <Flag local="loc33" SDN="sdn33"/>
-    <Flag local="loc34" SDN="sdn34"/>
-    <Flag local="loc35" SDN="sdn35"/>
-    <Flag local="loc36" SDN="sdn36"/>
-    <Flag local="loc37" SDN="sdn37"/>
-    <Flag local="loc38" SDN="sdn38"/>
-    <Flag local="loc39" SDN="sdn39"/>
+    <Flag local="31" SDN="8 - interpolated value"/>
+    <Flag local="32" SDN="1 - good value"/>
   </FlagTable>
 </NemoConfiguration>

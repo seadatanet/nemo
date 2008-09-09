@@ -1,9 +1,6 @@
-package fr.ifremer.nemo.flag;
+package fr.ifremer.nemo.config;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
 
 /**
  * Class FlagTable
@@ -27,8 +24,6 @@ public class FlagTable {
 	 * Liste des flags
 	 */
 	protected ArrayList<Flag> _flags;
-	
-	private Set changeListeners = new HashSet();
 
 	
 	/**
@@ -90,46 +85,15 @@ public class FlagTable {
 	}
 	
 	/**
-	 * Add a new task to the collection of tasks
+	 * Retourne le flag correspondant au code
 	 */
-	public void addFlag(String local, String sdn) {
-		Flag flag = new Flag(local, sdn);
-		getFlags().add(getFlags().size(), flag);
-		Iterator iterator = changeListeners.iterator();
-		while (iterator.hasNext())
-			((IFlagListViewer) iterator.next()).addFlag(flag);
-	}
-
-	/**
-	 * @param task
-	 */
-	public void removeFlag(Flag flag) {
-		getFlags().remove(flag);
-		Iterator iterator = changeListeners.iterator();
-		while (iterator.hasNext())
-			((IFlagListViewer) iterator.next()).removeFlag(flag);
-	}
-	
-	/**
-	 * @param task
-	 */
-	public void flagChanged(Flag flag) {
-		Iterator iterator = changeListeners.iterator();
-		while (iterator.hasNext())
-			((IFlagListViewer) iterator.next()).updateFlag(flag);
-	}
-	
-	/**
-	 * @param viewer
-	 */
-	public void removeChangeListener(IFlagListViewer viewer) {
-		changeListeners.remove(viewer);
-	}
-
-	/**
-	 * @param viewer
-	 */
-	public void addChangeListener(IFlagListViewer viewer) {
-		changeListeners.add(viewer);
+	public Flag getFlag(String local) {
+		int i;
+		for (i = 0; i < getFlags().size(); i++) {
+			if (getFlags().get(i).getLocal().equals(local)) {
+				return getFlags().get(i);
+			}
+		}
+		return null;
 	}
 }
