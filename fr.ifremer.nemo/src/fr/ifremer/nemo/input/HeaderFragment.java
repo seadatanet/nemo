@@ -11,8 +11,6 @@ import com.ago.xml.Element2Field;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
-import fr.ifremer.nemo.ui.DataModel;
-
 /**
  * Class HeaderFragment
  * 
@@ -464,7 +462,6 @@ public class HeaderFragment implements Cloneable, SAXConsumer {
 					// ).trim());
 					writer.println(a_Header[i].substring(start, end + 1));
 				}
-				
 			}
 			
 			// return stringWriter.toString().trim();

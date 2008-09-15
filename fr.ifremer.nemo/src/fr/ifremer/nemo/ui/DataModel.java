@@ -227,7 +227,7 @@ public class DataModel {
 		} else {
 			survey = singleSurvey.getModel();
 		}
-		
+
 		station = stationModel.getModel();
 
 		// maj des dataTypes
@@ -236,7 +236,8 @@ public class DataModel {
 
 		// injection des valeurs de l'IHM -> datamodel
 		// référence
-		if (EditSurvey.textCampagne == null || EditSurvey.textCampagne.isDisposed()) {
+		if (EditSurvey.textCampagne == null
+				|| EditSurvey.textCampagne.isDisposed()) {
 			EditSurvey.validee = 1;
 			return;
 		}
@@ -511,12 +512,6 @@ public class DataModel {
 			}
 
 		}
-
-		// FLAGS QC
-		station.setDateQC(EditStation.textQCDate.getText());
-		station.setDepthQC(EditStation.textQCProf.getText());
-		station.setLatQC(EditStation.textQCLat.getText());
-		station.setLongQC(EditStation.textQCLong.getText());
 
 		// commentaire
 		propertyModel = stationModel.propertiesAt("comment");
@@ -1234,6 +1229,13 @@ public class DataModel {
 
 		}
 
+		// FLAGS QC
+		// station.setDateQC(EditStation.textQCDate.getText());
+		// station.setDepthQC(EditStation.textQCProf.getText());
+		// station.setLatQC(EditStation.textQCLat.getText());
+		// station.setLongQC(EditStation.textQCLong.getText());
+		stationModel.setFlagTable(EditStation.getFlagTable());
+
 		// flag validation à 1
 		EditStation.validee = 1;
 
@@ -1249,7 +1251,7 @@ public class DataModel {
 
 		// reset systématique des parametres stockés dans le dataModel
 		stationModel.releaseParameterModels();
-	
+
 		for (int i = 0; i < nbreParam; i++) {
 			TypeData typeCourant = TableData.types.get(i);
 
@@ -1843,12 +1845,6 @@ public class DataModel {
 
 		}
 
-		// FLAGS QC
-		// EditStation.textQCDate.setText(""+station.getDateQC());
-		// EditStation.textQCLat.setText(""+station.getLatQC());
-		// EditStation.textQCLong.setText(""+station.getLongQC());
-		// EditStation.textQCProf.setText(""+station.getDepthQC());
-
 		// echantillon surface
 		propertyModel = stationModel_modele.propertiesAt("surfaceSamples1");
 		propertyModel2 = stationModel_modele.propertiesAt("surfaceSamples2");
@@ -2436,6 +2432,17 @@ public class DataModel {
 					.getTypePlateForme());
 			ViewFile.comboAccesDonnees.setText(stationModel_modele.getCdi()
 					.getAccesDonnees());
+		}
+
+		// FLAGS QC
+		// EditStation.textQCDate.setText(""+station.getDateQC());
+		// EditStation.textQCLat.setText(""+station.getLatQC());
+		// EditStation.textQCLong.setText(""+station.getLongQC());
+		// EditStation.textQCProf.setText(""+station.getDepthQC());
+		if (stationModel_modele.getFlagTable() != null) {
+			EditStation.flagTable = stationModel_modele.getFlagTable();
+			EditStation.flagTable.fillTable(EditStation.tabCorrespondance);
+			ViewEdit.formEdition.reflow(true);
 		}
 
 		// System.out.println("Fin remplissage onglet Station");

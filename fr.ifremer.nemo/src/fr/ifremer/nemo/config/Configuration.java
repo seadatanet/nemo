@@ -83,7 +83,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 
 	protected Locale _locale;
 	
-	protected String _defaultFlagTable;
+	protected String _defaultCode;
 	
 	protected ArrayList<FlagTable> _flagTables;
 
@@ -107,7 +107,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		_predicate = 255;
 		_fichierMapping = "";
 		_arboMapping = "";
-		_defaultFlagTable = "";
+		_defaultCode = "";
 		
 		_vocabLists = new HashMap<String, String>();
 		
@@ -255,7 +255,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			return this;
 		}
 		if (a_LocalName.equals("defaultFlagTable")) {
-			Element2Field setter = new Element2Field(this, "setDefaultFlagTable");
+			Element2Field setter = new Element2Field(this, "setDefaultCode");
 			return setter;
 		}
 		if (a_LocalName.equals("FlagTable")) {
@@ -334,7 +334,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			a_Writer.putAttribute("value", _vocabLists.get(listName));
 			a_Writer.closeTag();
 		}
-		a_Writer.putTag("defaultFlagTable", getDefaultFlagTable());
+		a_Writer.putTag("defaultFlagTable", getDefaultCode());
 		for (int i = 0; i < getFlagTables().size(); i++) {
 			a_Writer.openTag("FlagTable");
 			a_Writer.putAttribute("code", getFlagTables().get(i).getCode());
@@ -916,12 +916,16 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		_flagTables = tables;
 	}
 
-	public String getDefaultFlagTable() {
-		return _defaultFlagTable;
+	public String getDefaultCode() {
+		return _defaultCode;
 	}
 
-	public void setDefaultFlagTable(String flagTable) {
-		_defaultFlagTable = flagTable;
+	public void setDefaultCode(String flagTable) {
+		_defaultCode = flagTable;
+	}
+	
+	public FlagTable getDefaultFlagTable() {
+		return FlagTable.getFlagTable(getFlagTables(), getDefaultCode());
 	}
 	
 } /* End of class: Configuration */

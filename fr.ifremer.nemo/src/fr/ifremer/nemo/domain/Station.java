@@ -5,7 +5,6 @@ import java.io.OutputStream;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.TimeZone;
 import java.util.TreeMap;
 import java.util.Map.Entry;

@@ -2,26 +2,44 @@ package fr.ifremer.nemo.ui;
 
 import java.io.File;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
+import org.eclipse.swt.custom.TableEditor;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.MenuItem;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.events.ExpansionAdapter;
 import org.eclipse.ui.forms.events.ExpansionEvent;
 import org.eclipse.ui.forms.widgets.Section;
 
+import fr.ifremer.nemo.config.Flag;
+import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.input.HeaderFragment;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.util.DateTimeFormat;
@@ -31,12 +49,13 @@ import fr.ifremer.nemo.util.Messages;
 public class DrawingStation {
 
 	private static Group grou;
-	
+
 	// private static Text txtTest;
 
 	public static void sectionManuelLigneDebutFinInject(String nomSection,
 			String description, Section section, Text ligne, Text debut,
-			Text fin, Text manuel, Button radio, Button position, boolean blnManuel) {
+			Text fin, Text manuel, Button radio, Button position,
+			boolean blnManuel) {
 
 		final Text lign, debu, fi;
 		final Button inject;
@@ -46,7 +65,8 @@ public class DrawingStation {
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
 				| Section.TWISTIE | Section.COMPACT);
 
-		//System.out.println("sectionManuelLigneDebutFinInject DrawingStation ==> ok");
+		// System.out.println("sectionManuelLigneDebutFinInject DrawingStation
+		// ==> ok");
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			public void expansionStateChanged(ExpansionEvent e) {
@@ -171,14 +191,13 @@ public class DrawingStation {
 
 					}
 				});
-		
-		/*// par défaut manuel
-		radio.setSelection(true);
-		lign.setEnabled(false);
-		debu.setEnabled(false);
-		fi.setEnabled(false);
-		inject.setEnabled(false);*/
-		
+
+		/*
+		 * // par défaut manuel radio.setSelection(true);
+		 * lign.setEnabled(false); debu.setEnabled(false); fi.setEnabled(false);
+		 * inject.setEnabled(false);
+		 */
+
 		radio.setSelection(blnManuel);
 		position.setSelection(!blnManuel);
 		manu.setEnabled(blnManuel);
@@ -201,14 +220,13 @@ public class DrawingStation {
 		final Button inject;
 		final Text manu;
 
-
 		section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
 				| Section.TWISTIE | Section.COMPACT);
 
 		EditStation.sectionFreqEchant = section;
-//		System.out
-//				.println("sectionManuelLigneDebutFinInject DrawingStation ==> ok");
+		// System.out
+		// .println("sectionManuelLigneDebutFinInject DrawingStation ==> ok");
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			public void expansionStateChanged(ExpansionEvent e) {
@@ -235,11 +253,11 @@ public class DrawingStation {
 		Label labelConv = new Label(groupeConv, SWT.NONE);
 		labelConv.setText(Messages.getString("EditStation.37"));
 		conversion.setParent(groupeConv);
-		
-//		FAE066
-//		Label labelTest = new Label(groupeConv, SWT.NONE);
-//		labelTest.setText("Test");
-		
+
+		// FAE066
+		// Label labelTest = new Label(groupeConv, SWT.NONE);
+		// labelTest.setText("Test");
+
 		radio.setParent(sectionClient);
 		radio.setText(Messages.getString("Drawing.4"));
 
@@ -282,13 +300,13 @@ public class DrawingStation {
 		buttonInject.setText(Messages.getString("Drawing.1"));
 
 		inject = buttonInject;
-		
-		Composite compoTest = new Composite (sectionClient,SWT.NONE);
-		
+
+		Composite compoTest = new Composite(sectionClient, SWT.NONE);
+
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoTest);
-		GridDataFactory.fillDefaults().grab(false,false).applyTo(compoTest);
-		
-		Button btnTest = new Button(compoTest,SWT.NONE);
+		GridDataFactory.fillDefaults().grab(false, false).applyTo(compoTest);
+
+		Button btnTest = new Button(compoTest, SWT.NONE);
 		btnTest.setText("Test");
 		testConversion.setEnabled(false);
 		testConversion.setParent(compoTest);
@@ -312,17 +330,20 @@ public class DrawingStation {
 						// 
 						EditStation.conversionFreqEchant();
 
-//						System.out.println("mise à jour champ test conversion");
+						// System.out.println("mise à jour champ test
+						// conversion");
 					}
 
 					public void mouseDown(MouseEvent e) {
 
-//						System.out.println("mise à jour champ test conversion");
+						// System.out.println("mise à jour champ test
+						// conversion");
 					}
 
 					public void mouseUp(MouseEvent e) {
 						// 
-//						System.out.println("mise à jour champ test conversion");
+						// System.out.println("mise à jour champ test
+						// conversion");
 					}
 				});
 
@@ -377,7 +398,7 @@ public class DrawingStation {
 
 					}
 				});
-		
+
 		// bouton test
 		btnTest
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -387,13 +408,12 @@ public class DrawingStation {
 					}
 				});
 
-		/*// par défaut manuel
-		radio.setSelection(true);
-		lign.setEnabled(false);
-		debu.setEnabled(false);
-		fi.setEnabled(false);
-		inject.setEnabled(false);*/
-		
+		/*
+		 * // par défaut manuel radio.setSelection(true);
+		 * lign.setEnabled(false); debu.setEnabled(false); fi.setEnabled(false);
+		 * inject.setEnabled(false);
+		 */
+
 		radio.setSelection(blnManuel);
 		position.setSelection(!blnManuel);
 		manu.setEnabled(blnManuel);
@@ -401,7 +421,6 @@ public class DrawingStation {
 		debu.setEnabled(!blnManuel);
 		fi.setEnabled(!blnManuel);
 		inject.setEnabled(!blnManuel);
-		
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -409,20 +428,21 @@ public class DrawingStation {
 	}
 
 	public static void sectionIncrementeLigneDebutFinInject(String nomSection,
-			String description, Section section, Text numero, Text ligne, Text debut,
-			Text fin, Button radio, Button position, boolean blnManuel) {
+			String description, Section section, Text numero, Text ligne,
+			Text debut, Text fin, Button radio, Button position,
+			boolean blnManuel) {
 
 		// le ppar radio est le pointeur du bouton "incremente"
 		final Text num, lign, debu, fi, test;
 		final Button inject, pos;
 
-
 		section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
 				| Section.TWISTIE | Section.COMPACT);
 
-//		System.out
-//				.println("sectionIncrementeLigneDebutFinInject() DrawingStation ==> ok : section créée");
+		// System.out
+		// .println("sectionIncrementeLigneDebutFinInject() DrawingStation ==>
+		// ok : section créée");
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			public void expansionStateChanged(ExpansionEvent e) {
@@ -440,15 +460,15 @@ public class DrawingStation {
 
 		Composite compo1 = new Composite(sectionClient, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo1);
-		GridDataFactory.fillDefaults().grab(false,false).applyTo(compo1);
-		
+		GridDataFactory.fillDefaults().grab(false, false).applyTo(compo1);
+
 		// bouton radio "saisie manuelle"
 		// c'est lui qui est passé en ppar
 		radio.setParent(compo1);
 		radio.setText(Messages.getString("Drawing.6"));
 
 		numero.setParent(compo1);
-		
+
 		// bouton radio "position"
 		// radio.setParent(sectionClient);
 		// radio.setText("Position");
@@ -494,20 +514,20 @@ public class DrawingStation {
 		inject = buttonInject;
 
 		inject.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
+
 		section.setClient(sectionClient);
-		
-//		 Zone de test
-		Composite compoTest = new Composite(sectionClient,SWT.NONE);
+
+		// Zone de test
+		Composite compoTest = new Composite(sectionClient, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoTest);
-		
-		Button btnTest = new Button(compoTest,SWT.NONE);
+
+		Button btnTest = new Button(compoTest, SWT.NONE);
 		btnTest.setText("Test");
-		
+
 		Text txtTest = new Text(compoTest, SWT.BORDER);
 		txtTest.setEnabled(false);
 		txtTest.setText("");
-		
+
 		// une fois les éléments initialisés, on les passe en static pour y
 		// accéder à
 		// partir des listeners
@@ -528,7 +548,7 @@ public class DrawingStation {
 
 						// raz de la valeur manuelle
 						num.setText("1");
-						
+
 						// grou.setVisible(false);
 						num.setEnabled(true);
 						lign.setEnabled(false);
@@ -543,8 +563,8 @@ public class DrawingStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent f) {
-//						System.out.println("position dans fichier section "
-//								+ nomSec); // TODO Auto-generated Event stub
+						// System.out.println("position dans fichier section "
+						// + nomSec); // TODO Auto-generated Event stub
 						// widgetSelected()
 						// raz de la valeur manuelle
 
@@ -583,41 +603,46 @@ public class DrawingStation {
 							org.eclipse.swt.events.SelectionEvent g) {
 						if (pos.getSelection()) {
 							if (lign.getText().equals("0")) {
-								// On récupère le numéro de station dans le nom du fichier
+								// On récupère le numéro de station dans le nom
+								// du fichier
 								String strFichier = "";
 								if (ViewFile.radioFichier.getSelection()) {
-									strFichier = Utils.extraitFichierChemin(ViewFile.nomFichier);
+									strFichier = Utils
+											.extraitFichierChemin(ViewFile.nomFichier);
 								} else {
-									File directory = new File(ViewFile.nomRepertoire);
+									File directory = new File(
+											ViewFile.nomRepertoire);
 									File[] subfiles = directory.listFiles();
 									strFichier = subfiles[0].getName();
 								}
-								
-								test.setText(strFichier.substring(Integer.parseInt(debu.getText()) - 1, Integer.parseInt(fi.getText())));
+
+								test.setText(strFichier.substring(Integer
+										.parseInt(debu.getText()) - 1, Integer
+										.parseInt(fi.getText())));
 							} else {
-								Utils.test(test, ViewFile.styledTextStation, lign, debu, fi);
+								Utils.test(test, ViewFile.styledTextStation,
+										lign, debu, fi);
 							}
-							
-							// test.setText(test.getText().format("%05d", Integer.parseInt(test.getText().trim())));
-							test.setText(Formatter.getSingleton().padZero(test.getText().trim(), 5));
+
+							// test.setText(test.getText().format("%05d",
+							// Integer.parseInt(test.getText().trim())));
+							test.setText(Formatter.getSingleton().padZero(
+									test.getText().trim(), 5));
 							test.pack();
 						} else {
-							test.setText(Formatter.getSingleton().padZero(num.getText().trim(), 5));
+							test.setText(Formatter.getSingleton().padZero(
+									num.getText().trim(), 5));
 							test.pack();
-						}	
+						}
 					}
 				});
-		
-		
-		
-		/*// saisie manuelle par défaut
-		radio.setSelection(true);
-		lign.setEnabled(false);
-		debu.setEnabled(false);
-		fi.setEnabled(false);
-		inject.setEnabled(false);*/
-				
-		
+
+		/*
+		 * // saisie manuelle par défaut radio.setSelection(true);
+		 * lign.setEnabled(false); debu.setEnabled(false); fi.setEnabled(false);
+		 * inject.setEnabled(false);
+		 */
+
 		radio.setSelection(blnManuel);
 		numero.setEnabled(blnManuel);
 		position.setSelection(!blnManuel);
@@ -625,22 +650,23 @@ public class DrawingStation {
 		debu.setEnabled(!blnManuel);
 		fi.setEnabled(!blnManuel);
 		inject.setEnabled(!blnManuel);
-		
-		
+
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
 
 	}
 
-	public static void sectionTypeDonnees(Section section, String nom, Combo cmbRefType) {
+	public static void sectionTypeDonnees(Section section, String nom,
+			Combo cmbRefType) {
 
 		// EditStation.sectionTypeDonnees.setParent(EditStation.formEdition);
 		section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
 				| Section.TWISTIE | Section.COMPACT);
 
-//		System.out
-//				.println("sectionTypeDonnees() DrawingStation ==> ok : section créée");
+		// System.out
+		// .println("sectionTypeDonnees() DrawingStation ==> ok : section
+		// créée");
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			public void expansionStateChanged(ExpansionEvent e) {
@@ -650,8 +676,7 @@ public class DrawingStation {
 		section.setText(nom);
 		Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL);
 		section.setFont(font);
-		section
-				.setDescription(Messages.getString("Drawing.13"));
+		section.setDescription(Messages.getString("Drawing.13"));
 
 		Composite sectionClient = ViewEdit.toolkitEdition
 				.createComposite(section);
@@ -661,7 +686,7 @@ public class DrawingStation {
 
 		// EditStation.comboRefStationType.setParent(sectionClient);
 		cmbRefType.setParent(sectionClient);
-		
+
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
 
@@ -673,9 +698,7 @@ public class DrawingStation {
 			Text zone2, Button radio, Button position, boolean blnManuel) {
 
 		final Button inject1, inject2;
-		final Text  lign1, lign2, fi1, fi2, debu1, debu2, zon1, zon2;
-
-
+		final Text lign1, lign2, fi1, fi2, debu1, debu2, zon1, zon2;
 
 		section.setParent(EditStation.formEdition);
 
@@ -878,7 +901,6 @@ public class DrawingStation {
 					}
 				});
 
-		
 		radio.setSelection(blnManuel);
 		position.setSelection(!blnManuel);
 		zon1.setEnabled(blnManuel);
@@ -891,22 +913,18 @@ public class DrawingStation {
 		fi2.setEnabled(!blnManuel);
 		inject1.setEnabled(!blnManuel);
 		inject2.setEnabled(!blnManuel);
-		
-		/*// par défaut saisie manuelle
-		radio.setSelection(true);
-		zon1.setEnabled(true);
-		zon2.setEnabled(true);
-		// grou.setVisible(false);
-		lign1.setEnabled(false);
-		debu1.setEnabled(false);
-		fi1.setEnabled(false);
-		lign2.setEnabled(false);
-		debu2.setEnabled(false);
-		fi2.setEnabled(false);
 
-		inject1.setEnabled(false);
-		inject2.setEnabled(false);*/
-		
+		/*
+		 * // par défaut saisie manuelle radio.setSelection(true);
+		 * zon1.setEnabled(true); zon2.setEnabled(true); //
+		 * grou.setVisible(false); lign1.setEnabled(false);
+		 * debu1.setEnabled(false); fi1.setEnabled(false);
+		 * lign2.setEnabled(false); debu2.setEnabled(false);
+		 * fi2.setEnabled(false);
+		 * 
+		 * inject1.setEnabled(false); inject2.setEnabled(false);
+		 */
+
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
 
@@ -918,8 +936,7 @@ public class DrawingStation {
 			Text zone2, Button radio, Button position, boolean blnManuel) {
 
 		final Button inject1, inject2;
-		final Text  lign1, lign2, fi1, fi2, debu1, debu2, zon1, zon2;
-
+		final Text lign1, lign2, fi1, fi2, debu1, debu2, zon1, zon2;
 
 		section.setParent(EditStation.formEdition);
 
@@ -1123,8 +1140,6 @@ public class DrawingStation {
 					}
 				});
 
-		
-		
 		radio.setSelection(blnManuel);
 		position.setSelection(!blnManuel);
 		zon1.setEnabled(blnManuel);
@@ -1137,20 +1152,16 @@ public class DrawingStation {
 		fi2.setEnabled(!blnManuel);
 		inject1.setEnabled(!blnManuel);
 		inject2.setEnabled(!blnManuel);
-		
-		/*// par défaut saisie manuelle
-		radio.setSelection(true);
-		zon1.setEnabled(true);
-		zon2.setEnabled(true);
-		// grou.setVisible(false);
-		lign1.setEnabled(false);
-		debu1.setEnabled(false);
-		fi1.setEnabled(false);
-		lign2.setEnabled(false);
-		debu2.setEnabled(false);
-		fi2.setEnabled(false);
-		inject1.setEnabled(false);
-		inject2.setEnabled(false);*/
+
+		/*
+		 * // par défaut saisie manuelle radio.setSelection(true);
+		 * zon1.setEnabled(true); zon2.setEnabled(true); //
+		 * grou.setVisible(false); lign1.setEnabled(false);
+		 * debu1.setEnabled(false); fi1.setEnabled(false);
+		 * lign2.setEnabled(false); debu2.setEnabled(false);
+		 * fi2.setEnabled(false); inject1.setEnabled(false);
+		 * inject2.setEnabled(false);
+		 */
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -1163,7 +1174,7 @@ public class DrawingStation {
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
 				| Section.TWISTIE | Section.COMPACT);
 
-//		System.out.println("sectionCommentaire() DrawingStation");
+		// System.out.println("sectionCommentaire() DrawingStation");
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			public void expansionStateChanged(ExpansionEvent e) {
@@ -1182,10 +1193,11 @@ public class DrawingStation {
 
 		EditStation.textCommentaire.setParent(sectionClient);
 		EditStation.textCommentaire.setTextLimit(500);
-		
+
 		if (DataModel.ouverture) {
-			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("comment");
-			
+			PropertyModel propertyModel = DataModel.stationModel_modele
+					.propertiesAt("comment");
+
 			boolean blnProvided = propertyModel.isUserProvided();
 			EditStation.buttonCommentaireSaisie.setSelection(blnProvided);
 			EditStation.textCommentaire.setEnabled(!blnProvided);
@@ -1206,50 +1218,48 @@ public class DrawingStation {
 
 	}
 
-	public static void sectionFlagQC(Section section, String nomSection,
-			String description, Text text) {
-
-
-		section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition
-				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
-				| Section.TWISTIE | Section.COMPACT);
-
-		section.addExpansionListener(new ExpansionAdapter() {
-			public void expansionStateChanged(ExpansionEvent e) {
-				EditDesc.formEdition.reflow(true);
-			}
-		});
-
-		section.setText(nomSection);
-		Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL);
-		section.setFont(font);
-		section.setDescription(description);
-
-		Composite sectionClient = ViewEdit.toolkitEdition
-				.createComposite(section);
-		sectionClient.setLayout(new GridLayout());
-
-		Button button = new Button(sectionClient, SWT.RADIO);
-		button.setText("essai");
-		text.setParent(sectionClient);
-		text.setTextLimit(1);
-		text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-
-		// ajout de la section dans la liste des sections de description
-		ajoutSectionDansListeStation(section);
-
-	}
+	// public static void sectionFlagQC(Section section, String nomSection,
+	// String description, Text text) {
+	//
+	// section = ViewEdit.toolkitEdition.createSection(EditStation.formEdition
+	// .getBody(), Section.DESCRIPTION | Section.TITLE_BAR
+	// | Section.TWISTIE | Section.COMPACT);
+	//
+	// section.addExpansionListener(new ExpansionAdapter() {
+	// public void expansionStateChanged(ExpansionEvent e) {
+	// EditDesc.formEdition.reflow(true);
+	// }
+	// });
+	//
+	// section.setText(nomSection);
+	// Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL);
+	// section.setFont(font);
+	// section.setDescription(description);
+	//
+	// Composite sectionClient = ViewEdit.toolkitEdition
+	// .createComposite(section);
+	// sectionClient.setLayout(new GridLayout());
+	//
+	// Button button = new Button(sectionClient, SWT.RADIO);
+	// button.setText("essai");
+	// text.setParent(sectionClient);
+	// text.setTextLimit(1);
+	// text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+	//
+	// // ajout de la section dans la liste des sections de description
+	// ajoutSectionDansListeStation(section);
+	//
+	// }
 
 	public static void sectionCommentaireLigneDebutFinInject(String nomSection,
 			String description, Section section, Text ligne, Text debut,
-			Text fin, Text manuel, Button radio, Button position, Button buttonVar, boolean blnManuel) {
+			Text fin, Text manuel, Button radio, Button position,
+			Button buttonVar, boolean blnManuel) {
 
 		// ppar manuel = zone de commentaire
 		final Text lign, debu, fi;
 		final Button inject, var;
 		final Text manu;
-
-
 
 		section.setParent(EditDesc.formEdition);
 
@@ -1302,14 +1312,14 @@ public class DrawingStation {
 		groupe.setText(Messages.getString("Drawing.9"));
 		// groupe.setLayout(gridLayout1);
 		grou = groupe;
-		
+
 		GridLayoutFactory.fillDefaults().applyTo(groupe);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(groupe);
-		
-		Composite compo1 = new Composite(groupe,SWT.NONE);		
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(groupe);
+
+		Composite compo1 = new Composite(groupe, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(6).applyTo(compo1);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(compo1);
-		
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(compo1);
+
 		// ligne
 		Label label1 = new Label(compo1, SWT.NULL);
 		label1.setText(Messages.getString("Drawing.10"));
@@ -1333,28 +1343,29 @@ public class DrawingStation {
 
 		// groupe non visible de base
 		// groupe.setVisible(false);
-		
-		Composite compo2 = new Composite(groupe,SWT.NONE);
+
+		Composite compo2 = new Composite(groupe, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo2);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(compo2);
-		
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(compo2);
+
 		// bouton d'injection de la position des valeurs
 		Button buttonInject = new Button(compo2, SWT.NONE);
 		buttonInject.setText(Messages.getString("Drawing.1"));
-		
-		GridDataFactory.fillDefaults().grab(true, false).align(SWT.BEGINNING, SWT.CENTER).applyTo(buttonInject);
-		
-		
+
+		GridDataFactory.fillDefaults().grab(true, false).align(SWT.BEGINNING,
+				SWT.CENTER).applyTo(buttonInject);
+
 		// bouton de fin de ligne variable
 		// buttonVar = new Button(groupe, SWT.CHECK);
 		buttonVar.setText(Messages.getString("Drawing.20"));
 		buttonVar.setParent(compo2);
 		// buttonVar.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
-		GridDataFactory.fillDefaults().grab(true, false).align(SWT.END, SWT.CENTER).applyTo(buttonVar);
-		
+
+		GridDataFactory.fillDefaults().grab(true, false).align(SWT.END,
+				SWT.CENTER).applyTo(buttonVar);
+
 		section.setClient(sectionClient);
-		
+
 		// une fois les éléments initialisés, on les passe en static pour y
 		// accéder à
 		// partir des listeners
@@ -1428,7 +1439,7 @@ public class DrawingStation {
 
 					}
 				});
-		
+
 		// bouton Var
 		buttonVar
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -1438,8 +1449,7 @@ public class DrawingStation {
 
 					}
 				});
-		
-		
+
 		radio.setSelection(blnManuel);
 		position.setSelection(!blnManuel);
 		manu.setEnabled(blnManuel);
@@ -1448,27 +1458,26 @@ public class DrawingStation {
 		fi.setEnabled(!blnManuel);
 		inject.setEnabled(!blnManuel);
 		var.setEnabled(!blnManuel);
-		
+
 		if (DataModel.ouverture) {
-			PropertyModel propertyModel = DataModel.stationModel_modele.propertiesAt("comment");
-			
+			PropertyModel propertyModel = DataModel.stationModel_modele
+					.propertiesAt("comment");
+
 			if (!propertyModel.isUserProvided()) {
 				HeaderFragment frag = propertyModel.getFragment();
-				
+
 				fi.setEnabled(!frag.isVariable());
-				
+
 			}
 		}
-	
-		/*// saisie manuelle par défaut
-		radio.setSelection(true);
-		manu.setEnabled(true);
-		lign.setEnabled(false);
-		debu.setEnabled(false);
-		fi.setEnabled(false);
-		inject.setEnabled(false);
-		var.setEnabled(false);*/
-		
+
+		/*
+		 * // saisie manuelle par défaut radio.setSelection(true);
+		 * manu.setEnabled(true); lign.setEnabled(false);
+		 * debu.setEnabled(false); fi.setEnabled(false);
+		 * inject.setEnabled(false); var.setEnabled(false);
+		 */
+
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
 
@@ -1482,7 +1491,6 @@ public class DrawingStation {
 		// virer le second bouton radio !
 		// ajouter combo de format heure
 
-
 		final Text lign, debu, fi, test;
 		final Button inject;
 
@@ -1490,7 +1498,7 @@ public class DrawingStation {
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
 				| Section.TWISTIE | Section.COMPACT);
 
-//		System.out.println("section heure station ==> ok");
+		// System.out.println("section heure station ==> ok");
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			public void expansionStateChanged(ExpansionEvent e) {
@@ -1559,18 +1567,17 @@ public class DrawingStation {
 		EditStation.buttonHeureInject.setText(Messages.getString("Drawing.1"));
 
 		section.setClient(sectionClient);
-		
+
 		// Zone de test
-		Composite compoTest = new Composite(sectionClient,SWT.NONE);
+		Composite compoTest = new Composite(sectionClient, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoTest);
-		
-		Button btnTest = new Button(compoTest,SWT.NONE);
+
+		Button btnTest = new Button(compoTest, SWT.NONE);
 		btnTest.setText("Test");
-		
+
 		heure.setParent(compoTest);
 		heure.setEnabled(false);
 		heure.setText("");
-		
 
 		// une fois les éléments initialisés, on les passe en static pour y
 		// accéder à
@@ -1652,7 +1659,7 @@ public class DrawingStation {
 								.getSelection().y;
 					}
 				});
-		
+
 		// bouton test
 		btnTest
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -1661,39 +1668,41 @@ public class DrawingStation {
 						if (EditStation.buttonHeureSaisie.getSelection()) {
 							Utils.test(test, EditStation.textHeureSaisie);
 						} else {
-							Utils.test(test, ViewFile.styledTextStation, lign, debu, fi);
+							Utils.test(test, ViewFile.styledTextStation, lign,
+									debu, fi);
 						}
-						
+
 						try {
 							DateTimeFormat format = new DateTimeFormat(
 									EditStation.comboHeure.getText());
-							
-							Float flDecalTU = Float.parseFloat(EditStation.textTU.getText()) * 3600 * 1000;
-							
+
+							Float flDecalTU = Float
+									.parseFloat(EditStation.textTU.getText()) * 3600 * 1000;
+
 							Long lgDecalTU = flDecalTU.longValue();
-							
-							Long HourLong = (Long) format
-									.parseObject(test.getText()) + lgDecalTU;
-							
+
+							Long HourLong = (Long) format.parseObject(test
+									.getText())
+									+ lgDecalTU;
+
 							Formatter formatter;
-							
+
 							formatter = Formatter.getSingleton();
-							
-							test.setText(formatter.formatDateTime("hh24:mm:ss.sss", HourLong, "9999"));
-							
+
+							test.setText(formatter.formatDateTime(
+									"hh24:mm:ss.sss", HourLong, "9999"));
+
 							test.pack();
 						} catch (ParseException e) {
 
 							Utils.messageErreurAppend(Messages
 									.getString("Etape.121")); //$NON-NLS-1$
-							test.setText(Messages
-									.getString("Etape.120"));
+							test.setText(Messages.getString("Etape.120"));
 							test.pack();
 						}
 					}
 				});
-		
-		
+
 		EditStation.buttonHeureSaisie.setSelection(blnManuel);
 		EditStation.textHeureSaisie.setEnabled(blnManuel);
 		EditStation.buttonHeurePos.setSelection(!blnManuel);
@@ -1701,13 +1710,13 @@ public class DrawingStation {
 		debu.setEnabled(!blnManuel);
 		fi.setEnabled(!blnManuel);
 		inject.setEnabled(!blnManuel);
-	
-		/*// par défaut manuel
-		EditStation.buttonHeureSaisie.setSelection(true);
-		lign.setEnabled(false);
-		debu.setEnabled(false);
-		fi.setEnabled(false);
-		inject.setEnabled(false);*/
+
+		/*
+		 * // par défaut manuel
+		 * EditStation.buttonHeureSaisie.setSelection(true);
+		 * lign.setEnabled(false); debu.setEnabled(false); fi.setEnabled(false);
+		 * inject.setEnabled(false);
+		 */
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -1724,8 +1733,6 @@ public class DrawingStation {
 
 		final Text lign, debu, fi, test;
 		final Button inject;
-
-
 
 		section.setParent(EditDesc.formEdition);
 
@@ -1803,16 +1810,16 @@ public class DrawingStation {
 		EditStation.buttonDateInject.setParent(groupe);
 		EditStation.buttonDateInject.setText(Messages.getString("Drawing.1"));
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-		
+
 		section.setClient(sectionClient);
-		
+
 		// Zone de test
-		Composite compoTest = new Composite(sectionClient,SWT.NONE);
+		Composite compoTest = new Composite(sectionClient, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoTest);
-		
-		Button btnTest = new Button(compoTest,SWT.NONE);
+
+		Button btnTest = new Button(compoTest, SWT.NONE);
 		btnTest.setText("Test");
-		
+
 		date.setParent(compoTest);
 		date.setEnabled(false);
 		date.setText("");
@@ -1901,7 +1908,7 @@ public class DrawingStation {
 
 					}
 				});
-		
+
 		// bouton test
 		btnTest
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -1911,49 +1918,60 @@ public class DrawingStation {
 						Calendar cal = Calendar.getInstance(tz);
 						cal.clear();
 						cal.setLenient(false);
-						
+
 						// TEST DATE
 						if (EditStation.buttonDateSaisie.getSelection()) {
 							Utils.test(test, EditStation.textDateSaisie);
 						} else {
-							Utils.test(test, ViewFile.styledTextStation, lign, debu, fi);
+							Utils.test(test, ViewFile.styledTextStation, lign,
+									debu, fi);
 						}
-						
+
 						try {
 							DateTimeFormat format = new DateTimeFormat(
 									EditStation.comboDate.getText());
-							
-							Long DateLong = (Long) format
-									.parseObject(test.getText());
-							
-							
+
+							Long DateLong = (Long) format.parseObject(test
+									.getText());
+
 							// TEST HEURE (pour decalage TU)
 							if (EditStation.buttonHeureSaisie.getSelection()) {
-								Utils.test(EditStation.textTestConvHeure, EditStation.textHeureSaisie);
+								Utils.test(EditStation.textTestConvHeure,
+										EditStation.textHeureSaisie);
 							} else {
-								Utils.test(EditStation.textTestConvHeure, ViewFile.styledTextStation, EditStation.textHeureLigne, EditStation.textHeureDebut, EditStation.textHeureFin);
+								Utils.test(EditStation.textTestConvHeure,
+										ViewFile.styledTextStation,
+										EditStation.textHeureLigne,
+										EditStation.textHeureDebut,
+										EditStation.textHeureFin);
 							}
-							
+
 							try {
 								DateTimeFormat formatHeure = new DateTimeFormat(
 										EditStation.comboHeure.getText());
-								
-								Float flDecalTU = Float.parseFloat(EditStation.textTU.getText()) * 3600 * 1000;
-								
+
+								Float flDecalTU = Float
+										.parseFloat(EditStation.textTU
+												.getText()) * 3600 * 1000;
+
 								Long lgDecalTU = flDecalTU.longValue();
-								
+
 								Long HourLong = (Long) formatHeure
-										.parseObject(EditStation.textTestConvHeure.getText()) + lgDecalTU;
-								
+										.parseObject(EditStation.textTestConvHeure
+												.getText())
+										+ lgDecalTU;
+
 								cal.setTimeInMillis(DateLong + HourLong);
-								
+
 								Formatter formatter;
-								
+
 								formatter = Formatter.getSingleton();
-								
-								EditStation.textTestConvHeure.setText(formatter.formatDateTime("hh24mm", HourLong, "9999"));
+
+								EditStation.textTestConvHeure.setText(formatter
+										.formatDateTime("hh24mm", HourLong,
+												"9999"));
 								EditStation.textTestConvHeure.pack();
-								
+
 							} catch (ParseException e) {
 
 								Utils.messageErreurAppend(Messages
@@ -1962,33 +1980,32 @@ public class DrawingStation {
 										.getString("Etape.120"));
 								EditStation.textTestConvHeure.pack();
 							}
-							
+
 							if (!EditStation.buttonDateSaisie.getSelection()) {
-								Utils.test(test, ViewFile.styledTextStation, lign, debu, fi);
+								Utils.test(test, ViewFile.styledTextStation,
+										lign, debu, fi);
 							}
-							
+
 							DateLong = cal.getTimeInMillis();
-							
+
 							Formatter formatter;
-							
+
 							formatter = Formatter.getSingleton();
-							
-							test.setText(formatter.formatDateTime("yyyy-MM-dd", DateLong));
+
+							test.setText(formatter.formatDateTime("yyyy-MM-dd",
+									DateLong));
 							test.pack();
 						} catch (ParseException e) {
 
 							Utils.messageErreurAppend(Messages
 									.getString("Etape.122")); //$NON-NLS-1$
-							test.setText(Messages
-									.getString("Etape.120"));
+							test.setText(Messages.getString("Etape.120"));
 							test.pack();
 						}
-						
-						
+
 					}
 				});
-		
-		
+
 		EditStation.buttonDateSaisie.setSelection(blnManuel);
 		EditStation.textDateSaisie.setEnabled(blnManuel);
 		EditStation.buttonDatePos.setSelection(!blnManuel);
@@ -1996,13 +2013,12 @@ public class DrawingStation {
 		debu.setEnabled(!blnManuel);
 		fi.setEnabled(!blnManuel);
 		inject.setEnabled(!blnManuel);
-	
-		/*// par défaut manuel
-		EditStation.buttonDateSaisie.setSelection(true);
-		lign.setEnabled(false);
-		debu.setEnabled(false);
-		fi.setEnabled(false);
-		inject.setEnabled(false);*/
+
+		/*
+		 * // par défaut manuel EditStation.buttonDateSaisie.setSelection(true);
+		 * lign.setEnabled(false); debu.setEnabled(false); fi.setEnabled(false);
+		 * inject.setEnabled(false);
+		 */
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
@@ -2012,7 +2028,8 @@ public class DrawingStation {
 	public static void sectionManuelLigneDebutFinInjectLatLongComboFormat(
 			String nomSection, String description, Section section, Text ligne,
 			Text debut, Text fin, Text manuel, Button radio, Combo combo,
-			Button position, Button buttonVar, boolean blnManuel, boolean blnLatitude) {
+			Button position, Button buttonVar, boolean blnManuel,
+			boolean blnLatitude) {
 		final Text manu;
 		final Text lign, debu, fi, test;
 		final Button inject, var;
@@ -2066,14 +2083,14 @@ public class DrawingStation {
 		groupe.setText(Messages.getString("Drawing.9"));
 		// groupe.setLayout(gridLayout1);
 		grou = groupe;
-		
+
 		GridLayoutFactory.fillDefaults().applyTo(groupe);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(groupe);
-				
-		Composite compo1 = new Composite(groupe,SWT.NONE);		
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(groupe);
+
+		Composite compo1 = new Composite(groupe, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(6).applyTo(compo1);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(compo1);
-		
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(compo1);
+
 		// ligne
 		Label label1 = new Label(compo1, SWT.NULL);
 		label1.setText(Messages.getString("Drawing.10"));
@@ -2098,10 +2115,10 @@ public class DrawingStation {
 		// groupe non visible de base
 		// groupe.setVisible(false);
 
-		Composite compo2 = new Composite(groupe,SWT.NONE);
+		Composite compo2 = new Composite(groupe, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo2);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(compo2);
-		
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(compo2);
+
 		// bouton d'injection de la position des valeurs
 		Button buttonInject = new Button(compo2, SWT.NONE);
 		buttonInject.setText(Messages.getString("Drawing.1"));
@@ -2110,17 +2127,18 @@ public class DrawingStation {
 		// bouton de fin de ligne variable
 		buttonVar.setText(Messages.getString("Drawing.20"));
 		buttonVar.setParent(compo2);
-		GridDataFactory.fillDefaults().grab(true, false).align(SWT.END, SWT.CENTER).applyTo(buttonVar);
+		GridDataFactory.fillDefaults().grab(true, false).align(SWT.END,
+				SWT.CENTER).applyTo(buttonVar);
 
 		section.setClient(sectionClient);
-		
-//		 Zone de test
-		Composite compoTest = new Composite(sectionClient,SWT.NONE);
+
+		// Zone de test
+		Composite compoTest = new Composite(sectionClient, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoTest);
-		
-		Button btnTest = new Button(compoTest,SWT.NONE);
+
+		Button btnTest = new Button(compoTest, SWT.NONE);
 		btnTest.setText("Test");
-		
+
 		Text txtTest = new Text(compoTest, SWT.BORDER);
 		txtTest.setEnabled(false);
 		txtTest.setText("");
@@ -2192,8 +2210,8 @@ public class DrawingStation {
 
 					}
 				});
-		
-//		 bouton Var
+
+		// bouton Var
 		buttonVar
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
@@ -2201,32 +2219,34 @@ public class DrawingStation {
 						fi.setEnabled(!var.getSelection());
 					}
 				});
-		
-//		 bouton test
+
+		// bouton test
 		btnTest
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-							if (latitude) {
-								if (EditStation.buttonLatSaisie.getSelection()) {
-									Utils.test(test, EditStation.textLatitude);
-								} else {
-									Utils.test(test, ViewFile.styledTextStation, lign, debu, fi);
-								}
+						if (latitude) {
+							if (EditStation.buttonLatSaisie.getSelection()) {
+								Utils.test(test, EditStation.textLatitude);
 							} else {
-								if (EditStation.buttonLongSaisie.getSelection()) {
-								Utils.test(test, EditStation.textLongitude);
-								} else {
-									Utils.test(test, ViewFile.styledTextStation, lign, debu, fi);
-								}
+								Utils.test(test, ViewFile.styledTextStation,
+										lign, debu, fi);
 							}
-						
+						} else {
+							if (EditStation.buttonLongSaisie.getSelection()) {
+								Utils.test(test, EditStation.textLongitude);
+							} else {
+								Utils.test(test, ViewFile.styledTextStation,
+										lign, debu, fi);
+							}
+						}
+
 						if (latitude) {
 							try {
 								fr.ifremer.nemo.util.LatitudeFormat format = new fr.ifremer.nemo.util.LatitudeFormat(
 										EditStation.comboLatitude.getText());
 								format.setVariableLength(var.getSelection());
-								
+
 								Double latitudeDouble = (Double) format
 										.parseObject(test.getText());
 
@@ -2240,8 +2260,7 @@ public class DrawingStation {
 
 								Utils.messageErreurAppend(Messages
 										.getString("Etape.53")); //$NON-NLS-1$
-								test.setText(Messages
-										.getString("Etape.120"));
+								test.setText(Messages.getString("Etape.120"));
 								test.pack();
 							}
 
@@ -2264,16 +2283,15 @@ public class DrawingStation {
 
 								Utils.messageErreurAppend(Messages
 										.getString("Etape.58")); //$NON-NLS-1$
-								test.setText(Messages
-										.getString("Etape.120"));
+								test.setText(Messages.getString("Etape.120"));
 								test.pack();
 							}
-						}	
-						
+						}
+
 						test.pack();
 					}
 				});
-		
+
 		radio.setSelection(blnManuel);
 		manu.setEnabled(blnManuel);
 		position.setSelection(!blnManuel);
@@ -2282,38 +2300,41 @@ public class DrawingStation {
 		fi.setEnabled(!blnManuel);
 		inject.setEnabled(!blnManuel);
 		var.setEnabled(!blnManuel);
-		
+
 		if (DataModel.ouverture) {
 			PropertyModel propertyModel;
 			if (latitude) {
-				propertyModel = DataModel.stationModel_modele.propertiesAt("latitude");
+				propertyModel = DataModel.stationModel_modele
+						.propertiesAt("latitude");
 			} else {
-				propertyModel = DataModel.stationModel_modele.propertiesAt("longitude");
+				propertyModel = DataModel.stationModel_modele
+						.propertiesAt("longitude");
 			}
-			
+
 			if (!propertyModel.isUserProvided()) {
 				HeaderFragment frag = propertyModel.getFragment();
-				
+
 				fi.setEnabled(!frag.isVariable());
-				
+
 			}
 		}
 
-		/*// saisie manuelle par défaut
-		radio.setSelection(true);
-		lign.setEnabled(false);
-		debu.setEnabled(false);
-		fi.setEnabled(false);
-		inject.setEnabled(false);*/
-		
+		/*
+		 * // saisie manuelle par défaut radio.setSelection(true);
+		 * lign.setEnabled(false); debu.setEnabled(false); fi.setEnabled(false);
+		 * inject.setEnabled(false);
+		 */
+
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
 
 	}
 
 	public static void sectionManuelLigneDebutFinInjectLatLongFin(
-			String nomSection, String description, Section section, Combo combo, Text ligne,
-			Text debut, Text fin, Text manuel, Button radio, Button position, Button buttonVar, boolean blnManuel, boolean blnLatitude) {
+			String nomSection, String description, Section section,
+			Combo combo, Text ligne, Text debut, Text fin, Text manuel,
+			Button radio, Button position, Button buttonVar, boolean blnManuel,
+			boolean blnLatitude) {
 
 		final Text manu;
 		final Text lign, debu, fi, test;
@@ -2346,7 +2367,7 @@ public class DrawingStation {
 		groupFormat.setLayout(new GridLayout());
 		// combo format
 		combo.setParent(groupFormat);
-		
+
 		radio.setParent(sectionClient);
 		radio.setText(Messages.getString("Drawing.4"));
 
@@ -2366,12 +2387,12 @@ public class DrawingStation {
 		grou = groupe;
 
 		GridLayoutFactory.fillDefaults().applyTo(groupe);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(groupe);
-		
-		Composite compo1 = new Composite(groupe,SWT.NONE);		
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(groupe);
+
+		Composite compo1 = new Composite(groupe, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(6).applyTo(compo1);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(compo1);
-		
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(compo1);
+
 		// ligne
 		Label label1 = new Label(compo1, SWT.NULL);
 		label1.setText(Messages.getString("Drawing.10"));
@@ -2393,29 +2414,30 @@ public class DrawingStation {
 
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		Composite compo2 = new Composite(groupe,SWT.NONE);
+		Composite compo2 = new Composite(groupe, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo2);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(compo2);
-		
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(compo2);
+
 		// bouton d'injection de la position des valeurs
 		Button buttonInject = new Button(compo2, SWT.NONE);
 		buttonInject.setText(Messages.getString("Drawing.1"));
 		inject = buttonInject;
-		
-//		 bouton de fin de ligne variable
+
+		// bouton de fin de ligne variable
 		buttonVar.setText(Messages.getString("Drawing.20"));
 		buttonVar.setParent(compo2);
-		GridDataFactory.fillDefaults().grab(true, false).align(SWT.END, SWT.CENTER).applyTo(buttonVar);
+		GridDataFactory.fillDefaults().grab(true, false).align(SWT.END,
+				SWT.CENTER).applyTo(buttonVar);
 
 		section.setClient(sectionClient);
-		
-//		 Zone de test
-		Composite compoTest = new Composite(sectionClient,SWT.NONE);
+
+		// Zone de test
+		Composite compoTest = new Composite(sectionClient, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoTest);
-		
-		Button btnTest = new Button(compoTest,SWT.NONE);
+
+		Button btnTest = new Button(compoTest, SWT.NONE);
 		btnTest.setText("Test");
-		
+
 		Text txtTest = new Text(compoTest, SWT.BORDER);
 		txtTest.setEnabled(false);
 		txtTest.setText("");
@@ -2486,8 +2508,8 @@ public class DrawingStation {
 
 					}
 				});
-		
-//		 bouton Var
+
+		// bouton Var
 		buttonVar
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
@@ -2496,8 +2518,8 @@ public class DrawingStation {
 
 					}
 				});
-		
-//		 bouton test
+
+		// bouton test
 		btnTest
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
@@ -2505,9 +2527,10 @@ public class DrawingStation {
 						if (rad.getSelection()) {
 							Utils.test(test, manu);
 						} else {
-							Utils.test(test, ViewFile.styledTextStation, lign, debu, fi);
+							Utils.test(test, ViewFile.styledTextStation, lign,
+									debu, fi);
 						}
-						
+
 						if (latitude) {
 							try {
 								fr.ifremer.nemo.util.LatitudeFormat format = new fr.ifremer.nemo.util.LatitudeFormat(
@@ -2527,8 +2550,7 @@ public class DrawingStation {
 
 								Utils.messageErreurAppend(Messages
 										.getString("Etape.53")); //$NON-NLS-1$
-								test.setText(Messages
-										.getString("Etape.120"));
+								test.setText(Messages.getString("Etape.120"));
 								test.pack();
 							}
 
@@ -2551,24 +2573,21 @@ public class DrawingStation {
 
 								Utils.messageErreurAppend(Messages
 										.getString("Etape.58")); //$NON-NLS-1$
-								test.setText(Messages
-										.getString("Etape.120"));
+								test.setText(Messages.getString("Etape.120"));
 								test.pack();
 							}
-						}	
-						
+						}
+
 						test.pack();
 					}
 				});
 
-		/*// saisie manuelle par défaut
-		radio.setSelection(true);
-		lign.setEnabled(false);
-		debu.setEnabled(false);
-		fi.setEnabled(false);
-		inject.setEnabled(false);*/
-		
-		
+		/*
+		 * // saisie manuelle par défaut radio.setSelection(true);
+		 * lign.setEnabled(false); debu.setEnabled(false); fi.setEnabled(false);
+		 * inject.setEnabled(false);
+		 */
+
 		radio.setSelection(blnManuel);
 		manu.setEnabled(blnManuel);
 		position.setSelection(!blnManuel);
@@ -2577,20 +2596,22 @@ public class DrawingStation {
 		fi.setEnabled(!blnManuel);
 		inject.setEnabled(!blnManuel);
 		var.setEnabled(!blnManuel);
-		
+
 		if (DataModel.ouverture) {
 			PropertyModel propertyModel;
 			if (latitude) {
-				propertyModel = DataModel.stationModel_modele.getTimeSeriesModel().propertiesAt("endLatitude");
+				propertyModel = DataModel.stationModel_modele
+						.getTimeSeriesModel().propertiesAt("endLatitude");
 			} else {
-				propertyModel = DataModel.stationModel_modele.getTimeSeriesModel().propertiesAt("endLongitude");
+				propertyModel = DataModel.stationModel_modele
+						.getTimeSeriesModel().propertiesAt("endLongitude");
 			}
-			
+
 			if (!propertyModel.isUserProvided()) {
 				HeaderFragment frag = propertyModel.getFragment();
-				
+
 				fi.setEnabled(!frag.isVariable());
-				
+
 			}
 		}
 
@@ -2599,15 +2620,8 @@ public class DrawingStation {
 
 	}
 
-	public static void ajoutSectionDansListeStation(Section section) {
-
-		EditStation.listeSectionsStation.add(section);
-		//System.out.println("ajout section ok");
-
-	}
-
-	public static void sectionQC(String nomSection, String description,
-			Section section) {
+	public static void sectionFlagQC(String nomSection, String description,
+			Section section, Table tabCorrespondance, Table tabFlagQC) {
 
 		section.setParent(ViewEdit.formEdition);
 		section = ViewEdit.toolkitEdition.createSection(ViewEdit.formEdition
@@ -2626,39 +2640,271 @@ public class DrawingStation {
 		Composite sectionClient = ViewEdit.toolkitEdition
 				.createComposite(section);
 		GridLayout gridLayout = new GridLayout();
-		gridLayout.numColumns = 2;
+		gridLayout.numColumns = 1;
 		sectionClient.setLayout(gridLayout);
 
-		// label avec le texte de "description"
-		Label label1 = new Label(sectionClient, SWT.NULL);
-		label1.setText("Flag QC Date/Heure");
-		EditStation.textQCDate.setParent(sectionClient);
+		// Tableau des correspondances
+		tabCorrespondance.setHeaderVisible(true);
+		tabCorrespondance.setLinesVisible(true);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(
+				tabCorrespondance);
+		TableColumn flagColumn1 = new TableColumn(tabCorrespondance, SWT.NONE);
+		flagColumn1.setWidth(60);
+		flagColumn1.setText(Messages.getString("OptionsAction.36")); //$NON-NLS-1$
 
-		EditStation.textQCDate.setTextLimit(1);
+		TableColumn flagColumn2 = new TableColumn(tabCorrespondance, SWT.NONE);
+		flagColumn2.setWidth(210);
+		flagColumn2.setText(Messages.getString("OptionsAction.37")); //$NON-NLS-1$
 
-		Label label2 = new Label(sectionClient, SWT.NULL);
-		label2.setText("Flag QC Latitude");
-		EditStation.textQCLat.setParent(sectionClient);
+		// Menu contextuel
+		Menu menu = new Menu(tabCorrespondance.getShell(), SWT.POP_UP);
+		MenuItem itemAdd = new MenuItem(menu, SWT.NONE);
+		itemAdd.setText(Messages.getString("OptionsAction.38")); //$NON-NLS-1$
+		MenuItem itemRemove = new MenuItem(menu, SWT.NONE);
+		itemRemove.setText(Messages.getString("OptionsAction.39")); //$NON-NLS-1$
 
-		EditStation.textQCLat.setTextLimit(1);
+		tabCorrespondance.setMenu(menu);
 
-		Label label3 = new Label(sectionClient, SWT.NULL);
-		label3.setText("Flag QC Longitude");
-		EditStation.textQCLong.setParent(sectionClient);
+		final Table tab = tabCorrespondance;
+		final Menu men = menu;
 
-		EditStation.textQCLong.setTextLimit(1);
+		final TableEditor editor = new TableEditor(tabCorrespondance);
+		editor.horizontalAlignment = SWT.LEFT;
+		editor.grabHorizontal = true;
 
-		Label label4 = new Label(sectionClient, SWT.NULL);
-		label4.setText("Flag QC Profondeur");
-		EditStation.textQCProf.setParent(sectionClient);
+		tabCorrespondance.addMouseListener(new MouseAdapter() {
+			public void mouseDown(MouseEvent event) {
+				Control old = editor.getEditor();
+				if (old != null)
+					old.dispose();
 
-		EditStation.textQCProf.setTextLimit(1);
+				Point pt = new Point(event.x, event.y);
 
+				final TableItem item = tab.getItem(pt);
+				if (item == null) {
+					return;
+				}
+				int column = -1;
+				for (int i = 0, n = tab.getColumnCount(); i < n; i++) {
+					Rectangle rect = item.getBounds(i);
+					if (rect.contains(pt)) {
+						column = i;
+						break;
+					}
+				}
+
+				if (column == -1) {
+					return;
+				}
+
+				final int col = column;
+				final Text text = new Text(tab, SWT.NONE);
+				final CCombo combo = new CCombo(tab, SWT.READ_ONLY);
+
+				String[] flags = Flag.flagSDN();
+				for (int i = 0; i < flags.length; i++) {
+					combo.add(flags[i]);
+				}
+				if (flags.length > 20) {
+					combo.setVisibleItemCount(20);
+				} else {
+					combo.setVisibleItemCount(flags.length);
+				}
+
+				final Flag flag = EditStation.flagTable.getFlag(item.getText());
+
+				switch (column) {
+				case 0:
+					text.setForeground(item.getForeground());
+
+					text.setText(item.getText(column));
+					text.setForeground(item.getForeground());
+					text.selectAll();
+					text.setFocus();
+
+					editor.minimumWidth = text.getBounds().width;
+
+					editor.setEditor(text, item, column);
+
+					text.addModifyListener(new ModifyListener() {
+						public void modifyText(ModifyEvent event) {
+							flag.setLocal(text.getText());
+							item.setText(col, text.getText());
+						}
+					});
+
+					break;
+				case 1:
+					combo.setForeground(item.getForeground());
+
+					combo.setText(item.getText(column));
+					combo.setForeground(item.getForeground());
+					// combo.selectAll();
+					// combo.setFocus();
+					editor.minimumWidth = combo.getBounds().width;
+
+					editor.setEditor(combo, item, column);
+
+					combo.addModifyListener(new ModifyListener() {
+						public void modifyText(ModifyEvent event) {
+							flag.setSdn(combo.getText());
+							item.setText(col, combo.getText());
+						}
+					});
+					break;
+				default:
+					return;
+				}
+			}
+		});
+
+		tabCorrespondance.addListener(SWT.MouseDown, new Listener() {
+			public void handleEvent(Event event) {
+				// Lors d'un clic droit sur le tableau, on force l'affichage du
+				// menu contextuel
+				if (event.button == 3) {
+					men.setVisible(true);
+				}
+			}
+		});
+
+		itemAdd.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
+				TableItem item = new TableItem(tab, SWT.NONE);
+				item.setText(0, Messages.getString("OptionsAction.41"));
+				item.setText(1, Messages.getString("OptionsAction.41"));
+
+				Flag temp = new Flag(item.getText(0), item.getText(1));
+				EditStation.flagTable.getFlags().add(temp);
+			}
+		});
+
+		itemRemove.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
+				EditStation.flagTable.getFlags().remove(
+						EditStation.flagTable.getFlag(tab.getSelection()[0]
+								.getText()));
+				tab.remove(tab.getSelectionIndex());
+			}
+		});
+
+		MenuItem itemLoad = new MenuItem(menu, SWT.CASCADE);
+		itemLoad.setText(Messages.getString("OptionsAction.43")); //$NON-NLS-1$
+		final Menu submenu = new Menu(tabCorrespondance.getShell(),
+				SWT.DROP_DOWN);
+		itemLoad.setMenu(submenu);
+		final ArrayList<FlagTable> flagTables = FlagTable
+				.getOrderedFlagTables(Utils.configuration.getFlagTables());
+
+		for (int i = 0; i < flagTables.size(); i++) {
+			final MenuItem childItem = new MenuItem(submenu, SWT.PUSH);
+			childItem.setText(flagTables.get(i).getCode() + " - "
+					+ flagTables.get(i).getLibelle());
+			final int j = i;
+			childItem.addListener(SWT.Selection, new Listener() {
+				public void handleEvent(Event e) {
+					EditStation.flagTable = flagTables.get(j);
+					EditStation.flagTable.fillTable(tab);
+					ViewEdit.formEdition.reflow(true);
+				}
+			});
+		}
+		tabCorrespondance.setParent(sectionClient);
+
+		// Tableau des flags
+		tabFlagQC.setHeaderVisible(true);
+		tabFlagQC.setLinesVisible(true);
+		tabFlagQC.setParent(sectionClient);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(tabFlagQC);
+
+		TableColumn tableColumn1 = new TableColumn(tabFlagQC, SWT.NONE);
+		tableColumn1.setWidth(110);
+		tableColumn1.setText(Messages.getString("EditStation.38")); //$NON-NLS-1$
+
+		TableColumn tableColumn2 = new TableColumn(tabFlagQC, SWT.NONE);
+		tableColumn2.setWidth(50);
+		tableColumn2.setText(Messages.getString("EditStation.39")); //$NON-NLS-1$	
+
+		TableColumn tableColumn3 = new TableColumn(tabFlagQC, SWT.NONE);
+		tableColumn3.setWidth(50);
+		tableColumn3.setText(Messages.getString("EditStation.40")); //$NON-NLS-1$	
+
+		TableColumn tableColumn4 = new TableColumn(tabFlagQC, SWT.NONE);
+		tableColumn4.setWidth(50);
+		tableColumn4.setText(Messages.getString("EditStation.41")); //$NON-NLS-1$	
+
+		TableColumn tableColumn5 = new TableColumn(tabFlagQC, SWT.NONE);
+		tableColumn5.setWidth(60);
+		tableColumn5.setText(Messages.getString("EditStation.42")); //$NON-NLS-1$	
+
+		// Section
 		section.setClient(sectionClient);
 
 		// ajout de la section dans la liste des sections de description
 		ajoutSectionDansListeStation(section);
 
 	}
+
+	public static void ajoutSectionDansListeStation(Section section) {
+
+		EditStation.listeSectionsStation.add(section);
+		// System.out.println("ajout section ok");
+
+	}
+
+	// public static void sectionQC(String nomSection, String description,
+	// Section section) {
+	//
+	// section.setParent(ViewEdit.formEdition);
+	// section = ViewEdit.toolkitEdition.createSection(ViewEdit.formEdition
+	// .getBody(), Section.DESCRIPTION | Section.TITLE_BAR
+	// | Section.TWISTIE | Section.COMPACT);
+	//
+	// section.addExpansionListener(new ExpansionAdapter() {
+	// public void expansionStateChanged(ExpansionEvent e) {
+	// ViewEdit.formEdition.reflow(true);
+	// }
+	// });
+	// Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL);
+	// section.setFont(font);
+	// section.setText(nomSection);
+	// section.setDescription(description);
+	// Composite sectionClient = ViewEdit.toolkitEdition
+	// .createComposite(section);
+	// GridLayout gridLayout = new GridLayout();
+	// gridLayout.numColumns = 2;
+	// sectionClient.setLayout(gridLayout);
+	//
+	// // label avec le texte de "description"
+	// Label label1 = new Label(sectionClient, SWT.NULL);
+	// label1.setText("Flag QC Date/Heure");
+	// EditStation.textQCDate.setParent(sectionClient);
+	//
+	// EditStation.textQCDate.setTextLimit(1);
+	//
+	// Label label2 = new Label(sectionClient, SWT.NULL);
+	// label2.setText("Flag QC Latitude");
+	// EditStation.textQCLat.setParent(sectionClient);
+	//
+	// EditStation.textQCLat.setTextLimit(1);
+	//
+	// Label label3 = new Label(sectionClient, SWT.NULL);
+	// label3.setText("Flag QC Longitude");
+	// EditStation.textQCLong.setParent(sectionClient);
+	//
+	// EditStation.textQCLong.setTextLimit(1);
+	//
+	// Label label4 = new Label(sectionClient, SWT.NULL);
+	// label4.setText("Flag QC Profondeur");
+	// EditStation.textQCProf.setParent(sectionClient);
+	//
+	// EditStation.textQCProf.setTextLimit(1);
+	//
+	// section.setClient(sectionClient);
+	//
+	// // ajout de la section dans la liste des sections de description
+	// ajoutSectionDansListeStation(section);
+	//
+	// }
 
 }

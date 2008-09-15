@@ -20,6 +20,8 @@ import com.ago.xml.PathElementHandler;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.config.Flag;
+import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.Cdi;
 import fr.ifremer.nemo.domain.HorodatedValue;
@@ -182,6 +184,11 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * Format decimal de la date Julienne
 	 */
 	protected DecimalFormat _df;
+	
+	/**
+	 * Tableau de correspondance des flags
+	 */
+	protected FlagTable _flagTable;
 
 	public StationModel() {
 		_incrementNumber = 1;
@@ -380,6 +387,32 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			setTimestampModel(l);
 			return (SAXConsumer) l;
 		}
+		if (a_LocalName.equals("FlagTable")) {
+			String code = null;
+			String label = null;
+			FlagTable flagTable = new FlagTable();
+			
+			if ((code = a_Attributes.getValue("code")) != null &&
+					(label = a_Attributes.getValue("label")) != null) {
+				flagTable.setCode(code);
+				flagTable.setLibelle(label);
+				setFlagTable(flagTable);
+			}
+			return this;
+		}
+		if (a_LocalName.equals("Flag")) {
+			String local = null;
+			String sdn = null;
+			Flag flag = new Flag();
+			
+			if ((local = a_Attributes.getValue("local")) != null &&
+					(sdn = a_Attributes.getValue("SDN")) != null) {
+				flag.setLocal(local);
+				flag.setSdn(sdn);
+				getFlagTable().getFlags().add(flag);
+			}
+			return this;
+		}
 		return null;
 	}
 
@@ -452,6 +485,18 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		}
 		if (getTimestampModel() != null) {
 			getTimestampModel().writeXMLOn(a_Writer);
+		}
+		if (getFlagTable() != null) {
+			a_Writer.openTag("FlagTable");
+			a_Writer.putAttribute("code", getFlagTable().getCode());
+			a_Writer.putAttribute("label", getFlagTable().getLibelle());
+			for (int i = 0; i < getFlagTable().getFlags().size(); i++) {
+				a_Writer.openTag("Flag");
+				a_Writer.putAttribute("local", getFlagTable().getFlags().get(i).getLocal());
+				a_Writer.putAttribute("SDN", getFlagTable().getFlags().get(i).getSdn());
+				a_Writer.closeTag();
+			}
+			a_Writer.closeTag();
 		}
 	}
 
@@ -1400,6 +1445,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	public String[] consumeHeader(BufferedReader a_Reader) throws IOException {
 		Vector<String> v = new Vector<String>();
 		for (int i = 0; i < _numberOfLines; i++) {
+			
 			String line = a_Reader.readLine();
 			EditConversion.incrementErreurLigne();
 			EditConversion.setErreurChaine(line);
@@ -1742,9 +1788,13 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 							getReferenceProperty().applyOn(station, header);
 						}
 					}
+
 					for (PropertyModel m : getProperties()) {
 						// System.out.println("@DEBUG propertyModel courant
 						// :"+m.getProperty());
+						if (m.getProperty().equals("comment")) {
+							System.out.println();
+						}
 						m.applyOn(station, header);
 					}
 					if (_timeSeriesModel != null) {
@@ -2163,5 +2213,13 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 	public void setDecimalFormat(DecimalFormat _df) {
 		this._df = _df;
+	}
+
+	public FlagTable getFlagTable() {
+		return _flagTable;
+	}
+
+	public void setFlagTable(FlagTable table) {
+		_flagTable = table;
 	}
 } /* End of class: StationModel */

@@ -49,11 +49,11 @@ public class Utils {
 	public static ProgressBar progressbar;
 
 	public static InputModel inputModel;
-	
+
 	public static void insertTextFich(String fich, StyledText zone, boolean raz)
 			throws IOException {
 
-		int nbreLignes,  i, cumul, indexMax;
+		int nbreLignes, i, cumul, indexMax;
 		String ligne;
 
 		texteBrut = ""; //$NON-NLS-1$
@@ -102,7 +102,8 @@ public class Utils {
 		zone.setFont(font);
 
 		// log ok
-	//	ViewLog.styledTextLogErreurs.setText(Messages.getString("Utils.4")); //$NON-NLS-1$
+		// ViewLog.styledTextLogErreurs.setText(Messages.getString("Utils.4"));
+		// //$NON-NLS-1$
 
 		// début d'infos du fichier
 
@@ -112,23 +113,23 @@ public class Utils {
 				.append(Messages.getString("Utils.6") + nbreLignes); //$NON-NLS-1$
 
 		// réactivation de l'option série temporelle onglet DESC
-//		ViewFile.checkBoxTempo.setEnabled(true);
+		// ViewFile.checkBoxTempo.setEnabled(true);
 		ViewFile.radProfilVertical.setEnabled(true);
 		ViewFile.radSerieTempo.setEnabled(true);
 		ViewFile.radTrajectoire.setEnabled(true);
-		
+
 		// FAE 089
 		// ViewFile.checkBoxTempo.setSelection(false);
 
 		// RAZ global si réouverture fichier en cours de processus
 
 		EditDesc.nomNemo();
-		
+
 		if (raz) {
 			Utils.razGlobal();
-			
+
 			DataModel.ouverture = false;
-			
+
 			// reset de l'étape de conversion
 			ViewFile.etape = 0;
 		}
@@ -168,8 +169,8 @@ public class Utils {
 		deb = styledtext.getSelection().x;
 		fi = styledtext.getSelection().y;
 
-//		System.out.println("deb clic = " + deb);
-//		System.out.println("fi clic = " + fi);
+		// System.out.println("deb clic = " + deb);
+		// System.out.println("fi clic = " + fi);
 
 		if (deb == fi) {
 			Utils.messageErreur(Messages.getString("Utils.26"));
@@ -221,8 +222,9 @@ public class Utils {
 			Utils.messageErreur("");
 		}
 	}
-	
-	public static void test(Text test, StyledText styledtext, Text ligne, Text debut, Text fin) {
+
+	public static void test(Text test, StyledText styledtext, Text ligne,
+			Text debut, Text fin) {
 		int deb, fi, lign;
 
 		if (ligne.getText().equals("")) {
@@ -230,17 +232,17 @@ public class Utils {
 		} else {
 			lign = Integer.parseInt(ligne.getText());
 		}
-		
+
 		deb = Integer.parseInt(debut.getText()) + taillesCumLignes[lign - 1];
 		fi = Integer.parseInt(fin.getText()) + taillesCumLignes[lign - 1];
-		
-		styledtext.setSelection(deb-1, fi);
-		
+
+		styledtext.setSelection(deb - 1, fi);
+
 		// remplissage test dans interface
-		test.setText(styledtext.getText(deb-1, fi-1));
+		test.setText(styledtext.getText(deb - 1, fi - 1));
 		test.pack();
 	}
-	
+
 	public static void test(Text test, Text saisie) {
 		test.setText(saisie.getText());
 
@@ -334,7 +336,7 @@ public class Utils {
 				}
 
 			}
-			
+
 			// calcul ligne fin
 			for (int i = 0; i < lignesBrutes.size(); i++) {
 
@@ -440,7 +442,7 @@ public class Utils {
 		ligneFin = frag.getLastLine();
 		offsetDebut = frag.getFirstCharOffset();
 		offsetFin = frag.getLastCharOffset();
-		
+
 		cursor.setX(taillesCumLignes[ligneDebut - 1] + offsetDebut - 1);
 		cursor.setY(taillesCumLignes[ligneFin - 1] + offsetFin);
 
@@ -456,23 +458,23 @@ public class Utils {
 
 		offsetDebut = cursor.getX() - taillesCumLignes[ligneDebut - 1] + 1;
 		offsetFin = cursor.getY() - taillesCumLignes[ligneFin - 1];
-//		System.out.println("offsetdebut =" + offsetDebut + "  offsetfin="
-//				+ offsetFin);
+		// System.out.println("offsetdebut =" + offsetDebut + " offsetfin="
+		// + offsetFin);
 		if (offsetDebut < 0) {
 			frag.setFirstCharOffset(1);
 		} else {
 			frag.setFirstCharOffset(offsetDebut);
 		}
-		
+
 		if (offsetFin > 0) {
 			frag.setLastCharOffset(offsetFin);
 		}
-		
-		/*if (EditStation.buttonVar.getSelection()) {
-			frag.setLastCharOffset(-1);
-		} else {
-			frag.setLastCharOffset(offsetFin);
-		}*/
+
+		/*
+		 * if (EditStation.buttonVar.getSelection()) {
+		 * frag.setLastCharOffset(-1); } else {
+		 * frag.setLastCharOffset(offsetFin); }
+		 */
 
 	}
 
@@ -550,14 +552,14 @@ public class Utils {
 			}
 			// en sortie de boucle, cpt a la valeur de l'offset de fin sur la
 			// dernière ligne du commentaire
-//			System.out.println("offset en ligne fin = " + cpt);
-//			System.out.println("ligne fin = " + lignFin);
-//			System.out.println("ligne debut = " + lignDepart);
+			// System.out.println("offset en ligne fin = " + cpt);
+			// System.out.println("ligne fin = " + lignFin);
+			// System.out.println("ligne debut = " + lignDepart);
 
 			if (cpt > 0) {
 				cpt = cpt - (nbrelignes - 1);
 			}
-			
+
 			frag.setLastCharOffset(cpt);
 		}
 
@@ -1009,7 +1011,7 @@ public class Utils {
 		File[] subfiles = directory.listFiles();
 
 		Arrays.sort(subfiles);
-		
+
 		int nbre = subfiles.length;
 		String nom = subfiles[0].getName();
 
@@ -1056,16 +1058,16 @@ public class Utils {
 		}
 
 		return ok;
-		
+
 	}
-	
+
 	public static Boolean findFilesCollectCas1(String directoryPath, boolean raz) {
 		File directory = new File(directoryPath);
 
 		Boolean ok = true;
 
 		File[] subfiles = directory.listFiles();
-		
+
 		Arrays.sort(subfiles);
 
 		int nbre = subfiles.length;
@@ -1099,7 +1101,7 @@ public class Utils {
 		}
 
 		File[] subsubfiles = subfiles[0].listFiles();
-		
+
 		Arrays.sort(subsubfiles);
 
 		String nom2 = subsubfiles[0].getName();
@@ -1129,10 +1131,11 @@ public class Utils {
 			}
 
 		}
-		
+
 		if (ok) {
 
-			ViewFile.nomFichier = directoryPath + "/" + subfiles[0].getName() + "/" +  subsubfiles[0].getName(); //$NON-NLS-1$
+			ViewFile.nomFichier = directoryPath
+					+ "/" + subfiles[0].getName() + "/" + subsubfiles[0].getName(); //$NON-NLS-1$
 			ViewFile.nomRepertoire = directoryPath;
 
 			try {
@@ -1146,10 +1149,8 @@ public class Utils {
 		}
 
 		return ok;
-		
-	}
-	
 
+	}
 
 	public static void messageErreur(String message) {
 		ViewLog.styledTextLogErreurs.setText(message);
@@ -1183,7 +1184,7 @@ public class Utils {
 
 		ViewLog.styledTextLogErreurs.setStyleRange(style);
 		ViewLog.tabFolderLog.setSelection(0);
-		
+
 		ViewLog.styledTextLogErreurs.update();
 
 	}
@@ -1218,7 +1219,7 @@ public class Utils {
 
 		ViewLog.styledTextLogErreurs.setStyleRange(style);
 		ViewLog.tabFolderLog.setSelection(0);
-		
+
 		ViewLog.styledTextLogErreurs.update();
 
 	}
@@ -1237,11 +1238,13 @@ public class Utils {
 		// sauvegarde de la config dans le fichier qui va bien
 		// CONTACT
 		configuration.setContact(""); //$NON-NLS-1$
-		
+
 		// DOSSIERS
-		configuration.setModelsDirectory(OptionsAction.textDossierModele.getText());
-		configuration.setCruisesDirectory(OptionsAction.textDossierCampagne.getText());
-		
+		configuration.setModelsDirectory(OptionsAction.textDossierModele
+				.getText());
+		configuration.setCruisesDirectory(OptionsAction.textDossierCampagne
+				.getText());
+
 		// LANGUE
 		if (OptionsAction.comboLangue.getItem(
 				OptionsAction.comboLangue.getSelectionIndex()).matches(
@@ -1250,9 +1253,10 @@ public class Utils {
 		} else {
 			configuration.setLang("en_GB"); //$NON-NLS-1$
 		}
-		
+
 		// CENTRE DE DONNEES
-		configuration.setDataCenter(Utils.extraitCode(OptionsAction.comboCentreDonnees.getText()));
+		configuration.setDataCenter(Utils
+				.extraitCode(OptionsAction.comboCentreDonnees.getText()));
 
 		// WS
 		configuration.setNautilusWebServiceURL(OptionsAction.textAreaNautilus
@@ -1260,7 +1264,7 @@ public class Utils {
 		configuration
 				.setNemoWebServiceURL(OptionsAction.textAreaNemo.getText());
 		configuration.setVocabURL(OptionsAction.textVocabURL.getText());
-		
+
 		configuration.getVocabLists().put("C77", "");
 		configuration.getVocabLists().put("C174", "");
 		configuration.getVocabLists().put("C180", "");
@@ -1275,52 +1279,60 @@ public class Utils {
 		configuration.getVocabLists().put("L300", "");
 		configuration.getVocabLists().put("P021", "");
 		configuration.getVocabLists().put("P091", "");
-		for (Entry<String, String> currentEntry : Utils.configuration.getVocabLists().entrySet()) {
+		for (Entry<String, String> currentEntry : Utils.configuration
+				.getVocabLists().entrySet()) {
 			configuration.setVocabListURL(currentEntry.getKey());
 		}
-		
+
 		// CDI
-		configuration.setIdEdmoRespCdi(Utils.extraitCode(OptionsAction.comboIdEdmoRespCdi.getText()));
-		configuration.setCodeEdmoDonnees(Utils.extraitCode(OptionsAction.comboCodeEdmoDonnees.getText()));
-		configuration.setIdEdmoRespDonnees(Utils.extraitCode(OptionsAction.comboIdEdmoRespDonnees.getText()));
-		configuration.setIdEdmoDistDonnees(Utils.extraitCode(OptionsAction.comboIdEdmoDistDonnees.getText()));
+		configuration.setIdEdmoRespCdi(Utils
+				.extraitCode(OptionsAction.comboIdEdmoRespCdi.getText()));
+		configuration.setCodeEdmoDonnees(Utils
+				.extraitCode(OptionsAction.comboCodeEdmoDonnees.getText()));
+		configuration.setIdEdmoRespDonnees(Utils
+				.extraitCode(OptionsAction.comboIdEdmoRespDonnees.getText()));
+		configuration.setIdEdmoDistDonnees(Utils
+				.extraitCode(OptionsAction.comboIdEdmoDistDonnees.getText()));
 		configuration.setCdiURL(OptionsAction.textUrlCdi.getText());
-		configuration.setCdiMethod(Utils.extraitCode(OptionsAction.comboMethodeCdi.getText()));
-		configuration.setFichierMapping(OptionsAction.textFichierMapping.getText());
+		configuration.setCdiMethod(Utils
+				.extraitCode(OptionsAction.comboMethodeCdi.getText()));
+		configuration.setFichierMapping(OptionsAction.textFichierMapping
+				.getText());
 		configuration.setArboMapping(OptionsAction.textArboMapping.getText());
-		
+
 		// Flags qualite
-//		int i, j;
-//		ArrayList<FlagTable> flagTables = new ArrayList<FlagTable>();
-//		
-//		for (i = 0; i < 4; i++) {
-//			FlagTable tmpTable = new FlagTable();
-//			tmpTable.setCode("C" + i);
-//			tmpTable.setLibelle("L" + i);
-//			
-//			ArrayList<Flag> flags = new ArrayList<Flag>();
-//			for (j = 0; j < 10; j++) {
-//				Flag tmpFlag = new Flag();
-//				tmpFlag.setLocal("loc" + i + "" + j);
-//				tmpFlag.setSdn("sdn" + i + "" + j);
-//				flags.add(tmpFlag);
-//			}
-//			tmpTable.setFlags(flags);
-//			
-//			flagTables.add(tmpTable);
-//		}
-//		configuration.setFlagTables(flagTables);
-		configuration.setDefaultFlagTable(OptionsAction.getDefaultCode());
+		// int i, j;
+		// ArrayList<FlagTable> flagTables = new ArrayList<FlagTable>();
+		//		
+		// for (i = 0; i < 4; i++) {
+		// FlagTable tmpTable = new FlagTable();
+		// tmpTable.setCode("C" + i);
+		// tmpTable.setLibelle("L" + i);
+		//			
+		// ArrayList<Flag> flags = new ArrayList<Flag>();
+		// for (j = 0; j < 10; j++) {
+		// Flag tmpFlag = new Flag();
+		// tmpFlag.setLocal("loc" + i + "" + j);
+		// tmpFlag.setSdn("sdn" + i + "" + j);
+		// flags.add(tmpFlag);
+		// }
+		// tmpTable.setFlags(flags);
+		//			
+		// flagTables.add(tmpTable);
+		// }
+		// configuration.setFlagTables(flagTables);
+		configuration.setDefaultCode(OptionsAction.getDefaultCode());
 		ArrayList<FlagTable> flagTables = new ArrayList<FlagTable>();
 		for (int i = 0; i < OptionsAction.getFlagTables().size(); i++) {
-			FlagTable flagTable = new FlagTable(OptionsAction.getFlagTables().get(i));
+			FlagTable flagTable = new FlagTable(OptionsAction.getFlagTables()
+					.get(i));
 			flagTables.add(flagTable);
 		}
 		configuration.setFlagTables(flagTables);
-		
+
 		// Enregistrement de la configuration
 		configuration.save();
-		
+
 		// System.out.println("sauvegarde options... ok");
 
 	}
@@ -1440,8 +1452,7 @@ public class Utils {
 
 		// reset des noms des onglets
 		ViewFile.tabItem.setText(Messages.getString("Utils.21")); //$NON-NLS-1$
-		if (!ViewFile.tabItem1.isDisposed())
-		{
+		if (!ViewFile.tabItem1.isDisposed()) {
 			ViewFile.tabItem1.setText(Messages.getString("Utils.22")); //$NON-NLS-1$		
 		}
 		ViewFile.tabItem2.setText(Messages.getString("Utils.23")); //$NON-NLS-1$
@@ -1468,85 +1479,94 @@ public class Utils {
 	public static void selectComboValeur(Combo combo, String valeur) {
 		int i = 0;
 		int size = combo.getItemCount();
-		
+
 		if (valeur.equals("")) {
 			combo.select(-1);
 		} else {
 			combo.select(i);
-			
+
 			while (i < size && !combo.getText().equals(valeur)) {
 				i++;
 				combo.select(i);
 			}
-			
+
 			if (!combo.getText().equals(valeur)) {
 				combo.add(valeur);
-				combo.select(combo.getItemCount() - 1 );
+				combo.select(combo.getItemCount() - 1);
 			}
 		}
 	}
-	
+
 	public static void selectComboCode(Combo combo, String code) {
 		int i = 0;
 		int length = code.length();
 		int size = combo.getItemCount();
-		
+
 		if (code.equals("")) {
 			combo.select(-1);
 		} else {
 			combo.select(i);
-			
-			while (i < size && !combo.getText().substring(0,Math.min(combo.getText().length(),length)).equals(code)) {
+
+			while (i < size
+					&& !combo.getText().substring(0,
+							Math.min(combo.getText().length(), length)).equals(
+							code)) {
 				i++;
 				combo.select(i);
 			}
-			
-			if (!combo.getText().substring(0,Math.min(combo.getText().length(),length)).equals(code)) {
+
+			if (!combo.getText().substring(0,
+					Math.min(combo.getText().length(), length)).equals(code)) {
 				combo.add(code);
-				combo.select(combo.getItemCount() - 1 );
+				combo.select(combo.getItemCount() - 1);
 			}
 		}
 	}
-	
-	public static void selectComboCodePlus(Combo combo, String code, String valeur) {
+
+	public static void selectComboCodePlus(Combo combo, String code,
+			String valeur) {
 		int i = 0;
 		int length = code.length();
 		int size = combo.getItemCount();
-		
+
 		if (code.equals("")) {
 			combo.select(-1);
 		} else {
 			combo.select(i);
-			
-			while (i < size && !combo.getText().substring(0,Math.min(combo.getText().length(),length)).equals(code)) {
+
+			while (i < size
+					&& !combo.getText().substring(0,
+							Math.min(combo.getText().length(), length)).equals(
+							code)) {
 				i++;
 				combo.select(i);
 			}
-			
-			if (!combo.getText().substring(0,Math.min(combo.getText().length(),length)).equals(code)) {
+
+			if (!combo.getText().substring(0,
+					Math.min(combo.getText().length(), length)).equals(code)) {
 				combo.add(code + " - " + valeur);
-				combo.select(combo.getItemCount() - 1 );
+				combo.select(combo.getItemCount() - 1);
 			}
 		}
 	}
-	
+
 	public static String extraitCode(String valeur) {
 		if (valeur.indexOf(" ") > -1) {
-			return valeur.substring(0,valeur.indexOf(" "));
+			return valeur.substring(0, valeur.indexOf(" "));
 		} else {
 			return valeur;
 		}
 	}
-	
+
 	public static String extraitCodeURN(String valeur) {
 		if (valeur.lastIndexOf('/') > -1) {
 			return valeur.substring(valeur.lastIndexOf('/') + 1);
 		} else {
 			return valeur;
 		}
-		
+
 	}
-	
+
 	public static String extraitValeur(String valeur) {
 		if (valeur.indexOf(" - ") > -1) {
 			return valeur.substring(valeur.indexOf(" - ") + 3);
@@ -1554,15 +1574,15 @@ public class Utils {
 			return "";
 		}
 	}
-	
+
 	public static String extraitFichierChemin(String chemin) {
 		if (chemin.lastIndexOf('\\') > -1) {
-			return chemin.substring(chemin.lastIndexOf('\\')+1);
+			return chemin.substring(chemin.lastIndexOf('\\') + 1);
 		} else {
 			return chemin;
 		}
 	}
-	
+
 	public static String extraitCheminFichier(String chemin) {
 		if (chemin.lastIndexOf('\\') > -1) {
 			return chemin.substring(0, chemin.lastIndexOf('\\'));
@@ -1570,13 +1590,13 @@ public class Utils {
 			return chemin;
 		}
 	}
-	
+
 	public static String concat(String list1, String list2) {
 		return list1 + "_" + list2;
 	}
-	
+
 	public static String validFileName(String value) {
-		char newChar = '_';		
+		char newChar = '_';
 		value = value.replace(' ', newChar);
 		value = value.replace('/', newChar);
 		value = value.replace('\\', newChar);
@@ -1589,18 +1609,18 @@ public class Utils {
 		value = value.replace('|', newChar);
 		return value;
 	}
-	
+
 	public static void createSearchMenu(Combo combo, String table) {
 		Menu menu = new Menu(combo.getShell(), SWT.POP_UP);
-		
+
 		MenuItem itemSearch = new MenuItem(menu, SWT.NONE);
 		itemSearch.setText(Messages.getString("OptionsAction.27")); //$NON-NLS-1$
-		
+
 		combo.setMenu(menu);
-		
+
 		final Combo comb = combo;
 		final String tab = table;
-		
+
 		itemSearch.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				FiltrageTableType.comboRecherche = comb;
@@ -1608,15 +1628,14 @@ public class Utils {
 			}
 		});
 	}
-	
-	
+
 	public static int calculNbLigne(File file) {
 		int nbLignes = 0;
-		
+
 		try {
 			FileReader reader = new FileReader(file);
 			BufferedReader readerLigne = new BufferedReader(reader);
-			
+
 			while (readerLigne.readLine() != null) {
 				nbLignes++;
 			}

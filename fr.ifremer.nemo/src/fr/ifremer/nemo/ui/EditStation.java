@@ -14,10 +14,12 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
+import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
@@ -34,18 +36,17 @@ public class EditStation {
 			textHistoriqueAcqLigne1, textHistoriqueAcqLigne2,
 			textHistoriqueAcqDebut1, textHistoriqueAcqDebut2,
 			textHistoriqueAcqFin1, textHistoriqueAcqFin2, textHistorique1,
-			textHistorique2, textConversionDate,
-			textTU, textTULigne, textTUDebut, textTUFin, textHeureLigne,
-			textHeureDebut, textHeureFin, textSurface1, textSurface2,
-			textSurfaceLigne1, textSurfaceLigne2, textSurfaceDebut1,
-			textSurfaceDebut2, textSurfaceFin1, textSurfaceFin2, textDateLigne,
-			textDateDebut, textDateFin, textLatitude, textLatitudeLigne,
-			textLatitudeDebut, textLatitudeFin, textLongitude,
-			textLongitudeLigne, textLongitudeDebut, textLongitudeFin,
-			textProfondeur, textProfondeurLigne, textProfondeurDebut,
-			textProfondeurFin, textCommentaireLigne, textCommentaireDebut,
-			textCommentaireFin;
-	
+			textHistorique2, textConversionDate, textTU, textTULigne,
+			textTUDebut, textTUFin, textHeureLigne, textHeureDebut,
+			textHeureFin, textSurface1, textSurface2, textSurfaceLigne1,
+			textSurfaceLigne2, textSurfaceDebut1, textSurfaceDebut2,
+			textSurfaceFin1, textSurfaceFin2, textDateLigne, textDateDebut,
+			textDateFin, textLatitude, textLatitudeLigne, textLatitudeDebut,
+			textLatitudeFin, textLongitude, textLongitudeLigne,
+			textLongitudeDebut, textLongitudeFin, textProfondeur,
+			textProfondeurLigne, textProfondeurDebut, textProfondeurFin,
+			textCommentaireLigne, textCommentaireDebut, textCommentaireFin;
+
 	public static Text textLatFin, textLatFinLigne, textLatFinDebut,
 			textLatFinFin, textLongFin, textLongFinLigne, textLongFinDebut,
 			textLongFinFin, textProfFin, textProfFinLigne, textProfFinDebut,
@@ -57,7 +58,7 @@ public class EditStation {
 			textTestConvHeure, textTestConvDate, textHeureSaisie,
 			textDateSaisie;
 
-	public static Text textQCDate, textQCLat, textQCLong, textQCProf;
+	// public static Text textQCDate, textQCLat, textQCLong, textQCProf;
 
 	public static Button buttonValidate, buttonRAZ, buttonExpand,
 			buttonExpand2, buttonRefStationIncremente,
@@ -99,7 +100,8 @@ public class EditStation {
 			sectionLongitude, sectionProfondeur;
 
 	public static Section sectionLatFin, sectionLongFin, sectionProfFin,
-			sectionProfCapteur, sectionDeclinMagnet, sectionFreqEchant;
+			sectionProfCapteur, sectionDeclinMagnet, sectionFreqEchant,
+			sectionFlagQC;
 
 	public static Label labelConversionHeure, labelConversionDate;
 
@@ -126,6 +128,10 @@ public class EditStation {
 
 	public static Cursor cursCommentaire, cursEchant1, cursEchant2,
 			cursHistorique1, cursHistorique2;
+
+	public static Table tabCorrespondance, tabFlagQC;
+	
+	public static FlagTable flagTable;
 
 	public static void affichageEdition() {
 		// initialisation zone édition pour étape description de fichier
@@ -177,6 +183,7 @@ public class EditStation {
 		initBoutons();
 		initListeType();
 		initLabels();
+		initTables();
 
 		// boutons collapse all / expand all
 
@@ -199,7 +206,7 @@ public class EditStation {
 			btnMetaInData2.setParent(ViewEdit.formEdition.getBody());
 			btnMetaInData2.setText("Meta In Data");
 		}
-		
+
 		// Selecteur de methode de trajectoire
 		if (ViewFile.radTrajectoire.getSelection()) {
 			grpTrajectoire.setParent(ViewEdit.formEdition.getBody());
@@ -211,22 +218,24 @@ public class EditStation {
 			radMedatlas.setParent(grpTrajectoire);
 			radMedatlas.setText(Messages.getString("EditStation.medatlas"));
 			radMedatlas.setSelection(true);
-			
+
 			radODV.setParent(grpTrajectoire);
 			radODV.setText(Messages.getString("EditStation.odv"));
 			radODV.setSelection(false);
 		} else {
 			grpTrajectoire.setParent(shell);
 		}
-				
-		if ((ViewFile.radSerieTempo.getSelection() || (ViewFile.radTrajectoire.getSelection()) && EditStation.radMedatlas.getSelection())) {
+
+		if ((ViewFile.radSerieTempo.getSelection() || (ViewFile.radTrajectoire
+				.getSelection())
+				&& EditStation.radMedatlas.getSelection())) {
 			// série temporelle
 			grpSerieTempo.setParent(ViewEdit.formEdition.getBody());
 			grpSerieTempo.setText(Messages.getString("ViewFile.serieTempo"));
 			GridLayoutFactory.fillDefaults().applyTo(grpSerieTempo);
 			GridDataFactory.fillDefaults().grab(false, false).applyTo(
 					grpSerieTempo);
-			
+
 			radFreqEchant.setParent(grpSerieTempo);
 			radFreqEchant.setText(Messages.getString("EditData.4")); //$NON-NLS-1$
 			radLigneDonnees.setParent(grpSerieTempo);
@@ -235,15 +244,14 @@ public class EditStation {
 			radFreqEchant.setSelection(false);
 			radLigneDonnees.setSelection(true);
 
-
-//			formEdition.redraw();
-//			formEdition.reflow(true);
+			// formEdition.redraw();
+			// formEdition.reflow(true);
 		} else {
 			grpSerieTempo.setParent(shell);
 		}
-		
-//		formEdition.redraw();
-//		formEdition.reflow(true);
+
+		// formEdition.redraw();
+		// formEdition.reflow(true);
 
 		// Initialisation du tableau de paramètres si étape onglet Campagne
 		// "sautée"
@@ -374,7 +382,8 @@ public class EditStation {
 						Messages.getString("EditStation.19"), Messages.getString("EditStation.20"), sectionLatitude, textLatitudeLigne, textLatitudeDebut, textLatitudeFin, textLatitude, buttonLatSaisie, comboLatitude, buttonLatPos, buttonVarLat, blnManuel, true); //$NON-NLS-1$ //$NON-NLS-2$
 
 		// if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()
+				|| ViewFile.radTrajectoire.getSelection()) {
 			// section latitude de fin
 			blnManuel = true;
 			if (blnModeleOuvert) {
@@ -405,7 +414,8 @@ public class EditStation {
 						Messages.getString("EditStation.23"), Messages.getString("EditStation.24"), sectionLongitude, textLongitudeLigne, textLongitudeDebut, textLongitudeFin, textLongitude, buttonLongSaisie, comboLongitude, buttonLongPos, buttonVarLong, blnManuel, false); //$NON-NLS-1$ //$NON-NLS-2$
 
 		// if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()
+				|| ViewFile.radTrajectoire.getSelection()) {
 			// section longitude de fin
 			blnManuel = true;
 			if (blnModeleOuvert) {
@@ -434,7 +444,8 @@ public class EditStation {
 						Messages.getString("EditStation.27"), Messages.getString("EditStation.28"), sectionProfondeur, textProfondeurLigne, textProfondeurDebut, textProfondeurFin, textProfondeur, buttonProfondeurSaisie, buttonProfondeurPos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 
 		// if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
+		if (ViewFile.radSerieTempo.getSelection()
+				|| ViewFile.radTrajectoire.getSelection()) {
 			// section profondeur de fin
 			blnManuel = true;
 			if (blnModeleOuvert) {
@@ -483,6 +494,10 @@ public class EditStation {
 							Messages.getString("EditStation.35"), Messages.getString("EditStation.36"), sectionFreqEchant, textFreqEchantLigne, textFreqEchantDebut, textFreqEchantFin, textFreqEchant, buttonFreqEchantSaisie, buttonFreqEchantPos, textFreqEchantConv, textFreqEchantTest, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 			textFreqEchantConv.setText("*1");
 		}
+
+		DrawingStation.sectionFlagQC(Messages.getString("EditStation.17"),
+				Messages.getString("EditStation.18"), sectionFlagQC,
+				tabCorrespondance, tabFlagQC);
 
 		buttonExpand2.setText("+"); //$NON-NLS-1$
 
@@ -598,7 +613,7 @@ public class EditStation {
 
 					}
 				});
-		
+
 		// listeners sur les boutons radio
 		radMedatlas
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -616,15 +631,15 @@ public class EditStation {
 
 						activeGrpSerieTempo();
 					}
-				});	
-		
+				});
+
 		radFreqEchant
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
 
-//						test();
-//						formEdition.reflow(true);
+						// test();
+						// formEdition.reflow(true);
 						activeDateHeureManuel();
 
 					}
@@ -635,8 +650,8 @@ public class EditStation {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
 
-//						test2();
-//						formEdition.reflow(true);
+						// test2();
+						// formEdition.reflow(true);
 						activeDateHeureManuel();
 					}
 				});
@@ -655,8 +670,11 @@ public class EditStation {
 
 		if (DataModel.ouverture) {
 			DataModel.fillStation();
+		} else {
+			EditStation.flagTable = Utils.configuration.getDefaultFlagTable();
+			EditStation.flagTable.fillTable(tabCorrespondance);
+			ViewEdit.formEdition.reflow(true);
 		}
-
 	}
 
 	public static void razEdition() {
@@ -706,16 +724,17 @@ public class EditStation {
 		buttonValidate.setParent(s.getBody());
 		buttonRAZ.setParent(s.getBody());
 		buttonExpand.setParent(s.getBody());
-		
+
 		if (ViewFile.radProfilVertical.getSelection()) {
 			btnMetaInData2.setParent(s.getBody());
 		}
-		
+
 		if (ViewFile.radTrajectoire.getSelection()) {
 			grpTrajectoire.setParent(s.getBody());
 		}
-		
-		if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
+
+		if (ViewFile.radSerieTempo.getSelection()
+				|| ViewFile.radTrajectoire.getSelection()) {
 			grpSerieTempo.setParent(s.getBody());
 		}
 
@@ -769,25 +788,18 @@ public class EditStation {
 		sectionProfCapteur = new Section(shell, SWT.NONE);
 		sectionDeclinMagnet = new Section(shell, SWT.NONE);
 		sectionFreqEchant = new Section(shell, SWT.NONE);
+		sectionFlagQC = new Section(shell, SWT.NONE);
 	}
 
 	public static void initText() {
-
-//		textTotalLigne = new Text(shell, SWT.BORDER);
-//		listeTextData.add(textTotalLigne);
-//		textTotalDebut = new Text(shell, SWT.BORDER);
-//		listeTextData.add(textTotalDebut);
-//		textTotalFin = new Text(shell, SWT.BORDER);
-//		listeTextData.add(textTotalFin);
-		
-		textQCDate = new Text(shell, SWT.BORDER);
-		listeTextStation.add(textQCDate);
-		textQCLat = new Text(shell, SWT.BORDER);
-		listeTextStation.add(textQCLat);
-		textQCLong = new Text(shell, SWT.BORDER);
-		listeTextStation.add(textQCLong);
-		textQCProf = new Text(shell, SWT.BORDER);
-		listeTextStation.add(textQCProf);
+		// textQCDate = new Text(shell, SWT.BORDER);
+		// listeTextStation.add(textQCDate);
+		// textQCLat = new Text(shell, SWT.BORDER);
+		// listeTextStation.add(textQCLat);
+		// textQCLong = new Text(shell, SWT.BORDER);
+		// listeTextStation.add(textQCLong);
+		// textQCProf = new Text(shell, SWT.BORDER);
+		// listeTextStation.add(textQCProf);
 
 		textRefStationNumero = new Text(shell, SWT.BORDER);
 		listeTextStation.add(textRefStationNumero);
@@ -965,7 +977,6 @@ public class EditStation {
 
 		// remplissage de la liste des textes et ajout listeners
 		ajoutModifyListenerText(listeTextStation);
-
 	}
 
 	public static void ajoutModifyListenerText(ArrayList<Text> liste) {
@@ -999,11 +1010,11 @@ public class EditStation {
 		buttonExpand2 = new Button(shell, SWT.NONE);
 		buttonValidate = new Button(shell, SWT.NONE);
 		btnMetaInData2 = new Button(shell, SWT.CHECK);
-		
+
 		grpSerieTempo = new Group(shell, SWT.NONE);
 		radLigneDonnees = new Button(shell, SWT.RADIO);
 		radFreqEchant = new Button(shell, SWT.RADIO);
-		
+
 		grpTrajectoire = new Group(shell, SWT.NONE);
 		radMedatlas = new Button(shell, SWT.RADIO);
 		radODV = new Button(shell, SWT.RADIO);
@@ -1092,16 +1103,16 @@ public class EditStation {
 
 		buttonHeurePos = new Button(shell, SWT.RADIO);
 		listeBoutonsPos.add(buttonHeurePos);
-		
+
 		buttonDatePos = new Button(shell, SWT.RADIO);
 		listeBoutonsPos.add(buttonDatePos);
-		
+
 		buttonHeureInject = new Button(shell, SWT.NONE);
 		listeBoutonsManuel.add(buttonHeureInject);
-		
+
 		buttonDateInject = new Button(shell, SWT.NONE);
 		listeBoutonsManuel.add(buttonDateInject);
-		
+
 		buttonHeureReferencePos = new Button(shell, SWT.RADIO);
 		listeBoutonsPos.add(buttonHeureReferencePos);
 		buttonDateReferencePos = new Button(shell, SWT.RADIO);
@@ -1112,6 +1123,13 @@ public class EditStation {
 
 		listeType = new List(shell, SWT.BORDER);
 
+	}
+	
+	public static void initTables() {
+		flagTable = new FlagTable();
+		
+		tabCorrespondance = new Table(shell, SWT.FULL_SELECTION | SWT.BORDER);
+		tabFlagQC = new Table(shell, SWT.BORDER);
 	}
 
 	public static void initLabels() {
@@ -1261,7 +1279,7 @@ public class EditStation {
 					&& (Regexp.checkLigneDebutfin(textFreqEchantLigne,
 							textFreqEchantDebut, textFreqEchantFin, Messages
 									.getString("EditStation.85"), true))) { //$NON-NLS-1$
-				
+
 				// position dans fichier
 
 				// récupérer le texte en question et creer une nouvelle heure
@@ -1352,16 +1370,16 @@ public class EditStation {
 		if (comboRefStationType != null)
 			comboRefStationType.dispose();
 	}
-	
+
 	public static String typeFichierSortie() {
 		if (radODV.getSelection()) {
 			return Global.ODV;
 		} else {
 			return Global.MEDATLAS;
 		}
-		
+
 	}
-	
+
 	public static void test() {
 		int i;
 
@@ -1374,7 +1392,7 @@ public class EditStation {
 		// refresh global
 		ViewEdit.formEdition.reflow(true);
 	}
-	
+
 	public static void test2() {
 		int i;
 
@@ -1387,50 +1405,50 @@ public class EditStation {
 		// refresh global
 		ViewEdit.formEdition.reflow(true);
 	}
-	
+
 	public static void activeGrpSerieTempo() {
 		if (radMedatlas.getSelection()) {
 			radFreqEchant.setEnabled(true);
-			
+
 			radLigneDonnees.setEnabled(true);
 		} else {
 			radFreqEchant.setEnabled(false);
 			radFreqEchant.setSelection(false);
-			
+
 			radLigneDonnees.setEnabled(true);
 			radLigneDonnees.setSelection(true);
 		}
-		
+
 		activeDateHeureManuel();
 	}
-	
+
 	public static void activeDateHeureManuel() {
 		if (radFreqEchant.getSelection()) {
 			buttonHeureSaisie.setEnabled(true);
 			buttonHeurePos.setEnabled(true);
-			
+
 			buttonDateSaisie.setEnabled(true);
 			buttonDatePos.setEnabled(true);
-			
+
 			sectionFreqEchant.setVisible(true);
 		} else {
 			buttonHeureSaisie.setEnabled(false);
 			buttonHeureSaisie.setSelection(false);
 			buttonHeurePos.setEnabled(true);
 			buttonHeurePos.setSelection(true);
-			
+
 			buttonDateSaisie.setEnabled(false);
 			buttonDateSaisie.setSelection(false);
 			buttonDatePos.setEnabled(true);
 			buttonDatePos.setSelection(true);
-			
+
 			sectionFreqEchant.setVisible(false);
 		}
-		
+
 		activeHeure();
 		activeDate();
 	}
-	
+
 	public static void activeHeure() {
 		if (buttonHeureSaisie.getSelection()) {
 			textHeureSaisie.setEnabled(true);
@@ -1450,7 +1468,7 @@ public class EditStation {
 			buttonHeureInject.setEnabled(true);
 		}
 	}
-	
+
 	public static void activeDate() {
 		if (buttonDateSaisie.getSelection()) {
 			textDateSaisie.setEnabled(true);
@@ -1469,5 +1487,13 @@ public class EditStation {
 			}
 			buttonDateInject.setEnabled(true);
 		}
+	}
+
+	public static FlagTable getFlagTable() {
+		return flagTable;
+	}
+
+	public static void setFlagTable(FlagTable flagTable) {
+		EditStation.flagTable = flagTable;
 	}
 }
