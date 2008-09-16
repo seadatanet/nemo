@@ -542,10 +542,12 @@ public class DataModel {
 
 			// Utils.calculNbreLignesPuisRemplissageFragClic(frag,
 			// EditStation.posxCommentaire, EditStation.posyCommentaire);
-			Utils.calculNbreLignesPuisRemplissageFragClic(frag,
-					EditStation.cursCommentaire);
+			// Utils.calculNbreLignesPuisRemplissageFragClic(frag,
+			// EditStation.cursCommentaire);
+			Utils.calculNbreLignesPuisRemplissageFrag(frag, Integer
+					.valueOf(EditDesc.lignesEnteteFichier.getText()));
 
-			frag.toString();
+			// frag.toString();
 		}
 
 		// DM history 1&2

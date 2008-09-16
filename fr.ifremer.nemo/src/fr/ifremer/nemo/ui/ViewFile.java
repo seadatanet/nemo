@@ -1,10 +1,6 @@
 package fr.ifremer.nemo.ui;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.TreeSet;
 
 import org.eclipse.jface.layout.GridDataFactory;
@@ -33,7 +29,6 @@ import org.eclipse.ui.part.ViewPart;
 
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.JulianDate;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
@@ -78,7 +73,11 @@ public class ViewFile extends ViewPart {
 
 	public static Button radioDossier = null;
 
-	public static Button checkSeparateur = null;
+	public static Button chkSeparateur = null;
+
+	public static Button chkForcerTri = null;
+
+	public static boolean blnForcerTri;
 
 	public static Button radioTabulation, radioPointVirgule, radioVirgule,
 			radioEspace, radioSeparateurAutre = null;
@@ -372,20 +371,6 @@ public class ViewFile extends ViewPart {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-
-						try {
-							Date dateOrigine = new Date();
-							SimpleDateFormat datef = new SimpleDateFormat(
-									"yyyyy.MM.dd");
-							dateOrigine = datef.parse("2001.01.01");
-
-							JulianDate jDate = new JulianDate(dateOrigine
-									.getTime());
-//							System.out.println(jDate.getJour());
-						} catch (Exception ex) {
-
-						}
-
 						// System.out.println("parcourir"); // //$NON-NLS-1$
 						DataModel.ouverture = false;
 						Preformat.setPreformat(false);
@@ -685,6 +670,9 @@ public class ViewFile extends ViewPart {
 		// Composite vide pour mise en page
 		Composite compoVide2 = new Composite(compositeConversion, SWT.NONE);
 
+		chkForcerTri = new Button(compositeConversion, SWT.CHECK);
+		chkForcerTri.setText(Messages.getString("ViewFile.forcerTri"));
+
 		grpCDI = new Group(compositeConversion, SWT.NONE);
 		GridLayoutFactory.fillDefaults().applyTo(grpCDI);
 		GridDataFactory.fillDefaults().grab(false, false).applyTo(grpCDI);
@@ -764,6 +752,14 @@ public class ViewFile extends ViewPart {
 						lblAccesDonnees.setEnabled(checkCDI.getSelection());
 						comboAccesDonnees.setEnabled(checkCDI.getSelection());
 						writeResume = checkCDI.getSelection();
+					}
+				});
+
+		chkForcerTri
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					public void widgetSelected(
+							org.eclipse.swt.events.SelectionEvent g) {
+						blnForcerTri = chkForcerTri.getSelection();
 					}
 				});
 
@@ -856,8 +852,8 @@ public class ViewFile extends ViewPart {
 		GridDataFactory.fillDefaults().grab(false, false)
 				.applyTo(grpSeparateur);
 
-		checkSeparateur = new Button(grpSeparateur, SWT.CHECK);
-		checkSeparateur.setText(Messages.getString("Preformat.3"));
+		chkSeparateur = new Button(grpSeparateur, SWT.CHECK);
+		chkSeparateur.setText(Messages.getString("Preformat.3"));
 
 		compositeSeparateur = new Composite(grpSeparateur, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(3).applyTo(
@@ -890,11 +886,11 @@ public class ViewFile extends ViewPart {
 		// Par défaut
 		compositeSeparateur.setVisible(false);
 
-		checkSeparateur
+		chkSeparateur
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-						compositeSeparateur.setVisible(checkSeparateur
+						compositeSeparateur.setVisible(chkSeparateur
 								.getSelection());
 					}
 				});

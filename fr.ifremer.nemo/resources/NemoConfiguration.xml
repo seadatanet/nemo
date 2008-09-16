@@ -32,10 +32,10 @@
   <VocabListURL name="L051" value="http://vocab.ndg.nerc.ac.uk/list/L051/current"/>
   <defaultFlagTable>C2</defaultFlagTable>
   <FlagTable code="C5" label="L5">
-    <Flag local="loc00" SDN="1 - good value"/>
-    <Flag local="loc01" SDN="sdn01"/>
-    <Flag local="loc02" SDN="5 - changed value"/>
-    <Flag local="loc03" SDN="4 - bad value"/>
+    <Flag local="loc00" SDN="0 - no quality control"/>
+    <Flag local="loc01" SDN="1 - good value"/>
+    <Flag local="loc02" SDN="2 - probably good value"/>
+    <Flag local="loc03" SDN="3 - probably bad value"/>
     <Flag local="loc04" SDN="sdn04"/>
     <Flag local="loc05" SDN="sdn05"/>
     <Flag local="loc06" SDN="sdn06"/>

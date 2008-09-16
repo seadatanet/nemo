@@ -21,7 +21,7 @@ public class Etape {
 	public static void validationDesc() {
 
 		// Fichier avec séparateur
-		if (ViewFile.checkSeparateur.getSelection() && !Preformat.isPreformat()) {
+		if (ViewFile.chkSeparateur.getSelection() && !Preformat.isPreformat()) {
 			try {
 				Preformat.run();
 			} catch (Exception ex) {

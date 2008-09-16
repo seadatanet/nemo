@@ -405,10 +405,10 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 				// test CDL FAE01
 				FileReader reader = new FileReader(file);
 				reader2 = new BufferedReader(reader);
-				
+
 				// Calcul du nombre de lignes du fichier
 				EditConversion.setTotalLigne(Utils.calculNbLigne(file));
-				
+
 				// reader = new RandomAccessFile(file, "r");
 				consumeHeader(reader2);
 

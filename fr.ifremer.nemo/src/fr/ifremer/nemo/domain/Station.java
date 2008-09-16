@@ -5,6 +5,7 @@ import java.io.OutputStream;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.TimeZone;
 import java.util.TreeMap;
 import java.util.Map.Entry;
@@ -19,7 +20,9 @@ import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.input.StationModel;
+import fr.ifremer.nemo.ui.EditConversion;
 import fr.ifremer.nemo.ui.SWTProcess;
+import fr.ifremer.nemo.ui.ViewFile;
 import fr.ifremer.nemo.util.Global;
 
 /**
@@ -1198,7 +1201,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		}
 		return -1;
 	}
-	
+
 	/**
 	 * returns index of parameter according to code
 	 * 
@@ -1521,84 +1524,187 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	}
 
 	/**
-	 * Trie les données de la station par ordre croissant/décroissant
+	 * Trie les données de la station par ordre croissant/décroissant en
+	 * supprimant les doublons
+	 * 
+	 * @param ascendant
+	 */
+	public void triSansDoublon(boolean ascendant) {
+		if (ViewFile.blnForcerTri) {
+			ArrayList<Integer> arlIndexes = new ArrayList<Integer>();
+			TreeMap<Double, Integer> tmTri = new TreeMap<Double, Integer>();
+
+			String paramCode = "";
+			int paramIndex = -1;
+
+			int i;
+
+			// Choix du paramètre à trier en fonction du type de données en
+			// entrée et en sortie
+			if (SWTProcess.odv) {
+				if (StationModel.getSingleton().getInputType().equals(
+						Global.TIMESERIES)) {
+					paramCode = "";
+				} else if (StationModel.getSingleton().getInputType().equals(
+						Global.TRAJECTORY)) {
+					paramCode = "";
+				} else {
+					paramCode = "PRES";
+				}
+			} else {
+				if (StationModel.getSingleton().getInputType().equals(
+						Global.TIMESERIES)) {
+					paramCode = "";
+				} else if (StationModel.getSingleton().getInputType().equals(
+						Global.TRAJECTORY)) {
+					paramCode = "";
+				} else {
+					paramCode = "PRES";
+				}
+			}
+
+			// Ajout des binomes valeur/index dans un TreeMap pour tri sur la
+			// valeur
+			if (paramCode.equals("")) {
+				// Cas du tri par date
+				// on utilise la date du 1er paramètre
+				for (i = 0; i < parametersAt(0).valuesSize(); i++) {
+					Long date = ((HorodatedValue) parametersAt(0).valuesAt(i))
+							.getDate();
+					tmTri.put(date.doubleValue(), i);
+				}
+			} else {
+				// Recherche de l'index du paramètre en fonction du code
+				paramIndex = parametersIndexOf(paramCode);
+
+				if (paramIndex >= 0) {
+					for (i = 0; i < parametersAt(paramIndex).valuesSize(); i++) {
+						tmTri.put(parametersAt(paramIndex).valuesAt(i)
+								.getValue(), i);
+					}
+				} else {
+					return;
+				}
+			}
+
+			// Ajout des indexes triés dans une liste dans l'ordre croissant ou
+			// décroissant
+			if (ascendant) {
+				for (Entry<Double, Integer> currentEntry : tmTri.entrySet()) {
+					arlIndexes.add(currentEntry.getValue());
+				}
+			} else {
+				ArrayList<Integer> arrayTri = new ArrayList<Integer>(
+						parametersAt(paramIndex).valuesSize());
+
+				for (Entry<Double, Integer> currentEntry : tmTri.entrySet()) {
+					arrayTri.add(currentEntry.getValue());
+				}
+
+				for (i = arrayTri.size() - 1; i >= 0; i++) {
+					arlIndexes.add(arrayTri.get(i));
+				}
+			}
+
+			// Tri de tous les paramètres de la station
+			for (Parameter param : getParameters()) {
+				param.triIndexes(arlIndexes);
+			}
+		}
+	}
+
+	/**
+	 * Trie les données de la station par ordre croissant/décroissant en
+	 * conservant les doublons
 	 * 
 	 * @param ascendant
 	 */
 	public void tri(boolean ascendant) {
-		ArrayList<Integer> arlIndexes = new ArrayList<Integer>();
-		TreeMap<Double, Integer> tmTri = new TreeMap<Double, Integer>();
-		
-		String paramCode = "";
-		int paramIndex = -1;
-		
-		int i;
+		if (ViewFile.blnForcerTri) {
+			ArrayList<Integer> arlIndexes = new ArrayList<Integer>();
+			ArrayList<StationData> dataList = new ArrayList<StationData>(
+					parametersAt(0).valuesSize());
+			StationData dataTemp;
+			String paramCode = "";
+			int paramIndex = -1;
+			int nb = 0;
+			int i;
 
-		// Choix du paramètre à trier en fonction du type de données en entrée et en sortie
-		if (SWTProcess.odv) {
-			if (StationModel.getSingleton().getInputType().equals(
-					Global.TIMESERIES)) {
-				paramCode = "";
-			} else if (StationModel.getSingleton().getInputType().equals(
-					Global.TRAJECTORY)) {
-				paramCode = "";
-			} else {
-				paramCode = "PRES";
-			}
-		} else {
-			if (StationModel.getSingleton().getInputType().equals(
-					Global.TIMESERIES)) {
-				paramCode = "";
-			} else if (StationModel.getSingleton().getInputType().equals(
-					Global.TRAJECTORY)) {
-				paramCode = "";
-			} else {
-				paramCode = "PRES";
-			}
-		}
-
-		// Ajout des binomes valeur/index dans un TreeMap pour tri sur la valeur
-		if (paramCode.equals("")) {
-			// Cas du tri par date
-			// on utilise la date du 1er paramètre
-			for (i = 0; i < parametersAt(0).valuesSize(); i++) {
-				Long date = ((HorodatedValue) parametersAt(0).valuesAt(i)).getDate();
-				tmTri.put(date.doubleValue(), i);
-			}
-		} else {
-			// Recherche de l'index du paramètre en fonction du code
-			paramIndex = parametersIndexOf(paramCode);
-			
-			if (paramIndex >= 0) {
-				for (i = 0; i < parametersAt(paramIndex).valuesSize(); i++) {
-					tmTri.put(parametersAt(paramIndex).valuesAt(i).getValue(), i);
+			// Choix du paramètre à trier en fonction du type de données en
+			// entrée et en sortie
+			if (SWTProcess.odv) {
+				if (StationModel.getSingleton().getInputType().equals(
+						Global.TIMESERIES)) {
+					paramCode = "";
+				} else if (StationModel.getSingleton().getInputType().equals(
+						Global.TRAJECTORY)) {
+					paramCode = "";
+				} else {
+					paramCode = "PRES";
 				}
 			} else {
-				return;
-			}
-		}
-		
-		// Ajout des indexes triés dans une liste dans l'ordre croissant ou décroissant
-		if (ascendant) {
-			for (Entry<Double, Integer> currentEntry : tmTri.entrySet()) {
-				arlIndexes.add(currentEntry.getValue());
-			}
-		} else {
-			ArrayList<Integer> arrayTri = new ArrayList<Integer>(parametersAt(
-					paramIndex).valuesSize());
-
-			for (Entry<Double, Integer> currentEntry : tmTri.entrySet()) {
-				arrayTri.add(currentEntry.getValue());
+				if (StationModel.getSingleton().getInputType().equals(
+						Global.TIMESERIES)) {
+					paramCode = "";
+				} else if (StationModel.getSingleton().getInputType().equals(
+						Global.TRAJECTORY)) {
+					paramCode = "";
+				} else {
+					paramCode = "PRES";
+				}
 			}
 
-			for (i = arrayTri.size() - 1; i >= 0; i++) {
-				arlIndexes.add(arrayTri.get(i));
+			// Ajout des binomes valeur/index dans un TreeMap pour tri sur la
+			// valeur
+			if (paramCode.equals("")) {
+				// Cas du tri par date
+				// on utilise la date du 1er paramètre
+				for (i = 0; i < parametersAt(0).valuesSize(); i++) {
+					Long date = ((HorodatedValue) parametersAt(0).valuesAt(i))
+							.getDate();
+					dataTemp = new StationData(date.doubleValue(), i,
+							getReference());
+					dataList.add(dataTemp);
+				}
+			} else {
+				// Recherche de l'index du paramètre en fonction du code
+				paramIndex = parametersIndexOf(paramCode);
+
+				if (paramIndex >= 0) {
+					for (i = 0; i < parametersAt(paramIndex).valuesSize(); i++) {
+						dataTemp = new StationData(parametersAt(paramIndex)
+								.valuesAt(i).getValue(), i, getReference());
+						dataList.add(dataTemp);
+					}
+				} else {
+					return;
+				}
 			}
-		}
-		
-		// Tri de tous les paramètres de la station
-		for (Parameter param : getParameters()) {
-			param.triIndexes(arlIndexes);
+
+			// Ajout des indexes triés dans une liste dans l'ordre croissant ou
+			// décroissant
+			if (ascendant) {
+				Collections.sort(dataList);
+			} else {
+				Collections.sort(dataList, Collections.reverseOrder());
+			}
+
+			for (i = 0; i < dataList.size(); i++) {
+				arlIndexes.add(dataList.get(i).getIndex());
+				if (dataList.get(i).getIndex() != i) {
+					nb++;
+				}
+			}
+
+			if (nb > 0) {
+				// Ajout de la station à la liste des stations triées
+				EditConversion.getSortedStations().put(getReference().trim(), nb);
+
+				// Tri de tous les paramètres de la station
+				for (Parameter param : getParameters()) {
+					param.triIndexes(arlIndexes);
+				}
+			}
 		}
 	}
 

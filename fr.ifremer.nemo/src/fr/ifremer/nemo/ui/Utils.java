@@ -478,47 +478,49 @@ public class Utils {
 
 	}
 
-	public static void calculNbreLignesPuisRemplissageFrag(HeaderFragment frag) {
-		int deb, fi, lignDepart, lignFin, i, nbrelignes;
+	public static void calculNbreLignesPuisRemplissageFrag(HeaderFragment frag,
+			int headerLines) {
+		int deb, fi, lignDepart, lignFin, i, nbrelignes, longueur;
 
 		// on récupère les coordonnées de la sélection
 		deb = frag.getFirstCharOffset();
 		fi = frag.getLastCharOffset();
-
+		longueur = frag.getLastCharOffset();
 		// System.out.println("deb clic = " + deb);
 		// System.out.println("fi clic = " + fi);
 
-		// lignDepart = frag.getFirstLine();
-		lignDepart = 1;
-		lignFin = 1;
+		lignDepart = frag.getFirstLine() + headerLines;
+		lignFin = lignDepart;
+		// lignDepart = 1;
+		// lignFin = 1;
 		// calcul de la ligne en fonction de la valeur de x
 		// parcours du tableau des tailles de lignes cumulées
 
-		// calcul ligne depart
-		for (i = 0; i < lignesBrutes.size(); i++) {
-
-			if (deb == taillesCumLignes[i]) {
-				lignDepart = i + 1;
-				break;
-			}
-			if (i == (lignesBrutes.size() - 1)) {
-				lignDepart = i + 1;
-				break;
-			}
-			if ((deb >= taillesCumLignes[i]) && (deb < taillesCumLignes[i + 1])) {
-				lignDepart = i + 1;
-				break;
-			}
-
-		}
+//		// calcul ligne depart
+//		for (i = 0; i < lignesBrutes.size(); i++) {
+//
+//			if (deb == taillesCumLignes[i]) {
+//				lignDepart = i + 1;
+//				break;
+//			}
+//			if (i == (lignesBrutes.size() - 1)) {
+//				lignDepart = i + 1;
+//				break;
+//			}
+//			if ((deb >= taillesCumLignes[i]) && (deb < taillesCumLignes[i + 1])) {
+//				lignDepart = i + 1;
+//				break;
+//			}
+//
+//		}
 
 		// System.out.println("ligne depart = " + lignDepart);
 
 		// calcul ligne fin
 
-		for (i = 0; i < lignesBrutes.size(); i++) {
+		for (i = lignDepart - 1; i < lignesBrutes.size(); i++) {
 
-			if (fi == taillesCumLignes[i]) {
+			if (longueur == taillesCumLignes[i] - taillesCumLignes[lignDepart - 1]) {
 				lignFin = i + 1;
 				break;
 			}
@@ -526,7 +528,7 @@ public class Utils {
 				lignFin = i + 1;
 				break;
 			}
-			if ((fi >= taillesCumLignes[i]) && (fi < taillesCumLignes[i + 1])) {
+			if ((longueur >= taillesCumLignes[i] - taillesCumLignes[lignDepart - 1]) && (longueur < taillesCumLignes[i + 1] - taillesCumLignes[lignDepart - 1])) {
 				lignFin = i + 1;
 				break;
 			}
@@ -540,7 +542,7 @@ public class Utils {
 
 		if (nbrelignes == 1) {
 			// frag.setSingleLine(true);
-			frag.setLastLine(lignDepart);
+			frag.setLastLine(frag.getFirstLine());
 		} else {
 			frag.setSingleLine(false);
 			frag.setLastLine(frag.getFirstLine() + nbrelignes - 1);
@@ -579,17 +581,16 @@ public class Utils {
 		// System.out.println("deb clic = " + deb);
 		// System.out.println("fi clic = " + fi);
 
-		// lignDepart = frag.getFirstLine();
-		lignDepart = 1;
-		lignFin = 1;
-		// lignFin =frag.getFirstLine();
+		lignDepart = frag.getFirstLine();
+		lignFin = frag.getFirstLine();
+		// lignDepart = 1;
+		// lignFin = 1;
 
 		// calcul de la ligne en fonction de la valeur de x
 		// parcours du tableau des tailles de lignes cumulées
 
 		// calcul ligne depart
 		for (i = 0; i < lignesBrutes.size(); i++) {
-
 			if (deb == taillesCumLignes[i]) {
 				lignDepart = i + 1;
 				break;
@@ -602,7 +603,6 @@ public class Utils {
 				lignDepart = i + 1;
 				break;
 			}
-
 			// System.out.println("cumul = " + taillesCumLignes[i] + "i= " + i);
 
 		}
@@ -639,7 +639,6 @@ public class Utils {
 		} else {
 			frag.setSingleLine(false);
 			frag.setLastLine(frag.getFirstLine() + nbrelignes - 1);
-
 		}
 		calculOffsetDebOffsetFin(frag, cursor);
 

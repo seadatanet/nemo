@@ -2,6 +2,8 @@ package fr.ifremer.nemo.ui;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map.Entry;
 
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.swt.SWT;
@@ -17,7 +19,6 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
-import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.input.SurveyMedia;
 import fr.ifremer.nemo.output.CDIMappingWriter;
 import fr.ifremer.nemo.output.CDIResumeWriter;
@@ -62,6 +63,11 @@ public class EditConversion extends Thread {
 	 * Nombre de lignes du fichier lu
 	 */
 	protected static int _totalLigne;
+
+	/**
+	 * Liste des stations triées
+	 */
+	protected static LinkedHashMap<String, Integer> _sortedStations = new LinkedHashMap<String, Integer>();
 
 	public void run() {
 
@@ -109,6 +115,9 @@ public class EditConversion extends Thread {
 						} else {
 							NemoLists.writeSdnParameters("//");
 						}
+
+						// RAZ de la liste des stations triées
+						getSortedStations().clear();
 
 						try {
 							if (EditDesc.okApresReset
@@ -404,6 +413,25 @@ public class EditConversion extends Thread {
 			// Utils.messageErreur(Messages.getString("EditConversion.16"));
 			Utils.messageErreurAppend(messageErreur());
 		}
+
+		if (getSortedStations().size() > 0) {
+			String sortedMessage = "\n\n" + getSortedStations().size() + " "
+					+ Messages.getString("EditConversion.28") + " ";
+			
+			for (Entry<String, Integer> currentEntry : getSortedStations()
+					.entrySet()) {
+				// Utils.messageOKAppend("\n\tstation " + currentEntry.getKey()
+				// + " (" + currentEntry.getValue() + " " +
+				// Messages.getString("EditConversion.29"));
+				sortedMessage += currentEntry.getKey() + ", ";
+			}
+			
+			int last = sortedMessage.lastIndexOf(",");
+			if (last > 0) {
+				sortedMessage = sortedMessage.substring(0, last);
+			}
+			Utils.messageOKAppend(sortedMessage);
+		}
 	}
 
 	public static String getErreurFichier() {
@@ -446,7 +474,8 @@ public class EditConversion extends Thread {
 
 		if (getErreurLigne() != 0) {
 			if (getErreurLigne() <= DataModel.stationModel.getNumberOfLines()) {
-				// Si l'erreur se trouve dans l'en-tête de station, la ligne indiquée
+				// Si l'erreur se trouve dans l'en-tête de station, la ligne
+				// indiquée
 				// n'est pas forcément la bonne, il vaut mieux ne pas l'indiquer
 				return "";
 			}
@@ -461,7 +490,7 @@ public class EditConversion extends Thread {
 			}
 		}
 
-		if (!message.equals("")){
+		if (!message.equals("")) {
 			message = "\r\n" + Messages.getString("EditConversion.23") + "\r\n"
 					+ message;
 		}
@@ -540,5 +569,13 @@ public class EditConversion extends Thread {
 
 	public static void setTotalLigne(int ligne) {
 		_totalLigne = ligne;
+	}
+
+	public static LinkedHashMap<String, Integer> getSortedStations() {
+		return _sortedStations;
+	}
+
+	public static void setSortedStations(LinkedHashMap<String, Integer> stations) {
+		_sortedStations = stations;
 	}
 }
