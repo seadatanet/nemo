@@ -414,6 +414,7 @@ public class EditConversion extends Thread {
 			Utils.messageErreurAppend(messageErreur());
 		}
 
+		// Stations triées
 		if (getSortedStations().size() > 0) {
 			String sortedMessage = "\n\n" + getSortedStations().size() + " "
 					+ Messages.getString("EditConversion.28") + " ";

@@ -1129,7 +1129,7 @@ public class EditStation {
 		flagTable = new FlagTable();
 		
 		tabCorrespondance = new Table(shell, SWT.FULL_SELECTION | SWT.BORDER);
-		tabFlagQC = new Table(shell, SWT.BORDER);
+		tabFlagQC = new Table(shell, SWT.FULL_SELECTION | SWT.BORDER);
 	}
 
 	public static void initLabels() {

@@ -44,6 +44,7 @@ import fr.ifremer.nemo.input.HeaderFragment;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.Formatter;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 public class DrawingStation {
@@ -2785,6 +2786,7 @@ public class DrawingStation {
 						EditStation.flagTable.getFlag(tab.getSelection()[0]
 								.getText()));
 				tab.remove(tab.getSelectionIndex());
+				ViewEdit.formEdition.reflow(true);
 			}
 		});
 
@@ -2817,25 +2819,134 @@ public class DrawingStation {
 		tabFlagQC.setParent(sectionClient);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(tabFlagQC);
 
+		TableColumn tableColumn0 = new TableColumn(tabFlagQC, SWT.NONE);
+		tableColumn0.setWidth(100);
+		tableColumn0.setResizable(false);
+		tableColumn0.setText("Code"); //$NON-NLS-1$
+
 		TableColumn tableColumn1 = new TableColumn(tabFlagQC, SWT.NONE);
 		tableColumn1.setWidth(110);
 		tableColumn1.setText(Messages.getString("EditStation.38")); //$NON-NLS-1$
 
 		TableColumn tableColumn2 = new TableColumn(tabFlagQC, SWT.NONE);
-		tableColumn2.setWidth(50);
+		tableColumn2.setWidth(40);
 		tableColumn2.setText(Messages.getString("EditStation.39")); //$NON-NLS-1$	
 
 		TableColumn tableColumn3 = new TableColumn(tabFlagQC, SWT.NONE);
-		tableColumn3.setWidth(50);
+		tableColumn3.setWidth(40);
 		tableColumn3.setText(Messages.getString("EditStation.40")); //$NON-NLS-1$	
 
 		TableColumn tableColumn4 = new TableColumn(tabFlagQC, SWT.NONE);
-		tableColumn4.setWidth(50);
+		tableColumn4.setWidth(40);
 		tableColumn4.setText(Messages.getString("EditStation.41")); //$NON-NLS-1$	
 
 		TableColumn tableColumn5 = new TableColumn(tabFlagQC, SWT.NONE);
 		tableColumn5.setWidth(60);
-		tableColumn5.setText(Messages.getString("EditStation.42")); //$NON-NLS-1$	
+		tableColumn5.setText(Messages.getString("EditStation.47")); //$NON-NLS-1$	
+
+		TableColumn tableColumn6 = new TableColumn(tabFlagQC, SWT.NONE);
+		tableColumn6.setWidth(60);
+		tableColumn6.setText(Messages.getString("EditStation.48")); //$NON-NLS-1$	
+
+		// Menu contextuel
+		Menu menuFlag = new Menu(tabFlagQC.getShell(), SWT.POP_UP);
+		MenuItem itemAddFlag = new MenuItem(menuFlag, SWT.CASCADE);
+		itemAddFlag.setText(Messages.getString("EditStation.43")); //$NON-NLS-1$
+		final Menu subFlag = new Menu(tabFlagQC.getShell(), SWT.DROP_DOWN);
+		itemAddFlag.setMenu(subFlag);
+
+		MenuItem itemRemoveFlag = new MenuItem(menuFlag, SWT.NONE);
+		itemRemoveFlag.setText(Messages.getString("EditStation.44")); //$NON-NLS-1$
+		
+		new MenuItem(menuFlag,SWT.SEPARATOR);
+		
+		MenuItem itemInjectFlag = new MenuItem(menuFlag, SWT.NONE);
+		itemInjectFlag.setText(Messages.getString("TableData.11"));
+
+		MenuItem itemTestFlag = new MenuItem(menuFlag, SWT.NONE);
+		itemTestFlag.setText(Messages.getString("EditStation.42")); //$NON-NLS-1$
+
+		if (ViewFile.typeFichierEntree().equals(Global.PROFILE)) {
+			final FlagMenuItem childDateTime = new FlagMenuItem(subFlag,
+					tabFlagQC, Global.DATETIME, Messages.getString(
+							"EditStation.45").trim());
+
+			final FlagMenuItem childLatitude = new FlagMenuItem(subFlag,
+					tabFlagQC, Global.LATITUDE, Messages.getString(
+							"EditStation.19").trim());
+
+			final FlagMenuItem childLongitude = new FlagMenuItem(subFlag,
+					tabFlagQC, Global.LONGITUDE, Messages.getString(
+							"EditStation.23").trim());
+
+			final FlagMenuItem childDepth = new FlagMenuItem(subFlag,
+					tabFlagQC, Global.DEPTH, Messages.getString(
+							"EditStation.27").trim());
+		} else {
+			final FlagMenuItem childDateTime = new FlagMenuItem(subFlag,
+					tabFlagQC, Global.DATETIME, Messages.getString(
+							"EditStation.45").trim());
+			final FlagMenuItem childEndDateTime = new FlagMenuItem(subFlag,
+					tabFlagQC, Global.ENDDATETIME, Messages.getString(
+							"EditStation.46").trim());
+
+			final FlagMenuItem childLatitude = new FlagMenuItem(subFlag,
+					tabFlagQC, Global.LATITUDE, Messages.getString(
+							"EditStation.19").trim());
+			final FlagMenuItem childEndLatitude = new FlagMenuItem(subFlag,
+					tabFlagQC, Global.ENDLATITUDE, Messages.getString(
+							"EditStation.21").trim());
+
+			final FlagMenuItem childLongitude = new FlagMenuItem(subFlag,
+					tabFlagQC, Global.LONGITUDE, Messages.getString(
+							"EditStation.23").trim());
+			final FlagMenuItem childEndLongitude = new FlagMenuItem(subFlag,
+					tabFlagQC, Global.ENDLONGITUDE, Messages.getString(
+							"EditStation.25").trim());
+
+			final FlagMenuItem childDepth = new FlagMenuItem(subFlag,
+					tabFlagQC, Global.DEPTH, Messages.getString(
+							"EditStation.27").trim());
+			final FlagMenuItem childEndDepth = new FlagMenuItem(subFlag,
+					tabFlagQC, Global.ENDDEPTH, Messages.getString(
+							"EditStation.29").trim());
+		}
+
+		final Table tabFlag = tabFlagQC;
+		
+		itemRemoveFlag.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
+				tabFlag.remove(tabFlag.getSelectionIndex());
+
+				ViewEdit.formEdition.reflow(true);
+			}
+		});
+		
+		itemInjectFlag.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
+				Utils.injectFlag(ViewFile.styledTextStation, EditStation.flagTable, tabFlag, 2, 3, 4, 5, 6);
+			}
+		});
+		
+		itemTestFlag.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
+				Utils.testFlag(ViewFile.styledTextStation, EditStation.flagTable, tabFlag, 2, 3, 4, 5, 6);
+			}
+		});
+		
+//		subFlag.addListener(SWT.Show, new Listener() {
+//			public void handleEvent(Event event) {
+//				for (int i = 0; i < tabFlag.getItemCount(); i++) {
+//					if (tabFlag.getItems()[i].getText(0).equals(Global.DATETIME)) {
+//						if (childDateTime != null) {
+//							
+//						}
+//					}
+//				}
+//			}
+//		});
+
+		tabFlagQC.setMenu(menuFlag);
 
 		// Section
 		section.setClient(sectionClient);
@@ -2851,60 +2962,4 @@ public class DrawingStation {
 		// System.out.println("ajout section ok");
 
 	}
-
-	// public static void sectionQC(String nomSection, String description,
-	// Section section) {
-	//
-	// section.setParent(ViewEdit.formEdition);
-	// section = ViewEdit.toolkitEdition.createSection(ViewEdit.formEdition
-	// .getBody(), Section.DESCRIPTION | Section.TITLE_BAR
-	// | Section.TWISTIE | Section.COMPACT);
-	//
-	// section.addExpansionListener(new ExpansionAdapter() {
-	// public void expansionStateChanged(ExpansionEvent e) {
-	// ViewEdit.formEdition.reflow(true);
-	// }
-	// });
-	// Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL);
-	// section.setFont(font);
-	// section.setText(nomSection);
-	// section.setDescription(description);
-	// Composite sectionClient = ViewEdit.toolkitEdition
-	// .createComposite(section);
-	// GridLayout gridLayout = new GridLayout();
-	// gridLayout.numColumns = 2;
-	// sectionClient.setLayout(gridLayout);
-	//
-	// // label avec le texte de "description"
-	// Label label1 = new Label(sectionClient, SWT.NULL);
-	// label1.setText("Flag QC Date/Heure");
-	// EditStation.textQCDate.setParent(sectionClient);
-	//
-	// EditStation.textQCDate.setTextLimit(1);
-	//
-	// Label label2 = new Label(sectionClient, SWT.NULL);
-	// label2.setText("Flag QC Latitude");
-	// EditStation.textQCLat.setParent(sectionClient);
-	//
-	// EditStation.textQCLat.setTextLimit(1);
-	//
-	// Label label3 = new Label(sectionClient, SWT.NULL);
-	// label3.setText("Flag QC Longitude");
-	// EditStation.textQCLong.setParent(sectionClient);
-	//
-	// EditStation.textQCLong.setTextLimit(1);
-	//
-	// Label label4 = new Label(sectionClient, SWT.NULL);
-	// label4.setText("Flag QC Profondeur");
-	// EditStation.textQCProf.setParent(sectionClient);
-	//
-	// EditStation.textQCProf.setTextLimit(1);
-	//
-	// section.setClient(sectionClient);
-	//
-	// // ajout de la section dans la liste des sections de description
-	// ajoutSectionDansListeStation(section);
-	//
-	// }
-
 }

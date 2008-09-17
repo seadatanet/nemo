@@ -17,4 +17,14 @@ public interface Global {
 	// Type de trajectoire
 	public static final String MEDATLAS = "MEDATLAS";
 	public static final String ODV = "ODV";
+	
+	// Type de metadonnée
+	public static final String DATETIME = "DATETIME";
+	public static final String ENDDATETIME = "ENDDATETIME";
+	public static final String LATITUDE = "LATITUDE";
+	public static final String ENDLATITUDE = "ENDLATITUDE";
+	public static final String LONGITUDE = "LONGITUDE";
+	public static final String ENDLONGITUDE = "ENDLONGITUDE";
+	public static final String DEPTH = "DEPTH";
+	public static final String ENDDEPTH = "ENDDEPTH";
 }

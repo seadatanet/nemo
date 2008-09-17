@@ -20,6 +20,8 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.ProgressBar;
+import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.config.Configuration;
@@ -305,6 +307,106 @@ public class Utils {
 		}
 	}
 
+	public static void injectFlag(StyledText styledtext, FlagTable flagTable,
+			Table table, int indexLigne, int indexDebut, int indexFin,
+			int indexTest1, int indexTest2) {
+		int index = table.getSelectionIndex();
+		if (index >= 0 && table.getItems() != null) {
+			int deb, fi, lign, i;
+
+			// on récupère les coordonnées de la sélection
+			deb = styledtext.getSelection().x;
+			fi = styledtext.getSelection().y;
+
+			// System.out.println("deb clic = " + deb);
+			// System.out.println("fi clic = " + fi);
+
+			if (deb == fi) {
+				Utils.messageErreur(Messages.getString("Utils.26"));
+			} else {
+
+				lign = 1;
+				// calcul de la ligne en fonction de la valeur de x
+				// parcours du tableau des tailles de lignes cumulées
+
+				for (i = 0; i < lignesBrutes.size(); i++) {
+
+					if (deb == taillesCumLignes[i]) {
+						lign = i + 1;
+						break;
+					}
+					if (i == (lignesBrutes.size() - 1)) {
+						lign = i + 1;
+						break;
+					}
+					if ((deb >= taillesCumLignes[i])
+							&& (deb < taillesCumLignes[i + 1])) {
+						lign = i + 1;
+						break;
+					}
+
+				}
+
+				deb = deb - taillesCumLignes[lign - 1] + 1; // debut reel sur
+				// ligne
+				// :
+				// nbre caracs par rapport
+				// debut de ligne
+				fi = fi - taillesCumLignes[lign - 1]; // fin reelle sur ligne
+
+				// System.out.println("DEBUT = " + deb + " FIN= " + fi);
+
+				// remplissage ligne dans interface
+				table.getItems()[index].setText(indexLigne, String
+						.valueOf(lign));
+
+				// remplissage debut et fin dans interface
+				table.getItems()[index]
+						.setText(indexDebut, String.valueOf(deb));
+				table.getItems()[index].setText(indexFin, String.valueOf(fi));
+
+				// Test après injection
+				testFlag(styledtext, flagTable, table, indexLigne, indexDebut, indexFin, indexTest1, indexTest2);
+
+				Utils.messageErreur("");
+			}
+		}
+	}
+
+	public static void testFlag(StyledText styledtext, FlagTable flagTable,
+			Table table, int indexLigne, int indexDebut, int indexFin,
+			int indexTest1, int indexTest2) {
+		int deb, fi, lign;
+
+		for (int i = 0; i < table.getItemCount(); i++) {
+			lign = Integer.parseInt(table.getItems()[i].getText(indexLigne));
+
+			deb = Integer.parseInt(table.getItems()[i].getText(indexDebut))
+					+ taillesCumLignes[lign - 1];
+			fi = Integer.parseInt(table.getItems()[i].getText(indexFin))
+					+ taillesCumLignes[lign - 1];
+
+			// styledtext.setSelection(deb - 1, fi);
+
+			// remplissage test entrée dans interface
+			table.getItems()[i].setText(indexTest1, styledtext.getText(deb - 1,
+					fi - 1));
+
+			// remplissage test sortie dans interface
+			String flagSDN = "0";
+			int size = flagTable.getFlags().size();
+			for (int j = 0; j < size; j++) {
+				if (flagTable.getFlags().get(j).getLocal().equals(
+						table.getItems()[i].getText(indexTest1))) {
+					flagSDN = Utils.extraitCode(flagTable.getFlags().get(j)
+							.getSdn());
+					break;
+				}
+			}
+			table.getItems()[i].setText(indexTest2, flagSDN);
+		}
+	}
+
 	public static int calculNbreLignes(Cursor cursor) {
 
 		int nbre = 0, lignDepart, lignFin;
@@ -496,23 +598,24 @@ public class Utils {
 		// calcul de la ligne en fonction de la valeur de x
 		// parcours du tableau des tailles de lignes cumulées
 
-//		// calcul ligne depart
-//		for (i = 0; i < lignesBrutes.size(); i++) {
-//
-//			if (deb == taillesCumLignes[i]) {
-//				lignDepart = i + 1;
-//				break;
-//			}
-//			if (i == (lignesBrutes.size() - 1)) {
-//				lignDepart = i + 1;
-//				break;
-//			}
-//			if ((deb >= taillesCumLignes[i]) && (deb < taillesCumLignes[i + 1])) {
-//				lignDepart = i + 1;
-//				break;
-//			}
-//
-//		}
+		// // calcul ligne depart
+		// for (i = 0; i < lignesBrutes.size(); i++) {
+		//
+		// if (deb == taillesCumLignes[i]) {
+		// lignDepart = i + 1;
+		// break;
+		// }
+		// if (i == (lignesBrutes.size() - 1)) {
+		// lignDepart = i + 1;
+		// break;
+		// }
+		// if ((deb >= taillesCumLignes[i]) && (deb < taillesCumLignes[i + 1]))
+		// {
+		// lignDepart = i + 1;
+		// break;
+		// }
+		//
+		// }
 
 		// System.out.println("ligne depart = " + lignDepart);
 
@@ -520,7 +623,8 @@ public class Utils {
 
 		for (i = lignDepart - 1; i < lignesBrutes.size(); i++) {
 
-			if (longueur == taillesCumLignes[i] - taillesCumLignes[lignDepart - 1]) {
+			if (longueur == taillesCumLignes[i]
+					- taillesCumLignes[lignDepart - 1]) {
 				lignFin = i + 1;
 				break;
 			}
@@ -528,7 +632,10 @@ public class Utils {
 				lignFin = i + 1;
 				break;
 			}
-			if ((longueur >= taillesCumLignes[i] - taillesCumLignes[lignDepart - 1]) && (longueur < taillesCumLignes[i + 1] - taillesCumLignes[lignDepart - 1])) {
+			if ((longueur >= taillesCumLignes[i]
+					- taillesCumLignes[lignDepart - 1])
+					&& (longueur < taillesCumLignes[i + 1]
+							- taillesCumLignes[lignDepart - 1])) {
 				lignFin = i + 1;
 				break;
 			}
