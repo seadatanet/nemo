@@ -8,6 +8,11 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+/**
+ * Class EdmoHandler
+ * 
+ * @author Herve Taniou
+ */
 public class EdmoHandler extends DefaultHandler{
 	
 	private java.util.HashMap<Integer, String> _valeurs = new HashMap<Integer, String>();

@@ -133,7 +133,6 @@ public class Preformat {
 	
 	
 	public static void run() throws IOException {
-		int i;				
 		Double pourcentEtape1 = 0d;
 		Double pourcentEtape2 = 0d;
 		int nbFic = 0;

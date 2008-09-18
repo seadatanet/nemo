@@ -8,10 +8,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 
-import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.ViewEdit;
-import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
-
 /**
  * Class FlagTable
  * 

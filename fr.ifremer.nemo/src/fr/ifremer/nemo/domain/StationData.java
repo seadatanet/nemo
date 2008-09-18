@@ -1,7 +1,5 @@
 package fr.ifremer.nemo.domain;
 
-import java.util.TreeMap;
-
 public class StationData implements Comparable {
 	private Double _value;
 

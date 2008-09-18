@@ -3,7 +3,6 @@ package fr.ifremer.nemo.util;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.ui.Utils;
 
 public class Messages {

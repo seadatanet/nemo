@@ -35,10 +35,7 @@ public class DrawingBack {
 			String description, Section section, Text ligne, Text debut,
 			Text fin, Text manuel, Button radio) {
 
-		final String nomSec;
 		final Text manu;
-
-		nomSec = nomSection;
 
 		section.setParent(EditDesc.formEdition);
 
@@ -46,7 +43,7 @@ public class DrawingBack {
 				.getBody(), Section.DESCRIPTION | Section.TITLE_BAR
 				| Section.TWISTIE | Section.COMPACT);
 
-//		System.out.println("HOP");
+		// System.out.println("HOP");
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			public void expansionStateChanged(ExpansionEvent e) {
@@ -128,7 +125,8 @@ public class DrawingBack {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-//						System.out.println("saisie manuelle section " + nomSec); // 
+						// System.out.println("saisie manuelle section " +
+						// nomSec); //
 						// raz de la valeur manuelle
 						manu.setEnabled(true);
 						grou.setVisible(false);
@@ -140,8 +138,8 @@ public class DrawingBack {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent f) {
-//						System.out.println("position dans fichier section "
-//								+ nomSec); // 
+						// System.out.println("position dans fichier section "
+						// + nomSec); //
 						// raz de la valeur manuelle
 
 						manu.setText("");
@@ -161,7 +159,7 @@ public class DrawingBack {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-//						System.out.println("bouton injection"); // 
+						// System.out.println("bouton injection"); //
 
 						Utils.inject(lign, debu, fi,
 								ViewFile.textAreaDescription);
@@ -178,12 +176,9 @@ public class DrawingBack {
 			String nomSection, String description, Section section, Text ligne,
 			Text debut, Text fin, Text manuel) {
 
-		final String nomSec;
 		final ScrolledForm forme;
 
 		forme = form;
-
-		nomSec = nomSection;
 
 		section = ViewEdit.toolkitEdition.createSection(form.getBody(),
 				Section.DESCRIPTION | Section.TITLE_BAR | Section.TWISTIE
@@ -212,12 +207,12 @@ public class DrawingBack {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-//						System.out.println("saisie manuelle section " + nomSec); // 
+						// System.out.println("saisie manuelle section " +
+						// nomSec); //
 						// raz de la valeur manuelle
 						grou.setVisible(false);
 					}
 				});
-
 
 		// saisie manuelle
 		manuel = new Text(sectionClient, SWT.BORDER);
@@ -230,8 +225,8 @@ public class DrawingBack {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-//						System.out.println("position dans fichier section "
-//								+ nomSec); // 
+						// System.out.println("position dans fichier section "
+						// + nomSec); //
 						// raz de la valeur manuelle
 
 						grou.setVisible(true);
@@ -277,7 +272,6 @@ public class DrawingBack {
 			String nomSection, String description, Section section, Text ligne,
 			Text debut, Text fin, Button radio, Combo combo) {
 
-		final String nomSec;
 		final Combo comboList;
 		final Text lig, debu, fi;
 		final ScrolledForm forme;
@@ -287,7 +281,6 @@ public class DrawingBack {
 		lig = ligne;
 		debu = debut;
 		fi = fin;
-		nomSec = nomSection;
 
 		section.setParent(form);
 
@@ -295,7 +288,7 @@ public class DrawingBack {
 				Section.DESCRIPTION | Section.TITLE_BAR | Section.TWISTIE
 						| Section.COMPACT);
 
-//		System.out.println("sectionComboLigneDebutFinInject");
+		// System.out.println("sectionComboLigneDebutFinInject");
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			public void expansionStateChanged(ExpansionEvent e) {
@@ -346,8 +339,8 @@ public class DrawingBack {
 		Label label2 = new Label(groupe, SWT.NULL);
 		label2.setText(Messages.getString("Drawing.11"));
 
-//		Boolean tmp = debut.setParent(groupe);
-//		System.out.println("parent ?====> " + tmp);
+		// Boolean tmp = debut.setParent(groupe);
+		// System.out.println("parent ?====> " + tmp);
 		EditDesc.debutNbreMesures.setText("test");
 
 		debut.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -379,7 +372,8 @@ public class DrawingBack {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-//						System.out.println("saisie manuelle section " + nomSec); // 
+						// System.out.println("saisie manuelle section " +
+						// nomSec); //
 						// raz de la valeur manuelle
 						comboList.setEnabled(true);
 						grou.setVisible(false);
@@ -392,8 +386,8 @@ public class DrawingBack {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent f) {
-//						System.out.println("position dans fichier : section "
-//								+ nomSec); // 
+						// System.out.println("position dans fichier : section "
+						// + nomSec); //
 						// raz de la valeur manuelle
 
 						comboList.setEnabled(false);
@@ -412,7 +406,7 @@ public class DrawingBack {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent g) {
-//						System.out.println("bouton injection"); // 
+						// System.out.println("bouton injection"); //
 
 						Utils.inject(lig, debu, fi,
 								ViewFile.textAreaDescription);
@@ -516,7 +510,8 @@ public class DrawingBack {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent h) {
-//						System.out.println("bouton injection nbre lignes"); // 
+						// System.out.println("bouton injection nbre lignes");
+						// //
 
 						Utils.injectNbreLignes(manu,
 								ViewFile.textAreaDescription);
@@ -579,7 +574,8 @@ public class DrawingBack {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent h) {
-//						System.out.println("bouton injection nbre lignes"); // 
+						// System.out.println("bouton injection nbre lignes");
+						// //
 
 						Utils.injectNbreLignes(manu,
 								ViewFile.textAreaDescription);
@@ -595,7 +591,7 @@ public class DrawingBack {
 	public static void ajoutSectionDansListeDesc(Section section) {
 
 		EditDesc.listeSectionsDesc.add(section);
-		//System.out.println("ajout section ok");
+		// System.out.println("ajout section ok");
 
 	}
 

@@ -40,8 +40,6 @@ import fr.ifremer.nautilus.metadata.NautilusSurveyWS;
 import fr.ifremer.nautilus.metadata.NautilusSurveyWSServiceLocator;
 import fr.ifremer.nautilus.metadata.WSCollectedData;
 import fr.ifremer.nautilus.metadata.WSSurvey;
-import fr.ifremer.nemo.config.Configuration;
-import fr.ifremer.nemo.ui.DataModel;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Messages;

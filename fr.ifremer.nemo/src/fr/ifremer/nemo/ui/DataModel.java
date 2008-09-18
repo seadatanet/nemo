@@ -3,7 +3,9 @@ package fr.ifremer.nemo.ui;
 import java.text.ParseException;
 import java.util.regex.Pattern;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 import fr.ifremer.nemo.config.NemoLists;
@@ -14,6 +16,7 @@ import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.domain.TimeSeriesInformation;
 import fr.ifremer.nemo.domain.Trajectory;
 import fr.ifremer.nemo.input.DirectoryBasedSurvey;
+import fr.ifremer.nemo.input.FlagFragment;
 import fr.ifremer.nemo.input.HeaderFragment;
 import fr.ifremer.nemo.input.InputModel;
 import fr.ifremer.nemo.input.LineFragment;
@@ -344,6 +347,7 @@ public class DataModel {
 		// numéro de station
 		String ligne, debut, fin;
 		HeaderFragment frag;
+		FlagFragment flag;
 
 		station = stationModel.getModel();
 
@@ -683,6 +687,9 @@ public class DataModel {
 		// HEURE
 		propertyModel = stationModel.propertiesAt("time");
 
+		// Flag qualité
+		propertyModel.setFlag(setFlagFragment(Global.DATETIME));
+
 		if (EditStation.buttonHeureSaisie.getSelection()) {
 			// saisie heure manuelle
 
@@ -752,6 +759,9 @@ public class DataModel {
 
 		// DATE en LONG
 		propertyModel = stationModel.propertiesAt("date");
+
+		// Flag qualité
+		propertyModel.setFlag(setFlagFragment(Global.DATETIME));
 
 		if (EditStation.buttonDateSaisie.getSelection()) {
 			// saisie date manuelle
@@ -826,6 +836,9 @@ public class DataModel {
 		// latitude
 		propertyModel = stationModel.propertiesAt("latitude");
 
+		// Flag qualité
+		propertyModel.setFlag(setFlagFragment(Global.LATITUDE));
+
 		// format de la latitude à mettre dans le datamodel
 		LatitudeFormat latitudeFormat = (LatitudeFormat) propertyModel
 				.getFormat();
@@ -875,6 +888,9 @@ public class DataModel {
 		// longitude
 
 		propertyModel = stationModel.propertiesAt("longitude");
+
+		// Flag qualité
+		propertyModel.setFlag(setFlagFragment(Global.LONGITUDE));
 
 		// format de la longitude à mettre dans le datamodel
 		LongitudeFormat longitudeFormat = (LongitudeFormat) propertyModel
@@ -926,6 +942,10 @@ public class DataModel {
 
 		// profondeur
 		propertyModel = stationModel.propertiesAt("bottomDepth");
+
+		// Flag qualité
+		propertyModel.setFlag(setFlagFragment(Global.DEPTH));
+
 		if (EditStation.buttonProfondeurSaisie.getSelection()) {
 			// saisie manuelle
 			station.setBottomDepth(EditStation.textProfondeur.getText());
@@ -985,6 +1005,9 @@ public class DataModel {
 			propertyModel = stationModel.getTimeSeriesModel().propertiesAt(
 					"endDepth");
 
+			// Flag qualité
+			propertyModel.setFlag(setFlagFragment(Global.ENDDEPTH));
+
 			if (EditStation.buttonProfFinSaisie.getSelection()) {
 				propertyModel.setUserProvided(true);
 				// valeur manuelle
@@ -1037,6 +1060,9 @@ public class DataModel {
 			// LATITUDE DE FIN
 			propertyModel = stationModel.getTimeSeriesModel().propertiesAt(
 					"endLatitude");
+
+			// Flag qualité
+			propertyModel.setFlag(setFlagFragment(Global.ENDLATITUDE));
 
 			// format de la latitude de fin à mettre dans le datamodel
 			LatitudeFormat latitudeFormatFin = (LatitudeFormat) propertyModel
@@ -1114,6 +1140,9 @@ public class DataModel {
 			// LONGITUDE DE FIN
 			propertyModel = stationModel.getTimeSeriesModel().propertiesAt(
 					"endLongitude");
+
+			// Flag qualité
+			propertyModel.setFlag(setFlagFragment(Global.ENDLONGITUDE));
 
 			// format de la longitude à mettre dans le datamodel
 			LongitudeFormat longitudeFormatFin = (LongitudeFormat) propertyModel
@@ -1201,6 +1230,8 @@ public class DataModel {
 			propertyModel = stationModel.getTimeSeriesModel().propertiesAt(
 					"endTime");
 			propertyModel.setUserProvided(true);
+			// Flag qualité
+			propertyModel.setFlag(setFlagFragment(Global.ENDDATETIME));
 
 			// PROFONDEUR CAPTEUR
 			propertyModel = stationModel.getTimeSeriesModel().propertiesAt(
@@ -1232,10 +1263,6 @@ public class DataModel {
 		}
 
 		// FLAGS QC
-		// station.setDateQC(EditStation.textQCDate.getText());
-		// station.setDepthQC(EditStation.textQCProf.getText());
-		// station.setLatQC(EditStation.textQCLat.getText());
-		// station.setLongQC(EditStation.textQCLong.getText());
 		stationModel.setFlagTable(EditStation.getFlagTable());
 
 		// flag validation à 1
@@ -1950,6 +1977,11 @@ public class DataModel {
 		}
 
 		// HEURE
+		propertyModel = stationModel_modele.propertiesAt("time");
+
+		getFlagFragment(propertyModel.getFlag(), Global.DATETIME, Messages
+				.getString("EditStation.45").trim());
+
 		if ((ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire
 				.getSelection())
 				&& !stationModel_modele.getTimestampModel().isComputed()) {
@@ -1965,8 +1997,6 @@ public class DataModel {
 							.getTimestampModel().getTimeFragment()
 							.getLastCharOffset()));
 		} else {
-			propertyModel = stationModel_modele.propertiesAt("time");
-
 			DateTimeFormat timeFormat = (DateTimeFormat) propertyModel
 					.getFormat();
 			Utils.selectComboValeur(EditStation.comboHeure, timeFormat
@@ -2017,6 +2047,11 @@ public class DataModel {
 		}
 
 		// date en LONG
+		propertyModel = stationModel_modele.propertiesAt("date");
+
+		getFlagFragment(propertyModel.getFlag(), Global.DATETIME, Messages
+				.getString("EditStation.45").trim());
+
 		if ((ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire
 				.getSelection())
 				&& !stationModel_modele.getTimestampModel().isComputed()) {
@@ -2031,8 +2066,6 @@ public class DataModel {
 							.getTimestampModel().getDateFragment()
 							.getLastCharOffset()));
 		} else {
-			propertyModel = stationModel_modele.propertiesAt("date");
-
 			DateTimeFormat dateFormat = (DateTimeFormat) propertyModel
 					.getFormat();
 
@@ -2094,6 +2127,9 @@ public class DataModel {
 				.getFormatString());
 		// EditStation.comboLatitude.add(latitudeFormat.getFormatString(), 0);
 		// EditStation.comboLatitude.select(0);
+		
+		getFlagFragment(propertyModel.getFlag(), Global.LATITUDE, Messages
+				.getString("EditStation.19").trim());
 
 		if (propertyModel.isUserProvided()) {
 			// saisie manuelle latitude
@@ -2143,6 +2179,9 @@ public class DataModel {
 				.getFormatString());
 		// EditStation.comboLongitude.add(longitudeFormat.getFormatString(), 0);
 		// EditStation.comboLongitude.select(0);
+		
+		getFlagFragment(propertyModel.getFlag(), Global.LONGITUDE, Messages
+				.getString("EditStation.23").trim());
 
 		if (propertyModel.isUserProvided()) {
 			// saisie manuelle latitude
@@ -2182,6 +2221,9 @@ public class DataModel {
 
 		// profondeur
 		propertyModel = stationModel_modele.propertiesAt("bottomDepth");
+		
+		getFlagFragment(propertyModel.getFlag(), Global.DEPTH, Messages
+				.getString("EditStation.27").trim());
 
 		if (propertyModel.isUserProvided()) {
 			// profondeur manuelle
@@ -2259,6 +2301,9 @@ public class DataModel {
 			latitudeFormat = (LatitudeFormat) propertyModel.getFormat();
 			formatLat = latitudeFormat.getFormatString();
 			Utils.selectComboValeur(EditStation.comboLatitudeFin, formatLat);
+			
+			getFlagFragment(propertyModel.getFlag(), Global.ENDLATITUDE, Messages
+					.getString("EditStation.21").trim());
 
 			if (propertyModel.isUserProvided()) {
 				// saisie manuelle
@@ -2305,6 +2350,9 @@ public class DataModel {
 			longitudeFormat = (LongitudeFormat) propertyModel.getFormat();
 			formatLong = longitudeFormat.getFormatString();
 			Utils.selectComboValeur(EditStation.comboLongitudeFin, formatLong);
+			
+			getFlagFragment(propertyModel.getFlag(), Global.ENDLONGITUDE, Messages
+					.getString("EditStation.25").trim());
 
 			if (propertyModel.isUserProvided()) {
 				// saisie manuelle
@@ -2346,6 +2394,10 @@ public class DataModel {
 				|| ViewFile.radTrajectoire.getSelection()) {
 			propertyModel = stationModel_modele.getTimeSeriesModel()
 					.propertiesAt("endDepth");
+			
+			getFlagFragment(propertyModel.getFlag(), Global.ENDDEPTH, Messages
+					.getString("EditStation.29").trim());
+			
 			if (propertyModel.isUserProvided()) {
 				// saisie manuelle
 				if (Float.isNaN(stationModel_modele.getTimeSeriesInformation()
@@ -2437,12 +2489,12 @@ public class DataModel {
 		}
 
 		// FLAGS QC
-		// EditStation.textQCDate.setText(""+station.getDateQC());
-		// EditStation.textQCLat.setText(""+station.getLatQC());
-		// EditStation.textQCLong.setText(""+station.getLongQC());
-		// EditStation.textQCProf.setText(""+station.getDepthQC());
 		if (stationModel_modele.getFlagTable() != null) {
 			EditStation.flagTable = stationModel_modele.getFlagTable();
+			EditStation.flagTable.fillTable(EditStation.tabCorrespondance);
+			ViewEdit.formEdition.reflow(true);
+		} else {
+			EditStation.flagTable = Utils.configuration.getDefaultFlagTable();
 			EditStation.flagTable.fillTable(EditStation.tabCorrespondance);
 			ViewEdit.formEdition.reflow(true);
 		}
@@ -2460,6 +2512,43 @@ public class DataModel {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(">>>>" + e.getMessage());
+		}
+	}
+
+	private static FlagFragment setFlagFragment(String property) {
+		int i;
+		FlagFragment flag = new FlagFragment();
+
+		for (i = 0; i < EditStation.tabFlagQC.getItemCount(); i++) {
+			if (EditStation.tabFlagQC.getItems()[i].getText(0).equals(property)) {
+				flag.setLine(EditStation.tabFlagQC.getItems()[i].getText(2));
+				flag.setFirstCharOffset(EditStation.tabFlagQC.getItems()[i]
+						.getText(3));
+				flag.setLastCharOffset(EditStation.tabFlagQC.getItems()[i]
+						.getText(4));
+				return flag;
+			}
+		}
+		return null;
+	}
+
+	private static void getFlagFragment(FlagFragment flag, String propertyCode,
+			String propertyName) {
+		if (flag != null) {
+			// Teste si la metadonnée est déjà présente dans le tableau
+			int size = EditStation.tabFlagQC.getItemCount();
+			for (int i = 0; i < size; i++) {
+				if (EditStation.tabFlagQC.getItems()[i].getText(0).equals(propertyCode)) {
+					return;
+				}
+			}
+
+			TableItem item = new TableItem(EditStation.tabFlagQC, SWT.NONE);
+			item.setText(0, propertyCode);
+			item.setText(1, propertyName);
+			item.setText(2, String.valueOf(flag.getLine()));
+			item.setText(3, String.valueOf(flag.getFirstCharOffset()));
+			item.setText(4, String.valueOf(flag.getLastCharOffset()));
 		}
 	}
 

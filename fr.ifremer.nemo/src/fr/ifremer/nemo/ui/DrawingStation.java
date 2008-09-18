@@ -2820,7 +2820,7 @@ public class DrawingStation {
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(tabFlagQC);
 
 		TableColumn tableColumn0 = new TableColumn(tabFlagQC, SWT.NONE);
-		tableColumn0.setWidth(100);
+		tableColumn0.setWidth(0);
 		tableColumn0.setResizable(false);
 		tableColumn0.setText("Code"); //$NON-NLS-1$
 
@@ -2933,18 +2933,6 @@ public class DrawingStation {
 				Utils.testFlag(ViewFile.styledTextStation, EditStation.flagTable, tabFlag, 2, 3, 4, 5, 6);
 			}
 		});
-		
-//		subFlag.addListener(SWT.Show, new Listener() {
-//			public void handleEvent(Event event) {
-//				for (int i = 0; i < tabFlag.getItemCount(); i++) {
-//					if (tabFlag.getItems()[i].getText(0).equals(Global.DATETIME)) {
-//						if (childDateTime != null) {
-//							
-//						}
-//					}
-//				}
-//			}
-//		});
 
 		tabFlagQC.setMenu(menuFlag);
 

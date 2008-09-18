@@ -61,6 +61,12 @@ public class PropertyModel implements Cloneable, PathElementHandler,
 	 * récupérée
 	 */
 	protected HeaderFragment _fragment;
+	
+	/**
+	 * Représente le fragment du fichier d'entrée où le flag qualité peut être
+	 * récupéré
+	 */
+	protected FlagFragment _flag;
 
 	protected ExternalizableFormat _format;
 
@@ -69,6 +75,7 @@ public class PropertyModel implements Cloneable, PathElementHandler,
 		_userProvided = false;
 		_format = null;
 		_fragment = null;
+		_flag = null;
 		_source = null;
 	}
 
@@ -195,6 +202,12 @@ public class PropertyModel implements Cloneable, PathElementHandler,
 			setFragment(l);
 			return (SAXConsumer) l;
 		}
+		if (a_LocalName.equals("FlagFragment")) {
+			FlagFragment l = (FlagFragment) FlagFragment.fromElement(
+					a_URI, a_LocalName, a_QName, a_Attributes);
+			setFlag(l);
+			return (SAXConsumer) l;
+		}
 		if (a_LocalName.equals("format")) {
 			return new PathElementConsumer("format", this);
 		}
@@ -261,6 +274,9 @@ public class PropertyModel implements Cloneable, PathElementHandler,
 		if (getFragment() != null) {
 			getFragment().writeXMLOn(a_Writer);
 		}
+		if (getFlag() != null) {
+			getFlag().writeXMLOn(a_Writer);
+		}
 	}
 
 	/**
@@ -303,6 +319,10 @@ public class PropertyModel implements Cloneable, PathElementHandler,
 		if (getFragment() != null) {
 			copy.setFragment((HeaderFragment) getFragment().clone());
 		}
+		copy._flag = null;
+		if (getFlag() != null) {
+			copy.setFlag((FlagFragment) getFlag().clone());
+		}
 		copy._format = null;
 		if (getFormat() != null) {
 			copy.setFormat((ExternalizableFormat) getFormat().clone());
@@ -317,6 +337,7 @@ public class PropertyModel implements Cloneable, PathElementHandler,
 		releaseFormat();
 		releaseFragment();
 		releaseSource();
+		releaseFlag();
 	}
 
 	/**
@@ -426,6 +447,34 @@ public class PropertyModel implements Cloneable, PathElementHandler,
 		if (_fragment == x)
 			return;
 		_fragment = x;
+	}
+	
+	/**
+	 * returns the linked object for role <% aRole name%>
+	 * 
+	 * @return the object linked
+	 */
+	public FlagFragment getFlag() {
+		return _flag;
+	}
+
+	/**
+	 * Create a new link with x for role fragment
+	 * 
+	 * @param x
+	 *            the object to link with
+	 */
+	public void setFlag(FlagFragment x) {
+		if (_flag == x)
+			return;
+		_flag = x;
+	}
+	
+	/**
+	 * Remove any link for role fragment
+	 */
+	public void releaseFlag() {
+		setFlag(null);
 	}
 
 	/**

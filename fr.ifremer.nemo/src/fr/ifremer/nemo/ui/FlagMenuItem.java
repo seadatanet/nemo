@@ -8,6 +8,11 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 
+/**
+ * Class FlagMenuItem
+ * 
+ * @author Herve Taniou
+ */
 public class FlagMenuItem {
 	private Menu _menu;
 
@@ -28,7 +33,8 @@ public class FlagMenuItem {
 		_item.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				// Teste si la metadonnée est déjà présente dans le tableau
-				for (int i = 0; i < _table.getItemCount(); i++) {
+				int size = _table.getItemCount();
+				for (int i = 0; i < size; i++) {
 					if (_table.getItems()[i].getText(0).equals(_code)) {
 						return;
 					}

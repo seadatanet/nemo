@@ -1,7 +1,6 @@
 package fr.ifremer.nemo.util;
 
 import fr.ifremer.nemo.output.ProgressNotification;
-import fr.ifremer.nemo.ui.EditConversion;
 
 /**
  * Class SizeBasedProgressNotifier

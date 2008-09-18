@@ -10,6 +10,7 @@ import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
@@ -130,7 +131,7 @@ public class EditStation {
 			cursHistorique1, cursHistorique2;
 
 	public static Table tabCorrespondance, tabFlagQC;
-	
+
 	public static FlagTable flagTable;
 
 	public static void affichageEdition() {
@@ -1124,10 +1125,10 @@ public class EditStation {
 		listeType = new List(shell, SWT.BORDER);
 
 	}
-	
+
 	public static void initTables() {
 		flagTable = new FlagTable();
-		
+
 		tabCorrespondance = new Table(shell, SWT.FULL_SELECTION | SWT.BORDER);
 		tabFlagQC = new Table(shell, SWT.FULL_SELECTION | SWT.BORDER);
 	}
@@ -1276,8 +1277,8 @@ public class EditStation {
 
 			}
 			if ((buttonFreqEchantPos.getSelection())
-					&& (Regexp.checkLigneDebutfin(textFreqEchantLigne,
-							textFreqEchantDebut, textFreqEchantFin, Messages
+					&& (Regexp.checkLigneDebutfin(textFreqEchantLigne.getText(),
+							textFreqEchantDebut.getText(), textFreqEchantFin.getText(), Messages
 									.getString("EditStation.85"), true))) { //$NON-NLS-1$
 
 				// position dans fichier
@@ -1347,6 +1348,14 @@ public class EditStation {
 			for (Text element : listeTextStation) {
 				element.dispose();
 			}
+		}
+		
+		if (tabCorrespondance != null) {
+			tabCorrespondance.dispose();
+		}
+		
+		if (tabFlagQC != null) {
+			tabFlagQC.dispose();
 		}
 
 		if (comboDate != null)
@@ -1430,7 +1439,10 @@ public class EditStation {
 			buttonDateSaisie.setEnabled(true);
 			buttonDatePos.setEnabled(true);
 
-			sectionFreqEchant.setVisible(true);
+			// sectionFreqEchant.setVisible(true);
+			sectionFreqEchant.setEnabled(true);
+			sectionFreqEchant.setTitleBarForeground(Display.getCurrent()
+					.getSystemColor(SWT.COLOR_BLACK));
 		} else {
 			buttonHeureSaisie.setEnabled(false);
 			buttonHeureSaisie.setSelection(false);
@@ -1442,7 +1454,11 @@ public class EditStation {
 			buttonDatePos.setEnabled(true);
 			buttonDatePos.setSelection(true);
 
-			sectionFreqEchant.setVisible(false);
+			// sectionFreqEchant.setVisible(false);
+			sectionFreqEchant.setEnabled(false);
+			sectionFreqEchant.setExpanded(false);
+			sectionFreqEchant.setTitleBarForeground(Display.getCurrent()
+					.getSystemColor(SWT.COLOR_GRAY));
 		}
 
 		activeHeure();

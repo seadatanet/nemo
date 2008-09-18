@@ -21,7 +21,6 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.config.Configuration;
@@ -366,7 +365,8 @@ public class Utils {
 				table.getItems()[index].setText(indexFin, String.valueOf(fi));
 
 				// Test après injection
-				testFlag(styledtext, flagTable, table, indexLigne, indexDebut, indexFin, indexTest1, indexTest2);
+				testFlag(styledtext, flagTable, table, indexLigne, indexDebut,
+						indexFin, indexTest1, indexTest2);
 
 				Utils.messageErreur("");
 			}
@@ -379,31 +379,36 @@ public class Utils {
 		int deb, fi, lign;
 
 		for (int i = 0; i < table.getItemCount(); i++) {
-			lign = Integer.parseInt(table.getItems()[i].getText(indexLigne));
+			try {
+				lign = Integer
+						.parseInt(table.getItems()[i].getText(indexLigne));
 
-			deb = Integer.parseInt(table.getItems()[i].getText(indexDebut))
-					+ taillesCumLignes[lign - 1];
-			fi = Integer.parseInt(table.getItems()[i].getText(indexFin))
-					+ taillesCumLignes[lign - 1];
+				deb = Integer.parseInt(table.getItems()[i].getText(indexDebut))
+						+ taillesCumLignes[lign - 1];
+				fi = Integer.parseInt(table.getItems()[i].getText(indexFin))
+						+ taillesCumLignes[lign - 1];
 
-			// styledtext.setSelection(deb - 1, fi);
+				// styledtext.setSelection(deb - 1, fi);
 
-			// remplissage test entrée dans interface
-			table.getItems()[i].setText(indexTest1, styledtext.getText(deb - 1,
-					fi - 1));
+				// remplissage test entrée dans interface
+				table.getItems()[i].setText(indexTest1, styledtext.getText(
+						deb - 1, fi - 1));
 
-			// remplissage test sortie dans interface
-			String flagSDN = "0";
-			int size = flagTable.getFlags().size();
-			for (int j = 0; j < size; j++) {
-				if (flagTable.getFlags().get(j).getLocal().equals(
-						table.getItems()[i].getText(indexTest1))) {
-					flagSDN = Utils.extraitCode(flagTable.getFlags().get(j)
-							.getSdn());
-					break;
+				// remplissage test sortie dans interface
+				String flagSDN = "0";
+				int size = flagTable.getFlags().size();
+				for (int j = 0; j < size; j++) {
+					if (flagTable.getFlags().get(j).getLocal().equals(
+							table.getItems()[i].getText(indexTest1))) {
+						flagSDN = Utils.extraitCode(flagTable.getFlags().get(j)
+								.getSdn());
+						break;
+					}
 				}
+				table.getItems()[i].setText(indexTest2, flagSDN);
+			} catch (Exception e) {
+
 			}
-			table.getItems()[i].setText(indexTest2, flagSDN);
 		}
 	}
 
@@ -582,10 +587,9 @@ public class Utils {
 
 	public static void calculNbreLignesPuisRemplissageFrag(HeaderFragment frag,
 			int headerLines) {
-		int deb, fi, lignDepart, lignFin, i, nbrelignes, longueur;
+		int fi, lignDepart, lignFin, i, nbrelignes, longueur;
 
 		// on récupère les coordonnées de la sélection
-		deb = frag.getFirstCharOffset();
 		fi = frag.getLastCharOffset();
 		longueur = frag.getLastCharOffset();
 		// System.out.println("deb clic = " + deb);

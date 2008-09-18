@@ -3,7 +3,6 @@ package fr.ifremer.nemo.ui;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.util.Messages;
@@ -31,7 +30,8 @@ public class Regexp {
 
 	}
 
-	public static Boolean depassementHeaderStation(int ligne, String zone, boolean metaInData) {
+	public static Boolean depassementHeaderStation(int ligne, String zone,
+			boolean metaInData) {
 		// verifie que la métadonnée injectée ne se situe pas au delà de
 		// l'entete station+fichier
 		// retourne true quand ca dépasse
@@ -46,11 +46,11 @@ public class Regexp {
 			// fichier campagne
 			enteteFichier = DataModel.singleSurvey.getHeaderLinesNumber();
 		}
-		
+
 		if (metaInData) {
 			enteteFichier++;
 		}
-		
+
 		int ligneLimite = enteteFichier
 				+ DataModel.stationModel.getNumberOfLines();
 
@@ -78,7 +78,7 @@ public class Regexp {
 		return ok;
 	}
 
-	public static Boolean checkLigneDebutfin(Text ligne, Text debut, Text fin,
+	public static Boolean checkLigneDebutfin(String ligne, String debut, String fin,
 			String nomSection, boolean blnCheckLigne) {
 
 		String lign, debu, fi, log;
@@ -90,18 +90,12 @@ public class Regexp {
 		// log = "\n===[Check section : " + nomSection + "]===\n";
 		log = "\nSection : " + nomSection + "\n"; //$NON-NLS-1$
 
-		// System.out.println(nomSection);
-
-		// valeurs des champs
-		lign = ligne.getText();
-		debu = debut.getText();
-		fi = fin.getText();
-
 		// format des différents champs
 		// ligne
 		if (blnCheckLigne) {
-			if (Pattern.matches("^[0-9][0-9]*$", lign)) { //$NON-NLS-1$
-				// System.out.println("ligne de la section " + nomSection + " ==>
+			if (Pattern.matches("^[0-9][0-9]*$", ligne)) { //$NON-NLS-1$
+				// System.out.println("ligne de la section " + nomSection + "
+				// ==>
 				// ok");
 				ok = ok && true;
 				// log = log + "Valeur de ligne ok\n";
@@ -113,7 +107,7 @@ public class Regexp {
 		}
 
 		// debut
-		if (Pattern.matches("^[1-9][0-9]*$", debu)) { //$NON-NLS-1$
+		if (Pattern.matches("^[1-9][0-9]*$", debut)) { //$NON-NLS-1$
 			// System.out.println("debut de la section " + nomSection + " ==>
 			// ok");
 			ok = ok && true;
@@ -125,7 +119,7 @@ public class Regexp {
 		}
 
 		// fin
-		if (Pattern.matches("^[1-9][0-9]*$", fi)) { //$NON-NLS-1$
+		if (Pattern.matches("^[1-9][0-9]*$", fin)) { //$NON-NLS-1$
 			// System.out.println("fin de la section " + nomSection + " ==>
 			// ok");
 			ok = ok && true;
@@ -138,8 +132,8 @@ public class Regexp {
 
 		// tests des relations des champs
 
-		if (!debu.matches("") && (!fi.matches(""))) { //$NON-NLS-1$ //$NON-NLS-2$
-			if (Integer.parseInt(debu) > Integer.parseInt(fi)) {
+		if (!debut.matches("") && (!fin.matches(""))) { //$NON-NLS-1$ //$NON-NLS-2$
+			if (Integer.parseInt(debut) > Integer.parseInt(fin)) {
 				ok = ok && false;
 				log = log + "==>" + Messages.getString("Regexp.15"); //$NON-NLS-1$
 			}
@@ -183,17 +177,17 @@ public class Regexp {
 		}
 		return ok;
 	}
-	
-//	public static Boolean checkNonVide(Text text) {
-//		Boolean ok = true;
-//		
-//		if (EditDesc.radManuel.getSelection()) {
-//			if (EditDesc.txtManuel.getText().matches("")) {
-//				ok = false;
-//				Utils.messageErreurAppend(Messages.getString("EditDesc.indicateurVide"));
-//			}
-//		}
-//		
-//		return ok;
-//	}
+
+	// public static Boolean checkNonVide(Text text) {
+	// Boolean ok = true;
+	//		
+	// if (EditDesc.radManuel.getSelection()) {
+	// if (EditDesc.txtManuel.getText().matches("")) {
+	// ok = false;
+	// Utils.messageErreurAppend(Messages.getString("EditDesc.indicateurVide"));
+	// }
+	// }
+	//		
+	// return ok;
+	// }
 }
