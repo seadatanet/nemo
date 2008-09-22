@@ -203,12 +203,12 @@ public class HorodatedParameterModel implements Cloneable, PathElementHandler,
 		if (!isComputed()) {
 			if (getDateFragment() != null) {
 				a_Writer.openTag("dateFragment");
-				getDateFragment().writeXMLOn(a_Writer);
+				getDateFragment().writeXMLOn(a_Writer, "LineFragment");
 				a_Writer.closeTag();
 			}
 			if (getDateFragment() != null) {
 				a_Writer.openTag("timeFragment");
-				getTimeFragment().writeXMLOn(a_Writer);
+				getTimeFragment().writeXMLOn(a_Writer, "LineFragment");
 				a_Writer.closeTag();
 			}
 			if (getDateFormat() != null) {

@@ -387,6 +387,7 @@ public class TimeSeriesModel implements Cloneable, PathElementHandler,
 		for (PropertyModel m : getProperties()) {
 			try {
 				m.applyOn(timeSeries, a_Header);
+				_stationModel.addFlag(m, a_Station, a_Header);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

@@ -925,7 +925,12 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	}
 	
 	public FlagTable getDefaultFlagTable() {
-		return FlagTable.getFlagTable(getFlagTables(), getDefaultCode());
+		FlagTable flagTable = FlagTable.getFlagTable(getFlagTables(), getDefaultCode());
+		
+		if (flagTable != null) {
+			return flagTable;
+		}
+		return Utils.getBlankFlagTable();
 	}
 	
 } /* End of class: Configuration */

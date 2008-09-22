@@ -227,7 +227,7 @@ public class FlagFragment implements Cloneable, SAXConsumer {
 		StringWriter stringWriter = new StringWriter();
 		PrintWriter writer = new PrintWriter(stringWriter, true);
 
-		writer.println(a_Header[_line].substring(_firstCharOffset - 1, _lastCharOffset));
+		writer.println(a_Header[_line - 1].substring(_firstCharOffset - 1, _lastCharOffset));
 		
 		return stringWriter.toString();
 	}

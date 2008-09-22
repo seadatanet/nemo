@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.ParseException;
+import java.util.HashMap;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -17,9 +18,11 @@ import com.ago.xml.PathElementHandler;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.ExternalizableFormat;
 import fr.ifremer.nemo.util.FloatFormat;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.IntegerFormat;
 import fr.ifremer.nemo.util.LatitudeFormat;
 import fr.ifremer.nemo.util.LongitudeFormat;

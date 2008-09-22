@@ -9,8 +9,10 @@ import com.ago.xml.Element2Field;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.domain.Parameter;
 import fr.ifremer.nemo.domain.ParameterValue;
+import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSParameter;
 
@@ -41,6 +43,12 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 	 */
 	protected LineFragment _fragment;
 
+	/**
+	 * Représente le fragment de ligne du fichier d'entrée où la valeur du flag
+	 * peut être lue
+	 */
+	protected LineFragment _flag;
+
 	protected org.nfunk.jep.JEP _jepParser;
 
 	/**
@@ -51,6 +59,7 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 	public ParameterModel() {
 		_conversionFormula = "";
 		_fragment = new LineFragment();
+		_flag = null;
 		_model = null;
 	}
 
@@ -151,6 +160,12 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 			setModel(l);
 			return (SAXConsumer) l;
 		}
+		if (a_LocalName.equals("Flag")) {
+			LineFragment l = (LineFragment) LineFragment.fromElement(a_URI,
+					a_LocalName, a_QName, a_Attributes);
+			setFlag(l);
+			return (SAXConsumer) l;
+		}
 		return null;
 	}
 
@@ -177,7 +192,10 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 		a_Writer.putTag("conversionFormula", getConversionFormula());
 		a_Writer.putTag("inputDefault", getInputDefault());
 		if (getFragment() != null) {
-			getFragment().writeXMLOn(a_Writer);
+			getFragment().writeXMLOn(a_Writer, "LineFragment");
+		}
+		if (getFlag() != null) {
+			getFlag().writeXMLOn(a_Writer, "Flag");
 		}
 		if (getModel() != null) {
 			getModel().writeXMLOn(a_Writer);
@@ -227,6 +245,10 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 		if (getModel() != null) {
 			copy.setModel((Parameter) getModel().clone());
 		}
+		copy._flag = new LineFragment();
+		if (getFlag() != null) {
+			copy.setFlag((LineFragment) getFlag().clone());
+		}
 		return copy;
 	}
 
@@ -235,6 +257,7 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 	 */
 	public void release() {
 		releaseFragment();
+		releaseFlag();
 		releaseModel();
 	}
 
@@ -287,13 +310,10 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 	 *            new value for _inputDefault as String
 	 * @see ParameterModel#_inputDefault
 	 */
-	/*public void setInputDefault(String a_String) {
-		try {
-			setInputDefault(Float.parseFloat(a_String));
-		} catch (Exception e) {
-		}		
-	}
-*/
+	/*
+	 * public void setInputDefault(String a_String) { try {
+	 * setInputDefault(Float.parseFloat(a_String)); } catch (Exception e) { } }
+	 */
 	/**
 	 * Remove any link for role fragment
 	 */
@@ -320,6 +340,34 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 		if (_fragment == x)
 			return;
 		_fragment = x;
+	}
+
+	/**
+	 * Remove any link for role fragment
+	 */
+	public void releaseFlag() {
+		setFlag(null);
+	}
+
+	/**
+	 * returns the linked object for role <% aRole name%>
+	 * 
+	 * @return the object linked
+	 */
+	public LineFragment getFlag() {
+		return _flag;
+	}
+
+	/**
+	 * Create a new link with x for role fragment
+	 * 
+	 * @param x
+	 *            the object to link with
+	 */
+	public void setFlag(LineFragment x) {
+		if (_flag == x)
+			return;
+		_flag = x;
 	}
 
 	/**
@@ -363,47 +411,65 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 	 * @param a_Line
 	 * @param a_ParameterValue
 	 */
-	public void convert(String a_Line, ParameterValue a_ParameterValue) throws StringIndexOutOfBoundsException {
+	public void convert(String a_Line, ParameterValue a_ParameterValue,
+			FlagTable flagTable) throws StringIndexOutOfBoundsException {
 
 		org.nfunk.jep.JEP parser = null;
-		
+
 		String fragmnt = _fragment.retreive(a_Line);
 
-		if (_inputDefault.trim().equals(fragmnt)){
-			a_ParameterValue.setValue(Double.parseDouble(_model.getDefault()));
-		}
-			
+		if (fragmnt.equals("")) {
+			a_ParameterValue.setValue(Double.NaN);
+			a_ParameterValue.setQc("9");
+		} else {
+			if (_inputDefault.trim().equals(fragmnt)) {
+				a_ParameterValue.setValue(Double.parseDouble(_model.getDefault()));
+			}
 
-		
-	/*	if ((float) val == _inputDefault) {
-			a_ParameterValue.setValue(Float.parseFloat(_model.getDefault()));
-		}*/ else {
-			double val;
-			try {
-			val = Double.parseDouble(fragmnt);
-			}
-			catch (NumberFormatException e)
-			{
-				throw new NumberFormatException(Messages.getString("ParameterModel.1") + e.getMessage().substring(e.getMessage().indexOf("\""),e.getMessage().lastIndexOf("\"")) + Messages.getString("ParameterModel.2") + "\r\n");
-			}
-			if (_conversionFormula.trim().length() > 0) {
-				if (getJepParser() == null) {
-					parser = new org.nfunk.jep.JEP();
-					parser.addStandardFunctions();
-					parser.addStandardConstants();
-					parser.addVariable("x", val);
-					parser.parseExpression(_conversionFormula.trim());
-					setJepParser(parser);
-					double result = parser.getValue();
-					a_ParameterValue.setValue((Double) result);
-				} else {
-					parser = getJepParser();
-					parser.addVariable("x", val);
-					double result = parser.getValue();
-					a_ParameterValue.setValue((Double) result);
+			/*
+			 * if ((float) val == _inputDefault) {
+			 * a_ParameterValue.setValue(Float.parseFloat(_model.getDefault())); }
+			 */else {
+				double val;
+				try {
+					val = Double.parseDouble(fragmnt);
+				} catch (NumberFormatException e) {
+					throw new NumberFormatException(Messages
+							.getString("ParameterModel.1")
+							+ e.getMessage().substring(
+									e.getMessage().indexOf("\""),
+									e.getMessage().lastIndexOf("\""))
+							+ Messages.getString("ParameterModel.2") + "\r\n");
 				}
-			} else {
-				a_ParameterValue.setValue((Double) val);
+				if (_conversionFormula.trim().length() > 0) {
+					if (getJepParser() == null) {
+						parser = new org.nfunk.jep.JEP();
+						parser.addStandardFunctions();
+						parser.addStandardConstants();
+						parser.addVariable("x", val);
+						parser.parseExpression(_conversionFormula.trim());
+						setJepParser(parser);
+						double result = parser.getValue();
+						a_ParameterValue.setValue((Double) result);
+					} else {
+						parser = getJepParser();
+						parser.addVariable("x", val);
+						double result = parser.getValue();
+						a_ParameterValue.setValue((Double) result);
+					}
+				} else {
+					a_ParameterValue.setValue((Double) val);
+				}
+			}
+
+			// Flag QC
+			if (_flag != null) {
+				String flag = _flag.retreive(a_Line);
+
+				// Correspondance SDN
+				flag = flagTable.getFlagSDN(flag);
+
+				a_ParameterValue.setQc(flag);
 			}
 		}
 	}

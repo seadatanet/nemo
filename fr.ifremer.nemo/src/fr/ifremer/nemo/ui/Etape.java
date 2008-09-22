@@ -223,6 +223,9 @@ public class Etape {
 	public static void validationStation() {
 		// test des valeurs de Station
 
+		// Remplissage du tableau de correspondance de flags
+		EditStation.flagTable.fillFlagTable(EditStation.tabCorrespondance);
+		
 		// retour à l'onglet message d'erreur
 		ViewLog.tabFolderLog.setSelection(0);
 
@@ -1311,6 +1314,7 @@ public class Etape {
 
 		int nbreParam = TableData.types.size();
 		int[] debuts, fins;
+		String[] debutsFlag, finsFlag;
 		int cptDebut = 0;
 		int cptFin = 0;
 
@@ -1323,13 +1327,16 @@ public class Etape {
 
 			debuts = new int[nbreParam];
 			fins = new int[nbreParam];
+			debutsFlag = new String[nbreParam];
+			finsFlag = new String[nbreParam];
 
 			// remplissage des listes
 			for (int i = 0; i < nbreParam; i++) {
 				TypeData typeCourant = TableData.types.get(i);
 				debuts[i] = typeCourant.getDebut();
 				fins[i] = typeCourant.getFin();
-
+				debutsFlag[i] = typeCourant.getDebutFlag();
+				finsFlag[i] = typeCourant.getFinFlag();
 				/*
 				 * // test direct sur valeur entree if
 				 * (Pattern.matches("^.{0,1}[0-9]*[0-9].*[0-9][0-9]*$",
@@ -1360,6 +1367,15 @@ public class Etape {
 					Utils
 							.messageErreurAppend(Messages.getString("Etape.98") + " " + typeCourant.getCode()); //$NON-NLS-1$
 					ok = false;
+				}
+				
+//				 check des valeurs début<fin flag
+				if (!typeCourant.getDebutFlag().equals("") && !typeCourant.getFinFlag().equals("")) {
+					if (Integer.parseInt(typeCourant.getDebutFlag()) > Integer.parseInt(typeCourant.getFinFlag())) {
+						Utils
+								.messageErreurAppend(Messages.getString("Etape.125") + " " + typeCourant.getCode()); //$NON-NLS-1$
+						ok = false;
+					}
 				}
 			}
 

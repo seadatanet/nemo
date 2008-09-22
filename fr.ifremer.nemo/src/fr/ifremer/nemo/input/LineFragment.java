@@ -137,8 +137,8 @@ public class LineFragment implements Cloneable, SAXConsumer {
 	 *            the XMLOutputWriter to which to write the XML Definition
 	 * 
 	 */
-	public void writeXMLOn(XMLOutputWriter a_Writer) {
-		a_Writer.openTag("LineFragment");
+	public void writeXMLOn(XMLOutputWriter a_Writer, String tag) {
+		a_Writer.openTag(tag);
 		writeXMLBodyOn(a_Writer);
 		a_Writer.closeTag();
 	}
@@ -151,9 +151,9 @@ public class LineFragment implements Cloneable, SAXConsumer {
 	 *            the OutptStream to which to write the XML Definition
 	 * 
 	 */
-	public void writeXMLOn(OutputStream a_Stream) {
+	public void writeXMLOn(OutputStream a_Stream, String tag) {
 		XMLOutputWriter writer = new XMLOutputWriter(a_Stream);
-		writeXMLOn(writer);
+		writeXMLOn(writer, tag);
 	}
 
 	/**

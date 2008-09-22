@@ -24,6 +24,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.config.Configuration;
+import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.input.HeaderFragment;
 import fr.ifremer.nemo.input.InputModel;
@@ -50,6 +51,8 @@ public class Utils {
 	public static ProgressBar progressbar;
 
 	public static InputModel inputModel;
+	
+	private static FlagTable _blank;
 
 	public static void insertTextFich(String fich, StyledText zone, boolean raz)
 			throws IOException {
@@ -250,13 +253,14 @@ public class Utils {
 		test.pack();
 	}
 
-	public static void injectData(StyledText styledtext) {
-		int deb, fi, lign, i;
+	public static void injectData(StyledText styledtext, int debut, int fin) {
+		int deb, fi, lign, i, index;
 
 		// on récupère les coordonnées de la sélection
 		deb = styledtext.getSelection().x;
 		fi = styledtext.getSelection().y;
-
+		index = ViewFile.tableData.getSelectionIndex();
+		
 		// System.out.println("deb clic = " + deb);
 		// System.out.println("fi clic = " + fi);
 
@@ -299,8 +303,8 @@ public class Utils {
 			// System.out.println("DEBUT = " + deb + " FIN= " + fi);
 
 			// remplissage debut et fin dans interface
-			TableData.debut = deb;
-			TableData.fin = fi;
+			ViewFile.tableData.getItems()[index].setText(debut, String.valueOf(deb));
+			ViewFile.tableData.getItems()[index].setText(fin, String.valueOf(fi));
 
 			Utils.messageErreur("");
 		}
@@ -1755,5 +1759,30 @@ public class Utils {
 			e.printStackTrace();
 			return -1;
 		}
+	}
+	
+	public static FlagTable getBlankFlagTable() {
+		if (_blank == null) {
+			_blank = new FlagTable();
+			String[] flags = Flag.flagSDN();
+			for (int i = 0; i < flags.length; i++) {
+				_blank.getFlags().add(new Flag(Utils.extraitCode(flags[i]), flags[i]));
+			}
+		}
+		
+		return _blank;
+	}
+	
+	public static void forceMenu(Table table, Menu menu) {
+		final Menu men = menu;
+		table.addListener(SWT.MouseDown, new Listener() {
+			public void handleEvent(Event event) {
+				// Lors d'un clic droit sur le tableau, on force l'affichage du
+				// menu contextuel
+				if (event.button == 3) {
+					men.setVisible(true);
+				}
+			}
+		});
 	}
 }

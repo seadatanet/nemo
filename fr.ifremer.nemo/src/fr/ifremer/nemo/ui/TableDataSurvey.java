@@ -284,15 +284,7 @@ public class TableDataSurvey {
 		});
 		
 
-		final Menu men = menu;
-		table.addListener(SWT.MouseDown, new Listener() {
-			public void handleEvent(Event event) {
-				// Lors d'un clic droit sur le tableau, on force l'affiche du menu contextuel
-				if (event.button == 3) {
-					men.setVisible(true);
-				}
-			}
-		});
+		Utils.forceMenu(table, menu);
 
 		table.setLayout(new FillLayout());
 		table.redraw();

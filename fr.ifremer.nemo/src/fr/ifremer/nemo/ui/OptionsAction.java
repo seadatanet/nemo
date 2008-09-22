@@ -687,6 +687,8 @@ public class OptionsAction extends Action implements ISelectionListener,
 		editor.horizontalAlignment = SWT.LEFT;
 		editor.grabHorizontal = true;
 
+		final Table table = tabFlagTable;
+		
 		tabFlagTable.addMouseListener(new MouseAdapter() {
 			public void mouseDown(MouseEvent event) {
 				// On affiche les flags correspondants
@@ -695,6 +697,9 @@ public class OptionsAction extends Action implements ISelectionListener,
 				_flagTable.fillTable(tabFlag);
 
 				// Saisie
+				if (event.button == 3) {
+					return;
+				}
 				Control old = editor.getEditor();
 				if (old != null)
 					old.dispose();
@@ -719,8 +724,6 @@ public class OptionsAction extends Action implements ISelectionListener,
 				}
 
 				final Text text = new Text(tabFlagTable, SWT.NONE);
-				text.setForeground(item.getForeground());
-
 				text.setText(item.getText(column));
 				text.setForeground(item.getForeground());
 				text.selectAll();
@@ -748,33 +751,6 @@ public class OptionsAction extends Action implements ISelectionListener,
 				});
 			}
 		});
-
-		// tabFlagTable
-		// .addFocusListener(new org.eclipse.swt.events.FocusListener() {
-		// public void focusGained(org.eclipse.swt.events.FocusEvent e) {
-		//
-		// }
-		//					
-		// public void focusLost(org.eclipse.swt.events.FocusEvent e) {
-		// if (tabFlagTable.getSelection()[0].getText().trim().equals("")) {
-		// String[] buttons = new String[1];
-		// buttons[0] = "OK";
-		// MessageDialog dialog = new MessageDialog(tabFlagTable.getShell(), ""
-		// , null, Messages.getString("OptionsAction.42"),
-		// MessageDialog.WARNING, buttons, 0);
-		// dialog.open();
-		// final Text text = new Text(tabFlagTable, SWT.NONE);
-		// final TableItem item =
-		// tabFlagTable.getItem(tabFlagTable.getSelectionIndex());
-		// text.setForeground(item.getForeground());
-		//
-		// text.setText(item.getText(0));
-		// text.setForeground(item.getForeground());
-		// text.selectAll();
-		// text.setFocus();
-		// }
-		// }
-		// });
 
 		itemDefault.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
@@ -811,19 +787,11 @@ public class OptionsAction extends Action implements ISelectionListener,
 			public void handleEvent(Event e) {
 				getFlagTables().remove(_flagTable);
 				tabFlagTable.remove(tabFlagTable.getSelectionIndex());
+				tabFlag.clearAll();
 			}
 		});
 
-		final Menu men = menu;
-		tabFlagTable.addListener(SWT.MouseDown, new Listener() {
-			public void handleEvent(Event event) {
-				// Lors d'un clic droit sur le tableau, on force l'affiche du
-				// menu contextuel
-				if (event.button == 3) {
-					men.setVisible(true);
-				}
-			}
-		});
+		Utils.forceMenu(tabFlagTable, menu);
 	}
 	
 	public void createTableFlag() {
@@ -849,8 +817,6 @@ public class OptionsAction extends Action implements ISelectionListener,
 		tabFlag.setMenu(menu);
 
 		final Table tab = tabFlag;
-//		final FlagTable flagTab = this;
-		final Menu men = menu;
 
 		final TableEditor editor = new TableEditor(tabFlag);
 		editor.horizontalAlignment = SWT.LEFT;
@@ -858,6 +824,9 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		tabFlag.addMouseListener(new MouseAdapter() {
 			public void mouseDown(MouseEvent event) {
+				if (event.button == 3) {
+					return;
+				}
 				Control old = editor.getEditor();
 				if (old != null)
 					old.dispose();
@@ -962,15 +931,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 			}
 		});
 		
-		tabFlag.addListener(SWT.MouseDown, new Listener() {
-			public void handleEvent(Event event) {
-				// Lors d'un clic droit sur le tableau, on force l'affichage du
-				// menu contextuel
-				if (event.button == 3) {
-					men.setVisible(true);
-				}
-			}
-		});
+		Utils.forceMenu(tabFlag, menu);
 	}
 
 	public void createPartControl(Composite parent) {

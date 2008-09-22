@@ -6,6 +6,7 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.TimeZone;
 import java.util.TreeMap;
 import java.util.Map.Entry;
@@ -23,6 +24,7 @@ import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.ui.EditConversion;
 import fr.ifremer.nemo.ui.SWTProcess;
 import fr.ifremer.nemo.ui.ViewFile;
+import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 
 /**
@@ -175,6 +177,12 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 */
 	protected TimeSeriesInformation _timeSeriesInformation;
 
+	/**
+	 * Liste des flags QC des meta-donnees
+	 * 
+	 */
+	protected HashMap<String, String> _metaFlags;
+
 	public Station() {
 		_bottomDepth = Float.NaN;
 		_comment = "";
@@ -193,6 +201,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		_parameters = new ArrayList<Parameter>();
 		_survey = null;
 		_timeSeriesInformation = null;
+		_metaFlags = new HashMap<String, String>();
 	}
 
 	/**
@@ -1479,6 +1488,14 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		for (int i = 0; i < parametersSize(); i++) {
 			buffer.append('0');
 		}
+		// for (int i = 0; i < parametersSize(); i++) {
+		// String qc = getParameters()[i].getValues()[0].getQc();
+		// if (qc.equals("")) {
+		// buffer.append('0');
+		// } else {
+		// buffer.append(getParameters()[i].getValues()[0].getQc());
+		// }
+		// }
 		return buffer.toString();
 	}
 
@@ -1698,7 +1715,8 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 
 			if (nb > 0) {
 				// Ajout de la station à la liste des stations triées
-				EditConversion.getSortedStations().put(getReference().trim(), nb);
+				EditConversion.getSortedStations().put(getReference().trim(),
+						nb);
 
 				// Tri de tous les paramètres de la station
 				for (Parameter param : getParameters()) {
@@ -1706,6 +1724,41 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 				}
 			}
 		}
+	}
+
+	public HashMap<String, String> getMetaFlags() {
+		return _metaFlags;
+	}
+
+	public void setMetaFlags(HashMap<String, String> flags) {
+		_metaFlags = flags;
+	}
+
+	public String getMetaFlag(String property) {
+		String flag = "0";
+
+		if (getMetaFlags() != null) {
+			if (getMetaFlags().get(property) != null) {
+				flag = getMetaFlags().get(property);
+			}
+		}
+
+		return flag;
+	}
+
+	public String getFlags(int index) {
+		StringBuffer buffer = new StringBuffer();
+		for (Parameter param : getParameters()) {
+			if (param.valuesAt(index).getValue().isNaN()) {
+				buffer.append('9');
+			} else if (param.valuesAt(index).getQc().equals("")) {
+				buffer.append('0');
+			} else {
+				buffer.append(param.valuesAt(index).getQc());
+			}
+		}
+
+		return buffer.toString();
 	}
 
 } /* End of class: Station */

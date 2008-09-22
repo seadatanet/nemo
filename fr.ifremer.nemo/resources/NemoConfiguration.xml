@@ -30,7 +30,7 @@
   <VocabListURL name="L201" value="http://vocab.ndg.nerc.ac.uk/list/L201/current"/>
   <VocabListURL name="C174" value="http://vocab.ndg.nerc.ac.uk/list/C174/current"/>
   <VocabListURL name="L051" value="http://vocab.ndg.nerc.ac.uk/list/L051/current"/>
-  <defaultFlagTable>C2</defaultFlagTable>
+  <defaultFlagTable>C3</defaultFlagTable>
   <FlagTable code="C5" label="L5">
     <Flag local="loc00" SDN="0 - no quality control"/>
     <Flag local="loc01" SDN="1 - good value"/>
@@ -45,16 +45,17 @@
     <Flag local="loc10" SDN="A - value phenomenon uncertain"/>
   </FlagTable>
   <FlagTable code="C1" label="L1">
-    <Flag local="loc10" SDN="sdn10"/>
-    <Flag local="loc11" SDN="sdn11"/>
-    <Flag local="loc12" SDN="sdn12"/>
-    <Flag local="loc13" SDN="sdn13"/>
-    <Flag local="loc14" SDN="sdn14"/>
-    <Flag local="loc15" SDN="sdn15"/>
-    <Flag local="loc16" SDN="sdn16"/>
-    <Flag local="loc17" SDN="sdn17"/>
-    <Flag local="loc18" SDN="sdn18"/>
-    <Flag local="loc19" SDN="sdn19"/>
+    <Flag local="1" SDN="1 - good value"/>
+    <Flag local="0" SDN="0 - no quality control"/>
+    <Flag local="2" SDN="2 - probably good value"/>
+    <Flag local="3" SDN="3 - probably bad value"/>
+    <Flag local="4" SDN="4 - bad value"/>
+    <Flag local="5" SDN="5 - changed value"/>
+    <Flag local="6" SDN="6 - value below detection"/>
+    <Flag local="7" SDN="7 - value in excess"/>
+    <Flag local="8" SDN="8 - interpolated value"/>
+    <Flag local="9" SDN="9 - missing value"/>
+    <Flag local="A" SDN="A - value phenomenon uncertain"/>
   </FlagTable>
   <FlagTable code="C2" label="L2">
     <Flag local="loc20" SDN="sdn20"/>
@@ -66,9 +67,5 @@
     <Flag local="loc27" SDN="8 - interpolated value"/>
     <Flag local="loc28" SDN="sdn28"/>
     <Flag local="loc29" SDN="sdn29"/>
-  </FlagTable>
-  <FlagTable code="C3" label="L3">
-    <Flag local="31" SDN="8 - interpolated value"/>
-    <Flag local="32" SDN="1 - good value"/>
   </FlagTable>
 </NemoConfiguration>

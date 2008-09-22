@@ -2667,7 +2667,6 @@ public class DrawingStation {
 		tabCorrespondance.setMenu(menu);
 
 		final Table tab = tabCorrespondance;
-		final Menu men = menu;
 
 		final TableEditor editor = new TableEditor(tabCorrespondance);
 		editor.horizontalAlignment = SWT.LEFT;
@@ -2675,6 +2674,9 @@ public class DrawingStation {
 
 		tabCorrespondance.addMouseListener(new MouseAdapter() {
 			public void mouseDown(MouseEvent event) {
+				if (event.button == 3) {
+					return;
+				}
 				Control old = editor.getEditor();
 				if (old != null)
 					old.dispose();
@@ -2759,15 +2761,7 @@ public class DrawingStation {
 			}
 		});
 
-		tabCorrespondance.addListener(SWT.MouseDown, new Listener() {
-			public void handleEvent(Event event) {
-				// Lors d'un clic droit sur le tableau, on force l'affichage du
-				// menu contextuel
-				if (event.button == 3) {
-					men.setVisible(true);
-				}
-			}
-		});
+		Utils.forceMenu(tabCorrespondance, menu);
 
 		itemAdd.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {

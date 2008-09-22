@@ -25,7 +25,7 @@ public class TableData {
 
 	public static Table filtreTable;
 
-	public static int ligneSelec, colonneSelec, debut, fin, ligneBidon;
+	public static int ligneSelec, colonneSelec;
 
 	public static ArrayList<TypeData> types, listeFiltree, typesWS;
 
@@ -38,10 +38,6 @@ public class TableData {
 
 		final Table table;
 
-		ligneBidon = 0;
-		debut = 0;
-		fin = 0;
-
 		ViewFile.tableData = new Table(ViewFile.compositeData,
 				SWT.FULL_SELECTION | SWT.H_SCROLL);
 		
@@ -49,9 +45,9 @@ public class TableData {
 
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
-		TableColumn tableColumn = new TableColumn(table, SWT.NONE);
-		tableColumn.setWidth(110);
-		tableColumn.setText(Messages.getString("TableData.0")); //$NON-NLS-1$
+		TableColumn tableColumn0 = new TableColumn(table, SWT.NONE);
+		tableColumn0.setWidth(110);
+		tableColumn0.setText(Messages.getString("TableData.0")); //$NON-NLS-1$
 
 		TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);
 		tableColumn1.setWidth(90);
@@ -62,36 +58,51 @@ public class TableData {
 		tableColumn2.setText(Messages.getString("TableData.2")); //$NON-NLS-1$
 		tableColumn2.setAlignment(SWT.RIGHT);
 
-		TableColumn tableColumn8 = new TableColumn(table, SWT.NONE);
-		tableColumn8.setWidth(50);
-		tableColumn8.setText(Messages.getString("TableData.3")); //$NON-NLS-1$
-		tableColumn8.setAlignment(SWT.RIGHT);
-
 		TableColumn tableColumn3 = new TableColumn(table, SWT.NONE);
 		tableColumn3.setWidth(50);
-		tableColumn3.setText(Messages.getString("TableData.4")); //$NON-NLS-1$
+		tableColumn3.setText(Messages.getString("TableData.3")); //$NON-NLS-1$
 		tableColumn3.setAlignment(SWT.RIGHT);
 
 		TableColumn tableColumn4 = new TableColumn(table, SWT.NONE);
 		tableColumn4.setWidth(50);
-		tableColumn4.setText(Messages.getString("TableData.5")); //$NON-NLS-1$
+		tableColumn4.setText(Messages.getString("TableData.4")); //$NON-NLS-1$
 		tableColumn4.setAlignment(SWT.RIGHT);
 
 		TableColumn tableColumn5 = new TableColumn(table, SWT.NONE);
-		tableColumn5.setWidth(100);
-		tableColumn5.setText(Messages.getString("TableData.6")); //$NON-NLS-1$
+		tableColumn5.setWidth(50);
+		tableColumn5.setText(Messages.getString("TableData.5")); //$NON-NLS-1$
 		tableColumn5.setAlignment(SWT.RIGHT);
 
 		TableColumn tableColumn6 = new TableColumn(table, SWT.NONE);
 		tableColumn6.setWidth(100);
-		tableColumn6.setText(Messages.getString("TableData.7")); //$NON-NLS-1$
+		tableColumn6.setText(Messages.getString("TableData.6")); //$NON-NLS-1$
 		tableColumn6.setAlignment(SWT.RIGHT);
 
 		TableColumn tableColumn7 = new TableColumn(table, SWT.NONE);
 		tableColumn7.setWidth(100);
-		tableColumn7.setText(Messages.getString("TableData.8")); //$NON-NLS-1$
+		tableColumn7.setText(Messages.getString("TableData.7")); //$NON-NLS-1$
 		tableColumn7.setAlignment(SWT.RIGHT);
 
+		TableColumn tableColumn8 = new TableColumn(table, SWT.NONE);
+		tableColumn8.setWidth(100);
+		tableColumn8.setText(Messages.getString("TableData.8")); //$NON-NLS-1$
+		tableColumn8.setAlignment(SWT.RIGHT);
+
+		TableColumn tableColumn9 = new TableColumn(table, SWT.NONE);
+		tableColumn9.setWidth(65);
+		tableColumn9.setText(Messages.getString("TableData.21")); //$NON-NLS-1$
+		tableColumn9.setAlignment(SWT.RIGHT);
+		
+		TableColumn tableColumn10 = new TableColumn(table, SWT.NONE);
+		tableColumn10.setWidth(65);
+		tableColumn10.setText(Messages.getString("TableData.22")); //$NON-NLS-1$
+		tableColumn10.setAlignment(SWT.RIGHT);
+		
+		TableColumn tableColumn11 = new TableColumn(table, SWT.NONE);
+		tableColumn11.setWidth(65);
+		tableColumn11.setText(Messages.getString("TableData.23")); //$NON-NLS-1$
+		tableColumn11.setAlignment(SWT.RIGHT);
+		
 		initTable();
 
 		// agrandissement de la table
@@ -171,7 +182,9 @@ public class TableData {
 		table.setSize(size);
 		table.addListener(SWT.MouseDown, new Listener() {
 			public void handleEvent(Event event) {
-
+				if (event.button == 3) {
+					return;
+				}
 				// calcul du numéro de ligne sélectionné
 
 				Point pt = new Point(event.x, event.y);
@@ -272,21 +285,21 @@ public class TableData {
 		// MenuItem tmp = new Separator();
 		MenuItem itemDel = new MenuItem(menu, SWT.NONE);
 		itemDel.setText(Messages.getString("TableData.17")); //$NON-NLS-1$
+		
+		new MenuItem(menu,SWT.SEPARATOR);
+		MenuItem itemInjectFlag = new MenuItem(menu, SWT.NONE);
+		itemInjectFlag.setText(Messages.getString("TableData.24"));
+		MenuItem itemRemoveFlag = new MenuItem(menu, SWT.NONE);
+		itemRemoveFlag.setText(Messages.getString("TableData.25"));
 		table.setMenu(menu);
-
+		
 		// ajouter des listeners sur les menu items ^^
 
 		itemInject.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				// System.out.println("injection debut/fin");
-
-				Utils.injectData(ViewFile.styledTextData);
-
-				// debut
-				table.getItems()[ligneSelec].setText(4, "" + debut); //$NON-NLS-1$
-
-				// fin
-				table.getItems()[ligneSelec].setText(5, "" + fin); //$NON-NLS-1$
+//				table.forceFocus();
+				Utils.injectData(ViewFile.styledTextData, 4, 5);
 
 				majTypeData();
 				// razTableData
@@ -334,15 +347,25 @@ public class TableData {
 			}
 		});
 		
-		final Menu men = menu;
-		table.addListener(SWT.MouseDown, new Listener() {
-			public void handleEvent(Event event) {
-				// Lors d'un clic droit sur le tableau, on force l'affiche du menu contextuel
-				if (event.button == 3) {
-					men.setVisible(true);
-				}
+		itemInjectFlag.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
+				table.forceFocus();
+				Utils.injectData(ViewFile.styledTextData, 10, 11);
 			}
 		});
+		
+		itemRemoveFlag.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
+				table.forceFocus();
+				table.getItems()[table.getSelectionIndex()].setText(9, "");
+				table.getItems()[table.getSelectionIndex()].setText(10, "");
+				table.getItems()[table.getSelectionIndex()].setText(11, "");
+				types.get(table.getSelectionIndex()).setDebutFlag(null);
+				types.get(table.getSelectionIndex()).setFinFlag(null);
+			}
+		});
+		
+		Utils.forceMenu(table, menu);
 
 		// agrandissement de la table
 		ViewFile.compositeData.getParent().layout(true, true);
@@ -369,8 +392,13 @@ public class TableData {
 							types.get(i).getConversion(),
 							types.get(i).getTest(),
 							"" + types.get(i).getDebut(), //$NON-NLS-1$
-							"" + types.get(i).getFin(), types.get(i).getFormat(), types.get(i).getEntree(), types.get(i).getSortie() }); //$NON-NLS-1$
-
+							"" + types.get(i).getFin(),
+							types.get(i).getFormat(),
+							types.get(i).getEntree(),
+							types.get(i).getSortie(),
+							"",
+							types.get(i).getDebutFlag(),
+							types.get(i).getFinFlag()}); //$NON-NLS-1$
 		}
 
 	}
@@ -649,6 +677,11 @@ public class TableData {
 			types.get(i).setFormat(ViewFile.tableData.getItem(i).getText(6));
 			types.get(i).setEntree(ViewFile.tableData.getItem(i).getText(7));
 			types.get(i).setSortie(ViewFile.tableData.getItem(i).getText(8));
+			
+			if (!ViewFile.tableData.getItem(i).getText(10).equals("") && !ViewFile.tableData.getItem(i).getText(11).equals("")) {
+				types.get(i).setDebutFlag(ViewFile.tableData.getItem(i).getText(10));
+				types.get(i).setFinFlag(ViewFile.tableData.getItem(i).getText(11));
+			}
 		}
 
 		// System.out.println("maj types data : ok");

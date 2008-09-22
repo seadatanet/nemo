@@ -1314,6 +1314,14 @@ public class DataModel {
 			frag.setFirstCharOffset(typeCourant.getDebut());
 			frag.setLastCharOffset(typeCourant.getFin());
 			parameterModel.setFragment(frag);
+			
+			if (!typeCourant.getDebutFlag().equals("") && !typeCourant.getFinFlag().equals("")) {
+				LineFragment flag = new LineFragment();
+				flag.setFirstCharOffset(typeCourant.getDebutFlag());
+				flag.setLastCharOffset(typeCourant.getFinFlag());
+				parameterModel.setFlag(flag);
+			}
+			
 
 			// test par / au DataModel puis ajout du paramètre ou non
 			// ParameterModel[] parametersModels =
@@ -2127,7 +2135,7 @@ public class DataModel {
 				.getFormatString());
 		// EditStation.comboLatitude.add(latitudeFormat.getFormatString(), 0);
 		// EditStation.comboLatitude.select(0);
-		
+
 		getFlagFragment(propertyModel.getFlag(), Global.LATITUDE, Messages
 				.getString("EditStation.19").trim());
 
@@ -2179,7 +2187,7 @@ public class DataModel {
 				.getFormatString());
 		// EditStation.comboLongitude.add(longitudeFormat.getFormatString(), 0);
 		// EditStation.comboLongitude.select(0);
-		
+
 		getFlagFragment(propertyModel.getFlag(), Global.LONGITUDE, Messages
 				.getString("EditStation.23").trim());
 
@@ -2221,7 +2229,7 @@ public class DataModel {
 
 		// profondeur
 		propertyModel = stationModel_modele.propertiesAt("bottomDepth");
-		
+
 		getFlagFragment(propertyModel.getFlag(), Global.DEPTH, Messages
 				.getString("EditStation.27").trim());
 
@@ -2301,9 +2309,9 @@ public class DataModel {
 			latitudeFormat = (LatitudeFormat) propertyModel.getFormat();
 			formatLat = latitudeFormat.getFormatString();
 			Utils.selectComboValeur(EditStation.comboLatitudeFin, formatLat);
-			
-			getFlagFragment(propertyModel.getFlag(), Global.ENDLATITUDE, Messages
-					.getString("EditStation.21").trim());
+
+			getFlagFragment(propertyModel.getFlag(), Global.ENDLATITUDE,
+					Messages.getString("EditStation.21").trim());
 
 			if (propertyModel.isUserProvided()) {
 				// saisie manuelle
@@ -2350,9 +2358,9 @@ public class DataModel {
 			longitudeFormat = (LongitudeFormat) propertyModel.getFormat();
 			formatLong = longitudeFormat.getFormatString();
 			Utils.selectComboValeur(EditStation.comboLongitudeFin, formatLong);
-			
-			getFlagFragment(propertyModel.getFlag(), Global.ENDLONGITUDE, Messages
-					.getString("EditStation.25").trim());
+
+			getFlagFragment(propertyModel.getFlag(), Global.ENDLONGITUDE,
+					Messages.getString("EditStation.25").trim());
 
 			if (propertyModel.isUserProvided()) {
 				// saisie manuelle
@@ -2394,10 +2402,10 @@ public class DataModel {
 				|| ViewFile.radTrajectoire.getSelection()) {
 			propertyModel = stationModel_modele.getTimeSeriesModel()
 					.propertiesAt("endDepth");
-			
+
 			getFlagFragment(propertyModel.getFlag(), Global.ENDDEPTH, Messages
 					.getString("EditStation.29").trim());
-			
+
 			if (propertyModel.isUserProvided()) {
 				// saisie manuelle
 				if (Float.isNaN(stationModel_modele.getTimeSeriesInformation()
@@ -2491,13 +2499,13 @@ public class DataModel {
 		// FLAGS QC
 		if (stationModel_modele.getFlagTable() != null) {
 			EditStation.flagTable = stationModel_modele.getFlagTable();
-			EditStation.flagTable.fillTable(EditStation.tabCorrespondance);
-			ViewEdit.formEdition.reflow(true);
 		} else {
-			EditStation.flagTable = Utils.configuration.getDefaultFlagTable();
-			EditStation.flagTable.fillTable(EditStation.tabCorrespondance);
-			ViewEdit.formEdition.reflow(true);
+			Utils.configuration.getDefaultFlagTable();
 		}
+
+		EditStation.flagTable.fillTable(EditStation.tabCorrespondance);
+
+		ViewEdit.formEdition.reflow(true);
 
 		// System.out.println("Fin remplissage onglet Station");
 
@@ -2538,7 +2546,8 @@ public class DataModel {
 			// Teste si la metadonnée est déjà présente dans le tableau
 			int size = EditStation.tabFlagQC.getItemCount();
 			for (int i = 0; i < size; i++) {
-				if (EditStation.tabFlagQC.getItems()[i].getText(0).equals(propertyCode)) {
+				if (EditStation.tabFlagQC.getItems()[i].getText(0).equals(
+						propertyCode)) {
 					return;
 				}
 			}
@@ -2566,6 +2575,7 @@ public class DataModel {
 			ParameterModel paraCourant = parameterModels[i];
 			Parameter modeleCourant = paraCourant.getModel();
 			LineFragment frag = paraCourant.getFragment();
+			LineFragment flag = paraCourant.getFlag();
 
 			// code / fullName / sortie / format
 			typeData.setCode(modeleCourant.getCode() + " - "
@@ -2579,6 +2589,10 @@ public class DataModel {
 			}
 			typeData.setDebut(frag.getFirstCharOffset());
 			typeData.setFin(frag.getLastCharOffset());
+			if (flag != null) {
+				typeData.setDebutFlag(String.valueOf(flag.getFirstCharOffset()));
+				typeData.setFinFlag(String.valueOf(flag.getLastCharOffset()));
+			}
 			typeData.setEntree("" + paraCourant.getInputDefault());
 			// typeData.setSensor(paraCourant.get);
 			typeData.setUnite(modeleCourant.getUnit());

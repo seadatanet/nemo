@@ -19,12 +19,20 @@ public interface Global {
 	public static final String ODV = "ODV";
 	
 	// Type de metadonnée
-	public static final String DATETIME = "DATETIME";
-	public static final String ENDDATETIME = "ENDDATETIME";
-	public static final String LATITUDE = "LATITUDE";
-	public static final String ENDLATITUDE = "ENDLATITUDE";
-	public static final String LONGITUDE = "LONGITUDE";
-	public static final String ENDLONGITUDE = "ENDLONGITUDE";
-	public static final String DEPTH = "DEPTH";
-	public static final String ENDDEPTH = "ENDDEPTH";
+	public static final String DATE = "date";
+	public static final String TIME = "time";
+	public static final String DATETIME = "dateTime";
+	
+	public static final String ENDDATE = "endDate";
+	public static final String ENDTIME = "endTime";
+	public static final String ENDDATETIME = "endDateTime";
+	
+	public static final String LATITUDE = "latitude";
+	public static final String ENDLATITUDE = "endLatitude";
+	
+	public static final String LONGITUDE = "longitude";
+	public static final String ENDLONGITUDE = "endLongitude";
+	
+	public static final String DEPTH = "bottomDepth";
+	public static final String ENDDEPTH = "endDepth";
 }

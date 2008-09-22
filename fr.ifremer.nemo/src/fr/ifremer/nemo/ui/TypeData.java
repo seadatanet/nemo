@@ -5,6 +5,8 @@ public class TypeData extends Object {
 	private String code, unite, conversion, format, entree, sortie, test, nom;
 
 	private int position, debut, fin;
+	
+	private String debutFlag, finFlag;
 
 	private Boolean sensor;
 
@@ -139,4 +141,25 @@ public class TypeData extends Object {
 		this.nom = nom;
 	}
 
+	public String getDebutFlag() {
+		if (debutFlag == null) {
+			return "";
+		}
+		return debutFlag;
+	}
+
+	public void setDebutFlag(String debutFlag) {
+		this.debutFlag = debutFlag;
+	}
+
+	public String getFinFlag() {
+		if (finFlag == null) {
+			return "";
+		}
+		return finFlag;
+	}
+
+	public void setFinFlag(String finFlag) {
+		this.finFlag = finFlag;
+	}
 }

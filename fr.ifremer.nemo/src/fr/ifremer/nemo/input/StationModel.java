@@ -8,6 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.TimeZone;
 import java.util.Vector;
 
@@ -1534,6 +1535,8 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 		try {
 			station = (Station) _model.clone();
+			station.setMetaFlags(new HashMap<String, String>());
+			
 			if ((_timeSeriesModel != null /* && _timestampModel.isComputed() */&& _trajectory == null)
 					|| (_trajectory != null && _trajectory.getOutputType()
 							.equals(Global.MEDATLAS)) && !isMetaInData2()) {
@@ -1565,6 +1568,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 						// courant
 						// :"+m.getProperty());
 						m.applyOn(station, header);
+						addFlag(m, station, header);
 					}
 					if (_timeSeriesModel != null) {
 						_timeSeriesModel.convert(station, header,
@@ -1659,6 +1663,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 						for (PropertyModel m : getProperties()) {
 							m.applyOn(station, _headerPlus);
+							addFlag(m, station, header);
 						}
 
 						for (ParameterModel pm : _parameterModels) {
@@ -1748,7 +1753,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 							value = new ParameterValue();
 						}
 
-						pm.convert(_headerPlus[_headerPlus.length - 1], value);
+						pm.convert(_headerPlus[_headerPlus.length - 1], value, getFlagTable());
 						p.addValue(value);
 						paramIndex++;
 					}
@@ -1790,13 +1795,10 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 					}
 
 					for (PropertyModel m : getProperties()) {
-						// System.out.println("@DEBUG propertyModel courant
-						// :"+m.getProperty());
-						if (m.getProperty().equals("comment")) {
-							System.out.println();
-						}
 						m.applyOn(station, header);
+						addFlag(m, station, header);
 					}
+					
 					if (_timeSeriesModel != null) {
 						_timeSeriesModel.convert(station, header,
 								isRefDateBased, a_RefDate);
@@ -1863,6 +1865,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		try {
 			for (ParameterModel pm : _parameterModels) {
 				a_Station.addParameter((Parameter) pm.getModel().clone());
+				
 			}
 			String line = null;
 			long size = 0;
@@ -1876,7 +1879,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 				EditConversion.incrementErreurLigne();
 				EditConversion.setErreurChaine(line);
-
+				
 				if (index == 0 && isMetaInData()) {
 					String[] header = new String[] { line };
 					if (isIncrementRef()) {
@@ -1886,6 +1889,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 					}
 					for (PropertyModel m : getProperties()) {
 						m.applyOn(a_Station, header);
+						addFlag(m, a_Station, header);
 					}
 					if (_timeSeriesModel != null) {
 						_timeSeriesModel.convert(a_Station, header,
@@ -1926,7 +1930,10 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 						value = new ParameterValue();
 					}
 
-					pm.convert(line, value);
+					if (EditConversion.getErreurLigne() == 4 && pm.getModel().getCode().equals("NTRI")) {
+						System.out.println();
+					}
+					pm.convert(line, value, getFlagTable());
 					p.addValue(value);
 					paramIndex++;
 				}
@@ -2216,10 +2223,37 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	}
 
 	public FlagTable getFlagTable() {
-		return _flagTable;
+		if (_flagTable != null) {
+			return _flagTable;
+		} else {
+			return Utils.getBlankFlagTable();
+		}
 	}
 
 	public void setFlagTable(FlagTable table) {
 		_flagTable = table;
+	}
+	
+	public void addFlag(PropertyModel pm, Station station, String[] a_Header) {
+		if (pm.getFlag() != null) {
+			if (station.getMetaFlags() == null) {
+				station.setMetaFlags(new HashMap<String, String>());
+			}
+			// Lecture du flag dans le fichier en entree
+			String value = pm.getFlag().retreive(a_Header).trim();
+			
+			// Correspondance SDN
+			if (getFlagTable() == null) {
+				setFlagTable(new FlagTable(Utils.getBlankFlagTable()));
+			}
+			value = getFlagTable().getFlagSDN(value);
+			
+			// AJout dans la liste des flags de metadonnees
+			String property = pm.getProperty();
+			if (property.equals(Global.DATE) || property.equals(Global.TIME)) {
+				property = Global.DATETIME;
+			}
+			station.getMetaFlags().put(property, value);
+		}
 	}
 } /* End of class: StationModel */

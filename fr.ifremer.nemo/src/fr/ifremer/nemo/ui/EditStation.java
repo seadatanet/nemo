@@ -1506,10 +1506,14 @@ public class EditStation {
 	}
 
 	public static FlagTable getFlagTable() {
-		return flagTable;
+		if (flagTable != null) {
+			return flagTable;
+		} else {
+			return Utils.getBlankFlagTable();
+		}
 	}
 
-	public static void setFlagTable(FlagTable flagTable) {
-		EditStation.flagTable = flagTable;
+	public static void setFlagTable(FlagTable table) {
+		flagTable = table;
 	}
 }

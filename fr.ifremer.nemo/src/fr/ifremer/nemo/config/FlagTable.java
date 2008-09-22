@@ -8,6 +8,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 
+import fr.ifremer.nemo.ui.Utils;
+
 /**
  * Class FlagTable
  * 
@@ -102,6 +104,18 @@ public class FlagTable {
 		return null;
 	}
 
+	/**
+	 * Retourne le flag SDN correspondant au flag local
+	 */
+	public String getFlagSDN(String local) {
+		for (int i = 0; i < getFlags().size(); i++) {
+			if (getFlags().get(i).getLocal().equals(local)) {
+				return Utils.extraitCode(getFlags().get(i).getSdn());
+			}
+		}
+		return "0";
+	}
+
 	public void fillTable(Table table) {
 		table.removeAll();
 
@@ -110,6 +124,14 @@ public class FlagTable {
 			TableItem itemTemp = new TableItem(table, SWT.NONE);
 			itemTemp.setText(0, flags.get(i).getLocal());
 			itemTemp.setText(1, flags.get(i).getSdn());
+		}
+	}
+
+	public void fillFlagTable(Table table) {
+		setFlags(new ArrayList<Flag>(table.getItemCount()));
+
+		for (int i = 0; i < table.getItemCount(); i++) {
+			getFlags().add(new Flag(table.getItems()[i].getText(0), table.getItems()[i].getText(1)));
 		}
 	}
 
@@ -135,7 +157,8 @@ public class FlagTable {
 	/**
 	 * Retourne la liste des flagtables triée par code
 	 */
-	public static ArrayList<FlagTable> getOrderedFlagTables(ArrayList<FlagTable> flagTables) {
+	public static ArrayList<FlagTable> getOrderedFlagTables(
+			ArrayList<FlagTable> flagTables) {
 		ArrayList<FlagTable> arrayFlagTable = new ArrayList<FlagTable>();
 
 		TreeMap<String, FlagTable> treeFlagTables = new TreeMap<String, FlagTable>();
