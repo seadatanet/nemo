@@ -24,7 +24,6 @@ import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.ui.EditConversion;
 import fr.ifremer.nemo.ui.SWTProcess;
 import fr.ifremer.nemo.ui.ViewFile;
-import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 
 /**
@@ -1746,16 +1745,23 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		return flag;
 	}
 
+	public String getFlag(Parameter param, int index) {
+		String flag = "0";
+		
+		if (param.valuesAt(index).getValue().isNaN()) {
+			flag = "9";
+		} else if (param.valuesAt(index).getQc().equals("")) {
+			flag = "0";
+		} else {
+			flag = param.valuesAt(index).getQc();
+		}
+		
+		return flag;
+	}
 	public String getFlags(int index) {
 		StringBuffer buffer = new StringBuffer();
 		for (Parameter param : getParameters()) {
-			if (param.valuesAt(index).getValue().isNaN()) {
-				buffer.append('9');
-			} else if (param.valuesAt(index).getQc().equals("")) {
-				buffer.append('0');
-			} else {
-				buffer.append(param.valuesAt(index).getQc());
-			}
+			buffer.append(getFlag(param, index));
 		}
 
 		return buffer.toString();

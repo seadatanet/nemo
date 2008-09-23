@@ -185,7 +185,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * Format decimal de la date Julienne
 	 */
 	protected DecimalFormat _df;
-	
+
 	/**
 	 * Tableau de correspondance des flags
 	 */
@@ -392,9 +392,9 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			String code = null;
 			String label = null;
 			FlagTable flagTable = new FlagTable();
-			
-			if ((code = a_Attributes.getValue("code")) != null &&
-					(label = a_Attributes.getValue("label")) != null) {
+
+			if ((code = a_Attributes.getValue("code")) != null
+					&& (label = a_Attributes.getValue("label")) != null) {
 				flagTable.setCode(code);
 				flagTable.setLibelle(label);
 				setFlagTable(flagTable);
@@ -405,9 +405,9 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			String local = null;
 			String sdn = null;
 			Flag flag = new Flag();
-			
-			if ((local = a_Attributes.getValue("local")) != null &&
-					(sdn = a_Attributes.getValue("SDN")) != null) {
+
+			if ((local = a_Attributes.getValue("local")) != null
+					&& (sdn = a_Attributes.getValue("SDN")) != null) {
 				flag.setLocal(local);
 				flag.setSdn(sdn);
 				getFlagTable().getFlags().add(flag);
@@ -493,8 +493,10 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			a_Writer.putAttribute("label", getFlagTable().getLibelle());
 			for (int i = 0; i < getFlagTable().getFlags().size(); i++) {
 				a_Writer.openTag("Flag");
-				a_Writer.putAttribute("local", getFlagTable().getFlags().get(i).getLocal());
-				a_Writer.putAttribute("SDN", getFlagTable().getFlags().get(i).getSdn());
+				a_Writer.putAttribute("local", getFlagTable().getFlags().get(i)
+						.getLocal());
+				a_Writer.putAttribute("SDN", getFlagTable().getFlags().get(i)
+						.getSdn());
 				a_Writer.closeTag();
 			}
 			a_Writer.closeTag();
@@ -1446,7 +1448,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	public String[] consumeHeader(BufferedReader a_Reader) throws IOException {
 		Vector<String> v = new Vector<String>();
 		for (int i = 0; i < _numberOfLines; i++) {
-			
+
 			String line = a_Reader.readLine();
 			EditConversion.incrementErreurLigne();
 			EditConversion.setErreurChaine(line);
@@ -1536,7 +1538,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		try {
 			station = (Station) _model.clone();
 			station.setMetaFlags(new HashMap<String, String>());
-			
+
 			if ((_timeSeriesModel != null /* && _timestampModel.isComputed() */&& _trajectory == null)
 					|| (_trajectory != null && _trajectory.getOutputType()
 							.equals(Global.MEDATLAS)) && !isMetaInData2()) {
@@ -1580,7 +1582,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 					a_Reader.reset();
 					EditConversion.setErreurLigne(0);
 					consumeHeader(a_Reader);
-										
+
 					convertParameters(a_Reader, station, isRefDateBased,
 							a_RefDate, a_Notifier);
 					if (_timeSeriesModel != null
@@ -1626,9 +1628,10 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 					_headerPlus[_headerPlus.length - 1] = line;
 					EditConversion.incrementErreurLigne();
 					EditConversion.setErreurChaine(line);
-					
-					a_Notifier.progressLine(EditConversion.getErreurLigne(), EditConversion.getTotalLigne());
-					
+
+					a_Notifier.progressLine(EditConversion.getErreurLigne(),
+							EditConversion.getTotalLigne());
+
 					// Recuperation du numero de station
 					if (isMetaInData2()) {
 						getReferenceProperty().applyOn(station, _headerPlus);
@@ -1753,7 +1756,8 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 							value = new ParameterValue();
 						}
 
-						pm.convert(_headerPlus[_headerPlus.length - 1], value, getFlagTable());
+						pm.convert(_headerPlus[_headerPlus.length - 1], value,
+								getFlagTable());
 						p.addValue(value);
 						paramIndex++;
 					}
@@ -1798,7 +1802,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 						m.applyOn(station, header);
 						addFlag(m, station, header);
 					}
-					
+
 					if (_timeSeriesModel != null) {
 						_timeSeriesModel.convert(station, header,
 								isRefDateBased, a_RefDate);
@@ -1865,7 +1869,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		try {
 			for (ParameterModel pm : _parameterModels) {
 				a_Station.addParameter((Parameter) pm.getModel().clone());
-				
+
 			}
 			String line = null;
 			long size = 0;
@@ -1879,7 +1883,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 				EditConversion.incrementErreurLigne();
 				EditConversion.setErreurChaine(line);
-				
+
 				if (index == 0 && isMetaInData()) {
 					String[] header = new String[] { line };
 					if (isIncrementRef()) {
@@ -1930,7 +1934,8 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 						value = new ParameterValue();
 					}
 
-					if (EditConversion.getErreurLigne() == 4 && pm.getModel().getCode().equals("NTRI")) {
+					if (EditConversion.getErreurLigne() == 4
+							&& pm.getModel().getCode().equals("NTRI")) {
 						System.out.println();
 					}
 					pm.convert(line, value, getFlagTable());
@@ -2102,15 +2107,15 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	public void setInputType(String type) {
 		_inputType = type;
 	}
-	
+
 	public boolean isProfile() {
 		return _inputType.equals(Global.PROFILE);
 	}
-	
+
 	public boolean isTimeSeries() {
 		return _inputType.equals(Global.TIMESERIES);
 	}
-	
+
 	public boolean isTrajectory() {
 		return _inputType.equals(Global.TRAJECTORY);
 	}
@@ -2120,7 +2125,13 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			if (_parameterModels.get(0).getModel().getCode().equals("DEPH")) {
 				return false;
 			} else {
-				return true;
+				for (int i = 1; i < _parameterModels.size(); i++) {
+					if (_parameterModels.get(i).getModel().getCode().equals(
+							"DEPH")) {
+						return true;
+					}
+				}
+				return false;
 			}
 		} else {
 			return false;
@@ -2137,7 +2148,9 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			}
 			searchPresIndex();
 
-			return Utils.configuration.getSep() + "DEPH [m]";
+			return Utils.configuration.getSep() + "DEPH [m]"
+					+ Utils.configuration.getSep()
+					+ Utils.configuration.getSdnHeader();
 		} else {
 			setPresIndex(-1);
 			return "";
@@ -2150,6 +2163,12 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			if (getPresIndex() > -1) {
 				double X, Gr, P, Depth;
 
+				String QC = station.getParameters()[getPresIndex()].getValues()[index]
+						.getQc();
+				if (QC.equals("")) {
+					QC = "0";
+				}
+
 				P = station.getParameters()[getPresIndex()].getValues()[index]
 						.getValue();
 				X = Math.sin(station.getLatitude() / 57.29578);
@@ -2160,12 +2179,14 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 				Depth = (((-1.82E-15 * P + 2.279E-10) * P - 2.2512E-5) * P + 9.72659)
 						* P;
 				Depth = Depth / Gr;
-
+				
 				return Utils.configuration.getSep()
 						+ Formatter.getSingleton().formatDouble(
-								getDephFormat(), Depth);
+								getDephFormat(), Depth)
+						+ Utils.configuration.getSep() + QC;
 			} else {
-				return Utils.configuration.getSep();
+				return Utils.configuration.getSep()
+						+ Utils.configuration.getSep();
 			}
 		} else {
 			return "";
@@ -2233,7 +2254,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	public void setFlagTable(FlagTable table) {
 		_flagTable = table;
 	}
-	
+
 	public void addFlag(PropertyModel pm, Station station, String[] a_Header) {
 		if (pm.getFlag() != null) {
 			if (station.getMetaFlags() == null) {
@@ -2241,13 +2262,13 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			}
 			// Lecture du flag dans le fichier en entree
 			String value = pm.getFlag().retreive(a_Header).trim();
-			
+
 			// Correspondance SDN
 			if (getFlagTable() == null) {
 				setFlagTable(new FlagTable(Utils.getBlankFlagTable()));
 			}
 			value = getFlagTable().getFlagSDN(value);
-			
+
 			// AJout dans la liste des flags de metadonnees
 			String property = pm.getProperty();
 			if (property.equals(Global.DATE) || property.equals(Global.TIME)) {

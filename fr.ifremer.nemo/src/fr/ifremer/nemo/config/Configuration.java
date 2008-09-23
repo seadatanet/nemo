@@ -907,6 +907,10 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	public String getSep() {
 		return "\t";
 	}
+	
+	public String getSdnHeader() {
+		return "QV:SEADATANET";
+	}
 
 	public ArrayList<FlagTable> getFlagTables() {
 		return _flagTables;

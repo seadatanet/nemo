@@ -1058,7 +1058,7 @@ public class Drawing {
 		
 		// Nom campagne
 		Label lblNomCampagne = new Label(sectionClient, SWT.NULL);
-		lblNomCampagne.setText(strRefCampagne);
+		lblNomCampagne.setText(strNomCampagne);
 
 		txtNomCampagne.setParent(sectionClient);
 		txtNomCampagne.setLayoutData(

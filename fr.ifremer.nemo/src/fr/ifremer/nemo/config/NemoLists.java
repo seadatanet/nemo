@@ -18,9 +18,11 @@ import org.apache.axis.client.Service;
 import org.eclipse.swt.widgets.Table;
 
 import fr.ifremer.nemo.domain.Parameter;
+import fr.ifremer.nemo.input.ParameterModel;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webservice;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webserviceLocator;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webserviceSoap;
+import fr.ifremer.nemo.ui.DataModel;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.NemoWS;
@@ -47,29 +49,29 @@ public class NemoLists implements Cloneable {
 	static protected java.util.List<WSRegion> _regions = new java.util.ArrayList<WSRegion>();
 
 	static protected java.util.List<WSSurveyDescription> _surveys = new java.util.ArrayList<WSSurveyDescription>();
-	
+
 	static protected java.util.HashMap<Integer, String> _edmo = new java.util.HashMap<Integer, String>();
-	
-	public static Boolean okSurveys, okParameters, okRegions, 
-			okDataTypes, okVocabLists, okEdmo;
-	
-	public static int nbSurveys, nbParameters, nbRegions, 
-			nbDataTypes, nbVocabLists, nbEdmo;
-	
+
+	public static Boolean okSurveys, okParameters, okRegions, okDataTypes,
+			okVocabLists, okEdmo;
+
+	public static int nbSurveys, nbParameters, nbRegions, nbDataTypes,
+			nbVocabLists, nbEdmo;
+
 	static protected HashMap<String, CodeTableRecordType[]> _vocabList = new HashMap<String, CodeTableRecordType[]>();
-	
+
 	static protected HashMap<String, Integer> _vocabListStatus = new HashMap<String, Integer>();
 
 	static protected HashMap<String, CodeTableRecordType[]> _vocabMap = new HashMap<String, CodeTableRecordType[]>();
-	
+
 	static protected String _sdnParameters;
-	
+
 	public static Table filtreTable;
-	
+
 	public static ArrayList<String> listeNavire, listeCentreDonnees;
-	
+
 	public static ArrayList<String> listeFiltree;
-	
+
 	static {
 		initLists();
 	}
@@ -284,7 +286,7 @@ public class NemoLists implements Cloneable {
 		return _dataTypes.iterator();
 
 	}
-	
+
 	/**
 	 * release all links for role "parameters"
 	 */
@@ -909,6 +911,7 @@ public class NemoLists implements Cloneable {
 		initSurveys();
 		initVocabLists();
 		initVocabMap("P091", "P021");
+		initVocabMap("P091", "P061");
 		initEdmo();
 	}
 
@@ -1097,7 +1100,7 @@ public class NemoLists implements Cloneable {
 		okRegions = false;
 		FileOutputStream stream = null;
 		XMLEncoder encoder = null;
-		try { 
+		try {
 			NemoWS service = new NemoWSServiceLocator()
 					.getNEMO(new java.net.URL(Utils.configuration
 							.getNemoWebServiceURL()));
@@ -1181,16 +1184,16 @@ public class NemoLists implements Cloneable {
 			}
 		}
 	}
-	
+
 	public static void initEdmo() {
 		XMLDecoder decoder = null;
 		try {
-						
+
 			EdmoHandler edmoH = new EdmoHandler();
-						
-			SAXParserFactory.newInstance().newSAXParser().parse(new FileInputStream(
-			"resources/Edmo.xml"), edmoH);
-			
+
+			SAXParserFactory.newInstance().newSAXParser().parse(
+					new FileInputStream("resources/Edmo.xml"), edmoH);
+
 			_edmo.putAll(edmoH.get_valeurs());
 			nbEdmo = _edmo.size();
 		} catch (Exception e) {
@@ -1204,31 +1207,31 @@ public class NemoLists implements Cloneable {
 			}
 		}
 	}
-	
+
 	public static void updateEdmo() {
 		okEdmo = false;
 		FileOutputStream stream = null;
-		
+
 		try {
 			Edmo_webservice service = new Edmo_webserviceLocator();
 			Edmo_webserviceSoap port = service.getedmo_webserviceSoap12();
 			String result = port.ws_edmo_get_list();
-			
+
 			if (!result.equals("")) {
-				
+
 				File file = new java.io.File("resources/Edmo.xml");
-				
+
 				stream = new FileOutputStream(file.toString());
 				OutputStreamWriter osw = new OutputStreamWriter(stream, "UTF-8");
 				osw.write(result);
 				osw.flush();
 				osw.close();
-				
+
 				initEdmo();
-				
+
 				okEdmo = true;
 			}
-			
+
 		} catch (ServiceException ex1) {
 			ex1.printStackTrace();
 		} catch (java.rmi.RemoteException ex2) {
@@ -1242,7 +1245,7 @@ public class NemoLists implements Cloneable {
 	 * 
 	 */
 	public static void updateVocabList(String listName) {
-		//okSurveys = false;
+		// okSurveys = false;
 		okVocabLists = true;
 		FileOutputStream stream = null;
 		XMLEncoder encoder = null;
@@ -1252,18 +1255,19 @@ public class NemoLists implements Cloneable {
 			VocabSoapBindingStub vocab = new VocabSoapBindingStub(
 					new java.net.URL(Utils.configuration.getVocabURL()),
 					new Service());
-			vocab.getList(new String[]{Utils.configuration.getVocabListURL(listName)}, null, table, error );
+			vocab.getList(new String[] { Utils.configuration
+					.getVocabListURL(listName) }, null, table, error);
 			if (!error.value) {
 				if (table.value != null) {
 					_vocabList.put(listName, table.value);
-					
+
 					File dir = new java.io.File("resources/Vocab");
 					if (!dir.exists()) {
 						dir.mkdirs();
 					}
-					File file = new java.io.File(dir, listName+".xml");
+					File file = new java.io.File(dir, listName + ".xml");
 					stream = new FileOutputStream(file.toString());
-		
+
 					encoder = new XMLEncoder(stream);
 					encoder.writeObject(table.value);
 					_vocabListStatus.put(listName, table.value.length);
@@ -1305,29 +1309,32 @@ public class NemoLists implements Cloneable {
 	 * 
 	 */
 	public static void updateVocabLists() {
-		Iterator<String> keys = Utils.configuration.getVocabLists().keySet().iterator();
+		Iterator<String> keys = Utils.configuration.getVocabLists().keySet()
+				.iterator();
 		nbVocabLists = 0;
 		while (keys.hasNext()) {
 			String listName = keys.next();
 			updateVocabList(listName);
 		}
 	}
-		
+
 	/**
 	 * 
 	 */
 	public static void initVocabLists() {
 		XMLDecoder decoder = null;
-		Iterator<String> keys = Utils.configuration.getVocabLists().keySet().iterator();
+		Iterator<String> keys = Utils.configuration.getVocabLists().keySet()
+				.iterator();
 		while (keys.hasNext()) {
 			String listName = keys.next();
 			try {
-				String fileName = String.format("resources/Vocab/%s.xml", listName);
+				String fileName = String.format("resources/Vocab/%s.xml",
+						listName);
 				File file = new File(fileName);
 				if (file.exists()) {
-					decoder = new XMLDecoder(new FileInputStream(
-							file));
-					_vocabList.put( listName, (CodeTableRecordType[]) decoder.readObject());
+					decoder = new XMLDecoder(new FileInputStream(file));
+					_vocabList.put(listName, (CodeTableRecordType[]) decoder
+							.readObject());
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -1349,8 +1356,8 @@ public class NemoLists implements Cloneable {
 	public static void initVocabMap(String list1, String list2) {
 		XMLDecoder decoder = null;
 		try {
-			String fileName = "resources/Vocab/"
-					+ Utils.concat(list1, list2) + ".xml";
+			String fileName = "resources/Vocab/" + Utils.concat(list1, list2)
+					+ ".xml";
 			File file = new File(fileName);
 			if (file.exists()) {
 				decoder = new XMLDecoder(new FileInputStream(file));
@@ -1375,7 +1382,7 @@ public class NemoLists implements Cloneable {
 	 * 
 	 */
 	public static void updateVocabMap(String list1, String list2) {
-		//okSurveys = false;
+		// okSurveys = false;
 		FileOutputStream stream = null;
 		XMLEncoder encoder = null;
 		CodeTableRecordTypeArrayHolder table = new CodeTableRecordTypeArrayHolder();
@@ -1384,24 +1391,23 @@ public class NemoLists implements Cloneable {
 			VocabSoapBindingStub vocab = new VocabSoapBindingStub(
 					new java.net.URL(Utils.configuration.getVocabURL()),
 					new Service());
-			vocab.getMap(
-					new String[]{Utils.configuration.getVocabListURL(list1)},
-					Utils.configuration.getPredicate(),
-					new String[]{Utils.configuration.getVocabListURL(list2)},
-					"false",
-					table,
-					error);
+			vocab.getMap(new String[] { Utils.configuration
+					.getVocabListURL(list1) }, Utils.configuration
+					.getPredicate(), new String[] { Utils.configuration
+					.getVocabListURL(list2) }, "false", table, error);
 			if (!error.value) {
 				if (table.value != null) {
 					_vocabMap.put(Utils.concat(list1, list2), table.value);
-					
+
 					File dir = new java.io.File("resources/Vocab");
 					if (!dir.exists()) {
 						dir.mkdirs();
 					}
-					File file = new java.io.File(dir, Utils.concat(list1, list2) + ".xml");
+					File file = new java.io.File(dir, Utils
+							.concat(list1, list2)
+							+ ".xml");
 					stream = new FileOutputStream(file.toString());
-		
+
 					encoder = new XMLEncoder(stream);
 					encoder.writeObject(table.value);
 				}
@@ -1423,96 +1429,39 @@ public class NemoLists implements Cloneable {
 			}
 		}
 	}
-	
-//	public static void updateVocabMap() {
-//		//okSurveys = false;
-//		FileOutputStream stream = null;
-//		XMLEncoder encoder = null;
-//		CodeTableRecordTypeArrayHolder table = new CodeTableRecordTypeArrayHolder();
-//		javax.xml.rpc.holders.BooleanHolder error = new BooleanHolder();
-//		try {
-//			VocabSoapBindingStub vocab = new VocabSoapBindingStub(
-//					new java.net.URL(Utils.configuration.getVocabURL()),
-//					new Service());
-//			vocab.getMap(
-//					new String[]{Utils.configuration.getVocabListURL("P091")},
-//					// new String[]{"http://vocab.ndg.nerc.ac.uk/list/P031/current"},
-//					Utils.configuration.getPredicate(),
-//					new String[]{Utils.configuration.getVocabListURL("P021")},
-//					// new String[]{"http://vocab.ndg.nerc.ac.uk/list/P021/current"},
-//					"false",
-//					table,
-//					error);
-//			if (!error.value) {
-//				if (table.value != null) {
-//					_vocabMap = table.value;
-//					
-//					
-//					File dir = new java.io.File("resources/Vocab");
-//					if (!dir.exists()) {
-//						dir.mkdirs();
-//					}
-//					File file = new java.io.File(dir, "VocabMap.xml");
-//					stream = new FileOutputStream(file.toString());
-//		
-//					encoder = new XMLEncoder(stream);
-//					encoder.writeObject(table.value);
-////					_vocabListStatus.put(listName, table.value.length);
-//				} else {
-////					_vocabListStatus.put(listName, 0);
-//				}
-//			} else {
-////				_vocabListStatus.put(listName, -1);
-//			}
-//		} catch (Exception e) {
-////			_vocabListStatus.put(listName, -1);
-//			e.printStackTrace();
-//		} finally {
-//			if (encoder != null) {
-//				try {
-//					encoder.close();
-//				} catch (Exception ex) {
-//				}
-//			}
-//			if (stream != null) {
-//				try {
-//					stream.close();
-//				} catch (Exception ex) {
-//				}
-//			}
-//		}
-//	}
 
 	public static CodeTableRecordType[] getVocabMap(String list1, String list2) {
 		return _vocabMap.get(Utils.concat(list1, list2));
 	}
 
-	public static void setVocabMap(String list1, String list2, CodeTableRecordType[] map) {
+	public static void setVocabMap(String list1, String list2,
+			CodeTableRecordType[] map) {
 		_vocabMap.put(Utils.concat(list1, list2), map);
 	}
 
 	public static java.util.HashMap<Integer, String> getEdmo() {
 		return _edmo;
 	}
-	
+
 	public static void writeSdnParameters(String debut) {
 		setSdnParameters(debut);
-//		ANNULATION TEMPORAIRE DES LIGNES
-//		setSdnParameters(debut + "SDN_parameter_mapping");
-//		
-//		for (ParameterModel param : DataModel.stationModel.getParameterModels()) {
-//			_sdnParameters += "\n" + debut + parameterMap(param.getModel()) ;
-//		}
-	}
-	
-	public static String getVocabMatch(String list1, String list2, String value, String errorMessage) {
-		String strReturn = errorMessage;
 		
+		setSdnParameters(debut + "SDN_parameter_mapping");
+
+		for (ParameterModel param : DataModel.stationModel.getParameterModels()) {
+			_sdnParameters += "\n" + debut + parameterMap(param.getModel());
+		}
+	}
+
+	public static String getVocabMatch(String list1, String list2,
+			String value, String errorMessage) {
+		String strReturn = errorMessage;
+
 		try {
 			CodeTableRecordType[] tableMap = NemoLists
 					.getVocabMap(list1, list2);
 			int intLength = tableMap.length;
-			
+
 			for (int i = 0; i < intLength; i++) {
 				if (tableMap[i].getEntryTermAbbr().equals(value)) {
 					if (tableMap[i].getExactMatch() != null) {
@@ -1527,6 +1476,9 @@ public class NemoLists implements Cloneable {
 					} else if (tableMap[i].getMajorMatch() != null) {
 						strReturn = tableMap[i].getMajorMatch()[0]
 								.getEntryKey();
+					} else if (tableMap[i].getMinorMatch() != null) {
+						strReturn = tableMap[i].getMinorMatch()[0]
+								.getEntryKey();
 					}
 					break;
 				}
@@ -1534,21 +1486,20 @@ public class NemoLists implements Cloneable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return strReturn;
 	}
-	
+
 	public static String parameterMap(Parameter param) {
-		String pdvCode = getVocabMatch("P091", "P021", param.getCode(), Messages.getString("NemoLists.unknown"));
-						
-		return 	"<subject>SDN:LOCAL:" + 
-				param.getCode() +
-				"</subject><object>SDN:P021::" + 
-				Utils.extraitCodeURN(pdvCode) +
-				"</object><unit>SDN:P061::" +
-				"</unit>";
+		String pdvCode = Utils.extraitCodeURN(getVocabMatch("P091", "P021",
+				param.getCode(), Messages.getString("NemoLists.unknown")));
+		String unitCode = Utils.extraitCodeURN(getVocabMatch("P091", "P061", param.getCode(), Messages
+				.getString("NemoLists.unknown")));
+		return "<subject>SDN:LOCAL:" + param.getCode()
+				+ "</subject><object>SDN:P021::" + pdvCode
+				+ "</object><unit>SDN:P061::" + unitCode + "</unit>";
 	}
-	
+
 	public static String getSdnParameters() {
 		return _sdnParameters;
 	}
@@ -1556,6 +1507,5 @@ public class NemoLists implements Cloneable {
 	public static void setSdnParameters(String parameters) {
 		_sdnParameters = parameters;
 	}
-
 
 } /* End of class: NemoLists */
