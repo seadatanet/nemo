@@ -6,7 +6,7 @@ public class TypeData extends Object {
 
 	private int position, debut, fin;
 	
-	private String debutFlag, finFlag;
+	private String debutFlag, finFlag, testIn, testOut;
 
 	private Boolean sensor;
 
@@ -161,5 +161,21 @@ public class TypeData extends Object {
 
 	public void setFinFlag(String finFlag) {
 		this.finFlag = finFlag;
+	}
+
+	public String getTestIn() {
+		return testIn;
+	}
+
+	public void setTestIn(String testIn) {
+		this.testIn = testIn;
+	}
+
+	public String getTestOut() {
+		return testOut;
+	}
+
+	public void setTestOut(String testOut) {
+		this.testOut = testOut;
 	}
 }

@@ -72,7 +72,7 @@ $formatter.padString( $param.code, $len)##
 #foreach( $i in  $range )
 #if ($survey.isTimeSeriesSurvey())$formatter.formatInt( "%4d", $station.parametersAt(0).valuesAt($i).year) $formatter.formatInt( "%02d", $station.parametersAt(0).valuesAt($i).month) $formatter.formatInt( "%02d", $station.parametersAt(0).valuesAt($i).day) $formatter.formatDateTime( "hh24mmss", $station.parametersAt(0).valuesAt($i).date ) #end##
 #foreach ($param in $station.parameters)
-$formatter.formatDouble( $param.format, $param.valuesAt($i).getValue()) #end$station.getFlags($i)
+$formatter.formatDouble( $param.format, $param.valuesAt($i).getValue()) #end$station.getFlags($i, $survey.isTimeSeriesSurvey())
 #set( $count = $count + 1 )
 #set( $result = $notifier.progress( $count ))
 #end

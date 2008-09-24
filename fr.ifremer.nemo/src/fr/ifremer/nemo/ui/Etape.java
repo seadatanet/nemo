@@ -1422,11 +1422,24 @@ public class Etape {
 				// Si PRES n'est pas premier => Medatlas impossible
 				if (!code.matches("PRES")) {
 					ViewFile.radMedatlas.setEnabled(false);
+					ViewFile.radMedatlas.setSelection(false);
+					ViewFile.radODV.setSelection(true);
+					ViewFile.afficheGrpODV();
 				} else if (!ViewFile.isCollection()) {
 					ViewFile.radMedatlas.setEnabled(true);
 				}
 			}
 
+			// Trajectoire : Lat. et long. doivent etre les premiers parametres
+			if (ViewFile.typeFichierEntree().equals(Global.TRAJECTORY)) {
+				String code1 = Utils.extraitCode(TableData.types.get(0).getCode());
+				String code2 = Utils.extraitCode(TableData.types.get(1).getCode());
+				
+				if (!((code1.equals("LATX") && code2.equals("LONX")) || (code1.equals("LONX") && code2.equals("LATX")))) {
+					ok = ok && false;
+					Utils.messageErreurAppend(Messages.getString("Etape.126"));
+				}
+			}
 		}
 		if (ok) {
 			EditData.okApresReset = true;

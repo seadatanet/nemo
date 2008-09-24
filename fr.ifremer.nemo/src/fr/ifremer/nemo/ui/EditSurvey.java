@@ -42,10 +42,9 @@ public class EditSurvey {
 	public static Section sectionReference, sectionLocalisation, sectionSource,
 			sectionCentre, sectionType, sectionCommentaire;
 
-	public static Text textCampagne, textNom,
-			textDateDebut, textDateFin, textRegion, textPays, textLabo,
-			textChef, textProjet, textConfidentiel, textType,
-			textNbre, textCommentaire;
+	public static Text textCampagne, textNom, textDateDebut, textDateFin,
+			textRegion, textPays, textLabo, textChef, textProjet,
+			textConfidentiel, textType, textNbre, textCommentaire;
 
 	public static Label labelCampagne, labelNom, labelCodeNavire,
 			labelNomNavire, labelDateDebut, labelDateFin, labelRegion,
@@ -65,7 +64,8 @@ public class EditSurvey {
 
 	public static int expand, validee, loaded;
 
-	public static Combo comboConfid, comboDataCentres, comboCountries, comboNavire;
+	public static Combo comboConfid, comboDataCentres, comboCountries,
+			comboNavire;
 
 	public static List listeType;
 
@@ -74,14 +74,14 @@ public class EditSurvey {
 	public static ScrolledForm formEdition;
 
 	private static Shell shell = new Shell();
-	
+
 	public static void affichageEdition() {
 		// initialisation zone édition pour étape description de fichier
 
 		formEdition = ViewEdit.formEdition;
 		ViewLog.aideSurvey();
 		okApresReset = true;
-		
+
 		// affichage du texte dans la zone de gauche
 		ViewFile.styledTextCampagne.setText(Utils.texteBrut);
 
@@ -103,7 +103,7 @@ public class EditSurvey {
 						.messageInfoAppend(Messages.getString("EditSurvey.2") + ViewFile.nomRepertoire); //$NON-NLS-1$
 			}
 
-//			if (ViewFile.checkBoxTempo.getSelection()) {
+			// if (ViewFile.checkBoxTempo.getSelection()) {
 			if (ViewFile.radSerieTempo.getSelection()) {
 				Utils.messageInfoAppend(Messages.getString("EditSurvey.3")); //$NON-NLS-1$
 			}
@@ -121,7 +121,7 @@ public class EditSurvey {
 		ViewEdit.formEdition.setText(Messages.getString("EditSurvey.4")); //$NON-NLS-1$
 
 		disposeElements();
-		
+
 		// init de la arrayList des sections
 		listeSectionsSurvey = new ArrayList<Section>();
 		listeSectionsNoms = new ArrayList<String>();
@@ -159,17 +159,17 @@ public class EditSurvey {
 		formEdition.redraw();
 		formEdition.reflow(true);
 
-//		formEdition.reflow(true);
+		// formEdition.reflow(true);
 
 		// initialisation liste des sections de la partie description fichier
 
 		// section référence
-		Drawing
-		.sectionReferenceCampagne(
-				sectionReference, Messages.getString("EditSurvey.14"), Messages.getString("EditSurvey.15"),
-				textCampagne, Messages.getString("EditSurvey.10"),
-				textNom, Messages.getString("EditSurvey.11"),
-				comboNavire, Messages.getString("EditSurvey.ship"));
+		Drawing.sectionReferenceCampagne(sectionReference, Messages
+				.getString("EditSurvey.14"), Messages
+				.getString("EditSurvey.15"), textCampagne, Messages
+				.getString("EditSurvey.10"), textNom, Messages
+				.getString("EditSurvey.11"), comboNavire, Messages
+				.getString("EditSurvey.ship"));
 
 		// section localisation
 		listeText.add(textDateDebut);
@@ -188,8 +188,8 @@ public class EditSurvey {
 		ViewEdit.formEdition.reflow(true);
 
 		// section source des donnees
-//		listeText.add(textPays);
-//		listeNoms.add(Messages.getString("EditSurvey.21")); //$NON-NLS-1$
+		// listeText.add(textPays);
+		// listeNoms.add(Messages.getString("EditSurvey.21")); //$NON-NLS-1$
 		listeText.add(textLabo);
 		listeNoms.add(Messages.getString("EditSurvey.22")); //$NON-NLS-1$
 		listeText.add(textChef);
@@ -204,7 +204,7 @@ public class EditSurvey {
 		listeNoms.clear();
 
 		// section centre archivage
-		//listeText.add(textCentre);
+		// listeText.add(textCentre);
 		listeNoms.add(Messages.getString("EditSurvey.27")); //$NON-NLS-1$
 
 		Drawing
@@ -214,8 +214,8 @@ public class EditSurvey {
 		listeText.clear();
 		listeNoms.clear();
 		// FI par défaut pour le centre de données
-		//textCentre.setTextLimit(2);
-		//textCentre.setText("FI");
+		// textCentre.setTextLimit(2);
+		// textCentre.setText("FI");
 
 		// section types de données
 		listeText.add(textNbre);
@@ -367,7 +367,7 @@ public class EditSurvey {
 					}
 
 					public void focusLost(org.eclipse.swt.events.FocusEvent e) {
-						
+
 						int lastIndex = 1;
 						int lastIndexOfSpace = 1;
 						int indexOfCR = 1;
@@ -376,22 +376,26 @@ public class EditSurvey {
 						String tamponSortie = "";
 
 						while (tamponOrigine.length() > 80) {
-							
-							tampon80 = tamponOrigine.substring(0, 80);
-							
-								lastIndexOfSpace = tampon80.lastIndexOf(" ");
-								indexOfCR = tampon80.indexOf("\r");
-								
-								if (indexOfCR > -1) {
-									lastIndex = indexOfCR;
-									tamponOrigine = tamponOrigine.substring(lastIndex+2);
-								} else {
-									lastIndex = lastIndexOfSpace;
-									tamponOrigine = tamponOrigine.substring(lastIndex+1);
-								}
 
-								tamponSortie += tampon80.substring(0, lastIndex).trim()+ "\r\n";
-								
+							tampon80 = tamponOrigine.substring(0, 80);
+
+							lastIndexOfSpace = tampon80.lastIndexOf(" ");
+							indexOfCR = tampon80.indexOf("\r");
+
+							if (indexOfCR > -1) {
+								lastIndex = indexOfCR;
+								tamponOrigine = tamponOrigine
+										.substring(lastIndex + 2);
+							} else {
+								lastIndex = lastIndexOfSpace;
+								tamponOrigine = tamponOrigine
+										.substring(lastIndex + 1);
+							}
+
+							tamponSortie += tampon80.substring(0, lastIndex)
+									.trim()
+									+ "\r\n";
+
 						}
 
 						tamponSortie += tamponOrigine;
@@ -417,7 +421,8 @@ public class EditSurvey {
 		if (DataModel.ouverture) {
 			DataModel.fillSurvey();
 		} else {
-			Utils.selectComboCode(EditSurvey.comboDataCentres,Utils.configuration.getDataCenter());
+			Utils.selectComboCode(EditSurvey.comboDataCentres,
+					Utils.configuration.getDataCenter());
 		}
 
 	}
@@ -466,20 +471,20 @@ public class EditSurvey {
 			message = message + Messages.getString("EditSurvey.69") + "  "
 					+ Messages.getString("EditSurvey.71");
 		}
-		
+
 		message = message + Messages.getString("EditSurvey.73") + "  OK - "
 				+ NemoLists.nbVocabLists + " "
 				+ Messages.getString("EditSurvey.70");
-		
+
 		if (NemoLists.okEdmo) {
 			message = message + Messages.getString("EditSurvey.74") + "  OK - "
 					+ NemoLists.nbEdmo + " "
 					+ Messages.getString("EditSurvey.70");
 		} else {
 			message = message + Messages.getString("EditSurvey.74") + "  "
-			+ Messages.getString("EditSurvey.71");
+					+ Messages.getString("EditSurvey.71");
 		}
-		
+
 		MessageDialog.openInformation(shell, "WebServices Info", message);
 
 	}
@@ -513,7 +518,7 @@ public class EditSurvey {
 
 	public static void ouvertureDescriptionXML() {
 
-		String  nomXML;
+		String nomXML;
 		File fich;
 
 		// remplissage du dataModel à partir des valeurs du fichier XML de
@@ -553,18 +558,18 @@ public class EditSurvey {
 		// Liste des capteurs
 		ArrayList<String> listSensor = new ArrayList<String>();
 		WSDataType[] listWSDT = NemoLists.getDataTypes();
-		for (int i = 0 ; i < listWSDT.length ; i++) {
+		for (int i = 0; i < listWSDT.length; i++) {
 			if (listWSDT[i].isSensor()) {
 				listSensor.add(listWSDT[i].getCode());
 			}
 		}
-		
-//		System.out.println("");
-//		for (String temp : listSensor)
-//		{
-//			System.out.println(temp);
-//		}
-		
+
+		// System.out.println("");
+		// for (String temp : listSensor)
+		// {
+		// System.out.println(temp);
+		// }
+
 		if (ViewFile.dossierCampagne) {
 
 			try {
@@ -572,12 +577,14 @@ public class EditSurvey {
 				Survey survey = new Survey();
 				survey.importFromXML(fichier);
 				survey.setDataCentre(Utils.configuration.getDataCenter());
-				
+
 				// Màj des types de données capteurs
-				for (int index = 0 ; index < survey.getDataTypes().length ; index++) {
-					survey.dataTypesAt(index).setSensor(listSensor.contains(survey.dataTypesAt(index).getCode().substring(0,3)));
+				for (int index = 0; index < survey.getDataTypes().length; index++) {
+					survey.dataTypesAt(index).setSensor(
+							listSensor.contains(survey.dataTypesAt(index)
+									.getCode().substring(0, 3)));
 				}
-				
+
 				DataModel.dirSurvey.setModel(survey);
 
 			} catch (FileNotFoundException e) {
@@ -599,12 +606,14 @@ public class EditSurvey {
 				Survey survey = new Survey();
 				survey.importFromXML(fichier);
 				survey.setDataCentre(Utils.configuration.getDataCenter());
-				
+
 				// Màj des types de données capteurs
-				for (int index = 0 ; index < survey.getDataTypes().length ; index++) {
-					survey.dataTypesAt(index).setSensor(listSensor.contains(survey.dataTypesAt(index).getCode().substring(0,3)));
+				for (int index = 0; index < survey.getDataTypes().length; index++) {
+					survey.dataTypesAt(index).setSensor(
+							listSensor.contains(survey.dataTypesAt(index)
+									.getCode().substring(0, 3)));
 				}
-				
+
 				DataModel.singleSurvey.setModel(survey);
 
 				DataModel.singleSurvey.getModel();
@@ -648,9 +657,11 @@ public class EditSurvey {
 		}
 		if (survey.getShipCode() != null) {
 			if (survey.getShipName() != null) {
-				Utils.selectComboCodePlus(EditSurvey.comboNavire, survey.getShipCode(), survey.getShipName());
+				Utils.selectComboCodePlus(EditSurvey.comboNavire, survey
+						.getShipCode(), survey.getShipName());
 			} else {
-				Utils.selectComboCode(EditSurvey.comboNavire, survey.getShipCode());
+				Utils.selectComboCode(EditSurvey.comboNavire, survey
+						.getShipCode());
 			}
 		}
 
@@ -676,28 +687,29 @@ public class EditSurvey {
 		}
 
 		// Source de données
-//		if (survey.getCountryCode() != null) {
-//			EditSurvey.textPays.setText(survey.getCountryCode());
-//		}
+		// if (survey.getCountryCode() != null) {
+		// EditSurvey.textPays.setText(survey.getCountryCode());
+		// }
 		if (survey.getCountryCode() != null) {
-			Utils.selectComboCode(EditSurvey.comboCountries,survey.getCountryCode());
+			Utils.selectComboCode(EditSurvey.comboCountries, survey
+					.getCountryCode());
 		}
-		
+
 		if (survey.getLaboratories() != null) {
 			EditSurvey.textLabo.setText(survey.getLaboratories());
 		}
-		
+
 		if (survey.getChiefScientist() != null) {
 			EditSurvey.textChef.setText(survey.getChiefScientist());
 		}
-		
+
 		if (survey.getProjectName() != null) {
 			EditSurvey.textProjet.setText(survey.getProjectName());
 		}
 
 		// Centre d'archivage
 		if (survey.getDataCentre() != null) {
-			//EditSurvey.textCentre.setText(survey.getDataCentre());
+			// EditSurvey.textCentre.setText(survey.getDataCentre());
 
 			// sélection dans la comboList
 			Utils.selectComboCode(comboDataCentres, survey.getDataCentre());
@@ -786,7 +798,6 @@ public class EditSurvey {
 		// on retire toutes les sections et les boutons expand et validation
 
 		int i;
-
 
 		// effacement des boutons valider/expand/init serveur
 		EditSurvey.buttonExpand.setParent(shell);
@@ -883,7 +894,6 @@ public class EditSurvey {
 
 	public static void initSections() {
 
-
 		sectionReference = new Section(shell, SWT.NONE);
 		sectionLocalisation = new Section(shell, SWT.NONE);
 		sectionSource = new Section(shell, SWT.NONE);
@@ -894,7 +904,6 @@ public class EditSurvey {
 	}
 
 	public static void initText() {
-
 
 		textCampagne = new Text(shell, SWT.BORDER);
 		listeTextSurvey.add(textCampagne);
@@ -939,7 +948,7 @@ public class EditSurvey {
 	}
 
 	public static void initCombos() {
-		
+
 		comboConfid = new Combo(shell, SWT.READ_ONLY);
 		comboConfid.add("P - Public");
 		comboConfid.add("L - Limited");
@@ -948,16 +957,16 @@ public class EditSurvey {
 
 		// remplissage des centres de données
 		comboDataCentres = new Combo(shell, SWT.READ_ONLY);
-		
+
 		CodeTableRecordType[] centres = NemoLists.getVocabList("L300");
-		
+
 		TreeMap<String, String> treeCentre = new TreeMap<String, String>();
-		
-		for (CodeTableRecordType record : centres)
-		{	
-			treeCentre.put(Utils.extraitCodeURN(record.getEntryKey()), record.getEntryTerm());
+
+		for (CodeTableRecordType record : centres) {
+			treeCentre.put(Utils.extraitCodeURN(record.getEntryKey()), record
+					.getEntryTerm());
 		}
-		
+
 		NemoLists.listeCentreDonnees = new ArrayList<String>();
 		String temp = "";
 		for (Entry<String, String> currentEntry : treeCentre.entrySet()) {
@@ -966,18 +975,18 @@ public class EditSurvey {
 			comboDataCentres.add(temp);
 		}
 		Utils.createSearchMenu(comboDataCentres, Global.DATACENTRE);
-		
+
 		// Remplissage liste navires
 		comboNavire = new Combo(shell, SWT.READ_ONLY);
 		CodeTableRecordType[] navires = NemoLists.getVocabList("C174");
-		
+
 		TreeMap<String, String> treeNavire = new TreeMap<String, String>();
-			
-		for (CodeTableRecordType record : navires)
-		{	
-			treeNavire.put(record.getEntryTerm(), Utils.extraitCodeURN(record.getEntryKey()));
+
+		for (CodeTableRecordType record : navires) {
+			treeNavire.put(record.getEntryTerm(), Utils.extraitCodeURN(record
+					.getEntryKey()));
 		}
-		
+
 		NemoLists.listeNavire = new ArrayList<String>();
 		temp = "";
 		for (Entry<String, String> currentEntry : treeNavire.entrySet()) {
@@ -1000,7 +1009,7 @@ public class EditSurvey {
 
 		}
 
-		//textCentre.setText("FI");
+		// textCentre.setText("FI");
 		validee = 0;
 
 		// effacement de la liste des types de données dans la table
@@ -1047,15 +1056,13 @@ public class EditSurvey {
 		Utils.messageErreur("");
 
 	}
-	
-	
-	private static void disposeElements()
-	{
-		
+
+	private static void disposeElements() {
+
 		shell.close();
-		
+
 		shell = new Shell();
-		
+
 		if (listeSectionsLabel != null) {
 			for (Label element : listeSectionsLabel) {
 				element.dispose();
@@ -1079,7 +1086,7 @@ public class EditSurvey {
 				element.dispose();
 			}
 		}
-		
+
 		if (comboConfid != null)
 			comboConfid.dispose();
 
@@ -1088,7 +1095,7 @@ public class EditSurvey {
 
 		if (comboDataCentres != null)
 			comboDataCentres.dispose();
-			
+
 		if (sectionReference != null) {
 			sectionReference.dispose();
 			sectionLocalisation.dispose();
@@ -1097,7 +1104,7 @@ public class EditSurvey {
 			sectionType.dispose();
 			sectionCommentaire.dispose();
 		}
-		
+
 		if (buttonRAZ != null) {
 			buttonRAZ.dispose();
 			buttonInitServeur.dispose();
@@ -1106,11 +1113,10 @@ public class EditSurvey {
 			buttonValidate.dispose();
 			buttonXML.dispose();
 		}
-		
+
 		if (listeType != null)
 			listeType.dispose();
-		
-	}
 
+	}
 
 }

@@ -657,11 +657,11 @@ public class ViewFile extends ViewPart {
 		grpODV.setLayout(layout2);
 		afficheGrpODV();
 
-		radMonoFichier = new Button(grpODV, SWT.RADIO);
-		radMonoFichier.setText(Messages.getString("ViewFile.monoFichier"));
-		radMonoFichier.setSelection(true);
 		radMonoStation = new Button(grpODV, SWT.RADIO);
 		radMonoStation.setText(Messages.getString("ViewFile.monoStation"));
+		radMonoStation.setSelection(true);
+		radMonoFichier = new Button(grpODV, SWT.RADIO);
+		radMonoFichier.setText(Messages.getString("ViewFile.monoFichier"));
 
 		// if (isCollection()) {
 		// radMedatlas.setEnabled(false);
@@ -672,6 +672,9 @@ public class ViewFile extends ViewPart {
 
 		chkForcerTri = new Button(compositeConversion, SWT.CHECK);
 		chkForcerTri.setText(Messages.getString("ViewFile.forcerTri"));
+
+		// Composite vide pour mise en page
+		Composite compoVide3 = new Composite(compositeConversion, SWT.NONE);
 
 		grpCDI = new Group(compositeConversion, SWT.NONE);
 		GridLayoutFactory.fillDefaults().applyTo(grpCDI);

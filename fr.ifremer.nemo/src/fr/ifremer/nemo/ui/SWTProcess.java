@@ -30,8 +30,6 @@ public class SWTProcess implements IRunnableWithProgress {
 
 	public static int validee, loaded;
 
-	public static String nomFichierSortie;
-
 	public static Shell shell;
 
 	public static ProgressNotification notifier;
@@ -470,11 +468,11 @@ public class SWTProcess implements IRunnableWithProgress {
 						}
 					} else {
 						EditConversion.nomFichierSortie = EditConversion.nomDossierSortie
-								+ "/"
+								+ "\\"
 								+ fichier
 										.substring(0, fichier.lastIndexOf('.'))
 								+ ".txt";
-						File fichierSortie = new java.io.File(nomFichierSortie);
+						File fichierSortie = new java.io.File(EditConversion.nomFichierSortie);
 
 						monitor2.setTaskName(Messages.getString("SWTProcess.4")
 								+ " : " + fichier + ".txt" + " ( " + numFichier

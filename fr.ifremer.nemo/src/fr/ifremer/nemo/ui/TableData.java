@@ -17,6 +17,8 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
+import fr.ifremer.nemo.config.Flag;
+import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSParameter;
@@ -24,8 +26,6 @@ import fr.ifremer.nemo.ws.WSParameter;
 public class TableData {
 
 	public static Table filtreTable;
-
-	public static int ligneSelec, colonneSelec;
 
 	public static ArrayList<TypeData> types, listeFiltree, typesWS;
 
@@ -40,7 +40,7 @@ public class TableData {
 
 		ViewFile.tableData = new Table(ViewFile.compositeData,
 				SWT.FULL_SELECTION | SWT.H_SCROLL);
-		
+
 		table = ViewFile.tableData;
 
 		table.setHeaderVisible(true);
@@ -90,26 +90,31 @@ public class TableData {
 
 		TableColumn tableColumn9 = new TableColumn(table, SWT.NONE);
 		tableColumn9.setWidth(65);
-		tableColumn9.setText(Messages.getString("TableData.21")); //$NON-NLS-1$
+		tableColumn9.setText(Messages.getString("EditStation.47")); //$NON-NLS-1$
 		tableColumn9.setAlignment(SWT.RIGHT);
-		
+
 		TableColumn tableColumn10 = new TableColumn(table, SWT.NONE);
 		tableColumn10.setWidth(65);
-		tableColumn10.setText(Messages.getString("TableData.22")); //$NON-NLS-1$
+		tableColumn10.setText(Messages.getString("EditStation.48")); //$NON-NLS-1$
 		tableColumn10.setAlignment(SWT.RIGHT);
-		
+
 		TableColumn tableColumn11 = new TableColumn(table, SWT.NONE);
 		tableColumn11.setWidth(65);
-		tableColumn11.setText(Messages.getString("TableData.23")); //$NON-NLS-1$
+		tableColumn11.setText(Messages.getString("TableData.22")); //$NON-NLS-1$
 		tableColumn11.setAlignment(SWT.RIGHT);
-		
+
+		TableColumn tableColumn12 = new TableColumn(table, SWT.NONE);
+		tableColumn12.setWidth(65);
+		tableColumn12.setText(Messages.getString("TableData.23")); //$NON-NLS-1$
+		tableColumn12.setAlignment(SWT.RIGHT);
+
 		initTable();
 
 		// agrandissement de la table
 		ViewFile.compositeData.getShell().layout();
 
 	}
-	
+
 	public static void initTypes() {
 
 		// initialisation de la ArrayList des types des données à partir du
@@ -141,10 +146,11 @@ public class TableData {
 			// ajout systématique de PRES
 			if (wsParameter.getCode().matches("PRES")) { //$NON-NLS-1$
 
-//				if ((DataModel.ouverture == false)
-//						&& (!ViewFile.checkBoxTempo.getSelection())) {
+				// if ((DataModel.ouverture == false)
+				// && (!ViewFile.checkBoxTempo.getSelection())) {
 				if ((DataModel.ouverture == false)
-						&& (!ViewFile.radSerieTempo.getSelection() || !ViewFile.radTrajectoire.getSelection())) {	
+						&& (!ViewFile.radSerieTempo.getSelection() || !ViewFile.radTrajectoire
+								.getSelection())) {
 					// pas de modèle chargé donc on rajoute PRES
 					types.add(type);
 				}
@@ -202,18 +208,18 @@ public class TableData {
 				// TableItem item = table.getItem(pt);
 				if (item == null)
 					return;
-				for (int i = 0; i < table.getColumnCount(); i++) {
-					Rectangle rect = item.getBounds(i);
-					// System.out.println("rect===> "+rect);
-					// System.out.println("calcul num ligne===> "+i);
-					if (rect.contains(pt)) {
-						int indexTmp = table.indexOf(item);
-						// System.out.println("LigneSelec =>" + indexTmp + "-
-						// ColonneSelec =>" + i);
-						ligneSelec = indexTmp;
-						colonneSelec = i;
-					}
-				}
+				// for (int i = 0; i < table.getColumnCount(); i++) {
+				// Rectangle rect = item.getBounds(i);
+				// // System.out.println("rect===> "+rect);
+				// // System.out.println("calcul num ligne===> "+i);
+				// if (rect.contains(pt)) {
+				// int indexTmp = table.indexOf(item);
+				// // System.out.println("LigneSelec =>" + indexTmp + "-
+				// // ColonneSelec =>" + i);
+				// ligneSelec = indexTmp;
+				// colonneSelec = i;
+				// }
+				// }
 
 				while (index < table.getItemCount()) {
 					boolean visible = false;
@@ -285,20 +291,20 @@ public class TableData {
 		// MenuItem tmp = new Separator();
 		MenuItem itemDel = new MenuItem(menu, SWT.NONE);
 		itemDel.setText(Messages.getString("TableData.17")); //$NON-NLS-1$
-		
-		new MenuItem(menu,SWT.SEPARATOR);
+
+		new MenuItem(menu, SWT.SEPARATOR);
 		MenuItem itemInjectFlag = new MenuItem(menu, SWT.NONE);
 		itemInjectFlag.setText(Messages.getString("TableData.24"));
 		MenuItem itemRemoveFlag = new MenuItem(menu, SWT.NONE);
 		itemRemoveFlag.setText(Messages.getString("TableData.25"));
 		table.setMenu(menu);
-		
+
 		// ajouter des listeners sur les menu items ^^
 
 		itemInject.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				// System.out.println("injection debut/fin");
-//				table.forceFocus();
+				// table.forceFocus();
 				Utils.injectData(ViewFile.styledTextData, 4, 5);
 
 				majTypeData();
@@ -330,41 +336,42 @@ public class TableData {
 		itemUp.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				// System.out.println("up");
-				monterEltTableData(ligneSelec);
+				monterEltTableData();
 			}
 		});
 		itemDown.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				// System.out.println("down");
-				descendreEltTableData(ligneSelec);
+				descendreEltTableData();
 			}
 		});
 		itemDel.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				// System.out.println("suppression");
-				supprEltTableData(ligneSelec);
+				supprEltTableData();
 				// remplirTableData();
 			}
 		});
-		
+
 		itemInjectFlag.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				table.forceFocus();
-				Utils.injectData(ViewFile.styledTextData, 10, 11);
+				Utils.injectData(ViewFile.styledTextData, 11, 12);
 			}
 		});
-		
+
 		itemRemoveFlag.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				table.forceFocus();
 				table.getItems()[table.getSelectionIndex()].setText(9, "");
 				table.getItems()[table.getSelectionIndex()].setText(10, "");
 				table.getItems()[table.getSelectionIndex()].setText(11, "");
+				table.getItems()[table.getSelectionIndex()].setText(12, "");
 				types.get(table.getSelectionIndex()).setDebutFlag(null);
 				types.get(table.getSelectionIndex()).setFinFlag(null);
 			}
 		});
-		
+
 		Utils.forceMenu(table, menu);
 
 		// agrandissement de la table
@@ -385,20 +392,16 @@ public class TableData {
 		// nouvelle création des items
 		for (int i = 0; i < nbre; i++) {
 			TableItem item = new TableItem(table, SWT.NONE);
-			item
-					.setText(new String[] {
-							types.get(i).getCode(),
-							types.get(i).getUnite(),
-							types.get(i).getConversion(),
-							types.get(i).getTest(),
-							"" + types.get(i).getDebut(), //$NON-NLS-1$
-							"" + types.get(i).getFin(),
-							types.get(i).getFormat(),
-							types.get(i).getEntree(),
-							types.get(i).getSortie(),
-							"",
-							types.get(i).getDebutFlag(),
-							types.get(i).getFinFlag()}); //$NON-NLS-1$
+			item.setText(new String[] {
+					types.get(i).getCode(),
+					types.get(i).getUnite(),
+					types.get(i).getConversion(),
+					types.get(i).getTest(),
+					"" + types.get(i).getDebut(), //$NON-NLS-1$
+					"" + types.get(i).getFin(), types.get(i).getFormat(),
+					types.get(i).getEntree(), types.get(i).getSortie(),
+					types.get(i).getTestIn(), types.get(i).getTestOut(),
+					types.get(i).getDebutFlag(), types.get(i).getFinFlag() }); //$NON-NLS-1$
 		}
 
 	}
@@ -425,7 +428,7 @@ public class TableData {
 
 	}
 
-	public static void monterEltTableData(int indice) {
+	public static void monterEltTableData() {
 		// on monte d'un cran l'élément à la position indice
 		// swap (indice-1) <-> indice
 		// 
@@ -435,11 +438,10 @@ public class TableData {
 		ArrayList<TypeData> listeTempo;
 		nbre = types.size();
 
-		// si l'indice est 0, on ne fait rien
-		if (indice == 0) {
-		}
+		int indice = ViewFile.tableData.getSelectionIndex();
 
-		else {
+		// si l'indice est 0, on ne fait rien
+		if (indice != 0) {
 
 			listeTempo = new ArrayList();
 
@@ -480,23 +482,32 @@ public class TableData {
 
 	}
 
-	public static void descendreEltTableData(int indice) {
+	public static void descendreEltTableData() {
 		// on descend d'un cran l'élément à la position indice
 		// swap (indice-1) <-> indice
 
-		int nbre;
-		ArrayList<TypeData> listeTempo;
-		nbre = types.size();
+		int indice = ViewFile.tableData.getSelectionIndex();
 
-//		// verif si c'est PRES
-//		TypeData type_a_Deplacer = types.get(indice);
-//		// split sur " - "
-//		Pattern p = Pattern.compile(" - ");
-//		String mots[] = p.split(type_a_Deplacer.getCode());
-//		String code = mots[0];
+		// Si derniere ligne, on ne fait rien
+		if (indice != ViewFile.tableData.getItemCount() - 1) {
 
-//		if (!code.matches("PRES") || ViewFile.checkBoxTempo.getSelection()) {
-//		if (!code.matches("PRES") || ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
+			int nbre;
+			ArrayList<TypeData> listeTempo;
+			nbre = types.size();
+
+			// // verif si c'est PRES
+			// TypeData type_a_Deplacer = types.get(indice);
+			// // split sur " - "
+			// Pattern p = Pattern.compile(" - ");
+			// String mots[] = p.split(type_a_Deplacer.getCode());
+			// String code = mots[0];
+
+			// if (!code.matches("PRES") ||
+			// ViewFile.checkBoxTempo.getSelection()) {
+			// if (!code.matches("PRES") ||
+			// ViewFile.radSerieTempo.getSelection() ||
+			// ViewFile.radTrajectoire.getSelection()) {
+
 			listeTempo = new ArrayList();
 
 			// mise à jour préalable
@@ -531,16 +542,17 @@ public class TableData {
 
 			// refresh de la table
 			creationTable();
+		}
 
-//		} else {
-//			// si c'est PRES qu'on veut descendre alors c'est non
-//			Utils.messageErreurAppend(Messages.getString("TableData.19"));
-//		}
+		// } else {
+		// // si c'est PRES qu'on veut descendre alors c'est non
+		// Utils.messageErreurAppend(Messages.getString("TableData.19"));
+		// }
 	}
 
-	public static void supprEltTableData(int indice) {
+	public static void supprEltTableData() {
 		// suppression de la ligne sélectionnée
-
+		int indice = ViewFile.tableData.getSelectionIndex();
 		// d'abord mise à jour des données
 		majTypeData();
 
@@ -551,8 +563,9 @@ public class TableData {
 		String code = mots[0];
 
 		// pas forcément de - dans le nom du type
-//		if (!code.matches("PRES") || ViewFile.checkBoxTempo.getSelection()) {
-		if (!code.matches("PRES") || ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection()) {
+		// if (!code.matches("PRES") || ViewFile.checkBoxTempo.getSelection()) {
+		if (!code.matches("PRES") || ViewFile.radSerieTempo.getSelection()
+				|| ViewFile.radTrajectoire.getSelection()) {
 			types.remove(indice);
 		} else {
 			Utils.messageErreur(Messages.getString("TableData.18"));
@@ -595,16 +608,18 @@ public class TableData {
 
 				// on formate puis on reaffiche la liste
 				try {
-					if (selection.matches(ViewFile.tableData.getItem(i).getText(7))) {
-						// entrée par défaut, le test est la valeur de sortie par
+					if (selection.matches(ViewFile.tableData.getItem(i)
+							.getText(7))) {
+						// entrée par défaut, le test est la valeur de sortie
+						// par
 						// défaut formatée
 						resultat = String.format(ViewFile.tableData.getItem(i)
-								.getText(6), ViewFile.tableData.getItem(i).getText(
-								8));
-						
+								.getText(6), ViewFile.tableData.getItem(i)
+								.getText(8));
+
 					} else {
 						// valeur normale, on applique la formule puis formatage
-	
+
 						org.nfunk.jep.JEP parser = new org.nfunk.jep.JEP();
 						parser.addStandardFunctions();
 						parser.addStandardConstants();
@@ -612,7 +627,7 @@ public class TableData {
 						parser.parseExpression(ViewFile.tableData.getItem(i)
 								.getText(2));
 						resultJEP = parser.getValue();
-	
+
 						resultat = String.format(ViewFile.tableData.getItem(i)
 								.getText(6), resultJEP);
 					}
@@ -624,6 +639,35 @@ public class TableData {
 				types.get(i).setTest(resultat);
 
 				// System.out.println("resultat conversion = "+resultat);
+			}
+
+			if ((!ViewFile.tableData.getItem(i).getText(11).matches(""))
+					&& (!ViewFile.tableData.getItem(i).getText(12).matches(""))) {
+				ligne = Utils.lignesBrutes.get(Integer
+						.valueOf(EditDesc.lignesEnteteFichier.getText())
+						+ Integer.valueOf(EditDesc.lignesEnteteStation
+								.getText())) + 1;
+				selection = ligne.substring(
+						Integer.valueOf(ViewFile.tableData.getItem(i).getText(
+								11)) - 1,
+						Integer.valueOf(ViewFile.tableData.getItem(i).getText(
+								12))).trim();
+
+				types.get(i).setTestIn(selection);
+				
+				String flagSDN = "0";
+				ArrayList<Flag> flags = StationModel.getSingleton().getFlagTable().getFlags();
+				int size = flags.size();
+				for (int j = 0; j < size; j++) {
+					if (flags.get(j).getLocal().equals(
+							types.get(i).getTestIn())) {
+						flagSDN = Utils.extraitCode(flags.get(j)
+								.getSdn());
+						break;
+					}
+				}
+				
+				types.get(i).setTestOut(flagSDN);
 			}
 
 			// System.out.println("maj types data : ok");
@@ -677,10 +721,13 @@ public class TableData {
 			types.get(i).setFormat(ViewFile.tableData.getItem(i).getText(6));
 			types.get(i).setEntree(ViewFile.tableData.getItem(i).getText(7));
 			types.get(i).setSortie(ViewFile.tableData.getItem(i).getText(8));
-			
-			if (!ViewFile.tableData.getItem(i).getText(10).equals("") && !ViewFile.tableData.getItem(i).getText(11).equals("")) {
-				types.get(i).setDebutFlag(ViewFile.tableData.getItem(i).getText(10));
-				types.get(i).setFinFlag(ViewFile.tableData.getItem(i).getText(11));
+
+			if (!ViewFile.tableData.getItem(i).getText(11).equals("")
+					&& !ViewFile.tableData.getItem(i).getText(12).equals("")) {
+				types.get(i).setDebutFlag(
+						ViewFile.tableData.getItem(i).getText(11));
+				types.get(i).setFinFlag(
+						ViewFile.tableData.getItem(i).getText(12));
 			}
 		}
 

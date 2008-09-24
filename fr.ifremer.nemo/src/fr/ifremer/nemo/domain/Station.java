@@ -1758,8 +1758,18 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		
 		return flag;
 	}
-	public String getFlags(int index) {
+	public String getFlags(int index, boolean isTimeSeries) {
 		StringBuffer buffer = new StringBuffer();
+		
+		if (isTimeSeries) {
+			// Ajout des flags des données temporelles
+			String flag = getMetaFlag(Global.DATETIME);
+			for (int i = 0; i < 4; i++) {
+				buffer.append(flag);
+			}
+		}
+		
+		// Ajout des flags des paramètres
 		for (Parameter param : getParameters()) {
 			buffer.append(getFlag(param, index));
 		}
