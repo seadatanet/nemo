@@ -217,29 +217,33 @@ public class OptionsAction extends Action implements ISelectionListener,
 		textArboMapping.setText(Utils.configuration.getArboMapping());
 
 		// Libelles rouges si parametres manquants
-		if (comboIdEdmoRespCdi.getText().equals("")) {
+		if (comboIdEdmoRespCdi.getText().trim().equals("")) {
 			labelIdEdmoRespCdi.setForeground(Display.getCurrent()
 					.getSystemColor(SWT.COLOR_RED));
 		}
-		if (comboCodeEdmoDonnees.getText().equals("")) {
+		if (comboCodeEdmoDonnees.getText().trim().equals("")) {
 			labelCodeEdmoDonnees.setForeground(Display.getCurrent()
 					.getSystemColor(SWT.COLOR_RED));
 		}
-		if (comboIdEdmoRespDonnees.getText().equals("")) {
+		if (comboIdEdmoRespDonnees.getText().trim().equals("")) {
 			labelIdEdmoRespDonnees.setForeground(Display.getCurrent()
 					.getSystemColor(SWT.COLOR_RED));
 		}
-		if (comboIdEdmoDistDonnees.getText().equals("")) {
+		if (comboIdEdmoDistDonnees.getText().trim().equals("")) {
 			labelIdEdmoDistDonnees.setForeground(Display.getCurrent()
 					.getSystemColor(SWT.COLOR_RED));
 		}
-		if (textUrlCdi.getText().equals("")) {
+		if (textUrlCdi.getText().trim().equals("")) {
 			labelUrlCdi.setForeground(Display.getCurrent().getSystemColor(
 					SWT.COLOR_RED));
 		}
-		if (textFichierMapping.getText().equals("")) {
+		if (textFichierMapping.getText().trim().equals("")) {
 			labelFichierMapping.setForeground(Display.getCurrent()
 					.getSystemColor(SWT.COLOR_RED));
+		}
+		if (textArboMapping.getText().trim().equals("")) {
+			labelArboMapping.setForeground(Display.getCurrent().getSystemColor(
+					SWT.COLOR_RED));
 		}
 
 		// FAE 58 CDL 09/04/08
@@ -688,7 +692,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		editor.grabHorizontal = true;
 
 		final Table table = tabFlagTable;
-		
+
 		tabFlagTable.addMouseListener(new MouseAdapter() {
 			public void mouseDown(MouseEvent event) {
 				// On affiche les flags correspondants
@@ -756,17 +760,18 @@ public class OptionsAction extends Action implements ISelectionListener,
 			public void handleEvent(Event e) {
 				setDefaultCode(tabFlagTable.getSelection()[0].getText());
 				// Mise en gras du flagtable par défaut
-				
+
 				Font normal = new Font(Application.display, "", 8, SWT.NORMAL);
 				Font bold = new Font(Application.display, "", 8, SWT.BOLD);
-				
+
 				for (int i = 0; i < tabFlagTable.getItemCount(); i++) {
-					if (tabFlagTable.getItem(i).getText(0).equals(getDefaultCode())) {
+					if (tabFlagTable.getItem(i).getText(0).equals(
+							getDefaultCode())) {
 						tabFlagTable.getItem(i).setFont(bold);
 					} else {
 						tabFlagTable.getItem(i).setFont(normal);
 					}
-				}				
+				}
 			}
 		});
 
@@ -793,7 +798,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		Utils.forceMenu(tabFlagTable, menu);
 	}
-	
+
 	public void createTableFlag() {
 		tabFlag = new Table(grpFlag, SWT.FULL_SELECTION | SWT.BORDER);
 		tabFlag.setHeaderVisible(true);
@@ -813,7 +818,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		itemAdd.setText(Messages.getString("OptionsAction.38")); //$NON-NLS-1$
 		MenuItem itemRemove = new MenuItem(menu, SWT.NONE);
 		itemRemove.setText(Messages.getString("OptionsAction.39")); //$NON-NLS-1$
-				
+
 		tabFlag.setMenu(menu);
 
 		final Table tab = tabFlag;
@@ -864,7 +869,6 @@ public class OptionsAction extends Action implements ISelectionListener,
 					combo.setVisibleItemCount(flags.length);
 				}
 
-				
 				final Flag flag = _flagTable.getFlag(item.getText());
 
 				switch (column) {
@@ -930,7 +934,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 				tab.remove(tab.getSelectionIndex());
 			}
 		});
-		
+
 		Utils.forceMenu(tabFlag, menu);
 	}
 
@@ -994,8 +998,9 @@ public class OptionsAction extends Action implements ISelectionListener,
 	private void fillFlagTable() {
 		int i;
 		ArrayList<FlagTable> flagTables = new ArrayList<FlagTable>();
-		flagTables = FlagTable.getOrderedFlagTables(Utils.configuration.getFlagTables());
-		
+		flagTables = FlagTable.getOrderedFlagTables(Utils.configuration
+				.getFlagTables());
+
 		for (i = 0; i < flagTables.size(); i++) {
 			TableItem item = new TableItem(tabFlagTable, SWT.NONE);
 			item.setText(0, flagTables.get(i).getCode());

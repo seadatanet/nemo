@@ -65,7 +65,9 @@ public class ViewFile extends ViewPart {
 
 	public static Button radProfilVertical, radSerieTempo, radTrajectoire;
 
-	public static Button radMedatlas, radODV, checkCDI;
+	public static Button radMedatlas, /*radODV,*/ checkCDI;
+	
+	public static Button radODV;
 
 	public static Button radMonoFichier, radMonoStation = null;
 

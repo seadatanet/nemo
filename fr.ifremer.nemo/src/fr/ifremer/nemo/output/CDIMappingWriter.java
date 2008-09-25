@@ -3,7 +3,7 @@ package fr.ifremer.nemo.output;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.TreeMap;
+import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
 import fr.ifremer.nemo.ui.EditConversion;
@@ -12,17 +12,17 @@ import fr.ifremer.nemo.ui.Utils;
 public class CDIMappingWriter {
 	private static CDIMappingWriter _instance;
 	
-	private TreeMap<String, String> _mapping;
+	private LinkedHashMap<String, String> _mapping;
 	
 	public CDIMappingWriter() {
-		_mapping = new TreeMap<String, String>();
+		_mapping = new LinkedHashMap<String, String>();
 	}
 	
 	public void reset() {
 		if (_mapping != null) 
 			_mapping.clear();
 		
-		_mapping = new TreeMap<String, String>();
+		_mapping = new LinkedHashMap<String, String>();
 	}
 	
 	public static CDIMappingWriter getInstance() {

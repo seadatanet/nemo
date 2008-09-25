@@ -1983,6 +1983,10 @@ public class DataModel {
 			}
 
 		}
+		// Si conversion vide => "*1"
+		if (EditStation.textFreqEchantConv.getText().trim().equals("")) {
+			EditStation.textFreqEchantConv.setText("*1");
+		}
 
 		// HEURE
 		propertyModel = stationModel_modele.propertiesAt("time");

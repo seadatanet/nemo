@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
 import org.eclipse.jface.dialogs.InputDialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -101,25 +102,28 @@ public class EditConversion extends Thread {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						// System.out.println("conversion !");
-
-						setDataSetRef("");
-						Utils.messageErreur("");
-
-						// RAZ du numéro de station incrémenté
-						DataModel.stationModel.resetRef();
-						DataModel.stationModel.setLastRef(null);
-
-						if (ViewFile.radMedatlas.getSelection()) {
-							NemoLists.writeSdnParameters("*");
-						} else {
-							NemoLists.writeSdnParameters("//");
-						}
-
-						// RAZ de la liste des stations triées
-						getSortedStations().clear();
-
 						try {
+							// Test si la config est bien remplie
+							if (!EditConversion.checkConfig()) {
+								throw new Exception("CDI cancelled");
+							}
+							
+							setDataSetRef("");
+							Utils.messageErreur("");
+
+							// RAZ du numéro de station incrémenté
+							DataModel.stationModel.resetRef();
+							DataModel.stationModel.setLastRef(null);
+
+							if (ViewFile.radMedatlas.getSelection()) {
+								NemoLists.writeSdnParameters("*");
+							} else {
+								NemoLists.writeSdnParameters("//");
+							}
+
+							// RAZ de la liste des stations triées
+							getSortedStations().clear();
+							
 							if (EditDesc.okApresReset
 									&& EditSurvey.okApresReset
 									&& EditStation.okApresReset
@@ -134,11 +138,6 @@ public class EditConversion extends Thread {
 								// test pour savoir si on est en campagne ou pas
 								if (ViewFile.isCollection()) {
 									if (ViewFile.checkCDI.getSelection()) {
-										if (!CDIResumeWriter.getInstance()
-												.checkConfig()) {
-											throw new Exception("CDI cancelled");
-										}
-
 										CDIResumeWriter.getInstance().reset();
 										CDIResumeWriter.getInstance()
 												.choixFichierSortie();
@@ -562,6 +561,67 @@ public class EditConversion extends Thread {
 		}
 
 		return Utils.validFileName(temp);
+	}
+	
+	public static boolean checkConfig() {
+		boolean blnOK = true;
+		String message = Messages.getString("CDIResumeWriter.configMessage");
+		
+		if (Utils.configuration.getIdEdmoRespCdi().trim().equals("")) {
+			message += "\r\n - " + Messages.getString("OptionsAction.21");
+			blnOK = false;
+		}
+		
+		if (Utils.configuration.getCodeEdmoDonnees().trim().equals("")) {
+			message += "\r\n - " + Messages.getString("OptionsAction.24");
+			blnOK = false;
+		}
+
+		if (Utils.configuration.getIdEdmoRespDonnees().trim().equals("")) {
+			message += "\r\n - " + Messages.getString("OptionsAction.25");
+			blnOK = false;
+		}
+		
+		if (Utils.configuration.getIdEdmoDistDonnees().trim().equals("")) {
+			message += "\r\n - " + Messages.getString("OptionsAction.26");
+			blnOK = false;
+		}
+		
+		if (Utils.configuration.getCdiURL().trim().equals("")) {
+			message += "\r\n - " + Messages.getString("OptionsAction.22");
+			blnOK = false;
+		}
+		
+		if (Utils.configuration.getCdiMethod().trim().equals("")) {
+			message += "\r\n - " + Messages.getString("OptionsAction.23");
+			blnOK = false;
+		}
+		
+		if (Utils.configuration.getFichierMapping().trim().equals("")) {
+			message += "\r\n - " + Messages.getString("OptionsAction.31");
+			blnOK = false;
+		}
+		
+		if (Utils.configuration.getArboMapping().trim().equals("")) {
+			message += "\r\n - " + Messages.getString("OptionsAction.32");
+			blnOK = false;
+		}
+		
+		if (!blnOK) {
+			try {
+				String[] buttons = new String[1];
+				buttons[0] = "OK";
+				MessageDialog dialog = new MessageDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), Messages.getString("CDIResumeWriter.configTitle"), null, message, MessageDialog.NONE, buttons, 0);
+				dialog.open();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+						
+			ApplicationActionBarAdvisor.optionsAction.run();
+			
+			return false;
+		}
+		return true;
 	}
 
 	public static int getTotalLigne() {

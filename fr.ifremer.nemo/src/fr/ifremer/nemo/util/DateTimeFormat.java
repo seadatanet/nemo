@@ -321,6 +321,7 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 						'0'), symbols);
 				String tmp = String.valueOf(cal.get(Calendar.SECOND)) + "."
 						+ String.valueOf(cal.get(Calendar.MILLISECOND));
+				
 				float milliseconds = Float.parseFloat(tmp);
 				toAppendTo.append(format.format(milliseconds));
 				break;

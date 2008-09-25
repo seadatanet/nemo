@@ -889,6 +889,9 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	}
 
 	public String getFichierMapping() {
+		if (_fichierMapping.trim().equals("")) {
+			return "SDN_CDI_mapping_table";
+		}
 		return _fichierMapping;
 	}
 	

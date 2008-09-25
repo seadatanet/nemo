@@ -10,7 +10,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
@@ -21,7 +20,6 @@ import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.Parameter;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
-import fr.ifremer.nemo.ui.ApplicationActionBarAdvisor;
 import fr.ifremer.nemo.ui.EditConversion;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.ViewFile;
@@ -277,56 +275,5 @@ public class CDIResumeWriter {
 
 		surveys.add(survey);
 
-	}
-	
-	public boolean checkConfig() {
-		boolean blnOK = true;
-		String message = Messages.getString("CDIResumeWriter.configMessage");
-		
-		if (Utils.configuration.getIdEdmoRespCdi().equals("")) {
-			message += "\r\n - " + Messages.getString("OptionsAction.21");
-			blnOK = false;
-		}
-		
-		if (Utils.configuration.getCodeEdmoDonnees().equals("")) {
-			message += "\r\n - " + Messages.getString("OptionsAction.24");
-			blnOK = false;
-		}
-
-		if (Utils.configuration.getIdEdmoRespDonnees().equals("")) {
-			message += "\r\n - " + Messages.getString("OptionsAction.25");
-			blnOK = false;
-		}
-		
-		if (Utils.configuration.getIdEdmoDistDonnees().equals("")) {
-			message += "\r\n - " + Messages.getString("OptionsAction.26");
-			blnOK = false;
-		}
-		
-		if (Utils.configuration.getCdiURL().equals("")) {
-			message += "\r\n - " + Messages.getString("OptionsAction.22");
-			blnOK = false;
-		}
-		
-		if (Utils.configuration.getCdiMethod().equals("")) {
-			message += "\r\n - " + Messages.getString("OptionsAction.23");
-			blnOK = false;
-		}
-		
-		if (!blnOK) {
-			try {
-				String[] buttons = new String[1];
-				buttons[0] = "OK";
-				MessageDialog dialog = new MessageDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), Messages.getString("CDIResumeWriter.configTitle"), null, message, MessageDialog.NONE, buttons, 0);
-				dialog.open();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-						
-			ApplicationActionBarAdvisor.optionsAction.run();
-			
-			return false;
-		}
-		return true;
 	}
 }
