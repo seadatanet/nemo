@@ -997,7 +997,6 @@ public class EditStation {
 					EditData.okApresReset = false;
 					ViewFile.tabItem3.setText(Messages.getString("EditData.1"));
 					Utils.messageErreur("");
-
 				}
 			});
 

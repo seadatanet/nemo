@@ -461,13 +461,15 @@ public class DrawingStation {
 
 		Composite compo1 = new Composite(sectionClient, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo1);
-		GridDataFactory.fillDefaults().grab(false, false).applyTo(compo1);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(compo1);
 
 		// bouton radio "saisie manuelle"
 		// c'est lui qui est passé en ppar
 		radio.setParent(compo1);
 		radio.setText(Messages.getString("Drawing.6"));
 
+		//GridLayoutFactory.swtDefaults().
+		GridDataFactory.swtDefaults().grab(true, false).minSize(55, 10).applyTo(numero);
 		numero.setParent(compo1);
 
 		// bouton radio "position"

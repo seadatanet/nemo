@@ -263,8 +263,15 @@ public class Etape {
 				ok = ok && resultat1;
 			}
 
+		} else {
+			try {
+				int numero = Integer.parseInt(EditStation.textRefStationNumero.getText());
+			} catch (Exception e) {
+				ok = false;
+				Utils.messageErreurAppend(Messages.getString("Etape.127"));
+			}
 		}
-
+		
 		// FAE022
 		if (!ViewFile.isCollection()) {
 			// TYPE DE DONNEES
@@ -1299,7 +1306,7 @@ public class Etape {
 			ViewFile.etape = 2;
 		}
 
-		// okStation();
+//		okStation();
 	}
 
 	public static void validationData() {

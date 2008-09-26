@@ -679,12 +679,12 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		// Menu contextuel
 		Menu menu = new Menu(tabFlagTable.getShell(), SWT.POP_UP);
-		MenuItem itemDefault = new MenuItem(menu, SWT.NONE);
-		itemDefault.setText(Messages.getString("OptionsAction.40"));
 		MenuItem itemAdd = new MenuItem(menu, SWT.NONE);
 		itemAdd.setText(Messages.getString("OptionsAction.38")); //$NON-NLS-1$
 		MenuItem itemRemove = new MenuItem(menu, SWT.NONE);
 		itemRemove.setText(Messages.getString("OptionsAction.39")); //$NON-NLS-1$
+		MenuItem itemDefault = new MenuItem(menu, SWT.NONE);
+		itemDefault.setText(Messages.getString("OptionsAction.40"));
 		tabFlagTable.setMenu(menu);
 
 		final TableEditor editor = new TableEditor(tabFlagTable);

@@ -7,14 +7,14 @@
   <modelsDirectory>D:\Projets\NEMO\Donn&#233;es</modelsDirectory>
   <cruisesDirectory>D:\Projets\NEMO\Donn&#233;es</cruisesDirectory>
   <outputDirectory>D:/Projets/CONVMED/Donnees/Output</outputDirectory>
-  <idEdmoRespCdi>666</idEdmoRespCdi>
+  <idEdmoRespCdi>1</idEdmoRespCdi>
   <codeEdmoDonnees>2</codeEdmoDonnees>
   <idEdmoRespDonnees>3</idEdmoRespDonnees>
   <idEdmoDistDonnees>4</idEdmoDistDonnees>
-  <cdiURL>http://www.ifremer.fr</cdiURL>
+  <cdiURL>test</cdiURL>
   <cdiMethod>CDIMTH01</cdiMethod>
   <fichierMapping>SDN_CDI_mapping_table</fichierMapping>
-  <arboMapping>C:\Documents and Settings\htaniou.ATL\Bureau\Nouveau dossier</arboMapping>
+  <arboMapping>D:\Projets\NEMO\Donn&#233;es</arboMapping>
   <vocabURL>http://vocab.ndg.nerc.ac.uk/1.1/VocabServerAPI_dl.wsdl</vocabURL>
   <VocabListURL name="P091" value="http://vocab.ndg.nerc.ac.uk/list/P091/current"/>
   <VocabListURL name="L300" value="http://vocab.ndg.nerc.ac.uk/list/L300/current"/>
