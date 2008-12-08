@@ -1054,7 +1054,10 @@ public class EditSurvey {
 		ViewFile.tabItem3.setText(Messages.getString("EditData.1"));
 
 		Utils.messageErreur("");
-
+		
+		// FAE0001187 : RaZ Navire et Pays
+		comboCountries.deselectAll();
+		comboNavire.deselectAll();
 	}
 
 	private static void disposeElements() {

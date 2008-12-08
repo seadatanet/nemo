@@ -1252,6 +1252,14 @@ public class EditStation {
 		for (int i = 0; i < nbreManu; i++) {
 			listeBoutonsManuel.get(i).setSelection(true);
 		}
+		
+		// FAE0001187 : RaZ de tous les formats
+		comboHeure.deselectAll();
+		comboDate.deselectAll();
+		comboLatitude.deselectAll();
+		comboLongitude.deselectAll();
+		comboLatitudeFin.deselectAll();
+		comboLongitudeFin.deselectAll();
 
 	}
 
