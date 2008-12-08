@@ -1132,6 +1132,7 @@ public class Etape {
 			} else {
 				Utils.messageErreurAppend(Messages.getString("Etape.77")); //$NON-NLS-1$
 				if (EditStation.textProfCapteur.getText().matches("")) { //$NON-NLS-1$
+					ok = ok && false; // FAE 0001232
 					Utils.messageErreurAppend(Messages.getString("Etape.79")); //$NON-NLS-1$
 				} else {
 					if (Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$",
