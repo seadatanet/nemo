@@ -230,15 +230,6 @@ public class ViewFile extends ViewPart {
 		tabItem9 = new TabItem(tabFolder, SWT.NONE);
 		tabItem9.setText(Messages.getString("ViewFile.conversion")); //$NON-NLS-1$
 		tabItem9.setControl(compositeConversion);
-
-		// tabFolder
-		// .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-		// public void widgetSelected(
-		// org.eclipse.swt.events.SelectionEvent e) {
-		// System.out.println(tabFolder.getSelectionIndex());
-		// }
-		//
-		//				});
 	}
 
 	/**
@@ -369,14 +360,9 @@ public class ViewFile extends ViewPart {
 					}
 				});
 
-		createGroupeSeparateur();
-
-		createGroupeFichier();
-
+		// FAE 0001140 : déplacement du bouton Parcourir
 		buttonParcourir = new Button(composite11, SWT.NONE);
 		buttonParcourir.setText(Messages.getString("ViewFile.parcourir")); //$NON-NLS-1$
-
-		createGroupTempo();
 
 		buttonParcourir
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -440,6 +426,7 @@ public class ViewFile extends ViewPart {
 
 								radMedatlas.setEnabled(true);
 								radODV.setEnabled(true);
+								radMonoFichier.setEnabled(true); // FAE 0001134
 
 								grpCDI.setVisible(false);
 
@@ -494,6 +481,7 @@ public class ViewFile extends ViewPart {
 
 								radMedatlas.setEnabled(true);
 								radODV.setEnabled(true);
+								radMonoFichier.setEnabled(true); // FAE 0001134
 
 								grpCDI.setVisible(false);
 
@@ -547,6 +535,7 @@ public class ViewFile extends ViewPart {
 
 								radODV.setEnabled(true);
 								radODV.setSelection(true);
+								radMonoFichier.setEnabled(true); // FAE 0001134
 								afficheGrpODV();
 
 								grpCDI.setVisible(true);
@@ -600,6 +589,7 @@ public class ViewFile extends ViewPart {
 
 								radODV.setEnabled(true);
 								radODV.setSelection(true);
+								radMonoFichier.setEnabled(false); // FAE 0001134
 								afficheGrpODV();
 
 								grpCDI.setVisible(true);
@@ -618,6 +608,12 @@ public class ViewFile extends ViewPart {
 					}
 
 				});
+
+		createGroupeSeparateur();
+
+		createGroupeFichier();
+
+		createGroupTempo();
 	}
 
 	/**
