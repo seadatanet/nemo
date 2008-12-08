@@ -10,7 +10,7 @@
 //
 $nemoLists.getSdnParameters()
 //
-Cruise$configuration.getSep()Station$configuration.getSep()Type$configuration.getSep()#if ($stationModel.isTimeSeries())Julian Date#else yyyy-mm-ddThh:mm:ss.sss#end$configuration.getSep()Longitude [degrees_east]$configuration.getSep()Latitude [degrees_north]$configuration.getSep()LOCAL_CDI_ID$configuration.getSep()EDMO_CODE$configuration.getSep()Bot. Depth [m]$stationModel.headerDepth()##
+Cruise$configuration.getSep()Station$configuration.getSep()Type$configuration.getSep()yyyy-mm-ddThh:mm:ss.sss$configuration.getSep()Longitude [degrees_east]$configuration.getSep()Latitude [degrees_north]$configuration.getSep()LOCAL_CDI_ID$configuration.getSep()EDMO_CODE$configuration.getSep()Bot. Depth [m]$stationModel.headerDepth()#if ($stationModel.isTimeSeries())$configuration.getSep()Chronological Julian Date [days]#end##
 #foreach( $param in $survey.getStations().parameters )
 $param.code#end
 ##
@@ -49,10 +49,10 @@ $configuration.getSep()$param.code [$param.unit]$configuration.getSep()$configur
 ## traitement particulier de la date francaise / anglaise
 ##
 #if ($i == 0)$formatter.limitString($survey.name, 20)#end$configuration.getSep()#if ($i == 0)$formatter.limitString($station.reference, 20)#end$configuration.getSep()#if ($i == 0)$typeBC#end$configuration.getSep()##
-#if ($stationModel.isTimeSeries())$stationModel.julianDate($station, $i)##
-#else#if ($i == 0)$formatter.formatDateTime("YYYY-MM-DD", $station.fullDate)T$formatter.formatDateTime("hh24:mm:ss.sss", $station.correctedTime, "9999")#end#end##
+#if ($i == 0)$formatter.formatDateTime("YYYY-MM-DD", $station.fullDate)T$formatter.formatDateTime("hh24:mm:ss.sss", $station.correctedTime, "9999")#end##
 $configuration.getSep()#if ($i == 0)$formatter.formatLongitude("+DDD.dddddd", $station.longitude)#end$configuration.getSep()#if ($i == 0)$formatter.formatLatitude("+DD.dddddd ", $station.latitude)#end$configuration.getSep()#if ($i == 0)$editConversion.getLocalCdiId($station)#end$configuration.getSep()#if ($i == 0)$configuration.getIdEdmoRespCdi()#end$configuration.getSep()#if ($i == 0)#if ($station.bottomDepth.toString() == "NaN")0#else$station.bottomDepth#end#end##
-$stationModel.calculDepth($station, $i)#foreach( $param in $station.parameters )$configuration.getSep()#if($param.valuesAt($i).getValue().toString() == $param.default)-1.e10#else$formatter.formatDouble( $param.format, $param.valuesAt($i).getValue())#end$configuration.getSep()$station.getFlag($param,$i)#end
+$stationModel.calculDepth($station, $i)#if ($stationModel.isTimeSeries())$configuration.getSep()$stationModel.julianDate($station, $i)#end##
+#foreach( $param in $station.parameters )$configuration.getSep()#if($param.valuesAt($i).getValue().toString() == $param.default)-1.e10#else$formatter.formatDouble( $param.format, $param.valuesAt($i).getValue())#end$configuration.getSep()$station.getFlag($param,$i)#end
 
 #set( $count = $count + 1 )
 #set( $result = $notifier.progress( $count ))
