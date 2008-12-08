@@ -2121,13 +2121,14 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	}
 
 	public boolean testDepth() {
+		//TODO Stocker le resultat dans une variable a reinitialiser a chaque conversion
 		if (SWTProcess.odv) {
 			if (_parameterModels.get(0).getModel().getCode().equals("DEPH")) {
 				return false;
 			} else {
-				for (int i = 1; i < _parameterModels.size(); i++) {
+				for (int i = 0; i < _parameterModels.size(); i++) {
 					if (_parameterModels.get(i).getModel().getCode().equals(
-							"DEPH")) {
+							"PRES")) {
 						return true;
 					}
 				}

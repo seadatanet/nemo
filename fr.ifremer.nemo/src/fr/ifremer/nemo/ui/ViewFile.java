@@ -65,8 +65,8 @@ public class ViewFile extends ViewPart {
 
 	public static Button radProfilVertical, radSerieTempo, radTrajectoire;
 
-	public static Button radMedatlas, /*radODV,*/ checkCDI;
-	
+	public static Button radMedatlas, /* radODV, */checkCDI;
+
 	public static Button radODV;
 
 	public static Button radMonoFichier, radMonoStation = null;
@@ -230,6 +230,15 @@ public class ViewFile extends ViewPart {
 		tabItem9 = new TabItem(tabFolder, SWT.NONE);
 		tabItem9.setText(Messages.getString("ViewFile.conversion")); //$NON-NLS-1$
 		tabItem9.setControl(compositeConversion);
+
+		// tabFolder
+		// .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+		// public void widgetSelected(
+		// org.eclipse.swt.events.SelectionEvent e) {
+		// System.out.println(tabFolder.getSelectionIndex());
+		// }
+		//
+		//				});
 	}
 
 	/**

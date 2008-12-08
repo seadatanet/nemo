@@ -347,7 +347,6 @@ public class DataModel {
 		// numéro de station
 		String ligne, debut, fin;
 		HeaderFragment frag;
-		FlagFragment flag;
 
 		station = stationModel.getModel();
 

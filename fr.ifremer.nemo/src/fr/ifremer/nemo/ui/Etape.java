@@ -1213,6 +1213,7 @@ public class Etape {
 
 			// FREQUENCE ECHANTILLONNAGE --> voir heure !
 			// que si date n'est pas dans fichier en entrée
+			// FIXME ne tester que si section fréquence pas grisée !
 			if (EditStation.buttonFreqEchantPos.getSelection()) {
 				// position dans le fichier
 				resultat1 = Regexp.checkLigneDebutfin(
