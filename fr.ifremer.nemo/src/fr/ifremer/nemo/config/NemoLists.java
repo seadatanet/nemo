@@ -1448,8 +1448,9 @@ public class NemoLists implements Cloneable {
 		
 		setSdnParameters(debut + "SDN_parameter_mapping");
 
+		// FAE 0001131 : remplacer "\n" par "\r\n" pour retour chariot sous bloc-note
 		for (ParameterModel param : DataModel.stationModel.getParameterModels()) {
-			_sdnParameters += "\n" + debut + parameterMap(param.getModel());
+			_sdnParameters += "\r\n" + debut + parameterMap(param.getModel());
 		}
 	}
 
