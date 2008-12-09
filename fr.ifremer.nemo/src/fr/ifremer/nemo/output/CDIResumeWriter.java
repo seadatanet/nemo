@@ -201,7 +201,7 @@ public class CDIResumeWriter {
 						writer.write(sep + formatSortie);
 						
 						// data size
-						writer.write(sep + String.format("%.3f",survey.getDataSize()));
+						writer.write(sep + Formatter.getSingleton().formatFloat("%.3f",survey.getDataSize()));
 
 						// DIST website
 						writer.write(sep + cdiUrl);
