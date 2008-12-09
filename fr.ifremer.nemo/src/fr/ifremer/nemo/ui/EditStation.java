@@ -494,7 +494,15 @@ public class EditStation {
 					.sectionManuelLigneDebutFinInjectFreqEchant(
 							Messages.getString("EditStation.35"), Messages.getString("EditStation.36"), sectionFreqEchant, textFreqEchantLigne, textFreqEchantDebut, textFreqEchantFin, textFreqEchant, buttonFreqEchantSaisie, buttonFreqEchantPos, textFreqEchantConv, textFreqEchantTest, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 			textFreqEchantConv.setText("*1");
-			// FIXME mettre la valeur saisie à zéro par défaut
+			// la valeur saisie est à zéro par défaut
+			textFreqEchant.setText("0");
+			
+			if (radLigneDonnees.getSelection()){				
+				sectionFreqEchant.setEnabled(false);
+				sectionFreqEchant.setExpanded(false);
+				sectionFreqEchant.setTitleBarForeground(Display.getCurrent()
+						.getSystemColor(SWT.COLOR_GRAY));
+			}
 		}
 
 		DrawingStation.sectionFlagQC(Messages.getString("EditStation.17"),

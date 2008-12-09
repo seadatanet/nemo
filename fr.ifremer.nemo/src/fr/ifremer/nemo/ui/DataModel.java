@@ -1117,23 +1117,48 @@ public class DataModel {
 
 			} else {
 				// position dans fichier
-				frag = propertyModel.getFragment();
-				propertyModel.setUserProvided(false);
+				// FAE 0001137 : non bloquant si non saisi
+				if (EditStation.textLatFinLigne.getText().matches("")
+						&& EditStation.textLatFinDebut.getText().matches("")
+						&& EditStation.textLatFinFin.getText().matches("")){
+					// valeur non rentrée donc on recopie latitude dans latitude de fin
+					PropertyModel propLat = stationModel
+							.propertiesAt("latitude");
 
-				ligne = ""
-						+ (Integer.valueOf(EditStation.textLatFinLigne
-								.getText()) - Integer
-								.valueOf(EditDesc.lignesEnteteFichier.getText()));
-				debut = EditStation.textLatFinDebut.getText();
-				fin = EditStation.textLatFinFin.getText();
-
-				frag.setFirstLine(ligne);
-				frag.setLastLine(ligne);
-				frag.setFirstCharOffset(debut);
-				frag.setLastCharOffset(fin);
-				frag.setVariable(EditStation.buttonVarLatFin.getSelection());
-				latitudeFormatFin.setVariableLength(EditStation.buttonVarLatFin
-						.getSelection());
+					if (propLat.isUserProvided()) {
+						// on récupère le double de la latitude
+						propertyModel.setUserProvided(true);
+						stationModel.getTimeSeriesInformation().setEndLatitude(
+								station.getLatitude());
+					} else {
+						// on remplit le frag
+						HeaderFragment fragLat = propLat.getFragment();
+						frag = propertyModel.getFragment();
+						propertyModel.setUserProvided(false);
+						frag.setFirstCharOffset(fragLat.getFirstCharOffset());
+						frag.setLastCharOffset(fragLat.getLastCharOffset());
+						frag.setFirstLine(fragLat.getFirstLine());
+						frag.setLastLine(fragLat.getLastLine());
+					}
+				}else{
+					frag = propertyModel.getFragment();
+					propertyModel.setUserProvided(false);
+	
+					ligne = ""
+							+ (Integer.valueOf(EditStation.textLatFinLigne
+									.getText()) - Integer
+									.valueOf(EditDesc.lignesEnteteFichier.getText()));
+					debut = EditStation.textLatFinDebut.getText();
+					fin = EditStation.textLatFinFin.getText();
+	
+					frag.setFirstLine(ligne);
+					frag.setLastLine(ligne);
+					frag.setFirstCharOffset(debut);
+					frag.setLastCharOffset(fin);
+					frag.setVariable(EditStation.buttonVarLatFin.getSelection());
+					latitudeFormatFin.setVariableLength(EditStation.buttonVarLatFin
+							.getSelection());
+				}
 			}
 
 			// LONGITUDE DE FIN
@@ -1202,24 +1227,51 @@ public class DataModel {
 
 			} else {
 				// position dans fichier
-				frag = propertyModel.getFragment();
-				propertyModel.setUserProvided(false);
+				// FAE 0001137 : non bloquant si non saisi
+				if (EditStation.textLongFinLigne.getText().matches("")
+						&& EditStation.textLongFinDebut.getText().matches("")
+						&& EditStation.textLongFinFin.getText().matches("")){
+					// valeur non rentrée donc on recopie la longitude comme longitude de fin
+					PropertyModel propLong = stationModel
+					.propertiesAt("longitude");
 
-				ligne = ""
-						+ (Integer.valueOf(EditStation.textLongFinLigne
-								.getText()) - Integer
-								.valueOf(EditDesc.lignesEnteteFichier.getText()));
-				debut = EditStation.textLongFinDebut.getText();
-				fin = EditStation.textLongFinFin.getText();
-
-				frag.setFirstLine(ligne);
-				frag.setLastLine(ligne);
-				frag.setFirstCharOffset(debut);
-				frag.setLastCharOffset(fin);
-				frag.setVariable(EditStation.buttonVarLongFin.getSelection());
-				longitudeFormatFin
-						.setVariableLength(EditStation.buttonVarLongFin
-								.getSelection());
+					if (propLong.isUserProvided()) {
+						// on recopie le double de la longitude
+						propertyModel.setUserProvided(true);
+						stationModel.getTimeSeriesInformation()
+								.setEndLongitude(station.getLongitude());
+					} else {
+						// on recopie le frag correspondant
+						propertyModel.setUserProvided(false);
+		
+						HeaderFragment fragLong = propLong.getFragment();
+						frag = propertyModel.getFragment();
+		
+						frag.setFirstCharOffset(fragLong.getFirstCharOffset());
+						frag.setLastCharOffset(fragLong.getLastCharOffset());
+						frag.setFirstLine(fragLong.getFirstLine());
+						frag.setLastLine(fragLong.getLastLine());
+					}					
+				}else{
+					frag = propertyModel.getFragment();
+					propertyModel.setUserProvided(false);
+	
+					ligne = ""
+							+ (Integer.valueOf(EditStation.textLongFinLigne
+									.getText()) - Integer
+									.valueOf(EditDesc.lignesEnteteFichier.getText()));
+					debut = EditStation.textLongFinDebut.getText();
+					fin = EditStation.textLongFinFin.getText();
+	
+					frag.setFirstLine(ligne);
+					frag.setLastLine(ligne);
+					frag.setFirstCharOffset(debut);
+					frag.setLastCharOffset(fin);
+					frag.setVariable(EditStation.buttonVarLongFin.getSelection());
+					longitudeFormatFin
+							.setVariableLength(EditStation.buttonVarLongFin
+									.getSelection());
+				}
 			}
 
 			// DATE / HEURE DE FIN

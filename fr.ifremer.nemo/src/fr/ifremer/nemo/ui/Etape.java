@@ -958,23 +958,32 @@ public class Etape {
 				}
 			} else {
 				// position dans fichier
-				resultat1 = Regexp.checkLigneDebutfin(
-						EditStation.textLatFinLigne.getText(),
-						EditStation.textLatFinDebut.getText(),
-						EditStation.textLatFinFin.getText(), Messages
-								.getString("Etape.65"), true); //$NON-NLS-1$
-				if (resultat1) {
-					depasse = Regexp.depassementHeaderStation(Integer
-							.parseInt(EditStation.textLatFinLigne.getText()),
-							Messages.getString("Etape.65"), metaInData2);
-
-				}
-
-				if (depasse) {
-					ok = false;
-				} else {
-
-					ok = ok && resultat1;
+				// FAE 0001137 : non bloquant si non saisi
+				if (EditStation.textLatFinLigne.getText().matches("")
+						&& EditStation.textLatFinDebut.getText().matches("")
+						&& EditStation.textLatFinFin.getText().matches("")){
+					// valeur non rentrée
+					ok = ok && true;
+					
+				}else{
+					resultat1 = Regexp.checkLigneDebutfin(
+							EditStation.textLatFinLigne.getText(),
+							EditStation.textLatFinDebut.getText(),
+							EditStation.textLatFinFin.getText(), Messages
+									.getString("Etape.65"), true); //$NON-NLS-1$
+					if (resultat1) {
+						depasse = Regexp.depassementHeaderStation(Integer
+								.parseInt(EditStation.textLatFinLigne.getText()),
+								Messages.getString("Etape.65"), metaInData2);
+	
+					}
+	
+					if (depasse) {
+						ok = false;
+					} else {
+	
+						ok = ok && resultat1;
+					}
 				}
 			}
 
@@ -1004,23 +1013,32 @@ public class Etape {
 				}
 			} else {
 				// position dans fichier
-				resultat1 = Regexp.checkLigneDebutfin(
-						EditStation.textLongFinLigne.getText(),
-						EditStation.textLongFinDebut.getText(),
-						EditStation.textLongFinFin.getText(), Messages
-								.getString("Etape.68"), true); //$NON-NLS-1$
-				if (resultat1) {
-					depasse = Regexp.depassementHeaderStation(Integer
-							.parseInt(EditStation.textLongFinLigne.getText()),
-							Messages.getString("Etape.68"), metaInData2);
-
-				}
-
-				if (depasse) {
-					ok = false;
-				} else {
-
-					ok = ok && resultat1;
+				// FAE 0001137 : non bloquant si non saisi
+				if (EditStation.textLongFinLigne.getText().matches("")
+						&& EditStation.textLongFinDebut.getText().matches("")
+						&& EditStation.textLongFinFin.getText().matches("")){
+					// valeur non rentrée
+					ok = ok && true;
+					
+				}else{
+					resultat1 = Regexp.checkLigneDebutfin(
+							EditStation.textLongFinLigne.getText(),
+							EditStation.textLongFinDebut.getText(),
+							EditStation.textLongFinFin.getText(), Messages
+									.getString("Etape.68"), true); //$NON-NLS-1$
+					if (resultat1) {
+						depasse = Regexp.depassementHeaderStation(Integer
+								.parseInt(EditStation.textLongFinLigne.getText()),
+								Messages.getString("Etape.68"), metaInData2);
+	
+					}
+	
+					if (depasse) {
+						ok = false;
+					} else {
+	
+						ok = ok && resultat1;
+					}
 				}
 			}
 
@@ -1168,7 +1186,7 @@ public class Etape {
 									.getText()) - 1,
 							Integer.parseInt(EditStation.textDeclinMagnetFin
 									.getText()));
-					if (Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", string
+					if (Pattern.matches("^[+-]{0,1}[0-9]*[0-9][.]?[0-9]*[0-9]*$", string
 							.trim())) {
 						ok = ok && true;
 
@@ -1214,61 +1232,63 @@ public class Etape {
 
 			// FREQUENCE ECHANTILLONNAGE --> voir heure !
 			// que si date n'est pas dans fichier en entrée
-			// FIXME ne tester que si section fréquence pas grisée !
-			if (EditStation.buttonFreqEchantPos.getSelection()) {
-				// position dans le fichier
-				resultat1 = Regexp.checkLigneDebutfin(
-						EditStation.textFreqEchantLigne.getText(),
-						EditStation.textFreqEchantDebut.getText(),
-						EditStation.textFreqEchantFin.getText(), Messages
-								.getString("Etape.104"), true); //$NON-NLS-1$
-				if (resultat1) {
-					depasse = Regexp.depassementHeaderStation(
-							Integer.parseInt(EditStation.textFreqEchantLigne
-									.getText()), Messages
-									.getString("Etape.104"), metaInData2);
-					// check de la valeur lue dans le fichier
-					ligne = Utils.lignesBrutes
-							.get(Integer
-									.parseInt(EditStation.textFreqEchantLigne
-											.getText()) - 1);
-					string = ligne.substring(
-							Integer.parseInt(EditStation.textFreqEchantDebut
-									.getText()) - 1, Integer
-									.parseInt(EditStation.textFreqEchantFin
-											.getText()));
-					if (Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", string
-							.trim())) {
-						ok = ok && true;
-						// Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
-					} else {
-						ok = ok && false;
-						Utils.messageErreurAppend(Messages
-								.getString("Etape.104")); //$NON-NLS-1$
+			// ne tester que si section fréquence pas grisée !
+			if (EditStation.sectionFreqEchant.getEnabled()){
+				if (EditStation.buttonFreqEchantPos.getSelection()) {
+					// position dans le fichier
+					resultat1 = Regexp.checkLigneDebutfin(
+							EditStation.textFreqEchantLigne.getText(),
+							EditStation.textFreqEchantDebut.getText(),
+							EditStation.textFreqEchantFin.getText(), Messages
+									.getString("Etape.104"), true); //$NON-NLS-1$
+					if (resultat1) {
+						depasse = Regexp.depassementHeaderStation(
+								Integer.parseInt(EditStation.textFreqEchantLigne
+										.getText()), Messages
+										.getString("Etape.104"), metaInData2);
+						// check de la valeur lue dans le fichier
+						ligne = Utils.lignesBrutes
+								.get(Integer
+										.parseInt(EditStation.textFreqEchantLigne
+												.getText()) - 1);
+						string = ligne.substring(
+								Integer.parseInt(EditStation.textFreqEchantDebut
+										.getText()) - 1, Integer
+										.parseInt(EditStation.textFreqEchantFin
+												.getText()));
+						if (Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", string
+								.trim())) {
+							ok = ok && true;
+							// Utils.messageErreurAppend("...ok"); //$NON-NLS-1$
+						} else {
+							ok = ok && false;
+							Utils.messageErreurAppend(Messages
+									.getString("Etape.104")); //$NON-NLS-1$
+						}
 					}
-				}
-
-				if (depasse) {
-					ok = false;
+	
+					if (depasse) {
+						ok = false;
+					} else {
+	
+						ok = ok && resultat1;
+					}
 				} else {
-
-					ok = ok && resultat1;
+					// saisie manuelle
+					if ( // FAE 066 / 064
+					// Pattern.matches("^[0-9]*[0-9][.]?[0-9][0-9]*$",
+					Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$",
+							EditStation.textFreqEchant.getText())) {
+						// ok
+						ok = ok && true;
+	
+					} else {
+						// erreur
+						ok = ok && false;
+						Utils.messageErreurAppend(Messages.getString("Etape.103")); //$NON-NLS-1$
+					}
+	
 				}
-			} else {
-				// saisie manuelle
-				if ( // FAE 066 / 064
-				// Pattern.matches("^[0-9]*[0-9][.]?[0-9][0-9]*$",
-				Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$",
-						EditStation.textFreqEchant.getText())) {
-					// ok
-					ok = ok && true;
-
-				} else {
-					// erreur
-					ok = ok && false;
-					Utils.messageErreurAppend(Messages.getString("Etape.103")); //$NON-NLS-1$
-				}
-
 			}
 
 		} // fin série tempo
