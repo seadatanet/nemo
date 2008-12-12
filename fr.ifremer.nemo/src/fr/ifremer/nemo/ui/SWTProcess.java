@@ -429,8 +429,8 @@ public class SWTProcess implements IRunnableWithProgress {
 				// 
 				e.printStackTrace();
 			} catch (ParseException e) {
-				//
 				e.printStackTrace();
+				throw e;
 			}
 
 			writerODV = new fr.ifremer.nemo.odv.ODVSurveyWriter();
