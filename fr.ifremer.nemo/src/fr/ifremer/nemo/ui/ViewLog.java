@@ -200,7 +200,7 @@ public class ViewLog extends ViewPart {
 			// aide anglaise
 			ViewLog.styledTextLogHelp
 					.setText("==STATION DESCRIPTION==\n"
-							+ "It's the same principle than for the previous steps, only here some values to inject ask values on 'line', 'start' and 'end'. In the case of a cruise file, always carry out the injections on the first station ! In any case, the selection will have to be limited to a single line (date, time, latitude, depth, etc.) with the exception of the 'comments' where the possibility of highlighting several lines is proposed.\n"
+							+ "It's the same principle than for the previous steps, only here some values to set ask values on 'line', 'start' and 'end'. In the case of a cruise file, always carry out the injections on the first station ! In any case, the selection will have to be limited to a single line (date, time, latitude, depth, etc.) with the exception of the 'comments' where the possibility of highlighting several lines is proposed.\n"
 							+ "For the time, date, latitude and longitude formats, you can enter your own formats.\n"
 							+ "\nIf station's number is located within the filename, use 0 as line number\n"
 							+ "\n==TIME / DATE FORMATS==\n"
