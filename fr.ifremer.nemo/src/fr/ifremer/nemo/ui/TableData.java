@@ -148,7 +148,6 @@ public class TableData {
 
 				// if ((DataModel.ouverture == false)
 				// && (!ViewFile.checkBoxTempo.getSelection())) {
-				// FIXME revérifier que PRES n'est ajouté que dans le cas d'un profil vertical
 				// FIXME vérifier tous les tests du même type : si pas (série tempo ou trajectoire)
 				if ((DataModel.ouverture == false)
 						&& !(ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire

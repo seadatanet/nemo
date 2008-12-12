@@ -20,7 +20,6 @@ public class ViewEdit extends ViewPart {
 
 	@Override
 	public void createPartControl(Composite parent) {
-		// TODO Raccord de méthode auto-généré
 		top = parent;
 
 		parent.setLayout(new FillLayout());

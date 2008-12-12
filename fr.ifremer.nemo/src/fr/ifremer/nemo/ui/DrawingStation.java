@@ -567,7 +567,7 @@ public class DrawingStation {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent f) {
 						// System.out.println("position dans fichier section "
-						// + nomSec); // TODO Auto-generated Event stub
+						// + nomSec); 
 						// widgetSelected()
 						// raz de la valeur manuelle
 
@@ -1684,9 +1684,7 @@ public class DrawingStation {
 
 							Long lgDecalTU = flDecalTU.longValue();
 
-							Long HourLong = (Long) format.parseObject(test
-									.getText())
-									+ lgDecalTU;
+							Long HourLong = (Long) format.parseObject(test.getText()) + lgDecalTU;
 
 							Formatter formatter;
 
