@@ -655,9 +655,9 @@ public class TimeSeriesInformation implements Cloneable, SAXConsumer {
 	 * @return float
 	 */
 	public float getDuration() {
-		long startDate = getStation().getFullDate();
-		float duration = getEndDate() + getEndTime()
-				- new Long(startDate).floatValue(); // duree en millisecondes
+
+		// FAE 0001103 : champ DURATION faux
+		float duration = getEndTime() - getStation().getFullDate(); // duree en millisecondes
 		return duration / (1000.0f * 60.0f * 60.0f * 24.0f);
 	}
 
