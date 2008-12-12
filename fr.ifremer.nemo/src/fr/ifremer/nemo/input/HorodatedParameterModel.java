@@ -12,6 +12,7 @@ import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.util.DateTimeFormat;
+import fr.ifremer.nemo.util.Formatter;
 
 /**
  * Class HorodatedParameterModel
@@ -435,8 +436,17 @@ public class HorodatedParameterModel implements Cloneable, PathElementHandler,
 	 */
 	public long convertTimestamp(String a_Line, long a_RefDate)
 			throws ParseException {
+		
 		String frgmntDate = getDateFragment().retreive(a_Line);
 		String frgmntTime = getTimeFragment().retreive(a_Line);
+
+		// FAE 0001229 : Conversion date et heure : s'il manque des Zéros il faut que NEMO les mettent 
+		DateTimeFormat formatDate = new DateTimeFormat(getDateFormat().getFormatString());
+		DateTimeFormat formatTime = new DateTimeFormat(getTimeFormat().getFormatString());
+		Formatter utilFormat = Formatter.getSingleton();
+		frgmntDate = utilFormat.padZero(frgmntDate, formatDate.getFormatSize());
+		frgmntTime = utilFormat.padZero(frgmntTime, formatTime.getFormatSize());
+		
 		DateTimeFormat format = new DateTimeFormat();
 		format.setFormatString(getDateFormat().getFormatString() + " " + getTimeFormat().getFormatString());
 		format.setRefDate(a_RefDate);

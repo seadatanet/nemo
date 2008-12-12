@@ -664,5 +664,13 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 	public String toString() {
 		return _formatString;
 	}
+	
+	public int getFormatSize(){
+		int size = 0;
+		for (int i = 0; i < _elements.length; i++) {
+			size += _elements[i]._element.length();
+		}
+		return size;
+	}
 
 } /* End of class: DateTimeFormat */
