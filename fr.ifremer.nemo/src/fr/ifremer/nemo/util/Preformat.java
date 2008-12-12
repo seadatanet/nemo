@@ -423,8 +423,8 @@ public class Preformat {
 					}
 				}
 			}
-			
-//			System.out.println("Nombre de colonnes : " + _nbColonne);
+
+//			System.out.println("Nombre de colonnes : " + _nbColonne);			
 			
 		} catch (FileNotFoundException exc) {
 			Utils
@@ -532,14 +532,23 @@ public class Preformat {
 					analyseLigne(ligneLue);
 
 					for (i = 0; i < _nbColonne; i++) {
+						
 						// Ajout des zéros après
 						if (_maxDecimale[i] > 0) {
-							if (_colonne[i].lastIndexOf(".") < 0) {
-								_colonne[i] += ".";
-							}
+							// FIXME DBR : valider la proposition - FAE 0001135 : ne pas inscrire les "0" si la donnée est vide
+							if (_colonne[i].length() > 0){
+								if (_colonne[i].lastIndexOf(".") < 0) {
+									_colonne[i] += ".";
+								}
 
-							for (j = 0; j < _maxDecimale[i] - _nbDecimale[i]; j++) {
-								_colonne[i] += "0";
+								for (j = 0; j < _maxDecimale[i] - _nbDecimale[i]; j++) {
+									_colonne[i] += "0";
+								}
+							}else{
+								// on ajoute des espaces pour éviter le décalage
+								for (j = 0; j < _maxDecimale[i] +1; j++) {
+									_colonne[i] += " ";
+								}
 							}
 						}
 
