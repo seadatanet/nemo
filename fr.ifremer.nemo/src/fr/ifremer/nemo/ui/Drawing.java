@@ -1198,7 +1198,8 @@ public class Drawing {
 		EditSurvey.comboDataCentres.setParent(sectionClient); 		
 		
 		GridLayoutFactory.fillDefaults().applyTo(EditSurvey.comboDataCentres);
-		GridDataFactory.fillDefaults().grab(true,false).applyTo(EditSurvey.comboDataCentres);
+		// FAE 1190 : champ trop long
+		GridDataFactory.swtDefaults().hint(410, 10).applyTo(EditSurvey.comboDataCentres);
 		
 		// ajout de la combolist confidentialite
 		Label label2 = new Label(sectionClient, SWT.NULL);
