@@ -50,7 +50,7 @@ public class SWTProcessWS implements IRunnableWithProgress {
 				IProgressMonitor.UNKNOWN);
 
 		monitor2 = monitor;
-
+		
 		// TACHES A EFFECTUER
 
 		if (fichiersConstantes) {
@@ -68,8 +68,11 @@ public class SWTProcessWS implements IRunnableWithProgress {
 			NemoLists.updateSurveys();
 			
 			monitor.subTask(Messages.getString("SWTProcessWS.9"));
-			NemoLists.updateVocabLists();
-			NemoLists.updateVocabMap("P091", "P021");
+			// FAE 0001132 : précision du nom de la liste dans le message
+			NemoLists.updateVocabLists(monitor);
+			monitor.subTask(Messages.getString("SWTProcessWS.9") + " Mapping P091 / P012");
+			NemoLists.updateVocabMap("P091", "P012");
+			monitor.subTask(Messages.getString("SWTProcessWS.9") + " Mapping P091 / P061");
 			NemoLists.updateVocabMap("P091", "P061");
 			
 			monitor.subTask(Messages.getString("SWTProcessWS.10"));

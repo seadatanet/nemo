@@ -1391,9 +1391,10 @@ public class Utils {
 		configuration.getVocabLists().put("L081", "");
 		configuration.getVocabLists().put("L201", "");
 		configuration.getVocabLists().put("L300", "");
-		configuration.getVocabLists().put("P021", "");
+		configuration.getVocabLists().put("P012", "");
 		configuration.getVocabLists().put("P061", "");
 		configuration.getVocabLists().put("P091", "");
+		configuration.getVocabLists().put("C16", "");
 		for (Entry<String, String> currentEntry : Utils.configuration
 				.getVocabLists().entrySet()) {
 			configuration.setVocabListURL(currentEntry.getKey());
