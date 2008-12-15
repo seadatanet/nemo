@@ -1,36 +1,37 @@
-<NemoConfiguration lang="fr_FR">
+<NemoConfiguration lang="en_GB">
   <dataCenter>FI</dataCenter>
   <nemoWsURL>http://localhost:8080/nemo/services/NEMO</nemoWsURL>
   <nautilusWsURL>http://localhost:8080/nautilus/services/NAUTILUS</nautilusWsURL>
   <showRule>true</showRule>
   <contact></contact>
-  <modelsDirectory>D:\Projets\IFREMER\NEMO\Donn&#233;es</modelsDirectory>
-  <cruisesDirectory>D:\Projets\IFREMER\NEMO\Donn&#233;es</cruisesDirectory>
+  <modelsDirectory>D:\Projets\IFREMER\NEMO\Donn&#233;es<</modelsDirectory>
+  <cruisesDirectory>D:\Projets\IFREMER\NEMO\Donn&#233;es<</cruisesDirectory>
   <outputDirectory>D:/Projets/CONVMED/Donnees/Output</outputDirectory>
   <idEdmoRespCdi>1</idEdmoRespCdi>
   <codeEdmoDonnees>2</codeEdmoDonnees>
   <idEdmoRespDonnees>3</idEdmoRespDonnees>
   <idEdmoDistDonnees>4</idEdmoDistDonnees>
-  <cdiURL>test</cdiURL>
+  <cdiURL>http://www.sdn-taskmanager.org/</cdiURL>
   <cdiMethod>CDIMTH01</cdiMethod>
   <fichierMapping>SDN_CDI_mapping_table</fichierMapping>
-  <arboMapping>D:\Projets\IFREMER\NEMO\Donn&#233;es</arboMapping>
+  <arboMapping>D:\Projets\IFREMER\NEMO\Donn&#233;es<</arboMapping>
   <vocabURL>http://vocab.ndg.nerc.ac.uk/1.1/VocabServerAPI_dl.wsdl</vocabURL>
-  <VocabListURL name="P091" value="http://vocab.ndg.nerc.ac.uk/list/P091/current"/>
+  <VocabListURL name="C16" value="http://vocab.ndg.nerc.ac.uk/list/C16/current"/>
+  <VocabListURL name="P012" value="http://vocab.ndg.nerc.ac.uk/list/P012/current"/>
   <VocabListURL name="L300" value="http://vocab.ndg.nerc.ac.uk/list/L300/current"/>
+  <VocabListURL name="L051" value="http://vocab.ndg.nerc.ac.uk/list/L051/current"/>
   <VocabListURL name="C77" value="http://vocab.ndg.nerc.ac.uk/list/C77/current"/>
   <VocabListURL name="L061" value="http://vocab.ndg.nerc.ac.uk/list/L061/current"/>
-  <VocabListURL name="L021" value="http://vocab.ndg.nerc.ac.uk/list/L021/current"/>
+  <VocabListURL name="P061" value="http://vocab.ndg.nerc.ac.uk/list/P061/current"/>
+  <VocabListURL name="L05" value="http://vocab.ndg.nerc.ac.uk/list/L05/current"/>
   <VocabListURL name="L071" value="http://vocab.ndg.nerc.ac.uk/list/L071/current"/>
   <VocabListURL name="L031" value="http://vocab.ndg.nerc.ac.uk/list/L031/current"/>
-  <VocabListURL name="L081" value="http://vocab.ndg.nerc.ac.uk/list/L081/current"/>
-  <VocabListURL name="P061" value="http://vocab.ndg.nerc.ac.uk/list/P061/current"/>
   <VocabListURL name="C180" value="http://vocab.ndg.nerc.ac.uk/list/C180/current"/>
-  <VocabListURL name="P021" value="http://vocab.ndg.nerc.ac.uk/list/P021/current"/>
-  <VocabListURL name="L05" value="http://vocab.ndg.nerc.ac.uk/list/L05/current"/>
   <VocabListURL name="L201" value="http://vocab.ndg.nerc.ac.uk/list/L201/current"/>
+  <VocabListURL name="P091" value="http://vocab.ndg.nerc.ac.uk/list/P091/current"/>
+  <VocabListURL name="L021" value="http://vocab.ndg.nerc.ac.uk/list/L021/current"/>
+  <VocabListURL name="L081" value="http://vocab.ndg.nerc.ac.uk/list/L081/current"/>
   <VocabListURL name="C174" value="http://vocab.ndg.nerc.ac.uk/list/C174/current"/>
-  <VocabListURL name="L051" value="http://vocab.ndg.nerc.ac.uk/list/L051/current"/>
   <defaultFlagTable></defaultFlagTable>
   <FlagTable code="C3" label="test">
     <Flag local="Q1" SDN="0 - no quality control"/>
