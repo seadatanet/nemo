@@ -69,10 +69,7 @@ public class UpdateAction extends Action implements ISelectionListener,
 
 	}
 
-	/**
-	 * This method initializes combo
-	 * 
-	 */
+/*
 	private void createCombo() {
 		combo = new Combo(group, SWT.FILL);
 		combo.setText("Langue"); //$NON-NLS-1$
@@ -102,10 +99,6 @@ public class UpdateAction extends Action implements ISelectionListener,
 		button.setText("Parcourir"); //$NON-NLS-1$
 	}
 
-	/**
-	 * This method initializes group2
-	 * 
-	 */
 	private void createGroup2() {
 		group2 = new Group(top, SWT.NONE);
 		group2.setLayout(null);
@@ -116,10 +109,10 @@ public class UpdateAction extends Action implements ISelectionListener,
 		textArea1.setBounds(new Rectangle(5, 14, 267, 40));
 		textArea2 = new Text(group2, SWT.MULTI | SWT.V_SCROLL);
 	}
-
+*/
 	public void selectionChanged(IWorkbenchPart part, ISelection incoming) {
 	}
-
+/*
 	public void createPartControl(Composite parent) {
 
 		top = new Composite(parent, SWT.NONE);
@@ -160,5 +153,5 @@ public class UpdateAction extends Action implements ISelectionListener,
 				});
 
 	}
-
+*/
 }
