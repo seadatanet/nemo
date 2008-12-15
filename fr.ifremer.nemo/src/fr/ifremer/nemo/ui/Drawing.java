@@ -1087,8 +1087,7 @@ public class Drawing {
 
 		int nbre, i;
 		nbre = listeText.size();
-//		System.out.println("=================ok1===========<<<" + nbre);
-
+		
 		// affichage section
 		section.setParent(ViewEdit.formEdition);
 		section = ViewEdit.toolkitEdition.createSection(ViewEdit.formEdition
@@ -1109,8 +1108,6 @@ public class Drawing {
 		sectionClient.setLayout(new GridLayout());
 		GridData gd = new GridData();
 		gd.horizontalSpan = 2;
-
-//		System.out.println("=================ok1===========");
 		
 //		 Combo pays
 		if (blnPays) {
@@ -1119,22 +1116,10 @@ public class Drawing {
 			labelPays.setParent(sectionClient);
 			labelPays.setLayoutData(
 					new GridData(GridData.FILL_HORIZONTAL));
-			
-			EditSurvey.comboCountries = new Combo(sectionClient, SWT.NONE);
-			
-			// remplissage des pays
-			CodeTableRecordType[] records = NemoLists.getVocabList("C180");
-			
-			TreeMap<String, String> treePays = new TreeMap<String, String>();
-				
-			for (CodeTableRecordType record : records)
-			{	
-				treePays.put(record.getEntryTerm(), Utils.extraitCodeURN(record.getEntryKey()));
-			}
-			
-			for (Entry<String, String> currentEntry : treePays.entrySet()) {
-				EditSurvey.comboCountries.add(currentEntry.getValue() + " - " + currentEntry.getKey());
-			}
+
+			EditSurvey.comboCountries.setParent(sectionClient);
+			EditSurvey.comboCountries.setLayoutData(
+					new GridData(GridData.FILL_HORIZONTAL));
 		}
 			
 		for (i = 0; i < nbre; i++) {
@@ -1142,13 +1127,28 @@ public class Drawing {
 			// label avec le texte de "description"
 			Label label = new Label(sectionClient, SWT.NULL);
 			label.setText(listeNoms.get(i));
-//			System.out.println("creation de" + listeNoms.get(i));
 
 			// affichage zone texte dans la section
 			listeText.get(i).setParent(sectionClient);
 			listeText.get(i).setLayoutData(
 					new GridData(GridData.FILL_HORIZONTAL));
+		}
+		
+//		 Combo region
+		if (!blnPays) {
+			Label labelReg = new Label(sectionClient, SWT.NULL);
+			labelReg.setText(Messages.getString("EditSurvey.18"));
+			labelReg.setParent(sectionClient);
+			labelReg.setLayoutData(
+					new GridData(GridData.FILL_HORIZONTAL));
 
+			EditSurvey.comboRegion.setParent(sectionClient);
+			EditSurvey.comboRegion.setLayoutData(
+					new GridData(GridData.FILL_HORIZONTAL));
+			
+			// Création du menu contextuel pour la recherche filtree
+			Utils.createSearchMenu(EditSurvey.comboRegion, Global.REGION);
+			
 		}
 
 		section.setClient(sectionClient);

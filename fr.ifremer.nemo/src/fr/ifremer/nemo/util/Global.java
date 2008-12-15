@@ -13,6 +13,7 @@ public interface Global {
 	public static final String DATATYPE = "DATATYPE";
 	public static final String SHIP = "SHIP";
 	public static final String DATACENTRE = "DATACENTRE";
+	public static final String REGION = "REGION";
 	
 	// Type de trajectoire
 	public static final String MEDATLAS = "MEDATLAS";

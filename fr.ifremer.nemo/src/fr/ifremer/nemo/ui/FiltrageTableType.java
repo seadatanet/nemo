@@ -70,6 +70,8 @@ public class FiltrageTableType {
 				shell.setText(Messages.getString("FiltrageTableType.5")); //$NON-NLS-1$
 			} else if (tabOrigine.equals(Global.DATACENTRE)) {
 				shell.setText(Messages.getString("FiltrageTableType.6")); //$NON-NLS-1$
+			} else if (tabOrigine.equals(Global.REGION)) {
+				shell.setText(Messages.getString("FiltrageTableType.7")); //$NON-NLS-1$
 			}
 
 			shell.setLayout(new FillLayout());
@@ -89,10 +91,14 @@ public class FiltrageTableType {
 				NemoLists.listeFiltree = new ArrayList<String>();
 				
 				NemoLists.listeFiltree.addAll(NemoLists.listeCentreDonnees);
-			} else if (tabOrigine.equals(Global.DATACENTRE)) {
+			} else if (tabOrigine.equals(Global.REGION)) {
 				NemoLists.listeFiltree = new ArrayList<String>();
 				
-				NemoLists.listeFiltree.addAll(NemoLists.listeNavire);
+				NemoLists.listeFiltree.addAll(NemoLists.listeRegion);
+			//} else if (tabOrigine.equals(Global.DATACENTRE)) {
+			//	NemoLists.listeFiltree = new ArrayList<String>();
+			//	
+			//	NemoLists.listeFiltree.addAll(NemoLists.listeNavire);
 			} else {
 				// init des listes filtrées survey + data
 				TableDataSurvey.listeFiltree = new ArrayList<TypeSurvey>();
@@ -166,7 +172,8 @@ public class FiltrageTableType {
 			} else if (tabOrigine.equals(Global.PARAMETER)) {
 				creationTableData();
 			} else if (tabOrigine.equals(Global.SHIP) || 
-					tabOrigine.equals(Global.DATACENTRE)) {
+					tabOrigine.equals(Global.DATACENTRE) || 
+					tabOrigine.equals(Global.REGION)) {
 				creationTableBODC();
 			}
 
@@ -356,7 +363,8 @@ public class FiltrageTableType {
 
 								shell.close();
 							} else if (tabOrigine.equals(Global.SHIP) ||
-									tabOrigine.equals(Global.DATACENTRE)) {
+									tabOrigine.equals(Global.DATACENTRE) ||
+									tabOrigine.equals(Global.REGION)) {
 								Utils.selectComboValeur(
 										comboRecherche,
 										NemoLists.filtreTable.getItem(
@@ -384,7 +392,8 @@ public class FiltrageTableType {
 						} else if (tabOrigine.equals(Global.PARAMETER)){
 							filtrageListeData(filtreText.getText());
 						} else if (tabOrigine.equals(Global.SHIP) ||
-								tabOrigine.equals(Global.DATACENTRE)) {
+								tabOrigine.equals(Global.DATACENTRE) ||
+								tabOrigine.equals(Global.REGION)) {
 							filtrageListeBODC(filtreText.getText(), tabOrigine);
 						}
 					}
@@ -600,6 +609,8 @@ public class FiltrageTableType {
 			origine = NemoLists.listeNavire;
 		} else if (liste.equals(Global.DATACENTRE)) {
 			origine = NemoLists.listeCentreDonnees;
+		} else if (liste.equals(Global.REGION)) {
+			origine = NemoLists.listeRegion;
 		}		
 		
 		nbre = origine.size();

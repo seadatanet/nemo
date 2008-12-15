@@ -65,7 +65,7 @@ public class EditSurvey {
 	public static int expand, validee, loaded;
 
 	public static Combo comboConfid, comboDataCentres, comboCountries,
-			comboNavire;
+			comboNavire, comboRegion;
 
 	public static List listeType;
 
@@ -176,8 +176,7 @@ public class EditSurvey {
 		listeNoms.add(Messages.getString("EditSurvey.16")); //$NON-NLS-1$
 		listeText.add(textDateFin);
 		listeNoms.add(Messages.getString("EditSurvey.17")); //$NON-NLS-1$
-		listeText.add(textRegion);
-		listeNoms.add(Messages.getString("EditSurvey.18")); //$NON-NLS-1$
+		// FAE 0001186 : Region en liste
 		Drawing
 				.sectionNlabelsNtext(
 						sectionLocalisation,
@@ -993,6 +992,39 @@ public class EditSurvey {
 			temp = currentEntry.getValue() + " - " + currentEntry.getKey();
 			NemoLists.listeNavire.add(temp);
 			comboNavire.add(temp);
+		}
+		
+		// Remplissage des Pays
+		comboCountries = new Combo(shell, SWT.NONE);
+		CodeTableRecordType[] records = NemoLists.getVocabList("C180");
+		
+		TreeMap<String, String> treePays = new TreeMap<String, String>();
+			
+		for (CodeTableRecordType record : records){	
+			treePays.put(record.getEntryTerm(), Utils.extraitCodeURN(record.getEntryKey()));
+		}
+		
+		for (Entry<String, String> currentEntry : treePays.entrySet()) {
+			comboCountries.add(currentEntry.getValue() + " - " + currentEntry.getKey());
+		}
+		
+		// Remplissage des Regions
+		comboRegion = new Combo(shell, SWT.NONE);
+		CodeTableRecordType[] regions = NemoLists.getVocabList("C16");
+		
+		TreeMap<String, String> treeRegion = new TreeMap<String, String>();
+			
+		for (CodeTableRecordType record : regions)
+		{	
+			treeRegion.put(record.getEntryTerm(), Utils.extraitCodeURN(record.getEntryKey()));
+		}
+
+		NemoLists.listeRegion = new ArrayList<String>();
+		temp = "";
+		for (Entry<String, String> currentEntry : treeRegion.entrySet()) {
+			temp = currentEntry.getValue() + " - " + currentEntry.getKey();
+			NemoLists.listeRegion.add(temp);
+			comboRegion.add(temp);
 		}
 	}
 
