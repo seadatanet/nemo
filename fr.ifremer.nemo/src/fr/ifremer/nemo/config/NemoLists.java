@@ -15,6 +15,7 @@ import javax.xml.rpc.ServiceException;
 import javax.xml.rpc.holders.BooleanHolder;
 
 import org.apache.axis.client.Service;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.widgets.Table;
 
 import fr.ifremer.nemo.domain.Parameter;
@@ -68,7 +69,7 @@ public class NemoLists implements Cloneable {
 
 	public static Table filtreTable;
 
-	public static ArrayList<String> listeNavire, listeCentreDonnees;
+	public static ArrayList<String> listeNavire, listeCentreDonnees, listeRegion;
 
 	public static ArrayList<String> listeFiltree;
 
@@ -910,7 +911,7 @@ public class NemoLists implements Cloneable {
 		initParameters();
 		initSurveys();
 		initVocabLists();
-		initVocabMap("P091", "P021");
+		initVocabMap("P091", "P012");
 		initVocabMap("P091", "P061");
 		initEdmo();
 	}
@@ -995,7 +996,7 @@ public class NemoLists implements Cloneable {
 		updateRegions();
 		updateParameters();
 		updateSurveys();
-		updateVocabLists();
+		updateVocabLists(null);
 		updateEdmo();
 	}
 
@@ -1308,12 +1309,17 @@ public class NemoLists implements Cloneable {
 	/**
 	 * 
 	 */
-	public static void updateVocabLists() {
+	public static void updateVocabLists(IProgressMonitor monitor) {
 		Iterator<String> keys = Utils.configuration.getVocabLists().keySet()
 				.iterator();
+		
+		int keySetSize = Utils.configuration.getVocabLists().keySet().size();
+		
 		nbVocabLists = 0;
 		while (keys.hasNext()) {
 			String listName = keys.next();
+			if (monitor != null) monitor.subTask(Messages.getString("SWTProcessWS.9") + " " 
+					+ listName + " [" + (nbVocabLists + 1) + " / " + keySetSize + "]");
 			updateVocabList(listName);
 		}
 	}
@@ -1492,12 +1498,12 @@ public class NemoLists implements Cloneable {
 	}
 
 	public static String parameterMap(Parameter param) {
-		String pdvCode = Utils.extraitCodeURN(getVocabMatch("P091", "P021",
+		String pdvCode = Utils.extraitCodeURN(getVocabMatch("P091", "P012",
 				param.getCode(), Messages.getString("NemoLists.unknown")));
 		String unitCode = Utils.extraitCodeURN(getVocabMatch("P091", "P061", param.getCode(), Messages
 				.getString("NemoLists.unknown")));
 		return "<subject>SDN:LOCAL:" + param.getCode()
-				+ "</subject><object>SDN:P021::" + pdvCode
+				+ "</subject><object>SDN:P012::" + pdvCode
 				+ "</object><unit>SDN:P061::" + unitCode + "</unit>";
 	}
 
