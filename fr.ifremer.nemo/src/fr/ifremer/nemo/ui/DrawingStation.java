@@ -253,6 +253,8 @@ public class DrawingStation {
 		// zone de conversion et test de conversion
 		Label labelConv = new Label(groupeConv, SWT.NONE);
 		labelConv.setText(Messages.getString("EditStation.37"));
+		// FAE 0001121 agrandir le champ formule
+		GridDataFactory.swtDefaults().grab(true, false).minSize(100, 10).applyTo(conversion);
 		conversion.setParent(groupeConv);
 
 		// FAE066
