@@ -1683,7 +1683,9 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 					}
 
 					if (getLastRef() != null) {
-						if (!refTemp.equals(getLastRef())) {
+						// FAE 0001135 : reformatage des fichiers ODV 
+						//      (si la référence de la station est vide, considérer la ligne comme appartenant à la dernière station référencée)
+						if (!refTemp.equals(getLastRef()) && !(refTemp.replace("\r\n", "")).trim().equals("")) {
 							station.setReference(getLastRef());
 							setLastRef(refTemp);
 
