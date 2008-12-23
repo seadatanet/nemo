@@ -23,22 +23,22 @@ public class Preformat {
 	// liste des fichiers
 	private static String[] _listeFichiers;
 	
-	// liste des répertoires
+	// liste des rï¿½pertoires
 	private static String[] _listeRepertoires;
 	
-	// fichier en entrée
+	// fichier en entrï¿½e
 	private static String _ficEntree;
 	
-	// répertoire en entrée
+	// rï¿½pertoire en entrï¿½e
 	private static String _repEntree;
 	
-	// répertoire en sortie
+	// rï¿½pertoire en sortie
 	private static File _repSortie;
 	
-	// Nombre de lignes d'en-tête de fichier
+	// Nombre de lignes d'en-tï¿½te de fichier
 	private static int _enTeteFichier;
 	
-	// Nombre de lignes d'en-tête de station
+	// Nombre de lignes d'en-tï¿½te de station
 	private static int _enTeteStation;
 	
 	// Indicateur de fin de station
@@ -50,32 +50,32 @@ public class Preformat {
 	// Nombre de colonnes
 	private static int _nbColonne;
 	
-	// Séparateur
+	// Sï¿½parateur
 	private static char _separateur;
 	
-	// Partie Entière maximale
+	// Partie Entiï¿½re maximale
 	private static int[] _maxEntier;
 		
-	// Nombre de décimales max
+	// Nombre de dï¿½cimales max
 	private static int[] _maxDecimale;
 	
 	// Nombre d'entiers d'une colonne
 	private static int[] _nbEntier;
 	
-	// Nombre de décimales d'une colonne
+	// Nombre de dï¿½cimales d'une colonne
 	private static int[] _nbDecimale;
 	
 	// Contenu des colonnes
 	private static String[] _colonne;
 	
-	// Préformatage réussi
+	// Prï¿½formatage rï¿½ussi
 	private static boolean _preformatOK;
 	
 
 	public static String messagePreformat;
 	
 	//////////////
-	// Méthodes //
+	// Mï¿½thodes //
 	//////////////
 	
 
@@ -137,7 +137,7 @@ public class Preformat {
 		Double pourcentEtape2 = 0d;
 		int nbFic = 0;
 		
-		Utils.messageOK("Préformatage en cours");
+		Utils.messageOK("Prï¿½formatage en cours");
 				
 		_nbColonne = 1;	
 		_preformatOK = false;
@@ -184,7 +184,7 @@ public class Preformat {
 //		Utils.messageErreur("");
 		
 		/////////////////////////////////////////
-		// Récupération du nombres de colonnes //
+		// Rï¿½cupï¿½ration du nombres de colonnes //
 		/////////////////////////////////////////
 		if (ViewFile.radioFichier.getSelection()) {
 			nombreColonnes(_ficEntree);
@@ -197,11 +197,11 @@ public class Preformat {
 				
 				for (String fichier : _listeFichiers) {
 					nombreColonnes(fichier);
-					// on se contente de récupérer le nombre de colonnes du 1er fichier
+					// on se contente de rï¿½cupï¿½rer le nombre de colonnes du 1er fichier
 					break;
 				}
 				
-				// on se contente du 1er répertoire
+				// on se contente du 1er rï¿½pertoire
 				break;
 			}
 		} else {
@@ -210,7 +210,7 @@ public class Preformat {
 			
 			for (String fichier : _listeFichiers) {
 				nombreColonnes(fichier);
-				// on se contente de récupérer le nombre de colonnes du 1er fichier
+				// on se contente de rï¿½cupï¿½rer le nombre de colonnes du 1er fichier
 				break;
 			}
 		}
@@ -222,7 +222,7 @@ public class Preformat {
 		_colonne = new String[_nbColonne];
 		
 		///////////////////////////////////////////////////
-		// Récupération des entiers et décimales maximum //
+		// Rï¿½cupï¿½ration des entiers et dï¿½cimales maximum //
 		///////////////////////////////////////////////////
 		if (ViewFile.radioFichier.getSelection()) {
 			getMax(_ficEntree);
@@ -252,11 +252,11 @@ public class Preformat {
 		pourcentEtape1 = 100d;
 		
 //		for (i = 0 ; i < _nbColonne ; i++) {
-//		//	System.out.println("Colonne " + (i+1) + '\t' + ":" + " entier : " + _maxEntier[i] + " - décimales : " + _maxDecimale[i]);
+//		//	System.out.println("Colonne " + (i+1) + '\t' + ":" + " entier : " + _maxEntier[i] + " - dï¿½cimales : " + _maxDecimale[i]);
 //		}
 		
 		///////////////////////////////////////
-		// Ecriture des fichiers préformatés //
+		// Ecriture des fichiers prï¿½formatï¿½s //
 		///////////////////////////////////////
 		if (ViewFile.radioFichier.getSelection()) {
 			ecritureFichier(_ficEntree, _repEntree);
@@ -272,7 +272,7 @@ public class Preformat {
 				_repEntree = ViewFile.nomRepertoire+"\\"+repertoire;
 				_listeFichiers = new File(_repEntree).list();
 				
-				// Création du répertoire pour les fichiers préformatés
+				// Crï¿½ation du rï¿½pertoire pour les fichiers prï¿½formatï¿½s
 				File repPreformat = new File(_repSortie.getAbsolutePath()+"\\PF_"+_repEntree.substring(_repEntree.lastIndexOf('\\')+1));
 				if (!repPreformat.exists()) {
 					repPreformat.mkdirs();
@@ -284,9 +284,9 @@ public class Preformat {
 				}
 			}
 		} else {
-			// Création du répertoire pour les fichiers préformatés
-			// au même niveau que le répertoire d'entrée
-			// en recopiant le nom avec le préfixe "PF_"
+			// Crï¿½ation du rï¿½pertoire pour les fichiers prï¿½formatï¿½s
+			// au mï¿½me niveau que le rï¿½pertoire d'entrï¿½e
+			// en recopiant le nom avec le prï¿½fixe "PF_"
 			_repSortie = new File(ViewFile.nomRepertoire.substring(0,ViewFile.nomRepertoire.lastIndexOf('\\'))
 					+"\\PF_"+ViewFile.nomRepertoire.substring(ViewFile.nomRepertoire.lastIndexOf('\\')+1));
 			if (!_repSortie.exists()) {
@@ -311,7 +311,7 @@ public class Preformat {
 		refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
 		
 		/////////////////////////////////////
-		// Affichage du fichier préformaté //
+		// Affichage du fichier prï¿½formatï¿½ //
 		/////////////////////////////////////
 		if (ViewFile.radioFichier.getSelection()) {
 			ViewFile.nomFichier = _repEntree + "\\PF_" + _ficEntree;
@@ -339,12 +339,12 @@ public class Preformat {
 		setPreformat(true);
 
 		// affichage etape0 dans formulaire
-		// d'édition de
-		// paramètres
+		// d'ï¿½dition de
+		// paramï¿½tres
 //		Utils.razGlobal();
 // 		EditDesc.affichageEdition();
 
-//		// remplissage de l'IHM par le modèle chargé ?
+//		// remplissage de l'IHM par le modï¿½le chargï¿½ ?
 //		if (DataModel.ouverture) {
 //			DataModel.fillDesc();
 //		}
@@ -355,18 +355,18 @@ public class Preformat {
 		
 		int[] indexSeparateur = new int[_nbColonne+1];
 				
-		// Index des séparateurs
+		// Index des sï¿½parateurs
 		indexSeparateur[0] = -1;
 		for (i = 1 ; i < _nbColonne+1 ; i++) {
 			indexSeparateur[i] = ligneLue.indexOf(_separateur, indexSeparateur[i-1] + 1);
 			
-			// dernier séparateur = fin de ligne
+			// dernier sï¿½parateur = fin de ligne
 			if (indexSeparateur[i] < 0) {
 				indexSeparateur[i] = ligneLue.length();
 			}
 		}
 	
-		// Découpage des colonnes
+		// Dï¿½coupage des colonnes
 		for (i = 0 ; i < _nbColonne ; i++) {
 			_colonne[i] = ligneLue.substring(indexSeparateur[i] + 1, indexSeparateur[i+1]);
 			
@@ -402,7 +402,7 @@ public class Preformat {
 			lecteurAvecBuffer = new BufferedReader(new FileReader(
 					_repEntree + "\\" + fichier));
 			
-			// Lecture des lignes d'en-tête
+			// Lecture des lignes d'en-tï¿½te
 			while ((ligneLue = lecteurAvecBuffer.readLine()) != null) {
 				numLigne++;
 				if (numLigne == _enTeteFichier + _enTeteStation) {
@@ -410,7 +410,7 @@ public class Preformat {
 				}
 			}
 			
-			// Lecture de la 1e ligne de données
+			// Lecture de la 1e ligne de donnï¿½es
 			if ((ligneLue = lecteurAvecBuffer.readLine()) != null) {
 				if (ligneLue.indexOf(_separateur) < 0) {
 					_nbColonne = 0;
@@ -511,14 +511,14 @@ public class Preformat {
 			while ((ligneLue = lecteurAvecBuffer.readLine()) != null) {
 				numLigne++;
 				if (numLigne <= _enTeteFichier + _enTeteStation) {
-					// Traitement de l'en-tête
+					// Traitement de l'en-tï¿½te
 
 					if (ligneLue.startsWith("Latitude")) {
-						// Vérification du format de latitude
+						// Vï¿½rification du format de latitude
 						fichPreformat.println(ligneLue);
 					} else {
 						if (ligneLue.startsWith("Longitude")) {
-							// Vérification du format de longitude
+							// Vï¿½rification du format de longitude
 							fichPreformat.println(ligneLue);
 						} else {
 							// sinon on recopie la ligne
@@ -527,15 +527,14 @@ public class Preformat {
 					}
 
 				} else {
-					// Traitement des données
+					// Traitement des donnï¿½es
 
 					analyseLigne(ligneLue);
 
 					for (i = 0; i < _nbColonne; i++) {
 						
-						// Ajout des zéros après
+						// Ajout des zï¿½ros aprï¿½s
 						if (_maxDecimale[i] > 0) {
-							// FIXME DBR : valider la proposition - FAE 0001135 : ne pas inscrire les "0" si la donnée est vide
 							if (_colonne[i].length() > 0){
 								if (_colonne[i].lastIndexOf(".") < 0) {
 									_colonne[i] += ".";
@@ -545,7 +544,7 @@ public class Preformat {
 									_colonne[i] += "0";
 								}
 							}else{
-								// on ajoute des espaces pour éviter le décalage
+								// on ajoute des espaces pour ï¿½viter le dï¿½calage
 								for (j = 0; j < _maxDecimale[i] +1; j++) {
 									_colonne[i] += " ";
 								}
