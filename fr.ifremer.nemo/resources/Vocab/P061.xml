@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.5.0_06" class="java.beans.XMLDecoder"> 
+<java version="1.6.0_06" class="java.beans.XMLDecoder"> 
  <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="170"> 
   <void index="0"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
@@ -35,7 +35,7 @@
      <string>http://vocab.ndg.nerc.ac.uk/term/P061/12/UAQU</string> 
     </void> 
     <void property="entryTerm"> 
-     <string>Angstrom squared per quanta</string> 
+     <string>Angstrom squared per quantum</string> 
     </void> 
     <void property="entryTermAbbr"> 
      <string>A^2/Q</string> 

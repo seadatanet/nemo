@@ -1,0 +1,2599 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_06" class="java.beans.XMLDecoder"> 
+ <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="116"> 
+  <void index="0"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/28Bg</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Adriatic Sea (Mediterranean Sea)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="1"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/28Bh</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Aegean Sea (The Archipelago) (Mediterranean Sea)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="2"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/28Ab</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Alboran Sea (Mediterranean Sea)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="3"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/44</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Andaman or Burma Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="4"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/39</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Arabian Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="5"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/48h</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Arafura Sea (East Indian Archipelago)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="6"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C162/3/ARA</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Aral Sea</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Large inland water body comprising three lakes (North Aral Sea, eastern and western basins of the South Aral Sea) having coastlines in Kazakhstan and Uzbekistan.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1228723207000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C162/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="7"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/17</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Arctic Ocean</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="8"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/17a</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Arctic Ocean - Lincoln Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="9"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/28Ac</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Balearic (Iberian) Sea (Mediterranean Sea)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="10"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/48l</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Bali Sea (East Indian Archipelago)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="11"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/01</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Baltic Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="12"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/48g</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Banda Sea (East Indian Archipelago)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="13"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/07</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Barents Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="14"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/62a</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Bass Strait (Great Australian Bight)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="15"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/43</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Bay of Bengal</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="16"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/22</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Bay of Biscay</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="17"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/25</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Bay of Fundy</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="18"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/13</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Beaufort Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="19"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/55</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Bering Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="20"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/66</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Bismarck Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="21"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/30</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Black Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="22"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/20</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Bristol Channel</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="23"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/27</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Caribbean Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="24"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C162/3/CAS</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Caspian Sea</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Large brackish inland water body having coastlines in Azerbaijan, Iran, Kazakhstan, Russia, and Turkmenistan.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1228722928000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C162/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="25"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/48b</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Celebes Sea (East Indian Archipelago)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="26"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C162/3/21a</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Celtic Sea</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Not a valid IHB Code - created for ROSCOP compatibility</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>378734400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C162/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="27"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/48f</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Ceram Sea (East Indian Archipelago)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="28"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/12</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Chukchi Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="29"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/59</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Coastal Waters of SE Alaska and British Columbia</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="30"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/64</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Coral Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="31"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/15</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Davis Strait</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="32"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/48</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>East Indian Archipelago (Indonesia)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="33"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/11</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>East Siberian Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="34"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/50</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Eastern China Sea (Tung Hai)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="35"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/21</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>English Channel</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="36"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/48j</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Flores Sea (East Indian Archipelago)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="37"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/62</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Great Australian Bight</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="38"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/05</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Greenland Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="39"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/38</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Gulf of Aden</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="40"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/58</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Gulf of Alaska</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="41"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/36</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Gulf of Aqaba</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="42"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/48k</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Gulf of Boni (East Indian Archipelago)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="43"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/01a</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Gulf of Bothnia (Baltic Sea)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="44"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/60</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Gulf of California</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="45"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/01b</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Gulf of Finland (Baltic Sea)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="46"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/34</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Gulf of Guinea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="47"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/41</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Gulf of Iran (Persian Gulf)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="48"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/26</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Gulf of Mexico</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="49"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/40</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Gulf of Oman</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="50"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/01c</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Gulf of Riga (Baltic Sea)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="51"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/24</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Gulf of St. Lawrence</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="52"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/35</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Gulf of Suez</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="53"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/47</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Gulf of Thailand (Siam)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="54"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/48d</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Gulf of Tomini (East Indian Archipelago)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="55"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/48e</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Halmahera Sea (East Indian Archipelago)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="56"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/16</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Hudson Bay</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="57"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/16a</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Hudson Strait</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="58"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/45</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Indian Ocean</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="59"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/18</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Inner Seas off the West Coast of Scotland</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="60"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/28Bf</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Ionian Sea (Mediterranean Sea)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="61"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/19</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Irish Sea and St. George&apos;s Channel</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="62"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/52</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Japan Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="63"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/48n</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Java Sea (East Indian Archipelago)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="64"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/09</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Kara Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="65"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/02</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Kattegat, Sound and Belts</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="66"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/15a</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Labrador Sea (Davis Strait)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="67"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/42</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Laccadive Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="68"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/10</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Laptev Sea (or Nordenskjold Sea)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="69"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/28Ad</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Ligurian Sea (Mediterranean Sea)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="70"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/48m</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Makassar Strait (East Indian Archipelago)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="71"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/46a</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Malacca Strait</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="72"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/46</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Malacca and Singapore Straits</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="73"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/28</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Mediterranean Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="74"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/28B</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Mediterranean Sea - Eastern basin</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="75"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/28A</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Mediterranean Sea - Western basin</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="76"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/48c</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Molukka Sea (East Indian Archipelago)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="77"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/45a</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Mozambique Channel (Indian Ocean)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="78"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/23</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>North Atlantic Ocean</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="79"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C162/3/23a</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>North East Atlantic Ocean (limit 40W)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Not a valid IHB Code - created for ROSCOP compatibility</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>378734400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C162/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="80"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C162/3/57a</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>North East Pacific Ocean (limit 180W)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Not a valid IHB Code - created for ROSCOP compatibility</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>378734400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C162/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="81"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/57</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>North Pacific Ocean</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="82"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/04</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>North Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="83"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C162/3/23b</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>North West Atlantic Ocean (limit 40W)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Not a valid IHB Code - created for ROSCOP compatibility</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>378734400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C162/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="84"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C162/3/57b</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>North West Pacific Ocean (limit 180W)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Not a valid IHB Code - created for ROSCOP compatibility</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>378734400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C162/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="85"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/06</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Norwegian Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="86"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/56</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Philippine Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="87"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/37</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Red Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="88"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/33</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Rio de La Plata</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="89"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/48o</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Savu Sea (East Indian Archipelago)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="90"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/31</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Sea of Azov</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="91"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/29</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Sea of Marmara</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="92"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/54</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Sea of Okhotsk</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="93"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/53</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Seto Naikai or Inland Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="94"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/46b</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Singapore Strait</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="95"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/03</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Skagerrak</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="96"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/65</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Solomon Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="97"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/32</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>South Atlantic Ocean</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="98"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/49</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>South China Sea (Nan Hai)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="99"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C162/3/32a</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>South East Atlantic Ocean (limit 20W)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Not a valid IHB Code - created for ROSCOP compatibility</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>378734400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C162/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="100"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C162/3/61a</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>South East Pacific Ocean (limit 140W)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Not a valid IHB Code - created for ROSCOP compatibility</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>378734400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C162/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="101"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/61</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>South Pacific Ocean</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="102"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C162/3/32b</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>South West Atlantic Ocean (limit 20W)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Not a valid IHB Code - created for ROSCOP compatibility</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>378734400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C162/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="103"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C162/3/61b</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>South West Pacific Ocean (limit 140W)</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Not a valid IHB Code - created for ROSCOP compatibility</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>378734400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C162/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="104"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C162/3/SOC</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Southern Ocean</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Waters south of 60S</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1214900407000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C162/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="105"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/28Aa</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Strait of Gibraltar (Mediterranean Sea)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="106"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/48a</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Sulu Sea (East Indian Archipelago)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="107"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/63</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Tasman Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="108"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/14</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>The Northwestern Passages</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="109"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/14a</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>The Northwestern Passages - Baffin Bay</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="110"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/48i</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Timor Sea (East Indian Archipelago)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="111"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/28Ae</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Tyrrhenian Sea (Mediterranean Sea)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="112"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C162/3/ZZ</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Unknown</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>The correct value is not known to and not computable by the creator of this information. However a correct value probably exists.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1214221191000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C162/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="113"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/08</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>White Sea</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="114"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C162/3/GLO</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Worldwide</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Global coverage from 90S to 90N and 180E to 180W</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1214900465000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C162/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="115"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C161/0/51</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Yellow Sea (Hwang Hai)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>-504878400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C161/0</string> 
+    </void> 
+   </object> 
+  </void> 
+ </array> 
+</java> 

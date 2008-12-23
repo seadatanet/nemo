@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.5.0_06" class="java.beans.XMLDecoder"> 
+<java version="1.6.0_06" class="java.beans.XMLDecoder"> 
  <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="53"> 
   <void index="0"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/SB</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/SB</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Balearic Islands University, UIB</string> 
@@ -19,14 +19,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="1"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/UB</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/UB</string> 
     </void> 
     <void property="entryTerm"> 
      <string>British Oceanographic Data Center (BODC)</string> 
@@ -44,14 +44,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="2"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/BO</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/BO</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Bulgarian National Oceanographic Data Centre(BGODC), Institute of Oceanology</string> 
@@ -69,14 +69,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="3"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/II</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/II</string> 
     </void> 
     <void property="entryTerm"> 
      <string>CNR, Istituto di Scienze Marine (Sezione di Ancona)</string> 
@@ -94,14 +94,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="4"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/LC</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/LC</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Center of Marine Research</string> 
@@ -119,14 +119,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="5"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/SD</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/SD</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Centre de recherches oceanographiques de Dakar</string> 
@@ -141,14 +141,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="6"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/IE</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/IE</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Centro Ricerche Ambiente Marino (ENEA)</string> 
@@ -166,14 +166,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="7"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/FC</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/FC</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Collecte Localisation Satellites SA – CLS</string> 
@@ -191,14 +191,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="8"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/CN</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/CN</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Cyprus Oceanographic Data Center, Oceanography Center</string> 
@@ -216,14 +216,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="9"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/DM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/DM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Danish Meteorological Institute, Oceanographic Section</string> 
@@ -241,14 +241,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="10"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/CM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/CM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Department of Fisheries and Oceans - Ministère des pêches et Océans (DFO-MPO)</string> 
@@ -263,14 +263,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="11"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/TN</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/TN</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Department of Navigation and Hydrography and Oceanography, Turkish Navy</string> 
@@ -288,14 +288,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="12"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/FM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/FM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Finnish Institute of Marine Research (FIMR)</string> 
@@ -313,14 +313,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="13"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/BV</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/BV</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Flanders Marine Institute (VLIZ)</string> 
@@ -338,14 +338,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="14"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/AD</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/AD</string> 
     </void> 
     <void property="entryTerm"> 
      <string>German Oceanographic Datacentre (NODC)</string> 
@@ -363,14 +363,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="15"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/GN</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/GN</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Hellenic Centre for Marine Research, Hellenic National Oceanographic Data Centre (HNODC/HCMR)</string> 
@@ -388,14 +388,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="16"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/FI</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/FI</string> 
     </void> 
     <void property="entryTerm"> 
      <string>IFREMER / IDM/SISMER</string> 
@@ -413,14 +413,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="17"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/PI</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/PI</string> 
     </void> 
     <void property="entryTerm"> 
      <string>IHPT, Hydrographic Institute</string> 
@@ -438,14 +438,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="18"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/TI</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/TI</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Institut National des Sciences et Technologies de la Mer – INSTM</string> 
@@ -463,14 +463,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="19"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/NI</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/NI</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Institute of Marine Research - Norwegian Marine Data Centre (NMD)</string> 
@@ -488,14 +488,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="20"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/IM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/IM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Institute of Marine Sciences, Middle East Technical University (IMS-METU)</string> 
@@ -513,14 +513,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="21"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/PM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/PM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Institute of Meteorology and Water Management, Maritime Branch in Gdynia (IMWM MB)</string> 
@@ -538,14 +538,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="22"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/IF</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/IF</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Institute of Oceanography and Fisheries</string> 
@@ -563,14 +563,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="23"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/SI</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/SI</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Instituto Espanol de Oceanografia - IEO</string> 
@@ -588,14 +588,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="24"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/DI</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/DI</string> 
     </void> 
     <void property="entryTerm"> 
      <string>International Council for the Exploration of the Sea (ICES)</string> 
@@ -613,14 +613,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="25"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/ML</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/ML</string> 
     </void> 
     <void property="entryTerm"> 
      <string>International Ocean Institute - Malta Operational Centre (University Of Malta) / Physical Oceanography Unit</string> 
@@ -638,14 +638,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="26"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/IL</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/IL</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Israel Marine Data Center (ISRAMAR)</string> 
@@ -663,14 +663,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="27"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/IN</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/IN</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Istituto Nazionale di Geofisica e Vulcanologia – INGV</string> 
@@ -688,14 +688,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="28"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/IO</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/IO</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Istituto Nazionale di Oceanografia e di Geofisica Sperimentale - OGS, Dipartimento di Oceanografia</string> 
@@ -713,14 +713,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="29"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/NO</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/NO</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Iv.Javakhishvili Tbilisi State University</string> 
@@ -738,14 +738,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="30"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/LI</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/LI</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Latvian Institute of Aquatic Ecology</string> 
@@ -763,17 +763,17 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="31"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/BU</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/BU</string> 
     </void> 
     <void property="entryTerm"> 
-     <string>Management Unit of North Sea and Scheldt Estuary Mathematical Models, data acquisition centre -  (MUMM)</string> 
+     <string>Management Unit of North Sea and Scheldt Estuary Mathematical Models, data acquisition centre - (MUMM)</string> 
     </void> 
     <void property="entryTermAbbr"> 
      <string>EDMO429</string> 
@@ -782,20 +782,20 @@
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1211547655000</long> 
+        <long>1227627833000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="32"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/UM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/UM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Marine Hydrophysical Institute</string> 
@@ -813,14 +813,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="33"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/IR</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/IR</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Marine Institute</string> 
@@ -838,14 +838,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="34"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/IC</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/IC</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Marine Research Institute (MRI)</string> 
@@ -863,14 +863,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="35"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/EM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/EM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Marine Systems Institute</string> 
@@ -888,14 +888,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="36"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/WA</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/WA</string> 
     </void> 
     <void property="entryTerm"> 
      <string>NOAA - WDCA</string> 
@@ -910,14 +910,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="37"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/LB</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/LB</string> 
     </void> 
     <void property="entryTerm"> 
      <string>National Center for Marines Sciences - NCMS</string> 
@@ -935,14 +935,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="38"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/DN</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/DN</string> 
     </void> 
     <void property="entryTerm"> 
      <string>National Environmental Research Institute, University of Aarhus, Department of Marine Ecology</string> 
@@ -960,36 +960,36 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="39"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/EN</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/EN</string> 
     </void> 
     <void property="entryTerm"> 
-     <string>National Institute  Oceanography Fisheries, ENODC</string> 
+     <string>National Institute Oceanography Fisheries, ENODC</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1211547655000</long> 
+        <long>1227627833000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="40"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/RN</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/RN</string> 
     </void> 
     <void property="entryTerm"> 
      <string>National Institute for Marine Research and Development Grigore Antipa</string> 
@@ -1007,14 +1007,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="41"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/SN</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/SN</string> 
     </void> 
     <void property="entryTerm"> 
      <string>National Institute of Biology - NIB</string> 
@@ -1032,14 +1032,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="42"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/MI</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/MI</string> 
     </void> 
     <void property="entryTerm"> 
      <string>National Institute of Fisheries Research (INRH)</string> 
@@ -1057,14 +1057,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="43"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/AL </string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/AL </string> 
     </void> 
     <void property="entryTerm"> 
      <string>National Institute of Marine Sciences and Coastal Management (ISMAL)</string> 
@@ -1082,14 +1082,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="44"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/BM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/BM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>National Institute of Meteorology and Hydrometeorology Data Centre (NIMH)</string> 
@@ -1107,14 +1107,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="45"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/RI</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/RI</string> 
     </void> 
     <void property="entryTerm"> 
      <string>National Oceanographic Data Commission (NODC - RIKZ)</string> 
@@ -1132,14 +1132,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="46"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/RS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/RS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>P.P.Shirshov Institute of Oceanology, RAS</string> 
@@ -1157,14 +1157,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="47"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/AP</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/AP</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Polytechnic University of Tirana – PUT</string> 
@@ -1182,14 +1182,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="48"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/WB</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/WB</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Russia Research Institute of Hydrometeorological Information (RIHMI-WDCB)</string> 
@@ -1207,14 +1207,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="49"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/FS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/FS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>SHOM / EPSHOM (SERVICE HYDROGRAPHIQUE MARINE)</string> 
@@ -1232,14 +1232,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="50"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/SM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/SM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Swedish Meteorogical and Hydrological Institute (SMHI)</string> 
@@ -1257,14 +1257,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="51"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/UH</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/UH</string> 
     </void> 
     <void property="entryTerm"> 
      <string>United Kingdom Hydrographic Office</string> 
@@ -1282,29 +1282,29 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="52"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L300/1/BG</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L300/2/BG</string> 
     </void> 
     <void property="entryTerm"> 
-     <string>Universite de Liege,  GHER</string> 
+     <string>Universite de Liege, GHER</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1211547655000</long> 
+        <long>1227627833000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L300/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L300/2</string> 
     </void> 
    </object> 
   </void> 

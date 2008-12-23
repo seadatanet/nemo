@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.5.0_06" class="java.beans.XMLDecoder"> 
+<java version="1.6.0_06" class="java.beans.XMLDecoder"> 
  <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="11"> 
   <void index="0"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L201/1/4</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L201/2/4</string> 
     </void> 
     <void property="entryTerm"> 
      <string>bad value</string> 
@@ -25,14 +25,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L201/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L201/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="1"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L201/1/5</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L201/2/5</string> 
     </void> 
     <void property="entryTerm"> 
      <string>changed value</string> 
@@ -53,14 +53,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L201/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L201/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="2"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L201/1/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L201/2/1</string> 
     </void> 
     <void property="entryTerm"> 
      <string>good value</string> 
@@ -81,14 +81,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L201/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L201/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="3"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L201/1/8</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L201/2/8</string> 
     </void> 
     <void property="entryTerm"> 
      <string>interpolated value</string> 
@@ -109,14 +109,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L201/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L201/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="4"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L201/1/9</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L201/2/9</string> 
     </void> 
     <void property="entryTerm"> 
      <string>missing value</string> 
@@ -137,14 +137,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L201/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L201/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="5"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L201/1/0</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L201/2/0</string> 
     </void> 
     <void property="entryTerm"> 
      <string>no quality control</string> 
@@ -165,14 +165,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L201/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L201/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="6"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L201/1/3</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L201/2/3</string> 
     </void> 
     <void property="entryTerm"> 
      <string>probably bad value</string> 
@@ -193,14 +193,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L201/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L201/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="7"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L201/1/2</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L201/2/2</string> 
     </void> 
     <void property="entryTerm"> 
      <string>probably good value</string> 
@@ -221,14 +221,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L201/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L201/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="8"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L201/1/6</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L201/2/6</string> 
     </void> 
     <void property="entryTerm"> 
      <string>value below detection</string> 
@@ -237,26 +237,26 @@
      <string>BD</string> 
     </void> 
     <void property="entryTermDef"> 
-     <string>The level of the measured phenomena was too small to be quantified by the technique employed to measure it. The accompanying value is the detection limit for the technique.</string> 
+     <string>The level of the measured phenomena was too small to be quantified by the technique employed to measure it. The accompanying value is the detection limit for the technique or zero if that value is unknown.</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1179395250000</long> 
+        <long>1223019007000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L201/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L201/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="9"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L201/1/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L201/2/7</string> 
     </void> 
     <void property="entryTerm"> 
      <string>value in excess</string> 
@@ -277,14 +277,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L201/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L201/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="10"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L201/1/A</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L201/2/A</string> 
     </void> 
     <void property="entryTerm"> 
      <string>value phenomenon uncertain</string> 
@@ -305,7 +305,7 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L201/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L201/2</string> 
     </void> 
    </object> 
   </void> 

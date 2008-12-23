@@ -1,10 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.5.0_06" class="java.beans.XMLDecoder"> 
- <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="11"> 
+<java version="1.6.0_06" class="java.beans.XMLDecoder"> 
+ <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="12"> 
   <void index="0"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L081/1/SR</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L081/2/LS</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>SeaDataNet licence</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>SDN_licence</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Access to the data and usage are as specified in the SeaDataNet data policy and licence agreement</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1222331486000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L081/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="1"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L081/2/SR</string> 
     </void> 
     <void property="entryTerm"> 
      <string>academic</string> 
@@ -25,14 +53,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L081/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L081/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="1"> 
+  <void index="2"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L081/1/CC</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L081/2/CC</string> 
     </void> 
     <void property="entryTerm"> 
      <string>collection cost charge</string> 
@@ -53,14 +81,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L081/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L081/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="2"> 
+  <void index="3"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L081/1/FE</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L081/2/FE</string> 
     </void> 
     <void property="entryTerm"> 
      <string>commercial charge</string> 
@@ -81,14 +109,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L081/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L081/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="3"> 
+  <void index="4"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L081/1/NC</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L081/2/NC</string> 
     </void> 
     <void property="entryTerm"> 
      <string>distribution cost charge</string> 
@@ -109,14 +137,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L081/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L081/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="4"> 
+  <void index="5"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L081/1/LI</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L081/2/LI</string> 
     </void> 
     <void property="entryTerm"> 
      <string>licence</string> 
@@ -137,14 +165,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L081/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L081/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="5"> 
+  <void index="6"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L081/1/MO</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L081/2/MO</string> 
     </void> 
     <void property="entryTerm"> 
      <string>moratorium</string> 
@@ -165,14 +193,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L081/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L081/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="6"> 
+  <void index="7"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L081/1/NA</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L081/2/NA</string> 
     </void> 
     <void property="entryTerm"> 
      <string>no access</string> 
@@ -193,14 +221,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L081/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L081/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="7"> 
+  <void index="8"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L081/1/OG</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L081/2/OG</string> 
     </void> 
     <void property="entryTerm"> 
      <string>organisation</string> 
@@ -221,14 +249,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L081/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L081/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="8"> 
+  <void index="9"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L081/1/RS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L081/2/RS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>restricted</string> 
@@ -249,14 +277,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L081/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L081/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="9"> 
+  <void index="10"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L081/1/UK</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L081/2/UK</string> 
     </void> 
     <void property="entryTerm"> 
      <string>unknown</string> 
@@ -277,14 +305,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L081/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L081/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="10"> 
+  <void index="11"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L081/1/UN</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L081/2/UN</string> 
     </void> 
     <void property="entryTerm"> 
      <string>unrestricted</string> 
@@ -305,7 +333,7 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L081/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L081/2</string> 
     </void> 
    </object> 
   </void> 
