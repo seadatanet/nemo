@@ -157,7 +157,7 @@ public class SWTProcess implements IRunnableWithProgress {
 
 					for (Station station : survey.getStations()) {
 						CDIMappingWriter.getInstance().addMapping(
-								EditConversion.getLocalCdiId(station, survey),
+								EditConversion.getLocalCdiId(station, survey.getReference()),
 								fichierSortie.getName());
 					}
 				} else {
@@ -175,7 +175,7 @@ public class SWTProcess implements IRunnableWithProgress {
 
 							EditConversion.nomFichierSortie = EditConversion.nomDossierSortie
 									+ "\\"
-									+ EditConversion.getLocalCdiId(station, survey)
+									+ EditConversion.getLocalCdiId(station, survey.getReference())
 									+ ".txt";
 							File fichierSortie = new java.io.File(
 									EditConversion.nomFichierSortie);
@@ -184,7 +184,7 @@ public class SWTProcess implements IRunnableWithProgress {
 									notifier);
 
 							CDIMappingWriter.getInstance().addMapping(
-									EditConversion.getLocalCdiId(station, survey),
+									EditConversion.getLocalCdiId(station, survey.getReference()),
 									fichierSortie.getName());
 						}
 					} else {
@@ -195,7 +195,7 @@ public class SWTProcess implements IRunnableWithProgress {
 
 						for (Station station : survey.getStations()) {
 							CDIMappingWriter.getInstance().addMapping(
-									EditConversion.getLocalCdiId(station, survey),
+									EditConversion.getLocalCdiId(station, survey.getReference()),
 									fichierSortie.getName());
 						}
 					}
@@ -307,7 +307,7 @@ public class SWTProcess implements IRunnableWithProgress {
 
 							EditConversion.nomFichierSortie = EditConversion.nomDossierSortie
 									+ "\\"
-									+ EditConversion.getLocalCdiId(station, survey)
+									+ EditConversion.getLocalCdiId(station, survey.getReference())
 									+ ".txt";
 
 							File fichierSortie = new java.io.File(
@@ -318,7 +318,7 @@ public class SWTProcess implements IRunnableWithProgress {
 									.setDataSize(fichierSortie.length() / 1024f / 1024f);
 
 							CDIMappingWriter.getInstance().addMapping(
-									EditConversion.getLocalCdiId(station, survey),
+									EditConversion.getLocalCdiId(station, survey.getReference()),
 									fichierSortie.getName());
 						}
 					} else {
@@ -337,7 +337,7 @@ public class SWTProcess implements IRunnableWithProgress {
 
 						for (Station station : survey.getStations()) {
 							CDIMappingWriter.getInstance().addMapping(
-									EditConversion.getLocalCdiId(station, survey),
+									EditConversion.getLocalCdiId(station, survey.getReference()),
 									fichierSortie.getName());
 						}
 					}
@@ -452,7 +452,7 @@ public class SWTProcess implements IRunnableWithProgress {
 
 							EditConversion.nomFichierSortie = EditConversion.nomDossierSortie
 									+ "\\"
-									+ EditConversion.getLocalCdiId(station, survey)
+									+ EditConversion.getLocalCdiId(station, survey.getReference())
 									+ ".txt";
 
 							File fichierSortie = new java.io.File(
@@ -463,7 +463,7 @@ public class SWTProcess implements IRunnableWithProgress {
 									.setDataSize(fichierSortie.length() / 1024f / 1024f);
 
 							CDIMappingWriter.getInstance().addMapping(
-									EditConversion.getLocalCdiId(station, survey),
+									EditConversion.getLocalCdiId(station, survey.getReference()),
 									fichierSortie.getName());
 						}
 					} else {
@@ -485,7 +485,7 @@ public class SWTProcess implements IRunnableWithProgress {
 
 						for (Station station : survey.getStations()) {
 							CDIMappingWriter.getInstance().addMapping(
-									EditConversion.getLocalCdiId(station, survey),
+									EditConversion.getLocalCdiId(station, survey.getReference()),
 									fichierSortie.getName());
 						}
 					}

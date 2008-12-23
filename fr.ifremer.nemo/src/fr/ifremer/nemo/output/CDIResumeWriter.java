@@ -116,7 +116,7 @@ public class CDIResumeWriter {
 						writer.write("\r\n");
 						
 						// CDI ID
-						writer.write(EditConversion.getLocalCdiId(station, survey));
+						writer.write(EditConversion.getLocalCdiId(station, survey.getReference()));
 //						writer.write(/*station.getReference() + "_" +*/ Utils.configuration.getDataCenter() + "_"
 //								+ String.valueOf(cdiId++));
 //						writer.write(Configuration.getSingleton().getIdEdmoRespCdi() + "_"

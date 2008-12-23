@@ -49,7 +49,7 @@ $line
 #end
 $nemoLists.getSdnParameters()
 *EDMO_CODE=$configuration.getIdEdmoRespCdi()
-*LOCAL_CDI_ID=$editConversion.getLocalCdiId($station, $survey)
+*LOCAL_CDI_ID=$editConversion.getLocalCdiId($station, $survey.reference)
 *SURFACE SAMPLES=$formatter.limitString( $station.surfaceSamples1, 63)
 *$formatter.limitString( $station.surfaceSamples2, 80)
 #set( $limit = $station.parametersAt(0).valuesSize() - 1 )

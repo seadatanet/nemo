@@ -534,18 +534,17 @@ public class EditConversion extends Thread {
 		}
 	}
 
-	public static String getLocalCdiId(Station station, Survey survey) {
+	public static String getLocalCdiId(Station station, String surveyReference) {
 		// FAE 1143 : nommage du LOCAL_CDI_ID
-		// 		MEDATLAS -> [Référence campagne]_[Numéro station]_[Type de données]
-		// 		ODV      -> [Référence du jeu de données]_[Numéro station]_[Type de données]
 		
 		String temp = "";
 		
-		// [Référence campagne] ou [Référence du jeu de données]
 		if (SWTProcess.getOdv()) {
+			// ODV      -> [Référence du jeu de données]
 			temp = getDataSetRef();
 		}else{
-			temp = Formatter.getSingleton().padString(survey.getReference(),13);
+			// MEDATLAS ->  [Référence campagne]
+			temp = Formatter.getSingleton().padString(surveyReference,13);
 		}
 		
 		// [Numéro station] codé sur 5 caractères il est complété à gauche par des '0'. 
