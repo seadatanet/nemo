@@ -70,7 +70,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 	public static Button buttonCancel, buttonValider, buttonParcourirModele,
 			buttonParcourirCampagne, buttonArboMapping = null;
 
-	public static Label labelNemo, labelNautilus, labelModèle, labelCampagne,
+	public static Label labelNemo, labelNautilus, labelCampagne,
 			labelIdEdmoRespCdi, labelUrlCdi, labelMethodeCdi,
 			labelCodeEdmoDonnees, labelIdEdmoRespDonnees,
 			labelIdEdmoDistDonnees, labelWSVocab, labelFichierMapping,
@@ -90,7 +90,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 	public final static String ID = "fr.ifremer.nemo.ui.OptionsAction"; //$NON-NLS-1$
 
-	// vars nécessaires à la fenêtre d'options
+	// vars nï¿½cessaires ï¿½ la fenï¿½tre d'options
 
 	public static Shell shelloptions;
 
@@ -146,10 +146,10 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		// LANGUE
 		if (Utils.configuration.getLocale().toString().matches("fr_FR")) { //$NON-NLS-1$
-			// on met la combo langue à FR
+			// on met la combo langue ï¿½ FR
 			comboLangue.select(0);
 		} else {
-			// on met la combo langue à GB
+			// on met la combo langue ï¿½ GB
 			comboLangue.select(1);
 		}
 
@@ -394,10 +394,10 @@ public class OptionsAction extends Action implements ISelectionListener,
 		// groupDossier.setBounds(new Rectangle(176, 10, 242, 150));
 
 		/*
-		 * labelModèle = new Label(groupDossier, SWT.NONE); //
-		 * labelModèle.setBounds(new Rectangle(13, 15, 62, 13));
-		 * labelModèle.setText(Messages.getString("OptionsAction.18"));
-		 * //$NON-NLS-1$ labelModèle.pack();
+		 * labelModï¿½le = new Label(groupDossier, SWT.NONE); //
+		 * labelModï¿½le.setBounds(new Rectangle(13, 15, 62, 13));
+		 * labelModï¿½le.setText(Messages.getString("OptionsAction.18"));
+		 * //$NON-NLS-1$ labelModï¿½le.pack();
 		 */
 
 		groupDossier1 = new Group(groupDossier, SWT.NONE);
@@ -407,11 +407,11 @@ public class OptionsAction extends Action implements ISelectionListener,
 		groupDossier1.pack();
 
 		textDossierModele = new Text(groupDossier1, SWT.BORDER);
-		// textDossierModèle.setBounds(new Rectangle(5, 31, 229, 19));
+		// textDossierModï¿½le.setBounds(new Rectangle(5, 31, 229, 19));
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(
 				textDossierModele);
 		buttonParcourirModele = new Button(groupDossier1, SWT.NONE);
-		// buttonParcourirModèle.setBounds(new Rectangle(170, 53, 64, 23)); //
+		// buttonParcourirModï¿½le.setBounds(new Rectangle(170, 53, 64, 23)); //
 		// 64
 		buttonParcourirModele.setText(Messages.getString("OptionsAction.6")); //$NON-NLS-1$
 		buttonParcourirModele.pack();
@@ -458,7 +458,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 						} else {
 
-							// System.out.println("pas de dossier sélectionné");
+							// System.out.println("pas de dossier sï¿½lectionnï¿½");
 							// //$NON-NLS-1$
 							ViewLog.styledTextLogErreurs.setText(Messages
 									.getString("OptionsAction.9")); //$NON-NLS-1$
@@ -487,7 +487,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 						} else {
 
-							// System.out.println("pas de dossier sélectionné");
+							// System.out.println("pas de dossier sï¿½lectionnï¿½");
 							// //$NON-NLS-1$
 							ViewLog.styledTextLogErreurs.setText(Messages
 									.getString("OptionsAction.9")); //$NON-NLS-1$
@@ -656,10 +656,10 @@ public class OptionsAction extends Action implements ISelectionListener,
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(grpFlag);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(grpFlag);
 
-		// Création du tableau des tables de correspondaces
+		// Crï¿½ation du tableau des tables de correspondaces
 		createTableFlagTable();
 
-		// Création du tableau des correspondaces
+		// Crï¿½ation du tableau des correspondaces
 		createTableFlag();
 	}
 
@@ -759,7 +759,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		itemDefault.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				setDefaultCode(tabFlagTable.getSelection()[0].getText());
-				// Mise en gras du flagtable par défaut
+				// Mise en gras du flagtable par dï¿½faut
 
 				Font normal = new Font(Application.display, "", 8, SWT.NORMAL);
 				Font bold = new Font(Application.display, "", 8, SWT.BOLD);
@@ -1006,7 +1006,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 			item.setText(0, flagTables.get(i).getCode());
 			item.setText(1, flagTables.get(i).getLibelle());
 
-			// Mise en gras du flagtable par défaut
+			// Mise en gras du flagtable par dï¿½faut
 			if (flagTables.get(i).getCode().equals(
 					Utils.configuration.getDefaultCode())) {
 				setDefaultCode(flagTables.get(i).getCode());
