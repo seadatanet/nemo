@@ -13,14 +13,14 @@ import fr.ifremer.nemo.util.Preformat;
 public class Etape {
 
 	/*
-	 * Gestion des diff�rents affichages lors de la s�lection des onglets de la
-	 * fen�tre principale et des diff�rentes �tapes.
+	 * Gestion des diff�rents affichages lors de la sélection des onglets de la
+	 * fenêtre principale et des différentes étapes.
 	 * 
 	 */
 
 	public static void validationDesc() {
 
-		// Fichier avec s�parateur
+		// Fichier avec séparateur
 		if (ViewFile.chkSeparateur.getSelection() && !Preformat.isPreformat()) {
 			try {
 				Preformat.run();
@@ -30,7 +30,7 @@ public class Etape {
 			}
 		}
 
-		// retour � l'onglet message d'erreur
+		// retour à l'onglet message d'erreur
 		ViewLog.tabFolderLog.setSelection(0);
 
 		Boolean ok, resultat;
@@ -79,7 +79,7 @@ public class Etape {
 		//
 		// }
 
-		// check des valeurs date/heure s�ries tempo
+		// check des valeurs date/heure séries tempo
 		// if (ViewFile.checkBoxTempo.getSelection()) {
 		if (ViewFile.radSerieTempo.getSelection()
 				|| ViewFile.radTrajectoire.getSelection()) {
@@ -122,10 +122,10 @@ public class Etape {
 	public static void validationSurvey() {
 		// test de toutes les valeurs de Survey
 
-		// retour � l'onglet message d'erreur
+		// retour à l'onglet message d'erreur
 		ViewLog.tabFolderLog.setSelection(0);
 
-		// mise � jour de la table
+		// mise à jour de la table
 		TableDataSurvey.majTypeData();
 
 		Boolean ok, resultat;
@@ -196,7 +196,7 @@ public class Etape {
 			Utils.messageErreur(Messages.getString("Etape.28")); //$NON-NLS-1$
 			ok = false;
 		} else {
-			// v�rif si pas de "nombre=0"
+			// vérif si pas de "nombre=0"
 			int taille = TableDataSurvey.types.size();
 			for (int i = 0; i < taille; i++) {
 				int nbre = TableDataSurvey.types.get(i).getNombre();
@@ -226,7 +226,7 @@ public class Etape {
 		// Remplissage du tableau de correspondance de flags
 		EditStation.flagTable.fillFlagTable(EditStation.tabCorrespondance);
 		
-		// retour � l'onglet message d'erreur
+		// retour à l'onglet message d'erreur
 		ViewLog.tabFolderLog.setSelection(0);
 
 		// System.out.println("Debut check station");

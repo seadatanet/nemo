@@ -116,7 +116,7 @@ public class CDIResumeWriter {
 						writer.write("\r\n");
 						
 						// CDI ID
-						writer.write(EditConversion.getLocalCdiId(station));
+						writer.write(EditConversion.getLocalCdiId(station, survey));
 //						writer.write(/*station.getReference() + "_" +*/ Utils.configuration.getDataCenter() + "_"
 //								+ String.valueOf(cdiId++));
 //						writer.write(Configuration.getSingleton().getIdEdmoRespCdi() + "_"
@@ -258,10 +258,10 @@ public class CDIResumeWriter {
 
 				int reponse = mb.open();
 				if (reponse == SWT.NO) {
-					// on n'écrase pas le fichier
+					// on n'Ã©crase pas le fichier
 					choixFichierSortie();
 				} else {
-					// on écrase le fichier
+					// on Ã©crase le fichier
 					Utils.messageErreur("");
 				}
 			} else {

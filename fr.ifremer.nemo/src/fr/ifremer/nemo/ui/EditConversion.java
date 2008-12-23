@@ -46,17 +46,17 @@ public class EditConversion extends Thread {
 	private static String _dataSetRef;
 
 	/**
-	 * Nom du fichier lu � retourner en cas d'erreur
+	 * Nom du fichier lu à retourner en cas d'erreur
 	 */
 	protected static String _erreurFichier;
 
 	/**
-	 * Nombre de lignes lues � retourner en cas d'erreur
+	 * Nombre de lignes lues à retourner en cas d'erreur
 	 */
 	protected static int _erreurLigne;
 
 	/**
-	 * Chaine lue � retourner en cas d'erreur
+	 * Chaine lue à retourner en cas d'erreur
 	 */
 	protected static String _erreurChaine;
 
@@ -66,7 +66,7 @@ public class EditConversion extends Thread {
 	protected static int _totalLigne;
 
 	/**
-	 * Liste des stations tri�es
+	 * Liste des stations tri�es
 	 */
 	protected static LinkedHashMap<String, Integer> _sortedStations = new LinkedHashMap<String, Integer>();
 
@@ -76,7 +76,7 @@ public class EditConversion extends Thread {
 	}
 
 	public static void affichageEdition() {
-		// initialisation zone �dition pour �tape description de fichier
+		// initialisation zone édition pour étape description de fichier
 		ViewLog.aideConversion();
 		formEdition = ViewEdit.formEdition;
 		nomFichierSortie = "";
@@ -111,7 +111,7 @@ public class EditConversion extends Thread {
 							setDataSetRef("");
 							Utils.messageErreur("");
 
-							// RAZ du num�ro de station incr�ment�
+							// RAZ du numéro de station incrémenté
 							DataModel.stationModel.resetRef();
 							DataModel.stationModel.setLastRef(null);
 
@@ -121,7 +121,7 @@ public class EditConversion extends Thread {
 								NemoLists.writeSdnParameters("//");
 							}
 
-							// RAZ de la liste des stations tri�es
+							// RAZ de la liste des stations triées
 							getSortedStations().clear();
 							
 							if (EditDesc.okApresReset
@@ -297,7 +297,7 @@ public class EditConversion extends Thread {
 
 				int reponse = mb.open();
 				if (reponse == SWT.NO) {
-					// on n'�crase pas le fichier
+					// on n'écrase pas le fichier
 					choixFichierSortie();
 				} else {
 					runSWTProgress();
@@ -313,7 +313,7 @@ public class EditConversion extends Thread {
 				e.printStackTrace();
 			}
 
-			// affichage des r�sultats en fin de conversion
+			// affichage des résultats en fin de conversion
 			afficheResultat();
 		}
 
@@ -339,8 +339,8 @@ public class EditConversion extends Thread {
 
 		if (nomDossierSortie != null) {
 
-			// Teste si le repertoire de sortie est different du repertoire
-			// d'entree
+			// Teste si le répertoire de sortie est différent du répertoire
+			// d'entrée
 			if (!ViewFile.radioFichier.getSelection()
 					&& nomDossierSortie.equals(ViewFile.nomRepertoire)) {
 				MessageBox mb = new MessageBox(PlatformUI.getWorkbench()
@@ -365,7 +365,7 @@ public class EditConversion extends Thread {
 
 				int reponse = mb.open();
 				if (reponse == SWT.NO) {
-					// on n'�crase pas le fichier
+					// on n'écrase pas le fichier
 					choixDossierSortie();
 				} else {
 					runSWTProgress();
@@ -382,7 +382,7 @@ public class EditConversion extends Thread {
 				e.printStackTrace();
 			}
 
-			// affichage des r�sultats en fin de conversion
+			// affichage des résultats en fin de conversion
 			afficheResultat();
 		}
 
@@ -413,7 +413,7 @@ public class EditConversion extends Thread {
 			Utils.messageErreurAppend(messageErreur());
 		}
 
-		// Stations tri�es
+		// Stations triées
 		if (getSortedStations().size() > 0) {
 			String sortedMessage = "\n\n" + getSortedStations().size() + " "
 					+ Messages.getString("EditConversion.28") + " ";
@@ -474,9 +474,9 @@ public class EditConversion extends Thread {
 
 		if (getErreurLigne() != 0) {
 			if (getErreurLigne() <= DataModel.stationModel.getNumberOfLines()) {
-				// Si l'erreur se trouve dans l'en-t�te de station, la ligne
-				// indiqu�e
-				// n'est pas forc�ment la bonne, il vaut mieux ne pas l'indiquer
+				// Si l'erreur se trouve dans l'en-tête de station, la ligne
+				// indiquée
+				// n'est pas forcément la bonne, il vaut mieux ne pas l'indiquer
 				return "";
 			}
 			message += Messages.getString("EditConversion.21") + "\t : \t"
@@ -511,8 +511,10 @@ public class EditConversion extends Thread {
 			String strDefault = "";
 			if (DataModel.dirSurvey != null) {
 				strDefault = DataModel.dirSurvey.getModel().getReference();
+				if (strDefault.equals("")) strDefault = DataModel.dirSurvey.getModel().getName();
 			} else if (DataModel.singleSurvey != null) {
 				strDefault = DataModel.singleSurvey.getModel().getReference();
+				if (strDefault.equals("")) strDefault = DataModel.singleSurvey.getModel().getName();
 			}
 			InputDialog inputDataSetRef = new InputDialog(PlatformUI
 					.getWorkbench().getDisplay().getActiveShell(), Messages
@@ -532,25 +534,26 @@ public class EditConversion extends Thread {
 		}
 	}
 
-	public static String getLocalCdiId(Station station) {
+	public static String getLocalCdiId(Station station, Survey survey) {
+		// FAE 1143 : nommage du LOCAL_CDI_ID
+		// 		MEDATLAS -> [Référence campagne]_[Numéro station]_[Type de données]
+		// 		ODV      -> [Référence du jeu de données]_[Numéro station]_[Type de données]
+		
 		String temp = "";
-
+		
+		// [Référence campagne] ou [Référence du jeu de données]
 		if (SWTProcess.getOdv()) {
 			temp = getDataSetRef();
-
-			if (!station.getReference().trim().equals("")) {
-				if (!temp.equals("")) {
-					temp += "_";
-				}
-				temp += station.getReference().trim();
-			}
-		} else {
-			temp = Formatter.getSingleton().padZero(
-					station.getReference().trim(), 5);
-
-			temp += "_" + Utils.configuration.getIdEdmoRespCdi();
+		}else{
+			temp = Formatter.getSingleton().padString(survey.getReference(),13);
 		}
-
+		
+		// [Numéro station] codé sur 5 caractères il est complété à gauche par des '0'. 
+		String stationReference = station.getReference().trim();
+		if (!temp.equals("")) temp += "_";
+		temp += Formatter.getSingleton().padZero(stationReference, 5);
+		
+		// [Type de données] s'il existe
 		if (station.getDataType() != null) {
 			if (!station.getDataType().getCode().equals("")) {
 				if (!temp.equals("")) {

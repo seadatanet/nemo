@@ -64,7 +64,7 @@ $configuration.getSep()#if ($i == 0)$typeBC#end##
 $configuration.getSep()#if ($i == 0)$formatter.formatDateTime("YYYY-MM-DD", $station.fullDate)T$formatter.formatDateTime("hh24:mm:ss.sss", $station.correctedTime, "9999")#end##
 $configuration.getSep()#if ($i == 0)$formatter.formatLongitude("+DDD.dddddd", $station.longitude)#end##
 $configuration.getSep()#if ($i == 0)$formatter.formatLatitude("+DD.dddddd ", $station.latitude)#end##
-$configuration.getSep()#if ($i == 0)$editConversion.getLocalCdiId($station)#end##
+$configuration.getSep()#if ($i == 0)$editConversion.getLocalCdiId($station, $survey)#end##
 $configuration.getSep()#if ($i == 0)$configuration.getIdEdmoRespCdi()#end##
 $configuration.getSep()#if ($i == 0)#if ($station.bottomDepth.toString() == "NaN")0#else$station.bottomDepth#end#end##
 #if ($stationModel.isTimeSeries())$configuration.getSep()$stationModel.julianDate($station, $i)#end##

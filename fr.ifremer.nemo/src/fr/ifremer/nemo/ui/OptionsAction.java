@@ -90,7 +90,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 	public final static String ID = "fr.ifremer.nemo.ui.OptionsAction"; //$NON-NLS-1$
 
-	// vars n�cessaires � la fen�tre d'options
+	// vars nécessaires à la fenêtre d'options
 
 	public static Shell shelloptions;
 
@@ -146,10 +146,10 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		// LANGUE
 		if (Utils.configuration.getLocale().toString().matches("fr_FR")) { //$NON-NLS-1$
-			// on met la combo langue � FR
+			// on met la combo langue à FR
 			comboLangue.select(0);
 		} else {
-			// on met la combo langue � GB
+			// on met la combo langue à GB
 			comboLangue.select(1);
 		}
 
