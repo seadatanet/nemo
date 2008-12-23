@@ -54,12 +54,9 @@ public class SWTProcessWS implements IRunnableWithProgress {
 		// TACHES A EFFECTUER
 
 		if (fichiersConstantes) {
-			// mise à jour fichiers constantes
+			// mise ï¿½ jour fichiers constantes
 			monitor.subTask(Messages.getString("SWTProcessWS.3"));
 			NemoLists.updateDataTypes();
-
-			monitor.subTask(Messages.getString("SWTProcessWS.4"));
-			NemoLists.updateRegions();
 
 			monitor.subTask(Messages.getString("SWTProcessWS.7"));
 			NemoLists.updateParameters();
@@ -68,7 +65,7 @@ public class SWTProcessWS implements IRunnableWithProgress {
 			NemoLists.updateSurveys();
 			
 			monitor.subTask(Messages.getString("SWTProcessWS.9"));
-			// FAE 0001132 : précision du nom de la liste dans le message
+			// FAE 0001132 : prï¿½cision du nom de la liste dans le message
 			NemoLists.updateVocabLists(monitor);
 			monitor.subTask(Messages.getString("SWTProcessWS.9") + " Mapping P091 / P012");
 			NemoLists.updateVocabMap("P091", "P012");
@@ -80,7 +77,7 @@ public class SWTProcessWS implements IRunnableWithProgress {
 		} else {
 
 			if (dossier) {
-				// mise à jour dossier campagne
+				// mise ï¿½ jour dossier campagne
 				try {
 					DataModel.dirSurvey.getModel().fillFromSISMER(referenceWS);
 				} catch (MalformedURLException e) {
@@ -98,7 +95,7 @@ public class SWTProcessWS implements IRunnableWithProgress {
 				}
 
 			} else {
-				// mise à jour fichier campagne
+				// mise ï¿½ jour fichier campagne
 				try {
 					DataModel.singleSurvey.getModel().fillFromSISMER(
 							referenceWS);

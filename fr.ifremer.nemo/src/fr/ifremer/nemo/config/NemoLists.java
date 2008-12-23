@@ -47,8 +47,6 @@ public class NemoLists implements Cloneable {
 
 	static protected java.util.List<WSParameter> _parameters = new java.util.ArrayList<WSParameter>();
 
-	static protected java.util.List<WSRegion> _regions = new java.util.ArrayList<WSRegion>();
-
 	static protected java.util.List<WSSurveyDescription> _surveys = new java.util.ArrayList<WSSurveyDescription>();
 
 	static protected java.util.HashMap<Integer, String> _edmo = new java.util.HashMap<Integer, String>();
@@ -486,203 +484,6 @@ public class NemoLists implements Cloneable {
 	}
 
 	/**
-	 * release all links for role "regions"
-	 */
-	public static void releaseRegions() {
-		for (WSRegion t : getRegions()) {
-			removeRegion(t);
-		}
-	}
-
-	/**
-	 * remove link with x for role "regions"
-	 * 
-	 * @param x
-	 *            the linked object to unlink
-	 */
-	public static void removeRegion(WSRegion x) {
-		if (!regionsIncludes(x))
-			return;
-		nocheckRemoveRegion(x);
-	}
-
-	/**
-	 * Add a link for role "regions"
-	 * 
-	 * @param x
-	 *            the object to link with
-	 */
-	public static void addRegion(WSRegion x) {
-		if (regionsIncludes(x))
-			return;
-		nocheckAddRegion(x);
-	}
-
-	/**
-	 * Returns the collection of linked objects for role "regions"
-	 * 
-	 * @return Array of linked objects
-	 */
-	public static WSRegion[] getRegions() {
-		WSRegion[] v = new WSRegion[_regions.size()];
-		_regions.toArray(v);
-		return v;
-	}
-
-	/**
-	 * Returns linked object for role "regions" at index i
-	 * 
-	 * @param i
-	 *            the index of the linked object
-	 * @return linked object at index i
-	 */
-	public static WSRegion regionsAt(int i) {
-		return (WSRegion) _regions.get(i);
-	}
-
-	/**
-	 * returns index of object x in "regions"
-	 * 
-	 * @param x
-	 *            the linked object
-	 */
-	public static int regionsIndexOf(WSRegion x) {
-		if (!regionsIncludes(x))
-			return -1;
-		for (int i = 0; i < regionsSize(); i++) {
-			if (regionsAt(i) == x) {
-				return i;
-			}
-		}
-		return -1;
-	}
-
-	/**
-	 * move x one index before in the list for role "regions"
-	 * 
-	 * @param x
-	 *            the object to move
-	 */
-	public static void regionsMoveUp(WSRegion x) {
-		int index;
-		index = regionsIndexOf(x);
-		if (index < 1)
-			return;
-		nocheckMoveRegionAt(x, index - 1);
-	}
-
-	/**
-	 * move x to the top of list for role "regions"
-	 * 
-	 * @param x
-	 *            the object to move
-	 */
-	public static void regionsMoveTop(WSRegion x) {
-		int index;
-		index = regionsIndexOf(x);
-		if (index < 1)
-			return;
-		nocheckMoveRegionAt(x, 0);
-	}
-
-	/**
-	 * move x one index more in the list for role "regions"
-	 * 
-	 * @param x
-	 *            the object to move
-	 */
-	public static void regionsMoveDown(WSRegion x) {
-		int index;
-		index = regionsIndexOf(x);
-		if (index < 0 || index > regionsSize() - 2)
-			return;
-		nocheckMoveRegionAt(x, index + 1);
-	}
-
-	/**
-	 * move x to the bottom of list for role "regions"
-	 * 
-	 * @param x
-	 *            the object to move
-	 */
-	public static void regionsMoveBottom(WSRegion x) {
-		int index;
-		index = regionsIndexOf(x);
-		if (index < 0 || index > regionsSize() - 2)
-			return;
-		nocheckMoveRegionAt(x, regionsSize() - 1);
-	}
-
-	/**
-	 * move x one index more in the list for role "regions"
-	 * 
-	 * @param x
-	 *            the object to move
-	 */
-	public static void nocheckMoveRegionAt(WSRegion x, int a_Index) {
-		int index;
-		WSRegion tmp;
-		index = regionsIndexOf(x);
-		tmp = _regions.get(index);
-		_regions.remove(index);
-		_regions.add(a_Index, tmp);
-	}
-
-	/**
-	 * remove x from the linked objects for role "regions"
-	 * 
-	 * DO NOT USE. use non privileged method instead
-	 * 
-	 * @param x
-	 *            the object to link with
-	 * @see NemoLists#removeRegion(WSRegion)
-	 */
-	protected static void nocheckRemoveRegion(WSRegion x) {
-		_regions.remove(x);
-	}
-
-	/**
-	 * adds x to the linked objects for role "regions"
-	 * 
-	 * DO NOT USE. use non privileged method instead
-	 * 
-	 * @param x
-	 *            the object to link with
-	 * @see NemoLists#addRegion(WSRegion)
-	 */
-	protected static void nocheckAddRegion(WSRegion x) {
-		_regions.add(x);
-	}
-
-	/**
-	 * returns the number of linked objects for role "regions"
-	 * 
-	 * @return the number of linked objects
-	 */
-	public static int regionsSize() {
-		return _regions.size();
-	}
-
-	/**
-	 * returns true if x is linked to the receiver for role "regions"
-	 * 
-	 * @param x
-	 *            an instance of WSRegion
-	 */
-	public static boolean regionsIncludes(WSRegion x) {
-		return _regions.contains(x);
-	}
-
-	/**
-	 * returns an Iterator to iterate over the elements of "regions"
-	 * 
-	 */
-	public static java.util.Iterator<WSRegion> regionsIterator() {
-		return _regions.iterator();
-
-	}
-
-	/**
 	 * release all links for role "surveys"
 	 */
 	public static void releaseSurveys() {
@@ -907,7 +708,6 @@ public class NemoLists implements Cloneable {
 	 */
 	public static void initLists() {
 		initDataTypes();
-		initRegions();
 		initParameters();
 		initSurveys();
 		initVocabLists();
@@ -927,30 +727,6 @@ public class NemoLists implements Cloneable {
 			// decoder = new
 			// XMLDecoder(NemoLists.class.getResourceAsStream("/resources/Parameters.xml"));
 			_parameters = (java.util.List<WSParameter>) decoder.readObject();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (decoder != null) {
-				try {
-					decoder.close();
-				} catch (Exception ex) {
-				}
-			}
-		}
-	}
-
-	/**
-	 * 
-	 */
-	public static void initRegions() {
-		XMLDecoder decoder = null;
-		try {
-			decoder = new XMLDecoder(new FileInputStream(
-					"resources/Regions.xml"));
-
-			// decoder = new
-			// XMLDecoder(NemoLists.class.getResourceAsStream("/resources/Regions.xml"));
-			_regions = (java.util.List<WSRegion>) decoder.readObject();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -993,7 +769,6 @@ public class NemoLists implements Cloneable {
 	 */
 	public static void main(String[] args) {
 		updateDataTypes();
-		updateRegions();
 		updateParameters();
 		updateSurveys();
 		updateVocabLists(null);
@@ -1077,52 +852,6 @@ public class NemoLists implements Cloneable {
 			nbParameters = parameters.length;
 		} catch (Exception e) {
 			okParameters = false;
-			e.printStackTrace();
-		} finally {
-			if (encoder != null) {
-				try {
-					encoder.close();
-				} catch (Exception ex) {
-				}
-			}
-			if (stream != null) {
-				try {
-					stream.close();
-				} catch (Exception ex) {
-				}
-			}
-		}
-	}
-
-	/**
-	 * 
-	 */
-	public static void updateRegions() {
-		okRegions = false;
-		FileOutputStream stream = null;
-		XMLEncoder encoder = null;
-		try {
-			NemoWS service = new NemoWSServiceLocator()
-					.getNEMO(new java.net.URL(Utils.configuration
-							.getNemoWebServiceURL()));
-			WSRegion[] regions = service.getRegions();
-			releaseRegions();
-			for (int i = 0; i < regions.length; i++) {
-				addRegion(regions[i]);
-			}
-
-			File file = new java.io.File("resources/Regions.xml");
-			stream = new FileOutputStream(file.toString());
-
-			// URL url = NemoLists.class.getResource("/resources/Regions.xml");
-			// String file = url.getFile();
-			// stream = new FileOutputStream(file);
-			encoder = new XMLEncoder(stream);
-			encoder.writeObject(_regions);
-			okRegions = true;
-			nbRegions = regions.length;
-		} catch (Exception e) {
-			okRegions = false;
 			e.printStackTrace();
 		} finally {
 			if (encoder != null) {

@@ -52,8 +52,6 @@ public class DataModel {
 
 	public static WSDataType wsDatatypeStation, wsDatatypeStation_modele;
 
-	public static WSRegion[] listeWSRegions;
-
 	public static Boolean ouverture, reset;
 
 	public static TimeSeriesInformation timeSeriesInformation,
@@ -103,7 +101,6 @@ public class DataModel {
 		singleSurvey.setFile(nomFich);
 
 		initDesc();
-
 	}
 
 	public static void initDesc() {
@@ -182,7 +179,7 @@ public class DataModel {
 		// metaInData
 		stationModel.setMetaInData(false);
 
-		// attribut pattern fin donnees en accès direct
+		// attribut pattern fin donnees en accï¿½s direct
 
 		// si manuel -> direct sinon passer par propertyModel
 		if (EditDesc.radEOF.getSelection()) {
@@ -200,25 +197,24 @@ public class DataModel {
 			stationModel.setEndDataPattern(EditDesc.txtManuel.getText());
 		}
 
-		// on initialise les dataTypes, centers et parameters en prévision des
+		// on initialise les dataTypes, centers et parameters en prï¿½vision des
 		// onglets Campagne et Data
 
 		listeWSDataTypes = NemoLists.getDataTypes();
 		listeWSParameters = NemoLists.getParameters();
-		listeWSRegions = NemoLists.getRegions();
 
-		// Lancement de la table des paramètres, onglet DATA, si pas deja créée
+		// Lancement de la table des paramï¿½tres, onglet DATA, si pas deja crï¿½ï¿½e
 		if (ViewFile.tableData == null || ViewFile.tableData.isDisposed()) {
 			TableData.go();
 		}
 
-		// verrouillage de l'option serieTemporelle pour éviter les changements
+		// verrouillage de l'option serieTemporelle pour ï¿½viter les changements
 		// ViewFile.checkBoxTempo.setEnabled(false);
 		ViewFile.radProfilVertical.setEnabled(false);
 		ViewFile.radSerieTempo.setEnabled(false);
 		ViewFile.radTrajectoire.setEnabled(false);
 
-		// flag "validee" à 1
+		// flag "validee" ï¿½ 1
 		EditDesc.validee = 1;
 
 	}
@@ -238,7 +234,7 @@ public class DataModel {
 		TableDataSurvey.majTypeData();
 
 		// injection des valeurs de l'IHM -> datamodel
-		// référence
+		// rï¿½fï¿½rence
 		if (EditSurvey.textCampagne == null
 				|| EditSurvey.textCampagne.isDisposed()) {
 			EditSurvey.validee = 1;
@@ -277,9 +273,9 @@ public class DataModel {
 			e.printStackTrace();
 		}
 
-		survey.setRegionName(EditSurvey.textRegion.getText());
+		survey.setRegionName(Utils.extraitValeur(EditSurvey.comboRegion.getText()));
 
-		// Source de données
+		// Source de donnÃ©es
 		survey.setCountryCode(Utils.extraitCode(EditSurvey.comboCountries
 				.getText()));
 		survey.setLaboratories(EditSurvey.textLabo.getText());
@@ -290,7 +286,7 @@ public class DataModel {
 		survey.setDataCentre(Utils.extraitCode(EditSurvey.comboDataCentres
 				.getText()));
 
-		// confidentialité
+		// confidentialitÃ©
 		if (EditSurvey.comboConfid.getText().matches("P - Public")) {
 			survey.setAvailability("publicly");
 		}
@@ -305,11 +301,11 @@ public class DataModel {
 		survey.setComment(EditSurvey.textCommentaire.getText());
 
 		// remplissage de la liste des dataTypes de la campagne
-		// parcours de la liste des dataTypes de l'IHM et création d'un DataType
-		// à chaque fois
+		// parcours de la liste des dataTypes de l'IHM et crï¿½ation d'un DataType
+		// ï¿½ chaque fois
 		int taille = TableDataSurvey.types.size();
 
-		// reset préventif des dataTypes
+		// reset prÃ©ventif des dataTypes
 		survey.releaseDataTypes();
 
 		for (int i = 0; i < taille; i++) {
@@ -326,8 +322,8 @@ public class DataModel {
 			// dataType.setQc(typeSurvey.getQc());
 			dataType.setSensor(typeSurvey.getSensor());
 
-			// test par rapport aux types deja présents dans le DataModel
-			// si l'étape a déjà été validée
+			// test par rapport aux types deja prï¿½sents dans le DataModel
+			// si l'ï¿½tape a dï¿½jï¿½ ï¿½tï¿½ validï¿½e
 
 			survey.addDataType(dataType);
 
@@ -337,14 +333,14 @@ public class DataModel {
 			EditStation.initTypes();
 		}
 
-		// flag "validee" à 1
+		// flag "validee" ï¿½ 1
 		EditSurvey.validee = 1;
 
 	}
 
 	public static void initStation() {
 
-		// numéro de station
+		// numï¿½ro de station
 		String ligne, debut, fin;
 		HeaderFragment frag;
 
@@ -354,12 +350,12 @@ public class DataModel {
 
 		if (ViewFile.radSerieTempo.getSelection()
 				|| ViewFile.radTrajectoire.getSelection()) {
-			// gestion des séries temporelles
+			// gestion des sï¿½ries temporelles
 			if (EditStation.radFreqEchant.getSelection()) {
-				// calcul à partir fréquence échantillonnage
+				// calcul ï¿½ partir frï¿½quence ï¿½chantillonnage
 				stationModel.getTimestampModel().setComputed(true);
 			} else {
-				// calcul position date/heure dans les données
+				// calcul position date/heure dans les donnï¿½es
 				stationModel.getTimestampModel().setComputed(false);
 			}
 		}
@@ -418,16 +414,16 @@ public class DataModel {
 
 		}
 
-		// type de donnée
+		// type de donnï¿½e
 
-		// récupérer le bon datatype avant de l'affecter
+		// rï¿½cupï¿½rer le bon datatype avant de l'affecter
 
-		// on récupère la sélection du combo de station puis le code + libellé
+		// on rï¿½cupï¿½re la sï¿½lection du combo de station puis le code + libellï¿½
 		String typeCombo = EditStation.comboRefStationType.getText();
 
 		DataType dataType = new DataType();
 		String code = "";
-		// si on a ouvert un modèle, on a le code direct !
+		// si on a ouvert un modï¿½le, on a le code direct !
 		if (DataModel.ouverture) {
 			code = typeCombo;
 		} else {
@@ -440,7 +436,7 @@ public class DataModel {
 			}
 
 		}
-		// création d'un nouveau Datatype avec les infos récupérées au dessus.
+		// crï¿½ation d'un nouveau Datatype avec les infos rï¿½cupï¿½rï¿½es au dessus.
 		dataType.setCode(Utils.extraitCode(code));
 
 		// FAE 022
@@ -449,7 +445,7 @@ public class DataModel {
 
 				if (typeCombo.contentEquals(TableDataSurvey.types.get(i)
 						.getCode())) {
-					// c'est le bon dataType et on récupère le nombre de mesures
+					// c'est le bon dataType et on rï¿½cupï¿½re le nombre de mesures
 					// et
 					// le QC
 
@@ -495,7 +491,7 @@ public class DataModel {
 			frag.setLastCharOffset(fin);
 
 			if (EditStation.textHistoriqueAcqLigne2.getText().matches("")) {
-				// on a injecté que la ligne 1
+				// on a injectï¿½ que la ligne 1
 				propertyModel2.setUserProvided(true);
 				station.setDcHistory2(EditStation.textHistorique2.getText());
 			} else {
@@ -592,7 +588,7 @@ public class DataModel {
 			frag.setLastCharOffset(fin);
 
 			if (EditStation.textSurfaceLigne2.getText().matches("")) {
-				// si on a injecté que la ligne 1
+				// si on a injectï¿½ que la ligne 1
 				propertyModel2.setUserProvided(true);
 				station.setSurfaceSamples2(EditStation.textSurface2.getText());
 			} else {
@@ -612,12 +608,12 @@ public class DataModel {
 			}
 		}
 
-		// décallage TU
+		// dï¿½callage TU
 		propertyModel = stationModel.propertiesAt("offsetTU");
 
 		if (EditStation.buttonTUSaisie.getSelection()) {
 			// if (true){
-			// mise à true pour passage obligatoire !
+			// mise ï¿½ true pour passage obligatoire !
 			// saisie manuelle
 			// station.setLatitude(EditStation.textTU.getText());
 			station.setOffsetTU(EditStation.textTU.getText());
@@ -675,7 +671,7 @@ public class DataModel {
 				frag.setLastCharOffset(fin);
 			}
 
-			// conversion JEP de la fréquence
+			// conversion JEP de la frï¿½quence
 			if (!EditStation.textFreqEchantConv.getText().matches("")) {
 				// formule de conversion
 				stationModel.getTimeSeriesModel().setSampleRateConversion(
@@ -686,7 +682,7 @@ public class DataModel {
 		// HEURE
 		propertyModel = stationModel.propertiesAt("time");
 
-		// Flag qualité
+		// Flag qualitï¿½
 		propertyModel.setFlag(setFlagFragment(Global.DATETIME));
 
 		if (EditStation.buttonHeureSaisie.getSelection()) {
@@ -759,7 +755,7 @@ public class DataModel {
 		// DATE en LONG
 		propertyModel = stationModel.propertiesAt("date");
 
-		// Flag qualité
+		// Flag qualitï¿½
 		propertyModel.setFlag(setFlagFragment(Global.DATETIME));
 
 		if (EditStation.buttonDateSaisie.getSelection()) {
@@ -835,10 +831,10 @@ public class DataModel {
 		// latitude
 		propertyModel = stationModel.propertiesAt("latitude");
 
-		// Flag qualité
+		// Flag qualitï¿½
 		propertyModel.setFlag(setFlagFragment(Global.LATITUDE));
 
-		// format de la latitude à mettre dans le datamodel
+		// format de la latitude ï¿½ mettre dans le datamodel
 		LatitudeFormat latitudeFormat = (LatitudeFormat) propertyModel
 				.getFormat();
 		try {
@@ -888,10 +884,10 @@ public class DataModel {
 
 		propertyModel = stationModel.propertiesAt("longitude");
 
-		// Flag qualité
+		// Flag qualitï¿½
 		propertyModel.setFlag(setFlagFragment(Global.LONGITUDE));
 
-		// format de la longitude à mettre dans le datamodel
+		// format de la longitude ï¿½ mettre dans le datamodel
 		LongitudeFormat longitudeFormat = (LongitudeFormat) propertyModel
 				.getFormat();
 		try {
@@ -942,7 +938,7 @@ public class DataModel {
 		// profondeur
 		propertyModel = stationModel.propertiesAt("bottomDepth");
 
-		// Flag qualité
+		// Flag qualitï¿½
 		propertyModel.setFlag(setFlagFragment(Global.DEPTH));
 
 		if (EditStation.buttonProfondeurSaisie.getSelection()) {
@@ -1004,7 +1000,7 @@ public class DataModel {
 			propertyModel = stationModel.getTimeSeriesModel().propertiesAt(
 					"endDepth");
 
-			// Flag qualité
+			// Flag qualitï¿½
 			propertyModel.setFlag(setFlagFragment(Global.ENDDEPTH));
 
 			if (EditStation.buttonProfFinSaisie.getSelection()) {
@@ -1015,7 +1011,7 @@ public class DataModel {
 					PropertyModel propModelProfNormale = stationModel
 							.propertiesAt("bottomDepth");
 					if (propModelProfNormale.isUserProvided()) {
-						// on recopie la valeur entrée par l'utilisateur
+						// on recopie la valeur entrï¿½e par l'utilisateur
 						propertyModel.setUserProvided(true);
 						timeSeriesInformation
 								.setEndDepth(EditStation.textProfondeur
@@ -1060,10 +1056,10 @@ public class DataModel {
 			propertyModel = stationModel.getTimeSeriesModel().propertiesAt(
 					"endLatitude");
 
-			// Flag qualité
+			// Flag qualitï¿½
 			propertyModel.setFlag(setFlagFragment(Global.ENDLATITUDE));
 
-			// format de la latitude de fin à mettre dans le datamodel
+			// format de la latitude de fin ï¿½ mettre dans le datamodel
 			LatitudeFormat latitudeFormatFin = (LatitudeFormat) propertyModel
 					.getFormat();
 			try {
@@ -1097,7 +1093,7 @@ public class DataModel {
 							.propertiesAt("latitude");
 
 					if (propLat.isUserProvided()) {
-						// on récupère le double de la latitude
+						// on rï¿½cupï¿½re le double de la latitude
 						propertyModel.setUserProvided(true);
 						stationModel.getTimeSeriesInformation().setEndLatitude(
 								station.getLatitude());
@@ -1121,12 +1117,12 @@ public class DataModel {
 				if (EditStation.textLatFinLigne.getText().matches("")
 						&& EditStation.textLatFinDebut.getText().matches("")
 						&& EditStation.textLatFinFin.getText().matches("")){
-					// valeur non rentrée donc on recopie latitude dans latitude de fin
+					// valeur non rentrï¿½e donc on recopie latitude dans latitude de fin
 					PropertyModel propLat = stationModel
 							.propertiesAt("latitude");
 
 					if (propLat.isUserProvided()) {
-						// on récupère le double de la latitude
+						// on rï¿½cupï¿½re le double de la latitude
 						propertyModel.setUserProvided(true);
 						stationModel.getTimeSeriesInformation().setEndLatitude(
 								station.getLatitude());
@@ -1165,10 +1161,10 @@ public class DataModel {
 			propertyModel = stationModel.getTimeSeriesModel().propertiesAt(
 					"endLongitude");
 
-			// Flag qualité
+			// Flag qualitï¿½
 			propertyModel.setFlag(setFlagFragment(Global.ENDLONGITUDE));
 
-			// format de la longitude à mettre dans le datamodel
+			// format de la longitude ï¿½ mettre dans le datamodel
 			LongitudeFormat longitudeFormatFin = (LongitudeFormat) propertyModel
 					.getFormat();
 			try {
@@ -1231,7 +1227,7 @@ public class DataModel {
 				if (EditStation.textLongFinLigne.getText().matches("")
 						&& EditStation.textLongFinDebut.getText().matches("")
 						&& EditStation.textLongFinFin.getText().matches("")){
-					// valeur non rentrée donc on recopie la longitude comme longitude de fin
+					// valeur non rentrï¿½e donc on recopie la longitude comme longitude de fin
 					PropertyModel propLong = stationModel
 					.propertiesAt("longitude");
 
@@ -1281,7 +1277,7 @@ public class DataModel {
 			propertyModel = stationModel.getTimeSeriesModel().propertiesAt(
 					"endTime");
 			propertyModel.setUserProvided(true);
-			// Flag qualité
+			// Flag qualitï¿½
 			propertyModel.setFlag(setFlagFragment(Global.ENDDATETIME));
 
 			// PROFONDEUR CAPTEUR
@@ -1316,20 +1312,20 @@ public class DataModel {
 		// FLAGS QC
 		stationModel.setFlagTable(EditStation.getFlagTable());
 
-		// flag validation à 1
+		// flag validation ï¿½ 1
 		EditStation.validee = 1;
 
 	}
 
 	public static void initData() {
 
-		// mise à jour des types avant validation
+		// mise ï¿½ jour des types avant validation
 		TableData.majTypeData();
 
-		// remplissage des paramètres mesurés
+		// remplissage des paramï¿½tres mesurï¿½s
 		int nbreParam = TableData.types.size();
 
-		// reset systématique des parametres stockés dans le dataModel
+		// reset systï¿½matique des parametres stockï¿½s dans le dataModel
 		stationModel.releaseParameterModels();
 
 		for (int i = 0; i < nbreParam; i++) {
@@ -1348,7 +1344,7 @@ public class DataModel {
 			String code = mots[0];
 			String nom = mots[1];
 
-			// code, nom, unité
+			// code, nom, unitï¿½
 			para.setCode(code);
 			para.setFullName(nom);
 			para.setUnit(typeCourant.getUnite());
@@ -1360,7 +1356,7 @@ public class DataModel {
 			parameterModel.setConversionFormula(typeCourant.getConversion());
 			parameterModel.setInputDefault(typeCourant.getEntree());
 
-			// fragment du paramètre
+			// fragment du paramï¿½tre
 			LineFragment frag = new LineFragment();
 			frag.setFirstCharOffset(typeCourant.getDebut());
 			frag.setLastCharOffset(typeCourant.getFin());
@@ -1374,7 +1370,7 @@ public class DataModel {
 			}
 			
 
-			// test par / au DataModel puis ajout du paramètre ou non
+			// test par / au DataModel puis ajout du paramï¿½tre ou non
 			// ParameterModel[] parametersModels =
 			// stationModel.getParameterModels();
 			// int nbre = parametersModels.length;
@@ -1383,7 +1379,7 @@ public class DataModel {
 			stationModel.addParameterModel(parameterModel);
 
 			/*
-			 * System.out.println(">>Ajout du paramètre " +
+			 * System.out.println(">>Ajout du paramï¿½tre " +
 			 * typeCourant.getCode() + " ... OK");
 			 */
 
@@ -1392,13 +1388,13 @@ public class DataModel {
 		// // if (ViewFile.checkBoxTempo.getSelection()) {
 		// if (ViewFile.radSerieTempo.getSelection() ||
 		// ViewFile.radTrajectoire.getSelection()) {
-		// // gestion des séries temporelles
+		// // gestion des sï¿½ries temporelles
 		// if (EditData.buttonFreqEchant.getSelection()) {
-		// // calcul à partir fréquence échantillonnage
+		// // calcul ï¿½ partir frï¿½quence ï¿½chantillonnage
 		// stationModel.getTimestampModel().setComputed(true);
 		//
 		// } else {
-		// // calcul position date/heure dans les données
+		// // calcul position date/heure dans les donnï¿½es
 		// stationModel.getTimestampModel().setComputed(false);
 		// HorodatedParameterModel horoDatedParameterModel = stationModel
 		// .getTimestampModel();
@@ -1418,7 +1414,7 @@ public class DataModel {
 		// }
 		// }
 
-		// flag validation à 1
+		// flag validation ï¿½ 1
 		EditData.validee = 1;
 
 	}
@@ -1440,10 +1436,10 @@ public class DataModel {
 		// RAZ global
 		Utils.razGlobal();
 
-		// reset de l'étape de conversion
+		// reset de l'ï¿½tape de conversion
 		ViewFile.etape = 0;
 
-		// lancement du processus sur le premier onglet et effacement préventif
+		// lancement du processus sur le premier onglet et effacement prï¿½ventif
 		// si besoin
 		fillDesc(true);
 	}
@@ -1489,7 +1485,7 @@ public class DataModel {
 
 		}
 
-		// Cochage du sélecteur de type de fichier
+		// Cochage du sï¿½lecteur de type de fichier
 		if (stationModel_modele.getInputType().equals(Global.TIMESERIES)) {
 			ViewFile.radProfilVertical.setSelection(false);
 			ViewFile.radSerieTempo.setSelection(true);
@@ -1500,7 +1496,7 @@ public class DataModel {
 			ViewFile.radTrajectoire.setSelection(true);
 		} else {
 			if (stationModel_modele.getTimeSeriesInformation() != null) {
-				// Pour exploiter les anciens modèles
+				// Pour exploiter les anciens modï¿½les
 				ViewFile.radProfilVertical.setSelection(false);
 				ViewFile.radSerieTempo.setSelection(true);
 				ViewFile.radTrajectoire.setSelection(false);
@@ -1511,7 +1507,7 @@ public class DataModel {
 			}
 		}
 
-		// test si série tempo
+		// test si sï¿½rie tempo
 		if (stationModel_modele.getTimeSeriesInformation() != null) {
 			// ViewFile.groupTempo.setVisible(true);
 
@@ -1578,13 +1574,13 @@ public class DataModel {
 			EditDesc.txtManuel.setText(stationModel_modele.getEndDataPattern());
 		}
 
-		// refresh de la zone d'édition
+		// refresh de la zone d'ï¿½dition
 		EditDesc.razEdition();
 		EditDesc.DrawingBack();
 
 		DataModel.ouverture = true;
 
-		// désactivation option série tempo
+		// dï¿½sactivation option sï¿½rie tempo
 		// ViewFile.checkBoxTempo.setEnabled(false);
 		ViewFile.radProfilVertical.setEnabled(true);
 		ViewFile.radSerieTempo.setEnabled(true);
@@ -1603,7 +1599,7 @@ public class DataModel {
 		}
 
 		// injection des valeurs de l'IHM -> datamodel
-		// référence
+		// rï¿½fï¿½rence
 		EditSurvey.textCampagne.setText(survey.getReference());
 		EditSurvey.textNom.setText(survey.getName());
 		Utils.selectComboCodePlus(EditSurvey.comboNavire, survey.getShipCode(),
@@ -1632,9 +1628,10 @@ public class DataModel {
 			e.printStackTrace();
 		}
 
-		EditSurvey.textRegion.setText(survey.getRegionName());
+		Utils.selectComboLibelle(EditSurvey.comboRegion, survey.getRegionName());
+//		EditSurvey.textRegion.setText(survey.getRegionName());
 
-		// Source de données
+		// Source de donnï¿½es
 		Utils.selectComboCode(EditSurvey.comboCountries, survey
 				.getCountryCode());
 		EditSurvey.textLabo.setText(survey.getLaboratories());
@@ -1645,7 +1642,7 @@ public class DataModel {
 		Utils.selectComboCode(EditSurvey.comboDataCentres, survey
 				.getDataCentre());
 
-		// confidentialité
+		// confidentialitï¿½
 		String code = survey.getAvailabilityCode();
 		if (code.matches("P")) {
 			EditSurvey.comboConfid.select(0);
@@ -1683,7 +1680,7 @@ public class DataModel {
 			TableDataSurvey.types.add(typeSurvey);
 
 			// System.out.println("TypeSurvey " +typeSurvey.getCode()+"
-			// ajouté");
+			// ajoutï¿½");
 
 		}
 
@@ -1750,7 +1747,7 @@ public class DataModel {
 
 		if (ViewFile.radSerieTempo.getSelection()
 				|| ViewFile.radTrajectoire.getSelection()) {
-			// série tempo
+			// sï¿½rie tempo
 			if (stationModel_modele.getTimestampModel().isComputed()) {
 				// saisie manuelle
 				EditStation.radFreqEchant.setSelection(true);
@@ -1763,7 +1760,7 @@ public class DataModel {
 			EditStation.activeDateHeureManuel();
 		}
 
-		// numéro de station
+		// numï¿½ro de station
 		if (stationModel_modele.isIncrementRef()) {
 			EditStation.buttonRefStationIncremente.setSelection(true);
 			EditStation.textRefStationNumero.setText(String
@@ -1772,7 +1769,7 @@ public class DataModel {
 		} else {
 
 			// EditStation.buttonRefStationIncremente.setSelection(false); //pas
-			// obligatoire pour la première ligne?
+			// obligatoire pour la premiï¿½re ligne?
 			EditStation.buttonRefStationIncremente.setSelection(false);
 			EditStation.textRefStationNumero.setText("");
 			EditStation.buttonRefStationPos.setSelection(true);
@@ -1802,20 +1799,20 @@ public class DataModel {
 
 		}
 
-		// type de donnée
+		// type de donnï¿½e
 		// FAE022
 		if (!ViewFile.isCollection()) {
 			DataType dataType = station_modele.getDataType();
 			String code = dataType.getCode();
-			// faire un split sur - au cas où et n'avoir QUE le code
+			// faire un split sur - au cas oï¿½ et n'avoir QUE le code
 
 			Pattern p = Pattern.compile(" - ");
 			String mots[] = p.split(code);
 			String vraiCode = mots[0];
 
-			// avant de charger le type de données, vérifier qu'il existe bien
+			// avant de charger le type de donnï¿½es, vï¿½rifier qu'il existe bien
 			// dans
-			// la liste mise à jour!!
+			// la liste mise ï¿½ jour!!
 			int taille = TableDataSurvey.types.size();
 			Boolean ok = false, capteur = false;
 			for (int i = 0; i < taille; i++) {
@@ -1835,7 +1832,7 @@ public class DataModel {
 
 			// ajout du parametre ou non du coup
 			if (ok) {
-				// ajouté que si c'est un capteur
+				// ajoutï¿½ que si c'est un capteur
 				if (capteur) {
 					Utils
 							.selectComboCode(EditStation.comboRefStationType,
@@ -1852,7 +1849,7 @@ public class DataModel {
 				.propertiesAt("dcHistory2");
 
 		if (propertyModel.isUserProvided()) {
-			// historique 1&2 tapés manuellement
+			// historique 1&2 tapï¿½s manuellement
 			EditStation.buttonHistoriqueAcqSaisie.setSelection(true);
 			EditStation.textHistorique1.setText(station_modele.getDcHistory1());
 			EditStation.textHistorique2.setText(station_modele.getDcHistory2());
@@ -1879,7 +1876,7 @@ public class DataModel {
 			EditStation.textHistoriqueAcqFin1.setText("" + fin1);
 
 			if (propertyModel2.isUserProvided()) {
-				// on a rentré que la ligne 1 donc les valeurs de ligne 2 sont
+				// on a rentrï¿½ que la ligne 1 donc les valeurs de ligne 2 sont
 				// vides
 				EditStation.textHistoriqueAcqLigne2.setText("");
 				EditStation.textHistoriqueAcqDebut2.setText("");
@@ -1887,7 +1884,7 @@ public class DataModel {
 			} else {
 
 				Utils.calculPosxPosy(frag2, EditStation.cursHistorique2);
-				// on a aussi rentré la ligne 2
+				// on a aussi rentrï¿½ la ligne 2
 				int ligne2 = frag2.getFirstLine();
 				int debut2 = frag2.getFirstCharOffset();
 				int fin2 = frag2.getLastCharOffset();
@@ -1905,7 +1902,7 @@ public class DataModel {
 		propertyModel = stationModel_modele.propertiesAt("comment");
 
 		if (propertyModel.isUserProvided()) {
-			// entrée manuelle du commentaire
+			// entrï¿½e manuelle du commentaire
 			EditStation.buttonCommentaireSaisie.setSelection(true);
 			EditStation.textCommentaire.setText(station_modele.getComment());
 
@@ -1938,7 +1935,7 @@ public class DataModel {
 		propertyModel2 = stationModel_modele.propertiesAt("surfaceSamples2");
 
 		if (propertyModel.isUserProvided()) {
-			// entrée manuelle echantillon surface
+			// entrï¿½e manuelle echantillon surface
 			EditStation.buttonSurfaceSaisie.setSelection(true);
 			EditStation.textSurface1.setText(station_modele
 					.getSurfaceSamples1());
@@ -1968,12 +1965,12 @@ public class DataModel {
 			EditStation.textSurfaceFin1.setText("" + fin1);
 
 			if (propertyModel2.isUserProvided()) {
-				// on a rentré que la ligne 1
+				// on a rentrï¿½ que la ligne 1
 				EditStation.textSurfaceLigne2.setText("");
 				EditStation.textSurfaceDebut2.setText("");
 				EditStation.textSurfaceFin2.setText("");
 			} else {
-				// on a rentré aussi ligne 2
+				// on a rentrï¿½ aussi ligne 2
 
 				Utils.calculPosxPosy(frag2, EditStation.cursEchant2);
 
@@ -2315,7 +2312,7 @@ public class DataModel {
 
 		}
 
-		// refresh de la zone d'édition
+		// refresh de la zone d'ï¿½dition
 		EditStation.razEdition();
 		EditStation.DrawingBack();
 
@@ -2598,7 +2595,7 @@ public class DataModel {
 	private static void getFlagFragment(FlagFragment flag, String propertyCode,
 			String propertyName) {
 		if (flag != null) {
-			// Teste si la metadonnée est déjà présente dans le tableau
+			// Teste si la metadonnï¿½e est dï¿½jï¿½ prï¿½sente dans le tableau
 			int size = EditStation.tabFlagQC.getItemCount();
 			for (int i = 0; i < size; i++) {
 				if (EditStation.tabFlagQC.getItems()[i].getText(0).equals(
@@ -2622,7 +2619,7 @@ public class DataModel {
 		ParameterModel[] parameterModels = stationModel_modele
 				.getParameterModels();
 
-		// remplissage des paramètres mesurés
+		// remplissage des paramï¿½tres mesurï¿½s
 		int nbreParam = parameterModels.length;
 
 		for (int i = 0; i < nbreParam; i++) {
@@ -2667,7 +2664,7 @@ public class DataModel {
 		// // if (ViewFile.checkBoxTempo.getSelection()) {
 		// if (ViewFile.radSerieTempo.getSelection() ||
 		// ViewFile.radTrajectoire.getSelection()) {
-		// // série tempo
+		// // sï¿½rie tempo
 		// if (stationModel_modele.getTimestampModel().isComputed()) {
 		// // saisie manuelle
 		// EditData.buttonFreqEchant.setSelection(true);

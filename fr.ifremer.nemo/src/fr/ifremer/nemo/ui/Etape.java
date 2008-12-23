@@ -13,14 +13,14 @@ import fr.ifremer.nemo.util.Preformat;
 public class Etape {
 
 	/*
-	 * Gestion des différents affichages lors de la sélection des onglets de la
-	 * fenêtre principale et des différentes étapes.
+	 * Gestion des diffï¿½rents affichages lors de la sï¿½lection des onglets de la
+	 * fenï¿½tre principale et des diffï¿½rentes ï¿½tapes.
 	 * 
 	 */
 
 	public static void validationDesc() {
 
-		// Fichier avec séparateur
+		// Fichier avec sï¿½parateur
 		if (ViewFile.chkSeparateur.getSelection() && !Preformat.isPreformat()) {
 			try {
 				Preformat.run();
@@ -30,7 +30,7 @@ public class Etape {
 			}
 		}
 
-		// retour à l'onglet message d'erreur
+		// retour ï¿½ l'onglet message d'erreur
 		ViewLog.tabFolderLog.setSelection(0);
 
 		Boolean ok, resultat;
@@ -55,7 +55,7 @@ public class Etape {
 				.getString("Etape.3")); //$NON-NLS-1$
 		ok = ok && resultat;
 
-		// section fin de données
+		// section fin de donnï¿½es
 		if (EditDesc.radManuel.getSelection()) {
 			if (EditDesc.txtManuel.getText().matches("")) {
 				ok = false;
@@ -79,7 +79,7 @@ public class Etape {
 		//
 		// }
 
-		// check des valeurs date/heure séries tempo
+		// check des valeurs date/heure sï¿½ries tempo
 		// if (ViewFile.checkBoxTempo.getSelection()) {
 		if (ViewFile.radSerieTempo.getSelection()
 				|| ViewFile.radTrajectoire.getSelection()) {
@@ -122,10 +122,10 @@ public class Etape {
 	public static void validationSurvey() {
 		// test de toutes les valeurs de Survey
 
-		// retour à l'onglet message d'erreur
+		// retour ï¿½ l'onglet message d'erreur
 		ViewLog.tabFolderLog.setSelection(0);
 
-		// mise à jour de la table
+		// mise ï¿½ jour de la table
 		TableDataSurvey.majTypeData();
 
 		Boolean ok, resultat;
@@ -152,7 +152,7 @@ public class Etape {
 		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textDateFin
 				.getText(), Messages.getString("Etape.16")); //$NON-NLS-1$
 		ok = ok && resultat;
-		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.textRegion
+		resultat = Regexp.checkPresenceValeurObligatoire(EditSurvey.comboRegion
 				.getText(), Messages.getString("Etape.17")); //$NON-NLS-1$
 		ok = ok && resultat;
 		resultat = Regexp.checkPresenceValeurObligatoire(
@@ -196,7 +196,7 @@ public class Etape {
 			Utils.messageErreur(Messages.getString("Etape.28")); //$NON-NLS-1$
 			ok = false;
 		} else {
-			// vérif si pas de "nombre=0"
+			// vï¿½rif si pas de "nombre=0"
 			int taille = TableDataSurvey.types.size();
 			for (int i = 0; i < taille; i++) {
 				int nbre = TableDataSurvey.types.get(i).getNombre();
@@ -226,7 +226,7 @@ public class Etape {
 		// Remplissage du tableau de correspondance de flags
 		EditStation.flagTable.fillFlagTable(EditStation.tabCorrespondance);
 		
-		// retour à l'onglet message d'erreur
+		// retour ï¿½ l'onglet message d'erreur
 		ViewLog.tabFolderLog.setSelection(0);
 
 		// System.out.println("Debut check station");
@@ -245,7 +245,7 @@ public class Etape {
 
 		// NUMERO STATION
 		if (EditStation.buttonRefStationPos.getSelection()) {
-			// position dans le fichier, vérif des valeurs
+			// position dans le fichier, vï¿½rif des valeurs
 			resultat1 = Regexp.checkLigneDebutfin(
 					EditStation.textRefStationLigne.getText(),
 					EditStation.textRefStationDebut.getText(),
@@ -390,7 +390,7 @@ public class Etape {
 			ok = ok && resultat1;
 
 			if (resultat1) {
-				// VERIF si le commentaire ne dépasse pas le nombre de lignes
+				// VERIF si le commentaire ne dï¿½passe pas le nombre de lignes
 				// d'entete station!
 
 				int nbreLignes = Utils
@@ -525,7 +525,7 @@ public class Etape {
 		// HEURE
 		// check valeurs ligne/debut/fin
 		if (EditStation.buttonHeureSaisie.getSelection()) {
-			// saisie à la main
+			// saisie ï¿½ la main
 			try {
 				DateTimeFormat format = new DateTimeFormat(
 						EditStation.comboHeure.getText());
@@ -567,7 +567,7 @@ public class Etape {
 
 			try {
 
-				// récupérer le texte en question et creer une nouvelle
+				// rï¿½cupï¿½rer le texte en question et creer une nouvelle
 				// heure
 				if (EditStation.textHeureLigne.getText().equals("")) {
 					ligne = Utils.lignesBrutes.get(DataModel.stationModel
@@ -640,7 +640,7 @@ public class Etape {
 
 			try {
 
-				// récupérer le texte en question et creer une nouvelle heure
+				// rï¿½cupï¿½rer le texte en question et creer une nouvelle heure
 				// on a ligne debut fin donc parcours lignes de texte
 				if (EditStation.textDateLigne.getText().equals("")) {
 					ligne = Utils.lignesBrutes.get(DataModel.stationModel
@@ -826,7 +826,7 @@ public class Etape {
 				ok = ok && resultat1;
 			}
 
-			// récupérer le texte en question et creer une nouvelle latitude
+			// rï¿½cupï¿½rer le texte en question et creer une nouvelle latitude
 			// on a ligne debut fin donc parcours lignes de texte
 
 			ligne = Utils.lignesBrutes.get(Integer
@@ -936,7 +936,7 @@ public class Etape {
 			if (EditStation.buttonLatFinSaisie.getSelection()) {
 				// saisie manuelle
 				if (EditStation.textLatFin.getText().matches("")) { //$NON-NLS-1$
-					// valeur non rentrée
+					// valeur non rentrï¿½e
 					ok = ok && true;
 				} else {
 					if (!EditStation.textLatFin.getText().matches("")) {//$NON-NLS-1$
@@ -962,7 +962,7 @@ public class Etape {
 				if (EditStation.textLatFinLigne.getText().matches("")
 						&& EditStation.textLatFinDebut.getText().matches("")
 						&& EditStation.textLatFinFin.getText().matches("")){
-					// valeur non rentrée
+					// valeur non rentrï¿½e
 					ok = ok && true;
 					
 				}else{
@@ -991,7 +991,7 @@ public class Etape {
 			if (EditStation.buttonLongFinSaisie.getSelection()) {
 				// saisie manuelle
 				if (EditStation.textLongFin.getText().matches("")) { //$NON-NLS-1$
-					// valeur non rentrée
+					// valeur non rentrï¿½e
 					ok = ok && true;
 				} else {
 					if (!EditStation.textLongFin.getText().matches("")) {
@@ -1017,7 +1017,7 @@ public class Etape {
 				if (EditStation.textLongFinLigne.getText().matches("")
 						&& EditStation.textLongFinDebut.getText().matches("")
 						&& EditStation.textLongFinFin.getText().matches("")){
-					// valeur non rentrée
+					// valeur non rentrï¿½e
 					ok = ok && true;
 					
 				}else{
@@ -1098,7 +1098,7 @@ public class Etape {
 								.getString("Etape.70")); //$NON-NLS-1$
 					}
 				} else {
-					// valeur non rentrée
+					// valeur non rentrï¿½e
 					ok = ok && true;
 				}
 			}
@@ -1209,7 +1209,7 @@ public class Etape {
 
 			} else {
 				if (!EditStation.textDeclinMagnet.getText().matches("")) {
-					// vérif de ce qui est entré par l'utilisateur
+					// vï¿½rif de ce qui est entrï¿½ par l'utilisateur
 					if (Pattern.matches(
 							"^[+-]{0,1}[0-9]*[0-9][.]?[0-9]*[0-9]*$",
 							EditStation.textDeclinMagnet.getText())) {
@@ -1231,8 +1231,8 @@ public class Etape {
 			}
 
 			// FREQUENCE ECHANTILLONNAGE --> voir heure !
-			// que si date n'est pas dans fichier en entrée
-			// ne tester que si section fréquence pas grisée !
+			// que si date n'est pas dans fichier en entrï¿½e
+			// ne tester que si section frï¿½quence pas grisï¿½e !
 			if (EditStation.sectionFreqEchant.getEnabled()){
 				if (EditStation.buttonFreqEchantPos.getSelection()) {
 					// position dans le fichier
@@ -1291,7 +1291,7 @@ public class Etape {
 				}
 			}
 
-		} // fin série tempo
+		} // fin sï¿½rie tempo
 
 		// Section Flag QC
 		boolean flagOK = false;
@@ -1335,10 +1335,10 @@ public class Etape {
 		// test de toutes les valeurs debut / fin des Data
 		Boolean ok = true;
 		Boolean valeurNonRemplie = false;
-		// retour à l'onglet message d'erreur
+		// retour ï¿½ l'onglet message d'erreur
 		ViewLog.tabFolderLog.setSelection(0);
 
-		// mise à jour avant toute chose
+		// mise ï¿½ jour avant toute chose
 		TableData.majTypeData();
 
 		int nbreParam = TableData.types.size();
@@ -1391,14 +1391,14 @@ public class Etape {
 					Utils.messageErreurAppend(Messages.getString("Etape.106")); //$NON-NLS-1$
 				}
 
-				// check des valeurs début<fin
+				// check des valeurs dï¿½but<fin
 				if (typeCourant.getDebut() > typeCourant.getFin()) {
 					Utils
 							.messageErreurAppend(Messages.getString("Etape.98") + " " + typeCourant.getCode()); //$NON-NLS-1$
 					ok = false;
 				}
 				
-//				 check des valeurs début<fin flag
+//				 check des valeurs dï¿½but<fin flag
 				if (!typeCourant.getDebutFlag().equals("") && !typeCourant.getFinFlag().equals("")) {
 					if (Integer.parseInt(typeCourant.getDebutFlag()) > Integer.parseInt(typeCourant.getFinFlag())) {
 						Utils
@@ -1431,7 +1431,7 @@ public class Etape {
 			}
 
 			// TEST pour savoir si PRES est bien en premier mais pas pour
-			// séries tempo ou trajectoire
+			// sï¿½ries tempo ou trajectoire
 			TypeData premierType = TableData.types.get(0);
 
 			// split sur " - "
@@ -1477,10 +1477,10 @@ public class Etape {
 	}
 
 	private static void okDesc() {
-		// envoi des valeurs dans le modèle
+		// envoi des valeurs dans le modï¿½le
 		// attention aux boutons radio
 
-		// puis remplissage du modèle avec les valeurs de l'IHM
+		// puis remplissage du modï¿½le avec les valeurs de l'IHM
 		// DataModel.initModele(ViewFile.dossierCampagne, ViewFile.checkBoxTempo
 		// .getSelection(), ViewFile.nomFichier);
 		DataModel.initModele(ViewFile.dossierCampagne, ViewFile
@@ -1491,7 +1491,7 @@ public class Etape {
 		// on rajoute "ok" dans l'onglet description
 		ViewFile.tabItem.setText(Messages.getString("Etape.91")); //$NON-NLS-1$
 
-		// on valide l'étape 1
+		// on valide l'ï¿½tape 1
 		EditDesc.validee = 1;
 
 		try {
@@ -1523,13 +1523,13 @@ public class Etape {
 
 		// validation etape 2
 		ViewFile.etape = 2;
-		// envoi des valeurs dans le modèle
+		// envoi des valeurs dans le modï¿½le
 
 	}
 
 	private static void okStation() {
 
-		// envoi des valeurs dans le modèle
+		// envoi des valeurs dans le modï¿½le
 		Utils.messageOK(Messages.getString("Etape.94")); //$NON-NLS-1$
 		DataModel.initStation();
 		ViewFile.tabItem2.setText(Messages.getString("Etape.95")); //$NON-NLS-1$
@@ -1541,7 +1541,7 @@ public class Etape {
 		DataModel.initData();
 		ViewFile.tabItem3.setText(Messages.getString("Etape.97")); //$NON-NLS-1$
 		ViewFile.etape = 4;
-		// envoi des valeurs dans le modèle
+		// envoi des valeurs dans le modï¿½le
 
 	}
 

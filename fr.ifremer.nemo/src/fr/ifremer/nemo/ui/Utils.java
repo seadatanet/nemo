@@ -67,7 +67,7 @@ public class Utils {
 		lignesBrutes = new ArrayList<String>();
 		stringBuffer = new StringBuffer();
 
-		// lecture et concaténation
+		// lecture et concatï¿½nation
 		BufferedReader entree = new BufferedReader(new FileReader(fich));
 		do {
 			// System.out.println(nbreLignes);
@@ -86,7 +86,7 @@ public class Utils {
 		} while (ligne != null);
 		entree.close();
 
-		// calcul des tailles cumulées
+		// calcul des tailles cumulï¿½es
 		taillesCumLignes = new int[nbreLignes];
 		indexMax = nbreLignes - 1;
 		cumul = 0;
@@ -109,14 +109,14 @@ public class Utils {
 		// ViewLog.styledTextLogErreurs.setText(Messages.getString("Utils.4"));
 		// //$NON-NLS-1$
 
-		// début d'infos du fichier
+		// dï¿½but d'infos du fichier
 
 		ViewLog.styledTextLogInfos
 				.setText(Messages.getString("Utils.5") + fich); //$NON-NLS-1$
 		ViewLog.styledTextLogInfos
 				.append(Messages.getString("Utils.6") + nbreLignes); //$NON-NLS-1$
 
-		// réactivation de l'option série temporelle onglet DESC
+		// rï¿½activation de l'option sï¿½rie temporelle onglet DESC
 		// ViewFile.checkBoxTempo.setEnabled(true);
 		ViewFile.radProfilVertical.setEnabled(true);
 		ViewFile.radSerieTempo.setEnabled(true);
@@ -125,7 +125,7 @@ public class Utils {
 		// FAE 089
 		// ViewFile.checkBoxTempo.setSelection(false);
 
-		// RAZ global si réouverture fichier en cours de processus
+		// RAZ global si rï¿½ouverture fichier en cours de processus
 
 		EditDesc.nomNemo();
 
@@ -134,7 +134,7 @@ public class Utils {
 
 			DataModel.ouverture = false;
 
-			// reset de l'étape de conversion
+			// reset de l'ï¿½tape de conversion
 			ViewFile.etape = 0;
 		}
 	}
@@ -156,9 +156,9 @@ public class Utils {
 
 	public static void insertTexte(String chaine) {
 
-		// affichage de la règle de numéros 161 caractères (calculer la taille
-		// max des lignes en entrée puis seulement rajouter
-		// la règle concaténée au début du texteBrut
+		// affichage de la rï¿½gle de numï¿½ros 161 caractï¿½res (calculer la taille
+		// max des lignes en entrï¿½e puis seulement rajouter
+		// la rï¿½gle concatï¿½nï¿½e au dï¿½but du texteBrut
 
 		texteBrut = ""; //$NON-NLS-1$
 
@@ -168,7 +168,7 @@ public class Utils {
 			StyledText styledtext) {
 		int deb, fi, lign, i;
 
-		// on récupère les coordonnées de la sélection
+		// on rï¿½cupï¿½re les coordonnï¿½es de la sï¿½lection
 
 		deb = styledtext.getSelection().x;
 		fi = styledtext.getSelection().y;
@@ -186,7 +186,7 @@ public class Utils {
 
 			lign = 1;
 			// calcul de la ligne en fonction de la valeur de x
-			// parcours du tableau des tailles de lignes cumulées
+			// parcours du tableau des tailles de lignes cumulï¿½es
 
 			for (i = 0; i < lignesBrutes.size(); i++) {
 
@@ -256,7 +256,7 @@ public class Utils {
 	public static void injectData(StyledText styledtext, int debut, int fin) {
 		int deb, fi, lign, i, index;
 
-		// on récupère les coordonnées de la sélection
+		// on rï¿½cupï¿½re les coordonnï¿½es de la sï¿½lection
 		deb = styledtext.getSelection().x;
 		fi = styledtext.getSelection().y;
 		index = ViewFile.tableData.getSelectionIndex();
@@ -271,7 +271,7 @@ public class Utils {
 
 			lign = 1;
 			// calcul de la ligne en fonction de la valeur de x
-			// parcours du tableau des tailles de lignes cumulées
+			// parcours du tableau des tailles de lignes cumulï¿½es
 
 			for (i = 0; i < lignesBrutes.size(); i++) {
 
@@ -317,7 +317,7 @@ public class Utils {
 		if (index >= 0 && table.getItems() != null) {
 			int deb, fi, lign, i;
 
-			// on récupère les coordonnées de la sélection
+			// on rï¿½cupï¿½re les coordonnï¿½es de la sï¿½lection
 			deb = styledtext.getSelection().x;
 			fi = styledtext.getSelection().y;
 
@@ -330,7 +330,7 @@ public class Utils {
 
 				lign = 1;
 				// calcul de la ligne en fonction de la valeur de x
-				// parcours du tableau des tailles de lignes cumulées
+				// parcours du tableau des tailles de lignes cumulï¿½es
 
 				for (i = 0; i < lignesBrutes.size(); i++) {
 
@@ -368,7 +368,7 @@ public class Utils {
 						.setText(indexDebut, String.valueOf(deb));
 				table.getItems()[index].setText(indexFin, String.valueOf(fi));
 
-				// Test après injection
+				// Test aprï¿½s injection
 				testFlag(styledtext, flagTable, table, indexLigne, indexDebut,
 						indexFin, indexTest1, indexTest2);
 
@@ -394,7 +394,7 @@ public class Utils {
 
 				// styledtext.setSelection(deb - 1, fi);
 
-				// remplissage test entrée dans interface
+				// remplissage test entrï¿½e dans interface
 				table.getItems()[i].setText(indexTest1, styledtext.getText(
 						deb - 1, fi - 1));
 
@@ -423,7 +423,7 @@ public class Utils {
 		lignDepart = 1;
 		lignFin = 1;
 		// calcul de la ligne en fonction de la valeur de x
-		// parcours du tableau des tailles de lignes cumulées
+		// parcours du tableau des tailles de lignes cumulï¿½es
 
 		if (cursor.getX() == cursor.getY()) {
 			Utils.messageErreur(Messages.getString("Utils.26"));
@@ -478,7 +478,7 @@ public class Utils {
 	public static void injectNbreLignes(Text nbrelignes, StyledText styledtext) {
 		int deb, fi, lignDepart, lignFin, i;
 
-		// on récupère les coordonnées de la sélection
+		// on rï¿½cupï¿½re les coordonnï¿½es de la sï¿½lection
 		deb = styledtext.getSelection().x;
 		fi = styledtext.getSelection().y;
 
@@ -488,7 +488,7 @@ public class Utils {
 		lignDepart = 1;
 		lignFin = 1;
 		// calcul de la ligne en fonction de la valeur de x
-		// parcours du tableau des tailles de lignes cumulées
+		// parcours du tableau des tailles de lignes cumulï¿½es
 
 		if (deb == fi) {
 			Utils.messageErreur(Messages.getString("Utils.26"));
@@ -544,7 +544,7 @@ public class Utils {
 	}
 
 	public static void calculPosxPosy(HeaderFragment frag, Cursor cursor) {
-		// reconstitue la position x et y du surlignement souris à partir du
+		// reconstitue la position x et y du surlignement souris ï¿½ partir du
 		// fragment
 
 		int offsetDebut, offsetFin, ligneDebut, ligneFin;
@@ -561,7 +561,7 @@ public class Utils {
 
 	public static void calculOffsetDebOffsetFin(HeaderFragment frag,
 			Cursor cursor) {
-		// calcule debut et fin à partir du surlignement souris
+		// calcule debut et fin ï¿½ partir du surlignement souris
 		int offsetDebut, offsetFin, ligneDebut, ligneFin;
 
 		ligneDebut = frag.getFirstLine();
@@ -593,7 +593,7 @@ public class Utils {
 			int headerLines) {
 		int fi, lignDepart, lignFin, i, nbrelignes, longueur;
 
-		// on récupère les coordonnées de la sélection
+		// on rï¿½cupï¿½re les coordonnï¿½es de la sï¿½lection
 		fi = frag.getLastCharOffset();
 		longueur = frag.getLastCharOffset();
 		// System.out.println("deb clic = " + deb);
@@ -604,7 +604,7 @@ public class Utils {
 		// lignDepart = 1;
 		// lignFin = 1;
 		// calcul de la ligne en fonction de la valeur de x
-		// parcours du tableau des tailles de lignes cumulées
+		// parcours du tableau des tailles de lignes cumulï¿½es
 
 		// // calcul ligne depart
 		// for (i = 0; i < lignesBrutes.size(); i++) {
@@ -662,13 +662,13 @@ public class Utils {
 			frag.setSingleLine(false);
 			frag.setLastLine(frag.getFirstLine() + nbrelignes - 1);
 
-			// calcul de l'offset réel sur la dernière ligne
+			// calcul de l'offset rï¿½el sur la derniï¿½re ligne
 			int cpt = fi;
 			for (int j = lignDepart - 1; j < lignFin - 1; j++) {
 				cpt = cpt - Utils.lignesBrutes.get(j).length();
 			}
 			// en sortie de boucle, cpt a la valeur de l'offset de fin sur la
-			// dernière ligne du commentaire
+			// derniï¿½re ligne du commentaire
 			// System.out.println("offset en ligne fin = " + cpt);
 			// System.out.println("ligne fin = " + lignFin);
 			// System.out.println("ligne debut = " + lignDepart);
@@ -689,7 +689,7 @@ public class Utils {
 		// calcul nbre ligne/debut/fin en fonction de la zone de surlignement
 		// souris
 
-		// on récupère les coordonnées de la sélection
+		// on rï¿½cupï¿½re les coordonnï¿½es de la sï¿½lection
 		deb = cursor.getX();
 		fi = cursor.getY();
 
@@ -702,7 +702,7 @@ public class Utils {
 		// lignFin = 1;
 
 		// calcul de la ligne en fonction de la valeur de x
-		// parcours du tableau des tailles de lignes cumulées
+		// parcours du tableau des tailles de lignes cumulï¿½es
 
 		// calcul ligne depart
 		for (i = 0; i < lignesBrutes.size(); i++) {
@@ -760,13 +760,13 @@ public class Utils {
 	}
 
 	public static void validationEtape(int onglet) {
-		// messageErreur("Vous devez impérativement terminer la ou les étapes
-		// précédentes avant de continuer." +"\n==>étapes " + tmp + " à " +
+		// messageErreur("Vous devez impï¿½rativement terminer la ou les ï¿½tapes
+		// prï¿½cï¿½dentes avant de continuer." +"\n==>ï¿½tapes " + tmp + " ï¿½ " +
 		// onglet);
 
 		// check etape/onglet
 
-		// à partir de onglet 0
+		// ï¿½ partir de onglet 0
 
 		if ((onglet == 1) && (ViewFile.affiche == 0)) {
 			ViewLog.aideSurvey();
@@ -845,7 +845,7 @@ public class Utils {
 		}
 
 		// *********************************************************************//
-		// à partir de onglet 1
+		// ï¿½ partir de onglet 1
 
 		if ((onglet == 2) && (ViewFile.affiche == 1)) {
 			ViewLog.aideStation();
@@ -919,7 +919,7 @@ public class Utils {
 		}
 
 		// *********************************************************************//
-		// à partir de onglet 2
+		// ï¿½ partir de onglet 2
 
 		if ((onglet == 3) && (ViewFile.affiche == 2)) {
 			ViewLog.aideData();
@@ -993,7 +993,7 @@ public class Utils {
 
 		// *********************************************************************//
 
-		// à partir de onglet 3
+		// ï¿½ partir de onglet 3
 		if ((onglet == 0) && (ViewFile.affiche == 3)) {
 			ViewLog.aideDesc();
 			if (EditDesc.validee == 1) {
@@ -1362,7 +1362,7 @@ public class Utils {
 		// LANGUE
 		if (OptionsAction.comboLangue.getItem(
 				OptionsAction.comboLangue.getSelectionIndex()).matches(
-				"Français")) { //$NON-NLS-1$
+				"Franï¿½ais")) { //$NON-NLS-1$
 			configuration.setLang("fr_FR"); //$NON-NLS-1$
 		} else {
 			configuration.setLang("en_GB"); //$NON-NLS-1$
@@ -1454,11 +1454,11 @@ public class Utils {
 	}
 
 	public static void razGlobal() {
-		// efface tous les onglets qui ont été affichés jusque là en préparation
+		// efface tous les onglets qui ont ï¿½tï¿½ affichï¿½s jusque lï¿½ en prï¿½paration
 		// du chargement
-		// d'un nouveau modèle
+		// d'un nouveau modï¿½le
 
-		// si au moins une des sections d'un onglet est créée alors on peut les
+		// si au moins une des sections d'un onglet est crï¿½ï¿½e alors on peut les
 		// effacer toutes
 		if (EditDesc.sectionEnteteFichier != null) {
 			// //effacement boutons
@@ -1519,7 +1519,7 @@ public class Utils {
 				EditStation.listeSectionsStation.get(i).dispose();
 			}
 
-			// titre à vide
+			// titre ï¿½ vide
 			ViewEdit.formEdition.setText(""); //$NON-NLS-1$
 
 			// refresh global
@@ -1540,7 +1540,7 @@ public class Utils {
 				EditData.listeSectionsData.get(i).dispose();
 			}
 
-			// titre à vide
+			// titre ï¿½ vide
 			ViewEdit.formEdition.setText(""); //$NON-NLS-1$
 
 			// refresh global
@@ -1601,12 +1601,12 @@ public class Utils {
 		} else {
 			combo.select(i);
 
-			while (i < size && !combo.getText().equals(valeur)) {
+			while (i < size && !combo.getText().equalsIgnoreCase(valeur)) {
 				i++;
 				combo.select(i);
 			}
 
-			if (!combo.getText().equals(valeur)) {
+			if (!combo.getText().equalsIgnoreCase(valeur)) {
 				combo.add(valeur);
 				combo.select(combo.getItemCount() - 1);
 			}
@@ -1639,6 +1639,39 @@ public class Utils {
 		}
 	}
 
+	public static void selectComboLibelle(Combo combo, String libelle) {
+		int i = 0;
+		int length = libelle.length();
+		int size = combo.getItemCount();
+		boolean blnFound = false;
+
+		if (libelle.equals("")) {
+			combo.select(-1);
+		} else {
+			combo.select(i);
+
+			while (i < size) {
+//					&& !combo.getText().substring(0,
+//							Math.min(combo.getText().length(), length)).equals(
+//									libelle)) {
+				int debutLibelle = combo.getText().length() - length;
+				if (debutLibelle >= 0) {
+					if (combo.getText().substring(debutLibelle).equalsIgnoreCase(libelle)) {
+						blnFound = true;
+						break;
+					}
+				}
+				i++;
+				combo.select(i);
+			}
+
+			if (!blnFound) {
+				combo.add(libelle);
+				combo.select(combo.getItemCount() - 1);
+			}
+		}
+	}
+	
 	public static void selectComboCodePlus(Combo combo, String code,
 			String valeur) {
 		int i = 0;

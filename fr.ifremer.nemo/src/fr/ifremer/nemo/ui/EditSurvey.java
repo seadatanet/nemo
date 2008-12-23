@@ -37,13 +37,13 @@ import fr.ifremer.nemo.ws.WSDataType;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
 public class EditSurvey {
-	// fonctions de remplissage de la zone d'édition pour les campagnes
+	// fonctions de remplissage de la zone d'ï¿½dition pour les campagnes
 
 	public static Section sectionReference, sectionLocalisation, sectionSource,
 			sectionCentre, sectionType, sectionCommentaire;
 
 	public static Text textCampagne, textNom, textDateDebut, textDateFin,
-			textRegion, textPays, textLabo, textChef, textProjet,
+			textPays, textLabo, textChef, textProjet,
 			textConfidentiel, textType, textNbre, textCommentaire;
 
 	public static Label labelCampagne, labelNom, labelCodeNavire,
@@ -76,7 +76,7 @@ public class EditSurvey {
 	private static Shell shell = new Shell();
 
 	public static void affichageEdition() {
-		// initialisation zone édition pour étape description de fichier
+		// initialisation zone ï¿½dition pour ï¿½tape description de fichier
 
 		formEdition = ViewEdit.formEdition;
 		ViewLog.aideSurvey();
@@ -88,12 +88,12 @@ public class EditSurvey {
 		// raz message erreur
 		Utils.messageErreur(""); //$NON-NLS-1$
 
-		// de base les sections sont refermées
+		// de base les sections sont refermï¿½es
 		expand = 0;
 
 		if (loaded == 0) {
 
-			// INFOS sur les fichiers utilisés
+			// INFOS sur les fichiers utilisï¿½s
 			if (ViewFile.radioFichier.getSelection()) {
 				// fichier campagne
 				Utils.messageInfoAppend(Messages.getString("EditSurvey.1")); //$NON-NLS-1$
@@ -114,7 +114,7 @@ public class EditSurvey {
 		/*
 		 * recreer un formEdition sur le toolkit principal pour pouvoir faire un
 		 * dispose() dessus mais garder toutes les sections afin de les
-		 * réafficher par la suite dans DrawingBack.
+		 * rï¿½afficher par la suite dans DrawingBack.
 		 */
 
 		ViewEdit.formEdition.getBody().setLayout(new GridLayout());
@@ -163,7 +163,7 @@ public class EditSurvey {
 
 		// initialisation liste des sections de la partie description fichier
 
-		// section référence
+		// section rï¿½fï¿½rence
 		Drawing.sectionReferenceCampagne(sectionReference, Messages
 				.getString("EditSurvey.14"), Messages
 				.getString("EditSurvey.15"), textCampagne, Messages
@@ -212,11 +212,11 @@ public class EditSurvey {
 						Messages.getString("EditSurvey.29"), listeText, listeNoms, Messages.getString("EditSurvey.30"), comboConfid); //$NON-NLS-1$ //$NON-NLS-2$
 		listeText.clear();
 		listeNoms.clear();
-		// FI par défaut pour le centre de données
+		// FI par dï¿½faut pour le centre de donnï¿½es
 		// textCentre.setTextLimit(2);
 		// textCentre.setText("FI");
 
-		// section types de données
+		// section types de donnï¿½es
 		listeText.add(textNbre);
 		listeNoms.add(Messages.getString("EditSurvey.31")); //$NON-NLS-1$
 		listeText.add(textType);
@@ -320,7 +320,7 @@ public class EditSurvey {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
 
-						// on passe en ppar l'étape à laquelle on se trouve
+						// on passe en ppar l'ï¿½tape ï¿½ laquelle on se trouve
 						// Etape.etape(1);
 
 						Etape.validationSurvey();
@@ -416,7 +416,7 @@ public class EditSurvey {
 		// affichage courant
 		ViewFile.affiche = 1;
 
-		// remplissage de l'IHM par le modèle chargé
+		// remplissage de l'IHM par le modï¿½le chargï¿½
 		if (DataModel.ouverture) {
 			DataModel.fillSurvey();
 		} else {
@@ -432,7 +432,7 @@ public class EditSurvey {
 
 		new SWTProgressWS().run();
 
-		// affichage du résultat des mises à jour des fichiers
+		// affichage du rï¿½sultat des mises ï¿½ jour des fichiers
 		String message = "";
 
 		if (NemoLists.okDataTypes) {
@@ -489,13 +489,13 @@ public class EditSurvey {
 	}
 
 	public static void init_webService() {
-		// sélection de la ref campagne dans une liste
+		// sï¿½lection de la ref campagne dans une liste
 		FiltrageTableType.go(Global.WSSURVEY);
 
 	}
 
 	public static void webService(String reference) {
-		// remplissage du dataModel à partir des valeurs du ws
+		// remplissage du dataModel ï¿½ partir des valeurs du ws
 
 		TableDataSurvey.types.clear();
 
@@ -510,7 +510,7 @@ public class EditSurvey {
 
 		new SWTProgressWS().run();
 
-		// mise à jour de l'onglet courant
+		// mise ï¿½ jour de l'onglet courant
 		majApresWS();
 
 	}
@@ -520,10 +520,10 @@ public class EditSurvey {
 		String nomXML;
 		File fich;
 
-		// remplissage du dataModel à partir des valeurs du fichier XML de
+		// remplissage du dataModel ï¿½ partir des valeurs du fichier XML de
 		// description
 
-		// vérifier que un fichier est chargé avant d'ouvrir un modèle
+		// vï¿½rifier que un fichier est chargï¿½ avant d'ouvrir un modï¿½le
 		if ((EditDesc.validee != 1) && (EditSurvey.loaded != 1)) {
 			Utils.messageErreur(Messages.getString("EditSurvey.54")); //$NON-NLS-1$
 		} else {
@@ -577,7 +577,7 @@ public class EditSurvey {
 				survey.importFromXML(fichier);
 				survey.setDataCentre(Utils.configuration.getDataCenter());
 
-				// Màj des types de données capteurs
+				// Mï¿½j des types de donnï¿½es capteurs
 				for (int index = 0; index < survey.getDataTypes().length; index++) {
 					survey.dataTypesAt(index).setSensor(
 							listSensor.contains(survey.dataTypesAt(index)
@@ -606,7 +606,7 @@ public class EditSurvey {
 				survey.importFromXML(fichier);
 				survey.setDataCentre(Utils.configuration.getDataCenter());
 
-				// Màj des types de données capteurs
+				// Mï¿½j des types de donnï¿½es capteurs
 				for (int index = 0; index < survey.getDataTypes().length; index++) {
 					survey.dataTypesAt(index).setSensor(
 							listSensor.contains(survey.dataTypesAt(index)
@@ -629,7 +629,7 @@ public class EditSurvey {
 
 		}
 
-		// mise à jour de l'onglet courant
+		// mise ï¿½ jour de l'onglet courant
 		majApresWS();
 	}
 
@@ -645,7 +645,7 @@ public class EditSurvey {
 		// station = stationModel.getModel();
 
 		// injection des valeurs de l'IHM -> datamodel
-		// référence
+		// rÃ©fÃ©rence
 		if (survey.getReference() != null) {
 
 			EditSurvey.textCampagne.setText(survey.getReference());
@@ -682,10 +682,11 @@ public class EditSurvey {
 		}
 
 		if (survey.getRegionName() != null) {
-			EditSurvey.textRegion.setText(survey.getRegionName());
+			Utils.selectComboLibelle(comboRegion, survey.getRegionName());
+//			EditSurvey.textRegion.setText(survey.getRegionName());
 		}
 
-		// Source de données
+		// Source de donnÃ©es
 		// if (survey.getCountryCode() != null) {
 		// EditSurvey.textPays.setText(survey.getCountryCode());
 		// }
@@ -710,7 +711,7 @@ public class EditSurvey {
 		if (survey.getDataCentre() != null) {
 			// EditSurvey.textCentre.setText(survey.getDataCentre());
 
-			// sélection dans la comboList
+			// sï¿½lection dans la comboList
 			Utils.selectComboCode(comboDataCentres, survey.getDataCentre());
 		}
 
@@ -793,7 +794,7 @@ public class EditSurvey {
 	}
 
 	public static void razEdition() {
-		// reset de toute la zone d'édition après étape descriptioon de fichier
+		// reset de toute la zone d'ï¿½dition aprï¿½s ï¿½tape descriptioon de fichier
 		// on retire toutes les sections et les boutons expand et validation
 
 		int i;
@@ -829,11 +830,11 @@ public class EditSurvey {
 				public void modifyText(ModifyEvent event) {
 					// on modifie la valeur du champ texte
 
-					// dès qu'on modifie une valeur, on invalide l'étape
-					// remise du nom onglet à valeur par défaut
+					// dï¿½s qu'on modifie une valeur, on invalide l'ï¿½tape
+					// remise du nom onglet ï¿½ valeur par dï¿½faut
 
-					// on invalide toutes les étapes suivantes avec le second
-					// flag okApresReset à false
+					// on invalide toutes les ï¿½tapes suivantes avec le second
+					// flag okApresReset ï¿½ false
 					EditSurvey.okApresReset = false;
 					if (!ViewFile.tabItem1.isDisposed()) {
 						ViewFile.tabItem1.setText(Messages
@@ -853,7 +854,7 @@ public class EditSurvey {
 	}
 
 	public static void DrawingBack() {
-		// reset de toute la zone d'édition après étape descriptioon de fichier
+		// reset de toute la zone d'ï¿½dition aprï¿½s ï¿½tape descriptioon de fichier
 		// on retire toutes les sections et les boutons expand et validation
 
 		ViewLog.aideSurvey();
@@ -912,8 +913,6 @@ public class EditSurvey {
 		listeTextSurvey.add(textDateDebut);
 		textDateFin = new Text(shell, SWT.BORDER);
 		listeTextSurvey.add(textDateFin);
-		textRegion = new Text(shell, SWT.BORDER);
-		listeTextSurvey.add(textRegion);
 		textLabo = new Text(shell, SWT.BORDER);
 		listeTextSurvey.add(textLabo);
 		textChef = new Text(shell, SWT.BORDER);
@@ -954,7 +953,7 @@ public class EditSurvey {
 		comboConfid.add("C - Confidential");
 		comboConfid.select(0);
 
-		// remplissage des centres de données
+		// remplissage des centres de donnï¿½es
 		comboDataCentres = new Combo(shell, SWT.READ_ONLY);
 
 		CodeTableRecordType[] centres = NemoLists.getVocabList("L300");
@@ -1044,7 +1043,7 @@ public class EditSurvey {
 		// textCentre.setText("FI");
 		validee = 0;
 
-		// effacement de la liste des types de données dans la table
+		// effacement de la liste des types de donnï¿½es dans la table
 		TableDataSurvey.types = new ArrayList<TypeSurvey>();
 		// razTableData
 		TableDataSurvey.razTableData();
