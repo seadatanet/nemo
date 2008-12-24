@@ -1361,8 +1361,9 @@ public class Utils {
 
 		// LANGUE
 		if (OptionsAction.comboLangue.getItem(
-				OptionsAction.comboLangue.getSelectionIndex()).matches(
-				"Fran�ais")) { //$NON-NLS-1$
+				OptionsAction.comboLangue.getSelectionIndex())
+				.matches(Messages.getString("OptionsAction.11")
+				)) { //$NON-NLS-1$
 			configuration.setLang("fr_FR"); //$NON-NLS-1$
 		} else {
 			configuration.setLang("en_GB"); //$NON-NLS-1$
