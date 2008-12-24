@@ -49,7 +49,7 @@ import fr.ifremer.nemo.util.SizeBasedProgressNotifier;
 /**
  * Class StationModel
  * 
- * Modèle de station utilisé dans la campagne
+ * ModÃ¨le de station utilisÃ© dans la campagne
  * 
  * @author Gerard BUNEL
  */
@@ -69,8 +69,8 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	protected String _endDataPattern;
 
 	/**
-	 * Booléen indiquant si la fin de station doit être détectée par un motif.
-	 * S'il est à false, l'information de fin de station est obtenue à l'aide de
+	 * BoolÃ©en indiquant si la fin de station doit Ãªtre dÃ©tectÃ©e par un motif.
+	 * S'il est Ã  false, l'information de fin de station est obtenue Ã  l'aide de
 	 * l'attribut endData
 	 */
 	protected boolean _endOnPattern;
@@ -80,24 +80,24 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	protected boolean _endOnEmptyLine;
 
 	/**
-	 * Definit si le numero de reference est automatiquement incremente
+	 * Definit si le numÃ©ro de rÃ©fÃ©rence est automatiquement incrÃ©mente
 	 */
 	protected boolean _incrementRef;
 
 	/**
-	 * Definit le numero de reference a incrementer
+	 * Definit le numÃ©ro de rÃ©fÃ©rence a incrÃ©menter
 	 */
 	protected int _incrementNumber;
 
 	/**
-	 * Indique si le fichier correspond à un fichier dont les metadata station
-	 * se trouvent dans la première ligne des données
+	 * Indique si le fichier correspond Ã  un fichier dont les metadata station
+	 * se trouvent dans la premiÃ¨re ligne des donnÃ©es
 	 */
 	protected boolean _metaInData;
 
 	/**
-	 * Indique si le fichier correspond à un fichier dont les metadata station
-	 * se trouvent dans la première ligne des données
+	 * Indique si le fichier correspond Ã  un fichier dont les metadata station
+	 * se trouvent dans la premiÃ¨re ligne des donnÃ©es
 	 */
 	protected boolean _metaInData2;
 
@@ -109,12 +109,12 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	protected static transient int _ref = -1;
 
 	/**
-	 * Nombre de mesures réalisées sur la station
+	 * Nombre de mesures rÃ©alisÃ©es sur la station
 	 */
 	protected int _rowNumber;
 
 	/**
-	 * Station servant de modèle pour stocker les informations de l'entête
+	 * Station servant de modÃ¨le pour stocker les informations de l'entÃªte
 	 * station
 	 */
 	protected Station _model;
@@ -122,7 +122,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	protected PropertyModel _referenceProperty;
 
 	/**
-	 * Liste des propriété permettant de récupérer les informations de l'entête
+	 * Liste des propriÃ©tÃ©s permettant de rÃ©cupÃ©rer les informations de l'entÃªte
 	 * station
 	 */
 	protected java.util.Map<String, PropertyModel> _properties;
@@ -130,22 +130,22 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	protected TimeSeriesModel _timeSeriesModel;
 
 	/**
-	 * Liste, ordonnée, des paramètres mesurés sur la station
+	 * Liste, ordonnï¿½e, des paramÃ¨tres mesurÃ©s sur la station
 	 */
 	protected java.util.List<ParameterModel> _parameterModels;
 
 	/**
-	 * Modèle pour les informations propres aux séries temporelles. Optionnel
+	 * ModÃ¨le pour les informations propres aux sÃ©ries temporelles. Optionnel
 	 */
 	protected HorodatedParameterModel _timestampModel;
 
 	/**
-	 * Modèle pour les informations propres au CDI
+	 * ModÃ¨le pour les informations propres au CDI
 	 */
 	protected Cdi _cdi;
 
 	/**
-	 * Modèle pour les informations propres aux trajectoires
+	 * ModÃ¨le pour les informations propres aux trajectoires
 	 */
 	protected Trajectory _trajectory;
 
@@ -155,18 +155,18 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	protected String _lastRef;
 
 	/**
-	 * En-tête de station plus 1 ligne de données (mode "ODV")
+	 * En-tÃªte de station plus 1 ligne de donnÃ©es (mode "ODV")
 	 */
 	protected String[] _headerPlus;
 
 	/**
-	 * Nombre de caractères du fichier
+	 * Nombre de caractÃ¨res du fichier
 	 */
 	protected int _taille;
 
 	/**
 	 * 
-	 * Type de fichier en entrée : profil vertical, serie temporelle ou
+	 * Type de fichier en entrÃ©e : profil vertical, serie temporelle ou
 	 * trajectoire
 	 */
 	protected String _inputType;
@@ -1684,7 +1684,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 					if (getLastRef() != null) {
 						// FAE 0001135 : reformatage des fichiers ODV 
-						//      (si la référence de la station est vide, considérer la ligne comme appartenant à la dernière station référencée)
+						//      (si la rï¿½fï¿½rence de la station est vide, considï¿½rer la ligne comme appartenant ï¿½ la derniï¿½re station rï¿½fï¿½rencï¿½e)
 						if (!refTemp.equals(getLastRef()) && !(refTemp.replace("\r\n", "")).trim().equals("")) {
 							station.setReference(getLastRef());
 							setLastRef(refTemp);

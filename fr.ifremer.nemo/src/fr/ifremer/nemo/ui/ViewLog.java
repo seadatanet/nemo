@@ -92,24 +92,24 @@ public class ViewLog extends ViewPart {
 		if (langue.matches("fr_FR")) {
 			ViewLog.styledTextLogHelp
 					.setText("==MENUS=="
-							+ "1/Modèle/Ouvrir modèle : charge un modèle en mémoire à condition d'avoir déjà ouvert une campagne\n"
-							+ "2/Modèle/Enregistrer modèle : créé sur le disque un fichier modèle XML correspondant aux valeurs entrées dans les différentes étapes. N'est fonctionnel qu'après avoir validé les 4 premières étapes.\n"
-							+ "3/Quitter : ferme l'application après avoir demandé confirmation.\n"
+							+ "1/ModÃ¨le/Ouvrir modÃ¨le : charge un modÃ¨le en mÃ©moire Ã  condition d'avoir dÃ©jÃ  ouvert une campagne\n"
+							+ "2/ModÃ¨le/Enregistrer modÃ¨le : crÃ©Ã© sur le disque un fichier modÃ¨le XML correspondant aux valeurs entrÃ©es dans les diffÃ©rentes Ã©tapes. N'est fonctionnel qu'aprÃ¨s avoir validÃ© les 4 premiÃ¨res Ã©tapes.\n"
+							+ "3/Quitter : ferme l'application aprÃ¨s avoir demandÃ© confirmation.\n"
 							+ "\n\n"
 							+ "==DESCRIPTION FICHIER==\n"
-							+ "1/ Sélection 'fichier' ou 'dossier' en cochant ou non 'Série temporelle'.\n"
+							+ "1/ SÃ©lection 'fichier' ou 'dossier' en cochant ou non 'SÃ©rie temporelle'.\n"
 							+ "2/ Bouton 'Parcourir' et choisir un fichier/dossier.\n"
-							+ "3/ Si besoin, charger un modèle par le menu Modèle/Ouvrir un modèle et en choisissant le fichier XML du modèle correspondant à la campagne en cours.\n"
+							+ "3/ Si besoin, charger un modÃ¨le par le menu ModÃ¨le/Ouvrir un modÃ¨le et en choisissant le fichier XML du modÃ¨le correspondant Ã  la campagne en cours.\n"
 							+ "4/ La zone Description de fichier s'affiche. Cliquer sur chaque section et modifier les valeurs.\n"
-							+ "5/ Pour indiquer un nombre de lignes, surligner avec la souris les lignes concernées dans la partie gauche de la fenêtre puis cliquer sur le bouton 'injecter' de la section considérée.\n"
-							+ "6/ L'indicateur de fin de données peut être entré par l'utilisateur.\n"
+							+ "5/ Pour indiquer un nombre de lignes, surligner avec la souris les lignes concernÃ©es dans la partie gauche de la fenÃªtre puis cliquer sur le bouton 'injecter' de la section considÃ©rÃ©e.\n"
+							+ "6/ L'indicateur de fin de donnÃ©es peut Ãªtre entre par l'utilisateur.\n"
 							+ "    END sera traduit par NEMO en ^END$\n"
 							+ "    EOF sera traduit par NEMO en ^$\n"
-							+ "Ces valeurs peuvent donc se retrouver après chargement d'un modèle.\n"
-							+ "7/ L'onglet 'info' reprend les principales informations sur les fichiers campagne et modèle chargés.\n"
-							+ "8/ L'onglet 'aide' affiche à chaque étape l'aide correspondante.\n"
-							+ "9/ Une fois les valeurs remplies, cliquer sur 'valider' pour passer à l'étape suivante. Si des erreurs ont été commises, des messages apparaitront en rouge dans l'onglet 'erreurs'.\n"
-							+ "10/ Le bouton 'reset' permet d'effacer toutes les valeurs de l'étape en cours.\n"); //$NON-NLS-1$
+							+ "Ces valeurs peuvent donc se retrouver aprÃ¨s chargement d'un modÃ¨le.\n"
+							+ "7/ L'onglet 'info' reprend les principales informations sur les fichiers campagne et modÃ¨le chargÃ©s.\n"
+							+ "8/ L'onglet 'aide' affiche Ã  chaque Ã©tape l'aide correspondante.\n"
+							+ "9/ Une fois les valeurs remplies, cliquer sur 'valider' pour passer Ã  l'Ã©tape suivante. Si des erreurs ont Ã©tÃ© commises, des messages apparaitront en rouge dans l'onglet 'erreurs'.\n"
+							+ "10/ Le bouton 'reset' permet d'effacer toutes les valeurs de l'Ã©tape en cours.\n"); //$NON-NLS-1$
 		} else {
 			// aide anglaise
 			ViewLog.styledTextLogHelp
@@ -139,9 +139,9 @@ public class ViewLog extends ViewPart {
 		if (langue.matches("fr_FR")) {
 			ViewLog.styledTextLogHelp
 					.setText("==DESCRIPTION CAMPAGNE==\n"
-							+ "3 possibilités de remplissage de cette étape : entrer toutes les valeurs manuellement, interroger les Webservices ou charger un fichier XML.\n"
-							+ "1/ Manuellement : remplir les sections 'référence', 'localisation', 'Sources des données' et 'Commentaires éventuels'. Pour la section 'Centre d'archivage', choisir la confidentialité dans la combo list. Pour la section 'types de données', un clic droit sur la table vide fait apparaitre un menu qui permet d'ajouter un nouveau type ('Sélection liste'), de déplacer ou de supprimer le type sélectionné. Ne pas tenter de cliquer gauche pour choisir une ligne puis de cliquer droit pour faire apparaitre le menu mais au contraire faire un clic droit directement. Sinon on passe en mode édition. La fenêtre de sélection des types de données permet d'effectuer une recherche à la fois sur le code et sur le nom du type.\n"
-							+ "2/ Webservices, bouton 'initialisation serveur' : la fenêtre de sélection des campagnes permet d'effectuer une recherche à la fois sur le code et sur le nom de la campagne.\n"
+							+ "3 possibilitÃ©s de remplissage de cette Ã©tape : entrer toutes les valeurs manuellement, interroger les Webservices ou charger un fichier XML.\n"
+							+ "1/ Manuellement : remplir les sections 'rÃ©fÃ©rence', 'localisation', 'Sources des donnÃ©es' et 'Commentaires Ã©ventuels'. Pour la section 'Centre d'archivage', choisir la confidentialitÃ© dans la combo list. Pour la section 'types de donnÃ©es', un clic droit sur la table vide fait apparaitre un menu qui permet d'ajouter un nouveau type ('SÃ©lection liste'), de dÃ©placer ou de supprimer le type sÃ©lectionnÃ©. Ne pas tenter de cliquer gauche pour choisir une ligne puis de cliquer droit pour faire apparaitre le menu mais au contraire faire un clic droit directement. Sinon on passe en mode Ã©dition. La fenÃªtre de sÃ©lection des types de donnÃ©es permet d'effectuer une recherche Ã  la fois sur le code et sur le nom du type.\n"
+							+ "2/ Webservices, bouton 'initialisation serveur' : la fenÃªtre de selection des campagnes permet d'effectuer une recherche Ã  la fois sur le code et sur le nom de la campagne.\n"
 							+ "3/ Fichier XML, bouton 'initialisation XML' : choisir un fichier XML de campagne.\n\n");
 		} else {
 			// aide anglaise
@@ -159,41 +159,41 @@ public class ViewLog extends ViewPart {
 		if (langue.matches("fr_FR")) {
 			ViewLog.styledTextLogHelp
 					.setText("==DESCRIPTION DE STATION==\n"
-							+ "Même principe que les étapes précédentes à la différence que certaines valeurs à injecter demandent des valeurs sur 'ligne', 'début' et 'fin'. Dans le cas d'un fichier campagne, toujours effectuer les injections sur la première station ! Dans tous les cas, la sélection devra se limiter à une ligne unique (date, heure, latitude, profondeur, etc.) sauf pour le 'commentaire' où la possibilité de surligner plusieurs lignes est offerte."
+							+ "MÃªme principe que les Ã©tapes prÃ©cÃ©dentes Ã  la diffÃ©rence que certaines valeurs Ã  injecter demandent des valeurs sur 'ligne', 'dÃ©but' et 'fin'. Dans le cas d'un fichier campagne, toujours effectuer les injections sur la premiÃ¨re station ! Dans tous les cas, la sÃ©lection devra se limiter Ã  une ligne unique (date, heure, latitude, profondeur, etc.) sauf pour le 'commentaire' oÃ¹ la possibilitÃ© de surligner plusieurs lignes est offerte."
 							+ "Pour les formats d'heure, de date, de latitude et de longitude, on peut entrer ses propres formats.\n"
-							+ "\nSi le numéro de station est situé dans le nom du fichier, introduire 0 comme numéro de ligne\n"
+							+ "\nSi le numÃ©ro de station est situÃ© dans le nom du fichier, introduire 0 comme numÃ©ro de ligne\n"
 							+ "\n\n==FORMATS HEURE / DATE==\n"
-							+ "*YY ou YYYY : année exprimée sur 2 ou 4 digits\n"
-							+ "*MM : mois exprimé sur 2 digits\n"
-							+ "*DD : jour dans le mois exprimé sur 2 digits\n"
-							+ "*hh : heure exprimée sur 2 digits\n"
-							+ "*mm : minutes dans l’heure exprimées sur 2 digits\n"
-							+ "*cc : centièmes d'heure exprimés sur 2 digits\n"
-							+ "*ss : secondes exprimées sur 2 digits\n"
-							+ "*ttttt : secondes exprimées sur 1 à 5 digits\n"
-							+ "\nLes contraintes suivantes sont associées à ces formats :\n"
-							+ "*Les valeurs sont complétées à gauche par un 0 si la valeur à afficher est inférieure à 10 (ex : année 2000 -> 00)\n"
-							+ "*L’heure peut être absente\n"
-							+ "*L’ordre entre la date et l’heure est libre (date heure, heure date)\n"
-							+ "*Des caractères supplémentaires quelconques peuvent être insérés entre les différentes clés. Ceux-ci seront attendus tel quel en entrée et rendus tel quel en sortie\n"
+							+ "*YY ou YYYY : annÃ©e exprimÃ©e sur 2 ou 4 digits\n"
+							+ "*MM : mois exprimÃ© sur 2 digits\n"
+							+ "*DD : jour dans le mois exprimÃ© sur 2 digits\n"
+							+ "*hh : heure exprimÃ©e sur 2 digits\n"
+							+ "*mm : minutes dans l'heure exprimÃ©es sur 2 digits\n"
+							+ "*cc : centiÃ¨mes d'heure exprimÃ©s sur 2 digits\n"
+							+ "*ss : secondes exprimÃ©es sur 2 digits\n"
+							+ "*ttttt : secondes exprimÃ©es sur 1 Ã  5 digits\n"
+							+ "\nLes contraintes suivantes sont associÃ©es Ã  ces formats :\n"
+							+ "*Les valeurs sont complÃ©tÃ©es Ã  gauche par un 0 si la valeur Ã  afficher est infÃ©rieure Ã  10 (ex : annÃ©e 2000 -> 00)\n"
+							+ "*L'heure peut Ãªtre absente\n"
+							+ "*L'ordre entre la date et l'heure est libre (date heure, heure date)\n"
+							+ "*Des caractÃ¨res suppl'mentaires quelconques peuvent Ãªtre insÃ©rÃ©s entre les diffÃ©rentes clÃ©s. Ceux-ci seront attendus tel quel en entrï¿½e et rendus tel quel en sortie\n"
 							+ "\nExemples:\n"
 							+ "YYYY/MM/DD hh:mm:ss ==> 1986/07/10 09:23:10\n"
 							+ "hh:mm ==> 09:23\n"
 							+ "YY-MM-DD ==> 86-07-10\n"
 							+ "\n\n==FORMATS LATITUDE / LONGITUDE==\n"
-							+ "N : exprime un hémisphère. Sa valeur devra être égale à N ou S dans le cas des latitudes, et W ou E dans le cas des longitudes\n"
-							+ "DDD ou DD : Nombre de degrés. Le nombre de D doit être 3 dans le cas des longitudes et 2 dans le cas des latitudes\n"
-							+ "DDD.ddd ou DD.ddd : Degrés en valeur décimales. Le nombre de D doit être 3 dans le cas des longitudes et 2 dans le cas des latitudes. Le nombre de caractères « d » exprime la précision attendue\n"
+							+ "N : exprime un hÃ©misphÃ¨re. Sa valeur devra Ãªtre Ã©gale Ã  N ou S dans le cas des latitudes, et W ou E dans le cas des longitudes\n"
+							+ "DDD ou DD : Nombre de degrÃ©s. Le nombre de D doit ï¿½tre 3 dans le cas des longitudes et 2 dans le cas des latitudes\n"
+							+ "DDD.ddd ou DD.ddd : DegrÃ©s en valeur dÃ©cimales. Le nombre de D doit Ãªtre 3 dans le cas des longitudes et 2 dans le cas des latitudes. Le nombre de caractÃ¨res 'd' exprime la prÃ©cision attendue\n"
 							+ "MM : Nombre entier de minutes\n"
-							+ "MM.mm : Minutes en valeur décimale. Le nombre de caractères « m » exprime la précision attendue\n"
-							+ "SS : valeur entière des secondes\n"
+							+ "MM.mm : Minutes en valeur dÃ©cimale. Le nombre de caractÃ¨res 'm' exprime la prÃ©cision attendue\n"
+							+ "SS : valeur entiÃ¨re des secondes\n"
 							+ "+DDD.ddd\n"
-							+ "\nLes contraintes suivantes sont associées à ces formats :\n"
-							+ "Les valeurs sont complétées à gauche par un espace si la valeur entière à afficher n’occupe pas le nombre de caractères attendus\n"
-							+ "L’indicateur d’hémisphère peut se trouver avant ou après la valeur numérique\n"
-							+ "Dans le cas où les degrés sont exprimés en valeurs décimales, aucune minute n’est attendue\n"
-							+ "Dans le cas où les minutes sont exprimées en valeurs décimales, aucune seconde n’est attendue\n"
-							+ "Des caractères supplémentaires quelconques peuvent être insérés entre les différentes clés. Ceux-ci seront attendus tel quel en entrée et rendus tel quel en sortie\n"
+							+ "\nLes contraintes suivantes sont associÃ©es Ã  ces formats :\n"
+							+ "Les valeurs sont complÃ©tÃ©es Ã  gauche par un espace si la valeur entiÃ¨re Ã  afficher n'occupe pas le nombre de caractÃ¨res attendus\n"
+							+ "L'indicateur d'hÃ©misphÃ¨re peut se trouver avant ou aprÃ¨s la valeur numÃ©rique\n"
+							+ "Dans le cas oÃ¹ les degrÃ©s sont exprimÃ©s en valeurs dÃ©cimales, aucune minute n'est attendue\n"
+							+ "Dans le cas oÃ¹ les minutes sont exprimÃ©es en valeurs dÃ©cimales, aucune seconde n'est attendue\n"
+							+ "Des caractÃ¨res supplÃ©mentaires quelconques peuvent Ãªtre insÃ©rÃ©s entre les diffÃ©rentes clÃ©s. Ceux-ci seront attendus tel quel en entrÃ©e et rendus tel quel en sortie\n"
 							+ "\nExemples :\n" + "NDDD MM.mm ==> W123 10.25\n"
 							+ "DDD MM SS N ==> 123 10 30 W\n");
 		} else {
@@ -245,11 +245,11 @@ public class ViewLog extends ViewPart {
 		if (langue.matches("fr_FR")) {
 			ViewLog.styledTextLogHelp
 					.setText("==DESCRIPTION DONNEES==\n"
-							+ "Même principe que pour les types de données : on ajoute ici les paramètres mesurés.\n"
-							+ "\nLa formule de conversion doit être du style x*1000+3 ; x étant la valeur lue dans le fichier\n\n"
-							+ "Dans le cas d'une série temporelle :\n"
-							+ "*les paramètres DATE, YEAR, MONTH, DAYX, TIME sont rajoutés automatiquement à la génération donc attention à ne pas les ajouter manuellement.\n"
-							+ "*on peut choisir si le calcul des dates/heures est basé sur les dates/heures entrées à l'étape Station et la fréquence d'échantillonnage ou si les informations sont présentes au sein de la ligne des données (auquel cas préciser le format).\n"
+							+ "Mï¿½me principe que pour les types de donnï¿½es : on ajoute ici les paramï¿½tres mesurï¿½s.\n"
+							+ "\nLa formule de conversion doit ï¿½tre du style x*1000+3 ; x ï¿½tant la valeur lue dans le fichier\n\n"
+							+ "Dans le cas d'une sï¿½rie temporelle :\n"
+							+ "*les paramï¿½tres DATE, YEAR, MONTH, DAYX, TIME sont rajoutï¿½s automatiquement ï¿½ la gï¿½nï¿½ration donc attention ï¿½ ne pas les ajouter manuellement.\n"
+							+ "*on peut choisir si le calcul des dates/heures est basï¿½ sur les dates/heures entrï¿½es ï¿½ l'ï¿½tape Station et la frï¿½quence d'ï¿½chantillonnage ou si les informations sont prï¿½sentes au sein de la ligne des donnï¿½es (auquel cas prï¿½ciser le format).\n"
 							+ "\n");
 		} else {
 			// aide anglaise
@@ -269,10 +269,10 @@ public class ViewLog extends ViewPart {
 		if (langue.matches("fr_FR")) {
 			ViewLog.styledTextLogHelp
 					.setText("==#CONVERSION==\n"
-							+ "Choisir le format de sortie. On peut générer les deux formats à la suite sans devoir revalider toutes les étapes."
-							+ "\n\nLa conversion est divisée en deux étapes successives :\n"
-							+ "1-conversion du fichier en mémoire : on peut annuler le processus pendant cette étape !\n"
-							+ "2-écriture du fichier sur le disque : on ne peut plus annuler le processus une fois engagé !");
+							+ "Choisir le format de sortie. On peut gï¿½nï¿½rer les deux formats ï¿½ la suite sans devoir revalider toutes les ï¿½tapes."
+							+ "\n\nLa conversion est divisï¿½e en deux ï¿½tapes successives :\n"
+							+ "1-conversion du fichier en mï¿½moire : on peut annuler le processus pendant cette ï¿½tape !\n"
+							+ "2-ï¿½criture du fichier sur le disque : on ne peut plus annuler le processus une fois engagï¿½ !");
 
 		} else {
 			// aide anglaise
