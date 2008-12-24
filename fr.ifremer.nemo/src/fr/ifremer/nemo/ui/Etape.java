@@ -1439,25 +1439,23 @@ public class Etape {
 			String[] mots = p.split(premierType.getCode());
 			String code = mots[0];
 
-			if (!ViewFile.isCollection()) {
-				if (ViewFile.typeFichierEntree().equals(Global.PROFILE)) {
-					if (!(code.matches("PRES") || code.matches("DEPH"))) {
-						// PRES ou DEPH n'est pas en premier
-						Utils.messageErreurAppend(Messages.getString("Etape.107"));
-						ok = ok && false;
-					} else {
-						ok = ok && true;
-					}
-	
-					// Si PRES n'est pas premier => Medatlas impossible
-					if (!code.matches("PRES")) {
-						ViewFile.radMedatlas.setEnabled(false);
-						ViewFile.radMedatlas.setSelection(false);
-						ViewFile.radODV.setSelection(true);
-						ViewFile.afficheGrpODV();
-					} else if (!ViewFile.isCollection()) {
-						ViewFile.radMedatlas.setEnabled(true);
-					}
+			if (ViewFile.typeFichierEntree().equals(Global.PROFILE)) {
+				if (!(code.matches("PRES") || code.matches("DEPH"))) {
+					// PRES ou DEPH n'est pas en premier
+					Utils.messageErreurAppend(Messages.getString("Etape.107"));
+					ok = ok && false;
+				} else {
+					ok = ok && true;
+				}
+
+				// Si PRES n'est pas premier => Medatlas impossible
+				if (!code.matches("PRES")) {
+					ViewFile.radMedatlas.setEnabled(false);
+					ViewFile.radMedatlas.setSelection(false);
+					ViewFile.radODV.setSelection(true);
+					ViewFile.afficheGrpODV();
+				} else if (!ViewFile.isCollection()) {
+					ViewFile.radMedatlas.setEnabled(true);
 				}
 			}
 
