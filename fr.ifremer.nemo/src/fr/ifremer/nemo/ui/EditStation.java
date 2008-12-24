@@ -26,7 +26,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 public class EditStation {
-	// fonctions de remplissage de la zone d'édition pour les campagnes
+	// fonctions de remplissage de la zone d'Ã©dition pour les campagnes
 	// /////////////////////////////////////////
 
 	private static Shell shell = new Shell();
@@ -135,7 +135,7 @@ public class EditStation {
 	public static FlagTable flagTable;
 
 	public static void affichageEdition() {
-		// initialisation zone édition pour étape description de fichier
+		// initialisation zone Ã©dition pour Ã©tape description de fichier
 
 		cursCommentaire = new Cursor();
 		cursEchant1 = new Cursor();
@@ -156,13 +156,13 @@ public class EditStation {
 
 		loaded = 1;
 
-		// de base les sections sont refermées
+		// de base les sections sont refermï¿½es
 		expand = 0;
 
 		/*
 		 * recreer un formEdition sur le toolkit principal pour pouvoir faire un
 		 * dispose() dessus mais garder toutes les sections afin de les
-		 * réafficher par la suite dans DrawingBack.
+		 * rÃ©afficher par la suite dans DrawingBack.
 		 */
 
 		ViewEdit.formEdition.getBody().setLayout(new GridLayout());
@@ -202,7 +202,7 @@ public class EditStation {
 		buttonExpand.setParent(ViewEdit.formEdition.getBody());
 		buttonExpand.setText("+"); //$NON-NLS-1$
 
-		// Case à cocher "Meta In Data"
+		// Case Ã  cocher "Meta In Data"
 		if (ViewFile.radProfilVertical.getSelection()) {
 			btnMetaInData2.setParent(ViewEdit.formEdition.getBody());
 			btnMetaInData2.setText("Meta In Data");
@@ -230,7 +230,7 @@ public class EditStation {
 		if ((ViewFile.radSerieTempo.getSelection() || (ViewFile.radTrajectoire
 				.getSelection())
 				&& EditStation.radMedatlas.getSelection())) {
-			// série temporelle
+			// sÃ©rie temporelle
 			grpSerieTempo.setParent(ViewEdit.formEdition.getBody());
 			grpSerieTempo.setText(Messages.getString("ViewFile.serieTempo"));
 			GridLayoutFactory.fillDefaults().applyTo(grpSerieTempo);
@@ -254,8 +254,8 @@ public class EditStation {
 		// formEdition.redraw();
 		// formEdition.reflow(true);
 
-		// Initialisation du tableau de paramètres si étape onglet Campagne
-		// "sautée"
+		// Initialisation du tableau de paramÃ¨tres si Ã©tape onglet Campagne
+		// "sautÃ©e"
 		if (ViewFile.radioCollectCasN.getSelection()
 				|| ViewFile.radioCollectCas1.getSelection()) {
 			TableDataSurvey.initTypes();
@@ -280,7 +280,7 @@ public class EditStation {
 		textRefStationNumero.setText("1");
 
 		if (!ViewFile.isCollection()) {
-			// section reference type de données
+			// section reference type de donnï¿½es
 			DrawingStation.sectionTypeDonnees(sectionTypeDonnees, Messages
 					.getString("EditStation.0"), comboRefStationType);
 		}
@@ -309,7 +309,7 @@ public class EditStation {
 				.sectionCommentaireLigneDebutFinInject(
 						Messages.getString("EditStation.9"), Messages.getString("EditStation.10"), sectionCommentaire, textCommentaireLigne, textCommentaireDebut, textCommentaireFin, textCommentaire, buttonCommentaireSaisie, buttonCommentairePos, buttonVar, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 
-		// section surface sample : identique à historique acquisition
+		// section surface sample : identique ï¿½ historique acquisition
 		blnManuel = true;
 		if (blnModeleOuvert) {
 			PropertyModel propertyModel = DataModel.stationModel_modele
@@ -321,7 +321,7 @@ public class EditStation {
 				.sectionSurfaceSample(
 						Messages.getString("EditStation.11"), Messages.getString("EditStation.12"), sectionSurface, textSurfaceLigne1, textSurfaceDebut1, textSurfaceFin1, textSurfaceLigne2, textSurfaceDebut2, textSurfaceFin2, textSurface1, textSurface2, buttonSurfaceSaisie, buttonSurfacePos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 
-		// section décallage TU
+		// section dÃ©callage TU
 		blnManuel = true;
 		if (blnModeleOuvert) {
 			PropertyModel propertyModel = DataModel.stationModel_modele
@@ -366,7 +366,6 @@ public class EditStation {
 		// flags QC
 		// DrawingStation.sectionDateQC(Messages.getString("EditStation.17"),
 		// Messages.getString("EditStation.18"), sectionQCDate); //$NON-NLS-1$
-		// //$NON-NLS-2$
 
 		// section Latitude
 		blnManuel = true;
@@ -470,7 +469,7 @@ public class EditStation {
 					.sectionManuelLigneDebutFinInject(
 							Messages.getString("EditStation.31"), Messages.getString("EditStation.32"), sectionProfCapteur, textProfCapteurLigne, textProfCapteurDebut, textProfCapteurFin, textProfCapteur, buttonProfCapteurSaisie, buttonProfCapteurPos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 
-			// section déclinaison magnétique
+			// section dÃ©clinaison magnÃ©tique
 			blnManuel = true;
 			if (blnModeleOuvert) {
 				PropertyModel propertyModel = DataModel.stationModel_modele
@@ -482,7 +481,7 @@ public class EditStation {
 					.sectionManuelLigneDebutFinInject(
 							Messages.getString("EditStation.33"), Messages.getString("EditStation.34"), sectionDeclinMagnet, textDeclinMagnetLigne, textDeclinMagnetDebut, textDeclinMagnetFin, textDeclinMagnet, buttonDeclinMagnetSaisie, buttonDeclinMagnetPos, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 
-			// section fréquence échantillonnage
+			// section frÃ©quence Ã©chantillonnage
 			blnManuel = true;
 			if (blnModeleOuvert) {
 				PropertyModel propertyModel = DataModel.stationModel_modele
@@ -494,7 +493,7 @@ public class EditStation {
 					.sectionManuelLigneDebutFinInjectFreqEchant(
 							Messages.getString("EditStation.35"), Messages.getString("EditStation.36"), sectionFreqEchant, textFreqEchantLigne, textFreqEchantDebut, textFreqEchantFin, textFreqEchant, buttonFreqEchantSaisie, buttonFreqEchantPos, textFreqEchantConv, textFreqEchantTest, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 			textFreqEchantConv.setText("*1");
-			// la valeur saisie est à zéro par défaut
+			// la valeur saisie est Ã  zÃ©ro par dÃ©faut
 			textFreqEchant.setText("0");
 			
 			if (radLigneDonnees.getSelection()){				
@@ -502,6 +501,7 @@ public class EditStation {
 				sectionFreqEchant.setExpanded(false);
 				sectionFreqEchant.setTitleBarForeground(Display.getCurrent()
 						.getSystemColor(SWT.COLOR_GRAY));
+				activeDateHeureManuel();
 			}
 		}
 
@@ -518,15 +518,12 @@ public class EditStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						// System.out.println("expand/collapse all");
-						// raz de la valeur manuelle
 						int i;
-
-						// System.out.println("expand ? = " + expand);
 						for (i = 0; i <= EditStation.listeSectionsStation
 								.size() - 1; i++) {
 
-							if (expand == 0) {
+							// seule les section accessibles s'ouvrent
+							if (expand == 0 && EditStation.listeSectionsStation.get(i).getEnabled()) {
 								EditStation.listeSectionsStation.get(i)
 										.setExpanded(true);
 
@@ -538,13 +535,13 @@ public class EditStation {
 
 						}
 						if (expand == 0) {
-							// System.out.println("expand passe à 1");
+							// expand passe Ã  1
 							buttonExpand.setText("-"); //$NON-NLS-1$
 							buttonExpand2.setText("-"); //$NON-NLS-1$
 							expand = 1;
 						} else {
 							expand = 0;
-							// System.out.println("expand passe à 0");
+							// expand passe Ã  0
 							buttonExpand.setText("+"); //$NON-NLS-1$
 							buttonExpand2.setText("+"); //$NON-NLS-1$
 						}
@@ -559,15 +556,12 @@ public class EditStation {
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-
-						// raz de la valeur manuelle
 						int i;
-
-						// System.out.println("expand ? = " + expand);
 						for (i = 0; i <= EditStation.listeSectionsStation
 								.size() - 1; i++) {
-
-							if (expand == 0) {
+							
+							// seule les section accessibles s'ouvrent
+							if (expand == 0 && EditStation.listeSectionsStation.get(i).getEnabled()) {
 								EditStation.listeSectionsStation.get(i)
 										.setExpanded(true);
 
@@ -579,15 +573,13 @@ public class EditStation {
 
 						}
 						if (expand == 0) {
-							// System.out.println("expand passe à 1");
-							// //$NON-NLS-1$
+							// expand passe Ã  1
 							buttonExpand.setText("-"); //$NON-NLS-1$
 							buttonExpand2.setText("-"); //$NON-NLS-1$
 							expand = 1;
 						} else {
 							expand = 0;
-							// System.out.println("expand passe à 0");
-							// //$NON-NLS-1$
+							// expand passe Ã  0
 							buttonExpand.setText("+"); //$NON-NLS-1$
 							buttonExpand2.setText("+"); //$NON-NLS-1$
 						}
@@ -603,7 +595,7 @@ public class EditStation {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
 
-						// on passe en ppar l'étape à laquelle on se trouve
+						// on passe en ppar l'Ã©tape Ã  laquelle on se trouve
 						// Etape.etape(2);
 
 						Etape.validationStation();
@@ -676,7 +668,7 @@ public class EditStation {
 		// affichage courant
 		ViewFile.affiche = 2;
 
-		// remplissage de l'IHM par le modèle chargé
+		// remplissage de l'IHM par le modÃ¨le chargÃ©
 
 		if (DataModel.ouverture) {
 			DataModel.fillStation();
@@ -688,7 +680,7 @@ public class EditStation {
 	}
 
 	public static void razEdition() {
-		// reset de toute la zone d'édition après étape descriptioon de fichier
+		// reset de toute la zone d'Ã©dition aprÃ¨s Ã©tape descriptioon de fichier
 		// on retire toutes les sections et les boutons expand et validation
 
 		int i;
@@ -711,7 +703,7 @@ public class EditStation {
 
 		}
 
-		// titre à vide
+		// titre Ã  vide
 		ViewEdit.formEdition.setText(""); //$NON-NLS-1$
 
 		// refresh global
@@ -720,7 +712,7 @@ public class EditStation {
 	}
 
 	public static void DrawingBack() {
-		// reset de toute la zone d'édition après étape descriptioon de fichier
+		// reset de toute la zone d'Ã©dition aprÃ¨s Ã©tape descriptioon de fichier
 		// on retire toutes les sections et les boutons expand et validation
 
 		ViewLog.aideStation();
@@ -802,15 +794,6 @@ public class EditStation {
 	}
 
 	public static void initText() {
-		// textQCDate = new Text(shell, SWT.BORDER);
-		// listeTextStation.add(textQCDate);
-		// textQCLat = new Text(shell, SWT.BORDER);
-		// listeTextStation.add(textQCLat);
-		// textQCLong = new Text(shell, SWT.BORDER);
-		// listeTextStation.add(textQCLong);
-		// textQCProf = new Text(shell, SWT.BORDER);
-		// listeTextStation.add(textQCProf);
-
 		textRefStationNumero = new Text(shell, SWT.BORDER);
 		listeTextStation.add(textRefStationNumero);
 		textRefStationLigne = new Text(shell, SWT.BORDER);
@@ -853,8 +836,6 @@ public class EditStation {
 
 		textConversionDate = new Text(shell, SWT.BORDER);
 		listeTextStation.add(textConversionDate);
-		// textConversionHeure = new Text(shell, SWT.BORDER);
-		// listeTextStation.add(textConversionHeure);
 		textTestConvHeure = new Text(shell, SWT.BORDER);
 		listeTextStation.add(textTestConvHeure);
 		textTestConvDate = new Text(shell, SWT.BORDER);
@@ -995,11 +976,11 @@ public class EditStation {
 			liste.get(i).addModifyListener(new ModifyListener() {
 				public void modifyText(ModifyEvent event) {
 					// on modifie la valeur du champ texte
-					// dès qu'on modifie une valeur, on invalide l'étape
-					// remise du nom onglet à valeur par défaut
+					// dÃ¨s qu'on modifie une valeur, on invalide l'Ã©tape
+					// remise du nom onglet Ã  valeur par dÃ©faut
 
-					// on invalide toutes les étapes suivantes avec le second
-					// flag okApresReset à false
+					// on invalide toutes les Ã©tapes suivantes avec le second
+					// flag okApresReset Ã  false
 					EditStation.okApresReset = false;
 					ViewFile.tabItem2.setText(Messages
 							.getString("EditStation.1"));
@@ -1238,18 +1219,24 @@ public class EditStation {
 
 	public static void razText(ArrayList<Text> liste) {
 
+		// Effacement des donnÃ©es saisies
 		for (int i = 0; i < liste.size(); i++) {
 			liste.get(i).setText(""); //$NON-NLS-1$
-
 		}
+		
+		// exceptions
 		textTU.setText("0.0");
+		textRefStationNumero.setText("1");			
+		textFreqEchantConv.setText("*1");
+		textFreqEchant.setText("0");
+		
 		EditStation.okApresReset = false;
 		ViewFile.tabItem2.setText(Messages.getString("EditStation.1"));
 		EditData.okApresReset = false;
 		ViewFile.tabItem3.setText(Messages.getString("EditData.1"));
 		Utils.messageErreur("");
 
-		// boutons manuels sélectionnés par défaut
+		// boutons manuels sÃ©lectionnÃ©s par dÃ©faut
 		int nbreManu = listeBoutonsManuel.size();
 		int nbrePos = listeBoutonsPos.size();
 
@@ -1261,6 +1248,21 @@ public class EditStation {
 			listeBoutonsManuel.get(i).setSelection(true);
 		}
 		
+		// FAE0001187 : Exceptions pour les section Date / Heure / Lattitude / LogÃ©tude
+		buttonDateSaisie.setSelection(false);
+		buttonHeureSaisie.setSelection(false);
+		buttonLatSaisie.setSelection(false);
+		buttonLatFinSaisie.setSelection(false);
+		buttonLongSaisie.setSelection(false);
+		buttonLongFinSaisie.setSelection(false);
+		
+		buttonDatePos.setSelection(true);
+		buttonHeurePos.setSelection(true);
+		buttonLatPos.setSelection(true);
+		buttonLatFinPos.setSelection(true);
+		buttonLongPos.setSelection(true);
+		buttonLongFinPos.setSelection(true);
+		
 		// FAE0001187 : RaZ de tous les formats
 		comboHeure.deselectAll();
 		comboDate.deselectAll();
@@ -1268,6 +1270,9 @@ public class EditStation {
 		comboLongitude.deselectAll();
 		comboLatitudeFin.deselectAll();
 		comboLongitudeFin.deselectAll();
+		
+		// FAE0001187 : RaZ du type de donnÃ©es
+		comboRefStationType.deselectAll();
 
 	}
 
@@ -1299,7 +1304,7 @@ public class EditStation {
 
 				// position dans fichier
 
-				// récupérer le texte en question et creer une nouvelle heure
+				// rÃ©cupÃ©rer le texte en question et creer une nouvelle heure
 				String ligne = Utils.lignesBrutes
 						.get(Integer.parseInt(EditStation.textFreqEchantLigne
 								.getText()) - 1);

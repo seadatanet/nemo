@@ -1043,7 +1043,7 @@ public class EditSurvey {
 		// textCentre.setText("FI");
 		validee = 0;
 
-		// effacement de la liste des types de donn�es dans la table
+		// effacement de la liste des types de données dans la table
 		TableDataSurvey.types = new ArrayList<TypeSurvey>();
 		// razTableData
 		TableDataSurvey.razTableData();
@@ -1086,9 +1086,10 @@ public class EditSurvey {
 
 		Utils.messageErreur("");
 		
-		// FAE0001187 : RaZ Navire et Pays
+		// FAE0001187 : RaZ Navire et Pays et Region
 		comboCountries.deselectAll();
 		comboNavire.deselectAll();
+		comboRegion.deselectAll();
 	}
 
 	private static void disposeElements() {
