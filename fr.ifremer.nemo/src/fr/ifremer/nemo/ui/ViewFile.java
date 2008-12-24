@@ -148,7 +148,7 @@ public class ViewFile extends ViewPart {
 		top = new Composite(parent, SWT.NONE);
 		top.setLayout(new FillLayout());
 
-		// invalidation de chaque étape
+		// invalidation de chaque ï¿½tape
 		EditDesc.validee = 0;
 		EditDesc.loaded = 0;
 		EditSurvey.validee = 0;
@@ -161,10 +161,10 @@ public class ViewFile extends ViewPart {
 		// chargement de la configuration
 		Utils.initConfig();
 
-		// ouverture de modèle à false
+		// ouverture de modï¿½le ï¿½ false
 		DataModel.ouverture = false;
 
-		// étape de départ
+		// ï¿½tape de dï¿½part
 		etape = 0;
 		DataModel.reset = false;
 
@@ -211,7 +211,7 @@ public class ViewFile extends ViewPart {
 							tmp++;
 
 						Utils.validationEtape(tmp);
-						// System.out.println("onglet sélectionné " + tmp);
+						// System.out.println("onglet sï¿½lectionnï¿½ " + tmp);
 
 					}
 				});
@@ -360,7 +360,7 @@ public class ViewFile extends ViewPart {
 					}
 				});
 
-		// FAE 0001140 : déplacement du bouton Parcourir
+		// FAE 0001140 : dï¿½placement du bouton Parcourir
 		buttonParcourir = new Button(composite11, SWT.NONE);
 		buttonParcourir.setText(Messages.getString("ViewFile.parcourir")); //$NON-NLS-1$
 
@@ -371,13 +371,18 @@ public class ViewFile extends ViewPart {
 						// System.out.println("parcourir"); // //$NON-NLS-1$
 						DataModel.ouverture = false;
 						Preformat.setPreformat(false);
+						DataModel.trajectory = null;
 						// parcours des fichiers/dossiers
-
+						
+						// on rend sÃ©lectionnables les radios ODV et Medatlas dans l'onglet Conversion
+						radMedatlas.setEnabled(true);
+						radODV.setEnabled(true);
+						
 						// si fichier campagne
 						if (radioFichier.getSelection()) {
 
-							// Si on a supprimé l'onglet campagne pour une
-							// collection on le réaffiche
+							// Si on a supprimï¿½ l'onglet campagne pour une
+							// collection on le rï¿½affiche
 							// vu qu'on selectionne maintenant fichier campagne
 							if (tabItem1.isDisposed()) {
 								tabItem1 = new TabItem(tabFolder, SWT.NONE, 1);
@@ -403,7 +408,7 @@ public class ViewFile extends ViewPart {
 								fileLoaded = true;
 								nomRepertoire = nomFichier.substring(0,
 										nomFichier.lastIndexOf('\\') + 1);
-								// init du modèle
+								// init du modï¿½le
 
 								// affichage du fichier campagne dans onglet
 								// Campagne
@@ -415,7 +420,7 @@ public class ViewFile extends ViewPart {
 											.setText(Utils.texteBrut);
 
 									// affichage etape0 dans formulaire
-									// d'édition de paramètres
+									// d'ï¿½dition de paramï¿½tres
 									Utils.razGlobal();
 									EditDesc.affichageEdition();
 
@@ -444,8 +449,8 @@ public class ViewFile extends ViewPart {
 						// si dossier campagne
 						if (radioDossier.getSelection()) {
 
-							// Si on a supprimé l'onglet campagne pour une
-							// colleciton on le réaffiche
+							// Si on a supprimï¿½ l'onglet campagne pour une
+							// colleciton on le rï¿½affiche
 							// vu qu'on selectionne maintenant dossier
 							if (tabItem1.isDisposed()) {
 								tabItem1 = new TabItem(tabFolder, SWT.NONE, 1);
@@ -472,8 +477,8 @@ public class ViewFile extends ViewPart {
 											.setText(Utils.texteBrut);
 
 									// affichage etape0 dans formulaire
-									// d'édition de
-									// paramètres
+									// d'ï¿½dition de
+									// paramï¿½tres
 									Utils.razGlobal();
 									EditDesc.affichageEdition();
 
@@ -488,7 +493,7 @@ public class ViewFile extends ViewPart {
 							} else {
 								fileLoaded = false;
 								// System.out.println("pas de dossier
-								// sélectionné"); //$NON-NLS-1$
+								// sï¿½lectionnï¿½"); //$NON-NLS-1$
 								ViewLog.styledTextLogErreurs
 										.setText(Messages
 												.getString("ViewFile.selectionnezDossier")); //$NON-NLS-1$
@@ -521,8 +526,8 @@ public class ViewFile extends ViewPart {
 								}
 
 								// affichage etape0 dans formulaire
-								// d'édition de
-								// paramètres
+								// d'ï¿½dition de
+								// paramï¿½tres
 								Utils.razGlobal();
 								EditDesc.affichageEdition();
 
@@ -544,7 +549,7 @@ public class ViewFile extends ViewPart {
 							else {
 								fileLoaded = false;
 								// System.out.println("pas de dossier
-								// sélectionné"); //$NON-NLS-1$
+								// sï¿½lectionnï¿½"); //$NON-NLS-1$
 								ViewLog.styledTextLogErreurs
 										.setText(Messages
 												.getString("ViewFile.selectionnezDossier")); //$NON-NLS-1$
@@ -575,8 +580,8 @@ public class ViewFile extends ViewPart {
 								}
 
 								// affichage etape0 dans formulaire
-								// d'édition de
-								// paramètres
+								// d'ï¿½dition de
+								// paramï¿½tres
 								Utils.razGlobal();
 								EditDesc.affichageEdition();
 
@@ -598,7 +603,7 @@ public class ViewFile extends ViewPart {
 							else {
 								fileLoaded = false;
 								// System.out.println("pas de dossier
-								// sélectionné"); //$NON-NLS-1$
+								// sï¿½lectionnï¿½"); //$NON-NLS-1$
 								ViewLog.styledTextLogErreurs
 										.setText(Messages
 												.getString("ViewFile.selectionnezDossier")); //$NON-NLS-1$
@@ -745,7 +750,7 @@ public class ViewFile extends ViewPart {
 		GridDataFactory.fillDefaults().grab(false, false).applyTo(
 				comboAccesDonnees);
 
-		// Par défaut
+		// Par dï¿½faut
 		lblTypePlateForme.setEnabled(checkCDI.getSelection());
 		comboTypePlateForme.setEnabled(checkCDI.getSelection());
 		lblAccesDonnees.setEnabled(checkCDI.getSelection());
@@ -821,7 +826,7 @@ public class ViewFile extends ViewPart {
 
 		textTempoHeureRef = new Text(groupTempo, SWT.BORDER);
 
-		// on le désactive de base
+		// on le dï¿½sactive de base
 		groupTempo.setVisible(false);
 
 		// TODO Herve Taniou : ce groupe n'est jamais rendu visible et donc
@@ -847,7 +852,7 @@ public class ViewFile extends ViewPart {
 		radTrajectoire = new Button(grpFichier, SWT.RADIO);
 		radTrajectoire.setText(Messages.getString("ViewFile.trajectoire"));
 
-		// Sélection du type par défaut
+		// Sï¿½lection du type par dï¿½faut
 		radProfilVertical.setSelection(true);
 	}
 
@@ -893,7 +898,7 @@ public class ViewFile extends ViewPart {
 		radioSeparateurAutre.setText(Messages.getString("Preformat.8"));
 		textSeparateur = new Text(compositeSeparateur, SWT.BORDER);
 
-		// Par défaut
+		// Par dï¿½faut
 		compositeSeparateur.setVisible(false);
 
 		chkSeparateur

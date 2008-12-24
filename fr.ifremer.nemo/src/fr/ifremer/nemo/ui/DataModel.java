@@ -360,7 +360,7 @@ public class DataModel {
 		}
 
 		// Type de fichier de sortie (trajectoire)
-		if (trajectory != null) {
+		if (ViewFile.radTrajectoire.getSelection()) {
 			trajectory.setOutputType(EditStation.typeFichierSortie());
 
 			if (EditStation.typeFichierSortie().equals(Global.ODV)) {
