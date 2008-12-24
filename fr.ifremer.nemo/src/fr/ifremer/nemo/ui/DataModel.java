@@ -32,7 +32,6 @@ import fr.ifremer.nemo.util.LongitudeFormat;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSDataType;
 import fr.ifremer.nemo.ws.WSParameter;
-import fr.ifremer.nemo.ws.WSRegion;
 
 public class DataModel {
 
