@@ -117,7 +117,7 @@ public class TableData {
 
 	public static void initTypes() {
 
-		// initialisation de la ArrayList des types des données à partir du
+		// initialisation de la ArrayList des types des donnï¿½es ï¿½ partir du
 
 		types = new ArrayList<TypeData>();
 		typesWS = new ArrayList<TypeData>();
@@ -131,7 +131,7 @@ public class TableData {
 			// new type
 			TypeData type = new TypeData();
 
-			// paramètres
+			// paramï¿½tres
 			type.setCode(wsParameter.getCode() + " - " + wsParameter.getName()); //$NON-NLS-1$
 			type.setUnite(wsParameter.getUnit());
 			type.setFormat(wsParameter.getFormat());
@@ -143,16 +143,15 @@ public class TableData {
 			// ajout dans liste
 			typesWS.add(type);
 
-			// ajout systématique de PRES
+			// ajout systï¿½matique de PRES
 			if (wsParameter.getCode().matches("PRES")) { //$NON-NLS-1$
 
 				// if ((DataModel.ouverture == false)
 				// && (!ViewFile.checkBoxTempo.getSelection())) {
-				// FIXME vérifier tous les tests du même type : si pas (série tempo ou trajectoire)
 				if ((DataModel.ouverture == false)
 						&& !(ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire
 								.getSelection())) {
-					// pas de modèle chargé donc on rajoute PRES
+					// pas de modï¿½le chargï¿½ donc on rajoute PRES
 					types.add(type);
 				}
 
@@ -178,7 +177,7 @@ public class TableData {
 
 		// LINK des editors
 
-		// accès direct aux valeurs des colonnes des items
+		// accï¿½s direct aux valeurs des colonnes des items
 
 		final TableEditor editor = new TableEditor(table);
 
@@ -192,7 +191,7 @@ public class TableData {
 				if (event.button == 3) {
 					return;
 				}
-				// calcul du numéro de ligne sélectionné
+				// calcul du numï¿½ro de ligne sï¿½lectionnï¿½
 
 				Point pt = new Point(event.x, event.y);
 				TableItem item = table.getItem(pt);
@@ -200,7 +199,7 @@ public class TableData {
 				if (item == null)
 					return;
 
-				// édition directe de l'élément sélectionné
+				// ï¿½dition directe de l'ï¿½lï¿½ment sï¿½lectionnï¿½
 
 				Rectangle clientArea = table.getClientArea();
 				// Point pt = new Point(event.x, event.y);
@@ -276,7 +275,7 @@ public class TableData {
 			}
 		});
 
-		// création du menu
+		// crï¿½ation du menu
 		Menu menu = new Menu(table.getShell(), SWT.POP_UP);
 		MenuItem itemInject = new MenuItem(menu, SWT.NONE);
 		itemInject.setText(Messages.getString("TableData.11")); //$NON-NLS-1$
@@ -328,7 +327,7 @@ public class TableData {
 
 		itemList.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
-				// System.out.println("sélection liste");
+				// System.out.println("sï¿½lection liste");
 				FiltrageTableType.go(Global.PARAMETER);
 
 			}
@@ -382,7 +381,7 @@ public class TableData {
 	}
 
 	public static void initTableData() {
-		// création des TableItems à partir de la ArrayList types
+		// crï¿½ation des TableItems ï¿½ partir de la ArrayList types
 
 		int nbre;
 		nbre = types.size();
@@ -390,7 +389,7 @@ public class TableData {
 		Table table;
 		table = ViewFile.tableData;
 
-		// nouvelle création des items
+		// nouvelle crï¿½ation des items
 		for (int i = 0; i < nbre; i++) {
 			TableItem item = new TableItem(table, SWT.NONE);
 			item.setText(new String[] {
@@ -415,7 +414,7 @@ public class TableData {
 	}
 
 	public static void nouvelElt() {
-		// rajoute une ligne en dernière position de la table
+		// rajoute une ligne en derniï¿½re position de la table
 
 		TypeData type = new TypeData();
 		types.add(type);
@@ -430,7 +429,7 @@ public class TableData {
 	}
 
 	public static void monterEltTableData() {
-		// on monte d'un cran l'élément à la position indice
+		// on monte d'un cran l'ï¿½lï¿½ment ï¿½ la position indice
 		// swap (indice-1) <-> indice
 		// 
 
@@ -446,7 +445,7 @@ public class TableData {
 
 			listeTempo = new ArrayList();
 
-			// mise à jour préalable
+			// mise ï¿½ jour prï¿½alable
 			majTypeData();
 
 			// parcours de la liste
@@ -484,7 +483,7 @@ public class TableData {
 	}
 
 	public static void descendreEltTableData() {
-		// on descend d'un cran l'élément à la position indice
+		// on descend d'un cran l'ï¿½lï¿½ment ï¿½ la position indice
 		// swap (indice-1) <-> indice
 
 		int indice = ViewFile.tableData.getSelectionIndex();
@@ -511,7 +510,7 @@ public class TableData {
 
 			listeTempo = new ArrayList();
 
-			// mise à jour préalable
+			// mise ï¿½ jour prï¿½alable
 			majTypeData();
 
 			// parcours de la liste
@@ -552,18 +551,18 @@ public class TableData {
 	}
 
 	public static void supprEltTableData() {
-		// suppression de la ligne sélectionnée
+		// suppression de la ligne sï¿½lectionnï¿½e
 		int indice = ViewFile.tableData.getSelectionIndex();
-		// d'abord mise à jour des données
+		// d'abord mise ï¿½ jour des donnï¿½es
 		majTypeData();
 
-		// on supprime l'élément à l'indice donné
+		// on supprime l'ï¿½lï¿½ment ï¿½ l'indice donnï¿½
 		// split sur " - "
 		Pattern p = Pattern.compile(" - ");
 		String mots[] = p.split(types.get(indice).getCode());
 		String code = mots[0];
 
-		// pas forcément de - dans le nom du type
+		// pas forcï¿½ment de - dans le nom du type
 		// if (!code.matches("PRES") || ViewFile.checkBoxTempo.getSelection()) {
 		if (!code.matches("PRES") || ViewFile.radSerieTempo.getSelection()
 				|| ViewFile.radTrajectoire.getSelection()) {
@@ -582,7 +581,7 @@ public class TableData {
 
 	public static void majChampTest() {
 
-		// maj préventive de tout
+		// maj prï¿½ventive de tout
 		majTypeData();
 
 		int nbre;
@@ -593,10 +592,10 @@ public class TableData {
 		for (int i = 0; i < nbre; i++) {
 
 			if ((!ViewFile.tableData.getItem(i).getText(4).matches("")) && (!ViewFile.tableData.getItem(i).getText(2).matches(""))) { //$NON-NLS-1$ //$NON-NLS-2$
-				// on a sélectionné un début et une fin et il y a une conversion
-				// à faire
+				// on a sï¿½lectionnï¿½ un dï¿½but et une fin et il y a une conversion
+				// ï¿½ faire
 
-				// on récupère le data
+				// on rï¿½cupï¿½re le data
 				ligne = Utils.lignesBrutes.get(Integer
 						.valueOf(EditDesc.lignesEnteteFichier.getText())
 						+ Integer.valueOf(EditDesc.lignesEnteteStation
@@ -611,9 +610,9 @@ public class TableData {
 				try {
 					if (selection.matches(ViewFile.tableData.getItem(i)
 							.getText(7))) {
-						// entrée par défaut, le test est la valeur de sortie
+						// entrï¿½e par dï¿½faut, le test est la valeur de sortie
 						// par
-						// défaut formatée
+						// dï¿½faut formatï¿½e
 						resultat = String.format(ViewFile.tableData.getItem(i)
 								.getText(6), ViewFile.tableData.getItem(i)
 								.getText(8));
@@ -683,8 +682,8 @@ public class TableData {
 	}
 
 	public static void majTypeData() {
-		// on met à jour tous les types de données dans l'ArrayList global
-		// à partir des valeurs de la table
+		// on met ï¿½ jour tous les types de donnï¿½es dans l'ArrayList global
+		// ï¿½ partir des valeurs de la table
 
 		int nbre;
 
