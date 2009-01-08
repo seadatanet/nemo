@@ -39,7 +39,7 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 		reponse = mb.open();
 
 		if (reponse == SWT.YES) {
-			// demande pour sauver le modèle
+			// demande pour sauver le modele
 			if (EditData.validee == 1) {
 				if (EditDesc.okApresReset && EditSurvey.okApresReset
 						&& EditStation.okApresReset && EditData.okApresReset) {

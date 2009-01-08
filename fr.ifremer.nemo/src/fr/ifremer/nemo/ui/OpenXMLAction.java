@@ -16,7 +16,7 @@ public class OpenXMLAction extends Action implements ISelectionListener,
 
 	public final static String ID = "fr.ifremer.nemo.ui.OpenXMLAction"; //$NON-NLS-1$
 
-	// vars nécessaires à la fenêtre d'options
+	// vars necessaires e la fenetre d'options
 
 	public static Shell shelloptions;
 

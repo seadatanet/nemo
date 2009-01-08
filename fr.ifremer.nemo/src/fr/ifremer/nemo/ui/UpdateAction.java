@@ -43,7 +43,7 @@ public class UpdateAction extends Action implements ISelectionListener,
 
 	public final static String ID = "fr.ifremer.nemo.ui.UpdateAction"; //$NON-NLS-1$
 
-	// vars nécessaires à la fenêtre d'options
+	// vars necessaires e la fenetre d'options
 
 	public static Shell shelloptions;
 
@@ -75,7 +75,7 @@ public class UpdateAction extends Action implements ISelectionListener,
 		combo.setText("Langue"); //$NON-NLS-1$
 		combo.setBounds(new Rectangle(4, 28, 76, 21));
 
-		combo.add("Français"); //$NON-NLS-1$
+		combo.add("Franeais"); //$NON-NLS-1$
 		combo.add("English"); //$NON-NLS-1$
 	}
 
@@ -90,7 +90,7 @@ public class UpdateAction extends Action implements ISelectionListener,
 	private void createGroup1() {
 		group1 = new Group(top, SWT.NONE);
 		group1.setLayout(null);
-		group1.setText("Dossier des modèles"); //$NON-NLS-1$
+		group1.setText("Dossier des modeles"); //$NON-NLS-1$
 		group1.setBounds(new Rectangle(105, 4, 178, 69));
 		textArea = new Text(group1, SWT.MULTI | SWT.WRAP);
 		textArea.setBounds(new Rectangle(6, 15, 163, 18));

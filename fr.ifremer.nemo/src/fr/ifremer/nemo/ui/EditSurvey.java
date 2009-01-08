@@ -37,7 +37,7 @@ import fr.ifremer.nemo.ws.WSDataType;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
 public class EditSurvey {
-	// fonctions de remplissage de la zone d'�dition pour les campagnes
+	// fonctions de remplissage de la zone d'edition pour les campagnes
 
 	public static Section sectionReference, sectionLocalisation, sectionSource,
 			sectionCentre, sectionType, sectionCommentaire;
@@ -76,7 +76,7 @@ public class EditSurvey {
 	private static Shell shell = new Shell();
 
 	public static void affichageEdition() {
-		// initialisation zone �dition pour �tape description de fichier
+		// initialisation zone edition pour etape description de fichier
 
 		formEdition = ViewEdit.formEdition;
 		ViewLog.aideSurvey();
@@ -88,12 +88,12 @@ public class EditSurvey {
 		// raz message erreur
 		Utils.messageErreur(""); //$NON-NLS-1$
 
-		// de base les sections sont referm�es
+		// de base les sections sont refermees
 		expand = 0;
 
 		if (loaded == 0) {
 
-			// INFOS sur les fichiers utilis�s
+			// INFOS sur les fichiers utilises
 			if (ViewFile.radioFichier.getSelection()) {
 				// fichier campagne
 				Utils.messageInfoAppend(Messages.getString("EditSurvey.1")); //$NON-NLS-1$
@@ -114,7 +114,7 @@ public class EditSurvey {
 		/*
 		 * recreer un formEdition sur le toolkit principal pour pouvoir faire un
 		 * dispose() dessus mais garder toutes les sections afin de les
-		 * r�afficher par la suite dans DrawingBack.
+		 * reafficher par la suite dans DrawingBack.
 		 */
 
 		ViewEdit.formEdition.getBody().setLayout(new GridLayout());
@@ -163,7 +163,7 @@ public class EditSurvey {
 
 		// initialisation liste des sections de la partie description fichier
 
-		// section r�f�rence
+		// section reference
 		Drawing.sectionReferenceCampagne(sectionReference, Messages
 				.getString("EditSurvey.14"), Messages
 				.getString("EditSurvey.15"), textCampagne, Messages
@@ -212,11 +212,11 @@ public class EditSurvey {
 						Messages.getString("EditSurvey.29"), listeText, listeNoms, Messages.getString("EditSurvey.30"), comboConfid); //$NON-NLS-1$ //$NON-NLS-2$
 		listeText.clear();
 		listeNoms.clear();
-		// FI par d�faut pour le centre de donn�es
+		// FI par defaut pour le centre de donnees
 		// textCentre.setTextLimit(2);
 		// textCentre.setText("FI");
 
-		// section types de donn�es
+		// section types de donnees
 		listeText.add(textNbre);
 		listeNoms.add(Messages.getString("EditSurvey.31")); //$NON-NLS-1$
 		listeText.add(textType);
@@ -320,7 +320,7 @@ public class EditSurvey {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
 
-						// on passe en ppar l'�tape � laquelle on se trouve
+						// on passe en ppar l'etape e laquelle on se trouve
 						// Etape.etape(1);
 
 						Etape.validationSurvey();
@@ -416,7 +416,7 @@ public class EditSurvey {
 		// affichage courant
 		ViewFile.affiche = 1;
 
-		// remplissage de l'IHM par le mod�le charg�
+		// remplissage de l'IHM par le modele charge
 		if (DataModel.ouverture) {
 			DataModel.fillSurvey();
 		} else {
@@ -432,7 +432,7 @@ public class EditSurvey {
 
 		new SWTProgressWS().run();
 
-		// affichage du r�sultat des mises � jour des fichiers
+		// affichage du resultat des mises e jour des fichiers
 		String message = "";
 
 		if (NemoLists.okDataTypes) {
@@ -489,13 +489,13 @@ public class EditSurvey {
 	}
 
 	public static void init_webService() {
-		// s�lection de la ref campagne dans une liste
+		// selection de la ref campagne dans une liste
 		FiltrageTableType.go(Global.WSSURVEY);
 
 	}
 
 	public static void webService(String reference) {
-		// remplissage du dataModel � partir des valeurs du ws
+		// remplissage du dataModel e partir des valeurs du ws
 
 		TableDataSurvey.types.clear();
 
@@ -510,7 +510,7 @@ public class EditSurvey {
 
 		new SWTProgressWS().run();
 
-		// mise � jour de l'onglet courant
+		// mise e jour de l'onglet courant
 		majApresWS();
 
 	}
@@ -520,10 +520,10 @@ public class EditSurvey {
 		String nomXML;
 		File fich;
 
-		// remplissage du dataModel � partir des valeurs du fichier XML de
+		// remplissage du dataModel e partir des valeurs du fichier XML de
 		// description
 
-		// v�rifier que un fichier est charg� avant d'ouvrir un mod�le
+		// verifier que un fichier est charge avant d'ouvrir un modele
 		if ((EditDesc.validee != 1) && (EditSurvey.loaded != 1)) {
 			Utils.messageErreur(Messages.getString("EditSurvey.54")); //$NON-NLS-1$
 		} else {
@@ -577,7 +577,7 @@ public class EditSurvey {
 				survey.importFromXML(fichier);
 				survey.setDataCentre(Utils.configuration.getDataCenter());
 
-				// M�j des types de donn�es capteurs
+				// Mej des types de donnees capteurs
 				for (int index = 0; index < survey.getDataTypes().length; index++) {
 					survey.dataTypesAt(index).setSensor(
 							listSensor.contains(survey.dataTypesAt(index)
@@ -606,7 +606,7 @@ public class EditSurvey {
 				survey.importFromXML(fichier);
 				survey.setDataCentre(Utils.configuration.getDataCenter());
 
-				// M�j des types de donn�es capteurs
+				// Mej des types de donnees capteurs
 				for (int index = 0; index < survey.getDataTypes().length; index++) {
 					survey.dataTypesAt(index).setSensor(
 							listSensor.contains(survey.dataTypesAt(index)
@@ -629,7 +629,7 @@ public class EditSurvey {
 
 		}
 
-		// mise � jour de l'onglet courant
+		// mise e jour de l'onglet courant
 		majApresWS();
 	}
 
@@ -711,7 +711,7 @@ public class EditSurvey {
 		if (survey.getDataCentre() != null) {
 			// EditSurvey.textCentre.setText(survey.getDataCentre());
 
-			// s�lection dans la comboList
+			// selection dans la comboList
 			Utils.selectComboCode(comboDataCentres, survey.getDataCentre());
 		}
 
@@ -794,7 +794,7 @@ public class EditSurvey {
 	}
 
 	public static void razEdition() {
-		// reset de toute la zone d'�dition apr�s �tape descriptioon de fichier
+		// reset de toute la zone d'edition apres etape descriptioon de fichier
 		// on retire toutes les sections et les boutons expand et validation
 
 		int i;
@@ -830,11 +830,11 @@ public class EditSurvey {
 				public void modifyText(ModifyEvent event) {
 					// on modifie la valeur du champ texte
 
-					// d�s qu'on modifie une valeur, on invalide l'�tape
-					// remise du nom onglet � valeur par d�faut
+					// des qu'on modifie une valeur, on invalide l'etape
+					// remise du nom onglet e valeur par defaut
 
-					// on invalide toutes les �tapes suivantes avec le second
-					// flag okApresReset � false
+					// on invalide toutes les etapes suivantes avec le second
+					// flag okApresReset e false
 					EditSurvey.okApresReset = false;
 					if (!ViewFile.tabItem1.isDisposed()) {
 						ViewFile.tabItem1.setText(Messages
@@ -854,7 +854,7 @@ public class EditSurvey {
 	}
 
 	public static void DrawingBack() {
-		// reset de toute la zone d'�dition apr�s �tape descriptioon de fichier
+		// reset de toute la zone d'edition apres etape descriptioon de fichier
 		// on retire toutes les sections et les boutons expand et validation
 
 		ViewLog.aideSurvey();
@@ -953,7 +953,7 @@ public class EditSurvey {
 		comboConfid.add("C - Confidential");
 		comboConfid.select(0);
 
-		// remplissage des centres de donn�es
+		// remplissage des centres de donnees
 		comboDataCentres = new Combo(shell, SWT.READ_ONLY);
 
 		CodeTableRecordType[] centres = NemoLists.getVocabList("L300");

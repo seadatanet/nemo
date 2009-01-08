@@ -24,7 +24,7 @@ public class SaveAction extends Action implements ISelectionListener,
 
 	public final static String ID = "fr.ifremer.nemo.ui.SaveAction"; //$NON-NLS-1$
 
-	// vars nécessaires à la fenêtre d'options
+	// vars necessaires e la fenetre d'options
 
 	public static Shell shelloptions;
 
@@ -47,7 +47,7 @@ public class SaveAction extends Action implements ISelectionListener,
 	}
 
 	public void run() {
-		// sauvegarde du modèle
+		// sauvegarde du modele
 
 		FileOutputStream fileOutputStream = null;
 

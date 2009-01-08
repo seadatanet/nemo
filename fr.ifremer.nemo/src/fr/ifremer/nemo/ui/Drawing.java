@@ -68,7 +68,7 @@ public class Drawing {
 		// faire groupe et radios
 
 		// bouton radio "saisie manuelle"
-		// c'est lui qui est passé en ppar
+		// c'est lui qui est passe en ppar
 
 		radio.setParent(sectionClient);
 		radio.setText(Messages.getString("Drawing.4"));
@@ -125,8 +125,8 @@ public class Drawing {
 
 		section.setClient(sectionClient);
 
-		// une fois les éléments initialisés, on les passe en static pour y
-		// accéder à
+		// une fois les elements initialises, on les passe en static pour y
+		// acceder e
 		// partir des listeners
 		lign = ligne;
 		debu = debut;
@@ -191,7 +191,7 @@ public class Drawing {
 					}
 				});
 
-		// saisie par défaut et groupe désactivé
+		// saisie par defaut et groupe desactive
 		radio.setSelection(true);
 		lign.setEnabled(false);
 		debu.setEnabled(false);
@@ -303,7 +303,7 @@ public class Drawing {
 
 		fin.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		// sasie par défaut et groupe désactivé
+		// sasie par defaut et groupe desactive
 		saisieManuelle.setSelection(true);
 		lign.setEnabled(false);
 		debu.setEnabled(false);
@@ -354,7 +354,7 @@ public class Drawing {
 		// faire groupe et radios
 
 		// bouton radio "saisie manuelle"
-		// c'est lui qui est passé en ppar
+		// c'est lui qui est passe en ppar
 
 		radio.setParent(sectionClient);
 		radio.setText(Messages.getString("Drawing.5"));
@@ -412,8 +412,8 @@ public class Drawing {
 
 		section.setClient(sectionClient);
 
-		// une fois les éléments initialisés, on les passe en static pour y
-		// accéder à
+		// une fois les elements initialises, on les passe en static pour y
+		// acceder e
 		// partir des listeners
 
 		// listeners
@@ -472,7 +472,7 @@ public class Drawing {
 					}
 				});
 
-		// saisie manuelle par défaut et groupe désactivé
+		// saisie manuelle par defaut et groupe desactive
 		radio.setSelection(true);
 		lign.setEnabled(false);
 		debu.setEnabled(false);
@@ -544,7 +544,7 @@ public class Drawing {
 		
 //		FAE 33 : suppression de la partie "Injecter nbre de lignes"
 //		// bouton radio "saisie manuelle"
-//		// c'est lui qui est passé en ppar
+//		// c'est lui qui est passe en ppar
 //		radio.setParent(sectionClient);
 //		radio.setText("Indicateur manuel");
 //
@@ -553,7 +553,7 @@ public class Drawing {
 //
 //		// bouton radio "position"
 //		Button position = ViewEdit.toolkitEdition.createButton(sectionClient,
-//				"Données", SWT.RADIO);
+//				"Donnees", SWT.RADIO);
 //
 //		GridLayout gridLayout1 = new GridLayout();
 //		gridLayout1.numColumns = 6;
@@ -572,8 +572,8 @@ public class Drawing {
 //		buttonInject.setText(Messages.getString("Drawing.1"));
 //		inject = buttonInject;
 //
-//		// une fois les éléments initialisés, on les passe en static pour y
-//		// accéder à
+//		// une fois les elements initialises, on les passe en static pour y
+//		// acceder e
 //		// partir des listeners
 //
 //		// listeners
@@ -652,7 +652,7 @@ public class Drawing {
 				});
 		
 
-		// saisie manuelle par défaut et groupe désactivé
+		// saisie manuelle par defaut et groupe desactive
 		if (DataModel.ouverture) {
 			if (DataModel.stationModel_modele.isEndOnEOF()) {
 				EditDesc.selectComboEnd(EditDesc.radEOF);
@@ -662,7 +662,7 @@ public class Drawing {
 				EditDesc.selectComboEnd(EditDesc.radManuel);
 			}
 		} else {
-			// par défaut manuel
+			// par defaut manuel
 			EditDesc.selectComboEnd(EditDesc.radEOF);
 		}
 		
@@ -704,7 +704,7 @@ public class Drawing {
 		Label label1 = new Label(section, SWT.NULL);
 		label1.setText(description);
 
-		// zone d'édition
+		// zone d'edition
 		manuel = new Text(sectionClient, SWT.BORDER);
 		manuel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
@@ -868,7 +868,7 @@ public class Drawing {
 					}
 				});
 
-		// saisie par défaut et groupe désactivé
+		// saisie par defaut et groupe desactive
 
 		inject.setEnabled(true);
 		radio.setSelection(true);
@@ -914,7 +914,7 @@ public class Drawing {
 		Label label1 = new Label(section, SWT.NULL);
 		label1.setText(description);
 
-		// zone d'édition
+		// zone d'edition
 		manuel.setParent(sectionClient);
 
 		manuel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -979,7 +979,7 @@ public class Drawing {
 		Label label1 = new Label(section, SWT.NULL);
 		label1.setText(description);
 
-		// zone d'édition
+		// zone d'edition
 		manuel.setParent(sectionClient);
 
 		manuel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -1077,7 +1077,7 @@ public class Drawing {
 		ajoutSectionDansListeSurvey(section);
 		ViewEdit.formEdition.reflow(true);
 		
-		// Création du menu contextuel pour la recherche filtree
+		// Creation du menu contextuel pour la recherche filtree
 		Utils.createSearchMenu(cmbNavire, Global.SHIP);
 	}
 
@@ -1146,7 +1146,7 @@ public class Drawing {
 			EditSurvey.comboRegion.setLayoutData(
 					new GridData(GridData.FILL_HORIZONTAL));
 			
-			// Création du menu contextuel pour la recherche filtree
+			// Creation du menu contextuel pour la recherche filtree
 			Utils.createSearchMenu(EditSurvey.comboRegion, Global.REGION);
 			
 		}
@@ -1192,7 +1192,7 @@ public class Drawing {
 		GridLayoutFactory.fillDefaults().applyTo(sectionClient);
 		GridDataFactory.fillDefaults().grab(true,false).applyTo(sectionClient);
 		
-		// combolist centres de données
+		// combolist centres de donnees
 		Label label = new Label(sectionClient, SWT.NULL);
 		label.setText(Messages.getString("EditSurvey.62"));
 		EditSurvey.comboDataCentres.setParent(sectionClient); 		
@@ -1260,7 +1260,7 @@ public class Drawing {
 		// affichage d'une table
 		TableDataSurvey.go();
 
-		// ajout liste et boutons déplacement des éléments
+		// ajout liste et boutons deplacement des elements
 		// mettre les listeners dessus !!!!!
 
 		section.setClient(sectionClient);
@@ -1300,7 +1300,7 @@ public class Drawing {
 		// affichage d'une table
 		TableDataSurvey.go();
 
-		// ajout liste et boutons déplacement des éléments
+		// ajout liste et boutons deplacement des elements
 		// mettre les listeners dessus !!!!!
 
 		section.setClient(sectionClient);

@@ -11,12 +11,12 @@ import com.ago.xml.XMLOutputWriter;
 /**
  * Class LineFragment
  * 
- * Représente un fragment d'une ligne du fichier d'entrée. Le fragment est
- * définit par un offset de début et de fin. L'offset de fin est optionnel, dans
- * ce cas sa valeur vaut -1 et la ligne est lue jusqu'à la fin comme illustré
+ * Represente un fragment d'une ligne du fichier d'entree. Le fragment est
+ * definit par un offset de debut et de fin. L'offset de fin est optionnel, dans
+ * ce cas sa valeur vaut -1 et la ligne est lue jusqu'e la fin comme illustre
  * ci-dessous
  * 
- * v début du fragment | | XXXXXXXXX| | ^ fin du fragment
+ * v debut du fragment | | XXXXXXXXX| | ^ fin du fragment
  * 
  * @author Gerard BUNEL
  */

@@ -148,7 +148,7 @@ public class ViewFile extends ViewPart {
 		top = new Composite(parent, SWT.NONE);
 		top.setLayout(new FillLayout());
 
-		// invalidation de chaque �tape
+		// invalidation de chaque etape
 		EditDesc.validee = 0;
 		EditDesc.loaded = 0;
 		EditSurvey.validee = 0;
@@ -161,10 +161,10 @@ public class ViewFile extends ViewPart {
 		// chargement de la configuration
 		Utils.initConfig();
 
-		// ouverture de mod�le � false
+		// ouverture de modele e false
 		DataModel.ouverture = false;
 
-		// �tape de d�part
+		// etape de depart
 		etape = 0;
 		DataModel.reset = false;
 
@@ -211,7 +211,7 @@ public class ViewFile extends ViewPart {
 							tmp++;
 
 						Utils.validationEtape(tmp);
-						// System.out.println("onglet s�lectionn� " + tmp);
+						// System.out.println("onglet selectionne " + tmp);
 
 					}
 				});
@@ -360,7 +360,7 @@ public class ViewFile extends ViewPart {
 					}
 				});
 
-		// FAE 0001140 : d�placement du bouton Parcourir
+		// FAE 0001140 : deplacement du bouton Parcourir
 		buttonParcourir = new Button(composite11, SWT.NONE);
 		buttonParcourir.setText(Messages.getString("ViewFile.parcourir")); //$NON-NLS-1$
 
@@ -381,8 +381,8 @@ public class ViewFile extends ViewPart {
 						// si fichier campagne
 						if (radioFichier.getSelection()) {
 
-							// Si on a supprim� l'onglet campagne pour une
-							// collection on le r�affiche
+							// Si on a supprime l'onglet campagne pour une
+							// collection on le reaffiche
 							// vu qu'on selectionne maintenant fichier campagne
 							if (tabItem1.isDisposed()) {
 								tabItem1 = new TabItem(tabFolder, SWT.NONE, 1);
@@ -408,7 +408,7 @@ public class ViewFile extends ViewPart {
 								fileLoaded = true;
 								nomRepertoire = nomFichier.substring(0,
 										nomFichier.lastIndexOf('\\') + 1);
-								// init du mod�le
+								// init du modele
 
 								// affichage du fichier campagne dans onglet
 								// Campagne
@@ -420,7 +420,7 @@ public class ViewFile extends ViewPart {
 											.setText(Utils.texteBrut);
 
 									// affichage etape0 dans formulaire
-									// d'�dition de param�tres
+									// d'edition de parametres
 									Utils.razGlobal();
 									EditDesc.affichageEdition();
 
@@ -449,8 +449,8 @@ public class ViewFile extends ViewPart {
 						// si dossier campagne
 						if (radioDossier.getSelection()) {
 
-							// Si on a supprim� l'onglet campagne pour une
-							// colleciton on le r�affiche
+							// Si on a supprime l'onglet campagne pour une
+							// colleciton on le reaffiche
 							// vu qu'on selectionne maintenant dossier
 							if (tabItem1.isDisposed()) {
 								tabItem1 = new TabItem(tabFolder, SWT.NONE, 1);
@@ -477,8 +477,8 @@ public class ViewFile extends ViewPart {
 											.setText(Utils.texteBrut);
 
 									// affichage etape0 dans formulaire
-									// d'�dition de
-									// param�tres
+									// d'edition de
+									// parametres
 									Utils.razGlobal();
 									EditDesc.affichageEdition();
 
@@ -493,7 +493,7 @@ public class ViewFile extends ViewPart {
 							} else {
 								fileLoaded = false;
 								// System.out.println("pas de dossier
-								// s�lectionn�"); //$NON-NLS-1$
+								// selectionne"); //$NON-NLS-1$
 								ViewLog.styledTextLogErreurs
 										.setText(Messages
 												.getString("ViewFile.selectionnezDossier")); //$NON-NLS-1$
@@ -526,8 +526,8 @@ public class ViewFile extends ViewPart {
 								}
 
 								// affichage etape0 dans formulaire
-								// d'�dition de
-								// param�tres
+								// d'edition de
+								// parametres
 								Utils.razGlobal();
 								EditDesc.affichageEdition();
 
@@ -549,7 +549,7 @@ public class ViewFile extends ViewPart {
 							else {
 								fileLoaded = false;
 								// System.out.println("pas de dossier
-								// s�lectionn�"); //$NON-NLS-1$
+								// selectionne"); //$NON-NLS-1$
 								ViewLog.styledTextLogErreurs
 										.setText(Messages
 												.getString("ViewFile.selectionnezDossier")); //$NON-NLS-1$
@@ -580,8 +580,8 @@ public class ViewFile extends ViewPart {
 								}
 
 								// affichage etape0 dans formulaire
-								// d'�dition de
-								// param�tres
+								// d'edition de
+								// parametres
 								Utils.razGlobal();
 								EditDesc.affichageEdition();
 
@@ -603,7 +603,7 @@ public class ViewFile extends ViewPart {
 							else {
 								fileLoaded = false;
 								// System.out.println("pas de dossier
-								// s�lectionn�"); //$NON-NLS-1$
+								// selectionne"); //$NON-NLS-1$
 								ViewLog.styledTextLogErreurs
 										.setText(Messages
 												.getString("ViewFile.selectionnezDossier")); //$NON-NLS-1$
@@ -750,7 +750,7 @@ public class ViewFile extends ViewPart {
 		GridDataFactory.fillDefaults().grab(false, false).applyTo(
 				comboAccesDonnees);
 
-		// Par d�faut
+		// Par defaut
 		lblTypePlateForme.setEnabled(checkCDI.getSelection());
 		comboTypePlateForme.setEnabled(checkCDI.getSelection());
 		lblAccesDonnees.setEnabled(checkCDI.getSelection());
@@ -826,7 +826,7 @@ public class ViewFile extends ViewPart {
 
 		textTempoHeureRef = new Text(groupTempo, SWT.BORDER);
 
-		// on le d�sactive de base
+		// on le desactive de base
 		groupTempo.setVisible(false);
 
 		// TODO Herve Taniou : ce groupe n'est jamais rendu visible et donc
@@ -852,7 +852,7 @@ public class ViewFile extends ViewPart {
 		radTrajectoire = new Button(grpFichier, SWT.RADIO);
 		radTrajectoire.setText(Messages.getString("ViewFile.trajectoire"));
 
-		// S�lection du type par d�faut
+		// Selection du type par defaut
 		radProfilVertical.setSelection(true);
 	}
 
@@ -898,7 +898,7 @@ public class ViewFile extends ViewPart {
 		radioSeparateurAutre.setText(Messages.getString("Preformat.8"));
 		textSeparateur = new Text(compositeSeparateur, SWT.BORDER);
 
-		// Par d�faut
+		// Par defaut
 		compositeSeparateur.setVisible(false);
 
 		chkSeparateur

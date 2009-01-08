@@ -270,7 +270,7 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 						.append(format.format(cal.get(Calendar.DAY_OF_MONTH)));
 				break;
 			}
-			case DAY_DECIMAL: { // cas des dates/heures données en jours
+			case DAY_DECIMAL: { // cas des dates/heures donnees en jours
 				// decimaux par rapport a une date de reference
 				format = new DecimalFormat(_elements[i]._element.replace('d',
 						'0'), symbols);
@@ -421,7 +421,7 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 	public Long parseObject(String source, ParsePosition pos) {
 		int index = pos.getIndex();
 
-		// System.out.println("DateTimeFormat/parseObject(): Source parsée
+		// System.out.println("DateTimeFormat/parseObject(): Source parsee
 		// ==>"+source);
 
 		TimeZone tz = TimeZone.getTimeZone("GMT");

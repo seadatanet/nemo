@@ -8,7 +8,7 @@ public class JulianDate {
 	private static final long _NB_MS_PAR_JOUR = 86400000l;
 
 	/**
-	 * Epoch en DateJulienne représent un delta de 2440953 jours
+	 * Epoch en DateJulienne represent un delta de 2440953 jours
 	 */
 	private static final double _NB_JOURS_EPOCH = 2440587.5;
 
@@ -19,11 +19,11 @@ public class JulianDate {
 	}
 
 	/**
-	 * Construit une DateJulienne à partir d'un nombre de ms écoulées depuis
-	 * EPOCH (typiquement le résultat de {@link Calendar#getTimeInMillis()}).
+	 * Construit une DateJulienne e partir d'un nombre de ms ecoulees depuis
+	 * EPOCH (typiquement le resultat de {@link Calendar#getTimeInMillis()}).
 	 * 
 	 * @param msDepuisEpoch
-	 *            nombre de ms écoulées depuis EPOCH
+	 *            nombre de ms ecoulees depuis EPOCH
 	 */
 	public JulianDate(double msDepuisEpoch) {
 		this._jour = _NB_JOURS_EPOCH + (msDepuisEpoch / _NB_MS_PAR_JOUR);

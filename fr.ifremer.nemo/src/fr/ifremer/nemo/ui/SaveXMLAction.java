@@ -22,7 +22,7 @@ public class SaveXMLAction extends Action implements ISelectionListener,
 
 	public final static String ID = "fr.ifremer.nemo.ui.SaveXMLAction";
 
-	// vars nécessaires à la fenêtre d'options
+	// vars necessaires e la fenetre d'options
 
 	public static Shell shelloptions;
 
@@ -45,13 +45,13 @@ public class SaveXMLAction extends Action implements ISelectionListener,
 	}
 
 	public void run() {
-		// sauvegarde du modèle
+		// sauvegarde du modele
 
 		FileOutputStream fileOutputStream = null;
 
 		if (EditSurvey.validee == 0) {
 			Utils
-					.messageErreur("Veuillez valider au moins jusqu'à l'étape 2 avant d'enregistrer votre Description XML !");
+					.messageErreur("Veuillez valider au moins jusqu'e l'etape 2 avant d'enregistrer votre Description XML !");
 		} else {
 
 			choixFichierSortie();
@@ -90,7 +90,7 @@ public class SaveXMLAction extends Action implements ISelectionListener,
 			MessageBox mb = new MessageBox(shell2, SWT.ICON_WARNING | SWT.YES
 					| SWT.NO | SWT.APPLICATION_MODAL);
 			mb
-					.setMessage("Le fichier de sortie spécifié existe déjà ! Voulez-vous l'écraser ?");
+					.setMessage("Le fichier de sortie specifie existe deje ! Voulez-vous l'ecraser ?");
 
 			int reponse = mb.open();
 			if (reponse == SWT.NO) {

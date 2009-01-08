@@ -130,7 +130,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	protected TimeSeriesModel _timeSeriesModel;
 
 	/**
-	 * Liste, ordonn�e, des paramètres mesurés sur la station
+	 * Liste, ordonnee, des paramètres mesurés sur la station
 	 */
 	protected java.util.List<ParameterModel> _parameterModels;
 
@@ -1684,7 +1684,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 					if (getLastRef() != null) {
 						// FAE 0001135 : reformatage des fichiers ODV 
-						//      (si la r�f�rence de la station est vide, consid�rer la ligne comme appartenant � la derni�re station r�f�renc�e)
+						//      (si la reference de la station est vide, considerer la ligne comme appartenant e la derniere station referencee)
 						if (!refTemp.equals(getLastRef()) && !(refTemp.replace("\r\n", "")).trim().equals("")) {
 							station.setReference(getLastRef());
 							setLastRef(refTemp);

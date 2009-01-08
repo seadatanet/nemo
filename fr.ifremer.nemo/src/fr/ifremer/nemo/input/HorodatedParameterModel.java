@@ -17,7 +17,7 @@ import fr.ifremer.nemo.util.Formatter;
 /**
  * Class HorodatedParameterModel
  * 
- * Permet de modéliser un paramètre horodaté (spécifique séries temporelles)
+ * Permet de modeliser un parametre horodate (specifique series temporelles)
  * 
  * @author Gerard BUNEL
  */
@@ -25,20 +25,20 @@ public class HorodatedParameterModel implements Cloneable, PathElementHandler,
 		SAXConsumer {
 
 	/**
-	 * Permet de spécifier si l'horodatage est calculé à partir des informations
-	 * station (Date/Heure de début, période d'échantillonage)
+	 * Permet de specifier si l'horodatage est calcule e partir des informations
+	 * station (Date/Heure de debut, periode d'echantillonage)
 	 */
 	protected boolean _computed;
 
 	/**
-	 * Fragment permettant de récupérer la date de mesure du paramètre dans le
-	 * fichier d'entrée
+	 * Fragment permettant de recuperer la date de mesure du parametre dans le
+	 * fichier d'entree
 	 */
 	protected LineFragment _dateFragment;
 	
 	/**
-	 * Fragment permettant de récupérer la date de mesure du paramètre dans le
-	 * fichier d'entrée
+	 * Fragment permettant de recuperer la date de mesure du parametre dans le
+	 * fichier d'entree
 	 */
 	protected LineFragment _timeFragment;
 
@@ -440,7 +440,7 @@ public class HorodatedParameterModel implements Cloneable, PathElementHandler,
 		String frgmntDate = getDateFragment().retreive(a_Line);
 		String frgmntTime = getTimeFragment().retreive(a_Line);
 
-		// FAE 0001229 : Conversion date et heure : s'il manque des Zéros il faut que NEMO les mettent 
+		// FAE 0001229 : Conversion date et heure : s'il manque des Zeros il faut que NEMO les mettent 
 		DateTimeFormat formatDate = new DateTimeFormat(getDateFormat().getFormatString());
 		DateTimeFormat formatTime = new DateTimeFormat(getTimeFormat().getFormatString());
 		Formatter utilFormat = Formatter.getSingleton();

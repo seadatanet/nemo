@@ -6,7 +6,7 @@ import java.util.TimeZone;
 /**
  * Class HorodatedValue
  * 
- * Sous-classe de ParameterValue spécifique aux série temporelle. Elle permet
+ * Sous-classe de ParameterValue specifique aux serie temporelle. Elle permet
  * d'horodater une mesure.
  * 
  * @author Gerard BUNEL
@@ -18,7 +18,7 @@ public class HorodatedValue extends ParameterValue implements Cloneable {
 	public long _date;
 
 	/**
-	 * Flag qualité assoccié à la date de la mesure
+	 * Flag qualite assoccie e la date de la mesure
 	 */
 	public String _qc2;
 

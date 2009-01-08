@@ -27,7 +27,7 @@ import fr.ifremer.nemo.util.SizeBasedProgressNotifier;
 /**
  * Class SingleFileSurvey
  * 
- * Représente une campagne dont les informations sont stockées dans un fichier
+ * Represente une campagne dont les informations sont stockees dans un fichier
  * unique.
  * 
  * @author Gerard BUNEL
@@ -41,18 +41,18 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 	protected String _file;
 
 	/**
-	 * Nombre de lignes du fichier occupées par l'entête campagne
+	 * Nombre de lignes du fichier occupees par l'entete campagne
 	 */
 	protected int _headerLinesNumber;
 
 	/**
-	 * Campagne servant de modèle pour stocker les informations de l'entête
+	 * Campagne servant de modele pour stocker les informations de l'entete
 	 * campagne
 	 */
 	protected Survey _model;
 
 	/**
-	 * Modèle de station
+	 * Modele de station
 	 */
 	protected StationModel _stationModel;
 
@@ -427,7 +427,7 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 						throw new IOException("");
 					}
 
-					// Tri des données de la station par ordre croissant
+					// Tri des donnees de la station par ordre croissant
 					station.tri(true);
 
 					survey.addStation(station);

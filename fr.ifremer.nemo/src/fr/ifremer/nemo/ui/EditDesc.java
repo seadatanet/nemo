@@ -61,7 +61,7 @@ public class EditDesc {
 
 	// expand : savoir si sections ouvertes ou non
 	// validee : si etape validee
-	// loaded : si l'étape est chargée et affichée
+	// loaded : si l'etape est chargee et affichee
 	public static ScrolledForm formEdition;
 
 	// //////////////////////////////////////////
@@ -69,7 +69,7 @@ public class EditDesc {
 	private static Shell shell = new Shell();
 	
 	public static void affichageEdition() {
-		// initialisation zone édition pour étape description de fichier
+		// initialisation zone edition pour etape description de fichier
 		ViewLog.aideDesc();
 		if (ViewFile.fileLoaded) {
 
@@ -80,10 +80,10 @@ public class EditDesc {
 			// raz message erreur
 			Utils.messageErreur(""); //$NON-NLS-1$
 
-			// de base les sections sont refermées
+			// de base les sections sont refermees
 			expand = 0;
 
-			// flags de toutes les étapes à 0
+			// flags de toutes les etapes e 0
 			EditDesc.validee = 0;
 			EditSurvey.validee = 0;
 			EditStation.validee = 0;
@@ -97,7 +97,7 @@ public class EditDesc {
 			/*
 			 * recreer un formEdition sur le toolkit principal pour pouvoir
 			 * faire un dispose() dessus mais garder toutes les sections afin de
-			 * les réafficher par la suite dans DrawingBack.
+			 * les reafficher par la suite dans DrawingBack.
 			 */
 
 			GridLayout gridlayout = new GridLayout();
@@ -122,7 +122,7 @@ public class EditDesc {
 //			FAE 33
 //			initCombos();
 
-			// bouton "valider étape"
+			// bouton "valider etape"
 			buttonValidateDesc.setParent(formEdition.getBody());
 			buttonValidateDesc.setText(Messages
 					.getString("EditDesc.validerLetape")); //$NON-NLS-1$
@@ -135,7 +135,7 @@ public class EditDesc {
 			buttonExpandDesc.setParent(formEdition.getBody());
 			buttonExpandDesc.setText("+"); //$NON-NLS-1$
 			
-			// Bouton préformatage
+			// Bouton preformatage
 //			buttonPreformat.setParent(formEdition.getBody());
 //			buttonPreformat.setText("Preformat");
 //			buttonPreformat.setVisible(ViewFile.checkSeparateur.getSelection());
@@ -152,9 +152,9 @@ public class EditDesc {
 					.sectionLabelTextInjectNbreLignes(
 							formEdition,
 							Messages.getString("EditDesc.enteteFichier"), Messages.getString("EditDesc.surlignezLignes"), sectionEnteteFichier, lignesEnteteFichier); //$NON-NLS-1$ //$NON-NLS-2$
-			// FAE046 : En-tête de fichier à 0 par défaut
+			// FAE046 : En-tete de fichier e 0 par defaut
 			// if (ViewFile.dossierCampagne) {
-				// dossier donc entete fichier à 0 de base
+				// dossier donc entete fichier e 0 de base
 				EditDesc.lignesEnteteFichier.setText("0");
 			//}
 
@@ -216,7 +216,7 @@ public class EditDesc {
 
 							}
 							if (expand == 0) {
-								// System.out.println("expand passe à 1");
+								// System.out.println("expand passe e 1");
 								// //$NON-NLS-1$
 
 								expand = 1;
@@ -224,7 +224,7 @@ public class EditDesc {
 								buttonExpandDesc2.setText("-");} //$NON-NLS-1$
 							else {
 								expand = 0;
-								// System.out.println("expand passe à 0");
+								// System.out.println("expand passe e 0");
 								// //$NON-NLS-1$
 								buttonExpandDesc.setText("+"); //$NON-NLS-1$
 								buttonExpandDesc2.setText("+"); //$NON-NLS-1$
@@ -261,7 +261,7 @@ public class EditDesc {
 
 							}
 							if (expand == 0) {
-								// System.out.println("expand passe à 1");
+								// System.out.println("expand passe e 1");
 								// //$NON-NLS-1$
 
 								expand = 1;
@@ -269,7 +269,7 @@ public class EditDesc {
 								buttonExpandDesc.setText("-");} //$NON-NLS-1$
 							else {
 								expand = 0;
-								// System.out.println("expand passe à 0");
+								// System.out.println("expand passe e 0");
 								// //$NON-NLS-1$
 								buttonExpandDesc2.setText("+"); //$NON-NLS-1$
 								buttonExpandDesc.setText("+"); //$NON-NLS-1$
@@ -285,7 +285,7 @@ public class EditDesc {
 					.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 						public void widgetSelected(
 								org.eclipse.swt.events.SelectionEvent e) {
-							// on passe en ppar l'étape à laquelle on se trouve
+							// on passe en ppar l'etape e laquelle on se trouve
 							// Etape.etape(0);
 							
 							Etape.validationDesc();
@@ -323,7 +323,7 @@ public class EditDesc {
 			// affichage courant
 			ViewFile.affiche = 0;
 
-			// remplissage de l'IHM par le modèle chargé ?
+			// remplissage de l'IHM par le modele charge ?
 			if (DataModel.ouverture) {
 				DataModel.fillDesc(false);
 			}
@@ -336,7 +336,7 @@ public class EditDesc {
 	}
 
 	public static void razEdition() {
-		// reset de toute la zone d'édition après étape descriptioon de fichier
+		// reset de toute la zone d'edition apres etape descriptioon de fichier
 		// on retire toutes les sections et les boutons expand et validation
 
 		int i;
@@ -370,12 +370,12 @@ public class EditDesc {
 
 	public static void DrawingOuvertureModele() {
 		// on initialise tous les composants IHM en vue du remplissage par le
-		// dataModel chargé
+		// dataModel charge
 
 	}
 
 	public static void DrawingBack() {
-		// reset de toute la zone d'édition après étape description de fichier
+		// reset de toute la zone d'edition apres etape description de fichier
 		// on retire toutes les sections et les boutons expand et validation
 
 		int i;
@@ -510,17 +510,17 @@ public class EditDesc {
 				public void modifyText(ModifyEvent event) {
 					// on modifie la valeur du champ texte
 
-					// dès qu'on modifie une valeur, on invalide l'étape
-					// remise du nom onglet à valeur par défaut
+					// des qu'on modifie une valeur, on invalide l'etape
+					// remise du nom onglet e valeur par defaut
 					EditDesc.okApresReset = false;
 					ViewFile.tabItem.setText(Messages
 							.getString("EditDesc.descriptionFichier"));
 
-					// invalidation de l'étape
+					// invalidation de l'etape
 					// validee = 0;
 
-					// on invalide toutes les étapes suivantes avec le second
-					// flag okApresReset à false
+					// on invalide toutes les etapes suivantes avec le second
+					// flag okApresReset e false
 					EditSurvey.okApresReset = false;
 					if (!ViewFile.tabItem1.isDisposed()) {
 						ViewFile.tabItem1.setText(Messages
@@ -548,16 +548,16 @@ public class EditDesc {
 		}
 		lignesFinStation.setText("0");
 
-		// remise du nom onglet à valeur par défaut
+		// remise du nom onglet e valeur par defaut
 		EditDesc.okApresReset = false;
 		ViewFile.tabItem.setText(Messages
 				.getString("EditDesc.descriptionFichier"));
 
-		// invalidation de l'étape
+		// invalidation de l'etape
 		// validee = 0;
 
-		// on invalide toutes les étapes suivantes avec le second flag
-		// okApresReset à false
+		// on invalide toutes les etapes suivantes avec le second flag
+		// okApresReset e false
 		EditSurvey.okApresReset = false;
 		if (!ViewFile.tabItem1.isDisposed()) {
 			ViewFile.tabItem1.setText(Messages.getString("EditSurvey.4"));

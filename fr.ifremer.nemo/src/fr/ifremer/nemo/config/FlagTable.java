@@ -49,7 +49,7 @@ public class FlagTable {
 	}
 
 	/**
-	 * Méthodes
+	 * Methodes
 	 */
 
 	public String getCode() {
@@ -136,7 +136,7 @@ public class FlagTable {
 	}
 
 	/**
-	 * Retourne la liste des flags triée par local
+	 * Retourne la liste des flags triee par local
 	 */
 	public ArrayList<Flag> getOrderedFlags() {
 		ArrayList<Flag> arrayFlag = new ArrayList<Flag>();
@@ -155,7 +155,7 @@ public class FlagTable {
 	}
 
 	/**
-	 * Retourne la liste des flagtables triée par code
+	 * Retourne la liste des flagtables triee par code
 	 */
 	public static ArrayList<FlagTable> getOrderedFlagTables(
 			ArrayList<FlagTable> flagTables) {

@@ -84,7 +84,7 @@ public class DrawingStation {
 		sectionClient.setLayout(new GridLayout());
 
 		// bouton radio "saisie manuelle"
-		// c'est lui qui est passé en ppar
+		// c'est lui qui est passe en ppar
 
 		radio.setParent(sectionClient);
 		radio.setText(Messages.getString("Drawing.4"));
@@ -131,8 +131,8 @@ public class DrawingStation {
 
 		section.setClient(sectionClient);
 
-		// une fois les éléments initialisés, on les passe en static pour y
-		// accéder à
+		// une fois les elements initialises, on les passe en static pour y
+		// acceder e
 		// partir des listeners
 		lign = ligne;
 		debu = debut;
@@ -194,7 +194,7 @@ public class DrawingStation {
 				});
 
 		/*
-		 * // par défaut manuel radio.setSelection(true);
+		 * // par defaut manuel radio.setSelection(true);
 		 * lign.setEnabled(false); debu.setEnabled(false); fi.setEnabled(false);
 		 * inject.setEnabled(false);
 		 */
@@ -316,8 +316,8 @@ public class DrawingStation {
 
 		section.setClient(sectionClient);
 
-		// une fois les éléments initialisés, on les passe en static pour y
-		// accéder à
+		// une fois les elements initialises, on les passe en static pour y
+		// acceder e
 		// partir des listeners
 		lign = ligne;
 		debu = debut;
@@ -333,19 +333,19 @@ public class DrawingStation {
 						// 
 						EditStation.conversionFreqEchant();
 
-						// System.out.println("mise à jour champ test
+						// System.out.println("mise e jour champ test
 						// conversion");
 					}
 
 					public void mouseDown(MouseEvent e) {
 
-						// System.out.println("mise à jour champ test
+						// System.out.println("mise e jour champ test
 						// conversion");
 					}
 
 					public void mouseUp(MouseEvent e) {
 						// 
-						// System.out.println("mise à jour champ test
+						// System.out.println("mise e jour champ test
 						// conversion");
 					}
 				});
@@ -412,7 +412,7 @@ public class DrawingStation {
 				});
 
 		/*
-		 * // par défaut manuel radio.setSelection(true);
+		 * // par defaut manuel radio.setSelection(true);
 		 * lign.setEnabled(false); debu.setEnabled(false); fi.setEnabled(false);
 		 * inject.setEnabled(false);
 		 */
@@ -445,7 +445,7 @@ public class DrawingStation {
 
 		// System.out
 		// .println("sectionIncrementeLigneDebutFinInject() DrawingStation ==>
-		// ok : section créée");
+		// ok : section creee");
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			public void expansionStateChanged(ExpansionEvent e) {
@@ -466,7 +466,7 @@ public class DrawingStation {
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(compo1);
 
 		// bouton radio "saisie manuelle"
-		// c'est lui qui est passé en ppar
+		// c'est lui qui est passe en ppar
 		radio.setParent(compo1);
 		radio.setText(Messages.getString("Drawing.6"));
 
@@ -533,8 +533,8 @@ public class DrawingStation {
 		txtTest.setEnabled(false);
 		txtTest.setText("");
 
-		// une fois les éléments initialisés, on les passe en static pour y
-		// accéder à
+		// une fois les elements initialises, on les passe en static pour y
+		// acceder e
 		// partir des listeners
 		lign = ligne;
 		debu = debut;
@@ -608,7 +608,7 @@ public class DrawingStation {
 							org.eclipse.swt.events.SelectionEvent g) {
 						if (pos.getSelection()) {
 							if (lign.getText().equals("0")) {
-								// On récupère le numéro de station dans le nom
+								// On recupere le numero de station dans le nom
 								// du fichier
 								String strFichier = "";
 								if (ViewFile.radioFichier.getSelection()) {
@@ -643,7 +643,7 @@ public class DrawingStation {
 				});
 
 		/*
-		 * // saisie manuelle par défaut radio.setSelection(true);
+		 * // saisie manuelle par defaut radio.setSelection(true);
 		 * lign.setEnabled(false); debu.setEnabled(false); fi.setEnabled(false);
 		 * inject.setEnabled(false);
 		 */
@@ -671,7 +671,7 @@ public class DrawingStation {
 
 		// System.out
 		// .println("sectionTypeDonnees() DrawingStation ==> ok : section
-		// créée");
+		// creee");
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			public void expansionStateChanged(ExpansionEvent e) {
@@ -725,7 +725,7 @@ public class DrawingStation {
 		sectionClient.setLayout(new GridLayout());
 
 		// bouton radio "saisie manuelle"
-		// c'est lui qui est passé en ppar
+		// c'est lui qui est passe en ppar
 
 		radio.setParent(sectionClient);
 		radio.setText(Messages.getString("Drawing.4"));
@@ -804,8 +804,8 @@ public class DrawingStation {
 
 		section.setClient(sectionClient);
 
-		// une fois les éléments initialisés, on les passe en static pour y
-		// accéder à
+		// une fois les elements initialises, on les passe en static pour y
+		// acceder e
 		// partir des listeners
 		lign1 = ligne1;
 		debu1 = debut1;
@@ -920,7 +920,7 @@ public class DrawingStation {
 		inject2.setEnabled(!blnManuel);
 
 		/*
-		 * // par défaut saisie manuelle radio.setSelection(true);
+		 * // par defaut saisie manuelle radio.setSelection(true);
 		 * zon1.setEnabled(true); zon2.setEnabled(true); //
 		 * grou.setVisible(false); lign1.setEnabled(false);
 		 * debu1.setEnabled(false); fi1.setEnabled(false);
@@ -963,7 +963,7 @@ public class DrawingStation {
 		sectionClient.setLayout(new GridLayout());
 
 		// bouton radio "saisie manuelle"
-		// c'est lui qui est passé en ppar
+		// c'est lui qui est passe en ppar
 
 		radio.setParent(sectionClient);
 		radio.setText(Messages.getString("Drawing.4"));
@@ -1042,8 +1042,8 @@ public class DrawingStation {
 
 		section.setClient(sectionClient);
 
-		// une fois les éléments initialisés, on les passe en static pour y
-		// accéder à
+		// une fois les elements initialises, on les passe en static pour y
+		// acceder e
 		// partir des listeners
 		lign1 = ligne1;
 		debu1 = debut1;
@@ -1159,7 +1159,7 @@ public class DrawingStation {
 		inject2.setEnabled(!blnManuel);
 
 		/*
-		 * // par défaut saisie manuelle radio.setSelection(true);
+		 * // par defaut saisie manuelle radio.setSelection(true);
 		 * zon1.setEnabled(true); zon2.setEnabled(true); //
 		 * grou.setVisible(false); lign1.setEnabled(false);
 		 * debu1.setEnabled(false); fi1.setEnabled(false);
@@ -1210,7 +1210,7 @@ public class DrawingStation {
 			EditStation.textCommentaireFin.setEnabled(!blnProvided);
 			EditStation.buttonCommentairePos.setEnabled(!blnProvided);
 		} else {
-			// par défaut manuel
+			// par defaut manuel
 			EditStation.buttonCommentaireSaisie.setSelection(true);
 			EditStation.textCommentaire.setEnabled(false);
 			EditStation.textCommentaireDebut.setEnabled(false);
@@ -1291,7 +1291,7 @@ public class DrawingStation {
 		// faire groupe et radios
 
 		// bouton radio "saisie manuelle"
-		// c'est lui qui est passé en ppar
+		// c'est lui qui est passe en ppar
 
 		radio.setParent(sectionClient);
 		radio.setText(Messages.getString("Drawing.4"));
@@ -1371,8 +1371,8 @@ public class DrawingStation {
 
 		section.setClient(sectionClient);
 
-		// une fois les éléments initialisés, on les passe en static pour y
-		// accéder à
+		// une fois les elements initialises, on les passe en static pour y
+		// acceder e
 		// partir des listeners
 		lign = ligne;
 		debu = debut;
@@ -1477,7 +1477,7 @@ public class DrawingStation {
 		}
 
 		/*
-		 * // saisie manuelle par défaut radio.setSelection(true);
+		 * // saisie manuelle par defaut radio.setSelection(true);
 		 * manu.setEnabled(true); lign.setEnabled(false);
 		 * debu.setEnabled(false); fi.setEnabled(false);
 		 * inject.setEnabled(false); var.setEnabled(false);
@@ -1584,8 +1584,8 @@ public class DrawingStation {
 		heure.setEnabled(false);
 		heure.setText("");
 
-		// une fois les éléments initialisés, on les passe en static pour y
-		// accéder à
+		// une fois les elements initialises, on les passe en static pour y
+		// acceder e
 		// partir des listeners
 		lign = ligne;
 		debu = debut;
@@ -1715,7 +1715,7 @@ public class DrawingStation {
 		inject.setEnabled(!blnManuel);
 
 		/*
-		 * // par défaut manuel
+		 * // par defaut manuel
 		 * EditStation.buttonHeureSaisie.setSelection(true);
 		 * lign.setEnabled(false); debu.setEnabled(false); fi.setEnabled(false);
 		 * inject.setEnabled(false);
@@ -1827,8 +1827,8 @@ public class DrawingStation {
 		date.setEnabled(false);
 		date.setText("");
 
-		// une fois les éléments initialisés, on les passe en static pour y
-		// accéder à
+		// une fois les elements initialises, on les passe en static pour y
+		// acceder e
 		// partir des listeners
 		lign = ligne;
 		debu = debut;
@@ -1971,7 +1971,7 @@ public class DrawingStation {
 								formatter = Formatter.getSingleton();
 
 								EditStation.textTestConvHeure.setText(formatter
-										.formatDateTime("hh24mm", HourLong,
+										.formatDateTime("hh24:mm:ss.sss", HourLong,
 												"9999"));
 								EditStation.textTestConvHeure.pack();
 
@@ -2018,7 +2018,7 @@ public class DrawingStation {
 		inject.setEnabled(!blnManuel);
 
 		/*
-		 * // par défaut manuel EditStation.buttonDateSaisie.setSelection(true);
+		 * // par defaut manuel EditStation.buttonDateSaisie.setSelection(true);
 		 * lign.setEnabled(false); debu.setEnabled(false); fi.setEnabled(false);
 		 * inject.setEnabled(false);
 		 */
@@ -2069,7 +2069,7 @@ public class DrawingStation {
 		// faire groupe et radios
 
 		// bouton radio "saisie manuelle"
-		// c'est lui qui est passé en ppar
+		// c'est lui qui est passe en ppar
 
 		radio.setParent(sectionClient);
 		radio.setText(Messages.getString("Drawing.4"));
@@ -2146,8 +2146,8 @@ public class DrawingStation {
 		txtTest.setEnabled(false);
 		txtTest.setText("");
 
-		// une fois les éléments initialisés, on les passe en static pour y
-		// accéder à
+		// une fois les elements initialises, on les passe en static pour y
+		// acceder e
 		// partir des listeners
 		lign = ligne;
 		debu = debut;
@@ -2323,7 +2323,7 @@ public class DrawingStation {
 		}
 
 		/*
-		 * // saisie manuelle par défaut radio.setSelection(true);
+		 * // saisie manuelle par defaut radio.setSelection(true);
 		 * lign.setEnabled(false); debu.setEnabled(false); fi.setEnabled(false);
 		 * inject.setEnabled(false);
 		 */
@@ -2445,8 +2445,8 @@ public class DrawingStation {
 		txtTest.setEnabled(false);
 		txtTest.setText("");
 
-		// une fois les éléments initialisés, on les passe en static pour y
-		// accéder à
+		// une fois les elements initialises, on les passe en static pour y
+		// acceder e
 		// partir des listeners
 		lign = ligne;
 		debu = debut;
@@ -2586,7 +2586,7 @@ public class DrawingStation {
 				});
 
 		/*
-		 * // saisie manuelle par défaut radio.setSelection(true);
+		 * // saisie manuelle par defaut radio.setSelection(true);
 		 * lign.setEnabled(false); debu.setEnabled(false); fi.setEnabled(false);
 		 * inject.setEnabled(false);
 		 */

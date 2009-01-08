@@ -45,10 +45,10 @@ public class TypeData extends Object {
 
 		this.setCode("Code");
 		this.setConversion("x*1");
-		this.setEntree("Entrée");
+		this.setEntree("Entree");
 		this.setFormat("Format");
 		this.setSortie("Sortie");
-		this.setUnite("Unité");
+		this.setUnite("Unite");
 		this.setTest("");
 
 	}

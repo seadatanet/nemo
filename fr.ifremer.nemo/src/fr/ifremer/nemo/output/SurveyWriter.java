@@ -9,8 +9,8 @@ import fr.ifremer.nemo.domain.Survey;
 /**
  * Interface SurveyWriter
  * 
- * Interface utilisée pour la conversion vers un format donné. Pour chaque
- * format, une classe d'implémentation devra être définie
+ * Interface utilisee pour la conversion vers un format donne. Pour chaque
+ * format, une classe d'implementation devra etre definie
  * 
  * @author Gerard BUNEL
  */
@@ -37,7 +37,7 @@ public interface SurveyWriter {
 	 * @param a_Survey
 	 *            La campagne a convertir
 	 * @param a_Writer
-	 *            Le flux vers lequel ecrire les données
+	 *            Le flux vers lequel ecrire les donnees
 	 * @param a_Progress
 	 *            Interface permettant au SurveyWriter de notifier de la
 	 *            progression

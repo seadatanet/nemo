@@ -108,7 +108,7 @@ public class NautilusSurveyWSImpl implements Cloneable, NautilusSurveyWS {
 			WSCollectedData[] dataArray = new WSCollectedData[datas.size()];
 			return datas.toArray(dataArray);
 		} catch (Exception e) {
-			_logger.error("Erreur de récupération d'un DataType: " + e);
+			_logger.error("Erreur de recuperation d'un DataType: " + e);
 		} finally {
 			if (result != null) {
 				try {
@@ -147,7 +147,7 @@ public class NautilusSurveyWSImpl implements Cloneable, NautilusSurveyWS {
 				}
 			} catch (Exception e) {
 				_logger
-						.error("Erreur de récupération d'un nom de Projet: "
+						.error("Erreur de recuperation d'un nom de Projet: "
 								+ e);
 			} finally {
 				if (result != null) {
@@ -222,7 +222,7 @@ public class NautilusSurveyWSImpl implements Cloneable, NautilusSurveyWS {
 			}
 			return survey;
 		} catch (Exception e) {
-			_logger.error("Erreur de récupération de Campagne: " + e);
+			_logger.error("Erreur de recuperation de Campagne: " + e);
 		} finally {
 			if (result != null) {
 				try {

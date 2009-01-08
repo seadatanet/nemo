@@ -390,7 +390,7 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
 					if (_elements[i]._element.length() == 1
 							&& _elements[i]._element.equals(" ")) {
 						// cas particulier si on rencontre un espace, n'importe
-						// quel caractère est possible
+						// quel caractere est possible
 					} else {
 						if (!tmp.equals(_elements[i]._element)) {
 							throw new ParseException(
@@ -499,7 +499,7 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
 					if (_elements[i]._element.length() == 1
 							&& _elements[i]._element.equals(" ")) {
 						// cas particulier si on rencontre un espace, n'importe
-						// quel caractère est possible
+						// quel caractere est possible
 					} else {
 						if (!tmp.equals(_elements[i]._element)) {
 							throw new ParseException(

@@ -69,7 +69,7 @@ public class TableDataSurvey {
 		tableColumn2.setText("QC"); //$NON-NLS-1$
 
 		TableColumn tableColumn3 = new TableColumn(table, SWT.READ_ONLY);
-		// mise à zero de la largeur de la colonne avec isSensor() pour ne pas
+		// mise e zero de la largeur de la colonne avec isSensor() pour ne pas
 		// qu'on puisse la modifier!!
 		tableColumn3.setWidth(50);
 		tableColumn3.setText(Messages.getString("TableDataSurvey.11")); //$NON-NLS-1$
@@ -79,7 +79,7 @@ public class TableDataSurvey {
 
 	public static void initTypes() {
 
-		// initialisation de la ArrayList des types des données à partir du
+		// initialisation de la ArrayList des types des donnees e partir du
 		// datamodel
 		types = new ArrayList<TypeSurvey>();
 		typesWS = new ArrayList<TypeSurvey>();
@@ -93,7 +93,7 @@ public class TableDataSurvey {
 			// new type
 			TypeSurvey type = new TypeSurvey();
 
-			// paramètres
+			// parametres
 			type.setCode(wsDatatype.getCode()
 							+ " - " + wsDatatype.getLibelle()); //$NON-NLS-1$
 			type.setQc(Messages.getString("TableDataSurvey.5")); //$NON-NLS-1$
@@ -121,7 +121,7 @@ public class TableDataSurvey {
 
 		// LINK des editors
 
-		// accès direct aux valeurs des colonnes des items
+		// acces direct aux valeurs des colonnes des items
 
 		final TableEditor editor = new TableEditor(table);
 
@@ -133,7 +133,7 @@ public class TableDataSurvey {
 		table.addListener(SWT.MouseDown, new Listener() {
 			public void handleEvent(Event event) {
 
-				// calcul du numéro de ligne sélectionné
+				// calcul du numero de ligne selectionne
 
 				Point pt = new Point(event.x, event.y);
 				TableItem item = table.getItem(pt);
@@ -141,7 +141,7 @@ public class TableDataSurvey {
 				if (item == null)
 					return;
 
-				// édition directe de l'élément sélectionné
+				// edition directe de l'element selectionne
 
 				Rectangle clientArea = table.getClientArea();
 				// Point pt = new Point(event.x, event.y);
@@ -198,7 +198,7 @@ public class TableDataSurvey {
 							text.setText(itemTmp.getText(i));
 							text.selectAll();
 
-							// invalidation de l'étape quand modif
+							// invalidation de l'etape quand modif
 							EditSurvey.okApresReset = false;
 							if (!ViewFile.tabItem1.isDisposed()) {
 								ViewFile.tabItem1.setText(Messages
@@ -225,7 +225,7 @@ public class TableDataSurvey {
 			}
 		});
 
-		// création du menu
+		// creation du menu
 		Menu menu = new Menu(table.getShell(), SWT.POP_UP);
 
 		// MenuItem itemNew = new MenuItem(menu, SWT.NONE);
@@ -257,7 +257,7 @@ public class TableDataSurvey {
 		 */
 		itemList.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
-				// System.out.println("sélection liste");
+				// System.out.println("selection liste");
 				FiltrageTableType.go(Global.DATATYPE);
 
 			}
@@ -291,7 +291,7 @@ public class TableDataSurvey {
 	}
 
 	public static void initTableData() {
-		// création des TableItems à partir de la ArrayList types
+		// creation des TableItems e partir de la ArrayList types
 
 		int nbre;
 		nbre = types.size();
@@ -299,7 +299,7 @@ public class TableDataSurvey {
 		Table table;
 		table = TableDataSurvey.tableTypeSurvey;
 
-		// nouvelle création des items
+		// nouvelle creation des items
 		for (int i = 0; i < nbre; i++) {
 			TableItem item = new TableItem(table, SWT.NONE);
 			item.setText(new String[] { types.get(i).getCode(),
@@ -322,7 +322,7 @@ public class TableDataSurvey {
 	}
 
 	public static void nouvelElt() {
-		// rajoute une ligne en dernière position de la table
+		// rajoute une ligne en derniere position de la table
 
 		TypeSurvey type = new TypeSurvey();
 		types.add(type);
@@ -364,18 +364,18 @@ public class TableDataSurvey {
 	}
 
 	public static void monterEltTableData(int indice) {
-		// on monte d'un cran l'élément à la position indice
+		// on monte d'un cran l'element e la position indice
 		// swap (indice-1) <-> indice
 		// 
 		
-		// On teste si ce n'est pas le premier élément
+		// On teste si ce n'est pas le premier element
 		if (indice > 0) {
 			int nbre;
 			ArrayList<TypeSurvey> listeTempo;
 			nbre = types.size();
 			listeTempo = new ArrayList();
 
-			// mise à jour préalable
+			// mise e jour prealable
 			majTypeData();
 
 			// parcours de la liste
@@ -412,7 +412,7 @@ public class TableDataSurvey {
 	}
 
 	public static void descendreEltTableData(int indice) {
-		// on descend d'un cran l'élément à la position indice
+		// on descend d'un cran l'element e la position indice
 		// swap (indice-1) <-> indice
 
 		int nbre;
@@ -422,7 +422,7 @@ public class TableDataSurvey {
 			ArrayList<TypeSurvey> listeTempo;
 			listeTempo = new ArrayList();
 
-			// mise à jour préalable
+			// mise e jour prealable
 			majTypeData();
 
 			// parcours de la liste
@@ -458,13 +458,13 @@ public class TableDataSurvey {
 	}
 
 	public static void supprEltTableData(int[] indice) {
-		// suppression de la ligne sélectionnée
+		// suppression de la ligne selectionnee
 		int i;
 		
-		// d'abord mise à jour des données
+		// d'abord mise e jour des donnees
 		majTypeData();
 
-		// on supprime l'élément à l'indice donné
+		// on supprime l'element e l'indice donne
 		for (i = indice.length - 1; i > -1; i--) {
 			types.remove(indice[i]);
 		}
@@ -504,8 +504,8 @@ public class TableDataSurvey {
 	}
 
 	public static void majTypeData() {
-		// on met à jour tous les types de données dans l'ArrayList global
-		// à partir des valeurs de la table
+		// on met e jour tous les types de donnees dans l'ArrayList global
+		// e partir des valeurs de la table
 
 		int nbre;
 		// types = null;

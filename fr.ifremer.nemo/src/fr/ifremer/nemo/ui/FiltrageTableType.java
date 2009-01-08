@@ -100,16 +100,16 @@ public class FiltrageTableType {
 			//	
 			//	NemoLists.listeFiltree.addAll(NemoLists.listeNavire);
 			} else {
-				// init des listes filtrées survey + data
+				// init des listes filtrees survey + data
 				TableDataSurvey.listeFiltree = new ArrayList<TypeSurvey>();
 
-				// init de la liste des references campagne à partir des
+				// init de la liste des references campagne e partir des
 				// listesWS
 				TableWS_Survey.surveysWS = NemoLists.getSurveys();
 			
 
 				// remplissage des noms + ref
-				// liste filtree initialisée à surveysWS au depart
+				// liste filtree initialisee e surveysWS au depart
 				TableWS_Survey.listeFiltree = new ArrayList<String>();
 				TableWS_Survey.refsWS = new ArrayList<String>();
 				for (int i = 0; i < TableWS_Survey.surveysWS.length; i++) {
@@ -121,7 +121,7 @@ public class FiltrageTableType {
 							+ " - " + TableWS_Survey.surveysWS[i].getName()); //$NON-NLS-1$
 				}
 
-				// liste filtree initialisée à typesWS au depart
+				// liste filtree initialisee e typesWS au depart
 				try {
 					int taille = TableDataSurvey.typesWS.size();
 					
@@ -133,7 +133,7 @@ public class FiltrageTableType {
 					// TableDataSurvey.listeFiltree = TableDataSurvey.typesWS;
 
 					TableData.listeFiltree = new ArrayList<TypeData>();
-					// liste filtree initialisée à typesWS au depart
+					// liste filtree initialisee e typesWS au depart
 					taille = TableData.typesWS.size();
 					for (int i = 0; i < taille; i++) {
 						TableData.listeFiltree.add(TableData.typesWS.get(i));
@@ -205,7 +205,7 @@ public class FiltrageTableType {
 							} else if (tabOrigine
 									.equals(Global.WSSURVEY)) {
 
-								// sélection d'une référence campagne
+								// selection d'une reference campagne
 								int index = TableWS_Survey.filtreTable
 										.getSelectionIndex();
 								String reference = TableWS_Survey.listeFiltree
@@ -419,7 +419,7 @@ public class FiltrageTableType {
 		table.setBounds(new Rectangle(3, 45, 298, 237));
 
 		nbre = TableData.listeFiltree.size();
-		// création des colonnes...
+		// creation des colonnes...
 		TableColumn tableColumn = new TableColumn(table, SWT.NONE);
 		tableColumn.setWidth(290);
 		// taille = 60
@@ -452,7 +452,7 @@ public class FiltrageTableType {
 		table.setBounds(new Rectangle(3, 45, 298, 237));
 
 		nbre = EdmoHandler.listeFiltree.size();
-		// création des colonnes...
+		// creation des colonnes...
 		TableColumn tableColumn = new TableColumn(table, SWT.NONE);
 		tableColumn.setWidth(280);
 		// taille = 60
@@ -477,7 +477,7 @@ public class FiltrageTableType {
 		table.setBounds(new Rectangle(3, 45, 298, 237));
 
 		nbre = NemoLists.listeFiltree.size();
-		// création des colonnes...
+		// creation des colonnes...
 		TableColumn tableColumn = new TableColumn(table, SWT.NONE);
 		tableColumn.setWidth(280);
 		// taille = 60
@@ -548,7 +548,7 @@ public class FiltrageTableType {
 
 			if (m.matches()) {
 
-				// ajout dans la liste filtrée
+				// ajout dans la liste filtree
 				filtree.add(origine.get(i));
 			}
 		}
@@ -584,7 +584,7 @@ public class FiltrageTableType {
 
 			if (m.matches()) {
 
-				// ajout dans la liste filtrée
+				// ajout dans la liste filtree
 				filtree.add(origine.get(i));
 			}
 		}
@@ -626,7 +626,7 @@ public class FiltrageTableType {
 
 			if (m.matches()) {
 
-				// ajout dans la liste filtrée
+				// ajout dans la liste filtree
 				filtree.add(origine.get(i));
 			}
 		}
@@ -659,7 +659,7 @@ public class FiltrageTableType {
 
 			if (m.matches()) {
 
-				// ajout dans la liste filtrée
+				// ajout dans la liste filtree
 				filtree.add(origine.get(i));
 			}
 		}
@@ -694,7 +694,7 @@ public class FiltrageTableType {
 				// System.out.println("On ajoute le type " + origine.get(i));
 				// //$NON-NLS-1$
 
-				// ajout dans la liste filtrée
+				// ajout dans la liste filtree
 				filtree.add(origine.get(i));
 			}
 		}
@@ -723,7 +723,7 @@ public class FiltrageTableType {
 		table.setBounds(new Rectangle(3, 45, 298, 237));
 
 		nbre = TableWS_Survey.listeFiltree.size();
-		// création des colonnes...
+		// creation des colonnes...
 		TableColumn tableColumn = new TableColumn(table, SWT.NONE);
 		tableColumn.setWidth(290);
 		// taille = 60

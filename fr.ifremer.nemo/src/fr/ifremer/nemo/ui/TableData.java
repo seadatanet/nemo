@@ -117,7 +117,7 @@ public class TableData {
 
 	public static void initTypes() {
 
-		// initialisation de la ArrayList des types des donn�es � partir du
+		// initialisation de la ArrayList des types des donnees e partir du
 
 		types = new ArrayList<TypeData>();
 		typesWS = new ArrayList<TypeData>();
@@ -131,7 +131,7 @@ public class TableData {
 			// new type
 			TypeData type = new TypeData();
 
-			// param�tres
+			// parametres
 			type.setCode(wsParameter.getCode() + " - " + wsParameter.getName()); //$NON-NLS-1$
 			type.setUnite(wsParameter.getUnit());
 			type.setFormat(wsParameter.getFormat());
@@ -143,7 +143,7 @@ public class TableData {
 			// ajout dans liste
 			typesWS.add(type);
 
-			// ajout syst�matique de PRES
+			// ajout systematique de PRES
 			if (wsParameter.getCode().matches("PRES")) { //$NON-NLS-1$
 
 				// if ((DataModel.ouverture == false)
@@ -151,7 +151,7 @@ public class TableData {
 				if ((DataModel.ouverture == false)
 						&& !(ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire
 								.getSelection())) {
-					// pas de mod�le charg� donc on rajoute PRES
+					// pas de modele charge donc on rajoute PRES
 					types.add(type);
 				}
 
@@ -177,7 +177,7 @@ public class TableData {
 
 		// LINK des editors
 
-		// acc�s direct aux valeurs des colonnes des items
+		// acces direct aux valeurs des colonnes des items
 
 		final TableEditor editor = new TableEditor(table);
 
@@ -191,7 +191,7 @@ public class TableData {
 				if (event.button == 3) {
 					return;
 				}
-				// calcul du num�ro de ligne s�lectionn�
+				// calcul du numero de ligne selectionne
 
 				Point pt = new Point(event.x, event.y);
 				TableItem item = table.getItem(pt);
@@ -199,7 +199,7 @@ public class TableData {
 				if (item == null)
 					return;
 
-				// �dition directe de l'�l�ment s�lectionn�
+				// edition directe de l'element selectionne
 
 				Rectangle clientArea = table.getClientArea();
 				// Point pt = new Point(event.x, event.y);
@@ -275,7 +275,7 @@ public class TableData {
 			}
 		});
 
-		// cr�ation du menu
+		// creation du menu
 		Menu menu = new Menu(table.getShell(), SWT.POP_UP);
 		MenuItem itemInject = new MenuItem(menu, SWT.NONE);
 		itemInject.setText(Messages.getString("TableData.11")); //$NON-NLS-1$
@@ -327,7 +327,7 @@ public class TableData {
 
 		itemList.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
-				// System.out.println("s�lection liste");
+				// System.out.println("selection liste");
 				FiltrageTableType.go(Global.PARAMETER);
 
 			}
@@ -381,7 +381,7 @@ public class TableData {
 	}
 
 	public static void initTableData() {
-		// cr�ation des TableItems � partir de la ArrayList types
+		// creation des TableItems e partir de la ArrayList types
 
 		int nbre;
 		nbre = types.size();
@@ -389,7 +389,7 @@ public class TableData {
 		Table table;
 		table = ViewFile.tableData;
 
-		// nouvelle cr�ation des items
+		// nouvelle creation des items
 		for (int i = 0; i < nbre; i++) {
 			TableItem item = new TableItem(table, SWT.NONE);
 			item.setText(new String[] {
@@ -414,7 +414,7 @@ public class TableData {
 	}
 
 	public static void nouvelElt() {
-		// rajoute une ligne en derni�re position de la table
+		// rajoute une ligne en derniere position de la table
 
 		TypeData type = new TypeData();
 		types.add(type);
@@ -429,7 +429,7 @@ public class TableData {
 	}
 
 	public static void monterEltTableData() {
-		// on monte d'un cran l'�l�ment � la position indice
+		// on monte d'un cran l'element e la position indice
 		// swap (indice-1) <-> indice
 		// 
 
@@ -445,7 +445,7 @@ public class TableData {
 
 			listeTempo = new ArrayList();
 
-			// mise � jour pr�alable
+			// mise e jour prealable
 			majTypeData();
 
 			// parcours de la liste
@@ -483,7 +483,7 @@ public class TableData {
 	}
 
 	public static void descendreEltTableData() {
-		// on descend d'un cran l'�l�ment � la position indice
+		// on descend d'un cran l'element e la position indice
 		// swap (indice-1) <-> indice
 
 		int indice = ViewFile.tableData.getSelectionIndex();
@@ -510,7 +510,7 @@ public class TableData {
 
 			listeTempo = new ArrayList();
 
-			// mise � jour pr�alable
+			// mise e jour prealable
 			majTypeData();
 
 			// parcours de la liste
@@ -551,18 +551,18 @@ public class TableData {
 	}
 
 	public static void supprEltTableData() {
-		// suppression de la ligne s�lectionn�e
+		// suppression de la ligne selectionnee
 		int indice = ViewFile.tableData.getSelectionIndex();
-		// d'abord mise � jour des donn�es
+		// d'abord mise e jour des donnees
 		majTypeData();
 
-		// on supprime l'�l�ment � l'indice donn�
+		// on supprime l'element e l'indice donne
 		// split sur " - "
 		Pattern p = Pattern.compile(" - ");
 		String mots[] = p.split(types.get(indice).getCode());
 		String code = mots[0];
 
-		// pas forc�ment de - dans le nom du type
+		// pas forcement de - dans le nom du type
 		// if (!code.matches("PRES") || ViewFile.checkBoxTempo.getSelection()) {
 		if (!code.matches("PRES") || ViewFile.radSerieTempo.getSelection()
 				|| ViewFile.radTrajectoire.getSelection()) {
@@ -581,7 +581,7 @@ public class TableData {
 
 	public static void majChampTest() {
 
-		// maj pr�ventive de tout
+		// maj preventive de tout
 		majTypeData();
 
 		int nbre;
@@ -592,10 +592,10 @@ public class TableData {
 		for (int i = 0; i < nbre; i++) {
 
 			if ((!ViewFile.tableData.getItem(i).getText(4).matches("")) && (!ViewFile.tableData.getItem(i).getText(2).matches(""))) { //$NON-NLS-1$ //$NON-NLS-2$
-				// on a s�lectionn� un d�but et une fin et il y a une conversion
-				// � faire
+				// on a selectionne un debut et une fin et il y a une conversion
+				// e faire
 
-				// on r�cup�re le data
+				// on recupere le data
 				ligne = Utils.lignesBrutes.get(Integer
 						.valueOf(EditDesc.lignesEnteteFichier.getText())
 						+ Integer.valueOf(EditDesc.lignesEnteteStation
@@ -610,9 +610,9 @@ public class TableData {
 				try {
 					if (selection.matches(ViewFile.tableData.getItem(i)
 							.getText(7))) {
-						// entr�e par d�faut, le test est la valeur de sortie
+						// entree par defaut, le test est la valeur de sortie
 						// par
-						// d�faut format�e
+						// defaut formatee
 						resultat = String.format(ViewFile.tableData.getItem(i)
 								.getText(6), ViewFile.tableData.getItem(i)
 								.getText(8));
@@ -682,8 +682,8 @@ public class TableData {
 	}
 
 	public static void majTypeData() {
-		// on met � jour tous les types de donn�es dans l'ArrayList global
-		// � partir des valeurs de la table
+		// on met e jour tous les types de donnees dans l'ArrayList global
+		// e partir des valeurs de la table
 
 		int nbre;
 

@@ -48,7 +48,7 @@ import fr.ifremer.nemo.ws.WSShip;
 /**
  * Class Survey
  * 
- * Classe permettant la description de l'entête Campagne
+ * Classe permettant la description de l'entete Campagne
  * 
  * @author Gerard BUNEL
  */
@@ -57,7 +57,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 
 	/**
 	 * Taille du fichier de la campagne correspondant en Mo
-	 * Utilisé pour le résumé CDI dans le cas d'une collection 
+	 * Utilise pour le resume CDI dans le cas d'une collection 
 	 */
 	protected float _dataSize;
 	

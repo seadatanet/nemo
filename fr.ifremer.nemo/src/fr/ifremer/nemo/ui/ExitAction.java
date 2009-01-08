@@ -20,7 +20,7 @@ public class ExitAction extends Action implements ISelectionListener,
 
 	public final static String ID = "fr.ifremer.nemo.ui.ExitAction"; //$NON-NLS-1$
 
-	// vars nécessaires à la fenêtre d'options
+	// vars necessaires e la fenetre d'options
 	// public static
 	public static Shell shelloptions;
 

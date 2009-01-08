@@ -24,9 +24,9 @@ import fr.ifremer.nemo.util.SizeBasedProgressNotifier;
 /**
  * Class DirectoryBasedSurvey
  * 
- * Représente une campagne dont les informations sont stockées dans une
- * répertoire sous la forme d'un ensemble de fichiers. Chaqque fichier
- * correspond alors aux données d'une station
+ * Represente une campagne dont les informations sont stockees dans une
+ * repertoire sous la forme d'un ensemble de fichiers. Chaqque fichier
+ * correspond alors aux donnees d'une station
  * 
  * @author Gerard BUNEL
  */
@@ -34,18 +34,18 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 		SAXConsumer {
 
 	/**
-	 * Nom du répertoire dans lequel se trouvent les fichiers station
+	 * Nom du repertoire dans lequel se trouvent les fichiers station
 	 */
 	protected String _directory;
 
 	/**
-	 * Campagne servant de modèle pour stocker les informations de l'entête
+	 * Campagne servant de modele pour stocker les informations de l'entete
 	 * campagne
 	 */
 	protected Survey _model;
 
 	/**
-	 * Modèle de station
+	 * Modele de station
 	 */
 	protected StationModel _stationModel;
 
@@ -349,7 +349,7 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 									files[i], isRefDateBased, a_RefDate,
 									notifierStation);
 							
-							// Tri des données de la station par ordre croissant
+							// Tri des donnees de la station par ordre croissant
 							station.tri(true);
 							
 							survey.addStation(station);

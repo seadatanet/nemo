@@ -115,7 +115,7 @@ public class NemoWSImpl implements Cloneable, NemoWS {
 			WSCountry[] countryArray = new WSCountry[countries.size()];
 			return countries.toArray(countryArray);
 		} catch (Exception e) {
-			_logger.error("Erreur de récupération des Pays: " + e);
+			_logger.error("Erreur de recuperation des Pays: " + e);
 		} finally {
 			if (result != null) {
 				try {
@@ -174,7 +174,7 @@ public class NemoWSImpl implements Cloneable, NemoWS {
 			return centres.toArray(centreArray);
 		} catch (Exception e) {
 			_logger
-					.error("Erreur de récupération d'un Centre de Données: "
+					.error("Erreur de recuperation d'un Centre de Donnees: "
 							+ e);
 		} finally {
 			if (result != null) {
@@ -233,7 +233,7 @@ public class NemoWSImpl implements Cloneable, NemoWS {
 			WSDataType[] typeArray = new WSDataType[types.size()];
 			return types.toArray(typeArray);
 		} catch (Exception e) {
-			_logger.error("Erreur de récupération des DataType: " + e);
+			_logger.error("Erreur de recuperation des DataType: " + e);
 		} finally {
 			if (result != null) {
 				try {
@@ -293,7 +293,7 @@ public class NemoWSImpl implements Cloneable, NemoWS {
 			WSParameter[] parameterArray = new WSParameter[parameters.size()];
 			return parameters.toArray(parameterArray);
 		} catch (Exception e) {
-			_logger.error("Erreur de récupération des Parametres: " + e);
+			_logger.error("Erreur de recuperation des Parametres: " + e);
 		} finally {
 			if (result != null) {
 				try {
@@ -350,7 +350,7 @@ public class NemoWSImpl implements Cloneable, NemoWS {
 			WSRegion[] regionArray = new WSRegion[regions.size()];
 			return regions.toArray(regionArray);
 		} catch (Exception e) {
-			_logger.error("Erreur de récupération des Régions: " + e);
+			_logger.error("Erreur de recuperation des Regions: " + e);
 		} finally {
 			if (result != null) {
 				try {
@@ -405,7 +405,7 @@ public class NemoWSImpl implements Cloneable, NemoWS {
 			WSShip[] shipArray = new WSShip[ships.size()];
 			return ships.toArray(shipArray);
 		} catch (Exception e) {
-			_logger.error("Erreur de récupération de des Navires: " + e);
+			_logger.error("Erreur de recuperation de des Navires: " + e);
 		} finally {
 			if (result != null) {
 				try {
@@ -469,7 +469,7 @@ public class NemoWSImpl implements Cloneable, NemoWS {
 			return surveys.toArray(surveyArray);
 		} catch (Exception e) {
 
-			_logger.error("Erreur de récupération de la liste des Campagnes: "
+			_logger.error("Erreur de recuperation de la liste des Campagnes: "
 					+ e);
 		} finally {
 			if (result != null) {

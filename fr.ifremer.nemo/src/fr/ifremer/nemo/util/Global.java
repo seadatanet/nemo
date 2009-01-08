@@ -19,7 +19,7 @@ public interface Global {
 	public static final String MEDATLAS = "MEDATLAS";
 	public static final String ODV = "ODV";
 	
-	// Type de metadonnée
+	// Type de metadonnee
 	public static final String DATE = "date";
 	public static final String TIME = "time";
 	public static final String DATETIME = "dateTime";

@@ -18,7 +18,7 @@ import fr.ifremer.nemo.util.Messages;
 
 public class EditData {
 
-	// fonctions de remplissage de la zone d'édition pour les campagnes
+	// fonctions de remplissage de la zone d'edition pour les campagnes
 
 	// /////////////////////////////////////////
 
@@ -60,7 +60,7 @@ public class EditData {
 	// //////////////////////////////////////////
 
 	public static void affichageEdition() {
-		// initialisation zone édition pour étape description de fichier
+		// initialisation zone edition pour etape description de fichier
 
 		formEdition = ViewEdit.formEdition;
 		ViewLog.aideData();
@@ -79,7 +79,7 @@ public class EditData {
 		/*
 		 * recreer un formEdition sur le toolkit principal pour pouvoir faire un
 		 * dispose() dessus mais garder toutes les sections afin de les
-		 * réafficher par la suite dans DrawingBack.
+		 * reafficher par la suite dans DrawingBack.
 		 */
 
 		ViewEdit.formEdition.getBody().setLayout(new GridLayout());
@@ -117,7 +117,7 @@ public class EditData {
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
 
-						// on passe en ppar l'étape à laquelle on se trouve
+						// on passe en ppar l'etape e laquelle on se trouve
 						// Etape.etape(1);
 
 						Etape.validationData();
@@ -150,7 +150,7 @@ public class EditData {
 		// affichage courant
 		ViewFile.affiche = 3;
 		
-		// remplissage de l'IHM par le modèle chargé
+		// remplissage de l'IHM par le modele charge
 		
 		// DataModel.ouverture);
 
@@ -160,7 +160,7 @@ public class EditData {
 	}
 
 	public static void razEdition() {
-		// reset de toute la zone d'édition après étape descriptioon de fichier
+		// reset de toute la zone d'edition apres etape descriptioon de fichier
 		// on retire toutes les sections et les boutons expand et validation
 
 		int i;
@@ -188,11 +188,11 @@ public class EditData {
 				public void modifyText(ModifyEvent event) {
 					// on modifie la valeur du champ texte
 
-					// dès qu'on modifie une valeur, on invalide l'étape
-					// remise du nom onglet à valeur par défaut
+					// des qu'on modifie une valeur, on invalide l'etape
+					// remise du nom onglet e valeur par defaut
 
-					// on invalide toutes les étapes suivantes avec le second
-					// flag okApresReset à false
+					// on invalide toutes les etapes suivantes avec le second
+					// flag okApresReset e false
 					EditData.okApresReset = false;
 					ViewFile.tabItem3.setText(Messages.getString("EditData.1"));
 					Utils.messageErreur("");
@@ -204,7 +204,7 @@ public class EditData {
 	}
 
 	public static void DrawingBack() {
-		// reset de toute la zone d'édition après étape descriptioon de fichier
+		// reset de toute la zone d'edition apres etape descriptioon de fichier
 		// on retire toutes les sections et les boutons expand et validation
 
 		ViewLog.aideData();
@@ -306,7 +306,7 @@ public class EditData {
 		}
 
 		// raz de la table de parameters
-		// effacement de la liste des types de données dans la table
+		// effacement de la liste des types de donnees dans la table
 		TableData.types = null;
 		TableData.types = new ArrayList<TypeData>();
 		// razTableData

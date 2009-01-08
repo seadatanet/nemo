@@ -14,8 +14,8 @@ import com.ago.xml.XMLOutputWriter;
 /**
  * Class HeaderFragment
  * 
- * Représente un fragment du fichier d'entrée. Le fragment est définit par une
- * position de début et de fin. comme illustré ci-dessous | | | v début | | |
+ * Represente un fragment du fichier d'entree. Le fragment est definit par une
+ * position de debut et de fin. comme illustre ci-dessous | | | v debut | | |
  * XXXXXXXXXXXXXX| | XXXXXXXXXXXXXXXXX| | XXXXXXXXXXXXXXXXX| | XXXXXXXXXXXX| | | ^
  * fin | | |
  * 

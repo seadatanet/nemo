@@ -29,7 +29,7 @@ import fr.ifremer.nemo.util.Global;
 /**
  * Class Station
  * 
- * Classe permettant la description de l'entête Station
+ * Classe permettant la description de l'entete Station
  * 
  * @author Gerard BUNEL
  */
@@ -41,15 +41,15 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	protected float _bottomDepth;
 
 	/**
-	 * Commentaire multi-ligne, chaque ligne est limitee à 79 caracteres. Pour
-	 * toutes les données et méta-données complémentaire comme la date et la
-	 * position à la fin du profil, les observations météorologiques. Le nombre
-	 * de lignes commentaire n'est pas limité
+	 * Commentaire multi-ligne, chaque ligne est limitee e 79 caracteres. Pour
+	 * toutes les donnees et meta-donnees complementaire comme la date et la
+	 * position e la fin du profil, les observations meteorologiques. Le nombre
+	 * de lignes commentaire n'est pas limite
 	 */
 	protected String _comment;
 
 	/**
-	 * Date de début des mesures de la station. MEDATLAS: " DDMMYYYY"
+	 * Date de debut des mesures de la station. MEDATLAS: " DDMMYYYY"
 	 */
 	protected long _date;
 
@@ -61,15 +61,15 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 
 	/**
 	 * 1ere ligne des "DC History" (79 char max). MEDATLAS: "method or
-	 * instrument used when the data was collected" pour les informations liées
-	 * à la collecte des données en mer (instrument, calibration, ...)
+	 * instrument used when the data was collected" pour les informations liees
+	 * e la collecte des donnees en mer (instrument, calibration, ...)
 	 */
 	protected String _dcHistory1;
 
 	/**
 	 * 2eme ligne des "DC History" (79 char max). MEDATLAS: "method or
-	 * instrument used when the data was collected" pour les informations liées
-	 * à la collecte des données en mer (instrument, calibration, ...)
+	 * instrument used when the data was collected" pour les informations liees
+	 * e la collecte des donnees en mer (instrument, calibration, ...)
 	 */
 	protected String _dcHistory2;
 
@@ -81,17 +81,17 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 
 	/**
 	 * 1ere ligne des "Data Management History" (79 char max). pour les
-	 * informations liées à la gestion de données et à l'archivage (comme, par
-	 * exemple, la latitude d'origine, si elle a été changée au cours du
-	 * contrôle qualité)
+	 * informations liees e la gestion de donnees et e l'archivage (comme, par
+	 * exemple, la latitude d'origine, si elle a ete changee au cours du
+	 * contrele qualite)
 	 */
 	protected String _dmHistory1;
 
 	/**
 	 * 2eme ligne des "Data Management History" (79 char max). pour les
-	 * informations liées à la gestion de données et à l'archivage (comme, par
-	 * exemple, la latitude d'origine, si elle a été changée au cours du
-	 * contrôle qualité)
+	 * informations liees e la gestion de donnees et e l'archivage (comme, par
+	 * exemple, la latitude d'origine, si elle a ete changee au cours du
+	 * contrele qualite)
 	 */
 	protected String _dmHistory2;
 
@@ -106,7 +106,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	protected String _globalProfileQC;
 
 	/**
-	 * Latitude de départ de la station. MEDATLAS : NDD MM.mm
+	 * Latitude de depart de la station. MEDATLAS : NDD MM.mm
 	 */
 	protected double _latitude;
 
@@ -116,7 +116,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	protected int _latQC;
 
 	/**
-	 * Longitude de départ de la station. MEDATLAS : NDDD MM.mm
+	 * Longitude de depart de la station. MEDATLAS : NDDD MM.mm
 	 */
 	protected double _longitude;
 
@@ -126,7 +126,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	protected int _longQC;
 
 	/**
-	 * Decalage horaire de la date. Ne correspond pas à une donnée MEDATLAS. Les
+	 * Decalage horaire de la date. Ne correspond pas e une donnee MEDATLAS. Les
 	 * heures MEDATLAS sont toujours fournies en referentiel GMT.
 	 */
 	protected float _offsetTU;
@@ -147,16 +147,16 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	protected String _surfaceSamples2;
 
 	/**
-	 * Heure de début des mesures MEDATLAS: 'HHMN' Les heures non renseignées
-	 * doivent être égales à 9999 et le commentaire 'Heure inconnue' peut être
-	 * ajouté après COMMENT.
+	 * Heure de debut des mesures MEDATLAS: 'HHMN' Les heures non renseignees
+	 * doivent etre egales e 9999 et le commentaire 'Heure inconnue' peut etre
+	 * ajoute apres COMMENT.
 	 */
 	protected float _time;
 
 	/**
 	 * Type de donnee mesure par cette station. Il s'agit d'un d'un des
 	 * dataTypes de la relation datatType sur Survey. Le dataType doit de plus
-	 * correspondre à un capteur.
+	 * correspondre e un capteur.
 	 */
 	protected DataType _dataType;
 
@@ -171,7 +171,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	protected java.util.List<Parameter> _parameters;
 
 	/**
-	 * Information sur les séries temporelles. Optionnel, n'existe que si la
+	 * Information sur les series temporelles. Optionnel, n'existe que si la
 	 * campagne a concerne des donnees temporelles.
 	 */
 	protected TimeSeriesInformation _timeSeriesInformation;
@@ -1541,7 +1541,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	}
 
 	/**
-	 * Trie les données de la station par ordre croissant/décroissant en
+	 * Trie les donnees de la station par ordre croissant/decroissant en
 	 * supprimant les doublons
 	 * 
 	 * @param ascendant
@@ -1556,8 +1556,8 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 
 			int i;
 
-			// Choix du paramètre à trier en fonction du type de données en
-			// entrée et en sortie
+			// Choix du parametre e trier en fonction du type de donnees en
+			// entree et en sortie
 			if (SWTProcess.odv) {
 				if (StationModel.getSingleton().getInputType().equals(
 						Global.TIMESERIES)) {
@@ -1584,14 +1584,14 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 			// valeur
 			if (paramCode.equals("")) {
 				// Cas du tri par date
-				// on utilise la date du 1er paramètre
+				// on utilise la date du 1er parametre
 				for (i = 0; i < parametersAt(0).valuesSize(); i++) {
 					Long date = ((HorodatedValue) parametersAt(0).valuesAt(i))
 							.getDate();
 					tmTri.put(date.doubleValue(), i);
 				}
 			} else {
-				// Recherche de l'index du paramètre en fonction du code
+				// Recherche de l'index du parametre en fonction du code
 				paramIndex = parametersIndexOf(paramCode);
 
 				if (paramIndex >= 0) {
@@ -1604,8 +1604,8 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 				}
 			}
 
-			// Ajout des indexes triés dans une liste dans l'ordre croissant ou
-			// décroissant
+			// Ajout des indexes tries dans une liste dans l'ordre croissant ou
+			// decroissant
 			if (ascendant) {
 				for (Entry<Double, Integer> currentEntry : tmTri.entrySet()) {
 					arlIndexes.add(currentEntry.getValue());
@@ -1623,7 +1623,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 				}
 			}
 
-			// Tri de tous les paramètres de la station
+			// Tri de tous les parametres de la station
 			for (Parameter param : getParameters()) {
 				param.triIndexes(arlIndexes);
 			}
@@ -1631,7 +1631,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	}
 
 	/**
-	 * Trie les données de la station par ordre croissant/décroissant en
+	 * Trie les donnees de la station par ordre croissant/decroissant en
 	 * conservant les doublons
 	 * 
 	 * @param ascendant
@@ -1647,8 +1647,8 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 			int nb = 0;
 			int i;
 
-			// Choix du paramètre à trier en fonction du type de données en
-			// entrée et en sortie
+			// Choix du parametre e trier en fonction du type de donnees en
+			// entree et en sortie
 			if (SWTProcess.odv) {
 				if (StationModel.getSingleton().getInputType().equals(
 						Global.TIMESERIES)) {
@@ -1675,7 +1675,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 			// valeur
 			if (paramCode.equals("")) {
 				// Cas du tri par date
-				// on utilise la date du 1er paramètre
+				// on utilise la date du 1er parametre
 				for (i = 0; i < parametersAt(0).valuesSize(); i++) {
 					Long date = ((HorodatedValue) parametersAt(0).valuesAt(i))
 							.getDate();
@@ -1684,7 +1684,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 					dataList.add(dataTemp);
 				}
 			} else {
-				// Recherche de l'index du paramètre en fonction du code
+				// Recherche de l'index du parametre en fonction du code
 				paramIndex = parametersIndexOf(paramCode);
 
 				if (paramIndex >= 0) {
@@ -1698,8 +1698,8 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 				}
 			}
 
-			// Ajout des indexes triés dans une liste dans l'ordre croissant ou
-			// décroissant
+			// Ajout des indexes tries dans une liste dans l'ordre croissant ou
+			// decroissant
 			if (ascendant) {
 				Collections.sort(dataList);
 			} else {
@@ -1714,11 +1714,11 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 			}
 
 			if (nb > 0) {
-				// Ajout de la station à la liste des stations triées
+				// Ajout de la station e la liste des stations triees
 				EditConversion.getSortedStations().put(getReference().trim(),
 						nb);
 
-				// Tri de tous les paramètres de la station
+				// Tri de tous les parametres de la station
 				for (Parameter param : getParameters()) {
 					param.triIndexes(arlIndexes);
 				}
@@ -1763,14 +1763,14 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		StringBuffer buffer = new StringBuffer();
 		
 		if (isTimeSeries) {
-			// Ajout des flags des données temporelles
+			// Ajout des flags des donnees temporelles
 			String flag = getMetaFlag(Global.DATETIME);
 			for (int i = 0; i < 4; i++) {
 				buffer.append(flag);
 			}
 		}
 		
-		// Ajout des flags des paramètres
+		// Ajout des flags des parametres
 		for (Parameter param : getParameters()) {
 			buffer.append(getFlag(param, index));
 		}

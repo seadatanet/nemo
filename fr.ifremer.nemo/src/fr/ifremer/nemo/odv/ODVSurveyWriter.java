@@ -25,7 +25,7 @@ import fr.ifremer.nemo.util.SizeBasedProgressNotifier;
 /**
  * Class ODVSurveyWriter
  * 
- * Class d'implémentation de SurveyWriter permettant de stocker une Campagne au
+ * Class d'implementation de SurveyWriter permettant de stocker une Campagne au
  * format ODV (Ocen Data View)
  * 
  * @author Gerard BUNEL
@@ -90,7 +90,7 @@ public class ODVSurveyWriter implements Cloneable, SurveyWriter {
 	 * @param a_Survey
 	 *            La campagne a convertir
 	 * @param a_Writer
-	 *            Le flux vers lequel ecrire les données
+	 *            Le flux vers lequel ecrire les donnees
 	 * @param a_Progress
 	 *            Interface permettant au SurveyWriter de notifier de la
 	 *            progression

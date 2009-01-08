@@ -33,17 +33,17 @@ import fr.ifremer.nemo.ui.Utils;
 public class Configuration implements Cloneable, RootSAXConsumer {
 
 	/**
-	 * Adresse de contact IFREMER en cas de problème WebService
+	 * Adresse de contact IFREMER en cas de probleme WebService
 	 */
 	protected String _contact;
 
 	/**
-	 * Répertoire de base des fichiers modèles
+	 * Repertoire de base des fichiers modeles
 	 */
 	protected String _modelsDirectory;
 	
 	/**
-	 * Répertoire de base des fichier de sortie
+	 * Repertoire de base des fichier de sortie
 	 */
 	protected String _outputDirectory;
 	

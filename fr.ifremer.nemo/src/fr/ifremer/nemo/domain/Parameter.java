@@ -17,7 +17,7 @@ import fr.ifremer.nemo.ws.WSParameter;
 /**
  * Class Parameter
  * 
- * Classe permettant la description d'un paramètre mesuré
+ * Classe permettant la description d'un parametre mesure
  * 
  * @author Gerard BUNEL
  */
@@ -635,7 +635,7 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 	}
 	
 	/**
-	 * Tri les données d'un paramètre selon une liste d'indexes
+	 * Tri les donnees d'un parametre selon une liste d'indexes
 	 * @param indexes
 	 */
 	public void triIndexes(ArrayList<Integer> indexes)
@@ -643,7 +643,7 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 		ArrayList<ParameterValue> arlTemp = new ArrayList<ParameterValue>();
 		int i;
 		
-		// On recopie les données dans une liste temporaire dans l'ordre
+		// On recopie les donnees dans une liste temporaire dans l'ordre
 		for (i = 0; i < indexes.size(); i++) {
 			arlTemp.add(_values.get(indexes.get(i)));
 		}

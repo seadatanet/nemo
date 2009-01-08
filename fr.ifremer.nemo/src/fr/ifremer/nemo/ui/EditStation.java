@@ -156,7 +156,7 @@ public class EditStation {
 
 		loaded = 1;
 
-		// de base les sections sont referm�es
+		// de base les sections sont refermees
 		expand = 0;
 
 		/*
@@ -280,7 +280,7 @@ public class EditStation {
 		textRefStationNumero.setText("1");
 
 		if (!ViewFile.isCollection()) {
-			// section reference type de donn�es
+			// section reference type de donnees
 			DrawingStation.sectionTypeDonnees(sectionTypeDonnees, Messages
 					.getString("EditStation.0"), comboRefStationType);
 		}
@@ -309,7 +309,7 @@ public class EditStation {
 				.sectionCommentaireLigneDebutFinInject(
 						Messages.getString("EditStation.9"), Messages.getString("EditStation.10"), sectionCommentaire, textCommentaireLigne, textCommentaireDebut, textCommentaireFin, textCommentaire, buttonCommentaireSaisie, buttonCommentairePos, buttonVar, blnManuel); //$NON-NLS-1$ //$NON-NLS-2$
 
-		// section surface sample : identique � historique acquisition
+		// section surface sample : identique e historique acquisition
 		blnManuel = true;
 		if (blnModeleOuvert) {
 			PropertyModel propertyModel = DataModel.stationModel_modele

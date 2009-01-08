@@ -23,7 +23,7 @@ public class Cdi implements Cloneable, SAXConsumer {
 	protected String _typePlateForme;
 
 	/**
-	 * Accès aux données
+	 * Acces aux donnees
 	 */
 	protected String _accesDonnees;
 

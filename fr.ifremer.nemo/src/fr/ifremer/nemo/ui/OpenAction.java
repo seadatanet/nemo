@@ -24,7 +24,7 @@ public class OpenAction extends Action implements ISelectionListener,
 
 	public final static String ID = "fr.ifremer.nemo.ui.OpenAction"; //$NON-NLS-1$
 
-	// vars nécessaires à la fenêtre d'options
+	// vars necessaires e la fenetre d'options
 
 	public static Shell shelloptions;
 
@@ -48,7 +48,7 @@ public class OpenAction extends Action implements ISelectionListener,
 		FileInputStream stream = null;
 //		System.out.println("Menu open"); //$NON-NLS-1$
 
-		// vérifier que un fichier est chargé avant d'ouvrir un modèle
+		// verifier que un fichier est charge avant d'ouvrir un modele
 		if (EditDesc.loaded == 0) {
 			Utils.messageErreur(Messages.getString("OpenAction.3")); //$NON-NLS-1$
 		} else {
@@ -69,7 +69,7 @@ public class OpenAction extends Action implements ISelectionListener,
 			if (nomModele == null) {
 			} else {
 
-				// ouverture du fichier XML de modèle
+				// ouverture du fichier XML de modele
 
 				com.ago.xml.XMLBootstrapParser parser = new com.ago.xml.XMLBootstrapParser(
 						inputModel);
@@ -80,7 +80,7 @@ public class OpenAction extends Action implements ISelectionListener,
 					// 
 					e.printStackTrace();
 				}
-//				System.out.println("Ouverture du modèle : " + nomModele); //$NON-NLS-1$
+//				System.out.println("Ouverture du modele : " + nomModele); //$NON-NLS-1$
 				parser.parse(stream, false);
 
 				File fich = new File(nomModele);

@@ -122,7 +122,7 @@ public class AngleFormatParser extends AbstractParser implements Cloneable {
 		boolean res = true;
 
 		// En fait il faut pouvoir accepter beaucoup plus de formats
-		// Par contre moins de cas pouvant poser problème sont détectés
+		// Par contre moins de cas pouvant poser probleme sont detectes
 
 		spaces();
 		hemisphere();

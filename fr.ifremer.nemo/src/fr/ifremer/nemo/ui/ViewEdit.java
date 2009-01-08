@@ -12,10 +12,10 @@ public class ViewEdit extends ViewPart {
 
 	public static Composite top;
 
-	// toolkit du formulaire global d'édition
+	// toolkit du formulaire global d'edition
 	public static FormToolkit toolkitEdition;
 
-	// formulaire d'édition
+	// formulaire d'edition
 	public static ScrolledForm formEdition;
 
 	@Override

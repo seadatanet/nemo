@@ -51,7 +51,7 @@ public class TypeSurvey extends Object {
 			lecteurAvecBuffer = new BufferedReader(new FileReader(
 					"resources/liste_capteur.txt"));
 			
-			// Lecture des lignes d'en-tête
+			// Lecture des lignes d'en-tete
 			while ((ligneLue = lecteurAvecBuffer.readLine()) != null) {
 				numLigne++;
 				if (numLigne == 2) {

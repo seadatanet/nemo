@@ -24,7 +24,7 @@ import fr.ifremer.nemo.util.SizeBasedProgressNotifier;
 /**
  * Class MedatlasSurveyWriter
  * 
- * Class d'implémentation de SurveyWriter permettant de stocker une Campagne au
+ * Class d'implementation de SurveyWriter permettant de stocker une Campagne au
  * format MEDATLAS
  * 
  * @author Gerard BUNEL
@@ -69,7 +69,7 @@ public class MedatlasSurveyWriter implements Cloneable, SurveyWriter {
 		// Writer writer = null;
 		BufferedWriter writer = null;
 		try {
-			// FAE01 problème de performances réseau
+			// FAE01 probleme de performances reseau
 
 			// writer = new PrintWriter(new FileWriter(a_Filename), true);
 			// writer = new PrintWriter(new BufferedWriter(new
@@ -95,7 +95,7 @@ public class MedatlasSurveyWriter implements Cloneable, SurveyWriter {
 	 * @param a_Survey
 	 *            La campagne a convertir
 	 * @param a_Writer
-	 *            Le flux vers lequel ecrire les données
+	 *            Le flux vers lequel ecrire les donnees
 	 * @param a_Progress
 	 *            Interface permettant au SurveyWriter de notifier de la
 	 *            progression

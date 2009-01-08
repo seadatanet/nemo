@@ -29,25 +29,25 @@ public class InputModel implements Cloneable, PathElementHandler,
 		RootSAXConsumer {
 
 	/**
-	 * Date de réference par rapport à laquelle toutes les autres dates sont
+	 * Date de reference par rapport e laquelle toutes les autres dates sont
 	 * fournies
 	 */
 	protected long _refDate;
 
 	/**
-	 * Indique si les dates fournies dans les fichiers d'entrée sont donnés en
-	 * temps epuisé depuis une date de reference
+	 * Indique si les dates fournies dans les fichiers d'entree sont donnes en
+	 * temps epuise depuis une date de reference
 	 */
 	protected boolean _refDateBased;
 
 	/**
-	 * heure de réference par rapport à laquelle toutes les autres dates sont
+	 * heure de reference par rapport e laquelle toutes les autres dates sont
 	 * fournies
 	 */
 	protected long _refTime;
 
 	/**
-	 * Modèle de média contenant la campagne
+	 * Modele de media contenant la campagne
 	 */
 	protected SurveyMedia _media;
 

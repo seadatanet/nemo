@@ -66,7 +66,7 @@ public class EditConversion extends Thread {
 	protected static int _totalLigne;
 
 	/**
-	 * Liste des stations tri�es
+	 * Liste des stations triees
 	 */
 	protected static LinkedHashMap<String, Integer> _sortedStations = new LinkedHashMap<String, Integer>();
 

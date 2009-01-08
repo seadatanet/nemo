@@ -28,10 +28,10 @@ import fr.ifremer.nemo.util.Messages;
 /**
  * Class PropertyModel
  * 
- * Classe permettant de modéliser une information. L'information peut être
- * obtenue: - soit par saisie utilisateur, auquel cas elle est stockée dans un
- * attribut du bean - soit par récupération dans le fichier d'entrée, auquel cas
- * la récupération de l'information se fait par utilisation du fragment associé
+ * Classe permettant de modeliser une information. L'information peut etre
+ * obtenue: - soit par saisie utilisateur, auquel cas elle est stockee dans un
+ * attribut du bean - soit par recuperation dans le fichier d'entree, auquel cas
+ * la recuperation de l'information se fait par utilisation du fragment associe
  * (optionnel)
  * 
  * @author Gerard BUNEL
@@ -40,31 +40,31 @@ public class PropertyModel implements Cloneable, PathElementHandler,
 		SAXConsumer {
 
 	/**
-	 * Nom de la propriété du bean associé permettant de récuperer/définir la
-	 * valeur correspondante. Le bean, doit implémenter les méthodes d'accès a
-	 * la propriété ex: pour une propriété de type String nommée "name", le bean
-	 * doit implémenter: String getName(); void setName( String a_Name);
+	 * Nom de la propriete du bean associe permettant de recuperer/definir la
+	 * valeur correspondante. Le bean, doit implementer les methodes d'acces a
+	 * la propriete ex: pour une propriete de type String nommee "name", le bean
+	 * doit implementer: String getName(); void setName( String a_Name);
 	 */
 	protected String _property;
 
 	/**
-	 * Booléen précisant si la valeur de la propriété est issue du fichier
-	 * d'entrée (false) ou fournie par l'utilisateur (true). La valeur saisie
-	 * par l'utilisateur est stoquée dans la propriété du bean associé
+	 * Booleen precisant si la valeur de la propriete est issue du fichier
+	 * d'entree (false) ou fournie par l'utilisateur (true). La valeur saisie
+	 * par l'utilisateur est stoquee dans la propriete du bean associe
 	 */
 	protected boolean _userProvided;
 
 	protected Object _source;
 
 	/**
-	 * Représente le fragment du fichier d'entrée où l'information peut être
-	 * récupérée
+	 * Represente le fragment du fichier d'entree oe l'information peut etre
+	 * recuperee
 	 */
 	protected HeaderFragment _fragment;
 	
 	/**
-	 * Représente le fragment du fichier d'entrée où le flag qualité peut être
-	 * récupéré
+	 * Represente le fragment du fichier d'entree oe le flag qualite peut etre
+	 * recupere
 	 */
 	protected FlagFragment _flag;
 

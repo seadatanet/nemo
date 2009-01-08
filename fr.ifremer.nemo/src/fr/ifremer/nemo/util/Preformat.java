@@ -23,22 +23,22 @@ public class Preformat {
 	// liste des fichiers
 	private static String[] _listeFichiers;
 	
-	// liste des r�pertoires
+	// liste des repertoires
 	private static String[] _listeRepertoires;
 	
-	// fichier en entr�e
+	// fichier en entree
 	private static String _ficEntree;
 	
-	// r�pertoire en entr�e
+	// repertoire en entree
 	private static String _repEntree;
 	
-	// r�pertoire en sortie
+	// repertoire en sortie
 	private static File _repSortie;
 	
-	// Nombre de lignes d'en-t�te de fichier
+	// Nombre de lignes d'en-tete de fichier
 	private static int _enTeteFichier;
 	
-	// Nombre de lignes d'en-t�te de station
+	// Nombre de lignes d'en-tete de station
 	private static int _enTeteStation;
 	
 	// Indicateur de fin de station
@@ -50,32 +50,32 @@ public class Preformat {
 	// Nombre de colonnes
 	private static int _nbColonne;
 	
-	// S�parateur
+	// Separateur
 	private static char _separateur;
 	
-	// Partie Enti�re maximale
+	// Partie Entiere maximale
 	private static int[] _maxEntier;
 		
-	// Nombre de d�cimales max
+	// Nombre de decimales max
 	private static int[] _maxDecimale;
 	
 	// Nombre d'entiers d'une colonne
 	private static int[] _nbEntier;
 	
-	// Nombre de d�cimales d'une colonne
+	// Nombre de decimales d'une colonne
 	private static int[] _nbDecimale;
 	
 	// Contenu des colonnes
 	private static String[] _colonne;
 	
-	// Pr�formatage r�ussi
+	// Preformatage reussi
 	private static boolean _preformatOK;
 	
 
 	public static String messagePreformat;
 	
 	//////////////
-	// M�thodes //
+	// Methodes //
 	//////////////
 	
 
@@ -137,7 +137,7 @@ public class Preformat {
 		Double pourcentEtape2 = 0d;
 		int nbFic = 0;
 		
-		Utils.messageOK("Pr�formatage en cours");
+		Utils.messageOK("Preformatage en cours");
 				
 		_nbColonne = 1;	
 		_preformatOK = false;
@@ -184,7 +184,7 @@ public class Preformat {
 //		Utils.messageErreur("");
 		
 		/////////////////////////////////////////
-		// R�cup�ration du nombres de colonnes //
+		// Recuperation du nombres de colonnes //
 		/////////////////////////////////////////
 		if (ViewFile.radioFichier.getSelection()) {
 			nombreColonnes(_ficEntree);
@@ -197,11 +197,11 @@ public class Preformat {
 				
 				for (String fichier : _listeFichiers) {
 					nombreColonnes(fichier);
-					// on se contente de r�cup�rer le nombre de colonnes du 1er fichier
+					// on se contente de recuperer le nombre de colonnes du 1er fichier
 					break;
 				}
 				
-				// on se contente du 1er r�pertoire
+				// on se contente du 1er repertoire
 				break;
 			}
 		} else {
@@ -210,7 +210,7 @@ public class Preformat {
 			
 			for (String fichier : _listeFichiers) {
 				nombreColonnes(fichier);
-				// on se contente de r�cup�rer le nombre de colonnes du 1er fichier
+				// on se contente de recuperer le nombre de colonnes du 1er fichier
 				break;
 			}
 		}
@@ -222,7 +222,7 @@ public class Preformat {
 		_colonne = new String[_nbColonne];
 		
 		///////////////////////////////////////////////////
-		// R�cup�ration des entiers et d�cimales maximum //
+		// Recuperation des entiers et decimales maximum //
 		///////////////////////////////////////////////////
 		if (ViewFile.radioFichier.getSelection()) {
 			getMax(_ficEntree);
@@ -252,11 +252,11 @@ public class Preformat {
 		pourcentEtape1 = 100d;
 		
 //		for (i = 0 ; i < _nbColonne ; i++) {
-//		//	System.out.println("Colonne " + (i+1) + '\t' + ":" + " entier : " + _maxEntier[i] + " - d�cimales : " + _maxDecimale[i]);
+//		//	System.out.println("Colonne " + (i+1) + '\t' + ":" + " entier : " + _maxEntier[i] + " - decimales : " + _maxDecimale[i]);
 //		}
 		
 		///////////////////////////////////////
-		// Ecriture des fichiers pr�format�s //
+		// Ecriture des fichiers preformates //
 		///////////////////////////////////////
 		if (ViewFile.radioFichier.getSelection()) {
 			ecritureFichier(_ficEntree, _repEntree);
@@ -272,7 +272,7 @@ public class Preformat {
 				_repEntree = ViewFile.nomRepertoire+"\\"+repertoire;
 				_listeFichiers = new File(_repEntree).list();
 				
-				// Cr�ation du r�pertoire pour les fichiers pr�format�s
+				// Creation du repertoire pour les fichiers preformates
 				File repPreformat = new File(_repSortie.getAbsolutePath()+"\\PF_"+_repEntree.substring(_repEntree.lastIndexOf('\\')+1));
 				if (!repPreformat.exists()) {
 					repPreformat.mkdirs();
@@ -284,9 +284,9 @@ public class Preformat {
 				}
 			}
 		} else {
-			// Cr�ation du r�pertoire pour les fichiers pr�format�s
-			// au m�me niveau que le r�pertoire d'entr�e
-			// en recopiant le nom avec le pr�fixe "PF_"
+			// Creation du repertoire pour les fichiers preformates
+			// au meme niveau que le repertoire d'entree
+			// en recopiant le nom avec le prefixe "PF_"
 			_repSortie = new File(ViewFile.nomRepertoire.substring(0,ViewFile.nomRepertoire.lastIndexOf('\\'))
 					+"\\PF_"+ViewFile.nomRepertoire.substring(ViewFile.nomRepertoire.lastIndexOf('\\')+1));
 			if (!_repSortie.exists()) {
@@ -311,7 +311,7 @@ public class Preformat {
 		refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
 		
 		/////////////////////////////////////
-		// Affichage du fichier pr�format� //
+		// Affichage du fichier preformate //
 		/////////////////////////////////////
 		if (ViewFile.radioFichier.getSelection()) {
 			ViewFile.nomFichier = _repEntree + "\\PF_" + _ficEntree;
@@ -339,12 +339,12 @@ public class Preformat {
 		setPreformat(true);
 
 		// affichage etape0 dans formulaire
-		// d'�dition de
-		// param�tres
+		// d'edition de
+		// parametres
 //		Utils.razGlobal();
 // 		EditDesc.affichageEdition();
 
-//		// remplissage de l'IHM par le mod�le charg� ?
+//		// remplissage de l'IHM par le modele charge ?
 //		if (DataModel.ouverture) {
 //			DataModel.fillDesc();
 //		}
@@ -355,18 +355,18 @@ public class Preformat {
 		
 		int[] indexSeparateur = new int[_nbColonne+1];
 				
-		// Index des s�parateurs
+		// Index des separateurs
 		indexSeparateur[0] = -1;
 		for (i = 1 ; i < _nbColonne+1 ; i++) {
 			indexSeparateur[i] = ligneLue.indexOf(_separateur, indexSeparateur[i-1] + 1);
 			
-			// dernier s�parateur = fin de ligne
+			// dernier separateur = fin de ligne
 			if (indexSeparateur[i] < 0) {
 				indexSeparateur[i] = ligneLue.length();
 			}
 		}
 	
-		// D�coupage des colonnes
+		// Decoupage des colonnes
 		for (i = 0 ; i < _nbColonne ; i++) {
 			_colonne[i] = ligneLue.substring(indexSeparateur[i] + 1, indexSeparateur[i+1]);
 			
@@ -402,7 +402,7 @@ public class Preformat {
 			lecteurAvecBuffer = new BufferedReader(new FileReader(
 					_repEntree + "\\" + fichier));
 			
-			// Lecture des lignes d'en-t�te
+			// Lecture des lignes d'en-tete
 			while ((ligneLue = lecteurAvecBuffer.readLine()) != null) {
 				numLigne++;
 				if (numLigne == _enTeteFichier + _enTeteStation) {
@@ -410,7 +410,7 @@ public class Preformat {
 				}
 			}
 			
-			// Lecture de la 1e ligne de donn�es
+			// Lecture de la 1e ligne de donnees
 			if ((ligneLue = lecteurAvecBuffer.readLine()) != null) {
 				if (ligneLue.indexOf(_separateur) < 0) {
 					_nbColonne = 0;
@@ -511,14 +511,14 @@ public class Preformat {
 			while ((ligneLue = lecteurAvecBuffer.readLine()) != null) {
 				numLigne++;
 				if (numLigne <= _enTeteFichier + _enTeteStation) {
-					// Traitement de l'en-t�te
+					// Traitement de l'en-tete
 
 					if (ligneLue.startsWith("Latitude")) {
-						// V�rification du format de latitude
+						// Verification du format de latitude
 						fichPreformat.println(ligneLue);
 					} else {
 						if (ligneLue.startsWith("Longitude")) {
-							// V�rification du format de longitude
+							// Verification du format de longitude
 							fichPreformat.println(ligneLue);
 						} else {
 							// sinon on recopie la ligne
@@ -527,13 +527,13 @@ public class Preformat {
 					}
 
 				} else {
-					// Traitement des donn�es
+					// Traitement des donnees
 
 					analyseLigne(ligneLue);
 
 					for (i = 0; i < _nbColonne; i++) {
 						
-						// Ajout des z�ros apr�s
+						// Ajout des zeros apres
 						if (_maxDecimale[i] > 0) {
 							if (_colonne[i].length() > 0){
 								if (_colonne[i].lastIndexOf(".") < 0) {
@@ -544,7 +544,7 @@ public class Preformat {
 									_colonne[i] += "0";
 								}
 							}else{
-								// on ajoute des espaces pour �viter le d�calage
+								// on ajoute des espaces pour eviter le decalage
 								for (j = 0; j < _maxDecimale[i] +1; j++) {
 									_colonne[i] += " ";
 								}

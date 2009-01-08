@@ -18,7 +18,7 @@ import fr.ifremer.nemo.ws.WSParameter;
 /**
  * Class ParameterModel
  * 
- * Classe permettant de modéliser une paramètre mesuré. Le paramètre peut être
+ * Classe permettant de modeliser une parametre mesure. Le parametre peut etre
  * convertit en utilisant la formule de conversion fournie par l'attribut
  * conversionFormula
  * 
@@ -27,31 +27,31 @@ import fr.ifremer.nemo.ws.WSParameter;
 public class ParameterModel implements Cloneable, SAXConsumer {
 
 	/**
-	 * Expression mathématique permettant de convertir la valeur du paramètre.
-	 * La variable d'entrée est nommée "x" dans l'expression.Ex: 3*x+2. Les
+	 * Expression mathematique permettant de convertir la valeur du parametre.
+	 * La variable d'entree est nommee "x" dans l'expression.Ex: 3*x+2. Les
 	 * constantes "pi" et "e" sont reconnues ainsi que l'ensemble des fonctions
-	 * mathématiques de base (cos, sin, log, etc...)
+	 * mathematiques de base (cos, sin, log, etc...)
 	 */
 	protected String _conversionFormula;
 
 	public String _inputDefault;
 
 	/**
-	 * Représente le fragment de ligne du fichier d'entrée où la valeur du
-	 * paramètre peut être lue
+	 * Represente le fragment de ligne du fichier d'entree oe la valeur du
+	 * parametre peut etre lue
 	 */
 	protected LineFragment _fragment;
 
 	/**
-	 * Représente le fragment de ligne du fichier d'entrée où la valeur du flag
-	 * peut être lue
+	 * Represente le fragment de ligne du fichier d'entree oe la valeur du flag
+	 * peut etre lue
 	 */
 	protected LineFragment _flag;
 
 	protected org.nfunk.jep.JEP _jepParser;
 
 	/**
-	 * Représente le paramètre modélisé par ce ParameterModel
+	 * Represente le parametre modelise par ce ParameterModel
 	 */
 	protected Parameter _model;
 

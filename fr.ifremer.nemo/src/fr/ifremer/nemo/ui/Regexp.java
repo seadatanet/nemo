@@ -32,9 +32,9 @@ public class Regexp {
 
 	public static Boolean depassementHeaderStation(int ligne, String zone,
 			boolean metaInData) {
-		// verifie que la m�tadonn�e inject�e ne se situe pas au del� de
+		// verifie que la metadonnee injectee ne se situe pas au dele de
 		// l'entete station+fichier
-		// retourne true quand ca d�passe
+		// retourne true quand ca depasse
 
 		Boolean depasse = false;
 		int enteteFichier;
@@ -90,7 +90,7 @@ public class Regexp {
 		// log = "\n===[Check section : " + nomSection + "]===\n";
 		log = "\nSection : " + nomSection + "\n"; //$NON-NLS-1$
 
-		// format des diff�rents champs
+		// format des differents champs
 		// ligne
 		if (blnCheckLigne) {
 			if (Pattern.matches("^[0-9][0-9]*$", ligne)) { //$NON-NLS-1$
@@ -111,7 +111,7 @@ public class Regexp {
 			// System.out.println("debut de la section " + nomSection + " ==>
 			// ok");
 			ok = ok && true;
-			// log = log + "Valeur de d�but ok\n";
+			// log = log + "Valeur de debut ok\n";
 		} else {
 			ok = ok && false;
 			log = log + "==>" + Messages.getString("Regexp.10"); //$NON-NLS-1$

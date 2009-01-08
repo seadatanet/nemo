@@ -175,14 +175,14 @@ public class ViewLog extends ViewPart {
 							+ "*Les valeurs sont complétées à gauche par un 0 si la valeur à afficher est inférieure à 10 (ex : année 2000 -> 00)\n"
 							+ "*L'heure peut être absente\n"
 							+ "*L'ordre entre la date et l'heure est libre (date heure, heure date)\n"
-							+ "*Des caractères suppl'mentaires quelconques peuvent être insérés entre les différentes clés. Ceux-ci seront attendus tel quel en entr�e et rendus tel quel en sortie\n"
+							+ "*Des caractères suppl'mentaires quelconques peuvent être insérés entre les différentes clés. Ceux-ci seront attendus tel quel en entree et rendus tel quel en sortie\n"
 							+ "\nExemples:\n"
 							+ "YYYY/MM/DD hh:mm:ss ==> 1986/07/10 09:23:10\n"
 							+ "hh:mm ==> 09:23\n"
 							+ "YY-MM-DD ==> 86-07-10\n"
 							+ "\n\n==FORMATS LATITUDE / LONGITUDE==\n"
 							+ "N : exprime un hémisphère. Sa valeur devra être égale à N ou S dans le cas des latitudes, et W ou E dans le cas des longitudes\n"
-							+ "DDD ou DD : Nombre de degrés. Le nombre de D doit �tre 3 dans le cas des longitudes et 2 dans le cas des latitudes\n"
+							+ "DDD ou DD : Nombre de degrés. Le nombre de D doit etre 3 dans le cas des longitudes et 2 dans le cas des latitudes\n"
 							+ "DDD.ddd ou DD.ddd : Degrés en valeur décimales. Le nombre de D doit être 3 dans le cas des longitudes et 2 dans le cas des latitudes. Le nombre de caractères 'd' exprime la précision attendue\n"
 							+ "MM : Nombre entier de minutes\n"
 							+ "MM.mm : Minutes en valeur décimale. Le nombre de caractères 'm' exprime la précision attendue\n"
@@ -245,11 +245,11 @@ public class ViewLog extends ViewPart {
 		if (langue.matches("fr_FR")) {
 			ViewLog.styledTextLogHelp
 					.setText("==DESCRIPTION DONNEES==\n"
-							+ "M�me principe que pour les types de donn�es : on ajoute ici les param�tres mesur�s.\n"
-							+ "\nLa formule de conversion doit �tre du style x*1000+3 ; x �tant la valeur lue dans le fichier\n\n"
-							+ "Dans le cas d'une s�rie temporelle :\n"
-							+ "*les param�tres DATE, YEAR, MONTH, DAYX, TIME sont rajout�s automatiquement � la g�n�ration donc attention � ne pas les ajouter manuellement.\n"
-							+ "*on peut choisir si le calcul des dates/heures est bas� sur les dates/heures entr�es � l'�tape Station et la fr�quence d'�chantillonnage ou si les informations sont pr�sentes au sein de la ligne des donn�es (auquel cas pr�ciser le format).\n"
+							+ "Meme principe que pour les types de donnees : on ajoute ici les parametres mesures.\n"
+							+ "\nLa formule de conversion doit etre du style x*1000+3 ; x etant la valeur lue dans le fichier\n\n"
+							+ "Dans le cas d'une serie temporelle :\n"
+							+ "*les parametres DATE, YEAR, MONTH, DAYX, TIME sont rajoutes automatiquement e la generation donc attention e ne pas les ajouter manuellement.\n"
+							+ "*on peut choisir si le calcul des dates/heures est base sur les dates/heures entrees e l'etape Station et la frequence d'echantillonnage ou si les informations sont presentes au sein de la ligne des donnees (auquel cas preciser le format).\n"
 							+ "\n");
 		} else {
 			// aide anglaise
@@ -269,10 +269,10 @@ public class ViewLog extends ViewPart {
 		if (langue.matches("fr_FR")) {
 			ViewLog.styledTextLogHelp
 					.setText("==#CONVERSION==\n"
-							+ "Choisir le format de sortie. On peut g�n�rer les deux formats � la suite sans devoir revalider toutes les �tapes."
-							+ "\n\nLa conversion est divis�e en deux �tapes successives :\n"
-							+ "1-conversion du fichier en m�moire : on peut annuler le processus pendant cette �tape !\n"
-							+ "2-�criture du fichier sur le disque : on ne peut plus annuler le processus une fois engag� !");
+							+ "Choisir le format de sortie. On peut generer les deux formats e la suite sans devoir revalider toutes les etapes."
+							+ "\n\nLa conversion est divisee en deux etapes successives :\n"
+							+ "1-conversion du fichier en memoire : on peut annuler le processus pendant cette etape !\n"
+							+ "2-ecriture du fichier sur le disque : on ne peut plus annuler le processus une fois engage !");
 
 		} else {
 			// aide anglaise

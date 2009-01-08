@@ -19,12 +19,12 @@ import fr.ifremer.nemo.util.Messages;
 public class DrawingBack {
 
 	/*
-	 * ATTENTION : On est obligé de conserver les sections en public static
-	 * depuis ViewEdit à cause du refresh sur le ViewEdit.formEdit : le principe
+	 * ATTENTION : On est oblige de conserver les sections en public static
+	 * depuis ViewEdit e cause du refresh sur le ViewEdit.formEdit : le principe
 	 * est le suivant : on fait un dispose() sur chaque section du formulaire
-	 * afin de le récupérer vide. Ensuite on recrée les sections du formulaire
-	 * correspondant à la nouvelle étape. Donc on a une fonction clear() pour
-	 * chaque étape afin de préparer le formulaire pour la suivante. *
+	 * afin de le recuperer vide. Ensuite on recree les sections du formulaire
+	 * correspondant e la nouvelle etape. Donc on a une fonction clear() pour
+	 * chaque etape afin de preparer le formulaire pour la suivante. *
 	 */
 
 	private static Group grou;
@@ -62,7 +62,7 @@ public class DrawingBack {
 		// faire groupe et radios
 
 		// bouton radio "saisie manuelle"
-		// c'est lui qui est passé en ppar
+		// c'est lui qui est passe en ppar
 
 		radio.setParent(sectionClient);
 		radio.setText(Messages.getString("Drawing.4"));
@@ -111,8 +111,8 @@ public class DrawingBack {
 
 		section.setClient(sectionClient);
 
-		// une fois les éléments initialisés, on les passe en static pour y
-		// accéder à
+		// une fois les elements initialises, on les passe en static pour y
+		// acceder e
 		// partir des listeners
 		lign = ligne;
 		debu = debut;
@@ -307,7 +307,7 @@ public class DrawingBack {
 		// faire groupe et radios
 
 		// bouton radio "saisie manuelle"
-		// c'est lui qui est passé en ppar
+		// c'est lui qui est passe en ppar
 
 		radio.setParent(sectionClient);
 		radio.setText(Messages.getString("Drawing.5"));
@@ -361,8 +361,8 @@ public class DrawingBack {
 
 		section.setClient(sectionClient);
 
-		// une fois les éléments initialisés, on les passe en static pour y
-		// accéder à
+		// une fois les elements initialises, on les passe en static pour y
+		// acceder e
 		// partir des listeners
 
 		// listeners
@@ -449,7 +449,7 @@ public class DrawingBack {
 		Label label1 = new Label(section, SWT.NULL);
 		label1.setText(description);
 
-		// zone d'édition
+		// zone d'edition
 		manuel = new Text(sectionClient, SWT.BORDER);
 		manuel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
@@ -493,7 +493,7 @@ public class DrawingBack {
 		Label label1 = new Label(section, SWT.NULL);
 		label1.setText(description);
 
-		// zone d'édition
+		// zone d'edition
 		manuel.setParent(sectionClient);
 
 		// = new Text(sectionClient, SWT.BORDER);
@@ -558,7 +558,7 @@ public class DrawingBack {
 		Label label1 = new Label(section, SWT.NULL);
 		label1.setText(description);
 
-		// zone d'édition
+		// zone d'edition
 		manuel.setParent(sectionClient);
 
 		manuel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));

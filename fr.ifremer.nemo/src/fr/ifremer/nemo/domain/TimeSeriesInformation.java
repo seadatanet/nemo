@@ -12,7 +12,7 @@ import com.ago.xml.XMLOutputWriter;
 /**
  * Class TimeSeriesInformation
  * 
- * Classe permettant la description des informations spécifiques aux séries
+ * Classe permettant la description des informations specifiques aux series
  * temporelles.
  * 
  * @author Gerard BUNEL

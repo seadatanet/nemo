@@ -394,10 +394,10 @@ public class OptionsAction extends Action implements ISelectionListener,
 		// groupDossier.setBounds(new Rectangle(176, 10, 242, 150));
 
 		/*
-		 * labelMod�le = new Label(groupDossier, SWT.NONE); //
-		 * labelMod�le.setBounds(new Rectangle(13, 15, 62, 13));
-		 * labelMod�le.setText(Messages.getString("OptionsAction.18"));
-		 * //$NON-NLS-1$ labelMod�le.pack();
+		 * labelModele = new Label(groupDossier, SWT.NONE); //
+		 * labelModele.setBounds(new Rectangle(13, 15, 62, 13));
+		 * labelModele.setText(Messages.getString("OptionsAction.18"));
+		 * //$NON-NLS-1$ labelModele.pack();
 		 */
 
 		groupDossier1 = new Group(groupDossier, SWT.NONE);
@@ -407,11 +407,11 @@ public class OptionsAction extends Action implements ISelectionListener,
 		groupDossier1.pack();
 
 		textDossierModele = new Text(groupDossier1, SWT.BORDER);
-		// textDossierMod�le.setBounds(new Rectangle(5, 31, 229, 19));
+		// textDossierModele.setBounds(new Rectangle(5, 31, 229, 19));
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(
 				textDossierModele);
 		buttonParcourirModele = new Button(groupDossier1, SWT.NONE);
-		// buttonParcourirMod�le.setBounds(new Rectangle(170, 53, 64, 23)); //
+		// buttonParcourirModele.setBounds(new Rectangle(170, 53, 64, 23)); //
 		// 64
 		buttonParcourirModele.setText(Messages.getString("OptionsAction.6")); //$NON-NLS-1$
 		buttonParcourirModele.pack();
@@ -458,7 +458,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 						} else {
 
-							// System.out.println("pas de dossier s�lectionn�");
+							// System.out.println("pas de dossier selectionne");
 							// //$NON-NLS-1$
 							ViewLog.styledTextLogErreurs.setText(Messages
 									.getString("OptionsAction.9")); //$NON-NLS-1$
@@ -487,7 +487,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 						} else {
 
-							// System.out.println("pas de dossier s�lectionn�");
+							// System.out.println("pas de dossier selectionne");
 							// //$NON-NLS-1$
 							ViewLog.styledTextLogErreurs.setText(Messages
 									.getString("OptionsAction.9")); //$NON-NLS-1$
@@ -656,10 +656,10 @@ public class OptionsAction extends Action implements ISelectionListener,
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(grpFlag);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(grpFlag);
 
-		// Cr�ation du tableau des tables de correspondaces
+		// Creation du tableau des tables de correspondaces
 		createTableFlagTable();
 
-		// Cr�ation du tableau des correspondaces
+		// Creation du tableau des correspondaces
 		createTableFlag();
 	}
 
@@ -759,7 +759,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		itemDefault.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				setDefaultCode(tabFlagTable.getSelection()[0].getText());
-				// Mise en gras du flagtable par d�faut
+				// Mise en gras du flagtable par defaut
 
 				Font normal = new Font(Application.display, "", 8, SWT.NORMAL);
 				Font bold = new Font(Application.display, "", 8, SWT.BOLD);
@@ -1006,7 +1006,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 			item.setText(0, flagTables.get(i).getCode());
 			item.setText(1, flagTables.get(i).getLibelle());
 
-			// Mise en gras du flagtable par d�faut
+			// Mise en gras du flagtable par defaut
 			if (flagTables.get(i).getCode().equals(
 					Utils.configuration.getDefaultCode())) {
 				setDefaultCode(flagTables.get(i).getCode());

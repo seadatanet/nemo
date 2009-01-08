@@ -32,7 +32,7 @@ public class FlagMenuItem {
 
 		_item.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
-				// Teste si la metadonnée est déjà présente dans le tableau
+				// Teste si la metadonnee est deje presente dans le tableau
 				int size = _table.getItemCount();
 				for (int i = 0; i < size; i++) {
 					if (_table.getItems()[i].getText(0).equals(_code)) {
@@ -40,7 +40,7 @@ public class FlagMenuItem {
 					}
 				}
 				
-				// Ajout de la metadonnée dans le tableau
+				// Ajout de la metadonnee dans le tableau
 				TableItem itemTemp = new TableItem(_table, SWT.NONE);
 				itemTemp.setText(0, _code);
 				itemTemp.setText(1, _item.getText());

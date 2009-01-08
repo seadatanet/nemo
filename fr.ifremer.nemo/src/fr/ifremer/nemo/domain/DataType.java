@@ -12,7 +12,7 @@ import com.ago.xml.XMLOutputWriter;
 /**
  * Class DataType
  * 
- * Classe permettant la description d'un type de données
+ * Classe permettant la description d'un type de donnees
  * 
  * @author Gerard BUNEL
  */
@@ -31,7 +31,7 @@ public class DataType implements Cloneable, SAXConsumer {
 	protected boolean _qc;
 
 	/**
-	 * Indique si le type de données correspond à un capteur
+	 * Indique si le type de donnees correspond e un capteur
 	 */
 	protected boolean _sensor;
 

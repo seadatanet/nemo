@@ -138,7 +138,7 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 					characters();
 					return (time() || nothing());
 				} else {
-					throw new ParseException("Format de l'année manquant", mark);
+					throw new ParseException("Format de l'annee manquant", mark);
 				}
 			} else if (year() || year19()) {
 				characters();
@@ -159,7 +159,7 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 					characters();
 					return (time() || nothing());
 				} else {
-					throw new ParseException("Format de l'année manquant", mark);
+					throw new ParseException("Format de l'annee manquant", mark);
 				}
 			} else if (year() || year19()) {
 				characters();

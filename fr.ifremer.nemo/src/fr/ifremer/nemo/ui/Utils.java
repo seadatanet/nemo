@@ -67,7 +67,7 @@ public class Utils {
 		lignesBrutes = new ArrayList<String>();
 		stringBuffer = new StringBuffer();
 
-		// lecture et concat�nation
+		// lecture et concatenation
 		BufferedReader entree = new BufferedReader(new FileReader(fich));
 		do {
 			// System.out.println(nbreLignes);
@@ -86,7 +86,7 @@ public class Utils {
 		} while (ligne != null);
 		entree.close();
 
-		// calcul des tailles cumul�es
+		// calcul des tailles cumulees
 		taillesCumLignes = new int[nbreLignes];
 		indexMax = nbreLignes - 1;
 		cumul = 0;
@@ -109,14 +109,14 @@ public class Utils {
 		// ViewLog.styledTextLogErreurs.setText(Messages.getString("Utils.4"));
 		// //$NON-NLS-1$
 
-		// d�but d'infos du fichier
+		// debut d'infos du fichier
 
 		ViewLog.styledTextLogInfos
 				.setText(Messages.getString("Utils.5") + fich); //$NON-NLS-1$
 		ViewLog.styledTextLogInfos
 				.append(Messages.getString("Utils.6") + nbreLignes); //$NON-NLS-1$
 
-		// r�activation de l'option s�rie temporelle onglet DESC
+		// reactivation de l'option serie temporelle onglet DESC
 		// ViewFile.checkBoxTempo.setEnabled(true);
 		ViewFile.radProfilVertical.setEnabled(true);
 		ViewFile.radSerieTempo.setEnabled(true);
@@ -125,7 +125,7 @@ public class Utils {
 		// FAE 089
 		// ViewFile.checkBoxTempo.setSelection(false);
 
-		// RAZ global si r�ouverture fichier en cours de processus
+		// RAZ global si reouverture fichier en cours de processus
 
 		EditDesc.nomNemo();
 
@@ -134,7 +134,7 @@ public class Utils {
 
 			DataModel.ouverture = false;
 
-			// reset de l'�tape de conversion
+			// reset de l'etape de conversion
 			ViewFile.etape = 0;
 		}
 	}
@@ -156,9 +156,9 @@ public class Utils {
 
 	public static void insertTexte(String chaine) {
 
-		// affichage de la r�gle de num�ros 161 caract�res (calculer la taille
-		// max des lignes en entr�e puis seulement rajouter
-		// la r�gle concat�n�e au d�but du texteBrut
+		// affichage de la regle de numeros 161 caracteres (calculer la taille
+		// max des lignes en entree puis seulement rajouter
+		// la regle concatenee au debut du texteBrut
 
 		texteBrut = ""; //$NON-NLS-1$
 
@@ -168,7 +168,7 @@ public class Utils {
 			StyledText styledtext) {
 		int deb, fi, lign, i;
 
-		// on r�cup�re les coordonn�es de la s�lection
+		// on recupere les coordonnees de la selection
 
 		deb = styledtext.getSelection().x;
 		fi = styledtext.getSelection().y;
@@ -186,7 +186,7 @@ public class Utils {
 
 			lign = 1;
 			// calcul de la ligne en fonction de la valeur de x
-			// parcours du tableau des tailles de lignes cumul�es
+			// parcours du tableau des tailles de lignes cumulees
 
 			for (i = 0; i < lignesBrutes.size(); i++) {
 
@@ -256,7 +256,7 @@ public class Utils {
 	public static void injectData(StyledText styledtext, int debut, int fin) {
 		int deb, fi, lign, i, index;
 
-		// on r�cup�re les coordonn�es de la s�lection
+		// on recupere les coordonnees de la selection
 		deb = styledtext.getSelection().x;
 		fi = styledtext.getSelection().y;
 		index = ViewFile.tableData.getSelectionIndex();
@@ -271,7 +271,7 @@ public class Utils {
 
 			lign = 1;
 			// calcul de la ligne en fonction de la valeur de x
-			// parcours du tableau des tailles de lignes cumul�es
+			// parcours du tableau des tailles de lignes cumulees
 
 			for (i = 0; i < lignesBrutes.size(); i++) {
 
@@ -317,7 +317,7 @@ public class Utils {
 		if (index >= 0 && table.getItems() != null) {
 			int deb, fi, lign, i;
 
-			// on r�cup�re les coordonn�es de la s�lection
+			// on recupere les coordonnees de la selection
 			deb = styledtext.getSelection().x;
 			fi = styledtext.getSelection().y;
 
@@ -330,7 +330,7 @@ public class Utils {
 
 				lign = 1;
 				// calcul de la ligne en fonction de la valeur de x
-				// parcours du tableau des tailles de lignes cumul�es
+				// parcours du tableau des tailles de lignes cumulees
 
 				for (i = 0; i < lignesBrutes.size(); i++) {
 
@@ -368,7 +368,7 @@ public class Utils {
 						.setText(indexDebut, String.valueOf(deb));
 				table.getItems()[index].setText(indexFin, String.valueOf(fi));
 
-				// Test apr�s injection
+				// Test apres injection
 				testFlag(styledtext, flagTable, table, indexLigne, indexDebut,
 						indexFin, indexTest1, indexTest2);
 
@@ -394,7 +394,7 @@ public class Utils {
 
 				// styledtext.setSelection(deb - 1, fi);
 
-				// remplissage test entr�e dans interface
+				// remplissage test entree dans interface
 				table.getItems()[i].setText(indexTest1, styledtext.getText(
 						deb - 1, fi - 1));
 
@@ -423,7 +423,7 @@ public class Utils {
 		lignDepart = 1;
 		lignFin = 1;
 		// calcul de la ligne en fonction de la valeur de x
-		// parcours du tableau des tailles de lignes cumul�es
+		// parcours du tableau des tailles de lignes cumulees
 
 		if (cursor.getX() == cursor.getY()) {
 			Utils.messageErreur(Messages.getString("Utils.26"));
@@ -478,7 +478,7 @@ public class Utils {
 	public static void injectNbreLignes(Text nbrelignes, StyledText styledtext) {
 		int deb, fi, lignDepart, lignFin, i;
 
-		// on r�cup�re les coordonn�es de la s�lection
+		// on recupere les coordonnees de la selection
 		deb = styledtext.getSelection().x;
 		fi = styledtext.getSelection().y;
 
@@ -488,7 +488,7 @@ public class Utils {
 		lignDepart = 1;
 		lignFin = 1;
 		// calcul de la ligne en fonction de la valeur de x
-		// parcours du tableau des tailles de lignes cumul�es
+		// parcours du tableau des tailles de lignes cumulees
 
 		if (deb == fi) {
 			Utils.messageErreur(Messages.getString("Utils.26"));
@@ -544,7 +544,7 @@ public class Utils {
 	}
 
 	public static void calculPosxPosy(HeaderFragment frag, Cursor cursor) {
-		// reconstitue la position x et y du surlignement souris � partir du
+		// reconstitue la position x et y du surlignement souris e partir du
 		// fragment
 
 		int offsetDebut, offsetFin, ligneDebut, ligneFin;
@@ -561,7 +561,7 @@ public class Utils {
 
 	public static void calculOffsetDebOffsetFin(HeaderFragment frag,
 			Cursor cursor) {
-		// calcule debut et fin � partir du surlignement souris
+		// calcule debut et fin e partir du surlignement souris
 		int offsetDebut, offsetFin, ligneDebut, ligneFin;
 
 		ligneDebut = frag.getFirstLine();
@@ -593,7 +593,7 @@ public class Utils {
 			int headerLines) {
 		int fi, lignDepart, lignFin, i, nbrelignes, longueur;
 
-		// on r�cup�re les coordonn�es de la s�lection
+		// on recupere les coordonnees de la selection
 		fi = frag.getLastCharOffset();
 		longueur = frag.getLastCharOffset();
 		// System.out.println("deb clic = " + deb);
@@ -604,7 +604,7 @@ public class Utils {
 		// lignDepart = 1;
 		// lignFin = 1;
 		// calcul de la ligne en fonction de la valeur de x
-		// parcours du tableau des tailles de lignes cumul�es
+		// parcours du tableau des tailles de lignes cumulees
 
 		// // calcul ligne depart
 		// for (i = 0; i < lignesBrutes.size(); i++) {
@@ -662,13 +662,13 @@ public class Utils {
 			frag.setSingleLine(false);
 			frag.setLastLine(frag.getFirstLine() + nbrelignes - 1);
 
-			// calcul de l'offset r�el sur la derni�re ligne
+			// calcul de l'offset reel sur la derniere ligne
 			int cpt = fi;
 			for (int j = lignDepart - 1; j < lignFin - 1; j++) {
 				cpt = cpt - Utils.lignesBrutes.get(j).length();
 			}
 			// en sortie de boucle, cpt a la valeur de l'offset de fin sur la
-			// derni�re ligne du commentaire
+			// derniere ligne du commentaire
 			// System.out.println("offset en ligne fin = " + cpt);
 			// System.out.println("ligne fin = " + lignFin);
 			// System.out.println("ligne debut = " + lignDepart);
@@ -689,7 +689,7 @@ public class Utils {
 		// calcul nbre ligne/debut/fin en fonction de la zone de surlignement
 		// souris
 
-		// on r�cup�re les coordonn�es de la s�lection
+		// on recupere les coordonnees de la selection
 		deb = cursor.getX();
 		fi = cursor.getY();
 
@@ -702,7 +702,7 @@ public class Utils {
 		// lignFin = 1;
 
 		// calcul de la ligne en fonction de la valeur de x
-		// parcours du tableau des tailles de lignes cumul�es
+		// parcours du tableau des tailles de lignes cumulees
 
 		// calcul ligne depart
 		for (i = 0; i < lignesBrutes.size(); i++) {
@@ -760,13 +760,13 @@ public class Utils {
 	}
 
 	public static void validationEtape(int onglet) {
-		// messageErreur("Vous devez imp�rativement terminer la ou les �tapes
-		// pr�c�dentes avant de continuer." +"\n==>�tapes " + tmp + " � " +
+		// messageErreur("Vous devez imperativement terminer la ou les etapes
+		// precedentes avant de continuer." +"\n==>etapes " + tmp + " e " +
 		// onglet);
 
 		// check etape/onglet
 
-		// � partir de onglet 0
+		// e partir de onglet 0
 
 		if ((onglet == 1) && (ViewFile.affiche == 0)) {
 			ViewLog.aideSurvey();
@@ -845,7 +845,7 @@ public class Utils {
 		}
 
 		// *********************************************************************//
-		// � partir de onglet 1
+		// e partir de onglet 1
 
 		if ((onglet == 2) && (ViewFile.affiche == 1)) {
 			ViewLog.aideStation();
@@ -919,7 +919,7 @@ public class Utils {
 		}
 
 		// *********************************************************************//
-		// � partir de onglet 2
+		// e partir de onglet 2
 
 		if ((onglet == 3) && (ViewFile.affiche == 2)) {
 			ViewLog.aideData();
@@ -993,7 +993,7 @@ public class Utils {
 
 		// *********************************************************************//
 
-		// � partir de onglet 3
+		// e partir de onglet 3
 		if ((onglet == 0) && (ViewFile.affiche == 3)) {
 			ViewLog.aideDesc();
 			if (EditDesc.validee == 1) {
@@ -1455,11 +1455,11 @@ public class Utils {
 	}
 
 	public static void razGlobal() {
-		// efface tous les onglets qui ont �t� affich�s jusque l� en pr�paration
+		// efface tous les onglets qui ont ete affiches jusque le en preparation
 		// du chargement
-		// d'un nouveau mod�le
+		// d'un nouveau modele
 
-		// si au moins une des sections d'un onglet est cr��e alors on peut les
+		// si au moins une des sections d'un onglet est creee alors on peut les
 		// effacer toutes
 		if (EditDesc.sectionEnteteFichier != null) {
 			// //effacement boutons
@@ -1520,7 +1520,7 @@ public class Utils {
 				EditStation.listeSectionsStation.get(i).dispose();
 			}
 
-			// titre � vide
+			// titre e vide
 			ViewEdit.formEdition.setText(""); //$NON-NLS-1$
 
 			// refresh global
@@ -1541,7 +1541,7 @@ public class Utils {
 				EditData.listeSectionsData.get(i).dispose();
 			}
 
-			// titre � vide
+			// titre e vide
 			ViewEdit.formEdition.setText(""); //$NON-NLS-1$
 
 			// refresh global
