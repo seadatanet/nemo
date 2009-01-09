@@ -608,7 +608,10 @@ public class TableData {
 
 				// on formate puis on reaffiche la liste
 				try {
-					if (selection.matches(ViewFile.tableData.getItem(i)
+					// FIXME TNU mauvaise utilisation de la méthode "matches"
+					// if (selection.matches(ViewFile.tableData.getItem(i)
+					// .getText(7))) {
+					if (selection.equals(ViewFile.tableData.getItem(i)
 							.getText(7))) {
 						// entree par defaut, le test est la valeur de sortie
 						// par
@@ -654,20 +657,25 @@ public class TableData {
 								12))).trim();
 
 				types.get(i).setTestIn(selection);
-				
+
 				String flagSDN = "0";
-				ArrayList<Flag> flags = StationModel.getSingleton().getFlagTable().getFlags();
+				ArrayList<Flag> flags = StationModel.getSingleton()
+						.getFlagTable().getFlags();
 				int size = flags.size();
 				for (int j = 0; j < size; j++) {
-					if (flags.get(j).getLocal().equals(
-							types.get(i).getTestIn())) {
-						flagSDN = Utils.extraitCode(flags.get(j)
-								.getSdn());
+					if (flags.get(j).getLocal()
+							.equals(types.get(i).getTestIn())) {
+						flagSDN = Utils.extraitCode(flags.get(j).getSdn());
 						break;
 					}
 				}
-				
+
 				types.get(i).setTestOut(flagSDN);
+			} else {
+				// TODO à retester : si pas de position de flag, on vide les
+				// flags
+				types.get(i).setTestIn("");
+				types.get(i).setTestOut("");
 			}
 
 			// System.out.println("maj types data : ok");

@@ -83,7 +83,7 @@ public class EditData {
 		 */
 
 		ViewEdit.formEdition.getBody().setLayout(new GridLayout());
-		ViewEdit.formEdition.setText(Messages.getString("EditData.1")); //$NON-NLS-1$
+		ViewEdit.formEdition.setText(Messages.getString("EditData.8")); //$NON-NLS-1$
 
 		disposeElements();
 		

@@ -408,7 +408,7 @@ public class EditDesc {
 
 		// effacement titre formulaire
 		ViewEdit.formEdition.setText(Messages
-				.getString("EditDesc.descriptionFichier")); //$NON-NLS-1$
+				.getString("EditDesc.descriptiondeFichier")); //$NON-NLS-1$
 
 		// refresh global
 		ViewEdit.formEdition.reflow(true);

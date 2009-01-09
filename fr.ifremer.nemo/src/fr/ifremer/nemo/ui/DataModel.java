@@ -1724,7 +1724,7 @@ public class DataModel {
 
 	public static void fillStation() {
 
-		int ligne, debut, fin, real_ligne;
+		int ligne, debut, fin, real_ligne, ligneFin;
 		boolean var;
 
 		station_modele = stationModel_modele.getModel();
@@ -1921,6 +1921,13 @@ public class DataModel {
 
 			real_ligne = ligne
 					+ Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+			
+			// TODO FAE 0001226 : décaler le lastcharoffset pour qu'il prenne en compte le nombre de lignes
+			Cursor cursor = new Cursor();
+			cursor.setX(frag.getFirstCharOffset());
+			cursor.setY(frag.getFirstLine());
+			
+			Utils.calculOffsetDebOffsetFin(frag, cursor);
 
 			EditStation.textCommentaireLigne.setText("" + real_ligne);
 			EditStation.textCommentaireDebut.setText("" + debut);
