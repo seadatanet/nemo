@@ -48,10 +48,12 @@ $configuration.getSep()$param.code [$param.unit]$configuration.getSep()$configur
 ##
 #if ( !$swtProcess.getOdv() || !$swtProcess.getMonoStation() || ( $swtProcess.getMonoStation() && $swtProcess.getStation() == $station ))
 #set( $limit = $station.parametersAt(0).valuesSize() - 1 )
+#if ($stationModel.isTimeSeries())
 #if ($limit <= $limiteTypeBC )
 #set ( $typeBC = "B" )
 #else
 #set ( $typeBC = "C" )
+#end
 #end
 #set ( $range = [0 .. $limit] )
 #foreach( $i in  $range )
