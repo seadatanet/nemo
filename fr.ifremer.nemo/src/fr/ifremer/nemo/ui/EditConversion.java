@@ -17,6 +17,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
+import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
@@ -137,7 +138,8 @@ public class EditConversion extends Thread {
 
 								// test pour savoir si on est en campagne ou pas
 								if (ViewFile.isCollection()) {
-									if (ViewFile.checkCDI.getSelection()) {
+									if (Utils.configuration.getWriteCdi()) {
+                                        
 										CDIResumeWriter.getInstance().reset();
 										CDIResumeWriter.getInstance()
 												.choixFichierSortie();
@@ -146,7 +148,7 @@ public class EditConversion extends Thread {
 									choixDossierSortie();
 
 									// Ecriture du resume CDI
-									if (ViewFile.checkCDI.getSelection()
+									if (Utils.configuration.getWriteCdi()
 											&& !SurveyMedia.interrompu
 											&& !SWTProcess.interrompu) {
 										try {

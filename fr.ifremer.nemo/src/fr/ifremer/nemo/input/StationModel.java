@@ -140,9 +140,9 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	protected HorodatedParameterModel _timestampModel;
 
 	/**
-	 * Modèle pour les informations propres au CDI
+	 * Modèle pour les informations propres au CDI (déplacé dans la config
 	 */
-	protected Cdi _cdi;
+//	protected Cdi _cdi;
 
 	/**
 	 * Modèle pour les informations propres aux trajectoires
@@ -165,11 +165,15 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	protected int _taille;
 
 	/**
-	 * 
 	 * Type de fichier en entrée : profil vertical, serie temporelle ou
 	 * trajectoire
 	 */
 	protected String _inputType;
+	
+	/**
+	 * Séparateur des données en entrée
+	 */
+	protected String _separator;
 
 	/**
 	 * Index du parametre PRES
@@ -203,7 +207,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		_referenceProperty = null;
 		_timeSeriesModel = null;
 		_timestampModel = null;
-		_cdi = null;
+//		_cdi = null;
 		_trajectory = null;
 		_lastRef = null;
 		_headerPlus = null;
@@ -321,6 +325,10 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			Element2Field setter = new Element2Field(this, "setInputType");
 			return setter;
 		}
+		if (a_LocalName.equals("separator")) {
+			Element2Field setter = new Element2Field(this, "setSeparator");
+			return setter;
+		}
 		if (a_LocalName.equals("incrementRef")) {
 			Element2Field setter = new Element2Field(this, "setIncrementRef");
 			return setter;
@@ -349,12 +357,12 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			Element2Field setter = new Element2Field(this, "setMetaInData2");
 			return setter;
 		}
-		if (a_LocalName.equals("Cdi")) {
-			Cdi l = (Cdi) Cdi.fromElement(a_URI, a_LocalName, a_QName,
-					a_Attributes);
-			setCdi(l);
-			return (SAXConsumer) l;
-		}
+//		if (a_LocalName.equals("Cdi")) {
+//			Cdi l = (Cdi) Cdi.fromElement(a_URI, a_LocalName, a_QName,
+//					a_Attributes);
+//			setCdi(l);
+//			return (SAXConsumer) l;
+//		}
 		if (a_LocalName.equals("Station")) {
 			Station l = (Station) Station.fromElement(a_URI, a_LocalName,
 					a_QName, a_Attributes);
@@ -442,6 +450,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		a_Writer.putAttribute("endOnEmptyLine", isEndOnEmptyLine());
 		a_Writer.putAttribute("endOnPattern", isEndOnPattern());
 		a_Writer.putTag("inputType", getInputType());
+		a_Writer.putTag("separator", getSeparator());
 		a_Writer.putTag("incrementRef", isIncrementRef());
 		a_Writer.putTag("incrementNumber", getIncrementNumber());
 		a_Writer.putTag("endDataPattern", getEndDataPattern());
@@ -449,17 +458,18 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		a_Writer.putTag("endData", getEndData());
 		a_Writer.putTag("metaInData", isMetaInData());
 		a_Writer.putTag("metaInData2", isMetaInData2());
-		if (ViewFile.checkCDI.getSelection()) {
-			if (getCdi() != null) {
-				getCdi().writeXMLOn(a_Writer);
-			} else {
-				Cdi cdi = new Cdi();
-				cdi.setTypePlateForme(ViewFile.comboTypePlateForme.getText());
-				cdi.setAccesDonnees(ViewFile.comboAccesDonnees.getText());
-				setCdi(cdi);
-				getCdi().writeXMLOn(a_Writer);
-			}
-		}
+        // CDI déplacé dans la config
+//		if (ViewFile.checkCDI.getSelection()) {
+//			if (getCdi() != null) {
+//				getCdi().writeXMLOn(a_Writer);
+//			} else {
+//				Cdi cdi = new Cdi();
+//				cdi.setTypePlateForme(ViewFile.comboTypePlateForme.getText());
+//				cdi.setAccesDonnees(ViewFile.comboAccesDonnees.getText());
+//				setCdi(cdi);
+//				getCdi().writeXMLOn(a_Writer);
+//			}
+//		}
 		if (getModel() != null) {
 			getModel().writeXMLOn(a_Writer);
 		}
@@ -574,7 +584,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 */
 	public void release() {
 		releaseModel();
-		releaseCdi();
+//		releaseCdi();
 		releaseParameterModels();
 		releaseProperties();
 		releaseReferenceProperty();
@@ -929,33 +939,33 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		_model = x;
 	}
 
-	/**
-	 * Remove any link for role CDI
-	 */
-	public void releaseCdi() {
-		setCdi(null);
-	}
+//	/**
+//	 * Remove any link for role CDI
+//	 */
+//	public void releaseCdi() {
+//		setCdi(null);
+//	}
 
-	/**
-	 * returns the linked object for role <% aRole name%>
-	 * 
-	 * @return the object linked
-	 */
-	public Cdi getCdi() {
-		return _cdi;
-	}
-
-	/**
-	 * Create a new link with x for role model
-	 * 
-	 * @param x
-	 *            the object to link with
-	 */
-	public void setCdi(Cdi x) {
-		if (_cdi == x)
-			return;
-		_cdi = x;
-	}
+//	/**
+//	 * returns the linked object for role <% aRole name%>
+//	 * 
+//	 * @return the object linked
+//	 */
+//	public Cdi getCdi() {
+//		return _cdi;
+//	}
+//
+//	/**
+//	 * Create a new link with x for role model
+//	 * 
+//	 * @param x
+//	 *            the object to link with
+//	 */
+//	public void setCdi(Cdi x) {
+//		if (_cdi == x)
+//			return;
+//		_cdi = x;
+//	}
 
 	/**
 	 * Remove any link for role Trajectory
@@ -2279,5 +2289,13 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			}
 			station.getMetaFlags().put(property, value);
 		}
+	}
+
+	public String getSeparator() {
+		return _separator;
+	}
+
+	public void setSeparator(String _separator) {
+		this._separator = _separator;
 	}
 } /* End of class: StationModel */

@@ -75,8 +75,8 @@ public class CDIResumeWriter {
 			String idEdmoRespDonnees = Utils.configuration.getIdEdmoRespDonnees();
 			String idEdmoRespCdi = Utils.configuration.getIdEdmoRespCdi();
 			String idEdmoDistDonnees= Utils.configuration.getIdEdmoDistDonnees();
-			String codeTypePlateForme = Utils.extraitCode(ViewFile.comboTypePlateForme.getText());
-			String codeAccesDonnees = Utils.extraitCode(ViewFile.comboAccesDonnees.getText());
+			String codeTypePlateForme = Utils.configuration.getTypePlateForme();
+			String codeAccesDonnees = Utils.configuration.getAccesDonnees();
 			String formatSortie = "";
 			if (ViewFile.radODV.getSelection()) {
 				formatSortie = Messages.getString("CDIResumeWriter.odv");

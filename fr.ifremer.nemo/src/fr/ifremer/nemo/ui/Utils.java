@@ -28,6 +28,7 @@ import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.input.HeaderFragment;
 import fr.ifremer.nemo.input.InputModel;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 public class Utils {
@@ -51,7 +52,7 @@ public class Utils {
 	public static ProgressBar progressbar;
 
 	public static InputModel inputModel;
-	
+
 	private static FlagTable _blank;
 
 	public static void insertTextFich(String fich, StyledText zone, boolean raz)
@@ -260,7 +261,7 @@ public class Utils {
 		deb = styledtext.getSelection().x;
 		fi = styledtext.getSelection().y;
 		index = ViewFile.tableData.getSelectionIndex();
-		
+
 		// System.out.println("deb clic = " + deb);
 		// System.out.println("fi clic = " + fi);
 
@@ -303,8 +304,10 @@ public class Utils {
 			// System.out.println("DEBUT = " + deb + " FIN= " + fi);
 
 			// remplissage debut et fin dans interface
-			ViewFile.tableData.getItems()[index].setText(debut, String.valueOf(deb));
-			ViewFile.tableData.getItems()[index].setText(fin, String.valueOf(fi));
+			ViewFile.tableData.getItems()[index].setText(debut, String
+					.valueOf(deb));
+			ViewFile.tableData.getItems()[index].setText(fin, String
+					.valueOf(fi));
 
 			Utils.messageErreur("");
 		}
@@ -587,6 +590,33 @@ public class Utils {
 		 * frag.setLastCharOffset(offsetFin); }
 		 */
 
+	}
+
+	public static void calculRealOffsetFin(HeaderFragment frag) {
+		int offsetFin;
+		int enteteFichier = Integer.parseInt(EditDesc.lignesEnteteFichier
+				.getText());
+
+		// calcul de l'offset de fin après rechargement du modèle
+		if (enteteFichier > 0) {
+			// prise en compte de l'entête de fichier
+			offsetFin = frag.getLastCharOffset()
+					+ taillesCumLignes[frag.getLastLine()
+							+ Integer.parseInt(EditDesc.lignesEnteteFichier
+									.getText())]
+					- taillesCumLignes[frag.getFirstLine()
+							+ Integer.parseInt(EditDesc.lignesEnteteFichier
+									.getText())];
+		} else {
+			// il n'y a pas d'entête de fichier
+			offsetFin = frag.getLastCharOffset()
+					+ taillesCumLignes[frag.getLastLine() - 1]
+					- taillesCumLignes[frag.getFirstLine() - 1];
+		}
+
+		if (offsetFin > 0) {
+			frag.setLastCharOffset(offsetFin);
+		}
 	}
 
 	public static void calculNbreLignesPuisRemplissageFrag(HeaderFragment frag,
@@ -1361,9 +1391,8 @@ public class Utils {
 
 		// LANGUE
 		if (OptionsAction.comboLangue.getItem(
-				OptionsAction.comboLangue.getSelectionIndex())
-				.matches(Messages.getString("OptionsAction.11")
-				)) { //$NON-NLS-1$
+				OptionsAction.comboLangue.getSelectionIndex()).matches(
+				Messages.getString("OptionsAction.11"))) { //$NON-NLS-1$
 			configuration.setLang("fr_FR"); //$NON-NLS-1$
 		} else {
 			configuration.setLang("en_GB"); //$NON-NLS-1$
@@ -1402,6 +1431,7 @@ public class Utils {
 		}
 
 		// CDI
+        configuration.setWriteCdi(OptionsAction.checkCDI.getSelection());
 		configuration.setIdEdmoRespCdi(Utils
 				.extraitCode(OptionsAction.comboIdEdmoRespCdi.getText()));
 		configuration.setCodeEdmoDonnees(Utils
@@ -1413,6 +1443,10 @@ public class Utils {
 		configuration.setCdiURL(OptionsAction.textUrlCdi.getText());
 		configuration.setCdiMethod(Utils
 				.extraitCode(OptionsAction.comboMethodeCdi.getText()));
+        configuration.setAccesDonnees(Utils
+            .extraitCode(OptionsAction.comboAccesDonnees.getText()));
+        configuration.setTypePlateForme(Utils
+            .extraitCode(OptionsAction.comboTypePlateForme.getText()));
 		configuration.setFichierMapping(OptionsAction.textFichierMapping
 				.getText());
 		configuration.setArboMapping(OptionsAction.textArboMapping.getText());
@@ -1619,7 +1653,7 @@ public class Utils {
 		int length = code.length();
 		int size = combo.getItemCount();
 
-		if (code.equals("")) {
+		if (code.equals(Global.EMPTY_STRING)) {
 			combo.select(-1);
 		} else {
 			combo.select(i);
@@ -1652,12 +1686,13 @@ public class Utils {
 			combo.select(i);
 
 			while (i < size) {
-//					&& !combo.getText().substring(0,
-//							Math.min(combo.getText().length(), length)).equals(
-//									libelle)) {
+				// && !combo.getText().substring(0,
+				// Math.min(combo.getText().length(), length)).equals(
+				// libelle)) {
 				int debutLibelle = combo.getText().length() - length;
 				if (debutLibelle >= 0) {
-					if (combo.getText().substring(debutLibelle).equalsIgnoreCase(libelle)) {
+					if (combo.getText().substring(debutLibelle)
+							.equalsIgnoreCase(libelle)) {
 						blnFound = true;
 						break;
 					}
@@ -1672,14 +1707,14 @@ public class Utils {
 			}
 		}
 	}
-	
+
 	public static void selectComboCodePlus(Combo combo, String code,
 			String valeur) {
 		int i = 0;
 		int length = code.length();
 		int size = combo.getItemCount();
 
-		if (code.equals("")) {
+		if (code.equals(Global.EMPTY_STRING)) {
 			combo.select(-1);
 		} else {
 			combo.select(i);
@@ -1796,19 +1831,20 @@ public class Utils {
 			return -1;
 		}
 	}
-	
+
 	public static FlagTable getBlankFlagTable() {
 		if (_blank == null) {
 			_blank = new FlagTable();
 			String[] flags = Flag.flagSDN();
 			for (int i = 0; i < flags.length; i++) {
-				_blank.getFlags().add(new Flag(Utils.extraitCode(flags[i]), flags[i]));
+				_blank.getFlags().add(
+						new Flag(Utils.extraitCode(flags[i]), flags[i]));
 			}
 		}
-		
+
 		return _blank;
 	}
-	
+
 	public static void forceMenu(Table table, Menu menu) {
 		final Menu men = menu;
 		table.addListener(SWT.MouseDown, new Listener() {

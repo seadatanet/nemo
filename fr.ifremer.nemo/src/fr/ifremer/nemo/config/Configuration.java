@@ -55,6 +55,8 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 
 	protected String _nemoWebServiceURL;
 	
+    protected boolean _writeCdi;
+    
 	protected String _idEdmoRespCdi;
 	
 	protected String _codeEdmoDonnees;
@@ -66,6 +68,10 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	protected String _cdiURL;
 	
 	protected String _cdiMethod;
+    
+    protected String _typePlateForme;
+
+    protected String _accesDonnees;
 	
 	protected String _vocabURL;
 	
@@ -95,12 +101,15 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		_nautilusWebServiceURL = "";
 		_nemoWebServiceURL = "";
 		_outputDirectory = "";
+        _writeCdi = false;
 		_idEdmoRespCdi = "";
 		_codeEdmoDonnees = "";
 		_idEdmoRespDonnees = "";
 		_idEdmoDistDonnees = "";
 		_cdiURL = "";
 		_cdiMethod = "";
+        _typePlateForme = "";
+        _accesDonnees = "";
 		_showRule = true;
 		_locale = null;
 		_vocabURL = "";
@@ -209,6 +218,10 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			Element2Field setter = new Element2Field(this, "setOutputDirectory");
 			return setter;
 		}
+        if (a_LocalName.equals("writeCdi")) {
+            Element2Field setter = new Element2Field(this, "setWriteCdi");
+            return setter;
+        }
 		if (a_LocalName.equals("idEdmoRespCdi")) {
 			Element2Field setter = new Element2Field(this, "setIdEdmoRespCdi");
 			return setter;
@@ -233,6 +246,14 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			Element2Field setter = new Element2Field(this, "setCdiMethod");
 			return setter;
 		}
+        if (a_LocalName.equals("accesDonnees")) {
+            Element2Field setter = new Element2Field(this, "setAccesDonnees");
+            return setter;
+        }
+        if (a_LocalName.equals("typePlateforme")) {
+            Element2Field setter = new Element2Field(this, "setTypePlateForme");
+            return setter;
+        }        
 		if (a_LocalName.equals("fichierMapping")) {
 			Element2Field setter = new Element2Field(this, "setFichierMapping");
 			return setter;
@@ -317,12 +338,15 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		a_Writer.putTag("modelsDirectory", getModelsDirectory());
 		a_Writer.putTag("cruisesDirectory", getCruisesDirectory());
 		a_Writer.putTag("outputDirectory", getOutputDirectory());
+        a_Writer.putTag("writeCdi", getWriteCdi());
 		a_Writer.putTag("idEdmoRespCdi", getIdEdmoRespCdi());
 		a_Writer.putTag("codeEdmoDonnees", getCodeEdmoDonnees());
 		a_Writer.putTag("idEdmoRespDonnees", getIdEdmoRespDonnees());
 		a_Writer.putTag("idEdmoDistDonnees", getIdEdmoDistDonnees());
 		a_Writer.putTag("cdiURL", getCdiURL());
 		a_Writer.putTag("cdiMethod", getCdiMethod());
+        a_Writer.putTag("accesDonnees", getAccesDonnees());
+        a_Writer.putTag("typePlateforme", getTypePlateForme());
 		a_Writer.putTag("fichierMapping", getFichierMapping());
 		a_Writer.putTag("arboMapping", getArboMapping());
 		a_Writer.putTag("vocabURL", getVocabURL());
@@ -939,5 +963,40 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		}
 		return Utils.getBlankFlagTable();
 	}
+
+    public String getAccesDonnees()
+    {
+        return _accesDonnees;
+    }
+
+    public void setAccesDonnees(String accesDonnees)
+    {
+        _accesDonnees = accesDonnees;
+    }
+
+    public String getTypePlateForme()
+    {
+        return _typePlateForme;
+    }
+
+    public void setTypePlateForme(String typePlateForme)
+    {
+        _typePlateForme = typePlateForme;
+    }
+
+    public boolean getWriteCdi()
+    {
+        return _writeCdi;
+    }
+
+    public void setWriteCdi(boolean writeCdi)
+    {
+        _writeCdi = writeCdi;
+    }
+    
+    public void setWriteCdi(String writeCdi)
+    {
+        _writeCdi = Boolean.parseBoolean(writeCdi);
+    }
 	
 } /* End of class: Configuration */
