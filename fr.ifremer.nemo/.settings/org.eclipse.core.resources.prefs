@@ -1,3 +1,12 @@
+<<<<<<< org.eclipse.core.resources.prefs
+#Tue Jan 20 10:37:00 CET 2009
+=======
 #Fri Oct 03 18:00:00 CEST 2008
+>>>>>>> 1.4
 eclipse.preferences.version=1
+<<<<<<< org.eclipse.core.resources.prefs
+encoding//src/fr/ifremer/nemo/util/messages.properties=8859_1
 encoding/<project>=UTF-8
+=======
+encoding/<project>=UTF-8
+>>>>>>> 1.4

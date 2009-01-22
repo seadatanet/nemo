@@ -28,5 +28,13 @@ Bundle-ClassPath: .,
  lib_axis_14/jaxrpc.jar,
  lib_axis_14/log4j-1.2.8.jar,
  lib_axis_14/saaj.jar,
- lib_axis_14/wsdl4j-1.5.1.jar
+ lib_axis_14/wsdl4j-1.5.1.jar,
+ lib/appframework-1.0.3.jar,
+ lib/beansbinding-1.2.1.jar,
+ lib/hsqldb-1.8.0.7.jar,
+ lib/junit-3.8.2.jar,
+ lib/swing-layout-1.0.3.jar,
+ lib/swing-worker-1.1.jar,
+ lib/toplink-essentials.jar,
+ lib/toplink-essentials-agent.jar
 Bundle-Vendor: IFREMER

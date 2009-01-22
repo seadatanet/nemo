@@ -1,5 +1,6 @@
 package fr.ifremer.nemo.ui;
 
+
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
@@ -9,7 +10,10 @@ import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
 
+import fr.ifremer.nemo.mapping.MappingDatabaseEditView;
 import fr.ifremer.nemo.util.Messages;
+
+import fr.ifremer.nemo.mapping.*;
 
 
 /**
@@ -25,7 +29,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 	// when fillActionBars is called with FILL_PROXY.
 	public static IWorkbenchAction newAction, updateAction, exitAction,
 			exitActionQuit, aboutAction, openAction, openXMLAction,
-			saveXMLAction, optionsAction, helpAction, saveAction, saveAsAction;
+			saveXMLAction, optionsAction, helpAction, saveAction, saveAsAction, mappingDatabaseImportAction, mappingDatabaseExportAction, mappingDatabaseEditAction;
 
 	public ApplicationActionBarAdvisor(IActionBarConfigurer configurer) {
 		super(configurer);
@@ -59,12 +63,20 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 
 		// saveAsAction = ActionFactory.SAVE_AS.create(window);
 
+        mappingDatabaseImportAction = new OpenMappingAction(window);
+        mappingDatabaseExportAction = new ExportMappingAction(window);
+        mappingDatabaseEditAction = new EditMappingAction(window);
+        
+
 		register(exitAction);
 		// register(openXMLAction);
 		register(aboutAction);
 		register(saveAction);
 		register(exitActionQuit);
-
+        
+        register(mappingDatabaseImportAction);
+        register(mappingDatabaseExportAction);
+        register(mappingDatabaseEditAction);
 		// register(helpAction);
 
 	}
@@ -91,6 +103,14 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 		optionsMenu.add(optionsAction);
 		optionsMenu.add(updateAction);
 
+        MenuManager mappingMenu = new MenuManager(
+            Messages.getString("ApplicationActionBarAdvisor.4"), Messages.getString("ApplicationActionBarAdvisor.4")); //$NON-NLS-1$ //$NON-NLS-2$
+        mappingMenu.add(mappingDatabaseImportAction);
+        mappingMenu.add(mappingDatabaseExportAction);  
+        fileMenu.add(new Separator());      
+        mappingMenu.add(mappingDatabaseEditAction);          
+        
+        
 		MenuManager helpMenu = new MenuManager("&?", "?"); //$NON-NLS-1$ //$NON-NLS-2$
 		// helpMenu.add(helpAction);
 		helpMenu.add(aboutAction);
@@ -100,6 +120,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 
 		menuBar.add(fileMenu);
 		menuBar.add(optionsMenu);
+        menuBar.add(mappingMenu);        
 		menuBar.add(helpMenu);
 		// menuBar.add(aboutMenu);
 
