@@ -155,7 +155,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         textDossierCampagne.setText(Utils.configuration.getCruisesDirectory());
 
         // LANGUE
-        if (Utils.configuration.getLocale().toString().matches("fr_FR")) { //$NON-NLS-1$
+        if (Utils.configuration.getLocale().toString().equals("fr_FR")) { //$NON-NLS-1$
             // on met la combo langue à FR
             comboLangue.select(0);
         }
@@ -298,7 +298,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
         Utils.selectComboCode(comboMethodeCdi, Utils.configuration
             .getCdiMethod());
-        
+
         records = NemoLists.getVocabList("L061");
 
         champsMethodesCdi = new TreeSet<String>();
@@ -332,7 +332,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
         for (String champ : champsMethodesCdi)
             comboAccesDonnees.add(champ);
-        
+
         // FLags
         fillFlagTable();
     }

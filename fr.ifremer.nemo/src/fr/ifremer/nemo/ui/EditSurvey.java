@@ -707,13 +707,13 @@ public class EditSurvey {
 		}
 
 		if (survey.getAvailabilityCode() != null) {
-			if (survey.getAvailabilityCode().matches("P")) {
+			if (survey.getAvailabilityCode().equals("P")) {
 				EditSurvey.comboConfid.select(0);
 			}
-			if (survey.getAvailabilityCode().matches("L")) {
+			if (survey.getAvailabilityCode().equals("L")) {
 				EditSurvey.comboConfid.select(1);
 			}
-			if (survey.getAvailabilityCode().matches("C")) {
+			if (survey.getAvailabilityCode().equals("C")) {
 				EditSurvey.comboConfid.select(2);
 			}
 		}

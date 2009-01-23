@@ -1179,7 +1179,7 @@ public class Utils {
 				ext1 = mots1[1];
 			}
 
-			if (!ext.matches(ext1)) {
+			if (!ext.equals(ext1)) {
 				ok = false;
 				Utils.messageErreur(Messages.getString("Utils.27"));
 			}
@@ -1237,7 +1237,7 @@ public class Utils {
 				ext1 = mots1[1];
 			}
 
-			if (!ext.matches(ext1)) {
+			if (!ext.equals(ext1)) {
 				ok = false;
 				Utils.messageErreur(Messages.getString("Utils.27"));
 			}
@@ -1269,7 +1269,7 @@ public class Utils {
 				ext1 = mots1[1];
 			}
 
-			if (!ext.matches(ext1)) {
+			if (!ext.equals(ext1)) {
 				ok = false;
 				Utils.messageErreur(Messages.getString("Utils.27"));
 			}
@@ -1391,7 +1391,7 @@ public class Utils {
 
 		// LANGUE
 		if (OptionsAction.comboLangue.getItem(
-				OptionsAction.comboLangue.getSelectionIndex()).matches(
+				OptionsAction.comboLangue.getSelectionIndex()).equals(
 				Messages.getString("OptionsAction.11"))) { //$NON-NLS-1$
 			configuration.setLang("fr_FR"); //$NON-NLS-1$
 		} else {

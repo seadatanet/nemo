@@ -89,7 +89,7 @@ public class ViewLog extends ViewPart {
 
 	public static void aideDesc() {
 		String langue = Utils.configuration.getLang();
-		if (langue.matches("fr_FR")) {
+		if (langue.equals("fr_FR")) {
 			ViewLog.styledTextLogHelp
 					.setText("==MENUS=="
 							+ "1/Modèle/Ouvrir modèle : charge un modèle en mémoire à condition d'avoir déjà ouvert une campagne\n"
@@ -136,7 +136,7 @@ public class ViewLog extends ViewPart {
 
 	public static void aideSurvey() {
 		String langue = Utils.configuration.getLang();
-		if (langue.matches("fr_FR")) {
+		if (langue.equals("fr_FR")) {
 			ViewLog.styledTextLogHelp
 					.setText("==DESCRIPTION CAMPAGNE==\n"
 							+ "3 possibilités de remplissage de cette étape : entrer toutes les valeurs manuellement, interroger les Webservices ou charger un fichier XML.\n"
@@ -156,7 +156,7 @@ public class ViewLog extends ViewPart {
 
 	public static void aideStation() {
 		String langue = Utils.configuration.getLang();
-		if (langue.matches("fr_FR")) {
+		if (langue.equals("fr_FR")) {
 			ViewLog.styledTextLogHelp
 					.setText("==DESCRIPTION DE STATION==\n"
 							+ "Même principe que les étapes précédentes à la différence que certaines valeurs à injecter demandent des valeurs sur 'ligne', 'début' et 'fin'. Dans le cas d'un fichier campagne, toujours effectuer les injections sur la première station ! Dans tous les cas, la sélection devra se limiter à une ligne unique (date, heure, latitude, profondeur, etc.) sauf pour le 'commentaire' où la possibilité de surligner plusieurs lignes est offerte."
@@ -242,7 +242,7 @@ public class ViewLog extends ViewPart {
 
 	public static void aideData() {
 		String langue = Utils.configuration.getLang();
-		if (langue.matches("fr_FR")) {
+		if (langue.equals("fr_FR")) {
 			ViewLog.styledTextLogHelp
 					.setText("==DESCRIPTION DONNEES==\n"
 							+ "Meme principe que pour les types de donnees : on ajoute ici les parametres mesures.\n"
@@ -266,7 +266,7 @@ public class ViewLog extends ViewPart {
 
 	public static void aideConversion() {
 		String langue = Utils.configuration.getLang();
-		if (langue.matches("fr_FR")) {
+		if (langue.equals("fr_FR")) {
 			ViewLog.styledTextLogHelp
 					.setText("==#CONVERSION==\n"
 							+ "Choisir le format de sortie. On peut generer les deux formats e la suite sans devoir revalider toutes les etapes."

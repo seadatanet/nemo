@@ -138,7 +138,7 @@ public class DataModel
         {
             timeSeriesInformation = stationModel.getTimeSeriesInformation();
 
-            if (!ViewFile.textTempoHeureRef.getText().matches(""))
+            if (!ViewFile.textTempoHeureRef.getText().equals(""))
             {
                 inputModel.setRefDateBased(true);
 
@@ -369,15 +369,15 @@ public class DataModel
             .getText()));
 
         // confidentialité
-        if (EditSurvey.comboConfid.getText().matches("P - Public"))
+        if (EditSurvey.comboConfid.getText().equals("P - Public"))
         {
             survey.setAvailability("publicly");
         }
-        if (EditSurvey.comboConfid.getText().matches("L - Limited"))
+        if (EditSurvey.comboConfid.getText().equals("L - Limited"))
         {
             survey.setAvailability("limited");
         }
-        if (EditSurvey.comboConfid.getText().matches("C - Confidential"))
+        if (EditSurvey.comboConfid.getText().equals("C - Confidential"))
         {
             survey.setAvailability("confidential");
         }
@@ -400,7 +400,7 @@ public class DataModel
             dataType.setCode(typeSurvey.getCode());
             dataType.setNumberOfProfiles(typeSurvey.getNombre());
 
-            if (typeSurvey.getQc().matches("Y"))
+            if (typeSurvey.getQc().equals("Y"))
             {
                 dataType.setQc(true);
             }
@@ -607,7 +607,7 @@ public class DataModel
             frag.setFirstCharOffset(debut);
             frag.setLastCharOffset(fin);
 
-            if (EditStation.textHistoriqueAcqLigne2.getText().matches(""))
+            if (EditStation.textHistoriqueAcqLigne2.getText().equals(""))
             {
                 // on a injecte que la ligne 1
                 propertyModel2.setUserProvided(true);
@@ -718,7 +718,7 @@ public class DataModel
             frag.setFirstCharOffset(debut);
             frag.setLastCharOffset(fin);
 
-            if (EditStation.textSurfaceLigne2.getText().matches(""))
+            if (EditStation.textSurfaceLigne2.getText().equals(""))
             {
                 // si on a injecte que la ligne 1
                 propertyModel2.setUserProvided(true);
@@ -816,7 +816,7 @@ public class DataModel
             }
 
             // conversion JEP de la frequence
-            if (!EditStation.textFreqEchantConv.getText().matches(""))
+            if (!EditStation.textFreqEchantConv.getText().equals(""))
             {
                 // formule de conversion
                 stationModel.getTimeSeriesModel().setSampleRateConversion(
@@ -1222,7 +1222,7 @@ public class DataModel
             {
                 propertyModel.setUserProvided(true);
                 // valeur manuelle
-                if (EditStation.textProfFin.getText().matches(""))
+                if (EditStation.textProfFin.getText().equals(""))
                 {
                     // on recopie profondeur dans profondeur de fin
                     PropertyModel propModelProfNormale =
@@ -1302,7 +1302,7 @@ public class DataModel
                 propertyModel.setUserProvided(true);
                 // valeur manuelle
 
-                if (!EditStation.textLatFin.getText().matches(""))
+                if (!EditStation.textLatFin.getText().equals(""))
                 {
                     try
                     {
@@ -1354,9 +1354,9 @@ public class DataModel
             {
                 // position dans fichier
                 // FAE 0001137 : non bloquant si non saisi
-                if (EditStation.textLatFinLigne.getText().matches("")
-                        && EditStation.textLatFinDebut.getText().matches("")
-                        && EditStation.textLatFinFin.getText().matches(""))
+                if (EditStation.textLatFinLigne.getText().equals("")
+                        && EditStation.textLatFinDebut.getText().equals("")
+                        && EditStation.textLatFinFin.getText().equals(""))
                 {
                     // valeur non rentree donc on recopie latitude dans latitude
                     // de fin
@@ -1434,7 +1434,7 @@ public class DataModel
                 propertyModel.setUserProvided(true);
                 // valeur manuelle
                 // conversion en double
-                if (!EditStation.textLongFin.getText().matches(""))
+                if (!EditStation.textLongFin.getText().equals(""))
                 {
                     try
                     {
@@ -1490,9 +1490,9 @@ public class DataModel
             {
                 // position dans fichier
                 // FAE 0001137 : non bloquant si non saisi
-                if (EditStation.textLongFinLigne.getText().matches("")
-                        && EditStation.textLongFinDebut.getText().matches("")
-                        && EditStation.textLongFinFin.getText().matches(""))
+                if (EditStation.textLongFinLigne.getText().equals("")
+                        && EditStation.textLongFinDebut.getText().equals("")
+                        && EditStation.textLongFinFin.getText().equals(""))
                 {
                     // valeur non rentree donc on recopie la longitude comme
                     // longitude de fin
@@ -2042,15 +2042,15 @@ public class DataModel
 
         // confidentialite
         String code = survey.getAvailabilityCode();
-        if (code.matches("P"))
+        if (code.equals("P"))
         {
             EditSurvey.comboConfid.select(0);
         }
-        if (code.matches("L"))
+        if (code.equals("L"))
         {
             EditSurvey.comboConfid.select(1);
         }
-        if (code.matches("C"))
+        if (code.equals("C"))
         {
             EditSurvey.comboConfid.select(2);
         }
@@ -2251,7 +2251,7 @@ public class DataModel
                     pat.split(TableDataSurvey.types.get(i).getCode());
                 String vraiCodeType = motsType[0];
 
-                if (vraiCode.matches(vraiCodeType))
+                if (vraiCode.equals(vraiCodeType))
                 {
                     ok = true;
                     if (TableDataSurvey.types.get(i).getSensor())
@@ -3195,7 +3195,7 @@ public class DataModel
                     + modeleCourant.getFullName());
             typeData.setNom(modeleCourant.getFullName());
 
-            if (paraCourant.getConversionFormula().matches(""))
+            if (paraCourant.getConversionFormula().equals(""))
             {
                 typeData.setConversion("x*1");
             }

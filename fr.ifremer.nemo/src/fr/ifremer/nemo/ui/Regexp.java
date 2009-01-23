@@ -69,7 +69,7 @@ public class Regexp {
 
 		Boolean ok = true;
 
-		if (value.matches("")) { //$NON-NLS-1$
+		if (value.equals("")) { //$NON-NLS-1$
 			Utils
 					.messageErreurAppend(Messages.getString("Regexp.4") + nomSection + Messages.getString("Regexp.5")); //$NON-NLS-1$ //$NON-NLS-2$
 			ok = false;
@@ -132,7 +132,7 @@ public class Regexp {
 
 		// tests des relations des champs
 
-		if (!debut.matches("") && (!fin.matches(""))) { //$NON-NLS-1$ //$NON-NLS-2$
+		if (!debut.equals("") && (!fin.equals(""))) { //$NON-NLS-1$ //$NON-NLS-2$
 			if (Integer.parseInt(debut) > Integer.parseInt(fin)) {
 				ok = ok && false;
 				log = log + "==>" + Messages.getString("Regexp.15"); //$NON-NLS-1$
@@ -182,7 +182,7 @@ public class Regexp {
 	// Boolean ok = true;
 	//		
 	// if (EditDesc.radManuel.getSelection()) {
-	// if (EditDesc.txtManuel.getText().matches("")) {
+	// if (EditDesc.txtManuel.getText().equals("")) {
 	// ok = false;
 	// Utils.messageErreurAppend(Messages.getString("EditDesc.indicateurVide"));
 	// }

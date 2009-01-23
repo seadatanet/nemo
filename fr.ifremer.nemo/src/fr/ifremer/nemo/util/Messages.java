@@ -21,7 +21,7 @@ public class Messages {
 
 			// String langue = Utils.configuration.getLang();
 			String langue = Utils.configuration.getLang();
-			if (langue.matches("fr_FR")) {
+			if (langue.equals("fr_FR")) {
 				ResourceBundle.getBundle(BUNDLE_NAME_FR);
 				RESOURCE_BUNDLE = ResourceBundle
 						.getBundle(BUNDLE_NAME_FR);

@@ -57,7 +57,7 @@ public class Etape {
 
 		// section fin de donnees
 		if (EditDesc.radManuel.getSelection()) {
-			if (EditDesc.txtManuel.getText().matches("")) {
+			if (EditDesc.txtManuel.getText().equals("")) {
 				ok = false;
 				Utils.messageErreurAppend(Messages
 						.getString("EditDesc.indicateurVide"));
@@ -72,7 +72,7 @@ public class Etape {
 		// ok = ok && resultat;
 		// } else {
 		// // format de la combolist
-		// if (EditDesc.comboIndicRuptureDonnees.getText().matches("")) {
+		// if (EditDesc.comboIndicRuptureDonnees.getText().equals("")) {
 		// Utils.messageErreurAppend(Messages.getString("Etape.100"));
 		// ok = false;
 		// }
@@ -83,7 +83,7 @@ public class Etape {
 		// if (ViewFile.checkBoxTempo.getSelection()) {
 		if (ViewFile.radSerieTempo.getSelection()
 				|| ViewFile.radTrajectoire.getSelection()) {
-			if (!ViewFile.textTempoHeureRef.getText().matches("")) { //$NON-NLS-1$
+			if (!ViewFile.textTempoHeureRef.getText().equals("")) { //$NON-NLS-1$
 				try {
 					DateTimeFormat format = new DateTimeFormat(
 							ViewFile.comboTempoHeure.getText());
@@ -96,7 +96,7 @@ public class Etape {
 					ok = false;
 				}
 			} // fin tempoHeureRef ""
-			if (!ViewFile.textTempoDateRef.getText().matches("")) { //$NON-NLS-1$
+			if (!ViewFile.textTempoDateRef.getText().equals("")) { //$NON-NLS-1$
 				try {
 					DateTimeFormat format = new DateTimeFormat(
 							ViewFile.comboTempoDate.getText());
@@ -164,7 +164,7 @@ public class Etape {
 		ok = ok && resultat;
 
 		// CHECK DATES
-		if (!EditSurvey.textDateDebut.getText().matches("")) { //$NON-NLS-1$
+		if (!EditSurvey.textDateDebut.getText().equals("")) { //$NON-NLS-1$
 			try {
 				DateTimeFormat dateFormat = new DateTimeFormat();
 				dateFormat.setFormatString("dd/MM/yyyy"); //$NON-NLS-1$
@@ -177,7 +177,7 @@ public class Etape {
 				e.printStackTrace();
 			}
 		}
-		if (!EditSurvey.textDateFin.getText().matches("")) { //$NON-NLS-1$
+		if (!EditSurvey.textDateFin.getText().equals("")) { //$NON-NLS-1$
 			try {
 				DateTimeFormat dateFormat = new DateTimeFormat();
 				dateFormat.setFormatString("dd/MM/yyyy"); //$NON-NLS-1$
@@ -329,7 +329,7 @@ public class Etape {
 			}
 
 			// on permet de n'utiliser qu'une ligne sur les deux!
-			if (!EditStation.textHistoriqueAcqLigne2.getText().matches("")) {
+			if (!EditStation.textHistoriqueAcqLigne2.getText().equals("")) {
 				resultat2 = Regexp.checkLigneDebutfin(
 						EditStation.textHistoriqueAcqLigne2.getText(),
 						EditStation.textHistoriqueAcqDebut2.getText(),
@@ -465,7 +465,7 @@ public class Etape {
 			}
 
 			// permettre une seule ligne sur les deux!
-			if (!EditStation.textSurfaceLigne2.getText().matches("")) {
+			if (!EditStation.textSurfaceLigne2.getText().equals("")) {
 				resultat2 = Regexp.checkLigneDebutfin(
 						EditStation.textSurfaceLigne2.getText(),
 						EditStation.textSurfaceDebut2.getText(),
@@ -715,8 +715,8 @@ public class Etape {
 			}
 
 		} else {
-			if (!EditStation.textProfondeur.getText().matches("")
-					&& !EditStation.textProfondeur.getText().matches("NaN")) {
+			if (!EditStation.textProfondeur.getText().equals("")
+					&& !EditStation.textProfondeur.getText().equals("NaN")) {
 
 				if (Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$",
 						EditStation.textProfondeur.getText())) {
@@ -769,8 +769,8 @@ public class Etape {
 			}
 
 		} else {
-			if (!EditStation.textTU.getText().matches("")
-					&& !EditStation.textTU.getText().matches("NaN")) {
+			if (!EditStation.textTU.getText().equals("")
+					&& !EditStation.textTU.getText().equals("NaN")) {
 
 				if (Pattern.matches("^[+-]?[0-9]*[0-9][.]?[0-9]*$",
 						EditStation.textTU.getText())) {
@@ -935,11 +935,11 @@ public class Etape {
 			// LATITUDE DE FIN
 			if (EditStation.buttonLatFinSaisie.getSelection()) {
 				// saisie manuelle
-				if (EditStation.textLatFin.getText().matches("")) { //$NON-NLS-1$
+				if (EditStation.textLatFin.getText().equals("")) { //$NON-NLS-1$
 					// valeur non rentree
 					ok = ok && true;
 				} else {
-					if (!EditStation.textLatFin.getText().matches("")) {//$NON-NLS-1$
+					if (!EditStation.textLatFin.getText().equals("")) {//$NON-NLS-1$
 						try {
 							LatitudeFormat latitudeFormat = new LatitudeFormat(
 									EditStation.comboLatitudeFin.getText());
@@ -959,9 +959,9 @@ public class Etape {
 			} else {
 				// position dans fichier
 				// FAE 0001137 : non bloquant si non saisi
-				if (EditStation.textLatFinLigne.getText().matches("")
-						&& EditStation.textLatFinDebut.getText().matches("")
-						&& EditStation.textLatFinFin.getText().matches("")){
+				if (EditStation.textLatFinLigne.getText().equals("")
+						&& EditStation.textLatFinDebut.getText().equals("")
+						&& EditStation.textLatFinFin.getText().equals("")){
 					// valeur non rentree
 					ok = ok && true;
 					
@@ -990,11 +990,11 @@ public class Etape {
 			// LONGITUDE DE FIN
 			if (EditStation.buttonLongFinSaisie.getSelection()) {
 				// saisie manuelle
-				if (EditStation.textLongFin.getText().matches("")) { //$NON-NLS-1$
+				if (EditStation.textLongFin.getText().equals("")) { //$NON-NLS-1$
 					// valeur non rentree
 					ok = ok && true;
 				} else {
-					if (!EditStation.textLongFin.getText().matches("")) {
+					if (!EditStation.textLongFin.getText().equals("")) {
 						try {
 							LongitudeFormat longitudeFormat = new LongitudeFormat(
 									EditStation.comboLongitudeFin.getText());
@@ -1014,9 +1014,9 @@ public class Etape {
 			} else {
 				// position dans fichier
 				// FAE 0001137 : non bloquant si non saisi
-				if (EditStation.textLongFinLigne.getText().matches("")
-						&& EditStation.textLongFinDebut.getText().matches("")
-						&& EditStation.textLongFinFin.getText().matches("")){
+				if (EditStation.textLongFinLigne.getText().equals("")
+						&& EditStation.textLongFinDebut.getText().equals("")
+						&& EditStation.textLongFinFin.getText().equals("")){
 					// valeur non rentree
 					ok = ok && true;
 					
@@ -1085,8 +1085,8 @@ public class Etape {
 				}
 
 			} else {
-				if (!EditStation.textProfFin.getText().matches("")
-						&& !EditStation.textProfFin.getText().matches("NaN")) { //$NON-NLS-1$
+				if (!EditStation.textProfFin.getText().equals("")
+						&& !EditStation.textProfFin.getText().equals("NaN")) { //$NON-NLS-1$
 
 					if (Pattern.matches("^[0-9]*[0-9][.]?[0-9]*$",
 							EditStation.textProfFin.getText())) {
@@ -1149,7 +1149,7 @@ public class Etape {
 
 			} else {
 				Utils.messageErreurAppend(Messages.getString("Etape.77")); //$NON-NLS-1$
-				if (EditStation.textProfCapteur.getText().matches("")) { //$NON-NLS-1$
+				if (EditStation.textProfCapteur.getText().equals("")) { //$NON-NLS-1$
 					ok = ok && false; // FAE 0001232
 					Utils.messageErreurAppend(Messages.getString("Etape.79")); //$NON-NLS-1$
 				} else {
@@ -1208,7 +1208,7 @@ public class Etape {
 				}
 
 			} else {
-				if (!EditStation.textDeclinMagnet.getText().matches("")) {
+				if (!EditStation.textDeclinMagnet.getText().equals("")) {
 					// verif de ce qui est entre par l'utilisateur
 					if (Pattern.matches(
 							"^[+-]{0,1}[0-9]*[0-9][.]?[0-9]*[0-9]*$",
@@ -1440,7 +1440,7 @@ public class Etape {
 			String code = mots[0];
 
 			if (ViewFile.typeFichierEntree().equals(Global.PROFILE)) {
-				if (!(code.matches("PRES") || code.matches("DEPH"))) {
+				if (!(code.equals("PRES") || code.equals("DEPH"))) {
 					// PRES ou DEPH n'est pas en premier
 					Utils.messageErreurAppend(Messages.getString("Etape.107"));
 					ok = ok && false;
@@ -1449,7 +1449,7 @@ public class Etape {
 				}
 
 				// Si PRES n'est pas premier => Medatlas impossible
-				if (!code.matches("PRES")) {
+				if (!code.equals("PRES")) {
 					ViewFile.radMedatlas.setEnabled(false);
 					ViewFile.radMedatlas.setSelection(false);
 					ViewFile.radODV.setSelection(true);

@@ -250,7 +250,7 @@ public class FiltrageTableType {
 														.get(i).getCode());
 										String codeModele = mots2[0];
 
-										if (codeModele.matches(codeActuel)) {
+										if (codeModele.equals(codeActuel)) {
 											found = true;
 										}
 									}
@@ -335,7 +335,7 @@ public class FiltrageTableType {
 														.getCode());
 										codeModele = mots2[0];
 
-										if (codeModele.matches(codeActuel)) {
+										if (codeModele.equals(codeActuel)) {
 											found = true;
 										}
 									}
@@ -381,7 +381,7 @@ public class FiltrageTableType {
 			// listener keypressed sur le champ text
 			filtreText.addListener(SWT.KeyUp, new Listener() {
 				public void handleEvent(Event e) {
-					if (filtreText.getText().matches("")) {} //$NON-NLS-1$
+					if (filtreText.getText().equals("")) {} //$NON-NLS-1$
 					else {
 						if (tabOrigine.equals(Global.IDEDMO)) {
 							filtrageListeEdmo(filtreText.getText());

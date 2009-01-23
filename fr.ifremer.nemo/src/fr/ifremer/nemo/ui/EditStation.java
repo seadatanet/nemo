@@ -1278,10 +1278,10 @@ public class EditStation {
 
 	public static void conversionFreqEchant() {
 
-		if (!textFreqEchantConv.getText().matches("")) { //$NON-NLS-1$
+		if (!textFreqEchantConv.getText().equals("")) { //$NON-NLS-1$
 			// il y a une formule de conversion
 			if ((buttonFreqEchantSaisie.getSelection())
-					&& (!textFreqEchant.getText().matches(""))) { //$NON-NLS-1$
+					&& (!textFreqEchant.getText().equals(""))) { //$NON-NLS-1$
 				// saisie manuelle
 
 				org.nfunk.jep.JEP parser = new org.nfunk.jep.JEP();

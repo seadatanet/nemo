@@ -519,7 +519,7 @@ public class TableDataSurvey {
 							TableDataSurvey.tableTypeSurvey.getItem(i).getText(
 									0));
 					if (TableDataSurvey.tableTypeSurvey.getItem(i).getText(1)
-							.matches("")) {
+							.equals("")) {
 						types.get(i).setNombre(0);
 					} else {
 						types.get(i).setNombre(

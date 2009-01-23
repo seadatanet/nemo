@@ -144,7 +144,7 @@ public class TableData {
 			typesWS.add(type);
 
 			// ajout systematique de PRES
-			if (wsParameter.getCode().matches("PRES")) { //$NON-NLS-1$
+			if (wsParameter.getCode().equals("PRES")) { //$NON-NLS-1$
 
 				// if ((DataModel.ouverture == false)
 				// && (!ViewFile.checkBoxTempo.getSelection())) {
@@ -502,9 +502,9 @@ public class TableData {
 			// String mots[] = p.split(type_a_Deplacer.getCode());
 			// String code = mots[0];
 
-			// if (!code.matches("PRES") ||
+			// if (!code.equals("PRES") ||
 			// ViewFile.checkBoxTempo.getSelection()) {
-			// if (!code.matches("PRES") ||
+			// if (!code.equals("PRES") ||
 			// ViewFile.radSerieTempo.getSelection() ||
 			// ViewFile.radTrajectoire.getSelection()) {
 
@@ -563,8 +563,8 @@ public class TableData {
 		String code = mots[0];
 
 		// pas forcement de - dans le nom du type
-		// if (!code.matches("PRES") || ViewFile.checkBoxTempo.getSelection()) {
-		if (!code.matches("PRES") || ViewFile.radSerieTempo.getSelection()
+		// if (!code.equals("PRES") || ViewFile.checkBoxTempo.getSelection()) {
+		if (!code.equals("PRES") || ViewFile.radSerieTempo.getSelection()
 				|| ViewFile.radTrajectoire.getSelection()) {
 			types.remove(indice);
 		} else {
@@ -591,7 +591,7 @@ public class TableData {
 		nbre = ViewFile.tableData.getItemCount();
 		for (int i = 0; i < nbre; i++) {
 
-			if ((!ViewFile.tableData.getItem(i).getText(4).matches("")) && (!ViewFile.tableData.getItem(i).getText(2).matches(""))) { //$NON-NLS-1$ //$NON-NLS-2$
+			if ((!ViewFile.tableData.getItem(i).getText(4).equals("")) && (!ViewFile.tableData.getItem(i).getText(2).equals(""))) { //$NON-NLS-1$ //$NON-NLS-2$
 				// on a selectionne un debut et une fin et il y a une conversion
 				// e faire
 
@@ -644,8 +644,8 @@ public class TableData {
 				// System.out.println("resultat conversion = "+resultat);
 			}
 
-			if ((!ViewFile.tableData.getItem(i).getText(11).matches(""))
-					&& (!ViewFile.tableData.getItem(i).getText(12).matches(""))) {
+			if ((!ViewFile.tableData.getItem(i).getText(11).equals(""))
+					&& (!ViewFile.tableData.getItem(i).getText(12).equals(""))) {
 				ligne = Utils.lignesBrutes.get(Integer
 						.valueOf(EditDesc.lignesEnteteFichier.getText())
 						+ Integer.valueOf(EditDesc.lignesEnteteStation
