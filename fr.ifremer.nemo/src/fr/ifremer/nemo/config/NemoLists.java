@@ -51,7 +51,7 @@ public class NemoLists implements Cloneable {
 
 	static protected java.util.HashMap<Integer, String> _edmo = new java.util.HashMap<Integer, String>();
 
-	public static Boolean okSurveys, okParameters, okRegions, okDataTypes,
+	public static Boolean okSurveys, okParameters, okDataTypes,
 			okVocabLists, okEdmo;
 
 	public static int nbSurveys, nbParameters, nbRegions, nbDataTypes,

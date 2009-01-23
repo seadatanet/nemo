@@ -453,15 +453,6 @@ public class EditSurvey {
 					+ Messages.getString("EditSurvey.71");
 		}
 
-		if (NemoLists.okRegions) {
-			message = message + Messages.getString("EditSurvey.67") + "  OK - "
-					+ NemoLists.nbRegions + " "
-					+ Messages.getString("EditSurvey.70");
-		} else {
-			message = message + Messages.getString("EditSurvey.67") + "  "
-					+ Messages.getString("EditSurvey.71");
-		}
-
 		if (NemoLists.okSurveys) {
 			message = message + Messages.getString("EditSurvey.69") + "  OK - "
 					+ NemoLists.nbSurveys + " "
