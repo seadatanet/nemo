@@ -2,14 +2,13 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Nemo Plug-in
 Bundle-SymbolicName: fr.ifremer.nemo; singleton:=true
-Bundle-Version: 2.0
+Bundle-Version: 1.15
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
  org.eclipse.ui.forms,
  com.ibm.icu
 Eclipse-LazyStart: false
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ClassPath: .,
  lib/activation.jar,
  lib/commons-logging-1.0.4.jar,
@@ -38,3 +37,4 @@ Bundle-ClassPath: .,
  lib/toplink-essentials.jar,
  lib/toplink-essentials-agent.jar
 Bundle-Vendor: IFREMER
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
