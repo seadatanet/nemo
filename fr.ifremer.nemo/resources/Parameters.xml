@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.5.0_14" class="java.beans.XMLDecoder"> 
+<java version="1.6.0_06" class="java.beans.XMLDecoder"> 
  <object class="java.util.ArrayList"> 
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
@@ -222,7 +222,7 @@
      <string>%6.1f</string> 
     </void> 
     <void property="name"> 
-     <string>BACTERIA NUMBER SEDIMENT</string> 
+     <string>NUMBER OF BACTERIA IN SEDIMENT</string> 
     </void> 
     <void property="unit"> 
      <string>10+9 cell/dm3</string> 
@@ -263,7 +263,7 @@
      <string>BACTERIAL BIOMASS IN SEA WATER</string> 
     </void> 
     <void property="unit"> 
-     <string>milligram C/m3</string> 
+     <string>milligram carbon/m3</string> 
     </void> 
    </object> 
   </void> 
@@ -814,7 +814,7 @@
      <string>COCCOLITHOPHORIDAE PPC FLUX</string> 
     </void> 
     <void property="unit"> 
-     <string>milligram C/(m2.day)</string> 
+     <string>milligram carbon/(m2.day)</string> 
     </void> 
    </object> 
   </void> 
@@ -1239,6 +1239,25 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
     <void property="code"> 
+     <string>DEWT</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>99.999</string> 
+    </void> 
+    <void property="format"> 
+     <string>%6.3f</string> 
+    </void> 
+    <void property="name"> 
+     <string>DEW POINT TEMPERATURE</string> 
+    </void> 
+    <void property="unit"> 
+     <string>Celsius degree</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
      <string>DFCW</string> 
     </void> 
     <void property="defaultValue"> 
@@ -1270,7 +1289,7 @@
      <string>DINOFLAGELLATES PPC FLUX</string> 
     </void> 
     <void property="unit"> 
-     <string>milligram C/(m2.day)</string> 
+     <string>milligram carbon/(m2.day)</string> 
     </void> 
    </object> 
   </void> 
@@ -1308,7 +1327,7 @@
      <string>DIATOMS PPC FLUX</string> 
     </void> 
     <void property="unit"> 
-     <string>milligram C/(m2.day)</string> 
+     <string>milligram carbon/(m2.day)</string> 
     </void> 
    </object> 
   </void> 
@@ -1505,25 +1524,6 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
     <void property="code"> 
-     <string>D13C</string> 
-    </void> 
-    <void property="defaultValue"> 
-     <string>999.99</string> 
-    </void> 
-    <void property="format"> 
-     <string>%6.2f</string> 
-    </void> 
-    <void property="name"> 
-     <string>DELTA 13 C SIGNATURE</string> 
-    </void> 
-    <void property="unit"> 
-     <string>%</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSParameter"> 
-    <void property="code"> 
      <string>EF1W</string> 
     </void> 
     <void property="defaultValue"> 
@@ -1612,7 +1612,7 @@
      <string>ELLAPSED TIME</string> 
     </void> 
     <void property="unit"> 
-     <string>decimal days</string> 
+     <string>decimal day</string> 
     </void> 
    </object> 
   </void> 
@@ -1631,7 +1631,7 @@
      <string>PARTICULATE 234 TH ACT. ERROR</string> 
     </void> 
     <void property="unit"> 
-     <string>Bq/m3</string> 
+     <string>Bequerel/m3</string> 
     </void> 
    </object> 
   </void> 
@@ -1726,7 +1726,7 @@
      <string>FLAGELLATES PPC FLUX</string> 
     </void> 
     <void property="unit"> 
-     <string>milligram C/(m2.day)</string> 
+     <string>milligram carbon/(m2.day)</string> 
     </void> 
    </object> 
   </void> 
@@ -1784,6 +1784,25 @@
     </void> 
     <void property="unit"> 
      <string>milligram/m3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
+     <string>FLU3</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>999.99</string> 
+    </void> 
+    <void property="format"> 
+     <string>%6.2f</string> 
+    </void> 
+    <void property="name"> 
+     <string>FLUORESCENCE</string> 
+    </void> 
+    <void property="unit"> 
+     <string>FFU Fluoresceine Fluores. Unit</string> 
     </void> 
    </object> 
   </void> 
@@ -2239,7 +2258,7 @@
      <string>LIGHT IRRADIANCE IMMERGED PAR</string> 
     </void> 
     <void property="unit"> 
-     <string>micromole photon/(m2.s)</string> 
+     <string>micromole photon/(m2.second)</string> 
     </void> 
    </object> 
   </void> 
@@ -2258,7 +2277,7 @@
      <string>LIGHT IRRADIANCE CORRECTED PAR</string> 
     </void> 
     <void property="unit"> 
-     <string>micromole photon/(m2.s)</string> 
+     <string>micromole photon/(m2.second)</string> 
     </void> 
    </object> 
   </void> 
@@ -2277,7 +2296,7 @@
      <string>LIGHT IRRADIANCE SURFACE PAR</string> 
     </void> 
     <void property="unit"> 
-     <string>micromole photon/(m2.s)</string> 
+     <string>micromole photon/(m2.second)</string> 
     </void> 
    </object> 
   </void> 
@@ -2309,7 +2328,7 @@
      <string>-999.9</string> 
     </void> 
     <void property="format"> 
-     <string>%+5.1f</string> 
+     <string>%+6.1f</string> 
     </void> 
     <void property="name"> 
      <string>LONG-WAVE INCOMING RADIATION</string> 
@@ -2486,7 +2505,7 @@
      <string>LEUCINE UPTAKE RATE</string> 
     </void> 
     <void property="unit"> 
-     <string>microgram carbon/(m3.h)</string> 
+     <string>microgram carbon/(m3.hour)</string> 
     </void> 
    </object> 
   </void> 
@@ -4212,7 +4231,7 @@
      <string>%6.0f</string> 
     </void> 
     <void property="name"> 
-     <string>NUM. OF SW PHYTOPLANKTON CELLS</string> 
+     <string>PHYTOPLANKTON ABUNDANCE</string> 
     </void> 
     <void property="unit"> 
      <string>10+3 cell/m3</string> 
@@ -4709,7 +4728,7 @@
      <string>PROTOZOA PPC FLUX</string> 
     </void> 
     <void property="unit"> 
-     <string>milligram C/(m2.day)</string> 
+     <string>milligram carbon/(m2.day)</string> 
     </void> 
    </object> 
   </void> 
@@ -4862,44 +4881,6 @@
     </void> 
     <void property="unit"> 
      <string>%</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSParameter"> 
-    <void property="code"> 
-     <string>SCDT</string> 
-    </void> 
-    <void property="defaultValue"> 
-     <string>999.9</string> 
-    </void> 
-    <void property="format"> 
-     <string>%5.1f</string> 
-    </void> 
-    <void property="name"> 
-     <string>SEA SURF CURRENT DIR. REL T. N</string> 
-    </void> 
-    <void property="unit"> 
-     <string>degree</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSParameter"> 
-    <void property="code"> 
-     <string>SCSP</string> 
-    </void> 
-    <void property="defaultValue"> 
-     <string>99.99</string> 
-    </void> 
-    <void property="format"> 
-     <string>%5.2f</string> 
-    </void> 
-    <void property="name"> 
-     <string>SEA SURFACE CURRENT SPEED</string> 
-    </void> 
-    <void property="unit"> 
-     <string>meter/second</string> 
     </void> 
    </object> 
   </void> 
@@ -5134,44 +5115,6 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
     <void property="code"> 
-     <string>SSPS</string> 
-    </void> 
-    <void property="defaultValue"> 
-     <string>99.999</string> 
-    </void> 
-    <void property="format"> 
-     <string>%6.3f</string> 
-    </void> 
-    <void property="name"> 
-     <string>SEA SURFACE PRACTICAL SALINITY</string> 
-    </void> 
-    <void property="unit"> 
-     <string>P.S.U.</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSParameter"> 
-    <void property="code"> 
-     <string>SSTP</string> 
-    </void> 
-    <void property="defaultValue"> 
-     <string>99.999</string> 
-    </void> 
-    <void property="format"> 
-     <string>%6.3f</string> 
-    </void> 
-    <void property="name"> 
-     <string>SEA SURFACE TEMPERATURE</string> 
-    </void> 
-    <void property="unit"> 
-     <string>Celsius degree</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSParameter"> 
-    <void property="code"> 
      <string>SVEL</string> 
     </void> 
     <void property="defaultValue"> 
@@ -5229,6 +5172,25 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
     <void property="code"> 
+     <string>SWPR</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>999</string> 
+    </void> 
+    <void property="format"> 
+     <string>%3d</string> 
+    </void> 
+    <void property="name"> 
+     <string>SWELL PERIOD</string> 
+    </void> 
+    <void property="unit"> 
+     <string>second</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
      <string>TCCF</string> 
     </void> 
     <void property="defaultValue"> 
@@ -5280,25 +5242,6 @@
     </void> 
     <void property="unit"> 
      <string>mole/m3</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSParameter"> 
-    <void property="code"> 
-     <string>TDCW</string> 
-    </void> 
-    <void property="defaultValue"> 
-     <string>9999</string> 
-    </void> 
-    <void property="format"> 
-     <string>%4.0f</string> 
-    </void> 
-    <void property="name"> 
-     <string>TOTAL DISSOLVED CARBON</string> 
-    </void> 
-    <void property="unit"> 
-     <string>millimole/m3</string> 
     </void> 
    </object> 
   </void> 
@@ -5431,7 +5374,7 @@
      <string>SEA TEMPERATURE</string> 
     </void> 
     <void property="unit"> 
-     <string>Celcius degree</string> 
+     <string>Celsius degree</string> 
     </void> 
    </object> 
   </void> 
@@ -5780,6 +5723,25 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
     <void property="code"> 
+     <string>TPCW</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>999.99</string> 
+    </void> 
+    <void property="format"> 
+     <string>%6.2f</string> 
+    </void> 
+    <void property="name"> 
+     <string>TOTAL PARTICULATE CARBON</string> 
+    </void> 
+    <void property="unit"> 
+     <string>milligram/m3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
      <string>TPHP</string> 
     </void> 
     <void property="defaultValue"> 
@@ -6115,7 +6077,7 @@
      <string>AVER. HEIGHT HIGHEST 1/3 WAVE</string> 
     </void> 
     <void property="unit"> 
-     <string>metre</string> 
+     <string>meter</string> 
     </void> 
    </object> 
   </void> 
@@ -6135,6 +6097,25 @@
     </void> 
     <void property="unit"> 
      <string>second</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
+     <string>VCMX</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>99.9</string> 
+    </void> 
+    <void property="format"> 
+     <string>%4.1f</string> 
+    </void> 
+    <void property="name"> 
+     <string>MAX CREST TROUGH WAVE HEIGHT</string> 
+    </void> 
+    <void property="unit"> 
+     <string>meter</string> 
     </void> 
    </object> 
   </void> 
@@ -6217,6 +6198,25 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
     <void property="code"> 
+     <string>VHM0</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>99.9</string> 
+    </void> 
+    <void property="format"> 
+     <string>%4.1f</string> 
+    </void> 
+    <void property="name"> 
+     <string>SPECTRAL SIGNIF. WAVE HEIGHT</string> 
+    </void> 
+    <void property="unit"> 
+     <string>meter</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
      <string>VIAW</string> 
     </void> 
     <void property="defaultValue"> 
@@ -6236,6 +6236,25 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
     <void property="code"> 
+     <string>VMXL</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>99.9</string> 
+    </void> 
+    <void property="format"> 
+     <string>%4.1f</string> 
+    </void> 
+    <void property="name"> 
+     <string>MAXIMUM WAVE LEVEL</string> 
+    </void> 
+    <void property="unit"> 
+     <string>meter</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
      <string>VOCP</string> 
     </void> 
     <void property="defaultValue"> 
@@ -6248,7 +6267,7 @@
      <string>VOLUME CONC. OF PARTICLES</string> 
     </void> 
     <void property="unit"> 
-     <string>p.p.m.</string> 
+     <string>ppm</string> 
     </void> 
    </object> 
   </void> 
@@ -6283,7 +6302,7 @@
      <string>%3.0f</string> 
     </void> 
     <void property="name"> 
-     <string>WAVE PEAK PERIOD</string> 
+     <string>WAVE SPECTRUM PEAK PERIOD</string> 
     </void> 
     <void property="unit"> 
      <string>second</string> 
@@ -6324,7 +6343,7 @@
      <string>MAXI ZERO CROSSING WAVE HEIGHT</string> 
     </void> 
     <void property="unit"> 
-     <string>metre</string> 
+     <string>meter</string> 
     </void> 
    </object> 
   </void> 
