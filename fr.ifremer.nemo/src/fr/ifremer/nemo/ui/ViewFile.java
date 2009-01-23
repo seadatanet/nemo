@@ -1,7 +1,6 @@
 package fr.ifremer.nemo.ui;
 
 import java.io.IOException;
-import java.util.TreeSet;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
@@ -27,11 +26,9 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
-import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
-import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
 public class ViewFile extends ViewPart
 {
