@@ -1,13 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <java version="1.6.0_06" class="java.beans.XMLDecoder"> 
- <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="109"> 
+ <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="111"> 
   <void index="0"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/GAVHZZ01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/GT50ZZ01</string> 
     </void> 
     <void property="entryTerm"> 
-     <string>Average height of waves (highest 1/3rd) on the water column</string> 
+     <string>Average height of waves (highest one fiftieth) on the water column</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>Hz1/50</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>The average peak to trough height of the highest 1/50 of waves measured during a recording burst</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1232103934000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="1"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/GTDTZZ01</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Average height of waves (highest one tenth) on the water column</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>Hz1/10</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>The average peak to trough height of the highest 1/10 of waves measured during a recording burst</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1232103934000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="2"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/GAVHZZ01</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Average height of waves (highest one third) on the water column</string> 
     </void> 
     <void property="entryTermAbbr"> 
      <string>H1/3</string> 
@@ -19,23 +75,23 @@
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1210857462000</long> 
+        <long>1232103934000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="1"> 
+  <void index="3"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/GTZHZZ01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/GTZHZZ01</string> 
     </void> 
     <void property="entryTerm"> 
-     <string>Average zero crossing period (highest one third) of waves on the water column</string> 
+     <string>Average zero crossing period of waves (highest one third) on the water column</string> 
     </void> 
     <void property="entryTermAbbr"> 
      <string>Tz1/3</string> 
@@ -47,20 +103,20 @@
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1210857462000</long> 
+        <long>1232103934000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="2"> 
+  <void index="4"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MDMAP003</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP003</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of 1,1,2-trichloro-1,2,2-trifluoroethane {freon-113 or CFC-113} per unit mass of the water column [dissolved phase]</string> 
@@ -81,14 +137,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="3"> 
+  <void index="5"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/ALLOXXPX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/ALLOXXPX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of alloxanthin per unit volume of the water column</string> 
@@ -109,14 +165,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="4"> 
+  <void index="6"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MALSP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MALSP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of aluminium {Al} per unit dry weight of sediment</string> 
@@ -137,14 +193,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="5"> 
+  <void index="7"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MALPP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MALPP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of aluminium {Al} per unit dry weight of suspended particulate material</string> 
@@ -165,14 +221,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="6"> 
+  <void index="8"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/AMISP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/AMISP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of amino acids per unit dry weight of sediment</string> 
@@ -193,14 +249,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="7"> 
+  <void index="9"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MDMAP004</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP004</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of ammonium {NH4} per unit mass of the water column [dissolved phase]</string> 
@@ -221,14 +277,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="8"> 
+  <void index="10"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/AMONZZXX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/AMONZZXX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of ammonium {NH4} per unit volume of the water column [unknown phase]</string> 
@@ -249,14 +305,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="9"> 
+  <void index="11"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MBASP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MBASP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of barium {Ba} per unit dry weight of sediment</string> 
@@ -277,14 +333,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="10"> 
+  <void index="12"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MBAPP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MBAPP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of barium {Ba} per unit dry weight of suspended particulate material</string> 
@@ -305,14 +361,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="11"> 
+  <void index="13"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MDMAP014</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP014</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of bases per unit mass of the water column [dissolved phase]</string> 
@@ -333,14 +389,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="12"> 
+  <void index="14"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MBRSP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MBRSP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of bromine {Br} per unit dry weight of sediment</string> 
@@ -361,14 +417,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="13"> 
+  <void index="15"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MCASP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MCASP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of calcium {Ca} per unit dry weight of sediment</string> 
@@ -389,14 +445,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="14"> 
+  <void index="16"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MCAPP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MCAPP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of calcium {Ca} per unit dry weight of suspended particulate material</string> 
@@ -417,14 +473,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="15"> 
+  <void index="17"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/OCCNXXXX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/OCCNXXXX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of carbon (organic) per unit dry weight of sediment</string> 
@@ -445,14 +501,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="16"> 
+  <void index="18"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MDMAP010</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP010</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of carbon (organic) per unit volume of the water column [particulate phase]</string> 
@@ -473,14 +529,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="17"> 
+  <void index="19"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/TCO2ZZXX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/TCO2ZZXX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of carbon (total inorganic) {TCO2} per unit volume of the water column [dissolved plus reactive particulate phase]</string> 
@@ -501,14 +557,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="18"> 
+  <void index="20"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/TCCNXXXX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/TCCNXXXX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of carbon (total) per unit dry weight of sediment</string> 
@@ -529,14 +585,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="19"> 
+  <void index="21"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MDMAP011</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP011</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of carbon (total) per unit volume of the water column [particulate phase]</string> 
@@ -557,14 +613,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="20"> 
+  <void index="22"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/CALCXXXX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/CALCXXXX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of carbonate {CO3} per unit dry weight of sediment</string> 
@@ -585,14 +641,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="21"> 
+  <void index="23"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MCESP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MCESP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of cerium {Ce} per unit dry weight of sediment</string> 
@@ -613,14 +669,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="22"> 
+  <void index="24"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MCLPP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MCLPP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of chlorine {Cl} per unit dry weight of suspended particulate material</string> 
@@ -641,14 +697,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="23"> 
+  <void index="25"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/CPHLZZXX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/CPHLZZXX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of chlorophyll-a per unit volume of the water column</string> 
@@ -669,14 +725,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="24"> 
+  <void index="26"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/CHLBXXPX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/CHLBXXPX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of chlorophyll-b per unit volume of the water column</string> 
@@ -697,14 +753,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="25"> 
+  <void index="27"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/CHLCXXPX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/CHLCXXPX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of chlorophyll-c per unit volume of the water column</string> 
@@ -725,14 +781,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="26"> 
+  <void index="28"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/CHLC12PX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/CHLC12PX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of chlorophyll-c1c2 per unit volume of the water column</string> 
@@ -753,14 +809,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="27"> 
+  <void index="29"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/CHLC03PX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/CHLC03PX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of chlorophyll-c3 per unit volume of the water column</string> 
@@ -781,14 +837,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="28"> 
+  <void index="30"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MCRSP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MCRSP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of chromium {Cr} per unit dry weight of sediment</string> 
@@ -809,14 +865,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="29"> 
+  <void index="31"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MCUSP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MCUSP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of copper {Cu} per unit dry weight of sediment</string> 
@@ -837,14 +893,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="30"> 
+  <void index="32"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MDMAP002</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP002</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of dichlorodifluoromethane {freon-12 or CFC-12} per unit mass of the water column [dissolved phase]</string> 
@@ -865,14 +921,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="31"> 
+  <void index="33"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/FUCXZZZZ</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/FUCXZZZZ</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of fucoxanthin per unit volume of the water column</string> 
@@ -893,14 +949,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="32"> 
+  <void index="34"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/H2SXZZXX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/H2SXZZXX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of hydrogen sulphide {H2S} per unit volume of the water column [dissolved plus reactive particulate phase]</string> 
@@ -921,14 +977,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="33"> 
+  <void index="35"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MIISP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MIISP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of iodine {I} per unit dry weight of sediment</string> 
@@ -949,14 +1005,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="34"> 
+  <void index="36"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MFESP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MFESP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of iron (total) {Fe} per unit dry weight of sediment</string> 
@@ -977,14 +1033,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="35"> 
+  <void index="37"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MFEPP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MFEPP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of iron (total) {Fe} per unit dry weight of suspended particulate material</string> 
@@ -1005,14 +1061,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="36"> 
+  <void index="38"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MLASP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MLASP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of lanthanum {La} per unit dry weight of sediment</string> 
@@ -1033,14 +1089,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="37"> 
+  <void index="39"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MPBSP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MPBSP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of lead {Pb} per unit dry weight of sediment</string> 
@@ -1061,14 +1117,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="38"> 
+  <void index="40"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MMGSP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MMGSP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of magnesium {Mg} per unit dry weight of sediment</string> 
@@ -1089,14 +1145,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="39"> 
+  <void index="41"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MMGPP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MMGPP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of magnesium {Mg} per unit dry weight of suspended particulate material</string> 
@@ -1117,14 +1173,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="40"> 
+  <void index="42"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MMNSP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MMNSP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of manganese {Mn} per unit dry weight of sediment</string> 
@@ -1145,14 +1201,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="41"> 
+  <void index="43"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MMNPP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MMNPP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of manganese {Mn} per unit dry weight of suspended particulate material</string> 
@@ -1173,14 +1229,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="42"> 
+  <void index="44"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/CHEMM005</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/CHEMM005</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of mercury {Hg} per unit dry weight of suspended particulate material</string> 
@@ -1201,14 +1257,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="43"> 
+  <void index="45"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MMOSP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MMOSP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of molybdenum {Mo} per unit dry weight of sediment</string> 
@@ -1229,14 +1285,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="44"> 
+  <void index="46"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MNDSP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MNDSP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of neodynium {Nd} per unit dry weight of sediment</string> 
@@ -1257,14 +1313,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="45"> 
+  <void index="47"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MNISP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MNISP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of nickel {Ni} per unit dry weight of sediment</string> 
@@ -1285,14 +1341,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="46"> 
+  <void index="48"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MNBSP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MNBSP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of niobium {Nb} per unit dry weight of sediment</string> 
@@ -1313,14 +1369,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="47"> 
+  <void index="49"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MDMAP005</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP005</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of nitrate {NO3} per unit mass of the water column [dissolved phase]</string> 
@@ -1341,14 +1397,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="48"> 
+  <void index="50"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/NTRAZZXX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/NTRAZZXX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of nitrate {NO3} per unit volume of the water column [unknown phase]</string> 
@@ -1369,14 +1425,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="49"> 
+  <void index="51"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MDMAP006</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP006</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of nitrate+nitrite {NO3+NO2} per unit mass of the water column [dissolved phase]</string> 
@@ -1397,14 +1453,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="50"> 
+  <void index="52"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/NTRZZZXX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/NTRZZZXX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of nitrate+nitrite {NO3+NO2} per unit volume of the water column [unknown phase]</string> 
@@ -1425,14 +1481,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="51"> 
+  <void index="53"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/NTRIZZXX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/NTRIZZXX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of nitrite per unit volume of the water column [unknown phase]</string> 
@@ -1453,14 +1509,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="52"> 
+  <void index="54"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MDMAP007</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP007</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of nitrite {NO2} per unit mass of the water column [dissolved phase]</string> 
@@ -1481,14 +1537,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="53"> 
+  <void index="55"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MDMAP008</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP008</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of nitrogen (organic) per unit mass of the water column [dissolved phase]</string> 
@@ -1509,14 +1565,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="54"> 
+  <void index="56"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MDMAP009</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP009</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of nitrogen (organic) per unit volume of the water column [dissolved phase]</string> 
@@ -1537,14 +1593,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="55"> 
+  <void index="57"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/NTOTZZXX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/NTOTZZXX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of nitrogen (total) per unit volume of the water column [dissolved plus reactive particulate phase]</string> 
@@ -1565,14 +1621,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="56"> 
+  <void index="58"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MDMAP013</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP013</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of nitrogen (total) per unit volume of the water column [particulate phase]</string> 
@@ -1593,14 +1649,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="57"> 
+  <void index="59"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/DOXMZZXX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/DOXMZZXX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of oxygen {O2} per unit mass of the water column [dissolved phase]</string> 
@@ -1621,14 +1677,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="58"> 
+  <void index="60"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/DOXYZZXX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/DOXYZZXX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of oxygen {O2} per unit volume of the water column [dissolved phase]</string> 
@@ -1649,14 +1705,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="59"> 
+  <void index="61"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/PHOSZZXX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/PHOSZZXX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of phosphate {PO4} per unit volume of the water column [unknown phase]</string> 
@@ -1677,14 +1733,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="60"> 
+  <void index="62"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/TPHSZZXX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/TPHSZZXX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of phosphorus (total) per unit volume of the water column [dissolved plus reactive particulate phase]</string> 
@@ -1705,14 +1761,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="61"> 
+  <void index="63"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MPPSP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MPPSP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of phosphorus {P} per unit dry weight of sediment</string> 
@@ -1733,14 +1789,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="62"> 
+  <void index="64"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MPPPP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MPPPP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of phosphorus {P} per unit dry weight of suspended particulate material</string> 
@@ -1761,14 +1817,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="63"> 
+  <void index="65"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MKKSP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MKKSP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of potassium {K} per unit dry weight of sediment</string> 
@@ -1789,14 +1845,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="64"> 
+  <void index="66"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MKKPP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MKKPP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of potassium {K} per unit dry weight of suspended particulate material</string> 
@@ -1817,14 +1873,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="65"> 
+  <void index="67"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MRBSP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MRBSP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of rubidium {Rb} per unit dry weight of sediment</string> 
@@ -1845,14 +1901,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="66"> 
+  <void index="68"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MSCSP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MSCSP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of scandium {Sc} per unit dry weight of sediment</string> 
@@ -1873,14 +1929,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="67"> 
+  <void index="69"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MDMAP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of silicate {SiO4} per unit mass of the water column [dissolved phase]</string> 
@@ -1901,14 +1957,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="68"> 
+  <void index="70"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/SLCAZZXX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/SLCAZZXX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of silicate {SiO4} per unit volume of the water column [unknown phase]</string> 
@@ -1929,14 +1985,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="69"> 
+  <void index="71"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MSISP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MSISP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of silicon {Si} per unit dry weight of sediment</string> 
@@ -1957,14 +2013,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="70"> 
+  <void index="72"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MSIPP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MSIPP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of silicon {Si} per unit dry weight of suspended particulate material</string> 
@@ -1985,14 +2041,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="71"> 
+  <void index="73"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MNASP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MNASP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of sodium {Na} per unit dry weight of sediment</string> 
@@ -2013,14 +2069,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="72"> 
+  <void index="74"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MSRSP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MSRSP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of strontium {Sr} per unit dry weight of sediment</string> 
@@ -2041,14 +2097,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="73"> 
+  <void index="75"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MSSPP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MSSPP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of sulphur {S} per unit dry weight of suspended particulate material</string> 
@@ -2069,14 +2125,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="74"> 
+  <void index="76"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MTHSP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MTHSP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of thorium {Th} per unit dry weight of sediment</string> 
@@ -2097,14 +2153,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="75"> 
+  <void index="77"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MTISP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MTISP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of titanium {Ti} per unit dry weight of sediment</string> 
@@ -2125,14 +2181,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="76"> 
+  <void index="78"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MTIPP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MTIPP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of titanium {Ti} per unit dry weight of suspended particulate material</string> 
@@ -2153,14 +2209,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="77"> 
+  <void index="79"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MDMAP001</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP001</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of trichlorofluoromethane {freon-11 or CFC-11} per unit mass of the water column [dissolved phase]</string> 
@@ -2181,14 +2237,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="78"> 
+  <void index="80"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MUUSP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MUUSP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of uranium {U} per unit dry weight of sediment</string> 
@@ -2209,14 +2265,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="79"> 
+  <void index="81"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MVVSP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MVVSP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of vanadium {V} per unit dry weight of sediment</string> 
@@ -2237,14 +2293,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="80"> 
+  <void index="82"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MYYSP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MYYSP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of yttrium {Y} per unit dry weight of sediment</string> 
@@ -2265,14 +2321,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="81"> 
+  <void index="83"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MZNSP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MZNSP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of zinc {Zn} per unit dry weight of sediment</string> 
@@ -2293,14 +2349,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="82"> 
+  <void index="84"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MZRSP012</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MZRSP012</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Concentration of zirconium {Zr} per unit dry weight of sediment</string> 
@@ -2321,14 +2377,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="83"> 
+  <void index="85"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/LCDAZZ01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/LCDAZZ01</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Current direction in the water column</string> 
@@ -2349,14 +2405,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="84"> 
+  <void index="86"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/LCSAZZ01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/LCSAZZ01</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Current speed in the water column</string> 
@@ -2377,14 +2433,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="85"> 
+  <void index="87"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/COREDIST</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/COREDIST</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Depth below surface of the bed</string> 
@@ -2405,14 +2461,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="86"> 
+  <void index="88"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/ADEPZZ01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/ADEPZZ01</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Depth below surface of the water column</string> 
@@ -2433,14 +2489,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="87"> 
+  <void index="89"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/CDEWZZ01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/CDEWZZ01</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Dew point temperature of the atmosphere</string> 
@@ -2461,14 +2517,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="88"> 
+  <void index="90"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/LCEWZZ01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/LCEWZZ01</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Eastward current velocity in the water column</string> 
@@ -2489,14 +2545,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="89"> 
+  <void index="91"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/ESEWZZXX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/ESEWZZXX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Eastward wind velocity in the atmosphere</string> 
@@ -2517,14 +2573,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="90"> 
+  <void index="92"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/GCMXZZ01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/GCMXZZ01</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Maximum height of waves on the water column</string> 
@@ -2545,14 +2601,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="91"> 
+  <void index="93"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/GMXLZZ01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/GMXLZZ01</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Maximum level of waves on the water column</string> 
@@ -2573,14 +2629,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="92"> 
+  <void index="94"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/GZMXZZ01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/GZMXZZ01</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Maximum zero crossing height of waves on the water column</string> 
@@ -2601,14 +2657,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="93"> 
+  <void index="95"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/LCNSZZ01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/LCNSZZ01</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Northward current velocity in the water column</string> 
@@ -2629,14 +2685,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="94"> 
+  <void index="96"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/ESNSZZXX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/ESNSZZXX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Northward wind velocity in the atmosphere</string> 
@@ -2657,14 +2713,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="95"> 
+  <void index="97"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/GTPKZZ01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/GTPKZZ01</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Period at spectral maximum of waves on the water column</string> 
@@ -2685,14 +2741,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="96"> 
+  <void index="98"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/PSLTZZ01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/PSLTZZ01</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Practical salinity of the water column</string> 
@@ -2713,14 +2769,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="97"> 
+  <void index="99"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/PRESPS02</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/PRESPS02</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Pressure (measured variable) exerted by the water column by fixed in-situ pressure sensor and corrected to read zero at sea level</string> 
@@ -2741,14 +2797,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="98"> 
+  <void index="100"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/PRESPR01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/PRESPR01</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Pressure (spatial co-ordinate) exerted by the water column by profiling pressure sensor and corrected to read zero at sea level</string> 
@@ -2769,14 +2825,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="99"> 
+  <void index="101"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/CRELZZ01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/CRELZZ01</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Relative humidity of the atmosphere</string> 
@@ -2797,14 +2853,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="100"> 
+  <void index="102"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/MBANZZZZ</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MBANZZZZ</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Sea-floor depth (below instantaneous sea level) {bathymetric depth} in the water column</string> 
@@ -2825,14 +2881,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="101"> 
+  <void index="103"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/ASLVZZ01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/ASLVZZ01</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Surface elevation (unspecified datum) of the water column</string> 
@@ -2853,14 +2909,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="102"> 
+  <void index="104"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/CTMPZZ01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/CTMPZZ01</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Temperature of the atmosphere</string> 
@@ -2881,14 +2937,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="103"> 
+  <void index="105"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/TEMPPR01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/TEMPPR01</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Temperature of the water column</string> 
@@ -2909,14 +2965,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="104"> 
+  <void index="106"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/ALKYZZXX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/ALKYZZXX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Total alkalinity of the water column</string> 
@@ -2937,14 +2993,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="105"> 
+  <void index="107"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/EWDAZZ01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/EWDAZZ01</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Wind from direction in the atmosphere</string> 
@@ -2965,14 +3021,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="106"> 
+  <void index="108"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/EGTSZZ01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/EGTSZZ01</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Wind speed (gust) in the atmosphere</string> 
@@ -2993,14 +3049,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="107"> 
+  <void index="109"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/EWSBZZ01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/EWSBZZ01</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Wind speed in the atmosphere</string> 
@@ -3021,14 +3077,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
-  <void index="108"> 
+  <void index="110"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P012/7/PHXXZZXX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/PHXXZZXX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>pH of the water column</string> 
@@ -3049,7 +3105,7 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P012/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
     </void> 
    </object> 
   </void> 
