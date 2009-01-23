@@ -1,7 +1,7 @@
 <NemoConfiguration lang="fr_FR">
   <dataCenter>FI</dataCenter>
-  <nemoWsURL>http://www.ifremer.fr/WSnemo</nemoWsURL>
-  <nautilusWsURL>http://www.ifremer.fr/WSnautilus</nautilusWsURL>
+  <nemoWsURL>http://www.ifremer.fr/WSnemo/services/NEMO</nemoWsURL>
+  <nautilusWsURL>http://www.ifremer.fr/WSnautilus/services/NAUTILUS</nautilusWsURL>
   <showRule>true</showRule>
   <contact></contact>
   <modelsDirectory>C:\DONNEES\Projets\IFREMER\NEMO\Donn&#233;es</modelsDirectory>
