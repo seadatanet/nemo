@@ -2,6 +2,10 @@ package fr.ifremer.nemo.util;
 
 public interface Global
 {
+
+    public static final String EMPTY = "";  //$NON-NLS-1$
+    public static final String ZERO = "0"; //$NON-NLS-1$
+    
     // Types de fichier
     public static final String PROFILE = "profile"; //$NON-NLS-1$
     public static final String TIMESERIES = "timeSeries"; //$NON-NLS-1$
