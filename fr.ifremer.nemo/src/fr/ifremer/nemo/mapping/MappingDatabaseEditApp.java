@@ -6,17 +6,38 @@ package fr.ifremer.nemo.mapping;
 
 import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
+import org.jdesktop.application.View;
 
 /**
  * The main class of the application.
  */
 public class MappingDatabaseEditApp extends SingleFrameApplication {
 
+    View vue=null;
     /**
      * At startup create and show the main frame of the application.
      */
     @Override protected void startup() {
-        show(new MappingDatabaseEditView(this));
+        if(this.vue==null)
+        {
+            this.vue=new MappingDatabaseEditView(this);
+        }
+        show(vue);
+
+    }
+
+    protected void show() {
+        show(this.vue);
+    }
+
+    protected void hide() {
+        hide(this.vue);
+        //this.vue.getApplication().exit();
+        
+    }
+
+    @Override protected void shutdown() {
+        hide(this.getMainView());
     }
 
     /**
@@ -35,6 +56,9 @@ public class MappingDatabaseEditApp extends SingleFrameApplication {
         return Application.getInstance(MappingDatabaseEditApp.class);
     }
 
+    public View getView() {
+        return this.vue;
+    }
     /**
      * Main method launching the application.
      */

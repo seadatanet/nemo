@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
-
+import fr.ifremer.nemo.mapping.*;
 import fr.ifremer.nemo.ui.EditConversion;
 import fr.ifremer.nemo.ui.Utils;
 

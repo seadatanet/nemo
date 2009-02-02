@@ -18,7 +18,7 @@ import javax.persistence.RollbackException;
 import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
+
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import org.jdesktop.beansbinding.AbstractBindingListener;
@@ -61,6 +61,7 @@ public class MappingDatabaseEditView extends FrameView {
         // connecting action tasks to status bar via TaskMonitor
         TaskMonitor taskMonitor = new TaskMonitor(getApplication().getContext());
         taskMonitor.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 String propertyName = evt.getPropertyName();
                 if ("started".equals(propertyName)) {
@@ -108,6 +109,11 @@ public class MappingDatabaseEditView extends FrameView {
 
         // have a transaction started
         entityManager.getTransaction().begin();
+
+
+        //FIXME
+        //La bar de recherche s'initialise bizare, alors j'efface le contenu pour l'instant
+        jTextField3.setText("");
     }
 
 
@@ -150,10 +156,20 @@ public class MappingDatabaseEditView extends FrameView {
         list.removeAll(toRemove);
         setSaveNeeded(true);
     }
-    
+
+    @Action()
+    @SuppressWarnings("static-access")
+    public Task cancel() {
+        RefreshTask task = new RefreshTask(getApplication());
+        fr.ifremer.nemo.mapping.MappingDatabaseEditApp.getInstance().hide(fr.ifremer.nemo.mapping.MappingDatabaseEditApp.getApplication().getView());
+
+        return task;
+    }
 
     @Action(enabledProperty = "saveNeeded")
     public Task save() {
+        fr.ifremer.nemo.mapping.MappingDatabaseEditApp.getInstance().hide(fr.ifremer.nemo.mapping.MappingDatabaseEditApp.getApplication().getView());
+
         return new SaveTask(getApplication());
     }
 
@@ -232,16 +248,6 @@ public class MappingDatabaseEditView extends FrameView {
         }
     }
 
-    @Action
-    public void showAboutBox() {
-        if (aboutBox == null) {
-            JFrame mainFrame = MappingDatabaseEditApp.getApplication().getMainFrame();
-            aboutBox = new MappingDatabaseEditAboutBox(mainFrame);
-            aboutBox.setLocationRelativeTo(mainFrame);
-        }
-        MappingDatabaseEditApp.getApplication().show(aboutBox);
-    }
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -259,45 +265,64 @@ public class MappingDatabaseEditView extends FrameView {
         filenameLabel = new javax.swing.JLabel();
         modusField = new javax.swing.JTextField();
         filenameField = new javax.swing.JTextField();
-        saveButton = new javax.swing.JButton();
-        refreshButton = new javax.swing.JButton();
         newButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         statusPanel = new javax.swing.JPanel();
         javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
         statusMessageLabel = new javax.swing.JLabel();
         statusAnimationLabel = new javax.swing.JLabel();
         progressBar = new javax.swing.JProgressBar();
-        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("nemoPU").createEntityManager();
+        jButton1 = new javax.swing.JButton();
+        saveButton = new javax.swing.JButton();
+        refreshButton = new javax.swing.JButton();
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(fr.ifremer.nemo.mapping.MappingDatabaseEditApp.class).getContext().getResourceMap(MappingDatabaseEditView.class);
+        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory(resourceMap.getString("entityManager.persistenceUnit")).createEntityManager(); // NOI18N
         query = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery(resourceMap.getString("query.query")); // NOI18N
         list = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : org.jdesktop.observablecollections.ObservableCollections.observableList(query.getResultList());
+        dateColumnFormat1 = new fr.ifremer.nemo.mapping.utils.DateColumnFormat();
+        rowSorterToStringConverter1 = new fr.ifremer.nemo.mapping.utils.RowSorterToStringConverter();
 
         mainPanel.setName("mainPanel"); // NOI18N
+        mainPanel.setPreferredSize(new java.awt.Dimension(651, 468));
+        mainPanel.setRequestFocusEnabled(false);
 
         masterScrollPane.setName("masterScrollPane"); // NOI18N
 
+        masterTable.setDragEnabled(true);
+        masterTable.setAutoCreateRowSorter(true);
         masterTable.setName("masterTable"); // NOI18N
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, list, masterTable);
-        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${modus}"));
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${mappingPK.localCdiId}"));
+        columnBinding.setColumnName("LOCAL_CDI_ID");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${modus}"));
         columnBinding.setColumnName("Modus");
-        columnBinding.setColumnClass(Character.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${filename}"));
-        columnBinding.setColumnName("Filename");
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${mappingPK.format}"));
         columnBinding.setColumnName("Mapping PK.format");
         columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${mappingPK.localCdiId}"));
-        columnBinding.setColumnName("LOCAL_CDI_ID");
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${filename}"));
+        columnBinding.setColumnName("Filename");
         columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${date}"));
+        columnBinding.setColumnName("Date");
+        columnBinding.setColumnClass(java.util.Date.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         masterScrollPane.setViewportView(masterTable);
-        masterTable.getColumnModel().getColumn(0).setHeaderValue(resourceMap.getString("masterTable.columnModel.title0")); // NOI18N
-        masterTable.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("masterTable.columnModel.title1")); // NOI18N
+        masterTable.getColumnModel().getColumn(1).setHeaderValue(resourceMap.getString("masterTable.columnModel.title0")); // NOI18N
         masterTable.getColumnModel().getColumn(2).setHeaderValue(resourceMap.getString("masterTable.columnModel.title2")); // NOI18N
+        masterTable.getColumnModel().getColumn(3).setHeaderValue(resourceMap.getString("masterTable.columnModel.title1")); // NOI18N
+        masterTable.getColumnModel().getColumn(4).setHeaderValue(resourceMap.getString("masterTable.columnModel.title4")); // NOI18N
+        masterTable.getColumnModel().getColumn(4).setCellEditor(dateColumnFormat1.getEditor());
+        masterTable.getColumnModel().getColumn(4).setCellRenderer(dateColumnFormat1.getRenderer());
 
         modusLabel.setText(resourceMap.getString("modusLabel.text")); // NOI18N
         modusLabel.setName("modusLabel"); // NOI18N
@@ -310,7 +335,7 @@ public class MappingDatabaseEditView extends FrameView {
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.modus}"), modusField, org.jdesktop.beansbinding.BeanProperty.create("text"));
         binding.setSourceUnreadableValue(null);
         bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), modusField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), modusField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
         filenameField.setName("filenameField"); // NOI18N
@@ -322,17 +347,42 @@ public class MappingDatabaseEditView extends FrameView {
         bindingGroup.addBinding(binding);
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(fr.ifremer.nemo.mapping.MappingDatabaseEditApp.class).getContext().getActionMap(MappingDatabaseEditView.class, this);
-        saveButton.setAction(actionMap.get("save")); // NOI18N
-        saveButton.setName("saveButton"); // NOI18N
-
-        refreshButton.setAction(actionMap.get("refresh")); // NOI18N
-        refreshButton.setName("refreshButton"); // NOI18N
-
         newButton.setAction(actionMap.get("newRecord")); // NOI18N
         newButton.setName("newButton"); // NOI18N
 
         deleteButton.setAction(actionMap.get("deleteRecord")); // NOI18N
         deleteButton.setName("deleteButton"); // NOI18N
+
+        jTextField1.setName("LocalCdiIdField"); // NOI18N
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.mappingPK.localCdiId}"), jTextField1, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jTextField1, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jTextField2.setName("FormatField"); // NOI18N
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.mappingPK.format}"), jTextField2, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jTextField2, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
+        bindingGroup.addBinding(binding);
+
+        jLabel1.setText(resourceMap.getString("LocalCdiIdLabel.text")); // NOI18N
+        jLabel1.setName("LocalCdiIdLabel"); // NOI18N
+
+        jLabel2.setText(resourceMap.getString("formatLabel.text")); // NOI18N
+        jLabel2.setName("formatLabel"); // NOI18N
+
+        jTextField3.setName("jTextField3"); // NOI18N
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${rowSorter}"), jTextField3, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding.setSourceNullValue(null);
+        binding.setSourceUnreadableValue(null);
+        binding.setConverter(rowSorterToStringConverter1);
+        bindingGroup.addBinding(binding);
+
+        jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
+        jLabel3.setName("jLabel3"); // NOI18N
 
         org.jdesktop.layout.GroupLayout mainPanelLayout = new org.jdesktop.layout.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -340,51 +390,73 @@ public class MappingDatabaseEditView extends FrameView {
             mainPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(mainPanelLayout.createSequentialGroup()
                 .add(mainPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(mainPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .add(masterScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 757, Short.MAX_VALUE))
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, mainPanelLayout.createSequentialGroup()
+                        .addContainerGap()
                         .add(newButton)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(deleteButton))
+                    .add(mainPanelLayout.createSequentialGroup()
+                        .add(mainPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(mainPanelLayout.createSequentialGroup()
+                                .add(8, 8, 8)
+                                .add(jLabel1))
+                            .add(mainPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(modusLabel))
+                            .add(mainPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .add(mainPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                    .add(filenameLabel)
+                                    .add(jLabel2))))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(deleteButton)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(refreshButton)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(saveButton))
+                        .add(mainPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, filenameField, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 682, Short.MAX_VALUE)
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, jTextField2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 682, Short.MAX_VALUE)
+                            .add(modusField, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 682, Short.MAX_VALUE)
+                            .add(jTextField1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 682, Short.MAX_VALUE)))
                     .add(mainPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .add(mainPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(modusLabel)
-                            .add(filenameLabel))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(mainPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(modusField, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
-                            .add(filenameField, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)))
-                    .add(mainPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .add(masterScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)))
+                        .add(jLabel3)
+                        .add(40, 40, 40)
+                        .add(jTextField3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        mainPanelLayout.linkSize(new java.awt.Component[] {deleteButton, newButton, refreshButton, saveButton}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
+        mainPanelLayout.linkSize(new java.awt.Component[] {deleteButton, newButton}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
 
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(mainPanelLayout.createSequentialGroup()
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(masterScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
+                .add(mainPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jTextField3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabel3))
+                .add(8, 8, 8)
+                .add(masterScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(mainPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jTextField1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabel1))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(mainPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(modusLabel)
                     .add(modusField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(mainPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jLabel2)
+                    .add(jTextField2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(mainPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(filenameLabel)
                     .add(filenameField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(mainPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(saveButton)
-                    .add(refreshButton)
                     .add(deleteButton)
                     .add(newButton))
-                .addContainerGap())
+                .add(46, 46, 46))
         );
 
         statusPanel.setName("statusPanel"); // NOI18N
@@ -398,24 +470,47 @@ public class MappingDatabaseEditView extends FrameView {
 
         progressBar.setName("progressBar"); // NOI18N
 
+        jButton1.setAction(actionMap.get("cancel")); // NOI18N
+        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
+        jButton1.setName("jButton1"); // NOI18N
+
+        saveButton.setAction(actionMap.get("save")); // NOI18N
+        saveButton.setName("saveButton"); // NOI18N
+
+        refreshButton.setAction(actionMap.get("refresh")); // NOI18N
+        refreshButton.setName("refreshButton"); // NOI18N
+
         org.jdesktop.layout.GroupLayout statusPanelLayout = new org.jdesktop.layout.GroupLayout(statusPanel);
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(statusPanelSeparator, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE)
             .add(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(statusMessageLabel)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 323, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 607, Short.MAX_VALUE)
                 .add(progressBar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(statusAnimationLabel)
                 .addContainerGap())
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, statusPanelLayout.createSequentialGroup()
+                .addContainerGap(550, Short.MAX_VALUE)
+                .add(refreshButton)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(saveButton)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(jButton1)
+                .addContainerGap())
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, statusPanelSeparator, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE)
         );
         statusPanelLayout.setVerticalGroup(
             statusPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(statusPanelLayout.createSequentialGroup()
-                .add(statusPanelSeparator, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(statusPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jButton1)
+                    .add(saveButton)
+                    .add(refreshButton))
+                .add(9, 9, 9)
+                .add(statusPanelSeparator, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(statusPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(statusMessageLabel)
@@ -424,6 +519,8 @@ public class MappingDatabaseEditView extends FrameView {
                 .add(3, 3, 3))
         );
 
+        rowSorterToStringConverter1.setTable(masterTable);
+
         setComponent(mainPanel);
         setStatusBar(statusPanel);
 
@@ -431,10 +528,18 @@ public class MappingDatabaseEditView extends FrameView {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private fr.ifremer.nemo.mapping.utils.DateColumnFormat dateColumnFormat1;
     private javax.swing.JButton deleteButton;
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JTextField filenameField;
     private javax.swing.JLabel filenameLabel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     private java.util.List<fr.ifremer.nemo.mapping.Mapping> list;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JScrollPane masterScrollPane;
@@ -445,6 +550,7 @@ public class MappingDatabaseEditView extends FrameView {
     private javax.swing.JProgressBar progressBar;
     private javax.persistence.Query query;
     private javax.swing.JButton refreshButton;
+    private fr.ifremer.nemo.mapping.utils.RowSorterToStringConverter rowSorterToStringConverter1;
     private javax.swing.JButton saveButton;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
@@ -457,8 +563,6 @@ public class MappingDatabaseEditView extends FrameView {
     private final Icon idleIcon;
     private final Icon[] busyIcons = new Icon[15];
     private int busyIconIndex = 0;
-
-    private JDialog aboutBox;
 
     private boolean saveNeeded;
 }

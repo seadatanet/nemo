@@ -31,7 +31,7 @@ import fr.ifremer.nemo.input.InputModel;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ui.*;
 
-public class OpenMappingAction extends Action implements ISelectionListener,
+public class ImportMappingAction extends Action implements ISelectionListener,
         ActionFactory.IWorkbenchAction {
     private final IWorkbenchWindow window;
 
@@ -41,13 +41,13 @@ public class OpenMappingAction extends Action implements ISelectionListener,
 
     public static Shell shelloptions;
 
-    public static String nomModele, nomFichierModele;
+    public static String nomMapping;
 
-    public OpenMappingAction(IWorkbenchWindow window) {
+    public ImportMappingAction(IWorkbenchWindow window) {
 
         this.window = window;
         setId(ID);
-        setText(Messages.getString("OpenMappingAction.1")); //$NON-NLS-1$
+        setText(Messages.getString("ImportMappingAction.1")); //$NON-NLS-1$
         //setText("Import"); //$NON-NLS-1$
         window.getSelectionService().addSelectionListener(this);
 
@@ -70,18 +70,21 @@ public class OpenMappingAction extends Action implements ISelectionListener,
                     | SWT.APPLICATION_MODAL);
             dialog.setFilterPath(Utils.configuration.getModelsDirectory()
                     + "\\"); //$NON-NLS-1$
-            dialog.setText(Messages.getString("OpenMappingAction.5")); //$NON-NLS-1$
+            dialog.setText(Messages.getString("ImportMappingAction.5")); //$NON-NLS-1$
             String extensions[] = new String[1];
             extensions[0] = "*.txt"; //$NON-NLS-1$
             dialog.setFilterExtensions(extensions);
-            nomModele = dialog.open();
+            nomMapping = dialog.open();
 
-            if (nomModele == null) {
+            if (nomMapping == null) {
             } else {
+                
+                new MappingTable().importer(nomMapping);
 
+                Utils.messageInfo("Importation realise"); //$NON-NLS-1$
                 // ouverture du fichier XML de modele
 
-                com.ago.xml.XMLBootstrapParser parser = new com.ago.xml.XMLBootstrapParser(
+                /*com.ago.xml.XMLBootstrapParser parser = new com.ago.xml.XMLBootstrapParser(
                         inputModel);
 
                 try {
@@ -100,7 +103,7 @@ public class OpenMappingAction extends Action implements ISelectionListener,
                 DataModel.ouverture = true;
 
                 ViewLog.styledTextLogInfos.append(Messages
-                        .getString("OpenAction.8") + nomModele); //$NON-NLS-1$
+                        .getString("OpenAction.8") + nomModele); //$NON-NLS-1$*/
 
             }
 

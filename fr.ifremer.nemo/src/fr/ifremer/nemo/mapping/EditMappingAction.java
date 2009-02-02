@@ -12,27 +12,15 @@ package fr.ifremer.nemo.mapping;
  * @author jollivie
  *
  */
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.awt.Dialog;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
-
-import fr.ifremer.nemo.input.InputModel;
-import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.nemo.ui.*;
-
-import org.jdesktop.application.Application;
-import org.jdesktop.application.SingleFrameApplication;
 
 public class EditMappingAction extends Action implements ISelectionListener,
         ActionFactory.IWorkbenchAction {
@@ -51,7 +39,7 @@ public class EditMappingAction extends Action implements ISelectionListener,
         this.window = window;
         setId(ID);
         //setText(Messages.getString("OpenAction.1")); //$NON-NLS-1$
-        setText("Edit mapping"); //$NON-NLS-1$
+        setText("Editer"); //$NON-NLS-1$
         window.getSelectionService().addSelectionListener(this);
 
     }
@@ -64,8 +52,11 @@ public class EditMappingAction extends Action implements ISelectionListener,
     public void run() {
         //InputModel inputModel = new InputModel();
 
-        MappingDatabaseEditApp tt = MappingDatabaseEditApp.getApplication();
-        tt.startup();
+        MappingDatabaseEditApp mappingEditeur = MappingDatabaseEditApp.getApplication();
+        mappingEditeur.getMainFrame().setAlwaysOnTop(true);
+      //  mappingEditeur.getMainFrame()
+        mappingEditeur.startup();
+
         
         //Application te = new MappingDatabaseEditApp();
         

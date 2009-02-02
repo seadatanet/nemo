@@ -43,7 +43,7 @@ public class ExportMappingAction extends Action implements ISelectionListener,
 
     public static Shell shelloptions;
 
-    public static String nomModele, nomFichierModele;
+    public static String nomMapping;
 
     public ExportMappingAction(IWorkbenchWindow window) {
 
@@ -75,33 +75,16 @@ public class ExportMappingAction extends Action implements ISelectionListener,
             String extensions[] = new String[1];
             extensions[0] = "*.txt"; //$NON-NLS-1$
             dialog.setFilterExtensions(extensions);
-            nomModele = dialog.open();
+            nomMapping = dialog.open();
 
-            if (nomModele == null) {
+            if (nomMapping == null) {
             } else {
 
                 // ouverture du fichier XML de modele
 
-                com.ago.xml.XMLBootstrapParser parser = new com.ago.xml.XMLBootstrapParser(
-                        inputModel);
+                new MappingTable().exporter(nomMapping);
 
-                try {
-                    stream = new java.io.FileInputStream(nomModele);
-                } catch (FileNotFoundException e) {
-                    // 
-                    e.printStackTrace();
-                }
-//              System.out.println("Ouverture du modele : " + nomModele); //$NON-NLS-1$
-                parser.parse(stream, false);
-
-                File fich = new File(nomModele);
-                nomFichierModele = fich.getName();
-
-                DataModel.ouvertureModele(inputModel);
-                DataModel.ouverture = true;
-
-                ViewLog.styledTextLogInfos.append(Messages
-                        .getString("OpenAction.8") + nomModele); //$NON-NLS-1$
+                Utils.messageInfo("Importation realise"); //$NON-NLS-1$
 
             }
 

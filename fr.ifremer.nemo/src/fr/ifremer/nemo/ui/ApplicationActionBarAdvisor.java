@@ -63,7 +63,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 
 		// saveAsAction = ActionFactory.SAVE_AS.create(window);
 
-        mappingDatabaseImportAction = new OpenMappingAction(window);
+        mappingDatabaseImportAction = new ImportMappingAction(window);
         mappingDatabaseExportAction = new ExportMappingAction(window);
         mappingDatabaseEditAction = new EditMappingAction(window);
         
@@ -119,8 +119,8 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 		// aboutMenu.add(aboutAction);
 
 		menuBar.add(fileMenu);
+        menuBar.add(mappingMenu);
 		menuBar.add(optionsMenu);
-        menuBar.add(mappingMenu);        
 		menuBar.add(helpMenu);
 		// menuBar.add(aboutMenu);
 

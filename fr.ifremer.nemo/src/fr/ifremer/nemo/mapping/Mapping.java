@@ -8,21 +8,25 @@ package fr.ifremer.nemo.mapping;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 /**
  *
  * @author jollivie
  */
 @Entity
 @Table(name = "MAPPING",schema = "PUBLIC")
-@NamedQueries({@NamedQuery(name = "Mapping.findByLocalCdiId", query = "SELECT m FROM Mapping m WHERE m.mappingPK.localCdiId = :localCdiId"), @NamedQuery(name = "Mapping.findByModus", query = "SELECT m FROM Mapping m WHERE m.modus = :modus"), @NamedQuery(name = "Mapping.findByFormat", query = "SELECT m FROM Mapping m WHERE m.mappingPK.format = :format"), @NamedQuery(name = "Mapping.findByFilename", query = "SELECT m FROM Mapping m WHERE m.filename = :filename")})
+@NamedQueries({@NamedQuery(name = "Mapping.findByLocalCdiId", query = "SELECT m FROM Mapping m WHERE m.mappingPK.localCdiId = :localCdiId"), @NamedQuery(name = "Mapping.findByModus", query = "SELECT m FROM Mapping m WHERE m.modus = :modus"), @NamedQuery(name = "Mapping.findByFormat", query = "SELECT m FROM Mapping m WHERE m.mappingPK.format = :format"), @NamedQuery(name = "Mapping.findByFilename", query = "SELECT m FROM Mapping m WHERE m.filename = :filename"), @NamedQuery(name = "Mapping.findByDate", query = "SELECT m FROM Mapping m WHERE m.date = :date")})
 public class Mapping implements Serializable {
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
@@ -30,9 +34,12 @@ public class Mapping implements Serializable {
     @EmbeddedId
     protected MappingPK mappingPK;
     @Column(name = "MODUS")
-    private Character modus;
+    private String modus;
     @Column(name = "FILENAME")
     private String filename;
+    @Column(name = "DATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;    
 
     public Mapping() {
     }
@@ -53,12 +60,12 @@ public class Mapping implements Serializable {
         this.mappingPK = mappingPK;
     }
 
-    public Character getModus() {
+    public String getModus() {
         return modus;
     }
 
-    public void setModus(Character modus) {
-        Character oldModus = this.modus;
+    public void setModus(String modus) {
+        String oldModus = this.modus;
         this.modus = modus;
         changeSupport.firePropertyChange("modus", oldModus, modus);
     }
@@ -73,6 +80,16 @@ public class Mapping implements Serializable {
         changeSupport.firePropertyChange("filename", oldFilename, filename);
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        Date oldDate = this.date;
+        this.date = date;
+        changeSupport.firePropertyChange("date", oldDate, date);
+    }    
+    
     @Override
     public int hashCode() {
         int hash = 0;
