@@ -8,12 +8,14 @@ import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 import org.jdesktop.application.View;
 
+import fr.ifremer.nemo.mapping.MappingDatabaseEditView.RefreshTask;
+
 /**
  * The main class of the application.
  */
 public class MappingDatabaseEditApp extends SingleFrameApplication {
 
-    View vue=null;
+    MappingDatabaseEditView vue=null;
     /**
      * At startup create and show the main frame of the application.
      */
@@ -21,13 +23,19 @@ public class MappingDatabaseEditApp extends SingleFrameApplication {
         if(this.vue==null)
         {
             this.vue=new MappingDatabaseEditView(this);
+            show(vue);
+        } else
+        {
+        show();
         }
-        show(vue);
 
     }
 
     protected void show() {
         show(this.vue);
+        this.vue.reload();
+
+
     }
 
     protected void hide() {

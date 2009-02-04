@@ -19,6 +19,7 @@ import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
 
+
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import org.jdesktop.beansbinding.AbstractBindingListener;
@@ -34,7 +35,7 @@ public class MappingDatabaseEditView extends FrameView {
         super(app);
 
         initComponents();
-
+        
         // status bar initialization - message timeout, idle icon and busy animation, etc
         ResourceMap resourceMap = getResourceMap();
         int messageTimeout = resourceMap.getInteger("StatusBar.messageTimeout");
@@ -198,6 +199,21 @@ public class MappingDatabaseEditView extends FrameView {
         }
     }
 
+    /**/
+
+    public void reload() {
+            try {
+                entityManager.getTransaction().rollback();
+                entityManager.getTransaction().begin();
+                java.util.Collection data = query.getResultList();
+                for (Object entity : data) {
+                    entityManager.refresh(entity);
+                }
+                list.clear();
+                list.addAll(data);
+            } catch(Exception ignore) { }
+     }
+    
     /**
      * An example action method showing how to create asynchronous tasks
      * (running on background) and how to show their progress. Note the
@@ -206,10 +222,12 @@ public class MappingDatabaseEditView extends FrameView {
      */
     @Action
     public Task refresh() {
+  
+        
        return new RefreshTask(getApplication());
     }
 
-    private class RefreshTask extends Task {
+    public class RefreshTask extends Task {
         RefreshTask(org.jdesktop.application.Application app) {
             super(app);
         }
@@ -527,6 +545,7 @@ public class MappingDatabaseEditView extends FrameView {
         bindingGroup.bind();
     }// </editor-fold>//GEN-END:initComponents
 
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private fr.ifremer.nemo.mapping.utils.DateColumnFormat dateColumnFormat1;
     private javax.swing.JButton deleteButton;
