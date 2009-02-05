@@ -126,7 +126,7 @@ public class MappingTable
 
         } else
         {
-            fr.ifremer.nemo.ui.Utils.messageErreurAppend("Le fichier n'est pas au format .txt\n\r");  //$NON-NLS-1$ //$NON-NLS-2$            
+           // fr.ifremer.nemo.ui.Utils.messageErreurAppend("Le fichier n'est pas au format .txt\n\r");  //$NON-NLS-1$ //$NON-NLS-2$
         }
         
         return true;
@@ -198,7 +198,7 @@ public class MappingTable
                 em.getTransaction().commit();  
             } catch (javax.persistence.EntityExistsException e)
             {
-                fr.ifremer.nemo.ui.Utils.messageErreurAppend("Already exist: "+object.mappingPK.getLocalCdiId()+ " en "+ object.mappingPK.getFormat());  //$NON-NLS-1$ //$NON-NLS-2$
+                //fr.ifremer.nemo.ui.Utils.messageErreurAppend("Already exist: "+object.mappingPK.getLocalCdiId()+ " en "+ object.mappingPK.getFormat());  //$NON-NLS-1$ //$NON-NLS-2$
             }
         } catch (Exception e) 
         {

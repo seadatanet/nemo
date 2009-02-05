@@ -4,6 +4,7 @@
 
 package fr.ifremer.nemo.mapping;
 
+import fr.ifremer.nemo.mapping.utils.UtilDisplay;
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
@@ -13,11 +14,12 @@ import org.jdesktop.application.Task;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.persistence.EntityExistsException;
 import javax.persistence.RollbackException;
 import javax.swing.Timer;
 import javax.swing.Icon;
-import javax.swing.JDialog;
 
 
 import javax.swing.event.ListSelectionEvent;
@@ -136,13 +138,25 @@ public class MappingDatabaseEditView extends FrameView {
 
     @Action
     public void newRecord() {
-        fr.ifremer.nemo.mapping.Mapping m = new fr.ifremer.nemo.mapping.Mapping();
+    try
+    {
+        fr.ifremer.nemo.mapping.Mapping m = new fr.ifremer.nemo.mapping.Mapping(this.jTextField1.getText(),this.jTextField2.getText());
+        m.setFilename(this.filenameField.getText());
+        m.setModus("1");
+        m.setDate(new Date());
         entityManager.persist(m);
         list.add(m);
+    }
+    catch (EntityExistsException e)
+    {
+        UtilDisplay.error("Le Local_CDI_ID"+ this.jTextField1.getText() +" associé au format " + this.jTextField2.getText() + "existe déjà", MappingDatabaseEditApp.getApplication().getMainFrame());
+
+    }
         int row = list.size()-1;
         masterTable.setRowSelectionInterval(row, row);
         masterTable.scrollRectToVisible(masterTable.getCellRect(row, 0, true));
         setSaveNeeded(true);
+
     }
 
     @Action(enabledProperty = "recordSelected")
@@ -169,7 +183,7 @@ public class MappingDatabaseEditView extends FrameView {
 
     @Action(enabledProperty = "saveNeeded")
     public Task save() {
-        fr.ifremer.nemo.mapping.MappingDatabaseEditApp.getInstance().hide(fr.ifremer.nemo.mapping.MappingDatabaseEditApp.getApplication().getView());
+       // fr.ifremer.nemo.mapping.MappingDatabaseEditApp.getInstance().hide(fr.ifremer.nemo.mapping.MappingDatabaseEditApp.getApplication().getView());
 
         return new SaveTask(getApplication());
     }
@@ -320,12 +334,14 @@ public class MappingDatabaseEditView extends FrameView {
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${mappingPK.localCdiId}"));
         columnBinding.setColumnName("LOCAL_CDI_ID");
         columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${modus}"));
         columnBinding.setColumnName("Modus");
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${mappingPK.format}"));
         columnBinding.setColumnName("Mapping PK.format");
         columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${filename}"));
         columnBinding.setColumnName("Filename");
         columnBinding.setColumnClass(String.class);
@@ -350,19 +366,7 @@ public class MappingDatabaseEditView extends FrameView {
 
         modusField.setName("modusField"); // NOI18N
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.modus}"), modusField, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        binding.setSourceUnreadableValue(null);
-        bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), modusField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
         filenameField.setName("filenameField"); // NOI18N
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.filename}"), filenameField, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        binding.setSourceUnreadableValue(null);
-        bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), filenameField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(fr.ifremer.nemo.mapping.MappingDatabaseEditApp.class).getContext().getActionMap(MappingDatabaseEditView.class, this);
         newButton.setAction(actionMap.get("newRecord")); // NOI18N
@@ -373,17 +377,7 @@ public class MappingDatabaseEditView extends FrameView {
 
         jTextField1.setName("LocalCdiIdField"); // NOI18N
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.mappingPK.localCdiId}"), jTextField1, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jTextField1, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
-
         jTextField2.setName("FormatField"); // NOI18N
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.mappingPK.format}"), jTextField2, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), jTextField2, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
-        bindingGroup.addBinding(binding);
 
         jLabel1.setText(resourceMap.getString("LocalCdiIdLabel.text")); // NOI18N
         jLabel1.setName("LocalCdiIdLabel"); // NOI18N
@@ -393,7 +387,7 @@ public class MappingDatabaseEditView extends FrameView {
 
         jTextField3.setName("jTextField3"); // NOI18N
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${rowSorter}"), jTextField3, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${rowSorter}"), jTextField3, org.jdesktop.beansbinding.BeanProperty.create("text"));
         binding.setSourceNullValue(null);
         binding.setSourceUnreadableValue(null);
         binding.setConverter(rowSorterToStringConverter1);
