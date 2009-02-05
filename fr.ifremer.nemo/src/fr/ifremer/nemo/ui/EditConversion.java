@@ -35,7 +35,7 @@ public class EditConversion extends Thread {
 
 	public static int validee, loaded;
 
-	public static String nomFichierSortie, nomDossierSortie;
+	public static String nomFichierSortie, nomDossierSortie, nomHorsPrefix;
 
 	public static Shell shell;
 
@@ -286,7 +286,8 @@ public class EditConversion extends Thread {
 			}
 
 			File fich = new File(nomFichierSortie);
-			if (fich.exists()) {
+			if (fich.exists()) 
+            {
 				// fichier existe
 				// shell.close();
 				Shell shell2 = PlatformUI.getWorkbench().getDisplay()
@@ -301,9 +302,11 @@ public class EditConversion extends Thread {
 					// on n'écrase pas le fichier
 					choixFichierSortie();
 				} else {
+                    definePrefixDossier();
 					runSWTProgress();
 				}
 			} else {
+                definePrefixDossier();
 				runSWTProgress();
 			}
 
@@ -322,7 +325,8 @@ public class EditConversion extends Thread {
 
 	public static void choixDossierSortie() {
 
-		nomDossierSortie = "";
+        nomFichierSortie = "";
+        nomDossierSortie = "";
 
 		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		DirectoryDialog dialog = new DirectoryDialog(shell, SWT.SAVE
@@ -369,10 +373,12 @@ public class EditConversion extends Thread {
 					// on n'écrase pas le fichier
 					choixDossierSortie();
 				} else {
+                    definePrefixDossier();
 					runSWTProgress();
 				}
 
 			} else {
+                definePrefixDossier();
 				runSWTProgress();
 			}
 
@@ -390,10 +396,9 @@ public class EditConversion extends Thread {
 	}
 
 	public static void runSWTProgress() {
-		Utils.messageErreur("");
+		Utils.messageErreur("");  //$NON-NLS-1$
 		SWTProcess.interrompu = false;
 		SurveyMedia.interrompu = false;
-
 		try {
 			new SWTProgress().run();
 		} catch (Exception e) {
@@ -405,9 +410,9 @@ public class EditConversion extends Thread {
 	public static void afficheResultat() {
 		if (!SurveyMedia.interrompu && !SWTProcess.interrompu) {
 			if (ViewFile.radODV.getSelection()) {
-				Utils.messageOK(Messages.getString("EditConversion.9"));
+				Utils.messageOK(Messages.getString("EditConversion.9"));  //$NON-NLS-1$
 			} else {
-				Utils.messageOK(Messages.getString("EditConversion.10"));
+				Utils.messageOK(Messages.getString("EditConversion.10"));  //$NON-NLS-1$
 			}
 		} else {
 			// Utils.messageErreur(Messages.getString("EditConversion.16"));
@@ -416,18 +421,18 @@ public class EditConversion extends Thread {
 
 		// Stations triées
 		if (getSortedStations().size() > 0) {
-			String sortedMessage = "\n\n" + getSortedStations().size() + " "
-					+ Messages.getString("EditConversion.28") + " ";
-			
+			String sortedMessage = "\n\n" + getSortedStations().size() + " "  //$NON-NLS-1$  //$NON-NLS-2$
+					+ Messages.getString("EditConversion.28") + " ";  //$NON-NLS-1$  //$NON-NLS-2$
+			 
 			for (Entry<String, Integer> currentEntry : getSortedStations()
 					.entrySet()) {
 				// Utils.messageOKAppend("\n\tstation " + currentEntry.getKey()
 				// + " (" + currentEntry.getValue() + " " +
 				// Messages.getString("EditConversion.29"));
-				sortedMessage += currentEntry.getKey() + ", ";
+				sortedMessage += currentEntry.getKey() + ", ";  //$NON-NLS-1$
 			}
 			
-			int last = sortedMessage.lastIndexOf(",");
+			int last = sortedMessage.lastIndexOf(",");  //$NON-NLS-1$
 			if (last > 0) {
 				sortedMessage = sortedMessage.substring(0, last);
 			}
@@ -464,12 +469,12 @@ public class EditConversion extends Thread {
 	}
 
 	public static String messageErreur() {
-		String message = "";
+		String message = "";  //$NON-NLS-1$
 
 		if (getErreurFichier() != null) {
-			if (!getErreurFichier().trim().equals("")) {
-				message += Messages.getString("EditConversion.20") + "\t : \t"
-						+ getErreurFichier() + "\r\n";
+			if (!getErreurFichier().trim().equals("")) {  //$NON-NLS-1$
+				message += Messages.getString("EditConversion.20") + "\t : \t"  //$NON-NLS-1$  //$NON-NLS-2$
+						+ getErreurFichier() + "\r\n";  //$NON-NLS-1$
 			}
 		}
 
@@ -478,21 +483,21 @@ public class EditConversion extends Thread {
 				// Si l'erreur se trouve dans l'en-tête de station, la ligne
 				// indiquée
 				// n'est pas forcément la bonne, il vaut mieux ne pas l'indiquer
-				return "";
+				return "";  //$NON-NLS-1$
 			}
-			message += Messages.getString("EditConversion.21") + "\t : \t"
-					+ getErreurLigne() + "\r\n";
+			message += Messages.getString("EditConversion.21") + "\t : \t"  //$NON-NLS-1$  //$NON-NLS-2$
+					+ getErreurLigne() + "\r\n";  //$NON-NLS-1$
 		}
 
 		if (getErreurChaine() != null) {
-			if (!getErreurChaine().trim().equals("")) {
-				message += Messages.getString("EditConversion.22") + "\t : \t"
+			if (!getErreurChaine().trim().equals("")) {  //$NON-NLS-1$
+				message += Messages.getString("EditConversion.22") + "\t : \t"  //$NON-NLS-1$  //$NON-NLS-2$
 						+ getErreurChaine();
 			}
 		}
 
-		if (!message.equals("")) {
-			message = "\r\n" + Messages.getString("EditConversion.23") + "\r\n"
+		if (!message.equals("")) {  //$NON-NLS-1$
+			message = "\r\n" + Messages.getString("EditConversion.23") + "\r\n"  //$NON-NLS-1$  //$NON-NLS-2$  //$NON-NLS-3$
 					+ message;
 		}
 
@@ -507,9 +512,11 @@ public class EditConversion extends Thread {
 		_dataSetRef = value;
 	}
 
-	public static boolean askDataSetRef() {
-		if (getDataSetRef().equals("")) {
-			String strDefault = "";
+	public static boolean askDataSetRef() 
+    {
+		if (getDataSetRef().equals(""))   //$NON-NLS-1$
+        {
+			String strDefault = "";  //$NON-NLS-1$
 			if (DataModel.dirSurvey != null) {
 				strDefault = DataModel.dirSurvey.getModel().getReference();
 				if (strDefault.equals("")) strDefault = DataModel.dirSurvey.getModel().getName();
@@ -523,17 +530,57 @@ public class EditConversion extends Thread {
 					.getString("CDIResumeWriter.idMessage"), strDefault, null);
 			inputDataSetRef.open();
 
-			if (inputDataSetRef.getReturnCode() == InputDialog.OK) {
+			if (inputDataSetRef.getReturnCode() == InputDialog.OK) { 
 				_dataSetRef = inputDataSetRef.getValue();
 				return true;
 			} else {
-				_dataSetRef = "";
+				_dataSetRef = "";  //$NON-NLS-1$
 				return false;
 			}
-		} else {
+		} else 
+        {
 			return true;
 		}
 	}
+    
+    public static void definePrefixDossier() 
+    {
+            String cheminComplet;
+            Boolean modeDossier=false;
+            
+            if(nomFichierSortie.isEmpty())
+            {
+                cheminComplet = nomDossierSortie;
+                modeDossier = true;
+            }
+            else
+                cheminComplet = nomFichierSortie;
+        
+            InputDialog inputPrefixDossier = new InputDialog(PlatformUI
+                    .getWorkbench().getDisplay().getActiveShell(), Messages
+                    .getString("InputPrefixDossier.idTitle"), Messages   //$NON-NLS-1$
+                    .getString("InputPrefixDossier.idMessage"), nomDossierSortie, null);   //$NON-NLS-1$
+            inputPrefixDossier.open();
+
+
+            if (inputPrefixDossier.getReturnCode() == InputDialog.OK ) 
+            { 
+                if(inputPrefixDossier.getValue().endsWith(File.separator) || modeDossier)
+                {
+                    nomHorsPrefix = cheminComplet.replace(inputPrefixDossier.getValue(),""); //$NON-NLS-1$
+                }
+                else
+                {
+                    nomHorsPrefix = cheminComplet.replace(inputPrefixDossier.getValue()+File.separator,""); //$NON-NLS-1$
+                }
+            }
+            
+            //On affiche la boite de dialogue tant que l'utilisateur saisie une donnée incorrecte
+            if(!cheminComplet.endsWith(nomHorsPrefix))
+            {
+                definePrefixDossier();
+            }
+    }
 
 	public static String getLocalCdiId(Station station, String surveyReference) {
 		// FAE 1143 : nommage du LOCAL_CDI_ID

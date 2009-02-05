@@ -164,7 +164,7 @@ public class SWTProcess implements IRunnableWithProgress {
                    
 					for (Station station : survey.getStations()) {
                         mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "MEDATLAS");  //$NON-NLS-1$
-                        mapping.setFilename(fichierSortie.getName());
+                        mapping.setFilename(EditConversion.nomHorsPrefix);
                         mapping.setDate(new Date());
                         mapping.setModus("1");
                         
@@ -199,11 +199,17 @@ public class SWTProcess implements IRunnableWithProgress {
 									notifier);
 
                             mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
-                            mapping.setFilename(fichierSortie.getName());
+                            
+                            //Si le nom hors prefix est vide, il ne faut pas ajouter le séparateur
+                            if(EditConversion.nomHorsPrefix.equals(""))
+                                mapping.setFilename(EditConversion.nomHorsPrefix+fichierSortie.getName());
+                            else
+                                mapping.setFilename(EditConversion.nomHorsPrefix+File.separator+fichierSortie.getName());
+                            
                             mapping.setDate(new Date());
                             mapping.setModus("1");
-                            
                             MappingTable.persist(mapping);
+                            
                             
 							/*CDIMappingWriter.getInstance().addMapping(
 									EditConversion.getLocalCdiId(station, survey.getReference()),
@@ -217,9 +223,11 @@ public class SWTProcess implements IRunnableWithProgress {
 
 						for (Station station : survey.getStations()) {
                             mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
-                            mapping.setFilename(fichierSortie.getName());
+                            mapping.setFilename(EditConversion.nomHorsPrefix);
                             mapping.setDate(new Date());
-                            mapping.setModus("1");                            
+                            mapping.setModus("1");    
+                            
+                            MappingTable.persist(mapping);
 							/*CDIMappingWriter.getInstance().addMapping(
 									EditConversion.getLocalCdiId(station, survey.getReference()),
 									fichierSortie.getName());*/
@@ -347,9 +355,15 @@ public class SWTProcess implements IRunnableWithProgress {
 									EditConversion.getLocalCdiId(station, survey.getReference()),
 									fichierSortie.getName());*/
                             mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
-                            mapping.setFilename(fichierSortie.getName());
+                            //Si le nom hors prefix est vide, il ne faut pas ajouter le séparateur
+                            if(EditConversion.nomHorsPrefix.equals(""))
+                                mapping.setFilename(EditConversion.nomHorsPrefix+fichierSortie.getName());
+                            else
+                                mapping.setFilename(EditConversion.nomHorsPrefix+File.separator+fichierSortie.getName());
                             mapping.setDate(new Date());
                             mapping.setModus("1");
+                            
+                            MappingTable.persist(mapping);
                             
 						}
 					} else {
@@ -371,9 +385,11 @@ public class SWTProcess implements IRunnableWithProgress {
 									EditConversion.getLocalCdiId(station, survey.getReference()),
 									fichierSortie.getName());*/
                             mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
-                            mapping.setFilename(fichierSortie.getName());
+                            mapping.setFilename(EditConversion.nomHorsPrefix);
                             mapping.setDate(new Date());
                             mapping.setModus("1");
+                            
+                            MappingTable.persist(mapping);
 						}
 					}
 
@@ -498,9 +514,15 @@ public class SWTProcess implements IRunnableWithProgress {
 									.setDataSize(fichierSortie.length() / 1024f / 1024f);
 
                             mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
-                            mapping.setFilename(fichierSortie.getName());
+                            //Si le nom hors prefix est vide, il ne faut pas ajouter le séparateur
+                            if(EditConversion.nomHorsPrefix.equals(""))
+                                mapping.setFilename(EditConversion.nomHorsPrefix+fichierSortie.getName());
+                            else
+                                mapping.setFilename(EditConversion.nomHorsPrefix+File.separator+fichierSortie.getName());
                             mapping.setDate(new Date());
-                            mapping.setModus("1");                            
+                            mapping.setModus("1");        
+                            
+                            MappingTable.persist(mapping);
                             
 							/*CDIMappingWriter.getInstance().addMapping(
 									EditConversion.getLocalCdiId(station, survey.getReference()),
@@ -528,9 +550,11 @@ public class SWTProcess implements IRunnableWithProgress {
 									EditConversion.getLocalCdiId(station, survey.getReference()),
 									fichierSortie.getName());*/
                             mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
-                            mapping.setFilename(fichierSortie.getName());
+                            mapping.setFilename(EditConversion.nomHorsPrefix);
                             mapping.setDate(new Date());
-                            mapping.setModus("1");                            
+                            mapping.setModus("1");    
+                            
+                            MappingTable.persist(mapping);
 						}
 					}
 
