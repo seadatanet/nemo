@@ -194,7 +194,7 @@ public class MappingTable
         {  
             try
             {
-                em.persist(object); 
+                em.merge(object); 
                 em.getTransaction().commit();  
             } catch (javax.persistence.EntityExistsException e)
             {
