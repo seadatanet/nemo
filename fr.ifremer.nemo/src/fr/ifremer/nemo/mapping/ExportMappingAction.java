@@ -83,9 +83,6 @@ public class ExportMappingAction extends Action implements ISelectionListener,
                 // ouverture du fichier XML de modele
 
                 new MappingTable().exporter(nomMapping);
-
-                Utils.messageInfo("Importation realise"); //$NON-NLS-1$
-
             }
 
     }

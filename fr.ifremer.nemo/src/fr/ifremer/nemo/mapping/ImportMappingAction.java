@@ -80,31 +80,6 @@ public class ImportMappingAction extends Action implements ISelectionListener,
             } else {
                 
                 new MappingTable().importer(nomMapping);
-
-                Utils.messageInfo("Importation realise"); //$NON-NLS-1$
-                // ouverture du fichier XML de modele
-
-                /*com.ago.xml.XMLBootstrapParser parser = new com.ago.xml.XMLBootstrapParser(
-                        inputModel);
-
-                try {
-                    stream = new java.io.FileInputStream(nomModele);
-                } catch (FileNotFoundException e) {
-                    // 
-                    e.printStackTrace();
-                }
-//              System.out.println("Ouverture du modele : " + nomModele); //$NON-NLS-1$
-                parser.parse(stream, false);
-
-                File fich = new File(nomModele);
-                nomFichierModele = fich.getName();
-
-                DataModel.ouvertureModele(inputModel);
-                DataModel.ouverture = true;
-
-                ViewLog.styledTextLogInfos.append(Messages
-                        .getString("OpenAction.8") + nomModele); //$NON-NLS-1$*/
-
             }
 
     }

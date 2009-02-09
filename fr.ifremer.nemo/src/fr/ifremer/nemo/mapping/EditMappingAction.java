@@ -12,8 +12,6 @@ package fr.ifremer.nemo.mapping;
  * @author jollivie
  *
  */
-import java.awt.Dialog;
-
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.widgets.Shell;
@@ -21,6 +19,8 @@ import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.actions.ActionFactory;
+
+import fr.ifremer.nemo.util.Messages;
 
 public class EditMappingAction extends Action implements ISelectionListener,
         ActionFactory.IWorkbenchAction {
@@ -38,8 +38,8 @@ public class EditMappingAction extends Action implements ISelectionListener,
 
         this.window = window;
         setId(ID);
-        //setText(Messages.getString("OpenAction.1")); //$NON-NLS-1$
-        setText("Editer"); //$NON-NLS-1$
+        setText(Messages.getString("EditMappingAction.1")); //$NON-NLS-1$
+        
         window.getSelectionService().addSelectionListener(this);
 
     }
@@ -50,21 +50,10 @@ public class EditMappingAction extends Action implements ISelectionListener,
     }
 
     public void run() {
-        //InputModel inputModel = new InputModel();
-
         MappingDatabaseEditApp mappingEditeur = MappingDatabaseEditApp.getApplication();
         mappingEditeur.getMainFrame().setAlwaysOnTop(true);
-      //  mappingEditeur.getMainFrame()
         mappingEditeur.startup();
 
-        
-        //Application te = new MappingDatabaseEditApp();
-        
-        //Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();      
-
-        //new String[] arg = {""};
-        //te.launch(MappingDatabaseEditApp.class, new String[1]);
-    
     }
 
     public void selectionChanged(IWorkbenchPart part, ISelection incoming) {

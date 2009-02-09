@@ -17,7 +17,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceContext;
+
+import fr.ifremer.nemo.util.Messages;
 
 
 
@@ -33,21 +34,6 @@ public class MappingTable
     EntityManager em = emf.createEntityManager(); */
     
     
-
-
-  /*  public Mapping add(Mapping mapping) {
-        em.persist(mapping);
-        return mapping;
-    }
-
-    public Mapping update(Mapping entity) {
-        return em.merge(entity);
-    }
-
-    public void delete(Mapping entity) {
-        em.remove(entity);
-    }*/
-
     public List<Mapping> findAll() {
         EntityManagerFactory emf = javax.persistence.Persistence.createEntityManagerFactory("nemoPU");   //$NON-NLS-1$
         EntityManager em = emf.createEntityManager(); 
@@ -60,7 +46,7 @@ public class MappingTable
         //On determine l'extension du fichier, qui certe, est filtré via la boite d'ouverture 
         //de fichier, mais qui peut etre changé dans la ligne texte
         String fileExtension = (filename.lastIndexOf(".")==-1)?"":filename.substring(filename.lastIndexOf(".")+1,filename.length()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-        System.out.println("L'extension du fichier est ." + fileExtension + "\n\r"); //$NON-NLS-1$ //$NON-NLS-2$
+        System.out.println(Messages.getString("CouplingTableImport.1") + fileExtension + "\n\r"); //$NON-NLS-1$ //$NON-NLS-2$
 
         if(fileExtension.matches("txt") || fileExtension.matches("Txt") || fileExtension.matches("TXT")) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
         {
@@ -73,12 +59,12 @@ public class MappingTable
                     Date datelignefichier = new Date();
                     Mapping m = new Mapping();
 
-
+                    fr.ifremer.nemo.ui.Utils.messageOK(Messages.getString("CouplingTableImport.2")+"\n\r");  //$NON-NLS-1$
 
                     try {
                         while ( (ligne = correctFileLine.readLine()) != null) 
                         { 
-                             System.out.println(correctFileLine.getLineNumber()-1+" : "+ligne); //$NON-NLS-1$
+                            //fr.ifremer.nemo.ui.Utils.messageErreurAppend(correctFileLine.getLineNumber()-1+" : "+ligne); //$NON-NLS-1$
 
                              ligneSplit = ligne.split(";"); //$NON-NLS-1$
 
@@ -94,18 +80,20 @@ public class MappingTable
                                   this.persist(m);
                               } catch (javax.persistence.EntityExistsException e)
                               {
-                                  System.out.println("Ligne en doublon: "+ligne); //$NON-NLS-1$
+                                  fr.ifremer.nemo.ui.Utils.messageErreurAppend(Messages.getString("CouplingTableImport.3")+ligne+"\n\r");  //$NON-NLS-1$
+                                  
                               }
 
                         }
+                        fr.ifremer.nemo.ui.Utils.messageOKAppend(Messages.getString("CouplingTableImport.4")+"\n\r");  //$NON-NLS-1$
                    } catch (Exception e)
                    {
                       if(e.toString().contains("EntityExistsException")) //$NON-NLS-1$
                       {
-                          System.out.println("Le fichier de correction est invalide: des données sont dupliquées"); //$NON-NLS-1$
+                          fr.ifremer.nemo.ui.Utils.messageErreurAppend(Messages.getString("CouplingTableImport.5")+"\n\r"); //$NON-NLS-1$
                       } else
                       {
-                          System.out.println("Le fichier est invalide."); //$NON-NLS-1$
+                          fr.ifremer.nemo.ui.Utils.messageErreurAppend(Messages.getString("CouplingTableImport.6")+"\n\r"); //$NON-NLS-1$
                       }
 
                       System.out.println(e.toString());
@@ -117,7 +105,7 @@ public class MappingTable
              
   
             }catch(FileNotFoundException e) { 
-                System.out.println("Fichier non trouvé");  //$NON-NLS-1$
+                fr.ifremer.nemo.ui.Utils.messageErreurAppend(Messages.getString("CouplingTableImport.7")+"\n\r");  //$NON-NLS-1$
         
             }
             catch(IOException e) { 
@@ -126,7 +114,7 @@ public class MappingTable
 
         } else
         {
-           // fr.ifremer.nemo.ui.Utils.messageErreurAppend("Le fichier n'est pas au format .txt\n\r");  //$NON-NLS-1$ //$NON-NLS-2$
+            fr.ifremer.nemo.ui.Utils.messageErreurAppend("Le fichier n'est pas au format .txt\n\r");  //$NON-NLS-1$
         }
         
         return true;
@@ -157,6 +145,7 @@ public class MappingTable
                     }
 
                     monFluxFichier.flush();
+                    fr.ifremer.nemo.ui.Utils.messageOKAppend(Messages.getString("CouplingTableExport.1")+"\n\r");  //$NON-NLS-1$
                 }
                 catch (IOException e)
                 {
@@ -164,7 +153,7 @@ public class MappingTable
                 finally
                 {
                     monFluxFichier.close(); // Toujours dans un TRY
-                    
+                  
                 }
                 
             }
@@ -175,7 +164,7 @@ public class MappingTable
         }
         catch (IOException e)
         {
-            System.out.println("Impossible de créer le fichier");
+            System.out.println(Messages.getString("CouplingTableExport.2")+"\n\r");
         }
 
 
@@ -198,7 +187,7 @@ public class MappingTable
                 em.getTransaction().commit();  
             } catch (javax.persistence.EntityExistsException e)
             {
-                //fr.ifremer.nemo.ui.Utils.messageErreurAppend("Already exist: "+object.mappingPK.getLocalCdiId()+ " en "+ object.mappingPK.getFormat());  //$NON-NLS-1$ //$NON-NLS-2$
+                fr.ifremer.nemo.ui.Utils.messageErreurAppend("Already exist: "+object.mappingPK.getLocalCdiId()+ " en "+ object.mappingPK.getFormat());  //$NON-NLS-1$ //$NON-NLS-2$
             }
         } catch (Exception e) 
         {
