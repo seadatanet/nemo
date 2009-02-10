@@ -924,18 +924,8 @@ public class Etape {
 					ViewFile.radMedatlas.setEnabled(true);
 				}
 			}
-
-            // TAG FAE 1386 : LATX et LONX ajoutés directement dans fichier,
-			// Trajectoire : Lat. et long. doivent etre les premiers parametres
-//			if (ViewFile.typeFichierEntree().equals(Global.TRAJECTORY)) {
-//				String code1 = Utils.extraitCode(TableData.types.get(0).getCode());
-//				String code2 = Utils.extraitCode(TableData.types.get(1).getCode());
-//				
-//				if (!((code1.equals("LATX") && code2.equals("LONX")) || (code1.equals("LONX") && code2.equals("LATX")))) {
-//					ok = ok && false;
-//					Utils.messageErreurAppend(Messages.getString("Etape.126"));
-//				}
-//			}
+            
+            // TODO FAE 1403
 		}
 		if (ok) {
 			EditData.okApresReset = true;
