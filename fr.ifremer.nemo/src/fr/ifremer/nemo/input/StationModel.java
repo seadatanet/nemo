@@ -1299,10 +1299,14 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
         }
         return param;
     }
-
+    
     public void addFixedParameterModel(IdParameter code) {
+        addFixedParameterModel(code, null);
+    }
 
-        AddedParameter para = new AddedParameter(code);
+    public void addFixedParameterModel(IdParameter code, String formatPRES) {
+
+        AddedParameter para = new AddedParameter(code, formatPRES, _inputType);
         ParameterModel parameterModel = new ParameterModel();
         parameterModel.setModel(para);
         
@@ -1643,8 +1647,9 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
                     }
                 }else{
                     // Fixed position
-                    if (EditStation.stationNumber.isInData() && (a_Filename != null)){
-                        // dans la première ligne des données
+                    if (getReferenceProperty().getFragment().getFirstLine() == 0 
+                    	&& (a_Filename != null)){
+                        // dans le nom du fichier
                         if (ViewFile.collectionCasN) {
                             String[] filename = DataModel.singleSurvey.getFile().split("/");
                             getReferenceProperty().applyOn(station, new String[] { filename[filename.length - 1] });

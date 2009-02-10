@@ -46,7 +46,7 @@ public class AddedParameter extends Parameter
     /**
      * 
      */
-    public AddedParameter(IdParameter idParam)
+    public AddedParameter(IdParameter idParam, String formatPRES, String inputType)
     {
         this.idParam = idParam;
         _code = idParam.toString();
@@ -55,12 +55,16 @@ public class AddedParameter extends Parameter
             case DEPH :
                 _default = Global.ZERO;
                 _format = Global.EMPTY_STRING;   
-                for (int i = 0; i < NemoLists.getParameters().length; i++) {
-                    if (NemoLists.getParameters()[i].getCode().equals(this.getCode())) {
-                        _format = NemoLists.getParameters()[i].getFormat();
-                        break;
-                    }
-                }                   
+                if (inputType.equals(Global.PROFILE)){
+                    _format = formatPRES;
+                }else{                    
+                    for (int i = 0; i < NemoLists.getParameters().length; i++) {
+                        if (NemoLists.getParameters()[i].getCode().equals(this.getCode())) {
+                            _format = NemoLists.getParameters()[i].getFormat();
+                            break;
+                        }
+                    }                   
+                }
                 _fullName = "DEPTH BELOW SEA SURFACE";       //$NON-NLS-1$
                 _unit = "m";                             //$NON-NLS-1$
                 cible = Conversion.ODV;

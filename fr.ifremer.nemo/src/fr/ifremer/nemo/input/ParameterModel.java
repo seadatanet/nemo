@@ -554,8 +554,12 @@ public class ParameterModel implements Cloneable, SAXConsumer {
                 break;
             case TIME :
                 // $formatter.formatDateTime( "hh24mmss", $station.parametersAt(0).valuesAt($i).date )
-                stringValue = Formatter.getSingleton().formatInt(p.getFormat(), horodate.getDate());
-                flag = station.getMetaFlag(Global.DATETIME);
+                try{
+                    stringValue = Formatter.getSingleton().formatDateTime(p.getFormat(), horodate.getDate());
+                    flag = station.getMetaFlag(Global.DATETIME);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
                 break;
             case LATX :
             case LONX :

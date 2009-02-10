@@ -160,6 +160,8 @@ public class EditStation {
             stationSection.initSection(EditStation.formEdition);
             stationSection.draw(EditStation.formEdition.getBody());
         }
+        
+        actualiseEdition();
 
 		ViewEdit.formEdition.reflow(true);
 
@@ -268,9 +270,10 @@ public class EditStation {
             listeSectionsStation.add(endLongitude);
         }
         
-        depth = new StationSection(shell, NemoSection.S_DEPTH, Messages.getString(NemoSection.S_DEPTH), Messages.getString("EditStation.28"), true, false, 1);           //$NON-NLS-1$
+        // FAE 1129 : ajout TEST / position variable à DEPTH
+        depth = new StationSection(shell, NemoSection.S_DEPTH, Messages.getString(NemoSection.S_DEPTH), Messages.getString("EditStation.28"), true, true, 1);           //$NON-NLS-1$
         depth.addManualInput(shell, null, ComboType.NONE, Global.EMPTY_STRING);
-        depth.addAutoInput(shell, null, false, MetaInData.FACULTATIF, false);
+        depth.addAutoInput(shell, null, true, MetaInData.FACULTATIF, false);
         // in trajectory, depth must be in data
         if (ViewFile.radTrajectoire.getSelection()){
             depth.setEnableInData(MetaInData.OBLIGATOIRE);
@@ -322,7 +325,7 @@ public class EditStation {
             // => Sampling Rate : disable (car pas nécessaire pour le calcul)
             samplingRate.setEnabled(!(dateInData || timeInData));
             date.setEnabledManual(!(dateInData || timeInData));
-            time.setEnabledManual(!(dateInData || timeInData));
+            time.setEnabledManual(!(dateInData || timeInData));            
         }
 
         // pour trajectoires
@@ -333,6 +336,11 @@ public class EditStation {
             endDepth.setEnabled(!depthInData);
             depth.setEnabledManual(!depthInData);
         }
+        
+        // TODO griser line si vide pour toutes les stationSection
+        
+        
+        
     }
 
 	public static void DrawingBack() {

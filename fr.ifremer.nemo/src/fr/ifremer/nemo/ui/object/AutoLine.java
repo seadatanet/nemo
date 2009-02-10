@@ -231,7 +231,7 @@ public class AutoLine implements UIobject
     public boolean checkInDataOrHeader(String ligne, String sectionName){
         boolean inHeader;
         if (ligne != null && !ligne.equals(Global.EMPTY_STRING)){
-            int lign = Integer.parseInt(numberLine.getText());
+            int lign = Integer.parseInt(ligne);
             inData = (lign == (getHeaderStationPos() + 1));
             inHeader = (lign <= (getHeaderStationPos()));
         }else{
@@ -344,7 +344,9 @@ public class AutoLine implements UIobject
 
     public String getValue(){
         String result = Global.EMPTY_STRING;
-        if (numberLine.getText() != null && start.getText() != null && end.getText() != null)
+        if (numberLine.getText() != null 
+                && start.getText() != null && !start.getText().equals(Global.EMPTY_STRING)
+                && end.getText() != null && !end.getText().equals(Global.EMPTY_STRING))
         {            
             String ligne = Global.EMPTY_STRING;
             if (numberLine.getText().equals(Global.EMPTY_STRING)) {

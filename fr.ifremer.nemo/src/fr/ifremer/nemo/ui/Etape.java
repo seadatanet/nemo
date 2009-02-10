@@ -465,7 +465,7 @@ public class Etape {
         if (checkValue){
             value = EditStation.depth.getValue();
             if (!value.trim().equals("") && !value.equals("NaN")){                                  //$NON-NLS-1$ //$NON-NLS-2$
-                if (!Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", value)) {                     //$NON-NLS-1$
+                if (!Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", value.trim())) {                     //$NON-NLS-1$
                     ok = ok && false;
                     Utils.messageErreurAppend(Messages.getString("Etape.52"));                      //$NON-NLS-1$
                 }
@@ -492,7 +492,7 @@ public class Etape {
 		} else {
             value = EditStation.utConvertion.getValue();
 			if (!value.trim().equals("") && !value.equals("NaN")) {                                     //$NON-NLS-1$ //$NON-NLS-2$
-				if (!Pattern.matches("^[+-]?[0-9]*[0-9][.]?[0-9]*$", value)) {                          //$NON-NLS-1$
+				if (!Pattern.matches("^[+-]?[0-9]*[0-9][.]?[0-9]*$", value.trim())) {                          //$NON-NLS-1$
 					ok = ok && false;
 					Utils.messageErreurAppend(Messages.getString("Etape.119"));                         //$NON-NLS-1$
 				}
@@ -582,7 +582,7 @@ public class Etape {
                     ok = ok && ligneOK;
 
                     value = EditStation.sensorDepth.getValue();
-                    if (!Pattern.matches("^[0-9]*[0-9][.]?[0-9]*$", value)) {                                   //$NON-NLS-1$
+                    if (!Pattern.matches("^[0-9]*[0-9][.]?[0-9]*$", value.trim())) {                                   //$NON-NLS-1$
                         ok = ok && false;
                         Utils.messageErreurAppend(Messages.getString("Etape.75"));                              //$NON-NLS-1$
                     }
@@ -598,7 +598,7 @@ public class Etape {
                         Utils.messageErreurAppend(Messages.getString("Etape.79"));                          //$NON-NLS-1$
                     }
                 } else {
-                    if (!Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", value)) {                         //$NON-NLS-1$
+                    if (!Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", value.trim())) {                         //$NON-NLS-1$
                         ok = ok && false;
                         Utils.messageErreurAppend(Messages.getString("Etape.81"));                          //$NON-NLS-1$
                     }
@@ -626,7 +626,7 @@ public class Etape {
                         ok = ok && false; 
                         Utils.messageErreurAppend(Messages.getString("Etape.130"));                                 //$NON-NLS-1$
                     } else {
-                        if (!Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", value)) {                             //$NON-NLS-1$
+                        if (!Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", value.trim())) {                             //$NON-NLS-1$
                             ok = ok && false;
                             Utils.messageErreurAppend(Messages.getString("Etape.103"));                             //$NON-NLS-1$
                         }
@@ -644,7 +644,12 @@ public class Etape {
             formatSaisi = EditStation.endLatitude.getConverter().getText();
             value = EditStation.endLatitude.getValue();
             checkValue = true;
-            if (value != null && !value.trim().equals(Global.EMPTY_STRING)){                                                                      //$NON-NLS-1$
+            if (value != null && !value.trim().equals(Global.EMPTY_STRING)){ 
+                // vérification du format
+                if (formatSaisi == null || formatSaisi.equals(Global.EMPTY_STRING)){
+                    formatSaisi = EditStation.latitude.getConverter().getText();
+                    EditStation.endLatitude.getConverter().setText(formatSaisi);
+                }
                 if (!EditStation.endLatitude.isManual()) {
                     // position dans fichier
                     resultat1 = EditStation.endLatitude.checkAutoInputValues(Messages.getString("Etape.65"));   //$NON-NLS-1$
@@ -677,7 +682,12 @@ public class Etape {
             formatSaisi = EditStation.endLongitude.getConverter().getText();
             value = EditStation.endLongitude.getValue();
             checkValue = true;
-            if (value != null && !value.trim().equals(Global.EMPTY_STRING)){                                                                      //$NON-NLS-1$
+            if (value != null && !value.trim().equals(Global.EMPTY_STRING)){     
+                // vérification du format
+                if (formatSaisi == null || formatSaisi.equals(Global.EMPTY_STRING)){
+                    formatSaisi = EditStation.longitude.getConverter().getText();
+                    EditStation.endLongitude.getConverter().setText(formatSaisi);
+                } 
                 if (!EditStation.endLongitude.isManual()) {
                     // position dans fichier
                     resultat1 = EditStation.endLongitude.checkAutoInputValues(Messages.getString("Etape.68"));  //$NON-NLS-1$
@@ -715,7 +725,7 @@ public class Etape {
                     ok = ok && ligneOK;
                     
                     value = EditStation.endDepth.getValue();
-                    if (!Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", value)) {                         //$NON-NLS-1$
+                    if (!Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", value.trim())) {                         //$NON-NLS-1$
                         ok = ok && false;
                         Utils.messageErreurAppend(Messages.getString("Etape.69"));                          //$NON-NLS-1$
                     }
@@ -724,7 +734,7 @@ public class Etape {
             }else{        
                 value = EditStation.endDepth.getValue();
                 if (!value.trim().equals("") && !value.equals("NaN")){                                  //$NON-NLS-1$ //$NON-NLS-2$
-                    if (!Pattern.matches("^[0-9]*[0-9][.]?[0-9]*$", value)) {                           //$NON-NLS-1$
+                    if (!Pattern.matches("^[0-9]*[0-9][.]?[0-9]*$", value.trim())) {                           //$NON-NLS-1$
                         ok = ok && false;
                         Utils.messageErreurAppend(Messages.getString("Etape.70"));                      //$NON-NLS-1$
                     }
@@ -748,7 +758,7 @@ public class Etape {
             }
             if (checkValue){                
                 if (!value.trim().equals("")) {                                                                 //$NON-NLS-1$
-                    if (!Pattern.matches("^[+-]{0,1}[0-9]*[0-9][.]?[0-9]*[0-9]*$", value)) {                    //$NON-NLS-1$
+                    if (!Pattern.matches("^[+-]{0,1}[0-9]*[0-9][.]?[0-9]*[0-9]*$", value.trim())) {                    //$NON-NLS-1$
                         ok = ok && false;
                         Utils.messageErreurAppend(Messages.getString("Etape.102"));                             //$NON-NLS-1$
                     }
@@ -761,7 +771,7 @@ public class Etape {
 		boolean flagOK = false;
 		for (i = 0; i < size; i++) {
             Shell shell = new Shell();
-            String nomSection = Messages.getString(NemoSection.S_QCFLAG) + " - "                            //$NON-NLS-1$//$NON-NLS-2$
+            String nomSection = Messages.getString(NemoSection.S_QCFLAG) + " - "                            //$NON-NLS-1$
                 + EditStation.qcFlags.getTabFlagQC().getItems()[i].getText(1);
             AutoLine line = new AutoLine(shell, 1, true, MetaInData.FACULTATIF, false);
             line.setValue(EditStation.qcFlags.getTabFlagQC().getItems()[i].getText(2),
@@ -769,7 +779,7 @@ public class Etape {
                     EditStation.qcFlags.getTabFlagQC().getItems()[i].getText(4));
             flagOK = line.checkValues(nomSection);
 			if (flagOK) {
-                String zone = Messages.getString(NemoSection.S_QCFLAG).trim() + " : "                        //$NON-NLS-1$//$NON-NLS-2$
+                String zone = Messages.getString(NemoSection.S_QCFLAG).trim() + " : "                        //$NON-NLS-1$
                     + EditStation.qcFlags.getTabFlagQC().getItems()[i].getText(1);
                 ligneOK = line.checkInDataOrHeader(line.getNumberLine().getText(), zone);
 				ok = ok && ligneOK;

@@ -338,9 +338,9 @@ public class StationSection extends NemoSection
         return autoInput.checkPosition(0, nbreLignes);
     }
     
-    public boolean checkInDataOrHeader(int i, String lign, String sectionName){
-        return autoInput.checkInDataOrHeader(i, lign, sectionName);
-    }
+//    public boolean checkInDataOrHeader(int i, String lign, String sectionName){
+//        return autoInput.checkInDataOrHeader(i, lign, sectionName);
+//    }
     
     public boolean checkInDataOrHeader(String lign, String sectionName){
         return autoInput.checkInDataOrHeader(0, lign, sectionName);
@@ -900,7 +900,7 @@ public class StationSection extends NemoSection
                 // gestion des flags qualite
                 String propertyCode = name;
                 if (name.equals(S_TIME) || name.equals(S_DATE)) propertyCode = Global.DATETIME;
-                EditStation.qcFlags.getFlagFragment(propertyModel.getFlag(), propertyCode, Messages.getString(propertyCode).trim());
+                EditStation.qcFlags.setFlagFragment(propertyModel.getFlag(), propertyCode, Messages.getString(propertyCode).trim());
                 
                 
                 // gestion des converters

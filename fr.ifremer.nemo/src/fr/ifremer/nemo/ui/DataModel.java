@@ -3,13 +3,10 @@ package fr.ifremer.nemo.ui;
 import java.text.ParseException;
 import java.util.regex.Pattern;
 
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.domain.AddedParameter;
 import fr.ifremer.nemo.domain.DataType;
 import fr.ifremer.nemo.domain.Parameter;
 import fr.ifremer.nemo.domain.Station;
@@ -18,7 +15,6 @@ import fr.ifremer.nemo.domain.TimeSeriesInformation;
 import fr.ifremer.nemo.domain.Trajectory;
 import fr.ifremer.nemo.domain.AddedParameter.IdParameter;
 import fr.ifremer.nemo.input.DirectoryBasedSurvey;
-import fr.ifremer.nemo.input.FlagFragment;
 import fr.ifremer.nemo.input.InputModel;
 import fr.ifremer.nemo.input.LineFragment;
 import fr.ifremer.nemo.input.ParameterModel;
@@ -428,7 +424,7 @@ public class DataModel
     
     private static void initDiseabledField(String property){
         PropertyModel propertyModel = stationModel.getTimeSeriesModel().propertiesAt(property);
-        propertyModel.setFlag(setFlagFragment(property)); // Flag qualite
+        propertyModel.setFlag(EditStation.qcFlags.getFlagFragment(property)); // Flag qualite
         propertyModel.setToCompute(true);
     }
 
@@ -467,7 +463,7 @@ public class DataModel
             propertyModel.setUserProvided(true);
             propertyModel = stationModel.getTimeSeriesModel().propertiesAt(NemoSection.S_ETIME);
             propertyModel.setUserProvided(true);
-            propertyModel.setFlag(setFlagFragment(Global.ENDDATETIME)); // Flag qualite
+            propertyModel.setFlag(EditStation.qcFlags.getFlagFragment(Global.ENDDATETIME)); // Flag qualite
             
 
             if (ViewFile.radTrajectoire.getSelection())
@@ -509,6 +505,7 @@ public class DataModel
     {
         boolean existDEPH = false;
         int indexPRES = -1;
+        String formatPRES = Global.EMPTY_STRING;
 
         // mise e jour des types avant validation
         TableData.majTypeData();
@@ -535,9 +532,6 @@ public class DataModel
             String mots[] = p.split(typeCourant.getCode());
             String code = mots[0];
             String nom = mots[1];
-
-            if (code.trim().equals("DEPH")) existDEPH = true;
-            if (code.trim().equals("PRES")) indexPRES = i;
             
             // code, nom, unite
             para.setCode(code);
@@ -566,6 +560,12 @@ public class DataModel
                 parameterModel.setFlag(flag);
             }
 
+            if (code.trim().equals("DEPH")) existDEPH = true;
+            if (code.trim().equals("PRES")){
+                indexPRES = i;
+                formatPRES = para.getFormat();
+            }
+
             stationModel.addParameterModel(parameterModel);
            
         }
@@ -579,7 +579,7 @@ public class DataModel
             if ((!existDEPH) && (indexPRES != -1)){
                 // ajout de DEPH calculé à partir de PRES
                 //parameterModel.setFlag(stationModel.parameterModelsAt(indexPRES).getFlag());
-                stationModel.addFixedParameterModel(IdParameter.DEPH);
+                stationModel.addFixedParameterModel(IdParameter.DEPH, formatPRES);
             }
         }
         else
@@ -593,12 +593,12 @@ public class DataModel
             
             if (ViewFile.radSerieTempo.getSelection())
             {
+                // Ajout de "Chronological Julian Date" pour ODV
+                stationModel.addFixedParameterModel(IdParameter.CJDY);     
+                
                 // Serie temporelle
                 // Ajout du paramètre DEPH ( = Sensor Depth) pour ODV
-                stationModel.addFixedParameterModel(IdParameter.DEPH);
-                                
-                // Ajout de "Chronological Julian Date" pour ODV
-                stationModel.addFixedParameterModel(IdParameter.CJDY);                
+                stationModel.addFixedParameterModel(IdParameter.DEPH);          
             }
             else
             {
@@ -1072,55 +1072,6 @@ public class DataModel
         {
             e.printStackTrace();
             System.out.println(">>>>" + e.getMessage()); //$NON-NLS-1$
-        }
-    }
-
-    private static FlagFragment setFlagFragment(String property)
-    {
-        int i;
-        FlagFragment flag = new FlagFragment();
-
-        for (i = 0; i < EditStation.qcFlags.getTabFlagQC().getItemCount(); i++)
-        {
-            if (EditStation.qcFlags.getTabFlagQC().getItems()[i].getText(0).equals(property))
-            {
-                flag.setLine(Integer
-                    .valueOf(EditStation.qcFlags.getTabFlagQC().getItems()[i].getText(2))
-                        - Integer.valueOf(EditDesc.lignesEnteteFichier
-                            .getText()));
-                flag.setFirstCharOffset(EditStation.qcFlags.getTabFlagQC().getItems()[i]
-                    .getText(3));
-                flag.setLastCharOffset(EditStation.qcFlags.getTabFlagQC().getItems()[i]
-                    .getText(4));
-                return flag;
-            }
-        }
-        return null;
-    }
-
-    private static void getFlagFragment(FlagFragment flag, String propertyCode,
-            String propertyName)
-    {
-        if (flag != null)
-        {
-            // Teste si la metadonnee est deje presente dans le tableau
-            int size = EditStation.qcFlags.getTabFlagQC().getItemCount();
-            for (int i = 0; i < size; i++)
-            {
-                if (EditStation.qcFlags.getTabFlagQC().getItems()[i].getText(0).equals(
-                    propertyCode))
-                {
-                    return;
-                }
-            }
-
-            TableItem item = new TableItem(EditStation.qcFlags.getTabFlagQC(), SWT.NONE);
-            item.setText(0, propertyCode);
-            item.setText(1, propertyName);
-            item.setText(2, String.valueOf(flag.getLine()
-                    + Integer.valueOf(EditDesc.lignesEnteteFichier.getText())));
-            item.setText(3, String.valueOf(flag.getFirstCharOffset()));
-            item.setText(4, String.valueOf(flag.getLastCharOffset()));
         }
     }
 

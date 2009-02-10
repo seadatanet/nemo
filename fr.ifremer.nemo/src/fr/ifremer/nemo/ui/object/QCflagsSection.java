@@ -477,9 +477,34 @@ public class QCflagsSection extends NemoSection
         }
         return null;
     }
+    
 
 
-    public void getFlagFragment(FlagFragment flag, 
+    public FlagFragment getFlagFragment(String property)
+    {
+        int i;
+        FlagFragment flag = new FlagFragment();
+
+        for (i = 0; i < getTabFlagQC().getItemCount(); i++)
+        {
+            if (getTabFlagQC().getItems()[i].getText(0).equals(property))
+            {
+                flag.setLine(Integer
+                    .valueOf(getTabFlagQC().getItems()[i].getText(2))
+                        - Integer.valueOf(EditDesc.lignesEnteteFichier
+                            .getText()));
+                flag.setFirstCharOffset(getTabFlagQC().getItems()[i]
+                    .getText(3));
+                flag.setLastCharOffset(getTabFlagQC().getItems()[i]
+                    .getText(4));
+                return flag;
+            }
+        }
+        return null;
+    }
+
+
+    public void setFlagFragment(FlagFragment flag, 
                                 String propertyCode,
                                 String propertyName)
     {

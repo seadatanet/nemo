@@ -30,8 +30,8 @@ $configuration.getSep()Bot. Depth [m]##
 #foreach( $station in $survey.stations )
 #if ( $boucle == 0 )
 #foreach( $odvparam in $station.getOdvparameters() )
-#set $code = $odvparam.code
-#if ($odvparam.code == "CJDY") $code = $odvparam.fullName #end
+#set ($code = $odvparam.code)
+#if ($odvparam.code == "CJDY") #set ($code = $odvparam.fullName) #end
 $configuration.getSep()$code [$odvparam.unit]$configuration.getSep()$configuration.getSdnHeader() #set ($boucle = 1)##
 #end
 #foreach( $param in $station.parameters )

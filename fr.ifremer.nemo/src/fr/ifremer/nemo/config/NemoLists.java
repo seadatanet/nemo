@@ -1241,7 +1241,7 @@ public class NemoLists implements Cloneable {
             param.getCode(), Messages.getString("NemoLists.unknown")));
 		String unitCode = Utils.extraitCodeURN(getVocabMatch("P091", "P061", param.getCode(), Messages
 				.getString("NemoLists.unknown")));
-		return "<subject>SDN:LOCAL:" + param.getCode()
+		return "<subject>SDN:LOCAL:" + name
 				+ "</subject><object>SDN:P012::" + pdvCode
 				+ "</object><unit>SDN:P061::" + unitCode + "</unit>";
 	}

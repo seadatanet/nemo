@@ -8,6 +8,8 @@ import org.xml.sax.SAXException;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.util.Global;
+
 /**
  * Class LineFragment
  * 
@@ -256,5 +258,20 @@ public class LineFragment implements Cloneable, SAXConsumer {
 					.trim();
 		}
 	}
+
+    /**
+     * 
+     * @param a_Line
+     * @return String
+     */
+    public String fullRetreive(String a_Line) {
+        String fullFrag = Global.EMPTY_STRING;
+        if (_lastCharOffset == -1) {
+            fullFrag = a_Line.substring(_firstCharOffset - 1);
+        } else {
+            fullFrag = a_Line.substring(_firstCharOffset - 1, _lastCharOffset);
+        }
+        return fullFrag;
+    }
 
 } /* End of class: LineFragment */

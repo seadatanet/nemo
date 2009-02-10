@@ -20,7 +20,6 @@ import fr.ifremer.nemo.output.ProgressNotification;
 import fr.ifremer.nemo.ui.EditConversion;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.ViewFile;
-import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.SizeBasedProgressNotifier;
 
@@ -410,17 +409,7 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 				// Calcul du nombre de lignes du fichier
 				EditConversion.setTotalLigne(Utils.calculNbLigne(file));
 
-				// reader = new RandomAccessFile(file, "r");
 				//consumeHeader(reader2);
-
-                // TAG FAE 1386
-//				if (_stationModel.isMetaInData2()
-//						|| (_stationModel.getInputType().equals(
-//								Global.TRAJECTORY) && _stationModel
-//								.getTrajectory().getOutputType().equals(
-//										Global.ODV))) {
-//					_stationModel.consumeHeaderPlus(reader2);
-//				}
 
 				while ((station = _stationModel.convert(reader2, Utils
 						.extraitFichierChemin(ViewFile.nomFichier),
