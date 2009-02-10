@@ -11,6 +11,7 @@ import com.ago.xml.PathElementHandler;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.ui.object.NemoSection;
 import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.Formatter;
 
@@ -452,5 +453,25 @@ public class HorodatedParameterModel implements Cloneable, PathElementHandler,
 		format.setRefDate(a_RefDate);
 		return (Long) format.parseObject(frgmntDate + " " + frgmntTime);
 	}
+    
+    public DateTimeFormat getFormat(String champDest){
+        DateTimeFormat result = null;
+        if (champDest.equals(NemoSection.S_DATE)){
+            result = getDateFormat();
+        }else if (champDest.equals(NemoSection.S_TIME)){
+            result = getTimeFormat();
+        }
+        return result;
+    }
+    
+    public LineFragment getFragment (String champDest){
+        LineFragment result = null;
+        if (champDest.equals(NemoSection.S_DATE)){
+            result = getDateFragment();
+        }else if (champDest.equals(NemoSection.S_TIME)){
+            result = getTimeFragment();
+        }
+        return result;
+    }
 
 } /* End of class: HorodatedParameterModel */

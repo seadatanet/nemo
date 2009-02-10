@@ -30,6 +30,11 @@ public class Cursor {
 		this.y = 0;
 
 	}
+    
+    public void reset(){
+        this.x = 0;
+        this.y = 0;
+    }
 
 	public static void main(String[] args) {
 		// 

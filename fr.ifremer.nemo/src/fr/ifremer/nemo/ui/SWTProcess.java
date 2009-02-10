@@ -131,6 +131,8 @@ public class SWTProcess implements IRunnableWithProgress {
 		try {
 			notifier.progress(0);
 			monitor.setTaskName(Messages.getString("SWTProcess.3"));
+            // TODO FAE ... : ne convertir en objet qu'une seule fois
+            // attention à release
 			survey = DataModel.inputModel.convert(notifier);
 		} catch (InterruptedException e) {
 			throw e;

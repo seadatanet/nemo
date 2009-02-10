@@ -20,10 +20,12 @@ public class Trajectory implements Cloneable, SAXConsumer {
 	/**
 	 * Methode
 	 */
-	protected String _outputType;
+//	protected String _outputType;
+    protected String _stationNumber;
 
 	public Trajectory() {
-		_outputType = "";
+//		_outputType = "";
+        _stationNumber = "";
 	}
 
 	/**
@@ -65,8 +67,8 @@ public class Trajectory implements Cloneable, SAXConsumer {
 	public void buildFromElement(String a_URI, String a_LocalName,
 			String a_QName, Attributes a_Attributes) throws SAXException {
 		String tmp;
-		if ((tmp = a_Attributes.getValue("outputType")) != null) {
-			setOutputType(tmp);
+		if ((tmp = a_Attributes.getValue("stationNumber")) != null) {
+            setStationNumber(tmp);
 		}
 	}
 
@@ -87,8 +89,8 @@ public class Trajectory implements Cloneable, SAXConsumer {
 	 */
 	public SAXConsumer consumeElement(String a_URI, String a_LocalName,
 			String a_QName, Attributes a_Attributes) throws SAXException {
-		if (a_LocalName.equals("outputType")) {
-			Element2Field setter = new Element2Field(this, "setOutputType");
+		if (a_LocalName.equals("stationNumber")) {
+			Element2Field setter = new Element2Field(this, "setStationNumber");
 			return setter;
 		}
 		
@@ -115,7 +117,7 @@ public class Trajectory implements Cloneable, SAXConsumer {
 	 * 
 	 */
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
-		a_Writer.putTag("outputType", getOutputType());
+		a_Writer.putTag("stationNumber", getStationNumber());
 	}
 
 	/**
@@ -145,28 +147,51 @@ public class Trajectory implements Cloneable, SAXConsumer {
 		writeXMLOn(writer);
 	}
 
-	/**
-	 * Read accessor (getter) for attribute _outputType
-	 * 
-	 * @return String
-	 * @see Cdi#_outputType
-	 */
-	public String getOutputType() {
-		return _outputType;
-	}
+//	/**
+//	 * Read accessor (getter) for attribute _outputType
+//	 * 
+//	 * @return String
+//	 * @see Cdi#_outputType
+//	 */
+//	public String getOutputType() {
+//		return _outputType;
+//	}
+//
+//	/**
+//	 * Write accessor (setter) for attribute _outputType
+//	 * 
+//	 * @param s
+//	 *            new value for _outputType
+//	 * @see Dci#_outputType
+//	 */
+//	public void setOutputType(String s) {
+//		_outputType = s;
+//	}
+    
+    
 
 	/**
-	 * Write accessor (setter) for attribute _outputType
-	 * 
-	 * @param s
-	 *            new value for _outputType
-	 * @see Dci#_outputType
-	 */
-	public void setOutputType(String s) {
-		_outputType = s;
-	}
+     * Read accessor (getter) for attribute  _stationNumber.
+     * @return String
+     * @see Cdi#_stationNumber
+     */
+    public String getStationNumber()
+    {
+        return _stationNumber;
+    }
 
-	/**
+    /**
+     * Write accessor (setter) for attribute _stationNumber.
+     * @param stationNumber 
+     *            new value for _stationNumber
+     * @see Dci#_stationNumber
+     */
+    public void setStationNumber(String stationNumber)
+    {
+        _stationNumber = stationNumber;
+    }
+
+    /**
 	 * 
 	 * @param o
 	 * @return boolean

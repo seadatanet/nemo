@@ -13,56 +13,82 @@ public class Regexp {
 	 * 
 	 */
 
-	public static void initTab() {
+//	public static void initTab() {
+//
+//	}
 
-	}
+//	public static void remplirArrayList(ArrayList<String> liste, String chaine,
+//			int day, int month, int year, String split) {
+//
+//		liste = new ArrayList<String>();
+//
+//		liste.add(chaine);
+//		liste.add("" + day); //$NON-NLS-1$
+//		liste.add("" + month); //$NON-NLS-1$
+//		liste.add("" + year); //$NON-NLS-1$
+//		liste.add(split);
+//
+//	}
 
-	public static void remplirArrayList(ArrayList<String> liste, String chaine,
-			int day, int month, int year, String split) {
-
-		liste = new ArrayList<String>();
-
-		liste.add(chaine);
-		liste.add("" + day); //$NON-NLS-1$
-		liste.add("" + month); //$NON-NLS-1$
-		liste.add("" + year); //$NON-NLS-1$
-		liste.add(split);
-
-	}
-
-	public static Boolean depassementHeaderStation(int ligne, String zone,
-			boolean metaInData) {
-		// verifie que la metadonnee injectee ne se situe pas au dele de
-		// l'entete station+fichier
-		// retourne true quand ca depasse
-
-		Boolean depasse = false;
-		int enteteFichier;
-
-		if (ViewFile.dossierCampagne) {
-			// dossier
-			enteteFichier = 0;
-		} else {
-			// fichier campagne
-			enteteFichier = DataModel.singleSurvey.getHeaderLinesNumber();
-		}
-
-		if (metaInData) {
-			enteteFichier++;
-		}
-
-		int ligneLimite = enteteFichier
-				+ DataModel.stationModel.getNumberOfLines();
-
-		if (ligne > ligneLimite) {
-			depasse = true;
-			Utils.messageErreurAppend(zone + " "
-					+ Messages.getString("Regexp.19"));
-		}
-
-		return depasse;
-
-	}
+//	public static Boolean depassementHeaderStation(int ligne/*, String zone*/) {
+//		// verifie que la metadonnee injectee ne se situe pas au dele de
+//		// l'entete station+fichier
+//		// retourne true quand ca depasse
+//
+//		Boolean depasse = false;
+//		int enteteFichier;
+//
+//		if (ViewFile.dossierCampagne) {
+//			// dossier
+//			enteteFichier = 0;
+//		} else {
+//			// fichier campagne
+//			enteteFichier = DataModel.singleSurvey.getHeaderLinesNumber();
+//		}
+//
+////		if (metaInData) {
+////			enteteFichier++;
+////		}
+//
+//		int ligneLimite = enteteFichier
+//				+ DataModel.stationModel.getNumberOfLines();
+//
+//		if (ligne > ligneLimite) {
+//			depasse = true;
+////			Utils.messageErreurAppend(zone + " "
+////					+ Messages.getString("Regexp.19"));
+//		}
+//
+//		return depasse;
+//
+//	}
+//
+//    public static Boolean inData(int ligne) {
+//        // verifie que la metadonnee injectee se situe sur la
+//        // première ligne des données
+//        // retourne true si OK
+//
+//        Boolean inData = false;
+//        int enteteFichier,firstDataLine;
+//
+//        if (ViewFile.dossierCampagne) {
+//            // dossier
+//            enteteFichier = 0;
+//        } else {
+//            // fichier campagne
+//            enteteFichier = DataModel.singleSurvey.getHeaderLinesNumber();
+//        }
+//        enteteFichier += DataModel.stationModel.getNumberOfLines();
+//
+//        firstDataLine = enteteFichier + 1;
+//
+//        if (ligne == firstDataLine) {
+//            inData = true;
+//        }
+//
+//        return inData;
+//
+//    }
 
 	public static Boolean checkPresenceValeurObligatoire(String value,
 			String nomSection) {
@@ -78,76 +104,76 @@ public class Regexp {
 		return ok;
 	}
 
-	public static Boolean checkLigneDebutfin(String ligne, String debut, String fin,
-			String nomSection, boolean blnCheckLigne) {
-
-		String lign, debu, fi, log;
-		Boolean ok;
-
-		// raz du message d'erreurs
-
-		ok = true;
-		// log = "\n===[Check section : " + nomSection + "]===\n";
-		log = "\nSection : " + nomSection + "\n"; //$NON-NLS-1$
-
-		// format des differents champs
-		// ligne
-		if (blnCheckLigne) {
-			if (Pattern.matches("^[0-9][0-9]*$", ligne)) { //$NON-NLS-1$
-				// System.out.println("ligne de la section " + nomSection + "
-				// ==>
-				// ok");
-				ok = ok && true;
-				// log = log + "Valeur de ligne ok\n";
-			} else {
-				ok = ok && false;
-				log = log + "==>" + Messages.getString("Regexp.8"); //$NON-NLS-1$
-
-			}
-		}
-
-		// debut
-		if (Pattern.matches("^[1-9][0-9]*$", debut)) { //$NON-NLS-1$
-			// System.out.println("debut de la section " + nomSection + " ==>
-			// ok");
-			ok = ok && true;
-			// log = log + "Valeur de debut ok\n";
-		} else {
-			ok = ok && false;
-			log = log + "==>" + Messages.getString("Regexp.10"); //$NON-NLS-1$
-
-		}
-
-		// fin
-		if (Pattern.matches("^[1-9][0-9]*$", fin)) { //$NON-NLS-1$
-			// System.out.println("fin de la section " + nomSection + " ==>
-			// ok");
-			ok = ok && true;
-			// log = log + "Valeur de fin ok\n";
-		} else {
-			ok = ok && false;
-			log = log + "==>" + Messages.getString("Regexp.12"); //$NON-NLS-1$
-
-		}
-
-		// tests des relations des champs
-
-		if (!debut.equals("") && (!fin.equals(""))) { //$NON-NLS-1$ //$NON-NLS-2$
-			if (Integer.parseInt(debut) > Integer.parseInt(fin)) {
-				ok = ok && false;
-				log = log + "==>" + Messages.getString("Regexp.15"); //$NON-NLS-1$
-			}
-		}
-
-		if (ok) {
-			// log = log+"...ok";
-		} else {
-
-			Utils.messageErreurAppend(log);
-		}
-		return ok;
-
-	}
+//	public static Boolean checkLigneDebutfin(String ligne, String debut, String fin,
+//			String nomSection, boolean blnCheckLigne) {
+//
+//		String lign, debu, fi, log;
+//		Boolean ok;
+//
+//		// raz du message d'erreurs
+//
+//		ok = true;
+//		// log = "\n===[Check section : " + nomSection + "]===\n";
+//		log = "\nSection : " + nomSection + "\n"; //$NON-NLS-1$
+//
+//		// format des differents champs
+//		// ligne
+//		if (blnCheckLigne) {
+//			if (Pattern.matches("^[0-9][0-9]*$", ligne)) { //$NON-NLS-1$
+//				// System.out.println("ligne de la section " + nomSection + "
+//				// ==>
+//				// ok");
+//				ok = ok && true;
+//				// log = log + "Valeur de ligne ok\n";
+//			} else {
+//				ok = ok && false;
+//				log = log + "==>" + Messages.getString("Regexp.8"); //$NON-NLS-1$
+//
+//			}
+//		}
+//
+//		// debut
+//		if (Pattern.matches("^[1-9][0-9]*$", debut)) { //$NON-NLS-1$
+//			// System.out.println("debut de la section " + nomSection + " ==>
+//			// ok");
+//			ok = ok && true;
+//			// log = log + "Valeur de debut ok\n";
+//		} else {
+//			ok = ok && false;
+//			log = log + "==>" + Messages.getString("Regexp.10"); //$NON-NLS-1$
+//
+//		}
+//
+//		// fin
+//		if (Pattern.matches("^[1-9][0-9]*$", fin)) { //$NON-NLS-1$
+//			// System.out.println("fin de la section " + nomSection + " ==>
+//			// ok");
+//			ok = ok && true;
+//			// log = log + "Valeur de fin ok\n";
+//		} else {
+//			ok = ok && false;
+//			log = log + "==>" + Messages.getString("Regexp.12"); //$NON-NLS-1$
+//
+//		}
+//
+//		// tests des relations des champs
+//
+//		if (!debut.equals("") && (!fin.equals(""))) { //$NON-NLS-1$ //$NON-NLS-2$
+//			if (Integer.parseInt(debut) > Integer.parseInt(fin)) {
+//				ok = ok && false;
+//				log = log + "==>" + Messages.getString("Regexp.15"); //$NON-NLS-1$
+//			}
+//		}
+//
+//		if (ok) {
+//			// log = log+"...ok";
+//		} else {
+//
+//			Utils.messageErreurAppend(log);
+//		}
+//		return ok;
+//
+//	}
 
 	public static Boolean checkTextValeur(Text text, String nomSection) {
 		Boolean ok;

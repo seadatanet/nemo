@@ -24,6 +24,7 @@ import fr.ifremer.nemo.ui.EditConversion;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.ViewFile;
 import fr.ifremer.nemo.util.Formatter;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 public class CDIResumeWriter {
@@ -113,7 +114,7 @@ public class CDIResumeWriter {
 			for (Survey survey : surveys) {
 				for (Station station : survey.getStations()) {
 					for (Parameter param : station.getParameters()) {
-						writer.write("\r\n");
+						writer.write(Global.RN);
 						
 						// CDI ID
 						writer.write(EditConversion.getLocalCdiId(station, survey.getReference()));

@@ -12,6 +12,7 @@ import com.ago.xml.PathElementHandler;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.ws.WSParameter;
 
 /**
@@ -76,9 +77,10 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 		_unit = a_WSParameter.getUnit();
 		_format = a_WSParameter.getFormat();
 		_default = a_WSParameter.getDefaultValue();
+        _values = new java.util.ArrayList<ParameterValue>();
 	}
-
-	/**
+    
+    /**
 	 * 
 	 * Build object from its XML defintion
 	 * 

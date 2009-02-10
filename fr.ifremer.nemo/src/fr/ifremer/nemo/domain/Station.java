@@ -3,6 +3,7 @@ package fr.ifremer.nemo.domain;
 import java.io.LineNumberReader;
 import java.io.OutputStream;
 import java.io.StringReader;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -20,11 +21,19 @@ import com.ago.xml.PathElementHandler;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.domain.AddedParameter.IdParameter;
 import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.ui.EditConversion;
 import fr.ifremer.nemo.ui.SWTProcess;
 import fr.ifremer.nemo.ui.ViewFile;
+import fr.ifremer.nemo.ui.object.NemoSection;
+import fr.ifremer.nemo.util.Conversion;
+import fr.ifremer.nemo.util.DateTimeFormat;
+import fr.ifremer.nemo.util.ExternalizableFormat;
+import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.LatitudeFormat;
+import fr.ifremer.nemo.util.LongitudeFormat;
 
 /**
  * Class Station
@@ -170,6 +179,16 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 */
 	protected java.util.List<Parameter> _parameters;
 
+    /** TODO _odvparameters
+     * Liste, ordonnee, des paramètres rajoutés pour ODV
+     */
+    protected java.util.List<AddedParameter> _odvparameters;
+
+    /** TODO _odvparameters
+     * Liste, ordonnee, des paramètres rajoutés pour Medatlas
+     */
+    protected java.util.List<AddedParameter> _medparameters;
+
 	/**
 	 * Information sur les series temporelles. Optionnel, n'existe que si la
 	 * campagne a concerne des donnees temporelles.
@@ -184,20 +203,22 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 
 	public Station() {
 		_bottomDepth = Float.NaN;
-		_comment = "";
-		_dcHistory1 = "";
-		_dcHistory2 = "";
-		_dmHistory1 = "";
-		_dmHistory2 = "";
-		_globalParametersQC = "";
-		_globalProfileQC = "0";
+		_comment = Global.EMPTY_STRING;
+		_dcHistory1 = Global.EMPTY_STRING;
+		_dcHistory2 = Global.EMPTY_STRING;
+		_dmHistory1 = Global.EMPTY_STRING;
+		_dmHistory2 = Global.EMPTY_STRING;
+		_globalParametersQC = Global.EMPTY_STRING;
+		_globalProfileQC = Global.ZERO;
 		_offsetTU = 0.0f;
-		_reference = "";
-		_surfaceSamples1 = "";
-		_surfaceSamples2 = "";
+		_reference = Global.EMPTY_STRING;
+		_surfaceSamples1 = Global.EMPTY_STRING;
+		_surfaceSamples2 = Global.EMPTY_STRING;
 		_time = Float.NaN;
 		_dataType = null;
 		_parameters = new ArrayList<Parameter>();
+        _odvparameters = new ArrayList<AddedParameter>();
+        _medparameters = new ArrayList<AddedParameter>();
 		_survey = null;
 		_timeSeriesInformation = null;
 		_metaFlags = new HashMap<String, String>();
@@ -361,6 +382,12 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		if (a_LocalName.equals("parameters")) {
 			return new PathElementConsumer("parameters", this);
 		}
+        if (a_LocalName.equals("odvparameters")) {
+            return new PathElementConsumer("odvparameters", this);
+        }
+        if (a_LocalName.equals("medparameters")) {
+            return new PathElementConsumer("medparameters", this);
+        }
 		if (a_LocalName.equals("TimeSeriesInformation")) {
 			TimeSeriesInformation l = (TimeSeriesInformation) TimeSeriesInformation
 					.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
@@ -408,6 +435,18 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 			addParameter((Parameter) c);
 			return c;
 		}
+        if (path.equals("odvparameters")) {
+            c = Parameter
+                    .fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+            addOdvParameter((AddedParameter) c);
+            return c;
+        }
+        if (path.equals("medparameters")) {
+            c = Parameter
+                    .fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+            addMedParameter((AddedParameter) c);
+            return c;
+        }
 		return null;
 	}
 
@@ -448,6 +487,14 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		for (Parameter t : getParameters()) {
 			t.writeXMLOn(a_Writer);
 		}
+        a_Writer.openTag("odvparameters");
+        for (Parameter t : getParameters()) {
+            t.writeXMLOn(a_Writer);
+        }
+        a_Writer.openTag("medparameters");
+        for (Parameter t : getParameters()) {
+            t.writeXMLOn(a_Writer);
+        }
 		a_Writer.closeTag();
 		if (getTimeSeriesInformation() != null) {
 			getTimeSeriesInformation().writeXMLOn(a_Writer);
@@ -495,6 +542,8 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		}
 		copy._survey = null;
 		copy._parameters = new java.util.ArrayList<Parameter>();
+        copy._odvparameters = new java.util.ArrayList<AddedParameter>();
+        copy._medparameters = new java.util.ArrayList<AddedParameter>();
 		for (Parameter t0 : getParameters()) {
 			copy.addParameter((Parameter) t0.clone());
 		}
@@ -547,7 +596,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 */
 	public void setBottomDepth(String a_String) {
 		try {
-			if (a_String.trim().equals("")) {
+			if (a_String.trim().equals(Global.EMPTY_STRING)) {
 				setBottomDepth(Float.NaN);
 			} else {
 				setBottomDepth(Float.parseFloat(a_String));
@@ -612,6 +661,18 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		} catch (Exception e) {
 		}
 	}
+
+    /**
+     * 
+     */
+    public void setDate(String a_String, DateTimeFormat a_Format) {
+        try {
+            Long value = (Long) a_Format.parseObject(a_String);
+            setDate(value);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 	/**
 	 * Read accessor (getter) for attribute _dateQC
@@ -834,6 +895,18 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		}
 	}
 
+    /**
+     * 
+     */
+    public void setLatitude(String a_String, LatitudeFormat a_Format) {
+        try {
+            double value = ((Number) a_Format.parseObject(a_String)).doubleValue();
+            setLatitude(value);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 	/**
 	 * Read accessor (getter) for attribute _latQC
 	 * 
@@ -903,6 +976,18 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		} catch (Exception e) {
 		}
 	}
+
+    /**
+     * 
+     */
+    public void setLongitude(String a_String, LongitudeFormat a_Format) {
+        try {
+            double value = ((Number) a_Format.parseObject(a_String)).doubleValue();
+            setLongitude(value);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 	/**
 	 * Read accessor (getter) for attribute _longQC
@@ -1072,6 +1157,18 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		}
 	}
 
+    /**
+     * 
+     */
+    public void setTime(String a_String, DateTimeFormat a_Format) {
+        try {
+            Long value = (Long) a_Format.parseObject(a_String);
+            setTime(value);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 	/**
 	 * Remove any link for role dataType
 	 */
@@ -1136,6 +1233,67 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		}
 	}
 
+    
+    public void addMedParameter(AddedParameter x) {
+        if (_medparameters.contains(x))
+            return;
+        _medparameters.add(x);
+        x.setStation(this, Conversion.MEDATLAS);
+    }
+    public AddedParameter[] getMedParameters() {
+        AddedParameter[] v = new AddedParameter[_medparameters.size()];
+        _medparameters.toArray(v);
+        return v;
+    }
+    public void addOdvParameter(AddedParameter x) {
+        if (_odvparameters.contains(x))
+            return;
+        _odvparameters.add(x);
+        x.setStation(this, Conversion.ODV);
+    }
+    public AddedParameter[] getOdvParameters() {
+        AddedParameter[] v = new AddedParameter[_odvparameters.size()];
+        _odvparameters.toArray(v);
+        return v;
+    }
+
+    /**
+     * Getter sur _medparameters.
+     * @return the medparameters
+     */
+    public java.util.List<AddedParameter> getMedparameters()
+    {
+        return _medparameters;
+    }
+
+    /**
+     * Getter sur _odvparameters.
+     * @return the odvparameters
+     */
+    public java.util.List<AddedParameter> getOdvparameters()
+    {
+        return _odvparameters;
+    }
+    
+    public AddedParameter getAddedParameter(IdParameter idParam){
+        AddedParameter param = null;
+        for (AddedParameter current : _medparameters){
+            if (current.getCode().equals(idParam.toString())){                
+                param = current;
+                break;
+            }
+        }
+        if (param == null){
+            for (AddedParameter current : _odvparameters){
+                if (current.getCode().equals(idParam.toString())){                    
+                    param = current;
+                    break;
+                }
+            }
+        }
+        return param;
+    }
+
 	/**
 	 * release all links for role "parameters"
 	 */
@@ -1143,6 +1301,12 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		for (Parameter t : getParameters()) {
 			removeParameter(t);
 		}
+        for (Parameter t : getOdvParameters()) {
+            _odvparameters.remove(t);;
+        }
+        for (Parameter t : getMedParameters()) {
+            _medparameters.remove(t);;
+        }
 	}
 
 	/**
@@ -1182,7 +1346,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		return v;
 	}
 
-	/**
+    /**
 	 * Returns linked object for role "parameters" at index i
 	 * 
 	 * @param i
@@ -1190,7 +1354,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 * @return linked object at index i
 	 */
 	public Parameter parametersAt(int i) {
-		return (Parameter) _parameters.get(i);
+		return _parameters.get(i);
 	}
 
 	/**
@@ -1392,7 +1556,8 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 * @param o
 	 * @return boolean
 	 */
-	public boolean equals(Object o) {
+	@Override
+    public boolean equals(Object o) {
 		return (o == this);
 	}
 
@@ -1426,7 +1591,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 */
 	public float getCorrectedTime() {
 		if (!Float.isNaN(_time)) {
-			TimeZone tz = TimeZone.getTimeZone("GMT");
+			TimeZone tz = TimeZone.getTimeZone("GMT"); //$NON-NLS-1$
 			Calendar cal = Calendar.getInstance(tz);
 			cal.clear();
 			Calendar cal2 = Calendar.getInstance(tz);
@@ -1437,9 +1602,9 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 			cal.set(Calendar.SECOND, cal2.get(Calendar.SECOND));
 			cal.set(Calendar.MILLISECOND, cal2.get(Calendar.MILLISECOND));
 			return getGMTDate(cal.getTimeInMillis());
-		} else {
-			return _time;
-		}
+		} //else {
+		return _time;
+		//}
 	}
 
 	/**
@@ -1447,7 +1612,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 * @return String
 	 */
 	public String getDefaultGlobalParametersQC() {
-		return getGlobalParametersQC().replace('0', '9');
+		return getGlobalParametersQC().replace(Global.ZERO, Global.DEFAULT_FLAG);
 	}
 
 	/**
@@ -1455,18 +1620,11 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 * @return long
 	 */
 	public long getFullDate() {
-		TimeZone tz = TimeZone.getTimeZone("GMT");
+		TimeZone tz = TimeZone.getTimeZone("GMT"); //$NON-NLS-1$
 		Calendar cal = Calendar.getInstance(tz);
 		cal.clear();
 		cal.setTimeInMillis(_date);
 		if (!Float.isNaN(_time)) {
-			/*
-			 * Calendar cal2 = Calendar.getInstance(tz); cal2.clear();
-			 * cal2.setTimeInMillis(new Float(_time).longValue());
-			 * cal.set(Calendar.HOUR_OF_DAY, cal2.get(Calendar.HOUR_OF_DAY));
-			 * cal.set(Calendar.MINUTE, cal2.get(Calendar.MINUTE));
-			 * cal.set(Calendar.SECOND, cal2.get(Calendar.SECOND));
-			 */
 			cal.setTimeInMillis(_date + (new Float(_time).longValue()));
 		} else {
 			cal.setTimeInMillis(_date);
@@ -1479,23 +1637,13 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 * @return String
 	 */
 	public String getGlobalParametersQC() {
-		StringBuffer buffer = null;
-		if (_timeSeriesInformation != null) {
-			buffer = new StringBuffer("0000");
-		} else {
-			buffer = new StringBuffer();
-		}
+		StringBuffer buffer = new StringBuffer();
+        for (int i = 0; i < _medparameters.size(); i++) {
+            buffer.append(Global.ZERO);
+        }
 		for (int i = 0; i < parametersSize(); i++) {
-			buffer.append('0');
+			buffer.append(Global.ZERO);
 		}
-		// for (int i = 0; i < parametersSize(); i++) {
-		// String qc = getParameters()[i].getValues()[0].getQc();
-		// if (qc.equals("")) {
-		// buffer.append('0');
-		// } else {
-		// buffer.append(getParameters()[i].getValues()[0].getQc());
-		// }
-		// }
 		return buffer.toString();
 	}
 
@@ -1506,18 +1654,6 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 */
 	public long getGMTDate(long a_Date) {
 		return a_Date + ((new Float(getOffsetTU())).longValue() * 3600 * 1000);
-	}
-
-	/**
-	 * 
-	 * @return int
-	 */
-	public int getParametersNumber() {
-		if (getSurvey().isTimeSeriesSurvey()) {
-			return parametersSize() + 4;
-		} else {
-			return parametersSize();
-		}
 	}
 
 	/**
@@ -1551,7 +1687,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 			ArrayList<Integer> arlIndexes = new ArrayList<Integer>();
 			TreeMap<Double, Integer> tmTri = new TreeMap<Double, Integer>();
 
-			String paramCode = "";
+			String paramCode = Global.EMPTY_STRING;
 			int paramIndex = -1;
 
 			int i;
@@ -1561,28 +1697,28 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 			if (SWTProcess.odv) {
 				if (StationModel.getSingleton().getInputType().equals(
 						Global.TIMESERIES)) {
-					paramCode = "";
+					paramCode = Global.EMPTY_STRING;
 				} else if (StationModel.getSingleton().getInputType().equals(
 						Global.TRAJECTORY)) {
-					paramCode = "";
+					paramCode = Global.EMPTY_STRING;
 				} else {
-					paramCode = "PRES";
+					paramCode = "PRES"; //$NON-NLS-1$
 				}
 			} else {
 				if (StationModel.getSingleton().getInputType().equals(
 						Global.TIMESERIES)) {
-					paramCode = "";
+					paramCode = Global.EMPTY_STRING;
 				} else if (StationModel.getSingleton().getInputType().equals(
 						Global.TRAJECTORY)) {
-					paramCode = "";
+					paramCode = Global.EMPTY_STRING;
 				} else {
-					paramCode = "PRES";
+					paramCode = "PRES"; //$NON-NLS-1$
 				}
 			}
 
 			// Ajout des binomes valeur/index dans un TreeMap pour tri sur la
 			// valeur
-			if (paramCode.equals("")) {
+			if (paramCode.equals(Global.EMPTY_STRING)) {
 				// Cas du tri par date
 				// on utilise la date du 1er parametre
 				for (i = 0; i < parametersAt(0).valuesSize(); i++) {
@@ -1642,7 +1778,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 			ArrayList<StationData> dataList = new ArrayList<StationData>(
 					parametersAt(0).valuesSize());
 			StationData dataTemp;
-			String paramCode = "";
+			String paramCode = Global.EMPTY_STRING;
 			int paramIndex = -1;
 			int nb = 0;
 			int i;
@@ -1652,28 +1788,28 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 			if (SWTProcess.odv) {
 				if (StationModel.getSingleton().getInputType().equals(
 						Global.TIMESERIES)) {
-					paramCode = "";
+					paramCode = Global.EMPTY_STRING;
 				} else if (StationModel.getSingleton().getInputType().equals(
 						Global.TRAJECTORY)) {
-					paramCode = "";
+					paramCode = Global.EMPTY_STRING;
 				} else {
-					paramCode = "PRES";
+					paramCode = "PRES"; //$NON-NLS-1$
 				}
 			} else {
 				if (StationModel.getSingleton().getInputType().equals(
 						Global.TIMESERIES)) {
-					paramCode = "";
+					paramCode = Global.EMPTY_STRING;
 				} else if (StationModel.getSingleton().getInputType().equals(
 						Global.TRAJECTORY)) {
-					paramCode = "";
+					paramCode = Global.EMPTY_STRING;
 				} else {
-					paramCode = "PRES";
+					paramCode = "PRES"; //$NON-NLS-1$
 				}
 			}
 
 			// Ajout des binomes valeur/index dans un TreeMap pour tri sur la
 			// valeur
-			if (paramCode.equals("")) {
+			if (paramCode.equals(Global.EMPTY_STRING)) {
 				// Cas du tri par date
 				// on utilise la date du 1er parametre
 				for (i = 0; i < parametersAt(0).valuesSize(); i++) {
@@ -1735,47 +1871,201 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	}
 
 	public String getMetaFlag(String property) {
-		String flag = "0";
+		String flag = Global.ZERO;
 
 		if (getMetaFlags() != null) {
-			if (getMetaFlags().get(property) != null) {
+			if ((getMetaFlags().containsKey(property)) && (getMetaFlags().get(property) != null)) {
 				flag = getMetaFlags().get(property);
 			}
 		}
 
 		return flag;
 	}
+    
+    public String calculTypeBC(){
+        String typeBC = null;
+        if (_dataType.getCode().equals("H09")){ //$NON-NLS-1$
+            typeBC = "B"; //$NON-NLS-1$
+        }else if (_dataType.getCode().equals("H10") || _dataType.getCode().equals("H13")){ //$NON-NLS-1$ //$NON-NLS-2$
+            typeBC = "C";      //$NON-NLS-1$      
+        }else{
+            int nbRecords = parametersAt(0).valuesSize();
+            if (nbRecords < 250){
+                typeBC = "B"; //$NON-NLS-1$
+            }else{
+                typeBC = "C"; //$NON-NLS-1$
+            }
+        }
+        return typeBC;
+    }
+    
+    public String getDateTime() throws ParseException{
+        StringBuffer value = new StringBuffer();
+        //$formatter.formatDateTime("YYYY-MM-DD", $station.fullDate)T$formatter.formatDateTime("hh24:mm:ss.sss", $station.correctedTime, "9999"))
+        String date = Formatter.getSingleton().formatDateTime("YYYY-MM-DD", getFullDate()); //$NON-NLS-1$
+        value.append(date);
+        value.append("T"); //$NON-NLS-1$
+        String time = Formatter.getSingleton().formatDateTime("hh24:mm:ss.sss", getCorrectedTime()); //$NON-NLS-1$
+        value.append(time);
+        return value.toString();
+    }
+    
+    public String getVariantDateTime(int i) throws ParseException{
+        StringBuffer value = new StringBuffer();
+        HorodatedValue horodate = null;
+        if (parametersAt(0).valuesAt(i) instanceof HorodatedValue){
+            horodate = (HorodatedValue) parametersAt(0).valuesAt(i);
+            String date = Formatter.getSingleton().formatDateTime("YYYY-MM-DD", horodate.getDate()); //$NON-NLS-1$
+            value.append(date);
+            value.append("T"); //$NON-NLS-1$
+            String time = Formatter.getSingleton().formatDateTime("hh24:mm:ss.sss", horodate.getDate()); //$NON-NLS-1$
+            value.append(time);
+        }
+        return value.toString();
+    }
+    
+    public String getVariant(int i, String code){
+        String value = Global.EMPTY_STRING;
+        //Parameter param = null;
+        for (Parameter current : _medparameters){
+            if (current.getCode().equals(code))
+                value = current.valuesAt(i).getValue().toString();
+            break;
+        }
+        if (value.equals(Global.EMPTY_STRING)){
+            for (Parameter current : _odvparameters){
+                if (current.getCode().equals(code))
+                    value = current.valuesAt(i).getValue().toString();
+                break;
+            }
+        }
+        return value;
+    }
 
 	public String getFlag(Parameter param, int index) {
-		String flag = "0";
+		String flag = Global.ZERO;
 		
 		if (param.valuesAt(index).getValue().isNaN()) {
-			flag = "9";
-		} else if (param.valuesAt(index).getQc().equals("")) {
-			flag = "0";
+			flag = Global.DEFAULT_FLAG; 
+		} else if (param.valuesAt(index).getQc().equals(Global.EMPTY_STRING)) {
+			flag = Global.ZERO;
 		} else {
 			flag = param.valuesAt(index).getQc();
 		}
 		
 		return flag;
 	}
-	public String getFlags(int index, boolean isTimeSeries) {
-		StringBuffer buffer = new StringBuffer();
-		
-		if (isTimeSeries) {
-			// Ajout des flags des donnees temporelles
-			String flag = getMetaFlag(Global.DATETIME);
-			for (int i = 0; i < 4; i++) {
-				buffer.append(flag);
-			}
-		}
-		
-		// Ajout des flags des parametres
-		for (Parameter param : getParameters()) {
-			buffer.append(getFlag(param, index));
-		}
 
+    public String getAddedFlag(Parameter param, int index) {
+        String flag = Global.ZERO;
+        
+        if (param.valuesAt(index).getStringValue().equals(Global.EMPTY_STRING)) {
+            flag = Global.DEFAULT_FLAG; 
+        } else if (param.valuesAt(index).getQc().equals(Global.EMPTY_STRING)) {
+            flag = Global.ZERO;
+        } else {
+            flag = param.valuesAt(index).getQc();
+        }
+        
+        return flag;
+    }
+	public String getFlags(int index) {
+		StringBuffer buffer = new StringBuffer();
+
+        // Ajout des flags des parametres ajoutés
+        for (Parameter param : getMedParameters()) {
+            buffer.append(getAddedFlag(param, index));
+        }
+        
+        // Ajout des flags des parametres
+        for (Parameter param : getParameters()) {
+            buffer.append(getFlag(param, index));
+        }
 		return buffer.toString();
 	}
+    
+    
+    /**
+     * setter généralisé, sur le même modèle que la méthode consumeElement
+     * @param a_ChampDest
+     * @param a_String
+     * @param a_Format
+     * @return true si le a_ChampDest existe, false sinon
+     */
+    public boolean set(String a_ChampDest, String a_String, ExternalizableFormat a_Format){
+        boolean exist = true;
+        if (a_ChampDest.equals(NemoSection.S_DCHIST + '1')){
+            setDcHistory1(a_String);
+        }else if (a_ChampDest.equals(NemoSection.S_DCHIST + '2')){
+            setDcHistory2(a_String);
+        }else if (a_ChampDest.equals(NemoSection.S_COMMENT)){
+            setComment(a_String);
+        }else if (a_ChampDest.equals(NemoSection.S_SURFACE + '1')){
+            setSurfaceSamples1(a_String);
+        }else if (a_ChampDest.equals(NemoSection.S_SURFACE + '2')){
+            setSurfaceSamples2(a_String);
+        }else if (a_ChampDest.equals(NemoSection.S_OFFSETTU)){
+            setOffsetTU(a_String);
+        }else if (a_ChampDest.equals(NemoSection.S_TIME)){
+            setTime(a_String, (DateTimeFormat) a_Format);
+        }else if (a_ChampDest.equals(NemoSection.S_DATE)){
+            setDate(a_String, (DateTimeFormat) a_Format);
+        }else if (a_ChampDest.equals(NemoSection.S_LAT)){
+            setLatitude(a_String, (LatitudeFormat) a_Format);
+        }else if (a_ChampDest.equals(NemoSection.S_LON)){
+            setLongitude(a_String, (LongitudeFormat) a_Format);
+        }else if (a_ChampDest.equals(NemoSection.S_DEPTH)){
+            setBottomDepth(a_String);
+        }else{
+            exist = false;
+        }
+        return exist;
+    }
+    
+    
+    /**
+     * getter généralisé, sur le même modèle que la méthode consumeElement
+     * @param a_ChampDest
+     * @param a_String
+     * @param a_Format
+     * @return true si le a_ChampDest existe, false sinon
+     */
+    public String get(String a_ChampDest, ExternalizableFormat a_Format){
+        String value = Global.EMPTY_STRING;
+        Formatter formatter = Formatter.getSingleton();
+        try
+        {
+            if (a_ChampDest.equals(NemoSection.S_DCHIST + '1')){
+                value = getDcHistory1();
+            }else if (a_ChampDest.equals(NemoSection.S_DCHIST + '2')){
+                value = getDcHistory2();
+            }else if (a_ChampDest.equals(NemoSection.S_COMMENT)){
+                value = getComment();
+            }else if (a_ChampDest.equals(NemoSection.S_SURFACE + '1')){
+                value = getSurfaceSamples1();
+            }else if (a_ChampDest.equals(NemoSection.S_SURFACE + '2')){
+                value = getSurfaceSamples2();
+            }else if (a_ChampDest.equals(NemoSection.S_OFFSETTU)){
+                value = String.valueOf(getOffsetTU());
+            }else if (a_ChampDest.equals(NemoSection.S_TIME)){
+                value = formatter.formatDateTime(((DateTimeFormat) a_Format).getFormatString(), getTime());
+            }else if (a_ChampDest.equals(NemoSection.S_DATE)){
+                value = formatter.formatDateTime(((DateTimeFormat) a_Format).getFormatString(), getDate());
+            }else if (a_ChampDest.equals(NemoSection.S_LAT)){
+                value = formatter.formatLatitude(((LatitudeFormat) a_Format).getFormatString(), getLatitude());
+            }else if (a_ChampDest.equals(NemoSection.S_LON)){
+                value = formatter.formatLongitude(((LongitudeFormat) a_Format).getFormatString(), getLongitude());
+            }else if (a_ChampDest.equals(NemoSection.S_DEPTH)){
+                if (!Float.isNaN(getBottomDepth()))
+                    value = String.valueOf(getBottomDepth());
+            }
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+        return value;
+    }
+    
 
 } /* End of class: Station */

@@ -5,11 +5,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
-import java.text.DecimalFormat;
 import java.text.ParseException;
-import java.util.Calendar;
 import java.util.HashMap;
-import java.util.TimeZone;
 import java.util.Vector;
 
 import org.xml.sax.Attributes;
@@ -23,24 +20,23 @@ import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.FlagTable;
-import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.domain.Cdi;
+import fr.ifremer.nemo.domain.AddedParameter;
 import fr.ifremer.nemo.domain.HorodatedValue;
 import fr.ifremer.nemo.domain.Parameter;
 import fr.ifremer.nemo.domain.ParameterValue;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.TimeSeriesInformation;
 import fr.ifremer.nemo.domain.Trajectory;
+import fr.ifremer.nemo.domain.AddedParameter.IdParameter;
 import fr.ifremer.nemo.ui.DataModel;
 import fr.ifremer.nemo.ui.EditConversion;
-import fr.ifremer.nemo.ui.SWTProcess;
+import fr.ifremer.nemo.ui.EditStation;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.ViewFile;
+import fr.ifremer.nemo.ui.object.NemoSection;
 import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.FloatFormat;
-import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.JulianDate;
 import fr.ifremer.nemo.util.LatitudeFormat;
 import fr.ifremer.nemo.util.LongitudeFormat;
 import fr.ifremer.nemo.util.Messages;
@@ -93,13 +89,13 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * Indique si le fichier correspond à un fichier dont les metadata station
 	 * se trouvent dans la première ligne des données
 	 */
-	protected boolean _metaInData;
+	//protected boolean _metaInData;
 
 	/**
 	 * Indique si le fichier correspond à un fichier dont les metadata station
 	 * se trouvent dans la première ligne des données
 	 */
-	protected boolean _metaInData2;
+	//protected boolean _metaInData2;
 
 	/**
 	 * Nombre de ligne du header Station
@@ -133,6 +129,16 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * Liste, ordonnee, des paramètres mesurés sur la station
 	 */
 	protected java.util.List<ParameterModel> _parameterModels;
+
+    /** TODO _addedParameterModels
+     * Liste, ordonnee, des paramètres rajoutés pour ODV
+     */
+    protected java.util.List<ParameterModel> _odvParameterModels;
+
+    /** TODO _addedParameterModels
+     * Liste, ordonnee, des paramètres rajoutés pour Medatlas
+     */
+    protected java.util.List<ParameterModel> _medParameterModels;
 
 	/**
 	 * Modèle pour les informations propres aux séries temporelles. Optionnel
@@ -183,12 +189,12 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	/**
 	 * Format du parametre DEPH
 	 */
-	protected String _dephFormat;
+	//protected String _dephFormat;
 
 	/**
 	 * Format decimal de la date Julienne
 	 */
-	protected DecimalFormat _df;
+	//protected DecimalFormat _df;
 
 	/**
 	 * Tableau de correspondance des flags
@@ -197,12 +203,14 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 	public StationModel() {
 		_incrementNumber = 1;
-		_endDataPattern = "";
+		_endDataPattern = Global.EMPTY_STRING;
 		_endOnEOF = false;
 		_endOnEmptyLine = false;
 		_endOnPattern = false;
 		_model = null;
 		_parameterModels = new java.util.ArrayList<ParameterModel>();
+        _odvParameterModels = new java.util.ArrayList<ParameterModel>();
+        _medParameterModels = new java.util.ArrayList<ParameterModel>();
 		_properties = new java.util.LinkedHashMap<String, PropertyModel>();
 		_referenceProperty = null;
 		_timeSeriesModel = null;
@@ -212,7 +220,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		_lastRef = null;
 		_headerPlus = null;
 		_inputType = Global.PROFILE;
-		_df = new DecimalFormat("#0.000000");
+		//_df = new DecimalFormat("#0.000000");
 	}
 
 	/**
@@ -349,14 +357,14 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			Element2Field setter = new Element2Field(this, "setEndData");
 			return setter;
 		}
-		if (a_LocalName.equals("metaInData")) {
-			Element2Field setter = new Element2Field(this, "setMetaInData");
-			return setter;
-		}
-		if (a_LocalName.equals("metaInData2")) {
-			Element2Field setter = new Element2Field(this, "setMetaInData2");
-			return setter;
-		}
+//		if (a_LocalName.equals("metaInData")) {
+//			Element2Field setter = new Element2Field(this, "setMetaInData");
+//			return setter;
+//		}
+//		if (a_LocalName.equals("metaInData2")) {
+//			Element2Field setter = new Element2Field(this, "setMetaInData2");
+//			return setter;
+//		}
 //		if (a_LocalName.equals("Cdi")) {
 //			Cdi l = (Cdi) Cdi.fromElement(a_URI, a_LocalName, a_QName,
 //					a_Attributes);
@@ -390,6 +398,12 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		if (a_LocalName.equals("parameters")) {
 			return new PathElementConsumer("parameters", this);
 		}
+        if (a_LocalName.equals("odvparameters")) {
+            return new PathElementConsumer("odvparameters", this);
+        }
+        if (a_LocalName.equals("medparameters")) {
+            return new PathElementConsumer("medparameters", this);
+        }
 		if (a_LocalName.equals("HorodatedParameterModel")) {
 			HorodatedParameterModel l = (HorodatedParameterModel) HorodatedParameterModel
 					.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
@@ -456,8 +470,8 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		a_Writer.putTag("endDataPattern", getEndDataPattern());
 		a_Writer.putTag("rowNumber", getRowNumber());
 		a_Writer.putTag("endData", getEndData());
-		a_Writer.putTag("metaInData", isMetaInData());
-		a_Writer.putTag("metaInData2", isMetaInData2());
+//		a_Writer.putTag("metaInData", isMetaInData());
+//		a_Writer.putTag("metaInData2", isMetaInData2());
         // CDI déplacé dans la config
 //		if (ViewFile.checkCDI.getSelection()) {
 //			if (getCdi() != null) {
@@ -477,6 +491,14 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		for (ParameterModel t : getParameterModels()) {
 			t.writeXMLOn(a_Writer);
 		}
+        a_Writer.openTag("odvparameters");
+        for (ParameterModel t : getParameterModels()) {
+            t.writeXMLOn(a_Writer);
+        }
+        a_Writer.openTag("medparameters");
+        for (ParameterModel t : getParameterModels()) {
+            t.writeXMLOn(a_Writer);
+        }
 		a_Writer.closeTag();
 		a_Writer.openTag("properties");
 		for (PropertyModel t : getProperties()) {
@@ -570,6 +592,14 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		for (ParameterModel t1 : getParameterModels()) {
 			copy.addParameterModel((ParameterModel) t1.clone());
 		}
+        copy._odvParameterModels = new java.util.ArrayList<ParameterModel>();
+        for (ParameterModel t1 : getOdvParameterModels()) {
+            copy.addOdvParameterModel((ParameterModel) t1.clone());
+        }
+        copy._medParameterModels = new java.util.ArrayList<ParameterModel>();
+        for (ParameterModel t1 : getMedParameterModels()) {
+            copy.addMedParameterModel((ParameterModel) t1.clone());
+        }
 		copy._timestampModel = null;
 		if (getTimestampModel() != null) {
 			copy
@@ -788,37 +818,37 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		_incrementNumber = Integer.parseInt(number);
 	}
 
-	/**
-	 * Read accessor (getter) for attribute _metaInData
-	 * 
-	 * @return boolean
-	 * @see StationModel#_metaInData
-	 */
-	public boolean isMetaInData() {
-		return _metaInData;
-	}
-
-	/**
-	 * Write accessor (setter) for attribute _metaInData
-	 * 
-	 * @param x
-	 *            new value for _metaInData
-	 * @see StationModel#_metaInData
-	 */
-	public void setMetaInData(boolean x) {
-		_metaInData = x;
-	}
-
-	/**
-	 * Write accessor (setter) for attribute _metaInData
-	 * 
-	 * @param a_String
-	 *            new value for _metaInData as String
-	 * @see StationModel#_metaInData
-	 */
-	public void setMetaInData(String a_String) {
-		setMetaInData(new Boolean(a_String).booleanValue());
-	}
+//	/**
+//	 * Read accessor (getter) for attribute _metaInData
+//	 * 
+//	 * @return boolean
+//	 * @see StationModel#_metaInData
+//	 */
+//	public boolean isMetaInData() {
+//		return _metaInData;
+//	}
+//
+//	/**
+//	 * Write accessor (setter) for attribute _metaInData
+//	 * 
+//	 * @param x
+//	 *            new value for _metaInData
+//	 * @see StationModel#_metaInData
+//	 */
+//	public void setMetaInData(boolean x) {
+//		_metaInData = x;
+//	}
+//
+//	/**
+//	 * Write accessor (setter) for attribute _metaInData
+//	 * 
+//	 * @param a_String
+//	 *            new value for _metaInData as String
+//	 * @see StationModel#_metaInData
+//	 */
+//	public void setMetaInData(String a_String) {
+//		setMetaInData(new Boolean(a_String).booleanValue());
+//	}
 
 	/**
 	 * Read accessor (getter) for attribute _numberOfLines
@@ -1175,6 +1205,12 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		for (ParameterModel t : getParameterModels()) {
 			removeParameterModel(t);
 		}
+        for (ParameterModel t : getOdvParameterModels()) {
+            removeParameterModel(t);
+        }
+        for (ParameterModel t : getMedParameterModels()) {
+            removeParameterModel(t);
+        }
 	}
 
 	/**
@@ -1220,9 +1256,78 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * @return linked object at index i
 	 */
 	public ParameterModel parameterModelsAt(int i) {
-		return (ParameterModel) _parameterModels.get(i);
+		return _parameterModels.get(i);
 	}
 
+    public void addOdvParameterModel(ParameterModel x) {
+        if (parameterModelsIncludes(x))
+            return;
+        _odvParameterModels.add(x);;
+    }
+    public ParameterModel[] getOdvParameterModels() {
+        ParameterModel[] v = new ParameterModel[_odvParameterModels.size()];
+        _odvParameterModels.toArray(v);
+        return v;
+    }
+
+    public void addMedParameterModel(ParameterModel x) {
+        if (parameterModelsIncludes(x))
+            return;
+        _medParameterModels.add(x);;
+    }
+    public ParameterModel[] getMedParameterModels() {
+        ParameterModel[] v = new ParameterModel[_medParameterModels.size()];
+        _medParameterModels.toArray(v);
+        return v;
+    }
+    
+    public ParameterModel getAddedParameterModel(IdParameter idParam){
+        ParameterModel param = null;
+        for (ParameterModel current : _medParameterModels){
+            if (current.getModel().getCode().equals(idParam.toString())){                
+                param = current;
+                break;
+            }
+        }
+        if (param == null){
+            for (ParameterModel current : _odvParameterModels){
+                if (current.getModel().getCode().equals(idParam.toString())){                    
+                    param = current;
+                    break;
+                }
+            }
+        }
+        return param;
+    }
+
+    public void addFixedParameterModel(IdParameter code) {
+
+        AddedParameter para = new AddedParameter(code);
+        ParameterModel parameterModel = new ParameterModel();
+        parameterModel.setModel(para);
+        
+        PropertyModel propertyModel = para.getPropertyModel(this);
+        if (propertyModel != null){           
+            // fragment du parametre
+            HeaderFragment headFrag = propertyModel.getFragment();
+            if (headFrag != null){            
+                LineFragment frag = new LineFragment();
+                frag.setFirstCharOffset(headFrag.getFirstCharOffset());
+                frag.setLastCharOffset(headFrag.getLastCharOffset());
+                parameterModel.setFragment(frag);
+            }
+        }
+        
+        switch (para.getCible()){
+            case ODV :
+                if (!_odvParameterModels.contains(parameterModel)) _odvParameterModels.add(parameterModel);
+                break;
+            case MEDATLAS :
+                if (!_medParameterModels.contains(parameterModel)) _medParameterModels.add(parameterModel);
+                break;
+        }
+    }
+    
 	/**
 	 * returns index of object x in "parameterModels"
 	 * 
@@ -1392,41 +1497,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			return;
 		_timestampModel = x;
 	}
-
-	/**
-	 * 
-	 * @param a_Station
-	 */
-	public void computeEndDate(Station a_Station) {
-		TimeSeriesInformation timeSeries = a_Station.getTimeSeriesInformation();
-		if (Float.isNaN(timeSeries.getEndDate())) {
-			long rate = new Float(timeSeries.getSamplingRate() * 1000.0f)
-					.longValue();
-			int size = a_Station.parametersAt(0).valuesSize() - 1;
-			long date = a_Station.getFullDate() + (size * rate);
-			TimeZone tz = TimeZone.getTimeZone("GMT");
-			Calendar cal = Calendar.getInstance(tz);
-			cal.clear();
-			cal.setTimeInMillis(date);
-			/*
-			 * Calendar cal2 = Calendar.getInstance(tz); cal2.clear();
-			 * cal2.setTimeZone(tz); cal2.set(Calendar.HOUR_OF_DAY,
-			 * cal.get(Calendar.HOUR_OF_DAY)); cal2.set(Calendar.MINUTE,
-			 * cal.get(Calendar.MINUTE)); cal2.set(Calendar.SECOND,
-			 * cal.get(Calendar.SECOND));
-			 * timeSeries.setEndTime(cal2.getTimeInMillis());
-			 */
-			timeSeries.setEndTime(cal.getTimeInMillis());
-			/*
-			 * cal2.clear(); cal2.setTimeZone(tz); cal2.set(Calendar.YEAR,
-			 * cal.get(Calendar.YEAR)); cal2.set(Calendar.MONTH,
-			 * cal.get(Calendar.MONTH)); cal2.set(Calendar.DAY_OF_MONTH,
-			 * cal.get(Calendar.DAY_OF_MONTH));
-			 * timeSeries.setEndDate(cal2.getTimeInMillis());
-			 */
-			timeSeries.setEndDate(cal.getTimeInMillis());
-		}
-	}
+    
 
 	/**
 	 * 
@@ -1521,7 +1592,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			}
 		}
 
-		v.add("");
+		v.add(Global.EMPTY_STRING);
 
 		String[] lines = new String[v.size()];
 		_headerPlus = v.toArray(lines);
@@ -1548,291 +1619,89 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		try {
 			station = (Station) _model.clone();
 			station.setMetaFlags(new HashMap<String, String>());
+            
+            // Marquage du fichier au debut
+            a_Reader.mark(getTaille());
+            
+            if (EditStation.someInData()){
+                header = consumeHeaderPlusOne(a_Reader);
+            }else{
+                header = consumeHeader(a_Reader);
+            }
 
-			if ((_timeSeriesModel != null /* && _timestampModel.isComputed() */&& _trajectory == null)
-					|| (_trajectory != null && _trajectory.getOutputType()
-							.equals(Global.MEDATLAS)) && !isMetaInData2()) {
-				// Marquage du fichier au debut
-				a_Reader.mark(getTaille());
-				if ((header = consumeHeaderPlusOne(a_Reader)) != null) {
-					// a_Notifier.progress(a_Reader.getFilePointer());
-					if ((getReferenceProperty().getFragment().getFirstLine() == 0
-							&& (a_Filename != null) && !(isIncrementRef()))) {
-						if (ViewFile.collectionCasN) {
-							String[] filename = DataModel.singleSurvey
-									.getFile().split("/");
-							getReferenceProperty()
-									.applyOn(
-											station,
-											new String[] { filename[filename.length - 1] });
-						} else
-							getReferenceProperty().applyOn(station,
-									new String[] { a_Filename });
-					} else {
-						if (isIncrementRef()) {
-							station.setReference(Integer.toString(_ref++));
-						} else {
-							getReferenceProperty().applyOn(station, header);
-						}
-					}
-					for (PropertyModel m : getProperties()) {
-						// System.out.println("@DEBUG propertyModel
-						// courant
-						// :"+m.getProperty());
-						m.applyOn(station, header);
-						addFlag(m, station, header);
-					}
-					if (_timeSeriesModel != null) {
-						_timeSeriesModel.convert(station, header,
-								isRefDateBased, a_RefDate);
-					}
-					// a_Notifier.progress(a_Reader.getFilePointer());
-
-					// Retour au debut du fichier et depassement du header
-					a_Reader.reset();
-					EditConversion.setErreurLigne(0);
-					consumeHeader(a_Reader);
-
-					convertParameters(a_Reader, station, isRefDateBased,
-							a_RefDate, a_Notifier);
-					if (_timeSeriesModel != null
-							&& Float.isNaN(station.getTimeSeriesInformation()
-									.getEndDate())) {
-						computeEndDate(station);
-					}
-					consumeFooter(a_Reader);
-					// a_Notifier.progress(a_Reader.getFilePointer());
-
-					return station;
-				}
-
-			} else if (isMetaInData()) {
-				consumeHeader(a_Reader);
-
-				convertParameters(a_Reader, station, isRefDateBased, a_RefDate,
-						a_Notifier);
-				if (_timeSeriesModel != null
-						&& Float.isNaN(station.getTimeSeriesInformation()
-								.getEndDate())) {
-					computeEndDate(station);
-				}
-				// a_Notifier.progress(a_Reader.getFilePointer());
-
-				consumeFooter(a_Reader);
-				// a_Notifier.progress(a_Reader.getFilePointer());
-				return station;
-
-			} else if (isMetaInData2()
-					|| (_trajectory != null && _trajectory.getOutputType()
-							.equals(Global.ODV))) {
-				int index;
-				String line = null;
-				boolean initStation = false;
-
-				for (index = 0; (line = a_Reader.readLine()) != null
-						&& (!(_endOnEmptyLine && line.trim().matches("^$")))
-						&& (!(_endOnPattern && line.matches("^"
-								+ _endDataPattern + "$")))
-						|| (index < _rowNumber); index++) {
-
-					_headerPlus[_headerPlus.length - 1] = line;
-					EditConversion.incrementErreurLigne();
-					EditConversion.setErreurChaine(line);
-
-					a_Notifier.progressLine(EditConversion.getErreurLigne(),
-							EditConversion.getTotalLigne());
-
-					// Recuperation du numero de station
-					if (isMetaInData2()) {
-						getReferenceProperty().applyOn(station, _headerPlus);
-					} else {
-						if ((getReferenceProperty().getFragment()
-								.getFirstLine() == 0
-								&& (a_Filename != null) && !(isIncrementRef()))) {
-							if (ViewFile.collectionCasN) {
-								String[] filename = DataModel.singleSurvey
-										.getFile().split("/");
-								getReferenceProperty()
-										.applyOn(
-												station,
-												new String[] { filename[filename.length - 1] });
-							} else
-								getReferenceProperty().applyOn(station,
-										new String[] { a_Filename });
-						} else {
-							if (isIncrementRef()) {
-								station.setReference(Integer.toString(_ref++));
-							} else {
-								getReferenceProperty().applyOn(station, header);
-							}
-						}
-					}
-
-					String refTemp = station.getReference();
-
-					// Comparaison du numero de station en cours avec celui de
-					// la derniere station
-					if (!initStation) {
-
-						for (PropertyModel m : getProperties()) {
-							m.applyOn(station, _headerPlus);
-							addFlag(m, station, header);
-						}
-
-						for (ParameterModel pm : _parameterModels) {
-							station.addParameter((Parameter) pm.getModel()
-									.clone());
-						}
-
-						if (_timeSeriesModel != null) {
-							_timeSeriesModel.convert(station, _headerPlus,
-									isRefDateBased, a_RefDate);
-						}
-
-						initStation = true;
-					}
-
-					if (getLastRef() != null) {
-						// FAE 0001135 : reformatage des fichiers ODV 
-						//      (si la reference de la station est vide, considerer la ligne comme appartenant e la derniere station referencee)
-						if (!refTemp.equals(getLastRef()) && !(refTemp.replace("\r\n", "")).trim().equals("")) {
-							station.setReference(getLastRef());
-							setLastRef(refTemp);
-
-							a_Reader.reset();
-							EditConversion.setErreurLigne(EditConversion
-									.getErreurLigne() - 1);
-							_ref--;
-							return station;
-						}
-					} else {
-						setLastRef(station.getReference());
-					}
-
-					a_Reader.mark(getTaille());
-
-					long rate = 0;
-					if (station.getTimeSeriesInformation() != null) {
-						rate = new Float(station.getTimeSeriesInformation()
-								.getSamplingRate() * 1000.0f).longValue();
-						org.nfunk.jep.JEP parser = new org.nfunk.jep.JEP();
-						parser.addStandardFunctions();
-						parser.addStandardConstants();
-						parser.addVariable("x", rate); //$NON-NLS-1$
-						parser.parseExpression("x"
-								+ getTimeSeriesModel()
-										.getSampleRateConversion());
-
-						Double resultJEP = parser.getValue();
-						rate = resultJEP.longValue();
-
-						station.getTimeSeriesInformation().setSamplingRate(
-								rate / 1000);
-					}
-
-					int paramIndex = 0;
-
-					for (ParameterModel pm : _parameterModels) {
-						Parameter p = station.parametersAt(paramIndex);
-						ParameterValue value = null;
-						if (_timeSeriesModel != null) {
-							if (_timestampModel != null) {
-								HorodatedValue hValue = new HorodatedValue();
-								if (_timestampModel.isComputed()) {
-									hValue.setDate(station.getFullDate()
-											+ (index * rate));
-								} else {
-									long time = _timestampModel
-											.convertTimestamp(
-													_headerPlus[_headerPlus.length - 1],
-													a_RefDate);
-									hValue.setDate(station.getGMTDate(time));
-
-									// FAE086 START
-									long ecart = (time - station.getFullDate()) / 1000;
-
-									if (ecart > 0
-											&& station
-													.getTimeSeriesInformation()
-													.getSamplingRate() == 0) {
-										station.getTimeSeriesInformation()
-												.setSamplingRate(ecart);
-									}
-									// FAE086 END
-								}
-								value = hValue;
-							} else {
-								value = new ParameterValue();
-							}
-						} else {
-							value = new ParameterValue();
-						}
-
-						pm.convert(_headerPlus[_headerPlus.length - 1], value,
-								getFlagTable());
-						p.addValue(value);
-						paramIndex++;
-					}
-
-					if (_timeSeriesModel != null
-							&& Float.isNaN(station.getTimeSeriesInformation()
-									.getEndDate())) {
-						computeEndDate(station);
-					}
-				}
-
-				if (line == null && !station.getReference().equals("")) {
-					// consumeFooter(a_Reader);
-
-					return station;
-				}
-
-			} else {
-				if ((header = consumeHeader(a_Reader)) != null) {
-					// a_Notifier.progress(a_Reader.getFilePointer());
-					if ((getReferenceProperty().getFragment().getFirstLine() == 0
-							&& (a_Filename != null) && !(isIncrementRef()))) {
-						if (ViewFile.collectionCasN) {
-							String[] filename = DataModel.singleSurvey
-									.getFile().split("/");
-							getReferenceProperty()
-									.applyOn(
-											station,
-											new String[] { filename[filename.length - 1] });
-						} else
-							getReferenceProperty().applyOn(station,
-									new String[] { a_Filename });
-					} else {
-						if (isIncrementRef()) {
-							station.setReference(Integer.toString(_ref++));
-						} else {
-							getReferenceProperty().applyOn(station, header);
-						}
-					}
-
-					for (PropertyModel m : getProperties()) {
-						m.applyOn(station, header);
-						addFlag(m, station, header);
-					}
-
-					if (_timeSeriesModel != null) {
-						_timeSeriesModel.convert(station, header,
-								isRefDateBased, a_RefDate);
-					}
-					// a_Notifier.progress(a_Reader.getFilePointer());
-					convertParameters(a_Reader, station, isRefDateBased,
-							a_RefDate, a_Notifier);
-					if (_timeSeriesModel != null
-							&& Float.isNaN(station.getTimeSeriesInformation()
-									.getEndDate())) {
-						computeEndDate(station);
-					}
-					consumeFooter(a_Reader);
-					// a_Notifier.progress(a_Reader.getFilePointer());
-
-					return station;
-				}
-			}
+            if (header != null)
+            {
+                // STATION NUMBER
+                if (getReferenceProperty().isUserProvided()){
+                    // saisie manuelle
+                    if (_inputType.equals(Global.TRAJECTORY)){
+                        // Trajectoire : saisie fixe
+                        station.setReference(_trajectory.getStationNumber());
+                    }else{
+                        // incrementation du numéro
+                        station.setReference(Integer.toString(_ref++));
+                    }
+                }else{
+                    // Fixed position
+                    if (EditStation.stationNumber.isInData() && (a_Filename != null)){
+                        // dans la première ligne des données
+                        if (ViewFile.collectionCasN) {
+                            String[] filename = DataModel.singleSurvey.getFile().split("/");
+                            getReferenceProperty().applyOn(station, new String[] { filename[filename.length - 1] });
+                        } else
+                            getReferenceProperty().applyOn(station, new String[] { a_Filename });
+                    }else{
+                        // dans le Header
+                        getReferenceProperty().applyOn(station, header);
+                    }
+                }
+                
+                // récupération les propriétés de l'entête de station
+                for (PropertyModel m : getProperties()) {    
+                    if (!m.isToCompute()){                        
+                        m.applyOn(station, header);
+                        addFlag(m, station, header);
+                    }
+                }
+                if (_timeSeriesModel != null) {
+                    _timeSeriesModel.convert(station, _inputType, header);
+                }
+                
+                
+                // Retour au debut du fichier et depassement du header
+                a_Reader.reset();
+                EditConversion.setErreurLigne(0);
+                consumeHeader(a_Reader);
+                
+                convertParameters(a_Reader, station, a_RefDate, a_Notifier);
+                
+                // récupération des propriétés "de fin" de l'entête de station
+                // volontairement après la récupération des paramètres
+                // DATE / TIME
+                if (EditStation.date.isInData() && EditStation.time.isInData()){
+                    if ((_inputType.equals(Global.TIMESERIES) && Float.isNaN(station.getTimeSeriesInformation().getEndDate()))
+                            || (_inputType.equals(Global.TRAJECTORY))){
+                        _timeSeriesModel.computeEndDate(station);
+                    }
+                }
+                
+                if (_inputType.equals(Global.TRAJECTORY)){
+                    // récupération de la valeur du paramètre correspondant sur la dernière ligne de données
+                    // LATX
+                    station.getTimeSeriesInformation().setEndLatitude(station.getVariant((_rowNumber - 1), IdParameter.LATX.toString()));
+                    // LONX
+                    station.getTimeSeriesInformation().setEndLongitude(station.getVariant((_rowNumber - 1), IdParameter.LONX.toString()));
+                    // DEPTH
+                    if (EditStation.depth.isInData()){
+                        station.getTimeSeriesInformation().setEndDepth(station.getVariant((_rowNumber - 1), IdParameter.BATH.toString()));
+                    }
+                    
+                }
+                                
+                consumeFooter(a_Reader);
+                
+                return station;
+            }
 		} catch (StringIndexOutOfBoundsException e) {
 			throw e;
 		} catch (CloneNotSupportedException e) {
@@ -1857,32 +1726,28 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * @exception IOException
 	 * @exception ParseException
 	 */
-	public void convertParameters(BufferedReader a_Reader, Station a_Station,
-			boolean isRefDateBased, long a_RefDate,
-			SizeBasedProgressNotifier a_Notifier) throws IOException,
-			ParseException {
-		long rate = 0;
-		if (a_Station.getTimeSeriesInformation() != null) {
-			rate = new Float(a_Station.getTimeSeriesInformation()
-					.getSamplingRate() * 1000.0f).longValue();
-			org.nfunk.jep.JEP parser = new org.nfunk.jep.JEP();
-			parser.addStandardFunctions();
-			parser.addStandardConstants();
-			parser.addVariable("x", rate); //$NON-NLS-1$
-			parser.parseExpression("x"
-					+ getTimeSeriesModel().getSampleRateConversion());
-
-			Double resultJEP = parser.getValue();
-			rate = resultJEP.longValue();
-
-			a_Station.getTimeSeriesInformation().setSamplingRate(rate / 1000);
-		}
+	public void convertParameters(BufferedReader a_Reader, 
+                                  Station a_Station,
+                                  long a_RefDate,
+                                  SizeBasedProgressNotifier a_Notifier) 
+            throws IOException, ParseException {
+        
+        long rate = 0;
+        if ((_inputType.equals(Global.TIMESERIES)) || (_inputType.equals(Global.TRAJECTORY))){
+            rate = _timeSeriesModel.calculSamplingRate(a_Station.getTimeSeriesInformation());
+        }
+		
 		int index = 0;
 		try {
 			for (ParameterModel pm : _parameterModels) {
 				a_Station.addParameter((Parameter) pm.getModel().clone());
-
 			}
+            for (ParameterModel odvpm : _odvParameterModels) {
+                a_Station.addOdvParameter((AddedParameter) odvpm.getModel().clone());
+            }
+            for (ParameterModel medpm : _medParameterModels) {
+                a_Station.addMedParameter((AddedParameter) medpm.getModel().clone());
+            }
 			String line = null;
 			long size = 0;
 			for (index = 0; (line = a_Reader.readLine()) != null
@@ -1896,65 +1761,49 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 				EditConversion.incrementErreurLigne();
 				EditConversion.setErreurChaine(line);
 
-				if (index == 0 && isMetaInData()) {
-					String[] header = new String[] { line };
-					if (isIncrementRef()) {
-						a_Station.setReference(Long.toString(_ref++));
-					} else {
-						getReferenceProperty().applyOn(a_Station, header);
-					}
-					for (PropertyModel m : getProperties()) {
-						m.applyOn(a_Station, header);
-						addFlag(m, a_Station, header);
-					}
-					if (_timeSeriesModel != null) {
-						_timeSeriesModel.convert(a_Station, header,
-								isRefDateBased, a_RefDate);
-					}
-				}
+
 				int paramIndex = 0;
 				for (ParameterModel pm : _parameterModels) {
 					Parameter p = a_Station.parametersAt(paramIndex);
 					ParameterValue value = null;
-					if (_timeSeriesModel != null) {
-						if (_timestampModel != null) {
-							HorodatedValue hValue = new HorodatedValue();
-							if (_timestampModel.isComputed()) {
-								hValue.setDate(a_Station.getFullDate()
-										+ (index * rate));
-							} else {
-								long time = _timestampModel.convertTimestamp(
-										line, a_RefDate);
-								hValue.setDate(a_Station.getGMTDate(time));
+                    
+                    // Horodate value
+                    if ((_inputType.equals(Global.TIMESERIES)) || (_inputType.equals(Global.TRAJECTORY)) ) {
+                        HorodatedValue hValue = new HorodatedValue();
+                        if (_timestampModel.isComputed()) {
+                            hValue.setDate(a_Station.getFullDate() + (index * rate));
+                        } else {
+                            long time = _timestampModel.convertTimestamp(line, a_RefDate);
+                            hValue.setDate(a_Station.getGMTDate(time));
 
-								// FAE086 START
-								long ecart = (time - a_Station.getFullDate()) / 1000;
+                            // FAE086 START
+                            long ecart = (time - a_Station.getFullDate()) / 1000;
+                            if ((ecart > 0) && (a_Station.getTimeSeriesInformation().getSamplingRate() == 0)) {
+                                a_Station.getTimeSeriesInformation().setSamplingRate(ecart);
+                            }
+                            // FAE086 END
+                        }
+                        value = hValue;
+                    }else{
+                        value = new ParameterValue(); 
+                    }
 
-								if (ecart > 0
-										&& a_Station.getTimeSeriesInformation()
-												.getSamplingRate() == 0) {
-									a_Station.getTimeSeriesInformation()
-											.setSamplingRate(ecart);
-								}
-								// FAE086 END
-							}
-							value = hValue;
-						} else {
-							value = new ParameterValue();
-						}
-					} else {
-						value = new ParameterValue();
-					}
-
-					if (EditConversion.getErreurLigne() == 4
-							&& pm.getModel().getCode().equals("NTRI")) {
-						System.out.println();
-					}
 					pm.convert(line, value, getFlagTable());
 					p.addValue(value);
 					paramIndex++;
 				}
-				// a_Notifier.progress(a_Reader.getFilePointer());
+                
+                // renseignement des valeurs des paramètres ajoutés
+                ParameterModel paramModel;
+                for (IdParameter idParam : IdParameter.values()){            
+                    paramModel = getAddedParameterModel(idParam);
+                    if (paramModel != null){
+                        AddedParameter p = a_Station.getAddedParameter(idParam);
+                        ParameterValue value = new ParameterValue(); 
+                        paramModel.convertAdded(value, a_Station, _inputType, index, getPresIndex(), line);
+                        p.addValue(value);
+                    }
+                }
 			}
 		} catch (NumberFormatException e) {
 			throw new NumberFormatException(e.getMessage()
@@ -1977,14 +1826,9 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 					+ Messages.getString("StationModel.3"));
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
-		} catch (IntrospectionException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
 		}
 	}
+ 
 
 	/**
 	 * 
@@ -2019,6 +1863,18 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			addParameterModel((ParameterModel) c);
 			return c;
 		}
+        if (path.equals("odvparameters")) {
+            c = ParameterModel.fromElement(a_URI, a_LocalName, a_QName,
+                    a_Attributes);
+            addParameterModel((ParameterModel) c);
+            return c;
+        }
+        if (path.equals("medparameters")) {
+            c = ParameterModel.fromElement(a_URI, a_LocalName, a_QName,
+                    a_Attributes);
+            addParameterModel((ParameterModel) c);
+            return c;
+        }
 		if (path.equals("properties")) {
 			c = PropertyModel.fromElement(a_URI, a_LocalName, a_QName,
 					a_Attributes);
@@ -2077,25 +1933,6 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		_ref = -1;
 	}
 
-	public boolean isMetaInData2() {
-		return _metaInData2;
-	}
-
-	public void setMetaInData2(boolean inData2) {
-		_metaInData2 = inData2;
-	}
-
-	/**
-	 * Write accessor (setter) for attribute _metaInData2
-	 * 
-	 * @param a_String
-	 *            new value for _metaInData2 as String
-	 * @see StationModel#_metaInData2
-	 */
-	public void setMetaInData2(String a_String) {
-		setMetaInData2(new Boolean(a_String).booleanValue());
-	}
-
 	public String getLastRef() {
 		return _lastRef;
 	}
@@ -2132,128 +1969,12 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		return _inputType.equals(Global.TRAJECTORY);
 	}
 
-	public boolean testDepth() {
-		//TODO Stocker le resultat dans une variable a reinitialiser a chaque conversion
-		if (SWTProcess.odv) {
-			if (_parameterModels.get(0).getModel().getCode().equals("DEPH")) {
-				return false;
-			} else {
-				for (int i = 0; i < _parameterModels.size(); i++) {
-					if (_parameterModels.get(i).getModel().getCode().equals(
-							"PRES")) {
-						return true;
-					}
-				}
-				return false;
-			}
-		} else {
-			return false;
-		}
-	}
-
-	public String headerDepth() {
-		if (testDepth()) {
-			for (int i = 0; i < NemoLists.getParameters().length; i++) {
-				if (NemoLists.getParameters()[i].getCode().equals("DEPH")) {
-					setDephFormat(NemoLists.getParameters()[i].getFormat());
-					break;
-				}
-			}
-			searchPresIndex();
-
-			return Utils.configuration.getSep() + "DEPH [m]"
-					+ Utils.configuration.getSep()
-					+ Utils.configuration.getSdnHeader();
-		} else {
-			setPresIndex(-1);
-			return "";
-		}
-	}
-
-	// FAE091 : calcul de la profondeur en fonction de la pression
-	public String calculDepth(Station station, int index) {
-		if (testDepth()) {
-			if (getPresIndex() > -1) {
-				double X, Gr, P, Depth;
-
-				String QC = station.getParameters()[getPresIndex()].getValues()[index]
-						.getQc();
-				if (QC.equals("")) {
-					QC = "0";
-				}
-
-				P = station.getParameters()[getPresIndex()].getValues()[index]
-						.getValue();
-				X = Math.sin(station.getLatitude() / 57.29578);
-				X = X * X;
-
-				Gr = 9.780318 * (1.0 + (5.2788E-3 + 2.36E-5 * X) * X)
-						+ 1.092E-6 * P;
-				Depth = (((-1.82E-15 * P + 2.279E-10) * P - 2.2512E-5) * P + 9.72659)
-						* P;
-				Depth = Depth / Gr;
-				
-				return Utils.configuration.getSep()
-						+ Formatter.getSingleton().formatDouble(
-								getDephFormat(), Depth)
-						+ Utils.configuration.getSep() + QC;
-			} else {
-				return Utils.configuration.getSep()
-						+ Utils.configuration.getSep();
-			}
-		} else {
-			return "";
-		}
-	}
-
-	private void searchPresIndex() {
-		int i;
-		int size = _parameterModels.size();
-
-		for (i = 0; i < size; i++) {
-			if (_parameterModels.get(i).getModel().getCode().equals("PRES")) {
-				setPresIndex(i);
-				return;
-			}
-		}
-
-		setPresIndex(-1);
-	}
-
-	public String julianDate(Station station, int index) {
-		if (station.parametersAt(0).valuesAt(index) instanceof HorodatedValue) {
-			Long date = ((HorodatedValue) station.parametersAt(0).valuesAt(
-					index)).getDate();
-
-			JulianDate jDate = new JulianDate(date);
-
-			return getDecimalFormat().format(jDate.getJour());
-		}
-		return "";
-	}
-
 	public int getPresIndex() {
 		return _presIndex;
 	}
 
 	public void setPresIndex(int index) {
 		_presIndex = index;
-	}
-
-	public String getDephFormat() {
-		return _dephFormat;
-	}
-
-	public void setDephFormat(String format) {
-		_dephFormat = format;
-	}
-
-	public DecimalFormat getDecimalFormat() {
-		return _df;
-	}
-
-	public void setDecimalFormat(DecimalFormat _df) {
-		this._df = _df;
 	}
 
 	public FlagTable getFlagTable() {
@@ -2284,7 +2005,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 			// AJout dans la liste des flags de metadonnees
 			String property = pm.getProperty();
-			if (property.equals(Global.DATE) || property.equals(Global.TIME)) {
+			if (property.equals(NemoSection.S_DATE) || property.equals(NemoSection.S_TIME)) {
 				property = Global.DATETIME;
 			}
 			station.getMetaFlags().put(property, value);

@@ -4,6 +4,8 @@ import java.beans.IntrospectionException;
 import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -16,8 +18,10 @@ import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.TimeSeriesInformation;
+import fr.ifremer.nemo.ui.object.NemoSection;
 import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.FloatFormat;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.LatitudeFormat;
 import fr.ifremer.nemo.util.LongitudeFormat;
 
@@ -39,7 +43,7 @@ public class TimeSeriesModel implements Cloneable, PathElementHandler,
 	protected java.util.Map<String, PropertyModel> _properties;
 
 	public TimeSeriesModel() {
-		_sampleRateConversion = "";
+		_sampleRateConversion = Global.EMPTY_STRING;
 		_properties = new java.util.LinkedHashMap<String, PropertyModel>();
 		_stationModel = null;
 	}
@@ -379,20 +383,23 @@ public class TimeSeriesModel implements Cloneable, PathElementHandler,
 	 * @exception InvocationTargetException
 	 * @exception ParseException
 	 */
-	public TimeSeriesInformation convert(Station a_Station, String[] a_Header,
-			boolean isRefDateBased, long a_RefDate)
-			throws IntrospectionException, IllegalAccessException,
-			InvocationTargetException, ParseException {
+	public TimeSeriesInformation convert(Station a_Station, 
+                                         String inputType,
+                                         String[] a_Header)
+   {
 		TimeSeriesInformation timeSeries = a_Station.getTimeSeriesInformation();
-		for (PropertyModel m : getProperties()) {
-			try {
-				m.applyOn(timeSeries, a_Header);
-				_stationModel.addFlag(m, a_Station, a_Header);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		for (PropertyModel m : getProperties()) {             
+            try {
+                m.applyOn(timeSeries, a_Header);
+                _stationModel.addFlag(m, a_Station, a_Header);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 		}
-		convertSampleRate(timeSeries);
+        
+        // SAMPLING RATE
+        convertSampleRate(timeSeries);
+        
 		return timeSeries;
 	}
 
@@ -400,28 +407,27 @@ public class TimeSeriesModel implements Cloneable, PathElementHandler,
 	 * 
 	 * @param a_TimeSeriesInformation
 	 */
-	public void convertSampleRate(TimeSeriesInformation a_TimeSeriesInformation) {
+    private void convertSampleRate(TimeSeriesInformation a_TimeSeriesInformation) {
 
+        PropertyModel samplingRate = propertiesAt(NemoSection.S_SAMPLINGRATE);
 		org.nfunk.jep.JEP parser = null;
 
 		if (_sampleRateConversion.trim().length() > 0
-				&& !propertiesAt("samplingRate").isUserProvided()) {
+				&& !samplingRate.isUserProvided()) {
 
 			if (getJepParser() == null) {
 
 				parser = new org.nfunk.jep.JEP();
 				parser.addStandardFunctions();
 				parser.addStandardConstants();
-				parser.addVariable("x", a_TimeSeriesInformation
-						.getSamplingRate());
+				parser.addVariable("x", a_TimeSeriesInformation.getSamplingRate());
 				parser.parseExpression("x" + _sampleRateConversion.trim());
 				setJepParser(parser);
 				double result = parser.getValue();
 				a_TimeSeriesInformation.setSamplingRate((float) result);
 			} else {
 				parser = getJepParser();
-				parser.addVariable("x", a_TimeSeriesInformation
-						.getSamplingRate());
+				parser.addVariable("x", a_TimeSeriesInformation.getSamplingRate());
 				double result = parser.getValue();
 				a_TimeSeriesInformation.setSamplingRate((float) result);
 
@@ -429,6 +435,44 @@ public class TimeSeriesModel implements Cloneable, PathElementHandler,
 
 		}
 	}
+    public long calculSamplingRate(TimeSeriesInformation a_TimeSeriesInformation){
+        long rate = 0;
+        if (a_TimeSeriesInformation != null){            
+            rate = new Float(a_TimeSeriesInformation.getSamplingRate() * 1000.0f).longValue();
+            org.nfunk.jep.JEP parser = new org.nfunk.jep.JEP();
+            parser.addStandardFunctions();
+            parser.addStandardConstants();
+            parser.addVariable("x", rate);      //$NON-NLS-1$
+            parser.parseExpression("x" + _sampleRateConversion.trim());
+            
+            Double resultJEP = parser.getValue();
+            rate = resultJEP.longValue();
+            
+            a_TimeSeriesInformation.setSamplingRate(rate / 1000);
+        }
+        return rate;
+    }
+
+    /**
+     * 
+     * @param a_Station
+     */
+    public void computeEndDate(Station a_Station) {
+        TimeSeriesInformation timeSeries = a_Station.getTimeSeriesInformation();
+        if (Float.isNaN(timeSeries.getEndDate())) 
+        {
+            long rate = new Float(timeSeries.getSamplingRate() * 1000.0f).longValue();
+            int size = a_Station.parametersAt(0).valuesSize() - 1;
+            long date = a_Station.getFullDate() + (size * rate);
+            TimeZone tz = TimeZone.getTimeZone("GMT");
+            Calendar cal = Calendar.getInstance(tz);
+            cal.clear();
+            cal.setTimeInMillis(date);
+            
+            timeSeries.setEndTime(cal.getTimeInMillis());            
+            timeSeries.setEndDate(cal.getTimeInMillis());
+        }
+    }
 
 	/**
 	 * 

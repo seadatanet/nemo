@@ -8,6 +8,8 @@ import org.xml.sax.SAXException;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.util.Global;
+
 /**
  * Class ParameterValue
  * 
@@ -23,6 +25,11 @@ public class ParameterValue implements Cloneable, SAXConsumer {
 	 * Valeur de la mesure
 	 */
 	protected Double _value;
+    
+    /**
+     *  
+     */
+    private String _stringValue;
 
 	/**
 	 * Parametre pour lequel la mesure a ete effectuee
@@ -30,7 +37,7 @@ public class ParameterValue implements Cloneable, SAXConsumer {
 	protected Parameter _definition;
 
 	public ParameterValue() {
-		_qc = "";
+		_qc = Global.EMPTY_STRING;
 		_definition = null;
 	}
 
@@ -76,7 +83,10 @@ public class ParameterValue implements Cloneable, SAXConsumer {
 		if ((tmp = a_Attributes.getValue("value")) != null) {
 			setValue(tmp);
 		}
-		if ((tmp = a_Attributes.getValue("")) != null) {
+        if ((tmp = a_Attributes.getValue("stringValue")) != null) {
+            setStringValue(tmp);
+        }
+		if ((tmp = a_Attributes.getValue(Global.EMPTY_STRING)) != null) {
 			setQc(tmp);
 		}
 	}
@@ -122,7 +132,8 @@ public class ParameterValue implements Cloneable, SAXConsumer {
 	 */
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
 		a_Writer.putAttribute("value", getValue());
-		a_Writer.putAttribute("", getQc());
+        a_Writer.putAttribute("stringValue", getStringValue());
+		a_Writer.putAttribute(Global.EMPTY_STRING, getQc());
 	}
 
 	/**
@@ -262,5 +273,23 @@ public class ParameterValue implements Cloneable, SAXConsumer {
 			x.addValue(this);
 		}
 	}
+
+    /**
+     * Getter sur _stringValue.
+     * @return the stringValue
+     */
+    public String getStringValue()
+    {
+        return _stringValue;
+    }
+
+    /**
+     * Setter sur _stringValue.
+     * @param stringValue the stringValue to set
+     */
+    public void setStringValue(String stringValue)
+    {
+        _stringValue = stringValue;
+    }
 
 } /* End of class: ParameterValue */

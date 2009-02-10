@@ -146,8 +146,8 @@ public class ViewFile extends ViewPart
         EditDesc.loaded = 0;
         EditSurvey.validee = 0;
         EditSurvey.loaded = 0;
-        EditStation.validee = 0;
-        EditStation.loaded = 0;
+        EditStation.validee = false;
+        EditStation.loaded = false;
         EditData.validee = 0;
         EditData.loaded = 0;
 

@@ -17,9 +17,13 @@ import com.ago.xml.PathElementHandler;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.ui.EditDesc;
+import fr.ifremer.nemo.ui.object.AutoLine;
+import fr.ifremer.nemo.ui.object.StationSection;
 import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.ExternalizableFormat;
 import fr.ifremer.nemo.util.FloatFormat;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.IntegerFormat;
 import fr.ifremer.nemo.util.LatitudeFormat;
 import fr.ifremer.nemo.util.LongitudeFormat;
@@ -38,7 +42,7 @@ import fr.ifremer.nemo.util.Messages;
  */
 public class PropertyModel implements Cloneable, PathElementHandler,
 		SAXConsumer {
-
+    
 	/**
 	 * Nom de la propriete du bean associe permettant de recuperer/definir la
 	 * valeur correspondante. Le bean, doit implementer les methodes d'acces a
@@ -53,6 +57,11 @@ public class PropertyModel implements Cloneable, PathElementHandler,
 	 * par l'utilisateur est stoquee dans la propriete du bean associe
 	 */
 	protected boolean _userProvided;
+    
+    /**
+     * boolean précisant si cette propriété est, ou non, existante
+     */
+    protected boolean _toCompute = false;
 
 	protected Object _source;
 
@@ -71,7 +80,7 @@ public class PropertyModel implements Cloneable, PathElementHandler,
 	protected ExternalizableFormat _format;
 
 	public PropertyModel() {
-		_property = "";
+		_property = Global.EMPTY_STRING;
 		_userProvided = false;
 		_format = null;
 		_fragment = null;
@@ -657,5 +666,79 @@ public class PropertyModel implements Cloneable, PathElementHandler,
 			throw new SAXException(e);
 		}
 	}
+    
+
+    
+    public void copyFragment(PropertyModel initiale){
+
+        // memes valeurs de ligne/debut/fin que initial
+        HeaderFragment frag = initiale.getFragment();
+
+        _userProvided = false;
+        _fragment.setFirstLine(frag.getFirstLine());
+        _fragment.setLastLine(frag.getLastLine());
+        _fragment.setFirstCharOffset(frag.getFirstCharOffset());
+        _fragment.setLastCharOffset(frag.getLastCharOffset());
+    }
+    
+    public HeaderFragment fillFragment(StationSection stationSection){
+        return fillFragment(stationSection, null, 0, true, false);
+    }
+    
+    public HeaderFragment fillFragment(StationSection stationSection, String ligne){
+        return fillFragment(stationSection, ligne, 0, true, false);
+    }
+    
+    public HeaderFragment fillFragment(StationSection stationSection, int i){
+        return fillFragment(stationSection, null, i, true, false);
+    }
+    
+    public HeaderFragment fillFragment(StationSection stationSection, boolean lastLine, boolean posVariable){
+        return fillFragment(stationSection, null, 0, lastLine, posVariable);
+    }
+    
+    public HeaderFragment fillFragment(StationSection stationSection, String ligne, int i, boolean lastLine, boolean posVariable){
+        
+        // position dans fichier
+        _userProvided = false;
+        AutoLine line = stationSection.getAutoInput().getLines().get(i);
+        
+        if (ligne == null)
+            ligne = String.valueOf(((Integer.valueOf(line.getNumberLine().getText())) 
+                        - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())));
+        String debut = line.getStart().getText();
+        String fin = line.getEnd().getText();
+
+        _fragment.setFirstLine(ligne);
+        _fragment.setFirstCharOffset(debut);
+        _fragment.setLastCharOffset(fin);
+        
+        if (lastLine){
+            _fragment.setLastLine(ligne);
+        }
+        if (posVariable){
+            _fragment.setVariable(stationSection.isVariablePos());
+        }
+        
+        return _fragment;
+    }
+
+    /**
+     * Getter sur _toCompute.
+     * @return the empty
+     */
+    public boolean isToCompute()
+    {
+        return _toCompute;
+    }
+
+    /**
+     * Setter sur _toCompute.
+     * @param empty the empty to set
+     */
+    public void setToCompute(boolean empty)
+    {
+        _toCompute = empty;
+    }
 
 } /* End of class: PropertyModel */

@@ -12,6 +12,7 @@ import org.apache.velocity.app.VelocityEngine;
 
 import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.domain.AddedParameter;
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.input.SurveyMedia;

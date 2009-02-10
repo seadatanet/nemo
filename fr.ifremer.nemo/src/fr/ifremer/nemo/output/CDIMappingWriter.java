@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 import fr.ifremer.nemo.ui.EditConversion;
 import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.util.Global;
 
 public class CDIMappingWriter {
 	private static CDIMappingWriter _instance;
@@ -43,18 +44,18 @@ public class CDIMappingWriter {
 		try {
 			writer = new FileWriter(output);
 
-			String sep = "\t";
+			String sep = Global.TAB;
 			
 			writer.write("LOCAL_CDI_ID" + sep + "FILE_NAME");
 
 			for (Entry currentEntry : _mapping.entrySet()) {
-				writer.write("\r\n");
+				writer.write(Global.RN);
 				
 				// LOCAL_CDI_ID
 				writer.write(currentEntry.getKey() + sep);
 				
 				// FILE_NAME
-				writer.write(currentEntry.getValue() + "");								
+				writer.write(currentEntry.getValue() + Global.EMPTY_STRING);								
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

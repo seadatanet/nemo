@@ -86,7 +86,7 @@ public class EditDesc {
 			// flags de toutes les etapes e 0
 			EditDesc.validee = 0;
 			EditSurvey.validee = 0;
-			EditStation.validee = 0;
+			EditStation.validee = false;
 			EditData.validee = 0;
 			EditConversion.validee = 0;
 

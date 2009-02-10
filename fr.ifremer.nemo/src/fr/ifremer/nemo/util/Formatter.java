@@ -175,6 +175,15 @@ public class Formatter implements Cloneable {
 	public String formatInt(String format, int a_Int) {
 		return String.format(java.util.Locale.US, format, a_Int);
 	}
+    public String formatParamValue(String format, Double a_Double) {
+        String result = Global.EMPTY_STRING;
+        if (Double.isNaN(a_Double)) {
+            result = formatInt(format, 0).replace('0', ' ');
+        } else {
+            result = formatInt(format, a_Double.intValue());
+        }
+        return result;
+    }
 
 	/**
 	 * 

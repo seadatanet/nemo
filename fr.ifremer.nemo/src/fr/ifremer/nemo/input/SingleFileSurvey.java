@@ -379,7 +379,8 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 	 * @throws ParseException
 	 * @throws Exception
 	 */
-	public Survey convert(boolean isRefDateBased, long a_RefDate,
+	@Override
+    public Survey convert(boolean isRefDateBased, long a_RefDate,
 			ProgressNotification a_Progress) throws IOException,
 			ParseException, StringIndexOutOfBoundsException {
 		try {
@@ -410,15 +411,16 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 				EditConversion.setTotalLigne(Utils.calculNbLigne(file));
 
 				// reader = new RandomAccessFile(file, "r");
-				consumeHeader(reader2);
+				//consumeHeader(reader2);
 
-				if (_stationModel.isMetaInData2()
-						|| (_stationModel.getInputType().equals(
-								Global.TRAJECTORY) && _stationModel
-								.getTrajectory().getOutputType().equals(
-										Global.ODV))) {
-					_stationModel.consumeHeaderPlus(reader2);
-				}
+                // TAG FAE 1386
+//				if (_stationModel.isMetaInData2()
+//						|| (_stationModel.getInputType().equals(
+//								Global.TRAJECTORY) && _stationModel
+//								.getTrajectory().getOutputType().equals(
+//										Global.ODV))) {
+//					_stationModel.consumeHeaderPlus(reader2);
+//				}
 
 				while ((station = _stationModel.convert(reader2, Utils
 						.extraitFichierChemin(ViewFile.nomFichier),

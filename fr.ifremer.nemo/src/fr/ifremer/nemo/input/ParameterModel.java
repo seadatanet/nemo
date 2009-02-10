@@ -1,6 +1,7 @@
 package fr.ifremer.nemo.input;
 
 import java.io.OutputStream;
+import java.text.DecimalFormat;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -10,8 +11,15 @@ import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.config.FlagTable;
+import fr.ifremer.nemo.domain.AddedParameter;
+import fr.ifremer.nemo.domain.HorodatedValue;
 import fr.ifremer.nemo.domain.Parameter;
 import fr.ifremer.nemo.domain.ParameterValue;
+import fr.ifremer.nemo.domain.Station;
+import fr.ifremer.nemo.ui.object.NemoSection;
+import fr.ifremer.nemo.util.Formatter;
+import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.JulianDate;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSParameter;
 
@@ -37,13 +45,13 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 	public String _inputDefault;
 
 	/**
-	 * Represente le fragment de ligne du fichier d'entree oe la valeur du
+	 * Represente le fragment de ligne du fichier d'entree où la valeur du
 	 * parametre peut etre lue
 	 */
 	protected LineFragment _fragment;
 
 	/**
-	 * Represente le fragment de ligne du fichier d'entree oe la valeur du flag
+	 * Represente le fragment de ligne du fichier d'entree où la valeur du flag
 	 * peut etre lue
 	 */
 	protected LineFragment _flag;
@@ -417,18 +425,13 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 
 		String fragmnt = _fragment.retreive(a_Line);
 
-		if (fragmnt.equals("")) {
+		if (fragmnt.equals(Global.EMPTY_STRING)) {
 			a_ParameterValue.setValue(Double.NaN);
-			a_ParameterValue.setQc("9");
+			a_ParameterValue.setQc(Global.DEFAULT_FLAG);
 		} else {
 			if (_inputDefault.trim().equals(fragmnt)) {
 				a_ParameterValue.setValue(Double.parseDouble(_model.getDefault()));
-			}
-
-			/*
-			 * if ((float) val == _inputDefault) {
-			 * a_ParameterValue.setValue(Float.parseFloat(_model.getDefault())); }
-			 */else {
+			}else {
 				double val;
 				try {
 					val = Double.parseDouble(fragmnt);
@@ -438,7 +441,7 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 							+ e.getMessage().substring(
 									e.getMessage().indexOf("\""),
 									e.getMessage().lastIndexOf("\""))
-							+ Messages.getString("ParameterModel.2") + "\r\n");
+							+ Messages.getString("ParameterModel.2") + Global.RN);
 				}
 				if (_conversionFormula.trim().length() > 0) {
 					if (getJepParser() == null) {
@@ -480,5 +483,146 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 	public String toString() {
 		return getModel().toString();
 	}
+    
+    
+    
+    
+    
+    public void convertAdded(ParameterValue paramValue,
+                        Station station, 
+                        String inputType, 
+                        int index, 
+                        int indexPRES, 
+                        String line){
+        
+        AddedParameter p = (AddedParameter) _model;
+        
+        HorodatedValue horodate = null;
+        if (station.parametersAt(0).valuesAt(index) instanceof HorodatedValue){
+            horodate = (HorodatedValue) station.parametersAt(0).valuesAt(index);
+        }
+        String stringValue = null;
+        String flag = Global.ZERO;
+        switch (p.getIdParam()){
+            case DEPH :
+                if (inputType.equals(Global.PROFILE)){
+                    // calculDepth
+                    // FAE091 : calcul de la profondeur en fonction de la pression
+                    double X, Gr, P, Depth;
+
+                    P = station.getParameters()[indexPRES].getValues()[index].getValue();
+                    X = Math.sin(station.getLatitude() / 57.29578);
+                    X = X * X;
+
+                    Gr = 9.780318 * (1.0 + (5.2788E-3 + 2.36E-5 * X) * X) + 1.092E-6 * P;
+                    Depth = (((-1.82E-15 * P + 2.279E-10) * P - 2.2512E-5) * P + 9.72659) * P;
+                    Depth = Depth / Gr;
+                    
+                    stringValue = Formatter.getSingleton().formatDouble(p.getFormat(), Depth);
+
+                    flag = station.getParameters()[indexPRES].getValues()[index].getQc();
+                    if (flag.equals(Global.EMPTY_STRING)) {
+                        flag = Global.ZERO;
+                    }
+                }else if(inputType.equals(Global.TIMESERIES)){
+                    // = SensorDepth
+                    stringValue = String.valueOf(station.getTimeSeriesInformation().getSensorDepth());
+                    flag = station.getMetaFlag(NemoSection.S_SENSORDEPTH);
+                }
+                break;
+            case CJDY :
+                // julianDate = $stationModel.julianDate($station, $i)
+                Long date = horodate.getDate();
+                JulianDate jDate = new JulianDate(date);
+                stringValue = (new DecimalFormat(p.getFormat())).format(jDate.getJour());
+                flag = station.getMetaFlag(Global.DATETIME);
+                break;
+            case YEAR :
+                // $formatter.formatInt( "%4d", $station.parametersAt(0).valuesAt($i).year)
+                stringValue = Formatter.getSingleton().formatInt(p.getFormat(), horodate.getYear());
+                flag = station.getMetaFlag(Global.DATETIME);
+                break;
+            case MNTH :
+                // $formatter.formatInt( "%02d", $station.parametersAt(0).valuesAt($i).month)
+                stringValue = Formatter.getSingleton().formatInt(p.getFormat(), horodate.getMonth());
+                flag = station.getMetaFlag(Global.DATETIME);
+                break;
+            case DAYX :
+                // $formatter.formatInt( "%02d", $station.parametersAt(0).valuesAt($i).day)
+                stringValue = Formatter.getSingleton().formatInt(p.getFormat(), horodate.getDay());
+                flag = station.getMetaFlag(Global.DATETIME);
+                break;
+            case TIME :
+                // $formatter.formatDateTime( "hh24mmss", $station.parametersAt(0).valuesAt($i).date )
+                stringValue = Formatter.getSingleton().formatInt(p.getFormat(), horodate.getDate());
+                flag = station.getMetaFlag(Global.DATETIME);
+                break;
+            case LATX :
+            case LONX :
+            case BATH :
+                // mesuré - flag = celui de la métadonnée
+                paramValue = convertAddedInData(station, line);
+                break;
+        }
+        if (stringValue != null){
+            paramValue.setStringValue(stringValue);
+            paramValue.setQc(flag);
+        }
+    }
+    
+
+    public ParameterValue convertAddedInData(Station station,
+                                        String line) 
+        throws StringIndexOutOfBoundsException {
+
+        AddedParameter p = (AddedParameter) _model;
+        ParameterValue paramValue = new ParameterValue();
+        String fragmnt = getFragment().retreive(line);
+        
+        if (fragmnt.equals(Global.EMPTY_STRING)) {
+            paramValue.setStringValue(Global.EMPTY_STRING);
+//            paramValue.setValue(Double.NaN);
+            paramValue.setQc(Global.DEFAULT_FLAG);
+        } else {
+            // VALUE
+            if (getInputDefault().trim().equals(fragmnt)) {
+                paramValue.setStringValue(p.getDefault());
+//                paramValue.setValue(Double.parseDouble(p.getDefault()));
+            }else {
+                paramValue.setStringValue(fragmnt);
+//                double val;
+//                try {
+//                    val = Double.parseDouble(fragmnt);
+//                } catch (NumberFormatException e) {
+//                    throw new NumberFormatException(Messages
+//                            .getString("ParameterModel.1")
+//                            + e.getMessage().substring(
+//                                    e.getMessage().indexOf("\""),
+//                                    e.getMessage().lastIndexOf("\""))
+//                            + Messages.getString("ParameterModel.2") + Global.RN);
+//                }
+//                paramValue.setValue((Double) val);
+            }
+            
+            // Flag QC
+            String metaFlagCode;
+            switch (p.getIdParam()){
+                case LATX :
+                    metaFlagCode = NemoSection.S_LAT;
+                    break;
+                case LONX :
+                    metaFlagCode = NemoSection.S_LON;
+                    break;
+                case BATH :
+                    metaFlagCode = NemoSection.S_DEPTH;
+                    break;
+                default :
+                    metaFlagCode = Global.EMPTY_STRING;
+                    break;
+            }
+            paramValue.setQc(station.getMetaFlag(metaFlagCode));
+        }
+        return paramValue;        
+    }
 
 } /* End of class: ParameterModel */

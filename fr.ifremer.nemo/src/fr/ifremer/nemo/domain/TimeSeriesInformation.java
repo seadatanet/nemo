@@ -1,6 +1,7 @@
 package fr.ifremer.nemo.domain;
 
 import java.io.OutputStream;
+import java.text.ParseException;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -8,6 +9,13 @@ import org.xml.sax.SAXException;
 import com.ago.xml.Element2Field;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
+
+import fr.ifremer.nemo.ui.object.NemoSection;
+import fr.ifremer.nemo.util.ExternalizableFormat;
+import fr.ifremer.nemo.util.Formatter;
+import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.LatitudeFormat;
+import fr.ifremer.nemo.util.LongitudeFormat;
 
 /**
  * Class TimeSeriesInformation
@@ -374,6 +382,18 @@ public class TimeSeriesInformation implements Cloneable, SAXConsumer {
 		}
 	}
 
+    /**
+     * 
+     */
+    public void setEndLatitude(String a_String, LatitudeFormat a_Format) {
+        try {
+            double value = ((Number) a_Format.parseObject(a_String)).doubleValue();
+            setEndLatitude(value);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 	/**
 	 * Write accessor (setter) for attribute _endLongitude
 	 * 
@@ -398,6 +418,18 @@ public class TimeSeriesInformation implements Cloneable, SAXConsumer {
 		} catch (Exception e) {
 		}
 	}
+
+    /**
+     * 
+     */
+    public void setEndLongitude(String a_String, LongitudeFormat a_Format) {
+        try {
+            double value = ((Number) a_Format.parseObject(a_String)).doubleValue();
+            setEndLongitude(value);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 	/**
 	 * Read accessor (getter) for attribute _endTime
@@ -645,9 +677,9 @@ public class TimeSeriesInformation implements Cloneable, SAXConsumer {
 	public float getDistToBottom() {
 		if (Float.isNaN(_endDepth) || Float.isNaN(_sensorDepth)) {
 			return Float.NaN;
-		} else {
-			return _endDepth - _sensorDepth;
-		}
+		} //else {
+		return _endDepth - _sensorDepth;
+		//}
 	}
 
 	/**
@@ -668,9 +700,9 @@ public class TimeSeriesInformation implements Cloneable, SAXConsumer {
 	public double getEndLatitude() {
 		if (Double.isNaN(_endLatitude)) {
 			return getStation().getLatitude();
-		} else {
-			return _endLatitude;
-		}
+		} //else {
+		return _endLatitude;
+		//}
 	}
 
 	/**
@@ -680,9 +712,9 @@ public class TimeSeriesInformation implements Cloneable, SAXConsumer {
 	public double getEndLongitude() {
 		if (Double.isNaN(_endLongitude)) {
 			return getStation().getLongitude();
-		} else {
-			return _endLongitude;
-		}
+		} //else {
+		return _endLongitude;
+		//}
 	}
 
 	/**
@@ -700,5 +732,68 @@ public class TimeSeriesInformation implements Cloneable, SAXConsumer {
 	public void setEndTime(long a_Long) {
 		setEndTime(new Float(a_Long).floatValue());
 	}
+    
+    
+
+    /**
+     * setter généralisé, sur le même modèle que la méthode consumeElement
+     * @param a_ChampDest
+     * @param a_String
+     * @param a_Format
+     * @return true si le a_ChampDest existe, false sinon
+     */
+    public boolean set(String a_ChampDest, String a_String, ExternalizableFormat a_Format){
+        boolean exist = true;
+        if (a_ChampDest.equals(NemoSection.S_MAGNETIC)){
+            setMagneticDeclination(a_String);
+        }else if (a_ChampDest.equals(NemoSection.S_SENSORDEPTH)){
+            setSensorDepth(a_String);
+        }else if (a_ChampDest.equals(NemoSection.S_SAMPLINGRATE)){
+            setSamplingRate(a_String);
+        }else if (a_ChampDest.equals(NemoSection.S_EDEPTH)){
+            setEndDepth(a_String);
+        }else if (a_ChampDest.equals(NemoSection.S_ELAT)){
+            setEndLatitude(a_String, (LatitudeFormat) a_Format);
+        }else if (a_ChampDest.equals(NemoSection.S_ELON)){
+            setEndLongitude(a_String, (LongitudeFormat) a_Format);
+        }else{
+            exist = false;
+        }
+        return exist;
+    }
+
+    /**
+     * getter généralisé, sur le même modèle que la méthode consumeElement
+     * @param a_ChampDest
+     * @param a_String
+     * @param a_Format
+     * @return true si le a_ChampDest existe, false sinon
+     */
+    public String get(String a_ChampDest, ExternalizableFormat a_Format){
+        String value = Global.EMPTY_STRING;
+        Formatter formatter = Formatter.getSingleton();
+        try
+        {
+            if (a_ChampDest.equals(NemoSection.S_MAGNETIC)){
+                value = String.valueOf(getMagneticDeclination());
+            }else if (a_ChampDest.equals(NemoSection.S_SENSORDEPTH)){
+                value = String.valueOf(getSensorDepth());
+            }else if (a_ChampDest.equals(NemoSection.S_SAMPLINGRATE)){
+                value = String.valueOf(getSamplingRate());
+            }else if (a_ChampDest.equals(NemoSection.S_EDEPTH)){
+                if (!Float.isNaN(getEndDepth()))
+                        value = String.valueOf(getEndDepth());
+            }else if (a_ChampDest.equals(NemoSection.S_ELAT)){
+                value = formatter.formatLatitude(((LatitudeFormat) a_Format).getFormatString(), getEndLatitude());
+            }else if (a_ChampDest.equals(NemoSection.S_ELON)){
+                value = formatter.formatLongitude(((LongitudeFormat) a_Format).getFormatString(), getEndLongitude());
+            }
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+        return value;
+    }
 
 } /* End of class: TimeSeriesInformation */

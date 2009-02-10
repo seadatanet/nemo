@@ -28,6 +28,7 @@ import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.input.HeaderFragment;
 import fr.ifremer.nemo.input.InputModel;
+import fr.ifremer.nemo.ui.object.NemoSection;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -419,65 +420,6 @@ public class Utils {
 		}
 	}
 
-	public static int calculNbreLignes(Cursor cursor) {
-
-		int nbre = 0, lignDepart, lignFin;
-
-		lignDepart = 1;
-		lignFin = 1;
-		// calcul de la ligne en fonction de la valeur de x
-		// parcours du tableau des tailles de lignes cumulees
-
-		if (cursor.getX() == cursor.getY()) {
-			Utils.messageErreur(Messages.getString("Utils.26"));
-
-		} else {
-			// calcul ligne depart
-			for (int i = 0; i < lignesBrutes.size(); i++) {
-
-				if (cursor.getX() == taillesCumLignes[i]) {
-					lignDepart = i + 1;
-					break;
-				}
-				if (i == (lignesBrutes.size() - 1)) {
-					lignDepart = i + 1;
-					break;
-				}
-				if ((cursor.getX() >= taillesCumLignes[i])
-						&& (cursor.getX() < taillesCumLignes[i + 1])) {
-					lignDepart = i + 1;
-					break;
-				}
-
-			}
-
-			// calcul ligne fin
-			for (int i = 0; i < lignesBrutes.size(); i++) {
-
-				if (cursor.getY() == taillesCumLignes[i]) {
-					lignFin = i + 1;
-					break;
-				}
-				if (i == (lignesBrutes.size() - 1)) {
-					lignFin = i + 1;
-					break;
-				}
-				if ((cursor.getY() >= taillesCumLignes[i])
-						&& (cursor.getY() < taillesCumLignes[i + 1])) {
-					lignFin = i + 1;
-					break;
-				}
-
-			}
-
-			// remplissage nbreLignes dans interface
-			nbre = (lignFin - lignDepart + 1); //$NON-NLS-1$
-
-		}
-
-		return nbre;
-	}
-
 	public static void injectNbreLignes(Text nbrelignes, StyledText styledtext) {
 		int deb, fi, lignDepart, lignFin, i;
 
@@ -819,7 +761,7 @@ public class Utils {
 
 		if ((onglet == 2) && (ViewFile.affiche == 0)) {
 			ViewLog.aideStation();
-			if (EditStation.validee == 1) {
+			if (EditStation.validee) {
 				EditDesc.razEdition();
 				EditStation.DrawingBack();
 			} else {
@@ -842,7 +784,7 @@ public class Utils {
 				EditDesc.razEdition();
 				EditData.DrawingBack();
 			} else {
-				if (EditStation.validee == 1) {
+				if (EditStation.validee) {
 					EditDesc.razEdition();
 
 					if (EditData.loaded == 1) {
@@ -879,7 +821,7 @@ public class Utils {
 
 		if ((onglet == 2) && (ViewFile.affiche == 1)) {
 			ViewLog.aideStation();
-			if (EditStation.validee == 1) {
+			if (EditStation.validee) {
 				EditSurvey.razEdition();
 				EditStation.DrawingBack();
 			} else {
@@ -918,7 +860,7 @@ public class Utils {
 				EditSurvey.razEdition();
 				EditData.DrawingBack();
 			} else {
-				if (EditStation.validee == 1) {
+				if (EditStation.validee) {
 					EditSurvey.razEdition();
 
 					if (EditData.loaded == 1) {
@@ -957,7 +899,7 @@ public class Utils {
 				EditStation.razEdition();
 				EditData.DrawingBack();
 			} else {
-				if (EditStation.validee == 1) {
+				if (EditStation.validee) {
 					EditStation.razEdition();
 
 					if (EditData.loaded == 1) {
@@ -967,7 +909,7 @@ public class Utils {
 					}
 
 				} else {
-					if (EditStation.loaded == 1) {
+					if (EditStation.loaded) {
 						EditStation.razEdition();
 						ViewFile.affiche = 3;
 					}
@@ -979,7 +921,7 @@ public class Utils {
 		if ((onglet == 1) && (ViewFile.affiche == 2)) {
 			ViewLog.aideSurvey();
 			if (EditSurvey.validee == 1) {
-				if (EditStation.loaded == 1) {
+				if (EditStation.loaded) {
 					EditStation.razEdition();
 				}
 				EditSurvey.DrawingBack();
@@ -994,7 +936,7 @@ public class Utils {
 		if ((onglet == 0) && (ViewFile.affiche == 2)) {
 			ViewLog.aideDesc();
 			if (EditDesc.validee == 1) {
-				if (EditStation.loaded == 1) {
+				if (EditStation.loaded) {
 					EditStation.razEdition();
 				}
 				EditDesc.DrawingBack();
@@ -1013,7 +955,7 @@ public class Utils {
 				EditConversion.affichageEdition();
 			} else {
 
-				if (EditStation.loaded == 1) {
+				if (EditStation.loaded) {
 					EditStation.razEdition();
 					ViewFile.affiche = 4;
 
@@ -1056,13 +998,13 @@ public class Utils {
 
 		if ((onglet == 2) && (ViewFile.affiche == 3)) {
 			ViewLog.aideStation();
-			if (EditStation.validee == 1) {
+			if (EditStation.validee) {
 				if (EditData.loaded == 1) {
 					EditData.razEdition();
 				}
 				EditStation.DrawingBack();
 			} else {
-				if (EditStation.loaded == 1) {
+				if (EditStation.loaded) {
 					EditStation.affichageEdition();
 				}
 				ViewFile.affiche = 2;
@@ -1117,13 +1059,13 @@ public class Utils {
 
 		if ((onglet == 2) && (ViewFile.affiche == 4)) {
 			ViewLog.aideStation();
-			if (EditStation.validee == 1) {
+			if (EditStation.validee) {
 				if (EditConversion.loaded == 1) {
 					EditConversion.razEdition();
 				}
 				EditStation.DrawingBack();
 			} else {
-				if (EditStation.loaded == 1) {
+				if (EditStation.loaded) {
 					EditStation.affichageEdition();
 				}
 				ViewFile.affiche = 2;
@@ -1498,21 +1440,6 @@ public class Utils {
 		if (EditDesc.sectionEnteteFichier != null) {
 			// //effacement boutons
 			EditDesc.razEdition();
-			// EditDesc.buttonExpandDesc.dispose();
-			// EditDesc.buttonExpandDesc2.dispose();
-			// EditDesc.buttonRAZ.dispose();
-			// EditDesc.buttonValidateDesc.dispose();
-			// //effacement sections
-			// for (int i=0;i<=EditDesc.listeSectionsDesc.size()-1;i++){
-			// EditDesc.listeSectionsDesc.get(i).dispose();
-			// System.out.println("effacement zone edition etape description
-			// fichier ==> ok");
-			// }
-			// //effacement titre formulaire
-			// ViewEdit.formEdition.setText("");
-			//			
-			// //refresh global
-			// ViewEdit.formEdition.reflow(true);
 		}
 
 		if (EditSurvey.sectionReference != null) {
@@ -1539,20 +1466,16 @@ public class Utils {
 
 		}
 
-		if (EditStation.sectionTypeDonnees != null) {
+		if (EditStation.dataType != null) {
 
 			// effacement des boutons valider/expand/init serveur
 			EditStation.buttonExpand.dispose();
-			EditStation.buttonExpand2.dispose();
 			EditStation.buttonValidate.dispose();
 			EditStation.buttonRAZ.dispose();
-			EditStation.btnMetaInData2.dispose();
-			EditStation.grpSerieTempo.dispose();
-			EditStation.grpTrajectoire.dispose();
 
-			for (int i = 0; i <= EditStation.listeSectionsStation.size() - 1; i++) {
-				EditStation.listeSectionsStation.get(i).dispose();
-			}
+            for (NemoSection section : EditStation.listeSectionsStation){
+                section.dispose();
+            }
 
 			// titre e vide
 			ViewEdit.formEdition.setText(""); //$NON-NLS-1$
@@ -1560,8 +1483,8 @@ public class Utils {
 			// refresh global
 			ViewEdit.formEdition.reflow(true);
 
-			EditStation.loaded = 0;
-			EditStation.validee = 0;
+			EditStation.loaded = false;
+			EditStation.validee = false;
 		}
 
 		if (EditData.sectionTypeAjouter != null) {

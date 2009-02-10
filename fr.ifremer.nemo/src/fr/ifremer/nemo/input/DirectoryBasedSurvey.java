@@ -326,48 +326,50 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 					if (SurveyMedia.interrompu) {
 						// demande d'annulation
 						throw new InterruptedException("Interruption");
-					} else {
-						File file = new File(dir, files[i]);
-						EditConversion.setErreurFichier(file.getName());
-						EditConversion.setErreurLigne(0);
-						_stationModel.setTaille((int) file.length());
-					    notifierStation.setOffset(offset);
-						offset += file.length();
-					//	RandomAccessFile reader = null;
-						BufferedReader reader2 = null;
-						try {
-							// reader = new RandomAccessFile(file, "r");
-							// test CDL FAE01
-							FileReader reader  = new FileReader(file);
-							reader2 = new BufferedReader(reader);
-														
-							if (_stationModel.isMetaInData2() || (_stationModel.getInputType().equals(Global.TRAJECTORY) && _stationModel.getTrajectory().getOutputType().equals(Global.ODV))) {
-								_stationModel.consumeHeaderPlus(reader2);
-							}
-							
-							Station station = _stationModel.convert(reader2,
-									files[i], isRefDateBased, a_RefDate,
-									notifierStation);
-							
-							// Tri des donnees de la station par ordre croissant
-							station.tri(true);
-							
-							survey.addStation(station);
-						} catch (Exception e) {
-							throw new InterruptedException (e.getMessage() + Messages.getString("SingleFileSurvey.1") + file.getName());
-						} finally {
-							if (reader2 != null) {
-								try {
-									reader2.close();
-								} catch (Exception ioExc) {
-								}
+					} 
+                    //else {
+					File file = new File(dir, files[i]);
+					EditConversion.setErreurFichier(file.getName());
+					EditConversion.setErreurLigne(0);
+					_stationModel.setTaille((int) file.length());
+				    notifierStation.setOffset(offset);
+					offset += file.length();
+				//	RandomAccessFile reader = null;
+					BufferedReader reader2 = null;
+					try {
+						// reader = new RandomAccessFile(file, "r");
+						// test CDL FAE01
+						FileReader reader  = new FileReader(file);
+						reader2 = new BufferedReader(reader);
+								
+                        // TAG FAE 1386
+//							if (_stationModel.isMetaInData2() || (_stationModel.getInputType().equals(Global.TRAJECTORY) && _stationModel.getTrajectory().getOutputType().equals(Global.ODV))) {
+//								_stationModel.consumeHeaderPlus(reader2);
+//							}
+						
+						Station station = _stationModel.convert(reader2,
+								files[i], isRefDateBased, a_RefDate,
+								notifierStation);
+						
+						// Tri des donnees de la station par ordre croissant
+						station.tri(true);
+						
+						survey.addStation(station);
+					} catch (Exception e) {
+						throw new InterruptedException (e.getMessage() + Messages.getString("SingleFileSurvey.1") + file.getName());
+					} finally {
+						if (reader2 != null) {
+							try {
+								reader2.close();
+							} catch (Exception ioExc) {
 							}
 						}
-
 					}
 
 				}
+
 			}
+			//}
 			return survey;
 		} catch (CloneNotSupportedException e) {
 			return null;

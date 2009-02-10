@@ -18,19 +18,22 @@ import org.apache.axis.client.Service;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.widgets.Table;
 
+import fr.ifremer.nemo.domain.AddedParameter;
 import fr.ifremer.nemo.domain.Parameter;
+import fr.ifremer.nemo.domain.AddedParameter.IdParameter;
 import fr.ifremer.nemo.input.ParameterModel;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webservice;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webserviceLocator;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webserviceSoap;
 import fr.ifremer.nemo.ui.DataModel;
 import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.util.Conversion;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.NemoWS;
 import fr.ifremer.nemo.ws.NemoWSServiceLocator;
 import fr.ifremer.nemo.ws.WSDataType;
 import fr.ifremer.nemo.ws.WSParameter;
-import fr.ifremer.nemo.ws.WSRegion;
 import fr.ifremer.nemo.ws.WSSurveyDescription;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 import fr.ifremer.nemo.wsVocab.vocab.holders.CodeTableRecordTypeArrayHolder;
@@ -1178,14 +1181,19 @@ public class NemoLists implements Cloneable {
 		return _edmo;
 	}
 
-	public static void writeSdnParameters(String debut) {
-		setSdnParameters(debut);
+	public static void writeSdnParameters(Conversion convert) {
+		setSdnParameters(convert.getDebut());
 		
-		setSdnParameters(debut + "SDN_parameter_mapping");
+		setSdnParameters(convert.getDebut() + "SDN_parameter_mapping");
+        
+        // TODO verifier FAE 1386
+        for (ParameterModel param : convert.getAddedParameterModels()) {
+            _sdnParameters += Global.RN + convert.getDebut() + parameterMap(param.getModel());
+        }
 
 		// FAE 0001131 : remplacer "\n" par "\r\n" pour retour chariot sous bloc-note
 		for (ParameterModel param : DataModel.stationModel.getParameterModels()) {
-			_sdnParameters += "\r\n" + debut + parameterMap(param.getModel());
+			_sdnParameters += Global.RN + convert.getDebut() + parameterMap(param.getModel());
 		}
 	}
 
@@ -1227,8 +1235,10 @@ public class NemoLists implements Cloneable {
 	}
 
 	public static String parameterMap(Parameter param) {
+        String name = param.getCode();
+        if (param.getCode().equals(IdParameter.CJDY)) name = ((AddedParameter) param).getFullName();
 		String pdvCode = Utils.extraitCodeURN(getVocabMatch("P091", "P012",
-				param.getCode(), Messages.getString("NemoLists.unknown")));
+            param.getCode(), Messages.getString("NemoLists.unknown")));
 		String unitCode = Utils.extraitCodeURN(getVocabMatch("P091", "P061", param.getCode(), Messages
 				.getString("NemoLists.unknown")));
 		return "<subject>SDN:LOCAL:" + param.getCode()

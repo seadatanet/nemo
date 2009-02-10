@@ -9,33 +9,32 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.domain.AddedParameter;
 import fr.ifremer.nemo.domain.DataType;
 import fr.ifremer.nemo.domain.Parameter;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.domain.TimeSeriesInformation;
 import fr.ifremer.nemo.domain.Trajectory;
+import fr.ifremer.nemo.domain.AddedParameter.IdParameter;
 import fr.ifremer.nemo.input.DirectoryBasedSurvey;
 import fr.ifremer.nemo.input.FlagFragment;
-import fr.ifremer.nemo.input.HeaderFragment;
 import fr.ifremer.nemo.input.InputModel;
 import fr.ifremer.nemo.input.LineFragment;
 import fr.ifremer.nemo.input.ParameterModel;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.input.SingleFileSurvey;
 import fr.ifremer.nemo.input.StationModel;
+import fr.ifremer.nemo.ui.object.NemoSection;
 import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.LatitudeFormat;
-import fr.ifremer.nemo.util.LongitudeFormat;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSDataType;
 import fr.ifremer.nemo.ws.WSParameter;
 
 public class DataModel
 {
-
     public static InputModel inputModel, inputModel_modele;
 
     public static StationModel stationModel, stationModel_modele;
@@ -132,13 +131,12 @@ public class DataModel
         stationModel.setInputType(ViewFile.typeFichierEntree());
 
         // serie temporelle
-        // if (ViewFile.checkBoxTempo.getSelection()) {
         if (ViewFile.radSerieTempo.getSelection()
                 || ViewFile.radTrajectoire.getSelection())
         {
             timeSeriesInformation = stationModel.getTimeSeriesInformation();
 
-            if (!ViewFile.textTempoHeureRef.getText().equals(""))
+            if (!ViewFile.textTempoHeureRef.getText().equals(Global.EMPTY_STRING)) 
             {
                 inputModel.setRefDateBased(true);
 
@@ -149,7 +147,7 @@ public class DataModel
                 try
                 {
                     dateFormat = new DateTimeFormat();
-                    dateFormat.setFormatString("dd/MM/yyyy");
+                    dateFormat.setFormatString("dd/MM/yyyy"); //$NON-NLS-1$
                     dateLong =
                         (Long) dateFormat.parseObject(ViewFile.textTempoDateRef
                             .getText());
@@ -166,7 +164,7 @@ public class DataModel
                 try
                 {
                     DateTimeFormat timeFormat = new DateTimeFormat();
-                    timeFormat.setFormatString("hh24:mm");
+                    timeFormat.setFormatString("hh24:mm"); //$NON-NLS-1$
                     timeLong =
                         (Long) timeFormat
                             .parseObject(ViewFile.textTempoHeureRef.getText());
@@ -240,7 +238,7 @@ public class DataModel
             .getText()));
 
         // metaInData
-        stationModel.setMetaInData(false);
+//        stationModel.setMetaInData(false);
 
         // attribut pattern fin donnees en acces direct
 
@@ -327,7 +325,7 @@ public class DataModel
         try
         {
             DateTimeFormat dateFormat = new DateTimeFormat();
-            dateFormat.setFormatString("dd/MM/yyyy");
+            dateFormat.setFormatString("dd/MM/yyyy"); //$NON-NLS-1$
             Long dateLong =
                 (Long) dateFormat.parseObject(EditSurvey.textDateDebut
                     .getText());
@@ -343,7 +341,7 @@ public class DataModel
         try
         {
             DateTimeFormat dateFormat = new DateTimeFormat();
-            dateFormat.setFormatString("dd/MM/yyyy");
+            dateFormat.setFormatString("dd/MM/yyyy"); //$NON-NLS-1$
             Long dateLong =
                 (Long) dateFormat.parseObject(EditSurvey.textDateFin.getText());
             survey.setEndDate(dateLong);
@@ -369,17 +367,17 @@ public class DataModel
             .getText()));
 
         // confidentialité
-        if (EditSurvey.comboConfid.getText().equals("P - Public"))
+        if (EditSurvey.comboConfid.getText().equals("P - Public")) //$NON-NLS-1$
         {
-            survey.setAvailability("publicly");
+            survey.setAvailability("publicly"); //$NON-NLS-1$
         }
-        if (EditSurvey.comboConfid.getText().equals("L - Limited"))
+        if (EditSurvey.comboConfid.getText().equals("L - Limited")) //$NON-NLS-1$
         {
-            survey.setAvailability("limited");
+            survey.setAvailability("limited"); //$NON-NLS-1$
         }
-        if (EditSurvey.comboConfid.getText().equals("C - Confidential"))
+        if (EditSurvey.comboConfid.getText().equals("C - Confidential")) //$NON-NLS-1$
         {
-            survey.setAvailability("confidential");
+            survey.setAvailability("confidential"); //$NON-NLS-1$
         }
 
         // Commentaire
@@ -400,7 +398,7 @@ public class DataModel
             dataType.setCode(typeSurvey.getCode());
             dataType.setNumberOfProfiles(typeSurvey.getNombre());
 
-            if (typeSurvey.getQc().equals("Y"))
+            if (typeSurvey.getQc().equals("Y")) //$NON-NLS-1$
             {
                 dataType.setQc(true);
             }
@@ -418,1187 +416,99 @@ public class DataModel
 
         }
 
-        if (EditStation.loaded == 1)
-        {
-            EditStation.initTypes();
-        }
+//        if (EditStation.loaded)
+//        {
+//            EditStation.initTypes();
+//        }
 
         // flag "validee" e 1
         EditSurvey.validee = 1;
 
     }
+    
+    private static void initDiseabledField(String property){
+        PropertyModel propertyModel = stationModel.getTimeSeriesModel().propertiesAt(property);
+        propertyModel.setFlag(setFlagFragment(property)); // Flag qualite
+        propertyModel.setToCompute(true);
+    }
 
     public static void initStation()
     {
+        PropertyModel propertyModel;
 
-        // numero de station
-        String ligne, debut, fin;
-        HeaderFragment frag;
+        // compléter ELAT et ELON si nécessaire
+        if (ViewFile.radSerieTempo.getSelection())
+        {                                
+            if (EditStation.endLatitude.getValue().trim().equals(Global.EMPTY_STRING)) {
+                // vide donc on recopie latitude dans latitude de fin
+                EditStation.endLatitude.copyValues(EditStation.latitude); // TODO
+            }                        
+            if (EditStation.endLongitude.getValue().trim().equals(Global.EMPTY_STRING)) {
+                // vide donc on recopie longitude dans longitude de fin
+                EditStation.endLongitude.copyValues(EditStation.longitude); // TODO
+            }
+        }
 
-        station = stationModel.getModel();
-
-        stationModel.setMetaInData2(EditStation.btnMetaInData2.getSelection());
-
-        if (ViewFile.radSerieTempo.getSelection()
-                || ViewFile.radTrajectoire.getSelection())
+        // parcours des sections de la station pour initialisation
+        for (NemoSection stationSection : EditStation.listeSectionsStation){
+            stationSection.initModel(stationModel);
+        }
+        
+        // Completer les données manquantes
+        
+        // DM HISTORY 1&2
+        station.setDmHistory1(Global.EMPTY_STRING); 
+        station.setDmHistory2(Global.EMPTY_STRING); 
+        
+        if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection())
         {
-            // gestion des series temporelles
-            if (EditStation.radFreqEchant.getSelection())
+            // DATE / HEURE DE FIN
+            propertyModel = stationModel.getTimeSeriesModel().propertiesAt(NemoSection.S_EDATE);
+            propertyModel.setUserProvided(true);
+            propertyModel = stationModel.getTimeSeriesModel().propertiesAt(NemoSection.S_ETIME);
+            propertyModel.setUserProvided(true);
+            propertyModel.setFlag(setFlagFragment(Global.ENDDATETIME)); // Flag qualite
+            
+
+            if (ViewFile.radTrajectoire.getSelection())
             {
+                initDiseabledField(NemoSection.S_ELAT);
+                initDiseabledField(NemoSection.S_ELON);
+                initDiseabledField(NemoSection.S_EDEPTH);
+
+                // DECLINAISON MAGNETIQUE : FAE 1386 - valeur par défaut pour les Trajectoires
+                propertyModel = stationModel.getTimeSeriesModel().propertiesAt(NemoSection.S_MAGNETIC);
+                propertyModel.setUserProvided(true);
+                timeSeriesInformation.setMagneticDeclination("-999");  //$NON-NLS-1$
+            }
+
+
+           // GESTION Time/Date in Data
+           if (EditStation.samplingRate.isEnabled())
+           {
                 // calcul e partir frequence echantillonnage
                 stationModel.getTimestampModel().setComputed(true);
             }
             else
-            {
+           {
                 // calcul position date/heure dans les donnees
                 stationModel.getTimestampModel().setComputed(false);
-            }
-        }
-
-        // Type de fichier de sortie (trajectoire)
-        if (ViewFile.radTrajectoire.getSelection())
-        {
-            trajectory.setOutputType(EditStation.typeFichierSortie());
-
-            if (EditStation.typeFichierSortie().equals(Global.ODV))
-            {
-                ViewFile.radMedatlas.setSelection(false);
-                ViewFile.radMedatlas.setEnabled(false);
-
-                ViewFile.radODV.setSelection(true);
-                ViewFile.radODV.setEnabled(true);
-            }
-            else
-            {
-                ViewFile.radMedatlas.setSelection(true);
-                ViewFile.radMedatlas.setEnabled(true);
-
-                ViewFile.radODV.setSelection(false);
-                ViewFile.radODV.setEnabled(false);
-            }
-            ViewFile.afficheGrpODV();
-        }
-
-        PropertyModel propertyModel = stationModel.getReferenceProperty();
-
-        if (EditStation.buttonRefStationIncremente.getSelection())
-        {
-            stationModel.setIncrementRef(true);
-            stationModel.setIncrementNumber(EditStation.textRefStationNumero
-                .getText());
-            propertyModel.setUserProvided(true);
-
-        }
-        else
-        {
-            stationModel.setIncrementRef(false);
-            propertyModel.setUserProvided(false);
-
-            frag = propertyModel.getFragment();
-            // frag.setSingleLine(true);
-
-            if (Integer.valueOf(EditStation.textRefStationLigne.getText()) == 0)
-            {
-                ligne = "0";
-            }
-            else
-            {
-                ligne =
-                    ""
-                            + (Integer.valueOf(EditStation.textRefStationLigne
-                                .getText()) - Integer
-                                .valueOf(EditDesc.lignesEnteteFichier.getText()));
-            }
-
-            debut = EditStation.textRefStationDebut.getText();
-            fin = EditStation.textRefStationFin.getText();
-
-            frag.setFirstLine(ligne);
-            frag.setLastLine(ligne);
-            frag.setFirstCharOffset(debut);
-            frag.setLastCharOffset(fin);
-
-        }
-
-        // type de donnee
-
-        // recuperer le bon datatype avant de l'affecter
-
-        // on recupere la selection du combo de station puis le code + libelle
-        String typeCombo = EditStation.comboRefStationType.getText();
-
-        DataType dataType = new DataType();
-        String code = "";
-        // si on a ouvert un modele, on a le code direct !
-        if (DataModel.ouverture)
-        {
-            code = typeCombo;
-        }
-        else
-        {
-            Pattern p = Pattern.compile(" - ");
-            String mots[] = p.split(typeCombo);
-
-            int taille = mots.length;
-            if (taille >= 1)
-            {
-                code = mots[0];
-            }
-
-        }
-        // creation d'un nouveau Datatype avec les infos recuperees au dessus.
-        dataType.setCode(Utils.extraitCode(code));
-
-        // FAE 022
-        if (!ViewFile.isCollection())
-        {
-            for (int i = 0; i < TableDataSurvey.types.size(); i++)
-            {
-
-                if (typeCombo.contentEquals(TableDataSurvey.types.get(i)
-                    .getCode()))
-                {
-                    // c'est le bon dataType et on recupere le nombre de mesures
-                    // et
-                    // le QC
-
-                    dataType.setNumberOfProfiles(TableDataSurvey.types.get(i)
-                        .getNombre());
-                    dataType.setQc(TableDataSurvey.types.get(i).getQc());
-                    dataType
-                        .setSensor(TableDataSurvey.types.get(i).getSensor());
-
-                }
-
-            }
-
-            station.setDataType(dataType);
-        }
-        // historique acquisition1 et 2
-        propertyModel = stationModel.propertiesAt("dcHistory1");
-        PropertyModel propertyModel2 = stationModel.propertiesAt("dcHistory2");
-        if (EditStation.buttonHistoriqueAcqSaisie.getSelection())
-        {
-            // saisie manuelle
-            station.setDcHistory1(EditStation.textHistorique1.getText());
-            station.setDcHistory2(EditStation.textHistorique2.getText());
-            propertyModel.setUserProvided(true);
-            propertyModel2.setUserProvided(true);
-
-        }
-        else
-        {
-            propertyModel.setUserProvided(false);
-            propertyModel2.setUserProvided(false);
-            // position dans fichier
-            frag = propertyModel.getFragment();
-            HeaderFragment frag2 = propertyModel2.getFragment();
-
-            ligne =
-                ""
-                        + (Integer.valueOf(EditStation.textHistoriqueAcqLigne1
-                            .getText()) - Integer
-                            .valueOf(EditDesc.lignesEnteteFichier.getText()));
-            debut = EditStation.textHistoriqueAcqDebut1.getText();
-            fin = EditStation.textHistoriqueAcqFin1.getText();
-
-            frag.setFirstLine(ligne);
-            frag.setLastLine(ligne);
-            frag.setFirstCharOffset(debut);
-            frag.setLastCharOffset(fin);
-
-            if (EditStation.textHistoriqueAcqLigne2.getText().equals(""))
-            {
-                // on a injecte que la ligne 1
-                propertyModel2.setUserProvided(true);
-                station.setDcHistory2(EditStation.textHistorique2.getText());
-            }
-            else
-            {
-
-                String ligne2, debut2, fin2;
-                ligne2 =
-                    ""
-                            + (Integer
-                                .valueOf(EditStation.textHistoriqueAcqLigne2
-                                    .getText()) - Integer
-                                .valueOf(EditDesc.lignesEnteteFichier.getText()));
-                debut2 = EditStation.textHistoriqueAcqDebut2.getText();
-                fin2 = EditStation.textHistoriqueAcqFin2.getText();
-
-                frag2.setFirstLine(ligne2);
-                frag2.setLastLine(ligne2);
-                frag2.setFirstCharOffset(debut2);
-                frag2.setLastCharOffset(fin2);
-            }
-
-        }
-
-        // commentaire
-        propertyModel = stationModel.propertiesAt("comment");
-        if (EditStation.buttonCommentaireSaisie.getSelection())
-        {
-            // saisie manuelle du texte
-            station.setComment(EditStation.textCommentaire.getText());
-            propertyModel.setUserProvided(true);
-
-        }
-        else
-        {
-            // surlignement et injection ligne debut fin
-
-            propertyModel.setUserProvided(false);
-            frag = propertyModel.getFragment();
-
-            ligne =
-                ""
-                        + (Integer.valueOf(EditStation.textCommentaireLigne
-                            .getText()) - Integer
-                            .valueOf(EditDesc.lignesEnteteFichier.getText()));
-            debut = EditStation.textCommentaireDebut.getText();
-            fin = EditStation.textCommentaireFin.getText();
-
-            frag.setFirstLine(ligne);
-            // frag.setLastLine(ligne);
-            frag.setFirstCharOffset(debut);
-            frag.setLastCharOffset(fin);
-
-            frag.setVariable(EditStation.buttonVar.getSelection());
-
-            // Utils.calculNbreLignesPuisRemplissageFragClic(frag,
-            // EditStation.posxCommentaire, EditStation.posyCommentaire);
-            // Utils.calculNbreLignesPuisRemplissageFragClic(frag,
-            // EditStation.cursCommentaire);
-            Utils.calculNbreLignesPuisRemplissageFrag(frag, Integer
-                .valueOf(EditDesc.lignesEnteteFichier.getText()));
-
-            // frag.toString();
-        }
-
-        // DM history 1&2
-        /*
-         * propertyModel = stationModel.propertiesAt("dmHistory1");
-         * propertyModel2 = stationModel.propertiesAt("dmHistory2");
-         * propertyModel.setUserProvided(true);
-         * propertyModel.setUserProvided(true);
-         */
-        station.setDmHistory1("");
-        station.setDmHistory2("");
-
-        // echantillon surface
-        propertyModel = stationModel.propertiesAt("surfaceSamples1");
-        propertyModel2 = stationModel.propertiesAt("surfaceSamples2");
-        if (EditStation.buttonSurfaceSaisie.getSelection())
-        {
-            // saisie manuelle
-            station.setSurfaceSamples1(EditStation.textSurface1.getText());
-            station.setSurfaceSamples2(EditStation.textSurface2.getText());
-            propertyModel.setUserProvided(true);
-            propertyModel2.setUserProvided(true);
-
-        }
-        else
-        {
-            propertyModel.setUserProvided(false);
-            propertyModel2.setUserProvided(false);
-            // position dans fichier
-            frag = propertyModel.getFragment();
-            HeaderFragment frag2 = propertyModel2.getFragment();
-
-            ligne =
-                ""
-                        + (Integer.valueOf(EditStation.textSurfaceLigne1
-                            .getText()) - Integer
-                            .valueOf(EditDesc.lignesEnteteFichier.getText()));
-            debut = EditStation.textSurfaceDebut1.getText();
-            fin = EditStation.textSurfaceFin1.getText();
-
-            frag.setFirstLine(ligne);
-            frag.setLastLine(ligne);
-            frag.setFirstCharOffset(debut);
-            frag.setLastCharOffset(fin);
-
-            if (EditStation.textSurfaceLigne2.getText().equals(""))
-            {
-                // si on a injecte que la ligne 1
-                propertyModel2.setUserProvided(true);
-                station.setSurfaceSamples2(EditStation.textSurface2.getText());
-            }
-            else
-            {
-
-                String ligne2, debut2, fin2;
-                ligne2 =
-                    ""
-                            + (Integer.valueOf(EditStation.textSurfaceLigne2
-                                .getText()) - Integer
-                                .valueOf(EditDesc.lignesEnteteFichier.getText()));
-                debut2 = EditStation.textSurfaceDebut2.getText();
-                fin2 = EditStation.textSurfaceFin2.getText();
-
-                frag2.setFirstLine(ligne2);
-                frag2.setLastLine(ligne2);
-                frag2.setFirstCharOffset(debut2);
-                frag2.setLastCharOffset(fin2);
-            }
-        }
-
-        // decallage TU
-        propertyModel = stationModel.propertiesAt("offsetTU");
-
-        if (EditStation.buttonTUSaisie.getSelection())
-        {
-            // if (true){
-            // mise e true pour passage obligatoire !
-            // saisie manuelle
-            // station.setLatitude(EditStation.textTU.getText());
-            station.setOffsetTU(EditStation.textTU.getText());
-            propertyModel.setUserProvided(true);
-
-            // }
-        }
-        else
-        {
-            propertyModel.setUserProvided(false);
-            // position dans fichier
-
-            frag = propertyModel.getFragment();
-
-            ligne =
-                ""
-                        + (Integer.valueOf(EditStation.textTULigne.getText()) - Integer
-                            .valueOf(EditDesc.lignesEnteteFichier.getText()));
-            debut = EditStation.textTUDebut.getText();
-            fin = EditStation.textTUFin.getText();
-
-            frag.setFirstLine(ligne);
-            frag.setLastLine(ligne);
-            frag.setFirstCharOffset(debut);
-            frag.setLastCharOffset(fin);
-
-        }
-
-        // frequence echantillonnage
-        // if (ViewFile.checkBoxTempo.getSelection()) {
-        if (ViewFile.radSerieTempo.getSelection()
-                || ViewFile.radTrajectoire.getSelection())
-        {
-            propertyModel =
-                stationModel.getTimeSeriesModel().propertiesAt("samplingRate");
-
-            if (EditStation.buttonFreqEchantSaisie.getSelection())
-            {
-                // saisie manuelle
-                stationModel.getTimeSeriesInformation().setSamplingRate(
-                    EditStation.textFreqEchant.getText());
-                propertyModel.setUserProvided(true);
-
-            }
-            else
-            {
-                // position dans fichier
-                propertyModel.setUserProvided(false);
-
-                frag = propertyModel.getFragment();
-
-                ligne =
-                    ""
-                            + (Integer.valueOf(EditStation.textFreqEchantLigne
-                                .getText()) - Integer
-                                .valueOf(EditDesc.lignesEnteteFichier.getText()));
-                debut = EditStation.textFreqEchantDebut.getText();
-                fin = EditStation.textFreqEchantFin.getText();
-
-                frag.setFirstLine(ligne);
-                frag.setLastLine(ligne);
-                frag.setFirstCharOffset(debut);
-                frag.setLastCharOffset(fin);
-            }
-
-            // conversion JEP de la frequence
-            if (!EditStation.textFreqEchantConv.getText().equals(""))
-            {
-                // formule de conversion
-                stationModel.getTimeSeriesModel().setSampleRateConversion(
-                    EditStation.textFreqEchantConv.getText());
-            }
-        }
-
-        // HEURE
-        propertyModel = stationModel.propertiesAt("time");
-
-        // Flag qualite
-        propertyModel.setFlag(setFlagFragment(Global.DATETIME));
-
-        if (EditStation.buttonHeureSaisie.getSelection())
-        {
-            // saisie heure manuelle
-
-            propertyModel.setUserProvided(true);
-
-            try
-            {
-                DateTimeFormat timeFormat =
-                    (DateTimeFormat) propertyModel.getFormat();
-                timeFormat.setFormatString(EditStation.comboHeure.getText());
-                Long timeLong =
-                    (Long) timeFormat.parseObject(EditStation.textHeureSaisie
-                        .getText());
-                stationModel.getModel().setTime(timeLong);
-            }
-            catch (ParseException e)
-            {
-                e.printStackTrace();
-            }
-
-        }
-        else
-        {
-            // position heure dans fichier
-
-            propertyModel.setUserProvided(false);
-
-            frag = propertyModel.getFragment();
-            // frag.isSingleLine();
-
-            if ((ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire
-                .getSelection())
-                    && EditStation.radLigneDonnees.getSelection())
-            {
-                ligne =
-                    String
-                        .valueOf(DataModel.stationModel.getNumberOfLines() + 1);
-                try
-                {
-                    stationModel.getTimestampModel().getTimeFormat()
-                        .setFormatString(EditStation.comboHeure.getText());
-                    stationModel.getTimestampModel().getTimeFragment()
-                        .setFirstCharOffset(
-                            EditStation.textHeureDebut.getText());
-                    stationModel.getTimestampModel().getTimeFragment()
-                        .setLastCharOffset(EditStation.textHeureFin.getText());
-                }
-                catch (ParseException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-            else
-            {
-                ligne =
-                    ""
-                            + (Integer.valueOf(EditStation.textHeureLigne
-                                .getText()) - Integer
-                                .valueOf(EditDesc.lignesEnteteFichier.getText()));
-            }
-
-            debut = EditStation.textHeureDebut.getText();
-            fin = EditStation.textHeureFin.getText();
-
-            frag.setFirstLine(ligne);
-            frag.setLastLine(ligne);
-            frag.setFirstCharOffset(debut);
-            frag.setLastCharOffset(fin);
-
-            // format heure
-            DateTimeFormat timeFormat =
-                (DateTimeFormat) propertyModel.getFormat();
-            try
-            {
-                timeFormat.setFormatString(EditStation.comboHeure.getText());
-            }
-            catch (ParseException e)
-            {
-
-                e.printStackTrace();
-            }
-        }
-
-        // DATE en LONG
-        propertyModel = stationModel.propertiesAt("date");
-
-        // Flag qualite
-        propertyModel.setFlag(setFlagFragment(Global.DATETIME));
-
-        if (EditStation.buttonDateSaisie.getSelection())
-        {
-            // saisie date manuelle
-            propertyModel.setUserProvided(true);
-            stationModel.getReferenceProperty();
-
-            DateTimeFormat dateFormat =
-                (DateTimeFormat) propertyModel.getFormat();
-            try
-            {
-                dateFormat.setFormatString(EditStation.comboDate.getText());
-                Long dateLong =
-                    (Long) dateFormat.parseObject(EditStation.textDateSaisie
-                        .getText());
-                stationModel.getModel().setDate(dateLong);
-
-            }
-            catch (ParseException e)
-            {
-                // 
-                e.printStackTrace();
-            }
-
-        }
-        else
-        {
-
-            propertyModel.setUserProvided(false);
-
-            // position dans fichier
-
-            frag = propertyModel.getFragment();
-            // frag.isSingleLine();
-
-            if ((ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire
-                .getSelection())
-                    && EditStation.radLigneDonnees.getSelection())
-            {
-                ligne =
-                    String
-                        .valueOf(DataModel.stationModel.getNumberOfLines() + 1);
-
-                try
-                {
-                    stationModel.getTimestampModel().getDateFormat()
-                        .setFormatString(EditStation.comboDate.getText());
-                    stationModel
-                        .getTimestampModel()
-                        .getDateFragment()
-                        .setFirstCharOffset(EditStation.textDateDebut.getText());
-                    stationModel.getTimestampModel().getDateFragment()
-                        .setLastCharOffset(EditStation.textDateFin.getText());
-                }
-                catch (ParseException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-            else
-            {
-                ligne =
-                    ""
-                            + (Integer.valueOf(EditStation.textDateLigne
-                                .getText()) - Integer
-                                .valueOf(EditDesc.lignesEnteteFichier.getText()));
-            }
-
-            debut = EditStation.textDateDebut.getText();
-            fin = EditStation.textDateFin.getText();
-
-            frag.setFirstLine(ligne);
-            frag.setLastLine(ligne);
-            frag.setFirstCharOffset(debut);
-            frag.setLastCharOffset(fin);
-
-            // format date
-            DateTimeFormat dateFormat =
-                (DateTimeFormat) propertyModel.getFormat();
-            try
-            {
-                dateFormat.setFormatString(EditStation.comboDate.getText());
-            }
-            catch (ParseException e)
-            {
-                // 
-                e.printStackTrace();
-            }
-        }
-
-        // latitude
-        propertyModel = stationModel.propertiesAt("latitude");
-
-        // Flag qualite
-        propertyModel.setFlag(setFlagFragment(Global.LATITUDE));
-
-        // format de la latitude e mettre dans le datamodel
-        LatitudeFormat latitudeFormat =
-            (LatitudeFormat) propertyModel.getFormat();
-        try
-        {
-            latitudeFormat.setFormatString(EditStation.comboLatitude.getText());
-        }
-        catch (ParseException e)
-        {
-            // 
-            e.printStackTrace();
-        }
-
-        if (EditStation.buttonLatSaisie.getSelection())
-        {
-            // saisie manuelle
-
-            // conversion en DOUBLE avant injection DataModel
-            try
-            {
-                double latitudeDouble =
-                    ((Number) latitudeFormat
-                        .parseObject(EditStation.textLatitude.getText()))
-                        .doubleValue();
-                station.setLatitude(latitudeDouble);
+                // remplissage avec les données par défaut
+                stationModel.getTimeSeriesModel().setSampleRateConversion("*1"); //$NON-NLS-1$
+                stationModel.getTimeSeriesInformation().setSamplingRate(Global.ZERO);
                 propertyModel.setUserProvided(true);
             }
-            catch (ParseException e)
-            {
-                // 
-                e.printStackTrace();
-            }
-
-        }
-        else
-        {
-            propertyModel.setUserProvided(false);
-            // position dans fichier
-
-            frag = propertyModel.getFragment();
-
-            ligne =
-                ""
-                        + (Integer.valueOf(EditStation.textLatitudeLigne
-                            .getText()) - Integer
-                            .valueOf(EditDesc.lignesEnteteFichier.getText()));
-            debut = EditStation.textLatitudeDebut.getText();
-            fin = EditStation.textLatitudeFin.getText();
-
-            frag.setFirstLine(ligne);
-            frag.setLastLine(ligne);
-            frag.setFirstCharOffset(debut);
-            frag.setLastCharOffset(fin);
-            frag.setVariable(EditStation.buttonVarLat.getSelection());
-            latitudeFormat.setVariableLength(EditStation.buttonVarLat
-                .getSelection());
-        }
-
-        // longitude
-
-        propertyModel = stationModel.propertiesAt("longitude");
-
-        // Flag qualite
-        propertyModel.setFlag(setFlagFragment(Global.LONGITUDE));
-
-        // format de la longitude e mettre dans le datamodel
-        LongitudeFormat longitudeFormat =
-            (LongitudeFormat) propertyModel.getFormat();
-        try
-        {
-            longitudeFormat.setFormatString(EditStation.comboLongitude
-                .getText());
-        }
-        catch (ParseException e)
-        {
-            // 
-            e.printStackTrace();
-        }
-
-        if (EditStation.buttonLongSaisie.getSelection())
-        {
-            // saisie manuelle
-
-            // conversion en double
-            try
-            {
-                double longitudeDouble =
-                    ((Number) longitudeFormat
-                        .parseObject(EditStation.textLongitude.getText()))
-                        .doubleValue();
-                station.setLongitude(longitudeDouble);
-                propertyModel.setUserProvided(true);
-            }
-            catch (ParseException e)
-            {
-
-                e.printStackTrace();
-            }
-
-        }
-        else
-        {
-            propertyModel.setUserProvided(false);
-            // position dans fichier
-            frag = propertyModel.getFragment();
-
-            ligne =
-                ""
-                        + (Integer.valueOf(EditStation.textLongitudeLigne
-                            .getText()) - Integer
-                            .valueOf(EditDesc.lignesEnteteFichier.getText()));
-            debut = EditStation.textLongitudeDebut.getText();
-            fin = EditStation.textLongitudeFin.getText();
-
-            frag.setFirstLine(ligne);
-            frag.setLastLine(ligne);
-            frag.setFirstCharOffset(debut);
-            frag.setLastCharOffset(fin);
-            frag.setVariable(EditStation.buttonVarLong.getSelection());
-            longitudeFormat.setVariableLength(EditStation.buttonVarLong
-                .getSelection());
-
-        }
-
-        // profondeur
-        propertyModel = stationModel.propertiesAt("bottomDepth");
-
-        // Flag qualite
-        propertyModel.setFlag(setFlagFragment(Global.DEPTH));
-
-        if (EditStation.buttonProfondeurSaisie.getSelection())
-        {
-            // saisie manuelle
-            station.setBottomDepth(EditStation.textProfondeur.getText());
-            propertyModel.setUserProvided(true);
-
-        }
-        else
-        {
-            propertyModel.setUserProvided(false);
-            // position dans fichier
-            frag = propertyModel.getFragment();
-
-            ligne =
-                ""
-                        + (Integer.valueOf(EditStation.textProfondeurLigne
-                            .getText()) - Integer
-                            .valueOf(EditDesc.lignesEnteteFichier.getText()));
-            debut = EditStation.textProfondeurDebut.getText();
-            fin = EditStation.textProfondeurFin.getText();
-
-            frag.setFirstLine(ligne);
-            frag.setLastLine(ligne);
-            frag.setFirstCharOffset(debut);
-            frag.setLastCharOffset(fin);
-
-        }
-
-        // if (ViewFile.checkBoxTempo.getSelection()) {
-        if (ViewFile.radSerieTempo.getSelection()
-                || ViewFile.radTrajectoire.getSelection())
-        {
-            // DECLINAISON MAGNETIQUE
-            propertyModel =
-                stationModel.getTimeSeriesModel().propertiesAt(
-                    "magneticDeclination");
-
-            if (EditStation.buttonDeclinMagnetSaisie.getSelection())
-            {
-                propertyModel.setUserProvided(true);
-                // valeur manuelle
-                timeSeriesInformation
-                    .setMagneticDeclination(EditStation.textDeclinMagnet
-                        .getText());
-            }
-            else
-            {
-                // position dans fichier
-                frag = propertyModel.getFragment();
-                propertyModel.setUserProvided(false);
-
-                ligne =
-                    ""
-                            + (Integer
-                                .valueOf(EditStation.textDeclinMagnetLigne
-                                    .getText()) - Integer
-                                .valueOf(EditDesc.lignesEnteteFichier.getText()));
-                debut = EditStation.textDeclinMagnetDebut.getText();
-                fin = EditStation.textDeclinMagnetFin.getText();
-
-                frag.setFirstLine(ligne);
-                frag.setLastLine(ligne);
-                frag.setFirstCharOffset(debut);
-                frag.setLastCharOffset(fin);
-            }
-
-            // PROFONDEUR DE FIN
-            propertyModel =
-                stationModel.getTimeSeriesModel().propertiesAt("endDepth");
-
-            // Flag qualite
-            propertyModel.setFlag(setFlagFragment(Global.ENDDEPTH));
-
-            if (EditStation.buttonProfFinSaisie.getSelection())
-            {
-                propertyModel.setUserProvided(true);
-                // valeur manuelle
-                if (EditStation.textProfFin.getText().equals(""))
-                {
-                    // on recopie profondeur dans profondeur de fin
-                    PropertyModel propModelProfNormale =
-                        stationModel.propertiesAt("bottomDepth");
-                    if (propModelProfNormale.isUserProvided())
-                    {
-                        // on recopie la valeur entree par l'utilisateur
-                        propertyModel.setUserProvided(true);
-                        timeSeriesInformation
-                            .setEndDepth(EditStation.textProfondeur.getText());
-
-                    }
-                    else
-                    {
-                        // memes valeurs de ligne/debut/fin que profondeur
-                        HeaderFragment fragProf =
-                            propModelProfNormale.getFragment();
-
-                        propertyModel.setUserProvided(false);
-                        frag = propertyModel.getFragment();
-                        frag.setFirstLine(fragProf.getFirstLine());
-                        frag.setLastLine(fragProf.getLastLine());
-                        frag.setFirstCharOffset(fragProf.getFirstCharOffset());
-                        frag.setLastCharOffset(fragProf.getLastCharOffset());
-                    }
-                }
-                else
-                {
-
-                    timeSeriesInformation.setEndDepth(EditStation.textProfFin
-                        .getText());
-                }
-            }
-            else
-            {
-                // position dans fichier
-                frag = propertyModel.getFragment();
-                propertyModel.setUserProvided(false);
-
-                ligne =
-                    ""
-                            + (Integer.valueOf(EditStation.textProfFinLigne
-                                .getText()) - Integer
-                                .valueOf(EditDesc.lignesEnteteFichier.getText()));
-                debut = EditStation.textProfFinDebut.getText();
-                fin = EditStation.textProfFinFin.getText();
-
-                frag.setFirstLine(ligne);
-                frag.setLastLine(ligne);
-                frag.setFirstCharOffset(debut);
-                frag.setLastCharOffset(fin);
-            }
-
-            // LATITUDE DE FIN
-            propertyModel =
-                stationModel.getTimeSeriesModel().propertiesAt("endLatitude");
-
-            // Flag qualite
-            propertyModel.setFlag(setFlagFragment(Global.ENDLATITUDE));
-
-            // format de la latitude de fin e mettre dans le datamodel
-            LatitudeFormat latitudeFormatFin =
-                (LatitudeFormat) propertyModel.getFormat();
-            try
-            {
-                latitudeFormatFin.setFormatString(EditStation.comboLatitudeFin
-                    .getText());
-            }
-            catch (ParseException e)
-            {
-                // 
-                e.printStackTrace();
-            }
-
-            if (EditStation.buttonLatFinSaisie.getSelection())
-            {
-                propertyModel.setUserProvided(true);
-                // valeur manuelle
-
-                if (!EditStation.textLatFin.getText().equals(""))
-                {
-                    try
-                    {
-                        double latitudeFinDouble =
-                            ((Number) latitudeFormatFin
-                                .parseObject(EditStation.textLatFin.getText()))
-                                .doubleValue();
-                        // System.out.println("longitude de fin ="
-                        // + EditStation.textLatFin.getText());
-                        timeSeriesInformation.setEndLatitude(latitudeFinDouble);
-                    }
-                    catch (ParseException e)
-                    {
-
-                        e.printStackTrace();
-                    }
-
-                }
-                else
-                {
-                    // vide donc on recopie latitude dans latitude de fin
-                    PropertyModel propLat =
-                        stationModel.propertiesAt("latitude");
-
-                    if (propLat.isUserProvided())
-                    {
-                        // on recupere le double de la latitude
-                        propertyModel.setUserProvided(true);
-                        stationModel.getTimeSeriesInformation().setEndLatitude(
-                            station.getLatitude());
-                    }
-                    else
-                    {
-                        // on remplit le frag
-                        HeaderFragment fragLat = propLat.getFragment();
-                        frag = propertyModel.getFragment();
-                        propertyModel.setUserProvided(false);
-                        frag.setFirstCharOffset(fragLat.getFirstCharOffset());
-                        frag.setLastCharOffset(fragLat.getLastCharOffset());
-                        frag.setFirstLine(fragLat.getFirstLine());
-                        frag.setLastLine(fragLat.getLastLine());
-
-                    }
-
-                }
-
-            }
-            else
-            {
-                // position dans fichier
-                // FAE 0001137 : non bloquant si non saisi
-                if (EditStation.textLatFinLigne.getText().equals("")
-                        && EditStation.textLatFinDebut.getText().equals("")
-                        && EditStation.textLatFinFin.getText().equals(""))
-                {
-                    // valeur non rentree donc on recopie latitude dans latitude
-                    // de fin
-                    PropertyModel propLat =
-                        stationModel.propertiesAt("latitude");
-
-                    if (propLat.isUserProvided())
-                    {
-                        // on recupere le double de la latitude
-                        propertyModel.setUserProvided(true);
-                        stationModel.getTimeSeriesInformation().setEndLatitude(
-                            station.getLatitude());
-                    }
-                    else
-                    {
-                        // on remplit le frag
-                        HeaderFragment fragLat = propLat.getFragment();
-                        frag = propertyModel.getFragment();
-                        propertyModel.setUserProvided(false);
-                        frag.setFirstCharOffset(fragLat.getFirstCharOffset());
-                        frag.setLastCharOffset(fragLat.getLastCharOffset());
-                        frag.setFirstLine(fragLat.getFirstLine());
-                        frag.setLastLine(fragLat.getLastLine());
-                    }
-                }
-                else
-                {
-                    frag = propertyModel.getFragment();
-                    propertyModel.setUserProvided(false);
-
-                    ligne =
-                        ""
-                                + (Integer.valueOf(EditStation.textLatFinLigne
-                                    .getText()) - Integer
-                                    .valueOf(EditDesc.lignesEnteteFichier
-                                        .getText()));
-                    debut = EditStation.textLatFinDebut.getText();
-                    fin = EditStation.textLatFinFin.getText();
-
-                    frag.setFirstLine(ligne);
-                    frag.setLastLine(ligne);
-                    frag.setFirstCharOffset(debut);
-                    frag.setLastCharOffset(fin);
-                    frag
-                        .setVariable(EditStation.buttonVarLatFin.getSelection());
-                    latitudeFormatFin
-                        .setVariableLength(EditStation.buttonVarLatFin
-                            .getSelection());
-                }
-            }
-
-            // LONGITUDE DE FIN
-            propertyModel =
-                stationModel.getTimeSeriesModel().propertiesAt("endLongitude");
-
-            // Flag qualite
-            propertyModel.setFlag(setFlagFragment(Global.ENDLONGITUDE));
-
-            // format de la longitude e mettre dans le datamodel
-            LongitudeFormat longitudeFormatFin =
-                (LongitudeFormat) propertyModel.getFormat();
-            try
-            {
-                longitudeFormatFin
-                    .setFormatString(EditStation.comboLongitudeFin.getText());
-            }
-            catch (ParseException e)
-            {
-                // 
-                e.printStackTrace();
-            }
-
-            if (EditStation.buttonLongFinSaisie.getSelection())
-            {
-                propertyModel.setUserProvided(true);
-                // valeur manuelle
-                // conversion en double
-                if (!EditStation.textLongFin.getText().equals(""))
-                {
-                    try
-                    {
-                        double longitudeFinDouble =
-                            ((Number) longitudeFormatFin
-                                .parseObject(EditStation.textLongFin.getText()))
-                                .doubleValue();
-                        // System.out.println("longitude de fin ="
-                        // + EditStation.textLongFin.getText());
-                        timeSeriesInformation
-                            .setEndLongitude(longitudeFinDouble);
-                    }
-                    catch (ParseException e)
-                    {
-
-                        e.printStackTrace();
-                    }
-
-                }
-                else
-                {
-                    // vide donc on recopie la longitude comme longitude de fin
-                    PropertyModel propLong =
-                        stationModel.propertiesAt("longitude");
-
-                    if (propLong.isUserProvided())
-                    {
-                        // on recopie le double de la longitude
-                        propertyModel.setUserProvided(true);
-
-                        stationModel.getTimeSeriesInformation()
-                            .setEndLongitude(station.getLongitude());
-
-                    }
-                    else
-                    {
-                        // on recopie le frag correspondant
-                        propertyModel.setUserProvided(false);
-
-                        HeaderFragment fragLong = propLong.getFragment();
-                        frag = propertyModel.getFragment();
-
-                        frag.setFirstCharOffset(fragLong.getFirstCharOffset());
-                        frag.setLastCharOffset(fragLong.getLastCharOffset());
-                        frag.setFirstLine(fragLong.getFirstLine());
-                        frag.setLastLine(fragLong.getLastLine());
-                    }
-
-                }
-
-            }
-            else
-            {
-                // position dans fichier
-                // FAE 0001137 : non bloquant si non saisi
-                if (EditStation.textLongFinLigne.getText().equals("")
-                        && EditStation.textLongFinDebut.getText().equals("")
-                        && EditStation.textLongFinFin.getText().equals(""))
-                {
-                    // valeur non rentree donc on recopie la longitude comme
-                    // longitude de fin
-                    PropertyModel propLong =
-                        stationModel.propertiesAt("longitude");
-
-                    if (propLong.isUserProvided())
-                    {
-                        // on recopie le double de la longitude
-                        propertyModel.setUserProvided(true);
-                        stationModel.getTimeSeriesInformation()
-                            .setEndLongitude(station.getLongitude());
-                    }
-                    else
-                    {
-                        // on recopie le frag correspondant
-                        propertyModel.setUserProvided(false);
-
-                        HeaderFragment fragLong = propLong.getFragment();
-                        frag = propertyModel.getFragment();
-
-                        frag.setFirstCharOffset(fragLong.getFirstCharOffset());
-                        frag.setLastCharOffset(fragLong.getLastCharOffset());
-                        frag.setFirstLine(fragLong.getFirstLine());
-                        frag.setLastLine(fragLong.getLastLine());
-                    }
-                }
-                else
-                {
-                    frag = propertyModel.getFragment();
-                    propertyModel.setUserProvided(false);
-
-                    ligne =
-                        ""
-                                + (Integer.valueOf(EditStation.textLongFinLigne
-                                    .getText()) - Integer
-                                    .valueOf(EditDesc.lignesEnteteFichier
-                                        .getText()));
-                    debut = EditStation.textLongFinDebut.getText();
-                    fin = EditStation.textLongFinFin.getText();
-
-                    frag.setFirstLine(ligne);
-                    frag.setLastLine(ligne);
-                    frag.setFirstCharOffset(debut);
-                    frag.setLastCharOffset(fin);
-                    frag.setVariable(EditStation.buttonVarLongFin
-                        .getSelection());
-                    longitudeFormatFin
-                        .setVariableLength(EditStation.buttonVarLongFin
-                            .getSelection());
-                }
-            }
-
-            // DATE / HEURE DE FIN
-            propertyModel =
-                stationModel.getTimeSeriesModel().propertiesAt("endDate");
-            propertyModel.setUserProvided(true);
-            propertyModel =
-                stationModel.getTimeSeriesModel().propertiesAt("endTime");
-            propertyModel.setUserProvided(true);
-            // Flag qualite
-            propertyModel.setFlag(setFlagFragment(Global.ENDDATETIME));
-
-            // PROFONDEUR CAPTEUR
-            propertyModel =
-                stationModel.getTimeSeriesModel().propertiesAt("sensorDepth");
-
-            if (EditStation.buttonProfCapteurSaisie.getSelection())
-            {
-                propertyModel.setUserProvided(true);
-                // valeur manuelle
-                timeSeriesInformation
-                    .setSensorDepth(EditStation.textProfCapteur.getText());
-            }
-            else
-            {
-                // position dans fichier
-                frag = propertyModel.getFragment();
-                propertyModel.setUserProvided(false);
-
-                ligne =
-                    ""
-                            + (Integer.valueOf(EditStation.textProfCapteurLigne
-                                .getText()) - Integer
-                                .valueOf(EditDesc.lignesEnteteFichier.getText()));
-                debut = EditStation.textProfCapteurDebut.getText();
-                fin = EditStation.textProfCapteurFin.getText();
-
-                frag.setFirstLine(ligne);
-                frag.setLastLine(ligne);
-                frag.setFirstCharOffset(debut);
-                frag.setLastCharOffset(fin);
-            }
-
-        }
-
-        // FLAGS QC
-        stationModel.setFlagTable(EditStation.getFlagTable());
+        } // fin specifique SERIE TEMPO ou TRAJECTOIRE        
+        
 
         // flag validation e 1
-        EditStation.validee = 1;
-
+        EditStation.validee = true;
     }
 
     public static void initData()
     {
+        boolean existDEPH = false;
+        int indexPRES = -1;
 
         // mise e jour des types avant validation
         TableData.majTypeData();
@@ -1618,14 +528,17 @@ public class DataModel
             ParameterModel parameterModel = new ParameterModel();
             parameterModel.setModel(para);
 
-            parameterModel.setModel(para);
+            //parameterModel.setModel(para);
 
             // split sur " - "
-            Pattern p = Pattern.compile(" - ");
+            Pattern p = Pattern.compile(" - "); //$NON-NLS-1$
             String mots[] = p.split(typeCourant.getCode());
             String code = mots[0];
             String nom = mots[1];
 
+            if (code.trim().equals("DEPH")) existDEPH = true;
+            if (code.trim().equals("PRES")) indexPRES = i;
+            
             // code, nom, unite
             para.setCode(code);
             para.setFullName(nom);
@@ -1644,8 +557,8 @@ public class DataModel
             frag.setLastCharOffset(typeCourant.getFin());
             parameterModel.setFragment(frag);
 
-            if (!typeCourant.getDebutFlag().equals("")
-                    && !typeCourant.getFinFlag().equals(""))
+            if (!typeCourant.getDebutFlag().equals(Global.EMPTY_STRING) 
+                    && !typeCourant.getFinFlag().equals(Global.EMPTY_STRING))
             {
                 LineFragment flag = new LineFragment();
                 flag.setFirstCharOffset(typeCourant.getDebutFlag());
@@ -1653,51 +566,56 @@ public class DataModel
                 parameterModel.setFlag(flag);
             }
 
-            // test par / au DataModel puis ajout du parametre ou non
-            // ParameterModel[] parametersModels =
-            // stationModel.getParameterModels();
-            // int nbre = parametersModels.length;
-            // Boolean found = false;
-
             stationModel.addParameterModel(parameterModel);
-
-            /*
-             * System.out.println(">>Ajout du parametre " +
-             * typeCourant.getCode() + " ... OK");
-             */
-
+           
         }
+        // enregistrement de l'indexPRES
+        stationModel.setPresIndex(indexPRES);
 
-        // // if (ViewFile.checkBoxTempo.getSelection()) {
-        // if (ViewFile.radSerieTempo.getSelection() ||
-        // ViewFile.radTrajectoire.getSelection()) {
-        // // gestion des series temporelles
-        // if (EditData.buttonFreqEchant.getSelection()) {
-        // // calcul e partir frequence echantillonnage
-        // stationModel.getTimestampModel().setComputed(true);
-        //
-        // } else {
-        // // calcul position date/heure dans les donnees
-        // stationModel.getTimestampModel().setComputed(false);
-        // HorodatedParameterModel horoDatedParameterModel = stationModel
-        // .getTimestampModel();
-        // try {
-        // horoDatedParameterModel.setFormat(new DateTimeFormat(
-        // EditData.comboTotal.getText()));
-        // } catch (ParseException e) {
-        //
-        // e.printStackTrace();
-        // }
-        // LineFragment lineFragment = horoDatedParameterModel
-        // .getDateTimeFragment();
-        // lineFragment.setFirstCharOffset(EditData.textTotalDebut
-        // .getText());
-        // lineFragment.setLastCharOffset(EditData.textTotalFin.getText());
-        //
-        // }
-        // }
-
-        // flag validation e 1
+        // *** Ajouts automatiques de certains paramètres
+        if (ViewFile.radProfilVertical.getSelection())
+        {
+            // Profile vertical
+            if ((!existDEPH) && (indexPRES != -1)){
+                // ajout de DEPH calculé à partir de PRES
+                //parameterModel.setFlag(stationModel.parameterModelsAt(indexPRES).getFlag());
+                stationModel.addFixedParameterModel(IdParameter.DEPH);
+            }
+        }
+        else
+        {       
+            // Serie temporelle ou Trajectoire     
+            // Ajout YEAR, MNTH, DAYX et TIME pour Medatlas
+            stationModel.addFixedParameterModel(IdParameter.YEAR);
+            stationModel.addFixedParameterModel(IdParameter.MNTH);
+            stationModel.addFixedParameterModel(IdParameter.DAYX);
+            stationModel.addFixedParameterModel(IdParameter.TIME);
+            
+            if (ViewFile.radSerieTempo.getSelection())
+            {
+                // Serie temporelle
+                // Ajout du paramètre DEPH ( = Sensor Depth) pour ODV
+                stationModel.addFixedParameterModel(IdParameter.DEPH);
+                                
+                // Ajout de "Chronological Julian Date" pour ODV
+                stationModel.addFixedParameterModel(IdParameter.CJDY);                
+            }
+            else
+            {
+                // Trajectoire
+                // Ajout LATX et LONX pour Medatlas
+                stationModel.addFixedParameterModel(IdParameter.LATX);  
+                stationModel.addFixedParameterModel(IdParameter.LONX);  
+                
+                if (EditStation.depth.isInData()){
+                    // Ajout BATH si "Pofondeur" saisie dans les données pour Medatlas
+                    stationModel.addFixedParameterModel(IdParameter.BATH);
+                }
+                
+            }
+        }
+        
+        
         EditData.validee = 1;
 
     }
@@ -1752,13 +670,13 @@ public class DataModel
             }
             catch (RuntimeException e)
             {
-                Utils.messageErreurAppend(Messages.getString("Etape.124"));
+                Utils.messageErreurAppend(Messages.getString("Etape.124")); //$NON-NLS-1$
                 e.printStackTrace();
                 throw e;
             }
             stationModel_modele = dirSurvey_modele.getStationModel();
             // lignes entete fichier = 0
-            EditDesc.lignesEnteteFichier.setText("0");
+            EditDesc.lignesEnteteFichier.setText("0"); //$NON-NLS-1$
 
         }
         else
@@ -1771,13 +689,13 @@ public class DataModel
             }
             catch (RuntimeException e)
             {
-                Utils.messageErreurAppend(Messages.getString("Etape.124"));
+                Utils.messageErreurAppend(Messages.getString("Etape.124")); //$NON-NLS-1$
                 e.printStackTrace();
                 throw e;
             }
             stationModel_modele = singleSurvey_modele.getStationModel();
             // lignes entete fichier
-            EditDesc.lignesEnteteFichier.setText(""
+            EditDesc.lignesEnteteFichier.setText(Global.EMPTY_STRING                     
                     + singleSurvey_modele.getHeaderLinesNumber());
 
         }
@@ -1896,7 +814,7 @@ public class DataModel
                 try
                 {
                     ViewFile.textTempoDateRef.setText(formatter.formatDateTime(
-                        "dd/MM/yyyy", inputModel_modele.getRefDate()));
+                        "dd/MM/yyyy", inputModel_modele.getRefDate())); //$NON-NLS-1$
                 }
                 catch (ParseException e)
                 {
@@ -1912,7 +830,7 @@ public class DataModel
                 try
                 {
                     ViewFile.textTempoHeureRef.setText(formatter
-                        .formatDateTime("hh24:mm", inputModel_modele
+                        .formatDateTime("hh24:mm", inputModel_modele //$NON-NLS-1$
                             .getRefTime()));
                 }
                 catch (ParseException e)
@@ -1934,12 +852,12 @@ public class DataModel
 
         // nombre lignes entete station
 
-        EditDesc.lignesEnteteStation.setText(""
+        EditDesc.lignesEnteteStation.setText(Global.EMPTY_STRING 
                 + stationModel_modele.getNumberOfLines());
 
         // nombre de lignes de fin
         EditDesc.lignesFinStation
-            .setText("" + stationModel_modele.getEndData());
+            .setText(Global.EMPTY_STRING + stationModel_modele.getEndData()); 
 
         // metaInData
         // stationModel.setMetaInData(false);
@@ -2004,7 +922,7 @@ public class DataModel
         try
         {
             EditSurvey.textDateDebut.setText(formatter.formatDateTime(
-                "dd/MM/yyyy", survey.getStartDate()));
+                "dd/MM/yyyy", survey.getStartDate())); //$NON-NLS-1$
         }
         catch (ParseException e)
         {
@@ -2017,7 +935,7 @@ public class DataModel
         try
         {
             EditSurvey.textDateFin.setText(formatter.formatDateTime(
-                "dd/MM/yyyy", survey.getEndDate()));
+                "dd/MM/yyyy", survey.getEndDate())); //$NON-NLS-1$
         }
         catch (ParseException e)
         {
@@ -2042,15 +960,15 @@ public class DataModel
 
         // confidentialite
         String code = survey.getAvailabilityCode();
-        if (code.equals("P"))
+        if (code.equals("P")) //$NON-NLS-1$
         {
             EditSurvey.comboConfid.select(0);
         }
-        if (code.equals("L"))
+        if (code.equals("L")) //$NON-NLS-1$
         {
             EditSurvey.comboConfid.select(1);
         }
-        if (code.equals("C"))
+        if (code.equals("C")) //$NON-NLS-1$
         {
             EditSurvey.comboConfid.select(2);
         }
@@ -2072,13 +990,13 @@ public class DataModel
             // QC
             if (dataTypes[i].isQc())
             {
-                typeSurvey.setQc("Y");
+                typeSurvey.setQc("Y"); //$NON-NLS-1$
             }
             else
             {
-                typeSurvey.setQc("N");
+                typeSurvey.setQc("N"); //$NON-NLS-1$
             }
-            // typeSurvey.setQc(""+dataTypes[i].isQc());
+            // typeSurvey.setQc(Global.EMPTY_STRING+dataTypes[i].isQc());
 
             typeSurvey.setSensor(dataTypes[i].isSensor());
 
@@ -2136,975 +1054,9 @@ public class DataModel
 
     public static void fillStation()
     {
-
-        int ligne, debut, fin, real_ligne, ligneFin;
-        boolean var;
-
-        station_modele = stationModel_modele.getModel();
-
-        EditStation.btnMetaInData2.setSelection(stationModel_modele
-            .isMetaInData2());
-
-        if (stationModel_modele.getInputType().equals(Global.TRAJECTORY))
-        {
-            if (stationModel_modele.getTrajectory().getOutputType().equals(
-                Global.MEDATLAS))
-            {
-                EditStation.radMedatlas.setSelection(true);
-                EditStation.radODV.setSelection(false);
-            }
-            else
-            {
-                EditStation.radMedatlas.setSelection(false);
-                EditStation.radODV.setSelection(true);
-            }
-            EditStation.activeGrpSerieTempo();
+        for (NemoSection stationSection : EditStation.listeSectionsStation){
+            stationSection.fillFromModel(stationModel_modele);
         }
-
-        if (ViewFile.radSerieTempo.getSelection()
-                || ViewFile.radTrajectoire.getSelection())
-        {
-            // serie tempo
-            if (stationModel_modele.getTimestampModel().isComputed())
-            {
-                // saisie manuelle
-                EditStation.radFreqEchant.setSelection(true);
-                EditStation.radLigneDonnees.setSelection(false);
-            }
-            else
-            {
-                // position heure/date dans fichier
-                EditStation.radFreqEchant.setSelection(false);
-                EditStation.radLigneDonnees.setSelection(true);
-            }
-            EditStation.activeDateHeureManuel();
-        }
-
-        // numero de station
-        if (stationModel_modele.isIncrementRef())
-        {
-            EditStation.buttonRefStationIncremente.setSelection(true);
-            EditStation.textRefStationNumero.setText(String
-                .valueOf(stationModel_modele.getIncrementNumber()));
-            EditStation.buttonRefStationPos.setSelection(false);
-        }
-        else
-        {
-
-            // EditStation.buttonRefStationIncremente.setSelection(false); //pas
-            // obligatoire pour la premiere ligne?
-            EditStation.buttonRefStationIncremente.setSelection(false);
-            EditStation.textRefStationNumero.setText("");
-            EditStation.buttonRefStationPos.setSelection(true);
-
-            // valeurs de ligne/debut/fin
-            PropertyModel propertyModel =
-                stationModel_modele.getReferenceProperty();
-            HeaderFragment frag = propertyModel.getFragment();
-
-            ligne = frag.getFirstLine();
-            debut = frag.getFirstCharOffset();
-            fin = frag.getLastCharOffset();
-
-            if (ligne == 0)
-            {
-                real_ligne = 0;
-            }
-            else
-            {
-                real_ligne =
-                    ligne
-                            + Integer.valueOf(EditDesc.lignesEnteteFichier
-                                .getText());
-            }
-
-            EditStation.textRefStationLigne.setText("" + real_ligne);
-            EditStation.textRefStationDebut.setText("" + debut);
-            EditStation.textRefStationFin.setText("" + fin);
-
-            // activation de la zone des valeurs
-
-        }
-
-        // type de donnee
-        // FAE022
-        if (!ViewFile.isCollection())
-        {
-            DataType dataType = station_modele.getDataType();
-            String code = dataType.getCode();
-            // faire un split sur - au cas oe et n'avoir QUE le code
-
-            Pattern p = Pattern.compile(" - ");
-            String mots[] = p.split(code);
-            String vraiCode = mots[0];
-
-            // avant de charger le type de donnees, verifier qu'il existe bien
-            // dans
-            // la liste mise e jour!!
-            int taille = TableDataSurvey.types.size();
-            Boolean ok = false, capteur = false;
-            for (int i = 0; i < taille; i++)
-            {
-                // check si le type existe toujours ou pas
-                Pattern pat = Pattern.compile(" - ");
-                String motsType[] =
-                    pat.split(TableDataSurvey.types.get(i).getCode());
-                String vraiCodeType = motsType[0];
-
-                if (vraiCode.equals(vraiCodeType))
-                {
-                    ok = true;
-                    if (TableDataSurvey.types.get(i).getSensor())
-                    {
-                        capteur = true;
-                    }
-                }
-            }
-
-            // ajout du parametre ou non du coup
-            if (ok)
-            {
-                // ajoute que si c'est un capteur
-                if (capteur)
-                {
-                    Utils
-                        .selectComboCode(EditStation.comboRefStationType, code);
-                    // EditStation.comboRefStationType.add(code, 0);
-                    // EditStation.comboRefStationType.select(0);
-                }
-            }
-        }
-        // historique acquisition1 et 2
-        PropertyModel propertyModel =
-            stationModel_modele.propertiesAt("dcHistory1");
-        PropertyModel propertyModel2 =
-            stationModel_modele.propertiesAt("dcHistory2");
-
-        if (propertyModel.isUserProvided())
-        {
-            // historique 1&2 tapes manuellement
-            EditStation.buttonHistoriqueAcqSaisie.setSelection(true);
-            EditStation.textHistorique1.setText(station_modele.getDcHistory1());
-            EditStation.textHistorique2.setText(station_modele.getDcHistory2());
-
-        }
-        else
-        {
-            EditStation.buttonHistoriqueAcqPos.setSelection(true);
-            EditStation.buttonHistoriqueAcqSaisie.setSelection(false);
-            EditStation.textHistorique1.setEnabled(false);
-            EditStation.textHistorique2.setEnabled(false);
-
-            HeaderFragment frag = propertyModel.getFragment();
-            HeaderFragment frag2 = propertyModel2.getFragment();
-
-            Utils.calculPosxPosy(frag, EditStation.cursHistorique1);
-
-            int ligne1 = frag.getFirstLine();
-            int debut1 = frag.getFirstCharOffset();
-            int fin1 = frag.getLastCharOffset();
-            int real_ligne1 =
-                ligne1
-                        + Integer.valueOf(EditDesc.lignesEnteteFichier
-                            .getText());
-
-            EditStation.textHistoriqueAcqLigne1.setText("" + real_ligne1);
-            EditStation.textHistoriqueAcqDebut1.setText("" + debut1);
-            EditStation.textHistoriqueAcqFin1.setText("" + fin1);
-
-            if (propertyModel2.isUserProvided())
-            {
-                // on a rentre que la ligne 1 donc les valeurs de ligne 2 sont
-                // vides
-                EditStation.textHistoriqueAcqLigne2.setText("");
-                EditStation.textHistoriqueAcqDebut2.setText("");
-                EditStation.textHistoriqueAcqFin2.setText("");
-            }
-            else
-            {
-
-                Utils.calculPosxPosy(frag2, EditStation.cursHistorique2);
-                // on a aussi rentre la ligne 2
-                int ligne2 = frag2.getFirstLine();
-                int debut2 = frag2.getFirstCharOffset();
-                int fin2 = frag2.getLastCharOffset();
-                int real_ligne2 =
-                    ligne2
-                            + Integer.valueOf(EditDesc.lignesEnteteFichier
-                                .getText());
-
-                EditStation.textHistoriqueAcqLigne2.setText("" + real_ligne2);
-                EditStation.textHistoriqueAcqDebut2.setText("" + debut2);
-                EditStation.textHistoriqueAcqFin2.setText("" + fin2);
-            }
-        }
-
-        // commentaire
-        propertyModel = stationModel_modele.propertiesAt("comment");
-
-        if (propertyModel.isUserProvided())
-        {
-            // entree manuelle du commentaire
-            EditStation.buttonCommentaireSaisie.setSelection(true);
-            EditStation.textCommentaire.setText(station_modele.getComment());
-
-        }
-        else
-        {
-            // calcul du surlignement souris
-            HeaderFragment frag = propertyModel.getFragment();
-
-            Utils.calculPosxPosy(frag, EditStation.cursCommentaire);
-
-            EditStation.buttonCommentaireSaisie.setSelection(false);
-            EditStation.buttonCommentairePos.setSelection(true);
-
-            ligne = frag.getFirstLine();
-            debut = frag.getFirstCharOffset();
-            fin = frag.getLastCharOffset();
-            var = frag.isVariable();
-
-            real_ligne =
-                ligne + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
-
-            // TODO FAE 0001226 : décaler le lastcharoffset pour qu'il prenne en
-            // compte le nombre de lignes
-            Utils.calculRealOffsetFin(frag);
-
-            EditStation.textCommentaireLigne.setText("" + real_ligne);
-            EditStation.textCommentaireDebut.setText("" + debut);
-            EditStation.textCommentaireFin.setText(""
-                    + frag.getLastCharOffset());
-            EditStation.buttonVar.setSelection(var);
-
-        }
-
-        // echantillon surface
-        propertyModel = stationModel_modele.propertiesAt("surfaceSamples1");
-        propertyModel2 = stationModel_modele.propertiesAt("surfaceSamples2");
-
-        if (propertyModel.isUserProvided())
-        {
-            // entree manuelle echantillon surface
-            EditStation.buttonSurfaceSaisie.setSelection(true);
-            EditStation.textSurface1.setText(station_modele
-                .getSurfaceSamples1());
-            EditStation.textSurface2.setText(station_modele
-                .getSurfaceSamples2());
-
-        }
-        else
-        {
-            // position dans fichier
-            EditStation.buttonSurfaceSaisie.setSelection(false);
-            EditStation.buttonSurfacePos.setSelection(true);
-
-            HeaderFragment frag = propertyModel.getFragment();
-            // Utils.calculPosxPosy(frag, EditStation.posxEchantillon1,
-            // EditStation.posyEchantillon1);
-            Utils.calculPosxPosy(frag, EditStation.cursEchant1);
-
-            HeaderFragment frag2 = propertyModel2.getFragment();
-
-            int ligne1 = frag.getFirstLine();
-            int debut1 = frag.getFirstCharOffset();
-            int fin1 = frag.getLastCharOffset();
-            int real_ligne1 =
-                ligne1
-                        + Integer.valueOf(EditDesc.lignesEnteteFichier
-                            .getText());
-
-            EditStation.textSurfaceLigne1.setText("" + real_ligne1);
-            EditStation.textSurfaceDebut1.setText("" + debut1);
-            EditStation.textSurfaceFin1.setText("" + fin1);
-
-            if (propertyModel2.isUserProvided())
-            {
-                // on a rentre que la ligne 1
-                EditStation.textSurfaceLigne2.setText("");
-                EditStation.textSurfaceDebut2.setText("");
-                EditStation.textSurfaceFin2.setText("");
-            }
-            else
-            {
-                // on a rentre aussi ligne 2
-
-                Utils.calculPosxPosy(frag2, EditStation.cursEchant2);
-
-                int ligne2 = frag2.getFirstLine();
-                int debut2 = frag2.getFirstCharOffset();
-                int fin2 = frag2.getLastCharOffset();
-                int real_ligne2 =
-                    ligne2
-                            + Integer.valueOf(EditDesc.lignesEnteteFichier
-                                .getText());
-
-                EditStation.textSurfaceLigne2.setText("" + real_ligne2);
-                EditStation.textSurfaceDebut2.setText("" + debut2);
-                EditStation.textSurfaceFin2.setText("" + fin2);
-            }
-
-        }
-
-        HeaderFragment frag;
-
-        // frequence echantillonnage
-        // if (ViewFile.checkBoxTempo.getSelection()) {
-        if (ViewFile.radSerieTempo.getSelection()
-                || ViewFile.radTrajectoire.getSelection())
-        {
-            propertyModel =
-                stationModel_modele.getTimeSeriesModel().propertiesAt(
-                    "samplingRate");
-
-            EditStation.textFreqEchantConv.setText(stationModel_modele
-                .getTimeSeriesModel().getSampleRateConversion());
-
-            if (propertyModel.isUserProvided())
-            {
-                // saisie manuelle
-                EditStation.buttonFreqEchantSaisie.setSelection(true);
-                EditStation.buttonFreqEchantPos.setSelection(false);
-
-                EditStation.textFreqEchant.setText(""
-                        + stationModel_modele.getTimeSeriesInformation()
-                            .getSamplingRate());
-
-            }
-            else
-            {
-
-                // position dans fichier
-                EditStation.buttonFreqEchantSaisie.setSelection(false);
-                EditStation.buttonFreqEchantPos.setSelection(true);
-
-                frag = propertyModel.getFragment();
-
-                ligne = frag.getFirstLine();
-                debut = frag.getFirstCharOffset();
-                fin = frag.getLastCharOffset();
-                real_ligne =
-                    ligne
-                            + Integer.valueOf(EditDesc.lignesEnteteFichier
-                                .getText());
-
-                EditStation.textFreqEchantLigne.setText("" + real_ligne);
-                EditStation.textFreqEchantDebut.setText("" + debut);
-                EditStation.textFreqEchantFin.setText("" + fin);
-
-            }
-
-        }
-        // Si conversion vide => "*1"
-        if (EditStation.textFreqEchantConv.getText().trim().equals(""))
-        {
-            EditStation.textFreqEchantConv.setText("*1");
-        }
-
-        // HEURE
-        propertyModel = stationModel_modele.propertiesAt("time");
-
-        getFlagFragment(propertyModel.getFlag(), Global.DATETIME, Messages
-            .getString("EditStation.45").trim());
-
-        if ((ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire
-            .getSelection())
-                && !stationModel_modele.getTimestampModel().isComputed())
-        {
-
-            Utils.selectComboValeur(EditStation.comboHeure, stationModel_modele
-                .getTimestampModel().getTimeFormat().getFormatString());
-            EditStation.textHeureLigne.setText("");
-            EditStation.textHeureDebut.setText(String
-                .valueOf(stationModel_modele.getTimestampModel()
-                    .getTimeFragment().getFirstCharOffset()));
-            EditStation.textHeureFin.setText(String.valueOf(stationModel_modele
-                .getTimestampModel().getTimeFragment().getLastCharOffset()));
-        }
-        else
-        {
-            DateTimeFormat timeFormat =
-                (DateTimeFormat) propertyModel.getFormat();
-            Utils.selectComboValeur(EditStation.comboHeure, timeFormat
-                .getFormatString());
-            // EditStation.comboHeure.add(timeFormat.getFormatString(), 0);
-            // EditStation.comboHeure.select(0);
-
-            if (propertyModel.isUserProvided())
-            {
-                // saisie manuelle
-
-                // reconversion de LONG vers format normal
-                Formatter formatter = new Formatter();
-                try
-                {
-                    EditStation.textHeureSaisie.setText(formatter
-                        .formatDateTime(timeFormat.getFormatString(),
-                            station_modele.getTime()));
-                }
-                catch (ParseException e)
-                {
-                    e.printStackTrace();
-                }
-
-                // desactivation du champ manuel
-                EditStation.buttonHeureSaisie.setSelection(true);
-                EditStation.buttonHeurePos.setSelection(false);
-                EditStation.textHeureLigne.setEnabled(false);
-                EditStation.textHeureDebut.setEnabled(false);
-                EditStation.textHeureFin.setEnabled(false);
-
-            }
-            else
-            {
-                // position heure dans fichier
-                EditStation.buttonHeureSaisie.setSelection(false);
-                EditStation.buttonHeurePos.setSelection(true);
-                EditStation.textHeureLigne.setEnabled(true);
-                EditStation.textHeureDebut.setEnabled(true);
-                EditStation.textHeureFin.setEnabled(true);
-
-                frag = propertyModel.getFragment();
-                ligne = frag.getFirstLine();
-                debut = frag.getFirstCharOffset();
-                fin = frag.getLastCharOffset();
-                real_ligne =
-                    ligne
-                            + Integer.valueOf(EditDesc.lignesEnteteFichier
-                                .getText());
-
-                EditStation.textHeureLigne.setText("" + real_ligne);
-                EditStation.textHeureDebut.setText("" + debut);
-                EditStation.textHeureFin.setText("" + fin);
-            }
-        }
-
-        // date en LONG
-        propertyModel = stationModel_modele.propertiesAt("date");
-
-        getFlagFragment(propertyModel.getFlag(), Global.DATETIME, Messages
-            .getString("EditStation.45").trim());
-
-        if ((ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire
-            .getSelection())
-                && !stationModel_modele.getTimestampModel().isComputed())
-        {
-            Utils.selectComboValeur(EditStation.comboDate, stationModel_modele
-                .getTimestampModel().getDateFormat().getFormatString());
-            EditStation.textDateLigne.setText("");
-            EditStation.textDateDebut.setText(String
-                .valueOf(stationModel_modele.getTimestampModel()
-                    .getDateFragment().getFirstCharOffset()));
-            EditStation.textDateFin.setText(String.valueOf(stationModel_modele
-                .getTimestampModel().getDateFragment().getLastCharOffset()));
-        }
-        else
-        {
-            DateTimeFormat dateFormat =
-                (DateTimeFormat) propertyModel.getFormat();
-
-            Utils.selectComboValeur(EditStation.comboDate, dateFormat
-                .getFormatString());
-            // EditStation.comboDate.add(dateFormat.getFormatString(), 0);
-            // EditStation.comboDate.select(0);
-
-            if (propertyModel.isUserProvided())
-            {
-                // saisie manuelle
-
-                Formatter formatter = new Formatter();
-                try
-                {
-                    EditStation.textDateSaisie.setText(formatter
-                        .formatDateTime(dateFormat.getFormatString(),
-                            station_modele.getDate()));
-                }
-                catch (ParseException e)
-                {
-
-                    e.printStackTrace();
-                }
-
-                // desactivation du champ manuel
-                EditStation.buttonDateSaisie.setSelection(true);
-                EditStation.buttonDatePos.setSelection(false);
-                EditStation.textDateLigne.setEnabled(false);
-                EditStation.textDateDebut.setEnabled(false);
-                EditStation.textDateFin.setEnabled(false);
-
-            }
-            else
-            {
-                // position date dans fichier
-                frag = propertyModel.getFragment();
-                ligne = frag.getFirstLine();
-                debut = frag.getFirstCharOffset();
-                fin = frag.getLastCharOffset();
-                real_ligne =
-                    ligne
-                            + Integer.valueOf(EditDesc.lignesEnteteFichier
-                                .getText());
-
-                EditStation.buttonDateSaisie.setSelection(false);
-                EditStation.buttonDatePos.setSelection(true);
-                EditStation.textDateLigne.setEnabled(true);
-                EditStation.textDateDebut.setEnabled(true);
-                EditStation.textDateFin.setEnabled(true);
-
-                EditStation.textDateLigne.setText("" + real_ligne);
-                EditStation.textDateDebut.setText("" + debut);
-                EditStation.textDateFin.setText("" + fin);
-            }
-        }
-
-        // latitude
-
-        propertyModel = stationModel_modele.propertiesAt("latitude");
-        LatitudeFormat latitudeFormat =
-            (LatitudeFormat) propertyModel.getFormat();
-        String formatLat = latitudeFormat.getFormatString();
-
-        Utils.selectComboValeur(EditStation.comboLatitude, latitudeFormat
-            .getFormatString());
-        // EditStation.comboLatitude.add(latitudeFormat.getFormatString(), 0);
-        // EditStation.comboLatitude.select(0);
-
-        getFlagFragment(propertyModel.getFlag(), Global.LATITUDE, Messages
-            .getString("EditStation.19").trim());
-
-        if (propertyModel.isUserProvided())
-        {
-            // saisie manuelle latitude
-
-            // reconversion double vers format normal
-            Formatter formatter = new Formatter();
-
-            try
-            {
-                EditStation.textLatitude.setText(formatter.formatLatitude(
-                    latitudeFormat.getFormatString(), station_modele
-                        .getLatitude()));
-            }
-            catch (ParseException e)
-            {
-
-                e.printStackTrace();
-            }
-
-            EditStation.buttonLatSaisie.setSelection(true);
-
-        }
-        else
-        {
-            // position latitude dans fichier
-            EditStation.buttonLatSaisie.setSelection(false);
-            EditStation.buttonLatPos.setSelection(true);
-            frag = propertyModel.getFragment();
-
-            ligne = frag.getFirstLine();
-            debut = frag.getFirstCharOffset();
-            fin = frag.getLastCharOffset();
-            var = frag.isVariable();
-
-            real_ligne =
-                ligne + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
-
-            EditStation.textLatitudeLigne.setText("" + real_ligne);
-            EditStation.textLatitudeDebut.setText("" + debut);
-            EditStation.textLatitudeFin.setText("" + fin);
-            EditStation.buttonVarLat.setSelection(var);
-
-        }
-
-        // longitude
-        propertyModel = stationModel_modele.propertiesAt("longitude");
-        LongitudeFormat longitudeFormat =
-            (LongitudeFormat) propertyModel.getFormat();
-        String formatLong = longitudeFormat.getFormatString();
-
-        Utils.selectComboValeur(EditStation.comboLongitude, longitudeFormat
-            .getFormatString());
-        // EditStation.comboLongitude.add(longitudeFormat.getFormatString(), 0);
-        // EditStation.comboLongitude.select(0);
-
-        getFlagFragment(propertyModel.getFlag(), Global.LONGITUDE, Messages
-            .getString("EditStation.23").trim());
-
-        if (propertyModel.isUserProvided())
-        {
-            // saisie manuelle latitude
-            EditStation.buttonLongSaisie.setSelection(true);
-
-            // reconversion double vers format normal
-            Formatter formatter = new Formatter();
-
-            try
-            {
-                EditStation.textLongitude.setText(formatter.formatLongitude(
-                    longitudeFormat.getFormatString(), station_modele
-                        .getLongitude()));
-            }
-            catch (ParseException e)
-            {
-
-                e.printStackTrace();
-            }
-
-        }
-        else
-        {
-            // position latitude dans fichier
-            EditStation.buttonLongSaisie.setSelection(false);
-            EditStation.buttonLongPos.setSelection(true);
-            frag = propertyModel.getFragment();
-
-            ligne = frag.getFirstLine();
-            debut = frag.getFirstCharOffset();
-            fin = frag.getLastCharOffset();
-            var = frag.isVariable();
-
-            real_ligne =
-                ligne + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
-
-            EditStation.textLongitudeLigne.setText("" + real_ligne);
-            EditStation.textLongitudeDebut.setText("" + debut);
-            EditStation.textLongitudeFin.setText("" + fin);
-            EditStation.buttonVarLong.setSelection(var);
-        }
-
-        // profondeur
-        propertyModel = stationModel_modele.propertiesAt("bottomDepth");
-
-        getFlagFragment(propertyModel.getFlag(), Global.DEPTH, Messages
-            .getString("EditStation.27").trim());
-
-        if (propertyModel.isUserProvided())
-        {
-            // profondeur manuelle
-            EditStation.buttonProfondeurSaisie.setSelection(true);
-            if (Float.isNaN(station_modele.getBottomDepth()))
-            {
-                EditStation.textProfondeur.setText("");
-            }
-            else
-            {
-                EditStation.textProfondeur.setText(""
-                        + station_modele.getBottomDepth());
-            }
-
-        }
-        else
-        {
-            EditStation.buttonProfondeurSaisie.setSelection(false);
-            EditStation.buttonProfondeurPos.setSelection(true);
-            frag = propertyModel.getFragment();
-
-            ligne = frag.getFirstLine();
-            debut = frag.getFirstCharOffset();
-            fin = frag.getLastCharOffset();
-            real_ligne =
-                ligne + Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
-
-            EditStation.textProfondeurLigne.setText("" + real_ligne);
-            EditStation.textProfondeurDebut.setText("" + debut);
-            EditStation.textProfondeurFin.setText("" + fin);
-
-        }
-
-        // refresh de la zone d'edition
-        EditStation.razEdition();
-        EditStation.DrawingBack();
-
-        // PROFONDEUR CAPTEUR
-        // if (ViewFile.checkBoxTempo.getSelection()) {
-        if (ViewFile.radSerieTempo.getSelection()
-                || ViewFile.radTrajectoire.getSelection())
-        {
-            propertyModel =
-                stationModel_modele.getTimeSeriesModel().propertiesAt(
-                    "sensorDepth");
-            if (propertyModel.isUserProvided())
-            {
-                // saisie manuelle
-                EditStation.textProfCapteur.setText(""
-                        + stationModel_modele.getTimeSeriesInformation()
-                            .getSensorDepth());
-                EditStation.buttonProfCapteurSaisie.setSelection(true);
-                EditStation.buttonProfCapteurPos.setSelection(false);
-
-            }
-            else
-            {
-                // position dans fichier
-                frag = propertyModel.getFragment();
-                ligne = frag.getFirstLine();
-                debut = frag.getFirstCharOffset();
-                fin = frag.getLastCharOffset();
-                real_ligne =
-                    ligne
-                            + Integer.valueOf(EditDesc.lignesEnteteFichier
-                                .getText());
-
-                EditStation.buttonProfCapteurSaisie.setSelection(false);
-                EditStation.buttonProfCapteurPos.setSelection(true);
-
-                EditStation.textProfCapteurLigne.setText("" + real_ligne);
-                EditStation.textProfCapteurDebut.setText("" + debut);
-                EditStation.textProfCapteurFin.setText("" + fin);
-            }
-
-        }
-
-        // LATITUDE DE FIN
-        // if (ViewFile.checkBoxTempo.getSelection()) {
-        if (ViewFile.radSerieTempo.getSelection()
-                || ViewFile.radTrajectoire.getSelection())
-        {
-            propertyModel =
-                stationModel_modele.getTimeSeriesModel().propertiesAt(
-                    "endLatitude");
-
-            // reconversion double vers format normal
-            latitudeFormat = (LatitudeFormat) propertyModel.getFormat();
-            formatLat = latitudeFormat.getFormatString();
-            Utils.selectComboValeur(EditStation.comboLatitudeFin, formatLat);
-
-            getFlagFragment(propertyModel.getFlag(), Global.ENDLATITUDE,
-                Messages.getString("EditStation.21").trim());
-
-            if (propertyModel.isUserProvided())
-            {
-                // saisie manuelle
-                Formatter formatter = new Formatter();
-
-                try
-                {
-                    EditStation.textLatFin.setText(formatter.formatLatitude(
-                        formatLat, stationModel_modele
-                            .getTimeSeriesInformation().getEndLatitude()));
-                }
-                catch (ParseException e)
-                {
-
-                    e.printStackTrace();
-                }
-
-            }
-            else
-            {
-                // position dans fichier
-                frag = propertyModel.getFragment();
-                ligne = frag.getFirstLine();
-                debut = frag.getFirstCharOffset();
-                fin = frag.getLastCharOffset();
-                var = frag.isVariable();
-
-                real_ligne =
-                    ligne
-                            + Integer.valueOf(EditDesc.lignesEnteteFichier
-                                .getText());
-
-                EditStation.textLatFinLigne.setText("" + real_ligne);
-                EditStation.textLatFinDebut.setText("" + debut);
-                EditStation.textLatFinFin.setText("" + fin);
-                EditStation.buttonVarLatFin.setSelection(var);
-            }
-
-        }
-
-        // LONGITUDE DE FIN
-        // if (ViewFile.checkBoxTempo.getSelection()) {
-        if (ViewFile.radSerieTempo.getSelection()
-                || ViewFile.radTrajectoire.getSelection())
-        {
-            propertyModel =
-                stationModel_modele.getTimeSeriesModel().propertiesAt(
-                    "endLongitude");
-
-            // reconversion double vers format normal
-            longitudeFormat = (LongitudeFormat) propertyModel.getFormat();
-            formatLong = longitudeFormat.getFormatString();
-            Utils.selectComboValeur(EditStation.comboLongitudeFin, formatLong);
-
-            getFlagFragment(propertyModel.getFlag(), Global.ENDLONGITUDE,
-                Messages.getString("EditStation.25").trim());
-
-            if (propertyModel.isUserProvided())
-            {
-                // saisie manuelle
-                Formatter formatter = new Formatter();
-
-                try
-                {
-                    EditStation.textLongFin.setText(formatter.formatLongitude(
-                        formatLong, stationModel_modele
-                            .getTimeSeriesInformation().getEndLongitude()));
-                }
-                catch (ParseException e)
-                {
-
-                    e.printStackTrace();
-                }
-
-            }
-            else
-            {
-                // position dans fichier
-                frag = propertyModel.getFragment();
-                ligne = frag.getFirstLine();
-                debut = frag.getFirstCharOffset();
-                fin = frag.getLastCharOffset();
-                var = frag.isVariable();
-
-                real_ligne =
-                    ligne
-                            + Integer.valueOf(EditDesc.lignesEnteteFichier
-                                .getText());
-
-                EditStation.textLongFinLigne.setText("" + real_ligne);
-                EditStation.textLongFinDebut.setText("" + debut);
-                EditStation.textLongFinFin.setText("" + fin);
-                EditStation.buttonVarLongFin.setSelection(var);
-            }
-
-        }
-
-        // PROFONDEUR DE FIN
-        // if (ViewFile.checkBoxTempo.getSelection()) {
-        if (ViewFile.radSerieTempo.getSelection()
-                || ViewFile.radTrajectoire.getSelection())
-        {
-            propertyModel =
-                stationModel_modele.getTimeSeriesModel().propertiesAt(
-                    "endDepth");
-
-            getFlagFragment(propertyModel.getFlag(), Global.ENDDEPTH, Messages
-                .getString("EditStation.29").trim());
-
-            if (propertyModel.isUserProvided())
-            {
-                // saisie manuelle
-                if (Float.isNaN(stationModel_modele.getTimeSeriesInformation()
-                    .getEndDepth()))
-                {
-                    EditStation.textProfFin.setText("");
-                }
-                else
-                {
-                    EditStation.textProfFin.setText(""
-                            + stationModel_modele.getTimeSeriesInformation()
-                                .getEndDepth());
-                }
-
-            }
-            else
-            {
-                // position dans fichier
-                frag = propertyModel.getFragment();
-                ligne = frag.getFirstLine();
-                debut = frag.getFirstCharOffset();
-                fin = frag.getLastCharOffset();
-                real_ligne =
-                    ligne
-                            + Integer.valueOf(EditDesc.lignesEnteteFichier
-                                .getText());
-
-                EditStation.textProfFinLigne.setText("" + real_ligne);
-                EditStation.textProfFinDebut.setText("" + debut);
-                EditStation.textProfFinFin.setText("" + fin);
-            }
-
-        }
-
-        // DECLINAISON MAGNETIQUE
-        // if (ViewFile.checkBoxTempo.getSelection()) {
-        if (ViewFile.radSerieTempo.getSelection()
-                || ViewFile.radTrajectoire.getSelection())
-        {
-            propertyModel =
-                stationModel_modele.getTimeSeriesModel().propertiesAt(
-                    "magneticDeclination");
-            if (propertyModel.isUserProvided())
-            {
-                // saisie manuelle
-                EditStation.textDeclinMagnet.setText(""
-                        + stationModel_modele.getTimeSeriesInformation()
-                            .getMagneticDeclination());
-
-            }
-            else
-            {
-                // position dans fichier
-                frag = propertyModel.getFragment();
-                ligne = frag.getFirstLine();
-                debut = frag.getFirstCharOffset();
-                fin = frag.getLastCharOffset();
-                real_ligne =
-                    ligne
-                            + Integer.valueOf(EditDesc.lignesEnteteFichier
-                                .getText());
-
-                EditStation.textDeclinMagnetLigne.setText("" + real_ligne);
-                EditStation.textDeclinMagnetDebut.setText("" + debut);
-                EditStation.textDeclinMagnetFin.setText("" + fin);
-            }
-
-        }
-
-        // DECALLAGE TU
-        propertyModel = stationModel_modele.propertiesAt("offsetTU");
-        if (propertyModel.isUserProvided())
-        {
-            // saisie utilisateur
-            EditStation.buttonTUSaisie.setSelection(true);
-            EditStation.buttonTUPos.setSelection(false);
-            EditStation.textTUDebut.setEnabled(false);
-            EditStation.textTULigne.setEnabled(false);
-            EditStation.textTUFin.setEnabled(false);
-            EditStation.textTU.setText("" + station_modele.getOffsetTU());
-
-        }
-        else
-        {
-            // position fichier
-            frag = propertyModel.getFragment();
-
-            EditStation.buttonTUSaisie.setSelection(false);
-            EditStation.buttonTUPos.setSelection(true);
-            EditStation.textTUDebut.setEnabled(true);
-            EditStation.textTULigne.setEnabled(true);
-            EditStation.textTUFin.setEnabled(true);
-
-            EditStation.textTULigne.setText("" + frag.getFirstLine());
-            EditStation.textTUDebut.setText("" + frag.getFirstCharOffset());
-            EditStation.textTUFin.setText("" + frag.getLastCharOffset());
-        }
-
-        // CDI déplacé dans la config
-//        if (stationModel_modele.getCdi() != null)
-//        {
-//            ViewFile.comboTypePlateForme.setText(stationModel_modele.getCdi()
-//                .getTypePlateForme());
-//            ViewFile.comboAccesDonnees.setText(stationModel_modele.getCdi()
-//                .getAccesDonnees());
-//        }
-
-        // FLAGS QC
-        if (stationModel_modele.getFlagTable() != null)
-        {
-            EditStation.flagTable = stationModel_modele.getFlagTable();
-        }
-        else
-        {
-            Utils.configuration.getDefaultFlagTable();
-        }
-
-        EditStation.flagTable.fillTable(EditStation.tabCorrespondance);
-
-        ViewEdit.formEdition.reflow(true);
-
-        // System.out.println("Fin remplissage onglet Station");
-
     }
 
     public static void main(String[] args)
@@ -3112,14 +1064,14 @@ public class DataModel
         try
         {
 
-            DateTimeFormat format = new DateTimeFormat("MMM dd yyyy");
+            DateTimeFormat format = new DateTimeFormat("MMM dd yyyy"); //$NON-NLS-1$
             format.toString();
 
         }
         catch (Exception e)
         {
             e.printStackTrace();
-            System.out.println(">>>>" + e.getMessage());
+            System.out.println(">>>>" + e.getMessage()); //$NON-NLS-1$
         }
     }
 
@@ -3128,17 +1080,17 @@ public class DataModel
         int i;
         FlagFragment flag = new FlagFragment();
 
-        for (i = 0; i < EditStation.tabFlagQC.getItemCount(); i++)
+        for (i = 0; i < EditStation.qcFlags.getTabFlagQC().getItemCount(); i++)
         {
-            if (EditStation.tabFlagQC.getItems()[i].getText(0).equals(property))
+            if (EditStation.qcFlags.getTabFlagQC().getItems()[i].getText(0).equals(property))
             {
                 flag.setLine(Integer
-                    .valueOf(EditStation.tabFlagQC.getItems()[i].getText(2))
+                    .valueOf(EditStation.qcFlags.getTabFlagQC().getItems()[i].getText(2))
                         - Integer.valueOf(EditDesc.lignesEnteteFichier
                             .getText()));
-                flag.setFirstCharOffset(EditStation.tabFlagQC.getItems()[i]
+                flag.setFirstCharOffset(EditStation.qcFlags.getTabFlagQC().getItems()[i]
                     .getText(3));
-                flag.setLastCharOffset(EditStation.tabFlagQC.getItems()[i]
+                flag.setLastCharOffset(EditStation.qcFlags.getTabFlagQC().getItems()[i]
                     .getText(4));
                 return flag;
             }
@@ -3152,17 +1104,17 @@ public class DataModel
         if (flag != null)
         {
             // Teste si la metadonnee est deje presente dans le tableau
-            int size = EditStation.tabFlagQC.getItemCount();
+            int size = EditStation.qcFlags.getTabFlagQC().getItemCount();
             for (int i = 0; i < size; i++)
             {
-                if (EditStation.tabFlagQC.getItems()[i].getText(0).equals(
+                if (EditStation.qcFlags.getTabFlagQC().getItems()[i].getText(0).equals(
                     propertyCode))
                 {
                     return;
                 }
             }
 
-            TableItem item = new TableItem(EditStation.tabFlagQC, SWT.NONE);
+            TableItem item = new TableItem(EditStation.qcFlags.getTabFlagQC(), SWT.NONE);
             item.setText(0, propertyCode);
             item.setText(1, propertyName);
             item.setText(2, String.valueOf(flag.getLine()
@@ -3191,13 +1143,13 @@ public class DataModel
             LineFragment flag = paraCourant.getFlag();
 
             // code / fullName / sortie / format
-            typeData.setCode(modeleCourant.getCode() + " - "
+            typeData.setCode(modeleCourant.getCode() + " - " //$NON-NLS-1$
                     + modeleCourant.getFullName());
             typeData.setNom(modeleCourant.getFullName());
 
-            if (paraCourant.getConversionFormula().equals(""))
+            if (paraCourant.getConversionFormula().equals(Global.EMPTY_STRING))
             {
-                typeData.setConversion("x*1");
+                typeData.setConversion("x*1"); //$NON-NLS-1$
             }
             else
             {
@@ -3211,7 +1163,7 @@ public class DataModel
                     .setDebutFlag(String.valueOf(flag.getFirstCharOffset()));
                 typeData.setFinFlag(String.valueOf(flag.getLastCharOffset()));
             }
-            typeData.setEntree("" + paraCourant.getInputDefault());
+            typeData.setEntree(Global.EMPTY_STRING + paraCourant.getInputDefault());
             // typeData.setSensor(paraCourant.get);
             typeData.setUnite(modeleCourant.getUnit());
             typeData.setFormat(modeleCourant.getFormat());
@@ -3245,10 +1197,10 @@ public class DataModel
         // .getFormat().getFormatString(), 0);
         // EditData.comboTotal.select(0);
         //
-        // EditData.textTotalDebut.setText(""
+        // EditData.textTotalDebut.setText(Global.EMPTY_STRING
         // + stationModel_modele.getTimestampModel()
         // .getDateTimeFragment().getFirstCharOffset());
-        // EditData.textTotalFin.setText(""
+        // EditData.textTotalFin.setText(Global.EMPTY_STRING
         // + stationModel_modele.getTimestampModel()
         // .getDateTimeFragment().getLastCharOffset());
         // EditData.test2();

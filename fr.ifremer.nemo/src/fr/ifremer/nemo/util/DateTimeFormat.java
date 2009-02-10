@@ -31,7 +31,7 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 
 	public DateTimeFormat() {
 		super();
-		_formatString = "";
+		_formatString = Global.SPACE;
 	}
 
 	/**

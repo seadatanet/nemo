@@ -24,7 +24,9 @@ import fr.ifremer.nemo.input.SurveyMedia;
 import fr.ifremer.nemo.output.CDIMappingWriter;
 import fr.ifremer.nemo.output.CDIResumeWriter;
 import fr.ifremer.nemo.output.ProgressNotification;
+import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Formatter;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 public class EditConversion extends Thread {
@@ -100,7 +102,8 @@ public class EditConversion extends Thread {
 		// listener sur le bouton conversion
 		buttonConversion
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					public void widgetSelected(
+					@Override
+                    public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
 						try {
 							// Test si la config est bien remplie
@@ -116,9 +119,9 @@ public class EditConversion extends Thread {
 							DataModel.stationModel.setLastRef(null);
 
 							if (ViewFile.radMedatlas.getSelection()) {
-								NemoLists.writeSdnParameters("*");
+								NemoLists.writeSdnParameters(Conversion.MEDATLAS);
 							} else {
-								NemoLists.writeSdnParameters("//");
+								NemoLists.writeSdnParameters(Conversion.ODV);
 							}
 
 							// RAZ de la liste des stations triées
@@ -220,8 +223,8 @@ public class EditConversion extends Thread {
 
 		nomFichierSortie = "";
 
-		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
-		FileDialog dialog = new FileDialog(shell, SWT.SAVE
+		Shell newShell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+		FileDialog dialog = new FileDialog(newShell, SWT.SAVE
 				| SWT.APPLICATION_MODAL);
 		dialog.setText(Messages.getString("EditConversion.13")); //$NON-NLS-1$
 
@@ -325,8 +328,8 @@ public class EditConversion extends Thread {
 
 	public static void choixDossierSortie() {
 
-        nomFichierSortie = "";
-        nomDossierSortie = "";
+        nomFichierSortie = Global.EMPTY_STRING;
+        nomDossierSortie = Global.EMPTY_STRING;
 
 		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		DirectoryDialog dialog = new DirectoryDialog(shell, SWT.SAVE
@@ -396,7 +399,7 @@ public class EditConversion extends Thread {
 	}
 
 	public static void runSWTProgress() {
-		Utils.messageErreur("");  //$NON-NLS-1$
+		Utils.messageErreur(Global.EMPTY_STRING);
 		SWTProcess.interrompu = false;
 		SurveyMedia.interrompu = false;
 		try {
@@ -421,9 +424,9 @@ public class EditConversion extends Thread {
 
 		// Stations triées
 		if (getSortedStations().size() > 0) {
-			String sortedMessage = "\n\n" + getSortedStations().size() + " "  //$NON-NLS-1$  //$NON-NLS-2$
-					+ Messages.getString("EditConversion.28") + " ";  //$NON-NLS-1$  //$NON-NLS-2$
-			 
+			String sortedMessage = "\n\n" + getSortedStations().size() + Global.SPACE  //$NON-NLS-1$
+					+ Messages.getString("EditConversion.28") + Global.SPACE;  //$NON-NLS-1$
+			
 			for (Entry<String, Integer> currentEntry : getSortedStations()
 					.entrySet()) {
 				// Utils.messageOKAppend("\n\tstation " + currentEntry.getKey()
@@ -469,12 +472,12 @@ public class EditConversion extends Thread {
 	}
 
 	public static String messageErreur() {
-		String message = "";  //$NON-NLS-1$
+		String message = Global.EMPTY_STRING;
 
 		if (getErreurFichier() != null) {
-			if (!getErreurFichier().trim().equals("")) {  //$NON-NLS-1$
-				message += Messages.getString("EditConversion.20") + "\t : \t"  //$NON-NLS-1$  //$NON-NLS-2$
-						+ getErreurFichier() + "\r\n";  //$NON-NLS-1$
+			if (!getErreurFichier().trim().equals(Global.EMPTY_STRING)) {
+				message += Messages.getString("EditConversion.20") + "\t : \t" //$NON-NLS-1$ 
+						+ getErreurFichier() + Global.RN;
 			}
 		}
 
@@ -483,21 +486,21 @@ public class EditConversion extends Thread {
 				// Si l'erreur se trouve dans l'en-tête de station, la ligne
 				// indiquée
 				// n'est pas forcément la bonne, il vaut mieux ne pas l'indiquer
-				return "";  //$NON-NLS-1$
+				return Global.EMPTY_STRING;
 			}
-			message += Messages.getString("EditConversion.21") + "\t : \t"  //$NON-NLS-1$  //$NON-NLS-2$
-					+ getErreurLigne() + "\r\n";  //$NON-NLS-1$
+			message += Messages.getString("EditConversion.21") + "\t : \t" //$NON-NLS-1$  //$NON-NLS-2$ 
+					+ getErreurLigne() + Global.RN;
 		}
 
 		if (getErreurChaine() != null) {
-			if (!getErreurChaine().trim().equals("")) {  //$NON-NLS-1$
-				message += Messages.getString("EditConversion.22") + "\t : \t"  //$NON-NLS-1$  //$NON-NLS-2$
+			if (!getErreurChaine().trim().equals(Global.EMPTY_STRING)) {
+				message += Messages.getString("EditConversion.22") + "\t : \t" //$NON-NLS-1$  //$NON-NLS-2$
 						+ getErreurChaine();
 			}
 		}
 
-		if (!message.equals("")) {  //$NON-NLS-1$
-			message = "\r\n" + Messages.getString("EditConversion.23") + "\r\n"  //$NON-NLS-1$  //$NON-NLS-2$  //$NON-NLS-3$
+		if (!message.equals(Global.EMPTY_STRING)) {
+			message = Global.RN + Messages.getString("EditConversion.23") + Global.RN //$NON-NLS-1$
 					+ message;
 		}
 
@@ -513,16 +516,16 @@ public class EditConversion extends Thread {
 	}
 
 	public static boolean askDataSetRef() 
-    {
-		if (getDataSetRef().equals(""))   //$NON-NLS-1$
-        {
-			String strDefault = "";  //$NON-NLS-1$
+	{
+		if (getDataSetRef().equals(Global.EMPTY_STRING)) 
+		{
+			String strDefault = Global.EMPTY_STRING;
 			if (DataModel.dirSurvey != null) {
 				strDefault = DataModel.dirSurvey.getModel().getReference();
-				if (strDefault.equals("")) strDefault = DataModel.dirSurvey.getModel().getName();
+				if (strDefault.equals(Global.EMPTY_STRING)) strDefault = DataModel.dirSurvey.getModel().getName();
 			} else if (DataModel.singleSurvey != null) {
 				strDefault = DataModel.singleSurvey.getModel().getReference();
-				if (strDefault.equals("")) strDefault = DataModel.singleSurvey.getModel().getName();
+				if (strDefault.equals(Global.EMPTY_STRING)) strDefault = DataModel.singleSurvey.getModel().getName();
 			}
 			InputDialog inputDataSetRef = new InputDialog(PlatformUI
 					.getWorkbench().getDisplay().getActiveShell(), Messages
@@ -534,11 +537,12 @@ public class EditConversion extends Thread {
 				_dataSetRef = inputDataSetRef.getValue();
 				return true;
 			} else {
-				_dataSetRef = "";  //$NON-NLS-1$
+				_dataSetRef = Global.EMPTY_STRING;
 				return false;
 			}
-		} else 
-        {
+		} 
+		else 
+		{
 			return true;
 		}
 	}
@@ -585,7 +589,7 @@ public class EditConversion extends Thread {
 	public static String getLocalCdiId(Station station, String surveyReference) {
 		// FAE 1143 : nommage du LOCAL_CDI_ID
 		
-		String temp = "";
+		String temp = Global.EMPTY_STRING;
 		
 		if (SWTProcess.getOdv()) {
 			// ODV      -> [Référence du jeu de données]
@@ -597,14 +601,14 @@ public class EditConversion extends Thread {
 		
 		// [Numéro station] codé sur 5 caractères il est complété à gauche par des '0'. 
 		String stationReference = station.getReference().trim();
-		if (!temp.equals("")) temp += "_";
+		if (!temp.equals(Global.EMPTY_STRING)) temp += "_"; //$NON-NLS-1$
 		temp += Formatter.getSingleton().padZero(stationReference, 5);
 		
 		// [Type de données] s'il existe
 		if (station.getDataType() != null) {
-			if (!station.getDataType().getCode().equals("")) {
-				if (!temp.equals("")) {
-					temp += "_";
+			if (!station.getDataType().getCode().equals(Global.EMPTY_STRING)) {
+				if (!temp.equals(Global.EMPTY_STRING)) {
+					temp += "_"; //$NON-NLS-1$
 				}
 				temp += station.getDataType().getCode();
 			}
@@ -615,52 +619,52 @@ public class EditConversion extends Thread {
 	
 	public static boolean checkConfig() {
 		boolean blnOK = true;
-		String message = Messages.getString("CDIResumeWriter.configMessage");
+		String message = Messages.getString("CDIResumeWriter.configMessage"); //$NON-NLS-1$
 		
-		if (Utils.configuration.getIdEdmoRespCdi().trim().equals("")) {
-			message += "\r\n - " + Messages.getString("OptionsAction.21");
+		if (Utils.configuration.getIdEdmoRespCdi().trim().equals(Global.EMPTY_STRING)) {
+			message += Global.RN + " - " + Messages.getString("OptionsAction.21"); //$NON-NLS-1$ //$NON-NLS-2$
 			blnOK = false;
 		}
 		
-		if (Utils.configuration.getCodeEdmoDonnees().trim().equals("")) {
-			message += "\r\n - " + Messages.getString("OptionsAction.24");
+		if (Utils.configuration.getCodeEdmoDonnees().trim().equals(Global.EMPTY_STRING)) {
+			message += Global.RN + " - " + Messages.getString("OptionsAction.24"); //$NON-NLS-1$ //$NON-NLS-2$
 			blnOK = false;
 		}
 
-		if (Utils.configuration.getIdEdmoRespDonnees().trim().equals("")) {
-			message += "\r\n - " + Messages.getString("OptionsAction.25");
+		if (Utils.configuration.getIdEdmoRespDonnees().trim().equals(Global.EMPTY_STRING)) {
+			message += Global.RN + " - " + Messages.getString("OptionsAction.25"); //$NON-NLS-1$ //$NON-NLS-2$
 			blnOK = false;
 		}
 		
-		if (Utils.configuration.getIdEdmoDistDonnees().trim().equals("")) {
-			message += "\r\n - " + Messages.getString("OptionsAction.26");
+		if (Utils.configuration.getIdEdmoDistDonnees().trim().equals(Global.EMPTY_STRING)) {
+			message += Global.RN + " - " + Messages.getString("OptionsAction.26"); //$NON-NLS-1$ //$NON-NLS-2$
 			blnOK = false;
 		}
 		
-		if (Utils.configuration.getCdiURL().trim().equals("")) {
-			message += "\r\n - " + Messages.getString("OptionsAction.22");
+		if (Utils.configuration.getCdiURL().trim().equals(Global.EMPTY_STRING)) {
+			message += Global.RN + " - " + Messages.getString("OptionsAction.22"); //$NON-NLS-1$ //$NON-NLS-2$
 			blnOK = false;
 		}
 		
-		if (Utils.configuration.getCdiMethod().trim().equals("")) {
-			message += "\r\n - " + Messages.getString("OptionsAction.23");
+		if (Utils.configuration.getCdiMethod().trim().equals(Global.EMPTY_STRING)) {
+			message += Global.RN + " - " + Messages.getString("OptionsAction.23"); //$NON-NLS-1$ //$NON-NLS-2$
 			blnOK = false;
 		}
 		
-		if (Utils.configuration.getFichierMapping().trim().equals("")) {
-			message += "\r\n - " + Messages.getString("OptionsAction.31");
+		if (Utils.configuration.getFichierMapping().trim().equals(Global.EMPTY_STRING)) {
+			message += Global.RN + " - " + Messages.getString("OptionsAction.31"); //$NON-NLS-1$ //$NON-NLS-2$
 			blnOK = false;
 		}
 		
-		if (Utils.configuration.getArboMapping().trim().equals("")) {
-			message += "\r\n - " + Messages.getString("OptionsAction.32");
+		if (Utils.configuration.getArboMapping().trim().equals(Global.EMPTY_STRING)) {
+			message += Global.RN + " - " + Messages.getString("OptionsAction.32"); //$NON-NLS-1$ //$NON-NLS-2$
 			blnOK = false;
 		}
 		
 		if (!blnOK) {
 			try {
 				String[] buttons = new String[1];
-				buttons[0] = "OK";
+				buttons[0] = "OK"; //$NON-NLS-1$ 
 				MessageDialog dialog = new MessageDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), Messages.getString("CDIResumeWriter.configTitle"), null, message, MessageDialog.NONE, buttons, 0);
 				dialog.open();
 			} catch (Exception e) {

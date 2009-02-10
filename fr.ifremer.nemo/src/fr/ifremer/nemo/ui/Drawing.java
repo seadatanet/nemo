@@ -1,8 +1,6 @@
 package fr.ifremer.nemo.ui;
 
 import java.util.ArrayList;
-import java.util.TreeMap;
-import java.util.Map.Entry;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
@@ -22,10 +20,8 @@ import org.eclipse.ui.forms.events.ExpansionEvent;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
-import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
 public class Drawing {
 
