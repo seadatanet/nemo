@@ -27,7 +27,7 @@
 	<xs:element name="dataIdInfo" type="DataIdent"/>
 	<xs:simpleType name="element_Name_Value">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="Cruise Summary Record"/>
+			<xs:enumeration value="Cruise Summary record"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="element_Name">
@@ -96,7 +96,7 @@
 	</xs:attributeGroup>
 	<xs:complexType name="RespParty">
 		<xs:sequence>
-			<xs:element name="rpIndName" default="" nillable="1"/>
+			<xs:element name="rpIndName" default="" nillable="1" minOccurs="0"/>
 			<xs:element ref="rpOrgName"/>
 			<xs:element ref="rpCntInfo" minOccurs="0"/>
 			<xs:element ref="role"/>
@@ -361,13 +361,13 @@
 			<xs:element ref="ConstsTypes"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="Consts" type="Consts" substitutionGroup="ConstsTypes"/>
-	<xs:complexType name="Consts">
+	<xs:element name="LegConsts" type="LegConsts" substitutionGroup="ConstsTypes"/>
+	<xs:complexType name="LegConsts">
 		<xs:sequence>
-			<xs:element ref="useLimit" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="accessConsts" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="useLimit">
+	<xs:element name="accessConsts">
 		<xs:complexType>
 			<xs:simpleContent>
 				<xs:extension base="xs:string">
@@ -464,8 +464,7 @@
 	<xs:element name="identCode">
 		<xs:complexType>
 			<xs:simpleContent>
-				<xs:extension base="xs:string">
-				</xs:extension>
+				<xs:extension base="xs:string"/>
 			</xs:simpleContent>
 		</xs:complexType>
 	</xs:element>

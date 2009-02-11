@@ -1308,7 +1308,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 		// 2. Compile the schema.
 		// Here the schema is loaded from a java.io.File, but you could use
 		// a java.net.URL or a javax.xml.transform.Source instead.
-		File schemaLocation = new File("resources/CSR_sdn_V1.0.xsd");
+		File schemaLocation = new File("resources/CSR_sdn_V1.3.xsd");
 		Schema schema = factory.newSchema(schemaLocation);
 
 		// 3. Get a validator from the schema.
@@ -1393,4 +1393,13 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 	public void setDataSize(float size) {
 		_dataSize = size;
 	}
+
+    /**
+     * Setter sur _countryName.
+     * @param countryName the countryName to set
+     */
+    public void setCountryName(String countryName)
+    {
+        _countryName = countryName;
+    }
 } /* End of class: Survey */

@@ -674,17 +674,11 @@ public class EditSurvey {
 
 		if (survey.getRegionName() != null) {
 			Utils.selectComboLibelle(comboRegion, survey.getRegionName());
-//			EditSurvey.textRegion.setText(survey.getRegionName());
 		}
 
-		// Source de données
-		// if (survey.getCountryCode() != null) {
-		// EditSurvey.textPays.setText(survey.getCountryCode());
-		// }
-		if (survey.getCountryCode() != null) {
-			Utils.selectComboCode(EditSurvey.comboCountries, survey
-					.getCountryCode());
-		}
+        if (survey.getCountryName() != null) {
+            Utils.selectComboLibelle(comboCountries, survey.getCountryName());
+        }
 
 		if (survey.getLaboratories() != null) {
 			EditSurvey.textLabo.setText(survey.getLaboratories());
@@ -700,8 +694,6 @@ public class EditSurvey {
 
 		// Centre d'archivage
 		if (survey.getDataCentre() != null) {
-			// EditSurvey.textCentre.setText(survey.getDataCentre());
-
 			// selection dans la comboList
 			Utils.selectComboCode(comboDataCentres, survey.getDataCentre());
 		}

@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 
-<!-- Projet: CONVMED / IFREMER /SISMER.                                                -->
-<!-- Auteur: G.BUNEL, Y.CAUDAL                                                        -->
+<!-- Projet: CONVMED / IFREMER /SISMER.                                         -->
+<!-- Auteur: G.BUNEL, Y.CAUDAL                                                  -->
 <!-- Version: 1.1                                                               -->
-<!-- Date: 07/11/20006, Rvision: 06/12/2007                                                          -->
+<!-- Date: 07/11/20006, Revision: 06/12/2007                                    -->
 <!-- Description: conversion d un fichier XML de description de campagne        -->
 <!--              provenant de l'ifremer en information campagne exploitable    -->
 
@@ -50,7 +50,6 @@
             <!-- FAE021 Fin -->      
                       
             <!-- FAE028 Evolution : code pays  -->     
-            <country><xsl:value-of select="Metadata/dataIdInfo/idCitation/citRespParty/rpCntInfo/cntAddress/country"/></country>
             <countryName><xsl:value-of select="Metadata/dataIdInfo/idCitation/citRespParty/rpCntInfo/cntAddress/country"/></countryName>
     		<!-- FAE028 Fin -->  
 
@@ -80,49 +79,49 @@
             <!-- FAE021 Evolution : changement de format du fichier xml   -->
                 <xsl:choose>
                 	<!-- FAE034 Evolution : changement de format du fichier xml   -->
-                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/Consts/useLimit/@SDNIdent ,'CC')">
+                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/LegConsts/accessConsts/@SDNIdent ,'CC')">
                         <availability>limited</availability>
                     </xsl:when>
                     
-                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/Consts/useLimit/@SDNIdent ,'FE')">
+                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/LegConsts/accessConsts/@SDNIdent ,'FE')">
                         <availability>limited</availability>
                     </xsl:when>
                     
-                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/Consts/useLimit/@SDNIdent ,'LI')">
+                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/LegConsts/accessConsts/@SDNIdent ,'LI')">
                         <availability>limited</availability>
                     </xsl:when>
                     
-                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/Consts/useLimit/@SDNIdent ,'MO')">
+                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/LegConsts/accessConsts/@SDNIdent ,'MO')">
                         <availability>limited</availability>
                     </xsl:when>
                     
-                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/Consts/useLimit/@SDNIdent ,'NC')">
+                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/LegConsts/accessConsts/@SDNIdent ,'NC')">
                         <availability>limited</availability>
                     </xsl:when>
                     
-                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/Consts/useLimit/@SDNIdent ,'OG')">
+                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/LegConsts/accessConsts/@SDNIdent ,'OG')">
                         <availability>limited</availability>
                     </xsl:when>
                     
-                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/Consts/useLimit/@SDNIdent ,'RS')">
+                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/LegConsts/accessConsts/@SDNIdent ,'RS')">
                         <availability>limited</availability>
                     </xsl:when>
                     
-                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/Consts/useLimit/@SDNIdent ,'SR')">
+                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/LegConsts/accessConsts/@SDNIdent ,'SR')">
                         <availability>limited</availability>
                     </xsl:when>
                     
                     <!-- FAE034 Fin --> 
                     
-                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/Consts/useLimit/@SDNIdent ,'UN')">
+                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/LegConsts/accessConsts/@SDNIdent ,'UN')">
                         <availability>publicly</availability>
                     </xsl:when>
                     
-                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/Consts/useLimit/@SDNIdent ,'UK')">
+                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/LegConsts/accessConsts/@SDNIdent ,'UK')">
                         <availability>publicly</availability>
                     </xsl:when> 
                                      
-                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/Consts/useLimit/@SDNIdent ,'NA')">
+                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/LegConsts/accessConsts/@SDNIdent ,'NA')">
                         <availability>confidential</availability>
                     </xsl:when>
                     
