@@ -524,7 +524,8 @@ public class StationSection extends NemoSection
                     switch (cType){
                         case DATE : 
                             errorMessage = Messages.getString("Etape.122");    //$NON-NLS-1$
-                            dateTest(); break;
+                            dateTest(); 
+                            break;
                         case TIME : 
                             errorMessage = Messages.getString("Etape.121");    //$NON-NLS-1$
                             timeTest(); 
@@ -541,9 +542,15 @@ public class StationSection extends NemoSection
                             samplingRateTest(); 
                             break;
                         case NONE : 
-                            stationNumberTest(); 
+                            if (name.equals(S_STATIONNUMBER)){                                
+                                stationNumberTest(); 
+                            }else{
+                                defaultTest();
+                            }
                             break;
-                        default : break;
+                        default : 
+                            defaultTest();
+                            break;
                     }
                 }catch (ParseException e) {
 
@@ -707,8 +714,19 @@ public class StationSection extends NemoSection
                 resultTest.setText(String.valueOf(resultJEP));
                 resultTest.pack();
             }    
-      }
-  }
+        }
+    }
+
+    protected void defaultTest(){
+        String result = Global.EMPTY_STRING;
+        if (!isManual()) {
+            result = autoInput.getValue(0).trim();
+        } else {
+            result = manualInput.getValue().trim();
+        }
+        resultTest.setText(result);
+        resultTest.pack();
+    }
     
 
     

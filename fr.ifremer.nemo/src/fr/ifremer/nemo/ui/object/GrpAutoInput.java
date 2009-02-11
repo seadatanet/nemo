@@ -161,21 +161,23 @@ public class GrpAutoInput implements UIobject
 
     // pas utile pour l'instant
     public String getValue(){
+        boolean posVariable = isVariablePos();
         String result = Global.EMPTY_STRING;
         for (AutoLine line : lines){
-            if ((line.getValue() != null) && (!line.getValue().trim().equals(Global.EMPTY_STRING))) {
-                result += line.getValue();
+            if ((line.getValue(posVariable) != null) && (!line.getValue(posVariable).trim().equals(Global.EMPTY_STRING))) {
+                result += line.getValue(posVariable);
             }
         }
         return result;
     }
     
     public String getValue(int i){
+        boolean posVariable = isVariablePos();
         String result = Global.EMPTY_STRING;
         AutoLine line = lines.get(i);
-        if ((line.getValue() != null) 
-                && (!line.getValue().trim().equals(Global.EMPTY_STRING))) {
-            result = line.getValue();
+        if ((line.getValue(posVariable) != null) 
+                && (!line.getValue(posVariable).trim().equals(Global.EMPTY_STRING))) {
+            result = line.getValue(posVariable);
         }
         return result;
     }

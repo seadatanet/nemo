@@ -342,7 +342,7 @@ public class AutoLine implements UIobject
         return cursor;
     }
 
-    public String getValue(){
+    public String getValue(boolean posVariable){
         String result = Global.EMPTY_STRING;
         if (numberLine.getText() != null 
                 && start.getText() != null && !start.getText().equals(Global.EMPTY_STRING)
@@ -354,9 +354,26 @@ public class AutoLine implements UIobject
             } else {
                 ligne = Utils.lignesBrutes.get(Integer.parseInt(numberLine.getText()) - 1);
             }
+
+            int iEnd = Integer.parseInt(end.getText());
+            if (posVariable){ 
+                int index = iEnd;
+                String nextChar = Global.ZERO;
+                boolean continueBoucle = true;
+                while (continueBoucle && index < ligne.length()){
+                    nextChar = ligne.substring(index, index + 1);
+                    if (nextChar.equals(".") 
+                        || nextChar.equals(",")
+                        || Utils.isNumeric(nextChar)){
+                        index++;
+                    }else{
+                        continueBoucle = false;
+                    }
+                }
+                iEnd = index;
+            }
             
-            result = ligne.substring(Integer.parseInt(start.getText()) - 1,
-                                     Integer.parseInt(end.getText()));
+            result = ligne.substring(Integer.parseInt(start.getText()) - 1, iEnd);
         }
         return result;
     }
