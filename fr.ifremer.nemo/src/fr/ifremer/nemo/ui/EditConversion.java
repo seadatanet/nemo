@@ -137,28 +137,20 @@ public class EditConversion extends Thread {
 									}
 								}
 
-								// test pour savoir si on est en campagne ou pas
-								if (ViewFile.isCollection()) {
-									if (Utils.configuration.getWriteCdi()) {
-                                        
-										CDIResumeWriter.getInstance().reset();
-										CDIResumeWriter.getInstance()
-												.choixFichierSortie();
-									}
+                                //On demande les infos pour faire le résumé CDI, qui sera fait plus tard
+                                if (Utils.configuration.getWriteCdi()) {
+                                    
+                                    CDIResumeWriter.getInstance().reset();
+                                    CDIResumeWriter.getInstance()
+                                            .choixFichierSortie();
+                                }        
+                                
+                                // test pour savoir si on est en campagne ou pas
+                                if (ViewFile.isCollection()) {
 
 									choixDossierSortie();
 
-									// Ecriture du resume CDI
-									if (Utils.configuration.getWriteCdi()
-											&& !SurveyMedia.interrompu
-											&& !SWTProcess.interrompu) {
-										try {
-											CDIResumeWriter.getInstance()
-													.writeResume();
-										} catch (IOException ex) {
-											ex.printStackTrace();
-										}
-									}
+	
 								} else if (!ViewFile.isCollection()
 										&& ViewFile.radODV.getSelection()
 										&& ViewFile.radMonoStation
@@ -167,6 +159,17 @@ public class EditConversion extends Thread {
 								} else {
 									choixFichierSortie();
 								}
+                                // Ecriture du resume CDI
+                                if (Utils.configuration.getWriteCdi()
+                                        && !SurveyMedia.interrompu
+                                        && !SWTProcess.interrompu) {
+                                    try {
+                                        CDIResumeWriter.getInstance()
+                                                .writeResume();
+                                    } catch (IOException ex) {
+                                        ex.printStackTrace();
+                                    }
+                                }                                
 							} else {
 								Utils.messageErreur(Messages
 										.getString("EditConversion.15"));

@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
+import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.input.SurveyMedia;
@@ -20,7 +21,6 @@ import fr.ifremer.nemo.mapping.Mapping;
 import fr.ifremer.nemo.mapping.MappingTable;
 import fr.ifremer.nemo.medatlas.MedatlasSurveyWriter;
 import fr.ifremer.nemo.odv.ODVSurveyWriter;
-/*import fr.ifremer.nemo.output.CDIMappingWriter;*/
 import fr.ifremer.nemo.output.CDIResumeWriter;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.ProgressNotification;
@@ -236,6 +236,9 @@ public class SWTProcess implements IRunnableWithProgress {
 						}
 					}
 				}
+                if (Configuration.getSingleton().getWriteCdi()) {
+                    CDIResumeWriter.getInstance().addSurvey(survey);
+                }
 			} else {
 				// interruption
 				interrompu = true;
@@ -395,7 +398,7 @@ public class SWTProcess implements IRunnableWithProgress {
 						}
 					}
 
-					if (ViewFile.writeResume) {
+					if (Configuration.getSingleton().getWriteCdi()) {
 						CDIResumeWriter.getInstance().addSurvey(survey);
 					}
 				} else {
@@ -414,7 +417,7 @@ public class SWTProcess implements IRunnableWithProgress {
 			writerODV.release();
 
 			if (!interrompu) {
-				if (!ViewFile.writeResume) {
+				if (!Configuration.getSingleton().getWriteCdi()) {
 					survey.release();
 				}
 			}
@@ -560,7 +563,7 @@ public class SWTProcess implements IRunnableWithProgress {
 						}
 					}
 
-					if (ViewFile.writeResume) {
+					if (Configuration.getSingleton().getWriteCdi()) {
 						CDIResumeWriter.getInstance().addSurvey(survey);
 					}
 				} else {
@@ -579,7 +582,7 @@ public class SWTProcess implements IRunnableWithProgress {
 			writerODV.release();
 
 			if (!interrompu) {
-				if (!ViewFile.writeResume) {
+				if (!Configuration.getSingleton().getWriteCdi()) {
 					survey.release();
 				}
 			}
