@@ -157,7 +157,7 @@ public class CDIResumeWriter {
 //								+ Configuration.getSingleton().getIdEdmoRespDonnees());
 						
 						// PDV code
-						writer.write(sep + Utils.extraitCodeURN(NemoLists.getVocabMatch("P091", "P012", param.getCode(), Messages.getString("CDIResumeWriter.notSpecified"))) + "");
+						writer.write(sep + Utils.extraitCodeURN(NemoLists.getVocabMatch("P091", "P011", param.getCode(), Messages.getString("CDIResumeWriter.notSpecified"))) + "");
 
 						// Platform Type
 						writer.write(sep + codeTypePlateForme);

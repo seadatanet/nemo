@@ -67,10 +67,12 @@ public class SWTProcessWS implements IRunnableWithProgress {
 			monitor.subTask(Messages.getString("SWTProcessWS.9"));
 			// FAE 0001132 : precision du nom de la liste dans le message
 			NemoLists.updateVocabLists(monitor);
-			monitor.subTask(Messages.getString("SWTProcessWS.9") + " Mapping P091 / P012");
-			NemoLists.updateVocabMap("P091", "P012");
+			monitor.subTask(Messages.getString("SWTProcessWS.9") + " Mapping P091 / P011");
+			NemoLists.updateVocabMap("P091", "P011");
 			monitor.subTask(Messages.getString("SWTProcessWS.9") + " Mapping P091 / P061");
 			NemoLists.updateVocabMap("P091", "P061");
+//            monitor.subTask(Messages.getString("SWTProcessWS.9") + " Mapping L05 / C77");
+//            NemoLists.updateVocabMap("L05", "C77");
 			
 			monitor.subTask(Messages.getString("SWTProcessWS.10"));
 			NemoLists.updateEdmo();

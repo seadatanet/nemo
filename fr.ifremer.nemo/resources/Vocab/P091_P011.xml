@@ -8,7 +8,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/ALKYZZXX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/ALKYZZXX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Total alkalinity of the water column</string> 
@@ -17,19 +17,19 @@
          <string>TotAlk</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration of acid-neutralising bases per unit volume of the water column. Solute may be expressed in terms of mass or quantity of substance.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -68,7 +68,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP014</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MDMAP014</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of bases per unit mass of the water column [dissolved phase]</string> 
@@ -77,19 +77,19 @@
          <string>Talk/kg</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration (moles or mass) of acid-neutralising bases per unit mass of the water column.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1224513701000</long> 
+            <long>1224509745000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -149,7 +149,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/ALLOXXPX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/ALLOXXPX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of alloxanthin per unit volume of the water column</string> 
@@ -158,7 +158,7 @@
          <string>Alloxanthin</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of the carotenoid pigment alloxanthin per unit volume of a water body.  The pigment is contained in suspended particles of unspecified size.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
@@ -170,7 +170,7 @@
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -188,7 +188,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/AMONZZXX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/AMONZZXX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of ammonium {NH4} per unit volume of the water column [unknown phase]</string> 
@@ -197,19 +197,19 @@
          <string>NH4</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration of ammonium per unit volume of the water column. Ammonium may be expressed in terms of mass or quantity of substance.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -248,7 +248,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP004</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MDMAP004</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of ammonium {NH4} per unit mass of the water column [dissolved phase]</string> 
@@ -257,19 +257,19 @@
          <string>NH4/kg</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration (moles or mass) of nitrogen as ammonium per unit mass of the water column.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1224513701000</long> 
+            <long>1224509745000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -329,7 +329,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/GAVHZZ01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/GAVHZZ01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Average height of waves (highest one third) on the water column</string> 
@@ -338,7 +338,7 @@
          <string>H1/3</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The average peak to trough height of the highest 1/3 of waves measured during a recording burst</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
@@ -350,7 +350,7 @@
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -389,7 +389,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/GTZHZZ01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/GTZHZZ01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Average zero crossing period of waves (highest one third) on the water column</string> 
@@ -398,7 +398,7 @@
          <string>Tz1/3</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The average period of the highest 1/3 of waves measured during a recording burst</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
@@ -410,7 +410,7 @@
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -449,7 +449,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MALPP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MALPP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of aluminium {Al} per unit dry weight of suspended particulate material</string> 
@@ -458,19 +458,19 @@
          <string>SPM_Al</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental aluminium per unit mass of solid material suspended in the water column</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -509,7 +509,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MALSP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MALSP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of aluminium {Al} per unit dry weight of sediment</string> 
@@ -518,19 +518,19 @@
          <string>Sed_Al</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental aluminium per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -572,7 +572,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MBANZZZZ</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MBANZZZZ</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Sea-floor depth (below instantaneous sea level) {bathymetric depth} in the water column</string> 
@@ -581,19 +581,19 @@
          <string>BathyDep</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The distance between sea surface and sea bed measured from the sea surface at a particular instant in space and time.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -629,7 +629,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MBAPP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MBAPP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of barium {Ba} per unit dry weight of suspended particulate material</string> 
@@ -638,19 +638,19 @@
          <string>SPM_Ba</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental barium per unit mass of solid material suspended in the water column</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -689,7 +689,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MBASP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MBASP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of barium {Ba} per unit dry weight of sediment</string> 
@@ -698,19 +698,19 @@
          <string>Sed_Ba</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental barium per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -749,7 +749,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MBRSP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MBRSP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of bromine {Br} per unit dry weight of sediment</string> 
@@ -758,19 +758,19 @@
          <string>Sed_Br</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental bromine per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -809,7 +809,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/CPHLZZXX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/CPHLZZXX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of chlorophyll-a per unit volume of the water column</string> 
@@ -818,7 +818,7 @@
          <string>Chlorophyll-a</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The mass of all variants of chlorophyll-a per unit volume of the water column held in particles of any size.  Includes measurements made by instruments unable to resolve chorophyll-a types and the sum of HPLC chlorophyll-a types.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
@@ -830,7 +830,7 @@
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -869,7 +869,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/CPHLZZXX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/CPHLZZXX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of chlorophyll-a per unit volume of the water column</string> 
@@ -878,7 +878,7 @@
          <string>Chlorophyll-a</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The mass of all variants of chlorophyll-a per unit volume of the water column held in particles of any size.  Includes measurements made by instruments unable to resolve chorophyll-a types and the sum of HPLC chlorophyll-a types.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
@@ -890,7 +890,7 @@
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -929,7 +929,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/CHLBXXPX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/CHLBXXPX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of chlorophyll-b per unit volume of the water column</string> 
@@ -938,7 +938,7 @@
          <string>Chlorophyll-b</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of all forms of the pigment chlorophyll-b per unit volume of a water body.  The pigment is contained in suspended particles of unspecified size.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
@@ -950,7 +950,7 @@
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -989,7 +989,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/CHLCXXPX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/CHLCXXPX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of chlorophyll-c per unit volume of the water column</string> 
@@ -998,7 +998,7 @@
          <string>Chlorophyll-c</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of all forms of the pigment chlorophyll-c3 per unit volume of a water body.  The pigment is contained in suspended particles of unspecified size.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
@@ -1010,7 +1010,7 @@
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -1049,7 +1049,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/CHLC12PX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/CHLC12PX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of chlorophyll-c1c2 per unit volume of the water column</string> 
@@ -1058,7 +1058,7 @@
          <string>Chlorophyll-c1c2</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Combined mass of the pigments chlorophyll-c1 and chlorophyll-c2 per unit volume of a water body.  The pigment is contained in suspended particles of unspecified size.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
@@ -1070,7 +1070,7 @@
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -1109,7 +1109,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/CHLC03PX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/CHLC03PX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of chlorophyll-c3 per unit volume of the water column</string> 
@@ -1118,7 +1118,7 @@
          <string>Chlorophyll-c3</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of all forms of the the pigment chlorophyll-c3 per unit volume of a water body.  The pigment is contained in suspended particles of unspecified size.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
@@ -1130,7 +1130,7 @@
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -1169,7 +1169,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/LCEWZZ01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/LCEWZZ01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Eastward current velocity in the water column</string> 
@@ -1178,19 +1178,19 @@
          <string>EastCurr</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Speed of Eulerian current flow towards due east.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -1229,7 +1229,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/LCNSZZ01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/LCNSZZ01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Northward current velocity in the water column</string> 
@@ -1238,19 +1238,19 @@
          <string>NorthCurr</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Speed of Eulerian current flow towards true north.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -1289,7 +1289,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MCAPP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MCAPP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of calcium {Ca} per unit dry weight of suspended particulate material</string> 
@@ -1298,19 +1298,19 @@
          <string>SPM_Ca</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental calcium per unit mass of solid material suspended in the water column</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -1349,7 +1349,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MCASP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MCASP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of calcium {Ca} per unit dry weight of sediment</string> 
@@ -1358,19 +1358,19 @@
          <string>Sed_Ca</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental calcium per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -1409,7 +1409,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MCESP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MCESP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of cerium {Ce} per unit dry weight of sediment</string> 
@@ -1418,19 +1418,19 @@
          <string>Sed_Ce</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental cerium per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -1469,7 +1469,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MCLPP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MCLPP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of chlorine {Cl} per unit dry weight of suspended particulate material</string> 
@@ -1478,19 +1478,19 @@
          <string>SPM_Cl</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental chlorine per unit mass of solid material suspended in the water column</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -1529,7 +1529,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MCRSP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MCRSP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of chromium {Cr} per unit dry weight of sediment</string> 
@@ -1538,19 +1538,19 @@
          <string>Sed_Cr</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental chromium per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -1589,7 +1589,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MCUSP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MCUSP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of copper {Cu} per unit dry weight of sediment</string> 
@@ -1598,19 +1598,19 @@
          <string>Sed_Cu</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental copper per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -1649,7 +1649,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/COREDIST</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/COREDIST</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Depth below surface of the bed</string> 
@@ -1658,19 +1658,19 @@
          <string>DepBelowBed</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The distance of a sensor or sampling point below the floor of a water body</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -1709,7 +1709,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/ADEPZZ01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/ADEPZZ01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Depth below surface of the water column</string> 
@@ -1718,19 +1718,19 @@
          <string>DepBelowSurf</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The distance of a sensor or sampling point below the sea surface</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -1769,7 +1769,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/CDEWZZ01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/CDEWZZ01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Dew point temperature of the atmosphere</string> 
@@ -1778,19 +1778,19 @@
          <string>Unspec</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The temperature to which air must cool to become saturated with water vapour</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229085909000</long> 
+            <long>1229085888000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -1829,7 +1829,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/LCDAZZ01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/LCDAZZ01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Current direction in the water column</string> 
@@ -1838,19 +1838,19 @@
          <string>CurrDir</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The direction towards which Eulerian current in the water column is flowing.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -1868,7 +1868,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/TCO2ZZXX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/TCO2ZZXX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of carbon (total inorganic) {TCO2} per unit volume of the water column [dissolved plus reactive particulate phase]</string> 
@@ -1877,19 +1877,19 @@
          <string>TCO2</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration of dissolved inorganic carbon per unit volume of the water column. Solute may be expressed in terms of mass or quantity of substance.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -1928,7 +1928,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP001</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MDMAP001</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of trichlorofluoromethane {freon-11 or CFC-11} per unit mass of the water column [dissolved phase]</string> 
@@ -1937,7 +1937,7 @@
          <string>Fr-11/kg</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration (moles or mass) of trichlorofluoromethane {freon-11 or CFC-11} per unit mass of the water column.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
@@ -1949,7 +1949,7 @@
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -1988,7 +1988,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP003</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MDMAP003</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of 1,1,2-trichloro-1,2,2-trifluoroethane {freon-113 or CFC-113} per unit mass of the water column [dissolved phase]</string> 
@@ -1997,7 +1997,7 @@
          <string>Fr-113/kg</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration (moles or mass) of 1,1,2-trichloro-1,2,2-trifluoroethane {freon-113 or CFC-113} per unit mass of the water column.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
@@ -2009,7 +2009,7 @@
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -2048,7 +2048,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP002</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MDMAP002</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of dichlorodifluoromethane {freon-12 or CFC-12} per unit mass of the water column [dissolved phase]</string> 
@@ -2057,7 +2057,7 @@
          <string>Fr-12/kg</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration (moles or mass) of dichlorodifluoromethane {freon-12 or CFC-12} per unit mass of the water column.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
@@ -2069,7 +2069,7 @@
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -2108,7 +2108,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP008</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MDMAP008</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of nitrogen (organic) per unit mass of the water column [dissolved phase]</string> 
@@ -2117,19 +2117,19 @@
          <string>DON/kg</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration (moles or mass) of nitrogen in molecules containing carbon per unit mass of the water column.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1224513701000</long> 
+            <long>1224509745000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -2168,7 +2168,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP009</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MDMAP009</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of nitrogen (organic) per unit volume of the water column [dissolved phase]</string> 
@@ -2177,19 +2177,19 @@
          <string>DON</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration (moles or mass) of nitrogen in molecules containing carbon per unit volume of the water column.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1224513701000</long> 
+            <long>1224509745000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -2228,7 +2228,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/DOXMZZXX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/DOXMZZXX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of oxygen {O2} per unit mass of the water column [dissolved phase]</string> 
@@ -2237,19 +2237,19 @@
          <string>DissO2_Mass</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration of dissolved oxygen per unit mass of the water column. Oxygen may be expressed in terms of mass, volume or quantity of substance.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -2288,7 +2288,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/DOXYZZXX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/DOXYZZXX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of oxygen {O2} per unit volume of the water column [dissolved phase]</string> 
@@ -2297,19 +2297,19 @@
          <string>DissO2</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration of dissolved oxygen per unit volume of the water column. Oxygen may be expressed in terms of mass, volume or quantity of substance.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -2348,7 +2348,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/DOXYZZXX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/DOXYZZXX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of oxygen {O2} per unit volume of the water column [dissolved phase]</string> 
@@ -2357,19 +2357,19 @@
          <string>DissO2</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration of dissolved oxygen per unit volume of the water column. Oxygen may be expressed in terms of mass, volume or quantity of substance.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -2429,7 +2429,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/CTMPZZ01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/CTMPZZ01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Temperature of the atmosphere</string> 
@@ -2438,19 +2438,19 @@
          <string>At_temp</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The degree of hotness of the atmosphere expressed against a standard scale.  Includes both IPTS-68 and ITS-90 scales.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1228838528000</long> 
+            <long>1100515355000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -2489,7 +2489,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/FUCXZZZZ</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/FUCXZZZZ</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of fucoxanthin per unit volume of the water column</string> 
@@ -2498,7 +2498,7 @@
          <string>Fucoxanthin</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of the carotenoid pigment fucoxanthin per unit volume of a water body.  The pigment is contained in suspended particles of unspecified size.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
@@ -2510,7 +2510,7 @@
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -2549,7 +2549,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MFEPP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MFEPP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of iron (total) {Fe} per unit dry weight of suspended particulate material</string> 
@@ -2558,19 +2558,19 @@
          <string>SPM_Fe</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental iron per unit mass of solid material suspended in the water column</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -2609,7 +2609,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MFESP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MFESP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of iron (total) {Fe} per unit dry weight of sediment</string> 
@@ -2618,19 +2618,19 @@
          <string>Sed_Fe</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental iron per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -2669,7 +2669,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/EGTSZZ01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/EGTSZZ01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Wind speed (gust) in the atmosphere</string> 
@@ -2678,19 +2678,19 @@
          <string>GustWindSpd</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Maximum speed of the wind (distance moved per unit time by a parcel of air) parallel to the ground during a gust event (generally regarded as an increase over sustained speed of more than 5 m/s lasting less than 20 seconds).</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1226322042000</long> 
+            <long>1226322038000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -2729,7 +2729,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/LCSAZZ01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/LCSAZZ01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Current speed in the water column</string> 
@@ -2738,19 +2738,19 @@
          <string>CurrSpd</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The speed of Eulerian flow in the water column.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -2789,7 +2789,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/EWSBZZ01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/EWSBZZ01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Wind speed in the atmosphere</string> 
@@ -2798,19 +2798,19 @@
          <string>WindSpd</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Sustained speed of the wind (distance moved per unit time by a parcel of air) parallel to the ground at a given place and time.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1226321642000</long> 
+            <long>1226321605000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -2828,7 +2828,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/H2SXZZXX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/H2SXZZXX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of hydrogen sulphide {H2S} per unit volume of the water column [dissolved plus reactive particulate phase]</string> 
@@ -2837,19 +2837,19 @@
          <string>H2S</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration of dissolved hydrogen sulphide per unit volume of the water column. Hydrogen sulphide may be expressed in terms of mass, volume or quantity of substance.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -2909,7 +2909,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MIISP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MIISP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of iodine {I} per unit dry weight of sediment</string> 
@@ -2918,19 +2918,19 @@
          <string>Sed_I</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental iodine per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -2969,7 +2969,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MKKPP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MKKPP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of potassium {K} per unit dry weight of suspended particulate material</string> 
@@ -2978,19 +2978,19 @@
          <string>SPM_K</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental potassium per unit mass of solid material suspended in the water column</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -3029,7 +3029,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MKKSP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MKKSP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of potassium {K} per unit dry weight of sediment</string> 
@@ -3038,19 +3038,19 @@
          <string>Sed_K</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental potassium per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -3089,7 +3089,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MLASP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MLASP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of lanthanum {La} per unit dry weight of sediment</string> 
@@ -3098,19 +3098,19 @@
          <string>Sed_La</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental lanthanum per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -3149,7 +3149,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/GZMXZZ01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/GZMXZZ01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Maximum zero crossing height of waves on the water column</string> 
@@ -3158,19 +3158,19 @@
          <string>Hmax_Zero</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The largest peak to trough height determined by zero crossing analysis of the demeaned wave elevation recording burst</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -3209,7 +3209,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/GCMXZZ01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/GCMXZZ01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Maximum height of waves on the water column</string> 
@@ -3218,19 +3218,19 @@
          <string>Hmax</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The maximum vertical distance between a wave crest and the immediately preceding or following trough during a specified obervation period. </string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -3269,7 +3269,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/GMXLZZ01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/GMXLZZ01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Maximum level of waves on the water column</string> 
@@ -3278,19 +3278,19 @@
          <string>HmaxCrest</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The maximum zero crossing crest amplitude observed in a record.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -3329,7 +3329,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MMGPP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MMGPP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of magnesium {Mg} per unit dry weight of suspended particulate material</string> 
@@ -3338,19 +3338,19 @@
          <string>SPM_Mg</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental magnesium per unit mass of solid material suspended in the water column</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -3389,7 +3389,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MMGSP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MMGSP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of magnesium {Mg} per unit dry weight of sediment</string> 
@@ -3398,19 +3398,19 @@
          <string>Sed_Mg</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental magnesium per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -3449,7 +3449,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MMNPP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MMNPP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of manganese {Mn} per unit dry weight of suspended particulate material</string> 
@@ -3458,19 +3458,19 @@
          <string>SPM_Mn</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental manganese per unit mass of solid material suspended in the water column</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -3509,7 +3509,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MMNSP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MMNSP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of manganese {Mn} per unit dry weight of sediment</string> 
@@ -3518,19 +3518,19 @@
          <string>Sed_Mn</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental manganese per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -3569,7 +3569,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MMOSP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MMOSP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of molybdenum {Mo} per unit dry weight of sediment</string> 
@@ -3578,19 +3578,19 @@
          <string>Sed_Mo</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental zirconium per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -3608,7 +3608,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP005</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MDMAP005</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of nitrate {NO3} per unit mass of the water column [dissolved phase]</string> 
@@ -3617,19 +3617,19 @@
          <string>NO3/kg</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration (moles or mass) of nitrogen as nitrate per unit mass of the water column.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1224513701000</long> 
+            <long>1224509745000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -3668,7 +3668,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/NTRAZZXX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/NTRAZZXX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of nitrate {NO3} per unit volume of the water column [unknown phase]</string> 
@@ -3677,19 +3677,19 @@
          <string>NO3</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration of nitrate per unit volume of the water column. Nitrate may be expressed in terms of mass or quantity of substance.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -3728,7 +3728,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP006</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MDMAP006</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of nitrate+nitrite {NO3+NO2} per unit mass of the water column [dissolved phase]</string> 
@@ -3737,19 +3737,19 @@
          <string>NO3+NO2/kg</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration (moles or mass) of nitrogen as nitrate+nitrite per unit mass of the water column.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1224513701000</long> 
+            <long>1224509745000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -3788,7 +3788,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/NTRZZZXX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/NTRZZZXX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of nitrate+nitrite {NO3+NO2} per unit volume of the water column [unknown phase]</string> 
@@ -3797,19 +3797,19 @@
          <string>NO3+NO2</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration of nitrate+nitrite per unit volume of the water column. Nitrate+nitrite may be expressed in terms of mass or quantity of substance.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -3848,7 +3848,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP007</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MDMAP007</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of nitrite {NO2} per unit mass of the water column [dissolved phase]</string> 
@@ -3857,19 +3857,19 @@
          <string>NO2/kg</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration (moles or mass) of nitrogen as nitrite per unit mass of the water column.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1224513701000</long> 
+            <long>1224509745000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -3908,7 +3908,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/NTRIZZXX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/NTRIZZXX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of nitrite per unit volume of the water column [unknown phase]</string> 
@@ -3917,19 +3917,19 @@
          <string>NO2</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration of nitrite per unit volume of the water column. Nitrite may be expressed in terms of mass or quantity of substance.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -3989,7 +3989,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MNASP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MNASP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of sodium {Na} per unit dry weight of sediment</string> 
@@ -3998,19 +3998,19 @@
          <string>Sed_Na</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental sodium per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -4049,7 +4049,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MNBSP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MNBSP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of niobium {Nb} per unit dry weight of sediment</string> 
@@ -4058,19 +4058,19 @@
          <string>Sed_Nb</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental niobium per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -4109,7 +4109,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MNDSP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MNDSP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of neodynium {Nd} per unit dry weight of sediment</string> 
@@ -4118,19 +4118,19 @@
          <string>Sed_Nd</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental neodynium per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -4169,7 +4169,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MNISP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MNISP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of nickel {Ni} per unit dry weight of sediment</string> 
@@ -4178,19 +4178,19 @@
          <string>Sed_Ni</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental nickel per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -4229,7 +4229,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/ASLVZZ01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/ASLVZZ01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Surface elevation (unspecified datum) of the water column</string> 
@@ -4238,19 +4238,19 @@
          <string>SeaLevel</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The elevation of the sea surface realtive to a known but unspecified datum.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -4289,7 +4289,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MPPPP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MPPPP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of phosphorus {P} per unit dry weight of suspended particulate material</string> 
@@ -4298,19 +4298,19 @@
          <string>SPM_P</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental phosphorus per unit mass of solid material suspended in the water column</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -4349,7 +4349,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MPPSP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MPPSP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of phosphorus {P} per unit dry weight of sediment</string> 
@@ -4358,19 +4358,19 @@
          <string>Sed_P</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental phosphorus per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -4388,7 +4388,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP010</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MDMAP010</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of carbon (organic) per unit volume of the water column [particulate phase]</string> 
@@ -4397,19 +4397,19 @@
          <string>POC</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration (moles or mass) of organic carbon (i.e. carbon not in carbonate or bicarbonate molecules) in suspended particulate material per unit volume of the water column</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1224513701000</long> 
+            <long>1224509745000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -4448,7 +4448,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP010</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MDMAP010</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of carbon (organic) per unit volume of the water column [particulate phase]</string> 
@@ -4457,19 +4457,19 @@
          <string>POC</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration (moles or mass) of organic carbon (i.e. carbon not in carbonate or bicarbonate molecules) in suspended particulate material per unit volume of the water column</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1224513701000</long> 
+            <long>1224509745000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -4529,7 +4529,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/PHXXZZXX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/PHXXZZXX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>pH of the water column</string> 
@@ -4538,19 +4538,19 @@
          <string>pH</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Minus the log of the hydrogen ion concentration (moles per litre) in the water column.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -4568,7 +4568,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/PHOSZZXX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/PHOSZZXX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of phosphate {PO4} per unit volume of the water column [unknown phase]</string> 
@@ -4577,19 +4577,19 @@
          <string>PO4</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration of phosphate per unit volume of the water column. Phosphate may be expressed in terms of mass or quantity of substance.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -4649,7 +4649,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/PSLTZZ01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/PSLTZZ01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Practical salinity of the water column</string> 
@@ -4658,19 +4658,19 @@
          <string>PracSal</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The quantity of dissolved ions (predominantly salt in seawater) expressed on a scale (PSS-78) based on the conductivity ratio of a seawater sample to a standard KCl solution.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -4709,7 +4709,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MPBSP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MPBSP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of lead {Pb} per unit dry weight of sediment</string> 
@@ -4718,19 +4718,19 @@
          <string>Sed_Pb</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental lead per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -4769,7 +4769,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/CRELZZ01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/CRELZZ01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Relative humidity of the atmosphere</string> 
@@ -4778,19 +4778,19 @@
          <string>AtmRelHum</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The ratio of the amount of water vapour in the air compared to the maximum amount of water vapour that can theoretically be held at the air&apos;s temperature</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1225787795000</long> 
+            <long>1225787750000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -4829,7 +4829,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MRBSP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MRBSP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of rubidium {Rb} per unit dry weight of sediment</string> 
@@ -4838,19 +4838,19 @@
          <string>Sed_Rb</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental rubidium per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -4889,7 +4889,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MSSPP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MSSPP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of sulphur {S} per unit dry weight of suspended particulate material</string> 
@@ -4898,19 +4898,19 @@
          <string>SPM_S</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental sulphur per unit mass of solid material suspended in the water column</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -4952,7 +4952,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/PRESPR01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/PRESPR01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Pressure (spatial co-ordinate) exerted by the water column by profiling pressure sensor and corrected to read zero at sea level</string> 
@@ -4961,26 +4961,26 @@
          <string>Pres_Z</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The force per unit area exerted by the water column on a mobile sensor located in the water column.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
       <void index="1"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/PRESPS02</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/PRESPS02</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Pressure (measured variable) exerted by the water column by fixed in-situ pressure sensor and corrected to read zero at sea level</string> 
@@ -4989,19 +4989,19 @@
          <string>Pres_SL</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The force per unit area exerted by the water column on a fixed sensor located in the water column.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -5037,7 +5037,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/TEMPPR01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/TEMPPR01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Temperature of the water column</string> 
@@ -5046,19 +5046,19 @@
          <string>Temp</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The degree of hotness of the water column expressed against a standard scale.  Includes both IPTS-68 and ITS-90 scales.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -5097,7 +5097,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/TEMPPR01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/TEMPPR01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Temperature of the water column</string> 
@@ -5106,19 +5106,19 @@
          <string>Temp</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The degree of hotness of the water column expressed against a standard scale.  Includes both IPTS-68 and ITS-90 scales.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -5157,7 +5157,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/TEMPPR01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/TEMPPR01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Temperature of the water column</string> 
@@ -5166,19 +5166,19 @@
          <string>Temp</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The degree of hotness of the water column expressed against a standard scale.  Includes both IPTS-68 and ITS-90 scales.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -5217,7 +5217,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/TEMPPR01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/TEMPPR01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Temperature of the water column</string> 
@@ -5226,19 +5226,19 @@
          <string>Temp</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The degree of hotness of the water column expressed against a standard scale.  Includes both IPTS-68 and ITS-90 scales.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -5277,7 +5277,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/TEMPPR01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/TEMPPR01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Temperature of the water column</string> 
@@ -5286,19 +5286,19 @@
          <string>Temp</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The degree of hotness of the water column expressed against a standard scale.  Includes both IPTS-68 and ITS-90 scales.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -5337,7 +5337,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/TEMPPR01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/TEMPPR01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Temperature of the water column</string> 
@@ -5346,19 +5346,19 @@
          <string>Temp</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The degree of hotness of the water column expressed against a standard scale.  Includes both IPTS-68 and ITS-90 scales.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -5397,7 +5397,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/TEMPPR01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/TEMPPR01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Temperature of the water column</string> 
@@ -5406,19 +5406,19 @@
          <string>Temp</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The degree of hotness of the water column expressed against a standard scale.  Includes both IPTS-68 and ITS-90 scales.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -5457,7 +5457,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/TEMPPR01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/TEMPPR01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Temperature of the water column</string> 
@@ -5466,19 +5466,19 @@
          <string>Temp</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The degree of hotness of the water column expressed against a standard scale.  Includes both IPTS-68 and ITS-90 scales.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -5517,7 +5517,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/TEMPPR01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/TEMPPR01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Temperature of the water column</string> 
@@ -5526,19 +5526,19 @@
          <string>Temp</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The degree of hotness of the water column expressed against a standard scale.  Includes both IPTS-68 and ITS-90 scales.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -5577,7 +5577,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/TEMPPR01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/TEMPPR01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Temperature of the water column</string> 
@@ -5586,19 +5586,19 @@
          <string>Temp</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The degree of hotness of the water column expressed against a standard scale.  Includes both IPTS-68 and ITS-90 scales.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -5637,7 +5637,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/TEMPPR01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/TEMPPR01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Temperature of the water column</string> 
@@ -5646,19 +5646,19 @@
          <string>Temp</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The degree of hotness of the water column expressed against a standard scale.  Includes both IPTS-68 and ITS-90 scales.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -5697,7 +5697,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/TEMPPR01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/TEMPPR01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Temperature of the water column</string> 
@@ -5706,19 +5706,19 @@
          <string>Temp</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The degree of hotness of the water column expressed against a standard scale.  Includes both IPTS-68 and ITS-90 scales.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -5757,7 +5757,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/TEMPPR01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/TEMPPR01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Temperature of the water column</string> 
@@ -5766,19 +5766,19 @@
          <string>Temp</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The degree of hotness of the water column expressed against a standard scale.  Includes both IPTS-68 and ITS-90 scales.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -5817,7 +5817,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/AMISP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/AMISP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of amino acids per unit dry weight of sediment</string> 
@@ -5826,19 +5826,19 @@
          <string>Sed_AminAcid</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of all amino acids (organic compounds containing at least one amine group plus at least one carboxyllic acid group) per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -5856,7 +5856,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/CALCXXXX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/CALCXXXX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of carbonate {CO3} per unit dry weight of sediment</string> 
@@ -5865,19 +5865,19 @@
          <string>Sed_CO3</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The mass of  carbonate (CO3) per unit mass of bed sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1224513701000</long> 
+            <long>1224509745000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -5916,7 +5916,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/TCCNXXXX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/TCCNXXXX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of carbon (total) per unit dry weight of sediment</string> 
@@ -5925,19 +5925,19 @@
          <string>Sed_TotC</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration (moles or mass) of total carbon (carbon in any chemical form) per unit mass of bed sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1224513701000</long> 
+            <long>1224509745000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -5976,7 +5976,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/OCCNXXXX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/OCCNXXXX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of carbon (organic) per unit dry weight of sediment</string> 
@@ -5985,19 +5985,19 @@
          <string>Sed_OrgC</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration (moles or mass) of organic carbon (not carbonates) per unit mass of bed sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1224513701000</long> 
+            <long>1224509745000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -6036,7 +6036,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MDMAP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of silicate {SiO4} per unit mass of the water column [dissolved phase]</string> 
@@ -6045,19 +6045,19 @@
          <string>SiO4/kg</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration (moles or mass) of silicon as silicate per unit mass of the water column.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1224513701000</long> 
+            <long>1224509745000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -6096,7 +6096,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/SLCAZZXX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/SLCAZZXX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of silicate {SiO4} per unit volume of the water column [unknown phase]</string> 
@@ -6105,19 +6105,19 @@
          <string>SiO4</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration of silicate per unit volume of the water column. Silicate may be expressed in terms of mass or quantity of substance.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -6177,7 +6177,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MSCSP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MSCSP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of scandium {Sc} per unit dry weight of sediment</string> 
@@ -6186,19 +6186,19 @@
          <string>Sed_Sc</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental scandium per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -6237,7 +6237,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MSIPP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MSIPP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of silicon {Si} per unit dry weight of suspended particulate material</string> 
@@ -6246,19 +6246,19 @@
          <string>SPM_Si</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental silicon per unit mass of solid material suspended in the water column</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -6297,7 +6297,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MSISP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MSISP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of silicon {Si} per unit dry weight of sediment</string> 
@@ -6306,19 +6306,19 @@
          <string>Sed_Si</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental silicon per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -6357,7 +6357,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MSRSP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MSRSP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of strontium {Sr} per unit dry weight of sediment</string> 
@@ -6366,19 +6366,19 @@
          <string>Sed_Sr</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental strontium per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -6396,7 +6396,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/NTOTZZXX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/NTOTZZXX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of nitrogen (total) per unit volume of the water column [dissolved plus reactive particulate phase]</string> 
@@ -6405,19 +6405,19 @@
          <string>Total_N</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration of nitrogen in all species other than dissolved gaseous nitrogen per unit volume of the water column held both in solution and in partciles of any size. Nitrogen may be expressed in terms of mass or quantity of substance.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -6456,7 +6456,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP011</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MDMAP011</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of carbon (total) per unit volume of the water column [particulate phase]</string> 
@@ -6465,19 +6465,19 @@
          <string>PTC</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration (moles or mass) of total carbon (i.e. carbon in any chemical form) in suspended particulate material per unit volume of the water column</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1224513701000</long> 
+            <long>1224509745000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -6516,7 +6516,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP013</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MDMAP013</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of nitrogen (total) per unit volume of the water column [particulate phase]</string> 
@@ -6525,19 +6525,19 @@
          <string>PTN</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration (moles or mass) of total nitrogen (i.e. nitrogen in all chemical forms) in suspended particulate material per unit volume of the water column.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1224513701000</long> 
+            <long>1224509745000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -6576,7 +6576,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MDMAP013</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MDMAP013</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of nitrogen (total) per unit volume of the water column [particulate phase]</string> 
@@ -6585,19 +6585,19 @@
          <string>PTN</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration (moles or mass) of total nitrogen (i.e. nitrogen in all chemical forms) in suspended particulate material per unit volume of the water column.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1224513701000</long> 
+            <long>1224509745000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -6636,7 +6636,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/TPHSZZXX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/TPHSZZXX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of phosphorus (total) per unit volume of the water column [dissolved plus reactive particulate phase]</string> 
@@ -6645,19 +6645,19 @@
          <string>Total_P</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Concentration of phosphorus in all species per unit volume of the water column held both in solution and in partciles of any size. Phosphorous may be expressed in terms of mass or quantity of substance.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -6717,7 +6717,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MTHSP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MTHSP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of thorium {Th} per unit dry weight of sediment</string> 
@@ -6726,19 +6726,19 @@
          <string>Sed_Th</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental thorium per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -6777,7 +6777,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MTIPP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MTIPP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of titanium {Ti} per unit dry weight of suspended particulate material</string> 
@@ -6786,19 +6786,19 @@
          <string>SPM_Ti</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental titanium per unit mass of solid material suspended in the water column</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -6837,7 +6837,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MTISP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MTISP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of titanium {Ti} per unit dry weight of sediment</string> 
@@ -6846,19 +6846,19 @@
          <string>Sed_Ti</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental titanium per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -6897,7 +6897,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MUUSP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MUUSP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of uranium {U} per unit dry weight of sediment</string> 
@@ -6906,19 +6906,19 @@
          <string>Sed_U</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental uranium per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -6957,7 +6957,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MVVSP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MVVSP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of vanadium {V} per unit dry weight of sediment</string> 
@@ -6966,19 +6966,19 @@
          <string>Sed_V</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental vanadium per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -7017,7 +7017,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/GTPKZZ01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/GTPKZZ01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Period at spectral maximum of waves on the water column</string> 
@@ -7026,19 +7026,19 @@
          <string>T_SpecMax</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>The period with the maximum wave energy, determined from the wave spectrum.</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1210857462000</long> 
+            <long>1210857424000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -7077,7 +7077,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/EWDAZZ01</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/EWDAZZ01</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Wind from direction in the atmosphere</string> 
@@ -7086,19 +7086,19 @@
          <string>WindDir</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Direction relative to true north from which the wind is blowing</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1226322335000</long> 
+            <long>1226322333000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -7137,7 +7137,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/ESEWZZXX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/ESEWZZXX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Eastward wind velocity in the atmosphere</string> 
@@ -7146,19 +7146,19 @@
          <string>EwdWindVel</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Wind velocity blowing towards due east</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1225789602000</long> 
+            <long>1225789571000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -7197,7 +7197,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/ESNSZZXX</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/ESNSZZXX</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Northward wind velocity in the atmosphere</string> 
@@ -7206,19 +7206,19 @@
          <string>NwdWindVel</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Wind velocity blowing towards true north</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1225789594000</long> 
+            <long>1225789571000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -7257,7 +7257,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MYYSP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MYYSP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of yttrium {Y} per unit dry weight of sediment</string> 
@@ -7266,19 +7266,19 @@
          <string>Sed_Y</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental yttrium per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -7317,7 +7317,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MZNSP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MZNSP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of zinc {Zn} per unit dry weight of sediment</string> 
@@ -7326,19 +7326,19 @@
          <string>Sed_Zn</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental zinc per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 
@@ -7377,7 +7377,7 @@
       <void index="0"> 
        <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
         <void property="entryKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/term/P012/8/MZRSP012</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/P011/116/MZRSP012</string> 
         </void> 
         <void property="entryTerm"> 
          <string>Concentration of zirconium {Zr} per unit dry weight of sediment</string> 
@@ -7386,19 +7386,19 @@
          <string>Sed_Zr</string> 
         </void> 
         <void property="entryTermDef"> 
-         <string>Mass of elemental molybdenum per unit mass of dry sediment</string> 
+         <string>Unavailable</string> 
         </void> 
         <void property="entryTermLastMod"> 
          <object class="java.util.GregorianCalendar"> 
           <void property="time"> 
            <object class="java.util.Date"> 
-            <long>1229093462000</long> 
+            <long>1229093430000</long> 
            </object> 
           </void> 
          </object> 
         </void> 
         <void property="listKey"> 
-         <string>http://vocab.ndg.nerc.ac.uk/list/P012/8</string> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/P011/116</string> 
         </void> 
        </object> 
       </void> 

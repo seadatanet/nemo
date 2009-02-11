@@ -714,8 +714,9 @@ public class NemoLists implements Cloneable {
 		initParameters();
 		initSurveys();
 		initVocabLists();
-		initVocabMap("P091", "P012");
+		initVocabMap("P091", "P011");
 		initVocabMap("P091", "P061");
+//		initVocabMap("L05", "C77");
 		initEdmo();
 	}
 
@@ -1237,12 +1238,12 @@ public class NemoLists implements Cloneable {
 	public static String parameterMap(Parameter param) {
         String name = param.getCode();
         if (param.getCode().equals(IdParameter.CJDY)) name = ((AddedParameter) param).getFullName();
-		String pdvCode = Utils.extraitCodeURN(getVocabMatch("P091", "P012",
+		String pdvCode = Utils.extraitCodeURN(getVocabMatch("P091", "P011",
             param.getCode(), Messages.getString("NemoLists.unknown")));
 		String unitCode = Utils.extraitCodeURN(getVocabMatch("P091", "P061", param.getCode(), Messages
 				.getString("NemoLists.unknown")));
 		return "<subject>SDN:LOCAL:" + name
-				+ "</subject><object>SDN:P012::" + pdvCode
+				+ "</subject><object>SDN:P011::" + pdvCode
 				+ "</object><unit>SDN:P061::" + unitCode + "</unit>";
 	}
 
