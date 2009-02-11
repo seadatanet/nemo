@@ -143,6 +143,8 @@ public class OptionsAction extends Action implements ISelectionListener,
         Utils.initConfig();
 
         remplissageOptions();
+        
+        
 
     }
 
@@ -219,6 +221,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         }
 
         checkCDI.setSelection(Utils.configuration.getWriteCdi());
+        
         Utils.selectComboCode(comboIdEdmoRespCdi, Utils.configuration
             .getIdEdmoRespCdi());
         Utils.selectComboCode(comboCodeEdmoDonnees, Utils.configuration
@@ -236,7 +239,7 @@ public class OptionsAction extends Action implements ISelectionListener,
             .getTypePlateForme());
 
         textFichierMapping.setText(Utils.configuration.getFichierMapping());
-        textArboMapping.setText(Utils.configuration.getArboMapping());
+       // textArboMapping.setText(Utils.configuration.getArboMapping());
 
         // Libelles rouges si parametres manquants
         if (comboIdEdmoRespCdi.getText().trim().equals(""))
@@ -269,12 +272,14 @@ public class OptionsAction extends Action implements ISelectionListener,
             labelFichierMapping.setForeground(Display.getCurrent()
                 .getSystemColor(SWT.COLOR_RED));
         }
-        if (textArboMapping.getText().trim().equals(""))
+       /* if (textArboMapping.getText().trim().equals(""))
         {
             labelArboMapping.setForeground(Display.getCurrent().getSystemColor(
                 SWT.COLOR_RED));
-        }
+        }*/
 
+        CDICheckMask(Utils.configuration.getWriteCdi());
+        
         // FAE 58 CDL 09/04/08
 
         CodeTableRecordType[] records = NemoLists.getVocabList("L071");
@@ -335,6 +340,27 @@ public class OptionsAction extends Action implements ISelectionListener,
 
         // FLags
         fillFlagTable();
+    }
+    
+    private void CDICheckMask (Boolean status)
+    {
+        labelIdEdmoRespCdi.setEnabled(status);
+        comboIdEdmoRespCdi.setEnabled(status);
+        labelCodeEdmoDonnees.setEnabled(status);
+        comboCodeEdmoDonnees.setEnabled(status);
+        labelIdEdmoRespDonnees.setEnabled(status);
+        comboIdEdmoRespDonnees.setEnabled(status);
+        labelIdEdmoDistDonnees.setEnabled(status);
+        comboIdEdmoDistDonnees.setEnabled(status);
+        labelUrlCdi.setEnabled(status);
+        textUrlCdi.setEnabled(status);
+        labelMethodeCdi.setEnabled(status);
+        comboMethodeCdi.setEnabled(status);
+        lblTypePlateForme.setEnabled(status);
+        comboTypePlateForme.setEnabled(status);
+        lblAccesDonnees.setEnabled(status);
+        comboAccesDonnees.setEnabled(status);         
+        
     }
 
     public void selectionChanged(IWorkbenchPart part, ISelection incoming)
@@ -639,20 +665,30 @@ public class OptionsAction extends Action implements ISelectionListener,
         GridLayoutFactory.fillDefaults().numColumns(2).applyTo(groupCDI);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(groupCDI);
 
-        checkCDI = new Button(groupCDI, SWT.CHECK);
-
         // compo vide pour mise en forme
         lblCDI = new Label(groupCDI, SWT.NONE);
         lblCDI.setText(Messages.getString("OptionsAction.44"));
-
+        checkCDI = new Button(groupCDI, SWT.CHECK);
+        
+        
         labelIdEdmoRespCdi = new Label(groupCDI, SWT.NONE);
         labelIdEdmoRespCdi.setText(Messages.getString("OptionsAction.21"));
         labelIdEdmoRespCdi.pack();
 
+       
         comboIdEdmoRespCdi = new Combo(groupCDI, SWT.BORDER | SWT.READ_ONLY);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(
             comboIdEdmoRespCdi);
 
+        //On masque/affiche les champs falcutatif en fonction de la case checkCDI
+        checkCDI.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+            public void widgetSelected(org.eclipse.swt.events.SelectionEvent e)
+            {
+ 
+CDICheckMask(checkCDI.getSelection());
+            }
+        });  
+        
         labelCodeEdmoDonnees = new Label(groupCDI, SWT.NONE);
         labelCodeEdmoDonnees.setText(Messages.getString("OptionsAction.24"));
         labelCodeEdmoDonnees.pack();
@@ -699,7 +735,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         Utils.createSearchMenu(comboCodeEdmoDonnees, Global.IDEDMO);
         Utils.createSearchMenu(comboIdEdmoRespDonnees, Global.IDEDMO);
         Utils.createSearchMenu(comboIdEdmoDistDonnees, Global.IDEDMO);
-
+        
         // FAE 59 CDL 09/04/08
         lblTypePlateForme = new Label(groupCDI, SWT.NONE);
         lblTypePlateForme
@@ -725,7 +761,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         GridDataFactory.fillDefaults().grab(true, false).applyTo(
             textFichierMapping);
 
-        labelArboMapping = new Label(groupCDI, SWT.NONE);
+       /* labelArboMapping = new Label(groupCDI, SWT.NONE);
         labelArboMapping.setText(Messages.getString("OptionsAction.32"));
         labelArboMapping.pack();
 
@@ -754,7 +790,7 @@ public class OptionsAction extends Action implements ISelectionListener,
                     dialog.setFilterPath(textArboMapping.getText());
                     textArboMapping.setText(dialog.open());
                 }
-            });
+            });*/
     }
 
     /**

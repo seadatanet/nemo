@@ -21,7 +21,6 @@ import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.input.SurveyMedia;
-import fr.ifremer.nemo.output.CDIMappingWriter;
 import fr.ifremer.nemo.output.CDIResumeWriter;
 import fr.ifremer.nemo.output.ProgressNotification;
 import fr.ifremer.nemo.util.Conversion;
@@ -314,11 +313,11 @@ public class EditConversion extends Thread {
 			}
 
 			// Ecriture du fichier de mapping CDI
-			try {
+			/*try {
 				CDIMappingWriter.getInstance().writeMapping();
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
+			}*/
 
 			// affichage des résultats en fin de conversion
 			afficheResultat();
@@ -386,11 +385,11 @@ public class EditConversion extends Thread {
 			}
 
 			// Ecriture du fichier de mapping CDI
-			try {
+			/*try {
 				CDIMappingWriter.getInstance().writeMapping();
 			} catch (Exception e) {
 				e.printStackTrace();
-			}
+			}*/
 
 			// affichage des résultats en fin de conversion
 			afficheResultat();
@@ -620,46 +619,50 @@ public class EditConversion extends Thread {
 	public static boolean checkConfig() {
 		boolean blnOK = true;
 		String message = Messages.getString("CDIResumeWriter.configMessage"); //$NON-NLS-1$
-		
-		if (Utils.configuration.getIdEdmoRespCdi().trim().equals(Global.EMPTY_STRING)) {
-			message += Global.RN + " - " + Messages.getString("OptionsAction.21"); //$NON-NLS-1$ //$NON-NLS-2$
-			blnOK = false;
-		}
-		
-		if (Utils.configuration.getCodeEdmoDonnees().trim().equals(Global.EMPTY_STRING)) {
-			message += Global.RN + " - " + Messages.getString("OptionsAction.24"); //$NON-NLS-1$ //$NON-NLS-2$
-			blnOK = false;
-		}
 
-		if (Utils.configuration.getIdEdmoRespDonnees().trim().equals(Global.EMPTY_STRING)) {
-			message += Global.RN + " - " + Messages.getString("OptionsAction.25"); //$NON-NLS-1$ //$NON-NLS-2$
-			blnOK = false;
-		}
+        if (Utils.configuration.getWriteCdi())        
+        {
+    		if (Utils.configuration.getIdEdmoRespCdi().trim().equals(Global.EMPTY_STRING)) {
+    			message += Global.RN + " - " + Messages.getString("OptionsAction.21"); //$NON-NLS-1$ //$NON-NLS-2$
+    			blnOK = false;
+    		}
 		
-		if (Utils.configuration.getIdEdmoDistDonnees().trim().equals(Global.EMPTY_STRING)) {
-			message += Global.RN + " - " + Messages.getString("OptionsAction.26"); //$NON-NLS-1$ //$NON-NLS-2$
-			blnOK = false;
-		}
+    		if (Utils.configuration.getCodeEdmoDonnees().trim().equals(Global.EMPTY_STRING)) {
+    			message += Global.RN + " - " + Messages.getString("OptionsAction.24"); //$NON-NLS-1$ //$NON-NLS-2$
+    			blnOK = false;
+    		}
+
+    		if (Utils.configuration.getIdEdmoRespDonnees().trim().equals(Global.EMPTY_STRING)) {
+    			message += Global.RN + " - " + Messages.getString("OptionsAction.25"); //$NON-NLS-1$ //$NON-NLS-2$
+    			blnOK = false;
+    		}
+    		
+    		if (Utils.configuration.getIdEdmoDistDonnees().trim().equals(Global.EMPTY_STRING)) {
+    			message += Global.RN + " - " + Messages.getString("OptionsAction.26"); //$NON-NLS-1$ //$NON-NLS-2$
+    			blnOK = false;
+    		}
 		
-		if (Utils.configuration.getCdiURL().trim().equals(Global.EMPTY_STRING)) {
-			message += Global.RN + " - " + Messages.getString("OptionsAction.22"); //$NON-NLS-1$ //$NON-NLS-2$
-			blnOK = false;
-		}
+    		if (Utils.configuration.getCdiURL().trim().equals(Global.EMPTY_STRING)) {
+    			message += Global.RN + " - " + Messages.getString("OptionsAction.22"); //$NON-NLS-1$ //$NON-NLS-2$
+    			blnOK = false;
+    		}
 		
-		if (Utils.configuration.getCdiMethod().trim().equals(Global.EMPTY_STRING)) {
-			message += Global.RN + " - " + Messages.getString("OptionsAction.23"); //$NON-NLS-1$ //$NON-NLS-2$
-			blnOK = false;
-		}
+    		if (Utils.configuration.getCdiMethod().trim().equals(Global.EMPTY_STRING)) {
+    			message += Global.RN + " - " + Messages.getString("OptionsAction.23"); //$NON-NLS-1$ //$NON-NLS-2$
+    			blnOK = false;
+    		}
+            
+        }
 		
 		if (Utils.configuration.getFichierMapping().trim().equals(Global.EMPTY_STRING)) {
 			message += Global.RN + " - " + Messages.getString("OptionsAction.31"); //$NON-NLS-1$ //$NON-NLS-2$
 			blnOK = false;
 		}
 		
-		if (Utils.configuration.getArboMapping().trim().equals(Global.EMPTY_STRING)) {
+		/*if (Utils.configuration.getArboMapping().trim().equals(Global.EMPTY_STRING)) {
 			message += Global.RN + " - " + Messages.getString("OptionsAction.32"); //$NON-NLS-1$ //$NON-NLS-2$
 			blnOK = false;
-		}
+		}*/
 		
 		if (!blnOK) {
 			try {

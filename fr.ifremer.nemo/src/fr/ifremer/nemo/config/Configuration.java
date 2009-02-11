@@ -79,7 +79,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	
 	protected String _fichierMapping;
 	
-	protected String _arboMapping;
+	//protected String _arboMapping;
 		
 	protected HashMap<String, String> _vocabLists = new HashMap<String, String>();
 
@@ -115,7 +115,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		_vocabURL = "";
 		_predicate = 255;
 		_fichierMapping = "";
-		_arboMapping = "";
+		//_arboMapping = "";
 		_defaultCode = "";
 		
 		_vocabLists = new HashMap<String, String>();
@@ -258,10 +258,10 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			Element2Field setter = new Element2Field(this, "setFichierMapping");
 			return setter;
 		}
-		if (a_LocalName.equals("arboMapping")) {
+		/*if (a_LocalName.equals("arboMapping")) {
 			Element2Field setter = new Element2Field(this, "setArboMapping");
 			return setter;
-		}
+		}*/
 		if (a_LocalName.equals("vocabURL")) {
 			Element2Field setter = new Element2Field(this, "setVocabURL");
 			return setter;
@@ -348,7 +348,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
         a_Writer.putTag("accesDonnees", getAccesDonnees());
         a_Writer.putTag("typePlateforme", getTypePlateForme());
 		a_Writer.putTag("fichierMapping", getFichierMapping());
-		a_Writer.putTag("arboMapping", getArboMapping());
+		//a_Writer.putTag("arboMapping", getArboMapping());
 		a_Writer.putTag("vocabURL", getVocabURL());
 		Iterator<String> keys = getVocabLists().keySet().iterator();
 		while (keys.hasNext()) {
@@ -904,17 +904,17 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		return _predicate;
 	}
 
-	public String getArboMapping() {
+	/*public String getArboMapping() {
 		return _arboMapping;
 	}
 
 	public void setArboMapping(String mapping) {
 		_arboMapping = mapping;
-	}
+	}*/
 
 	public String getFichierMapping() {
 		if (_fichierMapping.trim().equals("")) {
-			return "SDN_CDI_mapping_table";
+			return "coupling.txt";
 		}
 		return _fichierMapping;
 	}

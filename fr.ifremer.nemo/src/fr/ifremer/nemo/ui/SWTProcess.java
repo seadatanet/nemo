@@ -20,7 +20,7 @@ import fr.ifremer.nemo.mapping.Mapping;
 import fr.ifremer.nemo.mapping.MappingTable;
 import fr.ifremer.nemo.medatlas.MedatlasSurveyWriter;
 import fr.ifremer.nemo.odv.ODVSurveyWriter;
-import fr.ifremer.nemo.output.CDIMappingWriter;
+/*import fr.ifremer.nemo.output.CDIMappingWriter;*/
 import fr.ifremer.nemo.output.CDIResumeWriter;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.ProgressNotification;

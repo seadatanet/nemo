@@ -14,9 +14,7 @@ package fr.ifremer.nemo.mapping;
  * @author jollivie
  *
  */
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.ISelection;
@@ -29,9 +27,10 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 
+import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.input.InputModel;
+import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.nemo.ui.*;
 
 public class ExportMappingAction extends Action implements ISelectionListener,
         ActionFactory.IWorkbenchAction {
@@ -72,6 +71,8 @@ public class ExportMappingAction extends Action implements ISelectionListener,
             dialog.setFilterPath(Utils.configuration.getModelsDirectory()
                     + "\\"); //$NON-NLS-1$
             dialog.setText(Messages.getString("ExportMappingAction.5")); //$NON-NLS-1$
+
+            dialog.setFileName(new Configuration().getSingleton().getFichierMapping());
             String extensions[] = new String[1];
             extensions[0] = "*.txt"; //$NON-NLS-1$
             dialog.setFilterExtensions(extensions);

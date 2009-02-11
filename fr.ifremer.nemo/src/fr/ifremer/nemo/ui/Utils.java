@@ -1391,7 +1391,7 @@ public class Utils {
             .extraitCode(OptionsAction.comboTypePlateForme.getText()));
 		configuration.setFichierMapping(OptionsAction.textFichierMapping
 				.getText());
-		configuration.setArboMapping(OptionsAction.textArboMapping.getText());
+		//configuration.setArboMapping(OptionsAction.textArboMapping.getText());
 
 		// Flags qualite
 		// int i, j;
