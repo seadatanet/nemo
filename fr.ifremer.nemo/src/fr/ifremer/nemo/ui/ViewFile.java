@@ -47,7 +47,7 @@ public class ViewFile extends ViewPart
 
     private Composite composite1 = null;
 
-    private Composite composite2 = null;
+    protected Composite composite2 = null;
 
     private Composite composite3 = null;
 
@@ -195,6 +195,7 @@ public class ViewFile extends ViewPart
         // ////////////////////////////////////////////////////////
         tabFolder
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                @Override
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
@@ -248,7 +249,7 @@ public class ViewFile extends ViewPart
      */
     private void createComposite2()
     {
-        Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL);
+        Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL); //$NON-NLS-1$
         composite2 = new Composite(tabFolder, SWT.NONE);
         composite2.setLayout(new FillLayout());
         styledTextCampagne =
@@ -310,7 +311,7 @@ public class ViewFile extends ViewPart
 
         labelCampagne = new Label(compositeChoixFichier, SWT.NONE);
         labelCampagne
-            .setText(Messages.getString("ViewFile.traiterCampagne") + "           "); //$NON-NLS-1$
+            .setText(Messages.getString("ViewFile.traiterCampagne") + "           "); //$NON-NLS-1$ //$NON-NLS-2$
 
         labelCollection = new Label(compositeChoixFichier, SWT.NONE);
         labelCollection.setText(Messages
@@ -331,6 +332,7 @@ public class ViewFile extends ViewPart
 
         radioFichier
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                @Override
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
@@ -341,6 +343,7 @@ public class ViewFile extends ViewPart
 
         radioDossier
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                @Override
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
@@ -351,6 +354,7 @@ public class ViewFile extends ViewPart
 
         radioCollectCas1
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                @Override
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
@@ -361,6 +365,7 @@ public class ViewFile extends ViewPart
 
         radioCollectCasN
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                @Override
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
@@ -374,6 +379,7 @@ public class ViewFile extends ViewPart
 
         buttonParcourir
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                @Override
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
@@ -386,7 +392,14 @@ public class ViewFile extends ViewPart
                     // on rend sélectionnables les radios ODV et Medatlas dans
                     // l'onglet Conversion
                     radMedatlas.setEnabled(true);
+                    radMedatlas.setSelection(true);
                     radODV.setEnabled(true);
+                    radODV.setSelection(false);
+                    radMonoStation.setEnabled(true);
+                    radMonoStation.setSelection(true);
+                    radMonoFichier.setEnabled(true);
+                    radMonoFichier.setSelection(false);
+                    afficheGrpODV();
 
                     // si fichier campagne
                     if (radioFichier.getSelection())
@@ -400,7 +413,7 @@ public class ViewFile extends ViewPart
                             tabItem1 = new TabItem(tabFolder, SWT.NONE, 1);
                             tabItem1.setText(Messages
                                 .getString("ViewFile.campagne")); //$NON-NLS-1$
-                            tabItem1.setControl(composite2);
+                            tabItem1.setControl(composite2); 
                         }
 
                         dossierCampagne = false;
@@ -415,7 +428,7 @@ public class ViewFile extends ViewPart
                             new FileDialog(shell, SWT.OPEN
                                     | SWT.APPLICATION_MODAL);
                         dialog.setFilterPath(Utils.configuration
-                            .getCruisesDirectory()); //$NON-NLS-1$
+                            .getCruisesDirectory());
                         nomFichier = dialog.open();
                         if (nomFichier != null)
                         {
@@ -447,9 +460,9 @@ public class ViewFile extends ViewPart
                                 e1.printStackTrace();
                             }
 
-                            radMedatlas.setEnabled(true);
-                            radODV.setEnabled(true);
-                            radMonoFichier.setEnabled(true); // FAE 0001134
+                            //radMedatlas.setEnabled(true);
+                            //radODV.setEnabled(true);
+                            //radMonoFichier.setEnabled(true); // FAE 0001134
                         }
                         else
                         {
@@ -487,7 +500,7 @@ public class ViewFile extends ViewPart
                             new DirectoryDialog(shell, SWT.OPEN
                                     | SWT.APPLICATION_MODAL);
                         dialog.setFilterPath(Utils.configuration
-                            .getCruisesDirectory()); //$NON-NLS-1$
+                            .getCruisesDirectory()); 
                         nomRepertoire = dialog.open();
                         if (nomRepertoire != null)
                         {
@@ -505,9 +518,9 @@ public class ViewFile extends ViewPart
 
                             }
 
-                            radMedatlas.setEnabled(true);
-                            radODV.setEnabled(true);
-                            radMonoFichier.setEnabled(true); // FAE 0001134
+                            //radMedatlas.setEnabled(true);
+                            //radODV.setEnabled(true);
+                            //radMonoFichier.setEnabled(true); // FAE 0001134
                         }
                         else
                         {
@@ -561,9 +574,9 @@ public class ViewFile extends ViewPart
                             radMedatlas.setEnabled(false);
                             radMedatlas.setSelection(false);
 
-                            radODV.setEnabled(true);
+                            //radODV.setEnabled(true);
                             radODV.setSelection(true);
-                            radMonoFichier.setEnabled(true); // FAE 0001134
+                            //radMonoFichier.setEnabled(true); // FAE 0001134
                             afficheGrpODV();
                         }
 
@@ -617,7 +630,7 @@ public class ViewFile extends ViewPart
                             radMedatlas.setEnabled(false);
                             radMedatlas.setSelection(false);
 
-                            radODV.setEnabled(true);
+                            //radODV.setEnabled(true);
                             radODV.setSelection(true);
                             radMonoFichier.setEnabled(false); // FAE 0001134
                             afficheGrpODV();
@@ -696,10 +709,10 @@ public class ViewFile extends ViewPart
         afficheGrpODV();
 
         radMonoStation = new Button(grpODV, SWT.RADIO);
-        radMonoStation.setText(Messages.getString("ViewFile.monoStation"));
+        radMonoStation.setText(Messages.getString("ViewFile.monoStation")); //$NON-NLS-1$
         radMonoStation.setSelection(true);
         radMonoFichier = new Button(grpODV, SWT.RADIO);
-        radMonoFichier.setText(Messages.getString("ViewFile.monoFichier"));
+        radMonoFichier.setText(Messages.getString("ViewFile.monoFichier")); //$NON-NLS-1$
 
         // if (isCollection()) {
         // radMedatlas.setEnabled(false);
@@ -709,10 +722,11 @@ public class ViewFile extends ViewPart
         Composite compoVide2 = new Composite(compositeConversion, SWT.NONE);
 
         chkForcerTri = new Button(compositeConversion, SWT.CHECK);
-        chkForcerTri.setText(Messages.getString("ViewFile.forcerTri"));
+        chkForcerTri.setText(Messages.getString("ViewFile.forcerTri")); //$NON-NLS-1$
 
         chkForcerTri
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                @Override
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent g)
                 {
@@ -723,6 +737,7 @@ public class ViewFile extends ViewPart
         // bouton radMedatlas
         radMedatlas
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                @Override
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent g)
                 {
@@ -734,6 +749,7 @@ public class ViewFile extends ViewPart
         // bouton radODV
         radODV
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                @Override
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent g)
                 {
@@ -756,13 +772,13 @@ public class ViewFile extends ViewPart
         groupTempo.setLayout(gridLayout1);
         labelDateRef = new Label(groupTempo, SWT.NONE);
         labelDateRef
-            .setText(Messages.getString("ViewFile.dateRef") + ": dd/MM/yyyy"); //$NON-NLS-1$
+            .setText(Messages.getString("ViewFile.dateRef") + ": dd/MM/yyyy"); //$NON-NLS-1$ //$NON-NLS-2$
 
         textTempoDateRef = new Text(groupTempo, SWT.BORDER);
 
         labelHeureRef = new Label(groupTempo, SWT.NONE);
         labelHeureRef
-            .setText(Messages.getString("ViewFile.heureRef") + ": hh24:mm"); //$NON-NLS-1$
+            .setText(Messages.getString("ViewFile.heureRef") + ": hh24:mm"); //$NON-NLS-1$ //$NON-NLS-2$
 
         textTempoHeureRef = new Text(groupTempo, SWT.BORDER);
 
@@ -780,18 +796,18 @@ public class ViewFile extends ViewPart
     private void createGroupeFichier()
     {
         grpFichier = new Group(composite11, SWT.NONE);
-        grpFichier.setText(Messages.getString("ViewFile.typeFichier"));
+        grpFichier.setText(Messages.getString("ViewFile.typeFichier"));  //$NON-NLS-1$
         GridLayoutFactory.fillDefaults().applyTo(grpFichier);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(grpFichier);
 
         radProfilVertical = new Button(grpFichier, SWT.RADIO);
-        radProfilVertical.setText(Messages.getString("ViewFile.profilVert"));
+        radProfilVertical.setText(Messages.getString("ViewFile.profilVert"));  //$NON-NLS-1$
 
         radSerieTempo = new Button(grpFichier, SWT.RADIO);
-        radSerieTempo.setText(Messages.getString("ViewFile.serieTempo"));
+        radSerieTempo.setText(Messages.getString("ViewFile.serieTempo"));  //$NON-NLS-1$
 
         radTrajectoire = new Button(grpFichier, SWT.RADIO);
-        radTrajectoire.setText(Messages.getString("ViewFile.trajectoire"));
+        radTrajectoire.setText(Messages.getString("ViewFile.trajectoire"));  //$NON-NLS-1$
 
         // Selection du type par defaut
         radProfilVertical.setSelection(true);
@@ -811,7 +827,7 @@ public class ViewFile extends ViewPart
             .applyTo(grpSeparateur);
 
         chkSeparateur = new Button(grpSeparateur, SWT.CHECK);
-        chkSeparateur.setText(Messages.getString("Preformat.3"));
+        chkSeparateur.setText(Messages.getString("Preformat.3"));  //$NON-NLS-1$
 
         compositeSeparateur = new Composite(grpSeparateur, SWT.NONE);
         GridLayoutFactory.fillDefaults().numColumns(3).applyTo(
@@ -820,17 +836,17 @@ public class ViewFile extends ViewPart
             compositeSeparateur);
 
         radioTabulation = new Button(compositeSeparateur, SWT.RADIO);
-        radioTabulation.setText(Messages.getString("Preformat.4"));
+        radioTabulation.setText(Messages.getString("Preformat.4"));  //$NON-NLS-1$
         radioTabulation.setSelection(true);
 
         radioPointVirgule = new Button(compositeSeparateur, SWT.RADIO);
-        radioPointVirgule.setText(Messages.getString("Preformat.5"));
+        radioPointVirgule.setText(Messages.getString("Preformat.5"));  //$NON-NLS-1$
 
         radioVirgule = new Button(compositeSeparateur, SWT.RADIO);
-        radioVirgule.setText(Messages.getString("Preformat.6"));
+        radioVirgule.setText(Messages.getString("Preformat.6"));  //$NON-NLS-1$
 
         radioEspace = new Button(compositeSeparateur, SWT.RADIO);
-        radioEspace.setText(Messages.getString("Preformat.7"));
+        radioEspace.setText(Messages.getString("Preformat.7"));  //$NON-NLS-1$
 
         // compositeSeparateurAutre = new Composite(compositeSeparateur,
         // SWT.NONE);
@@ -838,7 +854,7 @@ public class ViewFile extends ViewPart
         // GridDataFactory.fillDefaults().grab(false,false).applyTo(compositeSeparateurAutre);
 
         radioSeparateurAutre = new Button(compositeSeparateur, SWT.RADIO);
-        radioSeparateurAutre.setText(Messages.getString("Preformat.8"));
+        radioSeparateurAutre.setText(Messages.getString("Preformat.8"));  //$NON-NLS-1$
         textSeparateur = new Text(compositeSeparateur, SWT.BORDER);
 
         // Par defaut

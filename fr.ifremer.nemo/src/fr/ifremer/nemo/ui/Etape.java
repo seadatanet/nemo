@@ -195,7 +195,18 @@ public class Etape {
 					ok = false;
 				}
 			}
-
+            
+            // TODO ? vérif au moins 1 "sensor"
+//            boolean atLeastOne = false;
+//            for (int i = 0; i < taille; i++) {
+//                if (TableDataSurvey.types.get(i).getSensor()){
+//                    atLeastOne = true;
+//                }
+//            }
+//            if (!atLeastOne){
+//                Utils.messageErreur(Messages.getString("Etape.130")); //$NON-NLS-1$
+//                ok = false;
+//            }
 		}
 
 		if (ok) {
@@ -934,6 +945,14 @@ public class Etape {
 	}
 
 	private static void okDesc() {
+        // FAE1386 : desactiver "One File per station" si Trajectory
+        if (ViewFile.radTrajectoire.getSelection()){
+            ViewFile.radMonoStation.setSelection(false);
+            ViewFile.radMonoStation.setEnabled(false);
+            ViewFile.radMonoFichier.setEnabled(true);
+            ViewFile.radMonoFichier.setSelection(true);
+        }
+        
 		// envoi des valeurs dans le modele
 		// attention aux boutons radio
 
