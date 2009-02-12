@@ -50,6 +50,7 @@ public class CDIResumeWriter {
 
 	}
 
+
 	public void reset() {
 		if (surveys != null)
 			for (Survey survey : surveys)
@@ -128,13 +129,44 @@ public class CDIResumeWriter {
 //						writer.write(";" + Configuration.getSingleton().getIdEdmoRespCdi());
 
 						// Area Type
-						writer.write(sep + "Point");
+                        if(ViewFile.radProfilVertical.getSelection() || ViewFile.radSerieTempo.getSelection())
+                            writer.write(sep + "Point");                        
+                        else
+                            writer.write(sep + "Curve");
+                        
 
 						// Dataset name
-						writer.write(sep + Messages.getString("CDIResumeWriter.notSpecified"));
+                        if(survey.getName().isEmpty())
+                        {    
+                            if(EditConversion.getDataSetRef().isEmpty())
+                            {    
+                                writer.write(sep + Messages.getString("CDIResumeWriter.notSpecified"));                                
+                            } else 
+                            {
+                                writer.write(sep + EditConversion.getDataSetRef());                                 
+                            }
+                        
+                        } else
+                        {
+                            writer.write(sep + survey.getName());                             
+                        }
+
 
 						// Dataset ID
-						writer.write(sep + Messages.getString("CDIResumeWriter.notSpecified"));
+                        if(survey.getReference().isEmpty())
+                        {    
+                            if(EditConversion.getDataSetRef().isEmpty())
+                            {    
+                                writer.write(sep + Messages.getString("CDIResumeWriter.notSpecified"));                                
+                            } else 
+                            {
+                                writer.write(sep + EditConversion.getDataSetRef());                                 
+                            }
+                        
+                        } else
+                        {
+                            writer.write(sep + survey.getReference());                             
+                        }                        
 
 						// Dataset Rev Date
 						Calendar calendrier = Calendar.getInstance();
@@ -166,7 +198,7 @@ public class CDIResumeWriter {
 						writer.write(sep + codeAccesDonnees);
 
 						// Cruise name
-						if (ViewFile.collectionCas1)
+						if (!survey.getName().isEmpty())
 							writer.write(sep + survey.getName());
 						else
 							writer.write(sep + Messages.getString("CDIResumeWriter.notSpecified"));
@@ -277,4 +309,11 @@ public class CDIResumeWriter {
 		surveys.add(survey);
 
 	}
+    
+    public List<Survey> getSurveys() {
+        
+        return surveys;
+    }
+    
+    
 }

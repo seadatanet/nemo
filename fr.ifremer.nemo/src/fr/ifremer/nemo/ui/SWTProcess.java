@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -162,6 +163,8 @@ public class SWTProcess implements IRunnableWithProgress {
 							EditConversion.nomFichierSortie);
 
 					writerMed.writeSurvey(survey, fichierSortie, notifier);
+                    survey
+                    .setDataSize(fichierSortie.length() / 1024f / 1024f);                    
 
                    
 					for (Station station : survey.getStations()) {
@@ -199,7 +202,8 @@ public class SWTProcess implements IRunnableWithProgress {
 
 							writerODV.writeSurvey(survey, fichierSortie,
 									notifier);
-
+                            survey
+                            .setDataSize(fichierSortie.length() / 1024f / 1024f);
                             mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
                             
                             //Si le nom hors prefix est vide, il ne faut pas ajouter le séparateur
@@ -222,6 +226,8 @@ public class SWTProcess implements IRunnableWithProgress {
 								EditConversion.nomFichierSortie);
 
 						writerODV.writeSurvey(survey, fichierSortie, notifier);
+                        survey
+                        .setDataSize(fichierSortie.length() / 1024f / 1024f);                        
 
 						for (Station station : survey.getStations()) {
                             mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
@@ -259,7 +265,9 @@ public class SWTProcess implements IRunnableWithProgress {
 			writerMed.release();
 		}
 		if (!interrompu) {
-			survey.release();
+            if (!Configuration.getSingleton().getWriteCdi()) {
+                survey.release();
+            }
 		}
 
 		monitor.done();
@@ -475,6 +483,7 @@ public class SWTProcess implements IRunnableWithProgress {
 				survey = DataModel.inputModel.convert(notifier);
 
 				survey.setName("UNKNOWN");
+                
 
 			} catch (InterruptedException e) {
 				throw e;
@@ -490,7 +499,7 @@ public class SWTProcess implements IRunnableWithProgress {
 			}
 
 			writerODV = new fr.ifremer.nemo.odv.ODVSurveyWriter();
-
+            List<Survey> listdebug = CDIResumeWriter.getInstance().getSurveys();
 			try {
 				monitor2.setTaskName(Messages.getString("SWTProcess.4"));
 				if (!monitor2.isCanceled()) {
@@ -562,14 +571,16 @@ public class SWTProcess implements IRunnableWithProgress {
                             MappingTable.persist(mapping);
 						}
 					}
-
+                    listdebug = CDIResumeWriter.getInstance().getSurveys();
 					if (Configuration.getSingleton().getWriteCdi()) {
 						CDIResumeWriter.getInstance().addSurvey(survey);
 					}
+                    listdebug = CDIResumeWriter.getInstance().getSurveys();
 				} else {
 					// interruption
 					interrompu = true;
 				}
+
 			} catch (IOException e) {
 				// 
 				e.printStackTrace();
