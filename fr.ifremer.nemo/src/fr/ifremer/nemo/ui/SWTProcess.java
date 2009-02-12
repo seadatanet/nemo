@@ -499,7 +499,7 @@ public class SWTProcess implements IRunnableWithProgress {
 			}
 
 			writerODV = new fr.ifremer.nemo.odv.ODVSurveyWriter();
-            List<Survey> listdebug = CDIResumeWriter.getInstance().getSurveys();
+
 			try {
 				monitor2.setTaskName(Messages.getString("SWTProcess.4"));
 				if (!monitor2.isCanceled()) {
@@ -571,11 +571,11 @@ public class SWTProcess implements IRunnableWithProgress {
                             MappingTable.persist(mapping);
 						}
 					}
-                    listdebug = CDIResumeWriter.getInstance().getSurveys();
+
 					if (Configuration.getSingleton().getWriteCdi()) {
 						CDIResumeWriter.getInstance().addSurvey(survey);
 					}
-                    listdebug = CDIResumeWriter.getInstance().getSurveys();
+
 				} else {
 					// interruption
 					interrompu = true;

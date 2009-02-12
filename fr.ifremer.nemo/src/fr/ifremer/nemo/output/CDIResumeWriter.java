@@ -310,10 +310,6 @@ public class CDIResumeWriter {
 
 	}
     
-    public List<Survey> getSurveys() {
-        
-        return surveys;
-    }
-    
+   
     
 }
