@@ -825,6 +825,10 @@ public class Etape {
 		int cptFin = 0;
 
 		Utils.messageErreur(""); //$NON-NLS-1$
+        
+        String fmOut= new String();
+        //Formatter formatter = new Formatter();
+
 
 		if (nbreParam == 0) {
 			ok = false;
@@ -855,18 +859,29 @@ public class Etape {
 				// test direct sur valeur entree
 				// ok
 				ok = ok && true;
+                
+                //typeCourant.get
 
-				// test direct sur valeur sortie
-				if (Pattern.matches("^.{0,1}[0-9]*[0-9].*[0-9][0-9]*$",
-						typeCourant.getSortie())) {
-					// ok
-					ok = ok && true;
-
-				} else {
-					// erreur
-					ok = ok && false;
-					Utils.messageErreurAppend(Messages.getString("Etape.106")); //$NON-NLS-1$
-				}
+				// test direct sur valeur sortie (valeur par defaut)
+                try
+                {
+                    String formatString = typeCourant.getFormat();
+                    fmOut = String.format(java.util.Locale.US, formatString, Float.parseFloat(typeCourant.getSortie()));
+                    
+                    if(fmOut.equals(typeCourant.getSortie()))
+                    {
+    					// ok
+    					ok = ok && true;
+    
+    				} else {
+    					// erreur
+    					ok = ok && false;
+    					Utils.messageErreurAppend(Messages.getString("Etape.106")+ " " + typeCourant.getCode() + " : " + Messages.getString("Etape.106b")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$  
+    				}
+                } catch (Exception e)
+                {
+                    System.out.print(e.getMessage());
+                }
 
 				// check des valeurs debut<fin
 				if (typeCourant.getDebut() > typeCourant.getFin()) {
