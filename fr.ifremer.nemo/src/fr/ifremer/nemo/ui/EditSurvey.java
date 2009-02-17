@@ -62,7 +62,7 @@ public class EditSurvey {
 
 	public static ArrayList<Text> listeTextSurvey;
 
-	public static int expand, validee, loaded;
+    public static boolean expand, validee, loaded;
 
 	public static Combo comboConfid, comboDataCentres, comboCountries,
 			comboNavire, comboRegion;
@@ -89,9 +89,9 @@ public class EditSurvey {
 		Utils.messageErreur(""); //$NON-NLS-1$
 
 		// de base les sections sont refermees
-		expand = 0;
+		expand = false;
 
-		if (loaded == 0) {
+		if (!loaded) {
 
 			// INFOS sur les fichiers utilises
 			if (ViewFile.radioFichier.getSelection()) {
@@ -99,8 +99,7 @@ public class EditSurvey {
 				Utils.messageInfoAppend(Messages.getString("EditSurvey.1")); //$NON-NLS-1$
 			} else {
 				// dossier campagne
-				Utils
-						.messageInfoAppend(Messages.getString("EditSurvey.2") + ViewFile.nomRepertoire); //$NON-NLS-1$
+				Utils.messageInfoAppend(Messages.getString("EditSurvey.2") + ViewFile.nomRepertoire); //$NON-NLS-1$
 			}
 
 			// if (ViewFile.checkBoxTempo.getSelection()) {
@@ -109,7 +108,7 @@ public class EditSurvey {
 			}
 
 		}
-		loaded = 1;
+		loaded = true;
 
 		/*
 		 * recreer un formEdition sur le toolkit principal pour pouvoir faire un
@@ -247,7 +246,7 @@ public class EditSurvey {
 
 						for (i = 0; i <= EditSurvey.listeSectionsSurvey.size() - 1; i++) {
 
-							if (expand == 0) {
+							if (!expand) {
 								EditSurvey.listeSectionsSurvey.get(i)
 										.setExpanded(true);
 
@@ -258,13 +257,13 @@ public class EditSurvey {
 							}
 
 						}
-						if (expand == 0) {
+						if (!expand) {
 
 							buttonExpand.setText("-"); //$NON-NLS-1$
 							buttonExpand2.setText("-"); //$NON-NLS-1$
-							expand = 1;
+							expand = true;
 						} else {
-							expand = 0;
+							expand = false;
 
 							buttonExpand.setText("+"); //$NON-NLS-1$
 							buttonExpand2.setText("+"); //$NON-NLS-1$
@@ -286,7 +285,7 @@ public class EditSurvey {
 
 						for (i = 0; i <= EditSurvey.listeSectionsSurvey.size() - 1; i++) {
 
-							if (expand == 0) {
+							if (!expand) {
 								EditSurvey.listeSectionsSurvey.get(i)
 										.setExpanded(true);
 
@@ -297,13 +296,13 @@ public class EditSurvey {
 							}
 
 						}
-						if (expand == 0) {
+						if (!expand) {
 
 							buttonExpand.setText("-"); //$NON-NLS-1$
 							buttonExpand2.setText("-"); //$NON-NLS-1$
-							expand = 1;
+							expand = true;
 						} else {
-							expand = 0;
+							expand = false;
 
 							buttonExpand.setText("+"); //$NON-NLS-1$
 							buttonExpand2.setText("+"); //$NON-NLS-1$
@@ -462,9 +461,14 @@ public class EditSurvey {
 					+ Messages.getString("EditSurvey.71");
 		}
 
-		message = message + Messages.getString("EditSurvey.73") + "  OK - "
-				+ NemoLists.nbVocabLists + " "
-				+ Messages.getString("EditSurvey.70");
+        if (NemoLists.okVocabLists){            
+            message = message + Messages.getString("EditSurvey.73") + "  OK - "
+                    + NemoLists.nbVocabLists + " "
+                    + Messages.getString("EditSurvey.70");
+        }else{
+            message = message + Messages.getString("EditSurvey.73") + "  "
+            + Messages.getString("EditSurvey.71");
+        }
 
 		if (NemoLists.okEdmo) {
 			message = message + Messages.getString("EditSurvey.74") + "  OK - "
@@ -515,7 +519,7 @@ public class EditSurvey {
 		// description
 
 		// verifier que un fichier est charge avant d'ouvrir un modele
-		if ((EditDesc.validee != 1) && (EditSurvey.loaded != 1)) {
+		if ((!EditDesc.validee) && (!loaded)) {
 			Utils.messageErreur(Messages.getString("EditSurvey.54")); //$NON-NLS-1$
 		} else {
 			FileDialog dialog = new FileDialog(shell, SWT.OPEN
@@ -553,12 +557,6 @@ public class EditSurvey {
 				listSensor.add(listWSDT[i].getCode());
 			}
 		}
-
-		// System.out.println("");
-		// for (String temp : listSensor)
-		// {
-		// System.out.println(temp);
-		// }
 
 		if (ViewFile.dossierCampagne) {
 
@@ -803,7 +801,6 @@ public class EditSurvey {
 
 		// refresh global
 		ViewEdit.formEdition.reflow(true);
-
 	}
 
 	public static void ajoutModifyListenerText(ArrayList<Text> liste) {
@@ -1024,7 +1021,7 @@ public class EditSurvey {
 		}
 
 		// textCentre.setText("FI");
-		validee = 0;
+		validee = false;
 
 		// effacement de la liste des types de données dans la table
 		TableDataSurvey.types = new ArrayList<TypeSurvey>();
@@ -1060,14 +1057,11 @@ public class EditSurvey {
 			}
 		}
 
-		EditSurvey.okApresReset = false;
-		ViewFile.tabItem1.setText(Messages.getString("EditSurvey.4"));
-		EditStation.okApresReset = false;
-		ViewFile.tabItem2.setText(Messages.getString("EditStation.1"));
-		EditData.okApresReset = false;
-		ViewFile.tabItem3.setText(Messages.getString("EditData.1"));
+		invalidEtape();
+		EditStation.invalidEtape();
+		EditData.invalidEtape();
 
-		Utils.messageErreur("");
+		Utils.messageErreur(Global.EMPTY_STRING);
 		
 		// FAE0001187 : RaZ Navire et Pays et Region
 		comboCountries.deselectAll();
@@ -1136,5 +1130,17 @@ public class EditSurvey {
 			listeType.dispose();
 
 	}
+    
+
+
+    public static void invalidEtape(){
+        okApresReset = false;
+        if (!ViewFile.tabItem1.isDisposed()) {
+            ViewFile.tabItem1.setText(Messages.getString("EditSurvey.4")); //$NON-NLS-1$
+
+            // reinitialisation de la conversion
+            if (DataModel.inputModel != null) DataModel.inputModel.setConverted(false);
+        }
+    }
 
 }

@@ -54,8 +54,11 @@ public class NemoLists implements Cloneable {
 
 	static protected java.util.HashMap<Integer, String> _edmo = new java.util.HashMap<Integer, String>();
 
-	public static Boolean okSurveys, okParameters, okDataTypes,
-			okVocabLists, okEdmo;
+	public static Boolean okSurveys = false;
+    public static Boolean okParameters = false;
+    public static Boolean okDataTypes = false;
+    public static Boolean okVocabLists = false;
+    public static Boolean okEdmo = false;
 
 	public static int nbSurveys, nbParameters, nbRegions, nbDataTypes,
 			nbVocabLists, nbEdmo;
@@ -86,7 +89,8 @@ public class NemoLists implements Cloneable {
 	 * 
 	 * @return a copy of this object
 	 */
-	public Object clone() throws CloneNotSupportedException {
+	@Override
+    public Object clone() throws CloneNotSupportedException {
 		NemoLists copy = null;
 		copy = (NemoLists) super.clone();
 		return copy;
@@ -1185,9 +1189,8 @@ public class NemoLists implements Cloneable {
 	public static void writeSdnParameters(Conversion convert) {
 		setSdnParameters(convert.getDebut());
 		
-		setSdnParameters(convert.getDebut() + "SDN_parameter_mapping");
+		setSdnParameters(convert.getDebut() + "SDN_parameter_mapping"); //$NON-NLS-1$
         
-        // TODO verifier FAE 1386
         for (ParameterModel param : convert.getAddedParameterModels()) {
             _sdnParameters += Global.RN + convert.getDebut() + parameterMap(param.getModel());
         }

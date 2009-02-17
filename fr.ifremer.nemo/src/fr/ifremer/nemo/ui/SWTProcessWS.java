@@ -58,24 +58,45 @@ public class SWTProcessWS implements IRunnableWithProgress {
 			monitor.subTask(Messages.getString("SWTProcessWS.3"));
 			NemoLists.updateDataTypes();
 
-			monitor.subTask(Messages.getString("SWTProcessWS.7"));
-			NemoLists.updateParameters();
+            if (!monitor.isCanceled()){
+                monitor.subTask(Messages.getString("SWTProcessWS.7"));
+                NemoLists.updateParameters();
+            }
 
-			monitor.subTask(Messages.getString("SWTProcessWS.8"));
-			NemoLists.updateSurveys();
+            if (!monitor.isCanceled()){
+                monitor.subTask(Messages.getString("SWTProcessWS.8"));
+                NemoLists.updateSurveys();
+            }
+            
+
+            if (!monitor.isCanceled()){
+                monitor.subTask(Messages.getString("SWTProcessWS.9"));
+                // FAE 0001132 : precision du nom de la liste dans le message
+                NemoLists.updateVocabLists(monitor);
+            }
+            
+
+            if (!monitor.isCanceled()){
+                monitor.subTask(Messages.getString("SWTProcessWS.9") + " Mapping P091 / P011");
+                NemoLists.updateVocabMap("P091", "P011");
+            }
+            
+
+            if (!monitor.isCanceled()){
+                monitor.subTask(Messages.getString("SWTProcessWS.9") + " Mapping P091 / P061");
+                NemoLists.updateVocabMap("P091", "P061");
+            }
+
+//            if (!monitor.isCanceled()){
+//                monitor.subTask(Messages.getString("SWTProcessWS.9") + " Mapping L05 / C77");
+//                NemoLists.updateVocabMap("L05", "C77");
+//            }
 			
-			monitor.subTask(Messages.getString("SWTProcessWS.9"));
-			// FAE 0001132 : precision du nom de la liste dans le message
-			NemoLists.updateVocabLists(monitor);
-			monitor.subTask(Messages.getString("SWTProcessWS.9") + " Mapping P091 / P011");
-			NemoLists.updateVocabMap("P091", "P011");
-			monitor.subTask(Messages.getString("SWTProcessWS.9") + " Mapping P091 / P061");
-			NemoLists.updateVocabMap("P091", "P061");
-//            monitor.subTask(Messages.getString("SWTProcessWS.9") + " Mapping L05 / C77");
-//            NemoLists.updateVocabMap("L05", "C77");
-			
-			monitor.subTask(Messages.getString("SWTProcessWS.10"));
-			NemoLists.updateEdmo();
+
+            if (!monitor.isCanceled()){
+                monitor.subTask(Messages.getString("SWTProcessWS.10"));
+                NemoLists.updateEdmo();
+            }
 		} else {
 
 			if (dossier) {
