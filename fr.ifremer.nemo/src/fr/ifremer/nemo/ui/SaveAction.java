@@ -46,12 +46,13 @@ public class SaveAction extends Action implements ISelectionListener,
 
 	}
 
-	public void run() {
+	@Override
+    public void run() {
 		// sauvegarde du modele
 
 		FileOutputStream fileOutputStream = null;
 
-		if (EditData.validee == 0) {
+		if (!EditData.validee) {
 			Utils.messageErreur(Messages.getString("SaveAction.3")); //$NON-NLS-1$
 		} else {
 			if (EditDesc.okApresReset && EditSurvey.okApresReset
@@ -68,7 +69,7 @@ public class SaveAction extends Action implements ISelectionListener,
 				Utils.messageOK(Messages.getString("SaveAction.4")); //$NON-NLS-1$
 
 			} else {
-				Utils.messageErreur(Messages.getString("SaveAction.3"));
+				Utils.messageErreur(Messages.getString("SaveAction.3")); //$NON-NLS-1$
 			}
 		}
 	}
@@ -79,7 +80,7 @@ public class SaveAction extends Action implements ISelectionListener,
 		FileDialog dialog = new FileDialog(shell, SWT.SAVE
 				| SWT.APPLICATION_MODAL);
 		dialog.setText(Messages.getString("SaveAction.5")); //$NON-NLS-1$
-		dialog.setFilterPath(Utils.configuration.getModelsDirectory() + "\\");
+		dialog.setFilterPath(Utils.configuration.getModelsDirectory() + "\\"); //$NON-NLS-1$
 		String extensions[] = new String[1];
 		extensions[0] = "*.xml"; //$NON-NLS-1$
 		dialog.setFilterExtensions(extensions);

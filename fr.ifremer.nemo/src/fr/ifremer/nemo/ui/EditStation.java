@@ -46,6 +46,9 @@ public class EditStation {
 
 		// affichage du texte dans la zone de gauche
 		ViewFile.styledTextStation.setText(Utils.texteBrut);
+
+        // affichage courant
+        ViewFile.affiche = 2;
 		loaded = true;
 
 		// de base les sections sont refermees
@@ -102,17 +105,7 @@ public class EditStation {
             @Override
             public void widgetSelected(
                     org.eclipse.swt.events.SelectionEvent e) {
-
-                for (NemoSection stationSection : listeSectionsStation){
-                    stationSection.razValues();
-                }
-                
-                okApresReset = false;
-                ViewFile.tabItem2.setText(Messages.getString("EditStation.1")); //$NON-NLS-1$
-                EditData.okApresReset = false;
-                ViewFile.tabItem3.setText(Messages.getString("EditData.1")); //$NON-NLS-1$
-                Utils.messageErreur(Global.EMPTY_STRING);
-
+                razText();
             }
         });
 
@@ -171,8 +164,6 @@ public class EditStation {
 		// refresh du formulaire
 		formEdition.reflow(true);
 
-		// affichage courant
-		ViewFile.affiche = 2;
 	}
 
     private static void initBoutons() {
@@ -407,7 +398,17 @@ public class EditStation {
 
         // refresh global
         ViewEdit.formEdition.reflow(true);
+    }
+    
+    protected static void razText(){
 
+        for (NemoSection stationSection : listeSectionsStation){
+            stationSection.razValues();
+        }
+        
+        invalidEtape();
+        EditData.invalidEtape();
+        Utils.messageErreur(Global.EMPTY_STRING);
     }
 
 	private static void disposeElements() {
@@ -420,6 +421,9 @@ public class EditStation {
                 stationSection.dispose();
             }
         }
+        if (buttonRAZ != null) buttonRAZ.dispose();
+        if (buttonExpand != null) buttonExpand.dispose();
+        if (buttonValidate != null) buttonValidate.dispose();
 	}
 
     public static boolean someInData() {
@@ -435,48 +439,12 @@ public class EditStation {
         return inData;
     }
 
-    
-    
-//	public static void test() {
-//		int i;
-//
-//		for (i = 0; i <= EditData.listeSectionsData.size() - 1; i++) {
-//
-//			EditData.listeSectionsData.get(i).setEnabled(false); // Parent(s);
-//
-//		}
-//
-//		// refresh global
-//		ViewEdit.formEdition.reflow(true);
-//	}
-//
-//	public static void test2() {
-//		int i;
-//
-//		for (i = 0; i <= EditData.listeSectionsData.size() - 1; i++) {
-//
-//			EditData.listeSectionsData.get(i).setEnabled(true); // Parent(s);
-//
-//		}
-//
-//		// refresh global
-//		ViewEdit.formEdition.reflow(true);
-//	}
+    public static void invalidEtape(){
+        okApresReset = false;
+        ViewFile.tabItem2.setText(Messages.getString("EditStation.1"));         //$NON-NLS-1$
 
-
-//    public static void initTypes() {
-//
-//        comboRefStationType.removeAll();
-//
-//        // remplissage avec les dataTypes de la campagne
-//
-//        int taille = TableDataSurvey.types.size();
-//        for (int i = 0; i < taille; i++) {
-//            // on n'ajoute que les sensors
-//            if (TableDataSurvey.types.get(i).getSensor()) {
-//                comboRefStationType.add(TableDataSurvey.types.get(i).getCode());
-//            }
-//        }
-//    }
+        // reinitialisation de la conversion
+        if (DataModel.inputModel != null) DataModel.inputModel.setConverted(false);
+    }
     
 }

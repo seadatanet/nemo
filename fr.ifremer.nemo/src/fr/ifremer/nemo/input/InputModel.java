@@ -51,6 +51,9 @@ public class InputModel implements Cloneable, PathElementHandler,
 	 */
 	protected SurveyMedia _media;
 
+    
+    private boolean converted = false;
+
 	public InputModel() {
 		_media = null;
 	}
@@ -94,13 +97,13 @@ public class InputModel implements Cloneable, PathElementHandler,
 	public void buildFromElement(String a_URI, String a_LocalName,
 			String a_QName, Attributes a_Attributes) throws SAXException {
 		String tmp;
-		if ((tmp = a_Attributes.getValue("refDateBased")) != null) {
+		if ((tmp = a_Attributes.getValue("refDateBased")) != null) { //$NON-NLS-1$
 			setRefDateBased(tmp);
 		}
-		if ((tmp = a_Attributes.getValue("refDate")) != null) {
+		if ((tmp = a_Attributes.getValue("refDate")) != null) { //$NON-NLS-1$
 			setRefDate(tmp);
 		}
-		if ((tmp = a_Attributes.getValue("refTime")) != null) {
+		if ((tmp = a_Attributes.getValue("refTime")) != null) { //$NON-NLS-1$
 			setRefTime(tmp);
 		}
 	}
@@ -122,8 +125,8 @@ public class InputModel implements Cloneable, PathElementHandler,
 	 */
 	public SAXConsumer consumeElement(String a_URI, String a_LocalName,
 			String a_QName, Attributes a_Attributes) throws SAXException {
-		if (a_LocalName.equals("Media")) {
-			return new PathElementConsumer("Media", this);
+		if (a_LocalName.equals("Media")) { //$NON-NLS-1$
+			return new PathElementConsumer("Media", this); //$NON-NLS-1$
 		}
 		return null;
 	}
@@ -160,7 +163,7 @@ public class InputModel implements Cloneable, PathElementHandler,
 			String a_LocalName, String a_QName, Attributes a_Attributes)
 			throws SAXException {
 		SAXConsumer c = null;
-		if (path.equals("Media")) {
+		if (path.equals("Media")) { //$NON-NLS-1$
 			c = preferredMediaXMLElement(a_URI, a_LocalName, a_QName,
 					a_Attributes);
 			setMedia((SurveyMedia) c);
@@ -178,11 +181,11 @@ public class InputModel implements Cloneable, PathElementHandler,
 	 * 
 	 */
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
-		a_Writer.putAttribute("refDateBased", isRefDateBased());
-		a_Writer.putAttribute("refDate", getRefDate());
-		a_Writer.putAttribute("refTime", getRefTime());
+		a_Writer.putAttribute("refDateBased", isRefDateBased()); //$NON-NLS-1$
+		a_Writer.putAttribute("refDate", getRefDate()); //$NON-NLS-1$
+		a_Writer.putAttribute("refTime", getRefTime()); //$NON-NLS-1$
 		if (getMedia() != null) {
-			a_Writer.openTag("Media");
+			a_Writer.openTag("Media"); //$NON-NLS-1$
 			getMedia().writeXMLOn(a_Writer);
 			a_Writer.closeTag();
 		}
@@ -197,7 +200,7 @@ public class InputModel implements Cloneable, PathElementHandler,
 	 * 
 	 */
 	public void writeXMLOn(XMLOutputWriter a_Writer) {
-		a_Writer.openTag("InputModel");
+		a_Writer.openTag("InputModel"); //$NON-NLS-1$
 		writeXMLBodyOn(a_Writer);
 		a_Writer.closeTag();
 	}
@@ -220,7 +223,8 @@ public class InputModel implements Cloneable, PathElementHandler,
 	 * 
 	 * @return a copy of this object
 	 */
-	public Object clone() throws CloneNotSupportedException {
+	@Override
+    public Object clone() throws CloneNotSupportedException {
 		InputModel copy = null;
 		copy = (InputModel) super.clone();
 		copy._media = null;
@@ -234,7 +238,11 @@ public class InputModel implements Cloneable, PathElementHandler,
 	 * Remove any associated links
 	 */
 	public void release() {
-		releaseMedia();
+        releaseMedia();
+        _refDate = 0;
+        _refDateBased = false;
+        _refTime = 0;
+        converted = false;
 	}
 
 	/**
@@ -342,7 +350,8 @@ public class InputModel implements Cloneable, PathElementHandler,
 	/**
 	 * Remove any link for role media
 	 */
-	public void releaseMedia() {
+	private void releaseMedia() {
+        if (_media != null) _media.release();
 		setMedia(null);
 	}
 
@@ -386,57 +395,64 @@ public class InputModel implements Cloneable, PathElementHandler,
 	public Survey convert(ProgressNotification a_ProgressNotifier)
 			throws NumberFormatException, IOException, ParseException, StringIndexOutOfBoundsException, InterruptedException {
 
-		if (isRefDateBased()) {
-			TimeZone tz = TimeZone.getTimeZone("GMT");
-			Calendar cal = Calendar.getInstance(tz);
-			cal.clear();
-			cal.setTimeInMillis(getRefDate());
-			Calendar cal2 = Calendar.getInstance(tz);
-			cal2.clear();
-			cal2.setTimeInMillis(_refTime);
-			cal.set(Calendar.HOUR_OF_DAY, cal2.get(Calendar.HOUR_OF_DAY));
-			cal.set(Calendar.MINUTE, cal2.get(Calendar.MINUTE));
-			cal.set(Calendar.SECOND, cal2.get(Calendar.SECOND));
-
-			try {
-				return _media.convert(_refDateBased, cal.getTimeInMillis(),
-						a_ProgressNotifier);
-			} 
-			catch (ParseException e)
-			{
-				throw e;
-			}catch (Exception e) {
-				e.printStackTrace();
-			}
-		} else {
-			try {
-				return _media.convert(_refDateBased, 0, a_ProgressNotifier);
-			} 
-			catch (InterruptedException e)
-			{
-				throw e;
-			}
-			catch (ParseException e)
-			{
-				throw e;
-			}
-			catch (NumberFormatException e)
-			{
-				throw e;
-			}
-			catch (StringIndexOutOfBoundsException e)
-			{
-				throw e;
-			}
-
-			catch (Exception e) {
-			
-				// 
-				e.printStackTrace();
-				System.out.println("interrompu !");
-			}
-		}
-		return null;
+        Survey survey = null;
+        
+        try{
+            if (!converted)
+            {   
+                long refDate = 0;
+                if (isRefDateBased()) {
+                    TimeZone tz = TimeZone.getTimeZone("GMT"); //$NON-NLS-1$
+                    Calendar cal = Calendar.getInstance(tz);
+                    cal.clear();
+                    cal.setTimeInMillis(getRefDate());
+                    Calendar cal2 = Calendar.getInstance(tz);
+                    cal2.clear();
+                    cal2.setTimeInMillis(_refTime);
+                    cal.set(Calendar.HOUR_OF_DAY, cal2.get(Calendar.HOUR_OF_DAY));
+                    cal.set(Calendar.MINUTE, cal2.get(Calendar.MINUTE));
+                    cal.set(Calendar.SECOND, cal2.get(Calendar.SECOND));
+                    
+                    refDate = cal.getTimeInMillis();
+                    
+                }
+                survey = _media.convert(_refDateBased, refDate, a_ProgressNotifier);
+                _media.setModel(survey);
+                converted = true;
+            }
+            else
+            {
+                // la conversion en objet a déjà été réalisée
+                survey = _media.getModel();
+            }
+        }
+        catch (IOException e)
+        {
+            throw e;
+        }
+        catch (InterruptedException e)
+        {
+            throw e;
+        }
+        catch (ParseException e)
+        {
+            throw e;
+        }
+        catch (NumberFormatException e)
+        {
+            throw e;
+        }
+        catch (StringIndexOutOfBoundsException e)
+        {
+            throw e;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("interrompu !"); //$NON-NLS-1$
+        }
+        
+        
+        return survey;
 	}
 
 	/**
@@ -475,7 +491,7 @@ public class InputModel implements Cloneable, PathElementHandler,
 			ex.printStackTrace();
 		} finally {
 			try {
-				stream.close();
+				if (stream != null) stream.close();
 			} catch (Exception e) {
 			}
 		}
@@ -493,13 +509,31 @@ public class InputModel implements Cloneable, PathElementHandler,
 	public SurveyMedia preferredMediaXMLElement(String a_URI,
 			String a_LocalName, String a_QName, Attributes a_Attributes)
 			throws SAXException {
-		if (a_LocalName.equals("DirectoryBasedSurvey")) {
+		if (a_LocalName.equals("DirectoryBasedSurvey")) { //$NON-NLS-1$
 			return (SurveyMedia) DirectoryBasedSurvey.fromElement(a_URI,
 					a_LocalName, a_QName, a_Attributes);
-		} else {
+		} //else {
 			return (SurveyMedia) SingleFileSurvey.fromElement(a_URI,
 					a_LocalName, a_QName, a_Attributes);
-		}
+		//}
 	}
+
+    /**
+     * Getter sur converted.
+     * @return the converted
+     */
+    public boolean isConverted()
+    {
+        return converted;
+    }
+
+    /**
+     * Setter sur converted.
+     * @param converted the converted to set
+     */
+    public void setConverted(boolean converted)
+    {
+        this.converted = converted;
+    }
 
 } /* End of class: InputModel */

@@ -52,15 +52,14 @@ public class CDIResumeWriter {
 
 
 	public void reset() {
-		if (surveys != null)
-			for (Survey survey : surveys)
-				survey.release();
-		
+//		if (surveys != null)
+//			for (Survey survey : surveys)
+//				survey.release();
+        nomFichierSortie = Global.EMPTY_STRING;
 		surveys = new ArrayList<Survey>();
 	}
 
 	public void writeResume() throws IOException {
-		// choixFichierSortie();
 
 		File output = new File(nomFichierSortie);
 
@@ -72,45 +71,45 @@ public class CDIResumeWriter {
 
 			Formatter formatter = Formatter.getSingleton();
 
-			String sep = Messages.getString("CDIResumeWriter.separateur");
+			String sep = Messages.getString("CDIResumeWriter.separateur"); //$NON-NLS-1$
 			String codeEdmoDonnees = Utils.configuration.getCodeEdmoDonnees();
 			String idEdmoRespDonnees = Utils.configuration.getIdEdmoRespDonnees();
 			String idEdmoRespCdi = Utils.configuration.getIdEdmoRespCdi();
 			String idEdmoDistDonnees= Utils.configuration.getIdEdmoDistDonnees();
 			String codeTypePlateForme = Utils.configuration.getTypePlateForme();
 			String codeAccesDonnees = Utils.configuration.getAccesDonnees();
-			String formatSortie = "";
+			String formatSortie = Global.EMPTY_STRING;
 			if (ViewFile.radODV.getSelection()) {
-				formatSortie = Messages.getString("CDIResumeWriter.odv");
+				formatSortie = Messages.getString("CDIResumeWriter.odv"); //$NON-NLS-1$
 			} else {
-				formatSortie = Messages.getString("CDIResumeWriter.medatlas");
+				formatSortie = Messages.getString("CDIResumeWriter.medatlas"); //$NON-NLS-1$
 			}
 			String cdiUrl = Utils.configuration.getCdiURL();
 			String cdiMethod = Utils.configuration.getCdiMethod();
 			
 			writer.write(
-					"LOCAL_CDI_ID" + sep +
-					"EDMO_AUTHOR" + sep +
-					"AREA_TYPE" + sep +
-					"DATASET_NAME" + sep +
-					"DATASET_ID" + sep +
-					"DATASET_REV_DATE" + sep +
-					"EDMO_ORIGINATOR" + sep +
-					"DATASET_ABS" + sep +
-					"EDMO_CUSTODIAN" + sep +
-					"PDV_CODE" + sep +
-					"PLATFORM_TYPE" + sep +
-					"DATASET_ACCESS" + sep +
-					"CRUISE_NAME" + sep +
-					"STATION_NAME" + sep +
-					"STATION_LATITUDE" + sep +
-					"STATION_LONGITUDE" + sep +
-					"STATION_DATE" + sep +
-					"EDMO_DISTRIBUTOR" + sep +
-					"FORMAT" + sep +
-					"DATA_SIZE" + sep +
-					"DIST_WEBSITE" + sep +
-					"DIST_METHODE");
+					"LOCAL_CDI_ID" + sep + //$NON-NLS-1$
+					"EDMO_AUTHOR" + sep + //$NON-NLS-1$
+					"AREA_TYPE" + sep + //$NON-NLS-1$
+					"DATASET_NAME" + sep + //$NON-NLS-1$
+					"DATASET_ID" + sep + //$NON-NLS-1$
+					"DATASET_REV_DATE" + sep + //$NON-NLS-1$
+					"EDMO_ORIGINATOR" + sep + //$NON-NLS-1$
+					"DATASET_ABS" + sep + //$NON-NLS-1$
+					"EDMO_CUSTODIAN" + sep + //$NON-NLS-1$
+					"PDV_CODE" + sep + //$NON-NLS-1$
+					"PLATFORM_TYPE" + sep + //$NON-NLS-1$
+					"DATASET_ACCESS" + sep + //$NON-NLS-1$
+					"CRUISE_NAME" + sep + //$NON-NLS-1$
+					"STATION_NAME" + sep + //$NON-NLS-1$
+					"STATION_LATITUDE" + sep + //$NON-NLS-1$
+					"STATION_LONGITUDE" + sep + //$NON-NLS-1$
+					"STATION_DATE" + sep + //$NON-NLS-1$
+					"EDMO_DISTRIBUTOR" + sep + //$NON-NLS-1$
+					"FORMAT" + sep + //$NON-NLS-1$
+					"DATA_SIZE" + sep + //$NON-NLS-1$
+					"DIST_WEBSITE" + sep + //$NON-NLS-1$
+					"DIST_METHODE"); //$NON-NLS-1$
 			
 			for (Survey survey : surveys) {
 				for (Station station : survey.getStations()) {
@@ -119,20 +118,16 @@ public class CDIResumeWriter {
 						
 						// CDI ID
 						writer.write(EditConversion.getLocalCdiId(station, survey.getReference()));
-//						writer.write(/*station.getReference() + "_" +*/ Utils.configuration.getDataCenter() + "_"
-//								+ String.valueOf(cdiId++));
-//						writer.write(Configuration.getSingleton().getIdEdmoRespCdi() + "_"
-//								+ String.valueOf(cdiId++));
+
 
 						// EDMO author
 	 					writer.write(sep + idEdmoRespCdi);
-//						writer.write(";" + Configuration.getSingleton().getIdEdmoRespCdi());
 
 						// Area Type
                         if(ViewFile.radProfilVertical.getSelection() || ViewFile.radSerieTempo.getSelection())
-                            writer.write(sep + "Point");                        
+                            writer.write(sep + "Point");                         //$NON-NLS-1$
                         else
-                            writer.write(sep + "Curve");
+                            writer.write(sep + "Curve"); //$NON-NLS-1$
                         
 
 						// Dataset name
@@ -140,7 +135,7 @@ public class CDIResumeWriter {
                         {    
                             if(EditConversion.getDataSetRef().isEmpty())
                             {    
-                                writer.write(sep + Messages.getString("CDIResumeWriter.notSpecified"));                                
+                                writer.write(sep + Messages.getString("CDIResumeWriter.notSpecified"));                                 //$NON-NLS-1$
                             } else 
                             {
                                 writer.write(sep + EditConversion.getDataSetRef());                                 
@@ -157,7 +152,7 @@ public class CDIResumeWriter {
                         {    
                             if(EditConversion.getDataSetRef().isEmpty())
                             {    
-                                writer.write(sep + Messages.getString("CDIResumeWriter.notSpecified"));                                
+                                writer.write(sep + Messages.getString("CDIResumeWriter.notSpecified"));                                 //$NON-NLS-1$
                             } else 
                             {
                                 writer.write(sep + EditConversion.getDataSetRef());                                 
@@ -171,7 +166,7 @@ public class CDIResumeWriter {
 						// Dataset Rev Date
 						Calendar calendrier = Calendar.getInstance();
 						Date dateEcriture = calendrier.getTime();
-						SimpleDateFormat dateFormat = new  SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+						SimpleDateFormat dateFormat = new  SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss"); //$NON-NLS-1$
 						String stringDate = dateFormat.format(dateEcriture);
 						writer.write(sep + stringDate);
 
@@ -181,15 +176,13 @@ public class CDIResumeWriter {
 //								+ Configuration.getSingleton().getCodeEdmoDonnees());
 
 						// Dataset ABS
-						writer.write(sep + Messages.getString("CDIResumeWriter.notSpecified"));
+						writer.write(sep + Messages.getString("CDIResumeWriter.notSpecified")); //$NON-NLS-1$
 
 						// EDMO Custodian
 						writer.write(sep + idEdmoRespDonnees);
-//						writer.write(";"
-//								+ Configuration.getSingleton().getIdEdmoRespDonnees());
 						
 						// PDV code
-						writer.write(sep + Utils.extraitCodeURN(NemoLists.getVocabMatch("P091", "P011", param.getCode(), Messages.getString("CDIResumeWriter.notSpecified"))) + "");
+						writer.write(sep + Utils.extraitCodeURN(NemoLists.getVocabMatch("P091", "P011", param.getCode(), Messages.getString("CDIResumeWriter.notSpecified"))) + Global.EMPTY_STRING);   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 
 						// Platform Type
 						writer.write(sep + codeTypePlateForme);
@@ -201,48 +194,44 @@ public class CDIResumeWriter {
 						if (!survey.getName().isEmpty())
 							writer.write(sep + survey.getName());
 						else
-							writer.write(sep + Messages.getString("CDIResumeWriter.notSpecified"));
+							writer.write(sep + Messages.getString("CDIResumeWriter.notSpecified")); //$NON-NLS-1$
 
 						// Station name
 						writer.write(sep + station.getReference().trim());
 						
 						// station latitude
 						writer.write(sep
-								+ formatter.formatLatitude("+DD.ddd ", station
+								+ formatter.formatLatitude("+DD.ddd ", station //$NON-NLS-1$
 										.getLatitude()));
 
 						// station longitude
 						writer.write(sep
-								+ formatter.formatLongitude("+DDD.ddd", station
+								+ formatter.formatLongitude("+DDD.ddd", station //$NON-NLS-1$
 										.getLongitude()));
 
 						// station date
 						Formatter format = new Formatter();
-						SimpleDateFormat dateFormat2 = new  SimpleDateFormat("yyyy-MM-dd'T'");
+						SimpleDateFormat dateFormat2 = new  SimpleDateFormat("yyyy-MM-dd'T'"); //$NON-NLS-1$
 						writer.write(sep
-								+ dateFormat2.format(new Date(station.getDate())) + format.formatDateTime("hh24:mm:ss", station.getCorrectedTime()));
+								+ dateFormat2.format(new Date(station.getDate())) + format.formatDateTime("hh24:mm:ss", station.getCorrectedTime())); //$NON-NLS-1$
 			
 						station.getOffsetTU();
 						station.getParameters()[0].getStation().getTime();
 						
 						// edmo distributor
 						writer.write(sep + idEdmoDistDonnees);
-//						writer.write(";"
-//								+ Configuration.getSingleton().getIdEdmoDistDonnees());
 						
 						// Format
 						writer.write(sep + formatSortie);
 						
 						// data size
-						writer.write(sep + Formatter.getSingleton().formatFloat("%.3f",survey.getDataSize()));
+						writer.write(sep + Formatter.getSingleton().formatFloat("%.3f",survey.getDataSize())); //$NON-NLS-1$
 
 						// DIST website
 						writer.write(sep + cdiUrl);
-//						writer.write(";" + Configuration.getSingleton().getCdiURL());
 
 						// DIST methode
 						writer.write(sep + cdiMethod);
-//						writer.write(";" + Configuration.getSingleton().getCdiMethod());
 					}	
 				}
 			}
@@ -253,23 +242,23 @@ public class CDIResumeWriter {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			for (Survey survey : surveys)
-				survey.release();
-			writer.close();
+//			for (Survey survey : surveys)
+//				survey.release();
+            reset();
+			if (writer != null) writer.close();
 
 		}
 
 	}
 
 	public void choixFichierSortie() {
-		nomFichierSortie = "";
+		nomFichierSortie = Global.EMPTY_STRING;
 
 		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		FileDialog dialog = new FileDialog(shell, SWT.SAVE
 				| SWT.APPLICATION_MODAL);
 		dialog.setText(Messages.getString("CDIResumeWriter.choixFichier")); //$NON-NLS-1$
 		dialog.setFilterPath(Utils.configuration.getCruisesDirectory());
-//		dialog.setFilterPath(Configuration.getSingleton().getCruisesDirectory());
 		String extensions[] = new String[1];
 		extensions[0] = "*.txt"; //$NON-NLS-1$
 		dialog.setFilterExtensions(extensions);
@@ -295,11 +284,11 @@ public class CDIResumeWriter {
 					choixFichierSortie();
 				} else {
 					// on écrase le fichier
-					Utils.messageErreur("");
+					Utils.messageErreur(Global.EMPTY_STRING);
 				}
 			} else {
 				// le fichier n'existe pas, on le cree
-				Utils.messageErreur("");
+				Utils.messageErreur(Global.EMPTY_STRING);
 			}
 		}
 	}

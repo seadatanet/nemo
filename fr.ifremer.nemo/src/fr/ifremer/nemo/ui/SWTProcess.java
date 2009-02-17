@@ -258,18 +258,6 @@ public class SWTProcess implements IRunnableWithProgress {
 			throw new GenerationException(e);
 		}
 
-		// nettoyage memoire
-		if (odv) {
-			writerODV.release();
-		} else {
-			writerMed.release();
-		}
-		if (!interrompu) {
-            if (!Configuration.getSingleton().getWriteCdi()) {
-                survey.release();
-            }
-		}
-
 		monitor.done();
 	}
 
@@ -419,15 +407,6 @@ public class SWTProcess implements IRunnableWithProgress {
 			} catch (GenerationException e) {
 				// 
 				e.printStackTrace();
-			}
-
-			// nettoyage memoire
-			writerODV.release();
-
-			if (!interrompu) {
-				if (!Configuration.getSingleton().getWriteCdi()) {
-					survey.release();
-				}
 			}
 
 		}
@@ -587,15 +566,6 @@ public class SWTProcess implements IRunnableWithProgress {
 			} catch (GenerationException e) {
 				// 
 				e.printStackTrace();
-			}
-
-			// nettoyage memoire
-			writerODV.release();
-
-			if (!interrompu) {
-				if (!Configuration.getSingleton().getWriteCdi()) {
-					survey.release();
-				}
 			}
 		}
 

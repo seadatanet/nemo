@@ -44,14 +44,14 @@ public class SaveXMLAction extends Action implements ISelectionListener,
 
 	}
 
-	public void run() {
+	@Override
+    public void run() {
 		// sauvegarde du modele
 
 		FileOutputStream fileOutputStream = null;
 
-		if (EditSurvey.validee == 0) {
-			Utils
-					.messageErreur("Veuillez valider au moins jusqu'e l'etape 2 avant d'enregistrer votre Description XML !");
+		if (!EditSurvey.validee) {
+			Utils.messageErreur("Veuillez valider au moins jusqu'à l'étape 2 avant d'enregistrer votre Description XML !");
 		} else {
 
 			choixFichierSortie();
@@ -90,7 +90,7 @@ public class SaveXMLAction extends Action implements ISelectionListener,
 			MessageBox mb = new MessageBox(shell2, SWT.ICON_WARNING | SWT.YES
 					| SWT.NO | SWT.APPLICATION_MODAL);
 			mb
-					.setMessage("Le fichier de sortie specifie existe deje ! Voulez-vous l'ecraser ?");
+					.setMessage("Le fichier de sortie specifie existe déjà ! Voulez-vous l'écraser ?");
 
 			int reponse = mb.open();
 			if (reponse == SWT.NO) {

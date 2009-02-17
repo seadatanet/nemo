@@ -42,6 +42,7 @@ import fr.ifremer.nautilus.metadata.WSCollectedData;
 import fr.ifremer.nautilus.metadata.WSSurvey;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Formatter;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSShip;
 
@@ -141,7 +142,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 	 */
 	protected java.util.List<DataType> _dataTypes;
 
-	private class StationsComparator implements Comparator<Station> {
+	protected class StationsComparator implements Comparator<Station> {
 		public int compare(Station o1, Station o2) {
 			return o1.getSortCriteria().compareTo(o2.getSortCriteria());
 		}
@@ -157,21 +158,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 	}
 
 	public Survey() {
-		_availability = Availability.publicly;
-		_chiefScientist = "UNKNOWN";
-		_comment = "";
-		_countryCode = "";
-		_countryName = "";
-		_dataCentre = "";
-		_endDate = System.currentTimeMillis();
-		_laboratories = "";
-		_name = "";
-		_projectName = "";
-		_reference = "";
-		_regionName = "";
-		_shipCode = "XXXX";
-		_shipName = "UNKNOWN";
-		_startDate = System.currentTimeMillis();
+		initValues();
 		_dataTypes = new java.util.ArrayList<DataType>();
 		_stations = new java.util.TreeSet<Station>(new StationsComparator());
 	}
@@ -329,20 +316,44 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 	 * 
 	 * @return a copy of this object
 	 */
-	public Object clone() throws CloneNotSupportedException {
+	@Override
+    public Object clone() throws CloneNotSupportedException {
 		Survey copy = null;
 		copy = (Survey) super.clone();
 		copy._dataTypes = new java.util.ArrayList<DataType>();
 		for (DataType t0 : getDataTypes()) {
 			copy.addDataType((DataType) t0.clone());
 		}
-		copy._stations = new java.util.TreeSet<Station>(
-				new StationsComparator());
+		copy._stations = new java.util.TreeSet<Station>(new StationsComparator());
 		for (Station t1 : getStations()) {
 			copy.addStation((Station) t1.clone());
 		}
 		return copy;
 	}
+    
+    public void initValues(){
+        _dataSize = 0;
+        _availability = Availability.publicly;
+        _chiefScientist = "UNKNOWN"; //$NON-NLS-1$
+        _comment = Global.EMPTY_STRING;
+        _countryCode = Global.EMPTY_STRING;
+        _countryName = Global.EMPTY_STRING;
+        _dataCentre = Global.EMPTY_STRING;
+        _endDate = System.currentTimeMillis();
+        _laboratories = Global.EMPTY_STRING;
+        _name = Global.EMPTY_STRING;
+        _projectName = Global.EMPTY_STRING;
+        _reference = Global.EMPTY_STRING;
+        _regionName = Global.EMPTY_STRING;
+        _shipCode = "XXXX"; //$NON-NLS-1$
+        _shipName = "UNKNOWN"; //$NON-NLS-1$
+        _startDate = System.currentTimeMillis();
+    }
+    
+    public void reset(){
+        initValues();
+        release();
+    }
 
 	/**
 	 * Remove any associated links

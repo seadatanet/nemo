@@ -258,7 +258,7 @@ public class DataModel
             stationModel.setEndOnPattern(true);
             stationModel.setEndDataPattern(EditDesc.txtManuel.getText());
         }
-
+        
         // on initialise les dataTypes, centers et parameters en prevision des
         // onglets Campagne et Data
 
@@ -272,13 +272,12 @@ public class DataModel
         }
 
         // verrouillage de l'option serieTemporelle pour eviter les changements
-        // ViewFile.checkBoxTempo.setEnabled(false);
         ViewFile.radProfilVertical.setEnabled(false);
         ViewFile.radSerieTempo.setEnabled(false);
         ViewFile.radTrajectoire.setEnabled(false);
 
         // flag "validee" e 1
-        EditDesc.validee = 1;
+        EditDesc.validee = true;
 
     }
 
@@ -305,7 +304,7 @@ public class DataModel
         if (EditSurvey.textCampagne == null
                 || EditSurvey.textCampagne.isDisposed())
         {
-            EditSurvey.validee = 1;
+            EditSurvey.validee = true;
             return;
         }
 
@@ -418,7 +417,7 @@ public class DataModel
 //        }
 
         // flag "validee" e 1
-        EditSurvey.validee = 1;
+        EditSurvey.validee = true;
 
     }
     
@@ -437,17 +436,17 @@ public class DataModel
         {                                
             if (EditStation.endLatitude.getValue().trim().equals(Global.EMPTY_STRING)) {
                 // vide donc on recopie latitude dans latitude de fin
-                EditStation.endLatitude.copyValues(EditStation.latitude); // TODO
+                EditStation.endLatitude.copyValues(EditStation.latitude);
             }                        
             if (EditStation.endLongitude.getValue().trim().equals(Global.EMPTY_STRING)) {
                 // vide donc on recopie longitude dans longitude de fin
-                EditStation.endLongitude.copyValues(EditStation.longitude); // TODO
+                EditStation.endLongitude.copyValues(EditStation.longitude);
             }
         }
 
         // parcours des sections de la station pour initialisation
         for (NemoSection stationSection : EditStation.listeSectionsStation){
-            stationSection.initModel(stationModel);
+            stationModel = stationSection.initModel(stationModel);
         }
         
         // Completer les données manquantes
@@ -560,8 +559,8 @@ public class DataModel
                 parameterModel.setFlag(flag);
             }
 
-            if (code.trim().equals("DEPH")) existDEPH = true;
-            if (code.trim().equals("PRES")){
+            if (code.trim().equals("DEPH")) existDEPH = true; //$NON-NLS-1$
+            if (code.trim().equals("PRES")){ //$NON-NLS-1$
                 indexPRES = i;
                 formatPRES = para.getFormat();
             }
@@ -616,7 +615,7 @@ public class DataModel
         }
         
         
-        EditData.validee = 1;
+        EditData.validee = true;
 
     }
 
@@ -677,7 +676,6 @@ public class DataModel
             stationModel_modele = dirSurvey_modele.getStationModel();
             // lignes entete fichier = 0
             EditDesc.lignesEnteteFichier.setText("0"); //$NON-NLS-1$
-
         }
         else
         {
@@ -886,7 +884,6 @@ public class DataModel
         DataModel.ouverture = true;
 
         // desactivation option serie tempo
-        // ViewFile.checkBoxTempo.setEnabled(false);
         ViewFile.radProfilVertical.setEnabled(true);
         ViewFile.radSerieTempo.setEnabled(true);
         ViewFile.radTrajectoire.setEnabled(true);
@@ -1129,35 +1126,26 @@ public class DataModel
 
         // refresh de la table
         TableData.creationTable();
-
-        // // if (ViewFile.checkBoxTempo.getSelection()) {
-        // if (ViewFile.radSerieTempo.getSelection() ||
-        // ViewFile.radTrajectoire.getSelection()) {
-        // // serie tempo
-        // if (stationModel_modele.getTimestampModel().isComputed()) {
-        // // saisie manuelle
-        // EditData.buttonFreqEchant.setSelection(true);
-        // EditData.buttonLigneDonnees.setSelection(false);
-        // EditData.test();
-        // } else {
-        // // position heure/date dans fichier
-        // EditData.buttonFreqEchant.setSelection(false);
-        // EditData.buttonLigneDonnees.setSelection(true);
-        //
-        // EditData.comboTotal.add(stationModel_modele.getTimestampModel()
-        // .getFormat().getFormatString(), 0);
-        // EditData.comboTotal.select(0);
-        //
-        // EditData.textTotalDebut.setText(Global.EMPTY_STRING
-        // + stationModel_modele.getTimestampModel()
-        // .getDateTimeFragment().getFirstCharOffset());
-        // EditData.textTotalFin.setText(Global.EMPTY_STRING
-        // + stationModel_modele.getTimestampModel()
-        // .getDateTimeFragment().getLastCharOffset());
-        // EditData.test2();
-        // }
-        //
-        // }
-
+    }
+    
+    public static void reset()
+    {
+        stationModel = null;
+        stationModel_modele = null;
+        singleSurvey = null;
+        singleSurvey_modele = null;
+        dirSurvey = null;
+        dirSurvey_modele = null;
+        station = null;
+        station_modele = null;
+        timeSeriesInformation = null;
+        timeSeriesInformation_modele = null;
+        
+        trajectory = null;
+        ouverture = false;
+        reset = false;
+        
+        // par soucis d'optimisation :
+        // ne pas supprimer les listes récupérés du Web Service   
     }
 }

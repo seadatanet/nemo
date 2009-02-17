@@ -12,7 +12,7 @@ import com.ago.xml.PathElementHandler;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
-import fr.ifremer.nemo.util.Conversion;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.ws.WSParameter;
 
 /**
@@ -57,11 +57,11 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 	protected Station _station;
 
 	public Parameter() {
-		_code = "";
-		_default = "";
-		_format = "";
-		_fullName = "";
-		_unit = "";
+		_code = Global.EMPTY_STRING;
+		_default = Global.EMPTY_STRING;
+		_format = Global.EMPTY_STRING;
+		_fullName = Global.EMPTY_STRING;
+		_unit = Global.EMPTY_STRING;
 		_station = null;
 		_values = new java.util.ArrayList<ParameterValue>();
 	}
@@ -119,7 +119,7 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 	public void buildFromElement(String a_URI, String a_LocalName,
 			String a_QName, Attributes a_Attributes) throws SAXException {
 		String tmp;
-		if ((tmp = a_Attributes.getValue("code")) != null) {
+		if ((tmp = a_Attributes.getValue("code")) != null) { //$NON-NLS-1$
 			setCode(tmp);
 		}
 	}
@@ -141,24 +141,24 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 	 */
 	public SAXConsumer consumeElement(String a_URI, String a_LocalName,
 			String a_QName, Attributes a_Attributes) throws SAXException {
-		if (a_LocalName.equals("fullName")) {
-			Element2Field setter = new Element2Field(this, "setFullName");
+		if (a_LocalName.equals("fullName")) { //$NON-NLS-1$
+			Element2Field setter = new Element2Field(this, "setFullName"); //$NON-NLS-1$
 			return setter;
 		}
-		if (a_LocalName.equals("unit")) {
-			Element2Field setter = new Element2Field(this, "setUnit");
+		if (a_LocalName.equals("unit")) { //$NON-NLS-1$
+			Element2Field setter = new Element2Field(this, "setUnit"); //$NON-NLS-1$
 			return setter;
 		}
-		if (a_LocalName.equals("default")) {
-			Element2Field setter = new Element2Field(this, "setDefault");
+		if (a_LocalName.equals("default")) { //$NON-NLS-1$
+			Element2Field setter = new Element2Field(this, "setDefault"); //$NON-NLS-1$
 			return setter;
 		}
-		if (a_LocalName.equals("format")) {
-			Element2Field setter = new Element2Field(this, "setFormat");
+		if (a_LocalName.equals("format")) { //$NON-NLS-1$
+			Element2Field setter = new Element2Field(this, "setFormat"); //$NON-NLS-1$
 			return setter;
 		}
-		if (a_LocalName.equals("values")) {
-			return new PathElementConsumer("values", this);
+		if (a_LocalName.equals("values")) { //$NON-NLS-1$
+			return new PathElementConsumer("values", this); //$NON-NLS-1$
 		}
 		return null;
 	}
@@ -195,7 +195,7 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 			String a_LocalName, String a_QName, Attributes a_Attributes)
 			throws SAXException {
 		SAXConsumer c = null;
-		if (path.equals("values")) {
+		if (path.equals("values")) { //$NON-NLS-1$
 			c = ParameterValue.fromElement(a_URI, a_LocalName, a_QName,
 					a_Attributes);
 			addValue((ParameterValue) c);
@@ -213,12 +213,12 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 	 * 
 	 */
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
-		a_Writer.putAttribute("code", getCode());
-		a_Writer.putTag("fullName", getFullName());
-		a_Writer.putTag("unit", getUnit());
-		a_Writer.putTag("default", getDefault());
-		a_Writer.putTag("format", getFormat());
-		a_Writer.openTag("values");
+		a_Writer.putAttribute("code", getCode()); //$NON-NLS-1$
+		a_Writer.putTag("fullName", getFullName()); //$NON-NLS-1$
+		a_Writer.putTag("unit", getUnit()); //$NON-NLS-1$
+		a_Writer.putTag("default", getDefault()); //$NON-NLS-1$
+		a_Writer.putTag("format", getFormat()); //$NON-NLS-1$
+		a_Writer.openTag("values"); //$NON-NLS-1$
 		for (ParameterValue t : getValues()) {
 			t.writeXMLOn(a_Writer);
 		}
@@ -234,7 +234,7 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 	 * 
 	 */
 	public void writeXMLOn(XMLOutputWriter a_Writer) {
-		a_Writer.openTag("Parameter");
+		a_Writer.openTag("Parameter"); //$NON-NLS-1$
 		writeXMLBodyOn(a_Writer);
 		a_Writer.closeTag();
 	}
@@ -257,13 +257,28 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 	 * 
 	 * @return a copy of this object
 	 */
-	public Object clone() throws CloneNotSupportedException {
+	@Override
+    public Object clone() throws CloneNotSupportedException {
 		Parameter copy = null;
 		copy = (Parameter) super.clone();
 		copy._values = new java.util.ArrayList<ParameterValue>();
 		copy._station = null;
 		return copy;
 	}
+    
+    public void reset(){
+        _code = Global.EMPTY_STRING;
+        _default = Global.EMPTY_STRING;
+        _format = Global.EMPTY_STRING;
+        _fullName = Global.EMPTY_STRING;
+        _unit = Global.EMPTY_STRING;
+        release();
+    }
+    
+    public void release(){
+        releaseValues();
+        releaseStation();
+    }
 
 	/**
 	 * Read accessor (getter) for attribute _code
@@ -424,7 +439,7 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 	 * @return linked object at index i
 	 */
 	public ParameterValue valuesAt(int i) {
-		return (ParameterValue) _values.get(i);
+		return _values.get(i);
 	}
 
 	/**
@@ -607,32 +622,10 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 
 	/**
 	 * 
-	 * @param a_Value
-	 *            Chaine de caracteres lue dans le fichier d'entree
-	 * @param a_Formula
-	 *            Formule de conversion de la valeur. Peut etre a null
-	 */
-	public void addValue(String a_Value, String a_Formula) {
-
-	}
-
-	/**
-	 * 
-	 * @param a_Value
-	 *            Chaine de caracteres lue dans le fichier d'entree
-	 * @param a_Formula
-	 *            Formule de conversion de la valeur. Peut etre a null
-	 * @param a_Date
-	 */
-	public void addValue(String a_Value, String a_Formula, long a_Date) {
-
-	}
-
-	/**
-	 * 
 	 * @return String
 	 */
-	public String toString() {
+	@Override
+    public String toString() {
 		return _code;
 	}
 	

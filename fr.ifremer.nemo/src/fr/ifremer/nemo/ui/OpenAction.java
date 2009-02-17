@@ -44,12 +44,13 @@ public class OpenAction extends Action implements ISelectionListener,
 
 	}
 
-	public void run() {
+	@Override
+    public void run() {
 		FileInputStream stream = null;
 //		System.out.println("Menu open"); //$NON-NLS-1$
 
 		// verifier que un fichier est charge avant d'ouvrir un modele
-		if (EditDesc.loaded == 0) {
+		if (!EditDesc.loaded) {
 			Utils.messageErreur(Messages.getString("OpenAction.3")); //$NON-NLS-1$
 		} else {
 

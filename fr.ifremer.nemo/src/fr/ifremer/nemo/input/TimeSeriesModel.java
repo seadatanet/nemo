@@ -267,6 +267,7 @@ public class TimeSeriesModel implements Cloneable, PathElementHandler,
 	 */
 	public void releaseProperties() {
 		for (PropertyModel t : getProperties()) {
+            t.release();
 			removeProperty(t);
 		}
 	}

@@ -44,6 +44,11 @@ public abstract class SurveyMedia implements Cloneable, SAXConsumer {
 	public void releaseInputModel() {
 		setInputModel(null);
 	}
+    
+    public void release(){
+        interrompu = false;
+        releaseInputModel();
+    }
 
 	/**
 	 * returns the linked object for role <% aRole name%>
@@ -94,6 +99,8 @@ public abstract class SurveyMedia implements Cloneable, SAXConsumer {
 	 * @return Survey
 	 */
 	public abstract Survey getModel();
+    
+    public abstract void setModel(Survey x);
 
 	/**
 	 * 

@@ -42,6 +42,13 @@ public class AddedParameter extends Parameter
         copy.cible = null;
         return copy;
     }
+    
+    @Override
+    public void reset(){
+        idParam = null;
+        cible = null;
+        super.reset();
+    }
 
     /**
      * 

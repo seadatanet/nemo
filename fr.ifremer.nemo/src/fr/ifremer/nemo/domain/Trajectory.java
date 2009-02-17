@@ -9,6 +9,8 @@ import com.ago.xml.Element2Field;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.util.Global;
+
 /**
  * Class Trajectory
  * 
@@ -20,12 +22,10 @@ public class Trajectory implements Cloneable, SAXConsumer {
 	/**
 	 * Methode
 	 */
-//	protected String _outputType;
     protected String _stationNumber;
 
 	public Trajectory() {
-//		_outputType = "";
-        _stationNumber = "";
+        _stationNumber = Global.EMPTY_STRING;
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class Trajectory implements Cloneable, SAXConsumer {
 	public void buildFromElement(String a_URI, String a_LocalName,
 			String a_QName, Attributes a_Attributes) throws SAXException {
 		String tmp;
-		if ((tmp = a_Attributes.getValue("stationNumber")) != null) {
+		if ((tmp = a_Attributes.getValue("stationNumber")) != null) { //$NON-NLS-1$
             setStationNumber(tmp);
 		}
 	}
@@ -89,8 +89,8 @@ public class Trajectory implements Cloneable, SAXConsumer {
 	 */
 	public SAXConsumer consumeElement(String a_URI, String a_LocalName,
 			String a_QName, Attributes a_Attributes) throws SAXException {
-		if (a_LocalName.equals("stationNumber")) {
-			Element2Field setter = new Element2Field(this, "setStationNumber");
+		if (a_LocalName.equals("stationNumber")) { //$NON-NLS-1$
+			Element2Field setter = new Element2Field(this, "setStationNumber"); //$NON-NLS-1$
 			return setter;
 		}
 		
@@ -117,7 +117,7 @@ public class Trajectory implements Cloneable, SAXConsumer {
 	 * 
 	 */
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
-		a_Writer.putTag("stationNumber", getStationNumber());
+		a_Writer.putTag("stationNumber", getStationNumber()); //$NON-NLS-1$
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class Trajectory implements Cloneable, SAXConsumer {
 	 * 
 	 */
 	public void writeXMLOn(XMLOutputWriter a_Writer) {
-		a_Writer.openTag("Trajectory");
+		a_Writer.openTag("Trajectory"); //$NON-NLS-1$
 		writeXMLBodyOn(a_Writer);
 		a_Writer.closeTag();
 	}
@@ -196,7 +196,8 @@ public class Trajectory implements Cloneable, SAXConsumer {
 	 * @param o
 	 * @return boolean
 	 */
-	public boolean equals(Object o) {
+	@Override
+    public boolean equals(Object o) {
 		return (o == this);
 	}
 

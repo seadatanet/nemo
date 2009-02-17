@@ -742,15 +742,15 @@ public class Utils {
 
 		if ((onglet == 1) && (ViewFile.affiche == 0)) {
 			ViewLog.aideSurvey();
-			if (EditSurvey.validee == 1) {
+			if (EditSurvey.validee) {
 				EditDesc.razEdition();
 				EditSurvey.DrawingBack();
 			} else {
-				if (EditDesc.validee == 1) {
+				if (EditDesc.validee) {
 					EditDesc.razEdition();
 					EditSurvey.affichageEdition();
 				} else {
-					if (EditDesc.loaded == 1) {
+					if (EditDesc.loaded) {
 						EditDesc.razEdition();
 					}
 					ViewFile.affiche = 1;
@@ -765,11 +765,11 @@ public class Utils {
 				EditDesc.razEdition();
 				EditStation.DrawingBack();
 			} else {
-				if (EditSurvey.validee == 1) {
+				if (EditSurvey.validee) {
 					EditDesc.razEdition();
 					EditStation.affichageEdition();
 				} else {
-					if (EditDesc.loaded == 1) {
+					if (EditDesc.loaded) {
 						EditDesc.razEdition();
 					}
 					ViewFile.affiche = 2;
@@ -780,21 +780,21 @@ public class Utils {
 
 		if ((onglet == 3) && (ViewFile.affiche == 0)) {
 			ViewLog.aideData();
-			if (EditData.validee == 1) {
+			if (EditData.validee) {
 				EditDesc.razEdition();
 				EditData.DrawingBack();
 			} else {
 				if (EditStation.validee) {
 					EditDesc.razEdition();
 
-					if (EditData.loaded == 1) {
+					if (EditData.loaded) {
 						EditData.DrawingBack();
 					} else {
 						EditData.affichageEdition();
 					}
 
 				} else {
-					if (EditDesc.loaded == 1) {
+					if (EditDesc.loaded) {
 						EditDesc.razEdition();
 					}
 					ViewFile.affiche = 3;
@@ -805,11 +805,11 @@ public class Utils {
 
 		if ((onglet == 4) && (ViewFile.affiche == 0)) {
 			ViewLog.aideConversion();
-			if (EditData.validee == 1) {
+			if (EditData.validee) {
 				EditDesc.razEdition();
 				EditSurvey.affichageEdition();
 			} else {
-				if (EditDesc.loaded == 1) {
+				if (EditDesc.loaded) {
 					EditDesc.razEdition();
 				}
 				ViewFile.affiche = 4;
@@ -825,11 +825,11 @@ public class Utils {
 				EditSurvey.razEdition();
 				EditStation.DrawingBack();
 			} else {
-				if (EditSurvey.validee == 1) {
+				if (EditSurvey.validee) {
 					EditSurvey.razEdition();
 					EditStation.affichageEdition();
 				} else {
-					if (EditSurvey.loaded == 1) {
+					if (EditSurvey.loaded) {
 						EditSurvey.razEdition();
 						ViewFile.affiche = 2;
 					}
@@ -840,8 +840,8 @@ public class Utils {
 
 		if ((onglet == 0) && (ViewFile.affiche == 1)) {
 			ViewLog.aideDesc();
-			if (EditDesc.validee == 1) {
-				if (EditSurvey.loaded == 1) {
+			if (EditDesc.validee) {
+				if (EditSurvey.loaded) {
 					EditSurvey.razEdition();
 				}
 				EditDesc.DrawingBack();
@@ -856,21 +856,21 @@ public class Utils {
 
 		if ((onglet == 3) && (ViewFile.affiche == 1)) {
 			ViewLog.aideData();
-			if (EditData.validee == 1) {
+			if (EditData.validee) {
 				EditSurvey.razEdition();
 				EditData.DrawingBack();
 			} else {
 				if (EditStation.validee) {
 					EditSurvey.razEdition();
 
-					if (EditData.loaded == 1) {
+					if (EditData.loaded) {
 						EditData.DrawingBack();
 					} else {
 						EditData.affichageEdition();
 					}
 
 				} else {
-					if (EditSurvey.loaded == 1) {
+					if (EditSurvey.loaded) {
 						EditSurvey.razEdition();
 						ViewFile.affiche = 3;
 					}
@@ -881,7 +881,7 @@ public class Utils {
 
 		if ((onglet == 4) && (ViewFile.affiche == 1)) {
 			ViewLog.aideConversion();
-			if (EditData.validee == 1) {
+			if (EditData.validee) {
 				EditSurvey.razEdition();
 				EditConversion.affichageEdition();
 			} else {
@@ -895,14 +895,14 @@ public class Utils {
 
 		if ((onglet == 3) && (ViewFile.affiche == 2)) {
 			ViewLog.aideData();
-			if (EditData.validee == 1) {
+			if (EditData.validee) {
 				EditStation.razEdition();
 				EditData.DrawingBack();
 			} else {
 				if (EditStation.validee) {
 					EditStation.razEdition();
 
-					if (EditData.loaded == 1) {
+					if (EditData.loaded) {
 						EditData.DrawingBack();
 					} else {
 						EditData.affichageEdition();
@@ -920,13 +920,13 @@ public class Utils {
 
 		if ((onglet == 1) && (ViewFile.affiche == 2)) {
 			ViewLog.aideSurvey();
-			if (EditSurvey.validee == 1) {
+			if (EditSurvey.validee) {
 				if (EditStation.loaded) {
 					EditStation.razEdition();
 				}
 				EditSurvey.DrawingBack();
 			} else {
-				if (EditSurvey.loaded == 1) {
+				if (EditSurvey.loaded) {
 					EditSurvey.affichageEdition();
 				}
 				ViewFile.affiche = 1;
@@ -935,7 +935,7 @@ public class Utils {
 
 		if ((onglet == 0) && (ViewFile.affiche == 2)) {
 			ViewLog.aideDesc();
-			if (EditDesc.validee == 1) {
+			if (EditDesc.validee) {
 				if (EditStation.loaded) {
 					EditStation.razEdition();
 				}
@@ -950,7 +950,7 @@ public class Utils {
 
 		if ((onglet == 4) && (ViewFile.affiche == 2)) {
 			ViewLog.aideConversion();
-			if (EditData.validee == 1) {
+			if (EditData.validee) {
 				EditStation.razEdition();
 				EditConversion.affichageEdition();
 			} else {
@@ -968,8 +968,8 @@ public class Utils {
 		// e partir de onglet 3
 		if ((onglet == 0) && (ViewFile.affiche == 3)) {
 			ViewLog.aideDesc();
-			if (EditDesc.validee == 1) {
-				if (EditData.loaded == 1) {
+			if (EditDesc.validee) {
+				if (EditData.loaded) {
 					EditData.razEdition();
 				}
 				EditDesc.DrawingBack();
@@ -983,13 +983,13 @@ public class Utils {
 
 		if ((onglet == 1) && (ViewFile.affiche == 3)) {
 			ViewLog.aideSurvey();
-			if (EditSurvey.validee == 1) {
-				if (EditData.loaded == 1) {
+			if (EditSurvey.validee) {
+				if (EditData.loaded) {
 					EditData.razEdition();
 				}
 				EditSurvey.DrawingBack();
 			} else {
-				if (EditSurvey.loaded == 1) {
+				if (EditSurvey.loaded) {
 					EditSurvey.affichageEdition();
 				}
 				ViewFile.affiche = 1;
@@ -999,7 +999,7 @@ public class Utils {
 		if ((onglet == 2) && (ViewFile.affiche == 3)) {
 			ViewLog.aideStation();
 			if (EditStation.validee) {
-				if (EditData.loaded == 1) {
+				if (EditData.loaded) {
 					EditData.razEdition();
 				}
 				EditStation.DrawingBack();
@@ -1013,11 +1013,11 @@ public class Utils {
 
 		if ((onglet == 4) && (ViewFile.affiche == 3)) {
 			ViewLog.aideConversion();
-			if (EditData.validee == 1) {
+			if (EditData.validee) {
 				EditData.razEdition();
 				EditConversion.affichageEdition();
 			} else {
-				if (EditData.loaded == 1) {
+				if (EditData.loaded) {
 					EditData.razEdition();
 					ViewFile.affiche = 4;
 				}
@@ -1029,8 +1029,8 @@ public class Utils {
 
 		if ((onglet == 0) && (ViewFile.affiche == 4)) {
 			ViewLog.aideDesc();
-			if (EditDesc.validee == 1) {
-				if (EditConversion.loaded == 1) {
+			if (EditDesc.validee) {
+				if (EditConversion.loaded) {
 					EditConversion.razEdition();
 				}
 				EditDesc.DrawingBack();
@@ -1044,13 +1044,13 @@ public class Utils {
 
 		if ((onglet == 1) && (ViewFile.affiche == 4)) {
 			ViewLog.aideSurvey();
-			if (EditSurvey.validee == 1) {
-				if (EditConversion.loaded == 1) {
+			if (EditSurvey.validee) {
+				if (EditConversion.loaded) {
 					EditConversion.razEdition();
 				}
 				EditSurvey.DrawingBack();
 			} else {
-				if (EditSurvey.loaded == 1) {
+				if (EditSurvey.loaded) {
 					EditSurvey.affichageEdition();
 				}
 				ViewFile.affiche = 1;
@@ -1060,7 +1060,7 @@ public class Utils {
 		if ((onglet == 2) && (ViewFile.affiche == 4)) {
 			ViewLog.aideStation();
 			if (EditStation.validee) {
-				if (EditConversion.loaded == 1) {
+				if (EditConversion.loaded) {
 					EditConversion.razEdition();
 				}
 				EditStation.DrawingBack();
@@ -1074,13 +1074,13 @@ public class Utils {
 
 		if ((onglet == 3) && (ViewFile.affiche == 4)) {
 			ViewLog.aideData();
-			if (EditData.validee == 1) {
-				if (EditConversion.loaded == 1) {
+			if (EditData.validee) {
+				if (EditConversion.loaded) {
 					EditConversion.razEdition();
 				}
 				EditData.DrawingBack();
 			} else {
-				if (EditData.loaded == 1) {
+				if (EditData.loaded) {
 					EditData.DrawingBack();
 				}
 				ViewFile.affiche = 3;
@@ -1461,8 +1461,8 @@ public class Utils {
 			// refresh global
 			ViewEdit.formEdition.reflow(true);
 
-			EditSurvey.validee = 0;
-			EditSurvey.loaded = 0;
+			EditSurvey.validee = false;
+			EditSurvey.loaded = false;
 
 		}
 
@@ -1504,8 +1504,8 @@ public class Utils {
 			// refresh global
 			ViewEdit.formEdition.reflow(true);
 
-			EditData.loaded = 0;
-			EditData.validee = 0;
+			EditData.loaded = false;
+			EditData.validee = false;
 		}
 
 		// effacement de la table data
@@ -1514,7 +1514,7 @@ public class Utils {
 		}
 		;
 
-		EditDesc.validee = 0;
+		EditDesc.validee = false;
 
 		// effacement des listes des onglets Survey et Data
 		if (TableDataSurvey.types != null) {
@@ -1554,7 +1554,7 @@ public class Utils {
 		int i = 0;
 		int size = combo.getItemCount();
 
-		if (valeur.equals("")) {
+		if (valeur.equals(Global.EMPTY_STRING)) {
 			combo.select(-1);
 		} else {
 			combo.select(i);

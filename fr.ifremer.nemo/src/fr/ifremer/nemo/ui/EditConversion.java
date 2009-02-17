@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -34,7 +35,7 @@ public class EditConversion extends Thread {
 
 	public static Button buttonConversion;
 
-	public static int validee, loaded;
+	public static boolean loaded = false;
 
 	public static String nomFichierSortie, nomDossierSortie, nomHorsPrefix;
 
@@ -71,7 +72,8 @@ public class EditConversion extends Thread {
 	 */
 	protected static LinkedHashMap<String, Integer> _sortedStations = new LinkedHashMap<String, Integer>();
 
-	public void run() {
+	@Override
+    public void run() {
 
 		affichageEdition();
 	}
@@ -80,19 +82,19 @@ public class EditConversion extends Thread {
 		// initialisation zone édition pour étape description de fichier
 		ViewLog.aideConversion();
 		formEdition = ViewEdit.formEdition;
-		nomFichierSortie = "";
-		nomDossierSortie = "";
+		nomFichierSortie = Global.EMPTY_STRING;
+		nomDossierSortie = Global.EMPTY_STRING;
 		// interrompu = false;
 
 		// raz message erreur
-		Utils.messageErreur(""); //$NON-NLS-1$
+		Utils.messageErreur(Global.EMPTY_STRING);
 
 		ViewEdit.formEdition.getBody().setLayout(new GridLayout());
 		ViewEdit.formEdition.setText(Messages.getString("EditConversion.1")); //$NON-NLS-1$
 
 		initBoutons();
 
-		loaded = 1;
+		loaded = true;
 
 		// bouton conversion
 		buttonConversion.setParent(formEdition.getBody());
@@ -107,11 +109,11 @@ public class EditConversion extends Thread {
 						try {
 							// Test si la config est bien remplie
 							if (!EditConversion.checkConfig()) {
-								throw new Exception("CDI cancelled");
+								throw new Exception("CDI cancelled"); //$NON-NLS-1$
 							}
 							
-							setDataSetRef("");
-							Utils.messageErreur("");
+							setDataSetRef(Global.EMPTY_STRING);
+							Utils.messageErreur(Global.EMPTY_STRING);
 
 							// RAZ du numéro de station incrémenté
 							DataModel.stationModel.resetRef();
@@ -133,7 +135,7 @@ public class EditConversion extends Thread {
 
 								if (ViewFile.radODV.getSelection()) {
 									if (!askDataSetRef()) {
-										throw new Exception("Cancelled");
+										throw new Exception("Cancelled"); //$NON-NLS-1$
 									}
 								}
 
@@ -141,8 +143,7 @@ public class EditConversion extends Thread {
                                 if (Utils.configuration.getWriteCdi()) {
                                     
                                     CDIResumeWriter.getInstance().reset();
-                                    CDIResumeWriter.getInstance()
-                                            .choixFichierSortie();
+                                    CDIResumeWriter.getInstance().choixFichierSortie();
                                 }        
                                 
                                 // test pour savoir si on est en campagne ou pas
@@ -172,11 +173,11 @@ public class EditConversion extends Thread {
                                 }                                
 							} else {
 								Utils.messageErreur(Messages
-										.getString("EditConversion.15"));
+										.getString("EditConversion.15")); //$NON-NLS-1$
 							}
 						} catch (Exception ex) {
 							Utils.messageErreur(Messages
-									.getString("EditConversion.16"));
+									.getString("EditConversion.16")); //$NON-NLS-1$
 						}
 
 					}
@@ -189,19 +190,19 @@ public class EditConversion extends Thread {
 	}
 
 	public static void initBoutons() {
-		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+		Shell shell1 = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 
-		buttonConversion = new Button(shell, SWT.NONE);
+		buttonConversion = new Button(shell1, SWT.NONE);
 
 	}
 
 	public static void razEdition() {
 
-		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+		Shell shell1 = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 
-		buttonConversion.setParent(shell);
+		buttonConversion.setParent(shell1);
 		formEdition.reflow(true);
-		ViewEdit.formEdition.setText(""); //$NON-NLS-1$
+		ViewEdit.formEdition.setText(Global.EMPTY_STRING);
 
 	}
 
@@ -223,7 +224,7 @@ public class EditConversion extends Thread {
 
 	public static void choixFichierSortie() {
 
-		nomFichierSortie = "";
+		nomFichierSortie = Global.EMPTY_STRING;
 
 		Shell newShell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		FileDialog dialog = new FileDialog(newShell, SWT.SAVE
@@ -233,7 +234,7 @@ public class EditConversion extends Thread {
 		// FAE090
 		if (ViewFile.radODV.getSelection()) {
 			String[] extensions = new String[1];
-			extensions[0] = "*.txt";
+			extensions[0] = "*.txt"; //$NON-NLS-1$
 			dialog.setFilterExtensions(extensions);
 
 			Survey survey = null;
@@ -245,7 +246,7 @@ public class EditConversion extends Thread {
 
 			if (survey != null) {
 				String fileName = survey.getReference().trim();
-				if (fileName.equals("")) {
+				if (fileName.equals(Global.EMPTY_STRING)) {
 					fileName = survey.getName().trim();
 				}
 				fileName = Utils.validFileName(fileName);
@@ -333,8 +334,8 @@ public class EditConversion extends Thread {
         nomFichierSortie = Global.EMPTY_STRING;
         nomDossierSortie = Global.EMPTY_STRING;
 
-		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
-		DirectoryDialog dialog = new DirectoryDialog(shell, SWT.SAVE
+		Shell shell1 = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+		DirectoryDialog dialog = new DirectoryDialog(shell1, SWT.SAVE
 				| SWT.APPLICATION_MODAL);
 		dialog.setText(Messages.getString("EditConversion.25")); //$NON-NLS-1$
 
@@ -478,7 +479,7 @@ public class EditConversion extends Thread {
 
 		if (getErreurFichier() != null) {
 			if (!getErreurFichier().trim().equals(Global.EMPTY_STRING)) {
-				message += Messages.getString("EditConversion.20") + "\t : \t" //$NON-NLS-1$ 
+				message += Messages.getString("EditConversion.20") + "\t : \t" //$NON-NLS-1$ //$NON-NLS-2$ 
 						+ getErreurFichier() + Global.RN;
 			}
 		}
@@ -531,22 +532,22 @@ public class EditConversion extends Thread {
 			}
 			InputDialog inputDataSetRef = new InputDialog(PlatformUI
 					.getWorkbench().getDisplay().getActiveShell(), Messages
-					.getString("CDIResumeWriter.idTitle"), Messages
-					.getString("CDIResumeWriter.idMessage"), strDefault, null);
+					.getString("CDIResumeWriter.idTitle"), Messages //$NON-NLS-1$
+					.getString("CDIResumeWriter.idMessage"), strDefault, null); //$NON-NLS-1$
 			inputDataSetRef.open();
 
-			if (inputDataSetRef.getReturnCode() == InputDialog.OK) { 
+			if (inputDataSetRef.getReturnCode() == Window.OK) { 
 				_dataSetRef = inputDataSetRef.getValue();
 				return true;
-			} else {
-				_dataSetRef = Global.EMPTY_STRING;
-				return false;
-			}
+			} //else {
+			_dataSetRef = Global.EMPTY_STRING;
+			return false;
+			//}
 		} 
-		else 
-		{
-			return true;
-		}
+		//else 
+		//{
+		return true;
+		//}
 	}
     
     public static void definePrefixDossier() 
@@ -569,15 +570,15 @@ public class EditConversion extends Thread {
             inputPrefixDossier.open();
 
 
-            if (inputPrefixDossier.getReturnCode() == InputDialog.OK ) 
+            if (inputPrefixDossier.getReturnCode() == Window.OK ) 
             { 
                 if(inputPrefixDossier.getValue().endsWith(File.separator) || modeDossier)
                 {
-                    nomHorsPrefix = cheminComplet.replace(inputPrefixDossier.getValue(),""); //$NON-NLS-1$
+                    nomHorsPrefix = cheminComplet.replace(inputPrefixDossier.getValue(), Global.EMPTY_STRING);
                 }
                 else
                 {
-                    nomHorsPrefix = cheminComplet.replace(inputPrefixDossier.getValue()+File.separator,""); //$NON-NLS-1$
+                    nomHorsPrefix = cheminComplet.replace(inputPrefixDossier.getValue()+ File.separator, Global.EMPTY_STRING);
                 }
             }
             
@@ -671,7 +672,7 @@ public class EditConversion extends Thread {
 			try {
 				String[] buttons = new String[1];
 				buttons[0] = "OK"; //$NON-NLS-1$ 
-				MessageDialog dialog = new MessageDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), Messages.getString("CDIResumeWriter.configTitle"), null, message, MessageDialog.NONE, buttons, 0);
+				MessageDialog dialog = new MessageDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), Messages.getString("CDIResumeWriter.configTitle"), null, message, MessageDialog.NONE, buttons, 0); //$NON-NLS-1$
 				dialog.open();
 			} catch (Exception e) {
 				e.printStackTrace();

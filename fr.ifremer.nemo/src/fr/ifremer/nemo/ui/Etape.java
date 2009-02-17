@@ -30,7 +30,7 @@ public class Etape {
 			try {
 				Preformat.run();
 			} catch (Exception ex) {
-				Utils.messageErreur(Messages.getString("Etape.120"));
+				Utils.messageErreur(Messages.getString("Etape.120")); //$NON-NLS-1$
 				ex.printStackTrace();
 			}
 		}
@@ -43,7 +43,7 @@ public class Etape {
 		// Table table;
 
 		// raz du message d'erreurs
-		Utils.messageErreur(""); //$NON-NLS-1$
+		Utils.messageErreur(Global.EMPTY_STRING);
 
 		// section entete de fichier
 		resultat = Regexp.checkTextValeur(EditDesc.lignesEnteteFichier,
@@ -950,8 +950,6 @@ public class Etape {
 					ViewFile.radMedatlas.setEnabled(true);
 				}
 			}
-            
-            // TODO FAE 1403
 		}
 		if (ok) {
 			EditData.okApresReset = true;
@@ -983,13 +981,13 @@ public class Etape {
 		ViewFile.tabItem.setText(Messages.getString("Etape.91")); //$NON-NLS-1$
 
 		// on valide l'etape 1
-		EditDesc.validee = 1;
+		EditDesc.validee = true;
 
 		try {
 			// FAE 022
 			if (ViewFile.isCollection()) {
 				EditSurvey.okApresReset = true;
-				EditSurvey.validee = 1;
+				EditSurvey.validee = true;
 
 				DataModel.initSurvey();
 				ViewFile.etape = 2;

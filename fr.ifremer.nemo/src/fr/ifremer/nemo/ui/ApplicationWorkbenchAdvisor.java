@@ -15,14 +15,16 @@ import fr.ifremer.nemo.util.Messages;
 
 public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 
-	private static final String PERSPECTIVE_ID = "fr.ifremer.nemo.ui.perspective";
+	private static final String PERSPECTIVE_ID = "fr.ifremer.nemo.ui.perspective"; //$NON-NLS-1$
 
-	public WorkbenchWindowAdvisor createWorkbenchWindowAdvisor(
+	@Override
+    public WorkbenchWindowAdvisor createWorkbenchWindowAdvisor(
 			IWorkbenchWindowConfigurer configurer) {
 		return new ApplicationWorkbenchWindowAdvisor(configurer);
 	}
 
-	public String getInitialWindowPerspectiveId() {
+	@Override
+    public String getInitialWindowPerspectiveId() {
 		return PERSPECTIVE_ID;
 	}
 
@@ -40,7 +42,7 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 
 		if (reponse == SWT.YES) {
 			// demande pour sauver le modele
-			if (EditData.validee == 1) {
+			if (EditData.validee) {
 				if (EditDesc.okApresReset && EditSurvey.okApresReset
 						&& EditStation.okApresReset && EditData.okApresReset) {
 
@@ -49,7 +51,7 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 					MessageBox mbox = new MessageBox(shell2, SWT.ICON_WARNING
 							| SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
 					mbox.setMessage(Messages
-							.getString("ApplicationWorkbenchAdvisor.1"));
+							.getString("ApplicationWorkbenchAdvisor.1")); //$NON-NLS-1$
 					int reponse_mbox = mbox.open();
 					if (reponse_mbox == SWT.YES) {
 

@@ -51,7 +51,7 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 
 	public DirectoryBasedSurvey() {
 		super();
-		_directory = "";
+		_directory = Global.EMPTY_STRING;
 		_model = null;
 		_stationModel = null;
 	}
@@ -216,6 +216,16 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 		}
 		return copy;
 	}
+    /**
+     * Remove any associated links
+     */
+    @Override
+    public void release() {
+        super.release();
+        _directory = Global.EMPTY_STRING;
+        releaseModel();
+        releaseStationModel();
+    }
 
 	/**
 	 * Read accessor (getter) for attribute _directory
@@ -242,6 +252,7 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 	 * Remove any link for role model
 	 */
 	public void releaseModel() {
+        if (_model != null) _model.reset();
 		setModel(null);
 	}
 
@@ -269,7 +280,8 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 	/**
 	 * Remove any link for role stationModel
 	 */
-	public void releaseStationModel() {
+	private void releaseStationModel() {
+        if (_stationModel != null) _stationModel.release();
 		setStationModel(null);
 	}
 

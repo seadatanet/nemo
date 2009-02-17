@@ -86,18 +86,6 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	protected int _incrementNumber;
 
 	/**
-	 * Indique si le fichier correspond à un fichier dont les metadata station
-	 * se trouvent dans la première ligne des données
-	 */
-	//protected boolean _metaInData;
-
-	/**
-	 * Indique si le fichier correspond à un fichier dont les metadata station
-	 * se trouvent dans la première ligne des données
-	 */
-	//protected boolean _metaInData2;
-
-	/**
 	 * Nombre de ligne du header Station
 	 */
 	protected int _numberOfLines;
@@ -130,12 +118,12 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 */
 	protected java.util.List<ParameterModel> _parameterModels;
 
-    /** TODO _addedParameterModels
+    /** 
      * Liste, ordonnee, des paramètres rajoutés pour ODV
      */
     protected java.util.List<ParameterModel> _odvParameterModels;
 
-    /** TODO _addedParameterModels
+    /** 
      * Liste, ordonnee, des paramètres rajoutés pour Medatlas
      */
     protected java.util.List<ParameterModel> _medParameterModels;
@@ -144,11 +132,6 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * Modèle pour les informations propres aux séries temporelles. Optionnel
 	 */
 	protected HorodatedParameterModel _timestampModel;
-
-	/**
-	 * Modèle pour les informations propres au CDI (déplacé dans la config
-	 */
-//	protected Cdi _cdi;
 
 	/**
 	 * Modèle pour les informations propres aux trajectoires
@@ -187,16 +170,6 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	protected int _presIndex;
 
 	/**
-	 * Format du parametre DEPH
-	 */
-	//protected String _dephFormat;
-
-	/**
-	 * Format decimal de la date Julienne
-	 */
-	//protected DecimalFormat _df;
-
-	/**
 	 * Tableau de correspondance des flags
 	 */
 	protected FlagTable _flagTable;
@@ -215,12 +188,10 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		_referenceProperty = null;
 		_timeSeriesModel = null;
 		_timestampModel = null;
-//		_cdi = null;
 		_trajectory = null;
 		_lastRef = null;
 		_headerPlus = null;
 		_inputType = Global.PROFILE;
-		//_df = new DecimalFormat("#0.000000");
 	}
 
 	/**
@@ -357,20 +328,6 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			Element2Field setter = new Element2Field(this, "setEndData");
 			return setter;
 		}
-//		if (a_LocalName.equals("metaInData")) {
-//			Element2Field setter = new Element2Field(this, "setMetaInData");
-//			return setter;
-//		}
-//		if (a_LocalName.equals("metaInData2")) {
-//			Element2Field setter = new Element2Field(this, "setMetaInData2");
-//			return setter;
-//		}
-//		if (a_LocalName.equals("Cdi")) {
-//			Cdi l = (Cdi) Cdi.fromElement(a_URI, a_LocalName, a_QName,
-//					a_Attributes);
-//			setCdi(l);
-//			return (SAXConsumer) l;
-//		}
 		if (a_LocalName.equals("Station")) {
 			Station l = (Station) Station.fromElement(a_URI, a_LocalName,
 					a_QName, a_Attributes);
@@ -470,20 +427,6 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		a_Writer.putTag("endDataPattern", getEndDataPattern());
 		a_Writer.putTag("rowNumber", getRowNumber());
 		a_Writer.putTag("endData", getEndData());
-//		a_Writer.putTag("metaInData", isMetaInData());
-//		a_Writer.putTag("metaInData2", isMetaInData2());
-        // CDI déplacé dans la config
-//		if (ViewFile.checkCDI.getSelection()) {
-//			if (getCdi() != null) {
-//				getCdi().writeXMLOn(a_Writer);
-//			} else {
-//				Cdi cdi = new Cdi();
-//				cdi.setTypePlateForme(ViewFile.comboTypePlateForme.getText());
-//				cdi.setAccesDonnees(ViewFile.comboAccesDonnees.getText());
-//				setCdi(cdi);
-//				getCdi().writeXMLOn(a_Writer);
-//			}
-//		}
 		if (getModel() != null) {
 			getModel().writeXMLOn(a_Writer);
 		}
@@ -614,13 +557,13 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 */
 	public void release() {
 		releaseModel();
-//		releaseCdi();
 		releaseParameterModels();
 		releaseProperties();
 		releaseReferenceProperty();
 		releaseTimeSeriesModel();
 		releaseTrajectory();
 		releaseTimestampModel();
+        _singleton = null;
 	}
 
 	/**
@@ -818,38 +761,6 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		_incrementNumber = Integer.parseInt(number);
 	}
 
-//	/**
-//	 * Read accessor (getter) for attribute _metaInData
-//	 * 
-//	 * @return boolean
-//	 * @see StationModel#_metaInData
-//	 */
-//	public boolean isMetaInData() {
-//		return _metaInData;
-//	}
-//
-//	/**
-//	 * Write accessor (setter) for attribute _metaInData
-//	 * 
-//	 * @param x
-//	 *            new value for _metaInData
-//	 * @see StationModel#_metaInData
-//	 */
-//	public void setMetaInData(boolean x) {
-//		_metaInData = x;
-//	}
-//
-//	/**
-//	 * Write accessor (setter) for attribute _metaInData
-//	 * 
-//	 * @param a_String
-//	 *            new value for _metaInData as String
-//	 * @see StationModel#_metaInData
-//	 */
-//	public void setMetaInData(String a_String) {
-//		setMetaInData(new Boolean(a_String).booleanValue());
-//	}
-
 	/**
 	 * Read accessor (getter) for attribute _numberOfLines
 	 * 
@@ -944,7 +855,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	/**
 	 * Remove any link for role model
 	 */
-	public void releaseModel() {
+	private void releaseModel() {
 		setModel(null);
 	}
 
@@ -969,38 +880,10 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		_model = x;
 	}
 
-//	/**
-//	 * Remove any link for role CDI
-//	 */
-//	public void releaseCdi() {
-//		setCdi(null);
-//	}
-
-//	/**
-//	 * returns the linked object for role <% aRole name%>
-//	 * 
-//	 * @return the object linked
-//	 */
-//	public Cdi getCdi() {
-//		return _cdi;
-//	}
-//
-//	/**
-//	 * Create a new link with x for role model
-//	 * 
-//	 * @param x
-//	 *            the object to link with
-//	 */
-//	public void setCdi(Cdi x) {
-//		if (_cdi == x)
-//			return;
-//		_cdi = x;
-//	}
-
 	/**
 	 * Remove any link for role Trajectory
 	 */
-	public void releaseTrajectory() {
+	private void releaseTrajectory() {
 		setTrajectory(null);
 	}
 
@@ -1028,7 +911,8 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	/**
 	 * Remove any link for role referenceProperty
 	 */
-	public void releaseReferenceProperty() {
+	private void releaseReferenceProperty() {
+        if (_referenceProperty != null) _referenceProperty.release();
 		setReferenceProperty(null);
 	}
 
@@ -1056,8 +940,9 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	/**
 	 * release all links for role "properties"
 	 */
-	public void releaseProperties() {
+	private void releaseProperties() {
 		for (PropertyModel t : getProperties()) {
+            t.release();
 			removeProperty(t);
 		}
 	}
@@ -1165,7 +1050,8 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	/**
 	 * Remove any link for role timeSeriesModel
 	 */
-	public void releaseTimeSeriesModel() {
+	private void releaseTimeSeriesModel() {
+        if (_timeSeriesModel != null) _timeSeriesModel.release();
 		setTimeSeriesModel(null);
 	}
 
@@ -1203,13 +1089,18 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 */
 	public void releaseParameterModels() {
 		for (ParameterModel t : getParameterModels()) {
+            t.release();
 			removeParameterModel(t);
 		}
+        
         for (ParameterModel t : getOdvParameterModels()) {
-            removeParameterModel(t);
+            t.release();
+            if (_odvParameterModels.contains(t)) _odvParameterModels.remove(t);
         }
+        
         for (ParameterModel t : getMedParameterModels()) {
-            removeParameterModel(t);
+            t.release();
+            if (_medParameterModels.contains(t)) _medParameterModels.remove(t);
         }
 	}
 
@@ -1477,7 +1368,8 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	/**
 	 * Remove any link for role timestampModel
 	 */
-	public void releaseTimestampModel() {
+	private void releaseTimestampModel() {
+        if (_timestampModel != null) _timestampModel.release();
 		setTimestampModel(null);
 	}
 
@@ -1903,22 +1795,14 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	public void initProperties() {
 		try {
 			setReferenceProperty(new PropertyModel("reference", _model));
-			addProperty(new PropertyModel("date", _model, new DateTimeFormat(
-					"dd/MM/yyyy")));
-			addProperty(new PropertyModel("time", _model, new DateTimeFormat(
-					"hh:mm AM")));
-			addProperty(new PropertyModel("offsetTU", _model, new FloatFormat(
-					"%4.1f")));
-			addProperty(new PropertyModel("latitude", _model,
-					new LatitudeFormat("NDD MM SS")));
-			addProperty(new PropertyModel("longitude", _model,
-					new LongitudeFormat("NDDD MM SS")));
-			addProperty(new PropertyModel("bottomDepth", _model,
-					new FloatFormat("%4.0f")));
+			addProperty(new PropertyModel("date", _model, new DateTimeFormat("dd/MM/yyyy")));
+			addProperty(new PropertyModel("time", _model, new DateTimeFormat("hh:mm AM")));
+			addProperty(new PropertyModel("offsetTU", _model, new FloatFormat("%4.1f")));
+			addProperty(new PropertyModel("latitude", _model, new LatitudeFormat("NDD MM SS")));
+			addProperty(new PropertyModel("longitude", _model, new LongitudeFormat("NDDD MM SS")));
+			addProperty(new PropertyModel("bottomDepth", _model, new FloatFormat("%4.0f")));
 			addProperty(new PropertyModel("dcHistory1", _model));
 			addProperty(new PropertyModel("dcHistory2", _model));
-			// addProperty( new PropertyModel( "dmHistory1", _model));
-			// addProperty( new PropertyModel( "dmHistory2", _model));
 			addProperty(new PropertyModel("surfaceSamples1", _model));
 			addProperty(new PropertyModel("surfaceSamples2", _model));
 			addProperty(new PropertyModel("comment", _model));

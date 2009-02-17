@@ -179,12 +179,12 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 */
 	protected java.util.List<Parameter> _parameters;
 
-    /** TODO _odvparameters
+    /** 
      * Liste, ordonnee, des paramètres rajoutés pour ODV
      */
     protected java.util.List<AddedParameter> _odvparameters;
 
-    /** TODO _odvparameters
+    /** 
      * Liste, ordonnee, des paramètres rajoutés pour Medatlas
      */
     protected java.util.List<AddedParameter> _medparameters;
@@ -555,11 +555,41 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		}
 		return copy;
 	}
+    
+    public void reset()
+    {
+        _bottomDepth = Float.NaN;
+        _comment = Global.EMPTY_STRING;
+        _dcHistory1 = Global.EMPTY_STRING;
+        _dcHistory2 = Global.EMPTY_STRING;
+        _dmHistory1 = Global.EMPTY_STRING;
+        _dmHistory2 = Global.EMPTY_STRING;
+        _globalParametersQC = Global.EMPTY_STRING;
+        _globalProfileQC = Global.ZERO;
+        _offsetTU = 0.0f;
+        _reference = Global.EMPTY_STRING;
+        _surfaceSamples1 = Global.EMPTY_STRING;
+        _surfaceSamples2 = Global.EMPTY_STRING;
+        _time = Float.NaN;
+        
+        _date = 0;
+        _dateQC = 0;
+        _depthQC = 0;
+        _latitude = Double.NaN;
+        _latQC = 0;
+        _longitude = Double.NaN;
+        _longQC = 0;
+        
+        _metaFlags.clear();
+        release();
+    }
 
 	/**
 	 * Remove any associated links
 	 */
-	public void release() {
+	public void release() 
+    {
+        releaseSurvey();
 		releaseDataType();
 		releaseParameters();
 		releaseSurvey();
@@ -1299,13 +1329,16 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 */
 	public void releaseParameters() {
 		for (Parameter t : getParameters()) {
+            t.release();
 			removeParameter(t);
 		}
-        for (Parameter t : getOdvParameters()) {
-            _odvparameters.remove(t);;
+        for (AddedParameter t : getOdvParameters()) {
+            t.release();
+            if (_odvparameters.contains(t)) _odvparameters.remove(t);;
         }
-        for (Parameter t : getMedParameters()) {
-            _medparameters.remove(t);;
+        for (AddedParameter t : getMedParameters()) {
+            t.release();
+            if (_medparameters.contains(t)) _medparameters.remove(t);;
         }
 	}
 
@@ -1519,6 +1552,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 * Remove any link for role timeSeriesInformation
 	 */
 	public void releaseTimeSeriesInformation() {
+        if (_timeSeriesInformation != null) _timeSeriesInformation.release();
 		setTimeSeriesInformation(null);
 	}
 

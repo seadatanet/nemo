@@ -35,7 +35,7 @@ public class ViewFile extends ViewPart
 
     public static final String ID = "fr.ifremer.nemo.ui.ViewFile"; // //$NON-NLS-1$
 
-    public static int etape, ongletCourant, affiche, tailleCompositeData;
+    public static int etape, affiche, tailleCompositeData;
 
     public static boolean dossierCampagne, fileLoaded;
 
@@ -142,14 +142,14 @@ public class ViewFile extends ViewPart
         top.setLayout(new FillLayout());
 
         // invalidation de chaque etape
-        EditDesc.validee = 0;
-        EditDesc.loaded = 0;
-        EditSurvey.validee = 0;
-        EditSurvey.loaded = 0;
+        EditDesc.validee = false;
+        EditDesc.loaded = false;
+        EditSurvey.validee = false;
+        EditSurvey.loaded = false;
         EditStation.validee = false;
         EditStation.loaded = false;
-        EditData.validee = 0;
-        EditData.loaded = 0;
+        EditData.validee = false;
+        EditData.loaded = false;
 
         // chargement de la configuration
         Utils.initConfig();
@@ -186,7 +186,6 @@ public class ViewFile extends ViewPart
 
         // init des flags
         FiltrageTableType.listeOuverte = 0;
-        ongletCourant = 0;
         affiche = 0;
         fileLoaded = false;
 
@@ -383,10 +382,11 @@ public class ViewFile extends ViewPart
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
-                    // System.out.println("parcourir"); // //$NON-NLS-1$
-                    DataModel.ouverture = false;
+                    // reinitialisation de la conversion
+                    if (DataModel.inputModel != null)
+                        DataModel.reset();
+                    
                     Preformat.setPreformat(false);
-                    DataModel.trajectory = null;
                     // parcours des fichiers/dossiers
 
                     // on rend sélectionnables les radios ODV et Medatlas dans

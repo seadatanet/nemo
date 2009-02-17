@@ -20,6 +20,7 @@ import fr.ifremer.nemo.output.ProgressNotification;
 import fr.ifremer.nemo.ui.EditConversion;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.ViewFile;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.SizeBasedProgressNotifier;
 
@@ -57,7 +58,7 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 
 	public SingleFileSurvey() {
 		super();
-		_file = "";
+		_file = Global.EMPTY_STRING;
 		_model = null;
 		_stationModel = null;
 	}
@@ -230,7 +231,10 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 	/**
 	 * Remove any associated links
 	 */
-	public void release() {
+	@Override
+    public void release() {
+        super.release();
+        _file = Global.EMPTY_STRING;
 		releaseModel();
 		releaseStationModel();
 	}
@@ -295,6 +299,7 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 	 * Remove any link for role model
 	 */
 	public void releaseModel() {
+        if (_model != null) _model.reset();
 		setModel(null);
 	}
 
@@ -322,7 +327,8 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 	/**
 	 * Remove any link for role stationModel
 	 */
-	public void releaseStationModel() {
+	private void releaseStationModel() {
+        if (_stationModel != null) _stationModel.release();
 		setStationModel(null);
 	}
 

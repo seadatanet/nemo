@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 public class EditData {
@@ -48,7 +49,7 @@ public class EditData {
 
 	public static ArrayList<Text> listeTextData;
 
-	public static int validee, loaded;
+	public static boolean validee, loaded;
 
 	public static List listeType;
 
@@ -74,7 +75,7 @@ public class EditData {
 
 		ViewFile.styledTextData.setText(Utils.texteBrut);
 
-		loaded = 1;
+		loaded = true;
 
 		/*
 		 * recreer un formEdition sur le toolkit principal pour pouvoir faire un
@@ -178,7 +179,6 @@ public class EditData {
 
 		// refresh global
 		ViewEdit.formEdition.reflow(true);
-
 	}
 
 	public static void ajoutModifyListenerText(ArrayList<Text> liste) {
@@ -316,10 +316,8 @@ public class EditData {
 		// initTable();
 		TableData.creationTable();
 		
-		EditData.okApresReset = false;
-		ViewFile.tabItem3.setText(Messages.getString("EditData.1"));
-		Utils.messageErreur("");
-
+        invalidEtape();
+		Utils.messageErreur(Global.EMPTY_STRING);
 	}
 
 	private static void disposeElements()
@@ -344,4 +342,13 @@ public class EditData {
 			listeType.dispose();
 		}
 	}
+
+
+    public static void invalidEtape(){
+        okApresReset = false;
+        ViewFile.tabItem3.setText(Messages.getString("EditData.1"));         //$NON-NLS-1$
+
+        // reinitialisation de la conversion
+        if (DataModel.inputModel != null) DataModel.inputModel.setConverted(false);
+    }
 }
