@@ -1699,8 +1699,8 @@ public class Utils {
 		}
 	}
 
-	public static String concat(String list1, String list2) {
-		return list1 + "_" + list2;
+	public static String concat(String list1, String list2, String separator) {
+		return list1 + separator + list2; 
 	}
 
 	public static String validFileName(String value) {

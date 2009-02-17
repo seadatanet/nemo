@@ -1,18 +1,18 @@
 package fr.ifremer.nemo.ui;
 
+import java.lang.reflect.InvocationTargetException;
+
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.actions.ActionFactory;
 
+import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 public class UpdateAction extends Action implements ISelectionListener,
@@ -20,31 +20,13 @@ public class UpdateAction extends Action implements ISelectionListener,
 {
     private final IWorkbenchWindow window;
 
-    private Composite top = null;
-
-    private Combo combo = null;
-
-    private Group group = null;
-
-    private Group group1 = null;
-
-    private Text textArea = null;
-
-    private Button button = null;
-
-    private Group group2 = null;
-
-    private Button button1 = null;
-
-    private Button button2 = null;
-
-    private Text textArea1, textArea2 = null;
-
     public final static String ID = "fr.ifremer.nemo.ui.UpdateAction"; //$NON-NLS-1$
+    
+    private static boolean interrompu = false;
 
     // vars necessaires e la fenetre d'options
 
-    public static Shell shelloptions;
+    public static Shell shelloptions = new Shell();;
 
     public static int options;
 
@@ -68,61 +50,72 @@ public class UpdateAction extends Action implements ISelectionListener,
     public void run()
     {
         // System.out.println("Menu update WebServices"); //$NON-NLS-1$
-        EditSurvey.webServiceUpdate();
+        //EditSurvey.webServiceUpdate();
+        SWTProcessWS.fichiersConstantes = true;
+
+        StringBuffer message = new StringBuffer();
+                  
+        interrompu = new SWTProgressWS().run();
+        
+
+        if (interrompu){
+            message.append(Messages.getString("SWTProcessWS.2")); //$NON-NLS-1$
+            message.append(Global.RN);
+            message.append(Global.RN);
+        }
+        
+        // affichage du resultat des mises à jour des fichiers
+        message.append(getMessageUpdate(Messages.getString("SWTProcessWS.3"), NemoLists.okDataTypes, NemoLists.nbDataTypes, NemoLists.getDataTypes().length)); //$NON-NLS-1$
+        message.append(getMessageUpdate(Messages.getString("SWTProcessWS.7"), NemoLists.okParameters, NemoLists.nbParameters, NemoLists.getParameters().length)); //$NON-NLS-1$
+        message.append(getMessageUpdate(Messages.getString("SWTProcessWS.8"), NemoLists.okSurveys, NemoLists.nbSurveys, NemoLists.getSurveys().length)); //$NON-NLS-1$
+        message.append(getMessageUpdate(Messages.getString("SWTProcessWS.9"), NemoLists.okVocabLists, NemoLists.nbVocabLists, NemoLists.getVocabList().size())); //$NON-NLS-1$
+        message.append(getMessageUpdate(Messages.getString("SWTProcessWS.11"), NemoLists.okVocabMaps, NemoLists.nbVocabMaps, NemoLists.getVocabMap().size())); //$NON-NLS-1$
+        message.append(getMessageUpdate(Messages.getString("SWTProcessWS.10"), NemoLists.okEdmo, NemoLists.nbEdmo, NemoLists.getEdmo().size())); //$NON-NLS-1$
+        
+        MessageDialog.openInformation(shelloptions, "WebServices Info", message.toString()); //$NON-NLS-1$
 
     }
 
-    /*
-     * private void createCombo() { combo = new Combo(group, SWT.FILL);
-     * combo.setText("Langue"); //$NON-NLS-1$ combo.setBounds(new Rectangle(4,
-     * 28, 76, 21));
-     * 
-     * combo.add("Franeais"); //$NON-NLS-1$ combo.add("English"); //$NON-NLS-1$ }
-     * 
-     * private void createGroup() { group = new Group(top, SWT.NONE);
-     * group.setLayout(null); group.setText("Langue"); //$NON-NLS-1$
-     * createCombo(); group.setBounds(new Rectangle(4, 4, 91, 69)); }
-     * 
-     * private void createGroup1() { group1 = new Group(top, SWT.NONE);
-     * group1.setLayout(null); group1.setText("Dossier des modeles");
-     * //$NON-NLS-1$ group1.setBounds(new Rectangle(105, 4, 178, 69)); textArea =
-     * new Text(group1, SWT.MULTI | SWT.WRAP); textArea.setBounds(new
-     * Rectangle(6, 15, 163, 18)); button = new Button(group1, SWT.NONE);
-     * button.setBounds(new Rectangle(110, 36, 59, 23));
-     * button.setText("Parcourir"); //$NON-NLS-1$ }
-     * 
-     * private void createGroup2() { group2 = new Group(top, SWT.NONE);
-     * group2.setLayout(null); group2.setText("Web Service"); //$NON-NLS-1$
-     * group2.setBounds(new Rectangle(4, 78, 278, 61)); textArea1 = new
-     * Text(group2, SWT.MULTI | SWT.V_SCROLL);
-     * 
-     * textArea1.setBounds(new Rectangle(5, 14, 267, 40)); textArea2 = new
-     * Text(group2, SWT.MULTI | SWT.V_SCROLL); }
-     */
     public void selectionChanged(IWorkbenchPart part, ISelection incoming)
     {
+        // implement ISelectionListener...
     }
-    /*
-     * public void createPartControl(Composite parent) {
-     * 
-     * top = new Composite(parent, SWT.NONE); top.setLayout(null);
-     * createGroup(); createGroup1(); createGroup2(); button1 = new Button(top,
-     * SWT.NONE); button1.setBounds(new Rectangle(180, 143, 56, 23));
-     * button1.setText("Annuler"); //$NON-NLS-1$ button2 = new Button(top,
-     * SWT.NONE); button2.setBounds(new Rectangle(62, 143, 56, 23));
-     * button2.setText("Valider"); //$NON-NLS-1$
-     *  // listener valider button1 .addSelectionListener(new
-     * org.eclipse.swt.events.SelectionAdapter() { public void widgetSelected(
-     * org.eclipse.swt.events.SelectionEvent e) { // System.out.println("options
-     * valider"); options = 0; shelloptions.close();
-     *  } });
-     *  // listener annuler button2 .addSelectionListener(new
-     * org.eclipse.swt.events.SelectionAdapter() { public void widgetSelected(
-     * org.eclipse.swt.events.SelectionEvent e) { // System.out.println("options
-     * annuler"); options = 0;
-     * 
-     * shelloptions.close();
-     *  } });
-     *  }
-     */
+    
+    private String getMessageUpdate(String listeUpdated, boolean ok, int nb, int nbTot){
+        StringBuffer message = new StringBuffer();
+        message.append(padRightPoint(listeUpdated));
+        message.append(Global.SPACE);
+        message.append(Global.SPACE);
+        if (ok){
+            message.append("OK - "); //$NON-NLS-1$
+            message.append(nb);
+            message.append(Global.SPACE);
+            message.append(Messages.getString("SWTProcessWS.12")); //$NON-NLS-1$
+        }else{
+            if (interrompu && nb > 0){
+                message.append(Messages.getString("SWTProcessWS.14")); //$NON-NLS-1$
+                message.append(nb);
+                message.append(Global.SPACE);
+                message.append(Messages.getString("SWTProcessWS.12")); //$NON-NLS-1$
+                message.append(" / "); //$NON-NLS-1$
+                message.append(nbTot);
+            }else{
+                message.append(Messages.getString("SWTProcessWS.13")); //$NON-NLS-1$
+            }
+        }
+        message.append(Global.RN);
+        message.append(Global.RN);
+        return message.toString();
+    }
+    
+    private String padRightPoint(String input){
+        StringBuffer output = new StringBuffer();
+        output.append(input.trim());
+        // longueur fixe à 28 caractères
+        int maxlength = 28;
+        for (int i = input.trim().length(); i < maxlength; i++){
+            output.append('.');
+        }
+        return output.toString();
+    }
 }

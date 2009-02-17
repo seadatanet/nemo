@@ -3,6 +3,7 @@ package fr.ifremer.nemo.ui;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
+import java.util.List;
 
 import javax.xml.rpc.ServiceException;
 
@@ -18,6 +19,8 @@ import fr.ifremer.nemo.medatlas.MedatlasSurveyWriter;
 import fr.ifremer.nemo.odv.ODVSurveyWriter;
 import fr.ifremer.nemo.output.ProgressNotification;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.ws.NemoWS;
+import fr.ifremer.nemo.ws.WSDataType;
 
 public class SWTProcessWS implements IRunnableWithProgress {
 	public static ScrolledForm formEdition;
@@ -46,7 +49,7 @@ public class SWTProcessWS implements IRunnableWithProgress {
 
 	public void run(IProgressMonitor monitor) throws InvocationTargetException,
 			InterruptedException {
-		monitor.beginTask(Messages.getString("SWTProcessWS.1"),
+		monitor.beginTask(Messages.getString("SWTProcessWS.1"), //$NON-NLS-1$
 				IProgressMonitor.UNKNOWN);
 
 		monitor2 = monitor;
@@ -54,49 +57,50 @@ public class SWTProcessWS implements IRunnableWithProgress {
 		// TACHES A EFFECTUER
 
 		if (fichiersConstantes) {
-			// mise e jour fichiers constantes
-			monitor.subTask(Messages.getString("SWTProcessWS.3"));
-			NemoLists.updateDataTypes();
-
+            
+            // mise e jour fichiers constantes
+            
+            // appel au WebService NEMO
+            monitor.subTask("WebService NEMO"); //$NON-NLS-1$
+            NemoWS service = NemoLists.callNemoWS();
+            
             if (!monitor.isCanceled()){
-                monitor.subTask(Messages.getString("SWTProcessWS.7"));
-                NemoLists.updateParameters();
+                monitor.subTask(Messages.getString("SWTProcessWS.3")); //$NON-NLS-1$
+                NemoLists.updateDataTypes(monitor, service);
             }
 
             if (!monitor.isCanceled()){
-                monitor.subTask(Messages.getString("SWTProcessWS.8"));
-                NemoLists.updateSurveys();
+                monitor.subTask(Messages.getString("SWTProcessWS.7")); //$NON-NLS-1$
+                NemoLists.updateParameters(monitor, service);
+            }
+
+            if (!monitor.isCanceled()){
+                monitor.subTask(Messages.getString("SWTProcessWS.8")); //$NON-NLS-1$
+                NemoLists.updateSurveys(monitor, service);
             }
             
 
             if (!monitor.isCanceled()){
-                monitor.subTask(Messages.getString("SWTProcessWS.9"));
+                monitor.subTask(Messages.getString("SWTProcessWS.9")); //$NON-NLS-1$
                 // FAE 0001132 : precision du nom de la liste dans le message
                 NemoLists.updateVocabLists(monitor);
             }
             
 
             if (!monitor.isCanceled()){
-                monitor.subTask(Messages.getString("SWTProcessWS.9") + " Mapping P091 / P011");
-                NemoLists.updateVocabMap("P091", "P011");
+                monitor.subTask(Messages.getString("SWTProcessWS.11")); //$NON-NLS-1$
+                NemoLists.updateVocabMaps(monitor);
+            }			
+
+            if (!monitor.isCanceled()){
+                monitor.subTask(Messages.getString("SWTProcessWS.10")); //$NON-NLS-1$
+                NemoLists.updateEdmo(monitor);
             }
             
-
-            if (!monitor.isCanceled()){
-                monitor.subTask(Messages.getString("SWTProcessWS.9") + " Mapping P091 / P061");
-                NemoLists.updateVocabMap("P091", "P061");
+            if (monitor.isCanceled()){
+                throw new InterruptedException();
             }
-
-//            if (!monitor.isCanceled()){
-//                monitor.subTask(Messages.getString("SWTProcessWS.9") + " Mapping L05 / C77");
-//                NemoLists.updateVocabMap("L05", "C77");
-//            }
-			
-
-            if (!monitor.isCanceled()){
-                monitor.subTask(Messages.getString("SWTProcessWS.10"));
-                NemoLists.updateEdmo();
-            }
+            
 		} else {
 
 			if (dossier) {
@@ -106,15 +110,15 @@ public class SWTProcessWS implements IRunnableWithProgress {
 				} catch (MalformedURLException e) {
 					// 
 					e.printStackTrace();
-					Utils.messageErreur(Messages.getString("EditSurvey.48"));
+					Utils.messageErreur(Messages.getString("EditSurvey.48")); //$NON-NLS-1$
 				} catch (RemoteException e) {
 					// 
 					e.printStackTrace();
-					Utils.messageErreur(Messages.getString("EditSurvey.49"));
+					Utils.messageErreur(Messages.getString("EditSurvey.49")); //$NON-NLS-1$
 				} catch (ServiceException e) {
 					// 
 					e.printStackTrace();
-					Utils.messageErreur(Messages.getString("EditSurvey.50"));
+					Utils.messageErreur(Messages.getString("EditSurvey.50")); //$NON-NLS-1$
 				}
 
 			} else {
@@ -124,16 +128,16 @@ public class SWTProcessWS implements IRunnableWithProgress {
 							referenceWS);
 				} catch (MalformedURLException e) {
 					// 
-					Utils.messageErreur(Messages.getString("EditSurvey.48"));
+					Utils.messageErreur(Messages.getString("EditSurvey.48")); //$NON-NLS-1$
 					e.printStackTrace();
 				} catch (RemoteException e) {
 					//
 					e.printStackTrace();
-					Utils.messageErreur(Messages.getString("EditSurvey.49"));
+					Utils.messageErreur(Messages.getString("EditSurvey.49")); //$NON-NLS-1$
 				} catch (ServiceException e) {
 					// 
 					e.printStackTrace();
-					Utils.messageErreur(Messages.getString("EditSurvey.50"));
+					Utils.messageErreur(Messages.getString("EditSurvey.50")); //$NON-NLS-1$
 				}
 
 			}

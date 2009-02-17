@@ -425,64 +425,6 @@ public class EditSurvey {
 
 	}
 
-	public static void webServiceUpdate() {
-
-		SWTProcessWS.fichiersConstantes = true;
-
-		new SWTProgressWS().run();
-
-		// affichage du resultat des mises e jour des fichiers
-		String message = "";
-
-		if (NemoLists.okDataTypes) {
-			message = message + Messages.getString("EditSurvey.65") + "  OK - "
-					+ NemoLists.nbDataTypes + " "
-					+ Messages.getString("EditSurvey.70");
-		} else {
-			message = message + Messages.getString("EditSurvey.65") + "  "
-					+ Messages.getString("EditSurvey.71");
-		}
-
-		if (NemoLists.okParameters) {
-			message = message + Messages.getString("EditSurvey.66") + "  OK - "
-					+ NemoLists.nbParameters + " "
-					+ Messages.getString("EditSurvey.70");
-		} else {
-			message = message + Messages.getString("EditSurvey.66") + "  "
-					+ Messages.getString("EditSurvey.71");
-		}
-
-		if (NemoLists.okSurveys) {
-			message = message + Messages.getString("EditSurvey.69") + "  OK - "
-					+ NemoLists.nbSurveys + " "
-					+ Messages.getString("EditSurvey.70");
-		} else {
-			message = message + Messages.getString("EditSurvey.69") + "  "
-					+ Messages.getString("EditSurvey.71");
-		}
-
-        if (NemoLists.okVocabLists){            
-            message = message + Messages.getString("EditSurvey.73") + "  OK - "
-                    + NemoLists.nbVocabLists + " "
-                    + Messages.getString("EditSurvey.70");
-        }else{
-            message = message + Messages.getString("EditSurvey.73") + "  "
-            + Messages.getString("EditSurvey.71");
-        }
-
-		if (NemoLists.okEdmo) {
-			message = message + Messages.getString("EditSurvey.74") + "  OK - "
-					+ NemoLists.nbEdmo + " "
-					+ Messages.getString("EditSurvey.70");
-		} else {
-			message = message + Messages.getString("EditSurvey.74") + "  "
-					+ Messages.getString("EditSurvey.71");
-		}
-
-		MessageDialog.openInformation(shell, "WebServices Info", message);
-
-	}
-
 	public static void init_webService() {
 		// selection de la ref campagne dans une liste
 		FiltrageTableType.go(Global.WSSURVEY);

@@ -6,9 +6,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.rpc.ServiceException;
@@ -58,10 +60,15 @@ public class NemoLists implements Cloneable {
     public static Boolean okParameters = false;
     public static Boolean okDataTypes = false;
     public static Boolean okVocabLists = false;
+    public static Boolean okVocabMaps = false;
     public static Boolean okEdmo = false;
 
-	public static int nbSurveys, nbParameters, nbRegions, nbDataTypes,
-			nbVocabLists, nbEdmo;
+	public static int nbSurveys = 0;
+    public static int nbParameters = 0;
+    public static int nbDataTypes = 0;
+    public static int nbVocabLists = 0;
+    public static int nbVocabMaps = 0;
+    public static int nbEdmo = 0;
 
 	static protected HashMap<String, CodeTableRecordType[]> _vocabList = new HashMap<String, CodeTableRecordType[]>();
 
@@ -148,7 +155,7 @@ public class NemoLists implements Cloneable {
 	 * @return linked object at index i
 	 */
 	public static WSDataType dataTypesAt(int i) {
-		return (WSDataType) _dataTypes.get(i);
+		return  _dataTypes.get(i);
 	}
 
 	/**
@@ -345,7 +352,7 @@ public class NemoLists implements Cloneable {
 	 * @return linked object at index i
 	 */
 	public static WSParameter parametersAt(int i) {
-		return (WSParameter) _parameters.get(i);
+		return  _parameters.get(i);
 	}
 
 	/**
@@ -542,7 +549,7 @@ public class NemoLists implements Cloneable {
 	 * @return linked object at index i
 	 */
 	public static WSSurveyDescription surveysAt(int i) {
-		return (WSSurveyDescription) _surveys.get(i);
+		return  _surveys.get(i);
 	}
 
 	/**
@@ -694,9 +701,7 @@ public class NemoLists implements Cloneable {
 		XMLDecoder decoder = null;
 		try {
 			decoder = new XMLDecoder(new FileInputStream(
-					"resources/DataTypes.xml"));
-			// decoder = new
-			// XMLDecoder(NemoLists.class.getResourceAsStream("/resources/DataTypes.xml"));
+					"resources/DataTypes.xml")); //$NON-NLS-1$
 			_dataTypes = (java.util.List<WSDataType>) decoder.readObject();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -718,8 +723,8 @@ public class NemoLists implements Cloneable {
 		initParameters();
 		initSurveys();
 		initVocabLists();
-		initVocabMap("P091", "P011");
-		initVocabMap("P091", "P061");
+		initVocabMap("P091", "P011"); //$NON-NLS-1$ //$NON-NLS-2$
+		initVocabMap("P091", "P061"); //$NON-NLS-1$ //$NON-NLS-2$
 //		initVocabMap("L05", "C77");
 		initEdmo();
 	}
@@ -731,9 +736,7 @@ public class NemoLists implements Cloneable {
 		XMLDecoder decoder = null;
 		try {
 			decoder = new XMLDecoder(new FileInputStream(
-					"resources/Parameters.xml"));
-			// decoder = new
-			// XMLDecoder(NemoLists.class.getResourceAsStream("/resources/Parameters.xml"));
+					"resources/Parameters.xml")); //$NON-NLS-1$
 			_parameters = (java.util.List<WSParameter>) decoder.readObject();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -753,12 +756,9 @@ public class NemoLists implements Cloneable {
 	public static void initSurveys() {
 		XMLDecoder decoder = null;
 		try {
-			// decoder = new
-			// XMLDecoder(NemoLists.class.getResourceAsStream("/resources/Surveys.xml"));
 			decoder = new XMLDecoder(new FileInputStream(
-					"resources/Surveys.xml"));
-			_surveys = (java.util.List<WSSurveyDescription>) decoder
-					.readObject();
+					"resources/Surveys.xml")); //$NON-NLS-1$
+			_surveys = (java.util.List<WSSurveyDescription>) decoder.readObject();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -771,169 +771,253 @@ public class NemoLists implements Cloneable {
 		}
 	}
 
+//	/**
+//	 * 
+//	 * @param args
+//	 */
+//	public static void main(String[] args) {
+//		updateDataTypes();
+//		updateParameters();
+//		updateSurveys();
+//		updateVocabLists(null);
+//		updateEdmo();
+//	}
+    
+    public static NemoWS callNemoWS(){
+        NemoWS service = null;
+        try 
+        {
+            service = new NemoWSServiceLocator()
+                .getNEMO(new java.net.URL(Utils.configuration
+                .getNemoWebServiceURL()));
+        } 
+        catch (ServiceException e) 
+        {
+            e.printStackTrace();
+        }  
+        catch (MalformedURLException e) 
+        {
+            e.printStackTrace();
+        } 
+        return service;
+    }
+
 	/**
 	 * 
-	 * @param args
 	 */
-	public static void main(String[] args) {
-		updateDataTypes();
-		updateParameters();
-		updateSurveys();
-		updateVocabLists(null);
-		updateEdmo();
+	public static void updateDataTypes(IProgressMonitor monitor, NemoWS service) {
+
+        nbDataTypes = 0;
+        okDataTypes = false;
+        
+        if (service != null){
+            
+            // BackUp de l'objet
+            List<WSDataType> bkDataTypes = new ArrayList<WSDataType>();
+            for(WSDataType bkType : _dataTypes){
+                bkDataTypes.add(bkType);     
+            }
+            
+            FileOutputStream stream = null;
+            XMLEncoder encoder = null;
+            try 
+            {
+                if (!monitor.isCanceled()){
+                    WSDataType[] types = service.getDataTypes();
+                    releaseDataTypes();
+                    for (WSDataType type : service.getDataTypes()){
+                        addDataType(type);
+                    }
+                    nbDataTypes = types.length;
+                }
+                
+                if (!monitor.isCanceled()){
+                    File file = new java.io.File("resources/DataTypes.xml"); //$NON-NLS-1$
+                    stream = new FileOutputStream(file.toString());
+                    
+                    encoder = new XMLEncoder(stream);
+                    encoder.writeObject(_dataTypes);
+
+                    okDataTypes = true;
+                    
+                }else{
+                    if (nbDataTypes != 0){
+                        // rollback sur la liste des Data Types
+                        releaseDataTypes();
+                        for(WSDataType type : bkDataTypes){
+                            addDataType(type);
+                        }
+                        nbDataTypes = 0;
+                    }
+                }
+            } catch (Exception e) {
+                okDataTypes = false;
+                e.printStackTrace();
+            } finally {
+                if (encoder != null) {
+                    try {
+                        encoder.close();
+                    } catch (Exception ex) {
+                    }
+                }
+                if (stream != null) {
+                    try {
+                        stream.close();
+                    } catch (Exception ex) {
+                    }
+                }
+            }
+        }
 	}
 
 	/**
 	 * 
 	 */
-	public static void updateDataTypes() {
-		FileOutputStream stream = null;
-		XMLEncoder encoder = null;
-		okDataTypes = false;
-		try {
-			NemoWS service = new NemoWSServiceLocator()
-					.getNEMO(new java.net.URL(Utils.configuration
-							.getNemoWebServiceURL()));
-			WSDataType[] types = service.getDataTypes();
-			releaseDataTypes();
-			for (int i = 0; i < types.length; i++) {
-				addDataType(types[i]);
-			}
-
-			File file = new java.io.File("resources/DataTypes.xml");
-			stream = new FileOutputStream(file.toString());
-
-			// URL url =
-			// NemoLists.class.getResource("/resources/DataTypes.xml");
-			// String file = url.getFile();
-			// stream = new FileOutputStream(file);
-			encoder = new XMLEncoder(stream);
-			encoder.writeObject(_dataTypes);
-			okDataTypes = true;
-			nbDataTypes = types.length;
-		} catch (Exception e) {
-			okDataTypes = false;
-			e.printStackTrace();
-		} finally {
-			if (encoder != null) {
-				try {
-					encoder.close();
-				} catch (Exception ex) {
-				}
-			}
-			if (stream != null) {
-				try {
-					stream.close();
-				} catch (Exception ex) {
-				}
-			}
-		}
-	}
-
-	/**
-	 * 
-	 */
-	public static void updateParameters() {
+	public static void updateParameters(IProgressMonitor monitor, NemoWS service) {
+        
 		okParameters = false;
-		FileOutputStream stream = null;
-		XMLEncoder encoder = null;
-		try {
-			NemoWS service = new NemoWSServiceLocator()
-					.getNEMO(new java.net.URL(Utils.configuration
-							.getNemoWebServiceURL()));
-			WSParameter[] parameters = service.getParameters();
-			releaseParameters();
-			for (int i = 0; i < parameters.length; i++) {
-				addParameter(parameters[i]);
-			}
+        nbParameters = 0;
 
-			File file = new java.io.File("resources/Parameters.xml");
-			stream = new FileOutputStream(file.toString());
+        
+        if (service != null)
+        {
+            // BackUp de l'objet
+            List<WSParameter> bkParameters = new ArrayList<WSParameter>();
+            for(WSParameter bkParam : _parameters){
+                bkParameters.add(bkParam);     
+            }
+            
+            FileOutputStream stream = null;
+            XMLEncoder encoder = null;
+            try {
+                if (!monitor.isCanceled())
+                {
+                    WSParameter[] parameters = service.getParameters();
+                    releaseParameters();
+                    for (int i = 0; i < parameters.length; i++) {
+                        addParameter(parameters[i]);
+                    }
+                    nbParameters = parameters.length;
+                }
 
-			// URL url =
-			// NemoLists.class.getResource("/resources/Parameters.xml");
-			// String file = url.getFile();
-			// stream = new FileOutputStream(file);
-			encoder = new XMLEncoder(stream);
-			encoder.writeObject(_parameters);
-			okParameters = true;
-			nbParameters = parameters.length;
-		} catch (Exception e) {
-			okParameters = false;
-			e.printStackTrace();
-		} finally {
-			if (encoder != null) {
-				try {
-					encoder.close();
-				} catch (Exception ex) {
-				}
-			}
-			if (stream != null) {
-				try {
-					stream.close();
-				} catch (Exception ex) {
-				}
-			}
-		}
+                if (!monitor.isCanceled())
+                {
+                    File file = new java.io.File("resources/Parameters.xml"); //$NON-NLS-1$
+                    stream = new FileOutputStream(file.toString());
+                    encoder = new XMLEncoder(stream);
+                    encoder.writeObject(_parameters);
+                    okParameters = true;
+                }else{
+                    if (nbParameters != 0){
+                        // rollback
+                        releaseParameters();
+                        for(WSParameter bkParam : bkParameters){
+                            addParameter(bkParam);   
+                        }
+                        nbParameters = 0;
+                    }
+                }
+            } catch (Exception e) {
+                okParameters = false;
+                e.printStackTrace();
+            } finally {
+                if (encoder != null) {
+                    try {
+                        encoder.close();
+                    } catch (Exception ex) {
+                    }
+                }
+                if (stream != null) {
+                    try {
+                        stream.close();
+                    } catch (Exception ex) {
+                    }
+                }
+            }
+        }
 	}
 
 	/**
 	 * 
 	 */
-	public static void updateSurveys() {
+	public static void updateSurveys(IProgressMonitor monitor, NemoWS service) {
 		okSurveys = false;
-		FileOutputStream stream = null;
-		XMLEncoder encoder = null;
-		try {
-			NemoWS service = new NemoWSServiceLocator()
-					.getNEMO(new java.net.URL(Utils.configuration
-							.getNemoWebServiceURL()));
-			WSSurveyDescription[] surveys = service.getSurveyList();
-			releaseSurveys();
-			for (int i = 0; i < surveys.length; i++) {
-				addSurvey(surveys[i]);
-			}
+        nbSurveys = 0;
+        
+        if (service != null){
+            
+            // BackUp de l'objet
+            List<WSSurveyDescription> bkSurveys = new ArrayList<WSSurveyDescription>();
+            for(WSSurveyDescription bkSurvey : _surveys){
+                bkSurveys.add(bkSurvey);     
+            }
+        
+    		FileOutputStream stream = null;
+    		XMLEncoder encoder = null;
+    		try {
+                if (!monitor.isCanceled())
+                {
+        			WSSurveyDescription[] surveys = service.getSurveyList();
+        			releaseSurveys();
+        			for (int i = 0; i < surveys.length; i++) {
+        				addSurvey(surveys[i]);
+        			}
+                    nbSurveys = surveys.length;
+                }
 
-			File file = new java.io.File("resources/Surveys.xml");
-			stream = new FileOutputStream(file.toString());
-
-			// URL url = NemoLists.class.getResource("/resources/Surveys.xml");
-			// String file = url.getFile();
-			// stream = new FileOutputStream(file);
-			encoder = new XMLEncoder(stream);
-			encoder.writeObject(_surveys);
-			okSurveys = true;
-			nbSurveys = surveys.length;
-		} catch (Exception e) {
-			okSurveys = false;
-			e.printStackTrace();
-		} finally {
-			if (encoder != null) {
-				try {
-					encoder.close();
-				} catch (Exception ex) {
-				}
-			}
-			if (stream != null) {
-				try {
-					stream.close();
-				} catch (Exception ex) {
-				}
-			}
-		}
+                if (!monitor.isCanceled())
+                {
+        			File file = new java.io.File("resources/Surveys.xml"); //$NON-NLS-1$
+        			stream = new FileOutputStream(file.toString());
+                    
+        			encoder = new XMLEncoder(stream);
+        			encoder.writeObject(_surveys);
+                    
+        			okSurveys = true;
+                }
+                else
+                {
+                    if (nbSurveys != 0){
+                        // rollback 
+                        releaseSurveys();
+                        for(WSSurveyDescription bkSurvey : bkSurveys){
+                            addSurvey(bkSurvey); 
+                        }
+                        nbSurveys = 0;
+                    }
+                }
+    		} catch (Exception e) {
+    			okSurveys = false;
+    			e.printStackTrace();
+    		} finally {
+    			if (encoder != null) {
+    				try {
+    					encoder.close();
+    				} catch (Exception ex) {
+    				}
+    			}
+    			if (stream != null) {
+    				try {
+    					stream.close();
+    				} catch (Exception ex) {
+    				}
+    			}
+    		}
+        }
 	}
 
-	public static void initEdmo() {
+	public static int initEdmo() {
+        int edmoSize = 0;
 		XMLDecoder decoder = null;
 		try {
 
 			EdmoHandler edmoH = new EdmoHandler();
 
 			SAXParserFactory.newInstance().newSAXParser().parse(
-					new FileInputStream("resources/Edmo.xml"), edmoH);
+					new FileInputStream("resources/Edmo.xml"), edmoH); //$NON-NLS-1$
 
 			_edmo.putAll(edmoH.get_valeurs());
-			nbEdmo = _edmo.size();
+            edmoSize = _edmo.size();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -944,30 +1028,37 @@ public class NemoLists implements Cloneable {
 				}
 			}
 		}
+        return edmoSize;
 	}
 
-	public static void updateEdmo() {
+	public static void updateEdmo(IProgressMonitor monitor) {
 		okEdmo = false;
+        nbEdmo = 0;
 		FileOutputStream stream = null;
+        String result = Global.EMPTY_STRING;
 
 		try {
-			Edmo_webservice service = new Edmo_webserviceLocator();
-			Edmo_webserviceSoap port = service.getedmo_webserviceSoap12();
-			String result = port.ws_edmo_get_list();
-
-			if (!result.equals("")) {
-
-				File file = new java.io.File("resources/Edmo.xml");
+            if (!monitor.isCanceled())
+            {
+                // Appel au WebService
+    			Edmo_webservice service = new Edmo_webserviceLocator();
+    			Edmo_webserviceSoap port = service.getedmo_webserviceSoap12();
+    			result = port.ws_edmo_get_list();
+            }
+            if (!monitor.isCanceled() && !result.equals(Global.EMPTY_STRING))
+            {
+                // écriture du nouveau fichier
+				File file = new java.io.File("resources/Edmo.xml"); //$NON-NLS-1$
 
 				stream = new FileOutputStream(file.toString());
-				OutputStreamWriter osw = new OutputStreamWriter(stream, "UTF-8");
+				OutputStreamWriter osw = new OutputStreamWriter(stream, "UTF-8"); //$NON-NLS-1$
 				osw.write(result);
 				osw.flush();
 				osw.close();
-
-				initEdmo();
-
-				okEdmo = true;
+                
+                // stockage des valeurs dans l'objet
+                nbEdmo = initEdmo();
+                okEdmo = true;
 			}
 
 		} catch (ServiceException ex1) {
@@ -982,9 +1073,10 @@ public class NemoLists implements Cloneable {
 	/**
 	 * 
 	 */
-	public static void updateVocabList(String listName) {
-		// okSurveys = false;
+	private static void updateVocabList(String listName) 
+    {
 		okVocabLists = true;
+        
 		FileOutputStream stream = null;
 		XMLEncoder encoder = null;
 		CodeTableRecordTypeArrayHolder table = new CodeTableRecordTypeArrayHolder();
@@ -999,11 +1091,11 @@ public class NemoLists implements Cloneable {
 				if (table.value != null) {
 					_vocabList.put(listName, table.value);
 
-					File dir = new java.io.File("resources/Vocab");
+					File dir = new java.io.File("resources/Vocab"); //$NON-NLS-1$
 					if (!dir.exists()) {
 						dir.mkdirs();
 					}
-					File file = new java.io.File(dir, listName + ".xml");
+					File file = new java.io.File(dir, listName + ".xml"); //$NON-NLS-1$
 					stream = new FileOutputStream(file.toString());
 
 					encoder = new XMLEncoder(stream);
@@ -1021,9 +1113,6 @@ public class NemoLists implements Cloneable {
 			okVocabLists = false;
 			e.printStackTrace();
 		} finally {
-			if (okVocabLists) {
-				nbVocabLists++;
-			}
 			if (encoder != null) {
 				try {
 					encoder.close();
@@ -1047,18 +1136,31 @@ public class NemoLists implements Cloneable {
 	 * 
 	 */
 	public static void updateVocabLists(IProgressMonitor monitor) {
-		Iterator<String> keys = Utils.configuration.getVocabLists().keySet()
-				.iterator();
-		
-		int keySetSize = Utils.configuration.getVocabLists().keySet().size();
-		
-		nbVocabLists = 0;
-		while (keys.hasNext()) {
-			String listName = keys.next();
-			if (monitor != null) monitor.subTask(Messages.getString("SWTProcessWS.9") + " " 
-					+ listName + " [" + (nbVocabLists + 1) + " / " + keySetSize + "]");
-			updateVocabList(listName);
-		}
+		Iterator<String> keys = Utils.configuration.getVocabLists().keySet().iterator();
+        int keySetSize = Utils.configuration.getVocabLists().size();
+
+        nbVocabLists = 0;
+        okVocabLists = false;
+        
+      while (keys.hasNext()) {
+              String listName = keys.next();
+              if (!monitor.isCanceled()){
+                  StringBuffer msg = new StringBuffer();
+                  msg.append(Messages.getString("SWTProcessWS.9")); //$NON-NLS-1$
+                  msg.append(Global.SPACE);
+                  msg.append(listName);
+                  msg.append(" [");//$NON-NLS-1$
+                  msg.append((nbVocabLists + 1));
+                  msg.append(" / ");//$NON-NLS-1$
+                  msg.append(keySetSize);
+                  msg.append("]");//$NON-NLS-1$
+                  monitor.subTask(msg.toString());
+                  updateVocabList(listName);
+                  if (okVocabLists)  nbVocabLists++;
+              }else{
+                  okVocabLists = false;
+              }
+      }
 	}
 
 	/**
@@ -1099,13 +1201,13 @@ public class NemoLists implements Cloneable {
 	public static void initVocabMap(String list1, String list2) {
 		XMLDecoder decoder = null;
 		try {
-			String fileName = "resources/Vocab/" + Utils.concat(list1, list2)
+			String fileName = "resources/Vocab/" + Utils.concat(list1, list2, Global.UNDERSCORE)
 					+ ".xml";
 			File file = new File(fileName);
 			if (file.exists()) {
 				decoder = new XMLDecoder(new FileInputStream(file));
 
-				_vocabMap.put(Utils.concat(list1, list2),
+				_vocabMap.put(Utils.concat(list1, list2, Global.UNDERSCORE),
 						(CodeTableRecordType[]) decoder.readObject());
 			}
 		} catch (Exception e) {
@@ -1120,12 +1222,28 @@ public class NemoLists implements Cloneable {
 			}
 		}
 	}
+    
+    public static void updateVocabMaps(IProgressMonitor monitor)
+    {
+        okVocabMaps = false;
+        nbVocabMaps = 0;
+        for (String key : _vocabMap.keySet()){
+            if (!monitor.isCanceled()){
+                monitor.subTask(Messages.getString("SWTProcessWS.9") + " Mapping " + key); //$NON-NLS-1$ //$NON-NLS-2$
+                String[] listName = key.split(Global.UNDERSCORE);
+                NemoLists.updateVocabMap(listName[0], listName[1]);
+                if (okVocabMaps)  nbVocabMaps++;
+            }else{
+                okVocabMaps = false;
+            }
+        }
+    }
 
 	/**
 	 * 
 	 */
-	public static void updateVocabMap(String list1, String list2) {
-		// okSurveys = false;
+	private static void updateVocabMap(String list1, String list2) {
+		okVocabMaps = true;
 		FileOutputStream stream = null;
 		XMLEncoder encoder = null;
 		CodeTableRecordTypeArrayHolder table = new CodeTableRecordTypeArrayHolder();
@@ -1137,26 +1255,29 @@ public class NemoLists implements Cloneable {
 			vocab.getMap(new String[] { Utils.configuration
 					.getVocabListURL(list1) }, Utils.configuration
 					.getPredicate(), new String[] { Utils.configuration
-					.getVocabListURL(list2) }, "false", table, error);
+					.getVocabListURL(list2) }, "false", table, error); //$NON-NLS-1$
 			if (!error.value) {
 				if (table.value != null) {
-					_vocabMap.put(Utils.concat(list1, list2), table.value);
+					_vocabMap.put(Utils.concat(list1, list2, Global.UNDERSCORE), table.value);
 
-					File dir = new java.io.File("resources/Vocab");
+					File dir = new java.io.File("resources/Vocab"); //$NON-NLS-1$
 					if (!dir.exists()) {
 						dir.mkdirs();
 					}
 					File file = new java.io.File(dir, Utils
-							.concat(list1, list2)
-							+ ".xml");
+							.concat(list1, list2, Global.UNDERSCORE)
+							+ ".xml"); //$NON-NLS-1$
 					stream = new FileOutputStream(file.toString());
 
 					encoder = new XMLEncoder(stream);
 					encoder.writeObject(table.value);
 				}
-			}
+			}else{
+               okVocabMaps = false; 
+            }
 		} catch (Exception e) {
 			e.printStackTrace();
+            okVocabMaps = false;
 		} finally {
 			if (encoder != null) {
 				try {
@@ -1174,12 +1295,12 @@ public class NemoLists implements Cloneable {
 	}
 
 	public static CodeTableRecordType[] getVocabMap(String list1, String list2) {
-		return _vocabMap.get(Utils.concat(list1, list2));
+		return _vocabMap.get(Utils.concat(list1, list2, Global.UNDERSCORE));
 	}
 
 	public static void setVocabMap(String list1, String list2,
 			CodeTableRecordType[] map) {
-		_vocabMap.put(Utils.concat(list1, list2), map);
+		_vocabMap.put(Utils.concat(list1, list2, Global.UNDERSCORE), map);
 	}
 
 	public static java.util.HashMap<Integer, String> getEdmo() {
@@ -1257,5 +1378,23 @@ public class NemoLists implements Cloneable {
 	public static void setSdnParameters(String parameters) {
 		_sdnParameters = parameters;
 	}
+
+    /**
+     * Getter sur _vocabList.
+     * @return the vocabList
+     */
+    public static HashMap<String, CodeTableRecordType[]> getVocabList()
+    {
+        return _vocabList;
+    }
+
+    /**
+     * Getter sur _vocabMap.
+     * @return the vocabMap
+     */
+    public static HashMap<String, CodeTableRecordType[]> getVocabMap()
+    {
+        return _vocabMap;
+    }
 
 } /* End of class: NemoLists */

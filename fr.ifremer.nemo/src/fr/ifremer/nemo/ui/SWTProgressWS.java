@@ -13,22 +13,23 @@ public class SWTProgressWS extends ApplicationWindow {
 		super(null);
 	}
 
-	public void run(){
+	public boolean run(){
 
 		final Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+        boolean interrompu = false;
 
 		try {
 			// FAE 0001132 : enable the cancelation		
-			// FIXME DBR : rendre fonctionnel ce bouton cancel !!
-			new ProgressMonitorDialog(shell).run(true, true,
-					new SWTProcessWS());
+            new ProgressMonitorDialog(shell).run(true, true, new SWTProcessWS());
 			
 		} catch (InvocationTargetException e) {
 			e.printStackTrace();
+            interrompu = true;
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+            interrompu = true;
 		}
-
+        
+        return interrompu;
 	}
 
 }
