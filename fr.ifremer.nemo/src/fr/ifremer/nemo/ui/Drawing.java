@@ -322,8 +322,8 @@ public class Drawing {
 					new GridData(GridData.FILL_HORIZONTAL));
 
 			EditSurvey.comboCountries.setParent(sectionClient);
-			EditSurvey.comboCountries.setLayoutData(
-					new GridData(GridData.FILL_HORIZONTAL));
+			//EditSurvey.comboCountries.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+            GridDataFactory.swtDefaults().hint(385, 12).applyTo(EditSurvey.comboCountries);
 		}
 			
 		for (i = 0; i < nbre; i++) {
@@ -334,8 +334,8 @@ public class Drawing {
 
 			// affichage zone texte dans la section
 			listeText.get(i).setParent(sectionClient);
-			listeText.get(i).setLayoutData(
-					new GridData(GridData.FILL_HORIZONTAL));
+			//listeText.get(i).setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+            GridDataFactory.swtDefaults().hint(400, 12).applyTo(listeText.get(i));
 		}
 		
 //		 Combo region
@@ -347,8 +347,8 @@ public class Drawing {
 					new GridData(GridData.FILL_HORIZONTAL));
 
 			EditSurvey.comboRegion.setParent(sectionClient);
-			EditSurvey.comboRegion.setLayoutData(
-					new GridData(GridData.FILL_HORIZONTAL));
+			//EditSurvey.comboRegion.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+            GridDataFactory.swtDefaults().hint(385, 12).applyTo(EditSurvey.comboRegion);
 			
 			// Creation du menu contextuel pour la recherche filtree
 			Utils.createSearchMenu(EditSurvey.comboRegion, Global.REGION);
@@ -403,7 +403,7 @@ public class Drawing {
 		
 		GridLayoutFactory.fillDefaults().applyTo(EditSurvey.comboDataCentres);
 		// FAE 1190 : champ trop long
-		GridDataFactory.swtDefaults().hint(410, 10).applyTo(EditSurvey.comboDataCentres);
+		GridDataFactory.swtDefaults().hint(385, 10).applyTo(EditSurvey.comboDataCentres);
 		
 		// ajout de la combolist confidentialite
 		Label label2 = new Label(sectionClient, SWT.NULL);

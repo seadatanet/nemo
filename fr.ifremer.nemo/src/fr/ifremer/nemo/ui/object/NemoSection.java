@@ -7,6 +7,7 @@
  */
 package fr.ifremer.nemo.ui.object;
 
+import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridLayout;
@@ -32,16 +33,16 @@ import fr.ifremer.nemo.util.Formatter;
 public abstract class NemoSection implements UIobject
 {
     // constantes des noms possibles
-    public static final String F_FILEHEADER     = "";                       //$NON-NLS-1$
-    public static final String F_STATIONHEADER  = "";                       //$NON-NLS-1$
-    public static final String F_ENDSTATION     = "";                       //$NON-NLS-1$
-    public static final String F_ENDDATA        = "";                       //$NON-NLS-1$
-    public static final String C_REFERENCE      = "";                       //$NON-NLS-1$
-    public static final String C_LOCATION       = "";                       //$NON-NLS-1$
-    public static final String C_DATASOURCE     = "";                       //$NON-NLS-1$
-    public static final String C_ARCHIVING      = "";                       //$NON-NLS-1$
-    public static final String C_DATATYPE       = "";                       //$NON-NLS-1$
-    public static final String C_COMMENTS       = "";                       //$NON-NLS-1$
+//    public static final String F_FILEHEADER     = "enteteFichier";          //$NON-NLS-1$
+//    public static final String F_STATIONHEADER  = "enteteStation";          //$NON-NLS-1$
+//    public static final String F_ENDSTATION     = "finStation";             //$NON-NLS-1$
+//    public static final String F_ENDDATA        = "indicFinDonnees";        //$NON-NLS-1$
+//    public static final String C_REFERENCE      = "";                       //$NON-NLS-1$
+//    public static final String C_LOCATION       = "";                       //$NON-NLS-1$
+//    public static final String C_DATASOURCE     = "";                       //$NON-NLS-1$
+//    public static final String C_ARCHIVING      = "";                       //$NON-NLS-1$
+//    public static final String C_DATATYPE       = "";                       //$NON-NLS-1$
+//    public static final String C_COMMENTS       = "";                       //$NON-NLS-1$
     public static final String S_DCHIST         = "dcHistory";              //$NON-NLS-1$
     public static final String S_COMMENT        = "comment";                //$NON-NLS-1$
     public static final String S_SURFACE        = "surfaceSamples";         //$NON-NLS-1$

@@ -24,8 +24,9 @@ import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.ui.DataModel;
 import fr.ifremer.nemo.ui.EditData;
+import fr.ifremer.nemo.ui.EditDesc;
 import fr.ifremer.nemo.ui.EditStation;
-import fr.ifremer.nemo.ui.TableDataSurvey;
+import fr.ifremer.nemo.ui.EditSurvey;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.ViewFile;
 import fr.ifremer.nemo.util.Global;
@@ -76,17 +77,13 @@ public class Couple implements UIobject
         if (valueText != null){
             valueText.addModifyListener(new ModifyListener() {
                 public void modifyText(ModifyEvent event) {
-                    // on modifie la valeur du champ texte
-                    // dès qu'on modifie une valeur, on invalide l'étape
-                    // remise du nom onglet à valeur par défaut
-    
-                    // on invalide toutes les étapes suivantes avec le second
-                    // flag okApresReset à false
-                    EditStation.okApresReset = false;
-                    ViewFile.tabItem2.setText(Messages.getString("EditStation.1"));         //$NON-NLS-1$
-                    EditData.okApresReset = false;
-                    ViewFile.tabItem3.setText(Messages.getString("EditData.1"));            //$NON-NLS-1$
-                    Utils.messageErreur(Global.EMPTY_STRING);
+                    invalidEtapes();
+                }
+            });
+        }else if (valueCombo != null){
+            valueCombo.addModifyListener(new ModifyListener() {
+                public void modifyText(ModifyEvent event) {
+                    invalidEtapes();
                 }
             });
         }
@@ -381,6 +378,30 @@ public class Couple implements UIobject
     public void setLabelString(String labelString)
     {
         this.labelString = labelString;
+    }
+    
+    protected void invalidEtapes(){
+        // on modifie la valeur du champ texte
+        // dès qu'on modifie une valeur, on invalide l'étape
+        // remise du nom onglet à valeur par défaut
+
+        // on invalide toutes les étapes suivantes avec le second
+        // flag okApresReset à false
+        int currentTab = ViewFile.affiche;
+        
+        if (currentTab <= 0) // onglet FILE ou inférieur en cours
+            EditDesc.invalidEtape();
+        
+        if (currentTab <= 1) // onglet CRUISE ou inférieur en cours
+            EditSurvey.invalidEtape();
+        
+        if (currentTab <= 2) // onglet STATION ou inférieur en cours
+            EditStation.invalidEtape();
+        
+        if (currentTab <= 3) // onglet DATA ou inférieur en cours
+            EditData.invalidEtape();
+
+        Utils.messageErreur(Global.EMPTY_STRING);
     }
     
     

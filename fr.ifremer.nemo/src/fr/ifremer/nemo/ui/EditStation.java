@@ -329,7 +329,13 @@ public class EditStation {
         }
         
         // TODO griser line si vide pour toutes les stationSection
-        
+        for (NemoSection section : listeSectionsStation){
+            if (section instanceof StationSection)
+            {
+                ((StationSection) section).diseableLineInData();
+                
+            }
+        }
         
         
     }

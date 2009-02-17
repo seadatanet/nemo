@@ -752,7 +752,7 @@ public class StationSection extends NemoSection
                 ExternalizableFormat format = propertyModel.getFormat();
                 
                 // gestion des flags qualite
-                //FIXME Flag qualite PROFONDEUR CAPTEUR, DECLINAISON MAGNETIQUE ?
+                //FIXME Flag qualite DECLINAISON MAGNETIQUE ?
                 String property = name;
                 if (name.equals(S_TIME) || name.equals(S_DATE)) property = Global.DATETIME;
                 FlagFragment flag = EditStation.qcFlags.fillFlagFragment(property);
@@ -1082,5 +1082,12 @@ public class StationSection extends NemoSection
         return propertyModel;        
     }
     
+    public void diseableLineInData(){
+        if (autoInput != null && autoInput.isSelected()){
+            for (AutoLine line : autoInput.getLines()){
+                line.getNumberLine().setEnabled(!line.isInData());
+            }
+        }
+    }
     
 }

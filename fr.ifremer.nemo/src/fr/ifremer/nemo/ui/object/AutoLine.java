@@ -117,6 +117,7 @@ public class AutoLine implements UIobject
         
         buttonSet
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                @Override
                 public void widgetSelected(org.eclipse.swt.events.SelectionEvent g) {
 
                     StyledText styledtext = ViewFile.styledTextStation;
@@ -156,6 +157,9 @@ public class AutoLine implements UIobject
                         boolean ligneOK = checkInDataOrHeader(String.valueOf(lign), "This section");        //$NON-NLS-1$
                         
                         if (ligneOK){
+                            // réactivation du champ "ligne"
+                            numberLine.setEnabled(ligneOK);
+                            
                             // remplissage ligne dans interface
                             numberLine.setText(String.valueOf(lign)); 
                             
@@ -362,8 +366,8 @@ public class AutoLine implements UIobject
                 boolean continueBoucle = true;
                 while (continueBoucle && index < ligne.length()){
                     nextChar = ligne.substring(index, index + 1);
-                    if (nextChar.equals(".") 
-                        || nextChar.equals(",")
+                    if (nextChar.equals(".")  //$NON-NLS-1$
+                        || nextChar.equals(",")  //$NON-NLS-1$
                         || Utils.isNumeric(nextChar)){
                         index++;
                     }else{
@@ -379,10 +383,11 @@ public class AutoLine implements UIobject
     }
     
     public void setValue(String line, String start, String end){
-        this.numberLine.setText(line);
+        numberLine.setText(line);
         this.start.setText(start);
         this.end.setText(end);
         checkInDataOrHeader(line, null); 
+        //numberLine.setEnabled(!inData);
     }
     
     public void selectInViewFile(){
@@ -526,4 +531,8 @@ public class AutoLine implements UIobject
         // else
         return true;
     }
+    
+//    public void diseable(){
+//        if (numberLine)
+//    }
 }
