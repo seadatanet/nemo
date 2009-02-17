@@ -446,7 +446,7 @@ public class DataModel
 
         // parcours des sections de la station pour initialisation
         for (NemoSection stationSection : EditStation.listeSectionsStation){
-            stationModel = stationSection.initModel(stationModel);
+            stationSection.initModel(stationModel);
         }
         
         // Completer les données manquantes
