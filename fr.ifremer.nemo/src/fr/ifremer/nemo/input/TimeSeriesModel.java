@@ -398,6 +398,10 @@ public class TimeSeriesModel implements Cloneable, PathElementHandler,
             }
 		}
         
+        
+        _stationModel.addCalculateFlag(a_Station, Global.DURATION, Global.DATETIME, Global.ENDDATETIME);
+        _stationModel.addCalculateFlag(a_Station, Global.DISTANCETOBOTTOM, NemoSection.S_DEPTH, NemoSection.S_SENSORDEPTH);        
+
         // SAMPLING RATE
         convertSampleRate(timeSeries);
         

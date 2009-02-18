@@ -427,6 +427,7 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 					// Tri des donnees de la station par ordre croissant
 					station.tri(true);
 
+                    station.setFichierSource(_file);
 					survey.addStation(station);
 				}
 

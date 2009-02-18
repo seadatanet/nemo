@@ -1900,6 +1900,31 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			station.getMetaFlags().put(property, value);
 		}
 	}
+    
+    public void addCalculateFlag(Station station, String id, String initial1, String initial2){
+        String flag1 = station.getMetaFlag(initial1);
+        String flag2 = station.getMetaFlag(initial2);
+        String value;
+
+        //      TODO = moins bon de flag1 et flag2
+        if(flag1.equals("0"))
+        {
+            value = flag1;
+        } else if(flag2.equals("0"))
+        {
+            value = flag2;            
+        }  else if(flag1.compareTo(flag2) > 0)
+        {
+            value = flag2;            
+        } else
+        {
+            value = flag1;            
+        }
+        
+        
+        station.getMetaFlags().put(id, value);
+        
+    }
 
 	public String getSeparator() {
 		return _separator;

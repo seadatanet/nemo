@@ -335,6 +335,10 @@ public class QCflagsSection extends NemoSection
                     tabFlagQC, S_DEPTH, Messages.getString(S_DEPTH).trim()); 
             final FlagMenuItem childEndDepth = new FlagMenuItem(subFlag,
                     tabFlagQC, S_EDEPTH, Messages.getString(S_EDEPTH).trim()); 
+
+            final FlagMenuItem childSensorDepth = new FlagMenuItem(subFlag,
+                tabFlagQC, S_SENSORDEPTH, Messages.getString(S_SENSORDEPTH).trim());
+            
         }
 
         final Table tabFlag = tabFlagQC;

@@ -39,6 +39,12 @@ public class DataType implements Cloneable, SAXConsumer {
 		_code = "";
 		_qc = false;
 	}
+    
+    public DataType(String code, Boolean qc, Boolean sensor) {
+        _code = code;
+        _qc = false;
+        _sensor=sensor;
+    }
 
 	/**
 	 * 

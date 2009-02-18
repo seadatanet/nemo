@@ -141,7 +141,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	protected float _offsetTU;
 
 	/**
-	 * MEDATLAS: cruise+station+cast (18 char max)
+	 * MEDATLAS: numero de station (5 char max)
 	 */
 	protected String _reference;
 
@@ -200,6 +200,11 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 * 
 	 */
 	protected HashMap<String, String> _metaFlags;
+    
+    /**
+     * Nom du fichier source, sert notemment pour trier les stations
+     */
+    protected String _fichierSource;
 
 	public Station() {
 		_bottomDepth = Float.NaN;
@@ -222,6 +227,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		_survey = null;
 		_timeSeriesInformation = null;
 		_metaFlags = new HashMap<String, String>();
+        _fichierSource = "";
 	}
 
 	/**
@@ -1705,9 +1711,10 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	/**
 	 * 
 	 * @return String
+     * Trie pour l'ordre de sortie des fichiers.
 	 */
 	public String getSortCriteria() {
-		return Long.toString(getFullDate()) + getReference();
+		return getFichierSource() + Long.toString(getFullDate()) + getReference();
 	}
 
 	/**
@@ -2101,6 +2108,24 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
             e.printStackTrace();
         }
         return value;
+    }
+
+    /**
+     * Getter sur _fichierSource.
+     * @return the fichierSource
+     */
+    public String getFichierSource()
+    {
+        return _fichierSource;
+    }
+
+    /**
+     * Setter sur _fichierSource.
+     * @param fichierSource the fichierSource to set
+     */
+    public void setFichierSource(String fichierSource)
+    {
+        _fichierSource = fichierSource;
     }
     
 

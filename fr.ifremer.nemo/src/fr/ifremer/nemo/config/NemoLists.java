@@ -146,6 +146,25 @@ public class NemoLists implements Cloneable {
 		_dataTypes.toArray(v);
 		return v;
 	}
+    
+    /**
+     * Returns the collection of linked objects for role "dataTypes"
+     * 
+     * @return Array of linked objects
+     */
+    public static WSDataType[] getDataTypesIsSensor() {
+        java.util.List<WSDataType> dataTypesIsSensor = new java.util.ArrayList<WSDataType>();
+        
+        for (WSDataType object : _dataTypes)
+        {
+            if(object.isSensor())
+                dataTypesIsSensor.add(object);                
+        }
+
+        WSDataType[] v = new WSDataType[dataTypesIsSensor.size()];
+        dataTypesIsSensor.toArray(v);
+        return v;
+    }
 
 	/**
 	 * Returns linked object for role "dataTypes" at index i

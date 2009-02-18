@@ -40,8 +40,8 @@ $line
 #if ($survey.isTimeSeriesSurvey())
 *ADDITIONAL INFORMATION - TIME SERIES
 *EDATE=$formatter.formatDateTime("ddMMyyyy", $station.timeSeriesInformation.endDate) ETIME=$formatter.formatDateTime("hh24mm", $station.timeSeriesInformation.endTime) ELAT=$formatter.formatLatitude("NDD MM.mm", $station.timeSeriesInformation.endLatitude) ELON=$formatter.formatLongitude("NDDD MM.mm", $station.timeSeriesInformation.endLongitude) EDEPTH=#if($station.timeSeriesInformation.endDepth==0) #else$formatter.formatInt("%-5d", $station.timeSeriesInformation.endDepth)#end  QC=$station.getMetaFlag("endDateTime")$station.getMetaFlag("endLatitude")$station.getMetaFlag("endLongitude")$station.getMetaFlag("endDepth")
-*SENSOR DEPTH=$formatter.formatInt("%-5d", $station.timeSeriesInformation.sensorDepth) (metre)            DISTANCE TO BOTTOM=$formatter.formatInt("%-5d", $station.timeSeriesInformation.distToBottom) (metre) QC=00
-*DURATION=$formatter.formatInt("%-5d", $station.timeSeriesInformation.duration) (day)                                                   QC=0
+*SENSOR DEPTH=$formatter.formatInt("%-5d", $station.timeSeriesInformation.sensorDepth) (metre)            DISTANCE TO BOTTOM=$formatter.formatInt("%-5d", $station.timeSeriesInformation.distToBottom) (metre) QC=$station.getMetaFlag("sensorDepth")$station.getMetaFlag("distanceToBottom")
+*DURATION=$formatter.formatInt("%-5d", $station.timeSeriesInformation.duration) (day)                                                   QC=$station.getMetaFlag("duration")
 *SAMPLING RATE=$formatter.formatInt("%-5d", $station.timeSeriesInformation.samplingRate) (second)          MAGNETIC DECLINATION=$formatter.formatFloat("%-4.0f", $station.timeSeriesInformation.getMagneticDeclination()) (degree)
 #end
 ## -- SDN_parameters_mapping

@@ -2,11 +2,14 @@ package fr.ifremer.nemo.ui;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
 
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
@@ -16,9 +19,11 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.dialogs.ListDialog;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.domain.DataType;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.input.SurveyMedia;
@@ -28,6 +33,7 @@ import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.ws.WSDataType;
 
 public class EditConversion extends Thread {
 
@@ -155,6 +161,10 @@ public class EditConversion extends Thread {
                                 
                                 // test pour savoir si on est en campagne ou pas
                                 if (ViewFile.isCollection()) {
+
+                                    DataType dt = askDataType();
+                                    DataModel.stationModel.getModel().setDataType(dt);
+                                    
 
 									choixDossierSortie();
 
@@ -595,6 +605,31 @@ public class EditConversion extends Thread {
                 definePrefixDossier();
             }
     }
+    
+   public static DataType askDataType() 
+    {
+   
+       
+       
+        ListDialog ld = new ListDialog(shell);
+        ld.setAddCancelButton(true);
+        ld.setContentProvider(new ArrayContentProvider());
+        ld.setLabelProvider(new LabelProvider());
+        
+        ld.setInput(Arrays.asList(NemoLists.getDataTypesIsSensor()));         
+        ld.setTitle(Messages.getString("askDataType.Title"));  //$NON-NLS-1$
+        ld.open();
+        WSDataType result = (WSDataType)ld.getResult()[0];
+        
+        DataType dt = new DataType(result.getCode(), true, result.isSensor());
+          
+
+        return dt;
+        
+    }
+   
+
+
 
 	public static String getLocalCdiId(Station station, String surveyReference) {
 		// FAE 1143 : nommage du LOCAL_CDI_ID

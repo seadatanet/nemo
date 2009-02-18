@@ -319,6 +319,7 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 	public Survey convert(boolean isRefDateBased, long a_RefDate,
 			ProgressNotification a_Progress) throws IOException, ParseException, InterruptedException {
 		try {
+            // TODO FAE1105
 			Survey survey = (Survey) _model.clone();
 			File dir = new File(_directory);
 			String[] files = dir.list();
@@ -365,8 +366,9 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 						
 						// Tri des donnees de la station par ordre croissant
 						station.tri(true);
-						
+						station.setFichierSource(files[i]);
 						survey.addStation(station);
+                        
 					} catch (Exception e) {
 						throw new InterruptedException (e.getMessage() + Messages.getString("SingleFileSurvey.1") + file.getName());
 					} finally {

@@ -35,4 +35,8 @@ public interface Global
     // Types de metadonnee
     public static final String DATETIME = "dateTime"; //$NON-NLS-1$
     public static final String ENDDATETIME = "endDateTime"; //$NON-NLS-1$
+    // (Type de metadonnee calcules)
+    public static final String DURATION = "duration"; //$NON-NLS-1$    
+    public static final String DISTANCETOBOTTOM = "distanceToBottom"; //$NON-NLS-1$      
+    
 }
