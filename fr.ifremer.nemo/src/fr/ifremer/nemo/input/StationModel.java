@@ -355,12 +355,6 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		if (a_LocalName.equals("parameters")) {
 			return new PathElementConsumer("parameters", this);
 		}
-        if (a_LocalName.equals("odvparameters")) {
-            return new PathElementConsumer("odvparameters", this);
-        }
-        if (a_LocalName.equals("medparameters")) {
-            return new PathElementConsumer("medparameters", this);
-        }
 		if (a_LocalName.equals("HorodatedParameterModel")) {
 			HorodatedParameterModel l = (HorodatedParameterModel) HorodatedParameterModel
 					.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
@@ -434,14 +428,6 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		for (ParameterModel t : getParameterModels()) {
 			t.writeXMLOn(a_Writer);
 		}
-        a_Writer.openTag("odvparameters");
-        for (ParameterModel t : getParameterModels()) {
-            t.writeXMLOn(a_Writer);
-        }
-        a_Writer.openTag("medparameters");
-        for (ParameterModel t : getParameterModels()) {
-            t.writeXMLOn(a_Writer);
-        }
 		a_Writer.closeTag();
 		a_Writer.openTag("properties");
 		for (PropertyModel t : getProperties()) {

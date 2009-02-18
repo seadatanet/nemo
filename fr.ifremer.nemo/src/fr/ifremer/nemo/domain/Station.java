@@ -388,12 +388,12 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		if (a_LocalName.equals("parameters")) {
 			return new PathElementConsumer("parameters", this);
 		}
-        if (a_LocalName.equals("odvparameters")) {
-            return new PathElementConsumer("odvparameters", this);
-        }
-        if (a_LocalName.equals("medparameters")) {
-            return new PathElementConsumer("medparameters", this);
-        }
+//        if (a_LocalName.equals("odvparameters")) {
+//            return new PathElementConsumer("odvparameters", this);
+//        }
+//        if (a_LocalName.equals("medparameters")) {
+//            return new PathElementConsumer("medparameters", this);
+//        }
 		if (a_LocalName.equals("TimeSeriesInformation")) {
 			TimeSeriesInformation l = (TimeSeriesInformation) TimeSeriesInformation
 					.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
@@ -441,18 +441,6 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 			addParameter((Parameter) c);
 			return c;
 		}
-        if (path.equals("odvparameters")) {
-            c = Parameter
-                    .fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
-            addOdvParameter((AddedParameter) c);
-            return c;
-        }
-        if (path.equals("medparameters")) {
-            c = Parameter
-                    .fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
-            addMedParameter((AddedParameter) c);
-            return c;
-        }
 		return null;
 	}
 
@@ -490,18 +478,10 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 			getDataType().writeXMLOn(a_Writer);
 		}
 		a_Writer.openTag("parameters");
-		for (Parameter t : getParameters()) {
-			t.writeXMLOn(a_Writer);
-		}
-        a_Writer.openTag("odvparameters");
-        for (Parameter t : getParameters()) {
-            t.writeXMLOn(a_Writer);
-        }
-        a_Writer.openTag("medparameters");
-        for (Parameter t : getParameters()) {
-            t.writeXMLOn(a_Writer);
-        }
-		a_Writer.closeTag();
+//		for (Parameter t : getParameters()) {
+//			t.writeXMLOn(a_Writer);
+//		}
+        a_Writer.closeTag();
 		if (getTimeSeriesInformation() != null) {
 			getTimeSeriesInformation().writeXMLOn(a_Writer);
 		}

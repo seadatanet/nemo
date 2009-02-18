@@ -278,9 +278,9 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 		}
 		a_Writer.closeTag();
 		a_Writer.openTag("stations");
-		for (Station t : getStations()) {
-			t.writeXMLOn(a_Writer);
-		}
+//		for (Station t : getStations()) {
+//			t.writeXMLOn(a_Writer);
+//		}
 		a_Writer.closeTag();
 	}
 
