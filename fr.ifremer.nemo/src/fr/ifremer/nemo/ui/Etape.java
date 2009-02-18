@@ -62,10 +62,10 @@ public class Etape {
 
 		// section fin de donnees
 		if (EditDesc.radManuel.getSelection()) {
-			if (EditDesc.txtManuel.getText().equals("")) {
+			if (EditDesc.txtManuel.getText().equals(Global.EMPTY_STRING)) {
 				ok = false;
 				Utils.messageErreurAppend(Messages
-						.getString("EditDesc.indicateurVide"));
+						.getString("EditDesc.indicateurVide")); //$NON-NLS-1$
 			}
 		}
 
@@ -209,6 +209,23 @@ public class Etape {
 //            }
 		}
 
+        // FAE 1143 : la référence campagne doit être == 13 caractères pour MEDATLAS
+        EditConversion.setWarningCampagne(Global.EMPTY_STRING);
+        String value = EditSurvey.textCampagne.getText().trim();
+        if (value.length() != 13){
+            ViewFile.radMedatlas.setEnabled(false);
+            ViewFile.radMedatlas.setSelection(false);
+            ViewFile.radODV.setEnabled(true);
+            ViewFile.radODV.setSelection(true);
+            if (ViewFile.radMonoStation.isEnabled()){
+                ViewFile.radMonoStation.setSelection(true);
+            }else{
+                ViewFile.radMonoFichier.setSelection(true);
+            }
+            ViewFile.afficheGrpODV();
+            EditConversion.setWarningCampagne(Messages.getString("ViewLog.5")); //$NON-NLS-1$
+        }
+
 		if (ok) {
 			EditSurvey.okApresReset = true;
 			okSurvey();
@@ -272,6 +289,22 @@ public class Etape {
                 }
             }
 		}
+        // FAE 1143 : dans tous les cas, le numéro de station doit être <= 5 caractères pour MEDATLAS
+        EditConversion.setWarningStation(Global.EMPTY_STRING);
+        value = EditStation.stationNumber.getValue().trim();
+        if (value.length() > 5){
+            ViewFile.radMedatlas.setEnabled(false);
+            ViewFile.radMedatlas.setSelection(false);
+            ViewFile.radODV.setEnabled(true);
+            ViewFile.radODV.setSelection(true);
+            if (ViewFile.radMonoStation.isEnabled()){
+                ViewFile.radMonoStation.setSelection(true);
+            }else{
+                ViewFile.radMonoFichier.setSelection(true);
+            }
+            ViewFile.afficheGrpODV();
+            EditConversion.setWarningStation(Messages.getString("ViewLog.6")); //$NON-NLS-1$
+        }
         
 		// FAE022 : TYPE DE DONNEES
 		if (!ViewFile.isCollection()) {
@@ -824,7 +857,7 @@ public class Etape {
 		int cptDebut = 0;
 		int cptFin = 0;
 
-		Utils.messageErreur(""); //$NON-NLS-1$
+		Utils.messageErreur(Global.EMPTY_STRING);
         
         String fmOut= new String();
         //Formatter formatter = new Formatter();
@@ -832,7 +865,7 @@ public class Etape {
 
 		if (nbreParam == 0) {
 			ok = false;
-			Utils.messageErreur(Messages.getString("Etape.117"));
+			Utils.messageErreur(Messages.getString("Etape.117")); //$NON-NLS-1$
 		} else {
 
 			debuts = new int[nbreParam];
@@ -886,15 +919,15 @@ public class Etape {
 				// check des valeurs debut<fin
 				if (typeCourant.getDebut() > typeCourant.getFin()) {
 					Utils
-							.messageErreurAppend(Messages.getString("Etape.98") + " " + typeCourant.getCode()); //$NON-NLS-1$
+							.messageErreurAppend(Messages.getString("Etape.98") + Global.SPACE + typeCourant.getCode()); //$NON-NLS-1$
 					ok = false;
 				}
 				
 //				 check des valeurs debut<fin flag
-				if (!typeCourant.getDebutFlag().equals("") && !typeCourant.getFinFlag().equals("")) {
+				if (!typeCourant.getDebutFlag().equals(Global.EMPTY_STRING) && !typeCourant.getFinFlag().equals(Global.EMPTY_STRING)) {
 					if (Integer.parseInt(typeCourant.getDebutFlag()) > Integer.parseInt(typeCourant.getFinFlag())) {
 						Utils
-								.messageErreurAppend(Messages.getString("Etape.125") + " " + typeCourant.getCode()); //$NON-NLS-1$
+								.messageErreurAppend(Messages.getString("Etape.125") + Global.SPACE + typeCourant.getCode()); //$NON-NLS-1$
 						ok = false;
 					}
 				}
@@ -927,21 +960,21 @@ public class Etape {
 			TypeData premierType = TableData.types.get(0);
 
 			// split sur " - "
-			Pattern p = Pattern.compile(" - ");
+			Pattern p = Pattern.compile(" - "); //$NON-NLS-1$
 			String[] mots = p.split(premierType.getCode());
 			String code = mots[0];
 
 			if (ViewFile.typeFichierEntree().equals(Global.PROFILE)) {
-				if (!(code.equals("PRES") || code.equals("DEPH"))) {
+				if (!(code.equals("PRES") || code.equals("DEPH"))) { //$NON-NLS-1$ //$NON-NLS-2$
 					// PRES ou DEPH n'est pas en premier
-					Utils.messageErreurAppend(Messages.getString("Etape.107"));
+					Utils.messageErreurAppend(Messages.getString("Etape.107")); //$NON-NLS-1$
 					ok = ok && false;
 				} else {
 					ok = ok && true;
 				}
 
 				// Si PRES n'est pas premier => Medatlas impossible
-				if (!code.equals("PRES")) {
+				if (!code.equals("PRES")) { //$NON-NLS-1$
 					ViewFile.radMedatlas.setEnabled(false);
 					ViewFile.radMedatlas.setSelection(false);
 					ViewFile.radODV.setSelection(true);

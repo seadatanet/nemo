@@ -71,7 +71,13 @@ public class EditConversion extends Thread {
 	 * Liste des stations triees
 	 */
 	protected static LinkedHashMap<String, Integer> _sortedStations = new LinkedHashMap<String, Integer>();
-
+    
+    /**
+     * messages d'avertissement de formats grisés car données non conformae
+     */
+    private static String warningCampagne = Global.EMPTY_STRING;
+    private static String warningStation = Global.EMPTY_STRING;
+    
 	@Override
     public void run() {
 
@@ -87,7 +93,8 @@ public class EditConversion extends Thread {
 		// interrompu = false;
 
 		// raz message erreur
-		Utils.messageErreur(Global.EMPTY_STRING);
+        // FAE 1143 : avertissement
+		Utils.messageErreur(warningCampagne + warningStation);
 
 		ViewEdit.formEdition.getBody().setLayout(new GridLayout());
 		ViewEdit.formEdition.setText(Messages.getString("EditConversion.1")); //$NON-NLS-1$
@@ -700,4 +707,22 @@ public class EditConversion extends Thread {
 	public static void setSortedStations(LinkedHashMap<String, Integer> stations) {
 		_sortedStations = stations;
 	}
+
+    /**
+     * Setter sur warningCampagne.
+     * @param warningCampagne the warningCampagne to set
+     */
+    public static void setWarningCampagne(String warningCampagne)
+    {
+        EditConversion.warningCampagne = warningCampagne;
+    }
+
+    /**
+     * Setter sur warningStation.
+     * @param warningStation the warningStation to set
+     */
+    public static void setWarningStation(String warningStation)
+    {
+        EditConversion.warningStation = warningStation;
+    }
 }
