@@ -7,6 +7,14 @@
  */
 package fr.ifremer.nemo.domain;
 
+import java.io.OutputStream;
+
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+
+import com.ago.xml.SAXConsumer;
+import com.ago.xml.XMLOutputWriter;
+
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.input.StationModel;
@@ -29,6 +37,155 @@ public class AddedParameter extends Parameter
     private IdParameter idParam;
     private Conversion cible;
 
+    
+    /**
+     * 
+     * Build object from its XML defintion
+     * 
+     * @param a_URI
+     *            Element Namespace (SAX 2)
+     * @param a_LocalName
+     *            Tag name
+     * @param a_QName
+     *            qualified tag name
+     * @param a_Attributes
+     *            XML Element attributes
+     * @return SAXConsumer
+     * 
+     */
+    public static SAXConsumer fromElement(String a_URI, String a_LocalName,
+            String a_QName, Attributes a_Attributes) throws SAXException {
+        AddedParameter tmp = new AddedParameter();
+        tmp.buildFromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+        return tmp;
+    }
+
+    /**
+     * 
+     * Retrieve attributes values from their XML defintion
+     * 
+     * @param a_URI
+     *            Element Namespace (SAX 2)
+     * @param a_LocalName
+     *            Tag name
+     * @param a_QName
+     *            qualified tag name
+     * @param a_Attributes
+     *            XML Element attributes
+     * 
+     */
+    @Override
+    public void buildFromElement(String a_URI, String a_LocalName,
+            String a_QName, Attributes a_Attributes) throws SAXException {
+        super.buildFromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+    }
+
+    /**
+     * 
+     * A new XML Element as been found. Parse it.
+     * 
+     * @param a_URI
+     *            XML Namespace (SAX 2)
+     * @param a_LocalName
+     *            Tag name
+     * @param a_QName
+     *            Qualified tag name
+     * @param a_Attributes
+     *            XML Element attributes
+     * @return SAXConsumer
+     * 
+     */
+    @Override
+    public SAXConsumer consumeElement(String a_URI, String a_LocalName,
+            String a_QName, Attributes a_Attributes) throws SAXException {
+        return super.consumeElement(a_URI, a_LocalName, a_QName, a_Attributes);
+    }
+
+    /**
+     * 
+     * The XML Element is a CDATA filled element
+     * 
+     * @param a_Characters
+     *            The CDATA content
+     * 
+     */
+    @Override
+    public void consumeCharacters(String a_Characters) throws SAXException {
+    }
+
+    /**
+     * 
+     * The XML Element is a CDATA filled element
+     * 
+     * @param path
+     *            the association path name
+     * @param a_URI
+     *            XML Namespace (SAX 2)
+     * @param a_LocalName
+     *            Tag name
+     * @param a_QName
+     *            Qualified tag name
+     * @param a_Attributes
+     *            XML Element attributes
+     * @return SAXConsumer
+     * 
+     */
+    @Override
+    public SAXConsumer handlePathElement(String path, String a_URI,
+            String a_LocalName, String a_QName, Attributes a_Attributes)
+            throws SAXException {
+        SAXConsumer c = null;
+        if (path.equals("values")) { //$NON-NLS-1$
+            c = ParameterValue.fromElement(a_URI, a_LocalName, a_QName,
+                    a_Attributes);
+            addValue((ParameterValue) c);
+            return c;
+        }
+        return null;
+    }
+
+    /**
+     * 
+     * Generate XML defintion on a Stream
+     * 
+     * @param a_Writer
+     *            XMLOutputWriter to which to write the XML Definition
+     * 
+     */
+    @Override
+    public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
+        super.writeXMLBodyOn(a_Writer);
+    }
+
+    /**
+     * 
+     * Generate XML defintion on a XMLOutputWriter
+     * 
+     * @param a_Writer
+     *            the XMLOutputWriter to which to write the XML Definition
+     * 
+     */
+    @Override
+    public void writeXMLOn(XMLOutputWriter a_Writer) {
+        a_Writer.openTag("AddedParameter"); //$NON-NLS-1$
+        writeXMLBodyOn(a_Writer);
+        a_Writer.closeTag();
+    }
+
+    /**
+     * 
+     * Generate XML defintion on a Stream
+     * 
+     * @param a_Stream
+     *            the OutptStream to which to write the XML Definition
+     * 
+     */
+    @Override
+    public void writeXMLOn(OutputStream a_Stream) {
+        super.writeXMLOn(a_Stream);
+    }
+    
+
     /**
      * Returns a copy of this Object
      * 
@@ -48,6 +205,10 @@ public class AddedParameter extends Parameter
         idParam = null;
         cible = null;
         super.reset();
+    }
+    
+    public AddedParameter(){
+        super();
     }
 
     /**
