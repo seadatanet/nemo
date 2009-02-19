@@ -57,6 +57,8 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	
     protected boolean _writeCdi;
     
+    protected boolean _writeMapping;
+    
 	protected String _idEdmoRespCdi;
 	
 	protected String _codeEdmoDonnees;
@@ -102,6 +104,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		_nemoWebServiceURL = "";
 		_outputDirectory = "";
         _writeCdi = false;
+        _writeMapping = false;
 		_idEdmoRespCdi = "";
 		_codeEdmoDonnees = "";
 		_idEdmoRespDonnees = "";
@@ -253,7 +256,11 @@ public class Configuration implements Cloneable, RootSAXConsumer {
         if (a_LocalName.equals("typePlateforme")) {
             Element2Field setter = new Element2Field(this, "setTypePlateForme");
             return setter;
-        }        
+        }      
+        if (a_LocalName.equals("writeMapping")) {
+            Element2Field setter = new Element2Field(this, "setWriteMapping");
+            return setter;
+        }  
 		if (a_LocalName.equals("fichierMapping")) {
 			Element2Field setter = new Element2Field(this, "setFichierMapping");
 			return setter;
@@ -338,7 +345,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		a_Writer.putTag("modelsDirectory", getModelsDirectory());
 		a_Writer.putTag("cruisesDirectory", getCruisesDirectory());
 		a_Writer.putTag("outputDirectory", getOutputDirectory());
-        a_Writer.putTag("writeCdi", getWriteCdi());
+        a_Writer.putTag("writeCdi", isWriteCdi());
 		a_Writer.putTag("idEdmoRespCdi", getIdEdmoRespCdi());
 		a_Writer.putTag("codeEdmoDonnees", getCodeEdmoDonnees());
 		a_Writer.putTag("idEdmoRespDonnees", getIdEdmoRespDonnees());
@@ -347,6 +354,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		a_Writer.putTag("cdiMethod", getCdiMethod());
         a_Writer.putTag("accesDonnees", getAccesDonnees());
         a_Writer.putTag("typePlateforme", getTypePlateForme());
+        a_Writer.putTag("writeMapping", isWriteMapping());
 		a_Writer.putTag("fichierMapping", getFichierMapping());
 		//a_Writer.putTag("arboMapping", getArboMapping());
 		a_Writer.putTag("vocabURL", getVocabURL());
@@ -984,7 +992,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
         _typePlateForme = typePlateForme;
     }
 
-    public boolean getWriteCdi()
+    public boolean isWriteCdi()
     {
         return _writeCdi;
     }
@@ -997,6 +1005,33 @@ public class Configuration implements Cloneable, RootSAXConsumer {
     public void setWriteCdi(String writeCdi)
     {
         _writeCdi = Boolean.parseBoolean(writeCdi);
+    }
+
+    /**
+     * Getter sur _writeMapping.
+     * @return the writeMapping
+     */
+    public boolean isWriteMapping()
+    {
+        return _writeMapping;
+    }
+
+    /**
+     * Setter sur _writeMapping.
+     * @param writeMapping the writeMapping to set
+     */
+    public void setWriteMapping(boolean writeMapping)
+    {
+        _writeMapping = writeMapping;
+    }
+
+    /**
+     * Setter sur _writeMapping.
+     * @param writeMapping the writeMapping to set
+     */
+    public void setWriteMapping(String writeMapping)
+    {
+        _writeMapping = Boolean.parseBoolean(writeMapping);
     }
 	
 } /* End of class: Configuration */

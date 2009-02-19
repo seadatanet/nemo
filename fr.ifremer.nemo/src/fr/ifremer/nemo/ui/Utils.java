@@ -1389,6 +1389,9 @@ public class Utils {
             .extraitCode(OptionsAction.comboAccesDonnees.getText()));
         configuration.setTypePlateForme(Utils
             .extraitCode(OptionsAction.comboTypePlateForme.getText()));
+        
+        // MAPPING
+        configuration.setWriteMapping(OptionsAction.checkMapping.getSelection());
 		configuration.setFichierMapping(OptionsAction.textFichierMapping
 				.getText());
 		//configuration.setArboMapping(OptionsAction.textArboMapping.getText());

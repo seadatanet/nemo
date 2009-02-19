@@ -164,20 +164,21 @@ public class SWTProcess implements IRunnableWithProgress {
                     survey
                     .setDataSize(fichierSortie.length() / 1024f / 1024f);                    
 
-                   
-					for (Station station : survey.getStations()) {
-                        mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "MEDATLAS");  //$NON-NLS-1$
-                        mapping.setFilename(EditConversion.nomHorsPrefix);
-                        mapping.setDate(new Date());
-                        mapping.setModus("1");
-                        
-                        MappingTable.persist(mapping);
-                        
-						/*CDIMappingWriter.getInstance().addMapping(
-								EditConversion.getLocalCdiId(station, survey.getReference()),
-                                "MEDATLAS",
-								fichierSortie.getName());*/
-					}
+                    if (Configuration.getSingleton().isWriteMapping()){
+    					for (Station station : survey.getStations()) {
+                            mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "MEDATLAS");  //$NON-NLS-1$
+                            mapping.setFilename(EditConversion.nomHorsPrefix);
+                            mapping.setDate(new Date());
+                            mapping.setModus("1");
+                            
+                            MappingTable.persist(mapping);
+                            
+    						/*CDIMappingWriter.getInstance().addMapping(
+    								EditConversion.getLocalCdiId(station, survey.getReference()),
+                                    "MEDATLAS",
+    								fichierSortie.getName());*/
+    					}
+                    }
 				} else {
 					// ODV
 					if (monoStation) {
@@ -198,49 +199,49 @@ public class SWTProcess implements IRunnableWithProgress {
 							File fichierSortie = new java.io.File(
 									EditConversion.nomFichierSortie);
 
-							writerODV.writeSurvey(survey, fichierSortie,
-									notifier);
-                            survey
-                            .setDataSize(fichierSortie.length() / 1024f / 1024f);
-                            mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
+							writerODV.writeSurvey(survey, fichierSortie, notifier);
+                            survey.setDataSize(fichierSortie.length() / 1024f / 1024f);
                             
-                            //Si le nom hors prefix est vide, il ne faut pas ajouter le séparateur
-                            if(EditConversion.nomHorsPrefix.equals(""))
-                                mapping.setFilename(EditConversion.nomHorsPrefix+fichierSortie.getName());
-                            else
-                                mapping.setFilename(EditConversion.nomHorsPrefix+File.separator+fichierSortie.getName());
-                            
-                            mapping.setDate(new Date());
-                            mapping.setModus("1");
-                            MappingTable.persist(mapping);
-                            
+                            if (Configuration.getSingleton().isWriteMapping()){
+                                mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
+                                
+                                //Si le nom hors prefix est vide, il ne faut pas ajouter le séparateur
+                                if(EditConversion.nomHorsPrefix.equals(""))
+                                    mapping.setFilename(EditConversion.nomHorsPrefix+fichierSortie.getName());
+                                else
+                                    mapping.setFilename(EditConversion.nomHorsPrefix+File.separator+fichierSortie.getName());
+                                
+                                mapping.setDate(new Date());
+                                mapping.setModus("1");
+                                MappingTable.persist(mapping);
+                            }
                             
 							/*CDIMappingWriter.getInstance().addMapping(
 									EditConversion.getLocalCdiId(station, survey.getReference()),
 									fichierSortie.getName());*/
 						}
 					} else {
-						File fichierSortie = new java.io.File(
-								EditConversion.nomFichierSortie);
+						File fichierSortie = new java.io.File(EditConversion.nomFichierSortie);
 
 						writerODV.writeSurvey(survey, fichierSortie, notifier);
-                        survey
-                        .setDataSize(fichierSortie.length() / 1024f / 1024f);                        
-
-						for (Station station : survey.getStations()) {
-                            mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
-                            mapping.setFilename(EditConversion.nomHorsPrefix);
-                            mapping.setDate(new Date());
-                            mapping.setModus("1");    
-                            
-                            MappingTable.persist(mapping);
-							/*CDIMappingWriter.getInstance().addMapping(
-									EditConversion.getLocalCdiId(station, survey.getReference()),
-									fichierSortie.getName());*/
-						}
+                        survey.setDataSize(fichierSortie.length() / 1024f / 1024f);                        
+                        
+                        if (Configuration.getSingleton().isWriteMapping()){
+    						for (Station station : survey.getStations()) {
+                                mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
+                                mapping.setFilename(EditConversion.nomHorsPrefix);
+                                mapping.setDate(new Date());
+                                mapping.setModus("1");    
+                                
+                                MappingTable.persist(mapping);
+    							/*CDIMappingWriter.getInstance().addMapping(
+    									EditConversion.getLocalCdiId(station, survey.getReference()),
+    									fichierSortie.getName());*/
+    						}
+                        }
 					}
 				}
-                if (Configuration.getSingleton().getWriteCdi()) {
+                if (Configuration.getSingleton().isWriteCdi()) {
                     CDIResumeWriter.getInstance().addSurvey(survey);
                 }
 			} else {
@@ -350,19 +351,21 @@ public class SWTProcess implements IRunnableWithProgress {
 							survey
 									.setDataSize(fichierSortie.length() / 1024f / 1024f);
 
-							/*CDIMappingWriter.getInstance().addMapping(
-									EditConversion.getLocalCdiId(station, survey.getReference()),
-									fichierSortie.getName());*/
-                            mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
-                            //Si le nom hors prefix est vide, il ne faut pas ajouter le séparateur
-                            if(EditConversion.nomHorsPrefix.equals(""))
-                                mapping.setFilename(EditConversion.nomHorsPrefix+fichierSortie.getName());
-                            else
-                                mapping.setFilename(EditConversion.nomHorsPrefix+File.separator+fichierSortie.getName());
-                            mapping.setDate(new Date());
-                            mapping.setModus("1");
-                            
-                            MappingTable.persist(mapping);
+                            if (Configuration.getSingleton().isWriteMapping()){
+    							/*CDIMappingWriter.getInstance().addMapping(
+    									EditConversion.getLocalCdiId(station, survey.getReference()),
+    									fichierSortie.getName());*/
+                                mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
+                                //Si le nom hors prefix est vide, il ne faut pas ajouter le séparateur
+                                if(EditConversion.nomHorsPrefix.equals(""))
+                                    mapping.setFilename(EditConversion.nomHorsPrefix+fichierSortie.getName());
+                                else
+                                    mapping.setFilename(EditConversion.nomHorsPrefix+File.separator+fichierSortie.getName());
+                                mapping.setDate(new Date());
+                                mapping.setModus("1");
+                                
+                                MappingTable.persist(mapping);
+                            }
                             
 						}
 					} else {
@@ -379,20 +382,22 @@ public class SWTProcess implements IRunnableWithProgress {
 						survey
 								.setDataSize(fichierSortie.length() / 1024f / 1024f);
 
-						for (Station station : survey.getStations()) {
-							/*CDIMappingWriter.getInstance().addMapping(
+                        if (Configuration.getSingleton().isWriteMapping()){                            
+                            for (Station station : survey.getStations()) {
+                                /*CDIMappingWriter.getInstance().addMapping(
 									EditConversion.getLocalCdiId(station, survey.getReference()),
 									fichierSortie.getName());*/
-                            mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
-                            mapping.setFilename(EditConversion.nomHorsPrefix);
-                            mapping.setDate(new Date());
-                            mapping.setModus("1");
-                            
-                            MappingTable.persist(mapping);
-						}
+                                mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
+                                mapping.setFilename(EditConversion.nomHorsPrefix);
+                                mapping.setDate(new Date());
+                                mapping.setModus("1");
+                                
+                                MappingTable.persist(mapping);
+                            }
+                        }
 					}
 
-					if (Configuration.getSingleton().getWriteCdi()) {
+					if (Configuration.getSingleton().isWriteCdi()) {
 						CDIResumeWriter.getInstance().addSurvey(survey);
 					}
 				} else {
@@ -504,20 +509,22 @@ public class SWTProcess implements IRunnableWithProgress {
 							survey
 									.setDataSize(fichierSortie.length() / 1024f / 1024f);
 
-                            mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
-                            //Si le nom hors prefix est vide, il ne faut pas ajouter le séparateur
-                            if(EditConversion.nomHorsPrefix.equals(""))
-                                mapping.setFilename(EditConversion.nomHorsPrefix+fichierSortie.getName());
-                            else
-                                mapping.setFilename(EditConversion.nomHorsPrefix+File.separator+fichierSortie.getName());
-                            mapping.setDate(new Date());
-                            mapping.setModus("1");        
-                            
-                            MappingTable.persist(mapping);
-                            
-							/*CDIMappingWriter.getInstance().addMapping(
-									EditConversion.getLocalCdiId(station, survey.getReference()),
-									fichierSortie.getName());*/
+                            if (Configuration.getSingleton().isWriteMapping()){
+                                mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
+                                //Si le nom hors prefix est vide, il ne faut pas ajouter le séparateur
+                                if(EditConversion.nomHorsPrefix.equals(""))
+                                    mapping.setFilename(EditConversion.nomHorsPrefix+fichierSortie.getName());
+                                else
+                                    mapping.setFilename(EditConversion.nomHorsPrefix+File.separator+fichierSortie.getName());
+                                mapping.setDate(new Date());
+                                mapping.setModus("1");        
+                                
+                                MappingTable.persist(mapping);
+                                
+    							/*CDIMappingWriter.getInstance().addMapping(
+    									EditConversion.getLocalCdiId(station, survey.getReference()),
+    									fichierSortie.getName());*/
+                            }
 						}
 					} else {
 						EditConversion.nomFichierSortie = EditConversion.nomDossierSortie
@@ -536,20 +543,22 @@ public class SWTProcess implements IRunnableWithProgress {
 						survey
 								.setDataSize(fichierSortie.length() / 1024f / 1024f);
 
-						for (Station station : survey.getStations()) {
-						/*	CDIMappingWriter.getInstance().addMapping(
-									EditConversion.getLocalCdiId(station, survey.getReference()),
-									fichierSortie.getName());*/
-                            mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
-                            mapping.setFilename(EditConversion.nomHorsPrefix);
-                            mapping.setDate(new Date());
-                            mapping.setModus("1");    
-                            
-                            MappingTable.persist(mapping);
-						}
+                        if (Configuration.getSingleton().isWriteMapping()){
+    						for (Station station : survey.getStations()) {
+    						/*	CDIMappingWriter.getInstance().addMapping(
+    									EditConversion.getLocalCdiId(station, survey.getReference()),
+    									fichierSortie.getName());*/
+                                mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
+                                mapping.setFilename(EditConversion.nomHorsPrefix);
+                                mapping.setDate(new Date());
+                                mapping.setModus("1");    
+                                
+                                MappingTable.persist(mapping);
+    						}
+                        }
 					}
 
-					if (Configuration.getSingleton().getWriteCdi()) {
+					if (Configuration.getSingleton().isWriteCdi()) {
 						CDIResumeWriter.getInstance().addSurvey(survey);
 					}
 

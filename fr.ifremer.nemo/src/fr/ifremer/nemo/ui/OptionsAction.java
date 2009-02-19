@@ -62,7 +62,7 @@ public class OptionsAction extends Action implements ISelectionListener,
             compoWSVocab1, compoWSVocab2, compoFlag = null;
 
     public static Group groupLangue, groupCentreDonnees, groupWS, groupDossier,
-            groupDossier1, groupDossier2, groupCDI, grpFlag = null;
+            groupDossier1, groupDossier2, groupCDI, groupMapping, grpFlag = null;
 
     public static Combo comboLangue, comboCentreDonnees, comboIdEdmoRespCdi,
             comboMethodeCdi, comboCodeEdmoDonnees, comboIdEdmoRespDonnees,
@@ -75,10 +75,10 @@ public class OptionsAction extends Action implements ISelectionListener,
     public static Label labelNemo, labelNautilus, labelCampagne, lblCDI,
             labelIdEdmoRespCdi, labelUrlCdi, labelMethodeCdi,
             labelCodeEdmoDonnees, labelIdEdmoRespDonnees,
-            labelIdEdmoDistDonnees, labelWSVocab, labelFichierMapping,
+            labelIdEdmoDistDonnees, labelWSVocab, labelMapping, labelFichierMapping,
             labelArboMapping, lblTypePlateForme, lblAccesDonnees = null;
 
-    public static Button checkCDI;
+    public static Button checkCDI, checkMapping;
 
     public static Text textAreaNemo, textAreaNautilus, textDossierModele,
             textDossierCampagne, textUrlCdi, textVocabURL, textFichierMapping,
@@ -86,7 +86,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
     public static Table tabFlagTable, tabFlag;
 
-    public static String _defaultCode = "";
+    public static String _defaultCode = Global.EMPTY_STRING;
 
     public static FlagTable _flagTable = new FlagTable();
 
@@ -220,7 +220,7 @@ public class OptionsAction extends Action implements ISelectionListener,
             comboIdEdmoDistDonnees.add(strTemp);
         }
 
-        checkCDI.setSelection(Utils.configuration.getWriteCdi());
+        checkCDI.setSelection(Utils.configuration.isWriteCdi());
         
         Utils.selectComboCode(comboIdEdmoRespCdi, Utils.configuration
             .getIdEdmoRespCdi());
@@ -238,6 +238,8 @@ public class OptionsAction extends Action implements ISelectionListener,
         Utils.selectComboCode(comboTypePlateForme, Utils.configuration
             .getTypePlateForme());
 
+        checkMapping.setSelection(Utils.configuration.isWriteMapping());
+        
         textFichierMapping.setText(Utils.configuration.getFichierMapping());
        // textArboMapping.setText(Utils.configuration.getArboMapping());
 
@@ -278,7 +280,8 @@ public class OptionsAction extends Action implements ISelectionListener,
                 SWT.COLOR_RED));
         }*/
 
-        CDICheckMask(Utils.configuration.getWriteCdi());
+        CDICheckMask(Utils.configuration.isWriteCdi());
+        mappingCheckMask(Utils.configuration.isWriteMapping());
         
         // FAE 58 CDL 09/04/08
 
@@ -342,7 +345,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         fillFlagTable();
     }
     
-    private void CDICheckMask (Boolean status)
+    protected void CDICheckMask (Boolean status)
     {
         labelIdEdmoRespCdi.setEnabled(status);
         comboIdEdmoRespCdi.setEnabled(status);
@@ -361,6 +364,15 @@ public class OptionsAction extends Action implements ISelectionListener,
         lblAccesDonnees.setEnabled(status);
         comboAccesDonnees.setEnabled(status);         
         
+    }
+    
+    protected void mappingCheckMask(Boolean enabled){
+        labelFichierMapping.setEnabled(enabled);
+        textFichierMapping.setEnabled(enabled);
+        
+        ApplicationActionBarAdvisor.mappingDatabaseEditAction.setEnabled(enabled);
+        ApplicationActionBarAdvisor.mappingDatabaseExportAction.setEnabled(enabled);
+        ApplicationActionBarAdvisor.mappingDatabaseImportAction.setEnabled(enabled);
     }
 
     public void selectionChanged(IWorkbenchPart part, ISelection incoming)
@@ -684,8 +696,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         checkCDI.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
             public void widgetSelected(org.eclipse.swt.events.SelectionEvent e)
             {
- 
-CDICheckMask(checkCDI.getSelection());
+                CDICheckMask(checkCDI.getSelection());
             }
         });  
         
@@ -752,15 +763,6 @@ CDICheckMask(checkCDI.getSelection());
         GridDataFactory.fillDefaults().grab(false, false).applyTo(
             comboAccesDonnees);
 
-        // Mapping CDI
-        labelFichierMapping = new Label(groupCDI, SWT.NONE);
-        labelFichierMapping.setText(Messages.getString("OptionsAction.31"));
-        labelFichierMapping.pack();
-
-        textFichierMapping = new Text(groupCDI, SWT.BORDER);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(
-            textFichierMapping);
-
        /* labelArboMapping = new Label(groupCDI, SWT.NONE);
         labelArboMapping.setText(Messages.getString("OptionsAction.32"));
         labelArboMapping.pack();
@@ -791,6 +793,40 @@ CDICheckMask(checkCDI.getSelection());
                     textArboMapping.setText(dialog.open());
                 }
             });*/
+    }
+    
+
+
+    /**
+     * This method initializes groupMapping
+     * 
+     */
+    private void createGroupMapping()
+    {
+        groupMapping = new Group(top, SWT.NONE);
+        GridLayoutFactory.fillDefaults().numColumns(2).applyTo(groupMapping);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(groupMapping);
+
+        labelMapping = new Label(groupMapping, SWT.NONE);
+        labelMapping.setText(Messages.getString("OptionsAction.45")); //$NON-NLS-1$
+        checkMapping = new Button(groupMapping, SWT.CHECK);
+
+        checkMapping.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+            @Override
+            public void widgetSelected(org.eclipse.swt.events.SelectionEvent e)
+            {
+                //On masque/affiche les champs falcutatif en fonction de la case checkMapping
+                mappingCheckMask(checkMapping.getSelection());
+            }
+        }); 
+        
+        labelFichierMapping = new Label(groupMapping, SWT.NONE);
+        labelFichierMapping.setText(Messages.getString("OptionsAction.31")); //$NON-NLS-1$
+        labelFichierMapping.pack();
+
+        textFichierMapping = new Text(groupMapping, SWT.BORDER);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(
+            textFichierMapping);
     }
 
     /**
@@ -1134,6 +1170,7 @@ CDICheckMask(checkCDI.getSelection());
         createCompoHaut();
         createGroupWS();
         createGroupCDI();
+        createGroupMapping();
         createGroupFlag();
         createCompoBouton();
         /*

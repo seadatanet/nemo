@@ -22,6 +22,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ListDialog;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
+import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.DataType;
 import fr.ifremer.nemo.domain.Station;
@@ -153,7 +154,7 @@ public class EditConversion extends Thread {
 								}
 
                                 //On demande les infos pour faire le résumé CDI, qui sera fait plus tard
-                                if (Utils.configuration.getWriteCdi()) {
+                                if (Utils.configuration.isWriteCdi()) {
                                     
                                     CDIResumeWriter.getInstance().reset();
                                     CDIResumeWriter.getInstance().choixFichierSortie();
@@ -178,7 +179,7 @@ public class EditConversion extends Thread {
 									choixFichierSortie();
 								}
                                 // Ecriture du resume CDI
-                                if (Utils.configuration.getWriteCdi()
+                                if (Utils.configuration.isWriteCdi()
                                         && !SurveyMedia.interrompu
                                         && !SWTProcess.interrompu) {
                                     try {
@@ -569,6 +570,8 @@ public class EditConversion extends Thread {
     
     public static void definePrefixDossier() 
     {
+        if (Configuration.getSingleton().isWriteMapping())
+        {
             String cheminComplet;
             Boolean modeDossier=false;
             
@@ -604,6 +607,7 @@ public class EditConversion extends Thread {
             {
                 definePrefixDossier();
             }
+        }
     }
     
    public static DataType askDataType() 
@@ -666,7 +670,7 @@ public class EditConversion extends Thread {
 		boolean blnOK = true;
 		String message = Messages.getString("CDIResumeWriter.configMessage"); //$NON-NLS-1$
 
-        if (Utils.configuration.getWriteCdi())        
+        if (Utils.configuration.isWriteCdi())        
         {
     		if (Utils.configuration.getIdEdmoRespCdi().trim().equals(Global.EMPTY_STRING)) {
     			message += Global.RN + " - " + Messages.getString("OptionsAction.21"); //$NON-NLS-1$ //$NON-NLS-2$
