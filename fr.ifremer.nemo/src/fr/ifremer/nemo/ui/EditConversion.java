@@ -82,8 +82,10 @@ public class EditConversion extends Thread {
     /**
      * messages d'avertissement de formats grisés car données non conformae
      */
+    private static String warningFile = Global.EMPTY_STRING;
     private static String warningCampagne = Global.EMPTY_STRING;
     private static String warningStation = Global.EMPTY_STRING;
+    private static String warningData = Global.EMPTY_STRING;
     
 	@Override
     public void run() {
@@ -99,9 +101,25 @@ public class EditConversion extends Thread {
 		nomDossierSortie = Global.EMPTY_STRING;
 		// interrompu = false;
 
-		// raz message erreur
-        // FAE 1143 : avertissement
-		Utils.messageErreur(warningCampagne + warningStation);
+        // FAE 1143 : déactivation MEDATLAS
+        StringBuffer msg = new StringBuffer();
+        msg.append(Global.RN);
+        msg.append(warningFile);
+        msg.append(warningCampagne);
+        msg.append(warningStation);
+        //msg.append(warningData);
+		Utils.messageErreur(msg.toString());
+        
+        //  FAE 1143 : déactivation MEDATLAS
+        boolean medOK = true;
+        if (!warningFile.equals(Global.EMPTY_STRING)
+                || !warningCampagne.equals(Global.EMPTY_STRING)
+                || !warningStation.equals(Global.EMPTY_STRING)
+                || !warningData.equals(Global.EMPTY_STRING)){
+            medOK = false;
+        }
+        ViewFile.enableMedatlas(medOK);
+        
 
 		ViewEdit.formEdition.getBody().setLayout(new GridLayout());
 		ViewEdit.formEdition.setText(Messages.getString("EditConversion.1")); //$NON-NLS-1$
@@ -763,5 +781,59 @@ public class EditConversion extends Thread {
     public static void setWarningStation(String warningStation)
     {
         EditConversion.warningStation = warningStation;
+    }
+
+    /**
+     * Setter sur warningData.
+     * @param warningData the warningData to set
+     */
+    public static void setWarningData(String warningData)
+    {
+        EditConversion.warningData = warningData;
+    }
+
+    /**
+     * Setter sur warningFile.
+     * @param warningFile the warningFile to set
+     */
+    public static void setWarningFile(String warningFile)
+    {
+        EditConversion.warningFile = warningFile;
+    }
+
+    /**
+     * Getter sur warningCampagne.
+     * @return the warningCampagne
+     */
+    public static String getWarningCampagne()
+    {
+        return warningCampagne;
+    }
+
+    /**
+     * Getter sur warningData.
+     * @return the warningData
+     */
+    public static String getWarningData()
+    {
+        return warningData;
+    }
+
+    /**
+     * Getter sur warningFile.
+     * @return the warningFile
+     */
+    public static String getWarningFile()
+    {
+        return warningFile;
+    }
+
+    /**
+     * Getter sur warningStation.
+     * @return the warningStation
+     */
+    public static String getWarningStation()
+    {
+        return warningStation;
     }
 }

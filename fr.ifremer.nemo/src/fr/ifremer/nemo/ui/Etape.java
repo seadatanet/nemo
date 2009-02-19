@@ -213,19 +213,10 @@ public class Etape {
         EditConversion.setWarningCampagne(Global.EMPTY_STRING);
         String value = EditSurvey.textCampagne.getText().trim();
         if (value.length() != 13){
-            ViewFile.radMedatlas.setEnabled(false);
-            ViewFile.radMedatlas.setSelection(false);
-            ViewFile.radODV.setEnabled(true);
-            ViewFile.radODV.setSelection(true);
-            if (ViewFile.radMonoStation.isEnabled()){
-                ViewFile.radMonoStation.setSelection(true);
-            }else{
-                ViewFile.radMonoFichier.setSelection(true);
-            }
-            ViewFile.afficheGrpODV();
             EditConversion.setWarningCampagne(Messages.getString("ViewLog.5")); //$NON-NLS-1$
+        }else{
+            EditConversion.setWarningStation(Global.EMPTY_STRING);
         }
-
 		if (ok) {
 			EditSurvey.okApresReset = true;
 			okSurvey();
@@ -292,18 +283,11 @@ public class Etape {
         // FAE 1143 : dans tous les cas, le numéro de station doit être <= 5 caractères pour MEDATLAS
         EditConversion.setWarningStation(Global.EMPTY_STRING);
         value = EditStation.stationNumber.getValue().trim();
-        if (value.length() > 5){
-            ViewFile.radMedatlas.setEnabled(false);
-            ViewFile.radMedatlas.setSelection(false);
-            ViewFile.radODV.setEnabled(true);
-            ViewFile.radODV.setSelection(true);
-            if (ViewFile.radMonoStation.isEnabled()){
-                ViewFile.radMonoStation.setSelection(true);
-            }else{
-                ViewFile.radMonoFichier.setSelection(true);
-            }
-            ViewFile.afficheGrpODV();
+        if (!ViewFile.isCollection() && value.length() > 5){
             EditConversion.setWarningStation(Messages.getString("ViewLog.6")); //$NON-NLS-1$
+            Utils.messageErreurAppend(Messages.getString("ViewLog.6")); //$NON-NLS-1$
+        }else{
+            EditConversion.setWarningStation(Global.EMPTY_STRING);
         }
         
 		// FAE022 : TYPE DE DONNEES
@@ -557,7 +541,7 @@ public class Etape {
             ok = ok && resultat1;
 		}
         // check value (creer une nouvelle latitude)
-        if (checkValue){           
+        if (checkValue){
             value = EditStation.latitude.getValue(); 
             try {
                 LatitudeFormat latitudeFormat = new LatitudeFormat(formatSaisi);
@@ -956,7 +940,8 @@ public class Etape {
 			Pattern p = Pattern.compile(" - "); //$NON-NLS-1$
 			String[] mots = p.split(premierType.getCode());
 			String code = mots[0];
-
+            
+            EditConversion.setWarningData(Global.EMPTY_STRING);
 			if (ViewFile.typeFichierEntree().equals(Global.PROFILE)) {
 				if (!(code.equals("PRES") || code.equals("DEPH"))) { //$NON-NLS-1$ //$NON-NLS-2$
 					// PRES ou DEPH n'est pas en premier
@@ -967,14 +952,12 @@ public class Etape {
 				}
 
 				// Si PRES n'est pas premier => Medatlas impossible
-				if (!code.equals("PRES")) { //$NON-NLS-1$
-					ViewFile.radMedatlas.setEnabled(false);
-					ViewFile.radMedatlas.setSelection(false);
-					ViewFile.radODV.setSelection(true);
-					ViewFile.afficheGrpODV();
-				} else if (!ViewFile.isCollection()) {
-					ViewFile.radMedatlas.setEnabled(true);
-				}
+				if (!ViewFile.isCollection() && !code.equals("PRES")) { //$NON-NLS-1$
+                    EditConversion.setWarningData(Messages.getString("ViewLog.7")); //$NON-NLS-1$
+                    //Utils.messageErreurAppend(Messages.getString("ViewLog.7")); //$NON-NLS-1$
+                }else{
+                    EditConversion.setWarningData(Global.EMPTY_STRING);
+                }
 			}
 		}
 		if (ok) {
@@ -1034,7 +1017,11 @@ public class Etape {
 		if (!ViewFile.tabItem1.isDisposed()) {
 			ViewFile.tabItem1.setText(Messages.getString("Etape.92")); //$NON-NLS-1$
 		}
-		Utils.messageOK(Messages.getString("Etape.93")); //$NON-NLS-1$
+		Utils.messageOKAppend(Messages.getString("Etape.93")); //$NON-NLS-1$
+        if (!EditConversion.getWarningCampagne().equals(Global.EMPTY_STRING)){
+            Utils.messageOKAppend(Messages.getString("ViewLog.8")); //$NON-NLS-1$
+            Utils.messageOKAppend(EditConversion.getWarningCampagne());
+        }
 
 		// validation etape 2
 		ViewFile.etape = 2;
@@ -1046,6 +1033,10 @@ public class Etape {
 
 		// envoi des valeurs dans le modele
 		Utils.messageOK(Messages.getString("Etape.94")); //$NON-NLS-1$
+        if (!EditConversion.getWarningStation().equals(Global.EMPTY_STRING)){
+            Utils.messageOKAppend(Messages.getString("ViewLog.8")); //$NON-NLS-1$
+            Utils.messageOKAppend(EditConversion.getWarningStation());
+        }
 		DataModel.initStation();
 		ViewFile.tabItem2.setText(Messages.getString("Etape.95")); //$NON-NLS-1$
 		ViewFile.etape = 3;

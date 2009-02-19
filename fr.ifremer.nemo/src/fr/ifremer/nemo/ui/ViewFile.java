@@ -459,10 +459,6 @@ public class ViewFile extends ViewPart
                                 // 
                                 e1.printStackTrace();
                             }
-
-                            //radMedatlas.setEnabled(true);
-                            //radODV.setEnabled(true);
-                            //radMonoFichier.setEnabled(true); // FAE 0001134
                         }
                         else
                         {
@@ -517,16 +513,10 @@ public class ViewFile extends ViewPart
                                 EditDesc.affichageEdition();
 
                             }
-
-                            //radMedatlas.setEnabled(true);
-                            //radODV.setEnabled(true);
-                            //radMonoFichier.setEnabled(true); // FAE 0001134
                         }
                         else
                         {
                             fileLoaded = false;
-                            // System.out.println("pas de dossier
-                            // selectionne"); //$NON-NLS-1$
                             ViewLog.styledTextLogErreurs.setText(Messages
                                 .getString("ViewFile.selectionnezDossier")); //$NON-NLS-1$
 
@@ -574,17 +564,13 @@ public class ViewFile extends ViewPart
                             radMedatlas.setEnabled(false);
                             radMedatlas.setSelection(false);
 
-                            //radODV.setEnabled(true);
                             radODV.setSelection(true);
-                            //radMonoFichier.setEnabled(true); // FAE 0001134
                             afficheGrpODV();
                         }
 
                         else
                         {
                             fileLoaded = false;
-                            // System.out.println("pas de dossier
-                            // selectionne"); //$NON-NLS-1$
                             ViewLog.styledTextLogErreurs.setText(Messages
                                 .getString("ViewFile.selectionnezDossier")); //$NON-NLS-1$
 
@@ -900,5 +886,16 @@ public class ViewFile extends ViewPart
     public static void afficheGrpODV()
     {
         grpODV.setVisible(radODV.getSelection());
+    }
+    
+    public static void enableMedatlas(boolean enable)
+    {
+        if (!ViewFile.isCollection()){
+            ViewFile.radMedatlas.setEnabled(enable);
+            ViewFile.radMedatlas.setSelection(enable);
+            //ViewFile.radODV.setEnabled(true);
+            ViewFile.radODV.setSelection(!enable);
+            ViewFile.afficheGrpODV();
+        }
     }
 }
