@@ -54,6 +54,7 @@ public class QCflagsSection extends NemoSection
     
     protected Table tabCorrespondance, tabFlagQC;
     private TableColumn flagColumn1, flagColumn2;
+    private TableColumn tableColumn0, tableColumn1, tableColumn2, tableColumn3, tableColumn4, tableColumn5, tableColumn6;
     protected FlagTable flagTable;
 
     
@@ -62,8 +63,8 @@ public class QCflagsSection extends NemoSection
         super(shell, name, title, description);
         
         flagTable = new FlagTable();
-        tabCorrespondance = new Table(shell, SWT.FULL_SELECTION | SWT.BORDER);
         
+        tabCorrespondance = new Table(shell, SWT.FULL_SELECTION | SWT.BORDER);
         flagColumn1 = new TableColumn(tabCorrespondance, SWT.NONE);
         flagColumn2 = new TableColumn(tabCorrespondance, SWT.NONE);
         
@@ -72,6 +73,13 @@ public class QCflagsSection extends NemoSection
         
         
         tabFlagQC = new Table(shell, SWT.FULL_SELECTION | SWT.BORDER);
+        tableColumn0 = new TableColumn(tabFlagQC, SWT.NONE);
+        tableColumn1 = new TableColumn(tabFlagQC, SWT.NONE);
+        tableColumn2 = new TableColumn(tabFlagQC, SWT.NONE);
+        tableColumn3 = new TableColumn(tabFlagQC, SWT.NONE);
+        tableColumn4 = new TableColumn(tabFlagQC, SWT.NONE);
+        tableColumn5 = new TableColumn(tabFlagQC, SWT.NONE);
+        tableColumn6 = new TableColumn(tabFlagQC, SWT.NONE);
         
     }
     
@@ -256,32 +264,25 @@ public class QCflagsSection extends NemoSection
         tabFlagQC.setParent(parent);
         GridDataFactory.fillDefaults().grab(true, true).applyTo(tabFlagQC);
 
-        TableColumn tableColumn0 = new TableColumn(tabFlagQC, SWT.NONE);
         tableColumn0.setWidth(0);
         tableColumn0.setResizable(false);
         tableColumn0.setText("Code"); //$NON-NLS-1$
 
-        TableColumn tableColumn1 = new TableColumn(tabFlagQC, SWT.NONE);
         tableColumn1.setWidth(110);
         tableColumn1.setText(Messages.getString("EditStation.38")); //$NON-NLS-1$
 
-        TableColumn tableColumn2 = new TableColumn(tabFlagQC, SWT.NONE);
         tableColumn2.setWidth(40);
         tableColumn2.setText(Messages.getString("EditStation.39")); //$NON-NLS-1$   
 
-        TableColumn tableColumn3 = new TableColumn(tabFlagQC, SWT.NONE);
         tableColumn3.setWidth(40);
         tableColumn3.setText(Messages.getString("EditStation.40")); //$NON-NLS-1$   
 
-        TableColumn tableColumn4 = new TableColumn(tabFlagQC, SWT.NONE);
         tableColumn4.setWidth(40);
         tableColumn4.setText(Messages.getString("EditStation.41")); //$NON-NLS-1$   
 
-        TableColumn tableColumn5 = new TableColumn(tabFlagQC, SWT.NONE);
         tableColumn5.setWidth(60);
         tableColumn5.setText(Messages.getString("EditStation.47")); //$NON-NLS-1$   
 
-        TableColumn tableColumn6 = new TableColumn(tabFlagQC, SWT.NONE);
         tableColumn6.setWidth(60);
         tableColumn6.setText(Messages.getString("EditStation.48")); //$NON-NLS-1$   
 
