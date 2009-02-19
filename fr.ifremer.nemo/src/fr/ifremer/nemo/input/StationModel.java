@@ -1634,9 +1634,11 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			String line = null;
 			long size = 0;
 			for (index = 0; (line = a_Reader.readLine()) != null
-					&& (!(_endOnEmptyLine && line.trim().matches("^$")))
-					&& (!(_endOnPattern && line.matches("^" + _endDataPattern
-							+ "$"))) || (index < _rowNumber); index++) {
+					&& !(_endOnEmptyLine && line.trim().matches("^$"))
+					&& (!(_endOnPattern 
+                            && (line.matches("^" + _endDataPattern+ "$") 
+                                    || line.startsWith(_endDataPattern)))) 
+                    || (index < _rowNumber); index++) {
 
 				size += line.length();
 				a_Notifier.progress(size);
@@ -1891,12 +1893,11 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
         String flag1 = station.getMetaFlag(initial1);
         String flag2 = station.getMetaFlag(initial2);
         String value;
-
-        //      TODO = moins bon de flag1 et flag2
-        if(flag1.equals("0"))
+        
+        if(flag1.equals(Global.ZERO))
         {
             value = flag1;
-        } else if(flag2.equals("0"))
+        } else if(flag2.equals(Global.ZERO))
         {
             value = flag2;            
         }  else if(flag1.compareTo(flag2) > 0)

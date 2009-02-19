@@ -533,23 +533,29 @@ public class PropertyModel implements Cloneable, PathElementHandler,
 			writer.invoke(a_Destination, o);
 		} else {
 			String r = _fragment.retreive(a_Header);
-			if (_format != null) {
-				try {
-					writer.invoke(a_Destination, _format.parseObject(r));
-				}
-				catch (ParseException e)
-				{
-					if (_format instanceof LatitudeFormat)
-						throw new ParseException(Messages.getString("PropertyModel.1") + " : "+ r,0);
-					else if (_format instanceof LongitudeFormat)
-						throw new ParseException(Messages.getString("PropertyModel.2") + " : "+ r,0);
-					else if (_format instanceof DateTimeFormat)
-						throw new ParseException(Messages.getString("PropertyModel.3") + " : "+ r,0);
-						
-				}
-			} else {
-				writer.invoke(a_Destination, r);
-			}
+            if (r.trim().equals(Global.EMPTY_STRING)){    
+                Method reader = computeReadAccessor(getSource());
+                Object o = reader.invoke(getSource());
+                writer.invoke(a_Destination, o);
+            }else{
+                if (_format != null) {
+                    try {
+                        writer.invoke(a_Destination, _format.parseObject(r));
+                    }
+                    catch (ParseException e)
+                    {
+                        if (_format instanceof LatitudeFormat)
+                            throw new ParseException(Messages.getString("PropertyModel.1") + " : "+ r, 0);
+                        else if (_format instanceof LongitudeFormat)
+                            throw new ParseException(Messages.getString("PropertyModel.2") + " : "+ r, 0);
+                        else if (_format instanceof DateTimeFormat)
+                            throw new ParseException(Messages.getString("PropertyModel.3") + " : "+ r, 0);
+                        
+                    }
+                } else {
+                    writer.invoke(a_Destination, r);
+                }
+            }
 		}
 	}
 

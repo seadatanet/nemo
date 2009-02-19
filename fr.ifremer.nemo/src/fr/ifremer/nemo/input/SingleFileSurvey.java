@@ -405,9 +405,6 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 
 			try {
 
-				// System.out.println("nom du fichier campagne ===>"
-				// + file.getName());
-
 				// test CDL FAE01
 				FileReader reader = new FileReader(file);
 				reader2 = new BufferedReader(reader);
@@ -415,7 +412,7 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 				// Calcul du nombre de lignes du fichier
 				EditConversion.setTotalLigne(Utils.calculNbLigne(file));
 
-				//consumeHeader(reader2);
+				consumeHeader(reader2);
 
 				while ((station = _stationModel.convert(reader2, Utils
 						.extraitFichierChemin(ViewFile.nomFichier),
