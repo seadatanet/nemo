@@ -1680,6 +1680,17 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 * 
 	 * @return int
 	 */
+	public int getParametersNumber() {
+        int parametersNumber = parametersSize();
+        if (_odvparameters != null) parametersNumber += _odvparameters.size();
+        if (_medparameters != null) parametersNumber += _medparameters.size();
+		return parametersNumber;
+	}
+
+	/**
+	 * 
+	 * @return int
+	 */
 	public int getReferenceInteger() {
 		try {
 			return Integer.parseInt(_reference);
