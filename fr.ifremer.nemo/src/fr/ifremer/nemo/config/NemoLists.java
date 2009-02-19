@@ -20,16 +20,10 @@ import org.apache.axis.client.Service;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.widgets.Table;
 
-import fr.ifremer.nemo.domain.AddedParameter;
-import fr.ifremer.nemo.domain.Parameter;
-import fr.ifremer.nemo.domain.AddedParameter.IdParameter;
-import fr.ifremer.nemo.input.ParameterModel;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webservice;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webserviceLocator;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webserviceSoap;
-import fr.ifremer.nemo.ui.DataModel;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.NemoWS;
@@ -1326,17 +1320,17 @@ public class NemoLists implements Cloneable {
 		return _edmo;
 	}
 
-	public static void writeSdnParameters(Conversion convert) {
+	public static void writeSdnParameters(fr.ifremer.nemo.util.Conversion convert) {
 		setSdnParameters(convert.getDebut());
 		
 		setSdnParameters(convert.getDebut() + "SDN_parameter_mapping"); //$NON-NLS-1$
         
-        for (ParameterModel param : convert.getAddedParameterModels()) {
+        for (fr.ifremer.nemo.input.ParameterModel param : convert.getAddedParameterModels()) {
             _sdnParameters += Global.RN + convert.getDebut() + parameterMap(param.getModel());
         }
 
 		// FAE 0001131 : remplacer "\n" par "\r\n" pour retour chariot sous bloc-note
-		for (ParameterModel param : DataModel.stationModel.getParameterModels()) {
+		for (fr.ifremer.nemo.input.ParameterModel param : fr.ifremer.nemo.ui.DataModel.stationModel.getParameterModels()) {
 			_sdnParameters += Global.RN + convert.getDebut() + parameterMap(param.getModel());
 		}
 	}
@@ -1378,9 +1372,9 @@ public class NemoLists implements Cloneable {
 		return strReturn;
 	}
 
-	public static String parameterMap(Parameter param) {
+	public static String parameterMap(fr.ifremer.nemo.domain.Parameter param) {
         String name = param.getCode();
-        if (param.getCode().equals(IdParameter.CJDY)) name = ((AddedParameter) param).getFullName();
+        if (param.getCode().equals(fr.ifremer.nemo.domain.AddedParameter.IdParameter.CJDY)) name = ((fr.ifremer.nemo.domain.AddedParameter) param).getFullName();
 		String pdvCode = Utils.extraitCodeURN(getVocabMatch("P091", "P011",
             param.getCode(), Messages.getString("NemoLists.unknown")));
 		String unitCode = Utils.extraitCodeURN(getVocabMatch("P091", "P061", param.getCode(), Messages
