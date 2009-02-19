@@ -518,30 +518,27 @@ public class Etape {
 
         
 		// DECALAGE/TU
-        // FIXME validation DECALAGE/TU : pas même Pattern manual / automatique ?
+        checkValue = true;
         if (!EditStation.utConvertion.isManual()) {
             resultat1 = EditStation.utConvertion.checkAutoInputValues(Messages.getString("Etape.118"));  //$NON-NLS-1$
             if (resultat1){
                 String lign = EditStation.utConvertion.getLineText(0);
                 ligneOK = EditStation.utConvertion.checkInDataOrHeader(lign, Messages.getString("Etape.118")); //$NON-NLS-1$
                 ok = ok && ligneOK;
-
-                value = EditStation.utConvertion.getValue();
-                if (!Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", value.trim())) {//$NON-NLS-1$
-                    ok = ok && false;
-                    Utils.messageErreurAppend(Messages.getString("Etape.119")); //$NON-NLS-1$
-                }
+            }else{
+                checkValue = false;
             }
             ok = ok && resultat1;
-		} else {
-            value = EditStation.utConvertion.getValue();
-			if (!value.trim().equals("") && !value.equals("NaN")) {                                     //$NON-NLS-1$ //$NON-NLS-2$
-				if (!Pattern.matches("^[+-]?[0-9]*[0-9][.]?[0-9]*$", value.trim())) {                          //$NON-NLS-1$
-					ok = ok && false;
-					Utils.messageErreurAppend(Messages.getString("Etape.119"));                         //$NON-NLS-1$
-				}
-			}
 		}
+        if (checkValue){
+            value = EditStation.utConvertion.getValue();
+            if (!value.trim().equals("") && !value.equals("NaN")) {                                     //$NON-NLS-1$ //$NON-NLS-2$
+                if (!Pattern.matches("^[+-]?[0-9]*[0-9][.]?[0-9]*$", value.trim())) {                          //$NON-NLS-1$
+                    ok = ok && false;
+                    Utils.messageErreurAppend(Messages.getString("Etape.119"));                         //$NON-NLS-1$
+                }
+            }
+        }
 
         
 		// LATITUDE
@@ -617,35 +614,34 @@ public class Etape {
 				|| ViewFile.radTrajectoire.getSelection()) {
 
 			// PROFONDEUR DU CAPTEUR
-            // FIXME validation PROFONDEUR DU CAPTEUR : pas même Pattern manual / automatique ?         
+            checkValue = true;        
             if (!EditStation.sensorDepth.isManual()){
                 resultat1 = EditStation.sensorDepth.checkAutoInputValues(Messages.getString("Etape.75"));   //$NON-NLS-1$
                 if (resultat1){
                     String lign = EditStation.sensorDepth.getLineText(0);
                     ligneOK = EditStation.sensorDepth.checkInDataOrHeader(lign, Messages.getString("Etape.75")); //$NON-NLS-1$
                     ok = ok && ligneOK;
-
-                    value = EditStation.sensorDepth.getValue();
-                    if (!Pattern.matches("^[0-9]*[0-9][.]?[0-9]*$", value.trim())) {                                   //$NON-NLS-1$
-                        ok = ok && false;
-                        Utils.messageErreurAppend(Messages.getString("Etape.75"));                              //$NON-NLS-1$
-                    }
+                }else{
+                    checkValue = false;
                 }
                 ok = ok && resultat1;
             }else{
                 value = EditStation.sensorDepth.getValue();
                 Utils.messageErreurAppend(Messages.getString("Etape.77"));                                  //$NON-NLS-1$
-                if (value.trim().equals("")) { //$NON-NLS-1$
+                if (value.trim().equals(Global.EMPTY_STRING)) {
+                    checkValue = false;
                     // obligatoire que pour les series temporelles
                     if (ViewFile.radSerieTempo.getSelection()){
                         ok = ok && false; // FAE 0001232
                         Utils.messageErreurAppend(Messages.getString("Etape.79"));                          //$NON-NLS-1$
                     }
-                } else {
-                    if (!Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", value.trim())) {                         //$NON-NLS-1$
-                        ok = ok && false;
-                        Utils.messageErreurAppend(Messages.getString("Etape.81"));                          //$NON-NLS-1$
-                    }
+                }
+            }
+            if (checkValue){
+                value = EditStation.sensorDepth.getValue();
+                if (!Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", value.trim())) {                         //$NON-NLS-1$
+                    ok = ok && false;
+                    Utils.messageErreurAppend(Messages.getString("Etape.81"));                          //$NON-NLS-1$
                 }
             }
 
@@ -760,22 +756,19 @@ public class Etape {
             }
 
             // PROFONDEUR DE FIN
-            // FIXME validation PROFONDEUR DE FIN : pas même Pattern manual / automatique ?
+            checkValue = true;
             if (!EditStation.endDepth.isManual()){
                 resultat1 = EditStation.endDepth.checkAutoInputValues(Messages.getString("Etape.69"));  //$NON-NLS-1$
                 if (resultat1){
                     String lign = EditStation.endDepth.getLineText(0);
                     ligneOK = EditStation.endDepth.checkInDataOrHeader(lign, Messages.getString("Etape.69")); //$NON-NLS-1$
                     ok = ok && ligneOK;
-                    
-                    value = EditStation.endDepth.getValue();
-                    if (!Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", value.trim())) {                         //$NON-NLS-1$
-                        ok = ok && false;
-                        Utils.messageErreurAppend(Messages.getString("Etape.69"));                          //$NON-NLS-1$
-                    }
+                }else{
+                    checkValue = false;
                 }
                 ok = ok && resultat1;
-            }else{        
+            }
+            if (checkValue){   
                 value = EditStation.endDepth.getValue();
                 if (!value.trim().equals("") && !value.equals("NaN")){                                  //$NON-NLS-1$ //$NON-NLS-2$
                     if (!Pattern.matches("^[0-9]*[0-9][.]?[0-9]*$", value.trim())) {                           //$NON-NLS-1$

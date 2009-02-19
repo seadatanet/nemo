@@ -8,13 +8,11 @@
 package fr.ifremer.nemo.mapping;
 
 /**
- * Description: TODO
+ * Description: ImportMappingAction
  * @author jollivie
  *
  */
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.ISelection;
@@ -28,8 +26,8 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 
 import fr.ifremer.nemo.input.InputModel;
+import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.nemo.ui.*;
 
 public class ImportMappingAction extends Action implements ISelectionListener,
         ActionFactory.IWorkbenchAction {

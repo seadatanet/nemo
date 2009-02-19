@@ -319,7 +319,6 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 	public Survey convert(boolean isRefDateBased, long a_RefDate,
 			ProgressNotification a_Progress) throws IOException, ParseException, InterruptedException {
 		try {
-            // TODO FAE1105
 			Survey survey = (Survey) _model.clone();
 			File dir = new File(_directory);
 			String[] files = dir.list();
@@ -347,18 +346,10 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 					_stationModel.setTaille((int) file.length());
 				    notifierStation.setOffset(offset);
 					offset += file.length();
-				//	RandomAccessFile reader = null;
 					BufferedReader reader2 = null;
 					try {
-						// reader = new RandomAccessFile(file, "r");
-						// test CDL FAE01
 						FileReader reader  = new FileReader(file);
 						reader2 = new BufferedReader(reader);
-								
-                        // TAG FAE 1386
-//							if (_stationModel.isMetaInData2() || (_stationModel.getInputType().equals(Global.TRAJECTORY) && _stationModel.getTrajectory().getOutputType().equals(Global.ODV))) {
-//								_stationModel.consumeHeaderPlus(reader2);
-//							}
 						
 						Station station = _stationModel.convert(reader2,
 								files[i], isRefDateBased, a_RefDate,

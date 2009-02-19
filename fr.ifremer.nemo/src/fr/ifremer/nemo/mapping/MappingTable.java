@@ -23,7 +23,7 @@ import fr.ifremer.nemo.util.Messages;
 
 
 /**
- * Description: TODO
+ * Description: MappingTable
  * @author jollivie
  *
  */

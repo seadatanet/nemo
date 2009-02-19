@@ -843,7 +843,6 @@ public class StationSection extends NemoSection
         if (EditStation.stationNumber.isManual())
         {
             String stationNumber = EditStation.stationNumber.getManualValue();
-            // TODO vérifier l'enreg / restit STATION NUMBER pour radTrajectoire
             stationModel.setIncrementRef(true);
             if (ViewFile.radTrajectoire.getSelection())
                 stationModel.getTrajectory().setStationNumber(stationNumber);

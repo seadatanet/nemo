@@ -318,17 +318,7 @@ public class EditStation {
             date.setEnabledManual(!(dateInData || timeInData));
             time.setEnabledManual(!(dateInData || timeInData));            
         }
-
-//        // pour trajectoires
-//        if (ViewFile.radTrajectoire.getSelection()){
-//            // si Depth est saisie dans les données,
-//            boolean depthInData = depth.isInData();
-//            // => EndDepth : disable (car renseigné automatiquement par NEMO)
-//            endDepth.setEnabled(!depthInData);
-//            depth.setEnabledManual(!depthInData);
-//        }
         
-        // TODO griser line si vide pour toutes les stationSection
         for (NemoSection section : listeSectionsStation){
             if (section instanceof StationSection)
             {

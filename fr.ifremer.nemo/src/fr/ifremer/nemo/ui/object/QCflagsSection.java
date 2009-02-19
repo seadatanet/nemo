@@ -45,7 +45,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 /**
- * Description: TODO
+ * Description: QCflagsSection de l'onglet Station
  * @author dboulang
  *
  */

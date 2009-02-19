@@ -23,7 +23,7 @@ import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 
 /**
- * Description: TODO
+ * Description: AddedParameter - paramètres ajoutés automatiquement par NEMO
  * @author dboulang
  *
  */

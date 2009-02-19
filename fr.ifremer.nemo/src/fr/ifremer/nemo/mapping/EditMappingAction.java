@@ -8,7 +8,7 @@
 package fr.ifremer.nemo.mapping;
 
 /**
- * Description: TODO
+ * Description: EditMappingAction
  * @author jollivie
  *
  */

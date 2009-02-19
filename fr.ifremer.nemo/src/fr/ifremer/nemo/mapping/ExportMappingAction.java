@@ -10,7 +10,7 @@ package fr.ifremer.nemo.mapping;
 
 
 /**
- * Description: TODO
+ * Description: ExportMappingAction
  * @author jollivie
  *
  */
