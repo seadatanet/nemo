@@ -1962,15 +1962,17 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
         String value = Global.EMPTY_STRING;
         //Parameter param = null;
         for (Parameter current : _medparameters){
-            if (current.getCode().equals(code))
-                value = current.valuesAt(i).getValue().toString();
-            break;
+            if (current.getCode().equals(code)){                
+                value = current.valuesAt(i).getStringValue();
+                break;
+            }
         }
         if (value.equals(Global.EMPTY_STRING)){
             for (Parameter current : _odvparameters){
-                if (current.getCode().equals(code))
-                    value = current.valuesAt(i).getValue().toString();
-                break;
+                if (current.getCode().equals(code)){
+                    value = current.valuesAt(i).getStringValue();
+                    break;
+                }
             }
         }
         return value;

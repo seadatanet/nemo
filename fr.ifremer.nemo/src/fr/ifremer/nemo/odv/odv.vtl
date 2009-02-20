@@ -69,8 +69,8 @@ $configuration.getSep()$param.code [$param.unit]$configuration.getSep()$configur
 #if ($stationModel.isTrajectory()) 
 #set ($stationRef = $i)
 #set ($dateTime   = $station.getVariantDateTime($i))
-#set ($longitude  = $station.getVariant($i, "LATX"))
-#set ($latitude   = $station.getVariant($i, "LONX"))
+#set ($longitude  = $station.getVariant($i, "LONX"))
+#set ($latitude   = $station.getVariant($i, "LATX"))
 #if ($station.bottomDepth.toString() != "NaN")#set ($botDepth = $station.getVariant($i, "BATH"))#end
 #end
 ##

@@ -1571,12 +1571,12 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
                 if (_inputType.equals(Global.TRAJECTORY)){
                     // récupération de la valeur du paramètre correspondant sur la dernière ligne de données
                     // LATX
-                    station.getTimeSeriesInformation().setEndLatitude(station.getVariant((_rowNumber - 1), IdParameter.LATX.toString()));
+                    station.getTimeSeriesInformation().setEndLatitude(station.getVariant((_rowNumber), IdParameter.LATX.toString()));
                     // LONX
-                    station.getTimeSeriesInformation().setEndLongitude(station.getVariant((_rowNumber - 1), IdParameter.LONX.toString()));
+                    station.getTimeSeriesInformation().setEndLongitude(station.getVariant((_rowNumber), IdParameter.LONX.toString()));
                     // DEPTH
                     if (EditStation.depth.isInData()){
-                        station.getTimeSeriesInformation().setEndDepth(station.getVariant((_rowNumber - 1), IdParameter.BATH.toString()));
+                        station.getTimeSeriesInformation().setEndDepth(station.getVariant((_rowNumber), IdParameter.BATH.toString()));
                     }
                     
                 }

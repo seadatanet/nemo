@@ -36,6 +36,7 @@ public enum ComboType
                 valueCombo.add("YY/MM/DD");                 //$NON-NLS-1$
                 valueCombo.add("YYMMDD");                   //$NON-NLS-1$
                 valueCombo.add("YYYY/MM/DD");               //$NON-NLS-1$
+                valueCombo.add("YYYY-MM-DD");                 //$NON-NLS-1$
                 valueCombo.add("YYYYMMDD");                 //$NON-NLS-1$
                 break;
             case TIME :
@@ -44,6 +45,7 @@ public enum ComboType
                 valueCombo.add("hh:mm:ss PM");              //$NON-NLS-1$
                 valueCombo.add("hh24:mm");                  //$NON-NLS-1$
                 valueCombo.add("hh24:mm:ss");               //$NON-NLS-1$
+                valueCombo.add("hh24:mm:ss.sss");           //$NON-NLS-1$
                 valueCombo.add("hh24mm");                   //$NON-NLS-1$
                 valueCombo.add("hh24mmss");                 //$NON-NLS-1$
                 valueCombo.add("hh24 mm");                  //$NON-NLS-1$
