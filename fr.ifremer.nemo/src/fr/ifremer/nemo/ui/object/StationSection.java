@@ -612,7 +612,7 @@ public class StationSection extends NemoSection
         if (!isManual()) autoInput.selectInViewFile();
         
         DateTimeFormat format = new DateTimeFormat(converter.getText());
-        Long DateLong = (Long) format.parseObject(resultTest.getText());
+        Long DateLong = (Long) format.parseObject(resultTest.getText().replace(' ', '0'));
 
         // TEST HEURE (pour decalage TU)
         Long HourLong = time.timeTest();
@@ -638,7 +638,7 @@ public class StationSection extends NemoSection
 
         Float flDecalTU = Float.parseFloat(EditStation.utConvertion.getValue()) * 3600 * 1000;
         Long lgDecalTU = flDecalTU.longValue();
-        Long HourLong = (Long) format.parseObject(resultTest.getText()) + lgDecalTU;
+        Long HourLong = (Long) format.parseObject(resultTest.getText().replace(' ', '0')) + lgDecalTU;
 
         Formatter formatter = Formatter.getSingleton();
 
@@ -810,7 +810,8 @@ public class StationSection extends NemoSection
                         Utils.calculNbreLignesPuisRemplissageFrag(frag, Integer.valueOf(entete));
                     }else{
                        // Généralisation                        
-                        if ((i > 0) && (getLineText(i).trim().equals(Global.EMPTY_STRING))){
+                        if (((i > 0) && (getLineText(i).trim().equals(Global.EMPTY_STRING)))
+                                || getValue() == null || getValue().trim().equals(Global.EMPTY_STRING)){
                             fillManualModel(propertyModel, station, tagXml, format, i);
                         }else{
                             propertyModel.fillFragment(this, ligne, i, true, fillVariPos);

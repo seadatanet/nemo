@@ -540,6 +540,15 @@ public class PropertyModel implements Cloneable, PathElementHandler,
             }else{
                 if (_format != null) {
                     try {
+                        if (!(_format instanceof LatitudeFormat)
+                                && !(_format instanceof LongitudeFormat)
+                                && !(_format instanceof DateTimeFormat))
+                        {
+                            // stop string at next space
+                            r = _fragment.retreiveVariable(a_Header);
+                        }
+                        if (_format instanceof DateTimeFormat) 
+                            r = r.replace(' ', '0');
                         writer.invoke(a_Destination, _format.parseObject(r));
                     }
                     catch (ParseException e)
@@ -552,7 +561,11 @@ public class PropertyModel implements Cloneable, PathElementHandler,
                             throw new ParseException(Messages.getString("PropertyModel.3") + " : "+ r, 0);
                         
                     }
-                } else {
+                } else if (_fragment.isVariable()){
+                    // stop string at next space
+                    r = _fragment.retreiveVariable(a_Header);
+                    writer.invoke(a_Destination, r);
+                }else{
                     writer.invoke(a_Destination, r);
                 }
             }

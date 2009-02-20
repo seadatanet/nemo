@@ -1673,7 +1673,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
                         value = new ParameterValue(); 
                     }
 
-					pm.convert(line, value, getFlagTable());
+                    value = pm.convert(line, value, getFlagTable());
 					p.addValue(value);
 					paramIndex++;
 				}
@@ -1685,7 +1685,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
                     if (paramModel != null){
                         AddedParameter p = a_Station.getAddedParameter(idParam);
                         ParameterValue value = new ParameterValue(); 
-                        paramModel.convertAdded(value, a_Station, _inputType, index, getPresIndex(), line);
+                        value = paramModel.convertAdded(value, a_Station, _inputType, index, getPresIndex(), line);
                         p.addValue(value);
                     }
                 }

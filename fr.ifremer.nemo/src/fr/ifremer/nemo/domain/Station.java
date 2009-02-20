@@ -1992,8 +1992,8 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 
     public String getAddedFlag(Parameter param, int index) {
         String flag = Global.ZERO;
-        
-        if (param.valuesAt(index).getStringValue().equals(Global.EMPTY_STRING)) {
+        String stringValue = param.valuesAt(index).getStringValue(); 
+        if (stringValue == null ||stringValue.equals(Global.EMPTY_STRING)) {
             flag = Global.DEFAULT_FLAG; 
         } else if (param.valuesAt(index).getQc().equals(Global.EMPTY_STRING)) {
             flag = Global.ZERO;

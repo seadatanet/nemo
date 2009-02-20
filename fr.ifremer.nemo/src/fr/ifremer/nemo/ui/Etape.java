@@ -428,7 +428,7 @@ public class Etape {
 		}
         // check value (creer une nouvelle  heure)
         if (checkValue){  
-            value = EditStation.time.getValue();          
+            value = EditStation.time.getValue().replace(' ', '0');        
             try {
                 DateTimeFormat format = new DateTimeFormat(formatSaisi);
                 format.parseObject(value);
@@ -461,7 +461,7 @@ public class Etape {
         }
         // check value (creer une nouvelle  date)
         if (checkValue){ 
-            value = EditStation.date.getValue();
+            value = EditStation.date.getValue().replace(' ', '0');
             try {
                 DateTimeFormat format = new DateTimeFormat(formatSaisi);
                 format.parseObject(value);
@@ -476,29 +476,33 @@ public class Etape {
         }
 
         
-		// PROFONDEUR
+		// PROFONDEUR non-obligatoire
+        //value = EditStation.depth.getValue();
         checkValue = true;
-		if (!EditStation.depth.isManual()) {
-            resultat1 = EditStation.depth.checkAutoInputValues(Messages.getString("Etape.49"));     //$NON-NLS-1$
-            if (resultat1){
-                String lign = EditStation.depth.getLineText(0);
-                ligneOK = EditStation.depth.checkInDataOrHeader(lign, Messages.getString("Etape.49")); //$NON-NLS-1$
-                ok = ok && ligneOK;
-            }else{
-                checkValue = false;
-            }
-			ok = ok && resultat1;
-		} 
-        if (checkValue){
-            value = EditStation.depth.getValue();
-            if (!value.trim().equals("") && !value.equals("NaN")){                                  //$NON-NLS-1$ //$NON-NLS-2$
-                if (!Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", value.trim())) {                     //$NON-NLS-1$
-                    ok = ok && false;
-                    Utils.messageErreurAppend(Messages.getString("Etape.52"));                      //$NON-NLS-1$
+        //if (value != null && !value.trim().equals(Global.EMPTY_STRING)){ 
+    		if (!EditStation.depth.isManual()) {
+                // non-obligatoire
+                
+                resultat1 = EditStation.depth.checkAutoInputValues(Messages.getString("Etape.49"));     //$NON-NLS-1$
+                if (resultat1){
+                    String lign = EditStation.depth.getLineText(0);
+                    ligneOK = EditStation.depth.checkInDataOrHeader(lign, Messages.getString("Etape.49")); //$NON-NLS-1$
+                    ok = ok && ligneOK;
+                }else{
+                    checkValue = false;
+                }
+    			ok = ok && resultat1;
+    		} 
+            if (checkValue){
+                value = EditStation.depth.getValue();
+                if (!value.trim().equals("") && !value.equals("NaN")){                                  //$NON-NLS-1$ //$NON-NLS-2$
+                    if (!Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", value.trim())) {                     //$NON-NLS-1$
+                        ok = ok && false;
+                        Utils.messageErreurAppend(Messages.getString("Etape.52"));                      //$NON-NLS-1$
+                    }
                 }
             }
-        }
-
+       // }
         
 		// DECALAGE/TU
         checkValue = true;

@@ -1374,7 +1374,7 @@ public class NemoLists implements Cloneable {
 
 	public static String parameterMap(fr.ifremer.nemo.domain.Parameter param) {
         String name = param.getCode();
-        if (param.getCode().equals(fr.ifremer.nemo.domain.AddedParameter.IdParameter.CJDY)) name = ((fr.ifremer.nemo.domain.AddedParameter) param).getFullName();
+        if (param.getCode().equals(fr.ifremer.nemo.domain.AddedParameter.IdParameter.CJDY.toString())) name = ((fr.ifremer.nemo.domain.AddedParameter) param).getFullName();
 		String pdvCode = Utils.extraitCodeURN(getVocabMatch("P091", "P011",
             param.getCode(), Messages.getString("NemoLists.unknown")));
 		String unitCode = Utils.extraitCodeURN(getVocabMatch("P091", "P061", param.getCode(), Messages

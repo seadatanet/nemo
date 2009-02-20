@@ -431,7 +431,7 @@ public class DataModel
     {
         PropertyModel propertyModel;
 
-        // compléter ELAT et ELON si nécessaire
+        // compléter ELAT / ELON et EDEPTH si nécessaire
         if (ViewFile.radSerieTempo.getSelection())
         {                                
             if (EditStation.endLatitude.getValue().trim().equals(Global.EMPTY_STRING)) {
@@ -441,6 +441,10 @@ public class DataModel
             if (EditStation.endLongitude.getValue().trim().equals(Global.EMPTY_STRING)) {
                 // vide donc on recopie longitude dans longitude de fin
                 EditStation.endLongitude.copyValues(EditStation.longitude);
+            }                       
+            if (EditStation.endDepth.getValue().trim().equals(Global.EMPTY_STRING)) {
+                // vide donc on recopie profondeur dans profondeur de fin
+                EditStation.endDepth.copyValues(EditStation.depth);
             }
         }
 
@@ -597,7 +601,8 @@ public class DataModel
                 
                 // Serie temporelle
                 // Ajout du paramètre DEPH ( = Sensor Depth) pour ODV
-                stationModel.addFixedParameterModel(IdParameter.DEPH);          
+                if (!existDEPH)
+                    stationModel.addFixedParameterModel(IdParameter.DEPH);          
             }
             else
             {
@@ -606,7 +611,9 @@ public class DataModel
                 stationModel.addFixedParameterModel(IdParameter.LATX);  
                 stationModel.addFixedParameterModel(IdParameter.LONX);  
                 
-                if (EditStation.depth.isInData()){
+                if (EditStation.depth.getValue() != null 
+                        && !EditStation.depth.getValue().trim().equals(Global.EMPTY_STRING)
+                        && EditStation.depth.isInData()){
                     // Ajout BATH si "Pofondeur" saisie dans les données pour Medatlas
                     stationModel.addFixedParameterModel(IdParameter.BATH);
                 }

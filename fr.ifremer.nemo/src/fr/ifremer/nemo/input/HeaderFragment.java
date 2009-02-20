@@ -11,6 +11,9 @@ import com.ago.xml.Element2Field;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.util.Global;
+
 /**
  * Class HeaderFragment
  * 
@@ -468,5 +471,55 @@ public class HeaderFragment implements Cloneable, SAXConsumer {
 			return stringWriter.toString();
 		}
 	}
+
+    /**
+     * 
+     * @param a_Header
+     * @return String
+     */
+    public String retreiveVariable(String[] a_Header) {
+        if (_firstLine == 0) {
+            if (_lastCharOffset == -1 || isVariable()) {
+                return a_Header[0].substring(_firstCharOffset - 1);
+            } 
+            return a_Header[0].substring(_firstCharOffset - 1, _lastCharOffset);
+        } 
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter writer = new PrintWriter(stringWriter, true);
+
+        for (int i = _firstLine - 1; i < _lastLine; i++) {
+            int start = 0;
+            int end = -1;
+            
+            if (i == _firstLine - 1) {
+                start = _firstCharOffset - 1;
+            }
+            if (i == _lastLine - 1) {
+
+                int index = _lastCharOffset;
+                String nextChar = Global.ZERO;
+                boolean continueBoucle = true;
+                while (continueBoucle && index < a_Header[i].length()){
+                    nextChar = a_Header[i].substring(index, index + 1);
+                    if (nextChar.equals(".")  //$NON-NLS-1$
+                        || nextChar.equals(",")  //$NON-NLS-1$
+                        || Utils.isNumeric(nextChar)){
+                        index++;
+                    }else{
+                        continueBoucle = false;
+                    }
+                }
+                end = index -1;
+            }
+                            
+            if (end == -1) {
+                writer.println(a_Header[i].substring(start));
+            } else {
+                writer.println(a_Header[i].substring(start, end + 1));
+            }
+        }
+        
+        return stringWriter.toString();
+    }
 
 } /* End of class: HeaderFragment */

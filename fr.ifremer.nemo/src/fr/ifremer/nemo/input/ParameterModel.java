@@ -418,7 +418,7 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 	 * @param a_Line
 	 * @param a_ParameterValue
 	 */
-	public void convert(String a_Line, ParameterValue a_ParameterValue,
+	public ParameterValue convert(String a_Line, ParameterValue a_ParameterValue,
 			FlagTable flagTable) throws StringIndexOutOfBoundsException {
 
 		org.nfunk.jep.JEP parser = null;
@@ -474,6 +474,7 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 				a_ParameterValue.setQc(flag);
 			}
 		}
+        return a_ParameterValue;
 	}
 
 	/**
@@ -488,7 +489,7 @@ public class ParameterModel implements Cloneable, SAXConsumer {
     
     
     
-    public void convertAdded(ParameterValue paramValue,
+    public ParameterValue convertAdded(ParameterValue paramValue,
                         Station station, 
                         String inputType, 
                         int index, 
@@ -572,6 +573,7 @@ public class ParameterModel implements Cloneable, SAXConsumer {
             paramValue.setStringValue(stringValue);
             paramValue.setQc(flag);
         }
+        return paramValue;
     }
     
 
@@ -581,31 +583,18 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 
         AddedParameter p = (AddedParameter) _model;
         ParameterValue paramValue = new ParameterValue();
-        String fragmnt = getFragment().retreive(line);
+        String fragmnt = getFragment().fullRetreive(line);
         
         if (fragmnt.equals(Global.EMPTY_STRING)) {
             paramValue.setStringValue(Global.EMPTY_STRING);
-//            paramValue.setValue(Double.NaN);
             paramValue.setQc(Global.DEFAULT_FLAG);
         } else {
             // VALUE
-            if (getInputDefault().trim().equals(fragmnt)) {
-                paramValue.setStringValue(p.getDefault());
-//                paramValue.setValue(Double.parseDouble(p.getDefault()));
+            if (getModel().getDefault().equals(fragmnt)) {
+                paramValue.setStringValue(getModel().getDefault());
             }else {
-                paramValue.setStringValue(fragmnt);
-//                double val;
-//                try {
-//                    val = Double.parseDouble(fragmnt);
-//                } catch (NumberFormatException e) {
-//                    throw new NumberFormatException(Messages
-//                            .getString("ParameterModel.1")
-//                            + e.getMessage().substring(
-//                                    e.getMessage().indexOf("\""),
-//                                    e.getMessage().lastIndexOf("\""))
-//                            + Messages.getString("ParameterModel.2") + Global.RN);
-//                }
-//                paramValue.setValue((Double) val);
+                String value = String.format(java.util.Locale.US, getModel().getFormat(), Float.parseFloat(fragmnt));
+                paramValue.setStringValue(value);
             }
             
             // Flag QC
