@@ -285,7 +285,6 @@ public class Etape {
         value = EditStation.stationNumber.getValue().trim();
         if (!ViewFile.isCollection() && value.length() > 5){
             EditConversion.setWarningStation(Messages.getString("ViewLog.6")); //$NON-NLS-1$
-            Utils.messageErreurAppend(Messages.getString("ViewLog.6")); //$NON-NLS-1$
         }else{
             EditConversion.setWarningStation(Global.EMPTY_STRING);
         }
@@ -355,7 +354,7 @@ public class Etape {
 			if (resultat1) {
 				// VERIF si le commentaire ne depasse pas le nombre de lignes d'entete station!
 				int nbreLignes = EditStation.comments.calculNbreLignes();
-                resultat3 = EditStation.historique.checkPosition(nbreLignes);
+                resultat3 = EditStation.comments.checkPosition(nbreLignes);
                 ok = ok && resultat3;
                 
                 if (!resultat3)
@@ -395,7 +394,7 @@ public class Etape {
 						ok = ok && false;
 						Utils.messageErreurAppend(Messages.getString("Etape.112"));                           //$NON-NLS-1$
 					} else {
-                        resultat3 = EditStation.historique.checkPosition(1, nbreLignes);
+                        resultat3 = EditStation.surfaceSample.checkPosition(1, nbreLignes);
                         ok = ok && resultat3;
                         
                         if (!resultat3)
@@ -875,10 +874,30 @@ public class Etape {
 				// test direct sur valeur sortie (valeur par defaut)
                 try
                 {
+                    fmOut = Global.EMPTY_STRING;
                     String formatString = typeCourant.getFormat();
-                    fmOut = String.format(java.util.Locale.US, formatString, Float.parseFloat(typeCourant.getSortie()));
                     
-                    if(fmOut.equals(typeCourant.getSortie()))
+                    // compatiblité des tailles
+                    int index = 0;
+                    int indexSign = formatString.indexOf('+');
+                    if (indexSign == -1){
+                        index = formatString.indexOf('%') + 1;
+                    }else{
+                        index = indexSign + 1;
+                    }
+                    int totLength = Integer.parseInt(formatString.substring(index, index + 1));
+                    
+                    
+                    // Float ou Decimal ?
+                    String type = formatString.substring(formatString.length() - 1);
+                    if (type.equals("f") || type.equals("F")){       //$NON-NLS-1$//$NON-NLS-2$
+                        fmOut = String.format(java.util.Locale.US, formatString, Float.parseFloat(typeCourant.getSortie()));
+                    }else if (type.equals("d") || type.equals("D")){ //$NON-NLS-1$ //$NON-NLS-2$
+                        fmOut = String.format(java.util.Locale.US, formatString, Integer.parseInt(typeCourant.getSortie()));
+                    }
+                    
+                    if((fmOut.equals(typeCourant.getSortie())) 
+                            && (typeCourant.getSortie().length() == totLength))
                     {
     					// ok
     					ok = ok && true;
@@ -890,6 +909,9 @@ public class Etape {
     				}
                 } catch (Exception e)
                 {
+                    // erreur
+                    ok = ok && false;
+                    Utils.messageErreurAppend(Messages.getString("Etape.106")+ " " + typeCourant.getCode() + " : " + Messages.getString("Etape.106b")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ 
                     System.out.print(e.getMessage());
                 }
 
@@ -954,7 +976,6 @@ public class Etape {
 				// Si PRES n'est pas premier => Medatlas impossible
 				if (!ViewFile.isCollection() && !code.equals("PRES")) { //$NON-NLS-1$
                     EditConversion.setWarningData(Messages.getString("ViewLog.7")); //$NON-NLS-1$
-                    //Utils.messageErreurAppend(Messages.getString("ViewLog.7")); //$NON-NLS-1$
                 }else{
                     EditConversion.setWarningData(Global.EMPTY_STRING);
                 }
