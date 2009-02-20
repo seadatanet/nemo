@@ -21,9 +21,15 @@ import org.eclipse.ui.forms.widgets.Section;
 
 import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.ui.Application;
+import fr.ifremer.nemo.ui.EditData;
+import fr.ifremer.nemo.ui.EditDesc;
 import fr.ifremer.nemo.ui.EditStation;
+import fr.ifremer.nemo.ui.EditSurvey;
+import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.ViewEdit;
+import fr.ifremer.nemo.ui.ViewFile;
 import fr.ifremer.nemo.util.Formatter;
+import fr.ifremer.nemo.util.Global;
 
 /**
  * Description: clesse abstraite définissant une Section NEMO
@@ -158,5 +164,31 @@ public abstract class NemoSection implements UIobject
     public abstract void initModel(StationModel stationModel);
     
     public abstract void fillFromModel(StationModel stationModel);
+    
+
+    
+    public static void invalidEtapes(){
+        // on modifie la valeur du champ texte
+        // dès qu'on modifie une valeur, on invalide l'étape
+        // remise du nom onglet à valeur par défaut
+
+        // on invalide toutes les étapes suivantes avec le second
+        // flag okApresReset à false
+        int currentTab = ViewFile.affiche;
+        
+        if (currentTab <= 0) // onglet FILE ou inférieur en cours
+            EditDesc.invalidEtape();
+        
+        if (currentTab <= 1) // onglet CRUISE ou inférieur en cours
+            EditSurvey.invalidEtape();
+        
+        if (currentTab <= 2) // onglet STATION ou inférieur en cours
+            EditStation.invalidEtape();
+        
+        if (currentTab <= 3) // onglet DATA ou inférieur en cours
+            EditData.invalidEtape();
+
+        Utils.messageErreur(Global.EMPTY_STRING);
+    }
 
 }

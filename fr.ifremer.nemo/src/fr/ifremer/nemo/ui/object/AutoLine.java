@@ -7,6 +7,8 @@
  */
 package fr.ifremer.nemo.ui.object;
 
+import java.io.File;
+
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
@@ -355,7 +357,16 @@ public class AutoLine implements UIobject
             String ligne = Global.EMPTY_STRING;
             if (numberLine.getText().equals(Global.EMPTY_STRING)) {
                 ligne = Utils.lignesBrutes.get(DataModel.stationModel.getNumberOfLines());
-            } else {
+            } else if (numberLine.getText().equals(Global.ZERO)){
+                // la ligne correspond au nom du fichier
+                if (ViewFile.radioFichier.getSelection()) {
+                    ligne = Utils.extraitFichierChemin(ViewFile.nomFichier);
+                } else {
+                    File directory = new File(ViewFile.nomRepertoire);
+                    File[] subfiles = directory.listFiles();
+                    ligne = subfiles[0].getName();
+                }
+            }else{
                 ligne = Utils.lignesBrutes.get(Integer.parseInt(numberLine.getText()) - 1);
             }
 

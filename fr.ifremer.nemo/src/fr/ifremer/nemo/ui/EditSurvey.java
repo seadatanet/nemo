@@ -752,22 +752,14 @@ public class EditSurvey {
 				public void modifyText(ModifyEvent event) {
 					// on modifie la valeur du champ texte
 
-					// des qu'on modifie une valeur, on invalide l'etape
-					// remise du nom onglet e valeur par defaut
-
-					// on invalide toutes les etapes suivantes avec le second
-					// flag okApresReset e false
-					EditSurvey.okApresReset = false;
-					if (!ViewFile.tabItem1.isDisposed()) {
-						ViewFile.tabItem1.setText(Messages
-								.getString("EditSurvey.4"));
-					}
-					EditStation.okApresReset = false;
-					ViewFile.tabItem2.setText(Messages
-							.getString("EditStation.1"));
-					EditData.okApresReset = false;
-					ViewFile.tabItem3.setText(Messages.getString("EditData.1"));
-					Utils.messageErreur("");
+                    // des qu'on modifie une valeur,
+                    // invalidation de l'étape en cours et des suivantes
+                    invalidEtape();
+                    EditSurvey.invalidEtape();
+                    EditStation.invalidEtape();
+                    EditData.invalidEtape();
+                    
+					Utils.messageErreur(Global.EMPTY_STRING);
 
 				}
 			});

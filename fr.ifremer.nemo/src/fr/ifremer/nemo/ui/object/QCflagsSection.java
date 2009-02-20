@@ -186,6 +186,7 @@ public class QCflagsSection extends NemoSection
                         public void modifyText(ModifyEvent event) {
                             flag.setLocal(text.getText());
                             item.setText(col, text.getText());
+                            NemoSection.invalidEtapes();
                         }
                     });
 
@@ -203,6 +204,7 @@ public class QCflagsSection extends NemoSection
                         public void modifyText(ModifyEvent event) {
                             flag.setSdn(combo.getText());
                             item.setText(col, combo.getText());
+                            NemoSection.invalidEtapes();
                         }
                     });
                     break;

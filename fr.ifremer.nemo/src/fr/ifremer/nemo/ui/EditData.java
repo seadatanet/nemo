@@ -120,6 +120,9 @@ public class EditData {
 
 						// on passe en ppar l'etape e laquelle on se trouve
 						// Etape.etape(1);
+                        // reinitialisation de la conversion
+                        if (DataModel.inputModel != null) DataModel.inputModel.setConverted(false);
+
 
 						Etape.validationData();
 
@@ -189,13 +192,8 @@ public class EditData {
 					// on modifie la valeur du champ texte
 
 					// des qu'on modifie une valeur, on invalide l'etape
-					// remise du nom onglet e valeur par defaut
-
-					// on invalide toutes les etapes suivantes avec le second
-					// flag okApresReset e false
-					EditData.okApresReset = false;
-					ViewFile.tabItem3.setText(Messages.getString("EditData.1"));
-					Utils.messageErreur("");
+					invalidEtape();
+                    Utils.messageErreur(Global.EMPTY_STRING);
 
 				}
 			});
