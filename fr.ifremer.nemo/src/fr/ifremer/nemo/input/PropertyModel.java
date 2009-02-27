@@ -561,10 +561,10 @@ public class PropertyModel implements Cloneable, PathElementHandler,
                             throw new ParseException(Messages.getString("PropertyModel.3") + " : "+ r, 0);
                         
                     }
-                } else if (_fragment.isVariable()){
-                    // stop string at next space
-                    r = _fragment.retreiveVariable(a_Header);
-                    writer.invoke(a_Destination, r);
+//                } else if (_fragment.isVariable()){
+//                    // stop string at next space
+//                    r = _fragment.retreiveVariable(a_Header);
+//                    writer.invoke(a_Destination, r);
                 }else{
                     writer.invoke(a_Destination, r);
                 }
