@@ -390,6 +390,8 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 			ParseException, StringIndexOutOfBoundsException {
 		try {
 			Survey survey = (Survey) _model.clone();
+            // FAE 1661 : réinitialiser les stations
+            survey.releaseStations();
 			_stationModel.initRef();
 			File file = new File(_file);
 			// RandomAccessFile reader = null;

@@ -320,6 +320,8 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 			ProgressNotification a_Progress) throws IOException, ParseException, InterruptedException {
 		try {
 			Survey survey = (Survey) _model.clone();
+            // FAE 1661 : réinitialiser les stations
+            survey.releaseStations();
 			File dir = new File(_directory);
 			String[] files = dir.list();
 			_stationModel.initRef();
