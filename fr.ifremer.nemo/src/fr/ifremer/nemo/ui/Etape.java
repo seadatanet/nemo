@@ -265,9 +265,10 @@ public class Etape {
             value = EditStation.stationNumber.getManualValue();
             if (ViewFile.radTrajectoire.getSelection()){
                 // saisie manuelle - obligatoire
-                Utils.messageErreurAppend(Messages.getString("Etape.128"));                             //$NON-NLS-1$
                 if (value.trim().equals("") || value.equals("NaN")){                                    //$NON-NLS-1$ //$NON-NLS-2$
                     ok = ok && false;
+                    // FAE 1673 : n'afficher le message que si erreur
+                    Utils.messageErreurAppend(Messages.getString("Etape.128"));                             //$NON-NLS-1$
                     Utils.messageErreurAppend(Messages.getString("Etape.129"));                         //$NON-NLS-1$
                 }
             }else{
@@ -614,12 +615,13 @@ public class Etape {
                 ok = ok && resultat1;
             }else{
                 value = EditStation.sensorDepth.getValue();
-                Utils.messageErreurAppend(Messages.getString("Etape.77"));                                  //$NON-NLS-1$
                 if (value.trim().equals(Global.EMPTY_STRING)) {
                     checkValue = false;
                     // obligatoire que pour les series temporelles
                     if (ViewFile.radSerieTempo.getSelection()){
                         ok = ok && false; // FAE 0001232
+                        // FAE 1673 : n'afficher le message que si erreur
+                        Utils.messageErreurAppend(Messages.getString("Etape.77"));                          //$NON-NLS-1$
                         Utils.messageErreurAppend(Messages.getString("Etape.79"));                          //$NON-NLS-1$
                     }
                 }
@@ -651,7 +653,7 @@ public class Etape {
                     value = EditStation.samplingRate.getValue();            
                     if (value.trim().equals("")) {                                                                  //$NON-NLS-1$
                         ok = ok && false; 
-                        Utils.messageErreurAppend(Messages.getString("Etape.130"));                                 //$NON-NLS-1$
+                        Utils.messageErreurAppend(Messages.getString("Etape.103"));                                 //$NON-NLS-1$
                     } else {
                         if (!Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", value.trim())) {                             //$NON-NLS-1$
                             ok = ok && false;
