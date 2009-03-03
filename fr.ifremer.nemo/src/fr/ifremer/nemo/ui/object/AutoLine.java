@@ -224,54 +224,70 @@ public class AutoLine implements UIobject
         buttonSet.setEnabled(enabled);
     }
     
-    protected int getHeaderStationPos(){
-        int headerStation = 0;
-        if (!ViewFile.dossierCampagne) {
-            // fichier campagne
-            headerStation = DataModel.singleSurvey.getHeaderLinesNumber();
-        }
-        headerStation += DataModel.stationModel.getNumberOfLines();
-        return headerStation;
+    protected int getStationHeaderPos(){
+        int stationHeader = getFileHeaderPos();
+        stationHeader += DataModel.stationModel.getNumberOfLines();
+        return stationHeader;
     }
     
-    public boolean checkInDataOrHeader(String ligne, String sectionName){
-        boolean inHeader;
+    protected int getFileHeaderPos(){
+        int fileHeader = 0;
+        if (!ViewFile.dossierCampagne) {
+            // fichier campagne
+            fileHeader = DataModel.singleSurvey.getHeaderLinesNumber();
+        }
+        return fileHeader;
+    }
+    
+    public boolean checkInDataOrHeader(String ligne, String sectionName)
+    {
+        // FAE 1687 (evol) : ajout du test "inFileHeader"
+        boolean inStationHeader;
+        boolean inFileHeader = false;
+        boolean ligneOK = true;
+        
         if (ligne != null && !ligne.equals(Global.EMPTY_STRING)){
             int lign = Integer.parseInt(ligne);
-            inData = (lign == (getHeaderStationPos() + 1));
-            inHeader = (lign <= (getHeaderStationPos()));
+            inData = (lign == (getStationHeaderPos() + 1));
+            inFileHeader =  (lign <= (getFileHeaderPos()));
+            inStationHeader = (lign > (getFileHeaderPos())) && (lign <= (getStationHeaderPos()));
         }else{
             inData = true;
-            inHeader = false;
+            inStationHeader = false;
         }
-        boolean ligneOK = true;
-        switch (enableInData){
-            case OBLIGATOIRE:
-                // OK if inData
-                if (!inData){
-                    ligneOK = false;
-                    if (sectionName != null) 
-                        Utils.messageErreur(sectionName + Global.SPACE + Messages.getString("Regexp.20"));            //$NON-NLS-1$
-                }
-                break;
-            case INTERDIT:
-                // OK if inHeader
-                if (!inHeader || inData){
-                    ligneOK = false;
-                    if (sectionName != null) 
-                        Utils.messageErreur(sectionName + Global.SPACE + Messages.getString("Regexp.21"));        //$NON-NLS-1$
-                }
-                break;
-            case FACULTATIF:
-            default:
-                // comportement FACULTATIF : OK if inData or inHeader
-                if (!inData && !inHeader){
-                    ligneOK = false;
-                    if (sectionName != null) 
-                        Utils.messageErreur(sectionName + Global.SPACE + Messages.getString("Regexp.19"));   //$NON-NLS-1$ 
-                }
-                EditStation.actualiseEdition();
-                break;
+
+        if (!inFileHeader){
+            switch (enableInData){
+                case OBLIGATOIRE:
+                    // OK if inData
+                    if (!inData){
+                        ligneOK = false;
+                        if (sectionName != null) 
+                            Utils.messageErreur(sectionName + Global.SPACE + Messages.getString("Regexp.20"));            //$NON-NLS-1$
+                    }
+                    break;
+                case INTERDIT:
+                    // OK if inHeader
+                    if (!inStationHeader || inData){
+                        ligneOK = false;
+                        if (sectionName != null) 
+                            Utils.messageErreur(sectionName + Global.SPACE + Messages.getString("Regexp.21"));        //$NON-NLS-1$
+                    }
+                    break;
+                case FACULTATIF:
+                default:
+                    // comportement FACULTATIF : OK if inData or inHeader
+                    if (!inData && !inStationHeader){
+                        ligneOK = false;
+                        if (sectionName != null) 
+                            Utils.messageErreur(sectionName + Global.SPACE + Messages.getString("Regexp.19"));   //$NON-NLS-1$ 
+                    }
+                    EditStation.actualiseEdition();
+                    break;
+            }
+        }else{
+            ligneOK = false;
+            Utils.messageErreur(Messages.getString("Regexp.22"));            //$NON-NLS-1$
         }
         return ligneOK;
     }
@@ -356,7 +372,7 @@ public class AutoLine implements UIobject
         {            
             String ligne = Global.EMPTY_STRING;
             if (numberLine.getText().equals(Global.EMPTY_STRING)) {
-                ligne = Utils.lignesBrutes.get(DataModel.stationModel.getNumberOfLines());
+                ligne = Utils.lignesBrutes.get(getStationHeaderPos());
             } else if (numberLine.getText().equals(Global.ZERO)){
                 // la ligne correspond au nom du fichier
                 if (ViewFile.radioFichier.getSelection()) {
@@ -404,7 +420,7 @@ public class AutoLine implements UIobject
     public void selectInViewFile(){
         int lign, deb, fi;
         if (numberLine.getText().equals(Global.EMPTY_STRING)) {
-            lign = DataModel.stationModel.getNumberOfLines() + 1;
+            lign = getStationHeaderPos() + 1;
         } else {
             lign = Integer.parseInt(numberLine.getText());
         }
