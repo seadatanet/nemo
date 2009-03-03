@@ -721,6 +721,7 @@ public class StationSection extends NemoSection
         String result = Global.EMPTY_STRING;
         if (!isManual()) {
             result = autoInput.getValue(0).trim();
+            autoInput.selectInViewFile();
         } else {
             result = manualInput.getValue().trim();
         }
