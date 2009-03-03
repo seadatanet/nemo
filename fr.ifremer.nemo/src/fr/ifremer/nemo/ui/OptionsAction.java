@@ -7,6 +7,7 @@ import java.util.TreeSet;
 import java.util.Map.Entry;
 
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.ISelection;
@@ -232,56 +233,6 @@ public class OptionsAction extends Action implements ISelectionListener,
             .getIdEdmoDistDonnees());
 
         textUrlCdi.setText(Utils.configuration.getCdiURL());
-
-        Utils.selectComboCode(comboAccesDonnees, Utils.configuration
-            .getAccesDonnees());
-        Utils.selectComboCode(comboTypePlateForme, Utils.configuration
-            .getTypePlateForme());
-
-        checkMapping.setSelection(Utils.configuration.isWriteMapping());
-        
-        textFichierMapping.setText(Utils.configuration.getFichierMapping());
-       // textArboMapping.setText(Utils.configuration.getArboMapping());
-
-        // Libelles rouges si parametres manquants
-        if (comboIdEdmoRespCdi.getText().trim().equals(""))
-        {
-            labelIdEdmoRespCdi.setForeground(Display.getCurrent()
-                .getSystemColor(SWT.COLOR_RED));
-        }
-        if (comboCodeEdmoDonnees.getText().trim().equals(""))
-        {
-            labelCodeEdmoDonnees.setForeground(Display.getCurrent()
-                .getSystemColor(SWT.COLOR_RED));
-        }
-        if (comboIdEdmoRespDonnees.getText().trim().equals(""))
-        {
-            labelIdEdmoRespDonnees.setForeground(Display.getCurrent()
-                .getSystemColor(SWT.COLOR_RED));
-        }
-        if (comboIdEdmoDistDonnees.getText().trim().equals(""))
-        {
-            labelIdEdmoDistDonnees.setForeground(Display.getCurrent()
-                .getSystemColor(SWT.COLOR_RED));
-        }
-        if (textUrlCdi.getText().trim().equals(""))
-        {
-            labelUrlCdi.setForeground(Display.getCurrent().getSystemColor(
-                SWT.COLOR_RED));
-        }
-        if (textFichierMapping.getText().trim().equals(""))
-        {
-            labelFichierMapping.setForeground(Display.getCurrent()
-                .getSystemColor(SWT.COLOR_RED));
-        }
-       /* if (textArboMapping.getText().trim().equals(""))
-        {
-            labelArboMapping.setForeground(Display.getCurrent().getSystemColor(
-                SWT.COLOR_RED));
-        }*/
-
-        CDICheckMask(Utils.configuration.isWriteCdi());
-        mappingCheckMask(Utils.configuration.isWriteMapping());
         
         // FAE 58 CDL 09/04/08
 
@@ -341,14 +292,28 @@ public class OptionsAction extends Action implements ISelectionListener,
         for (String champ : champsMethodesCdi)
             comboAccesDonnees.add(champ);
 
+        Utils.selectComboCode(comboAccesDonnees, Utils.configuration
+            .getAccesDonnees());
+        Utils.selectComboCode(comboTypePlateForme, Utils.configuration
+            .getTypePlateForme());
+
+        // MAPPING
+        checkMapping.setSelection(Utils.configuration.isWriteMapping());
+        textFichierMapping.setText(Utils.configuration.getFichierMapping());
+        
+        redLabels();
+        
+        CDICheckMask(Utils.configuration.isWriteCdi());
+        mappingCheckMask(Utils.configuration.isWriteMapping());
+
         // FLags
         fillFlagTable();
     }
     
     protected void CDICheckMask (Boolean status)
     {
-        labelIdEdmoRespCdi.setEnabled(status);
-        comboIdEdmoRespCdi.setEnabled(status);
+        //labelIdEdmoRespCdi.setEnabled(status);
+        //comboIdEdmoRespCdi.setEnabled(status);
         labelCodeEdmoDonnees.setEnabled(status);
         comboCodeEdmoDonnees.setEnabled(status);
         labelIdEdmoRespDonnees.setEnabled(status);
@@ -554,6 +519,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         // listener sur le bouton
         buttonParcourirModele
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                @Override
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
@@ -588,6 +554,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         // listener sur le bouton
         buttonParcourirCampagne
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                @Override
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
@@ -673,6 +640,20 @@ public class OptionsAction extends Action implements ISelectionListener,
      */
     private void createGroupCDI()
     {
+        compoHaut = new Composite(top, SWT.NONE);
+        GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoHaut);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(compoHaut);
+        
+        // FAE 1123 : Extraire le centre de données responsable du CDI du bloc CDI.
+        labelIdEdmoRespCdi = new Label(compoHaut, SWT.NONE);
+        labelIdEdmoRespCdi.setText(Messages.getString("OptionsAction.21"));
+        labelIdEdmoRespCdi.pack();
+
+        comboIdEdmoRespCdi = new Combo(compoHaut, SWT.BORDER | SWT.READ_ONLY);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(
+            comboIdEdmoRespCdi);
+        
+        
         groupCDI = new Group(top, SWT.NONE);
         GridLayoutFactory.fillDefaults().numColumns(2).applyTo(groupCDI);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(groupCDI);
@@ -681,19 +662,10 @@ public class OptionsAction extends Action implements ISelectionListener,
         lblCDI = new Label(groupCDI, SWT.NONE);
         lblCDI.setText(Messages.getString("OptionsAction.44"));
         checkCDI = new Button(groupCDI, SWT.CHECK);
-        
-        
-        labelIdEdmoRespCdi = new Label(groupCDI, SWT.NONE);
-        labelIdEdmoRespCdi.setText(Messages.getString("OptionsAction.21"));
-        labelIdEdmoRespCdi.pack();
-
-       
-        comboIdEdmoRespCdi = new Combo(groupCDI, SWT.BORDER | SWT.READ_ONLY);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(
-            comboIdEdmoRespCdi);
 
         //On masque/affiche les champs falcutatif en fonction de la case checkCDI
         checkCDI.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+            @Override
             public void widgetSelected(org.eclipse.swt.events.SelectionEvent e)
             {
                 CDICheckMask(checkCDI.getSelection());
@@ -1173,23 +1145,12 @@ public class OptionsAction extends Action implements ISelectionListener,
         createGroupMapping();
         createGroupFlag();
         createCompoBouton();
-        /*
-         * buttonCancel = new Button(top, SWT.NONE); //
-         * buttonCancel.setBounds(new Rectangle(224, 333, 69, 23)); // 66
-         * buttonCancel.setText(Messages.getString("OptionsAction.16"));
-         * //$NON-NLS-1$ buttonCancel.pack();
-         */
 
-        /*
-         * buttonValider = new Button(top, SWT.NONE); //
-         * buttonValider.setBounds(new Rectangle(139, 333, 69, 23));
-         * buttonValider.setText(Messages.getString("OptionsAction.17"));
-         * //$NON-NLS-1$ buttonValider.pack();
-         */
 
         // listener cancel
         buttonCancel
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                @Override
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
@@ -1202,18 +1163,106 @@ public class OptionsAction extends Action implements ISelectionListener,
         // listener valider
         buttonValider
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                @Override
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
-                    // System.out.println("options valider");
-
-                    // sauvegarde de la config
-                    Utils.saveConfig();
-
-                    shelloptions.close();
-
+                    // FAE 1123 : validation de la config
+                    if (checkConfig()){                        
+                        // sauvegarde de la config
+                        Utils.saveConfig();
+                        // fermeture de la fenêtre
+                        shelloptions.close();
+                    }else{
+                        redLabels();
+                    }
+                    
                 }
             });
+    }
+    
+    protected boolean checkConfig() {
+        boolean blnOK = true;
+        StringBuffer message = new StringBuffer();
+        
+        if (checkCDI.getSelection())        
+        {       
+            message.append(checkCombo(comboIdEdmoRespCdi, "OptionsAction.21")); //$NON-NLS-1$
+            message.append(checkCombo(comboCodeEdmoDonnees, "OptionsAction.24")); //$NON-NLS-1$
+            message.append(checkCombo(comboIdEdmoRespDonnees, "OptionsAction.25")); //$NON-NLS-1$
+            message.append(checkCombo(comboIdEdmoDistDonnees, "OptionsAction.26")); //$NON-NLS-1$
+            message.append(checkText(textUrlCdi, "OptionsAction.22")); //$NON-NLS-1$
+            message.append(checkCombo(comboMethodeCdi, "OptionsAction.23")); //$NON-NLS-1$
+            message.append(checkCombo(comboTypePlateForme, "ViewFile.typePlateForme")); //$NON-NLS-1$
+
+            if (message.length() > 0){
+                message.insert(0, Messages.getString("OptionsAction.checkCDI")); //$NON-NLS-1$
+                blnOK = false;
+            }
+        }        
+        if (!blnOK) {
+            try {
+                String[] buttons = new String[1];
+                buttons[0] = "OK"; //$NON-NLS-1$ 
+                MessageDialog dialog = new MessageDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), Messages.getString("CDIResumeWriter.configTitle"), null, message.toString(), MessageDialog.NONE, buttons, 0); //$NON-NLS-1$
+                dialog.open();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return blnOK;
+    }
+    
+    protected String checkCombo(Combo combo, String keyErrorMsg)
+    {
+        StringBuffer message = new StringBuffer();
+        if (combo.getText().trim().equals(Global.EMPTY_STRING))
+        {
+            message.append(Global.RN);
+            message.append(" - "); //$NON-NLS-1$
+            message.append(Messages.getString(keyErrorMsg)); 
+        }
+        return message.toString();
+    }
+    
+    protected String checkText(Text text, String keyErrorMsg)
+    {
+        StringBuffer message = new StringBuffer();
+        if (text.getText().trim().equals(Global.EMPTY_STRING))
+        {
+            message.append(Global.RN);
+            message.append(" - "); //$NON-NLS-1$
+            message.append(Messages.getString(keyErrorMsg)); 
+        }
+        return message.toString();
+    }
+    
+    protected void redLabels(){
+
+        // Libelles rouges si parametres manquants
+        redComboLabel(comboIdEdmoRespCdi, labelIdEdmoRespCdi);
+        redComboLabel(comboCodeEdmoDonnees, labelCodeEdmoDonnees);
+        redComboLabel(comboIdEdmoRespDonnees, labelIdEdmoRespDonnees);
+        redComboLabel(comboIdEdmoDistDonnees, labelIdEdmoDistDonnees);
+        redTextLabel(textUrlCdi, labelUrlCdi);
+        redComboLabel(comboTypePlateForme, lblTypePlateForme);
+        //redTextLabel(textFichierMapping, labelFichierMapping);
+    }
+    
+    protected void redComboLabel(Combo combo, Label label){
+        if (combo.getText().trim().equals(Global.EMPTY_STRING)){
+            label.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
+        }else{
+            label.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_BLACK));
+        }
+    }
+    
+    protected void redTextLabel(Text text, Label label){
+        if (text.getText().trim().equals(Global.EMPTY_STRING)){
+            label.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
+        }else{
+            label.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_BLACK));
+        }
     }
 
     private void fillFlagTable()

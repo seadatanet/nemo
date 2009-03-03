@@ -688,13 +688,15 @@ public class EditConversion extends Thread {
 		boolean blnOK = true;
 		String message = Messages.getString("CDIResumeWriter.configMessage"); //$NON-NLS-1$
 
+        if (ViewFile.radODV.getSelection()) {
+            if (Utils.configuration.getIdEdmoRespCdi().trim().equals(Global.EMPTY_STRING)) {
+                message += Global.RN + " - " + Messages.getString("OptionsAction.21"); //$NON-NLS-1$ //$NON-NLS-2$
+                blnOK = false;
+            }
+        }
+        
         if (Utils.configuration.isWriteCdi())        
-        {
-    		if (Utils.configuration.getIdEdmoRespCdi().trim().equals(Global.EMPTY_STRING)) {
-    			message += Global.RN + " - " + Messages.getString("OptionsAction.21"); //$NON-NLS-1$ //$NON-NLS-2$
-    			blnOK = false;
-    		}
-		
+        {		
     		if (Utils.configuration.getCodeEdmoDonnees().trim().equals(Global.EMPTY_STRING)) {
     			message += Global.RN + " - " + Messages.getString("OptionsAction.24"); //$NON-NLS-1$ //$NON-NLS-2$
     			blnOK = false;
@@ -721,11 +723,13 @@ public class EditConversion extends Thread {
     		}
             
         }
-		
-		if (Utils.configuration.getFichierMapping().trim().equals(Global.EMPTY_STRING)) {
-			message += Global.RN + " - " + Messages.getString("OptionsAction.31"); //$NON-NLS-1$ //$NON-NLS-2$
-			blnOK = false;
-		}
+//        if (Utils.configuration.isWriteMapping())        
+//        {   
+//    		if (Utils.configuration.getFichierMapping().trim().equals(Global.EMPTY_STRING)) {
+//    			message += Global.RN + " - " + Messages.getString("OptionsAction.31"); //$NON-NLS-1$ //$NON-NLS-2$
+//    			blnOK = false;
+//    		}
+//        }
 		
 		/*if (Utils.configuration.getArboMapping().trim().equals(Global.EMPTY_STRING)) {
 			message += Global.RN + " - " + Messages.getString("OptionsAction.32"); //$NON-NLS-1$ //$NON-NLS-2$

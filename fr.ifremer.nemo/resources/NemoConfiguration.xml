@@ -13,10 +13,11 @@
   <idEdmoRespDonnees></idEdmoRespDonnees>
   <idEdmoDistDonnees></idEdmoDistDonnees>
   <cdiURL>http://www.sdn-taskmanager.org/</cdiURL>
-  <cdiMethod></cdiMethod>
-  <accesDonnees>FE</accesDonnees>
-  <typePlateforme>11</typePlateforme>
-  <fichierMapping>mapping.txt</fichierMapping>
+  <cdiMethod>CDIMTH01</cdiMethod>
+  <accesDonnees>LS</accesDonnees>
+  <typePlateforme></typePlateforme>
+  <writeMapping>false</writeMapping>
+  <fichierMapping>coupling.txt</fichierMapping>
   <vocabURL>http://vocab.ndg.nerc.ac.uk/1.1/VocabServerAPI_dl.wsdl</vocabURL>
   <VocabListURL name="C16" value="http://vocab.ndg.nerc.ac.uk/list/C16/current"/>
   <VocabListURL name="P011" value="http://vocab.ndg.nerc.ac.uk/list/P011/current"/>
