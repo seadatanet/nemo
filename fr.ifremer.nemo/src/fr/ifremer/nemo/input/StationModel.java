@@ -1511,7 +1511,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
                 header = consumeHeader(a_Reader);
             }
 
-            if (header != null)
+            if (header != null && (header.length > 0 && header[0] != null))
             {
                 // STATION NUMBER
                 if (getReferenceProperty().isUserProvided()){
@@ -1570,13 +1570,15 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
                 
                 if (_inputType.equals(Global.TRAJECTORY)){
                     // récupération de la valeur du paramètre correspondant sur la dernière ligne de données
+                    // FAE 1690 : _rowNumber toukours à zéro / changement de idxLastLine
+                    int idxLastLine = station.parametersAt(0).valuesSize() - 1;
                     // LATX
-                    station.getTimeSeriesInformation().setEndLatitude(station.getVariant((_rowNumber), IdParameter.LATX.toString()));
+                    station.getTimeSeriesInformation().setEndLatitude(station.getVariant(idxLastLine, IdParameter.LATX.toString()));
                     // LONX
-                    station.getTimeSeriesInformation().setEndLongitude(station.getVariant((_rowNumber), IdParameter.LONX.toString()));
+                    station.getTimeSeriesInformation().setEndLongitude(station.getVariant(idxLastLine, IdParameter.LONX.toString()));
                     // DEPTH
                     if (EditStation.depth.isInData()){
-                        station.getTimeSeriesInformation().setEndDepth(station.getVariant((_rowNumber), IdParameter.BATH.toString()));
+                        station.getTimeSeriesInformation().setEndDepth(station.getVariant(idxLastLine, IdParameter.BATH.toString()));
                     }
                     
                 }
