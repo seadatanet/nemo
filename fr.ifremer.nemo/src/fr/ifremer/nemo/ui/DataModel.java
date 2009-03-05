@@ -737,70 +737,72 @@ public class DataModel
 
         // séparateur
         String strSeparator = stationModel_modele.getSeparator();
-        if (strSeparator != null)
+        
+        // pour prise en compte des anciens modèles (par défaut, pas de séparateur)
+        if (strSeparator == null) strSeparator = Global.EMPTY_STRING;
+
+        boolean blnSeparator =
+            !Global.EMPTY_STRING.equals(strSeparator);
+
+        ViewFile.chkSeparateur.setSelection(blnSeparator);
+        ViewFile.setSeparatorVisible();
+
+        if (blnSeparator)
         {
-            boolean blnSeparator =
-                !Global.EMPTY_STRING.equals(strSeparator);
-
-            ViewFile.chkSeparateur.setSelection(blnSeparator);
-            ViewFile.setSeparatorVisible();
-
-            if (blnSeparator)
+            if (Global.TAB.equals(strSeparator))
             {
-                if (Global.TAB.equals(strSeparator))
-                {
-                    // Tabulation
-                    ViewFile.radioTabulation.setSelection(true);
-                    ViewFile.radioPointVirgule.setSelection(false);
-                    ViewFile.radioVirgule.setSelection(false);
-                    ViewFile.radioEspace.setSelection(false);
-                    ViewFile.radioSeparateurAutre.setSelection(false);
-                    ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
-                }
-                else if (Global.SEMICOLON.equals(strSeparator))
-                {
-                    // Point-virgule
-                    ViewFile.radioTabulation.setSelection(false);
-                    ViewFile.radioPointVirgule.setSelection(true);
-                    ViewFile.radioVirgule.setSelection(false);
-                    ViewFile.radioEspace.setSelection(false);
-                    ViewFile.radioSeparateurAutre.setSelection(false);
-                    ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
-                }
-                else if (Global.COMMA
-                    .equals(strSeparator))
-                {
-                    // Virgule
-                    ViewFile.radioTabulation.setSelection(false);
-                    ViewFile.radioPointVirgule.setSelection(false);
-                    ViewFile.radioVirgule.setSelection(true);
-                    ViewFile.radioEspace.setSelection(false);
-                    ViewFile.radioSeparateurAutre.setSelection(false);
-                    ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
-                }
-                else if (Global.SPACE
-                    .equals(strSeparator))
-                {
-                    // Espace
-                    ViewFile.radioTabulation.setSelection(false);
-                    ViewFile.radioPointVirgule.setSelection(false);
-                    ViewFile.radioVirgule.setSelection(false);
-                    ViewFile.radioEspace.setSelection(true);
-                    ViewFile.radioSeparateurAutre.setSelection(false);
-                    ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
-                }
-                else
-                {
-                    // Autre séparateur
-                    ViewFile.radioTabulation.setSelection(false);
-                    ViewFile.radioPointVirgule.setSelection(false);
-                    ViewFile.radioVirgule.setSelection(false);
-                    ViewFile.radioEspace.setSelection(false);
-                    ViewFile.radioSeparateurAutre.setSelection(true);
-                    ViewFile.textSeparateur.setText(strSeparator);
-                }
+                // Tabulation
+                ViewFile.radioTabulation.setSelection(true);
+                ViewFile.radioPointVirgule.setSelection(false);
+                ViewFile.radioVirgule.setSelection(false);
+                ViewFile.radioEspace.setSelection(false);
+                ViewFile.radioSeparateurAutre.setSelection(false);
+                ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
+            }
+            else if (Global.SEMICOLON.equals(strSeparator))
+            {
+                // Point-virgule
+                ViewFile.radioTabulation.setSelection(false);
+                ViewFile.radioPointVirgule.setSelection(true);
+                ViewFile.radioVirgule.setSelection(false);
+                ViewFile.radioEspace.setSelection(false);
+                ViewFile.radioSeparateurAutre.setSelection(false);
+                ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
+            }
+            else if (Global.COMMA
+                .equals(strSeparator))
+            {
+                // Virgule
+                ViewFile.radioTabulation.setSelection(false);
+                ViewFile.radioPointVirgule.setSelection(false);
+                ViewFile.radioVirgule.setSelection(true);
+                ViewFile.radioEspace.setSelection(false);
+                ViewFile.radioSeparateurAutre.setSelection(false);
+                ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
+            }
+            else if (Global.SPACE
+                .equals(strSeparator))
+            {
+                // Espace
+                ViewFile.radioTabulation.setSelection(false);
+                ViewFile.radioPointVirgule.setSelection(false);
+                ViewFile.radioVirgule.setSelection(false);
+                ViewFile.radioEspace.setSelection(true);
+                ViewFile.radioSeparateurAutre.setSelection(false);
+                ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
+            }
+            else
+            {
+                // Autre séparateur
+                ViewFile.radioTabulation.setSelection(false);
+                ViewFile.radioPointVirgule.setSelection(false);
+                ViewFile.radioVirgule.setSelection(false);
+                ViewFile.radioEspace.setSelection(false);
+                ViewFile.radioSeparateurAutre.setSelection(true);
+                ViewFile.textSeparateur.setText(strSeparator);
             }
         }
+
 
         // test si serie tempo
         if (stationModel_modele.getTimeSeriesInformation() != null)
