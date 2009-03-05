@@ -655,24 +655,38 @@ public class EditConversion extends Thread {
 
 	public static String getLocalCdiId(Station station, String surveyReference) {
 		// FAE 1143 : nommage du LOCAL_CDI_ID
+        
+        String ref = Global.EMPTY_STRING;
+        String stationReference = station.getReference().trim();
+        DataType datatype = station.getDataType();
+        
 		
-		String temp = Global.EMPTY_STRING;
 		
 		if (SWTProcess.getOdv()) {
 			// ODV      -> [Référence du jeu de données]
-			temp = getDataSetRef();
+            ref = getDataSetRef();
+            // [Numéro station]si < 5 : codé sur 5 caractères il est complété à gauche par des '0'. 
+            if (stationReference.length() < 5){
+                stationReference = Formatter.getSingleton().padZero(stationReference, 5);
+            }
 		}else{
-			// MEDATLAS ->  [Référence campagne]
-			temp = Formatter.getSingleton().padString(surveyReference,13);
+			// MEDATLAS ->  
+            // [Référence campagne]
+            ref = Formatter.getSingleton().padString(surveyReference,13);
+            // [Numéro station] codé sur 5 caractères il est complété à gauche par des '0'. 
+            stationReference = Formatter.getSingleton().padZero(stationReference, 5);
 		}
-		
-		// [Numéro station] codé sur 5 caractères il est complété à gauche par des '0'. 
-		String stationReference = station.getReference().trim();
+
+        // [Reference]
+        String temp = Global.EMPTY_STRING;
+        temp += ref;
+        
+		// [Numéro station]
 		if (!temp.equals(Global.EMPTY_STRING)) temp += "_"; //$NON-NLS-1$
-		temp += Formatter.getSingleton().padZero(stationReference, 5);
+		temp += stationReference;
 		
 		// [Type de données] s'il existe
-		if (station.getDataType() != null) {
+		if (datatype != null) {
 			if (!station.getDataType().getCode().equals(Global.EMPTY_STRING)) {
 				if (!temp.equals(Global.EMPTY_STRING)) {
 					temp += "_"; //$NON-NLS-1$
