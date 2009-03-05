@@ -245,11 +245,12 @@ public class AutoLine implements UIobject
         boolean inStationHeader;
         boolean inFileHeader = false;
         boolean ligneOK = true;
+        int lign = 0;
         
         if (ligne != null && !ligne.equals(Global.EMPTY_STRING)){
-            int lign = Integer.parseInt(ligne);
+            lign = Integer.parseInt(ligne);
             inData = (lign == (getStationHeaderPos() + 1));
-            inFileHeader =  (lign <= (getFileHeaderPos()));
+            inFileHeader =  ((lign <= (getFileHeaderPos())) && lign != 0);
             inStationHeader = (lign > (getFileHeaderPos())) && (lign <= (getStationHeaderPos()));
         }else{
             inData = true;
@@ -277,7 +278,7 @@ public class AutoLine implements UIobject
                 case FACULTATIF:
                 default:
                     // comportement FACULTATIF : OK if inData or inHeader
-                    if (!inData && !inStationHeader){
+                    if (!inData && !inStationHeader && lign != 0){
                         ligneOK = false;
                         if (sectionName != null) 
                             Utils.messageErreur(sectionName + Global.SPACE + Messages.getString("Regexp.19"));   //$NON-NLS-1$ 
