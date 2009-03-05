@@ -418,7 +418,7 @@ public class InputModel implements Cloneable, PathElementHandler,
                 }
                 survey = _media.convert(_refDateBased, refDate, a_ProgressNotifier);
                 _media.setModel(survey);
-                converted = true;
+                //converted = true;
             }
             else
             {

@@ -96,6 +96,7 @@ public class SWTProcess implements IRunnableWithProgress {
 						+ e.getMessage());
 			}
 		}
+        DataModel.inputModel.setConverted(true);
 	}
 
 	private void runCampagne(IProgressMonitor monitor)
