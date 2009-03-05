@@ -43,6 +43,12 @@ import fr.ifremer.nemo.util.LongitudeFormat;
  * @author Gerard BUNEL
  */
 public class Station implements Cloneable, PathElementHandler, SAXConsumer {
+    /**
+     * Taille du fichier correspondant en Mo
+     * Utilise pour le resume CDI dans le cas des fichiers monostation
+     */
+    protected float _dataSize;
+    
 	/**
 	 * Profondeur fond. MEDATLAS: bottom depth in metres (nothing if unknown) (6
 	 * char max)
@@ -207,6 +213,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
     protected String _fichierSource;
 
 	public Station() {
+        _dataSize = 0;
 		_bottomDepth = Float.NaN;
 		_comment = Global.EMPTY_STRING;
 		_dcHistory1 = Global.EMPTY_STRING;
@@ -2120,6 +2127,14 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
     {
         _fichierSource = fichierSource;
     }
-    
+
+
+    public float getDataSize() {
+        return _dataSize;
+    }
+
+    public void setDataSize(float size) {
+        _dataSize = size;
+    }
 
 } /* End of class: Station */

@@ -225,7 +225,9 @@ public class CDIResumeWriter {
 						writer.write(sep + formatSortie);
 						
 						// data size
-						writer.write(sep + Formatter.getSingleton().formatFloat("%.3f",survey.getDataSize())); //$NON-NLS-1$
+                        float datasize = survey.getDataSize();
+                        if (datasize == 0) datasize = station.getDataSize();
+						writer.write(sep + Formatter.getSingleton().formatFloat("%.3f",datasize)); //$NON-NLS-1$
 
 						// DIST website
 						writer.write(sep + cdiUrl);

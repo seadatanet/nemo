@@ -161,8 +161,7 @@ public class SWTProcess implements IRunnableWithProgress {
 							EditConversion.nomFichierSortie);
 
 					writerMed.writeSurvey(survey, fichierSortie, notifier);
-                    survey
-                    .setDataSize(fichierSortie.length() / 1024f / 1024f);                    
+                    survey.setDataSize(fichierSortie.length() / 1024f / 1024f);                    
 
                     if (Configuration.getSingleton().isWriteMapping()){
     					for (Station station : survey.getStations()) {
@@ -200,7 +199,7 @@ public class SWTProcess implements IRunnableWithProgress {
 									EditConversion.nomFichierSortie);
 
 							writerODV.writeSurvey(survey, fichierSortie, notifier);
-                            survey.setDataSize(fichierSortie.length() / 1024f / 1024f);
+                            station.setDataSize(fichierSortie.length() / 1024f / 1024f);
                             
                             if (Configuration.getSingleton().isWriteMapping()){
                                 mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
@@ -348,8 +347,7 @@ public class SWTProcess implements IRunnableWithProgress {
 									EditConversion.nomFichierSortie);
 							writerODV.writeSurvey(survey, fichierSortie,
 									notifier);
-							survey
-									.setDataSize(fichierSortie.length() / 1024f / 1024f);
+                            station.setDataSize(fichierSortie.length() / 1024f / 1024f);
 
                             if (Configuration.getSingleton().isWriteMapping()){
     							/*CDIMappingWriter.getInstance().addMapping(
@@ -379,8 +377,7 @@ public class SWTProcess implements IRunnableWithProgress {
 
 						writerODV.writeSurvey(survey, fichierSortie, notifier);
 
-						survey
-								.setDataSize(fichierSortie.length() / 1024f / 1024f);
+						survey.setDataSize(fichierSortie.length() / 1024f / 1024f);
 
                         if (Configuration.getSingleton().isWriteMapping()){                            
                             for (Station station : survey.getStations()) {
@@ -506,8 +503,7 @@ public class SWTProcess implements IRunnableWithProgress {
 									EditConversion.nomFichierSortie);
 							writerODV.writeSurvey(survey, fichierSortie,
 									notifier);
-							survey
-									.setDataSize(fichierSortie.length() / 1024f / 1024f);
+                            station.setDataSize(fichierSortie.length() / 1024f / 1024f);
 
                             if (Configuration.getSingleton().isWriteMapping()){
                                 mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
@@ -540,8 +536,7 @@ public class SWTProcess implements IRunnableWithProgress {
 
 						writerODV.writeSurvey(survey, fichierSortie, notifier);
 
-						survey
-								.setDataSize(fichierSortie.length() / 1024f / 1024f);
+						survey.setDataSize(fichierSortie.length() / 1024f / 1024f);
 
                         if (Configuration.getSingleton().isWriteMapping()){
     						for (Station station : survey.getStations()) {

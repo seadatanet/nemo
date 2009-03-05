@@ -58,7 +58,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 
 	/**
 	 * Taille du fichier de la campagne correspondant en Mo
-	 * Utilise pour le resume CDI dans le cas d'une collection 
+	 * Utilise pour le resume CDI dans les cas de fichier multistations
 	 */
 	protected float _dataSize;
 	
