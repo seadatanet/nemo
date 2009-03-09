@@ -461,9 +461,25 @@ public class DataModel
         
         if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection())
         {
+            // GESTION Time/Date in Data
+            if (EditStation.samplingRate.isEnabled())
+            {
+                 // calcul e partir frequence echantillonnage
+                 stationModel.getTimestampModel().setComputed(true);
+             }
+             else
+            {
+                 // calcul position date/heure dans les donnees
+                 stationModel.getTimestampModel().setComputed(false);
+                 // remplissage avec les données par défaut
+                 stationModel.getTimeSeriesModel().setSampleRateConversion("*1"); //$NON-NLS-1$
+                 stationModel.getTimeSeriesInformation().setSamplingRate(Global.ZERO);
+             }
+            
             // DATE / HEURE DE FIN
             propertyModel = stationModel.getTimeSeriesModel().propertiesAt(NemoSection.S_EDATE);
             propertyModel.setUserProvided(true);
+            propertyModel.setFlag(EditStation.qcFlags.getFlagFragment(Global.ENDDATETIME)); // Flag qualite
             propertyModel = stationModel.getTimeSeriesModel().propertiesAt(NemoSection.S_ETIME);
             propertyModel.setUserProvided(true);
             propertyModel.setFlag(EditStation.qcFlags.getFlagFragment(Global.ENDDATETIME)); // Flag qualite
@@ -479,23 +495,6 @@ public class DataModel
                 propertyModel = stationModel.getTimeSeriesModel().propertiesAt(NemoSection.S_MAGNETIC);
                 propertyModel.setUserProvided(true);
                 timeSeriesInformation.setMagneticDeclination("-999");  //$NON-NLS-1$
-            }
-
-
-           // GESTION Time/Date in Data
-           if (EditStation.samplingRate.isEnabled())
-           {
-                // calcul e partir frequence echantillonnage
-                stationModel.getTimestampModel().setComputed(true);
-            }
-            else
-           {
-                // calcul position date/heure dans les donnees
-                stationModel.getTimestampModel().setComputed(false);
-                // remplissage avec les données par défaut
-                stationModel.getTimeSeriesModel().setSampleRateConversion("*1"); //$NON-NLS-1$
-                stationModel.getTimeSeriesInformation().setSamplingRate(Global.ZERO);
-                propertyModel.setUserProvided(true);
             }
         } // fin specifique SERIE TEMPO ou TRAJECTOIRE        
         
@@ -1063,6 +1062,13 @@ public class DataModel
         for (NemoSection stationSection : EditStation.listeSectionsStation){
             stationSection.fillFromModel(stationModel_modele);
         }
+        
+        // ENDDATETIME flag !!
+        if(!stationModel_modele.getInputType().equals(Global.PROFILE)){
+            PropertyModel propertyModel = stationModel_modele.getTimeSeriesModel().propertiesAt(NemoSection.S_EDATE);
+            EditStation.qcFlags.setFlagFragment(propertyModel.getFlag(), Global.ENDDATETIME, Messages.getString(Global.ENDDATETIME).trim());
+        }
+        
     }
 
     public static void main(String[] args)

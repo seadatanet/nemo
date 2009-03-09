@@ -1561,11 +1561,9 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
                 // récupération des propriétés "de fin" de l'entête de station
                 // volontairement après la récupération des paramètres
                 // DATE / TIME
-                if (EditStation.date.isInData() && EditStation.time.isInData()){
-                    if ((_inputType.equals(Global.TIMESERIES) && Float.isNaN(station.getTimeSeriesInformation().getEndDate()))
-                            || (_inputType.equals(Global.TRAJECTORY))){
-                        _timeSeriesModel.computeEndDate(station);
-                    }
+                if ((_inputType.equals(Global.TIMESERIES) && Float.isNaN(station.getTimeSeriesInformation().getEndDate()))
+                        || (_inputType.equals(Global.TRAJECTORY))){
+                    _timeSeriesModel.computeEndDate(station);
                 }
                 
                 if (_inputType.equals(Global.TRAJECTORY)){
@@ -1641,7 +1639,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
                             && (line.matches("^" + _endDataPattern+ "$") 
                                     || line.startsWith(_endDataPattern)))) 
                     || (index < _rowNumber); index++) {
-
+                
 				size += line.length();
 				a_Notifier.progress(size);
 
@@ -1887,6 +1885,9 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			if (property.equals(NemoSection.S_DATE) || property.equals(NemoSection.S_TIME)) {
 				property = Global.DATETIME;
 			}
+            if (property.equals(NemoSection.S_EDATE) || property.equals(NemoSection.S_ETIME)) {
+                property = Global.ENDDATETIME;
+            }
 			station.getMetaFlags().put(property, value);
 		}
 	}

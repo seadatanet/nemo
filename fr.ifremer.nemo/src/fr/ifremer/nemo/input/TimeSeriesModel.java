@@ -471,7 +471,7 @@ public class TimeSeriesModel implements Cloneable, PathElementHandler,
             long rate = new Float(timeSeries.getSamplingRate() * 1000.0f).longValue();
             int size = a_Station.parametersAt(0).valuesSize() - 1;
             long date = a_Station.getFullDate() + (size * rate);
-            TimeZone tz = TimeZone.getTimeZone("GMT");
+            TimeZone tz = TimeZone.getTimeZone("GMT"); //$NON-NLS-1$
             Calendar cal = Calendar.getInstance(tz);
             cal.clear();
             cal.setTimeInMillis(date);

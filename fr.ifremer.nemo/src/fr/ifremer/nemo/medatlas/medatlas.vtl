@@ -6,7 +6,7 @@ $formatter.padString($survey.countryCode, 2) $formatter.padString($survey.labora
 $formatter.padString($survey.chiefScientist, 40) Project=$formatter.padString($survey.projectName, 28)
 Regional Archiving= $formatter.padString($survey.dataCentre, 2)                   Availability=$survey.availabilityCode
 #foreach( $dataType in $survey.dataTypes )
-Data Type=$formatter.padString($dataType.code, 3) n=$formatter.padInt( $dataType.numberOfProfiles, 4) QC=N
+Data Type=$formatter.padString($dataType.code, 3) n=$formatter.padInt( $dataType.numberOfProfiles, 4) QC=$formatter.formatBoolean($dataType.qc)
 #end
 #if ($survey.comment.trim().length() > 0)
 COMMENT
