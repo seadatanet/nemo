@@ -1688,8 +1688,8 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 * @return int
 	 */
 	public int getParametersNumber() {
+        // uniquement pour MEDATLAS
         int parametersNumber = parametersSize();
-        if (_odvparameters != null) parametersNumber += _odvparameters.size();
         if (_medparameters != null) parametersNumber += _medparameters.size();
 		return parametersNumber;
 	}
