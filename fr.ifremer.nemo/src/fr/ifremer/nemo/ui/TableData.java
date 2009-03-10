@@ -205,8 +205,8 @@ public class TableData {
 				// Point pt = new Point(event.x, event.y);
 				int index = table.getTopIndex();
 
-				if (item == null)
-					return;
+//				if (item == null)
+//					return;
 
 				while (index < table.getItemCount()) {
 					boolean visible = false;
@@ -244,9 +244,7 @@ public class TableData {
 							text.setText(itemTmp.getText(i));
 							text.selectAll();
 
-							EditData.okApresReset = false;
-							ViewFile.tabItem3.setText(Messages
-									.getString("EditData.1")); //$NON-NLS-1$
+							Utils.invalidEtapes();
 
 							text.setFocus();
 							return;
@@ -300,6 +298,7 @@ public class TableData {
 				// refresh de la table
 				creationTable();
 
+                Utils.invalidEtapes();
 			}
 		});
 
@@ -323,12 +322,16 @@ public class TableData {
 			public void handleEvent(Event e) {
 				// System.out.println("up");
 				monterEltTableData();
+
+                Utils.invalidEtapes();
 			}
 		});
 		itemDown.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				// System.out.println("down");
 				descendreEltTableData();
+
+                Utils.invalidEtapes();
 			}
 		});
 		itemDel.addListener(SWT.Selection, new Listener() {
@@ -336,6 +339,8 @@ public class TableData {
 				// System.out.println("suppression");
 				supprEltTableData();
 				// remplirTableData();
+
+                Utils.invalidEtapes();
 			}
 		});
 
@@ -343,6 +348,8 @@ public class TableData {
 			public void handleEvent(Event e) {
 				table.forceFocus();
 				Utils.injectData(ViewFile.styledTextData, 11, 12);
+
+                Utils.invalidEtapes();
 			}
 		});
 
@@ -355,6 +362,8 @@ public class TableData {
 				table.getItems()[table.getSelectionIndex()].setText(12, Global.EMPTY_STRING);
 				types.get(table.getSelectionIndex()).setDebutFlag(null);
 				types.get(table.getSelectionIndex()).setFinFlag(null);
+
+                Utils.invalidEtapes();
 			}
 		});
 

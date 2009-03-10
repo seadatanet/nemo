@@ -3,7 +3,6 @@ package fr.ifremer.nemo.ui;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
-import java.util.List;
 
 import javax.xml.rpc.ServiceException;
 
@@ -20,7 +19,6 @@ import fr.ifremer.nemo.odv.ODVSurveyWriter;
 import fr.ifremer.nemo.output.ProgressNotification;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.NemoWS;
-import fr.ifremer.nemo.ws.WSDataType;
 
 public class SWTProcessWS implements IRunnableWithProgress {
 	public static ScrolledForm formEdition;

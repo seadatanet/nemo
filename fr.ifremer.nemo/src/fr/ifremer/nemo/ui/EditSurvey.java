@@ -11,7 +11,6 @@ import java.util.Map.Entry;
 
 import javax.xml.transform.TransformerException;
 
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
@@ -31,6 +30,7 @@ import org.xml.sax.SAXException;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.DataType;
 import fr.ifremer.nemo.domain.Survey;
+import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSDataType;
@@ -119,6 +119,8 @@ public class EditSurvey {
 		ViewEdit.formEdition.getBody().setLayout(new GridLayout());
 		ViewEdit.formEdition.setText(Messages.getString("EditSurvey.4")); //$NON-NLS-1$
 
+        shell.close();
+        shell = new Shell();
 		disposeElements();
 
 		// init de la arrayList des sections
@@ -164,11 +166,11 @@ public class EditSurvey {
 
 		// section reference
 		Drawing.sectionReferenceCampagne(sectionReference, Messages
-				.getString("EditSurvey.14"), Messages
-				.getString("EditSurvey.15"), textCampagne, Messages
-				.getString("EditSurvey.10"), textNom, Messages
-				.getString("EditSurvey.11"), comboNavire, Messages
-				.getString("EditSurvey.ship"));
+				.getString("EditSurvey.14"), Messages               //$NON-NLS-1$
+				.getString("EditSurvey.15"), textCampagne, Messages //$NON-NLS-1$
+				.getString("EditSurvey.10"), textNom, Messages      //$NON-NLS-1$
+				.getString("EditSurvey.11"), comboNavire, Messages  //$NON-NLS-1$
+				.getString("EditSurvey.ship"));                     //$NON-NLS-1$
 
 		// section localisation
 		listeText.add(textDateDebut);
@@ -238,7 +240,8 @@ public class EditSurvey {
 
 		buttonExpand
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					public void widgetSelected(
+					@Override
+                    public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
 
 						// raz de la valeur manuelle
@@ -277,7 +280,8 @@ public class EditSurvey {
 
 		buttonExpand2
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					public void widgetSelected(
+					@Override
+                    public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
 
 						// raz de la valeur manuelle
@@ -316,23 +320,24 @@ public class EditSurvey {
 
 		buttonValidate
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					public void widgetSelected(
+					@Override
+                    public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
 
 						// on passe en ppar l'etape e laquelle on se trouve
 						// Etape.etape(1);
-
-						Etape.validationSurvey();
-
-						formEdition.redraw();
-						formEdition.reflow(true);
+                        
+    					Etape.validationSurvey();
+    					formEdition.redraw();
+    					formEdition.reflow(true);
 
 					}
 				});
 
 		buttonRAZ
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					public void widgetSelected(
+					@Override
+                    public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
 
 						razText(listeTextSurvey);
@@ -342,7 +347,8 @@ public class EditSurvey {
 
 		buttonInitServeur
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					public void widgetSelected(
+					@Override
+                    public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
 
 						init_webService();
@@ -351,7 +357,8 @@ public class EditSurvey {
 
 		buttonXML
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					public void widgetSelected(
+					@Override
+                    public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
 
 						ouvertureDescriptionXML();
@@ -370,15 +377,15 @@ public class EditSurvey {
 						int lastIndexOfSpace = 1;
 						int indexOfCR = 1;
 						String tamponOrigine = textCommentaire.getText();
-						String tampon80 = "";
-						String tamponSortie = "";
+						String tampon80 = Global.EMPTY_STRING;
+						String tamponSortie = Global.EMPTY_STRING;
 
 						while (tamponOrigine.length() > 80) {
 
 							tampon80 = tamponOrigine.substring(0, 80);
 
-							lastIndexOfSpace = tampon80.lastIndexOf(" ");
-							indexOfCR = tampon80.indexOf("\r");
+							lastIndexOfSpace = tampon80.lastIndexOf(Global.SPACE);
+							indexOfCR = tampon80.indexOf("\r"); //$NON-NLS-1$
 
 							if (indexOfCR > -1) {
 								lastIndex = indexOfCR;
@@ -392,7 +399,7 @@ public class EditSurvey {
 
 							tamponSortie += tampon80.substring(0, lastIndex)
 									.trim()
-									+ "\r\n";
+									+ Global.RN;
 
 						}
 
@@ -477,7 +484,7 @@ public class EditSurvey {
 
 				fich = new File(nomXML);
 
-				Utils.messageErreur("fiche:" + fich);
+				Utils.messageErreur("fiche:" + fich);//$NON-NLS-1$
 				EditSurvey.chargementXML(fich);
 
 			}
@@ -596,7 +603,7 @@ public class EditSurvey {
 		}
 
 		try {
-			SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy"); //$NON-NLS-1$
 			if (survey.getFormattedStartDate() != null) {
 				EditSurvey.textDateDebut.setText(formatDate.format(new Date(
 						survey.getStartDate())));
@@ -639,13 +646,13 @@ public class EditSurvey {
 		}
 
 		if (survey.getAvailabilityCode() != null) {
-			if (survey.getAvailabilityCode().equals("P")) {
+			if (survey.getAvailabilityCode().equals("P")) { //$NON-NLS-1$
 				EditSurvey.comboConfid.select(0);
 			}
-			if (survey.getAvailabilityCode().equals("L")) {
+			if (survey.getAvailabilityCode().equals("L")) { //$NON-NLS-1$
 				EditSurvey.comboConfid.select(1);
 			}
-			if (survey.getAvailabilityCode().equals("C")) {
+			if (survey.getAvailabilityCode().equals("C")) { //$NON-NLS-1$
 				EditSurvey.comboConfid.select(2);
 			}
 		}
@@ -669,11 +676,12 @@ public class EditSurvey {
 				TypeSurvey typeSurvey = new TypeSurvey();
 				typeSurvey.setCode(dataTypes[i].getCode());
 				typeSurvey.setNombre(dataTypes[i].getNumberOfProfiles());
-				if (dataTypes[i].isQc()) {
-					typeSurvey.setQc("Y");
-				} else {
-					typeSurvey.setQc("N");
-				}
+                typeSurvey.setQc(Formatter.getSingleton().formatBoolean(dataTypes[i].isQc()));
+//				if (dataTypes[i].isQc()) {
+//					typeSurvey.setQc("Y"); //$NON-NLS-1$
+//				} else {
+//					typeSurvey.setQc("N"); //$NON-NLS-1$
+//				}
 
 				typeSurvey.setSensor(dataTypes[i].isSensor());
 
@@ -754,12 +762,7 @@ public class EditSurvey {
 
                     // des qu'on modifie une valeur,
                     // invalidation de l'étape en cours et des suivantes
-                    invalidEtape();
-                    EditSurvey.invalidEtape();
-                    EditStation.invalidEtape();
-                    EditData.invalidEtape();
-                    
-					Utils.messageErreur(Global.EMPTY_STRING);
+                    Utils.invalidEtapes();
 
 				}
 			});
@@ -862,15 +865,15 @@ public class EditSurvey {
 	public static void initCombos() {
 
 		comboConfid = new Combo(shell, SWT.READ_ONLY);
-		comboConfid.add("P - Public");
-		comboConfid.add("L - Limited");
-		comboConfid.add("C - Confidential");
+		comboConfid.add("P - Public"); //$NON-NLS-1$
+		comboConfid.add("L - Limited"); //$NON-NLS-1$
+		comboConfid.add("C - Confidential"); //$NON-NLS-1$
 		comboConfid.select(0);
 
 		// remplissage des centres de donnees
 		comboDataCentres = new Combo(shell, SWT.READ_ONLY);
 
-		CodeTableRecordType[] centres = NemoLists.getVocabList("L300");
+		CodeTableRecordType[] centres = NemoLists.getVocabList("L300"); //$NON-NLS-1$
 
 		TreeMap<String, String> treeCentre = new TreeMap<String, String>();
 
@@ -880,9 +883,9 @@ public class EditSurvey {
 		}
 
 		NemoLists.listeCentreDonnees = new ArrayList<String>();
-		String temp = "";
+		String temp = Global.EMPTY_STRING;
 		for (Entry<String, String> currentEntry : treeCentre.entrySet()) {
-			temp = currentEntry.getKey() + " - " + currentEntry.getValue();
+			temp = currentEntry.getKey() + " - " + currentEntry.getValue(); //$NON-NLS-1$
 			NemoLists.listeCentreDonnees.add(temp);
 			comboDataCentres.add(temp);
 		}
@@ -890,7 +893,7 @@ public class EditSurvey {
 
 		// Remplissage liste navires
 		comboNavire = new Combo(shell, SWT.READ_ONLY);
-		CodeTableRecordType[] navires = NemoLists.getVocabList("C174");
+		CodeTableRecordType[] navires = NemoLists.getVocabList("C174"); //$NON-NLS-1$
 
 		TreeMap<String, String> treeNavire = new TreeMap<String, String>();
 
@@ -900,16 +903,16 @@ public class EditSurvey {
 		}
 
 		NemoLists.listeNavire = new ArrayList<String>();
-		temp = "";
+		temp = Global.EMPTY_STRING;
 		for (Entry<String, String> currentEntry : treeNavire.entrySet()) {
-			temp = currentEntry.getValue() + " - " + currentEntry.getKey();
+			temp = currentEntry.getValue() + " - " + currentEntry.getKey(); //$NON-NLS-1$
 			NemoLists.listeNavire.add(temp);
 			comboNavire.add(temp);
 		}
 		
 		// Remplissage des Pays
 		comboCountries = new Combo(shell, SWT.NONE);
-		CodeTableRecordType[] records = NemoLists.getVocabList("C180");
+		CodeTableRecordType[] records = NemoLists.getVocabList("C180"); //$NON-NLS-1$
 		
 		TreeMap<String, String> treePays = new TreeMap<String, String>();
 			
@@ -918,12 +921,12 @@ public class EditSurvey {
 		}
 		
 		for (Entry<String, String> currentEntry : treePays.entrySet()) {
-			comboCountries.add(currentEntry.getValue() + " - " + currentEntry.getKey());
+			comboCountries.add(currentEntry.getValue() + " - " + currentEntry.getKey()); //$NON-NLS-1$
 		}
 		
 		// Remplissage des Regions
 		comboRegion = new Combo(shell, SWT.NONE);
-		CodeTableRecordType[] regions = NemoLists.getVocabList("C16");
+		CodeTableRecordType[] regions = NemoLists.getVocabList("C16"); //$NON-NLS-1$
 		
 		TreeMap<String, String> treeRegion = new TreeMap<String, String>();
 			
@@ -933,9 +936,9 @@ public class EditSurvey {
 		}
 
 		NemoLists.listeRegion = new ArrayList<String>();
-		temp = "";
+		temp = Global.EMPTY_STRING;
 		for (Entry<String, String> currentEntry : treeRegion.entrySet()) {
-			temp = currentEntry.getValue() + " - " + currentEntry.getKey();
+			temp = currentEntry.getValue() + " - " + currentEntry.getKey(); //$NON-NLS-1$
 			NemoLists.listeRegion.add(temp);
 			comboRegion.add(temp);
 		}
@@ -991,11 +994,7 @@ public class EditSurvey {
 			}
 		}
 
-		invalidEtape();
-		EditStation.invalidEtape();
-		EditData.invalidEtape();
-
-		Utils.messageErreur(Global.EMPTY_STRING);
+		Utils.invalidEtapes();
 		
 		// FAE0001187 : RaZ Navire et Pays et Region
 		comboCountries.deselectAll();
@@ -1003,11 +1002,8 @@ public class EditSurvey {
 		comboRegion.deselectAll();
 	}
 
-	private static void disposeElements() {
+	public static void disposeElements() {
 
-		shell.close();
-
-		shell = new Shell();
 
 		if (listeSectionsLabel != null) {
 			for (Label element : listeSectionsLabel) {
@@ -1068,12 +1064,14 @@ public class EditSurvey {
 
 
     public static void invalidEtape(){
-        okApresReset = false;
         if (!ViewFile.tabItem1.isDisposed()) {
+            okApresReset = false;
+            validee = false;
+            if (ViewFile.affiche != 1){
+                loaded = false;
+                disposeElements();
+            }
             ViewFile.tabItem1.setText(Messages.getString("EditSurvey.4")); //$NON-NLS-1$
-
-            // reinitialisation de la conversion
-            if (DataModel.inputModel != null) DataModel.inputModel.setConverted(false);
         }
     }
 

@@ -23,12 +23,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.ui.DataModel;
-import fr.ifremer.nemo.ui.EditData;
-import fr.ifremer.nemo.ui.EditDesc;
-import fr.ifremer.nemo.ui.EditStation;
-import fr.ifremer.nemo.ui.EditSurvey;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.ViewFile;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -77,13 +72,13 @@ public class Couple implements UIobject
         if (valueText != null){
             valueText.addModifyListener(new ModifyListener() {
                 public void modifyText(ModifyEvent event) {
-                    NemoSection.invalidEtapes();
+                    Utils.invalidEtapes();
                 }
             });
         }else if (valueCombo != null){
             valueCombo.addModifyListener(new ModifyListener() {
                 public void modifyText(ModifyEvent event) {
-                    NemoSection.invalidEtapes();
+                    Utils.invalidEtapes();
                 }
             });
         }

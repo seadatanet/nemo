@@ -640,7 +640,8 @@ public class DataModel
 
         // forcage affichage onglet 0
         ViewFile.tabFolder.setSelection(0);
-
+        ViewFile.affiche = 0;
+        //Utils.invalidEtapes();
         // RAZ global
         Utils.razGlobal();
 

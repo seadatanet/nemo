@@ -9,9 +9,9 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 import fr.ifremer.nemo.ui.object.ComboType;
+import fr.ifremer.nemo.ui.object.NemoSection;
 import fr.ifremer.nemo.ui.object.QCflagsSection;
 import fr.ifremer.nemo.ui.object.StationSection;
-import fr.ifremer.nemo.ui.object.NemoSection;
 import fr.ifremer.nemo.ui.object.AutoLine.MetaInData;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
@@ -63,6 +63,8 @@ public class EditStation {
 		ViewEdit.formEdition.getBody().setLayout(new GridLayout());
 		ViewEdit.formEdition.setText(Messages.getString("EditStation.1")); //$NON-NLS-1$
 
+        shell.close();
+        shell = new Shell();
 		disposeElements();        
         
 		// init des objets
@@ -350,17 +352,19 @@ public class EditStation {
             stationSection.initSection(s.getBody());
         }
 
-		if (DataModel.station_modele != null) {
-			if (DataModel.station_modele.getDataType() != null) {
-				Utils.selectComboCode(dataType.getDatatype().getValueCombo(),
-						DataModel.station_modele.getDataType().getCode());
-			}
-		} else if (DataModel.station != null) {
-			if (DataModel.station.getDataType() != null) {
-				Utils.selectComboCode(dataType.getDatatype().getValueCombo(),
-						DataModel.station.getDataType().getCode());
-			}
-		}
+//		if (DataModel.station_modele != null) {
+//			if (DataModel.station_modele.getDataType() != null) {
+//				Utils.selectComboCode(dataType.getDatatype().getValueCombo(),
+//						DataModel.station_modele.getDataType().getCode());
+//			}
+//		} else if (DataModel.station != null) {
+//			if (DataModel.station.getDataType() != null) {
+//                Combo test = dataType.getDatatype().getValueCombo();
+//                
+//				Utils.selectComboCode(dataType.getDatatype().getValueCombo(),
+//						DataModel.station.getDataType().getCode());
+//			}
+//		}
 
 
 		ViewEdit.formEdition.setText(Messages.getString("EditStation.51")); //$NON-NLS-1$
@@ -402,16 +406,11 @@ public class EditStation {
             stationSection.razValues();
         }
         
-        invalidEtape();
-        EditData.invalidEtape();
-        Utils.messageErreur(Global.EMPTY_STRING);
+        Utils.invalidEtapes();
     }
 
 	private static void disposeElements() {
 
-		shell.close();
-
-		shell = new Shell();
         if (listeSectionsStation != null){            
             for (NemoSection stationSection : listeSectionsStation){
                 stationSection.dispose();
@@ -437,10 +436,12 @@ public class EditStation {
 
     public static void invalidEtape(){
         okApresReset = false;
+        validee = false;
+        if (ViewFile.affiche != 2){
+            loaded = false;
+            disposeElements();
+        }
         ViewFile.tabItem2.setText(Messages.getString("EditStation.1"));         //$NON-NLS-1$
-
-        // reinitialisation de la conversion
-        if (DataModel.inputModel != null) DataModel.inputModel.setConverted(false);
     }
     
 }

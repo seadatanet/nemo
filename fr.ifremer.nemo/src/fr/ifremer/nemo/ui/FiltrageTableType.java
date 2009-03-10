@@ -179,7 +179,8 @@ public class FiltrageTableType {
 
 			filtreButtonCancel
 					.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-						public void widgetSelected(
+						@Override
+                        public void widgetSelected(
 								org.eclipse.swt.events.SelectionEvent e) {
 							// System.out.println("valider cancel liste");
 							shell.close();
@@ -189,7 +190,8 @@ public class FiltrageTableType {
 
 			filtreButtonSelectionner
 					.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-						public void widgetSelected(
+						@Override
+                        public void widgetSelected(
 								org.eclipse.swt.events.SelectionEvent e) {
 
 							listeOuverte = 0;
@@ -308,6 +310,7 @@ public class FiltrageTableType {
 							} else if (tabOrigine.equals(Global.PARAMETER)) {
 
 								// ajout d'un parameter dans l'onglet Data
+                                Utils.invalidEtapes();
 
 								TypeData typeData = new TypeData();
 

@@ -207,7 +207,7 @@ public class StationSection extends NemoSection
      */
     @Override
     public void dispose(){
-        
+        super.dispose();
         if (datatype != null) datatype.dispose();
         if (converter != null) converter.dispose();
         if (manualInput != null)manualInput.dispose();

@@ -451,6 +451,7 @@ public class ViewFile extends ViewPart
                                 // affichage etape0 dans formulaire
                                 // d'edition de parametres
                                 Utils.razGlobal();
+                                //Utils.invalidEtapes();
                                 EditDesc.affichageEdition();
 
                             }
@@ -510,6 +511,7 @@ public class ViewFile extends ViewPart
                                 // d'edition de
                                 // parametres
                                 Utils.razGlobal();
+                                //Utils.invalidEtapes();
                                 EditDesc.affichageEdition();
 
                             }
@@ -555,6 +557,7 @@ public class ViewFile extends ViewPart
                             // d'edition de
                             // parametres
                             Utils.razGlobal();
+                            //Utils.invalidEtapes();
                             EditDesc.affichageEdition();
 
                             tabItem1.dispose();
@@ -607,6 +610,7 @@ public class ViewFile extends ViewPart
                             // d'edition de
                             // parametres
                             Utils.razGlobal();
+                            //Utils.invalidEtapes();
                             EditDesc.affichageEdition();
 
                             tabItem1.dispose();

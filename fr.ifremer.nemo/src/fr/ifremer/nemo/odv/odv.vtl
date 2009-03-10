@@ -67,7 +67,7 @@ $configuration.getSep()$param.code [$param.unit]$configuration.getSep()$configur
 #foreach( $i in  $range )
 ## ---- determination de valeurs d'entête variables pour Trajectory
 #if ($stationModel.isTrajectory()) 
-#set ($stationRef = $i)
+#set ($stationRef = $i + 1)
 #set ($dateTime   = $station.getVariantDateTime($i))
 #set ($longitude  = $station.getVariant($i, "LONX"))
 #set ($latitude   = $station.getVariant($i, "LATX"))

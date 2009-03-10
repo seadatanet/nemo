@@ -9,7 +9,6 @@ import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
@@ -23,22 +22,10 @@ public class EditDesc {
     // /////////////////////////////////////////
 
     public static Section sectionEnteteFichier, sectionEnteteStation,
-            sectionFinStation, sectionDate, sectionHeure, sectionDonnees,
-            sectionRuptureDonnees, sectionTest, sectionTest2 = null;
+            sectionFinStation, sectionRuptureDonnees = null;
 
     public static Text lignesEnteteFichier, lignesEnteteStation,
-            lignesFinStation, octetsEnteteStationLigne,
-            octetsEnteteStationDebut, octetsEnteteStationFin, enteteDonnees,
-            upletDonnees, finDonnees, indicFinDonnees, ruptureDonneesNoLigne,
-            ruptureDonneesDebut, ruptureDonneesFin, ligneNbreMesures,
-            debutNbreMesures, finNbreMesures, ligneTest, debutTest, finTest,
-            manuelTest, manuelTest2, nbreLignesMesures, txtManuel = null;
-
-    public static Label labelEnteteFichier, labelEnteteStation,
-            labelFinStation, labelDonneesEntete, labelDonneesUplet,
-            labelDonneesFinDonnees, labelRuptureIndic,
-            labelRuptureDonneesNoLigne, labelRuptureDonneesDebut,
-            labelRuptureDonneesFin = null;
+            lignesFinStation, txtManuel = null;
 
     public static Button buttonRAZ, buttonExpandDesc, 
             buttonValidateDesc, buttonLignesEnteteStation,
@@ -110,6 +97,8 @@ public class EditDesc {
             listeTextDesc = new ArrayList<Text>();
 
             // init composants IHM
+            shell.close();
+            shell = new Shell();
             disposeElements();
             
             initSections();
@@ -296,12 +285,7 @@ public class EditDesc {
         sectionEnteteFichier = new Section(shell, SWT.NONE);
         sectionEnteteStation = new Section(shell, SWT.NONE);
         sectionFinStation = new Section(shell, SWT.NONE);
-        sectionDate = new Section(shell, SWT.NONE);
-        sectionHeure = new Section(shell, SWT.NONE);
-        sectionDonnees = new Section(shell, SWT.NONE);
         sectionRuptureDonnees = new Section(shell, SWT.NONE);
-        sectionTest = new Section(shell, SWT.NONE);
-        sectionTest2 = new Section(shell, SWT.NONE);
 
     }
 
@@ -310,37 +294,10 @@ public class EditDesc {
         listeTextDesc.add(lignesEnteteFichier);
         lignesEnteteStation = new Text(shell, SWT.BORDER);
         listeTextDesc.add(lignesEnteteStation);
-        octetsEnteteStationLigne = new Text(shell, SWT.BORDER);
-        listeTextDesc.add(octetsEnteteStationLigne);
-        octetsEnteteStationDebut = new Text(shell, SWT.BORDER);
-        listeTextDesc.add(octetsEnteteStationDebut);
-        octetsEnteteStationFin = new Text(shell, SWT.BORDER);
-        listeTextDesc.add(octetsEnteteStationFin);
         lignesFinStation = new Text(shell, SWT.BORDER);
         listeTextDesc.add(lignesFinStation);
-        enteteDonnees = new Text(shell, SWT.BORDER);
-        listeTextDesc.add(enteteDonnees);
-        upletDonnees = new Text(shell, SWT.BORDER);
-        listeTextDesc.add(upletDonnees);
-        finDonnees = new Text(shell, SWT.BORDER);
-        listeTextDesc.add(finDonnees);
-        indicFinDonnees = new Text(shell, SWT.BORDER);
-        listeTextDesc.add(indicFinDonnees);
-        ruptureDonneesNoLigne = new Text(shell, SWT.BORDER);
-        listeTextDesc.add(ruptureDonneesNoLigne);
-        ruptureDonneesDebut = new Text(shell, SWT.BORDER);
-        listeTextDesc.add(ruptureDonneesDebut);
-        ruptureDonneesFin = new Text(shell, SWT.BORDER);
-        listeTextDesc.add(ruptureDonneesFin);
-        ligneNbreMesures = new Text(shell, SWT.BORDER);
-        listeTextDesc.add(ligneNbreMesures);
-        debutNbreMesures = new Text(shell, SWT.BORDER);
-        listeTextDesc.add(debutNbreMesures);
-        finNbreMesures = new Text(shell, SWT.BORDER);
-        listeTextDesc.add(finNbreMesures);
-        nbreLignesMesures = new Text(shell, SWT.BORDER);
-        listeTextDesc.add(nbreLignesMesures);
         txtManuel = new Text(shell, SWT.BORDER);
+        listeTextDesc.add(txtManuel);
         
         // remplissage de la liste des textes et ajout des listeners
         ajoutModifyListenerText(listeTextDesc);
@@ -368,14 +325,7 @@ public class EditDesc {
 
                     // des qu'on modifie une valeur,
                     // invalidation de l'étape en cours et des suivantes
-                    invalidEtape();
-                    EditSurvey.invalidEtape();
-                    EditStation.invalidEtape();
-                    EditData.invalidEtape();
-
-
-                    Utils.messageErreur(Global.EMPTY_STRING);
-
+                    Utils.invalidEtapes();
                 }
             });
 
@@ -390,12 +340,7 @@ public class EditDesc {
         lignesFinStation.setText(Global.ZERO);
 
         // invalidation de l'étape en cours et des suivantes
-        invalidEtape();
-        EditSurvey.invalidEtape();
-        EditStation.invalidEtape();
-        EditData.invalidEtape();
-
-        Utils.messageErreur(Global.EMPTY_STRING);
+        Utils.invalidEtapes();
     }
 
     public static void nomNemo() {
@@ -462,33 +407,17 @@ public class EditDesc {
             EditDesc.txtManuel.setEnabled(false);
             EditDesc.btnInjectFin.setEnabled(false);
         }
+        
+        // invalidation de l'étape en cours et des suivantes
+        Utils.invalidEtapes();
     }
 
-    private static void disposeElements()
-    {
-        
-        shell.close();
-        
-        shell = new Shell();
-                
+    public static void disposeElements()
+    {              
         if (lignesEnteteFichier != null) {
             lignesEnteteFichier.dispose();
             lignesEnteteStation.dispose();
-            octetsEnteteStationLigne.dispose();
-            octetsEnteteStationDebut.dispose();
-            octetsEnteteStationFin.dispose();
             lignesFinStation.dispose();
-            enteteDonnees.dispose();
-            upletDonnees.dispose();
-            finDonnees.dispose();
-            indicFinDonnees.dispose();
-            ruptureDonneesNoLigne.dispose();
-            ruptureDonneesDebut.dispose();
-            ruptureDonneesFin.dispose();
-            ligneNbreMesures.dispose();
-            debutNbreMesures.dispose();
-            finNbreMesures.dispose();
-            nbreLignesMesures.dispose();
             txtManuel.dispose();
         }
 
@@ -502,27 +431,29 @@ public class EditDesc {
             radManuel.dispose();
             btnInjectFin.dispose();
         }
-
-        if (sectionEnteteFichier != null) {
-            sectionEnteteFichier.dispose();
-            sectionEnteteStation.dispose();
-            sectionFinStation.dispose();
-            sectionDate.dispose();
-            sectionHeure.dispose();
-            sectionDonnees.dispose();
-            sectionRuptureDonnees.dispose();
-            sectionTest.dispose();
-            sectionTest2.dispose();
+        
+        for (Section section : listeSectionsDesc){
+            section.dispose();
         }
+        
+        
+//        if (sectionEnteteFichier != null) {
+//            sectionEnteteFichier.dispose();
+//            sectionEnteteStation.dispose();
+//            sectionFinStation.dispose();
+//            sectionRuptureDonnees.dispose();
+//        }
     }
 
 
     public static void invalidEtape(){
         okApresReset = false;
+        validee = false;
+        if (ViewFile.affiche != 0){
+            loaded = false;
+            disposeElements();
+        }
         ViewFile.tabItem.setText(Messages.getString("EditDesc.descriptionFichier")); //$NON-NLS-1$
-
-        // reinitialisation de la conversion
-        if (DataModel.inputModel != null) DataModel.inputModel.setConverted(false);
     }
     
 }

@@ -133,7 +133,7 @@ public class Utils {
 
 		if (raz) {
 			Utils.razGlobal();
-
+		    //invalidEtapes();
 			DataModel.ouverture = false;
 
 			// reset de l'etape de conversion
@@ -731,363 +731,107 @@ public class Utils {
 
 	}
 
+	/**
+	 * @param onglet : destination
+	 */
 	public static void validationEtape(int onglet) {
-		// messageErreur("Vous devez imperativement terminer la ou les etapes
-		// precedentes avant de continuer." +"\n==>etapes " + tmp + " e " +
-		// onglet);
 
 		// check etape/onglet
 
-		// e partir de onglet 0
-
-		if ((onglet == 1) && (ViewFile.affiche == 0)) {
-			ViewLog.aideSurvey();
-			if (EditSurvey.validee) {
-				EditDesc.razEdition();
-				EditSurvey.DrawingBack();
-			} else {
-				if (EditDesc.validee) {
-					EditDesc.razEdition();
-					EditSurvey.affichageEdition();
-				} else {
-					if (EditDesc.loaded) {
-						EditDesc.razEdition();
-					}
-					ViewFile.affiche = 1;
-				}
-
-			}
-		}
-
-		if ((onglet == 2) && (ViewFile.affiche == 0)) {
-			ViewLog.aideStation();
-			if (EditStation.validee) {
-				EditDesc.razEdition();
-				EditStation.DrawingBack();
-			} else {
-				if (EditSurvey.validee) {
-					EditDesc.razEdition();
-					EditStation.affichageEdition();
-				} else {
-					if (EditDesc.loaded) {
-						EditDesc.razEdition();
-					}
-					ViewFile.affiche = 2;
-				}
-
-			}
-		}
-
-		if ((onglet == 3) && (ViewFile.affiche == 0)) {
-			ViewLog.aideData();
-			if (EditData.validee) {
-				EditDesc.razEdition();
-				EditData.DrawingBack();
-			} else {
-				if (EditStation.validee) {
-					EditDesc.razEdition();
-
-					if (EditData.loaded) {
-						EditData.DrawingBack();
-					} else {
-						EditData.affichageEdition();
-					}
-
-				} else {
-					if (EditDesc.loaded) {
-						EditDesc.razEdition();
-					}
-					ViewFile.affiche = 3;
-				}
-
-			}
-		}
-
-		if ((onglet == 4) && (ViewFile.affiche == 0)) {
-			ViewLog.aideConversion();
-			if (EditData.validee) {
-				EditDesc.razEdition();
-				EditSurvey.affichageEdition();
-			} else {
-				if (EditDesc.loaded) {
-					EditDesc.razEdition();
-				}
-				ViewFile.affiche = 4;
-			}
-		}
-
-		// *********************************************************************//
-		// e partir de onglet 1
-
-		if ((onglet == 2) && (ViewFile.affiche == 1)) {
-			ViewLog.aideStation();
-			if (EditStation.validee) {
-				EditSurvey.razEdition();
-				EditStation.DrawingBack();
-			} else {
-				if (EditSurvey.validee) {
-					EditSurvey.razEdition();
-					EditStation.affichageEdition();
-				} else {
-					if (EditSurvey.loaded) {
-						EditSurvey.razEdition();
-						ViewFile.affiche = 2;
-					}
-
-				}
-			}
-		}
-
-		if ((onglet == 0) && (ViewFile.affiche == 1)) {
-			ViewLog.aideDesc();
-			if (EditDesc.validee) {
-				if (EditSurvey.loaded) {
-					EditSurvey.razEdition();
-				}
-				EditDesc.DrawingBack();
-			} else {
-				if (ViewFile.fileLoaded) {
-					EditDesc.affichageEdition();
-				}
-
-				ViewFile.affiche = 0;
-			}
-		}
-
-		if ((onglet == 3) && (ViewFile.affiche == 1)) {
-			ViewLog.aideData();
-			if (EditData.validee) {
-				EditSurvey.razEdition();
-				EditData.DrawingBack();
-			} else {
-				if (EditStation.validee) {
-					EditSurvey.razEdition();
-
-					if (EditData.loaded) {
-						EditData.DrawingBack();
-					} else {
-						EditData.affichageEdition();
-					}
-
-				} else {
-					if (EditSurvey.loaded) {
-						EditSurvey.razEdition();
-						ViewFile.affiche = 3;
-					}
-
-				}
-			}
-		}
-
-		if ((onglet == 4) && (ViewFile.affiche == 1)) {
-			ViewLog.aideConversion();
-			if (EditData.validee) {
-				EditSurvey.razEdition();
-				EditConversion.affichageEdition();
-			} else {
-				EditSurvey.razEdition();
-				ViewFile.affiche = 4;
-			}
-		}
-
-		// *********************************************************************//
-		// e partir de onglet 2
-
-		if ((onglet == 3) && (ViewFile.affiche == 2)) {
-			ViewLog.aideData();
-			if (EditData.validee) {
-				EditStation.razEdition();
-				EditData.DrawingBack();
-			} else {
-				if (EditStation.validee) {
-					EditStation.razEdition();
-
-					if (EditData.loaded) {
-						EditData.DrawingBack();
-					} else {
-						EditData.affichageEdition();
-					}
-
-				} else {
-					if (EditStation.loaded) {
-						EditStation.razEdition();
-						ViewFile.affiche = 3;
-					}
-
-				}
-			}
-		}
-
-		if ((onglet == 1) && (ViewFile.affiche == 2)) {
-			ViewLog.aideSurvey();
-			if (EditSurvey.validee) {
-				if (EditStation.loaded) {
-					EditStation.razEdition();
-				}
-				EditSurvey.DrawingBack();
-			} else {
-				if (EditSurvey.loaded) {
-					EditSurvey.affichageEdition();
-				}
-				ViewFile.affiche = 1;
-			}
-		}
-
-		if ((onglet == 0) && (ViewFile.affiche == 2)) {
-			ViewLog.aideDesc();
-			if (EditDesc.validee) {
-				if (EditStation.loaded) {
-					EditStation.razEdition();
-				}
-				EditDesc.DrawingBack();
-			} else {
-				if (ViewFile.fileLoaded) {
-					EditDesc.affichageEdition();
-				}
-				ViewFile.affiche = 0;
-			}
-		}
-
-		if ((onglet == 4) && (ViewFile.affiche == 2)) {
-			ViewLog.aideConversion();
-			if (EditData.validee) {
-				EditStation.razEdition();
-				EditConversion.affichageEdition();
-			} else {
-
-				if (EditStation.loaded) {
-					EditStation.razEdition();
-					ViewFile.affiche = 4;
-
-				}
-			}
-		}
-
-		// *********************************************************************//
-
-		// e partir de onglet 3
-		if ((onglet == 0) && (ViewFile.affiche == 3)) {
-			ViewLog.aideDesc();
-			if (EditDesc.validee) {
-				if (EditData.loaded) {
-					EditData.razEdition();
-				}
-				EditDesc.DrawingBack();
-			} else {
-				if (ViewFile.fileLoaded) {
-					EditDesc.affichageEdition();
-				}
-				ViewFile.affiche = 0;
-			}
-		}
-
-		if ((onglet == 1) && (ViewFile.affiche == 3)) {
-			ViewLog.aideSurvey();
-			if (EditSurvey.validee) {
-				if (EditData.loaded) {
-					EditData.razEdition();
-				}
-				EditSurvey.DrawingBack();
-			} else {
-				if (EditSurvey.loaded) {
-					EditSurvey.affichageEdition();
-				}
-				ViewFile.affiche = 1;
-			}
-		}
-
-		if ((onglet == 2) && (ViewFile.affiche == 3)) {
-			ViewLog.aideStation();
-			if (EditStation.validee) {
-				if (EditData.loaded) {
-					EditData.razEdition();
-				}
-				EditStation.DrawingBack();
-			} else {
-				if (EditStation.loaded) {
-					EditStation.affichageEdition();
-				}
-				ViewFile.affiche = 2;
-			}
-		}
-
-		if ((onglet == 4) && (ViewFile.affiche == 3)) {
-			ViewLog.aideConversion();
-			if (EditData.validee) {
-				EditData.razEdition();
-				EditConversion.affichageEdition();
-			} else {
-				if (EditData.loaded) {
-					EditData.razEdition();
-					ViewFile.affiche = 4;
-				}
-			}
-
-		}
-
-		// *********************************************************************//
-
-		if ((onglet == 0) && (ViewFile.affiche == 4)) {
-			ViewLog.aideDesc();
-			if (EditDesc.validee) {
-				if (EditConversion.loaded) {
-					EditConversion.razEdition();
-				}
-				EditDesc.DrawingBack();
-			} else {
-				if (ViewFile.fileLoaded) {
-					EditDesc.affichageEdition();
-				}
-				ViewFile.affiche = 0;
-			}
-		}
-
-		if ((onglet == 1) && (ViewFile.affiche == 4)) {
-			ViewLog.aideSurvey();
-			if (EditSurvey.validee) {
-				if (EditConversion.loaded) {
-					EditConversion.razEdition();
-				}
-				EditSurvey.DrawingBack();
-			} else {
-				if (EditSurvey.loaded) {
-					EditSurvey.affichageEdition();
-				}
-				ViewFile.affiche = 1;
-			}
-		}
-
-		if ((onglet == 2) && (ViewFile.affiche == 4)) {
-			ViewLog.aideStation();
-			if (EditStation.validee) {
-				if (EditConversion.loaded) {
-					EditConversion.razEdition();
-				}
-				EditStation.DrawingBack();
-			} else {
-				if (EditStation.loaded) {
-					EditStation.affichageEdition();
-				}
-				ViewFile.affiche = 2;
-			}
-		}
-
-		if ((onglet == 3) && (ViewFile.affiche == 4)) {
-			ViewLog.aideData();
-			if (EditData.validee) {
-				if (EditConversion.loaded) {
-					EditConversion.razEdition();
-				}
-				EditData.DrawingBack();
-			} else {
-				if (EditData.loaded) {
-					EditData.DrawingBack();
-				}
-				ViewFile.affiche = 3;
-			}
-		}
+		// ViewFile.affiche = onglet courant
+        // onglet           = onglet destination
+        
+	    switch (onglet){
+            case 0 :
+                ViewLog.aideDesc();
+                razEditionCurrent();
+                if (EditDesc.loaded){
+                    EditDesc.DrawingBack();
+                }else if (ViewFile.fileLoaded){
+                    EditDesc.affichageEdition();
+                }else{
+                    ViewFile.textAreaDescription.setText(Global.EMPTY_STRING);
+                }
+                ViewFile.affiche = 0;
+                break;
+            case 1 :
+                ViewLog.aideSurvey();
+                razEditionCurrent();
+                if (EditSurvey.loaded) {
+                    EditSurvey.DrawingBack();
+                } else if (EditDesc.validee) {
+                    EditSurvey.affichageEdition();
+                }else{
+                    ViewFile.styledTextCampagne.setText(Global.EMPTY_STRING);
+                }
+                ViewFile.affiche = 1;
+                break;
+            case 2 :
+                ViewLog.aideStation();
+                razEditionCurrent();
+                if (EditStation.loaded){
+                    EditStation.DrawingBack();
+                }else if ((!ViewFile.tabItem1.isDisposed() && EditSurvey.validee)
+                            || (ViewFile.tabItem1.isDisposed() && EditDesc.validee)){
+                    EditStation.affichageEdition();
+                }else{
+                    ViewFile.styledTextStation.setText(Global.EMPTY_STRING);
+                }
+                ViewFile.affiche = 2;
+                break;
+            case 3 :
+                ViewLog.aideData();
+                razEditionCurrent();
+                if (EditData.loaded) {
+                    EditData.DrawingBack();
+                } else if (EditStation.validee) {
+                    EditData.affichageEdition();
+                }else{
+                    ViewFile.styledTextData.setText(Global.EMPTY_STRING);
+                }
+                ViewFile.affiche = 3;
+                break;
+            case 4 :
+                ViewLog.aideConversion();
+                razEditionCurrent();
+                if (EditConversion.loaded){
+                    EditConversion.DrawingBack();
+                }else if (EditData.validee){
+                    EditConversion.affichageEdition();
+                }
+                ViewFile.affiche = 4;
+                break;
+        }
 
 	}
+    
+    private static void razEditionCurrent(){
+        switch (ViewFile.affiche){
+            case 0 :
+                // from FILE
+                if (EditDesc.loaded) EditDesc.razEdition();
+                break;
+            case 1 :
+                // from CRUISE
+                if (EditSurvey.loaded) EditSurvey.razEdition();
+                break;
+            case 2 :
+                // from STATION
+                if (EditStation.loaded) EditStation.razEdition();
+                break;
+            case 3 :
+                // from DATA
+                if (EditData.loaded) EditData.razEdition();
+                break;
+            case 4 :
+                // from DATA
+                if (EditConversion.loaded) EditConversion.razEdition();
+                break;
+            default :
+                break;
+        }
+    }
+    
 
 	public static Boolean findFiles(String directoryPath, boolean raz) {
 		File directory = new File(directoryPath);
@@ -1435,114 +1179,12 @@ public class Utils {
 
 	public static void razGlobal() {
 		// efface tous les onglets qui ont ete affiches jusque le en preparation
-		// du chargement
-		// d'un nouveau modele
-
-		// si au moins une des sections d'un onglet est creee alors on peut les
-		// effacer toutes
+		// du chargement d'un nouveau modele
 		if (EditDesc.sectionEnteteFichier != null) {
 			// //effacement boutons
 			EditDesc.razEdition();
 		}
-
-		if (EditSurvey.sectionReference != null) {
-
-			// effacement des boutons valider/expand/init serveur
-			EditSurvey.buttonExpand.dispose();
-			EditSurvey.buttonExpand2.dispose();
-			EditSurvey.buttonValidate.dispose();
-			EditSurvey.buttonXML.dispose();
-			EditSurvey.buttonInitServeur.dispose();
-			EditSurvey.buttonRAZ.dispose();
-
-			for (int i = 0; i <= EditSurvey.listeSectionsSurvey.size() - 1; i++) {
-				EditSurvey.listeSectionsSurvey.get(i).dispose();
-			}
-			// effacement titre formulaire
-			ViewEdit.formEdition.setText(""); //$NON-NLS-1$
-
-			// refresh global
-			ViewEdit.formEdition.reflow(true);
-
-			EditSurvey.validee = false;
-			EditSurvey.loaded = false;
-
-		}
-
-		if (EditStation.dataType != null) {
-
-			// effacement des boutons valider/expand/init serveur
-			EditStation.buttonExpand.dispose();
-			EditStation.buttonValidate.dispose();
-			EditStation.buttonRAZ.dispose();
-
-            for (NemoSection section : EditStation.listeSectionsStation){
-                section.dispose();
-            }
-
-			// titre e vide
-			ViewEdit.formEdition.setText(""); //$NON-NLS-1$
-
-			// refresh global
-			ViewEdit.formEdition.reflow(true);
-
-			EditStation.loaded = false;
-			EditStation.validee = false;
-		}
-
-		if (EditData.sectionTypeAjouter != null) {
-			// effacement des boutons valider/expand/init serveur
-
-			EditData.buttonValidate.dispose();
-			EditData.buttonRAZ.dispose();
-
-			// EditData.sectionTotal.dispose();
-			for (int i = 0; i <= EditData.listeSectionsData.size() - 1; i++) {
-				EditData.listeSectionsData.get(i).dispose();
-			}
-
-			// titre e vide
-			ViewEdit.formEdition.setText(""); //$NON-NLS-1$
-
-			// refresh global
-			ViewEdit.formEdition.reflow(true);
-
-			EditData.loaded = false;
-			EditData.validee = false;
-		}
-
-		// effacement de la table data
-		if (ViewFile.tableData != null) {
-			ViewFile.tableData.dispose();
-		}
-		;
-
-		EditDesc.validee = false;
-
-		// effacement des listes des onglets Survey et Data
-		if (TableDataSurvey.types != null) {
-			TableDataSurvey.types = new ArrayList<TypeSurvey>();
-		}
-		if (TableData.types != null) {
-			TableData.types = new ArrayList<TypeData>();
-		}
-
-		// reset des noms des onglets
-		ViewFile.tabItem.setText(Messages.getString("Utils.21")); //$NON-NLS-1$
-		if (!ViewFile.tabItem1.isDisposed()) {
-			ViewFile.tabItem1.setText(Messages.getString("Utils.22")); //$NON-NLS-1$		
-		}
-		ViewFile.tabItem2.setText(Messages.getString("Utils.23")); //$NON-NLS-1$
-		ViewFile.tabItem3.setText(Messages.getString("Utils.24")); //$NON-NLS-1$
-		ViewFile.tabItem9.setText(Messages.getString("Utils.25")); //$NON-NLS-1$
-
-		// effacement du bouton conversion
-		if (EditConversion.buttonConversion != null) {
-			EditConversion.razEdition();
-		}
-
-		ViewEdit.formEdition.reflow(true);
-
+        invalidEtapes();
 	}
 
 	public static void messageInfo(String message) {
@@ -1793,5 +1435,35 @@ public class Utils {
             numeric = false;
         }
         return numeric;
+    }
+
+    public static void invalidEtapes(){
+        // on modifie la valeur du champ texte
+        // dès qu'on modifie une valeur, on invalide l'étape
+        // remise du nom onglet à valeur par défaut
+    
+        // on invalide toutes les étapes suivantes avec le second
+        // flag okApresReset à false
+        int currentTab = ViewFile.affiche;
+        
+        if (currentTab <= 0) // onglet FILE ou inférieur en cours
+            EditDesc.invalidEtape();
+        
+        if (currentTab <= 1) // onglet CRUISE ou inférieur en cours
+            EditSurvey.invalidEtape();
+        
+        if (currentTab <= 2) // onglet STATION ou inférieur en cours
+            EditStation.invalidEtape();
+        
+        if (currentTab <= 3) // onglet DATA ou inférieur en cours
+            EditData.invalidEtape();
+        
+        if (currentTab <= 4) // onglet CONVERSION ou inférieur en cours
+            EditConversion.invalidEtape();
+        
+        // reinitialisation de la conversion
+        if (DataModel.inputModel != null) DataModel.inputModel.setConverted(false);
+    
+        messageErreur(Global.EMPTY_STRING);
     }
 }

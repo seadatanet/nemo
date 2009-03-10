@@ -854,4 +854,17 @@ public class EditConversion extends Thread {
     {
         return warningStation;
     }
+    
+    public static void disposeElements(){
+        if (buttonConversion != null) buttonConversion.dispose();
+    }
+
+
+    public static void invalidEtape(){
+        if (ViewFile.affiche != 4){
+            loaded = false;
+            disposeElements();
+        }
+
+    }
 }
