@@ -734,37 +734,6 @@ public class OptionsAction extends Action implements ISelectionListener,
         comboAccesDonnees = new Combo(groupCDI, SWT.BORDER);
         GridDataFactory.fillDefaults().grab(false, false).applyTo(
             comboAccesDonnees);
-
-       /* labelArboMapping = new Label(groupCDI, SWT.NONE);
-        labelArboMapping.setText(Messages.getString("OptionsAction.32"));
-        labelArboMapping.pack();
-
-        Composite compoRep = new Composite(groupCDI, SWT.NONE);
-        GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoRep);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(compoRep);
-
-        textArboMapping = new Text(compoRep, SWT.BORDER);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(
-            textArboMapping);
-
-        buttonArboMapping = new Button(compoRep, SWT.NONE);
-        buttonArboMapping.setText("...");
-        buttonArboMapping.pack();
-
-        buttonArboMapping
-            .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-                public void widgetSelected(
-                        org.eclipse.swt.events.SelectionEvent e)
-                {
-                    DirectoryDialog dialog =
-                        new DirectoryDialog(PlatformUI.getWorkbench()
-                            .getDisplay().getActiveShell(), SWT.OPEN
-                                | SWT.APPLICATION_MODAL);
-                    dialog.setText(Messages.getString("OptionsAction.32")); //$NON-NLS-1$
-                    dialog.setFilterPath(textArboMapping.getText());
-                    textArboMapping.setText(dialog.open());
-                }
-            });*/
     }
     
 
@@ -1191,7 +1160,7 @@ public class OptionsAction extends Action implements ISelectionListener,
             message.append(checkCombo(comboCodeEdmoDonnees, "OptionsAction.24")); //$NON-NLS-1$
             message.append(checkCombo(comboIdEdmoRespDonnees, "OptionsAction.25")); //$NON-NLS-1$
             message.append(checkCombo(comboIdEdmoDistDonnees, "OptionsAction.26")); //$NON-NLS-1$
-            message.append(checkText(textUrlCdi, "OptionsAction.22")); //$NON-NLS-1$
+            message.append(checkText(textUrlCdi, "OptionsAction.22", " - ")); //$NON-NLS-1$ //$NON-NLS-2$
             message.append(checkCombo(comboMethodeCdi, "OptionsAction.23")); //$NON-NLS-1$
             message.append(checkCombo(comboTypePlateForme, "ViewFile.typePlateForme")); //$NON-NLS-1$
 
@@ -1199,7 +1168,18 @@ public class OptionsAction extends Action implements ISelectionListener,
                 message.insert(0, Messages.getString("OptionsAction.checkCDI")); //$NON-NLS-1$
                 blnOK = false;
             }
-        }        
+        }    
+        
+        if (checkMapping.getSelection())        
+        { 
+            String errorMapping = checkText(textFichierMapping, "OptionsAction.checkMapping", Global.RN); //$NON-NLS-1$
+            if (errorMapping.length() > 0){
+                message.append(errorMapping);
+                blnOK = false;
+            }
+        }
+        
+        
         if (!blnOK) {
             try {
                 String[] buttons = new String[1];
@@ -1225,13 +1205,13 @@ public class OptionsAction extends Action implements ISelectionListener,
         return message.toString();
     }
     
-    protected String checkText(Text text, String keyErrorMsg)
+    protected String checkText(Text text, String keyErrorMsg, String sep)
     {
         StringBuffer message = new StringBuffer();
         if (text.getText().trim().equals(Global.EMPTY_STRING))
         {
             message.append(Global.RN);
-            message.append(" - "); //$NON-NLS-1$
+            message.append(sep);
             message.append(Messages.getString(keyErrorMsg)); 
         }
         return message.toString();
@@ -1246,7 +1226,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         redComboLabel(comboIdEdmoDistDonnees, labelIdEdmoDistDonnees);
         redTextLabel(textUrlCdi, labelUrlCdi);
         redComboLabel(comboTypePlateForme, lblTypePlateForme);
-        //redTextLabel(textFichierMapping, labelFichierMapping);
+        redTextLabel(textFichierMapping, labelFichierMapping);
     }
     
     protected void redComboLabel(Combo combo, Label label){
