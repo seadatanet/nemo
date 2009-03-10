@@ -1251,22 +1251,24 @@ public class Utils {
 		if (libelle.equals("")) {
 			combo.select(-1);
 		} else {
-			combo.select(i);
 
 			while (i < size) {
+                combo.select(i);
 				// && !combo.getText().substring(0,
 				// Math.min(combo.getText().length(), length)).equals(
 				// libelle)) {
 				int debutLibelle = combo.getText().length() - length;
+//                if (combo.getText().startsWith("61b")){
+//                    System.out.println("--" + combo.getText().substring(debutLibelle).trim() + "--");
+//                    System.out.println("--" + libelle + "--");
+//                }
 				if (debutLibelle >= 0) {
-					if (combo.getText().substring(debutLibelle)
-							.equalsIgnoreCase(libelle)) {
+					if (combo.getText().substring(debutLibelle).trim().equalsIgnoreCase(libelle)) {
 						blnFound = true;
 						break;
 					}
 				}
 				i++;
-				combo.select(i);
 			}
 
 			if (!blnFound) {
@@ -1324,7 +1326,7 @@ public class Utils {
 		if (valeur.indexOf(" - ") > -1) {
 			return valeur.substring(valeur.indexOf(" - ") + 3);
 		} else {
-			return "";
+			return valeur;
 		}
 	}
 

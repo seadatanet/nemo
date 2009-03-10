@@ -347,8 +347,7 @@ public class DataModel
             e.printStackTrace();
         }
 
-        survey.setRegionName(Utils.extraitValeur(EditSurvey.comboRegion
-            .getText()));
+        survey.setRegionName(Utils.extraitValeur(EditSurvey.comboRegion.getText()));
 
         // Source de données
         survey.setCountryCode(Utils.extraitCode(EditSurvey.comboCountries
