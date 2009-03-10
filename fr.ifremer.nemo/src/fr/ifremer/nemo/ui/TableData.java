@@ -585,17 +585,30 @@ public class TableData {
 
 				// on formate puis on reaffiche la liste
 				try {
-					// if (selection.matches(ViewFile.tableData.getItem(i)
-					// .getText(7))) {
 					if (selection.equals(ViewFile.tableData.getItem(i)
 							.getText(7))) {
-						// entree par defaut, le test est la valeur de sortie
-						// par
-						// defaut formatee
-						resultat = String.format(ViewFile.tableData.getItem(i)
-								.getText(6), ViewFile.tableData.getItem(i)
-								.getText(8));
-
+                        
+						// entree par defaut, le test est la valeur de sortie par defaut formatee
+                        String fmOut = Global.EMPTY_STRING;
+                        String formatString = ViewFile.tableData.getItem(i).getText(6);
+                        String outputDefaultValue = ViewFile.tableData.getItem(i).getText(8);
+                        
+                        // Float ou Decimal ?
+                        String type = formatString.substring(formatString.length() - 1);
+                        if (type.equals("f") || type.equals("F")){       //$NON-NLS-1$//$NON-NLS-2$
+                            fmOut = String.format(java.util.Locale.US, formatString, Float.parseFloat(outputDefaultValue));
+                        }else if (type.equals("d") || type.equals("D")){ //$NON-NLS-1$ //$NON-NLS-2$
+                            fmOut = String.format(java.util.Locale.US, formatString, Integer.parseInt(outputDefaultValue));
+                        }
+                        
+                        if(fmOut.equals(outputDefaultValue)){
+                            // ok
+                            resultat = fmOut;
+                        } else {
+                            // erreur
+                            resultat = Messages.getString("TableData.20"); //$NON-NLS-1$ 
+                        }
+                        
 					} else {
 						// valeur normale, on applique la formule puis formatage
 
