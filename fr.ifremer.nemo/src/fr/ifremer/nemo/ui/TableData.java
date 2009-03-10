@@ -585,16 +585,17 @@ public class TableData {
 
 				// on formate puis on reaffiche la liste
 				try {
+                    String formatString = ViewFile.tableData.getItem(i).getText(6);
+                    String type = formatString.substring(formatString.length() - 1);
+                    
 					if (selection.equals(ViewFile.tableData.getItem(i)
 							.getText(7))) {
                         
 						// entree par defaut, le test est la valeur de sortie par defaut formatee
                         String fmOut = Global.EMPTY_STRING;
-                        String formatString = ViewFile.tableData.getItem(i).getText(6);
                         String outputDefaultValue = ViewFile.tableData.getItem(i).getText(8);
                         
                         // Float ou Decimal ?
-                        String type = formatString.substring(formatString.length() - 1);
                         if (type.equals("f") || type.equals("F")){       //$NON-NLS-1$//$NON-NLS-2$
                             fmOut = String.format(java.util.Locale.US, formatString, Float.parseFloat(outputDefaultValue));
                         }else if (type.equals("d") || type.equals("D")){ //$NON-NLS-1$ //$NON-NLS-2$
@@ -616,12 +617,18 @@ public class TableData {
 						parser.addStandardFunctions();
 						parser.addStandardConstants();
 						parser.addVariable("x", Float.valueOf(selection)); //$NON-NLS-1$
-						parser.parseExpression(ViewFile.tableData.getItem(i)
-								.getText(2));
+						parser.parseExpression(ViewFile.tableData.getItem(i).getText(2));
 						resultJEP = parser.getValue();
 
-						resultat = String.format(ViewFile.tableData.getItem(i)
-								.getText(6), resultJEP);
+                        if (type.equals("f") || type.equals("F")){       //$NON-NLS-1$//$NON-NLS-2$
+                            resultat = String.format(ViewFile.tableData.getItem(i).getText(6), new Float(resultJEP));
+                        }else if (type.equals("d") || type.equals("D")){ //$NON-NLS-1$ //$NON-NLS-2$
+                            resultat = String.format(ViewFile.tableData.getItem(i).getText(6), (Double.valueOf(resultJEP)).intValue());
+                        }else{
+                            // error
+                            resultat = Messages.getString("TableData.20"); //$NON-NLS-1$ 
+                        }
+						//resultat = String.format(ViewFile.tableData.getItem(i).getText(6), resultJEP);
 					}
 				} catch (Exception e) {
 					resultat = Messages.getString("TableData.20"); //$NON-NLS-1$
