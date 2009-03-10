@@ -623,8 +623,12 @@ public class EditSurvey {
 			Utils.selectComboLibelle(comboRegion, survey.getRegionName());
 		}
 
-        if (survey.getCountryName() != null) {
-            Utils.selectComboLibelle(comboCountries, survey.getCountryName());
+//        if (survey.getCountryName() != null) {
+//            Utils.selectComboLibelle(comboCountries, survey.getCountryName());
+//        }
+
+        if (survey.getCountryCode() != null) {
+            Utils.selectComboCode(comboCountries, survey.getCountryCode());
         }
 
 		if (survey.getLaboratories() != null) {

@@ -82,10 +82,10 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 	 */
 	protected String _countryCode;
 	
-	/**
-	 * Source laboratory country name
-	 */
-	protected String _countryName;
+//	/**
+//	 * Source laboratory country name
+//	 */
+//	protected String _countryName;
 
 	/**
 	 * regional archiving centre code (MEDATLAS: 2 char max)
@@ -265,7 +265,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 		a_Writer.putTag("endDate", getEndDate());
 		a_Writer.putTag("regionName", getRegionName());
 		a_Writer.putTag("country", getCountryCode());
-		a_Writer.putTag("countryName", getCountryName());
+		//a_Writer.putTag("countryName", getCountryName());
 		a_Writer.putTag("laboratories", getLaboratories());
 		a_Writer.putTag("chiefScientist", getChiefScientist());
 		a_Writer.putTag("projectName", getProjectName());
@@ -337,7 +337,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
         _chiefScientist = "UNKNOWN"; //$NON-NLS-1$
         _comment = Global.EMPTY_STRING;
         _countryCode = Global.EMPTY_STRING;
-        _countryName = Global.EMPTY_STRING;
+        //_countryName = Global.EMPTY_STRING;
         _dataCentre = Global.EMPTY_STRING;
         _endDate = System.currentTimeMillis();
         _laboratories = Global.EMPTY_STRING;
@@ -461,15 +461,15 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 		_countryCode = x;
 	}
 	
-	/**
-	 * Read accessor (getter) for attribute _countryName
-	 * 
-	 * @return String
-	 * @see Survey#_countryName
-	 */
-	public String getCountryName() {
-		return _countryName;
-	}
+//	/**
+//	 * Read accessor (getter) for attribute _countryName
+//	 * 
+//	 * @return String
+//	 * @see Survey#_countryName
+//	 */
+//	public String getCountryName() {
+//		return _countryName;
+//	}
 
 	/**
 	 * Read accessor (getter) for attribute _dataCentre
@@ -1112,7 +1112,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 		WSSurvey wssurvey = service.getSurvey(a_Reference);
 		if (wssurvey.getReference() != null) {
 
-			setReference(wssurvey.getReference());
+			setReference(Formatter.getSingleton().padString(wssurvey.getReference(), 13));
 		} else {
 			setReference("");
 		}
@@ -1405,12 +1405,12 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 		_dataSize = size;
 	}
 
-    /**
-     * Setter sur _countryName.
-     * @param countryName the countryName to set
-     */
-    public void setCountryName(String countryName)
-    {
-        _countryName = countryName;
-    }
+//    /**
+//     * Setter sur _countryName.
+//     * @param countryName the countryName to set
+//     */
+//    public void setCountryName(String countryName)
+//    {
+//        _countryName = countryName;
+//    }
 } /* End of class: Survey */
