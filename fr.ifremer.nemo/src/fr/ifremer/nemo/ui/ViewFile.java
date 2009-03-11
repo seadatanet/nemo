@@ -505,13 +505,12 @@ public class ViewFile extends ViewPart
 
                             if (Utils.findFiles(nomRepertoire, true))
                             {
+                                
                                 textAreaDescription.setText(Utils.texteBrut);
 
                                 // affichage etape0 dans formulaire
-                                // d'edition de
-                                // parametres
+                                // d'edition de parametres
                                 Utils.razGlobal();
-                                //Utils.invalidEtapes();
                                 EditDesc.affichageEdition();
 
                             }
@@ -549,26 +548,25 @@ public class ViewFile extends ViewPart
                             if (Utils
                                 .findFilesCollectCas1(nomRepertoire, false))
                             {
+                                
                                 textAreaDescription.setText(Utils.texteBrut);
 
+                                // affichage etape0 dans formulaire
+                                // d'edition de parametres
+                                Utils.razGlobal();
+                                EditDesc.affichageEdition();
+                                
+                                tabItem1.dispose();
+                                
+                                // dans le cas d'une collection, on ne peut
+                                // generer que le format ODV
+                                radMedatlas.setEnabled(false);
+                                radMedatlas.setSelection(false);
+                                
+                                radODV.setSelection(true);
+                                afficheGrpODV();
                             }
 
-                            // affichage etape0 dans formulaire
-                            // d'edition de
-                            // parametres
-                            Utils.razGlobal();
-                            //Utils.invalidEtapes();
-                            EditDesc.affichageEdition();
-
-                            tabItem1.dispose();
-
-                            // dans le cas d'une collection, on ne peut
-                            // generer que le format ODV
-                            radMedatlas.setEnabled(false);
-                            radMedatlas.setSelection(false);
-
-                            radODV.setSelection(true);
-                            afficheGrpODV();
                         }
 
                         else
@@ -604,26 +602,24 @@ public class ViewFile extends ViewPart
                             {
                                 textAreaDescription.setText(Utils.texteBrut);
 
+                                // affichage etape0 dans formulaire
+                                // d'edition de  parametres
+                                Utils.razGlobal();
+                                EditDesc.affichageEdition();
+                                
+                                tabItem1.dispose();
+                                
+                                // dans le cas d'une collection, on ne peut
+                                // generer que le format ODV
+                                radMedatlas.setEnabled(false);
+                                radMedatlas.setSelection(false);
+                                
+                                //radODV.setEnabled(true);
+                                radODV.setSelection(true);
+                                radMonoFichier.setEnabled(false); // FAE 0001134
+                                afficheGrpODV();
                             }
 
-                            // affichage etape0 dans formulaire
-                            // d'edition de
-                            // parametres
-                            Utils.razGlobal();
-                            //Utils.invalidEtapes();
-                            EditDesc.affichageEdition();
-
-                            tabItem1.dispose();
-
-                            // dans le cas d'une collection, on ne peut
-                            // generer que le format ODV
-                            radMedatlas.setEnabled(false);
-                            radMedatlas.setSelection(false);
-
-                            //radODV.setEnabled(true);
-                            radODV.setSelection(true);
-                            radMonoFichier.setEnabled(false); // FAE 0001134
-                            afficheGrpODV();
                         }
 
                         else

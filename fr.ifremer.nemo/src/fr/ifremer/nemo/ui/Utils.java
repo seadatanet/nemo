@@ -846,11 +846,11 @@ public class Utils {
 		String nom = subfiles[0].getName();
 
 		// verif sur l'extension de tous les fichiers du dossier
-		Pattern p = Pattern.compile("[.]");
+		Pattern p = Pattern.compile("[.]"); //$NON-NLS-1$
 		String[] mots = p.split(nom);
 		String ext;
 		if (mots.length == 1) {
-			ext = "";
+			ext = Global.EMPTY_STRING;
 		} else {
 			ext = mots[1];
 		}
@@ -860,14 +860,14 @@ public class Utils {
 			String mots1[] = p.split(subfiles[i].getName());
 			String ext1;
 			if (mots1.length == 1) {
-				ext1 = "";
+				ext1 = Global.EMPTY_STRING;
 			} else {
 				ext1 = mots1[1];
 			}
 
 			if (!ext.equals(ext1)) {
 				ok = false;
-				Utils.messageErreur(Messages.getString("Utils.27"));
+				Utils.messageErreurAppend(Messages.getString("Utils.27")); //$NON-NLS-1$
 			}
 
 		}
@@ -904,11 +904,11 @@ public class Utils {
 		String nom = subfiles[0].getName();
 
 		// verif sur l'extension de tous les fichiers du dossier
-		Pattern p = Pattern.compile("[.]");
+		Pattern p = Pattern.compile("[.]"); //$NON-NLS-1$
 		String[] mots = p.split(nom);
 		String ext;
 		if (mots.length == 1) {
-			ext = "";
+			ext = Global.EMPTY_STRING;
 		} else {
 			ext = mots[1];
 		}
@@ -918,14 +918,14 @@ public class Utils {
 			String mots1[] = p.split(subfiles[i].getName());
 			String ext1;
 			if (mots1.length == 1) {
-				ext1 = "";
+				ext1 = Global.EMPTY_STRING;
 			} else {
 				ext1 = mots1[1];
 			}
 
 			if (!ext.equals(ext1)) {
 				ok = false;
-				Utils.messageErreur(Messages.getString("Utils.27"));
+				Utils.messageErreurAppend(Messages.getString("Utils.27")); //$NON-NLS-1$
 			}
 
 		}
@@ -940,7 +940,7 @@ public class Utils {
 		mots = p.split(nom2);
 
 		if (mots.length == 1) {
-			ext = "";
+			ext = Global.EMPTY_STRING;
 		} else {
 			ext = mots[1];
 		}
@@ -950,14 +950,14 @@ public class Utils {
 			String mots1[] = p.split(subsubfiles[i].getName());
 			String ext1;
 			if (mots1.length == 1) {
-				ext1 = "";
+				ext1 = Global.EMPTY_STRING;
 			} else {
 				ext1 = mots1[1];
 			}
 
 			if (!ext.equals(ext1)) {
 				ok = false;
-				Utils.messageErreur(Messages.getString("Utils.27"));
+				Utils.messageErreurAppend(Messages.getString("Utils.27")); //$NON-NLS-1$
 			}
 
 		}
@@ -965,7 +965,7 @@ public class Utils {
 		if (ok) {
 
 			ViewFile.nomFichier = directoryPath
-					+ "/" + subfiles[0].getName() + "/" + subsubfiles[0].getName(); //$NON-NLS-1$
+					+ "/" + subfiles[0].getName() + "/" + subsubfiles[0].getName(); //$NON-NLS-1$ //$NON-NLS-2$
 			ViewFile.nomRepertoire = directoryPath;
 
 			try {

@@ -31,7 +31,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 
 		configurer_titre = configurer;
 
-		configurer_titre.setTitle("Nemo");
+		configurer_titre.setTitle("Nemo"); //$NON-NLS-1$
 
 	}
 }
