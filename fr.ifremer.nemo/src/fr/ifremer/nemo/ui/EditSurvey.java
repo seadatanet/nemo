@@ -85,8 +85,8 @@ public class EditSurvey {
 		// affichage du texte dans la zone de gauche
 		ViewFile.styledTextCampagne.setText(Utils.texteBrut);
 
-		// raz message erreur
-		Utils.messageErreur(""); //$NON-NLS-1$
+        // raz du message d'erreurs
+        Utils.messageErreur(Global.EMPTY_STRING); 
 
 		// de base les sections sont refermees
 		expand = false;
@@ -412,9 +412,6 @@ public class EditSurvey {
 
 				});
 
-		// raz du message d'erreurs
-		Utils.messageErreur(""); //$NON-NLS-1$
-
 		// refresh du formulaire
 
 		formEdition.reflow(true);
@@ -469,7 +466,7 @@ public class EditSurvey {
 
 		// verifier que un fichier est charge avant d'ouvrir un modele
 		if ((!EditDesc.validee) && (!loaded)) {
-			Utils.messageErreur(Messages.getString("EditSurvey.54")); //$NON-NLS-1$
+			Utils.messageErreurAppend(Messages.getString("EditSurvey.54")); //$NON-NLS-1$
 		} else {
 			FileDialog dialog = new FileDialog(shell, SWT.OPEN
 					| SWT.APPLICATION_MODAL);
@@ -484,7 +481,7 @@ public class EditSurvey {
 
 				fich = new File(nomXML);
 
-				Utils.messageErreur("fiche:" + fich);//$NON-NLS-1$
+				Utils.messageErreurAppend("fiche:" + fich);//$NON-NLS-1$
 				EditSurvey.chargementXML(fich);
 
 			}
@@ -782,8 +779,9 @@ public class EditSurvey {
 		int i;
 		ScrolledForm s;
 		s = ViewEdit.formEdition;
-		// raz message erreur
-		Utils.messageErreur(""); //$NON-NLS-1$
+
+        // raz du message d'erreurs
+        Utils.messageErreur(Global.EMPTY_STRING); 
 
 		// reaffichage des boutons valider/expand/init serveur
 

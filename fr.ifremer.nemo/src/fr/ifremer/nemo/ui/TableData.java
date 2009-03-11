@@ -428,7 +428,7 @@ public class TableData {
 		// swap (indice-1) <-> indice
 		// 
 
-		Utils.messageErreur(Global.EMPTY_STRING);
+		//Utils.messageErreur(Global.EMPTY_STRING);
 		int nbre;
 		ArrayList<TypeData> listeTempo;
 		nbre = types.size();
@@ -545,7 +545,7 @@ public class TableData {
 				|| ViewFile.radTrajectoire.getSelection()) {
 			types.remove(indice);
 		} else {
-			Utils.messageErreur(Messages.getString("TableData.18")); //$NON-NLS-1$
+			Utils.messageErreurAppend(Messages.getString("TableData.18")); //$NON-NLS-1$
 		}
 
 		// razTableData

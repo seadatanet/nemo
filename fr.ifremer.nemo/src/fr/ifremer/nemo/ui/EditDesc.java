@@ -198,7 +198,10 @@ public class EditDesc {
                         public void widgetSelected(
                                 org.eclipse.swt.events.SelectionEvent e) {
 
-                            razText(listeTextDesc);
+                            razText();
+
+                            // invalidation de l'étape en cours et des suivantes
+                            Utils.invalidEtapes();
 
                         }
                     });
@@ -332,15 +335,13 @@ public class EditDesc {
         }
     }
 
-    public static void razText(ArrayList<Text> liste) {
+    public static void razText() {
 
-        for (Text text : liste){
-            text.setText(Global.EMPTY_STRING);
+        for (Text text : listeTextDesc){
+            text.setText(Global.ZERO);
         }
-        lignesFinStation.setText(Global.ZERO);
-
-        // invalidation de l'étape en cours et des suivantes
-        Utils.invalidEtapes();
+        selectComboEnd(radEOF);
+        txtManuel.setText(Global.ZERO);
     }
 
     public static void nomNemo() {

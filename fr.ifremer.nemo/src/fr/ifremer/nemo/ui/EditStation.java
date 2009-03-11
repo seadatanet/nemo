@@ -40,8 +40,10 @@ public class EditStation {
 		// initialisation zone édition pour étape description de fichier
 		formEdition = ViewEdit.formEdition;
 		ViewLog.aideStation();
-		// raz message erreur
-		Utils.messageErreur(""); //$NON-NLS-1$
+
+        // raz du message d'erreurs
+        Utils.messageErreur(Global.EMPTY_STRING); 
+        
 		okApresReset = true;
 
 		// affichage du texte dans la zone de gauche
@@ -159,9 +161,6 @@ public class EditStation {
         actualiseEdition();
 
 		ViewEdit.formEdition.reflow(true);
-
-		// raz du message d'erreurs
-		Utils.messageErreur(Global.EMPTY_STRING); 
 
 		// refresh du formulaire
 		formEdition.reflow(true);

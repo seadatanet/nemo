@@ -51,7 +51,7 @@ public class OpenAction extends Action implements ISelectionListener,
 
 		// verifier que un fichier est charge avant d'ouvrir un modele
 		if (!EditDesc.loaded) {
-			Utils.messageErreur(Messages.getString("OpenAction.3")); //$NON-NLS-1$
+			Utils.messageErreurAppend(Messages.getString("OpenAction.3")); //$NON-NLS-1$
 		} else {
 
 			InputModel inputModel = new InputModel();
@@ -78,7 +78,7 @@ public class OpenAction extends Action implements ISelectionListener,
 				try {
 					stream = new java.io.FileInputStream(nomModele);
 				} catch (FileNotFoundException e) {
-					// 
+                    Utils.messageErreurAppend(Messages.getString("Etape.120")); //$NON-NLS-1$
 					e.printStackTrace();
 				}
 //				System.out.println("Ouverture du modele : " + nomModele); //$NON-NLS-1$

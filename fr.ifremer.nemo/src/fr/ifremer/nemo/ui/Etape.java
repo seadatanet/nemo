@@ -25,25 +25,29 @@ public class Etape {
 
 	public static void validationDesc() {
 
+
+        // retour à l'onglet message d'erreur
+        ViewLog.tabFolderLog.setSelection(0);
+
+        // raz du message d'erreurs
+        Utils.messageErreur(Global.EMPTY_STRING);
+
+        Boolean ok, resultat;
+        ok = true;
+        
+        
 		// Fichier avec séparateur
 		if (ViewFile.chkSeparateur.getSelection() && !Preformat.isPreformat()) {
 			try {
 				Preformat.run();
 			} catch (Exception ex) {
-				Utils.messageErreur(Messages.getString("Etape.120")); //$NON-NLS-1$
+                ok = ok && false;
+				Utils.messageErreurAppend(Messages.getString("Etape.120")); //$NON-NLS-1$
 				ex.printStackTrace();
 			}
 		}
-
-		// retour à l'onglet message d'erreur
-		ViewLog.tabFolderLog.setSelection(0);
-
-		Boolean ok, resultat;
-		ok = true;
+        
 		// Table table;
-
-		// raz du message d'erreurs
-		Utils.messageErreur(Global.EMPTY_STRING);
 
 		// section entete de fichier
 		resultat = Regexp.checkTextValeur(EditDesc.lignesEnteteFichier,
@@ -121,8 +125,8 @@ public class Etape {
 		Boolean ok, resultat;
 		ok = true;
 
-		// raz du message d'erreurs
-		Utils.messageErreur(""); //$NON-NLS-1$
+        // raz du message d'erreurs
+        Utils.messageErreur(Global.EMPTY_STRING);
 
 		// check valeurs obligatoires
 		resultat = Regexp.checkPresenceValeurObligatoire(
@@ -183,7 +187,7 @@ public class Etape {
 		}
 
 		if (TableDataSurvey.types.size() == 0) {
-			Utils.messageErreur(Messages.getString("Etape.28")); //$NON-NLS-1$
+			Utils.messageErreurAppend(Messages.getString("Etape.28")); //$NON-NLS-1$
 			ok = false;
 		} else {
 			// vérif si pas de "nombre=0"
@@ -191,7 +195,7 @@ public class Etape {
 			for (int i = 0; i < taille; i++) {
 				int nbre = TableDataSurvey.types.get(i).getNombre();
 				if (nbre == 0) {
-					Utils.messageErreur(Messages.getString("Etape.99")); //$NON-NLS-1$
+					Utils.messageErreurAppend(Messages.getString("Etape.99")); //$NON-NLS-1$
 					ok = false;
 				}
 			}
@@ -247,8 +251,8 @@ public class Etape {
         
         int size = EditStation.qcFlags.getTabFlagQC().getItemCount();
 
-		// raz du message d'erreurs
-		Utils.messageErreur("");                                                                        //$NON-NLS-1$
+        // raz du message d'erreurs
+        Utils.messageErreur(Global.EMPTY_STRING);                                                                     //$NON-NLS-1$
 
 		// NUMERO STATION
 		if (!EditStation.stationNumber.isManual()) {
@@ -846,7 +850,9 @@ public class Etape {
 		int cptDebut = 0;
 		int cptFin = 0;
 
-		Utils.messageErreur(Global.EMPTY_STRING);
+
+        // raz du message d'erreurs
+        Utils.messageErreur(Global.EMPTY_STRING);
         
         String fmOut= new String();
         //Formatter formatter = new Formatter();
@@ -854,7 +860,7 @@ public class Etape {
 
 		if (nbreParam == 0) {
 			ok = false;
-			Utils.messageErreur(Messages.getString("Etape.117")); //$NON-NLS-1$
+			Utils.messageErreurAppend(Messages.getString("Etape.117")); //$NON-NLS-1$
 		} else {
 
 			debuts = new int[nbreParam];

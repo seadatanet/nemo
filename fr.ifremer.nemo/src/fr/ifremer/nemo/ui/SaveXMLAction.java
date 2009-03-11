@@ -51,7 +51,7 @@ public class SaveXMLAction extends Action implements ISelectionListener,
 		FileOutputStream fileOutputStream = null;
 
 		if (!EditSurvey.validee) {
-			Utils.messageErreur("Veuillez valider au moins jusqu'à l'étape 2 avant d'enregistrer votre Description XML !");
+			Utils.messageErreurAppend("Veuillez valider au moins jusqu'à l'étape 2 avant d'enregistrer votre Description XML !");
 		} else {
 
 			choixFichierSortie();
@@ -65,7 +65,7 @@ public class SaveXMLAction extends Action implements ISelectionListener,
 			DataModel.inputModel.getMedia().getModel().writeXMLOn(
 					fileOutputStream);
 			Utils
-					.messageErreur("==== Fin d'enregistrement Description XML ====");
+					.messageErreurAppend("==== Fin d'enregistrement Description XML ====");
 		}
 
 	}

@@ -46,13 +46,14 @@ public class FiltrageTableType {
 	public static Button filtreButtonCancel;
 	
 	public static void go(String table) {
-		// raz message d'erreur
+        
 		final String tabOrigine = table;
-		
-		Utils.messageErreur(""); //$NON-NLS-1$
+
+        // raz du message d'erreurs
+        //Utils.messageErreur(Global.EMPTY_STRING);
 
 		if (listeOuverte == 1) {
-			Utils.messageErreur(Messages.getString("FiltrageTableType.1"));
+			Utils.messageErreurAppend(Messages.getString("FiltrageTableType.1")); //$NON-NLS-1$
 		} else {
 			shell = new Shell(Application.display, SWT.BORDER | SWT.TITLE
 					| SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);

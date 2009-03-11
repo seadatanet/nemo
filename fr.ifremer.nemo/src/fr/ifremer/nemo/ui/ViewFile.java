@@ -385,6 +385,8 @@ public class ViewFile extends ViewPart
                     // reinitialisation de la conversion
                     if (DataModel.inputModel != null)
                         DataModel.reset();
+
+                    Utils.razGlobal();                    
                     
                     Preformat.setPreformat(false);
                     // parcours des fichiers/dossiers
@@ -402,14 +404,12 @@ public class ViewFile extends ViewPart
                     afficheGrpODV();
 
                     // si fichier campagne
-                    if (radioFichier.getSelection())
-                    {
+                    if (radioFichier.getSelection()){
 
                         // Si on a supprime l'onglet campagne pour une
                         // collection on le reaffiche
                         // vu qu'on selectionne maintenant fichier campagne
-                        if (tabItem1.isDisposed())
-                        {
+                        if (tabItem1.isDisposed()){
                             tabItem1 = new TabItem(tabFolder, SWT.NONE, 1);
                             tabItem1.setText(Messages
                                 .getString("ViewFile.campagne")); //$NON-NLS-1$
@@ -430,19 +430,16 @@ public class ViewFile extends ViewPart
                         dialog.setFilterPath(Utils.configuration
                             .getCruisesDirectory());
                         nomFichier = dialog.open();
-                        if (nomFichier != null)
-                        {
+                        
+                        if (nomFichier != null) {
 
                             fileLoaded = true;
                             nomRepertoire =
-                                nomFichier.substring(0, nomFichier
-                                    .lastIndexOf('\\') + 1);
-                            // init du modele
+                                nomFichier.substring(0, nomFichier.lastIndexOf('\\') + 1);
 
                             // affichage du fichier campagne dans onglet
                             // Campagne
-                            try
-                            {
+                            try{
                                 Utils.insertTextFich(nomFichier,
                                     styledTextCampagne, true);
                                 // Utils.remplissageTexte(textAreaDescription);
@@ -450,37 +447,25 @@ public class ViewFile extends ViewPart
 
                                 // affichage etape0 dans formulaire
                                 // d'edition de parametres
-                                Utils.razGlobal();
-                                //Utils.invalidEtapes();
                                 EditDesc.affichageEdition();
 
-                            }
-                            catch (IOException e1)
-                            {
-                                // 
+                            }catch (IOException e1){
+                                ViewLog.styledTextLogErreurs.setText(Messages.getString("Etape.120")); //$NON-NLS-1$
                                 e1.printStackTrace();
                             }
-                        }
-                        else
-                        {
+                        }else{
                             fileLoaded = false;
-                            // System.out.println("pas de fichier
-
-                            ViewLog.styledTextLogErreurs.setText(Messages
-                                .getString("ViewFile.selectionnezFichier")); //$NON-NLS-1$
-
+                            ViewLog.styledTextLogErreurs.setText(Messages.getString("ViewFile.selectionnezFichier")); //$NON-NLS-1$
                         }
                     }
 
                     // si dossier campagne
-                    if (radioDossier.getSelection())
-                    {
+                    if (radioDossier.getSelection()){
 
                         // Si on a supprime l'onglet campagne pour une
                         // colleciton on le reaffiche
                         // vu qu'on selectionne maintenant dossier
-                        if (tabItem1.isDisposed())
-                        {
+                        if (tabItem1.isDisposed()){
                             tabItem1 = new TabItem(tabFolder, SWT.NONE, 1);
                             tabItem1.setText(Messages
                                 .getString("ViewFile.campagne")); //$NON-NLS-1$
@@ -499,24 +484,20 @@ public class ViewFile extends ViewPart
                         dialog.setFilterPath(Utils.configuration
                             .getCruisesDirectory()); 
                         nomRepertoire = dialog.open();
-                        if (nomRepertoire != null)
-                        {
+                        
+                        if (nomRepertoire != null){
                             fileLoaded = true;
 
-                            if (Utils.findFiles(nomRepertoire, true))
-                            {
+                            if (Utils.findFiles(nomRepertoire, true)){
                                 
                                 textAreaDescription.setText(Utils.texteBrut);
 
                                 // affichage etape0 dans formulaire
                                 // d'edition de parametres
-                                Utils.razGlobal();
+                                //Utils.razGlobal();
                                 EditDesc.affichageEdition();
-
                             }
-                        }
-                        else
-                        {
+                        }else{
                             fileLoaded = false;
                             ViewLog.styledTextLogErreurs.setText(Messages
                                 .getString("ViewFile.selectionnezDossier")); //$NON-NLS-1$
@@ -525,8 +506,7 @@ public class ViewFile extends ViewPart
 
                     }
 
-                    if (radioCollectCas1.getSelection())
-                    {
+                    if (radioCollectCas1.getSelection()){
 
                         dossierCampagne = true;
                         collectionCas1 = true;
@@ -541,19 +521,15 @@ public class ViewFile extends ViewPart
                         dialog.setFilterPath(Utils.configuration
                             .getCruisesDirectory());
                         nomRepertoire = dialog.open();
-                        if (nomRepertoire != null)
-                        {
+                        if (nomRepertoire != null){
                             fileLoaded = true;
 
-                            if (Utils
-                                .findFilesCollectCas1(nomRepertoire, false))
-                            {
-                                
+                            if (Utils.findFilesCollectCas1(nomRepertoire, false)){
                                 textAreaDescription.setText(Utils.texteBrut);
 
                                 // affichage etape0 dans formulaire
                                 // d'edition de parametres
-                                Utils.razGlobal();
+                                //Utils.razGlobal();
                                 EditDesc.affichageEdition();
                                 
                                 tabItem1.dispose();
@@ -567,19 +543,14 @@ public class ViewFile extends ViewPart
                                 afficheGrpODV();
                             }
 
-                        }
-
-                        else
-                        {
+                        }else{
                             fileLoaded = false;
                             ViewLog.styledTextLogErreurs.setText(Messages
                                 .getString("ViewFile.selectionnezDossier")); //$NON-NLS-1$
-
                         }
                     }
 
-                    if (radioCollectCasN.getSelection())
-                    {
+                    if (radioCollectCasN.getSelection()){
 
                         dossierCampagne = false;
                         collectionCas1 = false;
@@ -594,17 +565,15 @@ public class ViewFile extends ViewPart
                         dialog.setFilterPath(Utils.configuration
                             .getCruisesDirectory());
                         nomRepertoire = dialog.open();
-                        if (nomRepertoire != null)
-                        {
+                        if (nomRepertoire != null){
                             fileLoaded = true;
 
-                            if (Utils.findFiles(nomRepertoire, true))
-                            {
+                            if (Utils.findFiles(nomRepertoire, true)){
                                 textAreaDescription.setText(Utils.texteBrut);
 
                                 // affichage etape0 dans formulaire
                                 // d'edition de  parametres
-                                Utils.razGlobal();
+                                //Utils.razGlobal();
                                 EditDesc.affichageEdition();
                                 
                                 tabItem1.dispose();
@@ -620,16 +589,12 @@ public class ViewFile extends ViewPart
                                 afficheGrpODV();
                             }
 
-                        }
-
-                        else
-                        {
+                        }else{
                             fileLoaded = false;
                             // System.out.println("pas de dossier
                             // selectionne"); //$NON-NLS-1$
                             ViewLog.styledTextLogErreurs.setText(Messages
                                 .getString("ViewFile.selectionnezDossier")); //$NON-NLS-1$
-
                         }
                     }
                 }

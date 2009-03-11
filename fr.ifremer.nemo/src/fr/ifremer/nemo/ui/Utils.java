@@ -179,7 +179,7 @@ public class Utils {
 		// System.out.println("fi clic = " + fi);
 
 		if (deb == fi) {
-			Utils.messageErreur(Messages.getString("Utils.26"));
+			Utils.messageErreurAppend(Messages.getString("Utils.26"));
 
 		} else {
 
@@ -224,8 +224,6 @@ public class Utils {
 			debut.pack();
 			ligne.pack();
 			fin.pack();
-
-			Utils.messageErreur("");
 		}
 	}
 
@@ -267,7 +265,7 @@ public class Utils {
 		// System.out.println("fi clic = " + fi);
 
 		if (deb == fi) {
-			Utils.messageErreur(Messages.getString("Utils.26"));
+			Utils.messageErreurAppend(Messages.getString("Utils.26"));
 
 		} else {
 
@@ -310,7 +308,7 @@ public class Utils {
 			ViewFile.tableData.getItems()[index].setText(fin, String
 					.valueOf(fi));
 
-			Utils.messageErreur("");
+			//Utils.messageErreur("");
 		}
 	}
 
@@ -329,7 +327,7 @@ public class Utils {
 			// System.out.println("fi clic = " + fi);
 
 			if (deb == fi) {
-				Utils.messageErreur(Messages.getString("Utils.26"));
+				Utils.messageErreurAppend(Messages.getString("Utils.26"));
 			} else {
 
 				lign = 1;
@@ -376,7 +374,7 @@ public class Utils {
 				testFlag(styledtext, flagTable, table, indexLigne, indexDebut,
 						indexFin, indexTest1, indexTest2);
 
-				Utils.messageErreur("");
+				//Utils.messageErreur("");
 			}
 		}
 	}
@@ -436,7 +434,7 @@ public class Utils {
 		// parcours du tableau des tailles de lignes cumulees
 
 		if (deb == fi) {
-			Utils.messageErreur(Messages.getString("Utils.26"));
+			Utils.messageErreurAppend(Messages.getString("Utils.26"));
 
 		} else {
 
@@ -484,7 +482,7 @@ public class Utils {
 			// remplissage nbreLignes dans interface
 			nbrelignes.setText("" + (lignFin - lignDepart + 1)); //$NON-NLS-1$
 			nbrelignes.pack();
-			Utils.messageErreur("");
+			//Utils.messageErreur("");
 		}
 	}
 
@@ -1466,6 +1464,6 @@ public class Utils {
         // reinitialisation de la conversion
         if (DataModel.inputModel != null) DataModel.inputModel.setConverted(false);
     
-        messageErreur(Global.EMPTY_STRING);
+        //messageErreur(Global.EMPTY_STRING);
     }
 }

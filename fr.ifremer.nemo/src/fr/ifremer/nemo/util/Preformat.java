@@ -428,7 +428,7 @@ public class Preformat {
 			
 		} catch (FileNotFoundException exc) {
 			Utils
-					.messageErreur(Messages.getString("Preformat.2")
+					.messageErreurAppend(Messages.getString("Preformat.2")
 							+ fichier);		
 		} finally {
 			lecteurAvecBuffer.close();	
@@ -484,7 +484,7 @@ public class Preformat {
 			
 		} catch (FileNotFoundException exc) {
 			Utils
-					.messageErreur(Messages.getString("Preformat.2")
+					.messageErreurAppend(Messages.getString("Preformat.2")
 							+ fichier);
 		} finally {
 			lecteurAvecBuffer.close();
@@ -565,7 +565,7 @@ public class Preformat {
 			}
 
 		} catch (FileNotFoundException exc) {
-			Utils.messageErreur(Messages.getString("Preformat.2") + ficEntree);
+			Utils.messageErreurAppend(Messages.getString("Preformat.2") + ficEntree);
 		} finally {
 			lecteurAvecBuffer.close();
 			fichPreformat.close();

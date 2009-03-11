@@ -704,197 +704,203 @@ public class DataModel
 
         }
 
-        // Cochage du selecteur de type de fichier
-        if (stationModel_modele.getInputType().equals(Global.TIMESERIES))
-        {
-            ViewFile.radProfilVertical.setSelection(false);
-            ViewFile.radSerieTempo.setSelection(true);
-            ViewFile.radTrajectoire.setSelection(false);
-        }
-        else if (stationModel_modele.getInputType().equals(Global.TRAJECTORY))
-        {
-            ViewFile.radProfilVertical.setSelection(false);
-            ViewFile.radSerieTempo.setSelection(false);
-            ViewFile.radTrajectoire.setSelection(true);
-        }
-        else
-        {
-            if (stationModel_modele.getTimeSeriesInformation() != null)
+        try{
+        
+            // Cochage du selecteur de type de fichier
+            if (stationModel_modele.getInputType().equals(Global.TIMESERIES))
             {
-                // Pour exploiter les anciens modeles
                 ViewFile.radProfilVertical.setSelection(false);
                 ViewFile.radSerieTempo.setSelection(true);
                 ViewFile.radTrajectoire.setSelection(false);
             }
-            else
+            else if (stationModel_modele.getInputType().equals(Global.TRAJECTORY))
             {
-                ViewFile.radProfilVertical.setSelection(true);
+                ViewFile.radProfilVertical.setSelection(false);
                 ViewFile.radSerieTempo.setSelection(false);
-                ViewFile.radTrajectoire.setSelection(false);
-            }
-        }
-
-        // séparateur
-        String strSeparator = stationModel_modele.getSeparator();
-        
-        // pour prise en compte des anciens modèles (par défaut, pas de séparateur)
-        if (strSeparator == null) strSeparator = Global.EMPTY_STRING;
-
-        boolean blnSeparator =
-            !Global.EMPTY_STRING.equals(strSeparator);
-
-        ViewFile.chkSeparateur.setSelection(blnSeparator);
-        ViewFile.setSeparatorVisible();
-
-        if (blnSeparator)
-        {
-            if (Global.TAB.equals(strSeparator))
-            {
-                // Tabulation
-                ViewFile.radioTabulation.setSelection(true);
-                ViewFile.radioPointVirgule.setSelection(false);
-                ViewFile.radioVirgule.setSelection(false);
-                ViewFile.radioEspace.setSelection(false);
-                ViewFile.radioSeparateurAutre.setSelection(false);
-                ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
-            }
-            else if (Global.SEMICOLON.equals(strSeparator))
-            {
-                // Point-virgule
-                ViewFile.radioTabulation.setSelection(false);
-                ViewFile.radioPointVirgule.setSelection(true);
-                ViewFile.radioVirgule.setSelection(false);
-                ViewFile.radioEspace.setSelection(false);
-                ViewFile.radioSeparateurAutre.setSelection(false);
-                ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
-            }
-            else if (Global.COMMA
-                .equals(strSeparator))
-            {
-                // Virgule
-                ViewFile.radioTabulation.setSelection(false);
-                ViewFile.radioPointVirgule.setSelection(false);
-                ViewFile.radioVirgule.setSelection(true);
-                ViewFile.radioEspace.setSelection(false);
-                ViewFile.radioSeparateurAutre.setSelection(false);
-                ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
-            }
-            else if (Global.SPACE
-                .equals(strSeparator))
-            {
-                // Espace
-                ViewFile.radioTabulation.setSelection(false);
-                ViewFile.radioPointVirgule.setSelection(false);
-                ViewFile.radioVirgule.setSelection(false);
-                ViewFile.radioEspace.setSelection(true);
-                ViewFile.radioSeparateurAutre.setSelection(false);
-                ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
+                ViewFile.radTrajectoire.setSelection(true);
             }
             else
             {
-                // Autre séparateur
-                ViewFile.radioTabulation.setSelection(false);
-                ViewFile.radioPointVirgule.setSelection(false);
-                ViewFile.radioVirgule.setSelection(false);
-                ViewFile.radioEspace.setSelection(false);
-                ViewFile.radioSeparateurAutre.setSelection(true);
-                ViewFile.textSeparateur.setText(strSeparator);
+                if (stationModel_modele.getTimeSeriesInformation() != null)
+                {
+                    // Pour exploiter les anciens modeles
+                    ViewFile.radProfilVertical.setSelection(false);
+                    ViewFile.radSerieTempo.setSelection(true);
+                    ViewFile.radTrajectoire.setSelection(false);
+                }
+                else
+                {
+                    ViewFile.radProfilVertical.setSelection(true);
+                    ViewFile.radSerieTempo.setSelection(false);
+                    ViewFile.radTrajectoire.setSelection(false);
+                }
             }
-        }
-
-
-        // test si serie tempo
-        if (stationModel_modele.getTimeSeriesInformation() != null)
-        {
-            // ViewFile.groupTempo.setVisible(true);
-
-            // heure et date de ref
-
-            if (inputModel_modele.isRefDateBased())
+    
+            // séparateur
+            String strSeparator = stationModel_modele.getSeparator();
+            
+            // pour prise en compte des anciens modèles (par défaut, pas de séparateur)
+            if (strSeparator == null) strSeparator = Global.EMPTY_STRING;
+    
+            boolean blnSeparator =
+                !Global.EMPTY_STRING.equals(strSeparator);
+    
+            ViewFile.chkSeparateur.setSelection(blnSeparator);
+            ViewFile.setSeparatorVisible();
+    
+            if (blnSeparator)
             {
-                // date de ref / heure de ref
-
-                // reconversion de LONG vers format normal
-                Formatter formatter = new Formatter();
-
-                try
+                if (Global.TAB.equals(strSeparator))
                 {
-                    ViewFile.textTempoDateRef.setText(formatter.formatDateTime(
-                        "dd/MM/yyyy", inputModel_modele.getRefDate())); //$NON-NLS-1$
+                    // Tabulation
+                    ViewFile.radioTabulation.setSelection(true);
+                    ViewFile.radioPointVirgule.setSelection(false);
+                    ViewFile.radioVirgule.setSelection(false);
+                    ViewFile.radioEspace.setSelection(false);
+                    ViewFile.radioSeparateurAutre.setSelection(false);
+                    ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
                 }
-                catch (ParseException e)
+                else if (Global.SEMICOLON.equals(strSeparator))
                 {
-
-                    e.printStackTrace();
+                    // Point-virgule
+                    ViewFile.radioTabulation.setSelection(false);
+                    ViewFile.radioPointVirgule.setSelection(true);
+                    ViewFile.radioVirgule.setSelection(false);
+                    ViewFile.radioEspace.setSelection(false);
+                    ViewFile.radioSeparateurAutre.setSelection(false);
+                    ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
                 }
-                // le format de la comboList correspondant est en 0
-                ViewFile.comboTempoDate.select(0);
-
-                // reconversion de LONG vers format normal
-                formatter = new Formatter();
-
-                try
+                else if (Global.COMMA
+                    .equals(strSeparator))
                 {
-                    ViewFile.textTempoHeureRef.setText(formatter
-                        .formatDateTime("hh24:mm", inputModel_modele //$NON-NLS-1$
-                            .getRefTime()));
+                    // Virgule
+                    ViewFile.radioTabulation.setSelection(false);
+                    ViewFile.radioPointVirgule.setSelection(false);
+                    ViewFile.radioVirgule.setSelection(true);
+                    ViewFile.radioEspace.setSelection(false);
+                    ViewFile.radioSeparateurAutre.setSelection(false);
+                    ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
                 }
-                catch (ParseException e)
+                else if (Global.SPACE
+                    .equals(strSeparator))
                 {
-
-                    e.printStackTrace();
+                    // Espace
+                    ViewFile.radioTabulation.setSelection(false);
+                    ViewFile.radioPointVirgule.setSelection(false);
+                    ViewFile.radioVirgule.setSelection(false);
+                    ViewFile.radioEspace.setSelection(true);
+                    ViewFile.radioSeparateurAutre.setSelection(false);
+                    ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
                 }
-                // le format de la comboList correspondant est en 0
-                ViewFile.comboTempoHeure.select(0);
-
+                else
+                {
+                    // Autre séparateur
+                    ViewFile.radioTabulation.setSelection(false);
+                    ViewFile.radioPointVirgule.setSelection(false);
+                    ViewFile.radioVirgule.setSelection(false);
+                    ViewFile.radioEspace.setSelection(false);
+                    ViewFile.radioSeparateurAutre.setSelection(true);
+                    ViewFile.textSeparateur.setText(strSeparator);
+                }
             }
-            else
+    
+    
+            // test si serie tempo
+            if (stationModel_modele.getTimeSeriesInformation() != null)
             {
-                // pas de date de ref
-
+                // ViewFile.groupTempo.setVisible(true);
+    
+                // heure et date de ref
+    
+                if (inputModel_modele.isRefDateBased())
+                {
+                    // date de ref / heure de ref
+    
+                    // reconversion de LONG vers format normal
+                    Formatter formatter = new Formatter();
+    
+                    try
+                    {
+                        ViewFile.textTempoDateRef.setText(formatter.formatDateTime(
+                            "dd/MM/yyyy", inputModel_modele.getRefDate())); //$NON-NLS-1$
+                    }
+                    catch (ParseException e)
+                    {
+    
+                        e.printStackTrace();
+                    }
+                    // le format de la comboList correspondant est en 0
+                    ViewFile.comboTempoDate.select(0);
+    
+                    // reconversion de LONG vers format normal
+                    formatter = new Formatter();
+    
+                    try
+                    {
+                        ViewFile.textTempoHeureRef.setText(formatter
+                            .formatDateTime("hh24:mm", inputModel_modele //$NON-NLS-1$
+                                .getRefTime()));
+                    }
+                    catch (ParseException e)
+                    {
+    
+                        e.printStackTrace();
+                    }
+                    // le format de la comboList correspondant est en 0
+                    ViewFile.comboTempoHeure.select(0);
+    
+                }
+                else
+                {
+                    // pas de date de ref
+    
+                }
+    
             }
-
+    
+            // nombre lignes entete station
+    
+            EditDesc.lignesEnteteStation.setText(Global.EMPTY_STRING 
+                    + stationModel_modele.getNumberOfLines());
+    
+            // nombre de lignes de fin
+            EditDesc.lignesFinStation
+                .setText(Global.EMPTY_STRING + stationModel_modele.getEndData()); 
+    
+            // metaInData
+            // stationModel.setMetaInData(false);
+    
+            // pattern de fin fourni ou pas
+    
+            if (stationModel_modele.isEndOnEOF())
+            {
+                EditDesc.selectComboEnd(EditDesc.radEOF);
+            }
+            else if (stationModel_modele.isEndOnEmptyLine())
+            {
+                EditDesc.selectComboEnd(EditDesc.radLigne);
+            }
+            else if (stationModel_modele.isEndOnPattern())
+            {
+                EditDesc.selectComboEnd(EditDesc.radManuel);
+    
+                EditDesc.txtManuel.setText(stationModel_modele.getEndDataPattern());
+            }
+    
+            // refresh de la zone d'edition
+            EditDesc.razEdition();
+            EditDesc.DrawingBack();
+    
+            DataModel.ouverture = true;
+    
+            // desactivation option serie tempo
+            ViewFile.radProfilVertical.setEnabled(true);
+            ViewFile.radSerieTempo.setEnabled(true);
+            ViewFile.radTrajectoire.setEnabled(true);
+        }catch (Exception e){
+            Utils.messageErreurAppend(Messages.getString("Etape.124")); //$NON-NLS-1$
+            e.printStackTrace();
         }
-
-        // nombre lignes entete station
-
-        EditDesc.lignesEnteteStation.setText(Global.EMPTY_STRING 
-                + stationModel_modele.getNumberOfLines());
-
-        // nombre de lignes de fin
-        EditDesc.lignesFinStation
-            .setText(Global.EMPTY_STRING + stationModel_modele.getEndData()); 
-
-        // metaInData
-        // stationModel.setMetaInData(false);
-
-        // pattern de fin fourni ou pas
-
-        if (stationModel_modele.isEndOnEOF())
-        {
-            EditDesc.selectComboEnd(EditDesc.radEOF);
-        }
-        else if (stationModel_modele.isEndOnEmptyLine())
-        {
-            EditDesc.selectComboEnd(EditDesc.radLigne);
-        }
-        else if (stationModel_modele.isEndOnPattern())
-        {
-            EditDesc.selectComboEnd(EditDesc.radManuel);
-
-            EditDesc.txtManuel.setText(stationModel_modele.getEndDataPattern());
-        }
-
-        // refresh de la zone d'edition
-        EditDesc.razEdition();
-        EditDesc.DrawingBack();
-
-        DataModel.ouverture = true;
-
-        // desactivation option serie tempo
-        ViewFile.radProfilVertical.setEnabled(true);
-        ViewFile.radSerieTempo.setEnabled(true);
-        ViewFile.radTrajectoire.setEnabled(true);
     }
 
     public static void fillSurvey()

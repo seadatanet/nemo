@@ -11,6 +11,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 public class EditData {
@@ -40,8 +41,8 @@ public class EditData {
         loaded = true;
         ViewFile.affiche = 3;
 
-		// raz message erreur
-		Utils.messageErreur(""); //$NON-NLS-1$
+        // raz du message d'erreurs
+        Utils.messageErreur(Global.EMPTY_STRING);
 
 		// affichage du texte dans la zone de gauche
 		ViewFile.styledTextData.setText(Utils.texteBrut);
@@ -108,9 +109,6 @@ public class EditData {
 					}
 				});
 
-		// raz du message d'erreurs
-		Utils.messageErreur(""); //$NON-NLS-1$
-
 		// refresh du formulaire
 		formEdition.reflow(true);
 		
@@ -160,8 +158,9 @@ public class EditData {
 
 		ScrolledForm s;
 		s = ViewEdit.formEdition;
-		// raz message erreur
-		Utils.messageErreur(""); //$NON-NLS-1$
+
+        // raz du message d'erreurs
+        Utils.messageErreur(Global.EMPTY_STRING);
 
 		buttonValidate.setParent(s.getBody());
 		buttonRAZ.setParent(s.getBody());
