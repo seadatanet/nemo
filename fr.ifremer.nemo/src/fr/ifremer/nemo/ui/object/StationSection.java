@@ -1094,6 +1094,7 @@ public class StationSection extends NemoSection
             for (AutoLine line : autoInput.getLines()){
                 line.getNumberLine().setEnabled(!line.isInData());
             }
+            autoInput.disableEndVari();
         }
     }
     

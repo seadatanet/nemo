@@ -114,6 +114,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
     }
 
+    @Override
     public void run()
     {
         // lancement IHM options
@@ -1137,11 +1138,17 @@ public class OptionsAction extends Action implements ISelectionListener,
                         org.eclipse.swt.events.SelectionEvent e)
                 {
                     // FAE 1123 : validation de la config
-                    if (checkConfig()){                        
+                    if (checkConfig())
+                    {                        
                         // sauvegarde de la config
                         Utils.saveConfig();
+                        
+                        // reinitialisation de la conversion
+                        if (DataModel.inputModel != null) DataModel.inputModel.setConverted(false);
+                        
                         // fermeture de la fenêtre
                         shelloptions.close();
+                        
                     }else{
                         redLabels();
                     }

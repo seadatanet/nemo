@@ -17,6 +17,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 
+import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.object.AutoLine.MetaInData;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
@@ -90,9 +91,8 @@ public class GrpAutoInput implements UIobject
                 @Override
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent g) {
-                    for (AutoLine line : lines){
-                        line.getEnd().setEnabled(!buttonVari.getSelection());
-                    }
+                    disableEndVari();
+                    Utils.invalidEtapes();
                 }
             });
         }
@@ -229,6 +229,14 @@ public class GrpAutoInput implements UIobject
     public boolean checkInDataOrHeader(int i, String lign, String sectionName){
         AutoLine line = lines.get(i);
         return line.checkInDataOrHeader(lign, sectionName);
+    }
+    
+    public void disableEndVari(){
+        if (buttonVari != null){
+            for (AutoLine line : lines){
+                line.getEnd().setEnabled(!buttonVari.getSelection());
+            }
+        }
     }
     
 }

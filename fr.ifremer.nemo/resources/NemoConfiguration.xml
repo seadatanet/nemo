@@ -35,16 +35,9 @@
   <VocabListURL name="L021" value="http://vocab.ndg.nerc.ac.uk/list/L021/current"/>
   <VocabListURL name="L081" value="http://vocab.ndg.nerc.ac.uk/list/L081/current"/>
   <VocabListURL name="C174" value="http://vocab.ndg.nerc.ac.uk/list/C174/current"/>
+  <VocabListURL name="P021" value="http://vocab.ndg.nerc.ac.uk/list/P021/current"/>
   <defaultFlagTable></defaultFlagTable>
-  <FlagTable code="C3" label="test">
-    <Flag local="Q1" SDN="0 - no quality control"/>
-    <Flag local="Q2" SDN="1 - good value"/>
-    <Flag local="Q3" SDN="3 - probably bad value"/>
-    <Flag local="Q4" SDN="6 - value below detection"/>
-    <Flag local="Q5" SDN="9 - missing value"/>
-    <Flag local="Q6" SDN="A - value phenomenon uncertain"/>
-  </FlagTable>
-  <FlagTable code="C1" label="normal">
+  <FlagTable code="C1" label="SeaDataNet">
     <Flag local="1" SDN="1 - good value"/>
     <Flag local="0" SDN="0 - no quality control"/>
     <Flag local="2" SDN="2 - probably good value"/>
@@ -57,17 +50,19 @@
     <Flag local="9" SDN="9 - missing value"/>
     <Flag local="A" SDN="A - value phenomenon uncertain"/>
   </FlagTable>
-  <FlagTable code="C2" label="invers&#233;">
-    <Flag local="A" SDN="0 - no quality control"/>
-    <Flag local="9" SDN="1 - good value"/>
-    <Flag local="8" SDN="2 - probably good value"/>
-    <Flag local="7" SDN="3 - probably bad value"/>
-    <Flag local="6" SDN="4 - bad value"/>
+  <FlagTable code="C2" label="MEDATLAS">
+    <Flag local="1" SDN="1 - good value"/>
+    <Flag local="0" SDN="0 - no quality control"/>
+    <Flag local="2" SDN="2 - probably good value"/>
+    <Flag local="3" SDN="3 - probably bad value"/>
+    <Flag local="4" SDN="4 - bad value"/>
     <Flag local="5" SDN="5 - changed value"/>
-    <Flag local="4" SDN="6 - value below detection"/>
-    <Flag local="3" SDN="7 - value in excess"/>
-    <Flag local="2" SDN="8 - interpolated value"/>
+    <Flag local="9" SDN="9 - missing value"/>
+  </FlagTable>
+  <FlagTable code="C3" label="ODV">
+    <Flag local="0" SDN="1 - good value"/>
     <Flag local="1" SDN="9 - missing value"/>
-    <Flag local="0" SDN="A - value phenomenon uncertain"/>
+    <Flag local="4" SDN="3 - probably bad value"/>
+    <Flag local="8" SDN="4 - bad value"/>
   </FlagTable>
 </NemoConfiguration>
