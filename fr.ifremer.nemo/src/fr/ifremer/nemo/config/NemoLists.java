@@ -738,6 +738,7 @@ public class NemoLists implements Cloneable {
 		initVocabLists();
 		initVocabMap("P091", "P011"); //$NON-NLS-1$ //$NON-NLS-2$
 		initVocabMap("P091", "P061"); //$NON-NLS-1$ //$NON-NLS-2$
+        initVocabMap("P091", "P021"); //$NON-NLS-1$ //$NON-NLS-2$
 //		initVocabMap("L05", "C77");
 		initEdmo();
 	}
@@ -1189,7 +1190,7 @@ public class NemoLists implements Cloneable {
 		while (keys.hasNext()) {
 			String listName = keys.next();
 			try {
-				String fileName = String.format("resources/Vocab/%s.xml",
+				String fileName = String.format("resources/Vocab/%s.xml", //$NON-NLS-1$
 						listName);
 				File file = new File(fileName);
 				if (file.exists()) {
@@ -1217,8 +1218,8 @@ public class NemoLists implements Cloneable {
 	public static void initVocabMap(String list1, String list2) {
 		XMLDecoder decoder = null;
 		try {
-			String fileName = "resources/Vocab/" + Utils.concat(list1, list2, Global.UNDERSCORE)
-					+ ".xml";
+			String fileName = "resources/Vocab/" + Utils.concat(list1, list2, Global.UNDERSCORE) //$NON-NLS-1$
+					+ ".xml"; //$NON-NLS-1$
 			File file = new File(fileName);
 			if (file.exists()) {
 				decoder = new XMLDecoder(new FileInputStream(file));
@@ -1378,13 +1379,13 @@ public class NemoLists implements Cloneable {
 	public static String parameterMap(fr.ifremer.nemo.domain.Parameter param) {
         String name = param.getCode();
         if (param.getCode().equals(fr.ifremer.nemo.domain.AddedParameter.IdParameter.CJDY.toString())) name = ((fr.ifremer.nemo.domain.AddedParameter) param).getFullName();
-		String pdvCode = Utils.extraitCodeURN(getVocabMatch("P091", "P011",
-            param.getCode(), Messages.getString("NemoLists.unknown")));
-		String unitCode = Utils.extraitCodeURN(getVocabMatch("P091", "P061", param.getCode(), Messages
-				.getString("NemoLists.unknown")));
-		return "<subject>SDN:LOCAL:" + name
-				+ "</subject><object>SDN:P011::" + pdvCode
-				+ "</object><unit>SDN:P061::" + unitCode + "</unit>";
+		String pdvCode = Utils.extraitCodeURN(getVocabMatch("P091", "P011", //$NON-NLS-1$ //$NON-NLS-2$
+            param.getCode(), Messages.getString("NemoLists.unknown"))); //$NON-NLS-1$
+		String unitCode = Utils.extraitCodeURN(getVocabMatch("P091", "P061", param.getCode(), Messages //$NON-NLS-1$ //$NON-NLS-2$
+				.getString("NemoLists.unknown"))); //$NON-NLS-1$
+		return "<subject>SDN:LOCAL:" + name //$NON-NLS-1$
+				+ "</subject><object>SDN:P011::" + pdvCode //$NON-NLS-1$
+				+ "</object><unit>SDN:P061::" + unitCode + "</unit>";  //$NON-NLS-1$//$NON-NLS-2$
 	}
 
 	public static String getSdnParameters() {

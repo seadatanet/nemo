@@ -131,7 +131,7 @@ public class CDIResumeWriter {
                         
 
 						// Dataset name
-                        if(survey.getName().isEmpty())
+                        if(survey.getName().isEmpty() || survey.getName().equals("UNKNOWN")) //$NON-NLS-1$
                         {    
                             if(EditConversion.getDataSetRef().isEmpty())
                             {    
@@ -182,7 +182,7 @@ public class CDIResumeWriter {
 						writer.write(sep + idEdmoRespDonnees);
 						
 						// PDV code
-						writer.write(sep + Utils.extraitCodeURN(NemoLists.getVocabMatch("P091", "P011", param.getCode(), Messages.getString("CDIResumeWriter.notSpecified"))) + Global.EMPTY_STRING);   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+						writer.write(sep + Utils.extraitCodeURN(NemoLists.getVocabMatch("P091", "P021", param.getCode(), Messages.getString("NemoLists.unknown"))) + Global.EMPTY_STRING);   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
 
 						// Platform Type
 						writer.write(sep + codeTypePlateForme);
@@ -226,7 +226,11 @@ public class CDIResumeWriter {
 						
 						// data size
                         float datasize = survey.getDataSize();
-                        if (datasize == 0) datasize = station.getDataSize();
+                        if (datasize == 0){
+                            datasize = station.getDataSize();
+                        }else{
+                            datasize = datasize / survey.getStations().length;
+                        }
 						writer.write(sep + Formatter.getSingleton().formatFloat("%.3f",datasize)); //$NON-NLS-1$
 
 						// DIST website
