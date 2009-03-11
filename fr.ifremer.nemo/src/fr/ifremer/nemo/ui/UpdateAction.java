@@ -1,7 +1,5 @@
 package fr.ifremer.nemo.ui;
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
