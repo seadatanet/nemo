@@ -650,14 +650,21 @@ public class Etape {
                     ok = ok && resultat1;
                 }
                 if (checkValue){        
-                    value = EditStation.samplingRate.getValue();            
+                    value = EditStation.samplingRate.getValue();
+                    
                     if (value.trim().equals("")) {                                                                  //$NON-NLS-1$
                         ok = ok && false; 
-                        Utils.messageErreurAppend(Messages.getString("Etape.103"));                                 //$NON-NLS-1$
+                        Utils.messageErreurAppend(Messages.getString("Etape.103a"));                                 //$NON-NLS-1$
                     } else {
                         if (!Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", value.trim())) {                             //$NON-NLS-1$
                             ok = ok && false;
                             Utils.messageErreurAppend(Messages.getString("Etape.103"));                             //$NON-NLS-1$
+                        }else{
+                            Double dblValue = Double.parseDouble(value);
+                            if (dblValue.compareTo(new Double("0.0")) == 0){                           //$NON-NLS-1$
+                                ok = ok && false;
+                                Utils.messageErreurAppend(Messages.getString("Etape.103b"));                        //$NON-NLS-1$
+                            }
                         }
                     }
                 }
