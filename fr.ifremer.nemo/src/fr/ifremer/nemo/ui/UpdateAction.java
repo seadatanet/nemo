@@ -22,7 +22,7 @@ public class UpdateAction extends Action implements ISelectionListener,
 
     public final static String ID = "fr.ifremer.nemo.ui.UpdateAction"; //$NON-NLS-1$
     
-    private static boolean interrompu = false;
+    private static int nbListesOK = -1;
 
     // vars necessaires e la fenetre d'options
 
@@ -54,23 +54,28 @@ public class UpdateAction extends Action implements ISelectionListener,
         SWTProcessWS.fichiersConstantes = true;
 
         StringBuffer message = new StringBuffer();
-                  
-        interrompu = new SWTProgressWS().run();
+        
+        String error = new SWTProgressWS().run();
+        try{
+            nbListesOK = Integer.parseInt(error);
+        }catch (Exception e){
+            // l'erreur de viens pas d'un cancel utilisateur
+        }
         
 
-        if (interrompu){
+        if (nbListesOK != -1){
             message.append(Messages.getString("SWTProcessWS.2")); //$NON-NLS-1$
             message.append(Global.RN);
             message.append(Global.RN);
         }
         
         // affichage du resultat des mises à jour des fichiers
-        message.append(getMessageUpdate(Messages.getString("SWTProcessWS.3"), NemoLists.okDataTypes, NemoLists.nbDataTypes, NemoLists.getDataTypes().length)); //$NON-NLS-1$
-        message.append(getMessageUpdate(Messages.getString("SWTProcessWS.7"), NemoLists.okParameters, NemoLists.nbParameters, NemoLists.getParameters().length)); //$NON-NLS-1$
-        message.append(getMessageUpdate(Messages.getString("SWTProcessWS.8"), NemoLists.okSurveys, NemoLists.nbSurveys, NemoLists.getSurveys().length)); //$NON-NLS-1$
-        message.append(getMessageUpdate(Messages.getString("SWTProcessWS.9"), NemoLists.okVocabLists, NemoLists.nbVocabLists, NemoLists.getVocabList().size())); //$NON-NLS-1$
-        message.append(getMessageUpdate(Messages.getString("SWTProcessWS.11"), NemoLists.okVocabMaps, NemoLists.nbVocabMaps, NemoLists.getVocabMap().size())); //$NON-NLS-1$
-        message.append(getMessageUpdate(Messages.getString("SWTProcessWS.10"), NemoLists.okEdmo, NemoLists.nbEdmo, NemoLists.getEdmo().size())); //$NON-NLS-1$
+        message.append(getMessageUpdate(0, Messages.getString("SWTProcessWS.3"), NemoLists.okDataTypes, NemoLists.nbDataTypes, NemoLists.getDataTypes().length)); //$NON-NLS-1$
+        message.append(getMessageUpdate(1, Messages.getString("SWTProcessWS.7"), NemoLists.okParameters, NemoLists.nbParameters, NemoLists.getParameters().length)); //$NON-NLS-1$
+        message.append(getMessageUpdate(2, Messages.getString("SWTProcessWS.8"), NemoLists.okSurveys, NemoLists.nbSurveys, NemoLists.getSurveys().length)); //$NON-NLS-1$
+        message.append(getMessageUpdate(3, Messages.getString("SWTProcessWS.9"), NemoLists.okVocabLists, NemoLists.nbVocabLists, NemoLists.getVocabList().size())); //$NON-NLS-1$
+        message.append(getMessageUpdate(4, Messages.getString("SWTProcessWS.11"), NemoLists.okVocabMaps, NemoLists.nbVocabMaps, NemoLists.getVocabMap().size())); //$NON-NLS-1$
+        message.append(getMessageUpdate(5, Messages.getString("SWTProcessWS.10"), NemoLists.okEdmo, NemoLists.nbEdmo, NemoLists.getEdmo().size())); //$NON-NLS-1$
         
         MessageDialog.openInformation(shelloptions, "WebServices Info", message.toString()); //$NON-NLS-1$
 
@@ -81,30 +86,35 @@ public class UpdateAction extends Action implements ISelectionListener,
         // implement ISelectionListener...
     }
     
-    private String getMessageUpdate(String listeUpdated, boolean ok, int nb, int nbTot){
+    private String getMessageUpdate(int index, String listeUpdated, boolean ok, int nb, int nbTot){
         StringBuffer message = new StringBuffer();
-        message.append(padRightPoint(listeUpdated));
-        message.append(Global.SPACE);
-        message.append(Global.SPACE);
-        if (ok){
-            message.append("OK - "); //$NON-NLS-1$
-            message.append(nb);
+        // n'alimenter le message que si 
+        // - aucune interruption
+        // - interruption mais nbListesOK > index
+        if ((nbListesOK == -1) || (nbListesOK > index)){
+            message.append(padRightPoint(listeUpdated));
             message.append(Global.SPACE);
-            message.append(Messages.getString("SWTProcessWS.12")); //$NON-NLS-1$
-        }else{
-            if (interrompu && nb > 0){
-                message.append(Messages.getString("SWTProcessWS.14")); //$NON-NLS-1$
+            message.append(Global.SPACE);
+            if (ok){
+                message.append("OK - "); //$NON-NLS-1$
                 message.append(nb);
                 message.append(Global.SPACE);
                 message.append(Messages.getString("SWTProcessWS.12")); //$NON-NLS-1$
-                message.append(" / "); //$NON-NLS-1$
-                message.append(nbTot);
             }else{
-                message.append(Messages.getString("SWTProcessWS.13")); //$NON-NLS-1$
+                if ((nbListesOK != -1) && nb > 0){
+                    message.append(Messages.getString("SWTProcessWS.14")); //$NON-NLS-1$
+                    message.append(nb);
+                    message.append(Global.SPACE);
+                    message.append(Messages.getString("SWTProcessWS.12")); //$NON-NLS-1$
+                    message.append(" / "); //$NON-NLS-1$
+                    message.append(nbTot);
+                }else{
+                    message.append(Messages.getString("SWTProcessWS.13")); //$NON-NLS-1$
+                }
             }
+            message.append(Global.RN);
+            message.append(Global.RN);
         }
-        message.append(Global.RN);
-        message.append(Global.RN);
         return message.toString();
     }
     

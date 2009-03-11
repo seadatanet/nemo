@@ -1151,28 +1151,31 @@ public class NemoLists implements Cloneable {
 	public static void updateVocabLists(IProgressMonitor monitor) {
 		Iterator<String> keys = Utils.configuration.getVocabLists().keySet().iterator();
         int keySetSize = Utils.configuration.getVocabLists().size();
+        int idxCurrent = 0;
 
         nbVocabLists = 0;
         okVocabLists = false;
         
+        
       while (keys.hasNext()) {
-              String listName = keys.next();
-              if (!monitor.isCanceled()){
-                  StringBuffer msg = new StringBuffer();
-                  msg.append(Messages.getString("SWTProcessWS.9")); //$NON-NLS-1$
-                  msg.append(Global.SPACE);
-                  msg.append(listName);
-                  msg.append(" [");//$NON-NLS-1$
-                  msg.append((nbVocabLists + 1));
-                  msg.append(" / ");//$NON-NLS-1$
-                  msg.append(keySetSize);
-                  msg.append("]");//$NON-NLS-1$
-                  monitor.subTask(msg.toString());
-                  updateVocabList(listName);
-                  if (okVocabLists)  nbVocabLists++;
-              }else{
-                  okVocabLists = false;
-              }
+          idxCurrent ++ ;
+          String listName = keys.next();
+          if (!monitor.isCanceled()){
+              StringBuffer msg = new StringBuffer();
+              msg.append(Messages.getString("SWTProcessWS.9")); //$NON-NLS-1$
+              msg.append(Global.SPACE);
+              msg.append(listName);
+              msg.append(" [");//$NON-NLS-1$
+              msg.append((idxCurrent + 1));
+              msg.append(" / ");//$NON-NLS-1$
+              msg.append(keySetSize);
+              msg.append("]");//$NON-NLS-1$
+              monitor.subTask(msg.toString());
+              updateVocabList(listName);
+              if (okVocabLists)  nbVocabLists++;
+          }else{
+              okVocabLists = false;
+          }
       }
 	}
 

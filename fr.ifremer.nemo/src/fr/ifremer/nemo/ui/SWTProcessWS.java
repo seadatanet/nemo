@@ -57,6 +57,7 @@ public class SWTProcessWS implements IRunnableWithProgress {
 		if (fichiersConstantes) {
             
             // mise e jour fichiers constantes
+            int nbListesOK = 0;
             
             // appel au WebService NEMO
             monitor.subTask("WebService NEMO"); //$NON-NLS-1$
@@ -65,16 +66,19 @@ public class SWTProcessWS implements IRunnableWithProgress {
             if (!monitor.isCanceled()){
                 monitor.subTask(Messages.getString("SWTProcessWS.3")); //$NON-NLS-1$
                 NemoLists.updateDataTypes(monitor, service);
+                nbListesOK++;
             }
 
             if (!monitor.isCanceled()){
                 monitor.subTask(Messages.getString("SWTProcessWS.7")); //$NON-NLS-1$
                 NemoLists.updateParameters(monitor, service);
+                nbListesOK++;
             }
 
             if (!monitor.isCanceled()){
                 monitor.subTask(Messages.getString("SWTProcessWS.8")); //$NON-NLS-1$
                 NemoLists.updateSurveys(monitor, service);
+                nbListesOK++;
             }
             
 
@@ -82,21 +86,24 @@ public class SWTProcessWS implements IRunnableWithProgress {
                 monitor.subTask(Messages.getString("SWTProcessWS.9")); //$NON-NLS-1$
                 // FAE 0001132 : precision du nom de la liste dans le message
                 NemoLists.updateVocabLists(monitor);
+                nbListesOK++;
             }
             
 
             if (!monitor.isCanceled()){
                 monitor.subTask(Messages.getString("SWTProcessWS.11")); //$NON-NLS-1$
                 NemoLists.updateVocabMaps(monitor);
+                nbListesOK++;
             }			
 
             if (!monitor.isCanceled()){
                 monitor.subTask(Messages.getString("SWTProcessWS.10")); //$NON-NLS-1$
                 NemoLists.updateEdmo(monitor);
+                nbListesOK++;
             }
             
             if (monitor.isCanceled()){
-                throw new InterruptedException();
+                throw new InterruptedException(String.valueOf(nbListesOK));
             }
             
 		} else {
