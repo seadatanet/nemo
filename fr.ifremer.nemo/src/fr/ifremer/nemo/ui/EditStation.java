@@ -276,9 +276,9 @@ public class EditStation {
         
         if (!ViewFile.radProfilVertical.getSelection()){
             if (ViewFile.radSerieTempo.getSelection()){
-                endDepth = new StationSection(shell, NemoSection.S_EDEPTH, Messages.getString(NemoSection.S_EDEPTH), Global.EMPTY_STRING,  true, false, 1);
+                endDepth = new StationSection(shell, NemoSection.S_EDEPTH, Messages.getString(NemoSection.S_EDEPTH), Global.EMPTY_STRING,  true, true, 1);
                 endDepth.addManualInput(shell, null, ComboType.NONE, Global.EMPTY_STRING);
-                endDepth.addAutoInput(shell, null, false, MetaInData.INTERDIT, false);
+                endDepth.addAutoInput(shell, null, true, MetaInData.INTERDIT, false);
                 endDepth.setTimeSeriesInfo(true);
                 listeSectionsStation.add(endDepth);
             }

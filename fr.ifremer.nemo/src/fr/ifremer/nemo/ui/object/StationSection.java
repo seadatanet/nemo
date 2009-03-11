@@ -539,12 +539,15 @@ public class StationSection extends NemoSection
                             longitudeTest(); 
                             break;
                         case FRQ : 
+                            //errorMessage = Messages.getString("Etape.103");    //$NON-NLS-1$
                             samplingRateTest(); 
                             break;
                         case NONE : 
-                            if (name.equals(S_STATIONNUMBER)){                                
+                            if (name.equals(S_STATIONNUMBER)){    
+                                //errorMessage = Messages.getString("Etape.128") + Messages.getString("Etape.120");    //$NON-NLS-1$     //$NON-NLS-2$                        
                                 stationNumberTest(); 
                             }else{
+                                //errorMessage = Messages.getString("Etape.70");    //$NON-NLS-1$
                                 defaultTest();
                             }
                             break;
@@ -552,8 +555,8 @@ public class StationSection extends NemoSection
                             defaultTest();
                             break;
                     }
-                }catch (ParseException e) {
-
+                }catch (Exception e) {
+                    
                     Utils.messageErreurAppend(errorMessage);
                     resultTest.setText(Messages.getString("Etape.120"));            //$NON-NLS-1$
                     resultTest.pack();
@@ -717,13 +720,16 @@ public class StationSection extends NemoSection
         }
     }
 
-    protected void defaultTest(){
+    protected void defaultTest() throws NumberFormatException{
         String result = Global.EMPTY_STRING;
         if (!isManual()) {
             result = autoInput.getValue(0).trim();
             autoInput.selectInViewFile();
         } else {
             result = manualInput.getValue().trim();
+        }
+        if (!result.equals(Global.EMPTY_STRING)){
+            result = Formatter.getSingleton().formatInt("%-5d", Float.parseFloat(result)); //$NON-NLS-1$
         }
         resultTest.setText(result);
         resultTest.pack();
