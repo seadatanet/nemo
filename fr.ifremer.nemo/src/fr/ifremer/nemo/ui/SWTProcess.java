@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.util.Date;
-import java.util.List;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -96,7 +95,7 @@ public class SWTProcess implements IRunnableWithProgress {
 						+ e.getMessage());
 			}
 		}
-        DataModel.inputModel.setConverted(true);
+        if (!ViewFile.radioCollectCas1.getSelection()) DataModel.inputModel.setConverted(true);
 	}
 
 	private void runCampagne(IProgressMonitor monitor)
