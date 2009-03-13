@@ -274,14 +274,14 @@ public class AddedParameter extends Parameter
                 break;
             case LATX :
                 _default = "+99.999999";            //$NON-NLS-1$
-                _format = "%+10.6f";                     //$NON-NLS-1$
+                _format = "+DD.dddddd";                     //$NON-NLS-1$
                 _fullName = "LATITUDE";                      //$NON-NLS-1$
                 _unit = "decimal degree";                //$NON-NLS-1$
                 cible = Conversion.MEDATLAS;
                 break;
             case LONX :
                 _default = "+999.999999";           //$NON-NLS-1$
-                _format = "%+11.6f";                     //$NON-NLS-1$
+                _format = "+DDD.dddddd";                     //$NON-NLS-1$
                 _fullName = "LONGITUDE";                     //$NON-NLS-1$
                 _unit = "decimal degree";                //$NON-NLS-1$
                 cible = Conversion.MEDATLAS;

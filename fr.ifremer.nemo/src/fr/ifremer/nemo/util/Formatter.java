@@ -265,6 +265,24 @@ public class Formatter implements Cloneable {
 			return buff.toString();
 		}
 	}
+
+    /**
+     * 
+     * @param a_String
+     * @param length
+     * @return String
+     */
+    public String padStringLeft(String a_String, int length) {
+        if (a_String.length() > length) {
+            return a_String.substring(0, length);
+        } //else {
+            StringBuffer buff = new StringBuffer(a_String);
+            for (int i = a_String.length(); i < length; i++) {
+                buff.insert(0,' ');
+            }
+            return buff.toString();
+       // }
+    }
 	
 	/**
 	 * 

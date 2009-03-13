@@ -450,12 +450,10 @@ public class TimeSeriesModel implements Cloneable, PathElementHandler,
             parser.addStandardFunctions();
             parser.addStandardConstants();
             parser.addVariable("x", rate);      //$NON-NLS-1$
-            parser.parseExpression("x" + _sampleRateConversion.trim());
+            parser.parseExpression("x");        //$NON-NLS-1$
             
             Double resultJEP = parser.getValue();
             rate = resultJEP.longValue();
-            
-            a_TimeSeriesInformation.setSamplingRate(rate / 1000);
         }
         return rate;
     }
@@ -469,6 +467,7 @@ public class TimeSeriesModel implements Cloneable, PathElementHandler,
         if (Float.isNaN(timeSeries.getEndDate())) 
         {
             long rate = new Float(timeSeries.getSamplingRate() * 1000.0f).longValue();
+            //long rate = new Float(timeSeries.getSamplingRate()).longValue();
             int size = a_Station.parametersAt(0).valuesSize() - 1;
             long date = a_Station.getFullDate() + (size * rate);
             TimeZone tz = TimeZone.getTimeZone("GMT"); //$NON-NLS-1$

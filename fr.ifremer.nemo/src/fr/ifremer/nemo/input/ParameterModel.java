@@ -2,6 +2,9 @@ package fr.ifremer.nemo.input;
 
 import java.io.OutputStream;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
+import java.util.Locale;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -20,6 +23,8 @@ import fr.ifremer.nemo.ui.object.NemoSection;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.JulianDate;
+import fr.ifremer.nemo.util.LatitudeFormat;
+import fr.ifremer.nemo.util.LongitudeFormat;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSParameter;
 
@@ -494,7 +499,8 @@ public class ParameterModel implements Cloneable, SAXConsumer {
                         String inputType, 
                         int index, 
                         int indexPRES, 
-                        String line){
+                        String line)
+    throws StringIndexOutOfBoundsException, ParseException{
         
         AddedParameter p = (AddedParameter) _model;
         
@@ -564,6 +570,9 @@ public class ParameterModel implements Cloneable, SAXConsumer {
                 break;
             case LATX :
             case LONX :
+                // mesuré - flag = celui de la métadonnée
+                paramValue = convertCoordinates(station, line);
+                break;
             case BATH :
                 // mesuré - flag = celui de la métadonnée
                 paramValue = convertAddedInData(station, line);
@@ -574,6 +583,65 @@ public class ParameterModel implements Cloneable, SAXConsumer {
             paramValue.setQc(flag);
         }
         return paramValue;
+    }
+    
+
+    public ParameterValue convertCoordinates(Station station,
+                                        String line) 
+        throws StringIndexOutOfBoundsException, ParseException {
+
+        AddedParameter p = (AddedParameter) _model;
+        ParameterValue paramValue = new ParameterValue();
+        String fragmnt = getFragment().fullRetreive(line);
+        
+        if (fragmnt.equals(Global.EMPTY_STRING)) {
+            paramValue.setStringValue(Global.EMPTY_STRING);
+            paramValue.setQc(Global.DEFAULT_FLAG);
+        } else {
+            // VALUE
+            if (getModel().getDefault().equals(fragmnt)) {
+                paramValue.setStringValue(getModel().getDefault());
+            }else {
+                String value = Global.EMPTY_STRING;
+                String formatString = getModel().getFormat();
+                DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
+                switch (p.getIdParam()){
+                    case LATX :
+                        LatitudeFormat formatLAT = new LatitudeFormat(formatString, true);
+                        //value = String.valueOf(formatLAT.parseObject(fragmnt));
+                        //fragmnt = 
+                        //value = String.format(java.util.Locale.US, formatString, Float.parseFloat(formatLAT.parseObject(fragmnt)));
+                        value = (new DecimalFormat("#0.000000", symbols)).format(formatLAT.parseObject(fragmnt)); //$NON-NLS-1$
+                        value = Formatter.getSingleton().padStringLeft(value, formatString.length());
+                        break;
+                    case LONX :
+                        LongitudeFormat formatLON = new LongitudeFormat(formatString, true);
+                        //value = String.valueOf(formatLON.parseObject(fragmnt));
+                        value = (new DecimalFormat("#0.000000", symbols)).format(formatLON.parseObject(fragmnt)); //$NON-NLS-1$
+                        value = Formatter.getSingleton().padStringLeft(value, formatString.length());                        
+                        break;
+                    default :
+                        break;
+                }
+                paramValue.setStringValue(value);
+            }
+            
+            // Flag QC
+            String metaFlagCode;
+            switch (p.getIdParam()){
+                case LATX :
+                    metaFlagCode = NemoSection.S_LAT;
+                    break;
+                case LONX :
+                    metaFlagCode = NemoSection.S_LON;
+                    break;
+                default :
+                    metaFlagCode = Global.EMPTY_STRING;
+                    break;
+            }
+            paramValue.setQc(station.getMetaFlag(metaFlagCode));
+        }
+        return paramValue; 
     }
     
 
@@ -593,19 +661,20 @@ public class ParameterModel implements Cloneable, SAXConsumer {
             if (getModel().getDefault().equals(fragmnt)) {
                 paramValue.setStringValue(getModel().getDefault());
             }else {
-                String value = String.format(java.util.Locale.US, getModel().getFormat(), Float.parseFloat(fragmnt));
+                String value = Global.EMPTY_STRING;
+                String formatString = getModel().getFormat();
+                String type = formatString.substring(formatString.length() - 1);
+                if (type.equals("f") || type.equals("F")){       //$NON-NLS-1$//$NON-NLS-2$
+                    value = String.format(java.util.Locale.US, formatString, Float.parseFloat(fragmnt));
+                }else if (type.equals("d") || type.equals("D")){ //$NON-NLS-1$ //$NON-NLS-2$
+                    value = String.format(java.util.Locale.US, formatString, Integer.parseInt(fragmnt));
+                }
                 paramValue.setStringValue(value);
             }
             
             // Flag QC
             String metaFlagCode;
             switch (p.getIdParam()){
-                case LATX :
-                    metaFlagCode = NemoSection.S_LAT;
-                    break;
-                case LONX :
-                    metaFlagCode = NemoSection.S_LON;
-                    break;
                 case BATH :
                     metaFlagCode = NemoSection.S_DEPTH;
                     break;
