@@ -474,7 +474,7 @@ public class StationSection extends NemoSection
                 }
             });
             // DefaultValue
-            if (!DataModel.ouverture) manualInput.setEnabled(blnDefaultManual);
+            if (!EditStation.filled) manualInput.setEnabled(blnDefaultManual);
         }
        
         
@@ -496,7 +496,7 @@ public class StationSection extends NemoSection
             });      
             // DefaultValue
             //autoInput.getButtonPos().setSelection(!blnDefaultManual);
-            if (!DataModel.ouverture) autoInput.setEnabled(!blnDefaultManual);     
+            if (!EditStation.filled) autoInput.setEnabled(!blnDefaultManual);     
         }
         
         if (test) drawTest(sectionClient);
@@ -759,7 +759,6 @@ public class StationSection extends NemoSection
                 ExternalizableFormat format = propertyModel.getFormat();
                 
                 // gestion des flags qualite
-                //FIXME Flag qualite DECLINAISON MAGNETIQUE ?
                 String property = name;
                 if (name.equals(S_TIME) || name.equals(S_DATE)) property = Global.DATETIME;
                 FlagFragment flag = EditStation.qcFlags.fillFlagFragment(property);

@@ -104,7 +104,8 @@ public class EditData {
                     public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) 
                     {
-						razText();
+						//razText();
+                        TableData.go();
                         Utils.invalidEtapes();
 					}
 				});
@@ -180,34 +181,36 @@ public class EditData {
 		buttonRAZ = new Button(shell, SWT.NONE);
 	}
 
-	public static void razText() {
-
-		// raz de la table de parameters
-		// effacement de la liste des types de donnees dans la table
-		TableData.types = null;
-		TableData.types = new ArrayList<TypeData>();
-		// razTableData
-		TableData.razTableData();
-
-		// refresh de la table
-		// initTable();
-		TableData.creationTable();
-	}
+//	public static void razText() {
+//	    
+//        
+//		// raz de la table de parameters
+//		// effacement de la liste des types de donnees dans la table
+//        
+//        
+//		TableData.types = null;
+//        TableData.typesWS = null;
+//        TableData.initTypes();
+//        
+//		// razTableData
+//		TableData.razTableData();
+//
+//		// refresh de la table
+//		// initTable();
+//		TableData.creationTable();
+//	}
 
 	private static void disposeElements()
 	{
         if (buttonRAZ != null) buttonRAZ.dispose();
         if (buttonValidate != null) buttonValidate.dispose();
-        if (ViewFile.tableData != null){
-            razText();
-        }
 	}
 
 
     public static void invalidEtape(){
         okApresReset = false;
         validee = false;
-        if (ViewFile.affiche != 3){
+        if (ViewFile.affiche != 3 && loaded){
             loaded = false;
             disposeElements();
         }

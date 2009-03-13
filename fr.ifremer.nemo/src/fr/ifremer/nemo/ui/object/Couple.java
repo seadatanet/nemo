@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.ui.DataModel;
+import fr.ifremer.nemo.ui.EditStation;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
@@ -114,7 +115,7 @@ public class Couple implements UIobject
             valueText.setParent(parent);
             defaultValueTextSize();
             // Default value
-            if (!DataModel.ouverture && defaultValue != null) valueText.setText(defaultValue);
+            if (!EditStation.filled && defaultValue != null) valueText.setText(defaultValue);
         }else if (valueCombo != null){
             valueCombo.setParent(parent);
             valueCombo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL)); 

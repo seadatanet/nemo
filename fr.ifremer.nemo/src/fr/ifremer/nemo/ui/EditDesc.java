@@ -450,7 +450,7 @@ public class EditDesc {
     public static void invalidEtape(){
         okApresReset = false;
         validee = false;
-        if (ViewFile.affiche != 0){
+        if (ViewFile.affiche != 0 && loaded){
             loaded = false;
             disposeElements();
         }

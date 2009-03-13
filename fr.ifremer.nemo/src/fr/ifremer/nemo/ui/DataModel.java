@@ -266,10 +266,10 @@ public class DataModel
         listeWSParameters = NemoLists.getParameters();
 
         // Lancement de la table des parametres, onglet DATA, si pas deja creee
-        if (ViewFile.tableData == null || ViewFile.tableData.isDisposed())
-        {
+        //if (ViewFile.tableData == null || ViewFile.tableData.isDisposed())
+        //{
             TableData.go();
-        }
+        //}
 
         // verrouillage de l'option serieTemporelle pour eviter les changements
         ViewFile.radProfilVertical.setEnabled(false);
@@ -905,9 +905,7 @@ public class DataModel
 
     public static void fillSurvey()
     {
-
         // System.out.println("Remplissage onglet survey");
-
         Survey survey;
         if (ViewFile.dossierCampagne)
         {
@@ -954,8 +952,7 @@ public class DataModel
             e.printStackTrace();
         }
 
-        Utils
-            .selectComboLibelle(EditSurvey.comboRegion, survey.getRegionName());
+        Utils.selectComboLibelle(EditSurvey.comboRegion, survey.getRegionName());
         // EditSurvey.textRegion.setText(survey.getRegionName());
 
         // Source de donnees
@@ -1072,6 +1069,20 @@ public class DataModel
         // ENDDATETIME flag !!
         if(!stationModel_modele.getInputType().equals(Global.PROFILE)){
             PropertyModel propertyModel = stationModel_modele.getTimeSeriesModel().propertiesAt(NemoSection.S_EDATE);
+            EditStation.qcFlags.setFlagFragment(propertyModel.getFlag(), Global.ENDDATETIME, Messages.getString(Global.ENDDATETIME).trim());
+        }
+        
+    }
+
+    public static void fillBackStation()
+    {
+        for (NemoSection stationSection : EditStation.listeSectionsStation){
+            stationSection.fillFromModel(stationModel);
+        }
+        
+        // ENDDATETIME flag !!
+        if(!stationModel.getInputType().equals(Global.PROFILE)){
+            PropertyModel propertyModel = stationModel.getTimeSeriesModel().propertiesAt(NemoSection.S_EDATE);
             EditStation.qcFlags.setFlagFragment(propertyModel.getFlag(), Global.ENDDATETIME, Messages.getString(Global.ENDDATETIME).trim());
         }
         

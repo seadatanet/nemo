@@ -24,7 +24,7 @@ public class EditStation {
 
 	public static Button buttonValidate, buttonRAZ, buttonExpand;
 	public static Boolean okApresReset;
-	public static boolean expand, validee, loaded;
+	public static boolean expand, validee, loaded, filled;
 	public static ScrolledForm formEdition;
     public static ArrayList<NemoSection> listeSectionsStation;
 
@@ -52,6 +52,7 @@ public class EditStation {
         // affichage courant
         ViewFile.affiche = 2;
 		loaded = true;
+        filled = false;
 
 		// de base les sections sont refermees
 		expand = false;
@@ -75,8 +76,13 @@ public class EditStation {
         initStationSections();     
 
         // remplissage de l'IHM par le modèle chargé
-        if (DataModel.ouverture) {
+        if (DataModel.stationModel != null 
+                && DataModel.stationModel.getModel().getDataType() != null){
+            DataModel.fillBackStation();
+            filled = true;
+        }else if (DataModel.ouverture) {
             DataModel.fillStation();
+            filled = true;
         } 
 
 		formEdition.redraw();
@@ -351,21 +357,6 @@ public class EditStation {
             stationSection.initSection(s.getBody());
         }
 
-//		if (DataModel.station_modele != null) {
-//			if (DataModel.station_modele.getDataType() != null) {
-//				Utils.selectComboCode(dataType.getDatatype().getValueCombo(),
-//						DataModel.station_modele.getDataType().getCode());
-//			}
-//		} else if (DataModel.station != null) {
-//			if (DataModel.station.getDataType() != null) {
-//                Combo test = dataType.getDatatype().getValueCombo();
-//                
-//				Utils.selectComboCode(dataType.getDatatype().getValueCombo(),
-//						DataModel.station.getDataType().getCode());
-//			}
-//		}
-
-
 		ViewEdit.formEdition.setText(Messages.getString("EditStation.51")); //$NON-NLS-1$
 
 		// refresh global
@@ -436,7 +427,7 @@ public class EditStation {
     public static void invalidEtape(){
         okApresReset = false;
         validee = false;
-        if (ViewFile.affiche != 2){
+        if (ViewFile.affiche != 2 && loaded){
             loaded = false;
             disposeElements();
         }

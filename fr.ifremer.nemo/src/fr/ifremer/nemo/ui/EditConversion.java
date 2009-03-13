@@ -861,7 +861,7 @@ public class EditConversion extends Thread {
 
 
     public static void invalidEtape(){
-        if (ViewFile.affiche != 4){
+        if (ViewFile.affiche != 4 && loaded){
             loaded = false;
             disposeElements();
         }

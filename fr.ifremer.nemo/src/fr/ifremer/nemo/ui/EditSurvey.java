@@ -420,7 +420,7 @@ public class EditSurvey {
 		ViewFile.affiche = 1;
 
 		// remplissage de l'IHM par le modele charge
-		if (DataModel.ouverture) {
+        if (DataModel.ouverture) {
 			DataModel.fillSurvey();
 		} else {
 			Utils.selectComboCode(EditSurvey.comboDataCentres,
@@ -1069,7 +1069,7 @@ public class EditSurvey {
         if (!ViewFile.tabItem1.isDisposed()) {
             okApresReset = false;
             validee = false;
-            if (ViewFile.affiche != 1){
+            if (ViewFile.affiche != 1 && loaded){
                 loaded = false;
                 disposeElements();
             }

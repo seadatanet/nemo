@@ -27,11 +27,18 @@ public class TableData {
 
 	public static Table filtreTable;
 
-	public static ArrayList<TypeData> types, listeFiltree, typesWS;
+	public static ArrayList<TypeData> types;
+    public static ArrayList<TypeData> listeFiltree;
+    public static ArrayList<TypeData> typesWS;
 
 	public static void go() {
+        TableData.types = null;
+        TableData.typesWS = null;
 		initTypes();
-		creationTable();
+        if (!(ViewFile.tableData == null || ViewFile.tableData.isDisposed())){
+            razTableData();
+        }
+        creationTable();
 	}
 
 	public static void creationTable() {
@@ -149,8 +156,7 @@ public class TableData {
 				// if ((DataModel.ouverture == false)
 				// && (!ViewFile.checkBoxTempo.getSelection())) {
 				if ((DataModel.ouverture == false)
-						&& !(ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire
-								.getSelection())) {
+						&& ViewFile.radProfilVertical.getSelection()) {
 					// pas de modele charge donc on rajoute PRES
 					types.add(type);
 				}
