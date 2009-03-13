@@ -197,6 +197,7 @@ public class Etape {
 				if (nbre == 0) {
 					Utils.messageErreurAppend(Messages.getString("Etape.99")); //$NON-NLS-1$
 					ok = false;
+                    break;
 				}
 			}
             
