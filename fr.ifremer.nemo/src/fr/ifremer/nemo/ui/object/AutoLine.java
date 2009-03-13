@@ -389,7 +389,7 @@ public class AutoLine implements UIobject
 
             int iEnd = Integer.parseInt(end.getText());
             if (posVariable){ 
-                int index = iEnd;
+                int index = Integer.parseInt(start.getText());
                 String nextChar = Global.ZERO;
                 boolean continueBoucle = true;
                 while (continueBoucle && index < ligne.length()){

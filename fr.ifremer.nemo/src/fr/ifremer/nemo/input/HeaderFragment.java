@@ -496,7 +496,7 @@ public class HeaderFragment implements Cloneable, SAXConsumer {
             }
             if (i == _lastLine - 1) {
 
-                int index = _lastCharOffset;
+                int index = _firstCharOffset;
                 String nextChar = Global.ZERO;
                 boolean continueBoucle = true;
                 while (continueBoucle && index < a_Header[i].length()){
