@@ -61,17 +61,8 @@ public class EditData {
         shell = new Shell();
 		disposeElements();
 		
-//		listeTextData = new ArrayList<Text>();
-		
 		// init composants IHM
-//		initSections();
-//		initText();
 		initBoutons();
-//		initListeType();
-
-		// init de la arrayList des sections
-//		listeSectionsData = new ArrayList<Section>();
-//		listeSectionsNoms = new ArrayList<String>();
 
 		// bouton validate
 		buttonValidate.setParent(ViewEdit.formEdition.getBody());
@@ -104,8 +95,7 @@ public class EditData {
                     public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) 
                     {
-						//razText();
-                        TableData.go();
+                        TableData.fillTypes();
                         Utils.invalidEtapes();
 					}
 				});
@@ -114,10 +104,14 @@ public class EditData {
 		formEdition.reflow(true);
 		
 		// remplissage de l'IHM par le modele charge
-		
-		if (DataModel.ouverture) {
+		if (TableData.types != null && !TableData.types.isEmpty()){
+            TableData.razTableData();
+            TableData.creationTable();
+        }else if (DataModel.ouverture) {
 			DataModel.fillData();
-		}
+		}else{
+            TableData.fillTypes();
+        }
 	}
 
 	public static void razEdition() {
@@ -180,25 +174,6 @@ public class EditData {
 		buttonValidate = new Button(shell, SWT.NONE);
 		buttonRAZ = new Button(shell, SWT.NONE);
 	}
-
-//	public static void razText() {
-//	    
-//        
-//		// raz de la table de parameters
-//		// effacement de la liste des types de donnees dans la table
-//        
-//        
-//		TableData.types = null;
-//        TableData.typesWS = null;
-//        TableData.initTypes();
-//        
-//		// razTableData
-//		TableData.razTableData();
-//
-//		// refresh de la table
-//		// initTable();
-//		TableData.creationTable();
-//	}
 
 	private static void disposeElements()
 	{

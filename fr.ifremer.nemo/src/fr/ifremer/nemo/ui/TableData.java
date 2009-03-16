@@ -32,9 +32,9 @@ public class TableData {
     public static ArrayList<TypeData> typesWS;
 
 	public static void go() {
-        TableData.types = null;
-        TableData.typesWS = null;
-		initTypes();
+		initTypesWS();
+        types = null;
+        types = new ArrayList<TypeData>();
         if (!(ViewFile.tableData == null || ViewFile.tableData.isDisposed())){
             razTableData();
         }
@@ -122,50 +122,93 @@ public class TableData {
 
 	}
 
-	public static void initTypes() {
+//	public static void initTypes() {
+//
+//		// initialisation de la ArrayList des types des donnees e partir du
+//
+//		types = new ArrayList<TypeData>();
+//		typesWS = new ArrayList<TypeData>();
+//
+//		int taille = DataModel.listeWSParameters.length;
+//
+//		for (int i = 0; i < taille; i++) {
+//			WSParameter wsParameter = new WSParameter();
+//			wsParameter = DataModel.listeWSParameters[i];
+//
+//			// new type
+//			TypeData type = new TypeData();
+//
+//			// parametres
+//			type.setCode(wsParameter.getCode() + " - " + wsParameter.getName()); //$NON-NLS-1$
+//			type.setUnite(wsParameter.getUnit());
+//			type.setFormat(wsParameter.getFormat());
+//			type.setEntree(Global.EMPTY_STRING);
+//			type.setSortie(wsParameter.getDefaultValue());
+//
+//			// type.setQc("N");
+//
+//			// ajout dans liste
+//			typesWS.add(type);
+//
+//			// ajout systematique de PRES
+//			if (wsParameter.getCode().equals("PRES")) { //$NON-NLS-1$
+//
+//				// if ((DataModel.ouverture == false)
+//				// && (!ViewFile.checkBoxTempo.getSelection())) {
+//				if (ViewFile.radProfilVertical.getSelection()) {
+//					// pas de modele charge donc on rajoute PRES
+//					types.add(type);
+//				}
+//
+//			}
+//
+//		}
+//
+//	}
 
-		// initialisation de la ArrayList des types des donnees e partir du
+    public static void initTypesWS() {
 
-		types = new ArrayList<TypeData>();
-		typesWS = new ArrayList<TypeData>();
+        // initialisation de la ArrayList des types des donnees e partir du
+        typesWS = null;
+        typesWS = new ArrayList<TypeData>();
 
-		int taille = DataModel.listeWSParameters.length;
+        int taille = DataModel.listeWSParameters.length;
 
-		for (int i = 0; i < taille; i++) {
-			WSParameter wsParameter = new WSParameter();
-			wsParameter = DataModel.listeWSParameters[i];
+        for (int i = 0; i < taille; i++) {
+            WSParameter wsParameter = new WSParameter();
+            wsParameter = DataModel.listeWSParameters[i];
 
-			// new type
-			TypeData type = new TypeData();
+            // new type
+            TypeData type = new TypeData();
 
-			// parametres
-			type.setCode(wsParameter.getCode() + " - " + wsParameter.getName()); //$NON-NLS-1$
-			type.setUnite(wsParameter.getUnit());
-			type.setFormat(wsParameter.getFormat());
-			type.setEntree(Global.EMPTY_STRING);
-			type.setSortie(wsParameter.getDefaultValue());
+            // parametres
+            type.setCode(wsParameter.getCode() + " - " + wsParameter.getName()); //$NON-NLS-1$
+            type.setUnite(wsParameter.getUnit());
+            type.setFormat(wsParameter.getFormat());
+            type.setEntree(Global.EMPTY_STRING);
+            type.setSortie(wsParameter.getDefaultValue());
 
-			// type.setQc("N");
+            // ajout dans liste
+            typesWS.add(type);
+        }
+    }
 
-			// ajout dans liste
-			typesWS.add(type);
-
-			// ajout systematique de PRES
-			if (wsParameter.getCode().equals("PRES")) { //$NON-NLS-1$
-
-				// if ((DataModel.ouverture == false)
-				// && (!ViewFile.checkBoxTempo.getSelection())) {
-				if ((DataModel.ouverture == false)
-						&& ViewFile.radProfilVertical.getSelection()) {
-					// pas de modele charge donc on rajoute PRES
-					types.add(type);
-				}
-
-			}
-
-		}
-
-	}
+    public static void fillTypes() {
+        // initialisation de la ArrayList des types des donnees e partir du
+        types = null;
+        types = new ArrayList<TypeData>();
+        
+        for (TypeData type : typesWS){
+            // ajout systematique de PRES
+            if (type.getCode().startsWith("PRES")  //$NON-NLS-1$
+                    && ViewFile.radProfilVertical.getSelection()) {
+                // on rajoute PRES
+                types.add(type);
+            }
+        }
+        razTableData();
+        creationTable();
+    }
 
 	public static void initTable() {
 

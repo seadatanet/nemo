@@ -1,6 +1,7 @@
 package fr.ifremer.nemo.ui;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import org.eclipse.swt.widgets.Composite;
@@ -264,12 +265,7 @@ public class DataModel
 
         listeWSDataTypes = NemoLists.getDataTypes();
         listeWSParameters = NemoLists.getParameters();
-
-        // Lancement de la table des parametres, onglet DATA, si pas deja creee
-        //if (ViewFile.tableData == null || ViewFile.tableData.isDisposed())
-        //{
-            TableData.go();
-        //}
+        TableData.go();
 
         // verrouillage de l'option serieTemporelle pour eviter les changements
         ViewFile.radProfilVertical.setEnabled(false);
@@ -1107,6 +1103,8 @@ public class DataModel
     public static void fillData()
     {
         // /////////////////////////////////
+        TableData.types = null;
+        TableData.types = new ArrayList<TypeData>();
 
         ParameterModel[] parameterModels =
             stationModel_modele.getParameterModels();
