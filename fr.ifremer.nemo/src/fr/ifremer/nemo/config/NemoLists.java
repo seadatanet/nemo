@@ -1167,7 +1167,7 @@ public class NemoLists implements Cloneable {
               msg.append(Global.SPACE);
               msg.append(listName);
               msg.append(" [");//$NON-NLS-1$
-              msg.append((idxCurrent + 1));
+              msg.append((idxCurrent));
               msg.append(" / ");//$NON-NLS-1$
               msg.append(keySetSize);
               msg.append("]");//$NON-NLS-1$
