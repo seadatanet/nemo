@@ -866,6 +866,7 @@ public class Utils {
 			if (!ext.equals(ext1)) {
 				ok = false;
 				Utils.messageErreurAppend(Messages.getString("Utils.27")); //$NON-NLS-1$
+                break;
 			}
 
 		}
@@ -924,6 +925,7 @@ public class Utils {
 			if (!ext.equals(ext1)) {
 				ok = false;
 				Utils.messageErreurAppend(Messages.getString("Utils.27")); //$NON-NLS-1$
+                break;
 			}
 
 		}
@@ -956,6 +958,7 @@ public class Utils {
 			if (!ext.equals(ext1)) {
 				ok = false;
 				Utils.messageErreurAppend(Messages.getString("Utils.27")); //$NON-NLS-1$
+                break;
 			}
 
 		}
