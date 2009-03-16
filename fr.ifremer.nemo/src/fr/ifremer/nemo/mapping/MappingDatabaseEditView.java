@@ -5,6 +5,7 @@
 package fr.ifremer.nemo.mapping;
 
 import fr.ifremer.nemo.mapping.utils.UtilDisplay;
+import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Messages;
 
 import org.jdesktop.application.Action;
@@ -140,31 +141,54 @@ public class MappingDatabaseEditView extends FrameView {
 
     @Action
     public void newRecord() {
-    try
-    {
-        fr.ifremer.nemo.mapping.Mapping m = new fr.ifremer.nemo.mapping.Mapping(this.jTextField1.getText(),this.jTextField2.getText());
-        m.setFilename(this.filenameField.getText());
-        m.setModus(this.modusField.getText());
-        m.setDate(new Date());
-        entityManager.persist(m);
-        list.add(m);
         
-        this.jTextField1.setText("");
-        this.jTextField2.setText("");
-        this.filenameField.setText("");
-        this.modusField.setText("");
-
-    }
-    catch (EntityExistsException e)
-    {
-        UtilDisplay.error(Messages.getString("CouplingTableAjout.1"), MappingDatabaseEditApp.getApplication().getMainFrame());
-
-    }
-        int row = list.size()-1;
-        masterTable.setRowSelectionInterval(row, row);
-        masterTable.scrollRectToVisible(masterTable.getCellRect(row, 0, true));
-        setSaveNeeded(true);
-
+    // check parameters
+    StringBuffer errorMsg = new StringBuffer();
+    String localCdiId = this.jTextField1.getText();
+    String format = (String) this.jTextField2.getSelectedItem();
+    String modusText = ((String) this.modusField.getSelectedItem());
+    String filename = this.filenameField.getText();
+    
+    if (localCdiId == null || localCdiId.trim().equals("")) 
+        errorMsg.append(Messages.getString("CouplingTableAjout.localcdiid"));
+    if (modusText == null || modusText.trim().equals("")) 
+        errorMsg.append(Messages.getString("CouplingTableAjout.modus"));
+    if (format == null || format.trim().equals("")) 
+        errorMsg.append(Messages.getString("CouplingTableAjout.format"));
+    else if (modusText != null && modusText.substring(0, 1).equals(Mapping.MODUS_MONOSTATION) 
+            && format.equals(Conversion.MEDATLAS.toString())) 
+        errorMsg.append(Messages.getString("CouplingTableAjout.modus3"));
+    if (filename == null || filename.trim().equals("")) 
+        errorMsg.append(Messages.getString("CouplingTableAjout.filename"));
+    
+    if (errorMsg.length() > 0){
+        UtilDisplay.error(errorMsg, MappingDatabaseEditApp.getApplication().getMainFrame());
+    }else{
+        try
+        {
+            fr.ifremer.nemo.mapping.Mapping m = new fr.ifremer.nemo.mapping.Mapping(localCdiId, format);
+            m.setFilename(filename);
+            m.setModus(modusText.substring(0, 1));
+            m.setDate(new Date());        
+            entityManager.persist(m);
+            list.add(m);
+            
+            this.jTextField1.setText("");
+            this.jTextField2.setSelectedIndex(0);
+            this.filenameField.setText("");
+            this.modusField.setSelectedIndex(0);
+        }
+        catch (EntityExistsException e)
+        {
+            UtilDisplay.error(Messages.getString("CouplingTableAjout.1"), MappingDatabaseEditApp.getApplication().getMainFrame());
+    
+        }
+            int row = list.size()-1;
+            masterTable.setRowSelectionInterval(row, row);
+            masterTable.scrollRectToVisible(masterTable.getCellRect(row, 0, true));
+            setSaveNeeded(true);
+        }
+    
     }
 
     @Action(enabledProperty = "recordSelected")
@@ -300,12 +324,18 @@ public class MappingDatabaseEditView extends FrameView {
         masterTable = new javax.swing.JTable();
         modusLabel = new javax.swing.JLabel();
         filenameLabel = new javax.swing.JLabel();
-        modusField = new javax.swing.JTextField();
+        modusField = new javax.swing.JComboBox();
+        modusField.addItem("");
+        modusField.addItem(Mapping.MODUS_MONOSTATION + Messages.getString("CouplingTableLabel.modus1") );
+        modusField.addItem(Mapping.MODUS_MULTISTATIONS + Messages.getString("CouplingTableLabel.modus3"));
         filenameField = new javax.swing.JTextField();
         newButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JComboBox();
+        jTextField2.addItem("");
+        jTextField2.addItem(Conversion.MEDATLAS.toString());
+        jTextField2.addItem(Conversion.ODV.toString());
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
@@ -560,13 +590,13 @@ public class MappingDatabaseEditView extends FrameView {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JComboBox jTextField2;
     private javax.swing.JTextField jTextField3;
     private java.util.List<fr.ifremer.nemo.mapping.Mapping> list;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JScrollPane masterScrollPane;
     private javax.swing.JTable masterTable;
-    private javax.swing.JTextField modusField;
+    private javax.swing.JComboBox modusField;
     private javax.swing.JLabel modusLabel;
     private javax.swing.JButton newButton;
     private javax.swing.JProgressBar progressBar;

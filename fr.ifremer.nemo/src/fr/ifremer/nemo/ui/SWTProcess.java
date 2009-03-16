@@ -168,7 +168,7 @@ public class SWTProcess implements IRunnableWithProgress {
                             mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "MEDATLAS");  //$NON-NLS-1$
                             mapping.setFilename(EditConversion.nomHorsPrefix);
                             mapping.setDate(new Date());
-                            mapping.setModus("1");
+                            mapping.setModus(Mapping.MODUS_MULTISTATIONS);
                             
                             MappingTable.persist(mapping);
                             
@@ -211,7 +211,7 @@ public class SWTProcess implements IRunnableWithProgress {
                                     mapping.setFilename(EditConversion.nomHorsPrefix+File.separator+fichierSortie.getName());
                                 
                                 mapping.setDate(new Date());
-                                mapping.setModus("1");
+                                mapping.setModus(Mapping.MODUS_MONOSTATION);
                                 MappingTable.persist(mapping);
                             }
                             
@@ -230,7 +230,7 @@ public class SWTProcess implements IRunnableWithProgress {
                                 mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
                                 mapping.setFilename(EditConversion.nomHorsPrefix);
                                 mapping.setDate(new Date());
-                                mapping.setModus("1");    
+                                mapping.setModus(Mapping.MODUS_MULTISTATIONS);    
                                 
                                 MappingTable.persist(mapping);
     							/*CDIMappingWriter.getInstance().addMapping(
@@ -360,7 +360,7 @@ public class SWTProcess implements IRunnableWithProgress {
                                 else
                                     mapping.setFilename(EditConversion.nomHorsPrefix+File.separator+fichierSortie.getName());
                                 mapping.setDate(new Date());
-                                mapping.setModus("1");
+                                mapping.setModus(Mapping.MODUS_MONOSTATION);
                                 
                                 MappingTable.persist(mapping);
                             }
@@ -387,7 +387,7 @@ public class SWTProcess implements IRunnableWithProgress {
                                 mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
                                 mapping.setFilename(EditConversion.nomHorsPrefix);
                                 mapping.setDate(new Date());
-                                mapping.setModus("1");
+                                mapping.setModus(Mapping.MODUS_MULTISTATIONS);
                                 
                                 MappingTable.persist(mapping);
                             }
@@ -513,7 +513,7 @@ public class SWTProcess implements IRunnableWithProgress {
                                 else
                                     mapping.setFilename(EditConversion.nomHorsPrefix+File.separator+fichierSortie.getName());
                                 mapping.setDate(new Date());
-                                mapping.setModus("1");        
+                                mapping.setModus(Mapping.MODUS_MONOSTATION);        
                                 
                                 MappingTable.persist(mapping);
                                 
@@ -546,7 +546,7 @@ public class SWTProcess implements IRunnableWithProgress {
                                 mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
                                 mapping.setFilename(EditConversion.nomHorsPrefix);
                                 mapping.setDate(new Date());
-                                mapping.setModus("1");    
+                                mapping.setModus(Mapping.MODUS_MULTISTATIONS);    
                                 
                                 MappingTable.persist(mapping);
     						}

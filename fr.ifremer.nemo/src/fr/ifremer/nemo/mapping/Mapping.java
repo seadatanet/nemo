@@ -40,6 +40,10 @@ public class Mapping implements Serializable {
     @Column(name = "DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;    
+    
+    public final static String MODUS_MULTISTATIONS = "3"; //$NON-NLS-1$
+    public final static String MODUS_MONOSTATION = "1"; //$NON-NLS-1$
+    
 
     public Mapping() {
     }

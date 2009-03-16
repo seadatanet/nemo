@@ -9,6 +9,11 @@ package fr.ifremer.nemo.mapping.utils;
 import java.util.Collection;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
+
+import com.ago.model.Message;
+
+import fr.ifremer.nemo.util.Messages;
+
 import java.util.Iterator;
 
 
@@ -37,7 +42,7 @@ public class UtilDisplay {
     JOptionPane.showMessageDialog(
       a_Frame,
       a_Message,
-      "Information",
+      Messages.getString("CouplingTable.info"),
       JOptionPane.INFORMATION_MESSAGE);
   }  
   
@@ -52,7 +57,7 @@ public class UtilDisplay {
     JOptionPane.showMessageDialog(
       a_Frame,
       a_Message,
-      "Warning !",
+      Messages.getString("CouplingTable.warning"),
       JOptionPane.WARNING_MESSAGE);
   }
   
@@ -67,7 +72,7 @@ public class UtilDisplay {
     JOptionPane.showMessageDialog(
       a_Frame,
       a_Message,
-      "Erreur !",
+      Messages.getString("CouplingTable.error"),
       JOptionPane.ERROR_MESSAGE);
   }  
 
@@ -84,7 +89,7 @@ public class UtilDisplay {
     status = JOptionPane.showConfirmDialog(
                a_Frame,
                a_Message,
-               "Confirm Please !",
+               Messages.getString("CouplingTable.confirm"),
                JOptionPane.OK_CANCEL_OPTION);
     return status == JOptionPane.OK_OPTION;
   }

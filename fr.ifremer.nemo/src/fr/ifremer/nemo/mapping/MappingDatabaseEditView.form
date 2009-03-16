@@ -192,7 +192,7 @@
             <Property name="name" type="java.lang.String" value="filenameLabel" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="modusField">
+        <Component class="javax.swing.JComboBox" name="modusField">
           <Properties>
             <Property name="name" type="java.lang.String" value="modusField" noResource="true"/>
           </Properties>
@@ -226,7 +226,7 @@
             <Property name="name" type="java.lang.String" value="LocalCdiIdField" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField2">
+        <Component class="javax.swing.JComboBox" name="jTextField2">
           <Properties>
             <Property name="name" type="java.lang.String" value="FormatField" noResource="true"/>
           </Properties>
