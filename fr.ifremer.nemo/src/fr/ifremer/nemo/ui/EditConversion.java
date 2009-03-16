@@ -702,12 +702,12 @@ public class EditConversion extends Thread {
 		boolean blnOK = true;
 		String message = Messages.getString("CDIResumeWriter.configMessage"); //$NON-NLS-1$
 
-        if (ViewFile.radODV.getSelection()) {
+        //if (ViewFile.radODV.getSelection()) {
             if (Utils.configuration.getIdEdmoRespCdi().trim().equals(Global.EMPTY_STRING)) {
                 message += Global.RN + " - " + Messages.getString("OptionsAction.21"); //$NON-NLS-1$ //$NON-NLS-2$
                 blnOK = false;
             }
-        }
+        //}
         
         if (Utils.configuration.isWriteCdi())        
         {		

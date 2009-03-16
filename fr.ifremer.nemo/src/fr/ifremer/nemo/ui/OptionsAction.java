@@ -1160,19 +1160,26 @@ public class OptionsAction extends Action implements ISelectionListener,
     protected boolean checkConfig() {
         boolean blnOK = true;
         StringBuffer message = new StringBuffer();
+        StringBuffer messageCDI = new StringBuffer();
+
+        message.append(checkCombo(comboIdEdmoRespCdi, "OptionsAction.21")); //$NON-NLS-1$
+        if (message.length() > 0){
+            message .insert(0, Messages.getString("OptionsAction.checkConfig")); //$NON-NLS-1$
+            blnOK = false;
+        }
         
         if (checkCDI.getSelection())        
         {       
-            message.append(checkCombo(comboIdEdmoRespCdi, "OptionsAction.21")); //$NON-NLS-1$
-            message.append(checkCombo(comboCodeEdmoDonnees, "OptionsAction.24")); //$NON-NLS-1$
-            message.append(checkCombo(comboIdEdmoRespDonnees, "OptionsAction.25")); //$NON-NLS-1$
-            message.append(checkCombo(comboIdEdmoDistDonnees, "OptionsAction.26")); //$NON-NLS-1$
-            message.append(checkText(textUrlCdi, "OptionsAction.22", " - ")); //$NON-NLS-1$ //$NON-NLS-2$
-            message.append(checkCombo(comboMethodeCdi, "OptionsAction.23")); //$NON-NLS-1$
-            message.append(checkCombo(comboTypePlateForme, "ViewFile.typePlateForme")); //$NON-NLS-1$
+            messageCDI.append(checkCombo(comboCodeEdmoDonnees, "OptionsAction.24")); //$NON-NLS-1$
+            messageCDI.append(checkCombo(comboIdEdmoRespDonnees, "OptionsAction.25")); //$NON-NLS-1$
+            messageCDI.append(checkCombo(comboIdEdmoDistDonnees, "OptionsAction.26")); //$NON-NLS-1$
+            messageCDI.append(checkText(textUrlCdi, "OptionsAction.22", " - ")); //$NON-NLS-1$ //$NON-NLS-2$
+            messageCDI.append(checkCombo(comboMethodeCdi, "OptionsAction.23")); //$NON-NLS-1$
+            messageCDI.append(checkCombo(comboTypePlateForme, "ViewFile.typePlateForme")); //$NON-NLS-1$
 
-            if (message.length() > 0){
-                message.insert(0, Messages.getString("OptionsAction.checkCDI")); //$NON-NLS-1$
+            if (messageCDI.length() > 0){
+                messageCDI.insert(0, Messages.getString("OptionsAction.checkCDI")); //$NON-NLS-1$
+                message.append(messageCDI);
                 blnOK = false;
             }
         }    
