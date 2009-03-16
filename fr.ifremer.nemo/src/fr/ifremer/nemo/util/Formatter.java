@@ -125,7 +125,7 @@ public class Formatter implements Cloneable {
 	public String formatFloat(String format, float a_Float) {
 		if (Float.isNaN(a_Float)) {
 			return String.format(java.util.Locale.US, format, a_Float).replace(
-					"NaN", "   ");
+					"NaN", "   "); //$NON-NLS-1$ //$NON-NLS-2$
 		} else {
 			return String.format(java.util.Locale.US, format, a_Float);
 		}
@@ -142,11 +142,26 @@ public class Formatter implements Cloneable {
 	public String formatDouble(String format, Double a_Double) {
 		if (Double.isNaN(a_Double)) {
 			return String.format(java.util.Locale.US, format, a_Double).replace(
-					"NaN", "   ");
+					"NaN", "   "); //$NON-NLS-1$ //$NON-NLS-2$
 		} else {
 			return String.format(java.util.Locale.US, format, a_Double);
 		}
 	}
+    
+    
+    public String formatParameter(String format, Double a_Double) {
+        if (Double.isNaN(a_Double)) {
+            return String.format(java.util.Locale.US, format, a_Double).replace("NaN", "   "); //$NON-NLS-1$ //$NON-NLS-2$
+        } //else {
+
+        String type = format.substring(format.length() - 1);
+        if (type.equals("d") || type.equals("D")){ //$NON-NLS-1$ //$NON-NLS-2$
+            return String.format(java.util.Locale.US, format, a_Double.intValue());
+        }
+        
+       return String.format(java.util.Locale.US, format, a_Double);
+       //}
+    }
 
 	/**
 	 * 

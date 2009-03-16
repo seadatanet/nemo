@@ -76,7 +76,7 @@ $medparam.valuesAt($i).getStringValue() #end
 ##
 ## -- -- paramètres mesurés (boucle sur parameters)
 #foreach ($param in $station.parameters)
-$formatter.formatDouble( $param.format, $param.valuesAt($i).getValue()) #end
+$formatter.formatParameter( $param.format, $param.valuesAt($i).getValue()) #end
 ##
 ## -- -- flags qualité
 $station.getFlags($i)

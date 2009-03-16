@@ -90,7 +90,7 @@ $configuration.getSep()#if (($i == 0) || ($stationModel.isTrajectory()))$botDept
 ## -- -- paramètres ajoutés (boucle sur odvparameters)
 #foreach( $odvparam in $station.getOdvparameters() )$configuration.getSep()#if($odvparam.valuesAt($i).getStringValue() == $odvparam.default)-1.e10#else$odvparam.valuesAt($i).getStringValue()#end$configuration.getSep()$station.getAddedFlag($odvparam,$i)#end##
 ## -- -- paramètres mesurés (boucle sur parameters)
-#foreach( $param in $station.parameters )$configuration.getSep()#if($param.valuesAt($i).getValue().toString() == $param.default)-1.e10#else$formatter.formatDouble( $param.format, $param.valuesAt($i).getValue())#end$configuration.getSep()$station.getFlag($param,$i)#end
+#foreach( $param in $station.parameters )$configuration.getSep()#if($param.valuesAt($i).getValue().toString() == $param.default)-1.e10#else$formatter.formatParameter( $param.format, $param.valuesAt($i).getValue())#end$configuration.getSep()$station.getFlag($param,$i)#end
 
 #set( $count = $count + 1 )
 #set( $result = $notifier.progress( $count ))
