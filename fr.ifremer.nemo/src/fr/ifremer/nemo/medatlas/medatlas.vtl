@@ -1,7 +1,7 @@
 #set ( $count = 0 )
 #set( $Integer = 0 )
 *$formatter.padString( $survey.reference, 13) $formatter.padString( $survey.name, 32) $formatter.padString( $survey.shipCode, 4) $formatter.padString( $survey.shipName, 25)
-$formatter.formatDateTime("dd/MM/yyyy", $survey.startDate)-$formatter.formatDateTime("dd/MM/yyyy", $survey.endDate) $formatter.padString( $survey.regionName, 35)
+$formatter.formatDateTime("dd/MM/yyyy", $survey.startDate)-$formatter.formatDateTime("dd/MM/yyyy", $survey.endDate) $formatter.padString( $survey.regionName, 50)
 $formatter.padString($survey.countryCode, 2) $formatter.padString($survey.laboratories, 75)
 $formatter.padString($survey.chiefScientist, 40) Project=$formatter.padString($survey.projectName, 28)
 Regional Archiving= $formatter.padString($survey.dataCentre, 2)                   Availability=$survey.availabilityCode

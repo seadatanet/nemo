@@ -156,7 +156,7 @@ public class AutoLine implements UIobject
                         }
                         
                         // test sur 1ère ligne de données ou Métadata
-                        boolean ligneOK = checkInDataOrHeader(String.valueOf(lign), "This section");        //$NON-NLS-1$
+                        boolean ligneOK = checkInDataOrHeader(String.valueOf(lign), Global.SPACE);        //$NON-NLS-1$
                         
                         if (ligneOK){
                             // réactivation du champ "ligne"
