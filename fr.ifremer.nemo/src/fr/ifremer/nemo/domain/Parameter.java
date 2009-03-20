@@ -46,6 +46,11 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 	 */
 	protected String _unit;
 
+    /**
+     * 
+     */
+    protected String _globalQC;
+
 	/**
 	 * Liste ordonnee des valeurs mesurees de ce parametre
 	 */
@@ -62,6 +67,7 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 		_format = Global.EMPTY_STRING;
 		_fullName = Global.EMPTY_STRING;
 		_unit = Global.EMPTY_STRING;
+        _globalQC = Global.WORSE_FLAG;
 		_station = null;
 		_values = new java.util.ArrayList<ParameterValue>();
 	}
@@ -418,6 +424,9 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 			return;
 		nocheckAddValue(x);
 		x.setDefinition(this);
+        // globalQC
+        if (!x.getQc().equals(Global.ZERO) && x.getQc().compareTo(_globalQC) < 0)
+            _globalQC = x.getQc();
 	}
 
 	/**
@@ -646,5 +655,23 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 		// On recopie la liste temporaire dans la liste d'origine
 		_values = arlTemp;
 	}
+
+    /**
+     * Getter sur _globalQC.
+     * @return the globalQC
+     */
+    public String getGlobalQC()
+    {
+        return _globalQC;
+    }
+
+    /**
+     * Setter sur _globalQC.
+     * @param globalQC the globalQC to set
+     */
+    public void setGlobalQC(String globalQC)
+    {
+        _globalQC = globalQC;
+    }
 
 } /* End of class: Parameter */

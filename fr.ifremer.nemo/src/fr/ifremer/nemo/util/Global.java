@@ -5,6 +5,7 @@ public interface Global
 
     public static final String ZERO = "0"; //$NON-NLS-1$
     public static final String DEFAULT_FLAG = "9"; //$NON-NLS-1$
+    public static final String WORSE_FLAG = "Z"; //$NON-NLS-1$
     public static final String RN = "\r\n"; //$NON-NLS-1$
     public static final String STR_CONVERT = "x"; //$NON-NLS-1$
     public static final String UNDERSCORE = "_"; //$NON-NLS-1$

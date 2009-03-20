@@ -27,7 +27,7 @@ $line
 #foreach( $param in $station.parameters )
 *$formatter.padString($param.code, 4) $formatter.padString($param.fullName, 29) ($formatter.padString($param.unit, 28)) def.=$param.default
 #end
-*GLOBAL PROFILE QUALITY FLAG=0 GLOBAL PARAMETERS QC FLAGS=$station.getGlobalParametersQC()
+*GLOBAL PROFILE QUALITY FLAG=$station.getGlobalProfileQC() GLOBAL PARAMETERS QC FLAGS=$station.getGlobalParametersQC()
 *DC HISTORY=$formatter.limitString( $station.dcHistory1, 68)
 *$formatter.limitString( $station.dcHistory2, 80)
 *DM HISTORY=$formatter.limitString( $station.dmHistory1, 68)

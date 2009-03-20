@@ -221,7 +221,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		_dmHistory1 = Global.EMPTY_STRING;
 		_dmHistory2 = Global.EMPTY_STRING;
 		_globalParametersQC = Global.EMPTY_STRING;
-		_globalProfileQC = Global.ZERO;
+		_globalProfileQC = Global.WORSE_FLAG;
 		_offsetTU = 0.0f;
 		_reference = Global.EMPTY_STRING;
 		_surfaceSamples1 = Global.EMPTY_STRING;
@@ -234,7 +234,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		_survey = null;
 		_timeSeriesInformation = null;
 		_metaFlags = new HashMap<String, String>();
-        _fichierSource = "";
+        _fichierSource = Global.EMPTY_STRING;
 	}
 
 	/**
@@ -558,7 +558,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
         _dmHistory1 = Global.EMPTY_STRING;
         _dmHistory2 = Global.EMPTY_STRING;
         _globalParametersQC = Global.EMPTY_STRING;
-        _globalProfileQC = Global.ZERO;
+        _globalProfileQC = Global.WORSE_FLAG;
         _offsetTU = 0.0f;
         _reference = Global.EMPTY_STRING;
         _surfaceSamples1 = Global.EMPTY_STRING;
@@ -869,6 +869,14 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 * @see Station#_globalProfileQC
 	 */
 	public String getGlobalProfileQC() {
+        
+        String globalParameter = getGlobalParametersQC();
+        for (int i = 0; i < globalParameter.length(); i++){
+            String qc = globalParameter.substring(i, i+1);
+            if (!qc.equals(Global.ZERO) && qc.compareTo(_globalProfileQC) < 0)
+                _globalProfileQC = qc;
+        }
+        if (_globalProfileQC.equals(Global.WORSE_FLAG)) _globalProfileQC = Global.ZERO;
 		return _globalProfileQC;
 	}
 
@@ -1639,7 +1647,14 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 * @return String
 	 */
 	public String getDefaultGlobalParametersQC() {
-		return getGlobalParametersQC().replace(Global.ZERO, Global.DEFAULT_FLAG);
+        StringBuffer buffer = new StringBuffer();
+        for (int i = 0; i < _medparameters.size(); i++) {
+            buffer.append(Global.DEFAULT_FLAG);
+        }
+        for (int i = 0; i < parametersSize(); i++) {
+            buffer.append(Global.DEFAULT_FLAG);
+        }
+        return buffer.toString();
 	}
 
 	/**
@@ -1665,12 +1680,16 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 */
 	public String getGlobalParametersQC() {
 		StringBuffer buffer = new StringBuffer();
-        for (int i = 0; i < _medparameters.size(); i++) {
-            buffer.append(Global.ZERO);
+        for (AddedParameter medPara : _medparameters){
+            String qc = medPara.getGlobalQC();
+            if (qc.equals(Global.WORSE_FLAG)) qc = Global.ZERO;
+            buffer.append(qc);
         }
-		for (int i = 0; i < parametersSize(); i++) {
-			buffer.append(Global.ZERO);
-		}
+        for (Parameter para : _parameters){
+            String qc = para.getGlobalQC();
+            if (qc.equals(Global.WORSE_FLAG)) qc = Global.ZERO;
+            buffer.append(qc);
+        }
 		return buffer.toString();
 	}
 
