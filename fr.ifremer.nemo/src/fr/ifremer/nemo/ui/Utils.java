@@ -28,7 +28,6 @@ import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.input.HeaderFragment;
 import fr.ifremer.nemo.input.InputModel;
-import fr.ifremer.nemo.ui.object.NemoSection;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -62,8 +61,8 @@ public class Utils {
 		int nbreLignes, i, cumul, indexMax;
 		String ligne;
 
-		texteBrut = ""; //$NON-NLS-1$
-		texteFinal = ""; //$NON-NLS-1$
+		texteBrut = Global.EMPTY_STRING; 
+		texteFinal = Global.EMPTY_STRING;
 		nbreLignes = 0;
 
 		lignesBrutes = new ArrayList<String>();
@@ -72,7 +71,6 @@ public class Utils {
 		// lecture et concatenation
 		BufferedReader entree = new BufferedReader(new FileReader(fich));
 		do {
-			// System.out.println(nbreLignes);
 			ligne = entree.readLine();
 
 			if (ligne != null) {
@@ -107,28 +105,19 @@ public class Utils {
 		font = new Font(Application.display, "Courier", 10, SWT.NORMAL); //$NON-NLS-1$
 		zone.setFont(font);
 
-		// log ok
-		// ViewLog.styledTextLogErreurs.setText(Messages.getString("Utils.4"));
-		// //$NON-NLS-1$
-
 		// debut d'infos du fichier
-
 		ViewLog.styledTextLogInfos
 				.setText(Messages.getString("Utils.5") + fich); //$NON-NLS-1$
 		ViewLog.styledTextLogInfos
 				.append(Messages.getString("Utils.6") + nbreLignes); //$NON-NLS-1$
 
 		// reactivation de l'option serie temporelle onglet DESC
-		// ViewFile.checkBoxTempo.setEnabled(true);
 		ViewFile.radProfilVertical.setEnabled(true);
 		ViewFile.radSerieTempo.setEnabled(true);
 		ViewFile.radTrajectoire.setEnabled(true);
 
 		// FAE 089
-		// ViewFile.checkBoxTempo.setSelection(false);
-
 		// RAZ global si reouverture fichier en cours de processus
-
 		EditDesc.nomNemo();
 
 		if (raz) {
@@ -141,31 +130,6 @@ public class Utils {
 		}
 	}
 
-	public static void remplissageTexte(StyledText styledText) {
-		int taille;
-		taille = lignesBrutes.size();
-
-		for (int i = 0; i < taille; i++) {
-
-			String tmp = lignesBrutes.get(i);
-			stringBuffer.append(tmp);
-			stringBuffer.append("\n"); //$NON-NLS-1$
-
-		}
-
-		texteBrut = stringBuffer.toString();
-	}
-
-	public static void insertTexte(String chaine) {
-
-		// affichage de la regle de numeros 161 caracteres (calculer la taille
-		// max des lignes en entree puis seulement rajouter
-		// la regle concatenee au debut du texteBrut
-
-		texteBrut = ""; //$NON-NLS-1$
-
-	}
-
 	public static void inject(Text ligne, Text debut, Text fin,
 			StyledText styledtext) {
 		int deb, fi, lign, i;
@@ -175,16 +139,10 @@ public class Utils {
 		deb = styledtext.getSelection().x;
 		fi = styledtext.getSelection().y;
 
-		// System.out.println("deb clic = " + deb);
-		// System.out.println("fi clic = " + fi);
-
 		if (deb == fi) {
-			Utils.messageErreurAppend(Messages.getString("Utils.26"));
+			Utils.messageErreurAppend(Messages.getString("Utils.26")); //$NON-NLS-1$
 
 		} else {
-
-			// System.out.println("deb clic = " + deb);
-			// System.out.println("fi clic = " + fi);
 
 			lign = 1;
 			// calcul de la ligne en fonction de la valeur de x
@@ -209,7 +167,7 @@ public class Utils {
 			}
 
 			// remplissage ligne dans interface
-			ligne.setText("" + lign); //$NON-NLS-1$
+			ligne.setText(String.valueOf(lign));
 
 			deb = deb - taillesCumLignes[lign - 1] + 1; // debut reel sur ligne
 
@@ -218,8 +176,8 @@ public class Utils {
 			fi = fi - taillesCumLignes[lign - 1]; // fin reelle sur ligne
 
 			// remplissage debut et fin dans interface
-			debut.setText("" + deb); //$NON-NLS-1$
-			fin.setText("" + fi); //$NON-NLS-1$
+			debut.setText(String.valueOf(deb));
+			fin.setText(String.valueOf(fi)); 
 
 			debut.pack();
 			ligne.pack();
@@ -231,7 +189,7 @@ public class Utils {
 			Text debut, Text fin) {
 		int deb, fi, lign;
 
-		if (ligne.getText().equals("")) {
+		if (ligne.getText().equals(Global.EMPTY_STRING)) {
 			lign = DataModel.stationModel.getNumberOfLines() + 1;
 		} else {
 			lign = Integer.parseInt(ligne.getText());
@@ -261,11 +219,8 @@ public class Utils {
 		fi = styledtext.getSelection().y;
 		index = ViewFile.tableData.getSelectionIndex();
 
-		// System.out.println("deb clic = " + deb);
-		// System.out.println("fi clic = " + fi);
-
 		if (deb == fi) {
-			Utils.messageErreurAppend(Messages.getString("Utils.26"));
+			Utils.messageErreurAppend(Messages.getString("Utils.26")); //$NON-NLS-1$
 
 		} else {
 
@@ -300,15 +255,11 @@ public class Utils {
 			// debut de ligne
 			fi = fi - taillesCumLignes[lign - 1]; // fin reelle sur ligne
 
-			// System.out.println("DEBUT = " + deb + " FIN= " + fi);
-
 			// remplissage debut et fin dans interface
 			ViewFile.tableData.getItems()[index].setText(debut, String
 					.valueOf(deb));
 			ViewFile.tableData.getItems()[index].setText(fin, String
 					.valueOf(fi));
-
-			//Utils.messageErreur("");
 		}
 	}
 
@@ -323,11 +274,8 @@ public class Utils {
 			deb = styledtext.getSelection().x;
 			fi = styledtext.getSelection().y;
 
-			// System.out.println("deb clic = " + deb);
-			// System.out.println("fi clic = " + fi);
-
 			if (deb == fi) {
-				Utils.messageErreurAppend(Messages.getString("Utils.26"));
+				Utils.messageErreurAppend(Messages.getString("Utils.26")); //$NON-NLS-1$
 			} else {
 
 				lign = 1;
@@ -352,14 +300,9 @@ public class Utils {
 
 				}
 
-				deb = deb - taillesCumLignes[lign - 1] + 1; // debut reel sur
-				// ligne
-				// :
-				// nbre caracs par rapport
-				// debut de ligne
+				deb = deb - taillesCumLignes[lign - 1] + 1; // debut reel sur ligne : 
+                // nbre caracs par rapport debut de ligne
 				fi = fi - taillesCumLignes[lign - 1]; // fin reelle sur ligne
-
-				// System.out.println("DEBUT = " + deb + " FIN= " + fi);
 
 				// remplissage ligne dans interface
 				table.getItems()[index].setText(indexLigne, String
@@ -373,8 +316,6 @@ public class Utils {
 				// Test apres injection
 				testFlag(styledtext, flagTable, table, indexLigne, indexDebut,
 						indexFin, indexTest1, indexTest2);
-
-				//Utils.messageErreur("");
 			}
 		}
 	}
@@ -394,14 +335,12 @@ public class Utils {
 				fi = Integer.parseInt(table.getItems()[i].getText(indexFin))
 						+ taillesCumLignes[lign - 1];
 
-				// styledtext.setSelection(deb - 1, fi);
-
 				// remplissage test entree dans interface
 				table.getItems()[i].setText(indexTest1, styledtext.getText(
 						deb - 1, fi - 1));
 
 				// remplissage test sortie dans interface
-				String flagSDN = "0";
+				String flagSDN = Global.ZERO;
 				int size = flagTable.getFlags().size();
 				for (int j = 0; j < size; j++) {
 					if (flagTable.getFlags().get(j).getLocal().equals(
@@ -425,16 +364,13 @@ public class Utils {
 		deb = styledtext.getSelection().x;
 		fi = styledtext.getSelection().y;
 
-		// System.out.println("deb clic = " + deb);
-		// System.out.println("fi clic = " + fi);
-
 		lignDepart = 1;
 		lignFin = 1;
 		// calcul de la ligne en fonction de la valeur de x
 		// parcours du tableau des tailles de lignes cumulees
 
 		if (deb == fi) {
-			Utils.messageErreurAppend(Messages.getString("Utils.26"));
+			Utils.messageErreurAppend(Messages.getString("Utils.26")); //$NON-NLS-1$
 
 		} else {
 
@@ -477,12 +413,9 @@ public class Utils {
 
 			}
 
-			// System.out.println("ligne fin = " + lignFin);
-
 			// remplissage nbreLignes dans interface
 			nbrelignes.setText("" + (lignFin - lignDepart + 1)); //$NON-NLS-1$
 			nbrelignes.pack();
-			//Utils.messageErreur("");
 		}
 	}
 
@@ -502,8 +435,7 @@ public class Utils {
 
 	}
 
-	public static void calculOffsetDebOffsetFin(HeaderFragment frag,
-			Cursor cursor) {
+	public static void calculOffsetDebOffsetFin(HeaderFragment frag, Cursor cursor) {
 		// calcule debut et fin e partir du surlignement souris
 		int offsetDebut, offsetFin, ligneDebut, ligneFin;
 
@@ -512,8 +444,6 @@ public class Utils {
 
 		offsetDebut = cursor.getX() - taillesCumLignes[ligneDebut - 1] + 1;
 		offsetFin = cursor.getY() - taillesCumLignes[ligneFin - 1];
-		// System.out.println("offsetdebut =" + offsetDebut + " offsetfin="
-		// + offsetFin);
 		if (offsetDebut < 0) {
 			frag.setFirstCharOffset(1);
 		} else {
@@ -523,30 +453,20 @@ public class Utils {
 		if (offsetFin > 0) {
 			frag.setLastCharOffset(offsetFin);
 		}
-
-		/*
-		 * if (EditStation.buttonVar.getSelection()) {
-		 * frag.setLastCharOffset(-1); } else {
-		 * frag.setLastCharOffset(offsetFin); }
-		 */
-
 	}
 
 	public static void calculRealOffsetFin(HeaderFragment frag) {
 		int offsetFin;
-		int enteteFichier = Integer.parseInt(EditDesc.lignesEnteteFichier
-				.getText());
+		int enteteFichier = Integer.parseInt(EditDesc.sectionEnteteFichier.getValue());
 
 		// calcul de l'offset de fin après rechargement du modèle
 		if (enteteFichier > 0) {
 			// prise en compte de l'entête de fichier
 			offsetFin = frag.getLastCharOffset()
 					+ taillesCumLignes[frag.getLastLine()
-							+ Integer.parseInt(EditDesc.lignesEnteteFichier
-									.getText())]
+							+ Integer.parseInt(EditDesc.sectionEnteteFichier.getValue())]
 					- taillesCumLignes[frag.getFirstLine()
-							+ Integer.parseInt(EditDesc.lignesEnteteFichier
-									.getText())];
+							+ Integer.parseInt(EditDesc.sectionEnteteFichier.getValue())];
 		} else {
 			// il n'y a pas d'entête de fichier
 			offsetFin = frag.getLastCharOffset()
@@ -1002,7 +922,7 @@ public class Utils {
 
 	public static void messageErreurAppend(String message) {
 
-		ViewLog.styledTextLogErreurs.append("\n");
+		ViewLog.styledTextLogErreurs.append(Global.RN);
 
 		ViewLog.styledTextLogErreurs.append(message);
 		Color truc = new Color(Application.display, 255, 0, 0);
@@ -1249,20 +1169,13 @@ public class Utils {
 		int size = combo.getItemCount();
 		boolean blnFound = false;
 
-		if (libelle.equals("")) {
+		if (libelle.equals(Global.EMPTY_STRING)) {
 			combo.select(-1);
 		} else {
 
 			while (i < size) {
                 combo.select(i);
-				// && !combo.getText().substring(0,
-				// Math.min(combo.getText().length(), length)).equals(
-				// libelle)) {
 				int debutLibelle = combo.getText().length() - length;
-//                if (combo.getText().startsWith("61b")){
-//                    System.out.println("--" + combo.getText().substring(debutLibelle).trim() + "--");
-//                    System.out.println("--" + libelle + "--");
-//                }
 				if (debutLibelle >= 0) {
 					if (combo.getText().substring(debutLibelle).trim().equalsIgnoreCase(libelle)) {
 						blnFound = true;
@@ -1466,7 +1379,5 @@ public class Utils {
         
         // reinitialisation de la conversion
         if (DataModel.inputModel != null) DataModel.inputModel.setConverted(false);
-    
-        //messageErreur(Global.EMPTY_STRING);
     }
 }

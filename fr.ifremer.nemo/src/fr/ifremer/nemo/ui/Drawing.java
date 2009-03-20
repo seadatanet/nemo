@@ -11,7 +11,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Text;
@@ -27,123 +26,123 @@ public class Drawing {
 
 	public static Composite sectionClientType;
 
-	public static void sectionComboInjectNbreLignes(ScrolledForm form,
-			String nomSection, String description, Section section,
-			Button radEOF, Button radLigne, Button radManuel, Text txtManuel, Button btnInject) {
-
-		final Text manuel;
-		final ScrolledForm forme;
-		final Button inject;
-		
-		forme = form;
-
-		section.setParent(form);
-
-		section = ViewEdit.toolkitEdition.createSection(form.getBody(),
-				Section.DESCRIPTION | Section.TITLE_BAR | Section.TWISTIE
-						| Section.COMPACT);
-
-		section.addExpansionListener(new ExpansionAdapter() {
-			public void expansionStateChanged(ExpansionEvent e) {
-				forme.reflow(true);
-			}
-		});
-        
-		Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL);
-		section.setFont(font);
-		section.setText(nomSection);
-		section.setDescription(description);
-		Composite sectionClient = ViewEdit.toolkitEdition
-				.createComposite(section);
-		sectionClient.setLayout(new GridLayout());
-		GridData gd = new GridData();
-		gd.horizontalSpan = 2;
-
-		// saisie manuelle
-		// faire groupe et radios
-
-		// EOF
-		radEOF.setParent(sectionClient);
-		radEOF.setText("EOF");
-		
-		// Ligne vide
-		radLigne.setParent(sectionClient);
-		radLigne.setText(Messages.getString("EditDesc.ligneVide"));
-		
-		// Indicateur manuel
-		radManuel.setParent(sectionClient);
-		radManuel.setText(Messages.getString("EditDesc.indicateur"));
-		
-		txtManuel.setParent(sectionClient);
-		manuel = txtManuel;
-		
-		// bouton d'injection de la position des valeurs
-		btnInject.setParent(sectionClient);
-		btnInject.setText(Messages.getString("Drawing.1"));
-		inject = btnInject;
-		
-		section.setClient(sectionClient);
-		radEOF
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					@Override
-                    public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent g) {
-                        EditDesc.selectComboEnd(EditDesc.radEOF);
-					}
-				});
-		
-		radLigne
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					@Override
-                    public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent g) {
-                        EditDesc.selectComboEnd(EditDesc.radLigne);
-					}
-				});
-
-		radManuel
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					@Override
-                    public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent g) {
-                        EditDesc.selectComboEnd(EditDesc.radManuel);
-					}
-				});
-		
-		// bouton inject
-		btnInject
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					@Override
-                    public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent g) {
-						manuel.setText(ViewFile.textAreaDescription.getText().substring(
-								ViewFile.textAreaDescription.getSelection().x, 
-								ViewFile.textAreaDescription.getSelection().y));
-						manuel.pack();
-
-					}
-				});
-		
-
-		// saisie manuelle par defaut et groupe desactive
-		if (DataModel.ouverture) {
-			if (DataModel.stationModel_modele.isEndOnEOF()) {
-				EditDesc.selectComboEnd(EditDesc.radEOF);
-			} else if (DataModel.stationModel_modele.isEndOnEOF()) {
-				EditDesc.selectComboEnd(EditDesc.radLigne);
-			} else if (DataModel.stationModel_modele.isEndOnEOF()) {
-				EditDesc.selectComboEnd(EditDesc.radManuel);
-			}
-		} else {
-			// par defaut manuel
-			EditDesc.selectComboEnd(EditDesc.radEOF);
-		}
-		
-		
-
-		// ajout de la section dans la liste des sections de description
-		ajoutSectionDansListeDesc(section);
-    }
+//	public static void sectionComboInjectNbreLignes(ScrolledForm form,
+//			String nomSection, String description, Section section,
+//			Button radEOF, Button radLigne, Button radManuel, Text txtManuel, Button btnInject) {
+//
+//		final Text manuel;
+//		final ScrolledForm forme;
+//		final Button inject;
+//		
+//		forme = form;
+//
+//		section.setParent(form);
+//
+//		section = ViewEdit.toolkitEdition.createSection(form.getBody(),
+//				Section.DESCRIPTION | Section.TITLE_BAR | Section.TWISTIE
+//						| Section.COMPACT);
+//
+//		section.addExpansionListener(new ExpansionAdapter() {
+//			public void expansionStateChanged(ExpansionEvent e) {
+//				forme.reflow(true);
+//			}
+//		});
+//        
+//		Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL);
+//		section.setFont(font);
+//		section.setText(nomSection);
+//		section.setDescription(description);
+//		Composite sectionClient = ViewEdit.toolkitEdition
+//				.createComposite(section);
+//		sectionClient.setLayout(new GridLayout());
+//		GridData gd = new GridData();
+//		gd.horizontalSpan = 2;
+//
+//		// saisie manuelle
+//		// faire groupe et radios
+//
+//		// EOF
+//		radEOF.setParent(sectionClient);
+//		radEOF.setText("EOF");
+//		
+//		// Ligne vide
+//		radLigne.setParent(sectionClient);
+//		radLigne.setText(Messages.getString("EditDesc.ligneVide"));
+//		
+//		// Indicateur manuel
+//		radManuel.setParent(sectionClient);
+//		radManuel.setText(Messages.getString("EditDesc.indicateur"));
+//		
+//		txtManuel.setParent(sectionClient);
+//		manuel = txtManuel;
+//		
+//		// bouton d'injection de la position des valeurs
+//		btnInject.setParent(sectionClient);
+//		btnInject.setText(Messages.getString("Drawing.1"));
+//		inject = btnInject;
+//		
+//		section.setClient(sectionClient);
+//		radEOF
+//				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+//					@Override
+//                    public void widgetSelected(
+//							org.eclipse.swt.events.SelectionEvent g) {
+//                        EditDesc.selectComboEnd(EditDesc.radEOF);
+//					}
+//				});
+//		
+//		radLigne
+//				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+//					@Override
+//                    public void widgetSelected(
+//							org.eclipse.swt.events.SelectionEvent g) {
+//                        EditDesc.selectComboEnd(EditDesc.radLigne);
+//					}
+//				});
+//
+//		radManuel
+//				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+//					@Override
+//                    public void widgetSelected(
+//							org.eclipse.swt.events.SelectionEvent g) {
+//                        EditDesc.selectComboEnd(EditDesc.radManuel);
+//					}
+//				});
+//		
+//		// bouton inject
+//		btnInject
+//				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+//					@Override
+//                    public void widgetSelected(
+//							org.eclipse.swt.events.SelectionEvent g) {
+//						manuel.setText(ViewFile.textAreaDescription.getText().substring(
+//								ViewFile.textAreaDescription.getSelection().x, 
+//								ViewFile.textAreaDescription.getSelection().y));
+//						manuel.pack();
+//
+//					}
+//				});
+//		
+//
+//		// saisie manuelle par defaut et groupe desactive
+//		if (DataModel.ouverture) {
+//			if (DataModel.stationModel_modele.isEndOnEOF()) {
+//				EditDesc.selectComboEnd(EditDesc.radEOF);
+//			} else if (DataModel.stationModel_modele.isEndOnEOF()) {
+//				EditDesc.selectComboEnd(EditDesc.radLigne);
+//			} else if (DataModel.stationModel_modele.isEndOnEOF()) {
+//				EditDesc.selectComboEnd(EditDesc.radManuel);
+//			}
+//		} else {
+//			// par defaut manuel
+//			EditDesc.selectComboEnd(EditDesc.radEOF);
+//		}
+//		
+//		
+//
+//		// ajout de la section dans la liste des sections de description
+//		ajoutSectionDansListeDesc(section);
+//    }
 
 	public static void sectionLabelTextInjectNbreLignes(ScrolledForm form,
 			String nomSection, String description, Section section, Text manuel) {
@@ -214,7 +213,7 @@ public class Drawing {
 
 	public static void ajoutSectionDansListeDesc(Section section) {
 
-		EditDesc.listeSectionsDesc.add(section);
+		//EditDesc.listeSectionsDesc.add(section);
 		//System.out.println("ajout section ok");
 
 	}

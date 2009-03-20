@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 import org.eclipse.swt.widgets.Shell;
 
 import fr.ifremer.nemo.ui.object.AutoLine;
+import fr.ifremer.nemo.ui.object.FileSection;
 import fr.ifremer.nemo.ui.object.NemoSection;
 import fr.ifremer.nemo.ui.object.AutoLine.MetaInData;
 import fr.ifremer.nemo.util.DateTimeFormat;
@@ -47,31 +48,24 @@ public class Etape {
 			}
 		}
         
-		// Table table;
-
-		// section entete de fichier
-		resultat = Regexp.checkTextValeur(EditDesc.lignesEnteteFichier,
-				Messages.getString("Etape.1")); //$NON-NLS-1$
-		ok = ok && resultat;
-
-		// section entete station
-		resultat = Regexp.checkTextValeur(EditDesc.lignesEnteteStation,
-				Messages.getString("Etape.2")); //$NON-NLS-1$
-		ok = ok && resultat;
-
-		// section fin de station
-		resultat = Regexp.checkTextValeur(EditDesc.lignesFinStation, Messages
-				.getString("Etape.3")); //$NON-NLS-1$
-		ok = ok && resultat;
-
-		// section fin de donnees
-		if (EditDesc.radManuel.getSelection()) {
-			if (EditDesc.txtManuel.getText().equals(Global.EMPTY_STRING)) {
-				ok = false;
-				Utils.messageErreurAppend(Messages
-						.getString("EditDesc.indicateurVide")); //$NON-NLS-1$
-			}
-		}
+        
+        for (NemoSection desc : EditDesc.listeSectionsDesc){
+            
+            if (desc.isEnabled()){
+                if (desc.getName().equals(NemoSection.F_ENDDATA)){
+                    if (((FileSection) desc).radManuelSelected() 
+                            && ((FileSection) desc).getValue().equals(Global.EMPTY_STRING)){
+                        ok = false;
+                        Utils.messageErreurAppend(Messages.getString("EditDesc.indicateurVide")); //$NON-NLS-1$
+                    }
+                }else{                    
+                    resultat = ((FileSection) desc).checkValue();
+                    ok = ok && resultat;
+                }
+            }else{
+                ((FileSection) desc).initValue();
+            }
+        }
 
 		// check des valeurs date/heure séries tempo
 		// if (ViewFile.checkBoxTempo.getSelection()) {
@@ -253,7 +247,7 @@ public class Etape {
         int size = EditStation.qcFlags.getTabFlagQC().getItemCount();
 
         // raz du message d'erreurs
-        Utils.messageErreur(Global.EMPTY_STRING);                                                                     //$NON-NLS-1$
+        Utils.messageErreur(Global.EMPTY_STRING);                                                                     
 
 		// NUMERO STATION
 		if (!EditStation.stationNumber.isManual()) {
@@ -839,6 +833,7 @@ public class Etape {
 		// test de toutes les valeurs debut / fin des Data
 		Boolean ok = true;
 		Boolean valeurNonRemplie = false;
+        boolean existDEPH = false;
 		// retour e l'onglet message d'erreur
 		ViewLog.tabFolderLog.setSelection(0);
 
@@ -884,6 +879,10 @@ public class Etape {
 				 * Utils.messageErreurAppend(Messages.getString("Etape.105"));
 				 * //$NON-NLS-1$ }
 				 */
+                
+                // recherche de l'existance du paramètre DEPH
+                if (typeCourant.getCode().startsWith("DEPH"))  //$NON-NLS-1$
+                    existDEPH = true;
 
 				// test direct sur valeur entree
 				// ok
@@ -999,7 +998,13 @@ public class Etape {
                 }else{
                     EditConversion.setWarningData(Global.EMPTY_STRING);
                 }
-			}
+			}else if (ViewFile.typeFichierEntree().equals(Global.TRAJECTORY)){
+                if (!code.equals("DEPH") && existDEPH) { //$NON-NLS-1$
+                    // DEPH existe et n'est pas en premier
+                    Utils.messageErreurAppend(Messages.getString("Etape.131")); //$NON-NLS-1$
+                    ok = ok && false;
+                }
+            }
 		}
 		if (ok) {
 			EditData.okApresReset = true;

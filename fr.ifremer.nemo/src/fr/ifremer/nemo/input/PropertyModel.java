@@ -721,7 +721,7 @@ public class PropertyModel implements Cloneable, PathElementHandler,
         
         if (ligne == null)
             ligne = String.valueOf(((Integer.valueOf(line.getNumberLine().getText())) 
-                        - Integer.valueOf(EditDesc.lignesEnteteFichier.getText())));
+                        - Integer.valueOf(EditDesc.sectionEnteteFichier.getValue())));
         String debut = line.getStart().getText();
         String fin = line.getEnd().getText();
 

@@ -8,12 +8,12 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
-import org.eclipse.ui.forms.widgets.Section;
 
+import fr.ifremer.nemo.ui.object.FileSection;
+import fr.ifremer.nemo.ui.object.NemoSection;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -21,36 +21,15 @@ public class EditDesc {
     
     // /////////////////////////////////////////
 
-    public static Section sectionEnteteFichier, sectionEnteteStation,
-            sectionFinStation, sectionRuptureDonnees = null;
-
-    public static Text lignesEnteteFichier, lignesEnteteStation,
-            lignesFinStation, txtManuel = null;
-
-    public static Button buttonRAZ, buttonExpandDesc, 
-            buttonValidateDesc, buttonLignesEnteteStation,
-            btnInjectFin,
-            radEOF, radLigne, radManuel;
-
-
-    public static Group groupRuptureDonnees;
-
-    public static ArrayList<Text> listeTextDesc;
-
-    public static ArrayList<Section> listeSectionsDesc;
-
-    public static Boolean okApresReset;
-
-    public static boolean expand, validee, loaded;
-
-    // expand : savoir si sections ouvertes ou non
-    // validee : si etape validee
-    // loaded : si l'etape est chargee et affichee
-    public static ScrolledForm formEdition;
-
-    // //////////////////////////////////////////
-
     private static Shell shell = new Shell();
+
+    public static Button buttonValidate, buttonRAZ, buttonExpand;
+    public static Boolean okApresReset;
+    public static boolean expand, validee, loaded;
+    public static ScrolledForm formEdition;
+    public static ArrayList<NemoSection> listeSectionsDesc;
+    public static FileSection sectionEnteteFichier, sectionEnteteStation,
+                              sectionFinStation, sectionRuptureDonnees;
     
     public static void affichageEdition() {
         // initialisation zone edition pour etape description de fichier
@@ -59,167 +38,117 @@ public class EditDesc {
 
             formEdition = ViewEdit.formEdition;
 
-            okApresReset = true;
-
             // raz message erreur
             Utils.messageErreur(Global.EMPTY_STRING);
-
-            // de base les sections sont refermees
-            expand = false;
+            
+            expand = false; // de base les sections sont refermees
+            okApresReset = true;
+            loaded = true;
+            ViewFile.affiche = 0;
 
             // flags de toutes les etapes e 0
             EditDesc.validee = false;
             EditSurvey.validee = false;
             EditStation.validee = false;
             EditData.validee = false;
-
-            
-            
-            loaded = true;
-
+  
             /*
              * recreer un formEdition sur le toolkit principal pour pouvoir
              * faire un dispose() dessus mais garder toutes les sections afin de
              * les reafficher par la suite dans DrawingBack.
              */
-
-            GridLayout gridlayout = new GridLayout();
-            gridlayout.numColumns = 1;
-            formEdition.getBody().setLayout(gridlayout);
-
-            formEdition.setText(Messages
-                    .getString("EditDesc.descriptiondeFichier")); //$NON-NLS-1$
-
-            // init de la arrayList des sections
-            listeSectionsDesc = new ArrayList<Section>();
-
-            // init de la arraylist des textes
-            listeTextDesc = new ArrayList<Text>();
+            formEdition.getBody().setLayout(new GridLayout());
+            formEdition.setText(Messages.getString("EditDesc.descriptiondeFichier")); //$NON-NLS-1$
 
             // init composants IHM
             shell.close();
             shell = new Shell();
             disposeElements();
             
-            initSections();
-            initText();
+            // init des objets
+            listeSectionsDesc = new ArrayList<NemoSection>();
             initBoutons();
+            initSections();
+            
+            // remplissage de l'IHM par le modèle chargé
+            if (DataModel.ouverture) {
+                DataModel.fillDesc(false);
+            } 
+            
+            formEdition.redraw();
+            formEdition.reflow(true);
 
             // bouton "valider etape"
-            buttonValidateDesc.setParent(formEdition.getBody());
-            buttonValidateDesc.setText(Messages
-                    .getString("EditDesc.validerLetape")); //$NON-NLS-1$
+            buttonValidate.setParent(formEdition.getBody());
+            buttonValidate.setText(Messages.getString("EditDesc.validerLetape")); //$NON-NLS-1$
+            buttonValidate.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                @Override
+                public void widgetSelected(
+                        org.eclipse.swt.events.SelectionEvent e) {
+                    
+                    Etape.validationDesc();
+                }
+            });
 
             // bouton RAZ
             buttonRAZ.setParent(formEdition.getBody());
             buttonRAZ.setText("Reset"); //$NON-NLS-1$
+            buttonRAZ.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                @Override
+                public void widgetSelected(
+                        org.eclipse.swt.events.SelectionEvent e) {
+
+                    razText();
+                    // invalidation de l'étape en cours et des suivantes
+                    Utils.invalidEtapes();
+
+                }
+            });
 
             // boutons collapse all / expand all
-            buttonExpandDesc.setParent(formEdition.getBody());
-            buttonExpandDesc.setText("+"); //$NON-NLS-1$
-            
-            formEdition.redraw();
-            formEdition.reflow(true);
-            
-            // initialisation liste des sections de la partie description
-            // fichier
-
-            // section entete fichier
-            Drawing
-                    .sectionLabelTextInjectNbreLignes(
-                            formEdition,
-                            Messages.getString("EditDesc.enteteFichier"), Messages.getString("EditDesc.surlignezLignes"), sectionEnteteFichier, lignesEnteteFichier); //$NON-NLS-1$ //$NON-NLS-2$
-            lignesEnteteFichier.setText(Global.ZERO);
-
-
-            Drawing
-                    .sectionLabelTextInjectNbreLignes(
-                            formEdition,
-                            Messages.getString("EditDesc.enteteStation"), Messages.getString("EditDesc.nbreLignesEntete"), sectionEnteteStation, lignesEnteteStation); //$NON-NLS-1$ //$NON-NLS-2$
-            lignesEnteteStation.setText(Global.ZERO);
-            
-            // section fin de station
-            Drawing
-                    .sectionLabelTextInjectNbreLignes(
-                            formEdition,
-                            Messages.getString("EditDesc.finStation"), Messages.getString("EditDesc.nbreLignesFinStation"), sectionFinStation, lignesFinStation); //$NON-NLS-1$ //$NON-NLS-2$
-            lignesFinStation.setText(Global.ZERO); 
-
-            
-            Drawing
-                    .sectionComboInjectNbreLignes(
-                            formEdition,
-                            Messages.getString("EditDesc.indicFinDonnees"), Messages.getString("EditDesc.indiquezIndicFinDonnees"), sectionRuptureDonnees, radEOF, radLigne, radManuel, txtManuel, btnInjectFin); //$NON-NLS-1$ //$NON-NLS-2$
-            selectComboEnd(radEOF);
-            
-            // listeners
-            buttonExpandDesc
-                    .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-                        @Override
-                        public void widgetSelected(
-                                org.eclipse.swt.events.SelectionEvent e) {
-                            for (Section desc : EditDesc.listeSectionsDesc){
-                                if (!expand){
-                                    desc.setExpanded(true);
-                                }else{
-                                    desc.setExpanded(false);
-                                }
-                            }
-                            if (!expand){
-                                expand = true;
-                                buttonExpandDesc.setText("-"); //$NON-NLS-1$
-                            }else{
-                                expand = false;
-                                buttonExpandDesc.setText("+"); //$NON-NLS-1$
-                            }
-
-                            // refresh global
-                            formEdition.reflow(true);
-
+            buttonExpand.setParent(formEdition.getBody());
+            buttonExpand.setText("+"); //$NON-NLS-1$
+            buttonExpand.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                @Override
+                public void widgetSelected(
+                        org.eclipse.swt.events.SelectionEvent e) {
+                    for (NemoSection desc : listeSectionsDesc){
+                        if (!expand && desc.isEnabled()){
+                            desc.setExpanded(true);
+                        }else{
+                            desc.setExpanded(false);
                         }
-                    });
+                    }
+                    if (!expand){
+                        expand = true;
+                        buttonExpand.setText("-"); //$NON-NLS-1$
+                    }else{
+                        expand = false;
+                        buttonExpand.setText("+"); //$NON-NLS-1$
+                    }
 
-            buttonValidateDesc
-                    .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-                        @Override
-                        public void widgetSelected(
-                                org.eclipse.swt.events.SelectionEvent e) {
-                            // on passe en ppar l'etape e laquelle on se trouve
-                            // Etape.etape(0);
-                            
-                            Etape.validationDesc();
+                    // refresh global
+                    formEdition.reflow(true);
 
-                        }
-                    });
+                }
+            });
+            
 
-            buttonRAZ
-                    .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-                        @Override
-                        public void widgetSelected(
-                                org.eclipse.swt.events.SelectionEvent e) {
+            // Draw Station Sections          
+            for (NemoSection desc : listeSectionsDesc){
+                desc.initSection(formEdition);
+                desc.draw(formEdition.getBody());
+            }
+            
+            actualiseEdition();
 
-                            razText();
-
-                            // invalidation de l'étape en cours et des suivantes
-                            Utils.invalidEtapes();
-
-                        }
-                    });
+            ViewEdit.formEdition.reflow(true);
 
             // refresh du formulaire
             formEdition.reflow(true);
-
-            // affichage courant
-            ViewFile.affiche = 0;
-
-            // remplissage de l'IHM par le modele charge ?
-            if (DataModel.ouverture) {
-                DataModel.fillDesc(false);
-            }
-
+            
             // nom de l'application
             nomNemo();
-
         }
 
     }
@@ -229,14 +158,14 @@ public class EditDesc {
         // on retire toutes les sections et les boutons expand et validation
 
         // effacement des boutons 
-        buttonExpandDesc.setParent(shell);
+        buttonExpand.setParent(shell);
         buttonRAZ.setParent(shell);
-        buttonValidateDesc.setParent(shell);
+        buttonValidate.setParent(shell);
         
         // effacement des sections
-        for (Section desc : EditDesc.listeSectionsDesc){
+        for (NemoSection desc : listeSectionsDesc){
             desc.setExpanded(true);
-            desc.setParent(shell);
+            desc.initSection(shell);
         }
 
         // effacement titre formulaire
@@ -261,14 +190,14 @@ public class EditDesc {
         s = ViewEdit.formEdition;
 
         // affichage des boutons 
-        buttonValidateDesc.setParent(s.getBody());
+        buttonValidate.setParent(s.getBody());
         buttonRAZ.setParent(s.getBody());
-        buttonExpandDesc.setParent(s.getBody());
+        buttonExpand.setParent(s.getBody());
 
         // affichage des sections
-        for (Section desc : EditDesc.listeSectionsDesc){
+        for (NemoSection desc : listeSectionsDesc){
             desc.setExpanded(false);
-            desc.setParent(s.getBody());
+            desc.initSection(s.getBody());
         }
 
         // affichage titre formulaire
@@ -284,39 +213,23 @@ public class EditDesc {
     }
 
     public static void initSections() {
+        sectionEnteteFichier = new FileSection(shell, NemoSection.F_FILEHEADER, Messages.getString(NemoSection.F_FILEHEADER), Messages.getString("EditDesc.surlignezLignes"),Global.ZERO); //$NON-NLS-1$
+        listeSectionsDesc.add(sectionEnteteFichier);
         
-        sectionEnteteFichier = new Section(shell, SWT.NONE);
-        sectionEnteteStation = new Section(shell, SWT.NONE);
-        sectionFinStation = new Section(shell, SWT.NONE);
-        sectionRuptureDonnees = new Section(shell, SWT.NONE);
-
-    }
-
-    public static void initText() {
-        lignesEnteteFichier = new Text(shell, SWT.BORDER);
-        listeTextDesc.add(lignesEnteteFichier);
-        lignesEnteteStation = new Text(shell, SWT.BORDER);
-        listeTextDesc.add(lignesEnteteStation);
-        lignesFinStation = new Text(shell, SWT.BORDER);
-        listeTextDesc.add(lignesFinStation);
-        txtManuel = new Text(shell, SWT.BORDER);
-        listeTextDesc.add(txtManuel);
+        sectionEnteteStation = new FileSection(shell, NemoSection.F_STATIONHEADER, Messages.getString(NemoSection.F_STATIONHEADER), Messages.getString("EditDesc.nbreLignesEntete"),Global.ZERO); //$NON-NLS-1$
+        listeSectionsDesc.add(sectionEnteteStation);
         
-        // remplissage de la liste des textes et ajout des listeners
-        ajoutModifyListenerText(listeTextDesc);
-
+        sectionFinStation = new FileSection(shell, NemoSection.F_ENDSTATION, Messages.getString(NemoSection.F_ENDSTATION), Messages.getString("EditDesc.nbreLignesFinStation"),Global.ZERO); //$NON-NLS-1$
+        listeSectionsDesc.add(sectionFinStation);
+        
+        sectionRuptureDonnees = new FileSection(shell, NemoSection.F_ENDDATA, Messages.getString(NemoSection.F_ENDDATA), Messages.getString("EditDesc.indiquezIndicFinDonnees"),Global.EMPTY_STRING); //$NON-NLS-1$
+        listeSectionsDesc.add(sectionRuptureDonnees);
     }
 
     public static void initBoutons() {
-        
         buttonRAZ = new Button(shell, SWT.NONE);
-        buttonLignesEnteteStation = new Button(shell, SWT.RADIO);
-        buttonExpandDesc = new Button(shell, SWT.NONE);
-        buttonValidateDesc = new Button(shell, SWT.NONE);
-        radEOF = new Button(shell, SWT.RADIO);
-        radLigne = new Button(shell, SWT.RADIO);
-        radManuel = new Button(shell, SWT.RADIO);
-        btnInjectFin = new Button(shell, SWT.NONE);
+        buttonExpand = new Button(shell, SWT.NONE);
+        buttonValidate = new Button(shell, SWT.NONE);
     }
 
     public static void ajoutModifyListenerText(ArrayList<Text> liste) {
@@ -337,11 +250,9 @@ public class EditDesc {
 
     public static void razText() {
 
-        for (Text text : listeTextDesc){
-            text.setText(Global.ZERO);
+        for (NemoSection desc : listeSectionsDesc){
+            desc.razValues();
         }
-        selectComboEnd(radEOF);
-        txtManuel.setText(Global.ZERO);
     }
 
     public static void nomNemo() {
@@ -374,76 +285,22 @@ public class EditDesc {
         }
 
     }
-    
-    public static void selectComboEnd(Button radio) {
-        if (radio == EditDesc.radEOF) {
-            EditDesc.radEOF.setSelection(true);
-            EditDesc.radLigne.setSelection(false);
-            EditDesc.radManuel.setSelection(false);
-
-            EditDesc.txtManuel.setEnabled(false);
-            EditDesc.btnInjectFin.setEnabled(false);
-            
-        } else if (radio == EditDesc.radLigne) {
-            EditDesc.radEOF.setSelection(false);
-            EditDesc.radLigne.setSelection(true);
-            EditDesc.radManuel.setSelection(false);
-
-            EditDesc.txtManuel.setEnabled(false);
-            EditDesc.btnInjectFin.setEnabled(false);
-            
-        } else if (radio == EditDesc.radManuel) {
-            EditDesc.radEOF.setSelection(false);
-            EditDesc.radLigne.setSelection(false);
-            EditDesc.radManuel.setSelection(true);
-            
-            EditDesc.txtManuel.setEnabled(true);
-            EditDesc.btnInjectFin.setEnabled(true);
-            
-        } else {
-            EditDesc.radEOF.setSelection(true);
-            EditDesc.radLigne.setSelection(false);
-            EditDesc.radManuel.setSelection(false);
-
-            EditDesc.txtManuel.setEnabled(false);
-            EditDesc.btnInjectFin.setEnabled(false);
-        }
-        
-        // invalidation de l'étape en cours et des suivantes
-        Utils.invalidEtapes();
-    }
 
     public static void disposeElements()
-    {              
-        if (lignesEnteteFichier != null) {
-            lignesEnteteFichier.dispose();
-            lignesEnteteStation.dispose();
-            lignesFinStation.dispose();
-            txtManuel.dispose();
+    {                     
+        if (listeSectionsDesc != null){
+            for (NemoSection section : listeSectionsDesc){
+                section.dispose();
+            }
         }
-
-        if (buttonRAZ != null) {
-            buttonRAZ.dispose();
-            buttonLignesEnteteStation.dispose();
-            buttonExpandDesc.dispose();
-            buttonValidateDesc.dispose();
-            radEOF.dispose();
-            radLigne.dispose();
-            radManuel.dispose();
-            btnInjectFin.dispose();
-        }
-        
-        for (Section section : listeSectionsDesc){
-            section.dispose();
-        }
-        
-        
-//        if (sectionEnteteFichier != null) {
-//            sectionEnteteFichier.dispose();
-//            sectionEnteteStation.dispose();
-//            sectionFinStation.dispose();
-//            sectionRuptureDonnees.dispose();
-//        }
+        if (buttonRAZ != null) buttonRAZ.dispose();
+        if (buttonExpand != null) buttonExpand.dispose();
+        if (buttonValidate != null) buttonValidate.dispose();
+    }
+    
+    public static void actualiseEdition(){
+        // FAE 1810 - FileHeader accessible que pour un fichier campagne
+        sectionEnteteFichier.setEnabled(ViewFile.radioFichier.getSelection());
     }
 
 

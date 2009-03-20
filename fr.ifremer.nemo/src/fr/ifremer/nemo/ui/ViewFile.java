@@ -336,6 +336,8 @@ public class ViewFile extends ViewPart
                         org.eclipse.swt.events.SelectionEvent e)
                 {
                     // System.out.println("fichier campagne"); //
+                    if (EditDesc.loaded) 
+                        EditDesc.sectionEnteteFichier.setEnabled(true);
 
                 }
             });
@@ -347,6 +349,8 @@ public class ViewFile extends ViewPart
                         org.eclipse.swt.events.SelectionEvent e)
                 {
                     // System.out.println("dossier campagne)"); //
+                    if (EditDesc.loaded) 
+                        EditDesc.sectionEnteteFichier.setEnabled(false);
 
                 }
             });
@@ -358,6 +362,8 @@ public class ViewFile extends ViewPart
                         org.eclipse.swt.events.SelectionEvent e)
                 {
                     // System.out.println("dossier campagne)"); //
+                    if (EditDesc.loaded)
+                        EditDesc.sectionEnteteFichier.setEnabled(false);
 
                 }
             });
@@ -369,6 +375,8 @@ public class ViewFile extends ViewPart
                         org.eclipse.swt.events.SelectionEvent e)
                 {
                     // System.out.println("dossier campagne)"); //
+                    if (EditDesc.loaded)
+                        EditDesc.sectionEnteteFichier.setEnabled(false);
                 }
             });
 

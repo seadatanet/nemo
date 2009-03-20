@@ -21,22 +21,21 @@ import org.eclipse.ui.forms.widgets.Section;
 
 import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.ui.Application;
-import fr.ifremer.nemo.ui.EditStation;
 import fr.ifremer.nemo.ui.ViewEdit;
 import fr.ifremer.nemo.util.Formatter;
 
 /**
- * Description: clesse abstraite définissant une Section NEMO
+ * Description: classe abstraite définissant une Section NEMO
  * @author dboulang
  *
  */
 public abstract class NemoSection implements UIobject
 {
     // constantes des noms possibles
-//    public static final String F_FILEHEADER     = "enteteFichier";          //$NON-NLS-1$
-//    public static final String F_STATIONHEADER  = "enteteStation";          //$NON-NLS-1$
-//    public static final String F_ENDSTATION     = "finStation";             //$NON-NLS-1$
-//    public static final String F_ENDDATA        = "indicFinDonnees";        //$NON-NLS-1$
+    public static final String F_FILEHEADER     = "enteteFichier";          //$NON-NLS-1$
+    public static final String F_STATIONHEADER  = "enteteStation";          //$NON-NLS-1$
+    public static final String F_ENDSTATION     = "finStation";             //$NON-NLS-1$
+    public static final String F_ENDDATA        = "indicFinDonnees";        //$NON-NLS-1$
 //    public static final String C_REFERENCE      = "";                       //$NON-NLS-1$
 //    public static final String C_LOCATION       = "";                       //$NON-NLS-1$
 //    public static final String C_DATASOURCE     = "";                       //$NON-NLS-1$
@@ -69,7 +68,7 @@ public abstract class NemoSection implements UIobject
     
     protected Section section;
     protected String name;      // nom correspondant au tag xml (PropertyModel)
-    private String title;
+    protected String title;
     private String description;
     
     public NemoSection(Shell shell, String name, String title, String description){
@@ -100,7 +99,7 @@ public abstract class NemoSection implements UIobject
         section.addExpansionListener(new ExpansionAdapter() {
             @Override
             public void expansionStateChanged(ExpansionEvent e) {
-                EditStation.formEdition.reflow(true);
+                ViewEdit.formEdition.reflow(true);
             }
         });
         section.setText(title);
@@ -111,8 +110,9 @@ public abstract class NemoSection implements UIobject
         sectionClient.setLayout(new GridLayout());
 
         drawSection(sectionClient);
-
+        
         section.setClient(sectionClient); 
+        section.pack();
     }
     
     protected abstract void drawSection(Composite parent);
@@ -161,5 +161,14 @@ public abstract class NemoSection implements UIobject
     public abstract void initModel(StationModel stationModel);
     
     public abstract void fillFromModel(StationModel stationModel);
+
+    /**
+     * Getter sur name.
+     * @return the name
+     */
+    public String getName()
+    {
+        return name;
+    }
 
 }

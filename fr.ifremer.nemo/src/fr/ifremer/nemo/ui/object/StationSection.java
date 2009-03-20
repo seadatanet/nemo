@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.domain.DataType;
 import fr.ifremer.nemo.domain.Station;
+import fr.ifremer.nemo.domain.TimeSeriesInformation;
 import fr.ifremer.nemo.input.FlagFragment;
 import fr.ifremer.nemo.input.HeaderFragment;
 import fr.ifremer.nemo.input.LineFragment;
@@ -258,7 +259,7 @@ public class StationSection extends NemoSection
         if (posVariable) vari = frag.isVariable();
         
         if (real_ligne == null){
-            real_ligne = new Integer(ligne + Integer.valueOf(EditDesc.lignesEnteteFichier.getText()));
+            real_ligne = new Integer(ligne + Integer.valueOf(EditDesc.sectionEnteteFichier.getValue()));
         }
             
         setAutoValueInput(String.valueOf(real_ligne), String.valueOf(debut), String.valueOf(fin),posVariable, vari, i);
@@ -557,7 +558,7 @@ public class StationSection extends NemoSection
                     }
                 }catch (Exception e) {
                     
-                    Utils.messageErreurAppend(errorMessage);
+                    Utils.messageErreur(errorMessage);
                     resultTest.setText(Messages.getString("Etape.120"));            //$NON-NLS-1$
                     resultTest.pack();
                 }
@@ -812,7 +813,7 @@ public class StationSection extends NemoSection
                         // cas particuliers : COMMENT
                         // surlignement et injection ligne debut fin
                         frag = propertyModel.fillFragment(this, ligne, i, false, fillVariPos);
-                        int entete = Integer.valueOf(EditDesc.lignesEnteteFichier.getText());
+                        int entete = Integer.valueOf(EditDesc.sectionEnteteFichier.getValue());
                         Utils.calculNbreLignesPuisRemplissageFrag(frag, Integer.valueOf(entete));
                     }else{
                        // Généralisation                        
@@ -864,7 +865,7 @@ public class StationSection extends NemoSection
             if (ligneSaisie == 0){
                 ligne = Global.ZERO;
             }else{
-                ligne = String.valueOf(ligneSaisie - Integer.valueOf(EditDesc.lignesEnteteFichier.getText()));
+                ligne = String.valueOf(ligneSaisie - Integer.valueOf(EditDesc.sectionEnteteFichier.getValue()));
             }
             propertyModel.fillFragment(EditStation.stationNumber, ligne);
         }
@@ -968,7 +969,12 @@ public class StationSection extends NemoSection
                     // gestion des valeurs saisies
                     if (propertyModel.isUserProvided())
                     {
-                        setManualValueInput(station.get(tagXml, format), i);
+                        String value = Global.EMPTY_STRING;
+                        if (isTimeSeriesInfo())
+                            value = station.getTimeSeriesInformation().get(tagXml, format);
+                        else
+                            value = station.get(tagXml, format);
+                        setManualValueInput(value, i);
                     }
                     else
                     {

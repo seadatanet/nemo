@@ -624,8 +624,8 @@ public class TableData {
 
 				// on recupere le data
 				ligne = Utils.lignesBrutes.get(Integer
-						.valueOf(EditDesc.lignesEnteteFichier.getText())
-						+ Integer.valueOf(EditDesc.lignesEnteteStation.getText())) + 1;
+						.valueOf(EditDesc.sectionEnteteFichier.getValue())
+						+ Integer.valueOf(EditDesc.sectionEnteteStation.getValue())) + 1;
 				selection = ligne.substring(
 						Integer.valueOf(ViewFile.tableData.getItem(i)
 								.getText(4)) - 1,
@@ -692,8 +692,8 @@ public class TableData {
 			if ((!ViewFile.tableData.getItem(i).getText(11).equals(Global.EMPTY_STRING))
 					&& (!ViewFile.tableData.getItem(i).getText(12).equals(Global.EMPTY_STRING))) {
 				ligne = Utils.lignesBrutes.get(Integer
-						.valueOf(EditDesc.lignesEnteteFichier.getText())
-						+ Integer.valueOf(EditDesc.lignesEnteteStation.getText())) + 1;
+						.valueOf(EditDesc.sectionEnteteFichier.getValue())
+                        + Integer.valueOf(EditDesc.sectionEnteteStation.getValue())) + 1;
 				selection = ligne.substring(
 						Integer.valueOf(ViewFile.tableData.getItem(i).getText(
 								11)) - 1,
@@ -721,8 +721,6 @@ public class TableData {
 				types.get(i).setTestIn(Global.EMPTY_STRING);
 				types.get(i).setTestOut(Global.EMPTY_STRING);
 			}
-
-			// System.out.println("maj types data : ok");
 		}
 
 		// razTableData

@@ -150,16 +150,16 @@ public class Preformat {
 			_repEntree = ViewFile.nomRepertoire;
 		}
 				
-		_enTeteFichier = Integer.parseInt(EditDesc.lignesEnteteFichier.getText());
-		_enTeteStation = Integer.parseInt(EditDesc.lignesEnteteStation.getText());
+		_enTeteFichier = Integer.parseInt(EditDesc.sectionEnteteFichier.getValue());
+		_enTeteStation = Integer.parseInt(EditDesc.sectionEnteteStation.getValue());
 //		_finStation = Integer.parseInt(EditDesc.lignesFinStation.getText());
 	
-		if (EditDesc.radEOF.getSelection()) {
+		if (EditDesc.sectionRuptureDonnees.radEOFselected()) {
 			
-		} else if (EditDesc.radLigne.getSelection()) {
+		} else if (EditDesc.sectionRuptureDonnees.radLigneSelected()) {
 			
-		} else if (EditDesc.radManuel.getSelection()) {
-			_indicateur = EditDesc.txtManuel.getText();
+		} else if (EditDesc.sectionRuptureDonnees.radManuelSelected()) {
+			_indicateur = EditDesc.sectionRuptureDonnees.getValue();
 		}
 		
 //		FAE 33
@@ -453,12 +453,12 @@ public class Preformat {
 					
 					
 					if (numLigne > _enTeteFichier + _enTeteStation) {
-						if (!ligneLue.trim().equals("")) {
-							if (EditDesc.radEOF.getSelection()) {
+						if (!ligneLue.trim().equals(Global.EMPTY_STRING)) {
+							if (EditDesc.sectionRuptureDonnees.radEOFselected()) {
 								analyseOK = true;
-							} else if (EditDesc.radLigne.getSelection()) {
+							} else if (EditDesc.sectionRuptureDonnees.radLigneSelected()) {
 								analyseOK = true;
-							} else if (EditDesc.radManuel.getSelection()) {
+							} else if (EditDesc.sectionRuptureDonnees.radManuelSelected()) {
 								analyseOK = !ligneLue.startsWith(_indicateur);
 							}
 							

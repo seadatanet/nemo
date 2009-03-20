@@ -22,6 +22,7 @@ import fr.ifremer.nemo.input.ParameterModel;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.input.SingleFileSurvey;
 import fr.ifremer.nemo.input.StationModel;
+import fr.ifremer.nemo.ui.object.FileSection;
 import fr.ifremer.nemo.ui.object.NemoSection;
 import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.Formatter;
@@ -120,7 +121,7 @@ public class DataModel
         else
         {
             singleSurvey.setHeaderLinesNumber(Integer
-                .parseInt(EditDesc.lignesEnteteFichier.getText()));
+                .parseInt(EditDesc.sectionEnteteFichier.getValue()));
             stationModel = singleSurvey.getStationModel();
         }
 
@@ -228,36 +229,30 @@ public class DataModel
 
         // nombre lignes entete station
         stationModel.setNumberOfLines(Integer
-            .parseInt(EditDesc.lignesEnteteStation.getText()));
+            .parseInt(EditDesc.sectionEnteteStation.getValue()));
 
         // nombre de lignes de fin
-        stationModel.setEndData(Integer.parseInt(EditDesc.lignesFinStation
-            .getText()));
-
-        // metaInData
-//        stationModel.setMetaInData(false);
+        stationModel.setEndData(Integer.parseInt(EditDesc.sectionFinStation.getValue()));
 
         // attribut pattern fin donnees en acces direct
-
-        // si manuel -> direct sinon passer par propertyModel
-        if (EditDesc.radEOF.getSelection())
+        if (EditDesc.sectionRuptureDonnees.radEOFselected())
         {
             stationModel.setEndOnEmptyLine(false);
             stationModel.setEndOnEOF(true);
             stationModel.setEndOnPattern(false);
         }
-        else if (EditDesc.radLigne.getSelection())
+        else if (EditDesc.sectionRuptureDonnees.radLigneSelected())
         {
             stationModel.setEndOnEmptyLine(true);
             stationModel.setEndOnEOF(false);
             stationModel.setEndOnPattern(false);
         }
-        else if (EditDesc.radManuel.getSelection())
+        else if (EditDesc.sectionRuptureDonnees.radManuelSelected())
         {
             stationModel.setEndOnEmptyLine(false);
             stationModel.setEndOnEOF(false);
             stationModel.setEndOnPattern(true);
-            stationModel.setEndDataPattern(EditDesc.txtManuel.getText());
+            stationModel.setEndDataPattern(EditDesc.sectionRuptureDonnees.getValue());
         }
         
         // on initialise les dataTypes, centers et parameters en prevision des
@@ -680,8 +675,7 @@ public class DataModel
                 throw e;
             }
             stationModel_modele = dirSurvey_modele.getStationModel();
-            // lignes entete fichier = 0
-            EditDesc.lignesEnteteFichier.setText("0"); //$NON-NLS-1$
+            EditDesc.sectionEnteteFichier.initValue();
         }
         else
         {
@@ -699,7 +693,7 @@ public class DataModel
             }
             stationModel_modele = singleSurvey_modele.getStationModel();
             // lignes entete fichier
-            EditDesc.lignesEnteteFichier.setText(Global.EMPTY_STRING                     
+            EditDesc.sectionEnteteFichier.setValue(Global.EMPTY_STRING                     
                     + singleSurvey_modele.getHeaderLinesNumber());
 
         }
@@ -860,31 +854,27 @@ public class DataModel
     
             // nombre lignes entete station
     
-            EditDesc.lignesEnteteStation.setText(Global.EMPTY_STRING 
+            EditDesc.sectionEnteteStation.setValue(Global.EMPTY_STRING 
                     + stationModel_modele.getNumberOfLines());
     
             // nombre de lignes de fin
-            EditDesc.lignesFinStation
-                .setText(Global.EMPTY_STRING + stationModel_modele.getEndData()); 
+            EditDesc.sectionFinStation.setValue(Global.EMPTY_STRING 
+                    + stationModel_modele.getEndData()); 
     
             // metaInData
             // stationModel.setMetaInData(false);
     
             // pattern de fin fourni ou pas
     
-            if (stationModel_modele.isEndOnEOF())
-            {
-                EditDesc.selectComboEnd(EditDesc.radEOF);
-            }
-            else if (stationModel_modele.isEndOnEmptyLine())
-            {
-                EditDesc.selectComboEnd(EditDesc.radLigne);
-            }
-            else if (stationModel_modele.isEndOnPattern())
-            {
-                EditDesc.selectComboEnd(EditDesc.radManuel);
-    
-                EditDesc.txtManuel.setText(stationModel_modele.getEndDataPattern());
+            // section EndData
+            FileSection endData = EditDesc.sectionRuptureDonnees;
+            if (stationModel_modele.isEndOnEOF()){
+                endData.selectEndData(endData.getRadEOF());
+            }else if (stationModel_modele.isEndOnEmptyLine()){
+                endData.selectEndData(endData.getRadLigne());
+            }else if (stationModel_modele.isEndOnPattern()){
+                endData.selectEndData(endData.getRadManuel());
+                endData.setValue(stationModel_modele.getEndDataPattern());
             }
     
             // refresh de la zone d'edition

@@ -474,8 +474,7 @@ public class QCflagsSection extends NemoSection
             {
                 flag.setLine(Integer
                     .valueOf(tabFlagQC.getItems()[i].getText(2))
-                        - Integer.valueOf(EditDesc.lignesEnteteFichier
-                            .getText()));
+                        - Integer.valueOf(EditDesc.sectionEnteteFichier.getValue()));
                 flag.setFirstCharOffset(tabFlagQC.getItems()[i]
                     .getText(3));
                 flag.setLastCharOffset(tabFlagQC.getItems()[i]
@@ -499,8 +498,7 @@ public class QCflagsSection extends NemoSection
             {
                 flag.setLine(Integer
                     .valueOf(getTabFlagQC().getItems()[i].getText(2))
-                        - Integer.valueOf(EditDesc.lignesEnteteFichier
-                            .getText()));
+                        - Integer.valueOf(EditDesc.sectionEnteteFichier.getValue()));
                 flag.setFirstCharOffset(getTabFlagQC().getItems()[i]
                     .getText(3));
                 flag.setLastCharOffset(getTabFlagQC().getItems()[i]
@@ -532,7 +530,7 @@ public class QCflagsSection extends NemoSection
             item.setText(0, propertyCode);
             item.setText(1, propertyName);
             item.setText(2, String.valueOf(flag.getLine()
-                    + Integer.valueOf(EditDesc.lignesEnteteFichier.getText())));
+                    + Integer.valueOf(EditDesc.sectionEnteteFichier.getValue())));
             item.setText(3, String.valueOf(flag.getFirstCharOffset()));
             item.setText(4, String.valueOf(flag.getLastCharOffset()));
         }
