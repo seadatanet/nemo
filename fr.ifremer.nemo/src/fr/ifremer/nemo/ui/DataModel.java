@@ -612,6 +612,10 @@ public class DataModel
                     stationModel.addFixedParameterModel(IdParameter.BATH);
                 }
                 
+                // Ajout du paramètre DEPH ( = Sensor Depth) pour ODV
+                if (!existDEPH)
+                    stationModel.addFixedParameterModel(IdParameter.DEPH);  
+                
             }
         }
         

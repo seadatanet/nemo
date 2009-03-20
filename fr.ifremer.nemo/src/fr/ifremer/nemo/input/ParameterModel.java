@@ -531,7 +531,7 @@ public class ParameterModel implements Cloneable, SAXConsumer {
                     if (flag.equals(Global.EMPTY_STRING)) {
                         flag = Global.ZERO;
                     }
-                }else if(inputType.equals(Global.TIMESERIES)){
+                }else{
                     // = SensorDepth
                     stringValue = String.valueOf(station.getTimeSeriesInformation().getSensorDepth());
                     flag = station.getMetaFlag(NemoSection.S_SENSORDEPTH);

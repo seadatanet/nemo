@@ -623,12 +623,12 @@ public class Etape {
                 if (value.trim().equals(Global.EMPTY_STRING)) {
                     checkValue = false;
                     // obligatoire que pour les series temporelles
-                    if (ViewFile.radSerieTempo.getSelection()){
+                    //if (ViewFile.radSerieTempo.getSelection()){
                         ok = ok && false; // FAE 0001232
                         // FAE 1673 : n'afficher le message que si erreur
                         Utils.messageErreurAppend(Messages.getString("Etape.77"));                          //$NON-NLS-1$
                         Utils.messageErreurAppend(Messages.getString("Etape.79"));                          //$NON-NLS-1$
-                    }
+                   // }
                 }
             }
             if (checkValue){
