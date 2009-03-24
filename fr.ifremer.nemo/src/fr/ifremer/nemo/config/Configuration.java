@@ -23,6 +23,7 @@ import com.ago.xml.XMLOutputWriter;
 import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.util.Global;
 
 /**
  * Class Configuration
@@ -80,10 +81,8 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	protected int _predicate;
 	
 	protected String _fichierMapping;
-	
-	//protected String _arboMapping;
 		
-	protected HashMap<String, String> _vocabLists = new HashMap<String, String>();
+	protected HashMap<String, BODCList> _vocabLists = new HashMap<String, BODCList>();
 
 	protected boolean _showRule;
 
@@ -96,32 +95,31 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	protected ArrayList<FlagTable> _flagTables;
 
 	public Configuration() {
-		_contact = "";
-		_modelsDirectory = "";
-		_cruisesDirectory = "";
-		_dataCenter = "";
-		_nautilusWebServiceURL = "";
-		_nemoWebServiceURL = "";
-		_outputDirectory = "";
+		_contact = Global.EMPTY_STRING;
+		_modelsDirectory = Global.EMPTY_STRING;
+		_cruisesDirectory = Global.EMPTY_STRING;
+		_dataCenter = Global.EMPTY_STRING;
+		_nautilusWebServiceURL = Global.EMPTY_STRING;
+		_nemoWebServiceURL = Global.EMPTY_STRING;
+		_outputDirectory = Global.EMPTY_STRING;
         _writeCdi = false;
         _writeMapping = false;
-		_idEdmoRespCdi = "";
-		_codeEdmoDonnees = "";
-		_idEdmoRespDonnees = "";
-		_idEdmoDistDonnees = "";
-		_cdiURL = "";
-		_cdiMethod = "";
-        _typePlateForme = "";
-        _accesDonnees = "";
+		_idEdmoRespCdi = Global.EMPTY_STRING;
+		_codeEdmoDonnees = Global.EMPTY_STRING;
+		_idEdmoRespDonnees = Global.EMPTY_STRING;
+		_idEdmoDistDonnees = Global.EMPTY_STRING;
+		_cdiURL = Global.EMPTY_STRING;
+		_cdiMethod = Global.EMPTY_STRING;
+        _typePlateForme = Global.EMPTY_STRING;
+        _accesDonnees = Global.EMPTY_STRING;
 		_showRule = true;
 		_locale = null;
-		_vocabURL = "";
+		_vocabURL = Global.EMPTY_STRING;
 		_predicate = 255;
-		_fichierMapping = "";
-		//_arboMapping = "";
-		_defaultCode = "";
+		_fichierMapping = Global.EMPTY_STRING;
+		_defaultCode = Global.EMPTY_STRING;
 		
-		_vocabLists = new HashMap<String, String>();
+		_vocabLists = new HashMap<String, BODCList>();
 		
 		_flagTables = new ArrayList<FlagTable>();
 	}
@@ -276,9 +274,15 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		if (a_LocalName.equals("VocabListURL")) {
 			String name = null;
 			String value = null;
-			if ((name = a_Attributes.getValue("name")) != null &&
-					(value = a_Attributes.getValue("value")) != null) {
-				_vocabLists.put(name, value);
+            String version = null;
+            String mapping = null;
+			if ((name = a_Attributes.getValue("name")) != null 
+					&& (value = a_Attributes.getValue("value")) != null
+                    && (version = a_Attributes.getValue("version")) != null
+                    && (mapping = a_Attributes.getValue("mapping")) != null) {
+                BODCList list = new BODCList(name, version, value, mapping);
+                _vocabLists.put(name, list);
+				//_vocabLists.put(name, value);
 			}
 			return this;
 		}
@@ -361,9 +365,12 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		Iterator<String> keys = getVocabLists().keySet().iterator();
 		while (keys.hasNext()) {
 			String listName = keys.next();
+            BODCList list = _vocabLists.get(listName);
 			a_Writer.openTag("VocabListURL");
 			a_Writer.putAttribute("name", listName);
-			a_Writer.putAttribute("value", _vocabLists.get(listName));
+			a_Writer.putAttribute("value", list.getUrl());
+            a_Writer.putAttribute("version", list.getLocalVersion());
+            a_Writer.putAttribute("mapping", list.isUseToMapping());
 			a_Writer.closeTag();
 		}
 		a_Writer.putTag("defaultFlagTable", getDefaultCode());
@@ -822,18 +829,9 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	public void save() {
 		FileOutputStream stream = null;
 		try {
-			// FileOutputStream fich2 = new FileOutputStream(new
-			// File("D:/NemoConfiguration.xml"));
-
 			// creation nouveau dossier puis creation fichier config
 			File fich2 = new java.io.File("resources/NemoConfiguration.xml");
-			// URL url =
-			// Configuration.class.getResource("/NemoConfiguration.xml");
-			// URL url =
-			// Configuration.class.getResource("/resources/NemoConfiguration.xml");
-			// String file = url.getFile();
 			stream = new FileOutputStream(fich2.toString());
-			// stream = new FileOutputStream(file);
 			writeXMLOn(stream);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -889,39 +887,24 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		_vocabURL = x;
 	}
 
-	public HashMap<String, String> getVocabLists() {
+	public HashMap<String, BODCList> getVocabLists() {
 		return _vocabLists;
 	}
 
-	public void setVocabLists(HashMap<String, String> lists) {
+    public BODCList getVocabList(String listName) {
+        return _vocabLists.get(listName);
+    }
+
+	public void setVocabLists(HashMap<String, BODCList> lists) {
 		_vocabLists = lists;
-	}
-
-	public String getVocabListURL(String listName) {
-		return _vocabLists.get(listName);
-	}
-
-	public void setVocabListURL(String listName) {
-		String VocabUrl = Utils.configuration.getVocabURL();
-		String ListUrl = VocabUrl.substring(0, VocabUrl.indexOf('/',7) + 1) + "list/" + listName + "/current";
-		
-		_vocabLists.put(listName, ListUrl);
 	}
 
 	public int getPredicate() {
 		return _predicate;
 	}
 
-	/*public String getArboMapping() {
-		return _arboMapping;
-	}
-
-	public void setArboMapping(String mapping) {
-		_arboMapping = mapping;
-	}*/
-
 	public String getFichierMapping() {
-		if (_fichierMapping.trim().equals("")) {
+		if (_fichierMapping.trim().equals(Global.EMPTY_STRING)) {
 			return "coupling.txt";
 		}
 		return _fichierMapping;

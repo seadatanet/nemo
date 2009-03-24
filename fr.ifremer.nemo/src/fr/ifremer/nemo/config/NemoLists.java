@@ -9,7 +9,6 @@ import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.parsers.SAXParserFactory;
@@ -20,11 +19,13 @@ import org.apache.axis.client.Service;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.widgets.Table;
 
+import fr.ifremer.nemo.config.UpdateBean.EtatUpdate;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webservice;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webserviceLocator;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webserviceSoap;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.NemoWS;
 import fr.ifremer.nemo.ws.NemoWSServiceLocator;
@@ -32,7 +33,9 @@ import fr.ifremer.nemo.ws.WSDataType;
 import fr.ifremer.nemo.ws.WSParameter;
 import fr.ifremer.nemo.ws.WSSurveyDescription;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
+import fr.ifremer.nemo.wsVocab.vocab.CodeTableTypeType;
 import fr.ifremer.nemo.wsVocab.vocab.holders.CodeTableRecordTypeArrayHolder;
+import fr.ifremer.nemo.wsVocab.vocab.holders.CodeTableTypeTypeArrayHolder;
 import fr.ifremer.nemo.wsVocab.vocab_pkg.VocabSoapBindingStub;
 
 /**
@@ -50,23 +53,29 @@ public class NemoLists implements Cloneable {
 
 	static protected java.util.HashMap<Integer, String> _edmo = new java.util.HashMap<Integer, String>();
 
-	public static Boolean okSurveys = false;
-    public static Boolean okParameters = false;
-    public static Boolean okDataTypes = false;
-    public static Boolean okVocabLists = false;
-    public static Boolean okVocabMaps = false;
-    public static Boolean okEdmo = false;
+//	public static Boolean okSurveys = false;
+//    public static Boolean okParameters = false;
+//    public static Boolean okDataTypes = false;
+////    public static Boolean okVocabLists = false;
+//    public static Boolean okVocabMaps = false;
+//    public static Boolean okEdmo = false;
+//
+//	public static int nbSurveys = 0;
+//    public static int nbParameters = 0;
+//    public static int nbDataTypes = 0;
+////    public static int nbVocabLists = 0;
+//    public static int nbVocabMaps = 0;
+//    public static int nbEdmo = 0;
+    
 
-	public static int nbSurveys = 0;
-    public static int nbParameters = 0;
-    public static int nbDataTypes = 0;
-    public static int nbVocabLists = 0;
-    public static int nbVocabMaps = 0;
-    public static int nbEdmo = 0;
+    /**
+     * list of updates
+     */
+    static protected ArrayList<UpdateBean> updatedLists;
 
 	static protected HashMap<String, CodeTableRecordType[]> _vocabList = new HashMap<String, CodeTableRecordType[]>();
 
-	static protected HashMap<String, Integer> _vocabListStatus = new HashMap<String, Integer>();
+//	static protected HashMap<String, Integer> _vocabListStatus = new HashMap<String, Integer>();
 
 	static protected HashMap<String, CodeTableRecordType[]> _vocabMap = new HashMap<String, CodeTableRecordType[]>();
 
@@ -736,10 +745,7 @@ public class NemoLists implements Cloneable {
 		initParameters();
 		initSurveys();
 		initVocabLists();
-		initVocabMap("P091", "P011"); //$NON-NLS-1$ //$NON-NLS-2$
-		initVocabMap("P091", "P061"); //$NON-NLS-1$ //$NON-NLS-2$
-        initVocabMap("P091", "P021"); //$NON-NLS-1$ //$NON-NLS-2$
-//		initVocabMap("L05", "C77");
+        initVocabMaps();
 		initEdmo();
 	}
 
@@ -798,6 +804,7 @@ public class NemoLists implements Cloneable {
 //	}
     
     public static NemoWS callNemoWS(){
+        
         NemoWS service = null;
         try 
         {
@@ -819,10 +826,12 @@ public class NemoLists implements Cloneable {
 	/**
 	 * 
 	 */
-	public static void updateDataTypes(IProgressMonitor monitor, NemoWS service) {
-
-        nbDataTypes = 0;
-        okDataTypes = false;
+	public static void updateDataTypes(IProgressMonitor monitor, NemoWS service, UpdateBean updateNemo) {
+        
+        String listName = "DataTypes.xml"; //$NON-NLS-1$
+        int nbDataTypes = 0;
+        UpdateBean updateDataTypes = new UpdateBean(listName, listName); 
+        updateDataTypes.setNbTot(_dataTypes.size());
         
         if (service != null){
             
@@ -846,13 +855,14 @@ public class NemoLists implements Cloneable {
                 }
                 
                 if (!monitor.isCanceled()){
-                    File file = new java.io.File("resources/DataTypes.xml"); //$NON-NLS-1$
+                    File file = new java.io.File("resources/" + listName); //$NON-NLS-1$
                     stream = new FileOutputStream(file.toString());
                     
                     encoder = new XMLEncoder(stream);
                     encoder.writeObject(_dataTypes);
 
-                    okDataTypes = true;
+                    updateDataTypes.setEtat(EtatUpdate.UPDATED);
+                    updateDataTypes.setNbRetrieve(nbDataTypes);                   
                     
                 }else{
                     if (nbDataTypes != 0){
@@ -865,7 +875,7 @@ public class NemoLists implements Cloneable {
                     }
                 }
             } catch (Exception e) {
-                okDataTypes = false;
+                updateDataTypes.setEtat(EtatUpdate.FAILED);
                 e.printStackTrace();
             } finally {
                 if (encoder != null) {
@@ -881,17 +891,25 @@ public class NemoLists implements Cloneable {
                     }
                 }
             }
+        }else{
+            
+        }
+
+        updateNemo.addSubUpdate(updateDataTypes);
+        if (updateNemo.getEtat().compareTo(updateDataTypes.getEtat()) < 0){
+            updateNemo.setEtat(updateDataTypes.getEtat());
         }
 	}
 
 	/**
 	 * 
 	 */
-	public static void updateParameters(IProgressMonitor monitor, NemoWS service) {
+	public static void updateParameters(IProgressMonitor monitor, NemoWS service, UpdateBean updateNemo) {
         
-		okParameters = false;
-        nbParameters = 0;
-
+        String listName = "Parameters.xml"; //$NON-NLS-1$
+        int nbParameters = 0;
+        UpdateBean updateParameters = new UpdateBean(listName, listName); 
+        updateParameters.setNbTot(_parameters.size());
         
         if (service != null)
         {
@@ -916,11 +934,14 @@ public class NemoLists implements Cloneable {
 
                 if (!monitor.isCanceled())
                 {
-                    File file = new java.io.File("resources/Parameters.xml"); //$NON-NLS-1$
+                    File file = new java.io.File("resources/" + listName); //$NON-NLS-1$
                     stream = new FileOutputStream(file.toString());
                     encoder = new XMLEncoder(stream);
                     encoder.writeObject(_parameters);
-                    okParameters = true;
+
+                    updateParameters.setEtat(EtatUpdate.UPDATED);
+                    updateParameters.setNbRetrieve(nbParameters);
+                    
                 }else{
                     if (nbParameters != 0){
                         // rollback
@@ -932,7 +953,7 @@ public class NemoLists implements Cloneable {
                     }
                 }
             } catch (Exception e) {
-                okParameters = false;
+                updateParameters.setEtat(EtatUpdate.FAILED);
                 e.printStackTrace();
             } finally {
                 if (encoder != null) {
@@ -948,15 +969,25 @@ public class NemoLists implements Cloneable {
                     }
                 }
             }
+        }else{
+            updateParameters.setEtat(EtatUpdate.FAILED);
+        }
+
+        updateNemo.addSubUpdate(updateParameters);
+        if (updateNemo.getEtat().compareTo(updateParameters.getEtat()) < 0){
+            updateNemo.setEtat(updateParameters.getEtat());
         }
 	}
 
 	/**
 	 * 
 	 */
-	public static void updateSurveys(IProgressMonitor monitor, NemoWS service) {
-		okSurveys = false;
-        nbSurveys = 0;
+	public static void updateSurveys(IProgressMonitor monitor, NemoWS service, UpdateBean updateNemo) {
+
+        String listName = "Surveys.xml"; //$NON-NLS-1$
+        int nbSurveys = 0;
+        UpdateBean updateSurveys = new UpdateBean(listName, listName); 
+        updateSurveys.setNbTot(_surveys.size());
         
         if (service != null){
             
@@ -981,13 +1012,14 @@ public class NemoLists implements Cloneable {
 
                 if (!monitor.isCanceled())
                 {
-        			File file = new java.io.File("resources/Surveys.xml"); //$NON-NLS-1$
+        			File file = new java.io.File("resources/" + listName); //$NON-NLS-1$
         			stream = new FileOutputStream(file.toString());
                     
         			encoder = new XMLEncoder(stream);
         			encoder.writeObject(_surveys);
-                    
-        			okSurveys = true;
+
+                    updateSurveys.setEtat(EtatUpdate.UPDATED);
+                    updateSurveys.setNbRetrieve(nbSurveys);
                 }
                 else
                 {
@@ -1001,7 +1033,7 @@ public class NemoLists implements Cloneable {
                     }
                 }
     		} catch (Exception e) {
-    			okSurveys = false;
+                updateSurveys.setEtat(EtatUpdate.FAILED);
     			e.printStackTrace();
     		} finally {
     			if (encoder != null) {
@@ -1017,6 +1049,13 @@ public class NemoLists implements Cloneable {
     				}
     			}
     		}
+        }else{
+            updateSurveys.setEtat(EtatUpdate.FAILED);
+        }
+
+        updateNemo.addSubUpdate(updateSurveys);
+        if (updateNemo.getEtat().compareTo(updateSurveys.getEtat()) < 0){
+            updateNemo.setEtat(updateSurveys.getEtat());
         }
 	}
 
@@ -1046,8 +1085,10 @@ public class NemoLists implements Cloneable {
 	}
 
 	public static void updateEdmo(IProgressMonitor monitor) {
-		okEdmo = false;
-        nbEdmo = 0;
+        
+        UpdateBean updateEdmo = getUpdate(Intern.id_edmo);
+        updateEdmo.setNbTot(_edmo.size());
+        int nbEdmo = 0;
 		FileOutputStream stream = null;
         String result = Global.EMPTY_STRING;
 
@@ -1061,85 +1102,191 @@ public class NemoLists implements Cloneable {
             }
             if (!monitor.isCanceled() && !result.equals(Global.EMPTY_STRING))
             {
-                // écriture du nouveau fichier
-				File file = new java.io.File("resources/Edmo.xml"); //$NON-NLS-1$
-
-				stream = new FileOutputStream(file.toString());
-				OutputStreamWriter osw = new OutputStreamWriter(stream, "UTF-8"); //$NON-NLS-1$
-				osw.write(result);
-				osw.flush();
-				osw.close();
-                
-                // stockage des valeurs dans l'objet
-                nbEdmo = initEdmo();
-                okEdmo = true;
+                if (!result.equals(Global.EMPTY_STRING)){
+                    monitor.subTask(Messages.getString(Intern.id_edmo));
+                    
+                    // écriture du nouveau fichier
+    				File file = new java.io.File("resources/Edmo.xml"); //$NON-NLS-1$
+    
+    				stream = new FileOutputStream(file.toString());
+    				OutputStreamWriter osw = new OutputStreamWriter(stream, "UTF-8"); //$NON-NLS-1$
+    				osw.write(result);
+    				osw.flush();
+    				osw.close();
+                    
+                    // stockage des valeurs dans l'objet
+                    nbEdmo = initEdmo();
+                    updateEdmo.setEtat(EtatUpdate.UPDATED);
+                    updateEdmo.setNbRetrieve(nbEdmo);
+                }else{
+                    updateEdmo.setEtat(EtatUpdate.FAILED);
+                }
 			}
 
-		} catch (ServiceException ex1) {
-			ex1.printStackTrace();
-		} catch (java.rmi.RemoteException ex2) {
-			ex2.printStackTrace();
-		} catch (Exception exG) {
+		}  catch (Exception exG) {
+            updateEdmo.setEtat(EtatUpdate.FAILED);
 			exG.printStackTrace();
 		}
 	}
+    
+    public static VocabSoapBindingStub connectVocab(){
+
+        VocabSoapBindingStub vocab = null;
+        try{
+    
+            vocab = new VocabSoapBindingStub(
+                        new java.net.URL(Utils.configuration.getVocabURL()),
+                        new Service());
+            
+            // récupération des versions serveur des listes
+            CodeTableTypeTypeArrayHolder table = new CodeTableTypeTypeArrayHolder();
+            javax.xml.rpc.holders.BooleanHolder error = new BooleanHolder();
+            vocab.whatLists(Global.EMPTY_STRING, table, error);
+            if (!error.value && table.value != null){
+                for (CodeTableTypeType item : table.value){
+                    String[] itemValue = item.getListKey().split(Global.SLASH);
+                    String listId = itemValue[itemValue.length - 2];
+                    if (Utils.configuration.getVocabLists().containsKey(listId)){
+                        BODCList list = Utils.configuration.getVocabLists().get(listId);
+                        list.setServerVersion(String.valueOf(item.getListVersion()));
+                        list.setName(item.getListShortName());
+                    }
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return vocab;
+    }
+    
+
+    /**
+     * 
+     */
+    public static void updateVocabLists(VocabSoapBindingStub vocabService, IProgressMonitor monitor) {
+
+        UpdateBean updateLists = getUpdate(Intern.id_lists);
+        
+        if (vocabService != null)
+        {
+            int nbRetrieve = 0;
+            int idxCurrent = 0;
+            
+            try
+            {
+                String[] listNames = Intern.vocabLists.split(",");
+                int keySetSize = listNames.length;
+                updateLists.setNbTot(keySetSize);
+                
+                for (String listName : listNames){
+                    idxCurrent ++ ;
+                    if (!monitor.isCanceled()){
+                        
+                        StringBuffer msg = new StringBuffer();
+                        msg.append(Messages.getString(Intern.id_lists)); 
+                        msg.append(Global.SPACE);
+                        msg.append(listName);
+                        msg.append(" [");//$NON-NLS-1$
+                        msg.append((idxCurrent));
+                        msg.append(" / ");//$NON-NLS-1$
+                        msg.append(keySetSize);
+                        msg.append("]");//$NON-NLS-1$
+                        monitor.subTask(msg.toString());
+                        
+                        UpdateBean updateList = updateVocabList(vocabService, listName);
+                        updateLists.addSubUpdate(updateList);
+                        if (updateList.getEtat().compareTo(EtatUpdate.UPDATED) == 0
+                                || updateList.getEtat().compareTo(EtatUpdate.CHECKED) == 0){
+                            nbRetrieve ++;
+                        }
+                        if (updateLists.getEtat().compareTo(updateList.getEtat()) < 0){
+                            updateLists.setEtat(updateList.getEtat());
+                        }
+                    }else{
+                        updateLists.setEtat(EtatUpdate.INTERRUPTED);
+                    }
+                }
+                
+                updateLists.setNbRetrieve(nbRetrieve);
+                
+            }catch (Exception e){
+                updateLists.setEtat(EtatUpdate.FAILED);
+                e.printStackTrace();
+            }
+        }else{
+            updateLists.setEtat(EtatUpdate.FAILED);
+        }
+    }
 
 	/**
 	 * 
 	 */
-	private static void updateVocabList(String listName) 
+	private static UpdateBean updateVocabList(VocabSoapBindingStub vocab, String listId) 
     {
-		okVocabLists = true;
+
+        BODCList list = Utils.configuration.getVocabList(listId);
         
-		FileOutputStream stream = null;
-		XMLEncoder encoder = null;
-		CodeTableRecordTypeArrayHolder table = new CodeTableRecordTypeArrayHolder();
-		javax.xml.rpc.holders.BooleanHolder error = new BooleanHolder();
-		try {
-			VocabSoapBindingStub vocab = new VocabSoapBindingStub(
-					new java.net.URL(Utils.configuration.getVocabURL()),
-					new Service());
-			vocab.getList(new String[] { Utils.configuration
-					.getVocabListURL(listName) }, null, table, error);
-			if (!error.value) {
-				if (table.value != null) {
-					_vocabList.put(listName, table.value);
+        StringBuffer msg = new StringBuffer();
+        msg.append(listId);
+        msg.append(Global.SPACE);
+        msg.append("-"); //$NON-NLS-1$
+        msg.append(Global.SPACE);
+        msg.append(list.getName());
+        
+        UpdateBean updateList = new UpdateBean(listId, msg.toString()); 
+        updateList.setNbTot(_vocabList.get(listId).length);
+        
+        if (list.getLocalVersion().compareTo(list.getServerVersion()) < 0){
+    		FileOutputStream stream = null;
+    		XMLEncoder encoder = null;
+    		CodeTableRecordTypeArrayHolder table = new CodeTableRecordTypeArrayHolder();
+    		javax.xml.rpc.holders.BooleanHolder error = new BooleanHolder();
+    		try {      
+    			vocab.getList(new String[] { list.getUrl() }, null, table, error);
+    			if (!error.value && table.value != null) {
+					_vocabList.put(list.getId(), table.value);
 
 					File dir = new java.io.File("resources/Vocab"); //$NON-NLS-1$
 					if (!dir.exists()) {
 						dir.mkdirs();
 					}
-					File file = new java.io.File(dir, listName + ".xml"); //$NON-NLS-1$
+					File file = new java.io.File(dir, list.getId() + ".xml"); //$NON-NLS-1$
 					stream = new FileOutputStream(file.toString());
 
 					encoder = new XMLEncoder(stream);
 					encoder.writeObject(table.value);
-					_vocabListStatus.put(listName, table.value.length);
-				} else {
-					_vocabListStatus.put(listName, 0);
-				}
-			} else {
-				okVocabLists = false;
-				_vocabListStatus.put(listName, -1);
-			}
-		} catch (Exception e) {
-			_vocabListStatus.put(listName, -1);
-			okVocabLists = false;
-			e.printStackTrace();
-		} finally {
-			if (encoder != null) {
-				try {
-					encoder.close();
-				} catch (Exception ex) {
-				}
-			}
-			if (stream != null) {
-				try {
-					stream.close();
-				} catch (Exception ex) {
-				}
-			}
-		}
+                    
+                    if (!list.isUseToMapping()){
+                        list.setLocalVersion(list.getServerVersion());
+                        Utils.configuration.getVocabLists().put(list.getId(), list);
+                    }
+                    
+                    updateList.setEtat(EtatUpdate.UPDATED);
+                    updateList.setNbRetrieve(_vocabList.get(listId).length);
+    			} else {
+                    updateList.setEtat(EtatUpdate.FAILED);
+    			}
+    		} catch (Exception e) {
+                updateList.setEtat(EtatUpdate.FAILED);
+    			e.printStackTrace();
+    		} finally {
+    			if (encoder != null) {
+    				try {
+    					encoder.close();
+    				} catch (Exception ex) {
+    				}
+    			}
+    			if (stream != null) {
+    				try {
+    					stream.close();
+    				} catch (Exception ex) {
+    				}
+    			}
+    		}
+        }else{
+            updateList.setEtat(EtatUpdate.CHECKED);
+        }
+        return updateList;
 	}
 
 	public static CodeTableRecordType[] getVocabList(String listName) {
@@ -1149,166 +1296,192 @@ public class NemoLists implements Cloneable {
 	/**
 	 * 
 	 */
-	public static void updateVocabLists(IProgressMonitor monitor) {
-		Iterator<String> keys = Utils.configuration.getVocabLists().keySet().iterator();
-        int keySetSize = Utils.configuration.getVocabLists().size();
-        int idxCurrent = 0;
-
-        nbVocabLists = 0;
-        okVocabLists = false;
-        
-        
-      while (keys.hasNext()) {
-          idxCurrent ++ ;
-          String listName = keys.next();
-          if (!monitor.isCanceled()){
-              StringBuffer msg = new StringBuffer();
-              msg.append(Messages.getString("SWTProcessWS.9")); //$NON-NLS-1$
-              msg.append(Global.SPACE);
-              msg.append(listName);
-              msg.append(" [");//$NON-NLS-1$
-              msg.append((idxCurrent));
-              msg.append(" / ");//$NON-NLS-1$
-              msg.append(keySetSize);
-              msg.append("]");//$NON-NLS-1$
-              monitor.subTask(msg.toString());
-              updateVocabList(listName);
-              if (okVocabLists)  nbVocabLists++;
-          }else{
-              okVocabLists = false;
-          }
-      }
-	}
-
-	/**
-	 * 
-	 */
 	public static void initVocabLists() {
 		XMLDecoder decoder = null;
-		Iterator<String> keys = Utils.configuration.getVocabLists().keySet()
-				.iterator();
-		while (keys.hasNext()) {
-			String listName = keys.next();
-			try {
-				String fileName = String.format("resources/Vocab/%s.xml", //$NON-NLS-1$
-						listName);
-				File file = new File(fileName);
-				if (file.exists()) {
-					decoder = new XMLDecoder(new FileInputStream(file));
-					_vocabList.put(listName, (CodeTableRecordType[]) decoder
-							.readObject());
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				if (decoder != null) {
-					try {
-						decoder.close();
-					} catch (Exception ex) {
-						ex.printStackTrace();
-					}
-				}
-			}
-		}
-	}
-
-	/**
-	 * 
-	 */
-	public static void initVocabMap(String list1, String list2) {
-		XMLDecoder decoder = null;
-		try {
-			String fileName = "resources/Vocab/" + Utils.concat(list1, list2, Global.UNDERSCORE) //$NON-NLS-1$
-					+ ".xml"; //$NON-NLS-1$
-			File file = new File(fileName);
-			if (file.exists()) {
-				decoder = new XMLDecoder(new FileInputStream(file));
-
-				_vocabMap.put(Utils.concat(list1, list2, Global.UNDERSCORE),
-						(CodeTableRecordType[]) decoder.readObject());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (decoder != null) {
-				try {
-					decoder.close();
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-		}
-	}
-    
-    public static void updateVocabMaps(IProgressMonitor monitor)
-    {
-        okVocabMaps = false;
-        nbVocabMaps = 0;
-        for (String key : _vocabMap.keySet()){
-            if (!monitor.isCanceled()){
-                monitor.subTask(Messages.getString("SWTProcessWS.9") + " Mapping " + key); //$NON-NLS-1$ //$NON-NLS-2$
-                String[] listName = key.split(Global.UNDERSCORE);
-                NemoLists.updateVocabMap(listName[0], listName[1]);
-                if (okVocabMaps)  nbVocabMaps++;
-            }else{
-                okVocabMaps = false;
+        String[] listNames = Intern.vocabLists.split(",");
+        for (String listName : listNames){
+            try {
+                String fileName = String.format("resources/Vocab/%s.xml", //$NON-NLS-1$
+                        listName);
+                File file = new File(fileName);
+                if (file.exists()) {
+                    decoder = new XMLDecoder(new FileInputStream(file));
+                    _vocabList.put(listName, (CodeTableRecordType[]) decoder
+                            .readObject());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (decoder != null) {
+                    try {
+                        decoder.close();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
             }
+        }
+	}
+
+    /**
+     * 
+     */
+    public static void initVocabMaps() {
+        XMLDecoder decoder = null;
+        String[] mapNames = Intern.vocabMaps.split(",");
+        for (String mapName : mapNames){
+            try {
+                String fileName = String.format("resources/Vocab/%s.xml", mapName); //$NON-NLS-1$ 
+                File file = new File(fileName);
+                if (file.exists()) {
+                    decoder = new XMLDecoder(new FileInputStream(file));
+                    _vocabMap.put(mapName, (CodeTableRecordType[]) decoder.readObject());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (decoder != null) {
+                    try {
+                        decoder.close();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+    
+    public static void updateVocabMaps(VocabSoapBindingStub vocabService, IProgressMonitor monitor)
+    {
+
+        UpdateBean updateMaps = getUpdate(Intern.id_maps);
+        
+        if (vocabService != null)
+        {
+            int nbRetrieve = 0;
+            int idxCurrent = 0;
+            
+            try
+            {
+                String[] listNames = Intern.vocabMaps.split(",");
+                int keySetSize = listNames.length;
+                updateMaps.setNbTot(keySetSize);
+                
+                for (String listName : listNames)
+                {
+                    
+                    idxCurrent ++ ;
+                    if (!monitor.isCanceled()){
+                        
+                        StringBuffer msg = new StringBuffer();
+                        msg.append(Messages.getString(Intern.id_maps)); 
+                        msg.append(Global.SPACE);
+                        msg.append(listName);
+                        msg.append(" [");//$NON-NLS-1$
+                        msg.append((idxCurrent));
+                        msg.append(" / ");//$NON-NLS-1$
+                        msg.append(keySetSize);
+                        msg.append("]");//$NON-NLS-1$
+                        monitor.subTask(msg.toString());
+                        
+                        UpdateBean updateMap = updateVocabMap(vocabService, listName);
+                        updateMaps.addSubUpdate(updateMap);
+                        if (updateMap.getEtat().compareTo(EtatUpdate.UPDATED) == 0
+                                || updateMap.getEtat().compareTo(EtatUpdate.CHECKED) == 0){
+                            nbRetrieve ++;
+                        }
+                        if (updateMaps.getEtat().compareTo(updateMap.getEtat()) < 0){
+                            updateMaps.setEtat(updateMap.getEtat());
+                        }
+                    }else{
+                        updateMaps.setEtat(EtatUpdate.INTERRUPTED);
+                    }
+                }
+                
+                updateMaps.setNbRetrieve(nbRetrieve);
+                
+            }catch (Exception e){
+                updateMaps.setEtat(EtatUpdate.FAILED);
+                e.printStackTrace();
+            }
+        }else{
+            updateMaps.setEtat(EtatUpdate.FAILED);
         }
     }
 
 	/**
 	 * 
 	 */
-	private static void updateVocabMap(String list1, String list2) {
-		okVocabMaps = true;
-		FileOutputStream stream = null;
-		XMLEncoder encoder = null;
-		CodeTableRecordTypeArrayHolder table = new CodeTableRecordTypeArrayHolder();
-		javax.xml.rpc.holders.BooleanHolder error = new BooleanHolder();
-		try {
-			VocabSoapBindingStub vocab = new VocabSoapBindingStub(
-					new java.net.URL(Utils.configuration.getVocabURL()),
-					new Service());
-			vocab.getMap(new String[] { Utils.configuration
-					.getVocabListURL(list1) }, Utils.configuration
-					.getPredicate(), new String[] { Utils.configuration
-					.getVocabListURL(list2) }, "false", table, error); //$NON-NLS-1$
-			if (!error.value) {
-				if (table.value != null) {
-					_vocabMap.put(Utils.concat(list1, list2, Global.UNDERSCORE), table.value);
+	private static UpdateBean updateVocabMap(VocabSoapBindingStub vocab, String listName) {
 
-					File dir = new java.io.File("resources/Vocab"); //$NON-NLS-1$
-					if (!dir.exists()) {
-						dir.mkdirs();
-					}
-					File file = new java.io.File(dir, Utils
-							.concat(list1, list2, Global.UNDERSCORE)
-							+ ".xml"); //$NON-NLS-1$
-					stream = new FileOutputStream(file.toString());
+        String[] listIds = listName.split(Global.UNDERSCORE);
+        
+        BODCList list1 = Utils.configuration.getVocabList(listIds[0]);
+        BODCList list2 = Utils.configuration.getVocabList(listIds[1]);
+        
+        UpdateBean updateMap = new UpdateBean(listName, listName); 
+        updateMap.setNbTot(_vocabMap.get(listName).length);
+                
+        if ((list1.getLocalVersion().compareTo(list1.getServerVersion()) < 0)
+                || (list2.getLocalVersion().compareTo(list2.getServerVersion()) < 0)){
 
-					encoder = new XMLEncoder(stream);
-					encoder.writeObject(table.value);
-				}
-			}else{
-               okVocabMaps = false; 
-            }
-		} catch (Exception e) {
-			e.printStackTrace();
-            okVocabMaps = false;
-		} finally {
-			if (encoder != null) {
-				try {
-					encoder.close();
-				} catch (Exception ex) {
-				}
-			}
-			if (stream != null) {
-				try {
-					stream.close();
-				} catch (Exception ex) {
-				}
-			}
-		}
+    		FileOutputStream stream = null;
+    		XMLEncoder encoder = null;
+    		CodeTableRecordTypeArrayHolder table = new CodeTableRecordTypeArrayHolder();
+    		javax.xml.rpc.holders.BooleanHolder error = new BooleanHolder();
+    		try 
+            {
+    			vocab.getMap(new String[] { list1.getUrl() }, 
+                             Utils.configuration.getPredicate(), 
+                             new String[] { list2.getUrl() }, 
+                             "false", table, error); //$NON-NLS-1$
+                
+    			if (!error.value) {
+    				if (table.value != null) {
+    					_vocabMap.put(listName, table.value);
+    
+    					File dir = new java.io.File("resources/Vocab"); //$NON-NLS-1$
+    					if (!dir.exists()) {
+    						dir.mkdirs();
+    					}
+    					File file = new java.io.File(dir, listName + ".xml"); //$NON-NLS-1$
+    					stream = new FileOutputStream(file.toString());
+    
+    					encoder = new XMLEncoder(stream);
+    					encoder.writeObject(table.value);
+                        
+                        list1.setLocalVersion(list1.getServerVersion());
+                        list2.setLocalVersion(list2.getServerVersion());
+                        Utils.configuration.getVocabLists().put(list1.getId(), list1);
+                        Utils.configuration.getVocabLists().put(list2.getId(), list2);
+                        
+                        updateMap.setEtat(EtatUpdate.UPDATED);
+                        updateMap.setNbRetrieve(_vocabMap.get(listName).length);
+    				}
+    			}else{
+                    updateMap.setEtat(EtatUpdate.FAILED);
+                }
+    		} catch (Exception e) {
+    			e.printStackTrace();
+                updateMap.setEtat(EtatUpdate.FAILED);
+    		} finally {
+    			if (encoder != null) {
+    				try {
+    					encoder.close();
+    				} catch (Exception ex) {
+    				}
+    			}
+    			if (stream != null) {
+    				try {
+    					stream.close();
+    				} catch (Exception ex) {
+    				}
+    			}
+    		}
+        }else{
+            updateMap.setEtat(EtatUpdate.CHECKED);
+        }
+        return updateMap;
 	}
 
 	public static CodeTableRecordType[] getVocabMap(String list1, String list2) {
@@ -1412,6 +1585,52 @@ public class NemoLists implements Cloneable {
     public static HashMap<String, CodeTableRecordType[]> getVocabMap()
     {
         return _vocabMap;
+    }
+    
+
+    
+    /**
+     * Getter sur updatedLists.
+     * @return the updatedLists
+     */
+    public static ArrayList<UpdateBean> getUpdatedLists()
+    {
+        return updatedLists;
+    }
+
+    /**
+     * @param id
+     * @return the updatedList selected
+     */
+    public static UpdateBean getUpdate(String id){
+        for (UpdateBean value : updatedLists){
+            if (value.getId().equals(id)){
+                return value;
+            }
+        }
+        return null;
+    }
+    
+    private static void initUpdatedLists(){
+        updatedLists = new ArrayList<UpdateBean>();
+        updatedLists.add(new UpdateBean(Intern.id_nemo));
+        updatedLists.add(new UpdateBean(Intern.id_lists));
+        updatedLists.add(new UpdateBean(Intern.id_maps));
+        updatedLists.add(new UpdateBean(Intern.id_edmo));
+    }
+
+
+    /**
+     * reset updatedLists
+     */
+    public static void resetUpdatedLists() {
+        if (updatedLists == null){
+            initUpdatedLists();
+        }else{
+            for (UpdateBean value : updatedLists){
+                value.reset();
+            }
+        }
     }
 
 } /* End of class: NemoLists */

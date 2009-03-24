@@ -13,12 +13,16 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.config.UpdateBean;
+import fr.ifremer.nemo.config.UpdateBean.EtatUpdate;
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.medatlas.MedatlasSurveyWriter;
 import fr.ifremer.nemo.odv.ODVSurveyWriter;
 import fr.ifremer.nemo.output.ProgressNotification;
+import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.NemoWS;
+import fr.ifremer.nemo.wsVocab.vocab_pkg.VocabSoapBindingStub;
 
 public class SWTProcessWS implements IRunnableWithProgress {
 	public static ScrolledForm formEdition;
@@ -47,7 +51,7 @@ public class SWTProcessWS implements IRunnableWithProgress {
 
 	public void run(IProgressMonitor monitor) throws InvocationTargetException,
 			InterruptedException {
-		monitor.beginTask(Messages.getString("SWTProcessWS.1"), //$NON-NLS-1$
+		monitor.beginTask(Messages.getString("update.title"), //$NON-NLS-1$
 				IProgressMonitor.UNKNOWN);
 
 		monitor2 = monitor;
@@ -56,54 +60,66 @@ public class SWTProcessWS implements IRunnableWithProgress {
 
 		if (fichiersConstantes) {
             
+            NemoLists.resetUpdatedLists();
+            
             // mise e jour fichiers constantes
-            int nbListesOK = 0;
-            
-            // appel au WebService NEMO
-            monitor.subTask("WebService NEMO"); //$NON-NLS-1$
-            NemoWS service = NemoLists.callNemoWS();
-            
+            //int nbListesOK = 0;
+
             if (!monitor.isCanceled()){
-                monitor.subTask(Messages.getString("SWTProcessWS.3")); //$NON-NLS-1$
-                NemoLists.updateDataTypes(monitor, service);
-                nbListesOK++;
+                // appel au WebService NEMO
+                monitor.subTask(Messages.getString("connect.nemo")); //$NON-NLS-1$
+                NemoWS service = NemoLists.callNemoWS();
+                UpdateBean updateNemo = NemoLists.getUpdate(Intern.id_nemo);
+                updateNemo.setNbTot(Integer.parseInt(Intern.nbnemolists));
+                
+                if (!monitor.isCanceled()){
+                    monitor.subTask(Messages.getString("update.data")); //$NON-NLS-1$
+                    NemoLists.updateDataTypes(monitor, service, updateNemo);
+                }
+                
+                if (!monitor.isCanceled()){
+                    monitor.subTask(Messages.getString("update.param")); //$NON-NLS-1$
+                    NemoLists.updateParameters(monitor, service, updateNemo);
+                }
+                
+                if (!monitor.isCanceled()){
+                    monitor.subTask(Messages.getString("update.survey")); //$NON-NLS-1$
+                    NemoLists.updateSurveys(monitor, service, updateNemo);
+                }
+                
+                updateNemo.setNbRetrieve();
+
+                if (monitor.isCanceled()){
+                    updateNemo.setEtat(EtatUpdate.INTERRUPTED);
+                    throw new InterruptedException();
+                }
+            }
+            
+
+            if (!monitor.isCanceled()){
+                monitor.subTask(Messages.getString("connect.vocab"));  //$NON-NLS-1$
+                VocabSoapBindingStub vocabService = NemoLists.connectVocab();
+                
+                if (!monitor.isCanceled()){
+                    monitor.subTask(Messages.getString(Intern.id_lists)); 
+                    NemoLists.updateVocabLists(vocabService, monitor);
+                }
+                
+                if (!monitor.isCanceled()){
+                    monitor.subTask(Messages.getString(Intern.id_maps)); 
+                    NemoLists.updateVocabMaps(vocabService, monitor);
+                }			
             }
 
             if (!monitor.isCanceled()){
-                monitor.subTask(Messages.getString("SWTProcessWS.7")); //$NON-NLS-1$
-                NemoLists.updateParameters(monitor, service);
-                nbListesOK++;
-            }
-
-            if (!monitor.isCanceled()){
-                monitor.subTask(Messages.getString("SWTProcessWS.8")); //$NON-NLS-1$
-                NemoLists.updateSurveys(monitor, service);
-                nbListesOK++;
-            }
-            
-
-            if (!monitor.isCanceled()){
-                monitor.subTask(Messages.getString("SWTProcessWS.9")); //$NON-NLS-1$
-                // FAE 0001132 : precision du nom de la liste dans le message
-                NemoLists.updateVocabLists(monitor);
-                nbListesOK++;
-            }
-            
-
-            if (!monitor.isCanceled()){
-                monitor.subTask(Messages.getString("SWTProcessWS.11")); //$NON-NLS-1$
-                NemoLists.updateVocabMaps(monitor);
-                nbListesOK++;
-            }			
-
-            if (!monitor.isCanceled()){
-                monitor.subTask(Messages.getString("SWTProcessWS.10")); //$NON-NLS-1$
+                monitor.subTask(Messages.getString("connect.edmo")); //$NON-NLS-1$
                 NemoLists.updateEdmo(monitor);
-                nbListesOK++;
             }
+            
+            Utils.configuration.save();
             
             if (monitor.isCanceled()){
-                throw new InterruptedException(String.valueOf(nbListesOK));
+                throw new InterruptedException();
             }
             
 		} else {

@@ -9,6 +9,7 @@ public interface Global
     public static final String RN = "\r\n"; //$NON-NLS-1$
     public static final String STR_CONVERT = "x"; //$NON-NLS-1$
     public static final String UNDERSCORE = "_"; //$NON-NLS-1$
+    public static final String SLASH = "/"; //$NON-NLS-1$
     
     // Types de fichier
     public static final String PROFILE = "profile"; //$NON-NLS-1$

@@ -13,10 +13,11 @@ public class SWTProgressWS extends ApplicationWindow {
 		super(null);
 	}
 
-	public String run(){
+	public boolean run(){
 
 		final Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
-        String interrompu = "-1"; //$NON-NLS-1$
+
+        boolean interrompu = false;
 
 		try {
 			// FAE 0001132 : enable the cancelation		
@@ -24,9 +25,9 @@ public class SWTProgressWS extends ApplicationWindow {
 			
 		} catch (InvocationTargetException e) {
 			e.printStackTrace();
-            interrompu = e.getMessage();
+            interrompu = true;
 		} catch (InterruptedException e) {
-            interrompu = e.getMessage();
+            interrompu = true;
 		}
         
         return interrompu;

@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 
+import fr.ifremer.nemo.config.BODCList;
 import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.FlagTable;
@@ -1016,26 +1017,31 @@ public class Utils {
 				.setNemoWebServiceURL(OptionsAction.textAreaNemo.getText());
 		configuration.setVocabURL(OptionsAction.textVocabURL.getText());
 
-		configuration.getVocabLists().put("C77", "");
-		configuration.getVocabLists().put("C174", "");
-		configuration.getVocabLists().put("C180", "");
-		configuration.getVocabLists().put("L05", "");
-		configuration.getVocabLists().put("L021", "");
-		configuration.getVocabLists().put("L031", "");
-		configuration.getVocabLists().put("L051", "");
-		configuration.getVocabLists().put("L061", "");
-		configuration.getVocabLists().put("L071", "");
-		configuration.getVocabLists().put("L081", "");
-		configuration.getVocabLists().put("L201", "");
-		configuration.getVocabLists().put("L300", "");
-		configuration.getVocabLists().put("P011", "");
-		configuration.getVocabLists().put("P061", "");
-		configuration.getVocabLists().put("P091", "");
-		configuration.getVocabLists().put("C16", "");
-		for (Entry<String, String> currentEntry : Utils.configuration
-				.getVocabLists().entrySet()) {
-			configuration.setVocabListURL(currentEntry.getKey());
-		}
+        // TODO vérifier save URL Vocab
+        for (BODCList list : Utils.configuration.getVocabLists().values()){
+            list.setUrl();
+        }
+        
+//		configuration.getVocabLists().put("C77", "");
+//		configuration.getVocabLists().put("C174", "");
+//		configuration.getVocabLists().put("C180", "");
+//		configuration.getVocabLists().put("L05", "");
+//		configuration.getVocabLists().put("L021", "");
+//		configuration.getVocabLists().put("L031", "");
+//		configuration.getVocabLists().put("L051", "");
+//		configuration.getVocabLists().put("L061", "");
+//		configuration.getVocabLists().put("L071", "");
+//		configuration.getVocabLists().put("L081", "");
+//		configuration.getVocabLists().put("L201", "");
+//		configuration.getVocabLists().put("L300", "");
+//		configuration.getVocabLists().put("P011", "");
+//		configuration.getVocabLists().put("P061", "");
+//		configuration.getVocabLists().put("P091", "");
+//		configuration.getVocabLists().put("C16", "");
+//		for (Entry<String, BODCList> currentEntry : Utils.configuration
+//				.getVocabLists().entrySet()) {
+//			//configuration.setVocabListURL(currentEntry.getKey());
+//		}
 
 		// CDI
         configuration.setWriteCdi(OptionsAction.checkCDI.getSelection());
