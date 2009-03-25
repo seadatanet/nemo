@@ -49,7 +49,9 @@ import fr.ifremer.nemo.config.EdmoHandler;
 import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.config.Proxy;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
@@ -71,19 +73,19 @@ public class OptionsAction extends Action implements ISelectionListener,
             comboAccesDonnees = null;
 
     public static Button buttonCancel, buttonValider, buttonParcourirModele,
-            buttonParcourirCampagne, buttonArboMapping = null;
+            buttonParcourirCampagne = null;
 
     public static Label labelNemo, labelNautilus, labelCampagne, lblCDI,
             labelIdEdmoRespCdi, labelUrlCdi, labelMethodeCdi,
             labelCodeEdmoDonnees, labelIdEdmoRespDonnees,
             labelIdEdmoDistDonnees, labelWSVocab, labelMapping, labelFichierMapping,
-            labelArboMapping, lblTypePlateForme, lblAccesDonnees = null;
+            labelWSEdmo, lblTypePlateForme, lblAccesDonnees = null;
 
     public static Button checkCDI, checkMapping;
 
     public static Text textAreaNemo, textAreaNautilus, textDossierModele,
             textDossierCampagne, textUrlCdi, textVocabURL, textFichierMapping,
-            textArboMapping = null;
+            textWSEdmo = null;
 
     public static Table tabFlagTable, tabFlag;
 
@@ -98,6 +100,12 @@ public class OptionsAction extends Action implements ISelectionListener,
     // vars nécessaires à la fenêtre d'options
 
     public static Shell shelloptions;
+
+    // -- PROXY
+    private Composite compo, compoProxy;
+    public static Button useProxy;
+    private Label label, labelAdrProxy, labelPortProxy, labelLoginProxy, labelPassProxy;
+    public static Text textAdrProxy, textPortProxy, textLoginProxy, textPassProxy;
 
     public OptionsAction(IWorkbenchWindow window)
     {
@@ -124,7 +132,7 @@ public class OptionsAction extends Action implements ISelectionListener,
             new Shell(Application.display, SWT.BORDER | SWT.TITLE
                     | SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);
 
-        shelloptions.setSize(600, 750);
+        shelloptions.setSize(600, 870);
         shelloptions.setText(Messages.getString("OptionsAction.3")); //$NON-NLS-1$
         shelloptions.setLayout(new GridLayout());
 
@@ -159,7 +167,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         textDossierCampagne.setText(Utils.configuration.getCruisesDirectory());
 
         // LANGUE
-        if (Utils.configuration.getLocale().toString().equals("fr_FR")) { //$NON-NLS-1$
+        if (Utils.configuration.getLocale().toString().equals(Intern.lang_fr)) {
             // on met la combo langue à FR
             comboLangue.select(0);
         }
@@ -181,10 +189,10 @@ public class OptionsAction extends Action implements ISelectionListener,
         }
 
         NemoLists.listeCentreDonnees = new ArrayList<String>();
-        String temp = "";
+        String temp = Global.EMPTY_STRING;
         for (Entry<String, String> currentEntry : treeCentre.entrySet())
         {
-            temp = currentEntry.getKey() + " - " + currentEntry.getValue();
+            temp = currentEntry.getKey() + Global.SEP + currentEntry.getValue();
             NemoLists.listeCentreDonnees.add(temp);
             comboCentreDonnees.add(temp);
         }
@@ -198,6 +206,7 @@ public class OptionsAction extends Action implements ISelectionListener,
             .setText(Utils.configuration.getNautilusWebServiceURL());
 
         textVocabURL.setText(Utils.configuration.getVocabURL());
+        textWSEdmo.setText(Utils.configuration.getEdmoURL());
 
         // CDI
         HashMap<Integer, String> edmoHash = NemoLists.getEdmo();
@@ -594,45 +603,142 @@ public class OptionsAction extends Action implements ISelectionListener,
      */
     private void createGroupWS()
     {
-        groupWS = new Group(top, SWT.NONE);
-        // groupWS.setLayout(null);
-        groupWS.setText("Web Services"); //$NON-NLS-1$
-        // groupWS.setBounds(new Rectangle(4, 169, 414, 146));
-        GridLayoutFactory.fillDefaults().applyTo(groupWS);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(groupWS);
+            groupWS = new Group(top, SWT.NONE);
+            // groupWS.setLayout(null);
+            groupWS.setText("Web Services"); //$NON-NLS-1$
+            // groupWS.setBounds(new Rectangle(4, 169, 414, 146));
+            GridLayoutFactory.fillDefaults().applyTo(groupWS);
+            GridDataFactory.fillDefaults().grab(true, false).applyTo(groupWS);
+    
+            compoWS = new Composite(groupWS, SWT.NONE);
+            GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoWS);
+            GridDataFactory.fillDefaults().grab(true, true).applyTo(compoWS); 
+    
+            labelNemo = new Label(compoWS, SWT.NONE);
+            // labelNemo.setBounds(new Rectangle(13, 40, 62, 13));
+            labelNemo.setText("NEMO"); //$NON-NLS-1$
+            labelNemo.pack();
+    
+            textAreaNemo = new Text(compoWS, SWT.BORDER);
+            // textAreaNemo.setBounds(new Rectangle(85, 18, 316, 55));
+            GridDataFactory.fillDefaults().grab(true, true).applyTo(textAreaNemo);
+    
+            labelNautilus = new Label(compoWS, SWT.NONE);
+            // labelNautilus.setBounds(new Rectangle(13, 100, 62, 13));
+            labelNautilus.setText("NAUTILUS"); //$NON-NLS-1$
+            labelNautilus.pack();
+    
+            textAreaNautilus = new Text(compoWS, SWT.BORDER);
+            // textAreaNautilus.setBounds(new Rectangle(85, 82, 316, 55));
+            GridDataFactory.fillDefaults().grab(true, true).applyTo(
+                textAreaNautilus);
+    
+            // WS Vocab
+    //        compoWSVocab1 = new Composite(groupWS, SWT.NONE);
+    //        GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoWSVocab1);
+    //        GridDataFactory.fillDefaults().grab(true, false).applyTo(compoWSVocab1);
+    
+            labelWSVocab = new Label(compoWS, SWT.NONE);
+            labelWSVocab.setText(Messages.getString("OptionsAction.28")); //$NON-NLS-1$
+            textVocabURL = new Text(compoWS, SWT.BORDER);
+            GridDataFactory.fillDefaults().grab(true, false).applyTo(textVocabURL);
+    
+            labelWSEdmo = new Label(compoWS, SWT.NONE);
+            labelWSEdmo.setText("WS Edmo"); //$NON-NLS-1$
+            textWSEdmo = new Text(compoWS, SWT.BORDER);
+            GridDataFactory.fillDefaults().grab(true, false).applyTo(textWSEdmo);
+        
+        // -- PROXY
+        createProxyGroup(groupWS);
+    }
 
-        compoWS = new Composite(groupWS, SWT.NONE);
-        GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoWS);
-        GridDataFactory.fillDefaults().grab(true, true).applyTo(compoWS);
+    
+    private void createProxyGroup(Composite parent)
+    {
+        compo = new Composite(parent, SWT.NULL);
+        
+        GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compo);
+        GridDataFactory.fillDefaults().grab(true, true).applyTo(compo);
+        
+        label = new Label(compo, SWT.NULL);
+        GridDataFactory.swtDefaults().grab(false, true).minSize(20, 10).applyTo(label);
 
-        labelNemo = new Label(compoWS, SWT.NONE);
-        // labelNemo.setBounds(new Rectangle(13, 40, 62, 13));
-        labelNemo.setText("NEMO"); //$NON-NLS-1$
-        labelNemo.pack();
+                // PROXY
+                Proxy proxy = Utils.configuration.getProxy();
+                useProxy = new Button(compo, SWT.CHECK);
+                useProxy.setText(Messages.getString("OptionsAction.proxy")); 
+                useProxy.setSelection(proxy.isUse());
+                useProxy
+                .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                    @Override
+                    public void widgetSelected(
+                            org.eclipse.swt.events.SelectionEvent e)
+                    {
+                        // enable proxy
+                        enableProxy(useProxy.getSelection());
+                    }
+                });
+            
+            compoProxy = new Composite(compo, SWT.NULL);        
+            GridLayoutFactory.fillDefaults().numColumns(5).applyTo(compoProxy);
+            //GridDataFactory.fillDefaults().grab(true, true).applyTo(compoProxy);
+            
+                labelAdrProxy = new Label(compoProxy, SWT.NULL);
+                labelAdrProxy.setText(Messages.getString("OptionsAction.proxy.adr"));
+                GridDataFactory.swtDefaults().grab(true, false).minSize(100, 10).applyTo(labelAdrProxy);
+                
+                textAdrProxy = new Text(compoProxy, SWT.BORDER);
+                textAdrProxy.setText(proxy.getAdress());
+                GridDataFactory.swtDefaults().grab(true, false).hint(170, 10).applyTo(textAdrProxy);
+                
+                label = new Label(compoProxy, SWT.NULL);
+                GridDataFactory.swtDefaults().grab(true, false).minSize(20, 10).applyTo(label);
+                
+                labelPortProxy = new Label(compoProxy, SWT.NULL);
+                labelPortProxy.setText(Messages.getString("OptionsAction.proxy.port"));
+                GridDataFactory.swtDefaults().grab(true, false).minSize(70, 10).applyTo(labelPortProxy);
+                
+                textPortProxy= new Text(compoProxy, SWT.BORDER);
+                textPortProxy.setText(String.valueOf(proxy.getPort()));
+                GridDataFactory.swtDefaults().grab(true, false).hint(170, 10).applyTo(textPortProxy);
+    
+    
+            compoProxy = new Composite(compo, SWT.NULL);            
+            GridLayoutFactory.fillDefaults().numColumns(5).applyTo(compoProxy);
+            
+                labelLoginProxy = new Label(compoProxy, SWT.NULL);
+                labelLoginProxy.setText(Messages.getString("OptionsAction.proxy.login"));
+                GridDataFactory.swtDefaults().grab(true, false).minSize(100, 10).applyTo(labelLoginProxy);
+                
+                textLoginProxy= new Text(compoProxy, SWT.BORDER);
+                textLoginProxy.setText(proxy.getLogin());
+                GridDataFactory.swtDefaults().grab(true, false).hint(170, 10).applyTo(textLoginProxy);
+                
+                label = new Label(compoProxy, SWT.NULL);
+                GridDataFactory.swtDefaults().grab(true, false).minSize(20, 10).applyTo(label);
+                
+                labelPassProxy = new Label(compoProxy, SWT.NULL);
+                labelPassProxy.setText(Messages.getString("OptionsAction.proxy.pass"));
+                GridDataFactory.swtDefaults().grab(true, false).minSize(70, 10).applyTo(labelPassProxy);
+                
+                textPassProxy = new Text(compoProxy, SWT.BORDER | SWT.SINGLE | SWT.PASSWORD);
+                textPassProxy.setText(proxy.getPassword());
+                GridDataFactory.swtDefaults().grab(true, false).hint(170, 10).applyTo(textPassProxy);
+        
+        enableProxy(proxy.isUse());
+    }
 
-        textAreaNemo = new Text(compoWS, SWT.BORDER);
-        // textAreaNemo.setBounds(new Rectangle(85, 18, 316, 55));
-        GridDataFactory.fillDefaults().grab(true, true).applyTo(textAreaNemo);
-
-        labelNautilus = new Label(compoWS, SWT.NONE);
-        // labelNautilus.setBounds(new Rectangle(13, 100, 62, 13));
-        labelNautilus.setText("NAUTILUS"); //$NON-NLS-1$
-        labelNautilus.pack();
-
-        textAreaNautilus = new Text(compoWS, SWT.BORDER);
-        // textAreaNautilus.setBounds(new Rectangle(85, 82, 316, 55));
-        GridDataFactory.fillDefaults().grab(true, true).applyTo(
-            textAreaNautilus);
-
-        // WS Vocab
-        compoWSVocab1 = new Composite(groupWS, SWT.NONE);
-        GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoWSVocab1);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(compoWSVocab1);
-
-        labelWSVocab = new Label(compoWSVocab1, SWT.NONE);
-        labelWSVocab.setText(Messages.getString("OptionsAction.28"));
-        textVocabURL = new Text(compoWSVocab1, SWT.BORDER);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(textVocabURL);
+    
+    private void enableProxy(boolean enabled)
+    {
+        labelAdrProxy.setEnabled(enabled);
+        textAdrProxy.setEnabled(enabled);
+        labelPortProxy.setEnabled(enabled);
+        textPortProxy.setEnabled(enabled);
+        labelLoginProxy.setEnabled(enabled);
+        textLoginProxy.setEnabled(enabled);
+        labelPassProxy.setEnabled(enabled);
+        textPassProxy.setEnabled(enabled);
     }
 
     /**
@@ -1139,9 +1245,12 @@ public class OptionsAction extends Action implements ISelectionListener,
                 {
                     // FAE 1123 : validation de la config
                     if (checkConfig())
-                    {                        
+                    {                    
+                        // message d'information pour redémarrage de l'application
+                        boolean writeIni = checkRestart();
+                        
                         // sauvegarde de la config
-                        Utils.saveConfig();
+                        Utils.saveConfig(writeIni);
                         
                         // reinitialisation de la conversion
                         if (DataModel.inputModel != null) DataModel.inputModel.setConverted(false);
@@ -1162,7 +1271,12 @@ public class OptionsAction extends Action implements ISelectionListener,
         StringBuffer message = new StringBuffer();
         StringBuffer messageCDI = new StringBuffer();
 
-        message.append(checkCombo(comboIdEdmoRespCdi, "OptionsAction.21")); //$NON-NLS-1$
+        message.append(checkMandatory(comboIdEdmoRespCdi.getText(), "OptionsAction.21", Global.SEP)); //$NON-NLS-1$ 
+        if (useProxy.getSelection()){
+            message.append(checkMandatory(textAdrProxy.getText(), "OptionsAction.proxy.adr", Global.SEP)); //$NON-NLS-1$
+            message.append(checkMandatory(textPortProxy.getText(), "OptionsAction.proxy.port", Global.SEP)); //$NON-NLS-1$
+        }
+        
         if (message.length() > 0){
             message .insert(0, Messages.getString("OptionsAction.checkConfig")); //$NON-NLS-1$
             blnOK = false;
@@ -1170,12 +1284,12 @@ public class OptionsAction extends Action implements ISelectionListener,
         
         if (checkCDI.getSelection())        
         {       
-            messageCDI.append(checkCombo(comboCodeEdmoDonnees, "OptionsAction.24")); //$NON-NLS-1$
-            messageCDI.append(checkCombo(comboIdEdmoRespDonnees, "OptionsAction.25")); //$NON-NLS-1$
-            messageCDI.append(checkCombo(comboIdEdmoDistDonnees, "OptionsAction.26")); //$NON-NLS-1$
-            messageCDI.append(checkText(textUrlCdi, "OptionsAction.22", " - ")); //$NON-NLS-1$ //$NON-NLS-2$
-            messageCDI.append(checkCombo(comboMethodeCdi, "OptionsAction.23")); //$NON-NLS-1$
-            messageCDI.append(checkCombo(comboTypePlateForme, "ViewFile.typePlateForme")); //$NON-NLS-1$
+            messageCDI.append(checkMandatory(comboCodeEdmoDonnees.getText(), "OptionsAction.24", Global.SEP)); //$NON-NLS-1$ 
+            messageCDI.append(checkMandatory(comboIdEdmoRespDonnees.getText(), "OptionsAction.25", Global.SEP)); //$NON-NLS-1$
+            messageCDI.append(checkMandatory(comboIdEdmoDistDonnees.getText(), "OptionsAction.26", Global.SEP)); //$NON-NLS-1$ 
+            messageCDI.append(checkMandatory(textUrlCdi.getText(), "OptionsAction.22", Global.SEP)); //$NON-NLS-1$
+            messageCDI.append(checkMandatory(comboMethodeCdi.getText(), "OptionsAction.23", Global.SEP)); //$NON-NLS-1$
+            messageCDI.append(checkMandatory(comboTypePlateForme.getText(), "ViewFile.typePlateForme", Global.SEP)); //$NON-NLS-1$
 
             if (messageCDI.length() > 0){
                 messageCDI.insert(0, Messages.getString("OptionsAction.checkCDI")); //$NON-NLS-1$
@@ -1186,7 +1300,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         
         if (checkMapping.getSelection())        
         { 
-            String errorMapping = checkText(textFichierMapping, "OptionsAction.checkMapping", Global.RN); //$NON-NLS-1$
+            String errorMapping = checkMandatory(textFichierMapping.getText(), "OptionsAction.checkMapping", Global.RN); //$NON-NLS-1$
             if (errorMapping.length() > 0){
                 message.append(errorMapping);
                 blnOK = false;
@@ -1207,22 +1321,10 @@ public class OptionsAction extends Action implements ISelectionListener,
         return blnOK;
     }
     
-    protected String checkCombo(Combo combo, String keyErrorMsg)
+    protected String checkMandatory(String text, String keyErrorMsg, String sep)
     {
         StringBuffer message = new StringBuffer();
-        if (combo.getText().trim().equals(Global.EMPTY_STRING))
-        {
-            message.append(Global.RN);
-            message.append(" - "); //$NON-NLS-1$
-            message.append(Messages.getString(keyErrorMsg)); 
-        }
-        return message.toString();
-    }
-    
-    protected String checkText(Text text, String keyErrorMsg, String sep)
-    {
-        StringBuffer message = new StringBuffer();
-        if (text.getText().trim().equals(Global.EMPTY_STRING))
+        if (text.trim().equals(Global.EMPTY_STRING))
         {
             message.append(Global.RN);
             message.append(sep);
@@ -1234,29 +1336,96 @@ public class OptionsAction extends Action implements ISelectionListener,
     protected void redLabels(){
 
         // Libelles rouges si parametres manquants
-        redComboLabel(comboIdEdmoRespCdi, labelIdEdmoRespCdi);
-        redComboLabel(comboCodeEdmoDonnees, labelCodeEdmoDonnees);
-        redComboLabel(comboIdEdmoRespDonnees, labelIdEdmoRespDonnees);
-        redComboLabel(comboIdEdmoDistDonnees, labelIdEdmoDistDonnees);
-        redTextLabel(textUrlCdi, labelUrlCdi);
-        redComboLabel(comboTypePlateForme, lblTypePlateForme);
-        redTextLabel(textFichierMapping, labelFichierMapping);
+        redLabel(comboIdEdmoRespCdi.getText(), labelIdEdmoRespCdi);
+        redLabel(comboCodeEdmoDonnees.getText(), labelCodeEdmoDonnees);
+        redLabel(comboIdEdmoRespDonnees.getText(), labelIdEdmoRespDonnees);
+        redLabel(comboIdEdmoDistDonnees.getText(), labelIdEdmoDistDonnees);
+        redLabel(textUrlCdi.getText(), labelUrlCdi);
+        redLabel(comboMethodeCdi.getText(), labelMethodeCdi);
+        redLabel(comboTypePlateForme.getText(), lblTypePlateForme);
+        redLabel(textFichierMapping.getText(), labelFichierMapping);
+        redLabel(textAdrProxy.getText(), labelAdrProxy);
+        redLabel(textPortProxy.getText(), labelPortProxy);
     }
     
-    protected void redComboLabel(Combo combo, Label label){
-        if (combo.getText().trim().equals(Global.EMPTY_STRING)){
-            label.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
+    protected void redLabel(String text, Label redLabel){
+        if (text.trim().equals(Global.EMPTY_STRING)){
+            redLabel.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
         }else{
-            label.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_BLACK));
+            redLabel.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_BLACK));
         }
     }
+
     
-    protected void redTextLabel(Text text, Label label){
-        if (text.getText().trim().equals(Global.EMPTY_STRING)){
-            label.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
+    protected boolean checkRestart()
+    {
+        boolean writeIni = false;
+        StringBuffer message = new StringBuffer();
+
+        if (comboLangue.getText().equals(Messages.getString("OptionsAction.12"))){ //$NON-NLS-1$
+            if (Utils.configuration.getLang().equals(Intern.lang_fr))
+                message.append(Global.RN + Global.SEP + Messages.getString("OptionsAction.10")); //$NON-NLS-1$
         }else{
-            label.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_BLACK));
+            if (Utils.configuration.getLang().equals(Intern.lang_en))
+                message.append(Global.RN + Global.SEP + Messages.getString("OptionsAction.10")); //$NON-NLS-1$
         }
+        
+        Proxy recordedProxy = Utils.configuration.getProxy();
+        if (useProxy.getSelection() != recordedProxy.isUse()){
+            // proxy configuration change
+            message.append(Global.RN + Global.SEP + Messages.getString("OptionsAction.proxy")); //$NON-NLS-1$
+            writeIni = true;
+        }else{
+            if (useProxy.getSelection())
+            {
+                if (!textAdrProxy.getText().trim().equals(recordedProxy.getAdress())){
+                    // proxy address change (can't be null)
+                    message.append(Global.RN + Global.SEP + Messages.getString("OptionsAction.proxy.adr")); //$NON-NLS-1$
+                    writeIni = true;
+                }
+                if (!textPortProxy.getText().trim().equals(recordedProxy.getPort())){
+                    // proxy port change (can't be null)
+                    message.append(Global.RN + Global.SEP + Messages.getString("OptionsAction.proxy.port")); //$NON-NLS-1$
+                    writeIni = true;
+                }
+                
+                if (textLoginProxy.getText() == null){
+                    if (!recordedProxy.getLogin().equals(Global.EMPTY_STRING)){
+                        // proxy login change
+                        message.append(Global.RN + Global.SEP + Messages.getString("OptionsAction.proxy.login")); //$NON-NLS-1$
+                        writeIni = true;
+                    }
+                }else if (!textLoginProxy.getText().trim().equals(recordedProxy.getLogin())){
+                    // proxy login change
+                    message.append(Global.RN + Global.SEP + Messages.getString("OptionsAction.proxy.login")); //$NON-NLS-1$
+                    writeIni = true;
+                }
+                
+                if (textPassProxy.getText() == null){
+                    if (!recordedProxy.getPassword().equals(Global.EMPTY_STRING)){
+                        // proxy password change
+                        message.append(Global.RN + Global.SEP + Messages.getString("OptionsAction.proxy.pass")); //$NON-NLS-1$
+                        writeIni = true;
+                    }
+                }else if (!textPassProxy.getText().trim().equals(recordedProxy.getPassword())){
+                    // proxy password change
+                    message.append(Global.RN + Global.SEP + Messages.getString("OptionsAction.proxy.pass")); //$NON-NLS-1$
+                    writeIni = true;
+                }
+            }
+        }
+        
+
+        if (message.length() > 0){
+            message.insert(0, Messages.getString("OptionsAction.warning")); //$NON-NLS-1$
+            MessageDialog dialog = new MessageDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), 
+                                                     Messages.getString("OptionsAction.warning.title"), null, message.toString(),  //$NON-NLS-1$
+                                                     MessageDialog.NONE, new String[] { "OK" }, 0);  //$NON-NLS-1$
+            dialog.open();
+            
+        }
+        
+        return writeIni;
     }
 
     private void fillFlagTable()
@@ -1277,7 +1446,7 @@ public class OptionsAction extends Action implements ISelectionListener,
                 Utils.configuration.getDefaultCode()))
             {
                 setDefaultCode(flagTables.get(i).getCode());
-                Font font = new Font(Application.display, "", 8, SWT.BOLD);
+                Font font = new Font(Application.display, Global.EMPTY_STRING, 8, SWT.BOLD);
                 item.setFont(font);
             }
         }

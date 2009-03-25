@@ -1097,10 +1097,11 @@ public class NemoLists implements Cloneable {
             {
                 // Appel au WebService
     			Edmo_webservice service = new Edmo_webserviceLocator();
+                ((Edmo_webserviceLocator)service).setedmo_webserviceSoap12EndpointAddress(Utils.configuration.getEdmoURL());
     			Edmo_webserviceSoap port = service.getedmo_webserviceSoap12();
     			result = port.ws_edmo_get_list();
             }
-            if (!monitor.isCanceled() && !result.equals(Global.EMPTY_STRING))
+            if (!monitor.isCanceled())
             {
                 if (!result.equals(Global.EMPTY_STRING)){
                     monitor.subTask(Messages.getString(Intern.id_edmo));
@@ -1155,6 +1156,7 @@ public class NemoLists implements Cloneable {
             }
         }catch (Exception e){
             e.printStackTrace();
+            vocab = null;
         }
         return vocab;
     }

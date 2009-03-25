@@ -20,10 +20,9 @@ import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLBootstrapParser;
 import com.ago.xml.XMLOutputWriter;
 
-import fr.ifremer.nemo.config.Flag;
-import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
 
 /**
  * Class Configuration
@@ -77,6 +76,8 @@ public class Configuration implements Cloneable, RootSAXConsumer {
     protected String _accesDonnees;
 	
 	protected String _vocabURL;
+    
+    protected String _edmoURL;
 	
 	protected int _predicate;
 	
@@ -93,6 +94,8 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	protected String _defaultCode;
 	
 	protected ArrayList<FlagTable> _flagTables;
+    
+    protected Proxy proxy;
 
 	public Configuration() {
 		_contact = Global.EMPTY_STRING;
@@ -115,6 +118,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		_showRule = true;
 		_locale = null;
 		_vocabURL = Global.EMPTY_STRING;
+        _edmoURL = Global.EMPTY_STRING;
 		_predicate = 255;
 		_fichierMapping = Global.EMPTY_STRING;
 		_defaultCode = Global.EMPTY_STRING;
@@ -122,6 +126,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		_vocabLists = new HashMap<String, BODCList>();
 		
 		_flagTables = new ArrayList<FlagTable>();
+        proxy = Proxy.getInstance();
 	}
 
 	/**
@@ -263,10 +268,15 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			Element2Field setter = new Element2Field(this, "setFichierMapping");
 			return setter;
 		}
-		/*if (a_LocalName.equals("arboMapping")) {
-			Element2Field setter = new Element2Field(this, "setArboMapping");
-			return setter;
-		}*/
+        if (a_LocalName.equals(Intern.settings_proxy)) {
+            Proxy l = (Proxy) Proxy.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+            setProxy(l);
+            return (SAXConsumer) l;
+        }
+        if (a_LocalName.equals("edmoURL")) {
+            Element2Field setter = new Element2Field(this, "setEdmoURL");
+            return setter;
+        }
 		if (a_LocalName.equals("vocabURL")) {
 			Element2Field setter = new Element2Field(this, "setVocabURL");
 			return setter;
@@ -361,6 +371,8 @@ public class Configuration implements Cloneable, RootSAXConsumer {
         a_Writer.putTag("writeMapping", isWriteMapping());
 		a_Writer.putTag("fichierMapping", getFichierMapping());
 		//a_Writer.putTag("arboMapping", getArboMapping());
+        proxy.writeXMLOn(a_Writer);
+        a_Writer.putTag("edmoURL", getEdmoURL());
 		a_Writer.putTag("vocabURL", getVocabURL());
 		Iterator<String> keys = getVocabLists().keySet().iterator();
 		while (keys.hasNext()) {
@@ -399,7 +411,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	 * 
 	 */
 	public void writeXMLOn(XMLOutputWriter a_Writer) {
-		a_Writer.openTag("NemoConfiguration");
+		a_Writer.openTag("NemoConfiguration"); 
 		writeXMLBodyOn(a_Writer);
 		a_Writer.closeTag();
 	}
@@ -422,7 +434,8 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	 * 
 	 * @return a copy of this object
 	 */
-	public Object clone() throws CloneNotSupportedException {
+	@Override
+    public Object clone() throws CloneNotSupportedException {
 		Configuration copy = null;
 		copy = (Configuration) super.clone();
 		copy._locale = null;
@@ -787,9 +800,9 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	public Locale getLocale() {
 		if (_locale == null) {
 			return Locale.getDefault();
-		} else {
+		}// else {
 			return _locale;
-		}
+		//}
 	}
 
 	/**
@@ -802,15 +815,11 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			XMLBootstrapParser parser = new XMLBootstrapParser(_singleton);
 			try {
 				parser.parse(new FileInputStream(
-						"resources/NemoConfiguration.xml"), false);
+						"resources/NemoConfiguration.xml"), false); //$NON-NLS-1$
 			} catch (FileNotFoundException e) {
 
 				e.printStackTrace();
 			}
-			// parser.parse(
-			// Configuration.class.getResourceAsStream("resources/NemoConfiguration.xml"),
-			// false);
-
 		}
 		return _singleton;
 	}
@@ -830,7 +839,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		FileOutputStream stream = null;
 		try {
 			// creation nouveau dossier puis creation fichier config
-			File fich2 = new java.io.File("resources/NemoConfiguration.xml");
+			File fich2 = new java.io.File("resources/NemoConfiguration.xml"); //$NON-NLS-1$
 			stream = new FileOutputStream(fich2.toString());
 			writeXMLOn(stream);
 		} catch (Exception e) {
@@ -850,7 +859,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	 * @param a_Lang
 	 */
 	public void setLang(String a_Lang) {
-		StringTokenizer tokenizer = new StringTokenizer(a_Lang, "_");
+		StringTokenizer tokenizer = new StringTokenizer(a_Lang, Global.UNDERSCORE);
 		String[] tokens = new String[3];
 		int i = 0;
 		while (tokenizer.hasMoreTokens()) {
@@ -905,13 +914,13 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 
 	public String getFichierMapping() {
 		if (_fichierMapping.trim().equals(Global.EMPTY_STRING)) {
-			return "coupling.txt";
+			return "coupling.txt"; //$NON-NLS-1$
 		}
 		return _fichierMapping;
 	}
 	
 	public String getFichierMappingTxt() {
-		return _fichierMapping + ".txt";
+		return _fichierMapping + ".txt"; //$NON-NLS-1$
 	}
 
 	public void setFichierMapping(String mapping) {
@@ -923,11 +932,11 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 //	}
 	
 	public String getSep() {
-		return "\t";
+		return "\t"; //$NON-NLS-1$
 	}
 	
 	public String getSdnHeader() {
-		return "QV:SEADATANET";
+		return "QV:SEADATANET"; //$NON-NLS-1$
 	}
 
 	public ArrayList<FlagTable> getFlagTables() {
@@ -1015,6 +1024,38 @@ public class Configuration implements Cloneable, RootSAXConsumer {
     public void setWriteMapping(String writeMapping)
     {
         _writeMapping = Boolean.parseBoolean(writeMapping);
+    }
+
+    /**
+     * @return the proxy
+     */
+    public Proxy getProxy() {
+        return proxy;
+    }
+
+    /**
+     * @param proxy the proxy to set
+     */
+    public void setProxy(Proxy proxy) {
+        this.proxy = proxy;
+    }
+
+    /**
+     * Getter sur _edmoURL.
+     * @return the edmoURL
+     */
+    public String getEdmoURL()
+    {
+        return _edmoURL;
+    }
+
+    /**
+     * Setter sur _edmoURL.
+     * @param edmoURL the edmoURL to set
+     */
+    public void setEdmoURL(String edmoURL)
+    {
+        _edmoURL = edmoURL;
     }
 	
 } /* End of class: Configuration */

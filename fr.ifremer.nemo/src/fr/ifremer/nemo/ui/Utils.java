@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
 import org.eclipse.swt.SWT;
@@ -30,6 +29,7 @@ import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.input.HeaderFragment;
 import fr.ifremer.nemo.input.InputModel;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 
 public class Utils {
@@ -986,10 +986,10 @@ public class Utils {
 		}
 	}
 
-	public static void saveConfig() {
+	public static void saveConfig(boolean writeIni) {
 		// sauvegarde de la config dans le fichier qui va bien
 		// CONTACT
-		configuration.setContact(""); //$NON-NLS-1$
+		configuration.setContact(Global.EMPTY_STRING); 
 
 		// DOSSIERS
 		configuration.setModelsDirectory(OptionsAction.textDossierModele
@@ -1001,9 +1001,9 @@ public class Utils {
 		if (OptionsAction.comboLangue.getItem(
 				OptionsAction.comboLangue.getSelectionIndex()).equals(
 				Messages.getString("OptionsAction.11"))) { //$NON-NLS-1$
-			configuration.setLang("fr_FR"); //$NON-NLS-1$
+			configuration.setLang(Intern.lang_fr);
 		} else {
-			configuration.setLang("en_GB"); //$NON-NLS-1$
+			configuration.setLang(Intern.lang_en); 
 		}
 
 		// CENTRE DE DONNEES
@@ -1011,37 +1011,15 @@ public class Utils {
 				.extraitCode(OptionsAction.comboCentreDonnees.getText()));
 
 		// WS
-		configuration.setNautilusWebServiceURL(OptionsAction.textAreaNautilus
-				.getText());
-		configuration
-				.setNemoWebServiceURL(OptionsAction.textAreaNemo.getText());
+		configuration.setNautilusWebServiceURL(OptionsAction.textAreaNautilus.getText());
+		configuration.setNemoWebServiceURL(OptionsAction.textAreaNemo.getText());
 		configuration.setVocabURL(OptionsAction.textVocabURL.getText());
+        configuration.setEdmoURL(OptionsAction.textWSEdmo.getText());
+        configuration.getProxy().update(writeIni);
 
-        // TODO vérifier save URL Vocab
         for (BODCList list : Utils.configuration.getVocabLists().values()){
             list.setUrl();
         }
-        
-//		configuration.getVocabLists().put("C77", "");
-//		configuration.getVocabLists().put("C174", "");
-//		configuration.getVocabLists().put("C180", "");
-//		configuration.getVocabLists().put("L05", "");
-//		configuration.getVocabLists().put("L021", "");
-//		configuration.getVocabLists().put("L031", "");
-//		configuration.getVocabLists().put("L051", "");
-//		configuration.getVocabLists().put("L061", "");
-//		configuration.getVocabLists().put("L071", "");
-//		configuration.getVocabLists().put("L081", "");
-//		configuration.getVocabLists().put("L201", "");
-//		configuration.getVocabLists().put("L300", "");
-//		configuration.getVocabLists().put("P011", "");
-//		configuration.getVocabLists().put("P061", "");
-//		configuration.getVocabLists().put("P091", "");
-//		configuration.getVocabLists().put("C16", "");
-//		for (Entry<String, BODCList> currentEntry : Utils.configuration
-//				.getVocabLists().entrySet()) {
-//			//configuration.setVocabListURL(currentEntry.getKey());
-//		}
 
 		// CDI
         configuration.setWriteCdi(OptionsAction.checkCDI.getSelection());
@@ -1219,51 +1197,51 @@ public class Utils {
 
 			if (!combo.getText().substring(0,
 					Math.min(combo.getText().length(), length)).equals(code)) {
-				combo.add(code + " - " + valeur);
+				combo.add(code + Global.SEP + valeur);
 				combo.select(combo.getItemCount() - 1);
 			}
 		}
 	}
 
 	public static String extraitCode(String valeur) {
-		if (valeur.indexOf(" ") > -1) {
-			return valeur.substring(0, valeur.indexOf(" "));
-		} else {
-			return valeur;
-		}
+		if (valeur.indexOf(Global.SPACE) > -1) {
+			return valeur.substring(0, valeur.indexOf(Global.SPACE));
+		} //else {
+		return valeur;
+		//}
 	}
 
 	public static String extraitCodeURN(String valeur) {
 		if (valeur.lastIndexOf('/') > -1) {
 			return valeur.substring(valeur.lastIndexOf('/') + 1);
-		} else {
+		} //else {
 			return valeur;
-		}
+		//}
 
 	}
 
 	public static String extraitValeur(String valeur) {
-		if (valeur.indexOf(" - ") > -1) {
-			return valeur.substring(valeur.indexOf(" - ") + 3);
-		} else {
+		if (valeur.indexOf(Global.SEP) > -1) {
+			return valeur.substring(valeur.indexOf(Global.SEP) + 3);
+		} //else {
 			return valeur;
-		}
+		//}
 	}
 
 	public static String extraitFichierChemin(String chemin) {
 		if (chemin.lastIndexOf('\\') > -1) {
 			return chemin.substring(chemin.lastIndexOf('\\') + 1);
-		} else {
+		} //else {
 			return chemin;
-		}
+		//}
 	}
 
 	public static String extraitCheminFichier(String chemin) {
 		if (chemin.lastIndexOf('\\') > -1) {
 			return chemin.substring(0, chemin.lastIndexOf('\\'));
-		} else {
+		} //else {
 			return chemin;
-		}
+		//}
 	}
 
 	public static String concat(String list1, String list2, String separator) {

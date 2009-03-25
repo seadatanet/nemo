@@ -25,7 +25,6 @@ public class SWTProgressWS extends ApplicationWindow {
 			
 		} catch (InvocationTargetException e) {
 			e.printStackTrace();
-            interrompu = true;
 		} catch (InterruptedException e) {
             interrompu = true;
 		}

@@ -1,6 +1,9 @@
 package fr.ifremer.nemo.util;
 
 public class JulianDate {
+    
+    // La date Julienne de référence est :
+    // 1er Janvier de l'année 4713 avant JC à 00:00.
 
 	/**
 	 * 3600 x 24 x 1000

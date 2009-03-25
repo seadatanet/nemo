@@ -16,6 +16,28 @@ public class Intern extends NLS {
     public static String nbnemolists;
     public static String vocabLists;
     public static String vocabMaps;
+    
+    public static String lang_fr;
+    public static String lang_en;
+
+    public static String settings_proxy;
+    public static String proxy_use;
+    public static String proxy_use_set;
+    public static String proxy_adr;
+    public static String proxy_adr_set;
+    public static String proxy_port;
+    public static String proxy_port_set;
+    public static String proxy_login;
+    public static String proxy_login_set;
+    public static String proxy_pass;
+    public static String proxy_pass_set;
+
+    public static String ini_name;
+    public static String ini_start;
+    public static String ini_proxy_adr;
+    public static String ini_proxy_port;
+    public static String ini_proxy_login;
+    public static String ini_proxy_pass;
 	
 	static {
 		// initialize resource bundle
