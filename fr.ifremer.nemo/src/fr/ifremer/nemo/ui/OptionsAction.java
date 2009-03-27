@@ -1312,7 +1312,9 @@ public class OptionsAction extends Action implements ISelectionListener,
             try {
                 String[] buttons = new String[1];
                 buttons[0] = "OK"; //$NON-NLS-1$ 
-                MessageDialog dialog = new MessageDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), Messages.getString("CDIResumeWriter.configTitle"), null, message.toString(), MessageDialog.NONE, buttons, 0); //$NON-NLS-1$
+                MessageDialog dialog = new MessageDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), 
+                                                         Messages.getString("CDIResumeWriter.configTitle"), null,  //$NON-NLS-1$
+                                                         message.toString(), MessageDialog.ERROR, buttons, 0);
                 dialog.open();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -1420,7 +1422,7 @@ public class OptionsAction extends Action implements ISelectionListener,
             message.insert(0, Messages.getString("OptionsAction.warning")); //$NON-NLS-1$
             MessageDialog dialog = new MessageDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), 
                                                      Messages.getString("OptionsAction.warning.title"), null, message.toString(),  //$NON-NLS-1$
-                                                     MessageDialog.NONE, new String[] { "OK" }, 0);  //$NON-NLS-1$
+                                                     MessageDialog.WARNING, new String[] { "OK" }, 0);  //$NON-NLS-1$
             dialog.open();
             
         }
