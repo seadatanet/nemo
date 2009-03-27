@@ -97,7 +97,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
     
     protected Proxy proxy;
 
-	public Configuration() {
+	private Configuration() {
 		_contact = Global.EMPTY_STRING;
 		_modelsDirectory = Global.EMPTY_STRING;
 		_cruisesDirectory = Global.EMPTY_STRING;

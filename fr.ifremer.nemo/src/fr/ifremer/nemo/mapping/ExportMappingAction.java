@@ -72,7 +72,7 @@ public class ExportMappingAction extends Action implements ISelectionListener,
                     + "\\"); //$NON-NLS-1$
             dialog.setText(Messages.getString("ExportMappingAction.5")); //$NON-NLS-1$
 
-            dialog.setFileName(new Configuration().getSingleton().getFichierMapping());
+            dialog.setFileName(Configuration.getSingleton().getFichierMapping());
             String extensions[] = new String[1];
             extensions[0] = "*.txt"; //$NON-NLS-1$
             dialog.setFilterExtensions(extensions);
