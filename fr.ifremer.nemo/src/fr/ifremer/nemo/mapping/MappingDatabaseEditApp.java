@@ -8,7 +8,6 @@ import org.jdesktop.application.Application;
 import org.jdesktop.application.SingleFrameApplication;
 import org.jdesktop.application.View;
 
-import fr.ifremer.nemo.mapping.MappingDatabaseEditView.RefreshTask;
 import fr.ifremer.nemo.util.Messages;
 
 /**
@@ -23,7 +22,7 @@ public class MappingDatabaseEditApp extends SingleFrameApplication {
     @Override protected void startup() {
         if(this.vue==null)
         {
-            fr.ifremer.nemo.ui.Utils.messageOK(Messages.getString("CouplingTable.launch"));
+            fr.ifremer.nemo.ui.Utils.messageOK(Messages.getString("CouplingTable.launch")); //$NON-NLS-1$
             this.vue=new MappingDatabaseEditView(this);
             show(vue);
         } else

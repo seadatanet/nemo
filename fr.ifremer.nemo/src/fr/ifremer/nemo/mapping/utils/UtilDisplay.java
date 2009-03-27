@@ -7,14 +7,12 @@ package fr.ifremer.nemo.mapping.utils;
 
 
 import java.util.Collection;
-import javax.swing.JOptionPane;
-import javax.swing.JFrame;
+import java.util.Iterator;
 
-import com.ago.model.Message;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import fr.ifremer.nemo.util.Messages;
-
-import java.util.Iterator;
 
 
 public class UtilDisplay {
@@ -42,7 +40,7 @@ public class UtilDisplay {
     JOptionPane.showMessageDialog(
       a_Frame,
       a_Message,
-      Messages.getString("CouplingTable.info"),
+      Messages.getString("CouplingTable.info"), //$NON-NLS-1$
       JOptionPane.INFORMATION_MESSAGE);
   }  
   
@@ -72,7 +70,7 @@ public class UtilDisplay {
     JOptionPane.showMessageDialog(
       a_Frame,
       a_Message,
-      Messages.getString("CouplingTable.error"),
+      Messages.getString("CouplingTable.error"), //$NON-NLS-1$
       JOptionPane.ERROR_MESSAGE);
   }  
 
@@ -89,7 +87,7 @@ public class UtilDisplay {
     status = JOptionPane.showConfirmDialog(
                a_Frame,
                a_Message,
-               Messages.getString("CouplingTable.confirm"),
+               Messages.getString("CouplingTable.confirm"), //$NON-NLS-1$
                JOptionPane.OK_CANCEL_OPTION);
     return status == JOptionPane.OK_OPTION;
   }
@@ -100,7 +98,7 @@ public class UtilDisplay {
   	System.out.print('[');
   	while (iter.hasNext()) {
   		if (!first){
-  			System.out.print(", ");
+  			System.out.print(", "); //$NON-NLS-1$
   		}
   		System.out.print(iter.next());
   		first = false;

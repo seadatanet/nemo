@@ -4,8 +4,8 @@
   <nautilusWsURL>http://www.ifremer.fr/WSnautilus/services/NAUTILUS</nautilusWsURL>
   <showRule>true</showRule>
   <contact></contact>
-  <modelsDirectory>D:\DBR\PROJETS\NEMO\dev_version1.2.01</modelsDirectory>
-  <cruisesDirectory>D:\DBR\PROJETS\NEMO\dev_version1.2.01</cruisesDirectory>
+  <modelsDirectory></modelsDirectory>
+  <cruisesDirectory></cruisesDirectory>
   <outputDirectory></outputDirectory>
   <writeCdi>false</writeCdi>
   <idEdmoRespCdi></idEdmoRespCdi>
