@@ -436,6 +436,7 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 		} else {
 			if (_inputDefault.trim().equals(fragmnt)) {
 				a_ParameterValue.setValue(Double.parseDouble(_model.getDefault()));
+                a_ParameterValue.setQc(Global.DEFAULT_FLAG);
 			}else {
 				double val;
 				try {
