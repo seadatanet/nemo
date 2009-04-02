@@ -32,18 +32,18 @@ public class RowSorterToStringConverter extends Converter {
         // The following statement makes the filter case-sensitive. If you want 
         //filter to work in a case-insensitive way, uncomment the line below, comment 
         //the 7 code lines below
-        sorter.setRowFilter(RowFilter.regexFilter(".*" + mask + ".*"));
+/*        sorter.setRowFilter(RowFilter.regexFilter(".*" + mask + ".*"));*/
 
         //The following 7 lines create a case-insensitive filter. If you want 
         //the filter to be case-sensitive, comment them out and uncomment the 
         //line above
-        /*String m = mask.toString();
+        String m = mask.toString();
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < m.length(); i++) {
             char c = m.charAt(i);
             sb.append('[').append(Character.toLowerCase(c)).append(Character.toUpperCase(c)).append(']');
         }
-        sorter.setRowFilter(RowFilter.regexFilter(".*" + sb + ".*"));*/
+        sorter.setRowFilter(RowFilter.regexFilter(".*" + sb + ".*"));
         return sorter;
     }
 }

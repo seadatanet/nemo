@@ -6,6 +6,7 @@ package fr.ifremer.nemo.mapping;
 
 import fr.ifremer.nemo.mapping.utils.UtilDisplay;
 import fr.ifremer.nemo.util.Conversion;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 import org.jdesktop.application.Action;
@@ -120,6 +121,8 @@ public class MappingDatabaseEditView extends FrameView {
         //FIXME
         //La bar de recherche s'initialise bizare, alors j'efface le contenu pour l'instant
         jTextField3.setText("");
+
+        setSaveNeeded(false);
     }
 
 
@@ -210,6 +213,30 @@ public class MappingDatabaseEditView extends FrameView {
         RefreshTask task = new RefreshTask(getApplication());
         fr.ifremer.nemo.mapping.MappingDatabaseEditApp.getInstance().hide(fr.ifremer.nemo.mapping.MappingDatabaseEditApp.getApplication().getView());
 
+        return task;
+    }
+
+    @Action()
+    @SuppressWarnings({"static-access", "fallthrough"})
+    public Task exit() {
+        Task task = null;
+        if (isSaveNeeded()){
+            int quit = UtilDisplay.confirm(Messages.getString("CouplingTableExit.confirm"), MappingDatabaseEditApp.getApplication().getMainFrame()); //$NON-NLS-1$
+            switch (quit){
+                case 0 :// YES -> save & quit
+                    task = save(); 
+                    fr.ifremer.nemo.mapping.MappingDatabaseEditApp.getInstance().hide(fr.ifremer.nemo.mapping.MappingDatabaseEditApp.getApplication().getView());
+                    break;
+                case 1 : // NO -> quit without save
+                    task = cancel(); 
+                    break;
+                default : // CANCEL -> return to MappingDatabaseEditApp
+                    break;
+            }
+        }else{
+            // no need to save -> quit
+            fr.ifremer.nemo.mapping.MappingDatabaseEditApp.getInstance().hide(fr.ifremer.nemo.mapping.MappingDatabaseEditApp.getApplication().getView());
+        }
         return task;
     }
 
@@ -348,6 +375,7 @@ public class MappingDatabaseEditView extends FrameView {
         jButton1 = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
         refreshButton = new javax.swing.JButton();
+        exitButton = new javax.swing.JButton();
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(fr.ifremer.nemo.mapping.MappingDatabaseEditApp.class).getContext().getResourceMap(MappingDatabaseEditView.class);
         entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory(resourceMap.getString("entityManager.persistenceUnit")).createEntityManager(); // NOI18N
         query = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery(resourceMap.getString("query.query")); // NOI18N
@@ -527,6 +555,10 @@ public class MappingDatabaseEditView extends FrameView {
         saveButton.setText(Messages.getString("CouplingTableAction.save")); // NOI18N        
         saveButton.setName("saveButton"); // NOI18N
 
+        exitButton.setAction(actionMap.get("exit")); // NOI18N
+        exitButton.setText(Messages.getString("CouplingTableAction.exit")); // NOI18N        
+        exitButton.setName("exitButton"); // NOI18N
+
         refreshButton.setAction(actionMap.get("refresh")); // NOI18N
         refreshButton.setText(Messages.getString("CouplingTableAction.refresh")); // NOI18N             
         refreshButton.setName("refreshButton"); // NOI18N
@@ -550,6 +582,8 @@ public class MappingDatabaseEditView extends FrameView {
                 .add(saveButton)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(jButton1)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(exitButton)
                 .addContainerGap())
             .add(org.jdesktop.layout.GroupLayout.TRAILING, statusPanelSeparator, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE)
         );
@@ -557,6 +591,7 @@ public class MappingDatabaseEditView extends FrameView {
             statusPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(statusPanelLayout.createSequentialGroup()
                 .add(statusPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(exitButton)
                     .add(jButton1)
                     .add(saveButton)
                     .add(refreshButton))
@@ -604,6 +639,7 @@ public class MappingDatabaseEditView extends FrameView {
     private javax.swing.JButton refreshButton;
     private fr.ifremer.nemo.mapping.utils.RowSorterToStringConverter rowSorterToStringConverter1;
     private javax.swing.JButton saveButton;
+    private javax.swing.JButton exitButton;
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;

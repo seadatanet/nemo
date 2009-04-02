@@ -82,14 +82,14 @@ public class UtilDisplay {
    * @return	boolean
    *
    */
-  public static boolean confirm (Object a_Message, JFrame a_Frame) {
+  public static int confirm (Object a_Message, JFrame a_Frame) {
     int status;
     status = JOptionPane.showConfirmDialog(
                a_Frame,
                a_Message,
                Messages.getString("CouplingTable.confirm"), //$NON-NLS-1$
-               JOptionPane.OK_CANCEL_OPTION);
-    return status == JOptionPane.OK_OPTION;
+               JOptionPane.YES_NO_CANCEL_OPTION);
+    return status;
   }
   
   public static void displayCollection(Collection c) {
