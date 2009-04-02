@@ -585,8 +585,12 @@ public class DataModel
             
             if (ViewFile.radSerieTempo.getSelection())
             {
-                // Ajout de "Chronological Julian Date" pour ODV
-                stationModel.addFixedParameterModel(IdParameter.CJDY);     
+                // Ajout de "Chronological Julian Date" ou "time-ISO8601 pour ODV
+                if (Utils.configuration.isDateISO()){
+                    stationModel.addFixedParameterModel(IdParameter.DTUT);  
+                }else{                    
+                    stationModel.addFixedParameterModel(IdParameter.CJDY);     
+                }
                 
                 // Serie temporelle
                 // Ajout du paramètre DEPH ( = Sensor Depth) pour ODV

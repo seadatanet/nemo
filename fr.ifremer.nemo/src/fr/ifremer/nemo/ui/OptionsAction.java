@@ -50,6 +50,8 @@ import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.config.Proxy;
+import fr.ifremer.nemo.domain.AddedParameter;
+import fr.ifremer.nemo.domain.AddedParameter.IdParameter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
@@ -61,27 +63,21 @@ public class OptionsAction extends Action implements ISelectionListener,
 
     private final IWorkbenchWindow window;
 
-    public static Composite top, compoHaut, compoLCD, compoBouton, compoWS,
-            compoWSVocab1, compoWSVocab2, compoFlag = null;
-
-    public static Group groupLangue, groupCentreDonnees, groupWS, groupDossier,
-            groupDossier1, groupDossier2, groupCDI, groupMapping, grpFlag = null;
-
     public static Combo comboLangue, comboCentreDonnees, comboIdEdmoRespCdi,
             comboMethodeCdi, comboCodeEdmoDonnees, comboIdEdmoRespDonnees,
             comboIdEdmoDistDonnees, comboTypePlateForme,
             comboAccesDonnees = null;
 
-    public static Button buttonCancel, buttonValider, buttonParcourirModele,
-            buttonParcourirCampagne = null;
+    public static Button buttonCancel, buttonValider, buttonRestore,
+                         buttonParcourirModele, buttonParcourirCampagne = null;
 
     public static Label labelNemo, labelNautilus, labelCampagne, lblCDI,
             labelIdEdmoRespCdi, labelUrlCdi, labelMethodeCdi,
             labelCodeEdmoDonnees, labelIdEdmoRespDonnees,
-            labelIdEdmoDistDonnees, labelWSVocab, labelMapping, labelFichierMapping,
+            labelIdEdmoDistDonnees, labelWSVocab, labelFichierMapping,
             labelWSEdmo, lblTypePlateForme, lblAccesDonnees = null;
 
-    public static Button checkCDI, checkMapping;
+    public static Button checkCDI, checkMapping, radDateISO, radDateJulian;
 
     public static Text textAreaNemo, textAreaNautilus, textDossierModele,
             textDossierCampagne, textUrlCdi, textVocabURL, textFichierMapping,
@@ -101,8 +97,11 @@ public class OptionsAction extends Action implements ISelectionListener,
 
     public static Shell shelloptions;
 
+    private Composite top, compo, compo01, compo02;
+    private Group group, group01, group02;
+    
+    
     // -- PROXY
-    private Composite compo, compoProxy;
     public static Button useProxy;
     private Label label, labelAdrProxy, labelPortProxy, labelLoginProxy, labelPassProxy;
     public static Text textAdrProxy, textPortProxy, textLoginProxy, textPassProxy;
@@ -149,16 +148,108 @@ public class OptionsAction extends Action implements ISelectionListener,
         // shelloptions.pack();
         shelloptions.open();
 
+        
+        
         // chargement des options
+        alimenteCombos();
+        
         Utils.initConfig();
-
         remplissageOptions();
-        
-        
 
     }
+    
+    private void alimenteCombos(){
 
-    public void remplissageOptions()
+        // CENTRES DE DONNEES
+        CodeTableRecordType[] centres = NemoLists.getVocabList("L300"); //$NON-NLS-1$
+        TreeMap<String, String> treeCentre = new TreeMap<String, String>();
+        for (CodeTableRecordType record : centres)
+        {
+            treeCentre.put(Utils.extraitCodeURN(record.getEntryKey()), record
+                .getEntryTerm());
+        }
+        NemoLists.listeCentreDonnees = new ArrayList<String>();
+        String temp = Global.EMPTY_STRING;
+        for (Entry<String, String> currentEntry : treeCentre.entrySet())
+        {
+            temp = currentEntry.getKey() + Global.SEP + currentEntry.getValue();
+            NemoLists.listeCentreDonnees.add(temp);
+            comboCentreDonnees.add(temp);
+        }
+        
+        // CDI
+        // FAE 58 CDL 09/04/08
+        CodeTableRecordType[] records = NemoLists.getVocabList("L071"); //$NON-NLS-1$
+        TreeSet<String> champsMethodesCdi = new TreeSet<String>();
+        for (CodeTableRecordType record : records)
+        {
+            String champCombo = Global.EMPTY_STRING;
+            // System.out.println(record.getEntryKey());
+            String contenuCleDecoup[] = record.getEntryKey().split("/"); //$NON-NLS-1$
+            champCombo += contenuCleDecoup[contenuCleDecoup.length - 1];
+            champCombo += " - " + record.getEntryTerm(); //$NON-NLS-1$
+            champsMethodesCdi.add(champCombo);
+        }
+        for (String champ : champsMethodesCdi)
+        {
+            comboMethodeCdi.add(champ);
+        }
+
+        records = NemoLists.getVocabList("L061"); //$NON-NLS-1$
+        champsMethodesCdi = new TreeSet<String>();
+        for (CodeTableRecordType record : records)
+        {
+            String champCombo = Global.EMPTY_STRING;
+            // System.out.println(record.getEntryKey());
+            String contenuCleDecoup[] = record.getEntryKey().split("/"); //$NON-NLS-1$
+            champCombo += contenuCleDecoup[contenuCleDecoup.length - 1];
+            champCombo += " - " + record.getEntryTerm(); //$NON-NLS-1$
+            champsMethodesCdi.add(champCombo);
+        }
+        for (String champ : champsMethodesCdi)
+            comboTypePlateForme.add(champ);
+
+        records = NemoLists.getVocabList("L081"); //$NON-NLS-1$
+        champsMethodesCdi = new TreeSet<String>();
+        for (CodeTableRecordType record : records)
+        {
+            String champCombo = Global.EMPTY_STRING;
+            // System.out.println(record.getEntryKey());
+            String contenuCleDecoup[] = record.getEntryKey().split("/"); //$NON-NLS-1$
+            champCombo += contenuCleDecoup[contenuCleDecoup.length - 1];
+            champCombo += " - " + record.getEntryTerm(); //$NON-NLS-1$
+            champsMethodesCdi.add(champCombo);
+        }
+        for (String champ : champsMethodesCdi)
+            comboAccesDonnees.add(champ);
+
+        
+        // alimentation des combos EDMO
+        HashMap<Integer, String> edmoHash = NemoLists.getEdmo();
+        TreeMap<Integer, String> edmoTree = new TreeMap<Integer, String>();
+        EdmoHandler.listeOrigine = new ArrayList<String>();
+        for (Entry<Integer, String> currentEntry : edmoHash.entrySet())
+        {
+            edmoTree.put(currentEntry.getKey(), currentEntry.getValue());
+        }
+        String strTemp = Global.EMPTY_STRING;
+        for (Entry<Integer, String> currentEntry : edmoTree.entrySet())
+        {
+            strTemp = currentEntry.getKey() + " - " + currentEntry.getValue(); //$NON-NLS-1$
+            EdmoHandler.listeOrigine.add(strTemp);
+            comboIdEdmoRespCdi.add(strTemp);
+            comboCodeEdmoDonnees.add(strTemp);
+            comboIdEdmoRespDonnees.add(strTemp);
+            comboIdEdmoDistDonnees.add(strTemp);
+        }
+        
+        
+        // FLags
+        fillFlagTable();
+        
+    }
+
+    private void remplissageOptions()
     {
         // remplissage IHM avec les valeurs du fichier de config
 
@@ -170,160 +261,59 @@ public class OptionsAction extends Action implements ISelectionListener,
         if (Utils.configuration.getLocale().toString().equals(Intern.lang_fr)) {
             // on met la combo langue à FR
             comboLangue.select(0);
-        }
-        else
-        {
+        }else{
             // on met la combo langue à GB
             comboLangue.select(1);
         }
 
         // CENTRE DE DONNEES
-        CodeTableRecordType[] centres = NemoLists.getVocabList("L300");
-
-        TreeMap<String, String> treeCentre = new TreeMap<String, String>();
-
-        for (CodeTableRecordType record : centres)
-        {
-            treeCentre.put(Utils.extraitCodeURN(record.getEntryKey()), record
-                .getEntryTerm());
-        }
-
-        NemoLists.listeCentreDonnees = new ArrayList<String>();
-        String temp = Global.EMPTY_STRING;
-        for (Entry<String, String> currentEntry : treeCentre.entrySet())
-        {
-            temp = currentEntry.getKey() + Global.SEP + currentEntry.getValue();
-            NemoLists.listeCentreDonnees.add(temp);
-            comboCentreDonnees.add(temp);
-        }
-
-        Utils.selectComboCode(comboCentreDonnees, Utils.configuration
-            .getDataCenter());
+        Utils.selectComboCode(comboCentreDonnees, Utils.configuration.getDataCenter());
 
         // WS
         textAreaNemo.setText(Utils.configuration.getNemoWebServiceURL());
-        textAreaNautilus
-            .setText(Utils.configuration.getNautilusWebServiceURL());
-
+        textAreaNautilus.setText(Utils.configuration.getNautilusWebServiceURL());
         textVocabURL.setText(Utils.configuration.getVocabURL());
         textWSEdmo.setText(Utils.configuration.getEdmoURL());
 
+        Proxy proxy = Utils.configuration.getProxy();
+        useProxy.setSelection(proxy.isUse());
+        textAdrProxy.setText(proxy.getAdress());
+        textPortProxy.setText(String.valueOf(proxy.getPort()));
+        textLoginProxy.setText(proxy.getLogin());
+        textPassProxy.setText(proxy.getPassword());
+        enableProxy(proxy.isUse());
+        
+        // EDMO code
+        Utils.selectComboCode(comboIdEdmoRespCdi, Utils.configuration.getIdEdmoRespCdi());
+
         // CDI
-        HashMap<Integer, String> edmoHash = NemoLists.getEdmo();
-
-        TreeMap<Integer, String> edmoTree = new TreeMap<Integer, String>();
-
-        EdmoHandler.listeOrigine = new ArrayList<String>();
-
-        for (Entry<Integer, String> currentEntry : edmoHash.entrySet())
-        {
-            edmoTree.put(currentEntry.getKey(), currentEntry.getValue());
-        }
-
-        String strTemp = "";
-        for (Entry<Integer, String> currentEntry : edmoTree.entrySet())
-        {
-            strTemp = currentEntry.getKey() + " - " + currentEntry.getValue();
-            EdmoHandler.listeOrigine.add(strTemp);
-            comboIdEdmoRespCdi.add(strTemp);
-            comboCodeEdmoDonnees.add(strTemp);
-            comboIdEdmoRespDonnees.add(strTemp);
-            comboIdEdmoDistDonnees.add(strTemp);
-        }
-
         checkCDI.setSelection(Utils.configuration.isWriteCdi());
-        
-        Utils.selectComboCode(comboIdEdmoRespCdi, Utils.configuration
-            .getIdEdmoRespCdi());
-        Utils.selectComboCode(comboCodeEdmoDonnees, Utils.configuration
-            .getCodeEdmoDonnees());
-        Utils.selectComboCode(comboIdEdmoRespDonnees, Utils.configuration
-            .getIdEdmoRespDonnees());
-        Utils.selectComboCode(comboIdEdmoDistDonnees, Utils.configuration
-            .getIdEdmoDistDonnees());
-
+        Utils.selectComboCode(comboCodeEdmoDonnees, Utils.configuration.getCodeEdmoDonnees());
+        Utils.selectComboCode(comboIdEdmoRespDonnees, Utils.configuration.getIdEdmoRespDonnees());
+        Utils.selectComboCode(comboIdEdmoDistDonnees, Utils.configuration.getIdEdmoDistDonnees());
         textUrlCdi.setText(Utils.configuration.getCdiURL());
-        
-        // FAE 58 CDL 09/04/08
-
-        CodeTableRecordType[] records = NemoLists.getVocabList("L071");
-
-        TreeSet<String> champsMethodesCdi = new TreeSet<String>();
-
-        for (CodeTableRecordType record : records)
-        {
-            String champCombo = "";
-            // System.out.println(record.getEntryKey());
-            String contenuCleDecoup[] = record.getEntryKey().split("/");
-            champCombo += contenuCleDecoup[contenuCleDecoup.length - 1];
-            champCombo += " - " + record.getEntryTerm();
-            champsMethodesCdi.add(champCombo);
-        }
-
-        for (String champ : champsMethodesCdi)
-        {
-            comboMethodeCdi.add(champ);
-        }
-
-        Utils.selectComboCode(comboMethodeCdi, Utils.configuration
-            .getCdiMethod());
-
-        records = NemoLists.getVocabList("L061");
-
-        champsMethodesCdi = new TreeSet<String>();
-
-        for (CodeTableRecordType record : records)
-        {
-            String champCombo = "";
-            // System.out.println(record.getEntryKey());
-            String contenuCleDecoup[] = record.getEntryKey().split("/");
-            champCombo += contenuCleDecoup[contenuCleDecoup.length - 1];
-            champCombo += " - " + record.getEntryTerm();
-            champsMethodesCdi.add(champCombo);
-        }
-
-        for (String champ : champsMethodesCdi)
-            comboTypePlateForme.add(champ);
-
-        records = NemoLists.getVocabList("L081");
-
-        champsMethodesCdi = new TreeSet<String>();
-
-        for (CodeTableRecordType record : records)
-        {
-            String champCombo = "";
-            // System.out.println(record.getEntryKey());
-            String contenuCleDecoup[] = record.getEntryKey().split("/");
-            champCombo += contenuCleDecoup[contenuCleDecoup.length - 1];
-            champCombo += " - " + record.getEntryTerm();
-            champsMethodesCdi.add(champCombo);
-        }
-
-        for (String champ : champsMethodesCdi)
-            comboAccesDonnees.add(champ);
-
-        Utils.selectComboCode(comboAccesDonnees, Utils.configuration
-            .getAccesDonnees());
-        Utils.selectComboCode(comboTypePlateForme, Utils.configuration
-            .getTypePlateForme());
+        Utils.selectComboCode(comboMethodeCdi, Utils.configuration.getCdiMethod());
+        Utils.selectComboCode(comboAccesDonnees, Utils.configuration.getAccesDonnees());
+        Utils.selectComboCode(comboTypePlateForme, Utils.configuration.getTypePlateForme());
+        CDICheckMask(Utils.configuration.isWriteCdi());
 
         // MAPPING
         checkMapping.setSelection(Utils.configuration.isWriteMapping());
         textFichierMapping.setText(Utils.configuration.getFichierMapping());
+        mappingCheckMask(Utils.configuration.isWriteMapping());
+        
+        // Date ODV
+        radDateISO.setSelection(Utils.configuration.isDateISO());
+        radDateJulian.setSelection(!Utils.configuration.isDateISO());
+        
+        // Flags
+        selectDefaultFlagsTab(Utils.configuration.getDefaultCode());
         
         redLabels();
-        
-        CDICheckMask(Utils.configuration.isWriteCdi());
-        mappingCheckMask(Utils.configuration.isWriteMapping());
-
-        // FLags
-        fillFlagTable();
     }
     
     protected void CDICheckMask (Boolean status)
     {
-        //labelIdEdmoRespCdi.setEnabled(status);
-        //comboIdEdmoRespCdi.setEnabled(status);
         labelCodeEdmoDonnees.setEnabled(status);
         comboCodeEdmoDonnees.setEnabled(status);
         labelIdEdmoRespDonnees.setEnabled(status);
@@ -338,7 +328,6 @@ public class OptionsAction extends Action implements ISelectionListener,
         comboTypePlateForme.setEnabled(status);
         lblAccesDonnees.setEnabled(status);
         comboAccesDonnees.setEnabled(status);         
-        
     }
     
     protected void mappingCheckMask(Boolean enabled){
@@ -360,207 +349,132 @@ public class OptionsAction extends Action implements ISelectionListener,
      */
     private void createCompoHaut()
     {
-        compoHaut = new Composite(top, SWT.NONE);
+        compo = new Composite(top, SWT.NONE);
 
-        GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoHaut);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(compoHaut);
+        GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(compo);
 
-        createCompoLCD();
-        createGroupDossier();
+        createCompoLCD(compo);
+        createGroupDossier(compo);
     }
 
     /**
      * This method initializes compoLCD
      * 
      */
-    private void createCompoLCD()
+    private void createCompoLCD(Composite parent)
     {
-        compoLCD = new Composite(compoHaut, SWT.NONE);
+        compo01 = new Composite(parent, SWT.NONE);
 
-        GridLayoutFactory.fillDefaults().applyTo(compoLCD);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(compoLCD);
+        GridLayoutFactory.fillDefaults().applyTo(compo01);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(compo01);
 
-        createGroupLangue();
-        createGroupCentreDonnees();
+        createGroupLangue(compo01);
+        createGroupCentreDonnees(compo01);
     }
 
     /**
      * This method initializes groupLangue
      * 
      */
-    private void createGroupLangue()
+    private void createGroupLangue(Composite parent)
     {
-        groupLangue = new Group(compoLCD, SWT.NONE);
+        group = new Group(parent, SWT.NONE);
         // groupLangue.setLayout(null);
-        groupLangue.setText(Messages.getString("OptionsAction.10")); //$NON-NLS-1$
-        createComboLangue();
-        // groupLangue.setBounds(new Rectangle(4, 10, 168, 65)); // 166
-        GridLayoutFactory.fillDefaults().applyTo(groupLangue);
-        GridDataFactory.fillDefaults().grab(true, true).applyTo(groupLangue);
-        groupLangue.pack();
-    }
-
-    /**
-     * This method initializes comboLangue
-     * 
-     */
-    private void createComboLangue()
-    {
-        comboLangue = new Combo(groupLangue, SWT.READ_ONLY);
-        // comboLangue.setBounds(new Rectangle(2, 16, 160, 21));
-
-        comboLangue.add(Messages.getString("OptionsAction.11")); //$NON-NLS-1$
-        comboLangue.add(Messages.getString("OptionsAction.12")); //$NON-NLS-1$
-        comboLangue.select(0);
+        group.setText(Messages.getString("OptionsAction.10")); //$NON-NLS-1$
+        GridLayoutFactory.fillDefaults().margins(4, 4).applyTo(group);
+        GridDataFactory.fillDefaults().grab(true, true).applyTo(group);
+        
+            comboLangue = new Combo(group, SWT.READ_ONLY);
+            GridDataFactory.fillDefaults().grab(true, false).applyTo(comboLangue);
+            // comboLangue.setBounds(new Rectangle(2, 16, 160, 21));
+    
+            comboLangue.add(Messages.getString("OptionsAction.11")); //$NON-NLS-1$
+            comboLangue.add(Messages.getString("OptionsAction.12")); //$NON-NLS-1$
+            comboLangue.select(0);
+            
+        group.pack();
     }
 
     /**
      * This method initializes groupCentreDonnees
      * 
      */
-    private void createGroupCentreDonnees()
+    private void createGroupCentreDonnees(Composite parent)
     {
-        groupCentreDonnees = new Group(compoLCD, SWT.NONE);
-        groupCentreDonnees.setText(Messages.getString("OptionsAction.20"));
-        GridLayoutFactory.fillDefaults().applyTo(groupCentreDonnees);
-        GridDataFactory.fillDefaults().grab(true, true).applyTo(
-            groupCentreDonnees);
+        group = new Group(parent, SWT.NONE);
+        group.setText(Messages.getString("OptionsAction.20")); //$NON-NLS-1$
+        GridLayoutFactory.fillDefaults().margins(4, 4).applyTo(group);
+        GridDataFactory.fillDefaults().grab(true, true).applyTo(group);
 
-        createComboCentreDonnees();
-    }
-
-    /**
-     * This method initializes comboCentreDonnees
-     * 
-     */
-    private void createComboCentreDonnees()
-    {
-        comboCentreDonnees = new Combo(groupCentreDonnees, SWT.READ_ONLY);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(
-            comboCentreDonnees);
+        comboCentreDonnees = new Combo(group, SWT.READ_ONLY);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(comboCentreDonnees);        
         comboCentreDonnees.pack();
 
         Utils.createSearchMenu(comboCentreDonnees, Global.DATACENTRE);
     }
 
     /**
-     * This method initializes groupTop3
-     * 
-     */
-    private void createCompoBouton()
-    {
-        compoBouton = new Composite(top, SWT.NONE);
-
-        GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoBouton);
-        GridDataFactory.fillDefaults().grab(true, false).align(SWT.CENTER,
-            SWT.NONE).applyTo(compoBouton);
-
-        buttonValider = new Button(compoBouton, SWT.NONE);
-        buttonValider.setText(Messages.getString("OptionsAction.17")); //$NON-NLS-1$
-        buttonValider.pack();
-
-        buttonCancel = new Button(compoBouton, SWT.NONE);
-        buttonCancel.setText(Messages.getString("OptionsAction.16")); //$NON-NLS-1$
-        buttonCancel.pack();
-
-        compoBouton.pack();
-    }
-
-    /**
      * This method initializes groupDossier
      * 
      */
-    private void createGroupDossier()
+    private void createGroupDossier(Composite parent)
     {
-        groupDossier = new Group(compoHaut, SWT.NONE);
-        GridLayoutFactory.fillDefaults().applyTo(groupDossier);
-        GridDataFactory.fillDefaults().grab(true, true).applyTo(groupDossier);
+        group = new Group(parent, SWT.NONE);
+        GridLayoutFactory.fillDefaults().margins(4, 4).applyTo(group);
+        GridDataFactory.fillDefaults().grab(true, true).applyTo(group);
 
         // groupDossier.setLayout(null);
-        groupDossier.setText(Messages.getString("OptionsAction.5")); //$NON-NLS-1$
-        // groupDossier.setBounds(new Rectangle(176, 10, 242, 150));
+        group.setText(Messages.getString("OptionsAction.5")); //$NON-NLS-1$
 
-        /*
-         * labelModele = new Label(groupDossier, SWT.NONE); //
-         * labelModele.setBounds(new Rectangle(13, 15, 62, 13));
-         * labelModele.setText(Messages.getString("OptionsAction.18"));
-         * //$NON-NLS-1$ labelModele.pack();
-         */
+        group01 = new Group(group, SWT.NONE);
+        GridLayoutFactory.fillDefaults().numColumns(2).applyTo(group01);
+        GridDataFactory.fillDefaults().grab(true, true).applyTo(group01);
+        group01.setText(Messages.getString("OptionsAction.18")); //$NON-NLS-1$
+        group01.pack();
 
-        groupDossier1 = new Group(groupDossier, SWT.NONE);
-        GridLayoutFactory.fillDefaults().numColumns(2).applyTo(groupDossier1);
-        GridDataFactory.fillDefaults().grab(true, true).applyTo(groupDossier1);
-        groupDossier1.setText(Messages.getString("OptionsAction.18")); //$NON-NLS-1$
-        groupDossier1.pack();
-
-        textDossierModele = new Text(groupDossier1, SWT.BORDER);
-        // textDossierModele.setBounds(new Rectangle(5, 31, 229, 19));
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(
-            textDossierModele);
-        buttonParcourirModele = new Button(groupDossier1, SWT.NONE);
-        // buttonParcourirModele.setBounds(new Rectangle(170, 53, 64, 23)); //
-        // 64
+        textDossierModele = new Text(group01, SWT.BORDER);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(textDossierModele);
+        buttonParcourirModele = new Button(group01, SWT.NONE);
         buttonParcourirModele.setText(Messages.getString("OptionsAction.6")); //$NON-NLS-1$
         buttonParcourirModele.pack();
-
-        /*
-         * labelCampagne = new Label(groupDossier, SWT.NONE); //
-         * labelCampagne.setBounds(new Rectangle(13, 80, 62, 13));
-         * labelCampagne.setText(Messages.getString("OptionsAction.19"));
-         * //$NON-NLS-1$ labelCampagne.pack();
-         */
-
-        groupDossier2 = new Group(groupDossier, SWT.NONE);
-        GridLayoutFactory.fillDefaults().numColumns(2).applyTo(groupDossier2);
-        GridDataFactory.fillDefaults().grab(true, true).applyTo(groupDossier2);
-        groupDossier2.setText(Messages.getString("OptionsAction.19")); //$NON-NLS-1$
-        groupDossier2.pack();
-
-        textDossierCampagne = new Text(groupDossier2, SWT.BORDER);
-        // textDossierCampagne.setBounds(new Rectangle(5, 96, 229, 19));
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(
-            textDossierCampagne);
-        buttonParcourirCampagne = new Button(groupDossier2, SWT.NONE);
-        // buttonParcourirCampagne.setBounds(new Rectangle(170, 118, 64, 23));
-        // // 64
-        buttonParcourirCampagne.setText(Messages.getString("OptionsAction.6")); //$NON-NLS-1$
-        buttonParcourirCampagne.pack();
-
         // listener sur le bouton
         buttonParcourirModele
-            .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-                @Override
-                public void widgetSelected(
-                        org.eclipse.swt.events.SelectionEvent e)
+        .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+            @Override
+            public void widgetSelected(
+                    org.eclipse.swt.events.SelectionEvent e)
+            {
+                String nomRepertoire;
+                Shell shell =
+                    PlatformUI.getWorkbench().getDisplay().getActiveShell();
+                DirectoryDialog dialog =
+                    new DirectoryDialog(shell, SWT.OPEN
+                        | SWT.APPLICATION_MODAL);
+                nomRepertoire = dialog.open();
+                if (nomRepertoire != null)
                 {
-                    // System.out.println(Messages
-                    // .getString("OptionsAction.7")); //$NON-NLS-1$
-
-                    String nomRepertoire;
-                    Shell shell =
-                        PlatformUI.getWorkbench().getDisplay().getActiveShell();
-                    DirectoryDialog dialog =
-                        new DirectoryDialog(shell, SWT.OPEN
-                                | SWT.APPLICATION_MODAL);
-                    nomRepertoire = dialog.open();
-                    if (nomRepertoire != null)
-                    {
-                        textDossierModele.setText(nomRepertoire);
-
-                    }
-                    else
-                    {
-
-                        // System.out.println("pas de dossier selectionne");
-                        // //$NON-NLS-1$
-                        ViewLog.styledTextLogErreurs.setText(Messages
-                            .getString("OptionsAction.9")); //$NON-NLS-1$
-
-                    }
-
+                    textDossierModele.setText(nomRepertoire);
                 }
-            });
+                else
+                {
+                    ViewLog.styledTextLogErreurs.setText(Messages
+                        .getString("OptionsAction.9")); //$NON-NLS-1$
+                }
+            }
+        });
 
+        group02 = new Group(group, SWT.NONE);
+        GridLayoutFactory.fillDefaults().numColumns(2).applyTo(group02);
+        GridDataFactory.fillDefaults().grab(true, true).applyTo(group02);
+        group02.setText(Messages.getString("OptionsAction.19")); //$NON-NLS-1$
+        group02.pack();
+
+        textDossierCampagne = new Text(group02, SWT.BORDER);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(textDossierCampagne);
+        buttonParcourirCampagne = new Button(group02, SWT.NONE);
+        buttonParcourirCampagne.setText(Messages.getString("OptionsAction.6")); //$NON-NLS-1$
+        buttonParcourirCampagne.pack();
         // listener sur le bouton
         buttonParcourirCampagne
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -568,9 +482,6 @@ public class OptionsAction extends Action implements ISelectionListener,
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
-                    // System.out.println(Messages
-                    // .getString("OptionsAction.7")); //$NON-NLS-1$
-
                     String nomRepertoire;
                     Shell shell =
                         PlatformUI.getWorkbench().getDisplay().getActiveShell();
@@ -581,18 +492,12 @@ public class OptionsAction extends Action implements ISelectionListener,
                     if (nomRepertoire != null)
                     {
                         textDossierCampagne.setText(nomRepertoire);
-
                     }
                     else
                     {
-
-                        // System.out.println("pas de dossier selectionne");
-                        // //$NON-NLS-1$
                         ViewLog.styledTextLogErreurs.setText(Messages
                             .getString("OptionsAction.9")); //$NON-NLS-1$
-
                     }
-
                 }
             });
     }
@@ -603,71 +508,58 @@ public class OptionsAction extends Action implements ISelectionListener,
      */
     private void createGroupWS()
     {
-            groupWS = new Group(top, SWT.NONE);
-            // groupWS.setLayout(null);
-            groupWS.setText("Web Services"); //$NON-NLS-1$
-            // groupWS.setBounds(new Rectangle(4, 169, 414, 146));
-            GridLayoutFactory.fillDefaults().applyTo(groupWS);
-            GridDataFactory.fillDefaults().grab(true, false).applyTo(groupWS);
+            group = new Group(top, SWT.NONE);
+            group.setText(Messages.getString("OptionsAction.grpWS")); //$NON-NLS-1$
+            GridLayoutFactory.fillDefaults().margins(4, 4).applyTo(group);
+            GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
     
-            compoWS = new Composite(groupWS, SWT.NONE);
-            GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoWS);
-            GridDataFactory.fillDefaults().grab(true, true).applyTo(compoWS); 
+            compo = new Composite(group, SWT.NONE);
+            GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo);
+            GridDataFactory.fillDefaults().grab(true, true).applyTo(compo); 
     
-            labelNemo = new Label(compoWS, SWT.NONE);
-            // labelNemo.setBounds(new Rectangle(13, 40, 62, 13));
+            labelNemo = new Label(compo, SWT.NONE);
             labelNemo.setText("NEMO"); //$NON-NLS-1$
             labelNemo.pack();
     
-            textAreaNemo = new Text(compoWS, SWT.BORDER);
-            // textAreaNemo.setBounds(new Rectangle(85, 18, 316, 55));
+            textAreaNemo = new Text(compo, SWT.BORDER);
             GridDataFactory.fillDefaults().grab(true, true).applyTo(textAreaNemo);
     
-            labelNautilus = new Label(compoWS, SWT.NONE);
-            // labelNautilus.setBounds(new Rectangle(13, 100, 62, 13));
+            labelNautilus = new Label(compo, SWT.NONE);
             labelNautilus.setText("NAUTILUS"); //$NON-NLS-1$
             labelNautilus.pack();
     
-            textAreaNautilus = new Text(compoWS, SWT.BORDER);
-            // textAreaNautilus.setBounds(new Rectangle(85, 82, 316, 55));
-            GridDataFactory.fillDefaults().grab(true, true).applyTo(
-                textAreaNautilus);
+            textAreaNautilus = new Text(compo, SWT.BORDER);
+            GridDataFactory.fillDefaults().grab(true, true).applyTo(textAreaNautilus);
     
-            // WS Vocab
-    //        compoWSVocab1 = new Composite(groupWS, SWT.NONE);
-    //        GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoWSVocab1);
-    //        GridDataFactory.fillDefaults().grab(true, false).applyTo(compoWSVocab1);
-    
-            labelWSVocab = new Label(compoWS, SWT.NONE);
+            // WS Vocab    
+            labelWSVocab = new Label(compo, SWT.NONE);
             labelWSVocab.setText(Messages.getString("OptionsAction.28")); //$NON-NLS-1$
-            textVocabURL = new Text(compoWS, SWT.BORDER);
+            textVocabURL = new Text(compo, SWT.BORDER);
             GridDataFactory.fillDefaults().grab(true, false).applyTo(textVocabURL);
     
-            labelWSEdmo = new Label(compoWS, SWT.NONE);
+            labelWSEdmo = new Label(compo, SWT.NONE);
             labelWSEdmo.setText("WS Edmo"); //$NON-NLS-1$
-            textWSEdmo = new Text(compoWS, SWT.BORDER);
+            textWSEdmo = new Text(compo, SWT.BORDER);
             GridDataFactory.fillDefaults().grab(true, false).applyTo(textWSEdmo);
         
         // -- PROXY
-        createProxyGroup(groupWS);
+        createProxyGroup(group);
     }
 
     
     private void createProxyGroup(Composite parent)
     {
-        compo = new Composite(parent, SWT.NULL);
+        compo01 = new Composite(parent, SWT.NULL);
         
-        GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compo);
-        GridDataFactory.fillDefaults().grab(true, true).applyTo(compo);
+        GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compo01);
+        GridDataFactory.fillDefaults().grab(true, true).applyTo(compo01);
         
-        label = new Label(compo, SWT.NULL);
-        GridDataFactory.swtDefaults().grab(false, true).minSize(20, 10).applyTo(label);
+        label = new Label(compo01, SWT.NULL);
+        GridDataFactory.swtDefaults().grab(false, true).hint(10, 4).applyTo(label);
 
                 // PROXY
-                Proxy proxy = Utils.configuration.getProxy();
-                useProxy = new Button(compo, SWT.CHECK);
-                useProxy.setText(Messages.getString("OptionsAction.proxy")); 
-                useProxy.setSelection(proxy.isUse());
+                useProxy = new Button(compo01, SWT.CHECK);
+                useProxy.setText(Messages.getString("OptionsAction.proxy"));  //$NON-NLS-1$
                 useProxy
                 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
                     @Override
@@ -679,57 +571,52 @@ public class OptionsAction extends Action implements ISelectionListener,
                     }
                 });
             
-            compoProxy = new Composite(compo, SWT.NULL);        
-            GridLayoutFactory.fillDefaults().numColumns(5).applyTo(compoProxy);
+            compo02 = new Composite(compo01, SWT.NULL);        
+            GridLayoutFactory.fillDefaults().numColumns(5).applyTo(compo02);
             //GridDataFactory.fillDefaults().grab(true, true).applyTo(compoProxy);
             
-                labelAdrProxy = new Label(compoProxy, SWT.NULL);
-                labelAdrProxy.setText(Messages.getString("OptionsAction.proxy.adr"));
-                GridDataFactory.swtDefaults().grab(true, false).minSize(100, 10).applyTo(labelAdrProxy);
+                labelAdrProxy = new Label(compo02, SWT.NULL);
+                labelAdrProxy.setText(Messages.getString("OptionsAction.proxy.adr")); //$NON-NLS-1$
+                GridDataFactory.fillDefaults().grab(true, false).minSize(100, 12).applyTo(labelAdrProxy);
                 
-                textAdrProxy = new Text(compoProxy, SWT.BORDER);
-                textAdrProxy.setText(proxy.getAdress());
-                GridDataFactory.swtDefaults().grab(true, false).hint(170, 10).applyTo(textAdrProxy);
+                textAdrProxy = new Text(compo02, SWT.BORDER);
+                GridDataFactory.fillDefaults().grab(true, false).hint(170, 12).applyTo(textAdrProxy);
                 
-                label = new Label(compoProxy, SWT.NULL);
-                GridDataFactory.swtDefaults().grab(true, false).minSize(20, 10).applyTo(label);
+                label = new Label(compo02, SWT.NULL);
+                GridDataFactory.fillDefaults().grab(true, false).minSize(10, 12).applyTo(label);
                 
-                labelPortProxy = new Label(compoProxy, SWT.NULL);
-                labelPortProxy.setText(Messages.getString("OptionsAction.proxy.port"));
-                GridDataFactory.swtDefaults().grab(true, false).minSize(70, 10).applyTo(labelPortProxy);
+                labelPortProxy = new Label(compo02, SWT.NULL);
+                labelPortProxy.setText(Messages.getString("OptionsAction.proxy.port")); //$NON-NLS-1$
+                GridDataFactory.fillDefaults().grab(true, false).minSize(70, 12).applyTo(labelPortProxy);
                 
-                textPortProxy= new Text(compoProxy, SWT.BORDER);
-                textPortProxy.setText(String.valueOf(proxy.getPort()));
-                GridDataFactory.swtDefaults().grab(true, false).hint(170, 10).applyTo(textPortProxy);
+                textPortProxy= new Text(compo02, SWT.BORDER);
+                GridDataFactory.fillDefaults().grab(true, false).hint(170, 12).applyTo(textPortProxy);
     
     
-            compoProxy = new Composite(compo, SWT.NULL);            
-            GridLayoutFactory.fillDefaults().numColumns(5).applyTo(compoProxy);
+                compo02 = new Composite(compo01, SWT.NULL);            
+            GridLayoutFactory.fillDefaults().numColumns(5).applyTo(compo02);
             
-                labelLoginProxy = new Label(compoProxy, SWT.NULL);
-                labelLoginProxy.setText(Messages.getString("OptionsAction.proxy.login"));
-                GridDataFactory.swtDefaults().grab(true, false).minSize(100, 10).applyTo(labelLoginProxy);
+                labelLoginProxy = new Label(compo02, SWT.NULL);
+                labelLoginProxy.setText(Messages.getString("OptionsAction.proxy.login")); //$NON-NLS-1$
+                GridDataFactory.fillDefaults().grab(true, false).minSize(100, 12).applyTo(labelLoginProxy);
                 
-                textLoginProxy= new Text(compoProxy, SWT.BORDER);
-                textLoginProxy.setText(proxy.getLogin());
-                GridDataFactory.swtDefaults().grab(true, false).hint(170, 10).applyTo(textLoginProxy);
+                textLoginProxy= new Text(compo02, SWT.BORDER);
+                GridDataFactory.fillDefaults().grab(true, false).hint(170, 12).applyTo(textLoginProxy);
                 
-                label = new Label(compoProxy, SWT.NULL);
-                GridDataFactory.swtDefaults().grab(true, false).minSize(20, 10).applyTo(label);
+                label = new Label(compo02, SWT.NULL);
+                GridDataFactory.fillDefaults().grab(true, false).minSize(10, 12).applyTo(label);
                 
-                labelPassProxy = new Label(compoProxy, SWT.NULL);
-                labelPassProxy.setText(Messages.getString("OptionsAction.proxy.pass"));
-                GridDataFactory.swtDefaults().grab(true, false).minSize(70, 10).applyTo(labelPassProxy);
+                labelPassProxy = new Label(compo02, SWT.NULL);
+                labelPassProxy.setText(Messages.getString("OptionsAction.proxy.pass")); //$NON-NLS-1$
+                GridDataFactory.fillDefaults().grab(true, false).minSize(70, 12).applyTo(labelPassProxy);
                 
-                textPassProxy = new Text(compoProxy, SWT.BORDER | SWT.SINGLE | SWT.PASSWORD);
-                textPassProxy.setText(proxy.getPassword());
-                GridDataFactory.swtDefaults().grab(true, false).hint(170, 10).applyTo(textPassProxy);
+                textPassProxy = new Text(compo02, SWT.BORDER | SWT.SINGLE | SWT.PASSWORD);
+                GridDataFactory.fillDefaults().grab(true, false).hint(170, 12).applyTo(textPassProxy);
         
-        enableProxy(proxy.isUse());
     }
 
     
-    private void enableProxy(boolean enabled)
+    protected void enableProxy(boolean enabled)
     {
         labelAdrProxy.setEnabled(enabled);
         textAdrProxy.setEnabled(enabled);
@@ -745,30 +632,40 @@ public class OptionsAction extends Action implements ISelectionListener,
      * This method initializes groupCDI
      * 
      */
-    private void createGroupCDI()
+    private void createGroupEdmo()
     {
-        compoHaut = new Composite(top, SWT.NONE);
-        GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compoHaut);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(compoHaut);
-        
         // FAE 1123 : Extraire le centre de données responsable du CDI du bloc CDI.
-        labelIdEdmoRespCdi = new Label(compoHaut, SWT.NONE);
-        labelIdEdmoRespCdi.setText(Messages.getString("OptionsAction.21"));
+        
+        group = new Group(top, SWT.NONE);
+        group.setText(Messages.getString("OptionsAction.grpEdmo")); //$NON-NLS-1$
+        GridLayoutFactory.fillDefaults().margins(4, 4).numColumns(2).applyTo(group);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
+        
+        labelIdEdmoRespCdi = new Label(group, SWT.NONE);
+        labelIdEdmoRespCdi.setText(Messages.getString("OptionsAction.21")); //$NON-NLS-1$
         labelIdEdmoRespCdi.pack();
 
-        comboIdEdmoRespCdi = new Combo(compoHaut, SWT.BORDER | SWT.READ_ONLY);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(
-            comboIdEdmoRespCdi);
+        comboIdEdmoRespCdi = new Combo(group, SWT.BORDER | SWT.READ_ONLY);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(comboIdEdmoRespCdi);
         
         
-        groupCDI = new Group(top, SWT.NONE);
-        GridLayoutFactory.fillDefaults().numColumns(2).applyTo(groupCDI);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(groupCDI);
+    }
+
+    /**
+     * This method initializes groupCDI
+     * 
+     */
+    private void createGroupCDI()
+    {   
+        group = new Group(top, SWT.NONE);
+        group.setText(Messages.getString("OptionsAction.grpCDI")); //$NON-NLS-1$
+        GridLayoutFactory.fillDefaults().margins(4, 4).numColumns(2).applyTo(group);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
 
         // compo vide pour mise en forme
-        lblCDI = new Label(groupCDI, SWT.NONE);
-        lblCDI.setText(Messages.getString("OptionsAction.44"));
-        checkCDI = new Button(groupCDI, SWT.CHECK);
+        lblCDI = new Label(group, SWT.NONE);
+        lblCDI.setText(Messages.getString("OptionsAction.44")); //$NON-NLS-1$
+        checkCDI = new Button(group, SWT.CHECK);
 
         //On masque/affiche les champs falcutatif en fonction de la case checkCDI
         checkCDI.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -779,46 +676,45 @@ public class OptionsAction extends Action implements ISelectionListener,
             }
         });  
         
-        labelCodeEdmoDonnees = new Label(groupCDI, SWT.NONE);
-        labelCodeEdmoDonnees.setText(Messages.getString("OptionsAction.24"));
+        labelCodeEdmoDonnees = new Label(group, SWT.NONE);
+        labelCodeEdmoDonnees.setText(Messages.getString("OptionsAction.24")); //$NON-NLS-1$
         labelCodeEdmoDonnees.pack();
 
-        comboCodeEdmoDonnees = new Combo(groupCDI, SWT.BORDER | SWT.READ_ONLY);
+        comboCodeEdmoDonnees = new Combo(group, SWT.BORDER | SWT.READ_ONLY);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(
             comboCodeEdmoDonnees);
 
-        labelIdEdmoRespDonnees = new Label(groupCDI, SWT.NONE);
-        labelIdEdmoRespDonnees.setText(Messages.getString("OptionsAction.25"));
+        labelIdEdmoRespDonnees = new Label(group, SWT.NONE);
+        labelIdEdmoRespDonnees.setText(Messages.getString("OptionsAction.25")); //$NON-NLS-1$
         labelIdEdmoRespDonnees.pack();
 
         comboIdEdmoRespDonnees =
-            new Combo(groupCDI, SWT.BORDER | SWT.READ_ONLY);
+            new Combo(group, SWT.BORDER | SWT.READ_ONLY);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(
             comboIdEdmoRespDonnees);
 
-        labelIdEdmoDistDonnees = new Label(groupCDI, SWT.NONE);
-        labelIdEdmoDistDonnees.setText(Messages.getString("OptionsAction.26"));
+        labelIdEdmoDistDonnees = new Label(group, SWT.NONE);
+        labelIdEdmoDistDonnees.setText(Messages.getString("OptionsAction.26")); //$NON-NLS-1$
         labelIdEdmoDistDonnees.pack();
 
         comboIdEdmoDistDonnees =
-            new Combo(groupCDI, SWT.BORDER | SWT.READ_ONLY);
+            new Combo(group, SWT.BORDER | SWT.READ_ONLY);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(
             comboIdEdmoDistDonnees);
 
-        labelUrlCdi = new Label(groupCDI, SWT.NONE);
-        labelUrlCdi.setText(Messages.getString("OptionsAction.22"));
+        labelUrlCdi = new Label(group, SWT.NONE);
+        labelUrlCdi.setText(Messages.getString("OptionsAction.22")); //$NON-NLS-1$
         labelUrlCdi.pack();
 
-        textUrlCdi = new Text(groupCDI, SWT.BORDER);
+        textUrlCdi = new Text(group, SWT.BORDER);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(textUrlCdi);
 
-        labelMethodeCdi = new Label(groupCDI, SWT.NONE);
-        labelMethodeCdi.setText(Messages.getString("OptionsAction.23"));
+        labelMethodeCdi = new Label(group, SWT.NONE);
+        labelMethodeCdi.setText(Messages.getString("OptionsAction.23")); //$NON-NLS-1$
         labelMethodeCdi.pack();
 
-        comboMethodeCdi = new Combo(groupCDI, SWT.BORDER | SWT.READ_ONLY);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(
-            comboMethodeCdi);
+        comboMethodeCdi = new Combo(group, SWT.BORDER | SWT.READ_ONLY);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(comboMethodeCdi);
 
         // Menu recherche combos
         Utils.createSearchMenu(comboIdEdmoRespCdi, Global.IDEDMO);
@@ -827,20 +723,32 @@ public class OptionsAction extends Action implements ISelectionListener,
         Utils.createSearchMenu(comboIdEdmoDistDonnees, Global.IDEDMO);
         
         // FAE 59 CDL 09/04/08
-        lblTypePlateForme = new Label(groupCDI, SWT.NONE);
-        lblTypePlateForme
-            .setText(Messages.getString("ViewFile.typePlateForme"));
+        lblTypePlateForme = new Label(group, SWT.NONE);
+        lblTypePlateForme.setText(Messages.getString("ViewFile.typePlateForme")); //$NON-NLS-1$
 
-        comboTypePlateForme = new Combo(groupCDI, SWT.BORDER);
-        GridDataFactory.fillDefaults().grab(false, false).applyTo(
-            comboTypePlateForme);
+        comboTypePlateForme = new Combo(group, SWT.BORDER);
+        GridDataFactory.fillDefaults().grab(false, false).applyTo(comboTypePlateForme);
 
-        lblAccesDonnees = new Label(groupCDI, SWT.NONE);
-        lblAccesDonnees.setText(Messages.getString("ViewFile.accesDonnees"));
+        lblAccesDonnees = new Label(group, SWT.NONE);
+        lblAccesDonnees.setText(Messages.getString("ViewFile.accesDonnees")); //$NON-NLS-1$
 
-        comboAccesDonnees = new Combo(groupCDI, SWT.BORDER);
-        GridDataFactory.fillDefaults().grab(false, false).applyTo(
-            comboAccesDonnees);
+        comboAccesDonnees = new Combo(group, SWT.BORDER);
+        GridDataFactory.fillDefaults().grab(false, false).applyTo(comboAccesDonnees);
+    }
+
+    /**
+     * This method initializes compoBas
+     * 
+     */
+    private void createCompoBas()
+    {
+        compo = new Composite(top, SWT.NONE);
+
+        GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(compo);
+
+        createGroupMapping(compo);
+        createGroupDateODV(compo);
     }
     
 
@@ -849,16 +757,15 @@ public class OptionsAction extends Action implements ISelectionListener,
      * This method initializes groupMapping
      * 
      */
-    private void createGroupMapping()
+    private void createGroupMapping(Composite parent)
     {
-        groupMapping = new Group(top, SWT.NONE);
-        GridLayoutFactory.fillDefaults().numColumns(2).applyTo(groupMapping);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(groupMapping);
-
-        labelMapping = new Label(groupMapping, SWT.NONE);
-        labelMapping.setText(Messages.getString("OptionsAction.45")); //$NON-NLS-1$
-        checkMapping = new Button(groupMapping, SWT.CHECK);
-
+        group = new Group(parent, SWT.NONE);
+        group.setText(Messages.getString("OptionsAction.grpMapping")); //$NON-NLS-1$
+        GridLayoutFactory.fillDefaults().margins(4, 4).applyTo(group);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
+        
+        checkMapping = new Button(group, SWT.CHECK);
+        checkMapping.setText(Messages.getString("OptionsAction.45")); //$NON-NLS-1$
         checkMapping.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
             @Override
             public void widgetSelected(org.eclipse.swt.events.SelectionEvent e)
@@ -868,13 +775,51 @@ public class OptionsAction extends Action implements ISelectionListener,
             }
         }); 
         
-        labelFichierMapping = new Label(groupMapping, SWT.NONE);
-        labelFichierMapping.setText(Messages.getString("OptionsAction.31")); //$NON-NLS-1$
-        labelFichierMapping.pack();
 
-        textFichierMapping = new Text(groupMapping, SWT.BORDER);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(
-            textFichierMapping);
+        compo01 = new Composite(group, SWT.NULL);        
+        GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo01);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(compo01);
+        
+            labelFichierMapping = new Label(compo01, SWT.NONE);
+            labelFichierMapping.setText(Messages.getString("OptionsAction.31")); //$NON-NLS-1$
+            labelFichierMapping.pack();
+    
+            textFichierMapping = new Text(compo01, SWT.BORDER);
+            GridDataFactory.fillDefaults().grab(true, false).applyTo(textFichierMapping);
+    }
+    
+    /**
+     * This method initializes groupMapping
+     * 
+     */
+    private void createGroupDateODV(Composite parent)
+    {
+        group = new Group(parent, SWT.NONE);
+        group.setText(Messages.getString("OptionsAction.grpDateODV")); //$NON-NLS-1$
+        GridLayoutFactory.fillDefaults().margins(4, 4).applyTo(group);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
+
+        AddedParameter dateISO = new AddedParameter(IdParameter.DTUT, null, null);
+        radDateISO = new Button(group, SWT.RADIO);
+        radDateISO.setText(dateISO.getFullName() + " [" + dateISO.getUnit() + "]"); //$NON-NLS-1$ //$NON-NLS-2$
+        radDateISO.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+            @Override
+            public void widgetSelected(org.eclipse.swt.events.SelectionEvent e)
+            {
+                radDateJulian.setSelection(!radDateISO.getSelection());
+            }
+        }); 
+        
+        AddedParameter dateJulian = new AddedParameter(IdParameter.CJDY, null, null);
+        radDateJulian = new Button(group, SWT.RADIO);
+        radDateJulian.setText(dateJulian.getFullName() + " [" + dateJulian.getUnit() + "]"); //$NON-NLS-1$//$NON-NLS-2$
+        radDateJulian.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+            @Override
+            public void widgetSelected(org.eclipse.swt.events.SelectionEvent e)
+            {
+                radDateISO.setSelection(!radDateJulian.getSelection());
+            }
+        });  
     }
 
     /**
@@ -883,21 +828,48 @@ public class OptionsAction extends Action implements ISelectionListener,
      */
     private void createGroupFlag()
     {
-        grpFlag = new Group(top, SWT.NONE);
-        grpFlag.setText(Messages.getString("OptionsAction.33"));
-        GridLayoutFactory.fillDefaults().numColumns(2).applyTo(grpFlag);
-        GridDataFactory.fillDefaults().grab(true, true).applyTo(grpFlag);
+        group = new Group(top, SWT.NONE);
+        group.setText(Messages.getString("OptionsAction.33")); //$NON-NLS-1$
+        GridLayoutFactory.fillDefaults().numColumns(2).applyTo(group);
+        GridDataFactory.fillDefaults().grab(true, true).applyTo(group);
 
         // Creation du tableau des tables de correspondaces
-        createTableFlagTable();
+        createTableFlagTable(group);
 
         // Creation du tableau des correspondaces
-        createTableFlag();
+        createTableFlag(group);
     }
 
-    public void createTableFlagTable()
+    /**
+     * This method initializes groupTop3
+     * 
+     */
+    private void createCompoBouton()
     {
-        tabFlagTable = new Table(grpFlag, SWT.FULL_SELECTION | SWT.BORDER);
+        compo = new Composite(top, SWT.NONE);
+
+        GridLayoutFactory.fillDefaults().numColumns(3).applyTo(compo);
+        GridDataFactory.fillDefaults().grab(true, false).align(SWT.CENTER,
+            SWT.NONE).applyTo(compo);
+
+        buttonValider = new Button(compo, SWT.NONE);
+        buttonValider.setText(Messages.getString("OptionsAction.17")); //$NON-NLS-1$
+        buttonValider.pack();
+
+        buttonRestore = new Button(compo, SWT.NONE);
+        buttonRestore.setText("Restore Default"); //$NON-NLS-1$
+        buttonRestore.pack();
+
+        buttonCancel = new Button(compo, SWT.NONE);
+        buttonCancel.setText(Messages.getString("OptionsAction.16")); //$NON-NLS-1$
+        buttonCancel.pack();
+
+        compo.pack();
+    }
+
+    public void createTableFlagTable(Composite parent)
+    {
+        tabFlagTable = new Table(parent, SWT.FULL_SELECTION | SWT.BORDER);
         tabFlagTable.setHeaderVisible(true);
         tabFlagTable.setLinesVisible(true);
         GridDataFactory.fillDefaults().grab(true, true).applyTo(tabFlagTable);
@@ -917,7 +889,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         MenuItem itemRemove = new MenuItem(menu, SWT.NONE);
         itemRemove.setText(Messages.getString("OptionsAction.39")); //$NON-NLS-1$
         MenuItem itemDefault = new MenuItem(menu, SWT.NONE);
-        itemDefault.setText(Messages.getString("OptionsAction.40"));
+        itemDefault.setText(Messages.getString("OptionsAction.40")); //$NON-NLS-1$
         tabFlagTable.setMenu(menu);
 
         final TableEditor editor = new TableEditor(tabFlagTable);
@@ -1001,24 +973,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         itemDefault.addListener(SWT.Selection, new Listener() {
             public void handleEvent(Event e)
             {
-                setDefaultCode(tabFlagTable.getSelection()[0].getText());
-                // Mise en gras du flagtable par defaut
-
-                Font normal = new Font(Application.display, "", 8, SWT.NORMAL);
-                Font bold = new Font(Application.display, "", 8, SWT.BOLD);
-
-                for (int i = 0; i < tabFlagTable.getItemCount(); i++)
-                {
-                    if (tabFlagTable.getItem(i).getText(0).equals(
-                        getDefaultCode()))
-                    {
-                        tabFlagTable.getItem(i).setFont(bold);
-                    }
-                    else
-                    {
-                        tabFlagTable.getItem(i).setFont(normal);
-                    }
-                }
+                selectDefaultFlagsTab(tabFlagTable.getSelection()[0].getText());
             }
         });
 
@@ -1047,10 +1002,28 @@ public class OptionsAction extends Action implements ISelectionListener,
 
         Utils.forceMenu(tabFlagTable, menu);
     }
+    
+    protected void selectDefaultFlagsTab(String defaultCode){
+        setDefaultCode(defaultCode);
+        // Mise en gras du flagtable par defaut
 
-    public void createTableFlag()
+        Font normal = new Font(Application.display, Global.EMPTY_STRING, 8, SWT.NORMAL);
+        Font bold = new Font(Application.display, Global.EMPTY_STRING, 8, SWT.BOLD);
+
+        for (int i = 0; i < tabFlagTable.getItemCount(); i++)
+        {
+            if (tabFlagTable.getItem(i).getText(0).equals(getDefaultCode()))
+            {
+                tabFlagTable.getItem(i).setFont(bold);
+            }else{
+                tabFlagTable.getItem(i).setFont(normal);
+            }
+        }
+    }
+
+    public void createTableFlag(Composite parent)
     {
-        tabFlag = new Table(grpFlag, SWT.FULL_SELECTION | SWT.BORDER);
+        tabFlag = new Table(parent, SWT.FULL_SELECTION | SWT.BORDER);
         tabFlag.setHeaderVisible(true);
         tabFlag.setLinesVisible(true);
         GridDataFactory.fillDefaults().grab(true, true).applyTo(tabFlag);
@@ -1217,8 +1190,9 @@ public class OptionsAction extends Action implements ISelectionListener,
          */
         createCompoHaut();
         createGroupWS();
+        createGroupEdmo();
         createGroupCDI();
-        createGroupMapping();
+        createCompoBas();
         createGroupFlag();
         createCompoBouton();
 
@@ -1261,6 +1235,19 @@ public class OptionsAction extends Action implements ISelectionListener,
                     }else{
                         redLabels();
                     }
+                    
+                }
+            });
+
+        // listener reinitialiser
+        buttonRestore
+            .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                @Override
+                public void widgetSelected(
+                        org.eclipse.swt.events.SelectionEvent e)
+                {
+                    Utils.restoreDefaultConfig();
+                    remplissageOptions();
                     
                 }
             });
@@ -1443,14 +1430,13 @@ public class OptionsAction extends Action implements ISelectionListener,
             item.setText(0, flagTables.get(i).getCode());
             item.setText(1, flagTables.get(i).getLibelle());
 
-            // Mise en gras du flagtable par defaut
-            if (flagTables.get(i).getCode().equals(
-                Utils.configuration.getDefaultCode()))
-            {
-                setDefaultCode(flagTables.get(i).getCode());
-                Font font = new Font(Application.display, Global.EMPTY_STRING, 8, SWT.BOLD);
-                item.setFont(font);
-            }
+//            // Mise en gras du flagtable par defaut
+//            if (flagTables.get(i).getCode().equals(Utils.configuration.getDefaultCode()))
+//            {
+//                setDefaultCode(flagTables.get(i).getCode());
+//                Font font = new Font(Application.display, Global.EMPTY_STRING, 8, SWT.BOLD);
+//                item.setFont(font);
+//            }
         }
 
         if (flagTables.size() > 0)

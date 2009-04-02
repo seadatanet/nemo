@@ -96,37 +96,41 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	protected ArrayList<FlagTable> _flagTables;
     
     protected Proxy proxy;
+    
+    protected boolean dateISO;
 
 	private Configuration() {
-		_contact = Global.EMPTY_STRING;
-		_modelsDirectory = Global.EMPTY_STRING;
-		_cruisesDirectory = Global.EMPTY_STRING;
-		_dataCenter = Global.EMPTY_STRING;
-		_nautilusWebServiceURL = Global.EMPTY_STRING;
-		_nemoWebServiceURL = Global.EMPTY_STRING;
-		_outputDirectory = Global.EMPTY_STRING;
+        _contact = Global.EMPTY_STRING;
+        _modelsDirectory = Global.EMPTY_STRING;
+        _cruisesDirectory = Global.EMPTY_STRING;
+        _dataCenter = Global.EMPTY_STRING;
+        _nautilusWebServiceURL = Global.EMPTY_STRING;
+        _nemoWebServiceURL = Global.EMPTY_STRING;
+        _outputDirectory = Global.EMPTY_STRING;
         _writeCdi = false;
         _writeMapping = false;
-		_idEdmoRespCdi = Global.EMPTY_STRING;
-		_codeEdmoDonnees = Global.EMPTY_STRING;
-		_idEdmoRespDonnees = Global.EMPTY_STRING;
-		_idEdmoDistDonnees = Global.EMPTY_STRING;
-		_cdiURL = Global.EMPTY_STRING;
-		_cdiMethod = Global.EMPTY_STRING;
+        _idEdmoRespCdi = Global.EMPTY_STRING;
+        _codeEdmoDonnees = Global.EMPTY_STRING;
+        _idEdmoRespDonnees = Global.EMPTY_STRING;
+        _idEdmoDistDonnees = Global.EMPTY_STRING;
+        _cdiURL = Global.EMPTY_STRING;
+        _cdiMethod = Global.EMPTY_STRING;
         _typePlateForme = Global.EMPTY_STRING;
         _accesDonnees = Global.EMPTY_STRING;
-		_showRule = true;
-		_locale = null;
-		_vocabURL = Global.EMPTY_STRING;
+        _showRule = true;
+        _locale = null;
+        _vocabURL = Global.EMPTY_STRING;
         _edmoURL = Global.EMPTY_STRING;
-		_predicate = 255;
-		_fichierMapping = Global.EMPTY_STRING;
-		_defaultCode = Global.EMPTY_STRING;
-		
-		_vocabLists = new HashMap<String, BODCList>();
-		
-		_flagTables = new ArrayList<FlagTable>();
+        _predicate = 255;
+        _fichierMapping = Global.EMPTY_STRING;
+        _defaultCode = Global.EMPTY_STRING;
+        
+        _vocabLists = new HashMap<String, BODCList>();
+        
+        _flagTables = new ArrayList<FlagTable>();
         proxy = Proxy.getInstance();
+        
+        dateISO = true;
 	}
 
 	/**
@@ -267,7 +271,11 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		if (a_LocalName.equals("fichierMapping")) {
 			Element2Field setter = new Element2Field(this, "setFichierMapping");
 			return setter;
-		}
+		}  
+        if (a_LocalName.equals("dateISO")) {
+            Element2Field setter = new Element2Field(this, "setDateISO");
+            return setter;
+        }
         if (a_LocalName.equals(Intern.settings_proxy)) {
             Proxy l = (Proxy) Proxy.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
             setProxy(l);
@@ -370,6 +378,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
         a_Writer.putTag("typePlateforme", getTypePlateForme());
         a_Writer.putTag("writeMapping", isWriteMapping());
 		a_Writer.putTag("fichierMapping", getFichierMapping());
+        a_Writer.putTag("dateISO", isDateISO());
 		//a_Writer.putTag("arboMapping", getArboMapping());
         proxy.writeXMLOn(a_Writer);
         a_Writer.putTag("edmoURL", getEdmoURL());
@@ -760,7 +769,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	 * @param x
 	 *            the object to link with
 	 */
-	public static void setSingleton(Configuration x) {
+	private static void setSingleton(Configuration x) {
 		if (_singleton == x)
 			return;
 		_singleton = x;
@@ -823,6 +832,19 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		}
 		return _singleton;
 	}
+    
+    public static Configuration restoreDefault(){
+        releaseSingleton();
+        _singleton = new Configuration();
+        XMLBootstrapParser parser = new XMLBootstrapParser(_singleton);
+        try {
+            parser.parse(new FileInputStream(
+                    "resources/NemoConfiguration_ini.xml"), false); //$NON-NLS-1$
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return _singleton;
+    }
 
 	/**
 	 * 
@@ -1056,6 +1078,33 @@ public class Configuration implements Cloneable, RootSAXConsumer {
     public void setEdmoURL(String edmoURL)
     {
         _edmoURL = edmoURL;
+    }
+
+    /**
+     * Getter sur dateISO.
+     * @return the dateISO
+     */
+    public boolean isDateISO()
+    {
+        return dateISO;
+    }
+
+    /**
+     * Setter sur dateISO.
+     * @param dateISO the dateISO to set
+     */
+    public void setDateISO(boolean dateISO)
+    {
+        this.dateISO = dateISO;
+    }
+
+    /**
+     * Setter sur dateISO.
+     * @param dateISO the dateISO to set
+     */
+    public void setDateISO(String dateISO)
+    {
+        this.dateISO = Boolean.parseBoolean(dateISO);
     }
 	
 } /* End of class: Configuration */

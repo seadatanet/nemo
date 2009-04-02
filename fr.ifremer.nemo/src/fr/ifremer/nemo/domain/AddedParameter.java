@@ -31,7 +31,7 @@ public class AddedParameter extends Parameter
 {
     
     public static enum IdParameter{
-        DEPH, YEAR, MNTH, DAYX, TIME, CJDY, LATX, LONX, BATH;
+        DEPH, YEAR, MNTH, DAYX, TIME, CJDY, DTUT, LATX, LONX, BATH;
     }
     
     private IdParameter idParam;
@@ -270,6 +270,13 @@ public class AddedParameter extends Parameter
                 _format = "#0.000000";                   //$NON-NLS-1$
                 _fullName = "Chronological Julian Date";     //$NON-NLS-1$
                 _unit = "days";                          //$NON-NLS-1$
+                cible = Conversion.ODV;
+                break;
+            case DTUT :
+                _default = Global.ZERO;
+                _format = "yyyy-MM-dd'T'HH:mm:ss.SSS";      //$NON-NLS-1$
+                _fullName = "time_ISO8601";                 //$NON-NLS-1$
+                _unit = "yyyy-mm-ddThh:mm:ss.sss";          //$NON-NLS-1$
                 cible = Conversion.ODV;
                 break;
             case LATX :

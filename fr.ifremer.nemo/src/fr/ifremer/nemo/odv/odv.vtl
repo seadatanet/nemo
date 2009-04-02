@@ -31,7 +31,7 @@ $configuration.getSep()Bot. Depth [m]##
 #if ( $boucle == 0 )
 #foreach( $odvparam in $station.getOdvparameters() )
 #set ($code = $odvparam.code)
-#if ($odvparam.code == "CJDY") #set ($code = $odvparam.fullName) #end
+#if ($odvparam.code == "CJDY" || $odvparam.code == "DTUT") #set ($code = $odvparam.fullName) #end
 $configuration.getSep()$code [$odvparam.unit]$configuration.getSep()$configuration.getSdnHeader() #set ($boucle = 1)##
 #end
 #foreach( $param in $station.parameters )
@@ -51,7 +51,11 @@ $configuration.getSep()$param.code [$param.unit]$configuration.getSep()$configur
 ##
 #set ($surveyName = $formatter.limitString($survey.name, 20))
 #set ($stationRef = $formatter.limitString($station.reference, 20))
+#if ($stationModel.isProfile()) 
 #set ($typeBC     = $station.calculTypeBC())
+#else 
+#set ($typeBC     = "*")
+#end
 #set ($dateTime   = $station.getDateTime())
 #set ($longitude  = $formatter.formatLongitude("+DDD.dddddd", $station.longitude))
 #set ($latitude   = $formatter.formatLatitude("+DD.dddddd ", $station.latitude))

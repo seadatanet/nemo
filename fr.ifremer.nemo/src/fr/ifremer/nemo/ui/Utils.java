@@ -985,6 +985,12 @@ public class Utils {
 			configuration = Configuration.getSingleton();
 		}
 	}
+    
+    public static void restoreDefaultConfig(){
+        Configuration.releaseSingleton();
+        configuration = Configuration.restoreDefault();
+    }
+    
 
 	public static void saveConfig(boolean writeIni) {
 		// sauvegarde de la config dans le fichier qui va bien
@@ -1044,6 +1050,9 @@ public class Utils {
 		configuration.setFichierMapping(OptionsAction.textFichierMapping
 				.getText());
 		//configuration.setArboMapping(OptionsAction.textArboMapping.getText());
+        
+        // DATE ODV
+        configuration.setDateISO(OptionsAction.radDateISO.getSelection());
 
 		// Flags qualite
 		// int i, j;
@@ -1125,8 +1134,11 @@ public class Utils {
 		int i = 0;
 		int length = code.length();
 		int size = combo.getItemCount();
+        
+        int idx = combo.getSelectionIndex();
 
 		if (code.equals(Global.EMPTY_STRING)) {
+            combo.deselectAll();
 			combo.select(-1);
 		} else {
 			combo.select(i);

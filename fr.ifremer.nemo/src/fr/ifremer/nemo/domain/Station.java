@@ -1941,7 +1941,8 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	}
     
     public String calculTypeBC(){
-        String typeBC = null;
+        String typeBC = "*"; //$NON-NLS-1$
+
         if (_dataType != null && _dataType.getCode() != null 
                 && _dataType.getCode().equals("H09")){ //$NON-NLS-1$
             typeBC = "B"; //$NON-NLS-1$
