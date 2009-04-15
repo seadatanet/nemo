@@ -775,11 +775,14 @@ public class TimeSeriesInformation implements Cloneable, SAXConsumer {
         try
         {
             if (a_ChampDest.equals(NemoSection.S_MAGNETIC)){
-                value = String.valueOf(getMagneticDeclination());
+                if (!Float.isNaN(getMagneticDeclination()))
+                    value = String.valueOf(getMagneticDeclination());
             }else if (a_ChampDest.equals(NemoSection.S_SENSORDEPTH)){
-                value = String.valueOf(getSensorDepth());
+                if (!Float.isNaN(getSensorDepth()))
+                    value = String.valueOf(getSensorDepth());
             }else if (a_ChampDest.equals(NemoSection.S_SAMPLINGRATE)){
-                value = String.valueOf(getSamplingRate());
+                if (!Float.isNaN(getSamplingRate()))
+                    value = String.valueOf(getSamplingRate());
             }else if (a_ChampDest.equals(NemoSection.S_EDEPTH)){
                 if (!Float.isNaN(getEndDepth()))
                         value = String.valueOf(getEndDepth());

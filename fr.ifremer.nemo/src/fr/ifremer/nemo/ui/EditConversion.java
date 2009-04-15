@@ -151,6 +151,9 @@ public class EditConversion extends Thread {
 							DataModel.stationModel.resetRef();
 							DataModel.stationModel.setLastRef(null);
 
+                            // *** Ajouts automatiques de certains paramètres
+                            DataModel.stationModel.setAddedParameterModel();
+
 							if (ViewFile.radMedatlas.getSelection()) {
 								NemoLists.writeSdnParameters(Conversion.MEDATLAS);
 							} else {

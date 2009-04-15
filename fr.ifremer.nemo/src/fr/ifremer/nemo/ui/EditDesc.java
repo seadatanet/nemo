@@ -58,7 +58,7 @@ public class EditDesc {
              * les reafficher par la suite dans DrawingBack.
              */
             formEdition.getBody().setLayout(new GridLayout());
-            formEdition.setText(Messages.getString("EditDesc.descriptiondeFichier")); //$NON-NLS-1$
+            formEdition.setText(Messages.edit_file_title); 
 
             // init composants IHM
             shell.close();
@@ -80,7 +80,7 @@ public class EditDesc {
 
             // bouton "valider etape"
             buttonValidate.setParent(formEdition.getBody());
-            buttonValidate.setText(Messages.getString("EditDesc.validerLetape")); //$NON-NLS-1$
+            buttonValidate.setText(Messages.button_validateStep);
             buttonValidate.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
                 @Override
                 public void widgetSelected(
@@ -92,7 +92,7 @@ public class EditDesc {
 
             // bouton RAZ
             buttonRAZ.setParent(formEdition.getBody());
-            buttonRAZ.setText("Reset"); //$NON-NLS-1$
+            buttonRAZ.setText(Messages.button_reset);
             buttonRAZ.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
                 @Override
                 public void widgetSelected(
@@ -107,7 +107,7 @@ public class EditDesc {
 
             // boutons collapse all / expand all
             buttonExpand.setParent(formEdition.getBody());
-            buttonExpand.setText("+"); //$NON-NLS-1$
+            buttonExpand.setText(Global.PLUS); 
             buttonExpand.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
                 @Override
                 public void widgetSelected(
@@ -121,10 +121,10 @@ public class EditDesc {
                     }
                     if (!expand){
                         expand = true;
-                        buttonExpand.setText("-"); //$NON-NLS-1$
+                        buttonExpand.setText(Global.MOINS);
                     }else{
                         expand = false;
-                        buttonExpand.setText("+"); //$NON-NLS-1$
+                        buttonExpand.setText(Global.PLUS); 
                     }
 
                     // refresh global
@@ -201,8 +201,7 @@ public class EditDesc {
         }
 
         // affichage titre formulaire
-        ViewEdit.formEdition.setText(Messages
-                .getString("EditDesc.descriptiondeFichier")); //$NON-NLS-1$
+        ViewEdit.formEdition.setText(Messages.edit_file_title); 
 
         // refresh global
         ViewEdit.formEdition.reflow(true);
@@ -213,16 +212,16 @@ public class EditDesc {
     }
 
     public static void initSections() {
-        sectionEnteteFichier = new FileSection(shell, NemoSection.F_FILEHEADER, Messages.getString(NemoSection.F_FILEHEADER), Messages.getString("EditDesc.surlignezLignes"),Global.ZERO); //$NON-NLS-1$
+        sectionEnteteFichier = new FileSection(shell, NemoSection.F_FILEHEADER, Messages.getString(NemoSection.F_FILEHEADER), Messages.edit_file_enteteFichier, Global.ZERO, false);
         listeSectionsDesc.add(sectionEnteteFichier);
         
-        sectionEnteteStation = new FileSection(shell, NemoSection.F_STATIONHEADER, Messages.getString(NemoSection.F_STATIONHEADER), Messages.getString("EditDesc.nbreLignesEntete"),Global.ZERO); //$NON-NLS-1$
+        sectionEnteteStation = new FileSection(shell, NemoSection.F_STATIONHEADER, Messages.getString(NemoSection.F_STATIONHEADER), Messages.edit_file_enteteStation, Global.EMPTY_STRING, true);
         listeSectionsDesc.add(sectionEnteteStation);
         
-        sectionFinStation = new FileSection(shell, NemoSection.F_ENDSTATION, Messages.getString(NemoSection.F_ENDSTATION), Messages.getString("EditDesc.nbreLignesFinStation"),Global.ZERO); //$NON-NLS-1$
+        sectionFinStation = new FileSection(shell, NemoSection.F_ENDSTATION, Messages.getString(NemoSection.F_ENDSTATION), Messages.edit_file_finStation, Global.ZERO, false);
         listeSectionsDesc.add(sectionFinStation);
         
-        sectionRuptureDonnees = new FileSection(shell, NemoSection.F_ENDDATA, Messages.getString(NemoSection.F_ENDDATA), Messages.getString("EditDesc.indiquezIndicFinDonnees"),Global.EMPTY_STRING); //$NON-NLS-1$
+        sectionRuptureDonnees = new FileSection(shell, NemoSection.F_ENDDATA, Messages.getString(NemoSection.F_ENDDATA), Messages.edit_file_indicFinDonnees, Global.EMPTY_STRING, true);
         listeSectionsDesc.add(sectionRuptureDonnees);
     }
 
@@ -263,11 +262,11 @@ public class EditDesc {
             File fich = new File(ViewFile.nomRepertoire);
             if (DataModel.ouverture) {
                 ApplicationWorkbenchWindowAdvisor.configurer_titre
-                        .setTitle(Messages.getString("EditDesc.nemoDossier") + fich.getName() + Messages.getString("EditDesc.modele") + OpenAction.nomFichierModele + " ]"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                        .setTitle(Messages.application_directoryTitle + fich.getName() + Messages.application_modelTitle + OpenAction.nomFichierModele + " ]"); //$NON-NLS-1$
 
             } else {
                 ApplicationWorkbenchWindowAdvisor.configurer_titre
-                        .setTitle(Messages.getString("EditDesc.dossier") + fich.getName() + " ]"); //$NON-NLS-1$ //$NON-NLS-2$
+                        .setTitle(Messages.application_directoryTitle + fich.getName() + " ]"); //$NON-NLS-1$ 
             }
 
         } else {
@@ -277,10 +276,10 @@ public class EditDesc {
 
             if (DataModel.ouverture) {
                 ApplicationWorkbenchWindowAdvisor.configurer_titre
-                        .setTitle(Messages.getString("EditDesc.fichier") + fich.getName() + Messages.getString("EditDesc.modele") + OpenAction.nomFichierModele + " ]"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                        .setTitle(Messages.application_fileTitle + fich.getName() + Messages.application_modelTitle + OpenAction.nomFichierModele + " ]"); //$NON-NLS-1$
             } else {
                 ApplicationWorkbenchWindowAdvisor.configurer_titre
-                        .setTitle(Messages.getString("EditDesc.fichier") + fich.getName() + " ]"); //$NON-NLS-1$ //$NON-NLS-2$
+                        .setTitle(Messages.application_fileTitle + fich.getName() + " ]"); //$NON-NLS-1$ 
             }
         }
 
@@ -311,7 +310,7 @@ public class EditDesc {
             loaded = false;
             disposeElements();
         }
-        ViewFile.tabItem.setText(Messages.getString("EditDesc.descriptionFichier")); //$NON-NLS-1$
+        ViewFile.tabItem.setText(Messages.onglet_file);
     }
     
 }

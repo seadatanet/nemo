@@ -65,6 +65,15 @@ public class UpdateBean{
 	public int getNbRetrieve() {
 		return nbRetrieve;
 	}
+    
+    public UpdateBean getSubUpdate(String id){
+        for (UpdateBean update : subUpdates){
+            if (update.getId().equals(id)){
+                return update;
+            }
+        }
+        return null;
+    }
 
 	/**
 	 * @param nbRetrieve the nbRetrieve to set

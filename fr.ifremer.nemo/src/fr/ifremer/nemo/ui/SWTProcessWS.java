@@ -51,8 +51,7 @@ public class SWTProcessWS implements IRunnableWithProgress {
 
 	public void run(IProgressMonitor monitor) throws InvocationTargetException,
 			InterruptedException {
-		monitor.beginTask(Messages.getString("update.title"), //$NON-NLS-1$
-				IProgressMonitor.UNKNOWN);
+		monitor.beginTask(Messages.update_title, IProgressMonitor.UNKNOWN);
 
 		monitor2 = monitor;
 		
@@ -67,23 +66,23 @@ public class SWTProcessWS implements IRunnableWithProgress {
 
             if (!monitor.isCanceled()){
                 // appel au WebService NEMO
-                monitor.subTask(Messages.getString("connect.nemo")); //$NON-NLS-1$
+                monitor.subTask(Messages.connect_nemo); 
                 NemoWS service = NemoLists.callNemoWS();
                 UpdateBean updateNemo = NemoLists.getUpdate(Intern.id_nemo);
                 updateNemo.setNbTot(Integer.parseInt(Intern.nbnemolists));
                 
-                if (!monitor.isCanceled()){
-                    monitor.subTask(Messages.getString("update.data")); //$NON-NLS-1$
-                    NemoLists.updateDataTypes(monitor, service, updateNemo);
-                }
+//                if (!monitor.isCanceled()){
+//                    monitor.subTask(Messages.update_data);
+//                    NemoLists.updateDataTypes(monitor, service, updateNemo);
+//                }
                 
                 if (!monitor.isCanceled()){
-                    monitor.subTask(Messages.getString("update.param")); //$NON-NLS-1$
+                    monitor.subTask(Messages.update_param); 
                     NemoLists.updateParameters(monitor, service, updateNemo);
                 }
                 
                 if (!monitor.isCanceled()){
-                    monitor.subTask(Messages.getString("update.survey")); //$NON-NLS-1$
+                    monitor.subTask(Messages.update_survey);
                     NemoLists.updateSurveys(monitor, service, updateNemo);
                 }
                 
@@ -97,7 +96,7 @@ public class SWTProcessWS implements IRunnableWithProgress {
             
 
             if (!monitor.isCanceled()){
-                monitor.subTask(Messages.getString("connect.vocab"));  //$NON-NLS-1$
+                monitor.subTask(Messages.connect_vocab); 
                 VocabSoapBindingStub vocabService = NemoLists.connectVocab();
                 
                 if (!monitor.isCanceled()){
@@ -108,11 +107,13 @@ public class SWTProcessWS implements IRunnableWithProgress {
                 if (!monitor.isCanceled()){
                     monitor.subTask(Messages.getString(Intern.id_maps)); 
                     NemoLists.updateVocabMaps(vocabService, monitor);
-                }			
+                }		
+                
+                NemoLists.updateDataTypes();
             }
 
             if (!monitor.isCanceled()){
-                monitor.subTask(Messages.getString("connect.edmo")); //$NON-NLS-1$
+                monitor.subTask(Messages.connect_edmo); 
                 NemoLists.updateEdmo(monitor);
             }
             

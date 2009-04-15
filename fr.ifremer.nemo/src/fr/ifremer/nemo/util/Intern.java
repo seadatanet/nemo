@@ -1,5 +1,8 @@
 package fr.ifremer.nemo.util;
 
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
+
 import org.eclipse.osgi.util.NLS;
 
 /**
@@ -16,6 +19,13 @@ public class Intern extends NLS {
     public static String nbnemolists;
     public static String vocabLists;
     public static String vocabMaps;
+
+    public static String list_ship;
+    public static String list_dataCenter;
+    public static String list_countries;
+    public static String list_regions;
+    public static String list_ROSCOPparameters;
+    public static String list_instruments;
     
     public static String lang_fr;
     public static String lang_en;
@@ -38,6 +48,19 @@ public class Intern extends NLS {
     public static String ini_proxy_port;
     public static String ini_proxy_login;
     public static String ini_proxy_pass;
+    
+    public static String xml_tag_start;
+    public static String xml_tag_end;
+    public static String xml_tag_close;
+    public static String mapping_subjet;
+    public static String mapping_objet;
+    public static String mapping_unit;
+    public static String file_mapping;
+    public static String file_mapping_sdn;
+    public static String file_mapping_subject;
+    public static String NemoLists_unknown;
+    public static String CJDY;
+    public static String DTUT;
 	
 	static {
 		// initialize resource bundle
@@ -46,4 +69,14 @@ public class Intern extends NLS {
 
 	private Intern() {
 	}
+    
+    /**
+     * @param key
+     * @return message corresponding to key
+     */
+    public static String getString(String key) throws MissingResourceException
+    { 
+        ResourceBundle resource = ResourceBundle.getBundle(BUNDLE_NAME);
+        return resource.getString(key);
+    }
 }

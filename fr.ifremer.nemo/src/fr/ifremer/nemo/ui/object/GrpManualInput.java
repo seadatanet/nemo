@@ -36,7 +36,7 @@ public class GrpManualInput implements UIobject
         
         this.labelButton = labelButton;
         if (this.labelButton == null){
-            this.labelButton = Messages.getString("Drawing.4");  //$NON-NLS-1$
+            this.labelButton = Messages.label_manual_01;
         }
         
         buttonSaisie = new Button(shell, SWT.RADIO);
@@ -44,7 +44,7 @@ public class GrpManualInput implements UIobject
         lines = new ArrayList<Couple>();
         if (nbLine > 1){            
             for (int i = 0; i < nbLine; i++){
-                String label = Messages.getString("Drawing.10") + " " + (i + 1);           //$NON-NLS-1$ //$NON-NLS-2$
+                String label = Messages.label_line + Global.SPACE + (i + 1);
                 lines.add(new Couple(shell, null, label, cType, defaultValue));
             }
         }else{
@@ -115,25 +115,7 @@ public class GrpManualInput implements UIobject
     {
         return buttonSaisie;
     }
-//
-//    /**
-//     * Setter sur buttonSaisie.
-//     * @param buttonSaisie the buttonSaisie to set
-//     */
-//    public void setButtonSaisie(Button buttonSaisie)
-//    {
-//        this.buttonSaisie = buttonSaisie;
-//    }
-//
-//    /**
-//     * Getter sur labelButton.
-//     * @return the labelButton
-//     */
-//    public String getLabelButton()
-//    {
-//        return labelButton;
-//    }
-//
+
     /**
      * Setter sur labelButton.
      * @param labelButton the labelButton to set
@@ -143,32 +125,6 @@ public class GrpManualInput implements UIobject
         this.labelButton = labelButton;
     }
 
-//    /**
-//     * Getter sur lines.
-//     * @return the lines
-//     */
-//    public ArrayList<Couple> getLines()
-//    {
-//        return lines;
-//    }
-//
-//    /**
-//     * Setter sur lines.
-//     * @param lines the lines to set
-//     */
-//    public void setLines(ArrayList<Couple> lines)
-//    {
-//        this.lines = lines;
-//    }
-
-//    /**
-//     * Getter sur nbColumns.
-//     * @return the nbColumns
-//     */
-//    public int getNbColumns()
-//    {
-//        return nbColumns;
-//    }
 
     /**
      * Setter sur nbColumns.

@@ -275,13 +275,13 @@ public class QCflagsSection extends NemoSection
         tableColumn1.setText(Messages.getString("EditStation.38")); //$NON-NLS-1$
 
         tableColumn2.setWidth(40);
-        tableColumn2.setText(Messages.getString("EditStation.39")); //$NON-NLS-1$   
+        tableColumn2.setText(Messages.label_line);
 
         tableColumn3.setWidth(40);
-        tableColumn3.setText(Messages.getString("EditStation.40")); //$NON-NLS-1$   
+        tableColumn3.setText(Messages.label_start);
 
         tableColumn4.setWidth(40);
-        tableColumn4.setText(Messages.getString("EditStation.41")); //$NON-NLS-1$   
+        tableColumn4.setText(Messages.label_end);
 
         tableColumn5.setWidth(60);
         tableColumn5.setText(Messages.getString("EditStation.47")); //$NON-NLS-1$   
@@ -305,7 +305,7 @@ public class QCflagsSection extends NemoSection
         itemInjectFlag.setText(Messages.getString("TableData.11")); //$NON-NLS-1$
 
         MenuItem itemTestFlag = new MenuItem(menuFlag, SWT.NONE);
-        itemTestFlag.setText(Messages.getString("EditStation.42")); //$NON-NLS-1$
+        itemTestFlag.setText(Messages.button_test);
 
         if (ViewFile.radProfilVertical.getSelection()) {
             final FlagMenuItem childDateTime = new FlagMenuItem(subFlag,

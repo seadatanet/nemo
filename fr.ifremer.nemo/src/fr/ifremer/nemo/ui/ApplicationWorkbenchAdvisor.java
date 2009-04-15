@@ -50,8 +50,7 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 
 					MessageBox mbox = new MessageBox(shell2, SWT.ICON_WARNING
 							| SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
-					mbox.setMessage(Messages
-							.getString("ApplicationWorkbenchAdvisor.1")); //$NON-NLS-1$
+					mbox.setMessage(Messages.confirm_saveModel);
 					int reponse_mbox = mbox.open();
 					if (reponse_mbox == SWT.YES) {
 

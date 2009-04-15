@@ -249,7 +249,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         
     }
 
-    private void remplissageOptions()
+    protected void remplissageOptions()
     {
         // remplissage IHM avec les valeurs du fichier de config
 
@@ -848,7 +848,8 @@ public class OptionsAction extends Action implements ISelectionListener,
     {
         compo = new Composite(top, SWT.NONE);
 
-        GridLayoutFactory.fillDefaults().numColumns(3).applyTo(compo);
+//        GridLayoutFactory.fillDefaults().numColumns(3).applyTo(compo);
+        GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo);
         GridDataFactory.fillDefaults().grab(true, false).align(SWT.CENTER,
             SWT.NONE).applyTo(compo);
 
@@ -856,9 +857,9 @@ public class OptionsAction extends Action implements ISelectionListener,
         buttonValider.setText(Messages.getString("OptionsAction.17")); //$NON-NLS-1$
         buttonValider.pack();
 
-        buttonRestore = new Button(compo, SWT.NONE);
-        buttonRestore.setText("Restore Default"); //$NON-NLS-1$
-        buttonRestore.pack();
+//        buttonRestore = new Button(compo, SWT.NONE);
+//        buttonRestore.setText("Restore Default"); //$NON-NLS-1$
+//        buttonRestore.pack();
 
         buttonCancel = new Button(compo, SWT.NONE);
         buttonCancel.setText(Messages.getString("OptionsAction.16")); //$NON-NLS-1$
@@ -1240,17 +1241,17 @@ public class OptionsAction extends Action implements ISelectionListener,
             });
 
         // listener reinitialiser
-        buttonRestore
-            .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-                @Override
-                public void widgetSelected(
-                        org.eclipse.swt.events.SelectionEvent e)
-                {
-                    Utils.restoreDefaultConfig();
-                    remplissageOptions();
-                    
-                }
-            });
+//        buttonRestore
+//            .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+//                @Override
+//                public void widgetSelected(
+//                        org.eclipse.swt.events.SelectionEvent e)
+//                {
+//                    Utils.restoreDefaultConfig();
+//                    remplissageOptions();
+//                    
+//                }
+//            });
     }
     
     protected boolean checkConfig() {

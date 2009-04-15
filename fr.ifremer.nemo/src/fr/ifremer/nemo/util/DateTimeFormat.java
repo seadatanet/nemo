@@ -492,17 +492,9 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 					String tmp = source.substring(index, index
 							+ _elements[i]._element.length());
 					cal.setTimeInMillis(getRefDate());
-					double day = Double.parseDouble(tmp);
-					int dayInt = (int) Math.floor(day);
-					double hours = (day - dayInt) * 24.0D;
-					int hour = (int) Math.floor(hours);
-					double minutes = (hours - hour) * 60.0D;
-					int mins = (int) Math.floor(minutes);
-					int seconds = (int) Math.floor((minutes - mins) * 60.0D);
-					cal.add(Calendar.DAY_OF_MONTH, dayInt);
-					cal.add(Calendar.HOUR_OF_DAY, hour);
-					cal.add(Calendar.MINUTE, mins);
-					cal.add(Calendar.SECOND, seconds);
+                    double days = Double.parseDouble(tmp.replace(',', '.'));
+                    JulianDate jd = new JulianDate(days, true);
+                    cal = jd.toCalendarDate(cal);
 
 					index += _elements[i]._element.length();
 					break;

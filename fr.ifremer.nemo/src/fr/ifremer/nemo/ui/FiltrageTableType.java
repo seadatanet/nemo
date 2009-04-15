@@ -82,24 +82,16 @@ public class FiltrageTableType {
 
 			if (tabOrigine.equals(Global.IDEDMO)) {
 				EdmoHandler.listeFiltree = new ArrayList<String>();
-				
 				EdmoHandler.listeFiltree.addAll(EdmoHandler.listeOrigine);
 			} else if (tabOrigine.equals(Global.SHIP)) {
 				NemoLists.listeFiltree = new ArrayList<String>();
-				
 				NemoLists.listeFiltree.addAll(NemoLists.listeNavire);
 			} else if (tabOrigine.equals(Global.DATACENTRE)) {
 				NemoLists.listeFiltree = new ArrayList<String>();
-				
 				NemoLists.listeFiltree.addAll(NemoLists.listeCentreDonnees);
 			} else if (tabOrigine.equals(Global.REGION)) {
 				NemoLists.listeFiltree = new ArrayList<String>();
-				
 				NemoLists.listeFiltree.addAll(NemoLists.listeRegion);
-			//} else if (tabOrigine.equals(Global.DATACENTRE)) {
-			//	NemoLists.listeFiltree = new ArrayList<String>();
-			//	
-			//	NemoLists.listeFiltree.addAll(NemoLists.listeNavire);
 			} else {
 				// init des listes filtrees survey + data
 				TableDataSurvey.listeFiltree = new ArrayList<TypeSurvey>();
@@ -220,7 +212,7 @@ public class FiltrageTableType {
 								EditSurvey.webService(mots[0]);
 
 								Utils.messageOK(Messages
-										.getString("FiltrageTableType.21"));
+										.getString("FiltrageTableType.21")); //$NON-NLS-1$
 								shell.close();
 
 							} else if (tabOrigine
@@ -243,7 +235,7 @@ public class FiltrageTableType {
 									for (int i = 0; i < taille; i++) {
 
 										// split sur " - "
-										Pattern p = Pattern.compile(" - "); //$NON-NLS-1$
+										Pattern p = Pattern.compile(Global.SEP); 
 										String mots[] = p.split(typeSurvey
 												.getCode());
 										String codeActuel = mots[0];

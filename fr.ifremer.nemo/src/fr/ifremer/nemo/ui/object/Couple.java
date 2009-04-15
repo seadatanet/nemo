@@ -22,7 +22,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import fr.ifremer.nemo.ui.DataModel;
 import fr.ifremer.nemo.ui.EditStation;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Global;
@@ -51,7 +50,7 @@ public class Couple implements UIobject
         
         // Label
         this.labelString = labelText;
-        if (labelText != null && !labelText.trim().equals(""))                          //$NON-NLS-1$
+        if (labelText != null && !labelText.trim().equals(Global.EMPTY_STRING))
             label = new Label(shell, SWT.NONE);
         
         // Text or Combo
@@ -135,8 +134,8 @@ public class Couple implements UIobject
                 valueText = new Text(shell, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL | SWT.WRAP);
                 break;
             case FRQ :
-                groupTitle = "Conversion";                  //$NON-NLS-1$
-                labelString = Messages.getString("EditStation.37"); //$NON-NLS-1$
+                groupTitle = Messages.label_conversion; 
+                labelString = Messages.label_formule; 
                 label = new Label(shell, SWT.NONE);
                 valueText = new Text(shell, SWT.BORDER);
                 break;
@@ -144,7 +143,7 @@ public class Couple implements UIobject
             case TIME :
             case LAT :
             case LON :
-                groupTitle = "Format";                      //$NON-NLS-1$
+                groupTitle = Messages.label_format;
                 valueCombo = cType.createCombo(shell);
                 break;
             case DATATYPE :
@@ -199,66 +198,6 @@ public class Couple implements UIobject
     }
 
 
-//    /**
-//     * Getter sur groupTitle.
-//     * @return the groupTitle
-//     */
-//    public String getGroupTitle()
-//    {
-//        return groupTitle;
-//    }
-//
-//
-//    /**
-//     * Setter sur groupTitle.
-//     * @param groupTitle the groupTitle to set
-//     */
-//    public void setGroupTitle(String groupTitle)
-//    {
-//        this.groupTitle = groupTitle;
-//    }
-//
-//
-//    /**
-//     * Getter sur label.
-//     * @return the label
-//     */
-//    public Label getLabel()
-//    {
-//        return label;
-//    }
-//
-//
-//    /**
-//     * Setter sur label.
-//     * @param label the label to set
-//     */
-//    public void setLabel(Label label)
-//    {
-//        this.label = label;
-//    }
-//
-//
-//    /**
-//     * Getter sur labelString.
-//     * @return the labelString
-//     */
-//    public String getLabelString()
-//    {
-//        return labelString;
-//    }
-//
-//
-//    /**
-//     * Setter sur labelString.
-//     * @param labelString the labelString to set
-//     */
-//    public void setLabelString(String labelString)
-//    {
-//        this.labelString = labelString;
-//    }
-
-
     /**
      * Getter sur valueCombo.
      * @return the valueCombo
@@ -268,17 +207,6 @@ public class Couple implements UIobject
         return valueCombo;
     }
 
-
-//    /**
-//     * Setter sur valueCombo.
-//     * @param valueCombo the valueCombo to set
-//     */
-//    public void setValueCombo(Combo valueCombo)
-//    {
-//        this.valueCombo = valueCombo;
-//    }
-//
-//
     /**
      * Getter sur valueText.
      * @return the valueText

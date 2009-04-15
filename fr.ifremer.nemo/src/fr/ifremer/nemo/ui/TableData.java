@@ -625,7 +625,7 @@ public class TableData {
 				// on recupere le data
 				ligne = Utils.lignesBrutes.get(Integer
 						.valueOf(EditDesc.sectionEnteteFichier.getValue())
-						+ Integer.valueOf(EditDesc.sectionEnteteStation.getValue())) + 1;
+						+ DataModel.stationModel.getNumberOfLines()) + 1;
 				selection = ligne.substring(
 						Integer.valueOf(ViewFile.tableData.getItem(i)
 								.getText(4)) - 1,
@@ -693,7 +693,7 @@ public class TableData {
 					&& (!ViewFile.tableData.getItem(i).getText(12).equals(Global.EMPTY_STRING))) {
 				ligne = Utils.lignesBrutes.get(Integer
 						.valueOf(EditDesc.sectionEnteteFichier.getValue())
-                        + Integer.valueOf(EditDesc.sectionEnteteStation.getValue())) + 1;
+                        + DataModel.stationModel.getNumberOfLines()) + 1;
 				selection = ligne.substring(
 						Integer.valueOf(ViewFile.tableData.getItem(i).getText(
 								11)) - 1,

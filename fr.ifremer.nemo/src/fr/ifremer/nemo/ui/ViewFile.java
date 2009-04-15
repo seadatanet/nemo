@@ -11,7 +11,6 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.FileDialog;
@@ -26,6 +25,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
+import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
@@ -112,19 +112,7 @@ public class ViewFile extends ViewPart
 
     public static Composite compositeConversion = null;
 
-    public static Group groupTempo, grpFichier = null;
-
-    public static Text textTempoDateRef = null;
-
-    private Label labelDateRef = null;
-
-    private Label labelHeureRef = null;
-
-    public static Text textTempoHeureRef = null;
-
-    public static Combo comboTempoDate = null;
-
-    public static Combo comboTempoHeure = null;
+    public static Group grpFichier = null;
 
     public static String nomFichier, nomRepertoire;
 
@@ -212,19 +200,19 @@ public class ViewFile extends ViewPart
                 }
             });
         tabItem = new TabItem(tabFolder, SWT.NONE);
-        tabItem.setText(Messages.getString("ViewFile.description")); //$NON-NLS-1$
+        tabItem.setText(Messages.onglet_file);
         tabItem.setControl(composite1);
         tabItem1 = new TabItem(tabFolder, SWT.NONE);
-        tabItem1.setText(Messages.getString("ViewFile.campagne")); //$NON-NLS-1$
+        tabItem1.setText(Messages.onglet_cruise);
         tabItem1.setControl(composite2);
         tabItem2 = new TabItem(tabFolder, SWT.NONE);
-        tabItem2.setText(Messages.getString("ViewFile.station")); //$NON-NLS-1$
+        tabItem2.setText(Messages.onglet_station);
         tabItem2.setControl(composite3);
         tabItem3 = new TabItem(tabFolder, SWT.NONE);
-        tabItem3.setText(Messages.getString("ViewFile.donnees")); //$NON-NLS-1$
+        tabItem3.setText(Messages.onglet_data); 
         tabItem3.setControl(composite4);
         tabItem9 = new TabItem(tabFolder, SWT.NONE);
-        tabItem9.setText(Messages.getString("ViewFile.conversion")); //$NON-NLS-1$
+        tabItem9.setText(Messages.onglet_convert);
         tabItem9.setControl(compositeConversion);
     }
 
@@ -310,24 +298,23 @@ public class ViewFile extends ViewPart
 
         labelCampagne = new Label(compositeChoixFichier, SWT.NONE);
         labelCampagne
-            .setText(Messages.getString("ViewFile.traiterCampagne") + "           "); //$NON-NLS-1$ //$NON-NLS-2$
+            .setText(Messages.lib_file_processCruise + "           "); //$NON-NLS-1$
 
         labelCollection = new Label(compositeChoixFichier, SWT.NONE);
-        labelCollection.setText(Messages
-            .getString("ViewFile.traiterCollection")); //$NON-NLS-1$
+        labelCollection.setText(Messages.lib_file_processCollection);
 
         radioFichier = new Button(compositeChoixFichier, SWT.RADIO);
         radioFichier.setSelection(true);
-        radioFichier.setText(Messages.getString("ViewFile.fichierCampagne")); //$NON-NLS-1$
+        radioFichier.setText(Messages.lib_file_cruiseFile);
 
         radioCollectCas1 = new Button(compositeChoixFichier, SWT.RADIO);
-        radioCollectCas1.setText(Messages.getString("ViewFile.collectionCas1")); //$NON-NLS-1$
+        radioCollectCas1.setText(Messages.lib_file_collectionCas1);
 
         radioDossier = new Button(compositeChoixFichier, SWT.RADIO);
-        radioDossier.setText(Messages.getString("ViewFile.dossierCampagne")); //$NON-NLS-1$
+        radioDossier.setText(Messages.lib_file_cruiseDir); 
 
         radioCollectCasN = new Button(compositeChoixFichier, SWT.RADIO);
-        radioCollectCasN.setText(Messages.getString("ViewFile.collectionCasN")); //$NON-NLS-1$
+        radioCollectCasN.setText(Messages.lib_file_collectionCasN); 
 
         radioFichier
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -382,7 +369,7 @@ public class ViewFile extends ViewPart
 
         // FAE 0001140 : deplacement du bouton Parcourir
         buttonParcourir = new Button(composite11, SWT.NONE);
-        buttonParcourir.setText(Messages.getString("ViewFile.parcourir")); //$NON-NLS-1$
+        buttonParcourir.setText(Messages.button_browse); 
 
         buttonParcourir
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -419,8 +406,7 @@ public class ViewFile extends ViewPart
                         // vu qu'on selectionne maintenant fichier campagne
                         if (tabItem1.isDisposed()){
                             tabItem1 = new TabItem(tabFolder, SWT.NONE, 1);
-                            tabItem1.setText(Messages
-                                .getString("ViewFile.campagne")); //$NON-NLS-1$
+                            tabItem1.setText(Messages.onglet_cruise); 
                             tabItem1.setControl(composite2); 
                         }
 
@@ -463,7 +449,7 @@ public class ViewFile extends ViewPart
                             }
                         }else{
                             fileLoaded = false;
-                            ViewLog.styledTextLogErreurs.setText(Messages.getString("ViewFile.selectionnezFichier")); //$NON-NLS-1$
+                            ViewLog.styledTextLogErreurs.setText(Messages.error_file_selectFile);
                         }
                     }
 
@@ -475,8 +461,7 @@ public class ViewFile extends ViewPart
                         // vu qu'on selectionne maintenant dossier
                         if (tabItem1.isDisposed()){
                             tabItem1 = new TabItem(tabFolder, SWT.NONE, 1);
-                            tabItem1.setText(Messages
-                                .getString("ViewFile.campagne")); //$NON-NLS-1$
+                            tabItem1.setText(Messages.onglet_cruise); 
                             tabItem1.setControl(composite2);
                         }
                         dossierCampagne = true;
@@ -507,8 +492,7 @@ public class ViewFile extends ViewPart
                             }
                         }else{
                             fileLoaded = false;
-                            ViewLog.styledTextLogErreurs.setText(Messages
-                                .getString("ViewFile.selectionnezDossier")); //$NON-NLS-1$
+                            ViewLog.styledTextLogErreurs.setText(Messages.error_file_selectDir); 
 
                         }
 
@@ -553,8 +537,7 @@ public class ViewFile extends ViewPart
 
                         }else{
                             fileLoaded = false;
-                            ViewLog.styledTextLogErreurs.setText(Messages
-                                .getString("ViewFile.selectionnezDossier")); //$NON-NLS-1$
+                            ViewLog.styledTextLogErreurs.setText(Messages.error_file_selectDir);
                         }
                     }
 
@@ -599,10 +582,7 @@ public class ViewFile extends ViewPart
 
                         }else{
                             fileLoaded = false;
-                            // System.out.println("pas de dossier
-                            // selectionne"); //$NON-NLS-1$
-                            ViewLog.styledTextLogErreurs.setText(Messages
-                                .getString("ViewFile.selectionnezDossier")); //$NON-NLS-1$
+                            ViewLog.styledTextLogErreurs.setText(Messages.error_file_selectDir); 
                         }
                     }
                 }
@@ -612,8 +592,6 @@ public class ViewFile extends ViewPart
         createGroupeSeparateur();
 
         createGroupeFichier();
-
-        createGroupTempo();
     }
 
     /**
@@ -649,18 +627,18 @@ public class ViewFile extends ViewPart
         layout.numColumns = 2;
 
         Group group = new Group(compositeConversion, SWT.NONE);
-        group.setText(Messages.getString("ViewFile.choixFormatSortie")); //$NON-NLS-1$
+        group.setText(Messages.lib_convert_title); 
         group.setLayout(layout);
 
         radMedatlas = new Button(group, SWT.RADIO);
-        radMedatlas.setText("Medatlas"); //$NON-NLS-1$
+        radMedatlas.setText(Conversion.MEDATLAS.getName()); 
         radMedatlas.setSelection(true);
 
         // Composite vide pour mise en page
         Composite compoVide1 = new Composite(group, SWT.NONE);
 
         radODV = new Button(group, SWT.RADIO);
-        radODV.setText("ODV"); //$NON-NLS-1$
+        radODV.setText(Conversion.ODV.getName());
         radODV.setSelection(false);
 
         grpODV = new Group(group, SWT.NONE);
@@ -668,10 +646,10 @@ public class ViewFile extends ViewPart
         afficheGrpODV();
 
         radMonoStation = new Button(grpODV, SWT.RADIO);
-        radMonoStation.setText(Messages.getString("ViewFile.monoStation")); //$NON-NLS-1$
+        radMonoStation.setText(Messages.lib_convert_monoStation);
         radMonoStation.setSelection(true);
         radMonoFichier = new Button(grpODV, SWT.RADIO);
-        radMonoFichier.setText(Messages.getString("ViewFile.monoFichier")); //$NON-NLS-1$
+        radMonoFichier.setText(Messages.lib_convert_monoFichier);
 
         // if (isCollection()) {
         // radMedatlas.setEnabled(false);
@@ -681,7 +659,7 @@ public class ViewFile extends ViewPart
         Composite compoVide2 = new Composite(compositeConversion, SWT.NONE);
 
         chkForcerTri = new Button(compositeConversion, SWT.CHECK);
-        chkForcerTri.setText(Messages.getString("ViewFile.forcerTri")); //$NON-NLS-1$
+        chkForcerTri.setText(Messages.lib_convert_sort);
 
         chkForcerTri
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -719,54 +697,24 @@ public class ViewFile extends ViewPart
     }
 
     /**
-     * This method initializes groupTempo
-     * 
-     */
-    private void createGroupTempo()
-    {
-        GridLayout gridLayout1 = new GridLayout();
-        gridLayout1.numColumns = 2;
-        groupTempo = new Group(composite11, SWT.NONE);
-        groupTempo.setText(Messages.getString("ViewFile.dateHeureRelatives")); //$NON-NLS-1$
-        groupTempo.setLayout(gridLayout1);
-        labelDateRef = new Label(groupTempo, SWT.NONE);
-        labelDateRef
-            .setText(Messages.getString("ViewFile.dateRef") + ": dd/MM/yyyy"); //$NON-NLS-1$ //$NON-NLS-2$
-
-        textTempoDateRef = new Text(groupTempo, SWT.BORDER);
-
-        labelHeureRef = new Label(groupTempo, SWT.NONE);
-        labelHeureRef
-            .setText(Messages.getString("ViewFile.heureRef") + ": hh24:mm"); //$NON-NLS-1$ //$NON-NLS-2$
-
-        textTempoHeureRef = new Text(groupTempo, SWT.BORDER);
-
-        // on le desactive de base
-        groupTempo.setVisible(false);
-
-        // TODO Herve Taniou : ce groupe n'est jamais rendu visible et donc
-        // inutile ?
-    }
-
-    /**
      * This method initializes groupFichier
      * 
      */
     private void createGroupeFichier()
     {
         grpFichier = new Group(composite11, SWT.NONE);
-        grpFichier.setText(Messages.getString("ViewFile.typeFichier"));  //$NON-NLS-1$
+        grpFichier.setText(Messages.lib_file_fileType);
         GridLayoutFactory.fillDefaults().applyTo(grpFichier);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(grpFichier);
 
         radProfilVertical = new Button(grpFichier, SWT.RADIO);
-        radProfilVertical.setText(Messages.getString("ViewFile.profilVert"));  //$NON-NLS-1$
+        radProfilVertical.setText(Messages.typeFile_profile);
 
         radSerieTempo = new Button(grpFichier, SWT.RADIO);
-        radSerieTempo.setText(Messages.getString("ViewFile.serieTempo"));  //$NON-NLS-1$
+        radSerieTempo.setText(Messages.typeFile_timeseries);
 
         radTrajectoire = new Button(grpFichier, SWT.RADIO);
-        radTrajectoire.setText(Messages.getString("ViewFile.trajectoire"));  //$NON-NLS-1$
+        radTrajectoire.setText(Messages.typeFile_trajectory);
 
         // Selection du type par defaut
         radProfilVertical.setSelection(true);
@@ -786,7 +734,7 @@ public class ViewFile extends ViewPart
             .applyTo(grpSeparateur);
 
         chkSeparateur = new Button(grpSeparateur, SWT.CHECK);
-        chkSeparateur.setText(Messages.getString("Preformat.3"));  //$NON-NLS-1$
+        chkSeparateur.setText(Messages.lib_file_separator);
 
         compositeSeparateur = new Composite(grpSeparateur, SWT.NONE);
         GridLayoutFactory.fillDefaults().numColumns(3).applyTo(
@@ -795,25 +743,20 @@ public class ViewFile extends ViewPart
             compositeSeparateur);
 
         radioTabulation = new Button(compositeSeparateur, SWT.RADIO);
-        radioTabulation.setText(Messages.getString("Preformat.4"));  //$NON-NLS-1$
+        radioTabulation.setText(Messages.lib_file_sepTab);
         radioTabulation.setSelection(true);
 
         radioPointVirgule = new Button(compositeSeparateur, SWT.RADIO);
-        radioPointVirgule.setText(Messages.getString("Preformat.5"));  //$NON-NLS-1$
+        radioPointVirgule.setText(Messages.lib_file_sepSemi); 
 
         radioVirgule = new Button(compositeSeparateur, SWT.RADIO);
-        radioVirgule.setText(Messages.getString("Preformat.6"));  //$NON-NLS-1$
+        radioVirgule.setText(Messages.lib_file_sepComma); 
 
         radioEspace = new Button(compositeSeparateur, SWT.RADIO);
-        radioEspace.setText(Messages.getString("Preformat.7"));  //$NON-NLS-1$
-
-        // compositeSeparateurAutre = new Composite(compositeSeparateur,
-        // SWT.NONE);
-        // GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compositeSeparateurAutre);
-        // GridDataFactory.fillDefaults().grab(false,false).applyTo(compositeSeparateurAutre);
+        radioEspace.setText(Messages.lib_file_sepSpace); 
 
         radioSeparateurAutre = new Button(compositeSeparateur, SWT.RADIO);
-        radioSeparateurAutre.setText(Messages.getString("Preformat.8"));  //$NON-NLS-1$
+        radioSeparateurAutre.setText(Messages.lib_file_sepOther); 
         textSeparateur = new Text(compositeSeparateur, SWT.BORDER);
 
         // Par defaut

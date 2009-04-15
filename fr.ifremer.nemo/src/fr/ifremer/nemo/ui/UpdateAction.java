@@ -37,7 +37,7 @@ public class UpdateAction extends Action implements ISelectionListener,
 
         this.window = window;
         setId(ID);
-        setText(Messages.getString("UpdateAction.1")); //$NON-NLS-1$
+        setText(Messages.update_barTitle); 
         window.getSelectionService().addSelectionListener(this);
 
     }
@@ -62,7 +62,7 @@ public class UpdateAction extends Action implements ISelectionListener,
         
 
         if (interrompu){
-            message.append(Messages.getString("update.info"));  //$NON-NLS-1$
+            message.append(Messages.update_info);
             message.append(Global.RN);
             message.append(Global.RN);
         }
@@ -103,12 +103,12 @@ public class UpdateAction extends Action implements ISelectionListener,
             case UPDATED :
                 message.append(list.getNbRetrieve());
                 message.append(Global.SPACE);
-                message.append(Messages.getString("retrieved")); //$NON-NLS-1$
+                message.append(Messages.retrieved);
                 break;
             case INTERRUPTED :
                 message.append(list.getNbRetrieve());
                 message.append(Global.SPACE);
-                message.append(Messages.getString("retrieved")); //$NON-NLS-1$
+                message.append(Messages.retrieved);
                 message.append(" / "); //$NON-NLS-1$
                 message.append(list.getNbTot());
                 break;

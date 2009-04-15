@@ -32,6 +32,7 @@ import fr.ifremer.nemo.domain.DataType;
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSDataType;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
@@ -44,7 +45,7 @@ public class EditSurvey {
 
 	public static Text textCampagne, textNom, textDateDebut, textDateFin,
 			textPays, textLabo, textChef, textProjet,
-			textConfidentiel, textType, textNbre, textCommentaire;
+			textConfidentiel, textCommentaire;
 
 	public static Label labelCampagne, labelNom, labelCodeNavire,
 			labelNomNavire, labelDateDebut, labelDateFin, labelRegion,
@@ -52,7 +53,7 @@ public class EditSurvey {
 			labelConfidentiel, labelType, labelNbre;
 
 	public static Button buttonRAZ, buttonInitServeur, buttonValidate,
-			buttonXML, buttonExpand, buttonExpand2;
+			buttonXML, buttonExpand;
 
 	public static ArrayList<Section> listeSectionsSurvey, listeSectionsParam;
 
@@ -96,16 +97,19 @@ public class EditSurvey {
 			// INFOS sur les fichiers utilises
 			if (ViewFile.radioFichier.getSelection()) {
 				// fichier campagne
-				Utils.messageInfoAppend(Messages.getString("EditSurvey.1")); //$NON-NLS-1$
+				Utils.messageInfoAppend(Messages.lib_file_cruiseFile);
 			} else {
 				// dossier campagne
-				Utils.messageInfoAppend(Messages.getString("EditSurvey.2") + ViewFile.nomRepertoire); //$NON-NLS-1$
+				Utils.messageInfoAppend(Messages.lib_file_cruiseDir + ViewFile.nomRepertoire);
 			}
 
-			// if (ViewFile.checkBoxTempo.getSelection()) {
 			if (ViewFile.radSerieTempo.getSelection()) {
-				Utils.messageInfoAppend(Messages.getString("EditSurvey.3")); //$NON-NLS-1$
-			}
+                // Série temporelle
+				Utils.messageInfoAppend(Messages.typeFile_timeseries);
+			}else if (ViewFile.radTrajectoire.getSelection()){
+                // Trajectoire
+                Utils.messageInfoAppend(Messages.typeFile_trajectory);
+            }
 
 		}
 		loaded = true;
@@ -117,7 +121,7 @@ public class EditSurvey {
 		 */
 
 		ViewEdit.formEdition.getBody().setLayout(new GridLayout());
-		ViewEdit.formEdition.setText(Messages.getString("EditSurvey.4")); //$NON-NLS-1$
+		ViewEdit.formEdition.setText(Messages.edit_cruise_title);
 
         shell.close();
         shell = new Shell();
@@ -139,105 +143,82 @@ public class EditSurvey {
 
 		// bouton validate
 		buttonValidate.setParent(ViewEdit.formEdition.getBody());
-		buttonValidate.setText(Messages.getString("EditSurvey.9")); //$NON-NLS-1$
+		buttonValidate.setText(Messages.button_validateStep);
 
 		// boutons collapse all / expand all
 
 		// bouton serveur
 		buttonInitServeur.setParent(ViewEdit.formEdition.getBody());
-		buttonInitServeur.setText(Messages.getString("EditSurvey.7")); //$NON-NLS-1$
+		buttonInitServeur.setText(Messages.button_serverIni);
 
 		// bouton XML
 		buttonXML.setParent(ViewEdit.formEdition.getBody());
-		buttonXML.setText(Messages.getString("EditSurvey.8")); //$NON-NLS-1$
+		buttonXML.setText(Messages.button_xmlIni); 
 
 		buttonRAZ.setParent(ViewEdit.formEdition.getBody());
-		buttonRAZ.setText("Reset"); //$NON-NLS-1$
+		buttonRAZ.setText(Messages.button_reset);
 
 		buttonExpand.setParent(ViewEdit.formEdition.getBody());
-		buttonExpand.setText("+"); //$NON-NLS-1$
+		buttonExpand.setText(Global.PLUS); 
 
 		formEdition.redraw();
 		formEdition.reflow(true);
 
-		// formEdition.reflow(true);
 
 		// initialisation liste des sections de la partie description fichier
 
 		// section reference
-		Drawing.sectionReferenceCampagne(sectionReference, Messages
-				.getString("EditSurvey.14"), Messages               //$NON-NLS-1$
-				.getString("EditSurvey.15"), textCampagne, Messages //$NON-NLS-1$
-				.getString("EditSurvey.10"), textNom, Messages      //$NON-NLS-1$
-				.getString("EditSurvey.11"), comboNavire, Messages  //$NON-NLS-1$
-				.getString("EditSurvey.ship"));                     //$NON-NLS-1$
+		Drawing.sectionReferenceCampagne(sectionReference, 
+                                         Messages.edit_cruise_sectionReference, 
+                                         Messages.edit_cruise_sectionReference_lib, 
+                                         textCampagne, Messages.edit_cruise_cruiseRef, 
+                                         textNom, Messages.edit_cruise_cruiseName, 
+                                         comboNavire, Messages.edit_cruise_ship); 
 
 		// section localisation
 		listeText.add(textDateDebut);
-		listeNoms.add(Messages.getString("EditSurvey.16")); //$NON-NLS-1$
+		listeNoms.add(Messages.edit_cruise_startDate); 
 		listeText.add(textDateFin);
-		listeNoms.add(Messages.getString("EditSurvey.17")); //$NON-NLS-1$
+		listeNoms.add(Messages.edit_cruise_endDate);
 		// FAE 0001186 : Region en liste
-		Drawing
-				.sectionNlabelsNtext(
-						sectionLocalisation,
-						Messages.getString("EditSurvey.19"), listeText, listeNoms, Messages.getString("EditSurvey.20"), false); //$NON-NLS-1$ //$NON-NLS-2$
+		Drawing.sectionNlabelsNtext(sectionLocalisation, Messages.edit_cruise_sectionLocation, 
+                                    listeText, listeNoms, 
+                                    Messages.edit_cruise_sectionLocation_lib, false);
 		listeText.clear();
 		listeNoms.clear();
 
 		ViewEdit.formEdition.reflow(true);
 
+        
 		// section source des donnees
-		// listeText.add(textPays);
-		// listeNoms.add(Messages.getString("EditSurvey.21")); //$NON-NLS-1$
 		listeText.add(textLabo);
-		listeNoms.add(Messages.getString("EditSurvey.22")); //$NON-NLS-1$
+		listeNoms.add(Messages.edit_cruise_lab);
 		listeText.add(textChef);
-		listeNoms.add(Messages.getString("EditSurvey.23")); //$NON-NLS-1$
+		listeNoms.add(Messages.edit_cruise_chief); 
 		listeText.add(textProjet);
-		listeNoms.add(Messages.getString("EditSurvey.24")); //$NON-NLS-1$
-		Drawing
-				.sectionNlabelsNtext(
-						sectionSource,
-						Messages.getString("EditSurvey.25"), listeText, listeNoms, Messages.getString("EditSurvey.26"), true); //$NON-NLS-1$ //$NON-NLS-2$
+		listeNoms.add(Messages.edit_cruise_project); 
+		Drawing.sectionNlabelsNtext(sectionSource, Messages.edit_cruise_sectionDataSource, 
+                                    listeText, listeNoms, 
+                                    Messages.edit_cruise_sectionDataSource_lib, true);
 		listeText.clear();
 		listeNoms.clear();
 
+        
 		// section centre archivage
-		// listeText.add(textCentre);
-		listeNoms.add(Messages.getString("EditSurvey.27")); //$NON-NLS-1$
+		Drawing.sectionNlabelsNtextConfidentialite(sectionCentre, Messages.edit_cruise_sectionArchiving, 
+                                                   Messages.edit_cruise_sectionArchiving_lib, comboConfid); 
 
-		Drawing
-				.sectionNlabelsNtextConfidentialite(
-						sectionCentre,
-						Messages.getString("EditSurvey.29"), listeText, listeNoms, Messages.getString("EditSurvey.30"), comboConfid); //$NON-NLS-1$ //$NON-NLS-2$
-		listeText.clear();
-		listeNoms.clear();
-		// FI par defaut pour le centre de donnees
-		// textCentre.setTextLimit(2);
-		// textCentre.setText("FI");
-
+        
 		// section types de donnees
-		listeText.add(textNbre);
-		listeNoms.add(Messages.getString("EditSurvey.31")); //$NON-NLS-1$
-		listeText.add(textType);
-		listeNoms.add(Messages.getString("EditSurvey.32")); //$NON-NLS-1$
-		Drawing
-				.sectionTypeDonnees(
-						sectionType,
-						Messages.getString("EditSurvey.33"), listeText, listeNoms, Messages.getString("EditSurvey.34"), listeType); //$NON-NLS-1$ //$NON-NLS-2$
+		Drawing.sectionTypeDonnees(sectionType, Messages.edit_cruise_sectionDataTypes, 
+                                   Messages.edit_cruise_sectionDataTypes_lib, listeType); 
 
+        
 		// section commentaire
-		Drawing
-				.sectionCommentaireSurvey(
-						sectionCommentaire,
-						Messages.getString("EditSurvey.35"), textCommentaire, Messages.getString("EditSurvey.36")); //$NON-NLS-1$ //$NON-NLS-2$
-
-		// buttonExpand2.setParent(ViewEdit.formEdition.getBody());
-		buttonExpand2.setText("+"); //$NON-NLS-1$
+		Drawing.sectionCommentaireSurvey(sectionCommentaire, Messages.edit_cruise_sectionComments, 
+                                         textCommentaire, Messages.edit_cruise_sectionComments_lib); 
 
 		// listeners
-
 		buttonExpand
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					@Override
@@ -262,54 +243,12 @@ public class EditSurvey {
 						}
 						if (!expand) {
 
-							buttonExpand.setText("-"); //$NON-NLS-1$
-							buttonExpand2.setText("-"); //$NON-NLS-1$
+							buttonExpand.setText(Global.MOINS); 
 							expand = true;
 						} else {
 							expand = false;
 
-							buttonExpand.setText("+"); //$NON-NLS-1$
-							buttonExpand2.setText("+"); //$NON-NLS-1$
-						}
-
-						// refresh global
-						formEdition.reflow(true);
-
-					}
-				});
-
-		buttonExpand2
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					@Override
-                    public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent e) {
-
-						// raz de la valeur manuelle
-						int i;
-
-						for (i = 0; i <= EditSurvey.listeSectionsSurvey.size() - 1; i++) {
-
-							if (!expand) {
-								EditSurvey.listeSectionsSurvey.get(i)
-										.setExpanded(true);
-
-							} else {
-								EditSurvey.listeSectionsSurvey.get(i)
-										.setExpanded(false);
-
-							}
-
-						}
-						if (!expand) {
-
-							buttonExpand.setText("-"); //$NON-NLS-1$
-							buttonExpand2.setText("-"); //$NON-NLS-1$
-							expand = true;
-						} else {
-							expand = false;
-
-							buttonExpand.setText("+"); //$NON-NLS-1$
-							buttonExpand2.setText("+"); //$NON-NLS-1$
+							buttonExpand.setText(Global.PLUS);
 						}
 
 						// refresh global
@@ -404,7 +343,6 @@ public class EditSurvey {
 						}
 
 						tamponSortie += tamponOrigine;
-						// System.out.println(tamponSortie);
 						textCommentaire.setText(tamponSortie);
 						textCommentaire.pack();
 
@@ -413,7 +351,6 @@ public class EditSurvey {
 				});
 
 		// refresh du formulaire
-
 		formEdition.reflow(true);
 
 		// affichage courant
@@ -466,12 +403,11 @@ public class EditSurvey {
 
 		// verifier que un fichier est charge avant d'ouvrir un modele
 		if ((!EditDesc.validee) && (!loaded)) {
-			Utils.messageErreurAppend(Messages.getString("EditSurvey.54")); //$NON-NLS-1$
+			Utils.messageErreurAppend(Messages.error_cruise_openXml);
 		} else {
 			FileDialog dialog = new FileDialog(shell, SWT.OPEN
 					| SWT.APPLICATION_MODAL);
-			// dialog.setFilterPath(Utils.configuration.getModelsDirectory()+"\\");
-			dialog.setText(Messages.getString("EditSurvey.55")); //$NON-NLS-1$
+			dialog.setText(Messages.edit_cruise_openXML); 
 			String extensions[] = new String[1];
 			extensions[0] = "*.xml"; //$NON-NLS-1$
 			dialog.setFilterExtensions(extensions);
@@ -497,6 +433,7 @@ public class EditSurvey {
 
 		// Liste des capteurs
 		ArrayList<String> listSensor = new ArrayList<String>();
+
 		WSDataType[] listWSDT = NemoLists.getDataTypes();
 		for (int i = 0; i < listWSDT.length; i++) {
 			if (listWSDT[i].isSensor()) {
@@ -577,10 +514,7 @@ public class EditSurvey {
 			survey = DataModel.singleSurvey.getModel();
 		}
 
-		// station = stationModel.getModel();
-
-		// injection des valeurs de l'IHM -> datamodel
-		// référence
+		// injection des valeurs de l'IHM -> datamodel  référence
 		if (survey.getReference() != null) {
 
 			EditSurvey.textCampagne.setText(survey.getReference());
@@ -604,12 +538,10 @@ public class EditSurvey {
 			if (survey.getFormattedStartDate() != null) {
 				EditSurvey.textDateDebut.setText(formatDate.format(new Date(
 						survey.getStartDate())));
-				// EditSurvey.textDateDebut.setText(survey.getFormattedStartDate());
 			}
 			if (survey.getFormattedEndDate() != null) {
 				EditSurvey.textDateFin.setText(formatDate.format(new Date(
 						survey.getEndDate())));
-				// EditSurvey.textDateFin.setText(survey.getFormattedEndDate());
 			}
 		} catch (ParseException e) {
 			// 
@@ -619,10 +551,6 @@ public class EditSurvey {
 		if (survey.getRegionName() != null) {
 			Utils.selectComboLibelle(comboRegion, survey.getRegionName());
 		}
-
-//        if (survey.getCountryName() != null) {
-//            Utils.selectComboLibelle(comboCountries, survey.getCountryName());
-//        }
 
         if (survey.getCountryCode() != null) {
             Utils.selectComboCode(comboCountries, survey.getCountryCode());
@@ -678,11 +606,6 @@ public class EditSurvey {
 				typeSurvey.setCode(dataTypes[i].getCode());
 				typeSurvey.setNombre(dataTypes[i].getNumberOfProfiles());
                 typeSurvey.setQc(Formatter.getSingleton().formatBoolean(dataTypes[i].isQc()));
-//				if (dataTypes[i].isQc()) {
-//					typeSurvey.setQc("Y"); //$NON-NLS-1$
-//				} else {
-//					typeSurvey.setQc("N"); //$NON-NLS-1$
-//				}
 
 				typeSurvey.setSensor(dataTypes[i].isSensor());
 
@@ -733,7 +656,6 @@ public class EditSurvey {
 
 		// effacement des boutons valider/expand/init serveur
 		EditSurvey.buttonExpand.setParent(shell);
-		EditSurvey.buttonExpand2.setParent(shell);
 		EditSurvey.buttonValidate.setParent(shell);
 		EditSurvey.buttonInitServeur.setParent(shell);
 		EditSurvey.buttonXML.setParent(shell);
@@ -748,7 +670,7 @@ public class EditSurvey {
 		}
 
 		// effacement titre formulaire
-		ViewEdit.formEdition.setText(""); //$NON-NLS-1$
+		ViewEdit.formEdition.setText(Global.EMPTY_STRING); 
 
 		// refresh global
 		ViewEdit.formEdition.reflow(true);
@@ -801,7 +723,7 @@ public class EditSurvey {
 
 		// EditSurvey.buttonExpand2.setParent(s.getBody());
 
-		ViewEdit.formEdition.setText(Messages.getString("EditSurvey.61")); //$NON-NLS-1$
+		ViewEdit.formEdition.setText(Messages.edit_cruise_title); 
 
 		// refresh global
 		ViewEdit.formEdition.reflow(true);
@@ -840,10 +762,6 @@ public class EditSurvey {
 		listeTextSurvey.add(textProjet);
 		textConfidentiel = new Text(shell, SWT.BORDER);
 		listeTextSurvey.add(textConfidentiel);
-		textType = new Text(shell, SWT.BORDER);
-		listeTextSurvey.add(textType);
-		textNbre = new Text(shell, SWT.BORDER);
-		listeTextSurvey.add(textNbre);
 		textCommentaire = new Text(shell, SWT.BORDER | SWT.H_SCROLL
 				| SWT.V_SCROLL);
 		listeTextSurvey.add(textCommentaire);
@@ -858,7 +776,6 @@ public class EditSurvey {
 		buttonRAZ = new Button(shell, SWT.NONE);
 		buttonInitServeur = new Button(shell, SWT.NONE);
 		buttonExpand = new Button(shell, SWT.NONE);
-		buttonExpand2 = new Button(shell, SWT.NONE);
 		buttonValidate = new Button(shell, SWT.NONE);
 		buttonXML = new Button(shell, SWT.NONE);
 
@@ -875,7 +792,7 @@ public class EditSurvey {
 		// remplissage des centres de donnees
 		comboDataCentres = new Combo(shell, SWT.READ_ONLY);
 
-		CodeTableRecordType[] centres = NemoLists.getVocabList("L300"); //$NON-NLS-1$
+		CodeTableRecordType[] centres = NemoLists.getVocabList(Intern.list_dataCenter); 
 
 		TreeMap<String, String> treeCentre = new TreeMap<String, String>();
 
@@ -887,7 +804,7 @@ public class EditSurvey {
 		NemoLists.listeCentreDonnees = new ArrayList<String>();
 		String temp = Global.EMPTY_STRING;
 		for (Entry<String, String> currentEntry : treeCentre.entrySet()) {
-			temp = currentEntry.getKey() + " - " + currentEntry.getValue(); //$NON-NLS-1$
+			temp = currentEntry.getKey() + Global.SEP + currentEntry.getValue(); 
 			NemoLists.listeCentreDonnees.add(temp);
 			comboDataCentres.add(temp);
 		}
@@ -895,7 +812,7 @@ public class EditSurvey {
 
 		// Remplissage liste navires
 		comboNavire = new Combo(shell, SWT.READ_ONLY);
-		CodeTableRecordType[] navires = NemoLists.getVocabList("C174"); //$NON-NLS-1$
+		CodeTableRecordType[] navires = NemoLists.getVocabList(Intern.list_ship);
 
 		TreeMap<String, String> treeNavire = new TreeMap<String, String>();
 
@@ -907,14 +824,14 @@ public class EditSurvey {
 		NemoLists.listeNavire = new ArrayList<String>();
 		temp = Global.EMPTY_STRING;
 		for (Entry<String, String> currentEntry : treeNavire.entrySet()) {
-			temp = currentEntry.getValue() + " - " + currentEntry.getKey(); //$NON-NLS-1$
+			temp = currentEntry.getValue() + Global.SEP + currentEntry.getKey();
 			NemoLists.listeNavire.add(temp);
 			comboNavire.add(temp);
 		}
 		
 		// Remplissage des Pays
 		comboCountries = new Combo(shell, SWT.NONE);
-		CodeTableRecordType[] records = NemoLists.getVocabList("C180"); //$NON-NLS-1$
+		CodeTableRecordType[] records = NemoLists.getVocabList(Intern.list_countries);
 		
 		TreeMap<String, String> treePays = new TreeMap<String, String>();
 			
@@ -923,27 +840,29 @@ public class EditSurvey {
 		}
 		
 		for (Entry<String, String> currentEntry : treePays.entrySet()) {
-			comboCountries.add(currentEntry.getValue() + " - " + currentEntry.getKey()); //$NON-NLS-1$
+			comboCountries.add(currentEntry.getValue() + Global.SEP + currentEntry.getKey()); 
 		}
 		
-		// Remplissage des Regions
+		
+        // Remplissage des Regions
 		comboRegion = new Combo(shell, SWT.NONE);
-		CodeTableRecordType[] regions = NemoLists.getVocabList("C16"); //$NON-NLS-1$
+		NemoLists.listeRegion = new ArrayList<String>();
+		CodeTableRecordType[] regions = NemoLists.getVocabList(Intern.list_regions);
 		
 		TreeMap<String, String> treeRegion = new TreeMap<String, String>();
 			
 		for (CodeTableRecordType record : regions)
 		{	
-			treeRegion.put(record.getEntryTerm(), Utils.extraitCodeURN(record.getEntryKey()));
+			treeRegion.put(record.getEntryTerm(), Utils.extraitCodeURN(record.getEntryKey()));            
 		}
 
-		NemoLists.listeRegion = new ArrayList<String>();
 		temp = Global.EMPTY_STRING;
 		for (Entry<String, String> currentEntry : treeRegion.entrySet()) {
-			temp = currentEntry.getValue() + " - " + currentEntry.getKey(); //$NON-NLS-1$
-			NemoLists.listeRegion.add(temp);
+			temp = currentEntry.getValue() + Global.SEP + currentEntry.getKey();
+            NemoLists.listeRegion.add(temp);
 			comboRegion.add(temp);
 		}
+        
 	}
 
 	public static void initListeType() {
@@ -955,8 +874,7 @@ public class EditSurvey {
 	public static void razText(ArrayList<Text> liste) {
 
 		for (int i = 0; i < liste.size(); i++) {
-			liste.get(i).setText(""); //$NON-NLS-1$
-
+			liste.get(i).setText(Global.EMPTY_STRING); 
 		}
 
 		// textCentre.setText("FI");
@@ -1053,7 +971,6 @@ public class EditSurvey {
 			buttonRAZ.dispose();
 			buttonInitServeur.dispose();
 			buttonExpand.dispose();
-			buttonExpand2.dispose();
 			buttonValidate.dispose();
 			buttonXML.dispose();
 		}
@@ -1073,7 +990,7 @@ public class EditSurvey {
                 loaded = false;
                 disposeElements();
             }
-            ViewFile.tabItem1.setText(Messages.getString("EditSurvey.4")); //$NON-NLS-1$
+            ViewFile.tabItem1.setText(Messages.onglet_cruise);
         }
     }
 

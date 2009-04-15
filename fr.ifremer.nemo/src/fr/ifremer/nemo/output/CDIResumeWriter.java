@@ -25,6 +25,7 @@ import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.ViewFile;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 
 public class CDIResumeWriter {
@@ -182,7 +183,7 @@ public class CDIResumeWriter {
 						writer.write(sep + idEdmoRespDonnees);
 						
 						// PDV code
-						writer.write(sep + Utils.extraitCodeURN(NemoLists.getVocabMatch("P091", "P021", param.getCode(), Messages.getString("NemoLists.unknown"))) + Global.EMPTY_STRING);   //$NON-NLS-1$//$NON-NLS-2$//$NON-NLS-3$
+						writer.write(sep + Utils.extraitCodeURN(NemoLists.getVocabMatch("P091", "P021", param.getCode(), Intern.NemoLists_unknown)) + Global.EMPTY_STRING);   //$NON-NLS-1$//$NON-NLS-2$
 
 						// Platform Type
 						writer.write(sep + codeTypePlateForme);

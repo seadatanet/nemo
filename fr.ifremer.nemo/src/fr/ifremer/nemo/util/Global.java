@@ -11,6 +11,14 @@ public interface Global
     public static final String UNDERSCORE = "_"; //$NON-NLS-1$
     public static final String SLASH = "/"; //$NON-NLS-1$
     public static final String SEP = " - "; //$NON-NLS-1$
+    public static final String DBL_PT = ":"; //$NON-NLS-1$
+    public static final String POINT = "."; //$NON-NLS-1$
+    public static final String POURCENT = "%"; //$NON-NLS-1$
+    public static final String ET_CO = "&"; //$NON-NLS-1$
+    
+    public static final String NO = "N"; //$NON-NLS-1$
+    public static final String PLUS = "+"; //$NON-NLS-1$
+    public static final String MOINS = "-"; //$NON-NLS-1$
     
     // Types de fichier
     public static final String PROFILE = "profile"; //$NON-NLS-1$

@@ -23,7 +23,6 @@ import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.domain.DataType;
 import fr.ifremer.nemo.domain.Station;
-import fr.ifremer.nemo.domain.TimeSeriesInformation;
 import fr.ifremer.nemo.input.FlagFragment;
 import fr.ifremer.nemo.input.HeaderFragment;
 import fr.ifremer.nemo.input.LineFragment;
@@ -521,6 +520,7 @@ public class StationSection extends NemoSection
             public void widgetSelected(
                     org.eclipse.swt.events.SelectionEvent g) {
                 String errorMessage = Global.EMPTY_STRING;
+                Utils.messageErreur(errorMessage);
                 try{
                     switch (cType){
                         case DATE : 
@@ -633,7 +633,8 @@ public class StationSection extends NemoSection
         resultTest.pack();
     }
 
-    protected long timeTest() throws ParseException{
+    protected long timeTest() throws ParseException
+    {
         
         resultTest.setText(getValue());
         if (!isManual()) autoInput.selectInViewFile();
@@ -698,7 +699,7 @@ public class StationSection extends NemoSection
                 String line = autoInput.getLines().get(0).getNumberLine().getText().trim();
                 String start = autoInput.getLines().get(0).getStart().getText().trim();
                 String end = autoInput.getLines().get(0).getEnd().getText().trim();
-                if (checkAutoInputValues(Messages.getString("EditStation.85"))){      //$NON-NLS-1$
+                if (checkAutoInputValues(Messages.getString(NemoSection.S_SAMPLINGRATE).trim())){ 
                     // récupérer le texte en question et creer une nouvelle heure
                     String ligne = Utils.lignesBrutes.get(Integer.parseInt(line) - 1);
                     stringValue = ligne.substring(Integer.parseInt(start) - 1, Integer.parseInt(end));

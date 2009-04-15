@@ -75,6 +75,8 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 	protected boolean _endOnEmptyLine;
 
+    protected boolean _endOnNextStation;
+
 	/**
 	 * Definit si le numéro de référence est automatiquement incrémente
 	 */
@@ -89,6 +91,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * Nombre de ligne du header Station
 	 */
 	protected int _numberOfLines;
+    protected String _endStationHeader;
 
 	protected static transient int _ref = -1;
 
@@ -176,10 +179,13 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 	public StationModel() {
 		_incrementNumber = 1;
+        _numberOfLines = 0;
 		_endDataPattern = Global.EMPTY_STRING;
+        _endStationHeader = Global.EMPTY_STRING;
 		_endOnEOF = false;
 		_endOnEmptyLine = false;
 		_endOnPattern = false;
+        _endOnNextStation = false;
 		_model = null;
 		_parameterModels = new java.util.ArrayList<ParameterModel>();
         _odvParameterModels = new java.util.ArrayList<ParameterModel>();
@@ -269,8 +275,11 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	public void buildFromElement(String a_URI, String a_LocalName,
 			String a_QName, Attributes a_Attributes) throws SAXException {
 		String tmp;
-		if ((tmp = a_Attributes.getValue("lineNumber")) != null) {
-			setNumberOfLines(tmp);
+        if ((tmp = a_Attributes.getValue("lineNumber")) != null) {
+            setNumberOfLines(tmp);
+        }
+		if ((tmp = a_Attributes.getValue("endStationHeader")) != null) {
+			setEndStationHeader(tmp);
 		}
 		if ((tmp = a_Attributes.getValue("endOnEOF")) != null) {
 			setEndOnEOF(tmp);
@@ -278,6 +287,9 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		if ((tmp = a_Attributes.getValue("endOnEmptyLine")) != null) {
 			setEndOnEmptyLine(tmp);
 		}
+        if ((tmp = a_Attributes.getValue("endOnNextStation")) != null) {
+            setEndOnNextStation(tmp);
+        }
 		if ((tmp = a_Attributes.getValue("endOnPattern")) != null) {
 			setEndOnPattern(tmp);
 		}
@@ -410,9 +422,10 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * 
 	 */
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
-		a_Writer.putAttribute("lineNumber", getNumberOfLines());
+		a_Writer.putAttribute("endStationHeader", getEndStationHeader());
 		a_Writer.putAttribute("endOnEOF", isEndOnEOF());
 		a_Writer.putAttribute("endOnEmptyLine", isEndOnEmptyLine());
+        a_Writer.putAttribute("endOnNextStation", isEndOnNextStation());
 		a_Writer.putAttribute("endOnPattern", isEndOnPattern());
 		a_Writer.putTag("inputType", getInputType());
 		a_Writer.putTag("separator", getSeparator());
@@ -544,6 +557,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	public void release() {
 		releaseModel();
 		releaseParameterModels();
+        releaseAddedParameterModels();
 		releaseProperties();
 		releaseReferenceProperty();
 		releaseTimeSeriesModel();
@@ -704,6 +718,38 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		setEndOnEmptyLine(new Boolean(a_String).booleanValue());
 	}
 
+    /**
+     * Read accessor (getter) for attribute _endOnNextStation
+     * 
+     * @return boolean
+     * @see StationModel#_endOnNextStation
+     */
+    public boolean isEndOnNextStation() {
+        return _endOnNextStation;
+    }
+
+    /**
+     * Write accessor (setter) for attribute _endOnNextStation
+     * 
+     * @param x
+     *            new value for _endOnNextStation
+     * @see StationModel#_endOnNextStation
+     */
+    public void setEndOnNextStation(boolean x) {
+        _endOnNextStation = x;
+    }
+
+    /**
+     * Write accessor (setter) for attribute _endOnNextStation
+     * 
+     * @param a_String
+     *            new value for _endOnNextStation as String
+     * @see StationModel#_endOnNextStation
+     */
+    public void setEndOnNextStation(String a_String) {
+        setEndOnNextStation(new Boolean(a_String).booleanValue());
+    }
+
 	/**
 	 * Read accessor (getter) for attribute _incrementRef
 	 * 
@@ -747,39 +793,57 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		_incrementNumber = Integer.parseInt(number);
 	}
 
+    /**
+     * Read accessor (getter) for attribute _numberOfLines 
+     * 
+     * @return int
+     * @see StationModel#_numberOfLines
+     */
+    public int getNumberOfLines() {
+        return _numberOfLines;
+    }
+
+    /**
+     * Write accessor (setter) for attribute _numberOfLines 
+     * 
+     * @param x
+     *            new value for _numberOfLines
+     * @see StationModel#_numberOfLines
+     */
+    public void setNumberOfLines(int x) {
+        _numberOfLines = x;
+    }
+
+    /**
+     * Write accessor (setter) for attribute _numberOfLines 
+     * 
+     * @param a_String
+     *            new value for _numberOfLines as String
+     * @see StationModel#_numberOfLines
+     */
+    public void setNumberOfLines(String a_String) {
+        _numberOfLines = Integer.parseInt(a_String);
+    }
+
 	/**
-	 * Read accessor (getter) for attribute _numberOfLines
+	 * Read accessor (getter) for attribute _endStationHeader
 	 * 
-	 * @return int
-	 * @see StationModel#_numberOfLines
+	 * @return String
+	 * @see StationModel#_endStationHeader
 	 */
-	public int getNumberOfLines() {
-		return _numberOfLines;
+	public String getEndStationHeader() {
+		return _endStationHeader;
 	}
 
 	/**
-	 * Write accessor (setter) for attribute _numberOfLines
-	 * 
-	 * @param x
-	 *            new value for _numberOfLines
-	 * @see StationModel#_numberOfLines
-	 */
-	public void setNumberOfLines(int x) {
-		_numberOfLines = x;
-	}
-
-	/**
-	 * Write accessor (setter) for attribute _numberOfLines
+	 * Write accessor (setter) for attribute _endStationHeader
 	 * 
 	 * @param a_String
-	 *            new value for _numberOfLines as String
-	 * @see StationModel#_numberOfLines
+	 *            new value for _endStationHeader
+	 * @see StationModel#_endStationHeader
 	 */
-	public void setNumberOfLines(String a_String) {
-		try {
-			setNumberOfLines(Integer.parseInt(a_String));
-		} catch (Exception e) {
-		}
+	public void setEndStationHeader(String a_String) {
+        _endStationHeader = a_String;
 	}
 
 	/**
@@ -1078,7 +1142,12 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
             t.release();
 			removeParameterModel(t);
 		}
-        
+	}
+
+    /**
+     * release all links for role "parameterModels"
+     */
+    private void releaseAddedParameterModels() {
         for (ParameterModel t : getOdvParameterModels()) {
             t.release();
             if (_odvParameterModels.contains(t)) _odvParameterModels.remove(t);
@@ -1088,7 +1157,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
             t.release();
             if (_medParameterModels.contains(t)) _medParameterModels.remove(t);
         }
-	}
+    }
 
 	/**
 	 * remove link with x for role "parameterModels"
@@ -1177,11 +1246,80 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
         return param;
     }
     
-    public void addFixedParameterModel(IdParameter code) {
+    
+    public void setAddedParameterModel()
+    {
+        // reset systematique des parametres stockes dans le dataModel
+        releaseAddedParameterModels();
+        
+        // *** Ajouts automatiques de certains paramètres
+        boolean existDEPH = false;
+        String formatPRES = Global.EMPTY_STRING;
+        for (ParameterModel param : getParameterModels()){
+            if (param.getModel().getCode().equals(IdParameter.DEPH.toString()))
+                existDEPH = true;
+            if (param.getModel().getCode().equals("PRES")) //$NON-NLS-1$
+                formatPRES = param.getModel().getFormat();
+        }
+        if (isProfile())
+        {
+            // Profile vertical
+            if ((!existDEPH) && (_presIndex != -1)){
+                // ajout de DEPH calculé à partir de PRES
+                //parameterModel.setFlag(stationModel.parameterModelsAt(indexPRES).getFlag());
+                addFixedParameterModel(IdParameter.DEPH, formatPRES);
+            }
+        }
+        else
+        {       
+            // Serie temporelle ou Trajectoire     
+            // Ajout YEAR, MNTH, DAYX et TIME pour Medatlas
+            addFixedParameterModel(IdParameter.YEAR);
+            addFixedParameterModel(IdParameter.MNTH);
+            addFixedParameterModel(IdParameter.DAYX);
+            addFixedParameterModel(IdParameter.TIME);
+            
+            if (isTimeSeries())
+            {
+                // Ajout de "Chronological Julian Date" ou "time-ISO8601 pour ODV
+                if (Utils.configuration.isDateISO()){
+                    addFixedParameterModel(IdParameter.DTUT);  
+                }else{                    
+                    addFixedParameterModel(IdParameter.CJDY);     
+                }
+                
+                // Serie temporelle
+                // Ajout du paramètre DEPH ( = Sensor Depth) pour ODV
+                if (!existDEPH)
+                    addFixedParameterModel(IdParameter.DEPH);          
+            }
+            else
+            {
+                // Trajectoire
+                // Ajout LATX et LONX pour Medatlas
+                addFixedParameterModel(IdParameter.LATX);  
+                addFixedParameterModel(IdParameter.LONX);  
+                
+                if (EditStation.depth.getValue() != null 
+                        && !EditStation.depth.getValue().trim().equals(Global.EMPTY_STRING)
+                        && EditStation.depth.isInData()){
+                    // Ajout BATH si "Pofondeur" saisie dans les données pour Medatlas
+                    addFixedParameterModel(IdParameter.BATH);
+                }
+                
+                // Ajout du paramètre DEPH ( = Sensor Depth) pour ODV
+                if (!existDEPH)
+                    addFixedParameterModel(IdParameter.DEPH);  
+                
+            }
+        }
+    }
+    
+    private void addFixedParameterModel(IdParameter code) {
         addFixedParameterModel(code, null);
     }
 
-    public void addFixedParameterModel(IdParameter code, String formatPRES) {
+    private void addFixedParameterModel(IdParameter code, String formatPRES) {
 
         AddedParameter para = new AddedParameter(code, formatPRES, _inputType);
         ParameterModel parameterModel = new ParameterModel();
@@ -1410,17 +1548,24 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 */
 	public String[] consumeHeader(BufferedReader a_Reader) throws IOException {
 		Vector<String> v = new Vector<String>();
-		for (int i = 0; i < _numberOfLines; i++) {
-
-			String line = a_Reader.readLine();
-			EditConversion.incrementErreurLigne();
-			EditConversion.setErreurChaine(line);
-			if (line != null) {
-				v.add(line);
-			} else {
-				return null;
-			}
-		}
+//      for (int i = 0; i < _numberOfLines; i++) {
+        if (!_endStationHeader.equals(Global.EMPTY_STRING)){
+            boolean stop = false;
+            while (!stop)
+            {
+    			String line = a_Reader.readLine();
+    			EditConversion.incrementErreurLigne();
+    			EditConversion.setErreurChaine(line);
+    			if (line != null) {
+    				v.add(line);
+                    if (line.startsWith(_endStationHeader)){
+                        stop = true;
+                    }
+    			} else {
+    				return null;
+    			}
+    		}
+        }
 		String[] lines = new String[v.size()];
 		return v.toArray(lines);
 	}
@@ -1436,16 +1581,23 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		EditConversion.setErreurLigne(0);
 		Vector<String> v = new Vector<String>();
 		String line = null;
-		for (int i = 0; i < _numberOfLines; i++) {
-			line = a_Reader.readLine();
-			EditConversion.incrementErreurLigne();
-			EditConversion.setErreurChaine(line);
-			if (line != null) {
-				v.add(line);
-			} else {
-				return null;
-			}
-		}
+//      for (int i = 0; i < _numberOfLines; i++) {
+        if (!_endStationHeader.equals(Global.EMPTY_STRING)){
+            boolean stop = false;
+            while (!stop){
+    			line = a_Reader.readLine();
+    			EditConversion.incrementErreurLigne();
+    			EditConversion.setErreurChaine(line);
+    			if (line != null) {
+    				v.add(line);
+                    if (line.startsWith(_endStationHeader)){
+                        stop = true;
+                    }
+    			} else {
+    				return null;
+    			}
+    		}
+        }
 		line = a_Reader.readLine();
 		EditConversion.incrementErreurLigne();
 		EditConversion.setErreurChaine(line);
@@ -1463,17 +1615,23 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 */
 	public void consumeHeaderPlus(BufferedReader a_Reader) throws IOException {
 		Vector<String> v = new Vector<String>();
-		for (int i = 0; i < _numberOfLines; i++) {
-			String line = a_Reader.readLine();
-			EditConversion.incrementErreurLigne();
-			EditConversion.setErreurChaine(line);
-			if (line != null) {
-				v.add(line);
-			} else {
-				_headerPlus = null;
-			}
-		}
-
+//		for (int i = 0; i < _numberOfLines; i++) {
+        if (!_endStationHeader.equals(Global.EMPTY_STRING)){
+            boolean stop = false;
+            while (!stop){
+    			String line = a_Reader.readLine();
+    			EditConversion.incrementErreurLigne();
+    			EditConversion.setErreurChaine(line);
+    			if (line != null) {
+    				v.add(line);
+                    if (line.startsWith(_endStationHeader)){
+                        stop = true;
+                    }
+    			} else {
+    				_headerPlus = null;
+    			}
+    		}
+        }
 		v.add(Global.EMPTY_STRING);
 
 		String[] lines = new String[v.size()];
@@ -1499,6 +1657,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		String[] header = null;
 
 		try {
+                        
 			station = (Station) _model.clone();
 			station.setMetaFlags(new HashMap<String, String>());
             
@@ -1636,11 +1795,22 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			for (index = 0; (line = a_Reader.readLine()) != null
 					&& !(_endOnEmptyLine && line.trim().matches("^$"))
 					&& (!(_endOnPattern 
-                            && (line.matches("^" + _endDataPattern+ "$") 
-                                    || line.startsWith(_endDataPattern)))) 
+                            && (line.matches("^" + _endDataPattern + "$") 
+                            || line.startsWith(_endDataPattern)))) 
                     || (index < _rowNumber); index++) {
                 
+                // FAE 1738 : ajout d'un indicateur "prochaine station"
+                if (_endOnNextStation 
+                            && index > 0
+                            && !line.startsWith("          ")){
+                    a_Reader.reset();
+                    break;
+                }
+                
+                
 				size += line.length();
+                a_Reader.mark(Integer.parseInt((String.valueOf(size))));
+                
 				a_Notifier.progress(size);
 
 				EditConversion.incrementErreurLigne();

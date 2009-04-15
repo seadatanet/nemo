@@ -52,51 +52,12 @@ public class Etape {
         for (NemoSection desc : EditDesc.listeSectionsDesc){
             
             if (desc.isEnabled()){
-                if (desc.getName().equals(NemoSection.F_ENDDATA)){
-                    if (((FileSection) desc).radManuelSelected() 
-                            && ((FileSection) desc).getValue().equals(Global.EMPTY_STRING)){
-                        ok = false;
-                        Utils.messageErreurAppend(Messages.getString("EditDesc.indicateurVide")); //$NON-NLS-1$
-                    }
-                }else{                    
-                    resultat = ((FileSection) desc).checkValue();
-                    ok = ok && resultat;
-                }
+                resultat = ((FileSection) desc).checkMandatory();
+                ok = ok && resultat;
             }else{
                 ((FileSection) desc).initValue();
             }
         }
-
-		// check des valeurs date/heure séries tempo
-		// if (ViewFile.checkBoxTempo.getSelection()) {
-		if (ViewFile.radSerieTempo.getSelection()
-				|| ViewFile.radTrajectoire.getSelection()) {
-			if (!ViewFile.textTempoHeureRef.getText().equals("")) { //$NON-NLS-1$
-				try {
-					DateTimeFormat format = new DateTimeFormat(
-							ViewFile.comboTempoHeure.getText());
-
-					format.parseObject(ViewFile.textTempoHeureRef.getText());
-
-				} catch (ParseException e) {
-
-					Utils.messageErreurAppend(Messages.getString("Etape.6")); //$NON-NLS-1$
-					ok = false;
-				}
-			} // fin tempoHeureRef ""
-			if (!ViewFile.textTempoDateRef.getText().equals("")) { //$NON-NLS-1$
-				try {
-					DateTimeFormat format = new DateTimeFormat(
-							ViewFile.comboTempoDate.getText());
-
-					format.parseObject(ViewFile.textTempoDateRef.getText());
-				} catch (ParseException e) {
-					Utils.messageErreurAppend(Messages.getString("Etape.8")); //$NON-NLS-1$
-					ok = false;
-				}
-			}
-
-		} // fin tempo
 
 		if (ok) {
 			EditDesc.okApresReset = true;
@@ -651,18 +612,30 @@ public class Etape {
                 if (checkValue){        
                     value = EditStation.samplingRate.getValue();
                     
-                    if (value.trim().equals("")) {                                                                  //$NON-NLS-1$
+                    if (value.trim().equals("")) {                                               //$NON-NLS-1$
                         ok = ok && false; 
-                        Utils.messageErreurAppend(Messages.getString("Etape.103a"));                                 //$NON-NLS-1$
+                        Utils.messageErreurAppend(Messages.getString("Etape.103a"));             //$NON-NLS-1$
                     } else {
-                        if (!Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", value.trim())) {                             //$NON-NLS-1$
+                        if (!Pattern.matches("^[0-9]*[0-9][.]?[0-9]*[0-9]*$", value.trim())) {   //$NON-NLS-1$
                             ok = ok && false;
-                            Utils.messageErreurAppend(Messages.getString("Etape.103"));                             //$NON-NLS-1$
+                            Utils.messageErreurAppend(Messages.getString("Etape.103"));          //$NON-NLS-1$
                         }else{
                             Double dblValue = Double.parseDouble(value);
-                            if (dblValue.compareTo(new Double("0.0")) == 0){                           //$NON-NLS-1$
+                            if (dblValue.compareTo(new Double("0.0")) == 0){                     //$NON-NLS-1$
                                 ok = ok && false;
-                                Utils.messageErreurAppend(Messages.getString("Etape.103b"));                        //$NON-NLS-1$
+                                Utils.messageErreurAppend(Messages.getString("Etape.103b"));     //$NON-NLS-1$
+                            }else{
+                                org.nfunk.jep.JEP parser = new org.nfunk.jep.JEP();
+                                parser.addStandardFunctions();
+                                parser.addStandardConstants();
+                                parser.addVariable(Global.STR_CONVERT, dblValue);
+                                parser.parseExpression(Global.STR_CONVERT + EditStation.samplingRate.getConverter().getText().trim());
+                        
+                                Double resultJEP = parser.getValue();
+                                if (resultJEP.isNaN()){
+                                    ok = ok && false;
+                                    Utils.messageErreurAppend(Messages.getString("Etape.103"));   //$NON-NLS-1$
+                                }
                             }
                         }
                     }
@@ -679,7 +652,7 @@ public class Etape {
             formatSaisi = EditStation.endLatitude.getConverter().getText();
             value = EditStation.endLatitude.getValue();
             checkValue = true;
-            if (value != null && !value.trim().equals(Global.EMPTY_STRING)){ 
+            if (value != null && !value.trim().equals(Global.EMPTY_STRING) && !value.equals(EditStation.latitude.getValue())){ 
                 // vérification du format
                 if (formatSaisi == null || formatSaisi.equals(Global.EMPTY_STRING)){
                     formatSaisi = EditStation.latitude.getConverter().getText();
@@ -717,7 +690,7 @@ public class Etape {
             formatSaisi = EditStation.endLongitude.getConverter().getText();
             value = EditStation.endLongitude.getValue();
             checkValue = true;
-            if (value != null && !value.trim().equals(Global.EMPTY_STRING)){     
+            if (value != null && !value.trim().equals(Global.EMPTY_STRING) && !value.equals(EditStation.longitude.getValue())){     
                 // vérification du format
                 if (formatSaisi == null || formatSaisi.equals(Global.EMPTY_STRING)){
                     formatSaisi = EditStation.longitude.getConverter().getText();
@@ -833,7 +806,6 @@ public class Etape {
 		// test de toutes les valeurs debut / fin des Data
 		Boolean ok = true;
 		Boolean valeurNonRemplie = false;
-        boolean existDEPH = false;
 		// retour e l'onglet message d'erreur
 		ViewLog.tabFolderLog.setSelection(0);
 
@@ -871,25 +843,10 @@ public class Etape {
 				fins[i] = typeCourant.getFin();
 				debutsFlag[i] = typeCourant.getDebutFlag();
 				finsFlag[i] = typeCourant.getFinFlag();
-				/*
-				 * // test direct sur valeur entree if
-				 * (Pattern.matches("^.{0,1}[0-9]*[0-9].*[0-9][0-9]*$",
-				 * typeCourant.getEntree())) { // ok ok = ok && true; } else { //
-				 * erreur ok = ok && false;
-				 * Utils.messageErreurAppend(Messages.getString("Etape.105"));
-				 * //$NON-NLS-1$ }
-				 */
                 
-                // recherche de l'existance du paramètre DEPH
-                if (typeCourant.getCode().startsWith("DEPH"))  //$NON-NLS-1$
-                    existDEPH = true;
-
 				// test direct sur valeur entree
-				// ok
 				ok = ok && true;
                 
-                //typeCourant.get
-
 				// test direct sur valeur sortie (valeur par defaut)
                 try
                 {
@@ -974,7 +931,7 @@ public class Etape {
 			}
 
 			// TEST pour savoir si PRES est bien en premier mais pas pour
-			// series tempo ou trajectoire
+			// profile ou trajectoire
 			TypeData premierType = TableData.types.get(0);
 
 			// split sur " - "
@@ -998,12 +955,12 @@ public class Etape {
                 }else{
                     EditConversion.setWarningData(Global.EMPTY_STRING);
                 }
-			}else if (ViewFile.typeFichierEntree().equals(Global.TRAJECTORY)){
-                if (!code.equals("DEPH") && existDEPH) { //$NON-NLS-1$
-                    // DEPH existe et n'est pas en premier
-                    Utils.messageErreurAppend(Messages.getString("Etape.131")); //$NON-NLS-1$
-                    ok = ok && false;
-                }
+//			}else if (ViewFile.typeFichierEntree().equals(Global.TRAJECTORY)){
+//                if (!code.equals("DEPH") && existDEPH) { //$NON-NLS-1$
+//                    // DEPH existe et n'est pas en premier
+//                    Utils.messageErreurAppend(Messages.getString("Etape.131")); //$NON-NLS-1$
+//                    ok = ok && false;
+//                }
             }
 		}
 		if (ok) {

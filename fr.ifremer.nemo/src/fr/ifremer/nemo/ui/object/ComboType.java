@@ -36,8 +36,9 @@ public enum ComboType
                 valueCombo.add("YY/MM/DD");                 //$NON-NLS-1$
                 valueCombo.add("YYMMDD");                   //$NON-NLS-1$
                 valueCombo.add("YYYY/MM/DD");               //$NON-NLS-1$
-                valueCombo.add("YYYY-MM-DD");                 //$NON-NLS-1$
+                valueCombo.add("YYYY-MM-DD");               //$NON-NLS-1$
                 valueCombo.add("YYYYMMDD");                 //$NON-NLS-1$
+                valueCombo.add("DDDDDDD.d");                //$NON-NLS-1$
                 break;
             case TIME :
                 valueCombo = new Combo(shell, SWT.BORDER);
@@ -50,6 +51,7 @@ public enum ComboType
                 valueCombo.add("hh24mmss");                 //$NON-NLS-1$
                 valueCombo.add("hh24 mm");                  //$NON-NLS-1$
                 valueCombo.add("hh24:cc");                  //$NON-NLS-1$
+                valueCombo.add("D.dddddd");                //$NON-NLS-1$
                 valueCombo.add("ttttt");                    //$NON-NLS-1$
                 break;
             case LAT :

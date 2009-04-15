@@ -1269,30 +1269,6 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 	 */
 	public void importFromXML(File xmlFile) throws SAXException,
 			TransformerException, FileNotFoundException {
-		/*
-		XMLReader reader = XMLReaderFactory.createXMLReader();
-		reader.setFeature("http://xml.org/sax/features/validation", false);
-		reader.setFeature("http://xml.org/sax/features/namespaces", true);
-		reader.setFeature("http://xml.org/sax/features/namespace-prefixes",
-				false);
-
-		Source source = new SAXSource(reader, new InputSource(new FileReader(
-				xmlFile)));
-		
-		XMLBootstrapParser parser = new XMLBootstrapParser(this);
-		Result result = new SAXResult(parser);
-		java.io.InputStream inputStream = new FileInputStream(
-				"resources/survey.xsl");
-		getClass().getResourceAsStream("/resources/survey.xsl");
-		Source style = new StreamSource(new InputStreamReader(inputStream));
-
-		if (checkSchema(source)) {
-			TransformerFactory transFactory = TransformerFactory.newInstance();
-			Transformer trans = transFactory.newTransformer(style);
-			source = new SAXSource(reader, new InputSource(new FileReader(xmlFile)));
-			trans.transform(source, result);
-		}
-		*/
 		
 		StreamSource xmlSource = new StreamSource(xmlFile);
 
@@ -1313,8 +1289,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 	private Boolean checkSchema(Source xmlFile) throws SAXException {
 
 		// 1. Lookup a factory for the W3C XML Schema language
-		SchemaFactory factory = SchemaFactory
-				.newInstance("http://www.w3.org/2001/XMLSchema");
+		SchemaFactory factory = SchemaFactory.newInstance("http://www.w3.org/2001/XMLSchema");
 
 		// 2. Compile the schema.
 		// Here the schema is loaded from a java.io.File, but you could use
@@ -1331,7 +1306,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 			return true;
 
 		} catch (SAXException ex) {
-			Utils.messageErreurAppend(Messages.getString("EditSurvey.72"));
+			Utils.messageErreurAppend(Messages.error_cruise_invalidXML);
 			Utils.messageErreurAppend(ex.getMessage());
 			throw ex;
 		} catch (IOException ex) {

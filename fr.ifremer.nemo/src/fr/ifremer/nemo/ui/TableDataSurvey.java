@@ -18,12 +18,9 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
-import fr.ifremer.nemo.config.Configuration;
-import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSDataType;
-import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
 public class TableDataSurvey {
 
@@ -31,7 +28,7 @@ public class TableDataSurvey {
 
 	public static Table filtreTable;
 
-	public static int ligneSelec, colonneSelec, debut, fin, ligneBidon;
+	public static int ligneSelec, colonneSelec;
 	
 	public static int[] lignesSelec;
 
@@ -46,10 +43,6 @@ public class TableDataSurvey {
 	public static void creationTable() {
 		final Table table;
 
-		ligneBidon = 0;
-		debut = 0;
-		fin = 0;
-
 		TableDataSurvey.tableTypeSurvey = new Table(Drawing.sectionClientType,
 				SWT.MULTI | SWT.FULL_SELECTION);
 
@@ -60,7 +53,6 @@ public class TableDataSurvey {
 				
 		TableColumn tableColumn = new TableColumn(table, SWT.NONE);
 		tableColumn.setWidth(100);
-		// taille = 60
 		tableColumn.setText(Messages.getString("TableDataSurvey.1")); //$NON-NLS-1$
 
 		TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);
@@ -98,8 +90,8 @@ public class TableDataSurvey {
 
 			// parametres
 			type.setCode(wsDatatype.getCode()
-							+ " - " + wsDatatype.getLibelle()); //$NON-NLS-1$
-			type.setQc(Messages.getString("TableDataSurvey.5")); //$NON-NLS-1$
+							+ Global.SEP + wsDatatype.getLibelle());
+			type.setQc(Global.NO);
 
 			type.setSensor(wsDatatype.isSensor());
 			// ajout dans liste
@@ -120,7 +112,6 @@ public class TableDataSurvey {
 
 		// REMPLISSAGE temporaire de la table
 		initTableData();
-		// remplirTableData();
 
 		// LINK des editors
 
@@ -140,26 +131,19 @@ public class TableDataSurvey {
 
 				Point pt = new Point(event.x, event.y);
 				TableItem item = table.getItem(pt);
-				// System.out.println("===> "+item.getText());
+                
 				if (item == null)
 					return;
 
 				// edition directe de l'element selectionne
 
 				Rectangle clientArea = table.getClientArea();
-				// Point pt = new Point(event.x, event.y);
 				int index = table.getTopIndex();
 
-				if (item == null)
-					return;
 				for (int i = 0; i < table.getColumnCount(); i++) {
 					Rectangle rect = item.getBounds(i);
-					// System.out.println("rect===> "+rect);
-					// System.out.println("calcul num ligne===> "+i);
 					if (rect.contains(pt)) {
 						int indexTmp = table.indexOf(item);
-						// System.out.println("LigneSelec =>" + indexTmp + "-
-						// ColonneSelec =>" + i);
 						ligneSelec = indexTmp;
 						colonneSelec = i;
 					}
@@ -184,8 +168,7 @@ public class TableDataSurvey {
 									case SWT.Traverse:
 										switch (e.detail) {
 										case SWT.TRAVERSE_RETURN:
-											itemTmp.setText(column, text
-													.getText());
+											itemTmp.setText(column, text.getText());
 
 										case SWT.TRAVERSE_ESCAPE:
 											text.dispose();
@@ -202,17 +185,7 @@ public class TableDataSurvey {
 							text.selectAll();
 
 							// invalidation de l'etape quand modif
-							EditSurvey.okApresReset = false;
-							if (!ViewFile.tabItem1.isDisposed()) {
-								ViewFile.tabItem1.setText(Messages
-										.getString("EditSurvey.4"));
-							}
-							EditStation.okApresReset = false;
-							ViewFile.tabItem2.setText(Messages
-									.getString("EditStation.1"));
-							EditData.okApresReset = false;
-							ViewFile.tabItem3.setText(Messages
-									.getString("EditData.1"));
+                            Utils.invalidEtapes();
 
 							text.setFocus();
 							return;
@@ -306,8 +279,9 @@ public class TableDataSurvey {
 		for (int i = 0; i < nbre; i++) {
 			TableItem item = new TableItem(table, SWT.NONE);
 			item.setText(new String[] { types.get(i).getCode(),
-					"" + types.get(i).getNombre(), //$NON-NLS-1$
-					types.get(i).getQc(), "" + types.get(i).getSensor() });
+					                    String.valueOf(types.get(i).getNombre()),
+					                    types.get(i).getQc(), 
+                                        String.valueOf(types.get(i).getSensor()) });
 
 		}
 
@@ -374,9 +348,8 @@ public class TableDataSurvey {
 		// On teste si ce n'est pas le premier element
 		if (indice > 0) {
 			int nbre;
-			ArrayList<TypeSurvey> listeTempo;
+			ArrayList<TypeSurvey> listeTempo = new ArrayList<TypeSurvey>();;
 			nbre = types.size();
-			listeTempo = new ArrayList();
 
 			// mise e jour prealable
 			majTypeData();
@@ -422,8 +395,7 @@ public class TableDataSurvey {
 		nbre = types.size();
 		
 		if (indice < nbre - 1) {
-			ArrayList<TypeSurvey> listeTempo;
-			listeTempo = new ArrayList();
+			ArrayList<TypeSurvey> listeTempo = new ArrayList<TypeSurvey>();
 
 			// mise e jour prealable
 			majTypeData();
@@ -522,7 +494,7 @@ public class TableDataSurvey {
 							TableDataSurvey.tableTypeSurvey.getItem(i).getText(
 									0));
 					if (TableDataSurvey.tableTypeSurvey.getItem(i).getText(1)
-							.equals("")) {
+							.equals(Global.EMPTY_STRING)) {
 						types.get(i).setNombre(0);
 					} else {
 						types.get(i).setNombre(

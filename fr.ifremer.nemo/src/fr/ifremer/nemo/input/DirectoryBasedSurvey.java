@@ -334,7 +334,9 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 				}
 				
 				SizeBasedProgressNotifier notifierStation = new SizeBasedProgressNotifier(size, offset, a_Progress);
-								
+					
+//                _stationModel.setAddedParameterModel();
+                
 				for (int i = 0; i < files.length; i++) {
 
 					if (SurveyMedia.interrompu) {

@@ -14,6 +14,7 @@ import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.mapping.EditMappingAction;
 import fr.ifremer.nemo.mapping.ExportMappingAction;
 import fr.ifremer.nemo.mapping.ImportMappingAction;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 
@@ -46,88 +47,82 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 		// the window is closed.
 
 		exitActionQuit = ActionFactory.QUIT.create(window);
+		register(exitActionQuit);
 
-		exitAction = new ExitAction(window);
-		// newAction = new SaveAction(window);
+        
+        // MODEL
 		openAction = new OpenAction(window);
-		aboutAction = ActionFactory.ABOUT.create(window);
+        register(openAction);
+		
+        saveAction = new SaveAction(window);
+		register(saveAction);
+        
+		exitAction = new ExitAction(window);
+		register(exitAction);
+        
+        
+		// MAPPING
+		mappingDatabaseImportAction = new ImportMappingAction(window);
+		mappingDatabaseImportAction.setEnabled(Configuration.getSingleton().isWriteMapping());
+		register(mappingDatabaseImportAction);
+		
+		mappingDatabaseExportAction = new ExportMappingAction(window);
+		mappingDatabaseExportAction.setEnabled(Configuration.getSingleton().isWriteMapping());
+		register(mappingDatabaseExportAction);
+		
+		mappingDatabaseEditAction = new EditMappingAction(window);
+		mappingDatabaseEditAction.setEnabled(Configuration.getSingleton().isWriteMapping());
+		register(mappingDatabaseEditAction);
 
-		// openXMLAction = new OpenXMLAction(window);
-		// saveXMLAction = new SaveXMLAction(window);
 
-		helpAction = ActionFactory.HELP_CONTENTS.create(window);
-
+        // OPTIONS
 		optionsAction = new OptionsAction(window);
-		// register(optionsAction);
+		register(optionsAction);
 	
 		updateAction = new UpdateAction(window);
-		saveAction = new SaveAction(window);
-
-		// saveAsAction = ActionFactory.SAVE_AS.create(window);
-
-        mappingDatabaseImportAction = new ImportMappingAction(window);
-        mappingDatabaseExportAction = new ExportMappingAction(window);
-        mappingDatabaseEditAction = new EditMappingAction(window);
+        register(updateAction);
         
-        mappingDatabaseImportAction.setEnabled(Configuration.getSingleton().isWriteMapping());
-        mappingDatabaseExportAction.setEnabled(Configuration.getSingleton().isWriteMapping());
-        mappingDatabaseEditAction.setEnabled(Configuration.getSingleton().isWriteMapping());
-        
-		register(exitAction);
-		// register(openXMLAction);
+        // ?
+		aboutAction = ActionFactory.ABOUT.create(window);
 		register(aboutAction);
-		register(saveAction);
-		register(exitActionQuit);
         
-        register(mappingDatabaseImportAction);
-        register(mappingDatabaseExportAction);
-        register(mappingDatabaseEditAction);
-		// register(helpAction);
-
 	}
 
 	@Override
-    protected void fillMenuBar(IMenuManager menuBar) {
-		MenuManager fileMenu = new MenuManager(Messages
-				.getString("ApplicationActionBarAdvisor.0"), Messages //$NON-NLS-1$
-				.getString("ApplicationActionBarAdvisor.1")); //$NON-NLS-1$
-		// fileMenu.add(newAction);
+    protected void fillMenuBar(IMenuManager menuBar) 
+    {
+		MenuManager fileMenu = new MenuManager(Messages.menu_model, 
+                                               Global.ET_CO + Messages.menu_model); 
+
 		fileMenu.add(openAction);
 		fileMenu.add(saveAction);
-
-		// fileMenu.add(saveAsAction);
-		// fileMenu.add(new Separator());
-
-		// fileMenu.add(openXMLAction);
-		// fileMenu.add(saveXMLAction);
-
 		fileMenu.add(new Separator());
 		fileMenu.add(exitAction);
 
-		MenuManager optionsMenu = new MenuManager(
-				Messages.getString("ApplicationActionBarAdvisor.2"), Messages.getString("ApplicationActionBarAdvisor.3")); //$NON-NLS-1$ //$NON-NLS-2$
+        
+		MenuManager optionsMenu = new MenuManager(Messages.menu_options, 
+                                                  Global.ET_CO + Messages.menu_options);
 		optionsMenu.add(optionsAction);
 		optionsMenu.add(updateAction);
 
-        MenuManager mappingMenu = new MenuManager(
-            Messages.getString("ApplicationActionBarAdvisor.4"), Messages.getString("ApplicationActionBarAdvisor.4")); //$NON-NLS-1$ //$NON-NLS-2$
+        
+        MenuManager mappingMenu =  new MenuManager(Messages.menu_couplingTable, 
+                                                   Global.ET_CO + Messages.menu_couplingTable);
         mappingMenu.add(mappingDatabaseImportAction);
         mappingMenu.add(mappingDatabaseExportAction);  
         fileMenu.add(new Separator());      
         mappingMenu.add(mappingDatabaseEditAction);        
         
-		MenuManager helpMenu = new MenuManager("&?", "?"); //$NON-NLS-1$ //$NON-NLS-2$
-		// helpMenu.add(helpAction);
+        
+		MenuManager helpMenu =  new MenuManager(Messages.menu_help, 
+                                                Global.ET_CO + Messages.menu_help);
 		helpMenu.add(aboutAction);
 
-		// MenuManager aboutMenu = new MenuManager("?", "?");
-		// aboutMenu.add(aboutAction);
-
+        
 		menuBar.add(fileMenu);
         menuBar.add(mappingMenu);
 		menuBar.add(optionsMenu);
 		menuBar.add(helpMenu);
-		// menuBar.add(aboutMenu);
 
 		saveAction.setEnabled(true);
 

@@ -216,6 +216,7 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 			characters();
 			return (date() || nothing());
 		} else if (dayDecimal()) {
+            return true;
 		} else if (milliseconds()) {
 		}
 		return false;

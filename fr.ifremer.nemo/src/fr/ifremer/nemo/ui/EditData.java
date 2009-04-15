@@ -189,6 +189,6 @@ public class EditData {
             loaded = false;
             disposeElements();
         }
-        ViewFile.tabItem3.setText(Messages.getString("EditData.1"));         //$NON-NLS-1$
+        ViewFile.tabItem3.setText(Messages.onglet_data); 
     }
 }

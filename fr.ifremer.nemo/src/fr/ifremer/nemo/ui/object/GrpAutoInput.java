@@ -29,10 +29,6 @@ import fr.ifremer.nemo.util.Messages;
  */
 public class GrpAutoInput implements UIobject
 {
-    
-    private final static String DEFAULT_LABEL   = Messages.getString("Drawing.7");      //$NON-NLS-1$
-    private final static String LABEL_VARI      = Messages.getString("Drawing.20");     //$NON-NLS-1$
-    private final static String LABEL_GROUP     = Messages.getString("Drawing.9");      //$NON-NLS-1$
 
     private Button buttonPos;
     private String labelButtonPos;
@@ -42,7 +38,7 @@ public class GrpAutoInput implements UIobject
     public GrpAutoInput(Shell shell, int nbLine, String labelButtonPos, boolean variablePos, MetaInData inData, boolean withCursor){
         
         this.labelButtonPos = labelButtonPos;
-        if (this.labelButtonPos == null) this.labelButtonPos = DEFAULT_LABEL;
+        if (this.labelButtonPos == null) this.labelButtonPos = Messages.label_auto_01;
         
         buttonPos = new Button(shell, SWT.RADIO);
 
@@ -64,7 +60,7 @@ public class GrpAutoInput implements UIobject
         buttonPos.setText(labelButtonPos);
 
         Group groupe = new Group(sectionClient, SWT.NONE);
-        groupe.setText(LABEL_GROUP);
+        groupe.setText(Messages.label_position);
         groupe.setLayout(new GridLayout());
 
         GridDataFactory.fillDefaults().grab(true, false).applyTo(groupe);
@@ -83,7 +79,7 @@ public class GrpAutoInput implements UIobject
         if (buttonVari != null){
             buttonVari.setParent(compo2);
             buttonVari.setBackground(compo2.getBackground());
-            buttonVari.setText(LABEL_VARI);
+            buttonVari.setText(Messages.label_variable);
             GridDataFactory.fillDefaults().grab(true, false).align(SWT.END, SWT.CENTER).applyTo(buttonVari);
 
             buttonVari

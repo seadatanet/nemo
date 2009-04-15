@@ -64,8 +64,8 @@ public class EditStation {
 		 */
 
 		ViewEdit.formEdition.getBody().setLayout(new GridLayout());
-		ViewEdit.formEdition.setText(Messages.getString("EditStation.1")); //$NON-NLS-1$
-
+		ViewEdit.formEdition.setText(Messages.edit_station_title);
+        
         shell.close();
         shell = new Shell();
 		disposeElements();        
@@ -90,7 +90,7 @@ public class EditStation {
 
 		// bouton validate
 		buttonValidate.setParent(ViewEdit.formEdition.getBody());
-		buttonValidate.setText(Messages.getString("EditStation.4")); //$NON-NLS-1$
+		buttonValidate.setText(Messages.button_validateStep);
         buttonValidate
         .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
             @Override
@@ -109,7 +109,7 @@ public class EditStation {
 
 		// bouton reset
 		buttonRAZ.setParent(ViewEdit.formEdition.getBody());
-		buttonRAZ.setText("Reset"); //$NON-NLS-1$
+		buttonRAZ.setText(Messages.button_reset);
         buttonRAZ
         .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
             @Override
@@ -121,7 +121,7 @@ public class EditStation {
 
         // bouton collapse all / expand all
 		buttonExpand.setParent(ViewEdit.formEdition.getBody());
-		buttonExpand.setText("+"); //$NON-NLS-1$
+		buttonExpand.setText(Global.PLUS);
         buttonExpand
         .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
             @Override
@@ -139,12 +139,12 @@ public class EditStation {
                 
                 if (!expand) {
                     // expand passe true
-                    buttonExpand.setText("-"); //$NON-NLS-1$
+                    buttonExpand.setText(Global.MOINS); 
                     expand = true;
                 } else {
                     expand = false;
                     // expand passe false
-                    buttonExpand.setText("+"); //$NON-NLS-1$
+                    buttonExpand.setText(Global.PLUS); 
                 }
 
                 // refresh global
@@ -180,54 +180,72 @@ public class EditStation {
     }
     
     private static void initStationSections(){
-        stationNumber = new StationSection(shell, NemoSection.S_STATIONNUMBER, Messages.getString(NemoSection.S_STATIONNUMBER), Messages.getString("EditStation.6"), true, true, 1);     //$NON-NLS-1$ 
+        stationNumber = new StationSection(shell, NemoSection.S_STATIONNUMBER, 
+                                           Messages.getString(NemoSection.S_STATIONNUMBER), 
+                                           Messages.edit_station_sectionReference_lib, true, true, 1);
         stationNumber.addManualInput(shell,null, ComboType.NONE, "1");                                                                  //$NON-NLS-1$ 
         if (!ViewFile.radTrajectoire.getSelection()){
             stationNumber.getManualInput().setNbColumns(2);
-            stationNumber.getManualInput().setLabelButton(Messages.getString("Drawing.6"));                                             //$NON-NLS-1$ 
+            stationNumber.getManualInput().setLabelButton(Messages.edit_station_refIncrement);
         }                                                                  
-        stationNumber.addAutoInput(shell,Messages.getString("Drawing.8"), false, MetaInData.FACULTATIF, false);                                //$NON-NLS-1$
+        stationNumber.addAutoInput(shell,Messages.label_auto_02, false, MetaInData.FACULTATIF, false);
         listeSectionsStation.add(stationNumber);
         
         if (!ViewFile.isCollection()) {
-            dataType = new StationSection(shell, NemoSection.S_DATATYPE, Messages.getString(NemoSection.S_DATATYPE), Messages.getString("Drawing.13"), true, false, 1);   //$NON-NLS-1$
+            dataType = new StationSection(shell, NemoSection.S_DATATYPE, 
+                                          Messages.getString(NemoSection.S_DATATYPE), 
+                                          Messages.edit_station_sectionDataType_lib, true, false, 1); 
             dataType.addCouple(shell, ComboType.DATATYPE, Global.EMPTY_STRING);
             listeSectionsStation.add(dataType);
         }
         
-        historique = new StationSection(shell, NemoSection.S_DCHIST, Messages.getString(NemoSection.S_DCHIST), Messages.getString("EditStation.8"), true, false, 2);       //$NON-NLS-1$ 
+        historique = new StationSection(shell, NemoSection.S_DCHIST, 
+                                        Messages.getString(NemoSection.S_DCHIST), 
+                                        Messages.edit_station_sectionHistory_lib, true, false, 2);
         historique.addManualInput(shell, null, ComboType.NONE, Global.EMPTY_STRING);
         historique.addAutoInput(shell, null, false, MetaInData.INTERDIT, true);
         listeSectionsStation.add(historique);
         
-        comments = new StationSection(shell, NemoSection.S_COMMENT, Messages.getString(NemoSection.S_COMMENT), Messages.getString("EditStation.10"), true, false, 1);        //$NON-NLS-1$
+        comments = new StationSection(shell, NemoSection.S_COMMENT, 
+                                      Messages.getString(NemoSection.S_COMMENT), 
+                                      Messages.edit_station_sectionComment_lib, true, false, 1);
         comments.addManualInput(shell, null, ComboType.BLOCK, Global.EMPTY_STRING);
         comments.addAutoInput(shell, null, true, MetaInData.INTERDIT, true);
         listeSectionsStation.add(comments);
         
-        surfaceSample = new StationSection(shell, NemoSection.S_SURFACE, Messages.getString(NemoSection.S_SURFACE), Messages.getString("EditStation.12"), true, false, 2);  //$NON-NLS-1$
+        surfaceSample = new StationSection(shell, NemoSection.S_SURFACE, 
+                                           Messages.getString(NemoSection.S_SURFACE), 
+                                           Messages.edit_station_sectionSurface_lib, true, false, 2);
         surfaceSample.addManualInput(shell, null, ComboType.NONE, Global.EMPTY_STRING);
         surfaceSample.addAutoInput(shell, null, false, MetaInData.INTERDIT, true);
         listeSectionsStation.add(surfaceSample);
         
-        utConvertion = new StationSection(shell, NemoSection.S_OFFSETTU, Messages.getString(NemoSection.S_OFFSETTU), Global.EMPTY_STRING, true, false, 1);  
+        utConvertion = new StationSection(shell, NemoSection.S_OFFSETTU, 
+                                          Messages.getString(NemoSection.S_OFFSETTU), 
+                                          Global.EMPTY_STRING, true, false, 1);  
         utConvertion.addManualInput(shell, null, ComboType.NONE, "0.0");                                                                  //$NON-NLS-1$
         utConvertion.addAutoInput(shell, null, false, MetaInData.INTERDIT, false);
         listeSectionsStation.add(utConvertion);
         
-        time = new StationSection(shell, NemoSection.S_TIME, Messages.getString(NemoSection.S_TIME), Messages.getString("EditStation.14"),  false, true, 1);          //$NON-NLS-1$ 
+        time = new StationSection(shell, NemoSection.S_TIME, 
+                                  Messages.getString(NemoSection.S_TIME), 
+                                  Messages.edit_station_sectionTime_lib,  false, true, 1);  
         time.addConverter(shell, ComboType.TIME, Global.EMPTY_STRING);
         time.addManualInput(shell, null, ComboType.NONE, Global.EMPTY_STRING);
         time.addAutoInput(shell, null, false, MetaInData.FACULTATIF, false);
         listeSectionsStation.add(time);
         
-        date = new StationSection(shell, NemoSection.S_DATE, Messages.getString(NemoSection.S_DATE), Messages.getString("EditStation.16"), false, true, 1);           //$NON-NLS-1$  
+        date = new StationSection(shell, NemoSection.S_DATE, 
+                                  Messages.getString(NemoSection.S_DATE), 
+                                  Messages.edit_station_sectionDate_lib, false, true, 1);   
         date.addConverter(shell, ComboType.DATE, Global.EMPTY_STRING);
         date.addManualInput(shell, null, ComboType.NONE, Global.EMPTY_STRING);
         date.addAutoInput(shell, null, false, MetaInData.FACULTATIF, false);
         listeSectionsStation.add(date);
         
-        latitude = new StationSection(shell, NemoSection.S_LAT, Messages.getString(NemoSection.S_LAT), Messages.getString("EditStation.20"), false, true, 1);       //$NON-NLS-1$  
+        latitude = new StationSection(shell, NemoSection.S_LAT, 
+                                      Messages.getString(NemoSection.S_LAT), 
+                                      Messages.edit_station_sectionLat_lib, false, true, 1);
         latitude.addConverter(shell, ComboType.LAT, Global.EMPTY_STRING);
         latitude.addManualInput(shell, null, ComboType.NONE, Global.EMPTY_STRING);
         latitude.addAutoInput(shell, null, true, MetaInData.FACULTATIF, false);
@@ -239,7 +257,9 @@ public class EditStation {
         listeSectionsStation.add(latitude);
         
         if (ViewFile.radSerieTempo.getSelection()){
-            endLatitude = new StationSection(shell, NemoSection.S_ELAT, Messages.getString(NemoSection.S_ELAT), Global.EMPTY_STRING, false, true, 1); 
+            endLatitude = new StationSection(shell, NemoSection.S_ELAT, 
+                                             Messages.getString(NemoSection.S_ELAT), 
+                                             Global.EMPTY_STRING, false, true, 1); 
             endLatitude.addConverter(shell, ComboType.LAT, Global.EMPTY_STRING);
             endLatitude.addManualInput(shell, null, ComboType.NONE, Global.EMPTY_STRING);
             endLatitude.addAutoInput(shell, null, true, MetaInData.INTERDIT, false);
@@ -248,7 +268,9 @@ public class EditStation {
         }
             
         
-        longitude = new StationSection(shell, NemoSection.S_LON, Messages.getString(NemoSection.S_LON), Messages.getString("EditStation.24"), false, true, 1);      //$NON-NLS-1$
+        longitude = new StationSection(shell, NemoSection.S_LON, 
+                                       Messages.getString(NemoSection.S_LON), 
+                                       Messages.edit_station_sectionLon_lib, false, true, 1); 
         longitude.addConverter(shell, ComboType.LON, Global.EMPTY_STRING);
         longitude.addManualInput(shell, null, ComboType.NONE, Global.EMPTY_STRING);
         longitude.addAutoInput(shell, null, true, MetaInData.FACULTATIF, false);
@@ -260,7 +282,9 @@ public class EditStation {
         listeSectionsStation.add(longitude);
         
         if (ViewFile.radSerieTempo.getSelection()){
-            endLongitude = new StationSection(shell, NemoSection.S_ELON, Messages.getString(NemoSection.S_ELON), Global.EMPTY_STRING, false, true, 1);     
+            endLongitude = new StationSection(shell, NemoSection.S_ELON, 
+                                              Messages.getString(NemoSection.S_ELON), 
+                                              Global.EMPTY_STRING, false, true, 1);     
             endLongitude.addConverter(shell, ComboType.LON, Global.EMPTY_STRING);
             endLongitude.addManualInput(shell, null, ComboType.NONE, Global.EMPTY_STRING);
             endLongitude.addAutoInput(shell, null, true, MetaInData.INTERDIT, false);
@@ -269,7 +293,9 @@ public class EditStation {
         }
         
         // FAE 1129 : ajout TEST / position variable à DEPTH
-        depth = new StationSection(shell, NemoSection.S_DEPTH, Messages.getString(NemoSection.S_DEPTH), Messages.getString("EditStation.28"), true, true, 1);           //$NON-NLS-1$
+        depth = new StationSection(shell, NemoSection.S_DEPTH, 
+                                   Messages.getString(NemoSection.S_DEPTH), 
+                                   Messages.edit_station_sectionDepth_lib, true, true, 1); 
         depth.addManualInput(shell, null, ComboType.NONE, Global.EMPTY_STRING);
         depth.addAutoInput(shell, null, true, MetaInData.FACULTATIF, false);
         // in trajectory, depth must be in data
@@ -281,35 +307,45 @@ public class EditStation {
         
         if (!ViewFile.radProfilVertical.getSelection()){
             if (ViewFile.radSerieTempo.getSelection()){
-                endDepth = new StationSection(shell, NemoSection.S_EDEPTH, Messages.getString(NemoSection.S_EDEPTH), Global.EMPTY_STRING,  true, true, 1);
+                endDepth = new StationSection(shell, NemoSection.S_EDEPTH, 
+                                              Messages.getString(NemoSection.S_EDEPTH), 
+                                              Global.EMPTY_STRING,  true, true, 1);
                 endDepth.addManualInput(shell, null, ComboType.NONE, Global.EMPTY_STRING);
                 endDepth.addAutoInput(shell, null, true, MetaInData.INTERDIT, false);
                 endDepth.setTimeSeriesInfo(true);
                 listeSectionsStation.add(endDepth);
             }
             
-            sensorDepth = new StationSection(shell, NemoSection.S_SENSORDEPTH, Messages.getString(NemoSection.S_SENSORDEPTH), Messages.getString("EditStation.32"), true, false, 1);     //$NON-NLS-1$
+            sensorDepth = new StationSection(shell, NemoSection.S_SENSORDEPTH, 
+                                             Messages.getString(NemoSection.S_SENSORDEPTH), 
+                                             Messages.edit_station_sectionSensorDepth_lib, true, false, 1); 
             sensorDepth.addManualInput(shell, null, ComboType.NONE, Global.EMPTY_STRING);
             sensorDepth.addAutoInput(shell, null, false, MetaInData.FACULTATIF, false);
             sensorDepth.setTimeSeriesInfo(true);
             listeSectionsStation.add(sensorDepth);
             
             if (ViewFile.radSerieTempo.getSelection()){
-                magneticDeclin = new StationSection(shell, NemoSection.S_MAGNETIC, Messages.getString(NemoSection.S_MAGNETIC), Messages.getString("EditStation.34"), true, false, 1);   //$NON-NLS-1$
+                magneticDeclin = new StationSection(shell, NemoSection.S_MAGNETIC, 
+                                                    Messages.getString(NemoSection.S_MAGNETIC), 
+                                                    Messages.edit_station_sectionMagn_lib, true, false, 1);
                 magneticDeclin.addManualInput(shell, null, ComboType.NONE, Global.EMPTY_STRING);
                 magneticDeclin.addAutoInput(shell, null, false, MetaInData.INTERDIT, false);
                 magneticDeclin.setTimeSeriesInfo(true);
                 listeSectionsStation.add(magneticDeclin);
             }
             
-            samplingRate = new StationSection(shell, NemoSection.S_SAMPLINGRATE, Messages.getString(NemoSection.S_SAMPLINGRATE), Messages.getString("EditStation.36"), true, true, 1);     //$NON-NLS-1$ 
+            samplingRate = new StationSection(shell, NemoSection.S_SAMPLINGRATE, 
+                                              Messages.getString(NemoSection.S_SAMPLINGRATE), 
+                                              Messages.edit_station_sectionSampling_lib, true, true, 1);
             samplingRate.addConverter(shell, ComboType.FRQ, "*1");                                                                                //$NON-NLS-1$
             samplingRate.addManualInput(shell, null, ComboType.NONE, "0");                                                                     //$NON-NLS-1$
             samplingRate.addAutoInput(shell, null, false, MetaInData.INTERDIT, false);
             samplingRate.setTimeSeriesInfo(true);
             listeSectionsStation.add(samplingRate);
         }
-        qcFlags = new QCflagsSection(shell, NemoSection.S_QCFLAG, Messages.getString(NemoSection.S_QCFLAG), Messages.getString("EditStation.18"));         //$NON-NLS-1$
+        qcFlags = new QCflagsSection(shell, NemoSection.S_QCFLAG, 
+                                     Messages.getString(NemoSection.S_QCFLAG), 
+                                     Messages.edit_station_sectionQCflags_lib);
         listeSectionsStation.add(qcFlags);
     }
     
@@ -357,7 +393,7 @@ public class EditStation {
             stationSection.initSection(s.getBody());
         }
 
-		ViewEdit.formEdition.setText(Messages.getString("EditStation.51")); //$NON-NLS-1$
+		ViewEdit.formEdition.setText(Messages.edit_station_title);
 
 		// refresh global
 		ViewEdit.formEdition.reflow(true);
@@ -431,7 +467,7 @@ public class EditStation {
             loaded = false;
             disposeElements();
         }
-        ViewFile.tabItem2.setText(Messages.getString("EditStation.1"));         //$NON-NLS-1$
+        ViewFile.tabItem2.setText(Messages.onglet_station);  
     }
     
 }

@@ -13,7 +13,6 @@ import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.ui.object.NemoSection;
 import fr.ifremer.nemo.util.DateTimeFormat;
-import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 
 /**
@@ -439,17 +438,38 @@ public class HorodatedParameterModel implements Cloneable, PathElementHandler,
 	public long convertTimestamp(String a_Line, long a_RefDate)
 			throws ParseException {
 		
-		String frgmntDate = getDateFragment().fullRetreive(a_Line);
-		String frgmntTime = getTimeFragment().fullRetreive(a_Line);
+        String frgmntFullDate = null;
+        String formatFullDate = null;
+        DateTimeFormat format = new DateTimeFormat();
+        
+        if (getDateFormat().getFormatString().contains("D.d") //$NON-NLS-1$
+                && getTimeFormat().getFormatString().contains("D.d")){ //$NON-NLS-1$
+            // convert Chronological Julian Date
+            LineFragment fullDate = new LineFragment(); 
+            fullDate.setFirstCharOffset(getDateFragment().getFirstCharOffset());
+            fullDate.setLastCharOffset(getTimeFragment().getLastCharOffset());
+            frgmntFullDate = fullDate.fullRetreive(a_Line);
+            
+            String dateTmp = getDateFormat().getFormatString();
+            String timeTmp = getTimeFormat().getFormatString();
+            String dateFormat = dateTmp.substring(0, dateTmp.indexOf(".")); //$NON-NLS-1$
+            String timeFormat = timeTmp.substring(timeTmp.indexOf(".")); //$NON-NLS-1$
+            formatFullDate = dateFormat + timeFormat;
+        }else{       
+    		String frgmntDate = getDateFragment().fullRetreive(a_Line);
+    		String frgmntTime = getTimeFragment().fullRetreive(a_Line);
+    
+    		// FAE 0001229 : Conversion date et heure : s'il manque des Zeros il faut que NEMO les mettent 
+            frgmntDate = frgmntDate.replace(' ', '0');
+            frgmntTime = frgmntTime.replace(' ', '0');
+            frgmntFullDate = frgmntDate + Global.SPACE + frgmntTime;
 
-		// FAE 0001229 : Conversion date et heure : s'il manque des Zeros il faut que NEMO les mettent 
-        frgmntDate = frgmntDate.replace(' ', '0');
-        frgmntTime = frgmntTime.replace(' ', '0');
-		
-		DateTimeFormat format = new DateTimeFormat();
-		format.setFormatString(getDateFormat().getFormatString() + Global.SPACE + getTimeFormat().getFormatString());
-		format.setRefDate(a_RefDate);
-		return (Long) format.parseObject(frgmntDate + Global.SPACE + frgmntTime);
+            formatFullDate = getDateFormat().getFormatString() + Global.SPACE + getTimeFormat().getFormatString();
+        }
+        format.setFormatString(formatFullDate);
+        format.setRefDate(a_RefDate);         
+        
+        return (Long) format.parseObject(frgmntFullDate);
 	}
     
     public DateTimeFormat getFormat(String champDest){

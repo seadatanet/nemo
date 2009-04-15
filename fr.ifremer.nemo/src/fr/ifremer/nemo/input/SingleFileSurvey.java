@@ -402,6 +402,8 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 			_stationModel.setTaille((int) file.length());
 			EditConversion.setErreurFichier(file.getName());
 			EditConversion.setErreurLigne(0);
+            
+//            _stationModel.setAddedParameterModel();
 
 			Station station = null;
 

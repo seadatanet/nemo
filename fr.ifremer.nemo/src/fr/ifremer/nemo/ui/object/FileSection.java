@@ -33,16 +33,18 @@ import fr.ifremer.nemo.util.Messages;
  */
 public class FileSection extends NemoSection
 {
-    protected Button radEOF, radLigne, radManuel;
+    protected Button radEOF, radLigne, radNextStation, radManuel;
     protected Text text;
     protected Button buttonSet;
     private String defaultValue;
+    private boolean inText;
 
 
-    public FileSection(Shell shell, String name, String title, String description, String defaultValue){
+    public FileSection(Shell shell, String name, String title, String description, String defaultValue, boolean inText){
         
         super(shell, name, title, description);
         this.defaultValue = defaultValue;
+        this.inText = inText;
         
         text = new Text(shell, SWT.BORDER);
         text.addModifyListener(new ModifyListener() {
@@ -60,9 +62,14 @@ public class FileSection extends NemoSection
             addRadListener(radEOF);
             radLigne = new Button(shell, SWT.RADIO);
             addRadListener(radLigne);
+            radNextStation = new Button(shell, SWT.RADIO);
+            addRadListener(radNextStation);
             radManuel = new Button(shell, SWT.RADIO);
-            addRadListener(radManuel);
-
+            addRadListener(radManuel);            
+        }
+        
+        if (inText)
+        {
             buttonSet.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
                 @Override
                 public void widgetSelected(
@@ -170,23 +177,28 @@ public class FileSection extends NemoSection
         if (name.equals(F_ENDDATA)){
             radEOF.setParent(compo);
             radEOF.setBackground(compo.getBackground());
-            radEOF.setText("EOF"); //$NON-NLS-1$
+            radEOF.setText(Messages.edit_file_idcEOF); 
             
             radLigne.setParent(compo);
             radLigne.setBackground(compo.getBackground());
-            radLigne.setText(Messages.getString("EditDesc.ligneVide")); //$NON-NLS-1$
+            radLigne.setText(Messages.edit_file_idcEmptyLine);
+            
+            radNextStation.setParent(compo);
+            radNextStation.setBackground(compo.getBackground());
+            radNextStation.setText(Messages.edit_file_idcNextStation);
             
             radManuel.setParent(compo);
             radManuel.setBackground(compo.getBackground());
-            radManuel.setText(Messages.getString("EditDesc.indicateur")); //$NON-NLS-1$
+            radManuel.setText(Messages.edit_file_idcManual); 
         }
         text.setParent(compo);
         text.setBackground(compo.getBackground());
-        text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+        //text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
         text.setText(defaultValue);
+        GridDataFactory.fillDefaults().grab(true, false).hint(400, 20).applyTo(compo);
         
         buttonSet.setParent(compo);
-        buttonSet.setText(Messages.getString("Drawing.1")); //$NON-NLS-1$
+        buttonSet.setText(Messages.button_set); 
         
         selectEndData(radEOF);
     }
@@ -241,6 +253,7 @@ public class FileSection extends NemoSection
             if (radio == radEOF) {
                 radEOF.setSelection(true);
                 radLigne.setSelection(false);
+                radNextStation.setSelection(false);
                 radManuel.setSelection(false);
     
                 text.setEnabled(false);
@@ -249,6 +262,16 @@ public class FileSection extends NemoSection
             } else if (radio == radLigne) {
                 radEOF.setSelection(false);
                 radLigne.setSelection(true);
+                radNextStation.setSelection(false);
+                radManuel.setSelection(false);
+    
+                text.setEnabled(false);
+                buttonSet.setEnabled(false);
+                
+            } else if (radio == radNextStation) {
+                radEOF.setSelection(false);
+                radLigne.setSelection(false);
+                radNextStation.setSelection(true);
                 radManuel.setSelection(false);
     
                 text.setEnabled(false);
@@ -257,6 +280,7 @@ public class FileSection extends NemoSection
             } else if (radio == radManuel) {
                 radEOF.setSelection(false);
                 radLigne.setSelection(false);
+                radNextStation.setSelection(false);
                 radManuel.setSelection(true);
     
                 text.setEnabled(true);
@@ -265,6 +289,7 @@ public class FileSection extends NemoSection
             } else {
                 radEOF.setSelection(true);
                 radLigne.setSelection(false);
+                radNextStation.setSelection(false);
                 radManuel.setSelection(false);
     
                 text.setEnabled(false);
@@ -303,6 +328,15 @@ public class FileSection extends NemoSection
     }
 
     /**
+     * Getter sur radNextStation.
+     * @return the radNextStation
+     */
+    public Button getRadNextStation()
+    {
+        return radNextStation;
+    }
+
+    /**
      * Getter sur radManuel.
      * @return the radManuel
      */
@@ -323,31 +357,49 @@ public class FileSection extends NemoSection
         return radLigne.getSelection();
     }
     
+    public boolean radNextStationSelected(){
+        return radNextStation.getSelection();
+    }
+    
     public boolean radManuelSelected(){
         return radManuel.getSelection();
     }
 
-
-    public boolean checkValue() {
-        Boolean ok;
-        String valeur, log;
-
-        ok = true;
-        log = Global.RN + "Section : " + title.trim() + Global.RN;  //$NON-NLS-1$
-        valeur = text.getText();
-
-        if (Pattern.matches("^[0-9][0-9]*$", valeur)) { //$NON-NLS-1$
-            ok = ok && true;
-        } else {
-            ok = ok && false;
-            log = log + "==>" + Messages.getString("Regexp.18"); //$NON-NLS-1$ //$NON-NLS-2$
-
+    public boolean checkMandatory()
+    {
+        boolean ok = true;
+        String log = Global.RN + "Section : " + title.trim() + Global.RN + "==>";  //$NON-NLS-1$  //$NON-NLS-2$
+        
+        if (!inText){
+            ok = checkIntegerValue();
+            log = log + Messages.error_notValid;
+        }else{
+          if (name.equals(F_ENDDATA) && radManuel.getSelection()) {
+                  ok = checkStringValue();
+          }
+          log = log + Messages.error_file_idcEmpty;
         }
-
-        if (ok) {
-            // log = log + "...ok";
-        } else {
+        
+        if (!ok) 
             Utils.messageErreurAppend(log);
+        
+        return ok;
+    }
+
+    private boolean checkIntegerValue() 
+    {
+        boolean ok = true;
+        if (!Pattern.matches("^[0-9][0-9]*$", getValue())) { //$NON-NLS-1$
+            ok = false;
+        }
+        return ok;
+    }
+
+    private boolean checkStringValue() 
+    {
+        boolean ok = true;
+        if (getValue().equals(Global.EMPTY_STRING)) { 
+            ok = false;
         }
         return ok;
     }

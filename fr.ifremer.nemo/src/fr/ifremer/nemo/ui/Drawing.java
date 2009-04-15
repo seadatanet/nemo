@@ -26,123 +26,6 @@ public class Drawing {
 
 	public static Composite sectionClientType;
 
-//	public static void sectionComboInjectNbreLignes(ScrolledForm form,
-//			String nomSection, String description, Section section,
-//			Button radEOF, Button radLigne, Button radManuel, Text txtManuel, Button btnInject) {
-//
-//		final Text manuel;
-//		final ScrolledForm forme;
-//		final Button inject;
-//		
-//		forme = form;
-//
-//		section.setParent(form);
-//
-//		section = ViewEdit.toolkitEdition.createSection(form.getBody(),
-//				Section.DESCRIPTION | Section.TITLE_BAR | Section.TWISTIE
-//						| Section.COMPACT);
-//
-//		section.addExpansionListener(new ExpansionAdapter() {
-//			public void expansionStateChanged(ExpansionEvent e) {
-//				forme.reflow(true);
-//			}
-//		});
-//        
-//		Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL);
-//		section.setFont(font);
-//		section.setText(nomSection);
-//		section.setDescription(description);
-//		Composite sectionClient = ViewEdit.toolkitEdition
-//				.createComposite(section);
-//		sectionClient.setLayout(new GridLayout());
-//		GridData gd = new GridData();
-//		gd.horizontalSpan = 2;
-//
-//		// saisie manuelle
-//		// faire groupe et radios
-//
-//		// EOF
-//		radEOF.setParent(sectionClient);
-//		radEOF.setText("EOF");
-//		
-//		// Ligne vide
-//		radLigne.setParent(sectionClient);
-//		radLigne.setText(Messages.getString("EditDesc.ligneVide"));
-//		
-//		// Indicateur manuel
-//		radManuel.setParent(sectionClient);
-//		radManuel.setText(Messages.getString("EditDesc.indicateur"));
-//		
-//		txtManuel.setParent(sectionClient);
-//		manuel = txtManuel;
-//		
-//		// bouton d'injection de la position des valeurs
-//		btnInject.setParent(sectionClient);
-//		btnInject.setText(Messages.getString("Drawing.1"));
-//		inject = btnInject;
-//		
-//		section.setClient(sectionClient);
-//		radEOF
-//				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-//					@Override
-//                    public void widgetSelected(
-//							org.eclipse.swt.events.SelectionEvent g) {
-//                        EditDesc.selectComboEnd(EditDesc.radEOF);
-//					}
-//				});
-//		
-//		radLigne
-//				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-//					@Override
-//                    public void widgetSelected(
-//							org.eclipse.swt.events.SelectionEvent g) {
-//                        EditDesc.selectComboEnd(EditDesc.radLigne);
-//					}
-//				});
-//
-//		radManuel
-//				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-//					@Override
-//                    public void widgetSelected(
-//							org.eclipse.swt.events.SelectionEvent g) {
-//                        EditDesc.selectComboEnd(EditDesc.radManuel);
-//					}
-//				});
-//		
-//		// bouton inject
-//		btnInject
-//				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-//					@Override
-//                    public void widgetSelected(
-//							org.eclipse.swt.events.SelectionEvent g) {
-//						manuel.setText(ViewFile.textAreaDescription.getText().substring(
-//								ViewFile.textAreaDescription.getSelection().x, 
-//								ViewFile.textAreaDescription.getSelection().y));
-//						manuel.pack();
-//
-//					}
-//				});
-//		
-//
-//		// saisie manuelle par defaut et groupe desactive
-//		if (DataModel.ouverture) {
-//			if (DataModel.stationModel_modele.isEndOnEOF()) {
-//				EditDesc.selectComboEnd(EditDesc.radEOF);
-//			} else if (DataModel.stationModel_modele.isEndOnEOF()) {
-//				EditDesc.selectComboEnd(EditDesc.radLigne);
-//			} else if (DataModel.stationModel_modele.isEndOnEOF()) {
-//				EditDesc.selectComboEnd(EditDesc.radManuel);
-//			}
-//		} else {
-//			// par defaut manuel
-//			EditDesc.selectComboEnd(EditDesc.radEOF);
-//		}
-//		
-//		
-//
-//		// ajout de la section dans la liste des sections de description
-//		ajoutSectionDansListeDesc(section);
-//    }
 
 	public static void sectionLabelTextInjectNbreLignes(ScrolledForm form,
 			String nomSection, String description, Section section, Text manuel) {
@@ -188,7 +71,7 @@ public class Drawing {
 
 		// bouton d'injection de la position des valeurs
 		Button buttonInject = new Button(sectionClient, SWT.NONE);
-		buttonInject.setText(Messages.getString("Drawing.1")); //$NON-NLS-1$
+		buttonInject.setText(Messages.button_set); 
 
 		section.setClient(sectionClient);
 		// listener bouton inject
@@ -315,13 +198,12 @@ public class Drawing {
 //		 Combo pays
 		if (blnPays) {
 			Label labelPays = new Label(sectionClient, SWT.NULL);
-			labelPays.setText(Messages.getString("EditSurvey.21"));
+			labelPays.setText(Messages.edit_cruise_country);
 			labelPays.setParent(sectionClient);
 			labelPays.setLayoutData(
 					new GridData(GridData.FILL_HORIZONTAL));
 
 			EditSurvey.comboCountries.setParent(sectionClient);
-			//EditSurvey.comboCountries.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
             GridDataFactory.swtDefaults().hint(385, 12).applyTo(EditSurvey.comboCountries);
 		}
 			
@@ -333,20 +215,18 @@ public class Drawing {
 
 			// affichage zone texte dans la section
 			listeText.get(i).setParent(sectionClient);
-			//listeText.get(i).setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
             GridDataFactory.swtDefaults().hint(400, 12).applyTo(listeText.get(i));
 		}
 		
 //		 Combo region
 		if (!blnPays) {
 			Label labelReg = new Label(sectionClient, SWT.NULL);
-			labelReg.setText(Messages.getString("EditSurvey.18"));
+			labelReg.setText(Messages.edit_cruise_region);
 			labelReg.setParent(sectionClient);
 			labelReg.setLayoutData(
 					new GridData(GridData.FILL_HORIZONTAL));
 
 			EditSurvey.comboRegion.setParent(sectionClient);
-			//EditSurvey.comboRegion.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
             GridDataFactory.swtDefaults().hint(385, 12).applyTo(EditSurvey.comboRegion);
 			
 			// Creation du menu contextuel pour la recherche filtree
@@ -362,8 +242,7 @@ public class Drawing {
 	}
 
 	public static void sectionNlabelsNtextConfidentialite(Section section,
-			String nomSection, ArrayList<Text> listeText,
-			ArrayList<String> listeNoms, String descriptionSection,
+			String nomSection, String descriptionSection,
 			Combo confidentialite) {
 
 
@@ -397,7 +276,7 @@ public class Drawing {
 		
 		// combolist centres de donnees
 		Label label = new Label(sectionClient, SWT.NULL);
-		label.setText(Messages.getString("EditSurvey.62"));
+		label.setText(Messages.edit_cruise_dataCenter);
 		EditSurvey.comboDataCentres.setParent(sectionClient); 		
 		
 		GridLayoutFactory.fillDefaults().applyTo(EditSurvey.comboDataCentres);
@@ -406,7 +285,7 @@ public class Drawing {
 		
 		// ajout de la combolist confidentialite
 		Label label2 = new Label(sectionClient, SWT.NULL);
-		label2.setText(Messages.getString("EditSurvey.28"));
+		label2.setText(Messages.edit_cruise_confident);
 		confidentialite.setParent(sectionClient);
 
 		section.setClient(sectionClient);
@@ -417,7 +296,6 @@ public class Drawing {
 	}
 
 	public static void sectionTypeDonnees(Section section, String nomSection,
-			ArrayList<Text> listeText, ArrayList<String> listeNoms,
 			String descriptionSection, List liste) {
 
 		// affichage section

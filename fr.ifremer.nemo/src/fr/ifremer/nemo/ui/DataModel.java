@@ -14,7 +14,6 @@ import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.domain.TimeSeriesInformation;
 import fr.ifremer.nemo.domain.Trajectory;
-import fr.ifremer.nemo.domain.AddedParameter.IdParameter;
 import fr.ifremer.nemo.input.DirectoryBasedSurvey;
 import fr.ifremer.nemo.input.InputModel;
 import fr.ifremer.nemo.input.LineFragment;
@@ -110,7 +109,7 @@ public class DataModel
 
     public static void initDesc()
     {
-
+        int fileHeader = 0;
         // taille du header fichier
         if (ViewFile.dossierCampagne)
         {
@@ -120,8 +119,8 @@ public class DataModel
         }
         else
         {
-            singleSurvey.setHeaderLinesNumber(Integer
-                .parseInt(EditDesc.sectionEnteteFichier.getValue()));
+            fileHeader = Integer.parseInt(EditDesc.sectionEnteteFichier.getValue());
+            singleSurvey.setHeaderLinesNumber(fileHeader);
             stationModel = singleSurvey.getStationModel();
         }
 
@@ -133,53 +132,7 @@ public class DataModel
                 || ViewFile.radTrajectoire.getSelection())
         {
             timeSeriesInformation = stationModel.getTimeSeriesInformation();
-
-            if (!ViewFile.textTempoHeureRef.getText().equals(Global.EMPTY_STRING)) 
-            {
-                inputModel.setRefDateBased(true);
-
-                // conversion en LONG avant injection dans dataModel
-                // DATE REF
-                DateTimeFormat dateFormat;
-                Long dateLong = null, timeLong = null;
-                try
-                {
-                    dateFormat = new DateTimeFormat();
-                    dateFormat.setFormatString("dd/MM/yyyy"); //$NON-NLS-1$
-                    dateLong =
-                        (Long) dateFormat.parseObject(ViewFile.textTempoDateRef
-                            .getText());
-                }
-                catch (ParseException e)
-                {
-                    // 
-                    e.printStackTrace();
-                }
-
-                inputModel.setRefDate(dateLong);
-
-                // HEURE REF
-                try
-                {
-                    DateTimeFormat timeFormat = new DateTimeFormat();
-                    timeFormat.setFormatString("hh24:mm"); //$NON-NLS-1$
-                    timeLong =
-                        (Long) timeFormat
-                            .parseObject(ViewFile.textTempoHeureRef.getText());
-                }
-                catch (ParseException e)
-                {
-                    // 
-                    e.printStackTrace();
-                }
-
-                inputModel.setRefTime(timeLong);
-            }
-            else
-            {
-                // pas d'heure de ref
-                inputModel.setRefDateBased(false);
-            }
+            inputModel.setRefDateBased(false);
 
         }
 
@@ -228,8 +181,24 @@ public class DataModel
         }
 
         // nombre lignes entete station
-        stationModel.setNumberOfLines(Integer
-            .parseInt(EditDesc.sectionEnteteStation.getValue()));
+        String stationPattern = EditDesc.sectionEnteteStation.getValue();
+        stationModel.setEndStationHeader(stationPattern);
+        
+        int numLine = 0;
+        if (!stationPattern.equals(Global.EMPTY_STRING)){
+            String[] texte = Utils.texteBrut.split("\n"); //$NON-NLS-1$
+            for(numLine = 0; numLine < texte.length; numLine++){
+                if (texte[numLine].startsWith(stationPattern)){
+                    numLine++;
+                    break;
+                }
+            }
+        }
+        int stationHeader = numLine;
+        if (stationHeader > 0)
+            stationHeader = numLine - fileHeader;
+        stationModel.setNumberOfLines(stationHeader);    
+        
 
         // nombre de lignes de fin
         stationModel.setEndData(Integer.parseInt(EditDesc.sectionFinStation.getValue()));
@@ -239,18 +208,29 @@ public class DataModel
         {
             stationModel.setEndOnEmptyLine(false);
             stationModel.setEndOnEOF(true);
+            stationModel.setEndOnNextStation(false);
             stationModel.setEndOnPattern(false);
         }
         else if (EditDesc.sectionRuptureDonnees.radLigneSelected())
         {
             stationModel.setEndOnEmptyLine(true);
             stationModel.setEndOnEOF(false);
+            stationModel.setEndOnNextStation(false);
             stationModel.setEndOnPattern(false);
         }
+        else if (EditDesc.sectionRuptureDonnees.radNextStationSelected())
+        {
+            stationModel.setEndOnEmptyLine(false);
+            stationModel.setEndOnEOF(false);
+            stationModel.setEndOnNextStation(true);
+            stationModel.setEndOnPattern(false);
+        }
+        
         else if (EditDesc.sectionRuptureDonnees.radManuelSelected())
         {
             stationModel.setEndOnEmptyLine(false);
             stationModel.setEndOnEOF(false);
+            stationModel.setEndOnNextStation(false);
             stationModel.setEndOnPattern(true);
             stationModel.setEndDataPattern(EditDesc.sectionRuptureDonnees.getValue());
         }
@@ -495,9 +475,9 @@ public class DataModel
 
     public static void initData()
     {
-        boolean existDEPH = false;
+//        boolean existDEPH = false;
+//        String formatPRES = Global.EMPTY_STRING;
         int indexPRES = -1;
-        String formatPRES = Global.EMPTY_STRING;
 
         // mise e jour des types avant validation
         TableData.majTypeData();
@@ -552,10 +532,10 @@ public class DataModel
                 parameterModel.setFlag(flag);
             }
 
-            if (code.trim().equals("DEPH")) existDEPH = true; //$NON-NLS-1$
+//            if (code.trim().equals("DEPH")) existDEPH = true; //$NON-NLS-1$
             if (code.trim().equals("PRES")){ //$NON-NLS-1$
                 indexPRES = i;
-                formatPRES = para.getFormat();
+//                formatPRES = para.getFormat();
             }
 
             stationModel.addParameterModel(parameterModel);
@@ -564,59 +544,59 @@ public class DataModel
         // enregistrement de l'indexPRES
         stationModel.setPresIndex(indexPRES);
 
-        // *** Ajouts automatiques de certains paramètres
-        if (ViewFile.radProfilVertical.getSelection())
-        {
-            // Profile vertical
-            if ((!existDEPH) && (indexPRES != -1)){
-                // ajout de DEPH calculé à partir de PRES
-                //parameterModel.setFlag(stationModel.parameterModelsAt(indexPRES).getFlag());
-                stationModel.addFixedParameterModel(IdParameter.DEPH, formatPRES);
-            }
-        }
-        else
-        {       
-            // Serie temporelle ou Trajectoire     
-            // Ajout YEAR, MNTH, DAYX et TIME pour Medatlas
-            stationModel.addFixedParameterModel(IdParameter.YEAR);
-            stationModel.addFixedParameterModel(IdParameter.MNTH);
-            stationModel.addFixedParameterModel(IdParameter.DAYX);
-            stationModel.addFixedParameterModel(IdParameter.TIME);
-            
-            if (ViewFile.radSerieTempo.getSelection())
-            {
-                // Ajout de "Chronological Julian Date" ou "time-ISO8601 pour ODV
-                if (Utils.configuration.isDateISO()){
-                    stationModel.addFixedParameterModel(IdParameter.DTUT);  
-                }else{                    
-                    stationModel.addFixedParameterModel(IdParameter.CJDY);     
-                }
-                
-                // Serie temporelle
-                // Ajout du paramètre DEPH ( = Sensor Depth) pour ODV
-                if (!existDEPH)
-                    stationModel.addFixedParameterModel(IdParameter.DEPH);          
-            }
-            else
-            {
-                // Trajectoire
-                // Ajout LATX et LONX pour Medatlas
-                stationModel.addFixedParameterModel(IdParameter.LATX);  
-                stationModel.addFixedParameterModel(IdParameter.LONX);  
-                
-                if (EditStation.depth.getValue() != null 
-                        && !EditStation.depth.getValue().trim().equals(Global.EMPTY_STRING)
-                        && EditStation.depth.isInData()){
-                    // Ajout BATH si "Pofondeur" saisie dans les données pour Medatlas
-                    stationModel.addFixedParameterModel(IdParameter.BATH);
-                }
-                
-                // Ajout du paramètre DEPH ( = Sensor Depth) pour ODV
-                if (!existDEPH)
-                    stationModel.addFixedParameterModel(IdParameter.DEPH);  
-                
-            }
-        }
+//        // *** Ajouts automatiques de certains paramètres
+//        if (ViewFile.radProfilVertical.getSelection())
+//        {
+//            // Profile vertical
+//            if ((!existDEPH) && (indexPRES != -1)){
+//                // ajout de DEPH calculé à partir de PRES
+//                //parameterModel.setFlag(stationModel.parameterModelsAt(indexPRES).getFlag());
+//                stationModel.addFixedParameterModel(IdParameter.DEPH, formatPRES);
+//            }
+//        }
+//        else
+//        {       
+//            // Serie temporelle ou Trajectoire     
+//            // Ajout YEAR, MNTH, DAYX et TIME pour Medatlas
+//            stationModel.addFixedParameterModel(IdParameter.YEAR);
+//            stationModel.addFixedParameterModel(IdParameter.MNTH);
+//            stationModel.addFixedParameterModel(IdParameter.DAYX);
+//            stationModel.addFixedParameterModel(IdParameter.TIME);
+//            
+//            if (ViewFile.radSerieTempo.getSelection())
+//            {
+//                // Ajout de "Chronological Julian Date" ou "time-ISO8601 pour ODV
+//                if (Utils.configuration.isDateISO()){
+//                    stationModel.addFixedParameterModel(IdParameter.DTUT);  
+//                }else{                    
+//                    stationModel.addFixedParameterModel(IdParameter.CJDY);     
+//                }
+//                
+//                // Serie temporelle
+//                // Ajout du paramètre DEPH ( = Sensor Depth) pour ODV
+//                if (!existDEPH)
+//                    stationModel.addFixedParameterModel(IdParameter.DEPH);          
+//            }
+//            else
+//            {
+//                // Trajectoire
+//                // Ajout LATX et LONX pour Medatlas
+//                stationModel.addFixedParameterModel(IdParameter.LATX);  
+//                stationModel.addFixedParameterModel(IdParameter.LONX);  
+//                
+//                if (EditStation.depth.getValue() != null 
+//                        && !EditStation.depth.getValue().trim().equals(Global.EMPTY_STRING)
+//                        && EditStation.depth.isInData()){
+//                    // Ajout BATH si "Pofondeur" saisie dans les données pour Medatlas
+//                    stationModel.addFixedParameterModel(IdParameter.BATH);
+//                }
+//                
+//                // Ajout du paramètre DEPH ( = Sensor Depth) pour ODV
+//                if (!existDEPH)
+//                    stationModel.addFixedParameterModel(IdParameter.DEPH);  
+//                
+//            }
+//        }
         
         
         EditData.validee = true;
@@ -768,8 +748,7 @@ public class DataModel
                     ViewFile.radioSeparateurAutre.setSelection(false);
                     ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
                 }
-                else if (Global.COMMA
-                    .equals(strSeparator))
+                else if (Global.COMMA.equals(strSeparator))
                 {
                     // Virgule
                     ViewFile.radioTabulation.setSelection(false);
@@ -779,8 +758,7 @@ public class DataModel
                     ViewFile.radioSeparateurAutre.setSelection(false);
                     ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
                 }
-                else if (Global.SPACE
-                    .equals(strSeparator))
+                else if (Global.SPACE.equals(strSeparator))
                 {
                     // Espace
                     ViewFile.radioTabulation.setSelection(false);
@@ -802,71 +780,22 @@ public class DataModel
                 }
             }
     
-    
-            // test si serie tempo
-            if (stationModel_modele.getTimeSeriesInformation() != null)
-            {
-                // ViewFile.groupTempo.setVisible(true);
-    
-                // heure et date de ref
-    
-                if (inputModel_modele.isRefDateBased())
-                {
-                    // date de ref / heure de ref
-    
-                    // reconversion de LONG vers format normal
-                    Formatter formatter = new Formatter();
-    
-                    try
-                    {
-                        ViewFile.textTempoDateRef.setText(formatter.formatDateTime(
-                            "dd/MM/yyyy", inputModel_modele.getRefDate())); //$NON-NLS-1$
-                    }
-                    catch (ParseException e)
-                    {
-    
-                        e.printStackTrace();
-                    }
-                    // le format de la comboList correspondant est en 0
-                    ViewFile.comboTempoDate.select(0);
-    
-                    // reconversion de LONG vers format normal
-                    formatter = new Formatter();
-    
-                    try
-                    {
-                        ViewFile.textTempoHeureRef.setText(formatter
-                            .formatDateTime("hh24:mm", inputModel_modele //$NON-NLS-1$
-                                .getRefTime()));
-                    }
-                    catch (ParseException e)
-                    {
-    
-                        e.printStackTrace();
-                    }
-                    // le format de la comboList correspondant est en 0
-                    ViewFile.comboTempoHeure.select(0);
-    
-                }
-                else
-                {
-                    // pas de date de ref
-    
-                }
-    
-            }
-    
             // nombre lignes entete station
-    
-            EditDesc.sectionEnteteStation.setValue(Global.EMPTY_STRING 
-                    + stationModel_modele.getNumberOfLines());
+            String stationPattern = stationModel_modele.getEndStationHeader();
+            if (stationPattern.equals(Global.EMPTY_STRING)){
+                // ancien modèle ? on recherche la ligne saisie pour avoir la correspondance
+                int numLigneStation = stationModel_modele.getNumberOfLines();
+                if (numLigneStation > 0){
+                    String[] texte = Utils.texteBrut.split("\n"); //$NON-NLS-1$
+                    stationPattern = texte[numLigneStation - 1];
+                }
+            }
+            EditDesc.sectionEnteteStation.setValue(stationPattern);           
+            
     
             // nombre de lignes de fin
-            EditDesc.sectionFinStation.setValue(Global.EMPTY_STRING 
-                    + stationModel_modele.getEndData()); 
+            EditDesc.sectionFinStation.setValue(String.valueOf(stationModel_modele.getEndData())); 
     
-            // metaInData
-            // stationModel.setMetaInData(false);
     
             // pattern de fin fourni ou pas
     
@@ -876,6 +805,8 @@ public class DataModel
                 endData.selectEndData(endData.getRadEOF());
             }else if (stationModel_modele.isEndOnEmptyLine()){
                 endData.selectEndData(endData.getRadLigne());
+            }else if (stationModel_modele.isEndOnNextStation()){
+                endData.selectEndData(endData.getRadNextStation());
             }else if (stationModel_modele.isEndOnPattern()){
                 endData.selectEndData(endData.getRadManuel());
                 endData.setValue(stationModel_modele.getEndDataPattern());

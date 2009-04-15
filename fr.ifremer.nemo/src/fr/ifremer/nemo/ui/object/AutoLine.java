@@ -38,12 +38,6 @@ public class AutoLine implements UIobject
         OBLIGATOIRE, INTERDIT, FACULTATIF;
     }
     
-    private final static String LABEL_GROUP     = Messages.getString("Drawing.9");      //$NON-NLS-1$
-    private final static String LABEL_LINE      = Messages.getString("Drawing.10");     //$NON-NLS-1$
-    private final static String LABEL_START     = Messages.getString("Drawing.11");     //$NON-NLS-1$
-    private final static String LABEL_END       = Messages.getString("Drawing.12");     //$NON-NLS-1$
-    private final static String LABEL_SET       = Messages.getString("Drawing.1");      //$NON-NLS-1$
-    
     protected Couple numberLine;
     protected Couple start;
     protected Couple end;
@@ -60,9 +54,9 @@ public class AutoLine implements UIobject
         this.enableInData = enableInData;
         String addedLabel = Global.EMPTY_STRING;
         if (!unique) addedLabel = Global.SPACE + (i + 1);            
-        numberLine = new Couple(shell, null, (LABEL_LINE + addedLabel), ComboType.NONE, Global.EMPTY_STRING);
-        start = new Couple(shell, null, (LABEL_START + addedLabel), ComboType.NONE, Global.EMPTY_STRING);
-        end = new Couple(shell, null, (LABEL_END + addedLabel), ComboType.NONE, Global.EMPTY_STRING);
+        numberLine = new Couple(shell, null, (Messages.label_line + addedLabel), ComboType.NONE, Global.EMPTY_STRING);
+        start = new Couple(shell, null, (Messages.label_start + addedLabel), ComboType.NONE, Global.EMPTY_STRING);
+        end = new Couple(shell, null, (Messages.label_end + addedLabel), ComboType.NONE, Global.EMPTY_STRING);
         buttonSet = new Button(shell, SWT.NULL);
         if (withCursor) cursor = new Cursor();
     }
@@ -73,7 +67,7 @@ public class AutoLine implements UIobject
     public void draw(Composite compo)
     {
         Group group = new Group(compo, SWT.NONE);
-        group.setText(LABEL_GROUP);
+        group.setText(Messages.label_position);
         group.setLayout(new GridLayout());
 
         GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
@@ -113,9 +107,9 @@ public class AutoLine implements UIobject
     public void drawSet(Composite compo, int i)
     {
         String addedLabel = Global.EMPTY_STRING;
-        if (!unique) addedLabel = Global.SPACE + LABEL_LINE + Global.SPACE + (i + 1);            
+        if (!unique) addedLabel = Global.SPACE + Messages.label_line + Global.SPACE + (i + 1);            
         buttonSet.setParent(compo);
-        buttonSet.setText(LABEL_SET + addedLabel);
+        buttonSet.setText(Messages.button_set + addedLabel);
         
         buttonSet
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -156,7 +150,7 @@ public class AutoLine implements UIobject
                         }
                         
                         // test sur 1ère ligne de données ou Métadata
-                        boolean ligneOK = checkInDataOrHeader(String.valueOf(lign), Global.SPACE);        //$NON-NLS-1$
+                        boolean ligneOK = checkInDataOrHeader(String.valueOf(lign), Global.SPACE); 
                         
                         if (ligneOK){
                             // réactivation du champ "ligne"
@@ -560,7 +554,4 @@ public class AutoLine implements UIobject
         return true;
     }
     
-//    public void diseable(){
-//        if (numberLine)
-//    }
 }
