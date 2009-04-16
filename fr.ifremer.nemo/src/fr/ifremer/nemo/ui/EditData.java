@@ -55,7 +55,7 @@ public class EditData {
 		 */
 
 		ViewEdit.formEdition.getBody().setLayout(new GridLayout());
-		ViewEdit.formEdition.setText(Messages.getString("EditData.8")); //$NON-NLS-1$
+		ViewEdit.formEdition.setText(Messages.edit_data_title); 
 
         shell.close();
         shell = new Shell();
@@ -66,11 +66,11 @@ public class EditData {
 
 		// bouton validate
 		buttonValidate.setParent(ViewEdit.formEdition.getBody());
-		buttonValidate.setText(Messages.getString("EditData.3")); //$NON-NLS-1$
+		buttonValidate.setText(Messages.button_validateStep);
 
 		// reset
 		buttonRAZ.setParent(ViewEdit.formEdition.getBody());
-		buttonRAZ.setText("Reset"); //$NON-NLS-1$
+		buttonRAZ.setText(Messages.button_reset); 
 
 		formEdition.reflow(true);
 		ViewEdit.formEdition.reflow(true);
@@ -123,7 +123,7 @@ public class EditData {
 		EditData.buttonRAZ.setParent(shell);
 
 		// effacement titre formulaire
-		ViewEdit.formEdition.setText(""); //$NON-NLS-1$
+		ViewEdit.formEdition.setText(Global.EMPTY_STRING);
 
 		// refresh global
 		ViewEdit.formEdition.reflow(true);
@@ -160,7 +160,7 @@ public class EditData {
 		buttonValidate.setParent(s.getBody());
 		buttonRAZ.setParent(s.getBody());
 
-		ViewEdit.formEdition.setText(Messages.getString("EditData.20")); //$NON-NLS-1$
+		ViewEdit.formEdition.setText(Messages.edit_data_title);
 
 		// refresh global
 		ViewEdit.formEdition.reflow(true);

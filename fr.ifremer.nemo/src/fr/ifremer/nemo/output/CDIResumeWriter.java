@@ -283,7 +283,7 @@ public class CDIResumeWriter {
 				MessageBox mb = new MessageBox(shell2, SWT.ICON_WARNING
 						| SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
 
-				mb.setMessage(Messages.getString("EditConversion.14")); //$NON-NLS-1$
+				mb.setMessage(Messages.confirm_eraseFile);
 
 				int reponse = mb.open();
 				if (reponse == SWT.NO) {

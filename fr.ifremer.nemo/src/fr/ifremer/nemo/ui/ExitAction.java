@@ -32,7 +32,7 @@ public class ExitAction extends Action implements ISelectionListener,
 
 		this.window = window;
 		setId(ID);
-		setText(Messages.getString("ExitAction.1")); //$NON-NLS-1$
+		setText(Messages.menu_quit); 
 		window.getSelectionService().addSelectionListener(this);
 
 	}
@@ -46,15 +46,8 @@ public class ExitAction extends Action implements ISelectionListener,
 
 		Shell s = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		MessageBox mb = new MessageBox(s, SWT.ICON_QUESTION | SWT.YES | SWT.NO);
-		mb.setMessage(Messages.getString("ExitAction.2")); //$NON-NLS-1$
-		// reponse = mb.open();
-		
-		// if (reponse == SWT.YES){
+		mb.setMessage(Messages.confirm_quit);
 		ApplicationActionBarAdvisor.exitActionQuit.run();
-		// Application.display.dispose();
-
-		// }
-
 	}
 
 	public void selectionChanged(IWorkbenchPart part, ISelection incoming) {

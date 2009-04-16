@@ -458,16 +458,16 @@ public class Utils {
 
 	public static void calculRealOffsetFin(HeaderFragment frag) {
 		int offsetFin;
-		int enteteFichier = Integer.parseInt(EditDesc.sectionEnteteFichier.getValue());
+		int enteteFichier = Integer.parseInt(EditDesc.sectionEnteteFichier.getNumberValue());
 
 		// calcul de l'offset de fin après rechargement du modèle
 		if (enteteFichier > 0) {
 			// prise en compte de l'entête de fichier
 			offsetFin = frag.getLastCharOffset()
 					+ taillesCumLignes[frag.getLastLine()
-							+ Integer.parseInt(EditDesc.sectionEnteteFichier.getValue())]
+							+ Integer.parseInt(EditDesc.sectionEnteteFichier.getNumberValue())]
 					- taillesCumLignes[frag.getFirstLine()
-							+ Integer.parseInt(EditDesc.sectionEnteteFichier.getValue())];
+							+ Integer.parseInt(EditDesc.sectionEnteteFichier.getNumberValue())];
 		} else {
 			// il n'y a pas d'entête de fichier
 			offsetFin = frag.getLastCharOffset()

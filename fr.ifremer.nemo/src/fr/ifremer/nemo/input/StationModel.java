@@ -36,7 +36,9 @@ import fr.ifremer.nemo.ui.ViewFile;
 import fr.ifremer.nemo.ui.object.NemoSection;
 import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.FloatFormat;
+import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.LatitudeFormat;
 import fr.ifremer.nemo.util.LongitudeFormat;
 import fr.ifremer.nemo.util.Messages;
@@ -92,6 +94,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 */
 	protected int _numberOfLines;
     protected String _endStationHeader;
+    protected int _numberLinesBetweenStationData;
 
 	protected static transient int _ref = -1;
 
@@ -142,16 +145,6 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	protected Trajectory _trajectory;
 
 	/**
-	 * Dernier numero de station (mode "ODV")
-	 */
-	protected String _lastRef;
-
-	/**
-	 * En-tête de station plus 1 ligne de données (mode "ODV")
-	 */
-	protected String[] _headerPlus;
-
-	/**
 	 * Nombre de caractères du fichier
 	 */
 	protected int _taille;
@@ -182,6 +175,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
         _numberOfLines = 0;
 		_endDataPattern = Global.EMPTY_STRING;
         _endStationHeader = Global.EMPTY_STRING;
+        _numberLinesBetweenStationData = 0;
 		_endOnEOF = false;
 		_endOnEmptyLine = false;
 		_endOnPattern = false;
@@ -195,8 +189,6 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		_timeSeriesModel = null;
 		_timestampModel = null;
 		_trajectory = null;
-		_lastRef = null;
-		_headerPlus = null;
 		_inputType = Global.PROFILE;
 	}
 
@@ -278,9 +270,6 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
         if ((tmp = a_Attributes.getValue("lineNumber")) != null) {
             setNumberOfLines(tmp);
         }
-		if ((tmp = a_Attributes.getValue("endStationHeader")) != null) {
-			setEndStationHeader(tmp);
-		}
 		if ((tmp = a_Attributes.getValue("endOnEOF")) != null) {
 			setEndOnEOF(tmp);
 		}
@@ -328,6 +317,14 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			Element2Field setter = new Element2Field(this, "setIncrementNumber");
 			return setter;
 		}
+        if (a_LocalName.equals("numberLinesBetweenStationData")) {
+            Element2Field setter = new Element2Field(this, "setNumberLinesBetweenStationData");
+            return setter;
+        }
+        if (a_LocalName.equals("endStationHeader")) {
+            Element2Field setter = new Element2Field(this, "setEndStationHeader");
+            return setter;
+        }
 		if (a_LocalName.equals("endDataPattern")) {
 			Element2Field setter = new Element2Field(this, "setEndDataPattern");
 			return setter;
@@ -422,7 +419,6 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * 
 	 */
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
-		a_Writer.putAttribute("endStationHeader", getEndStationHeader());
 		a_Writer.putAttribute("endOnEOF", isEndOnEOF());
 		a_Writer.putAttribute("endOnEmptyLine", isEndOnEmptyLine());
         a_Writer.putAttribute("endOnNextStation", isEndOnNextStation());
@@ -431,6 +427,8 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		a_Writer.putTag("separator", getSeparator());
 		a_Writer.putTag("incrementRef", isIncrementRef());
 		a_Writer.putTag("incrementNumber", getIncrementNumber());
+        a_Writer.putTag("numberLinesBetweenStationData", getNumberLinesBetweenStationData());
+        a_Writer.putTag("endStationHeader", getEndStationHeader());
 		a_Writer.putTag("endDataPattern", getEndDataPattern());
 		a_Writer.putTag("rowNumber", getRowNumber());
 		a_Writer.putTag("endData", getEndData());
@@ -845,8 +843,45 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	public void setEndStationHeader(String a_String) {
         _endStationHeader = a_String;
 	}
+    
+    
 
 	/**
+     * Read accessor (getter) for attribute _numberLinesBetweenStationData
+     * 
+     * @return int
+     * @see StationModel#_numberLinesBetweenStationData
+     */
+    public int getNumberLinesBetweenStationData()
+    {
+        return _numberLinesBetweenStationData;
+    }
+
+    /**
+     * Write accessor (setter) for attribute _numberLinesBetweenStationData
+     * 
+     * @param x
+     *            new value for _numberLinesBetweenStationData
+     * @see StationModel#_numberLinesBetweenStationData
+     */
+    public void setNumberLinesBetweenStationData(int x)
+    {
+        _numberLinesBetweenStationData = x;
+    }
+
+    /**
+     * Write accessor (setter) for attribute _numberLinesBetweenStationData
+     * 
+     * @param a_String
+     *            new value for _numberLinesBetweenStationData as String
+     * @see StationModel#_numberLinesBetweenStationData
+     */
+    public void setNumberLinesBetweenStationData(String a_String)
+    {
+        _numberLinesBetweenStationData = Integer.parseInt(a_String);
+    }
+
+    /**
 	 * Read accessor (getter) for attribute _ref
 	 * 
 	 * @return int
@@ -1258,7 +1293,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
         for (ParameterModel param : getParameterModels()){
             if (param.getModel().getCode().equals(IdParameter.DEPH.toString()))
                 existDEPH = true;
-            if (param.getModel().getCode().equals("PRES")) //$NON-NLS-1$
+            if (param.getModel().getCode().equals(Intern.paramPRES))
                 formatPRES = param.getModel().getFormat();
         }
         if (isProfile())
@@ -1548,12 +1583,13 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 */
 	public String[] consumeHeader(BufferedReader a_Reader) throws IOException {
 		Vector<String> v = new Vector<String>();
+        String line = null;
 //      for (int i = 0; i < _numberOfLines; i++) {
         if (!_endStationHeader.equals(Global.EMPTY_STRING)){
             boolean stop = false;
             while (!stop)
             {
-    			String line = a_Reader.readLine();
+    			line = a_Reader.readLine();
     			EditConversion.incrementErreurLigne();
     			EditConversion.setErreurChaine(line);
     			if (line != null) {
@@ -1566,6 +1602,13 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
     			}
     		}
         }
+        for (int i = 0; i < _numberLinesBetweenStationData; i++) {
+            line = a_Reader.readLine();
+            EditConversion.incrementErreurLigne();
+            EditConversion.setErreurChaine(line);
+            v.add(line);
+        }
+
 		String[] lines = new String[v.size()];
 		return v.toArray(lines);
 	}
@@ -1581,23 +1624,16 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		EditConversion.setErreurLigne(0);
 		Vector<String> v = new Vector<String>();
 		String line = null;
-//      for (int i = 0; i < _numberOfLines; i++) {
-        if (!_endStationHeader.equals(Global.EMPTY_STRING)){
-            boolean stop = false;
-            while (!stop){
-    			line = a_Reader.readLine();
-    			EditConversion.incrementErreurLigne();
-    			EditConversion.setErreurChaine(line);
-    			if (line != null) {
-    				v.add(line);
-                    if (line.startsWith(_endStationHeader)){
-                        stop = true;
-                    }
-    			} else {
-    				return null;
-    			}
-    		}
+        
+        String[] headerLines = consumeHeader(a_Reader);
+        if (headerLines != null){
+            for (String headerLine : headerLines){
+                v.add(headerLine);
+            }
+        }else{
+            return null;
         }
+        
 		line = a_Reader.readLine();
 		EditConversion.incrementErreurLigne();
 		EditConversion.setErreurChaine(line);
@@ -1605,37 +1641,6 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 		String[] lines = new String[v.size()];
 		return v.toArray(lines);
-	}
-
-	/**
-	 * 
-	 * @param a_Reader
-	 * @return String[]
-	 * @exception java.io.IOException
-	 */
-	public void consumeHeaderPlus(BufferedReader a_Reader) throws IOException {
-		Vector<String> v = new Vector<String>();
-//		for (int i = 0; i < _numberOfLines; i++) {
-        if (!_endStationHeader.equals(Global.EMPTY_STRING)){
-            boolean stop = false;
-            while (!stop){
-    			String line = a_Reader.readLine();
-    			EditConversion.incrementErreurLigne();
-    			EditConversion.setErreurChaine(line);
-    			if (line != null) {
-    				v.add(line);
-                    if (line.startsWith(_endStationHeader)){
-                        stop = true;
-                    }
-    			} else {
-    				_headerPlus = null;
-    			}
-    		}
-        }
-		v.add(Global.EMPTY_STRING);
-
-		String[] lines = new String[v.size()];
-		_headerPlus = v.toArray(lines);
 	}
 
 	/**
@@ -1800,12 +1805,17 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
                     || (index < _rowNumber); index++) {
                 
                 // FAE 1738 : ajout d'un indicateur "prochaine station"
-                if (_endOnNextStation 
+                // TODO test
+                if (_model != null){
+                    if (_endOnNextStation 
                             && index > 0
-                            && !line.startsWith("          ")){
-                    a_Reader.reset();
-                    break;
+                            && line.contains(Formatter.getSingleton().formatLatitude("+DD.dddddd ", _model.getLatitude()))
+                            && line.contains(Formatter.getSingleton().formatLongitude("+DDD.dddddd ", _model.getLongitude()))){
+                        a_Reader.reset();
+                        break;
+                    }
                 }
+                
                 
                 
 				size += line.length();
@@ -1978,14 +1988,6 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 
 	public void resetRef() {
 		_ref = -1;
-	}
-
-	public String getLastRef() {
-		return _lastRef;
-	}
-
-	public void setLastRef(String ref) {
-		_lastRef = ref;
 	}
 
 	public int getTaille() {

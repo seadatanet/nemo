@@ -61,6 +61,9 @@ public class Intern extends NLS {
     public static String NemoLists_unknown;
     public static String CJDY;
     public static String DTUT;
+    
+    public static String paramPRES;
+    public static String paramDEPH;
 	
 	static {
 		// initialize resource bundle

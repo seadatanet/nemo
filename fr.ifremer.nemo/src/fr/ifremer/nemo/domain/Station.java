@@ -32,6 +32,7 @@ import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.ExternalizableFormat;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.LatitudeFormat;
 import fr.ifremer.nemo.util.LongitudeFormat;
 
@@ -1760,7 +1761,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 						Global.TRAJECTORY)) {
 					paramCode = Global.EMPTY_STRING;
 				} else {
-					paramCode = "PRES"; //$NON-NLS-1$
+					paramCode = Intern.paramPRES;
 				}
 			} else {
 				if (StationModel.getSingleton().getInputType().equals(
@@ -1770,7 +1771,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 						Global.TRAJECTORY)) {
 					paramCode = Global.EMPTY_STRING;
 				} else {
-					paramCode = "PRES"; //$NON-NLS-1$
+					paramCode = Intern.paramPRES; 
 				}
 			}
 
@@ -1851,7 +1852,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 						Global.TRAJECTORY)) {
 					paramCode = Global.EMPTY_STRING;
 				} else {
-					paramCode = "PRES"; //$NON-NLS-1$
+					paramCode = Intern.paramPRES; 
 				}
 			} else {
 				if (StationModel.getSingleton().getInputType().equals(
@@ -1861,7 +1862,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 						Global.TRAJECTORY)) {
 					paramCode = Global.EMPTY_STRING;
 				} else {
-					paramCode = "PRES"; //$NON-NLS-1$
+					paramCode = Intern.paramPRES; 
 				}
 			}
 

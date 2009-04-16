@@ -7,22 +7,15 @@
  */
 package fr.ifremer.nemo.ui.object;
 
-import java.util.regex.Pattern;
-
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.ViewFile;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -34,27 +27,13 @@ import fr.ifremer.nemo.util.Messages;
 public class FileSection extends NemoSection
 {
     protected Button radEOF, radLigne, radNextStation, radManuel;
-    protected Text text;
-    protected Button buttonSet;
-    private String defaultValue;
-    private boolean inText;
+    protected SetText setterNumberLine;
+    protected SetText setterText;
 
 
-    public FileSection(Shell shell, String name, String title, String description, String defaultValue, boolean inText){
+    public FileSection(Shell shell, String name, String title, String description){
         
-        super(shell, name, title, description);
-        this.defaultValue = defaultValue;
-        this.inText = inText;
-        
-        text = new Text(shell, SWT.BORDER);
-        text.addModifyListener(new ModifyListener() {
-            public void modifyText(ModifyEvent event) {
-                Utils.invalidEtapes();
-            }
-        });
-        
-        buttonSet = new Button(shell, SWT.NONE);
-        
+        super(shell, name, title, description);        
 
         if (name.equals(F_ENDDATA))
         {
@@ -65,92 +44,8 @@ public class FileSection extends NemoSection
             radNextStation = new Button(shell, SWT.RADIO);
             addRadListener(radNextStation);
             radManuel = new Button(shell, SWT.RADIO);
-            addRadListener(radManuel);            
+            addRadListener(radManuel);   
         }
-        
-        if (inText)
-        {
-            buttonSet.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-                @Override
-                public void widgetSelected(
-                        org.eclipse.swt.events.SelectionEvent g) {
-                    text.setText(ViewFile.textAreaDescription.getText().substring(
-                            ViewFile.textAreaDescription.getSelection().x, 
-                            ViewFile.textAreaDescription.getSelection().y));
-                    text.pack();
-
-                }
-            });
-            
-        }else{
-            
-            buttonSet.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-                @Override
-                public void widgetSelected(
-                        org.eclipse.swt.events.SelectionEvent h) {
-                    
-                    int deb, fi, lignDepart, lignFin, i;
-
-                    // on recupere les coordonnees de la selection
-                    deb = ViewFile.textAreaDescription.getSelection().x;
-                    fi = ViewFile.textAreaDescription.getSelection().y;
-
-                    lignDepart = 1;
-                    lignFin = 1;
-                    // calcul de la ligne en fonction de la valeur de x
-                    // parcours du tableau des tailles de lignes cumulees
-
-                    if (deb == fi) {
-                        Utils.messageErreurAppend(Messages.getString("Utils.26")); //$NON-NLS-1$
-
-                    } else {
-
-                        // calcul ligne depart
-                        for (i = 0; i < Utils.lignesBrutes.size(); i++) {
-
-                            if (deb == Utils.taillesCumLignes[i]) {
-                                lignDepart = i + 1;
-                                break;
-                            }
-                            if (i == (Utils.lignesBrutes.size() - 1)) {
-                                lignDepart = i + 1;
-                                break;
-                            }
-                            if ((deb >= Utils.taillesCumLignes[i])
-                                    && (deb < Utils.taillesCumLignes[i + 1])) {
-                                lignDepart = i + 1;
-                                break;
-                            }
-
-                        }
-
-                        // calcul ligne fin
-                        for (i = 0; i < Utils.lignesBrutes.size(); i++) {
-
-                            if (fi == Utils.taillesCumLignes[i]) {
-                                lignFin = i + 1;
-                                break;
-                            }
-                            if (i == (Utils.lignesBrutes.size() - 1)) {
-                                lignFin = i + 1;
-                                break;
-                            }
-                            if ((fi >= Utils.taillesCumLignes[i])
-                                    && (fi < Utils.taillesCumLignes[i + 1])) {
-                                lignFin = i + 1;
-                                break;
-                            }
-
-                        }
-                        // remplissage nbreLignes dans interface
-                        text.setText("" + (lignFin - lignDepart + 1)); //$NON-NLS-1$
-                        text.pack();
-                    }
-                    
-                }
-            });
-        }
-
     }
     
     private void addRadListener(final Button radio){
@@ -164,6 +59,14 @@ public class FileSection extends NemoSection
         });
     }
     
+    public void addSetterNumberLine(Shell shell, String stringLabel, String defaultValue){
+        setterNumberLine = new SetText(shell, stringLabel, defaultValue, false);
+    }
+    
+    public void addSetterText(Shell shell, String stringLabel, String defaultValue){
+        setterText = new SetText(shell, stringLabel, defaultValue, true);
+    }
+    
     /**
      * {@inheritDoc}
      */
@@ -174,7 +77,8 @@ public class FileSection extends NemoSection
         GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compo);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(compo);
         
-        if (name.equals(F_ENDDATA)){
+        if (name.equals(F_ENDDATA))
+        {
             radEOF.setParent(compo);
             radEOF.setBackground(compo.getBackground());
             radEOF.setText(Messages.edit_file_idcEOF); 
@@ -190,15 +94,16 @@ public class FileSection extends NemoSection
             radManuel.setParent(compo);
             radManuel.setBackground(compo.getBackground());
             radManuel.setText(Messages.edit_file_idcManual); 
+            
         }
-        text.setParent(compo);
-        text.setBackground(compo.getBackground());
-        //text.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-        text.setText(defaultValue);
-        GridDataFactory.fillDefaults().grab(true, false).hint(400, 20).applyTo(compo);
+
+        if (setterText != null)
+            setterText.draw(compo);
         
-        buttonSet.setParent(compo);
-        buttonSet.setText(Messages.button_set); 
+        
+        if (setterNumberLine != null)
+            setterNumberLine.draw(compo);
+        
         
         selectEndData(radEOF);
     }
@@ -227,8 +132,10 @@ public class FileSection extends NemoSection
     @Override
     public void razValues()
     {
-        text.setText(defaultValue);
-        selectEndData(radEOF);
+        if (setterNumberLine != null) setterNumberLine.razValues();
+        if (setterText != null) setterText.razValues();
+        if (name.equals(F_ENDDATA))
+            selectEndData(radEOF);
     }
 
     
@@ -238,9 +145,9 @@ public class FileSection extends NemoSection
     @Override
     public void dispose(){
         super.dispose();
-        text.dispose();
-        buttonSet.dispose();
-        if (name.equals(NemoSection.F_ENDDATA)){
+        if (setterText != null) setterText.dispose();
+        if (setterNumberLine != null) setterNumberLine.dispose();
+        if (name.equals(F_ENDDATA)){
             radEOF.dispose();
             radLigne.dispose();
             radManuel.dispose();
@@ -255,58 +162,40 @@ public class FileSection extends NemoSection
                 radLigne.setSelection(false);
                 radNextStation.setSelection(false);
                 radManuel.setSelection(false);
-    
-                text.setEnabled(false);
-                buttonSet.setEnabled(false);
+                setterText.setEnabled(false);
                 
             } else if (radio == radLigne) {
                 radEOF.setSelection(false);
                 radLigne.setSelection(true);
                 radNextStation.setSelection(false);
                 radManuel.setSelection(false);
-    
-                text.setEnabled(false);
-                buttonSet.setEnabled(false);
+                setterText.setEnabled(false);
                 
             } else if (radio == radNextStation) {
                 radEOF.setSelection(false);
                 radLigne.setSelection(false);
                 radNextStation.setSelection(true);
                 radManuel.setSelection(false);
-    
-                text.setEnabled(false);
-                buttonSet.setEnabled(false);
+                setterText.setEnabled(false);
                 
             } else if (radio == radManuel) {
                 radEOF.setSelection(false);
                 radLigne.setSelection(false);
                 radNextStation.setSelection(false);
                 radManuel.setSelection(true);
-    
-                text.setEnabled(true);
-                buttonSet.setEnabled(true);
+                setterText.setEnabled(true);
                 
             } else {
                 radEOF.setSelection(true);
                 radLigne.setSelection(false);
                 radNextStation.setSelection(false);
                 radManuel.setSelection(false);
-    
-                text.setEnabled(false);
-                buttonSet.setEnabled(false);
+                setterText.setEnabled(false);
             }
             
             // invalidation de l'étape en cours et des suivantes
             Utils.invalidEtapes();
         }
-    }
-
-    public String getValue(){
-        return text.getText();
-    }
-
-    public void setValue(String value){
-        text.setText(value);
     }
 
     /**
@@ -344,10 +233,6 @@ public class FileSection extends NemoSection
     {
         return radManuel;
     }
-
-    public void initValue(){
-        text.setText(defaultValue);
-    }
     
     public boolean radEOFselected(){
         return radEOF.getSelection();
@@ -370,14 +255,16 @@ public class FileSection extends NemoSection
         boolean ok = true;
         String log = Global.RN + "Section : " + title.trim() + Global.RN + "==>";  //$NON-NLS-1$  //$NON-NLS-2$
         
-        if (!inText){
-            ok = checkIntegerValue();
+        if (setterNumberLine != null){
+            ok = setterNumberLine.checkMandatoryValue();
             log = log + Messages.error_notValid;
-        }else{
-          if (name.equals(F_ENDDATA) && radManuel.getSelection()) {
-                  ok = checkStringValue();
-          }
-          log = log + Messages.error_file_idcEmpty;
+        }
+        
+        if (setterText != null){
+            if (name.equals(F_ENDDATA) && radManuel.getSelection()) {
+                ok = setterText.checkMandatoryValue();
+            }
+            log = log + Messages.error_file_idcEmpty;
         }
         
         if (!ok) 
@@ -385,23 +272,22 @@ public class FileSection extends NemoSection
         
         return ok;
     }
-
-    private boolean checkIntegerValue() 
-    {
-        boolean ok = true;
-        if (!Pattern.matches("^[0-9][0-9]*$", getValue())) { //$NON-NLS-1$
-            ok = false;
-        }
-        return ok;
+    
+    public String getNumberValue(){
+        return setterNumberLine.getValue();
+    }
+    
+    public void setNumberValue(String value){
+        setterNumberLine.setValue(value);
     }
 
-    private boolean checkStringValue() 
-    {
-        boolean ok = true;
-        if (getValue().equals(Global.EMPTY_STRING)) { 
-            ok = false;
-        }
-        return ok;
+    
+    public String getTextValue(){
+        return setterText.getValue();
+    }
+    
+    public void setTextValue(String value){
+        setterText.setValue(value);
     }
     
 }

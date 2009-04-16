@@ -20,6 +20,7 @@ import org.eclipse.swt.widgets.Text;
 import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSParameter;
 
@@ -54,65 +55,65 @@ public class TableData {
 		table.setLinesVisible(true);
 		TableColumn tableColumn0 = new TableColumn(table, SWT.NONE);
 		tableColumn0.setWidth(110);
-		tableColumn0.setText(Messages.getString("TableData.0")); //$NON-NLS-1$
+		tableColumn0.setText(Messages.table_label_code.toUpperCase());
 
 		TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);
 		tableColumn1.setWidth(90);
-		tableColumn1.setText(Messages.getString("TableData.1")); //$NON-NLS-1$
+		tableColumn1.setText(Messages.table_label_unit); 
 
 		TableColumn tableColumn2 = new TableColumn(table, SWT.NONE);
 		tableColumn2.setWidth(100);
-		tableColumn2.setText(Messages.getString("TableData.2")); //$NON-NLS-1$
+		tableColumn2.setText(Messages.label_conversion);
 		tableColumn2.setAlignment(SWT.RIGHT);
 
 		TableColumn tableColumn3 = new TableColumn(table, SWT.NONE);
 		tableColumn3.setWidth(50);
-		tableColumn3.setText(Messages.getString("TableData.3")); //$NON-NLS-1$
+		tableColumn3.setText(Messages.label_test);
 		tableColumn3.setAlignment(SWT.RIGHT);
 
 		TableColumn tableColumn4 = new TableColumn(table, SWT.NONE);
 		tableColumn4.setWidth(50);
-		tableColumn4.setText(Messages.getString("TableData.4")); //$NON-NLS-1$
+		tableColumn4.setText(Messages.label_start); 
 		tableColumn4.setAlignment(SWT.RIGHT);
 
 		TableColumn tableColumn5 = new TableColumn(table, SWT.NONE);
 		tableColumn5.setWidth(50);
-		tableColumn5.setText(Messages.getString("TableData.5")); //$NON-NLS-1$
+		tableColumn5.setText(Messages.label_end); 
 		tableColumn5.setAlignment(SWT.RIGHT);
 
 		TableColumn tableColumn6 = new TableColumn(table, SWT.NONE);
 		tableColumn6.setWidth(100);
-		tableColumn6.setText(Messages.getString("TableData.6")); //$NON-NLS-1$
+		tableColumn6.setText(Messages.label_format);
 		tableColumn6.setAlignment(SWT.RIGHT);
 
 		TableColumn tableColumn7 = new TableColumn(table, SWT.NONE);
 		tableColumn7.setWidth(100);
-		tableColumn7.setText(Messages.getString("TableData.7")); //$NON-NLS-1$
+		tableColumn7.setText(Messages.table_label_valueIn);
 		tableColumn7.setAlignment(SWT.RIGHT);
 
 		TableColumn tableColumn8 = new TableColumn(table, SWT.NONE);
 		tableColumn8.setWidth(100);
-		tableColumn8.setText(Messages.getString("TableData.8")); //$NON-NLS-1$
+		tableColumn8.setText(Messages.table_label_valueOut);
 		tableColumn8.setAlignment(SWT.RIGHT);
 
 		TableColumn tableColumn9 = new TableColumn(table, SWT.NONE);
 		tableColumn9.setWidth(65);
-		tableColumn9.setText(Messages.getString("EditStation.47")); //$NON-NLS-1$
+		tableColumn9.setText(Messages.table_label_testIn); 
 		tableColumn9.setAlignment(SWT.RIGHT);
 
 		TableColumn tableColumn10 = new TableColumn(table, SWT.NONE);
 		tableColumn10.setWidth(65);
-		tableColumn10.setText(Messages.getString("EditStation.48")); //$NON-NLS-1$
+		tableColumn10.setText(Messages.table_label_testOut);
 		tableColumn10.setAlignment(SWT.RIGHT);
 
 		TableColumn tableColumn11 = new TableColumn(table, SWT.NONE);
 		tableColumn11.setWidth(65);
-		tableColumn11.setText(Messages.getString("TableData.22")); //$NON-NLS-1$
+		tableColumn11.setText(Messages.table_label_startFlag); 
 		tableColumn11.setAlignment(SWT.RIGHT);
 
 		TableColumn tableColumn12 = new TableColumn(table, SWT.NONE);
 		tableColumn12.setWidth(65);
-		tableColumn12.setText(Messages.getString("TableData.23")); //$NON-NLS-1$
+		tableColumn12.setText(Messages.table_label_endFlag); 
 		tableColumn12.setAlignment(SWT.RIGHT);
 
 		initTable();
@@ -121,51 +122,7 @@ public class TableData {
 		ViewFile.compositeData.getShell().layout();
 
 	}
-
-//	public static void initTypes() {
-//
-//		// initialisation de la ArrayList des types des donnees e partir du
-//
-//		types = new ArrayList<TypeData>();
-//		typesWS = new ArrayList<TypeData>();
-//
-//		int taille = DataModel.listeWSParameters.length;
-//
-//		for (int i = 0; i < taille; i++) {
-//			WSParameter wsParameter = new WSParameter();
-//			wsParameter = DataModel.listeWSParameters[i];
-//
-//			// new type
-//			TypeData type = new TypeData();
-//
-//			// parametres
-//			type.setCode(wsParameter.getCode() + " - " + wsParameter.getName()); //$NON-NLS-1$
-//			type.setUnite(wsParameter.getUnit());
-//			type.setFormat(wsParameter.getFormat());
-//			type.setEntree(Global.EMPTY_STRING);
-//			type.setSortie(wsParameter.getDefaultValue());
-//
-//			// type.setQc("N");
-//
-//			// ajout dans liste
-//			typesWS.add(type);
-//
-//			// ajout systematique de PRES
-//			if (wsParameter.getCode().equals("PRES")) { //$NON-NLS-1$
-//
-//				// if ((DataModel.ouverture == false)
-//				// && (!ViewFile.checkBoxTempo.getSelection())) {
-//				if (ViewFile.radProfilVertical.getSelection()) {
-//					// pas de modele charge donc on rajoute PRES
-//					types.add(type);
-//				}
-//
-//			}
-//
-//		}
-//
-//	}
-
+    
     public static void initTypesWS() {
 
         // initialisation de la ArrayList des types des donnees e partir du
@@ -182,7 +139,7 @@ public class TableData {
             TypeData type = new TypeData();
 
             // parametres
-            type.setCode(wsParameter.getCode() + " - " + wsParameter.getName()); //$NON-NLS-1$
+            type.setCode(wsParameter.getCode() + Global.SEP + wsParameter.getName()); 
             type.setUnite(wsParameter.getUnit());
             type.setFormat(wsParameter.getFormat());
             type.setEntree(Global.EMPTY_STRING);
@@ -200,7 +157,7 @@ public class TableData {
         
         for (TypeData type : typesWS){
             // ajout systematique de PRES
-            if (type.getCode().startsWith("PRES")  //$NON-NLS-1$
+            if (type.getCode().startsWith(Intern.paramPRES) 
                     && ViewFile.radProfilVertical.getSelection()) {
                 // on rajoute PRES
                 types.add(type);
@@ -227,7 +184,6 @@ public class TableData {
 		// LINK des editors
 
 		// acces direct aux valeurs des colonnes des items
-
 		final TableEditor editor = new TableEditor(table);
 
 		editor.horizontalAlignment = SWT.LEFT;
@@ -241,21 +197,14 @@ public class TableData {
 					return;
 				}
 				// calcul du numero de ligne selectionne
-
 				Point pt = new Point(event.x, event.y);
 				TableItem item = table.getItem(pt);
-				// System.out.println("===> "+item.getText());
 				if (item == null)
 					return;
 
 				// edition directe de l'element selectionne
-
 				Rectangle clientArea = table.getClientArea();
-				// Point pt = new Point(event.x, event.y);
 				int index = table.getTopIndex();
-
-//				if (item == null)
-//					return;
 
 				while (index < table.getItemCount()) {
 					boolean visible = false;
@@ -312,109 +261,99 @@ public class TableData {
 		// creation du menu
 		Menu menu = new Menu(table.getShell(), SWT.POP_UP);
 		MenuItem itemInject = new MenuItem(menu, SWT.NONE);
-		itemInject.setText(Messages.getString("TableData.11")); //$NON-NLS-1$
+		itemInject.setText(Messages.menu_label_setFlag);
+        itemInject.addListener(SWT.Selection, new Listener() {
+            public void handleEvent(Event e) {
+                // table.forceFocus();
+                Utils.injectData(ViewFile.styledTextData, 4, 5);
+
+                majTypeData();
+                razTableData();
+
+                // refresh de la table
+                creationTable();
+
+                Utils.invalidEtapes();
+            }
+        });
+        
 		MenuItem itemMaj = new MenuItem(menu, SWT.NONE);
-		itemMaj.setText(Messages.getString("TableData.12")); //$NON-NLS-1$
+		itemMaj.setText(Messages.menu_label_updateTest);
+        itemMaj.addListener(SWT.Selection, new Listener() {
+            public void handleEvent(Event e) {
+                majChampTest();
+
+            }
+        });
+        
 		MenuItem itemList = new MenuItem(menu, SWT.NONE);
-		itemList.setText(Messages.getString("TableData.13")); //$NON-NLS-1$
-		// itemNew.setText(Messages.getString("TableData.14")); //$NON-NLS-1$
+		itemList.setText(Messages.menu_label_paramList); 
+        itemList.addListener(SWT.Selection, new Listener() {
+            public void handleEvent(Event e) {
+                FiltrageTableType.go(Global.PARAMETER);
+
+            }
+        });
+        
 		MenuItem itemUp = new MenuItem(menu, SWT.NONE);
-		itemUp.setText(Messages.getString("TableData.15")); //$NON-NLS-1$
+		itemUp.setText(Messages.menu_label_upType);
+        itemUp.addListener(SWT.Selection, new Listener() {
+            public void handleEvent(Event e) {
+                // System.out.println("up");
+                monterEltTableData();
+
+                Utils.invalidEtapes();
+            }
+        });
+        
 		MenuItem itemDown = new MenuItem(menu, SWT.NONE);
-		itemDown.setText(Messages.getString("TableData.16")); //$NON-NLS-1$
-		// MenuItem tmp = new Separator();
+		itemDown.setText(Messages.menu_label_downType);
+        itemDown.addListener(SWT.Selection, new Listener() {
+            public void handleEvent(Event e) {
+                descendreEltTableData();
+
+                Utils.invalidEtapes();
+            }
+        });
+        
 		MenuItem itemDel = new MenuItem(menu, SWT.NONE);
-		itemDel.setText(Messages.getString("TableData.17")); //$NON-NLS-1$
+		itemDel.setText(Messages.menu_label_removeType);
+        itemDel.addListener(SWT.Selection, new Listener() {
+            public void handleEvent(Event e) {
+                supprEltTableData();
+                Utils.invalidEtapes();
+            }
+        });
 
 		new MenuItem(menu, SWT.SEPARATOR);
+        
 		MenuItem itemInjectFlag = new MenuItem(menu, SWT.NONE);
-		itemInjectFlag.setText(Messages.getString("TableData.24")); //$NON-NLS-1$
+		itemInjectFlag.setText(Messages.menu_label_setFlag); 
+        itemInjectFlag.addListener(SWT.Selection, new Listener() {
+            public void handleEvent(Event e) {
+                table.forceFocus();
+                Utils.injectData(ViewFile.styledTextData, 11, 12);
+
+                Utils.invalidEtapes();
+            }
+        });
+        
 		MenuItem itemRemoveFlag = new MenuItem(menu, SWT.NONE);
-		itemRemoveFlag.setText(Messages.getString("TableData.25")); //$NON-NLS-1$
+		itemRemoveFlag.setText(Messages.menu_label_deleteFlag);
+        itemRemoveFlag.addListener(SWT.Selection, new Listener() {
+            public void handleEvent(Event e) {
+                table.forceFocus();
+                table.getItems()[table.getSelectionIndex()].setText(9, Global.EMPTY_STRING);
+                table.getItems()[table.getSelectionIndex()].setText(10, Global.EMPTY_STRING);
+                table.getItems()[table.getSelectionIndex()].setText(11, Global.EMPTY_STRING);
+                table.getItems()[table.getSelectionIndex()].setText(12, Global.EMPTY_STRING);
+                types.get(table.getSelectionIndex()).setDebutFlag(null);
+                types.get(table.getSelectionIndex()).setFinFlag(null);
+
+                Utils.invalidEtapes();
+            }
+        });
 		table.setMenu(menu);
-
-		// ajouter des listeners sur les menu items ^^
-
-		itemInject.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event e) {
-				// table.forceFocus();
-				Utils.injectData(ViewFile.styledTextData, 4, 5);
-
-				majTypeData();
-				// razTableData
-				razTableData();
-
-				// refresh de la table
-				creationTable();
-
-                Utils.invalidEtapes();
-			}
-		});
-
-		itemMaj.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event e) {
-				// System.out.println("Maj champ test");
-				majChampTest();
-
-			}
-		});
-
-		itemList.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event e) {
-				// System.out.println("selection liste");
-				FiltrageTableType.go(Global.PARAMETER);
-
-			}
-		});
-
-		itemUp.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event e) {
-				// System.out.println("up");
-				monterEltTableData();
-
-                Utils.invalidEtapes();
-			}
-		});
-		itemDown.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event e) {
-				// System.out.println("down");
-				descendreEltTableData();
-
-                Utils.invalidEtapes();
-			}
-		});
-		itemDel.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event e) {
-				// System.out.println("suppression");
-				supprEltTableData();
-				// remplirTableData();
-
-                Utils.invalidEtapes();
-			}
-		});
-
-		itemInjectFlag.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event e) {
-				table.forceFocus();
-				Utils.injectData(ViewFile.styledTextData, 11, 12);
-
-                Utils.invalidEtapes();
-			}
-		});
-
-		itemRemoveFlag.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event e) {
-				table.forceFocus();
-				table.getItems()[table.getSelectionIndex()].setText(9, Global.EMPTY_STRING);
-				table.getItems()[table.getSelectionIndex()].setText(10, Global.EMPTY_STRING);
-				table.getItems()[table.getSelectionIndex()].setText(11, Global.EMPTY_STRING);
-				table.getItems()[table.getSelectionIndex()].setText(12, Global.EMPTY_STRING);
-				types.get(table.getSelectionIndex()).setDebutFlag(null);
-				types.get(table.getSelectionIndex()).setFinFlag(null);
-
-                Utils.invalidEtapes();
-			}
-		});
 
 		Utils.forceMenu(table, menu);
 
@@ -467,7 +406,6 @@ public class TableData {
 		razTableData();
 
 		// refresh de la table
-		// initTable();
 		creationTable();
 
 	}
@@ -589,12 +527,11 @@ public class TableData {
 		String code = mots[0];
 
 		// pas forcement de - dans le nom du type
-		// if (!code.equals("PRES") || ViewFile.checkBoxTempo.getSelection()) {
-		if (!code.equals("PRES") || ViewFile.radSerieTempo.getSelection() //$NON-NLS-1$
+		if (!code.equals(Intern.paramPRES) || ViewFile.radSerieTempo.getSelection()
 				|| ViewFile.radTrajectoire.getSelection()) {
 			types.remove(indice);
 		} else {
-			Utils.messageErreurAppend(Messages.getString("TableData.18")); //$NON-NLS-1$
+			Utils.messageErreurAppend(Messages.error_data_removePRES);
 		}
 
 		// razTableData
@@ -624,7 +561,7 @@ public class TableData {
 
 				// on recupere le data
 				ligne = Utils.lignesBrutes.get(Integer
-						.valueOf(EditDesc.sectionEnteteFichier.getValue())
+						.valueOf(EditDesc.sectionEnteteFichier.getNumberValue())
 						+ DataModel.stationModel.getNumberOfLines()) + 1;
 				selection = ligne.substring(
 						Integer.valueOf(ViewFile.tableData.getItem(i)
@@ -656,12 +593,11 @@ public class TableData {
                             resultat = fmOut;
                         } else {
                             // erreur
-                            resultat = Messages.getString("TableData.20"); //$NON-NLS-1$ 
+                            resultat = Messages.error; 
                         }
                         
 					} else {
 						// valeur normale, on applique la formule puis formatage
-
 						org.nfunk.jep.JEP parser = new org.nfunk.jep.JEP();
 						parser.addStandardFunctions();
 						parser.addStandardConstants();
@@ -675,24 +611,21 @@ public class TableData {
                             resultat = String.format(ViewFile.tableData.getItem(i).getText(6), (Double.valueOf(resultJEP)).intValue());
                         }else{
                             // error
-                            resultat = Messages.getString("TableData.20"); //$NON-NLS-1$ 
+                            resultat = Messages.error;
                         }
-						//resultat = String.format(ViewFile.tableData.getItem(i).getText(6), resultJEP);
 					}
 				} catch (Exception e) {
-					resultat = Messages.getString("TableData.20"); //$NON-NLS-1$
+					resultat = Messages.error;
 					e.printStackTrace();
 				}
 
 				types.get(i).setTest(resultat);
-
-				// System.out.println("resultat conversion = "+resultat);
 			}
 
 			if ((!ViewFile.tableData.getItem(i).getText(11).equals(Global.EMPTY_STRING))
 					&& (!ViewFile.tableData.getItem(i).getText(12).equals(Global.EMPTY_STRING))) {
 				ligne = Utils.lignesBrutes.get(Integer
-						.valueOf(EditDesc.sectionEnteteFichier.getValue())
+						.valueOf(EditDesc.sectionEnteteFichier.getNumberValue())
                         + DataModel.stationModel.getNumberOfLines()) + 1;
 				selection = ligne.substring(
 						Integer.valueOf(ViewFile.tableData.getItem(i).getText(

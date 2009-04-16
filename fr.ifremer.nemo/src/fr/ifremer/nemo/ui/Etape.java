@@ -11,6 +11,7 @@ import fr.ifremer.nemo.ui.object.NemoSection;
 import fr.ifremer.nemo.ui.object.AutoLine.MetaInData;
 import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.LatitudeFormat;
 import fr.ifremer.nemo.util.LongitudeFormat;
 import fr.ifremer.nemo.util.Messages;
@@ -55,7 +56,7 @@ public class Etape {
                 resultat = ((FileSection) desc).checkMandatory();
                 ok = ok && resultat;
             }else{
-                ((FileSection) desc).initValue();
+                desc.razValues();
             }
         }
 
@@ -941,7 +942,7 @@ public class Etape {
             
             EditConversion.setWarningData(Global.EMPTY_STRING);
 			if (ViewFile.typeFichierEntree().equals(Global.PROFILE)) {
-				if (!(code.equals("PRES") || code.equals("DEPH"))) { //$NON-NLS-1$ //$NON-NLS-2$
+				if (!(code.equals(Intern.paramPRES) || code.equals(Intern.paramDEPH))) {
 					// PRES ou DEPH n'est pas en premier
 					Utils.messageErreurAppend(Messages.getString("Etape.107")); //$NON-NLS-1$
 					ok = ok && false;
@@ -950,17 +951,11 @@ public class Etape {
 				}
 
 				// Si PRES n'est pas premier => Medatlas impossible
-				if (!ViewFile.isCollection() && !code.equals("PRES")) { //$NON-NLS-1$
+				if (!ViewFile.isCollection() && !code.equals(Intern.paramPRES)) { 
                     EditConversion.setWarningData(Messages.getString("ViewLog.7")); //$NON-NLS-1$
                 }else{
                     EditConversion.setWarningData(Global.EMPTY_STRING);
                 }
-//			}else if (ViewFile.typeFichierEntree().equals(Global.TRAJECTORY)){
-//                if (!code.equals("DEPH") && existDEPH) { //$NON-NLS-1$
-//                    // DEPH existe et n'est pas en premier
-//                    Utils.messageErreurAppend(Messages.getString("Etape.131")); //$NON-NLS-1$
-//                    ok = ok && false;
-//                }
             }
 		}
 		if (ok) {

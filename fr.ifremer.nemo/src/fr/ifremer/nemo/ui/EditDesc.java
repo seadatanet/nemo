@@ -212,16 +212,21 @@ public class EditDesc {
     }
 
     public static void initSections() {
-        sectionEnteteFichier = new FileSection(shell, NemoSection.F_FILEHEADER, Messages.getString(NemoSection.F_FILEHEADER), Messages.edit_file_enteteFichier, Global.ZERO, false);
+        sectionEnteteFichier = new FileSection(shell, NemoSection.F_FILEHEADER, Messages.getString(NemoSection.F_FILEHEADER), Messages.edit_file_enteteFichier);
+        sectionEnteteFichier.addSetterNumberLine(shell, null, Global.ZERO);
         listeSectionsDesc.add(sectionEnteteFichier);
         
-        sectionEnteteStation = new FileSection(shell, NemoSection.F_STATIONHEADER, Messages.getString(NemoSection.F_STATIONHEADER), Messages.edit_file_enteteStation, Global.EMPTY_STRING, true);
+        sectionEnteteStation = new FileSection(shell, NemoSection.F_STATIONHEADER, Messages.getString(NemoSection.F_STATIONHEADER), Messages.edit_file_enteteStation);
+        sectionEnteteStation.addSetterText(shell, null, Global.EMPTY_STRING);
+        sectionEnteteStation.addSetterNumberLine(shell, Messages.edit_file_interLines, Global.ZERO);
         listeSectionsDesc.add(sectionEnteteStation);
         
-        sectionFinStation = new FileSection(shell, NemoSection.F_ENDSTATION, Messages.getString(NemoSection.F_ENDSTATION), Messages.edit_file_finStation, Global.ZERO, false);
+        sectionFinStation = new FileSection(shell, NemoSection.F_ENDSTATION, Messages.getString(NemoSection.F_ENDSTATION), Messages.edit_file_finStation);
+        sectionFinStation.addSetterNumberLine(shell, null, Global.ZERO);
         listeSectionsDesc.add(sectionFinStation);
         
-        sectionRuptureDonnees = new FileSection(shell, NemoSection.F_ENDDATA, Messages.getString(NemoSection.F_ENDDATA), Messages.edit_file_indicFinDonnees, Global.EMPTY_STRING, true);
+        sectionRuptureDonnees = new FileSection(shell, NemoSection.F_ENDDATA, Messages.getString(NemoSection.F_ENDDATA), Messages.edit_file_indicFinDonnees);
+        sectionRuptureDonnees.addSetterText(shell, null, Global.EMPTY_STRING);
         listeSectionsDesc.add(sectionRuptureDonnees);
     }
 

@@ -258,7 +258,7 @@ public class StationSection extends NemoSection
         if (posVariable) vari = frag.isVariable();
         
         if (real_ligne == null){
-            real_ligne = new Integer(ligne + Integer.valueOf(EditDesc.sectionEnteteFichier.getValue()));
+            real_ligne = new Integer(ligne + Integer.valueOf(EditDesc.sectionEnteteFichier.getNumberValue()));
         }
             
         setAutoValueInput(String.valueOf(real_ligne), String.valueOf(debut), String.valueOf(fin),posVariable, vari, i);
@@ -512,7 +512,7 @@ public class StationSection extends NemoSection
         GridDataFactory.fillDefaults().grab(false, false).applyTo(compoTest);
         
         buttonTest.setParent(compoTest);
-        buttonTest.setText("Test");                                             //$NON-NLS-1$
+        buttonTest.setText(Messages.label_test);
         // LISTENER
         buttonTest
         .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -814,7 +814,7 @@ public class StationSection extends NemoSection
                         // cas particuliers : COMMENT
                         // surlignement et injection ligne debut fin
                         frag = propertyModel.fillFragment(this, ligne, i, false, fillVariPos);
-                        int entete = Integer.valueOf(EditDesc.sectionEnteteFichier.getValue());
+                        int entete = Integer.valueOf(EditDesc.sectionEnteteFichier.getNumberValue());
                         Utils.calculNbreLignesPuisRemplissageFrag(frag, Integer.valueOf(entete));
                     }else{
                        // Généralisation                        
@@ -866,7 +866,7 @@ public class StationSection extends NemoSection
             if (ligneSaisie == 0){
                 ligne = Global.ZERO;
             }else{
-                ligne = String.valueOf(ligneSaisie - Integer.valueOf(EditDesc.sectionEnteteFichier.getValue()));
+                ligne = String.valueOf(ligneSaisie - Integer.valueOf(EditDesc.sectionEnteteFichier.getNumberValue()));
             }
             propertyModel.fillFragment(EditStation.stationNumber, ligne);
         }

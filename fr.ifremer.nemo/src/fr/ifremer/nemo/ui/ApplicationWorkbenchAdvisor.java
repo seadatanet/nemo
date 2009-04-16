@@ -37,7 +37,7 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 
 		MessageBox mb = new MessageBox(PlatformUI.getWorkbench().getDisplay().getActiveShell(), SWT.ICON_QUESTION | SWT.YES | SWT.NO
 				| SWT.APPLICATION_MODAL);
-		mb.setMessage(Messages.getString("ExitAction.2")); //$NON-NLS-1$
+		mb.setMessage(Messages.confirm_quit);
 		reponse = mb.open();
 
 		if (reponse == SWT.YES) {

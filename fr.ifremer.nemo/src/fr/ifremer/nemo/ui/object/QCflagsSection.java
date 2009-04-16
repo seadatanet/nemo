@@ -269,10 +269,10 @@ public class QCflagsSection extends NemoSection
 
         tableColumn0.setWidth(0);
         tableColumn0.setResizable(false);
-        tableColumn0.setText("Code"); //$NON-NLS-1$
+        tableColumn0.setText(Messages.table_label_code);
 
         tableColumn1.setWidth(110);
-        tableColumn1.setText(Messages.getString("EditStation.38")); //$NON-NLS-1$
+        tableColumn1.setText(Messages.table_label_meta);
 
         tableColumn2.setWidth(40);
         tableColumn2.setText(Messages.label_line);
@@ -284,28 +284,28 @@ public class QCflagsSection extends NemoSection
         tableColumn4.setText(Messages.label_end);
 
         tableColumn5.setWidth(60);
-        tableColumn5.setText(Messages.getString("EditStation.47")); //$NON-NLS-1$   
+        tableColumn5.setText(Messages.table_label_testIn);
 
         tableColumn6.setWidth(60);
-        tableColumn6.setText(Messages.getString("EditStation.48")); //$NON-NLS-1$   
+        tableColumn6.setText(Messages.table_label_testOut);
 
         // Menu contextuel
         Menu menuFlag = new Menu(tabFlagQC.getShell(), SWT.POP_UP);
         MenuItem itemAddFlag = new MenuItem(menuFlag, SWT.CASCADE);
-        itemAddFlag.setText(Messages.getString("EditStation.43")); //$NON-NLS-1$
+        itemAddFlag.setText(Messages.menu_label_addFlag); 
         final Menu subFlag = new Menu(tabFlagQC.getShell(), SWT.DROP_DOWN);
         itemAddFlag.setMenu(subFlag);
 
         MenuItem itemRemoveFlag = new MenuItem(menuFlag, SWT.NONE);
-        itemRemoveFlag.setText(Messages.getString("EditStation.44")); //$NON-NLS-1$
+        itemRemoveFlag.setText(Messages.menu_label_removeFlag); 
         
         new MenuItem(menuFlag,SWT.SEPARATOR);
         
         MenuItem itemInjectFlag = new MenuItem(menuFlag, SWT.NONE);
-        itemInjectFlag.setText(Messages.getString("TableData.11")); //$NON-NLS-1$
+        itemInjectFlag.setText(Messages.menu_label_setFlag);
 
         MenuItem itemTestFlag = new MenuItem(menuFlag, SWT.NONE);
-        itemTestFlag.setText(Messages.button_test);
+        itemTestFlag.setText(Messages.label_test);
 
         if (ViewFile.radProfilVertical.getSelection()) {
             final FlagMenuItem childDateTime = new FlagMenuItem(subFlag,
@@ -474,7 +474,7 @@ public class QCflagsSection extends NemoSection
             {
                 flag.setLine(Integer
                     .valueOf(tabFlagQC.getItems()[i].getText(2))
-                        - Integer.valueOf(EditDesc.sectionEnteteFichier.getValue()));
+                        - Integer.valueOf(EditDesc.sectionEnteteFichier.getNumberValue()));
                 flag.setFirstCharOffset(tabFlagQC.getItems()[i]
                     .getText(3));
                 flag.setLastCharOffset(tabFlagQC.getItems()[i]
@@ -498,7 +498,7 @@ public class QCflagsSection extends NemoSection
             {
                 flag.setLine(Integer
                     .valueOf(getTabFlagQC().getItems()[i].getText(2))
-                        - Integer.valueOf(EditDesc.sectionEnteteFichier.getValue()));
+                        - Integer.valueOf(EditDesc.sectionEnteteFichier.getNumberValue()));
                 flag.setFirstCharOffset(getTabFlagQC().getItems()[i]
                     .getText(3));
                 flag.setLastCharOffset(getTabFlagQC().getItems()[i]
@@ -530,7 +530,7 @@ public class QCflagsSection extends NemoSection
             item.setText(0, propertyCode);
             item.setText(1, propertyName);
             item.setText(2, String.valueOf(flag.getLine()
-                    + Integer.valueOf(EditDesc.sectionEnteteFichier.getValue())));
+                    + Integer.valueOf(EditDesc.sectionEnteteFichier.getNumberValue())));
             item.setText(3, String.valueOf(flag.getFirstCharOffset()));
             item.setText(4, String.valueOf(flag.getLastCharOffset()));
         }

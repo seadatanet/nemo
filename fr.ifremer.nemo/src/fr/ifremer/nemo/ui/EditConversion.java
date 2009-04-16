@@ -122,7 +122,7 @@ public class EditConversion extends Thread {
         
 
 		ViewEdit.formEdition.getBody().setLayout(new GridLayout());
-		ViewEdit.formEdition.setText(Messages.getString("EditConversion.1")); //$NON-NLS-1$
+		ViewEdit.formEdition.setText(Messages.edit_convert_title); 
 
 		initBoutons();
 
@@ -130,7 +130,7 @@ public class EditConversion extends Thread {
 
 		// bouton conversion
 		buttonConversion.setParent(formEdition.getBody());
-		buttonConversion.setText(Messages.getString("EditConversion.2")); //$NON-NLS-1$
+		buttonConversion.setText(Messages.button_convert); 
 
 		// listener sur le bouton conversion
 		buttonConversion
@@ -149,7 +149,6 @@ public class EditConversion extends Thread {
 
 							// RAZ du numéro de station incrémenté
 							DataModel.stationModel.resetRef();
-							DataModel.stationModel.setLastRef(null);
 
                             // *** Ajouts automatiques de certains paramètres
                             DataModel.stationModel.setAddedParameterModel();
@@ -211,12 +210,10 @@ public class EditConversion extends Thread {
                                     }
                                 }                                
 							} else {
-								Utils.messageErreur(Messages
-										.getString("EditConversion.15")); //$NON-NLS-1$
+								Utils.messageErreur(Messages.error_convert_invalideSteps); 
 							}
 						} catch (Exception ex) {
-							Utils.messageErreur(Messages
-									.getString("EditConversion.16")); //$NON-NLS-1$
+							Utils.messageErreur(Messages.error_convert_cancel);
 						}
 
 					}
@@ -252,7 +249,7 @@ public class EditConversion extends Thread {
 		ViewLog.aideConversion();
 		buttonConversion.setParent(s.getBody());
 
-		s.setText(Messages.getString("EditConversion.12")); //$NON-NLS-1$
+		s.setText(Messages.edit_convert_title);
 
 		formEdition.reflow(true);
 
@@ -268,7 +265,7 @@ public class EditConversion extends Thread {
 		Shell newShell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		FileDialog dialog = new FileDialog(newShell, SWT.SAVE
 				| SWT.APPLICATION_MODAL);
-		dialog.setText(Messages.getString("EditConversion.13")); //$NON-NLS-1$
+		dialog.setText(Messages.edit_convert_outputFilename);
 
 		// FAE090
 		if (ViewFile.radODV.getSelection()) {
@@ -313,7 +310,7 @@ public class EditConversion extends Thread {
 					MessageBox mb = new MessageBox(PlatformUI.getWorkbench()
 							.getDisplay().getActiveShell(), SWT.ICON_ERROR
 							| SWT.OK | SWT.APPLICATION_MODAL);
-					mb.setMessage(Messages.getString("EditConversion.27")); //$NON-NLS-1$
+					mb.setMessage(Messages.error_convert_outputFile); 
 					mb.open();
 
 					choixFichierSortie();
@@ -323,7 +320,7 @@ public class EditConversion extends Thread {
 					MessageBox mb = new MessageBox(PlatformUI.getWorkbench()
 							.getDisplay().getActiveShell(), SWT.ICON_ERROR
 							| SWT.OK | SWT.APPLICATION_MODAL);
-					mb.setMessage(Messages.getString("EditConversion.26")); //$NON-NLS-1$
+					mb.setMessage(Messages.error_convert_outputDir); 
 					mb.open();
 
 					choixFichierSortie();
@@ -334,13 +331,12 @@ public class EditConversion extends Thread {
 			if (fich.exists()) 
             {
 				// fichier existe
-				// shell.close();
 				Shell shell2 = PlatformUI.getWorkbench().getDisplay()
 						.getActiveShell();
 
 				MessageBox mb = new MessageBox(shell2, SWT.ICON_WARNING
 						| SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
-				mb.setMessage(Messages.getString("EditConversion.18")); //$NON-NLS-1$
+				mb.setMessage(Messages.confirm_eraseFile);
 
 				int reponse = mb.open();
 				if (reponse == SWT.NO) {
@@ -354,13 +350,6 @@ public class EditConversion extends Thread {
                 definePrefixDossier();
 				runSWTProgress();
 			}
-
-			// Ecriture du fichier de mapping CDI
-			/*try {
-				CDIMappingWriter.getInstance().writeMapping();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}*/
 
 			// affichage des résultats en fin de conversion
 			afficheResultat();
@@ -376,7 +365,7 @@ public class EditConversion extends Thread {
 		Shell shell1 = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		DirectoryDialog dialog = new DirectoryDialog(shell1, SWT.SAVE
 				| SWT.APPLICATION_MODAL);
-		dialog.setText(Messages.getString("EditConversion.25")); //$NON-NLS-1$
+		dialog.setText(Messages.edit_convert_outputDir);
 
 		if (ViewFile.radioFichier.getSelection()) {
 			dialog.setFilterPath(ViewFile.nomRepertoire);
@@ -396,7 +385,7 @@ public class EditConversion extends Thread {
 				MessageBox mb = new MessageBox(PlatformUI.getWorkbench()
 						.getDisplay().getActiveShell(), SWT.ICON_ERROR | SWT.OK
 						| SWT.APPLICATION_MODAL);
-				mb.setMessage(Messages.getString("EditConversion.26")); //$NON-NLS-1$
+				mb.setMessage(Messages.error_convert_outputDir);
 				mb.open();
 
 				choixDossierSortie();
@@ -411,7 +400,7 @@ public class EditConversion extends Thread {
 
 				MessageBox mb = new MessageBox(shell2, SWT.ICON_WARNING
 						| SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
-				mb.setMessage(Messages.getString("EditConversion.24")); //$NON-NLS-1$
+				mb.setMessage(Messages.confirm_useDir);
 
 				int reponse = mb.open();
 				if (reponse == SWT.NO) {
@@ -426,13 +415,6 @@ public class EditConversion extends Thread {
                 definePrefixDossier();
 				runSWTProgress();
 			}
-
-			// Ecriture du fichier de mapping CDI
-			/*try {
-				CDIMappingWriter.getInstance().writeMapping();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}*/
 
 			// affichage des résultats en fin de conversion
 			afficheResultat();
@@ -455,25 +437,21 @@ public class EditConversion extends Thread {
 	public static void afficheResultat() {
 		if (!SurveyMedia.interrompu && !SWTProcess.interrompu) {
 			if (ViewFile.radODV.getSelection()) {
-				Utils.messageOK(Messages.getString("EditConversion.9"));  //$NON-NLS-1$
+				Utils.messageOK(Messages.edit_convert_endODV);
 			} else {
-				Utils.messageOK(Messages.getString("EditConversion.10"));  //$NON-NLS-1$
+				Utils.messageOK(Messages.edit_convert_endMED);
 			}
 		} else {
-			// Utils.messageErreur(Messages.getString("EditConversion.16"));
 			Utils.messageErreurAppend(messageErreur());
 		}
 
 		// Stations triées
 		if (getSortedStations().size() > 0) {
 			String sortedMessage = "\n\n" + getSortedStations().size() + Global.SPACE  //$NON-NLS-1$
-					+ Messages.getString("EditConversion.28") + Global.SPACE;  //$NON-NLS-1$
+					+ Messages.edit_convert_sortStations + Global.SPACE; 
 			
 			for (Entry<String, Integer> currentEntry : getSortedStations()
 					.entrySet()) {
-				// Utils.messageOKAppend("\n\tstation " + currentEntry.getKey()
-				// + " (" + currentEntry.getValue() + " " +
-				// Messages.getString("EditConversion.29"));
 				sortedMessage += currentEntry.getKey() + ", ";  //$NON-NLS-1$
 			}
 			
@@ -518,7 +496,7 @@ public class EditConversion extends Thread {
 
 		if (getErreurFichier() != null) {
 			if (!getErreurFichier().trim().equals(Global.EMPTY_STRING)) {
-				message += Messages.getString("EditConversion.20") + "\t : \t" //$NON-NLS-1$ //$NON-NLS-2$ 
+				message += Messages.label_file + "\t : \t" //$NON-NLS-1$
 						+ getErreurFichier() + Global.RN;
 			}
 		}
@@ -530,19 +508,19 @@ public class EditConversion extends Thread {
 				// n'est pas forcément la bonne, il vaut mieux ne pas l'indiquer
 				return Global.EMPTY_STRING;
 			}
-			message += Messages.getString("EditConversion.21") + "\t : \t" //$NON-NLS-1$  //$NON-NLS-2$ 
+			message += Messages.label_line + "\t : \t" //$NON-NLS-1$
 					+ getErreurLigne() + Global.RN;
 		}
 
 		if (getErreurChaine() != null) {
 			if (!getErreurChaine().trim().equals(Global.EMPTY_STRING)) {
-				message += Messages.getString("EditConversion.22") + "\t : \t" //$NON-NLS-1$  //$NON-NLS-2$
+				message += Messages.label_string + "\t : \t" //$NON-NLS-1$
 						+ getErreurChaine();
 			}
 		}
 
 		if (!message.equals(Global.EMPTY_STRING)) {
-			message = Global.RN + Messages.getString("EditConversion.23") + Global.RN //$NON-NLS-1$
+			message = Global.RN + Messages.error_convert_position + Global.RN 
 					+ message;
 		}
 
@@ -685,14 +663,14 @@ public class EditConversion extends Thread {
         temp += ref;
         
 		// [Numéro station]
-		if (!temp.equals(Global.EMPTY_STRING)) temp += "_"; //$NON-NLS-1$
+		if (!temp.equals(Global.EMPTY_STRING)) temp += Global.UNDERSCORE; 
 		temp += stationReference;
 		
 		// [Type de données] s'il existe
 		if (datatype != null) {
 			if (!station.getDataType().getCode().equals(Global.EMPTY_STRING)) {
 				if (!temp.equals(Global.EMPTY_STRING)) {
-					temp += "_"; //$NON-NLS-1$
+					temp += Global.UNDERSCORE;
 				}
 				temp += station.getDataType().getCode();
 			}
@@ -740,23 +718,11 @@ public class EditConversion extends Thread {
     		}
             
         }
-//        if (Utils.configuration.isWriteMapping())        
-//        {   
-//    		if (Utils.configuration.getFichierMapping().trim().equals(Global.EMPTY_STRING)) {
-//    			message += Global.RN + " - " + Messages.getString("OptionsAction.31"); //$NON-NLS-1$ //$NON-NLS-2$
-//    			blnOK = false;
-//    		}
-//        }
-		
-		/*if (Utils.configuration.getArboMapping().trim().equals(Global.EMPTY_STRING)) {
-			message += Global.RN + " - " + Messages.getString("OptionsAction.32"); //$NON-NLS-1$ //$NON-NLS-2$
-			blnOK = false;
-		}*/
 		
 		if (!blnOK) {
 			try {
 				String[] buttons = new String[1];
-				buttons[0] = "OK"; //$NON-NLS-1$ 
+				buttons[0] = Messages.success; 
 				MessageDialog dialog = new MessageDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), Messages.getString("CDIResumeWriter.configTitle"), null, message, MessageDialog.NONE, buttons, 0); //$NON-NLS-1$
 				dialog.open();
 			} catch (Exception e) {

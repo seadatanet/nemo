@@ -155,8 +155,8 @@ public class Preformat {
 			_repEntree = ViewFile.nomRepertoire;
 		}
 				
-		_enTeteFichier = Integer.parseInt(EditDesc.sectionEnteteFichier.getValue());
-		_enTeteStation = EditDesc.sectionEnteteStation.getValue();
+		_enTeteFichier = Integer.parseInt(EditDesc.sectionEnteteFichier.getNumberValue());
+		_enTeteStation = EditDesc.sectionEnteteStation.getTextValue();
 	
 		if (EditDesc.sectionRuptureDonnees.radEOFselected()) {
 			
@@ -165,7 +165,7 @@ public class Preformat {
 		} else if (EditDesc.sectionRuptureDonnees.radNextStationSelected()) {
             
         } else if (EditDesc.sectionRuptureDonnees.radManuelSelected()) {
-			_indicateur = EditDesc.sectionRuptureDonnees.getValue();
+			_indicateur = EditDesc.sectionRuptureDonnees.getTextValue();
 		}
         
 				

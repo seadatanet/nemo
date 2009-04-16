@@ -1495,8 +1495,8 @@ public class NemoLists implements Cloneable {
         UpdateBean parameters = getUpdate(Intern.id_nemo).getSubUpdate(Intern.list_ROSCOPparameters);
         UpdateBean instruments = getUpdate(Intern.id_nemo).getSubUpdate(Intern.list_instruments);
         
-        if (parameters.getEtat().equals(EtatUpdate.UPDATED) 
-                || instruments.getEtat().equals(EtatUpdate.UPDATED)){
+        if ((parameters != null && parameters.getEtat().equals(EtatUpdate.UPDATED)) 
+                ||( instruments != null && instruments.getEtat().equals(EtatUpdate.UPDATED))){
             _dataTypes.clear();
             initDataTypes();
         }

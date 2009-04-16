@@ -15,13 +15,13 @@ public class Messages {
     public static String application_modelTitle;
     
     public static String success;
-    
-    public static String confirm_saveModel;
+    public static String error;
     
     public static String menu_model;
     public static String menu_couplingTable;
     public static String menu_options;
     public static String menu_help;
+    public static String menu_quit;
     
     public static String onglet_file;
     public static String onglet_cruise;
@@ -35,7 +35,7 @@ public class Messages {
     public static String button_xmlIni;
     public static String button_reset;
     public static String button_set;
-    public static String button_test;
+    public static String button_convert;
     
     public static String typeFile_profile;
     public static String typeFile_timeseries;
@@ -54,6 +54,33 @@ public class Messages {
     public static String lib_file_sepComma;
     public static String lib_file_sepSpace;
     public static String lib_file_sepOther;
+
+    public static String lib_convert_title;
+    public static String lib_convert_monoFichier;
+    public static String lib_convert_monoStation;
+    public static String lib_convert_sort;
+    
+    public static String table_label_meta;
+    public static String table_label_code;
+    public static String table_label_testIn;
+    public static String table_label_testOut;
+    public static String table_label_unit;
+    public static String table_label_valueIn;
+    public static String table_label_valueOut;
+    public static String table_label_testFlag;
+    public static String table_label_startFlag;
+    public static String table_label_endFlag;
+    
+    public static String menu_label_setValue;
+    public static String menu_label_updateTest;
+    public static String menu_label_paramList;
+    public static String menu_label_upType;
+    public static String menu_label_downType;
+    public static String menu_label_removeType;
+    public static String menu_label_setFlag;
+    public static String menu_label_deleteFlag;
+    public static String menu_label_addFlag;
+    public static String menu_label_removeFlag;
     
     public static String label_manual_01;
     public static String label_auto_01;
@@ -66,10 +93,20 @@ public class Messages {
     public static String label_start;
     public static String label_end;
     public static String label_variable;
+    public static String label_test;
+    public static String label_file;
+    public static String label_string;
     
+    public static String confirm_saveModel;
+    public static String confirm_quit;
+    public static String confirm_eraseFile;
+    public static String confirm_useDir;
+    
+    // EDIT
     public static String edit_file_title;
     public static String edit_file_enteteFichier;
     public static String edit_file_enteteStation;
+    public static String edit_file_interLines;
     public static String edit_file_finStation;
     public static String edit_file_indicFinDonnees;
     public static String edit_file_idcEOF;
@@ -125,24 +162,35 @@ public class Messages {
     public static String edit_station_sectionSampling_lib;
     public static String edit_station_sectionQCflags_lib;
     
+    public static String edit_data_title;
     
-    public static String error_cruise_openXml;
-    public static String error_cruise_invalidXML;
+    public static String edit_convert_title;
+    public static String edit_convert_endODV;
+    public static String edit_convert_endMED;
+    public static String edit_convert_outputFilename;
+    public static String edit_convert_outputDir;
+    public static String edit_convert_sortStations;
     
+    
+    // RESULTATS
     public static String success_file_preformat;
     public static String progress_file_preformat;
     public static String progress_file_preformat_analyse;
     public static String progress_file_preformat_write;
+    public static String error_notValid;
     public static String error_file_preformat;
     public static String error_file_selectFile;
     public static String error_file_selectDir;
     public static String error_file_idcEmpty;
-    public static String error_notValid;
-
-    public static String lib_convert_title;
-    public static String lib_convert_monoFichier;
-    public static String lib_convert_monoStation;
-    public static String lib_convert_sort;
+    public static String error_cruise_openXml;
+    public static String error_cruise_invalidXML;
+    public static String error_data_removePRES;
+    public static String error_data_firstPRES;
+    public static String error_convert_invalideSteps;
+    public static String error_convert_cancel;
+    public static String error_convert_position;
+    public static String error_convert_outputDir;
+    public static String error_convert_outputFile;
 
     // VOCABULARY UPDATE 
     public static String connect_nemo;
