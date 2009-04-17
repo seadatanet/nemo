@@ -182,37 +182,7 @@ public class Preformat {
 			_separateur = ' ';
 		} else if (ViewFile.radioSeparateurAutre.getSelection()) {
 			_separateur = ViewFile.textSeparateur.getText().toCharArray()[0];
-		}
-		
-//		Utils.messageErreur("");
-		
-//		if (ViewFile.radioFichier.getSelection()) {
-//		} else if (ViewFile.radioCollectCas1.getSelection()) {
-//			for (String repertoire : _listeRepertoires) {
-//				_repEntree = ViewFile.nomRepertoire+"\\"+repertoire; //$NON-NLS-1$
-//				_listeFichiers = new File(_repEntree).list();
-//				
-//				
-//				for (String fichier : _listeFichiers) {
-//					nombreColonnes(fichier);
-//					// on se contente de recuperer le nombre de colonnes du 1er fichier
-//					break;
-//				}
-//				
-//				// on se contente du 1er repertoire
-//				break;
-//			}
-//		} else {
-//			_listeFichiers = new File(ViewFile.nomRepertoire).list();
-//			_repEntree = ViewFile.nomRepertoire;
-//			
-//			for (String fichier : _listeFichiers) {
-//				nombreColonnes(fichier);
-//				// on se contente de recuperer le nombre de colonnes du 1er fichier
-//				break;
-//			}
-//		}
-		
+		}		
 		
 		if (ViewFile.radioFichier.getSelection()) {
             /////////////////////////////////////////
@@ -314,7 +284,6 @@ public class Preformat {
             }
             
 			for (String fichier : _listeFichiers) {
-                System.out.println("fichier : " + fichier);
                 /////////////////////////////////////////
                 // Recuperation du nombres de colonnes //
                 /////////////////////////////////////////
@@ -341,7 +310,6 @@ public class Preformat {
                 refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
                 ecritureFichier(fichier, _repSortie.getAbsolutePath());
                 
-                System.out.println("OK");
 			}
             pourcentEtape2 = 100d;      
             refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
