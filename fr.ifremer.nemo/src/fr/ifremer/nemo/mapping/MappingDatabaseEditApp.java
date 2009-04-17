@@ -22,7 +22,7 @@ public class MappingDatabaseEditApp extends SingleFrameApplication {
     @Override protected void startup() {
         if(this.vue==null)
         {
-            fr.ifremer.nemo.ui.Utils.messageOK(Messages.getString("CouplingTable.launch")); //$NON-NLS-1$
+            fr.ifremer.nemo.ui.Utils.messageOK(Messages.CouplingTable_launch);
             this.vue=new MappingDatabaseEditView(this);
             show(vue);
         } else

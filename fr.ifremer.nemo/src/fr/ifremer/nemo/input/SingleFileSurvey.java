@@ -434,19 +434,19 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 
 			} catch (StringIndexOutOfBoundsException e) {
 				throw new StringIndexOutOfBoundsException(e.getMessage()
-						+ Messages.getString("SingleFileSurvey.1")
+						+ Messages.SingleFileSurvey_1
 						+ file.getName());
 			} catch (NumberFormatException e) {
 
 				e.printStackTrace();
 				throw new NumberFormatException(e.getMessage()
-						+ Messages.getString("SingleFileSurvey.1")
+						+ Messages.SingleFileSurvey_1
 						+ file.getName());
 			} catch (ParseException e) {
 
 				e.printStackTrace();
 				throw new ParseException(e.getMessage()
-						+ Messages.getString("SingleFileSurvey.1")
+						+ Messages.SingleFileSurvey_1
 						+ file.getName(), 0);
 			} finally {
 				if (reader2 != null) {

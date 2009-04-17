@@ -14,8 +14,6 @@ package fr.ifremer.nemo.mapping;
  * @author jollivie
  *
  */
-import java.io.FileInputStream;
-
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
@@ -28,7 +26,6 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 
 import fr.ifremer.nemo.config.Configuration;
-import fr.ifremer.nemo.input.InputModel;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Messages;
 
@@ -48,7 +45,7 @@ public class ExportMappingAction extends Action implements ISelectionListener,
 
         this.window = window;
         setId(ID);
-        setText(Messages.getString("ExportMappingAction.1")); //$NON-NLS-1$
+        setText(Messages.ExportMappingAction_1);
         window.getSelectionService().addSelectionListener(this);
 
     }
@@ -58,19 +55,15 @@ public class ExportMappingAction extends Action implements ISelectionListener,
 
     }
 
+    @Override
     public void run() {
-        FileInputStream stream = null;
-//      System.out.println("Menu open"); //$NON-NLS-1$
-
-
-            InputModel inputModel = new InputModel();
 
             Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
             FileDialog dialog = new FileDialog(shell, SWT.SAVE
                     | SWT.APPLICATION_MODAL);
             dialog.setFilterPath(Utils.configuration.getModelsDirectory()
                     + "\\"); //$NON-NLS-1$
-            dialog.setText(Messages.getString("ExportMappingAction.5")); //$NON-NLS-1$
+            dialog.setText(Messages.ExportMappingAction_5);
 
             dialog.setFileName(Configuration.getSingleton().getFichierMapping());
             String extensions[] = new String[1];
@@ -82,7 +75,6 @@ public class ExportMappingAction extends Action implements ISelectionListener,
             } else {
 
                 // ouverture du fichier XML de modele
-
                 new MappingTable().exporter(nomMapping);
             }
 

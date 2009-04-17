@@ -125,7 +125,7 @@ public class AutoLine implements UIobject
 
                     if (deb == fi) {
                         // message d'erreur
-                        Utils.messageErreurAppend(Messages.getString("Utils.26"));    //$NON-NLS-1$
+                        Utils.messageErreurAppend(Messages.Utils_26);
 
                     } else {
                         lign = 1;
@@ -258,7 +258,7 @@ public class AutoLine implements UIobject
                     if (!inData){
                         ligneOK = false;
                         if (sectionName != null) 
-                            Utils.messageErreurAppend(sectionName + Global.SPACE + Messages.getString("Regexp.19"));            //$NON-NLS-1$
+                            Utils.messageErreurAppend(sectionName + Global.SPACE + Messages.Regexp_19);
                     }
                     break;
                 case INTERDIT:
@@ -266,7 +266,7 @@ public class AutoLine implements UIobject
                     if (!inStationHeader || inData){
                         ligneOK = false;
                         if (sectionName != null) 
-                            Utils.messageErreurAppend(sectionName + Global.SPACE + Messages.getString("Regexp.21"));        //$NON-NLS-1$
+                            Utils.messageErreurAppend(sectionName + Global.SPACE + Messages.Regexp_21);
                     }
                     break;
                 case FACULTATIF:
@@ -275,14 +275,14 @@ public class AutoLine implements UIobject
                     if (!inData && !inStationHeader && lign != 0){
                         ligneOK = false;
                         if (sectionName != null) 
-                            Utils.messageErreurAppend(sectionName + Global.SPACE + Messages.getString("Regexp.19"));   //$NON-NLS-1$ 
+                            Utils.messageErreurAppend(sectionName + Global.SPACE + Messages.Regexp_19);
                     }
                     EditStation.actualiseEdition();
                     break;
             }
         }else{
             ligneOK = false;
-            Utils.messageErreurAppend(Messages.getString("Regexp.22"));            //$NON-NLS-1$
+            Utils.messageErreurAppend(Messages.Regexp_22);
         }
         return ligneOK;
     }
@@ -443,27 +443,27 @@ public class AutoLine implements UIobject
             result = numberLine.checkValue();
             ok = ok && result;
             if (!result)
-                log = log + "==>" + Messages.getString("Regexp.8"); //$NON-NLS-1$ //$NON-NLS-2$
+                log = log + "==>" + Messages.Regexp_8; //$NON-NLS-1$
         }
 
         // debut
         result = start.checkValue();
         ok = ok && result;
         if (!result)
-            log = log + "==>" + Messages.getString("Regexp.10"); //$NON-NLS-1$ //$NON-NLS-2$
+            log = log + "==>" + Messages.Regexp_10; //$NON-NLS-1$ 
 
         // fin
         result = end.checkValue();
         ok = ok && result;
         if (!result)
-            log = log + "==>" + Messages.getString("Regexp.12"); //$NON-NLS-1$ //$NON-NLS-2$
+            log = log + "==>" + Messages.Regexp_12; //$NON-NLS-1$
 
         
         // tests des relations des champs
         if (!debut.trim().equals(Global.EMPTY_STRING) && (!fin.trim().equals(Global.EMPTY_STRING))) {
             if (Integer.parseInt(debut) > Integer.parseInt(fin)) {
                 ok = ok && false;
-                log = log + "==>" + Messages.getString("Regexp.15"); //$NON-NLS-1$//$NON-NLS-2$
+                log = log + "==>" + Messages.Regexp_15; //$NON-NLS-1$
             }
         }
 
@@ -483,7 +483,7 @@ public class AutoLine implements UIobject
         // parcours du tableau des tailles de lignes cumulees
 
         if (cursor.getX() == cursor.getY()) {
-            Utils.messageErreurAppend(Messages.getString("Utils.26")); //$NON-NLS-1$
+            Utils.messageErreurAppend(Messages.Utils_26);
 
         } else {
             // calcul ligne depart

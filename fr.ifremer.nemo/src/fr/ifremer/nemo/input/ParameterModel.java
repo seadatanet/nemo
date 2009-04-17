@@ -445,11 +445,11 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 					val = Double.parseDouble(fragmnt);
 				} catch (NumberFormatException e) {
 					throw new NumberFormatException(Messages
-							.getString("ParameterModel.1")
+							.ParameterModel_1
 							+ e.getMessage().substring(
 									e.getMessage().indexOf("\""),
 									e.getMessage().lastIndexOf("\""))
-							+ Messages.getString("ParameterModel.2") + Global.RN);
+							+ Messages.ParameterModel_2 + Global.RN);
 				}
 				if (_conversionFormula.trim().length() > 0) {
 					if (getJepParser() == null) {

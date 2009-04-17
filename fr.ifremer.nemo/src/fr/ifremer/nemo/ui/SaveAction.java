@@ -36,7 +36,7 @@ public class SaveAction extends Action implements ISelectionListener,
 
 		this.window = window;
 		setId(ID);
-		setText(Messages.getString("SaveAction.1")); //$NON-NLS-1$
+		setText(Messages.SaveAction_1);
 		window.getSelectionService().addSelectionListener(this);
 
 	}
@@ -53,7 +53,7 @@ public class SaveAction extends Action implements ISelectionListener,
 		FileOutputStream fileOutputStream = null;
 
 		if (!EditData.validee) {
-			Utils.messageErreur(Messages.getString("SaveAction.3")); //$NON-NLS-1$
+			Utils.messageErreur(Messages.SaveAction_3);
 		} else {
 			if (EditDesc.okApresReset && EditSurvey.okApresReset
 					&& EditStation.okApresReset && EditData.okApresReset) {
@@ -66,10 +66,10 @@ public class SaveAction extends Action implements ISelectionListener,
 				}
 
 				DataModel.inputModel.writeXMLOn(fileOutputStream);
-				Utils.messageOK(Messages.getString("SaveAction.4")); //$NON-NLS-1$
+				Utils.messageOK(Messages.SaveAction_4);
 
 			} else {
-				Utils.messageErreur(Messages.getString("SaveAction.3")); //$NON-NLS-1$
+				Utils.messageErreur(Messages.SaveAction_3);
 			}
 		}
 	}
@@ -79,7 +79,7 @@ public class SaveAction extends Action implements ISelectionListener,
 		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		FileDialog dialog = new FileDialog(shell, SWT.SAVE
 				| SWT.APPLICATION_MODAL);
-		dialog.setText(Messages.getString("SaveAction.5")); //$NON-NLS-1$
+		dialog.setText(Messages.SaveAction_5); 
 		dialog.setFilterPath(Utils.configuration.getModelsDirectory() + "\\"); //$NON-NLS-1$
 		String extensions[] = new String[1];
 		extensions[0] = "*.xml"; //$NON-NLS-1$
@@ -96,7 +96,7 @@ public class SaveAction extends Action implements ISelectionListener,
 
 				MessageBox mb = new MessageBox(shell2, SWT.ICON_WARNING
 						| SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
-				mb.setMessage(Messages.getString("SaveAction.6")); //$NON-NLS-1$
+				mb.setMessage(Messages.SaveAction_6); 
 
 				int reponse = mb.open();
 				if (reponse == SWT.NO) {

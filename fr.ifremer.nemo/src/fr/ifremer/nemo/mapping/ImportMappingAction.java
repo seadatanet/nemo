@@ -12,8 +12,6 @@ package fr.ifremer.nemo.mapping;
  * @author jollivie
  *
  */
-import java.io.FileInputStream;
-
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
@@ -25,7 +23,6 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 
-import fr.ifremer.nemo.input.InputModel;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Messages;
 
@@ -45,7 +42,7 @@ public class ImportMappingAction extends Action implements ISelectionListener,
 
         this.window = window;
         setId(ID);
-        setText(Messages.getString("ImportMappingAction.1")); //$NON-NLS-1$
+        setText(Messages.ImportMappingAction_1);
         //setText("Import"); //$NON-NLS-1$
         window.getSelectionService().addSelectionListener(this);
 
@@ -56,19 +53,15 @@ public class ImportMappingAction extends Action implements ISelectionListener,
 
     }
 
+    @Override
     public void run() {
-        FileInputStream stream = null;
-//      System.out.println("Menu open"); //$NON-NLS-1$
-
-
-            InputModel inputModel = new InputModel();
 
             Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
             FileDialog dialog = new FileDialog(shell, SWT.OPEN
                     | SWT.APPLICATION_MODAL);
             dialog.setFilterPath(Utils.configuration.getModelsDirectory()
                     + "\\"); //$NON-NLS-1$
-            dialog.setText(Messages.getString("ImportMappingAction.5")); //$NON-NLS-1$
+            dialog.setText(Messages.ImportMappingAction_5); 
             String extensions[] = new String[1];
             extensions[0] = "*.txt"; //$NON-NLS-1$
             dialog.setFilterExtensions(extensions);

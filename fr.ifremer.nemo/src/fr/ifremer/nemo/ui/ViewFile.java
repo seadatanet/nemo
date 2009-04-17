@@ -298,23 +298,23 @@ public class ViewFile extends ViewPart
 
         labelCampagne = new Label(compositeChoixFichier, SWT.NONE);
         labelCampagne
-            .setText(Messages.lib_file_processCruise + "           "); //$NON-NLS-1$
+            .setText(Messages.view_file_processCruise + "           "); //$NON-NLS-1$
 
         labelCollection = new Label(compositeChoixFichier, SWT.NONE);
-        labelCollection.setText(Messages.lib_file_processCollection);
+        labelCollection.setText(Messages.view_file_processCollection);
 
         radioFichier = new Button(compositeChoixFichier, SWT.RADIO);
         radioFichier.setSelection(true);
-        radioFichier.setText(Messages.lib_file_cruiseFile);
+        radioFichier.setText(Messages.view_file_cruiseFile);
 
         radioCollectCas1 = new Button(compositeChoixFichier, SWT.RADIO);
-        radioCollectCas1.setText(Messages.lib_file_collectionCas1);
+        radioCollectCas1.setText(Messages.view_file_collectionCas1);
 
         radioDossier = new Button(compositeChoixFichier, SWT.RADIO);
-        radioDossier.setText(Messages.lib_file_cruiseDir); 
+        radioDossier.setText(Messages.view_file_cruiseDir); 
 
         radioCollectCasN = new Button(compositeChoixFichier, SWT.RADIO);
-        radioCollectCasN.setText(Messages.lib_file_collectionCasN); 
+        radioCollectCasN.setText(Messages.view_file_collectionCasN); 
 
         radioFichier
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -444,7 +444,7 @@ public class ViewFile extends ViewPart
                                 EditDesc.affichageEdition();
 
                             }catch (IOException e1){
-                                ViewLog.styledTextLogErreurs.setText(Messages.getString("Etape.120")); //$NON-NLS-1$
+                                ViewLog.styledTextLogErreurs.setText(Messages.error);
                                 e1.printStackTrace();
                             }
                         }else{
@@ -627,7 +627,7 @@ public class ViewFile extends ViewPart
         layout.numColumns = 2;
 
         Group group = new Group(compositeConversion, SWT.NONE);
-        group.setText(Messages.lib_convert_title); 
+        group.setText(Messages.view_convert_title); 
         group.setLayout(layout);
 
         radMedatlas = new Button(group, SWT.RADIO);
@@ -646,10 +646,10 @@ public class ViewFile extends ViewPart
         afficheGrpODV();
 
         radMonoStation = new Button(grpODV, SWT.RADIO);
-        radMonoStation.setText(Messages.lib_convert_monoStation);
+        radMonoStation.setText(Messages.view_convert_monoStation);
         radMonoStation.setSelection(true);
         radMonoFichier = new Button(grpODV, SWT.RADIO);
-        radMonoFichier.setText(Messages.lib_convert_monoFichier);
+        radMonoFichier.setText(Messages.view_convert_monoFichier);
 
         // if (isCollection()) {
         // radMedatlas.setEnabled(false);
@@ -659,7 +659,7 @@ public class ViewFile extends ViewPart
         Composite compoVide2 = new Composite(compositeConversion, SWT.NONE);
 
         chkForcerTri = new Button(compositeConversion, SWT.CHECK);
-        chkForcerTri.setText(Messages.lib_convert_sort);
+        chkForcerTri.setText(Messages.view_convert_sort);
 
         chkForcerTri
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -703,7 +703,7 @@ public class ViewFile extends ViewPart
     private void createGroupeFichier()
     {
         grpFichier = new Group(composite11, SWT.NONE);
-        grpFichier.setText(Messages.lib_file_fileType);
+        grpFichier.setText(Messages.view_file_fileType);
         GridLayoutFactory.fillDefaults().applyTo(grpFichier);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(grpFichier);
 
@@ -734,7 +734,7 @@ public class ViewFile extends ViewPart
             .applyTo(grpSeparateur);
 
         chkSeparateur = new Button(grpSeparateur, SWT.CHECK);
-        chkSeparateur.setText(Messages.lib_file_separator);
+        chkSeparateur.setText(Messages.view_file_separator);
 
         compositeSeparateur = new Composite(grpSeparateur, SWT.NONE);
         GridLayoutFactory.fillDefaults().numColumns(3).applyTo(
@@ -743,20 +743,20 @@ public class ViewFile extends ViewPart
             compositeSeparateur);
 
         radioTabulation = new Button(compositeSeparateur, SWT.RADIO);
-        radioTabulation.setText(Messages.lib_file_sepTab);
+        radioTabulation.setText(Messages.view_file_sepTab);
         radioTabulation.setSelection(true);
 
         radioPointVirgule = new Button(compositeSeparateur, SWT.RADIO);
-        radioPointVirgule.setText(Messages.lib_file_sepSemi); 
+        radioPointVirgule.setText(Messages.view_file_sepSemi); 
 
         radioVirgule = new Button(compositeSeparateur, SWT.RADIO);
-        radioVirgule.setText(Messages.lib_file_sepComma); 
+        radioVirgule.setText(Messages.view_file_sepComma); 
 
         radioEspace = new Button(compositeSeparateur, SWT.RADIO);
-        radioEspace.setText(Messages.lib_file_sepSpace); 
+        radioEspace.setText(Messages.view_file_sepSpace); 
 
         radioSeparateurAutre = new Button(compositeSeparateur, SWT.RADIO);
-        radioSeparateurAutre.setText(Messages.lib_file_sepOther); 
+        radioSeparateurAutre.setText(Messages.view_file_sepOther); 
         textSeparateur = new Text(compositeSeparateur, SWT.BORDER);
 
         // Par defaut

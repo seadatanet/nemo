@@ -92,7 +92,7 @@ public class SetText implements UIobject
         // parcours du tableau des tailles de lignes cumulees
 
         if (deb == fi) {
-            Utils.messageErreurAppend(Messages.getString("Utils.26")); //$NON-NLS-1$
+            Utils.messageErreurAppend(Messages.Utils_26);
 
         } else {
 

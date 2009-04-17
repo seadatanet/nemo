@@ -40,7 +40,7 @@ public class UtilDisplay {
     JOptionPane.showMessageDialog(
       a_Frame,
       a_Message,
-      Messages.getString("CouplingTable.info"), //$NON-NLS-1$
+      Messages.CouplingTable_info,
       JOptionPane.INFORMATION_MESSAGE);
   }  
   
@@ -55,7 +55,7 @@ public class UtilDisplay {
     JOptionPane.showMessageDialog(
       a_Frame,
       a_Message,
-      Messages.getString("CouplingTable.warning"),
+      Messages.CouplingTable_warning,
       JOptionPane.WARNING_MESSAGE);
   }
   
@@ -70,7 +70,7 @@ public class UtilDisplay {
     JOptionPane.showMessageDialog(
       a_Frame,
       a_Message,
-      Messages.getString("CouplingTable.error"), //$NON-NLS-1$
+      Messages.CouplingTable_error,
       JOptionPane.ERROR_MESSAGE);
   }  
 
@@ -87,7 +87,7 @@ public class UtilDisplay {
     status = JOptionPane.showConfirmDialog(
                a_Frame,
                a_Message,
-               Messages.getString("CouplingTable.confirm"), //$NON-NLS-1$
+               Messages.CouplingTable_confirm, 
                JOptionPane.YES_NO_CANCEL_OPTION);
     return status;
   }

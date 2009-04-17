@@ -98,9 +98,9 @@ public class Proxy implements RootSAXConsumer {
 				
 				// inform user
 				MessageDialog dialog = new MessageDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), 
-						 								Messages.getString("OptionsAction.proxy.error.title"), null, 
-                                                        Messages.getString("OptionsAction.proxy.error"), 
-						 								MessageDialog.NONE, new String[] { "OK" }, 0); 
+						 								Messages.error_settings_proxy_title, null, 
+                                                        Messages.error_settings_proxy, 
+						 								MessageDialog.NONE, new String[] { Messages.success }, 0); 
 				dialog.open();
 			}finally{
 				if (outputFileWriter != null)

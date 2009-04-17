@@ -132,15 +132,15 @@ public class SWTProcessWS implements IRunnableWithProgress {
 				} catch (MalformedURLException e) {
 					// 
 					e.printStackTrace();
-					Utils.messageErreur(Messages.getString("EditSurvey.48")); //$NON-NLS-1$
+					Utils.messageErreur(Messages.error_updateSurvey_url);
 				} catch (RemoteException e) {
 					// 
 					e.printStackTrace();
-					Utils.messageErreur(Messages.getString("EditSurvey.49")); //$NON-NLS-1$
+					Utils.messageErreur(Messages.error_updateSurvey_distant);
 				} catch (ServiceException e) {
 					// 
 					e.printStackTrace();
-					Utils.messageErreur(Messages.getString("EditSurvey.50")); //$NON-NLS-1$
+					Utils.messageErreur(Messages.error_updateSurvey_service);
 				}
 
 			} else {
@@ -150,16 +150,16 @@ public class SWTProcessWS implements IRunnableWithProgress {
 							referenceWS);
 				} catch (MalformedURLException e) {
 					// 
-					Utils.messageErreur(Messages.getString("EditSurvey.48")); //$NON-NLS-1$
+					Utils.messageErreur(Messages.error_updateSurvey_url);
 					e.printStackTrace();
 				} catch (RemoteException e) {
 					//
 					e.printStackTrace();
-					Utils.messageErreur(Messages.getString("EditSurvey.49")); //$NON-NLS-1$
+					Utils.messageErreur(Messages.error_updateSurvey_distant);
 				} catch (ServiceException e) {
 					// 
 					e.printStackTrace();
-					Utils.messageErreur(Messages.getString("EditSurvey.50")); //$NON-NLS-1$
+					Utils.messageErreur(Messages.error_updateSurvey_service);
 				}
 
 			}

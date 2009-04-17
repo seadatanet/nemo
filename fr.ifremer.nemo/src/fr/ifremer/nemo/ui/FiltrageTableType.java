@@ -53,26 +53,26 @@ public class FiltrageTableType {
         //Utils.messageErreur(Global.EMPTY_STRING);
 
 		if (listeOuverte == 1) {
-			Utils.messageErreurAppend(Messages.getString("FiltrageTableType.1")); //$NON-NLS-1$
+			Utils.messageErreurAppend(Messages.error_table);
 		} else {
 			shell = new Shell(Application.display, SWT.BORDER | SWT.TITLE
 					| SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);
 			shell.setSize(300, 500);
 
 			if (tabOrigine.equals(Global.IDEDMO)) {
-				shell.setText(Messages.getString("FiltrageTableType.2")); //$NON-NLS-1$
+				shell.setText(Messages.table_edmo);
 			} else if (tabOrigine.equals(Global.WSSURVEY)) {
-				shell.setText(Messages.getString("FiltrageTableType.2")); //$NON-NLS-1$
+				shell.setText(Messages.table_edmo);
 			} else if (tabOrigine.equals(Global.DATATYPE)) {
-				shell.setText(Messages.getString("FiltrageTableType.3")); //$NON-NLS-1$
+				shell.setText(Messages.table_dataTypes);
 			} else if (tabOrigine.equals(Global.PARAMETER)) {
-				shell.setText(Messages.getString("FiltrageTableType.4")); //$NON-NLS-1$
+				shell.setText(Messages.table_parameters);
 			} else if (tabOrigine.equals(Global.SHIP)) {
-				shell.setText(Messages.getString("FiltrageTableType.5")); //$NON-NLS-1$
+				shell.setText(Messages.table_ships);
 			} else if (tabOrigine.equals(Global.DATACENTRE)) {
-				shell.setText(Messages.getString("FiltrageTableType.6")); //$NON-NLS-1$
+				shell.setText(Messages.table_datacenter);
 			} else if (tabOrigine.equals(Global.REGION)) {
-				shell.setText(Messages.getString("FiltrageTableType.7")); //$NON-NLS-1$
+				shell.setText(Messages.table_region);
 			}
 
 			shell.setLayout(new FillLayout());
@@ -141,18 +141,16 @@ public class FiltrageTableType {
 			filtreText.setText(""); //$NON-NLS-1$
 			labelText = new Label(top, SWT.NONE);
 			labelText.setBounds(new Rectangle(3, 4, 298, 13));
-			labelText.setText(Messages.getString("FiltrageTableType.8")); //$NON-NLS-1$
+			labelText.setText(Messages.table_label_filter); //$NON-NLS-1$
 			labelText.pack();
 
 			filtreButtonSelectionner = new Button(top, SWT.NONE);
 			filtreButtonSelectionner.setBounds(new Rectangle(62, 289, 65, 23));
-			filtreButtonSelectionner.setText(Messages
-					.getString("FiltrageTableType.9")); //$NON-NLS-1$
+			filtreButtonSelectionner.setText(Messages.button_select);
 			filtreButtonSelectionner.pack();
 			filtreButtonCancel = new Button(top, SWT.NONE);
 			filtreButtonCancel.setBounds(new Rectangle(168, 289, 65, 23));
-			filtreButtonCancel.setText(Messages
-					.getString("FiltrageTableType.10")); //$NON-NLS-1$
+			filtreButtonCancel.setText(Messages.button_cancel);
 			filtreButtonCancel.pack();
 
 			// affichage des tables
@@ -175,7 +173,6 @@ public class FiltrageTableType {
 						@Override
                         public void widgetSelected(
 								org.eclipse.swt.events.SelectionEvent e) {
-							// System.out.println("valider cancel liste");
 							shell.close();
 							listeOuverte = 0;
 						}
@@ -211,8 +208,7 @@ public class FiltrageTableType {
 
 								EditSurvey.webService(mots[0]);
 
-								Utils.messageOK(Messages
-										.getString("FiltrageTableType.21")); //$NON-NLS-1$
+								Utils.messageOK(Messages.success_openSurveyDesc);
 								shell.close();
 
 							} else if (tabOrigine
@@ -254,8 +250,7 @@ public class FiltrageTableType {
 										TableDataSurvey.types.add(typeSurvey);
 									} else {
 										Utils
-												.messageErreur(Messages
-														.getString("FiltrageTableType.13")); //$NON-NLS-1$
+												.messageErreur(Messages.error_table_dataTypes);
 									}
 								} else {
 									TableDataSurvey.types.add(typeSurvey);
@@ -341,8 +336,7 @@ public class FiltrageTableType {
 												typeData));
 									} else {
 										Utils
-												.messageErreur(Messages
-														.getString("FiltrageTableType.15")); //$NON-NLS-1$
+												.messageErreur(Messages.error_table_parameters);
 									}
 								} else {
 									TableData.types.add(new TypeData(typeData));
@@ -419,13 +413,7 @@ public class FiltrageTableType {
 		TableColumn tableColumn = new TableColumn(table, SWT.NONE);
 		tableColumn.setWidth(290);
 		// taille = 60
-		tableColumn.setText(Messages.getString("FiltrageTableType.17")); //$NON-NLS-1$
-		// TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);
-		// tableColumn1.setWidth(300);
-		// tableColumn1.setText("Nom");
-		// TableColumn tableColumn2 = new TableColumn(table, SWT.NONE);
-		// tableColumn2.setWidth(100);
-		// tableColumn2.setText("QC");
+		tableColumn.setText(Messages.table_label_codeName);
 
 		for (int i = 0; i < nbre; i++) {
 			TableItem item = new TableItem(table, SWT.NONE);
@@ -452,7 +440,7 @@ public class FiltrageTableType {
 		TableColumn tableColumn = new TableColumn(table, SWT.NONE);
 		tableColumn.setWidth(280);
 		// taille = 60
-		tableColumn.setText(Messages.getString("FiltrageTableType.17")); //$NON-NLS-1$
+		tableColumn.setText(Messages.table_label_codeName);
 		
 		for (int i = 0; i < nbre; i++) {
 			TableItem item = new TableItem(table, SWT.NONE);
@@ -477,7 +465,7 @@ public class FiltrageTableType {
 		TableColumn tableColumn = new TableColumn(table, SWT.NONE);
 		tableColumn.setWidth(280);
 		// taille = 60
-		tableColumn.setText(Messages.getString("FiltrageTableType.17")); //$NON-NLS-1$
+		tableColumn.setText(Messages.table_label_codeName);
 		
 		for (int i = 0; i < nbre; i++) {
 			TableItem item = new TableItem(table, SWT.NONE);
@@ -504,13 +492,13 @@ public class FiltrageTableType {
 		TableColumn tableColumn = new TableColumn(table, SWT.NONE);
 		tableColumn.setWidth(100);
 		// taille = 60
-		tableColumn.setText(Messages.getString("FiltrageTableType.18")); //$NON-NLS-1$
+		tableColumn.setText(Messages.table_label_code.toUpperCase());
 		TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);
 		tableColumn1.setWidth(100);
-		tableColumn1.setText(Messages.getString("FiltrageTableType.19")); //$NON-NLS-1$
+		tableColumn1.setText(Messages.table_label_number);
 		TableColumn tableColumn2 = new TableColumn(table, SWT.NONE);
 		tableColumn2.setWidth(100);
-		tableColumn2.setText(Messages.getString("FiltrageTableType.20")); //$NON-NLS-1$
+		tableColumn2.setText(Messages.table_label_qc);
 
 		for (int i = 0; i < nbre; i++) {
 			TableItem item = new TableItem(table, SWT.NONE);
@@ -723,13 +711,7 @@ public class FiltrageTableType {
 		TableColumn tableColumn = new TableColumn(table, SWT.NONE);
 		tableColumn.setWidth(290);
 		// taille = 60
-		tableColumn.setText(Messages.getString("FiltrageTableType.29")); //$NON-NLS-1$
-		// TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);
-		// tableColumn1.setWidth(300);
-		// tableColumn1.setText("Nom");
-		// TableColumn tableColumn2 = new TableColumn(table, SWT.NONE);
-		// tableColumn2.setWidth(100);
-		// tableColumn2.setText("QC");
+		tableColumn.setText(Messages.table_label_refName);
 
 		for (int i = 0; i < nbre; i++) {
 			TableItem item = new TableItem(table, SWT.NONE);

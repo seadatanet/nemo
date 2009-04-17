@@ -108,9 +108,9 @@ public class Utils {
 
 		// debut d'infos du fichier
 		ViewLog.styledTextLogInfos
-				.setText(Messages.getString("Utils.5") + fich); //$NON-NLS-1$
+				.setText(Messages.Utils_5 + fich);
 		ViewLog.styledTextLogInfos
-				.append(Messages.getString("Utils.6") + nbreLignes); //$NON-NLS-1$
+				.append(Messages.Utils_6 + nbreLignes);
 
 		// reactivation de l'option serie temporelle onglet DESC
 		ViewFile.radProfilVertical.setEnabled(true);
@@ -141,7 +141,7 @@ public class Utils {
 		fi = styledtext.getSelection().y;
 
 		if (deb == fi) {
-			Utils.messageErreurAppend(Messages.getString("Utils.26")); //$NON-NLS-1$
+			Utils.messageErreurAppend(Messages.Utils_26);
 
 		} else {
 
@@ -221,7 +221,7 @@ public class Utils {
 		index = ViewFile.tableData.getSelectionIndex();
 
 		if (deb == fi) {
-			Utils.messageErreurAppend(Messages.getString("Utils.26")); //$NON-NLS-1$
+			Utils.messageErreurAppend(Messages.Utils_26);
 
 		} else {
 
@@ -276,7 +276,7 @@ public class Utils {
 			fi = styledtext.getSelection().y;
 
 			if (deb == fi) {
-				Utils.messageErreurAppend(Messages.getString("Utils.26")); //$NON-NLS-1$
+				Utils.messageErreurAppend(Messages.Utils_26);
 			} else {
 
 				lign = 1;
@@ -371,7 +371,7 @@ public class Utils {
 		// parcours du tableau des tailles de lignes cumulees
 
 		if (deb == fi) {
-			Utils.messageErreurAppend(Messages.getString("Utils.26")); //$NON-NLS-1$
+			Utils.messageErreurAppend(Messages.Utils_26);
 
 		} else {
 
@@ -786,7 +786,7 @@ public class Utils {
 
 			if (!ext.equals(ext1)) {
 				ok = false;
-				Utils.messageErreurAppend(Messages.getString("Utils.27")); //$NON-NLS-1$
+				Utils.messageErreurAppend(Messages.Utils_27);
                 break;
 			}
 
@@ -845,7 +845,7 @@ public class Utils {
 
 			if (!ext.equals(ext1)) {
 				ok = false;
-				Utils.messageErreurAppend(Messages.getString("Utils.27")); //$NON-NLS-1$
+				Utils.messageErreurAppend(Messages.Utils_27);
                 break;
 			}
 
@@ -878,7 +878,7 @@ public class Utils {
 
 			if (!ext.equals(ext1)) {
 				ok = false;
-				Utils.messageErreurAppend(Messages.getString("Utils.27")); //$NON-NLS-1$
+				Utils.messageErreurAppend(Messages.Utils_27);
                 break;
 			}
 
@@ -1006,7 +1006,7 @@ public class Utils {
 		// LANGUE
 		if (OptionsAction.comboLangue.getItem(
 				OptionsAction.comboLangue.getSelectionIndex()).equals(
-				Messages.getString("OptionsAction.11"))) { //$NON-NLS-1$
+				Messages.settings_lang_FR)) {
 			configuration.setLang(Intern.lang_fr);
 		} else {
 			configuration.setLang(Intern.lang_en); 
@@ -1279,7 +1279,7 @@ public class Utils {
 		Menu menu = new Menu(combo.getShell(), SWT.POP_UP);
 
 		MenuItem itemSearch = new MenuItem(menu, SWT.NONE);
-		itemSearch.setText(Messages.getString("OptionsAction.27")); //$NON-NLS-1$
+		itemSearch.setText(Messages.menu_label_search);
 
 		combo.setMenu(menu);
 

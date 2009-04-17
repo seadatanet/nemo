@@ -105,17 +105,17 @@ public class QCflagsSection extends NemoSection
         tabCorrespondance.setHeaderVisible(true);
         tabCorrespondance.setLinesVisible(true);
         flagColumn1.setWidth(60);
-        flagColumn1.setText(Messages.getString("OptionsAction.36")); //$NON-NLS-1$
+        flagColumn1.setText(Messages.table_label_local);
         flagColumn2.setWidth(210);
-        flagColumn2.setText(Messages.getString("OptionsAction.37")); //$NON-NLS-1$
+        flagColumn2.setText(Messages.table_label_seadatanet);
         GridDataFactory.fillDefaults().grab(true, true).applyTo(tabCorrespondance);
 
         // Menu contextuel
         Menu menu = new Menu(tabCorrespondance.getShell(), SWT.POP_UP);
         MenuItem itemAdd = new MenuItem(menu, SWT.NONE);
-        itemAdd.setText(Messages.getString("OptionsAction.38")); //$NON-NLS-1$
+        itemAdd.setText(Messages.menu_label_add); 
         MenuItem itemRemove = new MenuItem(menu, SWT.NONE);
-        itemRemove.setText(Messages.getString("OptionsAction.39")); //$NON-NLS-1$
+        itemRemove.setText(Messages.menu_label_remove);
 
         tabCorrespondance.setMenu(menu);
 
@@ -220,8 +220,8 @@ public class QCflagsSection extends NemoSection
         itemAdd.addListener(SWT.Selection, new Listener() {
             public void handleEvent(Event e) {
                 TableItem item = new TableItem(tab, SWT.NONE);
-                item.setText(0, Messages.getString("OptionsAction.41"));        //$NON-NLS-1$
-                item.setText(1, Messages.getString("OptionsAction.41"));        //$NON-NLS-1$
+                item.setText(0, Messages.menu_label_new);
+                item.setText(1, Messages.menu_label_new);
 
                 Flag temp = new Flag(item.getText(0), item.getText(1));
                 flagTable.getFlags().add(temp);
@@ -239,7 +239,7 @@ public class QCflagsSection extends NemoSection
         });
 
         MenuItem itemLoad = new MenuItem(menu, SWT.CASCADE);
-        itemLoad.setText(Messages.getString("OptionsAction.43"));               //$NON-NLS-1$
+        itemLoad.setText(Messages.menu_label_load);
         final Menu submenu = new Menu(tabCorrespondance.getShell(),
                 SWT.DROP_DOWN);
         itemLoad.setMenu(submenu);

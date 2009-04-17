@@ -97,10 +97,10 @@ public class EditSurvey {
 			// INFOS sur les fichiers utilises
 			if (ViewFile.radioFichier.getSelection()) {
 				// fichier campagne
-				Utils.messageInfoAppend(Messages.lib_file_cruiseFile);
+				Utils.messageInfoAppend(Messages.view_file_cruiseFile);
 			} else {
 				// dossier campagne
-				Utils.messageInfoAppend(Messages.lib_file_cruiseDir + ViewFile.nomRepertoire);
+				Utils.messageInfoAppend(Messages.view_file_cruiseDir + ViewFile.nomRepertoire);
 			}
 
 			if (ViewFile.radSerieTempo.getSelection()) {

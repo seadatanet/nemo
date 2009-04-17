@@ -153,16 +153,16 @@ public class MappingDatabaseEditView extends FrameView {
     String filename = this.filenameField.getText();
     
     if (localCdiId == null || localCdiId.trim().equals("")) 
-        errorMsg.append(Messages.getString("CouplingTableAjout.localcdiid"));
+        errorMsg.append(Messages.CouplingTableAjout_localcdiid);
     if (modusText == null || modusText.trim().equals("")) 
-        errorMsg.append(Messages.getString("CouplingTableAjout.modus"));
+        errorMsg.append(Messages.CouplingTableAjout_modus);
     if (format == null || format.trim().equals("")) 
-        errorMsg.append(Messages.getString("CouplingTableAjout.format"));
+        errorMsg.append(Messages.CouplingTableAjout_format);
     else if (modusText != null && modusText.substring(0, 1).equals(Mapping.MODUS_MONOSTATION) 
             && format.equals(Conversion.MEDATLAS.toString())) 
-        errorMsg.append(Messages.getString("CouplingTableAjout.modus3"));
+        errorMsg.append(Messages.CouplingTableAjout_modus3);
     if (filename == null || filename.trim().equals("")) 
-        errorMsg.append(Messages.getString("CouplingTableAjout.filename"));
+        errorMsg.append(Messages.CouplingTableAjout_filename);
     
     if (errorMsg.length() > 0){
         UtilDisplay.error(errorMsg, MappingDatabaseEditApp.getApplication().getMainFrame());
@@ -183,7 +183,7 @@ public class MappingDatabaseEditView extends FrameView {
         }
         catch (EntityExistsException e)
         {
-            UtilDisplay.error(Messages.getString("CouplingTableAjout.1"), MappingDatabaseEditApp.getApplication().getMainFrame());
+            UtilDisplay.error(Messages.CouplingTableAjout_1, MappingDatabaseEditApp.getApplication().getMainFrame());
     
         }
             int row = list.size()-1;
@@ -221,7 +221,7 @@ public class MappingDatabaseEditView extends FrameView {
     public Task exit() {
         Task task = null;
         if (isSaveNeeded()){
-            int quit = UtilDisplay.confirm(Messages.getString("CouplingTableExit.confirm"), MappingDatabaseEditApp.getApplication().getMainFrame()); //$NON-NLS-1$
+            int quit = UtilDisplay.confirm(Messages.CouplingTableExit_confirm, MappingDatabaseEditApp.getApplication().getMainFrame()); //$NON-NLS-1$
             switch (quit){
                 case 0 :// YES -> save & quit
                     task = save(); 
@@ -308,16 +308,16 @@ public class MappingDatabaseEditView extends FrameView {
         @Override protected Void doInBackground() {
             try {
                 setProgress(0, 0, 4);
-                setMessage(Messages.getString("CouplingTableRefresh.1")); //"Rolling back the current changes..."
+                setMessage(Messages.CouplingTableRefresh_1); //"Rolling back the current changes..."
                 setProgress(1, 0, 4);
                 entityManager.getTransaction().rollback();
                 setProgress(2, 0, 4);
 
-                setMessage(Messages.getString("CouplingTableRefresh.2"));
+                setMessage(Messages.CouplingTableRefresh_2);
                 entityManager.getTransaction().begin();
                 setProgress(3, 0, 4);
 
-                setMessage(Messages.getString("CouplingTableRefresh.3"));
+                setMessage(Messages.CouplingTableRefresh_3);
                 java.util.Collection data = query.getResultList();
                 for (Object entity : data) {
                     entityManager.refresh(entity);
@@ -353,8 +353,8 @@ public class MappingDatabaseEditView extends FrameView {
         filenameLabel = new javax.swing.JLabel();
         modusField = new javax.swing.JComboBox();
         modusField.addItem("");
-        modusField.addItem(Mapping.MODUS_MONOSTATION + Messages.getString("CouplingTableLabel.modus1") );
-        modusField.addItem(Mapping.MODUS_MULTISTATIONS + Messages.getString("CouplingTableLabel.modus3"));
+        modusField.addItem(Mapping.MODUS_MONOSTATION + Messages.CouplingTableLabel_modus1 );
+        modusField.addItem(Mapping.MODUS_MULTISTATIONS + Messages.CouplingTableLabel_modus3);
         filenameField = new javax.swing.JTextField();
         newButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
@@ -395,36 +395,36 @@ public class MappingDatabaseEditView extends FrameView {
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, list, masterTable);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${mappingPK.localCdiId}"));
-        columnBinding.setColumnName(Messages.getString("CouplingTableTable.localcdiid"));
+        columnBinding.setColumnName(Messages.CouplingTableTable_localcdiid);
         columnBinding.setColumnClass(String.class);
         columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${modus}"));
-        columnBinding.setColumnName(Messages.getString("CouplingTableTable.modus"));
+        columnBinding.setColumnName(Messages.CouplingTableTable_modus);
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${mappingPK.format}"));
-        columnBinding.setColumnName(Messages.getString("CouplingTableTable.format"));
+        columnBinding.setColumnName(Messages.CouplingTableTable_format);
         columnBinding.setColumnClass(String.class);
         columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${filename}"));
-        columnBinding.setColumnName(Messages.getString("CouplingTableTable.filename"));
+        columnBinding.setColumnName(Messages.CouplingTableTable_filename);
         columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${date}"));
-        columnBinding.setColumnName(Messages.getString("CouplingTableTable.date"));
+        columnBinding.setColumnName(Messages.CouplingTableTable_date);
         columnBinding.setColumnClass(java.util.Date.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         masterScrollPane.setViewportView(masterTable);
-        masterTable.getColumnModel().getColumn(1).setHeaderValue(Messages.getString("CouplingTableTable.modus")); // NOI18N
-        masterTable.getColumnModel().getColumn(2).setHeaderValue(Messages.getString("CouplingTableTable.format")); // NOI18N
-        masterTable.getColumnModel().getColumn(3).setHeaderValue(Messages.getString("CouplingTableTable.filename")); // NOI18N
-        masterTable.getColumnModel().getColumn(4).setHeaderValue(Messages.getString("CouplingTableTable.date")); // NOI18N
+        masterTable.getColumnModel().getColumn(1).setHeaderValue(Messages.CouplingTableTable_modus); // NOI18N
+        masterTable.getColumnModel().getColumn(2).setHeaderValue(Messages.CouplingTableTable_format); // NOI18N
+        masterTable.getColumnModel().getColumn(3).setHeaderValue(Messages.CouplingTableTable_filename); // NOI18N
+        masterTable.getColumnModel().getColumn(4).setHeaderValue(Messages.CouplingTableTable_date); // NOI18N
         masterTable.getColumnModel().getColumn(4).setCellEditor(dateColumnFormat1.getEditor());
         masterTable.getColumnModel().getColumn(4).setCellRenderer(dateColumnFormat1.getRenderer());
 
-        modusLabel.setText(Messages.getString("CouplingTableLabel.modus")); // NOI18N
+        modusLabel.setText(Messages.CouplingTableLabel_modus); // NOI18N
         modusLabel.setName("modusLabel"); // NOI18N
 
-        filenameLabel.setText(Messages.getString("CouplingTableLabel.filename")); // NOI18N
+        filenameLabel.setText(Messages.CouplingTableLabel_filename); // NOI18N
         filenameLabel.setName("filenameLabel"); // NOI18N
 
         modusField.setName("modusField"); // NOI18N
@@ -433,21 +433,21 @@ public class MappingDatabaseEditView extends FrameView {
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(fr.ifremer.nemo.mapping.MappingDatabaseEditApp.class).getContext().getActionMap(MappingDatabaseEditView.class, this);
         newButton.setAction(actionMap.get("newRecord")); // NOI18N
-        newButton.setText(Messages.getString("CouplingTableAction.newrecord"));// NOI18N
+        newButton.setText(Messages.CouplingTableAction_newrecord);// NOI18N
         newButton.setName("newButton"); // NOI18N
 
         deleteButton.setAction(actionMap.get("deleteRecord")); // NOI18N
-        deleteButton.setText(Messages.getString("CouplingTableAction.delete"));// NOI18N        
+        deleteButton.setText(Messages.CouplingTableAction_delete);// NOI18N        
         deleteButton.setName("deleteButton"); // NOI18N
 
         jTextField1.setName("LocalCdiIdField"); // NOI18N
 
         jTextField2.setName("FormatField"); // NOI18N
 
-        jLabel1.setText(Messages.getString("CouplingTableLabel.LocalCdiId")); // NOI18N
+        jLabel1.setText(Messages.CouplingTableLabel_LocalCdiId); // NOI18N
         jLabel1.setName("LocalCdiIdLabel"); // NOI18N
 
-        jLabel2.setText(Messages.getString("CouplingTableLabel.format")); // NOI18N
+        jLabel2.setText(Messages.CouplingTableLabel_format); // NOI18N
         jLabel2.setName("formatLabel"); // NOI18N
 
         jTextField3.setName("jTextField3"); // NOI18N
@@ -458,7 +458,7 @@ public class MappingDatabaseEditView extends FrameView {
         binding.setConverter(rowSorterToStringConverter1);
         bindingGroup.addBinding(binding);
 
-        jLabel3.setText(Messages.getString("CouplingTableLabel.filter")); // NOI18N
+        jLabel3.setText(Messages.CouplingTableLabel_filter); // NOI18N
         jLabel3.setName("jLabel3"); // NOI18N
 
         org.jdesktop.layout.GroupLayout mainPanelLayout = new org.jdesktop.layout.GroupLayout(mainPanel);
@@ -548,19 +548,19 @@ public class MappingDatabaseEditView extends FrameView {
         progressBar.setName("progressBar"); // NOI18N
 
         jButton1.setAction(actionMap.get("cancel")); // NOI18N
-        jButton1.setText(Messages.getString("CouplingTableAction.cancel")); // NOI18N
+        jButton1.setText(Messages.CouplingTableAction_cancel); // NOI18N
         jButton1.setName("jButton1"); // NOI18N
 
         saveButton.setAction(actionMap.get("save")); // NOI18N
-        saveButton.setText(Messages.getString("CouplingTableAction.save")); // NOI18N        
+        saveButton.setText(Messages.CouplingTableAction_save); // NOI18N        
         saveButton.setName("saveButton"); // NOI18N
 
         exitButton.setAction(actionMap.get("exit")); // NOI18N
-        exitButton.setText(Messages.getString("CouplingTableAction.exit")); // NOI18N        
+        exitButton.setText(Messages.CouplingTableAction_exit); // NOI18N        
         exitButton.setName("exitButton"); // NOI18N
 
         refreshButton.setAction(actionMap.get("refresh")); // NOI18N
-        refreshButton.setText(Messages.getString("CouplingTableAction.refresh")); // NOI18N             
+        refreshButton.setText(Messages.CouplingTableAction_refresh); // NOI18N             
         refreshButton.setName("refreshButton"); // NOI18N
 
         org.jdesktop.layout.GroupLayout statusPanelLayout = new org.jdesktop.layout.GroupLayout(statusPanel);

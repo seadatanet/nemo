@@ -524,31 +524,31 @@ public class StationSection extends NemoSection
                 try{
                     switch (cType){
                         case DATE : 
-                            errorMessage = Messages.getString("Etape.122");    //$NON-NLS-1$
+                            errorMessage = Messages.Etape_122;
                             dateTest(); 
                             break;
                         case TIME : 
-                            errorMessage = Messages.getString("Etape.121");    //$NON-NLS-1$
+                            errorMessage = Messages.Etape_121;
                             timeTest(); 
                             break;
                         case LAT : 
-                            errorMessage = Messages.getString("Etape.53");    //$NON-NLS-1$
+                            errorMessage = Messages.Etape_53; 
                             latitudeTest(); 
                             break;
                         case LON : 
-                            errorMessage = Messages.getString("Etape.58");    //$NON-NLS-1$
+                            errorMessage = Messages.Etape_58;
                             longitudeTest(); 
                             break;
                         case FRQ : 
-                            //errorMessage = Messages.getString("Etape.103");    //$NON-NLS-1$
+                            //errorMessage = Messages.Etape_103;
                             samplingRateTest(); 
                             break;
                         case NONE : 
                             if (name.equals(S_STATIONNUMBER)){    
-                                //errorMessage = Messages.getString("Etape.128") + Messages.getString("Etape.120");    //$NON-NLS-1$     //$NON-NLS-2$                        
+                                //errorMessage = Messages.Etape_128 + Messages.error;           
                                 stationNumberTest(); 
                             }else{
-                                //errorMessage = Messages.getString("Etape.70");    //$NON-NLS-1$
+                                //errorMessage = Messages.Etape_70;
                                 defaultTest();
                             }
                             break;
@@ -559,7 +559,7 @@ public class StationSection extends NemoSection
                 }catch (Exception e) {
                     
                     Utils.messageErreur(errorMessage);
-                    resultTest.setText(Messages.getString("Etape.120"));            //$NON-NLS-1$
+                    resultTest.setText(Messages.error);
                     resultTest.pack();
                 }
             }

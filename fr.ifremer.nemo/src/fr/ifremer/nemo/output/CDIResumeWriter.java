@@ -23,6 +23,7 @@ import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.ui.EditConversion;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.ViewFile;
+import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
@@ -72,7 +73,7 @@ public class CDIResumeWriter {
 
 			Formatter formatter = Formatter.getSingleton();
 
-			String sep = Messages.getString("CDIResumeWriter.separateur"); //$NON-NLS-1$
+			String sep = Messages.CDIResumeWriter_separateur;
 			String codeEdmoDonnees = Utils.configuration.getCodeEdmoDonnees();
 			String idEdmoRespDonnees = Utils.configuration.getIdEdmoRespDonnees();
 			String idEdmoRespCdi = Utils.configuration.getIdEdmoRespCdi();
@@ -81,9 +82,9 @@ public class CDIResumeWriter {
 			String codeAccesDonnees = Utils.configuration.getAccesDonnees();
 			String formatSortie = Global.EMPTY_STRING;
 			if (ViewFile.radODV.getSelection()) {
-				formatSortie = Messages.getString("CDIResumeWriter.odv"); //$NON-NLS-1$
+				formatSortie = Conversion.ODV.toString();
 			} else {
-				formatSortie = Messages.getString("CDIResumeWriter.medatlas"); //$NON-NLS-1$
+				formatSortie = Conversion.MEDATLAS.toString();
 			}
 			String cdiUrl = Utils.configuration.getCdiURL();
 			String cdiMethod = Utils.configuration.getCdiMethod();
@@ -136,7 +137,7 @@ public class CDIResumeWriter {
                         {    
                             if(EditConversion.getDataSetRef().isEmpty())
                             {    
-                                writer.write(sep + Messages.getString("CDIResumeWriter.notSpecified"));                                 //$NON-NLS-1$
+                                writer.write(sep + Messages.CDIResumeWriter_notSpecified);
                             } else 
                             {
                                 writer.write(sep + EditConversion.getDataSetRef());                                 
@@ -153,7 +154,7 @@ public class CDIResumeWriter {
                         {    
                             if(EditConversion.getDataSetRef().isEmpty())
                             {    
-                                writer.write(sep + Messages.getString("CDIResumeWriter.notSpecified"));                                 //$NON-NLS-1$
+                                writer.write(sep + Messages.CDIResumeWriter_notSpecified);
                             } else 
                             {
                                 writer.write(sep + EditConversion.getDataSetRef());                                 
@@ -177,7 +178,7 @@ public class CDIResumeWriter {
 //								+ Configuration.getSingleton().getCodeEdmoDonnees());
 
 						// Dataset ABS
-						writer.write(sep + Messages.getString("CDIResumeWriter.notSpecified")); //$NON-NLS-1$
+						writer.write(sep + Messages.CDIResumeWriter_notSpecified);
 
 						// EDMO Custodian
 						writer.write(sep + idEdmoRespDonnees);
@@ -195,7 +196,7 @@ public class CDIResumeWriter {
 						if (!survey.getName().isEmpty())
 							writer.write(sep + survey.getName());
 						else
-							writer.write(sep + Messages.getString("CDIResumeWriter.notSpecified")); //$NON-NLS-1$
+							writer.write(sep + Messages.CDIResumeWriter_notSpecified);
 
 						// Station name
 						writer.write(sep + station.getReference().trim());
@@ -264,7 +265,7 @@ public class CDIResumeWriter {
 		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		FileDialog dialog = new FileDialog(shell, SWT.SAVE
 				| SWT.APPLICATION_MODAL);
-		dialog.setText(Messages.getString("CDIResumeWriter.choixFichier")); //$NON-NLS-1$
+		dialog.setText(Messages.CDIResumeWriter_choixFichier);
 		dialog.setFilterPath(Utils.configuration.getCruisesDirectory());
 		String extensions[] = new String[1];
 		extensions[0] = "*.txt"; //$NON-NLS-1$

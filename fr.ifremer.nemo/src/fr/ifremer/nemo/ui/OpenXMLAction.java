@@ -26,7 +26,7 @@ public class OpenXMLAction extends Action implements ISelectionListener,
 
 		this.window = window;
 		setId(ID);
-		setText(Messages.getString("OpenXMLAction.1")); //$NON-NLS-1$
+		setText(Messages.action_openSurveyDesc);
 		window.getSelectionService().addSelectionListener(this);
 
 	}

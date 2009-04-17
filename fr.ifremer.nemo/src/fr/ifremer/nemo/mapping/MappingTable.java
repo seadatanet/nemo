@@ -46,7 +46,7 @@ public class MappingTable
         //On determine l'extension du fichier, qui certe, est filtré via la boite d'ouverture 
         //de fichier, mais qui peut etre changé dans la ligne texte
         String fileExtension = (filename.lastIndexOf(".")==-1)?"":filename.substring(filename.lastIndexOf(".")+1,filename.length()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-        System.out.println(Messages.getString("CouplingTableImport.1") + fileExtension + "\n\r"); //$NON-NLS-1$ //$NON-NLS-2$
+        System.out.println(Messages.CouplingTableImport_1 + fileExtension + "\n\r"); //$NON-NLS-1$ 
 
         if(fileExtension.matches("txt") || fileExtension.matches("Txt") || fileExtension.matches("TXT")) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
         {
@@ -59,12 +59,11 @@ public class MappingTable
                     Date datelignefichier = new Date();
                     Mapping m = new Mapping();
 
-                    fr.ifremer.nemo.ui.Utils.messageOK(Messages.getString("CouplingTableImport.2")+"\n\r");  //$NON-NLS-1$
+                    fr.ifremer.nemo.ui.Utils.messageOK(Messages.CouplingTableImport_2+"\n\r");  //$NON-NLS-1$
 
                     try {
                         while ( (ligne = correctFileLine.readLine()) != null) 
                         { 
-                            //fr.ifremer.nemo.ui.Utils.messageErreurAppend(correctFileLine.getLineNumber()-1+" : "+ligne); //$NON-NLS-1$
 
                              ligneSplit = ligne.split(";"); //$NON-NLS-1$
 
@@ -80,20 +79,20 @@ public class MappingTable
                                   this.persist(m);
                               } catch (javax.persistence.EntityExistsException e)
                               {
-                                  fr.ifremer.nemo.ui.Utils.messageErreurAppend(Messages.getString("CouplingTableImport.3")+ligne+"\n\r");  //$NON-NLS-1$
+                                  fr.ifremer.nemo.ui.Utils.messageErreurAppend(Messages.CouplingTableImport_3+ligne+"\n\r");  //$NON-NLS-1$
                                   
                               }
 
                         }
-                        fr.ifremer.nemo.ui.Utils.messageOKAppend(Messages.getString("CouplingTableImport.4")+"\n\r");  //$NON-NLS-1$
+                        fr.ifremer.nemo.ui.Utils.messageOKAppend(Messages.CouplingTableImport_4+"\n\r");  //$NON-NLS-1$
                    } catch (Exception e)
                    {
                       if(e.toString().contains("EntityExistsException")) //$NON-NLS-1$
                       {
-                          fr.ifremer.nemo.ui.Utils.messageErreurAppend(Messages.getString("CouplingTableImport.5")+"\n\r"); //$NON-NLS-1$
+                          fr.ifremer.nemo.ui.Utils.messageErreurAppend(Messages.CouplingTableImport_5+"\n\r"); //$NON-NLS-1$
                       } else
                       {
-                          fr.ifremer.nemo.ui.Utils.messageErreurAppend(Messages.getString("CouplingTableImport.6")+"\n\r"); //$NON-NLS-1$
+                          fr.ifremer.nemo.ui.Utils.messageErreurAppend(Messages.CouplingTableImport_6+"\n\r"); //$NON-NLS-1$
                       }
 
                       System.out.println(e.toString());
@@ -105,7 +104,7 @@ public class MappingTable
              
   
             }catch(FileNotFoundException e) { 
-                fr.ifremer.nemo.ui.Utils.messageErreurAppend(Messages.getString("CouplingTableImport.7")+"\n\r");  //$NON-NLS-1$
+                fr.ifremer.nemo.ui.Utils.messageErreurAppend(Messages.CouplingTableImport_7+"\n\r");  //$NON-NLS-1$
         
             }
             catch(IOException e) { 
@@ -114,7 +113,7 @@ public class MappingTable
 
         } else
         {
-            fr.ifremer.nemo.ui.Utils.messageErreurAppend("Le fichier n'est pas au format .txt\n\r");  //$NON-NLS-1$
+            fr.ifremer.nemo.ui.Utils.messageErreurAppend(Messages.CouplingTableImport_8);
         }
         
         return true;
@@ -145,7 +144,7 @@ public class MappingTable
                     }
 
                     monFluxFichier.flush();
-                    fr.ifremer.nemo.ui.Utils.messageOKAppend(Messages.getString("CouplingTableExport.1")+"\n\r");  //$NON-NLS-1$
+                    fr.ifremer.nemo.ui.Utils.messageOKAppend(Messages.CouplingTableExport_1+"\n\r");  //$NON-NLS-1$
                 }
                 catch (IOException e)
                 {
@@ -159,12 +158,12 @@ public class MappingTable
             }
             catch (FileNotFoundException e)
             {
-                System.out.println("Impossible de trouver le fichier");
+                System.out.println(Messages.CouplingTableImport_7);
             }
         }
         catch (IOException e)
         {
-            System.out.println(Messages.getString("CouplingTableExport.2")+"\n\r");
+            System.out.println(Messages.CouplingTableExport_2+"\n\r"); //$NON-NLS-1$
         }
 
 

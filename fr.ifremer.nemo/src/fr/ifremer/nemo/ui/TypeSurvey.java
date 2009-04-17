@@ -65,7 +65,7 @@ public class TypeSurvey extends Object {
 			}
 			
 		} catch (IOException exc) {
-			Utils.messageErreur(Messages.getString("Etape.120"));
+			Utils.messageErreur(Messages.error);
 		} 
 		
 		this.setSensor(listSensor.contains(this.getCode()));

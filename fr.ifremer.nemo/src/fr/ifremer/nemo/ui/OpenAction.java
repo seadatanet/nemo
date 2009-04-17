@@ -34,7 +34,7 @@ public class OpenAction extends Action implements ISelectionListener,
 
 		this.window = window;
 		setId(ID);
-		setText(Messages.getString("OpenAction.1")); //$NON-NLS-1$
+		setText(Messages.menu_openModel);
 		window.getSelectionService().addSelectionListener(this);
 
 	}
@@ -47,11 +47,10 @@ public class OpenAction extends Action implements ISelectionListener,
 	@Override
     public void run() {
 		FileInputStream stream = null;
-//		System.out.println("Menu open"); //$NON-NLS-1$
 
 		// verifier que un fichier est charge avant d'ouvrir un modele
 		if (!EditDesc.loaded) {
-			Utils.messageErreurAppend(Messages.getString("OpenAction.3")); //$NON-NLS-1$
+			Utils.messageErreurAppend(Messages.error_openModel);
 		} else {
 
 			InputModel inputModel = new InputModel();
@@ -61,7 +60,7 @@ public class OpenAction extends Action implements ISelectionListener,
 					| SWT.APPLICATION_MODAL);
 			dialog.setFilterPath(Utils.configuration.getModelsDirectory()
 					+ "\\"); //$NON-NLS-1$
-			dialog.setText(Messages.getString("OpenAction.5")); //$NON-NLS-1$
+			dialog.setText(Messages.dialog_openModel);
 			String extensions[] = new String[1];
 			extensions[0] = "*.xml"; //$NON-NLS-1$
 			dialog.setFilterExtensions(extensions);
@@ -78,10 +77,9 @@ public class OpenAction extends Action implements ISelectionListener,
 				try {
 					stream = new java.io.FileInputStream(nomModele);
 				} catch (FileNotFoundException e) {
-                    Utils.messageErreurAppend(Messages.getString("Etape.120")); //$NON-NLS-1$
+                    Utils.messageErreurAppend(Messages.error);
 					e.printStackTrace();
 				}
-//				System.out.println("Ouverture du modele : " + nomModele); //$NON-NLS-1$
 				parser.parse(stream, false);
 
 				File fich = new File(nomModele);
@@ -90,8 +88,7 @@ public class OpenAction extends Action implements ISelectionListener,
 				DataModel.ouvertureModele(inputModel);
 				DataModel.ouverture = true;
 
-				ViewLog.styledTextLogInfos.append(Messages
-						.getString("OpenAction.8") + nomModele); //$NON-NLS-1$
+				ViewLog.styledTextLogInfos.append(Messages.success_openModel + nomModele);
 
 			}
 

@@ -38,7 +38,7 @@ public class EditMappingAction extends Action implements ISelectionListener,
 
         this.window = window;
         setId(ID);
-        setText(Messages.getString("EditMappingAction.1")); //$NON-NLS-1$
+        setText(Messages.EditMappingAction_1);
         
         window.getSelectionService().addSelectionListener(this);
 
@@ -49,6 +49,7 @@ public class EditMappingAction extends Action implements ISelectionListener,
 
     }
 
+    @Override
     public void run() {
         MappingDatabaseEditApp mappingEditeur = MappingDatabaseEditApp.getApplication();
         mappingEditeur.getMainFrame().setAlwaysOnTop(true);

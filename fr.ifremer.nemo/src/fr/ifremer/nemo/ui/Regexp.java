@@ -17,7 +17,7 @@ public class Regexp {
 
 		if (value.equals("")) { //$NON-NLS-1$
 			Utils
-					.messageErreurAppend(Messages.getString("Regexp.4") + nomSection + Messages.getString("Regexp.5")); //$NON-NLS-1$ //$NON-NLS-2$
+					.messageErreurAppend(Messages.Regexp_4 + nomSection + Messages.Regexp_5);
 			ok = false;
 		}
 

@@ -261,7 +261,7 @@ public class TableData {
 		// creation du menu
 		Menu menu = new Menu(table.getShell(), SWT.POP_UP);
 		MenuItem itemInject = new MenuItem(menu, SWT.NONE);
-		itemInject.setText(Messages.menu_label_setFlag);
+		itemInject.setText(Messages.menu_label_setValue);
         itemInject.addListener(SWT.Selection, new Listener() {
             public void handleEvent(Event e) {
                 // table.forceFocus();

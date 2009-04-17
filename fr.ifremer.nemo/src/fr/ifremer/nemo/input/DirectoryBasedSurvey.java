@@ -365,7 +365,7 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 						survey.addStation(station);
                         
 					} catch (Exception e) {
-						throw new InterruptedException (e.getMessage() + Messages.getString("SingleFileSurvey.1") + file.getName());
+						throw new InterruptedException (e.getMessage() + Messages.SingleFileSurvey_1 + file.getName());
 					} finally {
 						if (reader2 != null) {
 							try {

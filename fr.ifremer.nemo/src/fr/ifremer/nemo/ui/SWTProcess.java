@@ -63,15 +63,15 @@ public class SWTProcess implements IRunnableWithProgress {
 					runCollectionCasN(monitor);
 			} catch (ParseException e) {
 				throw new InterruptedException(Messages
-						.getString("SWTProcess.5")
+						.SWTProcess_5
 						+ e.getMessage());
 			} catch (NumberFormatException e) {
 				throw new InterruptedException(Messages
-						.getString("SWTProcess.5")
+						.SWTProcess_5
 						+ e.getMessage());
 			} catch (StringIndexOutOfBoundsException e) {
 				throw new InterruptedException(Messages
-						.getString("SWTProcess.5")
+						.SWTProcess_5
 						+ e.getMessage());
 			}
 		} else {
@@ -79,19 +79,19 @@ public class SWTProcess implements IRunnableWithProgress {
 				runCampagne(monitor);
 			} catch (ParseException e) {
 				throw new InterruptedException(Messages
-						.getString("SWTProcess.5")
+						.SWTProcess_5
 						+ e.getMessage());
 			} catch (NumberFormatException e) {
 				throw new InterruptedException(Messages
-						.getString("SWTProcess.5")
+						.SWTProcess_5
 						+ e.getMessage());
 			} catch (StringIndexOutOfBoundsException e) {
 				throw new InterruptedException(Messages
-						.getString("SWTProcess.5")
+						.SWTProcess_5
 						+ e.getMessage());
 			} catch (GenerationException e) {
 				throw new InterruptedException(Messages
-						.getString("SWTProcess.5")
+						.SWTProcess_5
 						+ e.getMessage());
 			}
 		}
@@ -101,7 +101,7 @@ public class SWTProcess implements IRunnableWithProgress {
 	private void runCampagne(IProgressMonitor monitor)
 			throws NumberFormatException, ParseException, InterruptedException,
 			GenerationException {
-		monitor.beginTask(Messages.getString("SWTProcess.1"),
+		monitor.beginTask(Messages.SWTProcess_1,
 				IProgressMonitor.UNKNOWN);
 		monitor2 = monitor;
 		interrompu = false;
@@ -114,7 +114,7 @@ public class SWTProcess implements IRunnableWithProgress {
 				try {
 					Application.display.syncExec(new Runnable() {
 						public void run() {
-							monitor2.subTask(Messages.getString("SWTProcess.2")
+							monitor2.subTask(Messages.SWTProcess_2
 									+ val + "%");
 							if (monitor2.isCanceled()) {
 								SurveyMedia.interrompu = true;
@@ -131,7 +131,7 @@ public class SWTProcess implements IRunnableWithProgress {
 
 		try {
 			notifier.progress(0);
-			monitor.setTaskName(Messages.getString("SWTProcess.3"));
+			monitor.setTaskName(Messages.SWTProcess_3);
 			survey = DataModel.inputModel.convert(notifier);
 		} catch (InterruptedException e) {
 			throw e;
@@ -153,7 +153,7 @@ public class SWTProcess implements IRunnableWithProgress {
 		writerMed = new fr.ifremer.nemo.medatlas.MedatlasSurveyWriter();
 
 		try {
-			monitor2.setTaskName(Messages.getString("SWTProcess.4"));
+			monitor2.setTaskName(Messages.SWTProcess_4);
 			if (!monitor2.isCanceled()) {
 				if (!odv) {
 					// MEDATLAS
@@ -187,7 +187,7 @@ public class SWTProcess implements IRunnableWithProgress {
 						for (Station station : survey.getStations()) {
 							i++;
 							monitor.setTaskName(Messages
-									.getString("SWTProcess.4")
+									.SWTProcess_4
 									+ " : " + i + " / " + totalStations);
 							setStation(station);
 
@@ -261,7 +261,7 @@ public class SWTProcess implements IRunnableWithProgress {
 
 	private void runCollectionCas1(IProgressMonitor monitor)
 			throws NumberFormatException, ParseException, InterruptedException {
-		monitor.beginTask(Messages.getString("SWTProcess.1"),
+		monitor.beginTask(Messages.SWTProcess_1,
 				IProgressMonitor.UNKNOWN);
 		monitor2 = monitor;
 		interrompu = false;
@@ -284,7 +284,7 @@ public class SWTProcess implements IRunnableWithProgress {
 						Application.display.syncExec(new Runnable() {
 							public void run() {
 								monitor2.subTask(Messages
-										.getString("SWTProcess.2")
+										.SWTProcess_2
 										+ val + "%");
 								if (monitor2.isCanceled()) {
 									SurveyMedia.interrompu = true;
@@ -301,7 +301,7 @@ public class SWTProcess implements IRunnableWithProgress {
 
 			try {
 				notifier.progress(0);
-				monitor.setTaskName(Messages.getString("SWTProcess.3") + " : "
+				monitor.setTaskName(Messages.SWTProcess_3 + " : "
 						+ dossier + " ( " + numDossier + " / "
 						+ dossiers.length + " ) ");
 				survey = DataModel.inputModel.convert(notifier);
@@ -325,7 +325,7 @@ public class SWTProcess implements IRunnableWithProgress {
 			writerODV = new fr.ifremer.nemo.odv.ODVSurveyWriter();
 
 			try {
-				monitor2.setTaskName(Messages.getString("SWTProcess.4"));
+				monitor2.setTaskName(Messages.SWTProcess_4);
 				if (!monitor2.isCanceled()) {
 					if (monoStation) {
 						int i = 0;
@@ -334,7 +334,7 @@ public class SWTProcess implements IRunnableWithProgress {
 						for (Station station : survey.getStations()) {
 							i++;
 							monitor.setTaskName(Messages
-									.getString("SWTProcess.4")
+									.SWTProcess_4
 									+ " : " + i + " / " + totalStations);
 							setStation(station);
 
@@ -371,7 +371,7 @@ public class SWTProcess implements IRunnableWithProgress {
 								+ "/" + dossier + ".txt";
 						File fichierSortie = new java.io.File(
 								EditConversion.nomFichierSortie);
-						monitor2.setTaskName(Messages.getString("SWTProcess.4")
+						monitor2.setTaskName(Messages.SWTProcess_4
 								+ " : " + dossier + ".txt" + " ( " + numDossier
 								+ " / " + dossiers.length + " ) ");
 
@@ -416,7 +416,7 @@ public class SWTProcess implements IRunnableWithProgress {
 
 	private void runCollectionCasN(IProgressMonitor monitor)
 			throws NumberFormatException, ParseException, InterruptedException {
-		monitor.beginTask(Messages.getString("SWTProcess.1"),
+		monitor.beginTask(Messages.SWTProcess_1,
 				IProgressMonitor.UNKNOWN);
 		monitor2 = monitor;
 		interrompu = false;
@@ -440,7 +440,7 @@ public class SWTProcess implements IRunnableWithProgress {
 						Application.display.syncExec(new Runnable() {
 							public void run() {
 								monitor2.subTask(Messages
-										.getString("SWTProcess.2")
+										.SWTProcess_2
 										+ val + "%");
 								if (monitor2.isCanceled()) {
 									SurveyMedia.interrompu = true;
@@ -456,7 +456,7 @@ public class SWTProcess implements IRunnableWithProgress {
 
 			try {
 				notifier.progress(0);
-				monitor.setTaskName(Messages.getString("SWTProcess.3") + " : "
+				monitor.setTaskName(Messages.SWTProcess_3 + " : "
 						+ fichier + " ( " + numFichier + " / "
 						+ fichiers.length + " ) ");
 				survey = DataModel.inputModel.convert(notifier);
@@ -480,7 +480,7 @@ public class SWTProcess implements IRunnableWithProgress {
 			writerODV = new fr.ifremer.nemo.odv.ODVSurveyWriter();
 
 			try {
-				monitor2.setTaskName(Messages.getString("SWTProcess.4"));
+				monitor2.setTaskName(Messages.SWTProcess_4);
 				if (!monitor2.isCanceled()) {
 					// ODV
 					if (monoStation) {
@@ -490,7 +490,7 @@ public class SWTProcess implements IRunnableWithProgress {
 						for (Station station : survey.getStations()) {
 							i++;
 							monitor.setTaskName(Messages
-									.getString("SWTProcess.4")
+									.SWTProcess_4
 									+ " : " + i + " / " + totalStations);
 							setStation(station);
 
@@ -530,7 +530,7 @@ public class SWTProcess implements IRunnableWithProgress {
 								+ ".txt";
 						File fichierSortie = new java.io.File(EditConversion.nomFichierSortie);
 
-						monitor2.setTaskName(Messages.getString("SWTProcess.4")
+						monitor2.setTaskName(Messages.SWTProcess_4
 								+ " : " + fichier + ".txt" + " ( " + numFichier
 								+ " / " + fichiers.length + " ) ");
 

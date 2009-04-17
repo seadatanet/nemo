@@ -26,6 +26,9 @@ public class Intern extends NLS {
     public static String list_regions;
     public static String list_ROSCOPparameters;
     public static String list_instruments;
+    public static String list_methodCDI;
+    public static String list_typePlatform;
+    public static String list_accesDonnees;
     
     public static String lang_fr;
     public static String lang_en;

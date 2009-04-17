@@ -549,8 +549,8 @@ public class EditConversion extends Thread {
 			}
 			InputDialog inputDataSetRef = new InputDialog(PlatformUI
 					.getWorkbench().getDisplay().getActiveShell(), Messages
-					.getString("CDIResumeWriter.idTitle"), Messages //$NON-NLS-1$
-					.getString("CDIResumeWriter.idMessage"), strDefault, null); //$NON-NLS-1$
+					.CDIResumeWriter_idTitle, Messages
+					.CDIResumeWriter_idMessage, strDefault, null);
 			inputDataSetRef.open();
 
 			if (inputDataSetRef.getReturnCode() == Window.OK) { 
@@ -583,9 +583,9 @@ public class EditConversion extends Thread {
                 cheminComplet = nomFichierSortie;
         
             InputDialog inputPrefixDossier = new InputDialog(PlatformUI
-                    .getWorkbench().getDisplay().getActiveShell(), Messages
-                    .getString("InputPrefixDossier.idTitle"), Messages   //$NON-NLS-1$
-                    .getString("InputPrefixDossier.idMessage"), nomDossierSortie, null);   //$NON-NLS-1$
+                    .getWorkbench().getDisplay().getActiveShell(), 
+                    Messages.InputPrefixDossier_idTitle, 
+                    Messages.InputPrefixDossier_idMessage, nomDossierSortie, null);
             inputPrefixDossier.open();
 
 
@@ -620,7 +620,7 @@ public class EditConversion extends Thread {
         ld.setLabelProvider(new LabelProvider());
         
         ld.setInput(Arrays.asList(NemoLists.getDataTypesIsSensor()));         
-        ld.setTitle(Messages.getString("askDataType.Title"));  //$NON-NLS-1$
+        ld.setTitle(Messages.askDataType_Title);
         ld.open();
         WSDataType result = (WSDataType)ld.getResult()[0];
         
@@ -681,11 +681,11 @@ public class EditConversion extends Thread {
 	
 	public static boolean checkConfig() {
 		boolean blnOK = true;
-		String message = Messages.getString("CDIResumeWriter.configMessage"); //$NON-NLS-1$
+		String message = Messages.CDIResumeWriter_configMessage;
 
         //if (ViewFile.radODV.getSelection()) {
             if (Utils.configuration.getIdEdmoRespCdi().trim().equals(Global.EMPTY_STRING)) {
-                message += Global.RN + " - " + Messages.getString("OptionsAction.21"); //$NON-NLS-1$ //$NON-NLS-2$
+                message += Global.RN + Global.SEP + Messages.settings_EDMOauthor;
                 blnOK = false;
             }
         //}
@@ -693,27 +693,27 @@ public class EditConversion extends Thread {
         if (Utils.configuration.isWriteCdi())        
         {		
     		if (Utils.configuration.getCodeEdmoDonnees().trim().equals(Global.EMPTY_STRING)) {
-    			message += Global.RN + " - " + Messages.getString("OptionsAction.24"); //$NON-NLS-1$ //$NON-NLS-2$
+    			message += Global.RN + Global.SEP  + Messages.settings_EDMOori;
     			blnOK = false;
     		}
 
     		if (Utils.configuration.getIdEdmoRespDonnees().trim().equals(Global.EMPTY_STRING)) {
-    			message += Global.RN + " - " + Messages.getString("OptionsAction.25"); //$NON-NLS-1$ //$NON-NLS-2$
+    			message += Global.RN + Global.SEP  + Messages.settings_EDMOcustodian; 
     			blnOK = false;
     		}
     		
     		if (Utils.configuration.getIdEdmoDistDonnees().trim().equals(Global.EMPTY_STRING)) {
-    			message += Global.RN + " - " + Messages.getString("OptionsAction.26"); //$NON-NLS-1$ //$NON-NLS-2$
+    			message += Global.RN + Global.SEP  + Messages.settings_EDMOdist;
     			blnOK = false;
     		}
 		
     		if (Utils.configuration.getCdiURL().trim().equals(Global.EMPTY_STRING)) {
-    			message += Global.RN + " - " + Messages.getString("OptionsAction.22"); //$NON-NLS-1$ //$NON-NLS-2$
+    			message += Global.RN + Global.SEP  + Messages.settings_dataDist_web; 
     			blnOK = false;
     		}
 		
     		if (Utils.configuration.getCdiMethod().trim().equals(Global.EMPTY_STRING)) {
-    			message += Global.RN + " - " + Messages.getString("OptionsAction.23"); //$NON-NLS-1$ //$NON-NLS-2$
+    			message += Global.RN + Global.SEP  + Messages.settings_dataDist_met;
     			blnOK = false;
     		}
             
@@ -723,7 +723,7 @@ public class EditConversion extends Thread {
 			try {
 				String[] buttons = new String[1];
 				buttons[0] = Messages.success; 
-				MessageDialog dialog = new MessageDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), Messages.getString("CDIResumeWriter.configTitle"), null, message, MessageDialog.NONE, buttons, 0); //$NON-NLS-1$
+				MessageDialog dialog = new MessageDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), Messages.error_missing, null, message, MessageDialog.NONE, buttons, 0);
 				dialog.open();
 			} catch (Exception e) {
 				e.printStackTrace();

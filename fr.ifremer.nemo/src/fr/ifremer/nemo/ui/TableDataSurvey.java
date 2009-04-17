@@ -53,21 +53,21 @@ public class TableDataSurvey {
 				
 		TableColumn tableColumn = new TableColumn(table, SWT.NONE);
 		tableColumn.setWidth(100);
-		tableColumn.setText(Messages.getString("TableDataSurvey.1")); //$NON-NLS-1$
+		tableColumn.setText(Messages.table_label_code.toUpperCase());
 
 		TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);
 		tableColumn1.setWidth(100);
-		tableColumn1.setText(Messages.getString("TableDataSurvey.2")); //$NON-NLS-1$
+		tableColumn1.setText(Messages.table_label_number); 
 
 		TableColumn tableColumn2 = new TableColumn(table, SWT.NONE);
 		tableColumn2.setWidth(50);
-		tableColumn2.setText("QC"); //$NON-NLS-1$
+		tableColumn2.setText(Messages.table_label_qc);
 
 		TableColumn tableColumn3 = new TableColumn(table, SWT.READ_ONLY);
 		// mise e zero de la largeur de la colonne avec isSensor() pour ne pas
 		// qu'on puisse la modifier!!
 		tableColumn3.setWidth(50);
-		tableColumn3.setText(Messages.getString("TableDataSurvey.11")); //$NON-NLS-1$
+		tableColumn3.setText(Messages.table_label_sensor);
 
 		initTable();
 	}
@@ -204,21 +204,17 @@ public class TableDataSurvey {
 		// creation du menu
 		Menu menu = new Menu(table.getShell(), SWT.POP_UP);
 
-		// MenuItem itemNew = new MenuItem(menu, SWT.NONE);
-		// itemNew.setText(Messages.getString("TableDataSurvey.6"));
-
 		MenuItem itemList = new MenuItem(menu, SWT.NONE);
-		itemList.setText(Messages.getString("TableDataSurvey.7")); //$NON-NLS-1$
+		itemList.setText(Messages.menu_label_list);
 
 		MenuItem itemUp = new MenuItem(menu, SWT.NONE);
-		itemUp.setText(Messages.getString("TableDataSurvey.8")); //$NON-NLS-1$
+		itemUp.setText(Messages.menu_label_upType);
 
 		MenuItem itemDown = new MenuItem(menu, SWT.NONE);
-		itemDown.setText(Messages.getString("TableDataSurvey.9")); //$NON-NLS-1$
-		// MenuItem tmp = new Separator();
+		itemDown.setText(Messages.menu_label_downType);
 
 		MenuItem itemDel = new MenuItem(menu, SWT.NONE);
-		itemDel.setText(Messages.getString("TableDataSurvey.10")); //$NON-NLS-1$
+		itemDel.setText(Messages.menu_label_removeType);
 		
 		table.setMenu(menu);
 		
@@ -226,11 +222,6 @@ public class TableDataSurvey {
 
 		// ajouter des listeners sur les menu items ^^
 
-		/*
-		 * itemNew.addListener(SWT.Selection, new Listener() { public void
-		 * handleEvent(Event e) { // System.out.println("nouveau type");
-		 * nouvelElt(); } });
-		 */
 		itemList.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				// System.out.println("selection liste");

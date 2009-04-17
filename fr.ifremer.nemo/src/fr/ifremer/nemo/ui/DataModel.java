@@ -603,7 +603,7 @@ public class DataModel
             }
             catch (RuntimeException e)
             {
-                Utils.messageErreurAppend(Messages.getString("Etape.124")); //$NON-NLS-1$
+                Utils.messageErreurAppend(Messages.Etape_124);
                 e.printStackTrace();
                 throw e;
             }
@@ -620,7 +620,7 @@ public class DataModel
             }
             catch (RuntimeException e)
             {
-                Utils.messageErreurAppend(Messages.getString("Etape.124")); //$NON-NLS-1$
+                Utils.messageErreurAppend(Messages.Etape_124);
                 e.printStackTrace();
                 throw e;
             }
@@ -773,7 +773,7 @@ public class DataModel
             ViewFile.radSerieTempo.setEnabled(true);
             ViewFile.radTrajectoire.setEnabled(true);
         }catch (Exception e){
-            Utils.messageErreurAppend(Messages.getString("Etape.124")); //$NON-NLS-1$
+            Utils.messageErreurAppend(Messages.Etape_124);
             e.printStackTrace();
         }
     }

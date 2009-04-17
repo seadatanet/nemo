@@ -69,7 +69,7 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 								DataModel.inputModel
 										.writeXMLOn(fileOutputStream);
 								Utils.messageOK(Messages
-										.getString("SaveAction.4")); //$NON-NLS-1$
+										.SaveAction_4);
 							}
 						}
 					}

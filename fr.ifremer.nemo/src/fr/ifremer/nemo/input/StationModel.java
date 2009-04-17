@@ -1805,12 +1805,11 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
                     || (index < _rowNumber); index++) {
                 
                 // FAE 1738 : ajout d'un indicateur "prochaine station"
-                // TODO test
+                // FIXME trouver une autre solution que !line.startsWith("         ")
                 if (_model != null){
                     if (_endOnNextStation 
                             && index > 0
-                            && line.contains(Formatter.getSingleton().formatLatitude("+DD.dddddd ", _model.getLatitude()))
-                            && line.contains(Formatter.getSingleton().formatLongitude("+DDD.dddddd ", _model.getLongitude()))){
+                            && !line.startsWith("         ")){
                         a_Reader.reset();
                         break;
                     }
@@ -1872,23 +1871,23 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			}
 		} catch (NumberFormatException e) {
 			throw new NumberFormatException(e.getMessage()
-					+ Messages.getString("StationModel.1")
+					+ Messages.StationModel_1
 					+ a_Station.getReference().trim()
-					+ Messages.getString("StationModel.2") + (index + 1)
-					+ "\r\n");
+					+ Messages.StationModel_2 + (index + 1)
+					+ Global.RN);
 		} catch (ParseException e) {
 			throw new ParseException(e.getMessage()
-					+ Messages.getString("StationModel.1")
+					+ Messages.StationModel_1
 					+ a_Station.getReference().trim()
-					+ Messages.getString("StationModel.2") + (index + 1)
-					+ "\r\n", 0);
+					+ Messages.StationModel_2 + (index + 1)
+					+ Global.RN, 0);
 		} catch (StringIndexOutOfBoundsException e) {
 			throw new StringIndexOutOfBoundsException(Messages
-					.getString("StationModel.1")
+					.StationModel_1
 					+ a_Station.getReference().trim()
-					+ Messages.getString("StationModel.2")
+					+ Messages.StationModel_2
 					+ (index + 1)
-					+ Messages.getString("StationModel.3"));
+					+ Messages.StationModel_3);
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 		}

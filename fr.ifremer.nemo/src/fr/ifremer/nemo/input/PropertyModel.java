@@ -555,11 +555,11 @@ public class PropertyModel implements Cloneable, PathElementHandler,
                     catch (ParseException e)
                     {
                         if (_format instanceof LatitudeFormat)
-                            throw new ParseException(Messages.getString("PropertyModel.1") + " : "+ r, 0);
+                            throw new ParseException(Messages.PropertyModel_1 + " : "+ r, 0);
                         else if (_format instanceof LongitudeFormat)
-                            throw new ParseException(Messages.getString("PropertyModel.2") + " : "+ r, 0);
+                            throw new ParseException(Messages.PropertyModel_2 + " : "+ r, 0);
                         else if (_format instanceof DateTimeFormat)
-                            throw new ParseException(Messages.getString("PropertyModel.3") + " : "+ r, 0);
+                            throw new ParseException(Messages.PropertyModel_3 + " : "+ r, 0);
                         
                     }
                 }else{

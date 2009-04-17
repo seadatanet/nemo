@@ -72,11 +72,11 @@ public class ViewLog extends ViewPart {
 					}
 				});
 		TabItem tabItem = new TabItem(tabFolderLog, SWT.NONE);
-		tabItem.setText(Messages.getString("ViewLog.2")); //$NON-NLS-1$
+		tabItem.setText(Messages.ViewLog_2);
 		TabItem tabItem1 = new TabItem(tabFolderLog, SWT.NONE);
-		tabItem1.setText(Messages.getString("ViewLog.3")); //$NON-NLS-1$
+		tabItem1.setText(Messages.ViewLog_3);
 		TabItem tabItem2 = new TabItem(tabFolderLog, SWT.NONE);
-		tabItem2.setText(Messages.getString("ViewLog.4")); //$NON-NLS-1$
+		tabItem2.setText(Messages.ViewLog_4);
 		styledTextLogErreurs = new StyledText(tabFolderLog, SWT.MULTI
 				| SWT.V_SCROLL | SWT.READ_ONLY);
 		styledTextLogInfos = new StyledText(tabFolderLog, SWT.MULTI
