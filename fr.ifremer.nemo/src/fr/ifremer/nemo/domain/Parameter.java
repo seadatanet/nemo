@@ -163,9 +163,9 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 			Element2Field setter = new Element2Field(this, "setFormat"); //$NON-NLS-1$
 			return setter;
 		}
-		if (a_LocalName.equals("values")) { //$NON-NLS-1$
-			return new PathElementConsumer("values", this); //$NON-NLS-1$
-		}
+//		if (a_LocalName.equals("values")) { //$NON-NLS-1$
+//			return new PathElementConsumer("values", this); //$NON-NLS-1$
+//		}
 		return null;
 	}
 
@@ -200,13 +200,13 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 	public SAXConsumer handlePathElement(String path, String a_URI,
 			String a_LocalName, String a_QName, Attributes a_Attributes)
 			throws SAXException {
-		SAXConsumer c = null;
-		if (path.equals("values")) { //$NON-NLS-1$
-			c = ParameterValue.fromElement(a_URI, a_LocalName, a_QName,
-					a_Attributes);
-			addValue((ParameterValue) c);
-			return c;
-		}
+//		SAXConsumer c = null;
+//		if (path.equals("values")) { //$NON-NLS-1$
+//			c = ParameterValue.fromElement(a_URI, a_LocalName, a_QName,
+//					a_Attributes);
+//			addValue((ParameterValue) c);
+//			return c;
+//		}
 		return null;
 	}
 
@@ -224,11 +224,11 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 		a_Writer.putTag("unit", getUnit()); //$NON-NLS-1$
 		a_Writer.putTag("default", getDefault()); //$NON-NLS-1$
 		a_Writer.putTag("format", getFormat()); //$NON-NLS-1$
-		a_Writer.openTag("values"); //$NON-NLS-1$
-		for (ParameterValue t : getValues()) {
-			t.writeXMLOn(a_Writer);
-		}
-		a_Writer.closeTag();
+//		a_Writer.openTag("values"); //$NON-NLS-1$
+//		for (ParameterValue t : getValues()) {
+//			t.writeXMLOn(a_Writer);
+//		}
+//		a_Writer.closeTag();
 	}
 
 	/**
@@ -410,7 +410,7 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 		if (!valuesIncludes(x))
 			return;
 		nocheckRemoveValue(x);
-		x.setDefinition(null);
+//		x.setDefinition(null);
 	}
 
 	/**
@@ -423,7 +423,7 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 		if (valuesIncludes(x))
 			return;
 		nocheckAddValue(x);
-		x.setDefinition(this);
+		//x.setDefinition(this);
         // globalQC
         if (!x.getQc().equals(Global.ZERO) && x.getQc().compareTo(_globalQC) < 0)
             _globalQC = x.getQc();

@@ -17,9 +17,9 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
 import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.domain.Parameter;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
+import fr.ifremer.nemo.input.ParameterModel;
 import fr.ifremer.nemo.ui.EditConversion;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.ViewFile;
@@ -108,7 +108,7 @@ public class CDIResumeWriter {
 			
 			for (Survey survey : surveys) {
 				for (Station station : survey.getStations()) {
-					for (Parameter param : station.getParameters()) {
+					for (ParameterModel param : station.getParameters()) {
 						writer.write(Global.RN);
 						
 						// CDI ID
@@ -177,7 +177,7 @@ public class CDIResumeWriter {
 						writer.write(sep + idEdmoRespDonnees);
 						
 						// PDV code
-						writer.write(sep + Utils.extraitCodeURN(NemoLists.getVocabMatch("P091", "P021", param.getCode(), Intern.NemoLists_unknown)) + Global.EMPTY_STRING);   //$NON-NLS-1$//$NON-NLS-2$
+						writer.write(sep + Utils.extraitCodeURN(NemoLists.getVocabMatch("P091", "P021", param.getModel().getCode(), Intern.NemoLists_unknown)) + Global.EMPTY_STRING);   //$NON-NLS-1$//$NON-NLS-2$
 
 						// Platform Type
 						writer.write(sep + codeTypePlateForme);

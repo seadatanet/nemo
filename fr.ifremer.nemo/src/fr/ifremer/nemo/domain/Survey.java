@@ -1255,7 +1255,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 	public int getValuesCount() {
 		int count = 0;
 		for (Station s : _stations) {
-			count += s.parametersAt(0).valuesSize();
+			count += s.parametersAt(0).getModel().valuesSize();
 		}
 		return count;
 	}

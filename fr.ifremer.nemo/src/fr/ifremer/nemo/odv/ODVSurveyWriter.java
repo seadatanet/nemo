@@ -5,23 +5,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Writer;
 
 import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.VelocityEngine;
 
-import fr.ifremer.nemo.config.Configuration;
-import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.domain.AddedParameter;
 import fr.ifremer.nemo.domain.Survey;
-import fr.ifremer.nemo.input.StationModel;
-import fr.ifremer.nemo.input.SurveyMedia;
+import fr.ifremer.nemo.output.SurveyWriter;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.ProgressNotification;
-import fr.ifremer.nemo.output.SurveyWriter;
-import fr.ifremer.nemo.ui.EditConversion;
-import fr.ifremer.nemo.ui.SWTProcess;
-import fr.ifremer.nemo.util.SizeBasedProgressNotifier;
+import fr.ifremer.nemo.util.Conversion;
 
 /**
  * Class ODVSurveyWriter
@@ -31,7 +22,7 @@ import fr.ifremer.nemo.util.SizeBasedProgressNotifier;
  * 
  * @author Gerard BUNEL
  */
-public class ODVSurveyWriter implements Cloneable, SurveyWriter {
+public class ODVSurveyWriter extends SurveyWriter {
 
 	public ODVSurveyWriter() {
 	}
@@ -41,16 +32,11 @@ public class ODVSurveyWriter implements Cloneable, SurveyWriter {
 	 * 
 	 * @return a copy of this object
 	 */
-	public Object clone() throws CloneNotSupportedException {
+	@Override
+    public Object clone() throws CloneNotSupportedException {
 		ODVSurveyWriter copy = null;
 		copy = (ODVSurveyWriter) super.clone();
 		return copy;
-	}
-
-	/**
-	 * Remove any associated links
-	 */
-	public void release() {
 	}
 
 	/**
@@ -65,16 +51,21 @@ public class ODVSurveyWriter implements Cloneable, SurveyWriter {
 	 * @exception IOException
 	 * @exception GenerationException
 	 */
-	public void writeSurvey(Survey a_Survey, File a_Filename,
-			ProgressNotification a_Progress) throws IOException,
-			GenerationException {
+	@Override
+    public void writeSurvey(Survey a_Survey, 
+                            File a_Filename,
+                            Conversion a_Conversion,
+                            ProgressNotification a_Progress) throws GenerationException {
+        
 		FileWriter writer = null;
 		try {
 			writer = new FileWriter(a_Filename);
-			writeSurvey(a_Survey, writer, a_Progress);
-		} catch (IOException e) {
-			SurveyMedia.interrompu = true;
-		} finally {
+			super.writeSurvey(a_Survey, writer, a_Conversion, a_Progress);
+		} 
+        catch (Exception e) {
+            throw new GenerationException(e);
+        } 
+        finally {
 			if (writer != null) {
 				try {
 					writer.flush();
@@ -85,53 +76,16 @@ public class ODVSurveyWriter implements Cloneable, SurveyWriter {
 			}
 		}
 	}
+    
 
-	/**
-	 * 
-	 * @param a_Survey
-	 *            La campagne a convertir
-	 * @param a_Writer
-	 *            Le flux vers lequel ecrire les donnees
-	 * @param a_Progress
-	 *            Interface permettant au SurveyWriter de notifier de la
-	 *            progression
-	 * @exception GenerationException
-	 */
-	public void writeSurvey(Survey a_Survey, Writer a_Writer,
-			ProgressNotification a_Progress) throws GenerationException {
-		InputStream stream = null;
-		InputStreamReader reader = null;
-		try {
-			VelocityEngine ve = new VelocityEngine();
-			ve.setProperty(VelocityEngine.RUNTIME_LOG_LOGSYSTEM, this);
-			ve.init();
-			VelocityContext context = new VelocityContext();
-			context.put("survey", a_Survey);
-			context.put("formatter", fr.ifremer.nemo.util.Formatter
-					.getSingleton());
-			context.put("star", "*");
-			context.put("nemoLists", NemoLists.class.newInstance());
-			context.put("swtProcess", SWTProcess.class.newInstance());
-			context.put("stationModel", StationModel.getSingleton());
-			context.put("configuration", Configuration.getSingleton());
-			context.put("editConversion", EditConversion.class.newInstance());
-			context.put("cr", System.getProperty("line.separator"));
-			stream = getClass().getResourceAsStream("odv.vtl");
-			reader = new InputStreamReader(stream);
-			SizeBasedProgressNotifier notifier = new SizeBasedProgressNotifier(
-					a_Survey.getValuesCount(), 0, a_Progress);
-			context.put("notifier", notifier);
-			ve.evaluate(context, a_Writer, "ODV", reader);
-		} catch (Exception e) {
-			throw new GenerationException(e);
-		} finally {
-			if (reader != null) {
-				try {
-					reader.close();
-				} catch (Exception ex) {
-				}
-			}
-		}
-	}
+    @Override
+    public InputStreamReader specificWriteSurvey(VelocityContext context,
+                                                 Conversion a_Conversion){
+        
+        // possibité de rajouter des choses spécifiques au context
+        
+        InputStream stream = getClass().getResourceAsStream(a_Conversion.getTemplate());
+        return new InputStreamReader(stream);
+    }
 
 } /* End of class: ODVSurveyWriter */

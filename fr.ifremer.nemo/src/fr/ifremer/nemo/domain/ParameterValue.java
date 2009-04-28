@@ -34,13 +34,20 @@ public class ParameterValue implements Cloneable, SAXConsumer {
 	/**
 	 * Parametre pour lequel la mesure a ete effectuee
 	 */
-	protected Parameter _definition;
+	//protected Parameter _definition;
 
 	public ParameterValue() {
 		_qc = Global.EMPTY_STRING;
-		_definition = null;
+		//_definition = null;
 	}
 
+    
+    public void reset(){
+        _qc = Global.EMPTY_STRING;
+        _value = null;
+        _stringValue = null;
+    }
+    
 	/**
 	 * 
 	 * Build object from its XML defintion
@@ -79,16 +86,16 @@ public class ParameterValue implements Cloneable, SAXConsumer {
 	 */
 	public void buildFromElement(String a_URI, String a_LocalName,
 			String a_QName, Attributes a_Attributes) throws SAXException {
-		String tmp;
-		if ((tmp = a_Attributes.getValue("value")) != null) {
-			setValue(tmp);
-		}
-        if ((tmp = a_Attributes.getValue("stringValue")) != null) {
-            setStringValue(tmp);
-        }
-		if ((tmp = a_Attributes.getValue(Global.EMPTY_STRING)) != null) {
-			setQc(tmp);
-		}
+//		String tmp;
+//		if ((tmp = a_Attributes.getValue("value")) != null) {
+//			setValue(tmp);
+//		}
+//        if ((tmp = a_Attributes.getValue("stringValue")) != null) {
+//            setStringValue(tmp);
+//        }
+//		if ((tmp = a_Attributes.getValue(Global.EMPTY_STRING)) != null) {
+//			setQc(tmp);
+//		}
 	}
 
 	/**
@@ -131,9 +138,9 @@ public class ParameterValue implements Cloneable, SAXConsumer {
 	 * 
 	 */
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
-		a_Writer.putAttribute("value", getValue());
-        a_Writer.putAttribute("stringValue", getStringValue());
-		a_Writer.putAttribute(Global.EMPTY_STRING, getQc());
+//		a_Writer.putAttribute("value", getValue());
+//        a_Writer.putAttribute("stringValue", getStringValue());
+//		a_Writer.putAttribute(Global.EMPTY_STRING, getQc());
 	}
 
 	/**
@@ -145,9 +152,9 @@ public class ParameterValue implements Cloneable, SAXConsumer {
 	 * 
 	 */
 	public void writeXMLOn(XMLOutputWriter a_Writer) {
-		a_Writer.openTag("ParameterValue");
-		writeXMLBodyOn(a_Writer);
-		a_Writer.closeTag();
+//		a_Writer.openTag("ParameterValue");
+//		writeXMLBodyOn(a_Writer);
+//		a_Writer.closeTag();
 	}
 
 	/**
@@ -168,10 +175,11 @@ public class ParameterValue implements Cloneable, SAXConsumer {
 	 * 
 	 * @return a copy of this object
 	 */
-	public Object clone() throws CloneNotSupportedException {
+	@Override
+    public Object clone() throws CloneNotSupportedException {
 		ParameterValue copy = null;
 		copy = (ParameterValue) super.clone();
-		copy._definition = null;
+		//copy._definition = null;
 		return copy;
 	}
 
@@ -179,7 +187,7 @@ public class ParameterValue implements Cloneable, SAXConsumer {
 	 * Remove any associated links
 	 */
 	public void release() {
-		releaseDefinition();
+//		releaseDefinition();
 	}
 
 	/**
@@ -238,41 +246,41 @@ public class ParameterValue implements Cloneable, SAXConsumer {
 		}
 	}
 
-	/**
-	 * Remove any link for role definition
-	 */
-	public void releaseDefinition() {
-		setDefinition(null);
-	}
-
-	/**
-	 * returns the linked object for role <% aRole name%>
-	 * 
-	 * @return the object linked
-	 */
-	public Parameter getDefinition() {
-		return _definition;
-	}
-
-	/**
-	 * Create a new link with x for role definition
-	 * 
-	 * @param x
-	 *            the object to link with
-	 */
-	public void setDefinition(Parameter x) {
-		if (_definition == x)
-			return;
-		Parameter old = _definition;
-		if (_definition != null) {
-			_definition = null;
-			old.removeValue(this);
-		}
-		_definition = x;
-		if (x != null) {
-			x.addValue(this);
-		}
-	}
+//	/**
+//	 * Remove any link for role definition
+//	 */
+//	public void releaseDefinition() {
+//		setDefinition(null);
+//	}
+//
+//	/**
+//	 * returns the linked object for role <% aRole name%>
+//	 * 
+//	 * @return the object linked
+//	 */
+//	public Parameter getDefinition() {
+//		return _definition;
+//	}
+//
+//	/**
+//	 * Create a new link with x for role definition
+//	 * 
+//	 * @param x
+//	 *            the object to link with
+//	 */
+//	public void setDefinition(Parameter x) {
+//		if (_definition == x)
+//			return;
+//		Parameter old = _definition;
+//		if (_definition != null) {
+//			_definition = null;
+//			old.removeValue(this);
+//		}
+//		_definition = x;
+//		if (x != null) {
+//			x.addValue(this);
+//		}
+//	}
 
     /**
      * Getter sur _stringValue.

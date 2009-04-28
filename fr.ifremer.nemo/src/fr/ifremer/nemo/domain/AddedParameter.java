@@ -134,13 +134,13 @@ public class AddedParameter extends Parameter
     public SAXConsumer handlePathElement(String path, String a_URI,
             String a_LocalName, String a_QName, Attributes a_Attributes)
             throws SAXException {
-        SAXConsumer c = null;
-        if (path.equals("values")) { //$NON-NLS-1$
-            c = ParameterValue.fromElement(a_URI, a_LocalName, a_QName,
-                    a_Attributes);
-            addValue((ParameterValue) c);
-            return c;
-        }
+//        SAXConsumer c = null;
+//        if (path.equals("values")) { //$NON-NLS-1$
+//            c = ParameterValue.fromElement(a_URI, a_LocalName, a_QName,
+//                    a_Attributes);
+//            addValue((ParameterValue) c);
+//            return c;
+//        }
         return null;
     }
 
@@ -167,9 +167,9 @@ public class AddedParameter extends Parameter
      */
     @Override
     public void writeXMLOn(XMLOutputWriter a_Writer) {
-        a_Writer.openTag("AddedParameter"); //$NON-NLS-1$
-        writeXMLBodyOn(a_Writer);
-        a_Writer.closeTag();
+//        a_Writer.openTag("AddedParameter"); //$NON-NLS-1$
+//        writeXMLBodyOn(a_Writer);
+//        a_Writer.closeTag();
     }
 
     /**
@@ -195,8 +195,8 @@ public class AddedParameter extends Parameter
     public Object clone() throws CloneNotSupportedException {
         AddedParameter copy = null;
         copy = (AddedParameter) super.clone();
-        copy.idParam = null;
-        copy.cible = null;
+        copy.idParam = this.idParam;
+        copy.cible = this.cible;
         return copy;
     }
     

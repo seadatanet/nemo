@@ -17,14 +17,16 @@ $line
 #foreach( $station in $survey.stations )
 *$formatter.padString( $survey.reference, 13)$formatter.padZero($station.reference.trim(), 5) Data Type=$formatter.padString($station.dataType.code, 3)
 *DATE=$formatter.formatDateTime("ddMMyyyy", $station.fullDate) TIME=$formatter.formatDateTime("hh24mm", $station.correctedTime, "9999") LAT=$formatter.formatLatitude("NDD MM.mm", $station.latitude) LON=$formatter.formatLongitude("NDDD MM.mm", $station.longitude) DEPTH=#if($station.bottomDepth == 0) #else$formatter.formatInt("%-5d", $station.bottomDepth)#end  QC=$station.getMetaFlag("dateTime")$station.getMetaFlag("latitude")$station.getMetaFlag("longitude")$station.getMetaFlag("bottomDepth")
-*NB PARAMETERS=$formatter.formatInt("%02d", $station.parametersNumber) RECORD LINES=$formatter.formatInt("%05d", $station.parametersAt(0).valuesSize())
+*NB PARAMETERS=$formatter.formatInt("%02d", $station.parametersNumber) RECORD LINES=$formatter.formatInt("%05d", $station.parametersAt(0).getModel().valuesSize())
 ## -- PARAMETRES
 ## -- -- paramètres ajoutés
-#foreach( $medparam in $station.medparameters )
+#foreach( $medparamModel in $station.medparameters )
+#set ($medparam = $medparamModel.getModel())
 *$formatter.padString($medparam.code, 4) $formatter.padString($medparam.fullName, 29) ($formatter.padString($medparam.unit, 28)) def.=$medparam.default
 #end
 ## -- -- paramètres mesurés
-#foreach( $param in $station.parameters )
+#foreach( $paramModel in $station.parameters )
+#set ($param = $paramModel.getModel())
 *$formatter.padString($param.code, 4) $formatter.padString($param.fullName, 29) ($formatter.padString($param.unit, 28)) def.=$param.default
 #end
 *GLOBAL PROFILE QUALITY FLAG=$station.getGlobalProfileQC() GLOBAL PARAMETERS QC FLAGS=$station.getGlobalParametersQC()
@@ -51,17 +53,19 @@ $nemoLists.getSdnParameters()
 *SURFACE SAMPLES=$formatter.limitString( $station.surfaceSamples1, 63)
 *$formatter.limitString( $station.surfaceSamples2, 80)
 ##
-#set( $limit = $station.parametersAt(0).valuesSize() - 1 )
+#set( $limit = $station.parametersAt(0).getModel().valuesSize() - 1 )
 #set ( $range = [0 .. $limit] )
 ## -- PARAMETRES
 ## -- -- paramètres ajoutés
-*#foreach( $medparam in $station.medparameters )
+*#foreach( $medparamModel in $station.medparameters )
+#set ($medparam = $medparamModel.getModel())
 #set( $len = $medparam.default.length() + 1 )
 #if ( $len <= $medparam.code.length())#set( $len = $medparam.code.length() + 1)#end##
 $formatter.padString( $medparam.code, $len)##
 #end
 ## -- -- paramètres mesurés
-#foreach( $param in $station.parameters )
+#foreach( $paramModel in $station.parameters )
+#set ($param = $paramModel.getModel())
 #set( $len = $param.default.length() + 1 )
 #if ( $len <= $param.code.length())#set( $len = $param.code.length() + 1)#end##
 $formatter.padString( $param.code, $len)##
@@ -71,11 +75,12 @@ $formatter.padString( $param.code, $len)##
 #foreach( $i in  $range )
 ##
 ## -- -- paramètres ajoutés (boucle sur medparameters)
-#foreach ($medparam in $station.medparameters)
-$medparam.valuesAt($i).getStringValue() #end
+#foreach ($medparamModel in $station.medparameters )
+$medparamModel.getModel().valuesAt($i).getStringValue() #end
 ##
 ## -- -- paramètres mesurés (boucle sur parameters)
-#foreach ($param in $station.parameters)
+#foreach( $paramModel in $station.parameters )
+#set ($param = $paramModel.getModel())
 $formatter.formatParameter( $param.format, $param.valuesAt($i).getValue()) #end
 ##
 ## -- -- flags qualité
@@ -86,7 +91,7 @@ $station.getFlags($i)
 #end
 ##
 ## -- -- dernière ligne 
-#foreach( $medparam in $station.medparameters )$medparam.default #end
-#foreach( $param in $station.parameters )$param.default #end
+#foreach( $medparamModel in $station.medparameters )$medparamModel.getModel().default #end
+#foreach( $paramModel in $station.parameters )$paramModel.getModel().default #end
 $station.getDefaultGlobalParametersQC()
 #end

@@ -13,9 +13,10 @@ import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.mapping.Mapping;
 import fr.ifremer.nemo.mapping.MappingTable;
 import fr.ifremer.nemo.output.CDIResumeWriter;
-import fr.ifremer.nemo.output.CommonSurveyWriter;
+import fr.ifremer.nemo.output.SurveyWriter;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.ProgressNotification;
+import fr.ifremer.nemo.output.SurveyWriterFactory;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
@@ -27,7 +28,7 @@ public class SWTProcess implements IRunnableWithProgress {
 
 	public static Survey survey;
 
-    private CommonSurveyWriter writer;
+    private SurveyWriter writer;
     
     private Conversion formatConversion;
     private boolean monoStation;
@@ -126,7 +127,7 @@ public class SWTProcess implements IRunnableWithProgress {
         if (!monitor2.isCanceled()){
             System.out.println("START writing at " + new Date());
             monitor2.setTaskName(Messages.SWTProcess_4);
-            writer = new CommonSurveyWriter();
+            writer = SurveyWriterFactory.createWriter(formatConversion);
             
             if ((formatConversion == Conversion.ODV) && (monoStation)){
                 writeMonoStationFile();

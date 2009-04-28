@@ -3,6 +3,8 @@ package fr.ifremer.nemo.domain;
 import java.util.Calendar;
 import java.util.TimeZone;
 
+import fr.ifremer.nemo.util.Global;
+
 /**
  * Class HorodatedValue
  * 
@@ -24,10 +26,25 @@ public class HorodatedValue extends ParameterValue implements Cloneable {
 
 	public HorodatedValue() {
 		super();
-		_qc2 = "";
+		_qc2 = Global.EMPTY_STRING;
 	}
+    
+    
 
 	/**
+     * {@inheritDoc}
+     */
+    @Override
+    public void reset()
+    {
+        super.reset();
+        _qc2 = Global.EMPTY_STRING;
+        _date = 0;
+    }
+
+
+
+    /**
 	 * Returns a copy of this Object
 	 * 
 	 * @return a copy of this object

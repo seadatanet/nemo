@@ -29,12 +29,14 @@ $configuration.getSep()Bot. Depth [m]##
 #set ($boucle = 0)
 #foreach( $station in $survey.stations )
 #if ( $boucle == 0 )
-#foreach( $odvparam in $station.getOdvparameters() )
+#foreach( $odvparamModel in $station.getOdvparameters() )
+#set ($odvparam = $odvparamModel.getModel())
 #set ($code = $odvparam.code)
 #if ($odvparam.code == "CJDY" || $odvparam.code == "DTUT") #set ($code = $odvparam.fullName) #end
 $configuration.getSep()$code [$odvparam.unit]$configuration.getSep()$configuration.getSdnHeader() #set ($boucle = 1)##
 #end
-#foreach( $param in $station.parameters )
+#foreach( $paramModel in $station.parameters )
+#set ($param = $paramModel.getModel())
 $configuration.getSep()$param.code [$param.unit]$configuration.getSep()$configuration.getSdnHeader() #set ($boucle = 1)##
 #end
 #end
@@ -65,7 +67,7 @@ $configuration.getSep()$param.code [$param.unit]$configuration.getSep()$configur
 #if ($station.bottomDepth.toString() != "NaN")#set ($botDepth = $station.bottomDepth)#end
 ##
 ######if ( !$swtProcess.getOdv() || !$swtProcess.getMonoStation() || ( $swtProcess.getMonoStation() && $swtProcess.getStation() == $station ))
-#set( $limit = $station.parametersAt(0).valuesSize() - 1 )
+#set( $limit = $station.parametersAt(0).getModel().valuesSize() - 1 )
 #set ( $range = [0 .. $limit] )
 ##
 #foreach( $i in  $range )
@@ -92,9 +94,13 @@ $configuration.getSep()#if (($i == 0) || ($stationModel.isTrajectory()))$botDept
 ##
 ## -- DONNEES DES PARAMETRES
 ## -- -- paramètres ajoutés (boucle sur odvparameters)
-#foreach( $odvparam in $station.getOdvparameters() )$configuration.getSep()#if($odvparam.valuesAt($i).getStringValue() == $odvparam.default)-1.e10#else$odvparam.valuesAt($i).getStringValue()#end$configuration.getSep()$station.getAddedFlag($odvparam,$i)#end##
+#foreach( $odvparamModel in $station.getOdvparameters() )
+#set ($odvparam = $odvparamModel.getModel())
+$configuration.getSep()#if($odvparam.valuesAt($i).getStringValue() != $odvparam.default)$odvparam.valuesAt($i).getStringValue()#end$configuration.getSep()$station.getAddedFlag($odvparamModel,$i)#end##
 ## -- -- paramètres mesurés (boucle sur parameters)
-#foreach( $param in $station.parameters )$configuration.getSep()#if($param.valuesAt($i).getValue().toString() != $param.default)$formatter.formatParameter( $param.format, $param.valuesAt($i).getValue())#end$configuration.getSep()$station.getFlag($param,$i)#end
+#foreach( $paramModel in $station.parameters )
+#set ($param = $paramModel.getModel())
+$configuration.getSep()#if($param.valuesAt($i).getValue().toString() != $param.default)$formatter.formatParameter( $param.format, $param.valuesAt($i).getValue())#end$configuration.getSep()$station.getFlag($paramModel,$i)#end
 
 #set( $count = $count + 1 )
 #set( $result = $notifier.progress( $count ))

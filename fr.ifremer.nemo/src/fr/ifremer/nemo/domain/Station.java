@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.TimeZone;
 import java.util.TreeMap;
 import java.util.Map.Entry;
@@ -16,12 +17,12 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import com.ago.xml.Element2Field;
-import com.ago.xml.PathElementConsumer;
 import com.ago.xml.PathElementHandler;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.domain.AddedParameter.IdParameter;
+import fr.ifremer.nemo.input.ParameterModel;
 import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.ui.EditConversion;
 import fr.ifremer.nemo.ui.Utils;
@@ -181,21 +182,43 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 */
 	protected Survey _survey;
 
+//	/**
+//	 * Liste , ordonnee, des parametres mesures
+//	 */
+//	protected java.util.List<Parameter> _parameters;
+//
+//    /** 
+//     * Liste, ordonnee, des paramètres rajoutés pour ODV
+//     */
+//    protected java.util.List<AddedParameter> _odvparameters;
+//
+//    /** 
+//     * Liste, ordonnee, des paramètres rajoutés pour Medatlas
+//     */
+//    protected java.util.List<AddedParameter> _medparameters;
+
+    
+    
+
 	/**
 	 * Liste , ordonnee, des parametres mesures
 	 */
-	protected java.util.List<Parameter> _parameters;
+	protected List<ParameterModel> _parameters;
 
     /** 
      * Liste, ordonnee, des paramètres rajoutés pour ODV
      */
-    protected java.util.List<AddedParameter> _odvparameters;
+    protected List<ParameterModel> _odvparameters;
 
     /** 
      * Liste, ordonnee, des paramètres rajoutés pour Medatlas
      */
-    protected java.util.List<AddedParameter> _medparameters;
-
+    protected List<ParameterModel> _medparameters;
+    
+    
+    
+    
+    
 	/**
 	 * Information sur les series temporelles. Optionnel, n'existe que si la
 	 * campagne a concerne des donnees temporelles.
@@ -229,9 +252,9 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		_surfaceSamples2 = Global.EMPTY_STRING;
 		_time = Float.NaN;
 		_dataType = null;
-		_parameters = new ArrayList<Parameter>();
-        _odvparameters = new ArrayList<AddedParameter>();
-        _medparameters = new ArrayList<AddedParameter>();
+		_parameters = new ArrayList<ParameterModel>();
+        _odvparameters = new ArrayList<ParameterModel>();
+        _medparameters = new ArrayList<ParameterModel>();
 		_survey = null;
 		_timeSeriesInformation = null;
 		_metaFlags = new HashMap<String, String>();
@@ -393,9 +416,9 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 			setDataType(l);
 			return (SAXConsumer) l;
 		}
-		if (a_LocalName.equals("parameters")) {
-			return new PathElementConsumer("parameters", this);
-		}
+//		if (a_LocalName.equals("parameters")) {
+//			return new PathElementConsumer("parameters", this);
+//		}
 //        if (a_LocalName.equals("odvparameters")) {
 //            return new PathElementConsumer("odvparameters", this);
 //        }
@@ -442,13 +465,13 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	public SAXConsumer handlePathElement(String path, String a_URI,
 			String a_LocalName, String a_QName, Attributes a_Attributes)
 			throws SAXException {
-		SAXConsumer c = null;
-		if (path.equals("parameters")) {
-			c = Parameter
-					.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
-			addParameter((Parameter) c);
-			return c;
-		}
+//		SAXConsumer c = null;
+//		if (path.equals("parameters")) {
+//			c = Parameter
+//					.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+//			addParameter((Parameter) c);
+//			return c;
+//		}
 		return null;
 	}
 
@@ -485,11 +508,11 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		if (getDataType() != null) {
 			getDataType().writeXMLOn(a_Writer);
 		}
-		a_Writer.openTag("parameters");
-//		for (Parameter t : getParameters()) {
-//			t.writeXMLOn(a_Writer);
-//		}
-        a_Writer.closeTag();
+//		a_Writer.openTag("parameters");
+////		for (Parameter t : getParameters()) {
+////			t.writeXMLOn(a_Writer);
+////		}
+//        a_Writer.closeTag();
 		if (getTimeSeriesInformation() != null) {
 			getTimeSeriesInformation().writeXMLOn(a_Writer);
 		}
@@ -535,11 +558,11 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 			copy.setDataType((DataType) getDataType().clone());
 		}
 		copy._survey = null;
-		copy._parameters = new java.util.ArrayList<Parameter>();
-        copy._odvparameters = new java.util.ArrayList<AddedParameter>();
-        copy._medparameters = new java.util.ArrayList<AddedParameter>();
-		for (Parameter t0 : getParameters()) {
-			copy.addParameter((Parameter) t0.clone());
+		copy._parameters = new java.util.ArrayList<ParameterModel>();
+        copy._odvparameters = new java.util.ArrayList<ParameterModel>();
+        copy._medparameters = new java.util.ArrayList<ParameterModel>();
+		for (ParameterModel t0 : getParameters()) {
+			copy.addParameter((ParameterModel) t0.clone());
 		}
 		copy._timeSeriesInformation = null;
 		if (getTimeSeriesInformation() != null) {
@@ -1266,25 +1289,25 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	}
 
     
-    public void addMedParameter(AddedParameter x) {
+    public void addMedParameter(ParameterModel x) {
         if (_medparameters.contains(x))
             return;
         _medparameters.add(x);
         //x.setStation(this, Conversion.MEDATLAS);
     }
-    public AddedParameter[] getMedParameters() {
-        AddedParameter[] v = new AddedParameter[_medparameters.size()];
+    public ParameterModel[] getMedParameters() {
+        ParameterModel[] v = new ParameterModel[_medparameters.size()];
         _medparameters.toArray(v);
         return v;
     }
-    public void addOdvParameter(AddedParameter x) {
+    public void addOdvParameter(ParameterModel x) {
         if (_odvparameters.contains(x))
             return;
         _odvparameters.add(x);
         //x.setStation(this, Conversion.ODV);
     }
-    public AddedParameter[] getOdvParameters() {
-        AddedParameter[] v = new AddedParameter[_odvparameters.size()];
+    public ParameterModel[] getOdvParameters() {
+        ParameterModel[] v = new ParameterModel[_odvparameters.size()];
         _odvparameters.toArray(v);
         return v;
     }
@@ -1293,7 +1316,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
      * Getter sur _medparameters.
      * @return the medparameters
      */
-    public java.util.List<AddedParameter> getMedparameters()
+    public java.util.List<ParameterModel> getMedparameters()
     {
         return _medparameters;
     }
@@ -1302,22 +1325,22 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
      * Getter sur _odvparameters.
      * @return the odvparameters
      */
-    public java.util.List<AddedParameter> getOdvparameters()
+    public java.util.List<ParameterModel> getOdvparameters()
     {
         return _odvparameters;
     }
     
-    public AddedParameter getAddedParameter(IdParameter idParam){
-        AddedParameter param = null;
-        for (AddedParameter current : _medparameters){
-            if (current.getCode().equals(idParam.toString())){                
+    public ParameterModel getAddedParameter(IdParameter idParam){
+        ParameterModel param = null;
+        for (ParameterModel current : _medparameters){
+            if (current.getModel().getCode().equals(idParam.toString())){                
                 param = current;
                 break;
             }
         }
         if (param == null){
-            for (AddedParameter current : _odvparameters){
-                if (current.getCode().equals(idParam.toString())){                    
+            for (ParameterModel current : _odvparameters){
+                if (current.getModel().getCode().equals(idParam.toString())){                    
                     param = current;
                     break;
                 }
@@ -1330,15 +1353,15 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 * release all links for role "parameters"
 	 */
 	public void releaseParameters() {
-		for (Parameter t : getParameters()) {
+		for (ParameterModel t : getParameters()) {
             t.release();
 			removeParameter(t);
 		}
-        for (AddedParameter t : getOdvParameters()) {
+        for (ParameterModel t : getOdvParameters()) {
             t.release();
             if (_odvparameters.contains(t)) _odvparameters.remove(t);;
         }
-        for (AddedParameter t : getMedParameters()) {
+        for (ParameterModel t : getMedParameters()) {
             t.release();
             if (_medparameters.contains(t)) _medparameters.remove(t);;
         }
@@ -1350,7 +1373,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 * @param x
 	 *            the linked object to unlink
 	 */
-	public void removeParameter(Parameter x) {
+	public void removeParameter(ParameterModel x) {
 		if (!parametersIncludes(x))
 			return;
 		nocheckRemoveParameter(x);
@@ -1363,7 +1386,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 * @param x
 	 *            the object to link with
 	 */
-	public void addParameter(Parameter x) {
+	public void addParameter(ParameterModel x) {
 		if (parametersIncludes(x))
 			return;
 		nocheckAddParameter(x);
@@ -1375,8 +1398,8 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 * 
 	 * @return Array of linked objects
 	 */
-	public Parameter[] getParameters() {
-		Parameter[] v = new Parameter[_parameters.size()];
+	public ParameterModel[] getParameters() {
+        ParameterModel[] v = new ParameterModel[_parameters.size()];
 		_parameters.toArray(v);
 		return v;
 	}
@@ -1388,7 +1411,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 *            the index of the linked object
 	 * @return linked object at index i
 	 */
-	public Parameter parametersAt(int i) {
+	public ParameterModel parametersAt(int i) {
 		return _parameters.get(i);
 	}
 
@@ -1398,7 +1421,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 * @param x
 	 *            the linked object
 	 */
-	public int parametersIndexOf(Parameter x) {
+	public int parametersIndexOf(ParameterModel x) {
 		if (!parametersIncludes(x))
 			return -1;
 		for (int i = 0; i < parametersSize(); i++) {
@@ -1418,7 +1441,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	public int parametersIndexOf(String paramCode) {
 		int i;
 		for (i = 0; i < parametersSize(); i++) {
-			if (parametersAt(i).getCode().equals(paramCode)) {
+			if (parametersAt(i).getModel().getCode().equals(paramCode)) {
 				return i;
 			}
 		}
@@ -1431,7 +1454,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 * @param x
 	 *            the object to move
 	 */
-	public void parametersMoveUp(Parameter x) {
+	public void parametersMoveUp(ParameterModel x) {
 		int index;
 		index = parametersIndexOf(x);
 		if (index < 1)
@@ -1445,7 +1468,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 * @param x
 	 *            the object to move
 	 */
-	public void parametersMoveTop(Parameter x) {
+	public void parametersMoveTop(ParameterModel x) {
 		int index;
 		index = parametersIndexOf(x);
 		if (index < 1)
@@ -1459,7 +1482,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 * @param x
 	 *            the object to move
 	 */
-	public void parametersMoveDown(Parameter x) {
+	public void parametersMoveDown(ParameterModel x) {
 		int index;
 		index = parametersIndexOf(x);
 		if (index < 0 || index > parametersSize() - 2)
@@ -1473,7 +1496,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 * @param x
 	 *            the object to move
 	 */
-	public void parametersMoveBottom(Parameter x) {
+	public void parametersMoveBottom(ParameterModel x) {
 		int index;
 		index = parametersIndexOf(x);
 		if (index < 0 || index > parametersSize() - 2)
@@ -1487,9 +1510,9 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 * @param x
 	 *            the object to move
 	 */
-	public void nocheckMoveParameterAt(Parameter x, int a_Index) {
+	public void nocheckMoveParameterAt(ParameterModel x, int a_Index) {
 		int index;
-		Parameter tmp;
+        ParameterModel tmp;
 		index = parametersIndexOf(x);
 		tmp = _parameters.get(index);
 		_parameters.remove(index);
@@ -1505,7 +1528,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 *            the object to link with
 	 * @see Station#removeParameter(Parameter)
 	 */
-	protected void nocheckRemoveParameter(Parameter x) {
+	protected void nocheckRemoveParameter(ParameterModel x) {
 		_parameters.remove(x);
 	}
 
@@ -1518,7 +1541,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 *            the object to link with
 	 * @see Station#addParameter(Parameter)
 	 */
-	protected void nocheckAddParameter(Parameter x) {
+	protected void nocheckAddParameter(ParameterModel x) {
 		_parameters.add(x);
 	}
 
@@ -1537,7 +1560,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 * @param x
 	 *            an instance of Parameter
 	 */
-	public boolean parametersIncludes(Parameter x) {
+	public boolean parametersIncludes(ParameterModel x) {
 		return _parameters.contains(x);
 	}
 
@@ -1545,7 +1568,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 * returns an Iterator to iterate over the elements of "parameters"
 	 * 
 	 */
-	public java.util.Iterator<Parameter> parametersIterator() {
+	public java.util.Iterator<ParameterModel> parametersIterator() {
 		return _parameters.iterator();
 
 	}
@@ -1681,13 +1704,13 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 */
 	public String getGlobalParametersQC() {
 		StringBuffer buffer = new StringBuffer();
-        for (AddedParameter medPara : _medparameters){
-            String qc = medPara.getGlobalQC();
+        for (ParameterModel medPara : _medparameters){
+            String qc = medPara.getModel().getGlobalQC();
             if (qc.equals(Global.WORSE_FLAG)) qc = Global.ZERO;
             buffer.append(qc);
         }
-        for (Parameter para : _parameters){
-            String qc = para.getGlobalQC();
+        for (ParameterModel para : _parameters){
+            String qc = para.getModel().getGlobalQC();
             if (qc.equals(Global.WORSE_FLAG)) qc = Global.ZERO;
             buffer.append(qc);
         }
@@ -1765,8 +1788,8 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 			if (paramCode.equals(Global.EMPTY_STRING)) {
 				// Cas du tri par date
 				// on utilise la date du 1er parametre
-				for (i = 0; i < parametersAt(0).valuesSize(); i++) {
-					Long date = ((HorodatedValue) parametersAt(0).valuesAt(i))
+				for (i = 0; i < parametersAt(0).getModel().valuesSize(); i++) {
+					Long date = ((HorodatedValue) parametersAt(0).getModel().valuesAt(i))
 							.getDate();
 					tmTri.put(date.doubleValue(), i);
 				}
@@ -1776,8 +1799,8 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 				paramIndex = parametersIndexOf(paramCode);
 
 				if (paramIndex >= 0) {
-					for (i = 0; i < parametersAt(paramIndex).valuesSize(); i++) {
-						tmTri.put(parametersAt(paramIndex).valuesAt(i).getValue(), i);
+					for (i = 0; i < parametersAt(paramIndex).getModel().valuesSize(); i++) {
+						tmTri.put(parametersAt(paramIndex).getModel().valuesAt(i).getValue(), i);
 					}
 				} 
                 else {
@@ -1794,7 +1817,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 			} 
             else {
 				ArrayList<Integer> arrayTri = new ArrayList<Integer>(
-						parametersAt(paramIndex).valuesSize());
+						parametersAt(paramIndex).getModel().valuesSize());
 
 				for (Entry<Double, Integer> currentEntry : tmTri.entrySet()) {
 					arrayTri.add(currentEntry.getValue());
@@ -1806,8 +1829,8 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 			}
 
 			// Tri de tous les parametres de la station
-			for (Parameter param : getParameters()) {
-				param.triIndexes(arlIndexes);
+			for (ParameterModel param : getParameters()) {
+				param.getModel().triIndexes(arlIndexes);
 			}
 		}
 	}
@@ -1822,7 +1845,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		if (ViewFile.blnForcerTri) {
 			ArrayList<Integer> arlIndexes = new ArrayList<Integer>();
 			ArrayList<StationData> dataList = new ArrayList<StationData>(
-					parametersAt(0).valuesSize());
+					parametersAt(0).getModel().valuesSize());
 			StationData dataTemp;
 			String paramCode = Global.EMPTY_STRING;
 			int paramIndex = -1;
@@ -1843,8 +1866,8 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 			if (paramCode.equals(Global.EMPTY_STRING)) {
 				// Cas du tri par date
 				// on utilise la date du 1er parametre
-				for (i = 0; i < parametersAt(0).valuesSize(); i++) {
-					Long date = ((HorodatedValue) parametersAt(0).valuesAt(i))
+				for (i = 0; i < parametersAt(0).getModel().valuesSize(); i++) {
+					Long date = ((HorodatedValue) parametersAt(0).getModel().valuesAt(i))
 							.getDate();
 					dataTemp = new StationData(date.doubleValue(), i,
 							getReference());
@@ -1855,8 +1878,8 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 				paramIndex = parametersIndexOf(paramCode);
 
 				if (paramIndex >= 0) {
-					for (i = 0; i < parametersAt(paramIndex).valuesSize(); i++) {
-						dataTemp = new StationData(parametersAt(paramIndex)
+					for (i = 0; i < parametersAt(paramIndex).getModel().valuesSize(); i++) {
+						dataTemp = new StationData(parametersAt(paramIndex).getModel()
 								.valuesAt(i).getValue(), i, getReference());
 						dataList.add(dataTemp);
 					}
@@ -1886,8 +1909,8 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 						nb);
 
 				// Tri de tous les parametres de la station
-				for (Parameter param : getParameters()) {
-					param.triIndexes(arlIndexes);
+				for (ParameterModel param : getParameters()) {
+					param.getModel().triIndexes(arlIndexes);
 				}
 			}
 		}
@@ -1969,7 +1992,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
                 && (_dataType.getCode().equals("H10") || _dataType.getCode().equals("H13"))){ //$NON-NLS-1$ //$NON-NLS-2$
             typeBC = "C";      //$NON-NLS-1$      
         }else{
-            int nbRecords = parametersAt(0).valuesSize();
+            int nbRecords = parametersAt(0).getModel().valuesSize();
             if (nbRecords < 250){
                 typeBC = "B"; //$NON-NLS-1$
             }else{
@@ -1993,8 +2016,8 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
     public String getVariantDateTime(int i) throws ParseException{
         StringBuffer value = new StringBuffer();
         HorodatedValue horodate = null;
-        if (parametersAt(0).valuesAt(i) instanceof HorodatedValue){
-            horodate = (HorodatedValue) parametersAt(0).valuesAt(i);
+        if (parametersAt(0).getModel().valuesAt(i) instanceof HorodatedValue){
+            horodate = (HorodatedValue) parametersAt(0).getModel().valuesAt(i);
             String date = Formatter.getSingleton().formatDateTime("YYYY-MM-DD", horodate.getDate()); //$NON-NLS-1$
             value.append(date);
             value.append("T"); //$NON-NLS-1$
@@ -2007,16 +2030,16 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
     public String getVariant(int i, String code){
         String value = Global.EMPTY_STRING;
         //Parameter param = null;
-        for (Parameter current : _medparameters){
-            if (current.getCode().equals(code)){                
-                value = current.valuesAt(i).getStringValue();
+        for (ParameterModel current : _medparameters){
+            if (current.getModel().getCode().equals(code)){                
+                value = current.getModel().valuesAt(i).getStringValue();
                 break;
             }
         }
         if (value.equals(Global.EMPTY_STRING)){
-            for (Parameter current : _odvparameters){
-                if (current.getCode().equals(code)){
-                    value = current.valuesAt(i).getStringValue();
+            for (ParameterModel current : _odvparameters){
+                if (current.getModel().getCode().equals(code)){
+                    value = current.getModel().valuesAt(i).getStringValue();
                     break;
                 }
             }
@@ -2024,29 +2047,29 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
         return value;
     }
 
-	public String getFlag(Parameter param, int index) {
+	public String getFlag(ParameterModel param, int index) {
 		String flag = Global.ZERO;
 		
-		if (param.valuesAt(index).getValue().isNaN()) {
+		if (param.getModel().valuesAt(index).getValue().isNaN()) {
 			flag = Global.DEFAULT_FLAG; 
-		} else if (param.valuesAt(index).getQc().equals(Global.EMPTY_STRING)) {
+		} else if (param.getModel().valuesAt(index).getQc().equals(Global.EMPTY_STRING)) {
 			flag = Global.ZERO;
 		} else {
-			flag = param.valuesAt(index).getQc();
+			flag = param.getModel().valuesAt(index).getQc();
 		}
 		
 		return flag;
 	}
 
-    public String getAddedFlag(Parameter param, int index) {
+    public String getAddedFlag(ParameterModel param, int index) {
         String flag = Global.ZERO;
-        String stringValue = param.valuesAt(index).getStringValue(); 
+        String stringValue = param.getModel().valuesAt(index).getStringValue(); 
         if (stringValue == null ||stringValue.equals(Global.EMPTY_STRING)) {
             flag = Global.DEFAULT_FLAG; 
-        } else if (param.valuesAt(index).getQc().equals(Global.EMPTY_STRING)) {
+        } else if (param.getModel().valuesAt(index).getQc().equals(Global.EMPTY_STRING)) {
             flag = Global.ZERO;
         } else {
-            flag = param.valuesAt(index).getQc();
+            flag = param.getModel().valuesAt(index).getQc();
         }
         
         return flag;
@@ -2055,12 +2078,12 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		StringBuffer buffer = new StringBuffer();
 
         // Ajout des flags des parametres ajoutés
-        for (Parameter param : getMedParameters()) {
+        for (ParameterModel param : getMedParameters()) {
             buffer.append(getAddedFlag(param, index));
         }
         
         // Ajout des flags des parametres
-        for (Parameter param : getParameters()) {
+        for (ParameterModel param : getParameters()) {
             buffer.append(getFlag(param, index));
         }
 		return buffer.toString();

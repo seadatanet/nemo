@@ -247,18 +247,23 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 	 * 
 	 * @return a copy of this object
 	 */
-	public Object clone() throws CloneNotSupportedException {
+	@Override
+    public Object clone() throws CloneNotSupportedException {
 		ParameterModel copy = null;
 		copy = (ParameterModel) super.clone();
-		copy._fragment = new LineFragment();
+		//copy._fragment = new LineFragment();
 		if (getFragment() != null) {
 			copy.setFragment((LineFragment) getFragment().clone());
 		}
 		copy._model = null;
 		if (getModel() != null) {
-			copy.setModel((Parameter) getModel().clone());
+            if (getModel() instanceof AddedParameter){
+                copy.setModel((AddedParameter)((AddedParameter) getModel()).clone());
+            }else{
+                copy.setModel((Parameter) getModel().clone());
+            }
 		}
-		copy._flag = new LineFragment();
+		//copy._flag = new LineFragment();
 		if (getFlag() != null) {
 			copy.setFlag((LineFragment) getFlag().clone());
 		}
@@ -469,17 +474,17 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 				} else {
 					a_ParameterValue.setValue((Double) val);
 				}
+                
+				// Flag QC
+				if (_flag != null) {
+				    String flag = _flag.retreive(a_Line);
+				    
+				    // Correspondance SDN
+				    flag = flagTable.getFlagSDN(flag);
+				    a_ParameterValue.setQc(flag);
+				}
 			}
 
-			// Flag QC
-			if (_flag != null) {
-				String flag = _flag.retreive(a_Line);
-
-				// Correspondance SDN
-				flag = flagTable.getFlagSDN(flag);
-
-				a_ParameterValue.setQc(flag);
-			}
 		}
         return a_ParameterValue;
 	}
@@ -507,8 +512,8 @@ public class ParameterModel implements Cloneable, SAXConsumer {
         AddedParameter p = (AddedParameter) _model;
         
         HorodatedValue horodate = null;
-        if (station.parametersAt(0).valuesAt(index) instanceof HorodatedValue){
-            horodate = (HorodatedValue) station.parametersAt(0).valuesAt(index);
+        if (station.parametersAt(0).getModel().valuesAt(index) instanceof HorodatedValue){
+            horodate = (HorodatedValue) station.parametersAt(0).getModel().valuesAt(index);
         }
         String stringValue = null;
         String flag = Global.ZERO;
@@ -519,7 +524,7 @@ public class ParameterModel implements Cloneable, SAXConsumer {
                     // FAE091 : calcul de la profondeur en fonction de la pression
                     double X, Gr, P, Depth;
 
-                    P = station.getParameters()[indexPRES].getValues()[index].getValue();
+                    P = station.getParameters()[indexPRES].getModel().getValues()[index].getValue();
                     X = Math.sin(station.getLatitude() / 57.29578);
                     X = X * X;
 
@@ -529,7 +534,7 @@ public class ParameterModel implements Cloneable, SAXConsumer {
                     
                     stringValue = Formatter.getSingleton().formatDouble(p.getFormat(), Depth);
 
-                    flag = station.getParameters()[indexPRES].getValues()[index].getQc();
+                    flag = station.getParameters()[indexPRES].getModel().getValues()[index].getQc();
                     if (flag.equals(Global.EMPTY_STRING)) {
                         flag = Global.ZERO;
                     }

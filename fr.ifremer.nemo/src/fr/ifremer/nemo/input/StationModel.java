@@ -1240,7 +1240,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	}
 
     public void addOdvParameterModel(ParameterModel x) {
-        if (parameterModelsIncludes(x))
+        if (_odvParameterModels.contains(x))
             return;
         _odvParameterModels.add(x);;
     }
@@ -1251,7 +1251,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
     }
 
     public void addMedParameterModel(ParameterModel x) {
-        if (parameterModelsIncludes(x))
+        if (_medParameterModels.contains(x))
             return;
         _medParameterModels.add(x);;
     }
@@ -1738,7 +1738,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
             if (_inputType.equals(Global.TRAJECTORY)){
                 // récupération de la valeur du paramètre correspondant sur la dernière ligne de données
                 // FAE 1690 : _rowNumber toujours à zéro / changement de idxLastLine
-                int idxLastLine = station.parametersAt(0).valuesSize() - 1;
+                int idxLastLine = station.parametersAt(0).getModel().valuesSize() - 1;
                 // LATX
                 station.getTimeSeriesInformation().setEndLatitude(station.getVariant(idxLastLine, IdParameter.LATX.toString()));
                 // LONX
@@ -1790,16 +1790,20 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		
 		int index = 0;
 		try {
-            // recopie des listes de parameters
-			for (ParameterModel pm : _parameterModels) {
-				a_Station.addParameter((Parameter) pm.getModel().clone());
-			}
+            // recopie des listes de parameters            
+            for (ParameterModel pm : _parameterModels) {
+                a_Station.addParameter((ParameterModel) pm.clone());
+            }
             for (ParameterModel odvpm : _odvParameterModels) {
-                a_Station.addOdvParameter((AddedParameter) odvpm.getModel().clone());
+                a_Station.addOdvParameter((ParameterModel) odvpm.clone());
             }
             for (ParameterModel medpm : _medParameterModels) {
-                a_Station.addMedParameter((AddedParameter) medpm.getModel().clone());
+                a_Station.addMedParameter((ParameterModel) medpm.clone());
             }
+            
+            AddedParameter addedParam = null;
+            Parameter param = null;
+            
             
 			String line = null;
 			long size = 0;
@@ -1841,15 +1845,13 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 				EditConversion.incrementErreurLigne();
 				EditConversion.setErreurChaine(line);
 
-
-				int paramIndex = 0;
-				for (ParameterModel pm : _parameterModels) {
-					Parameter p = a_Station.parametersAt(paramIndex);
-					ParameterValue value = null;
+				for (ParameterModel paramModel : a_Station.getParameters()) {
+                    param = paramModel.getModel();
+                    ParameterValue value = null;
                     
                     // Horodate value
                     if ((_inputType.equals(Global.TIMESERIES)) || (_inputType.equals(Global.TRAJECTORY)) ) {
-                        HorodatedValue hValue = new HorodatedValue();
+                        HorodatedValue hValue= new HorodatedValue();
                         if (_timestampModel.isComputed()) {
                             hValue.setDate(a_Station.getFullDate() + (index * rate));
                         } else {
@@ -1857,34 +1859,41 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
                             hValue.setDate(a_Station.getGMTDate(time));
 
                             // FAE086 START
-                            long ecart = (time - a_Station.getFullDate()) / 1000;
-                            if ((ecart > 0) && (a_Station.getTimeSeriesInformation().getSamplingRate() == 0)) {
-                                a_Station.getTimeSeriesInformation().setSamplingRate(ecart);
+                            if (a_Station.getTimeSeriesInformation().getSamplingRate() == 0){
+                                long ecart = (time - a_Station.getFullDate()) / 1000;
+                                if (ecart > 0) {
+                                    a_Station.getTimeSeriesInformation().setSamplingRate(ecart);
+                                }
                             }
                             // FAE086 END
                         }
                         value = hValue;
                     }else{
-                        value = new ParameterValue(); 
+                        value = new ParameterValue();
                     }
 
-                    value = pm.convert(line, value, getFlagTable());
-					p.addValue(value);
-					paramIndex++;
+                    value = paramModel.convert(line, value, getFlagTable());
+                    param.addValue(value);
 				}
                 
                 // renseignement des valeurs des paramètres ajoutés
-                ParameterModel paramModel;
-                for (IdParameter idParam : IdParameter.values()){            
-                    paramModel = getAddedParameterModel(idParam);
-                    if (paramModel != null){
-                        AddedParameter p = a_Station.getAddedParameter(idParam);
-                        ParameterValue value = new ParameterValue(); 
-                        value = paramModel.convertAdded(value, a_Station, _inputType, index, getPresIndex(), line);
-                        p.addValue(value);
-                    }
+                // ODV
+                for (ParameterModel paramModel : a_Station.getOdvparameters()){
+                    addedParam = (AddedParameter) paramModel.getModel();
+                    ParameterValue value = new ParameterValue();
+                    value = paramModel.convertAdded(value, a_Station, _inputType, index, getPresIndex(), line);
+                    addedParam.addValue(value);
                 }
-
+                
+                // MEDATLAS
+                for (ParameterModel paramModel : a_Station.getMedparameters()){
+                    addedParam = (AddedParameter) paramModel.getModel();
+                    ParameterValue value = new ParameterValue();
+                    value = paramModel.convertAdded(value, a_Station, _inputType, index, getPresIndex(), line);
+                    addedParam.addValue(value);
+                }
+                
+                
                 if ((index == 0) || (index == 10000) || (index == 50000) || (index == 91000)){
                     Date now = new Date();
                     System.out.println("StationModel - convertParameters - line " + index + " : END   at " + now + " " + now.getTime());
