@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.text.ParseException;
 import java.util.Vector;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -385,16 +386,16 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 	 * @throws Exception
 	 */
 	@Override
-    public Survey convert(boolean isRefDateBased, long a_RefDate,
-			ProgressNotification a_Progress) throws IOException,
-			ParseException, StringIndexOutOfBoundsException {
+    public Survey convert(/*long a_RefDate,*/
+                          IProgressMonitor a_monitor, 
+                          ProgressNotification a_Progress) throws InterruptedException {
 		try {
 			Survey survey = (Survey) _model.clone();
             // FAE 1661 : réinitialiser les stations
             survey.releaseStations();
 			_stationModel.initRef();
+            
 			File file = new File(_file);
-			// RandomAccessFile reader = null;
 			BufferedReader reader2 = null;
 			SizeBasedProgressNotifier notifier = new SizeBasedProgressNotifier(
 					file.length(), 0, a_Progress);
@@ -402,8 +403,6 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 			_stationModel.setTaille((int) file.length());
 			EditConversion.setErreurFichier(file.getName());
 			EditConversion.setErreurLigne(0);
-            
-//            _stationModel.setAddedParameterModel();
 
 			Station station = null;
 
@@ -418,12 +417,16 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 
 				consumeHeader(reader2);
 
-				while ((station = _stationModel.convert(reader2, Utils
-						.extraitFichierChemin(ViewFile.nomFichier),
-						isRefDateBased, a_RefDate, notifier)) != null) {
-					if (SurveyMedia.interrompu) {
-						throw new IOException("");
-					}
+				while ((station = _stationModel.convert(reader2, 
+                                                        Utils.extraitFichierChemin(ViewFile.nomFichier),
+                                                        /*a_RefDate,*/ 
+                                                        a_monitor, 
+                                                        notifier)) != null) {
+                    
+                    if (a_monitor.isCanceled()) {
+                        // demande d'annulation
+                        throw new InterruptedException(Global.EMPTY_STRING); 
+                    } 
 
 					// Tri des donnees de la station par ordre croissant
 					station.tri(true);
@@ -432,23 +435,18 @@ public class SingleFileSurvey extends SurveyMedia implements Cloneable,
 					survey.addStation(station);
 				}
 
-			} catch (StringIndexOutOfBoundsException e) {
-				throw new StringIndexOutOfBoundsException(e.getMessage()
-						+ Messages.SingleFileSurvey_1
-						+ file.getName());
-			} catch (NumberFormatException e) {
-
+			} 
+            catch (InterruptedException e) {
+                EditConversion.setErreurFichier(null);
+                EditConversion.setErreurLigne(0);
+                EditConversion.setErreurChaine(null);
+                throw e;
+            } 
+            catch (Exception e) {
 				e.printStackTrace();
-				throw new NumberFormatException(e.getMessage()
-						+ Messages.SingleFileSurvey_1
-						+ file.getName());
-			} catch (ParseException e) {
-
-				e.printStackTrace();
-				throw new ParseException(e.getMessage()
-						+ Messages.SingleFileSurvey_1
-						+ file.getName(), 0);
-			} finally {
+				throw new InterruptedException(e.getMessage() + Messages.SingleFileSurvey_1 + file.getName());
+			} 
+            finally {
 				if (reader2 != null) {
 					try {
 						reader2.close();

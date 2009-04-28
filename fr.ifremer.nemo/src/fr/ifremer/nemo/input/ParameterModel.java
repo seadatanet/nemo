@@ -5,7 +5,6 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import org.xml.sax.Attributes;
@@ -550,7 +549,7 @@ public class ParameterModel implements Cloneable, SAXConsumer {
             case DTUT :
                 // time-ISO8601
                 SimpleDateFormat fDate = new SimpleDateFormat(p.getFormat());
-                stringValue = fDate.format(new Date(horodate.getDate()));
+                //stringValue = fDate.format(new Date(horodate.getDate()));
                 stringValue = station.getVariantDateTime(index);
                 flag = station.getMetaFlag(Global.DATETIME);
                 break;

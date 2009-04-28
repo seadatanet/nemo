@@ -24,7 +24,7 @@ import com.ago.xml.XMLOutputWriter;
 import fr.ifremer.nemo.domain.AddedParameter.IdParameter;
 import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.ui.EditConversion;
-import fr.ifremer.nemo.ui.SWTProcess;
+import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.ViewFile;
 import fr.ifremer.nemo.ui.object.NemoSection;
 import fr.ifremer.nemo.util.Conversion;
@@ -1270,7 +1270,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
         if (_medparameters.contains(x))
             return;
         _medparameters.add(x);
-        x.setStation(this, Conversion.MEDATLAS);
+        //x.setStation(this, Conversion.MEDATLAS);
     }
     public AddedParameter[] getMedParameters() {
         AddedParameter[] v = new AddedParameter[_medparameters.size()];
@@ -1281,7 +1281,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
         if (_odvparameters.contains(x))
             return;
         _odvparameters.add(x);
-        x.setStation(this, Conversion.ODV);
+        //x.setStation(this, Conversion.ODV);
     }
     public AddedParameter[] getOdvParameters() {
         AddedParameter[] v = new AddedParameter[_odvparameters.size()];
@@ -1354,7 +1354,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		if (!parametersIncludes(x))
 			return;
 		nocheckRemoveParameter(x);
-		x.setStation(null);
+		//x.setStation(null);
 	}
 
 	/**
@@ -1367,7 +1367,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		if (parametersIncludes(x))
 			return;
 		nocheckAddParameter(x);
-		x.setStation(this);
+		//x.setStation(this);
 	}
 
 	/**
@@ -1753,28 +1753,13 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 
 			// Choix du parametre e trier en fonction du type de donnees en
 			// entree et en sortie
-			if (SWTProcess.odv) {
-				if (StationModel.getSingleton().getInputType().equals(
-						Global.TIMESERIES)) {
-					paramCode = Global.EMPTY_STRING;
-				} else if (StationModel.getSingleton().getInputType().equals(
-						Global.TRAJECTORY)) {
-					paramCode = Global.EMPTY_STRING;
-				} else {
-					paramCode = Intern.paramPRES;
-				}
-			} else {
-				if (StationModel.getSingleton().getInputType().equals(
-						Global.TIMESERIES)) {
-					paramCode = Global.EMPTY_STRING;
-				} else if (StationModel.getSingleton().getInputType().equals(
-						Global.TRAJECTORY)) {
-					paramCode = Global.EMPTY_STRING;
-				} else {
-					paramCode = Intern.paramPRES; 
-				}
+			if (StationModel.getSingleton().getInputType().equals(Global.PROFILE)) {
+			    paramCode = Intern.paramPRES;
+			} 
+			else {
+			    paramCode = Global.EMPTY_STRING;
 			}
-
+            
 			// Ajout des binomes valeur/index dans un TreeMap pour tri sur la
 			// valeur
 			if (paramCode.equals(Global.EMPTY_STRING)) {
@@ -1785,16 +1770,17 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 							.getDate();
 					tmTri.put(date.doubleValue(), i);
 				}
-			} else {
+			} 
+            else {
 				// Recherche de l'index du parametre en fonction du code
 				paramIndex = parametersIndexOf(paramCode);
 
 				if (paramIndex >= 0) {
 					for (i = 0; i < parametersAt(paramIndex).valuesSize(); i++) {
-						tmTri.put(parametersAt(paramIndex).valuesAt(i)
-								.getValue(), i);
+						tmTri.put(parametersAt(paramIndex).valuesAt(i).getValue(), i);
 					}
-				} else {
+				} 
+                else {
 					return;
 				}
 			}
@@ -1805,7 +1791,8 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 				for (Entry<Double, Integer> currentEntry : tmTri.entrySet()) {
 					arlIndexes.add(currentEntry.getValue());
 				}
-			} else {
+			} 
+            else {
 				ArrayList<Integer> arrayTri = new ArrayList<Integer>(
 						parametersAt(paramIndex).valuesSize());
 
@@ -1844,27 +1831,12 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 
 			// Choix du parametre e trier en fonction du type de donnees en
 			// entree et en sortie
-			if (SWTProcess.odv) {
-				if (StationModel.getSingleton().getInputType().equals(
-						Global.TIMESERIES)) {
-					paramCode = Global.EMPTY_STRING;
-				} else if (StationModel.getSingleton().getInputType().equals(
-						Global.TRAJECTORY)) {
-					paramCode = Global.EMPTY_STRING;
-				} else {
-					paramCode = Intern.paramPRES; 
-				}
-			} else {
-				if (StationModel.getSingleton().getInputType().equals(
-						Global.TIMESERIES)) {
-					paramCode = Global.EMPTY_STRING;
-				} else if (StationModel.getSingleton().getInputType().equals(
-						Global.TRAJECTORY)) {
-					paramCode = Global.EMPTY_STRING;
-				} else {
-					paramCode = Intern.paramPRES; 
-				}
-			}
+            if (StationModel.getSingleton().getInputType().equals(Global.PROFILE)) {
+                paramCode = Intern.paramPRES;
+            } 
+            else {
+                paramCode = Global.EMPTY_STRING;
+            }
 
 			// Ajout des binomes valeur/index dans un TreeMap pour tri sur la
 			// valeur
@@ -1920,6 +1892,52 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 			}
 		}
 	}
+    
+
+
+    public String getLocalCdiId(String surveyReference, String formatConversion) {
+        // FAE 1143 : nommage du LOCAL_CDI_ID
+        
+        String ref = Global.EMPTY_STRING;
+        String stationReference = _reference.trim();
+        
+        
+        
+        if (formatConversion.equals(Conversion.ODV.toString())) {
+            // ODV      -> [Référence du jeu de données]
+            ref = EditConversion.getDataSetRef();
+            // [Numéro station]si < 5 : codé sur 5 caractères il est complété à gauche par des '0'. 
+            if (stationReference.length() < 5){
+                stationReference = Formatter.getSingleton().padZero(stationReference, 5);
+            }
+        }else{
+            // MEDATLAS ->  
+            // [Référence campagne]
+            ref = Formatter.getSingleton().padString(surveyReference,13);
+            // [Numéro station] codé sur 5 caractères il est complété à gauche par des '0'. 
+            stationReference = Formatter.getSingleton().padZero(stationReference, 5);
+        }
+
+        // [Reference]
+        String temp = Global.EMPTY_STRING;
+        temp += ref;
+        
+        // [Numéro station]
+        if (!temp.equals(Global.EMPTY_STRING)) temp += Global.UNDERSCORE; 
+        temp += stationReference;
+        
+        // [Type de données] s'il existe
+        if (_dataType != null) {
+            if (!_dataType.getCode().equals(Global.EMPTY_STRING)) {
+                if (!temp.equals(Global.EMPTY_STRING)) {
+                    temp += Global.UNDERSCORE;
+                }
+                temp += _dataType.getCode();
+            }
+        }
+
+        return Utils.validFileName(temp);
+    }
 
 	public HashMap<String, String> getMetaFlags() {
 		return _metaFlags;

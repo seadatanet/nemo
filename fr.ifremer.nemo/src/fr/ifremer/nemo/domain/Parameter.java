@@ -59,7 +59,7 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 	/**
 	 * Station pour laquelle des mesures de ce parametre ont ete realisees.
 	 */
-	protected Station _station;
+	//protected Station _station;
 
 	public Parameter() {
 		_code = Global.EMPTY_STRING;
@@ -68,7 +68,7 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 		_fullName = Global.EMPTY_STRING;
 		_unit = Global.EMPTY_STRING;
         _globalQC = Global.WORSE_FLAG;
-		_station = null;
+		//_station = null;
 		_values = new java.util.ArrayList<ParameterValue>();
 	}
 
@@ -268,7 +268,7 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 		Parameter copy = null;
 		copy = (Parameter) super.clone();
 		copy._values = new java.util.ArrayList<ParameterValue>();
-		copy._station = null;
+		//copy._station = null;
 		return copy;
 	}
     
@@ -283,7 +283,7 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
     
     public void release(){
         releaseValues();
-        releaseStation();
+        //releaseStation();
     }
 
 	/**
@@ -593,41 +593,41 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 
 	}
 
-	/**
-	 * Remove any link for role station
-	 */
-	public void releaseStation() {
-		setStation(null);
-	}
-
-	/**
-	 * returns the linked object for role <% aRole name%>
-	 * 
-	 * @return the object linked
-	 */
-	public Station getStation() {
-		return _station;
-	}
-
-	/**
-	 * Create a new link with x for role station
-	 * 
-	 * @param x
-	 *            the object to link with
-	 */
-	public void setStation(Station x) {
-		if (_station == x)
-			return;
-		Station old = _station;
-		if (_station != null) {
-			_station = null;
-			old.removeParameter(this);
-		}
-		_station = x;
-		if (x != null) {
-			x.addParameter(this);
-		}
-	}
+//	/**
+//	 * Remove any link for role station
+//	 */
+//	public void releaseStation() {
+//		setStation(null);
+//	}
+//
+//	/**
+//	 * returns the linked object for role <% aRole name%>
+//	 * 
+//	 * @return the object linked
+//	 */
+//	public Station getStation() {
+//		return _station;
+//	}
+//
+//	/**
+//	 * Create a new link with x for role station
+//	 * 
+//	 * @param x
+//	 *            the object to link with
+//	 */
+//	public void setStation(Station x) {
+//		if (_station == x)
+//			return;
+//		Station old = _station;
+//		if (_station != null) {
+//			_station = null;
+//			old.removeParameter(this);
+//		}
+//		_station = x;
+//		if (x != null) {
+//			x.addParameter(this);
+//		}
+//	}
 
 	/**
 	 * 

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.text.ParseException;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -316,9 +317,17 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 	 * @throws IOException
 	 * @throws Exception
 	 */
-	public Survey convert(boolean isRefDateBased, long a_RefDate,
-			ProgressNotification a_Progress) throws IOException, ParseException, InterruptedException {
+	@Override
+    public Survey convert(/*long a_RefDate,*/
+                          IProgressMonitor a_monitor, 
+                          ProgressNotification a_Progress) throws InterruptedException {
 		try {
+
+            if (a_monitor.isCanceled()) {
+                // demande d'annulation
+                throw new InterruptedException("Interruption");
+            } 
+            
 			Survey survey = (Survey) _model.clone();
             // FAE 1661 : réinitialiser les stations
             survey.releaseStations();
@@ -334,16 +343,14 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 				}
 				
 				SizeBasedProgressNotifier notifierStation = new SizeBasedProgressNotifier(size, offset, a_Progress);
-					
-//                _stationModel.setAddedParameterModel();
-                
+					               
 				for (int i = 0; i < files.length; i++) {
 
-					if (SurveyMedia.interrompu) {
+					if (a_monitor.isCanceled()) {
 						// demande d'annulation
-						throw new InterruptedException("Interruption");
+                        throw new InterruptedException(Global.EMPTY_STRING); 
 					} 
-                    //else {
+
 					File file = new File(dir, files[i]);
 					EditConversion.setErreurFichier(file.getName());
 					EditConversion.setErreurLigne(0);
@@ -356,17 +363,27 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 						reader2 = new BufferedReader(reader);
 						
 						Station station = _stationModel.convert(reader2,
-								files[i], isRefDateBased, a_RefDate,
-								notifierStation);
+								                                files[i], 
+                                                                /*a_RefDate,*/
+                                                                a_monitor,
+                                                                notifierStation);
 						
 						// Tri des donnees de la station par ordre croissant
 						station.tri(true);
 						station.setFichierSource(files[i]);
 						survey.addStation(station);
                         
-					} catch (Exception e) {
+					} 
+                    catch (InterruptedException e) {
+                        EditConversion.setErreurFichier(null);
+                        EditConversion.setErreurLigne(0);
+                        EditConversion.setErreurChaine(null);
+                        throw e;
+                    } 
+                    catch (Exception e) {
 						throw new InterruptedException (e.getMessage() + Messages.SingleFileSurvey_1 + file.getName());
-					} finally {
+					} 
+                    finally {
 						if (reader2 != null) {
 							try {
 								reader2.close();
@@ -378,7 +395,6 @@ public class DirectoryBasedSurvey extends SurveyMedia implements Cloneable,
 				}
 
 			}
-			//}
 			return survey;
 		} catch (CloneNotSupportedException e) {
 			return null;

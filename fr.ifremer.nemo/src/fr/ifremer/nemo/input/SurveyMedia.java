@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
@@ -31,7 +33,8 @@ public abstract class SurveyMedia implements Cloneable, SAXConsumer {
 	 * 
 	 * @return a copy of this object
 	 */
-	public Object clone() throws CloneNotSupportedException {
+	@Override
+    public Object clone() throws CloneNotSupportedException {
 		SurveyMedia copy = null;
 		copy = (SurveyMedia) super.clone();
 		copy._inputModel = null;
@@ -90,9 +93,9 @@ public abstract class SurveyMedia implements Cloneable, SAXConsumer {
 	 * @exception java.text.ParseException
 	 * @throws Exception
 	 */
-	public abstract Survey convert(boolean isRefDateBased, long a_RefDate,
-			ProgressNotification a_Progress) throws FileNotFoundException,
-			IOException, ParseException, Exception;
+	public abstract Survey convert(/*long a_RefDate,*/
+                                   IProgressMonitor a_monitor, 
+                                   ProgressNotification a_Progress) throws Exception;
 
 	/**
 	 * 

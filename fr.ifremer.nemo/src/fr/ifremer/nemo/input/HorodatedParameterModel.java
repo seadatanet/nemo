@@ -435,7 +435,7 @@ public class HorodatedParameterModel implements Cloneable, PathElementHandler,
 	 * @return long
 	 * @exception java.text.ParseException
 	 */
-	public long convertTimestamp(String a_Line, long a_RefDate)
+	public long convertTimestamp(String a_Line/*, long a_RefDate*/)
 			throws ParseException {
 		
         String frgmntFullDate = null;
@@ -467,7 +467,7 @@ public class HorodatedParameterModel implements Cloneable, PathElementHandler,
             formatFullDate = getDateFormat().getFormatString() + Global.SPACE + getTimeFormat().getFormatString();
         }
         format.setFormatString(formatFullDate);
-        format.setRefDate(a_RefDate);         
+        format.setRefDate(0);         
         
         return (Long) format.parseObject(frgmntFullDate);
 	}

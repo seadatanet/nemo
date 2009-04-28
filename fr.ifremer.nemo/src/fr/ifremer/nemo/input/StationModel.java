@@ -1,14 +1,14 @@
 package fr.ifremer.nemo.input;
 
-import java.beans.IntrospectionException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Vector;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -36,7 +36,6 @@ import fr.ifremer.nemo.ui.ViewFile;
 import fr.ifremer.nemo.ui.object.NemoSection;
 import fr.ifremer.nemo.util.DateTimeFormat;
 import fr.ifremer.nemo.util.FloatFormat;
-import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.LatitudeFormat;
@@ -1647,119 +1646,117 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * 
 	 * @param a_Reader
 	 * @param a_Filename
-	 * @param isRefDateBased
 	 * @param a_RefDate
 	 * @param a_Notifier
 	 * @return Station
-	 * @exception IOException
-	 * @exception java.text.ParseException
+	 * @exception Exception
 	 */
-	public Station convert(BufferedReader a_Reader, String a_Filename,
-			boolean isRefDateBased, long a_RefDate,
-			SizeBasedProgressNotifier a_Notifier) throws IOException,
-			ParseException, StringIndexOutOfBoundsException {
+	public Station convert(BufferedReader a_Reader, 
+                           String a_Filename,
+                           /*long a_RefDate,*/
+                           IProgressMonitor a_monitor,
+                           SizeBasedProgressNotifier a_Notifier) throws InterruptedException, Exception {
+        
+        System.out.println("StationModel - convert : START at " + new Date());
+
+        if (a_monitor.isCanceled()) {
+            // demande d'annulation
+            throw new InterruptedException(Global.EMPTY_STRING); 
+        }
+        
 		Station station = null;
 		String[] header = null;
-
-		try {
                         
-			station = (Station) _model.clone();
-			station.setMetaFlags(new HashMap<String, String>());
-            
-            // Marquage du fichier au debut
-            a_Reader.mark(getTaille());
-            
-            if (EditStation.someInData()){
-                header = consumeHeaderPlusOne(a_Reader);
-            }else{
-                header = consumeHeader(a_Reader);
-            }
+		station = (Station) _model.clone();
+		station.setMetaFlags(new HashMap<String, String>());
+        
+        // Marquage du fichier au debut
+        a_Reader.mark(getTaille());
+        
+        if (EditStation.someInData()){
+            header = consumeHeaderPlusOne(a_Reader);
+        }else{
+            header = consumeHeader(a_Reader);
+        }
 
-            if (header != null && (header.length > 0 && header[0] != null))
-            {
-                // STATION NUMBER
-                if (getReferenceProperty().isUserProvided()){
-                    // saisie manuelle
-                    if (_inputType.equals(Global.TRAJECTORY)){
-                        // Trajectoire : saisie fixe
-                        station.setReference(_trajectory.getStationNumber());
-                    }else{
-                        // incrementation du numéro
-                        station.setReference(Integer.toString(_ref++));
-                    }
-                }else{
-                    // Fixed position
-                    if (getReferenceProperty().getFragment().getFirstLine() == 0 
-                    	&& (a_Filename != null)){
-                        // dans le nom du fichier
-                        if (ViewFile.collectionCasN) {
-                            String[] filename = DataModel.singleSurvey.getFile().split("/");
-                            getReferenceProperty().applyOn(station, new String[] { filename[filename.length - 1] });
-                        } else
-                            getReferenceProperty().applyOn(station, new String[] { a_Filename });
-                    }else{
-                        // dans le Header
-                        getReferenceProperty().applyOn(station, header);
-                    }
-                }
-                
-                // récupération les propriétés de l'entête de station
-                for (PropertyModel m : getProperties()) {    
-                    if (!m.isToCompute()){                        
-                        m.applyOn(station, header);
-                        addFlag(m, station, header);
-                    }
-                }
-                if (_timeSeriesModel != null) {
-                    _timeSeriesModel.convert(station, _inputType, header);
-                }
-                
-                
-                // Retour au debut du fichier et depassement du header
-                a_Reader.reset();
-                EditConversion.setErreurLigne(0);
-                consumeHeader(a_Reader);
-                
-                convertParameters(a_Reader, station, a_RefDate, a_Notifier);
-                
-                // récupération des propriétés "de fin" de l'entête de station
-                // volontairement après la récupération des paramètres
-                // DATE / TIME
-                if ((_inputType.equals(Global.TIMESERIES) && Float.isNaN(station.getTimeSeriesInformation().getEndDate()))
-                        || (_inputType.equals(Global.TRAJECTORY))){
-                    _timeSeriesModel.computeEndDate(station);
-                }
-                
+        if (header != null && (header.length > 0 && header[0] != null))
+        {
+            // STATION NUMBER
+            if (getReferenceProperty().isUserProvided()){
+                // saisie manuelle
                 if (_inputType.equals(Global.TRAJECTORY)){
-                    // récupération de la valeur du paramètre correspondant sur la dernière ligne de données
-                    // FAE 1690 : _rowNumber toukours à zéro / changement de idxLastLine
-                    int idxLastLine = station.parametersAt(0).valuesSize() - 1;
-                    // LATX
-                    station.getTimeSeriesInformation().setEndLatitude(station.getVariant(idxLastLine, IdParameter.LATX.toString()));
-                    // LONX
-                    station.getTimeSeriesInformation().setEndLongitude(station.getVariant(idxLastLine, IdParameter.LONX.toString()));
-                    // DEPTH
-                    if (EditStation.depth.isInData()){
-                        station.getTimeSeriesInformation().setEndDepth(station.getVariant(idxLastLine, IdParameter.BATH.toString()));
-                    }
-                    
+                    // Trajectoire : saisie fixe
+                    station.setReference(_trajectory.getStationNumber());
+                }else{
+                    // incrementation du numéro
+                    station.setReference(Integer.toString(_ref++));
                 }
-                                
-                consumeFooter(a_Reader);
-                
-                return station;
+            }else{
+                // Fixed position
+                if (getReferenceProperty().getFragment().getFirstLine() == 0 
+                	&& (a_Filename != null)){
+                    // dans le nom du fichier
+                    if (ViewFile.collectionCasN) {
+                        String[] filename = DataModel.singleSurvey.getFile().split("/"); //$NON-NLS-1$
+                        getReferenceProperty().applyOn(station, new String[] { filename[filename.length - 1] });
+                    } else
+                        getReferenceProperty().applyOn(station, new String[] { a_Filename });
+                }else{
+                    // dans le Header
+                    getReferenceProperty().applyOn(station, header);
+                }
             }
-		} catch (StringIndexOutOfBoundsException e) {
-			throw e;
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		} catch (IntrospectionException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
+            
+            // récupération les propriétés de l'entête de station
+            for (PropertyModel m : getProperties()) {    
+                if (!m.isToCompute()){                        
+                    m.applyOn(station, header);
+                    addFlag(m, station, header);
+                }
+            }
+            if (_timeSeriesModel != null) {
+                _timeSeriesModel.convert(station, _inputType, header);
+            }
+            
+            
+            // Retour au debut du fichier et depassement du header
+            a_Reader.reset();
+            EditConversion.setErreurLigne(0);
+            consumeHeader(a_Reader);
+            
+            convertParameters(a_Reader, station, /*a_RefDate,*/ a_monitor, a_Notifier);
+            
+            // récupération des propriétés "de fin" de l'entête de station
+            // volontairement après la récupération des paramètres
+            
+            // DATE / TIME
+            if ((_inputType.equals(Global.TIMESERIES) && Float.isNaN(station.getTimeSeriesInformation().getEndDate()))
+                    || (_inputType.equals(Global.TRAJECTORY))){
+                _timeSeriesModel.computeEndDate(station);
+            }
+            
+            if (_inputType.equals(Global.TRAJECTORY)){
+                // récupération de la valeur du paramètre correspondant sur la dernière ligne de données
+                // FAE 1690 : _rowNumber toujours à zéro / changement de idxLastLine
+                int idxLastLine = station.parametersAt(0).valuesSize() - 1;
+                // LATX
+                station.getTimeSeriesInformation().setEndLatitude(station.getVariant(idxLastLine, IdParameter.LATX.toString()));
+                // LONX
+                station.getTimeSeriesInformation().setEndLongitude(station.getVariant(idxLastLine, IdParameter.LONX.toString()));
+                // DEPTH
+                if (EditStation.depth.isInData()){
+                    station.getTimeSeriesInformation().setEndDepth(station.getVariant(idxLastLine, IdParameter.BATH.toString()));
+                }
+                
+            }
+                            
+            consumeFooter(a_Reader);
+
+            System.out.println("StationModel - convert : END   at " + new Date());
+            return station;
+        }
+
+        System.out.println("StationModel - convert(null) : END   at " + new Date());
 		return null;
 	}
 
@@ -1775,9 +1772,16 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 */
 	public void convertParameters(BufferedReader a_Reader, 
                                   Station a_Station,
-                                  long a_RefDate,
+                                  /*long a_RefDate,*/
+                                  IProgressMonitor a_monitor,
                                   SizeBasedProgressNotifier a_Notifier) 
-            throws IOException, ParseException {
+            throws IOException, ParseException, InterruptedException, Exception {
+        
+
+        if (a_monitor.isCanceled()) {
+            // demande d'annulation
+            throw new InterruptedException(Global.EMPTY_STRING); 
+        }
         
         long rate = 0;
         if ((_inputType.equals(Global.TIMESERIES)) || (_inputType.equals(Global.TRAJECTORY))){
@@ -1786,6 +1790,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		
 		int index = 0;
 		try {
+            // recopie des listes de parameters
 			for (ParameterModel pm : _parameterModels) {
 				a_Station.addParameter((Parameter) pm.getModel().clone());
 			}
@@ -1795,6 +1800,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
             for (ParameterModel medpm : _medParameterModels) {
                 a_Station.addMedParameter((AddedParameter) medpm.getModel().clone());
             }
+            
 			String line = null;
 			long size = 0;
 			for (index = 0; (line = a_Reader.readLine()) != null
@@ -1806,7 +1812,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
                 
                 // FAE 1738 : ajout d'un indicateur "prochaine station"
                 // FIXME trouver une autre solution que !line.startsWith("         ")
-                if (_model != null){
+                if (_model != null){ // pour ne pas faire le test sur la 1ère ligne de la station
                     if (_endOnNextStation 
                             && index > 0
                             && !line.startsWith("         ")){
@@ -1816,7 +1822,17 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
                 }
                 
                 
+                if ((index == 0) || (index == 10000) || (index == 50000) || (index == 91000)){
+                    Date now = new Date();
+                    System.out.println("StationModel - convertParameters - line " + index + " : START at " + now + " " + now.getTime());
+                }
                 
+
+                if (a_monitor.isCanceled()) {
+                    // demande d'annulation
+                    throw new InterruptedException(Global.EMPTY_STRING); 
+                }
+                                
 				size += line.length();
                 a_Reader.mark(Integer.parseInt((String.valueOf(size))));
                 
@@ -1837,7 +1853,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
                         if (_timestampModel.isComputed()) {
                             hValue.setDate(a_Station.getFullDate() + (index * rate));
                         } else {
-                            long time = _timestampModel.convertTimestamp(line, a_RefDate);
+                            long time = _timestampModel.convertTimestamp(line/*, a_RefDate*/);
                             hValue.setDate(a_Station.getGMTDate(time));
 
                             // FAE086 START
@@ -1868,7 +1884,12 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
                         p.addValue(value);
                     }
                 }
-			}
+
+                if ((index == 0) || (index == 10000) || (index == 50000) || (index == 91000)){
+                    Date now = new Date();
+                    System.out.println("StationModel - convertParameters - line " + index + " : END   at " + now + " " + now.getTime());
+                }
+            }
 		} catch (NumberFormatException e) {
 			throw new NumberFormatException(e.getMessage()
 					+ Messages.StationModel_1

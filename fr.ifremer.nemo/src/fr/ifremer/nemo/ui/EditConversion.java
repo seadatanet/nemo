@@ -1,7 +1,6 @@
 package fr.ifremer.nemo.ui;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
@@ -25,13 +24,10 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.DataType;
-import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
-import fr.ifremer.nemo.input.SurveyMedia;
 import fr.ifremer.nemo.output.CDIResumeWriter;
 import fr.ifremer.nemo.output.ProgressNotification;
 import fr.ifremer.nemo.util.Conversion;
-import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSDataType;
@@ -144,30 +140,30 @@ public class EditConversion extends Thread {
 								throw new Exception("CDI cancelled"); //$NON-NLS-1$
 							}
 							
+                            // RaZ
 							setDataSetRef(Global.EMPTY_STRING);
 							Utils.messageErreur(Global.EMPTY_STRING);
-
-							// RAZ du numéro de station incrémenté
+							// -- du numéro de station incrémenté
 							DataModel.stationModel.resetRef();
+                            // -- de la liste des stations triées
+                            getSortedStations().clear();
 
                             // *** Ajouts automatiques de certains paramètres
                             DataModel.stationModel.setAddedParameterModel();
 
-							if (ViewFile.radMedatlas.getSelection()) {
-								NemoLists.writeSdnParameters(Conversion.MEDATLAS);
-							} else {
-								NemoLists.writeSdnParameters(Conversion.ODV);
-							}
-
-							// RAZ de la liste des stations triées
-							getSortedStations().clear();
+                            // type de la conversion
+                            Conversion formatConversion = Conversion.MEDATLAS;
+                            if (ViewFile.radODV.getSelection()){
+                                formatConversion = Conversion.ODV;
+                            }
+                            NemoLists.writeSdnParameters(formatConversion);
 							
 							if (EditDesc.okApresReset
 									&& EditSurvey.okApresReset
 									&& EditStation.okApresReset
 									&& EditData.okApresReset) {
 
-								if (ViewFile.radODV.getSelection()) {
+								if (formatConversion == Conversion.ODV) {
 									if (!askDataSetRef()) {
 										throw new Exception("Cancelled"); //$NON-NLS-1$
 									}
@@ -182,37 +178,30 @@ public class EditConversion extends Thread {
                                 
                                 // test pour savoir si on est en campagne ou pas
                                 if (ViewFile.isCollection()) {
-
+                                    
                                     DataType dt = askDataType();
                                     DataModel.stationModel.getModel().setDataType(dt);
+									choixDossierSortie();
+								} 
+                                else if (ViewFile.radODV.getSelection()
+										&& ViewFile.radMonoStation.getSelection()) {
                                     
-
 									choixDossierSortie();
-
-	
-								} else if (!ViewFile.isCollection()
-										&& ViewFile.radODV.getSelection()
-										&& ViewFile.radMonoStation
-												.getSelection()) {
-									choixDossierSortie();
-								} else {
+								} 
+                                else {
 									choixFichierSortie();
 								}
-                                // Ecriture du resume CDI
-                                if (Utils.configuration.isWriteCdi()
-                                        && !SurveyMedia.interrompu
-                                        && !SWTProcess.interrompu) {
-                                    try {
-                                        CDIResumeWriter.getInstance()
-                                                .writeResume();
-                                    } catch (IOException ex) {
-                                        ex.printStackTrace();
-                                    }
-                                }                                
-							} else {
+                                
+                                definePrefixDossier();
+                                
+                                // affichage des résultats en fin de conversion
+                                afficheResultat(runSWTProgress());                              
+							} 
+                            else {
 								Utils.messageErreur(Messages.error_convert_invalideSteps); 
 							}
-						} catch (Exception ex) {
+						} 
+                        catch (Exception ex) {
 							Utils.messageErreur(Messages.error_convert_cancel);
 						}
 
@@ -263,20 +252,20 @@ public class EditConversion extends Thread {
 		nomFichierSortie = Global.EMPTY_STRING;
 
 		Shell newShell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
-		FileDialog dialog = new FileDialog(newShell, SWT.SAVE
-				| SWT.APPLICATION_MODAL);
+		FileDialog dialog = new FileDialog(newShell, SWT.SAVE | SWT.APPLICATION_MODAL);
 		dialog.setText(Messages.edit_convert_outputFilename);
 
 		// FAE090
 		if (ViewFile.radODV.getSelection()) {
 			String[] extensions = new String[1];
-			extensions[0] = "*.txt"; //$NON-NLS-1$
+			extensions[0] = Global.STAR + Global.EXT_TXT; 
 			dialog.setFilterExtensions(extensions);
 
 			Survey survey = null;
 			if (DataModel.singleSurvey != null) {
 				survey = DataModel.singleSurvey.getModel();
-			} else if (DataModel.dirSurvey != null) {
+			} 
+            else if (DataModel.dirSurvey != null) {
 				survey = DataModel.dirSurvey.getModel();
 			}
 
@@ -342,19 +331,9 @@ public class EditConversion extends Thread {
 				if (reponse == SWT.NO) {
 					// on n'écrase pas le fichier
 					choixFichierSortie();
-				} else {
-                    definePrefixDossier();
-					runSWTProgress();
 				}
-			} else {
-                definePrefixDossier();
-				runSWTProgress();
 			}
-
-			// affichage des résultats en fin de conversion
-			afficheResultat();
 		}
-
 	}
 
 	public static void choixDossierSortie() {
@@ -369,9 +348,9 @@ public class EditConversion extends Thread {
 
 		if (ViewFile.radioFichier.getSelection()) {
 			dialog.setFilterPath(ViewFile.nomRepertoire);
-		} else {
-			dialog.setFilterPath(ViewFile.nomRepertoire.substring(0,
-					ViewFile.nomRepertoire.lastIndexOf('\\')));
+		} 
+        else {
+			dialog.setFilterPath(ViewFile.nomRepertoire.substring(0, ViewFile.nomRepertoire.lastIndexOf('\\')));
 		}
 
 		nomDossierSortie = dialog.open();
@@ -391,12 +370,10 @@ public class EditConversion extends Thread {
 				choixDossierSortie();
 			}
 
-			File fich = new File(nomDossierSortie);
-			if (fich.exists() && fich.listFiles().length != 0) {
+			File dir = new File(nomDossierSortie);
+			if (dir.exists() && dir.listFiles().length != 0) {
 				// fichier existe
-				// shell.close();
-				Shell shell2 = PlatformUI.getWorkbench().getDisplay()
-						.getActiveShell();
+				Shell shell2 = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 
 				MessageBox mb = new MessageBox(shell2, SWT.ICON_WARNING
 						| SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
@@ -406,36 +383,25 @@ public class EditConversion extends Thread {
 				if (reponse == SWT.NO) {
 					// on n'écrase pas le fichier
 					choixDossierSortie();
-				} else {
-                    definePrefixDossier();
-					runSWTProgress();
 				}
-
-			} else {
-                definePrefixDossier();
-				runSWTProgress();
 			}
-
-			// affichage des résultats en fin de conversion
-			afficheResultat();
 		}
 
 	}
 
-	public static void runSWTProgress() {
+	public static boolean runSWTProgress() {
 		Utils.messageErreur(Global.EMPTY_STRING);
-		SWTProcess.interrompu = false;
-		SurveyMedia.interrompu = false;
 		try {
 			new SWTProgress().run();
+            return true;
 		} catch (Exception e) {
 			Utils.messageErreur(e.getMessage());
-			SWTProcess.interrompu = true;
+            return false;
 		}
 	}
 
-	public static void afficheResultat() {
-		if (!SurveyMedia.interrompu && !SWTProcess.interrompu) {
+	public static void afficheResultat(boolean resultOK) {
+		if (resultOK) {
 			if (ViewFile.radODV.getSelection()) {
 				Utils.messageOK(Messages.edit_convert_endODV);
 			} else {
@@ -520,8 +486,8 @@ public class EditConversion extends Thread {
 		}
 
 		if (!message.equals(Global.EMPTY_STRING)) {
-			message = Global.RN + Messages.error_convert_position + Global.RN 
-					+ message;
+			message = Global.RN + Messages.error_convert_position 
+			          + Global.RN  + message;
 		}
 
 		return message;
@@ -632,53 +598,6 @@ public class EditConversion extends Thread {
     }
    
 
-
-
-	public static String getLocalCdiId(Station station, String surveyReference) {
-		// FAE 1143 : nommage du LOCAL_CDI_ID
-        
-        String ref = Global.EMPTY_STRING;
-        String stationReference = station.getReference().trim();
-        DataType datatype = station.getDataType();
-        
-		
-		
-		if (SWTProcess.getOdv()) {
-			// ODV      -> [Référence du jeu de données]
-            ref = getDataSetRef();
-            // [Numéro station]si < 5 : codé sur 5 caractères il est complété à gauche par des '0'. 
-            if (stationReference.length() < 5){
-                stationReference = Formatter.getSingleton().padZero(stationReference, 5);
-            }
-		}else{
-			// MEDATLAS ->  
-            // [Référence campagne]
-            ref = Formatter.getSingleton().padString(surveyReference,13);
-            // [Numéro station] codé sur 5 caractères il est complété à gauche par des '0'. 
-            stationReference = Formatter.getSingleton().padZero(stationReference, 5);
-		}
-
-        // [Reference]
-        String temp = Global.EMPTY_STRING;
-        temp += ref;
-        
-		// [Numéro station]
-		if (!temp.equals(Global.EMPTY_STRING)) temp += Global.UNDERSCORE; 
-		temp += stationReference;
-		
-		// [Type de données] s'il existe
-		if (datatype != null) {
-			if (!station.getDataType().getCode().equals(Global.EMPTY_STRING)) {
-				if (!temp.equals(Global.EMPTY_STRING)) {
-					temp += Global.UNDERSCORE;
-				}
-				temp += station.getDataType().getCode();
-			}
-		}
-
-		return Utils.validFileName(temp);
-	}
-	
 	public static boolean checkConfig() {
 		boolean blnOK = true;
 		String message = Messages.CDIResumeWriter_configMessage;

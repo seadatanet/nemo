@@ -133,7 +133,7 @@ public class DataModel
                 || ViewFile.radTrajectoire.getSelection())
         {
             timeSeriesInformation = stationModel.getTimeSeriesInformation();
-            inputModel.setRefDateBased(false);
+//            inputModel.setRefDateBased(false);
 
         }
 
@@ -369,7 +369,7 @@ public class DataModel
             dataType.setCode(typeSurvey.getCode());
             dataType.setNumberOfProfiles(typeSurvey.getNombre());
 
-            if (typeSurvey.getQc().equals("Y")) //$NON-NLS-1$
+            if (typeSurvey.getQc().equals(Global.YES))
             {
                 dataType.setQc(true);
             }
@@ -377,7 +377,6 @@ public class DataModel
             {
                 dataType.setQc(false);
             }
-            // dataType.setQc(typeSurvey.getQc());
             dataType.setSensor(typeSurvey.getSensor());
 
             // test par rapport aux types deja presents dans le DataModel
@@ -386,15 +385,7 @@ public class DataModel
             survey.addDataType(dataType);
 
         }
-
-//        if (EditStation.loaded)
-//        {
-//            EditStation.initTypes();
-//        }
-
-        // flag "validee" e 1
         EditSurvey.validee = true;
-
     }
     
     private static void initDiseabledField(String property){
@@ -860,7 +851,6 @@ public class DataModel
         EditSurvey.textCommentaire.setText(survey.getComment());
 
         // Remplissage de la liste des dataTypes de la campagne
-
         DataType[] dataTypes = survey.getDataTypes();
         int taille = dataTypes.length;
 
@@ -871,23 +861,16 @@ public class DataModel
             typeSurvey.setNombre(dataTypes[i].getNumberOfProfiles());
 
             // QC
-            if (dataTypes[i].isQc())
-            {
-                typeSurvey.setQc("Y"); //$NON-NLS-1$
+            if (dataTypes[i].isQc()){
+                typeSurvey.setQc(Global.YES); 
             }
-            else
-            {
-                typeSurvey.setQc("N"); //$NON-NLS-1$
+            else{
+                typeSurvey.setQc(Global.NO);
             }
-            // typeSurvey.setQc(Global.EMPTY_STRING+dataTypes[i].isQc());
 
             typeSurvey.setSensor(dataTypes[i].isSensor());
 
             TableDataSurvey.types.add(typeSurvey);
-
-            // System.out.println("TypeSurvey " +typeSurvey.getCode()+"
-            // ajoute");
-
         }
 
         EditSurvey.razEdition();
@@ -1000,7 +983,7 @@ public class DataModel
             LineFragment flag = paraCourant.getFlag();
 
             // code / fullName / sortie / format
-            typeData.setCode(modeleCourant.getCode() + " - " //$NON-NLS-1$
+            typeData.setCode(modeleCourant.getCode() + Global.SEP
                     + modeleCourant.getFullName());
             typeData.setNom(modeleCourant.getFullName());
 
@@ -1021,7 +1004,6 @@ public class DataModel
                 typeData.setFinFlag(String.valueOf(flag.getLastCharOffset()));
             }
             typeData.setEntree(Global.EMPTY_STRING + paraCourant.getInputDefault());
-            // typeData.setSensor(paraCourant.get);
             typeData.setUnite(modeleCourant.getUnit());
             typeData.setFormat(modeleCourant.getFormat());
             typeData.setSortie(modeleCourant.getDefault());

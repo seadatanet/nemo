@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.TimeZone;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -28,23 +29,23 @@ import fr.ifremer.nemo.output.ProgressNotification;
 public class InputModel implements Cloneable, PathElementHandler,
 		RootSAXConsumer {
 
-	/**
-	 * Date de reference par rapport e laquelle toutes les autres dates sont
-	 * fournies
-	 */
-	protected long _refDate;
-
-	/**
-	 * Indique si les dates fournies dans les fichiers d'entree sont donnes en
-	 * temps epuise depuis une date de reference
-	 */
-	protected boolean _refDateBased;
-
-	/**
-	 * heure de reference par rapport e laquelle toutes les autres dates sont
-	 * fournies
-	 */
-	protected long _refTime;
+//	/**
+//	 * Date de reference par rapport e laquelle toutes les autres dates sont
+//	 * fournies
+//	 */
+//	protected long _refDate;
+//
+//	/**
+//	 * Indique si les dates fournies dans les fichiers d'entree sont donnes en
+//	 * temps epuise depuis une date de reference
+//	 */
+//	protected boolean _refDateBased;
+//
+//	/**
+//	 * heure de reference par rapport e laquelle toutes les autres dates sont
+//	 * fournies
+//	 */
+//	protected long _refTime;
 
 	/**
 	 * Modele de media contenant la campagne
@@ -96,16 +97,16 @@ public class InputModel implements Cloneable, PathElementHandler,
 	 */
 	public void buildFromElement(String a_URI, String a_LocalName,
 			String a_QName, Attributes a_Attributes) throws SAXException {
-		String tmp;
-		if ((tmp = a_Attributes.getValue("refDateBased")) != null) { //$NON-NLS-1$
-			setRefDateBased(tmp);
-		}
-		if ((tmp = a_Attributes.getValue("refDate")) != null) { //$NON-NLS-1$
-			setRefDate(tmp);
-		}
-		if ((tmp = a_Attributes.getValue("refTime")) != null) { //$NON-NLS-1$
-			setRefTime(tmp);
-		}
+//		String tmp;
+//		if ((tmp = a_Attributes.getValue("refDateBased")) != null) { //$NON-NLS-1$
+//			setRefDateBased(tmp);
+//		}
+//		if ((tmp = a_Attributes.getValue("refDate")) != null) { //$NON-NLS-1$
+//			setRefDate(tmp);
+//		}
+//		if ((tmp = a_Attributes.getValue("refTime")) != null) { //$NON-NLS-1$
+//			setRefTime(tmp);
+//		}
 	}
 
 	/**
@@ -181,9 +182,9 @@ public class InputModel implements Cloneable, PathElementHandler,
 	 * 
 	 */
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
-		a_Writer.putAttribute("refDateBased", isRefDateBased()); //$NON-NLS-1$
-		a_Writer.putAttribute("refDate", getRefDate()); //$NON-NLS-1$
-		a_Writer.putAttribute("refTime", getRefTime()); //$NON-NLS-1$
+//		a_Writer.putAttribute("refDateBased", isRefDateBased()); //$NON-NLS-1$
+//		a_Writer.putAttribute("refDate", getRefDate()); //$NON-NLS-1$
+//		a_Writer.putAttribute("refTime", getRefTime()); //$NON-NLS-1$
 		if (getMedia() != null) {
 			a_Writer.openTag("Media"); //$NON-NLS-1$
 			getMedia().writeXMLOn(a_Writer);
@@ -239,113 +240,113 @@ public class InputModel implements Cloneable, PathElementHandler,
 	 */
 	public void release() {
         releaseMedia();
-        _refDate = 0;
-        _refDateBased = false;
-        _refTime = 0;
+//        _refDate = 0;
+//        _refDateBased = false;
+//        _refTime = 0;
         converted = false;
 	}
 
-	/**
-	 * Read accessor (getter) for attribute _refDate
-	 * 
-	 * @return long
-	 * @see InputModel#_refDate
-	 */
-	public long getRefDate() {
-		return _refDate;
-	}
-
-	/**
-	 * Write accessor (setter) for attribute _refDate
-	 * 
-	 * @param x
-	 *            new value for _refDate
-	 * @see InputModel#_refDate
-	 */
-	public void setRefDate(long x) {
-		_refDate = x;
-	}
-
-	/**
-	 * Write accessor (setter) for attribute _refDate
-	 * 
-	 * @param a_String
-	 *            new value for _refDate as String
-	 * @see InputModel#_refDate
-	 */
-	public void setRefDate(String a_String) {
-		try {
-			setRefDate(Long.parseLong(a_String));
-		} catch (Exception e) {
-		}
-	}
-
-	/**
-	 * Read accessor (getter) for attribute _refDateBased
-	 * 
-	 * @return boolean
-	 * @see InputModel#_refDateBased
-	 */
-	public boolean isRefDateBased() {
-		return _refDateBased;
-	}
-
-	/**
-	 * Write accessor (setter) for attribute _refDateBased
-	 * 
-	 * @param x
-	 *            new value for _refDateBased
-	 * @see InputModel#_refDateBased
-	 */
-	public void setRefDateBased(boolean x) {
-		_refDateBased = x;
-	}
-
-	/**
-	 * Write accessor (setter) for attribute _refDateBased
-	 * 
-	 * @param a_String
-	 *            new value for _refDateBased as String
-	 * @see InputModel#_refDateBased
-	 */
-	public void setRefDateBased(String a_String) {
-		setRefDateBased(new Boolean(a_String).booleanValue());
-	}
-
-	/**
-	 * Read accessor (getter) for attribute _refTime
-	 * 
-	 * @return long
-	 * @see InputModel#_refTime
-	 */
-	public long getRefTime() {
-		return _refTime;
-	}
-
-	/**
-	 * Write accessor (setter) for attribute _refTime
-	 * 
-	 * @param x
-	 *            new value for _refTime
-	 * @see InputModel#_refTime
-	 */
-	public void setRefTime(long x) {
-		_refTime = x;
-	}
-
-	/**
-	 * Write accessor (setter) for attribute _refTime
-	 * 
-	 * @param a_String
-	 *            new value for _refTime as String
-	 * @see InputModel#_refTime
-	 */
-	public void setRefTime(String a_String) {
-		try {
-			setRefTime(Long.parseLong(a_String));
-		} catch (Exception e) {
-		}
-	}
+//	/**
+//	 * Read accessor (getter) for attribute _refDate
+//	 * 
+//	 * @return long
+//	 * @see InputModel#_refDate
+//	 */
+//	public long getRefDate() {
+//		return _refDate;
+//	}
+//
+//	/**
+//	 * Write accessor (setter) for attribute _refDate
+//	 * 
+//	 * @param x
+//	 *            new value for _refDate
+//	 * @see InputModel#_refDate
+//	 */
+//	public void setRefDate(long x) {
+//		_refDate = x;
+//	}
+//
+//	/**
+//	 * Write accessor (setter) for attribute _refDate
+//	 * 
+//	 * @param a_String
+//	 *            new value for _refDate as String
+//	 * @see InputModel#_refDate
+//	 */
+//	public void setRefDate(String a_String) {
+//		try {
+//			setRefDate(Long.parseLong(a_String));
+//		} catch (Exception e) {
+//		}
+//	}
+//
+//	/**
+//	 * Read accessor (getter) for attribute _refDateBased
+//	 * 
+//	 * @return boolean
+//	 * @see InputModel#_refDateBased
+//	 */
+//	public boolean isRefDateBased() {
+//		return _refDateBased;
+//	}
+//
+//	/**
+//	 * Write accessor (setter) for attribute _refDateBased
+//	 * 
+//	 * @param x
+//	 *            new value for _refDateBased
+//	 * @see InputModel#_refDateBased
+//	 */
+//	public void setRefDateBased(boolean x) {
+//		_refDateBased = x;
+//	}
+//
+//	/**
+//	 * Write accessor (setter) for attribute _refDateBased
+//	 * 
+//	 * @param a_String
+//	 *            new value for _refDateBased as String
+//	 * @see InputModel#_refDateBased
+//	 */
+//	public void setRefDateBased(String a_String) {
+//		setRefDateBased(new Boolean(a_String).booleanValue());
+//	}
+//
+//	/**
+//	 * Read accessor (getter) for attribute _refTime
+//	 * 
+//	 * @return long
+//	 * @see InputModel#_refTime
+//	 */
+//	public long getRefTime() {
+//		return _refTime;
+//	}
+//
+//	/**
+//	 * Write accessor (setter) for attribute _refTime
+//	 * 
+//	 * @param x
+//	 *            new value for _refTime
+//	 * @see InputModel#_refTime
+//	 */
+//	public void setRefTime(long x) {
+//		_refTime = x;
+//	}
+//
+//	/**
+//	 * Write accessor (setter) for attribute _refTime
+//	 * 
+//	 * @param a_String
+//	 *            new value for _refTime as String
+//	 * @see InputModel#_refTime
+//	 */
+//	public void setRefTime(String a_String) {
+//		try {
+//			setRefTime(Long.parseLong(a_String));
+//		} catch (Exception e) {
+//		}
+//	}
 
 	/**
 	 * Remove any link for role media
@@ -392,38 +393,40 @@ public class InputModel implements Cloneable, PathElementHandler,
 	 * @exception IOException
 	 * @exception ParseException
 	 */
-	public Survey convert(ProgressNotification a_ProgressNotifier)
+	public Survey convert(IProgressMonitor a_monitor,
+                          ProgressNotification a_ProgressNotifier)
 			throws NumberFormatException, IOException, ParseException, StringIndexOutOfBoundsException, InterruptedException {
 
         Survey survey = null;
         
         try{
-            if (!converted)
-            {   
-                long refDate = 0;
-                if (isRefDateBased()) {
-                    TimeZone tz = TimeZone.getTimeZone("GMT"); //$NON-NLS-1$
-                    Calendar cal = Calendar.getInstance(tz);
-                    cal.clear();
-                    cal.setTimeInMillis(getRefDate());
-                    Calendar cal2 = Calendar.getInstance(tz);
-                    cal2.clear();
-                    cal2.setTimeInMillis(_refTime);
-                    cal.set(Calendar.HOUR_OF_DAY, cal2.get(Calendar.HOUR_OF_DAY));
-                    cal.set(Calendar.MINUTE, cal2.get(Calendar.MINUTE));
-                    cal.set(Calendar.SECOND, cal2.get(Calendar.SECOND));
-                    
-                    refDate = cal.getTimeInMillis();
-                    
+            if (!a_monitor.isCanceled()){
+                if (!converted)
+                {   
+//                    long refDate = 0;
+//                    if (isRefDateBased()) {
+//                        TimeZone tz = TimeZone.getTimeZone("GMT"); //$NON-NLS-1$
+//                        Calendar cal = Calendar.getInstance(tz);
+//                        cal.clear();
+//                        cal.setTimeInMillis(getRefDate());
+//                        Calendar cal2 = Calendar.getInstance(tz);
+//                        cal2.clear();
+//                        cal2.setTimeInMillis(_refTime);
+//                        cal.set(Calendar.HOUR_OF_DAY, cal2.get(Calendar.HOUR_OF_DAY));
+//                        cal.set(Calendar.MINUTE, cal2.get(Calendar.MINUTE));
+//                        cal.set(Calendar.SECOND, cal2.get(Calendar.SECOND));
+//                        
+//                        refDate = cal.getTimeInMillis();
+//                        
+//                    }
+                    survey = _media.convert(/*refDate, */a_monitor, a_ProgressNotifier);
+                    _media.setModel(survey);
                 }
-                survey = _media.convert(_refDateBased, refDate, a_ProgressNotifier);
-                _media.setModel(survey);
-                //converted = true;
-            }
-            else
-            {
-                // la conversion en objet a déjà été réalisée
-                survey = _media.getModel();
+                else
+                {
+                    // la conversion en objet a déjà été réalisée
+                    survey = _media.getModel();
+                }
             }
         }
         catch (IOException e)
@@ -471,31 +474,31 @@ public class InputModel implements Cloneable, PathElementHandler,
 		setMedia(new SingleFileSurvey(typeFichier));
 	}
 
-	/**
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		InputModel model = new InputModel();
-		java.io.FileInputStream stream = null;
-		try {
-			com.ago.xml.XMLBootstrapParser parser = new com.ago.xml.XMLBootstrapParser(
-					model);
-			stream = new java.io.FileInputStream(args[0]);
-			parser.parse(stream, false);
-			Survey survey = model.convert(null);
-			// survey.writeXMLOn( System.out );
-			fr.ifremer.nemo.medatlas.MedatlasSurveyWriter writer = new fr.ifremer.nemo.medatlas.MedatlasSurveyWriter();
-			writer.writeSurvey(survey, new java.io.File(args[1]), null);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			try {
-				if (stream != null) stream.close();
-			} catch (Exception e) {
-			}
-		}
-	}
+//	/**
+//	 * 
+//	 * @param args
+//	 */
+//	public static void main(String[] args) {
+//		InputModel model = new InputModel();
+//		java.io.FileInputStream stream = null;
+//		try {
+//			com.ago.xml.XMLBootstrapParser parser = new com.ago.xml.XMLBootstrapParser(
+//					model);
+//			stream = new java.io.FileInputStream(args[0]);
+//			parser.parse(stream, false);
+//			Survey survey = model.convert(null);
+//			// survey.writeXMLOn( System.out );
+//			fr.ifremer.nemo.medatlas.MedatlasSurveyWriter writer = new fr.ifremer.nemo.medatlas.MedatlasSurveyWriter();
+//			writer.writeSurvey(survey, new java.io.File(args[1]), null);
+//		} catch (Exception ex) {
+//			ex.printStackTrace();
+//		} finally {
+//			try {
+//				if (stream != null) stream.close();
+//			} catch (Exception e) {
+//			}
+//		}
+//	}
 
 	/**
 	 * 

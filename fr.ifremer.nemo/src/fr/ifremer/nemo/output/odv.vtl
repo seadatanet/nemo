@@ -59,12 +59,12 @@ $configuration.getSep()$param.code [$param.unit]$configuration.getSep()$configur
 #set ($dateTime   = $station.getDateTime())
 #set ($longitude  = $formatter.formatLongitude("+DDD.dddddd", $station.longitude))
 #set ($latitude   = $formatter.formatLatitude("+DD.dddddd ", $station.latitude))
-#set ($localCdiId = $editConversion.getLocalCdiId($station, $survey.reference))
+#set ($localCdiId = $station.getLocalCdiId($survey.reference, "ODV"))
 #set ($edmoCode   = $configuration.getIdEdmoRespCdi())
 #set ($botDepth   = 0)
 #if ($station.bottomDepth.toString() != "NaN")#set ($botDepth = $station.bottomDepth)#end
 ##
-#if ( !$swtProcess.getOdv() || !$swtProcess.getMonoStation() || ( $swtProcess.getMonoStation() && $swtProcess.getStation() == $station ))
+######if ( !$swtProcess.getOdv() || !$swtProcess.getMonoStation() || ( $swtProcess.getMonoStation() && $swtProcess.getStation() == $station ))
 #set( $limit = $station.parametersAt(0).valuesSize() - 1 )
 #set ( $range = [0 .. $limit] )
 ##
@@ -100,4 +100,4 @@ $configuration.getSep()#if (($i == 0) || ($stationModel.isTrajectory()))$botDept
 #set( $result = $notifier.progress( $count ))
 #end
 #end
-#end
+######end

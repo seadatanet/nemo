@@ -1,5 +1,6 @@
 package fr.ifremer.nemo.domain;
 
+@SuppressWarnings("unchecked")
 public class StationData implements Comparable {
 	private Double _value;
 

@@ -327,27 +327,27 @@ public class AddedParameter extends Parameter
         return propertyModel;
     }
     
-    public void setStation(Station x, Conversion cible) {
-        if (_station == x)
-            return;
-        Station old = _station;
-        if (_station != null) {
-            _station = null;
-            old.removeParameter(this);
-        }
-        _station = x;
-        if (x != null) {
-            switch (cible){
-                case ODV :
-                    x.addOdvParameter(this);
-                    break;
-                case MEDATLAS :
-                    x.addMedParameter(this);
-                    break;
-            }
-            
-        }
-    }
+//    public void setStation(Station x, Conversion cible) {
+//        if (_station == x)
+//            return;
+//        Station old = _station;
+//        if (_station != null) {
+//            _station = null;
+//            old.removeParameter(this);
+//        }
+//        _station = x;
+//        if (x != null) {
+//            switch (cible){
+//                case ODV :
+//                    x.addOdvParameter(this);
+//                    break;
+//                case MEDATLAS :
+//                    x.addMedParameter(this);
+//                    break;
+//            }
+//            
+//        }
+//    }
 
 
     /**

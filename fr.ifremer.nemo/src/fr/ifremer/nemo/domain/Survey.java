@@ -43,6 +43,7 @@ import fr.ifremer.nautilus.metadata.WSSurvey;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSShip;
 
@@ -334,10 +335,9 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
     public void initValues(){
         _dataSize = 0;
         _availability = Availability.publicly;
-        _chiefScientist = "UNKNOWN"; //$NON-NLS-1$
+        _chiefScientist = Intern.unknown;
         _comment = Global.EMPTY_STRING;
         _countryCode = Global.EMPTY_STRING;
-        //_countryName = Global.EMPTY_STRING;
         _dataCentre = Global.EMPTY_STRING;
         _endDate = System.currentTimeMillis();
         _laboratories = Global.EMPTY_STRING;
@@ -346,7 +346,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
         _reference = Global.EMPTY_STRING;
         _regionName = Global.EMPTY_STRING;
         _shipCode = "XXXX"; //$NON-NLS-1$
-        _shipName = "UNKNOWN"; //$NON-NLS-1$
+        _shipName = Intern.unknown;
         _startDate = System.currentTimeMillis();
     }
     

@@ -1,601 +1,250 @@
 package fr.ifremer.nemo.ui;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.text.ParseException;
 import java.util.Date;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
-import fr.ifremer.nemo.input.SurveyMedia;
 import fr.ifremer.nemo.mapping.Mapping;
 import fr.ifremer.nemo.mapping.MappingTable;
-import fr.ifremer.nemo.medatlas.MedatlasSurveyWriter;
-import fr.ifremer.nemo.odv.ODVSurveyWriter;
 import fr.ifremer.nemo.output.CDIResumeWriter;
+import fr.ifremer.nemo.output.CommonSurveyWriter;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.ProgressNotification;
+import fr.ifremer.nemo.util.Conversion;
+import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 
 public class SWTProcess implements IRunnableWithProgress {
-	public static ScrolledForm formEdition;
-
-	public static Button buttonConversion;
-
-	public static int validee, loaded;
-
-	public static Shell shell;
 
 	public static ProgressNotification notifier;
 
 	public static Survey survey;
 
-	public static ODVSurveyWriter writerODV;
-
-	public static MedatlasSurveyWriter writerMed;
-
-	public static Boolean odv, interrompu, monoStation;
-
-	public static Station _station;
+    private CommonSurveyWriter writer;
+    
+    private Conversion formatConversion;
+    private boolean monoStation;
 
 	public static IProgressMonitor monitor2;
     
     private Mapping mapping;
     private MappingTable MappingTable = new MappingTable();    
+    
+    
+    public SWTProcess(Conversion a_formatConversion,
+                      boolean a_monoStation){
+        super();
+        formatConversion = a_formatConversion;
+        monoStation = a_monoStation;
+    }
+    
 
-	public void run(IProgressMonitor monitor) throws InvocationTargetException,
-			InterruptedException {
+	@SuppressWarnings("unused")
+    public void run(IProgressMonitor monitor) 
+                    throws InvocationTargetException, InterruptedException 
+    {
+        
+	    try{
+            System.out.println("START at " + new Date());
+            
+            monitor.beginTask(Messages.SWTProcess_1, IProgressMonitor.UNKNOWN);
+            monitor2 = monitor;
+            
+    		if (ViewFile.isCollection()) {
+                runMultiProcess();
+    		} 
+            else {
+                runSingleProcess(Global.EMPTY_STRING, null, null);
+    		}
+            
+            // Ecriture du resume CDI
+            if (Configuration.getSingleton().isWriteCdi()){
+                monitor2.setTaskName("write CDI resume");
+                CDIResumeWriter.getInstance().writeResume(formatConversion);
+            }
 
-		if (ViewFile.isCollection()) {
-			try {
-				if (ViewFile.collectionCas1)
-					runCollectionCas1(monitor);
-				else
-					runCollectionCasN(monitor);
-			} catch (ParseException e) {
-				throw new InterruptedException(Messages
-						.SWTProcess_5
-						+ e.getMessage());
-			} catch (NumberFormatException e) {
-				throw new InterruptedException(Messages
-						.SWTProcess_5
-						+ e.getMessage());
-			} catch (StringIndexOutOfBoundsException e) {
-				throw new InterruptedException(Messages
-						.SWTProcess_5
-						+ e.getMessage());
-			}
-		} else {
-			try {
-				runCampagne(monitor);
-			} catch (ParseException e) {
-				throw new InterruptedException(Messages
-						.SWTProcess_5
-						+ e.getMessage());
-			} catch (NumberFormatException e) {
-				throw new InterruptedException(Messages
-						.SWTProcess_5
-						+ e.getMessage());
-			} catch (StringIndexOutOfBoundsException e) {
-				throw new InterruptedException(Messages
-						.SWTProcess_5
-						+ e.getMessage());
-			} catch (GenerationException e) {
-				throw new InterruptedException(Messages
-						.SWTProcess_5
-						+ e.getMessage());
-			}
-		}
-        if (!ViewFile.radioCollectCas1.getSelection()) DataModel.inputModel.setConverted(true);
+            System.out.println("END   at " + new Date() + "\n---------------");
+            monitor.done();
+        }
+        catch (Exception e) {
+            throw new InterruptedException(Messages.SWTProcess_5 + e.getMessage());
+        }
 	}
+    
+    private void runMultiProcess() throws Exception{
 
-	private void runCampagne(IProgressMonitor monitor)
-			throws NumberFormatException, ParseException, InterruptedException,
-			GenerationException {
-		monitor.beginTask(Messages.SWTProcess_1,
-				IProgressMonitor.UNKNOWN);
-		monitor2 = monitor;
-		interrompu = false;
-		SurveyMedia.interrompu = false;
-		// EditConversion.interrompu = false;
+        if (monitor2.isCanceled())
+            throw new InterruptedException(Global.EMPTY_STRING); 
+        
+        int numItem = 0;
+        String[] items = new File(ViewFile.nomRepertoire).list();
 
-		// NOTIFIER
-		notifier = new ProgressNotification() {
-			public void progress(final int val) {
-				try {
-					Application.display.syncExec(new Runnable() {
-						public void run() {
-							monitor2.subTask(Messages.SWTProcess_2
-									+ val + "%");
-							if (monitor2.isCanceled()) {
-								SurveyMedia.interrompu = true;
+        for (String item : items) {
+            numItem++;
+            String msg = " : " + item + " ( " + numItem + " / " + items.length + " ) "; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+            String multiStationFileName = null;
+            String surveyName = Intern.unknown;
+            
 
-							}
-						}
-					});
-				} catch (Exception e) {
-				}
-			}
-		};
+            if (ViewFile.collectionCas1){
+                DataModel.dirSurvey.setDirectory(ViewFile.nomRepertoire + "/" + item); //$NON-NLS-1$
+                multiStationFileName = EditConversion.nomDossierSortie + "/" + item + Global.EXT_TXT; //$NON-NLS-1$
+                surveyName = item;
+            }
+            else{
+                DataModel.singleSurvey.setFile(ViewFile.nomRepertoire + "/" + item); //$NON-NLS-1$
+                multiStationFileName = EditConversion.nomDossierSortie + "\\" + item.substring(0, item.lastIndexOf('.')) + Global.EXT_TXT;                 //$NON-NLS-1$
+            }
 
-		// TACHE A EFFECTUER
+            runSingleProcess(msg, multiStationFileName, surveyName);       
+        }
+    }
+    
+    private void runSingleProcess(String msg,
+                                  String multiStationFileName,
+                                  String surveyName) throws Exception{
 
-		try {
-			notifier.progress(0);
-			monitor.setTaskName(Messages.SWTProcess_3);
-			survey = DataModel.inputModel.convert(notifier);
-		} catch (InterruptedException e) {
-			throw e;
-		} catch (FileNotFoundException e) {
-			//
-			e.printStackTrace();
-		} catch (IOException e) {
-			// 
-			e.printStackTrace();
-		} catch (ParseException e) {
-			e.printStackTrace();
-			throw e;
-		} catch (NumberFormatException e) {
-			throw e;
-		} catch (StringIndexOutOfBoundsException e) {
-			throw e;
-		}
-		writerODV = new fr.ifremer.nemo.odv.ODVSurveyWriter();
-		writerMed = new fr.ifremer.nemo.medatlas.MedatlasSurveyWriter();
+        // NOTIFIER
+        notifier();            
+        
+        
+        // CONVERSION EN OBJET
+        if (!monitor2.isCanceled()){
+            System.out.println("START convertion at " + new Date());
+            executeConvert(msg, surveyName); 
+            System.out.println("END convertion at " + new Date());               
+        }
 
-		try {
-			monitor2.setTaskName(Messages.SWTProcess_4);
-			if (!monitor2.isCanceled()) {
-				if (!odv) {
-					// MEDATLAS
-					File fichierSortie = new java.io.File(
-							EditConversion.nomFichierSortie);
-
-					writerMed.writeSurvey(survey, fichierSortie, notifier);
-                    survey.setDataSize(fichierSortie.length() / 1024f / 1024f);                    
-
-                    if (Configuration.getSingleton().isWriteMapping()){
-    					for (Station station : survey.getStations()) {
-                            mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "MEDATLAS");  //$NON-NLS-1$
-                            mapping.setFilename(EditConversion.nomHorsPrefix);
-                            mapping.setDate(new Date());
-                            mapping.setModus(Mapping.MODUS_MULTISTATIONS);
-                            
-                            MappingTable.persist(mapping);
-                            
-    						/*CDIMappingWriter.getInstance().addMapping(
-    								EditConversion.getLocalCdiId(station, survey.getReference()),
-                                    "MEDATLAS",
-    								fichierSortie.getName());*/
-    					}
-                    }
-				} else {
-					// ODV
-					if (monoStation) {
-						int i = 0;
-						int totalStations = survey.getStations().length;
-
-						for (Station station : survey.getStations()) {
-							i++;
-							monitor.setTaskName(Messages
-									.SWTProcess_4
-									+ " : " + i + " / " + totalStations);
-							setStation(station);
-
-							EditConversion.nomFichierSortie = EditConversion.nomDossierSortie
-									+ "\\"
-									+ EditConversion.getLocalCdiId(station, survey.getReference())
-									+ ".txt";
-							File fichierSortie = new java.io.File(
-									EditConversion.nomFichierSortie);
-
-							writerODV.writeSurvey(survey, fichierSortie, notifier);
-                            station.setDataSize(fichierSortie.length() / 1024f / 1024f);
-                            
-                            if (Configuration.getSingleton().isWriteMapping()){
-                                mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
-                                
-                                //Si le nom hors prefix est vide, il ne faut pas ajouter le séparateur
-                                if(EditConversion.nomHorsPrefix.equals(""))
-                                    mapping.setFilename(EditConversion.nomHorsPrefix+fichierSortie.getName());
-                                else
-                                    mapping.setFilename(EditConversion.nomHorsPrefix+File.separator+fichierSortie.getName());
-                                
-                                mapping.setDate(new Date());
-                                mapping.setModus(Mapping.MODUS_MONOSTATION);
-                                MappingTable.persist(mapping);
-                            }
-                            
-							/*CDIMappingWriter.getInstance().addMapping(
-									EditConversion.getLocalCdiId(station, survey.getReference()),
-									fichierSortie.getName());*/
-						}
-					} else {
-						File fichierSortie = new java.io.File(EditConversion.nomFichierSortie);
-
-						writerODV.writeSurvey(survey, fichierSortie, notifier);
-                        survey.setDataSize(fichierSortie.length() / 1024f / 1024f);                        
-                        
-                        if (Configuration.getSingleton().isWriteMapping()){
-    						for (Station station : survey.getStations()) {
-                                mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
-                                mapping.setFilename(EditConversion.nomHorsPrefix);
-                                mapping.setDate(new Date());
-                                mapping.setModus(Mapping.MODUS_MULTISTATIONS);    
-                                
-                                MappingTable.persist(mapping);
-    							/*CDIMappingWriter.getInstance().addMapping(
-    									EditConversion.getLocalCdiId(station, survey.getReference()),
-    									fichierSortie.getName());*/
-    						}
-                        }
-					}
-				}
-                if (Configuration.getSingleton().isWriteCdi()) {
-                    CDIResumeWriter.getInstance().addSurvey(survey);
+        // ECRITURE DES FICHIERS
+        if (!monitor2.isCanceled()){
+            System.out.println("START writing at " + new Date());
+            monitor2.setTaskName(Messages.SWTProcess_4);
+            writer = new CommonSurveyWriter();
+            
+            if ((formatConversion == Conversion.ODV) && (monoStation)){
+                writeMonoStationFile();
+            }else{
+                String fileName = EditConversion.nomFichierSortie;
+                if (multiStationFileName != null){
+                    fileName = multiStationFileName;
                 }
-			} else {
-				// interruption
-				interrompu = true;
-			}
-		} catch (IOException e) {
-			// 
-			e.printStackTrace();
-		} catch (GenerationException e) {
-			// 
-			e.printStackTrace();
-			throw new GenerationException(e);
-		}
-
-		monitor.done();
-	}
-
-	private void runCollectionCas1(IProgressMonitor monitor)
-			throws NumberFormatException, ParseException, InterruptedException {
-		monitor.beginTask(Messages.SWTProcess_1,
-				IProgressMonitor.UNKNOWN);
-		monitor2 = monitor;
-		interrompu = false;
-		SurveyMedia.interrompu = false;
-		// EditConversion.interrompu = false;
-
-		int numDossier = 0;
-
-		String[] dossiers = new File(ViewFile.nomRepertoire).list();
-
-		for (String dossier : dossiers) {
-			numDossier++;
-			DataModel.dirSurvey.setDirectory(ViewFile.nomRepertoire + "/"
-					+ dossier);
-
-			// NOTIFIER
-			notifier = new ProgressNotification() {
-				public void progress(final int val) {
-					try {
-						Application.display.syncExec(new Runnable() {
-							public void run() {
-								monitor2.subTask(Messages
-										.SWTProcess_2
-										+ val + "%");
-								if (monitor2.isCanceled()) {
-									SurveyMedia.interrompu = true;
-
-								}
-							}
-						});
-					} catch (Exception e) {
-					}
-				}
-			};
-
-			// TACHE A EFFECTUER
-
-			try {
-				notifier.progress(0);
-				monitor.setTaskName(Messages.SWTProcess_3 + " : "
-						+ dossier + " ( " + numDossier + " / "
-						+ dossiers.length + " ) ");
-				survey = DataModel.inputModel.convert(notifier);
-
-				survey.setName(dossier);
-
-			} catch (InterruptedException e) {
-				//
-				throw e;
-			} catch (FileNotFoundException e) {
-				//
-				e.printStackTrace();
-			} catch (IOException e) {
-				// 
-				e.printStackTrace();
-			} catch (ParseException e) {
-				//
-				e.printStackTrace();
-			}
-
-			writerODV = new fr.ifremer.nemo.odv.ODVSurveyWriter();
-
-			try {
-				monitor2.setTaskName(Messages.SWTProcess_4);
-				if (!monitor2.isCanceled()) {
-					if (monoStation) {
-						int i = 0;
-						int totalStations = survey.getStations().length;
-
-						for (Station station : survey.getStations()) {
-							i++;
-							monitor.setTaskName(Messages
-									.SWTProcess_4
-									+ " : " + i + " / " + totalStations);
-							setStation(station);
-
-							EditConversion.nomFichierSortie = EditConversion.nomDossierSortie
-									+ "\\"
-									+ EditConversion.getLocalCdiId(station, survey.getReference())
-									+ ".txt";
-
-							File fichierSortie = new java.io.File(
-									EditConversion.nomFichierSortie);
-							writerODV.writeSurvey(survey, fichierSortie,
-									notifier);
-                            station.setDataSize(fichierSortie.length() / 1024f / 1024f);
-
-                            if (Configuration.getSingleton().isWriteMapping()){
-    							/*CDIMappingWriter.getInstance().addMapping(
-    									EditConversion.getLocalCdiId(station, survey.getReference()),
-    									fichierSortie.getName());*/
-                                mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
-                                //Si le nom hors prefix est vide, il ne faut pas ajouter le séparateur
-                                if(EditConversion.nomHorsPrefix.equals(""))
-                                    mapping.setFilename(EditConversion.nomHorsPrefix+fichierSortie.getName());
-                                else
-                                    mapping.setFilename(EditConversion.nomHorsPrefix+File.separator+fichierSortie.getName());
-                                mapping.setDate(new Date());
-                                mapping.setModus(Mapping.MODUS_MONOSTATION);
-                                
-                                MappingTable.persist(mapping);
-                            }
-                            
-						}
-					} else {
-						EditConversion.nomFichierSortie = EditConversion.nomDossierSortie
-								+ "/" + dossier + ".txt";
-						File fichierSortie = new java.io.File(
-								EditConversion.nomFichierSortie);
-						monitor2.setTaskName(Messages.SWTProcess_4
-								+ " : " + dossier + ".txt" + " ( " + numDossier
-								+ " / " + dossiers.length + " ) ");
-
-						writerODV.writeSurvey(survey, fichierSortie, notifier);
-
-						survey.setDataSize(fichierSortie.length() / 1024f / 1024f);
-
-                        if (Configuration.getSingleton().isWriteMapping()){                            
-                            for (Station station : survey.getStations()) {
-                                /*CDIMappingWriter.getInstance().addMapping(
-									EditConversion.getLocalCdiId(station, survey.getReference()),
-									fichierSortie.getName());*/
-                                mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
-                                mapping.setFilename(EditConversion.nomHorsPrefix);
-                                mapping.setDate(new Date());
-                                mapping.setModus(Mapping.MODUS_MULTISTATIONS);
-                                
-                                MappingTable.persist(mapping);
-                            }
+                writeMultisationFile(fileName, msg);
+            }
+            System.out.println("END writing at " + new Date());
+        }
+        
+        if ((!monitor2.isCanceled()) 
+                && (Configuration.getSingleton().isWriteCdi())){
+            CDIResumeWriter.getInstance().addSurvey(survey);
+        }
+        
+        if (monitor2.isCanceled())
+            throw new InterruptedException(Global.EMPTY_STRING); 
+    }
+    
+    private void notifier(){
+        notifier = new ProgressNotification() {
+            public void progress(final int val) {
+                try {
+                    Application.display.syncExec(new Runnable() {
+                        public void run() {
+                            monitor2.subTask(Messages.SWTProcess_2 + val + Global.POURCENT);
                         }
-					}
+                    });
+                } catch (Exception e) {
+                }
+            }
+        };
+    }
+    
+    private void executeConvert(String msgComplement, 
+                                String surveyName) 
+                        throws Exception{
+        notifier.progress(0);
+        monitor2.setTaskName(Messages.SWTProcess_3 + msgComplement);
+        
+        // TODO optimiser la conversion
+        survey = DataModel.inputModel.convert(monitor2, notifier);
+        
+        if (surveyName != null)
+            survey.setName(surveyName);
+        
+        if (!ViewFile.collectionCas1){
+           DataModel.inputModel.setConverted(true);    
+        }
+    }
+    
+    private void writeMonoStationFile() throws GenerationException
+    {
+        int i = 0;
+        int totalStations = survey.getStations().length;
 
-					if (Configuration.getSingleton().isWriteCdi()) {
-						CDIResumeWriter.getInstance().addSurvey(survey);
-					}
-				} else {
-					// interruption
-					interrompu = true;
-				}
-			} catch (IOException e) {
-				// 
-				e.printStackTrace();
-			} catch (GenerationException e) {
-				// 
-				e.printStackTrace();
-			}
-
-		}
-		monitor.done();
-
-	}
-
-	private void runCollectionCasN(IProgressMonitor monitor)
-			throws NumberFormatException, ParseException, InterruptedException {
-		monitor.beginTask(Messages.SWTProcess_1,
-				IProgressMonitor.UNKNOWN);
-		monitor2 = monitor;
-		interrompu = false;
-		SurveyMedia.interrompu = false;
-		// EditConversion.interrompu = false;
-
-		int numFichier = 0;
-
-		String[] fichiers = new File(ViewFile.nomRepertoire).list();
-
-		for (String fichier : fichiers) {
-			DataModel.singleSurvey.setFile(ViewFile.nomRepertoire + "/"
-					+ fichier);
-
-			numFichier++;
-
-			// NOTIFIER
-			notifier = new ProgressNotification() {
-				public void progress(final int val) {
-					try {
-						Application.display.syncExec(new Runnable() {
-							public void run() {
-								monitor2.subTask(Messages
-										.SWTProcess_2
-										+ val + "%");
-								if (monitor2.isCanceled()) {
-									SurveyMedia.interrompu = true;
-								}
-							}
-						});
-					} catch (Exception e) {
-					}
-				}
-			};
-
-			// TACHE A EFFECTUER
-
-			try {
-				notifier.progress(0);
-				monitor.setTaskName(Messages.SWTProcess_3 + " : "
-						+ fichier + " ( " + numFichier + " / "
-						+ fichiers.length + " ) ");
-				survey = DataModel.inputModel.convert(notifier);
-
-				survey.setName("UNKNOWN");
+        for (Station station : survey.getStations()) {
+            if (!monitor2.isCanceled()){
+                i++;
+                monitor2.setTaskName(Messages.SWTProcess_4 + " : " + i + " / " + totalStations);  //$NON-NLS-1$//$NON-NLS-2$
+                String localCdiId = station.getLocalCdiId(survey.getReference(), formatConversion.toString());
                 
+                
+                EditConversion.nomFichierSortie = EditConversion.nomDossierSortie
+                + "\\" + localCdiId + Global.EXT_TXT; //$NON-NLS-1$
+                File fichierSortie = new java.io.File(
+                    EditConversion.nomFichierSortie);
+                
+                writer.writeSurvey(survey, fichierSortie, formatConversion, notifier);
+                station.setDataSize(fichierSortie.length() / 1024f / 1024f);
+                
+                if (Configuration.getSingleton().isWriteMapping()){
+                    mapping = new Mapping(localCdiId, formatConversion.toString()); 
+                    
+                    //Si le nom hors prefix est vide, il ne faut pas ajouter le séparateur
+                    if(EditConversion.nomHorsPrefix.equals(Global.EMPTY_STRING))
+                        mapping.setFilename(EditConversion.nomHorsPrefix+fichierSortie.getName());
+                    else
+                        mapping.setFilename(EditConversion.nomHorsPrefix+File.separator+fichierSortie.getName());
+                    
+                    mapping.setDate(new Date());
+                    mapping.setModus(Mapping.MODUS_MONOSTATION);
+                    MappingTable.persist(mapping);
+                }
+            }
+        }
+    }
+    
+    private void writeMultisationFile(String outputFileName, 
+                                      String msg) 
+                                                    throws GenerationException
+    {
+        File fichierSortie = new java.io.File(outputFileName);
+        
+        if (msg != null){
+            monitor2.setTaskName(Messages.SWTProcess_4 + msg);
+        }
 
-			} catch (InterruptedException e) {
-				throw e;
-			} catch (FileNotFoundException e) {
-				//
-				e.printStackTrace();
-			} catch (IOException e) {
-				// 
-				e.printStackTrace();
-			} catch (ParseException e) {
-				e.printStackTrace();
-				throw e;
-			}
-
-			writerODV = new fr.ifremer.nemo.odv.ODVSurveyWriter();
-
-			try {
-				monitor2.setTaskName(Messages.SWTProcess_4);
-				if (!monitor2.isCanceled()) {
-					// ODV
-					if (monoStation) {
-						int i = 0;
-						int totalStations = survey.getStations().length;
-
-						for (Station station : survey.getStations()) {
-							i++;
-							monitor.setTaskName(Messages
-									.SWTProcess_4
-									+ " : " + i + " / " + totalStations);
-							setStation(station);
-
-							EditConversion.nomFichierSortie = EditConversion.nomDossierSortie
-									+ "\\"
-									+ EditConversion.getLocalCdiId(station, survey.getReference())
-									+ ".txt";
-
-							File fichierSortie = new java.io.File(
-									EditConversion.nomFichierSortie);
-							writerODV.writeSurvey(survey, fichierSortie,
-									notifier);
-                            station.setDataSize(fichierSortie.length() / 1024f / 1024f);
-
-                            if (Configuration.getSingleton().isWriteMapping()){
-                                mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
-                                //Si le nom hors prefix est vide, il ne faut pas ajouter le séparateur
-                                if(EditConversion.nomHorsPrefix.equals(""))
-                                    mapping.setFilename(EditConversion.nomHorsPrefix+fichierSortie.getName());
-                                else
-                                    mapping.setFilename(EditConversion.nomHorsPrefix+File.separator+fichierSortie.getName());
-                                mapping.setDate(new Date());
-                                mapping.setModus(Mapping.MODUS_MONOSTATION);        
-                                
-                                MappingTable.persist(mapping);
-                                
-    							/*CDIMappingWriter.getInstance().addMapping(
-    									EditConversion.getLocalCdiId(station, survey.getReference()),
-    									fichierSortie.getName());*/
-                            }
-						}
-					} else {
-						EditConversion.nomFichierSortie = EditConversion.nomDossierSortie
-								+ "\\"
-								+ fichier
-										.substring(0, fichier.lastIndexOf('.'))
-								+ ".txt";
-						File fichierSortie = new java.io.File(EditConversion.nomFichierSortie);
-
-						monitor2.setTaskName(Messages.SWTProcess_4
-								+ " : " + fichier + ".txt" + " ( " + numFichier
-								+ " / " + fichiers.length + " ) ");
-
-						writerODV.writeSurvey(survey, fichierSortie, notifier);
-
-						survey.setDataSize(fichierSortie.length() / 1024f / 1024f);
-
-                        if (Configuration.getSingleton().isWriteMapping()){
-    						for (Station station : survey.getStations()) {
-    						/*	CDIMappingWriter.getInstance().addMapping(
-    									EditConversion.getLocalCdiId(station, survey.getReference()),
-    									fichierSortie.getName());*/
-                                mapping = new Mapping(EditConversion.getLocalCdiId(station, survey.getReference()), "ODV");  //$NON-NLS-1$
-                                mapping.setFilename(EditConversion.nomHorsPrefix);
-                                mapping.setDate(new Date());
-                                mapping.setModus(Mapping.MODUS_MULTISTATIONS);    
-                                
-                                MappingTable.persist(mapping);
-    						}
-                        }
-					}
-
-					if (Configuration.getSingleton().isWriteCdi()) {
-						CDIResumeWriter.getInstance().addSurvey(survey);
-					}
-
-				} else {
-					// interruption
-					interrompu = true;
-				}
-
-			} catch (IOException e) {
-				// 
-				e.printStackTrace();
-			} catch (GenerationException e) {
-				// 
-				e.printStackTrace();
-			}
-		}
-
-		monitor.done();
-
-	}
-
-	public static Station getStation() {
-		return _station;
-	}
-
-	public static void setStation(Station _station) {
-		SWTProcess._station = _station;
-	}
-
-	public static Boolean getMonoStation() {
-		return monoStation;
-	}
-
-	public static void setMonoStation(Boolean monoStation) {
-		SWTProcess.monoStation = monoStation;
-	}
-
-	public static Boolean getOdv() {
-		return odv;
-	}
-
-	public static void setOdv(Boolean odv) {
-		SWTProcess.odv = odv;
-	}
+        writer.writeSurvey(survey, fichierSortie, formatConversion, notifier);
+        survey.setDataSize(fichierSortie.length() / 1024f / 1024f);                    
+    
+        if (Configuration.getSingleton().isWriteMapping()){
+            for (Station station : survey.getStations()) {
+                String localCdiId = station.getLocalCdiId(survey.getReference(), formatConversion.toString());
+                mapping = new Mapping(localCdiId, formatConversion.toString()); 
+                mapping.setFilename(EditConversion.nomHorsPrefix);
+                mapping.setDate(new Date());
+                mapping.setModus(Mapping.MODUS_MULTISTATIONS);
+                
+                MappingTable.persist(mapping);
+            }
+        }
+    }
+    
+    public Conversion getFormatConversion(){
+        return formatConversion;
+    }
 }

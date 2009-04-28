@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.Writer;
 
 import fr.ifremer.nemo.domain.Survey;
+import fr.ifremer.nemo.util.Conversion;
 
 /**
  * Interface SurveyWriter
@@ -28,9 +29,10 @@ public interface SurveyWriter {
 	 * @exception IOException
 	 * @exception GenerationException
 	 */
-	void writeSurvey(Survey a_Survey, File a_Filename,
-			ProgressNotification a_Progress) throws IOException,
-			GenerationException;
+	void writeSurvey(Survey a_Survey, 
+                     File a_Filename,
+                     Conversion a_Conversion,
+                     ProgressNotification a_Progress) throws GenerationException;
 
 	/**
 	 * 
@@ -43,7 +45,9 @@ public interface SurveyWriter {
 	 *            progression
 	 * @exception GenerationException
 	 */
-	void writeSurvey(Survey a_Survey, Writer a_Writer,
-			ProgressNotification a_Progress) throws GenerationException;
+	void writeSurvey(Survey a_Survey, 
+                     Writer a_Writer,
+                     Conversion a_Conversion,
+                     ProgressNotification a_Progress) throws GenerationException;
 
 } /* End of Interface: SurveyWriter */

@@ -38,7 +38,6 @@ public class CDIResumeWriter {
 	private List<Survey> surveys;
 
 	public CDIResumeWriter() {
-
 		surveys = new ArrayList<Survey>();
 	}
 
@@ -47,24 +46,18 @@ public class CDIResumeWriter {
 		if (instance == null) {
 			instance = new CDIResumeWriter();
 		}
-
 		return instance;
-
 	}
 
 
 	public void reset() {
-//		if (surveys != null)
-//			for (Survey survey : surveys)
-//				survey.release();
         nomFichierSortie = Global.EMPTY_STRING;
 		surveys = new ArrayList<Survey>();
 	}
 
-	public void writeResume() throws IOException {
-
+	public void writeResume(Conversion formatConversion) throws IOException 
+    {
 		File output = new File(nomFichierSortie);
-
 		FileWriter writer = null;
 		
 		try {
@@ -119,7 +112,7 @@ public class CDIResumeWriter {
 						writer.write(Global.RN);
 						
 						// CDI ID
-						writer.write(EditConversion.getLocalCdiId(station, survey.getReference()));
+						writer.write(station.getLocalCdiId(survey.getReference(), formatConversion.toString()));
 
 
 						// EDMO author
@@ -133,7 +126,7 @@ public class CDIResumeWriter {
                         
 
 						// Dataset name
-                        if(survey.getName().isEmpty() || survey.getName().equals("UNKNOWN")) //$NON-NLS-1$
+                        if(survey.getName().isEmpty() || survey.getName().equals(Intern.unknown))
                         {    
                             if(EditConversion.getDataSetRef().isEmpty())
                             {    
@@ -218,7 +211,7 @@ public class CDIResumeWriter {
 								+ dateFormat2.format(new Date(station.getDate())) + format.formatDateTime("hh24:mm:ss", station.getCorrectedTime())); //$NON-NLS-1$
 			
 						station.getOffsetTU();
-						station.getParameters()[0].getStation().getTime();
+						station.getTime();
 						
 						// edmo distributor
 						writer.write(sep + idEdmoDistDonnees);
@@ -268,7 +261,7 @@ public class CDIResumeWriter {
 		dialog.setText(Messages.CDIResumeWriter_choixFichier);
 		dialog.setFilterPath(Utils.configuration.getCruisesDirectory());
 		String extensions[] = new String[1];
-		extensions[0] = "*.txt"; //$NON-NLS-1$
+		extensions[0] = Global.STAR + Global.EXT_TXT;
 		dialog.setFilterExtensions(extensions);
 		nomFichierSortie = dialog.open();
 
