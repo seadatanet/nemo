@@ -60,10 +60,14 @@ public class ViewLog extends ViewPart {
             // récupération de l'aide en ligne
             String langue = Utils.configuration.getLang();
             
-            String listName = Intern.dir_resources + Intern.help_file + langue + Global.EXT_TXT;
-            File file = new java.io.File(listName);
+            String fileName = Intern.dir_resources + Intern.help_file + langue + Global.EXT_TXT;
             
+            File file = new File(fileName);
+//            FileInputStream stream = new FileInputStream(file);
+//            InputStreamReader reader = new InputStreamReader(stream, "UTF-8"); //$NON-NLS-1$
+//            BufferedReader bufferedReader = new BufferedReader(reader);
             BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            
             String readedLine = Global.EMPTY_STRING;
             int cpt = 0;
             while ((readedLine = bufferedReader.readLine()) != null){       
