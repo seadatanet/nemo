@@ -252,7 +252,7 @@ public class StationSection extends NemoSection
 
         ligne = frag.getFirstLine();
         debut = frag.getFirstCharOffset();
-        // TODO FAE 0001226 : décaler le lastcharoffset pour qu'il prenne en compte le nombre de lignes
+        // FAE 0001226 : décaler le lastcharoffset pour qu'il prenne en compte le nombre de lignes
         if (offset) Utils.calculRealOffsetFin(frag);
         fin = frag.getLastCharOffset();
         if (posVariable) vari = frag.isVariable();
@@ -882,7 +882,7 @@ public class StationSection extends NemoSection
             if (DataModel.ouverture){
                 code = typeCombo;
             }else{
-                Pattern p = Pattern.compile(" - ");                                                    //$NON-NLS-1$
+                Pattern p = Pattern.compile(Global.SEP);                                                    //$NON-NLS-1$
                 String mots[] = p.split(typeCombo);
                 
                 int taille = mots.length;
@@ -1042,7 +1042,7 @@ public class StationSection extends NemoSection
                 String code = dataType.getCode();
                 // faire un split sur - au cas oe et n'avoir QUE le code
     
-                Pattern p = Pattern.compile(" - "); //$NON-NLS-1$
+                Pattern p = Pattern.compile(Global.SEP); 
                 String mots[] = p.split(code);
                 String vraiCode = mots[0];
     
@@ -1053,7 +1053,7 @@ public class StationSection extends NemoSection
                 for (int i = 0; i < taille; i++)
                 {
                     // check si le type existe toujours ou pas
-                    Pattern pat = Pattern.compile(" - "); //$NON-NLS-1$
+                    Pattern pat = Pattern.compile(Global.SEP);
                     String motsType[] =
                         pat.split(TableDataSurvey.types.get(i).getCode());
                     String vraiCodeType = motsType[0];

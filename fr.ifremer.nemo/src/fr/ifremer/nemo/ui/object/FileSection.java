@@ -20,7 +20,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 /**
- * Description: TODO
+ * Description: objet graphique représentant une section dans l'onglet File
  * @author dboulang
  *
  */
@@ -114,7 +114,7 @@ public class FileSection extends NemoSection
     @Override
     public void fillFromModel(StationModel stationModel)
     {
-        // TODO Auto-generated method stub
+        // Auto-generated method stub
     }
 
     /**
@@ -123,7 +123,7 @@ public class FileSection extends NemoSection
     @Override
     public void initModel(StationModel stationModel)
     {
-        // TODO Auto-generated method stub
+        // Auto-generated method stub
     }
 
     /**

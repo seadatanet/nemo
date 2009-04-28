@@ -24,6 +24,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 
 import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 public class ImportMappingAction extends Action implements ISelectionListener,
@@ -63,7 +64,7 @@ public class ImportMappingAction extends Action implements ISelectionListener,
                     + "\\"); //$NON-NLS-1$
             dialog.setText(Messages.ImportMappingAction_5); 
             String extensions[] = new String[1];
-            extensions[0] = "*.txt"; //$NON-NLS-1$
+            extensions[0] = Global.STAR + Global.EXT_TXT;
             dialog.setFilterExtensions(extensions);
             nomMapping = dialog.open();
 

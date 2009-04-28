@@ -522,7 +522,7 @@ public class TableData {
 
 		// on supprime l'element e l'indice donne
 		// split sur " - "
-		Pattern p = Pattern.compile(" - "); //$NON-NLS-1$
+		Pattern p = Pattern.compile(Global.SEP); 
 		String mots[] = p.split(types.get(indice).getCode());
 		String code = mots[0];
 
@@ -649,8 +649,6 @@ public class TableData {
 
 				types.get(i).setTestOut(flagSDN);
 			} else {
-				// TODO à retester : si pas de position de flag, on vide les
-				// flags
 				types.get(i).setTestIn(Global.EMPTY_STRING);
 				types.get(i).setTestOut(Global.EMPTY_STRING);
 			}

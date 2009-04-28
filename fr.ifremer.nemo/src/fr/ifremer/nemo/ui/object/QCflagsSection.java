@@ -248,7 +248,7 @@ public class QCflagsSection extends NemoSection
 
         for (int i = 0; i < flagTables.size(); i++) {
             final MenuItem childItem = new MenuItem(submenu, SWT.PUSH);
-            childItem.setText(flagTables.get(i).getCode() + " - "               //$NON-NLS-1$
+            childItem.setText(flagTables.get(i).getCode() + Global.SEP 
                     + flagTables.get(i).getLibelle());
             final int j = i;
             childItem.addListener(SWT.Selection, new Listener() {

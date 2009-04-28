@@ -12,6 +12,13 @@ import org.eclipse.osgi.util.NLS;
 public class Intern extends NLS {
 	private static final String BUNDLE_NAME = "fr.ifremer.nemo.util.intern"; //$NON-NLS-1$
 
+    public static String dir_resources;
+    public static String dir_vocabLists;
+    
+    public static String fileName_config;
+    public static String fileName_configIni;
+    public static String fileName_coupling;
+    
 	public static String id_nemo;
 	public static String id_lists;
 	public static String id_maps;
@@ -29,9 +36,16 @@ public class Intern extends NLS {
     public static String list_methodCDI;
     public static String list_typePlatform;
     public static String list_accesDonnees;
+    public static String list_flagsSDN;
+    public static String list_nemo_parameters;
+    public static String list_nemo_survey;
+    public static String list_edmo;
     
     public static String lang_fr;
     public static String lang_en;
+    
+    public static String help_file;
+    public static String help_separator;
 
     public static String settings_proxy;
     public static String proxy_use;
@@ -67,6 +81,8 @@ public class Intern extends NLS {
     
     public static String paramPRES;
     public static String paramDEPH;
+    
+    public static String unknown;
 	
 	static {
 		// initialize resource bundle

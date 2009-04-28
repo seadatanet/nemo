@@ -16,6 +16,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 public class SaveAction extends Action implements ISelectionListener,
@@ -82,7 +83,7 @@ public class SaveAction extends Action implements ISelectionListener,
 		dialog.setText(Messages.SaveAction_5); 
 		dialog.setFilterPath(Utils.configuration.getModelsDirectory() + "\\"); //$NON-NLS-1$
 		String extensions[] = new String[1];
-		extensions[0] = "*.xml"; //$NON-NLS-1$
+		extensions[0] = Global.STAR + Global.EXT_XML;
 		dialog.setFilterExtensions(extensions);
 
 		nomFichierSortieXML = dialog.open();
@@ -90,7 +91,6 @@ public class SaveAction extends Action implements ISelectionListener,
 		if (nomFichierSortieXML != null) {
 			fichierSortieXML = new File(nomFichierSortieXML);
 			if (fichierSortieXML.exists()) {
-	//			shell.close();
 
 				Shell shell2 = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 

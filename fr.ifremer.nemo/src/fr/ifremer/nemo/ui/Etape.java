@@ -782,7 +782,7 @@ public class Etape {
 		boolean flagOK = false;
 		for (i = 0; i < size; i++) {
             Shell shell = new Shell();
-            String nomSection = Messages.getString(NemoSection.S_QCFLAG) + " - "                            //$NON-NLS-1$
+            String nomSection = Messages.getString(NemoSection.S_QCFLAG) + Global.SEP                            //$NON-NLS-1$
                 + EditStation.qcFlags.getTabFlagQC().getItems()[i].getText(1);
             AutoLine line = new AutoLine(shell, 1, true, MetaInData.FACULTATIF, false);
             line.setValue(EditStation.qcFlags.getTabFlagQC().getItems()[i].getText(2),

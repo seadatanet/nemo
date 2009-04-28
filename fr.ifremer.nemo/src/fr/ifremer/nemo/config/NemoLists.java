@@ -824,8 +824,7 @@ public class NemoLists implements Cloneable {
     public static void initParameters() {
 		XMLDecoder decoder = null;
 		try {
-			decoder = new XMLDecoder(new FileInputStream(
-					"resources/Parameters.xml")); //$NON-NLS-1$
+			decoder = new XMLDecoder(new FileInputStream(Intern.dir_resources + Intern.list_nemo_parameters));
 			_parameters = (List<WSParameter>) decoder.readObject();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -846,8 +845,7 @@ public class NemoLists implements Cloneable {
     public static void initSurveys() {
 		XMLDecoder decoder = null;
 		try {
-			decoder = new XMLDecoder(new FileInputStream(
-					"resources/Surveys.xml")); //$NON-NLS-1$
+			decoder = new XMLDecoder(new FileInputStream(Intern.dir_resources + Intern.list_nemo_survey));
 			_surveys = (List<WSSurveyDescription>) decoder.readObject();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -869,8 +867,8 @@ public class NemoLists implements Cloneable {
         String[] listNames = Intern.vocabLists.split(Global.COMMA);
         for (String listName : listNames){
             try {
-                String fileName = String.format("resources/Vocab/%s.xml", //$NON-NLS-1$
-                        listName);
+                String listVocab = Intern.dir_resources + Intern.dir_vocabLists + Global.SLASH + Global.POURCENT_S + Global.EXT_XML;
+                String fileName = String.format(listVocab, listName);
                 File file = new File(fileName);
                 if (file.exists()) {
                     decoder = new XMLDecoder(new FileInputStream(file));
@@ -899,7 +897,8 @@ public class NemoLists implements Cloneable {
         String[] mapNames = Intern.vocabMaps.split(Global.COMMA);
         for (String mapName : mapNames){
             try {
-                String fileName = String.format("resources/Vocab/%s.xml", mapName); //$NON-NLS-1$ 
+                String listVocab = Intern.dir_resources + Intern.dir_vocabLists + Global.SLASH + Global.POURCENT_S + Global.EXT_XML;
+                String fileName = String.format(listVocab, mapName);
                 File file = new File(fileName);
                 if (file.exists()) {
                     decoder = new XMLDecoder(new FileInputStream(file));
@@ -938,7 +937,6 @@ public class NemoLists implements Cloneable {
                     dataType.setSensor(true);
                 }
             }
-            //_dataTypes.add(dataType);
             _dataTypes.add(dataType);
         }
         
@@ -967,7 +965,7 @@ public class NemoLists implements Cloneable {
             EdmoHandler edmoH = new EdmoHandler();
 
             SAXParserFactory.newInstance().newSAXParser().parse(
-                    new FileInputStream("resources/Edmo.xml"), edmoH); //$NON-NLS-1$
+                    new FileInputStream(Intern.dir_resources + Intern.list_edmo), edmoH); 
 
             _edmo.putAll(edmoH.get_valeurs());
             edmoSize = _edmo.size();
@@ -975,25 +973,11 @@ public class NemoLists implements Cloneable {
             e.printStackTrace();
         }
         return edmoSize;
-    }
-
-//	/**
-//	 * 
-//	 * @param args
-//	 */
-//	public static void main(String[] args) {
-//		updateDataTypes();
-//		updateParameters();
-//		updateSurveys();
-//		updateVocabLists(null);
-//		updateEdmo();
-//	}
-    
+    }    
     
     /*
      *  Mise à jour des listes
      */
-    
     private static void initUpdatedLists(){
         updatedLists = new ArrayList<UpdateBean>();
         updatedLists.add(new UpdateBean(Intern.id_nemo));
@@ -1041,7 +1025,7 @@ public class NemoLists implements Cloneable {
 	 */
 	public static void updateParameters(IProgressMonitor monitor, NemoWS service, UpdateBean updateNemo) {
         
-        String listName = "Parameters.xml"; //$NON-NLS-1$
+        String listName = Intern.list_nemo_parameters; 
         int nbParameters = 0;
         UpdateBean updateParameters = new UpdateBean(listName, listName); 
         updateParameters.setNbTot(_parameters.size());
@@ -1069,7 +1053,7 @@ public class NemoLists implements Cloneable {
 
                 if (!monitor.isCanceled())
                 {
-                    File file = new java.io.File("resources/" + listName); //$NON-NLS-1$
+                    File file = new java.io.File(Intern.dir_resources + listName); 
                     stream = new FileOutputStream(file.toString());
                     encoder = new XMLEncoder(stream);
                     encoder.writeObject(_parameters);
@@ -1119,7 +1103,7 @@ public class NemoLists implements Cloneable {
 	 */
 	public static void updateSurveys(IProgressMonitor monitor, NemoWS service, UpdateBean updateNemo) {
 
-        String listName = "Surveys.xml"; //$NON-NLS-1$
+        String listName = Intern.list_nemo_survey;
         int nbSurveys = 0;
         UpdateBean updateSurveys = new UpdateBean(listName, listName); 
         updateSurveys.setNbTot(_surveys.size());
@@ -1147,7 +1131,7 @@ public class NemoLists implements Cloneable {
 
                 if (!monitor.isCanceled())
                 {
-        			File file = new java.io.File("resources/" + listName); //$NON-NLS-1$
+        			File file = new java.io.File(Intern.dir_resources + listName);
         			stream = new FileOutputStream(file.toString());
                     
         			encoder = new XMLEncoder(stream);
@@ -1310,11 +1294,11 @@ public class NemoLists implements Cloneable {
     			if (!error.value && table.value != null) {
 					_vocabList.put(list.getId(), table.value);
 
-					File dir = new java.io.File("resources/Vocab"); //$NON-NLS-1$
+					File dir = new java.io.File(Intern.dir_resources + Intern.dir_vocabLists);
 					if (!dir.exists()) {
 						dir.mkdirs();
 					}
-					File file = new java.io.File(dir, list.getId() + ".xml"); //$NON-NLS-1$
+					File file = new java.io.File(dir, list.getId() + Global.EXT_XML);
 					stream = new FileOutputStream(file.toString());
 
 					encoder = new XMLEncoder(stream);
@@ -1442,11 +1426,11 @@ public class NemoLists implements Cloneable {
     				if (table.value != null) {
     					_vocabMap.put(listName, table.value);
     
-    					File dir = new java.io.File("resources/Vocab"); //$NON-NLS-1$
+    					File dir = new java.io.File(Intern.dir_resources + Intern.dir_vocabLists);
     					if (!dir.exists()) {
     						dir.mkdirs();
     					}
-    					File file = new java.io.File(dir, listName + ".xml"); //$NON-NLS-1$
+    					File file = new java.io.File(dir, listName + Global.EXT_XML);
     					stream = new FileOutputStream(file.toString());
     
     					encoder = new XMLEncoder(stream);
@@ -1525,7 +1509,7 @@ public class NemoLists implements Cloneable {
                     monitor.subTask(Messages.getString(Intern.id_edmo));
                     
                     // écriture du nouveau fichier
-                    File file = new java.io.File("resources/Edmo.xml"); //$NON-NLS-1$
+                    File file = new java.io.File(Intern.dir_resources + Intern.list_edmo); 
     
                     stream = new FileOutputStream(file.toString());
                     OutputStreamWriter osw = new OutputStreamWriter(stream, "UTF-8"); //$NON-NLS-1$

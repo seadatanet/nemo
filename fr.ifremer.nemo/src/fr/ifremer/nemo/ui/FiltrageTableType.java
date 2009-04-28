@@ -108,10 +108,10 @@ public class FiltrageTableType {
 				for (int i = 0; i < TableWS_Survey.surveysWS.length; i++) {
 					TableWS_Survey.refsWS.add(TableWS_Survey.surveysWS[i]
 							.getReference()
-							+ " - " + TableWS_Survey.surveysWS[i].getName()); //$NON-NLS-1$
+							+ Global.SEP + TableWS_Survey.surveysWS[i].getName());
 					TableWS_Survey.listeFiltree.add(TableWS_Survey.surveysWS[i]
 							.getReference()
-							+ " - " + TableWS_Survey.surveysWS[i].getName()); //$NON-NLS-1$
+							+ Global.SEP + TableWS_Survey.surveysWS[i].getName());
 				}
 
 				// liste filtree initialisee e typesWS au depart
@@ -202,7 +202,7 @@ public class FiltrageTableType {
 										.getSelectionIndex();
 								String reference = TableWS_Survey.listeFiltree
 										.get(index);
-								Pattern p = Pattern.compile(" - "); //$NON-NLS-1$
+								Pattern p = Pattern.compile(Global.SEP);
 
 								String mots[] = p.split(reference);
 
@@ -316,7 +316,7 @@ public class FiltrageTableType {
 										String codeModele, codeActuel;
 
 										// split sur " - "
-										Pattern p = Pattern.compile(" - "); //$NON-NLS-1$
+										Pattern p = Pattern.compile(Global.SEP);
 										String mots[] = p.split(typeData
 												.getCode());
 										codeActuel = mots[0];

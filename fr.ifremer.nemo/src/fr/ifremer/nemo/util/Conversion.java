@@ -38,6 +38,20 @@ public enum Conversion
         }
         return debut;
     }
+
+    
+    public String getTemplate(){
+        String name = Global.EMPTY_STRING;
+        switch (this){
+            case MEDATLAS :
+                name = "medatlas.vtl";//$NON-NLS-1$
+                break;
+            default :
+                name = "odv.vtl";//$NON-NLS-1$
+                break;
+        }
+        return name;
+    }
     
     public ParameterModel[] getAddedParameterModels(){
         ParameterModel[]  addedParameters = null;

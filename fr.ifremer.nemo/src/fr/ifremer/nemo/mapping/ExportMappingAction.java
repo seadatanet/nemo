@@ -27,6 +27,7 @@ import org.eclipse.ui.actions.ActionFactory;
 
 import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 public class ExportMappingAction extends Action implements ISelectionListener,
@@ -67,7 +68,7 @@ public class ExportMappingAction extends Action implements ISelectionListener,
 
             dialog.setFileName(Configuration.getSingleton().getFichierMapping());
             String extensions[] = new String[1];
-            extensions[0] = "*.txt"; //$NON-NLS-1$
+            extensions[0] = Global.STAR + Global.EXT_TXT;
             dialog.setFilterExtensions(extensions);
             nomMapping = dialog.open();
 

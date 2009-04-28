@@ -25,7 +25,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 /**
- * Description: TODO
+ * Description: objet graphique contenant l'injection d'un texte ou d'un nombre de lignes
  * @author dboulang
  *
  */

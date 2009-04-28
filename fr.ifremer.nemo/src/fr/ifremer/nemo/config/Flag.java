@@ -4,6 +4,8 @@ import java.util.TreeMap;
 import java.util.Map.Entry;
 
 import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
 /**
@@ -28,8 +30,8 @@ public class Flag {
 	 * Constructeurs
 	 */
 	public Flag() {
-		_local = "";
-		_sdn = "";
+		_local = Global.EMPTY_STRING;
+		_sdn = Global.EMPTY_STRING;
 	}
 
 	public Flag(String local, String sdn) {
@@ -63,7 +65,7 @@ public class Flag {
 	 * @return String[]
 	 */
 	public static String[] flagSDN() {
-		CodeTableRecordType[] flags = NemoLists.getVocabList("L201");
+		CodeTableRecordType[] flags = NemoLists.getVocabList(Intern.list_flagsSDN);
 		String[] listFlags = new String[flags.length];
 
 		TreeMap<String, String> treeFlags = new TreeMap<String, String>();
@@ -75,7 +77,7 @@ public class Flag {
 
 		int i = 0;
 		for (Entry<String, String> currentEntry : treeFlags.entrySet()) {
-			listFlags[i] = currentEntry.getKey() + " - "
+			listFlags[i] = currentEntry.getKey() + Global.SEP
 					+ currentEntry.getValue();
 			i++;
 		}

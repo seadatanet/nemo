@@ -118,9 +118,8 @@ public class MappingDatabaseEditView extends FrameView {
         entityManager.getTransaction().begin();
 
 
-        //FIXME
-        //La bar de recherche s'initialise bizare, alors j'efface le contenu pour l'instant
-        jTextField3.setText("");
+        //FIXME - La bar de recherche s'initialise bizare, alors j'efface le contenu pour l'instant
+        jTextField3.setText(Global.EMPTY_STRING);
 
         setSaveNeeded(false);
     }

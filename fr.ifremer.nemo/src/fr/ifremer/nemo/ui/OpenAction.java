@@ -16,6 +16,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 
 import fr.ifremer.nemo.input.InputModel;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 public class OpenAction extends Action implements ISelectionListener,
@@ -62,7 +63,7 @@ public class OpenAction extends Action implements ISelectionListener,
 					+ "\\"); //$NON-NLS-1$
 			dialog.setText(Messages.dialog_openModel);
 			String extensions[] = new String[1];
-			extensions[0] = "*.xml"; //$NON-NLS-1$
+			extensions[0] = Global.STAR + Global.EXT_XML;
 			dialog.setFilterExtensions(extensions);
 			nomModele = dialog.open();
 

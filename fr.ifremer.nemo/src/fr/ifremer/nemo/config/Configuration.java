@@ -420,7 +420,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	 * 
 	 */
 	public void writeXMLOn(XMLOutputWriter a_Writer) {
-		a_Writer.openTag("NemoConfiguration"); 
+		a_Writer.openTag(Intern.fileName_config); 
 		writeXMLBodyOn(a_Writer);
 		a_Writer.closeTag();
 	}
@@ -823,8 +823,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			_singleton = new Configuration();
 			XMLBootstrapParser parser = new XMLBootstrapParser(_singleton);
 			try {
-				parser.parse(new FileInputStream(
-						"resources/NemoConfiguration.xml"), false); //$NON-NLS-1$
+				parser.parse(new FileInputStream(Intern.dir_resources + Intern.fileName_config + Global.EXT_XML), false);
 			} catch (FileNotFoundException e) {
 
 				e.printStackTrace();
@@ -838,8 +837,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
         _singleton = new Configuration();
         XMLBootstrapParser parser = new XMLBootstrapParser(_singleton);
         try {
-            parser.parse(new FileInputStream(
-                    "resources/NemoConfiguration_ini.xml"), false); //$NON-NLS-1$
+            parser.parse(new FileInputStream(Intern.dir_resources + Intern.fileName_configIni + Global.EXT_XML), false);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -861,7 +859,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		FileOutputStream stream = null;
 		try {
 			// creation nouveau dossier puis creation fichier config
-			File fich2 = new java.io.File("resources/NemoConfiguration.xml"); //$NON-NLS-1$
+			File fich2 = new java.io.File(Intern.dir_resources + Intern.fileName_config + Global.EXT_XML); 
 			stream = new FileOutputStream(fich2.toString());
 			writeXMLOn(stream);
 		} catch (Exception e) {
@@ -936,25 +934,21 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 
 	public String getFichierMapping() {
 		if (_fichierMapping.trim().equals(Global.EMPTY_STRING)) {
-			return "coupling.txt"; //$NON-NLS-1$
+			return (Intern.fileName_coupling + Global.EXT_TXT);
 		}
 		return _fichierMapping;
 	}
 	
 	public String getFichierMappingTxt() {
-		return _fichierMapping + ".txt"; //$NON-NLS-1$
+		return _fichierMapping + Global.EXT_TXT;
 	}
 
 	public void setFichierMapping(String mapping) {
 		_fichierMapping = mapping;
 	}
-
-//	public void setPredicate(String _predicate) {
-//		this._predicate = _predicate;
-//	}
 	
 	public String getSep() {
-		return "\t"; //$NON-NLS-1$
+		return Global.TAB; 
 	}
 	
 	public String getSdnHeader() {

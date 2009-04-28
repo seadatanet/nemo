@@ -17,8 +17,14 @@ public interface Global
     public static final String ET_CO = "&"; //$NON-NLS-1$
     
     public static final String NO = "N"; //$NON-NLS-1$
+    public static final String YES = "Y"; //$NON-NLS-1$
     public static final String PLUS = "+"; //$NON-NLS-1$
     public static final String MOINS = "-"; //$NON-NLS-1$
+    public static final String STAR = "*"; //$NON-NLS-1$
+
+    public static final String POURCENT_S = "%s"; //$NON-NLS-1$
+    public static final String EXT_XML = ".xml"; //$NON-NLS-1$
+    public static final String EXT_TXT = ".txt"; //$NON-NLS-1$
     
     // Types de fichier
     public static final String PROFILE = "profile"; //$NON-NLS-1$

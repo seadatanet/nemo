@@ -409,7 +409,7 @@ public class EditSurvey {
 					| SWT.APPLICATION_MODAL);
 			dialog.setText(Messages.edit_cruise_openXML); 
 			String extensions[] = new String[1];
-			extensions[0] = "*.xml"; //$NON-NLS-1$
+			extensions[0] = Global.STAR + Global.EXT_XML;
 			dialog.setFilterExtensions(extensions);
 			nomXML = dialog.open();
 			if (nomXML == null) {
