@@ -895,12 +895,22 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	public String getGlobalProfileQC() {
         
         String globalParameter = getGlobalParametersQC();
+        boolean missingValue = true;
+        
         for (int i = 0; i < globalParameter.length(); i++){
             String qc = globalParameter.substring(i, i+1);
-            if (!qc.equals(Global.ZERO) && qc.compareTo(_globalProfileQC) < 0)
+            
+            if (!qc.equals(Global.ZERO) 
+                    && !qc.equals(Global.DEFAULT_FLAG) 
+                    && qc.compareTo(_globalProfileQC) < 0)
                 _globalProfileQC = qc;
+            
+            if (!qc.equals(Global.DEFAULT_FLAG))
+                missingValue = false;
         }
+        
         if (_globalProfileQC.equals(Global.WORSE_FLAG)) _globalProfileQC = Global.ZERO;
+        if (missingValue) _globalProfileQC = Global.DEFAULT_FLAG;
 		return _globalProfileQC;
 	}
 

@@ -7,13 +7,11 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import com.ago.xml.Element2Field;
-import com.ago.xml.PathElementConsumer;
 import com.ago.xml.PathElementHandler;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.ws.WSParameter;
 
 /**
  * Class Parameter
@@ -51,6 +49,11 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
      */
     protected String _globalQC;
 
+    /**
+     * 
+     */
+    protected boolean _missingValue;
+
 	/**
 	 * Liste ordonnee des valeurs mesurees de ce parametre
 	 */
@@ -68,23 +71,23 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 		_fullName = Global.EMPTY_STRING;
 		_unit = Global.EMPTY_STRING;
         _globalQC = Global.WORSE_FLAG;
-		//_station = null;
+        _missingValue = true;
 		_values = new java.util.ArrayList<ParameterValue>();
 	}
 
-	/**
-	 * 
-	 * @param a_WSParameter
-	 */
-	public Parameter(WSParameter a_WSParameter) {
-		this();
-		_code = a_WSParameter.getCode();
-		_fullName = a_WSParameter.getName();
-		_unit = a_WSParameter.getUnit();
-		_format = a_WSParameter.getFormat();
-		_default = a_WSParameter.getDefaultValue();
-        _values = new java.util.ArrayList<ParameterValue>();
-	}
+//	/**
+//	 * 
+//	 * @param a_WSParameter
+//	 */
+//	public Parameter(WSParameter a_WSParameter) {
+//		this();
+//		_code = a_WSParameter.getCode();
+//		_fullName = a_WSParameter.getName();
+//		_unit = a_WSParameter.getUnit();
+//		_format = a_WSParameter.getFormat();
+//		_default = a_WSParameter.getDefaultValue();
+//        _values = new java.util.ArrayList<ParameterValue>();
+//	}
     
     /**
 	 * 
@@ -267,8 +270,14 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
     public Object clone() throws CloneNotSupportedException {
 		Parameter copy = null;
 		copy = (Parameter) super.clone();
+        copy._code = this._code;
+        copy._default = this._default;
+        copy._format = this._format;
+        copy._fullName = this._fullName;
+        copy._unit = this._unit;
+        copy._globalQC = this._globalQC;
+        copy._missingValue = this._missingValue;
 		copy._values = new java.util.ArrayList<ParameterValue>();
-		//copy._station = null;
 		return copy;
 	}
     
@@ -278,6 +287,7 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
         _format = Global.EMPTY_STRING;
         _fullName = Global.EMPTY_STRING;
         _unit = Global.EMPTY_STRING;
+        _globalQC = Global.WORSE_FLAG;
         release();
     }
     
@@ -423,10 +433,18 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
 		if (valuesIncludes(x))
 			return;
 		nocheckAddValue(x);
-		//x.setDefinition(this);
+        
         // globalQC
-        if (!x.getQc().equals(Global.ZERO) && x.getQc().compareTo(_globalQC) < 0)
+        if (!x.getQc().equals(Global.EMPTY_STRING) 
+                && !x.getQc().equals(Global.DEFAULT_FLAG) 
+                && !x.getQc().equals(Global.ZERO) 
+                && x.getQc().compareTo(_globalQC) < 0)
             _globalQC = x.getQc();
+        
+        // missingValue
+        if (!x.getQc().equals(Global.DEFAULT_FLAG)){
+            _missingValue = false;
+        }
 	}
 
 	/**
@@ -662,16 +680,10 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
      */
     public String getGlobalQC()
     {
+        if (_missingValue){
+            _globalQC = Global.DEFAULT_FLAG;
+        }
         return _globalQC;
-    }
-
-    /**
-     * Setter sur _globalQC.
-     * @param globalQC the globalQC to set
-     */
-    public void setGlobalQC(String globalQC)
-    {
-        _globalQC = globalQC;
     }
 
 } /* End of class: Parameter */
