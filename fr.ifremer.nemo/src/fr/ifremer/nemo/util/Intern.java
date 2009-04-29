@@ -37,6 +37,7 @@ public class Intern extends NLS {
     public static String list_typePlatform;
     public static String list_accesDonnees;
     public static String list_flagsSDN;
+    public static String list_BODCpdv;
     public static String list_nemo_parameters;
     public static String list_nemo_survey;
     public static String list_edmo;
@@ -69,7 +70,7 @@ public class Intern extends NLS {
     public static String xml_tag_start;
     public static String xml_tag_end;
     public static String xml_tag_close;
-    public static String mapping_subjet;
+    public static String mapping_subject;
     public static String mapping_objet;
     public static String mapping_unit;
     public static String file_mapping;
@@ -83,6 +84,8 @@ public class Intern extends NLS {
     public static String paramDEPH;
     
     public static String unknown;
+    public static String CDIResumeWriter_notSpecified;
+    public static String CDIResumeWriter_separateur;
 	
 	static {
 		// initialize resource bundle

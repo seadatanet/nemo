@@ -66,7 +66,7 @@ $configuration.getSep()$param.code [$param.unit]$configuration.getSep()$configur
 #set ($botDepth   = 0)
 #if ($station.bottomDepth.toString() != "NaN")#set ($botDepth = $station.bottomDepth)#end
 ##
-######if ( !$swtProcess.getOdv() || !$swtProcess.getMonoStation() || ( $swtProcess.getMonoStation() && $swtProcess.getStation() == $station ))
+#if ( !$swtProcess.isOdv() || !$swtProcess.isMonoStation() || ( $swtProcess.isMonoStation() && $swtProcess.getCurrentStation() == $station ))
 #set( $limit = $station.parametersAt(0).getModel().valuesSize() - 1 )
 #set ( $range = [0 .. $limit] )
 ##
@@ -106,4 +106,4 @@ $configuration.getSep()#if($param.valuesAt($i).getValue().toString() != $param.d
 #set( $result = $notifier.progress( $count ))
 #end
 #end
-######end
+#end

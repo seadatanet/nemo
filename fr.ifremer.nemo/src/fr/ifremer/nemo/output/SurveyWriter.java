@@ -26,6 +26,8 @@ import fr.ifremer.nemo.util.SizeBasedProgressNotifier;
  * @author Gerard BUNEL
  */
 public abstract class SurveyWriter implements Cloneable {
+    
+    protected VelocityContext context;
 
 	public SurveyWriter() {
 	}
@@ -86,18 +88,19 @@ public abstract class SurveyWriter implements Cloneable {
 			VelocityEngine ve = new VelocityEngine();
 			ve.setProperty(RuntimeConstants.RUNTIME_LOG_LOGSYSTEM, this);
 			ve.init();
-			VelocityContext context = new VelocityContext();
+			
+            context = new VelocityContext();
 			context.put("survey", a_Survey); //$NON-NLS-1$
             context.put("stationModel", StationModel.getSingleton()); //$NON-NLS-1$
 			context.put("formatter", Formatter.getSingleton()); //$NON-NLS-1$
 			context.put("nemoLists", NemoLists.class.newInstance()); //$NON-NLS-1$
 			context.put("configuration", Configuration.getSingleton()); //$NON-NLS-1$
             
-            reader = specificWriteSurvey(context, a_Conversion);
-            
-			SizeBasedProgressNotifier notifier = new SizeBasedProgressNotifier(
-					a_Survey.getValuesCount(), 0, a_Progress);
+			SizeBasedProgressNotifier notifier = new SizeBasedProgressNotifier(a_Survey.getValuesCount(), 0, a_Progress);
 			context.put("notifier", notifier); //$NON-NLS-1$
+            
+            reader = specificWriteSurvey(a_Conversion);
+            
 			ve.evaluate(context, a_Writer, a_Conversion.toString(), reader);
 		} 
         catch (Exception e) {
@@ -113,7 +116,7 @@ public abstract class SurveyWriter implements Cloneable {
 		}
 	}
     
-    public abstract InputStreamReader specificWriteSurvey(VelocityContext context,
-                                                          Conversion a_Conversion);
+    public abstract InputStreamReader specificWriteSurvey(Conversion a_Conversion)
+                                                throws Exception;
 
 } /* End of class: CommonSurveyWriter */

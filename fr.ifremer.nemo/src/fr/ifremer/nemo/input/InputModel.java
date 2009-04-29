@@ -19,6 +19,7 @@ import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.output.ProgressNotification;
+import fr.ifremer.nemo.util.Messages;
 
 /**
  * Class InputModel
@@ -403,6 +404,7 @@ public class InputModel implements Cloneable, PathElementHandler,
             if (!a_monitor.isCanceled()){
                 if (!converted)
                 {   
+                    System.out.println("--- " + Messages.SWTProcess_3);
 //                    long refDate = 0;
 //                    if (isRefDateBased()) {
 //                        TimeZone tz = TimeZone.getTimeZone("GMT"); //$NON-NLS-1$
@@ -425,6 +427,7 @@ public class InputModel implements Cloneable, PathElementHandler,
                 else
                 {
                     // la conversion en objet a déjà été réalisée
+                    System.out.println("--- already converted !");
                     survey = _media.getModel();
                 }
             }

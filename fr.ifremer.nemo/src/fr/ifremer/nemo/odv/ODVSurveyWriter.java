@@ -6,12 +6,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import org.apache.velocity.VelocityContext;
-
 import fr.ifremer.nemo.domain.Survey;
-import fr.ifremer.nemo.output.SurveyWriter;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.ProgressNotification;
+import fr.ifremer.nemo.output.SurveyWriter;
+import fr.ifremer.nemo.ui.SWTProcess;
 import fr.ifremer.nemo.util.Conversion;
 
 /**
@@ -25,6 +24,7 @@ import fr.ifremer.nemo.util.Conversion;
 public class ODVSurveyWriter extends SurveyWriter {
 
 	public ODVSurveyWriter() {
+        super();
 	}
 
 	/**
@@ -79,11 +79,12 @@ public class ODVSurveyWriter extends SurveyWriter {
     
 
     @Override
-    public InputStreamReader specificWriteSurvey(VelocityContext context,
-                                                 Conversion a_Conversion){
+    public InputStreamReader specificWriteSurvey(Conversion a_Conversion)
+                                    throws Exception{
         
         // possibité de rajouter des choses spécifiques au context
-        
+        context.put("swtProcess", SWTProcess.class.newInstance()); //$NON-NLS-1$
+                
         InputStream stream = getClass().getResourceAsStream(a_Conversion.getTemplate());
         return new InputStreamReader(stream);
     }

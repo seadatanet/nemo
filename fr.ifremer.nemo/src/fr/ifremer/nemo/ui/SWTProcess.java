@@ -30,21 +30,14 @@ public class SWTProcess implements IRunnableWithProgress {
 
     private SurveyWriter writer;
     
-    private Conversion formatConversion;
-    private boolean monoStation;
+    public static Conversion formatConversion;
+    public static boolean monoStation;
+    public static Station currentStation;
 
 	public static IProgressMonitor monitor2;
     
     private Mapping mapping;
     private MappingTable MappingTable = new MappingTable();    
-    
-    
-    public SWTProcess(Conversion a_formatConversion,
-                      boolean a_monoStation){
-        super();
-        formatConversion = a_formatConversion;
-        monoStation = a_monoStation;
-    }
     
 
 	@SuppressWarnings("unused")
@@ -53,7 +46,7 @@ public class SWTProcess implements IRunnableWithProgress {
     {
         
 	    try{
-            System.out.println("START at " + new Date());
+            System.out.println("Conversion START at " + new Date());
             
             monitor.beginTask(Messages.SWTProcess_1, IProgressMonitor.UNKNOWN);
             monitor2 = monitor;
@@ -62,16 +55,17 @@ public class SWTProcess implements IRunnableWithProgress {
                 runMultiProcess();
     		} 
             else {
+                System.out.println("Campagne");
                 runSingleProcess(Global.EMPTY_STRING, null, null);
     		}
             
             // Ecriture du resume CDI
             if (Configuration.getSingleton().isWriteCdi()){
-                monitor2.setTaskName("write CDI resume");
+                monitor2.setTaskName(Messages.SWTProcess_CDIresume);
                 CDIResumeWriter.getInstance().writeResume(formatConversion);
             }
 
-            System.out.println("END   at " + new Date() + "\n---------------");
+            System.out.println("Conversion END   at " + new Date() + "\n---------------");
             monitor.done();
         }
         catch (Exception e) {
@@ -80,12 +74,15 @@ public class SWTProcess implements IRunnableWithProgress {
 	}
     
     private void runMultiProcess() throws Exception{
-
-        if (monitor2.isCanceled())
-            throw new InterruptedException(Global.EMPTY_STRING); 
         
+        if (monitor2.isCanceled())
+            throw new InterruptedException(Global.EMPTY_STRING);
+        
+        String inputDirectory = ViewFile.nomRepertoire;
+        String outputDirectory = EditConversion.nomDossierSortie;
+   
         int numItem = 0;
-        String[] items = new File(ViewFile.nomRepertoire).list();
+        String[] items = new File(inputDirectory).list();
 
         for (String item : items) {
             numItem++;
@@ -95,13 +92,15 @@ public class SWTProcess implements IRunnableWithProgress {
             
 
             if (ViewFile.collectionCas1){
-                DataModel.dirSurvey.setDirectory(ViewFile.nomRepertoire + "/" + item); //$NON-NLS-1$
-                multiStationFileName = EditConversion.nomDossierSortie + "/" + item + Global.EXT_TXT; //$NON-NLS-1$
+                System.out.println("Collection Campagnes");
+                DataModel.dirSurvey.setDirectory(inputDirectory + "/" + item); //$NON-NLS-1$
+                multiStationFileName = outputDirectory + "/" + item + Global.EXT_TXT; //$NON-NLS-1$
                 surveyName = item;
             }
             else{
-                DataModel.singleSurvey.setFile(ViewFile.nomRepertoire + "/" + item); //$NON-NLS-1$
-                multiStationFileName = EditConversion.nomDossierSortie + "\\" + item.substring(0, item.lastIndexOf('.')) + Global.EXT_TXT;                 //$NON-NLS-1$
+                System.out.println("Collection Fichiers");
+                DataModel.singleSurvey.setFile(inputDirectory + "/" + item); //$NON-NLS-1$
+                multiStationFileName = outputDirectory + "\\" + item.substring(0, item.lastIndexOf('.')) + Global.EXT_TXT;                 //$NON-NLS-1$
             }
 
             runSingleProcess(msg, multiStationFileName, surveyName);       
@@ -118,14 +117,13 @@ public class SWTProcess implements IRunnableWithProgress {
         
         // CONVERSION EN OBJET
         if (!monitor2.isCanceled()){
-            System.out.println("START convertion at " + new Date());
-            executeConvert(msg, surveyName); 
-            System.out.println("END convertion at " + new Date());               
+            executeConvert(msg, surveyName);  
+            System.out.println("survey : " + survey.getReference() + " " + survey.getName());            
         }
 
         // ECRITURE DES FICHIERS
         if (!monitor2.isCanceled()){
-            System.out.println("START writing at " + new Date());
+//            System.out.println("START writing at " + new Date());
             monitor2.setTaskName(Messages.SWTProcess_4);
             writer = SurveyWriterFactory.createWriter(formatConversion);
             
@@ -138,7 +136,7 @@ public class SWTProcess implements IRunnableWithProgress {
                 }
                 writeMultisationFile(fileName, msg);
             }
-            System.out.println("END writing at " + new Date());
+//            System.out.println("END writing at " + new Date());
         }
         
         if ((!monitor2.isCanceled()) 
@@ -171,7 +169,6 @@ public class SWTProcess implements IRunnableWithProgress {
         notifier.progress(0);
         monitor2.setTaskName(Messages.SWTProcess_3 + msgComplement);
         
-        // TODO optimiser la conversion
         survey = DataModel.inputModel.convert(monitor2, notifier);
         
         if (surveyName != null)
@@ -192,7 +189,7 @@ public class SWTProcess implements IRunnableWithProgress {
                 i++;
                 monitor2.setTaskName(Messages.SWTProcess_4 + " : " + i + " / " + totalStations);  //$NON-NLS-1$//$NON-NLS-2$
                 String localCdiId = station.getLocalCdiId(survey.getReference(), formatConversion.toString());
-                
+                currentStation = station;
                 
                 EditConversion.nomFichierSortie = EditConversion.nomDossierSortie
                 + "\\" + localCdiId + Global.EXT_TXT; //$NON-NLS-1$
@@ -245,7 +242,21 @@ public class SWTProcess implements IRunnableWithProgress {
         }
     }
     
+    
+    
     public Conversion getFormatConversion(){
         return formatConversion;
+    }
+
+    public static Station getCurrentStation() {
+        return currentStation;
+    }
+
+    public static boolean isMonoStation() {
+        return monoStation;
+    }
+
+    public static boolean isOdv() {
+        return (formatConversion == Conversion.ODV);
     }
 }

@@ -1560,8 +1560,8 @@ public class NemoLists implements Cloneable {
             sdnMapping.append(Intern.getString(code));
         }catch (MissingResourceException e){
             String subjectURN = getURNSyntaxe(URNtype.subject, code, null, null);
-            String objectURN = getURNSyntaxe(URNtype.object, code, Intern.mapping_subjet, Intern.mapping_objet);
-            String unitURN = getURNSyntaxe(URNtype.units, code, Intern.mapping_subjet, Intern.mapping_unit);
+            String objectURN = getURNSyntaxe(URNtype.object, code, Intern.mapping_subject, Intern.mapping_objet);
+            String unitURN = getURNSyntaxe(URNtype.units, code, Intern.mapping_subject, Intern.mapping_unit);
 
             sdnMapping.append(subjectURN);
             sdnMapping.append(objectURN);

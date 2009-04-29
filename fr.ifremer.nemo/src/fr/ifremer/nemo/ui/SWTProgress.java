@@ -9,7 +9,6 @@ import fr.ifremer.nemo.output.ProgressNotification;
 import fr.ifremer.nemo.util.Conversion;
 
 public class SWTProgress extends ApplicationWindow {
-	public static SWTProcess swtProcess;
 
 	public static ProgressNotification notifier;
 
@@ -23,16 +22,18 @@ public class SWTProgress extends ApplicationWindow {
         if (ViewFile.radODV.getSelection()){
             formatConvert = Conversion.ODV;
         }
+        SWTProcess.formatConversion = formatConvert;
+        SWTProcess.monoStation = ViewFile.radMonoStation.getSelection();
 
 		try {
-			swtProcess = new SWTProcess(formatConvert, ViewFile.radMonoStation.getSelection());
 			new ProgressMonitorDialog(Application.display.getActiveShell())
-					.run(true, true, swtProcess);
+					.run(true, true, new SWTProcess());
 		} 
         catch (InvocationTargetException e) {
 
 		} 
         catch (InterruptedException e) {
+            System.out.println("Interrompu !\n------------");
 			throw e;
 		}
 

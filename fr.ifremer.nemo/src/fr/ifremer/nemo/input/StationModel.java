@@ -1657,7 +1657,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
                            IProgressMonitor a_monitor,
                            SizeBasedProgressNotifier a_Notifier) throws InterruptedException, Exception {
         
-        System.out.println("StationModel - convert : START at " + new Date());
+//        System.out.println("StationModel - convert : START at " + new Date());
 
         if (a_monitor.isCanceled()) {
             // demande d'annulation
@@ -1752,11 +1752,11 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
                             
             consumeFooter(a_Reader);
 
-            System.out.println("StationModel - convert : END   at " + new Date());
+//            System.out.println("StationModel - convert : END   at " + new Date());
             return station;
         }
 
-        System.out.println("StationModel - convert(null) : END   at " + new Date());
+//        System.out.println("StationModel - convert(null) : END   at " + new Date());
 		return null;
 	}
 
@@ -1826,10 +1826,10 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
                 }
                 
                 
-                if ((index == 0) || (index == 10000) || (index == 50000) || (index == 91000)){
-                    Date now = new Date();
-                    System.out.println("StationModel - convertParameters - line " + index + " : START at " + now + " " + now.getTime());
-                }
+//                if ((index == 0) || (index == 10000) || (index == 50000) || (index == 91000)){
+//                    Date now = new Date();
+//                    System.out.println("StationModel - convertParameters - line " + index + " : START at " + now + " " + now.getTime());
+//                }
                 
 
                 if (a_monitor.isCanceled()) {
@@ -1894,10 +1894,10 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
                 }
                 
                 
-                if ((index == 0) || (index == 10000) || (index == 50000) || (index == 91000)){
-                    Date now = new Date();
-                    System.out.println("StationModel - convertParameters - line " + index + " : END   at " + now + " " + now.getTime());
-                }
+//                if ((index == 0) || (index == 10000) || (index == 50000) || (index == 91000)){
+//                    Date now = new Date();
+//                    System.out.println("StationModel - convertParameters - line " + index + " : END   at " + now + " " + now.getTime());
+//                }
             }
 		} catch (NumberFormatException e) {
 			throw new NumberFormatException(e.getMessage()

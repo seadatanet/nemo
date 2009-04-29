@@ -27,7 +27,6 @@ import fr.ifremer.nemo.util.JulianDate;
 import fr.ifremer.nemo.util.LatitudeFormat;
 import fr.ifremer.nemo.util.LongitudeFormat;
 import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.nemo.ws.WSParameter;
 
 /**
  * Class ParameterModel
@@ -86,14 +85,14 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 		_inputDefault = a_Parameter.getDefault();
 	}
 
-	/**
-	 * 
-	 * @param a_WSParameter
-	 */
-	public ParameterModel(WSParameter a_WSParameter) {
-		this();
-		setModel(new Parameter(a_WSParameter));
-	}
+//	/**
+//	 * 
+//	 * @param a_WSParameter
+//	 */
+//	public ParameterModel(WSParameter a_WSParameter) {
+//		this();
+//		setModel(new Parameter(a_WSParameter));
+//	}
 
 	/**
 	 * 

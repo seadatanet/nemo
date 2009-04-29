@@ -273,12 +273,15 @@ public class Messages {
     public static String settings_web_edmo;
     public static String error_missing;
     public static String error_table;
+    
     public static String table_edmo;
     public static String table_dataTypes;
     public static String table_parameters;
     public static String table_ships;
     public static String table_datacenter;
     public static String table_region;
+    public static String table_survey;
+    
     public static String table_label_filter;
     public static String button_select;
     public static String error_table_dataTypes;
@@ -322,7 +325,6 @@ public class Messages {
     public static String CouplingTable_confirm;
     public static String CouplingTableAjout_localcdiid;
     public static String CouplingTableAjout_modus;
-    public static String CouplingTableAjout_modus3;
     public static String CouplingTableAjout_format;
     public static String CouplingTableAjout_filename;
     public static String CouplingTableAjout_1;
@@ -449,9 +451,8 @@ public class Messages {
     public static String SWTProcess_3;
     public static String SWTProcess_4;
     public static String SWTProcess_5;
+    public static String SWTProcess_CDIresume;
     public static String CDIResumeWriter_choixFichier;
-    public static String CDIResumeWriter_notSpecified;
-    public static String CDIResumeWriter_separateur;
     public static String CDIResumeWriter_idTitle;
     public static String CDIResumeWriter_idMessage;
     public static String CDIResumeWriter_configMessage;
