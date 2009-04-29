@@ -54,24 +54,31 @@ public class FiltrageTableType {
 
 		if (listeOuverte == 1) {
 			Utils.messageErreurAppend(Messages.error_table);
-		} else {
+		} 
+        else {
 			shell = new Shell(Application.display, SWT.BORDER | SWT.TITLE
 					| SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);
 			shell.setSize(300, 500);
 
 			if (tabOrigine.equals(Global.IDEDMO)) {
 				shell.setText(Messages.table_edmo);
-			} else if (tabOrigine.equals(Global.WSSURVEY)) {
-				shell.setText(Messages.table_edmo);
-			} else if (tabOrigine.equals(Global.DATATYPE)) {
+			} 
+            else if (tabOrigine.equals(Global.WSSURVEY)) {
+				shell.setText(Messages.table_survey);
+			} 
+            else if (tabOrigine.equals(Global.DATATYPE)) {
 				shell.setText(Messages.table_dataTypes);
-			} else if (tabOrigine.equals(Global.PARAMETER)) {
+			} 
+            else if (tabOrigine.equals(Global.PARAMETER)) {
 				shell.setText(Messages.table_parameters);
-			} else if (tabOrigine.equals(Global.SHIP)) {
+			} 
+            else if (tabOrigine.equals(Global.SHIP)) {
 				shell.setText(Messages.table_ships);
-			} else if (tabOrigine.equals(Global.DATACENTRE)) {
+			} 
+            else if (tabOrigine.equals(Global.DATACENTRE)) {
 				shell.setText(Messages.table_datacenter);
-			} else if (tabOrigine.equals(Global.REGION)) {
+			} 
+            else if (tabOrigine.equals(Global.REGION)) {
 				shell.setText(Messages.table_region);
 			}
 
@@ -83,16 +90,20 @@ public class FiltrageTableType {
 			if (tabOrigine.equals(Global.IDEDMO)) {
 				EdmoHandler.listeFiltree = new ArrayList<String>();
 				EdmoHandler.listeFiltree.addAll(EdmoHandler.listeOrigine);
-			} else if (tabOrigine.equals(Global.SHIP)) {
+			} 
+            else if (tabOrigine.equals(Global.SHIP)) {
 				NemoLists.listeFiltree = new ArrayList<String>();
 				NemoLists.listeFiltree.addAll(NemoLists.listeNavire);
-			} else if (tabOrigine.equals(Global.DATACENTRE)) {
+			} 
+            else if (tabOrigine.equals(Global.DATACENTRE)) {
 				NemoLists.listeFiltree = new ArrayList<String>();
 				NemoLists.listeFiltree.addAll(NemoLists.listeCentreDonnees);
-			} else if (tabOrigine.equals(Global.REGION)) {
+			} 
+            else if (tabOrigine.equals(Global.REGION)) {
 				NemoLists.listeFiltree = new ArrayList<String>();
 				NemoLists.listeFiltree.addAll(NemoLists.listeRegion);
-			} else {
+			} 
+            else {
 				// init des listes filtrees survey + data
 				TableDataSurvey.listeFiltree = new ArrayList<TypeSurvey>();
 
@@ -156,13 +167,17 @@ public class FiltrageTableType {
 			// affichage des tables
 			if (tabOrigine.equals(Global.IDEDMO)) {
 				creationTableEdmo();
-			} else if (tabOrigine.equals(Global.WSSURVEY)) {
+			} 
+            else if (tabOrigine.equals(Global.WSSURVEY)) {
 				creationTableWS_Survey();
-			} else if (tabOrigine.equals(Global.DATATYPE)) {
+			} 
+            else if (tabOrigine.equals(Global.DATATYPE)) {
 				creationTableSurvey();
-			} else if (tabOrigine.equals(Global.PARAMETER)) {
+			} 
+            else if (tabOrigine.equals(Global.PARAMETER)) {
 				creationTableData();
-			} else if (tabOrigine.equals(Global.SHIP) || 
+			} 
+            else if (tabOrigine.equals(Global.SHIP) || 
 					tabOrigine.equals(Global.DATACENTRE) || 
 					tabOrigine.equals(Global.REGION)) {
 				creationTableBODC();
