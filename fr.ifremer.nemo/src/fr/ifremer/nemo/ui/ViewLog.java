@@ -2,7 +2,8 @@ package fr.ifremer.nemo.ui;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
@@ -63,10 +64,10 @@ public class ViewLog extends ViewPart {
             String fileName = Intern.dir_resources + Intern.help_file + langue + Global.EXT_TXT;
             
             File file = new File(fileName);
-//            FileInputStream stream = new FileInputStream(file);
-//            InputStreamReader reader = new InputStreamReader(stream, "UTF-8"); //$NON-NLS-1$
-//            BufferedReader bufferedReader = new BufferedReader(reader);
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            FileInputStream stream = new FileInputStream(file);
+            InputStreamReader reader = new InputStreamReader(stream, "ISO-8859-1"); //$NON-NLS-1$
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            //BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             
             String readedLine = Global.EMPTY_STRING;
             int cpt = 0;
