@@ -157,9 +157,6 @@ public class MappingDatabaseEditView extends FrameView {
         errorMsg.append(Messages.CouplingTableAjout_modus);
     if (format == null || format.trim().equals("")) 
         errorMsg.append(Messages.CouplingTableAjout_format);
-    else if (modusText != null && modusText.substring(0, 1).equals(Mapping.MODUS_MONOSTATION) 
-            && format.equals(Conversion.MEDATLAS.toString())) 
-        errorMsg.append(Messages.CouplingTableAjout_modus3);
     if (filename == null || filename.trim().equals("")) 
         errorMsg.append(Messages.CouplingTableAjout_filename);
     
