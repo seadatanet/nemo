@@ -134,6 +134,7 @@ public class OptionsAction extends Action implements ISelectionListener,
             new Shell(Application.display, SWT.BORDER | SWT.TITLE
                     | SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);
 
+        shelloptions.setLocation(20, 20);
         shelloptions.setSize(600, 870);
         shelloptions.setText(Messages.settings_title);
         shelloptions.setLayout(new GridLayout());
