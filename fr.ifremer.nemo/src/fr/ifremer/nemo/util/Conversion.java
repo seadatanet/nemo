@@ -1,7 +1,7 @@
 package fr.ifremer.nemo.util;
 
 import fr.ifremer.nemo.input.ParameterModel;
-import fr.ifremer.nemo.ui.DataModel;
+import fr.ifremer.nemo.ui.edit.DataModel;
 
 /**
  * Description: Types de convertion

@@ -10,37 +10,41 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import fr.ifremer.nemo.ui.Application;
-import fr.ifremer.nemo.ui.EditDesc;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.ViewFile;
+import fr.ifremer.nemo.ui.edit.desc.EditDesc;
+import fr.ifremer.nemo.ui.view.ViewFile;
 
 public class Preformat {
 	
 	///////////////
 	// Attributs //
 	///////////////
+    
+    private static String PF = "\\PF_"; //$NON-NLS-1$
 	
-	// liste des fichiers
-	private static String[] _listeFichiers;
-	
-	// liste des repertoires
-	private static String[] _listeRepertoires;
-	
-	// fichier en entree
-	private static String _ficEntree;
+//	// liste des fichiers
+//	private static String[] _listeFichiers;
+//	
+//	// liste des repertoires
+//	private static String[] _listeRepertoires;
+//	
+//	// fichier en entree
+//	private static String _ficEntree;
 	
 	// repertoire en entree
 	private static String _repEntree;
 	
-	// repertoire en sortie
-	private static File _repSortie;
+//	// repertoire en sortie
+//	private static File _repSortie;
 	
 	// Nombre de lignes d'en-tete de fichier
 	private static int _enTeteFichier;
 	
 	// Nombre de lignes d'en-tete de station
 	private static int _lgEnTeteStation;
-    private static String _enTeteStation;
+    private static boolean _isPattern;
+    private static int _enTeteStation;
+    private static String _enTeteStationPattern;
     private static int _lgBeforeData;
 	
 	// Indicateur de fin de station
@@ -139,26 +143,33 @@ public class Preformat {
 	
 	
 	public static void run() throws IOException {
-		Double pourcentEtape1 = 0d;
-		Double pourcentEtape2 = 0d;
-		int nbFic = 0;
-		
+//		Double pourcentEtape1 = 0d;
+//		Double pourcentEtape2 = 0d;
+//		int nbFic = 0;
+
+        _repEntree = Global.EMPTY_STRING;
+        String[] listeFichiers;
+        File repSortie;
+        
 		Utils.messageOK(Messages.progress_file_preformat);
 				
 		_nbColonne = 1;	
 		_preformatOK = false;
 		
-		if (ViewFile.radioFichier.getSelection()) {
-			_ficEntree = ViewFile.nomFichier.substring(ViewFile.nomFichier.lastIndexOf('\\')+1);
-			_repEntree = ViewFile.nomFichier.substring(0,ViewFile.nomFichier.lastIndexOf('\\'));
-		} else {
-			_ficEntree = Global.EMPTY_STRING;
-			_repEntree = ViewFile.nomRepertoire;
-		}
+//		if (ViewFile.radioFichier.getSelection()) {
+//			_ficEntree = ViewFile.nomFichier.substring(ViewFile.nomFichier.lastIndexOf('\\')+1);
+//			_repEntree = ViewFile.nomFichier.substring(0,ViewFile.nomFichier.lastIndexOf('\\'));
+//		} else {
+//			_ficEntree = Global.EMPTY_STRING;
+//			_repEntree = ViewFile.nomRepertoire;
+//		}
 				
-		_enTeteFichier = Integer.parseInt(EditDesc.sectionEnteteFichier.getNumberValue());
-		_enTeteStation = EditDesc.sectionEnteteStation.getTextValue();
-        _lgBeforeData = Integer.parseInt(EditDesc.sectionEnteteStation.getNumberValue());
+		_enTeteFichier = Integer.parseInt(EditDesc.sectionEnteteFichier.getValue());
+        
+        _isPattern = !EditDesc.sectionEnteteStation.isSelectNumber();
+        _enTeteStation = Integer.parseInt(EditDesc.sectionEnteteStation.getValue());
+        _enTeteStationPattern = EditDesc.sectionEnteteStation.getIndicatorText();
+        _lgBeforeData = Integer.parseInt(EditDesc.sectionEnteteStation.getNbLinesBeforeData());
         
 	
 		if (EditDesc.sectionRuptureDonnees.radEOFselected()) {
@@ -168,7 +179,7 @@ public class Preformat {
 		} else if (EditDesc.sectionRuptureDonnees.radNextStationSelected()) {
             
         } else if (EditDesc.sectionRuptureDonnees.radManuelSelected()) {
-			_indicateur = EditDesc.sectionRuptureDonnees.getTextValue();
+			_indicateur = EditDesc.sectionRuptureDonnees.getValue();
 		}
         
 				
@@ -185,84 +196,97 @@ public class Preformat {
 		}		
 		
 		if (ViewFile.radioFichier.getSelection()) {
-            /////////////////////////////////////////
-            // Recuperation du nombres de colonnes //
-            /////////////////////////////////////////
-            nombreColonnes(_ficEntree);
-            _maxEntier = new int[_nbColonne];
-            _maxDecimale = new int[_nbColonne];
-            _nbEntier = new int[_nbColonne];
-            _nbDecimale = new int[_nbColonne];
-            _colonne = new String[_nbColonne];
 
-            ///////////////////////////////////////////////////
-            // Recuperation des entiers et decimales maximum //
-            ///////////////////////////////////////////////////
-			getMax(_ficEntree);
+            String ficEntree = ViewFile.nomFichier.substring(ViewFile.nomFichier.lastIndexOf('\\')+1);
+            listeFichiers = new String[]{ficEntree};
+            _repEntree = ViewFile.nomFichier.substring(0,ViewFile.nomFichier.lastIndexOf('\\'));
             
-            pourcentEtape1 = 100d;
+            processPreformat(listeFichiers, _repEntree);
             
-            ///////////////////////////////////////
-            // Ecriture des fichiers preformates //
-            ///////////////////////////////////////
-            ecritureFichier(_ficEntree, _repEntree);
-
-            pourcentEtape2 = 100d;      
-            refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
-            ViewFile.nomFichier = _repEntree + "\\PF_" + _ficEntree; //$NON-NLS-1$
+//            /////////////////////////////////////////
+//            // Recuperation du nombres de colonnes //
+//            /////////////////////////////////////////
+//            nombreColonnes(_ficEntree);
+//            _maxEntier = new int[_nbColonne];
+//            _maxDecimale = new int[_nbColonne];
+//            _nbEntier = new int[_nbColonne];
+//            _nbDecimale = new int[_nbColonne];
+//            _colonne = new String[_nbColonne];
+//
+//            ///////////////////////////////////////////////////
+//            // Recuperation des entiers et decimales maximum //
+//            ///////////////////////////////////////////////////
+//			getMax(_ficEntree);
+//            
+//            pourcentEtape1 = 100d;
+//            
+//            ///////////////////////////////////////
+//            // Ecriture des fichiers preformates //
+//            ///////////////////////////////////////
+//            ecritureFichier(_ficEntree, _repEntree);
+//
+//            pourcentEtape2 = 100d;      
+//            refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
+            
+            ViewFile.nomFichier = _repEntree + PF + ficEntree;
             ViewFile.fileLoaded = true;
 
             Utils.insertTextFich(ViewFile.nomFichier, ViewFile.styledTextCampagne, false);
             ViewFile.textAreaDescription.setText(Utils.texteBrut);
             
-		} else if (ViewFile.radioCollectCas1.getSelection()) {
-            _listeRepertoires = new File(ViewFile.nomRepertoire).list();
+		} 
+        else if (ViewFile.radioCollectCas1.getSelection()) {
+            
+            
+            File repCollection = new File(ViewFile.nomRepertoire);            
+            String[] listeRepertoires = repCollection.list();
 			
-			for (String repertoire : _listeRepertoires) {
-				_repEntree = ViewFile.nomRepertoire+"\\"+repertoire; //$NON-NLS-1$
-				_listeFichiers = new File(_repEntree).list();
-				nbFic = _listeFichiers.length;
+			for (String repertoire : listeRepertoires) {
+				_repEntree = repCollection.getAbsolutePath() + File.separator + repertoire;
+				listeFichiers = new File(_repEntree).list();
                 
-                _repSortie = new File(_repEntree.substring(0,_repEntree.lastIndexOf('\\'))
-                    +"\\PF_"+_repEntree.substring(_repEntree.lastIndexOf('\\')+1)); //$NON-NLS-1$
-                if (!_repSortie.exists()) {
-                    _repSortie.mkdirs(); 
+                repSortie = new File(repCollection.getParent() + File.separator + PF + repCollection.getName());
+                
+                if (! repSortie.exists()) {
+                     repSortie.mkdirs(); 
                 }
                 
                 // Creation du repertoire pour les fichiers preformates
-                File repPreformat = new File(_repSortie.getAbsolutePath()+"\\PF_"+_repEntree.substring(_repEntree.lastIndexOf('\\')+1)); //$NON-NLS-1$
+                File repPreformat = new File(repSortie.getAbsolutePath() + PF + repertoire);
                 if (!repPreformat.exists()) {
                     repPreformat.mkdirs();
                 }
+                
+                processPreformat(listeFichiers, repPreformat.getAbsolutePath());
 				
-				for (String fichier : _listeFichiers) {
-                    /////////////////////////////////////////
-                    // Recuperation du nombres de colonnes //
-                    /////////////////////////////////////////
-                    nombreColonnes(fichier);
-                    _maxEntier = new int[_nbColonne];
-                    _maxDecimale = new int[_nbColonne];
-                    _nbEntier = new int[_nbColonne];
-                    _nbDecimale = new int[_nbColonne];
-                    _colonne = new String[_nbColonne];
-
-                    ///////////////////////////////////////////////////
-                    // Recuperation des entiers et decimales maximum //
-                    ///////////////////////////////////////////////////
-					pourcentEtape1 += 100d / nbFic;
-					refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
-					getMax(fichier);
-                    
-                    pourcentEtape1 = 100d;
-                    
-                    ///////////////////////////////////////
-                    // Ecriture des fichiers preformates //
-                    ///////////////////////////////////////
-                    ecritureFichier(fichier, repPreformat.getAbsolutePath());
-				}
-                pourcentEtape2 = 100d;      
-                refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
-                ViewFile.nomRepertoire = _repSortie.getAbsolutePath();
+//				for (String fichier : _listeFichiers) {
+//                    /////////////////////////////////////////
+//                    // Recuperation du nombres de colonnes //
+//                    /////////////////////////////////////////
+//                    nombreColonnes(fichier);
+//                    _maxEntier = new int[_nbColonne];
+//                    _maxDecimale = new int[_nbColonne];
+//                    _nbEntier = new int[_nbColonne];
+//                    _nbDecimale = new int[_nbColonne];
+//                    _colonne = new String[_nbColonne];
+//
+//                    ///////////////////////////////////////////////////
+//                    // Recuperation des entiers et decimales maximum //
+//                    ///////////////////////////////////////////////////
+//					pourcentEtape1 += 100d / nbFic;
+//					refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
+//					getMax(fichier);
+//                    
+//                    pourcentEtape1 = 100d;
+//                    
+//                    ///////////////////////////////////////
+//                    // Ecriture des fichiers preformates //
+//                    ///////////////////////////////////////
+//                    ecritureFichier(fichier, repPreformat.getAbsolutePath());
+//				}
+//                pourcentEtape2 = 100d;      
+//                refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
+                ViewFile.nomRepertoire =  repSortie.getAbsolutePath();
                 ViewFile.fileLoaded = true;
                 
                 if (Utils.findFilesCollectCas1(ViewFile.nomRepertoire, true)) {
@@ -270,51 +294,60 @@ public class Preformat {
                             .setText(Utils.texteBrut);
                 }
 			}
-		} else {
-            _listeFichiers = new File(ViewFile.nomRepertoire).list();
+		} 
+        else {
             _repEntree = ViewFile.nomRepertoire;
-			nbFic = _listeFichiers.length;
+            listeFichiers = new File(_repEntree).list();
+            
             // Creation du repertoire pour les fichiers preformates
             // au meme niveau que le repertoire d'entree
             // en recopiant le nom avec le prefixe "PF_"
-            _repSortie = new File(ViewFile.nomRepertoire.substring(0,ViewFile.nomRepertoire.lastIndexOf('\\'))
-                    +"\\PF_"+ViewFile.nomRepertoire.substring(ViewFile.nomRepertoire.lastIndexOf('\\')+1)); //$NON-NLS-1$
-            if (!_repSortie.exists()) {
-                _repSortie.mkdirs(); 
+            repSortie = new File(ViewFile.nomRepertoire.substring(0,ViewFile.nomRepertoire.lastIndexOf('\\'))
+                    + PF + ViewFile.nomRepertoire.substring(ViewFile.nomRepertoire.lastIndexOf('\\')+1));
+            if (!repSortie.exists()) {
+               repSortie.mkdirs(); 
             }
             
-			for (String fichier : _listeFichiers) {
-                /////////////////////////////////////////
-                // Recuperation du nombres de colonnes //
-                /////////////////////////////////////////
-                nombreColonnes(fichier);
-                _maxEntier = new int[_nbColonne];
-                _maxDecimale = new int[_nbColonne];
-                _nbEntier = new int[_nbColonne];
-                _nbDecimale = new int[_nbColonne];
-                _colonne = new String[_nbColonne];
-
-                ///////////////////////////////////////////////////
-                // Recuperation des entiers et decimales maximum //
-                ///////////////////////////////////////////////////
-				pourcentEtape1 += 100d / nbFic;
-				refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
-				getMax(fichier);
-                
-                pourcentEtape1 = 100d;
-                
-                ///////////////////////////////////////
-                // Ecriture des fichiers preformates //
-                ///////////////////////////////////////
-                pourcentEtape2 += 100d / nbFic;
-                refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
-                ecritureFichier(fichier, _repSortie.getAbsolutePath());
-                
-			}
-            pourcentEtape2 = 100d;      
-            refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
-            ViewFile.nomRepertoire = _repSortie.getAbsolutePath();
+            processPreformat(listeFichiers, repSortie.getAbsolutePath());
+            
+//			for (String fichier : _listeFichiers) {
+//                /////////////////////////////////////////
+//                // Recuperation du nombres de colonnes //
+//                /////////////////////////////////////////
+//                nombreColonnes(fichier);
+//			}
+//			_maxEntier = new int[_nbColonne];
+//			_maxDecimale = new int[_nbColonne];
+//			_nbEntier = new int[_nbColonne];
+//			_nbDecimale = new int[_nbColonne];
+//			_colonne = new String[_nbColonne];
+//            
+//            for (String fichier : _listeFichiers){
+//                ///////////////////////////////////////////////////
+//                // Recuperation des entiers et decimales maximum //
+//                ///////////////////////////////////////////////////
+//                pourcentEtape1 += 100d / nbFic;
+//                refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
+//                getMax(fichier);
+//            }
+//            
+//			pourcentEtape1 = 100d;
+//            
+//            for (String fichier : _listeFichiers){
+//                ///////////////////////////////////////
+//                // Ecriture des fichiers preformates //
+//                ///////////////////////////////////////
+//                pourcentEtape2 += 100d / nbFic;
+//                refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
+//                ecritureFichier(fichier, _repSortie.getAbsolutePath());
+//            }
+//            
+//            pourcentEtape2 = 100d;      
+//            refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
+            
+            ViewFile.nomRepertoire = repSortie.getAbsolutePath();
             ViewFile.fileLoaded = true;
+            
             if (Utils.findFiles(ViewFile.nomRepertoire, false)) {
                 ViewFile.textAreaDescription
                         .setText(Utils.texteBrut);
@@ -322,6 +355,50 @@ public class Preformat {
 		}
 		setPreformat(true);
 	}
+    
+    private static void processPreformat(String[] lstFichiers,
+                                         String repSortie) throws IOException{
+        
+        Double pourcentEtape1 = 0d;
+        Double pourcentEtape2 = 0d;
+        
+        int nbFic = lstFichiers.length;
+        
+        /////////////////////////////////////////
+        // Recuperation du nombres de colonnes //
+        /////////////////////////////////////////
+        for (String fichier : lstFichiers) {
+            nombreColonnes(fichier);
+        }
+        _maxEntier = new int[_nbColonne];
+        _maxDecimale = new int[_nbColonne];
+        _nbEntier = new int[_nbColonne];
+        _nbDecimale = new int[_nbColonne];
+        _colonne = new String[_nbColonne];
+        
+        ///////////////////////////////////////////////////
+        // Recuperation des entiers et decimales maximum //
+        ///////////////////////////////////////////////////
+        for (String fichier : lstFichiers){
+            pourcentEtape1 += 100d / nbFic;
+            refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
+            getMax(fichier);
+        }
+        
+        pourcentEtape1 = 100d;
+        
+        ///////////////////////////////////////
+        // Ecriture des fichiers preformates //
+        ///////////////////////////////////////
+        for (String fichier : lstFichiers){
+            pourcentEtape2 += 100d / nbFic;
+            refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
+            ecritureFichier(fichier, repSortie);
+        }
+        
+        pourcentEtape2 = 100d;      
+        refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
+    }
 	
 	private static void analyseLigne(String ligneLue) {
 		int i;
@@ -379,23 +456,30 @@ public class Preformat {
             int endStationHeader = 0;
 			while ((ligneLue = lecteurAvecBuffer.readLine()) != null) {
                 _lgEnTeteStation++;
-                if (!(_enTeteStation.equals(Global.EMPTY_STRING) ||  _lgBeforeData == 0)){
-                    if (!_enTeteStation.equals(Global.EMPTY_STRING) 
-                            && ligneLue.startsWith(_enTeteStation) 
-                            && _lgEnTeteStation > _enTeteFichier){
-                        endStationHeader = _lgEnTeteStation + _lgBeforeData;
+                if (_isPattern){
+                    if (!(_enTeteStationPattern.equals(Global.EMPTY_STRING) &&  _lgBeforeData == 0)){
+                        if (!_enTeteStationPattern.equals(Global.EMPTY_STRING) 
+                                && ligneLue.startsWith(_enTeteStationPattern) 
+                                && _lgEnTeteStation > _enTeteFichier){
+                            endStationHeader = _lgEnTeteStation + _lgBeforeData;
+                        }
+                        if (_enTeteStationPattern.equals(Global.EMPTY_STRING)){
+                            endStationHeader = _lgBeforeData + _enTeteFichier;
+                        }
+                        if (_lgEnTeteStation > _enTeteFichier
+                                && endStationHeader > 0
+                                && _lgEnTeteStation == endStationHeader){
+                            break;
+                        }
                     }
-                    if (_enTeteStation.equals(Global.EMPTY_STRING)){
-                        endStationHeader = _lgBeforeData;
-                    }
-                    if (_lgEnTeteStation > _enTeteFichier
-                            && endStationHeader > 0
-                            && _lgEnTeteStation == endStationHeader){
+                    else if (_lgEnTeteStation == _enTeteFichier){
                         break;
                     }
-                    
-                }else if (_lgEnTeteStation == _enTeteFichier){
-                    break;
+                }
+                else{
+                    if (_lgEnTeteStation == _enTeteFichier + _enTeteStation) {
+                        break;
+                    }
                 }
 			}
 			
@@ -478,7 +562,7 @@ public class Preformat {
 		int i, j;
 
 		PrintWriter fichPreformat = new PrintWriter(new BufferedWriter(
-				new FileWriter(repSortie + "\\PF_" + ficEntree))); //$NON-NLS-1$
+				new FileWriter(repSortie + PF + ficEntree)));
 		numLigne = 0;
 		lecteurAvecBuffer = new BufferedReader(new FileReader(_repEntree
 				+ "\\" + ficEntree)); //$NON-NLS-1$

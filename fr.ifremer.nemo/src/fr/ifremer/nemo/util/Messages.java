@@ -120,7 +120,11 @@ public class Messages {
     public static String edit_file_title;
     public static String edit_file_enteteFichier;
     public static String edit_file_enteteStation;
-    public static String edit_file_interLines;
+    public static String edit_file_enteteStation_radNumber;
+    public static String edit_file_enteteStation_setter;
+    public static String edit_file_enteteStation_radIndicator;
+    public static String edit_file_enteteStation_indicator;
+    public static String edit_file_enteteStation_linesBeforeData;
     public static String edit_file_finStation;
     public static String edit_file_indicFinDonnees;
     public static String edit_file_idcEOF;

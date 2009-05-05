@@ -12,6 +12,8 @@ import org.eclipse.osgi.util.NLS;
 public class Intern extends NLS {
 	private static final String BUNDLE_NAME = "fr.ifremer.nemo.util.intern"; //$NON-NLS-1$
 
+    public static String application_title;
+    
     public static String dir_resources;
     public static String dir_vocabLists;
     

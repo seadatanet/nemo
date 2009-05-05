@@ -2,6 +2,10 @@ package fr.ifremer.nemo.util;
 
 import java.text.ParseException;
 
+import fr.ifremer.nemo.util.format.DateTimeFormat;
+import fr.ifremer.nemo.util.format.LatitudeFormat;
+import fr.ifremer.nemo.util.format.LongitudeFormat;
+
 /**
  * Class Formatter
  * 
