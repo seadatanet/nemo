@@ -848,7 +848,7 @@ public class OptionsAction extends Action implements ISelectionListener,
     {
         compo = new Composite(top, SWT.NONE);
 
-//        GridLayoutFactory.fillDefaults().numColumns(3).applyTo(compo);
+        //GridLayoutFactory.fillDefaults().numColumns(3).applyTo(compo);
         GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo);
         GridDataFactory.fillDefaults().grab(true, false).align(SWT.CENTER,
             SWT.NONE).applyTo(compo);
@@ -1007,7 +1007,6 @@ public class OptionsAction extends Action implements ISelectionListener,
     protected void selectDefaultFlagsTab(String defaultCode){
         setDefaultCode(defaultCode);
         // Mise en gras du flagtable par defaut
-
         Font normal = new Font(Application.display, Global.EMPTY_STRING, 8, SWT.NORMAL);
         Font bold = new Font(Application.display, Global.EMPTY_STRING, 8, SWT.BOLD);
 
@@ -1133,8 +1132,6 @@ public class OptionsAction extends Action implements ISelectionListener,
 
                         combo.setText(item.getText(column));
                         combo.setForeground(item.getForeground());
-                        // combo.selectAll();
-                        // combo.setFocus();
                         editor.minimumWidth = combo.getBounds().width;
 
                         editor.setEditor(combo, item, column);
@@ -1429,14 +1426,6 @@ public class OptionsAction extends Action implements ISelectionListener,
             TableItem item = new TableItem(tabFlagTable, SWT.NONE);
             item.setText(0, flagTables.get(i).getCode());
             item.setText(1, flagTables.get(i).getLibelle());
-
-//            // Mise en gras du flagtable par defaut
-//            if (flagTables.get(i).getCode().equals(Utils.configuration.getDefaultCode()))
-//            {
-//                setDefaultCode(flagTables.get(i).getCode());
-//                Font font = new Font(Application.display, Global.EMPTY_STRING, 8, SWT.BOLD);
-//                item.setFont(font);
-//            }
         }
 
         if (flagTables.size() > 0)

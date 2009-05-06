@@ -994,8 +994,10 @@ public class Utils {
 	}
     
     public static void restoreDefaultConfig(){
-        Configuration.releaseSingleton();
-        configuration = Configuration.restoreDefault();
+        // Restoration de la configuration initiale
+        configuration = Configuration.getSingleton().restoreDefault();
+        // Enregistrement de la configuration
+        configuration.save();
     }
     
 
@@ -1062,26 +1064,6 @@ public class Utils {
         configuration.setDateISO(OptionsAction.radDateISO.getSelection());
 
 		// Flags qualite
-		// int i, j;
-		// ArrayList<FlagTable> flagTables = new ArrayList<FlagTable>();
-		//		
-		// for (i = 0; i < 4; i++) {
-		// FlagTable tmpTable = new FlagTable();
-		// tmpTable.setCode("C" + i);
-		// tmpTable.setLibelle("L" + i);
-		//			
-		// ArrayList<Flag> flags = new ArrayList<Flag>();
-		// for (j = 0; j < 10; j++) {
-		// Flag tmpFlag = new Flag();
-		// tmpFlag.setLocal("loc" + i + "" + j);
-		// tmpFlag.setSdn("sdn" + i + "" + j);
-		// flags.add(tmpFlag);
-		// }
-		// tmpTable.setFlags(flags);
-		//			
-		// flagTables.add(tmpTable);
-		// }
-		// configuration.setFlagTables(flagTables);
 		configuration.setDefaultCode(OptionsAction.getDefaultCode());
 		ArrayList<FlagTable> flagTables = new ArrayList<FlagTable>();
 		for (int i = 0; i < OptionsAction.getFlagTables().size(); i++) {

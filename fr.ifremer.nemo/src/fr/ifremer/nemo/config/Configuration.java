@@ -828,13 +828,21 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		return _singleton;
 	}
     
-    public static Configuration restoreDefault(){
+    public Configuration restoreDefault(){
+        // sauvegarde des listes BODC
+        HashMap<String, BODCList> bkVocabLists = new HashMap<String, BODCList>();
+        bkVocabLists.putAll(_vocabLists);
+        
         releaseSingleton();
         _singleton = new Configuration();
         XMLBootstrapParser parser = new XMLBootstrapParser(_singleton);
         try {
             parser.parse(new FileInputStream(Intern.dir_resources + Intern.fileName_configIni + Global.EXT_XML), false);
-        } catch (FileNotFoundException e) {
+            _vocabLists.clear();
+            _vocabLists.putAll(bkVocabLists);
+            _singleton.setVocabLists(_vocabLists);
+        } 
+        catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         return _singleton;
