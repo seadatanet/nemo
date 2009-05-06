@@ -61,6 +61,8 @@ public class Preformat {
 	
 	// Preformatage reussi
 	private static boolean _preformatOK;
+    
+    public static boolean space;
 
 	
 	//////////////
@@ -129,8 +131,8 @@ public class Preformat {
 	
 	public static void run() throws IOException {
 
+        space = false;
         _repEntree = Global.EMPTY_STRING;
-        //String[] listeFichiers;
         File repSortie;
         
 		Utils.messageOK(Messages.progress_file_preformat);
@@ -506,6 +508,7 @@ public class Preformat {
 						while (_colonne[i].length() < _maxEntier[i]
 								+ _maxDecimale[i] + 1) {
 							_colonne[i] = Global.SPACE + _colonne[i];
+                            if (i == 0) space = true;
 						}
 
 						fichPreformat.print(_colonne[i] + Global.SPACE);

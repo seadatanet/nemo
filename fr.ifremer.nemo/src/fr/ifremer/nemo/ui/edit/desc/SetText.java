@@ -193,7 +193,7 @@ public class SetText implements UIobject
     {
         boolean ok = true;
         if (inText){
-            if (text.getText().equals(Global.EMPTY_STRING)) { 
+            if (text.getText().trim().equals(Global.EMPTY_STRING)) { 
                 ok = false;
             }
         }else{            

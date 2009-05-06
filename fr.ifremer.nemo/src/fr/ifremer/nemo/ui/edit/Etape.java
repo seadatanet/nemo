@@ -52,6 +52,10 @@ public class Etape {
 		if (ViewFile.chkSeparateur.getSelection() && !Preformat.isPreformat()) {
 			try {
 				Preformat.run();
+                if (Preformat.space && EditDesc.sectionRuptureDonnees.radNextStationSelected()){
+                    EditDesc.sectionRuptureDonnees.setStartStationIndicator(
+                        Global.SPACE + EditDesc.sectionRuptureDonnees.getStartStationIndicator());
+                }
 			} catch (Exception ex) {
                 ok = ok && false;
 				Utils.messageErreurAppend(Messages.error);
@@ -172,17 +176,17 @@ public class Etape {
 				}
 			}
             
-            // TODO ? vérif au moins 1 "sensor"
-//            boolean atLeastOne = false;
-//            for (int i = 0; i < taille; i++) {
-//                if (TableDataSurvey.types.get(i).getSensor()){
-//                    atLeastOne = true;
-//                }
-//            }
-//            if (!atLeastOne){
-//                Utils.messageErreur(Messages.Etape_130);
-//                ok = false;
-//            }
+            // vérification au moins 1 "sensor"
+            boolean atLeastOne = false;
+            for (int i = 0; i < taille; i++) {
+                if (TableDataSurvey.types.get(i).getSensor()){
+                    atLeastOne = true;
+                }
+            }
+            if (!atLeastOne){
+                Utils.messageErreur(Messages.Etape_130);
+                ok = false;
+            }
 		}
 
         // FAE 1143 : la référence campagne doit être == 13 caractères pour MEDATLAS
@@ -805,7 +809,7 @@ public class Etape {
 		boolean flagOK = false;
 		for (i = 0; i < size; i++) {
             Shell shell = new Shell();
-            String nomSection = Messages.getString(NemoSection.S_QCFLAG) + Global.SEP                            //$NON-NLS-1$
+            String nomSection = Messages.getString(NemoSection.S_QCFLAG) + Global.SEP
                 + EditStation.qcFlags.getTabFlagQC().getItems()[i].getText(1);
             AutoLine line = new AutoLine(shell, 1, true, MetaInData.FACULTATIF, false);
             line.setValue(EditStation.qcFlags.getTabFlagQC().getItems()[i].getText(2),
