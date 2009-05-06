@@ -580,8 +580,7 @@ public class StationSection extends NemoSection
             String start = autoInput.getLines().get(0).getStart().getText().trim();
             String end = autoInput.getLines().get(0).getEnd().getText().trim();
             if (line.equals(Global.ZERO)) {
-                // On recupere le numero de station dans le nom
-                // du fichier
+                // On recupere le numero de station dans le nom du fichier
                 String strFichier = Global.EMPTY_STRING;
                 if (ViewFile.radioFichier.getSelection()) {
                     strFichier = Utils.extraitFichierChemin(ViewFile.nomFichier);
@@ -593,10 +592,12 @@ public class StationSection extends NemoSection
                 result = (strFichier.substring(Integer.parseInt(start) - 1, Integer.parseInt(end))).trim();
             } else {
                 result = autoInput.getValue(0).trim();
+                autoInput.getLines().get(0).selectInViewFile();
             }
         } else {
             result = manualInput.getValue().trim();
         }
+        
         resultTest.setText(Formatter.getSingleton().padZero(result, 5));
         resultTest.pack();
     }
