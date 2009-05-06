@@ -59,7 +59,7 @@ public class SWTProcess implements IRunnableWithProgress {
     		} 
             else {
                 //System.out.println("Campagne");
-                runSingleProcess(Global.EMPTY_STRING, null, null);
+                runSingleProcess(Global.EMPTY_STRING, EditConversion.nomDossierSortie, null, null);
     		}
             
             // Ecriture du resume CDI
@@ -81,37 +81,44 @@ public class SWTProcess implements IRunnableWithProgress {
         if (monitor2.isCanceled())
             throw new InterruptedException(Global.EMPTY_STRING);
         
-        String inputDirectory = ViewFile.nomRepertoire;
-        String outputDirectory = EditConversion.nomDossierSortie;
    
         int numItem = 0;
-        String[] items = new File(inputDirectory).list();
+        String[] items = new File(ViewFile.nomRepertoire).list();
 
         for (String item : items) {
             numItem++;
             String msg = " : " + item + " ( " + numItem + " / " + items.length + " ) "; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+            
             String multiStationsFileName = null;
             String surveyName = Intern.unknown;
+            
+            String outputDirectory = EditConversion.nomDossierSortie;
+            String inputDirectory = ViewFile.nomRepertoire + File.separator + item;
             
 
             if (ViewFile.collectionCas1){
                 //System.out.println("Collection Campagnes");
-                DataModel.dirSurvey.setDirectory(inputDirectory + File.separator + item);
-                // TODO create outputdirectory ??
-                multiStationsFileName = outputDirectory + File.separator + item + Global.EXT_TXT;
+                DataModel.dirSurvey.setDirectory(inputDirectory);
+                // TODO verifier create outputdirectory 
+                outputDirectory = EditConversion.nomDossierSortie + File.separator + item;
+                File output = new File(outputDirectory);
+                if (!output.exists()) output.mkdirs();
+                
+                multiStationsFileName = outputDirectory + Global.EXT_TXT;
                 surveyName = item;
             }
             else{
                 //System.out.println("Collection Fichiers");
-                DataModel.singleSurvey.setFile(inputDirectory + File.separator + item);
+                DataModel.singleSurvey.setFile(inputDirectory);
                 multiStationsFileName = outputDirectory + File.separator + item.substring(0, item.lastIndexOf('.')) + Global.EXT_TXT;
             }
 
-            runSingleProcess(msg, multiStationsFileName, surveyName);       
+            runSingleProcess(msg, outputDirectory, multiStationsFileName, surveyName);       
         }
     }
     
     private void runSingleProcess(String msg,
+                                  String outputDirName,
                                   String multiStationsFileName,
                                   String surveyName) throws Exception{
 
@@ -132,7 +139,7 @@ public class SWTProcess implements IRunnableWithProgress {
             writer = SurveyWriterFactory.createWriter(formatConversion);
             
             if ((formatConversion == Conversion.ODV) && (monoStation)){
-                writeMonoStationFile();
+                writeMonoStationFile(outputDirName);
             }
             else{
                 String fileName = EditConversion.nomFichierSortie;
@@ -184,7 +191,7 @@ public class SWTProcess implements IRunnableWithProgress {
         }
     }
     
-    private void writeMonoStationFile() throws GenerationException
+    private void writeMonoStationFile(String outputDirName) throws GenerationException
     {
         int i = 0;
         int totalStations = survey.getStations().length;
@@ -196,8 +203,7 @@ public class SWTProcess implements IRunnableWithProgress {
                 String localCdiId = station.getLocalCdiId(survey.getReference(), formatConversion.toString());
                 currentStation = station;
                 
-                EditConversion.nomFichierSortie = EditConversion.nomDossierSortie
-                                                        + File.separator + localCdiId + Global.EXT_TXT;
+                EditConversion.nomFichierSortie = outputDirName + File.separator + localCdiId + Global.EXT_TXT;
                 File fichierSortie = new java.io.File(
                     EditConversion.nomFichierSortie);
                 
