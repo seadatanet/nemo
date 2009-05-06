@@ -28,6 +28,16 @@ import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.input.HeaderFragment;
 import fr.ifremer.nemo.input.InputModel;
+import fr.ifremer.nemo.ui.actions.OptionsAction;
+import fr.ifremer.nemo.ui.edit.Cursor;
+import fr.ifremer.nemo.ui.edit.DataModel;
+import fr.ifremer.nemo.ui.edit.conversion.EditConversion;
+import fr.ifremer.nemo.ui.edit.data.EditData;
+import fr.ifremer.nemo.ui.edit.desc.EditDesc;
+import fr.ifremer.nemo.ui.edit.station.EditStation;
+import fr.ifremer.nemo.ui.edit.survey.EditSurvey;
+import fr.ifremer.nemo.ui.view.ViewFile;
+import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
@@ -113,9 +123,7 @@ public class Utils {
 				.append(Messages.Utils_6 + nbreLignes);
 
 		// reactivation de l'option serie temporelle onglet DESC
-		ViewFile.radProfilVertical.setEnabled(true);
-		ViewFile.radSerieTempo.setEnabled(true);
-		ViewFile.radTrajectoire.setEnabled(true);
+        ViewFile.enableChoice(true);
 
 		// FAE 089
 		// RAZ global si reouverture fichier en cours de processus
@@ -458,16 +466,16 @@ public class Utils {
 
 	public static void calculRealOffsetFin(HeaderFragment frag) {
 		int offsetFin;
-		int enteteFichier = Integer.parseInt(EditDesc.sectionEnteteFichier.getNumberValue());
+		int enteteFichier = Integer.parseInt(EditDesc.sectionEnteteFichier.getValue());
 
 		// calcul de l'offset de fin après rechargement du modèle
 		if (enteteFichier > 0) {
 			// prise en compte de l'entête de fichier
 			offsetFin = frag.getLastCharOffset()
 					+ taillesCumLignes[frag.getLastLine()
-							+ Integer.parseInt(EditDesc.sectionEnteteFichier.getNumberValue())]
+							+ Integer.parseInt(EditDesc.sectionEnteteFichier.getValue())]
 					- taillesCumLignes[frag.getFirstLine()
-							+ Integer.parseInt(EditDesc.sectionEnteteFichier.getNumberValue())];
+							+ Integer.parseInt(EditDesc.sectionEnteteFichier.getValue())];
 		} else {
 			// il n'y a pas d'entête de fichier
 			offsetFin = frag.getLastCharOffset()
@@ -907,7 +915,6 @@ public class Utils {
 	public static void messageErreur(String message) {
 		ViewLog.styledTextLogErreurs.setText(message);
 		Color truc = new Color(Application.display, 255, 0, 0);
-		// ViewLog.styledTextLogErreurs.setLineBackground(0, 1, truc);
 
 		StyleRange style = new StyleRange();
 		style.start = 0;
@@ -1093,7 +1100,7 @@ public class Utils {
 
 	public static void razGlobal() {
 		// efface tous les onglets qui ont ete affiches jusque le en preparation
-		// du chargement d'un nouveau modele
+		// du chargement d'un nouveau fichier
 		if (EditDesc.sectionEnteteFichier != null) {
 			// //effacement boutons
 			EditDesc.razEdition();
@@ -1134,8 +1141,6 @@ public class Utils {
 		int i = 0;
 		int length = code.length();
 		int size = combo.getItemCount();
-        
-        int idx = combo.getSelectionIndex();
 
 		if (code.equals(Global.EMPTY_STRING)) {
             combo.deselectAll();

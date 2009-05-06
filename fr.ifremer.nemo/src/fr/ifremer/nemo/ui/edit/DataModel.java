@@ -190,7 +190,7 @@ public class DataModel
             if (!stationPattern.equals(Global.EMPTY_STRING)){
                 String[] texte = Utils.texteBrut.split("\n"); //$NON-NLS-1$
                 for(numLine = 0; numLine < texte.length; numLine++){
-                    if (texte[numLine].startsWith(stationPattern)){
+                    if (texte[numLine].trim().startsWith(stationPattern)){
                         numLine++;
                         break;
                     }
@@ -225,6 +225,7 @@ public class DataModel
             stationModel.setEndOnEmptyLine(false);
             stationModel.setEndOnEOF(false);
             stationModel.setEndOnNextStation(true);
+            stationModel.setEndDataPattern(EditDesc.sectionRuptureDonnees.getStartStationIndicator());
             stationModel.setEndOnPattern(false);
         }
         else if (EditDesc.sectionRuptureDonnees.radManuelSelected()){
@@ -263,7 +264,6 @@ public class DataModel
         station = stationModel.getModel();
 
         // maj des dataTypes
-
         TableDataSurvey.majTypeData();
 
         // injection des valeurs de l'IHM -> datamodel
@@ -447,8 +447,6 @@ public class DataModel
 
     public static void initData()
     {
-//        boolean existDEPH = false;
-//        String formatPRES = Global.EMPTY_STRING;
         int indexPRES = -1;
 
         // mise e jour des types avant validation
@@ -678,6 +676,7 @@ public class DataModel
             }
             else if (stationModel_modele.isEndOnNextStation()){
                 endData.selectEndData(endData.getRadNextStation());
+                endData.setStartStationIndicator(stationModel_modele.getEndDataPattern());
             }
             else if (stationModel_modele.isEndOnPattern()){
                 endData.selectEndData(endData.getRadManuel());
@@ -690,7 +689,7 @@ public class DataModel
     
             DataModel.ouverture = true;
     
-            // desactivation option serie tempo
+            // activation option serie tempo
             ViewFile.enableChoice(true);
         }
         catch (Exception e){
@@ -933,7 +932,11 @@ public class DataModel
                     .setDebutFlag(String.valueOf(flag.getFirstCharOffset()));
                 typeData.setFinFlag(String.valueOf(flag.getLastCharOffset()));
             }
-            typeData.setEntree(Global.EMPTY_STRING + paraCourant.getInputDefault());
+            
+            String inputDefault = paraCourant.getInputDefault();
+            if (inputDefault == null || inputDefault.equals("null")) inputDefault = Global.EMPTY_STRING; //$NON-NLS-1$
+            typeData.setEntree(inputDefault);
+            
             typeData.setUnite(modeleCourant.getUnit());
             typeData.setFormat(modeleCourant.getFormat());
             typeData.setSortie(modeleCourant.getDefault());

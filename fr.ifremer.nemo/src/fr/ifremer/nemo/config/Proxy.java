@@ -16,7 +16,7 @@ import com.ago.xml.RootSAXConsumer;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
-import fr.ifremer.nemo.ui.OptionsAction;
+import fr.ifremer.nemo.ui.actions.OptionsAction;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;

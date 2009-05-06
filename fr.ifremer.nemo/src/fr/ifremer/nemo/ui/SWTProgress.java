@@ -6,6 +6,7 @@ import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.window.ApplicationWindow;
 
 import fr.ifremer.nemo.output.ProgressNotification;
+import fr.ifremer.nemo.ui.view.ViewFile;
 import fr.ifremer.nemo.util.Conversion;
 
 public class SWTProgress extends ApplicationWindow {

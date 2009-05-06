@@ -11,6 +11,12 @@ import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
 import org.eclipse.ui.application.WorkbenchAdvisor;
 import org.eclipse.ui.application.WorkbenchWindowAdvisor;
 
+import fr.ifremer.nemo.ui.actions.SaveAction;
+import fr.ifremer.nemo.ui.edit.DataModel;
+import fr.ifremer.nemo.ui.edit.data.EditData;
+import fr.ifremer.nemo.ui.edit.desc.EditDesc;
+import fr.ifremer.nemo.ui.edit.station.EditStation;
+import fr.ifremer.nemo.ui.edit.survey.EditSurvey;
 import fr.ifremer.nemo.util.Messages;
 
 public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
@@ -35,8 +41,8 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 		FileOutputStream fileOutputStream = null;
 		int reponse = 0;
 
-		MessageBox mb = new MessageBox(PlatformUI.getWorkbench().getDisplay().getActiveShell(), SWT.ICON_QUESTION | SWT.YES | SWT.NO
-				| SWT.APPLICATION_MODAL);
+		MessageBox mb = new MessageBox(PlatformUI.getWorkbench().getDisplay().getActiveShell(), 
+		                                SWT.ICON_QUESTION | SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
 		mb.setMessage(Messages.confirm_quit);
 		reponse = mb.open();
 
@@ -58,18 +64,15 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 
 						if (SaveAction.fichierSortieXML != null) {
 							try {
-								fileOutputStream = new FileOutputStream(
-										SaveAction.fichierSortieXML);
+								fileOutputStream = new FileOutputStream(SaveAction.fichierSortieXML);
 							} catch (FileNotFoundException e) {
 								//
 								e.printStackTrace();
 							}
 
 							if (fileOutputStream != null) {
-								DataModel.inputModel
-										.writeXMLOn(fileOutputStream);
-								Utils.messageOK(Messages
-										.SaveAction_4);
+								DataModel.inputModel.writeXMLOn(fileOutputStream);
+								Utils.messageOK(Messages.SaveAction_4);
 							}
 						}
 					}

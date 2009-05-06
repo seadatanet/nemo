@@ -18,7 +18,7 @@ import com.ago.xml.XMLOutputWriter;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.input.StationModel;
-import fr.ifremer.nemo.ui.object.NemoSection;
+import fr.ifremer.nemo.ui.edit.NemoSection;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 

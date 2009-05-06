@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.ParseException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -28,20 +27,20 @@ import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.TimeSeriesInformation;
 import fr.ifremer.nemo.domain.Trajectory;
 import fr.ifremer.nemo.domain.AddedParameter.IdParameter;
-import fr.ifremer.nemo.ui.DataModel;
-import fr.ifremer.nemo.ui.EditConversion;
-import fr.ifremer.nemo.ui.EditStation;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.ViewFile;
-import fr.ifremer.nemo.ui.object.NemoSection;
-import fr.ifremer.nemo.util.DateTimeFormat;
-import fr.ifremer.nemo.util.FloatFormat;
+import fr.ifremer.nemo.ui.edit.DataModel;
+import fr.ifremer.nemo.ui.edit.NemoSection;
+import fr.ifremer.nemo.ui.edit.conversion.EditConversion;
+import fr.ifremer.nemo.ui.edit.station.EditStation;
+import fr.ifremer.nemo.ui.view.ViewFile;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
-import fr.ifremer.nemo.util.LatitudeFormat;
-import fr.ifremer.nemo.util.LongitudeFormat;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.SizeBasedProgressNotifier;
+import fr.ifremer.nemo.util.format.DateTimeFormat;
+import fr.ifremer.nemo.util.format.FloatFormat;
+import fr.ifremer.nemo.util.format.LatitudeFormat;
+import fr.ifremer.nemo.util.format.LongitudeFormat;
 
 /**
  * Class StationModel
@@ -66,7 +65,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	protected String _endDataPattern;
 
 	/**
-	 * Booléen indiquant si la fin de station doit être détectée par un motif.
+	 * Booléen indiquant si la fin des données station doit être détectée par un motif.
 	 * S'il est à false, l'information de fin de station est obtenue à l'aide de
 	 * l'attribut endData
 	 */
@@ -91,6 +90,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	/**
 	 * Nombre de ligne du header Station
 	 */
+    protected boolean _endStationHeaderPattern;
 	protected int _numberOfLines;
     protected String _endStationHeader;
     protected int _numberLinesBetweenStationData;
@@ -173,6 +173,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		_incrementNumber = 1;
         _numberOfLines = 0;
 		_endDataPattern = Global.EMPTY_STRING;
+        _endStationHeaderPattern = false;
         _endStationHeader = Global.EMPTY_STRING;
         _numberLinesBetweenStationData = 0;
 		_endOnEOF = false;
@@ -267,6 +268,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			String a_QName, Attributes a_Attributes) throws SAXException {
 		String tmp;
         if ((tmp = a_Attributes.getValue("lineNumber")) != null) {
+            _endStationHeaderPattern = false;
             setNumberOfLines(tmp);
         }
 		if ((tmp = a_Attributes.getValue("endOnEOF")) != null) {
@@ -317,10 +319,12 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 			return setter;
 		}
         if (a_LocalName.equals("numberLinesBetweenStationData")) {
+            _endStationHeaderPattern = true;
             Element2Field setter = new Element2Field(this, "setNumberLinesBetweenStationData");
             return setter;
         }
         if (a_LocalName.equals("endStationHeader")) {
+            _endStationHeaderPattern = true;
             Element2Field setter = new Element2Field(this, "setEndStationHeader");
             return setter;
         }
@@ -426,8 +430,15 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		a_Writer.putTag("separator", getSeparator());
 		a_Writer.putTag("incrementRef", isIncrementRef());
 		a_Writer.putTag("incrementNumber", getIncrementNumber());
-        a_Writer.putTag("numberLinesBetweenStationData", getNumberLinesBetweenStationData());
-        a_Writer.putTag("endStationHeader", getEndStationHeader());
+        
+        if (_endStationHeaderPattern){
+            a_Writer.putTag("numberLinesBetweenStationData", getNumberLinesBetweenStationData());
+            a_Writer.putTag("endStationHeader", getEndStationHeader());
+        }
+        else{
+            a_Writer.putAttribute("lineNumber", getNumberOfLines());
+        }
+        
 		a_Writer.putTag("endDataPattern", getEndDataPattern());
 		a_Writer.putTag("rowNumber", getRowNumber());
 		a_Writer.putTag("endData", getEndData());
@@ -639,6 +650,27 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	public void setEndOnPattern(boolean x) {
 		_endOnPattern = x;
 	}
+
+
+    /**
+     * Read accessor (getter) for attribute _endStationHeaderPattern
+     * 
+     * @return boolean
+     * @see StationModel#_endStationHeaderPattern
+     */
+    public boolean isEndStationHeaderPattern() {
+        return _endStationHeaderPattern;
+    }
+    /**
+     * Write accessor (setter) for attribute _endStationHeaderPattern
+     * 
+     * @param x
+     *            new value for _endStationHeaderPattern
+     * @see StationModel#_endStationHeaderPattern
+     */
+    public void setEndStationHeaderPattern(boolean x) {
+        _endStationHeaderPattern = x;
+    }
 
 	/**
 	 * Write accessor (setter) for attribute _endOnPattern
@@ -1583,29 +1615,39 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	public String[] consumeHeader(BufferedReader a_Reader) throws IOException {
 		Vector<String> v = new Vector<String>();
         String line = null;
-//      for (int i = 0; i < _numberOfLines; i++) {
-        if (!_endStationHeader.equals(Global.EMPTY_STRING)){
-            boolean stop = false;
-            while (!stop)
-            {
-    			line = a_Reader.readLine();
-    			EditConversion.incrementErreurLigne();
-    			EditConversion.setErreurChaine(line);
-    			if (line != null) {
-    				v.add(line);
-                    if (line.startsWith(_endStationHeader)){
-                        stop = true;
-                    }
-    			} else {
-    				return null;
-    			}
-    		}
+        if (_endStationHeaderPattern){
+            if (!_endStationHeader.equals(Global.EMPTY_STRING)){
+                boolean stop = false;
+                while (!stop)
+                {
+        			line = a_Reader.readLine();
+        			EditConversion.incrementErreurLigne();
+        			EditConversion.setErreurChaine(line);
+        			if (line != null) {
+        				v.add(line);
+                        if (line.startsWith(_endStationHeader)){
+                            stop = true;
+                        }
+        			} 
+                    else {
+        				return null;
+        			}
+        		}
+            }
+            for (int i = 0; i < _numberLinesBetweenStationData; i++) {
+                line = a_Reader.readLine();
+                EditConversion.incrementErreurLigne();
+                EditConversion.setErreurChaine(line);
+                v.add(line);
+            }
         }
-        for (int i = 0; i < _numberLinesBetweenStationData; i++) {
-            line = a_Reader.readLine();
-            EditConversion.incrementErreurLigne();
-            EditConversion.setErreurChaine(line);
-            v.add(line);
+        else{
+            for (int i = 0; i < _numberOfLines; i++) {
+                line = a_Reader.readLine();
+                EditConversion.incrementErreurLigne();
+                EditConversion.setErreurChaine(line);
+                v.add(line);
+            }
         }
 
 		String[] lines = new String[v.size()];
@@ -1772,7 +1814,6 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 */
 	public void convertParameters(BufferedReader a_Reader, 
                                   Station a_Station,
-                                  /*long a_RefDate,*/
                                   IProgressMonitor a_monitor,
                                   SizeBasedProgressNotifier a_Notifier) 
             throws IOException, ParseException, InterruptedException, Exception {
@@ -1815,22 +1856,15 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
                     || (index < _rowNumber); index++) {
                 
                 // FAE 1738 : ajout d'un indicateur "prochaine station"
-                // FIXME trouver une autre solution que !line.startsWith("         ")
+                // TODO tester nouvelle solution (autre que !line.startsWith("         "))
                 if (_model != null){ // pour ne pas faire le test sur la 1ère ligne de la station
                     if (_endOnNextStation 
                             && index > 0
-                            && !line.startsWith("         ")){
+                            && line.startsWith(_endDataPattern)){
                         a_Reader.reset();
                         break;
                     }
-                }
-                
-                
-//                if ((index == 0) || (index == 10000) || (index == 50000) || (index == 91000)){
-//                    Date now = new Date();
-//                    System.out.println("StationModel - convertParameters - line " + index + " : START at " + now + " " + now.getTime());
-//                }
-                
+                }                
 
                 if (a_monitor.isCanceled()) {
                     // demande d'annulation
@@ -1892,12 +1926,6 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
                     value = paramModel.convertAdded(value, a_Station, _inputType, index, getPresIndex(), line);
                     addedParam.addValue(value);
                 }
-                
-                
-//                if ((index == 0) || (index == 10000) || (index == 50000) || (index == 91000)){
-//                    Date now = new Date();
-//                    System.out.println("StationModel - convertParameters - line " + index + " : END   at " + now + " " + now.getTime());
-//                }
             }
 		} catch (NumberFormatException e) {
 			throw new NumberFormatException(e.getMessage()

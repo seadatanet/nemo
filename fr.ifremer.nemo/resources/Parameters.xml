@@ -5875,25 +5875,6 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
     <void property="code"> 
-     <string>TUR1</string> 
-    </void> 
-    <void property="defaultValue"> 
-     <string>99.999</string> 
-    </void> 
-    <void property="format"> 
-     <string>%6.3f</string> 
-    </void> 
-    <void property="name"> 
-     <string>LIGHT DIFFUSION COEFFICIENT</string> 
-    </void> 
-    <void property="unit"> 
-     <string>m-1</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSParameter"> 
-    <void property="code"> 
      <string>TUR2</string> 
     </void> 
     <void property="defaultValue"> 

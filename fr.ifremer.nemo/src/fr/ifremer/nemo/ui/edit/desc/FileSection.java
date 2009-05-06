@@ -26,6 +26,7 @@ import fr.ifremer.nemo.util.Messages;
  */
 public class FileSection extends NemoSection
 {
+    protected Composite compo;
     protected SetText setter;
 
 
@@ -45,7 +46,7 @@ public class FileSection extends NemoSection
     @Override
     protected void drawSection(Composite parent)
     {
-        Composite compo = new Composite(parent, SWT.NONE);
+        compo = new Composite(parent, SWT.NONE);
         GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compo);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(compo);
         
@@ -86,6 +87,7 @@ public class FileSection extends NemoSection
     @Override
     public void dispose(){
         super.dispose();
+        if (compo != null) compo.dispose();
         if (setter != null) setter.dispose();
     }
 

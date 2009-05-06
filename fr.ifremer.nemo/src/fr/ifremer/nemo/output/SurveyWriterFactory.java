@@ -1,7 +1,7 @@
 package fr.ifremer.nemo.output;
 
-import fr.ifremer.nemo.medatlas.MedatlasSurveyWriter;
-import fr.ifremer.nemo.odv.ODVSurveyWriter;
+import fr.ifremer.nemo.output.medatlas.MedatlasSurveyWriter;
+import fr.ifremer.nemo.output.odv.ODVSurveyWriter;
 import fr.ifremer.nemo.util.Conversion;
 
 /**

@@ -390,7 +390,10 @@ public class EditStation {
 
 		buttonValidate.setParent(s.getBody());
 		buttonRAZ.setParent(s.getBody());
+        
 		buttonExpand.setParent(s.getBody());
+        expand = false;
+        buttonExpand.setText(Global.PLUS); 
 
         for (NemoSection stationSection : listeSectionsStation){
             stationSection.setExpanded(false);

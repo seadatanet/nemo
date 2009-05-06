@@ -23,8 +23,6 @@ public class BODCList
     private String serverVersion;
     private String url;
     
-    private boolean useToMapping;
-    
     
     
     /**
@@ -32,13 +30,12 @@ public class BODCList
      * @param localVersion
      * @param url
      */
-    public BODCList(String id, String localVersion, String url, String mapping)
+    public BODCList(String id, String localVersion, String url)
     {
         super();
         this.id = id;
         this.localVersion = localVersion;
         this.url = url;
-        useToMapping = Boolean.valueOf(mapping);
     }
     
     
@@ -131,28 +128,5 @@ public class BODCList
     public void setName(String name)
     {
         this.name = name;
-    }
-
-
-    /**
-     * Getter sur useToMapping.
-     * @return the useToMapping
-     */
-    public boolean isUseToMapping()
-    {
-        return useToMapping;
-    }
-
-
-    /**
-     * Setter sur useToMapping.
-     * @param useToMapping the useToMapping to set
-     */
-    public void setUseToMapping(boolean useToMapping)
-    {
-        this.useToMapping = useToMapping;
-    }
-    
-    
-    
+    }    
 }

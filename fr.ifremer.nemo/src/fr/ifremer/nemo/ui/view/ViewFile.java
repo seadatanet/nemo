@@ -1,5 +1,6 @@
 package fr.ifremer.nemo.ui.view;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.jface.layout.GridDataFactory;
@@ -31,6 +32,7 @@ import fr.ifremer.nemo.ui.FiltrageTableType;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.DataModel;
 import fr.ifremer.nemo.ui.edit.data.EditData;
+import fr.ifremer.nemo.ui.edit.data.TableData;
 import fr.ifremer.nemo.ui.edit.desc.EditDesc;
 import fr.ifremer.nemo.ui.edit.station.EditStation;
 import fr.ifremer.nemo.ui.edit.survey.EditSurvey;
@@ -332,11 +334,7 @@ public class ViewFile extends ViewPart
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
-                    // System.out.println("fichier campagne"); //
                     init();
-                    if (EditDesc.loaded) 
-                        EditDesc.sectionEnteteFichier.setEnabled(true);
-
                 }
             });
 
@@ -346,11 +344,7 @@ public class ViewFile extends ViewPart
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
-                    // System.out.println("dossier campagne)"); //
                     init();
-                    if (EditDesc.loaded) 
-                        EditDesc.sectionEnteteFichier.setEnabled(false);
-
                 }
             });
 
@@ -360,11 +354,7 @@ public class ViewFile extends ViewPart
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
-                    // System.out.println("dossier campagne)"); //
                     init();
-                    if (EditDesc.loaded)
-                        EditDesc.sectionEnteteFichier.setEnabled(false);
-
                 }
             });
 
@@ -374,10 +364,7 @@ public class ViewFile extends ViewPart
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
-                    // System.out.println("dossier campagne)"); //
                     init();
-                    if (EditDesc.loaded)
-                        EditDesc.sectionEnteteFichier.setEnabled(false);
                 }
             });
 
@@ -391,202 +378,157 @@ public class ViewFile extends ViewPart
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
+                    // reinitialisation de la conversion et de l'affichage
                     init();
 
-                    // si fichier campagne
                     if (radioFichier.getSelection()){
+                        // si fichier campagne
+                        
+                        // reactivation de l'onglet campagne
+                        enableCruise(true);
 
-                        // Si on a supprime l'onglet campagne pour une
-                        // collection on le reaffiche
-                        // vu qu'on selectionne maintenant fichier campagne
-                        if (tabItem1.isDisposed()){
-                            tabItem1 = new TabItem(tabFolder, SWT.NONE, 1);
-                            tabItem1.setText(Messages.onglet_cruise); 
-                            tabItem1.setControl(composite2); 
-                        }
+                        Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 
-                        dossierCampagne = false;
-                        collectionCas1 = false;
-                        collectionCasN = false;
-
-                        Shell shell =
-                            PlatformUI.getWorkbench().getDisplay()
-                                .getActiveShell();
-
-                        FileDialog dialog =
-                            new FileDialog(shell, SWT.OPEN
-                                    | SWT.APPLICATION_MODAL);
-                        dialog.setFilterPath(Utils.configuration
-                            .getCruisesDirectory());
+                        FileDialog dialog = new FileDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
+                        dialog.setFilterPath(Utils.configuration.getCruisesDirectory());
                         nomFichier = dialog.open();
                         
                         if (nomFichier != null) {
 
                             fileLoaded = true;
-                            nomRepertoire =
-                                nomFichier.substring(0, nomFichier.lastIndexOf('\\') + 1);
+                            nomRepertoire = new File(nomFichier).getParent() + File.separator;
 
-                            // affichage du fichier campagne dans onglet
-                            // Campagne
                             try{
-                                Utils.insertTextFich(nomFichier,
-                                    styledTextCampagne, true);
-                                // Utils.remplissageTexte(textAreaDescription);
+                                // affichage du corps du fichier
+                                Utils.insertTextFich(nomFichier, styledTextCampagne, true);
                                 textAreaDescription.setText(Utils.texteBrut);
 
-                                // affichage etape0 dans formulaire
-                                // d'edition de parametres
+                                // affichage etape0 dans formulaire d'edition
                                 EditDesc.affichageEdition();
-
-                            }catch (IOException e1){
+                            }
+                            catch (IOException e1){
                                 ViewLog.styledTextLogErreurs.setText(Messages.error);
                                 e1.printStackTrace();
                             }
-                        }else{
-                            fileLoaded = false;
+                        }
+                        else{
                             ViewLog.styledTextLogErreurs.setText(Messages.error_file_selectFile);
                         }
                     }
-
-                    // si dossier campagne
-                    if (radioDossier.getSelection()){
-
-                        // Si on a supprime l'onglet campagne pour une
-                        // colleciton on le reaffiche
-                        // vu qu'on selectionne maintenant dossier
-                        if (tabItem1.isDisposed()){
-                            tabItem1 = new TabItem(tabFolder, SWT.NONE, 1);
-                            tabItem1.setText(Messages.onglet_cruise); 
-                            tabItem1.setControl(composite2);
-                        }
+                    else if (radioDossier.getSelection()){
+                        // si dossier campagne
+                        
                         dossierCampagne = true;
-                        collectionCas1 = false;
-                        collectionCasN = false;
 
-                        Shell shell =
-                            PlatformUI.getWorkbench().getDisplay()
-                                .getActiveShell();
-                        DirectoryDialog dialog =
-                            new DirectoryDialog(shell, SWT.OPEN
-                                    | SWT.APPLICATION_MODAL);
-                        dialog.setFilterPath(Utils.configuration
-                            .getCruisesDirectory()); 
+                        // reactivation de l'onglet campagne
+                        enableCruise(true);
+                        
+                        Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+                        
+                        DirectoryDialog dialog = new DirectoryDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
+                        dialog.setFilterPath(Utils.configuration.getCruisesDirectory()); 
                         nomRepertoire = dialog.open();
                         
                         if (nomRepertoire != null){
                             fileLoaded = true;
 
                             if (Utils.findFiles(nomRepertoire, true)){
-                                
+                                // affichage du corps du fichier
                                 textAreaDescription.setText(Utils.texteBrut);
 
-                                // affichage etape0 dans formulaire
-                                // d'edition de parametres
-                                //Utils.razGlobal();
+                                // affichage etape0 dans formulaire d'edition
                                 EditDesc.affichageEdition();
                             }
-                        }else{
-                            fileLoaded = false;
-                            ViewLog.styledTextLogErreurs.setText(Messages.error_file_selectDir); 
-
                         }
-
+                        else{
+                            ViewLog.styledTextLogErreurs.setText(Messages.error_file_selectDir); 
+                        }
                     }
-
-                    if (radioCollectCas1.getSelection()){
+                    else if (radioCollectCas1.getSelection()){
 
                         dossierCampagne = true;
                         collectionCas1 = true;
-                        collectionCasN = false;
 
-                        Shell shell =
-                            PlatformUI.getWorkbench().getDisplay()
-                                .getActiveShell();
-                        DirectoryDialog dialog =
-                            new DirectoryDialog(shell, SWT.OPEN
-                                    | SWT.APPLICATION_MODAL);
-                        dialog.setFilterPath(Utils.configuration
-                            .getCruisesDirectory());
+                        // desactivation de l'onglet campagne
+                        enableCruise(false);
+                        
+                        Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+                        
+                        DirectoryDialog dialog = new DirectoryDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
+                        dialog.setFilterPath(Utils.configuration.getCruisesDirectory());
                         nomRepertoire = dialog.open();
+                        
                         if (nomRepertoire != null){
                             fileLoaded = true;
 
                             if (Utils.findFilesCollectCas1(nomRepertoire, false)){
+                                // affichage du corps du fichier
                                 textAreaDescription.setText(Utils.texteBrut);
 
-                                // affichage etape0 dans formulaire
-                                // d'edition de parametres
-                                //Utils.razGlobal();
+                                // affichage etape0 dans formulaire d'edition
                                 EditDesc.affichageEdition();
-                                
-                                tabItem1.dispose();
                                 
                                 // dans le cas d'une collection, on ne peut
                                 // generer que le format ODV
-                                radMedatlas.setEnabled(false);
-                                radMedatlas.setSelection(false);
-                                
-                                radODV.setSelection(true);
-                                afficheGrpODV();
+                                enableCollectionMedatlas(false);
                             }
-
-                        }else{
-                            fileLoaded = false;
+                        }
+                        else{
                             ViewLog.styledTextLogErreurs.setText(Messages.error_file_selectDir);
                         }
                     }
+                    else if (radioCollectCasN.getSelection()){
 
-                    if (radioCollectCasN.getSelection()){
-
-                        dossierCampagne = false;
-                        collectionCas1 = false;
                         collectionCasN = true;
 
-                        Shell shell =
-                            PlatformUI.getWorkbench().getDisplay()
-                                .getActiveShell();
-                        DirectoryDialog dialog =
-                            new DirectoryDialog(shell, SWT.OPEN
-                                    | SWT.APPLICATION_MODAL);
-                        dialog.setFilterPath(Utils.configuration
-                            .getCruisesDirectory());
+                        // desactivation de l'onglet campagne
+                        enableCruise(false);
+                        
+                        Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+                        
+                        DirectoryDialog dialog = new DirectoryDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
+                        dialog.setFilterPath(Utils.configuration.getCruisesDirectory());
                         nomRepertoire = dialog.open();
+                        
                         if (nomRepertoire != null){
                             fileLoaded = true;
 
                             if (Utils.findFiles(nomRepertoire, true)){
+                                // affichage du corps du fichier
                                 textAreaDescription.setText(Utils.texteBrut);
 
-                                // affichage etape0 dans formulaire
-                                // d'edition de  parametres
-                                //Utils.razGlobal();
+                                // affichage etape0 dans formulaire d'edition
                                 EditDesc.affichageEdition();
-                                
-                                tabItem1.dispose();
                                 
                                 // dans le cas d'une collection, on ne peut
                                 // generer que le format ODV
-                                radMedatlas.setEnabled(false);
-                                radMedatlas.setSelection(false);
-                                
-                                //radODV.setEnabled(true);
-                                radODV.setSelection(true);
+                                enableCollectionMedatlas(false);
                                 radMonoFichier.setEnabled(false); // FAE 0001134
-                                afficheGrpODV();
                             }
-
-                        }else{
-                            fileLoaded = false;
+                        }
+                        else{
                             ViewLog.styledTextLogErreurs.setText(Messages.error_file_selectDir); 
                         }
                     }
                 }
-
             });
 
         createGroupeSeparateur();
 
         createGroupeFichier();
+    }
+    
+    protected void enableCruise(boolean enabled){
+        if (enabled){
+            if (tabItem1.isDisposed()){                
+                tabItem1 = new TabItem(tabFolder, SWT.NONE, 1);
+                tabItem1.setText(Messages.onglet_cruise); 
+                tabItem1.setControl(composite2); 
+            }
+        }
+        else{
+            tabItem1.dispose();
+        }
     }
     
     protected void init(){
@@ -601,6 +543,9 @@ public class ViewFile extends ViewPart
         // reinitialisation de l'affichage
         // --- les formulaires
         Utils.razGlobal();       
+        EditDesc.loaded = false;
+        // --- renitialisation du tableau de paramètres (onglet Data)
+        if (tableData != null) TableData.go();
         // --- le titre de l'application
         ApplicationWorkbenchWindowAdvisor.configurer_titre.setTitle(Intern.application_title);
         // --- le contenu du fichier
@@ -623,8 +568,19 @@ public class ViewFile extends ViewPart
         afficheGrpODV();
         
         enableChoice(true);
+        // reinitialisation des selections
         chkSeparateur.setSelection(false);
+        radioTabulation.setSelection(true);
+        radioPointVirgule.setSelection(false);
+        radioVirgule.setSelection(false);
+        radioEspace.setSelection(false);
+        radioSeparateurAutre.setSelection(false);
+        textSeparateur.setText(Global.EMPTY_STRING);
         setSeparatorVisible();
+
+        dossierCampagne = false;
+        collectionCas1 = false;
+        collectionCasN = false;
     }
 
     /**
@@ -766,10 +722,8 @@ public class ViewFile extends ViewPart
         chkSeparateur.setText(Messages.view_file_separator);
 
         compositeSeparateur = new Composite(grpSeparateur, SWT.NONE);
-        GridLayoutFactory.fillDefaults().numColumns(3).applyTo(
-            compositeSeparateur);
-        GridDataFactory.fillDefaults().grab(false, false).applyTo(
-            compositeSeparateur);
+        GridLayoutFactory.fillDefaults().numColumns(3).applyTo(compositeSeparateur);
+        GridDataFactory.fillDefaults().grab(false, false).applyTo(compositeSeparateur);
 
         radioTabulation = new Button(compositeSeparateur, SWT.RADIO);
         radioTabulation.setText(Messages.view_file_sepTab);
@@ -843,6 +797,14 @@ public class ViewFile extends ViewPart
             radODV.setSelection(!enable);
             afficheGrpODV();
         }
+    }
+    
+    public static void enableCollectionMedatlas(boolean enable)
+    {
+        radMedatlas.setEnabled(enable);
+        radMedatlas.setSelection(enable);
+        radODV.setSelection(!enable);
+        afficheGrpODV();
     }
     
     public static void enableChoice(boolean enabled){

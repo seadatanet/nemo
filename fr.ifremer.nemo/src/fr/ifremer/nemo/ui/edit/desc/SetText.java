@@ -206,7 +206,11 @@ public class SetText implements UIobject
 
 
     public String getValue(){
-        return text.getText().trim();
+        String value = text.getText();
+        if (!inText){
+            value = value.trim();
+        }
+        return value;
     }
 
     public void setValue(String value){

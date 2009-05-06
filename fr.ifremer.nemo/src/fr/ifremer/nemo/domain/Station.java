@@ -24,18 +24,18 @@ import com.ago.xml.XMLOutputWriter;
 import fr.ifremer.nemo.domain.AddedParameter.IdParameter;
 import fr.ifremer.nemo.input.ParameterModel;
 import fr.ifremer.nemo.input.StationModel;
-import fr.ifremer.nemo.ui.EditConversion;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.ViewFile;
-import fr.ifremer.nemo.ui.object.NemoSection;
+import fr.ifremer.nemo.ui.edit.NemoSection;
+import fr.ifremer.nemo.ui.edit.conversion.EditConversion;
+import fr.ifremer.nemo.ui.view.ViewFile;
 import fr.ifremer.nemo.util.Conversion;
-import fr.ifremer.nemo.util.DateTimeFormat;
-import fr.ifremer.nemo.util.ExternalizableFormat;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
-import fr.ifremer.nemo.util.LatitudeFormat;
-import fr.ifremer.nemo.util.LongitudeFormat;
+import fr.ifremer.nemo.util.format.DateTimeFormat;
+import fr.ifremer.nemo.util.format.ExternalizableFormat;
+import fr.ifremer.nemo.util.format.LatitudeFormat;
+import fr.ifremer.nemo.util.format.LongitudeFormat;
 
 /**
  * Class Station

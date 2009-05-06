@@ -11,9 +11,9 @@ import com.ago.xml.PathElementHandler;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
-import fr.ifremer.nemo.ui.object.NemoSection;
-import fr.ifremer.nemo.util.DateTimeFormat;
+import fr.ifremer.nemo.ui.edit.NemoSection;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.format.DateTimeFormat;
 
 /**
  * Class HorodatedParameterModel

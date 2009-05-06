@@ -293,14 +293,11 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			String name = null;
 			String value = null;
             String version = null;
-            String mapping = null;
 			if ((name = a_Attributes.getValue("name")) != null 
 					&& (value = a_Attributes.getValue("value")) != null
-                    && (version = a_Attributes.getValue("version")) != null
-                    && (mapping = a_Attributes.getValue("mapping")) != null) {
-                BODCList list = new BODCList(name, version, value, mapping);
+                    && (version = a_Attributes.getValue("version")) != null) {
+                BODCList list = new BODCList(name, version, value);
                 _vocabLists.put(name, list);
-				//_vocabLists.put(name, value);
 			}
 			return this;
 		}
@@ -391,7 +388,6 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			a_Writer.putAttribute("name", listName);
 			a_Writer.putAttribute("value", list.getUrl());
             a_Writer.putAttribute("version", list.getLocalVersion());
-            a_Writer.putAttribute("mapping", list.isUseToMapping());
 			a_Writer.closeTag();
 		}
 		a_Writer.putTag("defaultFlagTable", getDefaultCode());

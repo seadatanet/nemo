@@ -15,10 +15,14 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 
+import com.ago.xml.XMLBootstrapParser;
+
 import fr.ifremer.nemo.input.InputModel;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.DataModel;
+import fr.ifremer.nemo.ui.edit.data.TableData;
 import fr.ifremer.nemo.ui.edit.desc.EditDesc;
+import fr.ifremer.nemo.ui.view.ViewFile;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
@@ -56,35 +60,33 @@ public class OpenAction extends Action implements ISelectionListener,
 		// verifier que un fichier est charge avant d'ouvrir un modele
 		if (!EditDesc.loaded) {
 			Utils.messageErreurAppend(Messages.error_openModel);
-		} else {
-
+		} 
+        else {
 			InputModel inputModel = new InputModel();
 
 			Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
-			FileDialog dialog = new FileDialog(shell, SWT.OPEN
-					| SWT.APPLICATION_MODAL);
-			dialog.setFilterPath(Utils.configuration.getModelsDirectory()
-					+ "\\"); //$NON-NLS-1$
+			FileDialog dialog = new FileDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
+			dialog.setFilterPath(Utils.configuration.getModelsDirectory() + File.separator);
 			dialog.setText(Messages.dialog_openModel);
+            
 			String extensions[] = new String[1];
 			extensions[0] = Global.STAR + Global.EXT_XML;
 			dialog.setFilterExtensions(extensions);
+            
 			nomModele = dialog.open();
 
-			if (nomModele == null) {
-			} else {
-
+			if (nomModele != null) {
 				// ouverture du fichier XML de modele
-
-				com.ago.xml.XMLBootstrapParser parser = new com.ago.xml.XMLBootstrapParser(
-						inputModel);
+				XMLBootstrapParser parser = new XMLBootstrapParser(inputModel);
 
 				try {
 					stream = new java.io.FileInputStream(nomModele);
-				} catch (FileNotFoundException e) {
+				} 
+                catch (FileNotFoundException e) {
                     Utils.messageErreurAppend(Messages.error);
 					e.printStackTrace();
 				}
+                
 				parser.parse(stream, false);
 
 				File fich = new File(nomModele);
@@ -95,10 +97,10 @@ public class OpenAction extends Action implements ISelectionListener,
 
 				ViewLog.styledTextLogInfos.append(Messages.success_openModel + nomModele);
 
+                // reinitialisation du tableau de paramètres
+                if (ViewFile.tableData != null) TableData.go();
 			}
-
 		}
-
 	}
 
 	public void selectionChanged(IWorkbenchPart part, ISelection incoming) {

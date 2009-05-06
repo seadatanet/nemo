@@ -18,12 +18,12 @@ import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.TimeSeriesInformation;
-import fr.ifremer.nemo.ui.object.NemoSection;
-import fr.ifremer.nemo.util.DateTimeFormat;
-import fr.ifremer.nemo.util.FloatFormat;
+import fr.ifremer.nemo.ui.edit.NemoSection;
 import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.LatitudeFormat;
-import fr.ifremer.nemo.util.LongitudeFormat;
+import fr.ifremer.nemo.util.format.DateTimeFormat;
+import fr.ifremer.nemo.util.format.FloatFormat;
+import fr.ifremer.nemo.util.format.LatitudeFormat;
+import fr.ifremer.nemo.util.format.LongitudeFormat;
 
 /**
  * Class TimeSeriesModel

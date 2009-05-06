@@ -146,34 +146,12 @@ public class Trajectory implements Cloneable, SAXConsumer {
 		XMLOutputWriter writer = new XMLOutputWriter(a_Stream);
 		writeXMLOn(writer);
 	}
-
-//	/**
-//	 * Read accessor (getter) for attribute _outputType
-//	 * 
-//	 * @return String
-//	 * @see Cdi#_outputType
-//	 */
-//	public String getOutputType() {
-//		return _outputType;
-//	}
-//
-//	/**
-//	 * Write accessor (setter) for attribute _outputType
-//	 * 
-//	 * @param s
-//	 *            new value for _outputType
-//	 * @see Dci#_outputType
-//	 */
-//	public void setOutputType(String s) {
-//		_outputType = s;
-//	}
-    
+ 
     
 
 	/**
      * Read accessor (getter) for attribute  _stationNumber.
      * @return String
-     * @see Cdi#_stationNumber
      */
     public String getStationNumber()
     {
@@ -184,7 +162,6 @@ public class Trajectory implements Cloneable, SAXConsumer {
      * Write accessor (setter) for attribute _stationNumber.
      * @param stationNumber 
      *            new value for _stationNumber
-     * @see Dci#_stationNumber
      */
     public void setStationNumber(String stationNumber)
     {

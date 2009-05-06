@@ -17,7 +17,7 @@ import com.ago.xml.XMLOutputWriter;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.output.ProgressNotification;
-import fr.ifremer.nemo.ui.EditConversion;
+import fr.ifremer.nemo.ui.edit.conversion.EditConversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.SizeBasedProgressNotifier;

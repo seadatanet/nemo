@@ -20,13 +20,13 @@ import fr.ifremer.nemo.domain.HorodatedValue;
 import fr.ifremer.nemo.domain.Parameter;
 import fr.ifremer.nemo.domain.ParameterValue;
 import fr.ifremer.nemo.domain.Station;
-import fr.ifremer.nemo.ui.object.NemoSection;
+import fr.ifremer.nemo.ui.edit.NemoSection;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.JulianDate;
-import fr.ifremer.nemo.util.LatitudeFormat;
-import fr.ifremer.nemo.util.LongitudeFormat;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.util.format.JulianDate;
+import fr.ifremer.nemo.util.format.LatitudeFormat;
+import fr.ifremer.nemo.util.format.LongitudeFormat;
 
 /**
  * Class ParameterModel
@@ -435,7 +435,7 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 
 		String fragmnt = _fragment.retreive(a_Line);
 
-		if (fragmnt.equals(Global.EMPTY_STRING)) {
+		if (fragmnt.equals(Global.EMPTY_STRING) && !_inputDefault.trim().equals(Global.EMPTY_STRING)) {
 			a_ParameterValue.setValue(Double.NaN);
 			a_ParameterValue.setQc(Global.DEFAULT_FLAG);
 		} else {

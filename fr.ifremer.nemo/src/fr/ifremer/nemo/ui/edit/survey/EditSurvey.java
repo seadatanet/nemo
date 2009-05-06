@@ -722,6 +722,8 @@ public class EditSurvey {
 		EditSurvey.buttonXML.setParent(s.getBody());
 		EditSurvey.buttonRAZ.setParent(s.getBody());
 		EditSurvey.buttonExpand.setParent(s.getBody());
+        expand = false;
+        buttonExpand.setText(Global.PLUS); 
 
 		for (i = 0; i <= EditSurvey.listeSectionsSurvey.size() - 1; i++) {
 
@@ -730,8 +732,6 @@ public class EditSurvey {
 			EditSurvey.listeSectionsSurvey.get(i).setParent(s.getBody());
 
 		}
-
-		// EditSurvey.buttonExpand2.setParent(s.getBody());
 
 		ViewEdit.formEdition.setText(Messages.edit_cruise_title); 
 

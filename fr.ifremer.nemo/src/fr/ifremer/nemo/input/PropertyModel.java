@@ -17,17 +17,17 @@ import com.ago.xml.PathElementHandler;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
-import fr.ifremer.nemo.ui.EditDesc;
-import fr.ifremer.nemo.ui.object.AutoLine;
-import fr.ifremer.nemo.ui.object.StationSection;
-import fr.ifremer.nemo.util.DateTimeFormat;
-import fr.ifremer.nemo.util.ExternalizableFormat;
-import fr.ifremer.nemo.util.FloatFormat;
+import fr.ifremer.nemo.ui.edit.desc.EditDesc;
+import fr.ifremer.nemo.ui.edit.station.AutoLine;
+import fr.ifremer.nemo.ui.edit.station.StationSection;
 import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.IntegerFormat;
-import fr.ifremer.nemo.util.LatitudeFormat;
-import fr.ifremer.nemo.util.LongitudeFormat;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.util.format.DateTimeFormat;
+import fr.ifremer.nemo.util.format.ExternalizableFormat;
+import fr.ifremer.nemo.util.format.FloatFormat;
+import fr.ifremer.nemo.util.format.IntegerFormat;
+import fr.ifremer.nemo.util.format.LatitudeFormat;
+import fr.ifremer.nemo.util.format.LongitudeFormat;
 
 /**
  * Class PropertyModel
@@ -721,7 +721,7 @@ public class PropertyModel implements Cloneable, PathElementHandler,
         
         if (ligne == null)
             ligne = String.valueOf(((Integer.valueOf(line.getNumberLine().getText())) 
-                        - Integer.valueOf(EditDesc.sectionEnteteFichier.getNumberValue())));
+                        - Integer.valueOf(EditDesc.sectionEnteteFichier.getValue())));
         String debut = line.getStart().getText();
         String fin = line.getEnd().getText();
 

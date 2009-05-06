@@ -74,20 +74,6 @@ public class Parameter implements Cloneable, PathElementHandler, SAXConsumer {
         _missingValue = true;
 		_values = new java.util.ArrayList<ParameterValue>();
 	}
-
-//	/**
-//	 * 
-//	 * @param a_WSParameter
-//	 */
-//	public Parameter(WSParameter a_WSParameter) {
-//		this();
-//		_code = a_WSParameter.getCode();
-//		_fullName = a_WSParameter.getName();
-//		_unit = a_WSParameter.getUnit();
-//		_format = a_WSParameter.getFormat();
-//		_default = a_WSParameter.getDefaultValue();
-//        _values = new java.util.ArrayList<ParameterValue>();
-//	}
     
     /**
 	 * 

@@ -192,34 +192,38 @@ public class EditDesc {
         // on retire toutes les sections et les boutons expand et validation
 
         ViewLog.aideDesc();
-        nomNemo();
-
-        // raz message erreur
-        Utils.messageErreur(Global.EMPTY_STRING);
-
-        ScrolledForm s;
-        s = ViewEdit.formEdition;
-
-        // affichage des boutons 
-        buttonValidate.setParent(s.getBody());
-        buttonRAZ.setParent(s.getBody());
-        buttonExpand.setParent(s.getBody());
-
-        // affichage des sections
-        for (NemoSection desc : listeSectionsDesc){
-            desc.setExpanded(false);
-            desc.initSection(s.getBody());
+        if (loaded){
+            nomNemo();
+    
+            // raz message erreur
+            Utils.messageErreur(Global.EMPTY_STRING);
+    
+            ScrolledForm s;
+            s = ViewEdit.formEdition;
+    
+            // affichage des boutons 
+            buttonValidate.setParent(s.getBody());
+            buttonRAZ.setParent(s.getBody());
+            
+            buttonExpand.setParent(s.getBody());
+            expand = false;
+            buttonExpand.setText(Global.PLUS); 
+    
+            // affichage des sections
+            for (NemoSection desc : listeSectionsDesc){
+                desc.setExpanded(false);
+                desc.initSection(s.getBody());
+            }
+    
+            // affichage titre formulaire
+            ViewEdit.formEdition.setText(Messages.edit_file_title); 
+    
+            // refresh global
+            ViewEdit.formEdition.reflow(true);
+    
+            // affichage courant
+            ViewFile.affiche = 0;
         }
-
-        // affichage titre formulaire
-        ViewEdit.formEdition.setText(Messages.edit_file_title); 
-
-        // refresh global
-        ViewEdit.formEdition.reflow(true);
-
-        // affichage courant
-        ViewFile.affiche = 0;
-
     }
 
     public static void initSections() {
@@ -276,12 +280,13 @@ public class EditDesc {
 
             File fich = new File(ViewFile.nomRepertoire);
             if (DataModel.ouverture) {
-                ApplicationWorkbenchWindowAdvisor.configurer_titre
-                        .setTitle(Messages.application_directoryTitle + fich.getName() + Messages.application_modelTitle + OpenAction.nomFichierModele + " ]"); //$NON-NLS-1$
+                ApplicationWorkbenchWindowAdvisor.configurer_titre.setTitle(
+                    Messages.application_directoryTitle + fich.getName() + 
+                    Messages.application_modelTitle + OpenAction.nomFichierModele + " ]"); //$NON-NLS-1$
 
             } else {
-                ApplicationWorkbenchWindowAdvisor.configurer_titre
-                        .setTitle(Messages.application_directoryTitle + fich.getName() + " ]"); //$NON-NLS-1$ 
+                ApplicationWorkbenchWindowAdvisor.configurer_titre.setTitle(
+                    Messages.application_directoryTitle + fich.getName() + " ]"); //$NON-NLS-1$ 
             }
 
         } else {
@@ -290,11 +295,12 @@ public class EditDesc {
             fich = new File(ViewFile.nomFichier);
 
             if (DataModel.ouverture) {
-                ApplicationWorkbenchWindowAdvisor.configurer_titre
-                        .setTitle(Messages.application_fileTitle + fich.getName() + Messages.application_modelTitle + OpenAction.nomFichierModele + " ]"); //$NON-NLS-1$
+                ApplicationWorkbenchWindowAdvisor.configurer_titre.setTitle(
+                    Messages.application_fileTitle + fich.getName() + 
+                    Messages.application_modelTitle + OpenAction.nomFichierModele + " ]"); //$NON-NLS-1$
             } else {
-                ApplicationWorkbenchWindowAdvisor.configurer_titre
-                        .setTitle(Messages.application_fileTitle + fich.getName() + " ]"); //$NON-NLS-1$ 
+                ApplicationWorkbenchWindowAdvisor.configurer_titre.setTitle(
+                    Messages.application_fileTitle + fich.getName() + " ]"); //$NON-NLS-1$ 
             }
         }
 

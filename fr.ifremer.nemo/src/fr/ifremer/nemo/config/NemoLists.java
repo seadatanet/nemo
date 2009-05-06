@@ -1304,20 +1304,21 @@ public class NemoLists implements Cloneable {
 					encoder = new XMLEncoder(stream);
 					encoder.writeObject(table.value);
                     
-                    if (!list.isUseToMapping()){
-                        list.setLocalVersion(list.getServerVersion());
-                        Utils.configuration.getVocabLists().put(list.getId(), list);
-                    }
+                    list.setLocalVersion(list.getServerVersion());
+                    Utils.configuration.getVocabLists().put(list.getId(), list);
                     
                     updateList.setEtat(EtatUpdate.UPDATED);
                     updateList.setNbRetrieve(_vocabList.get(listId).length);
-    			} else {
+    			} 
+                else {
                     updateList.setEtat(EtatUpdate.FAILED);
     			}
-    		} catch (Exception e) {
+    		} 
+            catch (Exception e) {
                 updateList.setEtat(EtatUpdate.FAILED);
     			e.printStackTrace();
-    		} finally {
+    		} 
+            finally {
     			if (encoder != null) {
     				try {
     					encoder.close();
@@ -1407,9 +1408,15 @@ public class NemoLists implements Cloneable {
         
         UpdateBean updateMap = new UpdateBean(listName, listName); 
         updateMap.setNbTot(_vocabMap.get(listName).length);
-                
-        if ((list1.getLocalVersion().compareTo(list1.getServerVersion()) < 0)
-                || (list2.getLocalVersion().compareTo(list2.getServerVersion()) < 0)){
+        
+        // check if update is needed
+        // FIXME !! cette façon de faire nécessite le chargement et la mise à jour de chacune des listes en individuel :
+        // !! si les listes individuelles sont supprimées, cette vérification ne fonctionnera plus
+        UpdateBean updateList1 = getUpdate(Intern.id_lists).getSubUpdate(list1.getId());
+        UpdateBean updateList2 = getUpdate(Intern.id_lists).getSubUpdate(list2.getId());
+        
+        if (updateList1.getEtat() != EtatUpdate.CHECKED 
+                || updateList2.getEtat() != EtatUpdate.CHECKED){
 
     		FileOutputStream stream = null;
     		XMLEncoder encoder = null;
@@ -1435,11 +1442,6 @@ public class NemoLists implements Cloneable {
     
     					encoder = new XMLEncoder(stream);
     					encoder.writeObject(table.value);
-                        
-                        list1.setLocalVersion(list1.getServerVersion());
-                        list2.setLocalVersion(list2.getServerVersion());
-                        Utils.configuration.getVocabLists().put(list1.getId(), list1);
-                        Utils.configuration.getVocabLists().put(list2.getId(), list2);
                         
                         updateMap.setEtat(EtatUpdate.UPDATED);
                         updateMap.setNbRetrieve(_vocabMap.get(listName).length);
@@ -1548,7 +1550,7 @@ public class NemoLists implements Cloneable {
         }
 
 		// FAE 0001131 : remplacer "\n" par "\r\n" pour retour chariot sous bloc-note
-		for (fr.ifremer.nemo.input.ParameterModel param : fr.ifremer.nemo.ui.DataModel.stationModel.getParameterModels()) {
+		for (fr.ifremer.nemo.input.ParameterModel param : fr.ifremer.nemo.ui.edit.DataModel.stationModel.getParameterModels()) {
 			_sdnParameters += Global.RN + convert.getDebut() + parameterMap(param.getModel());
 		}
 	}

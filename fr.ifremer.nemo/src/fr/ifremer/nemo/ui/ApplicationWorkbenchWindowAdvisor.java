@@ -6,6 +6,8 @@ import org.eclipse.ui.application.IActionBarConfigurer;
 import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
 import org.eclipse.ui.application.WorkbenchWindowAdvisor;
 
+import fr.ifremer.nemo.util.Intern;
+
 public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 
 	public static IWorkbenchWindowConfigurer configurer_titre;
@@ -31,7 +33,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 
 		configurer_titre = configurer;
 
-		configurer_titre.setTitle("Nemo"); //$NON-NLS-1$
+		configurer_titre.setTitle(Intern.application_title);
 
 	}
 }

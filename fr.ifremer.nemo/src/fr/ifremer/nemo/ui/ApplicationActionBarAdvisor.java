@@ -14,6 +14,11 @@ import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.mapping.EditMappingAction;
 import fr.ifremer.nemo.mapping.ExportMappingAction;
 import fr.ifremer.nemo.mapping.ImportMappingAction;
+import fr.ifremer.nemo.ui.actions.ExitAction;
+import fr.ifremer.nemo.ui.actions.OpenAction;
+import fr.ifremer.nemo.ui.actions.OptionsAction;
+import fr.ifremer.nemo.ui.actions.SaveAction;
+import fr.ifremer.nemo.ui.actions.UpdateAction;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 

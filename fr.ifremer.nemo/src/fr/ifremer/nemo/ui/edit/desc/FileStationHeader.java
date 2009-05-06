@@ -25,6 +25,7 @@ import fr.ifremer.nemo.util.Messages;
  */
 public class FileStationHeader extends FileSection
 {
+    protected Composite subCompo, col01, col02;
     protected Button radNumber, radIndicator;
     protected SetText setterIndicator, setterLinesBeforeData;
 
@@ -84,7 +85,7 @@ public class FileStationHeader extends FileSection
     @Override
     protected void drawSection(Composite parent)
     {
-        Composite compo = new Composite(parent, SWT.NONE);
+        compo = new Composite(parent, SWT.NONE);
         GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compo);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(compo);
         
@@ -99,17 +100,17 @@ public class FileStationHeader extends FileSection
         radIndicator.setBackground(compo.getBackground());
         radIndicator.setText(Messages.edit_file_enteteStation_radIndicator); 
         
-            Composite subCompo = new Composite(compo, SWT.NONE);
+            subCompo = new Composite(compo, SWT.NONE);
             GridLayoutFactory.fillDefaults().numColumns(2).applyTo(subCompo);
             GridDataFactory.fillDefaults().grab(true, false).applyTo(subCompo);
 
-                Composite col01 = new Composite(subCompo, SWT.NONE);
+                col01 = new Composite(subCompo, SWT.NONE);
                 GridLayoutFactory.fillDefaults().numColumns(1).applyTo(col01);
                 GridDataFactory.fillDefaults().grab(true, false).applyTo(col01);
                 
                 setterIndicator.draw(col01);
 
-                Composite col02 = new Composite(subCompo, SWT.NONE);
+                col02 = new Composite(subCompo, SWT.NONE);
                 GridLayoutFactory.fillDefaults().numColumns(1).applyTo(col02);
                 GridDataFactory.fillDefaults().grab(true, false).applyTo(col02);
 
@@ -140,6 +141,9 @@ public class FileStationHeader extends FileSection
         radIndicator.dispose();
         setterIndicator.dispose();
         setterLinesBeforeData.dispose();
+        if (subCompo != null) subCompo.dispose();
+        if (col01 != null) col01.dispose();
+        if (col02 != null) col02.dispose();
     }
 
 

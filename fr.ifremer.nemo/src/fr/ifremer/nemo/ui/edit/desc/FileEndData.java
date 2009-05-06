@@ -25,8 +25,9 @@ import fr.ifremer.nemo.util.Messages;
  */
 public class FileEndData extends FileSection
 {
-
+    protected Composite subCompo, col01, col02;
     protected Button radEOF, radLigne, radNextStation, radManuel;
+    protected SetText setterStartStation;
 
     /**
      * @param shell
@@ -46,6 +47,8 @@ public class FileEndData extends FileSection
         addRadListener(radNextStation);
         radManuel = new Button(shell, SWT.RADIO);
         addRadListener(radManuel); 
+        
+        setterStartStation = new SetText(shell, null, Global.EMPTY_STRING, true);
     }
     
 
@@ -73,7 +76,7 @@ public class FileEndData extends FileSection
     @Override
     protected void drawSection(Composite parent)
     {
-        Composite compo = new Composite(parent, SWT.NONE);
+        compo = new Composite(parent, SWT.NONE);
         GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compo);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(compo);
 
@@ -84,11 +87,12 @@ public class FileEndData extends FileSection
         radLigne.setParent(compo);
         radLigne.setBackground(compo.getBackground());
         radLigne.setText(Messages.edit_file_idcEmptyLine);
-        
+
         radNextStation.setParent(compo);
         radNextStation.setBackground(compo.getBackground());
         radNextStation.setText(Messages.edit_file_idcNextStation);
-        
+        setterStartStation.draw(compo);
+
         radManuel.setParent(compo);
         radManuel.setBackground(compo.getBackground());
         radManuel.setText(Messages.edit_file_idcManual); 
@@ -107,6 +111,10 @@ public class FileEndData extends FileSection
             ok = setter.checkMandatoryValue();
             log = log + Messages.error_file_idcEmpty;
         }
+        else if (radNextStation.getSelection()){
+            ok = setterStartStation.checkMandatoryValue();
+            log = log + Messages.error_file_idcStartStationEmpty;
+        }
         
         if (!ok) 
             Utils.messageErreurAppend(log);
@@ -121,6 +129,7 @@ public class FileEndData extends FileSection
     public void razValues()
     {
         super.razValues();
+        setterStartStation.razValues();
         selectEndData(radEOF);
     }
     
@@ -134,6 +143,9 @@ public class FileEndData extends FileSection
         radLigne.dispose();
         radNextStation.dispose();
         radManuel.dispose();
+        if (subCompo != null) subCompo.dispose();
+        if (col01 != null) col01.dispose();
+        if (col02 != null) col02.dispose();
     }
     
     public void selectEndData(Button radio) {
@@ -142,6 +154,7 @@ public class FileEndData extends FileSection
                 radEOF.setSelection(true);
                 radLigne.setSelection(false);
                 radNextStation.setSelection(false);
+                setterStartStation.setEnabled(false);
                 radManuel.setSelection(false);
                 setter.setEnabled(false);
                 
@@ -149,6 +162,7 @@ public class FileEndData extends FileSection
                 radEOF.setSelection(false);
                 radLigne.setSelection(true);
                 radNextStation.setSelection(false);
+                setterStartStation.setEnabled(false);
                 radManuel.setSelection(false);
                 setter.setEnabled(false);
                 
@@ -156,6 +170,7 @@ public class FileEndData extends FileSection
                 radEOF.setSelection(false);
                 radLigne.setSelection(false);
                 radNextStation.setSelection(true);
+                setterStartStation.setEnabled(true);
                 radManuel.setSelection(false);
                 setter.setEnabled(false);
                 
@@ -163,6 +178,7 @@ public class FileEndData extends FileSection
                 radEOF.setSelection(false);
                 radLigne.setSelection(false);
                 radNextStation.setSelection(false);
+                setterStartStation.setEnabled(false);
                 radManuel.setSelection(true);
                 setter.setEnabled(true);
                 
@@ -170,6 +186,7 @@ public class FileEndData extends FileSection
                 radEOF.setSelection(true);
                 radLigne.setSelection(false);
                 radNextStation.setSelection(false);
+                setterStartStation.setEnabled(false);
                 radManuel.setSelection(false);
                 setter.setEnabled(false);
             }
@@ -229,5 +246,13 @@ public class FileEndData extends FileSection
     
     public boolean radManuelSelected(){
         return radManuel.getSelection();
+    }
+
+    public String getStartStationIndicator(){
+        return setterStartStation.getValue();
+    }
+    
+    public void setStartStationIndicator(String value){
+        setterStartStation.setValue(value);
     }
 }

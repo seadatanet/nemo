@@ -12,6 +12,7 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.config.UpdateBean;
 import fr.ifremer.nemo.config.UpdateBean.EtatUpdate;
+import fr.ifremer.nemo.ui.edit.DataModel;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.NemoWS;

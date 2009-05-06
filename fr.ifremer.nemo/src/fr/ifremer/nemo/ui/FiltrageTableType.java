@@ -22,6 +22,12 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 import fr.ifremer.nemo.config.EdmoHandler;
 import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.ui.edit.data.TableData;
+import fr.ifremer.nemo.ui.edit.data.TypeData;
+import fr.ifremer.nemo.ui.edit.survey.EditSurvey;
+import fr.ifremer.nemo.ui.edit.survey.TableDataSurvey;
+import fr.ifremer.nemo.ui.edit.survey.TableWS_Survey;
+import fr.ifremer.nemo.ui.edit.survey.TypeSurvey;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 

@@ -17,6 +17,9 @@ import fr.ifremer.nemo.output.SurveyWriter;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.ProgressNotification;
 import fr.ifremer.nemo.output.SurveyWriterFactory;
+import fr.ifremer.nemo.ui.edit.DataModel;
+import fr.ifremer.nemo.ui.edit.conversion.EditConversion;
+import fr.ifremer.nemo.ui.view.ViewFile;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
@@ -55,7 +58,7 @@ public class SWTProcess implements IRunnableWithProgress {
                 runMultiProcess();
     		} 
             else {
-                System.out.println("Campagne");
+                //System.out.println("Campagne");
                 runSingleProcess(Global.EMPTY_STRING, null, null);
     		}
             
@@ -87,28 +90,29 @@ public class SWTProcess implements IRunnableWithProgress {
         for (String item : items) {
             numItem++;
             String msg = " : " + item + " ( " + numItem + " / " + items.length + " ) "; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-            String multiStationFileName = null;
+            String multiStationsFileName = null;
             String surveyName = Intern.unknown;
             
 
             if (ViewFile.collectionCas1){
-                System.out.println("Collection Campagnes");
-                DataModel.dirSurvey.setDirectory(inputDirectory + "/" + item); //$NON-NLS-1$
-                multiStationFileName = outputDirectory + "/" + item + Global.EXT_TXT; //$NON-NLS-1$
+                //System.out.println("Collection Campagnes");
+                DataModel.dirSurvey.setDirectory(inputDirectory + File.separator + item);
+                // TODO create outputdirectory ??
+                multiStationsFileName = outputDirectory + File.separator + item + Global.EXT_TXT;
                 surveyName = item;
             }
             else{
-                System.out.println("Collection Fichiers");
-                DataModel.singleSurvey.setFile(inputDirectory + "/" + item); //$NON-NLS-1$
-                multiStationFileName = outputDirectory + "\\" + item.substring(0, item.lastIndexOf('.')) + Global.EXT_TXT;                 //$NON-NLS-1$
+                //System.out.println("Collection Fichiers");
+                DataModel.singleSurvey.setFile(inputDirectory + File.separator + item);
+                multiStationsFileName = outputDirectory + File.separator + item.substring(0, item.lastIndexOf('.')) + Global.EXT_TXT;
             }
 
-            runSingleProcess(msg, multiStationFileName, surveyName);       
+            runSingleProcess(msg, multiStationsFileName, surveyName);       
         }
     }
     
     private void runSingleProcess(String msg,
-                                  String multiStationFileName,
+                                  String multiStationsFileName,
                                   String surveyName) throws Exception{
 
         // NOTIFIER
@@ -129,12 +133,13 @@ public class SWTProcess implements IRunnableWithProgress {
             
             if ((formatConversion == Conversion.ODV) && (monoStation)){
                 writeMonoStationFile();
-            }else{
+            }
+            else{
                 String fileName = EditConversion.nomFichierSortie;
-                if (multiStationFileName != null){
-                    fileName = multiStationFileName;
+                if (multiStationsFileName != null){
+                    fileName = multiStationsFileName;
                 }
-                writeMultisationFile(fileName, msg);
+                writeMultiSationsFile(fileName, msg);
             }
 //            System.out.println("END writing at " + new Date());
         }
@@ -174,7 +179,7 @@ public class SWTProcess implements IRunnableWithProgress {
         if (surveyName != null)
             survey.setName(surveyName);
         
-        if (!ViewFile.collectionCas1){
+        if (!ViewFile.isCollection()){
            DataModel.inputModel.setConverted(true);    
         }
     }
@@ -192,7 +197,7 @@ public class SWTProcess implements IRunnableWithProgress {
                 currentStation = station;
                 
                 EditConversion.nomFichierSortie = EditConversion.nomDossierSortie
-                + "\\" + localCdiId + Global.EXT_TXT; //$NON-NLS-1$
+                                                        + File.separator + localCdiId + Global.EXT_TXT;
                 File fichierSortie = new java.io.File(
                     EditConversion.nomFichierSortie);
                 
@@ -204,9 +209,9 @@ public class SWTProcess implements IRunnableWithProgress {
                     
                     //Si le nom hors prefix est vide, il ne faut pas ajouter le séparateur
                     if(EditConversion.nomHorsPrefix.equals(Global.EMPTY_STRING))
-                        mapping.setFilename(EditConversion.nomHorsPrefix+fichierSortie.getName());
+                        mapping.setFilename(EditConversion.nomHorsPrefix + fichierSortie.getName());
                     else
-                        mapping.setFilename(EditConversion.nomHorsPrefix+File.separator+fichierSortie.getName());
+                        mapping.setFilename(EditConversion.nomHorsPrefix + File.separator + fichierSortie.getName());
                     
                     mapping.setDate(new Date());
                     mapping.setModus(Mapping.MODUS_MONOSTATION);
@@ -216,9 +221,8 @@ public class SWTProcess implements IRunnableWithProgress {
         }
     }
     
-    private void writeMultisationFile(String outputFileName, 
-                                      String msg) 
-                                                    throws GenerationException
+    private void writeMultiSationsFile(String outputFileName, 
+                                       String msg) throws GenerationException
     {
         File fichierSortie = new java.io.File(outputFileName);
         

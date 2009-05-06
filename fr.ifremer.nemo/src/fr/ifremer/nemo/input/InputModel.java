@@ -405,23 +405,7 @@ public class InputModel implements Cloneable, PathElementHandler,
                 if (!converted)
                 {   
                     System.out.println("--- " + Messages.SWTProcess_3);
-//                    long refDate = 0;
-//                    if (isRefDateBased()) {
-//                        TimeZone tz = TimeZone.getTimeZone("GMT"); //$NON-NLS-1$
-//                        Calendar cal = Calendar.getInstance(tz);
-//                        cal.clear();
-//                        cal.setTimeInMillis(getRefDate());
-//                        Calendar cal2 = Calendar.getInstance(tz);
-//                        cal2.clear();
-//                        cal2.setTimeInMillis(_refTime);
-//                        cal.set(Calendar.HOUR_OF_DAY, cal2.get(Calendar.HOUR_OF_DAY));
-//                        cal.set(Calendar.MINUTE, cal2.get(Calendar.MINUTE));
-//                        cal.set(Calendar.SECOND, cal2.get(Calendar.SECOND));
-//                        
-//                        refDate = cal.getTimeInMillis();
-//                        
-//                    }
-                    survey = _media.convert(/*refDate, */a_monitor, a_ProgressNotifier);
+                    survey = _media.convert(a_monitor, a_ProgressNotifier);
                     _media.setModel(survey);
                 }
                 else

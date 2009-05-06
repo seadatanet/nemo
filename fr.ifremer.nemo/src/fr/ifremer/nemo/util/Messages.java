@@ -200,6 +200,7 @@ public class Messages {
     public static String error_file_selectFile;
     public static String error_file_selectDir;
     public static String error_file_idcEmpty;
+    public static String error_file_idcStartStationEmpty;
     public static String error_cruise_openXml;
     public static String error_cruise_invalidXML;
     public static String error_data_removePRES;
