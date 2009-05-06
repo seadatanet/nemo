@@ -224,6 +224,7 @@ public class QCflagsSection extends NemoSection
 
                 Flag temp = new Flag(item.getText(0), item.getText(1));
                 flagTable.getFlags().add(temp);
+                Utils.invalidEtapes();
             }
         });
 
@@ -234,13 +235,13 @@ public class QCflagsSection extends NemoSection
                                 .getText()));
                 tab.remove(tab.getSelectionIndex());
                 ViewEdit.formEdition.reflow(true);
+                Utils.invalidEtapes();
             }
         });
 
         MenuItem itemLoad = new MenuItem(menu, SWT.CASCADE);
         itemLoad.setText(Messages.menu_label_load);
-        final Menu submenu = new Menu(tabCorrespondance.getShell(),
-                SWT.DROP_DOWN);
+        final Menu submenu = new Menu(tabCorrespondance.getShell(), SWT.DROP_DOWN);
         itemLoad.setMenu(submenu);
         final ArrayList<FlagTable> flagTables = FlagTable
                 .getOrderedFlagTables(Utils.configuration.getFlagTables());
@@ -255,6 +256,7 @@ public class QCflagsSection extends NemoSection
                     flagTable = flagTables.get(j);
                     flagTable.fillTable(tab);
                     ViewEdit.formEdition.reflow(true);
+                    Utils.invalidEtapes();
                 }
             });
         }
@@ -349,14 +351,15 @@ public class QCflagsSection extends NemoSection
         itemRemoveFlag.addListener(SWT.Selection, new Listener() {
             public void handleEvent(Event e) {
                 tabFlag.remove(tabFlag.getSelectionIndex());
-
                 ViewEdit.formEdition.reflow(true);
+                Utils.invalidEtapes();
             }
         });
         
         itemInjectFlag.addListener(SWT.Selection, new Listener() {
             public void handleEvent(Event e) {
                 Utils.injectFlag(ViewFile.styledTextStation, flagTable, tabFlag, 2, 3, 4, 5, 6);
+                Utils.invalidEtapes();
             }
         });
         
@@ -433,19 +436,7 @@ public class QCflagsSection extends NemoSection
 
     public void setFlagTable(FlagTable table) {
         flagTable = table;
-    }
-
-//    public void fillTabCorrespondanceTable() {
-//        tabCorrespondance.removeAll();
-//        ArrayList<Flag> flags = flagTable.getOrderedFlags();
-//        for (int i = 0; i < flags.size(); i++) {
-//            TableItem itemTemp = new TableItem(tabCorrespondance, SWT.NONE);
-//            
-//            itemTemp.setText(0, flags.get(i).getLocal());
-//            itemTemp.setText(1, flags.get(i).getSdn());
-//        }
-//    }
-    
+    } 
 
     
     @Override
