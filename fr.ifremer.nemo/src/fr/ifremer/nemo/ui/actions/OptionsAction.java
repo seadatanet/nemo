@@ -110,10 +110,13 @@ public class OptionsAction extends Action implements ISelectionListener,
     public static Button useProxy;
     private Label label, labelAdrProxy, labelPortProxy, labelLoginProxy, labelPassProxy;
     public static Text textAdrProxy, textPortProxy, textLoginProxy, textPassProxy;
+    
+    // -- options necessitant un redemarrage
+    private String configLangage;
+    private Proxy configProxy;
 
     public OptionsAction(IWorkbenchWindow window)
     {
-
         this.window = window;
         setId(ID);
         setText(Messages.menu_settings);
@@ -123,12 +126,15 @@ public class OptionsAction extends Action implements ISelectionListener,
     public void dispose()
     {
         window.getSelectionService().addSelectionListener(this);
-
     }
 
     @Override
     public void run()
     {
+        // sauvegarde des options necessitant un redemarrage
+        configLangage = Utils.configuration.getLang();
+        configProxy = Utils.configuration.getProxy();
+        
         // lancement IHM options
         shelloptions =
             new Shell(Application.display, SWT.BORDER | SWT.TITLE
@@ -847,23 +853,31 @@ public class OptionsAction extends Action implements ISelectionListener,
     private void createCompoBouton()
     {
         compo = new Composite(top, SWT.NONE);
-
-        //GridLayoutFactory.fillDefaults().numColumns(3).applyTo(compo);
         GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo);
-        GridDataFactory.fillDefaults().grab(true, false).align(SWT.CENTER,
-            SWT.NONE).applyTo(compo);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(compo);
+        
+            compo01 = new Composite(compo, SWT.NONE);
+            GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compo01);
+            GridDataFactory.fillDefaults().grab(true, false)
+                .align(SWT.LEFT, SWT.NONE).applyTo(compo01);
+        
+                buttonRestore = new Button(compo01, SWT.NONE);
+                buttonRestore.setText(Messages.button_restore);
+                buttonRestore.pack();
 
-        buttonValider = new Button(compo, SWT.NONE);
-        buttonValider.setText(Messages.button_validate);
-        buttonValider.pack();
-
-//        buttonRestore = new Button(compo, SWT.NONE);
-//        buttonRestore.setText("Restore Default"); //$NON-NLS-1$
-//        buttonRestore.pack();
-
-        buttonCancel = new Button(compo, SWT.NONE);
-        buttonCancel.setText(Messages.button_cancel);
-        buttonCancel.pack();
+            
+            compo02 = new Composite(compo, SWT.NONE);
+            GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo02);
+            GridDataFactory.fillDefaults().grab(true, false)
+                .align(SWT.RIGHT, SWT.NONE).applyTo(compo02);
+        
+                buttonValider = new Button(compo02, SWT.NONE);
+                buttonValider.setText(Messages.button_validate);
+                buttonValider.pack();
+        
+                buttonCancel = new Button(compo02, SWT.NONE);
+                buttonCancel.setText(Messages.button_cancel);
+                buttonCancel.pack();
 
         compo.pack();
     }
@@ -1237,17 +1251,18 @@ public class OptionsAction extends Action implements ISelectionListener,
             });
 
         // listener reinitialiser
-//        buttonRestore
-//            .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-//                @Override
-//                public void widgetSelected(
-//                        org.eclipse.swt.events.SelectionEvent e)
-//                {
-//                    Utils.restoreDefaultConfig();
-//                    remplissageOptions();
-//                    
-//                }
-//            });
+        buttonRestore
+            .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                @Override
+                public void widgetSelected(
+                        org.eclipse.swt.events.SelectionEvent e)
+                {
+                    Utils.restoreDefaultConfig();
+                    remplissageOptions();
+                    
+                    buttonCancel.setEnabled(false);
+                }
+            });
     }
     
     protected boolean checkConfig() {
@@ -1349,51 +1364,51 @@ public class OptionsAction extends Action implements ISelectionListener,
         StringBuffer message = new StringBuffer();
 
         if (comboLangue.getText().equals(Messages.settings_lang_EN)){
-            if (Utils.configuration.getLang().equals(Intern.lang_fr))
+            if (configLangage.equals(Intern.lang_fr))
                 message.append(Global.RN + Global.SEP + Messages.settings_lang);
         }else{
-            if (Utils.configuration.getLang().equals(Intern.lang_en))
+            if (configLangage.equals(Intern.lang_en))
                 message.append(Global.RN + Global.SEP + Messages.settings_lang); 
         }
         
-        Proxy recordedProxy = Utils.configuration.getProxy();
-        if (useProxy.getSelection() != recordedProxy.isUse()){
+        if (useProxy.getSelection() != configProxy.isUse()){
             // proxy configuration change
             message.append(Global.RN + Global.SEP + Messages.settings_proxy);
             writeIni = true;
-        }else{
+        }
+        else{
             if (useProxy.getSelection())
             {
-                if (!textAdrProxy.getText().trim().equals(recordedProxy.getAdress().trim())){
+                if (!textAdrProxy.getText().trim().equals(configProxy.getAdress().trim())){
                     // proxy address change (can't be null)
                     message.append(Global.RN + Global.SEP + Messages.settings_proxy_adr);
                     writeIni = true;
                 }
-                if (!textPortProxy.getText().trim().equals(recordedProxy.getPort().trim())){
+                if (!textPortProxy.getText().trim().equals(configProxy.getPort().trim())){
                     // proxy port change (can't be null)
                     message.append(Global.RN + Global.SEP + Messages.settings_proxy_port);
                     writeIni = true;
                 }
                 
                 if (textLoginProxy.getText() == null){
-                    if (!recordedProxy.getLogin().equals(Global.EMPTY_STRING)){
+                    if (!configProxy.getLogin().equals(Global.EMPTY_STRING)){
                         // proxy login change
                         message.append(Global.RN + Global.SEP + Messages.settings_proxy_login);
                         writeIni = true;
                     }
-                }else if (!textLoginProxy.getText().trim().equals(recordedProxy.getLogin().trim())){
+                }else if (!textLoginProxy.getText().trim().equals(configProxy.getLogin().trim())){
                     // proxy login change
                     message.append(Global.RN + Global.SEP + Messages.settings_proxy_login); 
                     writeIni = true;
                 }
                 
                 if (textPassProxy.getText() == null){
-                    if (!recordedProxy.getPassword().equals(Global.EMPTY_STRING)){
+                    if (!configProxy.getPassword().equals(Global.EMPTY_STRING)){
                         // proxy password change
                         message.append(Global.RN + Global.SEP + Messages.settings_proxy_pass);
                         writeIni = true;
                     }
-                }else if (!textPassProxy.getText().trim().equals(recordedProxy.getPassword().trim())){
+                }else if (!textPassProxy.getText().trim().equals(configProxy.getPassword().trim())){
                     // proxy password change
                     message.append(Global.RN + Global.SEP + Messages.settings_proxy_pass);
                     writeIni = true;

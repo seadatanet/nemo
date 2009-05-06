@@ -45,6 +45,7 @@ public class Messages {
     public static String button_reset;
     public static String button_set;
     public static String button_convert;
+    public static String button_restore;
     
     public static String typeFile_profile;
     public static String typeFile_timeseries;

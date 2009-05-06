@@ -1041,8 +1041,7 @@ public class NemoLists implements Cloneable {
             FileOutputStream stream = null;
             XMLEncoder encoder = null;
             try {
-                if (!monitor.isCanceled())
-                {
+                if (!monitor.isCanceled()){
                     WSParameter[] parameters = service.getParameters();
                     releaseParameters();
                     for (int i = 0; i < parameters.length; i++) {
@@ -1051,8 +1050,7 @@ public class NemoLists implements Cloneable {
                     nbParameters = parameters.length;
                 }
 
-                if (!monitor.isCanceled())
-                {
+                if (!monitor.isCanceled()){
                     File file = new java.io.File(Intern.dir_resources + listName); 
                     stream = new FileOutputStream(file.toString());
                     encoder = new XMLEncoder(stream);
@@ -1061,7 +1059,9 @@ public class NemoLists implements Cloneable {
                     updateParameters.setEtat(EtatUpdate.UPDATED);
                     updateParameters.setNbRetrieve(nbParameters);
                     
-                }else{
+                }
+                else{
+                    updateParameters.setEtat(EtatUpdate.INTERRUPTED);
                     if (nbParameters != 0){
                         // rollback
                         releaseParameters();
@@ -1071,10 +1071,12 @@ public class NemoLists implements Cloneable {
                         nbParameters = 0;
                     }
                 }
-            } catch (Exception e) {
+            } 
+            catch (Exception e) {
                 updateParameters.setEtat(EtatUpdate.FAILED);
                 e.printStackTrace();
-            } finally {
+            } 
+            finally {
                 if (encoder != null) {
                     try {
                         encoder.close();
@@ -1088,7 +1090,8 @@ public class NemoLists implements Cloneable {
                     }
                 }
             }
-        }else{
+        }
+        else{
             updateParameters.setEtat(EtatUpdate.FAILED);
         }
 
@@ -1140,8 +1143,8 @@ public class NemoLists implements Cloneable {
                     updateSurveys.setEtat(EtatUpdate.UPDATED);
                     updateSurveys.setNbRetrieve(nbSurveys);
                 }
-                else
-                {
+                else{
+                    updateSurveys.setEtat(EtatUpdate.INTERRUPTED);
                     if (nbSurveys != 0){
                         // rollback 
                         releaseSurveys();
@@ -1151,10 +1154,14 @@ public class NemoLists implements Cloneable {
                         nbSurveys = 0;
                     }
                 }
-    		} catch (Exception e) {
+                
+                
+    		} 
+            catch (Exception e) {
                 updateSurveys.setEtat(EtatUpdate.FAILED);
     			e.printStackTrace();
-    		} finally {
+    		} 
+            finally {
     			if (encoder != null) {
     				try {
     					encoder.close();
@@ -1168,7 +1175,8 @@ public class NemoLists implements Cloneable {
     				}
     			}
     		}
-        }else{
+        }
+        else{
             updateSurveys.setEtat(EtatUpdate.FAILED);
         }
 
@@ -1202,7 +1210,8 @@ public class NemoLists implements Cloneable {
                     }
                 }
             }
-        }catch (Exception e){
+        }
+        catch (Exception e){
             e.printStackTrace();
             vocab = null;
         }
@@ -1252,18 +1261,21 @@ public class NemoLists implements Cloneable {
                         if (updateLists.getEtat().compareTo(updateList.getEtat()) < 0){
                             updateLists.setEtat(updateList.getEtat());
                         }
-                    }else{
+                    }
+                    else{
                         updateLists.setEtat(EtatUpdate.INTERRUPTED);
                     }
                 }
                 
                 updateLists.setNbRetrieve(nbRetrieve);
                 
-            }catch (Exception e){
+            }
+            catch (Exception e){
                 updateLists.setEtat(EtatUpdate.FAILED);
                 e.printStackTrace();
             }
-        }else{
+        }
+        else{
             updateLists.setEtat(EtatUpdate.FAILED);
         }
     }
@@ -1273,7 +1285,6 @@ public class NemoLists implements Cloneable {
 	 */
 	private static UpdateBean updateVocabList(VocabSoapBindingStub vocab, String listId) 
     {
-
         BODCList list = Utils.configuration.getVocabList(listId);
         
         StringBuffer msg = new StringBuffer();
@@ -1332,7 +1343,8 @@ public class NemoLists implements Cloneable {
     				}
     			}
     		}
-        }else{
+        }
+        else{
             updateList.setEtat(EtatUpdate.CHECKED);
         }
         return updateList;
@@ -1340,7 +1352,6 @@ public class NemoLists implements Cloneable {
     
     public static void updateVocabMaps(VocabSoapBindingStub vocabService, IProgressMonitor monitor)
     {
-
         UpdateBean updateMaps = getUpdate(Intern.id_maps);
         
         if (vocabService != null)
@@ -1348,18 +1359,14 @@ public class NemoLists implements Cloneable {
             int nbRetrieve = 0;
             int idxCurrent = 0;
             
-            try
-            {
+            try{
                 String[] listNames = Intern.vocabMaps.split(Global.COMMA);
                 int keySetSize = listNames.length;
                 updateMaps.setNbTot(keySetSize);
                 
-                for (String listName : listNames)
-                {
-                    
+                for (String listName : listNames) {
                     idxCurrent ++ ;
                     if (!monitor.isCanceled()){
-                        
                         StringBuffer msg = new StringBuffer();
                         msg.append(Messages.getString(Intern.id_maps)); 
                         msg.append(Global.SPACE);
@@ -1380,18 +1387,19 @@ public class NemoLists implements Cloneable {
                         if (updateMaps.getEtat().compareTo(updateMap.getEtat()) < 0){
                             updateMaps.setEtat(updateMap.getEtat());
                         }
-                    }else{
+                    }
+                    else{
                         updateMaps.setEtat(EtatUpdate.INTERRUPTED);
                     }
                 }
-                
-                updateMaps.setNbRetrieve(nbRetrieve);
-                
-            }catch (Exception e){
+                updateMaps.setNbRetrieve(nbRetrieve);   
+            }
+            catch (Exception e){
                 updateMaps.setEtat(EtatUpdate.FAILED);
                 e.printStackTrace();
             }
-        }else{
+        }
+        else{
             updateMaps.setEtat(EtatUpdate.FAILED);
         }
     }
@@ -1410,7 +1418,7 @@ public class NemoLists implements Cloneable {
         updateMap.setNbTot(_vocabMap.get(listName).length);
         
         // check if update is needed
-        // FIXME !! cette façon de faire nécessite le chargement et la mise à jour de chacune des listes en individuel :
+        // !! cette façon de faire nécessite le chargement et la mise à jour de chacune des listes en individuel :
         // !! si les listes individuelles sont supprimées, cette vérification ne fonctionnera plus
         UpdateBean updateList1 = getUpdate(Intern.id_lists).getSubUpdate(list1.getId());
         UpdateBean updateList2 = getUpdate(Intern.id_lists).getSubUpdate(list2.getId());
@@ -1422,8 +1430,7 @@ public class NemoLists implements Cloneable {
     		XMLEncoder encoder = null;
     		CodeTableRecordTypeArrayHolder table = new CodeTableRecordTypeArrayHolder();
     		javax.xml.rpc.holders.BooleanHolder error = new BooleanHolder();
-    		try 
-            {
+    		try {
     			vocab.getMap(new String[] { list1.getUrl() }, 
                              Utils.configuration.getPredicate(), 
                              new String[] { list2.getUrl() }, 
@@ -1446,13 +1453,16 @@ public class NemoLists implements Cloneable {
                         updateMap.setEtat(EtatUpdate.UPDATED);
                         updateMap.setNbRetrieve(_vocabMap.get(listName).length);
     				}
-    			}else{
+    			}
+                else{
                     updateMap.setEtat(EtatUpdate.FAILED);
                 }
-    		} catch (Exception e) {
+    		} 
+            catch (Exception e) {
     			e.printStackTrace();
                 updateMap.setEtat(EtatUpdate.FAILED);
-    		} finally {
+    		} 
+            finally {
     			if (encoder != null) {
     				try {
     					encoder.close();
@@ -1466,7 +1476,8 @@ public class NemoLists implements Cloneable {
     				}
     			}
     		}
-        }else{
+        }
+        else{
             updateMap.setEtat(EtatUpdate.CHECKED);
         }
         return updateMap;
@@ -1497,16 +1508,14 @@ public class NemoLists implements Cloneable {
         String result = Global.EMPTY_STRING;
 
         try {
-            if (!monitor.isCanceled())
-            {
+            if (!monitor.isCanceled()){
                 // Appel au WebService
                 Edmo_webservice service = new Edmo_webserviceLocator();
                 ((Edmo_webserviceLocator)service).setedmo_webserviceSoap12EndpointAddress(Utils.configuration.getEdmoURL());
                 Edmo_webserviceSoap port = service.getedmo_webserviceSoap12();
                 result = port.ws_edmo_get_list();
             }
-            if (!monitor.isCanceled())
-            {
+            if (!monitor.isCanceled()){
                 if (!result.equals(Global.EMPTY_STRING)){
                     monitor.subTask(Messages.getString(Intern.id_edmo));
                     
@@ -1523,12 +1532,17 @@ public class NemoLists implements Cloneable {
                     nbEdmo = initEdmo();
                     updateEdmo.setEtat(EtatUpdate.UPDATED);
                     updateEdmo.setNbRetrieve(nbEdmo);
-                }else{
+                }
+                else{
                     updateEdmo.setEtat(EtatUpdate.FAILED);
                 }
             }
+            else{
+                updateEdmo.setEtat(EtatUpdate.INTERRUPTED);
+            }
 
-        }  catch (Exception exG) {
+        }  
+        catch (Exception exG) {
             updateEdmo.setEtat(EtatUpdate.FAILED);
             exG.printStackTrace();
         }
@@ -1560,7 +1574,8 @@ public class NemoLists implements Cloneable {
         StringBuffer sdnMapping = new StringBuffer();
         try{
             sdnMapping.append(Intern.getString(code));
-        }catch (MissingResourceException e){
+        }
+        catch (MissingResourceException e){
             String subjectURN = getURNSyntaxe(URNtype.subject, code, null, null);
             String objectURN = getURNSyntaxe(URNtype.object, code, Intern.mapping_subject, Intern.mapping_objet);
             String unitURN = getURNSyntaxe(URNtype.units, code, Intern.mapping_subject, Intern.mapping_unit);

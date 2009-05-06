@@ -829,6 +829,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	}
     
     public Configuration restoreDefault(){
+        
         // sauvegarde des listes BODC
         HashMap<String, BODCList> bkVocabLists = new HashMap<String, BODCList>();
         bkVocabLists.putAll(_vocabLists);
@@ -838,6 +839,8 @@ public class Configuration implements Cloneable, RootSAXConsumer {
         XMLBootstrapParser parser = new XMLBootstrapParser(_singleton);
         try {
             parser.parse(new FileInputStream(Intern.dir_resources + Intern.fileName_configIni + Global.EXT_XML), false);
+
+            // récupération des listes BODC
             _vocabLists.clear();
             _vocabLists.putAll(bkVocabLists);
             _singleton.setVocabLists(_vocabLists);
@@ -847,14 +850,6 @@ public class Configuration implements Cloneable, RootSAXConsumer {
         }
         return _singleton;
     }
-
-	/**
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		getSingleton().save();
-	}
 
 	/**
 	 * 

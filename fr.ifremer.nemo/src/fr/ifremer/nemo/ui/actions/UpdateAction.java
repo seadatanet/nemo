@@ -17,6 +17,7 @@ import fr.ifremer.nemo.config.UpdateBean.EtatUpdate;
 import fr.ifremer.nemo.ui.SWTProcessWS;
 import fr.ifremer.nemo.ui.SWTProgressWS;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 
 public class UpdateAction extends Action implements ISelectionListener,
@@ -90,7 +91,8 @@ public class UpdateAction extends Action implements ISelectionListener,
         if (!sublist){
             message.append(Global.RN);
             message.append(padRight(list.getName(), 35, '.'));
-        }else{
+        }
+        else{
             message.append(Global.TAB);
             message.append(padRight(list.getName(), 33, ' '));
             if (list.getName().trim().length() < 15)  message.append(Global.TAB);
@@ -103,16 +105,20 @@ public class UpdateAction extends Action implements ISelectionListener,
         message.append(Messages.getString(etat.toString()));
         switch (etat){
             case UPDATED :
+                message.append(Global.SEP);
                 message.append(list.getNbRetrieve());
                 message.append(Global.SPACE);
                 message.append(Messages.retrieved);
                 break;
             case INTERRUPTED :
-                message.append(list.getNbRetrieve());
-                message.append(Global.SPACE);
-                message.append(Messages.retrieved);
-                message.append(" / "); //$NON-NLS-1$
-                message.append(list.getNbTot());
+                if (!sublist && !list.getId().equals(Intern.id_nemo) && !list.getId().equals(Intern.id_edmo)){
+                    message.append(Global.SEP);
+                    message.append(list.getNbRetrieve());
+                    message.append(Global.SPACE);
+                    message.append(Messages.retrieved);
+                    message.append(" / "); //$NON-NLS-1$
+                    message.append(list.getNbTot());
+                }
                 break;
             default :
                 break;
