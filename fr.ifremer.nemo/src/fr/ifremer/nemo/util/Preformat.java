@@ -29,7 +29,6 @@ public class Preformat {
 	private static int _enTeteFichier;
 	
 	// Nombre de lignes d'en-tete de station
-	private static int _lgEnTeteStation;
     private static boolean _isPattern;
     private static int _enTeteStation;
     private static String _enTeteStationPattern;
@@ -203,7 +202,7 @@ public class Preformat {
 			ViewFile.nomRepertoire =  repSortie.getAbsolutePath();
 			ViewFile.fileLoaded = true;
 			
-			if (Utils.findFilesCollectCas1(ViewFile.nomRepertoire, false)) {
+			if (Utils.findFilesCollectCas1(repCollection.getAbsolutePath(), false)) {
 			    ViewFile.textAreaDescription.setText(Utils.texteBrut);
 			}
 		} 
@@ -341,7 +340,6 @@ public class Preformat {
 	private static void nombreColonnes(String fichier) throws IOException {
 		BufferedReader lecteurAvecBuffer = null;
 		String ligneLue = Global.EMPTY_STRING;
- 		_lgEnTeteStation = 0;
 		int i;
 
 		try {
@@ -349,35 +347,7 @@ public class Preformat {
                 _repEntree + File.separator + fichier));
 			
 			// Lecture des lignes d'en-tete
-            int endStationHeader = 0;
-			while ((ligneLue = lecteurAvecBuffer.readLine()) != null) {
-                _lgEnTeteStation++;
-                if (_isPattern){
-                    if (!(_enTeteStationPattern.equals(Global.EMPTY_STRING) &&  _lgBeforeData == 0)){
-                        if (!_enTeteStationPattern.equals(Global.EMPTY_STRING) 
-                                && ligneLue.startsWith(_enTeteStationPattern) 
-                                && _lgEnTeteStation > _enTeteFichier){
-                            endStationHeader = _lgEnTeteStation + _lgBeforeData;
-                        }
-                        if (_enTeteStationPattern.equals(Global.EMPTY_STRING)){
-                            endStationHeader = _lgBeforeData + _enTeteFichier;
-                        }
-                        if (_lgEnTeteStation > _enTeteFichier
-                                && endStationHeader > 0
-                                && _lgEnTeteStation == endStationHeader){
-                            break;
-                        }
-                    }
-                    else if (_lgEnTeteStation == _enTeteFichier){
-                        break;
-                    }
-                }
-                else{
-                    if (_lgEnTeteStation == _enTeteFichier + _enTeteStation) {
-                        break;
-                    }
-                }
-			}
+			consumeStationHeader(lecteurAvecBuffer);
 			
 			// Lecture de la 1e ligne de donnees
 			if ((ligneLue = lecteurAvecBuffer.readLine()) != null) {
@@ -403,8 +373,6 @@ public class Preformat {
 	private static void getMax(String fichier) throws IOException {
 		BufferedReader lecteurAvecBuffer = null;
 		String ligneLue = Global.EMPTY_STRING;
-		int numLigne = 0;
-		int i;
 		boolean analyseOK;
 		
 		
@@ -412,32 +380,31 @@ public class Preformat {
 			lecteurAvecBuffer = new BufferedReader(new FileReader(
 					_repEntree + File.separator + fichier));
 			if (_nbColonne > 0) {
+
+                // Lecture des lignes d'en-tete
+                consumeStationHeader(lecteurAvecBuffer);
+                
 				while ((ligneLue = lecteurAvecBuffer.readLine()) != null) {
-					numLigne++;
 					analyseOK = false;
-					
-					
-					if (numLigne > _lgEnTeteStation) {
-						if (!ligneLue.trim().equals(Global.EMPTY_STRING)) {
-							if (EditDesc.sectionRuptureDonnees.radEOFselected()) {
-								analyseOK = true;
-							} else if (EditDesc.sectionRuptureDonnees.radLigneSelected()) {
-								analyseOK = true;
-							} else if (EditDesc.sectionRuptureDonnees.radNextStationSelected()) {
-                                analyseOK = true;
-                            } else if (EditDesc.sectionRuptureDonnees.radManuelSelected()) {
-								analyseOK = !ligneLue.startsWith(_indicateur);
-							}
-							
-							if (analyseOK) {
-								analyseLigne(ligneLue);
-								
-								for (i = 0 ; i < _nbColonne ; i++) {
-									compareMax(i);
-								}
-							}
+                    
+					if (!ligneLue.trim().equals(Global.EMPTY_STRING)) {
+						if (EditDesc.sectionRuptureDonnees.radEOFselected()) {
+							analyseOK = true;
+						} else if (EditDesc.sectionRuptureDonnees.radLigneSelected()) {
+							analyseOK = true;
+						} else if (EditDesc.sectionRuptureDonnees.radNextStationSelected()) {
+                            analyseOK = true;
+                        } else if (EditDesc.sectionRuptureDonnees.radManuelSelected()) {
+							analyseOK = !ligneLue.startsWith(_indicateur);
 						}
 						
+						if (analyseOK) {
+							analyseLigne(ligneLue);
+							
+							for (int i = 0 ; i < _nbColonne ; i++) {
+								compareMax(i);
+							}
+						}
 					}
 				}
 			}
@@ -460,27 +427,20 @@ public class Preformat {
 
 		try {
 		    numLigne = 0;
+            File file = new File(_repEntree + File.separator + ficEntree);
 			lecteurAvecBuffer = new BufferedReader(new FileReader(_repEntree + File.separator + ficEntree)); 
 			fichPreformat = new PrintWriter(new BufferedWriter(new FileWriter(repSortie + PF + ficEntree)));
 
+            lecteurAvecBuffer.mark((int)file.length());
+            // Lecture des lignes d'en-tete
+            int lgEnTeteStation = consumeStationHeader(lecteurAvecBuffer);
+            lecteurAvecBuffer.reset();
+            
 			while ((ligneLue = lecteurAvecBuffer.readLine()) != null) {
 				numLigne++;
-				if (numLigne <= _lgEnTeteStation) {
+				if (numLigne <= lgEnTeteStation) {
 					// Traitement de l'en-tete
-					if (ligneLue.startsWith("Latitude")) { //$NON-NLS-1$
-						// Verification du format de latitude
-						fichPreformat.println(ligneLue);
-					} 
-                    else {
-						if (ligneLue.startsWith("Longitude")) { //$NON-NLS-1$
-							// Verification du format de longitude
-							fichPreformat.println(ligneLue);
-						} 
-                        else {
-							// sinon on recopie la ligne
-							fichPreformat.println(ligneLue);
-						}
-					}
+					fichPreformat.println(ligneLue);
 				} 
                 else {
 					// Traitement des donnees
@@ -528,6 +488,46 @@ public class Preformat {
             if (fichPreformat != null) fichPreformat.close();
 		}
 	}
+    
+    private static int consumeStationHeader(BufferedReader lecteurAvecBuffer) throws IOException{
+        
+        String ligneLue = Global.EMPTY_STRING;
+        int lgEnTeteStation = 0;
+        int i;
+
+        // Lecture des lignes d'en-tete
+        int endStationHeader = 0;
+        while ((ligneLue = lecteurAvecBuffer.readLine()) != null) {
+            lgEnTeteStation++;
+            if (_isPattern){
+                if (!(_enTeteStationPattern.equals(Global.EMPTY_STRING) &&  _lgBeforeData == 0)){
+                    if (!_enTeteStationPattern.equals(Global.EMPTY_STRING) 
+                            && ligneLue.startsWith(_enTeteStationPattern) 
+                            && lgEnTeteStation > _enTeteFichier){
+                        endStationHeader = lgEnTeteStation + _lgBeforeData;
+                    }
+                    if (_enTeteStationPattern.equals(Global.EMPTY_STRING)){
+                        endStationHeader = _lgBeforeData + _enTeteFichier;
+                    }
+                    if (lgEnTeteStation > _enTeteFichier
+                            && endStationHeader > 0
+                            && lgEnTeteStation == endStationHeader){
+                        break;
+                    }
+                }
+                else if (lgEnTeteStation == _enTeteFichier){
+                    break;
+                }
+            }
+            else{
+                if (lgEnTeteStation == _enTeteFichier + _enTeteStation) {
+                    break;
+                }
+            }
+        }           
+        
+        return lgEnTeteStation;
+    }
 
 	public static boolean isPreformat() {
 		return _preformatOK;
