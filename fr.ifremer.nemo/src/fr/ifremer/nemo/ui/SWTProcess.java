@@ -67,16 +67,19 @@ public class SWTProcess implements IRunnableWithProgress {
                 monitor2.setTaskName(Messages.SWTProcess_CDIresume);
                 CDIResumeWriter.getInstance().writeResume(formatConversion);
             }
-
+            
             System.out.println("Conversion END   at " + new Date() + "\n---------------");
             monitor.done();
+        }
+        catch (InterruptedException e) {
+            throw e;
         }
         catch (Exception e) {
             throw new InterruptedException(Messages.SWTProcess_5 + e.getMessage());
         }
 	}
     
-    private void runMultiProcess() throws Exception{
+    private void runMultiProcess() throws InterruptedException, Exception{
         
         if (monitor2.isCanceled())
             throw new InterruptedException(Global.EMPTY_STRING);
@@ -99,10 +102,7 @@ public class SWTProcess implements IRunnableWithProgress {
             if (ViewFile.collectionCas1){
                 //System.out.println("Collection Campagnes");
                 DataModel.dirSurvey.setDirectory(inputDirectory);
-                // TODO verifier create outputdirectory 
                 outputDirectory = EditConversion.nomDossierSortie + File.separator + item;
-                File output = new File(outputDirectory);
-                if (!output.exists()) output.mkdirs();
                 
                 multiStationsFileName = outputDirectory + Global.EXT_TXT;
                 surveyName = item;
@@ -120,7 +120,7 @@ public class SWTProcess implements IRunnableWithProgress {
     private void runSingleProcess(String msg,
                                   String outputDirName,
                                   String multiStationsFileName,
-                                  String surveyName) throws Exception{
+                                  String surveyName) throws InterruptedException, Exception{
 
         // NOTIFIER
         notifier();            
@@ -193,6 +193,9 @@ public class SWTProcess implements IRunnableWithProgress {
     
     private void writeMonoStationFile(String outputDirName) throws GenerationException
     {
+        File output = new File(outputDirName);
+        if (!output.exists()) output.mkdirs();
+        
         int i = 0;
         int totalStations = survey.getStations().length;
 

@@ -52,10 +52,13 @@ public class Etape {
 		if (ViewFile.chkSeparateur.getSelection() && !Preformat.isPreformat()) {
 			try {
 				Preformat.run();
-                if (Preformat.space && EditDesc.sectionRuptureDonnees.radNextStationSelected()){
+                
+                // le préformattage a ajouté un espace au début de chaque ligne de données
+                if (Preformat.isSpaceAdded() && EditDesc.sectionRuptureDonnees.radNextStationSelected()){
                     EditDesc.sectionRuptureDonnees.setStartStationIndicator(
                         Global.SPACE + EditDesc.sectionRuptureDonnees.getStartStationIndicator());
                 }
+                
 			} catch (Exception ex) {
                 ok = ok && false;
 				Utils.messageErreurAppend(Messages.error);

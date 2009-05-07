@@ -18,10 +18,9 @@ public class EdmoHandler extends DefaultHandler{
 	private java.util.HashMap<Integer, String> _valeurs = new HashMap<Integer, String>();
 	
 	private Integer intCode;
-
-	private Boolean blnCode = false;
 	
-	private Boolean blnName = false;
+    //  buffer nous permettant de récupérer les données 
+    private StringBuffer buffer;
 	
 	public static Table filtreTable;
 	
@@ -29,54 +28,50 @@ public class EdmoHandler extends DefaultHandler{
 	
 	public static ArrayList<String> listeFiltree;
 	
-	public java.util.HashMap<Integer, String> get_valeurs() {
+	public HashMap<Integer, String> get_valeurs() {
 		return _valeurs;
 	}
 
-	public void startElement(String uri,
+	@Override
+    public void startElement(String uri,
             String localName,
             String qName,
             Attributes attributes)
-     throws SAXException
-     {
-		
-		blnCode = false;
-		blnName = false;
-		
-		if (qName.equals("n_code"))
-		{
-			blnCode = true;
+     throws SAXException {		
+        
+		if (qName.equals("n_code")){
+            buffer = new StringBuffer();
 		}
-		
-		if (qName.equals("name"))
-		{
-			blnName = true;
+        else if (qName.equals("name")){
+            buffer = new StringBuffer();
 		}		
      }
 	
-	public void endElement(String uri,
+	@Override
+    public void endElement(String uri,
             String localName,
             String qName)
-     throws SAXException
-     {
-		
+     throws SAXException {
+        
+        if (qName.equals("n_code")){
+            intCode = Integer.parseInt(buffer.toString());
+            buffer = null;
+        }
+        else if (qName.equals("name")){
+            _valeurs.put(intCode, buffer.toString());
+            buffer = null;
+        }   
      }
 	
-	public void characters(char[] ch,
+	@Override
+    public void characters(char[] ch,
             int start,
             int length)
-     throws SAXException
-     {
-		if (blnCode)
-		{
-			intCode = Integer.parseInt(String.copyValueOf(ch).substring(start, start+length));
-			blnCode = false;
-		}
-		
-		if (blnName)
-		{
-			_valeurs.put(intCode, String.copyValueOf(ch).substring(start, start+length));
-			blnName = false;
-		}
+     throws SAXException {
+        
+        if (buffer != null){
+            String lecture = new String(ch, start, length);
+            buffer.append(lecture);
+        }
      }
 }

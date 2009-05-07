@@ -36,6 +36,7 @@ import fr.ifremer.nemo.ui.view.ViewFile;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.util.Preformat;
 import fr.ifremer.nemo.util.SizeBasedProgressNotifier;
 import fr.ifremer.nemo.util.format.DateTimeFormat;
 import fr.ifremer.nemo.util.format.FloatFormat;
@@ -422,10 +423,12 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 	 * 
 	 */
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
+        
 		a_Writer.putAttribute("endOnEOF", isEndOnEOF());
 		a_Writer.putAttribute("endOnEmptyLine", isEndOnEmptyLine());
         a_Writer.putAttribute("endOnNextStation", isEndOnNextStation());
 		a_Writer.putAttribute("endOnPattern", isEndOnPattern());
+        
 		a_Writer.putTag("inputType", getInputType());
 		a_Writer.putTag("separator", getSeparator());
 		a_Writer.putTag("incrementRef", isIncrementRef());
@@ -439,7 +442,13 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
             a_Writer.putAttribute("lineNumber", getNumberOfLines());
         }
         
-		a_Writer.putTag("endDataPattern", getEndDataPattern());
+        // onNextStation - Preformat
+        String endDataPattern = getEndDataPattern();
+        if (isEndOnNextStation() && Preformat.isPreformat() && Preformat.isSpaceAdded()){
+            endDataPattern = endDataPattern.substring(1);
+        }
+        
+		a_Writer.putTag("endDataPattern", endDataPattern);
 		a_Writer.putTag("rowNumber", getRowNumber());
 		a_Writer.putTag("endData", getEndData());
 		if (getModel() != null) {
@@ -1856,7 +1865,6 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
                     || (index < _rowNumber); index++) {
                 
                 // FAE 1738 : ajout d'un indicateur "prochaine station"
-                // TODO tester nouvelle solution (autre que !line.startsWith("         "))
                 if (_model != null){ // pour ne pas faire le test sur la 1ère ligne de la station
                     if (_endOnNextStation 
                             && index > 0

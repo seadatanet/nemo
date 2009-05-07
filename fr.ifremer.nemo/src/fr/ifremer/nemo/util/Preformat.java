@@ -62,7 +62,8 @@ public class Preformat {
 	// Preformatage reussi
 	private static boolean _preformatOK;
     
-    public static boolean space;
+    // Ajout d'un espace en début de ligne de données
+    private static boolean space;
 
 	
 	//////////////
@@ -535,5 +536,9 @@ public class Preformat {
 	public static void setPreformat(boolean blnPreformat) {
 		_preformatOK = blnPreformat;
 	}
+    
+    public static boolean isSpaceAdded(){
+        return space;
+    }
 	
 }
