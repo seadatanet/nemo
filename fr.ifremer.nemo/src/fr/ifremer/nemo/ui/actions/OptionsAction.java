@@ -809,7 +809,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         lblTypePlateForme.setFont(Utils.font08);
         lblTypePlateForme.setText(Messages.settings_typePlateForme);
 
-        comboTypePlateForme = new Combo(group, SWT.BORDER);
+        comboTypePlateForme = new Combo(group, SWT.BORDER | SWT.READ_ONLY);
         comboTypePlateForme.setFont(Utils.font08);
         GridDataFactory.fillDefaults().grab(false, false).applyTo(
             comboTypePlateForme);
@@ -818,7 +818,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         lblAccesDonnees.setFont(Utils.font08);
         lblAccesDonnees.setText(Messages.settings_accesDonnees);
 
-        comboAccesDonnees = new Combo(group, SWT.BORDER);
+        comboAccesDonnees = new Combo(group, SWT.BORDER | SWT.READ_ONLY);
         comboAccesDonnees.setFont(Utils.font08);
         GridDataFactory.fillDefaults().grab(false, false).applyTo(
             comboAccesDonnees);
