@@ -632,8 +632,8 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 					break;
 				}
 				}
-				cal.getTime();
 			}
+			cal.getTime();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
