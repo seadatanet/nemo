@@ -17,6 +17,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
 import fr.ifremer.nemo.ui.edit.UIobject;
+import fr.ifremer.nemo.ui.view.ViewEdit;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -60,7 +61,7 @@ public class GrpManualInput implements UIobject
         GridDataFactory.fillDefaults().grab(true, false).applyTo(compo);
 
         buttonSaisie.setParent(compo);
-        buttonSaisie.setBackground(compo.getBackground());
+        buttonSaisie.setBackground(ViewEdit.background);
         buttonSaisie.setText(labelButton);
         
         for (Couple line : lines){

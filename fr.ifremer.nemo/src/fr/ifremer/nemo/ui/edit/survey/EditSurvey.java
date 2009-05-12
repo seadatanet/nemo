@@ -153,22 +153,27 @@ public class EditSurvey {
 
 		// bouton validate
 		buttonValidate.setParent(ViewEdit.formEdition.getBody());
+        buttonValidate.setBackground(ViewEdit.background);
 		buttonValidate.setText(Messages.button_validateStep);
 
 		// boutons collapse all / expand all
 
 		// bouton serveur
 		buttonInitServeur.setParent(ViewEdit.formEdition.getBody());
+        buttonInitServeur.setBackground(ViewEdit.background);
 		buttonInitServeur.setText(Messages.button_serverIni);
 
 		// bouton XML
 		buttonXML.setParent(ViewEdit.formEdition.getBody());
+        buttonXML.setBackground(ViewEdit.background);
 		buttonXML.setText(Messages.button_xmlIni); 
 
 		buttonRAZ.setParent(ViewEdit.formEdition.getBody());
+        buttonRAZ.setBackground(ViewEdit.background);
 		buttonRAZ.setText(Messages.button_reset);
 
 		buttonExpand.setParent(ViewEdit.formEdition.getBody());
+        buttonExpand.setBackground(ViewEdit.background);
 		buttonExpand.setText(Global.PLUS); 
 
 		formEdition.redraw();

@@ -23,6 +23,7 @@ import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.Cursor;
 import fr.ifremer.nemo.ui.edit.DataModel;
 import fr.ifremer.nemo.ui.edit.UIobject;
+import fr.ifremer.nemo.ui.view.ViewEdit;
 import fr.ifremer.nemo.ui.view.ViewFile;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
@@ -73,9 +74,11 @@ public class AutoLine implements UIobject
         GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
 
         Composite compo1 = drawLineCompo(group);
+        compo1.setBackground(ViewEdit.background);
         drawLine(compo1);
         
         Composite compo2 = drawSetCompo(group, 1);
+        compo2.setBackground(ViewEdit.background);
         drawSet(compo2, 1);
     }
 
@@ -109,6 +112,7 @@ public class AutoLine implements UIobject
         String addedLabel = Global.EMPTY_STRING;
         if (!unique) addedLabel = Global.SPACE + Messages.label_line + Global.SPACE + (i + 1);            
         buttonSet.setParent(compo);
+        buttonSet.setBackground(ViewEdit.background);
         buttonSet.setText(Messages.button_set + addedLabel);
         
         buttonSet

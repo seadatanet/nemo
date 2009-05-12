@@ -21,6 +21,7 @@ import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.UIobject;
+import fr.ifremer.nemo.ui.view.ViewEdit;
 import fr.ifremer.nemo.ui.view.ViewFile;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
@@ -157,11 +158,11 @@ public class SetText implements UIobject
     {        
         if (label != null){
             label.setParent(compo);
-            label.setBackground(compo.getBackground());
+            label.setBackground(ViewEdit.background);
         }
         
         text.setParent(compo);
-        text.setBackground(compo.getBackground());
+        text.setBackground(ViewEdit.background);
         text.setText(defaultValue);
         GridDataFactory.fillDefaults().grab(true, false).hint(textSize, 12).applyTo(text);
         

@@ -24,6 +24,7 @@ import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.UIobject;
+import fr.ifremer.nemo.ui.view.ViewEdit;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -105,18 +106,20 @@ public class Couple implements UIobject
         // Label
         if (label != null){
             label.setParent(parent);
-            label.setBackground(parent.getBackground());
+            label.setBackground(ViewEdit.background);
             label.setText(labelString);
         }
 
         // Text or Combo
         if (valueText != null){
             valueText.setParent(parent);
+            valueText.setBackground(ViewEdit.background);
             defaultValueTextSize();
             // Default value
             if (!EditStation.filled && defaultValue != null) valueText.setText(defaultValue);
         }else if (valueCombo != null){
             valueCombo.setParent(parent);
+            valueCombo.setBackground(ViewEdit.background);
             valueCombo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL)); 
         }
 

@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
 import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.ui.view.ViewEdit;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -91,13 +92,13 @@ public class FileStationHeader extends FileSection
         
 
         radNumber.setParent(compo);
-        radNumber.setBackground(compo.getBackground());
+        radNumber.setBackground(ViewEdit.background);
         radNumber.setText(Messages.edit_file_enteteStation_radNumber); 
         
         setter.draw(compo);
         
         radIndicator.setParent(compo);
-        radIndicator.setBackground(compo.getBackground());
+        radIndicator.setBackground(ViewEdit.background);
         radIndicator.setText(Messages.edit_file_enteteStation_radIndicator); 
         
             subCompo = new Composite(compo, SWT.NONE);

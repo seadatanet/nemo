@@ -137,6 +137,7 @@ public class EditConversion extends Thread {
 
 		// bouton conversion
 		buttonConversion.setParent(formEdition.getBody());
+        buttonConversion.setBackground(ViewEdit.background);
 		buttonConversion.setText(Messages.button_convert); 
 
 		// listener sur le bouton conversion

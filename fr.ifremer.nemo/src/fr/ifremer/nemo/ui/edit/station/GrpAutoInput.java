@@ -20,6 +20,7 @@ import org.eclipse.swt.widgets.Shell;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.UIobject;
 import fr.ifremer.nemo.ui.edit.station.AutoLine.MetaInData;
+import fr.ifremer.nemo.ui.view.ViewEdit;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -57,10 +58,11 @@ public class GrpAutoInput implements UIobject
     public void draw(Composite sectionClient){
         
         buttonPos.setParent(sectionClient);
-        buttonPos.setBackground(sectionClient.getBackground());
+        buttonPos.setBackground(ViewEdit.background);
         buttonPos.setText(labelButtonPos);
 
         Group groupe = new Group(sectionClient, SWT.NONE);
+        groupe.setBackground(ViewEdit.background);
         groupe.setText(Messages.label_position);
         groupe.setLayout(new GridLayout());
 
@@ -68,18 +70,20 @@ public class GrpAutoInput implements UIobject
 
 
         Composite compo1 = AutoLine.drawLineCompo(groupe);
+        compo1.setBackground(ViewEdit.background);
         for (AutoLine line : lines){
             line.drawLine(compo1);
         }
         
         Composite compo2 = AutoLine.drawSetCompo(groupe, lines.size());
+        compo2.setBackground(ViewEdit.background);
         for (int i = 0; i < lines.size(); i++){
             lines.get(i).drawSet(compo2, i);
         }
         
         if (buttonVari != null){
             buttonVari.setParent(compo2);
-            buttonVari.setBackground(compo2.getBackground());
+            buttonVari.setBackground(ViewEdit.background);
             buttonVari.setText(Messages.label_variable);
             GridDataFactory.fillDefaults().grab(true, false).align(SWT.END, SWT.CENTER).applyTo(buttonVari);
 

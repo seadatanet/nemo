@@ -36,6 +36,7 @@ import fr.ifremer.nemo.ui.edit.data.EditData;
 import fr.ifremer.nemo.ui.edit.desc.EditDesc;
 import fr.ifremer.nemo.ui.edit.station.EditStation;
 import fr.ifremer.nemo.ui.edit.survey.EditSurvey;
+import fr.ifremer.nemo.ui.view.ViewEdit;
 import fr.ifremer.nemo.ui.view.ViewFile;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
@@ -59,7 +60,9 @@ public class Utils
 
     public static StyleRange[] stylesCouleurs;
 
-    public static Font font;
+    public static Font fontCourier = new Font(Application.display, "Courier", 10, SWT.NORMAL); //$NON-NLS-1$
+    public static Font font08 = new Font(Application.display, Global.EMPTY_STRING, 8, SWT.NORMAL);
+    public static Font font08bold = new Font(Application.display, Global.EMPTY_STRING, 8, SWT.BOLD);
 
     public static ProgressBar progressbar;
 
@@ -119,8 +122,7 @@ public class Utils
 
         // affichage texte
         // changement de font
-        font = new Font(Application.display, "Courier", 10, SWT.NORMAL); //$NON-NLS-1$
-        zone.setFont(font);
+        zone.setFont(fontCourier);
 
         // debut d'infos du fichier
         ViewLog.styledTextLogInfos.setText(Messages.Utils_5 + fich);

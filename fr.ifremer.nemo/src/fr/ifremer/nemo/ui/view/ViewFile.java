@@ -7,7 +7,6 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -26,7 +25,6 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.ViewPart;
 
-import fr.ifremer.nemo.ui.Application;
 import fr.ifremer.nemo.ui.ApplicationWorkbenchWindowAdvisor;
 import fr.ifremer.nemo.ui.FiltrageTableType;
 import fr.ifremer.nemo.ui.Utils;
@@ -248,13 +246,12 @@ public class ViewFile extends ViewPart
      */
     private void createComposite2()
     {
-        Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL); //$NON-NLS-1$
         composite2 = new Composite(tabFolder, SWT.NONE);
         composite2.setLayout(new FillLayout());
         styledTextCampagne =
             new StyledText(composite2, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL
                     | SWT.READ_ONLY);
-        styledTextCampagne.setFont(font);
+        styledTextCampagne.setFont(Utils.fontCourier);
     }
 
     /**
@@ -263,13 +260,12 @@ public class ViewFile extends ViewPart
      */
     private void createComposite3()
     {
-        Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL); //$NON-NLS-1$
         composite3 = new Composite(tabFolder, SWT.NONE);
         composite3.setLayout(new FillLayout());
         styledTextStation =
             new StyledText(composite3, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL
                     | SWT.READ_ONLY);
-        styledTextStation.setFont(font);
+        styledTextStation.setFont(Utils.fontCourier);
     }
 
     /**
@@ -278,13 +274,12 @@ public class ViewFile extends ViewPart
      */
     private void createComposite4()
     {
-        Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL); //$NON-NLS-1$
         composite4 = new Composite(tabFolder, SWT.NONE);
         composite4.setLayout(new FillLayout(SWT.VERTICAL));
         styledTextData =
             new StyledText(composite4, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL
                     | SWT.READ_ONLY);
-        styledTextData.setFont(font);
+        styledTextData.setFont(Utils.fontCourier);
         createCompositeData(composite4);
     }
 
@@ -589,15 +584,12 @@ public class ViewFile extends ViewPart
      */
     private void createComposite12()
     {
-
-        Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL); //$NON-NLS-1$
-
         composite12 = new Composite(composite1, SWT.NONE);
         composite12.setLayout(new FillLayout());
         textAreaDescription =
             new StyledText(composite12, SWT.MULTI | SWT.READ_ONLY
                     | SWT.H_SCROLL | SWT.V_SCROLL);
-        textAreaDescription.setFont(font);
+        textAreaDescription.setFont(Utils.fontCourier);
 
     }
 

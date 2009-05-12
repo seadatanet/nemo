@@ -1,5 +1,6 @@
 package fr.ifremer.nemo.ui.view;
 
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.forms.widgets.FormToolkit;
@@ -17,6 +18,8 @@ public class ViewEdit extends ViewPart {
 
 	// formulaire d'edition
 	public static ScrolledForm formEdition;
+    
+    public static Color background;
 
 	@Override
 	public void createPartControl(Composite parent) {
@@ -27,6 +30,8 @@ public class ViewEdit extends ViewPart {
 		toolkitEdition = new FormToolkit(parent.getDisplay());
 
 		formEdition = toolkitEdition.createScrolledForm(parent);
+        
+        background = formEdition.getBody().getBackground();
 
 	}
 

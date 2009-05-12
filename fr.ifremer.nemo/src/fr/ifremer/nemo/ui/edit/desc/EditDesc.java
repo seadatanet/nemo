@@ -91,6 +91,7 @@ public class EditDesc {
 
             // bouton "valider etape"
             buttonValidate.setParent(formEdition.getBody());
+            buttonValidate.setBackground(ViewEdit.background);
             buttonValidate.setText(Messages.button_validateStep);
             buttonValidate.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
                 @Override
@@ -103,6 +104,7 @@ public class EditDesc {
 
             // bouton RAZ
             buttonRAZ.setParent(formEdition.getBody());
+            buttonRAZ.setBackground(ViewEdit.background);
             buttonRAZ.setText(Messages.button_reset);
             buttonRAZ.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
                 @Override
@@ -118,6 +120,7 @@ public class EditDesc {
 
             // boutons collapse all / expand all
             buttonExpand.setParent(formEdition.getBody());
+            buttonExpand.setBackground(ViewEdit.background);
             buttonExpand.setText(Global.PLUS); 
             buttonExpand.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
                 @Override

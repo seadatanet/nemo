@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -19,7 +18,6 @@ import org.eclipse.ui.forms.events.ExpansionEvent;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
-import fr.ifremer.nemo.ui.Application;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.view.ViewEdit;
 import fr.ifremer.nemo.ui.view.ViewFile;
@@ -53,8 +51,7 @@ public class Drawing {
 			}
 		});
 
-		Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL); //$NON-NLS-1$
-		section.setFont(font);
+		section.setFont(Utils.fontCourier);
 		section.setText(nomSection);
 		section.setDescription(description);
 		Composite sectionClient = ViewEdit.toolkitEdition
@@ -66,15 +63,17 @@ public class Drawing {
 
 		// label avec le texte de "description"
 		Label label1 = new Label(section, SWT.NULL);
+        label1.setBackground(ViewEdit.background);
 		label1.setText(description);
 
 		// zone d'edition
 		manuel.setParent(sectionClient);
-
+		manuel.setBackground(ViewEdit.background);
 		manuel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
 		// bouton d'injection de la position des valeurs
 		Button buttonInject = new Button(sectionClient, SWT.NONE);
+        buttonInject.setBackground(ViewEdit.background);
 		buttonInject.setText(Messages.button_set); 
 
 		section.setClient(sectionClient);
@@ -129,8 +128,7 @@ public class Drawing {
 			}
 		});
 		section.setText(nomSection);
-		Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL);
-		section.setFont(font);
+		section.setFont(Utils.fontCourier);
 		section.setDescription(descSection);
 		Composite sectionClient = ViewEdit.toolkitEdition
 				.createComposite(section);
@@ -140,25 +138,31 @@ public class Drawing {
 		
 		// Reference campagne
 		Label lblRefCampagne = new Label(sectionClient, SWT.NULL);
+        lblRefCampagne.setBackground(ViewEdit.background);
 		lblRefCampagne.setText(strRefCampagne);
 
 		txtRefCampagne.setParent(sectionClient);
+        txtRefCampagne.setBackground(ViewEdit.background);
 		txtRefCampagne.setLayoutData(
 				new GridData(GridData.FILL_HORIZONTAL));
 		
 		// Nom campagne
 		Label lblNomCampagne = new Label(sectionClient, SWT.NULL);
+        lblNomCampagne.setBackground(ViewEdit.background);
 		lblNomCampagne.setText(strNomCampagne);
 
 		txtNomCampagne.setParent(sectionClient);
+        txtNomCampagne.setBackground(ViewEdit.background);
 		txtNomCampagne.setLayoutData(
 				new GridData(GridData.FILL_HORIZONTAL));
 		
 		// Navire
 		Label lblNavire = new Label(sectionClient, SWT.NULL);
+        lblNavire.setBackground(ViewEdit.background);
 		lblNavire.setText(strNavire);
 		
 		cmbNavire.setParent(sectionClient);
+        cmbNavire.setBackground(ViewEdit.background);
 		cmbNavire.setLayoutData(
 				new GridData(GridData.FILL_HORIZONTAL));
 		
@@ -190,8 +194,7 @@ public class Drawing {
 			}
 		});
 		section.setText(nomSection);
-		Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL);
-		section.setFont(font);
+		section.setFont(Utils.fontCourier);
 		section.setDescription(descriptionSection);
 		Composite sectionClient = ViewEdit.toolkitEdition
 				.createComposite(section);
@@ -204,10 +207,12 @@ public class Drawing {
 			Label labelPays = new Label(sectionClient, SWT.NULL);
 			labelPays.setText(Messages.edit_cruise_country);
 			labelPays.setParent(sectionClient);
+            labelPays.setBackground(ViewEdit.background);
 			labelPays.setLayoutData(
 					new GridData(GridData.FILL_HORIZONTAL));
 
 			EditSurvey.comboCountries.setParent(sectionClient);
+            EditSurvey.comboCountries.setBackground(ViewEdit.background);
             GridDataFactory.swtDefaults().hint(385, 12).applyTo(EditSurvey.comboCountries);
 		}
 			
@@ -215,6 +220,7 @@ public class Drawing {
 
 			// label avec le texte de "description"
 			Label label = new Label(sectionClient, SWT.NULL);
+            label.setBackground(ViewEdit.background);
 			label.setText(listeNoms.get(i));
 
 			// affichage zone texte dans la section
@@ -227,10 +233,12 @@ public class Drawing {
 			Label labelReg = new Label(sectionClient, SWT.NULL);
 			labelReg.setText(Messages.edit_cruise_region);
 			labelReg.setParent(sectionClient);
+            labelReg.setBackground(ViewEdit.background);
 			labelReg.setLayoutData(
 					new GridData(GridData.FILL_HORIZONTAL));
 
 			EditSurvey.comboRegion.setParent(sectionClient);
+            EditSurvey.comboRegion.setBackground(ViewEdit.background);
             GridDataFactory.swtDefaults().hint(385, 12).applyTo(EditSurvey.comboRegion);
 			
 			// Creation du menu contextuel pour la recherche filtree
@@ -266,8 +274,7 @@ public class Drawing {
 		GridLayoutFactory.fillDefaults().applyTo(section);
 		GridDataFactory.fillDefaults().grab(false,false).applyTo(section);
 		
-		Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL);
-		section.setFont(font);
+		section.setFont(Utils.fontCourier);
 		section.setDescription(descriptionSection);
 		Composite sectionClient = ViewEdit.toolkitEdition
 				.createComposite(section);
@@ -280,8 +287,10 @@ public class Drawing {
 		
 		// combolist centres de donnees
 		Label label = new Label(sectionClient, SWT.NULL);
+        label.setBackground(ViewEdit.background);
 		label.setText(Messages.edit_cruise_dataCenter);
-		EditSurvey.comboDataCentres.setParent(sectionClient); 		
+		EditSurvey.comboDataCentres.setParent(sectionClient); 	
+        EditSurvey.comboDataCentres.setBackground(ViewEdit.background);
 		
 		GridLayoutFactory.fillDefaults().applyTo(EditSurvey.comboDataCentres);
 		// FAE 1190 : champ trop long
@@ -289,8 +298,10 @@ public class Drawing {
 		
 		// ajout de la combolist confidentialite
 		Label label2 = new Label(sectionClient, SWT.NULL);
+        label2.setBackground(ViewEdit.background);
 		label2.setText(Messages.edit_cruise_confident);
 		confidentialite.setParent(sectionClient);
+        confidentialite.setBackground(ViewEdit.background);
 
 		section.setClient(sectionClient);
 		// ajout de la section dans la liste des sections de description
@@ -314,8 +325,7 @@ public class Drawing {
 			}
 		});
 		section.setText(nomSection);
-		Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL);
-		section.setFont(font);
+		section.setFont(Utils.fontCourier);
 		section.setDescription(descriptionSection);
 		Composite sectionClient = ViewEdit.toolkitEdition
 				.createComposite(section);
@@ -353,8 +363,7 @@ public class Drawing {
 			}
 		});
 		section.setText(nomSection);
-		Font font = new Font(Application.display, "Courier", 10, SWT.NORMAL);
-		section.setFont(font);
+		section.setFont(Utils.fontCourier);
 		section.setDescription(descriptionSection);
 		Composite sectionClient = ViewEdit.toolkitEdition
 				.createComposite(section);
@@ -364,6 +373,7 @@ public class Drawing {
 		gd.verticalSpan = 2;
 
 		commentaire.setParent(sectionClient);
+        commentaire.setBackground(ViewEdit.background);
 		commentaire.setLayoutData(new GridData(GridData.FILL_BOTH));
 		commentaire.setTextLimit(50000);
 		{

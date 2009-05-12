@@ -94,6 +94,7 @@ public class EditStation {
 
 		// bouton validate
 		buttonValidate.setParent(ViewEdit.formEdition.getBody());
+        buttonValidate.setBackground(ViewEdit.background);
 		buttonValidate.setText(Messages.button_validateStep);
         buttonValidate
         .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -113,6 +114,7 @@ public class EditStation {
 
 		// bouton reset
 		buttonRAZ.setParent(ViewEdit.formEdition.getBody());
+        buttonRAZ.setBackground(ViewEdit.background);
 		buttonRAZ.setText(Messages.button_reset);
         buttonRAZ
         .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -125,6 +127,7 @@ public class EditStation {
 
         // bouton collapse all / expand all
 		buttonExpand.setParent(ViewEdit.formEdition.getBody());
+        buttonExpand.setBackground(ViewEdit.background);
 		buttonExpand.setText(Global.PLUS);
         buttonExpand
         .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {

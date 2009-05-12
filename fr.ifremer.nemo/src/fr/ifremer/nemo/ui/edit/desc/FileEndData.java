@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
 import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.ui.view.ViewEdit;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -81,20 +82,20 @@ public class FileEndData extends FileSection
         GridDataFactory.fillDefaults().grab(true, false).applyTo(compo);
 
         radEOF.setParent(compo);
-        radEOF.setBackground(compo.getBackground());
+        radEOF.setBackground(ViewEdit.background);
         radEOF.setText(Messages.edit_file_idcEOF); 
         
         radLigne.setParent(compo);
-        radLigne.setBackground(compo.getBackground());
+        radLigne.setBackground(ViewEdit.background);
         radLigne.setText(Messages.edit_file_idcEmptyLine);
 
         radNextStation.setParent(compo);
-        radNextStation.setBackground(compo.getBackground());
+        radNextStation.setBackground(ViewEdit.background);
         radNextStation.setText(Messages.edit_file_idcNextStation);
         setterStartStation.draw(compo);
 
         radManuel.setParent(compo);
-        radManuel.setBackground(compo.getBackground());
+        radManuel.setBackground(ViewEdit.background);
         radManuel.setText(Messages.edit_file_idcManual); 
         setter.draw(compo);
         

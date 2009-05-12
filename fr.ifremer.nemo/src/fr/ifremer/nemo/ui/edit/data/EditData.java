@@ -72,10 +72,12 @@ public class EditData {
 
 		// bouton validate
 		buttonValidate.setParent(ViewEdit.formEdition.getBody());
+        buttonValidate.setBackground(ViewEdit.background);
 		buttonValidate.setText(Messages.button_validateStep);
 
 		// reset
 		buttonRAZ.setParent(ViewEdit.formEdition.getBody());
+        buttonRAZ.setBackground(ViewEdit.background);
 		buttonRAZ.setText(Messages.button_reset); 
 
 		formEdition.reflow(true);
