@@ -12,6 +12,8 @@ package fr.ifremer.nemo.mapping;
  * @author jollivie
  *
  */
+import java.io.File;
+
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
@@ -28,7 +30,8 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 public class ImportMappingAction extends Action implements ISelectionListener,
-        ActionFactory.IWorkbenchAction {
+        ActionFactory.IWorkbenchAction
+{
     private final IWorkbenchWindow window;
 
     public final static String ID = "fr.ifremer.nemo.ui.OpenAction"; //$NON-NLS-1$
@@ -39,7 +42,8 @@ public class ImportMappingAction extends Action implements ISelectionListener,
 
     public static String nomMapping;
 
-    public ImportMappingAction(IWorkbenchWindow window) {
+    public ImportMappingAction(IWorkbenchWindow window)
+    {
 
         this.window = window;
         setId(ID);
@@ -49,34 +53,40 @@ public class ImportMappingAction extends Action implements ISelectionListener,
 
     }
 
-    public void dispose() {
+    public void dispose()
+    {
         window.getSelectionService().addSelectionListener(this);
 
     }
 
     @Override
-    public void run() {
+    public void run()
+    {
 
-            Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
-            FileDialog dialog = new FileDialog(shell, SWT.OPEN
-                    | SWT.APPLICATION_MODAL);
-            dialog.setFilterPath(Utils.configuration.getModelsDirectory()
-                    + "\\"); //$NON-NLS-1$
-            dialog.setText(Messages.ImportMappingAction_5); 
-            String extensions[] = new String[1];
-            extensions[0] = Global.STAR + Global.EXT_TXT;
-            dialog.setFilterExtensions(extensions);
-            nomMapping = dialog.open();
+        Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+        FileDialog dialog =
+            new FileDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
+        dialog.setFilterPath(Utils.configuration.getModelsDirectory()
+                + File.separator);
+        dialog.setText(Messages.ImportMappingAction_5);
+        String extensions[] = new String[1];
+        extensions[0] = Global.STAR + Global.EXT_TXT;
+        dialog.setFilterExtensions(extensions);
+        nomMapping = dialog.open();
 
-            if (nomMapping == null) {
-            } else {
-                
-                new MappingTable().importer(nomMapping);
-            }
+        if (nomMapping == null)
+        {
+        }
+        else
+        {
+
+            new MappingTable().importer(nomMapping);
+        }
 
     }
 
-    public void selectionChanged(IWorkbenchPart part, ISelection incoming) {
+    public void selectionChanged(IWorkbenchPart part, ISelection incoming)
+    {
     }
 
 }

@@ -26,96 +26,117 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 public class SaveAction extends Action implements ISelectionListener,
-		ActionFactory.IWorkbenchAction {
-	private final IWorkbenchWindow window;
+        ActionFactory.IWorkbenchAction
+{
+    private final IWorkbenchWindow window;
 
-	public final static String ID = "fr.ifremer.nemo.ui.SaveAction"; //$NON-NLS-1$
+    public final static String ID = "fr.ifremer.nemo.ui.SaveAction"; //$NON-NLS-1$
 
-	// vars necessaires e la fenetre d'options
+    // vars necessaires e la fenetre d'options
 
-	public static Shell shelloptions;
+    public static Shell shelloptions;
 
-	public static String nomFichierSortieXML;
+    public static String nomFichierSortieXML;
 
-	public static File fichierSortieXML;
+    public static File fichierSortieXML;
 
-	public SaveAction(IWorkbenchWindow window) {
+    public SaveAction(IWorkbenchWindow window)
+    {
 
-		this.window = window;
-		setId(ID);
-		setText(Messages.SaveAction_1);
-		window.getSelectionService().addSelectionListener(this);
+        this.window = window;
+        setId(ID);
+        setText(Messages.SaveAction_1);
+        window.getSelectionService().addSelectionListener(this);
 
-	}
+    }
 
-	public void dispose() {
-		window.getSelectionService().addSelectionListener(this);
+    public void dispose()
+    {
+        window.getSelectionService().addSelectionListener(this);
 
-	}
+    }
 
-	@Override
-    public void run() {
-		// sauvegarde du modele
+    @Override
+    public void run()
+    {
+        // sauvegarde du modele
 
-		FileOutputStream fileOutputStream = null;
+        FileOutputStream fileOutputStream = null;
 
-		if (!EditData.validee) {
-			Utils.messageErreur(Messages.SaveAction_3);
-		} else {
-			if (EditDesc.okApresReset && EditSurvey.okApresReset
-					&& EditStation.okApresReset && EditData.okApresReset) {
-				choixFichierSortie();
-				try {
-					fileOutputStream = new FileOutputStream(fichierSortieXML);
-				} catch (FileNotFoundException e) {
-					//
-					e.printStackTrace();
-				}
+        if (!EditData.validee)
+        {
+            Utils.messageErreur(Messages.SaveAction_3);
+        }
+        else
+        {
+            if (EditDesc.okApresReset && EditSurvey.okApresReset
+                    && EditStation.okApresReset && EditData.okApresReset)
+            {
+                choixFichierSortie();
+                try
+                {
+                    fileOutputStream = new FileOutputStream(fichierSortieXML);
+                }
+                catch (FileNotFoundException e)
+                {
+                    //
+                    e.printStackTrace();
+                }
 
-				DataModel.inputModel.writeXMLOn(fileOutputStream);
-				Utils.messageOK(Messages.SaveAction_4);
+                DataModel.inputModel.writeXMLOn(fileOutputStream);
+                Utils.messageOK(Messages.SaveAction_4);
 
-			} else {
-				Utils.messageErreur(Messages.SaveAction_3);
-			}
-		}
-	}
+            }
+            else
+            {
+                Utils.messageErreur(Messages.SaveAction_3);
+            }
+        }
+    }
 
-	public static void choixFichierSortie() {
+    public static void choixFichierSortie()
+    {
 
-		Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
-		FileDialog dialog = new FileDialog(shell, SWT.SAVE
-				| SWT.APPLICATION_MODAL);
-		dialog.setText(Messages.SaveAction_5); 
-		dialog.setFilterPath(Utils.configuration.getModelsDirectory() + "\\"); //$NON-NLS-1$
-		String extensions[] = new String[1];
-		extensions[0] = Global.STAR + Global.EXT_XML;
-		dialog.setFilterExtensions(extensions);
+        Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+        FileDialog dialog =
+            new FileDialog(shell, SWT.SAVE | SWT.APPLICATION_MODAL);
+        dialog.setText(Messages.SaveAction_5);
+        dialog.setFilterPath(Utils.configuration.getModelsDirectory()
+                + File.separator);
+        String extensions[] = new String[1];
+        extensions[0] = Global.STAR + Global.EXT_XML;
+        dialog.setFilterExtensions(extensions);
 
-		nomFichierSortieXML = dialog.open();
+        nomFichierSortieXML = dialog.open();
 
-		if (nomFichierSortieXML != null) {
-			fichierSortieXML = new File(nomFichierSortieXML);
-			if (fichierSortieXML.exists()) {
+        if (nomFichierSortieXML != null)
+        {
+            fichierSortieXML = new File(nomFichierSortieXML);
+            if (fichierSortieXML.exists())
+            {
 
-				Shell shell2 = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+                Shell shell2 =
+                    PlatformUI.getWorkbench().getDisplay().getActiveShell();
 
-				MessageBox mb = new MessageBox(shell2, SWT.ICON_WARNING
-						| SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
-				mb.setMessage(Messages.SaveAction_6); 
+                MessageBox mb =
+                    new MessageBox(shell2, SWT.ICON_WARNING | SWT.YES | SWT.NO
+                            | SWT.APPLICATION_MODAL);
+                mb.setMessage(Messages.SaveAction_6);
 
-				int reponse = mb.open();
-				if (reponse == SWT.NO) {
-					choixFichierSortie();
-				}
+                int reponse = mb.open();
+                if (reponse == SWT.NO)
+                {
+                    choixFichierSortie();
+                }
 
-			}
+            }
 
-		}
+        }
 
-	}
+    }
 
-	public void selectionChanged(IWorkbenchPart part, ISelection incoming) {
-	}
+    public void selectionChanged(IWorkbenchPart part, ISelection incoming)
+    {
+    }
 
 }

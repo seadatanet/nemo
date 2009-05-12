@@ -7,13 +7,13 @@
  */
 package fr.ifremer.nemo.mapping;
 
-
-
 /**
  * Description: ExportMappingAction
  * @author jollivie
  *
  */
+import java.io.File;
+
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
@@ -31,7 +31,8 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 public class ExportMappingAction extends Action implements ISelectionListener,
-        ActionFactory.IWorkbenchAction {
+        ActionFactory.IWorkbenchAction
+{
     private final IWorkbenchWindow window;
 
     public final static String ID = "fr.ifremer.nemo.ui.OpenAction"; //$NON-NLS-1$
@@ -42,7 +43,8 @@ public class ExportMappingAction extends Action implements ISelectionListener,
 
     public static String nomMapping;
 
-    public ExportMappingAction(IWorkbenchWindow window) {
+    public ExportMappingAction(IWorkbenchWindow window)
+    {
 
         this.window = window;
         setId(ID);
@@ -51,37 +53,43 @@ public class ExportMappingAction extends Action implements ISelectionListener,
 
     }
 
-    public void dispose() {
+    public void dispose()
+    {
         window.getSelectionService().addSelectionListener(this);
 
     }
 
     @Override
-    public void run() {
+    public void run()
+    {
 
-            Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
-            FileDialog dialog = new FileDialog(shell, SWT.SAVE
-                    | SWT.APPLICATION_MODAL);
-            dialog.setFilterPath(Utils.configuration.getModelsDirectory()
-                    + "\\"); //$NON-NLS-1$
-            dialog.setText(Messages.ExportMappingAction_5);
+        Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+        FileDialog dialog =
+            new FileDialog(shell, SWT.SAVE | SWT.APPLICATION_MODAL);
+        dialog.setFilterPath(Utils.configuration.getModelsDirectory()
+                + File.separator);
+        dialog.setText(Messages.ExportMappingAction_5);
 
-            dialog.setFileName(Configuration.getSingleton().getFichierMapping());
-            String extensions[] = new String[1];
-            extensions[0] = Global.STAR + Global.EXT_TXT;
-            dialog.setFilterExtensions(extensions);
-            nomMapping = dialog.open();
+        dialog.setFileName(Configuration.getSingleton().getFichierMapping());
+        String extensions[] = new String[1];
+        extensions[0] = Global.STAR + Global.EXT_TXT;
+        dialog.setFilterExtensions(extensions);
+        nomMapping = dialog.open();
 
-            if (nomMapping == null) {
-            } else {
+        if (nomMapping == null)
+        {
+        }
+        else
+        {
 
-                // ouverture du fichier XML de modele
-                new MappingTable().exporter(nomMapping);
-            }
+            // ouverture du fichier XML de modele
+            new MappingTable().exporter(nomMapping);
+        }
 
     }
 
-    public void selectionChanged(IWorkbenchPart part, ISelection incoming) {
+    public void selectionChanged(IWorkbenchPart part, ISelection incoming)
+    {
     }
 
 }
