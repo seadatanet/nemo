@@ -216,11 +216,25 @@ public class SWTProcess implements IRunnableWithProgress {
                 if (Configuration.getSingleton().isWriteMapping()){
                     mapping = new Mapping(localCdiId, formatConversion.toString()); 
                     
-                    //Si le nom hors prefix est vide, il ne faut pas ajouter le séparateur
-                    if(EditConversion.nomHorsPrefix.equals(Global.EMPTY_STRING))
-                        mapping.setFilename(EditConversion.nomHorsPrefix + fichierSortie.getName());
-                    else
-                        mapping.setFilename(EditConversion.nomHorsPrefix + File.separator + fichierSortie.getName());
+                    
+                    StringBuffer filename = new StringBuffer();
+                    if(!EditConversion.nomHorsPrefix.equals(Global.EMPTY_STRING)){                        
+                        //Si le nom hors prefix est vide, il ne faut pas ajouter le séparateur
+                        filename.append(EditConversion.nomHorsPrefix);
+                        filename.append(File.separator);
+                    }
+                    if (ViewFile.collectionCas1){                        
+                        // collection campagne
+                        filename.append(fichierSortie.getParentFile().getName());
+                        filename.append(File.separator);
+                    }
+                    filename.append(fichierSortie.getName());
+                    mapping.setFilename(filename.toString());
+                    
+//                    if(EditConversion.nomHorsPrefix.equals(Global.EMPTY_STRING))
+//                        mapping.setFilename(EditConversion.nomHorsPrefix + fichierSortie.getName());
+//                    else
+//                        mapping.setFilename(EditConversion.nomHorsPrefix + File.separator + fichierSortie.getName());
                     
                     mapping.setDate(new Date());
                     mapping.setModus(Mapping.MODUS_MONOSTATION);
@@ -246,7 +260,17 @@ public class SWTProcess implements IRunnableWithProgress {
             for (Station station : survey.getStations()) {
                 String localCdiId = station.getLocalCdiId(survey.getReference(), formatConversion.toString());
                 mapping = new Mapping(localCdiId, formatConversion.toString()); 
-                mapping.setFilename(EditConversion.nomHorsPrefix);
+
+                StringBuffer filename = new StringBuffer();
+                filename.append(EditConversion.nomHorsPrefix);
+                if (ViewFile.collectionCas1){                        
+                    // collection campagne
+                    if(!EditConversion.nomHorsPrefix.equals(Global.EMPTY_STRING)){  
+                        filename.append(File.separator);
+                    }
+                    filename.append(fichierSortie.getName());
+                }                
+                mapping.setFilename(filename.toString());
                 mapping.setDate(new Date());
                 mapping.setModus(Mapping.MODUS_MULTISTATIONS);
                 
