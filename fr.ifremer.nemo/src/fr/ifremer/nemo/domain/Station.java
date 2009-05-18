@@ -180,25 +180,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	/**
 	 * Campagne a laquelle cette station est associee
 	 */
-	protected Survey _survey;
-
-//	/**
-//	 * Liste , ordonnee, des parametres mesures
-//	 */
-//	protected java.util.List<Parameter> _parameters;
-//
-//    /** 
-//     * Liste, ordonnee, des paramètres rajoutés pour ODV
-//     */
-//    protected java.util.List<AddedParameter> _odvparameters;
-//
-//    /** 
-//     * Liste, ordonnee, des paramètres rajoutés pour Medatlas
-//     */
-//    protected java.util.List<AddedParameter> _medparameters;
-
-    
-    
+	protected Survey _survey;    
 
 	/**
 	 * Liste , ordonnee, des parametres mesures
@@ -214,11 +196,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
      * Liste, ordonnee, des paramètres rajoutés pour Medatlas
      */
     protected List<ParameterModel> _medparameters;
-    
-    
-    
-    
-    
+
 	/**
 	 * Information sur les series temporelles. Optionnel, n'existe que si la
 	 * campagne a concerne des donnees temporelles.
@@ -235,6 +213,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
      * Nom du fichier source, sert notemment pour trier les stations
      */
     protected String _fichierSource;
+    
 
 	public Station() {
         _dataSize = 0;
@@ -373,15 +352,6 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 			Element2Field setter = new Element2Field(this, "setDepthQC");
 			return setter;
 		}
-		if (a_LocalName.equals("globalProfileQC")) {
-			Element2Field setter = new Element2Field(this, "setGlobalProfileQC");
-			return setter;
-		}
-		if (a_LocalName.equals("globalParametersQC")) {
-			Element2Field setter = new Element2Field(this,
-					"setGlobalParametersQC");
-			return setter;
-		}
 		if (a_LocalName.equals("dcHistory1")) {
 			Element2Field setter = new Element2Field(this, "setDcHistory1");
 			return setter;
@@ -416,15 +386,6 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 			setDataType(l);
 			return (SAXConsumer) l;
 		}
-//		if (a_LocalName.equals("parameters")) {
-//			return new PathElementConsumer("parameters", this);
-//		}
-//        if (a_LocalName.equals("odvparameters")) {
-//            return new PathElementConsumer("odvparameters", this);
-//        }
-//        if (a_LocalName.equals("medparameters")) {
-//            return new PathElementConsumer("medparameters", this);
-//        }
 		if (a_LocalName.equals("TimeSeriesInformation")) {
 			TimeSeriesInformation l = (TimeSeriesInformation) TimeSeriesInformation
 					.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
@@ -496,8 +457,6 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		a_Writer.putTag("latitudeQC", getLatQC());
 		a_Writer.putTag("longitudeQC", getLongQC());
 		a_Writer.putTag("depthQC", getDepthQC());
-		a_Writer.putTag("globalProfileQC", getGlobalProfileQC());
-		a_Writer.putTag("globalParametersQC", getGlobalParametersQC());
 		a_Writer.putTag("dcHistory1", getDcHistory1());
 		a_Writer.putTag("dcHistory2", getDcHistory2());
 		a_Writer.putTag("dmHistory1", getDmHistory1());
@@ -508,11 +467,6 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		if (getDataType() != null) {
 			getDataType().writeXMLOn(a_Writer);
 		}
-//		a_Writer.openTag("parameters");
-////		for (Parameter t : getParameters()) {
-////			t.writeXMLOn(a_Writer);
-////		}
-//        a_Writer.closeTag();
 		if (getTimeSeriesInformation() != null) {
 			getTimeSeriesInformation().writeXMLOn(a_Writer);
 		}
@@ -874,17 +828,39 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	public void setDmHistory2(String x) {
 		_dmHistory2 = x;
 	}
+    
+    public void constructGlobalParametersQC(){
 
-	/**
-	 * Write accessor (setter) for attribute _globalParametersQC
-	 * 
-	 * @param x
-	 *            new value for _globalParametersQC
-	 * @see Station#_globalParametersQC
-	 */
-	public void setGlobalParametersQC(String x) {
-		_globalParametersQC = x;
-	}
+        StringBuffer buffer = new StringBuffer();
+        
+        String medParamQC = fillGlobalQC(_medparameters);
+        buffer.append(medParamQC);
+        
+        String paramQC = fillGlobalQC(_parameters);
+        buffer.append(paramQC);
+        
+        _globalParametersQC = buffer.toString();
+    }
+    
+    public String fillGlobalQC(List<ParameterModel> liste){
+        StringBuffer buffer = new StringBuffer();
+        for (ParameterModel para : liste){
+            String qc = para.getModel().getGlobalQC();
+            if (qc.equals(Global.WORSE_FLAG)) qc = Global.ZERO;
+            buffer.append(qc);
+        }        
+        return buffer.toString();
+    }
+
+    /**
+     * Read accessor (getter) for attribute _globalParametersQC
+     * 
+     * @return String
+     * @see Station#_globalParametersQC
+     */
+    public String getGlobalParametersQC() {
+        return _globalParametersQC;
+    }
 
 	/**
 	 * Read accessor (getter) for attribute _globalProfileQC
@@ -892,13 +868,11 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 	 * @return String
 	 * @see Station#_globalProfileQC
 	 */
-	public String getGlobalProfileQC() {
-        
-        String globalParameter = getGlobalParametersQC();
+	public String constructGlobalProfileQC() {
         boolean missingValue = true;
         
-        for (int i = 0; i < globalParameter.length(); i++){
-            String qc = globalParameter.substring(i, i+1);
+        for (int i = 0; i < _globalParametersQC.length(); i++){
+            String qc = _globalParametersQC.substring(i, i+1);
             
             if (!qc.equals(Global.ZERO) 
                     && !qc.equals(Global.DEFAULT_FLAG) 
@@ -914,16 +888,15 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 		return _globalProfileQC;
 	}
 
-	/**
-	 * Write accessor (setter) for attribute _globalProfileQC
-	 * 
-	 * @param x
-	 *            new value for _globalProfileQC
-	 * @see Station#_globalProfileQC
-	 */
-	public void setGlobalProfileQC(String x) {
-		_globalProfileQC = x;
-	}
+    /**
+     * Read accessor (getter) for attribute _globalProfileQC
+     * 
+     * @return String
+     * @see Station#_globalProfileQC
+     */
+    public String getGlobalProfileQC() {
+        return _globalProfileQC;
+    }
 
 	/**
 	 * Read accessor (getter) for attribute _latitude
@@ -1706,25 +1679,6 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
 			cal.setTimeInMillis(_date);
 		}
 		return getGMTDate(cal.getTimeInMillis());
-	}
-
-	/**
-	 * 
-	 * @return String
-	 */
-	public String getGlobalParametersQC() {
-		StringBuffer buffer = new StringBuffer();
-        for (ParameterModel medPara : _medparameters){
-            String qc = medPara.getModel().getGlobalQC();
-            if (qc.equals(Global.WORSE_FLAG)) qc = Global.ZERO;
-            buffer.append(qc);
-        }
-        for (ParameterModel para : _parameters){
-            String qc = para.getModel().getGlobalQC();
-            if (qc.equals(Global.WORSE_FLAG)) qc = Global.ZERO;
-            buffer.append(qc);
-        }
-		return buffer.toString();
 	}
 
 	/**

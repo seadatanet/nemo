@@ -428,6 +428,9 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
 		a_Writer.putAttribute("endOnEmptyLine", isEndOnEmptyLine());
         a_Writer.putAttribute("endOnNextStation", isEndOnNextStation());
 		a_Writer.putAttribute("endOnPattern", isEndOnPattern());
+        if (!_endStationHeaderPattern){
+            a_Writer.putAttribute("lineNumber", getNumberOfLines());
+        }
         
 		a_Writer.putTag("inputType", getInputType());
 		a_Writer.putTag("separator", getSeparator());
@@ -437,9 +440,6 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
         if (_endStationHeaderPattern){
             a_Writer.putTag("numberLinesBetweenStationData", getNumberLinesBetweenStationData());
             a_Writer.putTag("endStationHeader", getEndStationHeader());
-        }
-        else{
-            a_Writer.putAttribute("lineNumber", getNumberOfLines());
         }
         
         // onNextStation - Preformat
@@ -1803,6 +1803,10 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer 
                             
             consumeFooter(a_Reader);
 
+            // GLOBAL QC
+            station.constructGlobalParametersQC();
+            station.constructGlobalProfileQC();
+            
 //            System.out.println("StationModel - convert : END   at " + new Date());
             return station;
         }
