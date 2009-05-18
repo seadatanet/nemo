@@ -190,7 +190,7 @@ public class DataModel
             if (!stationPattern.equals(Global.EMPTY_STRING)){
                 String[] texte = Utils.texteBrut.split("\n"); //$NON-NLS-1$
                 for(numLine = 0; numLine < texte.length; numLine++){
-                    if (texte[numLine].trim().startsWith(stationPattern)){
+                    if (texte[numLine].trim().startsWith(stationPattern.trim())){
                         numLine++;
                         break;
                     }
