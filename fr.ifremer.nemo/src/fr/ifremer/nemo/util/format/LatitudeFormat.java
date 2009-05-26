@@ -408,38 +408,43 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 					break;
 				}
 				case DEGREES: {
+                    String tmp = source.replace(' ', '0');
 					DecimalFormat format = new DecimalFormat(
 							_elements[i]._element);
-					value += ((Number) format.parseObject( source, pos)).doubleValue();
+					value += ((Number) format.parseObject(tmp, pos)).doubleValue();
 					index = pos.getIndex();
 					break;
 				}
 				case DEGREES_DECIMAL: {
-						DecimalFormat format = new DecimalFormat(
-								_elements[i]._element, symbols);
-						value += ((Number) format.parseObject(source, pos)).doubleValue();
-						index = pos.getIndex();
+                    String tmp = source.replace(' ', '0');
+					DecimalFormat format = new DecimalFormat(
+							_elements[i]._element, symbols);
+					value += ((Number) format.parseObject(tmp, pos)).doubleValue();
+					index = pos.getIndex();
 					break;
 				}
 				case MINUTES: {
-						DecimalFormat format = new DecimalFormat(
-								_elements[i]._element);
-						value += ((Number) format.parseObject(source, pos)).doubleValue() / 60.0;
-						index = pos.getIndex();
+                    String tmp = source.replace(' ', '0');
+					DecimalFormat format = new DecimalFormat(
+							_elements[i]._element);
+					value += ((Number) format.parseObject(tmp, pos)).doubleValue() / 60.0;
+					index = pos.getIndex();
 					break;
 				}
 				case MINUTES_DECIMAL: {
+                    String tmp = source.replace(' ', '0');
 					DecimalFormat format = new DecimalFormat(
 							_elements[i]._element, symbols);
-					value += ((Number) format.parseObject(source, pos)).doubleValue() / 60.0;
+					value += ((Number) format.parseObject(tmp, pos)).doubleValue() / 60.0;
 					index = pos.getIndex();
 					break;
 				}
 				case SECONDS: {
-						DecimalFormat format = new DecimalFormat(
-								_elements[i]._element);
-						value += ((Number) format.parseObject(source, pos)).doubleValue() / 3600.0;
-						index = pos.getIndex();
+                    String tmp = source.replace(' ', '0');
+					DecimalFormat format = new DecimalFormat(
+							_elements[i]._element);
+					value += ((Number) format.parseObject(tmp, pos)).doubleValue() / 3600.0;
+					index = pos.getIndex();
 					break;
 				}
 				}

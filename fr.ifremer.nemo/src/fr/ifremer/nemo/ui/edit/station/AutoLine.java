@@ -392,7 +392,8 @@ public class AutoLine implements UIobject
                 boolean continueBoucle = true;
                 while (continueBoucle && index < ligne.length()){
                     nextChar = ligne.substring(index, index + 1);
-                    if (nextChar.equals(".")  //$NON-NLS-1$
+                    if (index < iEnd
+                        || nextChar.equals(".")  //$NON-NLS-1$
                         || nextChar.equals(",")  //$NON-NLS-1$
                         || Utils.isNumeric(nextChar)){
                         index++;
