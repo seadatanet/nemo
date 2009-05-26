@@ -91,6 +91,9 @@ public class Messages {
     public static String menu_label_upType;
     public static String menu_label_downType;
     public static String menu_label_removeType;
+    public static String menu_label_upParam;
+    public static String menu_label_downParam;
+    public static String menu_label_removeParam;
     public static String menu_label_setFlag;
     public static String menu_label_deleteFlag;
     public static String menu_label_addFlag;
@@ -300,6 +303,7 @@ public class Messages {
     public static String connect_nemo;
     public static String connect_vocab;
     public static String connect_edmo;
+    public static String update_shellTitle;
     public static String update_barTitle;
     public static String update_title;
     public static String update_info;
