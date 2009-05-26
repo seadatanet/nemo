@@ -301,7 +301,7 @@ public class TableData {
         });
         
 		MenuItem itemUp = new MenuItem(menu, SWT.NONE);
-		itemUp.setText(Messages.menu_label_upType);
+		itemUp.setText(Messages.menu_label_upParam);
         itemUp.addListener(SWT.Selection, new Listener() {
             public void handleEvent(Event e) {
                 // System.out.println("up");
@@ -312,7 +312,7 @@ public class TableData {
         });
         
 		MenuItem itemDown = new MenuItem(menu, SWT.NONE);
-		itemDown.setText(Messages.menu_label_downType);
+		itemDown.setText(Messages.menu_label_downParam);
         itemDown.addListener(SWT.Selection, new Listener() {
             public void handleEvent(Event e) {
                 descendreEltTableData();
@@ -322,7 +322,7 @@ public class TableData {
         });
         
 		MenuItem itemDel = new MenuItem(menu, SWT.NONE);
-		itemDel.setText(Messages.menu_label_removeType);
+		itemDel.setText(Messages.menu_label_removeParam);
         itemDel.addListener(SWT.Selection, new Listener() {
             public void handleEvent(Event e) {
                 supprEltTableData();
