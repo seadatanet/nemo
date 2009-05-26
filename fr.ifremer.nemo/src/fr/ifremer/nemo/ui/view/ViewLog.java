@@ -66,9 +66,8 @@ public class ViewLog extends ViewPart {
             
             File file = new File(fileName);
             FileInputStream stream = new FileInputStream(file);
-            InputStreamReader reader = new InputStreamReader(stream, "ISO-8859-1"); //$NON-NLS-1$
+            InputStreamReader reader = new InputStreamReader(stream, "UTF8"); //$NON-NLS-1$
             BufferedReader bufferedReader = new BufferedReader(reader);
-            //BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
             
             String readedLine = Global.EMPTY_STRING;
             int cpt = 0;
