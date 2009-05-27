@@ -501,7 +501,8 @@ public class HeaderFragment implements Cloneable, SAXConsumer {
                 boolean continueBoucle = true;
                 while (continueBoucle && index < a_Header[i].length()){
                     nextChar = a_Header[i].substring(index, index + 1);
-                    if (nextChar.equals(".")  //$NON-NLS-1$
+                    if (index < _lastCharOffset
+                        || nextChar.equals(".")  //$NON-NLS-1$
                         || nextChar.equals(",")  //$NON-NLS-1$
                         || Utils.isNumeric(nextChar)){
                         index++;
