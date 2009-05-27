@@ -1030,6 +1030,25 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
     <void property="code"> 
+     <string>CUPH</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>999.99</string> 
+    </void> 
+    <void property="format"> 
+     <string>%6.2f</string> 
+    </void> 
+    <void property="name"> 
+     <string>14C PRODUCTION FILTER UNSPECIF</string> 
+    </void> 
+    <void property="unit"> 
+     <string>milligram carbon/(m3.hour)</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
      <string>CUPW</string> 
     </void> 
     <void property="defaultValue"> 
@@ -1039,7 +1058,7 @@
      <string>%6.2f</string> 
     </void> 
     <void property="name"> 
-     <string>14C PRODUCTION UNKNOWN FILTER</string> 
+     <string>14C PRODUCTION FILTER UNSPECIF</string> 
     </void> 
     <void property="unit"> 
      <string>milligram carbon/(m3.day)</string> 
@@ -1119,25 +1138,6 @@
     </void> 
     <void property="unit"> 
      <string>milligram carbon/(m3.day)</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSParameter"> 
-    <void property="code"> 
-     <string>DATE</string> 
-    </void> 
-    <void property="defaultValue"> 
-     <string>9999</string> 
-    </void> 
-    <void property="format"> 
-     <string>%4.4d</string> 
-    </void> 
-    <void property="name"> 
-     <string>DATE</string> 
-    </void> 
-    <void property="unit"> 
-     <string>mmdd</string> 
     </void> 
    </object> 
   </void> 
@@ -2132,6 +2132,25 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
     <void property="code"> 
+     <string>IC13</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>999.9</string> 
+    </void> 
+    <void property="format"> 
+     <string>%5.1f</string> 
+    </void> 
+    <void property="name"> 
+     <string>DIC DELTA 13C</string> 
+    </void> 
+    <void property="unit"> 
+     <string>per thousand</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
      <string>IODI</string> 
     </void> 
     <void property="defaultValue"> 
@@ -2164,44 +2183,6 @@
     </void> 
     <void property="unit"> 
      <string>gram/m3</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSParameter"> 
-    <void property="code"> 
-     <string>LATD</string> 
-    </void> 
-    <void property="defaultValue"> 
-     <string>+99</string> 
-    </void> 
-    <void property="format"> 
-     <string>%+3.0f</string> 
-    </void> 
-    <void property="name"> 
-     <string>LATITUDE DEGREES</string> 
-    </void> 
-    <void property="unit"> 
-     <string>degree</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSParameter"> 
-    <void property="code"> 
-     <string>LATM</string> 
-    </void> 
-    <void property="defaultValue"> 
-     <string>99.999</string> 
-    </void> 
-    <void property="format"> 
-     <string>%6.3f</string> 
-    </void> 
-    <void property="name"> 
-     <string>LATITUDE MINUTES</string> 
-    </void> 
-    <void property="unit"> 
-     <string>minute</string> 
     </void> 
    </object> 
   </void> 
@@ -2373,44 +2354,6 @@
     </void> 
     <void property="unit"> 
      <string>microgram/g</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSParameter"> 
-    <void property="code"> 
-     <string>LOND</string> 
-    </void> 
-    <void property="defaultValue"> 
-     <string>+999</string> 
-    </void> 
-    <void property="format"> 
-     <string>%+4.0f</string> 
-    </void> 
-    <void property="name"> 
-     <string>LONGITUDE DEGREES</string> 
-    </void> 
-    <void property="unit"> 
-     <string>degree</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSParameter"> 
-    <void property="code"> 
-     <string>LONM</string> 
-    </void> 
-    <void property="defaultValue"> 
-     <string>99.999</string> 
-    </void> 
-    <void property="format"> 
-     <string>%6.3f</string> 
-    </void> 
-    <void property="name"> 
-     <string>LONGITUDE MINUTES</string> 
-    </void> 
-    <void property="unit"> 
-     <string>minute</string> 
     </void> 
    </object> 
   </void> 
@@ -3608,25 +3551,6 @@
     </void> 
     <void property="unit"> 
      <string>nanomole/kg</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSParameter"> 
-    <void property="code"> 
-     <string>NETR</string> 
-    </void> 
-    <void property="defaultValue"> 
-     <string>-999.9</string> 
-    </void> 
-    <void property="format"> 
-     <string>%+5.1f</string> 
-    </void> 
-    <void property="name"> 
-     <string>NET RADIATION</string> 
-    </void> 
-    <void property="unit"> 
-     <string>watt/m2</string> 
     </void> 
    </object> 
   </void> 
