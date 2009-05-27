@@ -175,7 +175,7 @@ public class EditConversion extends Thread {
 									&& EditStation.okApresReset
 									&& EditData.okApresReset) {
 
-								if (formatConversion == Conversion.ODV) {
+								if ((formatConversion == Conversion.ODV) && (!ViewFile.collectionCas1)) {
 									if (!askDataSetRef()) {
 										throw new Exception("Cancelled"); //$NON-NLS-1$
 									}

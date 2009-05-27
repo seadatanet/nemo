@@ -61,7 +61,7 @@ $configuration.getSep()$param.code [$param.unit]$configuration.getSep()$configur
 #set ($dateTime   = $station.getDateTime())
 #set ($longitude  = $formatter.formatLongitude("+DDD.dddddd", $station.longitude))
 #set ($latitude   = $formatter.formatLatitude("+DD.dddddd ", $station.latitude))
-#set ($localCdiId = $station.getLocalCdiId($survey.reference, "ODV"))
+#set ($localCdiId = $station.getLocalCdiId($survey, "ODV"))
 #set ($edmoCode   = $configuration.getIdEdmoRespCdi())
 #set ($botDepth   = 0)
 #if ($station.bottomDepth.toString() != "NaN")#set ($botDepth = $station.bottomDepth)#end

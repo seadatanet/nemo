@@ -49,7 +49,7 @@ $line
 ## -- SDN_parameters_mapping
 $nemoLists.getSdnParameters()
 *EDMO_CODE=$configuration.getIdEdmoRespCdi()
-*LOCAL_CDI_ID=$station.getLocalCdiId($survey.reference, "MEDATLAS")
+*LOCAL_CDI_ID=$station.getLocalCdiId($survey, "MEDATLAS")
 *SURFACE SAMPLES=$formatter.limitString( $station.surfaceSamples1, 63)
 *$formatter.limitString( $station.surfaceSamples2, 80)
 ##

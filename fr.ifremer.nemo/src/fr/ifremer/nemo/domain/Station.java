@@ -1882,7 +1882,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
     
 
 
-    public String getLocalCdiId(String surveyReference, String formatConversion) {
+    public String getLocalCdiId(Survey survey, String formatConversion) {
         // FAE 1143 : nommage du LOCAL_CDI_ID
         
         String ref = Global.EMPTY_STRING;
@@ -1892,7 +1892,10 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
         
         if (formatConversion.equals(Conversion.ODV.toString())) {
             // ODV      -> [Référence du jeu de données]
-            ref = EditConversion.getDataSetRef();
+            if (ViewFile.collectionCas1)
+                ref = survey.getName();
+            else
+                ref = EditConversion.getDataSetRef();
             // [Numéro station]si < 5 : codé sur 5 caractères il est complété à gauche par des '0'. 
             if (stationReference.length() < 5){
                 stationReference = Formatter.getSingleton().padZero(stationReference, 5);
@@ -1900,7 +1903,7 @@ public class Station implements Cloneable, PathElementHandler, SAXConsumer {
         }else{
             // MEDATLAS ->  
             // [Référence campagne]
-            ref = Formatter.getSingleton().padString(surveyReference,13);
+            ref = Formatter.getSingleton().padString(survey.getReference(),13);
             // [Numéro station] codé sur 5 caractères il est complété à gauche par des '0'. 
             stationReference = Formatter.getSingleton().padZero(stationReference, 5);
         }

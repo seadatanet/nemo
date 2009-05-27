@@ -203,7 +203,7 @@ public class SWTProcess implements IRunnableWithProgress {
             if (!monitor2.isCanceled()){
                 i++;
                 monitor2.setTaskName(Messages.SWTProcess_4 + " : " + i + " / " + totalStations);  //$NON-NLS-1$//$NON-NLS-2$
-                String localCdiId = station.getLocalCdiId(survey.getReference(), formatConversion.toString());
+                String localCdiId = station.getLocalCdiId(survey, formatConversion.toString());
                 currentStation = station;
                 
                 EditConversion.nomFichierSortie = outputDirName + File.separator + localCdiId + Global.EXT_TXT;
@@ -258,7 +258,7 @@ public class SWTProcess implements IRunnableWithProgress {
     
         if (Configuration.getSingleton().isWriteMapping()){
             for (Station station : survey.getStations()) {
-                String localCdiId = station.getLocalCdiId(survey.getReference(), formatConversion.toString());
+                String localCdiId = station.getLocalCdiId(survey, formatConversion.toString());
                 mapping = new Mapping(localCdiId, formatConversion.toString()); 
 
                 StringBuffer filename = new StringBuffer();

@@ -22,6 +22,7 @@ import fr.ifremer.nemo.input.ParameterModel;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.DataModel;
 import fr.ifremer.nemo.ui.edit.conversion.EditConversion;
+import fr.ifremer.nemo.ui.view.ViewFile;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
@@ -146,7 +147,7 @@ public class CDIResumeWriter {
         writer.write(Global.RN);
         
         // CDI ID
-        writer.write(station.getLocalCdiId(survey.getReference(), formatSortie));
+        writer.write(station.getLocalCdiId(survey, formatSortie));
 
         // EDMO author
             writer.write(sep + idEdmoRespCdi);
@@ -175,7 +176,10 @@ public class CDIResumeWriter {
 
         // Dataset ID
         if (survey.getReference().isEmpty()){    
-            if (EditConversion.getDataSetRef().isEmpty()){    
+            if (ViewFile.collectionCas1){
+                writer.write(sep + survey.getName()); 
+            }
+            else if (EditConversion.getDataSetRef().isEmpty()){    
                 writer.write(sep + Intern.CDIResumeWriter_notSpecified);
             } 
             else{
