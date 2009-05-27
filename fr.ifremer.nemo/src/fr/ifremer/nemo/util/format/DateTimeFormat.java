@@ -507,7 +507,6 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 							+ _elements[i]._element.length());
 					if (!tmp.equals(_elements[i]._element)) {
 						if (!_elements[i]._element.trim().equals(""))
-						// if (!_elements[i]._element.equals(" "))
 						{
 							throw new ParseException(
 									"Charactere invalide, chaine attendue: \""
@@ -574,13 +573,8 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 					String tmp = source.substring(index, index
 							+ _elements[i]._element.length());
 
-					Pattern p = Pattern.compile("[.]");
+					Pattern p = Pattern.compile("[.]"); //$NON-NLS-1$
 					String parties[] = p.split(tmp);
-
-					// Double tmpDouble = Double.parseDouble(tmp);
-					// int seconds = tmpDouble.intValue();
-					// Double milliseconds = (tmpDouble.doubleValue() -
-					// tmpDouble.intValue()) * 1000;
 
 					cal.add(Calendar.SECOND, Integer.parseInt(parties[0]));
 					cal.add(Calendar.MILLISECOND, Integer.parseInt(parties[1]));
@@ -589,30 +583,65 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 					break;
 				}
 				case HOURSDEC: {
-					String tmp = source.substring(index, index
-							+ _elements[i]._element.length());
-					int minutes = 0;
-					if (tmp.trim().length() > 0) {
-						minutes = Integer.parseInt(tmp.trim()) * 60 / 100;
-					}
-					cal.set(Calendar.MINUTE, minutes);
-					index += _elements[i]._element.length();
-					break;
+                    String tmp = source.substring(index, index
+                        + _elements[i]._element.length());
+                    
+                    // maximum 7 éléments
+                    tmp = Formatter.getSingleton().genericPadString(tmp, 7, '0', false);
+                    
+                    // les 2 premières décimales correspondent aux minutes [*60 /100]
+                    String sMinutes = tmp.substring(0,2);
+                    int minutes = Integer.parseInt(sMinutes) * 60 / 100;
+                    cal.set(Calendar.MINUTE, minutes);
+                    
+                    // les 2 décimales suivantes correspondent aux secondes [*60 /100]
+                    String sSecondes = tmp.substring(2,4);
+                    int secondes = Integer.parseInt(sSecondes) * 60 / 100;
+                    cal.set(Calendar.SECOND, secondes);
+                    
+                    // les 3 dernières décimales correspondent aux millisecondes [direct]
+                    String sMillisecondes = tmp.substring(4);
+                    int millisecondes = Integer.parseInt(sMillisecondes);
+                    cal.set(Calendar.MILLISECOND, millisecondes);                    
+                    
+                    index += _elements[i]._element.length();
+                    break;
+                    
+                    /* Véritable Decimal Time
+				    // format = cc.cc.cc correspondant à [dour].[dinute].[decond]
+                    //
+                    // Règles
+                    // 1 decimal hour (dour) = 100 decimal minutes (dinutes)
+                    // 1 decimal minute (dinute) = 100 decimal seconds (deconds)
+                    // 1 decimal second (decond) = 0.864 regular seconds
+                    
+                    Calendar calTemp = Calendar.getInstance();
+                    calTemp.clear();
+                    
+                    String tmp = source.substring(index, index
+                            + _elements[i]._element.length());
 
-					// String tmp = source.substring(index, index
-					// + 2);
-					// index += 3;
-					// int hours = Integer.parseInt(tmp.trim());
-					//					
-					// tmp = source.substring(index, index
-					// + 2);
-					// index += 2;
-					// int minutes = Integer.parseInt(tmp.trim()) * 60 / 100 ;
-					//					
-					// cal.set(Calendar.HOUR, hours);
-					// cal.set(Calendar.MINUTE, minutes);
-					//										
-					// break;
+                    Pattern p = Pattern.compile("[.]"); //$NON-NLS-1$
+                    String parties[] = p.split(tmp);
+                    
+                    int deconds = 0;
+                    int multi = 100 * 100;
+                    for (int idx = 0; idx < parties.length; idx++){
+                        deconds += Integer.parseInt(parties[idx].trim()) * multi;
+                        multi = multi /100;
+                    }
+                    
+                    Double seconds = deconds * 0.864;
+                    
+                    calTemp.add(Calendar.SECOND, seconds.intValue());
+
+                    cal.set(Calendar.HOUR_OF_DAY, calTemp.get(Calendar.HOUR_OF_DAY));
+                    cal.set(Calendar.MINUTE, calTemp.get(Calendar.MINUTE));
+                    cal.set(Calendar.SECOND, calTemp.get(Calendar.SECOND));
+                    
+                    index += _elements[i]._element.length();
+                    break;
+                    */
 				}
 				case SECONDSD: {
 					Calendar calTemp = Calendar.getInstance();
@@ -623,12 +652,11 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 
 					calTemp.add(Calendar.SECOND, Integer.parseInt(tmp.trim()));
 
-					cal.set(Calendar.HOUR, calTemp.get(Calendar.HOUR_OF_DAY));
+					cal.set(Calendar.HOUR_OF_DAY, calTemp.get(Calendar.HOUR_OF_DAY));
 					cal.set(Calendar.MINUTE, calTemp.get(Calendar.MINUTE));
 					cal.set(Calendar.SECOND, calTemp.get(Calendar.SECOND));
 
 					index += _elements[i]._element.length();
-
 					break;
 				}
 				}

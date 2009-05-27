@@ -131,7 +131,7 @@ Les champs obligatoires sont : Numéro de station, Type de données, Heure, Date
            Le format peut être sélectionné dans la liste, ou saisi par l'utilisateur en utilisant les valeurs suivantes :
                hh: heure exprimée sur 2 caractères (hh24 indique une heure comprise entre 0 et 23).
                mm: minutes exprimée sur 2 caractères (entre 0 et 59)
-               cc: centième d'heure sur 2 caractères
+               ccc: centième d'heure sur 1 à 7 caractères (exemple : format hh24.ccc, valeur = 17.125, heure = 17:07:30.000)
                ss: secondes exprimées sur 2 caractères (entre 0 et 59)
                PM: heure au format anglo-saxon (PM et AM)
                ttttt: secondes exprimées sur 1 à 5 caractères (pour les heures exprimées en secondes, exemple : format tttt, valeur=3610, heure = 01:00:10.00)
@@ -147,7 +147,7 @@ Les champs obligatoires sont : Numéro de station, Type de données, Heure, Date
                MM: mois sur 2 caractères (1 à 12)
                MMM: mois sur 3 caractères alphabétiques (JAN,FEB,MAR,APR,MAY,JUN,JUL,AGU,SEP,OCT,NOV,DEC)
                DD: Jour dans le mois sur 2 caractères (1 à 31)
-	       DDDDDDD.d: Jour julien chronologique de (utilisé dans le format ODV)
+	       	   DDDDDDD.d: Jour julien chronologique de (utilisé dans le format ODV)
                   exemple : si la date à lire est la suivante : 2454972.09687, 
                                pour le jour il faut lire 2454972.0, format DDDDDDD.d
                                pour l'heure il faut lire 2.09687    format D.ddddd

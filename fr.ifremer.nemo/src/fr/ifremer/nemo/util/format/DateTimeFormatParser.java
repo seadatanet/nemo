@@ -84,8 +84,8 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 	 */
 	public boolean amPmMarker() throws ParseException {
 		if (peekForType(AMPM_MARKER)) {
-			_stack.add(new ParseElement(ParseElementType.AMPM, (String) _stack
-					.pop()));
+			_stack.add(new ParseElement(ParseElementType.AMPM, 
+                                        (String) _stack.pop()));
 			return true;
 		}
 		return false;
@@ -98,12 +98,28 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 	 */
 	public boolean characters() throws ParseException {
 		if (peekForType(WORD)) {
-			_stack.add(new ParseElement(ParseElementType.CHARS, (String) _stack
-					.pop()));
+			_stack.add(new ParseElement(ParseElementType.CHARS, 
+                                        (String) _stack.pop()));
 			return true;
 		}
 		return false;
 	}
+
+
+    /**
+     * 
+     * @return boolean
+     * @exception ParseException
+     */
+    public boolean dot() throws ParseException {
+        if (peekForType(DOT)) {
+            String value = ((Character) _stack.pop()).toString();
+            _stack.add(new ParseElement(ParseElementType.CHARS, 
+                                        value));
+            return true;
+        }
+        return false;
+    }
 	
 	/**
 	 * 
@@ -183,8 +199,8 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 	 */
 	public boolean day() throws ParseException {
 		if (peekForType(DAY)) {
-			_stack.add(new ParseElement(ParseElementType.DAY, (String) _stack
-					.pop()));
+			_stack.add(new ParseElement(ParseElementType.DAY, 
+                                        (String) _stack.pop()));
 			return true;
 		}
 		return false;
@@ -198,7 +214,7 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 	public boolean dayDecimal() throws ParseException {
 		if (peekForType(DAY_DECIMAL)) {
 			_stack.add(new ParseElement(ParseElementType.DAY_DECIMAL,
-					(String) _stack.pop()));
+					                    (String) _stack.pop()));
 			return true;
 		}
 		return false;
@@ -231,7 +247,7 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 	public boolean hours12() throws ParseException {
 		if (peekForType(HOURS12)) {
 			_stack.add(new ParseElement(ParseElementType.HOURS12,
-					(String) _stack.pop()));
+					                    (String) _stack.pop()));
 			return true;
 		}
 		return false;
@@ -245,7 +261,7 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 	public boolean hours24() throws ParseException {
 		if (peekForType(HOURS24)) {
 			_stack.add(new ParseElement(ParseElementType.HOURS24,
-					(String) _stack.pop()));
+					                    (String) _stack.pop()));
 			return true;
 		}
 		return false;
@@ -259,7 +275,7 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 	public boolean hoursDec() throws ParseException {
 		if (peekForType(HOURSDEC)) {
 			_stack.add(new ParseElement(ParseElementType.HOURSDEC,
-					(String) _stack.pop()));
+					                    (String) _stack.pop()));
 			return true;
 		}
 		return false;
@@ -273,7 +289,7 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 	public boolean secondsD() throws ParseException {
 		if (peekForType(SECONDSD)) {
 			_stack.add(new ParseElement(ParseElementType.SECONDSD,
-					(String) _stack.pop()));
+					                    (String) _stack.pop()));
 			return true;
 		}
 		return false;
@@ -460,7 +476,7 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 	public boolean time() throws ParseException {
 		if (hours12()) {
 			characters();
-			if (minutes() || hoursDec()) {
+			if (minutes()) {
 				characters();
 				if (seconds() || milliseconds()) {
 					characters();
@@ -477,7 +493,16 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 						throw new ParseException("Marker AM/PM manquant", mark);
 					}
 				}
-			} else {
+			}else if (hoursDec()){
+                throw new ParseException("'.' est obligatoire pour distinguer les heures décimales", mark);
+            }else if (dot()){
+                characters();
+                if (hoursDec()){
+                    return nothing();
+                }else {
+                    return characters();
+                }
+            } else {
 				characters();
 				if (amPmMarker()) {
 					return true;
@@ -487,12 +512,21 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 			}
 		} else if (hours24()) {			
 			characters();
-			if (minutes() || hoursDec()) {
+			if (minutes()) {
 				characters();
 				return (seconds() || milliseconds() || nothing());
-			}  else {
-				return characters();
-			}
+			}else if (hoursDec()){
+                throw new ParseException("'.' est obligatoire pour distinguer les heures décimales", mark);
+            }else if (dot()){
+                characters();
+                if (hoursDec()){
+                    return nothing();
+                }else {
+                    return characters();
+                }
+            }else {
+                return characters();
+            }
 		} else if (hoursDec()) {
 			return true;
 		} else if (secondsD()) {
@@ -581,13 +615,13 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 	public void xHourDec() throws ParseException {
 		StringBuffer buff = new StringBuffer();
 		tokenType = HOURSDEC;
-		buff.append('c');
+		//buff.append('.');
+        buff.append('c');
 		step();
 		while (hereChar > 0 && (typeTable[hereChar] == XHOURDEC)) {
-			buff.append('c');
+            buff.append('c');
 			step();			
-		}
-		
+		}		
 		token = buff.toString();
 	}
 

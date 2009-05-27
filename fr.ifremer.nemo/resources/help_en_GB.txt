@@ -130,11 +130,11 @@ Mandatory fields are: Station number, Data type, Time, Date, Latitude and Longit
           Format is either predefined but can be input by the user within the following :
                hh: hour expressed in 2 digits (hh24 indicates time on 24 hours, 0 to 23)
                mm: minutes expressed in 2 digits (0 to 59)
-               cc: hundredth in the time expressed in 2 digits
+               ccc: hundredth in the time expressed in 1 up to 7 digits (example : format hh24.ccc, value = 17.125, time = 17:07:30.000)
                ss: seconds expressed in 2 digits (0 59)
                ttttt: seconds expressed in 1 up to 5 digits (for hour given in seconds, example : format tttt, value=3610, time = 01:00:10.00)
                PM: allows NEMO to read PM and AM time
-	       D.dddddd: chronological Julian time (used in ODV format)
+	       	   D.dddddd: chronological Julian time (used in ODV format)
                       example : Chronological Julian date = 2454972.09687, 
                                For DATE, read 2454972.0 - format DDDDDDD.d
                                For TIME read  2.09687   - format D.ddddd
@@ -146,7 +146,7 @@ Mandatory fields are: Station number, Data type, Time, Date, Latitude and Longit
                MM: month expressed in 2 digits (1 to 12)
                MMM: month expressed in 3 alphabetic characters (JAN,FEB,MAR,APR,MAY,JUN,JUL,AGU,SEP,OCT,NOV,DEC)
                DD: day in the month expressed in 2 digits
-	       DDDDDDD.d: chronological Julian day (used in ODV format, for example)
+	       	   DDDDDDD.d: chronological Julian day (used in ODV format, for example)
                        example : Chronological Julian date = 2454972.09687, 
                                For DATE, read 2454972.0 - format DDDDDDD.d
                                For TIME read  2.09687   - format D.ddddd

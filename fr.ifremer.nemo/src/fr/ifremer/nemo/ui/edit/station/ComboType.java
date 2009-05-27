@@ -50,7 +50,8 @@ public enum ComboType
                 valueCombo.add("hh24mm");                   //$NON-NLS-1$
                 valueCombo.add("hh24mmss");                 //$NON-NLS-1$
                 valueCombo.add("hh24 mm");                  //$NON-NLS-1$
-                valueCombo.add("hh24:cc");                  //$NON-NLS-1$
+                // véritable "Decimal Time" : valueCombo.add("cc.cc.cc");                  //$NON-NLS-1$
+                valueCombo.add("hh24.ccc");                 //$NON-NLS-1$
                 valueCombo.add("D.dddddd");                //$NON-NLS-1$
                 valueCombo.add("ttttt");                    //$NON-NLS-1$
                 break;

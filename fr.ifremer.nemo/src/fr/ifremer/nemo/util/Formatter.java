@@ -274,15 +274,16 @@ public class Formatter implements Cloneable {
 	 * @return String
 	 */
 	public String padString(String a_String, int length) {
-		if (a_String.length() > length) {
-			return a_String.substring(0, length);
-		} else {
-			StringBuffer buff = new StringBuffer(a_String);
-			for (int i = a_String.length(); i < length; i++) {
-				buff.append(' ');
-			}
-			return buff.toString();
-		}
+        return genericPadString (a_String, length, ' ', false);
+//		if (a_String.length() > length) {
+//			return a_String.substring(0, length);
+//		} else {
+//			StringBuffer buff = new StringBuffer(a_String);
+//			for (int i = a_String.length(); i < length; i++) {
+//				buff.append(' ');
+//			}
+//			return buff.toString();
+//		}
 	}
 
     /**
@@ -292,15 +293,16 @@ public class Formatter implements Cloneable {
      * @return String
      */
     public String padStringLeft(String a_String, int length) {
-        if (a_String.length() > length) {
-            return a_String.substring(0, length);
-        } //else {
-            StringBuffer buff = new StringBuffer(a_String);
-            for (int i = a_String.length(); i < length; i++) {
-                buff.insert(0,' ');
-            }
-            return buff.toString();
-       // }
+        return genericPadString (a_String, length, ' ', true);
+//        if (a_String.length() > length) {
+//            return a_String.substring(0, length);
+//        } //else {
+//            StringBuffer buff = new StringBuffer(a_String);
+//            for (int i = a_String.length(); i < length; i++) {
+//                buff.insert(0,' ');
+//            }
+//            return buff.toString();
+//       // }
     }
 	
 	/**
@@ -310,14 +312,29 @@ public class Formatter implements Cloneable {
 	 * @return String
 	 */
 	public String padZero(String a_String, int length) {
-		if (a_String.length() > length) {
-			return a_String.substring(0, length);
-		} //else {
-			StringBuffer buff = new StringBuffer(a_String);
-			for (int i = a_String.length(); i < length; i++) {
-				buff.insert(0,'0');
-			}
-			return buff.toString();
-		//}
+        return genericPadString (a_String, length, '0', true);
+//		if (a_String.length() > length) {
+//			return a_String.substring(0, length);
+//		} //else {
+//			StringBuffer buff = new StringBuffer(a_String);
+//			for (int i = a_String.length(); i < length; i++) {
+//				buff.insert(0,'0');
+//			}
+//			return buff.toString();
+//		//}
 	}
+    
+    
+    public String genericPadString (String a_String, int maxLength, char padChar, boolean left){
+        if (a_String.length() > maxLength) {
+            return a_String.substring(0, maxLength);
+        } //else {
+            StringBuffer buff = new StringBuffer(a_String);
+            for (int i = a_String.length(); i < maxLength; i++) {
+                if (left) buff.insert(0,padChar);
+                else buff.append(padChar);
+            }
+            return buff.toString();
+        //}
+    }
 } /* End of class: Formatter */
