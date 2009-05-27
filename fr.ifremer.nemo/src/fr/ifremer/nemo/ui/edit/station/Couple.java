@@ -113,7 +113,6 @@ public class Couple implements UIobject
         // Text or Combo
         if (valueText != null){
             valueText.setParent(parent);
-            valueText.setBackground(ViewEdit.background);
             defaultValueTextSize();
             // Default value
             if (!EditStation.filled && defaultValue != null) valueText.setText(defaultValue);

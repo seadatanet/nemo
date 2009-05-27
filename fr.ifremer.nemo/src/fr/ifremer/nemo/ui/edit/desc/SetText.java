@@ -183,7 +183,6 @@ public class SetText implements UIobject
         }
 
         text.setParent(compo);
-        text.setBackground(ViewEdit.background);
         text.setText(defaultValue);
         GridDataFactory.fillDefaults().grab(true, false).hint(textSize, 12)
             .applyTo(text);
