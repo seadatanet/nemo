@@ -20,6 +20,8 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Shell;
 
 import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.ui.edit.ComboType;
+import fr.ifremer.nemo.ui.edit.Couple;
 import fr.ifremer.nemo.ui.edit.Cursor;
 import fr.ifremer.nemo.ui.edit.DataModel;
 import fr.ifremer.nemo.ui.edit.UIobject;
@@ -30,42 +32,63 @@ import fr.ifremer.nemo.util.Messages;
 
 /**
  * Description: objet graphique contenant l'injection d'une "ligne"
+ * 
  * @author dboulang
- *
  */
 public class AutoLine implements UIobject
-{    
-    public static enum MetaInData{
-        OBLIGATOIRE, INTERDIT, FACULTATIF;
+{
+    public static enum MetaInData
+    {
+        OBLIGATOIRE,
+        INTERDIT,
+        FACULTATIF;
     }
-    
+
     protected Couple numberLine;
     protected Couple start;
     protected Couple end;
     protected Button buttonSet;
     protected Cursor cursor;
-    
-    private boolean unique;
+
+    private final boolean unique;
     protected MetaInData enableInData;
     protected boolean inData = false;
-    
-    public AutoLine(Shell shell, int i, boolean unique, MetaInData enableInData, boolean withCursor){
+
+    public AutoLine(Shell shell, int i, boolean unique,
+            MetaInData enableInData, boolean withCursor)
+    {
 
         this.unique = unique;
         this.enableInData = enableInData;
         String addedLabel = Global.EMPTY_STRING;
-        if (!unique) addedLabel = Global.SPACE + (i + 1);            
-        numberLine = new Couple(shell, null, (Messages.label_line + addedLabel), ComboType.NONE, Global.EMPTY_STRING);
-        start = new Couple(shell, null, (Messages.label_start + addedLabel), ComboType.NONE, Global.EMPTY_STRING);
-        end = new Couple(shell, null, (Messages.label_end + addedLabel), ComboType.NONE, Global.EMPTY_STRING);
+
+        if (!unique)
+            addedLabel = Global.SPACE + (i + 1);
+
+        numberLine =
+            new Couple(shell, null, (Messages.label_line + addedLabel),
+                ComboType.NONE, Global.EMPTY_STRING);
+        numberLine.setFullSize(false);
+
+        start =
+            new Couple(shell, null, (Messages.label_start + addedLabel),
+                ComboType.NONE, Global.EMPTY_STRING);
+        start.setFullSize(false);
+
+        end =
+            new Couple(shell, null, (Messages.label_end + addedLabel),
+                ComboType.NONE, Global.EMPTY_STRING);
+        end.setFullSize(false);
+
         buttonSet = new Button(shell, SWT.NULL);
-        if (withCursor) cursor = new Cursor();
+        if (withCursor)
+            cursor = new Cursor();
     }
 
     /**
      * {@inheritDoc}
      */
-    public void draw(Composite compo)
+    public void draw(Composite compo, boolean filled)
     {
         Group group = new Group(compo, SWT.NONE);
         group.setText(Messages.label_position);
@@ -75,8 +98,8 @@ public class AutoLine implements UIobject
 
         Composite compo1 = drawLineCompo(group);
         compo1.setBackground(ViewEdit.background);
-        drawLine(compo1);
-        
+        drawLine(compo1, filled);
+
         Composite compo2 = drawSetCompo(group, 1);
         compo2.setBackground(ViewEdit.background);
         drawSet(compo2, 1);
@@ -87,15 +110,15 @@ public class AutoLine implements UIobject
         Composite compo = new Composite(group, SWT.NONE);
         GridLayoutFactory.fillDefaults().numColumns(6).applyTo(compo);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(compo);
-        
+
         return compo;
     }
 
-    public void drawLine(Composite compo)
+    public void drawLine(Composite compo, boolean filled)
     {
-        numberLine.draw(compo);
-        start.draw(compo);
-        end.draw(compo);
+        numberLine.draw(compo, filled);
+        start.draw(compo, filled);
+        end.draw(compo, filled);
     }
 
     public static Composite drawSetCompo(Group group, int nbLines)
@@ -103,22 +126,26 @@ public class AutoLine implements UIobject
         Composite compo = new Composite(group, SWT.NONE);
         GridLayoutFactory.fillDefaults().numColumns(nbLines + 1).applyTo(compo);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(compo);
-        
+
         return compo;
     }
 
     public void drawSet(Composite compo, int i)
     {
         String addedLabel = Global.EMPTY_STRING;
-        if (!unique) addedLabel = Global.SPACE + Messages.label_line + Global.SPACE + (i + 1);            
+        if (!unique)
+            addedLabel =
+                Global.SPACE + Messages.label_line + Global.SPACE + (i + 1);
         buttonSet.setParent(compo);
         buttonSet.setBackground(ViewEdit.background);
         buttonSet.setText(Messages.button_set + addedLabel);
-        
+
         buttonSet
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
                 @Override
-                public void widgetSelected(org.eclipse.swt.events.SelectionEvent g) {
+                public void widgetSelected(
+                        org.eclipse.swt.events.SelectionEvent g)
+                {
 
                     StyledText styledtext = ViewFile.styledTextStation;
                     int deb, fi, lign;
@@ -127,62 +154,81 @@ public class AutoLine implements UIobject
                     deb = styledtext.getSelection().x;
                     fi = styledtext.getSelection().y;
 
-                    if (deb == fi) {
+                    if (deb == fi)
+                    {
                         // message d'erreur
                         Utils.messageErreurAppend(Messages.Utils_26);
 
-                    } else {
+                    }
+                    else
+                    {
                         lign = 1;
                         // calcul de la ligne en fonction de la valeur de x
                         // parcours du tableau des tailles de lignes cumulees
-                        for (int idx = 0; idx < Utils.lignesBrutes.size(); idx++) {
+                        for (int idx = 0; idx < Utils.lignesBrutes.size(); idx++)
+                        {
 
-                            if (deb == Utils.taillesCumLignes[idx]) {
+                            if (deb == Utils.taillesCumLignes[idx])
+                            {
                                 lign = idx + 1;
                                 break;
                             }
-                            if (idx == (Utils.lignesBrutes.size() - 1)) {
+                            if (idx == (Utils.lignesBrutes.size() - 1))
+                            {
                                 lign = idx + 1;
                                 break;
                             }
                             if ((deb >= Utils.taillesCumLignes[idx])
-                                    && (deb < Utils.taillesCumLignes[idx + 1])) {
+                                    && (deb < Utils.taillesCumLignes[idx + 1]))
+                            {
                                 lign = idx + 1;
                                 break;
                             }
 
                         }
-                        
+
                         // test sur 1ère ligne de données ou Métadata
-                        boolean ligneOK = checkInDataOrHeader(String.valueOf(lign), Global.SPACE); 
-                        
-                        if (ligneOK){
+                        boolean ligneOK =
+                            checkInDataOrHeader(String.valueOf(lign),
+                                Global.SPACE);
+
+                        if (ligneOK)
+                        {
                             // réactivation du champ "ligne"
                             numberLine.setEnabled(ligneOK);
-                            
+
                             // remplissage ligne dans interface
-                            numberLine.setText(String.valueOf(lign)); 
-                            
-                            deb = deb - Utils.taillesCumLignes[lign - 1] + 1; // debut reel sur ligne
-                            
+                            numberLine.setText(String.valueOf(lign));
+
+                            deb = deb - Utils.taillesCumLignes[lign - 1] + 1; // debut
+                            // reel
+                            // sur
+                            // ligne
+
                             // nbre caracs par rapport
                             // debut de ligne
-                            fi = fi - Utils.taillesCumLignes[lign - 1]; // fin reelle sur ligne
-                            
+                            fi = fi - Utils.taillesCumLignes[lign - 1]; // fin
+                            // reelle
+                            // sur
+                            // ligne
+
                             // remplissage debut et fin dans interface
-                            start.setText(String.valueOf(deb)); 
+                            start.setText(String.valueOf(deb));
                             end.setText(String.valueOf(fi));
-                            
+
                             numberLine.getValueText().pack();
                             start.getValueText().pack();
                             end.getValueText().pack();
-                            
+
                             Utils.messageErreur(Global.EMPTY_STRING);
                         }
                     }
-                    if (cursor != null){
-                        cursor.setX(ViewFile.styledTextStation.getSelection().x);
-                        cursor.setY(ViewFile.styledTextStation.getSelection().y);
+                    if (cursor != null)
+                    {
+                        cursor
+                            .setX(ViewFile.styledTextStation.getSelection().x);
+                        cursor
+                            .setY(ViewFile.styledTextStation.getSelection().y);
                     }
                 }
             });
@@ -208,7 +254,8 @@ public class AutoLine implements UIobject
         numberLine.razValues();
         start.razValues();
         end.razValues();
-        if (cursor != null) cursor.reset();
+        if (cursor != null)
+            cursor.reset();
     }
 
     /**
@@ -221,22 +268,25 @@ public class AutoLine implements UIobject
         end.setEnabled(enabled);
         buttonSet.setEnabled(enabled);
     }
-    
-    protected int getStationHeaderPos(){
+
+    protected int getStationHeaderPos()
+    {
         int stationHeader = getFileHeaderPos();
         stationHeader += DataModel.stationModel.getNumberOfLines();
         return stationHeader;
     }
-    
-    protected int getFileHeaderPos(){
+
+    protected int getFileHeaderPos()
+    {
         int fileHeader = 0;
-        if (!ViewFile.dossierCampagne) {
+        if (!ViewFile.dossierCampagne)
+        {
             // fichier campagne
             fileHeader = DataModel.singleSurvey.getHeaderLinesNumber();
         }
         return fileHeader;
     }
-    
+
     public boolean checkInDataOrHeader(String ligne, String sectionName)
     {
         // FAE 1687 (evol) : ajout du test "inFileHeader"
@@ -244,47 +294,62 @@ public class AutoLine implements UIobject
         boolean inFileHeader = false;
         boolean ligneOK = true;
         int lign = 0;
-        
-        if (ligne != null && !ligne.equals(Global.EMPTY_STRING)){
+
+        if (ligne != null && !ligne.equals(Global.EMPTY_STRING))
+        {
             lign = Integer.parseInt(ligne);
             inData = (lign == (getStationHeaderPos() + 1));
-            inFileHeader =  ((lign <= (getFileHeaderPos())) && lign != 0);
-            inStationHeader = (lign > (getFileHeaderPos())) && (lign <= (getStationHeaderPos()));
-        }else{
+            inFileHeader = ((lign <= (getFileHeaderPos())) && lign != 0);
+            inStationHeader =
+                (lign > (getFileHeaderPos()))
+                        && (lign <= (getStationHeaderPos()));
+        }
+        else
+        {
             inData = true;
             inStationHeader = false;
         }
 
-        if (!inFileHeader){
-            switch (enableInData){
+        if (!inFileHeader)
+        {
+            switch (enableInData)
+            {
                 case OBLIGATOIRE:
                     // OK if inData
-                    if (!inData){
+                    if (!inData)
+                    {
                         ligneOK = false;
-                        if (sectionName != null) 
-                            Utils.messageErreurAppend(sectionName + Global.SPACE + Messages.Regexp_19);
+                        if (sectionName != null)
+                            Utils.messageErreurAppend(sectionName
+                                    + Global.SPACE + Messages.Regexp_19);
                     }
-                    break;
+                break;
                 case INTERDIT:
                     // OK if inHeader
-                    if (!inStationHeader || inData){
+                    if (!inStationHeader || inData)
+                    {
                         ligneOK = false;
-                        if (sectionName != null) 
-                            Utils.messageErreurAppend(sectionName + Global.SPACE + Messages.Regexp_21);
+                        if (sectionName != null)
+                            Utils.messageErreurAppend(sectionName
+                                    + Global.SPACE + Messages.Regexp_21);
                     }
-                    break;
+                break;
                 case FACULTATIF:
                 default:
                     // comportement FACULTATIF : OK if inData or inHeader
-                    if (!inData && !inStationHeader && lign != 0){
+                    if (!inData && !inStationHeader && lign != 0)
+                    {
                         ligneOK = false;
-                        if (sectionName != null) 
-                            Utils.messageErreurAppend(sectionName + Global.SPACE + Messages.Regexp_19);
+                        if (sectionName != null)
+                            Utils.messageErreurAppend(sectionName
+                                    + Global.SPACE + Messages.Regexp_19);
                     }
                     EditStation.actualiseEdition();
-                    break;
+                break;
             }
-        }else{
+        }
+        else
+        {
             ligneOK = false;
             Utils.messageErreurAppend(Messages.Regexp_22);
         }
@@ -293,6 +358,7 @@ public class AutoLine implements UIobject
 
     /**
      * Getter sur inData.
+     * 
      * @return the inData
      */
     public MetaInData getEnableInData()
@@ -302,7 +368,9 @@ public class AutoLine implements UIobject
 
     /**
      * Setter sur inData.
-     * @param inData the inData to set
+     * 
+     * @param inData
+     *            the inData to set
      */
     public void setEnableInData(MetaInData inData)
     {
@@ -311,6 +379,7 @@ public class AutoLine implements UIobject
 
     /**
      * Getter sur buttonSet.
+     * 
      * @return the buttonSet
      */
     public Button getButtonSet()
@@ -320,6 +389,7 @@ public class AutoLine implements UIobject
 
     /**
      * Getter sur end.
+     * 
      * @return the end
      */
     public Couple getEnd()
@@ -329,6 +399,7 @@ public class AutoLine implements UIobject
 
     /**
      * Getter sur numberLine.
+     * 
      * @return the numberLine
      */
     public Couple getNumberLine()
@@ -338,6 +409,7 @@ public class AutoLine implements UIobject
 
     /**
      * Getter sur start.
+     * 
      * @return the start
      */
     public Couple getStart()
@@ -347,15 +419,17 @@ public class AutoLine implements UIobject
 
     /**
      * Getter sur inData.
+     * 
      * @return the inData
      */
     public boolean isInData()
     {
         return inData;
     }
-    
+
     /**
      * Getter sur cursor.
+     * 
      * @return the cursor
      */
     public Cursor getCursor()
@@ -363,88 +437,114 @@ public class AutoLine implements UIobject
         return cursor;
     }
 
-    public String getValue(boolean posVariable){
+    public String getValue(boolean posVariable)
+    {
         String result = Global.EMPTY_STRING;
-        if (numberLine.getText() != null 
-                && start.getText() != null && !start.getText().equals(Global.EMPTY_STRING)
-                && end.getText() != null && !end.getText().equals(Global.EMPTY_STRING))
-        {            
+        if (numberLine.getText() != null && start.getText() != null
+                && !start.getText().equals(Global.EMPTY_STRING)
+                && end.getText() != null
+                && !end.getText().equals(Global.EMPTY_STRING))
+        {
             String ligne = Global.EMPTY_STRING;
-            if (numberLine.getText().equals(Global.EMPTY_STRING)) {
+            if (numberLine.getText().equals(Global.EMPTY_STRING))
+            {
                 ligne = Utils.lignesBrutes.get(getStationHeaderPos());
-            } else if (numberLine.getText().equals(Global.ZERO)){
+            }
+            else if (numberLine.getText().equals(Global.ZERO))
+            {
                 // la ligne correspond au nom du fichier
-                if (ViewFile.radioFichier.getSelection()) {
+                if (ViewFile.radioFichier.getSelection())
+                {
                     ligne = Utils.extraitFichierChemin(ViewFile.nomFichier);
-                } else {
+                }
+                else
+                {
                     File directory = new File(ViewFile.nomRepertoire);
                     File[] subfiles = directory.listFiles();
                     ligne = subfiles[0].getName();
                 }
-            }else{
-                ligne = Utils.lignesBrutes.get(Integer.parseInt(numberLine.getText()) - 1);
+            }
+            else
+            {
+                ligne =
+                    Utils.lignesBrutes.get(Integer.parseInt(numberLine
+                        .getText()) - 1);
             }
 
             int iEnd = Integer.parseInt(end.getText());
-            if (posVariable){ 
+            if (posVariable)
+            {
                 int index = Integer.parseInt(start.getText());
                 String nextChar = Global.ZERO;
                 boolean continueBoucle = true;
-                while (continueBoucle && index < ligne.length()){
+                while (continueBoucle && index < ligne.length())
+                {
                     nextChar = ligne.substring(index, index + 1);
-                    if (index < iEnd
-                        || nextChar.equals(".")  //$NON-NLS-1$
-                        || nextChar.equals(",")  //$NON-NLS-1$
-                        || Utils.isNumeric(nextChar)){
+                    if (index < iEnd || nextChar.equals(".") //$NON-NLS-1$
+                            || nextChar.equals(",") //$NON-NLS-1$
+                            || Utils.isNumeric(nextChar))
+                    {
                         index++;
-                    }else{
+                    }
+                    else
+                    {
                         continueBoucle = false;
                     }
                 }
                 iEnd = index;
             }
-            
-            result = ligne.substring(Integer.parseInt(start.getText()) - 1, iEnd);
+
+            result =
+                ligne.substring(Integer.parseInt(start.getText()) - 1, iEnd);
         }
         return result;
     }
-    
-    public void setValue(String line, String start, String end){
+
+    public void setValue(String line, String start, String end)
+    {
         numberLine.setText(line);
         this.start.setText(start);
         this.end.setText(end);
-        checkInDataOrHeader(line, null); 
-        //numberLine.setEnabled(!inData);
+        checkInDataOrHeader(line, null);
+        // numberLine.setEnabled(!inData);
     }
-    
-    public void selectInViewFile(){
+
+    public void selectInViewFile()
+    {
         int lign, deb, fi;
-        if (numberLine.getText().equals(Global.EMPTY_STRING)) {
+        if (numberLine.getText().equals(Global.EMPTY_STRING))
+        {
             lign = getStationHeaderPos() + 1;
-        } else {
+        }
+        else
+        {
             lign = Integer.parseInt(numberLine.getText());
         }
-        
-        deb = Integer.parseInt(start.getText()) + Utils.taillesCumLignes[lign - 1];
+
+        deb =
+            Integer.parseInt(start.getText())
+                    + Utils.taillesCumLignes[lign - 1];
         fi = Integer.parseInt(end.getText()) + Utils.taillesCumLignes[lign - 1];
-        
+
         ViewFile.styledTextStation.setSelection(deb - 1, fi);
     }
-    
-    public boolean checkValues(String nomSection){
+
+    public boolean checkValues(String nomSection)
+    {
 
         String log = "\nSection : " + nomSection + "\n"; //$NON-NLS-1$ //$NON-NLS-2$
-        
+
         boolean ok = true;
         boolean result;
-        
+
         String debut = start.getText();
         String fin = end.getText();
 
-        // format des differents champs 
-        
+        // format des differents champs
+
         // ligne
-        if (!isInData()) {
+        if (!isInData())
+        {
             result = numberLine.checkValue();
             ok = ok && result;
             if (!result)
@@ -463,10 +563,12 @@ public class AutoLine implements UIobject
         if (!result)
             log = log + "==>" + Messages.Regexp_12; //$NON-NLS-1$
 
-        
         // tests des relations des champs
-        if (!debut.trim().equals(Global.EMPTY_STRING) && (!fin.trim().equals(Global.EMPTY_STRING))) {
-            if (Integer.parseInt(debut) > Integer.parseInt(fin)) {
+        if (!debut.trim().equals(Global.EMPTY_STRING)
+                && (!fin.trim().equals(Global.EMPTY_STRING)))
+        {
+            if (Integer.parseInt(debut) > Integer.parseInt(fin))
+            {
                 ok = ok && false;
                 log = log + "==>" + Messages.Regexp_15; //$NON-NLS-1$
             }
@@ -474,11 +576,12 @@ public class AutoLine implements UIobject
 
         if (!ok)
             Utils.messageErreurAppend(log);
-        
+
         return ok;
     }
-    
-    public int calculNbreLignes(){
+
+    public int calculNbreLignes()
+    {
 
         int nbre = 0, lignDepart, lignFin;
 
@@ -487,23 +590,30 @@ public class AutoLine implements UIobject
         // calcul de la ligne en fonction de la valeur de x
         // parcours du tableau des tailles de lignes cumulees
 
-        if (cursor.getX() == cursor.getY()) {
+        if (cursor.getX() == cursor.getY())
+        {
             Utils.messageErreurAppend(Messages.Utils_26);
 
-        } else {
+        }
+        else
+        {
             // calcul ligne depart
-            for (int i = 0; i < Utils.lignesBrutes.size(); i++) {
+            for (int i = 0; i < Utils.lignesBrutes.size(); i++)
+            {
 
-                if (cursor.getX() == Utils.taillesCumLignes[i]) {
+                if (cursor.getX() == Utils.taillesCumLignes[i])
+                {
                     lignDepart = i + 1;
                     break;
                 }
-                if (i == (Utils.lignesBrutes.size() - 1)) {
+                if (i == (Utils.lignesBrutes.size() - 1))
+                {
                     lignDepart = i + 1;
                     break;
                 }
                 if ((cursor.getX() >= Utils.taillesCumLignes[i])
-                        && (cursor.getX() < Utils.taillesCumLignes[i + 1])) {
+                        && (cursor.getX() < Utils.taillesCumLignes[i + 1]))
+                {
                     lignDepart = i + 1;
                     break;
                 }
@@ -511,18 +621,22 @@ public class AutoLine implements UIobject
             }
 
             // calcul ligne fin
-            for (int i = 0; i < Utils.lignesBrutes.size(); i++) {
+            for (int i = 0; i < Utils.lignesBrutes.size(); i++)
+            {
 
-                if (cursor.getY() == Utils.taillesCumLignes[i]) {
+                if (cursor.getY() == Utils.taillesCumLignes[i])
+                {
                     lignFin = i + 1;
                     break;
                 }
-                if (i == (Utils.lignesBrutes.size() - 1)) {
+                if (i == (Utils.lignesBrutes.size() - 1))
+                {
                     lignFin = i + 1;
                     break;
                 }
                 if ((cursor.getY() >= Utils.taillesCumLignes[i])
-                        && (cursor.getY() < Utils.taillesCumLignes[i + 1])) {
+                        && (cursor.getY() < Utils.taillesCumLignes[i + 1]))
+                {
                     lignFin = i + 1;
                     break;
                 }
@@ -530,33 +644,37 @@ public class AutoLine implements UIobject
             }
 
             // remplissage nbreLignes dans interface
-            nbre = (lignFin - lignDepart + 1); 
+            nbre = (lignFin - lignDepart + 1);
 
         }
 
         return nbre;
     }
-    
-    public boolean checkPosition(int nbreLignes){
+
+    public boolean checkPosition(int nbreLignes)
+    {
         int ligneFin = Integer.parseInt(numberLine.getText()) + nbreLignes - 1;
-        
+
         int enteteFichier;
-        if (ViewFile.dossierCampagne) {
+        if (ViewFile.dossierCampagne)
+        {
             // dossier
             enteteFichier = 0;
-        } else {
-            // fichier campagne
-            enteteFichier = DataModel.singleSurvey
-                    .getHeaderLinesNumber();
         }
-        int ligneLimite = enteteFichier
-                + DataModel.stationModel.getNumberOfLines();
-        
-        if (ligneFin > ligneLimite) {
+        else
+        {
+            // fichier campagne
+            enteteFichier = DataModel.singleSurvey.getHeaderLinesNumber();
+        }
+        int ligneLimite =
+            enteteFichier + DataModel.stationModel.getNumberOfLines();
+
+        if (ligneFin > ligneLimite)
+        {
             return false;
-        } 
+        }
         // else
         return true;
     }
-    
+
 }

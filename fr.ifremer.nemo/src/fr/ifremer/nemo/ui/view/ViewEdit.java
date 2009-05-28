@@ -7,37 +7,43 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.part.ViewPart;
 
-public class ViewEdit extends ViewPart {
+import fr.ifremer.nemo.ui.Utils;
 
-	public static final String ID = "fr.ifremer.nemo.ui.ViewEdit";
+public class ViewEdit extends ViewPart
+{
 
-	public static Composite top;
+    public static final String ID = "fr.ifremer.nemo.ui.ViewEdit";
 
-	// toolkit du formulaire global d'edition
-	public static FormToolkit toolkitEdition;
+    public static Composite top;
 
-	// formulaire d'edition
-	public static ScrolledForm formEdition;
-    
+    // toolkit du formulaire global d'edition
+    public static FormToolkit toolkitEdition;
+
+    // formulaire d'edition
+    public static ScrolledForm formEdition;
+
     public static Color background;
 
-	@Override
-	public void createPartControl(Composite parent) {
-		top = parent;
+    @Override
+    public void createPartControl(Composite parent)
+    {
+        top = parent;
 
-		parent.setLayout(new FillLayout());
+        parent.setLayout(new FillLayout());
 
-		toolkitEdition = new FormToolkit(parent.getDisplay());
+        toolkitEdition = new FormToolkit(parent.getDisplay());
 
-		formEdition = toolkitEdition.createScrolledForm(parent);
-        
+        formEdition = toolkitEdition.createScrolledForm(parent);
+        formEdition.setFont(Utils.font14);
+
         background = formEdition.getBody().getBackground();
 
-	}
+    }
 
-	@Override
-	public void setFocus() {
+    @Override
+    public void setFocus()
+    {
 
-	}
+    }
 
 }

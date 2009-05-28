@@ -174,7 +174,7 @@ public class SetText implements UIobject
     /**
      * {@inheritDoc}
      */
-    public void draw(Composite compo)
+    public void draw(Composite compo, boolean filled)
     {
         if (label != null)
         {
@@ -183,7 +183,8 @@ public class SetText implements UIobject
         }
 
         text.setParent(compo);
-        text.setText(defaultValue);
+        if (defaultValue != null && !filled)
+            text.setText(defaultValue);
         GridDataFactory.fillDefaults().grab(true, false).hint(textSize, 12)
             .applyTo(text);
 

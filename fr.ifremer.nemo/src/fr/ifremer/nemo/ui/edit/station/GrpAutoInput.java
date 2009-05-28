@@ -26,37 +26,44 @@ import fr.ifremer.nemo.util.Messages;
 
 /**
  * Description: objet graphique "Automatic Input"
+ * 
  * @author dboulang
- *
  */
 public class GrpAutoInput implements UIobject
 {
 
-    private Button buttonPos;
+    private final Button buttonPos;
     private String labelButtonPos;
     protected ArrayList<AutoLine> lines;
     protected Button buttonVari;
-    
-    public GrpAutoInput(Shell shell, int nbLine, String labelButtonPos, boolean variablePos, MetaInData inData, boolean withCursor){
-        
+
+    public GrpAutoInput(Shell shell, int nbLine, String labelButtonPos,
+            boolean variablePos, MetaInData inData, boolean withCursor)
+    {
+
         this.labelButtonPos = labelButtonPos;
-        if (this.labelButtonPos == null) this.labelButtonPos = Messages.label_auto_01;
-        
+        if (this.labelButtonPos == null)
+            this.labelButtonPos = Messages.label_auto_01;
+
         buttonPos = new Button(shell, SWT.RADIO);
 
-        lines = new ArrayList<AutoLine>();        
-        for (int i = 0; i < nbLine; i++){
-            lines.add(new AutoLine(shell, i , (nbLine == 1), inData, withCursor));
+        lines = new ArrayList<AutoLine>();
+        for (int i = 0; i < nbLine; i++)
+        {
+            lines
+                .add(new AutoLine(shell, i, (nbLine == 1), inData, withCursor));
         }
-        
-        if (variablePos){
+
+        if (variablePos)
+        {
             buttonVari = new Button(shell, SWT.CHECK);
         }
-        
+
     }
 
-    public void draw(Composite sectionClient){
-        
+    public void draw(Composite sectionClient, boolean filled)
+    {
+
         buttonPos.setParent(sectionClient);
         buttonPos.setBackground(ViewEdit.background);
         buttonPos.setText(labelButtonPos);
@@ -68,91 +75,109 @@ public class GrpAutoInput implements UIobject
 
         GridDataFactory.fillDefaults().grab(true, false).applyTo(groupe);
 
-
         Composite compo1 = AutoLine.drawLineCompo(groupe);
         compo1.setBackground(ViewEdit.background);
-        for (AutoLine line : lines){
-            line.drawLine(compo1);
+        for (AutoLine line : lines)
+        {
+            line.drawLine(compo1, filled);
         }
-        
+
         Composite compo2 = AutoLine.drawSetCompo(groupe, lines.size());
         compo2.setBackground(ViewEdit.background);
-        for (int i = 0; i < lines.size(); i++){
+        for (int i = 0; i < lines.size(); i++)
+        {
             lines.get(i).drawSet(compo2, i);
         }
-        
-        if (buttonVari != null){
+
+        if (buttonVari != null)
+        {
             buttonVari.setParent(compo2);
             buttonVari.setBackground(ViewEdit.background);
             buttonVari.setText(Messages.label_variable);
-            GridDataFactory.fillDefaults().grab(true, false).align(SWT.END, SWT.CENTER).applyTo(buttonVari);
+            GridDataFactory.fillDefaults().grab(true, false).align(SWT.END,
+                SWT.CENTER).applyTo(buttonVari);
 
             buttonVari
-            .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-                @Override
-                public void widgetSelected(
-                        org.eclipse.swt.events.SelectionEvent g) {
-                    disableEndVari();
-                    Utils.invalidEtapes();
-                }
-            });
+                .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                    @Override
+                    public void widgetSelected(
+                            org.eclipse.swt.events.SelectionEvent g)
+                    {
+                        disableEndVari();
+                        Utils.invalidEtapes();
+                    }
+                });
         }
     }
-    
-    public void dispose(){
+
+    public void dispose()
+    {
         buttonPos.dispose();
-        for (AutoLine line : lines){
+        for (AutoLine line : lines)
+        {
             line.dispose();
         }
-        if (buttonVari != null) buttonVari.dispose();
+        if (buttonVari != null)
+            buttonVari.dispose();
     }
-    
-    public void setEnabled(boolean enabled){
+
+    public void setEnabled(boolean enabled)
+    {
         buttonPos.setSelection(enabled);
-        for (AutoLine line : lines){
+        for (AutoLine line : lines)
+        {
             line.setEnabled(enabled);
         }
-        if (buttonVari != null) buttonVari.setEnabled(enabled);
+        if (buttonVari != null)
+            buttonVari.setEnabled(enabled);
     }
-    
-    public boolean isSelected(){
+
+    public boolean isSelected()
+    {
         return buttonPos.getSelection();
     }
-    
-    public void razValues(){
-        for (AutoLine line : lines){
+
+    public void razValues()
+    {
+        for (AutoLine line : lines)
+        {
             line.razValues();
         }
-        if (buttonVari != null) buttonVari.setSelection(false);
+        if (buttonVari != null)
+            buttonVari.setSelection(false);
     }
-    
+
     public void setEnableInData(MetaInData enableInData)
     {
-        for (AutoLine line : lines){
+        for (AutoLine line : lines)
+        {
             line.setEnableInData(enableInData);
         }
     }
-    
-    public boolean isVariablePos(){
+
+    public boolean isVariablePos()
+    {
         boolean variable = false;
-        if (buttonVari != null){
+        if (buttonVari != null)
+        {
             variable = buttonVari.getSelection();
         }
         return variable;
     }
-    
 
     /**
      * Getter sur buttonPos.
+     * 
      * @return the buttonPos
      */
     public Button getButtonPos()
     {
         return buttonPos;
     }
-    
+
     /**
      * Getter sur buttonVari.
+     * 
      * @return the buttonVari
      */
     public Button getButtonVari()
@@ -161,83 +186,105 @@ public class GrpAutoInput implements UIobject
     }
 
     // pas utile pour l'instant
-    public String getValue(){
+    public String getValue()
+    {
         boolean posVariable = isVariablePos();
         String result = Global.EMPTY_STRING;
-        for (AutoLine line : lines){
-            if ((line.getValue(posVariable) != null) && (!line.getValue(posVariable).trim().equals(Global.EMPTY_STRING))) {
+        for (AutoLine line : lines)
+        {
+            if ((line.getValue(posVariable) != null)
+                    && (!line.getValue(posVariable).trim().equals(
+                        Global.EMPTY_STRING)))
+            {
                 result += line.getValue(posVariable);
             }
         }
         return result;
     }
-    
-    public String getValue(int i){
+
+    public String getValue(int i)
+    {
         boolean posVariable = isVariablePos();
         String result = Global.EMPTY_STRING;
         AutoLine line = lines.get(i);
-        if ((line.getValue(posVariable) != null) 
-                && (!line.getValue(posVariable).trim().equals(Global.EMPTY_STRING))) {
+        if ((line.getValue(posVariable) != null)
+                && (!line.getValue(posVariable).trim().equals(
+                    Global.EMPTY_STRING)))
+        {
             result = line.getValue(posVariable);
         }
         return result;
     }
-    
-    public void setValue(String line, String start, String end, boolean posVariable, boolean valueVariable, int i){
+
+    public void setValue(String line, String start, String end,
+            boolean posVariable, boolean valueVariable, int i)
+    {
         setEnabled(true);
         AutoLine autoLine = lines.get(i);
         autoLine.setValue(line, start, end);
-        if (posVariable) buttonVari.setSelection(valueVariable);
+        if (posVariable)
+            buttonVari.setSelection(valueVariable);
     }
 
     /**
      * Getter sur lines.
+     * 
      * @return the lines
      */
     public ArrayList<AutoLine> getLines()
     {
         return lines;
     }
-    
-    public boolean isInData(){
+
+    public boolean isInData()
+    {
         boolean result = false;
-        for (AutoLine line : lines){
+        for (AutoLine line : lines)
+        {
             result = (result || line.isInData());
         }
         return result;
     }
-    
-    public boolean checkAutoLine(int i, String nomSection){
+
+    public boolean checkAutoLine(int i, String nomSection)
+    {
         AutoLine line = lines.get(i);
         return line.checkValues(nomSection);
     }
-    
-    public int calculNbreLignes(int i){
+
+    public int calculNbreLignes(int i)
+    {
         AutoLine line = lines.get(i);
         return line.calculNbreLignes();
     }
-    
-    public boolean checkPosition(int i, int nbreLignes){
+
+    public boolean checkPosition(int i, int nbreLignes)
+    {
         AutoLine line = lines.get(i);
         return line.checkPosition(nbreLignes);
     }
 
-    public void selectInViewFile(){
+    public void selectInViewFile()
+    {
         AutoLine line = lines.get(0);
         line.selectInViewFile();
     }
-    
-    public boolean checkInDataOrHeader(int i, String lign, String sectionName){
+
+    public boolean checkInDataOrHeader(int i, String lign, String sectionName)
+    {
         AutoLine line = lines.get(i);
         return line.checkInDataOrHeader(lign, sectionName);
     }
-    
-    public void disableEndVari(){
-        if (buttonVari != null){
-            for (AutoLine line : lines){
+
+    public void disableEndVari()
+    {
+        if (buttonVari != null)
+        {
+            for (AutoLine line : lines)
+            {
                 line.getEnd().setEnabled(!buttonVari.getSelection());
             }
         }
     }
-    
+
 }

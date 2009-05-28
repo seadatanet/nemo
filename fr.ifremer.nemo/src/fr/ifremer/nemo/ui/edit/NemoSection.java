@@ -25,95 +25,104 @@ import fr.ifremer.nemo.util.Formatter;
 
 /**
  * Description: classe abstraite définissant une Section NEMO
+ * 
  * @author dboulang
- *
  */
 public abstract class NemoSection implements UIobject
 {
     // constantes des noms possibles
-    public static final String F_FILEHEADER     = "enteteFichier";          //$NON-NLS-1$
-    public static final String F_STATIONHEADER  = "enteteStation";          //$NON-NLS-1$
-    public static final String F_ENDSTATION     = "finStation";             //$NON-NLS-1$
-    public static final String F_ENDDATA        = "indicFinDonnees";        //$NON-NLS-1$
-//    public static final String C_REFERENCE      = "";                       //$NON-NLS-1$
-//    public static final String C_LOCATION       = "";                       //$NON-NLS-1$
-//    public static final String C_DATASOURCE     = "";                       //$NON-NLS-1$
-//    public static final String C_ARCHIVING      = "";                       //$NON-NLS-1$
-//    public static final String C_DATATYPE       = "";                       //$NON-NLS-1$
-//    public static final String C_COMMENTS       = "";                       //$NON-NLS-1$
-    public static final String S_DCHIST         = "dcHistory";              //$NON-NLS-1$
-    public static final String S_COMMENT        = "comment";                //$NON-NLS-1$
-    public static final String S_SURFACE        = "surfaceSamples";         //$NON-NLS-1$
-    public static final String S_OFFSETTU       = "offsetTU";               //$NON-NLS-1$
-    public static final String S_TIME           = "time";                   //$NON-NLS-1$
-    public static final String S_DATE           = "date";                   //$NON-NLS-1$
-    public static final String S_LAT            = "latitude";               //$NON-NLS-1$
-    public static final String S_LON            = "longitude";              //$NON-NLS-1$
-    public static final String S_DEPTH          = "bottomDepth";            //$NON-NLS-1$
-    public static final String S_ELAT           = "endLatitude";            //$NON-NLS-1$
-    public static final String S_ELON           = "endLongitude";           //$NON-NLS-1$
-    public static final String S_EDEPTH         = "endDepth";               //$NON-NLS-1$
-    public static final String S_SENSORDEPTH    = "sensorDepth";            //$NON-NLS-1$
-    public static final String S_MAGNETIC       = "magneticDeclination";    //$NON-NLS-1$
-    public static final String S_SAMPLINGRATE   = "samplingRate";           //$NON-NLS-1$
-    public static final String S_EDATE          = "endDate";                //$NON-NLS-1$
-    public static final String S_ETIME          = "endTime";                //$NON-NLS-1$
+    public static final String F_FILEHEADER = "enteteFichier"; //$NON-NLS-1$
+    public static final String F_STATIONHEADER = "enteteStation"; //$NON-NLS-1$
+    public static final String F_ENDSTATION = "finStation"; //$NON-NLS-1$
+    public static final String F_ENDDATA = "indicFinDonnees"; //$NON-NLS-1$
+    public static final String C_REFERENCE = "cuiseReference"; //$NON-NLS-1$
+    public static final String C_LOCATION = "cruiseLocation"; //$NON-NLS-1$
+    public static final String C_DATASOURCE = "cruiseDatasource"; //$NON-NLS-1$
+    public static final String C_ARCHIVING = "cruiseArchiving"; //$NON-NLS-1$
+    public static final String C_DATATYPE = "cruiseDatatype"; //$NON-NLS-1$
+    public static final String C_COMMENTS = "cruiseComments"; //$NON-NLS-1$
+    public static final String S_DCHIST = "dcHistory"; //$NON-NLS-1$
+    public static final String S_COMMENT = "comment"; //$NON-NLS-1$
+    public static final String S_SURFACE = "surfaceSamples"; //$NON-NLS-1$
+    public static final String S_OFFSETTU = "offsetTU"; //$NON-NLS-1$
+    public static final String S_TIME = "time"; //$NON-NLS-1$
+    public static final String S_DATE = "date"; //$NON-NLS-1$
+    public static final String S_LAT = "latitude"; //$NON-NLS-1$
+    public static final String S_LON = "longitude"; //$NON-NLS-1$
+    public static final String S_DEPTH = "bottomDepth"; //$NON-NLS-1$
+    public static final String S_ELAT = "endLatitude"; //$NON-NLS-1$
+    public static final String S_ELON = "endLongitude"; //$NON-NLS-1$
+    public static final String S_EDEPTH = "endDepth"; //$NON-NLS-1$
+    public static final String S_SENSORDEPTH = "sensorDepth"; //$NON-NLS-1$
+    public static final String S_MAGNETIC = "magneticDeclination"; //$NON-NLS-1$
+    public static final String S_SAMPLINGRATE = "samplingRate"; //$NON-NLS-1$
+    public static final String S_EDATE = "endDate"; //$NON-NLS-1$
+    public static final String S_ETIME = "endTime"; //$NON-NLS-1$
 
-    public static final String QC               = "QC";                     //$NON-NLS-1$
+    public static final String QC = "QC"; //$NON-NLS-1$
 
-    public static final String S_STATIONNUMBER  = "reference";              //$NON-NLS-1$
-    public static final String S_DATATYPE       = "dataType";               //$NON-NLS-1$
-    public static final String S_QCFLAG         = "qcFlag";                 //$NON-NLS-1$
-    
+    public static final String S_STATIONNUMBER = "reference"; //$NON-NLS-1$
+    public static final String S_DATATYPE = "dataType"; //$NON-NLS-1$
+    public static final String S_QCFLAG = "qcFlag"; //$NON-NLS-1$
+
     protected Section section;
-    protected String name;      // nom correspondant au tag xml (PropertyModel)
+    protected String name; // nom correspondant au tag xml (PropertyModel)
     protected String title;
-    private String description;
-    
-    public NemoSection(Shell shell, String name, String title, String description){
-        section  = new Section(shell, SWT.NONE);
+    private final String description;
+
+    public NemoSection(Shell shell, String name, String title,
+            String description)
+    {
+        section = new Section(shell, SWT.NONE);
         this.name = name;
-        this.title = Formatter.getSingleton().padString(title,40);
+        this.title = Formatter.getSingleton().padString(title, 40);
         this.description = description;
     }
 
     /**
      * {@inheritDoc}
      */
-    public void dispose(){
+    public void dispose()
+    {
         section.dispose();
     }
 
     /**
      * {@inheritDoc}
      */
-    public void draw(Composite parent){
-        section = ViewEdit.toolkitEdition.createSection(parent,
-                  Section.DESCRIPTION |  ExpandableComposite.TITLE_BAR
-                  |  ExpandableComposite.TWISTIE |  ExpandableComposite.COMPACT);
-//        GridDataFactory.fillDefaults().grab(false, true).minSize(510, 20).applyTo(section);
-        section.setFont(Utils.fontCourier);
-        
+    public void draw(Composite parent, boolean filled)
+    {
+        section =
+            ViewEdit.toolkitEdition
+                .createSection(parent, Section.DESCRIPTION
+                        | ExpandableComposite.TITLE_BAR
+                        | ExpandableComposite.TWISTIE
+                        | ExpandableComposite.COMPACT);
+// GridDataFactory.fillDefaults().grab(false, true).minSize(510,
+        // 20).applyTo(section);
+        section.setFont(Utils.fontCourier12);
+
         section.addExpansionListener(new ExpansionAdapter() {
             @Override
-            public void expansionStateChanged(ExpansionEvent e) {
+            public void expansionStateChanged(ExpansionEvent e)
+            {
                 ViewEdit.formEdition.reflow(true);
             }
         });
         section.setText(title);
         section.setDescription(description);
-        
-        
-        Composite sectionClient = ViewEdit.toolkitEdition.createComposite(section);
+
+        Composite sectionClient =
+            ViewEdit.toolkitEdition.createComposite(section);
         sectionClient.setLayout(new GridLayout());
 
-        drawSection(sectionClient);
-        
-        section.setClient(sectionClient); 
+        drawSection(sectionClient, filled);
+
+        section.setClient(sectionClient);
         section.pack();
     }
-    
-    protected abstract void drawSection(Composite parent);
+
+    protected abstract void drawSection(Composite parent, boolean filled);
 
     /**
      * {@inheritDoc}
@@ -126,47 +135,71 @@ public abstract class NemoSection implements UIobject
     public void setEnabled(boolean enabled)
     {
         section.setEnabled(enabled);
-        if (!enabled){
+        if (!enabled)
+        {
             section.setExpanded(enabled);
-            section.setTitleBarForeground(Display.getCurrent().getSystemColor(SWT.COLOR_GRAY));
-        }else{
-            section.setTitleBarForeground(Display.getCurrent().getSystemColor(SWT.COLOR_BLACK));
+            section.setTitleBarForeground(Display.getCurrent().getSystemColor(
+                SWT.COLOR_GRAY));
+        }
+        else
+        {
+            section.setTitleBarForeground(Display.getCurrent().getSystemColor(
+                SWT.COLOR_BLACK));
         }
     }
 
-    public void setExpanded(boolean expanded){
+    public void setExpanded(boolean expanded)
+    {
         section.setExpanded(expanded);
     }
-    
-    public boolean isEnabled(){
+
+    public boolean isEnabled()
+    {
         return section.isEnabled();
     }
+
     /**
      * init the section
+     * 
      * @param parentForm
      */
-    public void initSection(ScrolledForm parentForm){
+    public void initSection(ScrolledForm parentForm)
+    {
         section.setParent(parentForm);
-    }  
+    }
+
     /**
      * init the section
+     * 
      * @param parentComposite
      */
-    public void initSection(Composite parentComposite){
+    public void initSection(Composite parentComposite)
+    {
         section.setParent(parentComposite);
     }
-    
+
     public abstract void initModel(StationModel stationModel);
-    
+
     public abstract void fillFromModel(StationModel stationModel);
 
     /**
      * Getter sur name.
+     * 
      * @return the name
      */
     public String getName()
     {
         return name;
+    }
+
+    public Section getSection()
+    {
+        return section;
+    }
+
+    public String getTitle()
+    {
+        return title;
     }
 
 }

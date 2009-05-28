@@ -21,8 +21,8 @@ import fr.ifremer.nemo.util.Messages;
 
 /**
  * Description: "Indicator of end of Data" Section in File Description
+ * 
  * @author dboulang
- *
  */
 public class FileEndData extends FileSection
 {
@@ -36,10 +36,11 @@ public class FileEndData extends FileSection
      * @param title
      * @param description
      */
-    public FileEndData(Shell shell, String name, String title, String description)
+    public FileEndData(Shell shell, String name, String title,
+            String description)
     {
         super(shell, name, title, description);
-        
+
         radEOF = new Button(shell, SWT.RADIO);
         addRadListener(radEOF);
         radLigne = new Button(shell, SWT.RADIO);
@@ -47,35 +48,37 @@ public class FileEndData extends FileSection
         radNextStation = new Button(shell, SWT.RADIO);
         addRadListener(radNextStation);
         radManuel = new Button(shell, SWT.RADIO);
-        addRadListener(radManuel); 
-        
-        setterStartStation = new SetText(shell, null, Global.EMPTY_STRING, true);
+        addRadListener(radManuel);
+
+        setterStartStation =
+            new SetText(shell, null, Global.EMPTY_STRING, true);
     }
-    
 
     @Override
-    public void addSetter(Shell shell, String stringLabel, String defaultValue){
+    public void addSetter(Shell shell, String stringLabel, String defaultValue)
+    {
         setter = new SetText(shell, stringLabel, defaultValue, true);
     }
 
-    private void addRadListener(final Button radio){
+    private void addRadListener(final Button radio)
+    {
 
-        radio.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-            @Override
-            public void widgetSelected(
-                    org.eclipse.swt.events.SelectionEvent g) {
-                selectEndData(radio);
-            }
-        });
+        radio
+            .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                @Override
+                public void widgetSelected(
+                        org.eclipse.swt.events.SelectionEvent g)
+                {
+                    selectEndData(radio);
+                }
+            });
     }
-    
 
-    
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void drawSection(Composite parent)
+    protected void drawSection(Composite parent, boolean filled)
     {
         compo = new Composite(parent, SWT.NONE);
         GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compo);
@@ -83,8 +86,8 @@ public class FileEndData extends FileSection
 
         radEOF.setParent(compo);
         radEOF.setBackground(ViewEdit.background);
-        radEOF.setText(Messages.edit_file_idcEOF); 
-        
+        radEOF.setText(Messages.edit_file_idcEOF);
+
         radLigne.setParent(compo);
         radLigne.setBackground(ViewEdit.background);
         radLigne.setText(Messages.edit_file_idcEmptyLine);
@@ -92,37 +95,40 @@ public class FileEndData extends FileSection
         radNextStation.setParent(compo);
         radNextStation.setBackground(ViewEdit.background);
         radNextStation.setText(Messages.edit_file_idcNextStation);
-        setterStartStation.draw(compo);
+        setterStartStation.draw(compo, filled);
 
         radManuel.setParent(compo);
         radManuel.setBackground(ViewEdit.background);
-        radManuel.setText(Messages.edit_file_idcManual); 
-        setter.draw(compo);
-        
+        radManuel.setText(Messages.edit_file_idcManual);
+        setter.draw(compo, filled);
+
         selectEndData(radEOF);
     }
-    
+
     @Override
     public boolean checkMandatory()
     {
         boolean ok = true;
-        String log = Global.RN + "Section : " + title.trim() + Global.RN + "==>";  //$NON-NLS-1$  //$NON-NLS-2$
-        
-        if (setter != null && radManuel.getSelection()){
+        String log =
+            Global.RN + "Section : " + title.trim() + Global.RN + "==>"; //$NON-NLS-1$  //$NON-NLS-2$
+
+        if (setter != null && radManuel.getSelection())
+        {
             ok = setter.checkMandatoryValue();
             log = log + Messages.error_file_idcEmpty;
         }
-        else if (radNextStation.getSelection()){
+        else if (radNextStation.getSelection())
+        {
             ok = setterStartStation.checkMandatoryValue();
             log = log + Messages.error_file_idcStartStationEmpty;
         }
-        
-        if (!ok) 
+
+        if (!ok)
             Utils.messageErreurAppend(log);
-        
+
         return ok;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -133,57 +139,72 @@ public class FileEndData extends FileSection
         setterStartStation.razValues();
         selectEndData(radEOF);
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
-    public void dispose(){
+    public void dispose()
+    {
         super.dispose();
         radEOF.dispose();
         radLigne.dispose();
         radNextStation.dispose();
         radManuel.dispose();
-        if (subCompo != null) subCompo.dispose();
-        if (col01 != null) col01.dispose();
-        if (col02 != null) col02.dispose();
+        if (subCompo != null)
+            subCompo.dispose();
+        if (col01 != null)
+            col01.dispose();
+        if (col02 != null)
+            col02.dispose();
     }
-    
-    public void selectEndData(Button radio) {
-        if (radio != null){
-            if (radio == radEOF) {
+
+    public void selectEndData(Button radio)
+    {
+        if (radio != null)
+        {
+            if (radio == radEOF)
+            {
                 radEOF.setSelection(true);
                 radLigne.setSelection(false);
                 radNextStation.setSelection(false);
                 setterStartStation.setEnabled(false);
                 radManuel.setSelection(false);
                 setter.setEnabled(false);
-                
-            } else if (radio == radLigne) {
+
+            }
+            else if (radio == radLigne)
+            {
                 radEOF.setSelection(false);
                 radLigne.setSelection(true);
                 radNextStation.setSelection(false);
                 setterStartStation.setEnabled(false);
                 radManuel.setSelection(false);
                 setter.setEnabled(false);
-                
-            } else if (radio == radNextStation) {
+
+            }
+            else if (radio == radNextStation)
+            {
                 radEOF.setSelection(false);
                 radLigne.setSelection(false);
                 radNextStation.setSelection(true);
                 setterStartStation.setEnabled(true);
                 radManuel.setSelection(false);
                 setter.setEnabled(false);
-                
-            } else if (radio == radManuel) {
+
+            }
+            else if (radio == radManuel)
+            {
                 radEOF.setSelection(false);
                 radLigne.setSelection(false);
                 radNextStation.setSelection(false);
                 setterStartStation.setEnabled(false);
                 radManuel.setSelection(true);
                 setter.setEnabled(true);
-                
-            } else {
+
+            }
+            else
+            {
                 radEOF.setSelection(true);
                 radLigne.setSelection(false);
                 radNextStation.setSelection(false);
@@ -191,7 +212,7 @@ public class FileEndData extends FileSection
                 radManuel.setSelection(false);
                 setter.setEnabled(false);
             }
-            
+
             // invalidation de l'étape en cours et des suivantes
             Utils.invalidEtapes();
         }
@@ -199,6 +220,7 @@ public class FileEndData extends FileSection
 
     /**
      * Getter sur radEOF.
+     * 
      * @return the radEOF
      */
     public Button getRadEOF()
@@ -208,6 +230,7 @@ public class FileEndData extends FileSection
 
     /**
      * Getter sur radLigne.
+     * 
      * @return the radLigne
      */
     public Button getRadLigne()
@@ -217,6 +240,7 @@ public class FileEndData extends FileSection
 
     /**
      * Getter sur radNextStation.
+     * 
      * @return the radNextStation
      */
     public Button getRadNextStation()
@@ -226,34 +250,41 @@ public class FileEndData extends FileSection
 
     /**
      * Getter sur radManuel.
+     * 
      * @return the radManuel
      */
     public Button getRadManuel()
     {
         return radManuel;
     }
-    
-    public boolean radEOFselected(){
+
+    public boolean radEOFselected()
+    {
         return radEOF.getSelection();
     }
-    
-    public boolean radLigneSelected(){
+
+    public boolean radLigneSelected()
+    {
         return radLigne.getSelection();
     }
-    
-    public boolean radNextStationSelected(){
+
+    public boolean radNextStationSelected()
+    {
         return radNextStation.getSelection();
     }
-    
-    public boolean radManuelSelected(){
+
+    public boolean radManuelSelected()
+    {
         return radManuel.getSelection();
     }
 
-    public String getStartStationIndicator(){
+    public String getStartStationIndicator()
+    {
         return setterStartStation.getValue();
     }
-    
-    public void setStartStationIndicator(String value){
+
+    public void setStartStationIndicator(String value)
+    {
         setterStartStation.setValue(value);
     }
 }

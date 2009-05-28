@@ -21,36 +21,37 @@ import fr.ifremer.nemo.util.Messages;
 
 /**
  * Description: objet graphique représentant une section dans l'onglet File
+ * 
  * @author dboulang
- *
  */
 public class FileSection extends NemoSection
 {
     protected Composite compo;
     protected SetText setter;
 
+    public FileSection(Shell shell, String name, String title,
+            String description)
+    {
 
-    public FileSection(Shell shell, String name, String title, String description){
-        
-        super(shell, name, title, description);  
+        super(shell, name, title, description);
     }
-    
-    
-    public void addSetter(Shell shell, String stringLabel, String defaultValue){
+
+    public void addSetter(Shell shell, String stringLabel, String defaultValue)
+    {
         setter = new SetText(shell, stringLabel, defaultValue, false);
     }
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void drawSection(Composite parent)
+    protected void drawSection(Composite parent, boolean filled)
     {
         compo = new Composite(parent, SWT.NONE);
         GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compo);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(compo);
-        
-        setter.draw(compo);
+
+        setter.draw(compo, filled);
     }
 
     /**
@@ -77,44 +78,49 @@ public class FileSection extends NemoSection
     @Override
     public void razValues()
     {
-        if (setter != null) setter.razValues();
+        if (setter != null)
+            setter.razValues();
     }
 
-    
     /**
      * {@inheritDoc}
      */
     @Override
-    public void dispose(){
+    public void dispose()
+    {
         super.dispose();
-        if (compo != null) compo.dispose();
-        if (setter != null) setter.dispose();
+        if (compo != null)
+            compo.dispose();
+        if (setter != null)
+            setter.dispose();
     }
-
 
     public boolean checkMandatory()
     {
         boolean ok = true;
-        String log = Global.RN + "Section : " + title.trim() + Global.RN + "==>";  //$NON-NLS-1$  //$NON-NLS-2$
-        
-        if (setter != null){
+        String log =
+            Global.RN + "Section : " + title.trim() + Global.RN + "==>"; //$NON-NLS-1$  //$NON-NLS-2$
+
+        if (setter != null)
+        {
             ok = setter.checkMandatoryValue();
             log = log + Messages.error_notValid;
         }
-        
-        if (!ok) 
+
+        if (!ok)
             Utils.messageErreurAppend(log);
-        
+
         return ok;
     }
 
-    
-    public String getValue(){
+    public String getValue()
+    {
         return setter.getValue();
     }
-    
-    public void setValue(String value){
+
+    public void setValue(String value)
+    {
         setter.setValue(value);
     }
-    
+
 }

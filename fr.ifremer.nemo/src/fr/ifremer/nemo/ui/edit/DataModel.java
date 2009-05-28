@@ -4,9 +4,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.forms.widgets.ScrolledForm;
-
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.DataType;
 import fr.ifremer.nemo.domain.Parameter;
@@ -121,12 +118,15 @@ public class DataModel
     {
         int fileHeader = 0;
         // taille du header fichier
-        if (ViewFile.dossierCampagne){
+        if (ViewFile.dossierCampagne)
+        {
             dirSurvey.setDirectory(ViewFile.nomRepertoire);
             stationModel = dirSurvey.getStationModel();
         }
-        else{
-            fileHeader = Integer.parseInt(EditDesc.sectionEnteteFichier.getValue());
+        else
+        {
+            fileHeader =
+                Integer.parseInt(EditDesc.sectionEnteteFichier.getValue());
             singleSurvey.setHeaderLinesNumber(fileHeader);
             stationModel = singleSurvey.getStationModel();
         }
@@ -136,61 +136,78 @@ public class DataModel
 
         // serie temporelle
         if (ViewFile.radSerieTempo.getSelection()
-                || ViewFile.radTrajectoire.getSelection()){
+                || ViewFile.radTrajectoire.getSelection())
+        {
             timeSeriesInformation = stationModel.getTimeSeriesInformation();
         }
 
         // trajectoire
-        if (ViewFile.radTrajectoire.getSelection()){
+        if (ViewFile.radTrajectoire.getSelection())
+        {
             trajectory = stationModel.getTrajectory();
         }
 
         // séparateur
-        if (ViewFile.chkSeparateur.getSelection()){
-            if (ViewFile.radioTabulation.getSelection()){
+        if (ViewFile.chkSeparateur.getSelection())
+        {
+            if (ViewFile.radioTabulation.getSelection())
+            {
                 // Tabulation
                 stationModel.setSeparator(Global.TAB);
             }
-            else if (ViewFile.radioPointVirgule.getSelection()){
+            else if (ViewFile.radioPointVirgule.getSelection())
+            {
                 // Point-virgule
                 stationModel.setSeparator(Global.SEMICOLON);
             }
-            else if (ViewFile.radioVirgule.getSelection()){
+            else if (ViewFile.radioVirgule.getSelection())
+            {
                 // Virgule
                 stationModel.setSeparator(Global.COMMA);
             }
-            else if (ViewFile.radioEspace.getSelection()){
+            else if (ViewFile.radioEspace.getSelection())
+            {
                 // Espace
                 stationModel.setSeparator(Global.SPACE);
             }
-            else if (ViewFile.radioSeparateurAutre.getSelection()){
+            else if (ViewFile.radioSeparateurAutre.getSelection())
+            {
                 // Autre
                 stationModel.setSeparator(ViewFile.textSeparateur.getText());
             }
-            else{
+            else
+            {
                 stationModel.setSeparator(Global.EMPTY_STRING);
             }
         }
-        else{
+        else
+        {
             stationModel.setSeparator(Global.EMPTY_STRING);
         }
 
         // nombre lignes entete station
-        if (!EditDesc.sectionEnteteStation.isSelectNumber()){
+        if (!EditDesc.sectionEnteteStation.isSelectNumber())
+        {
             stationModel.setEndStationHeaderPattern(true);
 
-            String stationPattern = EditDesc.sectionEnteteStation.getIndicatorText();
+            String stationPattern =
+                EditDesc.sectionEnteteStation.getIndicatorText();
             stationModel.setEndStationHeader(stationPattern);
-            
-            int interLines = Integer.parseInt(EditDesc.sectionEnteteStation.getNbLinesBeforeData());
+
+            int interLines =
+                Integer.parseInt(EditDesc.sectionEnteteStation
+                    .getNbLinesBeforeData());
             stationModel.setNumberLinesBetweenStationData(interLines);
             int stationHeader = interLines;
-            
+
             int numLine = 0;
-            if (!stationPattern.equals(Global.EMPTY_STRING)){
+            if (!stationPattern.equals(Global.EMPTY_STRING))
+            {
                 String[] texte = Utils.texteBrut.split("\n"); //$NON-NLS-1$
-                for(numLine = 0; numLine < texte.length; numLine++){
-                    if (texte[numLine].trim().startsWith(stationPattern.trim())){
+                for (numLine = 0; numLine < texte.length; numLine++)
+                {
+                    if (texte[numLine].trim().startsWith(stationPattern.trim()))
+                    {
                         numLine++;
                         break;
                     }
@@ -198,44 +215,53 @@ public class DataModel
                 numLine += interLines;
                 stationHeader = numLine - fileHeader;
             }
-            stationModel.setNumberOfLines(stationHeader);    
+            stationModel.setNumberOfLines(stationHeader);
         }
-        else{
+        else
+        {
             stationModel.setEndStationHeaderPattern(false);
-            stationModel.setNumberOfLines(EditDesc.sectionEnteteStation.getValue()); 
+            stationModel.setNumberOfLines(EditDesc.sectionEnteteStation
+                .getValue());
         }
-        
+
         // nombre de lignes de fin
-        stationModel.setEndData(Integer.parseInt(EditDesc.sectionFinStation.getValue()));
+        stationModel.setEndData(Integer.parseInt(EditDesc.sectionFinStation
+            .getValue()));
 
         // attribut pattern fin donnees en acces direct
-        if (EditDesc.sectionRuptureDonnees.radEOFselected()){
+        if (EditDesc.sectionRuptureDonnees.radEOFselected())
+        {
             stationModel.setEndOnEmptyLine(false);
             stationModel.setEndOnEOF(true);
             stationModel.setEndOnNextStation(false);
             stationModel.setEndOnPattern(false);
         }
-        else if (EditDesc.sectionRuptureDonnees.radLigneSelected()){
+        else if (EditDesc.sectionRuptureDonnees.radLigneSelected())
+        {
             stationModel.setEndOnEmptyLine(true);
             stationModel.setEndOnEOF(false);
             stationModel.setEndOnNextStation(false);
             stationModel.setEndOnPattern(false);
         }
-        else if (EditDesc.sectionRuptureDonnees.radNextStationSelected()){
+        else if (EditDesc.sectionRuptureDonnees.radNextStationSelected())
+        {
             stationModel.setEndOnEmptyLine(false);
             stationModel.setEndOnEOF(false);
             stationModel.setEndOnNextStation(true);
-            stationModel.setEndDataPattern(EditDesc.sectionRuptureDonnees.getStartStationIndicator());
+            stationModel.setEndDataPattern(EditDesc.sectionRuptureDonnees
+                .getStartStationIndicator());
             stationModel.setEndOnPattern(false);
         }
-        else if (EditDesc.sectionRuptureDonnees.radManuelSelected()){
+        else if (EditDesc.sectionRuptureDonnees.radManuelSelected())
+        {
             stationModel.setEndOnEmptyLine(false);
             stationModel.setEndOnEOF(false);
             stationModel.setEndOnNextStation(false);
             stationModel.setEndOnPattern(true);
-            stationModel.setEndDataPattern(EditDesc.sectionRuptureDonnees.getValue());
+            stationModel.setEndDataPattern(EditDesc.sectionRuptureDonnees
+                .getValue());
         }
-        
+
         // on initialise les dataTypes, centers et parameters en prevision des
         // onglets Campagne et Data
 
@@ -253,11 +279,44 @@ public class DataModel
 
     public static void initSurvey()
     {
+        // recupération des items
+        Couple refCampagne =
+            EditSurvey.sectionReference.getItem(Messages.edit_cruise_cruiseRef);
+        Couple nomCampagne =
+            EditSurvey.sectionReference
+                .getItem(Messages.edit_cruise_cruiseName);
+        Couple navire =
+            EditSurvey.sectionReference.getItem(Messages.edit_cruise_ship);
+        Couple dateDebut =
+            EditSurvey.sectionLocalisation
+                .getItem(Messages.edit_cruise_startDate);
+        Couple dateFin =
+            EditSurvey.sectionLocalisation
+                .getItem(Messages.edit_cruise_endDate);
+        Couple region =
+            EditSurvey.sectionLocalisation.getItem(Messages.edit_cruise_region);
+        Couple pays =
+            EditSurvey.sectionSource.getItem(Messages.edit_cruise_country);
+        Couple labo =
+            EditSurvey.sectionSource.getItem(Messages.edit_cruise_lab);
+        Couple chef =
+            EditSurvey.sectionSource.getItem(Messages.edit_cruise_chief);
+        Couple projet =
+            EditSurvey.sectionSource.getItem(Messages.edit_cruise_project);
+        Couple centreDonnee =
+            EditSurvey.sectionCentre.getItem(Messages.edit_cruise_dataCenter);
+        Couple confidentialite =
+            EditSurvey.sectionCentre.getItem(Messages.edit_cruise_confident);
+        Couple commentaires =
+            EditSurvey.sectionCommentaire.getItem(Global.EMPTY_STRING);
+
         Survey survey;
-        if (ViewFile.dossierCampagne){
+        if (ViewFile.dossierCampagne)
+        {
             survey = dirSurvey.getModel();
         }
-        else{
+        else
+        {
             survey = singleSurvey.getModel();
         }
 
@@ -268,71 +327,69 @@ public class DataModel
 
         // injection des valeurs de l'IHM -> datamodel
         // reference
-        if (EditSurvey.textCampagne == null
-                || EditSurvey.textCampagne.isDisposed()){
+        if (ViewFile.tabItem1.isDisposed())
+        {
             EditSurvey.validee = true;
             return;
         }
 
-        survey.setReference(EditSurvey.textCampagne.getText());
-        survey.setName(EditSurvey.textNom.getText());
-        survey.setShipCode(Utils.extraitCode(EditSurvey.comboNavire.getText()));
-        survey.setShipName(Utils
-            .extraitValeur(EditSurvey.comboNavire.getText()));
+        survey.setReference(refCampagne.getText());
+        survey.setName(nomCampagne.getText());
+        survey.setShipCode(Utils.extraitCode(navire.getText()));
+        survey.setShipName(Utils.extraitValeur(navire.getText()));
 
         // Localisation
 
         // DATE DE DEBUT
-        try{
+        try
+        {
             DateTimeFormat dateFormat = new DateTimeFormat();
             dateFormat.setFormatString("dd/MM/yyyy"); //$NON-NLS-1$
-            Long dateLong =
-                (Long) dateFormat.parseObject(EditSurvey.textDateDebut
-                    .getText());
+            Long dateLong = (Long) dateFormat.parseObject(dateDebut.getText());
             survey.setStartDate(dateLong);
         }
-        catch (ParseException e){
+        catch (ParseException e)
+        {
             e.printStackTrace();
         }
 
         // DATE DE FIN
-        try{
+        try
+        {
             DateTimeFormat dateFormat = new DateTimeFormat();
             dateFormat.setFormatString("dd/MM/yyyy"); //$NON-NLS-1$
-            Long dateLong =
-                (Long) dateFormat.parseObject(EditSurvey.textDateFin.getText());
+            Long dateLong = (Long) dateFormat.parseObject(dateFin.getText());
             survey.setEndDate(dateLong);
         }
-        catch (ParseException e){
+        catch (ParseException e)
+        {
             e.printStackTrace();
         }
 
-        survey.setRegionName(Utils.extraitValeur(EditSurvey.comboRegion.getText()));
+        survey.setRegionName(Utils.extraitValeur(region.getText()));
 
         // Source de données
-        survey.setCountryCode(Utils.extraitCode(EditSurvey.comboCountries
-            .getText()));
-        survey.setLaboratories(EditSurvey.textLabo.getText());
-        survey.setChiefScientist(EditSurvey.textChef.getText());
-        survey.setProjectName(EditSurvey.textProjet.getText());
+        survey.setCountryCode(Utils.extraitCode(pays.getText()));
+        survey.setLaboratories(labo.getText());
+        survey.setChiefScientist(chef.getText());
+        survey.setProjectName(projet.getText());
 
         // Centre d'archivage
-        survey.setDataCentre(Utils.extraitCode(EditSurvey.comboDataCentres
-            .getText()));
+        survey.setDataCentre(Utils.extraitCode(centreDonnee.getText()));
 
         // confidentialité
-        if (EditSurvey.comboConfid.getText().equals("P - Public")){ //$NON-NLS-1$
+        if (confidentialite.getText().equals("P - Public")) { //$NON-NLS-1$
             survey.setAvailability("publicly"); //$NON-NLS-1$
         }
-        if (EditSurvey.comboConfid.getText().equals("L - Limited")){ //$NON-NLS-1$
+        if (confidentialite.getText().equals("L - Limited")) { //$NON-NLS-1$
             survey.setAvailability("limited"); //$NON-NLS-1$
         }
-        if (EditSurvey.comboConfid.getText().equals("C - Confidential")){ //$NON-NLS-1$
+        if (confidentialite.getText().equals("C - Confidential")) { //$NON-NLS-1$
             survey.setAvailability("confidential"); //$NON-NLS-1$
         }
 
         // Commentaire
-        survey.setComment(EditSurvey.textCommentaire.getText());
+        survey.setComment(commentaires.getText());
 
         // remplissage de la liste des dataTypes de la campagne
         // parcours de la liste des dataTypes de l'IHM et creation d'un DataType
@@ -342,16 +399,19 @@ public class DataModel
         // reset préventif des dataTypes
         survey.releaseDataTypes();
 
-        for (int i = 0; i < taille; i++){
+        for (int i = 0; i < taille; i++)
+        {
             TypeSurvey typeSurvey = TableDataSurvey.types.get(i);
             DataType dataType = new DataType();
             dataType.setCode(typeSurvey.getCode());
             dataType.setNumberOfProfiles(typeSurvey.getNombre());
 
-            if (typeSurvey.getQc().equals(Global.YES)){
+            if (typeSurvey.getQc().equals(Global.YES))
+            {
                 dataType.setQc(true);
             }
-            else{
+            else
+            {
                 dataType.setQc(false);
             }
             dataType.setSensor(typeSurvey.getSensor());
@@ -362,10 +422,13 @@ public class DataModel
         }
         EditSurvey.validee = true;
     }
-    
-    private static void initDiseabledField(String property){
-        PropertyModel propertyModel = stationModel.getTimeSeriesModel().propertiesAt(property);
-        propertyModel.setFlag(EditStation.qcFlags.getFlagFragment(property)); // Flag qualite
+
+    private static void initDiseabledField(String property)
+    {
+        PropertyModel propertyModel =
+            stationModel.getTimeSeriesModel().propertiesAt(property);
+        propertyModel.setFlag(EditStation.qcFlags.getFlagFragment(property)); // Flag
+        // qualite
         propertyModel.setToCompute(true);
     }
 
@@ -375,57 +438,71 @@ public class DataModel
 
         // compléter ELAT / ELON et EDEPTH si nécessaire
         if (ViewFile.radSerieTempo.getSelection())
-        {                                
-            if (EditStation.endLatitude.getValue().trim().equals(Global.EMPTY_STRING)) {
+        {
+            if (EditStation.endLatitude.getValue().trim().equals(
+                Global.EMPTY_STRING))
+            {
                 // vide donc on recopie latitude dans latitude de fin
                 EditStation.endLatitude.copyValues(EditStation.latitude);
-            }                        
-            if (EditStation.endLongitude.getValue().trim().equals(Global.EMPTY_STRING)) {
+            }
+            if (EditStation.endLongitude.getValue().trim().equals(
+                Global.EMPTY_STRING))
+            {
                 // vide donc on recopie longitude dans longitude de fin
                 EditStation.endLongitude.copyValues(EditStation.longitude);
-            }                       
-            if (EditStation.endDepth.getValue().trim().equals(Global.EMPTY_STRING)) {
+            }
+            if (EditStation.endDepth.getValue().trim().equals(
+                Global.EMPTY_STRING))
+            {
                 // vide donc on recopie profondeur dans profondeur de fin
                 EditStation.endDepth.copyValues(EditStation.depth);
             }
         }
 
         // parcours des sections de la station pour initialisation
-        for (NemoSection stationSection : EditStation.listeSectionsStation){
+        for (NemoSection stationSection : EditStation.listeSectionsStation)
+        {
             stationSection.initModel(stationModel);
         }
-        
+
         // Completer les données manquantes
-        
+
         // DM HISTORY 1&2
-        station.setDmHistory1(Global.EMPTY_STRING); 
-        station.setDmHistory2(Global.EMPTY_STRING); 
-        
-        if (ViewFile.radSerieTempo.getSelection() || ViewFile.radTrajectoire.getSelection())
+        station.setDmHistory1(Global.EMPTY_STRING);
+        station.setDmHistory2(Global.EMPTY_STRING);
+
+        if (ViewFile.radSerieTempo.getSelection()
+                || ViewFile.radTrajectoire.getSelection())
         {
             // GESTION Time/Date in Data
             if (EditStation.samplingRate.isEnabled())
             {
-                 // calcul e partir frequence echantillonnage
-                 stationModel.getTimestampModel().setComputed(true);
-             }
-             else
+                // calcul e partir frequence echantillonnage
+                stationModel.getTimestampModel().setComputed(true);
+            }
+            else
             {
-                 // calcul position date/heure dans les donnees
-                 stationModel.getTimestampModel().setComputed(false);
-                 // remplissage avec les données par défaut
-                 stationModel.getTimeSeriesModel().setSampleRateConversion("*1"); //$NON-NLS-1$
-                 stationModel.getTimeSeriesInformation().setSamplingRate(Global.ZERO);
-             }
-            
+                // calcul position date/heure dans les donnees
+                stationModel.getTimestampModel().setComputed(false);
+                // remplissage avec les données par défaut
+                stationModel.getTimeSeriesModel().setSampleRateConversion("*1"); //$NON-NLS-1$
+                stationModel.getTimeSeriesInformation().setSamplingRate(
+                    Global.ZERO);
+            }
+
             // DATE / HEURE DE FIN
-            propertyModel = stationModel.getTimeSeriesModel().propertiesAt(NemoSection.S_EDATE);
+            propertyModel =
+                stationModel.getTimeSeriesModel().propertiesAt(
+                    NemoSection.S_EDATE);
             propertyModel.setUserProvided(true);
-            propertyModel.setFlag(EditStation.qcFlags.getFlagFragment(Global.ENDDATETIME)); // Flag qualite
-            propertyModel = stationModel.getTimeSeriesModel().propertiesAt(NemoSection.S_ETIME);
+            propertyModel.setFlag(EditStation.qcFlags
+                .getFlagFragment(Global.ENDDATETIME)); // Flag qualite
+            propertyModel =
+                stationModel.getTimeSeriesModel().propertiesAt(
+                    NemoSection.S_ETIME);
             propertyModel.setUserProvided(true);
-            propertyModel.setFlag(EditStation.qcFlags.getFlagFragment(Global.ENDDATETIME)); // Flag qualite
-            
+            propertyModel.setFlag(EditStation.qcFlags
+                .getFlagFragment(Global.ENDDATETIME)); // Flag qualite
 
             if (ViewFile.radTrajectoire.getSelection())
             {
@@ -433,13 +510,15 @@ public class DataModel
                 initDiseabledField(NemoSection.S_ELON);
                 initDiseabledField(NemoSection.S_EDEPTH);
 
-                // DECLINAISON MAGNETIQUE : FAE 1386 - valeur par défaut pour les Trajectoires
-                propertyModel = stationModel.getTimeSeriesModel().propertiesAt(NemoSection.S_MAGNETIC);
+                // DECLINAISON MAGNETIQUE : FAE 1386 - valeur par défaut pour
+                // les Trajectoires
+                propertyModel =
+                    stationModel.getTimeSeriesModel().propertiesAt(
+                        NemoSection.S_MAGNETIC);
                 propertyModel.setUserProvided(true);
-                timeSeriesInformation.setMagneticDeclination("-999");  //$NON-NLS-1$
+                timeSeriesInformation.setMagneticDeclination("-999"); //$NON-NLS-1$
             }
-        } // fin specifique SERIE TEMPO ou TRAJECTOIRE        
-        
+        } // fin specifique SERIE TEMPO ou TRAJECTOIRE
 
         // flag validation e 1
         EditStation.validee = true;
@@ -467,14 +546,14 @@ public class DataModel
             ParameterModel parameterModel = new ParameterModel();
             parameterModel.setModel(para);
 
-            //parameterModel.setModel(para);
+            // parameterModel.setModel(para);
 
             // split sur " - "
             Pattern p = Pattern.compile(Global.SEP);
             String mots[] = p.split(typeCourant.getCode());
             String code = mots[0];
             String nom = mots[1];
-            
+
             // code, nom, unite
             para.setCode(code);
             para.setFullName(nom);
@@ -493,7 +572,7 @@ public class DataModel
             frag.setLastCharOffset(typeCourant.getFin());
             parameterModel.setFragment(frag);
 
-            if (!typeCourant.getDebutFlag().equals(Global.EMPTY_STRING) 
+            if (!typeCourant.getDebutFlag().equals(Global.EMPTY_STRING)
                     && !typeCourant.getFinFlag().equals(Global.EMPTY_STRING))
             {
                 LineFragment flag = new LineFragment();
@@ -502,16 +581,17 @@ public class DataModel
                 parameterModel.setFlag(flag);
             }
 
-            if (code.trim().equals(Intern.paramPRES)){ 
+            if (code.trim().equals(Intern.paramPRES))
+            {
                 indexPRES = i;
             }
 
             stationModel.addParameterModel(parameterModel);
-           
+
         }
         // enregistrement de l'indexPRES
-        stationModel.setPresIndex(indexPRES);        
-        
+        stationModel.setPresIndex(indexPRES);
+
         EditData.validee = true;
 
     }
@@ -532,7 +612,7 @@ public class DataModel
         // forcage affichage onglet 0
         ViewFile.tabFolder.setSelection(0);
         ViewFile.affiche = 0;
-        //Utils.invalidEtapes();
+        // Utils.invalidEtapes();
         // RAZ global
         Utils.razGlobal();
 
@@ -547,20 +627,25 @@ public class DataModel
     public static void fillDesc(boolean raz) throws RuntimeException
     {
         // remplissage auto de l'IHM Desc
-        if (dirSurvey_modele != null){
+        if (dirSurvey_modele != null)
+        {
             dirSurvey_modele.releaseInputModel();
         }
-        if (singleSurvey_modele != null && raz){
+        if (singleSurvey_modele != null && raz)
+        {
             singleSurvey_modele.releaseInputModel();
         }
 
-        if (ViewFile.dossierCampagne){
-            try{
+        if (ViewFile.dossierCampagne)
+        {
+            try
+            {
                 dirSurvey_modele = new DirectoryBasedSurvey();
                 dirSurvey_modele =
                     (DirectoryBasedSurvey) inputModel_modele.getMedia();
             }
-            catch (RuntimeException e){
+            catch (RuntimeException e)
+            {
                 Utils.messageErreurAppend(Messages.Etape_124);
                 e.printStackTrace();
                 throw e;
@@ -568,49 +653,59 @@ public class DataModel
             stationModel_modele = dirSurvey_modele.getStationModel();
             EditDesc.sectionEnteteFichier.razValues();
         }
-        else{
-            try{
+        else
+        {
+            try
+            {
                 singleSurvey_modele = new SingleFileSurvey();
                 singleSurvey_modele =
                     (SingleFileSurvey) inputModel_modele.getMedia();
             }
-            catch (RuntimeException e){
+            catch (RuntimeException e)
+            {
                 Utils.messageErreurAppend(Messages.Etape_124);
                 e.printStackTrace();
                 throw e;
             }
             stationModel_modele = singleSurvey_modele.getStationModel();
             // lignes entete fichier
-            EditDesc.sectionEnteteFichier.setValue(String.valueOf(singleSurvey_modele.getHeaderLinesNumber()));
+            EditDesc.sectionEnteteFichier.setValue(String
+                .valueOf(singleSurvey_modele.getHeaderLinesNumber()));
 
         }
 
-        try{
-        
+        try
+        {
+
             // Cochage du selecteur de type de fichier
             if (stationModel_modele.getInputType().equals(Global.PROFILE)
-                    && (stationModel_modele.getTimeSeriesInformation() != null)){
+                    && (stationModel_modele.getTimeSeriesInformation() != null))
+            {
                 // Pour exploiter les anciens modeles
                 ViewFile.selectTypeFile(Global.TIMESERIES);
             }
-            else{
+            else
+            {
                 ViewFile.selectTypeFile(stationModel_modele.getInputType());
             }
-    
+
             // séparateur
             String strSeparator = stationModel_modele.getSeparator();
-            
-            // pour prise en compte des anciens modèles (par défaut, pas de séparateur)
-            if (strSeparator == null) strSeparator = Global.EMPTY_STRING;
-    
-            boolean blnSeparator =
-                !Global.EMPTY_STRING.equals(strSeparator);
-    
+
+            // pour prise en compte des anciens modèles (par défaut, pas de
+            // séparateur)
+            if (strSeparator == null)
+                strSeparator = Global.EMPTY_STRING;
+
+            boolean blnSeparator = !Global.EMPTY_STRING.equals(strSeparator);
+
             ViewFile.chkSeparateur.setSelection(blnSeparator);
             ViewFile.setSeparatorVisible();
-    
-            if (blnSeparator){
-                if (Global.TAB.equals(strSeparator)){
+
+            if (blnSeparator)
+            {
+                if (Global.TAB.equals(strSeparator))
+                {
                     // Tabulation
                     ViewFile.radioTabulation.setSelection(true);
                     ViewFile.radioPointVirgule.setSelection(false);
@@ -619,7 +714,8 @@ public class DataModel
                     ViewFile.radioSeparateurAutre.setSelection(false);
                     ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
                 }
-                else if (Global.SEMICOLON.equals(strSeparator)){
+                else if (Global.SEMICOLON.equals(strSeparator))
+                {
                     // Point-virgule
                     ViewFile.radioTabulation.setSelection(false);
                     ViewFile.radioPointVirgule.setSelection(true);
@@ -628,7 +724,8 @@ public class DataModel
                     ViewFile.radioSeparateurAutre.setSelection(false);
                     ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
                 }
-                else if (Global.COMMA.equals(strSeparator)){
+                else if (Global.COMMA.equals(strSeparator))
+                {
                     // Virgule
                     ViewFile.radioTabulation.setSelection(false);
                     ViewFile.radioPointVirgule.setSelection(false);
@@ -637,7 +734,8 @@ public class DataModel
                     ViewFile.radioSeparateurAutre.setSelection(false);
                     ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
                 }
-                else if (Global.SPACE.equals(strSeparator)){
+                else if (Global.SPACE.equals(strSeparator))
+                {
                     // Espace
                     ViewFile.radioTabulation.setSelection(false);
                     ViewFile.radioPointVirgule.setSelection(false);
@@ -646,7 +744,8 @@ public class DataModel
                     ViewFile.radioSeparateurAutre.setSelection(false);
                     ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
                 }
-                else{
+                else
+                {
                     // Autre séparateur
                     ViewFile.radioTabulation.setSelection(false);
                     ViewFile.radioPointVirgule.setSelection(false);
@@ -656,43 +755,55 @@ public class DataModel
                     ViewFile.textSeparateur.setText(strSeparator);
                 }
             }
-    
+
             // nombre lignes entete station
-            EditDesc.sectionEnteteStation.selectNumber(!stationModel_modele.isEndStationHeaderPattern());
-            EditDesc.sectionEnteteStation.setIndicatorText(stationModel_modele.getEndStationHeader());
-            EditDesc.sectionEnteteStation.setNbLinesBeforeData(String.valueOf(stationModel_modele.getNumberLinesBetweenStationData()));
-            EditDesc.sectionEnteteStation.setValue(String.valueOf(stationModel_modele.getNumberOfLines()));
-    
+            EditDesc.sectionEnteteStation.selectNumber(!stationModel_modele
+                .isEndStationHeaderPattern());
+            EditDesc.sectionEnteteStation.setIndicatorText(stationModel_modele
+                .getEndStationHeader());
+            EditDesc.sectionEnteteStation
+                .setNbLinesBeforeData(String.valueOf(stationModel_modele
+                    .getNumberLinesBetweenStationData()));
+            EditDesc.sectionEnteteStation.setValue(String
+                .valueOf(stationModel_modele.getNumberOfLines()));
+
             // nombre de lignes de fin
-            EditDesc.sectionFinStation.setValue(String.valueOf(stationModel_modele.getEndData())); 
-        
+            EditDesc.sectionFinStation.setValue(String
+                .valueOf(stationModel_modele.getEndData()));
+
             // section EndData
             FileEndData endData = EditDesc.sectionRuptureDonnees;
-            if (stationModel_modele.isEndOnEOF()){
+            if (stationModel_modele.isEndOnEOF())
+            {
                 endData.selectEndData(endData.getRadEOF());
             }
-            else if (stationModel_modele.isEndOnEmptyLine()){
+            else if (stationModel_modele.isEndOnEmptyLine())
+            {
                 endData.selectEndData(endData.getRadLigne());
             }
-            else if (stationModel_modele.isEndOnNextStation()){
+            else if (stationModel_modele.isEndOnNextStation())
+            {
                 endData.selectEndData(endData.getRadNextStation());
-                endData.setStartStationIndicator(stationModel_modele.getEndDataPattern());
+                endData.setStartStationIndicator(stationModel_modele
+                    .getEndDataPattern());
             }
-            else if (stationModel_modele.isEndOnPattern()){
+            else if (stationModel_modele.isEndOnPattern())
+            {
                 endData.selectEndData(endData.getRadManuel());
                 endData.setValue(stationModel_modele.getEndDataPattern());
             }
-    
+
             // refresh de la zone d'edition
             EditDesc.razEdition();
             EditDesc.DrawingBack();
-    
+
             DataModel.ouverture = true;
-    
+
             // activation option serie tempo
             ViewFile.enableChoice(true);
         }
-        catch (Exception e){
+        catch (Exception e)
+        {
             Utils.messageErreurAppend(Messages.Etape_124);
             e.printStackTrace();
         }
@@ -700,6 +811,37 @@ public class DataModel
 
     public static void fillSurvey()
     {
+        // recupération des items
+        Couple refCampagne =
+            EditSurvey.sectionReference.getItem(Messages.edit_cruise_cruiseRef);
+        Couple nomCampagne =
+            EditSurvey.sectionReference
+                .getItem(Messages.edit_cruise_cruiseName);
+        Couple navire =
+            EditSurvey.sectionReference.getItem(Messages.edit_cruise_ship);
+        Couple dateDebut =
+            EditSurvey.sectionLocalisation
+                .getItem(Messages.edit_cruise_startDate);
+        Couple dateFin =
+            EditSurvey.sectionLocalisation
+                .getItem(Messages.edit_cruise_endDate);
+        Couple region =
+            EditSurvey.sectionLocalisation.getItem(Messages.edit_cruise_region);
+        Couple pays =
+            EditSurvey.sectionSource.getItem(Messages.edit_cruise_country);
+        Couple labo =
+            EditSurvey.sectionSource.getItem(Messages.edit_cruise_lab);
+        Couple chef =
+            EditSurvey.sectionSource.getItem(Messages.edit_cruise_chief);
+        Couple projet =
+            EditSurvey.sectionSource.getItem(Messages.edit_cruise_project);
+        Couple centreDonnee =
+            EditSurvey.sectionCentre.getItem(Messages.edit_cruise_dataCenter);
+        Couple confidentialite =
+            EditSurvey.sectionCentre.getItem(Messages.edit_cruise_confident);
+        Couple commentaires =
+            EditSurvey.sectionCommentaire.getItem(Global.EMPTY_STRING);
+
         // System.out.println("Remplissage onglet survey");
         Survey survey;
         if (ViewFile.dossierCampagne)
@@ -713,9 +855,9 @@ public class DataModel
 
         // injection des valeurs de l'IHM -> datamodel
         // reference
-        EditSurvey.textCampagne.setText(survey.getReference());
-        EditSurvey.textNom.setText(survey.getName());
-        Utils.selectComboCodePlus(EditSurvey.comboNavire, survey.getShipCode(),
+        refCampagne.setText(survey.getReference());
+        nomCampagne.setText(survey.getName());
+        Utils.selectComboCodePlus(navire.getValueCombo(), survey.getShipCode(),
             survey.getShipName());
 
         // Localisation
@@ -725,7 +867,7 @@ public class DataModel
 
         try
         {
-            EditSurvey.textDateDebut.setText(formatter.formatDateTime(
+            dateDebut.setText(formatter.formatDateTime(
                 "dd/MM/yyyy", survey.getStartDate())); //$NON-NLS-1$
         }
         catch (ParseException e)
@@ -738,7 +880,7 @@ public class DataModel
 
         try
         {
-            EditSurvey.textDateFin.setText(formatter.formatDateTime(
+            dateFin.setText(formatter.formatDateTime(
                 "dd/MM/yyyy", survey.getEndDate())); //$NON-NLS-1$
         }
         catch (ParseException e)
@@ -747,37 +889,37 @@ public class DataModel
             e.printStackTrace();
         }
 
-        Utils.selectComboLibelle(EditSurvey.comboRegion, survey.getRegionName());
-        // EditSurvey.textRegion.setText(survey.getRegionName());
+        Utils
+            .selectComboLibelle(region.getValueCombo(), survey.getRegionName());
 
         // Source de donnees
-        Utils.selectComboCode(EditSurvey.comboCountries, survey
-            .getCountryCode());
-        EditSurvey.textLabo.setText(survey.getLaboratories());
-        EditSurvey.textChef.setText(survey.getChiefScientist());
-        EditSurvey.textProjet.setText(survey.getProjectName());
+        Utils.selectComboCode(pays.getValueCombo(), survey.getCountryCode());
+        labo.setText(survey.getLaboratories());
+        chef.setText(survey.getChiefScientist());
+        projet.setText(survey.getProjectName());
 
         // Centre d'archivage
-        Utils.selectComboCode(EditSurvey.comboDataCentres, survey
+        Utils.selectComboCode(centreDonnee.getValueCombo(), survey
             .getDataCentre());
 
         // confidentialite
         String code = survey.getAvailabilityCode();
-        if (code.equals("P")) //$NON-NLS-1$
-        {
-            EditSurvey.comboConfid.select(0);
-        }
-        if (code.equals("L")) //$NON-NLS-1$
-        {
-            EditSurvey.comboConfid.select(1);
-        }
-        if (code.equals("C")) //$NON-NLS-1$
-        {
-            EditSurvey.comboConfid.select(2);
-        }
+        Utils.selectComboCode(confidentialite.getValueCombo(), code);
+// if (code.equals("P")) //$NON-NLS-1$
+// {
+// EditSurvey.comboConfid.select(0);
+// }
+//        if (code.equals("L")) //$NON-NLS-1$
+// {
+// EditSurvey.comboConfid.select(1);
+// }
+//        if (code.equals("C")) //$NON-NLS-1$
+// {
+// EditSurvey.comboConfid.select(2);
+// }
 
         // Commentaire
-        EditSurvey.textCommentaire.setText(survey.getComment());
+        commentaires.setText(survey.getComment());
 
         // Remplissage de la liste des dataTypes de la campagne
         DataType[] dataTypes = survey.getDataTypes();
@@ -790,10 +932,12 @@ public class DataModel
             typeSurvey.setNombre(dataTypes[i].getNumberOfProfiles());
 
             // QC
-            if (dataTypes[i].isQc()){
-                typeSurvey.setQc(Global.YES); 
+            if (dataTypes[i].isQc())
+            {
+                typeSurvey.setQc(Global.YES);
             }
-            else{
+            else
+            {
                 typeSurvey.setQc(Global.NO);
             }
 
@@ -807,39 +951,7 @@ public class DataModel
 
         // ////////////////////////////////////////
         // refresh de la liste des dataTypes
-        TableDataSurvey.razTableData();
-        TableDataSurvey.creationTable();
-        Composite c = EditSurvey.sectionType;
-        while (c != null)
-        {
-            c.setRedraw(false);
-            c = c.getParent();
-            if (c instanceof ScrolledForm)
-            {
-                break;
-            }
-        }
-        c = EditSurvey.sectionType;
-        while (c != null)
-        {
-            c.layout(true);
-            c = c.getParent();
-            if (c instanceof ScrolledForm)
-            {
-                ((ScrolledForm) c).reflow(true);
-                break;
-            }
-        }
-        c = EditSurvey.sectionType;
-        while (c != null)
-        {
-            c.setRedraw(true);
-            c = c.getParent();
-            if (c instanceof ScrolledForm)
-            {
-                break;
-            }
-        }
+        TableDataSurvey.majIHM();
 
         // ////////////////////////////////////////
 
@@ -849,30 +961,42 @@ public class DataModel
 
     public static void fillStation()
     {
-        for (NemoSection stationSection : EditStation.listeSectionsStation){
+        for (NemoSection stationSection : EditStation.listeSectionsStation)
+        {
             stationSection.fillFromModel(stationModel_modele);
         }
-        
+
         // ENDDATETIME flag !!
-        if(!stationModel_modele.getInputType().equals(Global.PROFILE)){
-            PropertyModel propertyModel = stationModel_modele.getTimeSeriesModel().propertiesAt(NemoSection.S_EDATE);
-            EditStation.qcFlags.setFlagFragment(propertyModel.getFlag(), Global.ENDDATETIME, Messages.getString(Global.ENDDATETIME).trim());
+        if (!stationModel_modele.getInputType().equals(Global.PROFILE))
+        {
+            PropertyModel propertyModel =
+                stationModel_modele.getTimeSeriesModel().propertiesAt(
+                    NemoSection.S_EDATE);
+            EditStation.qcFlags.setFlagFragment(propertyModel.getFlag(),
+                Global.ENDDATETIME, Messages.getString(Global.ENDDATETIME)
+                    .trim());
         }
-        
+
     }
 
     public static void fillBackStation()
     {
-        for (NemoSection stationSection : EditStation.listeSectionsStation){
+        for (NemoSection stationSection : EditStation.listeSectionsStation)
+        {
             stationSection.fillFromModel(stationModel);
         }
-        
+
         // ENDDATETIME flag !!
-        if(!stationModel.getInputType().equals(Global.PROFILE)){
-            PropertyModel propertyModel = stationModel.getTimeSeriesModel().propertiesAt(NemoSection.S_EDATE);
-            EditStation.qcFlags.setFlagFragment(propertyModel.getFlag(), Global.ENDDATETIME, Messages.getString(Global.ENDDATETIME).trim());
+        if (!stationModel.getInputType().equals(Global.PROFILE))
+        {
+            PropertyModel propertyModel =
+                stationModel.getTimeSeriesModel().propertiesAt(
+                    NemoSection.S_EDATE);
+            EditStation.qcFlags.setFlagFragment(propertyModel.getFlag(),
+                Global.ENDDATETIME, Messages.getString(Global.ENDDATETIME)
+                    .trim());
         }
-        
+
     }
 
     public static void main(String[] args)
@@ -932,11 +1056,11 @@ public class DataModel
                     .setDebutFlag(String.valueOf(flag.getFirstCharOffset()));
                 typeData.setFinFlag(String.valueOf(flag.getLastCharOffset()));
             }
-            
+
             String inputDefault = paraCourant.getInputDefault();
-            if (inputDefault == null || inputDefault.equals("null")) inputDefault = Global.EMPTY_STRING; //$NON-NLS-1$
+            if (inputDefault == null || inputDefault.equals("null"))inputDefault = Global.EMPTY_STRING; //$NON-NLS-1$
             typeData.setEntree(inputDefault);
-            
+
             typeData.setUnite(modeleCourant.getUnit());
             typeData.setFormat(modeleCourant.getFormat());
             typeData.setSortie(modeleCourant.getDefault());
@@ -951,7 +1075,7 @@ public class DataModel
         // refresh de la table
         TableData.creationTable();
     }
-    
+
     public static void reset()
     {
         stationModel = null;
@@ -964,12 +1088,12 @@ public class DataModel
         station_modele = null;
         timeSeriesInformation = null;
         timeSeriesInformation_modele = null;
-        
+
         trajectory = null;
         ouverture = false;
         reset = false;
-        
+
         // par soucis d'optimisation :
-        // ne pas supprimer les listes récupérés du Web Service   
+        // ne pas supprimer les listes récupérés du Web Service
     }
 }

@@ -21,6 +21,7 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
@@ -44,6 +45,8 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
+import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 import fr.ifremer.nemo.config.EdmoHandler;
 import fr.ifremer.nemo.config.Flag;
@@ -102,7 +105,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
     public static Shell shelloptions;
 
-    private Composite top, compo, compo01, compo02;
+    private Composite /*top, */compo, compo01, compo02;
     private Group group, group01, group02;
 
     // -- PROXY
@@ -142,7 +145,7 @@ public class OptionsAction extends Action implements ISelectionListener,
                     | SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);
 
         shelloptions.setLocation(20, 20);
-        shelloptions.setSize(600, 870);
+        shelloptions.setSize(640, 870);
         shelloptions.setText(Messages.settings_title);
         shelloptions.setLayout(new GridLayout());
 
@@ -373,12 +376,14 @@ public class OptionsAction extends Action implements ISelectionListener,
     /**
      * This method initializes compoHaut
      */
-    private void createCompoHaut()
+    private void createCompoHaut(Composite parent)
     {
-        compo = new Composite(top, SWT.NONE);
+        compo = new Composite(parent, SWT.NONE);
+        compo.setFont(Utils.font08);
 
         GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(compo);
+        GridDataFactory.fillDefaults().grab(true, false).hint(600, 110)
+            .applyTo(compo);
 
         createCompoLCD(compo);
         createGroupDossier(compo);
@@ -390,6 +395,7 @@ public class OptionsAction extends Action implements ISelectionListener,
     private void createCompoLCD(Composite parent)
     {
         compo01 = new Composite(parent, SWT.NONE);
+        compo01.setFont(Utils.font08);
 
         GridLayoutFactory.fillDefaults().applyTo(compo01);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(compo01);
@@ -406,8 +412,9 @@ public class OptionsAction extends Action implements ISelectionListener,
         group = new Group(parent, SWT.NONE);
         group.setFont(Utils.font08);
         group.setText(Messages.settings_lang);
+
         GridLayoutFactory.fillDefaults().margins(4, 4).applyTo(group);
-        GridDataFactory.fillDefaults().grab(true, true).applyTo(group);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
 
         comboLangue = new Combo(group, SWT.READ_ONLY);
         comboLangue.setFont(Utils.font08);
@@ -428,8 +435,9 @@ public class OptionsAction extends Action implements ISelectionListener,
         group = new Group(parent, SWT.NONE);
         group.setFont(Utils.font08);
         group.setText(Messages.settings_datacenter);
+
         GridLayoutFactory.fillDefaults().margins(4, 4).applyTo(group);
-        GridDataFactory.fillDefaults().grab(true, true).applyTo(group);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
 
         comboCentreDonnees = new Combo(group, SWT.READ_ONLY);
         comboCentreDonnees.setFont(Utils.font08);
@@ -448,7 +456,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         group = new Group(parent, SWT.NONE);
         group.setFont(Utils.font08);
         GridLayoutFactory.fillDefaults().margins(4, 4).applyTo(group);
-        GridDataFactory.fillDefaults().grab(true, true).applyTo(group);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
 
         // groupDossier.setLayout(null);
         group.setText(Messages.settings_dir);
@@ -456,13 +464,13 @@ public class OptionsAction extends Action implements ISelectionListener,
         group01 = new Group(group, SWT.NONE);
         group01.setFont(Utils.font08);
         GridLayoutFactory.fillDefaults().numColumns(2).applyTo(group01);
-        GridDataFactory.fillDefaults().grab(true, true).applyTo(group01);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(group01);
         group01.setText(Messages.settings_dir_model);
         group01.pack();
 
         textDossierModele = new Text(group01, SWT.BORDER);
         textDossierModele.setFont(Utils.font08);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(
+        GridDataFactory.fillDefaults().grab(true, false).hint(100, 12).applyTo(
             textDossierModele);
         buttonParcourirModele = new Button(group01, SWT.NONE);
         buttonParcourirModele.setFont(Utils.font08);
@@ -497,13 +505,13 @@ public class OptionsAction extends Action implements ISelectionListener,
         group02 = new Group(group, SWT.NONE);
         group02.setFont(Utils.font08);
         GridLayoutFactory.fillDefaults().numColumns(2).applyTo(group02);
-        GridDataFactory.fillDefaults().grab(true, true).applyTo(group02);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(group02);
         group02.setText(Messages.settings_dir_data);
         group02.pack();
 
         textDossierCampagne = new Text(group02, SWT.BORDER);
         textDossierCampagne.setFont(Utils.font08);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(
+        GridDataFactory.fillDefaults().grab(true, false).hint(100, 12).applyTo(
             textDossierCampagne);
         buttonParcourirCampagne = new Button(group02, SWT.NONE);
         buttonParcourirCampagne.setFont(Utils.font08);
@@ -539,17 +547,19 @@ public class OptionsAction extends Action implements ISelectionListener,
     /**
      * This method initializes groupWS
      */
-    private void createGroupWS()
+    private void createGroupWS(Composite parent)
     {
-        group = new Group(top, SWT.NONE);
+        group = new Group(parent, SWT.NONE);
         group.setFont(Utils.font08);
         group.setText(Messages.settings_web);
         GridLayoutFactory.fillDefaults().margins(4, 4).applyTo(group);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
+        GridDataFactory.fillDefaults().grab(true, false).hint(600, 250)
+            .applyTo(group);
 
         compo = new Composite(group, SWT.NONE);
+        compo.setFont(Utils.font08);
         GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo);
-        GridDataFactory.fillDefaults().grab(true, true).applyTo(compo);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(compo);
 
         labelNemo = new Label(compo, SWT.NONE);
         labelNemo.setFont(Utils.font08);
@@ -558,7 +568,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
         textAreaNemo = new Text(compo, SWT.BORDER);
         textAreaNemo.setFont(Utils.font08);
-        GridDataFactory.fillDefaults().grab(true, true).applyTo(textAreaNemo);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(textAreaNemo);
 
         labelNautilus = new Label(compo, SWT.NONE);
         labelNautilus.setFont(Utils.font08);
@@ -567,7 +577,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
         textAreaNautilus = new Text(compo, SWT.BORDER);
         textAreaNautilus.setFont(Utils.font08);
-        GridDataFactory.fillDefaults().grab(true, true).applyTo(
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(
             textAreaNautilus);
 
         // WS Vocab
@@ -592,13 +602,13 @@ public class OptionsAction extends Action implements ISelectionListener,
     private void createProxyGroup(Composite parent)
     {
         compo01 = new Composite(parent, SWT.NULL);
-
+        compo01.setFont(Utils.font08);
         GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compo01);
-        GridDataFactory.fillDefaults().grab(true, true).applyTo(compo01);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(compo01);
 
         label = new Label(compo01, SWT.NULL);
         label.setFont(Utils.font08);
-        GridDataFactory.swtDefaults().grab(false, true).hint(10, 4).applyTo(
+        GridDataFactory.swtDefaults().grab(false, false).hint(10, 4).applyTo(
             label);
 
         // PROXY
@@ -617,6 +627,7 @@ public class OptionsAction extends Action implements ISelectionListener,
             });
 
         compo02 = new Composite(compo01, SWT.NULL);
+        compo02.setFont(Utils.font08);
         GridLayoutFactory.fillDefaults().numColumns(5).applyTo(compo02);
         // GridDataFactory.fillDefaults().grab(true, true).applyTo(compoProxy);
 
@@ -695,17 +706,18 @@ public class OptionsAction extends Action implements ISelectionListener,
     /**
      * This method initializes groupCDI
      */
-    private void createGroupEdmo()
+    private void createGroupEdmo(Composite parent)
     {
         // FAE 1123 : Extraire le centre de données responsable du CDI du bloc
         // CDI.
 
-        group = new Group(top, SWT.NONE);
+        group = new Group(parent, SWT.NONE);
         group.setFont(Utils.font08);
         group.setText(Messages.settings_EDMO);
         GridLayoutFactory.fillDefaults().margins(4, 4).numColumns(2).applyTo(
             group);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
+        GridDataFactory.fillDefaults().grab(true, false).hint(600, 40).applyTo(
+            group);
 
         labelIdEdmoRespCdi = new Label(group, SWT.NONE);
         labelIdEdmoRespCdi.setFont(Utils.font08);
@@ -722,14 +734,15 @@ public class OptionsAction extends Action implements ISelectionListener,
     /**
      * This method initializes groupCDI
      */
-    private void createGroupCDI()
+    private void createGroupCDI(Composite parent)
     {
-        group = new Group(top, SWT.NONE);
+        group = new Group(parent, SWT.NONE);
         group.setFont(Utils.font08);
         group.setText(Messages.settings_cdi);
         GridLayoutFactory.fillDefaults().margins(4, 4).numColumns(2).applyTo(
             group);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
+        GridDataFactory.fillDefaults().grab(true, false).hint(600, 300)
+            .applyTo(group);
 
         // compo vide pour mise en forme
         lblCDI = new Label(group, SWT.NONE);
@@ -827,12 +840,13 @@ public class OptionsAction extends Action implements ISelectionListener,
     /**
      * This method initializes compoBas
      */
-    private void createCompoBas()
+    private void createCompoBas(Composite parent)
     {
-        compo = new Composite(top, SWT.NONE);
-
+        compo = new Composite(parent, SWT.NONE);
+        compo.setFont(Utils.font08);
         GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(compo);
+        GridDataFactory.fillDefaults().grab(true, false).hint(600, 100)
+            .applyTo(compo);
 
         createGroupMapping(compo);
         createGroupDateODV(compo);
@@ -846,6 +860,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         group = new Group(parent, SWT.NONE);
         group.setFont(Utils.font08);
         group.setText(Messages.settings_mapping);
+        group.setFont(Utils.font08);
         GridLayoutFactory.fillDefaults().margins(4, 4).applyTo(group);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
 
@@ -865,6 +880,7 @@ public class OptionsAction extends Action implements ISelectionListener,
             });
 
         compo01 = new Composite(group, SWT.NULL);
+        compo01.setFont(Utils.font08);
         GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo01);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(compo01);
 
@@ -875,7 +891,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
         textFichierMapping = new Text(compo01, SWT.BORDER);
         textFichierMapping.setFont(Utils.font08);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(
+        GridDataFactory.fillDefaults().grab(true, false).hint(50, 12).applyTo(
             textFichierMapping);
     }
 
@@ -926,13 +942,14 @@ public class OptionsAction extends Action implements ISelectionListener,
     /**
      * This method initializes groupFlag
      */
-    private void createGroupFlag()
+    private void createGroupFlag(Composite parent)
     {
-        group = new Group(top, SWT.NONE);
+        group = new Group(parent, SWT.NONE);
         group.setFont(Utils.font08);
         group.setText(Messages.settings_flags);
         GridLayoutFactory.fillDefaults().numColumns(2).applyTo(group);
-        GridDataFactory.fillDefaults().grab(true, true).applyTo(group);
+        GridDataFactory.fillDefaults().grab(true, true).hint(600, 100).applyTo(
+            group);
 
         // Creation du tableau des tables de correspondaces
         createTableFlagTable(group);
@@ -944,13 +961,16 @@ public class OptionsAction extends Action implements ISelectionListener,
     /**
      * This method initializes groupTop3
      */
-    private void createCompoBouton()
+    private void createCompoBouton(Composite parent)
     {
-        compo = new Composite(top, SWT.NONE);
+        compo = new Composite(parent, SWT.NONE);
+        compo.setFont(Utils.font08);
         GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(compo);
+        GridDataFactory.fillDefaults().grab(true, false).hint(600, 30).applyTo(
+            compo);
 
         compo01 = new Composite(compo, SWT.NONE);
+        compo01.setFont(Utils.font08);
         GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compo01);
         GridDataFactory.fillDefaults().grab(true, false).align(SWT.LEFT,
             SWT.CENTER).applyTo(compo01);
@@ -961,6 +981,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         buttonRestore.pack();
 
         compo02 = new Composite(compo, SWT.NONE);
+        compo02.setFont(Utils.font08);
         GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo02);
         GridDataFactory.fillDefaults().grab(true, false).align(SWT.RIGHT,
             SWT.CENTER).applyTo(compo02);
@@ -1295,22 +1316,35 @@ public class OptionsAction extends Action implements ISelectionListener,
 
     public void createPartControl(Composite parent)
     {
+        // top = parent;
 
-        top = new Composite(parent, SWT.NONE);
+        parent.setLayout(new FillLayout());
 
-        GridLayoutFactory.fillDefaults().applyTo(top);
-        GridDataFactory.fillDefaults().grab(true, true).applyTo(top);
+        FormToolkit toolkitOption = new FormToolkit(parent.getDisplay());
+        toolkitOption.setBackground(parent.getBackground());
+        ScrolledForm formOption = toolkitOption.createScrolledForm(parent);
+        formOption.setBackground(parent.getBackground());
+        formOption.setFont(Utils.font08);
+        formOption.getBody().setLayout(new GridLayout());
+
+        // top = new Composite(formOption.getBody(), SWT.NONE);
+        // top.setFont(Utils.font08);
+
+        // top = formOption.getBody();
+
+        // GridLayoutFactory.fillDefaults().applyTo(top);
+        // GridDataFactory.fillDefaults().grab(false, true).applyTo(top);
 
         /*
          * createGroupLangue(); createGroupDossier();
          */
-        createCompoHaut();
-        createGroupWS();
-        createGroupEdmo();
-        createGroupCDI();
-        createCompoBas();
-        createGroupFlag();
-        createCompoBouton();
+        createCompoHaut(formOption.getBody());
+        createGroupWS(formOption.getBody());
+        createGroupEdmo(formOption.getBody());
+        createGroupCDI(formOption.getBody());
+        createCompoBas(formOption.getBody());
+        createGroupFlag(formOption.getBody());
+        createCompoBouton(formOption.getBody());
 
         // listener cancel
         buttonCancel

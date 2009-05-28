@@ -8,7 +8,6 @@ import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
@@ -23,6 +22,8 @@ import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.part.ViewPart;
 
 import fr.ifremer.nemo.ui.ApplicationWorkbenchWindowAdvisor;
@@ -63,7 +64,7 @@ public class ViewFile extends ViewPart
 
     public static Composite composite4 = null;
 
-    private Composite composite11 = null;
+    // private final Composite composite11 = null;
 
     private Composite composite12 = null;
 
@@ -137,6 +138,7 @@ public class ViewFile extends ViewPart
     {
         // 
         top = new Composite(parent, SWT.NONE);
+        // top.setFont(Utils.font08);
         top.setLayout(new FillLayout());
 
         // invalidation de chaque etape
@@ -171,11 +173,11 @@ public class ViewFile extends ViewPart
 
     /**
      * This method initializes tabFolder
-     * 
      */
     private void createTabFolder()
     {
         tabFolder = new TabFolder(top, SWT.NONE);
+        // tabFolder.setFont(Utils.font08);
         createComposite1();
         createComposite2();
         createComposite3();
@@ -219,7 +221,7 @@ public class ViewFile extends ViewPart
         tabItem2.setText(Messages.onglet_station);
         tabItem2.setControl(composite3);
         tabItem3 = new TabItem(tabFolder, SWT.NONE);
-        tabItem3.setText(Messages.onglet_data); 
+        tabItem3.setText(Messages.onglet_data);
         tabItem3.setControl(composite4);
         tabItem9 = new TabItem(tabFolder, SWT.NONE);
         tabItem9.setText(Messages.onglet_convert);
@@ -228,11 +230,11 @@ public class ViewFile extends ViewPart
 
     /**
      * This method initializes composite1
-     * 
      */
     private void createComposite1()
     {
         composite1 = new Composite(tabFolder, SWT.NONE);
+        // composite1.setFont(Utils.font08);
         composite1.setLayout(new FillLayout(SWT.VERTICAL));
 
         createComposite12();
@@ -242,11 +244,11 @@ public class ViewFile extends ViewPart
 
     /**
      * This method initializes composite2
-     * 
      */
     private void createComposite2()
     {
         composite2 = new Composite(tabFolder, SWT.NONE);
+        // composite2.setFont(Utils.font08);
         composite2.setLayout(new FillLayout());
         styledTextCampagne =
             new StyledText(composite2, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL
@@ -256,11 +258,11 @@ public class ViewFile extends ViewPart
 
     /**
      * This method initializes composite3
-     * 
      */
     private void createComposite3()
     {
         composite3 = new Composite(tabFolder, SWT.NONE);
+        // composite3.setFont(Utils.font08);
         composite3.setLayout(new FillLayout());
         styledTextStation =
             new StyledText(composite3, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL
@@ -270,11 +272,11 @@ public class ViewFile extends ViewPart
 
     /**
      * This method initializes composite4
-     * 
      */
     private void createComposite4()
     {
         composite4 = new Composite(tabFolder, SWT.NONE);
+        // composite4.setFont(Utils.font08);
         composite4.setLayout(new FillLayout(SWT.VERTICAL));
         styledTextData =
             new StyledText(composite4, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL
@@ -285,43 +287,57 @@ public class ViewFile extends ViewPart
 
     /**
      * This method initializes composite11
-     * 
      */
     private void createComposite11()
     {
 
-        GridData gridData = new GridData();
-        gridData.verticalSpan = 2;
-        GridLayout gridLayout = new GridLayout();
-        gridLayout.numColumns = 1;
-        composite11 = new Composite(composite1, SWT.NONE);
-        composite11.setLayout(gridLayout);
+// GridData gridData = new GridData();
+// gridData.verticalSpan = 2;
+// GridLayout gridLayout = new GridLayout();
+// gridLayout.numColumns = 1;
+// composite11 = new Composite(composite1, SWT.NONE);
+// composite11.setFont(Utils.font08);
+// composite11.setLayout(gridLayout);
 
-        compositeChoixFichier = new Composite(composite11, SWT.NONE);
+        FormToolkit toolkitViewFile = new FormToolkit(composite1.getDisplay());
+        toolkitViewFile.setBackground(composite1.getBackground());
+        ScrolledForm formViewFile =
+            toolkitViewFile.createScrolledForm(composite1);
+        formViewFile.setBackground(composite1.getBackground());
+        formViewFile.setFont(Utils.font08);
+        formViewFile.getBody().setLayout(new GridLayout());
+
+        compositeChoixFichier = new Composite(formViewFile.getBody(), SWT.NONE);
+        // compositeChoixFichier.setFont(Utils.font08);
         GridLayoutFactory.fillDefaults().numColumns(2).applyTo(
             compositeChoixFichier);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(
             compositeChoixFichier);
 
         labelCampagne = new Label(compositeChoixFichier, SWT.NONE);
-        labelCampagne
-            .setText(Messages.view_file_processCruise + "           "); //$NON-NLS-1$
+        // labelCampagne.setFont(Utils.font08);
+        labelCampagne.setText(Messages.view_file_processCruise + "           "); //$NON-NLS-1$
 
         labelCollection = new Label(compositeChoixFichier, SWT.NONE);
+        // labelCollection.setFont(Utils.font08);
         labelCollection.setText(Messages.view_file_processCollection);
 
         radioFichier = new Button(compositeChoixFichier, SWT.RADIO);
+        // radioFichier.setFont(Utils.font08);
         radioFichier.setSelection(true);
         radioFichier.setText(Messages.view_file_cruiseFile);
 
         radioCollectCas1 = new Button(compositeChoixFichier, SWT.RADIO);
+        // radioCollectCas1.setFont(Utils.font08);
         radioCollectCas1.setText(Messages.view_file_collectionCas1);
 
         radioDossier = new Button(compositeChoixFichier, SWT.RADIO);
-        radioDossier.setText(Messages.view_file_cruiseDir); 
+        // radioDossier.setFont(Utils.font08);
+        radioDossier.setText(Messages.view_file_cruiseDir);
 
         radioCollectCasN = new Button(compositeChoixFichier, SWT.RADIO);
-        radioCollectCasN.setText(Messages.view_file_collectionCasN); 
+        // radioCollectCasN.setFont(Utils.font08);
+        radioCollectCasN.setText(Messages.view_file_collectionCasN);
 
         radioFichier
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -364,8 +380,9 @@ public class ViewFile extends ViewPart
             });
 
         // FAE 0001140 : deplacement du bouton Parcourir
-        buttonParcourir = new Button(composite11, SWT.NONE);
-        buttonParcourir.setText(Messages.button_browse); 
+        buttonParcourir = new Button(formViewFile.getBody(), SWT.NONE);
+        // buttonParcourir.setFont(Utils.font08);
+        buttonParcourir.setText(Messages.button_browse);
 
         buttonParcourir
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -376,58 +393,81 @@ public class ViewFile extends ViewPart
                     // reinitialisation de la conversion et de l'affichage
                     init();
 
-                    if (radioFichier.getSelection()){
+                    if (radioFichier.getSelection())
+                    {
                         // si fichier campagne
-                        
+
                         // reactivation de l'onglet campagne
                         enableCruise(true);
 
-                        Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+                        Shell shell =
+                            PlatformUI.getWorkbench().getDisplay()
+                                .getActiveShell();
 
-                        FileDialog dialog = new FileDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
-                        dialog.setFilterPath(Utils.configuration.getCruisesDirectory());
+                        FileDialog dialog =
+                            new FileDialog(shell, SWT.OPEN
+                                    | SWT.APPLICATION_MODAL);
+                        dialog.setFilterPath(Utils.configuration
+                            .getCruisesDirectory());
                         nomFichier = dialog.open();
-                        
-                        if (nomFichier != null) {
+
+                        if (nomFichier != null)
+                        {
 
                             fileLoaded = true;
-                            nomRepertoire = new File(nomFichier).getParent() + File.separator;
+                            nomRepertoire =
+                                new File(nomFichier).getParent()
+                                        + File.separator;
 
-                            try{
+                            try
+                            {
                                 // affichage du corps du fichier
-                                Utils.insertTextFich(nomFichier, styledTextCampagne, true);
+                                Utils.insertTextFich(nomFichier,
+                                    styledTextCampagne, true);
                                 textAreaDescription.setText(Utils.texteBrut);
 
                                 // affichage etape0 dans formulaire d'edition
                                 EditDesc.affichageEdition();
                             }
-                            catch (IOException e1){
-                                ViewLog.styledTextLogErreurs.setText(Messages.error);
+                            catch (IOException e1)
+                            {
+                                ViewLog.styledTextLogErreurs
+                                    .setText(Messages.error);
                                 e1.printStackTrace();
                             }
                         }
-                        else{
-                            ViewLog.styledTextLogErreurs.setText(Messages.error_file_selectFile);
+                        else
+                        {
+                            ViewLog.styledTextLogErreurs
+                                .setText(Messages.error_file_selectFile);
                         }
                     }
-                    else if (radioDossier.getSelection()){
+                    else if (radioDossier.getSelection())
+                    {
                         // si dossier campagne
-                        
+
                         dossierCampagne = true;
 
                         // reactivation de l'onglet campagne
                         enableCruise(true);
-                        
-                        Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
-                        
-                        DirectoryDialog dialog = new DirectoryDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
-                        dialog.setFilterPath(Utils.configuration.getCruisesDirectory()); 
+
+                        Shell shell =
+                            PlatformUI.getWorkbench().getDisplay()
+                                .getActiveShell();
+
+                        DirectoryDialog dialog =
+                            new DirectoryDialog(shell, SWT.OPEN
+                                    | SWT.APPLICATION_MODAL);
+                        dialog.setFilterPath(Utils.configuration
+                            .getCruisesDirectory());
                         nomRepertoire = dialog.open();
-                        
-                        if (nomRepertoire != null){
+
+                        if (nomRepertoire != null)
+                        {
                             fileLoaded = true;
 
-                            if (Utils.findFiles(nomRepertoire, true)){
+                            if (Utils.findFiles(nomRepertoire, true))
+                            {
                                 // affichage du corps du fichier
                                 textAreaDescription.setText(Utils.texteBrut);
 
@@ -435,120 +475,148 @@ public class ViewFile extends ViewPart
                                 EditDesc.affichageEdition();
                             }
                         }
-                        else{
-                            ViewLog.styledTextLogErreurs.setText(Messages.error_file_selectDir); 
+                        else
+                        {
+                            ViewLog.styledTextLogErreurs
+                                .setText(Messages.error_file_selectDir);
                         }
                     }
-                    else if (radioCollectCas1.getSelection()){
+                    else if (radioCollectCas1.getSelection())
+                    {
 
                         dossierCampagne = true;
                         collectionCas1 = true;
 
                         // desactivation de l'onglet campagne
                         enableCruise(false);
-                        
-                        Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
-                        
-                        DirectoryDialog dialog = new DirectoryDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
-                        dialog.setFilterPath(Utils.configuration.getCruisesDirectory());
+
+                        Shell shell =
+                            PlatformUI.getWorkbench().getDisplay()
+                                .getActiveShell();
+
+                        DirectoryDialog dialog =
+                            new DirectoryDialog(shell, SWT.OPEN
+                                    | SWT.APPLICATION_MODAL);
+                        dialog.setFilterPath(Utils.configuration
+                            .getCruisesDirectory());
                         nomRepertoire = dialog.open();
-                        
-                        if (nomRepertoire != null){
+
+                        if (nomRepertoire != null)
+                        {
                             fileLoaded = true;
 
-                            if (Utils.findFilesCollectCas1(nomRepertoire, false)){
+                            if (Utils
+                                .findFilesCollectCas1(nomRepertoire, false))
+                            {
                                 // affichage du corps du fichier
                                 textAreaDescription.setText(Utils.texteBrut);
 
                                 // affichage etape0 dans formulaire d'edition
                                 EditDesc.affichageEdition();
-                                
+
                                 // dans le cas d'une collection, on ne peut
                                 // generer que le format ODV
                                 enableCollectionMedatlas(false);
                             }
                         }
-                        else{
-                            ViewLog.styledTextLogErreurs.setText(Messages.error_file_selectDir);
+                        else
+                        {
+                            ViewLog.styledTextLogErreurs
+                                .setText(Messages.error_file_selectDir);
                         }
                     }
-                    else if (radioCollectCasN.getSelection()){
+                    else if (radioCollectCasN.getSelection())
+                    {
 
                         collectionCasN = true;
 
                         // desactivation de l'onglet campagne
                         enableCruise(false);
-                        
-                        Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
-                        
-                        DirectoryDialog dialog = new DirectoryDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
-                        dialog.setFilterPath(Utils.configuration.getCruisesDirectory());
+
+                        Shell shell =
+                            PlatformUI.getWorkbench().getDisplay()
+                                .getActiveShell();
+
+                        DirectoryDialog dialog =
+                            new DirectoryDialog(shell, SWT.OPEN
+                                    | SWT.APPLICATION_MODAL);
+                        dialog.setFilterPath(Utils.configuration
+                            .getCruisesDirectory());
                         nomRepertoire = dialog.open();
-                        
-                        if (nomRepertoire != null){
+
+                        if (nomRepertoire != null)
+                        {
                             fileLoaded = true;
 
-                            if (Utils.findFiles(nomRepertoire, true)){
+                            if (Utils.findFiles(nomRepertoire, true))
+                            {
                                 // affichage du corps du fichier
                                 textAreaDescription.setText(Utils.texteBrut);
 
                                 // affichage etape0 dans formulaire d'edition
                                 EditDesc.affichageEdition();
-                                
+
                                 // dans le cas d'une collection, on ne peut
                                 // generer que le format ODV
                                 enableCollectionMedatlas(false);
                                 radMonoFichier.setEnabled(false); // FAE 0001134
                             }
                         }
-                        else{
-                            ViewLog.styledTextLogErreurs.setText(Messages.error_file_selectDir); 
+                        else
+                        {
+                            ViewLog.styledTextLogErreurs
+                                .setText(Messages.error_file_selectDir);
                         }
                     }
                 }
             });
 
-        createGroupeSeparateur();
+        createGroupeSeparateur(formViewFile.getBody());
 
-        createGroupeFichier();
+        createGroupeFichier(formViewFile.getBody());
     }
-    
-    protected void enableCruise(boolean enabled){
-        if (enabled){
-            if (tabItem1.isDisposed()){                
+
+    protected void enableCruise(boolean enabled)
+    {
+        if (enabled)
+        {
+            if (tabItem1.isDisposed())
+            {
                 tabItem1 = new TabItem(tabFolder, SWT.NONE, 1);
-                tabItem1.setText(Messages.onglet_cruise); 
-                tabItem1.setControl(composite2); 
+                tabItem1.setText(Messages.onglet_cruise);
+                tabItem1.setControl(composite2);
             }
         }
-        else{
+        else
+        {
             tabItem1.dispose();
         }
     }
-    
-    protected void init(){
-        
+
+    protected void init()
+    {
+
         // reinitialisation de la conversion
         if (DataModel.inputModel != null)
             DataModel.reset();
 
         fileLoaded = false;
         Preformat.setPreformat(false);
-        
+
         // reinitialisation de l'affichage
         // --- les formulaires
-        Utils.razGlobal();       
+        Utils.razGlobal();
         EditDesc.loaded = false;
         // --- renitialisation du tableau de paramètres (onglet Data)
-        if (tableData != null) TableData.go();
+        if (tableData != null)
+            TableData.go();
         // --- le titre de l'application
-        ApplicationWorkbenchWindowAdvisor.configurer_titre.setTitle(Intern.application_title);
+        ApplicationWorkbenchWindowAdvisor.configurer_titre
+            .setTitle(Intern.application_title);
         // --- le contenu du fichier
         textAreaDescription.setText(Global.EMPTY_STRING);
         // --- l'onglet d'erreur
         Utils.messageErreur(Global.EMPTY_STRING);
-        
-        
 
         // on rend sélectionnables les radios ODV et Medatlas dans
         // l'onglet Conversion
@@ -561,7 +629,7 @@ public class ViewFile extends ViewPart
         radMonoFichier.setEnabled(true);
         radMonoFichier.setSelection(false);
         afficheGrpODV();
-        
+
         enableChoice(true);
         // reinitialisation des selections
         chkSeparateur.setSelection(false);
@@ -580,11 +648,11 @@ public class ViewFile extends ViewPart
 
     /**
      * This method initializes composite12
-     * 
      */
     private void createComposite12()
     {
         composite12 = new Composite(composite1, SWT.NONE);
+        // composite12.setFont(Utils.font08);
         composite12.setLayout(new FillLayout());
         textAreaDescription =
             new StyledText(composite12, SWT.MULTI | SWT.READ_ONLY
@@ -595,11 +663,11 @@ public class ViewFile extends ViewPart
 
     /**
      * This method initializes composite14
-     * 
      */
     private void createComposite14()
     {
         compositeConversion = new Composite(tabFolder, SWT.NONE);
+        // compositeConversion.setFont(Utils.font08);
         GridLayout layout = new GridLayout();
         layout.numColumns = 2;
         compositeConversion.setLayout(layout);
@@ -608,34 +676,43 @@ public class ViewFile extends ViewPart
         layout.numColumns = 2;
 
         Group group = new Group(compositeConversion, SWT.NONE);
-        group.setText(Messages.view_convert_title); 
+        // group.setFont(Utils.font08);
+        group.setText(Messages.view_convert_title);
         group.setLayout(layout);
 
         radMedatlas = new Button(group, SWT.RADIO);
-        radMedatlas.setText(Conversion.MEDATLAS.getName()); 
+        // radMedatlas.setFont(Utils.font08);
+        radMedatlas.setText(Conversion.MEDATLAS.getName());
         radMedatlas.setSelection(true);
 
         // Composite vide pour mise en page
         Composite compoVide1 = new Composite(group, SWT.NONE);
+        // compoVide1.setFont(Utils.font08);
 
         radODV = new Button(group, SWT.RADIO);
+        // radODV.setFont(Utils.font08);
         radODV.setText(Conversion.ODV.getName());
         radODV.setSelection(false);
 
         grpODV = new Group(group, SWT.NONE);
+        // grpODV.setFont(Utils.font08);
         grpODV.setLayout(layout2);
         afficheGrpODV();
 
         radMonoStation = new Button(grpODV, SWT.RADIO);
+        // radMonoStation.setFont(Utils.font08);
         radMonoStation.setText(Messages.view_convert_monoStation);
         radMonoStation.setSelection(true);
         radMonoFichier = new Button(grpODV, SWT.RADIO);
+        // radMonoFichier.setFont(Utils.font08);
         radMonoFichier.setText(Messages.view_convert_monoFichier);
 
         // Composite vide pour mise en page
         Composite compoVide2 = new Composite(compositeConversion, SWT.NONE);
+        // compoVide2.setFont(Utils.font08);
 
         chkForcerTri = new Button(compositeConversion, SWT.CHECK);
+        // chkForcerTri.setFont(Utils.font08);
         chkForcerTri.setText(Messages.view_convert_sort);
 
         chkForcerTri
@@ -675,22 +752,25 @@ public class ViewFile extends ViewPart
 
     /**
      * This method initializes groupFichier
-     * 
      */
-    private void createGroupeFichier()
+    private void createGroupeFichier(Composite parent)
     {
-        grpFichier = new Group(composite11, SWT.NONE);
+        grpFichier = new Group(parent, SWT.NONE);
+        // grpFichier.setFont(Utils.font08);
         grpFichier.setText(Messages.view_file_fileType);
         GridLayoutFactory.fillDefaults().applyTo(grpFichier);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(grpFichier);
 
         radProfilVertical = new Button(grpFichier, SWT.RADIO);
+        // radProfilVertical.setFont(Utils.font08);
         radProfilVertical.setText(Messages.typeFile_profile);
 
         radSerieTempo = new Button(grpFichier, SWT.RADIO);
+        // radSerieTempo.setFont(Utils.font08);
         radSerieTempo.setText(Messages.typeFile_timeseries);
 
         radTrajectoire = new Button(grpFichier, SWT.RADIO);
+        // radTrajectoire.setFont(Utils.font08);
         radTrajectoire.setText(Messages.typeFile_trajectory);
 
         // Selection du type par defaut
@@ -700,39 +780,51 @@ public class ViewFile extends ViewPart
     private void createCompositeData(Composite compo)
     {
         compositeData = new Composite(compo, SWT.NONE);
+        // compositeData.setFont(Utils.font08);
         compositeData.setLayout(new FillLayout());
     }
 
-    private void createGroupeSeparateur()
+    private void createGroupeSeparateur(Composite parent)
     {
-        grpSeparateur = new Group(composite11, SWT.NONE);
+        grpSeparateur = new Group(parent, SWT.NONE);
+        // grpSeparateur.setFont(Utils.font08);
         GridLayoutFactory.fillDefaults().applyTo(grpSeparateur);
         GridDataFactory.fillDefaults().grab(false, false)
             .applyTo(grpSeparateur);
 
         chkSeparateur = new Button(grpSeparateur, SWT.CHECK);
+        // chkSeparateur.setFont(Utils.font08);
         chkSeparateur.setText(Messages.view_file_separator);
 
         compositeSeparateur = new Composite(grpSeparateur, SWT.NONE);
-        GridLayoutFactory.fillDefaults().numColumns(3).applyTo(compositeSeparateur);
-        GridDataFactory.fillDefaults().grab(false, false).applyTo(compositeSeparateur);
+        // compositeSeparateur.setFont(Utils.font08);
+        GridLayoutFactory.fillDefaults().numColumns(3).applyTo(
+            compositeSeparateur);
+        GridDataFactory.fillDefaults().grab(false, false).applyTo(
+            compositeSeparateur);
 
         radioTabulation = new Button(compositeSeparateur, SWT.RADIO);
+        // radioTabulation.setFont(Utils.font08);
         radioTabulation.setText(Messages.view_file_sepTab);
         radioTabulation.setSelection(true);
 
         radioPointVirgule = new Button(compositeSeparateur, SWT.RADIO);
-        radioPointVirgule.setText(Messages.view_file_sepSemi); 
+        // radioPointVirgule.setFont(Utils.font08);
+        radioPointVirgule.setText(Messages.view_file_sepSemi);
 
         radioVirgule = new Button(compositeSeparateur, SWT.RADIO);
-        radioVirgule.setText(Messages.view_file_sepComma); 
+        // radioVirgule.setFont(Utils.font08);
+        radioVirgule.setText(Messages.view_file_sepComma);
 
         radioEspace = new Button(compositeSeparateur, SWT.RADIO);
-        radioEspace.setText(Messages.view_file_sepSpace); 
+        // radioEspace.setFont(Utils.font08);
+        radioEspace.setText(Messages.view_file_sepSpace);
 
         radioSeparateurAutre = new Button(compositeSeparateur, SWT.RADIO);
-        radioSeparateurAutre.setText(Messages.view_file_sepOther); 
+        // radioSeparateurAutre.setFont(Utils.font08);
+        radioSeparateurAutre.setText(Messages.view_file_sepOther);
         textSeparateur = new Text(compositeSeparateur, SWT.BORDER);
+        // textSeparateur.setFont(Utils.font08);
 
         // Par defaut
         compositeSeparateur.setVisible(false);
@@ -780,17 +872,18 @@ public class ViewFile extends ViewPart
     {
         grpODV.setVisible(radODV.getSelection());
     }
-    
+
     public static void enableMedatlas(boolean enable)
     {
-        if (!isCollection()){
+        if (!isCollection())
+        {
             radMedatlas.setEnabled(enable);
             radMedatlas.setSelection(enable);
             radODV.setSelection(!enable);
             afficheGrpODV();
         }
     }
-    
+
     public static void enableCollectionMedatlas(boolean enable)
     {
         radMedatlas.setEnabled(enable);
@@ -798,15 +891,17 @@ public class ViewFile extends ViewPart
         radODV.setSelection(!enable);
         afficheGrpODV();
     }
-    
-    public static void enableChoice(boolean enabled){
-        //grpFichier.setEnabled(enabled);
+
+    public static void enableChoice(boolean enabled)
+    {
+        // grpFichier.setEnabled(enabled);
         radProfilVertical.setEnabled(enabled);
         radSerieTempo.setEnabled(enabled);
         radTrajectoire.setEnabled(enabled);
-        
-        if (chkSeparateur.getSelection()){
-            //grpSeparateur.setEnabled(enabled);
+
+        if (chkSeparateur.getSelection())
+        {
+            // grpSeparateur.setEnabled(enabled);
             chkSeparateur.setEnabled(enabled);
             radioTabulation.setEnabled(enabled);
             radioPointVirgule.setEnabled(enabled);
@@ -816,20 +911,24 @@ public class ViewFile extends ViewPart
             textSeparateur.setEnabled(enabled);
         }
     }
-    
-    public static void selectTypeFile(String typeFile){
 
-        if (Global.PROFILE.equals(typeFile)){
+    public static void selectTypeFile(String typeFile)
+    {
+
+        if (Global.PROFILE.equals(typeFile))
+        {
             radProfilVertical.setSelection(true);
             radSerieTempo.setSelection(false);
             radTrajectoire.setSelection(false);
         }
-        else if (Global.TIMESERIES.equals(typeFile)){
+        else if (Global.TIMESERIES.equals(typeFile))
+        {
             radSerieTempo.setSelection(true);
             radProfilVertical.setSelection(false);
             radTrajectoire.setSelection(false);
         }
-        else if (Global.TRAJECTORY.equals(typeFile)){
+        else if (Global.TRAJECTORY.equals(typeFile))
+        {
             radProfilVertical.setSelection(false);
             radSerieTempo.setSelection(false);
             radTrajectoire.setSelection(true);
