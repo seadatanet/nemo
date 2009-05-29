@@ -7,12 +7,10 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.part.ViewPart;
 
-import fr.ifremer.nemo.ui.Utils;
-
 public class ViewEdit extends ViewPart
 {
 
-    public static final String ID = "fr.ifremer.nemo.ui.ViewEdit";
+    public static final String ID = "fr.ifremer.nemo.ui.ViewEdit"; //$NON-NLS-1$
 
     public static Composite top;
 
@@ -34,7 +32,6 @@ public class ViewEdit extends ViewPart
         toolkitEdition = new FormToolkit(parent.getDisplay());
 
         formEdition = toolkitEdition.createScrolledForm(parent);
-        formEdition.setFont(Utils.font14);
 
         background = formEdition.getBody().getBackground();
 

@@ -124,11 +124,6 @@ public class EditSurvey
             DataModel.fillSurvey();
             filled = true;
         }
-        else
-        {
-            // Utils.selectComboCode(EditSurvey.comboDataCentres,
-            // Utils.configuration.getDataCenter());
-        }
 
         formEdition.redraw();
         formEdition.reflow(true);

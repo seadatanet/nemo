@@ -13,7 +13,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
-import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.NemoSection;
 import fr.ifremer.nemo.util.Global;
@@ -54,23 +53,6 @@ public class FileSection extends NemoSection
         setter.draw(compo, filled);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void fillFromModel(StationModel stationModel)
-    {
-        // Auto-generated method stub
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void initModel(StationModel stationModel)
-    {
-        // Auto-generated method stub
-    }
 
     /**
      * {@inheritDoc}

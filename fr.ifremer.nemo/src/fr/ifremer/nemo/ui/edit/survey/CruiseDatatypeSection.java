@@ -12,13 +12,15 @@ import java.util.ArrayList;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 
-import fr.ifremer.nemo.input.StationModel;
+import fr.ifremer.nemo.domain.DataType;
+import fr.ifremer.nemo.domain.Survey;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.NemoSection;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 /**
- * Description: TODO
+ * Description: objet graphique représentant la section "Type de données" dans l'onglet Campagne
  * 
  * @author dboulang
  */
@@ -35,6 +37,7 @@ public class CruiseDatatypeSection extends NemoSection
             String description)
     {
         super(shell, name, title, description);
+        TableDataSurvey.go(shell);
     }
 
     /**
@@ -52,27 +55,76 @@ public class CruiseDatatypeSection extends NemoSection
     @Override
     protected void drawSection(Composite parent, boolean filled)
     {
-        TableDataSurvey.go(parent);
+        TableDataSurvey.tableTypeSurvey.setParent(parent);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void fillFromModel(StationModel stationModel)
+
+    public void fillFromModel(Survey survey)
     {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Not Implemented !");
+        DataType[] dataTypes = survey.getDataTypes();
+        int taille = dataTypes.length;
+
+        for (int i = 0; i < taille; i++)
+        {
+            TypeSurvey typeSurvey = new TypeSurvey();
+            typeSurvey.setCode(dataTypes[i].getCode());
+            typeSurvey.setNombre(dataTypes[i].getNumberOfProfiles());
+
+            // QC
+            if (dataTypes[i].isQc())
+            {
+                typeSurvey.setQc(Global.YES);
+            }
+            else
+            {
+                typeSurvey.setQc(Global.NO);
+            }
+
+            typeSurvey.setSensor(dataTypes[i].isSensor());
+
+            TableDataSurvey.types.add(typeSurvey);
+        }
+
+        //EditSurvey.razEdition();
+        //EditSurvey.DrawingBack();
+
+        // ////////////////////////////////////////
+        // refresh de la liste des dataTypes
+        TableDataSurvey.majIHM();
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void initModel(StationModel stationModel)
+
+    public void initModel(Survey survey)
     {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Not Implemented !");
+        // remplissage de la liste des dataTypes de la campagne
+        // parcours de la liste des dataTypes de l'IHM et creation d'un DataType
+        // e chaque fois
+        int taille = TableDataSurvey.types.size();
+
+        // reset préventif des dataTypes
+        survey.releaseDataTypes();
+
+        for (int i = 0; i < taille; i++)
+        {
+            TypeSurvey typeSurvey = TableDataSurvey.types.get(i);
+            DataType dataType = new DataType();
+            dataType.setCode(typeSurvey.getCode());
+            dataType.setNumberOfProfiles(typeSurvey.getNombre());
+
+            if (typeSurvey.getQc().equals(Global.YES))
+            {
+                dataType.setQc(true);
+            }
+            else
+            {
+                dataType.setQc(false);
+            }
+            dataType.setSensor(typeSurvey.getSensor());
+
+            // test par rapport aux types deja presents dans le DataModel
+            // si l'etape a deje ete validee
+            survey.addDataType(dataType);
+        }
     }
 
     /**

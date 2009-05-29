@@ -29,89 +29,81 @@ public class Drawing
 
     public static Composite sectionClientType;
 
-    public static void sectionLabelTextInjectNbreLignes(ScrolledForm form,
-            String nomSection, String description, Section section, Text manuel)
-    {
-        // creation d'une section simple avec 1 label description et une zone de
-        // texte
-
-        final Text manu;
-        final ScrolledForm forme;
-        forme = form;
-        manu = manuel;
-
-        section.setParent(form);
-        section =
-            ViewEdit.toolkitEdition.createSection(form.getBody(),
-                Section.DESCRIPTION | Section.TITLE_BAR | Section.TWISTIE
-                        | Section.COMPACT);
-
-        section.addExpansionListener(new ExpansionAdapter() {
-            @Override
-            public void expansionStateChanged(ExpansionEvent e)
-            {
-                forme.reflow(true);
-            }
-        });
-
-        section.setFont(Utils.fontCourier);
-        section.setText(nomSection);
-        section.setDescription(description);
-        Composite sectionClient =
-            ViewEdit.toolkitEdition.createComposite(section);
-        GridLayout grid = new GridLayout();
-        // grid.numColumns = 1;
-
-        sectionClient.setLayout(grid);
-
-        // label avec le texte de "description"
-        Label label1 = new Label(section, SWT.NULL);
-        label1.setBackground(ViewEdit.background);
-        label1.setText(description);
-
-        // zone d'edition
-        manuel.setParent(sectionClient);
-        manuel.setBackground(ViewEdit.background);
-        manuel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-
-        // bouton d'injection de la position des valeurs
-        Button buttonInject = new Button(sectionClient, SWT.NONE);
-        buttonInject.setBackground(ViewEdit.background);
-        buttonInject.setText(Messages.button_set);
-
-        section.setClient(sectionClient);
-        // listener bouton inject
-        buttonInject
-            .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-                @Override
-                public void widgetSelected(
-                        org.eclipse.swt.events.SelectionEvent h)
-                {
-
-                    Utils.injectNbreLignes(manu, ViewFile.textAreaDescription);
-
-                }
-            });
-
-        section.pack();
-
-        // ajout de la section dans la liste des sections de description
-        ajoutSectionDansListeDesc(section);
-
-    }
-
-    public static void ajoutSectionDansListeDesc(Section section)
-    {
-
-        // EditDesc.listeSectionsDesc.add(section);
-        // System.out.println("ajout section ok");
-
-    }
+//    public static void sectionLabelTextInjectNbreLignes(ScrolledForm form,
+//            String nomSection, String description, Section section, Text manuel)
+//    {
+//        // creation d'une section simple avec 1 label description et une zone de
+//        // texte
+//
+//        final Text manu;
+//        final ScrolledForm forme;
+//        forme = form;
+//        manu = manuel;
+//
+//        section.setParent(form);
+//        section =
+//            ViewEdit.toolkitEdition.createSection(form.getBody(),
+//                Section.DESCRIPTION | Section.TITLE_BAR | Section.TWISTIE
+//                        | Section.COMPACT);
+//
+//        section.addExpansionListener(new ExpansionAdapter() {
+//            @Override
+//            public void expansionStateChanged(ExpansionEvent e)
+//            {
+//                forme.reflow(true);
+//            }
+//        });
+//
+//        section.setFont(Utils.fontCourier);
+//        section.setText(nomSection);
+//        section.setDescription(description);
+//        Composite sectionClient =
+//            ViewEdit.toolkitEdition.createComposite(section);
+//        GridLayout grid = new GridLayout();
+//        // grid.numColumns = 1;
+//
+//        sectionClient.setLayout(grid);
+//
+//        // label avec le texte de "description"
+//        Label label1 = new Label(section, SWT.NULL);
+//        label1.setBackground(ViewEdit.background);
+//        label1.setText(description);
+//
+//        // zone d'edition
+//        manuel.setParent(sectionClient);
+//        manuel.setBackground(ViewEdit.background);
+//        manuel.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+//
+//        // bouton d'injection de la position des valeurs
+//        Button buttonInject = new Button(sectionClient, SWT.NONE);
+//        buttonInject.setBackground(ViewEdit.background);
+//        buttonInject.setText(Messages.button_set);
+//
+//        section.setClient(sectionClient);
+//        // listener bouton inject
+//        buttonInject
+//            .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+//                @Override
+//                public void widgetSelected(
+//                        org.eclipse.swt.events.SelectionEvent h)
+//                {
+//
+//                    Utils.injectNbreLignes(manu, ViewFile.textAreaDescription);
+//
+//                }
+//            });
+//
+//        section.pack();
+//
+//        // ajout de la section dans la liste des sections de description
+//        ajoutSectionDansListeDesc(section);
+//
+//    }
 
     public static void ajoutSectionDansListeSurvey(Section section)
     {
 
-        EditSurvey.listeSectionsSurvey.add(section);
+        EditSurvey_old.listeSectionsSurvey.add(section);
         // System.out.println("ajout section ok");
 
     }
@@ -220,10 +212,10 @@ public class Drawing
             labelPays.setBackground(ViewEdit.background);
             labelPays.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-            EditSurvey.comboCountries.setParent(sectionClient);
-            EditSurvey.comboCountries.setBackground(ViewEdit.background);
+            EditSurvey_old.comboCountries.setParent(sectionClient);
+            EditSurvey_old.comboCountries.setBackground(ViewEdit.background);
             GridDataFactory.swtDefaults().hint(385, 12).applyTo(
-                EditSurvey.comboCountries);
+                EditSurvey_old.comboCountries);
         }
 
         for (i = 0; i < nbre; i++)
@@ -249,13 +241,13 @@ public class Drawing
             labelReg.setBackground(ViewEdit.background);
             labelReg.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-            EditSurvey.comboRegion.setParent(sectionClient);
-            EditSurvey.comboRegion.setBackground(ViewEdit.background);
+            EditSurvey_old.comboRegion.setParent(sectionClient);
+            EditSurvey_old.comboRegion.setBackground(ViewEdit.background);
             GridDataFactory.swtDefaults().hint(385, 12).applyTo(
-                EditSurvey.comboRegion);
+                EditSurvey_old.comboRegion);
 
             // Creation du menu contextuel pour la recherche filtree
-            Utils.createSearchMenu(EditSurvey.comboRegion, Global.REGION);
+            Utils.createSearchMenu(EditSurvey_old.comboRegion, Global.REGION);
 
         }
 
@@ -304,13 +296,13 @@ public class Drawing
         Label label = new Label(sectionClient, SWT.NULL);
         label.setBackground(ViewEdit.background);
         label.setText(Messages.edit_cruise_dataCenter);
-        EditSurvey.comboDataCentres.setParent(sectionClient);
-        EditSurvey.comboDataCentres.setBackground(ViewEdit.background);
+        EditSurvey_old.comboDataCentres.setParent(sectionClient);
+        EditSurvey_old.comboDataCentres.setBackground(ViewEdit.background);
 
-        GridLayoutFactory.fillDefaults().applyTo(EditSurvey.comboDataCentres);
+        GridLayoutFactory.fillDefaults().applyTo(EditSurvey_old.comboDataCentres);
         // FAE 1190 : champ trop long
         GridDataFactory.swtDefaults().hint(385, 10).applyTo(
-            EditSurvey.comboDataCentres);
+            EditSurvey_old.comboDataCentres);
 
         // ajout de la combolist confidentialite
         Label label2 = new Label(sectionClient, SWT.NULL);
@@ -356,7 +348,7 @@ public class Drawing
         sectionClientType = sectionClient;
 
         // affichage d'une table
-        TableDataSurvey.go();
+        //TableDataSurvey.go();
 
         // ajout liste et boutons deplacement des elements
         // mettre les listeners dessus !!!!!

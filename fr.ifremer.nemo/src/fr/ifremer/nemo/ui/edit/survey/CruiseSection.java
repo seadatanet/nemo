@@ -25,7 +25,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 /**
- * Description: TODO
+ * Description: objet graphique représentant une section dans l'onglet Campagne
  * 
  * @author dboulang
  */
@@ -87,25 +87,6 @@ public class CruiseSection extends NemoSection
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void fillFromModel(StationModel stationModel)
-    {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Not Implemented yet !");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void initModel(StationModel stationModel)
-    {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Not Implemented yet !");
-    }
 
     /**
      * {@inheritDoc}

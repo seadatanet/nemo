@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.domain.DataType;
 import fr.ifremer.nemo.domain.Parameter;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.Survey;
@@ -27,7 +26,6 @@ import fr.ifremer.nemo.ui.edit.desc.FileEndData;
 import fr.ifremer.nemo.ui.edit.station.EditStation;
 import fr.ifremer.nemo.ui.edit.survey.EditSurvey;
 import fr.ifremer.nemo.ui.edit.survey.TableDataSurvey;
-import fr.ifremer.nemo.ui.edit.survey.TypeSurvey;
 import fr.ifremer.nemo.ui.view.ViewFile;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
@@ -392,34 +390,8 @@ public class DataModel
         survey.setComment(commentaires.getText());
 
         // remplissage de la liste des dataTypes de la campagne
-        // parcours de la liste des dataTypes de l'IHM et creation d'un DataType
-        // e chaque fois
-        int taille = TableDataSurvey.types.size();
-
-        // reset préventif des dataTypes
-        survey.releaseDataTypes();
-
-        for (int i = 0; i < taille; i++)
-        {
-            TypeSurvey typeSurvey = TableDataSurvey.types.get(i);
-            DataType dataType = new DataType();
-            dataType.setCode(typeSurvey.getCode());
-            dataType.setNumberOfProfiles(typeSurvey.getNombre());
-
-            if (typeSurvey.getQc().equals(Global.YES))
-            {
-                dataType.setQc(true);
-            }
-            else
-            {
-                dataType.setQc(false);
-            }
-            dataType.setSensor(typeSurvey.getSensor());
-
-            // test par rapport aux types deja presents dans le DataModel
-            // si l'etape a deje ete validee
-            survey.addDataType(dataType);
-        }
+        EditSurvey.sectionType.initModel(survey);
+        
         EditSurvey.validee = true;
     }
 
@@ -905,58 +877,12 @@ public class DataModel
         // confidentialite
         String code = survey.getAvailabilityCode();
         Utils.selectComboCode(confidentialite.getValueCombo(), code);
-// if (code.equals("P")) //$NON-NLS-1$
-// {
-// EditSurvey.comboConfid.select(0);
-// }
-//        if (code.equals("L")) //$NON-NLS-1$
-// {
-// EditSurvey.comboConfid.select(1);
-// }
-//        if (code.equals("C")) //$NON-NLS-1$
-// {
-// EditSurvey.comboConfid.select(2);
-// }
 
         // Commentaire
         commentaires.setText(survey.getComment());
 
         // Remplissage de la liste des dataTypes de la campagne
-        DataType[] dataTypes = survey.getDataTypes();
-        int taille = dataTypes.length;
-
-        for (int i = 0; i < taille; i++)
-        {
-            TypeSurvey typeSurvey = new TypeSurvey();
-            typeSurvey.setCode(dataTypes[i].getCode());
-            typeSurvey.setNombre(dataTypes[i].getNumberOfProfiles());
-
-            // QC
-            if (dataTypes[i].isQc())
-            {
-                typeSurvey.setQc(Global.YES);
-            }
-            else
-            {
-                typeSurvey.setQc(Global.NO);
-            }
-
-            typeSurvey.setSensor(dataTypes[i].isSensor());
-
-            TableDataSurvey.types.add(typeSurvey);
-        }
-
-        EditSurvey.razEdition();
-        EditSurvey.DrawingBack();
-
-        // ////////////////////////////////////////
-        // refresh de la liste des dataTypes
-        TableDataSurvey.majIHM();
-
-        // ////////////////////////////////////////
-
-        // System.out.println("Fin remplissage onglet Survey");
-
+        EditSurvey.sectionType.fillFromModel(survey);
     }
 
     public static void fillStation()

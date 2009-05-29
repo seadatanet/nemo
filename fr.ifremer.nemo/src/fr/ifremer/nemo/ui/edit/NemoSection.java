@@ -8,6 +8,7 @@
 package fr.ifremer.nemo.ui.edit;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -19,7 +20,7 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
 import fr.ifremer.nemo.input.StationModel;
-import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.ui.Application;
 import fr.ifremer.nemo.ui.view.ViewEdit;
 import fr.ifremer.nemo.util.Formatter;
 
@@ -98,10 +99,11 @@ public abstract class NemoSection implements UIobject
                         | ExpandableComposite.TITLE_BAR
                         | ExpandableComposite.TWISTIE
                         | ExpandableComposite.COMPACT);
-// GridDataFactory.fillDefaults().grab(false, true).minSize(510,
-        // 20).applyTo(section);
-        section.setFont(Utils.fontCourier12);
 
+        int heightFont = section.getFont().getFontData()[0].getHeight();
+        Font titleFont = new Font(Application.display, "Courier", heightFont, SWT.NORMAL); //$NON-NLS-1$
+        section.setFont(titleFont);
+        
         section.addExpansionListener(new ExpansionAdapter() {
             @Override
             public void expansionStateChanged(ExpansionEvent e)
@@ -178,9 +180,13 @@ public abstract class NemoSection implements UIobject
         section.setParent(parentComposite);
     }
 
-    public abstract void initModel(StationModel stationModel);
+    public void initModel(StationModel stationModel){
+        // a implémenter dans les classes filles, mais pas obligatoire
+    }
 
-    public abstract void fillFromModel(StationModel stationModel);
+    public void fillFromModel(StationModel stationModel){
+        // a implémenter dans les classes filles, mais pas obligatoire
+    }
 
     /**
      * Getter sur name.
