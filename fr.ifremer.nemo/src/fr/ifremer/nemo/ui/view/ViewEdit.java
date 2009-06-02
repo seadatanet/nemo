@@ -26,14 +26,12 @@ public class ViewEdit extends ViewPart
     public void createPartControl(Composite parent)
     {
         top = parent;
+        top.setLayout(new FillLayout());
 
-        parent.setLayout(new FillLayout());
-
-        toolkitEdition = new FormToolkit(parent.getDisplay());
-
-        formEdition = toolkitEdition.createScrolledForm(parent);
-
-        background = formEdition.getBody().getBackground();
+        toolkitEdition = new FormToolkit(top.getDisplay());
+        formEdition = toolkitEdition.createScrolledForm(top);
+        background = formEdition.getBackground();
+        // background = new Color(top.getDisplay(), 255, 255, 255);
 
     }
 

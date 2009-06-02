@@ -20,7 +20,8 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 /**
- * Description: objet graphique représentant la section "Type de données" dans l'onglet Campagne
+ * Description: objet graphique représentant la section "Type de données" dans
+ * l'onglet Campagne
  * 
  * @author dboulang
  */
@@ -55,9 +56,9 @@ public class CruiseDatatypeSection extends NemoSection
     @Override
     protected void drawSection(Composite parent, boolean filled)
     {
+        TableDataSurvey.setSectionClientType(parent);
         TableDataSurvey.tableTypeSurvey.setParent(parent);
     }
-
 
     public void fillFromModel(Survey survey)
     {
@@ -85,14 +86,9 @@ public class CruiseDatatypeSection extends NemoSection
             TableDataSurvey.types.add(typeSurvey);
         }
 
-        //EditSurvey.razEdition();
-        //EditSurvey.DrawingBack();
-
-        // ////////////////////////////////////////
         // refresh de la liste des dataTypes
         TableDataSurvey.majIHM();
     }
-
 
     public void initModel(Survey survey)
     {

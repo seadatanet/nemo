@@ -100,14 +100,8 @@ public class EditSurvey
         // affichage courant
         ViewFile.affiche = 1;
 
-        /*
-         * recreer un formEdition sur le toolkit principal pour pouvoir faire un
-         * dispose() dessus mais garder toutes les sections afin de les
-         * reafficher par la suite dans DrawingBack.
-         */
-
-        ViewEdit.formEdition.getBody().setLayout(new GridLayout());
-        ViewEdit.formEdition.setText(Messages.edit_cruise_title);
+        formEdition.getBody().setLayout(new GridLayout());
+        formEdition.setText(Messages.edit_cruise_title);
 
         shell.close();
         shell = new Shell();
@@ -117,16 +111,6 @@ public class EditSurvey
         listeSectionsSurvey = new ArrayList<NemoSection>();
         initBoutons();
         initSections();
-
-        // remplissage de l'IHM par le modele charge
-        if (DataModel.ouverture)
-        {
-            DataModel.fillSurvey();
-            filled = true;
-        }
-
-        formEdition.redraw();
-        formEdition.reflow(true);
 
         // bouton validate
         buttonValidate.setParent(formEdition.getBody());
@@ -139,8 +123,6 @@ public class EditSurvey
                         org.eclipse.swt.events.SelectionEvent e)
                 {
                     Etape.validationSurvey();
-                    // formEdition.redraw();
-                    // formEdition.reflow(true);
                 }
             });
 
@@ -235,6 +217,13 @@ public class EditSurvey
             section.draw(formEdition.getBody(), filled);
         }
 
+        // remplissage de l'IHM par le modele charge
+        if (DataModel.ouverture)
+        {
+            DataModel.fillSurvey();
+            filled = true;
+        }
+
         // refresh du formulaire
         ViewEdit.formEdition.reflow(true);
         formEdition.reflow(true);
@@ -305,7 +294,7 @@ public class EditSurvey
                 fich = new File(nomXML);
 
                 Utils.messageErreurAppend("fiche:" + fich);//$NON-NLS-1$
-                EditSurvey.chargementXML(fich);
+                chargementXML(fich);
 
             }
 
@@ -416,177 +405,7 @@ public class EditSurvey
 
     public static void majApresWS()
     {
-
-// Survey survey;
-// if (ViewFile.dossierCampagne)
-// {
-// survey = DataModel.dirSurvey.getModel();
-// }
-// else
-// {
-// survey = DataModel.singleSurvey.getModel();
-// }
-//
-// // injection des valeurs de l'IHM -> datamodel référence
-// if (survey.getReference() != null)
-// {
-//
-// EditSurvey.textCampagne.setText(survey.getReference());
-//
-// }
-// if (survey.getName() != null)
-// {
-// EditSurvey.textNom.setText(survey.getName());
-// }
-// if (survey.getShipCode() != null)
-// {
-// if (survey.getShipName() != null)
-// {
-// Utils.selectComboCodePlus(EditSurvey.comboNavire, survey
-// .getShipCode(), survey.getShipName());
-// }
-// else
-// {
-// Utils.selectComboCode(EditSurvey.comboNavire, survey
-// .getShipCode());
-// }
-// }
-//
-// try
-// {
-//            SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy"); //$NON-NLS-1$
-// if (survey.getFormattedStartDate() != null)
-// {
-// EditSurvey.textDateDebut.setText(formatDate.format(new Date(
-// survey.getStartDate())));
-// }
-// if (survey.getFormattedEndDate() != null)
-// {
-// EditSurvey.textDateFin.setText(formatDate.format(new Date(
-// survey.getEndDate())));
-// }
-// }
-// catch (ParseException e)
-// {
-// //
-// e.printStackTrace();
-// }
-//
-// if (survey.getRegionName() != null)
-// {
-// Utils.selectComboLibelle(comboRegion, survey.getRegionName());
-// }
-//
-// if (survey.getCountryCode() != null)
-// {
-// Utils.selectComboCode(comboCountries, survey.getCountryCode());
-// }
-//
-// if (survey.getLaboratories() != null)
-// {
-// EditSurvey.textLabo.setText(survey.getLaboratories());
-// }
-//
-// if (survey.getChiefScientist() != null)
-// {
-// EditSurvey.textChef.setText(survey.getChiefScientist());
-// }
-//
-// if (survey.getProjectName() != null)
-// {
-// EditSurvey.textProjet.setText(survey.getProjectName());
-// }
-//
-// // Centre d'archivage
-// if (survey.getDataCentre() != null)
-// {
-// // selection dans la comboList
-// Utils.selectComboCode(comboDataCentres, survey.getDataCentre());
-// }
-//
-// if (survey.getAvailabilityCode() != null)
-// {
-//            if (survey.getAvailabilityCode().equals("P")) { //$NON-NLS-1$
-// EditSurvey.comboConfid.select(0);
-// }
-//            if (survey.getAvailabilityCode().equals("L")) { //$NON-NLS-1$
-// EditSurvey.comboConfid.select(1);
-// }
-//            if (survey.getAvailabilityCode().equals("C")) { //$NON-NLS-1$
-// EditSurvey.comboConfid.select(2);
-// }
-// }
-//
-// // Commentaire
-// if (survey.getComment() != null)
-// {
-// EditSurvey.textCommentaire.setText(survey.getComment());
-// }
-//
-// // Remplissage de la liste des dataTypes de la campagne
-//
-// if (survey.getDataTypes() != null)
-// {
-// DataType[] dataTypes = survey.getDataTypes();
-// int taille = dataTypes.length;
-//
-// // reset de la liste des dataTypes de l'IHM
-// TableDataSurvey.types.clear();
-// TableDataSurvey.types = new ArrayList<TypeSurvey>();
-//
-// for (int i = 0; i < taille; i++)
-// {
-// TypeSurvey typeSurvey = new TypeSurvey();
-// typeSurvey.setCode(dataTypes[i].getCode());
-// typeSurvey.setNombre(dataTypes[i].getNumberOfProfiles());
-// typeSurvey.setQc(Formatter.getSingleton().formatBoolean(
-// dataTypes[i].isQc()));
-//
-// typeSurvey.setSensor(dataTypes[i].isSensor());
-//
-// TableDataSurvey.types.add(typeSurvey);
-//
-// }
-// }
-//
-// EditSurvey.razEdition();
-// EditSurvey.DrawingBack();
-//
-// // refresh de la liste des dataTypes
-// TableDataSurvey.razTableData();
-// TableDataSurvey.creationTable();
-// Composite c = EditSurvey.sectionType;
-// while (c != null)
-// {
-// c.setRedraw(false);
-// c = c.getParent();
-// if (c instanceof ScrolledForm)
-// {
-// break;
-// }
-// }
-// c = EditSurvey.sectionType;
-// while (c != null)
-// {
-// c.layout(true);
-// c = c.getParent();
-// if (c instanceof ScrolledForm)
-// {
-// ((ScrolledForm) c).reflow(true);
-// break;
-// }
-// }
-// c = EditSurvey.sectionType;
-// while (c != null)
-// {
-// c.setRedraw(true);
-// c = c.getParent();
-// if (c instanceof ScrolledForm)
-// {
-// break;
-// }
-// }
-
+        DataModel.fillSurvey();
     }
 
     public static void razEdition()
@@ -594,14 +413,12 @@ public class EditSurvey
         // reset de toute la zone d'edition apres etape descriptioon de fichier
         // on retire toutes les sections et les boutons expand et validation
 
-        int i;
-
         // effacement des boutons valider/expand/init serveur
-        EditSurvey.buttonExpand.setParent(shell);
-        EditSurvey.buttonValidate.setParent(shell);
-        EditSurvey.buttonInitServeur.setParent(shell);
-        EditSurvey.buttonXML.setParent(shell);
-        EditSurvey.buttonRAZ.setParent(shell);
+        buttonExpand.setParent(shell);
+        buttonValidate.setParent(shell);
+        buttonInitServeur.setParent(shell);
+        buttonXML.setParent(shell);
+        buttonRAZ.setParent(shell);
 
         // effacement des sections
         for (NemoSection section : listeSectionsSurvey)
@@ -625,8 +442,6 @@ public class EditSurvey
             liste.get(i).addModifyListener(new ModifyListener() {
                 public void modifyText(ModifyEvent event)
                 {
-                    // on modifie la valeur du champ texte
-
                     // des qu'on modifie une valeur,
                     // invalidation de l'étape en cours et des suivantes
                     Utils.invalidEtapes();
@@ -643,7 +458,6 @@ public class EditSurvey
         // on retire toutes les sections et les boutons expand et validation
 
         ViewLog.aideSurvey();
-        int i;
         ScrolledForm s;
         s = ViewEdit.formEdition;
 
@@ -652,11 +466,11 @@ public class EditSurvey
 
         // reaffichage des boutons valider/expand/init serveur
 
-        EditSurvey.buttonValidate.setParent(s.getBody());
-        EditSurvey.buttonInitServeur.setParent(s.getBody());
-        EditSurvey.buttonXML.setParent(s.getBody());
-        EditSurvey.buttonRAZ.setParent(s.getBody());
-        EditSurvey.buttonExpand.setParent(s.getBody());
+        buttonValidate.setParent(s.getBody());
+        buttonInitServeur.setParent(s.getBody());
+        buttonXML.setParent(s.getBody());
+        buttonRAZ.setParent(s.getBody());
+        buttonExpand.setParent(s.getBody());
         expand = false;
         buttonExpand.setText(Global.PLUS);
 
@@ -799,7 +613,6 @@ public class EditSurvey
 
     public static void initBoutons()
     {
-
         buttonRAZ = new Button(shell, SWT.NONE);
         buttonInitServeur = new Button(shell, SWT.NONE);
         buttonExpand = new Button(shell, SWT.NONE);

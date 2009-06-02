@@ -48,6 +48,11 @@ public class TableDataSurvey
         creationTable();
     }
 
+    public static void setSectionClientType(Composite parent)
+    {
+        sectionClientType = parent;
+    }
+
     public static void creationTable()
     {
         final Table table;

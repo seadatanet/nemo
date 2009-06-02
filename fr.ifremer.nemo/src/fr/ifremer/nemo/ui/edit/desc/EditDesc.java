@@ -67,11 +67,6 @@ public class EditDesc
             EditStation.validee = false;
             EditData.validee = false;
 
-            /*
-             * recreer un formEdition sur le toolkit principal pour pouvoir
-             * faire un dispose() dessus mais garder toutes les sections afin de
-             * les reafficher par la suite dans DrawingBack.
-             */
             formEdition.getBody().setLayout(new GridLayout());
             formEdition.setText(Messages.edit_file_title);
 
@@ -175,7 +170,7 @@ public class EditDesc
 
             actualiseEdition();
 
-            ViewEdit.formEdition.reflow(true);
+            // ViewEdit.formEdition.reflow(true);
 
             // refresh du formulaire
             formEdition.reflow(true);
@@ -204,10 +199,10 @@ public class EditDesc
         }
 
         // effacement titre formulaire
-        ViewEdit.formEdition.setText(Global.EMPTY_STRING);
+        formEdition.setText(Global.EMPTY_STRING);
 
         // refresh global
-        ViewEdit.formEdition.reflow(true);
+        formEdition.reflow(true);
 
     }
 
@@ -224,14 +219,11 @@ public class EditDesc
             // raz message erreur
             Utils.messageErreur(Global.EMPTY_STRING);
 
-            ScrolledForm s;
-            s = ViewEdit.formEdition;
-
             // affichage des boutons
-            buttonValidate.setParent(s.getBody());
-            buttonRAZ.setParent(s.getBody());
+            buttonValidate.setParent(formEdition.getBody());
+            buttonRAZ.setParent(formEdition.getBody());
 
-            buttonExpand.setParent(s.getBody());
+            buttonExpand.setParent(formEdition.getBody());
             expand = false;
             buttonExpand.setText(Global.PLUS);
 
@@ -239,14 +231,14 @@ public class EditDesc
             for (NemoSection desc : listeSectionsDesc)
             {
                 desc.setExpanded(false);
-                desc.initSection(s.getBody());
+                desc.initSection(formEdition.getBody());
             }
 
             // affichage titre formulaire
-            ViewEdit.formEdition.setText(Messages.edit_file_title);
+            formEdition.setText(Messages.edit_file_title);
 
             // refresh global
-            ViewEdit.formEdition.reflow(true);
+            formEdition.reflow(true);
 
             // affichage courant
             ViewFile.affiche = 0;

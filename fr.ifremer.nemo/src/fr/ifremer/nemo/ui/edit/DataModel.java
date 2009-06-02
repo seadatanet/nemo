@@ -391,7 +391,7 @@ public class DataModel
 
         // remplissage de la liste des dataTypes de la campagne
         EditSurvey.sectionType.initModel(survey);
-        
+
         EditSurvey.validee = true;
     }
 
@@ -835,11 +835,9 @@ public class DataModel
         // Localisation
 
         // DATES
-        Formatter formatter = new Formatter();
-
         try
         {
-            dateDebut.setText(formatter.formatDateTime(
+            dateDebut.setText(Formatter.getSingleton().formatDateTime(
                 "dd/MM/yyyy", survey.getStartDate())); //$NON-NLS-1$
         }
         catch (ParseException e)
@@ -848,11 +846,9 @@ public class DataModel
             e.printStackTrace();
         }
 
-        formatter = new Formatter();
-
         try
         {
-            dateFin.setText(formatter.formatDateTime(
+            dateFin.setText(Formatter.getSingleton().formatDateTime(
                 "dd/MM/yyyy", survey.getEndDate())); //$NON-NLS-1$
         }
         catch (ParseException e)
