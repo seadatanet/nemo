@@ -1,4 +1,4 @@
-package fr.ifremer.nemo.ui.edit.survey;
+package fr.ifremer.nemo.ui.edit.cruise;
 
 import java.util.ArrayList;
 
@@ -21,6 +21,7 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import fr.ifremer.nemo.ui.FiltrageTableType;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.DataModel;
+import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSDataType;
@@ -515,7 +516,7 @@ public class TableDataSurvey
         // refresh de la table
         creationTable();
 
-        Composite c = EditSurvey.sectionType.getSection();
+        Composite c = ViewMain.editCruiseForm.sectionType.getSection();
         while (c != null)
         {
             c.setRedraw(false);
@@ -525,7 +526,7 @@ public class TableDataSurvey
                 break;
             }
         }
-        c = EditSurvey.sectionType.getSection();
+        c = ViewMain.editCruiseForm.sectionType.getSection();
         while (c != null)
         {
             c.layout(true);
@@ -536,7 +537,7 @@ public class TableDataSurvey
                 break;
             }
         }
-        c = EditSurvey.sectionType.getSection();
+        c = ViewMain.editCruiseForm.sectionType.getSection();
         while (c != null)
         {
             c.setRedraw(true);

@@ -13,12 +13,12 @@ import java.util.Map.Entry;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Composite;
 
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.edit.survey.TableDataSurvey;
-import fr.ifremer.nemo.ui.view.ViewFile;
+import fr.ifremer.nemo.ui.edit.cruise.TableDataSurvey;
+import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
@@ -44,14 +44,40 @@ public enum ComboType
     DATACENTER,
     CONFIDENT;
 
-    public Combo createCombo(Shell shell)
+    public Combo createCombo(Composite parent)
     {
         Combo valueCombo;
+        switch (this)
+        {
+            case DATE:
+            case TIME:
+            case LAT:
+            case LON:
+            case DATATYPE:
+                valueCombo = new Combo(parent, SWT.BORDER);
+            break;
+            case REGION:
+            case COUNTRY:
+                valueCombo = new Combo(parent, SWT.NONE);
+            break;
+            case SHIP:
+            case DATACENTER:
+            case CONFIDENT:
+                valueCombo = new Combo(parent, SWT.READ_ONLY);
+            break;
+            default:
+                valueCombo = null;
+            break;
+        }
+        return valueCombo;
+    }
+
+    public Combo fillCombo(Combo valueCombo)
+    {
         String temp;
         switch (this)
         {
             case DATE:
-                valueCombo = new Combo(shell, SWT.BORDER);
                 valueCombo.add("DD/MM/YY"); //$NON-NLS-1$
                 valueCombo.add("DD/MM/YYYY"); //$NON-NLS-1$
                 valueCombo.add("DDMMYY"); //$NON-NLS-1$
@@ -65,7 +91,6 @@ public enum ComboType
                 valueCombo.add("DDDDDDD.d"); //$NON-NLS-1$
             break;
             case TIME:
-                valueCombo = new Combo(shell, SWT.BORDER);
                 valueCombo.add("hh:mm PM"); //$NON-NLS-1$
                 valueCombo.add("hh:mm:ss PM"); //$NON-NLS-1$
                 valueCombo.add("hh24:mm"); //$NON-NLS-1$
@@ -80,7 +105,6 @@ public enum ComboType
                 valueCombo.add("ttttt"); //$NON-NLS-1$
             break;
             case LAT:
-                valueCombo = new Combo(shell, SWT.BORDER);
                 valueCombo.add("+DD MM.mm"); //$NON-NLS-1$
                 valueCombo.add("+DD.ddd"); //$NON-NLS-1$
                 valueCombo.add("+DDMMSS"); //$NON-NLS-1$
@@ -89,7 +113,6 @@ public enum ComboType
                 valueCombo.add("NDDMMSS"); //$NON-NLS-1$
             break;
             case LON:
-                valueCombo = new Combo(shell, SWT.BORDER);
                 valueCombo.add("+DDD MM.mm"); //$NON-NLS-1$
                 valueCombo.add("+DDD.ddd"); //$NON-NLS-1$
                 valueCombo.add("+DDDMMSS"); //$NON-NLS-1$
@@ -98,9 +121,8 @@ public enum ComboType
                 valueCombo.add("NDDDMMSS"); //$NON-NLS-1$
             break;
             case DATATYPE:
-                valueCombo = new Combo(shell, SWT.BORDER);
                 // FAE022
-                if (!ViewFile.isCollection())
+                if (!ViewMain.isCollection() && TableDataSurvey.types != null)
                 {
                     int taille = TableDataSurvey.types.size();
                     for (int i = 0; i < taille; i++)
@@ -115,7 +137,6 @@ public enum ComboType
                 }
             break;
             case SHIP:
-                valueCombo = new Combo(shell, SWT.READ_ONLY);
                 CodeTableRecordType[] navires =
                     NemoLists.getVocabList(Intern.list_ship);
 
@@ -141,7 +162,6 @@ public enum ComboType
                 Utils.createSearchMenu(valueCombo, Global.SHIP);
             break;
             case REGION:
-                valueCombo = new Combo(shell, SWT.NONE);
                 NemoLists.listeRegion = new ArrayList<String>();
                 CodeTableRecordType[] regions =
                     NemoLists.getVocabList(Intern.list_regions);
@@ -167,7 +187,6 @@ public enum ComboType
                 Utils.createSearchMenu(valueCombo, Global.REGION);
             break;
             case COUNTRY:
-                valueCombo = new Combo(shell, SWT.NONE);
                 CodeTableRecordType[] records =
                     NemoLists.getVocabList(Intern.list_countries);
 
@@ -187,8 +206,6 @@ public enum ComboType
                 }
             break;
             case DATACENTER:
-                valueCombo = new Combo(shell, SWT.READ_ONLY);
-
                 CodeTableRecordType[] centres =
                     NemoLists.getVocabList(Intern.list_dataCenter);
 
@@ -214,16 +231,13 @@ public enum ComboType
                 Utils.createSearchMenu(valueCombo, Global.DATACENTRE);
             break;
             case CONFIDENT:
-                valueCombo = new Combo(shell, SWT.READ_ONLY);
                 valueCombo.add("P - Public"); //$NON-NLS-1$
                 valueCombo.add("L - Limited"); //$NON-NLS-1$
                 valueCombo.add("C - Confidential"); //$NON-NLS-1$
             break;
             default:
-                valueCombo = null;
             break;
         }
         return valueCombo;
     }
-
 }

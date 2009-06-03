@@ -8,79 +8,92 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 
-import fr.ifremer.nemo.ui.view.ViewEdit;
+import fr.ifremer.nemo.ui.view.ViewMain;
 
 /**
  * Class FlagMenuItem
  * 
  * @author Herve Taniou
  */
-public class FlagMenuItem {
-	private Menu _menu;
+public class FlagMenuItem
+{
+    private Menu _menu;
 
-	private Table _table;
+    private Table _table;
 
-	private String _code;
+    private String _code;
 
-	private MenuItem _item;
+    private MenuItem _item;
 
-	public FlagMenuItem(Menu menu, Table table, String code, String name) {
-		_menu = menu;
-		_table = table;
-		_code = code;
+    public FlagMenuItem(Menu menu, Table table, String code, String name)
+    {
+        _menu = menu;
+        _table = table;
+        _code = code;
 
-		_item = new MenuItem(_menu, SWT.PUSH);
-		_item.setText(name);
+        _item = new MenuItem(_menu, SWT.PUSH);
+        _item.setText(name);
 
-		_item.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event e) {
-				// Teste si la metadonnee est deje presente dans le tableau
-				int size = _table.getItemCount();
-				for (int i = 0; i < size; i++) {
-					if (_table.getItems()[i].getText(0).equals(_code)) {
-						return;
-					}
-				}
-				
-				// Ajout de la metadonnee dans le tableau
-				TableItem itemTemp = new TableItem(_table, SWT.NONE);
-				itemTemp.setText(0, _code);
-				itemTemp.setText(1, _item.getText());
-				ViewEdit.formEdition.reflow(true);
-			}
-		});
-	}
+        _item.addListener(SWT.Selection, new Listener() {
+            public void handleEvent(Event e)
+            {
+                // Teste si la metadonnee est deje presente dans le tableau
+                int size = _table.getItemCount();
+                for (int i = 0; i < size; i++)
+                {
+                    if (_table.getItems()[i].getText(0).equals(_code))
+                    {
+                        return;
+                    }
+                }
 
-	public String getCode() {
-		return _code;
-	}
+                // Ajout de la metadonnee dans le tableau
+                TableItem itemTemp = new TableItem(_table, SWT.NONE);
+                itemTemp.setText(0, _code);
+                itemTemp.setText(1, _item.getText());
+                ViewMain.editStationForm.formEdition.reflow(true);
+            }
+        });
+    }
 
-	public void setCode(String _code) {
-		this._code = _code;
-	}
+    public String getCode()
+    {
+        return _code;
+    }
 
-	public MenuItem getItem() {
-		return _item;
-	}
+    public void setCode(String _code)
+    {
+        this._code = _code;
+    }
 
-	public void setItem(MenuItem _item) {
-		this._item = _item;
-	}
+    public MenuItem getItem()
+    {
+        return _item;
+    }
 
-	public Menu getMenu() {
-		return _menu;
-	}
+    public void setItem(MenuItem _item)
+    {
+        this._item = _item;
+    }
 
-	public void setMenu(Menu _menu) {
-		this._menu = _menu;
-	}
+    public Menu getMenu()
+    {
+        return _menu;
+    }
 
-	public Table getTable() {
-		return _table;
-	}
+    public void setMenu(Menu _menu)
+    {
+        this._menu = _menu;
+    }
 
-	public void setTable(Table _table) {
-		this._table = _table;
-	}
+    public Table getTable()
+    {
+        return _table;
+    }
+
+    public void setTable(Table _table)
+    {
+        this._table = _table;
+    }
 
 }

@@ -5,17 +5,16 @@
  * Copyright		: Altran
  * ============================================================================
  */
-package fr.ifremer.nemo.ui.edit.desc;
+package fr.ifremer.nemo.ui.edit.file;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Shell;
 
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.view.ViewEdit;
+import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -36,26 +35,18 @@ public class FileStationHeader extends FileSection
      * @param title
      * @param description
      */
-    public FileStationHeader(Shell shell, String name, String title,
-            String description)
+    public FileStationHeader(String name, String title, String description)
     {
-        super(shell, name, title, description);
-
-        radNumber = new Button(shell, SWT.RADIO);
-        addRadListener(radNumber);
-
-        radIndicator = new Button(shell, SWT.RADIO);
-        addRadListener(radIndicator);
+        super(name, title, description);
 
         setterIndicator =
-            new SetText(shell, Messages.edit_file_enteteStation_indicator,
+            new SetText(Messages.edit_file_enteteStation_indicator,
                 Global.EMPTY_STRING, true);
         setterIndicator.setTextSize(139);
 
         setterLinesBeforeData =
-            new SetText(shell,
-                Messages.edit_file_enteteStation_linesBeforeData, Global.ZERO,
-                false);
+            new SetText(Messages.edit_file_enteteStation_linesBeforeData,
+                Global.ZERO, false);
         setterLinesBeforeData.setTextSize(139);
     }
 
@@ -68,6 +59,7 @@ public class FileStationHeader extends FileSection
                         org.eclipse.swt.events.SelectionEvent g)
                 {
                     selectNumber(radNumber.getSelection());
+                    Utils.invalidEtapes();
                 }
             });
     }
@@ -82,9 +74,6 @@ public class FileStationHeader extends FileSection
         radIndicator.setSelection(!selected);
         setterIndicator.setEnabled(!selected);
         setterLinesBeforeData.setEnabled(!selected);
-
-        // invalidation de l'étape en cours et des suivantes
-        Utils.invalidEtapes();
     }
 
     public boolean isSelectNumber()
@@ -102,14 +91,14 @@ public class FileStationHeader extends FileSection
         GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compo);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(compo);
 
-        radNumber.setParent(compo);
-        radNumber.setBackground(ViewEdit.background);
+        radNumber = new Button(compo, SWT.RADIO);
+        radNumber.setBackground(ViewMain.backgroungEdit);
         radNumber.setText(Messages.edit_file_enteteStation_radNumber);
 
         setter.draw(compo, filled);
 
-        radIndicator.setParent(compo);
-        radIndicator.setBackground(ViewEdit.background);
+        radIndicator = new Button(compo, SWT.RADIO);
+        radIndicator.setBackground(ViewMain.backgroungEdit);
         radIndicator.setText(Messages.edit_file_enteteStation_radIndicator);
 
         subCompo = new Composite(compo, SWT.NONE);
@@ -129,6 +118,8 @@ public class FileStationHeader extends FileSection
         setterLinesBeforeData.draw(col02, filled);
 
         selectNumber(true);
+        addRadListener(radNumber);
+        addRadListener(radIndicator);
     }
 
     /**

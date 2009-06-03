@@ -19,11 +19,10 @@ import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.view.ViewEdit;
+import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -45,8 +44,8 @@ public class Couple implements UIobject
     private boolean fullSize;
     private int textLimit;
 
-    public Couple(Shell shell, String groupTitle, String labelText,
-            ComboType type, String defaultValue)
+    public Couple(String groupTitle, String labelText, ComboType type,
+            String defaultValue)
     {
         fullSize = true; // par défaut
 
@@ -55,46 +54,21 @@ public class Couple implements UIobject
 
         // Label
         this.labelString = labelText;
-        if (labelText != null && !labelText.trim().equals(Global.EMPTY_STRING))
-            label = new Label(shell, SWT.NONE);
 
         // Text or Combo
-        addValue(shell, type, defaultValue);
+        addValue(type, defaultValue);
     }
 
-    public Couple(Shell shell, ComboType type, String defaultValue)
+    public Couple(ComboType type, String defaultValue)
     {
-        addValue(shell, type, defaultValue);
+        addValue(type, defaultValue);
     }
 
-    public void addValue(Shell shell, ComboType cType, String value)
+    public void addValue(ComboType cType, String value)
     {
-
         // Default value
         this.defaultValue = value;
-
         this.type = cType;
-        chooseValue(shell, type);
-
-        if (valueText != null)
-        {
-            valueText.addModifyListener(new ModifyListener() {
-                public void modifyText(ModifyEvent event)
-                {
-                    Utils.invalidEtapes();
-                }
-            });
-        }
-        else if (valueCombo != null)
-        {
-            valueCombo.addModifyListener(new ModifyListener() {
-                public void modifyText(ModifyEvent event)
-                {
-                    Utils.invalidEtapes();
-                }
-            });
-        }
-
     }
 
     public void setFullSize(boolean full)
@@ -127,14 +101,16 @@ public class Couple implements UIobject
         }
 
         // Label
-        if (label != null)
+        if (labelString != null
+                && !labelString.trim().equals(Global.EMPTY_STRING))
         {
-            label.setParent(parent);
-            label.setBackground(ViewEdit.background);
+            label = new Label(parent, SWT.NONE);
+            label.setBackground(ViewMain.backgroungEdit);
             label.setText(labelString);
         }
 
         // Text or Combo
+        chooseValue(parent, type);
         if (valueText != null)
         {
             valueText.setParent(parent);
@@ -142,11 +118,17 @@ public class Couple implements UIobject
             // Default value
             if (!filled && defaultValue != null)
                 valueText.setText(defaultValue);
+            valueText.addModifyListener(new ModifyListener() {
+                public void modifyText(ModifyEvent event)
+                {
+                    Utils.invalidEtapes();
+                }
+            });
         }
         else if (valueCombo != null)
         {
             valueCombo.setParent(parent);
-            valueCombo.setBackground(ViewEdit.background);
+            valueCombo.setBackground(ViewMain.backgroungEdit);
             valueCombo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
             if (fullSize)
@@ -159,6 +141,12 @@ public class Couple implements UIobject
             {
                 Utils.selectComboCode(valueCombo, defaultValue);
             }
+            valueCombo.addModifyListener(new ModifyListener() {
+                public void modifyText(ModifyEvent event)
+                {
+                    Utils.invalidEtapes();
+                }
+            });
         }
 
     }
@@ -173,41 +161,48 @@ public class Couple implements UIobject
             valueCombo.dispose();
     }
 
-    private void chooseValue(Shell shell, ComboType cType)
+    private void chooseValue(Composite parent, ComboType cType)
     {
         switch (cType)
         {
             case BLOCK:
                 valueText =
-                    new Text(shell, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL
+                    new Text(parent, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL
                             | SWT.WRAP);
             break;
             case FRQ:
                 groupTitle = Messages.label_conversion;
                 labelString = Messages.label_formule;
-                label = new Label(shell, SWT.NONE);
-                valueText = new Text(shell, SWT.BORDER);
+                label = new Label(parent, SWT.NONE);
+                valueText = new Text(parent, SWT.BORDER);
             break;
             case DATE:
             case TIME:
             case LAT:
             case LON:
                 groupTitle = Messages.label_format;
-                valueCombo = cType.createCombo(shell);
-            break;
+// valueCombo = cType.createCombo(parent);
+// valueCombo = cType.fillCombo(valueCombo);
+// break;
             case DATATYPE:
             case SHIP:
             case REGION:
             case COUNTRY:
             case DATACENTER:
             case CONFIDENT:
-                valueCombo = cType.createCombo(shell);
+                valueCombo = cType.createCombo(parent);
+                valueCombo = cType.fillCombo(valueCombo);
             break;
             default:
-                valueText = new Text(shell, SWT.BORDER);
+                valueText = new Text(parent, SWT.BORDER);
             break;
         }
     }
+
+// public void refreshCombo(ComboType cType)
+// {
+// valueCombo = cType.fillCombo(valueCombo);
+// }
 
     public void setEnabled(boolean enabled)
     {

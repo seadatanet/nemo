@@ -21,7 +21,7 @@ import fr.ifremer.nemo.util.Messages;
 public class ViewLog extends ViewPart
 {
 
-    public static final String ID = "fr.ifremer.nemo.ui.ViewLog"; //$NON-NLS-1$
+    public static final String ID = "fr.ifremer.nemo.ui.view.ViewLog"; //$NON-NLS-1$
 
     private Composite top = null;
 

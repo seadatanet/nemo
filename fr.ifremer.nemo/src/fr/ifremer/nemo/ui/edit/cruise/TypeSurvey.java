@@ -1,4 +1,4 @@
-package fr.ifremer.nemo.ui.edit.survey;
+package fr.ifremer.nemo.ui.edit.cruise;
 
 
 public class TypeSurvey extends Object {

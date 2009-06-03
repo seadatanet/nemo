@@ -5,7 +5,7 @@
  * Copyright		: Altran
  * ============================================================================
  */
-package fr.ifremer.nemo.ui.edit.desc;
+package fr.ifremer.nemo.ui.edit.file;
 
 import java.util.regex.Pattern;
 
@@ -16,13 +16,11 @@ import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.UIobject;
-import fr.ifremer.nemo.ui.view.ViewEdit;
-import fr.ifremer.nemo.ui.view.ViewFile;
+import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -37,56 +35,26 @@ public class SetText implements UIobject
     protected Label label;
     protected Text text;
     protected Button buttonSet;
+
+    private final String stringLabel;
     private final String defaultValue;
-    private final boolean inText;
+
+    protected final boolean inText;
     private int textSize;
 
-    public SetText(Shell shell, String stringLabel, String defaultValue,
-            final boolean inText)
+    public SetText(String stringLabel, String defaultValue, final boolean inText)
     {
         this.textSize = 293;
+        this.stringLabel = stringLabel;
         this.defaultValue = defaultValue;
         this.inText = inText;
-
-        if (stringLabel != null)
-        {
-            label = new Label(shell, SWT.NONE);
-            label.setText(stringLabel);
-        }
-
-        text = new Text(shell, SWT.BORDER);
-        text.addModifyListener(new ModifyListener() {
-            public void modifyText(ModifyEvent event)
-            {
-                Utils.invalidEtapes();
-            }
-        });
-
-        buttonSet = new Button(shell, SWT.NONE);
-        buttonSet
-            .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-                @Override
-                public void widgetSelected(
-                        org.eclipse.swt.events.SelectionEvent g)
-                {
-                    if (inText)
-                    {
-                        injectText();
-                    }
-                    else
-                    {
-                        injectNumberLines();
-                    }
-
-                }
-            });
     }
 
     protected void injectText()
     {
-        text.setText(ViewFile.textAreaDescription.getText().substring(
-            ViewFile.textAreaDescription.getSelection().x,
-            ViewFile.textAreaDescription.getSelection().y));
+        text.setText(ViewMain.textAreaFile.getText().substring(
+            ViewMain.textAreaFile.getSelection().x,
+            ViewMain.textAreaFile.getSelection().y));
         text.pack();
     }
 
@@ -95,8 +63,8 @@ public class SetText implements UIobject
         int deb, fi, lignDepart, lignFin, i;
 
         // on recupere les coordonnees de la selection
-        deb = ViewFile.textAreaDescription.getSelection().x;
-        fi = ViewFile.textAreaDescription.getSelection().y;
+        deb = ViewMain.textAreaFile.getSelection().x;
+        fi = ViewMain.textAreaFile.getSelection().y;
 
         lignDepart = 1;
         lignFin = 1;
@@ -176,21 +144,46 @@ public class SetText implements UIobject
      */
     public void draw(Composite compo, boolean filled)
     {
-        if (label != null)
+        if (stringLabel != null)
         {
-            label.setParent(compo);
-            label.setBackground(ViewEdit.background);
+            label = new Label(compo, SWT.NONE);
+            label.setText(stringLabel);
+            label.setBackground(ViewMain.backgroungEdit);
         }
 
-        text.setParent(compo);
+        text = new Text(compo, SWT.BORDER);
         if (defaultValue != null && !filled)
             text.setText(defaultValue);
+        text.addModifyListener(new ModifyListener() {
+            public void modifyText(ModifyEvent event)
+            {
+                Utils.invalidEtapes();
+            }
+        });
+
         GridDataFactory.fillDefaults().grab(true, false).hint(textSize, 12)
             .applyTo(text);
 
-        buttonSet.setParent(compo);
-        buttonSet.setBackground(ViewEdit.background);
+        buttonSet = new Button(compo, SWT.NONE);
+        buttonSet.setBackground(ViewMain.backgroungEdit);
         buttonSet.setText(Messages.button_set);
+        buttonSet
+            .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                @Override
+                public void widgetSelected(
+                        org.eclipse.swt.events.SelectionEvent g)
+                {
+                    if (inText)
+                    {
+                        injectText();
+                    }
+                    else
+                    {
+                        injectNumberLines();
+                    }
+
+                }
+            });
     }
 
     /**

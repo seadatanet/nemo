@@ -5,17 +5,16 @@
  * Copyright		: Altran
  * ============================================================================
  */
-package fr.ifremer.nemo.ui.edit.desc;
+package fr.ifremer.nemo.ui.edit.file;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Shell;
 
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.view.ViewEdit;
+import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -36,28 +35,16 @@ public class FileEndData extends FileSection
      * @param title
      * @param description
      */
-    public FileEndData(Shell shell, String name, String title,
-            String description)
+    public FileEndData(String name, String title, String description)
     {
-        super(shell, name, title, description);
-
-        radEOF = new Button(shell, SWT.RADIO);
-        addRadListener(radEOF);
-        radLigne = new Button(shell, SWT.RADIO);
-        addRadListener(radLigne);
-        radNextStation = new Button(shell, SWT.RADIO);
-        addRadListener(radNextStation);
-        radManuel = new Button(shell, SWT.RADIO);
-        addRadListener(radManuel);
-
-        setterStartStation =
-            new SetText(shell, null, Global.EMPTY_STRING, true);
+        super(name, title, description);
+        setterStartStation = new SetText(null, Global.EMPTY_STRING, true);
     }
 
     @Override
-    public void addSetter(Shell shell, String stringLabel, String defaultValue)
+    public void addSetter(String stringLabel, String defaultValue)
     {
-        setter = new SetText(shell, stringLabel, defaultValue, true);
+        setter = new SetText(stringLabel, defaultValue, true);
     }
 
     private void addRadListener(final Button radio)
@@ -70,6 +57,8 @@ public class FileEndData extends FileSection
                         org.eclipse.swt.events.SelectionEvent g)
                 {
                     selectEndData(radio);
+                    Utils.invalidEtapes();
+
                 }
             });
     }
@@ -84,25 +73,29 @@ public class FileEndData extends FileSection
         GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compo);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(compo);
 
-        radEOF.setParent(compo);
-        radEOF.setBackground(ViewEdit.background);
+        radEOF = new Button(compo, SWT.RADIO);
+        radEOF.setBackground(ViewMain.backgroungEdit);
         radEOF.setText(Messages.edit_file_idcEOF);
 
-        radLigne.setParent(compo);
-        radLigne.setBackground(ViewEdit.background);
+        radLigne = new Button(compo, SWT.RADIO);
+        radLigne.setBackground(ViewMain.backgroungEdit);
         radLigne.setText(Messages.edit_file_idcEmptyLine);
 
-        radNextStation.setParent(compo);
-        radNextStation.setBackground(ViewEdit.background);
+        radNextStation = new Button(compo, SWT.RADIO);
+        radNextStation.setBackground(ViewMain.backgroungEdit);
         radNextStation.setText(Messages.edit_file_idcNextStation);
         setterStartStation.draw(compo, filled);
 
-        radManuel.setParent(compo);
-        radManuel.setBackground(ViewEdit.background);
+        radManuel = new Button(compo, SWT.RADIO);
+        radManuel.setBackground(ViewMain.backgroungEdit);
         radManuel.setText(Messages.edit_file_idcManual);
         setter.draw(compo, filled);
 
         selectEndData(radEOF);
+        addRadListener(radEOF);
+        addRadListener(radLigne);
+        addRadListener(radNextStation);
+        addRadListener(radManuel);
     }
 
     @Override
@@ -213,8 +206,6 @@ public class FileEndData extends FileSection
                 setter.setEnabled(false);
             }
 
-            // invalidation de l'étape en cours et des suivantes
-            Utils.invalidEtapes();
         }
     }
 

@@ -5,13 +5,12 @@
  * Copyright		: Altran
  * ============================================================================
  */
-package fr.ifremer.nemo.ui.edit.desc;
+package fr.ifremer.nemo.ui.edit.file;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Shell;
 
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.NemoSection;
@@ -28,16 +27,15 @@ public class FileSection extends NemoSection
     protected Composite compo;
     protected SetText setter;
 
-    public FileSection(Shell shell, String name, String title,
-            String description)
+    public FileSection(String name, String title, String description)
     {
+        super(name, title, description);
 
-        super(shell, name, title, description);
     }
 
-    public void addSetter(Shell shell, String stringLabel, String defaultValue)
+    public void addSetter(String stringLabel, String defaultValue)
     {
-        setter = new SetText(shell, stringLabel, defaultValue, false);
+        setter = new SetText(stringLabel, defaultValue, false);
     }
 
     /**
@@ -52,7 +50,6 @@ public class FileSection extends NemoSection
 
         setter.draw(compo, filled);
     }
-
 
     /**
      * {@inheritDoc}

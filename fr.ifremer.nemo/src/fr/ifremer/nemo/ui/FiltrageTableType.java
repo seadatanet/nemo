@@ -21,12 +21,12 @@ import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.config.EdmoHandler;
 import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.ui.edit.cruise.TableDataSurvey;
+import fr.ifremer.nemo.ui.edit.cruise.TableWS_Survey;
+import fr.ifremer.nemo.ui.edit.cruise.TypeSurvey;
 import fr.ifremer.nemo.ui.edit.data.TableData;
 import fr.ifremer.nemo.ui.edit.data.TypeData;
-import fr.ifremer.nemo.ui.edit.survey.EditSurvey;
-import fr.ifremer.nemo.ui.edit.survey.TableDataSurvey;
-import fr.ifremer.nemo.ui.edit.survey.TableWS_Survey;
-import fr.ifremer.nemo.ui.edit.survey.TypeSurvey;
+import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -258,7 +258,7 @@ public class FiltrageTableType
 
                             String mots[] = p.split(reference);
 
-                            EditSurvey.webService(mots[0]);
+                            ViewMain.editCruiseForm.webService(mots[0]);
 
                             Utils.messageOK(Messages.success_openSurveyDesc);
                             shell.close();
@@ -320,8 +320,10 @@ public class FiltrageTableType
                             TableDataSurvey.majTypeData();
                             TableDataSurvey.majIHM();
 
-                            EditSurvey.sectionType.getSection().pack();
-                            EditSurvey.sectionType.getSection().redraw();
+                            ViewMain.editCruiseForm.sectionType.getSection()
+                                .pack();
+                            ViewMain.editCruiseForm.sectionType.getSection()
+                                .redraw();
 
                             shell.close();
 

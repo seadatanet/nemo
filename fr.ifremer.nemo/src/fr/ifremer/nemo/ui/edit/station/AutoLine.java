@@ -17,7 +17,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Shell;
 
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.ComboType;
@@ -25,8 +24,7 @@ import fr.ifremer.nemo.ui.edit.Couple;
 import fr.ifremer.nemo.ui.edit.Cursor;
 import fr.ifremer.nemo.ui.edit.DataModel;
 import fr.ifremer.nemo.ui.edit.UIobject;
-import fr.ifremer.nemo.ui.view.ViewEdit;
-import fr.ifremer.nemo.ui.view.ViewFile;
+import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -54,8 +52,8 @@ public class AutoLine implements UIobject
     protected MetaInData enableInData;
     protected boolean inData = false;
 
-    public AutoLine(Shell shell, int i, boolean unique,
-            MetaInData enableInData, boolean withCursor)
+    public AutoLine(int i, boolean unique, MetaInData enableInData,
+            boolean withCursor)
     {
 
         this.unique = unique;
@@ -66,21 +64,20 @@ public class AutoLine implements UIobject
             addedLabel = Global.SPACE + (i + 1);
 
         numberLine =
-            new Couple(shell, null, (Messages.label_line + addedLabel),
+            new Couple(null, (Messages.label_line + addedLabel),
                 ComboType.NONE, Global.EMPTY_STRING);
         numberLine.setFullSize(false);
 
         start =
-            new Couple(shell, null, (Messages.label_start + addedLabel),
+            new Couple(null, (Messages.label_start + addedLabel),
                 ComboType.NONE, Global.EMPTY_STRING);
         start.setFullSize(false);
 
         end =
-            new Couple(shell, null, (Messages.label_end + addedLabel),
-                ComboType.NONE, Global.EMPTY_STRING);
+            new Couple(null, (Messages.label_end + addedLabel), ComboType.NONE,
+                Global.EMPTY_STRING);
         end.setFullSize(false);
 
-        buttonSet = new Button(shell, SWT.NULL);
         if (withCursor)
             cursor = new Cursor();
     }
@@ -97,11 +94,11 @@ public class AutoLine implements UIobject
         GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
 
         Composite compo1 = drawLineCompo(group);
-        compo1.setBackground(ViewEdit.background);
+        compo1.setBackground(ViewMain.backgroungEdit);
         drawLine(compo1, filled);
 
         Composite compo2 = drawSetCompo(group, 1);
-        compo2.setBackground(ViewEdit.background);
+        compo2.setBackground(ViewMain.backgroungEdit);
         drawSet(compo2, 1);
     }
 
@@ -136,8 +133,9 @@ public class AutoLine implements UIobject
         if (!unique)
             addedLabel =
                 Global.SPACE + Messages.label_line + Global.SPACE + (i + 1);
-        buttonSet.setParent(compo);
-        buttonSet.setBackground(ViewEdit.background);
+
+        buttonSet = new Button(compo, SWT.NONE);
+        buttonSet.setBackground(ViewMain.backgroungEdit);
         buttonSet.setText(Messages.button_set + addedLabel);
 
         buttonSet
@@ -147,7 +145,7 @@ public class AutoLine implements UIobject
                         org.eclipse.swt.events.SelectionEvent g)
                 {
 
-                    StyledText styledtext = ViewFile.styledTextStation;
+                    StyledText styledtext = ViewMain.textAreaStation;
                     int deb, fi, lign;
 
                     // on recupere les coordonnees de la selection
@@ -225,10 +223,8 @@ public class AutoLine implements UIobject
                     }
                     if (cursor != null)
                     {
-                        cursor
-                            .setX(ViewFile.styledTextStation.getSelection().x);
-                        cursor
-                            .setY(ViewFile.styledTextStation.getSelection().y);
+                        cursor.setX(ViewMain.textAreaStation.getSelection().x);
+                        cursor.setY(ViewMain.textAreaStation.getSelection().y);
                     }
                 }
             });
@@ -279,7 +275,7 @@ public class AutoLine implements UIobject
     protected int getFileHeaderPos()
     {
         int fileHeader = 0;
-        if (!ViewFile.dossierCampagne)
+        if (!ViewMain.dossierCampagne)
         {
             // fichier campagne
             fileHeader = DataModel.singleSurvey.getHeaderLinesNumber();
@@ -344,7 +340,7 @@ public class AutoLine implements UIobject
                             Utils.messageErreurAppend(sectionName
                                     + Global.SPACE + Messages.Regexp_19);
                     }
-                    EditStation.actualiseEdition();
+                    ViewMain.editStationForm.actualiseEdition();
                 break;
             }
         }
@@ -453,13 +449,13 @@ public class AutoLine implements UIobject
             else if (numberLine.getText().equals(Global.ZERO))
             {
                 // la ligne correspond au nom du fichier
-                if (ViewFile.radioFichier.getSelection())
+                if (ViewMain.radioFichier.getSelection())
                 {
-                    ligne = Utils.extraitFichierChemin(ViewFile.nomFichier);
+                    ligne = Utils.extraitFichierChemin(ViewMain.nomFichier);
                 }
                 else
                 {
-                    File directory = new File(ViewFile.nomRepertoire);
+                    File directory = new File(ViewMain.nomRepertoire);
                     File[] subfiles = directory.listFiles();
                     ligne = subfiles[0].getName();
                 }
@@ -526,7 +522,7 @@ public class AutoLine implements UIobject
                     + Utils.taillesCumLignes[lign - 1];
         fi = Integer.parseInt(end.getText()) + Utils.taillesCumLignes[lign - 1];
 
-        ViewFile.styledTextStation.setSelection(deb - 1, fi);
+        ViewMain.textAreaStation.setSelection(deb - 1, fi);
     }
 
     public boolean checkValues(String nomSection)
@@ -656,7 +652,7 @@ public class AutoLine implements UIobject
         int ligneFin = Integer.parseInt(numberLine.getText()) + nbreLignes - 1;
 
         int enteteFichier;
-        if (ViewFile.dossierCampagne)
+        if (ViewMain.dossierCampagne)
         {
             // dossier
             enteteFichier = 0;

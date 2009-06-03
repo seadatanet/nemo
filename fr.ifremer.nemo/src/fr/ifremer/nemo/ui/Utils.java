@@ -31,13 +31,8 @@ import fr.ifremer.nemo.input.InputModel;
 import fr.ifremer.nemo.ui.actions.OptionsAction;
 import fr.ifremer.nemo.ui.edit.Cursor;
 import fr.ifremer.nemo.ui.edit.DataModel;
-import fr.ifremer.nemo.ui.edit.conversion.EditConversion;
-import fr.ifremer.nemo.ui.edit.data.EditData;
-import fr.ifremer.nemo.ui.edit.desc.EditDesc;
-import fr.ifremer.nemo.ui.edit.station.EditStation;
-import fr.ifremer.nemo.ui.edit.survey.EditSurvey;
-import fr.ifremer.nemo.ui.view.ViewFile;
 import fr.ifremer.nemo.ui.view.ViewLog;
+import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
@@ -131,11 +126,11 @@ public class Utils
         ViewLog.styledTextLogInfos.append(Messages.Utils_6 + nbreLignes);
 
         // reactivation de l'option serie temporelle onglet DESC
-        ViewFile.enableChoice(true);
+        ViewMain.enableChoice(true);
 
         // FAE 089
         // RAZ global si reouverture fichier en cours de processus
-        EditDesc.nomNemo();
+        ViewMain.editFileForm.nomNemo();
 
         if (raz)
         {
@@ -144,7 +139,7 @@ public class Utils
             DataModel.ouverture = false;
 
             // reset de l'etape de conversion
-            ViewFile.etape = 0;
+            ViewMain.etape = 0;
         }
     }
 
@@ -249,7 +244,7 @@ public class Utils
         // on recupere les coordonnees de la selection
         deb = styledtext.getSelection().x;
         fi = styledtext.getSelection().y;
-        index = ViewFile.tableData.getSelectionIndex();
+        index = ViewMain.tableData.getSelectionIndex();
 
         if (deb == fi)
         {
@@ -295,9 +290,9 @@ public class Utils
             fi = fi - taillesCumLignes[lign - 1]; // fin reelle sur ligne
 
             // remplissage debut et fin dans interface
-            ViewFile.tableData.getItems()[index].setText(debut, String
+            ViewMain.tableData.getItems()[index].setText(debut, String
                 .valueOf(deb));
-            ViewFile.tableData.getItems()[index].setText(fin, String
+            ViewMain.tableData.getItems()[index].setText(fin, String
                 .valueOf(fi));
         }
     }
@@ -537,7 +532,8 @@ public class Utils
     {
         int offsetFin;
         int enteteFichier =
-            Integer.parseInt(EditDesc.sectionEnteteFichier.getValue());
+            Integer.parseInt(ViewMain.editFileForm.sectionEnteteFichier
+                .getValue());
 
         // calcul de l'offset de fin après rechargement du modèle
         if (enteteFichier > 0)
@@ -547,11 +543,11 @@ public class Utils
                 frag.getLastCharOffset()
                         + taillesCumLignes[frag.getLastLine()
                                 + Integer
-                                    .parseInt(EditDesc.sectionEnteteFichier
+                                    .parseInt(ViewMain.editFileForm.sectionEnteteFichier
                                         .getValue())]
                         - taillesCumLignes[frag.getFirstLine()
                                 + Integer
-                                    .parseInt(EditDesc.sectionEnteteFichier
+                                    .parseInt(ViewMain.editFileForm.sectionEnteteFichier
                                         .getValue())];
         }
         else
@@ -770,92 +766,97 @@ public class Utils
 
         // check etape/onglet
 
-        // ViewFile.affiche = onglet courant
-        // onglet = onglet destination
+        // ViewMain.affiche => onglet courant
+        // onglet => onglet destination
 
         switch (onglet)
         {
             case 0:
                 ViewLog.aideDesc();
-                razEditionCurrent();
-                if (EditDesc.loaded)
+                if (ViewMain.editFileForm != null)
                 {
-                    EditDesc.DrawingBack();
+                    razEditionCurrent();
+                    if (ViewMain.editFileForm.loaded)
+                    {
+                        // EditDesc.DrawingBack();
+                        ViewMain.editFileForm.DrawingBack();
+                    }
+                    else if (ViewMain.fileLoaded)
+                    {
+                        // EditDesc.affichageEdition();
+                        ViewMain.editFileForm.afficheEdition();
+                    }
+                    else
+                    {
+                        ViewMain.textAreaFile.setText(Global.EMPTY_STRING);
+                    }
                 }
-                else if (ViewFile.fileLoaded)
-                {
-                    EditDesc.affichageEdition();
-                }
-                else
-                {
-                    ViewFile.textAreaDescription.setText(Global.EMPTY_STRING);
-                }
-                ViewFile.affiche = 0;
+                ViewMain.affiche = 0;
             break;
             case 1:
                 ViewLog.aideSurvey();
                 razEditionCurrent();
-                if (EditSurvey.loaded)
+                if (ViewMain.editCruiseForm.loaded)
                 {
-                    EditSurvey.DrawingBack();
+                    ViewMain.editCruiseForm.DrawingBack();
                 }
-                else if (EditDesc.validee)
+                else if (ViewMain.editFileForm.validee)
                 {
-                    EditSurvey.affichageEdition();
+                    ViewMain.editCruiseForm.afficheEdition();
                 }
                 else
                 {
-                    ViewFile.styledTextCampagne.setText(Global.EMPTY_STRING);
+                    ViewMain.textAreaCruise.setText(Global.EMPTY_STRING);
                 }
-                ViewFile.affiche = 1;
+                ViewMain.affiche = 1;
             break;
             case 2:
                 ViewLog.aideStation();
                 razEditionCurrent();
-                if (EditStation.loaded)
+                if (ViewMain.editStationForm.loaded)
                 {
-                    EditStation.DrawingBack();
+                    ViewMain.editStationForm.DrawingBack();
                 }
-                else if ((!ViewFile.tabItem1.isDisposed() && EditSurvey.validee)
-                        || (ViewFile.tabItem1.isDisposed() && EditDesc.validee))
+                else if ((!ViewMain.tabCruise.isDisposed() && ViewMain.editCruiseForm.validee)
+                        || (ViewMain.tabCruise.isDisposed() && ViewMain.editFileForm.validee))
                 {
-                    EditStation.affichageEdition();
+                    ViewMain.editStationForm.afficheEdition();
                 }
                 else
                 {
-                    ViewFile.styledTextStation.setText(Global.EMPTY_STRING);
+                    ViewMain.textAreaStation.setText(Global.EMPTY_STRING);
                 }
-                ViewFile.affiche = 2;
+                ViewMain.affiche = 2;
             break;
             case 3:
                 ViewLog.aideData();
                 razEditionCurrent();
-                if (EditData.loaded)
+                if (ViewMain.editDataForm.loaded)
                 {
-                    EditData.DrawingBack();
+                    ViewMain.editDataForm.DrawingBack();
                 }
-                else if (EditStation.validee)
+                else if (ViewMain.editStationForm.validee)
                 {
-                    EditData.affichageEdition();
+                    ViewMain.editDataForm.afficheEdition();
                 }
                 else
                 {
-                    ViewFile.styledTextData.setText(Global.EMPTY_STRING);
+                    ViewMain.textAreaData.setText(Global.EMPTY_STRING);
                 }
-                ViewFile.affiche = 3;
+                ViewMain.affiche = 3;
             break;
             case 4:
                 ViewLog.aideConversion();
                 razEditionCurrent();
-                if (EditConversion.loaded)
+                if (ViewMain.editConversionForm.loaded)
                 {
-                    EditConversion.DrawingBack();
+                    ViewMain.editConversionForm.DrawingBack();
                 }
-                else if (EditData.validee)
+                else if (ViewMain.editDataForm.validee)
                 {
-                    EditConversion.affichageEdition();
+                    ViewMain.editConversionForm.afficheEdition();
                 }
-                ViewFile.affiche = 4;
+                ViewMain.affiche = 4;
             break;
         }
 
@@ -863,32 +864,32 @@ public class Utils
 
     private static void razEditionCurrent()
     {
-        switch (ViewFile.affiche)
+        switch (ViewMain.affiche)
         {
             case 0:
                 // from FILE
-                if (EditDesc.loaded)
-                    EditDesc.razEdition();
+                if (ViewMain.editFileForm.loaded)
+                    ViewMain.editFileForm.razEdition();
             break;
             case 1:
                 // from CRUISE
-                if (EditSurvey.loaded)
-                    EditSurvey.razEdition();
+                if (ViewMain.editCruiseForm.loaded)
+                    ViewMain.editCruiseForm.razEdition();
             break;
             case 2:
                 // from STATION
-                if (EditStation.loaded)
-                    EditStation.razEdition();
+                if (ViewMain.editStationForm.loaded)
+                    ViewMain.editStationForm.razEdition();
             break;
             case 3:
                 // from DATA
-                if (EditData.loaded)
-                    EditData.razEdition();
+                if (ViewMain.editDataForm.loaded)
+                    ViewMain.editDataForm.razEdition();
             break;
             case 4:
                 // from DATA
-                if (EditConversion.loaded)
-                    EditConversion.razEdition();
+                if (ViewMain.editConversionForm.loaded)
+                    ViewMain.editConversionForm.razEdition();
             break;
             default:
             break;
@@ -947,14 +948,14 @@ public class Utils
         if (ok)
         {
 
-            ViewFile.nomFichier =
+            ViewMain.nomFichier =
                 directoryPath + File.separator + subfiles[0].getName();
-            ViewFile.nomRepertoire = directoryPath;
+            ViewMain.nomRepertoire = directoryPath;
 
             try
             {
-                Utils.insertTextFich(ViewFile.nomFichier,
-                    ViewFile.textAreaDescription, raz);
+                Utils.insertTextFich(ViewMain.nomFichier,
+                    ViewMain.textAreaFile, raz);
             }
             catch (IOException e)
             {
@@ -1061,15 +1062,15 @@ public class Utils
         if (ok)
         {
 
-            ViewFile.nomFichier =
+            ViewMain.nomFichier =
                 directoryPath
                         + "/" + subfiles[0].getName() + "/" + subsubfiles[0].getName(); //$NON-NLS-1$ //$NON-NLS-2$
-            ViewFile.nomRepertoire = directoryPath;
+            ViewMain.nomRepertoire = directoryPath;
 
             try
             {
-                Utils.insertTextFich(ViewFile.nomFichier,
-                    ViewFile.textAreaDescription, raz);
+                Utils.insertTextFich(ViewMain.nomFichier,
+                    ViewMain.textAreaFile, raz);
             }
             catch (IOException e)
             {
@@ -1272,10 +1273,10 @@ public class Utils
     {
         // efface tous les onglets qui ont ete affiches jusque le en preparation
         // du chargement d'un nouveau fichier
-        if (EditDesc.sectionEnteteFichier != null)
+        if (ViewMain.editFileForm.sectionEnteteFichier != null)
         {
             // //effacement boutons
-            EditDesc.razEdition();
+            ViewMain.editFileForm.razEdition();
         }
         invalidEtapes();
     }
@@ -1592,23 +1593,25 @@ public class Utils
 
         // on invalide toutes les étapes suivantes avec le second
         // flag okApresReset à false
-        int currentTab = ViewFile.affiche;
+        if (ViewMain.editFileForm != null)
+        {
+            int currentTab = ViewMain.affiche;
 
-        if (currentTab <= 0) // onglet FILE ou inférieur en cours
-            EditDesc.invalidEtape();
+            if (currentTab <= 0) // onglet FILE ou inférieur en cours
+                ViewMain.editFileForm.invalidEtape();
 
-        if (currentTab <= 1) // onglet CRUISE ou inférieur en cours
-            EditSurvey.invalidEtape();
+            if (currentTab <= 1) // onglet CRUISE ou inférieur en cours
+                ViewMain.editCruiseForm.invalidEtape();
 
-        if (currentTab <= 2) // onglet STATION ou inférieur en cours
-            EditStation.invalidEtape();
+            if (currentTab <= 2) // onglet STATION ou inférieur en cours
+                ViewMain.editStationForm.invalidEtape();
 
-        if (currentTab <= 3) // onglet DATA ou inférieur en cours
-            EditData.invalidEtape();
+            if (currentTab <= 3) // onglet DATA ou inférieur en cours
+                ViewMain.editDataForm.invalidEtape();
 
-        if (currentTab <= 4) // onglet CONVERSION ou inférieur en cours
-            EditConversion.invalidEtape();
-
+            if (currentTab <= 4) // onglet CONVERSION ou inférieur en cours
+                ViewMain.editConversionForm.invalidEtape();
+        }
         // reinitialisation de la conversion
         if (DataModel.inputModel != null)
             DataModel.inputModel.setConverted(false);

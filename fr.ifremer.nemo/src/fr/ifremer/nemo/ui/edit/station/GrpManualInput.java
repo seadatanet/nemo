@@ -14,12 +14,11 @@ import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Shell;
 
 import fr.ifremer.nemo.ui.edit.ComboType;
 import fr.ifremer.nemo.ui.edit.Couple;
 import fr.ifremer.nemo.ui.edit.UIobject;
-import fr.ifremer.nemo.ui.view.ViewEdit;
+import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -32,12 +31,12 @@ public class GrpManualInput implements UIobject
 {
 
     private String labelButton;
-    private final Button buttonSaisie;
+    private Button buttonSaisie;
     private final ArrayList<Couple> lines;
     private int nbColumns = 1;
 
-    public GrpManualInput(Shell shell, int nbLine, String labelButton,
-            ComboType cType, String defaultValue)
+    public GrpManualInput(int nbLine, String labelButton, ComboType cType,
+            String defaultValue)
     {
 
         this.labelButton = labelButton;
@@ -46,20 +45,18 @@ public class GrpManualInput implements UIobject
             this.labelButton = Messages.label_manual_01;
         }
 
-        buttonSaisie = new Button(shell, SWT.RADIO);
-
         lines = new ArrayList<Couple>();
         if (nbLine > 1)
         {
             for (int i = 0; i < nbLine; i++)
             {
                 String label = Messages.label_line + Global.SPACE + (i + 1);
-                lines.add(new Couple(shell, null, label, cType, defaultValue));
+                lines.add(new Couple(null, label, cType, defaultValue));
             }
         }
         else
         {
-            Couple couple = new Couple(shell, cType, defaultValue);
+            Couple couple = new Couple(cType, defaultValue);
             if (cType == ComboType.BLOCK)
                 couple.setTextLimit(500);
             lines.add(couple);
@@ -73,8 +70,9 @@ public class GrpManualInput implements UIobject
         GridLayoutFactory.fillDefaults().numColumns(nbColumns).applyTo(compo);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(compo);
 
+        buttonSaisie = new Button(compo, SWT.RADIO);
         buttonSaisie.setParent(compo);
-        buttonSaisie.setBackground(ViewEdit.background);
+        buttonSaisie.setBackground(ViewMain.backgroungEdit);
         buttonSaisie.setText(labelButton);
 
         for (Couple line : lines)

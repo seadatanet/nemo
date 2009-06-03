@@ -18,15 +18,11 @@ import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.input.SingleFileSurvey;
 import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.edit.data.EditData;
+import fr.ifremer.nemo.ui.edit.cruise.TableDataSurvey;
 import fr.ifremer.nemo.ui.edit.data.TableData;
 import fr.ifremer.nemo.ui.edit.data.TypeData;
-import fr.ifremer.nemo.ui.edit.desc.EditDesc;
-import fr.ifremer.nemo.ui.edit.desc.FileEndData;
-import fr.ifremer.nemo.ui.edit.station.EditStation;
-import fr.ifremer.nemo.ui.edit.survey.EditSurvey;
-import fr.ifremer.nemo.ui.edit.survey.TableDataSurvey;
-import fr.ifremer.nemo.ui.view.ViewFile;
+import fr.ifremer.nemo.ui.edit.file.FileEndData;
+import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
@@ -59,6 +55,15 @@ public class DataModel
             timeSeriesInformation_modele;
 
     public static Trajectory trajectory;
+
+    public static void init()
+    {
+        // on initialise les dataTypes, centers et parameters en prevision des
+        // onglets Campagne et Data
+
+        listeWSDataTypes = NemoLists.getDataTypes();
+        listeWSParameters = NemoLists.getParameters();
+    }
 
     public static void initModele(Boolean fichier, String typeFichier,
             String nomFich)
@@ -116,62 +121,63 @@ public class DataModel
     {
         int fileHeader = 0;
         // taille du header fichier
-        if (ViewFile.dossierCampagne)
+        if (ViewMain.dossierCampagne)
         {
-            dirSurvey.setDirectory(ViewFile.nomRepertoire);
+            dirSurvey.setDirectory(ViewMain.nomRepertoire);
             stationModel = dirSurvey.getStationModel();
         }
         else
         {
             fileHeader =
-                Integer.parseInt(EditDesc.sectionEnteteFichier.getValue());
+                Integer.parseInt(ViewMain.editFileForm.sectionEnteteFichier
+                    .getValue());
             singleSurvey.setHeaderLinesNumber(fileHeader);
             stationModel = singleSurvey.getStationModel();
         }
 
         // Type de fichier
-        stationModel.setInputType(ViewFile.typeFichierEntree());
+        stationModel.setInputType(ViewMain.typeFichierEntree());
 
         // serie temporelle
-        if (ViewFile.radSerieTempo.getSelection()
-                || ViewFile.radTrajectoire.getSelection())
+        if (ViewMain.radSerieTempo.getSelection()
+                || ViewMain.radTrajectoire.getSelection())
         {
             timeSeriesInformation = stationModel.getTimeSeriesInformation();
         }
 
         // trajectoire
-        if (ViewFile.radTrajectoire.getSelection())
+        if (ViewMain.radTrajectoire.getSelection())
         {
             trajectory = stationModel.getTrajectory();
         }
 
         // séparateur
-        if (ViewFile.chkSeparateur.getSelection())
+        if (ViewMain.chkSeparateur.getSelection())
         {
-            if (ViewFile.radioTabulation.getSelection())
+            if (ViewMain.radioTabulation.getSelection())
             {
                 // Tabulation
                 stationModel.setSeparator(Global.TAB);
             }
-            else if (ViewFile.radioPointVirgule.getSelection())
+            else if (ViewMain.radioPointVirgule.getSelection())
             {
                 // Point-virgule
                 stationModel.setSeparator(Global.SEMICOLON);
             }
-            else if (ViewFile.radioVirgule.getSelection())
+            else if (ViewMain.radioVirgule.getSelection())
             {
                 // Virgule
                 stationModel.setSeparator(Global.COMMA);
             }
-            else if (ViewFile.radioEspace.getSelection())
+            else if (ViewMain.radioEspace.getSelection())
             {
                 // Espace
                 stationModel.setSeparator(Global.SPACE);
             }
-            else if (ViewFile.radioSeparateurAutre.getSelection())
+            else if (ViewMain.radioSeparateurAutre.getSelection())
             {
                 // Autre
-                stationModel.setSeparator(ViewFile.textSeparateur.getText());
+                stationModel.setSeparator(ViewMain.textSeparateur.getText());
             }
             else
             {
@@ -184,16 +190,16 @@ public class DataModel
         }
 
         // nombre lignes entete station
-        if (!EditDesc.sectionEnteteStation.isSelectNumber())
+        if (!ViewMain.editFileForm.sectionEnteteStation.isSelectNumber())
         {
             stationModel.setEndStationHeaderPattern(true);
 
             String stationPattern =
-                EditDesc.sectionEnteteStation.getIndicatorText();
+                ViewMain.editFileForm.sectionEnteteStation.getIndicatorText();
             stationModel.setEndStationHeader(stationPattern);
 
             int interLines =
-                Integer.parseInt(EditDesc.sectionEnteteStation
+                Integer.parseInt(ViewMain.editFileForm.sectionEnteteStation
                     .getNbLinesBeforeData());
             stationModel.setNumberLinesBetweenStationData(interLines);
             int stationHeader = interLines;
@@ -218,60 +224,58 @@ public class DataModel
         else
         {
             stationModel.setEndStationHeaderPattern(false);
-            stationModel.setNumberOfLines(EditDesc.sectionEnteteStation
-                .getValue());
+            stationModel
+                .setNumberOfLines(ViewMain.editFileForm.sectionEnteteStation
+                    .getValue());
         }
 
         // nombre de lignes de fin
-        stationModel.setEndData(Integer.parseInt(EditDesc.sectionFinStation
-            .getValue()));
+        stationModel.setEndData(Integer
+            .parseInt(ViewMain.editFileForm.sectionFinStation.getValue()));
 
         // attribut pattern fin donnees en acces direct
-        if (EditDesc.sectionRuptureDonnees.radEOFselected())
+        if (ViewMain.editFileForm.sectionRuptureDonnees.radEOFselected())
         {
             stationModel.setEndOnEmptyLine(false);
             stationModel.setEndOnEOF(true);
             stationModel.setEndOnNextStation(false);
             stationModel.setEndOnPattern(false);
         }
-        else if (EditDesc.sectionRuptureDonnees.radLigneSelected())
+        else if (ViewMain.editFileForm.sectionRuptureDonnees.radLigneSelected())
         {
             stationModel.setEndOnEmptyLine(true);
             stationModel.setEndOnEOF(false);
             stationModel.setEndOnNextStation(false);
             stationModel.setEndOnPattern(false);
         }
-        else if (EditDesc.sectionRuptureDonnees.radNextStationSelected())
+        else if (ViewMain.editFileForm.sectionRuptureDonnees
+            .radNextStationSelected())
         {
             stationModel.setEndOnEmptyLine(false);
             stationModel.setEndOnEOF(false);
             stationModel.setEndOnNextStation(true);
-            stationModel.setEndDataPattern(EditDesc.sectionRuptureDonnees
-                .getStartStationIndicator());
+            stationModel
+                .setEndDataPattern(ViewMain.editFileForm.sectionRuptureDonnees
+                    .getStartStationIndicator());
             stationModel.setEndOnPattern(false);
         }
-        else if (EditDesc.sectionRuptureDonnees.radManuelSelected())
+        else if (ViewMain.editFileForm.sectionRuptureDonnees
+            .radManuelSelected())
         {
             stationModel.setEndOnEmptyLine(false);
             stationModel.setEndOnEOF(false);
             stationModel.setEndOnNextStation(false);
             stationModel.setEndOnPattern(true);
-            stationModel.setEndDataPattern(EditDesc.sectionRuptureDonnees
-                .getValue());
+            stationModel
+                .setEndDataPattern(ViewMain.editFileForm.sectionRuptureDonnees
+                    .getValue());
         }
 
-        // on initialise les dataTypes, centers et parameters en prevision des
-        // onglets Campagne et Data
-
-        listeWSDataTypes = NemoLists.getDataTypes();
-        listeWSParameters = NemoLists.getParameters();
-        TableData.go();
-
         // verrouillage de l'option serieTemporelle pour eviter les changements
-        ViewFile.enableChoice(false);
+        ViewMain.enableChoice(false);
 
         // flag "validee" e 1
-        EditDesc.validee = true;
+        ViewMain.editFileForm.validee = true;
 
     }
 
@@ -279,37 +283,47 @@ public class DataModel
     {
         // recupération des items
         Couple refCampagne =
-            EditSurvey.sectionReference.getItem(Messages.edit_cruise_cruiseRef);
+            ViewMain.editCruiseForm.sectionReference
+                .getItem(Messages.edit_cruise_cruiseRef);
         Couple nomCampagne =
-            EditSurvey.sectionReference
+            ViewMain.editCruiseForm.sectionReference
                 .getItem(Messages.edit_cruise_cruiseName);
         Couple navire =
-            EditSurvey.sectionReference.getItem(Messages.edit_cruise_ship);
+            ViewMain.editCruiseForm.sectionReference
+                .getItem(Messages.edit_cruise_ship);
         Couple dateDebut =
-            EditSurvey.sectionLocalisation
+            ViewMain.editCruiseForm.sectionLocalisation
                 .getItem(Messages.edit_cruise_startDate);
         Couple dateFin =
-            EditSurvey.sectionLocalisation
+            ViewMain.editCruiseForm.sectionLocalisation
                 .getItem(Messages.edit_cruise_endDate);
         Couple region =
-            EditSurvey.sectionLocalisation.getItem(Messages.edit_cruise_region);
+            ViewMain.editCruiseForm.sectionLocalisation
+                .getItem(Messages.edit_cruise_region);
         Couple pays =
-            EditSurvey.sectionSource.getItem(Messages.edit_cruise_country);
+            ViewMain.editCruiseForm.sectionSource
+                .getItem(Messages.edit_cruise_country);
         Couple labo =
-            EditSurvey.sectionSource.getItem(Messages.edit_cruise_lab);
+            ViewMain.editCruiseForm.sectionSource
+                .getItem(Messages.edit_cruise_lab);
         Couple chef =
-            EditSurvey.sectionSource.getItem(Messages.edit_cruise_chief);
+            ViewMain.editCruiseForm.sectionSource
+                .getItem(Messages.edit_cruise_chief);
         Couple projet =
-            EditSurvey.sectionSource.getItem(Messages.edit_cruise_project);
+            ViewMain.editCruiseForm.sectionSource
+                .getItem(Messages.edit_cruise_project);
         Couple centreDonnee =
-            EditSurvey.sectionCentre.getItem(Messages.edit_cruise_dataCenter);
+            ViewMain.editCruiseForm.sectionCentre
+                .getItem(Messages.edit_cruise_dataCenter);
         Couple confidentialite =
-            EditSurvey.sectionCentre.getItem(Messages.edit_cruise_confident);
+            ViewMain.editCruiseForm.sectionCentre
+                .getItem(Messages.edit_cruise_confident);
         Couple commentaires =
-            EditSurvey.sectionCommentaire.getItem(Global.EMPTY_STRING);
+            ViewMain.editCruiseForm.sectionCommentaire
+                .getItem(Global.EMPTY_STRING);
 
         Survey survey;
-        if (ViewFile.dossierCampagne)
+        if (ViewMain.dossierCampagne)
         {
             survey = dirSurvey.getModel();
         }
@@ -325,9 +339,9 @@ public class DataModel
 
         // injection des valeurs de l'IHM -> datamodel
         // reference
-        if (ViewFile.tabItem1.isDisposed())
+        if (ViewMain.tabCruise.isDisposed())
         {
-            EditSurvey.validee = true;
+            ViewMain.editCruiseForm.validee = true;
             return;
         }
 
@@ -390,16 +404,17 @@ public class DataModel
         survey.setComment(commentaires.getText());
 
         // remplissage de la liste des dataTypes de la campagne
-        EditSurvey.sectionType.initModel(survey);
+        ViewMain.editCruiseForm.sectionType.initModel(survey);
 
-        EditSurvey.validee = true;
+        ViewMain.editCruiseForm.validee = true;
     }
 
     private static void initDiseabledField(String property)
     {
         PropertyModel propertyModel =
             stationModel.getTimeSeriesModel().propertiesAt(property);
-        propertyModel.setFlag(EditStation.qcFlags.getFlagFragment(property)); // Flag
+        propertyModel.setFlag(ViewMain.editStationForm.qcFlags
+            .getFlagFragment(property)); // Flag
         // qualite
         propertyModel.setToCompute(true);
     }
@@ -409,30 +424,33 @@ public class DataModel
         PropertyModel propertyModel;
 
         // compléter ELAT / ELON et EDEPTH si nécessaire
-        if (ViewFile.radSerieTempo.getSelection())
+        if (ViewMain.radSerieTempo.getSelection())
         {
-            if (EditStation.endLatitude.getValue().trim().equals(
+            if (ViewMain.editStationForm.endLatitude.getValue().trim().equals(
                 Global.EMPTY_STRING))
             {
                 // vide donc on recopie latitude dans latitude de fin
-                EditStation.endLatitude.copyValues(EditStation.latitude);
+                ViewMain.editStationForm.endLatitude
+                    .copyValues(ViewMain.editStationForm.latitude);
             }
-            if (EditStation.endLongitude.getValue().trim().equals(
+            if (ViewMain.editStationForm.endLongitude.getValue().trim().equals(
                 Global.EMPTY_STRING))
             {
                 // vide donc on recopie longitude dans longitude de fin
-                EditStation.endLongitude.copyValues(EditStation.longitude);
+                ViewMain.editStationForm.endLongitude
+                    .copyValues(ViewMain.editStationForm.longitude);
             }
-            if (EditStation.endDepth.getValue().trim().equals(
+            if (ViewMain.editStationForm.endDepth.getValue().trim().equals(
                 Global.EMPTY_STRING))
             {
                 // vide donc on recopie profondeur dans profondeur de fin
-                EditStation.endDepth.copyValues(EditStation.depth);
+                ViewMain.editStationForm.endDepth
+                    .copyValues(ViewMain.editStationForm.depth);
             }
         }
 
         // parcours des sections de la station pour initialisation
-        for (NemoSection stationSection : EditStation.listeSectionsStation)
+        for (NemoSection stationSection : ViewMain.editStationForm.listeSectionsStation)
         {
             stationSection.initModel(stationModel);
         }
@@ -443,11 +461,11 @@ public class DataModel
         station.setDmHistory1(Global.EMPTY_STRING);
         station.setDmHistory2(Global.EMPTY_STRING);
 
-        if (ViewFile.radSerieTempo.getSelection()
-                || ViewFile.radTrajectoire.getSelection())
+        if (ViewMain.radSerieTempo.getSelection()
+                || ViewMain.radTrajectoire.getSelection())
         {
             // GESTION Time/Date in Data
-            if (EditStation.samplingRate.isEnabled())
+            if (ViewMain.editStationForm.samplingRate.isEnabled())
             {
                 // calcul e partir frequence echantillonnage
                 stationModel.getTimestampModel().setComputed(true);
@@ -467,16 +485,16 @@ public class DataModel
                 stationModel.getTimeSeriesModel().propertiesAt(
                     NemoSection.S_EDATE);
             propertyModel.setUserProvided(true);
-            propertyModel.setFlag(EditStation.qcFlags
+            propertyModel.setFlag(ViewMain.editStationForm.qcFlags
                 .getFlagFragment(Global.ENDDATETIME)); // Flag qualite
             propertyModel =
                 stationModel.getTimeSeriesModel().propertiesAt(
                     NemoSection.S_ETIME);
             propertyModel.setUserProvided(true);
-            propertyModel.setFlag(EditStation.qcFlags
+            propertyModel.setFlag(ViewMain.editStationForm.qcFlags
                 .getFlagFragment(Global.ENDDATETIME)); // Flag qualite
 
-            if (ViewFile.radTrajectoire.getSelection())
+            if (ViewMain.radTrajectoire.getSelection())
             {
                 initDiseabledField(NemoSection.S_ELAT);
                 initDiseabledField(NemoSection.S_ELON);
@@ -493,7 +511,7 @@ public class DataModel
         } // fin specifique SERIE TEMPO ou TRAJECTOIRE
 
         // flag validation e 1
-        EditStation.validee = true;
+        ViewMain.editStationForm.validee = true;
     }
 
     public static void initData()
@@ -564,7 +582,7 @@ public class DataModel
         // enregistrement de l'indexPRES
         stationModel.setPresIndex(indexPRES);
 
-        EditData.validee = true;
+        ViewMain.editDataForm.validee = true;
 
     }
 
@@ -582,18 +600,19 @@ public class DataModel
         inputModel_modele = input;
 
         // forcage affichage onglet 0
-        ViewFile.tabFolder.setSelection(0);
-        ViewFile.affiche = 0;
+        ViewMain.tabFolder.setSelection(0);
+        ViewMain.affiche = 0;
         // Utils.invalidEtapes();
         // RAZ global
         Utils.razGlobal();
 
         // reset de l'etape de conversion
-        ViewFile.etape = 0;
+        ViewMain.etape = 0;
 
         // lancement du processus sur le premier onglet et effacement preventif
         // si besoin
-        fillDesc(true);
+        // fillDesc(true);
+        ViewMain.editFileForm.afficheEdition();
     }
 
     public static void fillDesc(boolean raz) throws RuntimeException
@@ -608,7 +627,7 @@ public class DataModel
             singleSurvey_modele.releaseInputModel();
         }
 
-        if (ViewFile.dossierCampagne)
+        if (ViewMain.dossierCampagne)
         {
             try
             {
@@ -623,7 +642,7 @@ public class DataModel
                 throw e;
             }
             stationModel_modele = dirSurvey_modele.getStationModel();
-            EditDesc.sectionEnteteFichier.razValues();
+            ViewMain.editFileForm.sectionEnteteFichier.razValues();
         }
         else
         {
@@ -641,7 +660,7 @@ public class DataModel
             }
             stationModel_modele = singleSurvey_modele.getStationModel();
             // lignes entete fichier
-            EditDesc.sectionEnteteFichier.setValue(String
+            ViewMain.editFileForm.sectionEnteteFichier.setValue(String
                 .valueOf(singleSurvey_modele.getHeaderLinesNumber()));
 
         }
@@ -654,11 +673,11 @@ public class DataModel
                     && (stationModel_modele.getTimeSeriesInformation() != null))
             {
                 // Pour exploiter les anciens modeles
-                ViewFile.selectTypeFile(Global.TIMESERIES);
+                ViewMain.selectTypeFile(Global.TIMESERIES);
             }
             else
             {
-                ViewFile.selectTypeFile(stationModel_modele.getInputType());
+                ViewMain.selectTypeFile(stationModel_modele.getInputType());
             }
 
             // séparateur
@@ -671,80 +690,80 @@ public class DataModel
 
             boolean blnSeparator = !Global.EMPTY_STRING.equals(strSeparator);
 
-            ViewFile.chkSeparateur.setSelection(blnSeparator);
-            ViewFile.setSeparatorVisible();
+            ViewMain.chkSeparateur.setSelection(blnSeparator);
+            ViewMain.setSeparatorVisible();
 
             if (blnSeparator)
             {
                 if (Global.TAB.equals(strSeparator))
                 {
                     // Tabulation
-                    ViewFile.radioTabulation.setSelection(true);
-                    ViewFile.radioPointVirgule.setSelection(false);
-                    ViewFile.radioVirgule.setSelection(false);
-                    ViewFile.radioEspace.setSelection(false);
-                    ViewFile.radioSeparateurAutre.setSelection(false);
-                    ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
+                    ViewMain.radioTabulation.setSelection(true);
+                    ViewMain.radioPointVirgule.setSelection(false);
+                    ViewMain.radioVirgule.setSelection(false);
+                    ViewMain.radioEspace.setSelection(false);
+                    ViewMain.radioSeparateurAutre.setSelection(false);
+                    ViewMain.textSeparateur.setText(Global.EMPTY_STRING);
                 }
                 else if (Global.SEMICOLON.equals(strSeparator))
                 {
                     // Point-virgule
-                    ViewFile.radioTabulation.setSelection(false);
-                    ViewFile.radioPointVirgule.setSelection(true);
-                    ViewFile.radioVirgule.setSelection(false);
-                    ViewFile.radioEspace.setSelection(false);
-                    ViewFile.radioSeparateurAutre.setSelection(false);
-                    ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
+                    ViewMain.radioTabulation.setSelection(false);
+                    ViewMain.radioPointVirgule.setSelection(true);
+                    ViewMain.radioVirgule.setSelection(false);
+                    ViewMain.radioEspace.setSelection(false);
+                    ViewMain.radioSeparateurAutre.setSelection(false);
+                    ViewMain.textSeparateur.setText(Global.EMPTY_STRING);
                 }
                 else if (Global.COMMA.equals(strSeparator))
                 {
                     // Virgule
-                    ViewFile.radioTabulation.setSelection(false);
-                    ViewFile.radioPointVirgule.setSelection(false);
-                    ViewFile.radioVirgule.setSelection(true);
-                    ViewFile.radioEspace.setSelection(false);
-                    ViewFile.radioSeparateurAutre.setSelection(false);
-                    ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
+                    ViewMain.radioTabulation.setSelection(false);
+                    ViewMain.radioPointVirgule.setSelection(false);
+                    ViewMain.radioVirgule.setSelection(true);
+                    ViewMain.radioEspace.setSelection(false);
+                    ViewMain.radioSeparateurAutre.setSelection(false);
+                    ViewMain.textSeparateur.setText(Global.EMPTY_STRING);
                 }
                 else if (Global.SPACE.equals(strSeparator))
                 {
                     // Espace
-                    ViewFile.radioTabulation.setSelection(false);
-                    ViewFile.radioPointVirgule.setSelection(false);
-                    ViewFile.radioVirgule.setSelection(false);
-                    ViewFile.radioEspace.setSelection(true);
-                    ViewFile.radioSeparateurAutre.setSelection(false);
-                    ViewFile.textSeparateur.setText(Global.EMPTY_STRING);
+                    ViewMain.radioTabulation.setSelection(false);
+                    ViewMain.radioPointVirgule.setSelection(false);
+                    ViewMain.radioVirgule.setSelection(false);
+                    ViewMain.radioEspace.setSelection(true);
+                    ViewMain.radioSeparateurAutre.setSelection(false);
+                    ViewMain.textSeparateur.setText(Global.EMPTY_STRING);
                 }
                 else
                 {
                     // Autre séparateur
-                    ViewFile.radioTabulation.setSelection(false);
-                    ViewFile.radioPointVirgule.setSelection(false);
-                    ViewFile.radioVirgule.setSelection(false);
-                    ViewFile.radioEspace.setSelection(false);
-                    ViewFile.radioSeparateurAutre.setSelection(true);
-                    ViewFile.textSeparateur.setText(strSeparator);
+                    ViewMain.radioTabulation.setSelection(false);
+                    ViewMain.radioPointVirgule.setSelection(false);
+                    ViewMain.radioVirgule.setSelection(false);
+                    ViewMain.radioEspace.setSelection(false);
+                    ViewMain.radioSeparateurAutre.setSelection(true);
+                    ViewMain.textSeparateur.setText(strSeparator);
                 }
             }
 
             // nombre lignes entete station
-            EditDesc.sectionEnteteStation.selectNumber(!stationModel_modele
-                .isEndStationHeaderPattern());
-            EditDesc.sectionEnteteStation.setIndicatorText(stationModel_modele
-                .getEndStationHeader());
-            EditDesc.sectionEnteteStation
+            ViewMain.editFileForm.sectionEnteteStation
+                .selectNumber(!stationModel_modele.isEndStationHeaderPattern());
+            ViewMain.editFileForm.sectionEnteteStation
+                .setIndicatorText(stationModel_modele.getEndStationHeader());
+            ViewMain.editFileForm.sectionEnteteStation
                 .setNbLinesBeforeData(String.valueOf(stationModel_modele
                     .getNumberLinesBetweenStationData()));
-            EditDesc.sectionEnteteStation.setValue(String
+            ViewMain.editFileForm.sectionEnteteStation.setValue(String
                 .valueOf(stationModel_modele.getNumberOfLines()));
 
             // nombre de lignes de fin
-            EditDesc.sectionFinStation.setValue(String
+            ViewMain.editFileForm.sectionFinStation.setValue(String
                 .valueOf(stationModel_modele.getEndData()));
 
             // section EndData
-            FileEndData endData = EditDesc.sectionRuptureDonnees;
+            FileEndData endData = ViewMain.editFileForm.sectionRuptureDonnees;
             if (stationModel_modele.isEndOnEOF())
             {
                 endData.selectEndData(endData.getRadEOF());
@@ -766,13 +785,13 @@ public class DataModel
             }
 
             // refresh de la zone d'edition
-            EditDesc.razEdition();
-            EditDesc.DrawingBack();
+            // ViewMain.editDescForm.razEdition();
+            // ViewMain.editDescForm.DrawingBack();
 
             DataModel.ouverture = true;
 
             // activation option serie tempo
-            ViewFile.enableChoice(true);
+            ViewMain.enableChoice(true);
         }
         catch (Exception e)
         {
@@ -785,38 +804,48 @@ public class DataModel
     {
         // recupération des items
         Couple refCampagne =
-            EditSurvey.sectionReference.getItem(Messages.edit_cruise_cruiseRef);
+            ViewMain.editCruiseForm.sectionReference
+                .getItem(Messages.edit_cruise_cruiseRef);
         Couple nomCampagne =
-            EditSurvey.sectionReference
+            ViewMain.editCruiseForm.sectionReference
                 .getItem(Messages.edit_cruise_cruiseName);
         Couple navire =
-            EditSurvey.sectionReference.getItem(Messages.edit_cruise_ship);
+            ViewMain.editCruiseForm.sectionReference
+                .getItem(Messages.edit_cruise_ship);
         Couple dateDebut =
-            EditSurvey.sectionLocalisation
+            ViewMain.editCruiseForm.sectionLocalisation
                 .getItem(Messages.edit_cruise_startDate);
         Couple dateFin =
-            EditSurvey.sectionLocalisation
+            ViewMain.editCruiseForm.sectionLocalisation
                 .getItem(Messages.edit_cruise_endDate);
         Couple region =
-            EditSurvey.sectionLocalisation.getItem(Messages.edit_cruise_region);
+            ViewMain.editCruiseForm.sectionLocalisation
+                .getItem(Messages.edit_cruise_region);
         Couple pays =
-            EditSurvey.sectionSource.getItem(Messages.edit_cruise_country);
+            ViewMain.editCruiseForm.sectionSource
+                .getItem(Messages.edit_cruise_country);
         Couple labo =
-            EditSurvey.sectionSource.getItem(Messages.edit_cruise_lab);
+            ViewMain.editCruiseForm.sectionSource
+                .getItem(Messages.edit_cruise_lab);
         Couple chef =
-            EditSurvey.sectionSource.getItem(Messages.edit_cruise_chief);
+            ViewMain.editCruiseForm.sectionSource
+                .getItem(Messages.edit_cruise_chief);
         Couple projet =
-            EditSurvey.sectionSource.getItem(Messages.edit_cruise_project);
+            ViewMain.editCruiseForm.sectionSource
+                .getItem(Messages.edit_cruise_project);
         Couple centreDonnee =
-            EditSurvey.sectionCentre.getItem(Messages.edit_cruise_dataCenter);
+            ViewMain.editCruiseForm.sectionCentre
+                .getItem(Messages.edit_cruise_dataCenter);
         Couple confidentialite =
-            EditSurvey.sectionCentre.getItem(Messages.edit_cruise_confident);
+            ViewMain.editCruiseForm.sectionCentre
+                .getItem(Messages.edit_cruise_confident);
         Couple commentaires =
-            EditSurvey.sectionCommentaire.getItem(Global.EMPTY_STRING);
+            ViewMain.editCruiseForm.sectionCommentaire
+                .getItem(Global.EMPTY_STRING);
 
         // System.out.println("Remplissage onglet survey");
         Survey survey;
-        if (ViewFile.dossierCampagne)
+        if (ViewMain.dossierCampagne)
         {
             survey = dirSurvey_modele.getModel();
         }
@@ -878,12 +907,12 @@ public class DataModel
         commentaires.setText(survey.getComment());
 
         // Remplissage de la liste des dataTypes de la campagne
-        EditSurvey.sectionType.fillFromModel(survey);
+        ViewMain.editCruiseForm.sectionType.fillFromModel(survey);
     }
 
     public static void fillStation()
     {
-        for (NemoSection stationSection : EditStation.listeSectionsStation)
+        for (NemoSection stationSection : ViewMain.editStationForm.listeSectionsStation)
         {
             stationSection.fillFromModel(stationModel_modele);
         }
@@ -894,16 +923,16 @@ public class DataModel
             PropertyModel propertyModel =
                 stationModel_modele.getTimeSeriesModel().propertiesAt(
                     NemoSection.S_EDATE);
-            EditStation.qcFlags.setFlagFragment(propertyModel.getFlag(),
-                Global.ENDDATETIME, Messages.getString(Global.ENDDATETIME)
-                    .trim());
+            ViewMain.editStationForm.qcFlags.setFlagFragment(propertyModel
+                .getFlag(), Global.ENDDATETIME, Messages.getString(
+                Global.ENDDATETIME).trim());
         }
 
     }
 
     public static void fillBackStation()
     {
-        for (NemoSection stationSection : EditStation.listeSectionsStation)
+        for (NemoSection stationSection : ViewMain.editStationForm.listeSectionsStation)
         {
             stationSection.fillFromModel(stationModel);
         }
@@ -914,9 +943,9 @@ public class DataModel
             PropertyModel propertyModel =
                 stationModel.getTimeSeriesModel().propertiesAt(
                     NemoSection.S_EDATE);
-            EditStation.qcFlags.setFlagFragment(propertyModel.getFlag(),
-                Global.ENDDATETIME, Messages.getString(Global.ENDDATETIME)
-                    .trim());
+            ViewMain.editStationForm.qcFlags.setFlagFragment(propertyModel
+                .getFlag(), Global.ENDDATETIME, Messages.getString(
+                Global.ENDDATETIME).trim());
         }
 
     }

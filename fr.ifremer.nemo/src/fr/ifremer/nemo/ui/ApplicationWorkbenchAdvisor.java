@@ -13,78 +13,97 @@ import org.eclipse.ui.application.WorkbenchWindowAdvisor;
 
 import fr.ifremer.nemo.ui.actions.SaveAction;
 import fr.ifremer.nemo.ui.edit.DataModel;
-import fr.ifremer.nemo.ui.edit.data.EditData;
-import fr.ifremer.nemo.ui.edit.desc.EditDesc;
-import fr.ifremer.nemo.ui.edit.station.EditStation;
-import fr.ifremer.nemo.ui.edit.survey.EditSurvey;
+import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Messages;
 
-public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
+public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor
+{
 
-	private static final String PERSPECTIVE_ID = "fr.ifremer.nemo.ui.perspective"; //$NON-NLS-1$
+    private static final String PERSPECTIVE_ID =
+        "fr.ifremer.nemo.ui.perspective"; //$NON-NLS-1$
 
-	@Override
+    @Override
     public WorkbenchWindowAdvisor createWorkbenchWindowAdvisor(
-			IWorkbenchWindowConfigurer configurer) {
-		return new ApplicationWorkbenchWindowAdvisor(configurer);
-	}
+            IWorkbenchWindowConfigurer configurer)
+    {
+        return new ApplicationWorkbenchWindowAdvisor(configurer);
+    }
 
-	@Override
-    public String getInitialWindowPerspectiveId() {
-		return PERSPECTIVE_ID;
-	}
+    @Override
+    public String getInitialWindowPerspectiveId()
+    {
+        return PERSPECTIVE_ID;
+    }
 
-	@Override
-	public boolean preShutdown() {
+    @Override
+    public boolean preShutdown()
+    {
 
-	
-		FileOutputStream fileOutputStream = null;
-		int reponse = 0;
+        FileOutputStream fileOutputStream = null;
+        int reponse = 0;
 
-		MessageBox mb = new MessageBox(PlatformUI.getWorkbench().getDisplay().getActiveShell(), 
-		                                SWT.ICON_QUESTION | SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
-		mb.setMessage(Messages.confirm_quit);
-		reponse = mb.open();
+        MessageBox mb =
+            new MessageBox(PlatformUI.getWorkbench().getDisplay()
+                .getActiveShell(), SWT.ICON_QUESTION | SWT.YES | SWT.NO
+                    | SWT.APPLICATION_MODAL);
+        mb.setMessage(Messages.confirm_quit);
+        reponse = mb.open();
 
-		if (reponse == SWT.YES) {
-			// demande pour sauver le modele
-			if (EditData.validee) {
-				if (EditDesc.okApresReset && EditSurvey.okApresReset
-						&& EditStation.okApresReset && EditData.okApresReset) {
+        if (reponse == SWT.YES)
+        {
+            // demande pour sauver le modele
+            if (ViewMain.editDataForm.validee)
+            {
+                if (ViewMain.editFileForm.okApresReset
+                        && ViewMain.editCruiseForm.okApresReset
+                        && ViewMain.editStationForm.okApresReset
+                        && ViewMain.editDataForm.okApresReset)
+                {
 
-					Shell shell2 = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+                    Shell shell2 =
+                        PlatformUI.getWorkbench().getDisplay().getActiveShell();
 
-					MessageBox mbox = new MessageBox(shell2, SWT.ICON_WARNING
-							| SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
-					mbox.setMessage(Messages.confirm_saveModel);
-					int reponse_mbox = mbox.open();
-					if (reponse_mbox == SWT.YES) {
+                    MessageBox mbox =
+                        new MessageBox(shell2, SWT.ICON_WARNING | SWT.YES
+                                | SWT.NO | SWT.APPLICATION_MODAL);
+                    mbox.setMessage(Messages.confirm_saveModel);
+                    int reponse_mbox = mbox.open();
+                    if (reponse_mbox == SWT.YES)
+                    {
 
-						SaveAction.choixFichierSortie();
+                        SaveAction.choixFichierSortie();
 
-						if (SaveAction.fichierSortieXML != null) {
-							try {
-								fileOutputStream = new FileOutputStream(SaveAction.fichierSortieXML);
-							} catch (FileNotFoundException e) {
-								//
-								e.printStackTrace();
-							}
+                        if (SaveAction.fichierSortieXML != null)
+                        {
+                            try
+                            {
+                                fileOutputStream =
+                                    new FileOutputStream(
+                                        SaveAction.fichierSortieXML);
+                            }
+                            catch (FileNotFoundException e)
+                            {
+                                //
+                                e.printStackTrace();
+                            }
 
-							if (fileOutputStream != null) {
-								DataModel.inputModel.writeXMLOn(fileOutputStream);
-								Utils.messageOK(Messages.SaveAction_4);
-							}
-						}
-					}
+                            if (fileOutputStream != null)
+                            {
+                                DataModel.inputModel
+                                    .writeXMLOn(fileOutputStream);
+                                Utils.messageOK(Messages.SaveAction_4);
+                            }
+                        }
+                    }
 
-				}
+                }
 
-			}
+            }
 
-			return true;
-		}
-		return false;
+            return true;
+        }
+        return false;
 
-	}
+    }
 
 }

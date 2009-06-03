@@ -5,12 +5,11 @@
  * Copyright		: Altran
  * ============================================================================
  */
-package fr.ifremer.nemo.ui.edit.survey;
+package fr.ifremer.nemo.ui.edit.cruise;
 
 import java.util.ArrayList;
 
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Shell;
 
 import fr.ifremer.nemo.domain.DataType;
 import fr.ifremer.nemo.domain.Survey;
@@ -34,11 +33,9 @@ public class CruiseDatatypeSection extends NemoSection
      * @param title
      * @param description
      */
-    public CruiseDatatypeSection(Shell shell, String name, String title,
-            String description)
+    public CruiseDatatypeSection(String name, String title, String description)
     {
-        super(shell, name, title, description);
-        TableDataSurvey.go(shell);
+        super(name, title, description);
     }
 
     /**
@@ -56,8 +53,9 @@ public class CruiseDatatypeSection extends NemoSection
     @Override
     protected void drawSection(Composite parent, boolean filled)
     {
-        TableDataSurvey.setSectionClientType(parent);
-        TableDataSurvey.tableTypeSurvey.setParent(parent);
+        TableDataSurvey.go(parent);
+        // TableDataSurvey.setSectionClientType(parent);
+        // TableDataSurvey.tableTypeSurvey.setParent(parent);
     }
 
     public void fillFromModel(Survey survey)

@@ -25,7 +25,6 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
@@ -37,9 +36,7 @@ import fr.ifremer.nemo.input.FlagFragment;
 import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.NemoSection;
-import fr.ifremer.nemo.ui.edit.desc.EditDesc;
-import fr.ifremer.nemo.ui.view.ViewEdit;
-import fr.ifremer.nemo.ui.view.ViewFile;
+import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -52,35 +49,19 @@ public class QCflagsSection extends NemoSection
 {
 
     protected Table tabCorrespondance, tabFlagQC;
-    private final TableColumn flagColumn1, flagColumn2;
-    private final TableColumn tableColumn0, tableColumn1, tableColumn2,
-            tableColumn3, tableColumn4, tableColumn5, tableColumn6;
+    private TableColumn flagColumn1, flagColumn2;
+    private TableColumn tableColumn0, tableColumn1, tableColumn2, tableColumn3,
+            tableColumn4, tableColumn5, tableColumn6;
     protected FlagTable flagTable;
 
-    public QCflagsSection(Shell shell, String name, String title,
-            String description)
+    public QCflagsSection(String name, String title, String description)
     {
 
-        super(shell, name, title, description);
+        super(name, title, description);
 
         flagTable = new FlagTable();
 
-        tabCorrespondance = new Table(shell, SWT.FULL_SELECTION | SWT.BORDER);
-        flagColumn1 = new TableColumn(tabCorrespondance, SWT.NONE);
-        flagColumn2 = new TableColumn(tabCorrespondance, SWT.NONE);
-
         flagTable = Utils.configuration.getDefaultFlagTable();
-        flagTable.fillTable(tabCorrespondance);
-
-        tabFlagQC = new Table(shell, SWT.FULL_SELECTION | SWT.BORDER);
-        tableColumn0 = new TableColumn(tabFlagQC, SWT.NONE);
-        tableColumn1 = new TableColumn(tabFlagQC, SWT.NONE);
-        tableColumn2 = new TableColumn(tabFlagQC, SWT.NONE);
-        tableColumn3 = new TableColumn(tabFlagQC, SWT.NONE);
-        tableColumn4 = new TableColumn(tabFlagQC, SWT.NONE);
-        tableColumn5 = new TableColumn(tabFlagQC, SWT.NONE);
-        tableColumn6 = new TableColumn(tabFlagQC, SWT.NONE);
-
     }
 
     /**
@@ -101,6 +82,12 @@ public class QCflagsSection extends NemoSection
     protected void drawSection(Composite parent, boolean filled)
     {
         // Tableau des correspondances
+
+        tabCorrespondance = new Table(parent, SWT.FULL_SELECTION | SWT.BORDER);
+        flagColumn1 = new TableColumn(tabCorrespondance, SWT.NONE);
+        flagColumn2 = new TableColumn(tabCorrespondance, SWT.NONE);
+        flagTable.fillTable(tabCorrespondance);
+
         tabCorrespondance.setHeaderVisible(true);
         tabCorrespondance.setLinesVisible(true);
         flagColumn1.setWidth(60);
@@ -249,7 +236,7 @@ public class QCflagsSection extends NemoSection
                 flagTable.getFlags().remove(
                     flagTable.getFlag(tab.getSelection()[0].getText()));
                 tab.remove(tab.getSelectionIndex());
-                ViewEdit.formEdition.reflow(true);
+                ViewMain.editStationForm.formEdition.reflow(true);
                 Utils.invalidEtapes();
             }
         });
@@ -273,17 +260,26 @@ public class QCflagsSection extends NemoSection
                 {
                     flagTable = flagTables.get(j);
                     flagTable.fillTable(tab);
-                    ViewEdit.formEdition.reflow(true);
+                    ViewMain.editStationForm.formEdition.reflow(true);
                     Utils.invalidEtapes();
                 }
             });
         }
-        tabCorrespondance.setParent(parent);
+        // tabCorrespondance.setParent(parent);
 
         // Tableau des flags
+
+        tabFlagQC = new Table(parent, SWT.FULL_SELECTION | SWT.BORDER);
+        tableColumn0 = new TableColumn(tabFlagQC, SWT.NONE);
+        tableColumn1 = new TableColumn(tabFlagQC, SWT.NONE);
+        tableColumn2 = new TableColumn(tabFlagQC, SWT.NONE);
+        tableColumn3 = new TableColumn(tabFlagQC, SWT.NONE);
+        tableColumn4 = new TableColumn(tabFlagQC, SWT.NONE);
+        tableColumn5 = new TableColumn(tabFlagQC, SWT.NONE);
+        tableColumn6 = new TableColumn(tabFlagQC, SWT.NONE);
         tabFlagQC.setHeaderVisible(true);
         tabFlagQC.setLinesVisible(true);
-        tabFlagQC.setParent(parent);
+        // tabFlagQC.setParent(parent);
         GridDataFactory.fillDefaults().grab(true, true).applyTo(tabFlagQC);
 
         tableColumn0.setWidth(0);
@@ -326,7 +322,7 @@ public class QCflagsSection extends NemoSection
         MenuItem itemTestFlag = new MenuItem(menuFlag, SWT.NONE);
         itemTestFlag.setText(Messages.label_test);
 
-        if (ViewFile.radProfilVertical.getSelection())
+        if (ViewMain.radProfilVertical.getSelection())
         {
             final FlagMenuItem childDateTime =
                 new FlagMenuItem(subFlag, tabFlagQC, Global.DATETIME, Messages
@@ -386,7 +382,7 @@ public class QCflagsSection extends NemoSection
             public void handleEvent(Event e)
             {
                 tabFlag.remove(tabFlag.getSelectionIndex());
-                ViewEdit.formEdition.reflow(true);
+                ViewMain.editStationForm.formEdition.reflow(true);
                 Utils.invalidEtapes();
             }
         });
@@ -394,8 +390,8 @@ public class QCflagsSection extends NemoSection
         itemInjectFlag.addListener(SWT.Selection, new Listener() {
             public void handleEvent(Event e)
             {
-                Utils.injectFlag(ViewFile.styledTextStation, flagTable,
-                    tabFlag, 2, 3, 4, 5, 6);
+                Utils.injectFlag(ViewMain.textAreaStation, flagTable, tabFlag,
+                    2, 3, 4, 5, 6);
                 Utils.invalidEtapes();
             }
         });
@@ -403,8 +399,8 @@ public class QCflagsSection extends NemoSection
         itemTestFlag.addListener(SWT.Selection, new Listener() {
             public void handleEvent(Event e)
             {
-                Utils.testFlag(ViewFile.styledTextStation, flagTable, tabFlag,
-                    2, 3, 4, 5, 6);
+                Utils.testFlag(ViewMain.textAreaStation, flagTable, tabFlag, 2,
+                    3, 4, 5, 6);
             }
         });
 
@@ -493,7 +489,8 @@ public class QCflagsSection extends NemoSection
         if (stationModel.getFlagTable() != null)
         {
             flagTable = stationModel.getFlagTable();
-            flagTable.fillTable(EditStation.qcFlags.getTabCorrespondance());
+            flagTable.fillTable(ViewMain.editStationForm.qcFlags
+                .getTabCorrespondance());
         }
     }
 
@@ -508,8 +505,9 @@ public class QCflagsSection extends NemoSection
             {
                 flag.setLine(Integer
                     .valueOf(tabFlagQC.getItems()[i].getText(2))
-                        - Integer.valueOf(EditDesc.sectionEnteteFichier
-                            .getValue()));
+                        - Integer
+                            .valueOf(ViewMain.editFileForm.sectionEnteteFichier
+                                .getValue()));
                 flag.setFirstCharOffset(tabFlagQC.getItems()[i].getText(3));
                 flag.setLastCharOffset(tabFlagQC.getItems()[i].getText(4));
                 return flag;
@@ -529,8 +527,9 @@ public class QCflagsSection extends NemoSection
             {
                 flag.setLine(Integer.valueOf(getTabFlagQC().getItems()[i]
                     .getText(2))
-                        - Integer.valueOf(EditDesc.sectionEnteteFichier
-                            .getValue()));
+                        - Integer
+                            .valueOf(ViewMain.editFileForm.sectionEnteteFichier
+                                .getValue()));
                 flag
                     .setFirstCharOffset(getTabFlagQC().getItems()[i].getText(3));
                 flag.setLastCharOffset(getTabFlagQC().getItems()[i].getText(4));
@@ -559,9 +558,9 @@ public class QCflagsSection extends NemoSection
             TableItem item = new TableItem(getTabFlagQC(), SWT.NONE);
             item.setText(0, propertyCode);
             item.setText(1, propertyName);
-            item.setText(2, String
-                .valueOf(flag.getLine()
-                        + Integer.valueOf(EditDesc.sectionEnteteFichier
+            item.setText(2, String.valueOf(flag.getLine()
+                    + Integer
+                        .valueOf(ViewMain.editFileForm.sectionEnteteFichier
                             .getValue())));
             item.setText(3, String.valueOf(flag.getFirstCharOffset()));
             item.setText(4, String.valueOf(flag.getLastCharOffset()));

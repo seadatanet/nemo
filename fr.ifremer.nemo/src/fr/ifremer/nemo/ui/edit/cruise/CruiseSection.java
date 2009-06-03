@@ -5,7 +5,7 @@
  * Copyright		: Altran
  * ============================================================================
  */
-package fr.ifremer.nemo.ui.edit.survey;
+package fr.ifremer.nemo.ui.edit.cruise;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,6 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Shell;
 
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.ComboType;
@@ -39,17 +38,15 @@ public class CruiseSection extends NemoSection
      * @param title
      * @param description
      */
-    public CruiseSection(Shell shell, String name, String title,
-            String description)
+    public CruiseSection(String name, String title, String description)
     {
-        super(shell, name, title, description);
+        super(name, title, description);
         items = new ArrayList<Couple>();
     }
 
-    public void addItem(Shell shell, String label, ComboType type,
-            String defaultValue)
+    public void addItem(String label, ComboType type, String defaultValue)
     {
-        Couple item = new Couple(shell, null, label, type, defaultValue);
+        Couple item = new Couple(null, label, type, defaultValue);
         if (type == ComboType.BLOCK)
             item.setTextLimit(50000);
         items.add(item);

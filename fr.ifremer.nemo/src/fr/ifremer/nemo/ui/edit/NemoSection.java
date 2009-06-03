@@ -12,16 +12,15 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.forms.events.ExpansionAdapter;
 import org.eclipse.ui.forms.events.ExpansionEvent;
 import org.eclipse.ui.forms.widgets.ExpandableComposite;
+import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
 import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.ui.Application;
-import fr.ifremer.nemo.ui.view.ViewEdit;
 import fr.ifremer.nemo.util.Formatter;
 
 /**
@@ -29,7 +28,7 @@ import fr.ifremer.nemo.util.Formatter;
  * 
  * @author dboulang
  */
-public abstract class NemoSection implements UIobject
+public abstract class NemoSection
 {
     // constantes des noms possibles
     public static final String F_FILEHEADER = "enteteFichier"; //$NON-NLS-1$
@@ -71,10 +70,9 @@ public abstract class NemoSection implements UIobject
     protected String title;
     private final String description;
 
-    public NemoSection(Shell shell, String name, String title,
-            String description)
+    public NemoSection(String name, String title, String description)
     {
-        section = new Section(shell, SWT.NONE);
+        // section = new Section(shell, SWT.NONE);
         this.name = name;
         this.title = Formatter.getSingleton().padString(title, 40);
         this.description = description;
@@ -91,31 +89,31 @@ public abstract class NemoSection implements UIobject
     /**
      * {@inheritDoc}
      */
-    public void draw(Composite parent, boolean filled)
+    public void draw(FormToolkit toolkitEdition,
+            final ScrolledForm formEdition, boolean filled)
     {
         section =
-            ViewEdit.toolkitEdition
-                .createSection(parent, Section.DESCRIPTION
-                        | ExpandableComposite.TITLE_BAR
+            toolkitEdition.createSection(formEdition.getBody(),
+                Section.DESCRIPTION | ExpandableComposite.TITLE_BAR
                         | ExpandableComposite.TWISTIE
                         | ExpandableComposite.COMPACT);
 
         int heightFont = section.getFont().getFontData()[0].getHeight();
-        Font titleFont = new Font(Application.display, "Courier", heightFont, SWT.NORMAL); //$NON-NLS-1$
+        Font titleFont =
+            new Font(Application.display, "Courier", heightFont, SWT.NORMAL); //$NON-NLS-1$
         section.setFont(titleFont);
-        
+
         section.addExpansionListener(new ExpansionAdapter() {
             @Override
             public void expansionStateChanged(ExpansionEvent e)
             {
-                ViewEdit.formEdition.reflow(true);
+                formEdition.reflow(true);
             }
         });
         section.setText(title);
         section.setDescription(description);
 
-        Composite sectionClient =
-            ViewEdit.toolkitEdition.createComposite(section);
+        Composite sectionClient = toolkitEdition.createComposite(section);
         sectionClient.setLayout(new GridLayout());
 
         drawSection(sectionClient, filled);
@@ -160,31 +158,33 @@ public abstract class NemoSection implements UIobject
         return section.isEnabled();
     }
 
-    /**
-     * init the section
-     * 
-     * @param parentForm
-     */
-    public void initSection(ScrolledForm parentForm)
-    {
-        section.setParent(parentForm);
-    }
+// /**
+// * init the section
+// *
+// * @param parentForm
+// */
+// public void initSection(ScrolledForm parentForm)
+// {
+// section.setParent(parentForm);
+// }
 
-    /**
-     * init the section
-     * 
-     * @param parentComposite
-     */
-    public void initSection(Composite parentComposite)
-    {
-        section.setParent(parentComposite);
-    }
+// /**
+// * init the section
+// *
+// * @param parentComposite
+// */
+// public void initSection(Composite parentComposite)
+// {
+// section.setParent(parentComposite);
+// }
 
-    public void initModel(StationModel stationModel){
+    public void initModel(StationModel stationModel)
+    {
         // a implémenter dans les classes filles, mais pas obligatoire
     }
 
-    public void fillFromModel(StationModel stationModel){
+    public void fillFromModel(StationModel stationModel)
+    {
         // a implémenter dans les classes filles, mais pas obligatoire
     }
 

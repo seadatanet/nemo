@@ -22,17 +22,14 @@
    <extension
          point="org.eclipse.ui.views">
       <view
-            class="fr.ifremer.nemo.ui.view.ViewFile"
-            id="fr.ifremer.nemo.ui.ViewFile"
-            name="fr.ifremer.nemo.ui.ViewFile"/>
-      <view
             class="fr.ifremer.nemo.ui.view.ViewLog"
-            id="fr.ifremer.nemo.ui.ViewLog"
-            name="fr.ifremer.nemo.ui.ViewLog"/>
+            id="fr.ifremer.nemo.ui.view.ViewLog"
+            name="fr.ifremer.nemo.ui.view.ViewLog"/>
       <view
-            class="fr.ifremer.nemo.ui.view.ViewEdit"
-            id="fr.ifremer.nemo.ui.ViewEdit"
-            name="fr.ifremer.nemo.ui.ViewEdit"/>
+            class="fr.ifremer.nemo.ui.view.ViewMain"
+            id="fr.ifremer.nemo.ui.view.ViewMain"
+            name="fr.ifremer.nemo.ui.view.ViewMain">
+      </view>
    </extension>
    <extension
          id="productnemo"

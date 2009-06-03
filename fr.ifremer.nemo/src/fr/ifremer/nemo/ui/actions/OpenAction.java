@@ -21,89 +21,103 @@ import fr.ifremer.nemo.input.InputModel;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.DataModel;
 import fr.ifremer.nemo.ui.edit.data.TableData;
-import fr.ifremer.nemo.ui.edit.desc.EditDesc;
-import fr.ifremer.nemo.ui.view.ViewFile;
 import fr.ifremer.nemo.ui.view.ViewLog;
+import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 public class OpenAction extends Action implements ISelectionListener,
-		ActionFactory.IWorkbenchAction {
-	private final IWorkbenchWindow window;
+        ActionFactory.IWorkbenchAction
+{
+    private final IWorkbenchWindow window;
 
-	public final static String ID = "fr.ifremer.nemo.ui.OpenAction"; //$NON-NLS-1$
+    public final static String ID = "fr.ifremer.nemo.ui.OpenAction"; //$NON-NLS-1$
 
-	// vars necessaires e la fenetre d'options
+    // vars necessaires e la fenetre d'options
 
-	public static Shell shelloptions;
+    public static Shell shelloptions;
 
-	public static String nomModele, nomFichierModele;
+    public static String nomModele, nomFichierModele;
 
-	public OpenAction(IWorkbenchWindow window) {
+    public OpenAction(IWorkbenchWindow window)
+    {
 
-		this.window = window;
-		setId(ID);
-		setText(Messages.menu_openModel);
-		window.getSelectionService().addSelectionListener(this);
+        this.window = window;
+        setId(ID);
+        setText(Messages.menu_openModel);
+        window.getSelectionService().addSelectionListener(this);
 
-	}
+    }
 
-	public void dispose() {
-		window.getSelectionService().addSelectionListener(this);
+    public void dispose()
+    {
+        window.getSelectionService().addSelectionListener(this);
 
-	}
+    }
 
-	@Override
-    public void run() {
-		FileInputStream stream = null;
+    @Override
+    public void run()
+    {
+        FileInputStream stream = null;
 
-		// verifier que un fichier est charge avant d'ouvrir un modele
-		if (!EditDesc.loaded) {
-			Utils.messageErreurAppend(Messages.error_openModel);
-		} 
-        else {
-			InputModel inputModel = new InputModel();
+        // verifier que un fichier est charge avant d'ouvrir un modele
+        if (!ViewMain.editFileForm.loaded)
+        {
+            Utils.messageErreurAppend(Messages.error_openModel);
+        }
+        else
+        {
+            InputModel inputModel = new InputModel();
 
-			Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
-			FileDialog dialog = new FileDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
-			dialog.setFilterPath(Utils.configuration.getModelsDirectory() + File.separator);
-			dialog.setText(Messages.dialog_openModel);
-            
-			String extensions[] = new String[1];
-			extensions[0] = Global.STAR + Global.EXT_XML;
-			dialog.setFilterExtensions(extensions);
-            
-			nomModele = dialog.open();
+            Shell shell =
+                PlatformUI.getWorkbench().getDisplay().getActiveShell();
+            FileDialog dialog =
+                new FileDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
+            dialog.setFilterPath(Utils.configuration.getModelsDirectory()
+                    + File.separator);
+            dialog.setText(Messages.dialog_openModel);
 
-			if (nomModele != null) {
-				// ouverture du fichier XML de modele
-				XMLBootstrapParser parser = new XMLBootstrapParser(inputModel);
+            String extensions[] = new String[1];
+            extensions[0] = Global.STAR + Global.EXT_XML;
+            dialog.setFilterExtensions(extensions);
 
-				try {
-					stream = new java.io.FileInputStream(nomModele);
-				} 
-                catch (FileNotFoundException e) {
+            nomModele = dialog.open();
+
+            if (nomModele != null)
+            {
+                // ouverture du fichier XML de modele
+                XMLBootstrapParser parser = new XMLBootstrapParser(inputModel);
+
+                try
+                {
+                    stream = new java.io.FileInputStream(nomModele);
+                }
+                catch (FileNotFoundException e)
+                {
                     Utils.messageErreurAppend(Messages.error);
-					e.printStackTrace();
-				}
-                
-				parser.parse(stream, false);
+                    e.printStackTrace();
+                }
 
-				File fich = new File(nomModele);
-				nomFichierModele = fich.getName();
+                parser.parse(stream, false);
 
-				DataModel.ouvertureModele(inputModel);
-				DataModel.ouverture = true;
+                File fich = new File(nomModele);
+                nomFichierModele = fich.getName();
 
-				ViewLog.styledTextLogInfos.append(Messages.success_openModel + nomModele);
+                DataModel.ouvertureModele(inputModel);
+                DataModel.ouverture = true;
+
+                ViewLog.styledTextLogInfos.append(Messages.success_openModel
+                        + nomModele);
 
                 // reinitialisation du tableau de paramètres
-                if (ViewFile.tableData != null) TableData.go();
-			}
-		}
-	}
+                if (ViewMain.tableData != null)
+                    TableData.go();
+            }
+        }
+    }
 
-	public void selectionChanged(IWorkbenchPart part, ISelection incoming) {
-	}
+    public void selectionChanged(IWorkbenchPart part, ISelection incoming)
+    {
+    }
 
 }

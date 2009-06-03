@@ -1,4 +1,4 @@
-package fr.ifremer.nemo.ui.edit.survey;
+package fr.ifremer.nemo.ui.edit.cruise;
 
 import java.util.ArrayList;
 

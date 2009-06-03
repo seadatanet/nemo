@@ -18,10 +18,7 @@ import org.eclipse.ui.actions.ActionFactory;
 
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.DataModel;
-import fr.ifremer.nemo.ui.edit.data.EditData;
-import fr.ifremer.nemo.ui.edit.desc.EditDesc;
-import fr.ifremer.nemo.ui.edit.station.EditStation;
-import fr.ifremer.nemo.ui.edit.survey.EditSurvey;
+import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -63,14 +60,16 @@ public class SaveAction extends Action implements ISelectionListener,
 
         FileOutputStream fileOutputStream = null;
 
-        if (!EditData.validee)
+        if (!ViewMain.editDataForm.validee)
         {
             Utils.messageErreur(Messages.SaveAction_3);
         }
         else
         {
-            if (EditDesc.okApresReset && EditSurvey.okApresReset
-                    && EditStation.okApresReset && EditData.okApresReset)
+            if (ViewMain.editFileForm.okApresReset
+                    && ViewMain.editCruiseForm.okApresReset
+                    && ViewMain.editStationForm.okApresReset
+                    && ViewMain.editDataForm.okApresReset)
             {
                 choixFichierSortie();
                 try

@@ -15,12 +15,11 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Shell;
 
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.UIobject;
 import fr.ifremer.nemo.ui.edit.station.AutoLine.MetaInData;
-import fr.ifremer.nemo.ui.view.ViewEdit;
+import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -32,67 +31,62 @@ import fr.ifremer.nemo.util.Messages;
 public class GrpAutoInput implements UIobject
 {
 
-    private final Button buttonPos;
+    private Button buttonPos;
     private String labelButtonPos;
     protected ArrayList<AutoLine> lines;
+    private final boolean variablePos;
     protected Button buttonVari;
 
-    public GrpAutoInput(Shell shell, int nbLine, String labelButtonPos,
-            boolean variablePos, MetaInData inData, boolean withCursor)
+    public GrpAutoInput(int nbLine, String labelButtonPos, boolean variablePos,
+            MetaInData inData, boolean withCursor)
     {
 
         this.labelButtonPos = labelButtonPos;
         if (this.labelButtonPos == null)
             this.labelButtonPos = Messages.label_auto_01;
 
-        buttonPos = new Button(shell, SWT.RADIO);
-
         lines = new ArrayList<AutoLine>();
         for (int i = 0; i < nbLine; i++)
         {
-            lines
-                .add(new AutoLine(shell, i, (nbLine == 1), inData, withCursor));
+            lines.add(new AutoLine(i, (nbLine == 1), inData, withCursor));
         }
 
-        if (variablePos)
-        {
-            buttonVari = new Button(shell, SWT.CHECK);
-        }
-
+        this.variablePos = variablePos;
     }
 
     public void draw(Composite sectionClient, boolean filled)
     {
 
-        buttonPos.setParent(sectionClient);
-        buttonPos.setBackground(ViewEdit.background);
+        buttonPos = new Button(sectionClient, SWT.RADIO);
+        buttonPos.setBackground(ViewMain.backgroungEdit);
         buttonPos.setText(labelButtonPos);
 
         Group groupe = new Group(sectionClient, SWT.NONE);
-        groupe.setBackground(ViewEdit.background);
+        groupe.setBackground(ViewMain.backgroungEdit);
         groupe.setText(Messages.label_position);
         groupe.setLayout(new GridLayout());
 
         GridDataFactory.fillDefaults().grab(true, false).applyTo(groupe);
 
         Composite compo1 = AutoLine.drawLineCompo(groupe);
-        compo1.setBackground(ViewEdit.background);
+        compo1.setBackground(ViewMain.backgroungEdit);
         for (AutoLine line : lines)
         {
             line.drawLine(compo1, filled);
         }
 
         Composite compo2 = AutoLine.drawSetCompo(groupe, lines.size());
-        compo2.setBackground(ViewEdit.background);
+        compo2.setBackground(ViewMain.backgroungEdit);
         for (int i = 0; i < lines.size(); i++)
         {
             lines.get(i).drawSet(compo2, i);
         }
 
-        if (buttonVari != null)
+        if (variablePos)
         {
+            buttonVari = new Button(compo2, SWT.CHECK);
             buttonVari.setParent(compo2);
-            buttonVari.setBackground(ViewEdit.background);
+            buttonVari.setBackground(ViewMain.backgroungEdit);
             buttonVari.setText(Messages.label_variable);
             GridDataFactory.fillDefaults().grab(true, false).align(SWT.END,
                 SWT.CENTER).applyTo(buttonVari);
