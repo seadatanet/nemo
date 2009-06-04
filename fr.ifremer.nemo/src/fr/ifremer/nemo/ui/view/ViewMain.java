@@ -590,7 +590,8 @@ public class ViewMain extends ViewPart
 
         compositeData = new Composite(left, SWT.NONE);
         compositeData.setLayout(new FillLayout());
-
+        TableData.go();
+        
         Composite right = new Composite(parent, SWT.BORDER);
         right.setBackground(backgroungEdit);
         right.setLayout(new FillLayout());
@@ -598,7 +599,6 @@ public class ViewMain extends ViewPart
         editDataForm = new EditDataForm();
         editDataForm.createEditionForm(right);
 
-        TableData.go();
 
     }
 

@@ -104,7 +104,7 @@ public class EditStationForm
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
-                    expandSections();
+                    expandSections(listeSectionsStation);
                 }
             });
 
@@ -176,16 +176,6 @@ public class EditStationForm
         formEdition.reflow(true);
         formEdition.setVisible(true);
     }
-
-// private void refreshEdition(){
-//        
-// // dépendant
-//        
-// // Datatype conditionné par le résultat de l'onglet précédent
-// if (!ViewMain.isCollection())
-// dataType.refreshDataType();
-//        
-// }
 
     private void initStationSections()
     {
@@ -430,7 +420,7 @@ public class EditStationForm
         Utils.messageErreur(Global.EMPTY_STRING);
 
         expand = true;
-        expandSections();
+        expandSections(listeSectionsStation);
 
         // refresh global
         formEdition.reflow(true);
@@ -440,9 +430,9 @@ public class EditStationForm
         formEdition.setVisible(true);
     }
 
-    protected void expandSections()
+    protected void expandSections(ArrayList<NemoSection> listeSections)
     {
-        for (NemoSection section : listeSectionsStation)
+        for (NemoSection section : listeSections)
         {
             if (!expand && section.isEnabled())
             {

@@ -61,50 +61,15 @@ public class EditCruiseForm
         toolkitEdition = new FormToolkit(parent.getDisplay());
         formEdition = toolkitEdition.createScrolledForm(parent);
 
-        // INFOS sur les fichiers utilises
-// if (ViewMain.radioFichier.getSelection())
-// {
-// // fichier campagne
-// Utils.messageInfoAppend(Messages.view_file_cruiseFile);
-// }
-// else
-// {
-// // dossier campagne
-// Utils.messageInfoAppend(Messages.view_file_cruiseDir
-// + ViewMain.nomRepertoire);
-// }
-//
-// if (ViewMain.radSerieTempo.getSelection())
-// {
-// // Série temporelle
-// Utils.messageInfoAppend(Messages.typeFile_timeseries);
-// }
-// else if (ViewMain.radTrajectoire.getSelection())
-// {
-// // Trajectoire
-// Utils.messageInfoAppend(Messages.typeFile_trajectory);
-// }
-
-        // }
-        // loaded = true;
-        // affichage courant
-        // ViewMain.affiche = 1;
-
         formEdition.getBody().setLayout(new GridLayout());
         formEdition.setText(Messages.edit_cruise_title);
 
-        // shell.close();
-        // shell = new Shell();
-        // disposeElements();
-
         // init composants IHM
         listeSectionsSurvey = new ArrayList<NemoSection>();
-        // initBoutons();
         initSections();
 
         // bouton validate
         buttonValidate = new Button(formEdition.getBody(), SWT.NONE);
-        // buttonValidate.setParent(formEdition.getBody());
         buttonValidate.setBackground(ViewMain.backgroungEdit);
         buttonValidate.setText(Messages.button_validateStep);
         buttonValidate
@@ -118,7 +83,6 @@ public class EditCruiseForm
             });
 
         // bouton serveur
-        // buttonInitServeur.setParent(formEdition.getBody());
         buttonInitServeur = new Button(formEdition.getBody(), SWT.NONE);
         buttonInitServeur.setBackground(ViewMain.backgroungEdit);
         buttonInitServeur.setText(Messages.button_serverIni);
@@ -134,7 +98,6 @@ public class EditCruiseForm
             });
 
         // bouton XML
-        // buttonXML.setParent(formEdition.getBody());
         buttonXML = new Button(formEdition.getBody(), SWT.NONE);
         buttonXML.setBackground(ViewMain.backgroungEdit);
         buttonXML.setText(Messages.button_xmlIni);
@@ -150,7 +113,6 @@ public class EditCruiseForm
             });
 
         // bouton reset
-        // buttonRAZ.setParent(formEdition.getBody());
         buttonRAZ = new Button(formEdition.getBody(), SWT.NONE);
         buttonRAZ.setBackground(ViewMain.backgroungEdit);
         buttonRAZ.setText(Messages.button_reset);
@@ -167,7 +129,6 @@ public class EditCruiseForm
             });
 
         // bouton collapse all / expand all
-        // buttonExpand.setParent(formEdition.getBody());
         buttonExpand = new Button(formEdition.getBody(), SWT.NONE);
         buttonExpand.setBackground(ViewMain.backgroungEdit);
         buttonExpand.setText(Global.PLUS);
@@ -196,7 +157,6 @@ public class EditCruiseForm
         }
 
         // refresh du formulaire
-        // ViewEdit.formEdition.reflow(true);
         formEdition.reflow(true);
         formEdition.setVisible(false);
 
@@ -620,16 +580,6 @@ public class EditCruiseForm
         listeSectionsSurvey.add(sectionCommentaire);
 
     }
-
-// public static void initBoutons()
-// {
-// buttonRAZ = new Button(shell, SWT.NONE);
-// buttonInitServeur = new Button(shell, SWT.NONE);
-// buttonExpand = new Button(shell, SWT.NONE);
-// buttonValidate = new Button(shell, SWT.NONE);
-// buttonXML = new Button(shell, SWT.NONE);
-//
-// }
 
     public void razText()
     {

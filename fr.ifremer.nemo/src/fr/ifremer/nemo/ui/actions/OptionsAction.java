@@ -23,8 +23,6 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.RowData;
-import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
@@ -382,9 +380,8 @@ public class OptionsAction extends Action implements ISelectionListener,
     {
         compo = new Composite(parent, SWT.NONE);
         compo.setFont(Utils.font08);
-        GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo);
-        GridDataFactory.fillDefaults().grab(false, true).hint(600, SWT.DEFAULT)
-            .applyTo(compo);
+        GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(true).applyTo(compo);
+        GridDataFactory.fillDefaults().grab(false, true).hint(600,SWT.DEFAULT).applyTo(compo);
 
         createCompoLCD(compo);
         createGroupDossier(compo);
@@ -471,7 +468,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
         textDossierModele = new Text(group01, SWT.BORDER);
         textDossierModele.setFont(Utils.font08);
-        GridDataFactory.fillDefaults().grab(true, false).hint(100, 12).applyTo(
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(
             textDossierModele);
         buttonParcourirModele = new Button(group01, SWT.NONE);
         buttonParcourirModele.setFont(Utils.font08);
@@ -512,7 +509,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
         textDossierCampagne = new Text(group02, SWT.BORDER);
         textDossierCampagne.setFont(Utils.font08);
-        GridDataFactory.fillDefaults().grab(true, false).hint(100, 12).applyTo(
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(
             textDossierCampagne);
         buttonParcourirCampagne = new Button(group02, SWT.NONE);
         buttonParcourirCampagne.setFont(Utils.font08);
@@ -717,8 +714,8 @@ public class OptionsAction extends Action implements ISelectionListener,
         group.setText(Messages.settings_EDMO);
         GridLayoutFactory.fillDefaults().margins(4, 4).numColumns(2).applyTo(
             group);
-        GridDataFactory.fillDefaults().grab(false, true).hint(600, SWT.DEFAULT).applyTo(
-            group);
+        GridDataFactory.fillDefaults().grab(false, true).hint(600, SWT.DEFAULT)
+            .applyTo(group);
 
         labelIdEdmoRespCdi = new Label(group, SWT.NONE);
         labelIdEdmoRespCdi.setFont(Utils.font08);
@@ -861,7 +858,6 @@ public class OptionsAction extends Action implements ISelectionListener,
         group = new Group(parent, SWT.NONE);
         group.setFont(Utils.font08);
         group.setText(Messages.settings_mapping);
-        group.setFont(Utils.font08);
         GridLayoutFactory.fillDefaults().margins(4, 4).applyTo(group);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
 
@@ -967,8 +963,8 @@ public class OptionsAction extends Action implements ISelectionListener,
         compo = new Composite(parent, SWT.NONE);
         compo.setFont(Utils.font08);
         GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo);
-        GridDataFactory.fillDefaults().grab(false, true).hint(600, SWT.DEFAULT).applyTo(
-            compo);
+        GridDataFactory.fillDefaults().grab(false, true).hint(600, SWT.DEFAULT)
+            .applyTo(compo);
 
         compo01 = new Composite(compo, SWT.NONE);
         compo01.setFont(Utils.font08);
@@ -1319,17 +1315,17 @@ public class OptionsAction extends Action implements ISelectionListener,
     {
 
         parent.setLayout(new FillLayout());
-        //parent.setLayout(new FillLayout(SWT.VERTICAL));
-        //parent.setLayout(new RowLayout(SWT.VERTICAL));
-        //parent.setLayout(new GridLayout(1, false));
+        // parent.setLayout(new FillLayout(SWT.VERTICAL));
+        // parent.setLayout(new RowLayout(SWT.VERTICAL));
+        // parent.setLayout(new GridLayout(1, false));
 
         FormToolkit toolkitOption = new FormToolkit(parent.getDisplay());
         toolkitOption.setBackground(parent.getBackground());
         ScrolledForm formOption = toolkitOption.createScrolledForm(parent);
         formOption.setBackground(parent.getBackground());
         formOption.getBody().setLayout(new GridLayout());
-        //formOption.getBody().setLayoutData(new RowData(630, 800));
-        
+        // formOption.getBody().setLayoutData(new RowData(630, 800));
+
         createCompoHaut(formOption.getBody());
         createGroupWS(formOption.getBody());
         createGroupEdmo(formOption.getBody());
@@ -1337,7 +1333,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         createCompoBas(formOption.getBody());
         createGroupFlag(formOption.getBody());
         createCompoBouton(formOption.getBody());
-        //createCompoBouton(parent);
+        // createCompoBouton(parent);
 
         // listener cancel
         buttonCancel
@@ -1398,7 +1394,7 @@ public class OptionsAction extends Action implements ISelectionListener,
                     buttonCancel.setEnabled(false);
                 }
             });
-        
+
     }
 
     protected boolean checkConfig()

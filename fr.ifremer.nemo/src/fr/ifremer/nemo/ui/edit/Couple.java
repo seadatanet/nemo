@@ -69,6 +69,7 @@ public class Couple implements UIobject
         // Default value
         this.defaultValue = value;
         this.type = cType;
+        completeLabels(cType);
     }
 
     public void setFullSize(boolean full)
@@ -115,9 +116,11 @@ public class Couple implements UIobject
         {
             valueText.setParent(parent);
             defaultValueTextSize();
+            
             // Default value
             if (!filled && defaultValue != null)
                 valueText.setText(defaultValue);
+            
             valueText.addModifyListener(new ModifyListener() {
                 public void modifyText(ModifyEvent event)
                 {
@@ -161,6 +164,26 @@ public class Couple implements UIobject
             valueCombo.dispose();
     }
 
+    private void completeLabels(ComboType cType)
+    {
+        switch (cType)
+        {
+            case FRQ:
+                groupTitle = Messages.label_conversion;
+                labelString = Messages.label_formule;
+            break;
+            case DATE:
+            case TIME:
+            case LAT:
+            case LON:
+                groupTitle = Messages.label_format;
+                break;
+            default:
+                // nothing to complete
+            break;
+        }
+    }
+
     private void chooseValue(Composite parent, ComboType cType)
     {
         switch (cType)
@@ -170,20 +193,10 @@ public class Couple implements UIobject
                     new Text(parent, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL
                             | SWT.WRAP);
             break;
-            case FRQ:
-                groupTitle = Messages.label_conversion;
-                labelString = Messages.label_formule;
-                label = new Label(parent, SWT.NONE);
-                valueText = new Text(parent, SWT.BORDER);
-            break;
             case DATE:
             case TIME:
             case LAT:
             case LON:
-                groupTitle = Messages.label_format;
-// valueCombo = cType.createCombo(parent);
-// valueCombo = cType.fillCombo(valueCombo);
-// break;
             case DATATYPE:
             case SHIP:
             case REGION:
@@ -249,18 +262,19 @@ public class Couple implements UIobject
     private void defaultValueTextSize()
     {
         valueText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-        if (type == ComboType.BLOCK)
-        {
+        if (type == ComboType.BLOCK){
             valueText.setTextLimit(textLimit);
             GridData gridData =
                 new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1);
             gridData.minimumHeight = 40;
             gridData.minimumWidth = 50;
+            gridData.widthHint = 385;
             valueText.setLayoutData(gridData);
         }
-        if (type == ComboType.FRQ)
+        else if (type == ComboType.FRQ){
             GridDataFactory.fillDefaults().grab(true, false).minSize(100, 10)
                 .applyTo(valueText);
+        }
     }
 
     /**
