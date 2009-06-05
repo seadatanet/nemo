@@ -305,7 +305,7 @@ public class EditConversionForm extends EditForm
         }
         else{
             dialog.setFilterPath(ViewMain.nomRepertoire.substring(0,
-                ViewMain.nomRepertoire.lastIndexOf('\\')));
+                ViewMain.nomRepertoire.lastIndexOf(File.separator)));
         }
 
         nomFichierSortie = dialog.open();
@@ -366,7 +366,7 @@ public class EditConversionForm extends EditForm
         }
         else {
             dialog.setFilterPath(ViewMain.nomRepertoire.substring(0,
-                ViewMain.nomRepertoire.lastIndexOf('\\')));
+                ViewMain.nomRepertoire.lastIndexOf(File.separator)));
         }
 
         nomDossierSortie = dialog.open();

@@ -1048,7 +1048,7 @@ public class Utils
 
             ViewMain.nomFichier =
                 directoryPath
-                        + "/" + subfiles[0].getName() + "/" + subsubfiles[0].getName(); //$NON-NLS-1$ //$NON-NLS-2$
+                        + File.separator + subfiles[0].getName() + File.separator + subsubfiles[0].getName(); 
             ViewMain.nomRepertoire = directoryPath;
 
             try
@@ -1269,7 +1269,7 @@ public class Utils
             ViewMain.editCruiseForm.razText();
             ViewMain.editStationForm.razText();
             ViewMain.editDataForm.razText();
-            ViewMain.editConversionForm.razText();
+            //ViewMain.editConversionForm.razText();
         }
         
         invalidEtapes();
@@ -1449,9 +1449,9 @@ public class Utils
 
     public static String extraitFichierChemin(String chemin)
     {
-        if (chemin.lastIndexOf('\\') > -1)
+        if (chemin.lastIndexOf(File.separator) > -1)
         {
-            return chemin.substring(chemin.lastIndexOf('\\') + 1);
+            return chemin.substring(chemin.lastIndexOf(File.separator) + 1);
         } // else {
         return chemin;
         // }
@@ -1459,9 +1459,9 @@ public class Utils
 
     public static String extraitCheminFichier(String chemin)
     {
-        if (chemin.lastIndexOf('\\') > -1)
+        if (chemin.lastIndexOf(File.separator) > -1)
         {
-            return chemin.substring(0, chemin.lastIndexOf('\\'));
+            return chemin.substring(0, chemin.lastIndexOf(File.separator));
         } // else {
         return chemin;
         // }

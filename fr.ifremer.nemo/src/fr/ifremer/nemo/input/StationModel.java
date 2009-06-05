@@ -1,6 +1,7 @@
 package fr.ifremer.nemo.input;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.ParseException;
@@ -1945,7 +1946,7 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer
                     if (ViewMain.collectionCasN)
                     {
                         String[] filename =
-                            DataModel.singleSurvey.getFile().split("/"); //$NON-NLS-1$
+                            DataModel.singleSurvey.getFile().split(File.separator);
                         getReferenceProperty().applyOn(station,
                             new String[] {filename[filename.length - 1]});
                     }

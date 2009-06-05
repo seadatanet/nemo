@@ -16,9 +16,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DirectoryDialog;
@@ -709,6 +707,8 @@ public class ViewMain extends ViewPart
 
         // --- l'onglet d'erreur
         Utils.messageErreur(Global.EMPTY_STRING);
+        
+        editConversionForm.razText();
 
         enableChoice(true);
         // reinitialisation des selections

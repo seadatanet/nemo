@@ -188,12 +188,6 @@ public class EditStationForm extends EditForm
         latitude.addConverter(ComboType.LAT, Global.EMPTY_STRING);
         latitude.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
         latitude.addAutoInput(null, true, MetaInData.FACULTATIF, false);
-        // in trajectory, latitude must be in data
-        if (ViewMain.radTrajectoire.getSelection())
-        {
-            latitude.setEnableInData(MetaInData.OBLIGATOIRE);
-            latitude.setEnabledManual(false);
-        }
         listeSections.add(latitude);
 
         if (ViewMain.radSerieTempo.getSelection())
@@ -217,12 +211,6 @@ public class EditStationForm extends EditForm
         longitude.addConverter(ComboType.LON, Global.EMPTY_STRING);
         longitude.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
         longitude.addAutoInput(null, true, MetaInData.FACULTATIF, false);
-        // in trajectory, longitude must be in data
-        if (ViewMain.radTrajectoire.getSelection())
-        {
-            longitude.setEnableInData(MetaInData.OBLIGATOIRE);
-            longitude.getManualInput().setGrpEnabled(false);
-        }
         listeSections.add(longitude);
 
         if (ViewMain.radSerieTempo.getSelection())
@@ -246,12 +234,6 @@ public class EditStationForm extends EditForm
                 Messages.edit_station_sectionDepth_lib, true, true, 1);
         depth.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
         depth.addAutoInput(null, true, MetaInData.FACULTATIF, false);
-        // in trajectory, depth must be in data
-        if (ViewMain.radTrajectoire.getSelection())
-        {
-            depth.setEnableInData(MetaInData.OBLIGATOIRE);
-            depth.setEnabledManual(false);
-        }
         listeSections.add(depth);
 
         if (!ViewMain.radProfilVertical.getSelection())
@@ -328,6 +310,23 @@ public class EditStationForm extends EditForm
             date.setEnabledManual(!(dateInData || timeInData));
             time.setEnabledManual(!(dateInData || timeInData));
         }
+
+        if (ViewMain.radTrajectoire.getSelection())
+        {
+            // in trajectory, latitude must be in data
+            latitude.setEnableInData(MetaInData.OBLIGATOIRE);
+            latitude.setEnabledManual(false);
+            
+            // in trajectory, longitude must be in data
+            longitude.setEnableInData(MetaInData.OBLIGATOIRE);
+            longitude.getManualInput().setGrpEnabled(false);
+            
+            // in trajectory, depth must be in data
+            depth.setEnableInData(MetaInData.OBLIGATOIRE);
+            depth.getManualInput().setGrpEnabled(false);
+            
+        }
+        
 
         for (NemoSection section : listeSections){
             if (section instanceof StationSection){
