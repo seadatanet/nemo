@@ -4811,25 +4811,6 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
     <void property="code"> 
-     <string>SECS</string> 
-    </void> 
-    <void property="defaultValue"> 
-     <string>99</string> 
-    </void> 
-    <void property="format"> 
-     <string>%2.2d</string> 
-    </void> 
-    <void property="name"> 
-     <string>SECONDS WITHIN MINUTE</string> 
-    </void> 
-    <void property="unit"> 
-     <string>ss</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSParameter"> 
-    <void property="code"> 
      <string>SILT</string> 
     </void> 
     <void property="defaultValue"> 

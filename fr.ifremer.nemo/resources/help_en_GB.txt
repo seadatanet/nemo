@@ -163,7 +163,7 @@ Mandatory fields are: Station number, Data type, Time, Date, Latitude and Longit
                MM.mm: Minutes in decimal values. The number of 'm' characters expresses the number of decimals.
                SS: Seconds (0 to 59)
 
-               Click on "variable end of line position" if all latitudes and longitudes do not end at the same character in every station (this often happens with not significant zero values).
+               Click on "variable end of line position" if all latitudes and longitudes do not end or start at the same character in every station (this often happens with not significant zero values, see examples in NEMO's user_manual).
 
 11/ Depth :  Bottom depth of stations, must be given in meter in the input file. This field can be input manually or automatically.
 

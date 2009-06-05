@@ -164,8 +164,8 @@ Les champs obligatoires sont : Numéro de station, Type de données, Heure, Date
                MM.mm: Minutes décimales. Le nombre de 'm' exprime le nombre de décimales.
                SS: Seconds (0 à 59)
 
-               Cliquer sur "Position de fin de ligne variable" si toutes les latitudes ou longitudes des stations en entrée ne se termine pas à la même position 
-               (cela arrive souvent avec si les zéros non significatifs de fin ne sont pas écrits).
+               Cliquer sur "Position de fin de ligne variable" si toutes les latitudes ou longitudes des stations en entrée ne commence pas ou ne se termine pas à la même position 
+               (cela arrive souvent avec si les zéros non significatifs de fin ne sont pas écrits, cf exemples dans le manuel utilisateur de NEMO).
 
 11/ Profondeur : Profondeur de l'océan au point de la station en mètres. Cette valeur peut être saisie manuellement ou lue dans le fichier à l'aide du bouton "Injecter", puis testée à l'aide du bouton "Test".
                  Cliquer sur "Position de fin de ligne variable" si toutes les profondeurs des stations en entrée ne se termine pas à la même position.
