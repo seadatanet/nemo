@@ -763,9 +763,6 @@ public class Utils
      */
     public static void validationEtape(int onglet)
     {
-
-        // check etape/onglet
-
         // ViewMain.affiche => onglet courant
         // onglet => onglet destination
 
@@ -773,90 +770,77 @@ public class Utils
         {
             case 0:
                 ViewLog.aideDesc();
-                if (ViewMain.editFileForm != null)
-                {
+                if (ViewMain.editFileForm != null){
                     razEditionCurrent();
-                    if (ViewMain.editFileForm.loaded)
-                    {
+                    if (ViewMain.editFileForm.loaded){
                         // EditDesc.DrawingBack();
-                        ViewMain.editFileForm.DrawingBack();
+                        ViewMain.editFileForm.drawingBack();
                     }
-                    else if (ViewMain.fileLoaded)
-                    {
+                    else if (ViewMain.fileLoaded){
                         // EditDesc.affichageEdition();
                         ViewMain.editFileForm.afficheEdition();
                     }
-                    else
-                    {
+                    else{
                         ViewMain.textAreaFile.setText(Global.EMPTY_STRING);
                     }
                 }
                 ViewMain.affiche = 0;
             break;
             case 1:
-                ViewLog.aideSurvey();
                 razEditionCurrent();
-                if (ViewMain.editCruiseForm.loaded)
-                {
-                    ViewMain.editCruiseForm.DrawingBack();
+                if (ViewMain.editCruiseForm.loaded){
+                    ViewMain.editCruiseForm.drawingBack();
                 }
-                else if (ViewMain.editFileForm.validee)
-                {
+                else if (ViewMain.editFileForm.validee){
                     ViewMain.editCruiseForm.afficheEdition();
                 }
-                else
-                {
+                else{
+                    ViewLog.aideSurvey();
                     ViewMain.textAreaCruise.setText(Global.EMPTY_STRING);
+                    ViewMain.affiche = 1;
                 }
-                ViewMain.affiche = 1;
             break;
             case 2:
-                ViewLog.aideStation();
                 razEditionCurrent();
-                if (ViewMain.editStationForm.loaded)
-                {
-                    ViewMain.editStationForm.DrawingBack();
+                if (ViewMain.editStationForm.loaded){
+                    ViewMain.editStationForm.drawingBack();
                 }
                 else if ((!ViewMain.tabCruise.isDisposed() && ViewMain.editCruiseForm.validee)
-                        || (ViewMain.tabCruise.isDisposed() && ViewMain.editFileForm.validee))
-                {
+                        || (ViewMain.tabCruise.isDisposed() && ViewMain.editFileForm.validee)){
                     ViewMain.editStationForm.afficheEdition();
                 }
-                else
-                {
+                else{
+                    ViewLog.aideStation();
                     ViewMain.textAreaStation.setText(Global.EMPTY_STRING);
+                    ViewMain.affiche = 2;
                 }
-                ViewMain.affiche = 2;
             break;
             case 3:
-                ViewLog.aideData();
                 razEditionCurrent();
-                if (ViewMain.editDataForm.loaded)
-                {
-                    ViewMain.editDataForm.DrawingBack();
+                if (ViewMain.editDataForm.loaded){
+                    ViewMain.editDataForm.drawingBack();
                 }
-                else if (ViewMain.editStationForm.validee)
-                {
+                else if (ViewMain.editStationForm.validee){
                     ViewMain.editDataForm.afficheEdition();
                 }
-                else
-                {
+                else{
+                    ViewLog.aideData();
                     ViewMain.textAreaData.setText(Global.EMPTY_STRING);
+                    ViewMain.affiche = 3;
                 }
-                ViewMain.affiche = 3;
             break;
             case 4:
-                ViewLog.aideConversion();
                 razEditionCurrent();
-                if (ViewMain.editConversionForm.loaded)
-                {
-                    ViewMain.editConversionForm.DrawingBack();
+                if (ViewMain.editConversionForm.loaded){
+                    ViewMain.editConversionForm.drawingBack();
                 }
-                else if (ViewMain.editDataForm.validee)
-                {
+                else if (ViewMain.editDataForm.validee){
                     ViewMain.editConversionForm.afficheEdition();
                 }
-                ViewMain.affiche = 4;
+                else{
+                    ViewLog.aideConversion();
+                    ViewMain.affiche = 4;                    
+                }
             break;
         }
 
@@ -1143,6 +1127,8 @@ public class Utils
     public static void messageOKAppend(String message)
     {
 
+        ViewLog.styledTextLogErreurs.append(Global.RN);
+
         ViewLog.styledTextLogErreurs.append(message);
         Color truc = new Color(Application.display, 0, 151, 0);
 
@@ -1277,7 +1263,15 @@ public class Utils
         {
             // //effacement boutons
             ViewMain.editFileForm.razEdition();
+            
+            // reinitialisation des formulaires
+            ViewMain.editFileForm.razText();
+            ViewMain.editCruiseForm.razText();
+            ViewMain.editStationForm.razText();
+            ViewMain.editDataForm.razText();
+            ViewMain.editConversionForm.razText();
         }
+        
         invalidEtapes();
     }
 

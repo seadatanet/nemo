@@ -16,7 +16,9 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DirectoryDialog;
@@ -50,7 +52,7 @@ import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
 
 /**
- * Description: TODO
+ * Description: vue principale
  * 
  * @author dboulang
  */
@@ -188,7 +190,7 @@ public class ViewMain extends ViewPart
     {
         parent.setLayout(new FillLayout());
 
-        Composite left = new Composite(parent, SWT.BORDER);
+        Composite left = new Composite(parent, SWT.NONE);
         left.setBackground(parent.getBackground());
         left.setLayout(new FillLayout(SWT.VERTICAL));
 
@@ -221,7 +223,6 @@ public class ViewMain extends ViewPart
     {
 
         Composite compositeChoixFichier = new Composite(parent, SWT.NONE);
-        // compositeChoixFichier.setFont(Utils.font08);
         GridLayoutFactory.fillDefaults().numColumns(2).applyTo(
             compositeChoixFichier);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(
@@ -529,8 +530,8 @@ public class ViewMain extends ViewPart
     {
         parent.setLayout(new FillLayout());
 
-        Composite left = new Composite(parent, SWT.BORDER);
-        left.setBackground(parent.getBackground());
+        Composite left = new Composite(parent, SWT.NONE);
+        //left.setBackground(parent.getBackground());
         left.setLayout(new FillLayout());
 
         textFileCruise = new Composite(left, SWT.NONE);
@@ -553,8 +554,8 @@ public class ViewMain extends ViewPart
     {
         parent.setLayout(new FillLayout());
 
-        Composite left = new Composite(parent, SWT.BORDER);
-        left.setBackground(parent.getBackground());
+        Composite left = new Composite(parent, SWT.NONE);
+        //left.setBackground(parent.getBackground());
         left.setLayout(new FillLayout());
 
         Composite textFile = new Composite(left, SWT.NONE);
@@ -577,8 +578,8 @@ public class ViewMain extends ViewPart
     {
         parent.setLayout(new FillLayout());
 
-        Composite left = new Composite(parent, SWT.BORDER);
-        left.setBackground(parent.getBackground());
+        Composite left = new Composite(parent, SWT.NONE);
+        //left.setBackground(parent.getBackground());
         left.setLayout(new FillLayout(SWT.VERTICAL));
 
         Composite textFile = new Composite(left, SWT.NONE);
@@ -598,16 +599,14 @@ public class ViewMain extends ViewPart
 
         editDataForm = new EditDataForm();
         editDataForm.createEditionForm(right);
-
-
     }
 
     protected void createContentConversion(Composite parent)
     {
         parent.setLayout(new FillLayout());
 
-        Composite left = new Composite(parent, SWT.BORDER);
-        left.setBackground(parent.getBackground());
+        Composite left = new Composite(parent, SWT.NONE);
+        //left.setBackground(parent.getBackground());
         left.setLayout(new FillLayout());
 
         Composite compositeConversion = new Composite(left, SWT.NONE);
@@ -649,6 +648,7 @@ public class ViewMain extends ViewPart
         Composite compoVide2 = new Composite(compositeConversion, SWT.NONE);
 
         chkForcerTri = new Button(compositeConversion, SWT.CHECK);
+        chkForcerTri.setFont(Utils.font08);
         chkForcerTri.setText(Messages.view_convert_sort);
         chkForcerTri
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -666,7 +666,6 @@ public class ViewMain extends ViewPart
 
         editConversionForm = new EditConversionForm();
         editConversionForm.createEditionForm(right);
-
     }
 
     private void addRadConvertListener(final Button radio)
@@ -710,18 +709,6 @@ public class ViewMain extends ViewPart
 
         // --- l'onglet d'erreur
         Utils.messageErreur(Global.EMPTY_STRING);
-
-        // on rend sélectionnables les radios ODV et Medatlas dans
-        // l'onglet Conversion
-        radMedatlas.setEnabled(true);
-        radMedatlas.setSelection(true);
-        radODV.setEnabled(true);
-        radODV.setSelection(false);
-        radMonoStation.setEnabled(true);
-        radMonoStation.setSelection(true);
-        radMonoFichier.setEnabled(true);
-        radMonoFichier.setSelection(false);
-        afficheGrpODV();
 
         enableChoice(true);
         // reinitialisation des selections

@@ -1,5 +1,7 @@
 package fr.ifremer.nemo.ui.edit.data;
 
+import fr.ifremer.nemo.util.Global;
+
 public class TypeData extends Object {
 
 	private String code, unite, conversion, format, entree, sortie, test, nom;
@@ -9,6 +11,8 @@ public class TypeData extends Object {
 	private String debutFlag, finFlag, testIn, testOut;
 
 	private Boolean sensor;
+    
+    public static final String DEFAULT_CONVERT = "x*1"; //$NON-NLS-1$
 
 	public Boolean getSensor() {
 		return sensor;
@@ -43,13 +47,13 @@ public class TypeData extends Object {
 
 	public TypeData() {
 
-		this.setCode("Code");
-		this.setConversion("x*1");
-		this.setEntree("Entree");
-		this.setFormat("Format");
-		this.setSortie("Sortie");
-		this.setUnite("Unite");
-		this.setTest("");
+		this.setCode("Code"); //$NON-NLS-1$
+		this.setConversion(DEFAULT_CONVERT);
+		this.setEntree("Entree"); //$NON-NLS-1$
+		this.setFormat("Format"); //$NON-NLS-1$
+		this.setSortie("Sortie"); //$NON-NLS-1$
+		this.setUnite("Unite"); //$NON-NLS-1$
+		this.setTest(Global.EMPTY_STRING);
 
 	}
 
@@ -143,7 +147,7 @@ public class TypeData extends Object {
 
 	public String getDebutFlag() {
 		if (debutFlag == null) {
-			return "";
+			return Global.EMPTY_STRING;
 		}
 		return debutFlag;
 	}
@@ -154,7 +158,7 @@ public class TypeData extends Object {
 
 	public String getFinFlag() {
 		if (finFlag == null) {
-			return "";
+			return Global.EMPTY_STRING;
 		}
 		return finFlag;
 	}

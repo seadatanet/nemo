@@ -194,10 +194,21 @@ public class MappingDatabaseEditView extends FrameView {
     public void deleteRecord() {
         int[] selected = masterTable.getSelectedRows();
         List<fr.ifremer.nemo.mapping.Mapping> toRemove = new ArrayList<fr.ifremer.nemo.mapping.Mapping>(selected.length);
+        
         for (int idx=0; idx<selected.length; idx++) {
-            fr.ifremer.nemo.mapping.Mapping m = list.get(selected[idx]);
-            toRemove.add(m);
-            entityManager.remove(m);
+            String selectedLocalCdiId = (String) masterTable.getValueAt(selected[idx], 0);
+            String selectedFormat = (String) masterTable.getValueAt(selected[idx], 2);
+            
+            for (Mapping item : list){
+                String localCdiId = item.getMappingPK().getLocalCdiId();
+                String format = item.getMappingPK().getFormat();
+                if (localCdiId.equals(selectedLocalCdiId) 
+                        && format.equals(selectedFormat)){
+                    toRemove.add(item);
+                    entityManager.remove(item);
+                    break;
+                }
+            }
         }
         list.removeAll(toRemove);
         setSaveNeeded(true);

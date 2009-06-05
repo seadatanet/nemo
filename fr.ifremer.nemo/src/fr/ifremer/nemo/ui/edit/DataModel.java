@@ -450,7 +450,7 @@ public class DataModel
         }
 
         // parcours des sections de la station pour initialisation
-        for (NemoSection stationSection : ViewMain.editStationForm.listeSectionsStation)
+        for (NemoSection stationSection : ViewMain.editStationForm.listeSections)
         {
             stationSection.initModel(stationModel);
         }
@@ -602,7 +602,7 @@ public class DataModel
         // forcage affichage onglet 0
         ViewMain.tabFolder.setSelection(0);
         ViewMain.affiche = 0;
-        // Utils.invalidEtapes();
+
         // RAZ global
         Utils.razGlobal();
 
@@ -800,7 +800,7 @@ public class DataModel
         }
     }
 
-    public static void fillSurvey()
+    public static void fillSurvey(Survey a_Survey)
     {
         // recupération des items
         Couple refCampagne =
@@ -845,12 +845,13 @@ public class DataModel
 
         // System.out.println("Remplissage onglet survey");
         Survey survey;
-        if (ViewMain.dossierCampagne)
-        {
+        if (a_Survey != null){
+            survey = a_Survey;
+        } 
+        else if (ViewMain.dossierCampagne){
             survey = dirSurvey_modele.getModel();
         }
-        else
-        {
+        else{
             survey = singleSurvey_modele.getModel();
         }
 
@@ -864,25 +865,19 @@ public class DataModel
         // Localisation
 
         // DATES
-        try
-        {
+        try{
             dateDebut.setText(Formatter.getSingleton().formatDateTime(
                 "dd/MM/yyyy", survey.getStartDate())); //$NON-NLS-1$
         }
-        catch (ParseException e)
-        {
-
+        catch (ParseException e){
             e.printStackTrace();
         }
 
-        try
-        {
+        try{
             dateFin.setText(Formatter.getSingleton().formatDateTime(
                 "dd/MM/yyyy", survey.getEndDate())); //$NON-NLS-1$
         }
-        catch (ParseException e)
-        {
-
+        catch (ParseException e){
             e.printStackTrace();
         }
 
@@ -890,7 +885,11 @@ public class DataModel
             .selectComboLibelle(region.getValueCombo(), survey.getRegionName());
 
         // Source de donnees
-        Utils.selectComboCode(pays.getValueCombo(), survey.getCountryCode());
+        if (survey.getCountryName() != null) {
+            Utils.selectComboLibelle(pays.getValueCombo(), survey.getCountryName());
+        }else{
+            Utils.selectComboCode(pays.getValueCombo(), survey.getCountryCode());
+        }
         labo.setText(survey.getLaboratories());
         chef.setText(survey.getChiefScientist());
         projet.setText(survey.getProjectName());
@@ -912,7 +911,7 @@ public class DataModel
 
     public static void fillStation()
     {
-        for (NemoSection stationSection : ViewMain.editStationForm.listeSectionsStation)
+        for (NemoSection stationSection : ViewMain.editStationForm.listeSections)
         {
             stationSection.fillFromModel(stationModel_modele);
         }
@@ -932,7 +931,7 @@ public class DataModel
 
     public static void fillBackStation()
     {
-        for (NemoSection stationSection : ViewMain.editStationForm.listeSectionsStation)
+        for (NemoSection stationSection : ViewMain.editStationForm.listeSections)
         {
             stationSection.fillFromModel(stationModel);
         }
@@ -991,12 +990,10 @@ public class DataModel
                     + modeleCourant.getFullName());
             typeData.setNom(modeleCourant.getFullName());
 
-            if (paraCourant.getConversionFormula().equals(Global.EMPTY_STRING))
-            {
-                typeData.setConversion("x*1"); //$NON-NLS-1$
+            if (paraCourant.getConversionFormula().equals(Global.EMPTY_STRING)){
+                typeData.setConversion(TypeData.DEFAULT_CONVERT);
             }
-            else
-            {
+            else{
                 typeData.setConversion(paraCourant.getConversionFormula());
             }
             typeData.setDebut(frag.getFirstCharOffset());

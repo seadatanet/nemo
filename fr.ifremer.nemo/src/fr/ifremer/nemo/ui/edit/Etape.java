@@ -71,16 +71,12 @@ public class Etape
             }
         }
 
-        for (NemoSection desc : ViewMain.editFileForm.listeSectionsDesc)
-        {
-
-            if (desc.isEnabled())
-            {
+        for (NemoSection desc : ViewMain.editFileForm.listeSections){
+            if (desc.isEnabled()){
                 resultat = ((FileSection) desc).checkMandatory();
                 ok = ok && resultat;
             }
-            else
-            {
+            else{
                 desc.razValues();
             }
         }

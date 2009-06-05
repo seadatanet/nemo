@@ -17,11 +17,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ListDialog;
-import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.NemoLists;
@@ -33,6 +30,7 @@ import fr.ifremer.nemo.ui.ApplicationActionBarAdvisor;
 import fr.ifremer.nemo.ui.SWTProgress;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.DataModel;
+import fr.ifremer.nemo.ui.edit.EditForm;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Conversion;
@@ -40,22 +38,11 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSDataType;
 
-public class EditConversionForm extends Thread
+public class EditConversionForm extends EditForm
 {
-
-    public ScrolledForm formEdition;
-    public FormToolkit toolkitEdition;
-
     public Button buttonConversion;
 
-    public boolean loaded = false;
-
     public String nomFichierSortie, nomDossierSortie, nomHorsPrefix;
-
-    public Shell shell;
-
-    // public Boolean interrompu;
-
     public ProgressNotification notifier;
 
     private String _dataSetRef;
@@ -94,20 +81,16 @@ public class EditConversionForm extends Thread
     private String warningStation = Global.EMPTY_STRING;
     private String warningData = Global.EMPTY_STRING;
 
+
+    /*
+     * Methodes de création de l'onglet (héritées de EditForm)
+     */
+    
     @Override
-    public void run()
-    {
-
-        // affichageEdition();
-    }
-
     public void createEditionForm(Composite parent)
     {
-        loaded = false;
-
-        toolkitEdition = new FormToolkit(parent.getDisplay());
-        formEdition = toolkitEdition.createScrolledForm(parent);
-
+        super.createEditionForm(parent);
+        
         nomFichierSortie = Global.EMPTY_STRING;
         nomDossierSortie = Global.EMPTY_STRING;
 
@@ -118,19 +101,15 @@ public class EditConversionForm extends Thread
         buttonConversion = new Button(formEdition.getBody(), SWT.NONE);
         buttonConversion.setBackground(ViewMain.backgroungEdit);
         buttonConversion.setText(Messages.button_convert);
-
-        // listener sur le bouton conversion
         buttonConversion
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
                 @Override
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
-                    try
-                    {
+                    try{
                         // Test si la config est bien remplie
-                        if (!checkConfig())
-                        {
+                        if (!checkConfig()){
                             throw new Exception("CDI cancelled"); //$NON-NLS-1$
                         }
 
@@ -147,8 +126,7 @@ public class EditConversionForm extends Thread
 
                         // type de la conversion
                         Conversion formatConversion = Conversion.MEDATLAS;
-                        if (ViewMain.radODV.getSelection())
-                        {
+                        if (ViewMain.radODV.getSelection()){
                             formatConversion = Conversion.ODV;
                         }
                         NemoLists.writeSdnParameters(formatConversion);
@@ -156,45 +134,33 @@ public class EditConversionForm extends Thread
                         if (ViewMain.editFileForm.okApresReset
                                 && ViewMain.editCruiseForm.okApresReset
                                 && ViewMain.editStationForm.okApresReset
-                                && ViewMain.editDataForm.okApresReset)
-                        {
+                                && ViewMain.editDataForm.okApresReset){
 
                             if ((formatConversion == Conversion.ODV)
-                                    && (!ViewMain.collectionCas1))
-                            {
-                                if (!askDataSetRef())
-                                {
+                                    && (!ViewMain.collectionCas1)){
+                                if (!askDataSetRef()){
                                     throw new Exception("Cancelled"); //$NON-NLS-1$
                                 }
                             }
 
                             // On demande les infos pour faire le résumé CDI,
                             // qui sera fait plus tard
-                            if (Utils.configuration.isWriteCdi())
-                            {
-
+                            if (Utils.configuration.isWriteCdi()){
                                 CDIResumeWriter.getInstance().reset();
-                                CDIResumeWriter.getInstance()
-                                    .choixFichierSortie();
+                                CDIResumeWriter.getInstance().choixFichierSortie();
                             }
 
                             // test pour savoir si on est en campagne ou pas
-                            if (ViewMain.isCollection())
-                            {
-
+                            if (ViewMain.isCollection()){
                                 DataType dt = askDataType();
-                                DataModel.stationModel.getModel().setDataType(
-                                    dt);
+                                DataModel.stationModel.getModel().setDataType(dt);
                                 choixDossierSortie();
                             }
                             else if (ViewMain.radODV.getSelection()
-                                    && ViewMain.radMonoStation.getSelection())
-                            {
-
+                                    && ViewMain.radMonoStation.getSelection()){
                                 choixDossierSortie();
                             }
-                            else
-                            {
+                            else{
                                 choixFichierSortie();
                             }
 
@@ -203,30 +169,29 @@ public class EditConversionForm extends Thread
                             // affichage des résultats en fin de conversion
                             afficheResultat(runSWTProgress());
                         }
-                        else
-                        {
-                            Utils
-                                .messageErreur(Messages.error_convert_invalideSteps);
+                        else {
+                            Utils.messageErreur(Messages.error_convert_invalideSteps);
                         }
                     }
-                    catch (Exception ex)
-                    {
+                    catch (Exception ex){
                         Utils.messageErreur(Messages.error_convert_cancel);
                     }
-
                 }
-
             });
-
-        ViewMain.affiche = 4;
-        // formEdition.reflow(true);
-        formEdition.setVisible(false);
-
+    }
+    
+    @Override
+    protected void initSections(){
+        // pas de section dans cet onglet
     }
 
+    @Override
     public void afficheEdition()
     {
-
+        super.afficheEdition();
+        
+        ViewLog.aideConversion();
+        
         // FAE 1143 : déactivation MEDATLAS
         StringBuffer msg = new StringBuffer();
         msg.append(Global.RN);
@@ -248,58 +213,65 @@ public class EditConversionForm extends Thread
         ViewMain.enableMedatlas(medOK);
 
         loaded = true;
+        ViewMain.affiche = 4;
 
         formEdition.reflow(true);
-        formEdition.setVisible(true);
     }
 
-    public void initBoutons()
+    @Override
+    public void drawingBack()
     {
-        Shell shell1 = PlatformUI.getWorkbench().getDisplay().getActiveShell();
-
-        buttonConversion = new Button(shell1, SWT.NONE);
-
-    }
-
-    public void razEdition()
-    {
-
-// Shell shell1 = PlatformUI.getWorkbench().getDisplay().getActiveShell();
-//
-// buttonConversion.setParent(shell1);
-// formEdition.reflow(true);
-// ViewEdit.formEdition.setText(Global.EMPTY_STRING);
-        formEdition.setVisible(false);
-
-    }
-
-    public void DrawingBack()
-    {
-
-        // ScrolledForm s;
-        // s = ViewEdit.formEdition;
+        super.drawingBack();
+        
         ViewLog.aideConversion();
-        // buttonConversion.setParent(s.getBody());
-
-        // s.setText(Messages.edit_convert_title);
-
-        // formEdition.reflow(true);
-
-        // affichage courant
         ViewMain.affiche = 4;
-        formEdition.setVisible(true);
-
+    }
+    
+    @Override
+    public void actualiseEdition(){
+        // pas d'actualisation nécessaire pour cet onglet
+    }
+    
+    @Override
+    public void razText(){
+        // on rend sélectionnables les radios ODV et Medatlas dans
+        // l'onglet Conversion
+        if (ViewMain.radMonoFichier != null){
+            ViewMain.radMedatlas.setEnabled(true);
+            ViewMain.radMedatlas.setSelection(true);
+            ViewMain.radODV.setEnabled(true);
+            ViewMain.radODV.setSelection(false);
+            ViewMain.radMonoStation.setEnabled(true);
+            ViewMain.radMonoStation.setSelection(true);
+            ViewMain.radMonoFichier.setEnabled(true);
+            ViewMain.radMonoFichier.setSelection(false);
+            ViewMain.afficheGrpODV();
+        }
     }
 
+    @Override
+    public void disposeElements()
+    {
+        if (buttonConversion != null)
+            buttonConversion.dispose();
+    }
+
+    public void invalidEtape()
+    {
+        super.invalidEtape(4);
+    }
+    
+
+    /*
+     * Méthodes de traitement du lancement de la conversion
+     */
+    
     public void choixFichierSortie()
     {
-
         nomFichierSortie = Global.EMPTY_STRING;
 
-        Shell newShell =
-            PlatformUI.getWorkbench().getDisplay().getActiveShell();
-        FileDialog dialog =
-            new FileDialog(newShell, SWT.SAVE | SWT.APPLICATION_MODAL);
+        FileDialog dialog = new FileDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), 
+                                           SWT.SAVE | SWT.APPLICATION_MODAL);
         dialog.setText(Messages.edit_convert_outputFilename);
 
         // FAE090
@@ -310,20 +282,16 @@ public class EditConversionForm extends Thread
             dialog.setFilterExtensions(extensions);
 
             Survey survey = null;
-            if (DataModel.singleSurvey != null)
-            {
+            if (DataModel.singleSurvey != null){
                 survey = DataModel.singleSurvey.getModel();
             }
-            else if (DataModel.dirSurvey != null)
-            {
+            else if (DataModel.dirSurvey != null){
                 survey = DataModel.dirSurvey.getModel();
             }
 
-            if (survey != null)
-            {
+            if (survey != null){
                 String fileName = survey.getReference().trim();
-                if (fileName.equals(Global.EMPTY_STRING))
-                {
+                if (fileName.equals(Global.EMPTY_STRING)){
                     fileName = survey.getName().trim();
                 }
                 fileName = Utils.validFileName(fileName);
@@ -332,46 +300,35 @@ public class EditConversionForm extends Thread
         }
 
         // FAE45
-        if (ViewMain.radioFichier.getSelection())
-        {
+        if (ViewMain.radioFichier.getSelection()){
             dialog.setFilterPath(ViewMain.nomFichier);
         }
-        else
-        {
+        else{
             dialog.setFilterPath(ViewMain.nomRepertoire.substring(0,
                 ViewMain.nomRepertoire.lastIndexOf('\\')));
         }
 
         nomFichierSortie = dialog.open();
 
-        if (nomFichierSortie != null)
-        {
+        if (nomFichierSortie != null){
             nomDossierSortie = Utils.extraitCheminFichier(nomFichierSortie);
 
             // Teste si le repertoire de sortie est different du repertoire
             // d'entree
-            if (ViewMain.radioFichier.getSelection())
-            {
-                if (nomFichierSortie.equals(ViewMain.nomFichier))
-                {
-                    MessageBox mb =
-                        new MessageBox(PlatformUI.getWorkbench().getDisplay()
-                            .getActiveShell(), SWT.ICON_ERROR | SWT.OK
-                                | SWT.APPLICATION_MODAL);
+            if (ViewMain.radioFichier.getSelection()){
+                if (nomFichierSortie.equals(ViewMain.nomFichier)){
+                    MessageBox mb = new MessageBox(PlatformUI.getWorkbench().getDisplay().getActiveShell(), 
+                                                   SWT.ICON_ERROR | SWT.OK | SWT.APPLICATION_MODAL);
                     mb.setMessage(Messages.error_convert_outputFile);
                     mb.open();
 
                     choixFichierSortie();
                 }
             }
-            else
-            {
-                if (nomDossierSortie.equals(ViewMain.nomRepertoire))
-                {
-                    MessageBox mb =
-                        new MessageBox(PlatformUI.getWorkbench().getDisplay()
-                            .getActiveShell(), SWT.ICON_ERROR | SWT.OK
-                                | SWT.APPLICATION_MODAL);
+            else{
+                if (nomDossierSortie.equals(ViewMain.nomRepertoire)){
+                    MessageBox mb =  new MessageBox(PlatformUI.getWorkbench().getDisplay().getActiveShell(), 
+                                                    SWT.ICON_ERROR | SWT.OK | SWT.APPLICATION_MODAL);
                     mb.setMessage(Messages.error_convert_outputDir);
                     mb.open();
 
@@ -380,20 +337,14 @@ public class EditConversionForm extends Thread
             }
 
             File fich = new File(nomFichierSortie);
-            if (fich.exists())
-            {
+            if (fich.exists()){
                 // fichier existe
-                Shell shell2 =
-                    PlatformUI.getWorkbench().getDisplay().getActiveShell();
-
-                MessageBox mb =
-                    new MessageBox(shell2, SWT.ICON_WARNING | SWT.YES | SWT.NO
-                            | SWT.APPLICATION_MODAL);
+                MessageBox mb = new MessageBox(PlatformUI.getWorkbench().getDisplay().getActiveShell(),
+                                               SWT.ICON_WARNING | SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
                 mb.setMessage(Messages.confirm_eraseFile);
 
                 int reponse = mb.open();
-                if (reponse == SWT.NO)
-                {
+                if (reponse == SWT.NO){
                     // on n'écrase pas le fichier
                     choixFichierSortie();
                 }
@@ -403,39 +354,30 @@ public class EditConversionForm extends Thread
 
     public void choixDossierSortie()
     {
-
         nomFichierSortie = Global.EMPTY_STRING;
         nomDossierSortie = Global.EMPTY_STRING;
-
-        Shell shell1 = PlatformUI.getWorkbench().getDisplay().getActiveShell();
-        DirectoryDialog dialog =
-            new DirectoryDialog(shell1, SWT.SAVE | SWT.APPLICATION_MODAL);
+        
+        DirectoryDialog dialog = new DirectoryDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), 
+                                                     SWT.SAVE | SWT.APPLICATION_MODAL);
         dialog.setText(Messages.edit_convert_outputDir);
 
-        if (ViewMain.radioFichier.getSelection())
-        {
+        if (ViewMain.radioFichier.getSelection()){
             dialog.setFilterPath(ViewMain.nomRepertoire);
         }
-        else
-        {
+        else {
             dialog.setFilterPath(ViewMain.nomRepertoire.substring(0,
                 ViewMain.nomRepertoire.lastIndexOf('\\')));
         }
 
         nomDossierSortie = dialog.open();
 
-        if (nomDossierSortie != null)
-        {
-
+        if (nomDossierSortie != null) {
             // Teste si le répertoire de sortie est différent du répertoire
             // d'entrée
             if (!ViewMain.radioFichier.getSelection()
-                    && nomDossierSortie.equals(ViewMain.nomRepertoire))
-            {
-                MessageBox mb =
-                    new MessageBox(PlatformUI.getWorkbench().getDisplay()
-                        .getActiveShell(), SWT.ICON_ERROR | SWT.OK
-                            | SWT.APPLICATION_MODAL);
+                    && nomDossierSortie.equals(ViewMain.nomRepertoire)) {
+                MessageBox mb =  new MessageBox(PlatformUI.getWorkbench().getDisplay().getActiveShell(), 
+                                                SWT.ICON_ERROR | SWT.OK | SWT.APPLICATION_MODAL);
                 mb.setMessage(Messages.error_convert_outputDir);
                 mb.open();
 
@@ -443,38 +385,29 @@ public class EditConversionForm extends Thread
             }
 
             File dir = new File(nomDossierSortie);
-            if (dir.exists() && dir.listFiles().length != 0)
-            {
+            if (dir.exists() && dir.listFiles().length != 0) {
                 // fichier existe
-                Shell shell2 =
-                    PlatformUI.getWorkbench().getDisplay().getActiveShell();
-
-                MessageBox mb =
-                    new MessageBox(shell2, SWT.ICON_WARNING | SWT.YES | SWT.NO
-                            | SWT.APPLICATION_MODAL);
+                MessageBox mb = new MessageBox(PlatformUI.getWorkbench().getDisplay().getActiveShell(), 
+                                               SWT.ICON_WARNING | SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
                 mb.setMessage(Messages.confirm_useDir);
 
                 int reponse = mb.open();
-                if (reponse == SWT.NO)
-                {
+                if (reponse == SWT.NO) {
                     // on n'écrase pas le fichier
                     choixDossierSortie();
                 }
             }
         }
-
     }
 
     public boolean runSWTProgress()
     {
         Utils.messageErreur(Global.EMPTY_STRING);
-        try
-        {
+        try {
             new SWTProgress().run();
             return true;
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             Utils.messageErreur(e.getMessage());
             return false;
         }
@@ -482,38 +415,31 @@ public class EditConversionForm extends Thread
 
     public void afficheResultat(boolean resultOK)
     {
-        if (resultOK)
-        {
-            if (ViewMain.radODV.getSelection())
-            {
+        if (resultOK) {
+            if (ViewMain.radODV.getSelection()) {
                 Utils.messageOK(Messages.edit_convert_endODV);
             }
-            else
-            {
+            else {
                 Utils.messageOK(Messages.edit_convert_endMED);
             }
         }
-        else
-        {
+        else {
             Utils.messageErreurAppend(messageErreur());
         }
 
         // Stations triées
-        if (getSortedStations().size() > 0)
-        {
+        if (getSortedStations().size() > 0) {
             String sortedMessage =
                 "\n\n" + getSortedStations().size() + Global.SPACE //$NON-NLS-1$
                         + Messages.edit_convert_sortStations + Global.SPACE;
 
             for (Entry<String, Integer> currentEntry : getSortedStations()
-                .entrySet())
-            {
+                .entrySet()) {
                 sortedMessage += currentEntry.getKey() + ", "; //$NON-NLS-1$
             }
 
             int last = sortedMessage.lastIndexOf(","); //$NON-NLS-1$
-            if (last > 0)
-            {
+            if (last > 0) {
                 sortedMessage = sortedMessage.substring(0, last);
             }
             Utils.messageOKAppend(sortedMessage);
@@ -559,19 +485,15 @@ public class EditConversionForm extends Thread
     {
         String message = Global.EMPTY_STRING;
 
-        if (getErreurFichier() != null)
-        {
-            if (!getErreurFichier().trim().equals(Global.EMPTY_STRING))
-            {
+        if (getErreurFichier() != null)  {
+            if (!getErreurFichier().trim().equals(Global.EMPTY_STRING)) {
                 message += Messages.label_file + "\t : \t" //$NON-NLS-1$
                         + getErreurFichier() + Global.RN;
             }
         }
 
-        if (getErreurLigne() != 0)
-        {
-            if (getErreurLigne() <= DataModel.stationModel.getNumberOfLines())
-            {
+        if (getErreurLigne() != 0) {
+            if (getErreurLigne() <= DataModel.stationModel.getNumberOfLines()) {
                 // Si l'erreur se trouve dans l'en-tête de station, la ligne
                 // indiquée
                 // n'est pas forcément la bonne, il vaut mieux ne pas l'indiquer
@@ -581,22 +503,18 @@ public class EditConversionForm extends Thread
                     + getErreurLigne() + Global.RN;
         }
 
-        if (getErreurChaine() != null)
-        {
-            if (!getErreurChaine().trim().equals(Global.EMPTY_STRING))
-            {
+        if (getErreurChaine() != null) {
+            if (!getErreurChaine().trim().equals(Global.EMPTY_STRING)) {
                 message += Messages.label_string + "\t : \t" //$NON-NLS-1$
                         + getErreurChaine();
             }
         }
 
-        if (!message.equals(Global.EMPTY_STRING))
-        {
+        if (!message.equals(Global.EMPTY_STRING)) {
             message =
                 Global.RN + Messages.error_convert_position + Global.RN
                         + message;
         }
-
         return message;
     }
 
@@ -612,17 +530,14 @@ public class EditConversionForm extends Thread
 
     public boolean askDataSetRef()
     {
-        if (getDataSetRef().equals(Global.EMPTY_STRING))
-        {
+        if (getDataSetRef().equals(Global.EMPTY_STRING)) {
             String strDefault = Global.EMPTY_STRING;
-            if (DataModel.dirSurvey != null)
-            {
+            if (DataModel.dirSurvey != null) {
                 strDefault = DataModel.dirSurvey.getModel().getReference();
                 if (strDefault.equals(Global.EMPTY_STRING))
                     strDefault = DataModel.dirSurvey.getModel().getName();
             }
-            else if (DataModel.singleSurvey != null)
-            {
+            else if (DataModel.singleSurvey != null){
                 strDefault = DataModel.singleSurvey.getModel().getReference();
                 if (strDefault.equals(Global.EMPTY_STRING))
                     strDefault = DataModel.singleSurvey.getModel().getName();
@@ -633,8 +548,7 @@ public class EditConversionForm extends Thread
                     Messages.CDIResumeWriter_idMessage, strDefault, null);
             inputDataSetRef.open();
 
-            if (inputDataSetRef.getReturnCode() == Window.OK)
-            {
+            if (inputDataSetRef.getReturnCode() == Window.OK) {
                 _dataSetRef = inputDataSetRef.getValue();
                 return true;
             } // else {
@@ -650,18 +564,17 @@ public class EditConversionForm extends Thread
 
     public void definePrefixDossier()
     {
-        if (Configuration.getSingleton().isWriteMapping())
-        {
+        if (Configuration.getSingleton().isWriteMapping()) {
             String cheminComplet;
             Boolean modeDossier = false;
 
-            if (nomFichierSortie.isEmpty())
-            {
+            if (nomFichierSortie.isEmpty()) {
                 cheminComplet = nomDossierSortie;
                 modeDossier = true;
             }
-            else
+            else {
                 cheminComplet = nomFichierSortie;
+            }
 
             InputDialog inputPrefixDossier =
                 new InputDialog(PlatformUI.getWorkbench().getDisplay()
@@ -670,17 +583,14 @@ public class EditConversionForm extends Thread
                     null);
             inputPrefixDossier.open();
 
-            if (inputPrefixDossier.getReturnCode() == Window.OK)
-            {
+            if (inputPrefixDossier.getReturnCode() == Window.OK) {
                 if (inputPrefixDossier.getValue().endsWith(File.separator)
-                        || modeDossier)
-                {
+                        || modeDossier) {
                     nomHorsPrefix =
                         cheminComplet.replace(inputPrefixDossier.getValue(),
                             Global.EMPTY_STRING);
                 }
-                else
-                {
+                else {
                     nomHorsPrefix =
                         cheminComplet.replace(inputPrefixDossier.getValue()
                                 + File.separator, Global.EMPTY_STRING);
@@ -689,8 +599,7 @@ public class EditConversionForm extends Thread
 
             // On affiche la boite de dialogue tant que l'utilisateur saisie une
             // donnée incorrecte
-            if (!cheminComplet.endsWith(nomHorsPrefix))
-            {
+            if (!cheminComplet.endsWith(nomHorsPrefix)) {
                 definePrefixDossier();
             }
         }
@@ -698,8 +607,7 @@ public class EditConversionForm extends Thread
 
     public DataType askDataType()
     {
-
-        ListDialog ld = new ListDialog(shell);
+        ListDialog ld = new ListDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell());
         ld.setAddCancelButton(true);
         ld.setContentProvider(new ArrayContentProvider());
         ld.setLabelProvider(new LabelProvider());
@@ -712,7 +620,6 @@ public class EditConversionForm extends Thread
         DataType dt = new DataType(result.getCode(), true, result.isSensor());
 
         return dt;
-
     }
 
     public boolean checkConfig()
@@ -720,61 +627,41 @@ public class EditConversionForm extends Thread
         boolean blnOK = true;
         String message = Messages.CDIResumeWriter_configMessage;
 
-        // if (ViewMain.radODV.getSelection()) {
         if (Utils.configuration.getIdEdmoRespCdi().trim().equals(
-            Global.EMPTY_STRING))
-        {
+            Global.EMPTY_STRING)) {
             message += Global.RN + Global.SEP + Messages.settings_EDMOauthor;
             blnOK = false;
         }
-        // }
 
-        if (Utils.configuration.isWriteCdi())
-        {
-            if (Utils.configuration.getCodeEdmoDonnees().trim().equals(
-                Global.EMPTY_STRING))
-            {
+        if (Utils.configuration.isWriteCdi()) {
+            if (Utils.configuration.getCodeEdmoDonnees().trim().equals(Global.EMPTY_STRING)) {
                 message += Global.RN + Global.SEP + Messages.settings_EDMOori;
                 blnOK = false;
             }
 
-            if (Utils.configuration.getIdEdmoRespDonnees().trim().equals(
-                Global.EMPTY_STRING))
-            {
-                message +=
-                    Global.RN + Global.SEP + Messages.settings_EDMOcustodian;
+            if (Utils.configuration.getIdEdmoRespDonnees().trim().equals(Global.EMPTY_STRING)) {
+                message += Global.RN + Global.SEP + Messages.settings_EDMOcustodian;
                 blnOK = false;
             }
 
-            if (Utils.configuration.getIdEdmoDistDonnees().trim().equals(
-                Global.EMPTY_STRING))
-            {
+            if (Utils.configuration.getIdEdmoDistDonnees().trim().equals(Global.EMPTY_STRING)) {
                 message += Global.RN + Global.SEP + Messages.settings_EDMOdist;
                 blnOK = false;
             }
 
-            if (Utils.configuration.getCdiURL().trim().equals(
-                Global.EMPTY_STRING))
-            {
-                message +=
-                    Global.RN + Global.SEP + Messages.settings_dataDist_web;
+            if (Utils.configuration.getCdiURL().trim().equals(Global.EMPTY_STRING)) {
+                message +=  Global.RN + Global.SEP + Messages.settings_dataDist_web;
                 blnOK = false;
             }
 
-            if (Utils.configuration.getCdiMethod().trim().equals(
-                Global.EMPTY_STRING))
-            {
-                message +=
-                    Global.RN + Global.SEP + Messages.settings_dataDist_met;
+            if (Utils.configuration.getCdiMethod().trim().equals(Global.EMPTY_STRING)) {
+                message +=  Global.RN + Global.SEP + Messages.settings_dataDist_met;
                 blnOK = false;
             }
-
         }
 
-        if (!blnOK)
-        {
-            try
-            {
+        if (!blnOK) {
+            try {
                 String[] buttons = new String[1];
                 buttons[0] = Messages.success;
                 MessageDialog dialog =
@@ -783,8 +670,7 @@ public class EditConversionForm extends Thread
                         message, MessageDialog.NONE, buttons, 0);
                 dialog.open();
             }
-            catch (Exception e)
-            {
+            catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -897,21 +783,5 @@ public class EditConversionForm extends Thread
     public String getWarningStation()
     {
         return warningStation;
-    }
-
-    public void disposeElements()
-    {
-        if (buttonConversion != null)
-            buttonConversion.dispose();
-    }
-
-    public void invalidEtape()
-    {
-        if (ViewMain.affiche != 4 && loaded)
-        {
-            loaded = false;
-            disposeElements();
-        }
-
     }
 }

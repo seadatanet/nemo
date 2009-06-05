@@ -434,20 +434,20 @@ public class TableData
 
     }
 
-    public static void nouvelElt()
-    {
-        // rajoute une ligne en derniere position de la table
-
-        TypeData type = new TypeData();
-        types.add(type);
-
-        // razTableData
-        razTableData();
-
-        // refresh de la table
-        creationTable();
-
-    }
+//    public static void nouvelElt()
+//    {
+//        // rajoute une ligne en derniere position de la table
+//
+//        TypeData type = new TypeData();
+//        types.add(type);
+//
+//        // razTableData
+//        razTableData();
+//
+//        // refresh de la table
+//        creationTable();
+//
+//    }
 
     public static void monterEltTableData()
     {

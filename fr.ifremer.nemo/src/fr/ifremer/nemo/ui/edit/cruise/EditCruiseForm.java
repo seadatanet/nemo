@@ -7,16 +7,12 @@ import java.util.ArrayList;
 import javax.xml.transform.TransformerException;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.xml.sax.SAXException;
 
 import fr.ifremer.nemo.config.NemoLists;
@@ -27,6 +23,7 @@ import fr.ifremer.nemo.ui.SWTProgressWS;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.ComboType;
 import fr.ifremer.nemo.ui.edit.DataModel;
+import fr.ifremer.nemo.ui.edit.EditForm;
 import fr.ifremer.nemo.ui.edit.Etape;
 import fr.ifremer.nemo.ui.edit.NemoSection;
 import fr.ifremer.nemo.ui.view.ViewLog;
@@ -35,43 +32,27 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSDataType;
 
-public class EditCruiseForm
+public class EditCruiseForm extends EditForm
 {
-    // fonctions de remplissage de la zone d'edition pour les campagnes
-
-    // private static Shell shell = new Shell();
-    public ScrolledForm formEdition;
-    public FormToolkit toolkitEdition;
-
-    public Boolean okApresReset;
-    public boolean expand, validee, loaded, filled;
-
-    public ArrayList<NemoSection> listeSectionsSurvey;
-    public Button buttonRAZ, buttonInitServeur, buttonValidate, buttonXML,
-            buttonExpand;
+    //public ArrayList<NemoSection> listeSectionsSurvey;
+    public Button buttonInitServeur, buttonXML;
     public CruiseSection sectionReference, sectionLocalisation, sectionSource,
             sectionCentre, sectionCommentaire;
     public CruiseDatatypeSection sectionType;
 
+    @Override
     public void createEditionForm(Composite parent)
     {
-        validee = false;
-        loaded = false;
-
-        toolkitEdition = new FormToolkit(parent.getDisplay());
-        formEdition = toolkitEdition.createScrolledForm(parent);
+        super.createEditionForm(parent);
 
         formEdition.getBody().setLayout(new GridLayout());
         formEdition.setText(Messages.edit_cruise_title);
 
         // init composants IHM
-        listeSectionsSurvey = new ArrayList<NemoSection>();
         initSections();
 
         // bouton validate
-        buttonValidate = new Button(formEdition.getBody(), SWT.NONE);
-        buttonValidate.setBackground(ViewMain.backgroungEdit);
-        buttonValidate.setText(Messages.button_validateStep);
+        createButtonValidate();
         buttonValidate
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
                 @Override
@@ -92,7 +73,7 @@ public class EditCruiseForm
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
-
+                    razText();
                     init_webService();
                 }
             });
@@ -107,139 +88,63 @@ public class EditCruiseForm
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
-
+                    razText();
                     ouvertureDescriptionXML();
                 }
             });
 
         // bouton reset
-        buttonRAZ = new Button(formEdition.getBody(), SWT.NONE);
-        buttonRAZ.setBackground(ViewMain.backgroungEdit);
-        buttonRAZ.setText(Messages.button_reset);
-        buttonRAZ
-            .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-                @Override
-                public void widgetSelected(
-                        org.eclipse.swt.events.SelectionEvent e)
-                {
-                    razText();
-                    // invalidation de l'étape en cours et des suivantes
-                    Utils.invalidEtapes();
-                }
-            });
+        createButtonRaz();
 
         // bouton collapse all / expand all
-        buttonExpand = new Button(formEdition.getBody(), SWT.NONE);
-        buttonExpand.setBackground(ViewMain.backgroungEdit);
-        buttonExpand.setText(Global.PLUS);
-        buttonExpand
-            .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-                @Override
-                public void widgetSelected(
-                        org.eclipse.swt.events.SelectionEvent e)
-                {
-                    expandSections();
-                }
-            });
+        createButtonExpand();
 
         // Draw Station Sections
-        for (NemoSection section : listeSectionsSurvey)
-        {
-            // section.initSection(formEdition);
-            section.draw(toolkitEdition, formEdition, filled);
-        }
-
-        // remplissage de l'IHM par le modele charge
-        if (DataModel.ouverture)
-        {
-            DataModel.fillSurvey();
-            filled = true;
-        }
-
-        // refresh du formulaire
-        formEdition.reflow(true);
-        formEdition.setVisible(false);
-
+        drawSections();
     }
 
-    protected void expandSections()
-    {
-        for (NemoSection section : listeSectionsSurvey)
-        {
-            if (!expand && section.isEnabled())
-            {
-                section.setExpanded(true);
-            }
-            else
-            {
-                section.setExpanded(false);
-            }
-        }
-        if (!expand)
-        {
-            expand = true;
-            buttonExpand.setText(Global.MOINS);
-        }
-        else
-        {
-            expand = false;
-            buttonExpand.setText(Global.PLUS);
-        }
-
-        // refresh global
-        formEdition.reflow(true);
-    }
-
+    @Override
     public void afficheEdition()
     {
-        // raz du message d'erreurs
-        Utils.messageErreur(Global.EMPTY_STRING);
-
-        okApresReset = true;
-        filled = false;
-
+        super.afficheEdition();
+        
+        ViewLog.aideSurvey();
+        
         // affichage du texte dans la zone de gauche
         ViewMain.textAreaCruise.setText(Utils.texteBrut);
 
         if (!loaded)
         {
             // INFOS sur les fichiers utilises
-            if (ViewMain.radioFichier.getSelection())
-            {
+            if (ViewMain.radioFichier.getSelection()){
                 // fichier campagne
                 Utils.messageInfoAppend(Messages.view_file_cruiseFile);
             }
-            else
-            {
+            else{
                 // dossier campagne
                 Utils.messageInfoAppend(Messages.view_file_cruiseDir
                         + ViewMain.nomRepertoire);
             }
 
-            if (ViewMain.radSerieTempo.getSelection())
-            {
+            if (ViewMain.radSerieTempo.getSelection()){
                 // Série temporelle
                 Utils.messageInfoAppend(Messages.typeFile_timeseries);
             }
-            else if (ViewMain.radTrajectoire.getSelection())
-            {
+            else if (ViewMain.radTrajectoire.getSelection()){
                 // Trajectoire
                 Utils.messageInfoAppend(Messages.typeFile_trajectory);
             }
         }
         loaded = true;
-        // affichage courant
         ViewMain.affiche = 1;
 
         // remplissage de l'IHM par le modèle chargé
-        if (DataModel.ouverture)
-        {
-            DataModel.fillSurvey();
+        if (DataModel.ouverture){
+            DataModel.fillSurvey(null);
             filled = true;
         }
 
-        final Text textCommentaire =
-            sectionCommentaire.getItem(Global.EMPTY_STRING).getValueText();
+        final Text textCommentaire = sectionCommentaire.getItem(Global.EMPTY_STRING).getValueText();
         textCommentaire
             .addFocusListener(new org.eclipse.swt.events.FocusListener() {
                 public void focusGained(org.eclipse.swt.events.FocusEvent e)
@@ -292,15 +197,17 @@ public class EditCruiseForm
 
         formEdition.redraw();
         formEdition.reflow(true);
-
-        formEdition.setVisible(true);
+    }
+    
+    @Override
+    public void actualiseEdition(){
+        // pas d'actualisation nécessaire pour cet onglet
     }
 
     public void init_webService()
     {
         // selection de la ref campagne dans une liste
         FiltrageTableType.go(Global.WSSURVEY);
-
     }
 
     public void webService(String reference)
@@ -312,12 +219,10 @@ public class EditCruiseForm
         SWTProcessWS.referenceWS = reference;
         SWTProcessWS.fichiersConstantes = false;
 
-        if (ViewMain.dossierCampagne)
-        {
+        if (ViewMain.dossierCampagne){
             SWTProcessWS.dossier = true;
         }
-        else
-        {
+        else{
             SWTProcessWS.dossier = false;
         }
 
@@ -328,9 +233,8 @@ public class EditCruiseForm
 
     }
 
-    public void ouvertureDescriptionXML()
+    protected void ouvertureDescriptionXML()
     {
-
         String nomXML;
         File fich;
 
@@ -338,12 +242,10 @@ public class EditCruiseForm
         // description
 
         // verifier que un fichier est charge avant d'ouvrir un modele
-        if ((!ViewMain.editFileForm.validee) && (!loaded))
-        {
+        if ((!ViewMain.editFileForm.validee) && (!loaded)){
             Utils.messageErreurAppend(Messages.error_cruise_openXml);
         }
-        else
-        {
+        else{
             FileDialog dialog =
                 new FileDialog(new Shell(), SWT.OPEN | SWT.APPLICATION_MODAL);
             dialog.setText(Messages.edit_cruise_openXML);
@@ -351,169 +253,94 @@ public class EditCruiseForm
             extensions[0] = Global.STAR + Global.EXT_XML;
             dialog.setFilterExtensions(extensions);
             nomXML = dialog.open();
-            if (nomXML == null)
-            {
-            }
-            else
-            {
-
+            if (nomXML != null){
                 fich = new File(nomXML);
-
-                Utils.messageErreurAppend("fiche:" + fich);//$NON-NLS-1$
-                chargementXML(fich);
-
+                Utils.messageErreurAppend("fiche:" + fich);//$NON-NLS-1$  
+                try{                    
+                    chargementXML(fich);
+                    Utils.messageOKAppend(Messages.success_openSurveyDesc);  
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
             }
-
         }
-
     }
 
-    public void chargementXML(File fichier)
+    protected void chargementXML(File fichier) throws Exception
     {
-
         // reset de la liste des dataTypes
         TableDataSurvey.types.clear();
 
-        // Liste des capteurs
-        ArrayList<String> listSensor = new ArrayList<String>();
+        Survey survey;
+        if (ViewMain.dossierCampagne){
+            DataModel.dirSurvey.releaseModel();
 
-        WSDataType[] listWSDT = NemoLists.getDataTypes();
-        for (int i = 0; i < listWSDT.length; i++)
-        {
-            if (listWSDT[i].isSensor())
-            {
-                listSensor.add(listWSDT[i].getCode());
-            }
+            survey = importXML(fichier);
+
+            DataModel.dirSurvey.setModel(survey);
         }
+        else{
+            DataModel.singleSurvey.releaseModel();
 
-        if (ViewMain.dossierCampagne)
-        {
+            survey = importXML(fichier);
 
-            try
-            {
-                DataModel.dirSurvey.releaseModel();
-                Survey survey = new Survey();
-                survey.importFromXML(fichier);
-                survey.setDataCentre(Utils.configuration.getDataCenter());
-
-                // Mej des types de donnees capteurs
-                for (int index = 0; index < survey.getDataTypes().length; index++)
-                {
-                    survey.dataTypesAt(index).setSensor(
-                        listSensor.contains(survey.dataTypesAt(index).getCode()
-                            .substring(0, 3)));
-                }
-
-                DataModel.dirSurvey.setModel(survey);
-
-            }
-            catch (FileNotFoundException e)
-            {
-                // 
-                e.printStackTrace();
-            }
-            catch (SAXException e)
-            {
-                // 
-                e.printStackTrace();
-            }
-            catch (TransformerException e)
-            {
-                //
-                e.printStackTrace();
-            }
-
-        }
-        else
-        {
-
-            try
-            {
-                DataModel.singleSurvey.releaseModel();
-
-                Survey survey = new Survey();
-                survey.importFromXML(fichier);
-                survey.setDataCentre(Utils.configuration.getDataCenter());
-
-                // Mej des types de donnees capteurs
-                for (int index = 0; index < survey.getDataTypes().length; index++)
-                {
-                    survey.dataTypesAt(index).setSensor(
-                        listSensor.contains(survey.dataTypesAt(index).getCode()
-                            .substring(0, 3)));
-                }
-
-                DataModel.singleSurvey.setModel(survey);
-
-                DataModel.singleSurvey.getModel();
-            }
-            catch (FileNotFoundException e)
-            {
-                // 
-                e.printStackTrace();
-            }
-            catch (SAXException e)
-            {
-                // 
-                e.printStackTrace();
-            }
-            catch (TransformerException e)
-            {
-                // 
-                e.printStackTrace();
-            }
-
+            DataModel.singleSurvey.setModel(survey);
+            DataModel.singleSurvey.getModel();
         }
 
         // mise e jour de l'onglet courant
         majApresWS();
     }
+    
+    protected Survey importXML(File fichier) throws Exception{
 
-    public void majApresWS()
-    {
-        DataModel.fillSurvey();
-    }
+        // Liste des capteurs
+        ArrayList<String> listSensor = new ArrayList<String>();
 
-    public void razEdition()
-    {
-        formEdition.setVisible(false);
-    }
-
-    public void ajoutModifyListenerText(ArrayList<Text> liste)
-    {
-        int taille = liste.size();
-        for (int i = 0; i < taille; i++)
-        {
-            liste.get(i).addModifyListener(new ModifyListener() {
-                public void modifyText(ModifyEvent event)
-                {
-                    // des qu'on modifie une valeur,
-                    // invalidation de l'étape en cours et des suivantes
-                    Utils.invalidEtapes();
-
-                }
-            });
-
+        WSDataType[] listWSDT = NemoLists.getDataTypes();
+        for (int i = 0; i < listWSDT.length; i++){
+            if (listWSDT[i].isSensor()){
+                listSensor.add(listWSDT[i].getCode());
+            }
         }
-    }
 
-    public void DrawingBack()
+        Survey survey = new Survey();
+        survey.importFromXML(fichier);
+        survey.setDataCentre(Utils.configuration.getDataCenter());
+
+        // Mej des types de donnees capteurs
+        for (int index = 0; index < survey.getDataTypes().length; index++)
+        {
+            survey.dataTypesAt(index).setSensor(
+                listSensor.contains(survey.dataTypesAt(index).getCode()
+                    .substring(0, 3)));
+        }
+        return survey;
+    }
+    
+
+    protected void majApresWS()
     {
-        ViewLog.aideSurvey();
-
-        Utils.messageErreur(Global.EMPTY_STRING);
-
-        expand = true;
-        expandSections();
-
-        // refresh global
-        formEdition.reflow(true);
-
-        // affichage courant
-        ViewMain.affiche = 1;
-        formEdition.setVisible(true);
+        Survey survey;
+        if (ViewMain.dossierCampagne) {
+            survey = DataModel.dirSurvey.getModel();
+        } else {
+            survey = DataModel.singleSurvey.getModel();
+        }
+        DataModel.fillSurvey(survey);
     }
 
+    @Override
+    public void drawingBack()
+    {
+        super.drawingBack();
+        
+        ViewLog.aideSurvey();
+        ViewMain.affiche = 1;
+    }
+
+    @Override
     public void initSections()
     {
 
@@ -527,7 +354,7 @@ public class EditCruiseForm
             ComboType.NONE, Global.EMPTY_STRING);
         sectionReference.addItem(Messages.edit_cruise_ship, ComboType.SHIP,
             Global.EMPTY_STRING);
-        listeSectionsSurvey.add(sectionReference);
+        listeSections.add(sectionReference);
 
         sectionLocalisation =
             new CruiseSection(NemoSection.C_LOCATION,
@@ -539,7 +366,7 @@ public class EditCruiseForm
             ComboType.NONE, Global.EMPTY_STRING);
         sectionLocalisation.addItem(Messages.edit_cruise_region,
             ComboType.REGION, Global.EMPTY_STRING);
-        listeSectionsSurvey.add(sectionLocalisation);
+        listeSections.add(sectionLocalisation);
 
         sectionSource =
             new CruiseSection(NemoSection.C_DATASOURCE,
@@ -553,7 +380,7 @@ public class EditCruiseForm
             Global.EMPTY_STRING);
         sectionSource.addItem(Messages.edit_cruise_project, ComboType.NONE,
             Global.EMPTY_STRING);
-        listeSectionsSurvey.add(sectionSource);
+        listeSections.add(sectionSource);
 
         sectionCentre =
             new CruiseSection(NemoSection.C_ARCHIVING,
@@ -563,13 +390,13 @@ public class EditCruiseForm
             ComboType.DATACENTER, Utils.configuration.getDataCenter());
         sectionCentre.addItem(Messages.edit_cruise_confident,
             ComboType.CONFIDENT, "P"); //$NON-NLS-1$
-        listeSectionsSurvey.add(sectionCentre);
+        listeSections.add(sectionCentre);
 
         sectionType =
             new CruiseDatatypeSection(NemoSection.C_DATATYPE,
                 Messages.edit_cruise_sectionDataTypes,
                 Messages.edit_cruise_sectionDataTypes_lib);
-        listeSectionsSurvey.add(sectionType);
+        listeSections.add(sectionType);
 
         sectionCommentaire =
             new CruiseSection(NemoSection.C_COMMENTS,
@@ -577,52 +404,21 @@ public class EditCruiseForm
                 Messages.edit_cruise_sectionComments_lib);
         sectionCommentaire.addItem(Global.EMPTY_STRING, ComboType.BLOCK,
             Global.EMPTY_STRING);
-        listeSectionsSurvey.add(sectionCommentaire);
+        listeSections.add(sectionCommentaire);
 
     }
-
-    public void razText()
-    {
-
-        for (NemoSection section : listeSectionsSurvey)
-        {
-            section.razValues();
-        }
-    }
-
-    public void disposeElements()
-    {
-
-        if (listeSectionsSurvey != null)
-        {
-            for (NemoSection section : listeSectionsSurvey)
-            {
-                section.dispose();
-            }
-        }
-
-        if (buttonRAZ != null)
-        {
-            buttonRAZ.dispose();
-            buttonInitServeur.dispose();
-            buttonExpand.dispose();
-            buttonValidate.dispose();
-            buttonXML.dispose();
-        }
-
+    
+    @Override
+    protected void disposeElements(){
+        if (buttonInitServeur != null) buttonInitServeur.dispose();
+        if (buttonXML != null) buttonXML.dispose();
     }
 
     public void invalidEtape()
     {
         if (!ViewMain.tabCruise.isDisposed())
         {
-            okApresReset = false;
-            validee = false;
-            if (ViewMain.affiche != 1 && loaded)
-            {
-                loaded = false;
-                disposeElements();
-            }
+            super.invalidEtape(1);
             ViewMain.tabCruise.setText(Messages.onglet_cruise);
         }
     }

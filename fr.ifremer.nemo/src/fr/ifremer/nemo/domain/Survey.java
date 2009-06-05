@@ -83,10 +83,10 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 	 */
 	protected String _countryCode;
 	
-//	/**
-//	 * Source laboratory country name
-//	 */
-//	protected String _countryName;
+	/**
+	 * Source laboratory country name
+	 */
+	protected String _countryName;
 
 	/**
 	 * regional archiving centre code (MEDATLAS: 2 char max)
@@ -338,6 +338,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
         _chiefScientist = Intern.unknown;
         _comment = Global.EMPTY_STRING;
         _countryCode = Global.EMPTY_STRING;
+        _countryName = null;
         _dataCentre = Global.EMPTY_STRING;
         _endDate = System.currentTimeMillis();
         _laboratories = Global.EMPTY_STRING;
@@ -461,15 +462,15 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 		_countryCode = x;
 	}
 	
-//	/**
-//	 * Read accessor (getter) for attribute _countryName
-//	 * 
-//	 * @return String
-//	 * @see Survey#_countryName
-//	 */
-//	public String getCountryName() {
-//		return _countryName;
-//	}
+	/**
+	 * Read accessor (getter) for attribute _countryName
+	 * 
+	 * @return String
+	 * @see Survey#_countryName
+	 */
+	public String getCountryName() {
+		return _countryName;
+	}
 
 	/**
 	 * Read accessor (getter) for attribute _dataCentre
@@ -1380,12 +1381,12 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 		_dataSize = size;
 	}
 
-//    /**
-//     * Setter sur _countryName.
-//     * @param countryName the countryName to set
-//     */
-//    public void setCountryName(String countryName)
-//    {
-//        _countryName = countryName;
-//    }
+    /**
+     * Setter sur _countryName.
+     * @param countryName the countryName to set
+     */
+    public void setCountryName(String countryName)
+    {
+        _countryName = countryName;
+    }
 } /* End of class: Survey */
