@@ -1315,16 +1315,12 @@ public class OptionsAction extends Action implements ISelectionListener,
     {
 
         parent.setLayout(new FillLayout());
-        // parent.setLayout(new FillLayout(SWT.VERTICAL));
-        // parent.setLayout(new RowLayout(SWT.VERTICAL));
-        // parent.setLayout(new GridLayout(1, false));
 
         FormToolkit toolkitOption = new FormToolkit(parent.getDisplay());
         toolkitOption.setBackground(parent.getBackground());
         ScrolledForm formOption = toolkitOption.createScrolledForm(parent);
         formOption.setBackground(parent.getBackground());
         formOption.getBody().setLayout(new GridLayout());
-        // formOption.getBody().setLayoutData(new RowData(630, 800));
 
         createCompoHaut(formOption.getBody());
         createGroupWS(formOption.getBody());
@@ -1333,7 +1329,6 @@ public class OptionsAction extends Action implements ISelectionListener,
         createCompoBas(formOption.getBody());
         createGroupFlag(formOption.getBody());
         createCompoBouton(formOption.getBody());
-        // createCompoBouton(parent);
 
         // listener cancel
         buttonCancel
@@ -1342,9 +1337,7 @@ public class OptionsAction extends Action implements ISelectionListener,
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
-                    // System.out.println("options cancel");
                     shelloptions.close();
-
                 }
             });
 

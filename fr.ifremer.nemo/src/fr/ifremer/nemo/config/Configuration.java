@@ -819,7 +819,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 			_singleton = new Configuration();
 			XMLBootstrapParser parser = new XMLBootstrapParser(_singleton);
 			try {
-				parser.parse(new FileInputStream(Intern.dir_resources + Intern.fileName_config + Global.EXT_XML), false);
+				parser.parse(new FileInputStream(Intern.dir_resources + File.separator + Intern.fileName_config + Global.EXT_XML), false);
 			} catch (FileNotFoundException e) {
 
 				e.printStackTrace();
@@ -838,7 +838,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
         _singleton = new Configuration();
         XMLBootstrapParser parser = new XMLBootstrapParser(_singleton);
         try {
-            parser.parse(new FileInputStream(Intern.dir_resources + Intern.fileName_configIni + Global.EXT_XML), false);
+            parser.parse(new FileInputStream(Intern.dir_resources + File.separator + Intern.fileName_configIni + Global.EXT_XML), false);
 
             // récupération des listes BODC
             _vocabLists.clear();
@@ -858,7 +858,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		FileOutputStream stream = null;
 		try {
 			// creation nouveau dossier puis creation fichier config
-			File fich2 = new java.io.File(Intern.dir_resources + Intern.fileName_config + Global.EXT_XML); 
+			File fich2 = new java.io.File(Intern.dir_resources + File.separator + Intern.fileName_config + Global.EXT_XML); 
 			stream = new FileOutputStream(fich2.toString());
 			writeXMLOn(stream);
 		} catch (Exception e) {
