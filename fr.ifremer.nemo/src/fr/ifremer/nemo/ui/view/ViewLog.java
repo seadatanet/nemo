@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.ui.part.ViewPart;
 
+import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
@@ -59,7 +60,7 @@ public class ViewLog extends ViewPart
             String langue = Utils.configuration.getLang();
 
             String fileName =
-                Intern.dir_resources + File.separator + Intern.help_file + langue
+                Configuration.nemoHome + Intern.dir_resources + File.separator + Intern.help_file + langue
                         + Global.EXT_TXT;
 
             File file = new File(fileName);

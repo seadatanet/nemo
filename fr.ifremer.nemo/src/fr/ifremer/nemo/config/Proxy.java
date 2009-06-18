@@ -74,7 +74,7 @@ public class Proxy implements RootSAXConsumer {
 			PrintWriter outputFileWriter = null;
 			try{
 				// mise à jour du .ini de l'application
-				File file = new File(Intern.ini_name); 
+				File file = new File(Configuration.nemoHome + Intern.ini_name); 
 				outputFileWriter = new PrintWriter(new BufferedWriter(new FileWriter(file)));
 				outputFileWriter.println(Intern.ini_start);
 				if (use){
