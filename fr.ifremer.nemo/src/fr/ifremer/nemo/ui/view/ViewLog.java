@@ -60,7 +60,7 @@ public class ViewLog extends ViewPart
             String langue = Utils.configuration.getLang();
 
             String fileName =
-                Configuration.nemoHome + Intern.dir_resources + File.separator + Intern.help_file + langue
+                Intern.dir_resources + File.separator + Intern.help_file + langue
                         + Global.EXT_TXT;
 
             File file = new File(fileName);

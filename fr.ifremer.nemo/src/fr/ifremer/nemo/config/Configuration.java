@@ -1,11 +1,9 @@
 package fr.ifremer.nemo.config;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -100,8 +98,6 @@ public class Configuration implements Cloneable, RootSAXConsumer {
     protected Proxy proxy;
     
     protected boolean dateISO;
-    
-    public static String nemoHome;
 
 	private Configuration() {        
         _contact = Global.EMPTY_STRING;
@@ -822,23 +818,9 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		if (_singleton == null) {
 			_singleton = new Configuration();
             
-            try{
-                File unixConf = new File(System.getenv("HOME") + ".nemo");
-                if (unixConf.exists()){
-                    BufferedReader entree = new BufferedReader(new FileReader(unixConf));
-                    nemoHome = entree.readLine() + File.separator;
-                }
-                else{
-                    nemoHome = Global.EMPTY_STRING;
-                }
-            }
-            catch (Exception e){
-                nemoHome = Global.EMPTY_STRING;
-            }
-            
 			XMLBootstrapParser parser = new XMLBootstrapParser(_singleton);
 			try {
-				parser.parse(new FileInputStream(nemoHome + Intern.dir_resources + File.separator + Intern.fileName_config + Global.EXT_XML), false);
+				parser.parse(new FileInputStream(Intern.dir_resources + File.separator + Intern.fileName_config + Global.EXT_XML), false);
 			} catch (FileNotFoundException e) {
 
 				e.printStackTrace();
@@ -857,7 +839,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
         _singleton = new Configuration();
         XMLBootstrapParser parser = new XMLBootstrapParser(_singleton);
         try {
-            parser.parse(new FileInputStream(nemoHome + Intern.dir_resources + File.separator + Intern.fileName_configIni + Global.EXT_XML), false);
+            parser.parse(new FileInputStream(Intern.dir_resources + File.separator + Intern.fileName_configIni + Global.EXT_XML), false);
 
             // récupération des listes BODC
             _vocabLists.clear();
@@ -877,7 +859,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		FileOutputStream stream = null;
 		try {
 			// creation nouveau dossier puis creation fichier config
-			File fich2 = new java.io.File(nemoHome + Intern.dir_resources + File.separator + Intern.fileName_config + Global.EXT_XML); 
+			File fich2 = new java.io.File(Intern.dir_resources + File.separator + Intern.fileName_config + Global.EXT_XML); 
 			stream = new FileOutputStream(fich2.toString());
 			writeXMLOn(stream);
 		} catch (Exception e) {

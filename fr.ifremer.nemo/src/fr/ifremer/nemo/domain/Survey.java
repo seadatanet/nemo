@@ -1274,7 +1274,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 		
 		StreamSource xmlSource = new StreamSource(xmlFile);
 
-		StreamSource xslSource = new StreamSource(new File(Configuration.nemoHome + Intern.dir_resources + File.separator + "survey.xsl"));
+		StreamSource xslSource = new StreamSource(new File(Intern.dir_resources + File.separator + "survey.xsl"));
 		
 		XMLBootstrapParser parser = new XMLBootstrapParser(this);
 		Result result = new SAXResult(parser);
@@ -1296,7 +1296,7 @@ public class Survey implements Cloneable, PathElementHandler, RootSAXConsumer,
 		// 2. Compile the schema.
 		// Here the schema is loaded from a java.io.File, but you could use
 		// a java.net.URL or a javax.xml.transform.Source instead.
-		File schemaLocation = new File(Configuration.nemoHome + Intern.dir_resources + File.separator + "CSR_sdn_V1.3.xsd");
+		File schemaLocation = new File(Intern.dir_resources + File.separator + "CSR_sdn_V1.3.xsd");
 		Schema schema = factory.newSchema(schemaLocation);
 
 		// 3. Get a validator from the schema.
