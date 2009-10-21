@@ -4,8 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.ParseException;
-import java.util.Calendar;
-import java.util.TimeZone;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.xml.sax.Attributes;

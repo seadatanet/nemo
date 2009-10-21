@@ -140,6 +140,14 @@ public class GrpAutoInput implements UIobject
         if (buttonVari != null)
             buttonVari.setSelection(false);
     }
+    
+    public int nbLineFilled(){
+        int cpt = 0;
+        for (AutoLine line : lines){
+            if (!line.isEmpty()) cpt++;
+        }
+        return cpt;
+    }
 
     public void setEnableInData(MetaInData enableInData)
     {

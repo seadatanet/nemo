@@ -253,6 +253,14 @@ public class AutoLine implements UIobject
         if (cursor != null)
             cursor.reset();
     }
+    
+    public boolean isEmpty(){
+        boolean empty = true;
+        if (!start.isEmpty() && !end.isEmpty()){
+            empty = false;
+        }
+        return empty;
+    }
 
     /**
      * {@inheritDoc}

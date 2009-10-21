@@ -915,6 +915,7 @@ public class StationSection extends NemoSection
         }
         else
         {
+            boolean position = false;
             // généralisation des autres sections
             for (int i = 0; i < nbLignes; i++)
             {
@@ -1004,7 +1005,6 @@ public class StationSection extends NemoSection
                 {
                     // position dans fichier
                     boolean fillVariPos = (autoInput.getButtonVari() != null);
-                    ;
 
                     if (name.equals(NemoSection.S_COMMENT))
                     {
@@ -1023,17 +1023,15 @@ public class StationSection extends NemoSection
                     else
                     {
                         // Généralisation
-                        if (((i > 0) && (getLineText(i).trim()
+                        if ((!position) && (((i > 0) && (getLineText(i).trim()
                             .equals(Global.EMPTY_STRING)))
                                 || getValue() == null
                                 || getValue().trim()
-                                    .equals(Global.EMPTY_STRING))
-                        {
+                                    .equals(Global.EMPTY_STRING))){
                             fillManualModel(propertyModel, station, tagXml,
                                 format, i);
                         }
-                        else
-                        {
+                        else if (!getAutoInput().getLines().get(i).isEmpty()){
                             propertyModel.fillFragment(this, ligne, i, true,
                                 fillVariPos);
                             if (fillVariPos)
@@ -1049,6 +1047,15 @@ public class StationSection extends NemoSection
                                         .setVariableLength(isVariablePos());
                                 }
                             }
+                            position = true;
+                            
+                            // test la ligne suivante
+                            if (getAutoInput().nbLineFilled() == 1){
+                                propertyModel.getFragment().setSingleLine(true);
+                            }
+                        }
+                        else if ((i > 0) && position){
+                            propertyModel.setUserProvided(false);
                         }
                     }
                 }
@@ -1269,6 +1276,8 @@ public class StationSection extends NemoSection
                                     .getFragment(), getCursor(i));
                             setAutoValueInput(propertyModel, null, fillVariPos,
                                 offset, i);
+                            
+                            if (propertyModel.getFragment().isSingleLine()) break;
                         }
                     }
                 }

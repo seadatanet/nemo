@@ -244,6 +244,15 @@ public class Couple implements UIobject
             // valueCombo.deselectAll();
         }
     }
+    
+    public boolean isEmpty(){
+        boolean empty = true;
+        if ((valueText != null && !valueText.getText().trim().equals(Global.EMPTY_STRING))
+                || (valueCombo != null && !valueCombo.getText().trim().equals(Global.EMPTY_STRING))){
+            empty = false;
+        }
+        return empty;
+    }
 
     public void razDefaultValues()
     {
