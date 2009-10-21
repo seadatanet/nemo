@@ -724,6 +724,9 @@ public class ViewMain extends ViewPart
         dossierCampagne = false;
         collectionCas1 = false;
         collectionCasN = false;
+
+        // on force le passage du garbadge collector afin de recuperer un maximum de memoire
+        Runtime.getRuntime().gc ();
     }
 
     protected void enableCruise(boolean enabled)

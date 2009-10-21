@@ -56,7 +56,7 @@ public class ODVSurveyWriter extends SurveyWriter {
                             File a_Filename,
                             Conversion a_Conversion,
                             ProgressNotification a_Progress) throws GenerationException {
-        
+		 
 		FileWriter writer = null;
 		try {
 			writer = new FileWriter(a_Filename);
@@ -85,7 +85,7 @@ public class ODVSurveyWriter extends SurveyWriter {
         // possibité de rajouter des choses spécifiques au context
         context.put("swtProcess", SWTProcess.class.newInstance()); //$NON-NLS-1$
                 
-        InputStream stream = getClass().getResourceAsStream(a_Conversion.getTemplate());
+        InputStream stream = getClass().getResourceAsStream(a_Conversion.getTemplateName());
         return new InputStreamReader(stream);
     }
 

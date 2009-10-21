@@ -40,7 +40,7 @@ public enum Conversion
     }
 
     
-    public String getTemplate(){
+    public String getTemplateName(){
         String name = Global.EMPTY_STRING;
         switch (this){
             case MEDATLAS :

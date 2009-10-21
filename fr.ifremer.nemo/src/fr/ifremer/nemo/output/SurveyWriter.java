@@ -88,20 +88,23 @@ public abstract class SurveyWriter implements Cloneable {
 			VelocityEngine ve = new VelocityEngine();
 			ve.setProperty(RuntimeConstants.RUNTIME_LOG_LOGSYSTEM, this);
 			ve.init();
-			
+            
             context = new VelocityContext();
+            SizeBasedProgressNotifier notifier = new SizeBasedProgressNotifier(a_Survey.getValuesCount(), 0, a_Progress);
+           
 			context.put("survey", a_Survey); //$NON-NLS-1$
             context.put("stationModel", StationModel.getSingleton()); //$NON-NLS-1$
 			context.put("formatter", Formatter.getSingleton()); //$NON-NLS-1$
 			context.put("nemoLists", NemoLists.class.newInstance()); //$NON-NLS-1$
 			context.put("configuration", Configuration.getSingleton()); //$NON-NLS-1$
             
-			SizeBasedProgressNotifier notifier = new SizeBasedProgressNotifier(a_Survey.getValuesCount(), 0, a_Progress);
 			context.put("notifier", notifier); //$NON-NLS-1$
             
             reader = specificWriteSurvey(a_Conversion);
             
 			ve.evaluate(context, a_Writer, a_Conversion.toString(), reader);
+            context = null;
+            ve = null;
 		} 
         catch (Exception e) {
 			throw new GenerationException(e);
@@ -113,6 +116,8 @@ public abstract class SurveyWriter implements Cloneable {
 				} catch (Exception ex) {
 				}
 			}
+            // on force le passage du garbadge collector afin de recuperer un maximum de memoire
+            //Runtime.getRuntime().gc ();
 		}
 	}
     

@@ -83,7 +83,7 @@ public class MedatlasSurveyWriter extends SurveyWriter {
         // possibité de rajouter des choses spécifiques au context 
         // (en "protected" dans SurveyWriter)
         
-        InputStream stream = getClass().getResourceAsStream(a_Conversion.getTemplate());
+        InputStream stream = getClass().getResourceAsStream(a_Conversion.getTemplateName());
         return new InputStreamReader(stream);
     }
 

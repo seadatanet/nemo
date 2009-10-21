@@ -1,52 +1,36 @@
-#set ( $count = 0 )
 ##
-## recuperation des commentaires
+## ----------------------------------------------------------------------------------------
+## START MACRO odvcontent
 ##
-#if ($survey.comment.trim().length() > 0)
-#foreach( $line in $survey.commentLines )
-//$line
-#end
-#end
-//
-$nemoLists.getSdnParameters()
-//
-##
-## ENTETE DU TABLEAU
-## -- ENTETE STATION
-## 
-Cruise##
-$configuration.getSep()Station##
-$configuration.getSep()Type##
-$configuration.getSep()yyyy-mm-ddThh:mm:ss.sss##
-$configuration.getSep()Longitude [degrees_east]##
-$configuration.getSep()Latitude [degrees_north]##
-$configuration.getSep()LOCAL_CDI_ID##
-$configuration.getSep()EDMO_CODE##
-$configuration.getSep()Bot. Depth [m]##
-##
-## recuperation de tous les noms de code pour la premiere station
-##
-#set ($boucle = 0)
-#foreach( $station in $survey.stations )
+#macro( odvcontent $station $boucle )
 #if ( $boucle == 0 )
+#set ($nbtot = $station.getOdvparameters().size() + $station.parametersSize())
+#set ($nbparam = 0)
 #foreach( $odvparamModel in $station.getOdvparameters() )
-#set ($odvparam = $odvparamModel.getModel())
-#set ($code = $odvparam.code)
-#if ($odvparam.code == "CJDY" || $odvparam.code == "DTUT") #set ($code = $odvparam.fullName) #end
-$configuration.getSep()$code [$odvparam.unit]$configuration.getSep()$configuration.getSdnHeader() #set ($boucle = 1)##
+#set ($nbparam = $nbparam + 1)
+#if ($code == "CJDY" || $code == "DTUT") #set ($code = $odvparamModel.getModel().fullName) #end
+$configuration.getSep()$code [$odvparamModel.getModel().unit]##
+#if ($nbparam == $nbtot)
+$configuration.getSep()$configuration.getSdnHeader() 
+#else 
+$configuration.getSep()$configuration.getSdnHeader()## 
+#end
 #end
 #foreach( $paramModel in $station.parameters )
-#set ($param = $paramModel.getModel())
-$configuration.getSep()$param.code [$param.unit]$configuration.getSep()$configuration.getSdnHeader() #set ($boucle = 1)##
+#set ($nbparam = $nbparam + 1)
+$configuration.getSep()$paramModel.getModel().code [$paramModel.getModel().unit]##
+#if ($nbparam == $nbtot)
+$configuration.getSep()$configuration.getSdnHeader() 
+#else 
+$configuration.getSep()$configuration.getSdnHeader()## 
 #end
 #end
+##set ($boucle = 1)
 #end
-
 ##
 ## LIGNES DE DONNEE
 ## boucle sur les stations
 ##
-#foreach( $station in $survey.stations )
 ##
 ## -- ENTETE STATION
 ## ---- initialisation de des valeurs 
@@ -66,7 +50,6 @@ $configuration.getSep()$param.code [$param.unit]$configuration.getSep()$configur
 #set ($botDepth   = 0)
 #if ($station.bottomDepth.toString() != "NaN")#set ($botDepth = $station.bottomDepth)#end
 ##
-#if ( !$swtProcess.isOdv() || !$swtProcess.isMonoStation() || ( $swtProcess.isMonoStation() && $swtProcess.getCurrentStation() == $station ))
 #set( $limit = $station.parametersAt(0).getModel().valuesSize() - 1 )
 #set ( $range = [0 .. $limit] )
 ##
@@ -105,5 +88,48 @@ $configuration.getSep()#if($param.valuesAt($i).getValue().toString() != $param.d
 #set( $count = $count + 1 )
 #set( $result = $notifier.progress( $count ))
 #end
+#end
+##
+## END MACRO odvcontent
+## ----------------------------------------------------------------------------------------
+##
+#set ( $count = 0 )
+##
+## recuperation des commentaires
+##
+#if ($survey.comment.trim().length() > 0)
+#foreach( $line in $survey.commentLines )
+//$line
+#end
+#end
+##
+## affichage des parametres SeaDataNet
+##
+//
+$nemoLists.getSdnParameters()
+//
+##
+## ENTETE DU TABLEAU
+## -- ENTETE STATION
+## 
+Cruise##
+$configuration.getSep()Station##
+$configuration.getSep()Type##
+$configuration.getSep()yyyy-mm-ddThh:mm:ss.sss##
+$configuration.getSep()Longitude [degrees_east]##
+$configuration.getSep()Latitude [degrees_north]##
+$configuration.getSep()LOCAL_CDI_ID##
+$configuration.getSep()EDMO_CODE##
+$configuration.getSep()Bot. Depth [m]##
+##
+## recuperation de tous les noms de code pour la premiere station
+##
+#set ($boucle = 0)
+#if ($swtProcess.isMonoStation())
+#odvcontent($swtProcess.getCurrentStation() $boucle)
+#else
+#foreach( $station in $survey.stations )
+#odvcontent($station $boucle)
+#set ($boucle = $boucle +1)
 #end
 #end
