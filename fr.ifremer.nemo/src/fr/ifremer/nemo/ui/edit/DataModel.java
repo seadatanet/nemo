@@ -2,7 +2,10 @@ package fr.ifremer.nemo.ui.edit;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.regex.Pattern;
+
+import com.ibm.icu.text.SimpleDateFormat;
 
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.Parameter;
@@ -23,7 +26,6 @@ import fr.ifremer.nemo.ui.edit.data.TableData;
 import fr.ifremer.nemo.ui.edit.data.TypeData;
 import fr.ifremer.nemo.ui.edit.file.FileEndData;
 import fr.ifremer.nemo.ui.view.ViewMain;
-import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
@@ -865,21 +867,14 @@ public class DataModel
         // Localisation
 
         // DATES
-        try{
-            dateDebut.setText(Formatter.getSingleton().formatDateTime(
-                "dd/MM/yyyy", survey.getStartDate())); //$NON-NLS-1$
-        }
-        catch (ParseException e){
-            e.printStackTrace();
-        }
+        // FAE 2607
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); //$NON-NLS-1$
+        Date startValue = new Date(survey.getStartDate());
+        dateDebut.setText(dateFormat.format(startValue));
+        
 
-        try{
-            dateFin.setText(Formatter.getSingleton().formatDateTime(
-                "dd/MM/yyyy", survey.getEndDate())); //$NON-NLS-1$
-        }
-        catch (ParseException e){
-            e.printStackTrace();
-        }
+        Date endValue = new Date(survey.getEndDate());
+        dateFin.setText(dateFormat.format(endValue));
 
         Utils
             .selectComboLibelle(region.getValueCombo(), survey.getRegionName());
