@@ -17,6 +17,8 @@ import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.layout.RowData;
+import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DirectoryDialog;
@@ -574,10 +576,19 @@ public class ViewMain extends ViewPart
 
     protected void createContentData(Composite parent)
     {
-        parent.setLayout(new FillLayout());
+        RowLayout rowlayout = new RowLayout(SWT.HORIZONTAL);
+        rowlayout.wrap = false;
+        rowlayout.fill = true;    
+        rowlayout.justify = true;
+        parent.setLayout(rowlayout);
 
         Composite left = new Composite(parent, SWT.NONE);
-        //left.setBackground(parent.getBackground());
+        //left.setBackground(parent.getBackground());    
+        RowData data = new RowData();
+        data.width = 755;
+        data.height = 535;
+        left.setLayoutData(data);
+
         left.setLayout(new FillLayout(SWT.VERTICAL));
 
         Composite textFile = new Composite(left, SWT.NONE);
@@ -593,6 +604,11 @@ public class ViewMain extends ViewPart
         
         Composite right = new Composite(parent, SWT.BORDER);
         right.setBackground(backgroungEdit);
+        data = new RowData();
+        data.width = 231;
+        data.height = 530;
+        right.setLayoutData(data);
+        
         right.setLayout(new FillLayout());
 
         editDataForm = new EditDataForm();

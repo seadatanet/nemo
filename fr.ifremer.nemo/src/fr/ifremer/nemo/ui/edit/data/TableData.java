@@ -61,7 +61,8 @@ public class TableData
         table.setHeaderVisible(true);
         table.setLinesVisible(true);
         TableColumn tableColumn0 = new TableColumn(table, SWT.NONE);
-        tableColumn0.setWidth(110);
+        //tableColumn0.setWidth(110);
+        tableColumn0.setWidth(50);
         tableColumn0.setText(Messages.table_label_code.toUpperCase());
 
         TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);
@@ -69,7 +70,8 @@ public class TableData
         tableColumn1.setText(Messages.table_label_unit);
 
         TableColumn tableColumn2 = new TableColumn(table, SWT.NONE);
-        tableColumn2.setWidth(100);
+        //tableColumn2.setWidth(100);
+        tableColumn2.setWidth(70);
         tableColumn2.setText(Messages.label_conversion);
         tableColumn2.setAlignment(SWT.RIGHT);
 
@@ -79,37 +81,44 @@ public class TableData
         tableColumn3.setAlignment(SWT.RIGHT);
 
         TableColumn tableColumn4 = new TableColumn(table, SWT.NONE);
-        tableColumn4.setWidth(50);
+        //tableColumn4.setWidth(50);
+        tableColumn4.setWidth(45);
         tableColumn4.setText(Messages.label_start);
         tableColumn4.setAlignment(SWT.RIGHT);
 
         TableColumn tableColumn5 = new TableColumn(table, SWT.NONE);
-        tableColumn5.setWidth(50);
+        //tableColumn5.setWidth(50);
+        tableColumn5.setWidth(45);
         tableColumn5.setText(Messages.label_end);
         tableColumn5.setAlignment(SWT.RIGHT);
 
         TableColumn tableColumn6 = new TableColumn(table, SWT.NONE);
-        tableColumn6.setWidth(100);
+        //tableColumn6.setWidth(100);
+        tableColumn6.setWidth(50);
         tableColumn6.setText(Messages.label_format);
         tableColumn6.setAlignment(SWT.RIGHT);
 
         TableColumn tableColumn7 = new TableColumn(table, SWT.NONE);
-        tableColumn7.setWidth(100);
+        //tableColumn7.setWidth(100);
+        tableColumn7.setWidth(90);
         tableColumn7.setText(Messages.table_label_valueIn);
         tableColumn7.setAlignment(SWT.RIGHT);
 
         TableColumn tableColumn8 = new TableColumn(table, SWT.NONE);
-        tableColumn8.setWidth(100);
+        //tableColumn8.setWidth(100);
+        tableColumn8.setWidth(90);
         tableColumn8.setText(Messages.table_label_valueOut);
         tableColumn8.setAlignment(SWT.RIGHT);
 
         TableColumn tableColumn9 = new TableColumn(table, SWT.NONE);
-        tableColumn9.setWidth(65);
+        //tableColumn9.setWidth(65);
+        tableColumn9.setWidth(75);
         tableColumn9.setText(Messages.table_label_testIn);
         tableColumn9.setAlignment(SWT.RIGHT);
 
         TableColumn tableColumn10 = new TableColumn(table, SWT.NONE);
-        tableColumn10.setWidth(65);
+        //tableColumn10.setWidth(65);
+        tableColumn10.setWidth(75);
         tableColumn10.setText(Messages.table_label_testOut);
         tableColumn10.setAlignment(SWT.RIGHT);
 
