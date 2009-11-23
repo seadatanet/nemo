@@ -116,8 +116,6 @@ public abstract class SurveyWriter implements Cloneable {
 				} catch (Exception ex) {
 				}
 			}
-            // on force le passage du garbadge collector afin de recuperer un maximum de memoire
-            //Runtime.getRuntime().gc ();
 		}
 	}
     

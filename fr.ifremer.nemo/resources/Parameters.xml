@@ -1144,25 +1144,6 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
     <void property="code"> 
-     <string>DAYS</string> 
-    </void> 
-    <void property="defaultValue"> 
-     <string>999.99999</string> 
-    </void> 
-    <void property="format"> 
-     <string>%9.5f</string> 
-    </void> 
-    <void property="name"> 
-     <string>DAY WITHIN YEAR</string> 
-    </void> 
-    <void property="unit"> 
-     <string>decimal day</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSParameter"> 
-    <void property="code"> 
      <string>DAYX</string> 
     </void> 
     <void property="defaultValue"> 
@@ -1518,63 +1499,6 @@
     </void> 
     <void property="unit"> 
      <string>milligram/m3</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSParameter"> 
-    <void property="code"> 
-     <string>EF1W</string> 
-    </void> 
-    <void property="defaultValue"> 
-     <string>99.999</string> 
-    </void> 
-    <void property="format"> 
-     <string>%6.3f</string> 
-    </void> 
-    <void property="name"> 
-     <string>DISSOLVED CFC11 ERROR</string> 
-    </void> 
-    <void property="unit"> 
-     <string>%</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSParameter"> 
-    <void property="code"> 
-     <string>EF2W</string> 
-    </void> 
-    <void property="defaultValue"> 
-     <string>99.999</string> 
-    </void> 
-    <void property="format"> 
-     <string>%6.3f</string> 
-    </void> 
-    <void property="name"> 
-     <string>DISSOLVED CFC12 ERROR</string> 
-    </void> 
-    <void property="unit"> 
-     <string>%</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSParameter"> 
-    <void property="code"> 
-     <string>EF3W</string> 
-    </void> 
-    <void property="defaultValue"> 
-     <string>99.999</string> 
-    </void> 
-    <void property="format"> 
-     <string>%6.3f</string> 
-    </void> 
-    <void property="name"> 
-     <string>DISSOLVED CFC113 ERROR</string> 
-    </void> 
-    <void property="unit"> 
-     <string>%</string> 
     </void> 
    </object> 
   </void> 
@@ -3918,6 +3842,25 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
     <void property="code"> 
+     <string>NUMN</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>9.999e+99</string> 
+    </void> 
+    <void property="format"> 
+     <string>%9.3e</string> 
+    </void> 
+    <void property="name"> 
+     <string>NUMBER OF PARTICLES &gt; 0.7 UM</string> 
+    </void> 
+    <void property="unit"> 
+     <string>number/m3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
      <string>NUMP</string> 
     </void> 
     <void property="defaultValue"> 
@@ -3927,7 +3870,26 @@
      <string>%9.3e</string> 
     </void> 
     <void property="name"> 
-     <string>NUMBER OF PARTICLES</string> 
+     <string>NUMBER OF PARTICLES 3-80UM</string> 
+    </void> 
+    <void property="unit"> 
+     <string>number/m3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
+     <string>NUNM</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>9.999e+99</string> 
+    </void> 
+    <void property="format"> 
+     <string>%9.3e</string> 
+    </void> 
+    <void property="name"> 
+     <string>NUMBER OF PARTICLES &gt;=480UM</string> 
     </void> 
     <void property="unit"> 
      <string>number/m3</string> 
@@ -4792,6 +4754,25 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
     <void property="code"> 
+     <string>SAMA</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>-99.99</string> 
+    </void> 
+    <void property="format"> 
+     <string>%+6.2f</string> 
+    </void> 
+    <void property="name"> 
+     <string>SIGNAL RETURN AMPLITUDE</string> 
+    </void> 
+    <void property="unit"> 
+     <string>decibel</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
      <string>SAND</string> 
     </void> 
     <void property="defaultValue"> 
@@ -4944,6 +4925,25 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
     <void property="code"> 
+     <string>SLVR</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>+99.9999</string> 
+    </void> 
+    <void property="format"> 
+     <string>%+8.4f</string> 
+    </void> 
+    <void property="name"> 
+     <string>RESIDUAL(OBS - PRED SEA LEVEL)</string> 
+    </void> 
+    <void property="unit"> 
+     <string>meter</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
      <string>SNCW</string> 
     </void> 
     <void property="defaultValue"> 
@@ -4976,25 +4976,6 @@
     </void> 
     <void property="unit"> 
      <string>millimole/m3</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSParameter"> 
-    <void property="code"> 
-     <string>SPDI</string> 
-    </void> 
-    <void property="defaultValue"> 
-     <string>99.999</string> 
-    </void> 
-    <void property="format"> 
-     <string>%6.3f</string> 
-    </void> 
-    <void property="name"> 
-     <string>INDICATED PLATFORM SPEED-SHIP</string> 
-    </void> 
-    <void property="unit"> 
-     <string>meter/second</string> 
     </void> 
    </object> 
   </void> 
@@ -5096,6 +5077,25 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
     <void property="code"> 
+     <string>TB25</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>999.99</string> 
+    </void> 
+    <void property="format"> 
+     <string>%6.2f</string> 
+    </void> 
+    <void property="name"> 
+     <string>BLUE LIGHT TRANSMISSION 25CM </string> 
+    </void> 
+    <void property="unit"> 
+     <string>%</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
      <string>TCCF</string> 
     </void> 
     <void property="defaultValue"> 
@@ -5128,25 +5128,6 @@
     </void> 
     <void property="unit"> 
      <string>%</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSParameter"> 
-    <void property="code"> 
-     <string>TCO2</string> 
-    </void> 
-    <void property="defaultValue"> 
-     <string>9999.999</string> 
-    </void> 
-    <void property="format"> 
-     <string>%8.3f</string> 
-    </void> 
-    <void property="name"> 
-     <string>TOTAL CARBON DIOXYD (CO2)</string> 
-    </void> 
-    <void property="unit"> 
-     <string>mole/m3</string> 
     </void> 
    </object> 
   </void> 
@@ -5723,6 +5704,44 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
     <void property="code"> 
+     <string>TR10</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>999.99</string> 
+    </void> 
+    <void property="format"> 
+     <string>%6.2f</string> 
+    </void> 
+    <void property="name"> 
+     <string>RED LIGHT TRANSMISSION 10CM</string> 
+    </void> 
+    <void property="unit"> 
+     <string>%</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
+     <string>TR25</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>999.99</string> 
+    </void> 
+    <void property="format"> 
+     <string>%6.2f</string> 
+    </void> 
+    <void property="name"> 
+     <string>RED LIGHT TRANSMISSION 25CM</string> 
+    </void> 
+    <void property="unit"> 
+     <string>%</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
      <string>TSMF</string> 
     </void> 
     <void property="defaultValue"> 
@@ -5755,25 +5774,6 @@
     </void> 
     <void property="unit"> 
      <string>gram/m3</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void method="add"> 
-   <object class="fr.ifremer.nemo.ws.WSParameter"> 
-    <void property="code"> 
-     <string>TUR0</string> 
-    </void> 
-    <void property="defaultValue"> 
-     <string>999.99</string> 
-    </void> 
-    <void property="format"> 
-     <string>%6.2f</string> 
-    </void> 
-    <void property="name"> 
-     <string>LIGHT TRANSMISSION -  NOT USED</string> 
-    </void> 
-    <void property="unit"> 
-     <string>%</string> 
     </void> 
    </object> 
   </void> 
@@ -6363,6 +6363,25 @@
     </void> 
     <void property="unit"> 
      <string>yyyy</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
+     <string>ZNTH</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>99.99</string> 
+    </void> 
+    <void property="format"> 
+     <string>%5.2f</string> 
+    </void> 
+    <void property="name"> 
+     <string>TILT OF MEASUREMENT PLATFORM</string> 
+    </void> 
+    <void property="unit"> 
+     <string>degree</string> 
     </void> 
    </object> 
   </void> 

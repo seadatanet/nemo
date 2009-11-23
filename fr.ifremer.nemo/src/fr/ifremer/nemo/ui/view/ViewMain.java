@@ -13,12 +13,11 @@ import java.io.IOException;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.RowData;
-import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DirectoryDialog;
@@ -190,7 +189,10 @@ public class ViewMain extends ViewPart
     {
         parent.setLayout(new FillLayout());
 
-        Composite left = new Composite(parent, SWT.NONE);
+        SashForm parentform = new SashForm(parent, SWT.HORIZONTAL);
+        parentform.setLayout(new FillLayout());
+        
+        Composite left = new Composite(parentform, SWT.NONE);
         left.setBackground(parent.getBackground());
         left.setLayout(new FillLayout(SWT.VERTICAL));
 
@@ -211,7 +213,7 @@ public class ViewMain extends ViewPart
         createGroupSeparateurInFile(formViewFile.getBody());
         createGroupTypeFichierInFile(formViewFile.getBody());
 
-        Composite right = new Composite(parent, SWT.BORDER);
+        Composite right = new Composite(parentform, SWT.BORDER);
         right.setBackground(backgroungEdit);
         right.setLayout(new FillLayout());
 
@@ -530,7 +532,10 @@ public class ViewMain extends ViewPart
     {
         parent.setLayout(new FillLayout());
 
-        Composite left = new Composite(parent, SWT.NONE);
+        SashForm parentform = new SashForm(parent, SWT.HORIZONTAL);
+        parentform.setLayout(new FillLayout());
+
+        Composite left = new Composite(parentform, SWT.NONE);
         //left.setBackground(parent.getBackground());
         left.setLayout(new FillLayout());
 
@@ -541,7 +546,7 @@ public class ViewMain extends ViewPart
                     | SWT.H_SCROLL | SWT.V_SCROLL);
         textAreaCruise.setFont(Utils.fontCourier);
 
-        Composite right = new Composite(parent, SWT.BORDER);
+        Composite right = new Composite(parentform, SWT.BORDER);
         right.setBackground(backgroungEdit);
         right.setLayout(new FillLayout());
 
@@ -554,7 +559,10 @@ public class ViewMain extends ViewPart
     {
         parent.setLayout(new FillLayout());
 
-        Composite left = new Composite(parent, SWT.NONE);
+        SashForm parentform = new SashForm(parent, SWT.HORIZONTAL);
+        parentform.setLayout(new FillLayout());
+
+        Composite left = new Composite(parentform, SWT.NONE);
         //left.setBackground(parent.getBackground());
         left.setLayout(new FillLayout());
 
@@ -565,7 +573,7 @@ public class ViewMain extends ViewPart
                     | SWT.V_SCROLL);
         textAreaStation.setFont(Utils.fontCourier);
 
-        Composite right = new Composite(parent, SWT.BORDER);
+        Composite right = new Composite(parentform, SWT.BORDER);
         right.setBackground(backgroungEdit);
         right.setLayout(new FillLayout());
 
@@ -576,19 +584,12 @@ public class ViewMain extends ViewPart
 
     protected void createContentData(Composite parent)
     {
-        RowLayout rowlayout = new RowLayout(SWT.HORIZONTAL);
-        rowlayout.wrap = false;
-        rowlayout.fill = true;    
-        rowlayout.justify = true;
-        parent.setLayout(rowlayout);
+        parent.setLayout(new FillLayout());
 
-        Composite left = new Composite(parent, SWT.NONE);
-        //left.setBackground(parent.getBackground());    
-        RowData data = new RowData();
-        data.width = 755;
-        data.height = 535;
-        left.setLayoutData(data);
+        SashForm parentform = new SashForm(parent, SWT.HORIZONTAL);
+        parentform.setLayout(new FillLayout());
 
+        Composite left = new Composite(parentform, SWT.NONE);
         left.setLayout(new FillLayout(SWT.VERTICAL));
 
         Composite textFile = new Composite(left, SWT.NONE);
@@ -602,24 +603,25 @@ public class ViewMain extends ViewPart
         compositeData.setLayout(new FillLayout());
         TableData.go();
         
-        Composite right = new Composite(parent, SWT.BORDER);
+        Composite right = new Composite(parentform, SWT.BORDER);
         right.setBackground(backgroungEdit);
-        data = new RowData();
-        data.width = 231;
-        data.height = 530;
-        right.setLayoutData(data);
         
         right.setLayout(new FillLayout());
 
         editDataForm = new EditDataForm();
         editDataForm.createEditionForm(right);
+        
+        parentform.setWeights(new int[] {75, 25});
     }
 
     protected void createContentConversion(Composite parent)
     {
         parent.setLayout(new FillLayout());
 
-        Composite left = new Composite(parent, SWT.NONE);
+        SashForm parentform = new SashForm(parent, SWT.HORIZONTAL);
+        parentform.setLayout(new FillLayout());
+
+        Composite left = new Composite(parentform, SWT.NONE);
         //left.setBackground(parent.getBackground());
         left.setLayout(new FillLayout());
 
@@ -674,12 +676,14 @@ public class ViewMain extends ViewPart
                 }
             });
 
-        Composite right = new Composite(parent, SWT.BORDER);
+        Composite right = new Composite(parentform, SWT.BORDER);
         right.setBackground(backgroungEdit);
         right.setLayout(new FillLayout());
 
         editConversionForm = new EditConversionForm();
         editConversionForm.createEditionForm(right);
+        
+        parentform.setWeights(new int[] {60, 40});
     }
 
     private void addRadConvertListener(final Button radio)
@@ -742,7 +746,7 @@ public class ViewMain extends ViewPart
         collectionCasN = false;
 
         // on force le passage du garbadge collector afin de recuperer un maximum de memoire
-        Runtime.getRuntime().gc ();
+        //Runtime.getRuntime().gc ();
     }
 
     protected void enableCruise(boolean enabled)

@@ -229,6 +229,7 @@ public class Messages {
     public static String action_openSurveyDesc;
     public static String menu_settings;
     public static String settings_title;
+    public static String settings_general;
     public static String settings_dir;
     public static String error_settings_dir;
     public static String settings_lang;
