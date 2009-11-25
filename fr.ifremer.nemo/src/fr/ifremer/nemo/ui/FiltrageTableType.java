@@ -30,9 +30,8 @@ import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
-public class FiltrageTableType
-{
-
+public class FiltrageTableType{
+    
     public static int listeOuverte;
 
     public static Composite top;
@@ -51,51 +50,38 @@ public class FiltrageTableType
 
     public static Button filtreButtonCancel;
 
-    public static void go(String table)
-    {
+    public static void go(String table){
 
         final String tabOrigine = table;
 
-        // raz du message d'erreurs
-        // Utils.messageErreur(Global.EMPTY_STRING);
-
-        if (listeOuverte == 1)
-        {
+        if (listeOuverte == 1){
             Utils.messageErreurAppend(Messages.error_table);
         }
-        else
-        {
+        else{
             shell =
                 new Shell(Application.display, SWT.BORDER | SWT.TITLE
                         | SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);
             shell.setSize(300, 500);
 
-            if (tabOrigine.equals(Global.IDEDMO))
-            {
+            if (tabOrigine.equals(Global.IDEDMO)){
                 shell.setText(Messages.table_edmo);
             }
-            else if (tabOrigine.equals(Global.WSSURVEY))
-            {
+            else if (tabOrigine.equals(Global.WSSURVEY)){
                 shell.setText(Messages.table_survey);
             }
-            else if (tabOrigine.equals(Global.DATATYPE))
-            {
+            else if (tabOrigine.equals(Global.DATATYPE)){
                 shell.setText(Messages.table_dataTypes);
             }
-            else if (tabOrigine.equals(Global.PARAMETER))
-            {
+            else if (tabOrigine.equals(Global.PARAMETER)){
                 shell.setText(Messages.table_parameters);
             }
-            else if (tabOrigine.equals(Global.SHIP))
-            {
+            else if (tabOrigine.equals(Global.SHIP)){
                 shell.setText(Messages.table_ships);
             }
-            else if (tabOrigine.equals(Global.DATACENTRE))
-            {
+            else if (tabOrigine.equals(Global.DATACENTRE)){
                 shell.setText(Messages.table_datacenter);
             }
-            else if (tabOrigine.equals(Global.REGION))
-            {
+            else if (tabOrigine.equals(Global.REGION)){
                 shell.setText(Messages.table_region);
             }
 
@@ -104,28 +90,23 @@ public class FiltrageTableType
             top = new Composite(shell, SWT.NONE);
             top.setLayout(null);
 
-            if (tabOrigine.equals(Global.IDEDMO))
-            {
+            if (tabOrigine.equals(Global.IDEDMO)){
                 EdmoHandler.listeFiltree = new ArrayList<String>();
                 EdmoHandler.listeFiltree.addAll(EdmoHandler.listeOrigine);
             }
-            else if (tabOrigine.equals(Global.SHIP))
-            {
+            else if (tabOrigine.equals(Global.SHIP)){
                 NemoLists.listeFiltree = new ArrayList<String>();
                 NemoLists.listeFiltree.addAll(NemoLists.listeNavire);
             }
-            else if (tabOrigine.equals(Global.DATACENTRE))
-            {
+            else if (tabOrigine.equals(Global.DATACENTRE)){
                 NemoLists.listeFiltree = new ArrayList<String>();
                 NemoLists.listeFiltree.addAll(NemoLists.listeCentreDonnees);
             }
-            else if (tabOrigine.equals(Global.REGION))
-            {
+            else if (tabOrigine.equals(Global.REGION)){
                 NemoLists.listeFiltree = new ArrayList<String>();
                 NemoLists.listeFiltree.addAll(NemoLists.listeRegion);
             }
-            else
-            {
+            else{
                 // init des listes filtrees survey + data
                 TableDataSurvey.listeFiltree = new ArrayList<TypeSurvey>();
 
@@ -137,8 +118,7 @@ public class FiltrageTableType
                 // liste filtree initialisee e surveysWS au depart
                 TableWS_Survey.listeFiltree = new ArrayList<String>();
                 TableWS_Survey.refsWS = new ArrayList<String>();
-                for (int i = 0; i < TableWS_Survey.surveysWS.length; i++)
-                {
+                for (int i = 0; i < TableWS_Survey.surveysWS.length; i++){
                     TableWS_Survey.refsWS.add(TableWS_Survey.surveysWS[i]
                         .getReference()
                             + Global.SEP
@@ -150,38 +130,32 @@ public class FiltrageTableType
                 }
 
                 // liste filtree initialisee e typesWS au depart
-                try
-                {
+                try{
                     int taille = TableDataSurvey.typesWS.size();
 
-                    for (int i = 0; i < taille; i++)
-                    {
+                    for (int i = 0; i < taille; i++){
                         TableDataSurvey.listeFiltree
                             .add(TableDataSurvey.typesWS.get(i));
                     }
 
-                    // TableDataSurvey.listeFiltree = TableDataSurvey.typesWS;
-
                     TableData.listeFiltree = new ArrayList<TypeData>();
                     // liste filtree initialisee e typesWS au depart
                     taille = TableData.typesWS.size();
-                    for (int i = 0; i < taille; i++)
-                    {
+                    for (int i = 0; i < taille; i++){
                         TableData.listeFiltree.add(TableData.typesWS.get(i));
                     }
                 }
-                catch (Exception e)
-                {
+                catch (Exception e){
                     e.printStackTrace();
                 }
             }
 
             filtreText = new Text(top, SWT.BORDER);
             filtreText.setBounds(new Rectangle(3, 21, 298, 19));
-            filtreText.setText(""); //$NON-NLS-1$
+            filtreText.setText(Global.EMPTY_STRING);
             labelText = new Label(top, SWT.NONE);
             labelText.setBounds(new Rectangle(3, 4, 298, 13));
-            labelText.setText(Messages.table_label_filter); //$NON-NLS-1$
+            labelText.setText(Messages.table_label_filter);
             labelText.pack();
 
             filtreButtonSelectionner = new Button(top, SWT.NONE);
@@ -194,26 +168,21 @@ public class FiltrageTableType
             filtreButtonCancel.pack();
 
             // affichage des tables
-            if (tabOrigine.equals(Global.IDEDMO))
-            {
+            if (tabOrigine.equals(Global.IDEDMO)){
                 creationTableEdmo();
             }
-            else if (tabOrigine.equals(Global.WSSURVEY))
-            {
+            else if (tabOrigine.equals(Global.WSSURVEY)){
                 creationTableWS_Survey();
             }
-            else if (tabOrigine.equals(Global.DATATYPE))
-            {
+            else if (tabOrigine.equals(Global.DATATYPE)){
                 creationTableSurvey();
             }
-            else if (tabOrigine.equals(Global.PARAMETER))
-            {
+            else if (tabOrigine.equals(Global.PARAMETER)){
                 creationTableData();
             }
             else if (tabOrigine.equals(Global.SHIP)
                     || tabOrigine.equals(Global.DATACENTRE)
-                    || tabOrigine.equals(Global.REGION))
-            {
+                    || tabOrigine.equals(Global.REGION)){
                 creationTableBODC();
             }
 
@@ -221,8 +190,7 @@ public class FiltrageTableType
                 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
                     @Override
                     public void widgetSelected(
-                            org.eclipse.swt.events.SelectionEvent e)
-                    {
+                            org.eclipse.swt.events.SelectionEvent e){
                         shell.close();
                         listeOuverte = 0;
                     }
@@ -232,13 +200,11 @@ public class FiltrageTableType
                 .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
                     @Override
                     public void widgetSelected(
-                            org.eclipse.swt.events.SelectionEvent e)
-                    {
+                            org.eclipse.swt.events.SelectionEvent e){
 
                         listeOuverte = 0;
 
-                        if (tabOrigine.equals(Global.IDEDMO))
-                        {
+                        if (tabOrigine.equals(Global.IDEDMO)){
                             Utils.selectComboValeur(comboRecherche,
                                 EdmoHandler.filtreTable
                                     .getItem(
@@ -246,9 +212,7 @@ public class FiltrageTableType
                                             .getSelectionIndex()).getText());
                             shell.close();
                         }
-                        else if (tabOrigine.equals(Global.WSSURVEY))
-                        {
-
+                        else if (tabOrigine.equals(Global.WSSURVEY)){
                             // selection d'une reference campagne
                             int index =
                                 TableWS_Survey.filtreTable.getSelectionIndex();
@@ -264,9 +228,7 @@ public class FiltrageTableType
                             shell.close();
 
                         }
-                        else if (tabOrigine.equals(Global.DATATYPE))
-                        {
-
+                        else if (tabOrigine.equals(Global.DATATYPE)){
                             // ajout d'un dataType dans l'onglet Survey
                             TypeSurvey typeSurvey = new TypeSurvey();
 
@@ -279,11 +241,8 @@ public class FiltrageTableType
                             int taille = TableDataSurvey.types.size();
                             Boolean found = false;
 
-                            if (taille != 0)
-                            {
-
-                                for (int i = 0; i < taille; i++)
-                                {
+                            if (taille != 0){
+                                for (int i = 0; i < taille; i++){
 
                                     // split sur " - "
                                     Pattern p = Pattern.compile(Global.SEP);
@@ -296,24 +255,19 @@ public class FiltrageTableType
                                             .getCode());
                                     String codeModele = mots2[0];
 
-                                    if (codeModele.equals(codeActuel))
-                                    {
+                                    if (codeModele.equals(codeActuel)){
                                         found = true;
                                     }
                                 }
 
-                                if (found == false)
-                                {
+                                if (found == false){
                                     TableDataSurvey.types.add(typeSurvey);
                                 }
-                                else
-                                {
-                                    Utils
-                                        .messageErreur(Messages.error_table_dataTypes);
+                                else{
+                                    Utils.messageErreur(Messages.error_table_dataTypes);
                                 }
                             }
-                            else
-                            {
+                            else{
                                 TableDataSurvey.types.add(typeSurvey);
                             }
 
@@ -328,8 +282,7 @@ public class FiltrageTableType
                             shell.close();
 
                         }
-                        else if (tabOrigine.equals(Global.PARAMETER))
-                        {
+                        else if (tabOrigine.equals(Global.PARAMETER)){
 
                             // ajout d'un parameter dans l'onglet Data
                             Utils.invalidEtapes();
@@ -344,11 +297,9 @@ public class FiltrageTableType
                             int taille = TableData.types.size();
                             Boolean found = false;
 
-                            if (taille != 0)
-                            {
+                            if (taille != 0){
 
-                                for (int i = 0; i < taille; i++)
-                                {
+                                for (int i = 0; i < taille; i++){
                                     String codeModele, codeActuel;
 
                                     // split sur " - "
@@ -361,28 +312,22 @@ public class FiltrageTableType
                                             .getCode());
                                     codeModele = mots2[0];
 
-                                    if (codeModele.equals(codeActuel))
-                                    {
+                                    if (codeModele.equals(codeActuel)){
                                         found = true;
                                     }
                                 }
 
-                                if (found == false)
-                                {
+                                if (found == false){
                                     TableData.types.add(new TypeData(typeData));
                                 }
-                                else
-                                {
-                                    Utils
-                                        .messageErreur(Messages.error_table_parameters);
+                                else{
+                                    Utils.messageErreur(Messages.error_table_parameters);
                                 }
                             }
-                            else
-                            {
+                            else{
                                 TableData.types.add(new TypeData(typeData));
                             }
 
-                            // TableData.types.add(typeData);
                             TableData.majTypeData();
 
                             // razTableData
@@ -395,8 +340,7 @@ public class FiltrageTableType
                         }
                         else if (tabOrigine.equals(Global.SHIP)
                                 || tabOrigine.equals(Global.DATACENTRE)
-                                || tabOrigine.equals(Global.REGION))
-                        {
+                                || tabOrigine.equals(Global.REGION)){
                             Utils.selectComboValeur(comboRecherche,
                                 NemoLists.filtreTable.getItem(
                                     NemoLists.filtreTable.getSelectionIndex())
@@ -410,31 +354,23 @@ public class FiltrageTableType
 
             // listener keypressed sur le champ text
             filtreText.addListener(SWT.KeyUp, new Listener() {
-                public void handleEvent(Event e)
-                {
-                    if (filtreText.getText().equals("")) {} //$NON-NLS-1$
-                    else
-                    {
-                        if (tabOrigine.equals(Global.IDEDMO))
-                        {
+                public void handleEvent(Event e){
+                    if (!filtreText.getText().equals(Global.EMPTY_STRING)){
+                        if (tabOrigine.equals(Global.IDEDMO)){
                             filtrageListeEdmo(filtreText.getText());
                         }
-                        else if (tabOrigine.equals(Global.WSSURVEY))
-                        {
+                        else if (tabOrigine.equals(Global.WSSURVEY)){
                             filtrageListeWS_Survey(filtreText.getText());
                         }
-                        else if (tabOrigine.equals(Global.DATATYPE))
-                        {
+                        else if (tabOrigine.equals(Global.DATATYPE)){
                             filtrageListeDataSurvey(filtreText.getText());
                         }
-                        else if (tabOrigine.equals(Global.PARAMETER))
-                        {
+                        else if (tabOrigine.equals(Global.PARAMETER)){
                             filtrageListeData(filtreText.getText());
                         }
                         else if (tabOrigine.equals(Global.SHIP)
                                 || tabOrigine.equals(Global.DATACENTRE)
-                                || tabOrigine.equals(Global.REGION))
-                        {
+                                || tabOrigine.equals(Global.REGION)){
                             filtrageListeBODC(filtreText.getText(), tabOrigine);
                         }
                     }
@@ -448,8 +384,7 @@ public class FiltrageTableType
 
     }
 
-    public static void creationTableData()
-    {
+    public static void creationTableData(){
         final Table table;
         int nbre;
 
@@ -463,21 +398,21 @@ public class FiltrageTableType
         nbre = TableData.listeFiltree.size();
         // creation des colonnes...
         TableColumn tableColumn = new TableColumn(table, SWT.NONE);
-        tableColumn.setWidth(290);
-        // taille = 60
+        tableColumn.setWidth(200);
         tableColumn.setText(Messages.table_label_codeName);
+        
+        TableColumn tableColumn2 = new TableColumn(table, SWT.NONE);
+        tableColumn2.setWidth(81);
+        tableColumn2.setText(Messages.table_label_unit);
 
-        for (int i = 0; i < nbre; i++)
-        {
+        for (int i = 0; i < nbre; i++){
             TableItem item = new TableItem(table, SWT.NONE);
-            item
-                .setText(new String[] {TableData.listeFiltree.get(i).getCode()});
-
+            item.setText(new String[] {TableData.listeFiltree.get(i).getCode(),
+                                       TableData.listeFiltree.get(i).getUnite()});
         }
     }
 
-    public static void creationTableEdmo()
-    {
+    public static void creationTableEdmo(){
         final Table table;
         int nbre;
 
@@ -492,19 +427,15 @@ public class FiltrageTableType
         // creation des colonnes...
         TableColumn tableColumn = new TableColumn(table, SWT.NONE);
         tableColumn.setWidth(280);
-        // taille = 60
         tableColumn.setText(Messages.table_label_codeName);
 
-        for (int i = 0; i < nbre; i++)
-        {
+        for (int i = 0; i < nbre; i++){
             TableItem item = new TableItem(table, SWT.NONE);
             item.setText(EdmoHandler.listeFiltree.get(i));
-
         }
     }
 
-    public static void creationTableBODC()
-    {
+    public static void creationTableBODC(){
         final Table table;
         int nbre;
 
@@ -519,24 +450,19 @@ public class FiltrageTableType
         // creation des colonnes...
         TableColumn tableColumn = new TableColumn(table, SWT.NONE);
         tableColumn.setWidth(280);
-        // taille = 60
         tableColumn.setText(Messages.table_label_codeName);
 
-        for (int i = 0; i < nbre; i++)
-        {
+        for (int i = 0; i < nbre; i++){
             TableItem item = new TableItem(table, SWT.NONE);
             item.setText(NemoLists.listeFiltree.get(i));
-
         }
     }
 
-    public static void creationTableSurvey()
-    {
+    public static void creationTableSurvey(){
         final Table table;
         int nbre;
 
         TableDataSurvey.filtreTable = new Table(top, SWT.FULL_SELECTION);
-        ;
         nbre = TableDataSurvey.listeFiltree.size();
 
         table = TableDataSurvey.filtreTable;
@@ -548,7 +474,6 @@ public class FiltrageTableType
         table.setLinesVisible(true);
         TableColumn tableColumn = new TableColumn(table, SWT.NONE);
         tableColumn.setWidth(100);
-        // taille = 60
         tableColumn.setText(Messages.table_label_code.toUpperCase());
         TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);
         tableColumn1.setWidth(100);
@@ -557,19 +482,16 @@ public class FiltrageTableType
         tableColumn2.setWidth(100);
         tableColumn2.setText(Messages.table_label_qc);
 
-        for (int i = 0; i < nbre; i++)
-        {
+        for (int i = 0; i < nbre; i++){
             TableItem item = new TableItem(table, SWT.NONE);
             item.setText(new String[] {
                     TableDataSurvey.listeFiltree.get(i).getCode(),
                     "" + TableDataSurvey.listeFiltree.get(i).getNombre(), //$NON-NLS-1$
                     TableDataSurvey.listeFiltree.get(i).getQc()});
-
         }
     }
 
-    public static void filtrageListeData(String chaine)
-    {
+    public static void filtrageListeData(String chaine){
 
         ArrayList<TypeData> origine, filtree;
         int nbre;
@@ -579,20 +501,13 @@ public class FiltrageTableType
         origine = TableData.typesWS;
 
         nbre = origine.size();
-        // System.out.println("Nombre de types = "+nbre);
 
         // remplissage de la liste filtree
-        for (int i = 0; i < nbre; i++)
-        {
-
+        for (int i = 0; i < nbre; i++){
             regexp = "^.*" + chaine + ".*$"; //$NON-NLS-1$ //$NON-NLS-2$
-
             Pattern p = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE);
             Matcher m = p.matcher(origine.get(i).getCode());
-
-            if (m.matches())
-            {
-
+            if (m.matches()){
                 // ajout dans la liste filtree
                 filtree.add(origine.get(i));
             }
@@ -603,11 +518,9 @@ public class FiltrageTableType
 
         razTable(TableData.filtreTable);
         creationTableData();
-
     }
 
-    public static void filtrageListeEdmo(String chaine)
-    {
+    public static void filtrageListeEdmo(String chaine){
 
         ArrayList<String> origine, filtree;
         int nbre;
@@ -617,20 +530,15 @@ public class FiltrageTableType
         origine = EdmoHandler.listeOrigine;
 
         nbre = origine.size();
-        // System.out.println("Nombre de types = "+nbre);
 
         // remplissage de la liste filtree
-        for (int i = 0; i < nbre; i++)
-        {
-
+        for (int i = 0; i < nbre; i++){
             regexp = "^.*" + chaine + ".*$"; //$NON-NLS-1$ //$NON-NLS-2$
 
             Pattern p = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE);
             Matcher m = p.matcher(origine.get(i));
 
-            if (m.matches())
-            {
-
+            if (m.matches()){
                 // ajout dans la liste filtree
                 filtree.add(origine.get(i));
             }
@@ -641,11 +549,9 @@ public class FiltrageTableType
 
         razTable(EdmoHandler.filtreTable);
         creationTableEdmo();
-
     }
 
-    public static void filtrageListeBODC(String chaine, String liste)
-    {
+    public static void filtrageListeBODC(String chaine, String liste){
 
         ArrayList<String> origine, filtree;
         int nbre;
@@ -653,34 +559,26 @@ public class FiltrageTableType
 
         filtree = new ArrayList<String>();
         origine = new ArrayList<String>();
-        if (liste.equals(Global.SHIP))
-        {
+        if (liste.equals(Global.SHIP)){
             origine = NemoLists.listeNavire;
         }
-        else if (liste.equals(Global.DATACENTRE))
-        {
+        else if (liste.equals(Global.DATACENTRE)){
             origine = NemoLists.listeCentreDonnees;
         }
-        else if (liste.equals(Global.REGION))
-        {
+        else if (liste.equals(Global.REGION)){
             origine = NemoLists.listeRegion;
         }
 
         nbre = origine.size();
-        // System.out.println("Nombre de types = "+nbre);
 
         // remplissage de la liste filtree
-        for (int i = 0; i < nbre; i++)
-        {
+        for (int i = 0; i < nbre; i++){
 
             regexp = "^.*" + chaine + ".*$"; //$NON-NLS-1$ //$NON-NLS-2$
-
             Pattern p = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE);
             Matcher m = p.matcher(origine.get(i));
 
-            if (m.matches())
-            {
-
+            if (m.matches()){
                 // ajout dans la liste filtree
                 filtree.add(origine.get(i));
             }
@@ -693,8 +591,7 @@ public class FiltrageTableType
         creationTableBODC();
     }
 
-    public static void filtrageListeDataSurvey(String chaine)
-    {
+    public static void filtrageListeDataSurvey(String chaine){
         ArrayList<TypeSurvey> origine, filtree;
         int nbre;
         String regexp;
@@ -703,20 +600,14 @@ public class FiltrageTableType
         origine = TableDataSurvey.typesWS;
 
         nbre = origine.size();
-        // System.out.println("Nombre de types = "+nbre);
 
         // remplissage de la liste filtree
-        for (int i = 0; i < nbre; i++)
-        {
+        for (int i = 0; i < nbre; i++){
 
             regexp = "^.*" + chaine + ".*$"; //$NON-NLS-1$ //$NON-NLS-2$
-
             Pattern p = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE);
             Matcher m = p.matcher(origine.get(i).getCode());
-
-            if (m.matches())
-            {
-
+            if (m.matches()){
                 // ajout dans la liste filtree
                 filtree.add(origine.get(i));
             }
@@ -727,11 +618,9 @@ public class FiltrageTableType
 
         razTable(TableDataSurvey.filtreTable);
         creationTableSurvey();
-
     }
 
-    public static void filtrageListeWS_Survey(String chaine)
-    {
+    public static void filtrageListeWS_Survey(String chaine){
         ArrayList<String> origine, filtree;
         int nbre;
         String regexp;
@@ -742,19 +631,11 @@ public class FiltrageTableType
         nbre = origine.size();
 
         // remplissage de la liste filtree
-        for (int i = 0; i < nbre; i++)
-        {
-
+        for (int i = 0; i < nbre; i++){
             regexp = "^.*" + chaine + ".*$"; //$NON-NLS-1$ //$NON-NLS-2$
-
             Pattern p = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE);
             Matcher m = p.matcher(origine.get(i));
-
-            if (m.matches())
-            {
-                // System.out.println("On ajoute le type " + origine.get(i));
-                // //$NON-NLS-1$
-
+            if (m.matches()){
                 // ajout dans la liste filtree
                 filtree.add(origine.get(i));
             }
@@ -767,19 +648,16 @@ public class FiltrageTableType
         creationTableWS_Survey();
     }
 
-    public static void razTable(Table table)
-    {
+    public static void razTable(Table table){
         // maj
         table.dispose();
     }
 
-    public static void creationTableWS_Survey()
-    {
+    public static void creationTableWS_Survey(){
         final Table table;
         int nbre;
 
         TableWS_Survey.filtreTable = new Table(top, SWT.FULL_SELECTION);
-        // filtreTableData = new Table(top, SWT.FULL_SELECTION);
         table = TableWS_Survey.filtreTable;
         table.setHeaderVisible(true);
         table.setLinesVisible(true);
@@ -789,20 +667,16 @@ public class FiltrageTableType
         // creation des colonnes...
         TableColumn tableColumn = new TableColumn(table, SWT.NONE);
         tableColumn.setWidth(290);
-        // taille = 60
         tableColumn.setText(Messages.table_label_refName);
 
-        for (int i = 0; i < nbre; i++)
-        {
+        for (int i = 0; i < nbre; i++){
             TableItem item = new TableItem(table, SWT.NONE);
             item.setText(new String[] {TableWS_Survey.listeFiltree.get(i)});
-
         }
 
         // ajout listeners sur la table
         table.addListener(SWT.MouseDown, new Listener() {
-            public void handleEvent(Event event)
-            {
+            public void handleEvent(Event event){
 
             }
         });
