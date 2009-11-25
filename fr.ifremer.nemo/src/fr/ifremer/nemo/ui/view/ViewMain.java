@@ -16,7 +16,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
@@ -34,6 +37,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.part.ViewPart;
 
+import fr.ifremer.nemo.ui.Application;
 import fr.ifremer.nemo.ui.ApplicationWorkbenchWindowAdvisor;
 import fr.ifremer.nemo.ui.FiltrageTableType;
 import fr.ifremer.nemo.ui.Utils;
@@ -192,7 +196,7 @@ public class ViewMain extends ViewPart
         SashForm parentform = new SashForm(parent, SWT.HORIZONTAL);
         parentform.setLayout(new FillLayout());
         
-        Composite left = new Composite(parentform, SWT.NONE);
+        SashForm left = new SashForm(parentform, SWT.VERTICAL);
         left.setBackground(parent.getBackground());
         left.setLayout(new FillLayout(SWT.VERTICAL));
 
@@ -212,6 +216,9 @@ public class ViewMain extends ViewPart
         createGroupChoixFichierInFile(formViewFile.getBody());
         createGroupSeparateurInFile(formViewFile.getBody());
         createGroupTypeFichierInFile(formViewFile.getBody());
+        
+
+        left.setWeights(new int[] {45, 55});
 
         Composite right = new Composite(parentform, SWT.BORDER);
         right.setBackground(backgroungEdit);
@@ -225,33 +232,62 @@ public class ViewMain extends ViewPart
     {
 
         Composite compositeChoixFichier = new Composite(parent, SWT.NONE);
-        GridLayoutFactory.fillDefaults().numColumns(2).applyTo(
-            compositeChoixFichier);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(
-            compositeChoixFichier);
+        GridLayoutFactory.fillDefaults().numColumns(3).applyTo(compositeChoixFichier);
+        //GridDataFactory.fillDefaults().grab(true, false).applyTo(compositeChoixFichier);
+        
+        Composite col1 = new Composite(compositeChoixFichier, SWT.NONE);
+        col1.setLayout(new FillLayout(SWT.VERTICAL));
+        GridData dataCol = new GridData ();
+        //dataCol.grabExcessHorizontalSpace = true;
+        dataCol.grabExcessVerticalSpace = true;
+        col1.setLayoutData (dataCol);
 
-        Label labelCampagne = new Label(compositeChoixFichier, SWT.NONE);
+        Label labelCampagne = new Label(col1, SWT.NONE);
+        FontData fontdata = labelCampagne.getFont().getFontData()[0];
+        fontdata.setStyle(SWT.BOLD);
+        labelCampagne.setFont(new Font(Application.display, fontdata));
         labelCampagne.setText(Messages.view_file_processCruise + "           "); //$NON-NLS-1$
 
-        Label labelCollection = new Label(compositeChoixFichier, SWT.NONE);
-        labelCollection.setText(Messages.view_file_processCollection);
-
-        radioFichier = new Button(compositeChoixFichier, SWT.RADIO);
+        radioFichier = new Button(col1, SWT.RADIO);
         radioFichier.setSelection(true);
         radioFichier.setText(Messages.view_file_cruiseFile);
         addRadFileListener(radioFichier);
 
-        radioCollectCas1 = new Button(compositeChoixFichier, SWT.RADIO);
+        radioDossier = new Button(col1, SWT.RADIO);
+        radioDossier.setText(Messages.view_file_cruiseDir);
+        addRadFileListener(radioDossier);
+        
+        
+        Composite col2 = new Composite(compositeChoixFichier, SWT.NONE);
+        GridData data = new GridData();
+        data.widthHint = 50;
+        col2.setLayoutData (data);
+        //col2.setLayoutData(dataCol);
+        col2.setLayout(new FillLayout(SWT.VERTICAL));
+        new Label(col2, SWT.SEPARATOR | SWT.VERTICAL);
+        
+        
+        
+        Composite col3 = new Composite(compositeChoixFichier, SWT.NONE);
+        col3.setLayout(new FillLayout(SWT.VERTICAL));
+        col3.setLayoutData(dataCol);
+
+        Label labelCollection = new Label(col3, SWT.NONE);
+        labelCollection.setFont(new Font(Application.display, fontdata));
+        labelCollection.setText(Messages.view_file_processCollection);
+        
+        radioCollectCas1 = new Button(col3, SWT.RADIO);
         radioCollectCas1.setText(Messages.view_file_collectionCas1);
         addRadFileListener(radioCollectCas1);
 
-        radioDossier = new Button(compositeChoixFichier, SWT.RADIO);
-        radioDossier.setText(Messages.view_file_cruiseDir);
-        addRadFileListener(radioDossier);
-
-        radioCollectCasN = new Button(compositeChoixFichier, SWT.RADIO);
+        radioCollectCasN = new Button(col3, SWT.RADIO);
         radioCollectCasN.setText(Messages.view_file_collectionCasN);
         addRadFileListener(radioCollectCasN);
+        
+        new Label(col3, SWT.SEPARATOR | SWT.HORIZONTAL);
+        
+        Button radio1 = new Button(col3, SWT.CHECK);
+        radio1.setText("Multi-Stations File");
 
         // FAE 0001140 : deplacement du bouton Parcourir
         Button buttonParcourir = new Button(parent, SWT.NONE);
@@ -589,7 +625,7 @@ public class ViewMain extends ViewPart
         SashForm parentform = new SashForm(parent, SWT.HORIZONTAL);
         parentform.setLayout(new FillLayout());
 
-        Composite left = new Composite(parentform, SWT.NONE);
+        SashForm left = new SashForm(parentform, SWT.VERTICAL);
         left.setLayout(new FillLayout(SWT.VERTICAL));
 
         Composite textFile = new Composite(left, SWT.NONE);
