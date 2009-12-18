@@ -146,9 +146,11 @@ public class SetText implements UIobject
     {
         if (stringLabel != null)
         {
-            label = new Label(compo, SWT.NONE);
+            label = new Label(compo, SWT.WRAP);
             label.setText(stringLabel);
             label.setBackground(ViewMain.backgroungEdit);
+            GridDataFactory.fillDefaults().grab(true, false).hint(textSize, SWT.DEFAULT)
+            .applyTo(label);
         }
 
         text = new Text(compo, SWT.BORDER);

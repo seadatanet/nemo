@@ -123,7 +123,7 @@ public class EditFileForm extends EditForm
             new FileEndData(NemoSection.F_ENDDATA, Messages
                 .getString(NemoSection.F_ENDDATA),
                 Messages.edit_file_indicFinDonnees);
-        sectionRuptureDonnees.addSetter(null, Global.EMPTY_STRING);
+        sectionRuptureDonnees.addSetter(Messages.edit_file_sectionRuptureDonnees_end_with, Global.EMPTY_STRING); //$NON-NLS-1$
         listeSections.add(sectionRuptureDonnees);
     }
 

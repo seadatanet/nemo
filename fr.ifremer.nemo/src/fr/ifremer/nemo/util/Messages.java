@@ -135,6 +135,8 @@ public class Messages {
     public static String edit_file_idcEmptyLine;
     public static String edit_file_idcNextStation;
     public static String edit_file_idcManual;
+    public static String edit_file_sectionRuptureDonnees_end_with;
+    public static String edit_file_termination_start;
     
     public static String edit_cruise_title;
     public static String edit_cruise_sectionReference;

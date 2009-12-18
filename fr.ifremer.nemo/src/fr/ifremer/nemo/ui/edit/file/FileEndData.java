@@ -38,7 +38,7 @@ public class FileEndData extends FileSection
     public FileEndData(String name, String title, String description)
     {
         super(name, title, description);
-        setterStartStation = new SetText(null, Global.EMPTY_STRING, true);
+        setterStartStation = new SetText(Messages.edit_file_termination_start, Global.EMPTY_STRING, true); //$NON-NLS-1$
     }
 
     @Override
