@@ -146,7 +146,8 @@ public class EditStationForm extends EditForm
         comments.addManualInput(null, ComboType.BLOCK, Global.EMPTY_STRING);
         comments.addAutoInput(null, true, MetaInData.INTERDIT, true);
         listeSections.add(comments);
-
+        comments.getAutoInput().setVariableLabel(Messages.label_variable_comment); //$NON-NLS-1$
+        
         surfaceSample =
             new StationSection(NemoSection.S_SURFACE, Messages
                 .getString(NemoSection.S_SURFACE),

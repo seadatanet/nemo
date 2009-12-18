@@ -111,6 +111,7 @@ public class Messages {
     public static String label_start;
     public static String label_end;
     public static String label_variable;
+    public static String label_variable_comment;
     public static String label_test;
     public static String label_file;
     public static String label_string;

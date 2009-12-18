@@ -33,6 +33,7 @@ public class GrpAutoInput implements UIobject
 
     private Button buttonPos;
     private String labelButtonPos;
+    private String variableLabel;
     protected ArrayList<AutoLine> lines;
     private final boolean variablePos;
     protected Button buttonVari;
@@ -52,8 +53,15 @@ public class GrpAutoInput implements UIobject
         }
 
         this.variablePos = variablePos;
+        
+        this.variableLabel = Messages.label_variable;
     }
 
+    public void setVariableLabel(String value)
+    {
+        this.variableLabel = value;
+    }
+    
     public void draw(Composite sectionClient, boolean filled)
     {
 
@@ -87,7 +95,7 @@ public class GrpAutoInput implements UIobject
             buttonVari = new Button(compo2, SWT.CHECK);
             buttonVari.setParent(compo2);
             buttonVari.setBackground(ViewMain.backgroungEdit);
-            buttonVari.setText(Messages.label_variable);
+            buttonVari.setText(this.variableLabel);
             GridDataFactory.fillDefaults().grab(true, false).align(SWT.END,
                 SWT.CENTER).applyTo(buttonVari);
 
