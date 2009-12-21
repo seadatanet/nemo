@@ -99,9 +99,8 @@ public class EditFileForm extends EditForm
 
     @Override
     protected void createButtonRaz(){
-        buttonRAZ = new Button(formEdition.getBody(), SWT.NONE);
-        buttonRAZ.setBackground(ViewMain.backgroungEdit);
-        buttonRAZ.setText(Messages.button_reset);
+        super.createButtonRaz();
+        
         buttonRAZ
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
                 @Override
@@ -109,10 +108,6 @@ public class EditFileForm extends EditForm
                         org.eclipse.swt.events.SelectionEvent e)
                 {
                     ViewMain.init();
-                    
-                    razText();
-                    // invalidation de l'étape en cours et des suivantes
-                    Utils.invalidEtapes();
                 }
             });
     }
