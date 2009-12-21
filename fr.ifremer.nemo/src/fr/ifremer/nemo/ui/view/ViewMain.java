@@ -735,7 +735,7 @@ public class ViewMain extends ViewPart
             });
     }
 
-    protected void init()
+    public static void init()
     {
 
         // reinitialisation de la conversion

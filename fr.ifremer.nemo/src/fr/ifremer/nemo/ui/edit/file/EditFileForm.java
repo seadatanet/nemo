@@ -2,10 +2,13 @@ package fr.ifremer.nemo.ui.edit.file;
 
 import java.io.File;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
 import fr.ifremer.nemo.ui.ApplicationWorkbenchWindowAdvisor;
+import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.actions.OpenAction;
 import fr.ifremer.nemo.ui.edit.DataModel;
 import fr.ifremer.nemo.ui.edit.EditForm;
@@ -94,6 +97,26 @@ public class EditFileForm extends EditForm
         }
     }
 
+    @Override
+    protected void createButtonRaz(){
+        buttonRAZ = new Button(formEdition.getBody(), SWT.NONE);
+        buttonRAZ.setBackground(ViewMain.backgroungEdit);
+        buttonRAZ.setText(Messages.button_reset);
+        buttonRAZ
+            .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                @Override
+                public void widgetSelected(
+                        org.eclipse.swt.events.SelectionEvent e)
+                {
+                    ViewMain.init();
+                    
+                    razText();
+                    // invalidation de l'étape en cours et des suivantes
+                    Utils.invalidEtapes();
+                }
+            });
+    }
+    
     @Override
     public void initSections()
     {
