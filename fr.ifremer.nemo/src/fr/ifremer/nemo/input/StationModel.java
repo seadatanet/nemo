@@ -1,435 +1,125 @@
 package fr.ifremer.nemo.input;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.text.ParseException;
-import java.util.HashMap;
-import java.util.Vector;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
 
-import com.ago.xml.Element2Field;
 import com.ago.xml.PathElementConsumer;
-import com.ago.xml.PathElementHandler;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.config.ConfigDescription;
 import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.FlagTable;
-import fr.ifremer.nemo.domain.AddedParameter;
-import fr.ifremer.nemo.domain.HorodatedValue;
-import fr.ifremer.nemo.domain.Parameter;
-import fr.ifremer.nemo.domain.ParameterValue;
-import fr.ifremer.nemo.domain.Station;
-import fr.ifremer.nemo.domain.TimeSeriesInformation;
-import fr.ifremer.nemo.domain.Trajectory;
-import fr.ifremer.nemo.domain.AddedParameter.IdParameter;
-import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.edit.DataModel;
-import fr.ifremer.nemo.ui.edit.NemoSection;
-import fr.ifremer.nemo.ui.view.ViewMain;
-import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.Intern;
-import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.nemo.util.Preformat;
-import fr.ifremer.nemo.util.SizeBasedProgressNotifier;
-import fr.ifremer.nemo.util.format.DateTimeFormat;
-import fr.ifremer.nemo.util.format.FloatFormat;
-import fr.ifremer.nemo.util.format.LatitudeFormat;
-import fr.ifremer.nemo.util.format.LongitudeFormat;
 
 /**
- * Class StationModel Modèle de station utilisé dans la campagne
- * 
+ * Class StationModel 
+ * Description : Informations descrivant l'onglet Station
  * @author Gerard BUNEL
  */
-public class StationModel implements Cloneable, PathElementHandler, SAXConsumer
+public class StationModel extends AbstractModel
 {
-
-    static protected StationModel _singleton = null;
-
     /**
-     * Nombre de lignes entre la fin des donnees et le debut de la station
-     * suivante
+     * la description de la référence de la station
      */
-    protected int _endData;
-
-    /**
-     * Motif de fin de station
-     */
-    protected String _endDataPattern;
-
-    /**
-     * Booléen indiquant si la fin des données station doit être détectée par un
-     * motif. S'il est à false, l'information de fin de station est obtenue à
-     * l'aide de l'attribut endData
-     */
-    protected boolean _endOnPattern;
-
-    protected boolean _endOnEOF;
-
-    protected boolean _endOnEmptyLine;
-
-    protected boolean _endOnNextStation;
-
-    /**
-     * Definit si le numéro de référence est automatiquement incrémente
-     */
-    protected boolean _incrementRef;
-
-    /**
-     * Definit le numéro de référence a incrémenter
-     */
-    protected int _incrementNumber;
-
-    /**
-     * Nombre de ligne du header Station
-     */
-    protected boolean _endStationHeaderPattern;
-    protected int _numberOfLines;
-    protected String _endStationHeader;
-    protected int _numberLinesBetweenStationData;
-
-    protected static transient int _ref = -1;
-
-    /**
-     * Nombre de mesures réalisées sur la station
-     */
-    protected int _rowNumber;
-
-    /**
-     * Station servant de modèle pour stocker les informations de l'entête
-     * station
-     */
-    protected Station _model;
-
     protected PropertyModel _referenceProperty;
 
     /**
-     * Liste des propriétés permettant de récupérer les informations de l'entête
-     * station
+     * Liste des propriétés de l'entête station
      */
-    protected java.util.Map<String, PropertyModel> _properties;
-
-    protected TimeSeriesModel _timeSeriesModel;
+    protected Map<String, PropertyModel> _properties;
 
     /**
-     * Liste, ordonnee, des paramètres mesurés sur la station
+     * Type de donnee mesure par cette station. Il s'agit d'un d'un des
+     * dataTypes de la relation datatType sur Survey. Le dataType doit de plus
+     * correspondre e un capteur.
      */
-    protected java.util.List<ParameterModel> _parameterModels;
-
-    /**
-     * Liste, ordonnee, des paramètres rajoutés pour ODV
-     */
-    protected java.util.List<ParameterModel> _odvParameterModels;
-
-    /**
-     * Liste, ordonnee, des paramètres rajoutés pour Medatlas
-     */
-    protected java.util.List<ParameterModel> _medParameterModels;
-
-    /**
-     * Modèle pour les informations propres aux séries temporelles. Optionnel
-     */
-    protected HorodatedParameterModel _timestampModel;
-
-    /**
-     * Modèle pour les informations propres aux trajectoires
-     */
-    protected Trajectory _trajectory;
-
-    /**
-     * Nombre de caractères du fichier
-     */
-    protected int _taille;
-
-    /**
-     * Type de fichier en entrée : profil vertical, serie temporelle ou
-     * trajectoire
-     */
-    protected String _inputType;
-
-    /**
-     * Séparateur des données en entrée
-     */
-    protected String _separator;
-
-    /**
-     * Index du parametre PRES
-     */
-    protected int _presIndex;
+    protected DataType _dataType;
 
     /**
      * Tableau de correspondance des flags
      */
     protected FlagTable _flagTable;
 
-    public StationModel()
-    {
-        _incrementNumber = 1;
-        _numberOfLines = 0;
-        _endDataPattern = Global.EMPTY_STRING;
-        _endStationHeaderPattern = false;
-        _endStationHeader = Global.EMPTY_STRING;
-        _numberLinesBetweenStationData = 0;
-        _endOnEOF = false;
-        _endOnEmptyLine = false;
-        _endOnPattern = false;
-        _endOnNextStation = false;
-        _model = null;
-        _parameterModels = new java.util.ArrayList<ParameterModel>();
-        _odvParameterModels = new java.util.ArrayList<ParameterModel>();
-        _medParameterModels = new java.util.ArrayList<ParameterModel>();
-        _properties = new java.util.LinkedHashMap<String, PropertyModel>();
+    public StationModel(){
+        _tagName = ModelDescription.node_stationModel;
+        initValues();
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initValues(){
         _referenceProperty = null;
-        _timeSeriesModel = null;
-        _timestampModel = null;
-        _trajectory = null;
-        _inputType = Global.PROFILE;
+        _properties = new LinkedHashMap<String, PropertyModel>();
+        _flagTable = null;
     }
+
 
     /**
-     * @param isTimeSeries
+     * @see AbstractModel.java#fromElement
      */
-    public StationModel(String typeFichier)
-    {
-        this();
-        boolean isTimeSeries, isTrajectory;
-        if (typeFichier.equals(Global.TIMESERIES))
-        {
-            isTimeSeries = true;
-            isTrajectory = false;
-        }
-        else if (typeFichier.equals(Global.TRAJECTORY))
-        {
-            isTimeSeries = true;
-            isTrajectory = true;
-        }
-        else
-        {
-            isTimeSeries = false;
-            isTrajectory = false;
-        }
-
-        setModel(new Station(isTimeSeries));
-        if (isTimeSeries)
-        {
-            setTimeSeriesModel(new TimeSeriesModel(this));
-            setTimestampModel(new HorodatedParameterModel());
-        }
-        if (isTrajectory)
-        {
-            setTrajectory(new Trajectory());
-        }
-        setTimestampModel(new HorodatedParameterModel());
-        initProperties();
-
-        _singleton = StationModel.this;
+    public static SAXConsumer fromElement(String a_URI, 
+                                          String a_LocalName,
+                                          String a_QName, 
+                                          Attributes a_Attributes){
+        StationModel el = new StationModel();
+        el.buildFromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+        return el;
     }
-
-    public static StationModel getSingleton()
-    {
-        return _singleton;
-    }
-
+    
     /**
-     * Build object from its XML defintion
-     * 
-     * @param a_URI
-     *            Element Namespace (SAX 2)
-     * @param a_LocalName
-     *            Tag name
-     * @param a_QName
-     *            qualified tag name
-     * @param a_Attributes
-     *            XML Element attributes
-     * @return SAXConsumer
+     * {@inheritDoc}
      */
-    public static SAXConsumer fromElement(String a_URI, String a_LocalName,
-            String a_QName, Attributes a_Attributes) throws SAXException
-    {
-        StationModel tmp = new StationModel();
-        tmp.buildFromElement(a_URI, a_LocalName, a_QName, a_Attributes);
-        return tmp;
+    @Override
+    public void buildFromElement(String a_URI, 
+                                 String a_LocalName,
+                                 String a_QName, 
+                                 Attributes a_Attributes){
+        // no attribute
     }
-
+    
     /**
-     * Retrieve attributes values from their XML defintion
-     * 
-     * @param a_URI
-     *            Element Namespace (SAX 2)
-     * @param a_LocalName
-     *            Tag name
-     * @param a_QName
-     *            qualified tag name
-     * @param a_Attributes
-     *            XML Element attributes
+     * {@inheritDoc}
      */
-    public void buildFromElement(String a_URI, String a_LocalName,
-            String a_QName, Attributes a_Attributes) throws SAXException
-    {
-        String tmp;
-        if ((tmp = a_Attributes.getValue("lineNumber")) != null)
-        {
-            _endStationHeaderPattern = false;
-            setNumberOfLines(tmp);
+    @Override
+    public SAXConsumer consumeElement(String a_URI, 
+                                      String a_LocalName,
+                                      String a_QName, 
+                                      Attributes a_Attributes){
+        
+        if (a_LocalName.equals(ModelDescription.node_reference)){
+            return new PathElementConsumer(ModelDescription.node_reference, this);
         }
-        if ((tmp = a_Attributes.getValue("endOnEOF")) != null)
-        {
-            setEndOnEOF(tmp);
+        if (a_LocalName.equals(ModelDescription.node_listProperties)){
+            return new PathElementConsumer(ModelDescription.node_listProperties, this);
         }
-        if ((tmp = a_Attributes.getValue("endOnEmptyLine")) != null)
-        {
-            setEndOnEmptyLine(tmp);
+        if (a_LocalName.equals(ModelDescription.node_datatypeModel)){
+            SAXConsumer el = DataType.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+            setDataType((DataType) el);
+            return el;
+            //return new PathElementConsumer(ModelDescription.node_datatypeModel, this);
         }
-        if ((tmp = a_Attributes.getValue("endOnNextStation")) != null)
-        {
-            setEndOnNextStation(tmp);
-        }
-        if ((tmp = a_Attributes.getValue("endOnPattern")) != null)
-        {
-            setEndOnPattern(tmp);
-        }
-    }
-
-    /**
-     * A new XML Element has been found. Parse it.
-     * 
-     * @param a_URI
-     *            XML Namespace (SAX 2)
-     * @param a_LocalName
-     *            Tag name
-     * @param a_QName
-     *            Qualified tag name
-     * @param a_Attributes
-     *            XML Element attributes
-     * @return SAXConsumer
-     */
-    public SAXConsumer consumeElement(String a_URI, String a_LocalName,
-            String a_QName, Attributes a_Attributes) throws SAXException
-    {
-        if (a_LocalName.equals("inputType"))
-        {
-            Element2Field setter = new Element2Field(this, "setInputType");
-            return setter;
-        }
-        if (a_LocalName.equals("separator"))
-        {
-            Element2Field setter = new Element2Field(this, "setSeparator");
-            return setter;
-        }
-        if (a_LocalName.equals("incrementRef"))
-        {
-            Element2Field setter = new Element2Field(this, "setIncrementRef");
-            return setter;
-        }
-        if (a_LocalName.equals("incrementNumber"))
-        {
-            Element2Field setter =
-                new Element2Field(this, "setIncrementNumber");
-            return setter;
-        }
-        if (a_LocalName.equals("numberLinesBetweenStationData"))
-        {
-            _endStationHeaderPattern = true;
-            Element2Field setter =
-                new Element2Field(this, "setNumberLinesBetweenStationData");
-            return setter;
-        }
-        if (a_LocalName.equals("endStationHeader"))
-        {
-            _endStationHeaderPattern = true;
-            Element2Field setter =
-                new Element2Field(this, "setEndStationHeader");
-            return setter;
-        }
-        if (a_LocalName.equals("endDataPattern"))
-        {
-            Element2Field setter = new Element2Field(this, "setEndDataPattern");
-            return setter;
-        }
-        if (a_LocalName.equals("rowNumber"))
-        {
-            Element2Field setter = new Element2Field(this, "setRowNumber");
-            return setter;
-        }
-        if (a_LocalName.equals("endData"))
-        {
-            Element2Field setter = new Element2Field(this, "setEndData");
-            return setter;
-        }
-        if (a_LocalName.equals("Station"))
-        {
-            Station l =
-                (Station) Station.fromElement(a_URI, a_LocalName, a_QName,
-                    a_Attributes);
-            setModel(l);
-            return l;
-        }
-        if (a_LocalName.equals("referenceProperty"))
-        {
-            return new PathElementConsumer("referenceProperty", this);
-        }
-        if (a_LocalName.equals("properties"))
-        {
-            return new PathElementConsumer("properties", this);
-        }
-        if (a_LocalName.equals("TimeSeriesModel"))
-        {
-            TimeSeriesModel l =
-                (TimeSeriesModel) TimeSeriesModel.fromElement(a_URI,
-                    a_LocalName, a_QName, a_Attributes);
-            setTimeSeriesModel(l);
-            return l;
-        }
-        if (a_LocalName.equals("Trajectory"))
-        {
-            Trajectory l =
-                (Trajectory) Trajectory.fromElement(a_URI, a_LocalName,
-                    a_QName, a_Attributes);
-            setTrajectory(l);
-            return l;
-        }
-        if (a_LocalName.equals("parameters"))
-        {
-            return new PathElementConsumer("parameters", this);
-        }
-        if (a_LocalName.equals("HorodatedParameterModel"))
-        {
-            HorodatedParameterModel l =
-                (HorodatedParameterModel) HorodatedParameterModel.fromElement(
-                    a_URI, a_LocalName, a_QName, a_Attributes);
-            setTimestampModel(l);
-            return l;
-        }
-        if (a_LocalName.equals("FlagTable"))
-        {
+        if (a_LocalName.equals(ConfigDescription.node_FlagTable)){
             String code = null;
             String label = null;
             FlagTable flagTable = new FlagTable();
-
-            if ((code = a_Attributes.getValue("code")) != null
-                    && (label = a_Attributes.getValue("label")) != null)
-            {
+            if ((code = a_Attributes.getValue(ConfigDescription.a_code)) != null
+                    && (label = a_Attributes.getValue(ConfigDescription.a_label)) != null){
                 flagTable.setCode(code);
                 flagTable.setLibelle(label);
                 setFlagTable(flagTable);
             }
             return this;
         }
-        if (a_LocalName.equals("Flag"))
-        {
+        if (a_LocalName.equals(ConfigDescription.node_Flag)){
             String local = null;
             String sdn = null;
             Flag flag = new Flag();
-
-            if ((local = a_Attributes.getValue("local")) != null
-                    && (sdn = a_Attributes.getValue("SDN")) != null)
-            {
+            if ((local = a_Attributes.getValue(ConfigDescription.a_local)) != null
+                    && (sdn = a_Attributes.getValue(ConfigDescription.a_SDN)) != null){
                 flag.setLocal(local);
                 flag.setSdn(sdn);
                 getFlagTable().getFlags().add(flag);
@@ -438,2028 +128,234 @@ public class StationModel implements Cloneable, PathElementHandler, SAXConsumer
         }
         return null;
     }
-
+    
     /**
-     * The XML Element is a CDATA filled element
-     * 
-     * @param a_Characters
-     *            The CDATA content
+     * {@inheritDoc}
      */
-    public void consumeCharacters(String a_Characters) throws SAXException
-    {
+    @Override
+    public SAXConsumer handlePathElement(String path, 
+                                         String a_URI,
+                                         String a_LocalName, 
+                                         String a_QName, 
+                                         Attributes a_Attributes){
+        SAXConsumer el = null;
+        if (path.equals(ModelDescription.node_reference)){
+            el = PropertyModel.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+            setReferenceProperty((PropertyModel) el);
+            return el;
+        }
+        if (path.equals(ModelDescription.node_listProperties)){
+            el = PropertyModel.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+            addProperty((PropertyModel) el);
+            return el;
+        }
+        return null;
     }
-
+    
     /**
-     * Generate XML defintion on a Stream
-     * 
-     * @param a_Writer
-     *            XMLOutputWriter to which to write the XML Definition
+     * {@inheritDoc}
      */
-    public void writeXMLBodyOn(XMLOutputWriter a_Writer)
-    {
+    @Override
+    public void writeXMLBodyOn(XMLOutputWriter a_Writer){
 
-        a_Writer.putAttribute("endOnEOF", isEndOnEOF());
-        a_Writer.putAttribute("endOnEmptyLine", isEndOnEmptyLine());
-        a_Writer.putAttribute("endOnNextStation", isEndOnNextStation());
-        a_Writer.putAttribute("endOnPattern", isEndOnPattern());
-        if (!_endStationHeaderPattern)
-        {
-            a_Writer.putAttribute("lineNumber", getNumberOfLines());
-        }
-
-        a_Writer.putTag("inputType", getInputType());
-        a_Writer.putTag("separator", getSeparator());
-        a_Writer.putTag("incrementRef", isIncrementRef());
-        a_Writer.putTag("incrementNumber", getIncrementNumber());
-
-        if (_endStationHeaderPattern)
-        {
-            a_Writer.putTag("numberLinesBetweenStationData",
-                getNumberLinesBetweenStationData());
-            a_Writer.putTag("endStationHeader", getEndStationHeader());
-        }
-
-        // onNextStation - Preformat
-        String endDataPattern = getEndDataPattern();
-        if (isEndOnNextStation() && Preformat.isPreformat()
-                && Preformat.isSpaceAdded())
-        {
-            endDataPattern = endDataPattern.substring(1);
-        }
-
-        a_Writer.putTag("endDataPattern", endDataPattern);
-        a_Writer.putTag("rowNumber", getRowNumber());
-        a_Writer.putTag("endData", getEndData());
-        if (getModel() != null)
-        {
-            getModel().writeXMLOn(a_Writer);
-        }
-        a_Writer.openTag("parameters");
-        for (ParameterModel t : getParameterModels())
-        {
-            t.writeXMLOn(a_Writer);
-        }
-        a_Writer.closeTag();
-        a_Writer.openTag("properties");
-        for (PropertyModel t : getProperties())
-        {
-            t.writeXMLOn(a_Writer);
-        }
-        a_Writer.closeTag();
+        a_Writer.openTag(ModelDescription.node_reference);
         if (getReferenceProperty() != null)
-        {
-            a_Writer.openTag("referenceProperty");
             getReferenceProperty().writeXMLOn(a_Writer);
-            a_Writer.closeTag();
+        a_Writer.closeTag();
+        
+        a_Writer.openTag(ModelDescription.node_listProperties);
+        for (PropertyModel el : getProperties()){
+            el.writeXMLOn(a_Writer);
         }
-        if (getTrajectory() != null)
-        {
-            getTrajectory().writeXMLOn(a_Writer);
+        a_Writer.closeTag();
+        
+        if (getDataType() != null){
+            getDataType().writeXMLOn(a_Writer);
         }
-        if (getTimeSeriesModel() != null)
-        {
-            getTimeSeriesModel().writeXMLOn(a_Writer);
-        }
-        if (getTimestampModel() != null)
-        {
-            getTimestampModel().writeXMLOn(a_Writer);
-        }
-        if (getFlagTable() != null)
-        {
-            a_Writer.openTag("FlagTable");
-            a_Writer.putAttribute("code", getFlagTable().getCode());
-            a_Writer.putAttribute("label", getFlagTable().getLibelle());
-            for (int i = 0; i < getFlagTable().getFlags().size(); i++)
-            {
-                a_Writer.openTag("Flag");
-                a_Writer.putAttribute("local", getFlagTable().getFlags().get(i)
-                    .getLocal());
-                a_Writer.putAttribute("SDN", getFlagTable().getFlags().get(i)
-                    .getSdn());
+        
+        if (getFlagTable() != null){
+            a_Writer.openTag(ConfigDescription.node_FlagTable);
+            a_Writer.putAttribute(ConfigDescription.a_code, getFlagTable().getCode());
+            a_Writer.putAttribute(ConfigDescription.a_label, getFlagTable().getLibelle());
+            for (int i = 0; i < getFlagTable().getFlags().size(); i++){
+                a_Writer.openTag(ConfigDescription.node_Flag);
+                a_Writer.putAttribute(ConfigDescription.a_local, getFlagTable().getFlags().get(i).getLocal());
+                a_Writer.putAttribute(ConfigDescription.a_SDN, getFlagTable().getFlags().get(i).getSdn());
                 a_Writer.closeTag();
             }
             a_Writer.closeTag();
         }
     }
 
+    
     /**
-     * Generate XML defintion on a XMLOutputWriter
-     * 
-     * @param a_Writer
-     *            the XMLOutputWriter to which to write the XML Definition
-     */
-    public void writeXMLOn(XMLOutputWriter a_Writer)
-    {
-        a_Writer.openTag("StationModel");
-        writeXMLBodyOn(a_Writer);
-        a_Writer.closeTag();
-    }
-
-    /**
-     * Generate XML defintion on a Stream
-     * 
-     * @param a_Stream
-     *            the OutptStream to which to write the XML Definition
-     */
-    public void writeXMLOn(OutputStream a_Stream)
-    {
-        XMLOutputWriter writer = new XMLOutputWriter(a_Stream);
-        writeXMLOn(writer);
-    }
-
-    /**
-     * Returns a copy of this Object
-     * 
-     * @return a copy of this object
+     * {@inheritDoc}
      */
     @Override
     public Object clone() throws CloneNotSupportedException
     {
         StationModel copy = null;
         copy = (StationModel) super.clone();
-        copy._model = null;
-        if (getModel() != null)
-        {
-            copy.setModel((Station) getModel().clone());
-        }
         copy._referenceProperty = null;
-        if (getReferenceProperty() != null)
-        {
-            copy.setReferenceProperty((PropertyModel) getReferenceProperty()
-                .clone());
+        if (getReferenceProperty() != null){
+            copy.setReferenceProperty((PropertyModel) getReferenceProperty().clone());
         }
-        copy._properties = new java.util.LinkedHashMap<String, PropertyModel>();
-        for (PropertyModel t0 : getProperties())
-        {
+        copy._properties = new LinkedHashMap<String, PropertyModel>();
+        for (PropertyModel t0 : getProperties()){
             copy.addProperty((PropertyModel) t0.clone());
         }
-        copy._timeSeriesModel = null;
-        if (getTimeSeriesModel() != null)
-        {
-            copy.setTimeSeriesModel((TimeSeriesModel) getTimeSeriesModel()
-                .clone());
-        }
-        copy._parameterModels = new java.util.ArrayList<ParameterModel>();
-        for (ParameterModel t1 : getParameterModels())
-        {
-            copy.addParameterModel((ParameterModel) t1.clone());
-        }
-        copy._odvParameterModels = new java.util.ArrayList<ParameterModel>();
-        for (ParameterModel t1 : getOdvParameterModels())
-        {
-            copy.addOdvParameterModel((ParameterModel) t1.clone());
-        }
-        copy._medParameterModels = new java.util.ArrayList<ParameterModel>();
-        for (ParameterModel t1 : getMedParameterModels())
-        {
-            copy.addMedParameterModel((ParameterModel) t1.clone());
-        }
-        copy._timestampModel = null;
-        if (getTimestampModel() != null)
-        {
-            copy
-                .setTimestampModel((HorodatedParameterModel) getTimestampModel()
-                    .clone());
+        copy._flagTable = null;
+        FlagTable flagTable = new FlagTable();
+        if (getFlagTable() != null){
+            flagTable.setCode(getFlagTable().getCode());
+            flagTable.setLibelle(getFlagTable().getLibelle());
+            flagTable.getFlags().addAll(getFlagTable().getFlags());
+            copy.setFlagTable(flagTable);
         }
         return copy;
     }
 
+    
     /**
-     * Remove any associated links
+     * {@inheritDoc}
      */
-    public void release()
-    {
-        releaseModel();
-        releaseParameterModels();
-        releaseAddedParameterModels();
+    @Override
+    public void release(){
         releaseProperties();
         releaseReferenceProperty();
-        releaseTimeSeriesModel();
-        releaseTrajectory();
-        releaseTimestampModel();
-        _singleton = null;
+        _flagTable = null;
     }
 
     /**
-     * Read accessor (getter) for attribute _endData
-     * 
-     * @return int
-     * @see StationModel#_endData
+     * Supprime _properties
      */
-    public int getEndData()
-    {
-        return _endData;
-    }
-
-    /**
-     * Write accessor (setter) for attribute _endData
-     * 
-     * @param x
-     *            new value for _endData
-     * @see StationModel#_endData
-     */
-    public void setEndData(int x)
-    {
-        _endData = x;
-    }
-
-    /**
-     * Write accessor (setter) for attribute _endData
-     * 
-     * @param a_String
-     *            new value for _endData as String
-     * @see StationModel#_endData
-     */
-    public void setEndData(String a_String)
-    {
-        try
-        {
-            setEndData(Integer.parseInt(a_String));
+    private void releaseProperties(){
+        for (PropertyModel el : getProperties()){
+            el.release();
+            removeProperty(el);
         }
-        catch (Exception e)
-        {
-        }
+        _properties = null;
     }
 
     /**
-     * Read accessor (getter) for attribute _endDataPattern
-     * 
-     * @return String
-     * @see StationModel#_endDataPattern
+     * Supprime _referenceProperty
      */
-    public String getEndDataPattern()
-    {
-        return _endDataPattern;
-    }
-
-    /**
-     * Write accessor (setter) for attribute _endDataPattern
-     * 
-     * @param x
-     *            new value for _endDataPattern
-     * @see StationModel#_endDataPattern
-     */
-    public void setEndDataPattern(String x)
-    {
-        _endDataPattern = x;
-    }
-
-    /**
-     * Read accessor (getter) for attribute _endOnPattern
-     * 
-     * @return boolean
-     * @see StationModel#_endOnPattern
-     */
-    public boolean isEndOnPattern()
-    {
-        return _endOnPattern;
-    }
-
-    /**
-     * Write accessor (setter) for attribute _endOnPattern
-     * 
-     * @param x
-     *            new value for _endOnPattern
-     * @see StationModel#_endOnPattern
-     */
-    public void setEndOnPattern(boolean x)
-    {
-        _endOnPattern = x;
-    }
-
-    /**
-     * Read accessor (getter) for attribute _endStationHeaderPattern
-     * 
-     * @return boolean
-     * @see StationModel#_endStationHeaderPattern
-     */
-    public boolean isEndStationHeaderPattern()
-    {
-        return _endStationHeaderPattern;
-    }
-
-    /**
-     * Write accessor (setter) for attribute _endStationHeaderPattern
-     * 
-     * @param x
-     *            new value for _endStationHeaderPattern
-     * @see StationModel#_endStationHeaderPattern
-     */
-    public void setEndStationHeaderPattern(boolean x)
-    {
-        _endStationHeaderPattern = x;
-    }
-
-    /**
-     * Write accessor (setter) for attribute _endOnPattern
-     * 
-     * @param a_String
-     *            new value for _endOnPattern as String
-     * @see StationModel#_endOnPattern
-     */
-    public void setEndOnPattern(String a_String)
-    {
-        setEndOnPattern(new Boolean(a_String).booleanValue());
-    }
-
-    /**
-     * Read accessor (getter) for attribute _endOnEOF
-     * 
-     * @return boolean
-     * @see StationModel#_endOnEOF
-     */
-    public boolean isEndOnEOF()
-    {
-        return _endOnEOF;
-    }
-
-    /**
-     * Write accessor (setter) for attribute _endOnEOF
-     * 
-     * @param x
-     *            new value for _endOnEOF
-     * @see StationModel#_endOnEOF
-     */
-    public void setEndOnEOF(boolean x)
-    {
-        _endOnEOF = x;
-    }
-
-    /**
-     * Write accessor (setter) for attribute _endOnEOF
-     * 
-     * @param a_String
-     *            new value for _endOnEOF as String
-     * @see StationModel#_endOnEOF
-     */
-    public void setEndOnEOF(String a_String)
-    {
-        setEndOnEOF(new Boolean(a_String).booleanValue());
-    }
-
-    /**
-     * Read accessor (getter) for attribute _endOnEmptyLine
-     * 
-     * @return boolean
-     * @see StationModel#_endOnEmptyLine
-     */
-    public boolean isEndOnEmptyLine()
-    {
-        return _endOnEmptyLine;
-    }
-
-    /**
-     * Write accessor (setter) for attribute _endOnEmptyLine
-     * 
-     * @param x
-     *            new value for _endOnEmptyLine
-     * @see StationModel#_endOnEmptyLine
-     */
-    public void setEndOnEmptyLine(boolean x)
-    {
-        _endOnEmptyLine = x;
-    }
-
-    /**
-     * Write accessor (setter) for attribute _endOnEmptyLine
-     * 
-     * @param a_String
-     *            new value for _endOnEmptyLine as String
-     * @see StationModel#_endOnEmptyLine
-     */
-    public void setEndOnEmptyLine(String a_String)
-    {
-        setEndOnEmptyLine(new Boolean(a_String).booleanValue());
-    }
-
-    /**
-     * Read accessor (getter) for attribute _endOnNextStation
-     * 
-     * @return boolean
-     * @see StationModel#_endOnNextStation
-     */
-    public boolean isEndOnNextStation()
-    {
-        return _endOnNextStation;
-    }
-
-    /**
-     * Write accessor (setter) for attribute _endOnNextStation
-     * 
-     * @param x
-     *            new value for _endOnNextStation
-     * @see StationModel#_endOnNextStation
-     */
-    public void setEndOnNextStation(boolean x)
-    {
-        _endOnNextStation = x;
-    }
-
-    /**
-     * Write accessor (setter) for attribute _endOnNextStation
-     * 
-     * @param a_String
-     *            new value for _endOnNextStation as String
-     * @see StationModel#_endOnNextStation
-     */
-    public void setEndOnNextStation(String a_String)
-    {
-        setEndOnNextStation(new Boolean(a_String).booleanValue());
-    }
-
-    /**
-     * Read accessor (getter) for attribute _incrementRef
-     * 
-     * @return boolean
-     * @see StationModel#_incrementRef
-     */
-    public boolean isIncrementRef()
-    {
-        return _incrementRef;
-    }
-
-    /**
-     * Write accessor (setter) for attribute _incrementRef
-     * 
-     * @param x
-     *            new value for _incrementRef
-     * @see StationModel#_incrementRef
-     */
-    public void setIncrementRef(boolean x)
-    {
-        _incrementRef = x;
-    }
-
-    /**
-     * Write accessor (setter) for attribute _incrementRef
-     * 
-     * @param a_String
-     *            new value for _incrementRef as String
-     * @see StationModel#_incrementRef
-     */
-    public void setIncrementRef(String a_String)
-    {
-        setIncrementRef(new Boolean(a_String).booleanValue());
-    }
-
-    /**
-	 * 
-	 */
-    public int getIncrementNumber()
-    {
-        return _incrementNumber;
-    }
-
-    public void setIncrementNumber(String number)
-    {
-        _incrementNumber = Integer.parseInt(number);
-    }
-
-    /**
-     * Read accessor (getter) for attribute _numberOfLines
-     * 
-     * @return int
-     * @see StationModel#_numberOfLines
-     */
-    public int getNumberOfLines()
-    {
-        return _numberOfLines;
-    }
-
-    /**
-     * Write accessor (setter) for attribute _numberOfLines
-     * 
-     * @param x
-     *            new value for _numberOfLines
-     * @see StationModel#_numberOfLines
-     */
-    public void setNumberOfLines(int x)
-    {
-        _numberOfLines = x;
-    }
-
-    /**
-     * Write accessor (setter) for attribute _numberOfLines
-     * 
-     * @param a_String
-     *            new value for _numberOfLines as String
-     * @see StationModel#_numberOfLines
-     */
-    public void setNumberOfLines(String a_String)
-    {
-        _numberOfLines = Integer.parseInt(a_String);
-    }
-
-    /**
-     * Read accessor (getter) for attribute _endStationHeader
-     * 
-     * @return String
-     * @see StationModel#_endStationHeader
-     */
-    public String getEndStationHeader()
-    {
-        return _endStationHeader;
-    }
-
-    /**
-     * Write accessor (setter) for attribute _endStationHeader
-     * 
-     * @param a_String
-     *            new value for _endStationHeader
-     * @see StationModel#_endStationHeader
-     */
-    public void setEndStationHeader(String a_String)
-    {
-        _endStationHeader = a_String;
-    }
-
-    /**
-     * Read accessor (getter) for attribute _numberLinesBetweenStationData
-     * 
-     * @return int
-     * @see StationModel#_numberLinesBetweenStationData
-     */
-    public int getNumberLinesBetweenStationData()
-    {
-        return _numberLinesBetweenStationData;
-    }
-
-    /**
-     * Write accessor (setter) for attribute _numberLinesBetweenStationData
-     * 
-     * @param x
-     *            new value for _numberLinesBetweenStationData
-     * @see StationModel#_numberLinesBetweenStationData
-     */
-    public void setNumberLinesBetweenStationData(int x)
-    {
-        _numberLinesBetweenStationData = x;
-    }
-
-    /**
-     * Write accessor (setter) for attribute _numberLinesBetweenStationData
-     * 
-     * @param a_String
-     *            new value for _numberLinesBetweenStationData as String
-     * @see StationModel#_numberLinesBetweenStationData
-     */
-    public void setNumberLinesBetweenStationData(String a_String)
-    {
-        _numberLinesBetweenStationData = Integer.parseInt(a_String);
-    }
-
-    /**
-     * Read accessor (getter) for attribute _ref
-     * 
-     * @return int
-     * @see StationModel#_ref
-     */
-    public int getRef()
-    {
-        return _ref;
-    }
-
-    /**
-     * Write accessor (setter) for attribute _ref
-     * 
-     * @param x
-     *            new value for _ref
-     * @see StationModel#_ref
-     */
-    public void setRef(int x)
-    {
-        _ref = x;
-    }
-
-    /**
-     * Read accessor (getter) for attribute _rowNumber
-     * 
-     * @return int
-     * @see StationModel#_rowNumber
-     */
-    public int getRowNumber()
-    {
-        return _rowNumber;
-    }
-
-    /**
-     * Write accessor (setter) for attribute _rowNumber
-     * 
-     * @param x
-     *            new value for _rowNumber
-     * @see StationModel#_rowNumber
-     */
-    public void setRowNumber(int x)
-    {
-        _rowNumber = x;
-    }
-
-    /**
-     * Write accessor (setter) for attribute _rowNumber
-     * 
-     * @param a_String
-     *            new value for _rowNumber as String
-     * @see StationModel#_rowNumber
-     */
-    public void setRowNumber(String a_String)
-    {
-        try
-        {
-            setRowNumber(Integer.parseInt(a_String));
-        }
-        catch (Exception e)
-        {
-        }
-    }
-
-    /**
-     * Remove any link for role model
-     */
-    private void releaseModel()
-    {
-        setModel(null);
-    }
-
-    /**
-     * returns the linked object for role <% aRole name%>
-     * 
-     * @return the object linked
-     */
-    public Station getModel()
-    {
-        return _model;
-    }
-
-    /**
-     * Create a new link with x for role model
-     * 
-     * @param x
-     *            the object to link with
-     */
-    public void setModel(Station x)
-    {
-        if (_model == x)
-            return;
-        _model = x;
-    }
-
-    /**
-     * Remove any link for role Trajectory
-     */
-    private void releaseTrajectory()
-    {
-        setTrajectory(null);
-    }
-
-    /**
-     * returns the linked object for role <% aRole name%>
-     * 
-     * @return the object linked
-     */
-    public Trajectory getTrajectory()
-    {
-        return _trajectory;
-    }
-
-    /**
-     * Create a new link with x for role model
-     * 
-     * @param x
-     *            the object to link with
-     */
-    public void setTrajectory(Trajectory x)
-    {
-        if (_trajectory == x)
-            return;
-        _trajectory = x;
-    }
-
-    /**
-     * Remove any link for role referenceProperty
-     */
-    private void releaseReferenceProperty()
-    {
+    private void releaseReferenceProperty(){
         if (_referenceProperty != null)
             _referenceProperty.release();
         setReferenceProperty(null);
     }
 
+
     /**
-     * returns the linked object for role <% aRole name%>
-     * 
-     * @return the object linked
+     * Getter pour _referenceProperty.
+     * @return PropertyModel
+     * @see StationModel.java#_referenceProperty
      */
-    public PropertyModel getReferenceProperty()
-    {
+    public PropertyModel getReferenceProperty(){
         return _referenceProperty;
     }
 
     /**
-     * Create a new link with x for role referenceProperty
-     * 
-     * @param x
-     *            the object to link with
+     * Setter pour _referenceProperty
+     * @param x : nouvelle valeur pour _referenceProperty
+     * @see StationModel.java#_referenceProperty
      */
-    public void setReferenceProperty(PropertyModel x)
-    {
+    public void setReferenceProperty(PropertyModel x){
         if (_referenceProperty == x)
             return;
         _referenceProperty = x;
     }
 
     /**
-     * release all links for role "properties"
+     * Getter pour _properties.
+     * @return PropertyModel[] : le tableau des PropertyModel
+     * @see StationModel.java#_properties
      */
-    private void releaseProperties()
-    {
-        for (PropertyModel t : getProperties())
-        {
-            t.release();
-            removeProperty(t);
-        }
-    }
-
-    /**
-     * remove link with x for role "properties"
-     * 
-     * @param x
-     *            the linked object to unlink
-     */
-    public void removeProperty(PropertyModel x)
-    {
-        if (!propertiesIncludes(x))
-            return;
-        nocheckRemoveProperty(x);
-    }
-
-    /**
-     * Add a link for role "properties"
-     * 
-     * @param x
-     *            the object to link with
-     */
-    public void addProperty(PropertyModel x)
-    {
-        if (propertiesIncludes(x))
-            return;
-        nocheckAddProperty(x);
-    }
-
-    /**
-     * Returns the collection of linked objects for role "properties"
-     * 
-     * @return Array of linked objects
-     */
-    public PropertyModel[] getProperties()
-    {
+    public PropertyModel[] getProperties(){
         PropertyModel[] v = new PropertyModel[_properties.size()];
         _properties.values().toArray(v);
         return v;
     }
+    
+    public PropertyModel getProperty(String name){
+        PropertyModel property = null;
+        for (PropertyModel p : getProperties()){
+            if (p.getProperty().equals(name)){
+                property = p;
+                break;
+            }
+        }
+        return property;
+    }
 
     /**
-     * Returns linked object for role "properties" at index i
-     * 
-     * @param i
-     *            the index of the linked object
-     * @return linked object at index i
+     * Renvoit le PropertyModel trouvé à l'index i de _properties
+     * @param i : index
+     * @return PropertyModel
+     * @see StationModel.java#_properties
      */
-    public PropertyModel propertiesAt(String i)
-    {
+    public PropertyModel propertiesAt(String i){
         return _properties.get(i);
     }
 
     /**
-     * remove x from the linked objects for role "properties" DO NOT USE. use
-     * non privileged method instead
-     * 
-     * @param x
-     *            the object to link with
-     * @see StationModel#removeProperty(PropertyModel)
+     * Supprime x de _properties
+     * @param x : PropertyModel à supprimer
+     * @see StationModel.java#_properties
      */
-    protected void nocheckRemoveProperty(PropertyModel x)
-    {
-        _properties.remove(x.getProperty());
+    public void removeProperty(PropertyModel x){
+        if (_properties.containsKey(x.getProperty()))
+            _properties.remove(x.getProperty());
     }
 
     /**
-     * adds x to the linked objects for role "properties" DO NOT USE. use non
-     * privileged method instead
-     * 
-     * @param x
-     *            the object to link with
-     * @see StationModel#addProperty(PropertyModel)
+     * Ajoute x à _properties
+     * @param x : PropertyModel à ajouter
+     * @see StationModel.java#_properties
      */
-    protected void nocheckAddProperty(PropertyModel x)
-    {
-        _properties.put(x.getProperty(), x);
+    public void addProperty(PropertyModel x){
+        if (!_properties.containsKey(x.getProperty()))
+            _properties.put(x.getProperty(), x);
     }
+    
 
     /**
-     * returns the number of linked objects for role "properties"
-     * 
-     * @return the number of linked objects
+     * Getter pour _dataType.
+     * @return DataType
+     * @see StationModel.java#_dataType
      */
-    public int propertiesSize()
-    {
-        return _properties.size();
+    public DataType getDataType(){
+        return _dataType;
     }
 
     /**
-     * returns true if x is linked to the receiver for role "properties"
-     * 
-     * @param x
-     *            an instance of PropertyModel
+     * Setter pour _dataType
+     * @param dataType : nouvelle valeur pour dataType
+     * @see StationModel.java#_dataType
      */
-    public boolean propertiesIncludes(PropertyModel x)
-    {
-        return _properties.containsKey(x.getProperty());
+    public void setDataType(DataType dataType){
+        _dataType = dataType;
     }
 
     /**
-     * returns an Iterator to iterate over the elements of "properties"
+     * Getter pour _flagTable.
+     * @return FlagTable
+     * @see StationModel.java#_flagTable
      */
-    public java.util.Iterator<PropertyModel> propertiesIterator()
-    {
-        return _properties.values().iterator();
-
-    }
-
-    /**
-     * Remove any link for role timeSeriesModel
-     */
-    private void releaseTimeSeriesModel()
-    {
-        if (_timeSeriesModel != null)
-            _timeSeriesModel.release();
-        setTimeSeriesModel(null);
-    }
-
-    /**
-     * returns the linked object for role <% aRole name%>
-     * 
-     * @return the object linked
-     */
-    public TimeSeriesModel getTimeSeriesModel()
-    {
-        return _timeSeriesModel;
-    }
-
-    /**
-     * Create a new link with x for role timeSeriesModel
-     * 
-     * @param x
-     *            the object to link with
-     */
-    public void setTimeSeriesModel(TimeSeriesModel x)
-    {
-        if (_timeSeriesModel == x)
-            return;
-        TimeSeriesModel old = _timeSeriesModel;
-        if (_timeSeriesModel != null)
-        {
-            _timeSeriesModel = null;
-            old.setStationModel(null);
-        }
-        _timeSeriesModel = x;
-        if (x != null)
-        {
-            x.setStationModel(this);
-        }
-    }
-
-    /**
-     * release all links for role "parameterModels"
-     */
-    public void releaseParameterModels()
-    {
-        for (ParameterModel t : getParameterModels())
-        {
-            t.release();
-            removeParameterModel(t);
-        }
-    }
-
-    /**
-     * release all links for role "parameterModels"
-     */
-    private void releaseAddedParameterModels()
-    {
-        for (ParameterModel t : getOdvParameterModels())
-        {
-            t.release();
-            if (_odvParameterModels.contains(t))
-                _odvParameterModels.remove(t);
-        }
-
-        for (ParameterModel t : getMedParameterModels())
-        {
-            t.release();
-            if (_medParameterModels.contains(t))
-                _medParameterModels.remove(t);
-        }
-    }
-
-    /**
-     * remove link with x for role "parameterModels"
-     * 
-     * @param x
-     *            the linked object to unlink
-     */
-    public void removeParameterModel(ParameterModel x)
-    {
-        if (!parameterModelsIncludes(x))
-            return;
-        nocheckRemoveParameterModel(x);
-    }
-
-    /**
-     * Add a link for role "parameterModels"
-     * 
-     * @param x
-     *            the object to link with
-     */
-    public void addParameterModel(ParameterModel x)
-    {
-        if (parameterModelsIncludes(x))
-            return;
-        nocheckAddParameterModel(x);
-    }
-
-    /**
-     * Returns the collection of linked objects for role "parameterModels"
-     * 
-     * @return Array of linked objects
-     */
-    public ParameterModel[] getParameterModels()
-    {
-        ParameterModel[] v = new ParameterModel[_parameterModels.size()];
-        _parameterModels.toArray(v);
-        return v;
-    }
-
-    /**
-     * Returns linked object for role "parameterModels" at index i
-     * 
-     * @param i
-     *            the index of the linked object
-     * @return linked object at index i
-     */
-    public ParameterModel parameterModelsAt(int i)
-    {
-        return _parameterModels.get(i);
-    }
-
-    public void addOdvParameterModel(ParameterModel x)
-    {
-        if (_odvParameterModels.contains(x))
-            return;
-        _odvParameterModels.add(x);
-        ;
-    }
-
-    public ParameterModel[] getOdvParameterModels()
-    {
-        ParameterModel[] v = new ParameterModel[_odvParameterModels.size()];
-        _odvParameterModels.toArray(v);
-        return v;
-    }
-
-    public void addMedParameterModel(ParameterModel x)
-    {
-        if (_medParameterModels.contains(x))
-            return;
-        _medParameterModels.add(x);
-        ;
-    }
-
-    public ParameterModel[] getMedParameterModels()
-    {
-        ParameterModel[] v = new ParameterModel[_medParameterModels.size()];
-        _medParameterModels.toArray(v);
-        return v;
-    }
-
-    public ParameterModel getAddedParameterModel(IdParameter idParam)
-    {
-        ParameterModel param = null;
-        for (ParameterModel current : _medParameterModels)
-        {
-            if (current.getModel().getCode().equals(idParam.toString()))
-            {
-                param = current;
-                break;
-            }
-        }
-        if (param == null)
-        {
-            for (ParameterModel current : _odvParameterModels)
-            {
-                if (current.getModel().getCode().equals(idParam.toString()))
-                {
-                    param = current;
-                    break;
-                }
-            }
-        }
-        return param;
-    }
-
-    public void setAddedParameterModel()
-    {
-        // reset systematique des parametres stockes dans le dataModel
-        releaseAddedParameterModels();
-
-        // *** Ajouts automatiques de certains paramètres
-        boolean existDEPH = false;
-        String formatPRES = Global.EMPTY_STRING;
-        for (ParameterModel param : getParameterModels())
-        {
-            if (param.getModel().getCode().equals(IdParameter.DEPH.toString()))
-                existDEPH = true;
-            if (param.getModel().getCode().equals(Intern.paramPRES))
-                formatPRES = param.getModel().getFormat();
-        }
-        if (isProfile())
-        {
-            // Profile vertical
-            if ((!existDEPH) && (_presIndex != -1))
-            {
-                // ajout de DEPH calculé à partir de PRES
-                // parameterModel.setFlag(stationModel.parameterModelsAt(indexPRES).getFlag());
-                addFixedParameterModel(IdParameter.DEPH, formatPRES);
-            }
-        }
-        else
-        {
-            // Serie temporelle ou Trajectoire
-            // Ajout YEAR, MNTH, DAYX et TIME pour Medatlas
-            addFixedParameterModel(IdParameter.YEAR);
-            addFixedParameterModel(IdParameter.MNTH);
-            addFixedParameterModel(IdParameter.DAYX);
-            addFixedParameterModel(IdParameter.TIME);
-
-            if (isTimeSeries())
-            {
-                // Ajout de "Chronological Julian Date" ou "time-ISO8601 pour
-                // ODV
-                if (Utils.configuration.isDateISO())
-                {
-                    addFixedParameterModel(IdParameter.DTUT);
-                }
-                else
-                {
-                    addFixedParameterModel(IdParameter.CJDY);
-                }
-
-                // Serie temporelle
-                // Ajout du paramètre DEPH ( = Sensor Depth) pour ODV
-                if (!existDEPH)
-                    addFixedParameterModel(IdParameter.DEPH);
-            }
-            else
-            {
-                // Trajectoire
-                // Ajout LATX et LONX pour Medatlas
-                addFixedParameterModel(IdParameter.LATX);
-                addFixedParameterModel(IdParameter.LONX);
-
-                if (ViewMain.editStationForm.depth.getValue() != null
-                        && !ViewMain.editStationForm.depth.getValue().trim()
-                            .equals(Global.EMPTY_STRING)
-                        && ViewMain.editStationForm.depth.isInData())
-                {
-                    // Ajout BATH si "Pofondeur" saisie dans les données pour
-                    // Medatlas
-                    addFixedParameterModel(IdParameter.BATH);
-                }
-
-                // Ajout du paramètre DEPH ( = Sensor Depth) pour ODV
-                if (!existDEPH)
-                    addFixedParameterModel(IdParameter.DEPH);
-
-            }
-        }
-    }
-
-    private void addFixedParameterModel(IdParameter code)
-    {
-        addFixedParameterModel(code, null);
-    }
-
-    private void addFixedParameterModel(IdParameter code, String formatPRES)
-    {
-
-        AddedParameter para = new AddedParameter(code, formatPRES, _inputType);
-        ParameterModel parameterModel = new ParameterModel();
-        parameterModel.setModel(para);
-
-        PropertyModel propertyModel = para.getPropertyModel(this);
-        if (propertyModel != null)
-        {
-            // fragment du parametre
-            HeaderFragment headFrag = propertyModel.getFragment();
-            if (headFrag != null)
-            {
-                LineFragment frag = new LineFragment();
-                frag.setFirstCharOffset(headFrag.getFirstCharOffset());
-                frag.setLastCharOffset(headFrag.getLastCharOffset());
-                parameterModel.setFragment(frag);
-            }
-        }
-
-        switch (para.getCible())
-        {
-            case ODV:
-                if (!_odvParameterModels.contains(parameterModel))
-                    _odvParameterModels.add(parameterModel);
-            break;
-            case MEDATLAS:
-                if (!_medParameterModels.contains(parameterModel))
-                    _medParameterModels.add(parameterModel);
-            break;
-        }
-    }
-
-    /**
-     * returns index of object x in "parameterModels"
-     * 
-     * @param x
-     *            the linked object
-     */
-    public int parameterModelsIndexOf(ParameterModel x)
-    {
-        if (!parameterModelsIncludes(x))
-            return -1;
-        for (int i = 0; i < parameterModelsSize(); i++)
-        {
-            if (parameterModelsAt(i) == x)
-            {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    /**
-     * move x one index before in the list for role "parameterModels"
-     * 
-     * @param x
-     *            the object to move
-     */
-    public void parameterModelsMoveUp(ParameterModel x)
-    {
-        int index;
-        index = parameterModelsIndexOf(x);
-        if (index < 1)
-            return;
-        nocheckMoveParameterModelAt(x, index - 1);
-    }
-
-    /**
-     * move x to the top of list for role "parameterModels"
-     * 
-     * @param x
-     *            the object to move
-     */
-    public void parameterModelsMoveTop(ParameterModel x)
-    {
-        int index;
-        index = parameterModelsIndexOf(x);
-        if (index < 1)
-            return;
-        nocheckMoveParameterModelAt(x, 0);
-    }
-
-    /**
-     * move x one index more in the list for role "parameterModels"
-     * 
-     * @param x
-     *            the object to move
-     */
-    public void parameterModelsMoveDown(ParameterModel x)
-    {
-        int index;
-        index = parameterModelsIndexOf(x);
-        if (index < 0 || index > parameterModelsSize() - 2)
-            return;
-        nocheckMoveParameterModelAt(x, index + 1);
-    }
-
-    /**
-     * move x to the bottom of list for role "parameterModels"
-     * 
-     * @param x
-     *            the object to move
-     */
-    public void parameterModelsMoveBottom(ParameterModel x)
-    {
-        int index;
-        index = parameterModelsIndexOf(x);
-        if (index < 0 || index > parameterModelsSize() - 2)
-            return;
-        nocheckMoveParameterModelAt(x, parameterModelsSize() - 1);
-    }
-
-    /**
-     * move x one index more in the list for role "parameterModels"
-     * 
-     * @param x
-     *            the object to move
-     */
-    public void nocheckMoveParameterModelAt(ParameterModel x, int a_Index)
-    {
-        int index;
-        ParameterModel tmp;
-        index = parameterModelsIndexOf(x);
-        tmp = _parameterModels.get(index);
-        _parameterModels.remove(index);
-        _parameterModels.add(a_Index, tmp);
-    }
-
-    /**
-     * remove x from the linked objects for role "parameterModels" DO NOT USE.
-     * use non privileged method instead
-     * 
-     * @param x
-     *            the object to link with
-     * @see StationModel#removeParameterModel(ParameterModel)
-     */
-    protected void nocheckRemoveParameterModel(ParameterModel x)
-    {
-        _parameterModels.remove(x);
-    }
-
-    /**
-     * adds x to the linked objects for role "parameterModels" DO NOT USE. use
-     * non privileged method instead
-     * 
-     * @param x
-     *            the object to link with
-     * @see StationModel#addParameterModel(ParameterModel)
-     */
-    protected void nocheckAddParameterModel(ParameterModel x)
-    {
-        _parameterModels.add(x);
-    }
-
-    /**
-     * returns the number of linked objects for role "parameterModels"
-     * 
-     * @return the number of linked objects
-     */
-    public int parameterModelsSize()
-    {
-        return _parameterModels.size();
-    }
-
-    /**
-     * returns true if x is linked to the receiver for role "parameterModels"
-     * 
-     * @param x
-     *            an instance of ParameterModel
-     */
-    public boolean parameterModelsIncludes(ParameterModel x)
-    {
-        return _parameterModels.contains(x);
-    }
-
-    /**
-     * returns an Iterator to iterate over the elements of "parameterModels"
-     */
-    public java.util.Iterator<ParameterModel> parameterModelsIterator()
-    {
-        return _parameterModels.iterator();
-
-    }
-
-    /**
-     * Remove any link for role timestampModel
-     */
-    private void releaseTimestampModel()
-    {
-        if (_timestampModel != null)
-            _timestampModel.release();
-        setTimestampModel(null);
-    }
-
-    /**
-     * returns the linked object for role <% aRole name%>
-     * 
-     * @return the object linked
-     */
-    public HorodatedParameterModel getTimestampModel()
-    {
-        return _timestampModel;
-    }
-
-    /**
-     * Create a new link with x for role timestampModel
-     * 
-     * @param x
-     *            the object to link with
-     */
-    public void setTimestampModel(HorodatedParameterModel x)
-    {
-        if (_timestampModel == x)
-            return;
-        _timestampModel = x;
-    }
-
-    /**
-     * @param a_Reader
-     * @return String[]
-     * @exception java.io.IOException
-     */
-    public String[] consumeFooter(BufferedReader a_Reader) throws IOException
-    {
-        ViewMain.editConversionForm.incrementErreurLigne();
-        Vector<String> v = new Vector<String>();
-        for (int i = 0; i < _endData; i++)
-        {
-            String line = a_Reader.readLine();
-            ViewMain.editConversionForm.incrementErreurLigne();
-            ViewMain.editConversionForm.setErreurChaine(line);
-            if (line != null)
-            {
-                v.add(line);
-            }
-        }
-        String[] lines = new String[v.size()];
-        return v.toArray(lines);
-    }
-
-    /**
-     * @param a_Reader
-     * @return String[]
-     * @exception java.io.IOException
-     */
-    public String[] consumeHeader(BufferedReader a_Reader) throws IOException
-    {
-        Vector<String> v = new Vector<String>();
-        String line = null;
-        if (_endStationHeaderPattern)
-        {
-            if (!_endStationHeader.equals(Global.EMPTY_STRING))
-            {
-                boolean stop = false;
-                while (!stop)
-                {
-                    line = a_Reader.readLine();
-                    ViewMain.editConversionForm.incrementErreurLigne();
-                    ViewMain.editConversionForm.setErreurChaine(line);
-                    if (line != null)
-                    {
-                        v.add(line);
-                        if (line.startsWith(_endStationHeader))
-                        {
-                            stop = true;
-                        }
-                    }
-                    else
-                    {
-                        return null;
-                    }
-                }
-            }
-            for (int i = 0; i < _numberLinesBetweenStationData; i++)
-            {
-                line = a_Reader.readLine();
-                ViewMain.editConversionForm.incrementErreurLigne();
-                ViewMain.editConversionForm.setErreurChaine(line);
-                v.add(line);
-            }
-        }
-        else
-        {
-            for (int i = 0; i < _numberOfLines; i++)
-            {
-                line = a_Reader.readLine();
-                ViewMain.editConversionForm.incrementErreurLigne();
-                ViewMain.editConversionForm.setErreurChaine(line);
-                v.add(line);
-            }
-        }
-
-        String[] lines = new String[v.size()];
-        return v.toArray(lines);
-    }
-
-    /**
-     * @param a_Reader
-     * @return String[]
-     * @exception java.io.IOException
-     */
-    public String[] consumeHeaderPlusOne(BufferedReader a_Reader)
-            throws IOException
-    {
-        ViewMain.editConversionForm.setErreurLigne(0);
-        Vector<String> v = new Vector<String>();
-        String line = null;
-
-        String[] headerLines = consumeHeader(a_Reader);
-        if (headerLines != null)
-        {
-            for (String headerLine : headerLines)
-            {
-                v.add(headerLine);
-            }
-        }
-        else
-        {
-            return null;
-        }
-
-        line = a_Reader.readLine();
-        ViewMain.editConversionForm.incrementErreurLigne();
-        ViewMain.editConversionForm.setErreurChaine(line);
-        v.add(line);
-
-        String[] lines = new String[v.size()];
-        return v.toArray(lines);
-    }
-
-    /**
-     * @param a_Reader
-     * @param a_Filename
-     * @param a_RefDate
-     * @param a_Notifier
-     * @return Station
-     * @exception Exception
-     */
-    public Station convert(BufferedReader a_Reader, String a_Filename,
-    /*long a_RefDate,*/
-    IProgressMonitor a_monitor, SizeBasedProgressNotifier a_Notifier)
-            throws InterruptedException, Exception
-    {
-
-// System.out.println("StationModel - convert : START at " + new Date());
-
-        if (a_monitor.isCanceled())
-        {
-            // demande d'annulation
-            throw new InterruptedException(Global.EMPTY_STRING);
-        }
-
-        Station station = null;
-        String[] header = null;
-
-        station = (Station) _model.clone();
-        station.setMetaFlags(new HashMap<String, String>());
-
-        // Marquage du fichier au debut
-        a_Reader.mark(getTaille());
-
-        if (ViewMain.editStationForm.someInData())
-        {
-            header = consumeHeaderPlusOne(a_Reader);
-        }
-        else
-        {
-            header = consumeHeader(a_Reader);
-        }
-
-        if (header != null && (header.length > 0 && header[0] != null))
-        {
-            // STATION NUMBER
-            if (getReferenceProperty().isUserProvided())
-            {
-                // saisie manuelle
-                if (_inputType.equals(Global.TRAJECTORY))
-                {
-                    // Trajectoire : saisie fixe
-                    station.setReference(_trajectory.getStationNumber());
-                }
-                else
-                {
-                    // incrementation du numéro
-                    station.setReference(Integer.toString(_ref++));
-                }
-            }
-            else
-            {
-                // Fixed position
-                if (getReferenceProperty().getFragment().getFirstLine() == 0
-                        && (a_Filename != null))
-                {
-                    // dans le nom du fichier
-                    if (ViewMain.collectionCasN)
-                    {
-                        String[] filename =
-                            DataModel.singleSurvey.getFile().split(File.separator);
-                        getReferenceProperty().applyOn(station,
-                            new String[] {filename[filename.length - 1]});
-                    }
-                    else
-                        getReferenceProperty().applyOn(station,
-                            new String[] {a_Filename});
-                }
-                else
-                {
-                    // dans le Header
-                    getReferenceProperty().applyOn(station, header);
-                }
-            }
-
-            // récupération les propriétés de l'entête de station
-            for (PropertyModel m : getProperties())
-            {
-                if (!m.isToCompute())
-                {
-                    m.applyOn(station, header);
-                    addFlag(m, station, header);
-                }
-            }
-            if (_timeSeriesModel != null)
-            {
-                _timeSeriesModel.convert(station, _inputType, header);
-            }
-
-            // Retour au debut du fichier et depassement du header
-            a_Reader.reset();
-            ViewMain.editConversionForm.setErreurLigne(0);
-            consumeHeader(a_Reader);
-
-            convertParameters(a_Reader, station, /*a_RefDate,*/a_monitor,
-                a_Notifier);
-
-            // récupération des propriétés "de fin" de l'entête de station
-            // volontairement après la récupération des paramètres
-
-            // DATE / TIME
-            if ((_inputType.equals(Global.TIMESERIES) && Float.isNaN(station
-                .getTimeSeriesInformation().getEndDate()))
-                    || (_inputType.equals(Global.TRAJECTORY)))
-            {
-                _timeSeriesModel.computeEndDate(station);
-            }
-
-            if (_inputType.equals(Global.TRAJECTORY))
-            {
-                // récupération de la valeur du paramètre correspondant sur la
-                // dernière ligne de données
-                // FAE 1690 : _rowNumber toujours à zéro / changement de
-                // idxLastLine
-                int idxLastLine =
-                    station.parametersAt(0).getModel().valuesSize() - 1;
-                // LATX
-                station.getTimeSeriesInformation().setEndLatitude(
-                    station
-                        .getVariant(idxLastLine, IdParameter.LATX.toString()));
-                // LONX
-                station.getTimeSeriesInformation().setEndLongitude(
-                    station
-                        .getVariant(idxLastLine, IdParameter.LONX.toString()));
-                // DEPTH
-                if (ViewMain.editStationForm.depth.isInData())
-                {
-                    station.getTimeSeriesInformation().setEndDepth(
-                        station.getVariant(idxLastLine, IdParameter.BATH
-                            .toString()));
-                }
-
-            }
-
-            consumeFooter(a_Reader);
-
-            // GLOBAL QC
-            station.constructGlobalParametersQC();
-            station.constructGlobalProfileQC();
-
-// System.out.println("StationModel - convert : END   at " + new Date());
-            return station;
-        }
-
-// System.out.println("StationModel - convert(null) : END   at " + new Date());
-        return null;
-    }
-
-    /**
-     * @param a_Reader
-     * @param a_Station
-     * @param isRefDateBased
-     * @param a_RefDate
-     * @param a_Notifier
-     * @exception IOException
-     * @exception ParseException
-     */
-    public void convertParameters(BufferedReader a_Reader, Station a_Station,
-            IProgressMonitor a_monitor, SizeBasedProgressNotifier a_Notifier)
-            throws IOException, ParseException, InterruptedException, Exception
-    {
-
-        if (a_monitor.isCanceled())
-        {
-            // demande d'annulation
-            throw new InterruptedException(Global.EMPTY_STRING);
-        }
-
-        long rate = 0;
-        if ((_inputType.equals(Global.TIMESERIES))
-                || (_inputType.equals(Global.TRAJECTORY)))
-        {
-            rate =
-                _timeSeriesModel.calculSamplingRate(a_Station
-                    .getTimeSeriesInformation());
-        }
-
-        int index = 0;
-        try
-        {
-            // recopie des listes de parameters
-            for (ParameterModel pm : _parameterModels)
-            {
-                a_Station.addParameter((ParameterModel) pm.clone());
-            }
-            for (ParameterModel odvpm : _odvParameterModels)
-            {
-                a_Station.addOdvParameter((ParameterModel) odvpm.clone());
-            }
-            for (ParameterModel medpm : _medParameterModels)
-            {
-                a_Station.addMedParameter((ParameterModel) medpm.clone());
-            }
-
-            AddedParameter addedParam = null;
-            Parameter param = null;
-
-            String line = null;
-            long size = 0;
-            for (index = 0; (line = a_Reader.readLine()) != null
-                    && !(_endOnEmptyLine && line.trim().matches("^$"))
-                    && (!(_endOnPattern && (line.matches("^" + _endDataPattern
-                            + "$") || line.startsWith(_endDataPattern))))
-                    || (index < _rowNumber); index++)
-            {
-
-                // FAE 1738 : ajout d'un indicateur "prochaine station"
-                if (_model != null)
-                { // pour ne pas faire le test sur la 1ère ligne de la station
-                    if (_endOnNextStation && index > 0
-                            && line.startsWith(_endDataPattern))
-                    {
-                        a_Reader.reset();
-                        break;
-                    }
-                }
-
-                if (a_monitor.isCanceled())
-                {
-                    // demande d'annulation
-                    throw new InterruptedException(Global.EMPTY_STRING);
-                }
-
-                size += line.length();
-                a_Reader.mark(Integer.parseInt((String.valueOf(size))));
-
-                a_Notifier.progress(size);
-
-                ViewMain.editConversionForm.incrementErreurLigne();
-                ViewMain.editConversionForm.setErreurChaine(line);
-
-                for (ParameterModel paramModel : a_Station.getParameters())
-                {
-                    param = paramModel.getModel();
-                    ParameterValue value = null;
-
-                    // Horodate value
-                    if ((_inputType.equals(Global.TIMESERIES))
-                            || (_inputType.equals(Global.TRAJECTORY)))
-                    {
-                        HorodatedValue hValue = new HorodatedValue();
-                        if (_timestampModel.isComputed())
-                        {
-                            hValue.setDate(a_Station.getFullDate()
-                                    + (index * rate));
-                        }
-                        else
-                        {
-                            long time =
-                                _timestampModel
-                                    .convertTimestamp(line/*, a_RefDate*/);
-                            hValue.setDate(a_Station.getGMTDate(time));
-
-                            // FAE086 START
-                            if (a_Station.getTimeSeriesInformation()
-                                .getSamplingRate() == 0)
-                            {
-                                long ecart =
-                                    (time - a_Station.getFullDate()) / 1000;
-                                if (ecart > 0)
-                                {
-                                    a_Station.getTimeSeriesInformation()
-                                        .setSamplingRate(ecart);
-                                }
-                            }
-                            // FAE086 END
-                        }
-                        value = hValue;
-                    }
-                    else
-                    {
-                        value = new ParameterValue();
-                    }
-
-                    value = paramModel.convert(line, value, getFlagTable());
-                    param.addValue(value);
-                }
-
-                // renseignement des valeurs des paramètres ajoutés
-                // ODV
-                for (ParameterModel paramModel : a_Station.getOdvparameters())
-                {
-                    addedParam = (AddedParameter) paramModel.getModel();
-                    ParameterValue value = new ParameterValue();
-                    value =
-                        paramModel.convertAdded(value, a_Station, _inputType,
-                            index, getPresIndex(), line);
-                    addedParam.addValue(value);
-                }
-
-                // MEDATLAS
-                for (ParameterModel paramModel : a_Station.getMedparameters())
-                {
-                    addedParam = (AddedParameter) paramModel.getModel();
-                    ParameterValue value = new ParameterValue();
-                    value =
-                        paramModel.convertAdded(value, a_Station, _inputType,
-                            index, getPresIndex(), line);
-                    addedParam.addValue(value);
-                }
-            }
-        }
-        catch (NumberFormatException e)
-        {
-            throw new NumberFormatException(e.getMessage()
-                    + Messages.StationModel_1 + a_Station.getReference().trim()
-                    + Messages.StationModel_2 + (index + 1) + Global.RN);
-        }
-        catch (ParseException e)
-        {
-            throw new ParseException(e.getMessage() + Messages.StationModel_1
-                    + a_Station.getReference().trim() + Messages.StationModel_2
-                    + (index + 1) + Global.RN, 0);
-        }
-        catch (StringIndexOutOfBoundsException e)
-        {
-            throw new StringIndexOutOfBoundsException(Messages.StationModel_1
-                    + a_Station.getReference().trim() + Messages.StationModel_2
-                    + (index + 1) + Messages.StationModel_3);
-        }
-        catch (CloneNotSupportedException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * @return TimeSeriesInformation
-     */
-    public TimeSeriesInformation getTimeSeriesInformation()
-    {
-        return getModel().getTimeSeriesInformation();
-    }
-
-    /**
-     * @param path
-     *            the association path name
-     * @param a_URI
-     *            a_URI XML Namespace (SAX 2)
-     * @param a_LocalName
-     *            Tag name
-     * @param a_QName
-     *            Qualified tag name
-     * @param a_Attributes
-     *            XML Element attributes
-     * @return SAXConsumer
-     * @exception SAXException
-     */
-    public SAXConsumer handlePathElement(String path, String a_URI,
-            String a_LocalName, String a_QName, Attributes a_Attributes)
-            throws SAXException
-    {
-        SAXConsumer c = null;
-        if (path.equals("parameters"))
-        {
-            c =
-                ParameterModel.fromElement(a_URI, a_LocalName, a_QName,
-                    a_Attributes);
-            addParameterModel((ParameterModel) c);
-            return c;
-        }
-        if (path.equals("odvparameters"))
-        {
-            c =
-                ParameterModel.fromElement(a_URI, a_LocalName, a_QName,
-                    a_Attributes);
-            addParameterModel((ParameterModel) c);
-            return c;
-        }
-        if (path.equals("medparameters"))
-        {
-            c =
-                ParameterModel.fromElement(a_URI, a_LocalName, a_QName,
-                    a_Attributes);
-            addParameterModel((ParameterModel) c);
-            return c;
-        }
-        if (path.equals("properties"))
-        {
-            c =
-                PropertyModel.fromElement(a_URI, a_LocalName, a_QName,
-                    a_Attributes);
-            ((PropertyModel) c).setSource(_model);
-            addProperty((PropertyModel) c);
-            return c;
-        }
-        if (path.equals("referenceProperty"))
-        {
-            c =
-                PropertyModel.fromElement(a_URI, a_LocalName, a_QName,
-                    a_Attributes);
-            ((PropertyModel) c).setSource(_model);
-            setReferenceProperty((PropertyModel) c);
-            return c;
-        }
-        return null;
-    }
-
-    /**
-	 * 
-	 */
-    public void initProperties()
-    {
-        try
-        {
-            setReferenceProperty(new PropertyModel("reference", _model));
-            addProperty(new PropertyModel("date", _model, new DateTimeFormat(
-                "dd/MM/yyyy")));
-            addProperty(new PropertyModel("time", _model, new DateTimeFormat(
-                "hh:mm AM")));
-            addProperty(new PropertyModel("offsetTU", _model, new FloatFormat(
-                "%4.1f")));
-            addProperty(new PropertyModel("latitude", _model,
-                new LatitudeFormat("NDD MM SS")));
-            addProperty(new PropertyModel("longitude", _model,
-                new LongitudeFormat("NDDD MM SS")));
-            addProperty(new PropertyModel("bottomDepth", _model,
-                new FloatFormat("%4.0f")));
-            addProperty(new PropertyModel("dcHistory1", _model));
-            addProperty(new PropertyModel("dcHistory2", _model));
-            addProperty(new PropertyModel("surfaceSamples1", _model));
-            addProperty(new PropertyModel("surfaceSamples2", _model));
-            addProperty(new PropertyModel("comment", _model));
-        }
-        catch (Exception e)
-        {
-        }
-    }
-
-    /**
-	 * 
-	 */
-    public void initRef()
-    {
-        if (_ref == -1)
-            _ref = getIncrementNumber();
-    }
-
-    public void resetRef()
-    {
-        _ref = -1;
-    }
-
-    public int getTaille()
-    {
-        return _taille;
-    }
-
-    public void setTaille(int _taille)
-    {
-        this._taille = _taille;
-    }
-
-    public String getInputType()
-    {
-        return _inputType;
-    }
-
-    public void setInputType(String type)
-    {
-        _inputType = type;
-    }
-
-    public boolean isProfile()
-    {
-        return _inputType.equals(Global.PROFILE);
-    }
-
-    public boolean isTimeSeries()
-    {
-        return _inputType.equals(Global.TIMESERIES);
-    }
-
-    public boolean isTrajectory()
-    {
-        return _inputType.equals(Global.TRAJECTORY);
-    }
-
-    public int getPresIndex()
-    {
-        return _presIndex;
-    }
-
-    public void setPresIndex(int index)
-    {
-        _presIndex = index;
-    }
-
-    public FlagTable getFlagTable()
-    {
-        if (_flagTable != null)
-        {
+    public FlagTable getFlagTable(){
+        //if (_flagTable != null){
             return _flagTable;
-        }
-        else
-        {
-            return Utils.getBlankFlagTable();
-        }
+        //}
+        //return Utils.getBlankFlagTable();
     }
 
-    public void setFlagTable(FlagTable table)
-    {
-        _flagTable = table;
+    /**
+     * Setter pour _flagTable
+     * @param x : nouvelle valeur pour _flagTable
+     * @see StationModel.java#_flagTable
+     */
+    public void setFlagTable(FlagTable x){
+        _flagTable = x;
     }
-
-    public void addFlag(PropertyModel pm, Station station, String[] a_Header)
-    {
-        if (pm.getFlag() != null)
-        {
-            if (station.getMetaFlags() == null)
-            {
-                station.setMetaFlags(new HashMap<String, String>());
-            }
-            // Lecture du flag dans le fichier en entree
-            String value = pm.getFlag().retreive(a_Header).trim();
-
-            // Correspondance SDN
-            if (getFlagTable() == null)
-            {
-                setFlagTable(new FlagTable(Utils.getBlankFlagTable()));
-            }
-            value = getFlagTable().getFlagSDN(value);
-
-            // AJout dans la liste des flags de metadonnees
-            String property = pm.getProperty();
-            if (property.equals(NemoSection.S_DATE)
-                    || property.equals(NemoSection.S_TIME))
-            {
-                property = Global.DATETIME;
-            }
-            if (property.equals(NemoSection.S_EDATE)
-                    || property.equals(NemoSection.S_ETIME))
-            {
-                property = Global.ENDDATETIME;
-            }
-            station.getMetaFlags().put(property, value);
-        }
-    }
-
-    public void addCalculateFlag(Station station, String id, String initial1,
-            String initial2)
-    {
-        String flag1 = station.getMetaFlag(initial1);
-        String flag2 = station.getMetaFlag(initial2);
-        String value;
-
-        if (flag1.equals(Global.ZERO))
-        {
-            value = flag1;
-        }
-        else if (flag2.equals(Global.ZERO))
-        {
-            value = flag2;
-        }
-        else if (flag1.compareTo(flag2) > 0)
-        {
-            value = flag2;
-        }
-        else
-        {
-            value = flag1;
-        }
-
-        station.getMetaFlags().put(id, value);
-
-    }
-
-    public String getSeparator()
-    {
-        return _separator;
-    }
-
-    public void setSeparator(String _separator)
-    {
-        this._separator = _separator;
-    }
-} /* End of class: StationModel */
+}

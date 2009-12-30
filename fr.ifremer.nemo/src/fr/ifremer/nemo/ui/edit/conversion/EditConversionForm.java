@@ -2,8 +2,6 @@ package fr.ifremer.nemo.ui.edit.conversion;
 
 import java.io.File;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Map.Entry;
 
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -20,16 +18,16 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ListDialog;
 
-import fr.ifremer.nemo.config.Configuration;
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.domain.DataType;
-import fr.ifremer.nemo.domain.Survey;
+import fr.ifremer.nemo.domain.CruiseDomain;
+import fr.ifremer.nemo.input.CruiseModel;
+import fr.ifremer.nemo.input.DataType;
 import fr.ifremer.nemo.output.CDIResumeWriter;
 import fr.ifremer.nemo.output.ProgressNotification;
 import fr.ifremer.nemo.ui.ApplicationActionBarAdvisor;
 import fr.ifremer.nemo.ui.SWTProgress;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.edit.DataModel;
 import fr.ifremer.nemo.ui.edit.EditForm;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.ui.view.ViewMain;
@@ -45,7 +43,7 @@ public class EditConversionForm extends EditForm
     public String nomFichierSortie, nomDossierSortie, nomHorsPrefix;
     public ProgressNotification notifier;
 
-    private String _dataSetRef;
+    //private String _dataSetRef;
 
     /**
      * Nom du fichier lu à retourner en cas d'erreur
@@ -70,8 +68,8 @@ public class EditConversionForm extends EditForm
     /**
      * Liste des stations triees
      */
-    protected LinkedHashMap<String, Integer> _sortedStations =
-        new LinkedHashMap<String, Integer>();
+    /*protected LinkedHashMap<String, Integer> _sortedStations =
+        new LinkedHashMap<String, Integer>();*/
 
     /**
      * messages d'avertissement de formats grisés car données non conformae
@@ -114,22 +112,22 @@ public class EditConversionForm extends EditForm
                         }
 
                         // RaZ
-                        setDataSetRef(Global.EMPTY_STRING);
+                        Nemo.getInstance().getDomain().getCruise().setDataSetRef(Global.EMPTY_STRING);
                         Utils.messageErreur(Global.EMPTY_STRING);
                         // -- du numéro de station incrémenté
-                        DataModel.stationModel.resetRef();
+                        //DataModel.stationModel.resetRef();
                         // -- de la liste des stations triées
-                        getSortedStations().clear();
+                        //getSortedStations().clear();
 
                         // *** Ajouts automatiques de certains paramètres
-                        DataModel.stationModel.setAddedParameterModel();
+                        //DataModel.stationModel.setAddedParameterModel();
 
                         // type de la conversion
                         Conversion formatConversion = Conversion.MEDATLAS;
                         if (ViewMain.radODV.getSelection()){
                             formatConversion = Conversion.ODV;
                         }
-                        NemoLists.writeSdnParameters(formatConversion);
+                        //NemoLists.writeSdnParameters(formatConversion);
 
                         if (ViewMain.editFileForm.okApresReset
                                 && ViewMain.editCruiseForm.okApresReset
@@ -145,7 +143,7 @@ public class EditConversionForm extends EditForm
 
                             // On demande les infos pour faire le résumé CDI,
                             // qui sera fait plus tard
-                            if (Utils.configuration.isWriteCdi()){
+                            if (Nemo.getInstance().getConfig().isWriteCdi()){
                                 CDIResumeWriter.getInstance().reset();
                                 CDIResumeWriter.getInstance().choixFichierSortie();
                             }
@@ -153,7 +151,7 @@ public class EditConversionForm extends EditForm
                             // test pour savoir si on est en campagne ou pas
                             if (ViewMain.isCollection()){
                                 DataType dt = askDataType();
-                                DataModel.stationModel.getModel().setDataType(dt);
+                                Nemo.getInstance().getDomain().getCruise().getStation().getModel().setDataType(dt);
                                 choixDossierSortie();
                             }
                             else if (ViewMain.radODV.getSelection()
@@ -280,7 +278,7 @@ public class EditConversionForm extends EditForm
             String[] extensions = new String[1];
             extensions[0] = Global.STAR + Global.EXT_TXT;
             dialog.setFilterExtensions(extensions);
-
+/*
             Survey survey = null;
             if (DataModel.singleSurvey != null){
                 survey = DataModel.singleSurvey.getModel();
@@ -288,6 +286,7 @@ public class EditConversionForm extends EditForm
             else if (DataModel.dirSurvey != null){
                 survey = DataModel.dirSurvey.getModel();
             }
+            
 
             if (survey != null){
                 String fileName = survey.getReference().trim();
@@ -297,6 +296,15 @@ public class EditConversionForm extends EditForm
                 fileName = Utils.validFileName(fileName);
                 dialog.setFileName(fileName);
             }
+*/
+            
+            CruiseModel cruiseModel = Nemo.getInstance().getDomain().getCruise().getModel();
+            String fileName = cruiseModel.getReference().trim();
+            if (fileName.equals(Global.EMPTY_STRING)){
+                fileName = cruiseModel.getName().trim();
+            }
+            fileName = Utils.validFileName(fileName);
+            dialog.setFileName(fileName);
         }
 
         // FAE45
@@ -349,6 +357,7 @@ public class EditConversionForm extends EditForm
                     choixFichierSortie();
                 }
             }
+            Nemo.getInstance().getDomain().getMedia().setOutputFileName(nomFichierSortie);
         }
     }
 
@@ -397,6 +406,7 @@ public class EditConversionForm extends EditForm
                     choixDossierSortie();
                 }
             }
+            Nemo.getInstance().getDomain().getMedia().setOutputFileName(nomDossierSortie);
         }
     }
 
@@ -427,7 +437,8 @@ public class EditConversionForm extends EditForm
             Utils.messageErreurAppend(messageErreur());
         }
 
-        // Stations triées
+        // TODO Stations triées
+        /*
         if (getSortedStations().size() > 0) {
             String sortedMessage =
                 "\n\n" + getSortedStations().size() + Global.SPACE //$NON-NLS-1$
@@ -444,6 +455,7 @@ public class EditConversionForm extends EditForm
             }
             Utils.messageOKAppend(sortedMessage);
         }
+        */
     }
 
     public String getErreurFichier()
@@ -493,7 +505,7 @@ public class EditConversionForm extends EditForm
         }
 
         if (getErreurLigne() != 0) {
-            if (getErreurLigne() <= DataModel.stationModel.getNumberOfLines()) {
+            if (getErreurLigne() <= Nemo.getInstance().getDomain().getMedia().getStationHeaderNumberLines()) {
                 // Si l'erreur se trouve dans l'en-tête de station, la ligne
                 // indiquée
                 // n'est pas forcément la bonne, il vaut mieux ne pas l'indiquer
@@ -518,7 +530,7 @@ public class EditConversionForm extends EditForm
         return message;
     }
 
-    public String getDataSetRef()
+    /*public String getDataSetRef()
     {
         return _dataSetRef;
     }
@@ -526,12 +538,19 @@ public class EditConversionForm extends EditForm
     public void setDataSetRef(String value)
     {
         _dataSetRef = value;
-    }
+    }*/
 
     public boolean askDataSetRef()
     {
-        if (getDataSetRef().equals(Global.EMPTY_STRING)) {
+        boolean asDataSetRef = false;
+        CruiseDomain cruiseDomain = Nemo.getInstance().getDomain().getCruise();
+        if (cruiseDomain.getDataSetRef().equals(Global.EMPTY_STRING)) {
             String strDefault = Global.EMPTY_STRING;
+            strDefault = cruiseDomain.getModel().getReference();
+            if (strDefault.equals(Global.EMPTY_STRING))
+                strDefault = cruiseDomain.getModel().getName();
+            
+            /*
             if (DataModel.dirSurvey != null) {
                 strDefault = DataModel.dirSurvey.getModel().getReference();
                 if (strDefault.equals(Global.EMPTY_STRING))
@@ -542,6 +561,7 @@ public class EditConversionForm extends EditForm
                 if (strDefault.equals(Global.EMPTY_STRING))
                     strDefault = DataModel.singleSurvey.getModel().getName();
             }
+            */
             InputDialog inputDataSetRef =
                 new InputDialog(PlatformUI.getWorkbench().getDisplay()
                     .getActiveShell(), Messages.CDIResumeWriter_idTitle,
@@ -549,22 +569,28 @@ public class EditConversionForm extends EditForm
             inputDataSetRef.open();
 
             if (inputDataSetRef.getReturnCode() == Window.OK) {
-                _dataSetRef = inputDataSetRef.getValue();
-                return true;
-            } // else {
-            _dataSetRef = Global.EMPTY_STRING;
-            return false;
-            // }
+                cruiseDomain.setDataSetRef(inputDataSetRef.getValue());
+                asDataSetRef = true;
+                //_dataSetRef = inputDataSetRef.getValue();
+                //return true;
+            }
+            else {
+                cruiseDomain.setDataSetRef(Global.EMPTY_STRING);
+                asDataSetRef = false;
+                //_dataSetRef = Global.EMPTY_STRING;
+                //return false;
+            }
         }
-        // else
-        // {
-        return true;
-        // }
+        else{
+            asDataSetRef = true;
+            //return true;
+        }
+        return asDataSetRef;
     }
 
     public void definePrefixDossier()
     {
-        if (Configuration.getSingleton().isWriteMapping()) {
+        if (Nemo.getInstance().getConfig().isWriteMapping()) {
             String cheminComplet;
             Boolean modeDossier = false;
 
@@ -627,34 +653,34 @@ public class EditConversionForm extends EditForm
         boolean blnOK = true;
         String message = Messages.CDIResumeWriter_configMessage;
 
-        if (Utils.configuration.getIdEdmoRespCdi().trim().equals(
+        if (Nemo.getInstance().getConfig().getIdEdmoRespCdi().trim().equals(
             Global.EMPTY_STRING)) {
             message += Global.RN + Global.SEP + Messages.settings_EDMOauthor;
             blnOK = false;
         }
 
-        if (Utils.configuration.isWriteCdi()) {
-            if (Utils.configuration.getCodeEdmoDonnees().trim().equals(Global.EMPTY_STRING)) {
+        if (Nemo.getInstance().getConfig().isWriteCdi()) {
+            if (Nemo.getInstance().getConfig().getCodeEdmoDonnees().trim().equals(Global.EMPTY_STRING)) {
                 message += Global.RN + Global.SEP + Messages.settings_EDMOori;
                 blnOK = false;
             }
 
-            if (Utils.configuration.getIdEdmoRespDonnees().trim().equals(Global.EMPTY_STRING)) {
+            if (Nemo.getInstance().getConfig().getIdEdmoRespDonnees().trim().equals(Global.EMPTY_STRING)) {
                 message += Global.RN + Global.SEP + Messages.settings_EDMOcustodian;
                 blnOK = false;
             }
 
-            if (Utils.configuration.getIdEdmoDistDonnees().trim().equals(Global.EMPTY_STRING)) {
+            if (Nemo.getInstance().getConfig().getIdEdmoDistDonnees().trim().equals(Global.EMPTY_STRING)) {
                 message += Global.RN + Global.SEP + Messages.settings_EDMOdist;
                 blnOK = false;
             }
 
-            if (Utils.configuration.getCdiURL().trim().equals(Global.EMPTY_STRING)) {
+            if (Nemo.getInstance().getConfig().getCdiURL().trim().equals(Global.EMPTY_STRING)) {
                 message +=  Global.RN + Global.SEP + Messages.settings_dataDist_web;
                 blnOK = false;
             }
 
-            if (Utils.configuration.getCdiMethod().trim().equals(Global.EMPTY_STRING)) {
+            if (Nemo.getInstance().getConfig().getCdiMethod().trim().equals(Global.EMPTY_STRING)) {
                 message +=  Global.RN + Global.SEP + Messages.settings_dataDist_met;
                 blnOK = false;
             }
@@ -691,7 +717,7 @@ public class EditConversionForm extends EditForm
         _totalLigne = ligne;
     }
 
-    public LinkedHashMap<String, Integer> getSortedStations()
+    /*public LinkedHashMap<String, Integer> getSortedStations()
     {
         return _sortedStations;
     }
@@ -699,7 +725,7 @@ public class EditConversionForm extends EditForm
     public void setSortedStations(LinkedHashMap<String, Integer> stations)
     {
         _sortedStations = stations;
-    }
+    }*/
 
     /**
      * Setter sur warningCampagne.

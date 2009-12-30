@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import org.eclipse.swt.widgets.Table;
 import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 /**
@@ -14,6 +13,9 @@ import org.xml.sax.helpers.DefaultHandler;
  * @author Herve Taniou
  */
 public class EdmoHandler extends DefaultHandler{
+    
+    private static String n_code = "n_code"; //$NON-NLS-1$
+    private static String name = "name"; //$NON-NLS-1$
 	
 	private java.util.HashMap<Integer, String> _valeurs = new HashMap<Integer, String>();
 	
@@ -36,13 +38,12 @@ public class EdmoHandler extends DefaultHandler{
     public void startElement(String uri,
             String localName,
             String qName,
-            Attributes attributes)
-     throws SAXException {		
+            Attributes attributes){		
         
-		if (qName.equals("n_code")){
+		if (qName.equals(n_code)){
             buffer = new StringBuffer();
 		}
-        else if (qName.equals("name")){
+        else if (qName.equals(name)){
             buffer = new StringBuffer();
 		}		
      }
@@ -50,14 +51,13 @@ public class EdmoHandler extends DefaultHandler{
 	@Override
     public void endElement(String uri,
             String localName,
-            String qName)
-     throws SAXException {
+            String qName){
         
-        if (qName.equals("n_code")){
+        if (qName.equals(n_code)){
             intCode = Integer.parseInt(buffer.toString());
             buffer = null;
         }
-        else if (qName.equals("name")){
+        else if (qName.equals(name)){
             _valeurs.put(intCode, buffer.toString());
             buffer = null;
         }   
@@ -66,8 +66,7 @@ public class EdmoHandler extends DefaultHandler{
 	@Override
     public void characters(char[] ch,
             int start,
-            int length)
-     throws SAXException {
+            int length){
         
         if (buffer != null){
             String lecture = new String(ch, start, length);

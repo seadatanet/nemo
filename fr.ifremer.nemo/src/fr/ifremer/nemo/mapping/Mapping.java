@@ -9,6 +9,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -18,8 +19,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 /**
  *
  * @author jollivie
@@ -27,6 +26,7 @@ import javax.persistence.GenerationType;
 @Entity
 @Table(name = "MAPPING",schema = "PUBLIC")
 @NamedQueries({@NamedQuery(name = "Mapping.findByLocalCdiId", query = "SELECT m FROM Mapping m WHERE m.mappingPK.localCdiId = :localCdiId"), @NamedQuery(name = "Mapping.findByModus", query = "SELECT m FROM Mapping m WHERE m.modus = :modus"), @NamedQuery(name = "Mapping.findByFormat", query = "SELECT m FROM Mapping m WHERE m.mappingPK.format = :format"), @NamedQuery(name = "Mapping.findByFilename", query = "SELECT m FROM Mapping m WHERE m.filename = :filename"), @NamedQuery(name = "Mapping.findByDate", query = "SELECT m FROM Mapping m WHERE m.date = :date")})
+@SuppressWarnings("nls")
 public class Mapping implements Serializable {
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);

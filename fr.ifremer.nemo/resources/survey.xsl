@@ -19,7 +19,7 @@
     <!-- point d entree sur fichier -->
     <xsl:template match="/">
         <!-- tag root -->
-        <Survey>
+        <CruiseModel>
             <reference><xsl:value-of select="Metadata/dataIdInfo/idCitation/resAltTitle"/></reference>
             <name><xsl:value-of select="Metadata/dataIdInfo/idCitation/resTitle"/></name>
 			
@@ -147,7 +147,7 @@
                 </xsl:for-each>
             </dataTypes>
             
-        </Survey>
+        </CruiseModel>
     </xsl:template>
     
 </xsl:stylesheet>

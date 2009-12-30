@@ -7,7 +7,7 @@
  */
 package fr.ifremer.nemo.config;
 
-import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.Nemo;
 
 /**
  * Description: BODCList décrit une liste BODC
@@ -105,7 +105,7 @@ public class BODCList
     }
     
     public void setUrl (){
-        String VocabUrl = Utils.configuration.getVocabURL();
+        String VocabUrl = Nemo.getInstance().getConfig().getVocabURL();
         String ListUrl = VocabUrl.substring(0, VocabUrl.indexOf('/',7) + 1) + "list/" + id + "/current"; //$NON-NLS-1$ //$NON-NLS-2$
         this.url = ListUrl;
     }

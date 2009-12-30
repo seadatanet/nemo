@@ -11,8 +11,8 @@ import java.util.ArrayList;
 
 import org.eclipse.swt.widgets.Composite;
 
-import fr.ifremer.nemo.domain.DataType;
-import fr.ifremer.nemo.domain.Survey;
+import fr.ifremer.nemo.input.CruiseModel;
+import fr.ifremer.nemo.input.DataType;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.NemoSection;
 import fr.ifremer.nemo.util.Global;
@@ -58,9 +58,9 @@ public class CruiseDatatypeSection extends NemoSection
         // TableDataSurvey.tableTypeSurvey.setParent(parent);
     }
 
-    public void fillFromModel(Survey survey)
+    public void fillFromModel(CruiseModel cruise)
     {
-        DataType[] dataTypes = survey.getDataTypes();
+        DataType[] dataTypes = cruise.getDataTypes();
         int taille = dataTypes.length;
 
         for (int i = 0; i < taille; i++)
@@ -88,7 +88,7 @@ public class CruiseDatatypeSection extends NemoSection
         TableDataSurvey.majIHM();
     }
 
-    public void initModel(Survey survey)
+    public void initModel(CruiseModel cruise)
     {
         // remplissage de la liste des dataTypes de la campagne
         // parcours de la liste des dataTypes de l'IHM et creation d'un DataType
@@ -96,7 +96,7 @@ public class CruiseDatatypeSection extends NemoSection
         int taille = TableDataSurvey.types.size();
 
         // reset préventif des dataTypes
-        survey.releaseDataTypes();
+        //cruise.releaseDataTypes();
 
         for (int i = 0; i < taille; i++)
         {
@@ -117,7 +117,7 @@ public class CruiseDatatypeSection extends NemoSection
 
             // test par rapport aux types deja presents dans le DataModel
             // si l'etape a deje ete validee
-            survey.addDataType(dataType);
+            cruise.addDataType(dataType);
         }
     }
 

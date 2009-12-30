@@ -6,8 +6,11 @@ package fr.ifremer.nemo.output;
  * 
  * @author Gerard BUNEL
  */
-public class GenerationException extends Exception implements Cloneable {
-	public GenerationException() {
+public class GenerationException extends Exception{
+
+    private static final long serialVersionUID = 8951114939401799198L;
+
+    public GenerationException() {
 		super();
 	}
 
@@ -18,16 +21,13 @@ public class GenerationException extends Exception implements Cloneable {
 	public GenerationException(Throwable a_Throwable) {
 		super(a_Throwable);
 	}
+    
+    public GenerationException(String msg) {
+        super(msg);
+    }
+    
+    public GenerationException(String msg, Throwable a_Throwable) {
+        super(msg, a_Throwable);
+    }
 
-	/**
-	 * Returns a copy of this Object
-	 * 
-	 * @return a copy of this object
-	 */
-	public Object clone() throws CloneNotSupportedException {
-		GenerationException copy = null;
-		copy = (GenerationException) super.clone();
-		return copy;
-	}
-
-} /* End of class: GenerationException */
+}

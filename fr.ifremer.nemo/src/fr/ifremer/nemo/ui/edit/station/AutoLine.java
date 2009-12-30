@@ -18,11 +18,11 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.ComboType;
 import fr.ifremer.nemo.ui.edit.Couple;
 import fr.ifremer.nemo.ui.edit.Cursor;
-import fr.ifremer.nemo.ui.edit.DataModel;
 import fr.ifremer.nemo.ui.edit.UIobject;
 import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
@@ -276,17 +276,18 @@ public class AutoLine implements UIobject
     protected int getStationHeaderPos()
     {
         int stationHeader = getFileHeaderPos();
-        stationHeader += DataModel.stationModel.getNumberOfLines();
+        stationHeader = Nemo.getInstance().getDomain().getMedia().getStationHeaderNumberLines();
+        //stationHeader += DataModel.stationModel.getNumberOfLines();
         return stationHeader;
     }
 
     protected int getFileHeaderPos()
     {
         int fileHeader = 0;
-        if (!ViewMain.dossierCampagne)
-        {
+        if (!ViewMain.dossierCampagne){
             // fichier campagne
-            fileHeader = DataModel.singleSurvey.getHeaderLinesNumber();
+            fileHeader = Nemo.getInstance().getDomain().getMedia().getModel().getFileHeader();
+            //fileHeader = DataModel.singleSurvey.getHeaderLinesNumber();
         }
         return fileHeader;
     }
@@ -659,22 +660,17 @@ public class AutoLine implements UIobject
     {
         int ligneFin = Integer.parseInt(numberLine.getText()) + nbreLignes - 1;
 
-        int enteteFichier;
-        if (ViewMain.dossierCampagne)
-        {
-            // dossier
-            enteteFichier = 0;
-        }
-        else
-        {
+        int enteteFichier = 0;
+        if (!ViewMain.dossierCampagne){
             // fichier campagne
-            enteteFichier = DataModel.singleSurvey.getHeaderLinesNumber();
+            enteteFichier = Nemo.getInstance().getDomain().getMedia().getModel().getFileHeader();
+            //enteteFichier = DataModel.singleSurvey.getHeaderLinesNumber();
         }
         int ligneLimite =
-            enteteFichier + DataModel.stationModel.getNumberOfLines();
+            enteteFichier + Nemo.getInstance().getDomain().getMedia().getStationHeaderNumberLines();
+            //enteteFichier + DataModel.stationModel.getNumberOfLines();
 
-        if (ligneFin > ligneLimite)
-        {
+        if (ligneFin > ligneLimite){
             return false;
         }
         // else

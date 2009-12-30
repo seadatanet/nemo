@@ -257,8 +257,8 @@ public class Preformat
     }
 
     private static void processPreformat(File[] lstRepertoires,
-            String[] listeFichiers, File repSortie) throws IOException
-    {
+                                         String[] listeFichiers, 
+                                         File repSortie) throws IOException {
 
         Double pourcentEtape1 = 0d;
         Double pourcentEtape2 = 0d;
@@ -314,8 +314,7 @@ public class Preformat
         for (File repertoire : lstRepertoires)
         {
             _repEntree = repertoire.getAbsolutePath();
-            if (listeFichiers == null)
-            {
+            if (listeFichiers == null){
                 listeFichiers = new File(_repEntree).list();
             }
 
@@ -618,7 +617,6 @@ public class Preformat
 
         String ligneLue = Global.EMPTY_STRING;
         int lgEnTeteStation = 0;
-        int i;
 
         // Lecture des lignes d'en-tete
         int endStationHeader = 0;

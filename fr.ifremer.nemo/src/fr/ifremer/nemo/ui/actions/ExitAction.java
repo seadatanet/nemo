@@ -30,21 +30,18 @@ public class ExitAction extends Action implements ISelectionListener,
 	// private IStructuredSelection selection;
 
 	public ExitAction(IWorkbenchWindow window) {
-
 		this.window = window;
 		setId(ID);
 		setText(Messages.menu_quit); 
 		window.getSelectionService().addSelectionListener(this);
-
 	}
 
 	public void dispose() {
 		window.getSelectionService().addSelectionListener(this);
-
 	}
 
-	public void run() {
-
+	@Override
+    public void run() {
 		Shell s = PlatformUI.getWorkbench().getDisplay().getActiveShell();
 		MessageBox mb = new MessageBox(s, SWT.ICON_QUESTION | SWT.YES | SWT.NO);
 		mb.setMessage(Messages.confirm_quit);

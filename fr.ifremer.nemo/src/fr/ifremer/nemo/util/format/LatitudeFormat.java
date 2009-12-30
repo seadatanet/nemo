@@ -12,6 +12,10 @@ import org.xml.sax.SAXException;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.input.ModelDescription;
+import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
+
 
 /**
  * Class LatitudeFormat
@@ -20,7 +24,10 @@ import com.ago.xml.XMLOutputWriter;
  * @author Gerard BUNEL
  */
 public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
-	protected ParseElement[] _elements;
+
+    private static final long serialVersionUID = 442022117102694776L;
+
+    protected ParseElement[] _elements;
 
 	protected String _formatString;
 	
@@ -28,7 +35,7 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 
 	public LatitudeFormat() {
 		super();
-		_formatString = "";
+		_formatString = Global.EMPTY_STRING;
 	}
 
 	/**
@@ -67,8 +74,10 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 	 * @return SAXConsumer
 	 * 
 	 */
-	public SAXConsumer consumeElement(String a_URI, String a_LocalName,
-			String a_QName, Attributes a_Attributes) throws SAXException {
+	public SAXConsumer consumeElement(String a_URI, 
+                                      String a_LocalName,
+                                      String a_QName, 
+                                      Attributes a_Attributes){
 		return null;
 	}
 
@@ -80,7 +89,7 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 	 *            The CDATA content
 	 * 
 	 */
-	public void consumeCharacters(String a_Characters) throws SAXException {
+	public void consumeCharacters(String a_Characters){
 	}
 
 	/**
@@ -92,9 +101,9 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 	 * 
 	 */
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
-		a_Writer.putAttribute("formatString", getFormatString());
+		a_Writer.putAttribute(ModelDescription.a_string, getFormatString());
 		if (_variableLength) {
-			a_Writer.putAttribute("variable", _variableLength);
+			a_Writer.putAttribute(ModelDescription.a_vari, _variableLength);
 		}
 	}
 
@@ -106,8 +115,9 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 	 *            the XMLOutputWriter to which to write the XML Definition
 	 * 
 	 */
-	public void writeXMLOn(XMLOutputWriter a_Writer) {
-		a_Writer.openTag("LatitudeFormat");
+	@Override
+    public void writeXMLOn(XMLOutputWriter a_Writer) {
+		a_Writer.openTag(ModelDescription.node_fLatitude);
 		writeXMLBodyOn(a_Writer);
 		a_Writer.closeTag();
 	}
@@ -147,10 +157,10 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 			String a_QName, Attributes a_Attributes) throws SAXException {
 		try {
 			String tmp;
-			if ((tmp = a_Attributes.getValue("formatString")) != null) {
+			if ((tmp = a_Attributes.getValue(ModelDescription.a_string)) != null) {
 				setFormatString(tmp);
 			}
-			if ((tmp = a_Attributes.getValue("variable")) != null) {
+			if ((tmp = a_Attributes.getValue(ModelDescription.a_vari)) != null) {
 				setVariableLength(tmp);
 			}
 		} catch (Exception e) {
@@ -162,7 +172,8 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 	 * 
 	 * @return Object
 	 */
-	public Object clone() {
+	@Override
+    public Object clone() {
 		try {
 			return new LatitudeFormat(new String(_formatString), _variableLength);
 		} catch (Exception e) {
@@ -177,8 +188,10 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 	 * @param pos
 	 * @return StringBuffer
 	 */
-	public StringBuffer format(Object obj, StringBuffer toAppendTo,
-			FieldPosition pos) {
+	@Override
+    public StringBuffer format(Object obj, 
+                               StringBuffer toAppendTo,
+                               FieldPosition pos) {
 		double value = ((Double) obj).doubleValue();
 		java.util.Locale locale = java.util.Locale.US;
 		java.text.DecimalFormatSymbols symbols = new java.text.DecimalFormatSymbols(
@@ -187,71 +200,69 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 		for (int i = 0; i < _elements.length; i++) {
 			size = _elements[i]._element.length();
 			switch (_elements[i]._type) {
-			case HEMISPHERE: {
-				if (value >= 0.0) {
-					toAppendTo.append('N');
-				} else {
-					toAppendTo.append('S');
-				}
-				break;
-			}
-			case SIGN: {
-				if (value >= 0.0) {
-					toAppendTo.append('+');
-				} else {
-					toAppendTo.append('-');
-				}
-				break;
-			}
-			case CHARS: {
-				toAppendTo.append(_elements[i]._element);
-				break;
-			}
-			case DEGREES: {
-				double val = Math.abs(value);
-				double degrees = Math.floor(val);
-				DecimalFormat format = new DecimalFormat(_elements[i]._element,
-						symbols);
-				toAppendTo.append(paddedZeros(format.format(degrees), size));
-				break;
-			}
-			case DEGREES_DECIMAL: {
-				double val = Math.abs(value);
-				DecimalFormat format = new DecimalFormat(_elements[i]._element,
-						symbols);
-				toAppendTo.append(padded(format.format(val), size));
-				break;
-			}
-			case MINUTES: {
-				double val = Math.abs(value);
-				double degrees = Math.floor(val);
-				double minutes = (val - degrees) * 60.0D;
-				double mins = Math.floor(minutes);
-				DecimalFormat format = new DecimalFormat(_elements[i]._element,
-						symbols);
-				toAppendTo.append(padded(format.format(mins), size));
-				break;
-			}
-			case MINUTES_DECIMAL: {
-				double val = Math.abs(value);
-				double degrees = Math.floor(val);
-				double minutes = (val - degrees) * 60.0D;
-				DecimalFormat format = new DecimalFormat(_elements[i]._element,
-						symbols);
-				toAppendTo.append(padded(format.format(minutes), size));
-				break;
-			}
-			case SECONDS: {
-				double val = Math.abs(value);
-				double degrees = Math.floor(val);
-				double minutes = (val - degrees) * 60.0D;
-				double mins = Math.floor(minutes);
-				double seconds = (minutes - mins) * 60.0D;
-				DecimalFormat format = new DecimalFormat(_elements[i]._element,
-						symbols);
-				toAppendTo.append(padded(format.format(seconds), size));
-				break;
-			}
+    			case HEMISPHERE: {
+    				if (value >= 0.0) {
+    					toAppendTo.append('N');
+    				} else {
+    					toAppendTo.append('S');
+    				}
+    				break;
+                }
+    			case SIGN: {
+    				if (value >= 0.0) {
+    					toAppendTo.append('+');
+    				} else {
+    					toAppendTo.append('-');
+    				}
+    				break;
+                }
+    			case CHARS: {
+    				toAppendTo.append(_elements[i]._element);
+    				break;
+                }
+    			case DEGREES: {
+    				double val = Math.abs(value);
+    				double degrees = Math.floor(val);
+    				DecimalFormat format = new DecimalFormat(_elements[i]._element, symbols);
+    				toAppendTo.append(paddedZeros(format.format(degrees), size));
+    				break;
+                }
+    			case DEGREES_DECIMAL: {
+                    double val = Math.abs(value);
+                    DecimalFormat format = new DecimalFormat(_elements[i]._element, symbols);
+    				toAppendTo.append(padded(format.format(val), size));
+    				break;
+                }
+    			case MINUTES: {
+                    double val = Math.abs(value);
+                    double degrees = Math.floor(val);
+    				double minutes = (val - degrees) * 60.0D;
+    				double mins = Math.floor(minutes);
+                    DecimalFormat format = new DecimalFormat(_elements[i]._element, symbols);
+    				toAppendTo.append(padded(format.format(mins), size));
+    				break;
+                }
+    			case MINUTES_DECIMAL: {
+                    double val = Math.abs(value);
+                    double degrees = Math.floor(val);
+                    double minutes = (val - degrees) * 60.0D;
+                    DecimalFormat format = new DecimalFormat(_elements[i]._element, symbols);
+    				toAppendTo.append(padded(format.format(minutes), size));
+    				break;
+                }
+    			case SECONDS: {
+                    double val = Math.abs(value);
+                    double degrees = Math.floor(val);
+                    double minutes = (val - degrees) * 60.0D;
+                    double mins = Math.floor(minutes);
+    				double seconds = (minutes - mins) * 60.0D;
+                    DecimalFormat format = new DecimalFormat(_elements[i]._element, symbols);
+    				toAppendTo.append(padded(format.format(seconds), size));
+    				break;
+                }
+                default:{
+                    break;
+                }
 			}
 		}
 		return toAppendTo;
@@ -271,7 +282,7 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 		try {
 			LatitudeFormat tmp = new LatitudeFormat();
 			tmp.buildFromElement(a_URI, a_LocalName, a_QName, a_Attributes);
-			return (SAXConsumer) tmp;
+			return tmp;
 		} catch (Exception e) {
 			throw new SAXException(e);
 		}
@@ -281,7 +292,8 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	@SuppressWarnings("nls")
+    public static void main(String[] args) {
 		try {
 			LatitudeFormat format = new LatitudeFormat(args[0]);
 			double value = ((Number) format.parseObject(args[1])).doubleValue();
@@ -332,16 +344,12 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 	 * @param pos
 	 * @return Object
 	 */
-	public Object parseObject(String source, ParsePosition pos) {
-
+	@Override
+    public Object parseObject(String source, ParsePosition pos) {
 		if (_variableLength) {
 			return parseObjectVariableLength(source, pos);
-		} else {
-			return parseObjectFixedLength(source, pos);
 		}
-
-
-
+		return parseObjectFixedLength(source, pos);
 	}
 
 	/**
@@ -360,93 +368,82 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 		try {
 			for (int i = 0; i < _elements.length && index < source.length(); i++) {
 				switch (_elements[i]._type) {
-				case HEMISPHERE: {
-					String tmp = source.substring(index, index + 1);
-					if (tmp.equals("N")) {
-						sign = 1.0;
-					} else if (tmp.equals("S")) {
-						sign = -1.0;
-					} else {
-						throw new ParseException(
-								"Charactere invalide, 'N' ou 'S' attendu",
-								index);
-					}
-					index += 1;
-					break;
-				}
-				case SIGN: {
-					String tmp = source.substring(index, index + 1);
-					if (tmp.equals("+") || tmp.equals(" ") || tmp.equals("")) {
-						sign = 1.0;
-					} else if (tmp.equals("-")) {
-						sign = -1.0;
-					} else {
-						throw new ParseException(
-								"Charactere invalide, signe (+/-) attendu",
-								index);
-					}
-					index += 1;
-					break;
-				}
-				case CHARS: {
-					String tmp = source.substring(index, index
-							+ _elements[i]._element.length());
-
-					if (_elements[i]._element.length() == 1
-							&& _elements[i]._element.equals(" ")) {
-						// cas particulier si on rencontre un espace, n'importe
-						// quel caractere est possible
-					} else {
-						if (!tmp.equals(_elements[i]._element)) {
-							throw new ParseException(
-									"Charactere invalide, chaine attendue: \""
-											+ _elements[i]._element + "\""
-											+ " lue: \"" + tmp + "\"", index);
-						}
-					}
-					index += _elements[i]._element.length();
-					break;
-				}
-				case DEGREES: {
-                    String tmp = source.replace(' ', '0');
-					DecimalFormat format = new DecimalFormat(
-							_elements[i]._element);
-					value += ((Number) format.parseObject(tmp, pos)).doubleValue();
-					index = pos.getIndex();
-					break;
-				}
-				case DEGREES_DECIMAL: {
-                    String tmp = source.replace(' ', '0');
-					DecimalFormat format = new DecimalFormat(
-							_elements[i]._element, symbols);
-					value += ((Number) format.parseObject(tmp, pos)).doubleValue();
-					index = pos.getIndex();
-					break;
-				}
-				case MINUTES: {
-                    String tmp = source.replace(' ', '0');
-					DecimalFormat format = new DecimalFormat(
-							_elements[i]._element);
-					value += ((Number) format.parseObject(tmp, pos)).doubleValue() / 60.0;
-					index = pos.getIndex();
-					break;
-				}
-				case MINUTES_DECIMAL: {
-                    String tmp = source.replace(' ', '0');
-					DecimalFormat format = new DecimalFormat(
-							_elements[i]._element, symbols);
-					value += ((Number) format.parseObject(tmp, pos)).doubleValue() / 60.0;
-					index = pos.getIndex();
-					break;
-				}
-				case SECONDS: {
-                    String tmp = source.replace(' ', '0');
-					DecimalFormat format = new DecimalFormat(
-							_elements[i]._element);
-					value += ((Number) format.parseObject(tmp, pos)).doubleValue() / 3600.0;
-					index = pos.getIndex();
-					break;
-				}
+    				case HEMISPHERE: {
+    					String tmp = source.substring(index, index + 1);
+    					if (tmp.equals(Global.NORD)) {
+    						sign = 1.0;
+    					} else if (tmp.equals(Global.SUD)) {
+    						sign = -1.0;
+    					} else {
+    						throw new ParseException(Intern.errorParseCoordN, index);
+    					}
+    					index += 1;
+    					break;
+                    }
+    				case SIGN: {
+                        String tmp = source.substring(index, index + 1);
+    					if (tmp.equals(Global.PLUS) || tmp.equals(Global.SPACE) || tmp.equals(Global.EMPTY_STRING)) {
+    						sign = 1.0;
+    					} else if (tmp.equals(Global.MOINS)) {
+    						sign = -1.0;
+    					} else {
+    						throw new ParseException(Intern.errorParseSign, index);
+    					}
+    					index += 1;
+    					break;
+                    }
+    				case CHARS:{
+                        String tmp = source.substring(index, index + _elements[i]._element.length());
+    					if (_elements[i]._element.length() == 1
+    							&& _elements[i]._element.equals(Global.SPACE)) {
+    						// cas particulier si on rencontre un espace, n'importe
+    						// quel caractere est possible
+    					} else {
+    						if (!tmp.equals(_elements[i]._element)) {
+    							throw new ParseException(String.format(Intern.errorParseChar, _elements[i]._element, tmp), index);
+    						}
+    					}
+    					index += _elements[i]._element.length();
+    					break;
+    				}
+    				case DEGREES:{
+                        String tmp = source.replace(' ', '0');
+    					DecimalFormat format = new DecimalFormat(_elements[i]._element);
+    					value += ((Number) format.parseObject(tmp, pos)).doubleValue();
+    					index = pos.getIndex();
+    					break;
+                    }
+    				case DEGREES_DECIMAL:{
+                        String tmp = source.replace(' ', '0');
+                        DecimalFormat format = new DecimalFormat(_elements[i]._element, symbols);
+    					value += ((Number) format.parseObject(tmp, pos)).doubleValue();
+    					index = pos.getIndex();
+    					break;
+                    }
+    				case MINUTES:{
+                        String tmp = source.replace(' ', '0');
+                        DecimalFormat format = new DecimalFormat(_elements[i]._element);
+    					value += ((Number) format.parseObject(tmp, pos)).doubleValue() / 60.0;
+    					index = pos.getIndex();
+    					break;
+                    }
+    				case MINUTES_DECIMAL:{
+                        String tmp = source.replace(' ', '0');
+                        DecimalFormat format = new DecimalFormat(_elements[i]._element, symbols);
+    					value += ((Number) format.parseObject(tmp, pos)).doubleValue() / 60.0;
+    					index = pos.getIndex();
+    					break;
+                    }
+    				case SECONDS:{
+                        String tmp = source.replace(' ', '0');
+                        DecimalFormat format = new DecimalFormat(_elements[i]._element);
+    					value += ((Number) format.parseObject(tmp, pos)).doubleValue() / 3600.0;
+    					index = pos.getIndex();
+    					break;
+                    }
+                    default:{
+                        break;
+                    }
 				}
 				pos.setIndex(index);
 			}
@@ -474,177 +471,133 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 		try {
 			for (int i = 0; i < _elements.length && index < source.length(); i++) {
 				switch (_elements[i]._type) {
-				case HEMISPHERE: {
-					String tmp = source.substring(index, index + 1);
-					if (tmp.equals("N")) {
-						sign = 1.0;
-					} else if (tmp.equals("S")) {
-						sign = -1.0;
-					} else {
-						throw new ParseException(
-								"Charactere invalide, 'N' ou 'S' attendu",
-								index);
-					}
-					index += 1;
-					break;
-				}
-				case SIGN: {
-					String tmp = source.substring(index, index + 1);
-					if (tmp.equals("+") || tmp.equals(" ") || tmp.equals("")) {
-						sign = 1.0;
-					} else if (tmp.equals("-")) {
-						sign = -1.0;
-					} else {
-						throw new ParseException(
-								"Charactere invalide, signe (+/-) attendu",
-								index);
-					}
-					index += 1;
-					break;
-				}
-				case CHARS: {
-					String tmp = source.substring(index, index
-							+ _elements[i]._element.length());
-
-					if (_elements[i]._element.length() == 1
-							&& _elements[i]._element.equals(" ")) {
-						// cas particulier si on rencontre un espace, n'importe
-						// quel caractere est possible
-					} else {
-						if (!tmp.equals(_elements[i]._element)) {
-							throw new ParseException(
-									"Charactere invalide, chaine attendue: \""
-											+ _elements[i]._element + "\""
-											+ " lue: \"" + tmp + "\"", index);
-						}
-					}
-					index += _elements[i]._element.length();
-					break;
-				}
-				case DEGREES: {
-					String tmp = source.substring(index, index
-							+ _elements[i]._element.length());
-					if (tmp.matches("\\s*\\d+\\s*")) {
-						DecimalFormat format = new DecimalFormat(
-								_elements[i]._element);
-						value += ((Number) format.parseObject(tmp.trim()))
-								.doubleValue();
-					} else {
-						throw new ParseException("Degres attendus au format: "
-								+ _elements[i]._element, index);
-					}
-					index += _elements[i]._element.length();
-					break;
-				}
-				case DEGREES_DECIMAL: {
-					String tmp = source.substring(index, index
-							+ _elements[i]._element.length());
-					if (tmp.matches("\\s*\\d+\\.\\d+\\s*")) {
-						DecimalFormat format = new DecimalFormat(
-								_elements[i]._element, symbols);
-						value += ((Number) format.parseObject(tmp.trim()))
-								.doubleValue();
-					} else {
-						throw new ParseException("Degres attendus au format: "
-								+ _elements[i]._element, index);
-					}
-					index += _elements[i]._element.length();
-					break;
-				}
-				case DEGREES_DECIMAL_SANS_POINT: {
-					
-					int indexOfPoint = _elements[i]._element.indexOf(".");
-					
-					String tmp = source.substring(index, index
-							+ _elements[i]._element.length() - 1);
-					
-					String tmpPlusPoint = tmp.substring(0,indexOfPoint) + "." + tmp.substring(indexOfPoint);							
-					
-					if (tmpPlusPoint.matches("\\s*\\d+\\.\\d+\\s*")) {
-						DecimalFormat format = new DecimalFormat(
-								_elements[i]._element, symbols);
-						value += ((Number) format.parseObject(tmpPlusPoint.trim()))
-								.doubleValue();
-					} else {
-						throw new ParseException("Degres attendus au format: "
-								+ _elements[i]._element, index);
-					}
-					index += _elements[i]._element.length();
-					break;
-				}
-				case MINUTES: {
-					String tmp = source.substring(index, index
-							+ _elements[i]._element.length());
-					if (tmp.matches("\\s*\\d+\\s*")) {
-						DecimalFormat format = new DecimalFormat(
-								_elements[i]._element);
-						value += ((Number) format.parseObject(tmp.trim()))
-								.doubleValue() / 60.0;
-					} else {
-						throw new ParseException(
-								"Minutes attendues au format: "
-										+ _elements[i]._element, index);
-					}
-					index += _elements[i]._element.length();
-					break;
-				}
-				case MINUTES_DECIMAL: {
-					String tmp = source.substring(index, index
-							+ _elements[i]._element.length());
-					if (tmp.matches("\\s*\\d+\\.\\d+\\s*")) {
-						DecimalFormat format = new DecimalFormat(
-								_elements[i]._element, symbols);
-						value += ((Number) format.parseObject(tmp.trim()))
-								.doubleValue() / 60.0;
-					} else {
-						throw new ParseException("Minutes attendus au format: "
-								+ _elements[i]._element, index);
-					}
-					index += _elements[i]._element.length();
-					break;
-				}
-				case MINUTES_DECIMAL_SANS_POINT: {
-					
-					int indexOfPoint = _elements[i]._element.indexOf(".");
-										
-					String tmp = source.substring(index, index
-							+ _elements[i]._element.length() - 1);
-					
-					String tmpPlusPoint = tmp.substring(0,indexOfPoint) + "." + tmp.substring(indexOfPoint);							
-					
-					if (tmpPlusPoint.matches("\\s*\\d+\\.\\d+\\s*")) {
-						DecimalFormat format = new DecimalFormat(
-								_elements[i]._element, symbols);
-						value += ((Number) format.parseObject(tmpPlusPoint.trim()))
-								.doubleValue() / 60.0;
-					} else {
-						throw new ParseException("Minutes attendus au format: "
-								+ _elements[i]._element, index);
-					}
-					index += _elements[i]._element.length() - 1;
-					break;
-				}
-				case SECONDS: {
-					String tmp = source.substring(index, index
-							+ _elements[i]._element.length());
-					if (tmp.matches("\\s*\\d+\\s*")) {
-						DecimalFormat format = new DecimalFormat(
-								_elements[i]._element);
-						value += ((Number) format.parseObject(tmp.trim()))
-								.doubleValue() / 3600.0;
-					} else {
-						throw new ParseException(
-								"Secondes attendues au format: "
-										+ _elements[i]._element, index);
-					}
-					index += _elements[i]._element.length();
-					break;
-				}
+    				case HEMISPHERE: {
+    					String tmp = source.substring(index, index + 1);
+    					if (tmp.equals(Global.NORD)) {
+    						sign = 1.0;
+    					} else if (tmp.equals(Global.SUD)) {
+    						sign = -1.0;
+    					} else {
+    						throw new ParseException(Intern.errorParseCoordN,index);
+    					}
+    					index += 1;
+    					break;
+                    }
+    				case SIGN: {
+                        String tmp = source.substring(index, index + 1);
+    					if (tmp.equals(Global.PLUS) || tmp.equals(Global.SPACE) || tmp.equals(Global.EMPTY_STRING)) {
+    						sign = 1.0;
+    					} else if (tmp.equals(Global.MOINS)) {
+    						sign = -1.0;
+    					} else {
+    						throw new ParseException(Intern.errorParseSign, index);
+    					}
+    					index += 1;
+    					break;
+                    }
+    				case CHARS:{
+                        String tmp = source.substring(index, index + _elements[i]._element.length());
+    					if (_elements[i]._element.length() == 1
+    							&& _elements[i]._element.equals(Global.SPACE)) {
+    						// cas particulier si on rencontre un espace, n'importe
+    						// quel caractere est possible
+    					} else {
+    						if (!tmp.equals(_elements[i]._element)) {
+    							throw new ParseException(String.format(Intern.errorParseChar, _elements[i]._element, tmp), index);
+    						}
+    					}
+    					index += _elements[i]._element.length();
+    					break;
+                    }
+    				case DEGREES: {
+                        String tmp = source.substring(index, index + _elements[i]._element.length());
+    					if (tmp.matches("\\s*\\d+\\s*")) { //$NON-NLS-1$
+    						DecimalFormat format = new DecimalFormat(_elements[i]._element);
+    						value += ((Number) format.parseObject(tmp.trim())).doubleValue();
+    					} else {
+    						throw new ParseException(String.format(Intern.errorParseDegres, _elements[i]._element), index);
+    					}
+    					index += _elements[i]._element.length();
+    					break;
+                    }
+    				case DEGREES_DECIMAL:{
+                        String tmp = source.substring(index, index + _elements[i]._element.length());
+    					if (tmp.matches("\\s*\\d+\\.\\d+\\s*")) { //$NON-NLS-1$
+    						DecimalFormat format = new DecimalFormat(_elements[i]._element, symbols);
+    						value += ((Number) format.parseObject(tmp.trim())).doubleValue();
+    					} else {
+    						throw new ParseException(String.format(Intern.errorParseDegres, _elements[i]._element), index);
+    					}
+    					index += _elements[i]._element.length();
+    					break;
+                    }
+    				case DEGREES_DECIMAL_SANS_POINT:{
+    					int indexOfPoint = _elements[i]._element.indexOf(Global.POINT);
+                        String tmp = source.substring(index, index + _elements[i]._element.length() - 1);
+    					String tmpPlusPoint = tmp.substring(0,indexOfPoint) + Global.POINT + tmp.substring(indexOfPoint);		
+    					if (tmpPlusPoint.matches("\\s*\\d+\\.\\d+\\s*")) { //$NON-NLS-1$
+    						DecimalFormat format = new DecimalFormat(_elements[i]._element, symbols);
+    						value += ((Number) format.parseObject(tmpPlusPoint.trim())).doubleValue();
+    					} else {
+    						throw new ParseException(String.format(Intern.errorParseDegres, _elements[i]._element), index);
+    					}
+    					index += _elements[i]._element.length();
+    					break;
+                    }
+    				case MINUTES:{
+                        String tmp = source.substring(index, index + _elements[i]._element.length());
+    					if (tmp.matches("\\s*\\d+\\s*")) { //$NON-NLS-1$
+    						DecimalFormat format = new DecimalFormat(_elements[i]._element);
+    						value += ((Number) format.parseObject(tmp.trim())).doubleValue() / 60.0;
+    					} else {
+    						throw new ParseException(String.format(Intern.errorParseMinutes, _elements[i]._element), index);
+    					}
+    					index += _elements[i]._element.length();
+    					break;
+                    }
+    				case MINUTES_DECIMAL:{
+                        String tmp = source.substring(index, index + _elements[i]._element.length());
+    					if (tmp.matches("\\s*\\d+\\.\\d+\\s*")) { //$NON-NLS-1$
+    						DecimalFormat format = new DecimalFormat(_elements[i]._element, symbols);
+    						value += ((Number) format.parseObject(tmp.trim())).doubleValue() / 60.0;
+    					} else {
+    						throw new ParseException(String.format(Intern.errorParseMinutes, _elements[i]._element), index);
+    					}
+    					index += _elements[i]._element.length();
+    					break;
+                    }
+    				case MINUTES_DECIMAL_SANS_POINT:{
+    					int indexOfPoint = _elements[i]._element.indexOf(Global.POINT);
+                        String tmp = source.substring(index, index + _elements[i]._element.length() - 1);
+                        String tmpPlusPoint = tmp.substring(0,indexOfPoint) + Global.POINT + tmp.substring(indexOfPoint);							
+    					if (tmpPlusPoint.matches("\\s*\\d+\\.\\d+\\s*")) { //$NON-NLS-1$
+    						DecimalFormat format = new DecimalFormat(_elements[i]._element, symbols);
+    						value += ((Number) format.parseObject(tmpPlusPoint.trim())).doubleValue() / 60.0;
+    					} else {
+    						throw new ParseException(String.format(Intern.errorParseMinutes, _elements[i]._element), index);
+    					}
+    					index += _elements[i]._element.length() - 1;
+    					break;
+                    }
+    				case SECONDS:{
+                        String tmp = source.substring(index, index + _elements[i]._element.length());
+    					if (tmp.matches("\\s*\\d+\\s*")) { //$NON-NLS-1$
+    						DecimalFormat format = new DecimalFormat(_elements[i]._element);
+    						value += ((Number) format.parseObject(tmp.trim())).doubleValue() / 3600.0;
+    					} else {
+    						throw new ParseException(String.format(Intern.errorParseMinutes, _elements[i]._element), index);
+    					}
+    					index += _elements[i]._element.length();
+    					break;
+                    }
+                    default:{
+                        break;
+                    }
 				}
 			}
 		} catch (ParseException e) {
 			e.printStackTrace();
-		//	throw e;
+            return null;
 		}
 		value *= sign;
 		pos.setIndex(index);
@@ -665,7 +618,8 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 	 * 
 	 * @return the format string
 	 */
-	public String toString() {
+	@Override
+    public String toString() {
 		return _formatString;
 	}
 
@@ -681,4 +635,4 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 		setVariableLength(new Boolean(a_String).booleanValue());
 	}
 
-} /* End of class: LatitudeFormat */
+}

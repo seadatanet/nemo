@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -12,14 +11,14 @@ import java.util.Locale;
 import java.util.StringTokenizer;
 
 import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
 
 import com.ago.xml.Element2Field;
-import com.ago.xml.RootSAXConsumer;
+import com.ago.xml.PathElementConsumer;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLBootstrapParser;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.input.AbstractModel;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
@@ -30,8 +29,8 @@ import fr.ifremer.nemo.util.Intern;
  * 
  * @author Gerard BUNEL
  */
-public class Configuration implements Cloneable, RootSAXConsumer {
-
+public class Configuration extends AbstractModel
+{
 	/**
 	 * Adresse de contact IFREMER en cas de probleme WebService
 	 */
@@ -87,8 +86,6 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 
 	protected boolean _showRule;
 
-	static protected Configuration _singleton = null;
-
 	protected Locale _locale;
 	
 	protected String _defaultCode;
@@ -99,7 +96,27 @@ public class Configuration implements Cloneable, RootSAXConsumer {
     
     protected boolean dateISO;
 
-	private Configuration() {        
+	public Configuration() {
+        _tagName = ConfigDescription.node_root;
+        initValues();
+
+        XMLBootstrapParser parser = new XMLBootstrapParser(this);
+        try {
+            parser.parse(new FileInputStream(Intern.dir_resources + 
+                                             File.separator + 
+                                             ConfigDescription.node_root + 
+                                             Global.EXT_XML), 
+                         false);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+	}
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initValues(){        
         _contact = Global.EMPTY_STRING;
         _modelsDirectory = Global.EMPTY_STRING;
         _cruisesDirectory = Global.EMPTY_STRING;
@@ -128,203 +145,171 @@ public class Configuration implements Cloneable, RootSAXConsumer {
         _vocabLists = new HashMap<String, BODCList>();
         
         _flagTables = new ArrayList<FlagTable>();
-        proxy = Proxy.getInstance();
+        proxy = new Proxy();
         
         dateISO = true;
-	}
+    }
 
-	/**
-	 * 
-	 * Build object from its XML defintion
-	 * 
-	 * @param a_URI
-	 *            Element Namespace (SAX 2)
-	 * @param a_LocalName
-	 *            Tag name
-	 * @param a_QName
-	 *            qualified tag name
-	 * @param a_Attributes
-	 *            XML Element attributes
-	 * @return SAXConsumer
-	 * 
-	 */
-	public static SAXConsumer fromElement(String a_URI, String a_LocalName,
-			String a_QName, Attributes a_Attributes) throws SAXException {
-		Configuration tmp = new Configuration();
-		tmp.buildFromElement(a_URI, a_LocalName, a_QName, a_Attributes);
-		return (SAXConsumer) tmp;
-	}
 
-	/**
-	 * 
-	 * Retrieve attributes values from their XML defintion
-	 * 
-	 * @param a_URI
-	 *            Element Namespace (SAX 2)
-	 * @param a_LocalName
-	 *            Tag name
-	 * @param a_QName
-	 *            qualified tag name
-	 * @param a_Attributes
-	 *            XML Element attributes
-	 * 
-	 */
+    /**
+     * @see AbstractModel.java#fromElement
+     */
+	public static SAXConsumer fromElement(String a_URI, 
+                                          String a_LocalName,
+                                          String a_QName, 
+                                          Attributes a_Attributes){
+		Configuration el = new Configuration();
+        el.buildFromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+		return el;
+	}
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
 	public void buildFromElement(String a_URI, String a_LocalName,
-			String a_QName, Attributes a_Attributes) throws SAXException {
+			String a_QName, Attributes a_Attributes){
 		String tmp;
-		if ((tmp = a_Attributes.getValue("lang")) != null) {
+		if ((tmp = a_Attributes.getValue(ConfigDescription.a_lang)) != null) {  
 			setLang(tmp);
 		}
 	}
-
-	/**
-	 * 
-	 * A new XML Element as been found. Parse it.
-	 * 
-	 * @param a_URI
-	 *            XML Namespace (SAX 2)
-	 * @param a_LocalName
-	 *            Tag name
-	 * @param a_QName
-	 *            Qualified tag name
-	 * @param a_Attributes
-	 *            XML Element attributes
-	 * @return SAXConsumer
-	 * 
-	 */
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
 	public SAXConsumer consumeElement(String a_URI, String a_LocalName,
-			String a_QName, Attributes a_Attributes) throws SAXException {
-		if (a_LocalName.equals("nemoWsURL")) {
+			String a_QName, Attributes a_Attributes){
+		if (a_LocalName.equals(ConfigDescription.node_nemoWsURL)) {
 			Element2Field setter = new Element2Field(this,
-					"setNemoWebServiceURL");
+					ConfigDescription.setter_NemoWsURL);
 			return setter;
 		}
-		if (a_LocalName.equals("nautilusWsURL")) {
+		if (a_LocalName.equals(ConfigDescription.node_nautilusWsURL)) {
 			Element2Field setter = new Element2Field(this,
-					"setNautilusWebServiceURL");
+					ConfigDescription.setter_NautilusWsURL); 
 			return setter;
 		}
-		if (a_LocalName.equals("dataCenter")) {
-			Element2Field setter = new Element2Field(this, "setDataCenter");
+		if (a_LocalName.equals(ConfigDescription.node_dataCenter)) {
+			Element2Field setter = new Element2Field(this, ConfigDescription.setter_DataCenter);
 			return setter;
 		}
-		if (a_LocalName.equals("showRule")) {
-			Element2Field setter = new Element2Field(this, "setShowRule");
+		if (a_LocalName.equals(ConfigDescription.node_showRule)) {
+			Element2Field setter = new Element2Field(this, ConfigDescription.setter_ShowRule);
 			return setter;
 		}
-		if (a_LocalName.equals("contact")) {
-			Element2Field setter = new Element2Field(this, "setContact");
+		if (a_LocalName.equals(ConfigDescription.node_contact)) {
+			Element2Field setter = new Element2Field(this, ConfigDescription.setter_Contact);
 			return setter;
 		}
-		if (a_LocalName.equals("modelsDirectory")) {
-			Element2Field setter = new Element2Field(this, "setModelsDirectory");
+		if (a_LocalName.equals(ConfigDescription.node_modelsDirectory)) {
+			Element2Field setter = new Element2Field(this, ConfigDescription.setter_ModelsDirectory);
 			return setter;
 		}
-		if (a_LocalName.equals("cruisesDirectory")) {
-			Element2Field setter = new Element2Field(this, "setCruisesDirectory");
+		if (a_LocalName.equals(ConfigDescription.node_cruisesDirectory)) {
+			Element2Field setter = new Element2Field(this, ConfigDescription.setter_CruisesDirectory);
 			return setter;
 		}
-		if (a_LocalName.equals("outputDirectory")) {
-			Element2Field setter = new Element2Field(this, "setOutputDirectory");
+		if (a_LocalName.equals(ConfigDescription.node_outputDirectory)) {
+			Element2Field setter = new Element2Field(this, ConfigDescription.setter_OutputDirectory);
 			return setter;
 		}
-        if (a_LocalName.equals("writeCdi")) {
-            Element2Field setter = new Element2Field(this, "setWriteCdi");
+        if (a_LocalName.equals(ConfigDescription.node_writeCdi)) {
+            Element2Field setter = new Element2Field(this, ConfigDescription.setter_WriteCdi);
             return setter;
         }
-		if (a_LocalName.equals("idEdmoRespCdi")) {
-			Element2Field setter = new Element2Field(this, "setIdEdmoRespCdi");
+		if (a_LocalName.equals(ConfigDescription.node_idEdmoRespCdi)) {
+			Element2Field setter = new Element2Field(this, ConfigDescription.setter_IdEdmoRespCdi);
 			return setter;
 		}
-		if (a_LocalName.equals("codeEdmoDonnees")) {
-			Element2Field setter = new Element2Field(this, "setCodeEdmoDonnees");
+		if (a_LocalName.equals(ConfigDescription.node_codeEdmoDonnees)) {
+			Element2Field setter = new Element2Field(this, ConfigDescription.setter_CodeEdmoDonnees);
 			return setter;
 		}
-		if (a_LocalName.equals("idEdmoRespDonnees")) {
-			Element2Field setter = new Element2Field(this, "setIdEdmoRespDonnees");
+		if (a_LocalName.equals(ConfigDescription.node_idEdmoRespDonnees)) {
+			Element2Field setter = new Element2Field(this, ConfigDescription.setter_IdEdmoRespDonnees);
 			return setter;
 		}
-		if (a_LocalName.equals("idEdmoDistDonnees")) {
-			Element2Field setter = new Element2Field(this, "setIdEdmoDistDonnees");
+		if (a_LocalName.equals(ConfigDescription.node_idEdmoDistDonnees)) {
+			Element2Field setter = new Element2Field(this, ConfigDescription.setter_IdEdmoDistDonnees);
 			return setter;
 		}
-		if (a_LocalName.equals("cdiURL")) {
-			Element2Field setter = new Element2Field(this, "setCdiURL");
+		if (a_LocalName.equals(ConfigDescription.node_cdiURL)) {
+			Element2Field setter = new Element2Field(this, ConfigDescription.setter_CdiURL);
 			return setter;
 		}
-		if (a_LocalName.equals("cdiMethod")) {
-			Element2Field setter = new Element2Field(this, "setCdiMethod");
+		if (a_LocalName.equals(ConfigDescription.node_cdiMethod)) {
+			Element2Field setter = new Element2Field(this, ConfigDescription.setter_CdiMethod);
 			return setter;
 		}
-        if (a_LocalName.equals("accesDonnees")) {
-            Element2Field setter = new Element2Field(this, "setAccesDonnees");
+        if (a_LocalName.equals(ConfigDescription.node_accesDonnees)) {
+            Element2Field setter = new Element2Field(this, ConfigDescription.setter_AccesDonnees);
             return setter;
         }
-        if (a_LocalName.equals("typePlateforme")) {
-            Element2Field setter = new Element2Field(this, "setTypePlateForme");
+        if (a_LocalName.equals(ConfigDescription.node_typePlateforme)) {
+            Element2Field setter = new Element2Field(this, ConfigDescription.setter_TypePlateForme);
             return setter;
         }      
-        if (a_LocalName.equals("writeMapping")) {
-            Element2Field setter = new Element2Field(this, "setWriteMapping");
+        if (a_LocalName.equals(ConfigDescription.node_writeMapping)) {
+            Element2Field setter = new Element2Field(this, ConfigDescription.setter_WriteMapping);
             return setter;
         }  
-		if (a_LocalName.equals("fichierMapping")) {
-			Element2Field setter = new Element2Field(this, "setFichierMapping");
+		if (a_LocalName.equals(ConfigDescription.node_fichierMapping)) {
+			Element2Field setter = new Element2Field(this, ConfigDescription.setter_FichierMapping);
 			return setter;
 		}  
-        if (a_LocalName.equals("dateISO")) {
-            Element2Field setter = new Element2Field(this, "setDateISO");
+        if (a_LocalName.equals(ConfigDescription.node_dateISO)) {
+            Element2Field setter = new Element2Field(this, ConfigDescription.setter_DateISO);
             return setter;
         }
-        if (a_LocalName.equals(Intern.settings_proxy)) {
-            Proxy l = (Proxy) Proxy.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
-            setProxy(l);
-            return (SAXConsumer) l;
+        if (a_LocalName.equals(ConfigDescription.node_proxy)) { 
+            return new PathElementConsumer(ConfigDescription.node_proxy, this);  
         }
-        if (a_LocalName.equals("edmoURL")) {
-            Element2Field setter = new Element2Field(this, "setEdmoURL");
+        if (a_LocalName.equals(ConfigDescription.node_edmoURL)) {
+            Element2Field setter = new Element2Field(this, ConfigDescription.setter_EdmoURL); 
             return setter;
         }
-		if (a_LocalName.equals("vocabURL")) {
-			Element2Field setter = new Element2Field(this, "setVocabURL");
+		if (a_LocalName.equals(ConfigDescription.node_vocabURL)) {
+			Element2Field setter = new Element2Field(this, ConfigDescription.setter_VocabURL);  
 			return setter;
 		}
-		if (a_LocalName.equals("VocabListURL")) {
+		if (a_LocalName.equals(ConfigDescription.node_VocabListURL)) {
 			String name = null;
 			String value = null;
             String version = null;
-			if ((name = a_Attributes.getValue("name")) != null 
-					&& (value = a_Attributes.getValue("value")) != null
-                    && (version = a_Attributes.getValue("version")) != null) {
+			if ((name = a_Attributes.getValue(ConfigDescription.a_name)) != null   
+					&& (value = a_Attributes.getValue(ConfigDescription.a_value)) != null  
+                    && (version = a_Attributes.getValue(ConfigDescription.a_version)) != null) {  
                 BODCList list = new BODCList(name, version, value);
                 _vocabLists.put(name, list);
 			}
 			return this;
 		}
-		if (a_LocalName.equals("defaultFlagTable")) {
-			Element2Field setter = new Element2Field(this, "setDefaultCode");
+		if (a_LocalName.equals(ConfigDescription.node_defaultFlagTable)) {
+			Element2Field setter = new Element2Field(this, ConfigDescription.setter_DefaultCode);  
 			return setter;
 		}
-		if (a_LocalName.equals("FlagTable")) {
+		if (a_LocalName.equals(ConfigDescription.node_FlagTable)) {
 			String code = null;
 			String label = null;
 			FlagTable flagTable = new FlagTable();
 			
-			if ((code = a_Attributes.getValue("code")) != null &&
-					(label = a_Attributes.getValue("label")) != null) {
+			if ((code = a_Attributes.getValue(ConfigDescription.a_code)) != null &&  
+					(label = a_Attributes.getValue(ConfigDescription.a_label)) != null) {  
 				flagTable.setCode(code);
 				flagTable.setLibelle(label);
 				_flagTables.add(flagTable);
 			}
 			return this;
 		}
-		if (a_LocalName.equals("Flag")) {
+		if (a_LocalName.equals(ConfigDescription.node_Flag)) {
 			String local = null;
 			String sdn = null;
 			Flag flag = new Flag();
 			
-			if ((local = a_Attributes.getValue("local")) != null &&
-					(sdn = a_Attributes.getValue("SDN")) != null) {
+			if ((local = a_Attributes.getValue(ConfigDescription.a_local)) != null &&  
+					(sdn = a_Attributes.getValue(ConfigDescription.a_SDN)) != null) {  
 				flag.setLocal(local);
 				flag.setSdn(sdn);
 				_flagTables.get(_flagTables.size() - 1).getFlags().add(flag);
@@ -334,118 +319,180 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 		
 		return null;
 	}
-
-	/**
-	 * 
-	 * The XML Element is a CDATA filled element
-	 * 
-	 * @param a_Characters
-	 *            The CDATA content
-	 * 
-	 */
-	public void consumeCharacters(String a_Characters) throws SAXException {
-	}
-
-	/**
-	 * 
-	 * Generate XML defintion on a Stream
-	 * 
-	 * @param a_Writer
-	 *            XMLOutputWriter to which to write the XML Definition
-	 * 
-	 */
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SAXConsumer handlePathElement(String path, 
+                                         String a_URI,
+                                         String a_LocalName, 
+                                         String a_QName, 
+                                         Attributes a_Attributes){
+        SAXConsumer el = null;
+        if (path.equals(ConfigDescription.node_proxy)) {  
+            el = Proxy.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+            setProxy((Proxy) el);
+            return el;
+        }
+        return null;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
-		a_Writer.putAttribute("lang", getLang());
-		a_Writer.putTag("dataCenter", getDataCenter());
-		a_Writer.putTag("nemoWsURL", getNemoWebServiceURL());
-		a_Writer.putTag("nautilusWsURL", getNautilusWebServiceURL());
-		a_Writer.putTag("showRule", isShowRule());
-		a_Writer.putTag("contact", getContact());
-		a_Writer.putTag("modelsDirectory", getModelsDirectory());
-		a_Writer.putTag("cruisesDirectory", getCruisesDirectory());
-		a_Writer.putTag("outputDirectory", getOutputDirectory());
-        a_Writer.putTag("writeCdi", isWriteCdi());
-		a_Writer.putTag("idEdmoRespCdi", getIdEdmoRespCdi());
-		a_Writer.putTag("codeEdmoDonnees", getCodeEdmoDonnees());
-		a_Writer.putTag("idEdmoRespDonnees", getIdEdmoRespDonnees());
-		a_Writer.putTag("idEdmoDistDonnees", getIdEdmoDistDonnees());
-		a_Writer.putTag("cdiURL", getCdiURL());
-		a_Writer.putTag("cdiMethod", getCdiMethod());
-        a_Writer.putTag("accesDonnees", getAccesDonnees());
-        a_Writer.putTag("typePlateforme", getTypePlateForme());
-        a_Writer.putTag("writeMapping", isWriteMapping());
-		a_Writer.putTag("fichierMapping", getFichierMapping());
-        a_Writer.putTag("dateISO", isDateISO());
+		a_Writer.putAttribute(ConfigDescription.a_lang, getLang());  
+		a_Writer.putTag(ConfigDescription.node_dataCenter, getDataCenter());
+		a_Writer.putTag(ConfigDescription.node_nemoWsURL, getNemoWebServiceURL());
+		a_Writer.putTag(ConfigDescription.node_nautilusWsURL, getNautilusWebServiceURL());
+		a_Writer.putTag(ConfigDescription.node_showRule, isShowRule());
+		a_Writer.putTag(ConfigDescription.node_contact, getContact());
+		a_Writer.putTag(ConfigDescription.node_modelsDirectory, getModelsDirectory());
+		a_Writer.putTag(ConfigDescription.node_cruisesDirectory, getCruisesDirectory());
+		a_Writer.putTag(ConfigDescription.node_outputDirectory, getOutputDirectory());
+        a_Writer.putTag(ConfigDescription.node_writeCdi, isWriteCdi());
+		a_Writer.putTag(ConfigDescription.node_idEdmoRespCdi, getIdEdmoRespCdi());
+		a_Writer.putTag(ConfigDescription.node_codeEdmoDonnees, getCodeEdmoDonnees());
+		a_Writer.putTag(ConfigDescription.node_idEdmoRespDonnees, getIdEdmoRespDonnees());
+		a_Writer.putTag(ConfigDescription.node_idEdmoDistDonnees, getIdEdmoDistDonnees());
+		a_Writer.putTag(ConfigDescription.node_cdiURL, getCdiURL());
+		a_Writer.putTag(ConfigDescription.node_cdiMethod, getCdiMethod());
+        a_Writer.putTag(ConfigDescription.node_accesDonnees, getAccesDonnees());
+        a_Writer.putTag(ConfigDescription.node_typePlateforme, getTypePlateForme());
+        a_Writer.putTag(ConfigDescription.node_writeMapping, isWriteMapping());
+		a_Writer.putTag(ConfigDescription.node_fichierMapping, getFichierMapping());
+        a_Writer.putTag(ConfigDescription.node_dateISO, isDateISO());
 		//a_Writer.putTag("arboMapping", getArboMapping());
         proxy.writeXMLOn(a_Writer);
-        a_Writer.putTag("edmoURL", getEdmoURL());
-		a_Writer.putTag("vocabURL", getVocabURL());
+        a_Writer.putTag(ConfigDescription.node_edmoURL, getEdmoURL());
+		a_Writer.putTag(ConfigDescription.node_vocabURL, getVocabURL());
 		Iterator<String> keys = getVocabLists().keySet().iterator();
 		while (keys.hasNext()) {
 			String listName = keys.next();
             BODCList list = _vocabLists.get(listName);
-			a_Writer.openTag("VocabListURL");
-			a_Writer.putAttribute("name", listName);
-			a_Writer.putAttribute("value", list.getUrl());
-            a_Writer.putAttribute("version", list.getLocalVersion());
+			a_Writer.openTag(ConfigDescription.node_VocabListURL);
+			a_Writer.putAttribute(ConfigDescription.a_name, listName);  
+			a_Writer.putAttribute(ConfigDescription.a_value, list.getUrl());  
+            a_Writer.putAttribute(ConfigDescription.a_version, list.getLocalVersion());  
 			a_Writer.closeTag();
 		}
-		a_Writer.putTag("defaultFlagTable", getDefaultCode());
+		a_Writer.putTag(ConfigDescription.node_defaultFlagTable, getDefaultCode());
 		for (int i = 0; i < getFlagTables().size(); i++) {
-			a_Writer.openTag("FlagTable");
-			a_Writer.putAttribute("code", getFlagTables().get(i).getCode());
-			a_Writer.putAttribute("label", getFlagTables().get(i).getLibelle());
+			a_Writer.openTag(ConfigDescription.node_FlagTable);
+			a_Writer.putAttribute(ConfigDescription.a_code, getFlagTables().get(i).getCode());  
+			a_Writer.putAttribute(ConfigDescription.a_label, getFlagTables().get(i).getLibelle());  
 			
 			for (int j = 0; j < getFlagTables().get(i).getFlags().size(); j++) {
-				a_Writer.openTag("Flag");
-				a_Writer.putAttribute("local", getFlagTables().get(i).getFlags().get(j).getLocal());
-				a_Writer.putAttribute("SDN", getFlagTables().get(i).getFlags().get(j).getSdn());
+				a_Writer.openTag(ConfigDescription.node_Flag);
+				a_Writer.putAttribute(ConfigDescription.a_local, getFlagTables().get(i).getFlags().get(j).getLocal());  
+				a_Writer.putAttribute(ConfigDescription.a_SDN, getFlagTables().get(i).getFlags().get(j).getSdn());  
 				a_Writer.closeTag();
 			}
 			
 			a_Writer.closeTag();
 		}
 	}
+    
 
-	/**
-	 * 
-	 * Generate XML defintion on a XMLOutputWriter
-	 * 
-	 * @param a_Writer
-	 *            the XMLOutputWriter to which to write the XML Definition
-	 * 
-	 */
-	public void writeXMLOn(XMLOutputWriter a_Writer) {
-		a_Writer.openTag(Intern.fileName_config); 
-		writeXMLBodyOn(a_Writer);
-		a_Writer.closeTag();
-	}
+    /**
+     * 
+     */
+    public void restoreDefault(){
+        // sauvegarde des listes BODC
+        HashMap<String, BODCList> bkVocabLists = new HashMap<String, BODCList>();
+        bkVocabLists.putAll(_vocabLists);
+        
+        XMLBootstrapParser parser = new XMLBootstrapParser(this);
+        try {
+            parser.parse(new FileInputStream(Intern.dir_resources +  
+                                             File.separator + 
+                                             Intern.fileName_configIni +  
+                                             Global.EXT_XML), 
+                         false);
 
-	/**
-	 * 
-	 * Generate XML defintion on a Stream
-	 * 
-	 * @param a_Stream
-	 *            the OutptStream to which to write the XML Definition
-	 * 
-	 */
-	public void writeXMLOn(OutputStream a_Stream) {
-		XMLOutputWriter writer = new XMLOutputWriter(a_Stream);
-		writeXMLOn(writer);
-	}
+            // récupération des listes BODC
+            _vocabLists.clear();
+            _vocabLists.putAll(bkVocabLists);
+            setVocabLists(_vocabLists);
+        } 
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
-	/**
-	 * Returns a copy of this Object
-	 * 
-	 * @return a copy of this object
-	 */
-	@Override
+    /**
+     * 
+     */
+    public void save() {
+        FileOutputStream stream = null;
+        try {
+            // creation nouveau dossier puis creation fichier config
+            File fich2 = new java.io.File(Intern.dir_resources +  
+                                           File.separator + 
+                                           ConfigDescription.node_root + 
+                                           Global.EXT_XML); 
+            stream = new FileOutputStream(fich2.toString());
+            writeXMLOn(stream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (stream != null) {
+                try {
+                    stream.close();
+                } catch (Exception ex) {
+                }
+            }
+        }
+    }
+
+    /**
+     * 
+     * @param a_Lang
+     */
+    public void setLang(String a_Lang) {
+        StringTokenizer tokenizer = new StringTokenizer(a_Lang, Global.UNDERSCORE);
+        String[] tokens = new String[3];
+        int i = 0;
+        while (tokenizer.hasMoreTokens()) {
+            tokens[i++] = tokenizer.nextToken();
+        }
+        if (tokens[2] != null) {
+            setLocale(new Locale(tokens[0], tokens[1], tokens[2])); // language,
+                                                                    // country,
+                                                                    // variant
+        } else if (tokens[1] != null) {
+            setLocale(new Locale(tokens[0], tokens[1])); // language, country
+        } else {
+            setLocale(new Locale(tokens[0])); // language
+        }
+    }
+
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Object clone() throws CloneNotSupportedException {
 		Configuration copy = null;
 		copy = (Configuration) super.clone();
 		copy._locale = null;
 		return copy;
 	}
+    
+
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void release(){
+        _flagTables = null;
+        _vocabLists = null;
+    }
+    
+    
 
 	/**
 	 * Read accessor (getter) for attribute _contact
@@ -753,25 +800,6 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	}
 
 	/**
-	 * Remove any link for role singleton
-	 */
-	public static void releaseSingleton() {
-		setSingleton(null);
-	}
-
-	/**
-	 * Create a new link with x for role singleton
-	 * 
-	 * @param x
-	 *            the object to link with
-	 */
-	private static void setSingleton(Configuration x) {
-		if (_singleton == x)
-			return;
-		_singleton = x;
-	}
-
-	/**
 	 * Remove any link for role locale
 	 */
 	public void releaseLocale() {
@@ -805,95 +833,8 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 	public Locale getLocale() {
 		if (_locale == null) {
 			return Locale.getDefault();
-		}// else {
-			return _locale;
-		//}
-	}
-
-	/**
-	 * 
-	 * @return Configuration
-	 */
-	public static Configuration getSingleton() {
-		if (_singleton == null) {
-			_singleton = new Configuration();
-            
-			XMLBootstrapParser parser = new XMLBootstrapParser(_singleton);
-			try {
-				parser.parse(new FileInputStream(Intern.dir_resources + File.separator + Intern.fileName_config + Global.EXT_XML), false);
-			} catch (FileNotFoundException e) {
-
-				e.printStackTrace();
-			}
 		}
-		return _singleton;
-	}
-    
-    public Configuration restoreDefault(){
-        
-        // sauvegarde des listes BODC
-        HashMap<String, BODCList> bkVocabLists = new HashMap<String, BODCList>();
-        bkVocabLists.putAll(_vocabLists);
-        
-        releaseSingleton();
-        _singleton = new Configuration();
-        XMLBootstrapParser parser = new XMLBootstrapParser(_singleton);
-        try {
-            parser.parse(new FileInputStream(Intern.dir_resources + File.separator + Intern.fileName_configIni + Global.EXT_XML), false);
-
-            // récupération des listes BODC
-            _vocabLists.clear();
-            _vocabLists.putAll(bkVocabLists);
-            _singleton.setVocabLists(_vocabLists);
-        } 
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        return _singleton;
-    }
-
-	/**
-	 * 
-	 */
-	public void save() {
-		FileOutputStream stream = null;
-		try {
-			// creation nouveau dossier puis creation fichier config
-			File fich2 = new java.io.File(Intern.dir_resources + File.separator + Intern.fileName_config + Global.EXT_XML); 
-			stream = new FileOutputStream(fich2.toString());
-			writeXMLOn(stream);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (stream != null) {
-				try {
-					stream.close();
-				} catch (Exception ex) {
-				}
-			}
-		}
-	}
-
-	/**
-	 * 
-	 * @param a_Lang
-	 */
-	public void setLang(String a_Lang) {
-		StringTokenizer tokenizer = new StringTokenizer(a_Lang, Global.UNDERSCORE);
-		String[] tokens = new String[3];
-		int i = 0;
-		while (tokenizer.hasMoreTokens()) {
-			tokens[i++] = tokenizer.nextToken();
-		}
-		if (tokens[2] != null) {
-			setLocale(new Locale(tokens[0], tokens[1], tokens[2])); // language,
-																	// country,
-																	// variant
-		} else if (tokens[1] != null) {
-			setLocale(new Locale(tokens[0], tokens[1])); // language, country
-		} else {
-			setLocale(new Locale(tokens[0])); // language
-		}
+		return _locale;
 	}
 
 	/**
@@ -934,7 +875,7 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 
 	public String getFichierMapping() {
 		if (_fichierMapping.trim().equals(Global.EMPTY_STRING)) {
-			return (Intern.fileName_coupling + Global.EXT_TXT);
+			return (Intern.file_mapping + Global.EXT_TXT);  
 		}
 		return _fichierMapping;
 	}
@@ -945,14 +886,6 @@ public class Configuration implements Cloneable, RootSAXConsumer {
 
 	public void setFichierMapping(String mapping) {
 		_fichierMapping = mapping;
-	}
-	
-	public String getSep() {
-		return Global.TAB; 
-	}
-	
-	public String getSdnHeader() {
-		return "QV:SEADATANET"; //$NON-NLS-1$
 	}
 
 	public ArrayList<FlagTable> getFlagTables() {
@@ -1101,4 +1034,4 @@ public class Configuration implements Cloneable, RootSAXConsumer {
         this.dateISO = Boolean.parseBoolean(dateISO);
     }
 	
-} /* End of class: Configuration */
+}

@@ -37,6 +37,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.part.ViewPart;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.Application;
 import fr.ifremer.nemo.ui.ApplicationWorkbenchWindowAdvisor;
 import fr.ifremer.nemo.ui.FiltrageTableType;
@@ -53,6 +54,8 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
+import fr.ifremer.nemo.util.Global.E_InputType;
+import fr.ifremer.nemo.util.Global.E_ProcessType;
 
 /**
  * Description: vue principale
@@ -121,7 +124,7 @@ public class ViewMain extends ViewPart
     public void createPartControl(Composite parent)
     {
         // ouverture de modele e false
-        DataModel.ouverture = false;
+        //DataModel.ouverture = false;
         DataModel.reset = false;
         DataModel.init();
 
@@ -146,6 +149,7 @@ public class ViewMain extends ViewPart
                         org.eclipse.swt.events.SelectionEvent e)
                 {
                     int tmp = tabFolder.getSelectionIndex();
+                    //System.out.println("SelectionEvent => " + tmp);
                     if (isCollection() && tabFolder.getSelectionIndex() > 0)
                         tmp++;
                     Utils.validationEtape(tmp);
@@ -296,13 +300,12 @@ public class ViewMain extends ViewPart
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
                 @Override
                 public void widgetSelected(
-                        org.eclipse.swt.events.SelectionEvent e)
-                {
+                        org.eclipse.swt.events.SelectionEvent e){
+                    
                     // reinitialisation de la conversion et de l'affichage
                     init();
 
-                    if (radioFichier.getSelection())
-                    {
+                    if (radioFichier.getSelection()){
                         // si fichier campagne
 
                         // reactivation de l'onglet campagne
@@ -315,7 +318,7 @@ public class ViewMain extends ViewPart
                         FileDialog dialog =
                             new FileDialog(shell, SWT.OPEN
                                     | SWT.APPLICATION_MODAL);
-                        dialog.setFilterPath(Utils.configuration
+                        dialog.setFilterPath(Nemo.getInstance().getConfig()
                             .getCruisesDirectory());
                         nomFichier = dialog.open();
 
@@ -366,7 +369,7 @@ public class ViewMain extends ViewPart
                         DirectoryDialog dialog =
                             new DirectoryDialog(shell, SWT.OPEN
                                     | SWT.APPLICATION_MODAL);
-                        dialog.setFilterPath(Utils.configuration
+                        dialog.setFilterPath(Nemo.getInstance().getConfig()
                             .getCruisesDirectory());
                         nomRepertoire = dialog.open();
 
@@ -405,7 +408,7 @@ public class ViewMain extends ViewPart
                         DirectoryDialog dialog =
                             new DirectoryDialog(shell, SWT.OPEN
                                     | SWT.APPLICATION_MODAL);
-                        dialog.setFilterPath(Utils.configuration
+                        dialog.setFilterPath(Nemo.getInstance().getConfig()
                             .getCruisesDirectory());
                         nomRepertoire = dialog.open();
 
@@ -448,7 +451,7 @@ public class ViewMain extends ViewPart
                         DirectoryDialog dialog =
                             new DirectoryDialog(shell, SWT.OPEN
                                     | SWT.APPLICATION_MODAL);
-                        dialog.setFilterPath(Utils.configuration
+                        dialog.setFilterPath(Nemo.getInstance().getConfig()
                             .getCruisesDirectory());
                         nomRepertoire = dialog.open();
 
@@ -739,8 +742,9 @@ public class ViewMain extends ViewPart
     {
 
         // reinitialisation de la conversion
-        if (DataModel.inputModel != null)
-            DataModel.reset();
+        ////if (DataModel.inputModel != null)
+        ////    DataModel.reset();
+        Nemo.getInstance().resetModel();
 
         fileLoaded = false;
         Preformat.setPreformat(false);
@@ -812,22 +816,6 @@ public class ViewMain extends ViewPart
         return (collectionCas1 || collectionCasN);
     }
 
-    public static String typeFichierEntree()
-    {
-        if (radSerieTempo.getSelection())
-        {
-            return Global.TIMESERIES;
-        }
-        else if (radTrajectoire.getSelection())
-        {
-            return Global.TRAJECTORY;
-        }
-        else
-        {
-            return Global.PROFILE;
-        }
-    }
-
     public static void afficheGrpODV()
     {
         grpODV.setVisible(radODV.getSelection());
@@ -872,26 +860,23 @@ public class ViewMain extends ViewPart
         }
     }
 
-    public static void selectTypeFile(String typeFile)
-    {
-
-        if (Global.PROFILE.equals(typeFile))
-        {
+    public static void selectTypeFile(E_InputType typeFile){
+        switch (typeFile){
+            case TRAJECTORY:
+                radProfilVertical.setSelection(false);
+                radSerieTempo.setSelection(false);
+                radTrajectoire.setSelection(true);
+                break;
+            case TIMESERIES:
+                radSerieTempo.setSelection(true);
+                radProfilVertical.setSelection(false);
+                radTrajectoire.setSelection(false);
+                break;
+            default:
             radProfilVertical.setSelection(true);
             radSerieTempo.setSelection(false);
             radTrajectoire.setSelection(false);
-        }
-        else if (Global.TIMESERIES.equals(typeFile))
-        {
-            radSerieTempo.setSelection(true);
-            radProfilVertical.setSelection(false);
-            radTrajectoire.setSelection(false);
-        }
-        else if (Global.TRAJECTORY.equals(typeFile))
-        {
-            radProfilVertical.setSelection(false);
-            radSerieTempo.setSelection(false);
-            radTrajectoire.setSelection(true);
+                break;
         }
     }
 
@@ -902,6 +887,117 @@ public class ViewMain extends ViewPart
     public void setFocus()
     {
         // TODO Auto-generated method stub
+    }
+    
+    // TRADUCTION DES BOUTONS RADIO
+    public static E_InputType getTypeFichierEntree(){
+        if (radSerieTempo.getSelection()){
+            return E_InputType.TIMESERIES;
+        }
+        else if (radTrajectoire.getSelection()){
+            return E_InputType.TRAJECTORY;
+        }
+        else{
+            return E_InputType.PROFILE;
+        }
+    }
+    
+    public static E_ProcessType getTypeTraitement(){
+        if (radioCollectCasN.getSelection()){
+            return E_ProcessType.COLLECTION_FILES;
+        }
+        else if (radioCollectCas1.getSelection()){
+            return E_ProcessType.COLLECTION_DIR;
+        }
+        else if (radioDossier.getSelection()){
+            return E_ProcessType.CRUISE_DIR;
+        }
+        else{
+            return E_ProcessType.CRUISE_FILE;
+        }
+    }
+
+    
+    public static String getSeparateur(){
+        if (ViewMain.chkSeparateur.getSelection()){
+            if (ViewMain.radioTabulation.getSelection()){
+                // Tabulation
+                return Global.TAB;
+            }
+            else if (ViewMain.radioPointVirgule.getSelection()){
+                // Point-virgule
+                return Global.SEMICOLON;
+            }
+            else if (ViewMain.radioVirgule.getSelection()){
+                // Virgule
+                return Global.COMMA;
+            }
+            else if (ViewMain.radioEspace.getSelection()){
+                // Espace
+                return Global.SPACE;
+            }
+            else if (ViewMain.radioSeparateurAutre.getSelection()){
+                // Autre
+                return ViewMain.textSeparateur.getText();
+            }
+        }
+        return Global.EMPTY_STRING;
+    }
+    
+    public static void setSeparateur(String sep){
+        if (sep.equals(Global.EMPTY_STRING)){
+            // pas de séparateur
+            chkSeparateur.setSelection(false);           
+        }else{
+            chkSeparateur.setSelection(true);
+            
+            if (sep.equals(Global.TAB)){
+                // Tabulation
+                radioTabulation.setSelection(true);
+                radioPointVirgule.setSelection(false);
+                radioVirgule.setSelection(false);
+                radioEspace.setSelection(false);
+                radioSeparateurAutre.setSelection(false);
+                textSeparateur.setText(Global.EMPTY_STRING);
+            }
+            else if (sep.equals(Global.SEMICOLON)){
+                // Point-virgule
+                radioTabulation.setSelection(false);
+                radioPointVirgule.setSelection(true);
+                radioVirgule.setSelection(false);
+                radioEspace.setSelection(false);
+                radioSeparateurAutre.setSelection(false);
+                textSeparateur.setText(Global.EMPTY_STRING);
+            }
+            else if (sep.equals(Global.COMMA)){
+                // Virgule
+                radioTabulation.setSelection(false);
+                radioPointVirgule.setSelection(false);
+                radioVirgule.setSelection(true);
+                radioEspace.setSelection(false);
+                radioSeparateurAutre.setSelection(false);
+                textSeparateur.setText(Global.EMPTY_STRING);               
+            }
+            else if (sep.equals(Global.SPACE)){
+                // Espace
+                radioTabulation.setSelection(false);
+                radioPointVirgule.setSelection(false);
+                radioVirgule.setSelection(false);
+                radioEspace.setSelection(true);
+                radioSeparateurAutre.setSelection(false);
+                textSeparateur.setText(Global.EMPTY_STRING);
+            }
+            else{
+                // Autre séparateur
+                radioTabulation.setSelection(false);
+                radioPointVirgule.setSelection(false);
+                radioVirgule.setSelection(false);
+                radioEspace.setSelection(false);
+                radioSeparateurAutre.setSelection(true);
+                textSeparateur.setText(sep);
+            }
+        }
+        setSeparatorVisible(); 
     }
 
 }

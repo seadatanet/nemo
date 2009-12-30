@@ -13,8 +13,7 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.ui.part.ViewPart;
 
-import fr.ifremer.nemo.config.Configuration;
-import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
@@ -33,8 +32,8 @@ public class ViewLog extends ViewPart
     public static StyledText styledTextLogErreurs, styledTextLogInfos,
             styledTextLogHelp = null;
 
-    private static StringBuffer aideDesc = new StringBuffer();
-    private static StringBuffer aideSurvey = new StringBuffer();
+    private static StringBuffer aideFile = new StringBuffer();
+    private static StringBuffer aideCruise = new StringBuffer();
     private static StringBuffer aideStation = new StringBuffer();
     private static StringBuffer aideData = new StringBuffer();
     private static StringBuffer aideConversion = new StringBuffer();
@@ -57,7 +56,7 @@ public class ViewLog extends ViewPart
         try
         {
             // récupération de l'aide en ligne
-            String langue = Utils.configuration.getLang();
+            String langue = Nemo.getInstance().getConfig().getLang();
 
             String fileName =
                 Intern.dir_resources + File.separator + Intern.help_file + langue
@@ -81,12 +80,12 @@ public class ViewLog extends ViewPart
                     switch (cpt)
                     {
                         case 0:
-                            aideDesc.append(readedLine);
-                            aideDesc.append(Global.RN);
+                            aideFile.append(readedLine);
+                            aideFile.append(Global.RN);
                         break;
                         case 1:
-                            aideSurvey.append(readedLine);
-                            aideSurvey.append(Global.RN);
+                            aideCruise.append(readedLine);
+                            aideCruise.append(Global.RN);
                         break;
                         case 2:
                             aideStation.append(readedLine);
@@ -162,14 +161,14 @@ public class ViewLog extends ViewPart
         tabItem.setControl(styledTextLogErreurs);
     }
 
-    public static void aideDesc()
+    public static void aideFile()
     {
-        ViewLog.styledTextLogHelp.setText(aideDesc.toString());
+        ViewLog.styledTextLogHelp.setText(aideFile.toString());
     }
 
-    public static void aideSurvey()
+    public static void aideCruise()
     {
-        ViewLog.styledTextLogHelp.setText(aideSurvey.toString());
+        ViewLog.styledTextLogHelp.setText(aideCruise.toString());
     }
 
     public static void aideStation()

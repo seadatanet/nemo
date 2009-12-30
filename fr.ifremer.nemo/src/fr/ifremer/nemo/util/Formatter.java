@@ -15,7 +15,11 @@ import fr.ifremer.nemo.util.format.LongitudeFormat;
  * @author Gerard BUNEL
  */
 public class Formatter implements Cloneable {
+    
 	static protected Formatter _singleton = null;
+
+    private static final String SPACES = "   "; //$NON-NLS-1$
+    private static final String NaN = "NaN"; //$NON-NLS-1$
 
 	static {
 		_singleton = new Formatter();
@@ -33,7 +37,8 @@ public class Formatter implements Cloneable {
 	 * 
 	 * @return a copy of this object
 	 */
-	public Object clone() throws CloneNotSupportedException {
+	@Override
+    public Object clone() throws CloneNotSupportedException {
 		Formatter copy = null;
 		copy = (Formatter) super.clone();
 		return copy;
@@ -97,9 +102,8 @@ public class Formatter implements Cloneable {
 			throws ParseException {
 		if (Float.isNaN(date)) {
 			return sdefault;
-		} else {
-			return formatDateTime(format, date);
-		}
+		} 
+		return formatDateTime(format, date);
 	}
 
 	/**
@@ -128,11 +132,9 @@ public class Formatter implements Cloneable {
 	 */
 	public String formatFloat(String format, float a_Float) {
 		if (Float.isNaN(a_Float)) {
-			return String.format(java.util.Locale.US, format, a_Float).replace(
-					"NaN", "   "); //$NON-NLS-1$ //$NON-NLS-2$
-		} else {
-			return String.format(java.util.Locale.US, format, a_Float);
-		}
+			return String.format(java.util.Locale.US, format, a_Float).replace(NaN, SPACES);
+		} 
+		return String.format(java.util.Locale.US, format, a_Float);
 	}
 	
 	/**
@@ -145,26 +147,22 @@ public class Formatter implements Cloneable {
 	 */
 	public String formatDouble(String format, Double a_Double) {
 		if (Double.isNaN(a_Double)) {
-			return String.format(java.util.Locale.US, format, a_Double).replace(
-					"NaN", "   "); //$NON-NLS-1$ //$NON-NLS-2$
-		} else {
-			return String.format(java.util.Locale.US, format, a_Double);
+			return String.format(java.util.Locale.US, format, a_Double).replace(NaN, SPACES); 
 		}
+		return String.format(java.util.Locale.US, format, a_Double);
 	}
     
     
     public String formatParameter(String format, Double a_Double) {
         if (Double.isNaN(a_Double)) {
-            return String.format(java.util.Locale.US, format, a_Double).replace("NaN", "   "); //$NON-NLS-1$ //$NON-NLS-2$
-        } //else {
-
+            return String.format(java.util.Locale.US, format, a_Double).replace(NaN, SPACES);
+        }
         String type = format.substring(format.length() - 1);
         if (type.equals("d") || type.equals("D")){ //$NON-NLS-1$ //$NON-NLS-2$
             return String.format(java.util.Locale.US, format, a_Double.intValue());
         }
         
        return String.format(java.util.Locale.US, format, a_Double);
-       //}
     }
 
 	/**
@@ -178,9 +176,8 @@ public class Formatter implements Cloneable {
 	public String formatInt(String format, float a_Float) {
 		if (Float.isNaN(a_Float)) {
 			return formatInt(format, 0).replace('0', ' ');
-		} else {
-			return formatInt(format, Math.round(a_Float));
-		}
+		} 
+		return formatInt(format, Math.round(a_Float));
 	}
 
 	/**
@@ -197,8 +194,8 @@ public class Formatter implements Cloneable {
     
     public String formatBoolean(boolean value){
         String result = Global.EMPTY_STRING;
-        if (value) result = "Y"; //$NON-NLS-1$
-        else result = "N"; //$NON-NLS-1$
+        if (value) result = Global.YES;
+        else result = Global.NO;
         return result;
     }
     
@@ -275,15 +272,6 @@ public class Formatter implements Cloneable {
 	 */
 	public String padString(String a_String, int length) {
         return genericPadString (a_String, length, ' ', false);
-//		if (a_String.length() > length) {
-//			return a_String.substring(0, length);
-//		} else {
-//			StringBuffer buff = new StringBuffer(a_String);
-//			for (int i = a_String.length(); i < length; i++) {
-//				buff.append(' ');
-//			}
-//			return buff.toString();
-//		}
 	}
 
     /**
@@ -294,15 +282,6 @@ public class Formatter implements Cloneable {
      */
     public String padStringLeft(String a_String, int length) {
         return genericPadString (a_String, length, ' ', true);
-//        if (a_String.length() > length) {
-//            return a_String.substring(0, length);
-//        } //else {
-//            StringBuffer buff = new StringBuffer(a_String);
-//            for (int i = a_String.length(); i < length; i++) {
-//                buff.insert(0,' ');
-//            }
-//            return buff.toString();
-//       // }
     }
 	
 	/**
@@ -313,28 +292,18 @@ public class Formatter implements Cloneable {
 	 */
 	public String padZero(String a_String, int length) {
         return genericPadString (a_String, length, '0', true);
-//		if (a_String.length() > length) {
-//			return a_String.substring(0, length);
-//		} //else {
-//			StringBuffer buff = new StringBuffer(a_String);
-//			for (int i = a_String.length(); i < length; i++) {
-//				buff.insert(0,'0');
-//			}
-//			return buff.toString();
-//		//}
 	}
     
     
     public String genericPadString (String a_String, int maxLength, char padChar, boolean left){
         if (a_String.length() > maxLength) {
             return a_String.substring(0, maxLength);
-        } //else {
-            StringBuffer buff = new StringBuffer(a_String);
-            for (int i = a_String.length(); i < maxLength; i++) {
-                if (left) buff.insert(0,padChar);
-                else buff.append(padChar);
-            }
-            return buff.toString();
-        //}
+        }
+        StringBuffer buff = new StringBuffer(a_String);
+        for (int i = a_String.length(); i < maxLength; i++) {
+            if (left) buff.insert(0,padChar);
+            else buff.append(padChar);
+        }
+        return buff.toString();
     }
-} /* End of class: Formatter */
+}

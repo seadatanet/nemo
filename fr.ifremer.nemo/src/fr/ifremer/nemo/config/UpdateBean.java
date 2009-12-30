@@ -66,9 +66,9 @@ public class UpdateBean{
 		return nbRetrieve;
 	}
     
-    public UpdateBean getSubUpdate(String id){
+    public UpdateBean getSubUpdate(String updateId){
         for (UpdateBean update : subUpdates){
-            if (update.getId().equals(id)){
+            if (update.getId().equals(updateId)){
                 return update;
             }
         }

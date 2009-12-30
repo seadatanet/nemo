@@ -14,6 +14,7 @@ import fr.ifremer.nemo.ui.edit.station.AutoLine.MetaInData;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 
 public class EditStationForm extends EditForm
@@ -87,6 +88,12 @@ public class EditStationForm extends EditForm
         drawSections();
 
         // remplissage de l'IHM par le modèle chargé
+        //StationModel stationModel = Application.nemo.getDomain().getCruise().getStation().getModel();
+        //if (stationModel != null){
+            DataModel.fillStation();
+            filled = true;
+        //}
+/*         
         if (DataModel.stationModel != null
                 && DataModel.stationModel.getModel().getDataType() != null){
             DataModel.fillBackStation();
@@ -96,6 +103,7 @@ public class EditStationForm extends EditForm
             DataModel.fillStation();
             filled = true;
         }
+*/
         actualiseEdition();
 
         // refresh du formulaire
@@ -107,8 +115,8 @@ public class EditStationForm extends EditForm
     protected void initSections()
     {
         stationNumber =
-            new StationSection(NemoSection.S_STATIONNUMBER, Messages
-                .getString(NemoSection.S_STATIONNUMBER),
+            new StationSection(Intern.S_STATIONNUMBER, Messages
+                .getString(Intern.S_STATIONNUMBER),
                 Messages.edit_station_sectionReference_lib, true, true, 1);
         stationNumber.addManualInput(null, ComboType.NONE, "1"); //$NON-NLS-1$ 
         if (!ViewMain.radTrajectoire.getSelection())
@@ -124,49 +132,49 @@ public class EditStationForm extends EditForm
         if (!ViewMain.isCollection())
         {
             dataType =
-                new StationSection(NemoSection.S_DATATYPE, Messages
-                    .getString(NemoSection.S_DATATYPE),
+                new StationSection(Intern.S_DATATYPE, Messages
+                    .getString(Intern.S_DATATYPE),
                     Messages.edit_station_sectionDataType_lib, true, false, 1);
             dataType.addCouple(ComboType.DATATYPE, Global.EMPTY_STRING);
             listeSections.add(dataType);
         }
 
         historique =
-            new StationSection(NemoSection.S_DCHIST, Messages
-                .getString(NemoSection.S_DCHIST),
+            new StationSection(Intern.S_DCHIST, Messages
+                .getString(Intern.S_DCHIST),
                 Messages.edit_station_sectionHistory_lib, true, false, 2);
         historique.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
         historique.addAutoInput(null, false, MetaInData.INTERDIT, true);
         listeSections.add(historique);
 
         comments =
-            new StationSection(NemoSection.S_COMMENT, Messages
-                .getString(NemoSection.S_COMMENT),
+            new StationSection(Intern.S_COMMENT, Messages
+                .getString(Intern.S_COMMENT),
                 Messages.edit_station_sectionComment_lib, true, false, 1);
         comments.addManualInput(null, ComboType.BLOCK, Global.EMPTY_STRING);
         comments.addAutoInput(null, true, MetaInData.INTERDIT, true);
         listeSections.add(comments);
-        comments.getAutoInput().setVariableLabel(Messages.label_variable_comment); //$NON-NLS-1$
+        comments.getAutoInput().setVariableLabel(Messages.label_variable_comment);
         
         surfaceSample =
-            new StationSection(NemoSection.S_SURFACE, Messages
-                .getString(NemoSection.S_SURFACE),
+            new StationSection(Intern.S_SURFACE, Messages
+                .getString(Intern.S_SURFACE),
                 Messages.edit_station_sectionSurface_lib, true, false, 2);
         surfaceSample.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
         surfaceSample.addAutoInput(null, false, MetaInData.INTERDIT, true);
         listeSections.add(surfaceSample);
 
         utConvertion =
-            new StationSection(NemoSection.S_OFFSETTU, Messages
-                .getString(NemoSection.S_OFFSETTU), Global.EMPTY_STRING, true,
+            new StationSection(Intern.S_OFFSETTU, Messages
+                .getString(Intern.S_OFFSETTU), Global.EMPTY_STRING, true,
                 false, 1);
         utConvertion.addManualInput(null, ComboType.NONE, "0.0"); //$NON-NLS-1$
         utConvertion.addAutoInput(null, false, MetaInData.INTERDIT, false);
         listeSections.add(utConvertion);
 
         time =
-            new StationSection(NemoSection.S_TIME, Messages
-                .getString(NemoSection.S_TIME),
+            new StationSection(Intern.S_TIME, Messages
+                .getString(Intern.S_TIME),
                 Messages.edit_station_sectionTime_lib, false, true, 1);
         time.addConverter(ComboType.TIME, Global.EMPTY_STRING);
         time.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
@@ -174,8 +182,8 @@ public class EditStationForm extends EditForm
         listeSections.add(time);
 
         date =
-            new StationSection(NemoSection.S_DATE, Messages
-                .getString(NemoSection.S_DATE),
+            new StationSection(Intern.S_DATE, Messages
+                .getString(Intern.S_DATE),
                 Messages.edit_station_sectionDate_lib, false, true, 1);
         date.addConverter(ComboType.DATE, Global.EMPTY_STRING);
         date.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
@@ -183,8 +191,8 @@ public class EditStationForm extends EditForm
         listeSections.add(date);
 
         latitude =
-            new StationSection(NemoSection.S_LAT, Messages
-                .getString(NemoSection.S_LAT),
+            new StationSection(Intern.S_LAT, Messages
+                .getString(Intern.S_LAT),
                 Messages.edit_station_sectionLat_lib, false, true, 1);
         latitude.addConverter(ComboType.LAT, Global.EMPTY_STRING);
         latitude.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
@@ -194,8 +202,8 @@ public class EditStationForm extends EditForm
         if (ViewMain.radSerieTempo.getSelection())
         {
             endLatitude =
-                new StationSection(NemoSection.S_ELAT, Messages
-                    .getString(NemoSection.S_ELAT), Global.EMPTY_STRING, false,
+                new StationSection(Intern.S_ELAT, Messages
+                    .getString(Intern.S_ELAT), Global.EMPTY_STRING, false,
                     true, 1);
             endLatitude.addConverter(ComboType.LAT, Global.EMPTY_STRING);
             endLatitude.addManualInput(null, ComboType.NONE,
@@ -206,8 +214,8 @@ public class EditStationForm extends EditForm
         }
 
         longitude =
-            new StationSection(NemoSection.S_LON, Messages
-                .getString(NemoSection.S_LON),
+            new StationSection(Intern.S_LON, Messages
+                .getString(Intern.S_LON),
                 Messages.edit_station_sectionLon_lib, false, true, 1);
         longitude.addConverter(ComboType.LON, Global.EMPTY_STRING);
         longitude.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
@@ -217,8 +225,8 @@ public class EditStationForm extends EditForm
         if (ViewMain.radSerieTempo.getSelection())
         {
             endLongitude =
-                new StationSection(NemoSection.S_ELON, Messages
-                    .getString(NemoSection.S_ELON), Global.EMPTY_STRING, false,
+                new StationSection(Intern.S_ELON, Messages
+                    .getString(Intern.S_ELON), Global.EMPTY_STRING, false,
                     true, 1);
             endLongitude.addConverter(ComboType.LON, Global.EMPTY_STRING);
             endLongitude.addManualInput(null, ComboType.NONE,
@@ -230,8 +238,8 @@ public class EditStationForm extends EditForm
 
         // FAE 1129 : ajout TEST / position variable à DEPTH
         depth =
-            new StationSection(NemoSection.S_DEPTH, Messages
-                .getString(NemoSection.S_DEPTH),
+            new StationSection(Intern.S_DEPTH, Messages
+                .getString(Intern.S_DEPTH),
                 Messages.edit_station_sectionDepth_lib, true, true, 1);
         depth.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
         depth.addAutoInput(null, true, MetaInData.FACULTATIF, false);
@@ -242,8 +250,8 @@ public class EditStationForm extends EditForm
             if (ViewMain.radSerieTempo.getSelection())
             {
                 endDepth =
-                    new StationSection(NemoSection.S_EDEPTH, Messages
-                        .getString(NemoSection.S_EDEPTH), Global.EMPTY_STRING,
+                    new StationSection(Intern.S_EDEPTH, Messages
+                        .getString(Intern.S_EDEPTH), Global.EMPTY_STRING,
                         true, true, 1);
                 endDepth.addManualInput(null, ComboType.NONE,
                     Global.EMPTY_STRING);
@@ -253,8 +261,8 @@ public class EditStationForm extends EditForm
             }
 
             sensorDepth =
-                new StationSection(NemoSection.S_SENSORDEPTH, Messages
-                    .getString(NemoSection.S_SENSORDEPTH),
+                new StationSection(Intern.S_SENSORDEPTH, Messages
+                    .getString(Intern.S_SENSORDEPTH),
                     Messages.edit_station_sectionSensorDepth_lib, true, false,
                     1);
             sensorDepth.addManualInput(null, ComboType.NONE,
@@ -266,8 +274,8 @@ public class EditStationForm extends EditForm
             if (ViewMain.radSerieTempo.getSelection())
             {
                 magneticDeclin =
-                    new StationSection(NemoSection.S_MAGNETIC, Messages
-                        .getString(NemoSection.S_MAGNETIC),
+                    new StationSection(Intern.S_MAGNETIC, Messages
+                        .getString(Intern.S_MAGNETIC),
                         Messages.edit_station_sectionMagn_lib, true, false, 1);
                 magneticDeclin.addManualInput(null, ComboType.NONE,
                     Global.EMPTY_STRING);
@@ -278,8 +286,8 @@ public class EditStationForm extends EditForm
             }
 
             samplingRate =
-                new StationSection(NemoSection.S_SAMPLINGRATE, Messages
-                    .getString(NemoSection.S_SAMPLINGRATE),
+                new StationSection(Intern.S_SAMPLINGRATE, Messages
+                    .getString(Intern.S_SAMPLINGRATE),
                     Messages.edit_station_sectionSampling_lib, true, true, 1);
             samplingRate.addConverter(ComboType.FRQ, "*1"); //$NON-NLS-1$
             samplingRate.addManualInput(null, ComboType.NONE, "0"); //$NON-NLS-1$
@@ -288,8 +296,8 @@ public class EditStationForm extends EditForm
             listeSections.add(samplingRate);
         }
         qcFlags =
-            new QCflagsSection(NemoSection.S_QCFLAG, Messages
-                .getString(NemoSection.S_QCFLAG),
+            new QCflagsSection(Intern.S_QCFLAG, Messages
+                .getString(Intern.S_QCFLAG),
                 Messages.edit_station_sectionQCflags_lib);
         listeSections.add(qcFlags);
     }

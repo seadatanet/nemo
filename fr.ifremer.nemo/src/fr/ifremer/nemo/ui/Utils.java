@@ -22,19 +22,14 @@ import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 
-import fr.ifremer.nemo.config.BODCList;
-import fr.ifremer.nemo.config.Configuration;
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.FlagTable;
-import fr.ifremer.nemo.input.HeaderFragment;
-import fr.ifremer.nemo.input.InputModel;
-import fr.ifremer.nemo.ui.actions.OptionsAction;
+import fr.ifremer.nemo.input.Fragment;
 import fr.ifremer.nemo.ui.edit.Cursor;
-import fr.ifremer.nemo.ui.edit.DataModel;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 
 public class Utils
@@ -50,7 +45,7 @@ public class Utils
 
     public static int[] taillesCumLignes;
 
-    public static Configuration configuration;
+    //public static Configuration configuration;
 
     public static StyleRange[] stylesCouleurs;
 
@@ -63,7 +58,7 @@ public class Utils
 
     public static ProgressBar progressbar;
 
-    public static InputModel inputModel;
+    //public static InputModel inputModel;
 
     private static FlagTable _blank;
 
@@ -136,7 +131,8 @@ public class Utils
         {
             Utils.razGlobal();
             // invalidEtapes();
-            DataModel.ouverture = false;
+            // TODO à verifier
+            Nemo.getInstance().resetModel();
 
             // reset de l'etape de conversion
             ViewMain.etape = 0;
@@ -213,7 +209,8 @@ public class Utils
 
         if (ligne.getText().equals(Global.EMPTY_STRING))
         {
-            lign = DataModel.stationModel.getNumberOfLines() + 1;
+            // TODO verifier correspondance avec Old_StationModel.getNumberOfLines()
+            lign = Nemo.getInstance().getDomain().getMedia().getModel().getStationHeader() + 1;
         }
         else
         {
@@ -485,7 +482,7 @@ public class Utils
         }
     }
 
-    public static void calculPosxPosy(HeaderFragment frag, Cursor cursor)
+    public static void calculPosxPosy(Fragment frag, Cursor cursor)
     {
         // reconstitue la position x et y du surlignement souris e partir du
         // fragment
@@ -502,7 +499,7 @@ public class Utils
 
     }
 
-    public static void calculOffsetDebOffsetFin(HeaderFragment frag,
+    public static void calculOffsetDebOffsetFin(Fragment frag,
             Cursor cursor)
     {
         // calcule debut et fin e partir du surlignement souris
@@ -528,7 +525,7 @@ public class Utils
         }
     }
 
-    public static void calculRealOffsetFin(HeaderFragment frag)
+    public static void calculRealOffsetFin(Fragment frag)
     {
         int offsetFin;
         int enteteFichier =
@@ -565,7 +562,7 @@ public class Utils
         }
     }
 
-    public static void calculNbreLignesPuisRemplissageFrag(HeaderFragment frag,
+    public static void calculNbreLignesPuisRemplissageFrag(Fragment frag,
             int headerLines)
     {
         int fi, lignDepart, lignFin, i, nbrelignes, longueur;
@@ -669,7 +666,7 @@ public class Utils
     }
 
     public static void calculNbreLignesPuisRemplissageFragClic(
-            HeaderFragment frag, Cursor cursor)
+            Fragment frag, Cursor cursor)
     {
         int deb, fi, lignDepart, lignFin, i, nbrelignes;
 
@@ -769,7 +766,7 @@ public class Utils
         switch (onglet)
         {
             case 0:
-                ViewLog.aideDesc();
+                ViewLog.aideFile();
                 if (ViewMain.editFileForm != null){
                     razEditionCurrent();
                     if (ViewMain.editFileForm.loaded){
@@ -795,7 +792,7 @@ public class Utils
                     ViewMain.editCruiseForm.afficheEdition();
                 }
                 else{
-                    ViewLog.aideSurvey();
+                    ViewLog.aideCruise();
                     ViewMain.textAreaCruise.setText(Global.EMPTY_STRING);
                     ViewMain.affiche = 1;
                 }
@@ -1142,116 +1139,6 @@ public class Utils
         ViewLog.tabFolderLog.setSelection(0);
 
         ViewLog.styledTextLogErreurs.update();
-
-    }
-
-    public static void initConfig()
-    {
-        // chargement de la config
-        if (configuration == null)
-        {
-            configuration = Configuration.getSingleton();
-        }
-        else
-        {
-            Configuration.releaseSingleton();
-            configuration = Configuration.getSingleton();
-        }
-    }
-
-    public static void restoreDefaultConfig()
-    {
-        // Restoration de la configuration initiale
-        configuration = Configuration.getSingleton().restoreDefault();
-        // Enregistrement de la configuration
-        configuration.save();
-    }
-
-    public static void saveConfig(boolean writeIni)
-    {
-        // sauvegarde de la config dans le fichier qui va bien
-        // CONTACT
-        configuration.setContact(Global.EMPTY_STRING);
-
-        // DOSSIERS
-        configuration.setModelsDirectory(OptionsAction.textDossierModele
-            .getText());
-        configuration.setCruisesDirectory(OptionsAction.textDossierCampagne
-            .getText());
-
-        // LANGUE
-        if (OptionsAction.comboLangue.getItem(
-            OptionsAction.comboLangue.getSelectionIndex()).equals(
-            Messages.settings_lang_FR))
-        {
-            configuration.setLang(Intern.lang_fr);
-        }
-        else
-        {
-            configuration.setLang(Intern.lang_en);
-        }
-
-        // CENTRE DE DONNEES
-        configuration.setDataCenter(Utils
-            .extraitCode(OptionsAction.comboCentreDonnees.getText()));
-
-        // WS
-        configuration.setNautilusWebServiceURL(OptionsAction.textAreaNautilus
-            .getText());
-        configuration
-            .setNemoWebServiceURL(OptionsAction.textAreaNemo.getText());
-        configuration.setVocabURL(OptionsAction.textVocabURL.getText());
-        configuration.setEdmoURL(OptionsAction.textWSEdmo.getText());
-        configuration.getProxy().update(writeIni);
-
-        for (BODCList list : Utils.configuration.getVocabLists().values())
-        {
-            list.setUrl();
-        }
-
-        // CDI
-        configuration.setWriteCdi(OptionsAction.checkCDI.getSelection());
-        configuration.setIdEdmoRespCdi(Utils
-            .extraitCode(OptionsAction.comboIdEdmoRespCdi.getText()));
-        configuration.setCodeEdmoDonnees(Utils
-            .extraitCode(OptionsAction.comboCodeEdmoDonnees.getText()));
-        configuration.setIdEdmoRespDonnees(Utils
-            .extraitCode(OptionsAction.comboIdEdmoRespDonnees.getText()));
-        configuration.setIdEdmoDistDonnees(Utils
-            .extraitCode(OptionsAction.comboIdEdmoDistDonnees.getText()));
-        configuration.setCdiURL(OptionsAction.textUrlCdi.getText());
-        configuration.setCdiMethod(Utils
-            .extraitCode(OptionsAction.comboMethodeCdi.getText()));
-        configuration.setAccesDonnees(Utils
-            .extraitCode(OptionsAction.comboAccesDonnees.getText()));
-        configuration.setTypePlateForme(Utils
-            .extraitCode(OptionsAction.comboTypePlateForme.getText()));
-
-        // MAPPING
-        configuration
-            .setWriteMapping(OptionsAction.checkMapping.getSelection());
-        configuration.setFichierMapping(OptionsAction.textFichierMapping
-            .getText());
-        // configuration.setArboMapping(OptionsAction.textArboMapping.getText());
-
-        // DATE ODV
-        configuration.setDateISO(OptionsAction.radDateISO.getSelection());
-
-        // Flags qualite
-        configuration.setDefaultCode(OptionsAction.getDefaultCode());
-        ArrayList<FlagTable> flagTables = new ArrayList<FlagTable>();
-        for (int i = 0; i < OptionsAction.getFlagTables().size(); i++)
-        {
-            FlagTable flagTable =
-                new FlagTable(OptionsAction.getFlagTables().get(i));
-            flagTables.add(flagTable);
-        }
-        configuration.setFlagTables(flagTables);
-
-        // Enregistrement de la configuration
-        configuration.save();
-
-        // System.out.println("sauvegarde options... ok");
 
     }
 
@@ -1607,7 +1494,8 @@ public class Utils
                 ViewMain.editConversionForm.invalidEtape();
         }
         // reinitialisation de la conversion
-        if (DataModel.inputModel != null)
-            DataModel.inputModel.setConverted(false);
+        // TODO remettre setConverted ??
+        //if (DataModel.inputModel != null)
+        //    DataModel.inputModel.setConverted(false);
     }
 }

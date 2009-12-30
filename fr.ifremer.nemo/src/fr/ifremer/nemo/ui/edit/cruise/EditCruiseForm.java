@@ -1,10 +1,7 @@
 package fr.ifremer.nemo.ui.edit.cruise;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
-
-import javax.xml.transform.TransformerException;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
@@ -13,10 +10,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
-import org.xml.sax.SAXException;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.domain.Survey;
+import fr.ifremer.nemo.domain.CruiseDomain;
+import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.ui.FiltrageTableType;
 import fr.ifremer.nemo.ui.SWTProcessWS;
 import fr.ifremer.nemo.ui.SWTProgressWS;
@@ -59,7 +57,7 @@ public class EditCruiseForm extends EditForm
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
-                    Etape.validationSurvey();
+                    Etape.validationCruise();
                 }
             });
 
@@ -108,7 +106,7 @@ public class EditCruiseForm extends EditForm
     {
         super.afficheEdition();
         
-        ViewLog.aideSurvey();
+        ViewLog.aideCruise();
         
         // affichage du texte dans la zone de gauche
         ViewMain.textAreaCruise.setText(Utils.texteBrut);
@@ -139,10 +137,15 @@ public class EditCruiseForm extends EditForm
         ViewMain.affiche = 1;
 
         // remplissage de l'IHM par le modèle chargé
-        if (DataModel.ouverture){
+        //CruiseModel cModel = Application.nemo.getDomain().getCruise().getModel();
+        //if (cModel != null){
+            DataModel.fillCruise();
+            filled = true;
+        //}
+        /*if (DataModel.ouverture){
             DataModel.fillSurvey(null);
             filled = true;
-        }
+        }*/
 
         final Text textCommentaire = sectionCommentaire.getItem(Global.EMPTY_STRING).getValueText();
         textCommentaire
@@ -212,24 +215,27 @@ public class EditCruiseForm extends EditForm
 
     public void webService(String reference)
     {
-        // remplissage du dataModel e partir des valeurs du ws
+        // remplissage du dataModel à partir des valeurs du ws
 
         TableDataSurvey.types.clear();
 
         SWTProcessWS.referenceWS = reference;
         SWTProcessWS.fichiersConstantes = false;
 
-        if (ViewMain.dossierCampagne){
+        /*if (ViewMain.dossierCampagne){
             SWTProcessWS.dossier = true;
         }
         else{
             SWTProcessWS.dossier = false;
         }
+        */
 
         new SWTProgressWS().run();
 
-        // mise e jour de l'onglet courant
-        majApresWS();
+        // mise à jour de l'onglet courant
+        DataModel.fillCruise();
+        
+        //majApresWS();
 
     }
 
@@ -271,7 +277,14 @@ public class EditCruiseForm extends EditForm
     {
         // reset de la liste des dataTypes
         TableDataSurvey.types.clear();
-
+        
+        CruiseDomain cruiseDomain = Nemo.getInstance().getDomain().getCruise();
+        //cruiseDomain.getModel().reset();
+        
+        CruiseModel cruiseModel = importXML(fichier);
+        cruiseDomain.updateCruise(cruiseModel);
+        
+        /*
         Survey survey;
         if (ViewMain.dossierCampagne){
             DataModel.dirSurvey.releaseModel();
@@ -288,12 +301,13 @@ public class EditCruiseForm extends EditForm
             DataModel.singleSurvey.setModel(survey);
             DataModel.singleSurvey.getModel();
         }
+*/
 
-        // mise e jour de l'onglet courant
-        majApresWS();
+        // mise à jour de l'onglet courant
+        DataModel.fillCruise();
     }
     
-    protected Survey importXML(File fichier) throws Exception{
+    protected CruiseModel importXML(File fichier) throws Exception{
 
         // Liste des capteurs
         ArrayList<String> listSensor = new ArrayList<String>();
@@ -305,30 +319,18 @@ public class EditCruiseForm extends EditForm
             }
         }
 
-        Survey survey = new Survey();
-        survey.importFromXML(fichier);
-        survey.setDataCentre(Utils.configuration.getDataCenter());
+        CruiseModel cruise = new CruiseModel();
+        cruise.importFromXML(fichier);
+        cruise.setDataCentre(Nemo.getInstance().getConfig().getDataCenter());
 
         // Mej des types de donnees capteurs
-        for (int index = 0; index < survey.getDataTypes().length; index++)
+        for (int index = 0; index < cruise.getDataTypes().length; index++)
         {
-            survey.dataTypesAt(index).setSensor(
-                listSensor.contains(survey.dataTypesAt(index).getCode()
+            cruise.dataTypesAt(index).setSensor(
+                listSensor.contains(cruise.dataTypesAt(index).getCode()
                     .substring(0, 3)));
         }
-        return survey;
-    }
-    
-
-    protected void majApresWS()
-    {
-        Survey survey;
-        if (ViewMain.dossierCampagne) {
-            survey = DataModel.dirSurvey.getModel();
-        } else {
-            survey = DataModel.singleSurvey.getModel();
-        }
-        DataModel.fillSurvey(survey);
+        return cruise;
     }
 
     @Override
@@ -336,7 +338,7 @@ public class EditCruiseForm extends EditForm
     {
         super.drawingBack();
         
-        ViewLog.aideSurvey();
+        ViewLog.aideCruise();
         ViewMain.affiche = 1;
     }
 
@@ -387,7 +389,7 @@ public class EditCruiseForm extends EditForm
                 Messages.edit_cruise_sectionArchiving,
                 Messages.edit_cruise_sectionArchiving_lib);
         sectionCentre.addItem(Messages.edit_cruise_dataCenter,
-            ComboType.DATACENTER, Utils.configuration.getDataCenter());
+            ComboType.DATACENTER, Nemo.getInstance().getConfig().getDataCenter());
         sectionCentre.addItem(Messages.edit_cruise_confident,
             ComboType.CONFIDENT, "P"); //$NON-NLS-1$
         listeSections.add(sectionCentre);

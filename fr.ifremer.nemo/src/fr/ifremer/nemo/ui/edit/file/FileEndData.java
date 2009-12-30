@@ -17,6 +17,7 @@ import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.util.Global.E_EndData;
 
 /**
  * Description: "Indicator of end of Data" Section in File Description
@@ -277,5 +278,43 @@ public class FileEndData extends FileSection
     public void setStartStationIndicator(String value)
     {
         setterStartStation.setValue(value);
+    }
+    
+
+    
+
+    // TRADUCTION DES BOUTONS RADIO
+    public E_EndData getEndData(){
+        if (radNextStation.getSelection()){
+            return E_EndData.NEXT_START_WITH;
+        }
+        else if (radManuel.getSelection()){
+            return E_EndData.END_WITH;
+        }
+        else if (radLigne.getSelection()){
+            return E_EndData.EMPTY_LINE;
+        }
+        else{
+            return E_EndData.EOF;
+        }
+    }
+    
+    public void setEndData(E_EndData end, String pattern){
+        switch (end){
+            case NEXT_START_WITH:
+                selectEndData(getRadNextStation());
+                setStartStationIndicator(pattern);
+                break;
+            case END_WITH:
+                selectEndData(getRadManuel());
+                setValue(pattern);
+                break;
+            case EMPTY_LINE:
+                selectEndData(getRadLigne());
+                break;
+            default:
+                selectEndData(getRadEOF());
+                break;
+        }
     }
 }

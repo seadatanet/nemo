@@ -1,5 +1,7 @@
 package fr.ifremer.nemo.util.format;
 
+import fr.ifremer.nemo.util.Global;
+
 
 
 /**
@@ -14,7 +16,7 @@ public class ParseElement implements Cloneable {
 	public ParseElementType _type;
 
 	public ParseElement() {
-		_element = "";
+		_element = Global.EMPTY_STRING;
 	}
 
 	/**
@@ -33,10 +35,11 @@ public class ParseElement implements Cloneable {
 	 * 
 	 * @return a copy of this object
 	 */
-	public Object clone() throws CloneNotSupportedException {
+	@Override
+    public Object clone() throws CloneNotSupportedException {
 		ParseElement copy = null;
 		copy = (ParseElement) super.clone();
 		return copy;
 	}
 
-} /* End of class: ParseElement */
+}

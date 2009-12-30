@@ -3,12 +3,14 @@ package fr.ifremer.nemo.ui.edit.data;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.DataModel;
 import fr.ifremer.nemo.ui.edit.EditForm;
 import fr.ifremer.nemo.ui.edit.Etape;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.ui.view.ViewMain;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 public class EditDataForm extends EditForm
@@ -57,11 +59,14 @@ public class EditDataForm extends EditForm
         ViewMain.affiche = 3;
 
         // remplissage de l'IHM par le modele charge
+        // nom du model
+        String modelName = Nemo.getInstance().getNomModele();
+        
         if (TableData.types != null && !TableData.types.isEmpty()){
             TableData.razTableData();
             TableData.creationTable();
         }
-        else if (DataModel.ouverture){
+        else if (!Global.EMPTY_STRING.equals(modelName)){
             DataModel.fillData();
         }
         else{

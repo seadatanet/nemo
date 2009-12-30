@@ -4,8 +4,8 @@
   <nautilusWsURL>http://www.ifremer.fr/WSnautilus/services/NAUTILUS</nautilusWsURL>
   <showRule>true</showRule>
   <contact></contact>
-  <modelsDirectory>D:\DBR\PROJETS\IFREMER_SEADATANET\NEMO\retoursUtilisateurs</modelsDirectory>
-  <cruisesDirectory>D:\DBR\PROJETS\IFREMER_SEADATANET\NEMO\retoursUtilisateurs</cruisesDirectory>
+  <modelsDirectory>\\Siec\9064780_conv\Developpement\JeuxDeTests\Modeles</modelsDirectory>
+  <cruisesDirectory>\\Siec\9064780_conv\Developpement\JeuxDeTests\Donnees</cruisesDirectory>
   <outputDirectory></outputDirectory>
   <writeCdi>false</writeCdi>
   <idEdmoRespCdi>486</idEdmoRespCdi>

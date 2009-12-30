@@ -5,10 +5,12 @@ import java.text.FieldPosition;
 import java.text.ParsePosition;
 
 import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
 
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
+
+import fr.ifremer.nemo.input.ModelDescription;
+import fr.ifremer.nemo.util.Global;
 
 
 /**
@@ -18,11 +20,13 @@ import com.ago.xml.XMLOutputWriter;
  * @author Gerard BUNEL
  */
 public class FloatFormat extends ExternalizableFormat implements Cloneable {
-	public String _formatString;
+
+    private static final long serialVersionUID = 2589900117568212494L;
+    public String _formatString;
 
 	public FloatFormat() {
 		super();
-		_formatString = "";
+		_formatString = Global.EMPTY_STRING;
 	}
 
 	/**
@@ -49,11 +53,13 @@ public class FloatFormat extends ExternalizableFormat implements Cloneable {
 	 * @return SAXConsumer
 	 * 
 	 */
-	public static SAXConsumer fromElement(String a_URI, String a_LocalName,
-			String a_QName, Attributes a_Attributes) throws SAXException {
+	public static SAXConsumer fromElement(String a_URI, 
+                                          String a_LocalName,
+                                          String a_QName, 
+                                          Attributes a_Attributes){
 		FloatFormat tmp = new FloatFormat();
 		tmp.buildFromElement(a_URI, a_LocalName, a_QName, a_Attributes);
-		return (SAXConsumer) tmp;
+		return tmp;
 	}
 
 	/**
@@ -70,10 +76,12 @@ public class FloatFormat extends ExternalizableFormat implements Cloneable {
 	 *            XML Element attributes
 	 * 
 	 */
-	public void buildFromElement(String a_URI, String a_LocalName,
-			String a_QName, Attributes a_Attributes) throws SAXException {
+	public void buildFromElement(String a_URI, 
+                                 String a_LocalName,
+                                 String a_QName, 
+                                 Attributes a_Attributes) {
 		String tmp;
-		if ((tmp = a_Attributes.getValue("formatString")) != null) {
+		if ((tmp = a_Attributes.getValue(ModelDescription.a_string)) != null) {
 			setFormatString(tmp);
 		}
 	}
@@ -94,7 +102,7 @@ public class FloatFormat extends ExternalizableFormat implements Cloneable {
 	 * 
 	 */
 	public SAXConsumer consumeElement(String a_URI, String a_LocalName,
-			String a_QName, Attributes a_Attributes) throws SAXException {
+			String a_QName, Attributes a_Attributes){
 		return null;
 	}
 
@@ -106,7 +114,7 @@ public class FloatFormat extends ExternalizableFormat implements Cloneable {
 	 *            The CDATA content
 	 * 
 	 */
-	public void consumeCharacters(String a_Characters) throws SAXException {
+	public void consumeCharacters(String a_Characters){
 	}
 
 	/**
@@ -118,7 +126,7 @@ public class FloatFormat extends ExternalizableFormat implements Cloneable {
 	 * 
 	 */
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
-		a_Writer.putAttribute("formatString", getFormatString());
+		a_Writer.putAttribute(ModelDescription.a_string, getFormatString());
 	}
 
 	/**
@@ -129,8 +137,9 @@ public class FloatFormat extends ExternalizableFormat implements Cloneable {
 	 *            the XMLOutputWriter to which to write the XML Definition
 	 * 
 	 */
-	public void writeXMLOn(XMLOutputWriter a_Writer) {
-		a_Writer.openTag("FloatFormat");
+	@Override
+    public void writeXMLOn(XMLOutputWriter a_Writer) {
+		a_Writer.openTag(ModelDescription.node_fFloat);
 		writeXMLBodyOn(a_Writer);
 		a_Writer.closeTag();
 	}
@@ -173,7 +182,8 @@ public class FloatFormat extends ExternalizableFormat implements Cloneable {
 	 * 
 	 * @return Object
 	 */
-	public Object clone() {
+	@Override
+    public Object clone() {
 		return new FloatFormat(new String(_formatString));
 	}
 
@@ -184,8 +194,10 @@ public class FloatFormat extends ExternalizableFormat implements Cloneable {
 	 * @param pos
 	 * @return StringBuffer
 	 */
-	public StringBuffer format(Object obj, StringBuffer toAppendTo,
-			FieldPosition pos) {
+	@Override
+    public StringBuffer format(Object obj, 
+                               StringBuffer toAppendTo,
+                               FieldPosition pos) {
 		toAppendTo.append(String
 				.format(java.util.Locale.US, _formatString, obj));
 		return toAppendTo;
@@ -197,7 +209,9 @@ public class FloatFormat extends ExternalizableFormat implements Cloneable {
 	 * @param pos
 	 * @return Float
 	 */
-	public Float parseObject(String source, ParsePosition pos) {
+	@Override
+    public Float parseObject(String source, 
+                             ParsePosition pos) {
 		pos.setIndex(source.length());
 		return Float.valueOf(source);
 	}
@@ -206,8 +220,9 @@ public class FloatFormat extends ExternalizableFormat implements Cloneable {
 	 * 
 	 * @return String
 	 */
-	public String toString() {
+	@Override
+    public String toString() {
 		return _formatString;
 	}
 
-} /* End of class: FloatFormat */
+}

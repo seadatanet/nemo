@@ -1,6 +1,7 @@
 package fr.ifremer.nemo.util.format;
 
 import java.text.ParseException;
+import java.util.Vector;
 
 import com.ago.parsing.AbstractParser;
 
@@ -10,9 +11,11 @@ import com.ago.parsing.AbstractParser;
  * 
  * 
  * @author Gerard BUNEL
- */
+ */ 
+@SuppressWarnings("nls")
 public class AngleFormatParser extends AbstractParser implements Cloneable {
-	static public final String CHARS = "CHARS".intern();
+
+    static public final String CHARS = "CHARS".intern();
 
 	static protected final String DEGREE = "DEGREE".intern();
 
@@ -64,7 +67,8 @@ public class AngleFormatParser extends AbstractParser implements Cloneable {
 	 * 
 	 * @return a copy of this object
 	 */
-	public Object clone() throws CloneNotSupportedException {
+	@Override
+    public Object clone() throws CloneNotSupportedException {
 		AngleFormatParser copy = null;
 		copy = (AngleFormatParser) super.clone();
 		return copy;
@@ -171,66 +175,67 @@ public class AngleFormatParser extends AbstractParser implements Cloneable {
 	/**
 	 * 
 	 */
-	protected void initTypeTable() {
+	@Override
+    protected void initTypeTable() {
 		for (int i = 0; i < typeTable.length; i++) {
 			typeTable[i] = XDEFAULT;
 		}
 
 		String separators = "\r\n\t";
 		for (int i = 0; i < separators.length(); i++) {
-			typeTable[(int) separators.charAt(i)] = XDELIMITER;
+			typeTable[separators.charAt(i)] = XDELIMITER;
 		}
 		String digits = "0123456789";
 		for (int i = 0; i < digits.length(); i++) {
-			typeTable[(int) digits.charAt(i)] = XLETTER;
+			typeTable[digits.charAt(i)] = XLETTER;
 		}
 		String letters = "abcdefghijklmnopqrstuvwxytzABCDEFGHIJKLMNOPQRSTUVWXYTZ_";
 		for (int i = 0; i < letters.length(); i++) {
-			typeTable[(int) letters.charAt(i)] = XLETTER;
+			typeTable[letters.charAt(i)] = XLETTER;
 		}
 		String binaries = "!%&*-/<=>?@\\~";
 		for (int i = 0; i < binaries.length(); i++) {
-			typeTable[(int) binaries.charAt(i)] = XLETTER;
+			typeTable[binaries.charAt(i)] = XLETTER;
 		}
 
 		// Other multi-character tokens
-		typeTable[(int) '"'] = XLETTER;
-		typeTable[(int) '\''] = XLETTER;
-		typeTable[(int) '#'] = XLETTER;
-		typeTable[(int) '('] = XLETTER;
-		typeTable[(int) ')'] = XLETTER;
-		typeTable[(int) '$'] = XLETTER;
-		typeTable[(int) ','] = XLETTER;
-		typeTable[(int) '.'] = XLETTER;
-		typeTable[(int) ':'] = XLETTER;
-		typeTable[(int) ';'] = XLETTER;
-		typeTable[(int) '['] = XLETTER;
-		typeTable[(int) ']'] = XLETTER;
-		typeTable[(int) '{'] = XLETTER;
-		typeTable[(int) '}'] = XLETTER;
-		typeTable[(int) '^'] = XLETTER;
-		typeTable[(int) '|'] = XLETTER;
-		// typeTable[(int) ' '] = XLETTER;
+		typeTable['"'] = XLETTER;
+		typeTable['\''] = XLETTER;
+		typeTable['#'] = XLETTER;
+		typeTable['('] = XLETTER;
+		typeTable[')'] = XLETTER;
+		typeTable['$'] = XLETTER;
+		typeTable[','] = XLETTER;
+		typeTable['.'] = XLETTER;
+		typeTable[':'] = XLETTER;
+		typeTable[';'] = XLETTER;
+		typeTable['['] = XLETTER;
+		typeTable[']'] = XLETTER;
+		typeTable['{'] = XLETTER;
+		typeTable['}'] = XLETTER;
+		typeTable['^'] = XLETTER;
+		typeTable['|'] = XLETTER;
+		// typeTable[' '] = XLETTER;
 
-		typeTable[(int) 'N'] = XHEMISPHERE;
-		typeTable[(int) 'D'] = XDEGREE;
-		typeTable[(int) 'd'] = DEGREE_FRACTION;
-		typeTable[(int) 'M'] = XMINUTE;
-		typeTable[(int) 'm'] = MINUTE_FRACTION;
-		typeTable[(int) 'S'] = XSECOND;
-		typeTable[(int) '.'] = DOT;
-		typeTable[(int) ' '] = XLETTER;
-		typeTable[(int) '+'] = XSIGN;
+		typeTable['N'] = XHEMISPHERE;
+		typeTable['D'] = XDEGREE;
+		typeTable['d'] = DEGREE_FRACTION;
+		typeTable['M'] = XMINUTE;
+		typeTable['m'] = MINUTE_FRACTION;
+		typeTable['S'] = XSECOND;
+		typeTable['.'] = DOT;
+		typeTable[' '] = XLETTER;
+		typeTable['+'] = XSIGN;
 	}
 
 	/**
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 		AngleFormatParser parser = new AngleFormatParser();
 		try {
-			java.util.Vector v = parser.breakIntoTokens(args[0]);
+			Vector<String> v = parser.breakIntoTokens(args[0]);
 			for (int i = 0; i < v.size(); i++) {
 				System.out.println("i=" + i + " \"" + v.get(i) + "\"");
 			}

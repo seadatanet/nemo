@@ -10,7 +10,7 @@ import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
 
-import fr.ifremer.nemo.config.Configuration;
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.mapping.EditMappingAction;
 import fr.ifremer.nemo.mapping.ExportMappingAction;
 import fr.ifremer.nemo.mapping.ImportMappingAction;
@@ -68,15 +68,15 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
         
 		// MAPPING
 		mappingDatabaseImportAction = new ImportMappingAction(window);
-		mappingDatabaseImportAction.setEnabled(Configuration.getSingleton().isWriteMapping());
+		mappingDatabaseImportAction.setEnabled(Nemo.getInstance().getConfig().isWriteMapping());
 		register(mappingDatabaseImportAction);
 		
 		mappingDatabaseExportAction = new ExportMappingAction(window);
-		mappingDatabaseExportAction.setEnabled(Configuration.getSingleton().isWriteMapping());
+		mappingDatabaseExportAction.setEnabled(Nemo.getInstance().getConfig().isWriteMapping());
 		register(mappingDatabaseExportAction);
 		
 		mappingDatabaseEditAction = new EditMappingAction(window);
-		mappingDatabaseEditAction.setEnabled(Configuration.getSingleton().isWriteMapping());
+		mappingDatabaseEditAction.setEnabled(Nemo.getInstance().getConfig().isWriteMapping());
 		register(mappingDatabaseEditAction);
 
 

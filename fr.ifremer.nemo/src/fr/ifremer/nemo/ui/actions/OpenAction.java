@@ -1,8 +1,6 @@
 package fr.ifremer.nemo.ui.actions;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.ISelection;
@@ -15,11 +13,8 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 
-import com.ago.xml.XMLBootstrapParser;
-
-import fr.ifremer.nemo.input.InputModel;
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.edit.DataModel;
 import fr.ifremer.nemo.ui.edit.data.TableData;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.ui.view.ViewMain;
@@ -33,91 +28,69 @@ public class OpenAction extends Action implements ISelectionListener,
 
     public final static String ID = "fr.ifremer.nemo.ui.OpenAction"; //$NON-NLS-1$
 
-    // vars necessaires e la fenetre d'options
-
-    public static Shell shelloptions;
-
-    public static String nomModele, nomFichierModele;
-
-    public OpenAction(IWorkbenchWindow window)
-    {
-
+    public OpenAction(IWorkbenchWindow window){
         this.window = window;
         setId(ID);
         setText(Messages.menu_openModel);
         window.getSelectionService().addSelectionListener(this);
-
     }
 
-    public void dispose()
-    {
+    public void dispose(){
         window.getSelectionService().addSelectionListener(this);
-
     }
 
     @Override
-    public void run()
-    {
-        FileInputStream stream = null;
-
+    public void run(){
         // verifier que un fichier est charge avant d'ouvrir un modele
-        if (!ViewMain.editFileForm.loaded)
-        {
+        if (!ViewMain.editFileForm.loaded){
             Utils.messageErreurAppend(Messages.error_openModel);
         }
-        else
-        {
-            InputModel inputModel = new InputModel();
-
-            Shell shell =
-                PlatformUI.getWorkbench().getDisplay().getActiveShell();
-            FileDialog dialog =
-                new FileDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
-            dialog.setFilterPath(Utils.configuration.getModelsDirectory()
-                    + File.separator);
+        else{
+            Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+            FileDialog dialog = new FileDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
+            dialog.setFilterPath(Nemo.getInstance().getConfig().getModelsDirectory() + File.separator);
             dialog.setText(Messages.dialog_openModel);
 
             String extensions[] = new String[1];
             extensions[0] = Global.STAR + Global.EXT_XML;
             dialog.setFilterExtensions(extensions);
 
-            nomModele = dialog.open();
+            String nomModele = dialog.open();
 
-            if (nomModele != null)
-            {
-                // ouverture du fichier XML de modele
-                XMLBootstrapParser parser = new XMLBootstrapParser(inputModel);
+            if (nomModele != null){
+                try{
+                    Nemo.getInstance().openModel(nomModele);
+                    
+                    // forcage affichage onglet 0
+                    ViewMain.tabFolder.setSelection(0);
+                    ViewMain.affiche = 0;
 
-                try
-                {
-                    stream = new java.io.FileInputStream(nomModele);
+                    // RAZ global
+                    Utils.razGlobal();
+
+                    // reset de l'etape de conversion
+                    ViewMain.etape = 0;
+
+                    // lancement du processus sur le premier onglet et effacement preventif
+                    // si besoin
+                    // fillDesc(true);
+                    ViewMain.editFileForm.afficheEdition();
+
+                    ViewLog.styledTextLogInfos.append(Messages.success_openModel + nomModele);
+
+                    // reinitialisation du tableau de paramètres
+                    if (ViewMain.tableData != null)
+                        TableData.go();
                 }
-                catch (FileNotFoundException e)
-                {
+                catch (Exception e){
+                    // TODO affiner gestion exceptions
                     Utils.messageErreurAppend(Messages.error);
                     e.printStackTrace();
                 }
-
-                parser.parse(stream, false);
-
-                File fich = new File(nomModele);
-                nomFichierModele = fich.getName();
-
-                DataModel.ouvertureModele(inputModel);
-                DataModel.ouverture = true;
-
-                ViewLog.styledTextLogInfos.append(Messages.success_openModel
-                        + nomModele);
-
-                // reinitialisation du tableau de paramètres
-                if (ViewMain.tableData != null)
-                    TableData.go();
             }
         }
     }
 
-    public void selectionChanged(IWorkbenchPart part, ISelection incoming)
-    {
+    public void selectionChanged(IWorkbenchPart part, ISelection incoming){
     }
-
 }

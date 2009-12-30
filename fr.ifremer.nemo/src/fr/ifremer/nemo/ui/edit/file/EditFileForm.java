@@ -7,9 +7,8 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.ApplicationWorkbenchWindowAdvisor;
-import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.actions.OpenAction;
 import fr.ifremer.nemo.ui.edit.DataModel;
 import fr.ifremer.nemo.ui.edit.EditForm;
 import fr.ifremer.nemo.ui.edit.Etape;
@@ -25,6 +24,8 @@ public class EditFileForm extends EditForm
     public FileSection sectionEnteteFichier, sectionFinStation;
     public FileStationHeader sectionEnteteStation;
     public FileEndData sectionRuptureDonnees;
+    
+    private Button buttonValidateAll;
 
     @Override
     public void createEditionForm(Composite parent)
@@ -36,6 +37,30 @@ public class EditFileForm extends EditForm
 
         // init des objets
         initSections();
+        
+
+        buttonValidateAll = new Button(formEdition.getBody(), SWT.PUSH);
+        buttonValidateAll.setBackground(ViewMain.backgroungEdit);
+        buttonValidateAll.setText("Validate all steps");
+        buttonValidateAll
+        .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+            @Override
+            public void widgetSelected(
+                    org.eclipse.swt.events.SelectionEvent e)
+            {
+                Etape.validationFile();
+                if (ViewMain.etape == 1){
+                    ViewMain.tabFolder.setSelection(ViewMain.tabFolder.getItem(1));
+                    //Etape.validationSurvey();
+                }
+                if (ViewMain.etape == 2){
+                    Etape.validationStation();
+                }
+                if (ViewMain.etape == 3){
+                    Etape.validationData();
+                }
+            }
+        });
 
         // bouton "valider etape"
         createButtonValidate();
@@ -45,7 +70,7 @@ public class EditFileForm extends EditForm
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
-                    Etape.validationDesc();
+                    Etape.validationFile();
                 }
             });
 
@@ -62,19 +87,22 @@ public class EditFileForm extends EditForm
     @Override
     public void afficheEdition()
     {
+        // nom du model
+        //String modelName = Nemo.getInstance().getNomModele();
+        
         if (ViewMain.fileLoaded)
         {
             super.afficheEdition();
 
-            ViewLog.aideDesc();
+            ViewLog.aideFile();
             loaded = true;            
             ViewMain.affiche = 0;
 
             // remplissage de l'IHM par le modèle chargé
-            if (DataModel.ouverture){
+            //if (!Global.EMPTY_STRING.equals(modelName)){
                 DataModel.fillDesc(false);
                 filled = true;
-            }
+            //}
             actualiseEdition();
 
             formEdition.redraw();
@@ -92,7 +120,7 @@ public class EditFileForm extends EditForm
             super.drawingBack();
             
             nomNemo();
-            ViewLog.aideDesc();
+            ViewLog.aideFile();
             ViewMain.affiche = 0;
         }
     }
@@ -147,16 +175,18 @@ public class EditFileForm extends EditForm
 
     public void nomNemo()
     {
+        // nom du model
+        String modelName = Nemo.getInstance().getNomModele();
+        
         // nom de l'application
         if (ViewMain.dossierCampagne){
             // dossier campagne
             File fich = new File(ViewMain.nomRepertoire);
-            if (DataModel.ouverture)
-            {
+            if (!Global.EMPTY_STRING.equals(modelName)){
                 ApplicationWorkbenchWindowAdvisor.configurer_titre
                     .setTitle(Messages.application_directoryTitle
                             + fich.getName() + Messages.application_modelTitle
-                            + OpenAction.nomFichierModele + " ]"); //$NON-NLS-1$
+                            + modelName + " ]"); //$NON-NLS-1$
 
             }
             else{
@@ -171,11 +201,11 @@ public class EditFileForm extends EditForm
             File fich;
             fich = new File(ViewMain.nomFichier);
 
-            if (DataModel.ouverture){
+            if (!Global.EMPTY_STRING.equals(modelName)){
                 ApplicationWorkbenchWindowAdvisor.configurer_titre
                     .setTitle(Messages.application_fileTitle + fich.getName()
                             + Messages.application_modelTitle
-                            + OpenAction.nomFichierModele + " ]"); //$NON-NLS-1$
+                            + modelName + " ]"); //$NON-NLS-1$
             }
             else{
                 ApplicationWorkbenchWindowAdvisor.configurer_titre
@@ -183,6 +213,13 @@ public class EditFileForm extends EditForm
                             + " ]"); //$NON-NLS-1$ 
             }
         }
+    }
+
+    @Override
+    protected void disposeElements()
+    {
+        super.disposeElements();
+        buttonValidateAll.dispose();
     }
 
     @Override
@@ -197,5 +234,4 @@ public class EditFileForm extends EditForm
         super.invalidEtape(0);
         ViewMain.tabFile.setText(Messages.onglet_file);
     }
-
 }

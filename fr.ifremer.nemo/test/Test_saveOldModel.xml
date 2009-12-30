@@ -1,0 +1,226 @@
+<InputModel version="1.2.20">
+  <MediaModel path="\\Siec\9064780_conv\Developpement\JeuxDeTests\Donnees\CampagneFICH_profile(diapalis2_bot)\diapalis2_bot.prn">
+    <processType multiStations="true">CRUISE_FILE</processType>
+    <separator></separator>
+    <inputType>PROFILE</inputType>
+    <fileHeader>0</fileHeader>
+    <stationHeader pattern="">2</stationHeader>
+    <endStation>0</endStation>
+    <endData pattern="END">END_WITH</endData>
+  </MediaModel>
+  <CruiseModel>
+    <reference>FI35200110014</reference>
+    <name>DIAPALIS 2</name>
+    <shipCode>35AY</shipCode>
+    <shipName>Alis</shipName>
+    <startDate>1007942400000</startDate>
+    <endDate>1008892800000</endDate>
+    <regionName>Coral Sea</regionName>
+    <country>35</country>
+    <laboratories>IRD, CNRS, IUEM et Universite</laboratories>
+    <chiefScientist>LE BOUTEILLER Aubert</chiefScientist>
+    <projectName>JGOFS - FRANCE/PROOF</projectName>
+    <dataCentre>FI</dataCentre>
+    <availability>publicly</availability>
+    <comment><![CDATA[Ces donnees hydrologiques sont issues de la base de donnees DIAPAZON :
+http://www.com.univ-mrs.fr/IRD/urcyano/bdd/diapazon/bddiapaz.htm
+
+L'utilisation de ces donnees est soumise aux conditions suivantes :
+- demander l'autorisation aux responsables dont les noms et contacts figurent
+sur la page correspondant a la campagne.
+- faire reference a leur origine.]]></comment>
+    <dataTypes>
+      <DataType code="B71">
+        <profiles>8</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H09">
+        <profiles>13</profiles>
+        <qc>false</qc>
+        <sensor>true</sensor>
+      </DataType>
+    </dataTypes>
+  </CruiseModel>
+  <StationModel>
+    <referenceProperty>
+      <PropertyModel property="reference" userProvided="false">
+        <HeaderFragment isSingleLine="false" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>8</firstCharOffset>
+          <lastCharOffset>9</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+    </referenceProperty>
+    <properties>
+      <PropertyModel property="date" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="DD/MM/YYYY"/>
+        </format>
+        <HeaderFragment isSingleLine="false" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>11</firstCharOffset>
+          <lastCharOffset>20</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="time" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="hh24:mm"/>
+        </format>
+        <HeaderFragment isSingleLine="false" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>22</firstCharOffset>
+          <lastCharOffset>26</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="offsetTU" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue>0.0</userValue>
+      </PropertyModel>
+      <PropertyModel property="latitude" userProvided="false">
+        <format>
+          <LatitudeFormat formatString="NDD MM.mm"/>
+        </format>
+        <HeaderFragment isSingleLine="false" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>32</firstCharOffset>
+          <lastCharOffset>40</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="longitude" userProvided="false">
+        <format>
+          <LongitudeFormat formatString="NDDD MM.mm"/>
+        </format>
+        <HeaderFragment isSingleLine="false" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>42</firstCharOffset>
+          <lastCharOffset>51</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="bottomDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue>NaN</userValue>
+      </PropertyModel>
+      <PropertyModel property="dcHistory1" userProvided="true">
+        <userValue>test</userValue>
+      </PropertyModel>
+      <PropertyModel property="dcHistory2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="comment" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+    </properties>
+    <DataType code="H09">
+      <profiles>13</profiles>
+      <qc>false</qc>
+      <sensor>true</sensor>
+    </DataType>
+    <FlagTable code="" label="">
+      <Flag local="0" SDN="0 - no quality control"/>
+      <Flag local="1" SDN="1 - good value"/>
+      <Flag local="2" SDN="2 - probably good value"/>
+      <Flag local="3" SDN="3 - probably bad value"/>
+      <Flag local="4" SDN="4 - bad value"/>
+      <Flag local="5" SDN="5 - changed value"/>
+      <Flag local="6" SDN="6 - value below detection"/>
+      <Flag local="7" SDN="7 - value in excess"/>
+      <Flag local="8" SDN="8 - interpolated value"/>
+      <Flag local="9" SDN="9 - missing value"/>
+      <Flag local="A" SDN="A - value phenomenon uncertain"/>
+    </FlagTable>
+  </StationModel>
+  <DataModel>
+    <parameters>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>-999.9</inputDefault>
+        <LineFragment firstCharOffset="1" lastCharOffset="10"/>
+        <Parameter code="PRES">
+          <fullName>SEA PRESSURE sea surface=0</fullName>
+          <unit>decibar=10000 pascals</unit>
+          <default>-999.9</default>
+          <format>%6.1f</format>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>99.99</inputDefault>
+        <LineFragment firstCharOffset="1" lastCharOffset="10"/>
+        <Parameter code="PHOS">
+          <fullName>PHOSPHATE (PO4-P) CONTENT</fullName>
+          <unit>millimole/m3</unit>
+          <default>99.99</default>
+          <format>%5.2f</format>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>99.999</inputDefault>
+        <LineFragment firstCharOffset="1" lastCharOffset="10"/>
+        <Parameter code="NTRI">
+          <fullName>NITRITE (NO2-N) CONTENT</fullName>
+          <unit>millimole/m3</unit>
+          <default>99.999</default>
+          <format>%6.3f</format>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>99.999</inputDefault>
+        <LineFragment firstCharOffset="1" lastCharOffset="10"/>
+        <Parameter code="CPHL">
+          <fullName>CHLOROPHYLL-A TOTAL</fullName>
+          <unit>milligram/m3</unit>
+          <default>99.999</default>
+          <format>%6.3f</format>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>99.99</inputDefault>
+        <LineFragment firstCharOffset="1" lastCharOffset="10"/>
+        <Parameter code="AMON">
+          <fullName>AMMONIUM (NH4-N) CONTENT</fullName>
+          <unit>millimole/m3</unit>
+          <default>999.99</default>
+          <format>%6.2f</format>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x/1000.0</conversionFormula>
+        <inputDefault>999.9</inputDefault>
+        <LineFragment firstCharOffset="1" lastCharOffset="10"/>
+        <Parameter code="TPHS">
+          <fullName>TOTAL PHOSPHORUS (P) CONTENT</fullName>
+          <unit>millimole/m3</unit>
+          <default>99.9999</default>
+          <format>%7.4f</format>
+        </Parameter>
+      </ParameterModel>
+    </parameters>
+  </DataModel>
+  <ConversionModel>
+    <permissions>
+      <MEDALAS enable="true"/>
+      <ODV_MULTISTATIONS enable="true"/>
+      <ODV_MONOSTATION enable="true"/>
+    </permissions>
+    <sortStations>false</sortStations>
+  </ConversionModel>
+</InputModel>

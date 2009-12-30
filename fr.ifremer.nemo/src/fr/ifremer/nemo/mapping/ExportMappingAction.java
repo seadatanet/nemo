@@ -25,7 +25,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 
-import fr.ifremer.nemo.config.Configuration;
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
@@ -62,15 +62,14 @@ public class ExportMappingAction extends Action implements ISelectionListener,
     @Override
     public void run()
     {
-
         Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
         FileDialog dialog =
             new FileDialog(shell, SWT.SAVE | SWT.APPLICATION_MODAL);
-        dialog.setFilterPath(Utils.configuration.getModelsDirectory()
+        dialog.setFilterPath(Nemo.getInstance().getConfig().getModelsDirectory()
                 + File.separator);
         dialog.setText(Messages.ExportMappingAction_5);
 
-        dialog.setFileName(Configuration.getSingleton().getFichierMapping());
+        dialog.setFileName(Nemo.getInstance().getConfig().getFichierMapping());
         String extensions[] = new String[1];
         extensions[0] = Global.STAR + Global.EXT_TXT;
         dialog.setFilterExtensions(extensions);

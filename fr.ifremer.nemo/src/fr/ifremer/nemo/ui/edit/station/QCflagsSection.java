@@ -30,14 +30,16 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.FlagTable;
-import fr.ifremer.nemo.input.FlagFragment;
+import fr.ifremer.nemo.input.Fragment;
 import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.NemoSection;
 import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 
 /**
@@ -61,7 +63,7 @@ public class QCflagsSection extends NemoSection
 
         flagTable = new FlagTable();
 
-        flagTable = Utils.configuration.getDefaultFlagTable();
+        flagTable = Nemo.getInstance().getConfig().getDefaultFlagTable();
     }
 
     /**
@@ -247,7 +249,7 @@ public class QCflagsSection extends NemoSection
             new Menu(tabCorrespondance.getShell(), SWT.DROP_DOWN);
         itemLoad.setMenu(submenu);
         final ArrayList<FlagTable> flagTables =
-            FlagTable.getOrderedFlagTables(Utils.configuration.getFlagTables());
+            FlagTable.getOrderedFlagTables(Nemo.getInstance().getConfig().getFlagTables());
 
         for (int i = 0; i < flagTables.size(); i++)
         {
@@ -325,54 +327,54 @@ public class QCflagsSection extends NemoSection
         if (ViewMain.radProfilVertical.getSelection())
         {
             final FlagMenuItem childDateTime =
-                new FlagMenuItem(subFlag, tabFlagQC, Global.DATETIME, Messages
-                    .getString(Global.DATETIME).trim());
+                new FlagMenuItem(subFlag, tabFlagQC, Intern.DATETIME, Messages
+                    .getString(Intern.DATETIME).trim());
 
             final FlagMenuItem childLatitude =
-                new FlagMenuItem(subFlag, tabFlagQC, S_LAT, Messages.getString(
-                    S_LAT).trim());
+                new FlagMenuItem(subFlag, tabFlagQC, Intern.S_LAT, Messages.getString(
+                    Intern.S_LAT).trim());
 
             final FlagMenuItem childLongitude =
-                new FlagMenuItem(subFlag, tabFlagQC, S_LON, Messages.getString(
-                    S_LON).trim());
+                new FlagMenuItem(subFlag, tabFlagQC, Intern.S_LON, Messages.getString(
+                    Intern.S_LON).trim());
 
             final FlagMenuItem childDepth =
-                new FlagMenuItem(subFlag, tabFlagQC, S_DEPTH, Messages
-                    .getString(S_DEPTH).trim());
+                new FlagMenuItem(subFlag, tabFlagQC, Intern.S_DEPTH, Messages
+                    .getString(Intern.S_DEPTH).trim());
         }
         else
         {
             final FlagMenuItem childDateTime =
-                new FlagMenuItem(subFlag, tabFlagQC, Global.DATETIME, Messages
-                    .getString(Global.DATETIME).trim());
+                new FlagMenuItem(subFlag, tabFlagQC, Intern.DATETIME, Messages
+                    .getString(Intern.DATETIME).trim());
             final FlagMenuItem childEndDateTime =
-                new FlagMenuItem(subFlag, tabFlagQC, Global.ENDDATETIME,
-                    Messages.getString(Global.ENDDATETIME).trim());
+                new FlagMenuItem(subFlag, tabFlagQC, Intern.ENDDATETIME,
+                    Messages.getString(Intern.ENDDATETIME).trim());
 
             final FlagMenuItem childLatitude =
-                new FlagMenuItem(subFlag, tabFlagQC, S_LAT, Messages.getString(
-                    S_LAT).trim());
+                new FlagMenuItem(subFlag, tabFlagQC, Intern.S_LAT, Messages.getString(
+                    Intern.S_LAT).trim());
             final FlagMenuItem childEndLatitude =
-                new FlagMenuItem(subFlag, tabFlagQC, S_ELAT, Messages
-                    .getString(S_ELAT).trim());
+                new FlagMenuItem(subFlag, tabFlagQC, Intern.S_ELAT, Messages
+                    .getString(Intern.S_ELAT).trim());
 
             final FlagMenuItem childLongitude =
-                new FlagMenuItem(subFlag, tabFlagQC, S_LON, Messages.getString(
-                    S_LON).trim());
+                new FlagMenuItem(subFlag, tabFlagQC, Intern.S_LON, Messages.getString(
+                    Intern.S_LON).trim());
             final FlagMenuItem childEndLongitude =
-                new FlagMenuItem(subFlag, tabFlagQC, S_ELON, Messages
-                    .getString(S_ELON).trim());
+                new FlagMenuItem(subFlag, tabFlagQC, Intern.S_ELON, Messages
+                    .getString(Intern.S_ELON).trim());
 
             final FlagMenuItem childDepth =
-                new FlagMenuItem(subFlag, tabFlagQC, S_DEPTH, Messages
-                    .getString(S_DEPTH).trim());
+                new FlagMenuItem(subFlag, tabFlagQC, Intern.S_DEPTH, Messages
+                    .getString(Intern.S_DEPTH).trim());
             final FlagMenuItem childEndDepth =
-                new FlagMenuItem(subFlag, tabFlagQC, S_EDEPTH, Messages
-                    .getString(S_EDEPTH).trim());
+                new FlagMenuItem(subFlag, tabFlagQC, Intern.S_EDEPTH, Messages
+                    .getString(Intern.S_EDEPTH).trim());
 
             final FlagMenuItem childSensorDepth =
-                new FlagMenuItem(subFlag, tabFlagQC, S_SENSORDEPTH, Messages
-                    .getString(S_SENSORDEPTH).trim());
+                new FlagMenuItem(subFlag, tabFlagQC, Intern.S_SENSORDEPTH, Messages
+                    .getString(Intern.S_SENSORDEPTH).trim());
 
         }
 
@@ -494,16 +496,16 @@ public class QCflagsSection extends NemoSection
         }
     }
 
-    public FlagFragment fillFlagFragment(String property)
+    public Fragment fillFlagFragment(String property)
     {
         int i;
-        FlagFragment flag = new FlagFragment();
+        Fragment flag = new Fragment();
 
         for (i = 0; i < tabFlagQC.getItemCount(); i++)
         {
             if (tabFlagQC.getItems()[i].getText(0).equals(property))
             {
-                flag.setLine(Integer
+                flag.setFirstLine(Integer
                     .valueOf(tabFlagQC.getItems()[i].getText(2))
                         - Integer
                             .valueOf(ViewMain.editFileForm.sectionEnteteFichier
@@ -516,16 +518,16 @@ public class QCflagsSection extends NemoSection
         return null;
     }
 
-    public FlagFragment getFlagFragment(String property)
+    public Fragment getFlagFragment(String property)
     {
         int i;
-        FlagFragment flag = new FlagFragment();
+        Fragment flag = new Fragment();
 
         for (i = 0; i < getTabFlagQC().getItemCount(); i++)
         {
             if (getTabFlagQC().getItems()[i].getText(0).equals(property))
             {
-                flag.setLine(Integer.valueOf(getTabFlagQC().getItems()[i]
+                flag.setFirstLine(Integer.valueOf(getTabFlagQC().getItems()[i]
                     .getText(2))
                         - Integer
                             .valueOf(ViewMain.editFileForm.sectionEnteteFichier
@@ -539,7 +541,7 @@ public class QCflagsSection extends NemoSection
         return null;
     }
 
-    public void setFlagFragment(FlagFragment flag, String propertyCode,
+    public void setFlagFragment(Fragment flag, String propertyCode,
             String propertyName)
     {
         if (flag != null)
@@ -558,7 +560,7 @@ public class QCflagsSection extends NemoSection
             TableItem item = new TableItem(getTabFlagQC(), SWT.NONE);
             item.setText(0, propertyCode);
             item.setText(1, propertyName);
-            item.setText(2, String.valueOf(flag.getLine()
+            item.setText(2, String.valueOf(flag.getFirstLine()
                     + Integer
                         .valueOf(ViewMain.editFileForm.sectionEnteteFichier
                             .getValue())));

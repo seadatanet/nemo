@@ -39,7 +39,8 @@ public class SizeBasedProgressNotifier implements Cloneable {
 	 * 
 	 * @return a copy of this object
 	 */
-	public Object clone() throws CloneNotSupportedException {
+	@Override
+    public Object clone() throws CloneNotSupportedException {
 		SizeBasedProgressNotifier copy = null;
 		copy = (SizeBasedProgressNotifier) super.clone();
 		copy._progress = null;
@@ -169,8 +170,8 @@ public class SizeBasedProgressNotifier implements Cloneable {
 	 */
 	public void progressLine(int line, int total) {
 		if (_progress != null && total > 0) {
-			_progress.progress((int) (line * 100 / total));
+			_progress.progress(line * 100 / total);
 		}
 	}
 
-} /* End of class: SizeBasedProgressNotifier */
+}

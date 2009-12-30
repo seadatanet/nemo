@@ -9,10 +9,11 @@ import javax.xml.rpc.ServiceException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.config.UpdateBean;
 import fr.ifremer.nemo.config.UpdateBean.EtatUpdate;
-import fr.ifremer.nemo.ui.edit.DataModel;
+import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.NemoWS;
@@ -85,7 +86,7 @@ public class SWTProcessWS implements IRunnableWithProgress {
                 NemoLists.updateEdmo(monitor);
             }
             
-            Utils.configuration.save();
+            Nemo.getInstance().getConfig().save();
             
             if (monitor.isCanceled()){
                 throw new InterruptedException();
@@ -93,10 +94,32 @@ public class SWTProcessWS implements IRunnableWithProgress {
             
 		} 
         else {
+
+            // mise à jour onglet campagne
+            try {
+                CruiseModel cruiseModel = new CruiseModel();
+                cruiseModel.fillFromSISMER(referenceWS);
+                Nemo.getInstance().getDomain().getCruise().updateCruise(cruiseModel);
+                
+            } catch (MalformedURLException e) {
+                // 
+                Utils.messageErreur(Messages.error_updateSurvey_url);
+                e.printStackTrace();
+            } catch (RemoteException e) {
+                //
+                e.printStackTrace();
+                Utils.messageErreur(Messages.error_updateSurvey_distant);
+            } catch (ServiceException e) {
+                // 
+                e.printStackTrace();
+                Utils.messageErreur(Messages.error_updateSurvey_service);
+            }
+            
+            /*
 			if (dossier) {
 				// mise e jour dossier campagne
 				try {
-					DataModel.dirSurvey.getModel().fillFromSISMER(referenceWS);
+					Application.nemo.getDomain().getCruise().getModel().fillFromSISMER(referenceWS);
 				} catch (MalformedURLException e) {
 					// 
 					e.printStackTrace();
@@ -115,7 +138,7 @@ public class SWTProcessWS implements IRunnableWithProgress {
             else {
 				// mise e jour fichier campagne
 				try {
-					DataModel.singleSurvey.getModel().fillFromSISMER(
+                    Application.nemo.getDomain().getCruise().getModel().fillFromSISMER(
 							referenceWS);
 				} catch (MalformedURLException e) {
 					// 
@@ -132,6 +155,7 @@ public class SWTProcessWS implements IRunnableWithProgress {
 				}
 
 			}
+            */
 		}
 
 		monitor.done();

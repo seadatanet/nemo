@@ -41,6 +41,7 @@ public abstract class NemoSection
     public static final String C_ARCHIVING = "cruiseArchiving"; //$NON-NLS-1$
     public static final String C_DATATYPE = "cruiseDatatype"; //$NON-NLS-1$
     public static final String C_COMMENTS = "cruiseComments"; //$NON-NLS-1$
+    /*
     public static final String S_DCHIST = "dcHistory"; //$NON-NLS-1$
     public static final String S_COMMENT = "comment"; //$NON-NLS-1$
     public static final String S_SURFACE = "surfaceSamples"; //$NON-NLS-1$
@@ -64,7 +65,8 @@ public abstract class NemoSection
     public static final String S_STATIONNUMBER = "reference"; //$NON-NLS-1$
     public static final String S_DATATYPE = "dataType"; //$NON-NLS-1$
     public static final String S_QCFLAG = "qcFlag"; //$NON-NLS-1$
-
+*/
+    
     protected Section section;
     protected String name; // nom correspondant au tag xml (PropertyModel)
     protected String title;

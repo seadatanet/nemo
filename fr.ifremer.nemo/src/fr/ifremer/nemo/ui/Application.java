@@ -4,14 +4,17 @@ import org.eclipse.core.runtime.IPlatformRunnable;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 
+import fr.ifremer.nemo.Nemo;
+
 /**
  * This class controls all aspects of the application's execution
  */
 public class Application implements IPlatformRunnable {
-
+    
 	public static PlatformUI platformUI;
 
 	public static Display display;
+    
 
 	/*
 	 * (non-Javadoc)
@@ -21,7 +24,8 @@ public class Application implements IPlatformRunnable {
 	public Object run(Object args) throws Exception {
 		display = PlatformUI.createDisplay();
 		try {
-			Utils.initConfig();
+			//Utils.initConfig();
+            Nemo.getInstance();
 
 			int returnCode = PlatformUI.createAndRunWorkbench(display,
 					new ApplicationWorkbenchAdvisor());

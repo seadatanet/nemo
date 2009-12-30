@@ -17,7 +17,6 @@ public class Intern extends NLS {
     public static String dir_resources;
     public static String dir_vocabLists;
     
-    public static String fileName_config;
     public static String fileName_configIni;
     public static String fileName_coupling;
     
@@ -88,6 +87,51 @@ public class Intern extends NLS {
     public static String unknown;
     public static String CDIResumeWriter_notSpecified;
     public static String CDIResumeWriter_separateur;
+    
+    public static String CruiseShemaFactory;
+    public static String CruiseShemaLocation;
+    public static String CruiseXSL; 
+    public static String ModelXSL; 
+    public static String CruiseDateFormat;
+    
+    public static String errorParseChar;
+    public static String errorParseSign;
+    public static String errorParseCoordN;
+    public static String errorParseCoordW;
+    public static String errorParseDegres;
+    public static String errorParseMinutes;
+    public static String errorParseSeconds;
+    
+    public static String S_DCHIST;
+    public static String S_COMMENT;
+    public static String S_SURFACE;
+    public static String S_OFFSETTU;
+    public static String S_TIME;
+    public static String S_DATE;
+    public static String S_LAT;
+    public static String S_LON;
+    public static String S_DEPTH;
+    public static String S_ELAT;
+    public static String S_ELON;
+    public static String S_EDEPTH;
+    public static String S_SENSORDEPTH;
+    public static String S_MAGNETIC;
+    public static String S_SAMPLINGRATE;
+    public static String S_EDATE;
+    public static String S_ETIME;
+
+    //public static String QC = "QC"; //$NON-NLS-1$
+
+    public static String S_STATIONNUMBER;
+    public static String S_DATATYPE;
+    public static String S_QCFLAG;
+
+    // Types de metadonnee
+    public static String DATETIME;
+    public static String ENDDATETIME;
+    // (Type de metadonnee calcules)
+    public static String DURATION;
+    public static String DISTANCETOBOTTOM;
 	
 	static {
 		// initialize resource bundle

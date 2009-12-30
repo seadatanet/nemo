@@ -10,7 +10,6 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.MissingResourceException;
 
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.rpc.ServiceException;
@@ -20,6 +19,7 @@ import org.apache.axis.client.Service;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.widgets.Table;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.UpdateBean.EtatUpdate;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webservice;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webserviceLocator;
@@ -65,15 +65,13 @@ public class NemoLists implements Cloneable {
 
 	static protected HashMap<String, CodeTableRecordType[]> _vocabMap = new HashMap<String, CodeTableRecordType[]>();
 
-	static protected String _sdnParameters;
+	//static protected String _sdnParameters;
 
 	public static Table filtreTable;
 
 	public static ArrayList<String> listeNavire, listeCentreDonnees, listeRegion;
 
 	public static ArrayList<String> listeFiltree;
-    
-    private enum URNtype{subject, object, units; }
 
 	static {
 		initLists();
@@ -1006,7 +1004,7 @@ public class NemoLists implements Cloneable {
         try 
         {
             service = new NemoWSServiceLocator()
-                .getNEMO(new java.net.URL(Utils.configuration
+                .getNEMO(new java.net.URL(Nemo.getInstance().getConfig()
                 .getNemoWebServiceURL()));
         } 
         catch (ServiceException e) 
@@ -1192,7 +1190,7 @@ public class NemoLists implements Cloneable {
         try{
     
             vocab = new VocabSoapBindingStub(
-                        new java.net.URL(Utils.configuration.getVocabURL()),
+                        new java.net.URL(Nemo.getInstance().getConfig().getVocabURL()),
                         new Service());
             
             // récupération des versions serveur des listes
@@ -1203,8 +1201,8 @@ public class NemoLists implements Cloneable {
                 for (CodeTableTypeType item : table.value){
                     String[] itemValue = item.getListKey().split(Global.SLASH);
                     String listId = itemValue[itemValue.length - 2];
-                    if (Utils.configuration.getVocabLists().containsKey(listId)){
-                        BODCList list = Utils.configuration.getVocabLists().get(listId);
+                    if (Nemo.getInstance().getConfig().getVocabLists().containsKey(listId)){
+                        BODCList list = Nemo.getInstance().getConfig().getVocabLists().get(listId);
                         list.setServerVersion(String.valueOf(item.getListVersion()));
                         list.setName(item.getListShortName());
                     }
@@ -1285,7 +1283,7 @@ public class NemoLists implements Cloneable {
 	 */
 	private static UpdateBean updateVocabList(VocabSoapBindingStub vocab, String listId) 
     {
-        BODCList list = Utils.configuration.getVocabList(listId);
+        BODCList list = Nemo.getInstance().getConfig().getVocabList(listId);
         
         StringBuffer msg = new StringBuffer();
         msg.append(listId);
@@ -1316,7 +1314,7 @@ public class NemoLists implements Cloneable {
 					encoder.writeObject(table.value);
                     
                     list.setLocalVersion(list.getServerVersion());
-                    Utils.configuration.getVocabLists().put(list.getId(), list);
+                    Nemo.getInstance().getConfig().getVocabLists().put(list.getId(), list);
                     
                     updateList.setEtat(EtatUpdate.UPDATED);
                     updateList.setNbRetrieve(_vocabList.get(listId).length);
@@ -1411,8 +1409,8 @@ public class NemoLists implements Cloneable {
 
         String[] listIds = listName.split(Global.UNDERSCORE);
         
-        BODCList list1 = Utils.configuration.getVocabList(listIds[0]);
-        BODCList list2 = Utils.configuration.getVocabList(listIds[1]);
+        BODCList list1 = Nemo.getInstance().getConfig().getVocabList(listIds[0]);
+        BODCList list2 = Nemo.getInstance().getConfig().getVocabList(listIds[1]);
         
         UpdateBean updateMap = new UpdateBean(listName, listName); 
         updateMap.setNbTot(_vocabMap.get(listName).length);
@@ -1432,7 +1430,7 @@ public class NemoLists implements Cloneable {
     		javax.xml.rpc.holders.BooleanHolder error = new BooleanHolder();
     		try {
     			vocab.getMap(new String[] { list1.getUrl() }, 
-                             Utils.configuration.getPredicate(), 
+                             Nemo.getInstance().getConfig().getPredicate(), 
                              new String[] { list2.getUrl() }, 
                              "false", table, error); //$NON-NLS-1$
                 
@@ -1511,7 +1509,7 @@ public class NemoLists implements Cloneable {
             if (!monitor.isCanceled()){
                 // Appel au WebService
                 Edmo_webservice service = new Edmo_webserviceLocator();
-                ((Edmo_webserviceLocator)service).setedmo_webserviceSoap12EndpointAddress(Utils.configuration.getEdmoURL());
+                ((Edmo_webserviceLocator)service).setedmo_webserviceSoap12EndpointAddress(Nemo.getInstance().getConfig().getEdmoURL());
                 Edmo_webserviceSoap port = service.getedmo_webserviceSoap12();
                 result = port.ws_edmo_get_list();
             }
@@ -1552,24 +1550,25 @@ public class NemoLists implements Cloneable {
     /*
      *  mapping Seadatanet
      */
-    
-	public static void writeSdnParameters(fr.ifremer.nemo.util.Conversion convert) 
+    /*
+	public static void writeSdnParameters(Conversion convert) 
     {
 		setSdnParameters(convert.getDebut());
 		
 		setSdnParameters(convert.getDebut() + Intern.file_mapping);
         
         for (fr.ifremer.nemo.input.ParameterModel param : convert.getAddedParameterModels()) {
-            _sdnParameters += Global.RN + convert.getDebut() + parameterMap(param.getModel());
+            _sdnParameters += Global.RN + convert.getDebut() + parameterMap(param.getParameter());
         }
 
 		// FAE 0001131 : remplacer "\n" par "\r\n" pour retour chariot sous bloc-note
-		for (fr.ifremer.nemo.input.ParameterModel param : fr.ifremer.nemo.ui.edit.DataModel.stationModel.getParameterModels()) {
-			_sdnParameters += Global.RN + convert.getDebut() + parameterMap(param.getModel());
+        DataModel data = Nemo.getInstance().getDomain().getCruise().getStation().getData().getModel();
+		for (fr.ifremer.nemo.input.ParameterModel param : data.getParameterModels()) {
+			_sdnParameters += Global.RN + convert.getDebut() + parameterMap(param.getParameter());
 		}
 	}
 
-	private static String parameterMap(fr.ifremer.nemo.domain.Parameter param) {
+	private static String parameterMap(Parameter param) {
         String code = param.getCode();
         StringBuffer sdnMapping = new StringBuffer();
         try{
@@ -1629,5 +1628,5 @@ public class NemoLists implements Cloneable {
 	public static void setSdnParameters(String parameters) {
 		_sdnParameters = parameters;
 	}
-
+*/
 } /* End of class: NemoLists */

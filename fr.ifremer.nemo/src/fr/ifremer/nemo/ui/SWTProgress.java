@@ -5,8 +5,6 @@ import java.lang.reflect.InvocationTargetException;
 import org.eclipse.jface.window.ApplicationWindow;
 
 import fr.ifremer.nemo.output.ProgressNotification;
-import fr.ifremer.nemo.ui.view.ViewMain;
-import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Messages;
 
 public class SWTProgress extends ApplicationWindow
@@ -21,14 +19,6 @@ public class SWTProgress extends ApplicationWindow
 
     public void run() throws InterruptedException
     {
-        Conversion formatConvert = Conversion.MEDATLAS;
-        if (ViewMain.radODV.getSelection())
-        {
-            formatConvert = Conversion.ODV;
-        }
-        SWTProcess.formatConversion = formatConvert;
-        SWTProcess.monoStation = ViewMain.radMonoStation.getSelection();
-
         try
         {
             new MyProgressMonitorDialog(Application.display.getActiveShell(),

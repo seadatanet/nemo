@@ -11,8 +11,8 @@ import com.ago.xml.XMLOutputWriter;
  * 
  * @author Gerard BUNEL
  */
-public abstract class ExternalizableFormat extends Format implements Cloneable,
-		SAXConsumer {
+public abstract class ExternalizableFormat extends Format 
+                                           implements Cloneable, SAXConsumer {
 
 	public ExternalizableFormat() {
 		super();
@@ -22,7 +22,8 @@ public abstract class ExternalizableFormat extends Format implements Cloneable,
 	 * 
 	 * @return Object
 	 */
-	public abstract Object clone();
+	@Override
+    public abstract Object clone();
 
 	/**
 	 * 
@@ -32,4 +33,4 @@ public abstract class ExternalizableFormat extends Format implements Cloneable,
 
 	}
 
-} /* End of class: ExternalizableFormat */
+}

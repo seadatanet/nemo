@@ -18,6 +18,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
+import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.format.DateTimeFormat;
 import fr.ifremer.nemo.util.format.LatitudeFormat;
 import fr.ifremer.nemo.util.format.LongitudeFormat;
@@ -31,7 +32,7 @@ public class Etape
      * 
      */
 
-    public static void validationDesc()
+    public static void validationFile()
     {
 
         // retour à l'onglet message d'erreur
@@ -84,7 +85,7 @@ public class Etape
         if (ok)
         {
             ViewMain.editFileForm.okApresReset = true;
-            okDesc();
+            okFile();
         }
         else
         {
@@ -93,7 +94,7 @@ public class Etape
         }
     }
 
-    public static void validationSurvey()
+    public static void validationCruise()
     {
         // test de toutes les valeurs de Survey
 
@@ -157,35 +158,29 @@ public class Etape
         String endDate =
             ViewMain.editCruiseForm.sectionLocalisation.getItem(
                 Messages.edit_cruise_endDate).getText();
-        if (!startDate.equals(Global.EMPTY_STRING))
-        {
-            try
-            {
+        if (!startDate.equals(Global.EMPTY_STRING)){
+            try{
                 DateTimeFormat dateFormat = new DateTimeFormat();
                 dateFormat.setFormatString("dd/MM/yyyy"); //$NON-NLS-1$
 
                 dateFormat.parseObject(startDate);
 
             }
-            catch (ParseException e)
-            {
+            catch (ParseException e){
                 Utils.messageErreurAppend(Messages.Etape_24);
                 ok = false;
                 e.printStackTrace();
             }
         }
-        if (!endDate.equals(Global.EMPTY_STRING))
-        {
-            try
-            {
+        if (!endDate.equals(Global.EMPTY_STRING)){
+            try{
                 DateTimeFormat dateFormat = new DateTimeFormat();
                 dateFormat.setFormatString("dd/MM/yyyy"); //$NON-NLS-1$
 
                 dateFormat.parseObject(endDate);
 
             }
-            catch (ParseException e)
-            {
+            catch (ParseException e){
                 Utils.messageErreurAppend(Messages.Etape_27);
                 ok = false;
                 e.printStackTrace();
@@ -201,21 +196,17 @@ public class Etape
         String value =
             ViewMain.editCruiseForm.sectionReference.getItem(
                 Messages.edit_cruise_cruiseRef).getText().trim();
-        if (value.length() != 13)
-        {
+        if (value.length() != 13){
             ViewMain.editConversionForm.setWarningCampagne(Messages.ViewLog_5);
         }
-        else
-        {
+        else{
             ViewMain.editConversionForm.setWarningStation(Global.EMPTY_STRING);
         }
-        if (ok)
-        {
+        if (ok){
             ViewMain.editCruiseForm.okApresReset = true;
-            okSurvey();
+            okCruise();
         }
-        else
-        {
+        else{
             if (!ViewMain.tabCruise.isDisposed())
             {
                 ViewMain.tabCruise.setText(Messages.onglet_cruise_error);
@@ -256,14 +247,14 @@ public class Etape
             resultat1 =
                 ViewMain.editStationForm.stationNumber
                     .checkAutoInputValues(Messages
-                        .getString(NemoSection.S_STATIONNUMBER));
+                        .getString(Intern.S_STATIONNUMBER));
             if (resultat1)
             {
                 String lign =
                     ViewMain.editStationForm.stationNumber.getLineText(0);
                 ligneOK =
                     ViewMain.editStationForm.stationNumber.checkInDataOrHeader(
-                        lign, Messages.getString(NemoSection.S_STATIONNUMBER));
+                        lign, Messages.getString(Intern.S_STATIONNUMBER));
                 ok = ok && ligneOK;
             }
             ok = ok && resultat1;
@@ -394,7 +385,7 @@ public class Etape
         {
             resultat1 =
                 ViewMain.editStationForm.comments.checkAutoInputValues(Messages
-                    .getString(NemoSection.S_COMMENT));
+                    .getString(Intern.S_COMMENT));
             ok = ok && resultat1;
 
             if (resultat1)
@@ -490,13 +481,13 @@ public class Etape
             // position dans fichier
             resultat1 =
                 ViewMain.editStationForm.time.checkAutoInputValues(Messages
-                    .getString(NemoSection.S_TIME));
+                    .getString(Intern.S_TIME));
             if (resultat1)
             {
                 String lign = ViewMain.editStationForm.time.getLineText(0);
                 ligneOK =
                     ViewMain.editStationForm.time.checkInDataOrHeader(lign,
-                        Messages.getString(NemoSection.S_TIME));
+                        Messages.getString(Intern.S_TIME));
                 ok = ok && ligneOK;
             }
             else
@@ -532,13 +523,13 @@ public class Etape
             // check valeurs ligne/debut/fin
             resultat1 =
                 ViewMain.editStationForm.date.checkAutoInputValues(Messages
-                    .getString(NemoSection.S_DATE));
+                    .getString(Intern.S_DATE));
             if (resultat1)
             {
                 String lign = ViewMain.editStationForm.date.getLineText(0);
                 ligneOK =
                     ViewMain.editStationForm.date.checkInDataOrHeader(lign,
-                        Messages.getString(NemoSection.S_DATE));
+                        Messages.getString(Intern.S_DATE));
                 ok = ok && ligneOK;
             }
             else
@@ -575,13 +566,13 @@ public class Etape
 
             resultat1 =
                 ViewMain.editStationForm.depth.checkAutoInputValues(Messages
-                    .getString(NemoSection.S_DEPTH));
+                    .getString(Intern.S_DEPTH));
             if (resultat1)
             {
                 String lign = ViewMain.editStationForm.depth.getLineText(0);
                 ligneOK =
                     ViewMain.editStationForm.depth.checkInDataOrHeader(lign,
-                        Messages.getString(NemoSection.S_DEPTH));
+                        Messages.getString(Intern.S_DEPTH));
                 ok = ok && ligneOK;
             }
             else
@@ -610,14 +601,14 @@ public class Etape
             resultat1 =
                 ViewMain.editStationForm.utConvertion
                     .checkAutoInputValues(Messages
-                        .getString(NemoSection.S_OFFSETTU));
+                        .getString(Intern.S_OFFSETTU));
             if (resultat1)
             {
                 String lign =
                     ViewMain.editStationForm.utConvertion.getLineText(0);
                 ligneOK =
                     ViewMain.editStationForm.utConvertion.checkInDataOrHeader(
-                        lign, Messages.getString(NemoSection.S_OFFSETTU));
+                        lign, Messages.getString(Intern.S_OFFSETTU));
                 ok = ok && ligneOK;
             }
             else
@@ -647,13 +638,13 @@ public class Etape
             // position dans fichier
             resultat1 =
                 ViewMain.editStationForm.latitude.checkAutoInputValues(Messages
-                    .getString(NemoSection.S_LAT));
+                    .getString(Intern.S_LAT));
             if (resultat1)
             {
                 String lign = ViewMain.editStationForm.latitude.getLineText(0);
                 ligneOK =
                     ViewMain.editStationForm.latitude.checkInDataOrHeader(lign,
-                        Messages.getString(NemoSection.S_LAT));
+                        Messages.getString(Intern.S_LAT));
                 ok = ok && ligneOK;
             }
             else
@@ -693,13 +684,13 @@ public class Etape
             // position dans fichier
             resultat1 =
                 ViewMain.editStationForm.longitude
-                    .checkAutoInputValues(Messages.getString(NemoSection.S_LON));
+                    .checkAutoInputValues(Messages.getString(Intern.S_LON));
             if (resultat1)
             {
                 String lign = ViewMain.editStationForm.longitude.getLineText(0);
                 ligneOK =
                     ViewMain.editStationForm.longitude.checkInDataOrHeader(
-                        lign, Messages.getString(NemoSection.S_LON));
+                        lign, Messages.getString(Intern.S_LON));
                 ok = ok && ligneOK;
             }
             else
@@ -743,7 +734,7 @@ public class Etape
                 resultat1 =
                     ViewMain.editStationForm.sensorDepth
                         .checkAutoInputValues(Messages
-                            .getString(NemoSection.S_SENSORDEPTH));
+                            .getString(Intern.S_SENSORDEPTH));
                 if (resultat1)
                 {
                     String lign =
@@ -751,7 +742,7 @@ public class Etape
                     ligneOK =
                         ViewMain.editStationForm.sensorDepth
                             .checkInDataOrHeader(lign, Messages
-                                .getString(NemoSection.S_SENSORDEPTH));
+                                .getString(Intern.S_SENSORDEPTH));
                     ok = ok && ligneOK;
                 }
                 else
@@ -795,7 +786,7 @@ public class Etape
                     resultat1 =
                         ViewMain.editStationForm.samplingRate
                             .checkAutoInputValues(Messages
-                                .getString(NemoSection.S_SAMPLINGRATE));
+                                .getString(Intern.S_SAMPLINGRATE));
                     if (resultat1)
                     {
                         String lign =
@@ -804,7 +795,7 @@ public class Etape
                         ligneOK =
                             ViewMain.editStationForm.samplingRate
                                 .checkInDataOrHeader(lign, Messages
-                                    .getString(NemoSection.S_SAMPLINGRATE));
+                                    .getString(Intern.S_SAMPLINGRATE));
                         ok = ok && ligneOK;
                     }
                     else
@@ -892,7 +883,7 @@ public class Etape
                     resultat1 =
                         ViewMain.editStationForm.endLatitude
                             .checkAutoInputValues(Messages
-                                .getString(NemoSection.S_ELAT));
+                                .getString(Intern.S_ELAT));
                     if (resultat1)
                     {
                         String lign =
@@ -900,7 +891,7 @@ public class Etape
                         ligneOK =
                             ViewMain.editStationForm.endLatitude
                                 .checkInDataOrHeader(lign, Messages
-                                    .getString(NemoSection.S_ELAT));
+                                    .getString(Intern.S_ELAT));
                         ok = ok && ligneOK;
                     }
                     else
@@ -957,7 +948,7 @@ public class Etape
                     resultat1 =
                         ViewMain.editStationForm.endLongitude
                             .checkAutoInputValues(Messages
-                                .getString(NemoSection.S_ELON));
+                                .getString(Intern.S_ELON));
                     if (resultat1)
                     {
                         String lign =
@@ -966,7 +957,7 @@ public class Etape
                         ligneOK =
                             ViewMain.editStationForm.endLongitude
                                 .checkInDataOrHeader(lign, Messages
-                                    .getString(NemoSection.S_ELON));
+                                    .getString(Intern.S_ELON));
                         ok = ok && ligneOK;
                     }
                     else
@@ -1004,14 +995,14 @@ public class Etape
                 resultat1 =
                     ViewMain.editStationForm.endDepth
                         .checkAutoInputValues(Messages
-                            .getString(NemoSection.S_EDEPTH));
+                            .getString(Intern.S_EDEPTH));
                 if (resultat1)
                 {
                     String lign =
                         ViewMain.editStationForm.endDepth.getLineText(0);
                     ligneOK =
                         ViewMain.editStationForm.endDepth.checkInDataOrHeader(
-                            lign, Messages.getString(NemoSection.S_EDEPTH));
+                            lign, Messages.getString(Intern.S_EDEPTH));
                     ok = ok && ligneOK;
                 }
                 else
@@ -1040,7 +1031,7 @@ public class Etape
                 resultat1 =
                     ViewMain.editStationForm.magneticDeclin
                         .checkAutoInputValues(Messages
-                            .getString(NemoSection.S_MAGNETIC));
+                            .getString(Intern.S_MAGNETIC));
                 if (resultat1)
                 {
                     String lign =
@@ -1048,7 +1039,7 @@ public class Etape
                     ligneOK =
                         ViewMain.editStationForm.magneticDeclin
                             .checkInDataOrHeader(lign, Messages
-                                .getString(NemoSection.S_MAGNETIC));
+                                .getString(Intern.S_MAGNETIC));
                     ok = ok && ligneOK;
                 }
                 else
@@ -1075,7 +1066,7 @@ public class Etape
         for (i = 0; i < size; i++)
         {
             String nomSection =
-                Messages.getString(NemoSection.S_QCFLAG)
+                Messages.getString(Intern.S_QCFLAG)
                         + Global.SEP
                         + ViewMain.editStationForm.qcFlags.getTabFlagQC()
                             .getItems()[i].getText(1);
@@ -1092,7 +1083,7 @@ public class Etape
             if (flagOK)
             {
                 String zone =
-                    Messages.getString(NemoSection.S_QCFLAG).trim()
+                    Messages.getString(Intern.S_QCFLAG).trim()
                             + " : " //$NON-NLS-1$
                             + ViewMain.editStationForm.qcFlags.getTabFlagQC()
                                 .getItems()[i].getText(1);
@@ -1293,7 +1284,7 @@ public class Etape
             String code = mots[0];
 
             ViewMain.editConversionForm.setWarningData(Global.EMPTY_STRING);
-            if (ViewMain.typeFichierEntree().equals(Global.PROFILE))
+            if (ViewMain.getTypeFichierEntree() == E_InputType.PROFILE)
             {
                 if (!(code.equals(Intern.paramPRES) || code
                     .equals(Intern.paramDEPH)))
@@ -1319,7 +1310,7 @@ public class Etape
                         .setWarningData(Global.EMPTY_STRING);
                 }
             }
-            else if (ViewMain.typeFichierEntree().equals(Global.TRAJECTORY))
+            else if (ViewMain.getTypeFichierEntree() == E_InputType.PROFILE)
             {
                 if (!code.equals(Intern.paramDEPH) && existDEPH)
                 {
@@ -1342,7 +1333,7 @@ public class Etape
         }
     }
 
-    private static void okDesc()
+    private static void okFile()
     {
         // FAE1386 : desactiver "One File per station" si Trajectory
         if (ViewMain.radTrajectoire.getSelection())
@@ -1357,8 +1348,8 @@ public class Etape
         // attention aux boutons radio
 
         // puis remplissage du modele avec les valeurs de l'IHM
-        DataModel.initModele(ViewMain.dossierCampagne, ViewMain
-            .typeFichierEntree(), ViewMain.nomFichier);
+        DataModel.initDesc(ViewMain.nomFichier);
+        //DataModel.initModele(ViewMain.nomFichier);
 
         Utils.messageOK(Messages.success_etape);
 
@@ -1368,6 +1359,9 @@ public class Etape
         // on valide l'etape 1
         ViewMain.editFileForm.validee = true;
 
+        // verrouillage de l'option serieTemporelle pour eviter les changements
+        ViewMain.enableChoice(false);
+
         try
         {
             // FAE 022
@@ -1376,7 +1370,7 @@ public class Etape
                 ViewMain.editCruiseForm.okApresReset = true;
                 ViewMain.editCruiseForm.validee = true;
 
-                DataModel.initSurvey();
+                DataModel.initCruise();
                 ViewMain.etape = 2;
             }
             else
@@ -1391,10 +1385,10 @@ public class Etape
 
     }
 
-    private static void okSurvey()
+    private static void okCruise()
     {
 
-        DataModel.initSurvey();
+        DataModel.initCruise();
         if (!ViewMain.tabCruise.isDisposed())
         {
             ViewMain.tabCruise.setText(Messages.onglet_cruise_valid);

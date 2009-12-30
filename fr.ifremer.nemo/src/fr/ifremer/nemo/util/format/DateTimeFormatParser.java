@@ -11,6 +11,7 @@ import com.ago.parsing.AbstractParser;
  * 
  * @author Gerard BUNEL
  */
+@SuppressWarnings("nls")
 public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 	static protected final String AMPM_MARKER = "AM_PM".intern();
 
@@ -71,7 +72,8 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 	 * 
 	 * @return a copy of this object
 	 */
-	public Object clone() throws CloneNotSupportedException {
+	@Override
+    public Object clone() throws CloneNotSupportedException {
 		DateTimeFormatParser copy = null;
 		copy = (DateTimeFormatParser) super.clone();
 		return copy;
@@ -134,19 +136,15 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 				if (day()) {
 					characters();
 					return (time() || nothing());
-				} else {
-					throw new ParseException("Format du jour manquant", mark);
 				}
+				throw new ParseException("Format du jour manquant", mark);
 			} else if (day()) {
 				characters();
 				if (month()) {
 					return (time() || nothing());
-				} else {
-					throw new ParseException("Format du mois manquant", mark);
 				}
-			} else {
-				throw new ParseException("Format du mois manquant", mark);
 			}
+			throw new ParseException("Format du mois manquant", mark);
 		} else if (day()) {
 			characters();
 			if (month()) {
@@ -154,20 +152,16 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 				if (year() || year19()) {
 					characters();
 					return (time() || nothing());
-				} else {
-					throw new ParseException("Format de l'annee manquant", mark);
 				}
+				throw new ParseException("Format de l'annee manquant", mark);
 			} else if (year() || year19()) {
 				characters();
 				if (month()) {
 					characters();
 					return (time() || nothing());
-				} else {
-					throw new ParseException("Format du mois manquant", mark);
 				}
-			} else {
-				throw new ParseException("Format du mois manquant", mark);
 			}
+			throw new ParseException("Format du mois manquant", mark);
 		} else if (month()) {
 			characters();
 			if (day()) {
@@ -175,19 +169,15 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 				if (year() || year19()) {
 					characters();
 					return (time() || nothing());
-				} else {
-					throw new ParseException("Format de l'annee manquant", mark);
 				}
+				throw new ParseException("Format de l'annee manquant", mark);
 			} else if (year() || year19()) {
 				characters();
 				if (day()) {
 					return (time() || nothing());
-				} else {
-					throw new ParseException("Format du jour manquant", mark);
 				}
-			} else {
-				throw new ParseException("Format du jour manquant", mark);
 			}
+			throw new ParseException("Format du jour manquant", mark);
 		}
 		return false;
 	}
@@ -298,66 +288,67 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 	/**
 	 * 
 	 */
-	protected void initTypeTable() {
+	@Override
+    protected void initTypeTable() {
 		for (int i = 0; i < typeTable.length; i++) {
 			typeTable[i] = XDEFAULT;
 		}
 
 		String separators = "\r\n\t";
 		for (int i = 0; i < separators.length(); i++) {
-			typeTable[(int) separators.charAt(i)] = XDELIMITER;
+			typeTable[separators.charAt(i)] = XDELIMITER;
 		}
 		String digits = "0123456789";
 		for (int i = 0; i < digits.length(); i++) {
-			typeTable[(int) digits.charAt(i)] = XLETTER;
+			typeTable[digits.charAt(i)] = XLETTER;
 		}
 		String letters = "abcdefghijklmnopqrstuvwxytzABCDEFGHIJKLMNOPQRSTUVWXYTZ_";
 		for (int i = 0; i < letters.length(); i++) {
-			typeTable[(int) letters.charAt(i)] = XLETTER;
+			typeTable[letters.charAt(i)] = XLETTER;
 		}
 		String binaries = "!%&*-/<=>?@\\~";
 		for (int i = 0; i < binaries.length(); i++) {
-			typeTable[(int) binaries.charAt(i)] = XLETTER;
+			typeTable[binaries.charAt(i)] = XLETTER;
 		}
 
 		// Other multi-character tokens
-		typeTable[(int) '"'] = XLETTER;
-		typeTable[(int) '\''] = XLETTER;
-		typeTable[(int) '#'] = XLETTER;
-		typeTable[(int) '('] = XLETTER;
-		typeTable[(int) ')'] = XLETTER;
-		typeTable[(int) '$'] = XLETTER;
-		typeTable[(int) ','] = XLETTER;
-		typeTable[(int) ':'] = XLETTER;
-		typeTable[(int) ';'] = XLETTER;
-		typeTable[(int) '['] = XLETTER;
-		typeTable[(int) ']'] = XLETTER;
-		typeTable[(int) '{'] = XLETTER;
-		typeTable[(int) '}'] = XLETTER;
-		typeTable[(int) '^'] = XLETTER;
-		typeTable[(int) '|'] = XLETTER;
-		typeTable[(int) '/'] = XLETTER;
+		typeTable['"'] = XLETTER;
+		typeTable['\''] = XLETTER;
+		typeTable['#'] = XLETTER;
+		typeTable['('] = XLETTER;
+		typeTable[')'] = XLETTER;
+		typeTable['$'] = XLETTER;
+		typeTable[','] = XLETTER;
+		typeTable[':'] = XLETTER;
+		typeTable[';'] = XLETTER;
+		typeTable['['] = XLETTER;
+		typeTable[']'] = XLETTER;
+		typeTable['{'] = XLETTER;
+		typeTable['}'] = XLETTER;
+		typeTable['^'] = XLETTER;
+		typeTable['|'] = XLETTER;
+		typeTable['/'] = XLETTER;
 
-		typeTable[(int) '.'] = DOT;
-		typeTable[(int) 'y'] = XYEAR;
-		typeTable[(int) 'Y'] = XYEAR;
-		typeTable[(int) 'r'] = XYEAR19;
-		typeTable[(int) 'R'] = XYEAR19;
-		typeTable[(int) 'M'] = XMONTH;
-		typeTable[(int) 'd'] = XDAY;
-		typeTable[(int) 'D'] = XDAY;
-		typeTable[(int) 'h'] = XHOUR;
-		typeTable[(int) 'H'] = XHOUR;
-		typeTable[(int) 'c'] = XHOURDEC;
-		typeTable[(int) 'C'] = XHOURDEC;
-		typeTable[(int) 'm'] = XMINUTE;
-		typeTable[(int) 's'] = XSECOND;
-		typeTable[(int) 'S'] = XSECOND;
-		typeTable[(int) 't'] = XSECONDD;
-		typeTable[(int) 'T'] = XSECONDD;
-		typeTable[(int) ' '] = XLETTER;
-		typeTable[(int) 'A'] = XAMPM;
-		typeTable[(int) 'P'] = XAMPM;
+		typeTable['.'] = DOT;
+		typeTable['y'] = XYEAR;
+		typeTable['Y'] = XYEAR;
+		typeTable['r'] = XYEAR19;
+		typeTable['R'] = XYEAR19;
+		typeTable['M'] = XMONTH;
+		typeTable['d'] = XDAY;
+		typeTable['D'] = XDAY;
+		typeTable['h'] = XHOUR;
+		typeTable['H'] = XHOUR;
+		typeTable['c'] = XHOURDEC;
+		typeTable['C'] = XHOURDEC;
+		typeTable['m'] = XMINUTE;
+		typeTable['s'] = XSECOND;
+		typeTable['S'] = XSECOND;
+		typeTable['t'] = XSECONDD;
+		typeTable['T'] = XSECONDD;
+		typeTable[' '] = XLETTER;
+		typeTable['A'] = XAMPM;
+		typeTable['P'] = XAMPM;
 	}
 
 	/**
@@ -478,37 +469,25 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 			characters();
 			if (minutes()) {
 				characters();
-				if (seconds() || milliseconds()) {
-					characters();
-					if (amPmMarker()) {
-						return true;
-					} else {
-						throw new ParseException("Marker AM/PM manquant", mark);
-					}
-				} else {
-					characters();
-					if (amPmMarker()) {
-						return true;
-					} else {
-						throw new ParseException("Marker AM/PM manquant", mark);
-					}
-				}
+				characters();
+				if (amPmMarker()){
+                    return true;
+                }
+				throw new ParseException("Marker AM/PM manquant", mark);
 			}else if (hoursDec()){
                 throw new ParseException("'.' est obligatoire pour distinguer les heures décimales", mark);
             }else if (dot()){
                 characters();
                 if (hoursDec()){
                     return nothing();
-                }else {
-                    return characters();
                 }
+                return characters();
             } else {
 				characters();
 				if (amPmMarker()) {
 					return true;
-				} else {
-					throw new ParseException("Marker AM/PM manquant", mark);
 				}
+				throw new ParseException("Marker AM/PM manquant", mark);
 			}
 		} else if (hours24()) {			
 			characters();
@@ -521,9 +500,8 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
                 characters();
                 if (hoursDec()){
                     return nothing();
-                }else {
-                    return characters();
                 }
+                return characters();
             }else {
                 return characters();
             }
@@ -595,10 +573,10 @@ public class DateTimeFormatParser extends AbstractParser implements Cloneable {
 		}
 		long sourcePos = getSourcePosition();
 		if (hereChar > 0 && (typeTable[hereChar] == XLETTER)
-				&& hereChar == (int) '2') {
+				&& hereChar == '2') {
 			step();
 			if (hereChar > 0 && (typeTable[hereChar] == XLETTER)
-					&& hereChar == (int) '4') {
+					&& hereChar == '4') {
 				tokenType = HOURS24;
 				step();
 			} else {

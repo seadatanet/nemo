@@ -1,0 +1,43 @@
+<InputModel version="">
+  <MediaModel path="">
+    <processType multiStations="false">CRUISE_FILE</processType>
+    <separator></separator>
+    <inputType>PROFILE</inputType>
+    <fileHeader>0</fileHeader>
+    <stationHeader pattern="">0</stationHeader>
+    <endStation>0</endStation>
+    <endData pattern="">EOF</endData>
+  </MediaModel>
+  <CruiseModel>
+    <reference></reference>
+    <name></name>
+    <shipCode>XXXX</shipCode>
+    <shipName>UNKNOWN</shipName>
+    <startDate>1260467522890</startDate>
+    <endDate>1260467522890</endDate>
+    <regionName></regionName>
+    <country></country>
+    <laboratories></laboratories>
+    <chiefScientist>UNKNOWN</chiefScientist>
+    <projectName></projectName>
+    <dataCentre></dataCentre>
+    <availability>publicly</availability>
+    <comment><![CDATA[]]></comment>
+    <dataTypes/>
+  </CruiseModel>
+  <StationModel>
+    <referenceProperty/>
+    <properties/>
+  </StationModel>
+  <DataModel>
+    <parameters/>
+  </DataModel>
+  <ConversionModel>
+    <permissions>
+      <MEDALAS enable="true"/>
+      <ODV_MULTISTATIONS enable="true"/>
+      <ODV_MONOSTATION enable="true"/>
+    </permissions>
+    <sortStations>false</sortStations>
+  </ConversionModel>
+</InputModel>

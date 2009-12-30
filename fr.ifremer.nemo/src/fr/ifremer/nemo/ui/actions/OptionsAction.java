@@ -52,6 +52,9 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
+import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.config.BODCList;
+import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.EdmoHandler;
 import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.FlagTable;
@@ -62,7 +65,6 @@ import fr.ifremer.nemo.domain.AddedParameter.IdParameter;
 import fr.ifremer.nemo.ui.Application;
 import fr.ifremer.nemo.ui.ApplicationActionBarAdvisor;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.edit.DataModel;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
@@ -139,9 +141,12 @@ public class OptionsAction extends Action implements ISelectionListener,
     @Override
     public void run()
     {
+        // configuration
+        Configuration config = Nemo.getInstance().getConfig();
+        
         // sauvegarde des options necessitant un redemarrage
-        configLangage = Utils.configuration.getLang();
-        configProxy = Utils.configuration.getProxy();
+        configLangage = config.getLang();
+        configProxy = config.getProxy();
 
         // lancement IHM options
         shelloptions =
@@ -153,10 +158,10 @@ public class OptionsAction extends Action implements ISelectionListener,
         shelloptions.setText(Messages.settings_title);
 
         _flagTables.clear();
-        for (int i = 0; i < Utils.configuration.getFlagTables().size(); i++)
+        for (int i = 0; i < config.getFlagTables().size(); i++)
         {
             FlagTable flagTable =
-                new FlagTable(Utils.configuration.getFlagTables().get(i));
+                new FlagTable(config.getFlagTables().get(i));
             _flagTables.add(flagTable);
         }
 
@@ -168,9 +173,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         // chargement des options
         alimenteCombos();
 
-        Utils.initConfig();
         remplissageOptions();
-
     }
 
     private void alimenteCombos()
@@ -203,7 +206,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         {
             String champCombo = Global.EMPTY_STRING;
             // System.out.println(record.getEntryKey());
-            String contenuCleDecoup[] = record.getEntryKey().split("/"); //$NON-NLS-1$
+            String contenuCleDecoup[] = record.getEntryKey().split(Global.SLASH);
             champCombo += contenuCleDecoup[contenuCleDecoup.length - 1];
             champCombo += Global.SEP + record.getEntryTerm();
             champsMethodesCdi.add(champCombo);
@@ -218,8 +221,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         for (CodeTableRecordType record : records)
         {
             String champCombo = Global.EMPTY_STRING;
-            // System.out.println(record.getEntryKey());
-            String contenuCleDecoup[] = record.getEntryKey().split("/"); //$NON-NLS-1$
+            String contenuCleDecoup[] = record.getEntryKey().split(Global.SLASH);
             champCombo += contenuCleDecoup[contenuCleDecoup.length - 1];
             champCombo += Global.SEP + record.getEntryTerm();
             champsMethodesCdi.add(champCombo);
@@ -232,8 +234,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         for (CodeTableRecordType record : records)
         {
             String champCombo = Global.EMPTY_STRING;
-            // System.out.println(record.getEntryKey());
-            String contenuCleDecoup[] = record.getEntryKey().split("/"); //$NON-NLS-1$
+            String contenuCleDecoup[] = record.getEntryKey().split(Global.SLASH);
             champCombo += contenuCleDecoup[contenuCleDecoup.length - 1];
             champCombo += Global.SEP + record.getEntryTerm();
             champsMethodesCdi.add(champCombo);
@@ -263,41 +264,38 @@ public class OptionsAction extends Action implements ISelectionListener,
 
         // FLags
         fillFlagTable();
-
     }
 
     protected void remplissageOptions()
     {
         // remplissage IHM avec les valeurs du fichier de config
+        // configuration
+        final Configuration config = Nemo.getInstance().getConfig();
 
         // DOSSIERS
-        textDossierModele.setText(Utils.configuration.getModelsDirectory());
-        textDossierCampagne.setText(Utils.configuration.getCruisesDirectory());
+        textDossierModele.setText(config.getModelsDirectory());
+        textDossierCampagne.setText(config.getCruisesDirectory());
 
         // LANGUE
-        if (Utils.configuration.getLocale().toString().equals(Intern.lang_fr))
-        {
+        if (config.getLocale().toString().equals(Intern.lang_fr)){
             // on met la combo langue à FR
             comboLangue.select(0);
         }
-        else
-        {
+        else{
             // on met la combo langue à GB
             comboLangue.select(1);
         }
 
         // CENTRE DE DONNEES
-        Utils.selectComboCode(comboCentreDonnees, Utils.configuration
-            .getDataCenter());
+        Utils.selectComboCode(comboCentreDonnees, config.getDataCenter());
 
         // WS
-        textAreaNemo.setText(Utils.configuration.getNemoWebServiceURL());
-        textAreaNautilus
-            .setText(Utils.configuration.getNautilusWebServiceURL());
-        textVocabURL.setText(Utils.configuration.getVocabURL());
-        textWSEdmo.setText(Utils.configuration.getEdmoURL());
+        textAreaNemo.setText(config.getNemoWebServiceURL());
+        textAreaNautilus.setText(config.getNautilusWebServiceURL());
+        textVocabURL.setText(config.getVocabURL());
+        textWSEdmo.setText(config.getEdmoURL());
 
-        Proxy proxy = Utils.configuration.getProxy();
+        Proxy proxy = config.getProxy();
         useProxy.setSelection(proxy.isUse());
         textAdrProxy.setText(proxy.getAdress());
         textPortProxy.setText(String.valueOf(proxy.getPort()));
@@ -306,37 +304,30 @@ public class OptionsAction extends Action implements ISelectionListener,
         enableProxy(proxy.isUse());
 
         // EDMO code
-        Utils.selectComboCode(comboIdEdmoRespCdi, Utils.configuration
-            .getIdEdmoRespCdi());
+        Utils.selectComboCode(comboIdEdmoRespCdi, config.getIdEdmoRespCdi());
 
         // CDI
-        checkCDI.setSelection(Utils.configuration.isWriteCdi());
-        Utils.selectComboCode(comboCodeEdmoDonnees, Utils.configuration
-            .getCodeEdmoDonnees());
-        Utils.selectComboCode(comboIdEdmoRespDonnees, Utils.configuration
-            .getIdEdmoRespDonnees());
-        Utils.selectComboCode(comboIdEdmoDistDonnees, Utils.configuration
-            .getIdEdmoDistDonnees());
-        textUrlCdi.setText(Utils.configuration.getCdiURL());
-        Utils.selectComboCode(comboMethodeCdi, Utils.configuration
-            .getCdiMethod());
-        Utils.selectComboCode(comboAccesDonnees, Utils.configuration
-            .getAccesDonnees());
-        Utils.selectComboCode(comboTypePlateForme, Utils.configuration
-            .getTypePlateForme());
-        CDICheckMask(Utils.configuration.isWriteCdi());
+        checkCDI.setSelection(config.isWriteCdi());
+        Utils.selectComboCode(comboCodeEdmoDonnees, config.getCodeEdmoDonnees());
+        Utils.selectComboCode(comboIdEdmoRespDonnees, config.getIdEdmoRespDonnees());
+        Utils.selectComboCode(comboIdEdmoDistDonnees, config.getIdEdmoDistDonnees());
+        textUrlCdi.setText(config.getCdiURL());
+        Utils.selectComboCode(comboMethodeCdi, config.getCdiMethod());
+        Utils.selectComboCode(comboAccesDonnees, config.getAccesDonnees());
+        Utils.selectComboCode(comboTypePlateForme, config.getTypePlateForme());
+        CDICheckMask(config.isWriteCdi());
 
         // MAPPING
-        checkMapping.setSelection(Utils.configuration.isWriteMapping());
-        textFichierMapping.setText(Utils.configuration.getFichierMapping());
-        mappingCheckMask(Utils.configuration.isWriteMapping());
+        checkMapping.setSelection(config.isWriteMapping());
+        textFichierMapping.setText(config.getFichierMapping());
+        mappingCheckMask(config.isWriteMapping());
 
         // Date ODV
-        radDateISO.setSelection(Utils.configuration.isDateISO());
-        radDateJulian.setSelection(!Utils.configuration.isDateISO());
+        radDateISO.setSelection(config.isDateISO());
+        radDateJulian.setSelection(!config.isDateISO());
 
         // Flags
-        selectDefaultFlagsTab(Utils.configuration.getDefaultCode());
+        selectDefaultFlagsTab(config.getDefaultCode());
 
         redLabels();
     }
@@ -970,15 +961,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         data.widthHint = 600;
         data.heightHint = 30;
         compo.setLayoutData (data);
-        //GridLayoutFactory.fillDefaults().numColumns(3).applyTo(compo);
-        //GridDataFactory.fillDefaults().hint(600, SWT.DEFAULT).applyTo(compo);
-
-        //compo01 = new Composite(compo, SWT.NONE);
-        //compo01.setFont(Utils.font08);
-        //compo01.setBackground(compo.getBackground());
-        //GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compo01);
-        //GridDataFactory.fillDefaults().grab(true, false).align(SWT.LEFT,SWT.CENTER).applyTo(compo01);
-
+        
         buttonRestore = new Button(compo, SWT.NONE);
         buttonRestore.setFont(Utils.font08);
         buttonRestore.setText(Messages.button_restore);
@@ -986,13 +969,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         data.grabExcessHorizontalSpace = true;
         buttonRestore.setLayoutData (data);
         buttonRestore.pack();
-
-        //compo02 = new Composite(compo, SWT.NONE);
-        //compo02.setBackground(compo.getBackground());
-        //compo02.setFont(Utils.font08);
-        //GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo02);
-        //GridDataFactory.fillDefaults().grab(true, false).align(SWT.RIGHT, SWT.CENTER).applyTo(compo02);
-
+        
         buttonValider = new Button(compo, SWT.NONE);
         buttonValider.setFont(Utils.font08);
         buttonValider.setText(Messages.button_validate);
@@ -1036,7 +1013,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         editor.horizontalAlignment = SWT.LEFT;
         editor.grabHorizontal = true;
 
-        final Table table = tabFlagTable;
+        //final Table table = tabFlagTable;
 
         tabFlagTable.addMouseListener(new MouseAdapter() {
             @Override
@@ -1372,11 +1349,11 @@ public class OptionsAction extends Action implements ISelectionListener,
                         boolean writeIni = checkRestart();
 
                         // sauvegarde de la config
-                        Utils.saveConfig(writeIni);
+                        saveConfig(writeIni);
 
                         // reinitialisation de la conversion
-                        if (DataModel.inputModel != null)
-                            DataModel.inputModel.setConverted(false);
+                        //if (DataModel.inputModel != null)
+                        //    DataModel.inputModel.setConverted(false);
 
                         // fermeture de la fenêtre
                         shelloptions.close();
@@ -1397,7 +1374,7 @@ public class OptionsAction extends Action implements ISelectionListener,
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
-                    Utils.restoreDefaultConfig();
+                    Nemo.getInstance().restoreDefaultConfig();
                     remplissageOptions();
 
                     buttonCancel.setEnabled(false);
@@ -1414,17 +1391,12 @@ public class OptionsAction extends Action implements ISelectionListener,
             toolkitOption.createSection(formOption.getBody(),
                 ExpandableComposite.TREE_NODE
                 | expandStyle);
-
-        //int heightFont = section.getFont().getFontData()[0].getHeight();
-        //Font titleFont =
-        //new Font(Application.display, "Courier", heightFont, SWT.NORMAL); //$NON-NLS-1$
-        //section.setFont(titleFont);
         
         section.addExpansionListener(new ExpansionAdapter() {
-        @Override
-        public void expansionStateChanged(ExpansionEvent e){
-            formOption.reflow(true);
-        }
+            @Override
+            public void expansionStateChanged(ExpansionEvent e){
+                formOption.reflow(true);
+            }
         });
         section.setText(title);
         
@@ -1540,9 +1512,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         return message.toString();
     }
 
-    protected void redLabels()
-    {
-
+    protected void redLabels(){
         // Libelles rouges si parametres manquants
         redLabel(comboIdEdmoRespCdi.getText(), labelIdEdmoRespCdi);
         redLabel(comboCodeEdmoDonnees.getText(), labelCodeEdmoDonnees);
@@ -1556,67 +1526,54 @@ public class OptionsAction extends Action implements ISelectionListener,
         redLabel(textPortProxy.getText(), labelPortProxy);
     }
 
-    protected void redLabel(String text, Label redLabel)
-    {
-        if (text.trim().equals(Global.EMPTY_STRING))
-        {
+    protected void redLabel(String text, Label redLabel){
+        if (text.trim().equals(Global.EMPTY_STRING)){
             redLabel.setForeground(Display.getCurrent().getSystemColor(
                 SWT.COLOR_RED));
         }
-        else
-        {
+        else{
             redLabel.setForeground(Display.getCurrent().getSystemColor(
                 SWT.COLOR_BLACK));
         }
     }
 
-    protected boolean checkRestart()
-    {
+    protected boolean checkRestart(){
         boolean writeIni = false;
         StringBuffer message = new StringBuffer();
 
-        if (comboLangue.getText().equals(Messages.settings_lang_EN))
-        {
+        if (comboLangue.getText().equals(Messages.settings_lang_EN)){
             if (configLangage.equals(Intern.lang_fr))
                 message.append(Global.RN + Global.SEP + Messages.settings_lang);
         }
-        else
-        {
+        else{
             if (configLangage.equals(Intern.lang_en))
                 message.append(Global.RN + Global.SEP + Messages.settings_lang);
         }
 
-        if (useProxy.getSelection() != configProxy.isUse())
-        {
+        if (useProxy.getSelection() != configProxy.isUse()){
             // proxy configuration change
             message.append(Global.RN + Global.SEP + Messages.settings_proxy);
             writeIni = true;
         }
-        else
-        {
-            if (useProxy.getSelection())
-            {
+        else{
+            if (useProxy.getSelection()){
                 if (!textAdrProxy.getText().trim().equals(
-                    configProxy.getAdress().trim()))
-                {
+                    configProxy.getAdress().trim())){
                     // proxy address change (can't be null)
                     message.append(Global.RN + Global.SEP
                             + Messages.settings_proxy_adr);
                     writeIni = true;
                 }
                 if (!textPortProxy.getText().trim().equals(
-                    configProxy.getPort().trim()))
-                {
+                    configProxy.getPort().trim())){
                     // proxy port change (can't be null)
                     message.append(Global.RN + Global.SEP
                             + Messages.settings_proxy_port);
                     writeIni = true;
                 }
 
-                if (textLoginProxy.getText() == null)
-                {
-                    if (!configProxy.getLogin().equals(Global.EMPTY_STRING))
-                    {
+                if (textLoginProxy.getText() == null){
+                    if (!configProxy.getLogin().equals(Global.EMPTY_STRING)){
                         // proxy login change
                         message.append(Global.RN + Global.SEP
                                 + Messages.settings_proxy_login);
@@ -1624,18 +1581,15 @@ public class OptionsAction extends Action implements ISelectionListener,
                     }
                 }
                 else if (!textLoginProxy.getText().trim().equals(
-                    configProxy.getLogin().trim()))
-                {
+                    configProxy.getLogin().trim())){
                     // proxy login change
                     message.append(Global.RN + Global.SEP
                             + Messages.settings_proxy_login);
                     writeIni = true;
                 }
 
-                if (textPassProxy.getText() == null)
-                {
-                    if (!configProxy.getPassword().equals(Global.EMPTY_STRING))
-                    {
+                if (textPassProxy.getText() == null){
+                    if (!configProxy.getPassword().equals(Global.EMPTY_STRING)){
                         // proxy password change
                         message.append(Global.RN + Global.SEP
                                 + Messages.settings_proxy_pass);
@@ -1643,8 +1597,7 @@ public class OptionsAction extends Action implements ISelectionListener,
                     }
                 }
                 else if (!textPassProxy.getText().trim().equals(
-                    configProxy.getPassword().trim()))
-                {
+                    configProxy.getPassword().trim())){
                     // proxy password change
                     message.append(Global.RN + Global.SEP
                             + Messages.settings_proxy_pass);
@@ -1653,8 +1606,7 @@ public class OptionsAction extends Action implements ISelectionListener,
             }
         }
 
-        if (message.length() > 0)
-        {
+        if (message.length() > 0){
             message.insert(0, Messages.warning_settings);
             MessageDialog dialog =
                 new MessageDialog(PlatformUI.getWorkbench().getDisplay()
@@ -1662,10 +1614,88 @@ public class OptionsAction extends Action implements ISelectionListener,
                     message.toString(), MessageDialog.WARNING,
                     new String[] {Messages.success}, 0);
             dialog.open();
-
         }
 
         return writeIni;
+    }
+    
+    protected void saveConfig(boolean writeIni){
+        // configuration
+        final Configuration configuration = Nemo.getInstance().getConfig();
+        
+        // sauvegarde de la config dans le fichier qui va bien
+        // CONTACT
+        configuration.setContact(Global.EMPTY_STRING);
+
+        // DOSSIERS
+        configuration.setModelsDirectory(textDossierModele.getText());
+        configuration.setCruisesDirectory(textDossierCampagne.getText());
+
+        // LANGUE
+        if (comboLangue.getItem(
+            comboLangue.getSelectionIndex()).equals(
+            Messages.settings_lang_FR))
+        {
+            configuration.setLang(Intern.lang_fr);
+        }
+        else
+        {
+            configuration.setLang(Intern.lang_en);
+        }
+
+        // CENTRE DE DONNEES
+        configuration.setDataCenter(Utils.extraitCode(comboCentreDonnees.getText()));
+
+        // WS
+        configuration.setNautilusWebServiceURL(textAreaNautilus.getText());
+        configuration.setNemoWebServiceURL(textAreaNemo.getText());
+        configuration.setVocabURL(textVocabURL.getText());
+        configuration.setEdmoURL(textWSEdmo.getText());
+        configuration.getProxy().update(writeIni);
+
+        for (BODCList list : configuration.getVocabLists().values()){
+            list.setUrl();
+        }
+
+        // CDI
+        configuration.setWriteCdi(checkCDI.getSelection());
+        configuration.setIdEdmoRespCdi(Utils
+            .extraitCode(comboIdEdmoRespCdi.getText()));
+        configuration.setCodeEdmoDonnees(Utils
+            .extraitCode(comboCodeEdmoDonnees.getText()));
+        configuration.setIdEdmoRespDonnees(Utils
+            .extraitCode(comboIdEdmoRespDonnees.getText()));
+        configuration.setIdEdmoDistDonnees(Utils
+            .extraitCode(comboIdEdmoDistDonnees.getText()));
+        configuration.setCdiURL(textUrlCdi.getText());
+        configuration.setCdiMethod(Utils
+            .extraitCode(comboMethodeCdi.getText()));
+        configuration.setAccesDonnees(Utils
+            .extraitCode(comboAccesDonnees.getText()));
+        configuration.setTypePlateForme(Utils
+            .extraitCode(comboTypePlateForme.getText()));
+
+        // MAPPING
+        configuration.setWriteMapping(checkMapping.getSelection());
+        configuration.setFichierMapping(textFichierMapping.getText());
+        // configuration.setArboMapping(textArboMapping.getText());
+
+        // DATE ODV
+        configuration.setDateISO(radDateISO.getSelection());
+
+        // Flags qualite
+        configuration.setDefaultCode(getDefaultCode());
+        ArrayList<FlagTable> flagTables = new ArrayList<FlagTable>();
+        for (int i = 0; i < getFlagTables().size(); i++)
+        {
+            FlagTable flagTable =
+                new FlagTable(getFlagTables().get(i));
+            flagTables.add(flagTable);
+        }
+        configuration.setFlagTables(flagTables);
+
+        // Enregistrement de la configuration
+        configuration.save();
     }
 
     private void fillFlagTable()
@@ -1673,7 +1703,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         int i;
         ArrayList<FlagTable> flagTables = new ArrayList<FlagTable>();
         flagTables =
-            FlagTable.getOrderedFlagTables(Utils.configuration.getFlagTables());
+            FlagTable.getOrderedFlagTables(Nemo.getInstance().getConfig().getFlagTables());
 
         for (i = 0; i < flagTables.size(); i++)
         {

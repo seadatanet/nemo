@@ -4,10 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
@@ -15,52 +13,44 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
+import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.domain.CruiseDomain;
+import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.domain.Station;
-import fr.ifremer.nemo.domain.Survey;
+import fr.ifremer.nemo.domain.StationDomain;
 import fr.ifremer.nemo.input.ParameterModel;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.edit.DataModel;
 import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.util.Global.E_InputType;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
 
 public class CDIResumeWriter
 {
-
     private static CDIResumeWriter instance;
 
+    private Nemo nemo;
+    
     private String nomFichierSortie;
-
-    private List<Survey> surveys;
 
     private FileWriter writer;
     private final String sep;
 
-    private String codeEdmoDonnees;
-    private String idEdmoRespDonnees;
-    private String idEdmoRespCdi;
-    private String idEdmoDistDonnees;
-    private String codeTypePlateForme;
-    private String codeAccesDonnees;
-    private String formatSortie;
-    private String cdiUrl;
-    private String cdiMethod;
 
     private CDIResumeWriter()
     {
-        surveys = new ArrayList<Survey>();
+        nemo = Nemo.getInstance();
         sep = Intern.CDIResumeWriter_separateur;
     }
 
-    public static CDIResumeWriter getInstance()
-    {
-
-        if (instance == null)
-        {
+    public static CDIResumeWriter getInstance(){
+        if (instance == null){
             instance = new CDIResumeWriter();
         }
         return instance;
@@ -69,21 +59,13 @@ public class CDIResumeWriter
     public void reset()
     {
         nomFichierSortie = Global.EMPTY_STRING;
-        surveys = new ArrayList<Survey>();
-
-        codeEdmoDonnees = Global.EMPTY_STRING;
-        idEdmoRespDonnees = Global.EMPTY_STRING;
-        idEdmoRespCdi = Global.EMPTY_STRING;
-        idEdmoDistDonnees = Global.EMPTY_STRING;
-        codeTypePlateForme = Global.EMPTY_STRING;
-        codeAccesDonnees = Global.EMPTY_STRING;
-        formatSortie = Global.EMPTY_STRING;
-        cdiUrl = Global.EMPTY_STRING;
-        cdiMethod = Global.EMPTY_STRING;
     }
 
+    @SuppressWarnings("nls")
     public void writeResume(Conversion formatConversion) throws IOException
     {
+        // 1 ligne par paramètres mesurés
+        
         File output = new File(nomFichierSortie);
         writer = null;
 
@@ -91,47 +73,165 @@ public class CDIResumeWriter
         {
             writer = new FileWriter(output);
 
-            codeEdmoDonnees = Utils.configuration.getCodeEdmoDonnees();
-            idEdmoRespDonnees = Utils.configuration.getIdEdmoRespDonnees();
-            idEdmoRespCdi = Utils.configuration.getIdEdmoRespCdi();
-            idEdmoDistDonnees = Utils.configuration.getIdEdmoDistDonnees();
-            codeTypePlateForme = Utils.configuration.getTypePlateForme();
-            codeAccesDonnees = Utils.configuration.getAccesDonnees();
-            formatSortie = formatConversion.toString();
-            cdiUrl = Utils.configuration.getCdiURL();
-            cdiMethod = Utils.configuration.getCdiMethod();
+            writer.write("LOCAL_CDI_ID"     + sep + 
+                         "EDMO_AUTHOR"      + sep +
+                         "AREA_TYPE"        + sep + 
+                         "DATASET_NAME"     + sep +
+                         "DATASET_ID"       + sep +
+                         "DATASET_REV_DATE" + sep + 
+                         "EDMO_ORIGINATOR"  + sep +
+                         "DATASET_ABS"      + sep +
+                         "EDMO_CUSTODIAN"   + sep +
+                         "PDV_CODE"         + sep +
+                         "PLATFORM_TYPE"    + sep +
+                         "DATASET_ACCESS"   + sep + 
+                         "CRUISE_NAME"      + sep + 
+                         "STATION_NAME"     + sep +
+                         "STATION_LATITUDE" + sep +
+                         "STATION_LONGITUDE" + sep +
+                         "STATION_DATE"     + sep +
+                         "EDMO_DISTRIBUTOR" + sep + 
+                         "FORMAT"           + sep + 
+                         "DATA_SIZE"        + sep +
+                         "DIST_WEBSITE"     + sep +
+                         "DIST_METHODE");
 
-            writer.write("LOCAL_CDI_ID" + sep + //$NON-NLS-1$
-                    "EDMO_AUTHOR" + sep + //$NON-NLS-1$
-                    "AREA_TYPE" + sep + //$NON-NLS-1$
-                    "DATASET_NAME" + sep + //$NON-NLS-1$
-                    "DATASET_ID" + sep + //$NON-NLS-1$
-                    "DATASET_REV_DATE" + sep + //$NON-NLS-1$
-                    "EDMO_ORIGINATOR" + sep + //$NON-NLS-1$
-                    "DATASET_ABS" + sep + //$NON-NLS-1$
-                    "EDMO_CUSTODIAN" + sep + //$NON-NLS-1$
-                    "PDV_CODE" + sep + //$NON-NLS-1$
-                    "PLATFORM_TYPE" + sep + //$NON-NLS-1$
-                    "DATASET_ACCESS" + sep + //$NON-NLS-1$
-                    "CRUISE_NAME" + sep + //$NON-NLS-1$
-                    "STATION_NAME" + sep + //$NON-NLS-1$
-                    "STATION_LATITUDE" + sep + //$NON-NLS-1$
-                    "STATION_LONGITUDE" + sep + //$NON-NLS-1$
-                    "STATION_DATE" + sep + //$NON-NLS-1$
-                    "EDMO_DISTRIBUTOR" + sep + //$NON-NLS-1$
-                    "FORMAT" + sep + //$NON-NLS-1$
-                    "DATA_SIZE" + sep + //$NON-NLS-1$
-                    "DIST_WEBSITE" + sep + //$NON-NLS-1$
-                    "DIST_METHODE"); //$NON-NLS-1$
-
-            for (Survey survey : surveys)
-            {
-                for (Station station : survey.getStations())
-                {
+            InputDomain iDomain = nemo.getDomain();
+            CruiseDomain cDomain = iDomain.getCruise();
+            StationDomain sDomain = cDomain.getStation();
+            
+            Configuration config = nemo.getConfig();
+            
+            for (String outputPath : iDomain.getMedia().getOutputFiles().keySet()){
+                for (Station st : sDomain.getStations(outputPath)){
                     // seuls les paramètres mesurés sont à prendre en compte
-                    for (ParameterModel param : station.getParameters())
-                    {
-                        writeLineResume(survey, station, param);
+                    for (ParameterModel param : iDomain.getCruise().getStation().getData().getModel().getParameterModels()){
+                        //writeLineResume(inputFilePath, st, param);
+
+                        writer.write(Global.RN);
+
+                        // CDI ID
+                        writer.write(sDomain.getLocalCdiId(cDomain, formatConversion, st.getReference()));
+
+                        // EDMO author
+                        writer.write(sep + config.getIdEdmoRespCdi());
+
+                        // Area Type
+                        if (iDomain.getMedia().getModel().getInputType() == E_InputType.TRAJECTORY)
+                            writer.write(sep + "Curve");
+                        else
+                            writer.write(sep + "Point");
+
+                        // Dataset name
+                        if (cDomain.getModel().getName().isEmpty()
+                                || cDomain.getModel().getName().equals(Intern.unknown)){
+                            if (cDomain.getDataSetRef().isEmpty()){
+                                writer.write(sep + Intern.CDIResumeWriter_notSpecified);
+                            }
+                            else{
+                                writer.write(sep + cDomain.getDataSetRef());
+                            }
+                        }
+                        else{
+                            writer.write(sep + cDomain.getModel().getName());
+                        }
+
+                        // Dataset ID
+                        if (cDomain.getModel().getReference().isEmpty()){
+                            if (ViewMain.collectionCas1){
+                                writer.write(sep + cDomain.getModel().getName());
+                            }
+                            else if (cDomain.getDataSetRef().isEmpty()){
+                                writer.write(sep + Intern.CDIResumeWriter_notSpecified);
+                            }
+                            else{
+                                writer.write(sep + cDomain.getDataSetRef());
+                            }
+                        }
+                        else{
+                            writer.write(sep + cDomain.getModel().getReference());
+                        }
+
+                        // Dataset Rev Date
+                        Calendar calendrier = Calendar.getInstance();
+                        Date dateEcriture = calendrier.getTime();
+                        SimpleDateFormat dateFormat =
+                            new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+                        String stringDate = dateFormat.format(dateEcriture);
+                        writer.write(sep + stringDate);
+
+                        // Edmo originator
+                        writer.write(sep + config.getCodeEdmoDonnees());
+
+                        // Dataset ABS
+                        writer.write(sep + Intern.CDIResumeWriter_notSpecified);
+
+                        // EDMO Custodian
+                        writer.write(sep + config.getIdEdmoRespDonnees());
+ 
+                        // PDV code
+                        String pdvCode =
+                            Utils.extraitCodeURN(NemoLists.getVocabMatch(
+                                Intern.mapping_subject, Intern.list_BODCpdv, param.getParameter()
+                                    .getCode(), Intern.NemoLists_unknown));
+                        writer.write(sep + pdvCode + Global.EMPTY_STRING);
+
+                        // Platform Type
+                        writer.write(sep + config.getTypePlateForme());
+
+                        // Dataset Access
+                        writer.write(sep + config.getAccesDonnees());
+
+                        // Cruise name
+                        if (!cDomain.getModel().getName().isEmpty())
+                            writer.write(sep + cDomain.getModel().getName());
+                        else
+                            writer.write(sep + Intern.CDIResumeWriter_notSpecified);
+
+                        // Station name
+                        writer.write(sep + st.getReference().trim());
+
+                        // station latitude
+                        writer.write(sep
+                                + Formatter.getSingleton().formatLatitude(
+                                    "+DD.ddd ", st.getLatitude()));
+                        
+                        // station longitude
+                        writer.write(sep
+                                + Formatter.getSingleton().formatLongitude(
+                                    "+DDD.ddd", st.getLongitude()));
+
+                        // station date
+                        Formatter format = new Formatter();
+                        SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd'T'");
+                        writer.write(sep
+                                + dateFormat2.format(new Date(st.getDate()))
+                                + format.formatDateTime(
+                                    "hh24:mm:ss", sDomain.getCorrectedTime(st.getTime(), st.getOffsetTU())));
+
+                        //st.getOffsetTU();
+                        //st.getTime();
+
+                        // edmo distributor
+                        writer.write(sep + config.getIdEdmoDistDonnees());
+
+                        // Format
+                        writer.write(sep + formatConversion.toString());
+
+                        // data size
+                        float datasize = new File(outputPath).length() / 1024f / 1024f;
+                        if (iDomain.getConversion().getCurrent() != E_TypeConversion.ODV_MONOSTATION){
+                            datasize = datasize / sDomain.getStations(outputPath).size();
+                        }
+
+                        writer.write(sep
+                                + Formatter.getSingleton().formatFloat("%.3f", datasize)); 
+
+                        // DIST website
+                        writer.write(sep + config.getCdiURL());
+
+                        // DIST methode
+                        writer.write(sep + config.getCdiMethod());
                     }
                 }
             }
@@ -148,153 +248,6 @@ public class CDIResumeWriter
         }
     }
 
-    private void writeLineResume(Survey survey, Station station,
-            ParameterModel param) throws Exception
-    {
-
-        writer.write(Global.RN);
-
-        // CDI ID
-        writer.write(station.getLocalCdiId(survey, formatSortie));
-
-        // EDMO author
-        writer.write(sep + idEdmoRespCdi);
-
-        // Area Type
-        if (DataModel.stationModel_modele.isTrajectory())
-        {
-            writer.write(sep + "Curve"); //$NON-NLS-1$
-        }
-        else
-        {
-            writer.write(sep + "Point"); //$NON-NLS-1$
-        }
-
-        // Dataset name
-        if (survey.getName().isEmpty()
-                || survey.getName().equals(Intern.unknown))
-        {
-            if (ViewMain.editConversionForm.getDataSetRef().isEmpty())
-            {
-                writer.write(sep + Intern.CDIResumeWriter_notSpecified);
-            }
-            else
-            {
-                writer.write(sep + ViewMain.editConversionForm.getDataSetRef());
-            }
-        }
-        else
-        {
-            writer.write(sep + survey.getName());
-        }
-
-        // Dataset ID
-        if (survey.getReference().isEmpty())
-        {
-            if (ViewMain.collectionCas1)
-            {
-                writer.write(sep + survey.getName());
-            }
-            else if (ViewMain.editConversionForm.getDataSetRef().isEmpty())
-            {
-                writer.write(sep + Intern.CDIResumeWriter_notSpecified);
-            }
-            else
-            {
-                writer.write(sep + ViewMain.editConversionForm.getDataSetRef());
-            }
-        }
-        else
-        {
-            writer.write(sep + survey.getReference());
-        }
-
-        // Dataset Rev Date
-        Calendar calendrier = Calendar.getInstance();
-        Date dateEcriture = calendrier.getTime();
-        SimpleDateFormat dateFormat =
-            new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss"); //$NON-NLS-1$
-        String stringDate = dateFormat.format(dateEcriture);
-        writer.write(sep + stringDate);
-
-        // Edmo originator
-        writer.write(sep + codeEdmoDonnees);
-
-        // Dataset ABS
-        writer.write(sep + Intern.CDIResumeWriter_notSpecified);
-
-        // EDMO Custodian
-        writer.write(sep + idEdmoRespDonnees);
-
-        // PDV code
-        String pdvCode =
-            Utils.extraitCodeURN(NemoLists.getVocabMatch(
-                Intern.mapping_subject, Intern.list_BODCpdv, param.getModel()
-                    .getCode(), Intern.NemoLists_unknown));
-        writer.write(sep + pdvCode + Global.EMPTY_STRING);
-
-        // Platform Type
-        writer.write(sep + codeTypePlateForme);
-
-        // Dataset Access
-        writer.write(sep + codeAccesDonnees);
-
-        // Cruise name
-        if (!survey.getName().isEmpty())
-            writer.write(sep + survey.getName());
-        else
-            writer.write(sep + Intern.CDIResumeWriter_notSpecified);
-
-        // Station name
-        writer.write(sep + station.getReference().trim());
-
-        // station latitude
-        writer.write(sep
-                + Formatter.getSingleton().formatLatitude(
-                    "+DD.ddd ", station.getLatitude())); //$NON-NLS-1$
-
-        // station longitude
-        writer.write(sep
-                + Formatter.getSingleton().formatLongitude(
-                    "+DDD.ddd", station.getLongitude())); //$NON-NLS-1$
-
-        // station date
-        Formatter format = new Formatter();
-        SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd'T'"); //$NON-NLS-1$
-        writer.write(sep
-                + dateFormat2.format(new Date(station.getDate()))
-                + format.formatDateTime(
-                    "hh24:mm:ss", station.getCorrectedTime())); //$NON-NLS-1$
-
-        station.getOffsetTU();
-        station.getTime();
-
-        // edmo distributor
-        writer.write(sep + idEdmoDistDonnees);
-
-        // Format
-        writer.write(sep + formatSortie);
-
-        // data size
-        float datasize = survey.getDataSize();
-        if (datasize == 0)
-        {
-            datasize = station.getDataSize();
-        }
-        else
-        {
-            datasize = datasize / survey.getStations().length;
-        }
-        writer.write(sep
-                + Formatter.getSingleton().formatFloat("%.3f", datasize)); //$NON-NLS-1$
-
-        // DIST website
-        writer.write(sep + cdiUrl);
-
-        // DIST methode
-        writer.write(sep + cdiMethod);
-    }
-
     public void choixFichierSortie()
     {
         nomFichierSortie = Global.EMPTY_STRING;
@@ -303,7 +256,7 @@ public class CDIResumeWriter
         FileDialog dialog =
             new FileDialog(shell, SWT.SAVE | SWT.APPLICATION_MODAL);
         dialog.setText(Messages.CDIResumeWriter_choixFichier);
-        dialog.setFilterPath(Utils.configuration.getCruisesDirectory());
+        dialog.setFilterPath(Nemo.getInstance().getConfig().getCruisesDirectory());
         String extensions[] = new String[1];
         extensions[0] = Global.STAR + Global.EXT_TXT;
         dialog.setFilterExtensions(extensions);
@@ -346,11 +299,15 @@ public class CDIResumeWriter
         }
     }
 
-    public void addSurvey(Survey survey)
+    /**
+     * Setter pour nomFichierSortie
+     * @param nomFichierSortie : nouvelle valeur pour nomFichierSortie
+     * @see CDIResumeWriter.java#nomFichierSortie
+     */
+    public void setNomFichierSortie(String nomFichierSortie)
     {
-
-        surveys.add(survey);
-
+        this.nomFichierSortie = nomFichierSortie;
     }
-
+    
+    
 }

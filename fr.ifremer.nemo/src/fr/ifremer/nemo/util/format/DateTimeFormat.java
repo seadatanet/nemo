@@ -16,8 +16,10 @@ import org.xml.sax.SAXException;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.input.ModelDescription;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
 
 /**
  * Class DateTimeFormat
@@ -26,7 +28,14 @@ import fr.ifremer.nemo.util.Global;
  * @author Gerard BUNEL
  */
 public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
-	protected ParseElement[] _elements;
+
+    private static final long serialVersionUID = 7705137988380881083L;
+
+    private static final String AM = "AM"; //$NON-NLS-1$
+    private static final String PM = "PM"; //$NON-NLS-1$
+    public static final String GMT = "GMT"; //$NON-NLS-1$
+    
+    protected ParseElement[] _elements;
 
 	protected String _formatString;
 
@@ -61,35 +70,13 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 		setRefDate(0);
 	}
 
-	/**
-	 * 
-	 * A new XML Element as been found. Parse it.
-	 * 
-	 * @param a_URI
-	 *            XML Namespace (SAX 2)
-	 * @param a_LocalName
-	 *            Tag name
-	 * @param a_QName
-	 *            Qualified tag name
-	 * @param a_Attributes
-	 *            XML Element attributes
-	 * @return SAXConsumer
-	 * 
-	 */
+
 	public SAXConsumer consumeElement(String a_URI, String a_LocalName,
-			String a_QName, Attributes a_Attributes) throws SAXException {
+			String a_QName, Attributes a_Attributes){
 		return null;
 	}
 
-	/**
-	 * 
-	 * The XML Element is a CDATA filled element
-	 * 
-	 * @param a_Characters
-	 *            The CDATA content
-	 * 
-	 */
-	public void consumeCharacters(String a_Characters) throws SAXException {
+	public void consumeCharacters(String a_Characters){
 	}
 
 	/**
@@ -101,8 +88,8 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 	 * 
 	 */
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
-		a_Writer.putAttribute("formatString", getFormatString());
-		a_Writer.putAttribute("refDate", getRefDate());
+		a_Writer.putAttribute(ModelDescription.a_string, getFormatString());
+		//a_Writer.putAttribute("refDate", getRefDate());
 	}
 
 	/**
@@ -113,8 +100,9 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 	 *            the XMLOutputWriter to which to write the XML Definition
 	 * 
 	 */
-	public void writeXMLOn(XMLOutputWriter a_Writer) {
-		a_Writer.openTag("DateTimeFormat");
+	@Override
+    public void writeXMLOn(XMLOutputWriter a_Writer) {
+		a_Writer.openTag(ModelDescription.node_fDate);
 		writeXMLBodyOn(a_Writer);
 		a_Writer.closeTag();
 	}
@@ -185,16 +173,18 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 	 * @param a_Attributes
 	 * @exception SAXException
 	 */
-	public void buildFromElement(String a_URI, String a_LocalName,
-			String a_QName, Attributes a_Attributes) throws SAXException {
+	public void buildFromElement(String a_URI, 
+                                 String a_LocalName,
+                                 String a_QName, 
+                                 Attributes a_Attributes) throws SAXException {
 		try {
 			String tmp;
-			if ((tmp = a_Attributes.getValue("formatString")) != null) {
+			if ((tmp = a_Attributes.getValue(ModelDescription.a_string)) != null) {
 				setFormatString(tmp);
 			}
-			if ((tmp = a_Attributes.getValue("refDate")) != null) {
-				setRefDate(tmp);
-			}
+			//if ((tmp = a_Attributes.getValue("refDate")) != null) {
+			//	setRefDate(tmp);
+			//}
 		} catch (Exception e) {
 			throw new SAXException(e);
 		}
@@ -204,7 +194,8 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 	 * 
 	 * @return Object
 	 */
-	public Object clone() {
+	@Override
+    public Object clone() {
 		try {
 			return new DateTimeFormat(new String(_formatString));
 		} catch (Exception e) {
@@ -219,13 +210,15 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 	 * @param pos
 	 * @return StringBuffer
 	 */
-	public StringBuffer format(Object obj, StringBuffer toAppendTo,
-			FieldPosition pos) {
+	@Override
+    public StringBuffer format(Object obj, 
+                               StringBuffer toAppendTo,
+                               FieldPosition pos) {
 		Long dateTime = (Long) obj;
 		Date value = new Date(dateTime.longValue());
 
 		DecimalFormat format = null;
-		TimeZone tz = TimeZone.getTimeZone("GMT");
+		TimeZone tz = TimeZone.getTimeZone(GMT); 
 		java.util.Locale locale = java.util.Locale.US;
 		java.text.DecimalFormatSymbols symbols = new java.text.DecimalFormatSymbols(
 				locale);
@@ -234,101 +227,104 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 		for (int i = 0; i < _elements.length; i++) {
 
 			switch (_elements[i]._type) {
-			case YEAR: {
-				format = new DecimalFormat(_elements[i]._element.replace('y',
-						'0'));
-				int year = cal.get(Calendar.YEAR);
-				if (_elements[i]._element.length() <= 2) {
-					if (year >= 2000) {
-						year -= 2000;
-					} else {
-						year -= 1900;
-					}
-				}
-				toAppendTo.append(format.format(year));
-				break;
-			}
-
-			case YEAR19: {
-				format = new DecimalFormat(_elements[i]._element.replace('r',
-						'0'));
-				int year = cal.get(Calendar.YEAR);
-				if (_elements[i]._element.length() <= 2) {
-					year -= 1900;
-				}
-				toAppendTo.append(format.format(year));
-				break;
-			}
-
-			case MONTH: {
-				format = new DecimalFormat(_elements[i]._element.replace('M',
-						'0'));
-				toAppendTo.append(format.format(cal.get(Calendar.MONTH) + 1));
-				break;
-			}
-			case DAY: {
-				format = new DecimalFormat(_elements[i]._element.replace('d',
-						'0'));
-				toAppendTo
-						.append(format.format(cal.get(Calendar.DAY_OF_MONTH)));
-				break;
-			}
-			case DAY_DECIMAL: { // cas des dates/heures donnees en jours
-				// decimaux par rapport a une date de reference
-				format = new DecimalFormat(_elements[i]._element.replace('d',
-						'0'), symbols);
-				int day = dateTime.intValue();
-				float dayDecimal = (float) (day / (60.0 * 60.0 * 24.0));
-				toAppendTo.append(format.format(dayDecimal));
-				break;
-			}
-			case CHARS: {
-				toAppendTo.append(_elements[i]._element);
-				break;
-			}
-			case HOURS12: {
-				format = new DecimalFormat(_elements[i]._element.replace('h',
-						'0'));
-				toAppendTo.append(format.format(cal.get(Calendar.HOUR)));
-				break;
-			}
-			case HOURS24: {
-				format = new DecimalFormat(_elements[i]._element.replace('h',
-						'0'));
-				toAppendTo.append(format.format(cal.get(Calendar.HOUR_OF_DAY)));
-				break;
-			}
-			case AMPM: {
-				int amPm = cal.get(Calendar.AM_PM);
-				if (amPm == Calendar.AM) {
-					toAppendTo.append("AM");
-				} else {
-					toAppendTo.append("PM");
-				}
-				break;
-			}
-			case MINUTES: {
-				format = new DecimalFormat(_elements[i]._element.replace('m',
-						'0'));
-				toAppendTo.append(format.format(cal.get(Calendar.MINUTE)));
-				break;
-			}
-			case SECONDS: {
-				format = new DecimalFormat(_elements[i]._element.replace('s',
-						'0'));
-				toAppendTo.append(format.format(cal.get(Calendar.SECOND)));
-				break;
-			}
-			case MILLISECONDS: {
-				format = new DecimalFormat(_elements[i]._element.replace('s',
-						'0'), symbols);
-				String tmp = String.valueOf(cal.get(Calendar.SECOND)) + "."
-						+ String.valueOf(cal.get(Calendar.MILLISECOND));
-				
-				float milliseconds = Float.parseFloat(tmp);
-				toAppendTo.append(format.format(milliseconds));
-				break;
-			}
+    			case YEAR: {
+    				format = new DecimalFormat(_elements[i]._element.replace('y',
+    						'0'));
+    				int year = cal.get(Calendar.YEAR);
+    				if (_elements[i]._element.length() <= 2) {
+    					if (year >= 2000) {
+    						year -= 2000;
+    					} else {
+    						year -= 1900;
+    					}
+    				}
+    				toAppendTo.append(format.format(year));
+    				break;
+    			}
+    
+    			case YEAR19: {
+    				format = new DecimalFormat(_elements[i]._element.replace('r',
+    						'0'));
+    				int year = cal.get(Calendar.YEAR);
+    				if (_elements[i]._element.length() <= 2) {
+    					year -= 1900;
+    				}
+    				toAppendTo.append(format.format(year));
+    				break;
+    			}
+    
+    			case MONTH: {
+    				format = new DecimalFormat(_elements[i]._element.replace('M',
+    						'0'));
+    				toAppendTo.append(format.format(cal.get(Calendar.MONTH) + 1));
+    				break;
+    			}
+    			case DAY: {
+    				format = new DecimalFormat(_elements[i]._element.replace('d',
+    						'0'));
+    				toAppendTo
+    						.append(format.format(cal.get(Calendar.DAY_OF_MONTH)));
+    				break;
+    			}
+    			case DAY_DECIMAL: { // cas des dates/heures donnees en jours
+    				// decimaux par rapport a une date de reference
+    				format = new DecimalFormat(_elements[i]._element.replace('d',
+    						'0'), symbols);
+    				int day = dateTime.intValue();
+    				float dayDecimal = (float) (day / (60.0 * 60.0 * 24.0));
+    				toAppendTo.append(format.format(dayDecimal));
+    				break;
+    			}
+    			case CHARS: {
+    				toAppendTo.append(_elements[i]._element);
+    				break;
+    			}
+    			case HOURS12: {
+    				format = new DecimalFormat(_elements[i]._element.replace('h',
+    						'0'));
+    				toAppendTo.append(format.format(cal.get(Calendar.HOUR)));
+    				break;
+    			}
+    			case HOURS24: {
+    				format = new DecimalFormat(_elements[i]._element.replace('h',
+    						'0'));
+    				toAppendTo.append(format.format(cal.get(Calendar.HOUR_OF_DAY)));
+    				break;
+    			}
+    			case AMPM:{
+    				int amPm = cal.get(Calendar.AM_PM);
+    				if (amPm == Calendar.AM) {
+    					toAppendTo.append(AM);
+    				} else {
+    					toAppendTo.append(PM);
+    				}
+    				break;
+                }
+    			case MINUTES:{
+    				format = new DecimalFormat(_elements[i]._element.replace('m',
+    						'0'));
+    				toAppendTo.append(format.format(cal.get(Calendar.MINUTE)));
+    				break;
+                }
+    			case SECONDS:{
+    				format = new DecimalFormat(_elements[i]._element.replace('s',
+    						'0'));
+    				toAppendTo.append(format.format(cal.get(Calendar.SECOND)));
+    				break;
+                }
+    			case MILLISECONDS:{
+    				format = new DecimalFormat(_elements[i]._element.replace('s',
+    						'0'), symbols);
+    				String tmp = String.valueOf(cal.get(Calendar.SECOND)) + Global.POINT
+    						+ String.valueOf(cal.get(Calendar.MILLISECOND));
+    				
+    				float milliseconds = Float.parseFloat(tmp);
+    				toAppendTo.append(format.format(milliseconds));
+    				break;
+                }
+                default:{
+                    break;
+                }
 			}
 		}
 		return toAppendTo;
@@ -348,7 +344,7 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 		try {
 			DateTimeFormat tmp = new DateTimeFormat();
 			tmp.buildFromElement(a_URI, a_LocalName, a_QName, a_Attributes);
-			return (SAXConsumer) tmp;
+			return tmp;
 		} catch (Exception e) {
 			throw new SAXException(e);
 		}
@@ -358,40 +354,14 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 	 * 
 	 * @param args
 	 */
+    @SuppressWarnings("nls")
 	public static void main(String[] args) {
 		try {
-			/*
-			 * // long baseTime = System.currentTimeMillis(); long baseTime = 0;
-			 * System.out.println("TimeZone: "+TimeZone.getDefault().getID());
-			 * DateTimeFormat format = new DateTimeFormat( args[0], baseTime );
-			 * Date value = new
-			 * Date(((Long)format.parseObject(args[2])).longValue());
-			 * System.out.println(value.getTime()); DateTimeFormat outFormat =
-			 * new DateTimeFormat( args[1] ); System.out.println("base:
-			 * "+outFormat.format(baseTime)); System.out.println("out:
-			 * "+outFormat.format(value.getTime()));
-			 */
-			// DateTimeFormat format = new DateTimeFormat("MMM dd yyyy");
-			// format.toString();
-			// DateTimeFormat format2 = new DateTimeFormat("hh24:mm:ss");
-			// String timeConvertie = format2.format("23:15");
-			// System.out.println("Heure 23:15 convertie en hh24:mm:ss =
-			// "+timeConvertie);
-			// N125 06.66
-			// LongitudeFormat longitudeFormat =
-			// (LongitudeFormat)propertyModel.getFormat();
-			// Formatter formatter = new Formatter();
-			// Long dateLong = (Long)format.parseObject("JUN 02 2007");
 			Formatter formatter = new Formatter();
 			System.out.println("latitude ===>"
 					+ formatter.formatLatitude("NDD MM.mm", -66.111));
 			System.out.println("longitude ===>"
 					+ formatter.formatLongitude("NDDD MM.mm", 126.111));
-
-			// System.out.println(">>>>>>"+formatter.formatDateTime("MM/dd/yyyy",
-			// dateLong));
-
-			// System.out.println(new Date( dateLong.longValue()));
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(">>>>" + e.getMessage());
@@ -421,13 +391,12 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 	 * @param pos
 	 * @return Long
 	 */
-	public Long parseObject(String source, ParsePosition pos) {
+	@Override
+    public Long parseObject(String source, ParsePosition pos) {
 		int index = pos.getIndex();
 
-		// System.out.println("DateTimeFormat/parseObject(): Source parsee
-		// ==>"+source);
 
-		TimeZone tz = TimeZone.getTimeZone("GMT");
+		TimeZone tz = TimeZone.getTimeZone(GMT);
 		Calendar cal = Calendar.getInstance(tz);
 		cal.clear();
 		cal.setLenient(false);
@@ -435,230 +404,178 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 		try {
 			for (int i = 0; i < _elements.length && index < source.length(); i++) {
 				switch (_elements[i]._type) {
-				case YEAR: {
-					String tmp = source.substring(index, index
-							+ _elements[i]._element.length());
-					int year = Integer.parseInt(tmp);
-					if (_elements[i]._element.length() <= 2) {
-						if (year < 50) {
-							year = 2000 + year;
-						} else {
-							year = 1900 + year;
-						}
-					}
-					cal.set(Calendar.YEAR, year);
-					index += _elements[i]._element.length();
-					break;
-				}
-				case YEAR19: {
-					String tmp = source.substring(index, index
-							+ _elements[i]._element.length());
-					int year = Integer.parseInt(tmp);
-					if (_elements[i]._element.length() <= 2) {
-						year = 1900 + year;
-					}
-					cal.set(Calendar.YEAR, year);
-					index += _elements[i]._element.length();
-					break;
-				}
-				case MONTH: {
-					String tmp = source.substring(index, index
-							+ _elements[i]._element.length());
-					if (tmp.length() > 2) {
-						java.text.SimpleDateFormat fmt = new java.text.SimpleDateFormat(
-								_elements[i]._element,
-								new java.text.DateFormatSymbols(
-										java.util.Locale.US));
-						java.util.Date date = fmt.parse(tmp);
-						Calendar c = Calendar.getInstance();
-						c.setTime(date);
-						cal.set(Calendar.MONTH, c.get(Calendar.MONTH));
-					} else {
-						int month = Integer.parseInt(tmp);
-						cal.set(Calendar.MONTH, month - 1);
-					}
-
-					index += _elements[i]._element.length();
-					break;
-				}
-				case DAY: {
-					String tmp = source.substring(index, index
-							+ _elements[i]._element.length());
-
-					int day = Integer.parseInt(tmp);
-					cal.set(Calendar.DAY_OF_MONTH, day);
-
-					index += _elements[i]._element.length();
-					break;
-				}
-				case DAY_DECIMAL: {
-					String tmp = source.substring(index, index
-							+ _elements[i]._element.length());
-					cal.setTimeInMillis(getRefDate());
-                    double days = Double.parseDouble(tmp.replace(',', '.'));
-                    JulianDate jd = new JulianDate(days, true);
-                    cal = jd.toCalendarDate(cal);
-
-					index += _elements[i]._element.length();
-					break;
-				}
-				case CHARS: {
-					String tmp = source.substring(index, index
-							+ _elements[i]._element.length());
-					if (!tmp.equals(_elements[i]._element)) {
-						if (!_elements[i]._element.trim().equals(""))
-						{
-							throw new ParseException(
-									"Charactere invalide, chaine attendue: \""
-											+ _elements[i]._element + "\""
-											+ " lue: \"" + tmp + "\"", index);
-						}
-					}
-					index += _elements[i]._element.length();
-					break;
-				}
-				case HOURS12: {
-					String tmp = source.substring(index, index
-							+ _elements[i]._element.length());
-					int hours = 0;
-					if (tmp.trim().length() > 0) {
-						hours = Integer.parseInt(tmp.trim());
-					}
-					cal.set(Calendar.HOUR, hours);
-					index += _elements[i]._element.length();
-					break;
-				}
-				case HOURS24: {
-					String tmp = source.substring(index, index
-							+ _elements[i]._element.length());
-					int hours = 0;
-					if (tmp.trim().length() > 0) {
-						hours = Integer.parseInt(tmp.trim());
-					}
-					cal.set(Calendar.HOUR_OF_DAY, hours);
-					index += _elements[i]._element.length();
-					break;
-				}
-				case AMPM: {
-					String tmp = source.substring(index, index
-							+ _elements[i]._element.length());
-					if (tmp.toUpperCase().equals("AM")) {
-						cal.set(Calendar.AM_PM, Calendar.AM);
-					} else {
-						cal.set(Calendar.AM_PM, Calendar.PM);
-					}
-					index += _elements[i]._element.length();
-					break;
-				}
-				case MINUTES: {
-					String tmp = source.substring(index, index
-							+ _elements[i]._element.length());
-					int minutes = 0;
-					if (tmp.trim().length() > 0) {
-						minutes = Integer.parseInt(tmp.trim());
-					}
-					cal.set(Calendar.MINUTE, minutes);
-					index += _elements[i]._element.length();
-					break;
-				}
-				case SECONDS: {
-					String tmp = source.substring(index, index
-							+ _elements[i]._element.length());
-					int seconds = Integer.parseInt(tmp.trim());
-					cal.set(Calendar.SECOND, seconds);
-					index += _elements[i]._element.length();
-					break;
-				}
-				case MILLISECONDS: {
-					String tmp = source.substring(index, index
-							+ _elements[i]._element.length());
-
-					Pattern p = Pattern.compile("[.]"); //$NON-NLS-1$
-					String parties[] = p.split(tmp);
-
-					cal.add(Calendar.SECOND, Integer.parseInt(parties[0]));
-					cal.add(Calendar.MILLISECOND, Integer.parseInt(parties[1]));
-
-					index += _elements[i]._element.length();
-					break;
-				}
-				case HOURSDEC: {
-                    String tmp = source.substring(index, index
-                        + _elements[i]._element.length());
-                    
-                    // maximum 7 éléments
-                    tmp = Formatter.getSingleton().genericPadString(tmp, 7, '0', false);
-                    
-                    // les 2 premières décimales correspondent aux minutes [*60 /100]
-                    String sMinutes = tmp.substring(0,2);
-                    int minutes = Integer.parseInt(sMinutes) * 60 / 100;
-                    cal.set(Calendar.MINUTE, minutes);
-                    
-                    // les 2 décimales suivantes correspondent aux secondes [*60 /100]
-                    String sSecondes = tmp.substring(2,4);
-                    int secondes = Integer.parseInt(sSecondes) * 60 / 100;
-                    cal.set(Calendar.SECOND, secondes);
-                    
-                    // les 3 dernières décimales correspondent aux millisecondes [direct]
-                    String sMillisecondes = tmp.substring(4);
-                    int millisecondes = Integer.parseInt(sMillisecondes);
-                    cal.set(Calendar.MILLISECOND, millisecondes);                    
-                    
-                    index += _elements[i]._element.length();
-                    break;
-                    
-                    /* Véritable Decimal Time
-				    // format = cc.cc.cc correspondant à [dour].[dinute].[decond]
-                    //
-                    // Règles
-                    // 1 decimal hour (dour) = 100 decimal minutes (dinutes)
-                    // 1 decimal minute (dinute) = 100 decimal seconds (deconds)
-                    // 1 decimal second (decond) = 0.864 regular seconds
-                    
-                    Calendar calTemp = Calendar.getInstance();
-                    calTemp.clear();
-                    
-                    String tmp = source.substring(index, index
-                            + _elements[i]._element.length());
-
-                    Pattern p = Pattern.compile("[.]"); //$NON-NLS-1$
-                    String parties[] = p.split(tmp);
-                    
-                    int deconds = 0;
-                    int multi = 100 * 100;
-                    for (int idx = 0; idx < parties.length; idx++){
-                        deconds += Integer.parseInt(parties[idx].trim()) * multi;
-                        multi = multi /100;
+    				case YEAR: {
+                        String tmp = source.substring(index, index + _elements[i]._element.length());
+    					int year = Integer.parseInt(tmp);
+    					if (_elements[i]._element.length() <= 2) {
+    						if (year < 50) {
+    							year = 2000 + year;
+    						} else {
+    							year = 1900 + year;
+    						}
+    					}
+    					cal.set(Calendar.YEAR, year);
+    					index += _elements[i]._element.length();
+    					break;
                     }
-                    
-                    Double seconds = deconds * 0.864;
-                    
-                    calTemp.add(Calendar.SECOND, seconds.intValue());
-
-                    cal.set(Calendar.HOUR_OF_DAY, calTemp.get(Calendar.HOUR_OF_DAY));
-                    cal.set(Calendar.MINUTE, calTemp.get(Calendar.MINUTE));
-                    cal.set(Calendar.SECOND, calTemp.get(Calendar.SECOND));
-                    
-                    index += _elements[i]._element.length();
-                    break;
-                    */
-				}
-				case SECONDSD: {
-					Calendar calTemp = Calendar.getInstance();
-					calTemp.clear();
-
-					String tmp = source.substring(index, index
-							+ _elements[i]._element.length());
-
-					calTemp.add(Calendar.SECOND, Integer.parseInt(tmp.trim()));
-
-					cal.set(Calendar.HOUR_OF_DAY, calTemp.get(Calendar.HOUR_OF_DAY));
-					cal.set(Calendar.MINUTE, calTemp.get(Calendar.MINUTE));
-					cal.set(Calendar.SECOND, calTemp.get(Calendar.SECOND));
-
-					index += _elements[i]._element.length();
-					break;
-				}
+    				case YEAR19: {
+                        String tmp = source.substring(index, index + _elements[i]._element.length());
+    					int year = Integer.parseInt(tmp);
+    					if (_elements[i]._element.length() <= 2) {
+    						year = 1900 + year;
+    					}
+    					cal.set(Calendar.YEAR, year);
+    					index += _elements[i]._element.length();
+    					break;
+                    }
+    				case MONTH:{
+                        String tmp = source.substring(index, index + _elements[i]._element.length()); 
+    					if (tmp.length() > 2) {
+    						java.text.SimpleDateFormat fmt = new java.text.SimpleDateFormat(
+    								_elements[i]._element,
+    								new java.text.DateFormatSymbols(
+    										java.util.Locale.US));
+    						java.util.Date date = fmt.parse(tmp);
+    						Calendar c = Calendar.getInstance();
+    						c.setTime(date);
+    						cal.set(Calendar.MONTH, c.get(Calendar.MONTH));
+    					} else {
+    						int month = Integer.parseInt(tmp);
+    						cal.set(Calendar.MONTH, month - 1);
+    					}
+    
+    					index += _elements[i]._element.length();
+    					break;
+                    }
+    				case DAY: {
+                        String tmp = source.substring(index, index + _elements[i]._element.length());
+    					int day = Integer.parseInt(tmp);
+    					cal.set(Calendar.DAY_OF_MONTH, day);
+    
+    					index += _elements[i]._element.length();
+    					break;
+                    }
+    				case DAY_DECIMAL: {
+                        String tmp = source.substring(index, index + _elements[i]._element.length());
+    					cal.setTimeInMillis(getRefDate());
+                        double days = Double.parseDouble(tmp.replace(',', '.'));
+                        JulianDate jd = new JulianDate(days, true);
+                        cal = jd.toCalendarDate(cal);
+    
+    					index += _elements[i]._element.length();
+    					break;
+                    }
+    				case CHARS: {
+                        String tmp = source.substring(index, index + _elements[i]._element.length());
+    					if (!tmp.equals(_elements[i]._element)) {
+    						if (!_elements[i]._element.trim().equals(Global.EMPTY_STRING))
+    						{
+    							throw new ParseException(String.format(Intern.errorParseChar, _elements[i]._element, tmp), index);
+    						}
+    					}
+    					index += _elements[i]._element.length();
+    					break;
+                    }
+    				case HOURS12: {
+                        String tmp = source.substring(index, index + _elements[i]._element.length());
+    					int hours = 0;
+    					if (tmp.trim().length() > 0) {
+    						hours = Integer.parseInt(tmp.trim());
+    					}
+    					cal.set(Calendar.HOUR, hours);
+    					index += _elements[i]._element.length();
+    					break;
+    				}
+    				case HOURS24: {
+                        String tmp = source.substring(index, index + _elements[i]._element.length());
+    					int hours = 0;
+    					if (tmp.trim().length() > 0) {
+    						hours = Integer.parseInt(tmp.trim());
+    					}
+    					cal.set(Calendar.HOUR_OF_DAY, hours);
+    					index += _elements[i]._element.length();
+    					break;
+                    }
+    				case AMPM: {
+                        String tmp = source.substring(index, index + _elements[i]._element.length());
+    					if (tmp.toUpperCase().equals(AM)) {
+    						cal.set(Calendar.AM_PM, Calendar.AM);
+    					} else {
+    						cal.set(Calendar.AM_PM, Calendar.PM);
+    					}
+    					index += _elements[i]._element.length();
+    					break;
+                    }
+    				case MINUTES: {
+                        String tmp = source.substring(index, index + _elements[i]._element.length());
+    					int minutes = 0;
+    					if (tmp.trim().length() > 0) {
+    						minutes = Integer.parseInt(tmp.trim());
+    					}
+    					cal.set(Calendar.MINUTE, minutes);
+    					index += _elements[i]._element.length();
+    					break;
+                    }
+    				case SECONDS: {
+                        String tmp = source.substring(index, index + _elements[i]._element.length());
+    					int seconds = Integer.parseInt(tmp.trim());
+    					cal.set(Calendar.SECOND, seconds);
+    					index += _elements[i]._element.length();
+    					break;
+                    }
+    				case MILLISECONDS: {
+                        String tmp = source.substring(index, index + _elements[i]._element.length());
+    					Pattern p = Pattern.compile("[.]"); //$NON-NLS-1$
+    					String parties[] = p.split(tmp);
+    
+    					cal.add(Calendar.SECOND, Integer.parseInt(parties[0]));
+    					cal.add(Calendar.MILLISECOND, Integer.parseInt(parties[1]));
+    
+    					index += _elements[i]._element.length();
+    					break;
+                    }
+    				case HOURSDEC: {
+                        String tmp = source.substring(index, index + _elements[i]._element.length());
+                        
+                        // maximum 7 éléments
+                        tmp = Formatter.getSingleton().genericPadString(tmp, 7, '0', false);
+                        
+                        // les 2 premières décimales correspondent aux minutes [*60 /100]
+                        String sMinutes = tmp.substring(0,2);
+                        int minutes = Integer.parseInt(sMinutes) * 60 / 100;
+                        cal.set(Calendar.MINUTE, minutes);
+                        
+                        // les 2 décimales suivantes correspondent aux secondes [*60 /100]
+                        String sSecondes = tmp.substring(2,4);
+                        int secondes = Integer.parseInt(sSecondes) * 60 / 100;
+                        cal.set(Calendar.SECOND, secondes);
+                        
+                        // les 3 dernières décimales correspondent aux millisecondes [direct]
+                        String sMillisecondes = tmp.substring(4);
+                        int millisecondes = Integer.parseInt(sMillisecondes);
+                        cal.set(Calendar.MILLISECOND, millisecondes);                    
+                        
+                        index += _elements[i]._element.length();
+                        break;
+                    }
+    				case SECONDSD: {
+    					Calendar calTemp = Calendar.getInstance();
+    					calTemp.clear();
+    
+                        String tmp = source.substring(index, index + _elements[i]._element.length());
+    
+    					calTemp.add(Calendar.SECOND, Integer.parseInt(tmp.trim()));
+    
+    					cal.set(Calendar.HOUR_OF_DAY, calTemp.get(Calendar.HOUR_OF_DAY));
+    					cal.set(Calendar.MINUTE, calTemp.get(Calendar.MINUTE));
+    					cal.set(Calendar.SECOND, calTemp.get(Calendar.SECOND));
+    
+    					index += _elements[i]._element.length();
+    					break;
+                    }
+                    default:{
+                        break;
+                    }
 				}
 			}
 			cal.getTime();
@@ -684,7 +601,8 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 	 * 
 	 * @return the format string
 	 */
-	public String toString() {
+	@Override
+    public String toString() {
 		return _formatString;
 	}
 	
@@ -696,4 +614,4 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 		return size;
 	}
 
-} /* End of class: DateTimeFormat */
+}

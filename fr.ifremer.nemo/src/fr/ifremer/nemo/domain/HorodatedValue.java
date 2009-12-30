@@ -3,7 +3,7 @@ package fr.ifremer.nemo.domain;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.format.DateTimeFormat;
 
 /**
  * Class HorodatedValue
@@ -13,54 +13,27 @@ import fr.ifremer.nemo.util.Global;
  * 
  * @author Gerard BUNEL
  */
-public class HorodatedValue extends ParameterValue implements Cloneable {
+public class HorodatedValue extends ParameterValue {
 	/**
 	 * Date/Heure de la mesure
 	 */
 	public long _date;
 
-	/**
-	 * Flag qualite assoccie e la date de la mesure
-	 */
-	public String _qc2;
 
 	public HorodatedValue() {
 		super();
-		_qc2 = Global.EMPTY_STRING;
 	}
-    
     
 
 	/**
      * {@inheritDoc}
      */
     @Override
-    public void reset()
-    {
+    public void reset(){
         super.reset();
-        _qc2 = Global.EMPTY_STRING;
         _date = 0;
     }
 
-
-
-    /**
-	 * Returns a copy of this Object
-	 * 
-	 * @return a copy of this object
-	 */
-	public Object clone() throws CloneNotSupportedException {
-		HorodatedValue copy = null;
-		copy = (HorodatedValue) super.clone();
-		return copy;
-	}
-
-	/**
-	 * Remove any associated links
-	 */
-	public void release() {
-		super.release();
-	}
 
 	/**
 	 * Read accessor (getter) for attribute _date
@@ -98,32 +71,11 @@ public class HorodatedValue extends ParameterValue implements Cloneable {
 	}
 
 	/**
-	 * Read accessor (getter) for attribute _qc2
-	 * 
-	 * @return String
-	 * @see HorodatedValue#_qc2
-	 */
-	public String getQc2() {
-		return _qc2;
-	}
-
-	/**
-	 * Write accessor (setter) for attribute _qc2
-	 * 
-	 * @param x
-	 *            new value for _qc2
-	 * @see HorodatedValue#_qc2
-	 */
-	public void setQc2(String x) {
-		_qc2 = x;
-	}
-
-	/**
 	 * 
 	 * @return int
 	 */
 	public int getDay() {
-		TimeZone tz = TimeZone.getTimeZone("GMT");
+		TimeZone tz = TimeZone.getTimeZone(DateTimeFormat.GMT);
 		Calendar cal = Calendar.getInstance(tz);
 		cal.setTimeInMillis(_date);
 		return cal.get(Calendar.DAY_OF_MONTH);
@@ -134,7 +86,7 @@ public class HorodatedValue extends ParameterValue implements Cloneable {
 	 * @return int
 	 */
 	public int getMonth() {
-		TimeZone tz = TimeZone.getTimeZone("GMT");
+		TimeZone tz = TimeZone.getTimeZone(DateTimeFormat.GMT);
 		Calendar cal = Calendar.getInstance(tz);
 		cal.setTimeInMillis(_date);
 		return cal.get(Calendar.MONTH) + 1;
@@ -145,7 +97,7 @@ public class HorodatedValue extends ParameterValue implements Cloneable {
 	 * @return int
 	 */
 	public int getYear() {
-		TimeZone tz = TimeZone.getTimeZone("GMT");
+		TimeZone tz = TimeZone.getTimeZone(DateTimeFormat.GMT);
 		Calendar cal = Calendar.getInstance(tz);
 		cal.setTimeInMillis(_date);
 		return cal.get(Calendar.YEAR);

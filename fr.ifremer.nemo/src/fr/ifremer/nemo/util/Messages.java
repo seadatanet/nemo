@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import org.eclipse.osgi.util.NLS;
 
-import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.Nemo;
 
 public class Messages {
     private static final String BUNDLE_NAME = "fr.ifremer.nemo.util.messages"; //$NON-NLS-1$
@@ -218,6 +218,8 @@ public class Messages {
     public static String error_convert_position;
     public static String error_convert_outputDir;
     public static String error_convert_outputFile;
+    
+    public static String error_unknown_format;
 
     //ACTIONS
     public static String settings_typePlateForme;
@@ -483,7 +485,7 @@ public class Messages {
     
     static {
         // check config de la langue
-        String langue = Utils.configuration.getLang();
+        String langue = Nemo.getInstance().getConfig().getLang();
         
         // initialize resource bundle
         StringBuffer bundleName = new StringBuffer(BUNDLE_NAME);
@@ -503,7 +505,7 @@ public class Messages {
         try
         {
             // check config de la langue
-            String langue = Utils.configuration.getLang();
+            String langue = Nemo.getInstance().getConfig().getLang();
             
             StringBuffer bundleName = new StringBuffer(BUNDLE_NAME);
             if (langue.equals(Intern.lang_fr) || langue.equals(Intern.lang_en))

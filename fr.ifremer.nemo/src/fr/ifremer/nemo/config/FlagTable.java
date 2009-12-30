@@ -9,6 +9,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 
 import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.util.Global;
 
 /**
  * Class FlagTable
@@ -37,8 +38,8 @@ public class FlagTable {
 	 * Constructeur
 	 */
 	public FlagTable() {
-		_code = "";
-		_libelle = "";
+		_code = Global.EMPTY_STRING;
+		_libelle = Global.EMPTY_STRING;
 		_flags = new ArrayList<Flag>();
 	}
 
@@ -113,7 +114,7 @@ public class FlagTable {
 				return Utils.extraitCode(getFlags().get(i).getSdn());
 			}
 		}
-		return "0";
+		return Global.ZERO;
 	}
 
 	public void fillTable(Table table) {

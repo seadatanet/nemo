@@ -1,44 +1,39 @@
 package fr.ifremer.nemo.input;
 
-import java.io.OutputStream;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+import org.nfunk.jep.JEP;
 import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
 
 import com.ago.xml.Element2Field;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
-import fr.ifremer.nemo.config.FlagTable;
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.domain.AddedParameter;
-import fr.ifremer.nemo.domain.HorodatedValue;
-import fr.ifremer.nemo.domain.Parameter;
+import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.domain.ParameterValue;
 import fr.ifremer.nemo.domain.Station;
-import fr.ifremer.nemo.ui.edit.NemoSection;
+import fr.ifremer.nemo.domain.StationDomain;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.nemo.util.format.JulianDate;
+import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.format.LatitudeFormat;
 import fr.ifremer.nemo.util.format.LongitudeFormat;
 
 /**
  * Class ParameterModel
- * 
- * Classe permettant de modeliser une parametre mesure. Le parametre peut etre
- * convertit en utilisant la formule de conversion fournie par l'attribut
- * conversionFormula
- * 
+ * Description : Modélisation d'un paramètre mesuré. 
  * @author Gerard BUNEL
  */
-public class ParameterModel implements Cloneable, SAXConsumer {
-
+public class ParameterModel extends AbstractModel
+{
 	/**
 	 * Expression mathematique permettant de convertir la valeur du parametre.
 	 * La variable d'entree est nommee "x" dans l'expression.Ex: 3*x+2. Les
@@ -47,6 +42,9 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 	 */
 	protected String _conversionFormula;
 
+    /**
+     * Valeur par défaut dans le fichier
+     */
 	public String _inputDefault;
 
 	/**
@@ -60,578 +58,346 @@ public class ParameterModel implements Cloneable, SAXConsumer {
 	 * peut etre lue
 	 */
 	protected LineFragment _flag;
-
-	protected org.nfunk.jep.JEP _jepParser;
-
+    
 	/**
 	 * Represente le parametre modelise par ce ParameterModel
 	 */
-	protected Parameter _model;
+	protected Parameter _parameter;
+    
+    protected ParameterValue _lineValue;
+    
+    protected JEP _jepParser;
 
 	public ParameterModel() {
-		_conversionFormula = "";
-		_fragment = new LineFragment();
-		_flag = null;
-		_model = null;
+        _tagName = ModelDescription.node_parameterModel;
+        initValues();
 	}
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void initValues(){
+        _conversionFormula = Global.EMPTY_STRING;
+        _inputDefault = Global.EMPTY_STRING;
+        _fragment = new LineFragment();
+        _flag = null;
+        _parameter = new Parameter();
+        _lineValue = null;
+    }
 
-	/**
-	 * 
-	 * @param a_Parameter
-	 */
-	public ParameterModel(Parameter a_Parameter) {
-		this();
-		setModel(a_Parameter);
-		_inputDefault = a_Parameter.getDefault();
+
+    /**
+     * @see AbstractModel.java#fromElement
+     */
+	public static SAXConsumer fromElement(String a_URI, 
+                                          String a_LocalName,
+                                          String a_QName, 
+                                          Attributes a_Attributes){
+		ParameterModel el = new ParameterModel();
+		el.buildFromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+		return el;
 	}
-
-//	/**
-//	 * 
-//	 * @param a_WSParameter
-//	 */
-//	public ParameterModel(WSParameter a_WSParameter) {
-//		this();
-//		setModel(new Parameter(a_WSParameter));
-//	}
-
-	/**
-	 * 
-	 * Build object from its XML defintion
-	 * 
-	 * @param a_URI
-	 *            Element Namespace (SAX 2)
-	 * @param a_LocalName
-	 *            Tag name
-	 * @param a_QName
-	 *            qualified tag name
-	 * @param a_Attributes
-	 *            XML Element attributes
-	 * @return SAXConsumer
-	 * 
-	 */
-	public static SAXConsumer fromElement(String a_URI, String a_LocalName,
-			String a_QName, Attributes a_Attributes) throws SAXException {
-		ParameterModel tmp = new ParameterModel();
-		tmp.buildFromElement(a_URI, a_LocalName, a_QName, a_Attributes);
-		return (SAXConsumer) tmp;
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+	public void buildFromElement(String a_URI, 
+                                 String a_LocalName,
+                                 String a_QName, 
+                                 Attributes a_Attributes){
+        // l'élément n'a pas d'attribut
 	}
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+	public SAXConsumer consumeElement(String a_URI, 
+                                      String a_LocalName,
+                                      String a_QName, 
+                                      Attributes a_Attributes){
 
-	/**
-	 * 
-	 * Retrieve attributes values from their XML defintion
-	 * 
-	 * @param a_URI
-	 *            Element Namespace (SAX 2)
-	 * @param a_LocalName
-	 *            Tag name
-	 * @param a_QName
-	 *            qualified tag name
-	 * @param a_Attributes
-	 *            XML Element attributes
-	 * 
-	 */
-	public void buildFromElement(String a_URI, String a_LocalName,
-			String a_QName, Attributes a_Attributes) throws SAXException {
-	}
-
-	/**
-	 * 
-	 * A new XML Element as been found. Parse it.
-	 * 
-	 * @param a_URI
-	 *            XML Namespace (SAX 2)
-	 * @param a_LocalName
-	 *            Tag name
-	 * @param a_QName
-	 *            Qualified tag name
-	 * @param a_Attributes
-	 *            XML Element attributes
-	 * @return SAXConsumer
-	 * 
-	 */
-	public SAXConsumer consumeElement(String a_URI, String a_LocalName,
-			String a_QName, Attributes a_Attributes) throws SAXException {
-		if (a_LocalName.equals("conversionFormula")) {
-			Element2Field setter = new Element2Field(this,
-					"setConversionFormula");
+        SAXConsumer el = null;
+		if (a_LocalName.equals(ModelDescription.node_formula)) {
+			Element2Field setter = new Element2Field(this, ModelDescription.setter_formula);
 			return setter;
 		}
-		if (a_LocalName.equals("inputDefault")) {
-			Element2Field setter = new Element2Field(this, "setInputDefault");
+		if (a_LocalName.equals(ModelDescription.node_indefault)) {
+			Element2Field setter = new Element2Field(this, ModelDescription.setter_indefault);
 			return setter;
+		}        
+		if (a_LocalName.equals(ModelDescription.node_dataFragment)) {
+            el = LineFragment.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+            setFragment((LineFragment) el);
+            return el;
+            //return new PathElementConsumer(ModelDescription.node_dataFragment, this);
 		}
-		if (a_LocalName.equals("LineFragment")) {
-			LineFragment l = (LineFragment) LineFragment.fromElement(a_URI,
-					a_LocalName, a_QName, a_Attributes);
-			setFragment(l);
-			return (SAXConsumer) l;
+		if (a_LocalName.equals(ModelDescription.node_parameter)) {
+            el = Parameter.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+            setParameter((Parameter) el);
+            return el;
+            //return new PathElementConsumer(ModelDescription.node_parameter, this);
 		}
-		if (a_LocalName.equals("Parameter")) {
-			Parameter l = (Parameter) Parameter.fromElement(a_URI, a_LocalName,
-					a_QName, a_Attributes);
-			setModel(l);
-			return (SAXConsumer) l;
-		}
-		if (a_LocalName.equals("Flag")) {
-			LineFragment l = (LineFragment) LineFragment.fromElement(a_URI,
-					a_LocalName, a_QName, a_Attributes);
-			setFlag(l);
-			return (SAXConsumer) l;
+		if (a_LocalName.equals(ModelDescription.node_flag)) {
+            el = LineFragment.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+            setFlag((LineFragment) el);
+            return el;
+            //return new PathElementConsumer(ModelDescription.node_flag, this);
 		}
 		return null;
 	}
-
-	/**
-	 * 
-	 * The XML Element is a CDATA filled element
-	 * 
-	 * @param a_Characters
-	 *            The CDATA content
-	 * 
-	 */
-	public void consumeCharacters(String a_Characters) throws SAXException {
-	}
-
-	/**
-	 * 
-	 * Generate XML defintion on a Stream
-	 * 
-	 * @param a_Writer
-	 *            XMLOutputWriter to which to write the XML Definition
-	 * 
-	 */
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public SAXConsumer handlePathElement(String path, 
+                                         String a_URI,
+                                         String a_LocalName, 
+                                         String a_QName, 
+                                         Attributes a_Attributes){
+        // non utilisé
+        return null;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
-		a_Writer.putTag("conversionFormula", getConversionFormula());
-		a_Writer.putTag("inputDefault", getInputDefault());
+		a_Writer.putTag(ModelDescription.node_formula, getConversionFormula());
+		a_Writer.putTag(ModelDescription.node_indefault, getInputDefault());
 		if (getFragment() != null) {
-			getFragment().writeXMLOn(a_Writer, "LineFragment");
+            getFragment().setTagName(ModelDescription.node_dataFragment);
+            getFragment().writeXMLOn(a_Writer);
 		}
 		if (getFlag() != null) {
-			getFlag().writeXMLOn(a_Writer, "Flag");
+            getFlag().setTagName(ModelDescription.node_flag);
+			getFlag().writeXMLOn(a_Writer);
 		}
-		if (getModel() != null) {
-			getModel().writeXMLOn(a_Writer);
+		if (getParameter() != null) {
+			getParameter().writeXMLOn(a_Writer);
 		}
 	}
 
-	/**
-	 * 
-	 * Generate XML defintion on a XMLOutputWriter
-	 * 
-	 * @param a_Writer
-	 *            the XMLOutputWriter to which to write the XML Definition
-	 * 
-	 */
-	public void writeXMLOn(XMLOutputWriter a_Writer) {
-		a_Writer.openTag("ParameterModel");
-		writeXMLBodyOn(a_Writer);
-		a_Writer.closeTag();
-	}
-
-	/**
-	 * 
-	 * Generate XML defintion on a Stream
-	 * 
-	 * @param a_Stream
-	 *            the OutptStream to which to write the XML Definition
-	 * 
-	 */
-	public void writeXMLOn(OutputStream a_Stream) {
-		XMLOutputWriter writer = new XMLOutputWriter(a_Stream);
-		writeXMLOn(writer);
-	}
-
-	/**
-	 * Returns a copy of this Object
-	 * 
-	 * @return a copy of this object
-	 */
-	@Override
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public Object clone() throws CloneNotSupportedException {
 		ParameterModel copy = null;
 		copy = (ParameterModel) super.clone();
-		//copy._fragment = new LineFragment();
+		copy._fragment = null;
 		if (getFragment() != null) {
 			copy.setFragment((LineFragment) getFragment().clone());
 		}
-		copy._model = null;
-		if (getModel() != null) {
-            if (getModel() instanceof AddedParameter){
-                copy.setModel((AddedParameter)((AddedParameter) getModel()).clone());
-            }else{
-                copy.setModel((Parameter) getModel().clone());
-            }
+		copy._parameter = null;
+		if (getParameter() != null) {
+            copy.setParameter((Parameter) getParameter().clone());
 		}
-		//copy._flag = new LineFragment();
+		copy._flag = null;
 		if (getFlag() != null) {
 			copy.setFlag((LineFragment) getFlag().clone());
 		}
 		return copy;
 	}
+    
+    @SuppressWarnings("nls")
+    public void computeParameterValue(String inputLine){
+        ParameterValue pValue = new ParameterValue();
+        JEP parser = null;
+        String value = _fragment.retreive(inputLine);
 
-	/**
-	 * Remove any associated links
-	 */
-	public void release() {
-		releaseFragment();
-		releaseFlag();
-		releaseModel();
-	}
-
-	/**
-	 * Read accessor (getter) for attribute _conversionFormula
-	 * 
-	 * @return String
-	 * @see ParameterModel#_conversionFormula
-	 */
-	public String getConversionFormula() {
-		return _conversionFormula;
-	}
-
-	/**
-	 * Write accessor (setter) for attribute _conversionFormula
-	 * 
-	 * @param x
-	 *            new value for _conversionFormula
-	 * @see ParameterModel#_conversionFormula
-	 */
-	public void setConversionFormula(String x) {
-		_conversionFormula = x;
-	}
-
-	/**
-	 * Read accessor (getter) for attribute _inputDefault
-	 * 
-	 * @return float
-	 * @see ParameterModel#_inputDefault
-	 */
-	public String getInputDefault() {
-		return _inputDefault;
-	}
-
-	/**
-	 * Write accessor (setter) for attribute _inputDefault
-	 * 
-	 * @param x
-	 *            new value for _inputDefault
-	 * @see ParameterModel#_inputDefault
-	 */
-	public void setInputDefault(String x) {
-		_inputDefault = x;
-	}
-
-	/**
-	 * Write accessor (setter) for attribute _inputDefault
-	 * 
-	 * @param a_String
-	 *            new value for _inputDefault as String
-	 * @see ParameterModel#_inputDefault
-	 */
-	/*
-	 * public void setInputDefault(String a_String) { try {
-	 * setInputDefault(Float.parseFloat(a_String)); } catch (Exception e) { } }
-	 */
-	/**
-	 * Remove any link for role fragment
-	 */
-	public void releaseFragment() {
-		setFragment(null);
-	}
-
-	/**
-	 * returns the linked object for role <% aRole name%>
-	 * 
-	 * @return the object linked
-	 */
-	public LineFragment getFragment() {
-		return _fragment;
-	}
-
-	/**
-	 * Create a new link with x for role fragment
-	 * 
-	 * @param x
-	 *            the object to link with
-	 */
-	public void setFragment(LineFragment x) {
-		if (_fragment == x)
-			return;
-		_fragment = x;
-	}
-
-	/**
-	 * Remove any link for role fragment
-	 */
-	public void releaseFlag() {
-		setFlag(null);
-	}
-
-	/**
-	 * returns the linked object for role <% aRole name%>
-	 * 
-	 * @return the object linked
-	 */
-	public LineFragment getFlag() {
-		return _flag;
-	}
-
-	/**
-	 * Create a new link with x for role fragment
-	 * 
-	 * @param x
-	 *            the object to link with
-	 */
-	public void setFlag(LineFragment x) {
-		if (_flag == x)
-			return;
-		_flag = x;
-	}
-
-	/**
-	 * Remove any link for role model
-	 */
-	public void releaseModel() {
-		setModel(null);
-	}
-
-	/**
-	 * returns the linked object for role <% aRole name%>
-	 * 
-	 * @return the object linked
-	 */
-	public Parameter getModel() {
-		return _model;
-	}
-
-	/**
-	 * Create a new link with x for role model
-	 * 
-	 * @param x
-	 *            the object to link with
-	 */
-	public void setModel(Parameter x) {
-		if (_model == x)
-			return;
-		_model = x;
-	}
-
-	protected org.nfunk.jep.JEP getJepParser() {
-		return _jepParser;
-	}
-
-	protected void setJepParser(org.nfunk.jep.JEP parser) {
-		_jepParser = parser;
-	}
-
-	/**
-	 * 
-	 * @param a_Line
-	 * @param a_ParameterValue
-	 */
-	public ParameterValue convert(String a_Line, ParameterValue a_ParameterValue,
-			FlagTable flagTable) throws StringIndexOutOfBoundsException {
-
-		org.nfunk.jep.JEP parser = null;
-
-		String fragmnt = _fragment.retreive(a_Line);
-
-		if (fragmnt.equals(Global.EMPTY_STRING) && !_inputDefault.trim().equals(Global.EMPTY_STRING)) {
-			a_ParameterValue.setValue(Double.NaN);
-			a_ParameterValue.setQc(Global.DEFAULT_FLAG);
-		} else {
-			if (_inputDefault.trim().equals(fragmnt)) {
-				a_ParameterValue.setValue(Double.parseDouble(_model.getDefault()));
-                a_ParameterValue.setQc(Global.DEFAULT_FLAG);
-			}else {
-				double val;
-				try {
-					val = Double.parseDouble(fragmnt);
-				} catch (NumberFormatException e) {
-					throw new NumberFormatException(Messages
-							.ParameterModel_1
-							+ e.getMessage().substring(
-									e.getMessage().indexOf("\""),
-									e.getMessage().lastIndexOf("\""))
-							+ Messages.ParameterModel_2 + Global.RN);
-				}
-				if (_conversionFormula.trim().length() > 0) {
-					if (getJepParser() == null) {
-						parser = new org.nfunk.jep.JEP();
-						parser.addStandardFunctions();
-						parser.addStandardConstants();
-						parser.addVariable("x", val);
-						parser.parseExpression(_conversionFormula.trim());
-						setJepParser(parser);
-						double result = parser.getValue();
-						a_ParameterValue.setValue((Double) result);
-					} else {
-						parser = getJepParser();
-						parser.addVariable("x", val);
-						double result = parser.getValue();
-						a_ParameterValue.setValue((Double) result);
-					}
-				} else {
-					a_ParameterValue.setValue((Double) val);
-				}
+        if (value.equals(Global.EMPTY_STRING) && !_inputDefault.trim().equals(Global.EMPTY_STRING)) {
+            pValue.setValue(Double.NaN);
+            pValue.setQc(Global.DEFAULT_FLAG);
+        } else {
+            if (_inputDefault.trim().equals(value)) {
+                pValue.setValue(Double.parseDouble(_parameter.getDefault()));
+                pValue.setQc(Global.DEFAULT_FLAG);
+            }else {
+                double val;
+                try {
+                    val = Double.parseDouble(value);
+                } catch (NumberFormatException e) {
+                    throw new NumberFormatException(Messages
+                            .ParameterModel_1
+                            + e.getMessage().substring(
+                                    e.getMessage().indexOf("\""),
+                                    e.getMessage().lastIndexOf("\""))
+                            + Messages.ParameterModel_2 + Global.RN);
+                }
+                if (_conversionFormula.trim().length() > 0) {
+                    if (getJepParser() == null) {
+                        parser = new org.nfunk.jep.JEP();
+                        parser.addStandardFunctions();
+                        parser.addStandardConstants();
+                        parser.addVariable("x", val);
+                        parser.parseExpression(_conversionFormula.trim());
+                        setJepParser(parser);
+                        double result = parser.getValue();
+                        pValue.setValue(result);
+                    } else {
+                        parser = getJepParser();
+                        parser.addVariable("x", val);
+                        double result = parser.getValue();
+                        pValue.setValue(result);
+                    }
+                } else {
+                    pValue.setValue(val);
+                }
                 
-				// Flag QC
-				if (_flag != null) {
-				    String flag = _flag.retreive(a_Line);
-				    
-				    // Correspondance SDN
-				    flag = flagTable.getFlagSDN(flag);
-				    a_ParameterValue.setQc(flag);
-				}
-			}
-
-		}
-        return a_ParameterValue;
-	}
-
-	/**
-	 * 
-	 * @return String
-	 */
-	public String toString() {
-		return getModel().toString();
-	}
-    
-    
-    
-    
-    
-    public ParameterValue convertAdded(ParameterValue paramValue,
-                        Station station, 
-                        String inputType, 
-                        int index, 
-                        int indexPRES, 
-                        String line)
-    throws StringIndexOutOfBoundsException, ParseException{
-        
-        AddedParameter p = (AddedParameter) _model;
-        
-        HorodatedValue horodate = null;
-        if (station.parametersAt(0).getModel().valuesAt(index) instanceof HorodatedValue){
-            horodate = (HorodatedValue) station.parametersAt(0).getModel().valuesAt(index);
+                // Flag QC
+                if (_flag != null) {
+                    String flag = _flag.retreive(inputLine);
+                    
+                    // Correspondance SDN
+                    flag = Nemo.getInstance().getDomain().getCruise().getStation().getModel().getFlagTable().getFlagSDN(flag);
+                    pValue.setQc(flag);
+                }
+            }
         }
+        _lineValue = pValue;
+    }
+    
+    public void computeAddedParameterValue(Station currentStation,
+                                           String inputLine) throws Exception{
+        ParameterValue pValue = new ParameterValue();
+        AddedParameter p = (AddedParameter) _parameter;
+        
+        InputDomain iDomain = Nemo.getInstance().getDomain();
+        StationDomain sDomain = iDomain.getCruise().getStation();
+        
         String stringValue = null;
         String flag = Global.ZERO;
         switch (p.getIdParam()){
             case DEPH :
-                if (inputType.equals(Global.PROFILE)){
+                if (iDomain.getMedia().getModel().getInputType() == E_InputType.PROFILE){
+                    
+                    // récupération de la valeur de la pression
+                    ParameterModel pModelPRES = sDomain.getData().getModel().getParameterModel(Intern.paramPRES);
+                    if (pModelPRES.getLineValue() == null){
+                        pModelPRES.computeParameterValue(inputLine);
+                    }
+                    ParameterValue valuePRES = pModelPRES.getLineValue();                   
+                    
                     // calculDepth
                     // FAE091 : calcul de la profondeur en fonction de la pression
                     double X, Gr, P, Depth;
 
-                    P = station.getParameters()[indexPRES].getModel().getValues()[index].getValue();
-                    X = Math.sin(station.getLatitude() / 57.29578);
-                    X = X * X;
+                    P = valuePRES.getValue();
+                    X = Math.sin((Double)currentStation.getLatitude() / 57.29578);
+                    double X2 = X * X;
 
-                    Gr = 9.780318 * (1.0 + (5.2788E-3 + 2.36E-5 * X) * X) + 1.092E-6 * P;
+                    Gr = 9.780318 * (1.0 + (5.2788E-3 + 2.36E-5 * X2) * X2) + 1.092E-6 * P;
                     Depth = (((-1.82E-15 * P + 2.279E-10) * P - 2.2512E-5) * P + 9.72659) * P;
                     Depth = Depth / Gr;
                     
                     stringValue = Formatter.getSingleton().formatDouble(p.getFormat(), Depth);
 
-                    flag = station.getParameters()[indexPRES].getModel().getValues()[index].getQc();
+                    flag = valuePRES.getQc();
                     if (flag.equals(Global.EMPTY_STRING)) {
                         flag = Global.ZERO;
                     }
                 }else{
                     // = SensorDepth
-                    stringValue = String.valueOf(station.getTimeSeriesInformation().getSensorDepth());
-                    flag = station.getMetaFlag(NemoSection.S_SENSORDEPTH);
+                    stringValue = String.valueOf(currentStation.getSensorDepth());
+                    flag = currentStation.getMetaFlags().get(Intern.S_SENSORDEPTH);
                 }
                 break;
             case CJDY :
                 // julianDate = $stationModel.julianDate($station, $i)
-                Long date = horodate.getDate();
-                JulianDate jDate = new JulianDate(date);
-                stringValue = (new DecimalFormat(p.getFormat())).format(jDate.getJour());
-                flag = station.getMetaFlag(Global.DATETIME);
+                // Long date = horodate.getDate();
+                //JulianDate jDate = new JulianDate(date);
+                stringValue = "TODO"; //TODO (new DecimalFormat(p.getFormat())).format(jDate.getJour());
+                flag = currentStation.getMetaFlags().get(Intern.DATETIME);
                 break;
             case DTUT :
                 // time-ISO8601
                 SimpleDateFormat fDate = new SimpleDateFormat(p.getFormat());
                 //stringValue = fDate.format(new Date(horodate.getDate()));
-                stringValue = station.getVariantDateTime(index);
-                flag = station.getMetaFlag(Global.DATETIME);
+                stringValue = "TODO"; //TODO station.getVariantDateTime(index);
+                flag = currentStation.getMetaFlags().get(Intern.DATETIME);
                 break;
             case YEAR :
                 // $formatter.formatInt( "%4d", $station.parametersAt(0).valuesAt($i).year)
-                stringValue = Formatter.getSingleton().formatInt(p.getFormat(), horodate.getYear());
-                flag = station.getMetaFlag(Global.DATETIME);
+                stringValue = "TODO"; //TODO Formatter.getSingleton().formatInt(p.getFormat(), horodate.getYear());
+                flag = currentStation.getMetaFlags().get(Intern.DATETIME);
                 break;
             case MNTH :
                 // $formatter.formatInt( "%02d", $station.parametersAt(0).valuesAt($i).month)
-                stringValue = Formatter.getSingleton().formatInt(p.getFormat(), horodate.getMonth());
-                flag = station.getMetaFlag(Global.DATETIME);
+                stringValue = "TODO"; //TODO Formatter.getSingleton().formatInt(p.getFormat(), horodate.getMonth());
+                flag = currentStation.getMetaFlags().get(Intern.DATETIME);
                 break;
             case DAYX :
                 // $formatter.formatInt( "%02d", $station.parametersAt(0).valuesAt($i).day)
-                stringValue = Formatter.getSingleton().formatInt(p.getFormat(), horodate.getDay());
-                flag = station.getMetaFlag(Global.DATETIME);
+                stringValue = "TODO"; //TODO Formatter.getSingleton().formatInt(p.getFormat(), horodate.getDay());
+                flag = currentStation.getMetaFlags().get(Intern.DATETIME);
                 break;
             case TIME :
                 // $formatter.formatDateTime( "hh24mmss", $station.parametersAt(0).valuesAt($i).date )
                 try{
-                    stringValue = Formatter.getSingleton().formatDateTime(p.getFormat(), horodate.getDate());
-                    flag = station.getMetaFlag(Global.DATETIME);
+                    stringValue = "TODO"; //TODO Formatter.getSingleton().formatDateTime(p.getFormat(), horodate.getDate());
+                    flag = currentStation.getMetaFlags().get(Intern.DATETIME);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
                 break;
             case LATX :
             case LONX :
-                // mesuré - flag = celui de la métadonnée
-                paramValue = convertCoordinates(station, line);
-                break;
             case BATH :
                 // mesuré - flag = celui de la métadonnée
-                paramValue = convertAddedInData(station, line);
+                pValue = convertAdded(currentStation, inputLine);
                 break;
         }
         if (stringValue != null){
-            paramValue.setStringValue(stringValue);
-            paramValue.setQc(flag);
+            pValue.setStringValue(stringValue);
+            pValue.setQc(flag);
         }
-        return paramValue;
-    }
-    
 
-    public ParameterValue convertCoordinates(Station station,
-                                        String line) 
+        _lineValue = pValue;
+    }
+
+    @SuppressWarnings("nls")
+    private ParameterValue convertAdded(Station station, String line) 
         throws StringIndexOutOfBoundsException, ParseException {
 
-        AddedParameter p = (AddedParameter) _model;
+        AddedParameter p = (AddedParameter) _parameter;
         ParameterValue paramValue = new ParameterValue();
-        String fragmnt = getFragment().fullRetreive(line);
+        String fragmnt = _fragment.fullRetreive(line);
         
         if (fragmnt.equals(Global.EMPTY_STRING)) {
             paramValue.setStringValue(Global.EMPTY_STRING);
             paramValue.setQc(Global.DEFAULT_FLAG);
         } else {
             // VALUE
-            if (getModel().getDefault().equals(fragmnt)) {
-                paramValue.setStringValue(getModel().getDefault());
+            if (p.getDefault().equals(fragmnt)) {
+                paramValue.setStringValue(p.getDefault());
             }else {
                 String value = Global.EMPTY_STRING;
-                String formatString = getModel().getFormat();
+                String formatString = p.getFormat();
                 DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
                 switch (p.getIdParam()){
                     case LATX :
                         LatitudeFormat formatLAT = new LatitudeFormat(formatString, true);
-                        //value = String.valueOf(formatLAT.parseObject(fragmnt));
-                        //fragmnt = 
-                        //value = String.format(java.util.Locale.US, formatString, Float.parseFloat(formatLAT.parseObject(fragmnt)));
-                        value = (new DecimalFormat("#0.000000", symbols)).format(formatLAT.parseObject(fragmnt)); //$NON-NLS-1$
+                        value = (new DecimalFormat("#0.000000", symbols)).format(formatLAT.parseObject(fragmnt));
                         value = Formatter.getSingleton().padStringLeft(value, formatString.length());
                         break;
                     case LONX :
                         LongitudeFormat formatLON = new LongitudeFormat(formatString, true);
-                        //value = String.valueOf(formatLON.parseObject(fragmnt));
-                        value = (new DecimalFormat("#0.000000", symbols)).format(formatLON.parseObject(fragmnt)); //$NON-NLS-1$
+                        value = (new DecimalFormat("#0.000000", symbols)).format(formatLON.parseObject(fragmnt));
                         value = Formatter.getSingleton().padStringLeft(value, formatString.length());                        
+                        break;
+                    case BATH : 
+                        String type = formatString.substring(formatString.length() - 1);
+                        if (type.equals("f") || type.equals("F")){ 
+                            value = String.format(java.util.Locale.US, formatString, Float.parseFloat(fragmnt));
+                        }else if (type.equals("d") || type.equals("D")){
+                            value = String.format(java.util.Locale.US, formatString, Integer.parseInt(fragmnt));
+                        }
                         break;
                     default :
                         break;
@@ -643,61 +409,203 @@ public class ParameterModel implements Cloneable, SAXConsumer {
             String metaFlagCode;
             switch (p.getIdParam()){
                 case LATX :
-                    metaFlagCode = NemoSection.S_LAT;
+                    metaFlagCode = Intern.S_LAT;
                     break;
                 case LONX :
-                    metaFlagCode = NemoSection.S_LON;
+                    metaFlagCode = Intern.S_LON;
+                    break;
+                case BATH :
+                    metaFlagCode = Intern.S_DEPTH;
                     break;
                 default :
                     metaFlagCode = Global.EMPTY_STRING;
                     break;
             }
-            paramValue.setQc(station.getMetaFlag(metaFlagCode));
+            paramValue.setQc(station.getMetaFlags().get(metaFlagCode));
         }
         return paramValue; 
     }
     
 
-    public ParameterValue convertAddedInData(Station station,
-                                        String line) 
-        throws StringIndexOutOfBoundsException {
-
-        AddedParameter p = (AddedParameter) _model;
-        ParameterValue paramValue = new ParameterValue();
-        String fragmnt = getFragment().fullRetreive(line);
-        
-        if (fragmnt.equals(Global.EMPTY_STRING)) {
-            paramValue.setStringValue(Global.EMPTY_STRING);
-            paramValue.setQc(Global.DEFAULT_FLAG);
-        } else {
-            // VALUE
-            if (getModel().getDefault().equals(fragmnt)) {
-                paramValue.setStringValue(getModel().getDefault());
-            }else {
-                String value = Global.EMPTY_STRING;
-                String formatString = getModel().getFormat();
-                String type = formatString.substring(formatString.length() - 1);
-                if (type.equals("f") || type.equals("F")){       //$NON-NLS-1$//$NON-NLS-2$
-                    value = String.format(java.util.Locale.US, formatString, Float.parseFloat(fragmnt));
-                }else if (type.equals("d") || type.equals("D")){ //$NON-NLS-1$ //$NON-NLS-2$
-                    value = String.format(java.util.Locale.US, formatString, Integer.parseInt(fragmnt));
-                }
-                paramValue.setStringValue(value);
-            }
-            
-            // Flag QC
-            String metaFlagCode;
-            switch (p.getIdParam()){
-                case BATH :
-                    metaFlagCode = NemoSection.S_DEPTH;
-                    break;
-                default :
-                    metaFlagCode = Global.EMPTY_STRING;
-                    break;
-            }
-            paramValue.setQc(station.getMetaFlag(metaFlagCode));
-        }
-        return paramValue;        
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return getParameter().toString();
     }
 
-} /* End of class: ParameterModel */
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+	public void release() {
+		releaseFragment();
+		releaseFlag();
+        releaseParameter();
+        releaseLineValue();
+	}
+
+    /**
+     * Supprime _fragment
+     */
+    public void releaseFragment() {
+        if (_fragment != null)
+            _fragment.release();
+        _fragment = null;
+    }
+
+    /**
+     * Supprime _flag
+     */
+    public void releaseFlag() {
+        if (_flag != null)
+            _flag.release();
+        _flag = null;
+    }
+
+    /**
+     * Supprime _parameter
+     */
+    public void releaseParameter() {
+        if (_parameter != null)
+            _parameter.release();
+        _parameter = null;
+    }
+
+    /**
+     * Supprime _lineValue
+     */
+    public void releaseLineValue() {
+        if (_lineValue != null)
+            _lineValue.release();
+        _lineValue = null;
+    }
+
+    protected JEP getJepParser() {
+        return _jepParser;
+    }
+
+    protected void setJepParser(JEP parser) {
+        _jepParser = parser;
+    }
+
+
+    /**
+     * Getter pour _conversionFormula.
+     * @return String
+     * @see ParameterModel.java#_conversionFormula
+     */
+	public String getConversionFormula() {
+		return _conversionFormula;
+	}
+
+    /**
+     * Setter pour _conversionFormula
+     * @param x : nouvelle valeur pour _conversionFormula
+     * @see ParameterModel.java#_conversionFormula
+     */
+	public void setConversionFormula(String x) {
+		_conversionFormula = x;
+	}
+
+    /**
+     * Getter pour _inputDefault.
+     * @return String
+     * @see ParameterModel.java#_inputDefault
+     */
+	public String getInputDefault() {
+		return _inputDefault;
+	}
+
+    /**
+     * Setter pour _inputDefault
+     * @param x : nouvelle valeur pour _inputDefault
+     * @see ParameterModel.java#_inputDefault
+     */
+	public void setInputDefault(String x) {
+		_inputDefault = x;
+	}
+
+    /**
+     * Getter pour _fragment.
+     * @return LineFragment
+     * @see ParameterModel.java#_fragment
+     */
+	public LineFragment getFragment() {
+		return _fragment;
+	}
+
+    /**
+     * Setter pour _fragment
+     * @param x : nouvelle valeur pour _fragment
+     * @see ParameterModel.java#_fragment
+     */
+	public void setFragment(LineFragment x) {
+		if (_fragment == x)
+			return;
+		_fragment = x;
+	}
+
+    /**
+     * Getter pour _flag.
+     * @return LineFragment
+     * @see ParameterModel.java#_flag
+     */
+	public LineFragment getFlag() {
+		return _flag;
+	}
+
+    /**
+     * Setter pour _flag
+     * @param x : nouvelle valeur pour _flag
+     * @see ParameterModel.java#_flag
+     */
+	public void setFlag(LineFragment x) {
+		if (_flag == x)
+			return;
+		_flag = x;
+	}
+
+    /**
+     * Getter pour _parameter.
+     * @return Parameter
+     * @see ParameterModel.java#_parameter
+     */
+	public Parameter getParameter() {
+		return _parameter;
+	}
+
+    /**
+     * Setter pour _parameter
+     * @param x : nouvelle valeur pour _parameter
+     * @see ParameterModel.java#_parameter
+     */
+	public void setParameter(Parameter x) {
+		if (_parameter == x)
+			return;
+        _parameter = x;
+	}
+
+    /**
+     * Getter pour _lineValue.
+     * @return ParameterValue
+     * @see ParameterModel.java#_lineValue
+     */
+    public ParameterValue getLineValue()
+    {
+        return _lineValue;
+    }
+
+    /**
+     * Setter pour _lineValue
+     * @param lineValue : nouvelle valeur pour lineValue
+     * @see ParameterModel.java#_lineValue
+     */
+    public void setLineValue(ParameterValue lineValue)
+    {
+        _lineValue = lineValue;
+    }
+}

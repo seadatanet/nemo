@@ -35,6 +35,7 @@ import org.jdesktop.beansbinding.PropertyStateEvent;
 /**
  * The application's main frame.
  */
+@SuppressWarnings("nls")
 public class MappingDatabaseEditView extends FrameView {
     
     public MappingDatabaseEditView(SingleFrameApplication app) {

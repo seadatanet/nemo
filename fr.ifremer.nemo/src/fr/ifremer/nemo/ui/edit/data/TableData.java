@@ -17,8 +17,9 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.Flag;
-import fr.ifremer.nemo.input.StationModel;
+import fr.ifremer.nemo.domain.MediaDomain;
 import fr.ifremer.nemo.ui.FiltrageTableType;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.DataModel;
@@ -630,11 +631,17 @@ public class TableData
                 // e faire
 
                 // on recupere le data
-                ligne =
+                /*ligne =
                     Utils.lignesBrutes.get(Integer
                         .valueOf(ViewMain.editFileForm.sectionEnteteFichier
                             .getValue())
                             + DataModel.stationModel.getNumberOfLines()) + 1;
+                */
+                
+                MediaDomain mediaDomain = Nemo.getInstance().getDomain().getMedia();
+                ligne = Utils.lignesBrutes.get(mediaDomain.getModel().getFileHeader() + 
+                                               mediaDomain.getStationHeaderNumberLines() + 1);
+                
                 selection =
                     ligne.substring(
                         Integer.valueOf(ViewMain.tableData.getItem(i)
@@ -729,11 +736,16 @@ public class TableData
                     && (!ViewMain.tableData.getItem(i).getText(12).equals(
                         Global.EMPTY_STRING)))
             {
-                ligne =
+                /*ligne =
                     Utils.lignesBrutes.get(Integer
                         .valueOf(ViewMain.editFileForm.sectionEnteteFichier
                             .getValue())
                             + DataModel.stationModel.getNumberOfLines()) + 1;
+                */
+                MediaDomain mediaDomain = Nemo.getInstance().getDomain().getMedia();
+                ligne = Utils.lignesBrutes.get(mediaDomain.getModel().getFileHeader() + 
+                                               mediaDomain.getStationHeaderNumberLines() + 1);
+                
                 selection =
                     ligne.substring(
                         Integer.valueOf(ViewMain.tableData.getItem(i).getText(
@@ -745,7 +757,7 @@ public class TableData
 
                 String flagSDN = Global.ZERO;
                 ArrayList<Flag> flags =
-                    StationModel.getSingleton().getFlagTable().getFlags();
+                    Nemo.getInstance().getDomain().getCruise().getStation().getModel().getFlagTable().getFlags();
                 int size = flags.size();
                 for (int j = 0; j < size; j++)
                 {

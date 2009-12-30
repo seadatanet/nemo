@@ -1,7 +1,5 @@
 package fr.ifremer.nemo.util;
 
-import fr.ifremer.nemo.input.ParameterModel;
-import fr.ifremer.nemo.ui.edit.DataModel;
 
 /**
  * Description: Types de convertion
@@ -38,8 +36,21 @@ public enum Conversion
         }
         return debut;
     }
-
     
+    public String getExt(){
+        String ext = Global.EMPTY_STRING;
+        switch (this){
+            case ODV :
+                ext = Global.EXT_TXT;
+                break;
+            default:
+                ext = ".*";//$NON-NLS-1$
+                break;
+        }
+        return ext;
+    }
+
+ /*   
     public String getTemplateName(){
         String name = Global.EMPTY_STRING;
         switch (this){
@@ -52,19 +63,5 @@ public enum Conversion
         }
         return name;
     }
-    
-    public ParameterModel[] getAddedParameterModels(){
-        ParameterModel[]  addedParameters = null;
-        switch (this){
-            case MEDATLAS :
-                addedParameters = DataModel.stationModel.getMedParameterModels();
-                break;
-            case ODV :
-                addedParameters = DataModel.stationModel.getOdvParameterModels();
-                break;
-            default :
-                break;
-        }
-        return addedParameters;
-    }
+    */
 }

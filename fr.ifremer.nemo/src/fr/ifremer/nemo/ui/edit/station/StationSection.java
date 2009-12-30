@@ -20,25 +20,24 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
-import fr.ifremer.nemo.domain.DataType;
-import fr.ifremer.nemo.domain.Station;
-import fr.ifremer.nemo.input.FlagFragment;
-import fr.ifremer.nemo.input.HeaderFragment;
-import fr.ifremer.nemo.input.LineFragment;
+import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.input.DataType;
+import fr.ifremer.nemo.input.Fragment;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.ComboType;
 import fr.ifremer.nemo.ui.edit.Couple;
 import fr.ifremer.nemo.ui.edit.Cursor;
-import fr.ifremer.nemo.ui.edit.DataModel;
 import fr.ifremer.nemo.ui.edit.NemoSection;
 import fr.ifremer.nemo.ui.edit.cruise.TableDataSurvey;
 import fr.ifremer.nemo.ui.edit.station.AutoLine.MetaInData;
 import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.format.DateTimeFormat;
 import fr.ifremer.nemo.util.format.ExternalizableFormat;
 import fr.ifremer.nemo.util.format.LatitudeFormat;
@@ -287,7 +286,7 @@ public class StationSection extends NemoSection
     {
         int ligne, debut, fin;
         boolean vari = false;
-        HeaderFragment frag = propertyModel.getFragment();
+        Fragment frag = propertyModel.getFragment();
 
         ligne = frag.getFirstLine();
         debut = frag.getFirstCharOffset();
@@ -640,7 +639,7 @@ public class StationSection extends NemoSection
                                 samplingRateTest();
                             break;
                             case NONE:
-                                if (name.equals(S_STATIONNUMBER))
+                                if (name.equals(Intern.S_STATIONNUMBER))
                                 {
                                     // errorMessage = Messages.Etape_128 +
                                     // Messages.error;
@@ -722,7 +721,7 @@ public class StationSection extends NemoSection
     protected void dateTest() throws ParseException
     {
 
-        TimeZone tz = TimeZone.getTimeZone("GMT"); //$NON-NLS-1$
+        TimeZone tz = TimeZone.getTimeZone(DateTimeFormat.GMT);
         Calendar cal = Calendar.getInstance(tz);
         cal.clear();
         cal.setLenient(false);
@@ -843,7 +842,7 @@ public class StationSection extends NemoSection
                 String end =
                     autoInput.getLines().get(0).getEnd().getText().trim();
                 if (checkAutoInputValues(Messages.getString(
-                    NemoSection.S_SAMPLINGRATE).trim()))
+                    Intern.S_SAMPLINGRATE).trim()))
                 {
                     // récupérer le texte en question et creer une nouvelle
                     // heure
@@ -897,117 +896,88 @@ public class StationSection extends NemoSection
     }
 
     @Override
-    public void initModel(StationModel stationModel)
-    {
+    public void initModel(StationModel stationModel){
         String ligne = null;
-        HeaderFragment frag;
-        Station station = stationModel.getModel();
+        Fragment frag;
+        //Station station = stationModel.getModel();
 
-        if (name.equals(S_STATIONNUMBER))
+        if (name.equals(Intern.S_STATIONNUMBER))
         {
             // Station number reste un cas particulier
             initReferenceModel(stationModel);
         }
-        else if (name.equals(S_DATATYPE))
+        else if (name.equals(Intern.S_DATATYPE))
         {
             // DataType également un cas particulier
-            initDataTypeModel(station);
+            initDataTypeModel(stationModel);
         }
         else
         {
             boolean position = false;
             // généralisation des autres sections
-            for (int i = 0; i < nbLignes; i++)
-            {
+            for (int i = 0; i < nbLignes; i++){
 
                 // récupération du propertyModel correspondant
-                String tagXml = getTagXml(i);
-                PropertyModel propertyModel =
-                    getPropertyModel(stationModel, tagXml);
-                ExternalizableFormat format = propertyModel.getFormat();
+                //String tagXml = getTagXml(i);
+                PropertyModel propertyModel = new PropertyModel();
+                propertyModel.setProperty(name);
+                    //stationModel.getProperty(name);
+                    //getPropertyModel(stationModel, tagXml);
+                //ExternalizableFormat format = propertyModel.getFormat();
+                ExternalizableFormat format = null;
 
                 // gestion des flags qualite
                 String property = name;
-                if (name.equals(S_TIME) || name.equals(S_DATE))
-                    property = Global.DATETIME;
-                FlagFragment flag =
+                if (name.equals(Intern.S_TIME) || name.equals(Intern.S_DATE))
+                    property = Intern.DATETIME;
+                Fragment flag =
                     ViewMain.editStationForm.qcFlags.fillFlagFragment(property);
                 if (flag != null)
                     propertyModel.setFlag(flag);
 
                 // gestion des converteurs
-                if (converter != null)
-                {
-                    String formatSaisi = converter.getText();
-                    if (converter.getValueCombo() != null)
-                    {
-                        try
-                        {
-                            if (format instanceof LatitudeFormat)
-                            {
-                                ((LatitudeFormat) format)
-                                    .setFormatString(formatSaisi);
-                            }
-                            else if (format instanceof LongitudeFormat)
-                            {
-                                ((LongitudeFormat) format)
-                                    .setFormatString(formatSaisi);
-                            }
-                            else if (format instanceof DateTimeFormat)
-                            {
-                                ((DateTimeFormat) format)
-                                    .setFormatString(formatSaisi);
-                                if ((name.equals(S_TIME) || name.equals(S_DATE))
-                                        && isInData())
-                                {
-                                    AutoLine line = autoInput.getLines().get(i);
-                                    ligne =
-                                        String.valueOf(DataModel.stationModel
-                                            .getNumberOfLines() + 1);
-                                    stationModel.getTimestampModel().getFormat(
-                                        name).setFormatString(formatSaisi);
-                                    stationModel.getTimestampModel()
-                                        .getFragment(name).setFirstCharOffset(
-                                            line.getStart().getText());
-                                    stationModel.getTimestampModel()
-                                        .getFragment(name).setLastCharOffset(
-                                            line.getEnd().getText());
-                                }
-                            }
-                        }
-                        catch (ParseException e)
-                        {
-                            e.printStackTrace();
+                try{
+                    if (converter != null){
+                        String formatSaisi = converter.getText();
+                        switch (cType){
+                            case FRQ:
+                                propertyModel.setConversionFormula(formatSaisi);
+                                break;
+                            case TIME:
+                            case DATE:
+                                format = new DateTimeFormat();
+                                ((DateTimeFormat) format).setFormatString(formatSaisi);
+                                break;
+                            case LAT:
+                                format = new LatitudeFormat();
+                                ((LatitudeFormat) format).setFormatString(formatSaisi);
+                                break;
+                            case LON:
+                                format = new LongitudeFormat();
+                                ((LongitudeFormat) format).setFormatString(formatSaisi);
+                                break;
+                            default:
+                                break;
                         }
                     }
-                    else
-                    {
-                        // conversion JEP de la frequence
-                        if (formatSaisi != null
-                                && !formatSaisi.trim().equals(
-                                    Global.EMPTY_STRING))
-                        {
-                            // formule de conversion
-                            stationModel.getTimeSeriesModel()
-                                .setSampleRateConversion(formatSaisi);
-                        }
-                    }
+                }
+                catch (ParseException e){
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
                 }
 
                 // gestion des valeurs saisies
-                if (isManual())
-                {
+                if (isManual()){
                     // saisie manuelle
-                    fillManualModel(propertyModel, station, tagXml, format, i);
+                    propertyModel.fillUserValue(getValue(i));
+                    //fillManualModel(propertyModel, station, tagXml, format, i);
 
                 }
-                else
-                {
+                else{
                     // position dans fichier
                     boolean fillVariPos = (autoInput.getButtonVari() != null);
 
-                    if (name.equals(NemoSection.S_COMMENT))
-                    {
+                    if (name.equals(Intern.S_COMMENT)){
                         // cas particuliers : COMMENT
                         // surlignement et injection ligne debut fin
                         frag =
@@ -1028,23 +998,17 @@ public class StationSection extends NemoSection
                                 || getValue() == null
                                 || getValue().trim()
                                     .equals(Global.EMPTY_STRING))){
-                            fillManualModel(propertyModel, station, tagXml,
-                                format, i);
+                            propertyModel.fillUserValue(getValue(i));
+                            //fillManualModel(propertyModel, station, tagXml, format, i);
                         }
                         else if (!getAutoInput().getLines().get(i).isEmpty()){
-                            propertyModel.fillFragment(this, ligne, i, true,
-                                fillVariPos);
-                            if (fillVariPos)
-                            {
-                                if (format instanceof LatitudeFormat)
-                                {
-                                    ((LatitudeFormat) format)
-                                        .setVariableLength(isVariablePos());
+                            propertyModel.fillFragment(this, ligne, i, true, fillVariPos);
+                            if (fillVariPos){
+                                if (format instanceof LatitudeFormat){
+                                    ((LatitudeFormat) format).setVariableLength(isVariablePos());
                                 }
-                                else if (format instanceof LongitudeFormat)
-                                {
-                                    ((LongitudeFormat) format)
-                                        .setVariableLength(isVariablePos());
+                                else if (format instanceof LongitudeFormat){
+                                    ((LongitudeFormat) format).setVariableLength(isVariablePos());
                                 }
                             }
                             position = true;
@@ -1059,10 +1023,14 @@ public class StationSection extends NemoSection
                         }
                     }
                 }
+                if (format != null){
+                    propertyModel.setFormat(format);
+                }
+                stationModel.addProperty(propertyModel);
             }
         }
     }
-
+/*
     private void fillManualModel(PropertyModel propertyModel, Station station,
             String tagXml, ExternalizableFormat format, int i)
     {
@@ -1073,47 +1041,44 @@ public class StationSection extends NemoSection
         else
             station.set(tagXml, valueString, format);
     }
-
+*/
     private void initReferenceModel(StationModel stationModel)
     {
         String ligne = null;
-        PropertyModel propertyModel = stationModel.getReferenceProperty();
-        if (ViewMain.editStationForm.stationNumber.isManual())
-        {
-            String stationNumber =
-                ViewMain.editStationForm.stationNumber.getManualValue();
+        PropertyModel propertyModel = new PropertyModel();
+        //PropertyModel propertyModel = stationModel.getReferenceProperty();
+        if (ViewMain.editStationForm.stationNumber.isManual()){
+            propertyModel.fillUserValue(ViewMain.editStationForm.stationNumber.getManualValue());
+       
+            /*
+            String stationNumber =  ViewMain.editStationForm.stationNumber.getManualValue();
             stationModel.setIncrementRef(true);
             if (ViewMain.radTrajectoire.getSelection())
                 stationModel.getTrajectory().setStationNumber(stationNumber);
             else
                 stationModel.setIncrementNumber(stationNumber);
             propertyModel.setUserProvided(true);
+            */
         }
-        else
-        {
-            stationModel.setIncrementRef(false);
+        else{
+            //stationModel.setIncrementRef(false);
             int ligneSaisie =
                 Integer.valueOf(ViewMain.editStationForm.stationNumber
                     .getLineText(0));
-            if (ligneSaisie == 0)
-            {
+            if (ligneSaisie == 0){
                 ligne = Global.ZERO;
             }
-            else
-            {
+            else{
                 ligne =
-                    String
-                        .valueOf(ligneSaisie
-                                - Integer
-                                    .valueOf(ViewMain.editFileForm.sectionEnteteFichier
-                                        .getValue()));
+                    String.valueOf(
+                        ligneSaisie - Integer.valueOf(ViewMain.editFileForm.sectionEnteteFichier.getValue()));
             }
-            propertyModel.fillFragment(ViewMain.editStationForm.stationNumber,
-                ligne);
+            propertyModel.fillFragment(ViewMain.editStationForm.stationNumber, ligne);
         }
+        stationModel.setReferenceProperty(propertyModel);
     }
 
-    private void initDataTypeModel(Station station)
+    private void initDataTypeModel(StationModel stationModel)
     {
         if (!ViewMain.isCollection()) // FAE 022
         {
@@ -1121,12 +1086,14 @@ public class StationSection extends NemoSection
             DataType newDataType = new DataType();
             String code = Global.EMPTY_STRING;
             // si on a ouvert un modele, on a le code direct !
-            if (DataModel.ouverture)
-            {
+
+            // --- nom du model
+            String modelName = Nemo.getInstance().getNomModele();
+            
+            if (!Global.EMPTY_STRING.equals(modelName)){
                 code = typeCombo;
             }
-            else
-            {
+            else{
                 Pattern p = Pattern.compile(Global.SEP);
                 String mots[] = p.split(typeCombo);
 
@@ -1153,105 +1120,96 @@ public class StationSection extends NemoSection
                         .getSensor());
                 }
             }
-            station.setDataType(newDataType);
+            stationModel.setDataType(newDataType);
         }
     }
 
     @Override
     public void fillFromModel(StationModel stationModel)
     {
-        Station station = stationModel.getModel();
-        if (name.equals(S_STATIONNUMBER))
+        //Station station = stationModel.getModel();
+        if (name.equals(Intern.S_STATIONNUMBER))
         {
-            fillReference(stationModel);
+            fillReference(stationModel.getReferenceProperty());
         }
-        else if (name.equals(S_DATATYPE))
+        else if (name.equals(Intern.S_DATATYPE))
         {
-            fillDataType(station);
+            fillDataType(stationModel);
         }
         else
         {
+            E_InputType inputType = Nemo.getInstance().getDomain().getMedia().getModel().getInputType();
             // généralisation des autres sections
-            for (int i = 0; i < nbLignes; i++)
-            {
+            for (int i = 0; i < nbLignes; i++){
 
                 // récupération du propertyModel correspondant
-                String tagXml = getTagXml(i);
-                PropertyModel propertyModel =
-                    getPropertyModel(stationModel, tagXml);
+                //String tagXml = getTagXml(i);
+                String propertyName = name;
+                if (nbLignes > 1)
+                    propertyName += (i+1);
+                PropertyModel propertyModel = stationModel.getProperty(propertyName);
+                    //getPropertyModel(stationModel, tagXml);
                 ExternalizableFormat format = propertyModel.getFormat();
 
                 // gestion des flags qualite
                 String propertyCode = name;
-                if (name.equals(S_TIME) || name.equals(S_DATE))
-                    propertyCode = Global.DATETIME;
+                if (name.equals(Intern.S_TIME) || name.equals(Intern.S_DATE))
+                    propertyCode = Intern.DATETIME;
                 ViewMain.editStationForm.qcFlags.setFlagFragment(propertyModel
                     .getFlag(), propertyCode, Messages.getString(propertyCode)
                     .trim());
 
                 // gestion des converters
-                if (converter != null)
-                {
+                if (converter != null){
                     String formule = Global.EMPTY_STRING;
                     switch (cType)
                     {
                         case FRQ:
-                            formule =
-                                stationModel.getTimeSeriesModel()
-                                    .getSampleRateConversion();
+                            formule = propertyModel.getConversionFormula();
                             if (formule.equals(Global.EMPTY_STRING))
                                 formule = "*1"; //$NON-NLS-1$ 
-                        break;
+                            break;
                         case TIME:
                         case DATE:
-                            if (!ViewMain.radProfilVertical.getSelection()
-                                    && !stationModel.getTimestampModel()
-                                        .isComputed())
-                                formule =
-                                    stationModel.getTimestampModel().getFormat(
-                                        name).getFormatString();
-                            else
-                                formule =
-                                    ((DateTimeFormat) format).getFormatString();
-                        break;
+                            //if (inputType != E_InputType.PROFILE && Nemo.getInstance().getDomain().getCruise().getStation().isComputed())
+                            //    formule = ((DateTimeFormat)propertyModel.getFormat()).getFormatString();
+                            //else
+                                formule = ((DateTimeFormat) format).getFormatString();
+                            break;
                         case LAT:
-                            formule =
-                                ((LatitudeFormat) format).getFormatString();
-                        break;
+                            formule = ((LatitudeFormat) format).getFormatString();
+                            break;
                         case LON:
-                            formule =
-                                ((LongitudeFormat) format).getFormatString();
-                        break;
+                            formule = ((LongitudeFormat) format).getFormatString();
+                            break;
                         default:
-                        break;
+                            break;
                     }
                     converter.setText(formule);
                 }
-
-                if ((name.equals(S_TIME) || name.equals(S_DATE))
-                        && !ViewMain.radProfilVertical.getSelection()
-                        && !stationModel.getTimestampModel().isComputed())
-                {
+/*
+                if ((name.equals(Intern.S_TIME) || name.equals(Intern.S_DATE))
+                        && inputType != E_InputType.PROFILE
+                        && !Nemo.getInstance().getDomain().getCruise().getStation().isComputed()){
                     // cas des données temporelles dans les données
-                    LineFragment lineTime =
-                        stationModel.getTimestampModel().getFragment(name);
+                    LineFragment lineTime = propertyModel.getFragment();
                     setAutoValueInput(Global.EMPTY_STRING, String
                         .valueOf(lineTime.getFirstCharOffset()), String
                         .valueOf(lineTime.getLastCharOffset()), i);
                 }
                 else
                 {
+*/
                     // gestion des valeurs saisies
-                    if (propertyModel.isUserProvided())
-                    {
-                        String value = Global.EMPTY_STRING;
+                    if (propertyModel.isUserProvided()){
+                        /*String value = Global.EMPTY_STRING;
                         if (isTimeSeriesInfo())
                             value =
                                 station.getTimeSeriesInformation().get(tagXml,
                                     format);
                         else
-                            value = station.get(tagXml, format);
-                        setManualValueInput(value, i);
+                            value = station.get(tagXml, format);*/
+                        setManualValueInput(propertyModel.getUserValue(), i);
                     }
                     else
                     {
@@ -1259,7 +1217,7 @@ public class StationSection extends NemoSection
                         boolean fillVariPos =
                             (autoInput.getButtonVari() != null);
                         boolean offset = false;
-                        if (name.equals(NemoSection.S_COMMENT))
+                        if (name.equals(Intern.S_COMMENT))
                             offset = true;
 
                         if ((i > 0) && propertyModel.isUserProvided())
@@ -1280,7 +1238,7 @@ public class StationSection extends NemoSection
                             if (propertyModel.getFragment().isSingleLine()) break;
                         }
                     }
-                }
+                //}
 
             }
 
@@ -1288,12 +1246,25 @@ public class StationSection extends NemoSection
 
     }
 
-    private void fillReference(StationModel stationModel)
-    {
-
+    private void fillReference(PropertyModel refProperty){
         // SECTION numero de station
-        if (stationModel.isIncrementRef())
-        {
+        //PropertyModel propertyModel = stationModel.getReferenceProperty();
+        if (refProperty.isUserProvided()){
+            ViewMain.editStationForm.stationNumber.setManualValueInput(refProperty.getUserValue());
+        }
+        else{
+            Fragment frag = refProperty.getFragment();
+            Integer realLigne = null;
+            int ligne = frag.getFirstLine();
+            if (ligne == 0)
+                realLigne = new Integer(0);
+            ViewMain.editStationForm.stationNumber.setAutoValueInput(
+                refProperty, realLigne);
+        }
+        
+        
+        /*
+        if (stationModel.isIncrementRef()){
             String value = null;
             if (stationModel.getInputType().equals(Global.TRAJECTORY))
             {
@@ -1311,7 +1282,7 @@ public class StationSection extends NemoSection
         {
             // valeurs de ligne/debut/fin
             PropertyModel propertyModel = stationModel.getReferenceProperty();
-            HeaderFragment frag = propertyModel.getFragment();
+            Fragment frag = propertyModel.getFragment();
             Integer realLigne = null;
             int ligne = frag.getFirstLine();
             if (ligne == 0)
@@ -1320,9 +1291,10 @@ public class StationSection extends NemoSection
                 propertyModel, realLigne);
 
         }
+        */
     }
 
-    private void fillDataType(Station station)
+    private void fillDataType(StationModel station)
     {
 
         // SECTION type de donnee
@@ -1382,7 +1354,7 @@ public class StationSection extends NemoSection
         return tagXml;
     }
 
-    private PropertyModel getPropertyModel(StationModel stationModel,
+    /*private PropertyModel getPropertyModel(StationModel stationModel,
             String tagXml)
     {
         PropertyModel propertyModel;
@@ -1392,7 +1364,7 @@ public class StationSection extends NemoSection
         else
             propertyModel = stationModel.propertiesAt(tagXml);
         return propertyModel;
-    }
+    }*/
 
     public void diseableLineInData()
     {
