@@ -9,6 +9,7 @@ import org.eclipse.swt.widgets.Composite;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.ApplicationWorkbenchWindowAdvisor;
+import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.DataModel;
 import fr.ifremer.nemo.ui.edit.EditForm;
 import fr.ifremer.nemo.ui.edit.Etape;
@@ -41,23 +42,44 @@ public class EditFileForm extends EditForm
 
         buttonValidateAll = new Button(formEdition.getBody(), SWT.PUSH);
         buttonValidateAll.setBackground(ViewMain.backgroungEdit);
-        buttonValidateAll.setText("Validate all steps");
+        buttonValidateAll.setText(Messages.button_validateAllSteps);
         buttonValidateAll
         .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
             @Override
             public void widgetSelected(
                     org.eclipse.swt.events.SelectionEvent e)
             {
+                // validation de l'onglet FILE
                 Etape.validationFile();
+                
                 if (ViewMain.etape == 1){
+                    // Sélection de l'onglet CRUISE
                     ViewMain.tabFolder.setSelection(ViewMain.tabFolder.getItem(1));
-                    //Etape.validationSurvey();
+                    Utils.validationEtape(1);
+                    // Validation de l'onglet CRUISE
+                    Etape.validationCruise();
                 }
+                
                 if (ViewMain.etape == 2){
+                    // Sélection de l'onglet STATION
+                    ViewMain.tabFolder.setSelection(ViewMain.tabFolder.getItem(2));
+                    Utils.validationEtape(2);
+                    // Validation de l'onglet STATION
                     Etape.validationStation();
                 }
+                
                 if (ViewMain.etape == 3){
+                    // Sélection de l'onglet DATA
+                    ViewMain.tabFolder.setSelection(ViewMain.tabFolder.getItem(3));
+                    Utils.validationEtape(3);
+                    // Validation de l'onglet DATA
                     Etape.validationData();
+                }
+                
+                if (ViewMain.etape == 4){
+                    // Sélection de l'onglet CONVERSION
+                    ViewMain.tabFolder.setSelection(ViewMain.tabFolder.getItem(4));
+                    Utils.validationEtape(4);
                 }
             }
         });
@@ -169,7 +191,7 @@ public class EditFileForm extends EditForm
             new FileEndData(NemoSection.F_ENDDATA, Messages
                 .getString(NemoSection.F_ENDDATA),
                 Messages.edit_file_indicFinDonnees);
-        sectionRuptureDonnees.addSetter(Messages.edit_file_sectionRuptureDonnees_end_with, Global.EMPTY_STRING); //$NON-NLS-1$
+        sectionRuptureDonnees.addSetter(Messages.edit_file_sectionRuptureDonnees_end_with, Global.EMPTY_STRING);
         listeSections.add(sectionRuptureDonnees);
     }
 

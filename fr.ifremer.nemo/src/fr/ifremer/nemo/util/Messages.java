@@ -40,6 +40,7 @@ public class Messages {
     
     public static String button_browse;
     public static String button_validateStep;
+    public static String button_validateAllSteps;
     public static String button_serverIni;
     public static String button_xmlIni;
     public static String button_reset;
