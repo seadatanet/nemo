@@ -491,6 +491,7 @@ public class ViewMain extends ViewPart
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent g)
                 {
+                    selectTypeProcess(radio);
                     init();
                 }
             });
@@ -899,6 +900,20 @@ public class ViewMain extends ViewPart
         }
         else{
             return E_InputType.PROFILE;
+        }
+    }
+
+    private static void selectTypeProcess(Button radioSelected){
+        // les boutons radios ne sont plus dans le même conteneur :
+        // il faut forcer la deselection
+        if (radioSelected == radioCollectCasN
+                || radioSelected == radioCollectCas1){
+            radioDossier.setSelection(false);
+            radioFichier.setSelection(false);
+        }
+        else {
+            radioCollectCasN.setSelection(false);
+            radioCollectCas1.setSelection(false);
         }
     }
     
