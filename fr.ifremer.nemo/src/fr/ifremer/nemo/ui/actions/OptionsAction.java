@@ -896,7 +896,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
 
         AddedParameter dateISO =
-            new AddedParameter(IdParameter.DTUT, null, null);
+            new AddedParameter(IdParameter.DTUT);
         radDateISO = new Button(group, SWT.RADIO);
         radDateISO.setFont(Utils.font08);
         radDateISO.setText(dateISO.getFullName()
@@ -912,7 +912,7 @@ public class OptionsAction extends Action implements ISelectionListener,
             });
 
         AddedParameter dateJulian =
-            new AddedParameter(IdParameter.CJDY, null, null);
+            new AddedParameter(IdParameter.CJDY);
         radDateJulian = new Button(group, SWT.RADIO);
         radDateJulian.setFont(Utils.font08);
         radDateJulian.setText(dateJulian.getFullName()

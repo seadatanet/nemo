@@ -86,7 +86,7 @@ public class CruiseDomainTest
         
         AddedParameter addpTEST = mock(AddedParameter.class);
         when(addpTEST.getCode()).thenReturn("DEPH");
-        when(addpTEST.getCible()).thenReturn(Conversion.ODV);
+        //when(addpTEST.getCible()).thenReturn(Conversion.ODV);
         ParameterModel addpmTEST = mock(ParameterModel.class);
         when(addpmTEST.getParameter()).thenReturn(addpTEST);
         

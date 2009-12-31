@@ -145,7 +145,16 @@ public class Elts extends NLS
                 elt.append(form.formatLongitude(format[1], (Double) value));
             }
             else {
-                elt.append(form.formatInt(parseElt[0], (Float) value));
+                if (value instanceof Float){
+                    elt.append(form.formatInt(format[1], (Float) value));
+                }
+                else if (value instanceof Integer){
+                    elt.append(form.formatInt(format[1], (Integer) value));
+                }
+                else{
+                    elt.append(form.formatInt(format[1], Float.valueOf((String) value)));
+                }
+                //elt.append(form.formatInt(parseElt[0], Float.valueOf((String) value)));
             }
         }
         else{
@@ -155,7 +164,7 @@ public class Elts extends NLS
             if (format[0].equals("ZERO")){
                 elt.append(form.padZero((String) value, len));
             }
-            else{            
+            else if (!Global.EMPTY_STRING.equals(((String)value).trim())){            
                 elt.append(form.padString((String) value, len));
             }
         }

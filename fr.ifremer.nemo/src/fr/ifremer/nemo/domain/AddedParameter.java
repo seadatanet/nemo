@@ -7,14 +7,25 @@
  */
 package fr.ifremer.nemo.domain;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.input.Parameter;
+import fr.ifremer.nemo.input.ParameterModel;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.util.Conversion;
+import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Global.E_InputType;
+import fr.ifremer.nemo.util.format.LatitudeFormat;
+import fr.ifremer.nemo.util.format.LongitudeFormat;
 
 /**
  * Description: AddedParameter - paramètres ajoutés automatiquement par NEMO
@@ -23,119 +34,249 @@ import fr.ifremer.nemo.util.Global.E_InputType;
  */
 public class AddedParameter extends Parameter
 {
-    
+
+    @SuppressWarnings("nls")
     public static enum IdParameter{
         DEPH, YEAR, MNTH, DAYX, TIME, CJDY, DTUT, LATX, LONX, BATH;
-    }
-    
-    private IdParameter idParam;
-    private Conversion cible;
-    
-    public AddedParameter(){
-        super();
-        initValues();
-    }
-    
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void initValues(){
-        idParam = null;
-        cible = null;
-    }
-
-    /**
-     * 
-     */
-    @SuppressWarnings("nls")
-    public AddedParameter(IdParameter idParam, String formatPRES, E_InputType inputType)
-    {
-        this.idParam = idParam;
-        _code = idParam.toString();
         
-        switch (idParam){
-            case DEPH :
-                _default = Global.ZERO;
-                _format = Global.EMPTY_STRING;   
-                if (inputType == E_InputType.PROFILE){
-                    _format = formatPRES;
-                }else{                    
-                    for (int i = 0; i < NemoLists.getParameters().length; i++) {
-                        if (NemoLists.getParameters()[i].getCode().equals(this.getCode())) {
-                            _format = NemoLists.getParameters()[i].getFormat();
-                            break;
-                        }
-                    }                   
-                }
-                _fullName = "DEPTH BELOW SEA SURFACE";
-                _unit = "m";
-                cible = Conversion.ODV;
-                break;
-            case YEAR :
-                _default = "9999";
-                _format = "%4d";
-                _fullName = "YEAR"; 
-                _unit = "yyyy";
-                cible = Conversion.MEDATLAS;
-                break;
-            case MNTH :
-                _default = "99";
-                _format = "%02d";
-                _fullName = "MONTH";
-                _unit = "mm";
-                cible = Conversion.MEDATLAS;
-                break;
-            case DAYX :
-                _default = "99";
-                _format = "%02d";
-                _fullName = "DAY WITHIN MONTH";
-                _unit = "dd";
-                cible = Conversion.MEDATLAS;
-                break;
-            case TIME :
-                _default = "999999";
-                _format = "hh24mmss";
-                _fullName = "TIME WITHIN DAY";
-                _unit = "hhmmss";
-                cible = Conversion.MEDATLAS;
-                break;
-            case CJDY :
-                _default = Global.ZERO;
-                _format = "#0.000000";
-                _fullName = "Chronological Julian Date";
-                _unit = "days";
-                cible = Conversion.ODV;
-                break;
-            case DTUT :
-                _default = Global.ZERO;
-                _format = "yyyy-MM-dd'T'HH:mm:ss.SSS";
-                _fullName = "time_ISO8601";
-                _unit = "yyyy-mm-ddThh:mm:ss.sss";
-                cible = Conversion.ODV;
-                break;
-            case LATX :
-                _default = "+99.999999";
-                _format = "+DD.dddddd";
-                _fullName = "LATITUDE";
-                _unit = "decimal degree";
-                cible = Conversion.MEDATLAS;
-                break;
-            case LONX :
-                _default = "+999.999999";
-                _format = "+DDD.dddddd";
-                _fullName = "LONGITUDE";
-                _unit = "decimal degree";
-                cible = Conversion.MEDATLAS;
-                break;
-            case BATH :
-                _default = "-999.9";
-                _format = "%6.1f";
-                _fullName = "BATHYMETRIC DEPTH";
-                _unit = "meter";
-                cible = Conversion.MEDATLAS;
-                break;
+        public String getDefault(){
+            switch (this){
+                case YEAR : return "9999";
+                case MNTH : return "99";
+                case DAYX : return "99";
+                case TIME : return "999999";
+                case LATX : return "+99.999999";
+                case LONX : return "+999.999999";
+                case BATH : return "-999.9";
+                default: return Global.ZERO;
+            }
         }
+        
+        public String getFormat(){        
+            switch (this){
+                case DEPH : 
+                    InputDomain iDomain = Nemo.getInstance().getDomain();
+                    if (iDomain.getMedia().getModel().getInputType() == E_InputType.PROFILE){
+                        ParameterModel pModelPRES = iDomain.getCruise().getStation().getData().getModel().getParameterModel(Intern.paramPRES);
+                        return pModelPRES.getParameter().getFormat();
+                    }                    
+                    for (int i = 0; i < NemoLists.getParameters().length; i++) {
+                        if (NemoLists.getParameters()[i].getCode().equals(this.toString())) {
+                            return NemoLists.getParameters()[i].getFormat();
+                        }
+                    }
+                    return Global.EMPTY_STRING;                    
+                case YEAR : return "%4d";
+                case MNTH : return "%02d";
+                case DAYX : return "%02d";
+                case TIME : return "hh24mmss";
+                case CJDY : return "#0.000000";
+                case DTUT : return "yyyy-MM-dd'T'HH:mm:ss.SSS";
+                case LATX : return "+DD.dddddd";
+                case LONX : return "+DDD.dddddd";
+                case BATH : return "%6.1f";
+                default: return Global.EMPTY_STRING;
+            }
+        }
+        
+        public String getFullName(){
+            switch (this){
+                case DEPH : return "DEPTH BELOW SEA SURFACE";
+                case YEAR : return "YEAR"; 
+                case MNTH : return "MONTH";
+                case DAYX : return "DAY WITHIN MONTH";
+                case TIME : return "TIME WITHIN DAY";
+                case CJDY : return "Chronological Julian Date";
+                case DTUT : return "time_ISO8601";
+                case LATX : return "LATITUDE";
+                case LONX : return "LONGITUDE";
+                case BATH : return "BATHYMETRIC DEPTH";
+                default: return Global.EMPTY_STRING;
+            }
+        }
+        
+        public String getUnit(){
+            switch (this){
+                case DEPH : return "m";
+                case YEAR : return "yyyy";
+                case MNTH : return "mm";
+                case DAYX : return "dd";
+                case TIME : return "hhmmss";
+                case CJDY : return "days";
+                case DTUT : return "yyyy-mm-ddThh:mm:ss.sss";
+                case LATX : return "decimal degree";
+                case LONX : return "decimal degree";
+                case BATH : return "meter";
+                default: return Global.EMPTY_STRING;
+            }
+        }
+            
+        public Conversion getCible(){
+            switch (this){
+                case DEPH :
+                case CJDY :
+                case DTUT :
+                    return Conversion.ODV;
+                default :
+                    return Conversion.MEDATLAS;
+            }
+        }
+        
+        public String getFlag(Station currentStation,
+                              String inputLine){
+
+            InputDomain iDomain = Nemo.getInstance().getDomain();
+            StationDomain sDomain = iDomain.getCruise().getStation();
+            
+            switch (this){
+                case DEPH:
+                    if (iDomain.getMedia().getModel().getInputType() == E_InputType.PROFILE){
+                        return sDomain.getData().getModel().getParameterModel(Intern.paramPRES).retreiveParameterFlag(inputLine);
+                    }
+                    return currentStation.getMetaFlags().get(Intern.S_SENSORDEPTH);
+                case LATX :
+                    return currentStation.getMetaFlags().get(Intern.S_LAT);
+                case LONX :
+                    return currentStation.getMetaFlags().get(Intern.S_LON);
+                case BATH :
+                    return currentStation.getMetaFlags().get(Intern.S_DEPTH);
+                case CJDY :
+                case DTUT :
+                case YEAR :
+                case MNTH :
+                case DAYX :
+                case TIME :
+                    return currentStation.getMetaFlags().get(Intern.DATETIME);
+                default:
+                    return Global.ZERO;
+            }
+        }
+        
+        public String getValue(Station currentStation,
+                               String inputLine) throws ParseException{
+            InputDomain iDomain = Nemo.getInstance().getDomain();
+            StationDomain sDomain = iDomain.getCruise().getStation();
+            
+            String formatString = this.getFormat();
+            DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
+
+            String stringValue = null;
+            switch (this){
+                case DEPH :
+                    if (iDomain.getMedia().getModel().getInputType() == E_InputType.PROFILE){
+                        
+                        // récupération de la valeur de la pression
+                        ParameterModel pModelPRES = sDomain.getData().getModel().getParameterModel(Intern.paramPRES);
+                        if (pModelPRES.getLineValue() == null){
+                            pModelPRES.computeParameterValue(inputLine);
+                        }
+                        ParameterValue valuePRES = pModelPRES.getLineValue();                   
+                        
+                        // calculDepth
+                        // FAE091 : calcul de la profondeur en fonction de la pression
+                        double X, Gr, P, Depth;
+    
+                        P = valuePRES.getValue();
+                        X = Math.sin((Double)currentStation.getLatitude() / 57.29578);
+                        double X2 = X * X;
+    
+                        Gr = 9.780318 * (1.0 + (5.2788E-3 + 2.36E-5 * X2) * X2) + 1.092E-6 * P;
+                        Depth = (((-1.82E-15 * P + 2.279E-10) * P - 2.2512E-5) * P + 9.72659) * P;
+                        Depth = Depth / Gr;
+                        
+                        stringValue = Formatter.getSingleton().formatDouble(formatString, Depth);
+                    }else{
+                        // = SensorDepth
+                        stringValue = String.valueOf(currentStation.getSensorDepth());
+                    }
+                    break;
+                case CJDY :
+                    // julianDate = $stationModel.julianDate($station, $i)
+                    // Long date = horodate.getDate();
+                    //JulianDate jDate = new JulianDate(date);
+                    stringValue = "TODO"; //TODO (new DecimalFormat(formatString)).format(jDate.getJour());
+                    break;
+                case DTUT :
+                    // time-ISO8601
+                    SimpleDateFormat fDate = new SimpleDateFormat(this.getFormat());
+                    //stringValue = fDate.format(new Date(horodate.getDate()));
+                    stringValue = "TODO"; //TODO station.getVariantDateTime(index);
+                    break;
+                case YEAR :
+                    // $formatter.formatInt( "%4d", $station.parametersAt(0).valuesAt($i).year)
+                    stringValue = "TODO"; //TODO Formatter.getSingleton().formatInt(formatString, horodate.getYear());
+                    break;
+                case MNTH :
+                    // $formatter.formatInt( "%02d", $station.parametersAt(0).valuesAt($i).month)
+                    stringValue = "TODO"; //TODO Formatter.getSingleton().formatInt(formatString, horodate.getMonth());
+                    break;
+                case DAYX :
+                    // $formatter.formatInt( "%02d", $station.parametersAt(0).valuesAt($i).day)
+                    stringValue = "TODO"; //TODO Formatter.getSingleton().formatInt(formatString, horodate.getDay());
+                    break;
+                case TIME :
+                    // $formatter.formatDateTime( "hh24mmss", $station.parametersAt(0).valuesAt($i).date )
+                    try{
+                        stringValue = "TODO"; //TODO Formatter.getSingleton().formatDateTime(formatString, horodate.getDate());
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    break;
+                
+                // paramètres ajoutés mais mesurés !!
+                case LATX :
+                    LatitudeFormat formatLAT = new LatitudeFormat(formatString, true);
+                    stringValue = (new DecimalFormat("#0.000000", symbols)).format(formatLAT.parseObject(inputLine));
+                    stringValue = Formatter.getSingleton().padStringLeft(stringValue, formatString.length());
+                    break;
+                case LONX :
+                    LongitudeFormat formatLON = new LongitudeFormat(formatString, true);
+                    stringValue = (new DecimalFormat("#0.000000", symbols)).format(formatLON.parseObject(inputLine));
+                    stringValue = Formatter.getSingleton().padStringLeft(stringValue, formatString.length());                        
+                    break;
+                case BATH : 
+                    String type = formatString.substring(formatString.length() - 1);
+                    if (type.equals("f") || type.equals("F")){ 
+                        stringValue = String.format(java.util.Locale.US, formatString, Float.parseFloat(inputLine));
+                    }else if (type.equals("d") || type.equals("D")){
+                        stringValue = String.format(java.util.Locale.US, formatString, Integer.parseInt(inputLine));
+                    }
+                    break;
+            }
+            return stringValue;
+        }
+        
+        public boolean isMesured(){
+            switch (this){
+                case LATX :
+                case LONX :
+                case BATH :
+                    return true;
+                default :
+                    return false;
+            }
+        }
+
+        public String getPropertyCode(){  
+            switch (this){
+                case LATX : return Intern.S_LAT;
+                case LONX : return Intern.S_LON;
+                case BATH : return Intern.S_DEPTH;
+                default : return null;
+            }
+        }
+    }
+    
+    private IdParameter _idParam;
+
+    public AddedParameter(IdParameter idParam)
+    {
+        _idParam = idParam;
+        _code = idParam.toString();
+        _default = idParam.getDefault();
+        _format = idParam.getFormat();
+        _fullName = idParam.getFullName();
+        _unit = idParam.getUnit();
     }
     
 
@@ -152,46 +293,31 @@ public class AddedParameter extends Parameter
     
     public PropertyModel getPropertyModel(StationModel stationModel){  
         PropertyModel propertyModel = null;
-        String propertyCode;
-        switch (this.idParam){
-            case LATX :
-                propertyCode = Intern.S_LAT;
-                break;
-            case LONX :
-                propertyCode = Intern.S_LON;
-                break;
-            case BATH :
-                propertyCode = Intern.S_DEPTH;
-                break;
-            default :
-                propertyCode = null;
-                break;
-        }
+        String propertyCode = _idParam.getPropertyCode();
         if (propertyCode != null){
             propertyModel = stationModel.propertiesAt(propertyCode);
         }
         return propertyModel;
     }
+    
 
-    /**
-     * Getter sur cible.
-     * @return the cible
-     */
-    public Conversion getCible()
-    {
-        return cible;
+    @SuppressWarnings("nls")
+    public String compute(String fragmnt) 
+        throws StringIndexOutOfBoundsException, ParseException {
+
+        String paramValue = null;
+        
+        if (fragmnt.equals(Global.EMPTY_STRING)) {
+            paramValue = Global.EMPTY_STRING;
+        } else {
+            if (_default.equals(fragmnt)) {
+                paramValue = _default;
+            }else {
+                paramValue = _idParam.getValue(null, fragmnt);
+            }
+        }
+        return paramValue; 
     }
-
-
-    /**
-     * Setter sur cible.
-     * @param cible the cible to set
-     */
-    public void setCible(Conversion cible)
-    {
-        this.cible = cible;
-    }
-
 
     /**
      * Getter sur idParam.
@@ -199,7 +325,7 @@ public class AddedParameter extends Parameter
      */
     public IdParameter getIdParam()
     {
-        return idParam;
+        return _idParam;
     }
 
 
@@ -209,6 +335,6 @@ public class AddedParameter extends Parameter
      */
     public void setIdParam(IdParameter idParam)
     {
-        this.idParam = idParam;
+        _idParam = idParam;
     }
 }

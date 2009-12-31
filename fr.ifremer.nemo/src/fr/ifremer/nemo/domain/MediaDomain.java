@@ -51,7 +51,7 @@ public class MediaDomain
         _model = new MediaModel();
         _outputFileName = null;
         _inputFilesNames = null;
-        _outputFiles = null;
+        _outputFiles = new HashMap<String, List<String>>();
     }
     
     public void update(InputModel model){

@@ -93,12 +93,13 @@ public abstract class NemoWriter{
 
                                 String[] inputStationHeader = consumeStationHeader();
                                 if (inputStationHeader != null){
+                                    st = new Station(inputStationHeader);
                                     String ref = stationDomain.getReference(inputFile.getName(), inputStationHeader);
-                                    st = new Station();
                                     st.setReference(ref);
                                     
                                     if (stationDomain.isSomeInData()){
                                         // la première ligne des données est déjà "consommée" dans stationHeaderBuffer 
+                                        st.updateGlobalParamQc(inputStationHeader[inputStationHeader.length -1]);
                                         nbrecords++;
                                     }
                                     
@@ -108,6 +109,7 @@ public abstract class NemoWriter{
                                 }
                             }
                             else{
+                                if (st != null) st.updateGlobalParamQc(readedLine);
                                 nbrecords++;
                             }
                             

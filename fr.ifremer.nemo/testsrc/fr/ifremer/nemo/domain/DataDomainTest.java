@@ -68,7 +68,7 @@ public class DataDomainTest
         pNTRI.setUnit("millimole/m3");
         ParameterModel pmNTRI = mock(ParameterModel.class);
         when(pmNTRI.getParameter()).thenReturn(pNTRI);
-        
+/*        
         AddedParameter pAddMED = new AddedParameter();
         pAddMED.setIdParam(IdParameter.YEAR);
         pAddMED.setCible(Conversion.MEDATLAS);
@@ -90,7 +90,7 @@ public class DataDomainTest
         pAddODV.setUnit("m");
         ParameterModel pmAddODV = mock(ParameterModel.class);
         when(pmAddODV.getParameter()).thenReturn(pAddODV);
-
+*/
 
         DataModel dModel = mock(DataModel.class);
         when(dModel.getParameterModels()).thenReturn(new ParameterModel[]{pmPRES, pmPHOS, pmNTRI});
@@ -100,8 +100,8 @@ public class DataDomainTest
         
         dDomain = new DataDomain();
         dDomain.update(iModel);
-        dDomain.addMedParameterModel(pmAddMED);
-        dDomain.addOdvParameterModel(pmAddODV);
+//        dDomain.addMedParameterModel(pmAddMED);
+//        dDomain.addOdvParameterModel(pmAddODV);
     }
 
     /**

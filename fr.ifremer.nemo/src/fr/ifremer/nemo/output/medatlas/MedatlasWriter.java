@@ -61,6 +61,7 @@ public class MedatlasWriter extends NemoWriter{
                     if (isEndData() && stationWrited){
                         // écriture de la dernière ligne de données
                         outputFileWriter.println(data.getMedatlasLastDataLine());
+                        iDomain.getMedia().addStationInOutput(outputFileName, currentStation.getReference());
                     }
                     
                     if (isStartStationHeader()){
@@ -91,7 +92,6 @@ public class MedatlasWriter extends NemoWriter{
                 numLine = 0;
                 bufferedReader.reset();
                 
-                iDomain.getMedia().addStationInOutput(outputFileName, currentStation.getReference());
             }
         } catch (Exception e){
             throw new GenerationException(e);

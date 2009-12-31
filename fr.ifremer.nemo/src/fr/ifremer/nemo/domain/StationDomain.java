@@ -77,6 +77,7 @@ public class StationDomain
         _data = new DataDomain();
         _listStations = new HashMap<String, List<Station>>();
         _ref = -1;
+        _someInData = true; // TODO pour test
         //_currentStationValues = new HashMap<String, Object>();
         //_currentStationMetaFlags = new HashMap<String, String>();
     }
@@ -143,40 +144,7 @@ public class StationDomain
     }
     
     public StringBuffer getHeader(CruiseDomain cDomain, Conversion c, Station currentStation, String[] inputFile) throws ParseException{
-        StringBuffer stationHeader = new StringBuffer(); 
-        // recuperation des valeurs utiles
-        if (!currentStation.isRegistered()){
-            Float time = ((Long) _model.getProperty(Intern.S_TIME).applyOn(inputFile)).floatValue();
-            Float offsetTU = Float.valueOf((String) _model.getProperty(Intern.S_OFFSETTU).applyOn(inputFile));
-            
-            currentStation.setLatitude((Double) _model.getProperty(Intern.S_LAT).applyOn(inputFile));
-            currentStation.setLongitude((Double) _model.getProperty(Intern.S_LON).applyOn(inputFile));
-            currentStation.setDate((Long) _model.getProperty(Intern.S_DATE).applyOn(inputFile));
-            currentStation.setTime(time);
-            currentStation.setOffsetTU(offsetTU);
-            //currentStation.setCorrectedTime(getCorrectedTime(time, offsetTU));
-
-            currentStation.addMetaFlag(Intern.DATETIME, getMetaFlag(Intern.DATETIME, inputFile));
-            currentStation.addMetaFlag(Intern.S_LAT, getMetaFlag(Intern.S_LAT, inputFile));
-            currentStation.addMetaFlag(Intern.S_LON, getMetaFlag(Intern.S_LON, inputFile));
-            currentStation.addMetaFlag(Intern.S_DEPTH, getMetaFlag(Intern.S_DEPTH, inputFile));
-            
-            if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() != E_InputType.PROFILE){
-                currentStation.setSensorDepth((Float) _model.getProperty(Intern.S_SENSORDEPTH).applyOn(inputFile));
-                currentStation.setSamplingRate((Float) _model.getProperty(Intern.S_SAMPLINGRATE).applyOn(inputFile));
-                
-                currentStation.addMetaFlag(Intern.S_SENSORDEPTH, getMetaFlag(Intern.S_SENSORDEPTH, inputFile));
-                currentStation.addMetaFlag(Intern.ENDDATETIME, getMetaFlag(Intern.ENDDATETIME, inputFile));
-                currentStation.addMetaFlag(Intern.S_ELAT, getMetaFlag(Intern.S_ELAT, inputFile));
-                currentStation.addMetaFlag(Intern.S_ELON, getMetaFlag(Intern.S_ELON, inputFile));
-                currentStation.addMetaFlag(Intern.S_EDEPTH, getMetaFlag(Intern.S_EDEPTH, inputFile));
-                currentStation.addMetaFlag(Intern.S_SENSORDEPTH, getMetaFlag(Intern.S_SENSORDEPTH, inputFile));
-                currentStation.addMetaFlag(Intern.DISTANCETOBOTTOM, getMetaFlag(Intern.DISTANCETOBOTTOM, inputFile));
-                currentStation.addMetaFlag(Intern.DURATION, getMetaFlag(Intern.DURATION, inputFile));
-            }
-            currentStation.setRegistered(true);
-        }
-        
+        StringBuffer stationHeader = new StringBuffer();        
         switch (c){
             case ODV:
                 stationHeader = getOdvHeader(cDomain, currentStation, inputFile);
@@ -302,15 +270,15 @@ public class StationDomain
 
     private long getFullDate(Station currentStation){
         
-        Long date = currentStation.getDate();
-        Float time = currentStation.getTime();
+        long date = currentStation.getDate();
+        long time = currentStation.getTime();
         
         TimeZone tz = TimeZone.getTimeZone(DateTimeFormat.GMT);
         Calendar cal = Calendar.getInstance(tz);
         cal.clear();
         cal.setTimeInMillis(date);
         if (!Float.isNaN(time)){
-            cal.setTimeInMillis(date + (new Float(time).longValue()));
+            cal.setTimeInMillis(date + (time));
         }
         else
         {
@@ -319,12 +287,12 @@ public class StationDomain
         return getGMTDate(cal.getTimeInMillis(), currentStation.getOffsetTU());
     }
     
-    private long getGMTDate(long a_Date, Float offsetTU){
+    private long getGMTDate(long a_Date, float offsetTU){
         //Float offsetTU = (Float) _model.getProperty(Intern.S_OFFSETTU).applyOn(inputFile);
-        return a_Date + (offsetTU.longValue() * 3600 * 1000);
+        return a_Date + (Float.valueOf(offsetTU).longValue() * 3600 * 1000);
     }
     
-    public float getCorrectedTime(Float time, Float offsetTU) {
+    public long getCorrectedTime(long time, float offsetTU) {
         if (!Float.isNaN(time)){
             TimeZone tz = TimeZone.getTimeZone(DateTimeFormat.GMT);
             Calendar cal = Calendar.getInstance(tz);
@@ -418,7 +386,8 @@ public class StationDomain
         medStationHeader.append(Elts.getElt(Elts.station_time, getCorrectedTime(currentStation.getTime(), currentStation.getOffsetTU())));
         medStationHeader.append(Elts.getElt(Elts.station_lat,  currentStation.getLatitude()));
         medStationHeader.append(Elts.getElt(Elts.station_lon, currentStation.getLongitude()));
-        medStationHeader.append(Elts.getElt(Elts.station_depth, _model.getProperty(Intern.S_DEPTH).applyOn(inputFile)));
+        medStationHeader.append(Elts.getElt(Elts.station_depth, Float.valueOf((String) _model.getProperty(Intern.S_DEPTH).applyOn(inputFile))));
+        medStationHeader.append(Global.SPACE);
         medStationHeader.append(Elts.getKeyword(Elts.qc));
         medStationHeader.append(currentStation.getMetaFlag(Intern.DATETIME));
         medStationHeader.append(currentStation.getMetaFlag(Intern.S_LAT));
@@ -437,8 +406,8 @@ public class StationDomain
         
         //*GLOBAL PROFILE QUALITY FLAG=0 GLOBAL PARAMETERS QC FLAGS=0000000
         medStationHeader.append(start);
-        medStationHeader.append(Elts.getElt(Elts.station_gblProfile, "")); //TODO
-        medStationHeader.append(Elts.getElt(Elts.station_gblParam, "")); //TODO
+        medStationHeader.append(Elts.getElt(Elts.station_gblProfile, currentStation.getGlobalProfileQc()));
+        medStationHeader.append(Elts.getElt(Elts.station_gblParam, currentStation.getGlobalParamQc()));
         medStationHeader.append(Global.RN);
         
         //*DC HISTORY=
@@ -483,7 +452,7 @@ public class StationDomain
 
         //*LOCAL_CDI_ID=FI35199810007_00001_D09
         medStationHeader.append(start);
-        medStationHeader.append(getLocalCdiId(cDomain, Conversion.MEDATLAS, stationRef));
+        medStationHeader.append(Elts.getElt(Elts.station_localCdiId, getLocalCdiId(cDomain, Conversion.MEDATLAS, stationRef)));
         medStationHeader.append(Global.RN);
 
         //*SURFACE SAMPLES=
@@ -493,7 +462,7 @@ public class StationDomain
         
         medStationHeader.append(start);
         medStationHeader.append(Elts.limit((String) _model.getProperty(Intern.S_SURFACE + "2").applyOn(inputFile), Elts.station_line));
-        medStationHeader.append(Global.RN);
+
         
         /*
 #foreach( $station in $survey.stations )
@@ -564,8 +533,13 @@ $nemoLists.getSdnParameters()
         return lines.toArray(lineArray);
     }
     
-    private String getMetaFlag(String key, String[] inputFile){
+    public String getMetaFlag(String key, String[] inputFile){
         String metaFlag = Global.ZERO;
+        if (key.equals(Intern.DATETIME)){
+            key = Intern.S_DATE;
+        }else if (key.equals(Intern.ENDDATETIME)){
+            key = Intern.S_EDATE;
+        }
         Fragment flag = _model.getProperty(key).getFlag();
         if (flag != null){
             metaFlag = _model.getFlagTable().getFlagSDN(flag.retreive(inputFile));

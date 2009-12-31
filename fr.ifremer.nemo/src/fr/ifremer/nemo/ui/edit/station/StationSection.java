@@ -919,8 +919,10 @@ public class StationSection extends NemoSection
 
                 // récupération du propertyModel correspondant
                 //String tagXml = getTagXml(i);
+                String propertyName = name;
+                if (nbLignes > 1) propertyName += (i+1);
                 PropertyModel propertyModel = new PropertyModel();
-                propertyModel.setProperty(name);
+                propertyModel.setProperty(propertyName);
                     //stationModel.getProperty(name);
                     //getPropertyModel(stationModel, tagXml);
                 //ExternalizableFormat format = propertyModel.getFormat();
@@ -1145,8 +1147,7 @@ public class StationSection extends NemoSection
                 // récupération du propertyModel correspondant
                 //String tagXml = getTagXml(i);
                 String propertyName = name;
-                if (nbLignes > 1)
-                    propertyName += (i+1);
+                if (nbLignes > 1) propertyName += (i+1);
                 PropertyModel propertyModel = stationModel.getProperty(propertyName);
                     //getPropertyModel(stationModel, tagXml);
                 ExternalizableFormat format = propertyModel.getFormat();

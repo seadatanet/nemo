@@ -245,9 +245,10 @@
                   <ParameterModel>
                     <conversionFormula><xsl:value-of select="conversionFormula"/></conversionFormula>
                     <inputDefault><xsl:value-of select="inputDefault"/></inputDefault>
-                    <LineFragment firstCharOffset="1" lastCharOffset="10"/>
+                    <LineFragment>
                       <xsl:attribute name="firstCharOffset"><xsl:value-of select="LineFragment/@firstCharOffset"/></xsl:attribute>
                       <xsl:attribute name="lastCharOffset"><xsl:value-of select="LineFragment/@lastCharOffset"/></xsl:attribute>
+                    </LineFragment>
                     <Parameter>
                       <xsl:attribute name="code"><xsl:value-of select="Parameter/@code"/></xsl:attribute>
                       <fullName><xsl:value-of select="Parameter/fullName"/></fullName>

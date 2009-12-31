@@ -121,10 +121,7 @@ public class DataDomain
         for (ParameterModel pModel : _model.getParameterModels()){
             Parameter param = pModel.getParameter();
             dataHeader.append(param.getOutputCode(c));
-        }
-        
-        dataHeader.append(Global.RN);
-        
+        }        
         return dataHeader;
     }
         
@@ -174,7 +171,7 @@ public class DataDomain
             odvDataLine.append(Global.TAB);
             odvDataLine.append(pModel.getLineValue().getQc());
         }
-        odvDataLine.append(Global.RN);
+        //odvDataLine.append(Global.RN);
         return odvDataLine;
     }
     
@@ -188,19 +185,17 @@ public class DataDomain
         for (ParameterModel pModel : getOdvParameterModels()){
             pModel.computeAddedParameterValue(currentStation, inputLine);
             
-            medatlasDataLine.append(Global.SPACE);
             medatlasDataLine.append(pModel.getLineValue().getStringValue());         
+            medatlasDataLine.append(Global.SPACE);
         }
         
         // paramètres mesurés
         for (ParameterModel pModel : _model.getParameterModels()){
             pModel.computeParameterValue(inputLine);
             
-            medatlasDataLine.append(Global.SPACE);
             medatlasDataLine.append(Formatter.getSingleton().formatParameter(pModel.getParameter().getFormat(), pModel.getLineValue().getValue())); 
+            medatlasDataLine.append(Global.SPACE);
         }
-        
-        medatlasDataLine.append(Global.SPACE);
         
         // -- FLAGS QUALITE
         // paramètres ajoutés
@@ -213,19 +208,20 @@ public class DataDomain
             medatlasDataLine.append(pModel.getLineValue().getQc()); 
         }
         
-        
-        medatlasDataLine.append(Global.RN);
         return medatlasDataLine;
     }
     
     public StringBuffer getMedatlasLastDataLine(){
         StringBuffer medLastDataLine = new StringBuffer(); 
         
+        int cptParam = 0;
+        
         // paramètres ajoutés
         for (ParameterModel pModel : getMedParameterModels()){
             Parameter param = pModel.getParameter();
             medLastDataLine.append(param.getDefault());
             medLastDataLine.append(Global.SPACE);
+            cptParam++;
         }
         
         // paramètres mesurés
@@ -233,9 +229,14 @@ public class DataDomain
             Parameter param = pModel.getParameter();
             medLastDataLine.append(param.getDefault());
             medLastDataLine.append(Global.SPACE);
+            cptParam++;
         }
         
-        medLastDataLine.append(Global.RN);
+        // ajouts des qcFlags default
+        for (int i = 0; i < cptParam; i++){
+            medLastDataLine.append(Global.DEFAULT_FLAG);
+        }
+        
         return medLastDataLine;
     }
     
@@ -260,9 +261,11 @@ public class DataDomain
         StringBuffer paramDesc = new StringBuffer(); 
 
         paramDesc.append(Elts.getElt(Elts.param_code, param.getCode()));
+        paramDesc.append(Global.SPACE);
         paramDesc.append(Elts.getElt(Elts.param_fullname, param.getFullName()));
         paramDesc.append(Elts.getElt(Elts.param_unit, param.getUnit()));
         paramDesc.append(Elts.getElt(Elts.param_default, param.getDefault()));
+        paramDesc.append(Global.RN);
         
         return paramDesc;
     }
@@ -348,12 +351,9 @@ public class DataDomain
 
         // *** Ajouts automatiques de certains paramètres
         boolean existDEPH = false;
-        String formatPRES = Global.EMPTY_STRING;
         for (ParameterModel param : _model.getParameterModels()){
             if (param.getParameter().getCode().equals(IdParameter.DEPH.toString()))
                 existDEPH = true;
-            if (param.getParameter().getCode().equals(Intern.paramPRES))
-                formatPRES = param.getParameter().getFormat();
         }
         
         if (inputType == E_InputType.PROFILE){
@@ -361,7 +361,7 @@ public class DataDomain
             if ((!existDEPH) && (_presIndex != -1)){
                 // ajout de DEPH calculé à partir de PRES
                 // parameterModel.setFlag(stationModel.parameterModelsAt(indexPRES).getFlag());
-                addFixedParameterModel(IdParameter.DEPH, formatPRES);
+                addFixedParameterModel(IdParameter.DEPH);
             }
         }
         else{
@@ -407,12 +407,7 @@ public class DataDomain
     }
 
     private void addFixedParameterModel(IdParameter code){
-        addFixedParameterModel(code, null);
-    }
-
-    private void addFixedParameterModel(IdParameter code, String formatPRES){
-        E_InputType inputType = Nemo.getInstance().getDomain().getMedia().getModel().getInputType();
-        AddedParameter para = new AddedParameter(code, formatPRES, inputType);
+        AddedParameter para = new AddedParameter(code);
         ParameterModel parameterModel = new ParameterModel();
         parameterModel.setParameter(para);
 
@@ -428,7 +423,7 @@ public class DataDomain
             }
         }
 
-        switch (para.getCible()){
+        switch (para.getIdParam().getCible()){
             case ODV:
                 if (!_odvParameterModels.contains(parameterModel))
                     _odvParameterModels.add(parameterModel);

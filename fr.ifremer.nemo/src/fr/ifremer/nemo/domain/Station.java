@@ -9,295 +9,362 @@
  */
 package fr.ifremer.nemo.domain;
 
+import java.text.ParseException;
 import java.util.HashMap;
 
+import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.input.ParameterModel;
+import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
+import fr.ifremer.nemo.util.Global.E_InputType;
 
 /**
- * Class Station.java
- * Description: TODO
- * @author dboulang 
+ * Class Station.java Description: TODO
+ * 
+ * @author dboulang
  */
-public class Station implements Comparable 
+public class Station implements Comparable
 {
-    
+
     protected String _reference;
     protected int _nbRecords;
-    
-    protected Double _latitude;
-    protected Double _longitude;
-    protected Long _date;
-    //protected Float _correctedTime;
-    protected Float _offsetTU;
-    protected Float _time;
-    
-    protected Float _sensorDepth;
-    protected Float _samplingRate;
+
+    protected double _latitude;
+    protected double _longitude;
+    protected long _date;
+    // protected Float _correctedTime;
+    protected float _offsetTU;
+    protected long _time;
+
+    protected float _sensorDepth;
+    protected float _samplingRate;
 
     protected HashMap<String, String> _metaFlags;
-    
-    protected boolean _registered;
-    
-    protected Float _dataSize;
-    
-    
-    public Station(){
+    protected HashMap<String, String> _globalParamQc;
+
+    public Station(String[] inputStationHeader) throws ParseException
+    {
         _reference = null;
         _nbRecords = 0;
+        _metaFlags = new HashMap<String, String>();
+
+        StationDomain stationDomain = Nemo.getInstance().getDomain().getCruise().getStation();
+
+        _latitude = ((Double) stationDomain.getModel().getProperty(Intern.S_LAT).applyOn(inputStationHeader)).doubleValue();
+        _longitude = ((Double) stationDomain.getModel().getProperty(Intern.S_LON).applyOn(inputStationHeader)).doubleValue();
+        _date = ((Long) stationDomain.getModel().getProperty(Intern.S_DATE).applyOn(inputStationHeader)).longValue();
+        _time = ((Long) stationDomain.getModel().getProperty(Intern.S_TIME).applyOn(inputStationHeader)).longValue();
+        _offsetTU = Float.valueOf((String) stationDomain.getModel().getProperty(Intern.S_OFFSETTU).applyOn(inputStationHeader)).floatValue();
+
+        addMetaFlag(Intern.DATETIME, stationDomain.getMetaFlag(Intern.DATETIME, inputStationHeader));
+        addMetaFlag(Intern.S_LAT, stationDomain.getMetaFlag(Intern.S_LAT, inputStationHeader));
+        addMetaFlag(Intern.S_LON, stationDomain.getMetaFlag(Intern.S_LON, inputStationHeader));
+        addMetaFlag(Intern.S_DEPTH, stationDomain.getMetaFlag(Intern.S_DEPTH, inputStationHeader));
+
+        if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() != E_InputType.PROFILE)
+        {
+            _sensorDepth = ((Float) stationDomain.getModel().getProperty(Intern.S_SENSORDEPTH).applyOn(inputStationHeader)).floatValue();
+            _samplingRate = ((Float) stationDomain.getModel().getProperty(Intern.S_SAMPLINGRATE).applyOn(inputStationHeader)).floatValue();
+
+            addMetaFlag(Intern.S_SENSORDEPTH, stationDomain.getMetaFlag(Intern.S_SENSORDEPTH, inputStationHeader));
+            addMetaFlag(Intern.ENDDATETIME, stationDomain.getMetaFlag(Intern.ENDDATETIME, inputStationHeader));
+            addMetaFlag(Intern.S_ELAT, stationDomain.getMetaFlag(Intern.S_ELAT, inputStationHeader));
+            addMetaFlag(Intern.S_ELON, stationDomain.getMetaFlag(Intern.S_ELON, inputStationHeader));
+            addMetaFlag(Intern.S_EDEPTH, stationDomain.getMetaFlag(Intern.S_EDEPTH, inputStationHeader));
+            addMetaFlag(Intern.S_SENSORDEPTH, stationDomain.getMetaFlag(Intern.S_SENSORDEPTH, inputStationHeader));
+            addMetaFlag(Intern.DISTANCETOBOTTOM, stationDomain.getMetaFlag(Intern.DISTANCETOBOTTOM, inputStationHeader));
+            addMetaFlag(Intern.DURATION, stationDomain.getMetaFlag(Intern.DURATION, inputStationHeader));
+        }
+
+        _globalParamQc = new HashMap<String, String>();
+        for (ParameterModel paramModel : stationDomain.getData().getMedParameterModels()){
+            _globalParamQc.put(paramModel.getParameter().getCode(), ((AddedParameter)paramModel.getParameter()).getIdParam().getFlag(this, null));
+        }
+        for (ParameterModel paramModel : stationDomain.getData().getModel().getParameterModels()){
+            _globalParamQc.put(paramModel.getParameter().getCode(),Global.WORSE_FLAG);
+        }
+    }
+
+    public void updateGlobalParamQc(String inputLine){
+        DataDomain dataDomain = Nemo.getInstance().getDomain().getCruise().getStation().getData();
+        // les qcFlags des paramètres ajoutés pour MEDATLAS ne varient pas (= MetaFlags)
+        String qcFlag = null;
+        for (ParameterModel paramModel : dataDomain.getModel().getParameterModels()){
+            qcFlag = paramModel.retreiveParameterFlag(inputLine);
+
+            if (!qcFlag.equals(Global.DEFAULT_FLAG) 
+                    && !qcFlag.equals(Global.ZERO) 
+                    && qcFlag.compareTo(_globalParamQc.get(paramModel.getParameter().getCode())) < 0){
+
+                _globalParamQc.put(paramModel.getParameter().getCode(), qcFlag);
+            }
+            
+        }
+    }
+
+    public String getGlobalParamQc(){
+        StringBuffer globalParamQc = new StringBuffer();
+
+        DataDomain dataDomain = Nemo.getInstance().getDomain().getCruise().getStation().getData();
+        String globalQc = null;
+        for (ParameterModel paramModel : dataDomain.getMedParameterModels()){
+            globalQc = _globalParamQc.get(paramModel.getParameter().getCode());
+            if (globalQc.equals(Global.WORSE_FLAG)) globalQc = Global.ZERO;
+            globalParamQc.append(globalQc);
+        }
+        for (ParameterModel paramModel : dataDomain.getModel().getParameterModels()){
+            globalQc = _globalParamQc.get(paramModel.getParameter().getCode());
+            if (globalQc.equals(Global.WORSE_FLAG)) globalQc = Global.ZERO;
+            globalParamQc.append(globalQc);
+        }
+
+        return globalParamQc.toString();
+    }
+
+    public String getGlobalProfileQc(){
+        String globalProfileQC = Global.WORSE_FLAG;
+        boolean missingValue = true;
+        
+        for (String qc : _globalParamQc.values()){
+            if (!qc.equals(Global.ZERO) && !qc.equals(Global.DEFAULT_FLAG)
+                    && qc.compareTo(globalProfileQC) < 0)
+                globalProfileQC = qc;
+
+            if (!qc.equals(Global.DEFAULT_FLAG))
+                missingValue = false;
+        }
+
+        if (globalProfileQC.equals(Global.WORSE_FLAG))
+            globalProfileQC = Global.ZERO;
+        
+        if (missingValue)
+            globalProfileQC = Global.DEFAULT_FLAG;
+        
+        return globalProfileQC;
     }
 
     /**
      * Getter pour nbRecords.
+     * 
      * @return int
      * @see Station.java#nbRecords
      */
-    public int getNbRecords()
-    {
+    public int getNbRecords(){
         return _nbRecords;
     }
 
     /**
      * Setter pour nbRecords
-     * @param nbRecords : nouvelle valeur pour nbRecords
+     * 
+     * @param nbRecords :
+     *            nouvelle valeur pour nbRecords
      * @see Station.java#nbRecords
      */
-    public void setNbRecords(int nbRecords)
-    {
+    public void setNbRecords(int nbRecords){
         _nbRecords = nbRecords;
     }
 
     /**
      * Getter pour reference.
+     * 
      * @return String
      * @see Station.java#reference
      */
-    public String getReference()
-    {
+    public String getReference(){
         return _reference;
     }
 
     /**
      * Setter pour reference
-     * @param reference : nouvelle valeur pour reference
+     * 
+     * @param reference :
+     *            nouvelle valeur pour reference
      * @see Station.java#reference
      */
-    public void setReference(String reference)
-    {
+    public void setReference(String reference){
         _reference = reference;
     }
 
-
     /**
      * Getter pour _date.
-     * @return Long
+     * 
+     * @return long
      * @see Station.java#_date
      */
-    public Long getDate()
-    {
+    public long getDate(){
         return _date;
     }
 
     /**
      * Setter pour _date
-     * @param date : nouvelle valeur pour date
+     * 
+     * @param date :
+     *            nouvelle valeur pour date
      * @see Station.java#_date
      */
-    public void setDate(Long date)
-    {
+    public void setDate(long date){
         _date = date;
     }
 
     /**
      * Getter pour _latitude.
-     * @return Double
+     * 
+     * @return double
      * @see Station.java#_latitude
      */
-    public Double getLatitude()
-    {
+    public double getLatitude(){
         return _latitude;
     }
 
     /**
      * Setter pour _latitude
-     * @param latitude : nouvelle valeur pour latitude
+     * 
+     * @param latitude :
+     *            nouvelle valeur pour latitude
      * @see Station.java#_latitude
      */
-    public void setLatitude(Double latitude)
-    {
+    public void setLatitude(double latitude){
         _latitude = latitude;
     }
 
     /**
      * Getter pour _longitude.
-     * @return Double
+     * 
+     * @return double
      * @see Station.java#_longitude
      */
-    public Double getLongitude()
-    {
+    public double getLongitude(){
         return _longitude;
     }
 
     /**
      * Setter pour _longitude
-     * @param longitude : nouvelle valeur pour longitude
+     * 
+     * @param longitude :
+     *            nouvelle valeur pour longitude
      * @see Station.java#_longitude
      */
-    public void setLongitude(Double longitude)
-    {
+    public void setLongitude(double longitude){
         _longitude = longitude;
     }
-    
+
     public String getMetaFlag(String key){
         return _metaFlags.get(key);
     }
 
     /**
      * Getter pour _metaFlags.
+     * 
      * @return HashMap<String,String>
      * @see Station.java#_metaFlags
      */
-    public HashMap<String, String> getMetaFlags()
-    {
+    public HashMap<String, String> getMetaFlags(){
         return _metaFlags;
     }
-    
+
     public void addMetaFlag(String key, String metaFlag){
         _metaFlags.put(key, metaFlag);
     }
 
     /**
      * Setter pour _metaFlags
-     * @param metaFlags : nouvelle valeur pour metaFlags
+     * 
+     * @param metaFlags :
+     *            nouvelle valeur pour metaFlags
      * @see Station.java#_metaFlags
      */
-    public void setMetaFlags(HashMap<String, String> metaFlags)
-    {
+    public void setMetaFlags(HashMap<String, String> metaFlags){
         _metaFlags = metaFlags;
     }
 
     /**
      * Getter pour _offsetTU.
-     * @return Float
+     * 
+     * @return float
      * @see Station.java#_offsetTU
      */
-    public Float getOffsetTU()
-    {
+    public float getOffsetTU(){
         return _offsetTU;
     }
 
     /**
      * Setter pour _offsetTU
-     * @param offsetTU : nouvelle valeur pour offsetTU
+     * 
+     * @param offsetTU :
+     *            nouvelle valeur pour offsetTU
      * @see Station.java#_offsetTU
      */
-    public void setOffsetTU(Float offsetTU)
-    {
+    public void setOffsetTU(float offsetTU){
         _offsetTU = offsetTU;
     }
 
     /**
-     * Getter pour _registered.
-     * @return boolean
-     * @see Station.java#_registered
-     */
-    public boolean isRegistered()
-    {
-        return _registered;
-    }
-
-    /**
-     * Setter pour _registered
-     * @param registered : nouvelle valeur pour registered
-     * @see Station.java#_registered
-     */
-    public void setRegistered(boolean registered)
-    {
-        _registered = registered;
-    }
-
-    /**
      * Getter pour _sensorDepth.
-     * @return Float
+     * 
+     * @return float
      * @see Station.java#_sensorDepth
      */
-    public Float getSensorDepth()
-    {
+    public float getSensorDepth(){
         return _sensorDepth;
     }
 
     /**
      * Setter pour _sensorDepth
-     * @param sensorDepth : nouvelle valeur pour sensorDepth
+     * 
+     * @param sensorDepth :
+     *            nouvelle valeur pour sensorDepth
      * @see Station.java#_sensorDepth
      */
-    public void setSensorDepth(Float sensorDepth)
-    {
+    public void setSensorDepth(float sensorDepth){
         _sensorDepth = sensorDepth;
     }
 
     /**
      * Getter pour _time.
-     * @return Long
+     * 
+     * @return long
      * @see Station.java#_time
      */
-    public Float getTime()
-    {
+    public long getTime(){
         return _time;
     }
 
     /**
      * Setter pour _time
-     * @param time : nouvelle valeur pour time
+     * 
+     * @param time :
+     *            nouvelle valeur pour time
      * @see Station.java#_time
      */
-    public void setTime(Float time)
-    {
+    public void setTime(long time){
         _time = time;
     }
-    
-    
+
     /**
      * Getter pour _samplingRate.
-     * @return Float
+     * 
+     * @return float
      * @see Station.java#_samplingRate
      */
-    public Float getSamplingRate()
-    {
+    public float getSamplingRate(){
         return _samplingRate;
     }
 
     /**
      * Setter pour _samplingRate
-     * @param samplingRate : nouvelle valeur pour samplingRate
+     * 
+     * @param samplingRate :
+     *            nouvelle valeur pour samplingRate
      * @see Station.java#_samplingRate
      */
-    public void setSamplingRate(Float samplingRate)
-    {
+    public void setSamplingRate(float samplingRate){
         _samplingRate = samplingRate;
     }
 
-    /**
-     * Getter pour _dataSize.
-     * @return int
-     * @see Station.java#_dataSize
-     */
-    public Float getDataSize()
-    {
-        return _dataSize;
-    }
+    public int compareTo(Object other){
+        // FAE1105 : tri des stations selon (Nom Fichier -) Date - Référence
+        // Station
 
-    /**
-     * Setter pour _dataSize
-     * @param dataSize : nouvelle valeur pour dataSize
-     * @see Station.java#_dataSize
-     */
-    public void setDataSize(Float dataSize)
-    {
-        _dataSize = dataSize;
-    }
-
-    public int compareTo(Object other) {
-        // FAE1105 : tri des stations selon (Nom Fichier -) Date - Référence Station
-        
         String refIni = this.getReference();
         String refOther = ((Station) other).getReference();
 
