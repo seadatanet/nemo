@@ -76,8 +76,9 @@ public class MedatlasWriter extends NemoWriter{
                             
                             if (station.isSomeInData()){
                                 // la première ligne des données est déjà "consommée" dans stationHeaderBuffer 
-                                outputFileWriter.println(data.getDataLine(c, currentStation, readedLine));
+                                outputFileWriter.println(data.getDataLine(c, currentStation, inputStationHeader[inputStationHeader.length -1]));
                             }
+                            outputFileWriter.println(data.getDataLine(c, currentStation, readedLine));
                             stationWrited = true;
                         }
                         else if (stationWrited || inputStationHeader == null){

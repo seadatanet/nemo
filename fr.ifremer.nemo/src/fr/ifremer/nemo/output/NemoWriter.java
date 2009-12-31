@@ -102,7 +102,7 @@ public abstract class NemoWriter{
                                         st.updateGlobalParamQc(inputStationHeader[inputStationHeader.length -1]);
                                         nbrecords++;
                                     }
-                                    
+                                    nbrecords++;
                                 }
                                 else{
                                     break;
