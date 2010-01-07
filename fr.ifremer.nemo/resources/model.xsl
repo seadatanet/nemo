@@ -157,10 +157,7 @@
                       <Flag>
                         <xsl:attribute name="isSingleLine"><xsl:value-of select="FlagFragment/@isSingleLine"/></xsl:attribute>
                         <xsl:attribute name="isVariable"><xsl:value-of select="FlagFragment/@isVariable"/></xsl:attribute>
-                        <firstLine><xsl:value-of select="FlagFragment/firstLine"/></firstLine>
-                        <xsl:if test="FlagFragment/@isSingleLine = 'false'">
-                          <lastLine><xsl:value-of select="FlagFragment/lastLine"/></lastLine>
-                        </xsl:if>
+                        <firstLine><xsl:value-of select="FlagFragment/line"/></firstLine>
                         <firstCharOffset><xsl:value-of select="FlagFragment/firstCharOffset"/></firstCharOffset>
                         <lastCharOffset><xsl:value-of select="FlagFragment/lastCharOffset"/></lastCharOffset>
                       </Flag>
@@ -173,8 +170,8 @@
                     <xsl:variable name="propertyName" select="@property"/>
                     <xsl:attribute name="property"><xsl:value-of select="@property"/></xsl:attribute>
                     <xsl:attribute name="userProvided"><xsl:value-of select="@userProvided"/></xsl:attribute>
-                    <xsl:if test="$propertyName = 'samplingRate' and StationModel/TimeSeriesModel/sampeRateConversion">
-                      <conversionFormula><xsl:value-of select="StationModel/TimeSeriesModel/sampeRateConversion"/></conversionFormula>
+                    <xsl:if test="$propertyName = 'samplingRate' and ../../sampeRateConversion">
+                      <conversionFormula><xsl:value-of select="../../sampeRateConversion"/></conversionFormula>
                     </xsl:if>
                     <xsl:if test="format">
                       <format>
@@ -207,10 +204,7 @@
                       <Flag>
                         <xsl:attribute name="isSingleLine"><xsl:value-of select="FlagFragment/@isSingleLine"/></xsl:attribute>
                         <xsl:attribute name="isVariable"><xsl:value-of select="FlagFragment/@isVariable"/></xsl:attribute>
-                        <firstLine><xsl:value-of select="FlagFragment/firstLine"/></firstLine>
-                        <xsl:if test="FlagFragment/@isSingleLine = 'false'">
-                          <lastLine><xsl:value-of select="FlagFragment/lastLine"/></lastLine>
-                        </xsl:if>
+                        <firstLine><xsl:value-of select="FlagFragment/line"/></firstLine>
                         <firstCharOffset><xsl:value-of select="FlagFragment/firstCharOffset"/></firstCharOffset>
                         <lastCharOffset><xsl:value-of select="FlagFragment/lastCharOffset"/></lastCharOffset>
                       </Flag>

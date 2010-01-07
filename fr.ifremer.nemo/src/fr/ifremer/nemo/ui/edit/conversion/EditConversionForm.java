@@ -31,9 +31,9 @@ import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.EditForm;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.ui.view.ViewMain;
-import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.ws.WSDataType;
 
 public class EditConversionForm extends EditForm
@@ -123,10 +123,13 @@ public class EditConversionForm extends EditForm
                         //DataModel.stationModel.setAddedParameterModel();
 
                         // type de la conversion
-                        Conversion formatConversion = Conversion.MEDATLAS;
-                        if (ViewMain.radODV.getSelection()){
-                            formatConversion = Conversion.ODV;
-                        }
+                        E_TypeConversion currentConversion = ViewMain.getSelectedConversion();
+                        Nemo.getInstance().getDomain().getConversion().setCurrentConversion(currentConversion);
+                        
+                        //Conversion formatConversion = Conversion.MEDATLAS;
+                        //if (ViewMain.radODV.getSelection()){
+                        //    formatConversion = Conversion.ODV;
+                        //}
                         //NemoLists.writeSdnParameters(formatConversion);
 
                         if (ViewMain.editFileForm.okApresReset
@@ -134,7 +137,7 @@ public class EditConversionForm extends EditForm
                                 && ViewMain.editStationForm.okApresReset
                                 && ViewMain.editDataForm.okApresReset){
 
-                            if ((formatConversion == Conversion.ODV)
+                            if ((currentConversion != E_TypeConversion.MEDALAS)
                                     && (!ViewMain.collectionCas1)){
                                 if (!askDataSetRef()){
                                     throw new Exception("Cancelled"); //$NON-NLS-1$
@@ -154,8 +157,7 @@ public class EditConversionForm extends EditForm
                                 Nemo.getInstance().getDomain().getCruise().getStation().getModel().setDataType(dt);
                                 choixDossierSortie();
                             }
-                            else if (ViewMain.radODV.getSelection()
-                                    && ViewMain.radMonoStation.getSelection()){
+                            else if (currentConversion == E_TypeConversion.ODV_MONOSTATION){
                                 choixDossierSortie();
                             }
                             else{

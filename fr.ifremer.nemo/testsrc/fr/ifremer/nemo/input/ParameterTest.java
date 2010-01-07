@@ -57,7 +57,7 @@ public class ParameterTest
     public void correcteMiseEnFormeDuCodePRESpourMEDATLAS() throws Exception{
         
         
-        String code = pPRES.getOutputCode(Conversion.MEDATLAS);
+        String code = pPRES.getOutputCode(Conversion.MEDATLAS, false);
         System.out.println(code);
         Assert.assertEquals("Le code Paramètre MEDATLAS n'est pas conforme",
                             code, 
@@ -71,7 +71,7 @@ public class ParameterTest
     public void correcteMiseEnFormeDuCodePRESpourODV() throws Exception{
         
         
-        String code = pPRES.getOutputCode(Conversion.ODV);
+        String code = pPRES.getOutputCode(Conversion.ODV, false);
         System.out.println(code);
         Assert.assertEquals("Le code Paramètre ODV n'est pas conforme",
                             code, 

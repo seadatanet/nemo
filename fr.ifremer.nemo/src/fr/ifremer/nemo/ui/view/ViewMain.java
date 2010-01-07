@@ -56,6 +56,7 @@ import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
 
 /**
  * Description: vue principale
@@ -891,6 +892,18 @@ public class ViewMain extends ViewPart
     }
     
     // TRADUCTION DES BOUTONS RADIO
+    public static E_TypeConversion getSelectedConversion(){
+        if (ViewMain.radMedatlas.getSelection()){
+            return E_TypeConversion.MEDALAS;
+        }
+        //else
+        if (ViewMain.radMonoStation.getSelection()){
+            return E_TypeConversion.ODV_MONOSTATION;
+        }
+        //else{
+        return E_TypeConversion.ODV_MULTISTATIONS;
+    }
+    
     public static E_InputType getTypeFichierEntree(){
         if (radSerieTempo.getSelection()){
             return E_InputType.TIMESERIES;

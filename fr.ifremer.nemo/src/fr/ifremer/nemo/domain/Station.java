@@ -41,6 +41,7 @@ public class Station implements Comparable
 
     protected HashMap<String, String> _metaFlags;
     protected HashMap<String, String> _globalParamQc;
+    protected HashMap<String, Boolean> _missingValueParams;
 
     public Station(String[] inputStationHeader) throws ParseException
     {
@@ -77,11 +78,14 @@ public class Station implements Comparable
         }
 
         _globalParamQc = new HashMap<String, String>();
+        _missingValueParams = new HashMap<String, Boolean>();
         for (ParameterModel paramModel : stationDomain.getData().getMedParameterModels()){
             _globalParamQc.put(paramModel.getParameter().getCode(), ((AddedParameter)paramModel.getParameter()).getIdParam().getFlag(this, null));
+            _missingValueParams.put(paramModel.getParameter().getCode(), true);
         }
         for (ParameterModel paramModel : stationDomain.getData().getModel().getParameterModels()){
             _globalParamQc.put(paramModel.getParameter().getCode(),Global.WORSE_FLAG);
+            _missingValueParams.put(paramModel.getParameter().getCode(), true);
         }
     }
 
@@ -95,8 +99,13 @@ public class Station implements Comparable
             if (!qcFlag.equals(Global.DEFAULT_FLAG) 
                     && !qcFlag.equals(Global.ZERO) 
                     && qcFlag.compareTo(_globalParamQc.get(paramModel.getParameter().getCode())) < 0){
-
                 _globalParamQc.put(paramModel.getParameter().getCode(), qcFlag);
+            }
+            
+
+            // missingValue
+            if (!qcFlag.equals(Global.DEFAULT_FLAG)){ 
+                _missingValueParams.put(paramModel.getParameter().getCode(), false);
             }
             
         }
@@ -109,12 +118,16 @@ public class Station implements Comparable
         String globalQc = null;
         for (ParameterModel paramModel : dataDomain.getMedParameterModels()){
             globalQc = _globalParamQc.get(paramModel.getParameter().getCode());
-            if (globalQc.equals(Global.WORSE_FLAG)) globalQc = Global.ZERO;
+            if (globalQc.equals(Global.WORSE_FLAG)) 
+                globalQc = Global.ZERO;
             globalParamQc.append(globalQc);
         }
         for (ParameterModel paramModel : dataDomain.getModel().getParameterModels()){
             globalQc = _globalParamQc.get(paramModel.getParameter().getCode());
-            if (globalQc.equals(Global.WORSE_FLAG)) globalQc = Global.ZERO;
+            if (_missingValueParams.get(paramModel.getParameter().getCode()))
+                globalQc = Global.DEFAULT_FLAG;
+            else if (globalQc.equals(Global.WORSE_FLAG)) 
+                globalQc = Global.ZERO;
             globalParamQc.append(globalQc);
         }
 

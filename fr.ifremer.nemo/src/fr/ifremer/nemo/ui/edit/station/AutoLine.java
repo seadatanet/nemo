@@ -276,7 +276,7 @@ public class AutoLine implements UIobject
     protected int getStationHeaderPos()
     {
         int stationHeader = getFileHeaderPos();
-        stationHeader = Nemo.getInstance().getDomain().getMedia().getStationHeaderNumberLines();
+        stationHeader += Nemo.getInstance().getDomain().getMedia().getStationHeaderNumberLines();
         //stationHeader += DataModel.stationModel.getNumberOfLines();
         return stationHeader;
     }

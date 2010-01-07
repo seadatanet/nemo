@@ -541,9 +541,9 @@ public class QCflagsSection extends NemoSection
         return null;
     }
 
-    public void setFlagFragment(Fragment flag, String propertyCode,
-            String propertyName)
-    {
+    public void setFlagFragment(Fragment flag, 
+                                String propertyCode,
+                                String propertyName){
         if (flag != null)
         {
             // Test si la metadonnee est déjà presente dans le tableau
@@ -560,10 +560,7 @@ public class QCflagsSection extends NemoSection
             TableItem item = new TableItem(getTabFlagQC(), SWT.NONE);
             item.setText(0, propertyCode);
             item.setText(1, propertyName);
-            item.setText(2, String.valueOf(flag.getFirstLine()
-                    + Integer
-                        .valueOf(ViewMain.editFileForm.sectionEnteteFichier
-                            .getValue())));
+            item.setText(2, String.valueOf(flag.getFirstLine()+ Nemo.getInstance().getDomain().getMedia().getModel().getFileHeader()));
             item.setText(3, String.valueOf(flag.getFirstCharOffset()));
             item.setText(4, String.valueOf(flag.getLastCharOffset()));
         }

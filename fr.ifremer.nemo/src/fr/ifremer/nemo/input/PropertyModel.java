@@ -101,6 +101,7 @@ public class PropertyModel extends AbstractModel
         _format = null;
         _fragment = null;
         _flag = null;
+        _inData = false;
     }
 
 
@@ -401,8 +402,7 @@ public class PropertyModel extends AbstractModel
     public Fragment fillFragment(StationSection stationSection,
                                  String ligne, 
                                  int i, 
-                                 boolean 
-                                 lastLine, 
+                                 boolean lastLine, 
                                  boolean posVariable){
 
         // position dans fichier

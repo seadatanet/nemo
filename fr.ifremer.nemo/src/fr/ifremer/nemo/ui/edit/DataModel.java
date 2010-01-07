@@ -490,6 +490,9 @@ public class DataModel
         ViewMain.editDataForm.validee = true;
 
     }
+    
+    //public static void initConversion(){
+    //}
 
     public static void fillDesc(boolean raz) throws RuntimeException
     {
@@ -504,6 +507,7 @@ public class DataModel
         
         // --- remplissage du formulaire de gauche (ViewMain)
         // Type de traitement - déjà fixé à l'ouverture du fichier
+        //TODO sourcePath
 
         // Séparateur
         ViewMain.setSeparateur(mediaModel.getSeparator());

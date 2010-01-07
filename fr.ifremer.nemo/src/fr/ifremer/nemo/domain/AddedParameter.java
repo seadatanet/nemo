@@ -167,9 +167,7 @@ public class AddedParameter extends Parameter
                         
                         // récupération de la valeur de la pression
                         ParameterModel pModelPRES = sDomain.getData().getModel().getParameterModel(Intern.paramPRES);
-                        if (pModelPRES.getLineValue() == null){
-                            pModelPRES.computeParameterValue(inputLine);
-                        }
+                        pModelPRES.computeParameterValue(inputLine);
                         ParameterValue valuePRES = pModelPRES.getLineValue();                   
                         
                         // calculDepth

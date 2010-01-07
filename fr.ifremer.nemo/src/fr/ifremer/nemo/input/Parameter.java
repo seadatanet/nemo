@@ -257,11 +257,11 @@ public class Parameter extends AbstractModel
 	}
     
     
-    public String getOutputCode(Conversion c){
+    public String getOutputCode(Conversion c, boolean lastParam){
         String code = null;
         switch (c){
             case ODV:
-                code = getOutputOdvCode();
+                code = getOutputOdvCode(lastParam);
                 break;
             case MEDATLAS:
                 code = getOutputMedatlasCode();
@@ -278,7 +278,7 @@ public class Parameter extends AbstractModel
         return Formatter.getSingleton().padString(_code, len);
     }
     
-    private String getOutputOdvCode(){
+    private String getOutputOdvCode(boolean lastParam){
         StringBuffer paramHeader = new StringBuffer();
         String code = _code;
         if (code.equals(IdParameter.CJDY.toString()) || code.equals(IdParameter.DTUT.toString())){
@@ -292,7 +292,9 @@ public class Parameter extends AbstractModel
         paramHeader.append(Global.TAB);
         
         paramHeader.append("QV:SEADATANET"); //$NON-NLS-1$
-        paramHeader.append(Global.TAB);
+        
+        if (!lastParam)
+            paramHeader.append(Global.TAB);
         
         return paramHeader.toString();
     }

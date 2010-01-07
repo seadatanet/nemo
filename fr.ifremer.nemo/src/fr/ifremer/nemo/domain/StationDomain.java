@@ -22,6 +22,7 @@ import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.input.DataType;
 import fr.ifremer.nemo.input.Fragment;
 import fr.ifremer.nemo.input.InputModel;
+import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.output.medatlas.Elts;
 import fr.ifremer.nemo.ui.Utils;
@@ -77,7 +78,7 @@ public class StationDomain
         _data = new DataDomain();
         _listStations = new HashMap<String, List<Station>>();
         _ref = -1;
-        _someInData = true; // TODO pour test
+        _someInData = false;
         //_currentStationValues = new HashMap<String, Object>();
         //_currentStationMetaFlags = new HashMap<String, String>();
     }
@@ -89,7 +90,15 @@ public class StationDomain
     
     public void updateStation(StationModel model){
         _model = model;
-        // TODO update domain
+        _listStations = new HashMap<String, List<Station>>();
+        _ref = -1;
+        _someInData = false;
+        for (PropertyModel pModel : _model.getProperties()){
+            if (pModel.isInData()){
+                _someInData = true;
+                break;
+            }
+        }
     }
     
     @SuppressWarnings("nls")
@@ -118,7 +127,7 @@ public class StationDomain
     
     public StringBuffer getOdvEmptyStationHeader(){
         StringBuffer odvStationHeader = new StringBuffer(); 
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < 9; i++){
             odvStationHeader.append(Global.TAB);
         }
         return odvStationHeader;
@@ -197,8 +206,13 @@ public class StationDomain
         odvStationHeader.append(Global.TAB);
         
         //Bot. Depth [m]
-        Float botDepth = (Float) _model.getProperty(Intern.S_DEPTH).applyOn(inputFile);
-        if (!botDepth.isNaN()) odvStationHeader.append(botDepth);
+        Float botDepth = Float.valueOf((String)_model.getProperty(Intern.S_DEPTH).applyOn(inputFile));
+        if (!botDepth.isNaN()){
+            odvStationHeader.append(botDepth);
+        }
+        else{
+            odvStationHeader.append(Global.ZERO);
+        }
         odvStationHeader.append(Global.TAB);
         
         
@@ -322,6 +336,7 @@ public class StationDomain
                 if (Nemo.getInstance().getDomain().getMedia().getModel().getProcessType() == E_ProcessType.COLLECTION_FILES)
                     cruiseRef = cDomain.getModel().getName();
                 else
+                    cruiseRef = cDomain.getDataSetRef();
                 // [Numéro station]si < 5 : codé sur 5 caractères il est complété à
                 // gauche par des '0'.
                 if (stationReference.length() < 5){
@@ -379,8 +394,6 @@ public class StationDomain
         
 
         //*DATE=21071998 TIME=0930 LAT=S18 08.55 LON=E178 27.21 DEPTH=       QC=0000
-        // TODO revoir getFullDate()...
-
         medStationHeader.append(start);
         medStationHeader.append(Elts.getElt(Elts.station_date, getFullDate(currentStation)));
         medStationHeader.append(Elts.getElt(Elts.station_time, getCorrectedTime(currentStation.getTime(), currentStation.getOffsetTU())));

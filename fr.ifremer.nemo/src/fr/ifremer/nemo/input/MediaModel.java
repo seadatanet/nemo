@@ -363,7 +363,7 @@ public class MediaModel extends AbstractModel
      */
     public void setInputType(String s){
         try {
-            _inputType = Enum.valueOf(E_InputType.class, s);
+            _inputType = Enum.valueOf(E_InputType.class, s.toUpperCase());
         } catch (Exception e) {
         }
     }

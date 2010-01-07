@@ -45,15 +45,15 @@ public class OdvWriter extends NemoWriter{
                 outputFileName += File.separator + cruise.getModel().getReference();
             
     
-            E_TypeConversion selectedCoversion = iDomain.getConversion().getCurrent();
-            if (selectedCoversion == E_TypeConversion.ODV_MONOSTATION){
+            E_TypeConversion selectedConversion = iDomain.getConversion().getCurrent();
+            if (selectedConversion == E_TypeConversion.ODV_MONOSTATION){
                 // Conversion ODV - fichiers monostation => N fichiers de sortie
                 
                 for (Station st : station.getStations(inputFilePath)){
                     
                     String localCdiId = station.getLocalCdiId(cruise, Conversion.ODV, st.getReference());
-                    outputFileName += File.separator + localCdiId + Conversion.ODV.getExt();
-                    outputFileWriter = new PrintWriter(new BufferedWriter(new FileWriter(outputFileName)));
+                    String mOutputFileName = outputFileName + File.separator + localCdiId + Conversion.ODV.getExt();
+                    outputFileWriter = new PrintWriter(new BufferedWriter(new FileWriter(mOutputFileName)));
     
                     // écriture de l'entête campagne
                     StringBuffer cruiseHeader = cruise.getHeader(c);
@@ -62,7 +62,7 @@ public class OdvWriter extends NemoWriter{
                     writeStation(st, inputFileName, readerSize);
                     
                     outputFileWriter.close();
-                    iDomain.getMedia().addStationInOutput(outputFileName, st.getReference());
+                    iDomain.getMedia().addStationInOutput(mOutputFileName, st.getReference());
                 }
             }
             else{
@@ -89,12 +89,13 @@ public class OdvWriter extends NemoWriter{
 	}
     
     private void writeDataLine(StringBuffer stationHeader,
-                               Station currentStation) throws Exception{
+                               Station currentStation,
+                               String line) throws Exception{
         DataDomain data = iDomain.getCruise().getStation().getData();
 
         StringBuffer dataLine = new StringBuffer();
         dataLine.append(stationHeader);
-        dataLine.append(data.getDataLine(c, currentStation, readedLine));
+        dataLine.append(data.getDataLine(c, currentStation, line));
         
         outputFileWriter.println(dataLine);
     }
@@ -126,9 +127,12 @@ public class OdvWriter extends NemoWriter{
                     
                     if (station.isSomeInData()){
                         // la première ligne des données est déjà "consommée" dans stationHeaderBuffer 
-                        writeDataLine(stationHeader, currentStation);
+                        writeDataLine(stationHeader, currentStation, inputStationHeader[inputStationHeader.length -1]);
                         stationHeader = station.getOdvEmptyStationHeader();
                     }
+                    
+                    writeDataLine(stationHeader, currentStation, readedLine);
+                    stationHeader = station.getOdvEmptyStationHeader();
                     
                     stationWrited = true;
                 }
@@ -138,7 +142,7 @@ public class OdvWriter extends NemoWriter{
             }
             else if (stationWrited){        
                 // ligne de données : à ne prendre en compte qua si on est sur la bonne station
-                writeDataLine(stationHeader, currentStation);
+                writeDataLine(stationHeader, currentStation, readedLine);
                 stationHeader = station.getOdvEmptyStationHeader();
             }
         }

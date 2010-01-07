@@ -978,32 +978,25 @@ public class StationSection extends NemoSection
                 else{
                     // position dans fichier
                     boolean fillVariPos = (autoInput.getButtonVari() != null);
+                    //propertyModel.setInData(inData)
 
                     if (name.equals(Intern.S_COMMENT)){
                         // cas particuliers : COMMENT
                         // surlignement et injection ligne debut fin
-                        frag =
-                            propertyModel.fillFragment(this, ligne, i, false,
-                                fillVariPos);
-                        int entete =
-                            Integer
-                                .valueOf(ViewMain.editFileForm.sectionEnteteFichier
-                                    .getValue());
-                        Utils.calculNbreLignesPuisRemplissageFrag(frag, Integer
-                            .valueOf(entete));
+                        frag = propertyModel.fillFragment(this, ligne, i, false, fillVariPos);
+                        int entete = Nemo.getInstance().getDomain().getMedia().getModel().getFileHeader();
+                        Utils.calculNbreLignesPuisRemplissageFrag(frag, entete);
                     }
-                    else
-                    {
+                    else{
                         // Généralisation
-                        if ((!position) && (((i > 0) && (getLineText(i).trim()
-                            .equals(Global.EMPTY_STRING)))
+                        if ((!position) && (((i > 0) && (getLineText(i).trim().equals(Global.EMPTY_STRING)))
                                 || getValue() == null
-                                || getValue().trim()
-                                    .equals(Global.EMPTY_STRING))){
+                                || getValue().trim().equals(Global.EMPTY_STRING))){
                             propertyModel.fillUserValue(getValue(i));
                             //fillManualModel(propertyModel, station, tagXml, format, i);
                         }
                         else if (!getAutoInput().getLines().get(i).isEmpty()){
+                            propertyModel.setInData(getAutoInput().getLines().get(i).isInData());
                             propertyModel.fillFragment(this, ligne, i, true, fillVariPos);
                             if (fillVariPos){
                                 if (format instanceof LatitudeFormat){

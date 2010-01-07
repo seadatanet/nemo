@@ -1,11 +1,5 @@
 package fr.ifremer.nemo.input;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-
 import org.nfunk.jep.JEP;
 import org.xml.sax.Attributes;
 
@@ -16,17 +10,10 @@ import com.ago.xml.XMLOutputWriter;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.domain.AddedParameter;
-import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.domain.ParameterValue;
 import fr.ifremer.nemo.domain.Station;
-import fr.ifremer.nemo.domain.StationDomain;
-import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.nemo.util.Global.E_InputType;
-import fr.ifremer.nemo.util.format.LatitudeFormat;
-import fr.ifremer.nemo.util.format.LongitudeFormat;
 
 /**
  * Class ParameterModel
