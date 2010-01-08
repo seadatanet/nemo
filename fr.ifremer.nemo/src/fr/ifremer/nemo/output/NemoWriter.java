@@ -70,7 +70,7 @@ public abstract class NemoWriter{
                     readerSize = Long.valueOf(inputFile.length()).intValue();
                     bufferedReader.mark(readerSize + 1);
 
-                    if (!stationDomain.stationsRegistered(inputFilePath)){
+                    if (!stationDomain.stationsRegistered(inputFilePath, inputFileName)){
                         // première lecture pour obtenir le nombre de valeurs par stations
                         Station st = null;
                         int nbrecords = 0;
@@ -86,6 +86,7 @@ public abstract class NemoWriter{
                             if (isEndData() && (st != null)){
                                 st.setNbRecords(nbrecords);
                                 stationDomain.addStation(inputFilePath, st);
+                                st = null;
                             }
                             
                             if (isStartStationHeader()){
@@ -93,7 +94,7 @@ public abstract class NemoWriter{
 
                                 String[] inputStationHeader = consumeStationHeader();
                                 if (inputStationHeader != null){
-                                    st = new Station(inputStationHeader);
+                                    st = new Station(inputFile.getName(),inputStationHeader);
                                     String ref = stationDomain.getReference(inputFile.getName(), inputStationHeader);
                                     st.setReference(ref);
                                     
@@ -109,25 +110,30 @@ public abstract class NemoWriter{
                                     break;
                                 }
                             }
-                            else{
-                                if (st != null) st.updateGlobalParamQc(readedLine);
+                            else if (st != null){
+                                st.updateGlobalParamQc(readedLine);
                                 nbrecords++;
                             }
-                            
+                        }
+                        
+                        if (st != null){
+                            // endData = EOF : la station n'a pas été enregistrée
+                            st.setNbRecords(nbrecords);
+                            stationDomain.addStation(inputFilePath, st);
                         }
 
-                        // FAE1105 : tri des stations selon Nom Fichier - Date - Référence Station
-                        Collections.sort(stationDomain.getStations(inputFilePath));
-                        
-                        numLine = 0;
-                        bufferedReader.reset();
-                    
                     }
                     
-        			writeFile(inputFilePath, inputFileName, readerSize);
+                    // FAE1105 : tri des stations selon Nom Fichier - Date - Référence Station
+                    Collections.sort(stationDomain.getStations(inputFilePath));
                     
-                    bufferedReader.close();
+                    numLine = 0;
+                    bufferedReader.reset();
+                    
                 }
+                writeFile(inputFilePath, readerSize);
+                
+                bufferedReader.close();
             }
 
 		} catch (Exception e) {
@@ -155,7 +161,6 @@ public abstract class NemoWriter{
 	 * @throws ParseException
 	 */
 	public abstract void writeFile(String inputFilePath,
-                                   String inputFileName,
                                    int readerSize) 
            throws Exception;
     

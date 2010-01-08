@@ -152,9 +152,9 @@ public class Elts extends NLS
                     elt.append(form.formatInt(format[1], (Integer) value));
                 }
                 else{
-                    elt.append(form.formatInt(format[1], Float.valueOf((String) value)));
+                    elt.append(form.formatInt(format[1], Float.parseFloat((String) value)));
                 }
-                //elt.append(form.formatInt(parseElt[0], Float.valueOf((String) value)));
+                //elt.append(form.formatInt(parseElt[0], Float.parseFloat((String) value)));
             }
         }
         else{

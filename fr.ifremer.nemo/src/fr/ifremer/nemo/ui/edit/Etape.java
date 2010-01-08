@@ -1348,7 +1348,10 @@ public class Etape
         // attention aux boutons radio
 
         // puis remplissage du modele avec les valeurs de l'IHM
-        DataModel.initDesc(ViewMain.nomFichier);
+        if (ViewMain.radioFichier.getSelection())
+            DataModel.initDesc(ViewMain.nomFichier);
+        else
+            DataModel.initDesc(ViewMain.nomRepertoire);
         //DataModel.initModele(ViewMain.nomFichier);
 
         Utils.messageOK(Messages.success_etape);

@@ -30,7 +30,6 @@ public class MedatlasWriter extends NemoWriter{
 	 */
 	@Override
 	public final void writeFile(String inputFilePath,
-                                String inputFileName,
                                 int readerSize) throws GenerationException {
         try{
             String outputFileName = iDomain.getMedia().getOutputFileName();
@@ -44,7 +43,8 @@ public class MedatlasWriter extends NemoWriter{
             // écriture de l'entête campagne
             StringBuffer cruiseHeader = cruise.getHeader(c);
             outputFileWriter.println(cruiseHeader);
-    
+            
+            station.updateRef();
             for (Station currentStation : station.getStations(inputFilePath)){
     
                 bufferedReader.mark(readerSize + 1);
@@ -52,6 +52,9 @@ public class MedatlasWriter extends NemoWriter{
         		
         		// scan the InputFile line by line
         		while ((readedLine = bufferedReader.readLine()) != null) {
+                    if (numLine == 8653){
+                        System.out.println("line " + numLine + " : " + readedLine); //$NON-NLS-1$ //$NON-NLS-2$
+                    }
         			numLine++;
                     
                     if (numLine == 1){
@@ -68,7 +71,7 @@ public class MedatlasWriter extends NemoWriter{
                         // écriture de l'entête station
                         String[] inputStationHeader = consumeStationHeader();
                         if (inputStationHeader != null &&
-                                currentStation.getReference().equals(station.getReference(inputFileName, inputStationHeader))){
+                                currentStation.getReference().equals(station.getReference(currentStation.getFileName(), inputStationHeader))){
                             outputFileWriter.println(station.getHeader(cruise, c, currentStation, inputStationHeader));
             
                             // écriture de l'entête des données (titres des colonnes)

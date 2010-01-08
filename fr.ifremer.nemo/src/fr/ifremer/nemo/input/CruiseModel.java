@@ -861,6 +861,10 @@ public class CruiseModel extends AbstractModel
      */
 	public void addDataType(DataType x) {
         if (!_dataTypes.contains(x)){
+            for (DataType data : _dataTypes){
+                if (data.getCode().equals(x.getCode()))
+                    return;
+            }
             _dataTypes.add(x);
         }
 	}

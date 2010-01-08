@@ -33,7 +33,6 @@ public class OdvWriter extends NemoWriter{
 	 */
 	@Override
 	public final void writeFile(String inputFilePath,
-                                String inputFileName,
                                 int readerSize) throws GenerationException {
 	    try{
             CruiseDomain cruise = iDomain.getCruise();
@@ -59,7 +58,7 @@ public class OdvWriter extends NemoWriter{
                     StringBuffer cruiseHeader = cruise.getHeader(c);
                     outputFileWriter.println(cruiseHeader);
                     
-                    writeStation(st, inputFileName, readerSize);
+                    writeStation(st, readerSize);
                     
                     outputFileWriter.close();
                     iDomain.getMedia().addStationInOutput(mOutputFileName, st.getReference());
@@ -77,7 +76,7 @@ public class OdvWriter extends NemoWriter{
                 outputFileWriter.println(cruiseHeader);
     
                 for (Station st : station.getStations(inputFilePath)){
-                    writeStation(st, inputFileName, readerSize);
+                    writeStation(st, readerSize);
                     iDomain.getMedia().addStationInOutput(outputFileName, st.getReference());
                 }
                 
@@ -100,8 +99,7 @@ public class OdvWriter extends NemoWriter{
         outputFileWriter.println(dataLine);
     }
     
-    private void writeStation(Station currentStation, 
-                              String inputFileName, 
+    private void writeStation(Station currentStation,
                               int readerSize) throws Exception{
 
         StationDomain station = iDomain.getCruise().getStation();
@@ -121,7 +119,7 @@ public class OdvWriter extends NemoWriter{
             if (isStartStationHeader()){
                 String[] inputStationHeader = consumeStationHeader();
                 if (inputStationHeader != null &&
-                        currentStation.getReference().equals(station.getReference(inputFileName, inputStationHeader))){
+                        currentStation.getReference().equals(station.getReference(currentStation.getFileName(), inputStationHeader))){
 
                     stationHeader = station.getHeader(iDomain.getCruise(), c, currentStation, inputStationHeader);
                     

@@ -27,6 +27,7 @@ import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Global.E_EndData;
 import fr.ifremer.nemo.util.Global.E_InputType;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.format.DateTimeFormat;
 import fr.ifremer.nemo.ws.WSDataType;
 import fr.ifremer.nemo.ws.WSParameter;
@@ -319,11 +320,12 @@ public class DataModel
         // recuperation du model correspondant
         StationDomain sDomain = Nemo.getInstance().getDomain().getCruise().getStation();
         StationModel stationModel = new StationModel();
+        E_InputType inputType = Nemo.getInstance().getDomain().getMedia().getModel().getInputType();
         
         PropertyModel propertyModel;
 
         // compléter ELAT / ELON et EDEPTH si nécessaire
-        if (ViewMain.radSerieTempo.getSelection())
+        if (inputType == E_InputType.TIMESERIES)
         {
             if (ViewMain.editStationForm.endLatitude.getValue().trim().equals(
                 Global.EMPTY_STRING))
@@ -359,17 +361,13 @@ public class DataModel
         //station.setDmHistory1(Global.EMPTY_STRING);
         //station.setDmHistory2(Global.EMPTY_STRING);
 
-        if (ViewMain.radSerieTempo.getSelection()
-                || ViewMain.radTrajectoire.getSelection())
-        {
+        if (inputType != E_InputType.PROFILE){
             // GESTION Time/Date in Data
-            if (ViewMain.editStationForm.samplingRate.isEnabled())
-            {
+            if (ViewMain.editStationForm.samplingRate.isEnabled()){
                 // calcul e partir frequence echantillonnage
                 sDomain.setComputed(true);
             }
-            else
-            {
+            else{
                 // calcul position date/heure dans les donnees
                 sDomain.setComputed(false);
                 // remplissage avec les données par défaut
@@ -382,24 +380,31 @@ public class DataModel
             }
 
             // DATE / HEURE DE FIN
-            propertyModel = stationModel.propertiesAt(Intern.S_EDATE);
+            propertyModel = new PropertyModel();
+            //stationModel.propertiesAt(Intern.S_EDATE);
+            propertyModel.setProperty(Intern.S_EDATE);
             propertyModel.setUserProvided(true);
             propertyModel.setFlag(ViewMain.editStationForm.qcFlags.getFlagFragment(Intern.ENDDATETIME)); // Flag qualite
-            
-            propertyModel = stationModel.propertiesAt(Intern.S_ETIME);
+            stationModel.addProperty(propertyModel);
+
+            propertyModel = new PropertyModel();
+            //propertyModel = stationModel.propertiesAt(Intern.S_ETIME);
+            propertyModel.setProperty(Intern.S_ETIME);
             propertyModel.setUserProvided(true);
             propertyModel.setFlag(ViewMain.editStationForm.qcFlags
                 .getFlagFragment(Intern.ENDDATETIME)); // Flag qualite
+            stationModel.addProperty(propertyModel);
 
-            if (ViewMain.radTrajectoire.getSelection())
-            {
+            if (inputType == E_InputType.TRAJECTORY){
                 initDiseabledField(stationModel, Intern.S_ELAT);
                 initDiseabledField(stationModel, Intern.S_ELON);
                 initDiseabledField(stationModel, Intern.S_EDEPTH);
 
                 // DECLINAISON MAGNETIQUE : FAE 1386 - valeur par défaut pour
                 // les Trajectoires
-                propertyModel = stationModel.propertiesAt( Intern.S_MAGNETIC);
+                propertyModel = new PropertyModel();
+                //propertyModel = stationModel.propertiesAt( Intern.S_MAGNETIC);
+                propertyModel.setProperty(Intern.S_MAGNETIC);
                 propertyModel.setUserProvided(true);
                 propertyModel.setUserValue("-999"); //$NON-NLS-1$
                 //timeSeriesInformation.setMagneticDeclination("-999"); //$NON-NLS-1$

@@ -42,9 +42,12 @@ public class Station implements Comparable
     protected HashMap<String, String> _metaFlags;
     protected HashMap<String, String> _globalParamQc;
     protected HashMap<String, Boolean> _missingValueParams;
+    
+    protected String _fileName;
 
-    public Station(String[] inputStationHeader) throws ParseException
+    public Station(String fileName, String[] inputStationHeader) throws ParseException
     {
+        _fileName = fileName;
         _reference = null;
         _nbRecords = 0;
         _metaFlags = new HashMap<String, String>();
@@ -55,7 +58,7 @@ public class Station implements Comparable
         _longitude = ((Double) stationDomain.getModel().getProperty(Intern.S_LON).applyOn(inputStationHeader)).doubleValue();
         _date = ((Long) stationDomain.getModel().getProperty(Intern.S_DATE).applyOn(inputStationHeader)).longValue();
         _time = ((Long) stationDomain.getModel().getProperty(Intern.S_TIME).applyOn(inputStationHeader)).longValue();
-        _offsetTU = Float.valueOf((String) stationDomain.getModel().getProperty(Intern.S_OFFSETTU).applyOn(inputStationHeader)).floatValue();
+        _offsetTU = Float.parseFloat((String) stationDomain.getModel().getProperty(Intern.S_OFFSETTU).applyOn(inputStationHeader));
 
         addMetaFlag(Intern.DATETIME, stationDomain.getMetaFlag(Intern.DATETIME, inputStationHeader));
         addMetaFlag(Intern.S_LAT, stationDomain.getMetaFlag(Intern.S_LAT, inputStationHeader));
@@ -64,8 +67,8 @@ public class Station implements Comparable
 
         if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() != E_InputType.PROFILE)
         {
-            _sensorDepth = ((Float) stationDomain.getModel().getProperty(Intern.S_SENSORDEPTH).applyOn(inputStationHeader)).floatValue();
-            _samplingRate = ((Float) stationDomain.getModel().getProperty(Intern.S_SAMPLINGRATE).applyOn(inputStationHeader)).floatValue();
+            _sensorDepth = Float.parseFloat((String) stationDomain.getModel().getProperty(Intern.S_SENSORDEPTH).applyOn(inputStationHeader));
+            _samplingRate = Float.parseFloat((String) stationDomain.getModel().getProperty(Intern.S_SAMPLINGRATE).applyOn(inputStationHeader));
 
             addMetaFlag(Intern.S_SENSORDEPTH, stationDomain.getMetaFlag(Intern.S_SENSORDEPTH, inputStationHeader));
             addMetaFlag(Intern.ENDDATETIME, stationDomain.getMetaFlag(Intern.ENDDATETIME, inputStationHeader));
@@ -73,8 +76,8 @@ public class Station implements Comparable
             addMetaFlag(Intern.S_ELON, stationDomain.getMetaFlag(Intern.S_ELON, inputStationHeader));
             addMetaFlag(Intern.S_EDEPTH, stationDomain.getMetaFlag(Intern.S_EDEPTH, inputStationHeader));
             addMetaFlag(Intern.S_SENSORDEPTH, stationDomain.getMetaFlag(Intern.S_SENSORDEPTH, inputStationHeader));
-            addMetaFlag(Intern.DISTANCETOBOTTOM, stationDomain.getMetaFlag(Intern.DISTANCETOBOTTOM, inputStationHeader));
-            addMetaFlag(Intern.DURATION, stationDomain.getMetaFlag(Intern.DURATION, inputStationHeader));
+//            addMetaFlag(Intern.DISTANCETOBOTTOM, stationDomain.getMetaFlag(Intern.DISTANCETOBOTTOM, inputStationHeader));
+//            addMetaFlag(Intern.DURATION, stationDomain.getMetaFlag(Intern.DURATION, inputStationHeader));
         }
 
         _globalParamQc = new HashMap<String, String>();
@@ -262,7 +265,18 @@ public class Station implements Comparable
     }
 
     public String getMetaFlag(String key){
-        return _metaFlags.get(key);
+        String flag = Global.ZERO;
+
+        if (getMetaFlags() != null)
+        {
+            if ((getMetaFlags().containsKey(key))
+                    && (getMetaFlags().get(key) != null))
+            {
+                flag = getMetaFlags().get(key);
+            }
+        }
+
+        return flag;
     }
 
     /**
@@ -382,6 +396,26 @@ public class Station implements Comparable
         String refOther = ((Station) other).getReference();
 
         return refIni.compareTo(refOther);
+    }
+
+    /**
+     * Getter pour _fileName.
+     * @return String
+     * @see Station.java#_fileName
+     */
+    public String getFileName()
+    {
+        return _fileName;
+    }
+
+    /**
+     * Setter pour _fileName
+     * @param fileName : nouvelle valeur pour fileName
+     * @see Station.java#_fileName
+     */
+    public void setFileName(String fileName)
+    {
+        _fileName = fileName;
     }
 
 }

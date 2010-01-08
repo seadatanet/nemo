@@ -91,7 +91,7 @@ public class StationDomain
     public void updateStation(StationModel model){
         _model = model;
         _listStations = new HashMap<String, List<Station>>();
-        _ref = -1;
+        updateRef();
         _someInData = false;
         for (PropertyModel pModel : _model.getProperties()){
             if (pModel.isInData()){
@@ -99,6 +99,15 @@ public class StationDomain
                 break;
             }
         }
+    }
+    
+    public void updateRef(){
+        if (_model.getReferenceProperty() != null
+                && _model.getReferenceProperty().isUserProvided()
+                && !_model.getReferenceProperty().getUserValue().trim().equals(Global.EMPTY_STRING))
+            _ref = Integer.parseInt(_model.getReferenceProperty().getUserValue());
+        else
+            _ref = -1;
     }
     
     @SuppressWarnings("nls")
@@ -139,7 +148,8 @@ public class StationDomain
         if ((_model.getReferenceProperty().isUserProvided()) && 
                 (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() != E_InputType.TRAJECTORY)){
             // incrementation du numéro
-            ref = Integer.toString(_ref++);
+            ref = Integer.toString(_ref);
+            _ref++;
         }
         else if (_model.getReferenceProperty().getFragment().getFirstLine() == 0){
             // dans le nom du fichier
@@ -266,9 +276,7 @@ public class StationDomain
 
     @SuppressWarnings("nls")
     private String getDateTime(Station currentStation) throws ParseException
-    {
-        //Float time = (Float) _model.getProperty(Intern.S_TIME).applyOn(inputFile);
-        
+    {        
         StringBuffer value = new StringBuffer();
         String s_date =
             Formatter.getSingleton()
@@ -302,7 +310,6 @@ public class StationDomain
     }
     
     private long getGMTDate(long a_Date, float offsetTU){
-        //Float offsetTU = (Float) _model.getProperty(Intern.S_OFFSETTU).applyOn(inputFile);
         return a_Date + (Float.valueOf(offsetTU).longValue() * 3600 * 1000);
     }
     
@@ -399,7 +406,7 @@ public class StationDomain
         medStationHeader.append(Elts.getElt(Elts.station_time, getCorrectedTime(currentStation.getTime(), currentStation.getOffsetTU())));
         medStationHeader.append(Elts.getElt(Elts.station_lat,  currentStation.getLatitude()));
         medStationHeader.append(Elts.getElt(Elts.station_lon, currentStation.getLongitude()));
-        medStationHeader.append(Elts.getElt(Elts.station_depth, Float.valueOf((String) _model.getProperty(Intern.S_DEPTH).applyOn(inputFile))));
+        medStationHeader.append(Elts.getElt(Elts.station_depth, Float.parseFloat((String) _model.getProperty(Intern.S_DEPTH).applyOn(inputFile))));
         medStationHeader.append(Global.SPACE);
         medStationHeader.append(Elts.getKeyword(Elts.qc));
         medStationHeader.append(currentStation.getMetaFlag(Intern.DATETIME));
@@ -564,9 +571,29 @@ $nemoLists.getSdnParameters()
         StringBuffer timeseriesHeader = new StringBuffer(); 
         String start = Conversion.MEDATLAS.getDebut();
         
-        Float endDepth = (Float) _model.getProperty(Intern.S_EDEPTH).applyOn(inputFile);
-        Float sensorDepth = currentStation.getSensorDepth();
-        Float endTime = (Float) _model.getProperty(Intern.S_ETIME).applyOn(inputFile);
+        float endDepth = Float.parseFloat((String)_model.getProperty(Intern.S_EDEPTH).applyOn(inputFile));
+        float sensorDepth = currentStation.getSensorDepth();
+        long endTime;
+        try{
+            endTime = Long.parseLong(_model.getProperty(Intern.S_ETIME).getUserValue());
+        }
+        catch (NumberFormatException e){
+            long rate = new Float(currentStation.getSamplingRate() * 1000.0f).longValue();
+            int size = currentStation.getNbRecords() - 1;
+            long date = getFullDate(currentStation) + (size * rate);
+            TimeZone tz = TimeZone.getTimeZone(DateTimeFormat.GMT); 
+            Calendar cal = Calendar.getInstance(tz);
+            cal.clear();
+            cal.setTimeInMillis(date);
+            
+            endTime = cal.getTimeInMillis();
+            
+            _model.getProperty(Intern.S_ETIME).setUserProvided(true);
+            _model.getProperty(Intern.S_ETIME).setUserValue(String.valueOf(endTime));
+  
+            _model.getProperty(Intern.S_EDATE).setUserProvided(true);
+            _model.getProperty(Intern.S_EDATE).setUserValue(String.valueOf(endTime));     
+        }
 
         //*ADDITIONAL INFORMATION - TIME SERIES
         timeseriesHeader.append(start);
@@ -575,7 +602,7 @@ $nemoLists.getSdnParameters()
         
         //*EDATE=19091998 ETIME=1110 ELAT=S18 08.55 ELON=E178 27.21 EDEPTH=       QC=0000
         timeseriesHeader.append(start);
-        timeseriesHeader.append(Elts.getElt(Elts.station_endDate, _model.getProperty(Intern.S_EDATE).applyOn(inputFile)));
+        timeseriesHeader.append(Elts.getElt(Elts.station_endDate, Long.parseLong((String)_model.getProperty(Intern.S_EDATE).applyOn(inputFile))));
         timeseriesHeader.append(Elts.getElt(Elts.station_endTime, endTime));
         timeseriesHeader.append(Elts.getElt(Elts.station_endLat, _model.getProperty(Intern.S_ELAT).applyOn(inputFile)));
         timeseriesHeader.append(Elts.getElt(Elts.station_endLon, _model.getProperty(Intern.S_ELON).applyOn(inputFile)));
@@ -696,8 +723,14 @@ $nemoLists.getSdnParameters()
         }
     }
     
-    public boolean stationsRegistered(String inputFilePath){
-        return _listStations.containsKey(inputFilePath);
+    public boolean stationsRegistered(String inputFilePath, String inputFileName){
+        if (_listStations.containsKey(inputFilePath)){
+            for (Station st : _listStations.get(inputFilePath)){
+                if (st.getFileName().equals(inputFileName))
+                    return true;
+            }
+        }
+        return false;
     }
     
     public List<Station> getStations(String inputFilePath){

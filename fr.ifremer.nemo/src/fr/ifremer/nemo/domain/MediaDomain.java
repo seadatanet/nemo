@@ -69,13 +69,13 @@ public class MediaDomain
     private void buildInputFilesNames(){
         _inputFilesNames = new HashMap<String, List<String>>();
         // FAE1105 : tri des stations selon Nom Fichier - Date - Référence Station
-        File iputFile = new File(_model.getSourcePath());
+        File inputFile = new File(_model.getSourcePath());
         List<String> names = new ArrayList<String>();
-        if (iputFile.isDirectory()){
+        if (inputFile.isDirectory()){
             names = new ArrayList<String>();
-            for (File file : iputFile.listFiles()){
+            for (File file : inputFile.listFiles()){
                 if (file.isDirectory()){
-                    for (File subfile : iputFile.listFiles()){
+                    for (File subfile : inputFile.listFiles()){
                         names.add(subfile.getName());
                     }
                     Collections.sort(names);
@@ -83,18 +83,18 @@ public class MediaDomain
                     names = new ArrayList<String>();
                 }
                 else{
-                    names.add(iputFile.getName());
+                    names.add(file.getName());
                 }
-                if (!names.isEmpty()){
-                    Collections.sort(names);
-                    _inputFilesNames.put(iputFile.getPath(), names);
-                }
+            }
+            if (!names.isEmpty()){
+                Collections.sort(names);
+                _inputFilesNames.put(inputFile.getPath(), names);
             }
             
         }
         else{
-            names.add(iputFile.getName());
-            _inputFilesNames.put(iputFile.getParentFile().getPath(), names);
+            names.add(inputFile.getName());
+            _inputFilesNames.put(inputFile.getParentFile().getPath(), names);
         }
         
     }
