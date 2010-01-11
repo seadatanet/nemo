@@ -17,6 +17,7 @@ import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.CruiseDomain;
+import fr.ifremer.nemo.domain.DateTimeUtils;
 import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.StationDomain;
@@ -207,7 +208,7 @@ public class CDIResumeWriter
                         writer.write(sep
                                 + dateFormat2.format(new Date(st.getDate()))
                                 + format.formatDateTime(
-                                    "hh24:mm:ss", sDomain.getCorrectedTime(st.getTime(), st.getOffsetTU())));
+                                    "hh24:mm:ss", DateTimeUtils.getCorrectedTime(st.getTime(), st.getOffsetTU())));
 
                         //st.getOffsetTU();
                         //st.getTime();

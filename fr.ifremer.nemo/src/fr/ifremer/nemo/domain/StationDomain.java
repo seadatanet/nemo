@@ -193,7 +193,7 @@ public class StationDomain
         odvStationHeader.append(Global.TAB);
         
         //yyyy-mm-ddThh:mm:ss.sss
-        odvStationHeader.append(getDateTime(currentStation));
+        odvStationHeader.append(DateTimeUtils.getDateTime(currentStation));
         odvStationHeader.append(Global.TAB);
         
         //Longitude [degrees_east]
@@ -274,63 +274,6 @@ public class StationDomain
         return typeBC;
     }
 
-    @SuppressWarnings("nls")
-    private String getDateTime(Station currentStation) throws ParseException
-    {        
-        StringBuffer value = new StringBuffer();
-        String s_date =
-            Formatter.getSingleton()
-                .formatDateTime("YYYY-MM-DD", getFullDate(currentStation));
-        value.append(s_date);
-        value.append("T");
-        String s_time =
-            Formatter.getSingleton().formatDateTime(
-                "hh24:mm:ss.sss", getCorrectedTime(currentStation.getTime(), currentStation.getOffsetTU()));
-        value.append(s_time);
-        return value.toString();
-    }
-
-    private long getFullDate(Station currentStation){
-        
-        long date = currentStation.getDate();
-        long time = currentStation.getTime();
-        
-        TimeZone tz = TimeZone.getTimeZone(DateTimeFormat.GMT);
-        Calendar cal = Calendar.getInstance(tz);
-        cal.clear();
-        cal.setTimeInMillis(date);
-        if (!Float.isNaN(time)){
-            cal.setTimeInMillis(date + (time));
-        }
-        else
-        {
-            cal.setTimeInMillis(date);
-        }
-        return getGMTDate(cal.getTimeInMillis(), currentStation.getOffsetTU());
-    }
-    
-    private long getGMTDate(long a_Date, float offsetTU){
-        return a_Date + (Float.valueOf(offsetTU).longValue() * 3600 * 1000);
-    }
-    
-    public long getCorrectedTime(long time, float offsetTU) {
-        if (!Float.isNaN(time)){
-            TimeZone tz = TimeZone.getTimeZone(DateTimeFormat.GMT);
-            Calendar cal = Calendar.getInstance(tz);
-            cal.clear();
-            Calendar cal2 = Calendar.getInstance(tz);
-            cal2.clear();
-            cal2.setTimeInMillis(new Float(time).longValue());
-            cal.set(Calendar.HOUR_OF_DAY, cal2.get(Calendar.HOUR_OF_DAY));
-            cal.set(Calendar.MINUTE, cal2.get(Calendar.MINUTE));
-            cal.set(Calendar.SECOND, cal2.get(Calendar.SECOND));
-            cal.set(Calendar.MILLISECOND, cal2.get(Calendar.MILLISECOND));
-            return getGMTDate(cal.getTimeInMillis(), offsetTU);
-        }
-        return time;
-    }
-
-
     public String getLocalCdiId(CruiseDomain cDomain, Conversion c, String ref) throws ParseException{
         // FAE 1143 : nommage du LOCAL_CDI_ID
 
@@ -402,8 +345,8 @@ public class StationDomain
 
         //*DATE=21071998 TIME=0930 LAT=S18 08.55 LON=E178 27.21 DEPTH=       QC=0000
         medStationHeader.append(start);
-        medStationHeader.append(Elts.getElt(Elts.station_date, getFullDate(currentStation)));
-        medStationHeader.append(Elts.getElt(Elts.station_time, getCorrectedTime(currentStation.getTime(), currentStation.getOffsetTU())));
+        medStationHeader.append(Elts.getElt(Elts.station_date, DateTimeUtils.getFullDate(currentStation)));
+        medStationHeader.append(Elts.getElt(Elts.station_time, DateTimeUtils.getCorrectedTime(currentStation.getTime(), currentStation.getOffsetTU())));
         medStationHeader.append(Elts.getElt(Elts.station_lat,  currentStation.getLatitude()));
         medStationHeader.append(Elts.getElt(Elts.station_lon, currentStation.getLongitude()));
         medStationHeader.append(Elts.getElt(Elts.station_depth, Float.parseFloat((String) _model.getProperty(Intern.S_DEPTH).applyOn(inputFile))));
@@ -458,6 +401,9 @@ public class StationDomain
             medStationHeader.append(line);
             medStationHeader.append(Global.RN);
         }
+
+        medStationHeader.append(start);
+        medStationHeader.append(Global.RN);
         
         if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() != E_InputType.PROFILE)
             medStationHeader.append(getMedTimeSeriesHeader(currentStation, inputFile));
@@ -573,28 +519,8 @@ $nemoLists.getSdnParameters()
         
         float endDepth = Float.parseFloat((String)_model.getProperty(Intern.S_EDEPTH).applyOn(inputFile));
         float sensorDepth = currentStation.getSensorDepth();
-        long endTime;
-        try{
-            endTime = Long.parseLong(_model.getProperty(Intern.S_ETIME).getUserValue());
-        }
-        catch (NumberFormatException e){
-            long rate = new Float(currentStation.getSamplingRate() * 1000.0f).longValue();
-            int size = currentStation.getNbRecords() - 1;
-            long date = getFullDate(currentStation) + (size * rate);
-            TimeZone tz = TimeZone.getTimeZone(DateTimeFormat.GMT); 
-            Calendar cal = Calendar.getInstance(tz);
-            cal.clear();
-            cal.setTimeInMillis(date);
-            
-            endTime = cal.getTimeInMillis();
-            
-            _model.getProperty(Intern.S_ETIME).setUserProvided(true);
-            _model.getProperty(Intern.S_ETIME).setUserValue(String.valueOf(endTime));
-  
-            _model.getProperty(Intern.S_EDATE).setUserProvided(true);
-            _model.getProperty(Intern.S_EDATE).setUserValue(String.valueOf(endTime));     
-        }
-
+        long endTime = DateTimeUtils.computeEndTime(currentStation);
+        
         //*ADDITIONAL INFORMATION - TIME SERIES
         timeseriesHeader.append(start);
         timeseriesHeader.append(Elts.kw_station_addTimeSeries);
@@ -602,11 +528,12 @@ $nemoLists.getSdnParameters()
         
         //*EDATE=19091998 ETIME=1110 ELAT=S18 08.55 ELON=E178 27.21 EDEPTH=       QC=0000
         timeseriesHeader.append(start);
-        timeseriesHeader.append(Elts.getElt(Elts.station_endDate, Long.parseLong((String)_model.getProperty(Intern.S_EDATE).applyOn(inputFile))));
+        timeseriesHeader.append(Elts.getElt(Elts.station_endDate, endTime));
         timeseriesHeader.append(Elts.getElt(Elts.station_endTime, endTime));
         timeseriesHeader.append(Elts.getElt(Elts.station_endLat, _model.getProperty(Intern.S_ELAT).applyOn(inputFile)));
         timeseriesHeader.append(Elts.getElt(Elts.station_endLon, _model.getProperty(Intern.S_ELON).applyOn(inputFile)));
         timeseriesHeader.append(Elts.getElt(Elts.station_endDepth, endDepth));
+        timeseriesHeader.append(Global.SPACE);
         timeseriesHeader.append(Elts.getKeyword(Elts.qc));
         timeseriesHeader.append(currentStation.getMetaFlag(Intern.ENDDATETIME));
         timeseriesHeader.append(currentStation.getMetaFlag(Intern.S_ELAT));
@@ -630,7 +557,7 @@ $nemoLists.getSdnParameters()
         
         
         //*DURATION=60    (day)                                                   QC=0
-        float duration = endTime - getFullDate(currentStation); // duree en millisecondes
+        float duration = endTime - DateTimeUtils.getFullDate(currentStation); // duree en millisecondes
         duration = duration / (1000.0f * 60.0f * 60.0f * 24.0f);
         timeseriesHeader.append(start);
         timeseriesHeader.append(Elts.getElt(Elts.station_duration, duration));
@@ -723,7 +650,7 @@ $nemoLists.getSdnParameters()
         }
     }
     
-    public boolean stationsRegistered(String inputFilePath, String inputFileName){
+    public boolean stationIsRegistered(String inputFilePath, String inputFileName){
         if (_listStations.containsKey(inputFilePath)){
             for (Station st : _listStations.get(inputFilePath)){
                 if (st.getFileName().equals(inputFileName))

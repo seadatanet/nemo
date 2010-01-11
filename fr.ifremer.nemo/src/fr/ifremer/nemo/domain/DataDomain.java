@@ -11,6 +11,7 @@ package fr.ifremer.nemo.domain;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.MissingResourceException;
 
@@ -133,21 +134,23 @@ public class DataDomain
         
     public StringBuffer getDataLine(Conversion c,
                                     Station currentStation, 
-                                    String inputLine) throws Exception{
+                                    String inputLine,
+                                    int indexRecord) throws Exception{
         StringBuffer dataLine = new StringBuffer(); 
         switch (c){
             case ODV:
-                dataLine.append(getOdvDataLine(currentStation, inputLine));
+                dataLine.append(getOdvDataLine(currentStation, inputLine, indexRecord));
                 break;
             case MEDATLAS:
-                dataLine.append(getMedatlasDataLine(currentStation, inputLine));
+                dataLine.append(getMedatlasDataLine(currentStation, inputLine, indexRecord));
                 break;
         }
         return dataLine;
     }
     
     private StringBuffer getOdvDataLine(Station currentStation, 
-                                        String inputLine) throws Exception{
+                                        String inputLine,
+                                        int indexRecord) throws Exception{
         
         StringBuffer odvDataLine = new StringBuffer(); 
         
@@ -155,9 +158,10 @@ public class DataDomain
         int cptParam = 0;
         
         // paramètres ajoutés
+        long currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord);
         for (ParameterModel pModel : getOdvParameterModels()){
             cptParam ++;
-            pModel.computeAddedParameterValue(currentStation, inputLine);
+            pModel.computeAddedParameterValue(currentStation, inputLine, currentDate);
             
             String defaultValue = pModel.getParameter().getDefault();
             String stringValue = pModel.getLineValue().getStringValue();
@@ -195,14 +199,18 @@ public class DataDomain
     }
     
     private StringBuffer getMedatlasDataLine(Station currentStation, 
-                                             String inputLine) throws Exception{
+                                             String inputLine,
+                                             int indexRecord) throws Exception{
         
         StringBuffer medatlasDataLine = new StringBuffer(); 
         
         // -- VALEURS
         // paramètres ajoutés
+        long currentDate = 0;
+        if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() != E_InputType.PROFILE)
+            currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord);
         for (ParameterModel pModel : getMedParameterModels()){
-            pModel.computeAddedParameterValue(currentStation, inputLine);
+            pModel.computeAddedParameterValue(currentStation, inputLine, currentDate);
             
             medatlasDataLine.append(pModel.getLineValue().getStringValue());         
             medatlasDataLine.append(Global.SPACE);
@@ -459,10 +467,7 @@ public class DataDomain
     
     public StringBuffer getSDNparameters(Conversion c){
         StringBuffer sdnParams = new StringBuffer();
-        
-        sdnParams.append(c.getDebut());
-        sdnParams.append(Global.RN);
-        
+                
         sdnParams.append(c.getDebut());
         sdnParams.append(Intern.file_mapping);
         sdnParams.append(Global.RN);

@@ -11,6 +11,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 import fr.ifremer.nemo.Nemo;
@@ -24,6 +25,7 @@ import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Global.E_InputType;
+import fr.ifremer.nemo.util.format.JulianDate;
 import fr.ifremer.nemo.util.format.LatitudeFormat;
 import fr.ifremer.nemo.util.format.LongitudeFormat;
 
@@ -71,7 +73,7 @@ public class AddedParameter extends Parameter
                 case DAYX : return "%02d";
                 case TIME : return "hh24mmss";
                 case CJDY : return "#0.000000";
-                case DTUT : return "yyyy-MM-dd'T'HH:mm:ss.SSS";
+                case DTUT : return "yyyy-MM-dd'T'hh24:mm:ss.SSS";
                 case LATX : return "+DD.dddddd";
                 case LONX : return "+DDD.dddddd";
                 case BATH : return "%6.1f";
@@ -153,7 +155,8 @@ public class AddedParameter extends Parameter
         }
         
         public String getValue(Station currentStation,
-                               String inputLine) throws ParseException{
+                               String inputLine,
+                               long currentDate) throws ParseException{
             InputDomain iDomain = Nemo.getInstance().getDomain();
             StationDomain sDomain = iDomain.getCruise().getStation();
             
@@ -175,7 +178,7 @@ public class AddedParameter extends Parameter
                         double X, Gr, P, Depth;
     
                         P = valuePRES.getValue();
-                        X = Math.sin((Double)currentStation.getLatitude() / 57.29578);
+                        X = Math.sin(currentStation.getLatitude() / 57.29578);
                         double X2 = X * X;
     
                         Gr = 9.780318 * (1.0 + (5.2788E-3 + 2.36E-5 * X2) * X2) + 1.092E-6 * P;
@@ -190,35 +193,34 @@ public class AddedParameter extends Parameter
                     break;
                 case CJDY :
                     // julianDate = $stationModel.julianDate($station, $i)
-                    // Long date = horodate.getDate();
-                    //JulianDate jDate = new JulianDate(date);
-                    stringValue = "TODO"; //TODO (new DecimalFormat(formatString)).format(jDate.getJour());
+                    JulianDate jDate = new JulianDate(currentDate);
+                    stringValue = (new DecimalFormat(formatString)).format(jDate.getJour());
                     break;
                 case DTUT :
                     // time-ISO8601
-                    SimpleDateFormat fDate = new SimpleDateFormat(this.getFormat());
-                    //stringValue = fDate.format(new Date(horodate.getDate()));
-                    stringValue = "TODO"; //TODO station.getVariantDateTime(index);
-                    break;
-                case YEAR :
-                    // $formatter.formatInt( "%4d", $station.parametersAt(0).valuesAt($i).year)
-                    stringValue = "TODO"; //TODO Formatter.getSingleton().formatInt(formatString, horodate.getYear());
-                    break;
-                case MNTH :
-                    // $formatter.formatInt( "%02d", $station.parametersAt(0).valuesAt($i).month)
-                    stringValue = "TODO"; //TODO Formatter.getSingleton().formatInt(formatString, horodate.getMonth());
-                    break;
-                case DAYX :
-                    // $formatter.formatInt( "%02d", $station.parametersAt(0).valuesAt($i).day)
-                    stringValue = "TODO"; //TODO Formatter.getSingleton().formatInt(formatString, horodate.getDay());
-                    break;
+                    //SimpleDateFormat fDate = new SimpleDateFormat(formatString);
+                    //stringValue = fDate.format(new Date(DateTimeUtils.getCurrentDate(currentStation, indexRecord)));
+                    //stringValue = "TODO"; //TODO station.getVariantDateTime(index);
+                    //break;
                 case TIME :
                     // $formatter.formatDateTime( "hh24mmss", $station.parametersAt(0).valuesAt($i).date )
                     try{
-                        stringValue = "TODO"; //TODO Formatter.getSingleton().formatDateTime(formatString, horodate.getDate());
+                        stringValue = Formatter.getSingleton().formatDateTime(formatString, currentDate);
                     }catch (Exception e){
                         e.printStackTrace();
                     }
+                    break;
+                case YEAR :
+                    // $formatter.formatInt( "%4d", $station.parametersAt(0).valuesAt($i).year)
+                    stringValue = Formatter.getSingleton().formatInt(formatString, DateTimeUtils.getYear(currentDate));
+                    break;
+                case MNTH :
+                    // $formatter.formatInt( "%02d", $station.parametersAt(0).valuesAt($i).month)
+                    stringValue = Formatter.getSingleton().formatInt(formatString, DateTimeUtils.getMonth(currentDate));
+                    break;
+                case DAYX :
+                    // $formatter.formatInt( "%02d", $station.parametersAt(0).valuesAt($i).day)
+                    stringValue = Formatter.getSingleton().formatInt(formatString, DateTimeUtils.getDay(currentDate));
                     break;
                 
                 // paramètres ajoutés mais mesurés !!
@@ -311,7 +313,7 @@ public class AddedParameter extends Parameter
             if (_default.equals(fragmnt)) {
                 paramValue = _default;
             }else {
-                paramValue = _idParam.getValue(null, fragmnt);
+                paramValue = _idParam.getValue(null, fragmnt, 0);
             }
         }
         return paramValue; 

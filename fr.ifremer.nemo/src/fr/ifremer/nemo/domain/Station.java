@@ -387,6 +387,13 @@ public class Station implements Comparable
     public void setSamplingRate(float samplingRate){
         _samplingRate = samplingRate;
     }
+    
+    public void calculSamplingRate(String inputLine) throws ParseException{        
+        long ecart = (DateTimeUtils.convertTimestamp(inputLine) - DateTimeUtils.getFullDate(this)) / 1000;
+        if (ecart > 0){
+            _samplingRate = ecart;
+        }
+    }
 
     public int compareTo(Object other){
         // FAE1105 : tri des stations selon (Nom Fichier -) Date - Référence

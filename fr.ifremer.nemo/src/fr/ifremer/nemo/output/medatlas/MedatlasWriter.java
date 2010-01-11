@@ -1,6 +1,9 @@
 package fr.ifremer.nemo.output.medatlas;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
@@ -11,6 +14,7 @@ import fr.ifremer.nemo.domain.StationDomain;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.util.Conversion;
+import fr.ifremer.nemo.util.Global.E_EndData;
 
 
 /**
@@ -29,8 +33,7 @@ public class MedatlasWriter extends NemoWriter{
 	 * @see fr.ifremer.nemo.output.NemoWriter#writeFile()
 	 */
 	@Override
-	public final void writeFile(String inputFilePath,
-                                int readerSize) throws GenerationException {
+	public final void writeFile(String inputFilePath) throws GenerationException {
         try{
             String outputFileName = iDomain.getMedia().getOutputFileName();
             outputFileWriter = new PrintWriter(new BufferedWriter(new FileWriter(outputFileName)));
@@ -45,16 +48,21 @@ public class MedatlasWriter extends NemoWriter{
             outputFileWriter.println(cruiseHeader);
             
             station.updateRef();
+            
+            
             for (Station currentStation : station.getStations(inputFilePath)){
+                
+                File inputFile= new File(inputFilePath + File.separator + currentStation.getFileName());
+                bufferedReader = new BufferedReader(new FileReader(inputFile));
+                //readerSize = Long.valueOf(inputFile.length()).intValue();
+                
+                int indexRecord = 0;
     
-                bufferedReader.mark(readerSize + 1);
+                //bufferedReader.mark(readerSize + 1);
                 boolean stationWrited = false;
         		
         		// scan the InputFile line by line
         		while ((readedLine = bufferedReader.readLine()) != null) {
-                    if (numLine == 8653){
-                        System.out.println("line " + numLine + " : " + readedLine); //$NON-NLS-1$ //$NON-NLS-2$
-                    }
         			numLine++;
                     
                     if (numLine == 1){
@@ -79,9 +87,10 @@ public class MedatlasWriter extends NemoWriter{
                             
                             if (station.isSomeInData()){
                                 // la première ligne des données est déjà "consommée" dans stationHeaderBuffer 
-                                outputFileWriter.println(data.getDataLine(c, currentStation, inputStationHeader[inputStationHeader.length -1]));
+                                outputFileWriter.println(data.getDataLine(c, currentStation, inputStationHeader[inputStationHeader.length -1], indexRecord));
+                                indexRecord++;
                             }
-                            outputFileWriter.println(data.getDataLine(c, currentStation, readedLine));
+                            outputFileWriter.println(data.getDataLine(c, currentStation, readedLine, indexRecord));
                             stationWrited = true;
                         }
                         else if (stationWrited || inputStationHeader == null){
@@ -90,11 +99,19 @@ public class MedatlasWriter extends NemoWriter{
                     }
                     else if (stationWrited){
                         // écriture de la ligne de données
-                        outputFileWriter.println(data.getDataLine(c, currentStation, readedLine));
+                        indexRecord++;
+                        outputFileWriter.println(data.getDataLine(c, currentStation, readedLine, indexRecord));
                     }
         		}
+                
+                if (iDomain.getMedia().getModel().getEndData() == E_EndData.EOF && stationWrited){
+                    // écriture de la dernière ligne de données
+                    outputFileWriter.println(data.getMedatlasLastDataLine());
+                    iDomain.getMedia().addStationInOutput(outputFileName, currentStation.getReference());
+                }
+                
                 numLine = 0;
-                bufferedReader.reset();
+                //bufferedReader.reset();
                 
             }
         } catch (Exception e){

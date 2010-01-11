@@ -1,5 +1,7 @@
 package fr.ifremer.nemo.input;
 
+import java.util.Date;
+
 import org.nfunk.jep.JEP;
 import org.xml.sax.Attributes;
 
@@ -266,7 +268,8 @@ public class ParameterModel extends AbstractModel
     }
     
     public void computeAddedParameterValue(Station currentStation,
-                                           String inputLine) throws Exception{
+                                           String inputLine,
+                                           long currentDate) throws Exception{
         ParameterValue pValue = new ParameterValue();
         AddedParameter p = (AddedParameter) _parameter;
         
@@ -276,7 +279,7 @@ public class ParameterModel extends AbstractModel
             stringValue = p.compute(_fragment.fullRetreive(inputLine));
         }
         else{
-            stringValue = p.getIdParam().getValue(currentStation, inputLine);
+            stringValue = p.getIdParam().getValue(currentStation, inputLine, currentDate);
         }
         
         if (stringValue != null){

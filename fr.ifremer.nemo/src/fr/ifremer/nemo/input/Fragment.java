@@ -257,6 +257,17 @@ public class Fragment extends AbstractModel
         
         return stringWriter.toString();
     }
+    
+    public String fullRetreiveInLine(String a_Line){
+        String fullFrag = Global.EMPTY_STRING;
+        if (_lastCharOffset == -1) {
+            fullFrag = a_Line.substring(_firstCharOffset - 1);
+        } else {
+            fullFrag = a_Line.substring(_firstCharOffset - 1, _lastCharOffset);
+        }
+        return fullFrag;
+        
+    }
 
 
     /**

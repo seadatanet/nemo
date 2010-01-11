@@ -95,6 +95,10 @@ public class CruiseDomain
                 odvCruiseHeader.append(Global.RN);
             }
         }
+        
+        odvCruiseHeader.append(start);
+        odvCruiseHeader.append(Global.RN);
+        
         odvCruiseHeader.append(_station.getData().getSDNparameters(Conversion.ODV));
         odvCruiseHeader.append(start);
         odvCruiseHeader.append(Global.RN);

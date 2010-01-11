@@ -15,6 +15,7 @@ import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.StationDomain;
 import fr.ifremer.nemo.input.MediaModel;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Global.E_EndData;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
 
@@ -70,7 +71,7 @@ public abstract class NemoWriter{
                     readerSize = Long.valueOf(inputFile.length()).intValue();
                     bufferedReader.mark(readerSize + 1);
 
-                    if (!stationDomain.stationsRegistered(inputFilePath, inputFileName)){
+                    if (!stationDomain.stationIsRegistered(inputFilePath, inputFileName)){
                         // première lecture pour obtenir le nombre de valeurs par stations
                         Station st = null;
                         int nbrecords = 0;
@@ -102,6 +103,11 @@ public abstract class NemoWriter{
                                         // la première ligne des données est déjà "consommée" dans stationHeaderBuffer 
                                         st.updateGlobalParamQc(inputStationHeader[inputStationHeader.length -1]);
                                         nbrecords++;
+                                        
+                                        // sampling rate peut etre à calculer
+                                        if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData()){
+                                            st.calculSamplingRate(readedLine);
+                                        }
                                     }
                                     st.updateGlobalParamQc(readedLine);
                                     nbrecords++;
@@ -131,9 +137,9 @@ public abstract class NemoWriter{
                     bufferedReader.reset();
                     
                 }
-                writeFile(inputFilePath, readerSize);
-                
                 bufferedReader.close();
+                
+                writeFile(inputFilePath);   
             }
 
 		} catch (Exception e) {
@@ -160,8 +166,7 @@ public abstract class NemoWriter{
 	 * @throws IOException
 	 * @throws ParseException
 	 */
-	public abstract void writeFile(String inputFilePath,
-                                   int readerSize) 
+	public abstract void writeFile(String inputFilePath) 
            throws Exception;
     
     /**
