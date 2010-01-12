@@ -40,6 +40,8 @@ public class OdvWriter extends NemoWriter{
             CruiseDomain cruise = iDomain.getCruise();
             StationDomain station = cruise.getStation();
             
+            station.updateRef();
+            
             String outputFileName = iDomain.getMedia().getOutputFileName();
             E_ProcessType processType = iDomain.getMedia().getModel().getProcessType();
             if (processType == E_ProcessType.COLLECTION_DIR)

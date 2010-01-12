@@ -27,7 +27,6 @@ import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Global.E_EndData;
 import fr.ifremer.nemo.util.Global.E_InputType;
-import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.format.DateTimeFormat;
 import fr.ifremer.nemo.ws.WSDataType;
 import fr.ifremer.nemo.ws.WSParameter;
@@ -308,11 +307,11 @@ public class DataModel
 
     private static void initDiseabledField(StationModel sModel, String property)
     {
-        PropertyModel propertyModel =
-            sModel.propertiesAt(property);
-        propertyModel.setFlag(ViewMain.editStationForm.qcFlags
-            .getFlagFragment(property)); // Flag qualite
+        PropertyModel propertyModel = new PropertyModel();
+        propertyModel.setProperty(property);
+        propertyModel.setFlag(ViewMain.editStationForm.qcFlags.getFlagFragment(property)); // Flag qualite
         propertyModel.setToCompute(true);
+        sModel.addProperty(propertyModel);
     }
 
     public static void initStation()

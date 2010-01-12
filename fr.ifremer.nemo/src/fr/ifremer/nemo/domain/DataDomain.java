@@ -86,7 +86,6 @@ public class DataDomain
     
     public void updateData(DataModel model){
         _model = model;
-        // TODO recherche presIndex
         setAddedParameterModel();
     }
     

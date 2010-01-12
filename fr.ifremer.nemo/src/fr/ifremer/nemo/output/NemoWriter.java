@@ -17,6 +17,7 @@ import fr.ifremer.nemo.input.MediaModel;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Global.E_EndData;
+import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
 
 
@@ -117,6 +118,9 @@ public abstract class NemoWriter{
                                 }
                             }
                             else if (st != null){
+                                if (media.getModel().getInputType() == E_InputType.TRAJECTORY){
+                                    st.completeMedatlasTrajectory(readedLine);
+                                }
                                 st.updateGlobalParamQc(readedLine);
                                 nbrecords++;
                             }
@@ -248,8 +252,11 @@ public abstract class NemoWriter{
         String pattern = media.getStationHeaderPattern();
         if (!pattern.equals(Global.EMPTY_STRING)){
             while (readedLine != null && !readedLine.startsWith(pattern)){
+                // récupération de toutes les lignes avant "pattern"
                 stationHeader.append(consumeLine());
             }
+            // récupération de la ligne commencant par "pattern"
+            stationHeader.append(consumeLine());
         }
         for (int i = 0; i < media.getStationHeader(); i++){
             if (readedLine != null)

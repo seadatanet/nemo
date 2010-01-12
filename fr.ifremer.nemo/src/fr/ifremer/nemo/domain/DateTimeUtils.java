@@ -183,4 +183,14 @@ public class DateTimeUtils
         return cal.get(Calendar.YEAR);        
     }
 
+    public static String getVariantDateTime(long currentDate) throws ParseException{
+        StringBuffer value = new StringBuffer();
+        String date = Formatter.getSingleton().formatDateTime("YYYY-MM-DD", currentDate); //$NON-NLS-1$
+        value.append(date);
+        value.append("T"); //$NON-NLS-1$
+        String time = Formatter.getSingleton().formatDateTime("hh24:mm:ss.sss", currentDate); //$NON-NLS-1$
+        value.append(time);
+        return value.toString();
+    }
+
 }

@@ -13,7 +13,9 @@ import java.text.ParseException;
 import java.util.HashMap;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.domain.AddedParameter.IdParameter;
 import fr.ifremer.nemo.input.ParameterModel;
+import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Global.E_InputType;
@@ -32,12 +34,18 @@ public class Station implements Comparable
     protected double _latitude;
     protected double _longitude;
     protected long _date;
-    // protected Float _correctedTime;
-    protected float _offsetTU;
     protected long _time;
+    protected float _offsetTU;
 
+    // pour Timeseries et Trajectory
     protected float _sensorDepth;
     protected float _samplingRate;
+    
+    // pour Trajectory
+    protected double _endlatitude;
+    protected double _endlongitude;
+    protected float _enddepth;
+    
 
     protected HashMap<String, String> _metaFlags;
     protected HashMap<String, String> _globalParamQc;
@@ -51,6 +59,10 @@ public class Station implements Comparable
         _reference = null;
         _nbRecords = 0;
         _metaFlags = new HashMap<String, String>();
+        
+        _endlatitude = Double.NaN;
+        _endlongitude = Double.NaN;
+        _enddepth = Float.NaN;
 
         StationDomain stationDomain = Nemo.getInstance().getDomain().getCruise().getStation();
 
@@ -76,8 +88,8 @@ public class Station implements Comparable
             addMetaFlag(Intern.S_ELON, stationDomain.getMetaFlag(Intern.S_ELON, inputStationHeader));
             addMetaFlag(Intern.S_EDEPTH, stationDomain.getMetaFlag(Intern.S_EDEPTH, inputStationHeader));
             addMetaFlag(Intern.S_SENSORDEPTH, stationDomain.getMetaFlag(Intern.S_SENSORDEPTH, inputStationHeader));
-//            addMetaFlag(Intern.DISTANCETOBOTTOM, stationDomain.getMetaFlag(Intern.DISTANCETOBOTTOM, inputStationHeader));
-//            addMetaFlag(Intern.DURATION, stationDomain.getMetaFlag(Intern.DURATION, inputStationHeader));
+            addMetaFlag(Intern.DISTANCETOBOTTOM, calculateMetaFlag(Intern.S_DEPTH, Intern.S_SENSORDEPTH));
+            addMetaFlag(Intern.DURATION, calculateMetaFlag(Intern.DATETIME, Intern.ENDDATETIME));
         }
 
         _globalParamQc = new HashMap<String, String>();
@@ -157,6 +169,26 @@ public class Station implements Comparable
             globalProfileQC = Global.DEFAULT_FLAG;
         
         return globalProfileQC;
+    }
+    
+    public void completeMedatlasTrajectory(String inputLine) throws NumberFormatException, StringIndexOutOfBoundsException, ParseException{
+        // recupérer le AddedParameter et compute pour avoir sa valeur
+        StationDomain stationDomain= Nemo.getInstance().getDomain().getCruise().getStation();
+        DataDomain dataDomain = stationDomain.getData();
+        
+        // ENDLAT => LATX
+        ParameterModel paramModel = dataDomain.getAddedParameterModel(IdParameter.LATX);
+        _endlatitude = Double.parseDouble(((AddedParameter)paramModel.getParameter()).compute(paramModel.getFragment().fullRetreive(inputLine)));
+        
+        // ENDLON => LONX
+        paramModel = dataDomain.getAddedParameterModel(IdParameter.LONX);
+        _endlongitude = Double.parseDouble(((AddedParameter)paramModel.getParameter()).compute(paramModel.getFragment().fullRetreive(inputLine)));
+        
+        // ENDDEPTH => BATH si inData
+        if (stationDomain.getModel().getProperty(Intern.S_DEPTH).isInData()){
+            paramModel = dataDomain.getAddedParameterModel(IdParameter.BATH);
+            _enddepth = Float.valueOf(((AddedParameter)paramModel.getParameter()).compute(paramModel.getFragment().fullRetreive(inputLine))).floatValue();
+        }
     }
 
     /**
@@ -262,6 +294,32 @@ public class Station implements Comparable
      */
     public void setLongitude(double longitude){
         _longitude = longitude;
+    }
+    
+    private String calculateMetaFlag(String initial1, String initial2){
+
+        String flag1 = getMetaFlag(initial1);
+        String flag2 = getMetaFlag(initial2);
+        String value;
+
+        if (flag1.equals(Global.ZERO))
+        {
+            value = flag1;
+        }
+        else if (flag2.equals(Global.ZERO))
+        {
+            value = flag2;
+        }
+        else if (flag1.compareTo(flag2) > 0)
+        {
+            value = flag2;
+        }
+        else
+        {
+            value = flag1;
+        }
+        
+        return value;
     }
 
     public String getMetaFlag(String key){
@@ -423,6 +481,36 @@ public class Station implements Comparable
     public void setFileName(String fileName)
     {
         _fileName = fileName;
+    }
+
+    /**
+     * Getter pour _enddepth.
+     * @return float
+     * @see Station.java#_enddepth
+     */
+    public float getEnddepth()
+    {
+        return _enddepth;
+    }
+
+    /**
+     * Getter pour _endlatitude.
+     * @return double
+     * @see Station.java#_endlatitude
+     */
+    public double getEndlatitude()
+    {
+        return _endlatitude;
+    }
+
+    /**
+     * Getter pour _endlongitude.
+     * @return double
+     * @see Station.java#_endlongitude
+     */
+    public double getEndlongitude()
+    {
+        return _endlongitude;
     }
 
 }

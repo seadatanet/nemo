@@ -13,10 +13,8 @@ import java.io.LineNumberReader;
 import java.io.StringReader;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.TimeZone;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.input.DataType;
@@ -32,7 +30,6 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
-import fr.ifremer.nemo.util.format.DateTimeFormat;
 
 /**
  * Class StationDomain.java
@@ -145,11 +142,15 @@ public class StationDomain
     public String getReference(String inputFileName, String[] inputFile) throws ParseException{
         // STATION NUMBER
         String ref = Global.EMPTY_STRING;
-        if ((_model.getReferenceProperty().isUserProvided()) && 
-                (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() != E_InputType.TRAJECTORY)){
-            // incrementation du numéro
-            ref = Integer.toString(_ref);
-            _ref++;
+        if (_model.getReferenceProperty().isUserProvided()){
+            if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TRAJECTORY){
+                ref = _model.getReferenceProperty().getUserValue();
+            }
+            else{
+                // incrementation du numéro
+                ref = Integer.toString(_ref);
+                _ref++;   
+            }
         }
         else if (_model.getReferenceProperty().getFragment().getFirstLine() == 0){
             // dans le nom du fichier
@@ -429,49 +430,6 @@ public class StationDomain
         medStationHeader.append(start);
         medStationHeader.append(Elts.limit((String) _model.getProperty(Intern.S_SURFACE + "2").applyOn(inputFile), Elts.station_line));
 
-        
-        /*
-#foreach( $station in $survey.stations )
-*$formatter.padString( $survey.reference, 13)$formatter.padZero($station.reference.trim(), 5) Data Type=$formatter.padString($station.dataType.code, 3)
-*DATE=$formatter.formatDateTime("ddMMyyyy", $station.fullDate) TIME=$formatter.formatDateTime("hh24mm", $station.correctedTime, "9999") LAT=$formatter.formatLatitude("NDD MM.mm", $station.latitude) LON=$formatter.formatLongitude("NDDD MM.mm", $station.longitude) DEPTH=#if($station.bottomDepth == 0) #else$formatter.formatInt("%-5d", $station.bottomDepth)#end  QC=$station.getMetaFlag("dateTime")$station.getMetaFlag("latitude")$station.getMetaFlag("longitude")$station.getMetaFlag("bottomDepth")
-*NB PARAMETERS=$formatter.formatInt("%02d", $station.parametersNumber) RECORD LINES=$formatter.formatInt("%05d", $station.parametersAt(0).getModel().valuesSize())
-## -- PARAMETRES
-## -- -- paramètres ajoutés
-#foreach( $medparamModel in $station.medparameters )
-#set ($medparam = $medparamModel.getModel())
-*$formatter.padString($medparam.code, 4) $formatter.padString($medparam.fullName, 29) ($formatter.padString($medparam.unit, 28)) def.=$medparam.default
-#end
-## -- -- paramètres mesurés
-#foreach( $paramModel in $station.parameters )
-#set ($param = $paramModel.getModel())
-*$formatter.padString($param.code, 4) $formatter.padString($param.fullName, 29) ($formatter.padString($param.unit, 28)) def.=$param.default
-#end
-*GLOBAL PROFILE QUALITY FLAG=$station.getGlobalProfileQC() GLOBAL PARAMETERS QC FLAGS=$station.getGlobalParametersQC()
-*DC HISTORY=$formatter.limitString( $station.dcHistory1, 68)
-*$formatter.limitString( $station.dcHistory2, 80)
-*DM HISTORY=$formatter.limitString( $station.dmHistory1, 68)
-*$formatter.limitString( $station.dmHistory2, 80)
-*COMMENT
-#foreach ($line in $station.commentLines)
-*$formatter.limitString( $line, 80)
-#end
-* 
-#if ($survey.isTimeSeriesSurvey())
-*ADDITIONAL INFORMATION - TIME SERIES
-*EDATE=$formatter.formatDateTime("ddMMyyyy", $station.timeSeriesInformation.endDate) ETIME=$formatter.formatDateTime("hh24mm", $station.timeSeriesInformation.endTime) ELAT=$formatter.formatLatitude("NDD MM.mm", $station.timeSeriesInformation.endLatitude) ELON=$formatter.formatLongitude("NDDD MM.mm", $station.timeSeriesInformation.endLongitude) EDEPTH=#if($station.timeSeriesInformation.endDepth==0) #else$formatter.formatInt("%-5d", $station.timeSeriesInformation.endDepth)#end  QC=$station.getMetaFlag("endDateTime")$station.getMetaFlag("endLatitude")$station.getMetaFlag("endLongitude")$station.getMetaFlag("endDepth")
-*SENSOR DEPTH=$formatter.formatInt("%-5d", $station.timeSeriesInformation.sensorDepth) (metre)            DISTANCE TO BOTTOM=$formatter.formatInt("%-5d", $station.timeSeriesInformation.distToBottom) (metre) QC=$station.getMetaFlag("sensorDepth")$station.getMetaFlag("distanceToBottom")
-*DURATION=$formatter.formatInt("%-5d", $station.timeSeriesInformation.duration) (day)                                                   QC=$station.getMetaFlag("duration")
-*SAMPLING RATE=$formatter.formatInt("%-5d", $station.timeSeriesInformation.samplingRate) (second)          MAGNETIC DECLINATION=$formatter.formatFloat("%-4.0f", $station.timeSeriesInformation.getMagneticDeclination()) (degree)
-#end
-## -- SDN_parameters_mapping
-$nemoLists.getSdnParameters()
-*EDMO_CODE=$configuration.getIdEdmoRespCdi()
-*LOCAL_CDI_ID=$station.getLocalCdiId($survey, "MEDATLAS")
-*SURFACE SAMPLES=$formatter.limitString( $station.surfaceSamples1, 63)
-*$formatter.limitString( $station.surfaceSamples2, 80)
-##
-         */
-        // TODO
         return medStationHeader;
     }
 
@@ -517,7 +475,6 @@ $nemoLists.getSdnParameters()
         StringBuffer timeseriesHeader = new StringBuffer(); 
         String start = Conversion.MEDATLAS.getDebut();
         
-        float endDepth = Float.parseFloat((String)_model.getProperty(Intern.S_EDEPTH).applyOn(inputFile));
         float sensorDepth = currentStation.getSensorDepth();
         long endTime = DateTimeUtils.computeEndTime(currentStation);
         
@@ -530,8 +487,20 @@ $nemoLists.getSdnParameters()
         timeseriesHeader.append(start);
         timeseriesHeader.append(Elts.getElt(Elts.station_endDate, endTime));
         timeseriesHeader.append(Elts.getElt(Elts.station_endTime, endTime));
-        timeseriesHeader.append(Elts.getElt(Elts.station_endLat, _model.getProperty(Intern.S_ELAT).applyOn(inputFile)));
-        timeseriesHeader.append(Elts.getElt(Elts.station_endLon, _model.getProperty(Intern.S_ELON).applyOn(inputFile)));
+        double endlat = currentStation.getEndlatitude();
+        if (Double.isNaN(endlat)){
+            endlat = (Double)_model.getProperty(Intern.S_ELAT).applyOn(inputFile);
+        }
+        timeseriesHeader.append(Elts.getElt(Elts.station_endLat, endlat));
+        double endlon = currentStation.getEndlongitude();
+        if (Double.isNaN(endlon)){
+            endlon = (Double)_model.getProperty(Intern.S_ELON).applyOn(inputFile);
+        }
+        timeseriesHeader.append(Elts.getElt(Elts.station_endLon, endlon));
+        float endDepth = currentStation.getEnddepth();
+        if (Float.isNaN(endDepth)){            
+            endDepth = Float.parseFloat((String)_model.getProperty(Intern.S_EDEPTH).applyOn(inputFile));
+        }
         timeseriesHeader.append(Elts.getElt(Elts.station_endDepth, endDepth));
         timeseriesHeader.append(Global.SPACE);
         timeseriesHeader.append(Elts.getKeyword(Elts.qc));

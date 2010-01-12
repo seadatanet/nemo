@@ -73,7 +73,7 @@ public class AddedParameter extends Parameter
                 case DAYX : return "%02d";
                 case TIME : return "hh24mmss";
                 case CJDY : return "#0.000000";
-                case DTUT : return "yyyy-MM-dd'T'hh24:mm:ss.SSS";
+                case DTUT : return "yyyy-MM-dd'T'HH:mm:ss.SSS";
                 case LATX : return "+DD.dddddd";
                 case LONX : return "+DDD.dddddd";
                 case BATH : return "%6.1f";
@@ -199,9 +199,9 @@ public class AddedParameter extends Parameter
                 case DTUT :
                     // time-ISO8601
                     //SimpleDateFormat fDate = new SimpleDateFormat(formatString);
-                    //stringValue = fDate.format(new Date(DateTimeUtils.getCurrentDate(currentStation, indexRecord)));
+                    stringValue = DateTimeUtils.getVariantDateTime(currentDate);
                     //stringValue = "TODO"; //TODO station.getVariantDateTime(index);
-                    //break;
+                    break;
                 case TIME :
                     // $formatter.formatDateTime( "hh24mmss", $station.parametersAt(0).valuesAt($i).date )
                     try{

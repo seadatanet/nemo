@@ -1133,7 +1133,6 @@ public class StationSection extends NemoSection
         }
         else
         {
-            E_InputType inputType = Nemo.getInstance().getDomain().getMedia().getModel().getInputType();
             // généralisation des autres sections
             for (int i = 0; i < nbLignes; i++){
 
@@ -1203,6 +1202,8 @@ public class StationSection extends NemoSection
                                     format);
                         else
                             value = station.get(tagXml, format);*/
+                        String value = propertyModel.getUserValue();
+                        if (value.equals("NaN")) value = Global.EMPTY_STRING; //$NON-NLS-1$
                         setManualValueInput(propertyModel.getUserValue(), i);
                     }
                     else

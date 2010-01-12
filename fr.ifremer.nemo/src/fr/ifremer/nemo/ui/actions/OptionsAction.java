@@ -1352,6 +1352,7 @@ public class OptionsAction extends Action implements ISelectionListener,
                         saveConfig(writeIni);
 
                         // reinitialisation de la conversion
+                        Nemo.getInstance().getDomain().getCruise().getStation().getData().setAddedParameterModel();
                         //if (DataModel.inputModel != null)
                         //    DataModel.inputModel.setConverted(false);
 
