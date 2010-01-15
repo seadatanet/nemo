@@ -19,6 +19,7 @@ import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.edit.station.AutoLine;
 import fr.ifremer.nemo.ui.edit.station.StationSection;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.format.DateTimeFormat;
 import fr.ifremer.nemo.util.format.ExternalizableFormat;
@@ -295,37 +296,88 @@ public class PropertyModel extends AbstractModel
      */
     public Object applyOn(String[] a_Header) throws ParseException {
         
-        Object result = null;
+        Object result = null;        
+        String sResult = Global.EMPTY_STRING;
         
         if (isUserProvided()){
-            result = _userValue;
+            sResult = _userValue;
+            if (_format != null){
+                result = _format.parseObject(sResult);
+            }
         }
         else{
-            String r = _fragment.retreive(a_Header);
-            if (!r.trim().equals(Global.EMPTY_STRING) && _format != null){
+            sResult = _fragment.retreive(a_Header);
+            if (!sResult.trim().equals(Global.EMPTY_STRING) && _format != null){
                 try{
                     if (!(_format instanceof LatitudeFormat)
                             && !(_format instanceof LongitudeFormat)
                             && !(_format instanceof DateTimeFormat)){
                         if (_fragment.isVariable())
                             // stop string at next space
-                            r = _fragment.retreiveVariable(a_Header);
+                            sResult = _fragment.retreiveVariable(a_Header);
                     }
                     if (_format instanceof DateTimeFormat)
-                        r = r.replace(' ', '0');
-                    result = _format.parseObject(r);
+                        sResult = sResult.replace(' ', '0');
+                    result = _format.parseObject(sResult);
                 }
                 catch (ParseException e){
                     if (_format instanceof LatitudeFormat)
-                        throw new ParseException(Messages.PropertyModel_1 + r, 0);
+                        throw new ParseException(Messages.PropertyModel_1 + sResult, 0);
                     else if (_format instanceof LongitudeFormat)
-                        throw new ParseException(Messages.PropertyModel_2 + r, 0);
+                        throw new ParseException(Messages.PropertyModel_2 + sResult, 0);
                     else if (_format instanceof DateTimeFormat)
-                        throw new ParseException(Messages.PropertyModel_3 + r, 0);
+                        throw new ParseException(Messages.PropertyModel_3 + sResult, 0);
                 }
             }
             else{
-                result = r;
+                result = sResult;
+            }            
+        }
+        return result;
+    }
+
+    /**
+     * @param a_Destination
+     * @param a_Header
+     * @exception java.text.ParseException
+     */
+    public Object applyOnLine(String a_Line) throws ParseException {
+        
+        Object result = null;
+        String sResult = Global.EMPTY_STRING;
+
+        if (isUserProvided()){
+            sResult = _userValue;
+            if (_format != null){
+                result = _format.parseObject(sResult);
+            }
+        }
+        else{
+            sResult = _fragment.retreiveInLine(a_Line);
+            if (!sResult.trim().equals(Global.EMPTY_STRING) && _format != null){
+                try{
+                    if (!(_format instanceof LatitudeFormat)
+                            && !(_format instanceof LongitudeFormat)
+                            && !(_format instanceof DateTimeFormat)){
+                        if (_fragment.isVariable())
+                            // stop string at next space
+                            sResult = _fragment.retreiveVariableInLine(a_Line);
+                    }
+                    if (_format instanceof DateTimeFormat)
+                        sResult = sResult.replace(' ', '0');
+                    result = _format.parseObject(sResult);
+                }
+                catch (ParseException e){
+                    if (_format instanceof LatitudeFormat)
+                        throw new ParseException(Messages.PropertyModel_1 + sResult, 0);
+                    else if (_format instanceof LongitudeFormat)
+                        throw new ParseException(Messages.PropertyModel_2 + sResult, 0);
+                    else if (_format instanceof DateTimeFormat)
+                        throw new ParseException(Messages.PropertyModel_3 + sResult, 0);
+                }
+            }
+            else{
+                result = sResult;
             }            
         }
         return result;
@@ -491,6 +543,16 @@ public class PropertyModel extends AbstractModel
      */
     public void setProperty(String x){
         _property = x;
+        if (x.equals(Intern.S_OFFSETTU) 
+                || x.equals(Intern.S_MAGNETIC)){
+            _format = new FloatFormat("%4.1f"); //$NON-NLS-1$
+        }
+        else if(x.equals(Intern.S_DEPTH)
+                || x.equals(Intern.S_EDEPTH)
+                || x.equals(Intern.S_SENSORDEPTH)
+                || x.equals(Intern.S_SAMPLINGRATE)){
+            _format = new FloatFormat("%4.0f"); //$NON-NLS-1$
+        }
     }
 
     /**

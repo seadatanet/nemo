@@ -80,7 +80,7 @@ public class MedatlasWriter extends NemoWriter{
                         String[] inputStationHeader = consumeStationHeader();
                         if (inputStationHeader != null &&
                                 currentStation.getReference().equals(station.getReference(currentStation.getFileName(), inputStationHeader))){
-                            outputFileWriter.println(station.getHeader(cruise, c, currentStation, inputStationHeader));
+                            outputFileWriter.println(station.getHeader(c, currentStation, inputStationHeader));
             
                             // écriture de l'entête des données (titres des colonnes)
                             outputFileWriter.println(data.getDataHeader(c));

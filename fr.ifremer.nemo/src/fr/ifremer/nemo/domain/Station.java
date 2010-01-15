@@ -70,7 +70,7 @@ public class Station implements Comparable
         _longitude = ((Double) stationDomain.getModel().getProperty(Intern.S_LON).applyOn(inputStationHeader)).doubleValue();
         _date = ((Long) stationDomain.getModel().getProperty(Intern.S_DATE).applyOn(inputStationHeader)).longValue();
         _time = ((Long) stationDomain.getModel().getProperty(Intern.S_TIME).applyOn(inputStationHeader)).longValue();
-        _offsetTU = Float.parseFloat((String) stationDomain.getModel().getProperty(Intern.S_OFFSETTU).applyOn(inputStationHeader));
+        _offsetTU = ((Float) stationDomain.getModel().getProperty(Intern.S_OFFSETTU).applyOn(inputStationHeader)).floatValue();
 
         addMetaFlag(Intern.DATETIME, stationDomain.getMetaFlag(Intern.DATETIME, inputStationHeader));
         addMetaFlag(Intern.S_LAT, stationDomain.getMetaFlag(Intern.S_LAT, inputStationHeader));
@@ -79,8 +79,8 @@ public class Station implements Comparable
 
         if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() != E_InputType.PROFILE)
         {
-            _sensorDepth = Float.parseFloat((String) stationDomain.getModel().getProperty(Intern.S_SENSORDEPTH).applyOn(inputStationHeader));
-            _samplingRate = Float.parseFloat((String) stationDomain.getModel().getProperty(Intern.S_SAMPLINGRATE).applyOn(inputStationHeader));
+            _sensorDepth = ((Float) stationDomain.getModel().getProperty(Intern.S_SENSORDEPTH).applyOn(inputStationHeader)).floatValue();
+            _samplingRate = ((Float) stationDomain.getModel().getProperty(Intern.S_SAMPLINGRATE).applyOn(inputStationHeader)).floatValue();
 
             addMetaFlag(Intern.S_SENSORDEPTH, stationDomain.getMetaFlag(Intern.S_SENSORDEPTH, inputStationHeader));
             addMetaFlag(Intern.ENDDATETIME, stationDomain.getMetaFlag(Intern.ENDDATETIME, inputStationHeader));
@@ -172,22 +172,17 @@ public class Station implements Comparable
     }
     
     public void completeMedatlasTrajectory(String inputLine) throws NumberFormatException, StringIndexOutOfBoundsException, ParseException{
-        // recupérer le AddedParameter et compute pour avoir sa valeur
         StationDomain stationDomain= Nemo.getInstance().getDomain().getCruise().getStation();
-        DataDomain dataDomain = stationDomain.getData();
         
         // ENDLAT => LATX
-        ParameterModel paramModel = dataDomain.getAddedParameterModel(IdParameter.LATX);
-        _endlatitude = Double.parseDouble(((AddedParameter)paramModel.getParameter()).compute(paramModel.getFragment().fullRetreive(inputLine)));
+        _endlatitude = (Double)stationDomain.getModel().getProperty(Intern.S_LAT).applyOnLine(inputLine);
         
         // ENDLON => LONX
-        paramModel = dataDomain.getAddedParameterModel(IdParameter.LONX);
-        _endlongitude = Double.parseDouble(((AddedParameter)paramModel.getParameter()).compute(paramModel.getFragment().fullRetreive(inputLine)));
+        _endlongitude = (Double)stationDomain.getModel().getProperty(Intern.S_LON).applyOnLine(inputLine);
         
         // ENDDEPTH => BATH si inData
         if (stationDomain.getModel().getProperty(Intern.S_DEPTH).isInData()){
-            paramModel = dataDomain.getAddedParameterModel(IdParameter.BATH);
-            _enddepth = Float.valueOf(((AddedParameter)paramModel.getParameter()).compute(paramModel.getFragment().fullRetreive(inputLine))).floatValue();
+            _enddepth = (Float)stationDomain.getModel().getProperty(Intern.S_DEPTH).applyOnLine(inputLine);
         }
     }
 

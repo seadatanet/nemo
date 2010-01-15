@@ -139,6 +139,56 @@ public class StationDomain
         return odvStationHeader;
     }
     
+    public StringBuffer getOdvTrajectoryHeader(Station currentStation, String inputLine, int indexRecord) throws ParseException{
+        StringBuffer odvStationHeader = new StringBuffer(); 
+        String stationRef = currentStation.getReference();
+        // Cruise
+        String cruiseName = Nemo.getInstance().getDomain().getCruise().getModel().getName();
+        odvStationHeader.append(form.limitString(cruiseName, 20));
+        odvStationHeader.append(Global.TAB);
+        
+        //Station
+        odvStationHeader.append(form.limitString(getRef(), 20));
+        odvStationHeader.append(Global.TAB);
+        
+        //Type
+        odvStationHeader.append(getTypeBC(stationRef));
+        odvStationHeader.append(Global.TAB);
+        
+        //yyyy-mm-ddThh:mm:ss.sss
+        long currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord);
+        odvStationHeader.append(DateTimeUtils.getVariantDateTime(currentDate));
+        odvStationHeader.append(Global.TAB);
+        
+        //Longitude [degrees_east]
+        odvStationHeader.append(form.formatLongitude("+DDD.dddddd", (Double)_model.getProperty(Intern.S_LON).applyOnLine(inputLine)));
+        odvStationHeader.append(Global.TAB);
+        
+        //Latitude [degrees_north]
+        odvStationHeader.append(form.formatLatitude("+DD.dddddd ", (Double)_model.getProperty(Intern.S_LAT).applyOnLine(inputLine)));
+        odvStationHeader.append(Global.TAB);
+        
+        //LOCAL_CDI_ID
+        odvStationHeader.append(getLocalCdiId(Nemo.getInstance().getDomain().getCruise(), Conversion.ODV, stationRef));
+        odvStationHeader.append(Global.TAB);
+        
+        //EDMO_CODE
+        odvStationHeader.append(Nemo.getInstance().getConfig().getIdEdmoRespCdi());
+        odvStationHeader.append(Global.TAB);
+        
+        //Bot. Depth [m]
+        Float botDepth = (Float)_model.getProperty(Intern.S_DEPTH).applyOnLine(inputLine);
+        if (!botDepth.isNaN()){
+            odvStationHeader.append(botDepth);
+        }
+        else{
+            odvStationHeader.append(Global.ZERO);
+        }
+        odvStationHeader.append(Global.TAB);
+
+        return odvStationHeader;
+    }
+    
     public String getReference(String inputFileName, String[] inputFile) throws ParseException{
         // STATION NUMBER
         String ref = Global.EMPTY_STRING;
@@ -147,9 +197,7 @@ public class StationDomain
                 ref = _model.getReferenceProperty().getUserValue();
             }
             else{
-                // incrementation du numéro
-                ref = Integer.toString(_ref);
-                _ref++;   
+                getRef(); 
             }
         }
         else if (_model.getReferenceProperty().getFragment().getFirstLine() == 0){
@@ -163,21 +211,28 @@ public class StationDomain
         return ref;
     }
     
-    public StringBuffer getHeader(CruiseDomain cDomain, Conversion c, Station currentStation, String[] inputFile) throws ParseException{
+    private String getRef(){
+        // incrementation du numéro
+        String ref = Integer.toString(_ref);
+        _ref++;
+        return ref;
+    }
+    
+    public StringBuffer getHeader(Conversion c, Station currentStation, String[] inputFile) throws ParseException{
         StringBuffer stationHeader = new StringBuffer();        
         switch (c){
             case ODV:
-                stationHeader = getOdvHeader(cDomain, currentStation, inputFile);
+                stationHeader = getOdvHeader(currentStation, inputFile);
                 break;
             case MEDATLAS:
-                stationHeader = getMedatlasHeader(cDomain, currentStation, inputFile);
+                stationHeader = getMedatlasHeader(currentStation, inputFile);
                 break;
         }
         return stationHeader;
     }
     
     @SuppressWarnings("nls")
-    private StringBuffer getOdvHeader(CruiseDomain cDomain, Station currentStation, String[] inputFile) throws ParseException{
+    private StringBuffer getOdvHeader(Station currentStation, String[] inputFile) throws ParseException{
         StringBuffer odvStationHeader = new StringBuffer(); 
         String stationRef = currentStation.getReference();
         // Cruise
@@ -186,7 +241,13 @@ public class StationDomain
         odvStationHeader.append(Global.TAB);
         
         //Station
-        odvStationHeader.append(form.limitString(stationRef, 20));
+        if(Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TRAJECTORY){
+            _ref = 1;
+            odvStationHeader.append(form.limitString(getRef(), 20));
+        }
+        else{
+            odvStationHeader.append(form.limitString(stationRef, 20));
+        }
         odvStationHeader.append(Global.TAB);
         
         //Type
@@ -198,18 +259,15 @@ public class StationDomain
         odvStationHeader.append(Global.TAB);
         
         //Longitude [degrees_east]
-        //Double longitude = (Double) _model.getProperty(Intern.S_LON).applyOn(inputFile);
         odvStationHeader.append(form.formatLongitude("+DDD.dddddd", currentStation.getLongitude()));
         odvStationHeader.append(Global.TAB);
         
         //Latitude [degrees_north]
-        //Double latitude = (Double) _model.getProperty(Intern.S_LAT).applyOn(inputFile);
-        //_currentStationValues.put(Intern.S_LAT, latitude);
         odvStationHeader.append(form.formatLatitude("+DD.dddddd ", currentStation.getLatitude()));
         odvStationHeader.append(Global.TAB);
         
         //LOCAL_CDI_ID
-        odvStationHeader.append(getLocalCdiId(cDomain, Conversion.ODV, stationRef));
+        odvStationHeader.append(getLocalCdiId(Nemo.getInstance().getDomain().getCruise(), Conversion.ODV, stationRef));
         odvStationHeader.append(Global.TAB);
         
         //EDMO_CODE
@@ -217,7 +275,7 @@ public class StationDomain
         odvStationHeader.append(Global.TAB);
         
         //Bot. Depth [m]
-        Float botDepth = Float.valueOf((String)_model.getProperty(Intern.S_DEPTH).applyOn(inputFile));
+        Float botDepth = (Float)_model.getProperty(Intern.S_DEPTH).applyOn(inputFile);
         if (!botDepth.isNaN()){
             odvStationHeader.append(botDepth);
         }
@@ -225,25 +283,7 @@ public class StationDomain
             odvStationHeader.append(Global.ZERO);
         }
         odvStationHeader.append(Global.TAB);
-        
-        
-        /*
-        // TODO cas TRAJECTORY
-## ---- initialisation de des valeurs 
-##
-#set( $limit = $station.parametersAt(0).getModel().valuesSize() - 1 )
-#set ( $range = [0 .. $limit] )
-##
-#foreach( $i in  $range )
-## ---- determination de valeurs d'entête variables pour Trajectory
-#if ($stationModel.isTrajectory()) 
-#set ($stationRef = $i + 1)
-#set ($dateTime   = $station.getVariantDateTime($i))
-#set ($longitude  = $station.getVariant($i, "LONX"))
-#set ($latitude   = $station.getVariant($i, "LATX"))
-#if ($station.bottomDepth.toString() != "NaN")#set ($botDepth = $station.getVariant($i, "BATH"))#end
-#end
-         */
+  
         return odvStationHeader;
     }
 
@@ -328,7 +368,7 @@ public class StationDomain
     }
     
     @SuppressWarnings("nls")
-    private StringBuffer getMedatlasHeader(CruiseDomain cDomain, Station currentStation, String[] inputFile) throws ParseException{
+    private StringBuffer getMedatlasHeader(Station currentStation, String[] inputFile) throws ParseException{
         StringBuffer medStationHeader = new StringBuffer();
         String stationRef = currentStation.getReference();
         
@@ -350,7 +390,7 @@ public class StationDomain
         medStationHeader.append(Elts.getElt(Elts.station_time, DateTimeUtils.getCorrectedTime(currentStation.getTime(), currentStation.getOffsetTU())));
         medStationHeader.append(Elts.getElt(Elts.station_lat,  currentStation.getLatitude()));
         medStationHeader.append(Elts.getElt(Elts.station_lon, currentStation.getLongitude()));
-        medStationHeader.append(Elts.getElt(Elts.station_depth, Float.parseFloat((String) _model.getProperty(Intern.S_DEPTH).applyOn(inputFile))));
+        medStationHeader.append(Elts.getElt(Elts.station_depth, _model.getProperty(Intern.S_DEPTH).applyOn(inputFile)));
         medStationHeader.append(Global.SPACE);
         medStationHeader.append(Elts.getKeyword(Elts.qc));
         medStationHeader.append(currentStation.getMetaFlag(Intern.DATETIME));
@@ -376,11 +416,11 @@ public class StationDomain
         
         //*DC HISTORY=
         medStationHeader.append(start);
-        medStationHeader.append(Elts.getElt(Elts.station_dcHistory, _model.getProperty(Intern.S_DCHIST + "1").applyOn(inputFile))); 
+        //medStationHeader.append(Elts.getElt(Elts.station_dcHistory, _model.getProperty(Intern.S_DCHIST + "1").applyOn(inputFile))); 
         medStationHeader.append(Global.RN);
 
         medStationHeader.append(start);
-        medStationHeader.append(Elts.limit((String) _model.getProperty(Intern.S_DCHIST + "2").applyOn(inputFile), Elts.station_line));
+        //medStationHeader.append(Elts.limit((String) _model.getProperty(Intern.S_DCHIST + "2").applyOn(inputFile), Elts.station_line));
         medStationHeader.append(Global.RN);
 
         //*DM HISTORY=
@@ -419,7 +459,7 @@ public class StationDomain
 
         //*LOCAL_CDI_ID=FI35199810007_00001_D09
         medStationHeader.append(start);
-        medStationHeader.append(Elts.getElt(Elts.station_localCdiId, getLocalCdiId(cDomain, Conversion.MEDATLAS, stationRef)));
+        medStationHeader.append(Elts.getElt(Elts.station_localCdiId, getLocalCdiId(Nemo.getInstance().getDomain().getCruise(), Conversion.MEDATLAS, stationRef)));
         medStationHeader.append(Global.RN);
 
         //*SURFACE SAMPLES=
@@ -499,7 +539,7 @@ public class StationDomain
         timeseriesHeader.append(Elts.getElt(Elts.station_endLon, endlon));
         float endDepth = currentStation.getEnddepth();
         if (Float.isNaN(endDepth)){            
-            endDepth = Float.parseFloat((String)_model.getProperty(Intern.S_EDEPTH).applyOn(inputFile));
+            endDepth = (Float)_model.getProperty(Intern.S_EDEPTH).applyOn(inputFile);
         }
         timeseriesHeader.append(Elts.getElt(Elts.station_endDepth, endDepth));
         timeseriesHeader.append(Global.SPACE);

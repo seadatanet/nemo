@@ -210,6 +210,34 @@ public class Fragment extends AbstractModel
         }
         
         return stringWriter.toString();
+    }    
+
+    public String retreiveInLine(String a_Line) {
+        
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter writer = new PrintWriter(stringWriter, true);
+
+        //for (int i = _firstLine - 1; i < _lastLine; i++) {
+            //int start = 0;
+            int end = -1;
+            
+            //if (i == _firstLine - 1) {
+                int start = _firstCharOffset - 1;
+            //}
+            //if (i == _lastLine - 1) {
+                if (_lastCharOffset != -1 && !isVariable()) {
+                    end = _lastCharOffset - 1;
+                }
+            //}
+                            
+            if (end == -1) {
+                writer.println(a_Line.substring(start));
+            } else {
+                writer.println(a_Line.substring(start, end + 1));
+            }
+        //}
+        
+        return stringWriter.toString();
     }
 
     public String retreiveVariable(String[] a_Header) {
@@ -254,6 +282,47 @@ public class Fragment extends AbstractModel
                 writer.println(a_Header[i].substring(start, end + 1));
             }
         }
+        
+        return stringWriter.toString();
+    }
+
+    public String retreiveVariableInLine(String a_Line) {
+        
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter writer = new PrintWriter(stringWriter, true);
+
+        //for (int i = _firstLine - 1; i < _lastLine; i++) {
+          //  int start = 0;
+            int end = -1;
+            
+            //if (i == _firstLine - 1) {
+                int start = _firstCharOffset - 1;
+            //}
+            //if (i == _lastLine - 1) {
+
+                int index = _firstCharOffset;
+                String nextChar = Global.ZERO;
+                boolean continueBoucle = true;
+                while (continueBoucle && index < a_Line.length()){
+                    nextChar = a_Line.substring(index, index + 1);
+                    if (index < _lastCharOffset
+                        || nextChar.equals(".")  //$NON-NLS-1$
+                        || nextChar.equals(",")  //$NON-NLS-1$
+                        || Utils.isNumeric(nextChar)){
+                        index++;
+                    }else{
+                        continueBoucle = false;
+                    }
+                }
+                end = index -1;
+            //}
+                            
+            if (end == -1) {
+                writer.println(a_Line.substring(start));
+            } else {
+                writer.println(a_Line.substring(start, end + 1));
+            }
+        //}
         
         return stringWriter.toString();
     }

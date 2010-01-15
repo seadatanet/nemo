@@ -15,6 +15,7 @@ import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global.E_EndData;
+import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 
@@ -96,7 +97,15 @@ public class OdvWriter extends NemoWriter{
         DataDomain data = iDomain.getCruise().getStation().getData();
 
         StringBuffer dataLine = new StringBuffer();
-        dataLine.append(stationHeader);
+        if (indexRecord == 0){
+            dataLine.append(stationHeader);
+        }
+        else if(iDomain.getMedia().getModel().getInputType() == E_InputType.TRAJECTORY){
+            dataLine.append(iDomain.getCruise().getStation().getOdvTrajectoryHeader(currentStation, line, indexRecord));
+        }
+        else{
+            dataLine.append(iDomain.getCruise().getStation().getOdvEmptyStationHeader());
+        }
         dataLine.append(data.getDataLine(c, currentStation, line, indexRecord));
         
         outputFileWriter.println(dataLine);
@@ -128,7 +137,7 @@ public class OdvWriter extends NemoWriter{
                 if (inputStationHeader != null &&
                         currentStation.getReference().equals(station.getReference(currentStation.getFileName(), inputStationHeader))){
 
-                    stationHeader = station.getHeader(iDomain.getCruise(), c, currentStation, inputStationHeader);
+                    stationHeader = station.getHeader(c, currentStation, inputStationHeader);
                     
                     if (station.isSomeInData()){
                         // la première ligne des données est déjà "consommée" dans stationHeaderBuffer 
