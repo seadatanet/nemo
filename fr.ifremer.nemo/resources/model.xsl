@@ -187,16 +187,14 @@
                           <xsl:attribute name="isSingleLine"><xsl:value-of select="HeaderFragment/@isSingleLine"/></xsl:attribute>
                           <xsl:attribute name="isVariable"><xsl:value-of select="HeaderFragment/@isVariable"/></xsl:attribute>
                           <firstLine><xsl:value-of select="HeaderFragment/firstLine"/></firstLine>
-                          <xsl:if test="HeaderFragment/@isSingleLine = 'false'">
-                            <lastLine><xsl:value-of select="HeaderFragment/lastLine"/></lastLine>
-                          </xsl:if>
+                          <lastLine><xsl:value-of select="HeaderFragment/lastLine"/></lastLine>
                           <firstCharOffset><xsl:value-of select="HeaderFragment/firstCharOffset"/></firstCharOffset>
                           <lastCharOffset><xsl:value-of select="HeaderFragment/lastCharOffset"/></lastCharOffset>
                         </HeaderFragment>
                       </xsl:when>
                       <xsl:otherwise>
                         <userValue>
-                          <xsl:value-of select="dyn:evaluate(concat('../../Station/TimeSeriesInformation/',$propertyName))"/>
+                          <xsl:value-of select="dyn:evaluate(concat('../../../Station/TimeSeriesInformation/',$propertyName))"/>
                         </userValue>
                       </xsl:otherwise>
                     </xsl:choose>
@@ -205,6 +203,7 @@
                         <xsl:attribute name="isSingleLine"><xsl:value-of select="FlagFragment/@isSingleLine"/></xsl:attribute>
                         <xsl:attribute name="isVariable"><xsl:value-of select="FlagFragment/@isVariable"/></xsl:attribute>
                         <firstLine><xsl:value-of select="FlagFragment/line"/></firstLine>
+                        <lastLine><xsl:value-of select="FlagFragment/line"/></lastLine>
                         <firstCharOffset><xsl:value-of select="FlagFragment/firstCharOffset"/></firstCharOffset>
                         <lastCharOffset><xsl:value-of select="FlagFragment/lastCharOffset"/></lastCharOffset>
                       </Flag>
@@ -243,6 +242,12 @@
                       <xsl:attribute name="firstCharOffset"><xsl:value-of select="LineFragment/@firstCharOffset"/></xsl:attribute>
                       <xsl:attribute name="lastCharOffset"><xsl:value-of select="LineFragment/@lastCharOffset"/></xsl:attribute>
                     </LineFragment>
+                    <xsl:if test="Flag">
+	                    <Flag>
+	                      <xsl:attribute name="firstCharOffset"><xsl:value-of select="Flag/@firstCharOffset"/></xsl:attribute>
+	                      <xsl:attribute name="lastCharOffset"><xsl:value-of select="Flag/@lastCharOffset"/></xsl:attribute>
+	                    </Flag>
+                    </xsl:if>
                     <Parameter>
                       <xsl:attribute name="code"><xsl:value-of select="Parameter/@code"/></xsl:attribute>
                       <fullName><xsl:value-of select="Parameter/fullName"/></fullName>
