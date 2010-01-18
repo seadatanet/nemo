@@ -40,7 +40,7 @@ public class EditConversionForm extends EditForm
 {
     public Button buttonConversion;
 
-    public String nomFichierSortie, nomDossierSortie, nomHorsPrefix;
+    //public String nomFichierSortie, nomDossierSortie;
     public ProgressNotification notifier;
 
     //private String _dataSetRef;
@@ -89,8 +89,8 @@ public class EditConversionForm extends EditForm
     {
         super.createEditionForm(parent);
         
-        nomFichierSortie = Global.EMPTY_STRING;
-        nomDossierSortie = Global.EMPTY_STRING;
+        //nomFichierSortie = Global.EMPTY_STRING;
+        //nomDossierSortie = Global.EMPTY_STRING;
 
         formEdition.getBody().setLayout(new GridLayout());
         formEdition.setText(Messages.edit_convert_title);
@@ -113,6 +113,8 @@ public class EditConversionForm extends EditForm
 
                         // RaZ
                         Nemo.getInstance().getDomain().getCruise().setDataSetRef(Global.EMPTY_STRING);
+                        Nemo.getInstance().getDomain().getMedia().initOutput();
+                        Nemo.getInstance().getDomain().getConversion().setNomMappingHorsPrefix(Global.EMPTY_STRING);
                         Utils.messageErreur(Global.EMPTY_STRING);
                         // -- du numéro de station incrémenté
                         //DataModel.stationModel.resetRef();
@@ -268,7 +270,7 @@ public class EditConversionForm extends EditForm
     
     public void choixFichierSortie()
     {
-        nomFichierSortie = Global.EMPTY_STRING;
+        String nomFichierSortie = Global.EMPTY_STRING;
 
         FileDialog dialog = new FileDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), 
                                            SWT.SAVE | SWT.APPLICATION_MODAL);
@@ -321,7 +323,7 @@ public class EditConversionForm extends EditForm
         nomFichierSortie = dialog.open();
 
         if (nomFichierSortie != null){
-            nomDossierSortie = Utils.extraitCheminFichier(nomFichierSortie);
+            String nomDossierSortie = Utils.extraitCheminFichier(nomFichierSortie);
 
             // Teste si le repertoire de sortie est different du repertoire
             // d'entree
@@ -365,8 +367,8 @@ public class EditConversionForm extends EditForm
 
     public void choixDossierSortie()
     {
-        nomFichierSortie = Global.EMPTY_STRING;
-        nomDossierSortie = Global.EMPTY_STRING;
+        //String nomFichierSortie = Global.EMPTY_STRING;
+        String nomDossierSortie = Global.EMPTY_STRING;
         
         DirectoryDialog dialog = new DirectoryDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), 
                                                      SWT.SAVE | SWT.APPLICATION_MODAL);
@@ -593,27 +595,29 @@ public class EditConversionForm extends EditForm
     public void definePrefixDossier()
     {
         if (Nemo.getInstance().getConfig().isWriteMapping()) {
-            String cheminComplet;
-            Boolean modeDossier = false;
+            File output = new File(Nemo.getInstance().getDomain().getMedia().getOutputFileName());
+            String cheminComplet = output.getParentFile().getPath();
+            
+            //Boolean modeDossier = false;
 
-            if (nomFichierSortie.isEmpty()) {
-                cheminComplet = nomDossierSortie;
-                modeDossier = true;
-            }
-            else {
-                cheminComplet = nomFichierSortie;
-            }
+            //if (nomFichierSortie.isEmpty()) {
+            //    cheminComplet = nomDossierSortie;
+            //    modeDossier = true;
+            //}
+            //else {
+            //    cheminComplet = nomFichierSortie;
+            //}
 
             InputDialog inputPrefixDossier =
                 new InputDialog(PlatformUI.getWorkbench().getDisplay()
                     .getActiveShell(), Messages.InputPrefixDossier_idTitle,
-                    Messages.InputPrefixDossier_idMessage, nomDossierSortie,
+                    Messages.InputPrefixDossier_idMessage, cheminComplet,
                     null);
             inputPrefixDossier.open();
-
+            String nomHorsPrefix = Global.EMPTY_STRING;
             if (inputPrefixDossier.getReturnCode() == Window.OK) {
                 if (inputPrefixDossier.getValue().endsWith(File.separator)
-                        || modeDossier) {
+                        || inputPrefixDossier.getValue().equals(cheminComplet)) {
                     nomHorsPrefix =
                         cheminComplet.replace(inputPrefixDossier.getValue(),
                             Global.EMPTY_STRING);
@@ -630,6 +634,7 @@ public class EditConversionForm extends EditForm
             if (!cheminComplet.endsWith(nomHorsPrefix)) {
                 definePrefixDossier();
             }
+            Nemo.getInstance().getDomain().getConversion().setNomMappingHorsPrefix(nomHorsPrefix);
         }
     }
 

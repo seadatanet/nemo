@@ -65,14 +65,14 @@ public class SWTProcess implements IRunnableWithProgress
                 if (config.isWriteMapping()){  
                     monitor.setTaskName("enregistrement du mapping");
                     for (String outputPath : iDomain.getMedia().getOutputFiles().keySet()){
-                        for (Station st : sDomain.getStations(outputPath)){
-                            
+                        File outputFile = new File(outputPath);
+                        for (String stRef : iDomain.getMedia().getOutputFiles().get(outputPath)){
+                            Station st = sDomain.getStationByRef(stRef);
                             String localCdiId = sDomain.getLocalCdiId(cDomain, formatConversion, st.getReference());
                             mapping = new Mapping(localCdiId, formatConversion.toString());
                             
                             String modus = Mapping.MODUS_MULTISTATIONS;
 
-                            File outputFile = new File(outputPath);
                             StringBuffer filename = new StringBuffer();
                             filename.append(iDomain.getConversion().getNomMappingHorsPrefix());
                             

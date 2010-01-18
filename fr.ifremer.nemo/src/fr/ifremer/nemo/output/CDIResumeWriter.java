@@ -104,7 +104,10 @@ public class CDIResumeWriter
             Configuration config = nemo.getConfig();
             
             for (String outputPath : iDomain.getMedia().getOutputFiles().keySet()){
-                for (Station st : sDomain.getStations(outputPath)){
+                File outputFile = new File(outputPath);
+                for(String stRef : iDomain.getMedia().getOutputFiles().get(outputPath)){
+                //for (Station st : sDomain.getStations(outputFile.getName())){
+                    Station st = sDomain.getStationByRef(stRef);
                     // seuls les paramètres mesurés sont à prendre en compte
                     for (ParameterModel param : iDomain.getCruise().getStation().getData().getModel().getParameterModels()){
                         //writeLineResume(inputFilePath, st, param);
@@ -220,9 +223,9 @@ public class CDIResumeWriter
                         writer.write(sep + formatConversion.toString());
 
                         // data size
-                        float datasize = new File(outputPath).length() / 1024f / 1024f;
+                        float datasize = outputFile.length() / 1024f / 1024f;
                         if (iDomain.getConversion().getCurrent() != E_TypeConversion.ODV_MONOSTATION){
-                            datasize = datasize / sDomain.getStations(outputPath).size();
+                            datasize = datasize / iDomain.getMedia().getOutputFiles().get(outputPath).size();
                         }
 
                         writer.write(sep

@@ -1204,7 +1204,7 @@ public class StationSection extends NemoSection
                             value = station.get(tagXml, format);*/
                         String value = propertyModel.getUserValue();
                         if (value.equals("NaN")) value = Global.EMPTY_STRING; //$NON-NLS-1$
-                        setManualValueInput(propertyModel.getUserValue(), i);
+                        setManualValueInput(value, i);
                     }
                     else
                     {

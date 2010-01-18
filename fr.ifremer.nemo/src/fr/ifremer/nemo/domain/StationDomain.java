@@ -197,7 +197,7 @@ public class StationDomain
                 ref = _model.getReferenceProperty().getUserValue();
             }
             else{
-                getRef(); 
+                ref = getRef(); 
             }
         }
         else if (_model.getReferenceProperty().getFragment().getFirstLine() == 0){
@@ -236,7 +236,14 @@ public class StationDomain
         StringBuffer odvStationHeader = new StringBuffer(); 
         String stationRef = currentStation.getReference();
         // Cruise
-        String cruiseName = Nemo.getInstance().getDomain().getCruise().getModel().getName();
+        String cruiseName = Global.EMPTY_STRING;
+        E_ProcessType processType = Nemo.getInstance().getDomain().getMedia().getModel().getProcessType();
+        if (processType == E_ProcessType.COLLECTION_DIR){
+            cruiseName = Nemo.getInstance().getDomain().getCruise().getDataSetRef();
+        }
+        else{
+            cruiseName = Nemo.getInstance().getDomain().getCruise().getModel().getName();
+        }
         odvStationHeader.append(form.limitString(cruiseName, 20));
         odvStationHeader.append(Global.TAB);
         
@@ -324,9 +331,9 @@ public class StationDomain
         switch (c){
             case ODV:
                 // ODV -> [Référence du jeu de données]
-                if (Nemo.getInstance().getDomain().getMedia().getModel().getProcessType() == E_ProcessType.COLLECTION_FILES)
-                    cruiseRef = cDomain.getModel().getName();
-                else
+                //if (Nemo.getInstance().getDomain().getMedia().getModel().getProcessType() == E_ProcessType.COLLECTION_FILES)
+                //    cruiseRef = cDomain.getModel().getName();
+                //else
                     cruiseRef = cDomain.getDataSetRef();
                 // [Numéro station]si < 5 : codé sur 5 caractères il est complété à
                 // gauche par des '0'.
@@ -416,11 +423,11 @@ public class StationDomain
         
         //*DC HISTORY=
         medStationHeader.append(start);
-        //medStationHeader.append(Elts.getElt(Elts.station_dcHistory, _model.getProperty(Intern.S_DCHIST + "1").applyOn(inputFile))); 
+        medStationHeader.append(Elts.getElt(Elts.station_dcHistory, _model.getProperty(Intern.S_DCHIST + "1").applyOn(inputFile))); 
         medStationHeader.append(Global.RN);
 
         medStationHeader.append(start);
-        //medStationHeader.append(Elts.limit((String) _model.getProperty(Intern.S_DCHIST + "2").applyOn(inputFile), Elts.station_line));
+        medStationHeader.append(Elts.limit((String) _model.getProperty(Intern.S_DCHIST + "2").applyOn(inputFile), Elts.station_line));
         medStationHeader.append(Global.RN);
 
         //*DM HISTORY=

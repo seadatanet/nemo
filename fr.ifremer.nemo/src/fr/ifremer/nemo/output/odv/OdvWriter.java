@@ -45,8 +45,10 @@ public class OdvWriter extends NemoWriter{
             
             String outputFileName = iDomain.getMedia().getOutputFileName();
             E_ProcessType processType = iDomain.getMedia().getModel().getProcessType();
-            if (processType == E_ProcessType.COLLECTION_DIR)
-                outputFileName += File.separator + cruise.getModel().getReference();
+            if (processType == E_ProcessType.COLLECTION_DIR){
+                cruise.setDataSetRef(new File(inputFilePath).getName());
+                outputFileName += File.separator + cruise.getDataSetRef();
+            }
             
     
             E_TypeConversion selectedConversion = iDomain.getConversion().getCurrent();
@@ -54,6 +56,10 @@ public class OdvWriter extends NemoWriter{
                 // Conversion ODV - fichiers monostation => N fichiers de sortie
                 
                 for (Station st : station.getStations(inputFilePath)){
+                    
+                    if (processType == E_ProcessType.COLLECTION_DIR){
+                        new File(outputFileName).mkdir();
+                    }
                     
                     String localCdiId = station.getLocalCdiId(cruise, Conversion.ODV, st.getReference());
                     String mOutputFileName = outputFileName + File.separator + localCdiId + Conversion.ODV.getExt();

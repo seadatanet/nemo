@@ -144,6 +144,9 @@ public class Elts extends NLS
             else if(format[0].startsWith("LON")){
                 elt.append(form.formatLongitude(format[1], (Double) value));
             }
+            else if (format[0].equals("FLOAT")){
+                elt.append(form.formatFloat(format[1], (Float) value));
+            }
             else {
                 if (value instanceof Float){
                     elt.append(form.formatInt(format[1], (Float) value));

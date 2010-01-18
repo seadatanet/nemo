@@ -110,7 +110,8 @@ public class FlagTable {
 	 */
 	public String getFlagSDN(String local) {
 		for (int i = 0; i < getFlags().size(); i++) {
-			if (getFlags().get(i).getLocal().equals(local)) {
+            if (local.startsWith(getFlags().get(i).getLocal())){
+			//if (getFlags().get(i).getLocal().equals(local)) {
 				return Utils.extraitCode(getFlags().get(i).getSdn());
 			}
 		}

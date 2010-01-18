@@ -60,6 +60,7 @@ public abstract class NemoWriter{
         
         MediaDomain media = iDomain.getMedia();
         StationDomain stationDomain = iDomain.getCruise().getStation();
+        stationDomain.updateRef();
 
 		try {
             

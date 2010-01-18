@@ -83,6 +83,7 @@ public class EditFileForm extends EditForm
                 }
             }
         });
+        buttonValidateAll.setEnabled(false);
 
         // bouton "valider etape"
         createButtonValidate();
@@ -249,6 +250,8 @@ public class EditFileForm extends EditForm
     {
         // FAE 1810 - FileHeader accessible que pour un fichier campagne
         sectionEnteteFichier.setEnabled(ViewMain.radioFichier.getSelection());
+        
+        buttonValidateAll.setEnabled(!Nemo.getInstance().getNomModele().equals(Global.EMPTY_STRING));
     }
 
     public void invalidEtape()

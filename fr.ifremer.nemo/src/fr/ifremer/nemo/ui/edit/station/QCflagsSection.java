@@ -510,6 +510,7 @@ public class QCflagsSection extends NemoSection
                         - Integer
                             .valueOf(ViewMain.editFileForm.sectionEnteteFichier
                                 .getValue()));
+                flag.setLastLine(flag.getFirstLine());
                 flag.setFirstCharOffset(tabFlagQC.getItems()[i].getText(3));
                 flag.setLastCharOffset(tabFlagQC.getItems()[i].getText(4));
                 return flag;
@@ -532,6 +533,7 @@ public class QCflagsSection extends NemoSection
                         - Integer
                             .valueOf(ViewMain.editFileForm.sectionEnteteFichier
                                 .getValue()));
+                flag.setLastLine(flag.getFirstLine());
                 flag
                     .setFirstCharOffset(getTabFlagQC().getItems()[i].getText(3));
                 flag.setLastCharOffset(getTabFlagQC().getItems()[i].getText(4));

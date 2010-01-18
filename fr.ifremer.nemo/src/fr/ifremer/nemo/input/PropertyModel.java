@@ -302,7 +302,13 @@ public class PropertyModel extends AbstractModel
         if (isUserProvided()){
             sResult = _userValue;
             if (_format != null){
-                result = _format.parseObject(sResult);
+                if (!sResult.equals(Global.EMPTY_STRING))
+                    result = _format.parseObject(sResult);
+                else
+                    result = Float.NaN;
+            }
+            else{
+                result = sResult;
             }
         }
         else{
@@ -346,13 +352,16 @@ public class PropertyModel extends AbstractModel
         Object result = null;
         String sResult = Global.EMPTY_STRING;
 
-        if (isUserProvided()){
+        /*if (isUserProvided()){
             sResult = _userValue;
             if (_format != null){
                 result = _format.parseObject(sResult);
             }
+            else{
+                result = sResult;
+            }
         }
-        else{
+        else{*/
             sResult = _fragment.retreiveInLine(a_Line);
             if (!sResult.trim().equals(Global.EMPTY_STRING) && _format != null){
                 try{
@@ -379,7 +388,7 @@ public class PropertyModel extends AbstractModel
             else{
                 result = sResult;
             }            
-        }
+        //}
         return result;
     }
 

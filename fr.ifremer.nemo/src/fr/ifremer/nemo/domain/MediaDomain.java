@@ -54,6 +54,11 @@ public class MediaDomain
         _outputFiles = new HashMap<String, List<String>>();
     }
     
+    public void initOutput(){
+        _outputFileName = null;
+        _outputFiles = new HashMap<String, List<String>>();        
+    }
+    
     public void update(InputModel model){
         updateMedia(model.getMediaModel());
     }
@@ -75,7 +80,7 @@ public class MediaDomain
             names = new ArrayList<String>();
             for (File file : inputFile.listFiles()){
                 if (file.isDirectory()){
-                    for (File subfile : inputFile.listFiles()){
+                    for (File subfile : file.listFiles()){
                         names.add(subfile.getName());
                     }
                     Collections.sort(names);
