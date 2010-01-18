@@ -51,7 +51,7 @@ public class AutoLine implements UIobject
     private final boolean unique;
     protected MetaInData enableInData;
     protected boolean inData = false;
-
+  
     public AutoLine(int i, boolean unique, MetaInData enableInData,
             boolean withCursor)
     {

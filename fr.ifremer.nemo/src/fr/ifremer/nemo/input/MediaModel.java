@@ -257,6 +257,7 @@ public class MediaModel extends AbstractModel
         try {
             _endData = Enum.valueOf(E_EndData.class, s);
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -305,6 +306,7 @@ public class MediaModel extends AbstractModel
         try{
             _endStation = Integer.parseInt(s);
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -335,6 +337,7 @@ public class MediaModel extends AbstractModel
         try{
             _fileHeader = Integer.parseInt(s);
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -365,6 +368,7 @@ public class MediaModel extends AbstractModel
         try {
             _inputType = Enum.valueOf(E_InputType.class, s.toUpperCase());
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -395,6 +399,7 @@ public class MediaModel extends AbstractModel
         try{
             _multiStations = new Boolean(s).booleanValue();
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -425,6 +430,7 @@ public class MediaModel extends AbstractModel
         try {
             _processType = Enum.valueOf(E_ProcessType.class, s);
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -491,6 +497,7 @@ public class MediaModel extends AbstractModel
         try{
             _stationHeader = Integer.parseInt(s);
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

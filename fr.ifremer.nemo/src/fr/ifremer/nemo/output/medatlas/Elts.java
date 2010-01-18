@@ -128,6 +128,9 @@ public class Elts extends NLS
         
         if (parseElt.length > 2) elt.append(parseElt[2]);
         
+        if (value.equals("Default"))
+            return elt.toString();
+        
         if (format.length > 1){
             // doit appliquer un format
             if (format[0].equals("DATETIME")){

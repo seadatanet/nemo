@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -773,6 +774,51 @@ public class NemoLists implements Cloneable {
         return strReturn;
     }
 
+    public static List<CodeTableRecordType> getVocabMatchs(String list1, String list2,
+        String value)
+        {        
+
+        List<CodeTableRecordType> listReturn = new ArrayList<CodeTableRecordType>();
+        
+        try {
+            
+            CodeTableRecordType[] tableMap = NemoLists
+                    .getVocabMap(list1, list2);
+            int intLength = tableMap.length;
+            
+            for (int i = 0; i < intLength; i++) {
+                if (tableMap[i].getEntryTermAbbr().equals(value)) {
+                    
+                    CodeTableRecordType[] tmpTab = tableMap[i].getExactMatch();
+                    if (tmpTab != null)
+                        listReturn.addAll(Arrays.asList(tmpTab));
+                    
+                    tmpTab = tableMap[i].getNarrowMatch();
+                    if (tmpTab != null)
+                        listReturn.addAll(Arrays.asList(tmpTab));
+                    
+                    tmpTab = tableMap[i].getBroadMatch();
+                    if (tmpTab != null)
+                        listReturn.addAll(Arrays.asList(tmpTab));
+                    
+                    tmpTab = tableMap[i].getMajorMatch();
+                    if (tmpTab != null)
+                        listReturn.addAll(Arrays.asList(tmpTab));
+                    
+                    tmpTab = tableMap[i].getMinorMatch();                    
+                    if (tmpTab != null)
+                        listReturn.addAll(Arrays.asList(tmpTab));
+
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listReturn;
+    }
+    
     public static java.util.HashMap<Integer, String> getEdmo() {
         return _edmo;
     }
@@ -1413,7 +1459,13 @@ public class NemoLists implements Cloneable {
         BODCList list2 = Nemo.getInstance().getConfig().getVocabList(listIds[1]);
         
         UpdateBean updateMap = new UpdateBean(listName, listName); 
-        updateMap.setNbTot(_vocabMap.get(listName).length);
+        
+        if (_vocabMap.get(listName) != null)
+            updateMap.setNbTot(_vocabMap.get(listName).length);
+        else
+            // Cas ou le fichier xml n'est pas présent sur le disque
+            updateMap.setNbTot(0);
+        
         
         // check if update is needed
         // !! cette façon de faire nécessite le chargement et la mise à jour de chacune des listes en individuel :

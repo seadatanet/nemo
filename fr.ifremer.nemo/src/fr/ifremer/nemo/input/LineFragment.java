@@ -186,6 +186,7 @@ public class LineFragment extends AbstractModel
 		try {
             _firstCharOffset = Integer.parseInt(s);
 		} catch (Exception e) {
+            e.printStackTrace();
 		}
 	}
 
@@ -216,6 +217,7 @@ public class LineFragment extends AbstractModel
 		try {
             _lastCharOffset = Integer.parseInt(s);
 		} catch (Exception e) {
+            e.printStackTrace();
 		}
 	}
 }

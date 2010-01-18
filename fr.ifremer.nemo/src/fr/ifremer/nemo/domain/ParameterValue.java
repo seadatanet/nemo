@@ -96,6 +96,7 @@ public class ParameterValue {
 		try {
 			setValue(Double.parseDouble(a_String));
 		} catch (Exception e) {
+            e.printStackTrace();
 		}
 	}
 

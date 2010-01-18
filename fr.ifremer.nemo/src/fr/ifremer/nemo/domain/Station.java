@@ -71,10 +71,13 @@ public class Station implements Comparable
         _date = ((Long) stationDomain.getModel().getProperty(Intern.S_DATE).applyOn(inputStationHeader)).longValue();
         _time = ((Long) stationDomain.getModel().getProperty(Intern.S_TIME).applyOn(inputStationHeader)).longValue();
         _offsetTU = ((Float) stationDomain.getModel().getProperty(Intern.S_OFFSETTU).applyOn(inputStationHeader)).floatValue();
-
+        //--float depth = ((Float) stationDomain.getModel().getProperty(Intern.S_DEPTH).applyOn(inputStationHeader)).floatValue();
+        //-- recup valeur par defaut
+        
         addMetaFlag(Intern.DATETIME, stationDomain.getMetaFlag(Intern.DATETIME, inputStationHeader));
         addMetaFlag(Intern.S_LAT, stationDomain.getMetaFlag(Intern.S_LAT, inputStationHeader));
         addMetaFlag(Intern.S_LON, stationDomain.getMetaFlag(Intern.S_LON, inputStationHeader));
+        // TODO FAE Depth par défaut (flags) si "defaut" = > Global.DEFAULT_FLAG sinon getMetaFlag
         addMetaFlag(Intern.S_DEPTH, stationDomain.getMetaFlag(Intern.S_DEPTH, inputStationHeader));
 
         if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() != E_InputType.PROFILE)

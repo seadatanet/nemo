@@ -11,6 +11,7 @@ import fr.ifremer.nemo.ui.edit.data.TableData;
 import fr.ifremer.nemo.ui.edit.data.TypeData;
 import fr.ifremer.nemo.ui.edit.file.FileSection;
 import fr.ifremer.nemo.ui.edit.station.AutoLine;
+import fr.ifremer.nemo.ui.edit.station.StationSection;
 import fr.ifremer.nemo.ui.edit.station.AutoLine.MetaInData;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.ui.view.ViewMain;
@@ -584,7 +585,7 @@ public class Etape
         if (checkValue)
         {
             value = ViewMain.editStationForm.depth.getValue();
-            if (!value.trim().equals("") && !value.equals("NaN")) { //$NON-NLS-1$ //$NON-NLS-2$
+            if (!value.trim().equals("") && !value.equals("NaN") && !value.equals(StationSection.defaultValue)) { //$NON-NLS-1$ //$NON-NLS-2$
                 if (!Pattern.matches(
                     "^[0-9]*[0-9][.]?[0-9]*[0-9]*$", value.trim())) { //$NON-NLS-1$
                     ok = ok && false;

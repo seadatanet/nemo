@@ -496,6 +496,7 @@ public class CruiseModel extends AbstractModel
 		try {
             _availability = Enum.valueOf(E_Availability.class, s);
 		} catch (Exception e) {
+            e.printStackTrace();
 		}
 	}
 

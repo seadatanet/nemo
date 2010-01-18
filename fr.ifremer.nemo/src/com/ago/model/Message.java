@@ -75,6 +75,7 @@ public class Message extends Object {
 		try {
 			return ((Performer) receiver).getReturnTypeFor(this);
 		} catch (Exception e) {
+            e.printStackTrace();
 		}
 		try {
 			// Ce n'est pas un performer, on utilise l'API reflexion

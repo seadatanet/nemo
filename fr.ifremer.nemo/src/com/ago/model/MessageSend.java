@@ -112,6 +112,7 @@ public class MessageSend extends Message implements Runnable, ActionListener {
 		try {
 			perform();
 		} catch (Exception e) {
+            e.printStackTrace();
 		}
 	}
 

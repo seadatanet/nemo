@@ -84,7 +84,7 @@ public class PropertyModel extends AbstractModel
     
     // variables non présentes dans le model XML (?)
     protected boolean _inData;
-
+    
     public PropertyModel(){
         _tagName = ModelDescription.node_propertyModel;
         initValues();
@@ -287,6 +287,9 @@ public class PropertyModel extends AbstractModel
         _fragment.setLastLine(frag.getLastLine());
         _fragment.setFirstCharOffset(frag.getFirstCharOffset());
         _fragment.setLastCharOffset(frag.getLastCharOffset());
+        _fragment.setHasDefaultValue(frag.isDefaultValue());
+        _fragment.setDefaultValueSelected(frag.isDefaultValueSelected());
+        _fragment.setDefaultValue(frag.getDefaultValue());
     }
 
     /**
@@ -339,10 +342,19 @@ public class PropertyModel extends AbstractModel
                 result = sResult;
             }            
         }
+        
+        if (_fragment != null)
+            if (_fragment.isDefaultValue())
+                if (_fragment.isDefaultValueSelected())
+                    if (sResult.trim().equals(_fragment.getDefaultValue().trim()))
+                        return "Default";
+                
+        
         return result;
     }
 
     /**
+     * Utilisé dans le cas trajectory pour long lat et prof
      * @param a_Destination
      * @param a_Header
      * @exception java.text.ParseException
@@ -363,6 +375,11 @@ public class PropertyModel extends AbstractModel
         }
         else{*/
             sResult = _fragment.retreiveInLine(a_Line);
+            
+            if (_fragment.isDefaultValue())
+                if (sResult.trim().equals(_fragment.getDefaultValue().trim()))
+                    return null;
+                    
             if (!sResult.trim().equals(Global.EMPTY_STRING) && _format != null){
                 try{
                     if (!(_format instanceof LatitudeFormat)
@@ -460,6 +477,29 @@ public class PropertyModel extends AbstractModel
         return fillFragment(stationSection, null, 0, lastLine, posVariable);
     }
 
+    
+    public Fragment fillFragment(StationSection stationSection,
+            String ligne, 
+            int i, 
+            boolean lastLine, 
+            boolean posVariable,
+            boolean isDefaultValueEnable,
+            boolean isDefaultValueSelected,
+            String defaultValue){
+        
+        Fragment frag = fillFragment(stationSection,
+            ligne, 
+            i, 
+            lastLine, 
+            posVariable);
+        
+        frag.setHasDefaultValue(isDefaultValueEnable);
+        frag.setDefaultValue(defaultValue);
+        frag.setDefaultValueSelected(isDefaultValueSelected);
+        
+        return frag;
+    }
+    
     public Fragment fillFragment(StationSection stationSection,
                                  String ligne, 
                                  int i, 
@@ -562,6 +602,7 @@ public class PropertyModel extends AbstractModel
                 || x.equals(Intern.S_SAMPLINGRATE)){
             _format = new FloatFormat("%4.0f"); //$NON-NLS-1$
         }
+
     }
 
     /**

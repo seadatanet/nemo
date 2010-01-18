@@ -3,6 +3,8 @@ package fr.ifremer.nemo.util;
 public interface Global
 {
 
+    public static final int SIZE_SECTION = 270;
+    
     public static final String ZERO = "0"; //$NON-NLS-1$
     public static final String DEFAULT_FLAG = "9"; //$NON-NLS-1$
     public static final String WORSE_FLAG = "Z"; //$NON-NLS-1$
@@ -16,7 +18,7 @@ public interface Global
     public static final String POINT = "."; //$NON-NLS-1$
     public static final String POURCENT = "%"; //$NON-NLS-1$
     public static final String ET_CO = "&"; //$NON-NLS-1$
-    
+     
     public static final String NO = "N"; //$NON-NLS-1$
     public static final String YES = "Y"; //$NON-NLS-1$
     public static final String PLUS = "+"; //$NON-NLS-1$
@@ -52,7 +54,9 @@ public interface Global
     public static final String SHIP = "SHIP"; //$NON-NLS-1$
     public static final String DATACENTRE = "DATACENTRE"; //$NON-NLS-1$
     public static final String REGION = "REGION"; //$NON-NLS-1$
-/*
+    public static final String SUBPARAMETER = "subParameter"; //$NON-NLS-1$    
+    
+    /*
     // Types de metadonnee
     public static final String DATETIME = "dateTime"; //$NON-NLS-1$
     public static final String ENDDATETIME = "endDateTime"; //$NON-NLS-1$

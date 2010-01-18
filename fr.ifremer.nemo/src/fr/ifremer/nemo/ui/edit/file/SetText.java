@@ -44,7 +44,7 @@ public class SetText implements UIobject
 
     public SetText(String stringLabel, String defaultValue, final boolean inText)
     {
-        this.textSize = 293;
+        this.textSize = Global.SIZE_SECTION;
         this.stringLabel = stringLabel;
         this.defaultValue = defaultValue;
         this.inText = inText;
@@ -149,7 +149,7 @@ public class SetText implements UIobject
             label = new Label(compo, SWT.WRAP);
             label.setText(stringLabel);
             label.setBackground(ViewMain.backgroungEdit);
-            GridDataFactory.fillDefaults().grab(true, false).hint(textSize, SWT.DEFAULT)
+            GridDataFactory.fillDefaults().grab(false, false).hint(textSize, SWT.DEFAULT)
             .applyTo(label);
         }
 
@@ -163,7 +163,7 @@ public class SetText implements UIobject
             }
         });
 
-        GridDataFactory.fillDefaults().grab(true, false).hint(textSize, 12)
+        GridDataFactory.fillDefaults().grab(false, false).hint(textSize, 12)
             .applyTo(text);
 
         buttonSet = new Button(compo, SWT.NONE);

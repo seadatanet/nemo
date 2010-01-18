@@ -96,6 +96,10 @@ public class Configuration extends AbstractModel
     
     protected boolean dateISO;
 
+    public enum DataListEnum {P011, P091};
+    
+    protected DataListEnum _dataList;
+    
 	public Configuration() {
         _tagName = ConfigDescription.node_root;
         initValues();
@@ -141,6 +145,7 @@ public class Configuration extends AbstractModel
         _predicate = 255;
         _fichierMapping = Global.EMPTY_STRING;
         _defaultCode = Global.EMPTY_STRING;
+        _dataList = DataListEnum.P091;
         
         _vocabLists = new HashMap<String, BODCList>();
         
@@ -290,6 +295,11 @@ public class Configuration extends AbstractModel
 			Element2Field setter = new Element2Field(this, ConfigDescription.setter_DefaultCode);  
 			return setter;
 		}
+        if (a_LocalName.equals("dataList")) {
+            Element2Field setter = new Element2Field(this, "setDataList");  
+            return setter;
+        }
+        
 		if (a_LocalName.equals(ConfigDescription.node_FlagTable)) {
 			String code = null;
 			String label = null;
@@ -364,6 +374,7 @@ public class Configuration extends AbstractModel
         a_Writer.putTag(ConfigDescription.node_writeMapping, isWriteMapping());
 		a_Writer.putTag(ConfigDescription.node_fichierMapping, getFichierMapping());
         a_Writer.putTag(ConfigDescription.node_dateISO, isDateISO());
+        a_Writer.putTag("dataList", _dataList.toString());
 		//a_Writer.putTag("arboMapping", getArboMapping());
         proxy.writeXMLOn(a_Writer);
         a_Writer.putTag(ConfigDescription.node_edmoURL, getEdmoURL());
@@ -442,6 +453,7 @@ public class Configuration extends AbstractModel
                 try {
                     stream.close();
                 } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
             }
         }
@@ -903,7 +915,15 @@ public class Configuration extends AbstractModel
 	public void setDefaultCode(String flagTable) {
 		_defaultCode = flagTable;
 	}
-	
+
+    public DataListEnum getDataList() {
+        return _dataList;
+    }
+
+    public void setDataList(String flagTable) {
+        _dataList = DataListEnum.valueOf(flagTable);
+    }
+    
 	public FlagTable getDefaultFlagTable() {
 		FlagTable flagTable = FlagTable.getFlagTable(getFlagTables(), getDefaultCode());
 		

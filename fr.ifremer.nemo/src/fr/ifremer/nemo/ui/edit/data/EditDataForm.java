@@ -20,7 +20,10 @@ public class EditDataForm extends EditForm
     public void createEditionForm(Composite parent)
     {
         super.createEditionForm(parent);
-        
+
+        // init composants IHM
+        initSections();
+
         formEdition.getBody().setLayout(new GridLayout());
         formEdition.setText(Messages.edit_data_title);
 
@@ -36,13 +39,19 @@ public class EditDataForm extends EditForm
                 }
             });
 
-        // reset 
+        // reset
         createButtonRaz();
+
+        // bouton collapse all / expand all
+        createButtonExpand();
+
+        drawSections();
     }
-    
+
     @Override
-    protected void initSections(){
-        // pas de section dans cet onglet
+    protected void initSections()
+    {
+        
     }
 
     @Override
@@ -51,7 +60,7 @@ public class EditDataForm extends EditForm
         super.afficheEdition();
 
         ViewLog.aideData();
-        
+
         // affichage du texte dans la zone de gauche
         ViewMain.textAreaData.setText(Utils.texteBrut);
 
@@ -82,14 +91,16 @@ public class EditDataForm extends EditForm
         ViewLog.aideData();
         ViewMain.affiche = 3;
     }
-    
+
     @Override
-    public void razText(){
+    public void razText()
+    {
         TableData.fillTypes();
     }
-    
+
     @Override
-    public void actualiseEdition(){
+    public void actualiseEdition()
+    {
         // pas d'actualisation nécessaire pour cet onglet
     }
 

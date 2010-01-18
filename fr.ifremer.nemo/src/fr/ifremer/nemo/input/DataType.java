@@ -199,6 +199,7 @@ public class DataType extends AbstractModel
 		try {
 			setNumberOfProfiles(Integer.parseInt(s));
 		} catch (Exception e) {
+            e.printStackTrace();
 		}
 	}
     
@@ -229,6 +230,7 @@ public class DataType extends AbstractModel
         try{
             _qc = new Boolean(s).booleanValue();
         } catch (Exception e) {
+            e.printStackTrace();
         }
 	}
     
@@ -259,6 +261,7 @@ public class DataType extends AbstractModel
         try{
             _sensor = new Boolean(s).booleanValue();
         } catch (Exception e) {
+            e.printStackTrace();
         }
 	}
 }

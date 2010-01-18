@@ -46,7 +46,7 @@ public class FileSection extends NemoSection
     {
         compo = new Composite(parent, SWT.NONE);
         GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compo);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(compo);
+        GridDataFactory.fillDefaults().grab(false, false).applyTo(compo);
 
         setter.draw(compo, filled);
     }

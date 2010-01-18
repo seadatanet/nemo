@@ -403,7 +403,7 @@ public class Utils
             }
             catch (Exception e)
             {
-
+                e.printStackTrace();
             }
         }
     }
@@ -1391,7 +1391,7 @@ public class Utils
             public void handleEvent(Event e)
             {
                 FiltrageTableType.comboRecherche = comb;
-                FiltrageTableType.go(tab);
+                FiltrageTableType.go(tab, comb);
             }
         });
     }

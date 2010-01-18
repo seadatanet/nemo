@@ -47,7 +47,7 @@ public class Couple implements UIobject
     public Couple(String groupTitle, String labelText, ComboType type,
             String defaultValue)
     {
-        fullSize = true; // par défaut
+        // fullSize = true; // par défaut
 
         // Grouped data
         this.groupTitle = groupTitle;
@@ -116,11 +116,11 @@ public class Couple implements UIobject
         {
             valueText.setParent(parent);
             defaultValueTextSize();
-            
+
             // Default value
             if (!filled && defaultValue != null)
                 valueText.setText(defaultValue);
-            
+
             valueText.addModifyListener(new ModifyListener() {
                 public void modifyText(ModifyEvent event)
                 {
@@ -132,13 +132,10 @@ public class Couple implements UIobject
         {
             valueCombo.setParent(parent);
             valueCombo.setBackground(ViewMain.backgroungEdit);
-            valueCombo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
+            // valueCombo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-            if (fullSize)
-            {
-                GridDataFactory.fillDefaults().grab(true, true).hint(385, 25)
-                    .applyTo(valueCombo);
-            }
+            GridDataFactory.fillDefaults().grab(false, true).hint(Global.SIZE_SECTION, 25)
+                .applyTo(valueCombo);
 
             if (!filled)
             {
@@ -177,7 +174,7 @@ public class Couple implements UIobject
             case LAT:
             case LON:
                 groupTitle = Messages.label_format;
-                break;
+            break;
             default:
                 // nothing to complete
             break;
@@ -212,10 +209,10 @@ public class Couple implements UIobject
         }
     }
 
-// public void refreshCombo(ComboType cType)
-// {
-// valueCombo = cType.fillCombo(valueCombo);
-// }
+    // public void refreshCombo(ComboType cType)
+    // {
+    // valueCombo = cType.fillCombo(valueCombo);
+    // }
 
     public void setEnabled(boolean enabled)
     {
@@ -244,11 +241,15 @@ public class Couple implements UIobject
             // valueCombo.deselectAll();
         }
     }
-    
-    public boolean isEmpty(){
+
+    public boolean isEmpty()
+    {
         boolean empty = true;
-        if ((valueText != null && !valueText.getText().trim().equals(Global.EMPTY_STRING))
-                || (valueCombo != null && !valueCombo.getText().trim().equals(Global.EMPTY_STRING))){
+        if ((valueText != null && !valueText.getText().trim().equals(
+            Global.EMPTY_STRING))
+                || (valueCombo != null && !valueCombo.getText().trim().equals(
+                    Global.EMPTY_STRING)))
+        {
             empty = false;
         }
         return empty;
@@ -271,18 +272,22 @@ public class Couple implements UIobject
     private void defaultValueTextSize()
     {
         valueText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-        if (type == ComboType.BLOCK){
+        if (type == ComboType.BLOCK)
+        {
             valueText.setTextLimit(textLimit);
             GridData gridData =
                 new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1);
-            gridData.minimumHeight = 40;
-            gridData.minimumWidth = 50;
-            gridData.widthHint = 385;
+            // gridData.minimumHeight = 40;
+            // gridData.minimumWidth = 50;
+            // gridData.widthHint = 385;
             valueText.setLayoutData(gridData);
         }
-        else if (type == ComboType.FRQ){
-            GridDataFactory.fillDefaults().grab(true, false).minSize(100, 10)
-                .applyTo(valueText);
+        else if (type == ComboType.FRQ)
+        {
+            GridDataFactory.fillDefaults().grab(true, false)./*
+                                                                 * minSize(100,
+                                                                 * 10) .
+                                                                 */applyTo(valueText);
         }
     }
 

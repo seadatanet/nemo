@@ -179,6 +179,7 @@ public class CruiseDomain
                 lines.add(line);
             }
         } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             try {
                 reader.close();

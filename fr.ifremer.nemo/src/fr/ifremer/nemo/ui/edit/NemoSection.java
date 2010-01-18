@@ -7,6 +7,7 @@
  */
 package fr.ifremer.nemo.ui.edit;
 
+import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridLayout;
@@ -22,6 +23,7 @@ import org.eclipse.ui.forms.widgets.Section;
 import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.ui.Application;
 import fr.ifremer.nemo.util.Formatter;
+import fr.ifremer.nemo.util.Global;
 
 /**
  * Description: classe abstraite définissant une Section NEMO
@@ -59,7 +61,9 @@ public abstract class NemoSection
     public static final String S_SAMPLINGRATE = "samplingRate"; //$NON-NLS-1$
     public static final String S_EDATE = "endDate"; //$NON-NLS-1$
     public static final String S_ETIME = "endTime"; //$NON-NLS-1$
-
+    */
+    public static final String D_DATATYPE = "dataType"; //$NON-NLS-1$
+/*
     public static final String QC = "QC"; //$NON-NLS-1$
 
     public static final String S_STATIONNUMBER = "reference"; //$NON-NLS-1$
@@ -74,12 +78,18 @@ public abstract class NemoSection
 
     public NemoSection(String name, String title, String description)
     {
-        // section = new Section(shell, SWT.NONE);
-        this.name = name;
-        this.title = Formatter.getSingleton().padString(title, 40);
-        this.description = description;
+        this(name, title, description,40);
     }
 
+    
+    public NemoSection(String name, String title, String description, int padSize)
+    {
+        // section = new Section(shell, SWT.NONE);
+        this.name = name;
+        this.title = /*Formatter.getSingleton().padString(*/title/*, padSize)*/;
+        this.description = description;
+    }
+    
     /**
      * {@inheritDoc}
      */
@@ -98,13 +108,13 @@ public abstract class NemoSection
             toolkitEdition.createSection(formEdition.getBody(),
                 Section.DESCRIPTION | ExpandableComposite.TITLE_BAR
                         | ExpandableComposite.TWISTIE
-                        | ExpandableComposite.COMPACT);
+                        /*| ExpandableComposite.COMPACT*/);
 
         int heightFont = section.getFont().getFontData()[0].getHeight();
-        Font titleFont =
+   /*     Font titleFont =
             new Font(Application.display, "Courier", heightFont, SWT.NORMAL); //$NON-NLS-1$
         section.setFont(titleFont);
-
+*/
         section.addExpansionListener(new ExpansionAdapter() {
             @Override
             public void expansionStateChanged(ExpansionEvent e)
@@ -112,16 +122,20 @@ public abstract class NemoSection
                 formEdition.reflow(true);
             }
         });
+                
         section.setText(title);
         section.setDescription(description);
-
+        
         Composite sectionClient = toolkitEdition.createComposite(section);
-        sectionClient.setLayout(new GridLayout());
 
+        sectionClient.setLayout(new GridLayout());
+        GridDataFactory.fillDefaults().grab(false, false).hint(Global.SIZE_SECTION,SWT.DEFAULT).applyTo(
+            sectionClient);
+        GridDataFactory.fillDefaults().grab(false, false).hint(Global.SIZE_SECTION,SWT.DEFAULT).applyTo(
+            section);
         drawSection(sectionClient, filled);
 
         section.setClient(sectionClient);
-        section.pack();
     }
 
     protected abstract void drawSection(Composite parent, boolean filled);

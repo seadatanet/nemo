@@ -25,42 +25,57 @@ import fr.ifremer.nemo.util.Global;
 public class Fragment extends AbstractModel
 {
     
-	/**
-	 * Offset, dans la premiere ligne, du premier caractere de la donnee
-	 */
-	protected int _firstCharOffset;
+    /**
+     * Offset, dans la premiere ligne, du premier caractere de la donnee
+     */
+    protected int _firstCharOffset;
 
-	/**
-	 * Index de la premiere ligne dans le header ou commence la donnee
-	 */
-	protected int _firstLine;
+    /**
+     * Index de la premiere ligne dans le header ou commence la donnee
+     */
+    protected int _firstLine;
 
-	/**
-	 * Offset, dans la derniere ligne, du dernier caractere de la donnee. si -1
-	 * on lit jusqu'a la fin de ligne
-	 */
-	protected int _lastCharOffset;
+    /**
+     * Offset, dans la derniere ligne, du dernier caractere de la donnee. si -1
+     * on lit jusqu'a la fin de ligne
+     */
+    protected int _lastCharOffset;
 
-	/**
-	 * Index de la ligne dans le header ou finit la donnee. Par defaut egale a
-	 * la valeur de firstLine
-	 */
-	protected int _lastLine;
+    /**
+     * Index de la ligne dans le header ou finit la donnee. Par defaut egale a
+     * la valeur de firstLine
+     */
+    protected int _lastLine;
 
     /**
      * Indique si le fragment est sur une ligne ou plusieurs
      */
-	protected boolean _singleLine;
-	
-	/**
-	 * Indique si la longueur de la derniere ligne est variable
-	 */
-	protected boolean _variable;
+    protected boolean _singleLine;
+    
+    /**
+     * Indique si la longueur de la derniere ligne est variable
+     */
+    protected boolean _variable;
+    
+    /**
+     * Indique si il y a une valeur par défault ou non associée à ce paramètre
+     */
+    protected boolean _hasDefaultValue;
 
-	public Fragment() {
+    /**
+     * Indique si valeur par défault est sélectionné
+     */
+    protected boolean _defaultValueSelected;
+    
+    /**
+     * Valeur par défault
+     */
+    protected String _defaultValue;
+    
+    public Fragment() {
         _tagName = ModelDescription.nodetitle_default;
         initValues();
-	}
+    }
     
     /**
      * {@inheritDoc}
@@ -73,64 +88,76 @@ public class Fragment extends AbstractModel
         //_lastLine = 1;
         _singleLine = true;
         _variable = false;
+        _hasDefaultValue = false;
+        _defaultValueSelected = false;
     }
 
 
     /**
      * @see AbstractModel.java#fromElement
      */
-	public static SAXConsumer fromElement(String a_URI, 
+    public static SAXConsumer fromElement(String a_URI, 
                                           String a_LocalName,
                                           String a_QName, 
                                           Attributes a_Attributes){
-		Fragment el = new Fragment();
-		el.buildFromElement(a_URI, a_LocalName, a_QName, a_Attributes);
-		return el;
-	}
+        Fragment el = new Fragment();
+        el.buildFromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+        return el;
+    }
     
     /**
      * {@inheritDoc}
      */
     @Override
-	public void buildFromElement(String a_URI, 
+    public void buildFromElement(String a_URI, 
                                  String a_LocalName,
                                  String a_QName, 
                                  Attributes a_Attributes){
-		String tmp;
-		if ((tmp = a_Attributes.getValue(ModelDescription.a_singleline)) != null) {
-			setSingleLine(tmp);
-		}
-		if ((tmp = a_Attributes.getValue(ModelDescription.a_variable)) != null) {
-			setVariable(tmp);
-		}
-	}
+        String tmp;
+        if ((tmp = a_Attributes.getValue(ModelDescription.a_singleline)) != null) {
+            setSingleLine(tmp);
+        }
+        if ((tmp = a_Attributes.getValue(ModelDescription.a_variable)) != null) {
+            setVariable(tmp);
+        }
+    }
     
     /**
      * {@inheritDoc}
      */
     @Override
-	public SAXConsumer consumeElement(String a_URI, 
+    public SAXConsumer consumeElement(String a_URI, 
                                       String a_LocalName,
                                       String a_QName, 
                                       Attributes a_Attributes){
-		if (a_LocalName.equals(ModelDescription.node_firstline)) {
-			Element2Field setter = new Element2Field(this, ModelDescription.setter_firstline);
-			return setter;
-		}
-		if (a_LocalName.equals(ModelDescription.node_lastline)) {
-			Element2Field setter = new Element2Field(this, ModelDescription.setter_lastline);
-			return setter;
-		}
-		if (a_LocalName.equals(ModelDescription.node_firstoffset)) {
-			Element2Field setter = new Element2Field(this, ModelDescription.setter_firstoffset);
-			return setter;
-		}
-		if (a_LocalName.equals(ModelDescription.node_lastoffset)) {
-			Element2Field setter = new Element2Field(this, ModelDescription.setter_lastoffset);
-			return setter;
-		}
-		return null;
-	}
+        if (a_LocalName.equals(ModelDescription.node_firstline)) {            
+            Element2Field setter = new Element2Field(this, ModelDescription.setter_firstline);
+            return setter;
+        }
+        if (a_LocalName.equals(ModelDescription.node_lastline)) {
+            Element2Field setter = new Element2Field(this, ModelDescription.setter_lastline);
+            return setter;
+        }
+        if (a_LocalName.equals(ModelDescription.node_firstoffset)) {
+            Element2Field setter = new Element2Field(this, ModelDescription.setter_firstoffset);
+            return setter;
+        }
+        if (a_LocalName.equals(ModelDescription.node_lastoffset)) {
+            Element2Field setter = new Element2Field(this, ModelDescription.setter_lastoffset);
+            return setter;
+        }
+        if (a_LocalName.equals(ModelDescription.node_defaultselected)) {
+            _hasDefaultValue = true;
+            Element2Field setter = new Element2Field(this, ModelDescription.setter_defaultselected);
+            return setter;
+        }
+        if (a_LocalName.equals(ModelDescription.node_defaultvalue)) {
+            _hasDefaultValue = true;
+            Element2Field setter = new Element2Field(this, ModelDescription.setter_defaultvalue);
+            return setter;
+        }
+        return null;
+    }
     
     /**
      * {@inheritDoc}
@@ -149,14 +176,21 @@ public class Fragment extends AbstractModel
      * {@inheritDoc}
      */
     @Override
-	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
-		a_Writer.putAttribute(ModelDescription.a_singleline, isSingleLine());
-		a_Writer.putAttribute(ModelDescription.a_variable, isVariable());
-		a_Writer.putTag(ModelDescription.node_firstline, getFirstLine());
+    public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
+        
+        a_Writer.putAttribute(ModelDescription.a_singleline, isSingleLine());
+        a_Writer.putAttribute(ModelDescription.a_variable, isVariable());
+        a_Writer.putTag(ModelDescription.node_firstline, getFirstLine());
         a_Writer.putTag(ModelDescription.node_lastline, getLastLine());
-		a_Writer.putTag(ModelDescription.node_firstoffset, getFirstCharOffset());
-		a_Writer.putTag(ModelDescription.node_lastoffset, getLastCharOffset());
-	}
+        a_Writer.putTag(ModelDescription.node_firstoffset, getFirstCharOffset());
+        a_Writer.putTag(ModelDescription.node_lastoffset, getLastCharOffset());
+        
+        if (_hasDefaultValue)
+        {
+            a_Writer.putTag(ModelDescription.node_defaultselected, isDefaultValueSelected());
+            a_Writer.putTag(ModelDescription.node_defaultvalue, getDefaultValue());
+        }
+    }
     
 
     /**
@@ -164,10 +198,10 @@ public class Fragment extends AbstractModel
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-		Fragment copy = null;
-		copy = (Fragment) super.clone();
-		return copy;
-	}
+        Fragment copy = null;
+        copy = (Fragment) super.clone();
+        return copy;
+    }
     
     
     /**
@@ -344,178 +378,257 @@ public class Fragment extends AbstractModel
      * @return int
      * @see Fragment.java#_firstCharOffset
      */
-	public int getFirstCharOffset() {
-		return _firstCharOffset;
-	}
+    public int getFirstCharOffset() {
+        return _firstCharOffset;
+    }
 
     /**
      * Setter pour _firstCharOffset
      * @param x : nouvelle valeur pour _firstCharOffset
      * @see Fragment.java#_firstCharOffset
      */
-	public void setFirstCharOffset(int x) {
-		_firstCharOffset = x;
-	}
+    public void setFirstCharOffset(int x) {
+        _firstCharOffset = x;
+    }
 
     /**
      * Setter pour _firstCharOffset
      * @param s : nouvelle valeur pour _firstCharOffset sous forme de String
      * @see Fragment.java#_firstCharOffset
      */
-	public void setFirstCharOffset(String s) {
-		try {
+    public void setFirstCharOffset(String s) {
+        try {
             _firstCharOffset = Integer.parseInt(s);
-		} catch (Exception e) {
-		}
-	}
+        } catch (Exception e) { e.printStackTrace();
+        }
+    }
 
     /**
      * Getter pour _firstLine.
      * @return int
      * @see Fragment.java#_firstLine
      */
-	public int getFirstLine() {
-		return _firstLine;
-	}
+    public int getFirstLine() {
+        return _firstLine;
+    }
 
     /**
      * Setter pour _firstLine
      * @param x : nouvelle valeur pour _firstLine
      * @see Fragment.java#_firstLine
      */
-	public void setFirstLine(int x) {
-		_firstLine = x;
-	}
+    public void setFirstLine(int x) {
+        _firstLine = x;
+    }
 
     /**
      * Setter pour _firstLine
      * @param s : nouvelle valeur pour _firstLine sous forme de String
      * @see Fragment.java#_firstLine
      */
-	public void setFirstLine(String s) {
-		try {
+    public void setFirstLine(String s) {
+        try {
             _firstLine = Integer.parseInt(s);
-		} catch (Exception e) {
-		}
-	}
+        } catch (Exception e) { e.printStackTrace();
+        }
+    }
 
     /**
      * Getter pour _lastCharOffset.
      * @return int
      * @see Fragment.java#_lastCharOffset
      */
-	public int getLastCharOffset() {
-		return _lastCharOffset;
-	}
+    public int getLastCharOffset() {
+        return _lastCharOffset;
+    }
 
     /**
      * Setter pour _lastCharOffset
      * @param x : nouvelle valeur pour _lastCharOffset
      * @see Fragment.java#_lastCharOffset
      */
-	public void setLastCharOffset(int x) {
-		_lastCharOffset = x;
-	}
+    public void setLastCharOffset(int x) {
+        _lastCharOffset = x;
+    }
 
     /**
      * Setter pour _lastCharOffset
      * @param s : nouvelle valeur pour _lastCharOffset sous forme de String
      * @see Fragment.java#_lastCharOffset
      */
-	public void setLastCharOffset(String s) {
-		try {
+    public void setLastCharOffset(String s) {
+        try {
             _lastCharOffset = Integer.parseInt(s);
-		} catch (Exception e) {
-		}
-	}
+        } catch (Exception e) { e.printStackTrace();
+        }
+    }
 
     /**
      * Getter pour _lastLine.
      * @return int
      * @see Fragment.java#_lastLine
      */
-	public int getLastLine() {
-		return _lastLine;
-	}
+    public int getLastLine() {
+        return _lastLine;
+    }
 
     /**
      * Setter pour _lastLine
      * @param x : nouvelle valeur pour _lastLine
      * @see Fragment.java#_lastLine
      */
-	public void setLastLine(int x) {
-		_lastLine = x;
-	}
+    public void setLastLine(int x) {
+        _lastLine = x;
+    }
 
     /**
      * Setter pour _lastLine
      * @param s : nouvelle valeur pour _lastLine sous forme de String
      * @see Fragment.java#_lastLine
      */
-	public void setLastLine(String s) {
-		try {
+    public void setLastLine(String s) {
+        try {
             _lastLine = Integer.parseInt(s);
-		} catch (Exception e) {
-		}
-	}
+        } catch (Exception e) { e.printStackTrace();
+        }
+    }
 
     /**
      * Getter pour _singleLine.
      * @return boolean
      * @see Fragment.java#_singleLine
      */
-	public boolean isSingleLine() {
-		return _singleLine;
-	}
+    public boolean isSingleLine() {
+        return _singleLine;
+    }
 
     /**
      * Setter pour _singleLine
      * @param x : nouvelle valeur pour _singleLine
      * @see Fragment.java#_singleLine
      */
-	public void setSingleLine(boolean x) {
-		_singleLine = x;
-	}
+    public void setSingleLine(boolean x) {
+        _singleLine = x;
+    }
 
     /**
      * Setter pour _singleLine
      * @param s : nouvelle valeur pour _singleLine sous forme de String
      * @see Fragment.java#_singleLine
      */
-	public void setSingleLine(String s) {
+    public void setSingleLine(String s) {
         try {
             _singleLine = new Boolean(s).booleanValue();
-        } catch (Exception e) {
+        } catch (Exception e) { e.printStackTrace();
         }
-	}
+    }
 
     /**
      * Getter pour _variable.
      * @return boolean
      * @see Fragment.java#_variable
      */
-	public boolean isVariable() {
-		return _variable;
-	}
+    public boolean isVariable() {
+        return _variable;
+    }
 
     /**
      * Setter pour _variable
      * @param x : nouvelle valeur pour _variable
      * @see Fragment.java#_variable
      */
-	public void setVariable(boolean x) {
-		_variable = x;
-	}
+    public void setVariable(boolean x) {
+        _variable = x;
+    }
 
     /**
      * Setter pour _variable
      * @param s : nouvelle valeur pour _variable sous forme de String
      * @see Fragment.java#_variable
      */
-	public void setVariable(String s) {
+    public void setVariable(String s) {
         try {
             _variable = new Boolean(s).booleanValue();
-        } catch (Exception e) {
+        } catch (Exception e) { e.printStackTrace();
         }
-	}
+    }
+    
+  /**
+   * Getter pour _defaultValue
+     * @return String
+     * @see Fragment.java#_defaultValue
+   */
+  public String getDefaultValue() {
+      return _defaultValue;
+  }
+    
+    /**
+     * Setter pour _defaultValue
+     * @param s : nouvelle valeur pour _defaultValue sous forme de String
+     * @see Fragment.java#_defaultValue
+     */
+  public void setDefaultValue(String s) {
+            _defaultValue = s;
+  }
+    
+    /**
+     * Getter pour _hasDefaultValue.
+     * @return boolean
+     * @see Fragment.java#_hasDefaultValue
+     */
+    public boolean isDefaultValue() {
+        return _hasDefaultValue;
+    }
+
+    /**
+     * Setter pour _variable
+     * @param x : nouvelle valeur pour _variable
+     * @see Fragment.java#_variable
+     */
+    public void setHasDefaultValue(boolean x) {
+        _hasDefaultValue = x;
+    }
+    
+    /**
+     * Setter pour _variable
+     * @param s : nouvelle valeur pour _variable sous forme de String
+     * @see Fragment.java#_variable
+     */
+    public void setHasDefaultValue(String s) {
+        try {
+            _hasDefaultValue = new Boolean(s).booleanValue();
+        } catch (Exception e) { e.printStackTrace();
+        }
+    }
+    
+    /**
+     * Getter pour _defaultValueSelected.
+     * @return boolean
+     * @see Fragment.java#_defaultValueSelected
+     */
+    public boolean isDefaultValueSelected() {
+        return _defaultValueSelected;
+    }
+
+    /**
+     * Setter pour _defaultValueSelected
+     * @param x : nouvelle valeur pour _defaultValueSelected
+     * @see Fragment.java#_defaultValueSelected
+     */
+    public void setDefaultValueSelected(boolean x) {
+        _defaultValueSelected = x;
+    }
+    
+    /**
+     * Setter pour _defaultValueSelected
+     * @param s : nouvelle valeur pour _defaultValueSelected sous forme de String
+     * @see Fragment.java#_defaultValueSelected
+     */
+    public void setDefaultValueSelected(String s) {
+        try {
+            _defaultValueSelected = new Boolean(s).booleanValue();
+        } catch (Exception e) { e.printStackTrace();
+        }
+    }
+    
 }

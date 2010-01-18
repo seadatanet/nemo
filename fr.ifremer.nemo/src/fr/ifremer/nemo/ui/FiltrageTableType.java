@@ -1,8 +1,11 @@
 package fr.ifremer.nemo.ui;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.xml.bind.annotation.XmlElementDecl.GLOBAL;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Rectangle;
@@ -26,9 +29,17 @@ import fr.ifremer.nemo.ui.edit.cruise.TableWS_Survey;
 import fr.ifremer.nemo.ui.edit.cruise.TypeSurvey;
 import fr.ifremer.nemo.ui.edit.data.TableData;
 import fr.ifremer.nemo.ui.edit.data.TypeData;
+import fr.ifremer.nemo.ui.tables.DatacentreFilteredTable;
+import fr.ifremer.nemo.ui.tables.DatatypeFilteredTable;
+import fr.ifremer.nemo.ui.tables.IdEDMOFilteredTable;
+import fr.ifremer.nemo.ui.tables.ParameterFilteredTable;
+import fr.ifremer.nemo.ui.tables.RegionFilteredTable;
+import fr.ifremer.nemo.ui.tables.ShipFilteredTable;
+import fr.ifremer.nemo.ui.tables.WSSurveyFilteredTable;
 import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
 public class FiltrageTableType{
     
@@ -50,339 +61,394 @@ public class FiltrageTableType{
 
     public static Button filtreButtonCancel;
 
-    public static void go(String table){
-
-        final String tabOrigine = table;
-
-        if (listeOuverte == 1){
-            Utils.messageErreurAppend(Messages.error_table);
+    public static String codeSelected;
+    
+    public static void go(String table, Combo comboRecherche){
+        
+        if (table.equals(Global.IDEDMO)){
+            new IdEDMOFilteredTable(comboRecherche).open();
         }
-        else{
-            shell =
-                new Shell(Application.display, SWT.BORDER | SWT.TITLE
-                        | SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);
-            shell.setSize(300, 500);
-
-            if (tabOrigine.equals(Global.IDEDMO)){
-                shell.setText(Messages.table_edmo);
+        else if (table.equals(Global.WSSURVEY)){
+            new WSSurveyFilteredTable(comboRecherche).open();
             }
-            else if (tabOrigine.equals(Global.WSSURVEY)){
-                shell.setText(Messages.table_survey);
+        else if (table.equals(Global.DATATYPE)){
+            new DatatypeFilteredTable(comboRecherche).open();
             }
-            else if (tabOrigine.equals(Global.DATATYPE)){
-                shell.setText(Messages.table_dataTypes);
+        else if (table.equals(Global.PARAMETER)){
+            new ParameterFilteredTable(comboRecherche).open();
             }
-            else if (tabOrigine.equals(Global.PARAMETER)){
-                shell.setText(Messages.table_parameters);
+        else if (table.equals(Global.SHIP)){
+            new ShipFilteredTable(comboRecherche).open();
             }
-            else if (tabOrigine.equals(Global.SHIP)){
-                shell.setText(Messages.table_ships);
+        else if (table.equals(Global.DATACENTRE)){
+            new DatacentreFilteredTable(comboRecherche).open();
             }
-            else if (tabOrigine.equals(Global.DATACENTRE)){
-                shell.setText(Messages.table_datacenter);
+        else if (table.equals(Global.REGION)){
+            new RegionFilteredTable(comboRecherche).open();
             }
-            else if (tabOrigine.equals(Global.REGION)){
-                shell.setText(Messages.table_region);
-            }
-
-            shell.setLayout(new FillLayout());
-
-            top = new Composite(shell, SWT.NONE);
-            top.setLayout(null);
-
-            if (tabOrigine.equals(Global.IDEDMO)){
-                EdmoHandler.listeFiltree = new ArrayList<String>();
-                EdmoHandler.listeFiltree.addAll(EdmoHandler.listeOrigine);
-            }
-            else if (tabOrigine.equals(Global.SHIP)){
-                NemoLists.listeFiltree = new ArrayList<String>();
-                NemoLists.listeFiltree.addAll(NemoLists.listeNavire);
-            }
-            else if (tabOrigine.equals(Global.DATACENTRE)){
-                NemoLists.listeFiltree = new ArrayList<String>();
-                NemoLists.listeFiltree.addAll(NemoLists.listeCentreDonnees);
-            }
-            else if (tabOrigine.equals(Global.REGION)){
-                NemoLists.listeFiltree = new ArrayList<String>();
-                NemoLists.listeFiltree.addAll(NemoLists.listeRegion);
-            }
-            else{
-                // init des listes filtrees survey + data
-                TableDataSurvey.listeFiltree = new ArrayList<TypeSurvey>();
-
-                // init de la liste des references campagne e partir des
-                // listesWS
-                TableWS_Survey.surveysWS = NemoLists.getSurveys();
-
-                // remplissage des noms + ref
-                // liste filtree initialisee e surveysWS au depart
-                TableWS_Survey.listeFiltree = new ArrayList<String>();
-                TableWS_Survey.refsWS = new ArrayList<String>();
-                for (int i = 0; i < TableWS_Survey.surveysWS.length; i++){
-                    TableWS_Survey.refsWS.add(TableWS_Survey.surveysWS[i]
-                        .getReference()
-                            + Global.SEP
-                            + TableWS_Survey.surveysWS[i].getName());
-                    TableWS_Survey.listeFiltree.add(TableWS_Survey.surveysWS[i]
-                        .getReference()
-                            + Global.SEP
-                            + TableWS_Survey.surveysWS[i].getName());
-                }
-
-                // liste filtree initialisee e typesWS au depart
-                try{
-                    int taille = TableDataSurvey.typesWS.size();
-
-                    for (int i = 0; i < taille; i++){
-                        TableDataSurvey.listeFiltree
-                            .add(TableDataSurvey.typesWS.get(i));
-                    }
-
-                    TableData.listeFiltree = new ArrayList<TypeData>();
-                    // liste filtree initialisee e typesWS au depart
-                    taille = TableData.typesWS.size();
-                    for (int i = 0; i < taille; i++){
-                        TableData.listeFiltree.add(TableData.typesWS.get(i));
-                    }
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-
-            filtreText = new Text(top, SWT.BORDER);
-            filtreText.setBounds(new Rectangle(3, 21, 298, 19));
-            filtreText.setText(Global.EMPTY_STRING);
-            labelText = new Label(top, SWT.NONE);
-            labelText.setBounds(new Rectangle(3, 4, 298, 13));
-            labelText.setText(Messages.table_label_filter);
-            labelText.pack();
-
-            filtreButtonSelectionner = new Button(top, SWT.NONE);
-            filtreButtonSelectionner.setBounds(new Rectangle(62, 289, 65, 23));
-            filtreButtonSelectionner.setText(Messages.button_select);
-            filtreButtonSelectionner.pack();
-            filtreButtonCancel = new Button(top, SWT.NONE);
-            filtreButtonCancel.setBounds(new Rectangle(168, 289, 65, 23));
-            filtreButtonCancel.setText(Messages.button_cancel);
-            filtreButtonCancel.pack();
-
-            // affichage des tables
-            if (tabOrigine.equals(Global.IDEDMO)){
-                creationTableEdmo();
-            }
-            else if (tabOrigine.equals(Global.WSSURVEY)){
-                creationTableWS_Survey();
-            }
-            else if (tabOrigine.equals(Global.DATATYPE)){
-                creationTableSurvey();
-            }
-            else if (tabOrigine.equals(Global.PARAMETER)){
-                creationTableData();
-            }
-            else if (tabOrigine.equals(Global.SHIP)
-                    || tabOrigine.equals(Global.DATACENTRE)
-                    || tabOrigine.equals(Global.REGION)){
-                creationTableBODC();
-            }
-
-            filtreButtonCancel
-                .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-                    @Override
-                    public void widgetSelected(
-                            org.eclipse.swt.events.SelectionEvent e){
-                        shell.close();
-                        listeOuverte = 0;
-                    }
-                });
-
-            filtreButtonSelectionner
-                .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-                    @Override
-                    public void widgetSelected(
-                            org.eclipse.swt.events.SelectionEvent e){
-
-                        listeOuverte = 0;
-
-                        if (tabOrigine.equals(Global.IDEDMO)){
-                            Utils.selectComboValeur(comboRecherche,
-                                EdmoHandler.filtreTable
-                                    .getItem(
-                                        EdmoHandler.filtreTable
-                                            .getSelectionIndex()).getText());
-                            shell.close();
-                        }
-                        else if (tabOrigine.equals(Global.WSSURVEY)){
-                            // selection d'une reference campagne
-                            int index =
-                                TableWS_Survey.filtreTable.getSelectionIndex();
-                            String reference =
-                                TableWS_Survey.listeFiltree.get(index);
-                            Pattern p = Pattern.compile(Global.SEP);
-
-                            String mots[] = p.split(reference);
-
-                            ViewMain.editCruiseForm.webService(mots[0]);
-
-                            Utils.messageOK(Messages.success_openSurveyDesc);
-                            shell.close();
-
-                        }
-                        else if (tabOrigine.equals(Global.DATATYPE)){
-                            // ajout d'un dataType dans l'onglet Survey
-                            TypeSurvey typeSurvey = new TypeSurvey();
-
-                            int index =
-                                TableDataSurvey.filtreTable.getSelectionIndex();
-                            typeSurvey =
-                                TableDataSurvey.listeFiltree.get(index);
-
-                            // test avant ajout pour doublons
-                            int taille = TableDataSurvey.types.size();
-                            Boolean found = false;
-
-                            if (taille != 0){
-                                for (int i = 0; i < taille; i++){
-
-                                    // split sur " - "
-                                    Pattern p = Pattern.compile(Global.SEP);
-                                    String mots[] =
-                                        p.split(typeSurvey.getCode());
-                                    String codeActuel = mots[0];
-
-                                    String mots2[] =
-                                        p.split(TableDataSurvey.types.get(i)
-                                            .getCode());
-                                    String codeModele = mots2[0];
-
-                                    if (codeModele.equals(codeActuel)){
-                                        found = true;
-                                    }
-                                }
-
-                                if (found == false){
-                                    TableDataSurvey.types.add(typeSurvey);
-                                }
-                                else{
-                                    Utils.messageErreur(Messages.error_table_dataTypes);
-                                }
-                            }
-                            else{
-                                TableDataSurvey.types.add(typeSurvey);
-                            }
-
-                            TableDataSurvey.majTypeData();
-                            TableDataSurvey.majIHM();
-
-                            ViewMain.editCruiseForm.sectionType.getSection()
-                                .pack();
-                            ViewMain.editCruiseForm.sectionType.getSection()
-                                .redraw();
-
-                            shell.close();
-
-                        }
-                        else if (tabOrigine.equals(Global.PARAMETER)){
-
-                            // ajout d'un parameter dans l'onglet Data
-                            Utils.invalidEtapes();
-
-                            TypeData typeData = new TypeData();
-
-                            int index =
-                                TableData.filtreTable.getSelectionIndex();
-                            typeData = TableData.listeFiltree.get(index);
-
-                            // test avant ajout pour doublons
-                            int taille = TableData.types.size();
-                            Boolean found = false;
-
-                            if (taille != 0){
-
-                                for (int i = 0; i < taille; i++){
-                                    String codeModele, codeActuel;
-
-                                    // split sur " - "
-                                    Pattern p = Pattern.compile(Global.SEP);
-                                    String mots[] = p.split(typeData.getCode());
-                                    codeActuel = mots[0];
-
-                                    String mots2[] =
-                                        p.split(TableData.types.get(i)
-                                            .getCode());
-                                    codeModele = mots2[0];
-
-                                    if (codeModele.equals(codeActuel)){
-                                        found = true;
-                                    }
-                                }
-
-                                if (found == false){
-                                    TableData.types.add(new TypeData(typeData));
-                                }
-                                else{
-                                    Utils.messageErreur(Messages.error_table_parameters);
-                                }
-                            }
-                            else{
-                                TableData.types.add(new TypeData(typeData));
-                            }
-
-                            TableData.majTypeData();
-
-                            // razTableData
-                            TableData.razTableData();
-
-                            // refresh de la table
-                            TableData.creationTable();
-
-                            shell.close();
-                        }
-                        else if (tabOrigine.equals(Global.SHIP)
-                                || tabOrigine.equals(Global.DATACENTRE)
-                                || tabOrigine.equals(Global.REGION)){
-                            Utils.selectComboValeur(comboRecherche,
-                                NemoLists.filtreTable.getItem(
-                                    NemoLists.filtreTable.getSelectionIndex())
-                                    .getText());
-                            shell.close();
-                        }
-
-                    } // ///////////////FIN
-
-                });
-
-            // listener keypressed sur le champ text
-            filtreText.addListener(SWT.KeyUp, new Listener() {
-                public void handleEvent(Event e){
-                    if (!filtreText.getText().equals(Global.EMPTY_STRING)){
-                        if (tabOrigine.equals(Global.IDEDMO)){
-                            filtrageListeEdmo(filtreText.getText());
-                        }
-                        else if (tabOrigine.equals(Global.WSSURVEY)){
-                            filtrageListeWS_Survey(filtreText.getText());
-                        }
-                        else if (tabOrigine.equals(Global.DATATYPE)){
-                            filtrageListeDataSurvey(filtreText.getText());
-                        }
-                        else if (tabOrigine.equals(Global.PARAMETER)){
-                            filtrageListeData(filtreText.getText());
-                        }
-                        else if (tabOrigine.equals(Global.SHIP)
-                                || tabOrigine.equals(Global.DATACENTRE)
-                                || tabOrigine.equals(Global.REGION)){
-                            filtrageListeBODC(filtreText.getText(), tabOrigine);
-                        }
-                    }
-                }
-            });
-
-            shell.pack();
-            shell.open();
-            listeOuverte = 1;
-        }
-
     }
+    
+//
+//        final String tabOrigine = table;
+//
+//        if (listeOuverte == 1){
+//            Utils.messageErreurAppend(Messages.error_table);
+//        }
+//        else{
+//            shell =
+//                new Shell(Application.display, SWT.BORDER | SWT.TITLE
+//                        | SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);
+//            shell.setSize(300, 500);
+//
+//            if (tabOrigine.equals(Global.IDEDMO)){
+//                shell.setText(Messages.table_edmo);
+//            }
+//            else if (tabOrigine.equals(Global.WSSURVEY)){
+//                shell.setText(Messages.table_survey);
+//            }
+//            else if (tabOrigine.equals(Global.DATATYPE)){
+//                shell.setText(Messages.table_dataTypes);
+//            }
+//            else if (tabOrigine.equals(Global.PARAMETER)){
+//                shell.setText(Messages.table_parameters);
+//            }
+//            else if (tabOrigine.equals(Global.SHIP)){
+//                shell.setText(Messages.table_ships);
+//            }
+//            else if (tabOrigine.equals(Global.DATACENTRE)){
+//                shell.setText(Messages.table_datacenter);
+//            }
+//            else if (tabOrigine.equals(Global.REGION)){
+//                shell.setText(Messages.table_region);
+//            }
+//
+//            shell.setLayout(new FillLayout());
+//
+//            top = new Composite(shell, SWT.NONE);
+//            top.setLayout(null);
+//
+//            if (tabOrigine.equals(Global.IDEDMO)){
+//                EdmoHandler.listeFiltree = new ArrayList<String>();
+//                EdmoHandler.listeFiltree.addAll(EdmoHandler.listeOrigine);
+//            }
+//            else if (tabOrigine.equals(Global.SHIP)){
+//                NemoLists.listeFiltree = new ArrayList<String>();
+//                NemoLists.listeFiltree.addAll(NemoLists.listeNavire);
+//            }
+//            else if (tabOrigine.equals(Global.DATACENTRE)){
+//                NemoLists.listeFiltree = new ArrayList<String>();
+//                NemoLists.listeFiltree.addAll(NemoLists.listeCentreDonnees);
+//            }
+//            else if (tabOrigine.equals(Global.REGION)){
+//                NemoLists.listeFiltree = new ArrayList<String>();
+//                NemoLists.listeFiltree.addAll(NemoLists.listeRegion);
+//            }
+//            else if (tabOrigine.equals(Global.SUBPARAMETER)){
+//                TableData.listeFiltree = new ArrayList<TypeData>();
+//                                
+//                List<CodeTableRecordType> listeCompleteP091_P021_P011 = new ArrayList<CodeTableRecordType>();
+//                
+//                List<CodeTableRecordType> listeP091_P021 = NemoLists.getVocabMatchs("P091", "P021", codeSelected);
+//
+//                for (CodeTableRecordType liste  : listeP091_P021)
+//                {
+//                    listeCompleteP091_P021_P011.addAll( NemoLists.getVocabMatchs("P021", "P011", liste.getEntryTermAbbr()));
+//                }
+//                
+//                for (CodeTableRecordType code  : listeCompleteP091_P021_P011)
+//                {
+//                    TableData.listeFiltree.add(new TypeData(code.getEntryTermAbbr() + " - " + code.getEntryTerm(),"","","","","","","",""));
+//                }
+//                System.out.println(TableData.listeFiltree.size());
+//                
+//            }
+//            else{
+//               // init des listes filtrees survey + data
+//                TableDataSurvey.listeFiltree = new ArrayList<TypeSurvey>();
+//
+//                // init de la liste des references campagne e partir des
+//                // listesWS
+//                TableWS_Survey.surveysWS = NemoLists.getSurveys();
+//
+//                // remplissage des noms + ref
+//                // liste filtree initialisee e surveysWS au depart
+//                TableWS_Survey.listeFiltree = new ArrayList<String>();
+//                TableWS_Survey.refsWS = new ArrayList<String>();
+//                for (int i = 0; i < TableWS_Survey.surveysWS.length; i++){
+//                    TableWS_Survey.refsWS.add(TableWS_Survey.surveysWS[i]
+//                        .getReference()
+//                            + Global.SEP
+//                            + TableWS_Survey.surveysWS[i].getName());
+//                    TableWS_Survey.listeFiltree.add(TableWS_Survey.surveysWS[i]
+//                        .getReference()
+//                            + Global.SEP
+//                            + TableWS_Survey.surveysWS[i].getName());
+//                }
+//
+//                // liste filtree initialisee e typesWS au depart
+//                try{
+//                    int taille = TableDataSurvey.typesWS.size();
+//
+//                    for (int i = 0; i < taille; i++){
+//                        TableDataSurvey.listeFiltree
+//                            .add(TableDataSurvey.typesWS.get(i));
+//                    }
+//
+//                    TableData.listeFiltree = new ArrayList<TypeData>();
+//                    // liste filtree initialisee e typesWS au depart
+//                    taille = TableData.typesWS.size();
+//                    for (int i = 0; i < taille; i++){
+//                        TableData.listeFiltree.add(TableData.typesWS.get(i));
+//                    }
+//                }
+//                catch (Exception e){
+//                    e.printStackTrace();
+//                }
+//           }
+//
+//            filtreText = new Text(top, SWT.BORDER);
+//            filtreText.setBounds(new Rectangle(3, 21, 298, 19));
+//            filtreText.setText(Global.EMPTY_STRING);
+//            labelText = new Label(top, SWT.NONE);
+//            labelText.setBounds(new Rectangle(3, 4, 298, 13));
+//            labelText.setText(Messages.table_label_filter);
+//            labelText.pack();
+//
+//            filtreButtonSelectionner = new Button(top, SWT.NONE);
+//            filtreButtonSelectionner.setBounds(new Rectangle(62, 289, 65, 23));
+//            filtreButtonSelectionner.setText(Messages.button_select);
+//            filtreButtonSelectionner.pack();
+//            filtreButtonCancel = new Button(top, SWT.NONE);
+//            filtreButtonCancel.setBounds(new Rectangle(168, 289, 65, 23));
+//            filtreButtonCancel.setText(Messages.button_cancel);
+//            filtreButtonCancel.pack();
+//
+//            // affichage des tables
+//            if (tabOrigine.equals(Global.IDEDMO)){
+//                creationTableEdmo();
+//            }
+//            else if (tabOrigine.equals(Global.WSSURVEY)){
+//                creationTableWS_Survey();
+//            }
+//            else if (tabOrigine.equals(Global.DATATYPE)){
+//                creationTableSurvey();
+//            }
+//            else if (tabOrigine.equals(Global.PARAMETER)){
+//                creationTableData();
+//            }
+//            else if (tabOrigine.equals(Global.SUBPARAMETER)){
+//                creationTableData();
+//            }
+//            else if (tabOrigine.equals(Global.SHIP)
+//                    || tabOrigine.equals(Global.DATACENTRE)
+//                    || tabOrigine.equals(Global.REGION)){
+//                creationTableBODC();
+//            }
+//
+//            filtreButtonCancel
+//                .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+//                    @Override
+//                    public void widgetSelected(
+//                            org.eclipse.swt.events.SelectionEvent e){
+//                        shell.close();
+//                        listeOuverte = 0;
+//                    }
+//                });
+//
+//            filtreButtonSelectionner
+//                .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+//                    @Override
+//                    public void widgetSelected(
+//                            org.eclipse.swt.events.SelectionEvent e){
+//
+//                        listeOuverte = 0;
+//
+//                        if (tabOrigine.equals(Global.IDEDMO)){
+//                            Utils.selectComboValeur(comboRecherche,
+//                                EdmoHandler.filtreTable
+//                                    .getItem(
+//                                        EdmoHandler.filtreTable
+//                                            .getSelectionIndex()).getText());
+//                            shell.close();
+//                        }
+//                        else if (tabOrigine.equals(Global.WSSURVEY)){
+//                            // selection d'une reference campagne
+//                            int index =
+//                                TableWS_Survey.filtreTable.getSelectionIndex();
+//                            String reference =
+//                                TableWS_Survey.listeFiltree.get(index);
+//                            Pattern p = Pattern.compile(Global.SEP);
+//
+//                            String mots[] = p.split(reference);
+//
+//                            ViewMain.editCruiseForm.webService(mots[0]);
+//
+//                            Utils.messageOK(Messages.success_openSurveyDesc);
+//                            shell.close();
+//
+//                        }
+//                        else if (tabOrigine.equals(Global.DATATYPE)){
+//                            // ajout d'un dataType dans l'onglet Survey
+//                            TypeSurvey typeSurvey = new TypeSurvey();
+//
+//                            int index =
+//                                TableDataSurvey.filtreTable.getSelectionIndex();
+//                            typeSurvey =
+//                                TableDataSurvey.listeFiltree.get(index);
+//
+//                            // test avant ajout pour doublons
+//                            int taille = TableDataSurvey.types.size();
+//                            Boolean found = false;
+//
+//                            if (taille != 0){
+//                                for (int i = 0; i < taille; i++){
+//
+//                                    // split sur " - "
+//                                    Pattern p = Pattern.compile(Global.SEP);
+//                                    String mots[] =
+//                                        p.split(typeSurvey.getCode());
+//                                    String codeActuel = mots[0];
+//
+//                                    String mots2[] =
+//                                        p.split(TableDataSurvey.types.get(i)
+//                                            .getCode());
+//                                    String codeModele = mots2[0];
+//
+//                                    if (codeModele.equals(codeActuel)){
+//                                        found = true;
+//                                    }
+//                                }
+//
+//                                if (found == false){
+//                                    TableDataSurvey.types.add(typeSurvey);
+//                                }
+//                                else{
+//                                    Utils.messageErreur(Messages.error_table_dataTypes);
+//                                }
+//                            }
+//                            else{
+//                                TableDataSurvey.types.add(typeSurvey);
+//                            }
+//
+//                            TableDataSurvey.majTypeData();
+//                            TableDataSurvey.majIHM();
+//
+//                            ViewMain.editCruiseForm.sectionType.getSection()
+//                                .pack();
+//                            ViewMain.editCruiseForm.sectionType.getSection()
+//                                .redraw();
+//
+//                            shell.close();
+//
+//                        }
+//                        else if (tabOrigine.equals(Global.PARAMETER)){
+//
+//                            // ajout d'un parameter dans l'onglet Data
+//                            Utils.invalidEtapes();
+//
+//                            TypeData typeData = new TypeData();
+//
+//                            int index =
+//                                TableData.filtreTable.getSelectionIndex();
+//                            typeData = TableData.listeFiltree.get(index);
+//
+//                            // test avant ajout pour doublons
+//                            int taille = TableData.types.size();
+//                            Boolean found = false;
+//
+//                            if (taille != 0){
+//
+//                      /*          for (int i = 0; i < taille; i++){*/
+//                                    String codeModele, codeActuel;
+//
+//                                    // split sur " - "
+//                                    Pattern p = Pattern.compile(Global.SEP);
+//                                    String mots[] = p.split(typeData.getCode());
+//                                    codeActuel = mots[0];
+//
+//                                    codeSelected = codeActuel;
+//                                   
+//                                    go(Global.SUBPARAMETER);
+//                                    /*
+//                                    String mots2[] =
+//                                        p.split(TableData.types.get(i)
+//                                            .getCode());
+//                                    codeModele = mots2[0];
+//
+//                                    if (codeModele.equals(codeActuel)){
+//                                        found = true;
+//                                    }*/
+//                                }
+///*
+//                                if (found == false){
+//                                    TableData.types.add(new TypeData(typeData));
+//                                }
+//                                else{
+//                                    Utils.messageErreur(Messages.error_table_parameters);
+//                                }
+//                            }
+//                            else{
+//                                TableData.types.add(new TypeData(typeData));
+//                            }
+//
+//                            TableData.majTypeData();
+//
+//                            // razTableData
+//                            TableData.razTableData();
+//
+//                            // refresh de la table
+//                            TableData.creationTable();
+//
+//                            shell.close();*/
+//                        }
+//                        else if (tabOrigine.equals(Global.SHIP)
+//                                || tabOrigine.equals(Global.DATACENTRE)
+//                                || tabOrigine.equals(Global.REGION)){
+//                            Utils.selectComboValeur(comboRecherche,
+//                                NemoLists.filtreTable.getItem(
+//                                    NemoLists.filtreTable.getSelectionIndex())
+//                                    .getText());
+//                            shell.close();
+//                        }
+//
+//                    } // ///////////////FIN
+//
+//                });
+//
+//            // listener keypressed sur le champ text
+//            filtreText.addListener(SWT.KeyUp, new Listener() {
+//                public void handleEvent(Event e){
+//                    if (!filtreText.getText().equals(Global.EMPTY_STRING)){
+//                        if (tabOrigine.equals(Global.IDEDMO)){
+//                            filtrageListeEdmo(filtreText.getText());
+//                        }
+//                        else if (tabOrigine.equals(Global.WSSURVEY)){
+//                            filtrageListeWS_Survey(filtreText.getText());
+//                        }
+//                        else if (tabOrigine.equals(Global.DATATYPE)){
+//                            filtrageListeDataSurvey(filtreText.getText());
+//                        }
+//                        else if (tabOrigine.equals(Global.PARAMETER)){
+//                            filtrageListeData(filtreText.getText());
+//                        }
+//                        else if (tabOrigine.equals(Global.SUBPARAMETER)){
+//                            filtrageListeData(filtreText.getText());
+//                        }
+//                        else if (tabOrigine.equals(Global.SHIP)
+//                                || tabOrigine.equals(Global.DATACENTRE)
+//                                || tabOrigine.equals(Global.REGION)){
+//                            filtrageListeBODC(filtreText.getText(), tabOrigine);
+//                        }
+//                    }
+//                }
+//            });
+//
+//            shell.pack();
+//            shell.open();
+//            listeOuverte = 1;
+//        }
+//
+//    }
 
     public static void creationTableData(){
         final Table table;
@@ -411,7 +477,7 @@ public class FiltrageTableType{
                                        TableData.listeFiltree.get(i).getUnite()});
         }
     }
-
+    
     public static void creationTableEdmo(){
         final Table table;
         int nbre;

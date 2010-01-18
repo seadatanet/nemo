@@ -45,9 +45,9 @@ public class DataModel
     public static Station station, station_modele;
     */
 
-    public static WSParameter[] listeWSParameters, listeWSParameters_modele;
+   /* public static WSParameter[] listeWSParameters, listeWSParameters_modele;*/
 
-    public static WSDataType[] listeWSDataTypes, listeWSDataTypes_modele;
+   /* public static WSDataType[] listeWSDataTypes, listeWSDataTypes_modele; */
 
     public static WSDataType wsDatatypeStation, wsDatatypeStation_modele;
 
@@ -63,8 +63,8 @@ public class DataModel
         // on initialise les dataTypes, centers et parameters en prevision des
         // onglets Campagne et Data
 
-        listeWSDataTypes = NemoLists.getDataTypes();
-        listeWSParameters = NemoLists.getParameters();
+     //   listeWSDataTypes = NemoLists.getDataTypes();
+     //   listeWSParameters = NemoLists.getParameters();
     }
 
     /*
@@ -456,6 +456,12 @@ public class DataModel
             para.setFullName(nom);
             para.setUnit(typeCourant.getUnite());
 
+            // specific P011
+            para.setCodeP011(typeCourant.getCodeP011());
+            para.setNameP011(typeCourant.getNomP011());
+            para.setP011(typeCourant.isP011());
+            
+            
             para.setDefault(typeCourant.getSortie());
             para.setFormat(typeCourant.getFormat());
             parameterModel.setParameter(para);
@@ -753,7 +759,11 @@ public class DataModel
             typeData.setUnite(modeleCourant.getUnit());
             typeData.setFormat(modeleCourant.getFormat());
             typeData.setSortie(modeleCourant.getDefault());
-
+            typeData.setCodeP011(modeleCourant.getCodeP011());
+            typeData.setNomP011(modeleCourant.getNameP011());
+            typeData.setP011(modeleCourant.isP011());
+            
+            
             TableData.types.add(typeData);
 
         }

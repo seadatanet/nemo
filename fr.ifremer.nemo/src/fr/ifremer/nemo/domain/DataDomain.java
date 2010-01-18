@@ -491,7 +491,12 @@ public class DataDomain
         }
         catch (MissingResourceException e){
             sdnMapping.append(getURNSyntaxe(URNtype.subject, code, null, null));
-            sdnMapping.append(getURNSyntaxe(URNtype.object, code, Intern.mapping_subject, Intern.mapping_objet));
+            
+            if (param.isP011())
+                sdnMapping.append(getURNSyntaxe(URNtype.object, param.getCodeP011(), null, Intern.mapping_objet));
+            else                
+                sdnMapping.append(getURNSyntaxe(URNtype.object, code, Intern.mapping_subject, Intern.mapping_objet));
+            
             sdnMapping.append(getURNSyntaxe(URNtype.units, code, Intern.mapping_subject, Intern.mapping_unit));
         }
         sdnMapping.append(Global.RN);
@@ -520,7 +525,11 @@ public class DataDomain
                 urnSyntaxe.append(list2);
                 urnSyntaxe.append(Global.DBL_PT);
                 urnSyntaxe.append(Global.DBL_PT);
-                String pdvCode = Utils.extraitCodeURN(NemoLists.getVocabMatch(list1, list2, code, Intern.NemoLists_unknown));
+                String pdvCode;
+                if (list1 != null)
+                    pdvCode = Utils.extraitCodeURN(NemoLists.getVocabMatch(list1, list2, code, Intern.NemoLists_unknown));
+                else
+                    pdvCode = code;
                 urnSyntaxe.append(pdvCode);
                 break;
         }

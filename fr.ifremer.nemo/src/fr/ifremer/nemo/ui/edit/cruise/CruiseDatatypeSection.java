@@ -9,6 +9,8 @@ package fr.ifremer.nemo.ui.edit.cruise;
 
 import java.util.ArrayList;
 
+import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 
 import fr.ifremer.nemo.input.CruiseModel;
@@ -54,6 +56,7 @@ public class CruiseDatatypeSection extends NemoSection
     protected void drawSection(Composite parent, boolean filled)
     {
         TableDataSurvey.go(parent);
+
         // TableDataSurvey.setSectionClientType(parent);
         // TableDataSurvey.tableTypeSurvey.setParent(parent);
     }

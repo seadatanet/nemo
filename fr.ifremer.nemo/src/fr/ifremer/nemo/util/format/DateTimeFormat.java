@@ -161,7 +161,7 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 	public void setRefDate(String a_String) {
 		try {
 			setRefDate(Long.parseLong(a_String));
-		} catch (Exception e) {
+		} catch (Exception e) {            
 		}
 	}
 

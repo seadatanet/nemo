@@ -3,6 +3,9 @@ package fr.ifremer.nemo.ui.edit.cruise;
 import java.io.File;
 import java.util.ArrayList;
 
+import javax.xml.transform.TransformerException;
+
+import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -193,11 +196,13 @@ public class EditCruiseForm extends EditForm
 
                     tamponSortie += tamponOrigine;
                     textCommentaire.setText(tamponSortie);
-                    textCommentaire.pack();
+        //            textCommentaire.pack();
 
                 }
             });
 
+        GridDataFactory.fillDefaults().grab(true, true).hint(Global.SIZE_SECTION, SWT.DEFAULT)
+        .applyTo(textCommentaire);
         formEdition.redraw();
         formEdition.reflow(true);
     }
@@ -210,7 +215,7 @@ public class EditCruiseForm extends EditForm
     public void init_webService()
     {
         // selection de la ref campagne dans une liste
-        FiltrageTableType.go(Global.WSSURVEY);
+        FiltrageTableType.go(Global.WSSURVEY, null);
     }
 
     public void webService(String reference)

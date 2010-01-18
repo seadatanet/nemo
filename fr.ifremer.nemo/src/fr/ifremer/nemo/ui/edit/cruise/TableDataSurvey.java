@@ -2,6 +2,7 @@ package fr.ifremer.nemo.ui.edit.cruise;
 
 import java.util.ArrayList;
 
+import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.graphics.Point;
@@ -18,9 +19,9 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
+import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.ui.FiltrageTableType;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.edit.DataModel;
 import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
@@ -59,7 +60,7 @@ public class TableDataSurvey
         final Table table;
 
         TableDataSurvey.tableTypeSurvey =
-            new Table(sectionClientType, SWT.MULTI | SWT.FULL_SELECTION);
+            new Table(sectionClientType, SWT.MULTI | SWT.FULL_SELECTION | SWT.BORDER);
 
         table = TableDataSurvey.tableTypeSurvey;
 
@@ -67,21 +68,21 @@ public class TableDataSurvey
         table.setLinesVisible(true);
 
         TableColumn tableColumn = new TableColumn(table, SWT.NONE);
-        tableColumn.setWidth(100);
+        tableColumn.setWidth(10);
         tableColumn.setText(Messages.table_label_code.toUpperCase());
 
         TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);
-        tableColumn1.setWidth(100);
+        tableColumn1.setWidth(10);
         tableColumn1.setText(Messages.table_label_number);
 
         TableColumn tableColumn2 = new TableColumn(table, SWT.NONE);
-        tableColumn2.setWidth(50);
+        tableColumn2.setWidth(10);
         tableColumn2.setText(Messages.table_label_qc);
 
         TableColumn tableColumn3 = new TableColumn(table, SWT.READ_ONLY);
         // mise e zero de la largeur de la colonne avec isSensor() pour ne pas
         // qu'on puisse la modifier!!
-        tableColumn3.setWidth(50);
+        tableColumn3.setWidth(10);
         tableColumn3.setText(Messages.table_label_sensor);
 
         initTable();
@@ -95,12 +96,12 @@ public class TableDataSurvey
         types = new ArrayList<TypeSurvey>();
         typesWS = new ArrayList<TypeSurvey>();
 
-        int taille = DataModel.listeWSDataTypes.length;
+        int taille = NemoLists.getDataTypes().length;
 
         for (int i = 0; i < taille; i++)
         {
             WSDataType wsDatatype = new WSDataType();
-            wsDatatype = DataModel.listeWSDataTypes[i];
+            wsDatatype = NemoLists.getDataTypes()[i];
 
             // new type
             TypeSurvey type = new TypeSurvey();
@@ -140,9 +141,9 @@ public class TableDataSurvey
         editor.horizontalAlignment = SWT.LEFT;
         editor.grabHorizontal = true;
 
-        Point size = table.computeSize(SWT.DEFAULT, SWT.DEFAULT);
+     /*   Point size = table.computeSize(SWT.DEFAULT, SWT.DEFAULT);
         table.setSize(size);
-        table.addListener(SWT.MouseDown, new Listener() {
+       */ table.addListener(SWT.MouseDown, new Listener() {
             public void handleEvent(Event event)
             {
 
@@ -254,7 +255,7 @@ public class TableDataSurvey
             public void handleEvent(Event e)
             {
                 // System.out.println("selection liste");
-                FiltrageTableType.go(Global.DATATYPE);
+                FiltrageTableType.go(Global.DATATYPE, null);
 
             }
         });
@@ -284,6 +285,7 @@ public class TableDataSurvey
 
         Utils.forceMenu(table, menu);
 
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(table);
         table.setLayout(new FillLayout());
         table.redraw();
     }
@@ -519,7 +521,7 @@ public class TableDataSurvey
         Composite c = ViewMain.editCruiseForm.sectionType.getSection();
         while (c != null)
         {
-            c.setRedraw(false);
+   //         c.setRedraw(false);
             c = c.getParent();
             if (c instanceof ScrolledForm)
             {
@@ -529,7 +531,7 @@ public class TableDataSurvey
         c = ViewMain.editCruiseForm.sectionType.getSection();
         while (c != null)
         {
-            c.layout(true);
+ //           c.layout(true);
             c = c.getParent();
             if (c instanceof ScrolledForm)
             {
@@ -540,7 +542,7 @@ public class TableDataSurvey
         c = ViewMain.editCruiseForm.sectionType.getSection();
         while (c != null)
         {
-            c.setRedraw(true);
+  //          c.setRedraw(true);
             c = c.getParent();
             if (c instanceof ScrolledForm)
             {

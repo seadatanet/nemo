@@ -126,7 +126,7 @@ public class EditStationForm extends EditForm
                 Messages.edit_station_refIncrement);
         }
         stationNumber.addAutoInput(Messages.label_auto_02, false,
-            MetaInData.FACULTATIF, false);
+            MetaInData.FACULTATIF, false, false);
         listeSections.add(stationNumber);
 
         if (!ViewMain.isCollection())
@@ -144,7 +144,7 @@ public class EditStationForm extends EditForm
                 .getString(Intern.S_DCHIST),
                 Messages.edit_station_sectionHistory_lib, true, false, 2);
         historique.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
-        historique.addAutoInput(null, false, MetaInData.INTERDIT, true);
+        historique.addAutoInput(null, false, MetaInData.INTERDIT, true, false);
         listeSections.add(historique);
 
         comments =
@@ -152,7 +152,7 @@ public class EditStationForm extends EditForm
                 .getString(Intern.S_COMMENT),
                 Messages.edit_station_sectionComment_lib, true, false, 1);
         comments.addManualInput(null, ComboType.BLOCK, Global.EMPTY_STRING);
-        comments.addAutoInput(null, true, MetaInData.INTERDIT, true);
+        comments.addAutoInput(null, true, MetaInData.INTERDIT, true, false);
         listeSections.add(comments);
         comments.getAutoInput().setVariableLabel(Messages.label_variable_comment);
         
@@ -161,7 +161,7 @@ public class EditStationForm extends EditForm
                 .getString(Intern.S_SURFACE),
                 Messages.edit_station_sectionSurface_lib, true, false, 2);
         surfaceSample.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
-        surfaceSample.addAutoInput(null, false, MetaInData.INTERDIT, true);
+        surfaceSample.addAutoInput(null, false, MetaInData.INTERDIT, true, false);
         listeSections.add(surfaceSample);
 
         utConvertion =
@@ -169,7 +169,7 @@ public class EditStationForm extends EditForm
                 .getString(Intern.S_OFFSETTU), Global.EMPTY_STRING, true,
                 false, 1);
         utConvertion.addManualInput(null, ComboType.NONE, "0.0"); //$NON-NLS-1$
-        utConvertion.addAutoInput(null, false, MetaInData.INTERDIT, false);
+        utConvertion.addAutoInput(null, false, MetaInData.INTERDIT, false, false);
         listeSections.add(utConvertion);
 
         time =
@@ -178,7 +178,7 @@ public class EditStationForm extends EditForm
                 Messages.edit_station_sectionTime_lib, false, true, 1);
         time.addConverter(ComboType.TIME, Global.EMPTY_STRING);
         time.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
-        time.addAutoInput(null, false, MetaInData.FACULTATIF, false);
+        time.addAutoInput(null, false, MetaInData.FACULTATIF, false, false);
         listeSections.add(time);
 
         date =
@@ -187,7 +187,7 @@ public class EditStationForm extends EditForm
                 Messages.edit_station_sectionDate_lib, false, true, 1);
         date.addConverter(ComboType.DATE, Global.EMPTY_STRING);
         date.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
-        date.addAutoInput(null, false, MetaInData.FACULTATIF, false);
+        date.addAutoInput(null, false, MetaInData.FACULTATIF, false, false);
         listeSections.add(date);
 
         latitude =
@@ -196,7 +196,7 @@ public class EditStationForm extends EditForm
                 Messages.edit_station_sectionLat_lib, false, true, 1);
         latitude.addConverter(ComboType.LAT, Global.EMPTY_STRING);
         latitude.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
-        latitude.addAutoInput(null, true, MetaInData.FACULTATIF, false);
+        latitude.addAutoInput(null, true, MetaInData.FACULTATIF, false, false);
         listeSections.add(latitude);
 
         if (ViewMain.radSerieTempo.getSelection())
@@ -208,7 +208,7 @@ public class EditStationForm extends EditForm
             endLatitude.addConverter(ComboType.LAT, Global.EMPTY_STRING);
             endLatitude.addManualInput(null, ComboType.NONE,
                 Global.EMPTY_STRING);
-            endLatitude.addAutoInput(null, true, MetaInData.INTERDIT, false);
+            endLatitude.addAutoInput(null, true, MetaInData.INTERDIT, false, false);
             endLatitude.setTimeSeriesInfo(true);
             listeSections.add(endLatitude);
         }
@@ -219,7 +219,7 @@ public class EditStationForm extends EditForm
                 Messages.edit_station_sectionLon_lib, false, true, 1);
         longitude.addConverter(ComboType.LON, Global.EMPTY_STRING);
         longitude.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
-        longitude.addAutoInput(null, true, MetaInData.FACULTATIF, false);
+        longitude.addAutoInput(null, true, MetaInData.FACULTATIF, false, false);
         listeSections.add(longitude);
 
         if (ViewMain.radSerieTempo.getSelection())
@@ -231,7 +231,7 @@ public class EditStationForm extends EditForm
             endLongitude.addConverter(ComboType.LON, Global.EMPTY_STRING);
             endLongitude.addManualInput(null, ComboType.NONE,
                 Global.EMPTY_STRING);
-            endLongitude.addAutoInput(null, true, MetaInData.INTERDIT, false);
+            endLongitude.addAutoInput(null, true, MetaInData.INTERDIT, false, false);
             endLongitude.setTimeSeriesInfo(true);
             listeSections.add(endLongitude);
         }
@@ -242,7 +242,7 @@ public class EditStationForm extends EditForm
                 .getString(Intern.S_DEPTH),
                 Messages.edit_station_sectionDepth_lib, true, true, 1);
         depth.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
-        depth.addAutoInput(null, true, MetaInData.FACULTATIF, false);
+        depth.addAutoInput(null, true, MetaInData.FACULTATIF, false, true);
         listeSections.add(depth);
 
         if (!ViewMain.radProfilVertical.getSelection())
@@ -255,7 +255,7 @@ public class EditStationForm extends EditForm
                         true, true, 1);
                 endDepth.addManualInput(null, ComboType.NONE,
                     Global.EMPTY_STRING);
-                endDepth.addAutoInput(null, true, MetaInData.INTERDIT, false);
+                endDepth.addAutoInput(null, true, MetaInData.INTERDIT, false, false);
                 endDepth.setTimeSeriesInfo(true);
                 listeSections.add(endDepth);
             }
@@ -267,7 +267,7 @@ public class EditStationForm extends EditForm
                     1);
             sensorDepth.addManualInput(null, ComboType.NONE,
                 Global.EMPTY_STRING);
-            sensorDepth.addAutoInput(null, false, MetaInData.FACULTATIF, false);
+            sensorDepth.addAutoInput(null, false, MetaInData.FACULTATIF, false, false);
             sensorDepth.setTimeSeriesInfo(true);
             listeSections.add(sensorDepth);
 
@@ -280,7 +280,7 @@ public class EditStationForm extends EditForm
                 magneticDeclin.addManualInput(null, ComboType.NONE,
                     Global.EMPTY_STRING);
                 magneticDeclin.addAutoInput(null, false, MetaInData.INTERDIT,
-                    false);
+                    false, false);
                 magneticDeclin.setTimeSeriesInfo(true);
                 listeSections.add(magneticDeclin);
             }
@@ -291,7 +291,7 @@ public class EditStationForm extends EditForm
                     Messages.edit_station_sectionSampling_lib, true, true, 1);
             samplingRate.addConverter(ComboType.FRQ, "*1"); //$NON-NLS-1$
             samplingRate.addManualInput(null, ComboType.NONE, "0"); //$NON-NLS-1$
-            samplingRate.addAutoInput(null, false, MetaInData.INTERDIT, false);
+            samplingRate.addAutoInput(null, false, MetaInData.INTERDIT, false, false);
             samplingRate.setTimeSeriesInfo(true);
             listeSections.add(samplingRate);
         }

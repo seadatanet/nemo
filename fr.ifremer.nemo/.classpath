@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry excluding="fr/ifremer/nemo/input/CopyOfFragment.java" kind="src" path="src"/>
+	<classpathentry kind="src" path="testsrc"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="lib" path="lib/activation.jar"/>
@@ -29,5 +30,7 @@
 	<classpathentry kind="lib" path="lib/toplink-essentials.jar"/>
 	<classpathentry kind="lib" path="lib/toplink-essentials-agent.jar"/>
 	<classpathentry kind="lib" path="lib/hsqldb-1.8.0.7.jar"/>
+	<classpathentry kind="lib" path="lib/junit.jar"/>
+	<classpathentry kind="lib" path="lib/mockito-all-1.8.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

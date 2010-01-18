@@ -42,12 +42,12 @@ public class FileStationHeader extends FileSection
         setterIndicator =
             new SetText(Messages.edit_file_enteteStation_indicator,
                 Global.EMPTY_STRING, true);
-        setterIndicator.setTextSize(139);
+        setterIndicator.setTextSize(Global.SIZE_SECTION / 2 - 10);
 
         setterLinesBeforeData =
             new SetText(Messages.edit_file_enteteStation_linesBeforeData,
                 Global.ZERO, false);
-        setterLinesBeforeData.setTextSize(139);
+        setterLinesBeforeData.setTextSize(Global.SIZE_SECTION / 2 - 10);
     }
 
     private void addRadListener(final Button radio)
@@ -89,7 +89,7 @@ public class FileStationHeader extends FileSection
     {
         compo = new Composite(parent, SWT.NONE);
         GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compo);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(compo);
+        GridDataFactory.fillDefaults().grab(false, false).applyTo(compo);
 
         radNumber = new Button(compo, SWT.RADIO);
         radNumber.setBackground(ViewMain.backgroungEdit);
@@ -103,17 +103,17 @@ public class FileStationHeader extends FileSection
 
         subCompo = new Composite(compo, SWT.NONE);
         GridLayoutFactory.fillDefaults().numColumns(2).applyTo(subCompo);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(subCompo);
+        GridDataFactory.fillDefaults().grab(false, false).applyTo(subCompo);
 
         col01 = new Composite(subCompo, SWT.NONE);
         GridLayoutFactory.fillDefaults().numColumns(1).applyTo(col01);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(col01);
+        GridDataFactory.fillDefaults().grab(false, false).applyTo(col01);
 
         setterIndicator.draw(col01, filled);
 
         col02 = new Composite(subCompo, SWT.NONE);
         GridLayoutFactory.fillDefaults().numColumns(1).applyTo(col02);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(col02);
+        GridDataFactory.fillDefaults().grab(false, false).applyTo(col02);
 
         setterLinesBeforeData.draw(col02, filled);
 

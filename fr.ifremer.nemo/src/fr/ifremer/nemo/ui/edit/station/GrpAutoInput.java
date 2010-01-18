@@ -11,10 +11,15 @@ import java.util.ArrayList;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.UIobject;
@@ -38,9 +43,15 @@ public class GrpAutoInput implements UIobject
     private final boolean variablePos;
     protected Button buttonVari;
 
+    protected boolean defaultValueEnable;
+    protected Button checkBoxHasDefaultValue;
+    protected Text textDefaultValue;
+
     public GrpAutoInput(int nbLine, String labelButtonPos, boolean variablePos,
-            MetaInData inData, boolean withCursor)
+            MetaInData inData, boolean withCursor, boolean defaultValueEnabled)
     {
+
+        defaultValueEnable = defaultValueEnabled;
 
         this.labelButtonPos = labelButtonPos;
         if (this.labelButtonPos == null)
@@ -53,7 +64,7 @@ public class GrpAutoInput implements UIobject
         }
 
         this.variablePos = variablePos;
-        
+
         this.variableLabel = Messages.label_variable;
     }
 
@@ -61,7 +72,7 @@ public class GrpAutoInput implements UIobject
     {
         this.variableLabel = value;
     }
-    
+
     public void draw(Composite sectionClient, boolean filled)
     {
 
@@ -110,6 +121,50 @@ public class GrpAutoInput implements UIobject
                     }
                 });
         }
+
+        if (defaultValueEnable)
+        {
+            checkBoxHasDefaultValue = new Button(compo2, SWT.CHECK);
+            checkBoxHasDefaultValue.setText("Default value");
+            checkBoxHasDefaultValue
+                .addSelectionListener(new SelectionListener() {
+
+                    public void widgetDefaultSelected(SelectionEvent e)
+                    {
+                        widgetSelected(e);
+                    }
+
+                    public void widgetSelected(SelectionEvent e)
+                    {
+                        if (checkBoxHasDefaultValue.getSelection())
+                        {
+                            textDefaultValue.setEnabled(true);
+                        }
+                        else
+                        {
+                            textDefaultValue.setEnabled(false);
+                            textDefaultValue.setText("");
+                        }
+                        
+                        Utils.invalidEtapes();
+                    }
+
+                });
+            GridDataFactory.fillDefaults().grab(true, false).applyTo(
+                checkBoxHasDefaultValue);
+
+            textDefaultValue = new Text(compo2, SWT.BORDER);
+            GridDataFactory.fillDefaults().grab(true, false).applyTo(
+                textDefaultValue);
+            textDefaultValue.addModifyListener(new ModifyListener(){
+
+                public void modifyText(ModifyEvent e)
+                {
+                    Utils.invalidEtapes();
+                }
+                
+            });
+        }
     }
 
     public void dispose()
@@ -130,8 +185,18 @@ public class GrpAutoInput implements UIobject
         {
             line.setEnabled(enabled);
         }
+        
         if (buttonVari != null)
             buttonVari.setEnabled(enabled);
+
+        if (defaultValueEnable)
+        {
+            checkBoxHasDefaultValue.setEnabled(enabled);
+            if (checkBoxHasDefaultValue.getSelection() || !enabled)
+            {
+                textDefaultValue.setEnabled(enabled);
+            }
+        }
     }
 
     public boolean isSelected()
@@ -147,12 +212,22 @@ public class GrpAutoInput implements UIobject
         }
         if (buttonVari != null)
             buttonVari.setSelection(false);
+
+        if (textDefaultValue != null)
+            textDefaultValue.setText("");
+
+        if (checkBoxHasDefaultValue != null)
+            checkBoxHasDefaultValue.setSelection(false);
+
     }
-    
-    public int nbLineFilled(){
+
+    public int nbLineFilled()
+    {
         int cpt = 0;
-        for (AutoLine line : lines){
-            if (!line.isEmpty()) cpt++;
+        for (AutoLine line : lines)
+        {
+            if (!line.isEmpty())
+                cpt++;
         }
         return cpt;
     }
@@ -227,13 +302,23 @@ public class GrpAutoInput implements UIobject
     }
 
     public void setValue(String line, String start, String end,
-            boolean posVariable, boolean valueVariable, int i)
+            boolean posVariable, boolean valueVariable, int i, boolean hasDefaultValue, boolean isDefaultValueSeceted, String defaultValue)
     {
         setEnabled(true);
         AutoLine autoLine = lines.get(i);
         autoLine.setValue(line, start, end);
         if (posVariable)
             buttonVari.setSelection(valueVariable);
+        
+        if (hasDefaultValue)            
+        {            
+            textDefaultValue.setEnabled(isDefaultValueSeceted);
+            
+            if (checkBoxHasDefaultValue != null)
+                checkBoxHasDefaultValue.setSelection(isDefaultValueSeceted);
+            if (textDefaultValue != null)
+                textDefaultValue.setText(defaultValue);
+        }
     }
 
     /**
@@ -297,4 +382,25 @@ public class GrpAutoInput implements UIobject
         }
     }
 
+    
+    protected boolean isDefaultValueEnable()
+    {
+        return defaultValueEnable;
+    }
+    
+    protected boolean isDefaultValueSelected()
+    {
+        if(checkBoxHasDefaultValue != null)
+            return checkBoxHasDefaultValue.getSelection();
+        
+        return false;
+    }
+    
+    protected String getDefaultValue()
+    {
+        if (textDefaultValue != null)
+            return textDefaultValue.getText();
+        else
+            return "";
+    }
 }

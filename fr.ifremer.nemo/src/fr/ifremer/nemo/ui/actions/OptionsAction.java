@@ -60,11 +60,14 @@ import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.config.Proxy;
+import fr.ifremer.nemo.config.Configuration.DataListEnum;
 import fr.ifremer.nemo.domain.AddedParameter;
 import fr.ifremer.nemo.domain.AddedParameter.IdParameter;
 import fr.ifremer.nemo.ui.Application;
 import fr.ifremer.nemo.ui.ApplicationActionBarAdvisor;
 import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.ui.edit.data.EditDataForm;
+import fr.ifremer.nemo.ui.edit.data.TableData;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
@@ -121,6 +124,11 @@ public class OptionsAction extends Action implements ISelectionListener,
     public static Text textAdrProxy, textPortProxy, textLoginProxy,
             textPassProxy;
 
+    // DataList    
+    public Configuration.DataListEnum dataList;
+   
+    private Button buttonP011,buttonP091;
+    
     // -- options necessitant un redemarrage
     private String configLangage;
     private Proxy configProxy;
@@ -329,6 +337,18 @@ public class OptionsAction extends Action implements ISelectionListener,
         // Flags
         selectDefaultFlagsTab(config.getDefaultCode());
 
+        // DataList
+        switch (config.getDataList())
+        {
+            case P011 :
+                buttonP011.setSelection(true);
+                break;
+            case P091 :
+                buttonP091.setSelection(true);
+                break;
+        }
+            
+        
         redLabels();
     }
 
@@ -841,7 +861,26 @@ public class OptionsAction extends Action implements ISelectionListener,
         createGroupMapping(compo);
         createGroupDateODV(compo);
     }
-
+    
+    /**
+     * This method initializes data list group
+     */
+    private void createGroupDataList(Composite parent)
+    {
+        group = new Group(parent, SWT.NONE);
+        group.setFont(Utils.font08);
+        group.setText("Liste de données");
+        GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(true).margins(4, 4).applyTo(group);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
+        
+        buttonP091 = new Button(group,SWT.RADIO);
+        buttonP091.setText("P091 (MEDATLAS Parameter Usage Vocabulary)");
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(buttonP091);
+        buttonP011 = new Button(group,SWT.RADIO);
+        buttonP011.setText("P011 (BODC Parameter Usage Vocabulary)");
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(buttonP011);
+    }
+    
     /**
      * This method initializes groupMapping
      */
@@ -1347,7 +1386,7 @@ public class OptionsAction extends Action implements ISelectionListener,
                         // message d'information pour redémarrage de
                         // l'application
                         boolean writeIni = checkRestart();
-
+                                                                        
                         // sauvegarde de la config
                         saveConfig(writeIni);
 
@@ -1355,7 +1394,7 @@ public class OptionsAction extends Action implements ISelectionListener,
                         Nemo.getInstance().getDomain().getCruise().getStation().getData().setAddedParameterModel();
                         //if (DataModel.inputModel != null)
                         //    DataModel.inputModel.setConverted(false);
-
+                        
                         // fermeture de la fenêtre
                         shelloptions.close();
 
@@ -1408,6 +1447,7 @@ public class OptionsAction extends Action implements ISelectionListener,
             createCompoHaut(sectionClient);
             createGroupEdmo(sectionClient);
             createCompoBas(sectionClient);
+            createGroupDataList(sectionClient);
         }
         else if (title.equals(Messages.settings_web)){
             createGroupWS(sectionClient);
@@ -1619,7 +1659,9 @@ public class OptionsAction extends Action implements ISelectionListener,
 
         return writeIni;
     }
-    
+
+
+
     protected void saveConfig(boolean writeIni){
         // configuration
         final Configuration configuration = Nemo.getInstance().getConfig();
@@ -1695,6 +1737,19 @@ public class OptionsAction extends Action implements ISelectionListener,
         }
         configuration.setFlagTables(flagTables);
 
+        // DataList             
+        if (buttonP011.getSelection())
+            dataList = DataListEnum.P011;
+        else if (buttonP091.getSelection())
+            dataList = DataListEnum.P091;
+        
+        if (!dataList.equals(configuration.getDataList()))
+        {
+            TableData.removeAllElts();
+        }
+        
+        configuration.setDataList(dataList.toString());
+        
         // Enregistrement de la configuration
         configuration.save();
     }

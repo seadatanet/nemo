@@ -135,7 +135,7 @@ public abstract class XmlSAXParser extends DefaultHandler {
 
 		try {
 			XMLReader parser = getXmlReader();
-			// pas de grammaire utilisée pour vérifier la syntaxe du fichier XML
+			// pas de grammaire utilisï¿½e pour vï¿½rifier la syntaxe du fichier XML
 			parser.setFeature("http://xml.org/sax/features/validation", false);
 			parser.setContentHandler(this);
 			stream = a_URL.openStream();
@@ -149,6 +149,7 @@ public abstract class XmlSAXParser extends DefaultHandler {
 				try {
 					stream.close();
 				} catch (Exception e) {
+                    e.printStackTrace();
 				}
 			}
 		}
@@ -164,7 +165,7 @@ public abstract class XmlSAXParser extends DefaultHandler {
 
 		try {
 			XMLReader parser = getXmlReader();
-			// pas de grammaire utilisée pour vérifier la syntaxe du fichier XML
+			// pas de grammaire utilisï¿½e pour vï¿½rifier la syntaxe du fichier XML
 			parser.setFeature("http://xml.org/sax/features/validation", false);
 			parser.setContentHandler(this);
 			parser.parse(new InputSource(new InputStreamReader(a_Stream)));

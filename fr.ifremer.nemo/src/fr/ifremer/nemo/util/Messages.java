@@ -293,6 +293,7 @@ public class Messages {
     public static String table_edmo;
     public static String table_dataTypes;
     public static String table_parameters;
+    public static String table_subparameters;
     public static String table_ships;
     public static String table_datacenter;
     public static String table_region;

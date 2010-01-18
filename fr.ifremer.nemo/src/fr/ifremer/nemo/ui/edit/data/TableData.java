@@ -19,7 +19,9 @@ import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.Flag;
+import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.MediaDomain;
+import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.ui.FiltrageTableType;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.DataModel;
@@ -62,7 +64,7 @@ public class TableData
         table.setHeaderVisible(true);
         table.setLinesVisible(true);
         TableColumn tableColumn0 = new TableColumn(table, SWT.NONE);
-        //tableColumn0.setWidth(110);
+        // tableColumn0.setWidth(110);
         tableColumn0.setWidth(50);
         tableColumn0.setText(Messages.table_label_code.toUpperCase());
 
@@ -71,7 +73,7 @@ public class TableData
         tableColumn1.setText(Messages.table_label_unit);
 
         TableColumn tableColumn2 = new TableColumn(table, SWT.NONE);
-        //tableColumn2.setWidth(100);
+        // tableColumn2.setWidth(100);
         tableColumn2.setWidth(70);
         tableColumn2.setText(Messages.label_conversion);
         tableColumn2.setAlignment(SWT.RIGHT);
@@ -82,43 +84,43 @@ public class TableData
         tableColumn3.setAlignment(SWT.RIGHT);
 
         TableColumn tableColumn4 = new TableColumn(table, SWT.NONE);
-        //tableColumn4.setWidth(50);
+        // tableColumn4.setWidth(50);
         tableColumn4.setWidth(45);
         tableColumn4.setText(Messages.label_start);
         tableColumn4.setAlignment(SWT.RIGHT);
 
         TableColumn tableColumn5 = new TableColumn(table, SWT.NONE);
-        //tableColumn5.setWidth(50);
+        // tableColumn5.setWidth(50);
         tableColumn5.setWidth(45);
         tableColumn5.setText(Messages.label_end);
         tableColumn5.setAlignment(SWT.RIGHT);
 
         TableColumn tableColumn6 = new TableColumn(table, SWT.NONE);
-        //tableColumn6.setWidth(100);
+        // tableColumn6.setWidth(100);
         tableColumn6.setWidth(50);
         tableColumn6.setText(Messages.label_format);
         tableColumn6.setAlignment(SWT.RIGHT);
 
         TableColumn tableColumn7 = new TableColumn(table, SWT.NONE);
-        //tableColumn7.setWidth(100);
+        // tableColumn7.setWidth(100);
         tableColumn7.setWidth(90);
         tableColumn7.setText(Messages.table_label_valueIn);
         tableColumn7.setAlignment(SWT.RIGHT);
 
         TableColumn tableColumn8 = new TableColumn(table, SWT.NONE);
-        //tableColumn8.setWidth(100);
+        // tableColumn8.setWidth(100);
         tableColumn8.setWidth(90);
         tableColumn8.setText(Messages.table_label_valueOut);
         tableColumn8.setAlignment(SWT.RIGHT);
 
         TableColumn tableColumn9 = new TableColumn(table, SWT.NONE);
-        //tableColumn9.setWidth(65);
+        // tableColumn9.setWidth(65);
         tableColumn9.setWidth(75);
         tableColumn9.setText(Messages.table_label_testIn);
         tableColumn9.setAlignment(SWT.RIGHT);
 
         TableColumn tableColumn10 = new TableColumn(table, SWT.NONE);
-        //tableColumn10.setWidth(65);
+        // tableColumn10.setWidth(65);
         tableColumn10.setWidth(75);
         tableColumn10.setText(Messages.table_label_testOut);
         tableColumn10.setAlignment(SWT.RIGHT);
@@ -142,17 +144,17 @@ public class TableData
 
     public static void initTypesWS()
     {
-
+        
         // initialisation de la ArrayList des types des donnees e partir du
         typesWS = null;
         typesWS = new ArrayList<TypeData>();
 
-        int taille = DataModel.listeWSParameters.length;
+        int taille = NemoLists.getParameters().length;
 
         for (int i = 0; i < taille; i++)
         {
             WSParameter wsParameter = new WSParameter();
-            wsParameter = DataModel.listeWSParameters[i];
+            wsParameter = NemoLists.getParameters()[i];
 
             // new type
             TypeData type = new TypeData();
@@ -327,7 +329,7 @@ public class TableData
         itemList.addListener(SWT.Selection, new Listener() {
             public void handleEvent(Event e)
             {
-                FiltrageTableType.go(Global.PARAMETER);
+                FiltrageTableType.go(Global.PARAMETER, null);
 
             }
         });
@@ -423,15 +425,31 @@ public class TableData
         for (int i = 0; i < nbre; i++)
         {
             TableItem item = new TableItem(table, SWT.NONE);
-            item.setText(new String[] {types.get(i).getCode(),
-                    types.get(i).getUnite(), types.get(i).getConversion(),
-                    types.get(i).getTest(),
-                    String.valueOf(types.get(i).getDebut()),
-                    String.valueOf(types.get(i).getFin()),
-                    types.get(i).getFormat(), types.get(i).getEntree(),
-                    types.get(i).getSortie(), types.get(i).getTestIn(),
-                    types.get(i).getTestOut(), types.get(i).getDebutFlag(),
-                    types.get(i).getFinFlag()});
+            if (types.get(i).isP011())
+            {
+                item.setText(new String[] {types.get(i).getCodeP011() + Global.SEP + types.get(i).getNomP011(),
+                        types.get(i).getUnite(), types.get(i).getConversion(),
+                        types.get(i).getTest(),
+                        String.valueOf(types.get(i).getDebut()),
+                        String.valueOf(types.get(i).getFin()),
+                        types.get(i).getFormat(), types.get(i).getEntree(),
+                        types.get(i).getSortie(), types.get(i).getTestIn(),
+                        types.get(i).getTestOut(), types.get(i).getDebutFlag(),
+                        types.get(i).getFinFlag()});
+            }
+            else
+            {
+
+                item.setText(new String[] {types.get(i).getCode(),
+                        types.get(i).getUnite(), types.get(i).getConversion(),
+                        types.get(i).getTest(),
+                        String.valueOf(types.get(i).getDebut()),
+                        String.valueOf(types.get(i).getFin()),
+                        types.get(i).getFormat(), types.get(i).getEntree(),
+                        types.get(i).getSortie(), types.get(i).getTestIn(),
+                        types.get(i).getTestOut(), types.get(i).getDebutFlag(),
+                        types.get(i).getFinFlag()});
+            }
         }
 
     }
@@ -444,20 +462,20 @@ public class TableData
 
     }
 
-//    public static void nouvelElt()
-//    {
-//        // rajoute une ligne en derniere position de la table
-//
-//        TypeData type = new TypeData();
-//        types.add(type);
-//
-//        // razTableData
-//        razTableData();
-//
-//        // refresh de la table
-//        creationTable();
-//
-//    }
+    // public static void nouvelElt()
+    // {
+    // // rajoute une ligne en derniere position de la table
+    //
+    // TypeData type = new TypeData();
+    // types.add(type);
+    //
+    // // razTableData
+    // razTableData();
+    //
+    // // refresh de la table
+    // creationTable();
+    //
+    // }
 
     public static void monterEltTableData()
     {
@@ -608,6 +626,20 @@ public class TableData
 
     }
 
+    public static void removeAllElts()
+    {
+
+        types.clear();
+
+        // razTableData
+        razTableData();
+
+        // refresh de la table
+        creationTable();
+
+    }
+    
+    
     public static void majChampTest()
     {
 
@@ -796,7 +828,9 @@ public class TableData
         nbre = ViewMain.tableData.getItemCount();
         for (int i = 0; i < nbre; i++)
         {
-            types.get(i).setCode(ViewMain.tableData.getItem(i).getText(0));
+            if (!types.get(i).isP011())
+                types.get(i).setCode(ViewMain.tableData.getItem(i).getText(0));
+            
             types.get(i).setUnite(ViewMain.tableData.getItem(i).getText(1));
             types.get(i)
                 .setConversion(ViewMain.tableData.getItem(i).getText(2));

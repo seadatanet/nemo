@@ -37,7 +37,6 @@ import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.format.DateTimeFormat;
 import fr.ifremer.nemo.util.format.ExternalizableFormat;
 import fr.ifremer.nemo.util.format.LatitudeFormat;
@@ -68,8 +67,10 @@ public class StationSection extends NemoSection
 
     private boolean timeSeriesInfo = false;
 
+    public static final String defaultValue = "Default";
+
     /*
-     *  construct StationSection methodes
+     * construct StationSection methodes
      */
 
     /**
@@ -133,12 +134,12 @@ public class StationSection extends NemoSection
      * @param enableInData
      */
     public void addAutoInput(String autoLabel, boolean variablePos,
-            MetaInData enable, boolean withCursor)
+            MetaInData enable, boolean withCursor, boolean defaultValueEnable)
     {
         enableInData = enable;
         autoInput =
             new GrpAutoInput(nbLignes, autoLabel, variablePos, enableInData,
-                withCursor);
+                withCursor, defaultValueEnable);
     }
 
     /**
@@ -264,21 +265,24 @@ public class StationSection extends NemoSection
     }
 
     public void setAutoValueInput(String line, String start, String end,
-            boolean posVariable, boolean valueVariable, int i)
+            boolean posVariable, boolean valueVariable, int i,
+            boolean hasDefaultValue, boolean isDefaultValueSeceted,
+            String defaultValue)
     {
         manualInput.setEnabled(false);
         manualInput.razDefaultValues();
-        autoInput.setValue(line, start, end, posVariable, valueVariable, i);
+        autoInput.setValue(line, start, end, posVariable, valueVariable, i,
+            hasDefaultValue, isDefaultValueSeceted, defaultValue);
     }
 
     public void setAutoValueInput(String line, String start, String end, int i)
     {
-        setAutoValueInput(line, start, end, false, false, i);
+        setAutoValueInput(line, start, end, false, false, i, false, false, "");
     }
 
     public void setAutoValueInput(String line, String start, String end)
     {
-        setAutoValueInput(line, start, end, false, false, 0);
+        setAutoValueInput(line, start, end, false, false, 0, false, false, "");
     }
 
     public void setAutoValueInput(PropertyModel propertyModel,
@@ -290,6 +294,7 @@ public class StationSection extends NemoSection
 
         ligne = frag.getFirstLine();
         debut = frag.getFirstCharOffset();
+
         // FAE 0001226 : décaler le lastcharoffset pour qu'il prenne en compte
         // le nombre de lignes
         if (offset)
@@ -307,8 +312,12 @@ public class StationSection extends NemoSection
                                 .getValue()));
         }
 
+        boolean hasDefaultValue = frag.isDefaultValue();
+        boolean isDefaultValueSeceted = frag.isDefaultValueSelected();
+        String defaultValue = frag.getDefaultValue();
         setAutoValueInput(String.valueOf(real_ligne), String.valueOf(debut),
-            String.valueOf(fin), posVariable, vari, i);
+            String.valueOf(fin), posVariable, vari, i, hasDefaultValue,
+            isDefaultValueSeceted, defaultValue);
 
     }
 
@@ -445,7 +454,13 @@ public class StationSection extends NemoSection
         else
         {
             value = autoInput.getValue();
+            
+            if (autoInput.isDefaultValueEnable())
+                if (autoInput.checkBoxHasDefaultValue.getSelection())
+                    if (value.trim().equals(autoInput.textDefaultValue.getText().trim()))
+                        value = defaultValue;
         }
+
         return value;
     }
 
@@ -671,7 +686,7 @@ public class StationSection extends NemoSection
     }
 
     /*
-     *  TEST methodes
+     * TEST methodes
      */
 
     protected void stationNumberTest()
@@ -876,30 +891,39 @@ public class StationSection extends NemoSection
     protected void defaultTest() throws NumberFormatException
     {
         String result = Global.EMPTY_STRING;
+
         if (!isManual())
         {
             result = autoInput.getValue(0).trim();
+
+            if (autoInput.checkBoxHasDefaultValue.getSelection())
+                if (result.equals(autoInput.textDefaultValue.getText()))
+                    result = defaultValue;
+
             autoInput.selectInViewFile();
         }
         else
         {
             result = manualInput.getValue().trim();
         }
-        if (!result.equals(Global.EMPTY_STRING))
+
+        if (!result.equals(Global.EMPTY_STRING) && !result.equals(defaultValue))
         {
             result =
                 Formatter.getSingleton().formatInt(
                     "%-5d", Float.parseFloat(result)); //$NON-NLS-1$
         }
+
         resultTest.setText(result);
         resultTest.pack();
     }
 
     @Override
-    public void initModel(StationModel stationModel){
+    public void initModel(StationModel stationModel)
+    {
         String ligne = null;
         Fragment frag;
-        //Station station = stationModel.getModel();
+        // Station station = stationModel.getModel();
 
         if (name.equals(Intern.S_STATIONNUMBER))
         {
@@ -915,17 +939,19 @@ public class StationSection extends NemoSection
         {
             boolean position = false;
             // généralisation des autres sections
-            for (int i = 0; i < nbLignes; i++){
+            for (int i = 0; i < nbLignes; i++)
+            {
 
                 // récupération du propertyModel correspondant
-                //String tagXml = getTagXml(i);
+                // String tagXml = getTagXml(i);
                 String propertyName = name;
-                if (nbLignes > 1) propertyName += (i+1);
+                if (nbLignes > 1)
+                    propertyName += (i + 1);
                 PropertyModel propertyModel = new PropertyModel();
                 propertyModel.setProperty(propertyName);
-                    //stationModel.getProperty(name);
-                    //getPropertyModel(stationModel, tagXml);
-                //ExternalizableFormat format = propertyModel.getFormat();
+                // stationModel.getProperty(name);
+                // getPropertyModel(stationModel, tagXml);
+                // ExternalizableFormat format = propertyModel.getFormat();
                 ExternalizableFormat format = null;
 
                 // gestion des flags qualite
@@ -938,137 +964,184 @@ public class StationSection extends NemoSection
                     propertyModel.setFlag(flag);
 
                 // gestion des converteurs
-                try{
-                    if (converter != null){
+                try
+                {
+                    if (converter != null)
+                    {
                         String formatSaisi = converter.getText();
-                        switch (cType){
+                        switch (cType)
+                        {
                             case FRQ:
                                 propertyModel.setConversionFormula(formatSaisi);
-                                break;
+                            break;
                             case TIME:
                             case DATE:
                                 format = new DateTimeFormat();
-                                ((DateTimeFormat) format).setFormatString(formatSaisi);
-                                break;
+                                ((DateTimeFormat) format)
+                                    .setFormatString(formatSaisi);
+                            break;
                             case LAT:
                                 format = new LatitudeFormat();
-                                ((LatitudeFormat) format).setFormatString(formatSaisi);
-                                break;
+                                ((LatitudeFormat) format)
+                                    .setFormatString(formatSaisi);
+                            break;
                             case LON:
                                 format = new LongitudeFormat();
-                                ((LongitudeFormat) format).setFormatString(formatSaisi);
-                                break;
+                                ((LongitudeFormat) format)
+                                    .setFormatString(formatSaisi);
+                            break;
                             default:
-                                break;
+                            break;
                         }
                     }
                 }
-                catch (ParseException e){
+                catch (ParseException e)
+                {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
 
                 // gestion des valeurs saisies
-                if (isManual()){
+                if (isManual())
+                {
                     // saisie manuelle
                     propertyModel.fillUserValue(getValue(i));
-                    //fillManualModel(propertyModel, station, tagXml, format, i);
+                    // fillManualModel(propertyModel, station, tagXml, format,
+                    // i);
 
                 }
-                else{
+                else
+                {
                     // position dans fichier
                     boolean fillVariPos = (autoInput.getButtonVari() != null);
-                    //propertyModel.setInData(inData)
+                    // propertyModel.setInData(inData)
 
-                    if (name.equals(Intern.S_COMMENT)){
+                    if (name.equals(Intern.S_COMMENT))
+                    {
                         // cas particuliers : COMMENT
                         // surlignement et injection ligne debut fin
-                        frag = propertyModel.fillFragment(this, ligne, i, false, fillVariPos);
-                        int entete = Nemo.getInstance().getDomain().getMedia().getModel().getFileHeader();
+                        frag =
+                            propertyModel.fillFragment(this, ligne, i, false,
+                                fillVariPos);
+                        int entete =
+                            Nemo.getInstance().getDomain().getMedia()
+                                .getModel().getFileHeader();
                         Utils.calculNbreLignesPuisRemplissageFrag(frag, entete);
                     }
-                    else{
+                    else
+                    {
                         // Généralisation
-                        if ((!position) && (((i > 0) && (getLineText(i).trim().equals(Global.EMPTY_STRING)))
-                                || getValue() == null
-                                || getValue().trim().equals(Global.EMPTY_STRING))){
+                        if ((!position)
+                                && (((i > 0) && (getLineText(i).trim()
+                                    .equals(Global.EMPTY_STRING)))
+                                        || getValue() == null || getValue()
+                                    .trim().equals(Global.EMPTY_STRING)))
+                        {
                             propertyModel.fillUserValue(getValue(i));
-                            //fillManualModel(propertyModel, station, tagXml, format, i);
+                            // fillManualModel(propertyModel, station, tagXml,
+                            // format, i);
                         }
-                        else if (!getAutoInput().getLines().get(i).isEmpty()){
-                            propertyModel.setInData(getAutoInput().getLines().get(i).isInData());
-                            propertyModel.fillFragment(this, ligne, i, true, fillVariPos);
-                            if (fillVariPos){
-                                if (format instanceof LatitudeFormat){
-                                    ((LatitudeFormat) format).setVariableLength(isVariablePos());
+                        else if (!getAutoInput().getLines().get(i).isEmpty())
+                        {
+                            propertyModel.setInData(getAutoInput().getLines()
+                                .get(i).isInData());
+                            try
+                            {
+                                propertyModel.fillFragment(this, ligne, i,
+                                    true, fillVariPos, getAutoInput()
+                                        .isDefaultValueEnable(), getAutoInput()
+                                        .isDefaultValueSelected(),
+                                    getAutoInput().getDefaultValue());
+                            }
+                            catch (Exception e)
+                            {
+                                e.printStackTrace();
+                            }
+                            if (fillVariPos)
+                            {
+                                if (format instanceof LatitudeFormat)
+                                {
+                                    ((LatitudeFormat) format)
+                                        .setVariableLength(isVariablePos());
                                 }
-                                else if (format instanceof LongitudeFormat){
-                                    ((LongitudeFormat) format).setVariableLength(isVariablePos());
+                                else if (format instanceof LongitudeFormat)
+                                {
+                                    ((LongitudeFormat) format)
+                                        .setVariableLength(isVariablePos());
                                 }
                             }
                             position = true;
-                            
+
                             // test la ligne suivante
-                            if (getAutoInput().nbLineFilled() == 1){
+                            if (getAutoInput().nbLineFilled() == 1)
+                            {
                                 propertyModel.getFragment().setSingleLine(true);
                             }
                         }
-                        else if ((i > 0) && position){
+                        else if ((i > 0) && position)
+                        {
                             propertyModel.setUserProvided(false);
                         }
                     }
                 }
-                if (format != null){
+                if (format != null)
+                {
                     propertyModel.setFormat(format);
                 }
                 stationModel.addProperty(propertyModel);
             }
         }
     }
-/*
-    private void fillManualModel(PropertyModel propertyModel, Station station,
-            String tagXml, ExternalizableFormat format, int i)
-    {
-        propertyModel.setUserProvided(true);
-        String valueString = getManualValue(i);
-        if (isTimeSeriesInfo())
-            station.getTimeSeriesInformation().set(tagXml, valueString, format);
-        else
-            station.set(tagXml, valueString, format);
-    }
-*/
+
+    /*
+     * private void fillManualModel(PropertyModel propertyModel, Station
+     * station, String tagXml, ExternalizableFormat format, int i) {
+     * propertyModel.setUserProvided(true); String valueString =
+     * getManualValue(i); if (isTimeSeriesInfo())
+     * station.getTimeSeriesInformation().set(tagXml, valueString, format); else
+     * station.set(tagXml, valueString, format); }
+     */
     private void initReferenceModel(StationModel stationModel)
     {
         String ligne = null;
         PropertyModel propertyModel = new PropertyModel();
-        //PropertyModel propertyModel = stationModel.getReferenceProperty();
-        if (ViewMain.editStationForm.stationNumber.isManual()){
-            propertyModel.fillUserValue(ViewMain.editStationForm.stationNumber.getManualValue());
-       
+        // PropertyModel propertyModel = stationModel.getReferenceProperty();
+        if (ViewMain.editStationForm.stationNumber.isManual())
+        {
+            propertyModel.fillUserValue(ViewMain.editStationForm.stationNumber
+                .getManualValue());
+
             /*
-            String stationNumber =  ViewMain.editStationForm.stationNumber.getManualValue();
-            stationModel.setIncrementRef(true);
-            if (ViewMain.radTrajectoire.getSelection())
-                stationModel.getTrajectory().setStationNumber(stationNumber);
-            else
-                stationModel.setIncrementNumber(stationNumber);
-            propertyModel.setUserProvided(true);
-            */
+             * String stationNumber =
+             * ViewMain.editStationForm.stationNumber.getManualValue();
+             * stationModel.setIncrementRef(true); if
+             * (ViewMain.radTrajectoire.getSelection())
+             * stationModel.getTrajectory().setStationNumber(stationNumber);
+             * else stationModel.setIncrementNumber(stationNumber);
+             * propertyModel.setUserProvided(true);
+             */
         }
-        else{
-            //stationModel.setIncrementRef(false);
+        else
+        {
+            // stationModel.setIncrementRef(false);
             int ligneSaisie =
                 Integer.valueOf(ViewMain.editStationForm.stationNumber
                     .getLineText(0));
-            if (ligneSaisie == 0){
+            if (ligneSaisie == 0)
+            {
                 ligne = Global.ZERO;
             }
-            else{
+            else
+            {
                 ligne =
-                    String.valueOf(
-                        ligneSaisie - Integer.valueOf(ViewMain.editFileForm.sectionEnteteFichier.getValue()));
+                    String
+                        .valueOf(ligneSaisie
+                                - Integer
+                                    .valueOf(ViewMain.editFileForm.sectionEnteteFichier
+                                        .getValue()));
             }
-            propertyModel.fillFragment(ViewMain.editStationForm.stationNumber, ligne);
+            propertyModel.fillFragment(ViewMain.editStationForm.stationNumber,
+                ligne);
         }
         stationModel.setReferenceProperty(propertyModel);
     }
@@ -1084,11 +1157,13 @@ public class StationSection extends NemoSection
 
             // --- nom du model
             String modelName = Nemo.getInstance().getNomModele();
-            
-            if (!Global.EMPTY_STRING.equals(modelName)){
+
+            if (!Global.EMPTY_STRING.equals(modelName))
+            {
                 code = typeCombo;
             }
-            else{
+            else
+            {
                 Pattern p = Pattern.compile(Global.SEP);
                 String mots[] = p.split(typeCombo);
 
@@ -1122,7 +1197,7 @@ public class StationSection extends NemoSection
     @Override
     public void fillFromModel(StationModel stationModel)
     {
-        //Station station = stationModel.getModel();
+        // Station station = stationModel.getModel();
         if (name.equals(Intern.S_STATIONNUMBER))
         {
             fillReference(stationModel.getReferenceProperty());
@@ -1134,14 +1209,17 @@ public class StationSection extends NemoSection
         else
         {
             // généralisation des autres sections
-            for (int i = 0; i < nbLignes; i++){
+            for (int i = 0; i < nbLignes; i++)
+            {
 
                 // récupération du propertyModel correspondant
-                //String tagXml = getTagXml(i);
+                // String tagXml = getTagXml(i);
                 String propertyName = name;
-                if (nbLignes > 1) propertyName += (i+1);
-                PropertyModel propertyModel = stationModel.getProperty(propertyName);
-                    //getPropertyModel(stationModel, tagXml);
+                if (nbLignes > 1)
+                    propertyName += (i + 1);
+                PropertyModel propertyModel =
+                    stationModel.getProperty(propertyName);
+                // getPropertyModel(stationModel, tagXml);
                 ExternalizableFormat format = propertyModel.getFormat();
 
                 // gestion des flags qualite
@@ -1153,7 +1231,8 @@ public class StationSection extends NemoSection
                     .trim());
 
                 // gestion des converters
-                if (converter != null){
+                if (converter != null)
+                {
                     String formule = Global.EMPTY_STRING;
                     switch (cType)
                     {
@@ -1161,79 +1240,82 @@ public class StationSection extends NemoSection
                             formule = propertyModel.getConversionFormula();
                             if (formule.equals(Global.EMPTY_STRING))
                                 formule = "*1"; //$NON-NLS-1$ 
-                            break;
+                        break;
                         case TIME:
                         case DATE:
-                            //if (inputType != E_InputType.PROFILE && Nemo.getInstance().getDomain().getCruise().getStation().isComputed())
-                            //    formule = ((DateTimeFormat)propertyModel.getFormat()).getFormatString();
-                            //else
-                                formule = ((DateTimeFormat) format).getFormatString();
-                            break;
+                            // if (inputType != E_InputType.PROFILE &&
+                            // Nemo.getInstance().getDomain().getCruise().getStation().isComputed())
+                            // formule =
+                            // ((DateTimeFormat)propertyModel.getFormat()).getFormatString();
+                            // else
+                            formule =
+                                ((DateTimeFormat) format).getFormatString();
+                        break;
                         case LAT:
-                            formule = ((LatitudeFormat) format).getFormatString();
-                            break;
+                            formule =
+                                ((LatitudeFormat) format).getFormatString();
+                        break;
                         case LON:
-                            formule = ((LongitudeFormat) format).getFormatString();
-                            break;
+                            formule =
+                                ((LongitudeFormat) format).getFormatString();
+                        break;
                         default:
-                            break;
+                        break;
                     }
                     converter.setText(formule);
                 }
-/*
-                if ((name.equals(Intern.S_TIME) || name.equals(Intern.S_DATE))
-                        && inputType != E_InputType.PROFILE
-                        && !Nemo.getInstance().getDomain().getCruise().getStation().isComputed()){
-                    // cas des données temporelles dans les données
-                    LineFragment lineTime = propertyModel.getFragment();
-                    setAutoValueInput(Global.EMPTY_STRING, String
-                        .valueOf(lineTime.getFirstCharOffset()), String
-                        .valueOf(lineTime.getLastCharOffset()), i);
+                /*
+                 * if ((name.equals(Intern.S_TIME) ||
+                 * name.equals(Intern.S_DATE)) && inputType !=
+                 * E_InputType.PROFILE &&
+                 * !Nemo.getInstance().getDomain().getCruise().getStation().isComputed()){ //
+                 * cas des données temporelles dans les données LineFragment
+                 * lineTime = propertyModel.getFragment();
+                 * setAutoValueInput(Global.EMPTY_STRING, String
+                 * .valueOf(lineTime.getFirstCharOffset()), String
+                 * .valueOf(lineTime.getLastCharOffset()), i); } else {
+                 */
+                // gestion des valeurs saisies
+                if (propertyModel.isUserProvided())
+                {
+                    /*
+                     * String value = Global.EMPTY_STRING; if
+                     * (isTimeSeriesInfo()) value =
+                     * station.getTimeSeriesInformation().get(tagXml, format);
+                     * else value = station.get(tagXml, format);
+                     */
+                    String value = propertyModel.getUserValue();
+                    if (value.equals("NaN"))value = Global.EMPTY_STRING; //$NON-NLS-1$
+                    setManualValueInput(value, i);
                 }
                 else
                 {
-*/
-                    // gestion des valeurs saisies
-                    if (propertyModel.isUserProvided()){
-                        /*String value = Global.EMPTY_STRING;
-                        if (isTimeSeriesInfo())
-                            value =
-                                station.getTimeSeriesInformation().get(tagXml,
-                                    format);
-                        else
-                            value = station.get(tagXml, format);*/
-                        String value = propertyModel.getUserValue();
-                        if (value.equals("NaN")) value = Global.EMPTY_STRING; //$NON-NLS-1$
-                        setManualValueInput(value, i);
+                    // position dans fichier
+                    boolean fillVariPos = (autoInput.getButtonVari() != null);
+                    boolean offset = false;
+                    if (name.equals(Intern.S_COMMENT))
+                        offset = true;
+
+                    if ((i > 0) && propertyModel.isUserProvided())
+                    {
+                        // on a rentre que la ligne 1 donc les valeurs de
+                        // ligne 2 sont vides
+                        setAutoValueInput(Global.EMPTY_STRING,
+                            Global.EMPTY_STRING, Global.EMPTY_STRING, i);
                     }
                     else
                     {
-                        // position dans fichier
-                        boolean fillVariPos =
-                            (autoInput.getButtonVari() != null);
-                        boolean offset = false;
-                        if (name.equals(Intern.S_COMMENT))
-                            offset = true;
+                        if (autoInput.getLines().get(i).getCursor() != null)
+                            Utils.calculPosxPosy(propertyModel.getFragment(),
+                                getCursor(i));
+                        setAutoValueInput(propertyModel, null, fillVariPos,
+                            offset, i);
 
-                        if ((i > 0) && propertyModel.isUserProvided())
-                        {
-                            // on a rentre que la ligne 1 donc les valeurs de
-                            // ligne 2 sont vides
-                            setAutoValueInput(Global.EMPTY_STRING,
-                                Global.EMPTY_STRING, Global.EMPTY_STRING, i);
-                        }
-                        else
-                        {
-                            if (autoInput.getLines().get(i).getCursor() != null)
-                                Utils.calculPosxPosy(propertyModel
-                                    .getFragment(), getCursor(i));
-                            setAutoValueInput(propertyModel, null, fillVariPos,
-                                offset, i);
-                            
-                            if (propertyModel.getFragment().isSingleLine()) break;
-                        }
+                        if (propertyModel.getFragment().isSingleLine())
+                            break;
                     }
-                //}
+                }
+                // }
 
             }
 
@@ -1241,13 +1323,17 @@ public class StationSection extends NemoSection
 
     }
 
-    private void fillReference(PropertyModel refProperty){
+    private void fillReference(PropertyModel refProperty)
+    {
         // SECTION numero de station
-        //PropertyModel propertyModel = stationModel.getReferenceProperty();
-        if (refProperty.isUserProvided()){
-            ViewMain.editStationForm.stationNumber.setManualValueInput(refProperty.getUserValue());
+        // PropertyModel propertyModel = stationModel.getReferenceProperty();
+        if (refProperty.isUserProvided())
+        {
+            ViewMain.editStationForm.stationNumber
+                .setManualValueInput(refProperty.getUserValue());
         }
-        else{
+        else
+        {
             Fragment frag = refProperty.getFragment();
             Integer realLigne = null;
             int ligne = frag.getFirstLine();
@@ -1256,37 +1342,22 @@ public class StationSection extends NemoSection
             ViewMain.editStationForm.stationNumber.setAutoValueInput(
                 refProperty, realLigne);
         }
-        
-        
-        /*
-        if (stationModel.isIncrementRef()){
-            String value = null;
-            if (stationModel.getInputType().equals(Global.TRAJECTORY))
-            {
-                // FAE 1386 : saisie manuelle, non incrementable pour
-                // Trajectoires
-                value = stationModel.getTrajectory().getStationNumber();
-            }
-            else
-            {
-                value = String.valueOf(stationModel.getIncrementNumber());
-            }
-            ViewMain.editStationForm.stationNumber.setManualValueInput(value);
-        }
-        else
-        {
-            // valeurs de ligne/debut/fin
-            PropertyModel propertyModel = stationModel.getReferenceProperty();
-            Fragment frag = propertyModel.getFragment();
-            Integer realLigne = null;
-            int ligne = frag.getFirstLine();
-            if (ligne == 0)
-                realLigne = new Integer(0);
-            ViewMain.editStationForm.stationNumber.setAutoValueInput(
-                propertyModel, realLigne);
 
-        }
-        */
+        /*
+         * if (stationModel.isIncrementRef()){ String value = null; if
+         * (stationModel.getInputType().equals(Global.TRAJECTORY)) { // FAE 1386 :
+         * saisie manuelle, non incrementable pour // Trajectoires value =
+         * stationModel.getTrajectory().getStationNumber(); } else { value =
+         * String.valueOf(stationModel.getIncrementNumber()); }
+         * ViewMain.editStationForm.stationNumber.setManualValueInput(value); }
+         * else { // valeurs de ligne/debut/fin PropertyModel propertyModel =
+         * stationModel.getReferenceProperty(); Fragment frag =
+         * propertyModel.getFragment(); Integer realLigne = null; int ligne =
+         * frag.getFirstLine(); if (ligne == 0) realLigne = new Integer(0);
+         * ViewMain.editStationForm.stationNumber.setAutoValueInput(
+         * propertyModel, realLigne);
+         *  }
+         */
     }
 
     private void fillDataType(StationModel station)
@@ -1349,17 +1420,13 @@ public class StationSection extends NemoSection
         return tagXml;
     }
 
-    /*private PropertyModel getPropertyModel(StationModel stationModel,
-            String tagXml)
-    {
-        PropertyModel propertyModel;
-        if (isTimeSeriesInfo())
-            propertyModel =
-                stationModel.getTimeSeriesModel().propertiesAt(tagXml);
-        else
-            propertyModel = stationModel.propertiesAt(tagXml);
-        return propertyModel;
-    }*/
+    /*
+     * private PropertyModel getPropertyModel(StationModel stationModel, String
+     * tagXml) { PropertyModel propertyModel; if (isTimeSeriesInfo())
+     * propertyModel = stationModel.getTimeSeriesModel().propertiesAt(tagXml);
+     * else propertyModel = stationModel.propertiesAt(tagXml); return
+     * propertyModel; }
+     */
 
     public void diseableLineInData()
     {
@@ -1373,9 +1440,9 @@ public class StationSection extends NemoSection
         }
     }
 
-// public void refreshDataType()
-// {
-// datatype.refreshCombo(ComboType.DATATYPE);
-// }
+    // public void refreshDataType()
+    // {
+    // datatype.refreshCombo(ComboType.DATATYPE);
+    // }
 
 }

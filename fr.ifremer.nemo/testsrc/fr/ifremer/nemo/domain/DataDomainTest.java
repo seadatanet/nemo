@@ -18,13 +18,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import fr.ifremer.nemo.domain.AddedParameter.IdParameter;
 import fr.ifremer.nemo.input.DataModel;
 import fr.ifremer.nemo.input.InputModel;
 import fr.ifremer.nemo.input.Parameter;
 import fr.ifremer.nemo.input.ParameterModel;
 import fr.ifremer.nemo.util.Conversion;
-import fr.ifremer.nemo.util.Global;
 
 /**
  * Class DataDomainTest.java

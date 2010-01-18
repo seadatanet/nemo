@@ -4,12 +4,20 @@ import fr.ifremer.nemo.util.Global;
 
 public class TypeData extends Object {
 
-	private String code, unite, conversion, format, entree, sortie, test, nom;
-
+	private String code;
+    
+    private String unite, conversion, format, entree, sortie, test, nom;
+    
 	private int position, debut, fin;
 	
 	private String debutFlag, finFlag, testIn, testOut;
 
+    private boolean p011;
+    
+    private String codeP011, abbr;
+
+    private String nomP011;
+    
 	private Boolean sensor;
     
     public static final String DEFAULT_CONVERT = "x*1"; //$NON-NLS-1$
@@ -31,7 +39,11 @@ public class TypeData extends Object {
 		this.setFormat(format);
 		this.setSortie(sortie);
 		this.setUnite(unite);
-
+		this.setNom(Global.EMPTY_STRING);
+        this.setNomP011(Global.EMPTY_STRING);
+        this.setCodeP011(Global.EMPTY_STRING);
+        this.setAbbr(Global.EMPTY_STRING);
+        this.setP011(false);
 	}
 
 	public TypeData(TypeData typeData) {
@@ -42,7 +54,11 @@ public class TypeData extends Object {
 		this.setFormat(typeData.format);
 		this.setSortie(typeData.sortie);
 		this.setUnite(typeData.unite);
-
+		this.setNom(typeData.nom);
+        this.setNomP011(typeData.nomP011);
+        this.setCodeP011(typeData.codeP011);
+        this.setAbbr(typeData.abbr);
+        this.setP011(typeData.p011);
 	}
 
 	public TypeData() {
@@ -54,7 +70,11 @@ public class TypeData extends Object {
 		this.setSortie("Sortie"); //$NON-NLS-1$
 		this.setUnite("Unite"); //$NON-NLS-1$
 		this.setTest(Global.EMPTY_STRING);
-
+		this.setNom(Global.EMPTY_STRING);
+        this.setNomP011(Global.EMPTY_STRING);
+        this.setCodeP011(Global.EMPTY_STRING);
+        this.setAbbr(Global.EMPTY_STRING);
+        this.setP011(false);
 	}
 
 	public String getCode() {
@@ -182,4 +202,36 @@ public class TypeData extends Object {
 	public void setTestOut(String testOut) {
 		this.testOut = testOut;
 	}
+    
+    public String getCodeP011() {
+        return codeP011;
+    }
+
+    public void setCodeP011(String codeP011) {
+        this.codeP011 = codeP011;
+    }
+    
+    public String getAbbr() {
+        return abbr;
+    }
+
+    public void setAbbr(String abbr) {
+        this.abbr = abbr;
+    }
+    
+    public String getNomP011() {
+        return nomP011;
+    }
+
+    public void setNomP011(String nomP011) {
+        this.nomP011 = nomP011;
+    }
+    
+    public boolean isP011() {
+        return p011;
+    }
+
+    public void setP011(boolean isP011) {
+        this.p011 = isP011;
+    }
 }

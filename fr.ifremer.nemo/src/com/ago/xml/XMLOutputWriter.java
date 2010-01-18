@@ -225,6 +225,7 @@ public class XMLOutputWriter {
 			try {
 				_writer.close();
 			} catch (Exception e) {
+                e.printStackTrace();
 			}
 		}
 		_writer = new PrintWriter(a_Stream);
@@ -291,6 +292,7 @@ public class XMLOutputWriter {
 		try {
 			_writer.close();
 		} catch (Exception e) {
+            e.printStackTrace();
 		}
 	}
 

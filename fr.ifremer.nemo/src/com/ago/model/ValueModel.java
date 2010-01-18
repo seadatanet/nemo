@@ -53,6 +53,7 @@ public class ValueModel implements PropertyChangeListener, Performer {
 		try {
 			return ((Performer) valueModel).getReturnTypeFor(message);
 		} catch (Exception e) {
+            e.printStackTrace();
 		}
 
 		try {
@@ -97,6 +98,7 @@ public class ValueModel implements PropertyChangeListener, Performer {
 		try {
 			hookupMessageSend().perform();
 		} catch (Exception e) {
+            e.printStackTrace();
 		}
 
 	}
@@ -126,6 +128,7 @@ public class ValueModel implements PropertyChangeListener, Performer {
 					message.getMethodName(), message.getArgTypes());
 			return method.invoke(this, args);
 		} catch (Exception e) {
+            e.printStackTrace();
 		}
 		// l'invocation a echoue, Le message est probablement destine a l'objet
 		// "valueModel"
@@ -133,6 +136,7 @@ public class ValueModel implements PropertyChangeListener, Performer {
 		try {
 			return message.perform(valueModel, args);
 		} catch (Exception e) {
+            e.printStackTrace();
 		}
 
 		return null;
@@ -206,6 +210,7 @@ public class ValueModel implements PropertyChangeListener, Performer {
 		try {
 			unhookMessageSend().perform();
 		} catch (Exception e) {
+            e.printStackTrace();
 		}
 
 	}

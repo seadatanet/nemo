@@ -23,6 +23,7 @@ public class ModelDescription extends NLS
 {
     private static final String BUNDLE_NAME = "fr.ifremer.nemo.input.model_desc"; //$NON-NLS-1$
 
+
     public static String node_formattedEndDate;
 
     public static String node_formattedStartDate;
@@ -79,6 +80,9 @@ public class ModelDescription extends NLS
     public static String node_dataFragment;
     public static String node_parameter;
     public static String node_fullname;
+    public static String node_codeP011;
+    public static String node_nameP011;
+    public static String node_P011;
     public static String node_unit;
     public static String node_outdefault;
     public static String node_reference;
@@ -88,6 +92,9 @@ public class ModelDescription extends NLS
     public static String node_conversionModel;
     public static String node_listPermissions;
     public static String node_sort;
+    public static String node_defaultselected;
+    public static String node_defaultvalue;  
+    
     
     public static String a_version;
     public static String a_sourcepath;
@@ -140,12 +147,15 @@ public class ModelDescription extends NLS
     public static String setter_formula;
     public static String setter_indefault;
     public static String setter_fullname;
+    public static String setter_codeP011;
+    public static String setter_nameP011;
+    public static String setter_P011;
     public static String setter_unit;
     public static String setter_outdefault;
     public static String setter_format;
     public static String setter_sort;
-        
-    
+    public static String setter_defaultselected;
+    public static String setter_defaultvalue;
     static {
         // initialize resource bundle
         NLS.initializeMessages(BUNDLE_NAME, ModelDescription.class);
