@@ -66,7 +66,6 @@ import fr.ifremer.nemo.domain.AddedParameter.IdParameter;
 import fr.ifremer.nemo.ui.Application;
 import fr.ifremer.nemo.ui.ApplicationActionBarAdvisor;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.edit.data.EditDataForm;
 import fr.ifremer.nemo.ui.edit.data.TableData;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
@@ -869,15 +868,15 @@ public class OptionsAction extends Action implements ISelectionListener,
     {
         group = new Group(parent, SWT.NONE);
         group.setFont(Utils.font08);
-        group.setText("Liste de données");
+        group.setText(Messages.settings_parametersList);
         GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(true).margins(4, 4).applyTo(group);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
         
         buttonP091 = new Button(group,SWT.RADIO);
-        buttonP091.setText("P091 (MEDATLAS Parameter Usage Vocabulary)");
+        buttonP091.setText(Messages.settings_parameterListP091);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(buttonP091);
         buttonP011 = new Button(group,SWT.RADIO);
-        buttonP011.setText("P011 (BODC Parameter Usage Vocabulary)");
+        buttonP011.setText(Messages.settings_parameterListP011);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(buttonP011);
     }
     
