@@ -92,7 +92,8 @@ public class ViewMain extends ViewPart
             tabConversion;
 
     public static Button radProfilVertical, radSerieTempo, radTrajectoire;
-    public static Button radMedatlas, radODV;
+    public static Button radMedatlas;
+    public static Button radODV;
     public static Button radMonoFichier, radMonoStation = null;
 
     public static Button radioFichier = null;

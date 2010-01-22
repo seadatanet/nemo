@@ -90,6 +90,7 @@ public class Fragment extends AbstractModel
         _variable = false;
         _hasDefaultValue = false;
         _defaultValueSelected = false;
+        _defaultValue = "";
     }
 
 

@@ -20,12 +20,14 @@ public class NemoShell
     /**
      * @param args
      */
-    /*public static void main(String[] args)
+    public static void main(String[] args)
     {
+        Nemo nemo = Nemo.getInstance();
+        
         
         
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Not Implemented yet !");
     }
-*/
+
 }

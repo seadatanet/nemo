@@ -378,11 +378,17 @@ public class DataDomain
         // *** Ajouts automatiques de certains paramètres
         boolean existDEPH = false;
         boolean existPRES = false;
+        boolean existTEMP = false;
+        boolean existPSAL = false;
         for (ParameterModel param : _model.getParameterModels()){
             if (param.getParameter().getCode().equals(IdParameter.DEPH.toString()))
                 existDEPH = true;
             else if (param.getParameter().getCode().equals(Intern.paramPRES))
                 existPRES = true;
+            else if (param.getParameter().getCode().equals(Intern.paramPSAL))
+                existPSAL = true;
+            else if (param.getParameter().getCode().equals(Intern.paramTEMP))
+                existTEMP = true;
         }
         
         if (inputType == E_InputType.PROFILE){
@@ -391,6 +397,11 @@ public class DataDomain
                 // ajout de DEPH calculé à partir de PRES
                 // parameterModel.setFlag(stationModel.parameterModelsAt(indexPRES).getFlag());
                 addFixedParameterModel(IdParameter.DEPH);
+            }
+            if (! existPRES && existDEPH && existPSAL && existTEMP ){
+                // ajout de DEPH calculé à partir de PRES
+                // parameterModel.setFlag(stationModel.parameterModelsAt(indexPRES).getFlag());
+                addFixedParameterModel(IdParameter.PRES);
             }
         }
         else{

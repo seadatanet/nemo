@@ -29,7 +29,9 @@ public class ViewLog extends ViewPart
 
     public static TabFolder tabFolderLog = null;
 
-    public static StyledText styledTextLogErreurs, styledTextLogInfos,
+    public static StyledText styledTextLogErreurs;
+    
+    public static StyledText  styledTextLogInfos,
             styledTextLogHelp = null;
 
     private static StringBuffer aideFile = new StringBuffer();

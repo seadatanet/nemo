@@ -83,6 +83,8 @@ public class Intern extends NLS {
     
     public static String paramPRES;
     public static String paramDEPH;
+    public static String paramPSAL;
+    public static String paramTEMP;
     
     public static String unknown;
     public static String CDIResumeWriter_notSpecified;

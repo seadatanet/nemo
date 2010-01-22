@@ -126,11 +126,8 @@ public class Elts extends NLS
         String[] format = parseElt[0].split(Global.SEMICOLON);
         
         
-        if (parseElt.length > 2) elt.append(parseElt[2]);
-        
-        if (value.equals("Default"))
-            return elt.toString();
-        
+        if (parseElt.length > 2) elt.append(parseElt[2]);        
+
         if (format.length > 1){
             // doit appliquer un format
             if (format[0].equals("DATETIME")){

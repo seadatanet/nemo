@@ -28,6 +28,7 @@ import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.format.JulianDate;
 import fr.ifremer.nemo.util.format.LatitudeFormat;
 import fr.ifremer.nemo.util.format.LongitudeFormat;
+import fr.ifremer.nemo.util.presdepth.CalcPres;
 
 /**
  * Description: AddedParameter - paramètres ajoutés automatiquement par NEMO
@@ -39,7 +40,7 @@ public class AddedParameter extends Parameter
 
     @SuppressWarnings("nls")
     public static enum IdParameter{
-        DEPH, YEAR, MNTH, DAYX, TIME, CJDY, DTUT, LATX, LONX, BATH;
+        DEPH, YEAR, MNTH, DAYX, TIME, CJDY, DTUT, LATX, LONX, BATH, PRES;
         
         public String getDefault(){
             switch (this){
@@ -50,6 +51,7 @@ public class AddedParameter extends Parameter
                 case LATX : return "+99.999999";
                 case LONX : return "+999.999999";
                 case BATH : return "-999.9";
+                case PRES : return "-999.9";
                 default: return Global.ZERO;
             }
         }
@@ -77,6 +79,7 @@ public class AddedParameter extends Parameter
                 case LATX : return "+DD.dddddd";
                 case LONX : return "+DDD.dddddd";
                 case BATH : return "%6.1f";
+                case PRES : return "%6.1f";
                 default: return Global.EMPTY_STRING;
             }
         }
@@ -93,6 +96,7 @@ public class AddedParameter extends Parameter
                 case LATX : return "LATITUDE";
                 case LONX : return "LONGITUDE";
                 case BATH : return "BATHYMETRIC DEPTH";
+                case PRES : return "SEA PRESSURE sea surface=0";
                 default: return Global.EMPTY_STRING;
             }
         }
@@ -109,6 +113,7 @@ public class AddedParameter extends Parameter
                 case LATX : return "decimal degree";
                 case LONX : return "decimal degree";
                 case BATH : return "meter";
+                case PRES : return "decibar=10000 pascals";
                 default: return Global.EMPTY_STRING;
             }
         }
@@ -242,6 +247,29 @@ public class AddedParameter extends Parameter
                         stringValue = String.format(java.util.Locale.US, formatString, Integer.parseInt(inputLine));
                     }
                     break;
+                case PRES :
+                    // récupération de la valeur de la profondeur
+                    ParameterModel pModelDEPTH = sDomain.getData().getModel().getParameterModel(Intern.paramDEPH);
+                    pModelDEPTH.computeParameterValue(inputLine);
+                    ParameterValue valueDEPTH = pModelDEPTH.getLineValue();  
+                    
+                    // récupération de la valeur de la salinite
+                    ParameterModel pModelPSAL = sDomain.getData().getModel().getParameterModel(Intern.paramPSAL);
+                    pModelPSAL.computeParameterValue(inputLine);
+                    ParameterValue valuePSAL = pModelPSAL.getLineValue();  
+                    
+                    // récupération de la valeur de la temperature
+                    ParameterModel pModelTEMP = sDomain.getData().getModel().getParameterModel(Intern.paramTEMP);
+                    pModelTEMP.computeParameterValue(inputLine);
+                    ParameterValue valueTEMP = pModelTEMP.getLineValue();  
+                    
+                    //récupération de la valeur de la latitude
+                    double valueLAT = sDomain.getCurrentStation()._latitude;  
+                                       
+                    double pres = CalcPres.calcPres(valueLAT, valuePSAL.getValue(), valueDEPTH.getValue(), valueTEMP.getValue());
+                    stringValue = Formatter.getSingleton().formatDouble(formatString, pres);              
+                    break;
+                    
             }
             return stringValue;
         }

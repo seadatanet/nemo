@@ -200,7 +200,7 @@ public class EditConversionForm extends EditForm
         msg.append(warningFile);
         msg.append(warningCampagne);
         msg.append(warningStation);
-        // msg.append(warningData);
+        msg.append(warningData);
         Utils.messageErreur(msg.toString());
 
         // FAE 1143 : déactivation MEDATLAS
@@ -223,6 +223,7 @@ public class EditConversionForm extends EditForm
     @Override
     public void drawingBack()
     {
+       
         super.drawingBack();
         
         ViewLog.aideConversion();

@@ -15,6 +15,7 @@ import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global.E_EndData;
+import fr.ifremer.nemo.util.presdepth.CalcPres;
 
 
 /**
@@ -51,6 +52,8 @@ public class MedatlasWriter extends NemoWriter{
             
             
             for (Station currentStation : station.getStations(inputFilePath)){
+                
+                CalcPres.init();
                 
                 File inputFile= new File(inputFilePath + File.separator + currentStation.getFileName());
                 bufferedReader = new BufferedReader(new FileReader(inputFile));

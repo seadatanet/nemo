@@ -378,7 +378,7 @@ public class PropertyModel extends AbstractModel
             
             if (_fragment.isDefaultValue())
                 if (sResult.trim().equals(_fragment.getDefaultValue().trim()))
-                    return null;
+                    return "Default";
                     
             if (!sResult.trim().equals(Global.EMPTY_STRING) && _format != null){
                 try{

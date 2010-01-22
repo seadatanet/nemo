@@ -43,7 +43,9 @@ public class StationDomain
      */
     protected StationModel _model;
     final private Formatter form;
-
+    
+    private Station _currentStation;
+    
     protected DataDomain _data;
     protected HashMap<String, List<Station>> _listStations;
 
@@ -156,6 +158,8 @@ public class StationDomain
     public StringBuffer getOdvTrajectoryHeader(Station currentStation,
             String inputLine, int indexRecord) throws ParseException
     {
+        _currentStation = currentStation;
+        
         StringBuffer odvStationHeader = new StringBuffer();
         String stationRef = currentStation.getReference();
         // Cruise
@@ -199,9 +203,13 @@ public class StationDomain
         odvStationHeader.append(Global.TAB);
 
         // Bot. Depth [m]
-        Float botDepth =
-            (Float) _model.getProperty(Intern.S_DEPTH).applyOnLine(inputLine);
-        if (!botDepth.isNaN())
+        Object botDepth =
+            _model.getProperty(Intern.S_DEPTH).applyOnLine(inputLine);
+
+        if (botDepth.equals("Default"))
+            botDepth = 0f;
+
+        if (!((Float) botDepth).isNaN())
         {
             odvStationHeader.append(botDepth);
         }
@@ -209,6 +217,7 @@ public class StationDomain
         {
             odvStationHeader.append(Global.ZERO);
         }
+
         odvStationHeader.append(Global.TAB);
 
         return odvStationHeader;
@@ -257,6 +266,9 @@ public class StationDomain
     public StringBuffer getHeader(Conversion c, Station currentStation,
             String[] inputFile) throws ParseException
     {
+        
+        _currentStation = currentStation;
+        
         StringBuffer stationHeader = new StringBuffer();
         switch (c)
         {
@@ -274,6 +286,7 @@ public class StationDomain
     private StringBuffer getOdvHeader(Station currentStation, String[] inputFile)
             throws ParseException
     {
+        
         StringBuffer odvStationHeader = new StringBuffer();
         String stationRef = currentStation.getReference();
         // Cruise
@@ -340,9 +353,9 @@ public class StationDomain
         if (botDepth.equals("Default"))
             botDepth = 0f;
 
-        if (!((Float)botDepth).isNaN())
+        if (!((Float) botDepth).isNaN())
         {
-            odvStationHeader.append((Float)botDepth);
+            odvStationHeader.append((Float) botDepth);
         }
         else
         {
@@ -486,18 +499,29 @@ public class StationDomain
             .getLatitude()));
         medStationHeader.append(Elts.getElt(Elts.station_lon, currentStation
             .getLongitude()));
-        
+
         Object value = _model.getProperty(Intern.S_DEPTH).applyOn(inputFile);
-        
+
+        boolean depthIsDefault = false;
+        if (value.equals("Default"))
+        {
+            value = Float.NaN;
+            depthIsDefault = true;
+        }
 
         medStationHeader.append(Elts.getElt(Elts.station_depth, value));
-        
+
         medStationHeader.append(Global.SPACE);
         medStationHeader.append(Elts.getKeyword(Elts.qc));
         medStationHeader.append(currentStation.getMetaFlag(Intern.DATETIME));
         medStationHeader.append(currentStation.getMetaFlag(Intern.S_LAT));
         medStationHeader.append(currentStation.getMetaFlag(Intern.S_LON));
-        medStationHeader.append(currentStation.getMetaFlag(Intern.S_DEPTH));
+
+        if (depthIsDefault)
+            medStationHeader.append(Global.DEFAULT_FLAG);
+        else
+            medStationHeader.append(currentStation.getMetaFlag(Intern.S_DEPTH));
+
         medStationHeader.append(Global.RN);
 
         // *NB PARAMETERS=07 RECORD LINES=08651
@@ -892,5 +916,14 @@ public class StationDomain
     public void setComputed(boolean computed)
     {
         _computed = computed;
+    }
+
+    /**
+     * Getter sur _currentStation.
+     * @return the currentStation
+     */
+    public Station getCurrentStation()
+    {
+        return _currentStation;
     }
 }

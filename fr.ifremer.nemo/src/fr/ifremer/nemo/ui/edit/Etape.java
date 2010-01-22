@@ -1300,10 +1300,29 @@ public class Etape
                 }
 
                 // Si PRES n'est pas premier => Medatlas impossible
+                // A moins que l'on est les parametre DEPH, PSAL et TEMP ( FAE 3228 )
                 if (!ViewMain.isCollection() && !code.equals(Intern.paramPRES))
                 {
-                    ViewMain.editConversionForm
-                        .setWarningData(Messages.ViewLog_7);
+                    boolean isPSAL = false;
+                    boolean isTEMP = false;
+                    boolean isDEPH = false;
+                    
+                   for (TypeData donnee : TableData.types)
+                   {
+                      if (donnee.getCode().split("-")[0].trim().equals(Intern.paramDEPH))
+                          isDEPH = true;
+                      else if (donnee.getCode().split("-")[0].trim().equals(Intern.paramPSAL))
+                          isPSAL = true;
+                      else if (donnee.getCode().split("-")[0].trim().equals(Intern.paramTEMP))
+                          isTEMP = true;                      
+                   }
+                   
+                   if (!(isPSAL && isTEMP && isDEPH))
+                       ViewMain.editConversionForm
+                            .setWarningData(Messages.ViewLog_7);
+                   else
+                       ViewMain.editConversionForm
+                       .setWarningData(Global.EMPTY_STRING);
                 }
                 else
                 {
