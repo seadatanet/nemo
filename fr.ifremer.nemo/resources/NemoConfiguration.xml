@@ -4,8 +4,8 @@
   <nautilusWsURL>http://www.ifremer.fr/WSnautilus/services/NAUTILUS</nautilusWsURL>
   <showRule>true</showRule>
   <contact></contact>
-  <modelsDirectory>\\Siec\9064780_conv\Developpement\JeuxDeTests\Modeles</modelsDirectory>
-  <cruisesDirectory>\\Siec\9064780_conv\Developpement\JeuxDeTests\Donnees</cruisesDirectory>
+  <modelsDirectory>X:\Developpement\JeuxDeTests\Modeles</modelsDirectory>
+  <cruisesDirectory>X:\Developpement\JeuxDeTests\Donnees</cruisesDirectory>
   <outputDirectory></outputDirectory>
   <writeCdi>false</writeCdi>
   <idEdmoRespCdi>486</idEdmoRespCdi>
@@ -19,30 +19,31 @@
   <writeMapping>false</writeMapping>
   <fichierMapping>coupling.txt</fichierMapping>
   <dateISO>true</dateISO>
+  <dataList>P091</dataList>
   <proxy use="false">
-    <address>proxy.ago.fr</address>
-    <port>3128</port>
+    <address></address>
+    <port></port>
     <login></login>
     <password></password>
   </proxy>
   <edmoURL>http://seadatanet.maris2.nl/ws/ws_edmo.asmx</edmoURL>
   <vocabURL>http://vocab.ndg.nerc.ac.uk/1.1/VocabServerAPI_dl.wsdl</vocabURL>
   <VocabListURL name="C16" value="http://vocab.ndg.nerc.ac.uk/list/C16/current" version="5"/>
-  <VocabListURL name="P011" value="http://vocab.ndg.nerc.ac.uk/list/P011/current" version="171"/>
+  <VocabListURL name="P011" value="http://vocab.ndg.nerc.ac.uk/list/P011/current" version="176"/>
   <VocabListURL name="L300" value="http://vocab.ndg.nerc.ac.uk/list/L300/current" version="2"/>
   <VocabListURL name="L051" value="http://vocab.ndg.nerc.ac.uk/list/L051/current" version="1"/>
-  <VocabListURL name="C77" value="http://vocab.ndg.nerc.ac.uk/list/C77/current" version="1"/>
+  <VocabListURL name="C77" value="http://vocab.ndg.nerc.ac.uk/list/C77/current" version="2"/>
   <VocabListURL name="L061" value="http://vocab.ndg.nerc.ac.uk/list/L061/current" version="7"/>
   <VocabListURL name="L05" value="http://vocab.ndg.nerc.ac.uk/list/L05/current" version="5"/>
-  <VocabListURL name="P061" value="http://vocab.ndg.nerc.ac.uk/list/P061/current" version="20"/>
+  <VocabListURL name="P061" value="http://vocab.ndg.nerc.ac.uk/list/P061/current" version="21"/>
   <VocabListURL name="L071" value="http://vocab.ndg.nerc.ac.uk/list/L071/current" version="1"/>
   <VocabListURL name="L031" value="http://vocab.ndg.nerc.ac.uk/list/L031/current" version="2"/>
   <VocabListURL name="L201" value="http://vocab.ndg.nerc.ac.uk/list/L201/current" version="3"/>
   <VocabListURL name="C180" value="http://vocab.ndg.nerc.ac.uk/list/C180/current" version="6"/>
-  <VocabListURL name="P091" value="http://vocab.ndg.nerc.ac.uk/list/P091/current" version="31"/>
+  <VocabListURL name="P091" value="http://vocab.ndg.nerc.ac.uk/list/P091/current" version="32"/>
   <VocabListURL name="L021" value="http://vocab.ndg.nerc.ac.uk/list/L021/current" version="1"/>
   <VocabListURL name="L081" value="http://vocab.ndg.nerc.ac.uk/list/L081/current" version="2"/>
-  <VocabListURL name="C174" value="http://vocab.ndg.nerc.ac.uk/list/C174/current" version="64"/>
+  <VocabListURL name="C174" value="http://vocab.ndg.nerc.ac.uk/list/C174/current" version="68"/>
   <VocabListURL name="P021" value="http://vocab.ndg.nerc.ac.uk/list/P021/current" version="45"/>
   <defaultFlagTable>C1</defaultFlagTable>
   <FlagTable code="C1" label="SeaDataNet">
