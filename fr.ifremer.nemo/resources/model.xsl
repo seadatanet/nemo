@@ -15,8 +15,8 @@
     <xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes" cdata-section-elements="comment"/>
     
     <!-- on supprime tout les espaces -->
-    <xsl:strip-space elements="*"/>
-
+   <xsl:strip-space elements="*"/> 
+   <xsl:preserve-space elements="separator"/>
     
     <!-- point d entree sur fichier -->
     <xsl:template match="/">
