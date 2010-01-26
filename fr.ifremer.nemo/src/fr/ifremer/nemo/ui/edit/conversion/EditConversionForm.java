@@ -127,6 +127,7 @@ public class EditConversionForm extends EditForm
                         // type de la conversion
                         E_TypeConversion currentConversion = ViewMain.getSelectedConversion();
                         Nemo.getInstance().getDomain().getConversion().setCurrentConversion(currentConversion);
+                        Nemo.getInstance().getDomain().getConversion().setSortData(ViewMain.chkForcerTri.getSelection());
                         
                         //Conversion formatConversion = Conversion.MEDATLAS;
                         //if (ViewMain.radODV.getSelection()){

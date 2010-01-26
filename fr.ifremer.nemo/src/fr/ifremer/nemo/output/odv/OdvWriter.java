@@ -6,15 +6,20 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
 import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.domain.DataDomain;
+import fr.ifremer.nemo.domain.DateTimeUtils;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.StationDomain;
+import fr.ifremer.nemo.input.ParameterModel;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.util.Conversion;
-import fr.ifremer.nemo.util.Global.E_EndData;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
@@ -27,9 +32,12 @@ import fr.ifremer.nemo.util.Global.E_TypeConversion;
 public class OdvWriter extends NemoWriter{
 	
     Conversion c = Conversion.ODV;
+    HashMap<Double, String> stationDatas;
+    int indexRecord;
 
 	public OdvWriter() {
-        
+        super();
+        stationDatas = new HashMap<Double, String>();
 	}
 
 	/* (non-Javadoc)
@@ -98,8 +106,7 @@ public class OdvWriter extends NemoWriter{
     
     private void writeDataLine(StringBuffer stationHeader,
                                Station currentStation,
-                               String line,
-                               int indexRecord) throws Exception{
+                               String line) throws Exception{
         DataDomain data = iDomain.getCruise().getStation().getData();
 
         StringBuffer dataLine = new StringBuffer();
@@ -114,7 +121,24 @@ public class OdvWriter extends NemoWriter{
         }
         dataLine.append(data.getDataLine(c, currentStation, line, indexRecord));
         
-        outputFileWriter.println(dataLine);
+        if (iDomain.getConversion().isSortData()){
+            // préparation des données pour le tri
+            Double key = Double.NaN;
+            if (iDomain.getMedia().getModel().getInputType() == E_InputType.PROFILE){
+                ParameterModel keyParam = data.getModel().getParameterModels()[0];
+                keyParam.computeParameterValue(line);
+                key = keyParam.getLineValue().getValue();
+            }else{
+                key = Long.valueOf(DateTimeUtils.getCurrentDate(currentStation, indexRecord)).doubleValue();
+            }
+            
+            stationDatas.put(key, dataLine.toString());
+            
+        }else{
+            // écriture directe
+            outputFileWriter.println(dataLine);
+        }
+        indexRecord++;
     }
     
     private void writeStation(Station currentStation,
@@ -124,11 +148,11 @@ public class OdvWriter extends NemoWriter{
         StationDomain station = iDomain.getCruise().getStation();
         File inputFile= new File(inputFilePath + File.separator + currentStation.getFileName());
         bufferedReader = new BufferedReader(new FileReader(inputFile));
-        //bufferedReader.mark(readerSize + 1);
 
         StringBuffer stationHeader = station.getOdvEmptyStationHeader();
         boolean stationWrited = false;
-        int indexRecord = 0;
+        indexRecord = 0;      
+        stationDatas.clear();
 
         // scan the InputFile line by line
         while ((readedLine = bufferedReader.readLine()) != null) {
@@ -147,12 +171,11 @@ public class OdvWriter extends NemoWriter{
                     
                     if (station.isSomeInData()){
                         // la première ligne des données est déjà "consommée" dans stationHeaderBuffer 
-                        writeDataLine(stationHeader, currentStation, inputStationHeader[inputStationHeader.length -1], indexRecord);
-                        indexRecord++;
+                        writeDataLine(stationHeader, currentStation, inputStationHeader[inputStationHeader.length -1]);
                         stationHeader = station.getOdvEmptyStationHeader();
                     }
                     
-                    writeDataLine(stationHeader, currentStation, readedLine, indexRecord);
+                    writeDataLine(stationHeader, currentStation, readedLine);
                     stationHeader = station.getOdvEmptyStationHeader();
                     
                     stationWrited = true;
@@ -163,19 +186,26 @@ public class OdvWriter extends NemoWriter{
             }
             else if (stationWrited){        
                 // ligne de données : à ne prendre en compte qua si on est sur la bonne station
-                indexRecord++;
-                writeDataLine(stationHeader, currentStation, readedLine, indexRecord);
+                writeDataLine(stationHeader, currentStation, readedLine);
                 stationHeader = station.getOdvEmptyStationHeader();
             }
         }
         
-        if (iDomain.getMedia().getModel().getEndData() == E_EndData.EOF && stationWrited){
-            // écriture de la dernière ligne de données
+        if (stationWrited){
+            if (iDomain.getConversion().isSortData()){
+                // écriture des données après tri
+                List<Double> keys = new ArrayList<Double>();
+                keys.addAll(stationDatas.keySet());
+                Collections.sort(keys);
+                for (Double key : keys){
+                    outputFileWriter.println(stationDatas.get(key));
+                }
+            }    
+            // enregistrement de la station
             iDomain.getMedia().addStationInOutput(outputFileName, currentStation.getReference());
         }
         
         numLine = 0;
-        //bufferedReader.reset();
     }
 
 }

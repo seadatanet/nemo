@@ -29,6 +29,11 @@ public class ConversionDomain
      * Conversion courrante
      */
     protected E_TypeConversion _current;
+
+    /**
+     * indicateur de tri des données en sortie
+     */
+    protected boolean _sortData;
     
     /**
      * pour mapping
@@ -38,11 +43,6 @@ public class ConversionDomain
     public ConversionDomain(){
         initValues();
     }
-    
-    /*public ConversionDomain(ConversionModel model){
-        initValues();
-        update(model);
-    }*/
     
     public void initValues(){
         _model = new ConversionModel();
@@ -119,5 +119,25 @@ public class ConversionDomain
     public void setNomMappingHorsPrefix(String nomMappingHorsPrefix)
     {
         _nomMappingHorsPrefix = nomMappingHorsPrefix;
+    }
+
+    /**
+     * Getter pour _sortData.
+     * @return boolean
+     * @see ConversionDomain.java#_sortData
+     */
+    public boolean isSortData()
+    {
+        return _sortData;
+    }
+
+    /**
+     * Setter pour _sortData
+     * @param sortData : nouvelle valeur pour sortData
+     * @see ConversionDomain.java#_sortData
+     */
+    public void setSortData(boolean sortData)
+    {
+        _sortData = sortData;
     } 
 }

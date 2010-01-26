@@ -154,6 +154,9 @@ public class AddedParameter extends Parameter
                 case DAYX :
                 case TIME :
                     return currentStation.getMetaFlags().get(Intern.DATETIME);
+                //TODO vérifier si PRES calculé, QC PRES = QC DEPH ??
+                //case PRES :
+                //    return sDomain.getData().getModel().getParameterModel(Intern.paramDEPH).retreiveParameterFlag(inputLine);
                 default:
                     return Global.ZERO;
             }
@@ -205,7 +208,6 @@ public class AddedParameter extends Parameter
                     // time-ISO8601
                     //SimpleDateFormat fDate = new SimpleDateFormat(formatString);
                     stringValue = DateTimeUtils.getVariantDateTime(currentDate);
-                    //stringValue = "TODO"; //TODO station.getVariantDateTime(index);
                     break;
                 case TIME :
                     // $formatter.formatDateTime( "hh24mmss", $station.parametersAt(0).valuesAt($i).date )
