@@ -1017,7 +1017,9 @@ public class Utils
             ext = mots[1];
         }
 
-        for (int i = 0; i < nbre; i++)
+        int nbre2 = subsubfiles.length;
+        
+        for (int i = 0; i < nbre2; i++)
         {
 
             String mots1[] = p.split(subsubfiles[i].getName());

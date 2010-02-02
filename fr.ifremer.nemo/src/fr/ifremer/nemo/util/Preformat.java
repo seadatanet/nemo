@@ -9,10 +9,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.domain.MediaDomain;
 import fr.ifremer.nemo.ui.Application;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.ui.view.ViewMain;
+import fr.ifremer.nemo.util.Global.E_EndData;
 
 public class Preformat
 {
@@ -256,9 +259,81 @@ public class Preformat
         setPreformat(true);
     }
 
+    public static File runBatch(File inputFile) throws IOException
+    {
+
+        MediaDomain mediaDom = Nemo.getInstance().getDomain().getMedia();
+        space = false;
+
+        _nbColonne = 1;
+        _preformatOK = false;
+
+        _enTeteFichier = mediaDom.getModel().getFileHeader();
+
+        _isPattern = mediaDom.getModel().getStationHeaderPattern().length() > 0;
+
+        _enTeteStation = mediaDom.getModel().getEndStation();
+
+        _enTeteStationPattern = mediaDom.getModel().getStationHeaderPattern();
+
+        _lgBeforeData = mediaDom.getModel().getStationHeader();
+
+        _indicateur = mediaDom.getModel().getEndDataPattern();
+
+        _separateur = mediaDom.getModel().getSeparator().toCharArray()[0];
+
+        File ficSortie = null;
+        if (inputFile.isFile())
+        {
+
+            processPreformat(new File[] {inputFile.getParentFile()},
+                new String[] {inputFile.getName()}, inputFile.getParentFile(),
+                true);
+
+            ficSortie =
+                new File(inputFile.getParent() + PF + inputFile.getName());
+
+        }
+        else if (inputFile.listFiles()[0].isDirectory())
+        {
+
+            File[] listeRepertoires = inputFile.listFiles();
+
+            ficSortie =
+                new File(inputFile.getParent() + PF + inputFile.getName());
+            if (!ficSortie.exists())
+            {
+                ficSortie.mkdirs();
+            }
+
+            processPreformat(listeRepertoires, null, ficSortie, true);
+
+        }
+        else
+        {
+
+            processPreformat(new File[] {inputFile}, null, inputFile
+                .getParentFile(), true);
+
+            ficSortie =
+                new File(inputFile.getParent() + PF + inputFile.getName());
+
+        }
+
+        return ficSortie;
+
+    }
+
     private static void processPreformat(File[] lstRepertoires,
-                                         String[] listeFichiers, 
-                                         File repSortie) throws IOException {
+            String[] listeFichiers, File repSortie) throws IOException
+    {
+        processPreformat(lstRepertoires, listeFichiers, repSortie, false);
+    }
+
+    private static void processPreformat(File[] lstRepertoires,
+            String[] listeFichiers, File repSortie, boolean batchMode)
+            throws IOException
+    {
 
         Double pourcentEtape1 = 0d;
         Double pourcentEtape2 = 0d;
@@ -301,9 +376,12 @@ public class Preformat
 
             for (String fichier : listeFichiers)
             {
-                pourcentEtape1 += 100d / nbFic;
-                refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
-                getMax(fichier);
+                if (!batchMode)
+                {
+                    pourcentEtape1 += 100d / nbFic;
+                    refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
+                }
+                getMax(fichier, batchMode);
             }
         }
         pourcentEtape1 = 100d;
@@ -314,14 +392,24 @@ public class Preformat
         for (File repertoire : lstRepertoires)
         {
             _repEntree = repertoire.getAbsolutePath();
-            if (listeFichiers == null){
+            if (listeFichiers == null)
+            {
                 listeFichiers = new File(_repEntree).list();
             }
 
             // Creation du repertoire pour les fichiers preformates
             String outputDir = repSortie.getAbsolutePath();
-            if (!ViewMain.radioFichier.getSelection())
+
+            if (!batchMode)
+            {
+                if (!ViewMain.radioFichier.getSelection())
+                    outputDir += PF + repertoire.getName();
+            }
+            else
+            {
                 outputDir += PF + repertoire.getName();
+            }
+
             File repPreformat = new File(outputDir);
             if (!repPreformat.exists())
             {
@@ -330,13 +418,19 @@ public class Preformat
 
             for (String fichier : listeFichiers)
             {
-                pourcentEtape2 += 100d / nbFic;
-                refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
+                if (!batchMode)
+                {
+                    pourcentEtape2 += 100d / nbFic;
+                    refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
+                }
                 ecritureFichier(fichier, repPreformat.getAbsolutePath());
             }
         }
         pourcentEtape2 = 100d;
-        refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
+        if (!batchMode)
+        {
+            refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
+        }
     }
 
     private static void analyseLigne(String ligneLue)
@@ -366,7 +460,8 @@ public class Preformat
                 ligneLue.substring(indexSeparateur[i] + 1,
                     indexSeparateur[i + 1]);
 
-// System.out.println("ligne " + ligneLue + "i " + i + "index sep " +
+            // System.out.println("ligne " + ligneLue + "i " + i + "index sep "
+            // +
             // indexSeparateur);
 
             if (_colonne[i].indexOf(Global.POINT) > -1)
@@ -445,11 +540,42 @@ public class Preformat
         }
     }
 
-    private static void getMax(String fichier) throws IOException
+    private static void getMax(String fichier, boolean isBatch)
+            throws IOException
     {
         BufferedReader lecteurAvecBuffer = null;
         String ligneLue = Global.EMPTY_STRING;
         boolean analyseOK;
+
+        E_EndData endData = null;
+
+        if (isBatch)
+        {
+            endData =
+                Nemo.getInstance().getDomain().getMedia().getModel()
+                    .getEndData();
+        }
+        else
+        {
+            EditFileForm editDesc = ViewMain.editFileForm;
+
+            if (editDesc.sectionRuptureDonnees.radEOFselected())
+            {
+                endData = E_EndData.EOF;
+            }
+            else if (editDesc.sectionRuptureDonnees.radLigneSelected())
+            {
+                endData = E_EndData.EMPTY_LINE;
+            }
+            else if (editDesc.sectionRuptureDonnees.radNextStationSelected())
+            {
+                endData = E_EndData.NEXT_START_WITH;
+            }
+            else if (editDesc.sectionRuptureDonnees.radManuelSelected())
+            {
+                endData = E_EndData.END_WITH;
+            }
+        }
 
         try
         {
@@ -461,7 +587,6 @@ public class Preformat
 
                 // Lecture des lignes d'en-tete
                 consumeStationHeader(lecteurAvecBuffer);
-                EditFileForm editDesc = ViewMain.editFileForm;
 
                 while ((ligneLue = lecteurAvecBuffer.readLine()) != null)
                 {
@@ -469,24 +594,15 @@ public class Preformat
 
                     if (!ligneLue.trim().equals(Global.EMPTY_STRING))
                     {
-                        if (editDesc.sectionRuptureDonnees.radEOFselected())
+                        switch (endData)
                         {
-                            analyseOK = true;
-                        }
-                        else if (editDesc.sectionRuptureDonnees
-                            .radLigneSelected())
-                        {
-                            analyseOK = true;
-                        }
-                        else if (editDesc.sectionRuptureDonnees
-                            .radNextStationSelected())
-                        {
-                            analyseOK = true;
-                        }
-                        else if (editDesc.sectionRuptureDonnees
-                            .radManuelSelected())
-                        {
-                            analyseOK = !ligneLue.startsWith(_indicateur);
+                            case EOF:
+                            case EMPTY_LINE:
+                            case NEXT_START_WITH:
+                                analyseOK = true;
+                            break;
+                            case END_WITH:
+                                analyseOK = !ligneLue.startsWith(_indicateur);
                         }
 
                         if (analyseOK)

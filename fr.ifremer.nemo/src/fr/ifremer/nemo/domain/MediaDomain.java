@@ -71,7 +71,7 @@ public class MediaDomain
         }
     }
     
-    private void buildInputFilesNames(){
+    public void buildInputFilesNames(){
         _inputFilesNames = new HashMap<String, List<String>>();
         // FAE1105 : tri des stations selon Nom Fichier - Date - Référence Station
         File inputFile = new File(_model.getSourcePath());

@@ -21,10 +21,8 @@ import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.MediaDomain;
-import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.ui.FiltrageTableType;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.edit.DataModel;
 import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
@@ -606,17 +604,20 @@ public class TableData
         String mots[] = p.split(types.get(indice).getCode());
         String code = mots[0];
 
+        // On peut maintenant retirer PRES (FAE 3228)
+        
         // pas forcement de - dans le nom du type
-        if (!code.equals(Intern.paramPRES)
-                || ViewMain.radSerieTempo.getSelection()
-                || ViewMain.radTrajectoire.getSelection())
-        {
+//        if (!code.equals(Intern.paramPRES)
+//                || ViewMain.radSerieTempo.getSelection()
+//                || ViewMain.radTrajectoire.getSelection())
+//        {
+        
             types.remove(indice);
-        }
-        else
-        {
-            Utils.messageErreurAppend(Messages.error_data_removePRES);
-        }
+//        }
+//        else
+//        {
+//            Utils.messageErreurAppend(Messages.error_data_removePRES);
+//        }
 
         // razTableData
         razTableData();

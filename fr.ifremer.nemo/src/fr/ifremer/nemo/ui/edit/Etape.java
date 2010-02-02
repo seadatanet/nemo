@@ -219,6 +219,7 @@ public class Etape
 
     public static void validationStation()
     {
+        try {
         // test des valeurs de Station
 
         // Remplissage du tableau de correspondance de flags
@@ -1109,6 +1110,11 @@ public class Etape
         {
             ViewMain.tabStation.setText(Messages.onglet_station_error);
             ViewMain.etape = 2;
+        }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
 

@@ -83,7 +83,6 @@ public class OpenAction extends Action implements ISelectionListener,
                         TableData.go();
                 }
                 catch (Exception e){
-                    // TODO affiner gestion exceptions
                     Utils.messageErreurAppend(Messages.error);
                     e.printStackTrace();
                 }

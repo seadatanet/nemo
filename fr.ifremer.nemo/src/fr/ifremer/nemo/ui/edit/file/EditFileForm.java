@@ -249,7 +249,7 @@ public class EditFileForm extends EditForm
     public void actualiseEdition()
     {
         // FAE 1810 - FileHeader accessible que pour un fichier campagne
-        sectionEnteteFichier.setEnabled(ViewMain.radioFichier.getSelection());
+        sectionEnteteFichier.setEnabled(ViewMain.radioFichier.getSelection() || ViewMain.chkMultiStations.getSelection());
         
         buttonValidateAll.setEnabled(!Nemo.getInstance().getNomModele().equals(Global.EMPTY_STRING));
     }

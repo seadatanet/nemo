@@ -101,7 +101,7 @@ public class ViewMain extends ViewPart
 
     public static Button chkSeparateur = null;
     public static Button chkForcerTri = null;
-
+    public static Button chkMultiStations;
     public static Button radioTabulation, radioPointVirgule, radioVirgule,
             radioEspace, radioSeparateurAutre = null;
 
@@ -292,8 +292,8 @@ public class ViewMain extends ViewPart
         
         new Label(col3, SWT.SEPARATOR | SWT.HORIZONTAL);
         
-        Button radio1 = new Button(col3, SWT.CHECK);
-        radio1.setText("Multi-Stations File");
+        chkMultiStations = new Button(col3, SWT.CHECK);
+        chkMultiStations.setText("Multi-Stations File");
 
         // FAE 0001140 : deplacement du bouton Parcourir
         Button buttonParcourir = new Button(parent, SWT.NONE);

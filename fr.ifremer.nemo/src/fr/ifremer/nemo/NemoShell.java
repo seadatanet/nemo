@@ -9,10 +9,24 @@
  */
 package fr.ifremer.nemo;
 
+import java.io.File;
+
+import org.apache.log4j.Logger;
+
+import fr.ifremer.nemo.input.Fragment;
+import fr.ifremer.nemo.input.PropertyModel;
+import fr.ifremer.nemo.output.NemoWriter;
+import fr.ifremer.nemo.output.NemoWriterFactory;
+import fr.ifremer.nemo.ui.view.ViewMain;
+import fr.ifremer.nemo.util.Conversion;
+import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Preformat;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
+
 /**
- * Class NemoShell.java
- * Description: TODO
- * @author dboulang 
+ * Class NemoShell.java Description: Main class to launch nemo in batch mode.
+ * 
+ * @author ycaudal
  */
 public class NemoShell
 {
@@ -20,14 +34,86 @@ public class NemoShell
     /**
      * @param args
      */
-    public static void main(String[] args)
+    public static boolean main(String inputFile, String outputFile,
+            String modelFile, Conversion conv, boolean sortDatas,
+            E_TypeConversion odvConv, String datasetRef, Logger logger)
     {
-        Nemo nemo = Nemo.getInstance();
-        
-        
-        
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Not Implemented yet !");
+
+        try
+        {
+
+            Nemo nemo = Nemo.getInstance();
+
+            if (!new File(inputFile).exists())
+            {
+                logger.error("Input file not found");
+                return false;
+            }
+            if (!new File(modelFile).exists())
+            {
+                logger.error("Model file not found");
+                return false;
+            }
+            
+            boolean sort = sortDatas;
+
+            nemo.openModel(modelFile);
+
+            if (nemo.getDomain().getMedia().getModel().getSeparator() != Global.EMPTY_STRING)
+                inputFile =
+                    Preformat.runBatch(new File(inputFile)).getAbsolutePath();
+
+            nemo.getDomain().getMedia().getModel().setSourcePath(inputFile);
+
+            nemo.getDomain().getConversion().setCurrentConversion(odvConv);
+
+            nemo.getDomain().getMedia().buildInputFilesNames();
+
+            nemo.getDomain().getMedia().setOutputFileName(outputFile);
+
+            nemo.getDomain().getConversion().setSortData(sort);
+
+            // The default dataset ref
+            String strDefault = datasetRef;
+
+            if (strDefault.equals(Global.EMPTY_STRING))
+                strDefault =
+                    nemo.getDomain().getCruise().getModel().getReference();
+
+            if (strDefault.equals(Global.EMPTY_STRING))
+                strDefault = nemo.getDomain().getCruise().getModel().getName();
+
+            if ((odvConv != E_TypeConversion.MEDALAS))
+                nemo.getDomain().getCruise().setDataSetRef(strDefault);
+
+            // Is a station property in file
+            for (PropertyModel pModel : nemo.getDomain().getCruise()
+                .getStation().getModel().getProperties())
+            {
+                if (pModel.getFragment() != null)
+                {
+                    if (pModel.getFragment().getLastLine() > nemo.getDomain()
+                        .getMedia().getModel().getStationHeader())
+                    {
+                        nemo.getDomain().getCruise().getStation()
+                            .setSomeInData(true);
+                        break;
+                    }
+                }
+            }
+
+            NemoWriter writer = NemoWriterFactory.createWriter(conv);
+
+            writer.write(null);
+
+            return true;
+        }
+        catch (Exception e)
+        {
+            logger.error(e.getMessage(), e);
+            return false;
+        }
+
     }
 
 }

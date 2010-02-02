@@ -149,6 +149,7 @@ public abstract class NemoWriter{
 
 		} catch (Exception e) {
             stationDomain.resetStations();
+            e.printStackTrace();
 			throw new GenerationException(e);
 
 		} finally {
@@ -182,6 +183,7 @@ public abstract class NemoWriter{
     protected String[] consumeFileHeader() throws IOException{
         StringBuffer fileHeader = new StringBuffer();
         int nbLignes = iDomain.getMedia().getModel().getFileHeader();
+
         for (int i = 0; i < nbLignes; i++){
             fileHeader.append(consumeLine());
         }
@@ -234,7 +236,6 @@ public abstract class NemoWriter{
         
         MediaModel media = iDomain.getMedia().getModel();
         StringBuffer stationHeader = new StringBuffer();
-        
         
         if (numLine > (media.getFileHeader() + 1)){
             // consommation de la ligne de fin de données
