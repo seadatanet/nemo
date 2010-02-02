@@ -111,6 +111,7 @@ public abstract class NemoSection
                         /*| ExpandableComposite.COMPACT*/);
 
         int heightFont = section.getFont().getFontData()[0].getHeight();
+        
    /*     Font titleFont =
             new Font(Application.display, "Courier", heightFont, SWT.NORMAL); //$NON-NLS-1$
         section.setFont(titleFont);
@@ -136,6 +137,8 @@ public abstract class NemoSection
         drawSection(sectionClient, filled);
 
         section.setClient(sectionClient);
+    
+        section.getParent().layout(true);
     }
 
     protected abstract void drawSection(Composite parent, boolean filled);

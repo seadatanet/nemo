@@ -140,12 +140,16 @@ public class DataModel
         // Type de fichier
         mediaModel.setInputType(ViewMain.getTypeFichierEntree());
 
+        // Fichier multiStation ?
+        mediaModel.setMultiStations(ViewMain.chkMultiStations.getSelection());
+        
         // --- enregistrement du formulaire de droite (editFileForm)
         // Entête Fichier
         int fileHeader = 0;
-        if (!ViewMain.dossierCampagne){
+        if (!ViewMain.dossierCampagne || mediaModel.isMultiStations()){
             fileHeader = Integer.parseInt(ViewMain.editFileForm.sectionEnteteFichier.getValue());
         }
+        
         mediaModel.setFileHeader(fileHeader);
 
         // Entête Station
@@ -527,7 +531,7 @@ public class DataModel
 
         // --- remplissage du formulaire de droite (editFileForm)
         // Entête Fichier
-        if (ViewMain.dossierCampagne){
+        if (ViewMain.dossierCampagne && !ViewMain.chkMultiStations.getSelection()){
             ViewMain.editFileForm.sectionEnteteFichier.razValues();
         }
         else{

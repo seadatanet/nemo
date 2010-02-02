@@ -36,6 +36,8 @@ public class Etape
     public static void validationFile()
     {
 
+        try
+        {
         // retour à l'onglet message d'erreur
         ViewLog.tabFolderLog.setSelection(0);
 
@@ -92,6 +94,11 @@ public class Etape
         {
             ViewMain.tabFile.setText(Messages.onglet_file_error);
             ViewMain.etape = 0;
+        }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
     }
 

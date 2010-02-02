@@ -31,6 +31,8 @@ public class EditStationForm extends EditForm
     @Override
     public void createEditionForm(Composite parent)
     {
+        try
+        {
         super.createEditionForm(parent);
 
         formEdition.getBody().setLayout(new GridLayout());
@@ -63,6 +65,11 @@ public class EditStationForm extends EditForm
 
         // Draw Station Sections
         drawSections();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -284,7 +284,7 @@ public class AutoLine implements UIobject
     protected int getFileHeaderPos()
     {
         int fileHeader = 0;
-        if (!ViewMain.dossierCampagne){
+        if (!ViewMain.dossierCampagne || ViewMain.chkMultiStations.getSelection()){
             // fichier campagne
             fileHeader = Nemo.getInstance().getDomain().getMedia().getModel().getFileHeader();
             //fileHeader = DataModel.singleSurvey.getHeaderLinesNumber();
@@ -661,7 +661,7 @@ public class AutoLine implements UIobject
         int ligneFin = Integer.parseInt(numberLine.getText()) + nbreLignes - 1;
 
         int enteteFichier = 0;
-        if (!ViewMain.dossierCampagne){
+        if (!ViewMain.dossierCampagne || ViewMain.chkMultiStations.getSelection()){
             // fichier campagne
             enteteFichier = Nemo.getInstance().getDomain().getMedia().getModel().getFileHeader();
             //enteteFichier = DataModel.singleSurvey.getHeaderLinesNumber();
