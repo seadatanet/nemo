@@ -60,13 +60,14 @@ public class Messages {
     public static String view_file_processCollection;
     public static String view_file_collectionCas1;
     public static String view_file_collectionCasN;
+    public static String view_file_multiStations;
     public static String view_file_separator;
     public static String view_file_sepTab;
     public static String view_file_sepSemi;
     public static String view_file_sepComma;
     public static String view_file_sepSpace;
     public static String view_file_sepOther;
-
+    
     public static String view_convert_title;
     public static String view_convert_monoFichier;
     public static String view_convert_monoStation;
