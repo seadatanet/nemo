@@ -410,6 +410,7 @@ public class DataModel
                 propertyModel.setProperty(Intern.S_MAGNETIC);
                 propertyModel.setUserProvided(true);
                 propertyModel.setUserValue("-999"); //$NON-NLS-1$
+                stationModel.addProperty(propertyModel);
                 //timeSeriesInformation.setMagneticDeclination("-999"); //$NON-NLS-1$
             }
         } // fin specifique SERIE TEMPO ou TRAJECTOIRE
