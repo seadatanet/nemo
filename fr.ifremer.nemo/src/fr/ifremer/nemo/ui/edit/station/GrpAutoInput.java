@@ -19,6 +19,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.ui.Utils;
@@ -124,8 +125,12 @@ public class GrpAutoInput implements UIobject
 
         if (defaultValueEnable)
         {
+            // Ajout d'un filler pour l'alignement
+            if (buttonVari == null)
+                new Label(compo2, SWT.NONE);
+                
             checkBoxHasDefaultValue = new Button(compo2, SWT.CHECK);
-            checkBoxHasDefaultValue.setText("Default value");
+            checkBoxHasDefaultValue.setText(Messages.label_defaultValue);
             checkBoxHasDefaultValue
                 .addSelectionListener(new SelectionListener() {
 
@@ -307,6 +312,7 @@ public class GrpAutoInput implements UIobject
         setEnabled(true);
         AutoLine autoLine = lines.get(i);
         autoLine.setValue(line, start, end);
+        
         if (posVariable)
             buttonVari.setSelection(valueVariable);
         
@@ -316,6 +322,7 @@ public class GrpAutoInput implements UIobject
             
             if (checkBoxHasDefaultValue != null)
                 checkBoxHasDefaultValue.setSelection(isDefaultValueSeceted);
+            
             if (textDefaultValue != null)
                 textDefaultValue.setText(defaultValue);
         }

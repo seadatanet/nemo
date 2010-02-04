@@ -37,11 +37,15 @@ public class DateTimeUtils
             Formatter.getSingleton()
                 .formatDateTime("YYYY-MM-DD", getFullDate(currentStation));
         value.append(s_date);
-        value.append("T");
-        String s_time =
+        // Valeur par défault de l'heure FAE 3663 = -1
+        if (!(currentStation.getTime() == -1))
+        {
+            value.append("T");
+            String s_time =
             Formatter.getSingleton().formatDateTime(
                 "hh24:mm:ss.sss", getCorrectedTime(currentStation.getTime(), currentStation.getOffsetTU()));
-        value.append(s_time);
+            value.append(s_time);
+        }
         return value.toString();
     }
 
@@ -70,7 +74,7 @@ public class DateTimeUtils
     }
     
     public static long getCorrectedTime(long time, float offsetTU) {
-        if (!Float.isNaN(time)){
+        if (!Float.isNaN(time) && time != -1){
             TimeZone tz = TimeZone.getTimeZone(DateTimeFormat.GMT);
             Calendar cal = Calendar.getInstance(tz);
             cal.clear();

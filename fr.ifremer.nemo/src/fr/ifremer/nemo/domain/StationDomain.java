@@ -43,9 +43,9 @@ public class StationDomain
      */
     protected StationModel _model;
     final private Formatter form;
-    
+
     private Station _currentStation;
-    
+
     protected DataDomain _data;
     protected HashMap<String, List<Station>> _listStations;
 
@@ -159,7 +159,7 @@ public class StationDomain
             String inputLine, int indexRecord) throws ParseException
     {
         _currentStation = currentStation;
-        
+
         StringBuffer odvStationHeader = new StringBuffer();
         String stationRef = currentStation.getReference();
         // Cruise
@@ -266,9 +266,9 @@ public class StationDomain
     public StringBuffer getHeader(Conversion c, Station currentStation,
             String[] inputFile) throws ParseException
     {
-        
+
         _currentStation = currentStation;
-        
+
         StringBuffer stationHeader = new StringBuffer();
         switch (c)
         {
@@ -286,7 +286,7 @@ public class StationDomain
     private StringBuffer getOdvHeader(Station currentStation, String[] inputFile)
             throws ParseException
     {
-        
+
         StringBuffer odvStationHeader = new StringBuffer();
         String stationRef = currentStation.getReference();
         // Cruise
@@ -492,9 +492,11 @@ public class StationDomain
         medStationHeader.append(start);
         medStationHeader.append(Elts.getElt(Elts.station_date, DateTimeUtils
             .getFullDate(currentStation)));
-        medStationHeader.append(Elts.getElt(Elts.station_time, DateTimeUtils
-            .getCorrectedTime(currentStation.getTime(), currentStation
-                .getOffsetTU())));
+
+        medStationHeader.append(Elts.getElt(Elts.station_time,
+            DateTimeUtils.getCorrectedTime(currentStation.getTime(),
+                currentStation.getOffsetTU())));
+            
         medStationHeader.append(Elts.getElt(Elts.station_lat, currentStation
             .getLatitude()));
         medStationHeader.append(Elts.getElt(Elts.station_lon, currentStation
@@ -920,6 +922,7 @@ public class StationDomain
 
     /**
      * Getter sur _currentStation.
+     * 
      * @return the currentStation
      */
     public Station getCurrentStation()

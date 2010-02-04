@@ -454,10 +454,11 @@ public class StationSection extends NemoSection
         else
         {
             value = autoInput.getValue();
-            
+
             if (autoInput.isDefaultValueEnable())
                 if (autoInput.checkBoxHasDefaultValue.getSelection())
-                    if (value.trim().equals(autoInput.textDefaultValue.getText().trim()))
+                    if (value.trim().equals(
+                        autoInput.textDefaultValue.getText().trim()))
                         value = defaultValue;
         }
 
@@ -1355,8 +1356,7 @@ public class StationSection extends NemoSection
          * propertyModel.getFragment(); Integer realLigne = null; int ligne =
          * frag.getFirstLine(); if (ligne == 0) realLigne = new Integer(0);
          * ViewMain.editStationForm.stationNumber.setAutoValueInput(
-         * propertyModel, realLigne);
-         *  }
+         * propertyModel, realLigne); }
          */
     }
 
@@ -1439,6 +1439,7 @@ public class StationSection extends NemoSection
             autoInput.disableEndVari();
         }
     }
+
 
     // public void refreshDataType()
     // {

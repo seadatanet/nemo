@@ -19,6 +19,7 @@ import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Global.E_InputType;
+import fr.ifremer.nemo.util.format.DateTimeFormat;
 
 /**
  * Class Station.java Description: TODO
@@ -69,7 +70,14 @@ public class Station implements Comparable
         _latitude = ((Double) stationDomain.getModel().getProperty(Intern.S_LAT).applyOn(inputStationHeader)).doubleValue();
         _longitude = ((Double) stationDomain.getModel().getProperty(Intern.S_LON).applyOn(inputStationHeader)).doubleValue();
         _date = ((Long) stationDomain.getModel().getProperty(Intern.S_DATE).applyOn(inputStationHeader)).longValue();
-        _time = ((Long) stationDomain.getModel().getProperty(Intern.S_TIME).applyOn(inputStationHeader)).longValue();
+        
+        Object time = stationDomain.getModel().getProperty(Intern.S_TIME).applyOn(inputStationHeader);
+        
+        if (time.toString().equals("Default"))
+            _time = -1;
+        else
+            _time = (Long) time;
+        
         _offsetTU = ((Float) stationDomain.getModel().getProperty(Intern.S_OFFSETTU).applyOn(inputStationHeader)).floatValue();
         //--float depth = ((Float) stationDomain.getModel().getProperty(Intern.S_DEPTH).applyOn(inputStationHeader)).floatValue();
         //-- recup valeur par defaut

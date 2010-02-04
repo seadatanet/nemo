@@ -16,14 +16,15 @@ import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.util.Global.E_InputType;
 
 public class EditStationForm extends EditForm
 {
-    //public ArrayList<NemoSection> listeSectionsStation;
+    // public ArrayList<NemoSection> listeSectionsStation;
 
-    public StationSection stationNumber, dataType, historique, comments, 
-            surfaceSample, utConvertion, time, date, latitude, endLatitude, 
-            longitude, endLongitude, depth, endDepth, sensorDepth, 
+    public StationSection stationNumber, dataType, historique, comments,
+            surfaceSample, utConvertion, time, date, latitude, endLatitude,
+            longitude, endLongitude, depth, endDepth, sensorDepth,
             magneticDeclin, samplingRate;
 
     public QCflagsSection qcFlags;
@@ -33,38 +34,39 @@ public class EditStationForm extends EditForm
     {
         try
         {
-        super.createEditionForm(parent);
+            super.createEditionForm(parent);
 
-        formEdition.getBody().setLayout(new GridLayout());
-        formEdition.setText(Messages.edit_station_title);
+            formEdition.getBody().setLayout(new GridLayout());
+            formEdition.setText(Messages.edit_station_title);
 
-        // init des objets
-        initSections();
+            // init des objets
+            initSections();
 
-        // bouton validate
-        createButtonValidate();
-        buttonValidate
-            .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-                @Override
-                public void widgetSelected(
-                        org.eclipse.swt.events.SelectionEvent e)
-                {
-                    Etape.validationStation();
-                }
-            });
+            // bouton validate
+            createButtonValidate();
+            buttonValidate
+                .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                    @Override
+                    public void widgetSelected(
+                            org.eclipse.swt.events.SelectionEvent e)
+                    {
+                        Etape.validationStation();
+                    }
+                });
 
-        // bouton reset
-        createButtonRaz();
+            // bouton reset
+            createButtonRaz();
 
-        // bouton collapse all / expand all
-        createButtonExpand();
+            // bouton collapse all / expand all
+            createButtonExpand();
 
-        if (ViewMain.isCollection()){
-            TableDataSurvey.initTypes();
-        }
+            if (ViewMain.isCollection())
+            {
+                TableDataSurvey.initTypes();
+            }
 
-        // Draw Station Sections
-        drawSections();
+            // Draw Station Sections
+            drawSections();
         }
         catch (Exception e)
         {
@@ -78,7 +80,7 @@ public class EditStationForm extends EditForm
         super.afficheEdition();
 
         ViewLog.aideStation();
-        
+
         // affichage du texte dans la zone de gauche
         ViewMain.textAreaStation.setText(Utils.texteBrut);
 
@@ -87,7 +89,8 @@ public class EditStationForm extends EditForm
         ViewMain.affiche = 2;
 
         // refreshEdition
-        for (NemoSection stationSection : listeSections){
+        for (NemoSection stationSection : listeSections)
+        {
             stationSection.dispose();
         }
         listeSections.clear();
@@ -95,22 +98,18 @@ public class EditStationForm extends EditForm
         drawSections();
 
         // remplissage de l'IHM par le modèle chargé
-        //StationModel stationModel = Application.nemo.getDomain().getCruise().getStation().getModel();
-        //if (stationModel != null){
-            DataModel.fillStation();
-            filled = true;
-        //}
-/*         
-        if (DataModel.stationModel != null
-                && DataModel.stationModel.getModel().getDataType() != null){
-            DataModel.fillBackStation();
-            filled = true;
-        }
-        else if (DataModel.ouverture){
-            DataModel.fillStation();
-            filled = true;
-        }
-*/
+        // StationModel stationModel =
+        // Application.nemo.getDomain().getCruise().getStation().getModel();
+        // if (stationModel != null){
+        DataModel.fillStation();
+        filled = true;
+        // }
+        /*
+         * if (DataModel.stationModel != null &&
+         * DataModel.stationModel.getModel().getDataType() != null){
+         * DataModel.fillBackStation(); filled = true; } else if
+         * (DataModel.ouverture){ DataModel.fillStation(); filled = true; }
+         */
         actualiseEdition();
 
         // refresh du formulaire
@@ -161,14 +160,16 @@ public class EditStationForm extends EditForm
         comments.addManualInput(null, ComboType.BLOCK, Global.EMPTY_STRING);
         comments.addAutoInput(null, true, MetaInData.INTERDIT, true, false);
         listeSections.add(comments);
-        comments.getAutoInput().setVariableLabel(Messages.label_variable_comment);
-        
+        comments.getAutoInput().setVariableLabel(
+            Messages.label_variable_comment);
+
         surfaceSample =
             new StationSection(Intern.S_SURFACE, Messages
                 .getString(Intern.S_SURFACE),
                 Messages.edit_station_sectionSurface_lib, true, false, 2);
         surfaceSample.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
-        surfaceSample.addAutoInput(null, false, MetaInData.INTERDIT, true, false);
+        surfaceSample.addAutoInput(null, false, MetaInData.INTERDIT, true,
+            false);
         listeSections.add(surfaceSample);
 
         utConvertion =
@@ -176,21 +177,25 @@ public class EditStationForm extends EditForm
                 .getString(Intern.S_OFFSETTU), Global.EMPTY_STRING, true,
                 false, 1);
         utConvertion.addManualInput(null, ComboType.NONE, "0.0"); //$NON-NLS-1$
-        utConvertion.addAutoInput(null, false, MetaInData.INTERDIT, false, false);
+        utConvertion.addAutoInput(null, false, MetaInData.INTERDIT, false,
+            false);
         listeSections.add(utConvertion);
 
         time =
-            new StationSection(Intern.S_TIME, Messages
-                .getString(Intern.S_TIME),
+            new StationSection(Intern.S_TIME,
+                Messages.getString(Intern.S_TIME),
                 Messages.edit_station_sectionTime_lib, false, true, 1);
+
         time.addConverter(ComboType.TIME, Global.EMPTY_STRING);
         time.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
-        time.addAutoInput(null, false, MetaInData.FACULTATIF, false, false);
+        
+        boolean defaultValueEnable = ViewMain.getTypeFichierEntree().equals(E_InputType.PROFILE);
+        time.addAutoInput(null, false, MetaInData.FACULTATIF, false, defaultValueEnable);
         listeSections.add(time);
 
         date =
-            new StationSection(Intern.S_DATE, Messages
-                .getString(Intern.S_DATE),
+            new StationSection(Intern.S_DATE,
+                Messages.getString(Intern.S_DATE),
                 Messages.edit_station_sectionDate_lib, false, true, 1);
         date.addConverter(ComboType.DATE, Global.EMPTY_STRING);
         date.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
@@ -198,8 +203,7 @@ public class EditStationForm extends EditForm
         listeSections.add(date);
 
         latitude =
-            new StationSection(Intern.S_LAT, Messages
-                .getString(Intern.S_LAT),
+            new StationSection(Intern.S_LAT, Messages.getString(Intern.S_LAT),
                 Messages.edit_station_sectionLat_lib, false, true, 1);
         latitude.addConverter(ComboType.LAT, Global.EMPTY_STRING);
         latitude.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
@@ -215,14 +219,14 @@ public class EditStationForm extends EditForm
             endLatitude.addConverter(ComboType.LAT, Global.EMPTY_STRING);
             endLatitude.addManualInput(null, ComboType.NONE,
                 Global.EMPTY_STRING);
-            endLatitude.addAutoInput(null, true, MetaInData.INTERDIT, false, false);
+            endLatitude.addAutoInput(null, true, MetaInData.INTERDIT, false,
+                false);
             endLatitude.setTimeSeriesInfo(true);
             listeSections.add(endLatitude);
         }
 
         longitude =
-            new StationSection(Intern.S_LON, Messages
-                .getString(Intern.S_LON),
+            new StationSection(Intern.S_LON, Messages.getString(Intern.S_LON),
                 Messages.edit_station_sectionLon_lib, false, true, 1);
         longitude.addConverter(ComboType.LON, Global.EMPTY_STRING);
         longitude.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
@@ -238,7 +242,8 @@ public class EditStationForm extends EditForm
             endLongitude.addConverter(ComboType.LON, Global.EMPTY_STRING);
             endLongitude.addManualInput(null, ComboType.NONE,
                 Global.EMPTY_STRING);
-            endLongitude.addAutoInput(null, true, MetaInData.INTERDIT, false, false);
+            endLongitude.addAutoInput(null, true, MetaInData.INTERDIT, false,
+                false);
             endLongitude.setTimeSeriesInfo(true);
             listeSections.add(endLongitude);
         }
@@ -258,11 +263,12 @@ public class EditStationForm extends EditForm
             {
                 endDepth =
                     new StationSection(Intern.S_EDEPTH, Messages
-                        .getString(Intern.S_EDEPTH), Global.EMPTY_STRING,
-                        true, true, 1);
+                        .getString(Intern.S_EDEPTH), Global.EMPTY_STRING, true,
+                        true, 1);
                 endDepth.addManualInput(null, ComboType.NONE,
                     Global.EMPTY_STRING);
-                endDepth.addAutoInput(null, true, MetaInData.INTERDIT, false, false);
+                endDepth.addAutoInput(null, true, MetaInData.INTERDIT, false,
+                    false);
                 endDepth.setTimeSeriesInfo(true);
                 listeSections.add(endDepth);
             }
@@ -274,7 +280,8 @@ public class EditStationForm extends EditForm
                     1);
             sensorDepth.addManualInput(null, ComboType.NONE,
                 Global.EMPTY_STRING);
-            sensorDepth.addAutoInput(null, false, MetaInData.FACULTATIF, false, false);
+            sensorDepth.addAutoInput(null, false, MetaInData.FACULTATIF, false,
+                false);
             sensorDepth.setTimeSeriesInfo(true);
             listeSections.add(sensorDepth);
 
@@ -298,7 +305,8 @@ public class EditStationForm extends EditForm
                     Messages.edit_station_sectionSampling_lib, true, true, 1);
             samplingRate.addConverter(ComboType.FRQ, "*1"); //$NON-NLS-1$
             samplingRate.addManualInput(null, ComboType.NONE, "0"); //$NON-NLS-1$
-            samplingRate.addAutoInput(null, false, MetaInData.INTERDIT, false, false);
+            samplingRate.addAutoInput(null, false, MetaInData.INTERDIT, false,
+                false);
             samplingRate.setTimeSeriesInfo(true);
             listeSections.add(samplingRate);
         }
@@ -314,7 +322,8 @@ public class EditStationForm extends EditForm
     {
         // pour trajectoires et time-series
         if (ViewMain.radTrajectoire.getSelection()
-                || ViewMain.radSerieTempo.getSelection()){
+                || ViewMain.radSerieTempo.getSelection())
+        {
             // si Date est saisie dans les données
             boolean dateInData =
                 date.getAutoInput().getLines().get(0).isInData();
@@ -332,30 +341,32 @@ public class EditStationForm extends EditForm
             // in trajectory, latitude must be in data
             latitude.setEnableInData(MetaInData.OBLIGATOIRE);
             latitude.setEnabledManual(false);
-            
+
             // in trajectory, longitude must be in data
             longitude.setEnableInData(MetaInData.OBLIGATOIRE);
             longitude.getManualInput().setGrpEnabled(false);
-            
+
             // in trajectory, depth must be in data
             depth.setEnableInData(MetaInData.OBLIGATOIRE);
             depth.getManualInput().setGrpEnabled(false);
-            
-        }
-        
 
-        for (NemoSection section : listeSections){
-            if (section instanceof StationSection){
+        }
+
+        for (NemoSection section : listeSections)
+        {
+            if (section instanceof StationSection)
+            {
                 ((StationSection) section).diseableLineInData();
             }
         }
+        
     }
 
     @Override
     public void drawingBack()
     {
         super.drawingBack();
-        
+
         ViewLog.aideStation();
         ViewMain.affiche = 2;
     }
@@ -363,9 +374,11 @@ public class EditStationForm extends EditForm
     public boolean someInData()
     {
         boolean inData = false;
-        for (NemoSection stationSection : listeSections){
+        for (NemoSection stationSection : listeSections)
+        {
             if (stationSection instanceof StationSection
-                    && ((StationSection) stationSection).isInData()){
+                    && ((StationSection) stationSection).isInData())
+            {
                 inData = true;
             }
         }

@@ -77,7 +77,6 @@ public class Nemo
     }
     
     public void openModel(String pathModel) throws FileNotFoundException, TransformerException{
-        // TODO gestion des exceptions
         
         // nom du model
         nomModele = new File(pathModel).getName();

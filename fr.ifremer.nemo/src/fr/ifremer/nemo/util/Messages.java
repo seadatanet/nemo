@@ -117,6 +117,7 @@ public class Messages {
     public static String label_test;
     public static String label_file;
     public static String label_string;
+    public static String label_defaultValue;
     
     public static String confirm_saveModel;
     public static String confirm_quit;
