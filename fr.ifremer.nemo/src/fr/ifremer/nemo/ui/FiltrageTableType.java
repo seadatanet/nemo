@@ -1,15 +1,11 @@
 package fr.ifremer.nemo.ui;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.xml.bind.annotation.XmlElementDecl.GLOBAL;
-
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
@@ -36,10 +32,8 @@ import fr.ifremer.nemo.ui.tables.ParameterFilteredTable;
 import fr.ifremer.nemo.ui.tables.RegionFilteredTable;
 import fr.ifremer.nemo.ui.tables.ShipFilteredTable;
 import fr.ifremer.nemo.ui.tables.WSSurveyFilteredTable;
-import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
 public class FiltrageTableType{
     

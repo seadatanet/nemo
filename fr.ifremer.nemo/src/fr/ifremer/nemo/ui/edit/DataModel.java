@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 import com.ibm.icu.text.SimpleDateFormat;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.StationDomain;
 import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.input.LineFragment;
@@ -29,7 +28,6 @@ import fr.ifremer.nemo.util.Global.E_EndData;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.format.DateTimeFormat;
 import fr.ifremer.nemo.ws.WSDataType;
-import fr.ifremer.nemo.ws.WSParameter;
 
 public class DataModel
 {

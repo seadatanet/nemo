@@ -9,8 +9,6 @@ package fr.ifremer.nemo.ui.edit.cruise;
 
 import java.util.ArrayList;
 
-import org.eclipse.jface.layout.GridDataFactory;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 
 import fr.ifremer.nemo.input.CruiseModel;

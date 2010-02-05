@@ -3,8 +3,6 @@ package fr.ifremer.nemo.ui.edit.cruise;
 import java.io.File;
 import java.util.ArrayList;
 
-import javax.xml.transform.TransformerException;
-
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;

@@ -13,13 +13,10 @@ import java.text.ParseException;
 import java.util.HashMap;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.domain.AddedParameter.IdParameter;
 import fr.ifremer.nemo.input.ParameterModel;
-import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Global.E_InputType;
-import fr.ifremer.nemo.util.format.DateTimeFormat;
 
 /**
  * Class Station.java Description: TODO

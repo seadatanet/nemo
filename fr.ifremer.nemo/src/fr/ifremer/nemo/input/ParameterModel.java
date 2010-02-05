@@ -1,7 +1,5 @@
 package fr.ifremer.nemo.input;
 
-import java.util.Date;
-
 import org.nfunk.jep.JEP;
 import org.xml.sax.Attributes;
 

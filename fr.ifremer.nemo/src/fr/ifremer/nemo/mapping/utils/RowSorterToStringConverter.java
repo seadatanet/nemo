@@ -3,6 +3,7 @@ package fr.ifremer.nemo.mapping.utils;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
+
 import org.jdesktop.beansbinding.Converter;
 
 /**

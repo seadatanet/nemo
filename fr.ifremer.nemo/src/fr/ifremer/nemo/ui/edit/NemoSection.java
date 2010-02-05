@@ -9,7 +9,6 @@ package fr.ifremer.nemo.ui.edit;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -21,8 +20,6 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
 import fr.ifremer.nemo.input.StationModel;
-import fr.ifremer.nemo.ui.Application;
-import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 
 /**

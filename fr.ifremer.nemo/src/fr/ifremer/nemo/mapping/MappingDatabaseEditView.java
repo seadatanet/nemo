@@ -4,33 +4,33 @@
 
 package fr.ifremer.nemo.mapping;
 
-import fr.ifremer.nemo.mapping.utils.UtilDisplay;
-import fr.ifremer.nemo.util.Conversion;
-import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.Messages;
-
-import org.jdesktop.application.Action;
-import org.jdesktop.application.ResourceMap;
-import org.jdesktop.application.SingleFrameApplication;
-import org.jdesktop.application.FrameView;
-import org.jdesktop.application.TaskMonitor;
-import org.jdesktop.application.Task;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.persistence.EntityExistsException;
 import javax.persistence.RollbackException;
-import javax.swing.Timer;
 import javax.swing.Icon;
-
-
+import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import org.jdesktop.application.Action;
+import org.jdesktop.application.FrameView;
+import org.jdesktop.application.ResourceMap;
+import org.jdesktop.application.SingleFrameApplication;
+import org.jdesktop.application.Task;
+import org.jdesktop.application.TaskMonitor;
 import org.jdesktop.beansbinding.AbstractBindingListener;
 import org.jdesktop.beansbinding.Binding;
 import org.jdesktop.beansbinding.PropertyStateEvent;
+
+import fr.ifremer.nemo.mapping.utils.UtilDisplay;
+import fr.ifremer.nemo.util.Conversion;
+import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Messages;
 
 /**
  * The application's main frame.

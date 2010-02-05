@@ -11,7 +11,6 @@ package fr.ifremer.nemo.domain;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.MissingResourceException;
 

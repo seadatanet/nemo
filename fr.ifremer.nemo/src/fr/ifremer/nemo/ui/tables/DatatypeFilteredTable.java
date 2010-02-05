@@ -25,7 +25,6 @@ import fr.ifremer.nemo.ui.edit.cruise.TableWS_Survey;
 import fr.ifremer.nemo.ui.edit.cruise.TypeSurvey;
 import fr.ifremer.nemo.ui.edit.data.TableData;
 import fr.ifremer.nemo.ui.edit.data.TypeData;
-import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 

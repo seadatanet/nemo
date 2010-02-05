@@ -10,8 +10,6 @@ package fr.ifremer.nemo.domain;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 import fr.ifremer.nemo.Nemo;

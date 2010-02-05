@@ -13,11 +13,9 @@ import java.io.File;
 
 import org.apache.log4j.Logger;
 
-import fr.ifremer.nemo.input.Fragment;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.output.NemoWriterFactory;
-import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Preformat;
