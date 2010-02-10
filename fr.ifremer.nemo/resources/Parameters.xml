@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.6.0_06" class="java.beans.XMLDecoder"> 
+<java version="1.6.0_02" class="java.beans.XMLDecoder"> 
  <object class="java.util.ArrayList"> 
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
@@ -2164,6 +2164,25 @@
     </void> 
     <void property="unit"> 
      <string>micromole photon/(m2.second)</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
+     <string>LGH2</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>99.999</string> 
+    </void> 
+    <void property="format"> 
+     <string>%6.3f</string> 
+    </void> 
+    <void property="name"> 
+     <string>PAR ATTENUATION COEFFICIENT</string> 
+    </void> 
+    <void property="unit"> 
+     <string>m-1</string> 
     </void> 
    </object> 
   </void> 

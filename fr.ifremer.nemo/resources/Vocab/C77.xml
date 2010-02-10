@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.6.0_06" class="java.beans.XMLDecoder"> 
- <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="91"> 
+<java version="1.6.0_02" class="java.beans.XMLDecoder"> 
+ <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="92"> 
   <void index="0"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B28</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B28</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Acoustic reflection on marine organisms.</string> 
@@ -19,14 +19,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="1"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C772/1/H27</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C772/2/H27</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Alkalinity</string> 
@@ -41,14 +41,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="2"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C772/1/H76</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C772/2/H76</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Ammonia</string> 
@@ -63,14 +63,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="3"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C775/1/M71</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C775/2/M71</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Atmospheric chemistry</string> 
@@ -85,14 +85,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="4"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C771/1/H13</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C771/2/H13</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Bathythermograph</string> 
@@ -107,14 +107,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="5"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B16</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B16</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Benthic bacteria/micro-organisms</string> 
@@ -129,14 +129,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="6"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B72</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B72</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Biochemical measurements (eg lipids, amino acids)</string> 
@@ -151,14 +151,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="7"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B25</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B25</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Birds</string> 
@@ -173,14 +173,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="8"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C773/1/P12</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C773/2/P12</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Bottom deposits</string> 
@@ -195,14 +195,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="9"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C776/1/G08</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C776/2/G08</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Bottom photography</string> 
@@ -217,14 +217,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="10"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C771/1/H10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C771/2/H10</string> 
     </void> 
     <void property="entryTerm"> 
      <string>CTD stations</string> 
@@ -239,14 +239,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="11"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C772/1/H74</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C772/2/H74</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Carbon dioxide</string> 
@@ -261,14 +261,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="12"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C773/1/P04</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C773/2/P04</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Chlorinated hydrocarbons</string> 
@@ -283,14 +283,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="13"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C773/1/P13</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C773/2/P13</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Contaminants in organisms</string> 
@@ -305,14 +305,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="14"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C776/1/G03</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C776/2/G03</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Core - rock</string> 
@@ -327,14 +327,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="15"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C776/1/G04</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C776/2/G04</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Core - soft bottom</string> 
@@ -349,14 +349,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="16"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B21</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Crustaceans</string> 
@@ -371,14 +371,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="17"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C771/1/D01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C771/2/D01</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Current meters</string> 
@@ -393,14 +393,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="18"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C771/1/D71</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C771/2/D71</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Current profiler (eg ADCP)</string> 
@@ -415,14 +415,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="19"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C771/1/D03</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C771/2/D03</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Currents measured from ship drift</string> 
@@ -437,14 +437,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="20"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B19</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B19</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Demersal fish</string> 
@@ -459,14 +459,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="21"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B06</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B06</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Dissolved organic matter (inc DOC)</string> 
@@ -481,14 +481,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="22"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C776/1/G01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C776/2/G01</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Dredge</string> 
@@ -503,14 +503,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="23"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B13</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B13</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Eggs and larvae</string> 
@@ -525,14 +525,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="24"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B65</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B65</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Exploratory fishing</string> 
@@ -547,14 +547,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="25"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C771/1/D04</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C771/2/D04</string> 
     </void> 
     <void property="entryTerm"> 
      <string>GEK</string> 
@@ -569,14 +569,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="26"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B64</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B64</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Gear research</string> 
@@ -591,14 +591,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="27"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C771/1/H73</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C771/2/H73</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Geochemical tracers (eg freons)</string> 
@@ -613,14 +613,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="28"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C776/1/G72</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C776/2/G72</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Geophysical measurements made at depth</string> 
@@ -635,14 +635,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="29"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C776/1/G02</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C776/2/G02</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Grab</string> 
@@ -657,14 +657,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="30"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C776/1/G27</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C776/2/G27</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Gravity measurements</string> 
@@ -679,14 +679,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
   <void index="31"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C776/1/G71</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C775/2/M04</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Ice observations</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Descriptions of the extent or physical characteristics of sea ice or the collection of sea ice samples for physical, chemical or biological analysis.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1260172321000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="32"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C776/2/G71</string> 
     </void> 
     <void property="entryTerm"> 
      <string>In-situ seafloor measurement/sampling</string> 
@@ -701,14 +726,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="32"> 
+  <void index="33"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C775/1/M02</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C775/2/M02</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Incident radiation</string> 
@@ -723,14 +748,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="33"> 
+  <void index="34"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C771/1/D72</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C771/2/D72</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Instrumented wave measurements</string> 
@@ -745,14 +770,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="34"> 
+  <void index="35"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C772/1/H32</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C772/2/H32</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Isotopes</string> 
@@ -767,14 +792,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="35"> 
+  <void index="36"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C776/1/G24</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C776/2/G24</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Long/short range side scan sonar</string> 
@@ -789,14 +814,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="36"> 
+  <void index="37"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C776/1/G28</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C776/2/G28</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Magnetic measurements</string> 
@@ -811,14 +836,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="37"> 
+  <void index="38"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B26</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B26</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Mammals and reptiles</string> 
@@ -833,14 +858,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="38"> 
+  <void index="39"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B20</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B20</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Molluscs</string> 
@@ -855,14 +880,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="39"> 
+  <void index="40"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C776/1/G74</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C776/2/G74</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Multi-beam echosounding</string> 
@@ -877,14 +902,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="40"> 
+  <void index="41"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C776/1/G76</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C776/2/G76</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Multichannel seismic reflection</string> 
@@ -899,14 +924,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="41"> 
+  <void index="42"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B11</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B11</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Nekton</string> 
@@ -921,14 +946,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="42"> 
+  <void index="43"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B10</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B10</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Neuston</string> 
@@ -943,14 +968,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="43"> 
+  <void index="44"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C771/1/D06</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C771/2/D06</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Neutrally buoyant floats</string> 
@@ -965,14 +990,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="44"> 
+  <void index="45"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C772/1/H24</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C772/2/H24</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Nitrate</string> 
@@ -987,14 +1012,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="45"> 
+  <void index="46"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C772/1/H25</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C772/2/H25</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Nitrite</string> 
@@ -1009,14 +1034,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="46"> 
+  <void index="47"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C775/1/M05</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C775/2/M05</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Occasional standard measurements</string> 
@@ -1031,14 +1056,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="47"> 
+  <void index="48"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C771/1/H17</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C771/2/H17</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Optics (eg underwater light levels)</string> 
@@ -1053,14 +1078,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="48"> 
+  <void index="49"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B90</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B90</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Other biological/fisheries measurements</string> 
@@ -1075,14 +1100,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="49"> 
+  <void index="50"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C772/1/H90</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C772/2/H90</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Other chemical oceanographic measurements</string> 
@@ -1097,14 +1122,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="50"> 
+  <void index="51"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C773/1/P90</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C773/2/P90</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Other contaminant measurements</string> 
@@ -1119,14 +1144,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="51"> 
+  <void index="52"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C772/1/H33</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C772/2/H33</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Other dissolved gases</string> 
@@ -1141,14 +1166,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="52"> 
+  <void index="53"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C773/1/P05</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C773/2/P05</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Other dissolved substances</string> 
@@ -1163,14 +1188,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="53"> 
+  <void index="54"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C776/1/G90</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C776/2/G90</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Other geological/geophysical measurements</string> 
@@ -1185,14 +1210,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="54"> 
+  <void index="55"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C775/1/M90</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C775/2/M90</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Other meteorological measurements</string> 
@@ -1207,14 +1232,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="55"> 
+  <void index="56"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C771/1/D90</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C771/2/D90</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Other physical oceanographic measurements</string> 
@@ -1229,14 +1254,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="56"> 
+  <void index="57"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C772/1/H21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C772/2/H21</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Oxygen</string> 
@@ -1251,14 +1276,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="57"> 
+  <void index="58"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B71</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B71</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Particulate organic matter (inc POC, PON)</string> 
@@ -1273,14 +1298,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="58"> 
+  <void index="59"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B07</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B07</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Pelagic bacteria/micro-organisms</string> 
@@ -1295,14 +1320,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="59"> 
+  <void index="60"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B14</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B14</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Pelagic fish</string> 
@@ -1317,14 +1342,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="60"> 
+  <void index="61"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C773/1/P03</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C773/2/P03</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Petroleum residues</string> 
@@ -1339,14 +1364,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="61"> 
+  <void index="62"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C772/1/H22</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C772/2/H22</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Phosphate</string> 
@@ -1361,14 +1386,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="62"> 
+  <void index="63"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B17</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B17</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Phytobenthos</string> 
@@ -1383,14 +1408,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="63"> 
+  <void index="64"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B08</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B08</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Phytoplankton</string> 
@@ -1405,14 +1430,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="64"> 
+  <void index="65"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B02</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B02</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Phytoplankton pigs (eg chlorophyll, fluorescence)</string> 
@@ -1427,14 +1452,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="65"> 
+  <void index="66"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B01</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Primary productivity</string> 
@@ -1449,14 +1474,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="66"> 
+  <void index="67"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C772/1/H31</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C772/2/H31</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Radioactivity</string> 
@@ -1471,14 +1496,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="67"> 
+  <void index="68"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C775/1/M06</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C775/2/M06</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Routine standard measurements</string> 
@@ -1493,14 +1518,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="68"> 
+  <void index="69"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C771/1/D09</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C771/2/D09</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Sea level (inc. bot. press., inverted echosounder)</string> 
@@ -1515,14 +1540,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="69"> 
+  <void index="70"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B73</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B73</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Sediment traps</string> 
@@ -1537,14 +1562,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="70"> 
+  <void index="71"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C776/1/G26</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C776/2/G26</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Seismic refraction</string> 
@@ -1559,14 +1584,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="71"> 
+  <void index="72"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B03</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B03</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Seston</string> 
@@ -1581,14 +1606,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="72"> 
+  <void index="73"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C772/1/H26</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C772/2/H26</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Silicate</string> 
@@ -1603,14 +1628,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="73"> 
+  <void index="74"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C776/1/G75</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C776/2/G75</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Single channel seismic reflection</string> 
@@ -1625,14 +1650,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="74"> 
+  <void index="75"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C776/1/G73</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C776/2/G73</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Single-beam echosounding</string> 
@@ -1647,14 +1672,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="75"> 
+  <void index="76"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C771/1/H11</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C771/2/H11</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Subsurface temperature and salinity measurements</string> 
@@ -1672,14 +1697,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="76"> 
+  <void index="77"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C771/1/H72</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C771/2/H72</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Subsurface temperature measurements</string> 
@@ -1697,14 +1722,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="77"> 
+  <void index="78"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C771/1/D05</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C771/2/D05</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Surface drifters/drifting buoys</string> 
@@ -1719,14 +1744,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="78"> 
+  <void index="79"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C771/1/H71</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C771/2/H71</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Surface measurements underway (T,S)</string> 
@@ -1741,14 +1766,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="79"> 
+  <void index="80"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C773/1/P01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C773/2/P01</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Suspended matter</string> 
@@ -1763,14 +1788,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="80"> 
+  <void index="81"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B37</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B37</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Taggings</string> 
@@ -1785,14 +1810,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="81"> 
+  <void index="82"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C772/1/H75</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C772/2/H75</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Total - N</string> 
@@ -1807,14 +1832,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="82"> 
+  <void index="83"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C772/1/H23</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C772/2/H23</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Total - P</string> 
@@ -1829,14 +1854,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="83"> 
+  <void index="84"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C772/1/H30</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C772/2/H30</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Trace elements</string> 
@@ -1851,14 +1876,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="84"> 
+  <void index="85"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C773/1/P02</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C773/2/P02</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Trace metals</string> 
@@ -1873,14 +1898,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="85"> 
+  <void index="86"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C771/1/H16</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C771/2/H16</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Transparency (eg transmissometer)</string> 
@@ -1895,14 +1920,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="86"> 
+  <void index="87"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C775/1/M01</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C775/2/M01</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Upper air observations</string> 
@@ -1917,14 +1942,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="87"> 
+  <void index="88"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C771/1/H09</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C771/2/H09</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Water bottle stations</string> 
@@ -1939,14 +1964,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="88"> 
+  <void index="89"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B18</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B18</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Zoobenthos</string> 
@@ -1961,14 +1986,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="89"> 
+  <void index="90"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C774/1/B09</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C774/2/B09</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Zooplankton</string> 
@@ -1983,14 +2008,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
-  <void index="90"> 
+  <void index="91"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/C772/1/H28</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C772/2/H28</string> 
     </void> 
     <void property="entryTerm"> 
      <string>pH</string> 
@@ -2005,7 +2030,7 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/C77/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/2</string> 
     </void> 
    </object> 
   </void> 
