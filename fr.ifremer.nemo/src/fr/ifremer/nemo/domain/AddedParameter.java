@@ -153,8 +153,8 @@ public class AddedParameter extends Parameter
                 case TIME :
                     return currentStation.getMetaFlags().get(Intern.DATETIME);
                 // si PRES calculé, QC PRES = QC DEPH ??
-                case PRES :
-                    return sDomain.getData().getModel().getParameterModel(Intern.paramDEPH).retreiveParameterFlag(inputLine);
+//                case PRES :
+//                    return sDomain.getData().getModel().getParameterModel(Intern.paramDEPH).retreiveParameterFlag(inputLine);
                 default:
                     return Global.ZERO;
             }
