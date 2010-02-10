@@ -10,12 +10,15 @@
 package fr.ifremer.nemo;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.RandomAccessFile;
 
 import org.apache.log4j.Logger;
 
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.output.NemoWriterFactory;
+import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Preformat;
@@ -81,25 +84,40 @@ public class NemoShell
             if (strDefault.equals(Global.EMPTY_STRING))
                 strDefault = nemo.getDomain().getCruise().getModel().getName();
 
-            if ((odvConv != E_TypeConversion.MEDALAS))
+            if (odvConv != E_TypeConversion.MEDALAS)
                 nemo.getDomain().getCruise().setDataSetRef(strDefault);
 
             // Is a station property in file
+            int nbLignes = Nemo.getInstance().getDomain().getMedia().getModel().getFileHeader() + Nemo.getInstance().getDomain().getMedia().getShellStationHeaderNumberLines();
+            
             for (PropertyModel pModel : nemo.getDomain().getCruise()
                 .getStation().getModel().getProperties())
             {
                 if (pModel.getFragment() != null)
                 {
-                    if (pModel.getFragment().getLastLine() > nemo.getDomain()
-                        .getMedia().getModel().getStationHeader())
+                    if (pModel.getFragment().getLastLine() > nbLignes)
                     {
                         nemo.getDomain().getCruise().getStation()
                             .setSomeInData(true);
-                        break;
+                        pModel.setInData(true);
                     }
                 }
             }
 
+            File repertory = null;
+            
+            if (odvConv.equals(E_TypeConversion.ODV_MONOSTATION))
+            {
+                repertory = new File(outputFile);                
+            }
+            else
+            {
+                repertory = new File(outputFile).getParentFile();
+            }
+            
+            if (!(repertory == null) && !repertory.exists())
+                repertory.mkdirs();
+            
             NemoWriter writer = NemoWriterFactory.createWriter(conv);
 
             writer.write(null);

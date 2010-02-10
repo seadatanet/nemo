@@ -40,6 +40,7 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.part.ViewPart;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.input.MediaModel;
 import fr.ifremer.nemo.ui.Application;
 import fr.ifremer.nemo.ui.ApplicationWorkbenchWindowAdvisor;
 import fr.ifremer.nemo.ui.FiltrageTableType;
@@ -360,7 +361,7 @@ public class ViewMain extends ViewPart
                 @Override
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
-                {
+                {                                      
 
                     // reinitialisation de la conversion et de l'affichage
                     init();
@@ -400,6 +401,7 @@ public class ViewMain extends ViewPart
 
                                 // affichage etape0 dans formulaire d'edition
                                 ViewMain.editFileForm.afficheEdition();
+                               
                             }
                             catch (IOException e1)
                             {
@@ -541,7 +543,15 @@ public class ViewMain extends ViewPart
                                 .setText(Messages.error_file_selectDir);
                         }
                     }
+                    
+                    if (radioFichier.getSelection())
+                        Nemo.getInstance().getDomain().getMedia().getModel().setSourcePath(nomFichier);
+                    else
+                        Nemo.getInstance().getDomain().getMedia().getModel().setSourcePath(nomRepertoire);
+                    
+                    Nemo.getInstance().getDomain().getMedia().buildInputFilesNames();
                 }
+                
             });
     }
 

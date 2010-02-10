@@ -154,23 +154,27 @@ public class EditConversionForm extends EditForm
                                 CDIResumeWriter.getInstance().choixFichierSortie();
                             }
 
+                            boolean okChoixSortie;
                             // test pour savoir si on est en campagne ou pas
                             if (ViewMain.isCollection()){
                                 DataType dt = askDataType();
                                 Nemo.getInstance().getDomain().getCruise().getStation().getModel().setDataType(dt);
-                                choixDossierSortie();
+                                okChoixSortie = choixDossierSortie();
                             }
                             else if (currentConversion == E_TypeConversion.ODV_MONOSTATION){
-                                choixDossierSortie();
+                                okChoixSortie = choixDossierSortie();
                             }
                             else{
-                                choixFichierSortie();
+                                okChoixSortie = choixFichierSortie();
                             }
 
-                            definePrefixDossier();
+                            if (okChoixSortie)
+                            {
+                                definePrefixDossier();
 
-                            // affichage des résultats en fin de conversion
-                            afficheResultat(runSWTProgress());
+                                // affichage des résultats en fin de conversion
+                                afficheResultat(runSWTProgress());
+                            }
                         }
                         else {
                             Utils.messageErreur(Messages.error_convert_invalideSteps);
@@ -219,6 +223,7 @@ public class EditConversionForm extends EditForm
         ViewMain.affiche = 4;
 
         formEdition.reflow(true);
+        formEdition.redraw();
     }
 
     @Override
@@ -270,7 +275,7 @@ public class EditConversionForm extends EditForm
      * Méthodes de traitement du lancement de la conversion
      */
     
-    public void choixFichierSortie()
+    public boolean choixFichierSortie()
     {
         String nomFichierSortie = Global.EMPTY_STRING;
 
@@ -365,9 +370,14 @@ public class EditConversionForm extends EditForm
             }
             Nemo.getInstance().getDomain().getMedia().setOutputFileName(nomFichierSortie);
         }
+        else
+        {
+            return false;
+        }
+        return true;
     }
 
-    public void choixDossierSortie()
+    public boolean choixDossierSortie()
     {
         //String nomFichierSortie = Global.EMPTY_STRING;
         String nomDossierSortie = Global.EMPTY_STRING;
@@ -414,6 +424,12 @@ public class EditConversionForm extends EditForm
             }
             Nemo.getInstance().getDomain().getMedia().setOutputFileName(nomDossierSortie);
         }
+        else
+        {
+            return false;
+        }
+        
+        return true;
     }
 
     public boolean runSWTProgress()

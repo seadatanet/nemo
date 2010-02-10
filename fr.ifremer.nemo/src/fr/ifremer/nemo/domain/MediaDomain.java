@@ -9,7 +9,10 @@
  */
 package fr.ifremer.nemo.domain;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -18,6 +21,7 @@ import java.util.List;
 import fr.ifremer.nemo.input.InputModel;
 import fr.ifremer.nemo.input.MediaModel;
 import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 
 /**
@@ -66,9 +70,16 @@ public class MediaDomain
     public void updateMedia(MediaModel model){
         _model = model;
         
-        if (!_model.getSourcePath().equals(Global.EMPTY_STRING)){
-            buildInputFilesNames();
-        }
+   /*     if (ViewMain.radioFichier.getSelection())
+            if (ViewMain.nomFichier != null)
+                _model.setSourcePath(ViewMain.nomFichier);
+        else
+            if (ViewMain.nomRepertoire != null)
+                _model.setSourcePath(ViewMain.nomRepertoire);
+       
+        if (_model.getSourcePath() != null && !_model.getSourcePath().equals(Global.EMPTY_STRING))
+            buildInputFilesNames();*/
+        
     }
     
     public void buildInputFilesNames(){
@@ -98,6 +109,7 @@ public class MediaDomain
             
         }
         else{
+           
             names.add(inputFile.getName());
             _inputFilesNames.put(inputFile.getParentFile().getPath(), names);
         }
@@ -195,5 +207,27 @@ public class MediaDomain
         return numLine;   
     }
     
+    public int getShellStationHeaderNumberLines() throws IOException{
+        // nombre lignes entete station
+        String stationPattern = _model.getStationHeaderPattern();
+        int numLine = _model.getStationHeader();
+        String rep = (String) _inputFilesNames.keySet().toArray()[0];
+        String file = rep + "/" + _inputFilesNames.get(rep).get(0);
+        BufferedReader br = new BufferedReader(new FileReader(new File(file)));
+        if (!stationPattern.equals(Global.EMPTY_STRING)){
+            String texte = br.readLine(); //$NON-NLS-1$
+            numLine = 0;
+            while (texte != null){
+                if (texte.trim().startsWith(stationPattern.trim())){
+                    numLine++;
+                    break;
+                }
+                numLine++;
+                texte = br.readLine();
+            }
+            numLine -= _model.getFileHeader();
+        }
+        return numLine;   
+    }
     
 }

@@ -146,7 +146,7 @@ public class Application implements IPlatformRunnable
                 else
                 {
                     batchLogger.info("Batch mode ended with errors.");
-                    System.exit(1);
+                    System.exit(0);
                 }
             }
             else
