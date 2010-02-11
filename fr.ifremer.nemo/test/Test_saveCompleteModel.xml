@@ -47,6 +47,7 @@ sur la page correspondant a la campagne.
       <PropertyModel property="reference" userProvided="false">
         <HeaderFragment isSingleLine="true" isVariable="false">
           <firstLine>1</firstLine>
+          <lastLine>0</lastLine>
           <firstCharOffset>8</firstCharOffset>
           <lastCharOffset>9</lastCharOffset>
         </HeaderFragment>
@@ -59,6 +60,7 @@ sur la page correspondant a la campagne.
         </format>
         <HeaderFragment isSingleLine="true" isVariable="false">
           <firstLine>1</firstLine>
+          <lastLine>0</lastLine>
           <firstCharOffset>11</firstCharOffset>
           <lastCharOffset>20</lastCharOffset>
         </HeaderFragment>
@@ -69,6 +71,7 @@ sur la page correspondant a la campagne.
         </format>
         <HeaderFragment isSingleLine="true" isVariable="false">
           <firstLine>1</firstLine>
+          <lastLine>0</lastLine>
           <firstCharOffset>22</firstCharOffset>
           <lastCharOffset>26</lastCharOffset>
         </HeaderFragment>
@@ -85,6 +88,7 @@ sur la page correspondant a la campagne.
         </format>
         <HeaderFragment isSingleLine="true" isVariable="false">
           <firstLine>1</firstLine>
+          <lastLine>0</lastLine>
           <firstCharOffset>32</firstCharOffset>
           <lastCharOffset>40</lastCharOffset>
         </HeaderFragment>
@@ -95,6 +99,7 @@ sur la page correspondant a la campagne.
         </format>
         <HeaderFragment isSingleLine="true" isVariable="false">
           <firstLine>1</firstLine>
+          <lastLine>0</lastLine>
           <firstCharOffset>42</firstCharOffset>
           <lastCharOffset>51</lastCharOffset>
         </HeaderFragment>
@@ -151,6 +156,9 @@ sur la page correspondant a la campagne.
           <unit>decibar=10000 pascals</unit>
           <default>-999.9</default>
           <format>%6.1f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
         </Parameter>
       </ParameterModel>
       <ParameterModel>
@@ -162,6 +170,9 @@ sur la page correspondant a la campagne.
           <unit>millimole/m3</unit>
           <default>99.99</default>
           <format>%5.2f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
         </Parameter>
       </ParameterModel>
       <ParameterModel>
@@ -173,6 +184,9 @@ sur la page correspondant a la campagne.
           <unit>millimole/m3</unit>
           <default>99.999</default>
           <format>%6.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
         </Parameter>
       </ParameterModel>
       <ParameterModel>
@@ -184,6 +198,9 @@ sur la page correspondant a la campagne.
           <unit>milligram/m3</unit>
           <default>99.999</default>
           <format>%6.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
         </Parameter>
       </ParameterModel>
       <ParameterModel>
@@ -195,6 +212,9 @@ sur la page correspondant a la campagne.
           <unit>millimole/m3</unit>
           <default>999.99</default>
           <format>%6.2f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
         </Parameter>
       </ParameterModel>
       <ParameterModel>
@@ -206,6 +226,9 @@ sur la page correspondant a la campagne.
           <unit>millimole/m3</unit>
           <default>99.9999</default>
           <format>%7.4f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
         </Parameter>
       </ParameterModel>
     </parameters>

@@ -54,7 +54,7 @@ public class Application implements IPlatformRunnable
 
         opt = new Options();
         
-        opt.addOption(optBatchMode, false, "Determine if you are in batch mode");
+        opt.addOption(optBatchMode, false, "Not necessary using nemo_batch launcher");
         opt.addOption(optInputFile, true, "Input file / directory");
         opt.addOption(optOutputFile, true, "Output file / directory");
         opt.addOption(optModelFile, true, "Model file (xml)");
@@ -63,7 +63,7 @@ public class Application implements IPlatformRunnable
             .addOption(
                 optOdvMono,
                 false,
-                "ODV conversion type for mono station output file (one output file per station).");
+                "ODV conversion type for mono station output file (one output file per station) Default mode if neither mono or multi option precised.");
         opt
             .addOption(
                 optOdvMulti,
@@ -191,9 +191,9 @@ public class Application implements IPlatformRunnable
         batchLogger.error("Arguments error. Nemo batch stopped.");
         HelpFormatter hf = new HelpFormatter();
         PrintWriter pw = new PrintWriter(System.out);
-        hf.printUsage(pw, 200, "nemo", opt);
+        hf.printUsage(pw, 200, "nemo_batch", opt);
         pw.flush();
-        hf.printHelp("nemo", opt);
+        hf.printHelp("nemo_batch", opt);
         
         System.exit(1);
     }

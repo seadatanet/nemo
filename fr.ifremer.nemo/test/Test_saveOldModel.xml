@@ -156,61 +156,79 @@ sur la page correspondant a la campagne.
           <unit>decibar=10000 pascals</unit>
           <default>-999.9</default>
           <format>%6.1f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
         </Parameter>
       </ParameterModel>
       <ParameterModel>
         <conversionFormula>x*1</conversionFormula>
         <inputDefault>99.99</inputDefault>
-        <LineFragment firstCharOffset="1" lastCharOffset="10"/>
+        <LineFragment firstCharOffset="33" lastCharOffset="41"/>
         <Parameter code="PHOS">
           <fullName>PHOSPHATE (PO4-P) CONTENT</fullName>
           <unit>millimole/m3</unit>
           <default>99.99</default>
           <format>%5.2f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
         </Parameter>
       </ParameterModel>
       <ParameterModel>
         <conversionFormula>x*1</conversionFormula>
         <inputDefault>99.999</inputDefault>
-        <LineFragment firstCharOffset="1" lastCharOffset="10"/>
+        <LineFragment firstCharOffset="13" lastCharOffset="21"/>
         <Parameter code="NTRI">
           <fullName>NITRITE (NO2-N) CONTENT</fullName>
           <unit>millimole/m3</unit>
           <default>99.999</default>
           <format>%6.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
         </Parameter>
       </ParameterModel>
       <ParameterModel>
         <conversionFormula>x*1</conversionFormula>
         <inputDefault>99.999</inputDefault>
-        <LineFragment firstCharOffset="1" lastCharOffset="10"/>
+        <LineFragment firstCharOffset="103" lastCharOffset="111"/>
         <Parameter code="CPHL">
           <fullName>CHLOROPHYLL-A TOTAL</fullName>
           <unit>milligram/m3</unit>
           <default>99.999</default>
           <format>%6.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
         </Parameter>
       </ParameterModel>
       <ParameterModel>
         <conversionFormula>x*1</conversionFormula>
         <inputDefault>99.99</inputDefault>
-        <LineFragment firstCharOffset="1" lastCharOffset="10"/>
+        <LineFragment firstCharOffset="43" lastCharOffset="51"/>
         <Parameter code="AMON">
           <fullName>AMMONIUM (NH4-N) CONTENT</fullName>
           <unit>millimole/m3</unit>
           <default>999.99</default>
           <format>%6.2f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
         </Parameter>
       </ParameterModel>
       <ParameterModel>
         <conversionFormula>x/1000.0</conversionFormula>
         <inputDefault>999.9</inputDefault>
-        <LineFragment firstCharOffset="1" lastCharOffset="10"/>
+        <LineFragment firstCharOffset="133" lastCharOffset="141"/>
         <Parameter code="TPHS">
           <fullName>TOTAL PHOSPHORUS (P) CONTENT</fullName>
           <unit>millimole/m3</unit>
           <default>99.9999</default>
           <format>%7.4f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
         </Parameter>
       </ParameterModel>
     </parameters>
