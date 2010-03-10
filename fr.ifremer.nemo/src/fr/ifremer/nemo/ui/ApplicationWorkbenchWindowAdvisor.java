@@ -1,6 +1,7 @@
 package fr.ifremer.nemo.ui;
 
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.ui.WorkbenchException;
 import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
 import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
@@ -35,7 +36,19 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 
 		configurer_titre = configurer;
 
-		configurer_titre.setTitle(Intern.application_title);
+        configurer.setTitle(Intern.application_title);
 
 	}
+    
+ 
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void postWindowCreate()
+    {
+        super.postWindowCreate();
+        configurer.getWindow().getShell().setMinimized(false);
+    }
 }

@@ -7,6 +7,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.application.IWorkbenchConfigurer;
 import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
 import org.eclipse.ui.application.WorkbenchAdvisor;
 import org.eclipse.ui.application.WorkbenchWindowAdvisor;
@@ -88,4 +89,10 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor
         }
         return false;
     }
+    
+    @Override
+    public void initialize(IWorkbenchConfigurer configurer) {
+       configurer.setSaveAndRestore(false);
+    }
+
 }

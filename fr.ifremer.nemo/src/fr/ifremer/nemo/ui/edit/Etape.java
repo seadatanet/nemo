@@ -56,7 +56,7 @@ public class Etape
                 try
                 {
                     Preformat.run();
-                    
+
                     // le préformattage a ajouté un espace au début de chaque
                     // ligne
                     // de données
@@ -69,8 +69,6 @@ public class Etape
                                     + ViewMain.editFileForm.sectionRuptureDonnees
                                         .getStartStationIndicator());
                     }
-                    
-                    
 
                 }
                 catch (Exception ex)
@@ -1194,25 +1192,35 @@ public class Etape
 
     public static void validationData()
     {
-        
+
         Boolean valeurNonRemplie = false;
         boolean existDEPH = false;
         // retour e l'onglet message d'erreur
         ViewLog.tabFolderLog.setSelection(0);
-        
+
         // raz du message d'erreurs
         Utils.messageErreur(Global.EMPTY_STRING);
 
         // mise e jour avant toute chose
         TableData.majTypeData();
-        
+
         // test de toutes les valeurs debut / fin des Data
-        Boolean ok = TableData.majChampTest();
+        Boolean ok = true;
+        try
+        {
+            ok = TableData.majChampTest();
+        }
+        catch (Exception e)
+        {
+            ok = false;
+            e.printStackTrace();
+        }
+
         if (!ok)
         {
             Utils.messageErreurAppend(Messages.Etape_131);
         }
-        
+
         int nbreParam = TableData.types.size();
         int[] debuts, fins;
         String[] debutsFlag, finsFlag;
@@ -1462,9 +1470,9 @@ public class Etape
             DataModel.initDesc(ViewMain.nomFichier);
         else
             DataModel.initDesc(ViewMain.nomRepertoire);
-        
+
         Nemo.getInstance().getDomain().getMedia().buildInputFilesNames();
-        
+
         // DataModel.initModele(ViewMain.nomFichier);
 
         Utils.messageOK(Messages.success_etape);
