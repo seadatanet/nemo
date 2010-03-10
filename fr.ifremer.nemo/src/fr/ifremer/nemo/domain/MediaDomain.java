@@ -193,7 +193,7 @@ public class MediaDomain
     public int getStationHeaderNumberLines(){
         // nombre lignes entete station
         String stationPattern = _model.getStationHeaderPattern();
-        int numLine = _model.getStationHeader();
+        int numLine = 0;
         if (!stationPattern.equals(Global.EMPTY_STRING)){
             String[] texte = Utils.texteBrut.split("\n"); //$NON-NLS-1$
             for (numLine = 0; numLine < texte.length; numLine++){
@@ -204,6 +204,7 @@ public class MediaDomain
             }
             numLine -= _model.getFileHeader();
         }
+        numLine+=_model.getStationHeader();
         return numLine;   
     }
     
