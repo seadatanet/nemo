@@ -154,9 +154,10 @@ public class ViewMain extends ViewPart
                         org.eclipse.swt.events.SelectionEvent e)
                 {
                     int tmp = tabFolder.getSelectionIndex();
-                    // System.out.println("SelectionEvent => " + tmp);
-                    if (isCollection() && tabFolder.getSelectionIndex() > 0)
+
+                    if (isCollection() && tmp > 0)
                         tmp++;
+                    
                     Utils.validationEtape(tmp);
                 }
             });
@@ -542,14 +543,7 @@ public class ViewMain extends ViewPart
                             ViewLog.styledTextLogErreurs
                                 .setText(Messages.error_file_selectDir);
                         }
-                    }
-                    
-                    if (radioFichier.getSelection())
-                        Nemo.getInstance().getDomain().getMedia().getModel().setSourcePath(nomFichier);
-                    else
-                        Nemo.getInstance().getDomain().getMedia().getModel().setSourcePath(nomRepertoire);
-                    
-                    Nemo.getInstance().getDomain().getMedia().buildInputFilesNames();
+                    }                    
                 }
                 
             });

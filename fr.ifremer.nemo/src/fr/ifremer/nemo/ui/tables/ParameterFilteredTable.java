@@ -162,10 +162,19 @@ public class ParameterFilteredTable extends AbstractFilteredTable
       typeData = TableData.listeFiltree.get(index);
       Configuration config = Nemo.getInstance().getConfig();
       
-      if (config.getDataList().equals(DataListEnum.P011))
+      
+      // Correction FAE 3760 si on charge un modele si on a utilisé liste P091 on continue à utiliser la liste P091
+      boolean isTypeP011;
+      
+      if (!TableData.types.isEmpty())
+          isTypeP011 = TableData.types.get(0).isP011();
+      else
+          isTypeP011 = config.getDataList().equals(DataListEnum.P011);
+      
+      if (isTypeP011)
       {
           SubParameterFilteredTable subTable = new SubParameterFilteredTable(typeData);
-          subTable.open();
+          subTable.open(this.shell);
           if (subTable.isValidated())
               typeData = subTable.getSelectedData();
           else
@@ -205,6 +214,8 @@ public class ParameterFilteredTable extends AbstractFilteredTable
             if (found == false)
             {
                 TableData.types.add(new TypeData(typeData));
+                // Suppression message erreur FAE 3752
+                Utils.messageErreur("");
             }
             else
             {

@@ -66,17 +66,14 @@ public class AutoLine implements UIobject
         numberLine =
             new Couple(null, (Messages.label_line + addedLabel),
                 ComboType.NONE, Global.EMPTY_STRING);
-        numberLine.setFullSize(false);
 
         start =
             new Couple(null, (Messages.label_start + addedLabel),
                 ComboType.NONE, Global.EMPTY_STRING);
-        start.setFullSize(false);
 
         end =
             new Couple(null, (Messages.label_end + addedLabel), ComboType.NONE,
                 Global.EMPTY_STRING);
-        end.setFullSize(false);
 
         if (withCursor)
             cursor = new Cursor();

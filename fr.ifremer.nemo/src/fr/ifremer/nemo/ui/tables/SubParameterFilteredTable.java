@@ -117,15 +117,15 @@ public class SubParameterFilteredTable extends AbstractFilteredTable
 
         _table.setHeaderVisible(true);
         _table.setLinesVisible(true);
-        _table.setBounds(new Rectangle(3, 45, 298, 237));
+        _table.setBounds(new Rectangle(3, 45, 405, 237));
 
         // creation des colonnes...
         TableColumn tableColumn = new TableColumn(_table, SWT.NONE);
-        tableColumn.setWidth(200);
+        tableColumn.setWidth(300);
         tableColumn.setText(Messages.table_label_codeName);
 
         TableColumn tableColumn2 = new TableColumn(_table, SWT.NONE);
-        tableColumn2.setWidth(81);
+        tableColumn2.setWidth(100);
         tableColumn2.setText("Abbr");
 
         refreshTable();

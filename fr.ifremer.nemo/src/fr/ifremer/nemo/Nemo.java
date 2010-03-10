@@ -26,8 +26,12 @@ import com.ago.xml.XMLBootstrapParser;
 import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.input.InputModel;
+import fr.ifremer.nemo.ui.ApplicationWorkbenchWindowAdvisor;
+import fr.ifremer.nemo.ui.edit.file.EditFileForm;
+import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
+import fr.ifremer.nemo.util.Messages;
 
 /**
  * Class Nemo.java
@@ -159,5 +163,57 @@ public class Nemo
     public String getNomModele()
     {
         return nomModele;
+    }
+
+    /**
+     * Getter pour nomModele.
+     * @return String
+     * @see Nemo.java#nomModele
+     */
+    public void setNomModele(String nomModel)
+    {
+        nomModele = nomModel;
+    }
+    
+    public static void refreshNomNemo()
+    {
+        // nom du model
+        String modelName = Nemo.getInstance().getNomModele();
+        
+        // nom de l'application
+        if (ViewMain.dossierCampagne){
+            // dossier campagne
+            File fich = new File(ViewMain.nomRepertoire);
+            if (!Global.EMPTY_STRING.equals(modelName)){
+                ApplicationWorkbenchWindowAdvisor.configurer_titre
+                    .setTitle(Messages.application_directoryTitle
+                            + fich.getAbsolutePath() + Messages.application_modelTitle
+                            + modelName + " ]"); //$NON-NLS-1$
+
+            }
+            else{
+                ApplicationWorkbenchWindowAdvisor.configurer_titre
+                    .setTitle(Messages.application_directoryTitle
+                            + fich.getAbsolutePath() + " ]"); //$NON-NLS-1$ 
+            }
+
+        }
+        else{
+            // fichier campagne
+            File fich;
+            fich = new File(ViewMain.nomFichier);
+
+            if (!Global.EMPTY_STRING.equals(modelName)){
+                ApplicationWorkbenchWindowAdvisor.configurer_titre
+                    .setTitle(Messages.application_fileTitle + fich.getAbsolutePath()
+                            + Messages.application_modelTitle
+                            + modelName + " ]"); //$NON-NLS-1$
+            }
+            else{
+                ApplicationWorkbenchWindowAdvisor.configurer_titre
+                    .setTitle(Messages.application_fileTitle + fich.getAbsolutePath()
+                            + " ]"); //$NON-NLS-1$ 
+            }
+        }
     }
 }

@@ -21,6 +21,8 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import com.sun.xml.internal.bind.v2.runtime.reflect.Lister.Pack;
+
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
@@ -41,7 +43,6 @@ public class Couple implements UIobject
     private String defaultValue;
     private Text valueText;
     private Combo valueCombo;
-    private boolean fullSize;
     private int textLimit;
 
     public Couple(String groupTitle, String labelText, ComboType type,
@@ -72,11 +73,6 @@ public class Couple implements UIobject
         completeLabels(cType);
     }
 
-    public void setFullSize(boolean full)
-    {
-        this.fullSize = full;
-    }
-
     public void setTextLimit(int limit)
     {
         this.textLimit = limit;
@@ -92,12 +88,18 @@ public class Couple implements UIobject
         {
 
             GridLayout gridLayout = new GridLayout();
-            if (type == ComboType.FRQ)
-                gridLayout.numColumns = 4;
+            
 
             Group groupe = new Group(compo, SWT.NONE);
             groupe.setLayout(gridLayout);
             groupe.setText(groupTitle);
+            
+            if (type == ComboType.FRQ)
+            {
+                gridLayout.numColumns = 4;
+                GridDataFactory.fillDefaults().grab(true, false).applyTo(groupe);                
+            }
+            
             parent = groupe;
         }
 
@@ -127,6 +129,7 @@ public class Couple implements UIobject
                     Utils.invalidEtapes();
                 }
             });
+            
         }
         else if (valueCombo != null)
         {
@@ -278,8 +281,8 @@ public class Couple implements UIobject
             GridData gridData =
                 new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1);
             // gridData.minimumHeight = 40;
-            // gridData.minimumWidth = 50;
-            // gridData.widthHint = 385;
+             gridData.minimumWidth = 50;
+             gridData.widthHint = 50;
             valueText.setLayoutData(gridData);
         }
         else if (type == ComboType.FRQ)
@@ -429,4 +432,5 @@ public class Couple implements UIobject
         return type;
     }
 
+   
 }

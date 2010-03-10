@@ -119,10 +119,10 @@ public class MediaModel extends AbstractModel
                                  String a_LocalName,
                                  String a_QName, 
                                  Attributes a_Attributes){
-        String tmp;
-        if ((tmp = a_Attributes.getValue(ModelDescription.a_sourcepath)) != null){
-            setSourcePath(tmp);
-        }
+//        String tmp;
+//        if ((tmp = a_Attributes.getValue(ModelDescription.a_sourcepath)) != null){
+//            setSourcePath(tmp);
+//        }
     }
     
     /**

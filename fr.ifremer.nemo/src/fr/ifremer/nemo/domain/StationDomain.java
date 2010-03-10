@@ -693,26 +693,48 @@ public class StationDomain
         timeseriesHeader.append(start);
         timeseriesHeader.append(Elts.getElt(Elts.station_endDate, endTime));
         timeseriesHeader.append(Elts.getElt(Elts.station_endTime, endTime));
+        
         double endlat = currentStation.getEndlatitude();
         if (Double.isNaN(endlat))
         {
-            endlat =
-                (Double) _model.getProperty(Intern.S_ELAT).applyOn(inputFile);
+            if (_model.getProperty(Intern.S_ELAT).isUserProvided() && _model.getProperty(Intern.S_ELAT).getUserValue().equals(Global.EMPTY_STRING))
+            {
+                endlat = (Double)_model.getProperty(Intern.S_LAT).applyOn(inputFile);
+            }
+            else
+            {
+                endlat = (Double) _model.getProperty(Intern.S_ELAT).applyOn(inputFile);
+            }
         }
+        
         timeseriesHeader.append(Elts.getElt(Elts.station_endLat, endlat));
         double endlon = currentStation.getEndlongitude();
         if (Double.isNaN(endlon))
         {
-            endlon =
-                (Double) _model.getProperty(Intern.S_ELON).applyOn(inputFile);
-        }
+            if (_model.getProperty(Intern.S_ELON).isUserProvided() && _model.getProperty(Intern.S_ELON).getUserValue().equals(Global.EMPTY_STRING))
+            {
+                endlat = (Double)_model.getProperty(Intern.S_LON).applyOn(inputFile);
+            }
+            else
+            {
+                endlon = (Double) _model.getProperty(Intern.S_ELON).applyOn(inputFile);
+            }
+        }        
+        
         timeseriesHeader.append(Elts.getElt(Elts.station_endLon, endlon));
         float endDepth = currentStation.getEnddepth();
         if (Float.isNaN(endDepth))
         {
-            endDepth =
-                (Float) _model.getProperty(Intern.S_EDEPTH).applyOn(inputFile);
+            if (_model.getProperty(Intern.S_EDEPTH).isUserProvided() && _model.getProperty(Intern.S_EDEPTH).getUserValue().equals(Global.EMPTY_STRING))
+            {
+                endDepth = (Float)_model.getProperty(Intern.S_DEPTH).applyOn(inputFile);
+            }
+            else
+            {
+                endDepth = (Float) _model.getProperty(Intern.S_EDEPTH).applyOn(inputFile);
+            }
         }
+        
         timeseriesHeader.append(Elts.getElt(Elts.station_endDepth, endDepth));
         timeseriesHeader.append(Global.SPACE);
         timeseriesHeader.append(Elts.getKeyword(Elts.qc));

@@ -119,6 +119,8 @@ public abstract class EditForm
                     razText();
                     // invalidation de l'étape en cours et des suivantes
                     Utils.invalidEtapes();
+                    // Suppression message erreur FAE 3752
+                    Utils.messageErreur("");
                 }
             });
     }

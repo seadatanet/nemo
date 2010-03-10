@@ -47,7 +47,8 @@ public class TableDataSurvey
     {
         sectionClientType = parent;
         initTypes();
-        creationTable();
+        creationTable(
+            );
     }
 
     public static void setSectionClientType(Composite parent)
@@ -67,25 +68,26 @@ public class TableDataSurvey
         table.setHeaderVisible(true);
         table.setLinesVisible(true);
 
+
         TableColumn tableColumn = new TableColumn(table, SWT.NONE);
-        tableColumn.setWidth(10);
+        tableColumn.setWidth(70);
         tableColumn.setText(Messages.table_label_code.toUpperCase());
 
         TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);
-        tableColumn1.setWidth(10);
+        tableColumn1.setWidth(70);
         tableColumn1.setText(Messages.table_label_number);
 
         TableColumn tableColumn2 = new TableColumn(table, SWT.NONE);
-        tableColumn2.setWidth(10);
+        tableColumn2.setWidth(70);
         tableColumn2.setText(Messages.table_label_qc);
 
         TableColumn tableColumn3 = new TableColumn(table, SWT.READ_ONLY);
         // mise e zero de la largeur de la colonne avec isSensor() pour ne pas
         // qu'on puisse la modifier!!
-        tableColumn3.setWidth(10);
+        tableColumn3.setWidth(70);
         tableColumn3.setText(Messages.table_label_sensor);
 
-        initTable();
+        initTable();        
     }
 
     public static void initTypes()
@@ -255,7 +257,7 @@ public class TableDataSurvey
             public void handleEvent(Event e)
             {
                 // System.out.println("selection liste");
-                FiltrageTableType.go(Global.DATATYPE, null);
+                FiltrageTableType.go(sectionClientType,Global.DATATYPE, null);
 
             }
         });

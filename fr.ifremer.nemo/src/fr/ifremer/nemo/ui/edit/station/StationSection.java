@@ -742,8 +742,6 @@ public class StationSection extends NemoSection
         cal.clear();
         cal.setLenient(false);
 
-        StationSection time = ViewMain.editStationForm.time;
-
         // TEST DATE
         resultTest.setText(getValue());
         if (!isManual())
@@ -753,9 +751,7 @@ public class StationSection extends NemoSection
         Long DateLong =
             (Long) format.parseObject(resultTest.getText().replace(' ', '0'));
 
-        // TEST HEURE (pour decalage TU)
-        Long HourLong = time.timeTest();
-        cal.setTimeInMillis(DateLong + HourLong);
+        cal.setTimeInMillis(DateLong /*+ HourLong*/);
 
         if (!isManual())
             autoInput.getLines().get(0).selectInViewFile();
@@ -897,9 +893,10 @@ public class StationSection extends NemoSection
         {
             result = autoInput.getValue(0).trim();
 
-            if (autoInput.checkBoxHasDefaultValue.getSelection())
-                if (result.equals(autoInput.textDefaultValue.getText()))
-                    result = defaultValue;
+            if (autoInput.defaultValueEnable)
+                if (autoInput.checkBoxHasDefaultValue.getSelection())
+                    if (result.equals(autoInput.textDefaultValue.getText()))
+                        result = defaultValue;
 
             autoInput.selectInViewFile();
         }

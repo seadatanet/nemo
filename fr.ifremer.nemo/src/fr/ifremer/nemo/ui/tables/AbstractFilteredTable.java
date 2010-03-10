@@ -13,6 +13,7 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
@@ -49,90 +50,95 @@ public abstract class AbstractFilteredTable
 
     protected Button filtreButtonCancel;
 
-    public void open()
+    public void open(final Composite parent)
     {
-        try
-        {
+        Display.getCurrent().syncExec(new Runnable(){
 
-            Display display = Application.display;
-            
-            shell = 
-                new Shell(display, SWT.BORDER | SWT.TITLE | SWT.APPLICATION_MODAL);
-            
-            shell.setSize(300, 500);
-
-            shell.setLayout(new FillLayout());
-
-            shell.setText(getDialogTitle());
-
-            top = new Composite(shell, SWT.NONE);
-            top.setLayout(null);
-
-            createDataList();
-
-            filtreText = new Text(top, SWT.BORDER);
-            filtreText.setBounds(new Rectangle(3, 21, 298, 19));
-            filtreText.setText(Global.EMPTY_STRING);
-            labelText = new Label(top, SWT.NONE);
-            labelText.setBounds(new Rectangle(3, 4, 298, 13));
-            labelText.setText(Messages.table_label_filter);
-            labelText.pack();
-
-            filtreButtonSelectionner = new Button(top, SWT.NONE);
-            filtreButtonSelectionner.setBounds(new Rectangle(62, 289, 65, 23));
-            filtreButtonSelectionner.setText(Messages.button_select);
-            filtreButtonSelectionner.pack();
-            filtreButtonCancel = new Button(top, SWT.NONE);
-            filtreButtonCancel.setBounds(new Rectangle(168, 289, 65, 23));
-            filtreButtonCancel.setText(Messages.button_cancel);
-            filtreButtonCancel.pack();
-
-            createTable();
-
-            filtreButtonCancel
-                .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-                    @Override
-                    public void widgetSelected(
-                            org.eclipse.swt.events.SelectionEvent e)
-                    {
-                        shell.close();
-                    }
-                });
-
-            filtreButtonSelectionner
-                .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-                    @Override
-                    public void widgetSelected(
-                            org.eclipse.swt.events.SelectionEvent e)
-                    {
-                        selectAction();
-                    } // ///////////////FIN
-
-                });
-
-            // listener keypressed sur le champ text
-            filtreText.addListener(SWT.KeyUp, new Listener() {
-                public void handleEvent(Event e)
+            public void run()
+            {
+                try
                 {
-                    filterAction(filtreText.getText());
-                }
-            });
+                    shell = 
+                        new Shell(parent.getShell(), SWT.BORDER | SWT.TITLE | SWT.APPLICATION_MODAL);
+                    
+                    shell.setSize(400, 600);
 
-            shell.pack();
-            shell.open();
-            
-            // Set up the event loop.
-            while (!shell.isDisposed()) {
-              if (!display.readAndDispatch()) {
-                // If no more entries in event queue
-                display.sleep();
-              }
+                    shell.setLayout(new FillLayout());
+
+                    shell.setText(getDialogTitle());
+
+                    top = new Composite(shell, SWT.NONE);
+                    top.setLayout(null);
+
+                    createDataList();
+
+                    filtreText = new Text(top, SWT.BORDER);
+                    filtreText.setBounds(new Rectangle(3, 21, 298, 19));
+                    filtreText.setText(Global.EMPTY_STRING);
+                    labelText = new Label(top, SWT.NONE);
+                    labelText.setBounds(new Rectangle(3, 4, 298, 13));
+                    labelText.setText(Messages.table_label_filter);
+                    labelText.pack();
+
+                    filtreButtonSelectionner = new Button(top, SWT.NONE);
+                    filtreButtonSelectionner.setBounds(new Rectangle(62, 289, 65, 23));
+                    filtreButtonSelectionner.setText(Messages.button_select);
+                    filtreButtonSelectionner.pack();
+                    filtreButtonCancel = new Button(top, SWT.NONE);
+                    filtreButtonCancel.setBounds(new Rectangle(168, 289, 65, 23));
+                    filtreButtonCancel.setText(Messages.button_cancel);
+                    filtreButtonCancel.pack();
+
+                    createTable();
+
+                    filtreButtonCancel
+                        .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                            @Override
+                            public void widgetSelected(
+                                    org.eclipse.swt.events.SelectionEvent e)
+                            {
+                                shell.close();
+                            }
+                        });
+
+                    filtreButtonSelectionner
+                        .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+                            @Override
+                            public void widgetSelected(
+                                    org.eclipse.swt.events.SelectionEvent e)
+                            {
+                                selectAction();
+                            } // ///////////////FIN
+
+                        });
+
+                    // listener keypressed sur le champ text
+                    filtreText.addListener(SWT.KeyUp, new Listener() {
+                        public void handleEvent(Event e)
+                        {
+                            filterAction(filtreText.getText());
+                        }
+                    });
+
+                    shell.pack();
+                    shell.open();
+                    
+                    // Set up the event loop.
+                    while (!shell.isDisposed()) {
+                      if (!Display.getCurrent().readAndDispatch()) {
+                        // If no more entries in event queue
+                          Display.getCurrent().sleep();
+                      }
+                    }
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
             }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+            
+        });
+       
     }
 
     /**

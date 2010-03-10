@@ -52,6 +52,12 @@ public class EditFileForm extends EditForm
                 // validation de l'onglet FILE
                 Etape.validationFile();
                 
+                // Les onglets sont décalés si on on est en collection => pas d'étape cruise
+                // FAE 3796
+                int offset = 0;
+                if (ViewMain.isCollection())
+                    offset--;
+                
                 if (ViewMain.etape == 1){
                     // Sélection de l'onglet CRUISE
                     ViewMain.tabFolder.setSelection(ViewMain.tabFolder.getItem(1));
@@ -62,7 +68,7 @@ public class EditFileForm extends EditForm
                 
                 if (ViewMain.etape == 2){
                     // Sélection de l'onglet STATION
-                    ViewMain.tabFolder.setSelection(ViewMain.tabFolder.getItem(2));
+                    ViewMain.tabFolder.setSelection(ViewMain.tabFolder.getItem(2 + offset));
                     Utils.validationEtape(2);
                     // Validation de l'onglet STATION
                     Etape.validationStation();
@@ -70,7 +76,7 @@ public class EditFileForm extends EditForm
                 
                 if (ViewMain.etape == 3){
                     // Sélection de l'onglet DATA
-                    ViewMain.tabFolder.setSelection(ViewMain.tabFolder.getItem(3));
+                    ViewMain.tabFolder.setSelection(ViewMain.tabFolder.getItem(3 + offset));
                     Utils.validationEtape(3);
                     // Validation de l'onglet DATA
                     Etape.validationData();
@@ -78,7 +84,7 @@ public class EditFileForm extends EditForm
                 
                 if (ViewMain.etape == 4){
                     // Sélection de l'onglet CONVERSION
-                    ViewMain.tabFolder.setSelection(ViewMain.tabFolder.getItem(4));
+                    ViewMain.tabFolder.setSelection(ViewMain.tabFolder.getItem(4 + offset));
                     Utils.validationEtape(4);
                 }
             }
@@ -132,7 +138,7 @@ public class EditFileForm extends EditForm
             formEdition.reflow(true);
 
             // nom de l'application
-            nomNemo();
+            Nemo.refreshNomNemo();
         }
     }
 
@@ -141,8 +147,7 @@ public class EditFileForm extends EditForm
     {
         if (loaded){
             super.drawingBack();
-            
-            nomNemo();
+            Nemo.refreshNomNemo();
             ViewLog.aideFile();
             ViewMain.affiche = 0;
         }
@@ -195,48 +200,7 @@ public class EditFileForm extends EditForm
         sectionRuptureDonnees.addSetter(Messages.edit_file_sectionRuptureDonnees_end_with, Global.EMPTY_STRING);
         listeSections.add(sectionRuptureDonnees);
     }
-
-    public void nomNemo()
-    {
-        // nom du model
-        String modelName = Nemo.getInstance().getNomModele();
-        
-        // nom de l'application
-        if (ViewMain.dossierCampagne){
-            // dossier campagne
-            File fich = new File(ViewMain.nomRepertoire);
-            if (!Global.EMPTY_STRING.equals(modelName)){
-                ApplicationWorkbenchWindowAdvisor.configurer_titre
-                    .setTitle(Messages.application_directoryTitle
-                            + fich.getName() + Messages.application_modelTitle
-                            + modelName + " ]"); //$NON-NLS-1$
-
-            }
-            else{
-                ApplicationWorkbenchWindowAdvisor.configurer_titre
-                    .setTitle(Messages.application_directoryTitle
-                            + fich.getName() + " ]"); //$NON-NLS-1$ 
-            }
-
-        }
-        else{
-            // fichier campagne
-            File fich;
-            fich = new File(ViewMain.nomFichier);
-
-            if (!Global.EMPTY_STRING.equals(modelName)){
-                ApplicationWorkbenchWindowAdvisor.configurer_titre
-                    .setTitle(Messages.application_fileTitle + fich.getName()
-                            + Messages.application_modelTitle
-                            + modelName + " ]"); //$NON-NLS-1$
-            }
-            else{
-                ApplicationWorkbenchWindowAdvisor.configurer_titre
-                    .setTitle(Messages.application_fileTitle + fich.getName()
-                            + " ]"); //$NON-NLS-1$ 
-            }
-        }
-    }
+    
 
     @Override
     protected void disposeElements()

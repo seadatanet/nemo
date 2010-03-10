@@ -125,7 +125,7 @@ public class Utils
 
         // FAE 089
         // RAZ global si reouverture fichier en cours de processus
-        ViewMain.editFileForm.nomNemo();
+        Nemo.refreshNomNemo();
 
         if (raz)
         {
@@ -1393,7 +1393,7 @@ public class Utils
             public void handleEvent(Event e)
             {
                 FiltrageTableType.comboRecherche = comb;
-                FiltrageTableType.go(tab, comb);
+                FiltrageTableType.go(comb.getShell(),tab, comb);
             }
         });
     }

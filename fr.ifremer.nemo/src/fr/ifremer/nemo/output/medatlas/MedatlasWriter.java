@@ -123,6 +123,7 @@ public class MedatlasWriter extends NemoWriter{
                 numLine = 0;                
             }
         } catch (Exception e){
+            e.printStackTrace();
             throw new GenerationException(e);
         }
 	}

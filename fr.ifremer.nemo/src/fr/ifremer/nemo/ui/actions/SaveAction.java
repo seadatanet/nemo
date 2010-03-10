@@ -72,6 +72,11 @@ public class SaveAction extends Action implements ISelectionListener,
                     e.printStackTrace();
                 }
                 Nemo.getInstance().saveModel(fileOutputStream);
+                
+                Nemo.getInstance().setNomModele(fichierSortieXML.getName());
+
+                Nemo.refreshNomNemo();
+                
                 Utils.messageOK(Messages.SaveAction_4);
             }
             else{

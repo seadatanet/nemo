@@ -8,6 +8,7 @@
 package fr.ifremer.nemo.ui.edit.station;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
@@ -188,6 +189,11 @@ public class GrpManualInput implements UIobject
             result = line.getText();
         }
         return result;
+    }
+    
+    public List<Couple> getLines()
+    {
+        return lines;
     }
 
 }

@@ -57,28 +57,28 @@ public class FiltrageTableType{
 
     public static String codeSelected;
     
-    public static void go(String table, Combo comboRecherche){
+    public static void go(Composite parent, String table, Combo comboRecherche){
         
         if (table.equals(Global.IDEDMO)){
-            new IdEDMOFilteredTable(comboRecherche).open();
+            new IdEDMOFilteredTable(comboRecherche).open(parent);
         }
         else if (table.equals(Global.WSSURVEY)){
-            new WSSurveyFilteredTable(comboRecherche).open();
+            new WSSurveyFilteredTable(comboRecherche).open(parent);
             }
         else if (table.equals(Global.DATATYPE)){
-            new DatatypeFilteredTable(comboRecherche).open();
+            new DatatypeFilteredTable(comboRecherche).open(parent);
             }
         else if (table.equals(Global.PARAMETER)){
-            new ParameterFilteredTable(comboRecherche).open();
+            new ParameterFilteredTable(comboRecherche).open(parent);
             }
         else if (table.equals(Global.SHIP)){
-            new ShipFilteredTable(comboRecherche).open();
+            new ShipFilteredTable(comboRecherche).open(parent);
             }
         else if (table.equals(Global.DATACENTRE)){
-            new DatacentreFilteredTable(comboRecherche).open();
+            new DatacentreFilteredTable(comboRecherche).open(parent);
             }
         else if (table.equals(Global.REGION)){
-            new RegionFilteredTable(comboRecherche).open();
+            new RegionFilteredTable(comboRecherche).open(parent);
             }
     }
     

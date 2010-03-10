@@ -328,27 +328,27 @@ public class DataModel
         // compléter ELAT / ELON et EDEPTH si nécessaire
         if (inputType == E_InputType.TIMESERIES)
         {
-            if (ViewMain.editStationForm.endLatitude.getValue().trim().equals(
-                Global.EMPTY_STRING))
-            {
-                // vide donc on recopie latitude dans latitude de fin
-                ViewMain.editStationForm.endLatitude
-                    .copyValues(ViewMain.editStationForm.latitude);
-            }
-            if (ViewMain.editStationForm.endLongitude.getValue().trim().equals(
-                Global.EMPTY_STRING))
-            {
-                // vide donc on recopie longitude dans longitude de fin
-                ViewMain.editStationForm.endLongitude
-                    .copyValues(ViewMain.editStationForm.longitude);
-            }
-            if (ViewMain.editStationForm.endDepth.getValue().trim().equals(
-                Global.EMPTY_STRING))
-            {
-                // vide donc on recopie profondeur dans profondeur de fin
-                ViewMain.editStationForm.endDepth
-                    .copyValues(ViewMain.editStationForm.depth);
-            }
+//            if (ViewMain.editStationForm.endLatitude.getValue().trim().equals(
+//                Global.EMPTY_STRING))
+//            {
+//                // vide donc on recopie latitude dans latitude de fin
+//                ViewMain.editStationForm.endLatitude
+//                    .copyValues(ViewMain.editStationForm.latitude);
+//            }
+//            if (ViewMain.editStationForm.endLongitude.getValue().trim().equals(
+//                Global.EMPTY_STRING))
+//            {
+//                // vide donc on recopie longitude dans longitude de fin
+//                ViewMain.editStationForm.endLongitude
+//                    .copyValues(ViewMain.editStationForm.longitude);
+//            }
+//            if (ViewMain.editStationForm.endDepth.getValue().trim().equals(
+//                Global.EMPTY_STRING))
+//            {
+//                // vide donc on recopie profondeur dans profondeur de fin
+//                ViewMain.editStationForm.endDepth
+//                    .copyValues(ViewMain.editStationForm.depth);
+//            }
         }
 
         // parcours des sections de la station pour initialisation

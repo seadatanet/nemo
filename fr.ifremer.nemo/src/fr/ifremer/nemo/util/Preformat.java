@@ -24,7 +24,7 @@ public class Preformat
     // Attributs //
     // /////////////
 
-    private static String PF = File.separator + "PF_"; //$NON-NLS-1$
+    public static String PF = File.separator + "PF_"; //$NON-NLS-1$
 
     // repertoire en entree
     private static String _repEntree;

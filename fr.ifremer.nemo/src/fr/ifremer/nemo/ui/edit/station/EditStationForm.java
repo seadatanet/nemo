@@ -1,7 +1,10 @@
 package fr.ifremer.nemo.ui.edit.station;
 
+import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.ComboType;
@@ -24,8 +27,10 @@ public class EditStationForm extends EditForm
 
     public StationSection stationNumber, dataType, historique, comments,
             surfaceSample, utConvertion, time, date, latitude, endLatitude,
-            longitude, endLongitude, depth, endDepth, sensorDepth,
+            longitude, endLongitude, depth, sensorDepth,
             magneticDeclin, samplingRate;
+    
+    public StationSection endDepth;
 
     public QCflagsSection qcFlags;
 
@@ -97,6 +102,11 @@ public class EditStationForm extends EditForm
         initSections();
         drawSections();
 
+        //FAE 3749
+        Text textCommentaire = comments.getManualInput().getLines().get(0).getValueText();
+        GridDataFactory.fillDefaults().grab(true, true).hint(Global.SIZE_SECTION, SWT.DEFAULT).minSize(Global.SIZE_SECTION, 200)
+        .applyTo(textCommentaire);
+        
         // remplissage de l'IHM par le modèle chargé
         // StationModel stationModel =
         // Application.nemo.getDomain().getCruise().getStation().getModel();

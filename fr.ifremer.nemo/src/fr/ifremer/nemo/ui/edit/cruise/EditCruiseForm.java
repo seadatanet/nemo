@@ -5,6 +5,10 @@ import java.util.ArrayList;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
@@ -33,16 +37,20 @@ import fr.ifremer.nemo.ws.WSDataType;
 
 public class EditCruiseForm extends EditForm
 {
-    //public ArrayList<NemoSection> listeSectionsSurvey;
+    // public ArrayList<NemoSection> listeSectionsSurvey;
     public Button buttonInitServeur, buttonXML;
     public CruiseSection sectionReference, sectionLocalisation, sectionSource,
-            sectionCentre, sectionCommentaire;
+            sectionCentre;
+    public CruiseSection sectionCommentaire;
     public CruiseDatatypeSection sectionType;
+    private Composite _parent;
 
     @Override
     public void createEditionForm(Composite parent)
     {
         super.createEditionForm(parent);
+
+        _parent = parent;
 
         formEdition.getBody().setLayout(new GridLayout());
         formEdition.setText(Messages.edit_cruise_title);
@@ -106,30 +114,34 @@ public class EditCruiseForm extends EditForm
     public void afficheEdition()
     {
         super.afficheEdition();
-        
+
         ViewLog.aideCruise();
-        
+
         // affichage du texte dans la zone de gauche
         ViewMain.textAreaCruise.setText(Utils.texteBrut);
 
         if (!loaded)
         {
             // INFOS sur les fichiers utilises
-            if (ViewMain.radioFichier.getSelection()){
+            if (ViewMain.radioFichier.getSelection())
+            {
                 // fichier campagne
                 Utils.messageInfoAppend(Messages.view_file_cruiseFile);
             }
-            else{
+            else
+            {
                 // dossier campagne
                 Utils.messageInfoAppend(Messages.view_file_cruiseDir
                         + ViewMain.nomRepertoire);
             }
 
-            if (ViewMain.radSerieTempo.getSelection()){
+            if (ViewMain.radSerieTempo.getSelection())
+            {
                 // Série temporelle
                 Utils.messageInfoAppend(Messages.typeFile_timeseries);
             }
-            else if (ViewMain.radTrajectoire.getSelection()){
+            else if (ViewMain.radTrajectoire.getSelection())
+            {
                 // Trajectoire
                 Utils.messageInfoAppend(Messages.typeFile_trajectory);
             }
@@ -138,17 +150,18 @@ public class EditCruiseForm extends EditForm
         ViewMain.affiche = 1;
 
         // remplissage de l'IHM par le modèle chargé
-        //CruiseModel cModel = Application.nemo.getDomain().getCruise().getModel();
-        //if (cModel != null){
-            DataModel.fillCruise();
-            filled = true;
-        //}
-        /*if (DataModel.ouverture){
-            DataModel.fillSurvey(null);
-            filled = true;
-        }*/
+        // CruiseModel cModel =
+        // Application.nemo.getDomain().getCruise().getModel();
+        // if (cModel != null){
+        DataModel.fillCruise();
+        filled = true;
+        // }
+        /*
+         * if (DataModel.ouverture){ DataModel.fillSurvey(null); filled = true; }
+         */
 
-        final Text textCommentaire = sectionCommentaire.getItem(Global.EMPTY_STRING).getValueText();
+        final Text textCommentaire =
+            sectionCommentaire.getItem(Global.EMPTY_STRING).getValueText();
         textCommentaire
             .addFocusListener(new org.eclipse.swt.events.FocusListener() {
                 public void focusGained(org.eclipse.swt.events.FocusEvent e)
@@ -194,26 +207,30 @@ public class EditCruiseForm extends EditForm
 
                     tamponSortie += tamponOrigine;
                     textCommentaire.setText(tamponSortie);
-        //            textCommentaire.pack();
+
+                    // textCommentaire.pack();
 
                 }
             });
+        
+        GridDataFactory.fillDefaults().grab(true, true).hint(
+            Global.SIZE_SECTION, 200).minSize(Global.SIZE_SECTION, 200)
+            .applyTo(textCommentaire);
 
-        GridDataFactory.fillDefaults().grab(true, true).hint(Global.SIZE_SECTION, SWT.DEFAULT)
-        .applyTo(textCommentaire);
         formEdition.redraw();
         formEdition.reflow(true);
     }
-    
+
     @Override
-    public void actualiseEdition(){
+    public void actualiseEdition()
+    {
         // pas d'actualisation nécessaire pour cet onglet
     }
 
     public void init_webService()
     {
         // selection de la ref campagne dans une liste
-        FiltrageTableType.go(Global.WSSURVEY, null);
+        FiltrageTableType.go(_parent, Global.WSSURVEY, null);
     }
 
     public void webService(String reference)
@@ -225,20 +242,17 @@ public class EditCruiseForm extends EditForm
         SWTProcessWS.referenceWS = reference;
         SWTProcessWS.fichiersConstantes = false;
 
-        /*if (ViewMain.dossierCampagne){
-            SWTProcessWS.dossier = true;
-        }
-        else{
-            SWTProcessWS.dossier = false;
-        }
-        */
+        /*
+         * if (ViewMain.dossierCampagne){ SWTProcessWS.dossier = true; } else{
+         * SWTProcessWS.dossier = false; }
+         */
 
         new SWTProgressWS().run();
 
         // mise à jour de l'onglet courant
         DataModel.fillCruise();
-        
-        //majApresWS();
+
+        // majApresWS();
 
     }
 
@@ -251,10 +265,12 @@ public class EditCruiseForm extends EditForm
         // description
 
         // verifier que un fichier est charge avant d'ouvrir un modele
-        if ((!ViewMain.editFileForm.validee) && (!loaded)){
+        if ((!ViewMain.editFileForm.validee) && (!loaded))
+        {
             Utils.messageErreurAppend(Messages.error_cruise_openXml);
         }
-        else{
+        else
+        {
             FileDialog dialog =
                 new FileDialog(new Shell(), SWT.OPEN | SWT.APPLICATION_MODAL);
             dialog.setText(Messages.edit_cruise_openXML);
@@ -262,14 +278,17 @@ public class EditCruiseForm extends EditForm
             extensions[0] = Global.STAR + Global.EXT_XML;
             dialog.setFilterExtensions(extensions);
             nomXML = dialog.open();
-            if (nomXML != null){
+            if (nomXML != null)
+            {
                 fich = new File(nomXML);
                 Utils.messageErreurAppend("fiche:" + fich);//$NON-NLS-1$  
-                try{                    
+                try
+                {
                     chargementXML(fich);
-                    Utils.messageOKAppend(Messages.success_openSurveyDesc);  
+                    Utils.messageOKAppend(Messages.success_openSurveyDesc);
                 }
-                catch (Exception e){
+                catch (Exception e)
+                {
                     e.printStackTrace();
                 }
             }
@@ -280,44 +299,43 @@ public class EditCruiseForm extends EditForm
     {
         // reset de la liste des dataTypes
         TableDataSurvey.types.clear();
-        
+
         CruiseDomain cruiseDomain = Nemo.getInstance().getDomain().getCruise();
-        //cruiseDomain.getModel().reset();
-        
+        // cruiseDomain.getModel().reset();
+
         CruiseModel cruiseModel = importXML(fichier);
         cruiseDomain.updateCruise(cruiseModel);
-        
+
         /*
-        Survey survey;
-        if (ViewMain.dossierCampagne){
-            DataModel.dirSurvey.releaseModel();
-
-            survey = importXML(fichier);
-
-            DataModel.dirSurvey.setModel(survey);
-        }
-        else{
-            DataModel.singleSurvey.releaseModel();
-
-            survey = importXML(fichier);
-
-            DataModel.singleSurvey.setModel(survey);
-            DataModel.singleSurvey.getModel();
-        }
-*/
+         * Survey survey; if (ViewMain.dossierCampagne){
+         * DataModel.dirSurvey.releaseModel();
+         * 
+         * survey = importXML(fichier);
+         * 
+         * DataModel.dirSurvey.setModel(survey); } else{
+         * DataModel.singleSurvey.releaseModel();
+         * 
+         * survey = importXML(fichier);
+         * 
+         * DataModel.singleSurvey.setModel(survey);
+         * DataModel.singleSurvey.getModel(); }
+         */
 
         // mise à jour de l'onglet courant
         DataModel.fillCruise();
     }
-    
-    protected CruiseModel importXML(File fichier) throws Exception{
+
+    protected CruiseModel importXML(File fichier) throws Exception
+    {
 
         // Liste des capteurs
         ArrayList<String> listSensor = new ArrayList<String>();
 
         WSDataType[] listWSDT = NemoLists.getDataTypes();
-        for (int i = 0; i < listWSDT.length; i++){
-            if (listWSDT[i].isSensor()){
+        for (int i = 0; i < listWSDT.length; i++)
+        {
+            if (listWSDT[i].isSensor())
+            {
                 listSensor.add(listWSDT[i].getCode());
             }
         }
@@ -340,7 +358,7 @@ public class EditCruiseForm extends EditForm
     public void drawingBack()
     {
         super.drawingBack();
-        
+
         ViewLog.aideCruise();
         ViewMain.affiche = 1;
     }
@@ -392,7 +410,8 @@ public class EditCruiseForm extends EditForm
                 Messages.edit_cruise_sectionArchiving,
                 Messages.edit_cruise_sectionArchiving_lib);
         sectionCentre.addItem(Messages.edit_cruise_dataCenter,
-            ComboType.DATACENTER, Nemo.getInstance().getConfig().getDataCenter());
+            ComboType.DATACENTER, Nemo.getInstance().getConfig()
+                .getDataCenter());
         sectionCentre.addItem(Messages.edit_cruise_confident,
             ComboType.CONFIDENT, "P"); //$NON-NLS-1$
         listeSections.add(sectionCentre);
@@ -412,11 +431,14 @@ public class EditCruiseForm extends EditForm
         listeSections.add(sectionCommentaire);
 
     }
-    
+
     @Override
-    protected void disposeElements(){
-        if (buttonInitServeur != null) buttonInitServeur.dispose();
-        if (buttonXML != null) buttonXML.dispose();
+    protected void disposeElements()
+    {
+        if (buttonInitServeur != null)
+            buttonInitServeur.dispose();
+        if (buttonXML != null)
+            buttonXML.dispose();
     }
 
     public void invalidEtape()

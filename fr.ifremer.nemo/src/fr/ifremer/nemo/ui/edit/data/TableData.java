@@ -18,8 +18,10 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.config.Configuration.DataListEnum;
 import fr.ifremer.nemo.domain.MediaDomain;
 import fr.ifremer.nemo.ui.FiltrageTableType;
 import fr.ifremer.nemo.ui.Utils;
@@ -63,7 +65,7 @@ public class TableData
         table.setLinesVisible(true);
         TableColumn tableColumn0 = new TableColumn(table, SWT.NONE);
         // tableColumn0.setWidth(110);
-        tableColumn0.setWidth(50);
+        tableColumn0.setWidth(100);
         tableColumn0.setText(Messages.table_label_code.toUpperCase());
 
         TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);
@@ -142,7 +144,7 @@ public class TableData
 
     public static void initTypesWS()
     {
-        
+
         // initialisation de la ArrayList des types des donnees e partir du
         typesWS = null;
         typesWS = new ArrayList<TypeData>();
@@ -176,14 +178,22 @@ public class TableData
         types = null;
         types = new ArrayList<TypeData>();
 
-        for (TypeData type : typesWS)
+        Configuration config = Nemo.getInstance().getConfig();
+
+        // On ajoute systématiquement le paramètre pression pour les profils
+        // verticaux sauf si la liste de paramètres à utilisert est la P011
+        if (ViewMain.radProfilVertical.getSelection()
+                && config.getDataList().equals(DataListEnum.P091))
         {
-            // ajout systematique de PRES
-            if (type.getCode().startsWith(Intern.paramPRES)
-                    && ViewMain.radProfilVertical.getSelection())
+            for (TypeData type : typesWS)
             {
-                // on rajoute PRES
-                types.add(type);
+                // ajout systematique de PRES
+                if (type.getCode().startsWith(Intern.paramPRES)
+                        && ViewMain.radProfilVertical.getSelection())
+                {
+                    // on rajoute PRES
+                    types.add(type);
+                }
             }
         }
         razTableData();
@@ -244,9 +254,13 @@ public class TableData
                         {
                             final int column = i;
                             final Text text = new Text(table, SWT.NONE);
+                            text.setText(itemTmp.getText(i));
                             Listener textListener = new Listener() {
+                                
+                                String s = text.getText();
                                 public void handleEvent(final Event e)
                                 {
+
                                     switch (e.type)
                                     {
                                         case SWT.FocusOut:
@@ -266,16 +280,19 @@ public class TableData
                                                     e.doit = false;
                                             }
                                         break;
+
+                                        case SWT.Modify:
+                                            if (!((Text)e.widget).getText().equals(s))                                            
+                                                Utils.invalidEtapes();
+                                        break;
                                     }
                                 }
                             };
                             text.addListener(SWT.FocusOut, textListener);
                             text.addListener(SWT.Traverse, textListener);
+                            text.addListener(SWT.Modify, textListener);
                             editor.setEditor(text, itemTmp, i);
-                            text.setText(itemTmp.getText(i));
                             text.selectAll();
-
-                            Utils.invalidEtapes();
 
                             text.setFocus();
                             return;
@@ -318,7 +335,6 @@ public class TableData
             public void handleEvent(Event e)
             {
                 majChampTest();
-
             }
         });
 
@@ -327,7 +343,8 @@ public class TableData
         itemList.addListener(SWT.Selection, new Listener() {
             public void handleEvent(Event e)
             {
-                FiltrageTableType.go(Global.PARAMETER, null);
+                FiltrageTableType.go(ViewMain.compositeData.getParent(),
+                    Global.PARAMETER, null);
 
             }
         });
@@ -425,7 +442,9 @@ public class TableData
             TableItem item = new TableItem(table, SWT.NONE);
             if (types.get(i).isP011())
             {
-                item.setText(new String[] {types.get(i).getCodeP011() + Global.SEP + types.get(i).getNomP011(),
+                item.setText(new String[] {
+                        types.get(i).getCodeP011() + Global.SEP
+                                + types.get(i).getNomP011(),
                         types.get(i).getUnite(), types.get(i).getConversion(),
                         types.get(i).getTest(),
                         String.valueOf(types.get(i).getDebut()),
@@ -605,19 +624,19 @@ public class TableData
         String code = mots[0];
 
         // On peut maintenant retirer PRES (FAE 3228)
-        
+
         // pas forcement de - dans le nom du type
-//        if (!code.equals(Intern.paramPRES)
-//                || ViewMain.radSerieTempo.getSelection()
-//                || ViewMain.radTrajectoire.getSelection())
-//        {
-        
-            types.remove(indice);
-//        }
-//        else
-//        {
-//            Utils.messageErreurAppend(Messages.error_data_removePRES);
-//        }
+        // if (!code.equals(Intern.paramPRES)
+        // || ViewMain.radSerieTempo.getSelection()
+        // || ViewMain.radTrajectoire.getSelection())
+        // {
+
+        types.remove(indice);
+        // }
+        // else
+        // {
+        // Utils.messageErreurAppend(Messages.error_data_removePRES);
+        // }
 
         // razTableData
         razTableData();
@@ -639,14 +658,15 @@ public class TableData
         creationTable();
 
     }
-    
-    
-    public static void majChampTest()
+
+    public static boolean majChampTest()
     {
 
         // maj preventive de tout
         majTypeData();
 
+        boolean ok = true;
+        
         int nbre;
         String selection, ligne, resultat;
         double resultJEP;
@@ -663,18 +683,13 @@ public class TableData
                 // on a selectionne un debut et une fin et il y a une conversion
                 // e faire
 
-                // on recupere le data
-                /*ligne =
-                    Utils.lignesBrutes.get(Integer
-                        .valueOf(ViewMain.editFileForm.sectionEnteteFichier
-                            .getValue())
-                            + DataModel.stationModel.getNumberOfLines()) + 1;
-                */
-                
-                MediaDomain mediaDomain = Nemo.getInstance().getDomain().getMedia();
-                ligne = Utils.lignesBrutes.get(mediaDomain.getModel().getFileHeader() + 
-                                               mediaDomain.getStationHeaderNumberLines() + 1);
-                
+                MediaDomain mediaDomain =
+                    Nemo.getInstance().getDomain().getMedia();
+                ligne =
+                    Utils.lignesBrutes.get(mediaDomain.getModel()
+                        .getFileHeader()
+                            + mediaDomain.getStationHeaderNumberLines());
+
                 selection =
                     ligne.substring(
                         Integer.valueOf(ViewMain.tableData.getItem(i)
@@ -722,6 +737,7 @@ public class TableData
                         else
                         {
                             // erreur
+                            ok = false;
                             resultat = Messages.error;
                         }
 
@@ -751,12 +767,14 @@ public class TableData
                         else
                         {
                             // error
+                            ok = false;
                             resultat = Messages.error;
                         }
                     }
                 }
                 catch (Exception e)
                 {
+                    ok = false;
                     resultat = Messages.error;
                     e.printStackTrace();
                 }
@@ -769,16 +787,19 @@ public class TableData
                     && (!ViewMain.tableData.getItem(i).getText(12).equals(
                         Global.EMPTY_STRING)))
             {
-                /*ligne =
-                    Utils.lignesBrutes.get(Integer
-                        .valueOf(ViewMain.editFileForm.sectionEnteteFichier
-                            .getValue())
-                            + DataModel.stationModel.getNumberOfLines()) + 1;
-                */
-                MediaDomain mediaDomain = Nemo.getInstance().getDomain().getMedia();
-                ligne = Utils.lignesBrutes.get(mediaDomain.getModel().getFileHeader() + 
-                                               mediaDomain.getStationHeaderNumberLines() + 1);
-                
+                /*
+                 * ligne = Utils.lignesBrutes.get(Integer
+                 * .valueOf(ViewMain.editFileForm.sectionEnteteFichier
+                 * .getValue()) + DataModel.stationModel.getNumberOfLines()) +
+                 * 1;
+                 */
+                MediaDomain mediaDomain =
+                    Nemo.getInstance().getDomain().getMedia();
+                ligne =
+                    Utils.lignesBrutes.get(mediaDomain.getModel()
+                        .getFileHeader()
+                            + mediaDomain.getStationHeaderNumberLines() + 1);
+
                 selection =
                     ligne.substring(
                         Integer.valueOf(ViewMain.tableData.getItem(i).getText(
@@ -790,7 +811,8 @@ public class TableData
 
                 String flagSDN = Global.ZERO;
                 ArrayList<Flag> flags =
-                    Nemo.getInstance().getDomain().getCruise().getStation().getModel().getFlagTable().getFlags();
+                    Nemo.getInstance().getDomain().getCruise().getStation()
+                        .getModel().getFlagTable().getFlags();
                 int size = flags.size();
                 for (int j = 0; j < size; j++)
                 {
@@ -817,6 +839,7 @@ public class TableData
         // refresh de la table
         creationTable();
 
+        return ok;
     }
 
     public static void majTypeData()
@@ -831,7 +854,7 @@ public class TableData
         {
             if (!types.get(i).isP011())
                 types.get(i).setCode(ViewMain.tableData.getItem(i).getText(0));
-            
+
             types.get(i).setUnite(ViewMain.tableData.getItem(i).getText(1));
             types.get(i)
                 .setConversion(ViewMain.tableData.getItem(i).getText(2));
