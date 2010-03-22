@@ -713,7 +713,10 @@ public class StationSection extends NemoSection
                 {
                     File directory = new File(ViewMain.nomRepertoire);
                     File[] subfiles = directory.listFiles();
-                    strFichier = subfiles[0].getName();
+                    if (subfiles[0].isFile())
+                        strFichier = subfiles[0].getName();
+                    else
+                        strFichier = subfiles[0].listFiles()[0].getName();
                 }
                 result =
                     (strFichier.substring(Integer.parseInt(start) - 1, Integer
