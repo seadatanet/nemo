@@ -117,17 +117,26 @@ public class SubParameterFilteredTable extends AbstractFilteredTable
 
         _table.setHeaderVisible(true);
         _table.setLinesVisible(true);
-        _table.setBounds(new Rectangle(3, 45, 405, 237));
+        _table.setBounds(new Rectangle(3, 45, 800, 237));
 
         // creation des colonnes...
         TableColumn tableColumn = new TableColumn(_table, SWT.NONE);
-        tableColumn.setWidth(300);
+        tableColumn.setWidth(695);
         tableColumn.setText(Messages.table_label_codeName);
 
         TableColumn tableColumn2 = new TableColumn(_table, SWT.NONE);
         tableColumn2.setWidth(100);
         tableColumn2.setText("Abbr");
 
+        // comme la fenetre est plus large on decale egalement les boutons.
+        Rectangle bounds = filtreButtonSelectionner.getBounds();
+        bounds.x+=580;
+        filtreButtonSelectionner.setBounds(bounds);
+        
+        bounds = filtreButtonCancel.getBounds();
+        bounds.x+=580;
+        filtreButtonCancel.setBounds(bounds);
+        
         refreshTable();
     }
 
@@ -187,7 +196,7 @@ public class SubParameterFilteredTable extends AbstractFilteredTable
     @Override
     protected String getDialogTitle()
     {
-        return Messages.table_subparameters; //$NON-NLS-1$
+        return _typeP091.getCode().split("-")[0].trim() + " - " + Messages.table_subparameters; //$NON-NLS-1$
     }
 
     /**
