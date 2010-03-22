@@ -312,7 +312,7 @@ public class TableDataSurvey
 
         GridDataFactory.fillDefaults().grab(true, false).applyTo(table);
         table.setLayout(new FillLayout());
-        table.redraw();
+        table.getParent().layout(true);
     }
 
     public static void initTableData()
