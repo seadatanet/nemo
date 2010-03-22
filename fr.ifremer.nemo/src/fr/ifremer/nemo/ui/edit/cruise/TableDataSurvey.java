@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TableEditor;
+import org.eclipse.swt.events.ControlEvent;
+import org.eclipse.swt.events.ControlListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
@@ -47,8 +49,7 @@ public class TableDataSurvey
     {
         sectionClientType = parent;
         initTypes();
-        creationTable(
-            );
+        creationTable();
     }
 
     public static void setSectionClientType(Composite parent)
@@ -61,33 +62,54 @@ public class TableDataSurvey
         final Table table;
 
         TableDataSurvey.tableTypeSurvey =
-            new Table(sectionClientType, SWT.MULTI | SWT.FULL_SELECTION | SWT.BORDER);
+            new Table(sectionClientType, SWT.MULTI | SWT.FULL_SELECTION
+                    | SWT.BORDER);
 
         table = TableDataSurvey.tableTypeSurvey;
 
         table.setHeaderVisible(true);
         table.setLinesVisible(true);
+        
+        final TableColumn tableColumn = new TableColumn(table, SWT.NONE);
 
-
-        TableColumn tableColumn = new TableColumn(table, SWT.NONE);
-        tableColumn.setWidth(70);
         tableColumn.setText(Messages.table_label_code.toUpperCase());
 
-        TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);
-        tableColumn1.setWidth(70);
+        final TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);
+
         tableColumn1.setText(Messages.table_label_number);
 
-        TableColumn tableColumn2 = new TableColumn(table, SWT.NONE);
-        tableColumn2.setWidth(70);
+        final TableColumn tableColumn2 = new TableColumn(table, SWT.NONE);
+
         tableColumn2.setText(Messages.table_label_qc);
 
-        TableColumn tableColumn3 = new TableColumn(table, SWT.READ_ONLY);
+        final TableColumn tableColumn3 = new TableColumn(table, SWT.READ_ONLY);
         // mise e zero de la largeur de la colonne avec isSensor() pour ne pas
         // qu'on puisse la modifier!!
-        tableColumn3.setWidth(70);
+
         tableColumn3.setText(Messages.table_label_sensor);
 
-        initTable();        
+        table.addControlListener(new ControlListener() {
+
+            public void controlMoved(ControlEvent e)
+            {
+            }
+
+            public void controlResized(ControlEvent e)
+            {
+
+                int w = ((Table) e.getSource()).getSize().x;
+                int w1 = 60;
+                int w2 = (w - (w1 * 3) - 35);
+                tableColumn.setWidth(w2);
+                tableColumn1.setWidth(w1);
+                tableColumn2.setWidth(w1);
+                tableColumn3.setWidth(w1);
+
+            }
+
+        });
+
+        initTable();
     }
 
     public static void initTypes()
@@ -143,9 +165,10 @@ public class TableDataSurvey
         editor.horizontalAlignment = SWT.LEFT;
         editor.grabHorizontal = true;
 
-     /*   Point size = table.computeSize(SWT.DEFAULT, SWT.DEFAULT);
-        table.setSize(size);
-       */ table.addListener(SWT.MouseDown, new Listener() {
+        /*
+         * Point size = table.computeSize(SWT.DEFAULT, SWT.DEFAULT);
+         * table.setSize(size);
+         */table.addListener(SWT.MouseDown, new Listener() {
             public void handleEvent(Event event)
             {
 
@@ -257,7 +280,7 @@ public class TableDataSurvey
             public void handleEvent(Event e)
             {
                 // System.out.println("selection liste");
-                FiltrageTableType.go(sectionClientType,Global.DATATYPE, null);
+                FiltrageTableType.go(sectionClientType, Global.DATATYPE, null);
 
             }
         });
@@ -523,7 +546,7 @@ public class TableDataSurvey
         Composite c = ViewMain.editCruiseForm.sectionType.getSection();
         while (c != null)
         {
-   //         c.setRedraw(false);
+            // c.setRedraw(false);
             c = c.getParent();
             if (c instanceof ScrolledForm)
             {
@@ -533,7 +556,7 @@ public class TableDataSurvey
         c = ViewMain.editCruiseForm.sectionType.getSection();
         while (c != null)
         {
- //           c.layout(true);
+            // c.layout(true);
             c = c.getParent();
             if (c instanceof ScrolledForm)
             {
@@ -544,7 +567,7 @@ public class TableDataSurvey
         c = ViewMain.editCruiseForm.sectionType.getSection();
         while (c != null)
         {
-  //          c.setRedraw(true);
+            // c.setRedraw(true);
             c = c.getParent();
             if (c instanceof ScrolledForm)
             {
