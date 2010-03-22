@@ -863,9 +863,12 @@ public class ViewMain extends ViewPart
         {
             if (tabCruise.isDisposed())
             {
-                tabCruise = new TabItem(tabFolder, SWT.NONE, 1);
+                Composite contentCruise = new Composite(tabFolder, SWT.NONE);
+                createContentCruise(contentCruise);
+
+                tabCruise = new TabItem(tabFolder, SWT.NONE,1);
                 tabCruise.setText(Messages.onglet_cruise);
-                tabCruise.setControl(textFileCruise);
+                tabCruise.setControl(contentCruise);
             }
         }
         else
