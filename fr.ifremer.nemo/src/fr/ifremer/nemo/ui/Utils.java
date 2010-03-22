@@ -246,11 +246,11 @@ public class Utils
         if (deb == fi)
         {
             Utils.messageErreurAppend(Messages.Utils_26);
-
         }
         else
         {
-
+            Utils.messageErreur("");
+            
             lign = 1;
             // calcul de la ligne en fonction de la valeur de x
             // parcours du tableau des tailles de lignes cumulees
@@ -291,6 +291,7 @@ public class Utils
                 .valueOf(deb));
             ViewMain.tableData.getItems()[index].setText(fin, String
                 .valueOf(fi));
+            
         }
     }
 
