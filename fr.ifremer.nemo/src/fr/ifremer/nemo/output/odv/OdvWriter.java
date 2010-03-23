@@ -97,6 +97,8 @@ public class OdvWriter extends NemoWriter{
                     writeStation(st, inputFilePath, outputFileName);
                 }
                 
+                outputFileWriter.close();
+                
             }
         } catch (Exception e){
             throw new GenerationException(e);
