@@ -629,12 +629,20 @@ public class Etape
             if (checkValue)
             {
                 value = ViewMain.editStationForm.depth.getValue();
-                if (!value.trim().equals("") && !value.equals("NaN") && !value.equals(StationSection.defaultValue)) { //$NON-NLS-1$ //$NON-NLS-2$
-                    if (!Pattern.matches(
-                        "^[0-9]*[0-9][.]?[0-9]*[0-9]*$", value.trim())) { //$NON-NLS-1$
-                        ok = ok && false;
-                        Utils.messageErreurAppend(Messages.Etape_52);
+                if (value != null)
+                {
+                    if (!value.trim().equals("") && !value.equals("NaN") && !value.equals(StationSection.defaultValue)) { //$NON-NLS-1$ //$NON-NLS-2$
+                        if (!Pattern.matches(
+                            "^[0-9]*[0-9][.]?[0-9]*[0-9]*$", value.trim())) { //$NON-NLS-1$
+                            ok = ok && false;
+                            Utils.messageErreurAppend(Messages.Etape_52);
+                        }
                     }
+                }
+                else
+                {
+                    ok = ok && false;
+                    Utils.messageErreurAppend(Messages.Etape_52);
                 }
             }
             // }
@@ -1186,6 +1194,8 @@ public class Etape
         }
         catch (Exception e)
         {
+            ViewMain.tabStation.setText(Messages.Etape_132);
+            ViewMain.etape = 2;
             e.printStackTrace();
         }
     }

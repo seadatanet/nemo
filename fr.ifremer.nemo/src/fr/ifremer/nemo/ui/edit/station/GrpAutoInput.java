@@ -7,6 +7,7 @@
  */
 package fr.ifremer.nemo.ui.edit.station;
 
+import java.awt.Stroke;
 import java.util.ArrayList;
 
 import org.eclipse.jface.layout.GridDataFactory;
@@ -128,7 +129,7 @@ public class GrpAutoInput implements UIobject
             // Ajout d'un filler pour l'alignement
             if (buttonVari == null)
                 new Label(compo2, SWT.NONE);
-                
+
             checkBoxHasDefaultValue = new Button(compo2, SWT.CHECK);
             checkBoxHasDefaultValue.setText(Messages.label_defaultValue);
             checkBoxHasDefaultValue
@@ -150,7 +151,7 @@ public class GrpAutoInput implements UIobject
                             textDefaultValue.setEnabled(false);
                             textDefaultValue.setText("");
                         }
-                        
+
                         Utils.invalidEtapes();
                     }
 
@@ -161,13 +162,13 @@ public class GrpAutoInput implements UIobject
             textDefaultValue = new Text(compo2, SWT.BORDER);
             GridDataFactory.fillDefaults().grab(true, false).applyTo(
                 textDefaultValue);
-            textDefaultValue.addModifyListener(new ModifyListener(){
+            textDefaultValue.addModifyListener(new ModifyListener() {
 
                 public void modifyText(ModifyEvent e)
                 {
                     Utils.invalidEtapes();
                 }
-                
+
             });
         }
     }
@@ -190,7 +191,7 @@ public class GrpAutoInput implements UIobject
         {
             line.setEnabled(enabled);
         }
-        
+
         if (buttonVari != null)
             buttonVari.setEnabled(enabled);
 
@@ -278,16 +279,23 @@ public class GrpAutoInput implements UIobject
     // pas utile pour l'instant
     public String getValue()
     {
-        boolean posVariable = isVariablePos();
         String result = Global.EMPTY_STRING;
-        for (AutoLine line : lines)
+        try
         {
-            if ((line.getValue(posVariable) != null)
-                    && (!line.getValue(posVariable).trim().equals(
-                        Global.EMPTY_STRING)))
+            boolean posVariable = isVariablePos();
+            for (AutoLine line : lines)
             {
-                result += line.getValue(posVariable);
+                if ((line.getValue(posVariable) != null)
+                        && (!line.getValue(posVariable).trim().equals(
+                            Global.EMPTY_STRING)))
+                {
+                    result += line.getValue(posVariable);
+                }
             }
+        }
+        catch (StringIndexOutOfBoundsException e)
+        {
+            return null;
         }
         return result;
     }
@@ -307,22 +315,24 @@ public class GrpAutoInput implements UIobject
     }
 
     public void setValue(String line, String start, String end,
-            boolean posVariable, boolean valueVariable, int i, boolean hasDefaultValue, boolean isDefaultValueSeceted, String defaultValue)
+            boolean posVariable, boolean valueVariable, int i,
+            boolean hasDefaultValue, boolean isDefaultValueSeceted,
+            String defaultValue)
     {
         setEnabled(true);
         AutoLine autoLine = lines.get(i);
         autoLine.setValue(line, start, end);
-        
+
         if (posVariable)
             buttonVari.setSelection(valueVariable);
-        
-        if (hasDefaultValue)            
-        {            
+
+        if (hasDefaultValue)
+        {
             textDefaultValue.setEnabled(isDefaultValueSeceted);
-            
+
             if (checkBoxHasDefaultValue != null)
                 checkBoxHasDefaultValue.setSelection(isDefaultValueSeceted);
-            
+
             if (textDefaultValue != null)
                 textDefaultValue.setText(defaultValue);
         }
@@ -389,20 +399,19 @@ public class GrpAutoInput implements UIobject
         }
     }
 
-    
     protected boolean isDefaultValueEnable()
     {
         return defaultValueEnable;
     }
-    
+
     protected boolean isDefaultValueSelected()
     {
-        if(checkBoxHasDefaultValue != null)
+        if (checkBoxHasDefaultValue != null)
             return checkBoxHasDefaultValue.getSelection();
-        
+
         return false;
     }
-    
+
     protected String getDefaultValue()
     {
         if (textDefaultValue != null)

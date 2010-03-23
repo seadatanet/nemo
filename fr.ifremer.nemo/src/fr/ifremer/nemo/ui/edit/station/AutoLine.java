@@ -274,7 +274,7 @@ public class AutoLine implements UIobject
     {
         int stationHeader = getFileHeaderPos();
         stationHeader += Nemo.getInstance().getDomain().getMedia().getStationHeaderNumberLines();
-        //stationHeader += DataModel.stationModel.getNumberOfLines();
+        // stationHeader += DataModel.stationModel.getNumberOfLines();
         return stationHeader;
     }
 
@@ -284,7 +284,7 @@ public class AutoLine implements UIobject
         if (!ViewMain.dossierCampagne || ViewMain.chkMultiStations.getSelection()){
             // fichier campagne
             fileHeader = Nemo.getInstance().getDomain().getMedia().getModel().getFileHeader();
-            //fileHeader = DataModel.singleSurvey.getHeaderLinesNumber();
+            // fileHeader = DataModel.singleSurvey.getHeaderLinesNumber();
         }
         return fileHeader;
     }
@@ -439,8 +439,9 @@ public class AutoLine implements UIobject
         return cursor;
     }
 
-    public String getValue(boolean posVariable)
+    public String getValue(boolean posVariable) throws StringIndexOutOfBoundsException
     {
+
         String result = Global.EMPTY_STRING;
         if (numberLine.getText() != null && start.getText() != null
                 && !start.getText().equals(Global.EMPTY_STRING)
@@ -499,6 +500,7 @@ public class AutoLine implements UIobject
             result =
                 ligne.substring(Integer.parseInt(start.getText()) - 1, iEnd);
         }
+        
         return result;
     }
 
@@ -661,11 +663,11 @@ public class AutoLine implements UIobject
         if (!ViewMain.dossierCampagne || ViewMain.chkMultiStations.getSelection()){
             // fichier campagne
             enteteFichier = Nemo.getInstance().getDomain().getMedia().getModel().getFileHeader();
-            //enteteFichier = DataModel.singleSurvey.getHeaderLinesNumber();
+            // enteteFichier = DataModel.singleSurvey.getHeaderLinesNumber();
         }
         int ligneLimite =
             enteteFichier + Nemo.getInstance().getDomain().getMedia().getStationHeaderNumberLines();
-            //enteteFichier + DataModel.stationModel.getNumberOfLines();
+            // enteteFichier + DataModel.stationModel.getNumberOfLines();
 
         if (ligneFin > ligneLimite){
             return false;
