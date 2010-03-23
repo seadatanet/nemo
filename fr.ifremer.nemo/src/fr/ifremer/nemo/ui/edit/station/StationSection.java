@@ -444,7 +444,7 @@ public class StationSection extends NemoSection
         return manualInput;
     }
 
-    public String getValue()
+    public String getValue() throws StringIndexOutOfBoundsException
     {
         String value = Global.EMPTY_STRING;
         if (isManual())
@@ -754,7 +754,7 @@ public class StationSection extends NemoSection
         Long DateLong =
             (Long) format.parseObject(resultTest.getText().replace(' ', '0'));
 
-        cal.setTimeInMillis(DateLong /*+ HourLong*/);
+        cal.setTimeInMillis(DateLong /* + HourLong */);
 
         if (!isManual())
             autoInput.getLines().get(0).selectInViewFile();
@@ -771,6 +771,10 @@ public class StationSection extends NemoSection
     {
 
         resultTest.setText(getValue());
+
+        if (resultTest.getText().equals(defaultValue))
+            return 0;
+
         if (!isManual())
             autoInput.selectInViewFile();
 
@@ -787,6 +791,7 @@ public class StationSection extends NemoSection
 
         resultTest.setText(formatter.formatDateTime(
             "hh24:mm:ss.sss", HourLong, "9999")); //$NON-NLS-1$       //$NON-NLS-2$
+
         resultTest.pack();
 
         return HourLong;
@@ -1439,7 +1444,6 @@ public class StationSection extends NemoSection
             autoInput.disableEndVari();
         }
     }
-
 
     // public void refreshDataType()
     // {
