@@ -359,11 +359,33 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
 		java.util.Locale locale = java.util.Locale.US;
 		java.text.DecimalFormatSymbols symbols = new java.text.DecimalFormatSymbols(
 				locale);
+        
+        
+        /// VOIR FAE 2967 PB avec des longitude "+DDD.dddd" et récupération de la chaine "  -2.5000"
+        /// remplacement de la chaine par "-002.5000"
+        /// (UglyHack)
+        String tmp = source.replace(' ', '0');
+        if (tmp.startsWith("0"))
+        {
+            if (tmp.contains("+"))
+            {
+                tmp = tmp.replaceFirst("+", "0");
+                tmp = tmp.replaceFirst("0", "+");
+                source = tmp;
+            }
+            if (tmp.contains("-"))
+            {
+                tmp = tmp.replaceFirst("-","0");
+                tmp = tmp.replaceFirst("0", "-");
+                source = tmp;
+            }
+        }
+        
 		try {
 			for (int i = 0; i < _elements.length && index < source.length(); i++) {
 				switch (_elements[i]._type) {
     				case HEMISPHERE:{
-    					String tmp = source.substring(index, index + 1);
+    					tmp = source.substring(index, index + 1);
     					if (tmp.equals(Global.EST)) {
     						sign = 1.0;
     					} else if (tmp.equals(Global.OUEST_EN) || tmp.equals(Global.OUEST)) {
@@ -375,7 +397,7 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
     					break;
                     }
     				case SIGN:{
-                        String tmp = source.substring(index, index + 1);
+                        tmp = source.substring(index, index + 1);
     					if (tmp.equals(Global.PLUS) || tmp.equals(Global.SPACE) || tmp.equals(Global.EMPTY_STRING)) {
     						sign = 1.0;
     					} else if (tmp.equals(Global.MOINS)) {
@@ -387,7 +409,7 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
     					break;
                     }
     				case CHARS: {
-    					String tmp = source.substring(index, index
+    					tmp = source.substring(index, index
     							+ _elements[i]._element.length());
     
     					if (_elements[i]._element.length() == 1
@@ -403,7 +425,7 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
     					break;
     				}
     				case DEGREES: {
-                        String tmp = source.replace(' ', '0');
+                        tmp = source.replace(' ', '0');
     					DecimalFormat format = new DecimalFormat(
     							_elements[i]._element);
     					value += ((Number) format.parseObject(tmp, pos)).doubleValue();
@@ -411,7 +433,7 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
     					break;
     				}
     				case DEGREES_DECIMAL: {
-                        String tmp = source.replace(' ', '0');
+                        tmp = source.replace(' ', '0');
     					DecimalFormat format = new DecimalFormat(
     							_elements[i]._element, symbols);
     					value += ((Number) format.parseObject(tmp, pos)).doubleValue();
@@ -419,7 +441,7 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
     					break;
     				}
     				case MINUTES: {
-                        String tmp = source.replace(' ', '0');
+                        tmp = source.replace(' ', '0');
     					DecimalFormat format = new DecimalFormat(
     							_elements[i]._element);
     					value += ((Number) format.parseObject(tmp, pos)).doubleValue() / 60.0;
@@ -427,7 +449,7 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
     					break;
     				}
     				case MINUTES_DECIMAL: {
-                        String tmp = source.replace(' ', '0');
+                        tmp = source.replace(' ', '0');
     					DecimalFormat format = new DecimalFormat(
     							_elements[i]._element, symbols);
     					value += ((Number) format.parseObject(tmp, pos)).doubleValue() / 60.0;
@@ -435,7 +457,7 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
     					break;
     				}
     				case SECONDS: {
-                        String tmp = source.replace(' ', '0');
+                        tmp = source.replace(' ', '0');
     					DecimalFormat format = new DecimalFormat(
     							_elements[i]._element);
     					value += ((Number) format.parseObject(tmp, pos)).doubleValue() / 3600.0;
