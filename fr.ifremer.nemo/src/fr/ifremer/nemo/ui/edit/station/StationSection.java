@@ -1221,8 +1221,10 @@ public class StationSection extends NemoSection
                 // récupération du propertyModel correspondant
                 // String tagXml = getTagXml(i);
                 String propertyName = name;
+
                 if (nbLignes > 1)
                     propertyName += (i + 1);
+
                 PropertyModel propertyModel =
                     stationModel.getProperty(propertyName);
                 // getPropertyModel(stationModel, tagXml);
@@ -1317,11 +1319,13 @@ public class StationSection extends NemoSection
                         setAutoValueInput(propertyModel, null, fillVariPos,
                             offset, i);
 
-                        if (propertyModel.getFragment().isSingleLine())
-                            break;
+                        // FAE 3145 problème de l'acquisition history espérons
+                        // que ces lignes ne servaient à rien...
+
+                        // if (propertyModel.getFragment().isSingleLine())
+                        // break;
                     }
                 }
-                // }
 
             }
 
