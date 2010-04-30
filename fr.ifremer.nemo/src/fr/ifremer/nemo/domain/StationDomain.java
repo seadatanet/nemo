@@ -130,7 +130,10 @@ public class StationDomain
         odvStationHeader.append(Global.TAB);
         odvStationHeader.append("Type");
         odvStationHeader.append(Global.TAB);
-        odvStationHeader.append("yyyy-mm-ddThh:mm:ss.sss");
+        if(Nemo.getInstance().getConfig().isDateISO())
+            odvStationHeader.append("time_ISO8601 [yyyy-mm-ddThh:mm:ss.sss]");
+        else
+            odvStationHeader.append("Chronological Julian Date [days]");
         odvStationHeader.append(Global.TAB);
         odvStationHeader.append("Longitude [degrees_east]");
         odvStationHeader.append(Global.TAB);
