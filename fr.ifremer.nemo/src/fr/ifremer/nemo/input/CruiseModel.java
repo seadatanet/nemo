@@ -823,6 +823,10 @@ public class CruiseModel extends AbstractModel
         return v;
     }
     
+    public int getDataTypesLength() {
+        return _dataTypes.size();
+    }
+    
     public DataType getDataType(String code){
         DataType dataType = null;
         for (DataType d : getDataTypes()){

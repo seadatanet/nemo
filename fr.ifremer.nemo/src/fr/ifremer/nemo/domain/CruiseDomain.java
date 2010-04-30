@@ -146,11 +146,15 @@ public class CruiseDomain
         medCruiseHeader.append(Elts.getElt(Elts.cruise_availability, _model.getAvailability().getCode()));
         medCruiseHeader.append(Global.RN);
 
+        int end = _model.getDataTypesLength();
+        int length = 0;
         for (DataType dType : _model.getDataTypes()){
             medCruiseHeader.append(Elts.getElt(Elts.datatype_code, dType.getCode()));
             medCruiseHeader.append(Elts.getElt(Elts.datatype_nbprofile, Integer.toString(dType.getNumberOfProfiles())));
             medCruiseHeader.append(Elts.getElt(Elts.qc, form.formatBoolean(dType.isQc())));
-            //medCruiseHeader.append(Global.RN);
+            length++;
+            if(length != end)
+                medCruiseHeader.append(Global.RN);
         }
 
         if (!_model.getComment().equals(Global.EMPTY_STRING)){            
