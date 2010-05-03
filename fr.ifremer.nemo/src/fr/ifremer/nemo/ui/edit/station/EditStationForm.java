@@ -354,7 +354,7 @@ public class EditStationForm extends EditForm
 
             // in trajectory, longitude must be in data
             longitude.setEnableInData(MetaInData.OBLIGATOIRE);
-            longitude.getManualInput().setGrpEnabled(false);
+            longitude.setEnabledManual(false);
 
             // in trajectory, depth must be in data
             depth.setEnableInData(MetaInData.OBLIGATOIRE);
