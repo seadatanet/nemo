@@ -358,7 +358,8 @@ public class EditStationForm extends EditForm
 
             // in trajectory, depth must be in data
             depth.setEnableInData(MetaInData.OBLIGATOIRE);
-            depth.getManualInput().setGrpEnabled(false);
+            depth.getManualInput().setEnabled(false);
+            depth.getAutoInput().setEnabled(true);
 
         }
 
