@@ -604,7 +604,7 @@ public class Etape
             // value = ViewMain.editStationForm.depth.getValue();
             checkValue = true;
             // if (value != null && !value.trim().equals(Global.EMPTY_STRING)){
-            if (!ViewMain.editStationForm.depth.isManual())
+            if (!ViewMain.editStationForm.depth.isManual() && !ViewMain.radTrajectoire.getSelection())
             {
                 // non-obligatoire
 
