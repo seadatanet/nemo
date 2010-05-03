@@ -1194,7 +1194,7 @@ public class Etape
         }
         catch (Exception e)
         {
-            ViewMain.tabStation.setText(Messages.Etape_132);
+            Utils.messageErreurAppend(Messages.Etape_132);
             ViewMain.etape = 2;
             e.printStackTrace();
         }
