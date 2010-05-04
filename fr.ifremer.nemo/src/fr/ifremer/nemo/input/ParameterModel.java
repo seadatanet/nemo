@@ -76,6 +76,7 @@ public class ParameterModel extends AbstractModel
         _flag = null;
         _parameter = new Parameter();
         _lineValue = null;
+        _unknownFlagValue = Global.ZERO;
     }
 
 
@@ -252,7 +253,7 @@ public class ParameterModel extends AbstractModel
     public String retreiveParameterFlag(String inputLine)
     {
         String value = _fragment.retreive(inputLine);
-        String flagQc = Global.ZERO;
+        String flagQc = _unknownFlagValue;
         if (_inputDefault.trim().equals(value)  || value.equals(Global.EMPTY_STRING)){
             // la valeur est celle par défaut ou la valeur est manquante
             flagQc = Global.DEFAULT_FLAG;
@@ -264,8 +265,6 @@ public class ParameterModel extends AbstractModel
                 FlagTable flagTable = Nemo.getInstance().getDomain().getCruise().getStation().getModel().getFlagTable();
                 flagQc = flagTable.getFlagSDN(_flag.retreive(inputLine));
             }
-            else
-                flagQc = _unknownFlagValue;
                 
             // sinon, on laisse le flag à 0
         }
