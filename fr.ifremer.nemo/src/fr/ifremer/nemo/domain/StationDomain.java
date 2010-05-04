@@ -1,10 +1,10 @@
 /* ============================================================================
- * Nom du fichier	: StationDomain.java
+ * Nom du fichier   : StationDomain.java
  * Application      : NEMO version 1.2.20
- * Auteur			: Delphine BOULANGER
- * Date	de création : 30 nov. 09
- * Client			: Ifremer
- * Copyright		: Altran
+ * Auteur           : Delphine BOULANGER
+ * Date de crÃ©ation : 30 nov. 09
+ * Client           : Ifremer
+ * Copyright        : Altran
  * ============================================================================
  */
 package fr.ifremer.nemo.domain;
@@ -130,10 +130,7 @@ public class StationDomain
         odvStationHeader.append(Global.TAB);
         odvStationHeader.append("Type");
         odvStationHeader.append(Global.TAB);
-        if(Nemo.getInstance().getConfig().isDateISO())
-            odvStationHeader.append("time_ISO8601 [yyyy-mm-ddThh:mm:ss.sss]");
-        else
-            odvStationHeader.append("Chronological Julian Date [days]");
+        odvStationHeader.append("yyyy-mm-ddThh:mm:ss.sss");
         odvStationHeader.append(Global.TAB);
         odvStationHeader.append("Longitude [degrees_east]");
         odvStationHeader.append(Global.TAB);
@@ -260,7 +257,7 @@ public class StationDomain
 
     private String getRef()
     {
-        // incrementation du numéro
+        // incrementation du numÃ©ro
         String ref = Integer.toString(_ref);
         _ref++;
         return ref;
@@ -415,15 +412,15 @@ public class StationDomain
         switch (c)
         {
             case ODV:
-                // ODV -> [Référence du jeu de données]
+                // ODV -> [RÃ©fÃ©rence du jeu de donnÃ©es]
                 // if
                 // (Nemo.getInstance().getDomain().getMedia().getModel().getProcessType()
                 // == E_ProcessType.COLLECTION_FILES)
                 // cruiseRef = cDomain.getModel().getName();
                 // else
                 cruiseRef = cDomain.getDataSetRef();
-                // [Numéro station]si < 5 : codé sur 5 caractères il est
-                // complété à
+                // [NumÃ©ro station]si < 5 : codÃ© sur 5 caractÃ¨res il est
+                // complÃ©tÃ© Ã 
                 // gauche par des '0'.
                 if (stationReference.length() < 5)
                 {
@@ -433,11 +430,11 @@ public class StationDomain
 
             case MEDATLAS:
                 // MEDATLAS ->
-                // [Référence campagne]
+                // [RÃ©fÃ©rence campagne]
                 cruiseRef =
                     Elts.getElt(Elts.cruise_ref, cDomain.getModel()
                         .getReference());
-                // [Numéro station] codé sur 5 caractères il est complété à
+                // [NumÃ©ro station] codÃ© sur 5 caractÃ¨res il est complÃ©tÃ© Ã 
                 // gauche
                 // par des '0'.
                 stationReference = form.padZero(stationReference, 5);
@@ -448,12 +445,12 @@ public class StationDomain
         String temp = Global.EMPTY_STRING;
         temp += cruiseRef;
 
-        // [Numéro station]
+        // [NumÃ©ro station]
         if (!temp.equals(Global.EMPTY_STRING))
             temp += Global.UNDERSCORE;
         temp += stationReference;
 
-        // [Type de données] s'il existe
+        // [Type de donnÃ©es] s'il existe
         DataType dataType = _model.getDataType();
         if (dataType != null)
         {
