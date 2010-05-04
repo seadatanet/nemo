@@ -14,6 +14,7 @@ import fr.ifremer.nemo.domain.ParameterValue;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.ui.actions.OptionsAction;
 
 /**
  * Class ParameterModel
@@ -55,6 +56,9 @@ public class ParameterModel extends AbstractModel
     protected ParameterValue _lineValue;
     
     protected JEP _jepParser;
+    
+    //  default flag value 
+    private static String _unknownFlagValue;
 
 	public ParameterModel() {
         _tagName = ModelDescription.node_parameterModel;
@@ -260,6 +264,9 @@ public class ParameterModel extends AbstractModel
                 FlagTable flagTable = Nemo.getInstance().getDomain().getCruise().getStation().getModel().getFlagTable();
                 flagQc = flagTable.getFlagSDN(_flag.retreive(inputLine));
             }
+            else
+                flagQc = _unknownFlagValue;
+                
             // sinon, on laisse le flag à 0
         }
         return flagQc;
@@ -468,5 +475,15 @@ public class ParameterModel extends AbstractModel
     public void setLineValue(ParameterValue lineValue)
     {
         _lineValue = lineValue;
+    }
+    
+    public static String getUnknownFalgValue()
+    {
+        return _unknownFlagValue;
+    }
+    
+    public static void setUnknownFalgValue(String unknownFlagValue)
+    {
+        _unknownFlagValue = unknownFlagValue;
     }
 }

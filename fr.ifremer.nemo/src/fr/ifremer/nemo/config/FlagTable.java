@@ -117,6 +117,19 @@ public class FlagTable {
 		}
 		return Global.ZERO;
 	}
+    
+    /**
+     * Retourne le flag local correspondant au flag SDN
+     */
+    public String getFlagLocal(String sdn) {
+        for (int i = 0; i < getFlags().size(); i++) {
+            if (sdn.startsWith(getFlags().get(i).getSdn())){
+            //if (getFlags().get(i).getLocal().equals(local)) {
+                return Utils.extraitCode(getFlags().get(i).getLocal());
+            }
+        }
+        return Global.ZERO;
+    }
 
 	public void fillTable(Table table) {
 		table.removeAll();

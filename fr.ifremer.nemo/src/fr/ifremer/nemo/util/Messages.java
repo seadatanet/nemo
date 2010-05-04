@@ -294,6 +294,7 @@ public class Messages {
     public static String settings_parametersList;
     public static String settings_parameterListP091;
     public static String settings_parameterListP011;
+    public static String settings_flagDefault;
     
     public static String table_edmo;
     public static String table_dataTypes;
