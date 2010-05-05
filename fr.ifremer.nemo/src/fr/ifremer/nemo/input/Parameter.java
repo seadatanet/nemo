@@ -6,6 +6,7 @@ import com.ago.xml.Element2Field;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.domain.AddedParameter;
 import fr.ifremer.nemo.domain.AddedParameter.IdParameter;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Formatter;
@@ -446,7 +447,8 @@ public class Parameter extends AbstractModel
     {
         StringBuffer paramHeader = new StringBuffer();
         String code;
-        if (isP011())
+        //voir bug 4454
+        if (isP011() && !(this instanceof AddedParameter))
             code = _codeP011;
         else
             code = _code;
