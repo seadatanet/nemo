@@ -18,13 +18,13 @@ and the file containing this LOCAL_CDI_ID.
 
 ==OPTIONS==
 
-1/ Options/Settings: define the configuration of NEMO such as default values for several information, web services addresses, Qc flags mapping, ...
+1/ Options/Settings: define the configuration of NEMO such as default values for several information, web services addresses, Qc flags mapping, ...(see detail explanation in User Manuel)
 2/ Options/Vocabulary update : update NEMO with the last versions of the common vocabulary of SeaDataNet, EDMO.
 
 ==FILE==
 
 ==Left part of the screen :
-1/ First select the type of file you want to process 
+1/ First select the type of file you want to process  (Cruise file=one file for all the stations of one cruise, Cruise directory= one file per station, Collection of files grouped by cruise (multi-station files or not), Collection of files not group by cruise (multi-station files or not)
 2/ Then 'Browse' Button  and choose a file or directory.
 3/ If needed, load a model via the model/open menu and by choosing the XML file of the model you want to use for the current dataset.
 4/ If the file contains separators, click on separator and choose the correct separator.
@@ -32,6 +32,8 @@ and the file containing this LOCAL_CDI_ID.
 
 ==Right part of the screen :
 Once the type of file and the input file or directory is chosen, file description appears on the right of NEMO screen.
+ - Validate all steps button : The “validate all steps button” is only available  when input file(s) and model have been loaded.
+                               This button allows to validate all the steps of NEMO to go directly to the Convert folder for data conversion. 
  - Validate Button : One step must be validated before moving to the next one.
  - Reset button : erase all the values of the current step
 
@@ -42,20 +44,20 @@ Once the type of file and the input file or directory is chosen, file descriptio
     The number of lines of the file header can be input manually or selected in the left part of the screen 
     in the file and then input through the "Set" button.
 
-2/ Station header : This field describes the number of lines or (exclusive) a rupture indicator of the station header. 
+2/ Station header : This field describes the number of lines or (exclusive) a station header termination record text. 
     A station header is a set of lines containing information on the station. 
     Theses lines are the lines before the data lines; they are repeated for each station.
-    + The number of lines of the station header can be input manually or selected in the left part of the screen in the file and then input through the "Set" button .
-    + The station header rupture indicator (a specific string of characters) can be input manually or selected in the left part of the screen in the file and then input through the "Set" button.
-      This indicator may need a number of lines (equal to 0 by default) which corresponds to the lines between the indicator and the first line of data.
+    + The number of lines of the station header must be described.
+    + For a set of files with variable length of station headers, the text that identifies the end of the station header (station header termination record text) must also be described.
+      There may be some lines between this station header termination record and the first data record (number of lines equal to 0 by default). If this number of lines is > 0 it has to be described.
 
 3/ End of station : This field describes the number of lines of the end of a station.
     These lines are generally present when it is a multi-station file and there are several lines between each station.
-    The indicator of end of data (see below) must not be taken into account in this number of lines.
+    The data termination indicator (see below) must not be taken into account in this number of lines.
  
-4/ Indicator of end of data : This field describes the data rupture indication.
+4/ Data termination indicator: This section describes the indicator of the end of a station in a file.
     - For single station file, most of the time the end of file (EOF) is the indicator of end of data, but it may be an empty line at the end of the file or a line with a specific text.
-    - For multiple stations file, NEMO needs a separator between the stations to be able to know that station is changing. This separator can be an empty line or a set of specific characters that may
+    - For multiple stations file, NEMO needs a separator between the stations, to be able to know that station is changing. This separator can be an empty line or a set of specific characters that may
       be located on the first line of the next station  (in that case it is necessary to check the corresponding box)
     For example, in a MEDATLAS file, the indicator of end of data is the line starting with "-999.9 99.999". It is not necessary to type all the line; the first significant characters are enough.
 
@@ -134,10 +136,11 @@ Mandatory fields are: Station number, Data type, Time, Date, Latitude and Longit
                ss: seconds expressed in 2 digits (0 59)
                ttttt: seconds expressed in 1 up to 5 digits (for hour given in seconds, example : format tttt, value=3610, time = 01:00:10.00)
                PM: allows NEMO to read PM and AM time
-	       	   D.dddddd: chronological Julian time (used in ODV format)
-                      example : Chronological Julian date = 2454972.09687, 
-                               For DATE, read 2454972.0 - format DDDDDDD.d
-                               For TIME read  2.09687   - format D.ddddd
+	       D.dddddd: chronological Julian time (used in ODV format)
+                   example : Chronological Julian date = 2454972.09687, 
+                             For DATE, read 2454972.0 - format DDDDDDD.d
+                             For TIME read  2.09687   - format D.ddddd
+          Time may be unknown for some stations of vertical profiles and in that case a default value must be specified, user has to click on Default value and to input this value in the corresponding field.
 
 
 8/ Date : input the format in which time is provided in the input file and then, select time in the file and press Set and Test.
@@ -163,12 +166,15 @@ Mandatory fields are: Station number, Data type, Time, Date, Latitude and Longit
                MM.mm: Minutes in decimal values. The number of 'm' characters expresses the number of decimals.
                SS: Seconds (0 to 59)
 
-               Click on "variable end of line position" if all latitudes and longitudes do not end or start at the same character in every station (this often happens with not significant zero values, see examples in NEMO's user_manual).
+               Click on "variable end of line position" if all latitudes and longitudes do not end or start at the same character in every station (this often happens with not significant zero values, see examples in NEMO's user manual).
 
-11/ Depth :  Bottom depth of stations, must be given in meter in the input file. This field can be input manually or automatically.
+11/ Bottom Depth :  Bottom depth of stations, must be given in meter in the input file. This field can be input manually or automatically.
+             Click on "Variable end of line position or variable start position" if all bottom depths do not end or start at the same character in every station (this often happens with not significant zero values)
+	     Some files could contain default values if bottom depth is not measured (-999, for example). To described this value click default value and enter the corresponding value in the text field.
+
 
 12/ QC flags : quality flags on station header information that could exists in the input file.
-          Header QC flags are only used in MEDATLAS format, they concerns Date/Time, Latitude, Longitude and Bottom depth.
+               Header QC flags are only used in MEDATLAS format, they concerns Date/Time, Latitude, Longitude and Bottom depth.
 
 ==For time-series 6 more sections are available :
 Mandatory fields are: Station number, Data type, Time, Date, Latitude, Longitude and Sensor's depth
@@ -177,7 +183,7 @@ Mandatory fields are: Station number, Data type, Time, Date, Latitude, Longitude
           By default, if not input, the values will be the same than "Latitude" and "Longitude" which are the position at the start time of the time series.
           Input in these fields is the same than for "Latitude" and "Longitude" described for vertical profiles.
 
-15/ End Depth : Bottom depth at the end time of time series.
+15/ End Bottom Depth : Bottom depth at the end time of time series.
           By default, if not input, the value will be the same than Depth which is as the bottom depth at the start time of the time series.
           Input in this field is the same than for "Depth" described for vertical profiles.
 
@@ -231,6 +237,12 @@ when the parameter is not measured), and the format in which the parameter will 
  
 - Parameter list:
    To add a new parameter in the table of measured parameters. This is the list P091 of SeaDataNet, it corresponds to the MEDATLAS codes of parameters.
+   + If default parameter list is P091 in NEMO settings
+       The selected parameter is added in the table, with some values filled by default; all these default values can be modified. The default and the format values linked to the parameter are downloaded in the parameters list of NEMO Web service
+   +If default parameter list is P011 in NEMO settings
+       Another window with the corresponding P011 opens
+       Then you have to select the P011 parameter in the list (use filter to find a specific parameter)
+
 
 - Move current parameter up:
    To move up a parameter in the table of measured parameters.

@@ -17,13 +17,13 @@ pour faire la correspondance entre un LICAL_CDI_ID (un profil vertical, une sér
 
 ==OPTIONS===========================
 
-1/ Options/Configurer: définit la configuration of NEMO comme par exemple les valeurs par défaut pour des informations nécessaires à NEMO, l'adresse des web services, le mapping des flags de Qc, ...
+1/ Options/Configurer: définit la configuration of NEMO comme par exemple les valeurs par défaut pour des informations nécessaires à NEMO, l'adresse des web services, le mapping des flags de Qc, ... (Voir les explications détaillées dans le manuel utilisateur)
 2/ Options/Mise à jour constantes : Met à jour NEMO avec les dernières version des listes de valeurs nécessaires (EDMO, liste de vocabulaires de SeaDataNet, ...).
 
 ==FICHIER===========================
 
 ==Partie gauche de l'écran :
-1/ Sélectionner le type de fichier que vous souhaitez reformatter.
+1/ Sélectionner le type de fichier que vous souhaitez reformater (Fichier campagne : un fichier pour toutes les stations d'une campagne, Dossier campagne : Un fichier par station, Une collection de fichier (muti-stations ou pas) regroupés par campagne, Collection de fichier (multi-stations ou pas) non regroupés par campagne)
 2/ Puis cliquer sur "Parcourir" pour choisir le fichier ou le répertoire.
 3/ Si nécessaire, charger un modèle à l'aide du menu "Modèle/Ouvrir un modèle" et sélectionner le fichier XML correspondant.
 4/ Si le fichier en entrée contient des séparateurs, cliquer sur "Séparateur" et choisissez le séparateur qui convient.
@@ -139,6 +139,7 @@ Les champs obligatoires sont : Numéro de station, Type de données, Heure, Date
                    exemple : si la date à lire est la suivante : 2454972.09687, 
                                pour le jour il faut lire 2454972.0, format DDDDDDD.d
                                pour l'heure il faut lire 2.09687    format D.ddddd
+           L'heure peut ne pas être conues pour certaines stations et dans ce cas la valeur par défaut doit être renseignée : l'utilisateur doit cocher le champ "Valeur par défaut" et renseigner cette valeur dans le champ correspondant.
                
 
 8/ Date : Entrer le format de la date du fichier en entrée, puis, sélectionner l'heure dans le fichier, appuyer sur le bouton "Injecter", puis sur le bouton Test pour vérifier la valeur.
@@ -151,7 +152,7 @@ Les champs obligatoires sont : Numéro de station, Type de données, Heure, Date
                   exemple : si la date à lire est la suivante : 2454972.09687, 
                                pour le jour il faut lire 2454972.0, format DDDDDDD.d
                                pour l'heure il faut lire 2.09687    format D.ddddd
-
+   
 9-10/ Latitude et Longitude : Entrer le format de la latitude ou de la longitude du fichier en entrée, puis, sélectionner l'heure dans le fichier, appuyer sur le bouton "Injecter", puis sur le bouton Test pour vérifier la valeur.
       Le format peut être sélectionné dans la liste, ou saisi par l'utilisateur en utilisant les valeurs suivantes :
                N: désigne l'hémisphère. Les valeurs en entrée doivent être égales à N ou S pour les latitudes et W ou E dans le cas des longitudes
@@ -167,8 +168,9 @@ Les champs obligatoires sont : Numéro de station, Type de données, Heure, Date
                Cliquer sur "Position de fin de ligne variable" si toutes les latitudes ou longitudes des stations en entrée ne commence pas ou ne se termine pas à la même position 
                (cela arrive souvent avec si les zéros non significatifs de fin ne sont pas écrits, cf exemples dans le manuel utilisateur de NEMO).
 
-11/ Profondeur : Profondeur de l'océan au point de la station en mètres. Cette valeur peut être saisie manuellement ou lue dans le fichier à l'aide du bouton "Injecter", puis testée à l'aide du bouton "Test".
-                 Cliquer sur "Position de fin de ligne variable" si toutes les profondeurs des stations en entrée ne se termine pas à la même position.
+11/ Bathymétrie : Profondeur de l'océan au point de la station en mètres. Cette valeur peut être saisie manuellement ou lue dans le fichier à l'aide du bouton "Injecter", puis testée à l'aide du bouton "Test".
+                  Cliquer sur "Position de fin de ligne variable" si toutes les profondeurs des stations en entrée ne se termine pas à la même position.
+                  Certains fichiers peuvent contenir une valeur par défaut si la bathymétrie n'est pas renseignée (-999 par exemple). Pour décrire cette valeur, cocher "Valeur par défaut" et entrer la valeur dans le champ correspondant.
 
 12/ QC flags : Flags qualités sur les méta-données de l'entête station qui peuvent exister en entrée (cas du format MEDATLAS, par exemple).
                Ces flags qualité sont utilisés en sortie uniquement dans le format MEDATLAS, ils concernent la date/heure, la latitude, la longitude et la profondeur.
@@ -181,9 +183,9 @@ Les champs obligatoires sont : Numéro de station, Type de données, Heure, Date
           Si rien n'est saisi, les valeurs sont les mêmes que celles de Latitude et Longitude qui sont les positions à la date de début des séries temporelles.
           Les valeurs autorisées sont les mêmes que pour les champs Latitude et Longitude décrits pour les profils verticaux.
 
-15/ Profondeur de fin : Profondeur de l'océan au point de la station en mètres, à la date de fin des séries temporelles.
+15/ Bathymétrie de fin : Profondeur de l'océan au point de la station en mètres, à la date de fin des séries temporelles.
                Si rien n'est saisi, les valeurs sont les mêmes que celles du champ "Profondeur" qui est la profondeur à la date de début des séries temporelles.
-               La saisie se fait de la m^me façon que dans le champ "Profondeur" décrit pour les profils verticaux. 
+               La saisie se fait de la même façon que dans le champ "Profondeur" décrit pour les profils verticaux. 
           
 16/ Profondeur du capteur : Profondeur du capteur mesurant les données, elle doit être donnée en mètres. Ce champ peut être renseigné manuellement ou automatiquement en utilisant le bouton « Injecter ».
  
@@ -234,7 +236,11 @@ Cette information concerne le nom,l'unité, les valeurs par défaut en entrée e
    
 - Liste de paramètres:
    Pour ajouter un paramètre dans le tableau des paramètres mesurés. Cette liste est la liste P091 de SeaDataNet et correspond aux codes MEDATLAS des paramètres.
-
+   + Si la liste de paramètres par défaut est P091 dans la configuration de NEMO
+         Le paramètre sélectionné dans la liste P091 est ajouté dans la liste des paramètres mesurés ainsi que quelques valeurs qui lui correspondent et qui sont modifiables.
+   + Si la liste de paramètres par défaut est P011 dans la configuration de NEMO
+         Une autre fenêtre contenant la liste des paramètres P011 correspondants s'ouvre
+         Les code P011 souhaité doit être sélectionné dans cet liste et est ensuite ajouté dans la liste des paramètres mesurés ainsi que quelques valeurs qui lui correspondent et qui sont modifiables.
 - Monter paramètre sélectionné:
    Pour déplacer un paramètre vers le haut, dans le tableau des paramètres mesurés. 
    L'ordre des paramètres dans le tableau est l'ordre des paramètres dans le fichier de sortie.
