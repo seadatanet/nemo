@@ -545,7 +545,7 @@ public class Etape
                     try
                     {
                         DateTimeFormat format = new DateTimeFormat(formatSaisi);
-                        
+
                         if (!value.equals(StationSection.defaultValue))
                             format.parseObject(value);
                     }
@@ -606,7 +606,8 @@ public class Etape
             // value = ViewMain.editStationForm.depth.getValue();
             checkValue = true;
             // if (value != null && !value.trim().equals(Global.EMPTY_STRING)){
-            if (!ViewMain.editStationForm.depth.isManual() && !ViewMain.radTrajectoire.getSelection())
+            if (!ViewMain.editStationForm.depth.isManual()
+                    && !ViewMain.radTrajectoire.getSelection())
             {
                 // non-obligatoire
 
@@ -825,28 +826,38 @@ public class Etape
                 else
                 {
                     value = ViewMain.editStationForm.sensorDepth.getValue();
-                    if (value.trim().equals(Global.EMPTY_STRING))
+
+                    // FT 4466 valeur vide autorisée dans le cas trajectory
+                    if (!ViewMain.radTrajectoire.getSelection())
                     {
-                        checkValue = false;
-                        // obligatoire que pour les series temporelles
-                        // if (ViewMain.radSerieTempo.getSelection()){
-                        ok = ok && false; // FAE 0001232
-                        // FAE 1673 : n'afficher le message que si erreur
-                        Utils.messageErreurAppend(Messages.Etape_77);
-                        Utils.messageErreurAppend(Messages.Etape_79);
-                        // }
+                        if (value.trim().equals(Global.EMPTY_STRING))
+                        {
+                            checkValue = false;
+                            // obligatoire que pour les series temporelles
+                            // if (ViewMain.radSerieTempo.getSelection()){
+                            ok = ok && false; // FAE 0001232
+                            // FAE 1673 : n'afficher le message que si erreur
+                            Utils.messageErreurAppend(Messages.Etape_77);
+                            Utils.messageErreurAppend(Messages.Etape_79);
+                            // }
+                        }
                     }
                 }
                 if (checkValue)
                 {
                     value = ViewMain.editStationForm.sensorDepth.getValue();
-                    if (!Pattern.matches(
-                        "^[0-9]*[0-9][.]?[0-9]*[0-9]*$", value.trim())) { //$NON-NLS-1$
-                        ok = ok && false;
-                        Utils.messageErreurAppend(Messages.Etape_81);
+                    
+                    // FT 4466 valeur vide autorisée dans le cas trajectory
+                    if (!(ViewMain.radTrajectoire.getSelection() && ""
+                        .equals(value)))
+                    {
+                        if (!Pattern.matches(
+                            "^[0-9]*[0-9][.]?[0-9]*[0-9]*$", value.trim())) { //$NON-NLS-1$
+                            ok = ok && false;
+                            Utils.messageErreurAppend(Messages.Etape_81);
+                        }
                     }
                 }
-
                 // FREQUENCE ECHANTILLONNAGE
                 // ne tester que si section frequence pas grisee !
                 checkValue = true;

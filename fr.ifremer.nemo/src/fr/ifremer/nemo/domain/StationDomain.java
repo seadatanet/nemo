@@ -202,9 +202,13 @@ public class StationDomain
             .getIdEdmoRespCdi());
         odvStationHeader.append(Global.TAB);
 
+        Object botDepth;
         // Bot. Depth [m]
-        Object botDepth =
-            _model.getProperty(Intern.S_DEPTH).applyOnLine(inputLine);
+        //FAE 4466 => trajectory edepth non renseigné
+        if (_model.getProperty(Intern.S_EDEPTH).getFragment() == null && Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TRAJECTORY)
+            botDepth = Float.NaN;
+        else
+            botDepth = _model.getProperty(Intern.S_DEPTH).applyOnLine(inputLine);
 
         if (botDepth.equals("Default"))
             botDepth = 0f;
@@ -731,11 +735,17 @@ public class StationDomain
             }
             else
             {
-                endDepth = (Float) _model.getProperty(Intern.S_EDEPTH).applyOn(inputFile);
+                if (_model.getProperty(Intern.S_EDEPTH).getFragment() == null && Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TRAJECTORY)
+                    endDepth = Float.NaN;
+                else
+                   endDepth = (Float) _model.getProperty(Intern.S_EDEPTH).applyOn(inputFile);            
             }
         }
         
-        timeseriesHeader.append(Elts.getElt(Elts.station_endDepth, endDepth));
+        if (endDepth == -1)
+            timeseriesHeader.append(Elts.getElt(Elts.station_endDepth, null));
+        else
+            timeseriesHeader.append(Elts.getElt(Elts.station_endDepth, endDepth));
         timeseriesHeader.append(Global.SPACE);
         timeseriesHeader.append(Elts.getKeyword(Elts.qc));
         timeseriesHeader.append(currentStation.getMetaFlag(Intern.ENDDATETIME));
