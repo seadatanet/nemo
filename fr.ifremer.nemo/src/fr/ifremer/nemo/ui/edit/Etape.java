@@ -545,7 +545,9 @@ public class Etape
                     try
                     {
                         DateTimeFormat format = new DateTimeFormat(formatSaisi);
-                        format.parseObject(value);
+                        
+                        if (!value.equals(StationSection.defaultValue))
+                            format.parseObject(value);
                     }
                     catch (ParseException e)
                     {
