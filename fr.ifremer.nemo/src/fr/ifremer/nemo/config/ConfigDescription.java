@@ -66,6 +66,8 @@ public class ConfigDescription extends NLS
     public static String node_fichierMapping;
 
     public static String node_Flag;
+    
+    public static String node_FlagDefault;
 
     public static String node_FlagTable;
 
@@ -112,6 +114,8 @@ public class ConfigDescription extends NLS
     public static String setter_DataCenter;
 
     public static String setter_DateISO;
+    
+    public static String setter_FlagDefault;
 
     public static String setter_DefaultCode;
 

@@ -1770,6 +1770,8 @@ public class OptionsAction extends Action implements ISelectionListener,
         
         configuration.setDataList(dataList.toString());
         
+        configuration.setDefaultFlag(_flagTable.getFlagLocal(_flagDefault.getItem(_flagDefault.getSelectionIndex())));
+        
         // Enregistrement de la configuration
         configuration.save();
     }
@@ -1798,8 +1800,20 @@ public class OptionsAction extends Action implements ISelectionListener,
             _flagTable.fillTable(tabFlag);
             
         }
+        int index = 0;
+        boolean originalDefaultFlag=true;
         for(Flag flag:_flagTable.getFlags())
+        {
             _flagDefault.add(flag.getSdn());
+            if(_flagTable.getFlagLocal(flag.getSdn()).equals(Nemo.getInstance().getConfig().getDefaultFlag()))
+            {
+                originalDefaultFlag=false;
+                _flagDefault.select(index);
+            }
+            index++;
+        }
+        if(originalDefaultFlag)
+            _flagDefault.select(0);
     }
 
     public static ArrayList<FlagTable> getFlagTables()

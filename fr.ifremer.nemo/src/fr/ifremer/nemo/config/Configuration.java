@@ -89,6 +89,8 @@ public class Configuration extends AbstractModel
 	protected Locale _locale;
 	
 	protected String _defaultCode;
+    
+    protected String _defaultFlag;
 	
 	protected ArrayList<FlagTable> _flagTables;
     
@@ -326,6 +328,10 @@ public class Configuration extends AbstractModel
 			}
 			return this;
 		}
+        if (a_LocalName.equals(ConfigDescription.node_FlagDefault)) {
+            Element2Field setter = new Element2Field(this, ConfigDescription.setter_FlagDefault);  
+            return setter;
+        }
 		
 		return null;
 	}
@@ -404,6 +410,7 @@ public class Configuration extends AbstractModel
 			
 			a_Writer.closeTag();
 		}
+        a_Writer.putTag(ConfigDescription.node_FlagDefault ,getDefaultFlag());
 	}
     
 
@@ -915,6 +922,14 @@ public class Configuration extends AbstractModel
 	public void setDefaultCode(String flagTable) {
 		_defaultCode = flagTable;
 	}
+    
+    public String getDefaultFlag() {
+        return _defaultFlag;
+    }
+
+    public void setDefaultFlag(String defaultFlag) {
+        _defaultFlag = defaultFlag;
+    }
 
     public DataListEnum getDataList() {
         return _dataList;
