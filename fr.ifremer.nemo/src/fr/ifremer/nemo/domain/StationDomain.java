@@ -204,8 +204,9 @@ public class StationDomain
 
         Object botDepth;
         // Bot. Depth [m]
-        //FAE 4466 => trajectory edepth non renseigné
-        if (_model.getProperty(Intern.S_EDEPTH).getFragment() == null && Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TRAJECTORY)
+        //FAE 4466 => trajectory depth non renseigné
+        //FAE 4615
+        if (_model.getProperty(Intern.S_DEPTH).getFragment() == null && Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TRAJECTORY)
             botDepth = Float.NaN;
         else
             botDepth = _model.getProperty(Intern.S_DEPTH).applyOnLine(inputLine);
