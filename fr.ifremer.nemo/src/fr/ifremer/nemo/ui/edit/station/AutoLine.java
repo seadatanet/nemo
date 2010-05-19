@@ -464,7 +464,12 @@ public class AutoLine implements UIobject
                 {
                     File directory = new File(ViewMain.nomRepertoire);
                     File[] subfiles = directory.listFiles();
-                    ligne = subfiles[0].getName();
+                    
+                    //Correction FAE 4076
+                    if (subfiles[0].isFile())
+                        ligne = subfiles[0].getName();
+                    else
+                        ligne = subfiles[0].listFiles()[0].getName();
                 }
             }
             else
