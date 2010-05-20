@@ -177,8 +177,12 @@ public class OdvWriter extends NemoWriter{
                         stationHeader = station.getOdvEmptyStationHeader();
                     }
                     
-                    writeDataLine(stationHeader, currentStation, readedLine);
-                    stationHeader = station.getOdvEmptyStationHeader();
+                    // FAE 4673 Pb si une seule ligne données et pas d'entête station
+                    if (!isEndData())
+                    {
+                        writeDataLine(stationHeader, currentStation, readedLine);
+                        stationHeader = station.getOdvEmptyStationHeader();
+                    }
                     
                     stationWrited = true;
                 }

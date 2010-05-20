@@ -108,10 +108,13 @@ public abstract class NemoWriter{
                                         
                                         // sampling rate peut etre à calculer
                                         if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData()){
-                                            st.calculSamplingRate(readedLine);
+                                            if (!isEndData()) // FAE 4673 Pb si une seule ligne données et pas d'entête station
+                                                st.calculSamplingRate(readedLine);
                                         }
                                     }
-                                    st.updateGlobalParamQc(readedLine);
+                                    if (!isEndData()) // FAE 4673 Pb si une seule ligne données et pas d'entête station
+                                        st.updateGlobalParamQc(readedLine);
+                                    
                                     nbrecords++;
                                 }
                                 else{
