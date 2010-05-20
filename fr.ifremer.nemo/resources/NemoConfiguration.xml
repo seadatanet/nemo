@@ -1,4 +1,4 @@
-<NemoConfiguration lang="fr_FR">
+<NemoConfiguration lang="en_GB">
   <dataCenter>FI</dataCenter>
   <nemoWsURL>http://www.ifremer.fr/WSnemo/services/NEMO</nemoWsURL>
   <nautilusWsURL>http://www.ifremer.fr/WSnautilus/services/NAUTILUS</nautilusWsURL>
@@ -18,7 +18,7 @@
   <typePlateforme>12</typePlateforme>
   <writeMapping>false</writeMapping>
   <fichierMapping>coupling.txt</fichierMapping>
-  <dateISO>false</dateISO>
+  <dateISO>true</dateISO>
   <dataList>P011</dataList>
   <proxy use="false">
     <address></address>
@@ -35,7 +35,7 @@
   <VocabListURL name="C77" value="http://vocab.ndg.nerc.ac.uk/list/C77/current" version="2"/>
   <VocabListURL name="L061" value="http://vocab.ndg.nerc.ac.uk/list/L061/current" version="7"/>
   <VocabListURL name="L05" value="http://vocab.ndg.nerc.ac.uk/list/L05/current" version="8"/>
-  <VocabListURL name="P061" value="http://vocab.ndg.nerc.ac.uk/list/P061/current" version="24"/>
+  <VocabListURL name="P061" value="http://vocab.ndg.nerc.ac.uk/list/P061/current" version="25"/>
   <VocabListURL name="L071" value="http://vocab.ndg.nerc.ac.uk/list/L071/current" version="1"/>
   <VocabListURL name="L031" value="http://vocab.ndg.nerc.ac.uk/list/L031/current" version="2"/>
   <VocabListURL name="L201" value="http://vocab.ndg.nerc.ac.uk/list/L201/current" version="3"/>
@@ -44,7 +44,7 @@
   <VocabListURL name="L021" value="http://vocab.ndg.nerc.ac.uk/list/L021/current" version="1"/>
   <VocabListURL name="L081" value="http://vocab.ndg.nerc.ac.uk/list/L081/current" version="2"/>
   <VocabListURL name="C174" value="http://vocab.ndg.nerc.ac.uk/list/C174/current" version="86"/>
-  <VocabListURL name="P021" value="http://vocab.ndg.nerc.ac.uk/list/P021/current" version="49"/>
+  <VocabListURL name="P021" value="http://vocab.ndg.nerc.ac.uk/list/P021/current" version="50"/>
   <defaultFlagTable>C1</defaultFlagTable>
   <FlagTable code="C1" label="SeaDataNet">
     <Flag local="0" SDN="0 - no quality control"/>
@@ -74,5 +74,33 @@
     <Flag local="4" SDN="3 - probably bad value"/>
     <Flag local="8" SDN="4 - bad value"/>
   </FlagTable>
-  <NLS missing message: node_FlagDefault in: fr.ifremer.nemo.config.config_desc></NLS missing message: node_FlagDefault in: fr.ifremer.nemo.config.config_desc>
+  <FlagTable code="C1" label="SeaDataNet">
+    <Flag local="0" SDN="0 - no quality control"/>
+    <Flag local="1" SDN="1 - good value"/>
+    <Flag local="2" SDN="2 - probably good value"/>
+    <Flag local="3" SDN="3 - probably bad value"/>
+    <Flag local="4" SDN="4 - bad value"/>
+    <Flag local="5" SDN="5 - changed value"/>
+    <Flag local="6" SDN="6 - value below detection"/>
+    <Flag local="7" SDN="7 - value in excess"/>
+    <Flag local="8" SDN="8 - interpolated value"/>
+    <Flag local="9" SDN="9 - missing value"/>
+    <Flag local="A" SDN="A - value phenomenon uncertain"/>
+  </FlagTable>
+  <FlagTable code="C2" label="MEDATLAS">
+    <Flag local="1" SDN="1 - good value"/>
+    <Flag local="0" SDN="0 - no quality control"/>
+    <Flag local="2" SDN="2 - probably good value"/>
+    <Flag local="3" SDN="3 - probably bad value"/>
+    <Flag local="4" SDN="4 - bad value"/>
+    <Flag local="5" SDN="5 - changed value"/>
+    <Flag local="9" SDN="9 - missing value"/>
+  </FlagTable>
+  <FlagTable code="C3" label="ODV">
+    <Flag local="0" SDN="1 - good value"/>
+    <Flag local="1" SDN="9 - missing value"/>
+    <Flag local="4" SDN="3 - probably bad value"/>
+    <Flag local="8" SDN="4 - bad value"/>
+  </FlagTable>
+  <defaultFlag>0</defaultFlag>
 </NemoConfiguration>
