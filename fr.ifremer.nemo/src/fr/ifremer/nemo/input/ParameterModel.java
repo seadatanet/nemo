@@ -57,9 +57,6 @@ public class ParameterModel extends AbstractModel
     
     protected JEP _jepParser;
     
-    //  default flag value 
-    private static String _unknownFlagValue;
-
 	public ParameterModel() {
         _tagName = ModelDescription.node_parameterModel;
         initValues();
@@ -76,7 +73,6 @@ public class ParameterModel extends AbstractModel
         _flag = null;
         _parameter = new Parameter();
         _lineValue = null;
-        _unknownFlagValue = Global.ZERO;
     }
 
 
@@ -253,7 +249,11 @@ public class ParameterModel extends AbstractModel
     public String retreiveParameterFlag(String inputLine)
     {
         String value = _fragment.retreive(inputLine);
-        String flagQc = _unknownFlagValue;
+        
+        //FAE 4431 Flag qualité par défault configurable
+        String flagConfig = Nemo.getInstance().getConfig().getDefaultFlag();
+        String flagQc = flagConfig==null?Global.ZERO:flagConfig;
+     
         if (_inputDefault.trim().equals(value)  || value.equals(Global.EMPTY_STRING)){
             // la valeur est celle par défaut ou la valeur est manquante
             flagQc = Global.DEFAULT_FLAG;
@@ -475,14 +475,5 @@ public class ParameterModel extends AbstractModel
     {
         _lineValue = lineValue;
     }
-    
-    public static String getUnknownFalgValue()
-    {
-        return _unknownFlagValue;
-    }
-    
-    public static void setUnknownFalgValue(String unknownFlagValue)
-    {
-        _unknownFlagValue = unknownFlagValue;
-    }
+  
 }

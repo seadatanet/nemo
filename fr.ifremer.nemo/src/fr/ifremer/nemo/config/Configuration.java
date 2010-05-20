@@ -90,6 +90,7 @@ public class Configuration extends AbstractModel
 	
 	protected String _defaultCode;
     
+    //FAE 4431 Flag qualité par défault configurable
     protected String _defaultFlag;
 	
 	protected ArrayList<FlagTable> _flagTables;

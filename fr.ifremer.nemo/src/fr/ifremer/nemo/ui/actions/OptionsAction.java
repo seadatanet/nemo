@@ -110,6 +110,7 @@ public class OptionsAction extends Action implements ISelectionListener,
     
     public static Label textAreaFlag;
     
+    //FAE 4431 Flag qualité par défault configurable
     public static Combo _flagDefault;
 
     public final static String ID = "fr.ifremer.nemo.ui.OptionsAction"; //$NON-NLS-1$
@@ -274,8 +275,11 @@ public class OptionsAction extends Action implements ISelectionListener,
             comboIdEdmoDistDonnees.add(strTemp);
         }
 
-        // FLags
         fillFlagTable();
+        
+        //FAE 4431 Flag qualité par défault configurable
+        _flagDefault.add("0");        
+        _flagDefault.add("1");
     }
 
     protected void remplissageOptions()
@@ -352,6 +356,11 @@ public class OptionsAction extends Action implements ISelectionListener,
                 break;
         }
             
+        //FAE 4431 Flag qualité par défault configurable
+        if (config.getDefaultFlag().equals("1"))
+            _flagDefault.select(1);
+        else
+            _flagDefault.select(0);
         
         redLabels();
     }
@@ -993,6 +1002,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         textAreaFlag.setFont(Utils.font08);
         textAreaFlag.setText(Messages.settings_flagDefault);
         
+        //FAE 4431 Flag qualité par défault configurable
         _flagDefault = new Combo(compo, SWT.BORDER | SWT.READ_ONLY);
         _flagDefault.setFont(Utils.font08);
         GridDataFactory.fillDefaults().grab(false, false).applyTo(
@@ -1535,9 +1545,6 @@ public class OptionsAction extends Action implements ISelectionListener,
             }
         }
 
-        // default flag value 
-        ParameterModel.setUnknownFalgValue(_flagTable.getFlagLocal(_flagDefault.getItem(_flagDefault.getSelectionIndex())));
-        
         if (!blnOK)
         {
             try
@@ -1674,9 +1681,6 @@ public class OptionsAction extends Action implements ISelectionListener,
             dialog.open();
         }
         
-        // default flag value 
-        //String _defaultFlagValue = _flagTable.getFlagLocal(_flagDefault.getItem(_flagDefault.getSelectionIndex()));
-
         return writeIni;
     }
 
@@ -1770,7 +1774,8 @@ public class OptionsAction extends Action implements ISelectionListener,
         
         configuration.setDataList(dataList.toString());
         
-        configuration.setDefaultFlag(_flagTable.getFlagLocal(_flagDefault.getItem(_flagDefault.getSelectionIndex())));
+        //FAE 4431 Flag qualité par défault configurable
+        configuration.setDefaultFlag(_flagDefault.getText());
         
         // Enregistrement de la configuration
         configuration.save();
@@ -1783,7 +1788,6 @@ public class OptionsAction extends Action implements ISelectionListener,
         flagTables =
             FlagTable.getOrderedFlagTables(Nemo.getInstance().getConfig().getFlagTables());
 
-        _flagDefault.removeAll();
         for (i = 0; i < flagTables.size(); i++)
         {
             TableItem item = new TableItem(tabFlagTable, SWT.NONE);
@@ -1800,20 +1804,6 @@ public class OptionsAction extends Action implements ISelectionListener,
             _flagTable.fillTable(tabFlag);
             
         }
-        int index = 0;
-        boolean originalDefaultFlag=true;
-        for(Flag flag:_flagTable.getFlags())
-        {
-            _flagDefault.add(flag.getSdn());
-            if(_flagTable.getFlagLocal(flag.getSdn()).equals(Nemo.getInstance().getConfig().getDefaultFlag()))
-            {
-                originalDefaultFlag=false;
-                _flagDefault.select(index);
-            }
-            index++;
-        }
-        if(originalDefaultFlag)
-            _flagDefault.select(0);
     }
 
     public static ArrayList<FlagTable> getFlagTables()
