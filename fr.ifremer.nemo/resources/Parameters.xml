@@ -1752,6 +1752,25 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
     <void property="code"> 
+     <string>GDIR</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>999.9</string> 
+    </void> 
+    <void property="format"> 
+     <string>%5.1f</string> 
+    </void> 
+    <void property="name"> 
+     <string>GUST WIND DIRECTION</string> 
+    </void> 
+    <void property="unit"> 
+     <string>degree</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
      <string>GLUC</string> 
     </void> 
     <void property="defaultValue"> 
@@ -1876,6 +1895,25 @@
     </void> 
     <void property="name"> 
      <string>HORIZONTAL CURRENT SPEED</string> 
+    </void> 
+    <void property="unit"> 
+     <string>meter/second</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
+     <string>HCSS</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>9.999</string> 
+    </void> 
+    <void property="format"> 
+     <string>%5.3f</string> 
+    </void> 
+    <void property="name"> 
+     <string>HORIZ. CURRENT SPEED STD DEV</string> 
     </void> 
     <void property="unit"> 
      <string>meter/second</string> 
