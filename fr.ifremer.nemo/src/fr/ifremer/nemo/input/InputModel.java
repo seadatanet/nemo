@@ -1,5 +1,9 @@
 package fr.ifremer.nemo.input;
 
+import java.util.Dictionary;
+
+import org.eclipse.core.runtime.Platform;
+import org.osgi.framework.Bundle;
 import org.xml.sax.Attributes;
 
 import com.ago.xml.SAXConsumer;
@@ -63,7 +67,11 @@ public class InputModel extends AbstractModel
                       DataModel data,
                       ConversionModel convert) {
         _tagName = ModelDescription.node_root;
-        _version = "1.2.20";
+        
+        Bundle bundle = Platform.getBundle("fr.ifremer.nemo"); 
+        Dictionary headers = bundle.getHeaders(); 
+        _version = (String) headers.get("Bundle-Version"); //$NON-NLS-1$ 
+        
         _mediaModel = media;
         _cruiseModel = cruise;
         _stationModel = station;
