@@ -2,6 +2,8 @@ package fr.ifremer.nemo.ui.edit.station;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
@@ -62,6 +64,25 @@ public class EditStationForm extends EditForm
             // bouton reset
             createButtonRaz();
 
+            buttonRAZ.addSelectionListener(new SelectionListener(){
+
+                public void widgetDefaultSelected(SelectionEvent e)
+                {
+                    widgetSelected(e);
+                }
+
+                //Correction FAE 4674
+                // Après le reset on doit réautoriser la saisie manuelle ainsi
+                // que le sampling rate
+                public void widgetSelected(SelectionEvent e)
+                {
+                    samplingRate.setEnabled(true);
+                    date.setEnabledManual(true);
+                    time.setEnabledManual(true);
+                }
+                
+            });
+            
             // bouton collapse all / expand all
             createButtonExpand();
 
