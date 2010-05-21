@@ -62,6 +62,9 @@ import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.config.Proxy;
 import fr.ifremer.nemo.config.Configuration.DataListEnum;
 import fr.ifremer.nemo.domain.AddedParameter;
+import fr.ifremer.nemo.domain.CruiseDomain;
+import fr.ifremer.nemo.domain.InputDomain;
+import fr.ifremer.nemo.domain.StationDomain;
 import fr.ifremer.nemo.domain.AddedParameter.IdParameter;
 import fr.ifremer.nemo.ui.Application;
 import fr.ifremer.nemo.ui.ApplicationActionBarAdvisor;
@@ -1779,6 +1782,18 @@ public class OptionsAction extends Action implements ISelectionListener,
         
         // Enregistrement de la configuration
         configuration.save();
+        
+        // On fait un reset sur les stations certains changement nécessite un recalcul lors de l'écriture
+        InputDomain id =  Nemo.getInstance().getDomain();
+        if (id != null){
+            CruiseDomain cd = id.getCruise();
+            if (cd != null){
+                StationDomain sd = cd.getStation();
+                if (sd != null){
+                sd.resetStations();
+                }
+            }
+        }
     }
 
     private void fillFlagTable()

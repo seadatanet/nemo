@@ -156,7 +156,7 @@ public class AddedParameter extends Parameter
 //                case PRES :
 //                    return sDomain.getData().getModel().getParameterModel(Intern.paramDEPH).retreiveParameterFlag(inputLine);
                 default:
-                    return Global.ZERO;
+                    return Nemo.getInstance().getConfig().getDefaultFlag();
             }
         }
         

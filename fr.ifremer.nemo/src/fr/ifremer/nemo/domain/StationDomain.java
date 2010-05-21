@@ -661,7 +661,8 @@ public class StationDomain
 
     public String getMetaFlag(String key, String[] inputFile)
     {
-        String metaFlag = Global.ZERO;
+        // FAE 4431
+        String metaFlag = Nemo.getInstance().getConfig().getDefaultFlag();
         if (key.equals(Intern.DATETIME))
         {
             key = Intern.S_DATE;
