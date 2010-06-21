@@ -13,7 +13,6 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 
 import fr.ifremer.nemo.Nemo;
@@ -37,7 +36,8 @@ public class SaveAction extends Action implements ISelectionListener,
 
     public static File fichierSortieXML;
 
-    public SaveAction(IWorkbenchWindow window){
+    public SaveAction(IWorkbenchWindow window)
+    {
         this.window = window;
         setId(ID);
         setText(Messages.SaveAction_1);
@@ -45,74 +45,92 @@ public class SaveAction extends Action implements ISelectionListener,
 
     }
 
-    public void dispose(){
+    public void dispose()
+    {
         window.getSelectionService().addSelectionListener(this);
 
     }
 
     @Override
-    public void run(){
+    public void run()
+    {
         // sauvegarde du modele
         FileOutputStream fileOutputStream = null;
 
-        if (!ViewMain.editDataForm.validee){
+        if (!ViewMain.editDataForm.validee)
+        {
             Utils.messageErreur(Messages.SaveAction_3);
         }
-        else{
+        else
+        {
             if (ViewMain.editFileForm.okApresReset
                     && ViewMain.editCruiseForm.okApresReset
                     && ViewMain.editStationForm.okApresReset
-                    && ViewMain.editDataForm.okApresReset){
+                    && ViewMain.editDataForm.okApresReset)
+            {
                 choixFichierSortie();
-                try{
+                try
+                {
                     fileOutputStream = new FileOutputStream(fichierSortieXML);
                 }
-                catch (FileNotFoundException e){
+                catch (FileNotFoundException e)
+                {
                     //
                     e.printStackTrace();
                 }
                 Nemo.getInstance().saveModel(fileOutputStream);
-                
+
                 Nemo.getInstance().setNomModele(fichierSortieXML.getName());
 
                 Nemo.refreshNomNemo();
-                
+
                 Utils.messageOK(Messages.SaveAction_4);
             }
-            else{
+            else
+            {
                 Utils.messageErreur(Messages.SaveAction_3);
             }
         }
     }
 
-    public static void choixFichierSortie(){
-        Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
-        
-        FileDialog dialog = new FileDialog(shell, SWT.SAVE | SWT.APPLICATION_MODAL);
+    public static void choixFichierSortie()
+    {
+        Shell shell = Utils.getMainShell();
+
+        FileDialog dialog =
+            new FileDialog(shell, SWT.SAVE | SWT.APPLICATION_MODAL);
         dialog.setText(Messages.SaveAction_5);
-        dialog.setFilterPath(Nemo.getInstance().getConfig().getModelsDirectory() + File.separator);
+        dialog.setFilterPath(Nemo.getInstance().getConfig()
+            .getModelsDirectory()
+                + File.separator);
         String extensions[] = new String[1];
         extensions[0] = Global.STAR + Global.EXT_XML;
         dialog.setFilterExtensions(extensions);
 
         nomFichierSortieXML = dialog.open();
 
-        if (nomFichierSortieXML != null){
+        if (nomFichierSortieXML != null)
+        {
             fichierSortieXML = new File(nomFichierSortieXML);
-            if (fichierSortieXML.exists()){
-                Shell shell2 = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+            if (fichierSortieXML.exists())
+            {
+                Shell shell2 = Utils.getMainShell();
 
-                MessageBox mb = new MessageBox(shell2, SWT.ICON_WARNING | SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
+                MessageBox mb =
+                    new MessageBox(shell2, SWT.ICON_WARNING | SWT.YES | SWT.NO
+                            | SWT.APPLICATION_MODAL);
                 mb.setMessage(Messages.SaveAction_6);
 
                 int reponse = mb.open();
-                if (reponse == SWT.NO){
+                if (reponse == SWT.NO)
+                {
                     choixFichierSortie();
                 }
             }
         }
     }
 
-    public void selectionChanged(IWorkbenchPart part, ISelection incoming){
+    public void selectionChanged(IWorkbenchPart part, ISelection incoming)
+    {
     }
 }

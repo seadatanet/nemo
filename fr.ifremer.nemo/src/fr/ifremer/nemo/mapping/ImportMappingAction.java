@@ -22,10 +22,10 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.ActionFactory;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -63,10 +63,11 @@ public class ImportMappingAction extends Action implements ISelectionListener,
     public void run()
     {
 
-        Shell shell = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+        Shell shell = Utils.getMainShell();
         FileDialog dialog =
             new FileDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
-        dialog.setFilterPath(Nemo.getInstance().getConfig().getModelsDirectory()
+        dialog.setFilterPath(Nemo.getInstance().getConfig()
+            .getModelsDirectory()
                 + File.separator);
         dialog.setText(Messages.ImportMappingAction_5);
         String extensions[] = new String[1];

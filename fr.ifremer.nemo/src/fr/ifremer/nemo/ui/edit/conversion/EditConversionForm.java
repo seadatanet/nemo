@@ -15,7 +15,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ListDialog;
 
 import fr.ifremer.nemo.Nemo;
@@ -40,10 +39,10 @@ public class EditConversionForm extends EditForm
 {
     public Button buttonConversion;
 
-    //public String nomFichierSortie, nomDossierSortie;
+    // public String nomFichierSortie, nomDossierSortie;
     public ProgressNotification notifier;
 
-    //private String _dataSetRef;
+    // private String _dataSetRef;
 
     /**
      * Nom du fichier lu à retourner en cas d'erreur
@@ -79,18 +78,17 @@ public class EditConversionForm extends EditForm
     private String warningStation = Global.EMPTY_STRING;
     private String warningData = Global.EMPTY_STRING;
 
-
     /*
      * Methodes de création de l'onglet (héritées de EditForm)
      */
-    
+
     @Override
     public void createEditionForm(Composite parent)
     {
         super.createEditionForm(parent);
-        
-        //nomFichierSortie = Global.EMPTY_STRING;
-        //nomDossierSortie = Global.EMPTY_STRING;
+
+        // nomFichierSortie = Global.EMPTY_STRING;
+        // nomDossierSortie = Global.EMPTY_STRING;
 
         formEdition.getBody().setLayout(new GridLayout());
         formEdition.setText(Messages.edit_convert_title);
@@ -105,66 +103,82 @@ public class EditConversionForm extends EditForm
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
-                    try{
+                    try
+                    {
                         // Test si la config est bien remplie
-                        if (!checkConfig()){
+                        if (!checkConfig())
+                        {
                             throw new Exception("CDI cancelled"); //$NON-NLS-1$
                         }
 
                         // RaZ
-                        Nemo.getInstance().getDomain().getCruise().setDataSetRef(Global.EMPTY_STRING);
+                        Nemo.getInstance().getDomain().getCruise()
+                            .setDataSetRef(Global.EMPTY_STRING);
                         Nemo.getInstance().getDomain().getMedia().initOutput();
-                        Nemo.getInstance().getDomain().getConversion().setNomMappingHorsPrefix(Global.EMPTY_STRING);
+                        Nemo.getInstance().getDomain().getConversion()
+                            .setNomMappingHorsPrefix(Global.EMPTY_STRING);
                         Utils.messageErreur(Global.EMPTY_STRING);
                         // -- du numéro de station incrémenté
-                        //DataModel.stationModel.resetRef();
+                        // DataModel.stationModel.resetRef();
                         // -- de la liste des stations triées
-                        //getSortedStations().clear();
+                        // getSortedStations().clear();
 
                         // *** Ajouts automatiques de certains paramètres
-                        //DataModel.stationModel.setAddedParameterModel();
+                        // DataModel.stationModel.setAddedParameterModel();
 
                         // type de la conversion
-                        E_TypeConversion currentConversion = ViewMain.getSelectedConversion();
-                        Nemo.getInstance().getDomain().getConversion().setCurrentConversion(currentConversion);
-                        Nemo.getInstance().getDomain().getConversion().setSortData(ViewMain.chkForcerTri.getSelection());
-                        
-                        //Conversion formatConversion = Conversion.MEDATLAS;
-                        //if (ViewMain.radODV.getSelection()){
-                        //    formatConversion = Conversion.ODV;
-                        //}
-                        //NemoLists.writeSdnParameters(formatConversion);
+                        E_TypeConversion currentConversion =
+                            ViewMain.getSelectedConversion();
+                        Nemo.getInstance().getDomain().getConversion()
+                            .setCurrentConversion(currentConversion);
+                        Nemo.getInstance().getDomain().getConversion()
+                            .setSortData(ViewMain.chkForcerTri.getSelection());
+
+                        // Conversion formatConversion = Conversion.MEDATLAS;
+                        // if (ViewMain.radODV.getSelection()){
+                        // formatConversion = Conversion.ODV;
+                        // }
+                        // NemoLists.writeSdnParameters(formatConversion);
 
                         if (ViewMain.editFileForm.okApresReset
                                 && ViewMain.editCruiseForm.okApresReset
                                 && ViewMain.editStationForm.okApresReset
-                                && ViewMain.editDataForm.okApresReset){
+                                && ViewMain.editDataForm.okApresReset)
+                        {
 
                             if ((currentConversion != E_TypeConversion.MEDALAS)
-                                    && (!ViewMain.collectionCas1)){
-                                if (!askDataSetRef()){
+                                    && (!ViewMain.collectionCas1))
+                            {
+                                if (!askDataSetRef())
+                                {
                                     throw new Exception("Cancelled"); //$NON-NLS-1$
                                 }
                             }
 
                             // On demande les infos pour faire le résumé CDI,
                             // qui sera fait plus tard
-                            if (Nemo.getInstance().getConfig().isWriteCdi()){
+                            if (Nemo.getInstance().getConfig().isWriteCdi())
+                            {
                                 CDIResumeWriter.getInstance().reset();
-                                CDIResumeWriter.getInstance().choixFichierSortie();
+                                CDIResumeWriter.getInstance()
+                                    .choixFichierSortie();
                             }
 
                             boolean okChoixSortie;
                             // test pour savoir si on est en campagne ou pas
-                            if (ViewMain.isCollection()){
+                            if (ViewMain.isCollection())
+                            {
                                 DataType dt = askDataType();
-                                Nemo.getInstance().getDomain().getCruise().getStation().getModel().setDataType(dt);
+                                Nemo.getInstance().getDomain().getCruise()
+                                    .getStation().getModel().setDataType(dt);
                                 okChoixSortie = choixDossierSortie();
                             }
-                            else if (currentConversion == E_TypeConversion.ODV_MONOSTATION){
+                            else if (currentConversion == E_TypeConversion.ODV_MONOSTATION)
+                            {
                                 okChoixSortie = choixDossierSortie();
                             }
-                            else{
+                            else
+                            {
                                 okChoixSortie = choixFichierSortie();
                             }
 
@@ -176,19 +190,24 @@ public class EditConversionForm extends EditForm
                                 afficheResultat(runSWTProgress());
                             }
                         }
-                        else {
-                            Utils.messageErreur(Messages.error_convert_invalideSteps);
+                        else
+                        {
+                            Utils
+                                .messageErreur(Messages.error_convert_invalideSteps);
                         }
                     }
-                    catch (Exception ex){
+                    catch (Exception ex)
+                    {
+                        ex.printStackTrace();
                         Utils.messageErreur(Messages.error_convert_cancel);
                     }
                 }
             });
     }
-    
+
     @Override
-    protected void initSections(){
+    protected void initSections()
+    {
         // pas de section dans cet onglet
     }
 
@@ -196,9 +215,9 @@ public class EditConversionForm extends EditForm
     public void afficheEdition()
     {
         super.afficheEdition();
-        
+
         ViewLog.aideConversion();
-        
+
         // FAE 1143 : déactivation MEDATLAS
         StringBuffer msg = new StringBuffer();
         msg.append(Global.RN);
@@ -229,23 +248,26 @@ public class EditConversionForm extends EditForm
     @Override
     public void drawingBack()
     {
-       
+
         super.drawingBack();
-        
+
         ViewLog.aideConversion();
         ViewMain.affiche = 4;
     }
-    
+
     @Override
-    public void actualiseEdition(){
+    public void actualiseEdition()
+    {
         // pas d'actualisation nécessaire pour cet onglet
     }
-    
+
     @Override
-    public void razText(){
+    public void razText()
+    {
         // on rend sélectionnables les radios ODV et Medatlas dans
         // l'onglet Conversion
-        if (ViewMain.radMonoFichier != null){
+        if (ViewMain.radMonoFichier != null)
+        {
             ViewMain.radMedatlas.setEnabled(true);
             ViewMain.radMedatlas.setSelection(true);
             ViewMain.radODV.setEnabled(true);
@@ -269,18 +291,18 @@ public class EditConversionForm extends EditForm
     {
         super.invalidEtape(4);
     }
-    
 
     /*
      * Méthodes de traitement du lancement de la conversion
      */
-    
+
     public boolean choixFichierSortie()
     {
         String nomFichierSortie = Global.EMPTY_STRING;
 
-        FileDialog dialog = new FileDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), 
-                                           SWT.SAVE | SWT.APPLICATION_MODAL);
+        FileDialog dialog =
+            new FileDialog(Utils.getMainShell(), SWT.SAVE
+                    | SWT.APPLICATION_MODAL);
         dialog.setText(Messages.edit_convert_outputFilename);
 
         // FAE090
@@ -289,29 +311,31 @@ public class EditConversionForm extends EditForm
             String[] extensions = new String[1];
             extensions[0] = Global.STAR + Global.EXT_TXT;
             dialog.setFilterExtensions(extensions);
-/*
-            Survey survey = null;
-            if (DataModel.singleSurvey != null){
-                survey = DataModel.singleSurvey.getModel();
-            }
-            else if (DataModel.dirSurvey != null){
-                survey = DataModel.dirSurvey.getModel();
-            }
-            
+            /*
+                        Survey survey = null;
+                        if (DataModel.singleSurvey != null){
+                            survey = DataModel.singleSurvey.getModel();
+                        }
+                        else if (DataModel.dirSurvey != null){
+                            survey = DataModel.dirSurvey.getModel();
+                        }
+                        
 
-            if (survey != null){
-                String fileName = survey.getReference().trim();
-                if (fileName.equals(Global.EMPTY_STRING)){
-                    fileName = survey.getName().trim();
-                }
-                fileName = Utils.validFileName(fileName);
-                dialog.setFileName(fileName);
-            }
-*/
-            
-            CruiseModel cruiseModel = Nemo.getInstance().getDomain().getCruise().getModel();
+                        if (survey != null){
+                            String fileName = survey.getReference().trim();
+                            if (fileName.equals(Global.EMPTY_STRING)){
+                                fileName = survey.getName().trim();
+                            }
+                            fileName = Utils.validFileName(fileName);
+                            dialog.setFileName(fileName);
+                        }
+            */
+
+            CruiseModel cruiseModel =
+                Nemo.getInstance().getDomain().getCruise().getModel();
             String fileName = cruiseModel.getReference().trim();
-            if (fileName.equals(Global.EMPTY_STRING)){
+            if (fileName.equals(Global.EMPTY_STRING))
+            {
                 fileName = cruiseModel.getName().trim();
             }
             fileName = Utils.validFileName(fileName);
@@ -319,35 +343,45 @@ public class EditConversionForm extends EditForm
         }
 
         // FAE45
-        if (ViewMain.radioFichier.getSelection()){
+        if (ViewMain.radioFichier.getSelection())
+        {
             dialog.setFilterPath(ViewMain.nomFichier);
         }
-        else{
+        else
+        {
             dialog.setFilterPath(ViewMain.nomRepertoire.substring(0,
                 ViewMain.nomRepertoire.lastIndexOf(File.separator)));
         }
 
         nomFichierSortie = dialog.open();
 
-        if (nomFichierSortie != null){
-            String nomDossierSortie = Utils.extraitCheminFichier(nomFichierSortie);
+        if (nomFichierSortie != null)
+        {
+            String nomDossierSortie =
+                Utils.extraitCheminFichier(nomFichierSortie);
 
             // Teste si le repertoire de sortie est different du repertoire
             // d'entree
-            if (ViewMain.radioFichier.getSelection()){
-                if (nomFichierSortie.equals(ViewMain.nomFichier)){
-                    MessageBox mb = new MessageBox(PlatformUI.getWorkbench().getDisplay().getActiveShell(), 
-                                                   SWT.ICON_ERROR | SWT.OK | SWT.APPLICATION_MODAL);
+            if (ViewMain.radioFichier.getSelection())
+            {
+                if (nomFichierSortie.equals(ViewMain.nomFichier))
+                {
+                    MessageBox mb =
+                        new MessageBox(Utils.getMainShell(), SWT.ICON_ERROR
+                                | SWT.OK | SWT.APPLICATION_MODAL);
                     mb.setMessage(Messages.error_convert_outputFile);
                     mb.open();
 
                     choixFichierSortie();
                 }
             }
-            else{
-                if (nomDossierSortie.equals(ViewMain.nomRepertoire)){
-                    MessageBox mb =  new MessageBox(PlatformUI.getWorkbench().getDisplay().getActiveShell(), 
-                                                    SWT.ICON_ERROR | SWT.OK | SWT.APPLICATION_MODAL);
+            else
+            {
+                if (nomDossierSortie.equals(ViewMain.nomRepertoire))
+                {
+                    MessageBox mb =
+                        new MessageBox(Utils.getMainShell(), SWT.ICON_ERROR
+                                | SWT.OK | SWT.APPLICATION_MODAL);
                     mb.setMessage(Messages.error_convert_outputDir);
                     mb.open();
 
@@ -356,19 +390,23 @@ public class EditConversionForm extends EditForm
             }
 
             File fich = new File(nomFichierSortie);
-            if (fich.exists()){
+            if (fich.exists())
+            {
                 // fichier existe
-                MessageBox mb = new MessageBox(PlatformUI.getWorkbench().getDisplay().getActiveShell(),
-                                               SWT.ICON_WARNING | SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
+                MessageBox mb =
+                    new MessageBox(Utils.getMainShell(), SWT.ICON_WARNING
+                            | SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
                 mb.setMessage(Messages.confirm_eraseFile);
 
                 int reponse = mb.open();
-                if (reponse == SWT.NO){
+                if (reponse == SWT.NO)
+                {
                     // on n'écrase pas le fichier
                     choixFichierSortie();
                 }
             }
-            Nemo.getInstance().getDomain().getMedia().setOutputFileName(nomFichierSortie);
+            Nemo.getInstance().getDomain().getMedia().setOutputFileName(
+                nomFichierSortie);
         }
         else
         {
@@ -379,30 +417,36 @@ public class EditConversionForm extends EditForm
 
     public boolean choixDossierSortie()
     {
-        //String nomFichierSortie = Global.EMPTY_STRING;
+        // String nomFichierSortie = Global.EMPTY_STRING;
         String nomDossierSortie = Global.EMPTY_STRING;
-        
-        DirectoryDialog dialog = new DirectoryDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell(), 
-                                                     SWT.SAVE | SWT.APPLICATION_MODAL);
+
+        DirectoryDialog dialog =
+            new DirectoryDialog(Utils.getMainShell(), SWT.SAVE
+                    | SWT.APPLICATION_MODAL);
         dialog.setText(Messages.edit_convert_outputDir);
 
-        if (ViewMain.radioFichier.getSelection()){
+        if (ViewMain.radioFichier.getSelection())
+        {
             dialog.setFilterPath(ViewMain.nomRepertoire);
         }
-        else {
+        else
+        {
             dialog.setFilterPath(ViewMain.nomRepertoire.substring(0,
                 ViewMain.nomRepertoire.lastIndexOf(File.separator)));
         }
 
         nomDossierSortie = dialog.open();
 
-        if (nomDossierSortie != null) {
+        if (nomDossierSortie != null)
+        {
             // Teste si le répertoire de sortie est différent du répertoire
             // d'entrée
             if (!ViewMain.radioFichier.getSelection()
-                    && nomDossierSortie.equals(ViewMain.nomRepertoire)) {
-                MessageBox mb =  new MessageBox(PlatformUI.getWorkbench().getDisplay().getActiveShell(), 
-                                                SWT.ICON_ERROR | SWT.OK | SWT.APPLICATION_MODAL);
+                    && nomDossierSortie.equals(ViewMain.nomRepertoire))
+            {
+                MessageBox mb =
+                    new MessageBox(Utils.getMainShell(), SWT.ICON_ERROR
+                            | SWT.OK | SWT.APPLICATION_MODAL);
                 mb.setMessage(Messages.error_convert_outputDir);
                 mb.open();
 
@@ -410,36 +454,42 @@ public class EditConversionForm extends EditForm
             }
 
             File dir = new File(nomDossierSortie);
-            if (dir.exists() && dir.listFiles().length != 0) {
+            if (dir.exists() && dir.listFiles().length != 0)
+            {
                 // fichier existe
-                MessageBox mb = new MessageBox(PlatformUI.getWorkbench().getDisplay().getActiveShell(), 
-                                               SWT.ICON_WARNING | SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
+                MessageBox mb =
+                    new MessageBox(Utils.getMainShell(), SWT.ICON_WARNING
+                            | SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
                 mb.setMessage(Messages.confirm_useDir);
 
                 int reponse = mb.open();
-                if (reponse == SWT.NO) {
+                if (reponse == SWT.NO)
+                {
                     // on n'écrase pas le fichier
                     choixDossierSortie();
                 }
             }
-            Nemo.getInstance().getDomain().getMedia().setOutputFileName(nomDossierSortie);
+            Nemo.getInstance().getDomain().getMedia().setOutputFileName(
+                nomDossierSortie);
         }
         else
         {
             return false;
         }
-        
+
         return true;
     }
 
     public boolean runSWTProgress()
     {
         Utils.messageErreur(Global.EMPTY_STRING);
-        try {
+        try
+        {
             new SWTProgress().run();
             return true;
         }
-        catch (Exception e) {
+        catch (Exception e)
+        {
             Utils.messageErreur(e.getMessage());
             return false;
         }
@@ -447,15 +497,19 @@ public class EditConversionForm extends EditForm
 
     public void afficheResultat(boolean resultOK)
     {
-        if (resultOK) {
-            if (ViewMain.radODV.getSelection()) {
+        if (resultOK)
+        {
+            if (ViewMain.radODV.getSelection())
+            {
                 Utils.messageOK(Messages.edit_convert_endODV);
             }
-            else {
+            else
+            {
                 Utils.messageOK(Messages.edit_convert_endMED);
             }
         }
-        else {
+        else
+        {
             Utils.messageErreurAppend(messageErreur());
         }
 
@@ -519,15 +573,20 @@ public class EditConversionForm extends EditForm
     {
         String message = Global.EMPTY_STRING;
 
-        if (getErreurFichier() != null)  {
-            if (!getErreurFichier().trim().equals(Global.EMPTY_STRING)) {
+        if (getErreurFichier() != null)
+        {
+            if (!getErreurFichier().trim().equals(Global.EMPTY_STRING))
+            {
                 message += Messages.label_file + "\t : \t" //$NON-NLS-1$
                         + getErreurFichier() + Global.RN;
             }
         }
 
-        if (getErreurLigne() != 0) {
-            if (getErreurLigne() <= Nemo.getInstance().getDomain().getMedia().getStationHeaderNumberLines()) {
+        if (getErreurLigne() != 0)
+        {
+            if (getErreurLigne() <= Nemo.getInstance().getDomain().getMedia()
+                .getStationHeaderNumberLines())
+            {
                 // Si l'erreur se trouve dans l'en-tête de station, la ligne
                 // indiquée
                 // n'est pas forcément la bonne, il vaut mieux ne pas l'indiquer
@@ -537,14 +596,17 @@ public class EditConversionForm extends EditForm
                     + getErreurLigne() + Global.RN;
         }
 
-        if (getErreurChaine() != null) {
-            if (!getErreurChaine().trim().equals(Global.EMPTY_STRING)) {
+        if (getErreurChaine() != null)
+        {
+            if (!getErreurChaine().trim().equals(Global.EMPTY_STRING))
+            {
                 message += Messages.label_string + "\t : \t" //$NON-NLS-1$
                         + getErreurChaine();
             }
         }
 
-        if (!message.equals(Global.EMPTY_STRING)) {
+        if (!message.equals(Global.EMPTY_STRING))
+        {
             message =
                 Global.RN + Messages.error_convert_position + Global.RN
                         + message;
@@ -566,12 +628,13 @@ public class EditConversionForm extends EditForm
     {
         boolean asDataSetRef = false;
         CruiseDomain cruiseDomain = Nemo.getInstance().getDomain().getCruise();
-        if (cruiseDomain.getDataSetRef().equals(Global.EMPTY_STRING)) {
+        if (cruiseDomain.getDataSetRef().equals(Global.EMPTY_STRING))
+        {
             String strDefault = Global.EMPTY_STRING;
             strDefault = cruiseDomain.getModel().getReference();
             if (strDefault.equals(Global.EMPTY_STRING))
                 strDefault = cruiseDomain.getModel().getName();
-            
+
             /*
             if (DataModel.dirSurvey != null) {
                 strDefault = DataModel.dirSurvey.getModel().getReference();
@@ -585,62 +648,70 @@ public class EditConversionForm extends EditForm
             }
             */
             InputDialog inputDataSetRef =
-                new InputDialog(PlatformUI.getWorkbench().getDisplay()
-                    .getActiveShell(), Messages.CDIResumeWriter_idTitle,
+                new InputDialog(Utils.getMainShell(),
+                    Messages.CDIResumeWriter_idTitle,
                     Messages.CDIResumeWriter_idMessage, strDefault, null);
             inputDataSetRef.open();
 
-            if (inputDataSetRef.getReturnCode() == Window.OK) {
+            if (inputDataSetRef.getReturnCode() == Window.OK)
+            {
                 cruiseDomain.setDataSetRef(inputDataSetRef.getValue());
                 asDataSetRef = true;
-                //_dataSetRef = inputDataSetRef.getValue();
-                //return true;
+                // _dataSetRef = inputDataSetRef.getValue();
+                // return true;
             }
-            else {
+            else
+            {
                 cruiseDomain.setDataSetRef(Global.EMPTY_STRING);
                 asDataSetRef = false;
-                //_dataSetRef = Global.EMPTY_STRING;
-                //return false;
+                // _dataSetRef = Global.EMPTY_STRING;
+                // return false;
             }
         }
-        else{
+        else
+        {
             asDataSetRef = true;
-            //return true;
+            // return true;
         }
         return asDataSetRef;
     }
 
     public void definePrefixDossier()
     {
-        if (Nemo.getInstance().getConfig().isWriteMapping()) {
-            File output = new File(Nemo.getInstance().getDomain().getMedia().getOutputFileName());
+        if (Nemo.getInstance().getConfig().isWriteMapping())
+        {
+            File output =
+                new File(Nemo.getInstance().getDomain().getMedia()
+                    .getOutputFileName());
             String cheminComplet = output.getParentFile().getPath();
-            
-            //Boolean modeDossier = false;
 
-            //if (nomFichierSortie.isEmpty()) {
-            //    cheminComplet = nomDossierSortie;
-            //    modeDossier = true;
-            //}
-            //else {
-            //    cheminComplet = nomFichierSortie;
-            //}
+            // Boolean modeDossier = false;
+
+            // if (nomFichierSortie.isEmpty()) {
+            // cheminComplet = nomDossierSortie;
+            // modeDossier = true;
+            // }
+            // else {
+            // cheminComplet = nomFichierSortie;
+            // }
 
             InputDialog inputPrefixDossier =
-                new InputDialog(PlatformUI.getWorkbench().getDisplay()
-                    .getActiveShell(), Messages.InputPrefixDossier_idTitle,
-                    Messages.InputPrefixDossier_idMessage, cheminComplet,
-                    null);
+                new InputDialog(Utils.getMainShell(),
+                    Messages.InputPrefixDossier_idTitle,
+                    Messages.InputPrefixDossier_idMessage, cheminComplet, null);
             inputPrefixDossier.open();
             String nomHorsPrefix = Global.EMPTY_STRING;
-            if (inputPrefixDossier.getReturnCode() == Window.OK) {
+            if (inputPrefixDossier.getReturnCode() == Window.OK)
+            {
                 if (inputPrefixDossier.getValue().endsWith(File.separator)
-                        || inputPrefixDossier.getValue().equals(cheminComplet)) {
+                        || inputPrefixDossier.getValue().equals(cheminComplet))
+                {
                     nomHorsPrefix =
                         cheminComplet.replace(inputPrefixDossier.getValue(),
                             Global.EMPTY_STRING);
                 }
-                else {
+                else
+                {
                     nomHorsPrefix =
                         cheminComplet.replace(inputPrefixDossier.getValue()
                                 + File.separator, Global.EMPTY_STRING);
@@ -649,16 +720,18 @@ public class EditConversionForm extends EditForm
 
             // On affiche la boite de dialogue tant que l'utilisateur saisie une
             // donnée incorrecte
-            if (!cheminComplet.endsWith(nomHorsPrefix)) {
+            if (!cheminComplet.endsWith(nomHorsPrefix))
+            {
                 definePrefixDossier();
             }
-            Nemo.getInstance().getDomain().getConversion().setNomMappingHorsPrefix(nomHorsPrefix);
+            Nemo.getInstance().getDomain().getConversion()
+                .setNomMappingHorsPrefix(nomHorsPrefix);
         }
     }
 
     public DataType askDataType()
     {
-        ListDialog ld = new ListDialog(PlatformUI.getWorkbench().getDisplay().getActiveShell());
+        ListDialog ld = new ListDialog(Utils.getMainShell());
         ld.setAddCancelButton(true);
         ld.setContentProvider(new ArrayContentProvider());
         ld.setLabelProvider(new LabelProvider());
@@ -679,49 +752,67 @@ public class EditConversionForm extends EditForm
         String message = Messages.CDIResumeWriter_configMessage;
 
         if (Nemo.getInstance().getConfig().getIdEdmoRespCdi().trim().equals(
-            Global.EMPTY_STRING)) {
+            Global.EMPTY_STRING))
+        {
             message += Global.RN + Global.SEP + Messages.settings_EDMOauthor;
             blnOK = false;
         }
 
-        if (Nemo.getInstance().getConfig().isWriteCdi()) {
-            if (Nemo.getInstance().getConfig().getCodeEdmoDonnees().trim().equals(Global.EMPTY_STRING)) {
+        if (Nemo.getInstance().getConfig().isWriteCdi())
+        {
+            if (Nemo.getInstance().getConfig().getCodeEdmoDonnees().trim()
+                .equals(Global.EMPTY_STRING))
+            {
                 message += Global.RN + Global.SEP + Messages.settings_EDMOori;
                 blnOK = false;
             }
 
-            if (Nemo.getInstance().getConfig().getIdEdmoRespDonnees().trim().equals(Global.EMPTY_STRING)) {
-                message += Global.RN + Global.SEP + Messages.settings_EDMOcustodian;
+            if (Nemo.getInstance().getConfig().getIdEdmoRespDonnees().trim()
+                .equals(Global.EMPTY_STRING))
+            {
+                message +=
+                    Global.RN + Global.SEP + Messages.settings_EDMOcustodian;
                 blnOK = false;
             }
 
-            if (Nemo.getInstance().getConfig().getIdEdmoDistDonnees().trim().equals(Global.EMPTY_STRING)) {
+            if (Nemo.getInstance().getConfig().getIdEdmoDistDonnees().trim()
+                .equals(Global.EMPTY_STRING))
+            {
                 message += Global.RN + Global.SEP + Messages.settings_EDMOdist;
                 blnOK = false;
             }
 
-            if (Nemo.getInstance().getConfig().getCdiURL().trim().equals(Global.EMPTY_STRING)) {
-                message +=  Global.RN + Global.SEP + Messages.settings_dataDist_web;
+            if (Nemo.getInstance().getConfig().getCdiURL().trim().equals(
+                Global.EMPTY_STRING))
+            {
+                message +=
+                    Global.RN + Global.SEP + Messages.settings_dataDist_web;
                 blnOK = false;
             }
 
-            if (Nemo.getInstance().getConfig().getCdiMethod().trim().equals(Global.EMPTY_STRING)) {
-                message +=  Global.RN + Global.SEP + Messages.settings_dataDist_met;
+            if (Nemo.getInstance().getConfig().getCdiMethod().trim().equals(
+                Global.EMPTY_STRING))
+            {
+                message +=
+                    Global.RN + Global.SEP + Messages.settings_dataDist_met;
                 blnOK = false;
             }
         }
 
-        if (!blnOK) {
-            try {
+        if (!blnOK)
+        {
+            try
+            {
                 String[] buttons = new String[1];
                 buttons[0] = Messages.success;
                 MessageDialog dialog =
-                    new MessageDialog(PlatformUI.getWorkbench().getDisplay()
-                        .getActiveShell(), Messages.error_missing, null,
-                        message, MessageDialog.NONE, buttons, 0);
+                    new MessageDialog(Utils.getMainShell(),
+                        Messages.error_missing, null, message,
+                        MessageDialog.NONE, buttons, 0);
                 dialog.open();
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 e.printStackTrace();
             }
 

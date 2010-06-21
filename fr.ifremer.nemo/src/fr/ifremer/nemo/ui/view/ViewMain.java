@@ -34,13 +34,11 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.part.ViewPart;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.input.MediaModel;
 import fr.ifremer.nemo.ui.Application;
 import fr.ifremer.nemo.ui.ApplicationWorkbenchWindowAdvisor;
 import fr.ifremer.nemo.ui.FiltrageTableType;
@@ -157,7 +155,7 @@ public class ViewMain extends ViewPart
 
                     if (isCollection() && tmp > 0)
                         tmp++;
-                    
+
                     Utils.validationEtape(tmp);
                 }
             });
@@ -262,7 +260,7 @@ public class ViewMain extends ViewPart
         radioFichier = new Button(col1, SWT.RADIO);
         radioFichier.setSelection(true);
         radioFichier.setText(Messages.view_file_cruiseFile);
-        
+
         radioFichier.addSelectionListener(new SelectionListener() {
 
             public void widgetDefaultSelected(SelectionEvent e)
@@ -277,7 +275,7 @@ public class ViewMain extends ViewPart
             }
 
         });
-        
+
         addRadFileListener(radioFichier);
 
         radioDossier = new Button(col1, SWT.RADIO);
@@ -362,7 +360,7 @@ public class ViewMain extends ViewPart
                 @Override
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
-                {                                      
+                {
 
                     // reinitialisation de la conversion et de l'affichage
                     init();
@@ -374,9 +372,7 @@ public class ViewMain extends ViewPart
                         // reactivation de l'onglet campagne
                         enableCruise(true);
 
-                        Shell shell =
-                            PlatformUI.getWorkbench().getDisplay()
-                                .getActiveShell();
+                        Shell shell = Utils.getMainShell();
 
                         FileDialog dialog =
                             new FileDialog(shell, SWT.OPEN
@@ -402,7 +398,7 @@ public class ViewMain extends ViewPart
 
                                 // affichage etape0 dans formulaire d'edition
                                 ViewMain.editFileForm.afficheEdition();
-                               
+
                             }
                             catch (IOException e1)
                             {
@@ -426,9 +422,7 @@ public class ViewMain extends ViewPart
                         // reactivation de l'onglet campagne
                         enableCruise(true);
 
-                        Shell shell =
-                            PlatformUI.getWorkbench().getDisplay()
-                                .getActiveShell();
+                        Shell shell = Utils.getMainShell();
 
                         DirectoryDialog dialog =
                             new DirectoryDialog(shell, SWT.OPEN
@@ -465,9 +459,7 @@ public class ViewMain extends ViewPart
                         // desactivation de l'onglet campagne
                         enableCruise(false);
 
-                        Shell shell =
-                            PlatformUI.getWorkbench().getDisplay()
-                                .getActiveShell();
+                        Shell shell = Utils.getMainShell();
 
                         DirectoryDialog dialog =
                             new DirectoryDialog(shell, SWT.OPEN
@@ -508,9 +500,7 @@ public class ViewMain extends ViewPart
                         // desactivation de l'onglet campagne
                         enableCruise(false);
 
-                        Shell shell =
-                            PlatformUI.getWorkbench().getDisplay()
-                                .getActiveShell();
+                        Shell shell = Utils.getMainShell();
 
                         DirectoryDialog dialog =
                             new DirectoryDialog(shell, SWT.OPEN
@@ -535,7 +525,7 @@ public class ViewMain extends ViewPart
                                 // generer que le format ODV
                                 enableCollectionMedatlas(false);
                                 radMonoFichier.setEnabled(false); // FAE
-                                                                    // 0001134
+                                // 0001134
                             }
                         }
                         else
@@ -543,9 +533,9 @@ public class ViewMain extends ViewPart
                             ViewLog.styledTextLogErreurs
                                 .setText(Messages.error_file_selectDir);
                         }
-                    }                    
+                    }
                 }
-                
+
             });
     }
 
@@ -866,7 +856,7 @@ public class ViewMain extends ViewPart
                 Composite contentCruise = new Composite(tabFolder, SWT.NONE);
                 createContentCruise(contentCruise);
 
-                tabCruise = new TabItem(tabFolder, SWT.NONE,1);
+                tabCruise = new TabItem(tabFolder, SWT.NONE, 1);
                 tabCruise.setText(Messages.onglet_cruise);
                 tabCruise.setControl(contentCruise);
             }

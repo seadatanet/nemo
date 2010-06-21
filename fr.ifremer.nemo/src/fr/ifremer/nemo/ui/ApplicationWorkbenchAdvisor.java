@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.application.IWorkbenchConfigurer;
 import org.eclipse.ui.application.IWorkbenchWindowConfigurer;
 import org.eclipse.ui.application.WorkbenchAdvisor;
@@ -37,47 +36,56 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor
     }
 
     @Override
-    public boolean preShutdown(){
+    public boolean preShutdown()
+    {
 
         FileOutputStream fileOutputStream = null;
         int reponse = 0;
 
-        MessageBox mb = new MessageBox(PlatformUI.getWorkbench().getDisplay().getActiveShell(), 
-                                       SWT.ICON_QUESTION | 
-                                       SWT.YES | SWT.NO | 
-                                       SWT.APPLICATION_MODAL);
+        MessageBox mb =
+            new MessageBox(Utils.getMainShell(), SWT.ICON_QUESTION | SWT.YES
+                    | SWT.NO | SWT.APPLICATION_MODAL);
         mb.setMessage(Messages.confirm_quit);
         reponse = mb.open();
 
-        if (reponse == SWT.YES){
+        if (reponse == SWT.YES)
+        {
             // demande pour sauver le modele
-            if (ViewMain.editDataForm.validee){
+            if (ViewMain.editDataForm.validee)
+            {
                 if (ViewMain.editFileForm.okApresReset
                         && ViewMain.editCruiseForm.okApresReset
                         && ViewMain.editStationForm.okApresReset
-                        && ViewMain.editDataForm.okApresReset){
+                        && ViewMain.editDataForm.okApresReset)
+                {
 
-                    Shell shell2 = PlatformUI.getWorkbench().getDisplay().getActiveShell();
+                    Shell shell2 = Utils.getMainShell();
 
-                    MessageBox mbox = new MessageBox(shell2, 
-                                                     SWT.ICON_WARNING | 
-                                                     SWT.YES | SWT.NO | 
-                                                     SWT.APPLICATION_MODAL);
+                    MessageBox mbox =
+                        new MessageBox(shell2, SWT.ICON_WARNING | SWT.YES
+                                | SWT.NO | SWT.APPLICATION_MODAL);
                     mbox.setMessage(Messages.confirm_saveModel);
                     int reponse_mbox = mbox.open();
-                    if (reponse_mbox == SWT.YES){
+                    if (reponse_mbox == SWT.YES)
+                    {
                         SaveAction.choixFichierSortie();
 
-                        if (SaveAction.fichierSortieXML != null) {
-                            try{
-                                fileOutputStream = new FileOutputStream(SaveAction.fichierSortieXML);
+                        if (SaveAction.fichierSortieXML != null)
+                        {
+                            try
+                            {
+                                fileOutputStream =
+                                    new FileOutputStream(
+                                        SaveAction.fichierSortieXML);
                             }
-                            catch (FileNotFoundException e){
+                            catch (FileNotFoundException e)
+                            {
                                 //
                                 e.printStackTrace();
                             }
 
-                            if (fileOutputStream != null){
+                            if (fileOutputStream != null)
+                            {
                                 Nemo.getInstance().saveModel(fileOutputStream);
                                 Utils.messageOK(Messages.SaveAction_4);
                             }
@@ -89,10 +97,11 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor
         }
         return false;
     }
-    
+
     @Override
-    public void initialize(IWorkbenchConfigurer configurer) {
-       configurer.setSaveAndRestore(false);
+    public void initialize(IWorkbenchConfigurer configurer)
+    {
+        configurer.setSaveAndRestore(false);
     }
 
 }

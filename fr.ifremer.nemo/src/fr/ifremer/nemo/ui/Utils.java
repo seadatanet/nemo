@@ -19,6 +19,7 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.ProgressBar;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 
@@ -45,7 +46,7 @@ public class Utils
 
     public static int[] taillesCumLignes;
 
-    //public static Configuration configuration;
+    // public static Configuration configuration;
 
     public static StyleRange[] stylesCouleurs;
 
@@ -58,7 +59,7 @@ public class Utils
 
     public static ProgressBar progressbar;
 
-    //public static InputModel inputModel;
+    // public static InputModel inputModel;
 
     private static FlagTable _blank;
 
@@ -209,8 +210,11 @@ public class Utils
 
         if (ligne.getText().equals(Global.EMPTY_STRING))
         {
-            // TODO verifier correspondance avec Old_StationModel.getNumberOfLines()
-            lign = Nemo.getInstance().getDomain().getMedia().getModel().getStationHeader() + 1;
+            // TODO verifier correspondance avec
+            // Old_StationModel.getNumberOfLines()
+            lign =
+                Nemo.getInstance().getDomain().getMedia().getModel()
+                    .getStationHeader() + 1;
         }
         else
         {
@@ -250,7 +254,7 @@ public class Utils
         else
         {
             Utils.messageErreur("");
-            
+
             lign = 1;
             // calcul de la ligne en fonction de la valeur de x
             // parcours du tableau des tailles de lignes cumulees
@@ -291,7 +295,7 @@ public class Utils
                 .valueOf(deb));
             ViewMain.tableData.getItems()[index].setText(fin, String
                 .valueOf(fi));
-            
+
         }
     }
 
@@ -500,8 +504,7 @@ public class Utils
 
     }
 
-    public static void calculOffsetDebOffsetFin(Fragment frag,
-            Cursor cursor)
+    public static void calculOffsetDebOffsetFin(Fragment frag, Cursor cursor)
     {
         // calcule debut et fin e partir du surlignement souris
         int offsetDebut, offsetFin, ligneDebut, ligneFin;
@@ -666,8 +669,8 @@ public class Utils
 
     }
 
-    public static void calculNbreLignesPuisRemplissageFragClic(
-            Fragment frag, Cursor cursor)
+    public static void calculNbreLignesPuisRemplissageFragClic(Fragment frag,
+            Cursor cursor)
     {
         int deb, fi, lignDepart, lignFin, i, nbrelignes;
 
@@ -768,17 +771,21 @@ public class Utils
         {
             case 0:
                 ViewLog.aideFile();
-                if (ViewMain.editFileForm != null){
+                if (ViewMain.editFileForm != null)
+                {
                     razEditionCurrent();
-                    if (ViewMain.editFileForm.loaded){
+                    if (ViewMain.editFileForm.loaded)
+                    {
                         // EditDesc.DrawingBack();
                         ViewMain.editFileForm.drawingBack();
                     }
-                    else if (ViewMain.fileLoaded){
+                    else if (ViewMain.fileLoaded)
+                    {
                         // EditDesc.affichageEdition();
                         ViewMain.editFileForm.afficheEdition();
                     }
-                    else{
+                    else
+                    {
                         ViewMain.textAreaFile.setText(Global.EMPTY_STRING);
                     }
                 }
@@ -786,13 +793,16 @@ public class Utils
             break;
             case 1:
                 razEditionCurrent();
-                if (ViewMain.editCruiseForm.loaded){
+                if (ViewMain.editCruiseForm.loaded)
+                {
                     ViewMain.editCruiseForm.drawingBack();
                 }
-                else if (ViewMain.editFileForm.validee){
+                else if (ViewMain.editFileForm.validee)
+                {
                     ViewMain.editCruiseForm.afficheEdition();
                 }
-                else{
+                else
+                {
                     ViewLog.aideCruise();
                     ViewMain.textAreaCruise.setText(Global.EMPTY_STRING);
                     ViewMain.affiche = 1;
@@ -800,14 +810,17 @@ public class Utils
             break;
             case 2:
                 razEditionCurrent();
-                if (ViewMain.editStationForm.loaded){
+                if (ViewMain.editStationForm.loaded)
+                {
                     ViewMain.editStationForm.drawingBack();
                 }
                 else if ((!ViewMain.tabCruise.isDisposed() && ViewMain.editCruiseForm.validee)
-                        || (ViewMain.tabCruise.isDisposed() && ViewMain.editFileForm.validee)){
+                        || (ViewMain.tabCruise.isDisposed() && ViewMain.editFileForm.validee))
+                {
                     ViewMain.editStationForm.afficheEdition();
                 }
-                else{
+                else
+                {
                     ViewLog.aideStation();
                     ViewMain.textAreaStation.setText(Global.EMPTY_STRING);
                     ViewMain.affiche = 2;
@@ -815,13 +828,16 @@ public class Utils
             break;
             case 3:
                 razEditionCurrent();
-                if (ViewMain.editDataForm.loaded){
+                if (ViewMain.editDataForm.loaded)
+                {
                     ViewMain.editDataForm.drawingBack();
                 }
-                else if (ViewMain.editStationForm.validee){
+                else if (ViewMain.editStationForm.validee)
+                {
                     ViewMain.editDataForm.afficheEdition();
                 }
-                else{
+                else
+                {
                     ViewLog.aideData();
                     ViewMain.textAreaData.setText(Global.EMPTY_STRING);
                     ViewMain.affiche = 3;
@@ -829,15 +845,18 @@ public class Utils
             break;
             case 4:
                 razEditionCurrent();
-                if (ViewMain.editConversionForm.loaded){
+                if (ViewMain.editConversionForm.loaded)
+                {
                     ViewMain.editConversionForm.drawingBack();
                 }
-                else if (ViewMain.editDataForm.validee){
+                else if (ViewMain.editDataForm.validee)
+                {
                     ViewMain.editConversionForm.afficheEdition();
                 }
-                else{
+                else
+                {
                     ViewLog.aideConversion();
-                    ViewMain.affiche = 4;                    
+                    ViewMain.affiche = 4;
                 }
             break;
         }
@@ -1019,7 +1038,7 @@ public class Utils
         }
 
         int nbre2 = subsubfiles.length;
-        
+
         for (int i = 0; i < nbre2; i++)
         {
 
@@ -1047,8 +1066,8 @@ public class Utils
         {
 
             ViewMain.nomFichier =
-                directoryPath
-                        + File.separator + subfiles[0].getName() + File.separator + subsubfiles[0].getName(); 
+                directoryPath + File.separator + subfiles[0].getName()
+                        + File.separator + subsubfiles[0].getName();
             ViewMain.nomRepertoire = directoryPath;
 
             try
@@ -1153,15 +1172,15 @@ public class Utils
         {
             // //effacement boutons
             ViewMain.editFileForm.razEdition();
-            
+
             // reinitialisation des formulaires
             ViewMain.editFileForm.razText();
             ViewMain.editCruiseForm.razText();
             ViewMain.editStationForm.razText();
             ViewMain.editDataForm.razText();
-            //ViewMain.editConversionForm.razText();
+            // ViewMain.editConversionForm.razText();
         }
-        
+
         invalidEtapes();
     }
 
@@ -1394,7 +1413,7 @@ public class Utils
             public void handleEvent(Event e)
             {
                 FiltrageTableType.comboRecherche = comb;
-                FiltrageTableType.go(comb.getShell(),tab, comb);
+                FiltrageTableType.go(comb.getShell(), tab, comb);
             }
         });
     }
@@ -1498,7 +1517,16 @@ public class Utils
         }
         // reinitialisation de la conversion
         // TODO remettre setConverted ??
-        //if (DataModel.inputModel != null)
-        //    DataModel.inputModel.setConverted(false);
+        // if (DataModel.inputModel != null)
+        // DataModel.inputModel.setConverted(false);
+    }
+
+    /**
+     * 
+     */
+    public static Shell getMainShell()
+    {
+        return ApplicationWorkbenchWindowAdvisor.configurer.getWindow()
+            .getShell();
     }
 }

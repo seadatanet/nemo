@@ -32,7 +32,7 @@ public class Application implements IPlatformRunnable
     public static Logger batchLogger;
 
     public static Options opt;
-    
+
     private static final String optInputFile = "i";
     private static final String optOutputFile = "o";
     private static final String optModelFile = "m";
@@ -53,8 +53,9 @@ public class Application implements IPlatformRunnable
         String[] strArgs = (String[]) args;
 
         opt = new Options();
-        
-        opt.addOption(optBatchMode, false, "Not necessary using nemo_batch launcher");
+
+        opt.addOption(optBatchMode, false,
+            "Not necessary using nemo_batch launcher");
         opt.addOption(optInputFile, true, "Input file / directory");
         opt.addOption(optOutputFile, true, "Output file / directory");
         opt.addOption(optModelFile, true, "Model file (xml)");
@@ -97,9 +98,10 @@ public class Application implements IPlatformRunnable
 
                 String modelFile = cl.getOptionValue(optModelFile);
 
-                if (inputFile == null || outputFile == null || modelFile == null)
+                if (inputFile == null || outputFile == null
+                        || modelFile == null)
                     exitPrintingUsage();
-                
+
                 Conversion convType =
                     Conversion
                         .valueOf(cl.getOptionValue(optConv).toUpperCase());
@@ -131,7 +133,7 @@ public class Application implements IPlatformRunnable
                 batchLogger.info("Batch mode starting. Arguments :");
                 StringBuilder sb = new StringBuilder();
                 for (String s : strArgs)
-                    sb.append(s + " ");                
+                    sb.append(s + " ");
                 batchLogger.info(sb.toString());
 
                 boolean success =
@@ -194,7 +196,7 @@ public class Application implements IPlatformRunnable
         hf.printUsage(pw, 200, "nemo_batch", opt);
         pw.flush();
         hf.printHelp("nemo_batch", opt);
-        
+
         System.exit(1);
     }
 }
