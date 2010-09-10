@@ -233,6 +233,7 @@ public class Station implements Comparable
      * @see Station.java#reference
      */
     public void setReference(String reference){
+    //    System.out.println(reference);
         _reference = reference;
     }
 
@@ -457,13 +458,23 @@ public class Station implements Comparable
     }
 
     public int compareTo(Object other){
-        // FAE1105 : tri des stations selon (Nom Fichier -) Date - Référence
-        // Station
+        Integer refIniInteger;
+        Integer refOtherInteger;
+        
+        try
+        {
+        refIniInteger = Integer.valueOf(this.getReference());
+        refOtherInteger = Integer.valueOf(((Station)other).getReference());
+        }
+        catch(NumberFormatException e)
+        {
+            String refIni = this.getReference();
+            String refOther = ((Station)other).getReference();
+            
+            return refIni.compareTo(refOther);
+        }
 
-        String refIni = this.getReference();
-        String refOther = ((Station) other).getReference();
-
-        return refIni.compareTo(refOther);
+        return refIniInteger.compareTo(refOtherInteger);
     }
 
     /**
