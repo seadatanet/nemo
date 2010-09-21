@@ -158,6 +158,7 @@ public class CruiseDomain
         }
 
         if (!_model.getComment().equals(Global.EMPTY_STRING)){            
+            medCruiseHeader.append(Global.RN);
             medCruiseHeader.append(Elts.kw_cruise_comment);
             //medCruiseHeader.append(Global.RN);
             
