@@ -773,7 +773,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         compo = new Composite(parent, SWT.NONE);
         compo.setFont(Utils.font08);
         // group.setText(Messages.settings_cdi);
-        GridLayoutFactory.fillDefaults().margins(4, 4).numColumns(2).applyTo(
+        GridLayoutFactory.fillDefaults().margins(0, 0).numColumns(2).applyTo(
             compo);
         GridDataFactory.fillDefaults().grab(false, true).hint(600, SWT.DEFAULT)
             .applyTo(compo);
