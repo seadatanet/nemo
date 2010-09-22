@@ -272,7 +272,16 @@ public class Configuration extends AbstractModel
             return setter;
         }
         if (a_LocalName.equals(ConfigDescription.node_proxy)) { 
-            return new PathElementConsumer(ConfigDescription.node_proxy, this);  
+            //return new PathElementConsumer(ConfigDescription.node_proxy, this);
+            // set proxy values
+            getProxy().setUse(a_Attributes.getValue(Intern.proxy_use));
+            getProxy().setAdress(a_Attributes.getValue(Intern.proxy_adr));
+            getProxy().setPort(a_Attributes.getValue(Intern.proxy_port));
+            getProxy().setLogin(a_Attributes.getValue(Intern.proxy_login));
+            getProxy().setPassword(a_Attributes.getValue(Intern.proxy_pass));
+            // only to avoid return null
+            Element2Field setter = new Element2Field(this, ConfigDescription.setter_Proxy);
+            return setter;
         }
         if (a_LocalName.equals(ConfigDescription.node_edmoURL)) {
             Element2Field setter = new Element2Field(this, ConfigDescription.setter_EdmoURL); 
@@ -383,7 +392,18 @@ public class Configuration extends AbstractModel
         a_Writer.putTag(ConfigDescription.node_dateISO, isDateISO());
         a_Writer.putTag("dataList", _dataList.toString());
 		//a_Writer.putTag("arboMapping", getArboMapping());
-        proxy.writeXMLOn(a_Writer);
+        
+        //proxy:
+        a_Writer.openTag(ConfigDescription.node_proxy);
+        a_Writer.putAttribute(Intern.proxy_use, getProxy().isUse());  
+        a_Writer.putAttribute(Intern.proxy_adr, getProxy().address);  
+        a_Writer.putAttribute(Intern.proxy_port, getProxy().port);  
+        a_Writer.putAttribute(Intern.proxy_login, getProxy().login);  
+        a_Writer.putAttribute(Intern.proxy_pass, getProxy().password);  
+        a_Writer.closeTag();
+        
+        
+        
         a_Writer.putTag(ConfigDescription.node_edmoURL, getEdmoURL());
 		a_Writer.putTag(ConfigDescription.node_vocabURL, getVocabURL());
 		Iterator<String> keys = getVocabLists().keySet().iterator();

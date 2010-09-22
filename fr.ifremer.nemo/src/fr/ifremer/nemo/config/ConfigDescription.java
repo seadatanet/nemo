@@ -119,6 +119,8 @@ public class ConfigDescription extends NLS
 
     public static String setter_DefaultCode;
 
+    public static String setter_Proxy;
+    
     public static String setter_EdmoURL;
 
     public static String setter_FichierMapping;
