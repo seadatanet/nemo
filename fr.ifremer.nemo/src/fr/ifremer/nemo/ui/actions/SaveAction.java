@@ -106,9 +106,16 @@ public class SaveAction extends Action implements ISelectionListener,
         String extensions[] = new String[1];
         extensions[0] = Global.STAR + Global.EXT_XML;
         dialog.setFilterExtensions(extensions);
-
+        dialog.setFileName( extensions[0] );
+        
+       
         nomFichierSortieXML = dialog.open();
 
+        if (!nomFichierSortieXML.endsWith(Global.EXT_XML))
+        {
+            nomFichierSortieXML+=Global.EXT_XML;
+        }
+           
         if (nomFichierSortieXML != null)
         {
             fichierSortieXML = new File(nomFichierSortieXML);
