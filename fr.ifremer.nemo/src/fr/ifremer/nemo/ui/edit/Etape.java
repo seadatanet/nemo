@@ -348,7 +348,7 @@ public class Etape
                 resultat1 =
                     ViewMain.editStationForm.historique.checkAutoInputValues(0,
                         Messages.Etape_33);
-                ok = ok && resultat1;
+                 ok = ok && resultat1;
 
                 if (resultat1)
                 {
@@ -1404,8 +1404,9 @@ public class Etape
             ViewMain.editConversionForm.setWarningData(Global.EMPTY_STRING);
             if (ViewMain.getTypeFichierEntree() == E_InputType.PROFILE)
             {
-                if (!(code.equals(Intern.paramPRES) || code
-                    .equals(Intern.paramDEPH)))
+                if (!(code.equals(Intern.paramPRES) 
+                        || code.equals(Intern.paramDEPH)
+                        ))
                 {
                     // PRES ou DEPH n'est pas en premier
                     Utils.messageErreurAppend(Messages.error_data_firstPRES);
@@ -1451,16 +1452,17 @@ public class Etape
                         .setWarningData(Global.EMPTY_STRING);
                 }
             }
-            else if (ViewMain.getTypeFichierEntree() == E_InputType.PROFILE)
-            {
-                if (!code.equals(Intern.paramDEPH) && existDEPH)
-                {
-                    // DEPH existe et n'est pas en premier
-                    Utils
-                        .messageErreurAppend(Messages.error_data_firstDEPH_TRAJ);
-                    ok = ok && false;
-                }
-            }
+            // code commenté car non accessible (condition ne sera jamais vérifiée)
+//            else if (ViewMain.getTypeFichierEntree() == E_InputType.PROFILE)
+//            {
+//                if (!code.equals(Intern.paramDEPH) && existDEPH)
+//                {
+//                    // DEPH existe et n'est pas en premier
+//                    Utils
+//                        .messageErreurAppend(Messages.error_data_firstDEPH_TRAJ);
+//                    ok = ok && false;
+//                }
+//            }
         }
         if (ok)
         {
@@ -1581,5 +1583,7 @@ public class Etape
         // envoi des valeurs dans le modele
 
     }
+    
+    
 
 }

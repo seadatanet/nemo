@@ -559,9 +559,15 @@ public class StationDomain
         medStationHeader.append(Global.RN);
 
         medStationHeader.append(start);
+       try{
         medStationHeader.append(Elts.limit((String) _model.getProperty(
             Intern.S_DCHIST + "2").applyOn(inputFile), Elts.station_line));
         medStationHeader.append(Global.RN);
+        }catch(Exception nulException){
+            // this is authorized: only DCHistory1 is used, DC History2 is empty
+            // so this is not an error
+            System.out.println("no value for "+Intern.S_DCHIST + "2");
+        }
 
         // *DM HISTORY=
         medStationHeader.append(start);
