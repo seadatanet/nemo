@@ -92,6 +92,9 @@ public class OpenAction extends Action implements ISelectionListener,
                     // reinitialisation du tableau de paramètres
                     if (ViewMain.tableData != null)
                         TableData.go();
+                    
+                    // 4063 affectation du nom de modele courant
+                    Nemo.getInstance().setCurrentOpenModelPath(nomModele);
                 }
                 catch (Exception e)
                 {

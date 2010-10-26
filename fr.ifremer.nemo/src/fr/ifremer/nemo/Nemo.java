@@ -45,6 +45,9 @@ public class Nemo
     private Configuration config;
     private InputDomain domain;
     private String nomModele;
+    //4063
+    private String currentOpenModelPath;
+    private boolean needToSaveCurrentModel=false;
 
     /**
      * Getter pour instance.
@@ -216,4 +219,15 @@ public class Nemo
             }
         }
     }
+
+    public String getCurrentOpenModelPath()
+    {
+        return currentOpenModelPath;
+    }
+
+    public void setCurrentOpenModelPath(String currentOpenModelPath)
+    {
+        this.currentOpenModelPath = currentOpenModelPath;
+    }
+
 }

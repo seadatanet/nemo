@@ -22,7 +22,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 public class SaveAction extends Action implements ISelectionListener,
-        ActionFactory.IWorkbenchAction
+ActionFactory.IWorkbenchAction
 {
     private final IWorkbenchWindow window;
 
@@ -32,7 +32,7 @@ public class SaveAction extends Action implements ISelectionListener,
 
     public static Shell shelloptions;
 
-    public static String nomFichierSortieXML;
+    public static String nomFichierSortieXML="";
 
     public static File fichierSortieXML;
 
@@ -95,20 +95,54 @@ public class SaveAction extends Action implements ISelectionListener,
 
     public static void choixFichierSortie()
     {
+       //4063 gestion de la sauvegarde du modèle
+        String currentModelPath="";
+        File currentModelFile;
+        String currentModelFileName;
+
+        String filterPath = Nemo.getInstance().getConfig().getModelsDirectory()+ File.separator;
+        String extensions[] = new String[1];
+        extensions[0] = Global.STAR + Global.EXT_XML;
+        currentModelFileName =  extensions[0] ;
+
+        
+        // verification du nom et chemin et modele courant 
+        //si le modele est un fichier qui a été ouvert, ou si il a déjà été enregistré, on conserve ces infos pour proposer d'enregistrer sous le nom courant)
+        // sinon on utilise les valeurs par défaut (repertoire des modeles de la config et nom de fichier = *.xml)
+        // nom connu car deja enregistre recemment
+        if (!nomFichierSortieXML.equals("")){
+            currentModelPath=nomFichierSortieXML;
+        }
+        // nom connu car le modele est un fichier existant qui a été ouvert
+        else if(
+                (Nemo.getInstance().getCurrentOpenModelPath()!= null)   
+                &&
+                (! Nemo.getInstance().getCurrentOpenModelPath().equals(""))
+        ){
+            currentModelPath=Nemo.getInstance().getCurrentOpenModelPath();
+        }
+        if (!currentModelPath.equals(""))
+        {
+            currentModelFile = new File(currentModelPath);
+            currentModelFileName = currentModelFile.getName();
+            int indexEndPath = currentModelPath.indexOf(currentModelFileName);
+            filterPath = currentModelPath.substring(0,indexEndPath);
+
+        }
+
+
+
         Shell shell = Utils.getMainShell();
 
         FileDialog dialog =
             new FileDialog(shell, SWT.SAVE | SWT.APPLICATION_MODAL);
         dialog.setText(Messages.SaveAction_5);
-        dialog.setFilterPath(Nemo.getInstance().getConfig()
-            .getModelsDirectory()
-                + File.separator);
-        String extensions[] = new String[1];
-        extensions[0] = Global.STAR + Global.EXT_XML;
+        dialog.setFilterPath(filterPath);
+
         dialog.setFilterExtensions(extensions);
-        dialog.setFileName( extensions[0] );
-        
-       
+        dialog.setFileName(currentModelFileName );
+
+
         nomFichierSortieXML = dialog.open();
 
         if (!nomFichierSortieXML.endsWith(Global.EXT_XML))
@@ -134,6 +168,8 @@ public class SaveAction extends Action implements ISelectionListener,
                     choixFichierSortie();
                 }
             }
+
+            Nemo.getInstance().setCurrentOpenModelPath(nomFichierSortieXML);
         }
     }
 

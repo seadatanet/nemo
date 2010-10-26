@@ -1,7 +1,11 @@
 package fr.ifremer.nemo.ui;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.MessageBox;
@@ -44,50 +48,114 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor
 
         MessageBox mb =
             new MessageBox(Utils.getMainShell(), SWT.ICON_QUESTION | SWT.YES
-                    | SWT.NO | SWT.APPLICATION_MODAL);
+                | SWT.NO | SWT.APPLICATION_MODAL);
         mb.setMessage(Messages.confirm_quit);
         reponse = mb.open();
 
         if (reponse == SWT.YES)
         {
             // demande pour sauver le modele
-            if (ViewMain.editDataForm.validee)
+            if (ViewMain.editDataForm.validee )
             {
                 if (ViewMain.editFileForm.okApresReset
                         && ViewMain.editCruiseForm.okApresReset
                         && ViewMain.editStationForm.okApresReset
                         && ViewMain.editDataForm.okApresReset)
                 {
-
-                    Shell shell2 = Utils.getMainShell();
-
-                    MessageBox mbox =
-                        new MessageBox(shell2, SWT.ICON_WARNING | SWT.YES
-                                | SWT.NO | SWT.APPLICATION_MODAL);
-                    mbox.setMessage(Messages.confirm_saveModel);
-                    int reponse_mbox = mbox.open();
-                    if (reponse_mbox == SWT.YES)
+                    //4063
+                    File tmpBack =null;
+                    boolean identical=true;
+                    if (Nemo.getInstance().getCurrentOpenModelPath()==null){
+                        identical=false;
+                    }else{
+                    // on le compare avec le fichier du modele courant si un fichier modele a été ouvert
+                    File currentModel =new File(Nemo.getInstance().getCurrentOpenModelPath());
+                    // on sauve le modele temporairement
+                    try
                     {
-                        SaveAction.choixFichierSortie();
+                        tmpBack =new File("nemoBackupTmp.xml");
+                        fileOutputStream =
+                            new FileOutputStream(tmpBack);
+                    }
+                    catch (FileNotFoundException e)
+                    {
+                        //
+                        e.printStackTrace();
+                    }
 
-                        if (SaveAction.fichierSortieXML != null)
+                    if (fileOutputStream != null)
+                    {
+                        Nemo.getInstance().saveModel(fileOutputStream);
+                    }
+
+
+                    try
+                    {
+                        BufferedReader bufNew = new BufferedReader(new FileReader(tmpBack));
+                        BufferedReader bufOld = new BufferedReader(new FileReader(currentModel));
+
+                        int cpt=0;
+
+                        while( bufNew.ready() && identical)
                         {
-                            try
-                            {
-                                fileOutputStream =
-                                    new FileOutputStream(
-                                        SaveAction.fichierSortieXML);
-                            }
-                            catch (FileNotFoundException e)
-                            {
-                                //
-                                e.printStackTrace();
-                            }
+                            String newModel = bufNew.readLine();
+                            String oldModel = bufOld.readLine();
+                            if (cpt>2){
 
-                            if (fileOutputStream != null)
+                                identical= newModel.equals(oldModel);
+                            }
+                            cpt++;
+                        }
+
+                        bufNew.close();
+                        bufOld.close();
+                        tmpBack.delete();
+                    }
+                    catch (FileNotFoundException e1)
+                    {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
+                    catch (IOException e)
+                    {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+
+                    }
+                    if(!identical)
+                    {
+                        //***********************
+                        Shell shell2 = Utils.getMainShell();
+
+                        MessageBox mbox =
+                            new MessageBox(shell2, SWT.ICON_WARNING | SWT.YES
+                                | SWT.NO | SWT.APPLICATION_MODAL);
+                        mbox.setMessage(Messages.confirm_saveModel);
+                        int reponse_mbox = mbox.open();
+                        if (reponse_mbox == SWT.YES)
+                        {
+                            SaveAction.choixFichierSortie();
+
+                            if (SaveAction.fichierSortieXML != null)
                             {
-                                Nemo.getInstance().saveModel(fileOutputStream);
-                                Utils.messageOK(Messages.SaveAction_4);
+                                try
+                                {
+                                    fileOutputStream =
+                                        new FileOutputStream(
+                                            SaveAction.fichierSortieXML);
+                                }
+                                catch (FileNotFoundException e)
+                                {
+                                    //
+                                    e.printStackTrace();
+                                }
+
+                                if (fileOutputStream != null)
+                                {
+                                    Nemo.getInstance().saveModel(fileOutputStream);
+                                    Utils.messageOK(Messages.SaveAction_4);
+                                }
                             }
                         }
                     }
