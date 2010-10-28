@@ -16,6 +16,8 @@ import java.io.RandomAccessFile;
 import org.apache.log4j.Logger;
 
 import fr.ifremer.nemo.input.PropertyModel;
+import fr.ifremer.nemo.mapping.MappingTable;
+import fr.ifremer.nemo.output.CDIResumeWriter;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.output.NemoWriterFactory;
 import fr.ifremer.nemo.ui.Utils;
@@ -37,7 +39,7 @@ public class NemoShell
      */
     public static boolean main(String inputFile, String outputFile,
             String modelFile, Conversion conv, boolean sortDatas,
-            E_TypeConversion odvConv, String datasetRef, Logger logger)
+            E_TypeConversion odvConv, String datasetRef, String cdiSummaryFile, String couplingTableFile, Logger logger)
     {
 
         try
@@ -122,6 +124,18 @@ public class NemoShell
 
             writer.write(null);
 
+            
+            // export CDI summary (FAE 4525)
+            if (! cdiSummaryFile.equals(Global.EMPTY_STRING))
+            {
+                CDIResumeWriter.getInstance().reset();
+                CDIResumeWriter.getInstance().setNomFichierSortie(cdiSummaryFile);
+                CDIResumeWriter.getInstance().writeResume(conv);
+            }
+           
+            // export coupling table (FAE 4525)
+            new MappingTable().exporter(couplingTableFile);
+            
             return true;
         }
         catch (Exception e)
