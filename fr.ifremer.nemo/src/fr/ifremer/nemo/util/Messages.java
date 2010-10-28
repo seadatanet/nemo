@@ -103,6 +103,7 @@ public class Messages {
     public static String menu_label_list;
     
     public static String label_manual_01;
+    public static String label_noValue_01;
     public static String label_auto_01;
     public static String label_auto_02;
     public static String label_position;

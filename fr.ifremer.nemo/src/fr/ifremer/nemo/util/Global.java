@@ -45,6 +45,9 @@ public interface Global
 
     // Chaîne vide
     public static final String EMPTY_STRING = ""; //$NON-NLS-1$
+    
+    // Chaîne vide
+    public static final String NO_VALUE = "NaN"; //$NON-NLS-1$
 
     // Types de table
     public static final String WSSURVEY = "WSSURVEY"; //$NON-NLS-1$

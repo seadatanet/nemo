@@ -151,6 +151,11 @@ public class EditStationForm extends EditForm
     @Override
     protected void initSections()
     {
+        /**
+         * ==============================================================================================
+         * station number
+         * ==============================================================================================
+         */
         stationNumber =
             new StationSection(Intern.S_STATIONNUMBER, Messages
                 .getString(Intern.S_STATIONNUMBER),
@@ -165,7 +170,11 @@ public class EditStationForm extends EditForm
         stationNumber.addAutoInput(Messages.label_auto_02, false,
             MetaInData.FACULTATIF, false, false);
         listeSections.add(stationNumber);
-
+        /**
+         * ==============================================================================================
+         * data type
+         * ==============================================================================================
+         */
         if (!ViewMain.isCollection())
         {
             dataType =
@@ -175,7 +184,11 @@ public class EditStationForm extends EditForm
             dataType.addCouple(ComboType.DATATYPE, Global.EMPTY_STRING);
             listeSections.add(dataType);
         }
-
+        /**
+         * ==============================================================================================
+         * acquisition history
+         * ==============================================================================================
+         */
         historique =
             new StationSection(Intern.S_DCHIST, Messages
                 .getString(Intern.S_DCHIST),
@@ -183,7 +196,11 @@ public class EditStationForm extends EditForm
         historique.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
         historique.addAutoInput(null, false, MetaInData.INTERDIT, true, false);
         listeSections.add(historique);
-
+        /**
+         * ==============================================================================================
+         * comments
+         * ==============================================================================================
+         */
         comments =
             new StationSection(Intern.S_COMMENT, Messages
                 .getString(Intern.S_COMMENT),
@@ -193,7 +210,11 @@ public class EditStationForm extends EditForm
         listeSections.add(comments);
         comments.getAutoInput().setVariableLabel(
             Messages.label_variable_comment);
-
+        /**
+         * ==============================================================================================
+         * surface sample
+         * ==============================================================================================
+         */
         surfaceSample =
             new StationSection(Intern.S_SURFACE, Messages
                 .getString(Intern.S_SURFACE),
@@ -202,7 +223,11 @@ public class EditStationForm extends EditForm
         surfaceSample.addAutoInput(null, false, MetaInData.INTERDIT, true,
             false);
         listeSections.add(surfaceSample);
-
+        /**
+         * ==============================================================================================
+         * UT conversion
+         * ==============================================================================================
+         */
         utConvertion =
             new StationSection(Intern.S_OFFSETTU, Messages
                 .getString(Intern.S_OFFSETTU), Global.EMPTY_STRING, true,
@@ -211,7 +236,11 @@ public class EditStationForm extends EditForm
         utConvertion.addAutoInput(null, false, MetaInData.INTERDIT, false,
             false);
         listeSections.add(utConvertion);
-
+        /**
+         * ==============================================================================================
+         * time
+         * ==============================================================================================
+         */
         time =
             new StationSection(Intern.S_TIME,
                 Messages.getString(Intern.S_TIME),
@@ -223,7 +252,11 @@ public class EditStationForm extends EditForm
         boolean defaultValueEnable = ViewMain.getTypeFichierEntree().equals(E_InputType.PROFILE);
         time.addAutoInput(null, false, MetaInData.FACULTATIF, false, defaultValueEnable);
         listeSections.add(time);
-
+        /**
+         * ==============================================================================================
+         * date
+         * ==============================================================================================
+         */
         date =
             new StationSection(Intern.S_DATE,
                 Messages.getString(Intern.S_DATE),
@@ -232,7 +265,11 @@ public class EditStationForm extends EditForm
         date.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
         date.addAutoInput(null, false, MetaInData.FACULTATIF, false, false);
         listeSections.add(date);
-
+        /**
+         * ==============================================================================================
+         * latitude
+         * ==============================================================================================
+         */
         latitude =
             new StationSection(Intern.S_LAT, Messages.getString(Intern.S_LAT),
                 Messages.edit_station_sectionLat_lib, false, true, 1);
@@ -255,7 +292,11 @@ public class EditStationForm extends EditForm
             endLatitude.setTimeSeriesInfo(true);
             listeSections.add(endLatitude);
         }
-
+        /**
+         * ==============================================================================================
+         * longitude
+         * ==============================================================================================
+         */
         longitude =
             new StationSection(Intern.S_LON, Messages.getString(Intern.S_LON),
                 Messages.edit_station_sectionLon_lib, false, true, 1);
@@ -278,13 +319,19 @@ public class EditStationForm extends EditForm
             endLongitude.setTimeSeriesInfo(true);
             listeSections.add(endLongitude);
         }
-
+        /**
+         * ==============================================================================================
+         * bottom depth
+         * ==============================================================================================
+         */
         // FAE 1129 : ajout TEST / position variable à DEPTH
         depth =
             new StationSection(Intern.S_DEPTH, Messages
                 .getString(Intern.S_DEPTH),
                 Messages.edit_station_sectionDepth_lib, true, true, 1);
-        depth.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
+        //FAE 4471
+//        depth.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
+        depth.addNoValueInput(null, ComboType.NONE, Global.EMPTY_STRING);
         depth.addAutoInput(null, true, MetaInData.FACULTATIF, false, true);
         listeSections.add(depth);
 
@@ -303,7 +350,11 @@ public class EditStationForm extends EditForm
                 endDepth.setTimeSeriesInfo(true);
                 listeSections.add(endDepth);
             }
-
+            /**
+             * ==============================================================================================
+             * sensor depth
+             * ==============================================================================================
+             */
             sensorDepth =
                 new StationSection(Intern.S_SENSORDEPTH, Messages
                     .getString(Intern.S_SENSORDEPTH),
@@ -329,7 +380,11 @@ public class EditStationForm extends EditForm
                 magneticDeclin.setTimeSeriesInfo(true);
                 listeSections.add(magneticDeclin);
             }
-
+            /**
+             * ==============================================================================================
+             * sampling rate
+             * ==============================================================================================
+             */
             samplingRate =
                 new StationSection(Intern.S_SAMPLINGRATE, Messages
                     .getString(Intern.S_SAMPLINGRATE),
@@ -341,6 +396,11 @@ public class EditStationForm extends EditForm
             samplingRate.setTimeSeriesInfo(true);
             listeSections.add(samplingRate);
         }
+        /**
+         * ==============================================================================================
+         * QC flags
+         * ==============================================================================================
+         */
         qcFlags =
             new QCflagsSection(Intern.S_QCFLAG, Messages
                 .getString(Intern.S_QCFLAG),
@@ -379,7 +439,7 @@ public class EditStationForm extends EditForm
 
             // in trajectory, depth must be in data
             depth.setEnableInData(MetaInData.OBLIGATOIRE);
-            depth.setEnabledManual(false);
+//            depth.setEnabledManual(false); // 4471: manual must not be disabled
 
         }
 

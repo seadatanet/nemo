@@ -123,7 +123,14 @@ public class StationSection extends NemoSection
         manualInput =
             new GrpManualInput(nbLignes, manualLabel, type, defaultValue);
     }
-
+    
+    
+    public void  addNoValueInput(String manualLabel, ComboType type,
+            String defaultValue)
+    {
+        manualInput =
+            new GrpNoValueInput(nbLignes, manualLabel, type, defaultValue);
+    }
     /**
      * add a AutoInput group
      * 
@@ -138,10 +145,10 @@ public class StationSection extends NemoSection
     {
         enableInData = enable;
         autoInput =
-            new GrpAutoInput(nbLignes, autoLabel, variablePos, enableInData,
+            new GrpAutoInput(1, autoLabel, variablePos, enableInData,
                 withCursor, defaultValueEnable);
     }
-
+  
     /**
      * add a simple Couple group (DATATYPE)
      * 
@@ -154,15 +161,17 @@ public class StationSection extends NemoSection
         datatype = new Couple(type, defaultValue);
     }
 
-    public void copyValues(StationSection initiale)
-    {
-        if (initiale.getConverter() != null)
-            converter = initiale.getConverter();
-        if (initiale.getAutoInput() != null)
-            autoInput = initiale.getAutoInput();
-        if (initiale.getManualInput() != null)
-            manualInput = initiale.getManualInput();
-    }
+    
+    // BGT not used?
+//    public void copyValues(StationSection initiale)
+//    {
+//        if (initiale.getConverter() != null)
+//            converter = initiale.getConverter();
+//        if (initiale.getAutoInput() != null)
+//            autoInput = initiale.getAutoInput();
+//        if (initiale.getManualInput() != null)
+//            manualInput = initiale.getManualInput();
+//    }
 
     /*
      * Modify StationSection properties
@@ -256,7 +265,11 @@ public class StationSection extends NemoSection
     {
         autoInput.setEnabled(false);
         autoInput.razValues();
-        manualInput.setValue(value, i);
+        
+        if (!isNoValue()){
+            manualInput.setValue(value, i);
+        }
+      
     }
 
     public void setManualValueInput(String value)
@@ -351,9 +364,24 @@ public class StationSection extends NemoSection
      */
     public boolean isManual()
     {
-        return manualInput.isSelected();
+        boolean isManual=false;
+        if (isNoValue())
+        {
+            isManual = ((GrpNoValueInput)manualInput).isSelected();
+           
+        }else 
+        {
+            isManual = manualInput.isSelected();
+        }
+        return isManual;
     }
-
+    /**
+     * @return true if ManualInput is NoValue type
+     */
+    public boolean isNoValue()
+    {
+        return (manualInput instanceof GrpNoValueInput);
+    }
     public boolean isInData()
     {
         boolean inData = false;
@@ -468,9 +496,13 @@ public class StationSection extends NemoSection
     public String getValue(int i)
     {
         String value = Global.EMPTY_STRING;
-        if (isManual())
+        if (isManual() && !isNoValue())
         {
             value = manualInput.getValue(i);
+        }
+        else if(isManual() && isNoValue())
+        {
+            value = ((GrpNoValueInput)manualInput).getValue(i);
         }
         else
         {

@@ -496,12 +496,27 @@ public class DataDomain
                 addFixedParameterModel(IdParameter.LATX);
                 addFixedParameterModel(IdParameter.LONX);
 
+                
+                // si bottomDepth est en manuel
                 if (Nemo.getInstance().getDomain().getCruise().getStation()
                     .getModel().getProperty(Intern.S_DEPTH).isInData())
                 {
-                    // Ajout BATH si "Pofondeur" saisie dans les données pour
-                    // Medatlas
-                    addFixedParameterModel(IdParameter.BATH);
+                    // FAE 4471 on regarde si le parametre BATH est dans les parametres de l'onlget données
+                    boolean isBathPresentInDataTab=false;
+                    for (ParameterModel param : Nemo.getInstance().getDomain().getCruise().getStation().getData().getModel().getParameterModels())
+                    {
+                        if(param.getParameter().getCode().equals(IdParameter.BATH.name()))
+                        {
+                            isBathPresentInDataTab=true;
+                        }
+                    }
+                    // -> Ajout BATH pour Medatlas 
+                    // - si "Profondeur" saisie dans les données
+                    // -et si il n'est pas déjà présent dans l'onglet data
+                    if (!isBathPresentInDataTab)
+                    {
+                        addFixedParameterModel(IdParameter.BATH);
+                    }
                 }
 
                 // Ajout du paramètre DEPH ( = Sensor Depth) pour ODV

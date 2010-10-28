@@ -31,10 +31,10 @@ import fr.ifremer.nemo.util.Messages;
 public class GrpManualInput implements UIobject
 {
 
-    private String labelButton;
-    private Button buttonSaisie;
-    private final ArrayList<Couple> lines;
-    private int nbColumns = 1;
+    protected String labelButton;
+    protected Button buttonSaisie;
+    protected ArrayList<Couple> lines;
+    protected int nbColumns = 1;
 
     public GrpManualInput(int nbLine, String labelButton, ComboType cType,
             String defaultValue)
@@ -194,6 +194,11 @@ public class GrpManualInput implements UIobject
     public List<Couple> getLines()
     {
         return lines;
+    }
+    
+    protected void removeLines()
+    {
+        lines = new ArrayList<Couple>();
     }
 
 }
