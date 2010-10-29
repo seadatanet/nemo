@@ -1461,8 +1461,12 @@ public class Etape
             ViewMain.editConversionForm.setWarningData(Global.EMPTY_STRING);
             if (ViewMain.getTypeFichierEntree() == E_InputType.PROFILE)
             {
+                
+                
+                //FAE 5819 : ajout du code DPSF comme parametre possible
                 if (!(code.equals(Intern.paramPRES) 
                         || code.equals(Intern.paramDEPH)
+                          || code.equals(Intern.paramDPSF)
                         ))
                 {
                     // PRES ou DEPH n'est pas en premier
