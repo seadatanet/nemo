@@ -92,6 +92,12 @@ public class CruiseSection extends NemoSection
         for (Couple item : items)
         {
             item.razValues();
+            // FAE 3749 cas particulier des commentaires
+            if (item.getType() == ComboType.BLOCK)
+            {
+                GridDataFactory.fillDefaults().grab(true, true).hint(Global.SIZE_SECTION, SWT.DEFAULT).minSize(Global.SIZE_SECTION, 200)
+                .applyTo(item.getValueText());
+            }
         }
     }
 
