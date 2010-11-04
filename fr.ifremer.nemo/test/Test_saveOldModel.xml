@@ -22,7 +22,7 @@
     <projectName>JGOFS - FRANCE/PROOF</projectName>
     <dataCentre>FI</dataCentre>
     <availability>publicly</availability>
-    <comment><![CDATA[Ces donnees hydrologiques sont issues de la base de donnees DIAPAZON :
+    <comment><![CDATA[testCes donnees hydrologiques sont issues de la base de donnees DIAPAZON :
 http://www.com.univ-mrs.fr/IRD/urcyano/bdd/diapazon/bddiapaz.htm
 
 L'utilisation de ces donnees est soumise aux conditions suivantes :
