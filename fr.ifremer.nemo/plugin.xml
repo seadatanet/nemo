@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
-<plugin>
+<plugin
+   id="fr.ifremer.nemo"
+   name="Nemo Plug-in"
+   version="1.2.29"
+   provider-name="IFREMER">
 
    <extension
          id="nemoid"
