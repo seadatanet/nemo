@@ -23,7 +23,7 @@ import fr.ifremer.nemo.util.format.DateTimeFormat;
 
 /**
  * Class DateTimeUtils.java
- * Description: TODO
+ * Description: Classe d'outils pour la gestion des dates et heures
  * @author Delphine 
  */
 public class DateTimeUtils

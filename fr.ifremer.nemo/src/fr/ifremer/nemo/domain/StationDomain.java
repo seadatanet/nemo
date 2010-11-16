@@ -32,7 +32,7 @@ import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
 
 /**
- * Class StationDomain.java Description: TODO
+ * Class StationDomain.java Description: classe pour la description des données de l'onglet station
  * 
  * @author Delphine BOULANGER
  */
@@ -46,7 +46,7 @@ public class StationDomain
 
     private Station _currentStation;
 
-    protected DataDomain _data;
+    protected DataDomain _data; // onglet Data
     protected HashMap<String, List<Station>> _listStations;
 
     protected boolean _someInData;

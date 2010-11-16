@@ -13,14 +13,15 @@ import fr.ifremer.nemo.input.InputModel;
 
 /**
  * Class InputDomain
- * Description: TODO
+ * Description: description des données
+ * 
  * @author Delphine BOULANGER 
  */
 public class InputDomain
 {
-    protected MediaDomain _media;
-    protected CruiseDomain _cruise;
-    protected ConversionDomain _conversion;
+    protected MediaDomain _media; //onglet File
+    protected CruiseDomain _cruise; //onglet Cruise (contient ref sur Station + Data)
+    protected ConversionDomain _conversion; // onglet Conversion
         
     public InputDomain(){
         _media = new MediaDomain();

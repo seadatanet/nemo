@@ -33,7 +33,7 @@ import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Global.E_InputType;
 
 /**
- * Class DataDomain.java Description: TODO
+ * Class DataDomain.java Description: Classe pour la description des données de l'onglet Data
  * 
  * @author Delphine BOULANGER
  */
@@ -578,23 +578,27 @@ public class DataDomain
         sdnParams.append(Global.RN);
 
         if (c.equals(Conversion.ODV))
+        {
             for (ParameterModel param : getAddedParameterModels(c))
-                param.getParameter().setP011(
-                    _model.getParameterModels()[0].getParameter().isP011());
+            {
+                param.getParameter().setP011( _model.getParameterModels()[0].getParameter().isP011());
+            }
+        } 
         else
+        {
             for (ParameterModel param : getAddedParameterModels(c))
+            {
                 param.getParameter().setP011(false);
-
+            }
+        }
         for (ParameterModel param : getAddedParameterModels(c))
         {
-            sdnParams
-                .append(parameterMap(c.getDebut(), param.getParameter(), c));
+            sdnParams.append(parameterMap(c.getDebut(), param.getParameter(), c));
         }
 
         for (ParameterModel param : _model.getParameterModels())
         {
-            sdnParams
-                .append(parameterMap(c.getDebut(), param.getParameter(), c));
+            sdnParams.append(parameterMap(c.getDebut(), param.getParameter(), c));
         }
 
         return sdnParams;

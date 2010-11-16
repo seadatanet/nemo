@@ -25,7 +25,7 @@ import fr.ifremer.nemo.util.Global;
 
 /**
  * Class CruiseDomain.java
- * Description: TODO
+ * Description: Classe pour la description des données de l'onglet Cruise
  * @author Delphine BOULANGER 
  */
 public class CruiseDomain
@@ -34,7 +34,7 @@ public class CruiseDomain
      * Informations descrivant l'onglet Cuise
      */
     protected CruiseModel _model;
-    protected StationDomain _station;
+    protected StationDomain _station; //onglet Station
     final private Formatter form;
     
     private String _dataSetRef;

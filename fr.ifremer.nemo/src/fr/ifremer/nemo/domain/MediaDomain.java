@@ -26,7 +26,7 @@ import fr.ifremer.nemo.util.Global;
 
 /**
  * Class FileDomain.java
- * Description: TODO
+ * Description: classe pour la description des données de l'onglet File
  * @author Delphine BOULANGER 
  */
 public class MediaDomain

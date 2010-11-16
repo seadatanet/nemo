@@ -15,7 +15,7 @@ import fr.ifremer.nemo.util.Global.E_TypeConversion;
 
 /**
  * Class ConversionDomain.java
- * Description: TODO
+ * Description: classe pour la description des données de l'onglet conversion
  * @author Delphine BOULANGER 
  */
 public class ConversionDomain

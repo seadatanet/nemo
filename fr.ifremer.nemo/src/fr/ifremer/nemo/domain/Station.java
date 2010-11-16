@@ -19,7 +19,7 @@ import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Global.E_InputType;
 
 /**
- * Class Station.java Description: TODO
+ * Class Station.java Description: description d'une station
  * 
  * @author dboulang
  */
