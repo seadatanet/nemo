@@ -773,7 +773,15 @@ public class NemoLists implements Cloneable {
 
         return strReturn;
     }
-
+    /**
+     * 
+     * @param list1 nom de la liste de parametres de depart
+     * @param list2 nom de la liste des parametres d'arrivée
+     * @param value
+     * @return liste des paramètres d'arrivée qui correspondent à la valeur value dans le liste de départ
+     * 
+     * ex: list1=P091 list2=P021, value=BATH renvoie les parametres P021 correspondant au parametre BATH en P091
+     */
     public static List<CodeTableRecordType> getVocabMatchs(String list1, String list2,
         String value)
         {        
@@ -853,12 +861,36 @@ public class NemoLists implements Cloneable {
 	 * 
 	 */
 	public static void initLists() {
+        long debut ;
+        long fin;
+        
 		initParameters();
+        
+        debut = System.currentTimeMillis();
 		initSurveys();
+        fin = System.currentTimeMillis();
+        System.out.println("initSurveys temps ecoule : "+(fin-debut)/3600);
+            
+            
+        debut = System.currentTimeMillis();
 		initVocabLists();
+        fin = System.currentTimeMillis();
+        System.out.println("initVocabLists temps ecoule : "+(fin-debut)/3600);
+        
+        debut = System.currentTimeMillis();
         initVocabMaps();
+        fin = System.currentTimeMillis();
+        System.out.println("initVocabMaps temps ecoule : "+(fin-debut)/3600);
+        
+        debut = System.currentTimeMillis();
         initDataTypes();
+        fin = System.currentTimeMillis();
+        System.out.println("initDataTypes temps ecoule : "+(fin-debut)/3600);
+        
+        debut = System.currentTimeMillis();
 		initEdmo();
+        fin = System.currentTimeMillis();
+        System.out.println("initEdmo temps ecoule : "+(fin-debut)/3600);
 	}
 
 	/**

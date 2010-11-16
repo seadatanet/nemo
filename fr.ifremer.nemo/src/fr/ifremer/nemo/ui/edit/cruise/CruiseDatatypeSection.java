@@ -15,6 +15,7 @@ import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.input.DataType;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.NemoSection;
+import fr.ifremer.nemo.ui.edit.station.EditStationForm;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -26,16 +27,17 @@ import fr.ifremer.nemo.util.Messages;
  */
 public class CruiseDatatypeSection extends NemoSection
 {
-
+    protected EditCruiseForm myForm;
     /**
      * @param shell
      * @param name
      * @param title
      * @param description
      */
-    public CruiseDatatypeSection(String name, String title, String description)
+    public CruiseDatatypeSection(String name, String title, String description, EditCruiseForm form)
     {
-        super(name, title, description);
+        super(name, title, description, form);
+        myForm = form;
     }
 
     /**

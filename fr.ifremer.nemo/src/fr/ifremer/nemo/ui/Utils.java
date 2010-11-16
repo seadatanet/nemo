@@ -28,6 +28,11 @@ import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.input.Fragment;
 import fr.ifremer.nemo.ui.edit.Cursor;
+import fr.ifremer.nemo.ui.edit.conversion.EditConversionForm;
+import fr.ifremer.nemo.ui.edit.cruise.EditCruiseForm;
+import fr.ifremer.nemo.ui.edit.data.EditDataForm;
+import fr.ifremer.nemo.ui.edit.file.EditFileForm;
+import fr.ifremer.nemo.ui.edit.station.EditStationForm;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
@@ -122,11 +127,11 @@ public class Utils
         ViewLog.styledTextLogInfos.append(Messages.Utils_6 + nbreLignes);
 
         // reactivation de l'option serie temporelle onglet DESC
-        ViewMain.enableChoice(true);
+        Nemo.getInstance().getViewMain().getEditFileForm().enableChoice(true);
 
         // FAE 089
         // RAZ global si reouverture fichier en cours de processus
-        Nemo.refreshNomNemo();
+        Nemo.getInstance().refreshNomNemo();
 
         if (raz)
         {
@@ -136,7 +141,7 @@ public class Utils
             Nemo.getInstance().resetModel();
 
             // reset de l'etape de conversion
-            ViewMain.etape = 0;
+            Nemo.getInstance().getViewMain().setEtape(0);
         }
     }
 
@@ -245,7 +250,7 @@ public class Utils
         // on recupere les coordonnees de la selection
         deb = styledtext.getSelection().x;
         fi = styledtext.getSelection().y;
-        index = ViewMain.tableData.getSelectionIndex();
+        index = Nemo.getInstance().getViewMain().tableData.getSelectionIndex();
 
         if (deb == fi)
         {
@@ -291,9 +296,9 @@ public class Utils
             fi = fi - taillesCumLignes[lign - 1]; // fin reelle sur ligne
 
             // remplissage debut et fin dans interface
-            ViewMain.tableData.getItems()[index].setText(debut, String
+            Nemo.getInstance().getViewMain().tableData.getItems()[index].setText(debut, String
                 .valueOf(deb));
-            ViewMain.tableData.getItems()[index].setText(fin, String
+            Nemo.getInstance().getViewMain().tableData.getItems()[index].setText(fin, String
                 .valueOf(fi));
 
         }
@@ -531,9 +536,10 @@ public class Utils
 
     public static void calculRealOffsetFin(Fragment frag)
     {
+        EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
         int offsetFin;
         int enteteFichier =
-            Integer.parseInt(ViewMain.editFileForm.sectionEnteteFichier
+            Integer.parseInt(editFileForm.getSectionEnteteFichier()
                 .getValue());
 
         // calcul de l'offset de fin après rechargement du modèle
@@ -544,11 +550,11 @@ public class Utils
                 frag.getLastCharOffset()
                         + taillesCumLignes[frag.getLastLine()
                                 + Integer
-                                    .parseInt(ViewMain.editFileForm.sectionEnteteFichier
+                                    .parseInt(editFileForm.getSectionEnteteFichier()
                                         .getValue())]
                         - taillesCumLignes[frag.getFirstLine()
                                 + Integer
-                                    .parseInt(ViewMain.editFileForm.sectionEnteteFichier
+                                    .parseInt(editFileForm.getSectionEnteteFichier()
                                         .getValue())];
         }
         else
@@ -766,97 +772,102 @@ public class Utils
     {
         // ViewMain.affiche => onglet courant
         // onglet => onglet destination
-
+        EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
+        EditCruiseForm editCruiseForm = Nemo.getInstance().getViewMain().getEditCruiseForm();
+        EditStationForm editStationForm = Nemo.getInstance().getViewMain().getEditStationForm();
+        EditDataForm editDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
+        EditConversionForm editConversionForm = Nemo.getInstance().getViewMain().getEditConversionForm();
+        
         switch (onglet)
         {
             case 0:
                 ViewLog.aideFile();
-                if (ViewMain.editFileForm != null)
+                if (editFileForm != null)
                 {
                     razEditionCurrent();
-                    if (ViewMain.editFileForm.loaded)
+                    if (editFileForm.isLoaded())
                     {
                         // EditDesc.DrawingBack();
-                        ViewMain.editFileForm.drawingBack();
+                        editFileForm.drawingBack();
                     }
-                    else if (ViewMain.fileLoaded)
+                    else if (editFileForm.isFileLoaded())
                     {
                         // EditDesc.affichageEdition();
-                        ViewMain.editFileForm.afficheEdition();
+                        editFileForm.afficheEdition();
                     }
                     else
                     {
-                        ViewMain.textAreaFile.setText(Global.EMPTY_STRING);
+                        editFileForm.textAreaFile.setText(Global.EMPTY_STRING);
                     }
                 }
-                ViewMain.affiche = 0;
+                Nemo.getInstance().getViewMain().setAffiche(0);
             break;
             case 1:
                 razEditionCurrent();
-                if (ViewMain.editCruiseForm.loaded)
+                if (editCruiseForm.isLoaded())
                 {
-                    ViewMain.editCruiseForm.drawingBack();
+                    editCruiseForm.drawingBack();
                 }
-                else if (ViewMain.editFileForm.validee)
+                else if (editFileForm.validee)
                 {
-                    ViewMain.editCruiseForm.afficheEdition();
+                    editCruiseForm.afficheEdition();
                 }
                 else
                 {
                     ViewLog.aideCruise();
-                    ViewMain.textAreaCruise.setText(Global.EMPTY_STRING);
-                    ViewMain.affiche = 1;
+                    Nemo.getInstance().getViewMain().textAreaCruise.setText(Global.EMPTY_STRING);
+                    Nemo.getInstance().getViewMain().setAffiche(1);
                 }
             break;
             case 2:
                 razEditionCurrent();
-                if (ViewMain.editStationForm.loaded)
+                if (editStationForm.isLoaded())
                 {
-                    ViewMain.editStationForm.drawingBack();
+                    editStationForm.drawingBack();
                 }
-                else if ((!ViewMain.tabCruise.isDisposed() && ViewMain.editCruiseForm.validee)
-                        || (ViewMain.tabCruise.isDisposed() && ViewMain.editFileForm.validee))
+                else if ((!Nemo.getInstance().getViewMain().tabCruise.isDisposed() && editCruiseForm.validee)
+                        || (Nemo.getInstance().getViewMain().tabCruise.isDisposed() && editFileForm.validee))
                 {
-                    ViewMain.editStationForm.afficheEdition();
+                    editStationForm.afficheEdition();
                 }
                 else
                 {
                     ViewLog.aideStation();
-                    ViewMain.textAreaStation.setText(Global.EMPTY_STRING);
-                    ViewMain.affiche = 2;
+                    Nemo.getInstance().getViewMain().textAreaStation.setText(Global.EMPTY_STRING);
+                    Nemo.getInstance().getViewMain().setAffiche(2);
                 }
             break;
             case 3:
                 razEditionCurrent();
-                if (ViewMain.editDataForm.loaded)
+                if (editDataForm.isLoaded())
                 {
-                    ViewMain.editDataForm.drawingBack();
+                    editDataForm.drawingBack();
                 }
-                else if (ViewMain.editStationForm.validee)
+                else if (editStationForm.validee)
                 {
-                    ViewMain.editDataForm.afficheEdition();
+                    editDataForm.afficheEdition();
                 }
                 else
                 {
                     ViewLog.aideData();
-                    ViewMain.textAreaData.setText(Global.EMPTY_STRING);
-                    ViewMain.affiche = 3;
+                    Nemo.getInstance().getViewMain().textAreaData.setText(Global.EMPTY_STRING);
+                    Nemo.getInstance().getViewMain().setAffiche(3);
                 }
             break;
             case 4:
                 razEditionCurrent();
-                if (ViewMain.editConversionForm.loaded)
+                if (editConversionForm.isLoaded())
                 {
-                    ViewMain.editConversionForm.drawingBack();
+                    editConversionForm.drawingBack();
                 }
-                else if (ViewMain.editDataForm.validee)
+                else if (editDataForm.validee)
                 {
-                    ViewMain.editConversionForm.afficheEdition();
+                    editConversionForm.afficheEdition();
                 }
                 else
                 {
                     ViewLog.aideConversion();
-                    ViewMain.affiche = 4;
+                    Nemo.getInstance().getViewMain().setAffiche(4);
                 }
             break;
         }
@@ -865,32 +876,38 @@ public class Utils
 
     private static void razEditionCurrent()
     {
-        switch (ViewMain.affiche)
+        EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
+        EditCruiseForm editCruiseForm = Nemo.getInstance().getViewMain().getEditCruiseForm();
+        EditStationForm editStationForm = Nemo.getInstance().getViewMain().getEditStationForm();
+        EditDataForm editDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
+        EditConversionForm editConversionForm = Nemo.getInstance().getViewMain().getEditConversionForm();
+        
+        switch (Nemo.getInstance().getViewMain().getAffiche())
         {
             case 0:
                 // from FILE
-                if (ViewMain.editFileForm.loaded)
-                    ViewMain.editFileForm.razEdition();
+                if (editFileForm.isLoaded())
+                    editFileForm.razEdition();
             break;
             case 1:
                 // from CRUISE
-                if (ViewMain.editCruiseForm.loaded)
-                    ViewMain.editCruiseForm.razEdition();
+                if (editCruiseForm.isLoaded())
+                    editCruiseForm.razEdition();
             break;
             case 2:
                 // from STATION
-                if (ViewMain.editStationForm.loaded)
-                    ViewMain.editStationForm.razEdition();
+                if (editStationForm.isLoaded())
+                    editStationForm.razEdition();
             break;
             case 3:
                 // from DATA
-                if (ViewMain.editDataForm.loaded)
-                    ViewMain.editDataForm.razEdition();
+                if (editDataForm.isLoaded())
+                    editDataForm.razEdition();
             break;
             case 4:
                 // from DATA
-                if (ViewMain.editConversionForm.loaded)
-                    ViewMain.editConversionForm.razEdition();
+                if (editConversionForm.isLoaded())
+                    editConversionForm.razEdition();
             break;
             default:
             break;
@@ -948,15 +965,15 @@ public class Utils
 
         if (ok)
         {
-
-            ViewMain.nomFichier =
+            EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
+            editFileForm.nomFichier =
                 directoryPath + File.separator + subfiles[0].getName();
-            ViewMain.nomRepertoire = directoryPath;
+            editFileForm.nomRepertoire = directoryPath;
 
             try
             {
-                Utils.insertTextFich(ViewMain.nomFichier,
-                    ViewMain.textAreaFile, raz);
+                Utils.insertTextFich(editFileForm.nomFichier,
+                    editFileForm.textAreaFile, raz);
             }
             catch (IOException e)
             {
@@ -1064,16 +1081,17 @@ public class Utils
 
         if (ok)
         {
-
-            ViewMain.nomFichier =
+            EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
+            
+            editFileForm.nomFichier =
                 directoryPath + File.separator + subfiles[0].getName()
                         + File.separator + subsubfiles[0].getName();
-            ViewMain.nomRepertoire = directoryPath;
+            editFileForm.nomRepertoire = directoryPath;
 
             try
             {
-                Utils.insertTextFich(ViewMain.nomFichier,
-                    ViewMain.textAreaFile, raz);
+                Utils.insertTextFich(editFileForm.nomFichier,
+                    editFileForm.textAreaFile, raz);
             }
             catch (IOException e)
             {
@@ -1166,19 +1184,23 @@ public class Utils
 
     public static void razGlobal()
     {
+        EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
+        EditCruiseForm editCruiseForm = Nemo.getInstance().getViewMain().getEditCruiseForm();
+        EditStationForm editStationForm = Nemo.getInstance().getViewMain().getEditStationForm();
+        EditDataForm editDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
+        
         // efface tous les onglets qui ont ete affiches jusque le en preparation
         // du chargement d'un nouveau fichier
-        if (ViewMain.editFileForm.sectionEnteteFichier != null)
+        if (editFileForm.getSectionEnteteFichier() != null)
         {
             // //effacement boutons
-            ViewMain.editFileForm.razEdition();
+            editFileForm.razEdition();
 
             // reinitialisation des formulaires
-            ViewMain.editFileForm.razText();
-            ViewMain.editCruiseForm.razText();
-            ViewMain.editStationForm.razText();
-            ViewMain.editDataForm.razText();
-            // ViewMain.editConversionForm.razText();
+            editFileForm.razText();
+            editCruiseForm.razText();
+            editStationForm.razText();
+            editDataForm.razText();
         }
 
         invalidEtapes();
@@ -1490,35 +1512,36 @@ public class Utils
 
     public static void invalidEtapes()
     {
+        EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
+        EditCruiseForm editCruiseForm = Nemo.getInstance().getViewMain().getEditCruiseForm();
+        EditStationForm editStationForm = Nemo.getInstance().getViewMain().getEditStationForm();
+        EditDataForm editDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
+        EditConversionForm editConversionForm = Nemo.getInstance().getViewMain().getEditConversionForm();
         // on modifie la valeur du champ texte
         // dès qu'on modifie une valeur, on invalide l'étape
         // remise du nom onglet à valeur par défaut
 
         // on invalide toutes les étapes suivantes avec le second
         // flag okApresReset à false
-        if (ViewMain.editFileForm != null)
+        if (editFileForm != null)
         {
-            int currentTab = ViewMain.affiche;
+            int currentTab = Nemo.getInstance().getViewMain().getAffiche();
 
             if (currentTab <= 0) // onglet FILE ou inférieur en cours
-                ViewMain.editFileForm.invalidEtape();
+                editFileForm.invalidEtape();
 
             if (currentTab <= 1) // onglet CRUISE ou inférieur en cours
-                ViewMain.editCruiseForm.invalidEtape();
+                editCruiseForm.invalidEtape();
 
             if (currentTab <= 2) // onglet STATION ou inférieur en cours
-                ViewMain.editStationForm.invalidEtape();
+                editStationForm.invalidEtape();
 
             if (currentTab <= 3) // onglet DATA ou inférieur en cours
-                ViewMain.editDataForm.invalidEtape();
+                editDataForm.invalidEtape();
 
             if (currentTab <= 4) // onglet CONVERSION ou inférieur en cours
-                ViewMain.editConversionForm.invalidEtape();
+                editConversionForm.invalidEtape();
         }
-        // reinitialisation de la conversion
-        // TODO remettre setConverted ??
-        // if (DataModel.inputModel != null)
-        // DataModel.inputModel.setConverted(false);
     }
 
     /**

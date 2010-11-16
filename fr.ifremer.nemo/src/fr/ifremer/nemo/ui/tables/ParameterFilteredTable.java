@@ -54,7 +54,7 @@ public class ParameterFilteredTable extends AbstractFilteredTable
         // liste filtree initialisee e typesWS au depart
         try
         {
-            TableData.initTypesWS();
+//            TableData.initTypesWS();
             
             TableData.listeFiltree = new ArrayList<TypeData>();
             // liste filtree initialisee e typesWS au depart
@@ -164,12 +164,18 @@ public class ParameterFilteredTable extends AbstractFilteredTable
       
       
       // Correction FAE 3760 si on charge un modele si on a utilisé liste P091 on continue à utiliser la liste P091
-      boolean isTypeP011;
+      boolean isTypeP011=false;
+      DataListEnum currentType=config.getDataList();
       
       if (!TableData.types.isEmpty())
-          isTypeP011 = TableData.types.get(0).isP011();
-      else
-          isTypeP011 = config.getDataList().equals(DataListEnum.P011);
+      {
+          if (TableData.types.get(0).isP011())
+          {
+              isTypeP011=true;
+              currentType= DataListEnum.P011_VIA_P091;
+          }
+      }
+      
       
       if (isTypeP011)
       {

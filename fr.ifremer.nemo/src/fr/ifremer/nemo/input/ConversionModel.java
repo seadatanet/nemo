@@ -23,6 +23,12 @@ public class ConversionModel extends AbstractModel
      */
     protected List<E_TypeConversion> _enableConversions;
 
+    
+    /**
+     * format de sortie choisi
+     */
+    private E_TypeConversion _outputFormat;
+    
     /**
      * indicateur de tri des stations en sortie
      */
@@ -43,6 +49,7 @@ public class ConversionModel extends AbstractModel
             _enableConversions.add(e);
         }
         _sortStations = false;
+        _outputFormat = E_TypeConversion.MEDATLAS;
     }
 
 
@@ -76,23 +83,47 @@ public class ConversionModel extends AbstractModel
     public SAXConsumer consumeElement(String a_URI, 
                                       String a_LocalName,
                                       String a_QName, 
-                                      Attributes a_Attributes){
-        if (a_LocalName.equals(ModelDescription.node_listPermissions)){
-            for (E_TypeConversion e : E_TypeConversion.values()){
-                if (a_LocalName.equals(e.toString())){
-                    boolean enable = new Boolean(a_Attributes.getValue(ModelDescription.a_enable));
-                    if (enable)
-                        _enableConversions.add(e);
-                    else
-                        _enableConversions.remove(e);
+                                      Attributes a_Attributes)
+    {
+    // lecture permissions
+        for (E_TypeConversion e : E_TypeConversion.values()){
+            if (a_LocalName.equals(e.toString())){
+                boolean enable = new Boolean(a_Attributes.getValue(ModelDescription.a_enable));
+                if (enable && ! _enableConversions.contains(e)){
+                    _enableConversions.add(e);
                 }
+                else if (!enable &&  _enableConversions.contains(e))
+                {
+                    _enableConversions.remove(e);
+                }
+                return this;
             }
         }
+            
+        if (a_LocalName.equals(ModelDescription.node_listPermissions)){
+//            for (E_TypeConversion e : E_TypeConversion.values()){
+//                //TODO corriger lecture
+//                if (a_LocalName.equals(e.toString())){
+//                    boolean enable = new Boolean(a_Attributes.getValue(ModelDescription.a_enable));
+//                    if (enable)
+//                        _enableConversions.add(e);
+//                    else
+//                        _enableConversions.remove(e);
+//                }
+//            }
+            return this;
+        }
+       
         if (a_LocalName.equals(ModelDescription.node_sort)){            
             Element2Field setter = new Element2Field(this, ModelDescription.setter_sort);
             return setter;
         }
-        return null;
+        if (a_LocalName.equals(ModelDescription.node_outputFormat))
+        {
+            Element2Field setter = new Element2Field(this, ModelDescription.setter_outputFormat);
+            return setter;
+        }
+        return this;
     }
     
     /**
@@ -122,6 +153,7 @@ public class ConversionModel extends AbstractModel
         }
         a_Writer.closeTag();
         a_Writer.putTag(ModelDescription.node_sort, isSortStations());
+        a_Writer.putTag(ModelDescription.node_outputFormat, getOutputFormat().toString());
     }
     
     
@@ -213,5 +245,30 @@ public class ConversionModel extends AbstractModel
      */
     public void setSortStations(String s){
         _sortStations = new Boolean(s).booleanValue();;
+    }
+
+    public E_TypeConversion getOutputFormat()
+    {
+        return _outputFormat;
+    }
+
+    public void setOutputFormat(String outputFormat)
+    {
+        if (outputFormat.equals(E_TypeConversion.MEDATLAS.toString()))
+        {
+            setOutputFormat(E_TypeConversion.MEDATLAS);
+        }
+        else if(outputFormat.equals(E_TypeConversion.ODV_MONOSTATION.toString()))
+        {
+            setOutputFormat(E_TypeConversion.ODV_MONOSTATION);
+        }
+        else if(outputFormat.equals(E_TypeConversion.ODV_MULTISTATIONS.toString()))
+        {
+            setOutputFormat(E_TypeConversion.ODV_MULTISTATIONS);
+        }
+    }
+    public void setOutputFormat(E_TypeConversion outputFormat)
+    {
+        _outputFormat = outputFormat;
     }   
 }

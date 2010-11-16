@@ -17,7 +17,10 @@ import org.eclipse.ui.application.WorkbenchWindowAdvisor;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.actions.SaveAction;
-import fr.ifremer.nemo.ui.view.ViewMain;
+import fr.ifremer.nemo.ui.edit.cruise.EditCruiseForm;
+import fr.ifremer.nemo.ui.edit.data.EditDataForm;
+import fr.ifremer.nemo.ui.edit.file.EditFileForm;
+import fr.ifremer.nemo.ui.edit.station.EditStationForm;
 import fr.ifremer.nemo.util.Messages;
 
 public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor
@@ -54,13 +57,18 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor
 
         if (reponse == SWT.YES)
         {
+            EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
+            EditCruiseForm editCruiseForm = Nemo.getInstance().getViewMain().getEditCruiseForm();
+            EditStationForm editStationForm = Nemo.getInstance().getViewMain().getEditStationForm();
+            EditDataForm editDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
+            
             // demande pour sauver le modele
-            if (ViewMain.editDataForm.validee )
+            if (editDataForm.validee )
             {
-                if (ViewMain.editFileForm.okApresReset
-                        && ViewMain.editCruiseForm.okApresReset
-                        && ViewMain.editStationForm.okApresReset
-                        && ViewMain.editDataForm.okApresReset)
+                if (editFileForm.isOkApresReset()
+                        && editCruiseForm.isOkApresReset()
+                        && editStationForm.isOkApresReset()
+                        && editDataForm.isOkApresReset())
                 {
                     //4063
                     File tmpBack =null;

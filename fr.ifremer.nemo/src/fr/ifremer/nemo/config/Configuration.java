@@ -13,7 +13,6 @@ import java.util.StringTokenizer;
 import org.xml.sax.Attributes;
 
 import com.ago.xml.Element2Field;
-import com.ago.xml.PathElementConsumer;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLBootstrapParser;
 import com.ago.xml.XMLOutputWriter;
@@ -99,9 +98,9 @@ public class Configuration extends AbstractModel
     
     protected boolean dateISO;
 
-    public enum DataListEnum {P011, P091};
+    public enum DataListEnum {P011_VIA_P091, P091, P011_VIA_P021};
     
-    protected DataListEnum _dataList;
+    private DataListEnum _dataList;
     
 	public Configuration() {
         _tagName = ConfigDescription.node_root;

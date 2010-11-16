@@ -81,7 +81,7 @@ public class SubParameterFilteredTable extends AbstractFilteredTable
             String entryKey = code.getEntryKey();
             String[] entryKeySplit = entryKey.split("/"); //$NON-NLS-1$
 
-            newElement.setP011(true);
+            newElement.setIsP011(true);
 
             newElement.setCodeP011(entryKeySplit[entryKeySplit.length - 1]);
 
@@ -196,7 +196,7 @@ public class SubParameterFilteredTable extends AbstractFilteredTable
     @Override
     protected String getDialogTitle()
     {
-        return _typeP091.getCode().split("-")[0].trim() + " - " + Messages.table_subparameters; //$NON-NLS-1$
+        return _typeP091.getCode().split("-")[0].trim() + " - " + Messages.table_subparameters; //$NON-NLS-1$ //$NON-NLS-2$ 
     }
 
     /**

@@ -16,6 +16,7 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
@@ -23,6 +24,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.UIobject;
 import fr.ifremer.nemo.ui.edit.station.AutoLine.MetaInData;
@@ -77,27 +79,27 @@ public class GrpAutoInput implements UIobject
 
     public void draw(Composite sectionClient, boolean filled)
     {
-
+        Color backgroundEditColor = Nemo.getInstance().getViewMain().getBackgroundEdit();
         buttonPos = new Button(sectionClient, SWT.RADIO);
-        buttonPos.setBackground(ViewMain.backgroungEdit);
+        buttonPos.setBackground(backgroundEditColor);
         buttonPos.setText(labelButtonPos);
 
         Group groupe = new Group(sectionClient, SWT.NONE);
-        groupe.setBackground(ViewMain.backgroungEdit);
+        groupe.setBackground(backgroundEditColor);
         groupe.setText(Messages.label_position);
         groupe.setLayout(new GridLayout());
 
         GridDataFactory.fillDefaults().grab(true, false).applyTo(groupe);
 
         Composite compo1 = AutoLine.drawLineCompo(groupe);
-        compo1.setBackground(ViewMain.backgroungEdit);
+        compo1.setBackground(backgroundEditColor);
         for (AutoLine line : lines)
         {
             line.drawLine(compo1, filled);
         }
 
         Composite compo2 = AutoLine.drawSetCompo(groupe, lines.size());
-        compo2.setBackground(ViewMain.backgroungEdit);
+        compo2.setBackground(backgroundEditColor);
         for (int i = 0; i < lines.size(); i++)
         {
             lines.get(i).drawSet(compo2, i);
@@ -107,7 +109,7 @@ public class GrpAutoInput implements UIobject
         {
             buttonVari = new Button(compo2, SWT.CHECK);
             buttonVari.setParent(compo2);
-            buttonVari.setBackground(ViewMain.backgroungEdit);
+            buttonVari.setBackground(backgroundEditColor);
             buttonVari.setText(this.variableLabel);
             GridDataFactory.fillDefaults().grab(true, false).align(SWT.END,
                 SWT.CENTER).applyTo(buttonVari);

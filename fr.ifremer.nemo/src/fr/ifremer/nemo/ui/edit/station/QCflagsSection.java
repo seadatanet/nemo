@@ -55,15 +55,18 @@ public class QCflagsSection extends NemoSection
     private TableColumn tableColumn0, tableColumn1, tableColumn2, tableColumn3,
             tableColumn4, tableColumn5, tableColumn6;
     protected FlagTable flagTable;
+    protected EditStationForm myForm;
 
-    public QCflagsSection(String name, String title, String description)
+    public QCflagsSection(String name, String title, String description , EditStationForm form)
     {
 
-        super(name, title, description);
+        super(name, title, description, form);
+        
 
         flagTable = new FlagTable();
 
         flagTable = Nemo.getInstance().getConfig().getDefaultFlagTable();
+        myForm = form;
     }
 
     /**
@@ -238,7 +241,7 @@ public class QCflagsSection extends NemoSection
                 flagTable.getFlags().remove(
                     flagTable.getFlag(tab.getSelection()[0].getText()));
                 tab.remove(tab.getSelectionIndex());
-                ViewMain.editStationForm.formEdition.reflow(true);
+                myForm.formEdition.reflow(true);
                 Utils.invalidEtapes();
             }
         });
@@ -262,7 +265,7 @@ public class QCflagsSection extends NemoSection
                 {
                     flagTable = flagTables.get(j);
                     flagTable.fillTable(tab);
-                    ViewMain.editStationForm.formEdition.reflow(true);
+                    myForm.formEdition.reflow(true);
                     Utils.invalidEtapes();
                 }
             });
@@ -324,7 +327,7 @@ public class QCflagsSection extends NemoSection
         MenuItem itemTestFlag = new MenuItem(menuFlag, SWT.NONE);
         itemTestFlag.setText(Messages.label_test);
 
-        if (ViewMain.radProfilVertical.getSelection())
+        if (Nemo.getInstance().getViewMain().getEditFileForm().radProfilVertical.getSelection())
         {
             final FlagMenuItem childDateTime =
                 new FlagMenuItem(subFlag, tabFlagQC, Intern.DATETIME, Messages
@@ -384,7 +387,7 @@ public class QCflagsSection extends NemoSection
             public void handleEvent(Event e)
             {
                 tabFlag.remove(tabFlag.getSelectionIndex());
-                ViewMain.editStationForm.formEdition.reflow(true);
+                myForm.formEdition.reflow(true);
                 Utils.invalidEtapes();
             }
         });
@@ -392,7 +395,7 @@ public class QCflagsSection extends NemoSection
         itemInjectFlag.addListener(SWT.Selection, new Listener() {
             public void handleEvent(Event e)
             {
-                Utils.injectFlag(ViewMain.textAreaStation, flagTable, tabFlag,
+                Utils.injectFlag(Nemo.getInstance().getViewMain().textAreaStation, flagTable, tabFlag,
                     2, 3, 4, 5, 6);
                 Utils.invalidEtapes();
             }
@@ -401,7 +404,7 @@ public class QCflagsSection extends NemoSection
         itemTestFlag.addListener(SWT.Selection, new Listener() {
             public void handleEvent(Event e)
             {
-                Utils.testFlag(ViewMain.textAreaStation, flagTable, tabFlag, 2,
+                Utils.testFlag(Nemo.getInstance().getViewMain().textAreaStation, flagTable, tabFlag, 2,
                     3, 4, 5, 6);
             }
         });
@@ -491,7 +494,7 @@ public class QCflagsSection extends NemoSection
         if (stationModel.getFlagTable() != null)
         {
             flagTable = stationModel.getFlagTable();
-            flagTable.fillTable(ViewMain.editStationForm.qcFlags
+            flagTable.fillTable(myForm.qcFlags
                 .getTabCorrespondance());
         }
     }
@@ -508,7 +511,7 @@ public class QCflagsSection extends NemoSection
                 flag.setFirstLine(Integer
                     .valueOf(tabFlagQC.getItems()[i].getText(2))
                         - Integer
-                            .valueOf(ViewMain.editFileForm.sectionEnteteFichier
+                            .valueOf(Nemo.getInstance().getViewMain().getEditFileForm().getSectionEnteteFichier()
                                 .getValue()));
                 flag.setLastLine(flag.getFirstLine());
                 flag.setFirstCharOffset(tabFlagQC.getItems()[i].getText(3));
@@ -531,7 +534,7 @@ public class QCflagsSection extends NemoSection
                 flag.setFirstLine(Integer.valueOf(getTabFlagQC().getItems()[i]
                     .getText(2))
                         - Integer
-                            .valueOf(ViewMain.editFileForm.sectionEnteteFichier
+                            .valueOf(Nemo.getInstance().getViewMain().getEditFileForm().getSectionEnteteFichier()
                                 .getValue()));
                 flag.setLastLine(flag.getFirstLine());
                 flag

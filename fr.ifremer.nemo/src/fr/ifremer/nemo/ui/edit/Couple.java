@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Text;
 
 import com.sun.xml.internal.bind.v2.runtime.reflect.Lister.Pack;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
@@ -108,7 +109,7 @@ public class Couple implements UIobject
                 && !labelString.trim().equals(Global.EMPTY_STRING))
         {
             label = new Label(parent, SWT.NONE);
-            label.setBackground(ViewMain.backgroungEdit);
+            label.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
             label.setText(labelString);
         }
 
@@ -134,7 +135,7 @@ public class Couple implements UIobject
         else if (valueCombo != null)
         {
             valueCombo.setParent(parent);
-            valueCombo.setBackground(ViewMain.backgroungEdit);
+            valueCombo.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
             // valueCombo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
             GridDataFactory.fillDefaults().grab(false, true).hint(Global.SIZE_SECTION, 25)

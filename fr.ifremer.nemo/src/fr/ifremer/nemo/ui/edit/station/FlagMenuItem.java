@@ -8,6 +8,7 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.view.ViewMain;
 
 /**
@@ -51,7 +52,7 @@ public class FlagMenuItem
                 TableItem itemTemp = new TableItem(_table, SWT.NONE);
                 itemTemp.setText(0, _code);
                 itemTemp.setText(1, _item.getText());
-                ViewMain.editStationForm.formEdition.reflow(true);
+                Nemo.getInstance().getViewMain().getEditStationForm().formEdition.reflow(true);
             }
         });
     }

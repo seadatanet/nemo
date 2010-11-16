@@ -20,8 +20,11 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.ui.edit.conversion.EditConversionForm;
+import fr.ifremer.nemo.ui.edit.cruise.EditCruiseForm;
 import fr.ifremer.nemo.ui.edit.cruise.TableDataSurvey;
 import fr.ifremer.nemo.ui.edit.cruise.TableWS_Survey;
 import fr.ifremer.nemo.ui.edit.cruise.TypeSurvey;
@@ -184,6 +187,7 @@ public class WSSurveyFilteredTable extends AbstractFilteredTable
     @Override
     protected void selectAction()
     {
+        
         // selection d'une reference campagne
         int index = TableWS_Survey.filtreTable.getSelectionIndex();
         String reference = TableWS_Survey.listeFiltree.get(index);
@@ -191,7 +195,7 @@ public class WSSurveyFilteredTable extends AbstractFilteredTable
 
         String mots[] = p.split(reference);
 
-        ViewMain.editCruiseForm.webService(mots[0]);
+        Nemo.getInstance().getViewMain().getEditCruiseForm().webService(mots[0]);
 
         Utils.messageOK(Messages.success_openSurveyDesc);
         shell.close();

@@ -18,6 +18,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.UIobject;
 import fr.ifremer.nemo.ui.view.ViewMain;
@@ -52,9 +53,9 @@ public class SetText implements UIobject
 
     protected void injectText()
     {
-        text.setText(ViewMain.textAreaFile.getText().substring(
-            ViewMain.textAreaFile.getSelection().x,
-            ViewMain.textAreaFile.getSelection().y));
+        text.setText(Nemo.getInstance().getViewMain().getEditFileForm().textAreaFile.getText().substring(
+            Nemo.getInstance().getViewMain().getEditFileForm().textAreaFile.getSelection().x,
+            Nemo.getInstance().getViewMain().getEditFileForm().textAreaFile.getSelection().y));
         text.pack();
     }
 
@@ -63,8 +64,8 @@ public class SetText implements UIobject
         int deb, fi, lignDepart, lignFin, i;
 
         // on recupere les coordonnees de la selection
-        deb = ViewMain.textAreaFile.getSelection().x;
-        fi = ViewMain.textAreaFile.getSelection().y;
+        deb = Nemo.getInstance().getViewMain().getEditFileForm().textAreaFile.getSelection().x;
+        fi = Nemo.getInstance().getViewMain().getEditFileForm().textAreaFile.getSelection().y;
 
         lignDepart = 1;
         lignFin = 1;
@@ -148,7 +149,7 @@ public class SetText implements UIobject
         {
             label = new Label(compo, SWT.WRAP);
             label.setText(stringLabel);
-            label.setBackground(ViewMain.backgroungEdit);
+            label.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
             GridDataFactory.fillDefaults().grab(false, false).hint(textSize, SWT.DEFAULT)
             .applyTo(label);
         }
@@ -167,7 +168,7 @@ public class SetText implements UIobject
             .applyTo(text);
 
         buttonSet = new Button(compo, SWT.NONE);
-        buttonSet.setBackground(ViewMain.backgroungEdit);
+        buttonSet.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
         buttonSet.setText(Messages.button_set);
         buttonSet
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {

@@ -1,20 +1,20 @@
 package fr.ifremer.nemo.ui.edit.cruise;
 
 import java.io.File;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.events.KeyListener;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+
+import com.ibm.icu.text.SimpleDateFormat;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.NemoLists;
@@ -25,19 +25,18 @@ import fr.ifremer.nemo.ui.SWTProcessWS;
 import fr.ifremer.nemo.ui.SWTProgressWS;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.ComboType;
-import fr.ifremer.nemo.ui.edit.DataModel;
+import fr.ifremer.nemo.ui.edit.Couple;
 import fr.ifremer.nemo.ui.edit.EditForm;
 import fr.ifremer.nemo.ui.edit.Etape;
 import fr.ifremer.nemo.ui.edit.NemoSection;
 import fr.ifremer.nemo.ui.view.ViewLog;
-import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.util.format.DateTimeFormat;
 import fr.ifremer.nemo.ws.WSDataType;
 
 public class EditCruiseForm extends EditForm
 {
-    // public ArrayList<NemoSection> listeSectionsSurvey;
     public Button buttonInitServeur, buttonXML;
     public CruiseSection sectionReference, sectionLocalisation, sectionSource,
             sectionCentre;
@@ -45,6 +44,8 @@ public class EditCruiseForm extends EditForm
     public CruiseDatatypeSection sectionType;
     private Composite _parent;
 
+    
+    
     @Override
     public void createEditionForm(Composite parent)
     {
@@ -72,7 +73,7 @@ public class EditCruiseForm extends EditForm
 
         // bouton serveur
         buttonInitServeur = new Button(formEdition.getBody(), SWT.NONE);
-        buttonInitServeur.setBackground(ViewMain.backgroungEdit);
+        buttonInitServeur.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
         buttonInitServeur.setText(Messages.button_serverIni);
         buttonInitServeur
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -87,7 +88,7 @@ public class EditCruiseForm extends EditForm
 
         // bouton XML
         buttonXML = new Button(formEdition.getBody(), SWT.NONE);
-        buttonXML.setBackground(ViewMain.backgroungEdit);
+        buttonXML.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
         buttonXML.setText(Messages.button_xmlIni);
         buttonXML
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -118,12 +119,12 @@ public class EditCruiseForm extends EditForm
         ViewLog.aideCruise();
 
         // affichage du texte dans la zone de gauche
-        ViewMain.textAreaCruise.setText(Utils.texteBrut);
+        Nemo.getInstance().getViewMain().textAreaCruise.setText(Utils.texteBrut);
 
-        if (!loaded)
+        if (!isLoaded())
         {
             // INFOS sur les fichiers utilises
-            if (ViewMain.radioFichier.getSelection())
+            if (Nemo.getInstance().getViewMain().getEditFileForm().radioFichier.getSelection())
             {
                 // fichier campagne
                 Utils.messageInfoAppend(Messages.view_file_cruiseFile);
@@ -132,28 +133,29 @@ public class EditCruiseForm extends EditForm
             {
                 // dossier campagne
                 Utils.messageInfoAppend(Messages.view_file_cruiseDir
-                        + ViewMain.nomRepertoire);
+                        + Nemo.getInstance().getViewMain().getEditFileForm().nomRepertoire);
             }
 
-            if (ViewMain.radSerieTempo.getSelection())
+            if (Nemo.getInstance().getViewMain().getEditFileForm().radSerieTempo.getSelection())
             {
                 // Série temporelle
                 Utils.messageInfoAppend(Messages.typeFile_timeseries);
             }
-            else if (ViewMain.radTrajectoire.getSelection())
+            else if (Nemo.getInstance().getViewMain().getEditFileForm().radTrajectoire.getSelection())
             {
                 // Trajectoire
                 Utils.messageInfoAppend(Messages.typeFile_trajectory);
             }
         }
-        loaded = true;
-        ViewMain.affiche = 1;
+        setLoaded(true);
+        Nemo.getInstance().getViewMain().setAffiche(1);
 
         // remplissage de l'IHM par le modèle chargé
         // CruiseModel cModel =
         // Application.nemo.getDomain().getCruise().getModel();
         // if (cModel != null){
-        DataModel.fillCruise();
+//        DataModel.fillCruise();
+        fillFromModel();
         filled = true;
         // }
         /*
@@ -250,7 +252,8 @@ public class EditCruiseForm extends EditForm
         new SWTProgressWS().run();
 
         // mise à jour de l'onglet courant
-        DataModel.fillCruise();
+//        DataModel.fillCruise();
+        fillFromModel();
 
         // majApresWS();
 
@@ -265,7 +268,7 @@ public class EditCruiseForm extends EditForm
         // description
 
         // verifier que un fichier est charge avant d'ouvrir un modele
-        if ((!ViewMain.editFileForm.validee) && (!loaded))
+        if ((!Nemo.getInstance().getViewMain().getEditFileForm().validee) && (!isLoaded()))
         {
             Utils.messageErreurAppend(Messages.error_cruise_openXml);
         }
@@ -322,7 +325,8 @@ public class EditCruiseForm extends EditForm
          */
 
         // mise à jour de l'onglet courant
-        DataModel.fillCruise();
+//        DataModel.fillCruise();
+        fillFromModel();
     }
 
     protected CruiseModel importXML(File fichier) throws Exception
@@ -360,7 +364,7 @@ public class EditCruiseForm extends EditForm
         super.drawingBack();
 
         ViewLog.aideCruise();
-        ViewMain.affiche = 1;
+        Nemo.getInstance().getViewMain().setAffiche(1);
     }
 
     @Override
@@ -370,7 +374,7 @@ public class EditCruiseForm extends EditForm
         sectionReference =
             new CruiseSection(NemoSection.C_REFERENCE,
                 Messages.edit_cruise_sectionReference,
-                Messages.edit_cruise_sectionReference_lib);
+                Messages.edit_cruise_sectionReference_lib, this);
         sectionReference.addItem(Messages.edit_cruise_cruiseRef,
             ComboType.NONE, Global.EMPTY_STRING);
         sectionReference.addItem(Messages.edit_cruise_cruiseName,
@@ -382,7 +386,7 @@ public class EditCruiseForm extends EditForm
         sectionLocalisation =
             new CruiseSection(NemoSection.C_LOCATION,
                 Messages.edit_cruise_sectionLocation,
-                Messages.edit_cruise_sectionLocation_lib);
+                Messages.edit_cruise_sectionLocation_lib, this);
         sectionLocalisation.addItem(Messages.edit_cruise_startDate,
             ComboType.NONE, Global.EMPTY_STRING);
         sectionLocalisation.addItem(Messages.edit_cruise_endDate,
@@ -394,7 +398,7 @@ public class EditCruiseForm extends EditForm
         sectionSource =
             new CruiseSection(NemoSection.C_DATASOURCE,
                 Messages.edit_cruise_sectionDataSource,
-                Messages.edit_cruise_sectionDataSource_lib);
+                Messages.edit_cruise_sectionDataSource_lib, this);
         sectionSource.addItem(Messages.edit_cruise_country, ComboType.COUNTRY,
             Global.EMPTY_STRING);
         sectionSource.addItem(Messages.edit_cruise_lab, ComboType.NONE,
@@ -408,7 +412,7 @@ public class EditCruiseForm extends EditForm
         sectionCentre =
             new CruiseSection(NemoSection.C_ARCHIVING,
                 Messages.edit_cruise_sectionArchiving,
-                Messages.edit_cruise_sectionArchiving_lib);
+                Messages.edit_cruise_sectionArchiving_lib, this);
         sectionCentre.addItem(Messages.edit_cruise_dataCenter,
             ComboType.DATACENTER, Nemo.getInstance().getConfig()
                 .getDataCenter());
@@ -419,13 +423,13 @@ public class EditCruiseForm extends EditForm
         sectionType =
             new CruiseDatatypeSection(NemoSection.C_DATATYPE,
                 Messages.edit_cruise_sectionDataTypes,
-                Messages.edit_cruise_sectionDataTypes_lib);
+                Messages.edit_cruise_sectionDataTypes_lib, this);
         listeSections.add(sectionType);
 
         sectionCommentaire =
             new CruiseSection(NemoSection.C_COMMENTS,
                 Messages.edit_cruise_sectionComments,
-                Messages.edit_cruise_sectionComments_lib);
+                Messages.edit_cruise_sectionComments_lib, this);
         sectionCommentaire.addItem(Global.EMPTY_STRING, ComboType.BLOCK,
             Global.EMPTY_STRING);
         listeSections.add(sectionCommentaire);
@@ -443,11 +447,177 @@ public class EditCruiseForm extends EditForm
 
     public void invalidEtape()
     {
-        if (!ViewMain.tabCruise.isDisposed())
+        if (!Nemo.getInstance().getViewMain().tabCruise.isDisposed())
         {
             super.invalidEtape(1);
-            ViewMain.tabCruise.setText(Messages.onglet_cruise);
+            Nemo.getInstance().getViewMain().tabCruise.setText(Messages.onglet_cruise);
         }
     }
+    
+    @Override
+    public void initFromNewModel()
+    {
+        // recuperation du model correspondant
+        CruiseModel cruiseModel = new CruiseModel();
+        
+        
+        // recupération des items
+        Couple refCampagne =sectionReference.getItem(Messages.edit_cruise_cruiseRef);
+        Couple nomCampagne =sectionReference.getItem(Messages.edit_cruise_cruiseName);
+        Couple navire =sectionReference.getItem(Messages.edit_cruise_ship);
+        Couple dateDebut =sectionLocalisation.getItem(Messages.edit_cruise_startDate);
+        Couple dateFin =sectionLocalisation.getItem(Messages.edit_cruise_endDate);
+        Couple region =sectionLocalisation.getItem(Messages.edit_cruise_region);
+        Couple pays = sectionSource.getItem(Messages.edit_cruise_country);
+        Couple labo =sectionSource.getItem(Messages.edit_cruise_lab);
+        Couple chef =sectionSource.getItem(Messages.edit_cruise_chief);
+        Couple projet =sectionSource.getItem(Messages.edit_cruise_project);
+        Couple centreDonnee =sectionCentre.getItem(Messages.edit_cruise_dataCenter);
+        Couple confidentialite =sectionCentre.getItem(Messages.edit_cruise_confident);
+        Couple commentaires =sectionCommentaire.getItem(Global.EMPTY_STRING);
 
+        // maj des dataTypes
+        TableDataSurvey.majTypeData();
+
+        // injection des valeurs de l'IHM -> datamodel
+        // reference
+        if (Nemo.getInstance().getViewMain().tabCruise.isDisposed()){
+            validee = true;
+            return;
+        }
+
+        cruiseModel.setReference(refCampagne.getText());
+        cruiseModel.setName(nomCampagne.getText());
+        cruiseModel.setShipCode(Utils.extraitCode(navire.getText()));
+        cruiseModel.setShipName(Utils.extraitValeur(navire.getText()));
+
+        // Localisation
+
+        // DATE DE DEBUT
+        try
+        {
+            DateTimeFormat dateFormat = new DateTimeFormat();
+            dateFormat.setFormatString("dd/MM/yyyy"); //$NON-NLS-1$
+            Long dateLong = (Long) dateFormat.parseObject(dateDebut.getText());
+            cruiseModel.setStartDate(dateLong);
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+
+        // DATE DE FIN
+        try
+        {
+            DateTimeFormat dateFormat = new DateTimeFormat();
+            dateFormat.setFormatString("dd/MM/yyyy"); //$NON-NLS-1$
+            Long dateLong = (Long) dateFormat.parseObject(dateFin.getText());
+            cruiseModel.setEndDate(dateLong);
+        }
+        catch (ParseException e)
+        {
+            e.printStackTrace();
+        }
+
+        cruiseModel.setRegionName(Utils.extraitValeur(region.getText()));
+
+        // Source de données
+        cruiseModel.setCountryCode(Utils.extraitCode(pays.getText()));
+        cruiseModel.setLaboratories(labo.getText());
+        cruiseModel.setChiefScientist(chef.getText());
+        cruiseModel.setProjectName(projet.getText());
+
+        // Centre d'archivage
+        cruiseModel.setDataCentre(Utils.extraitCode(centreDonnee.getText()));
+
+        // confidentialité
+        if (confidentialite.getText().equals("P - Public")) { //$NON-NLS-1$
+            cruiseModel.setAvailability("publicly"); //$NON-NLS-1$
+        }
+        if (confidentialite.getText().equals("L - Limited")) { //$NON-NLS-1$
+            cruiseModel.setAvailability("limited"); //$NON-NLS-1$
+        }
+        if (confidentialite.getText().equals("C - Confidential")) { //$NON-NLS-1$
+            cruiseModel.setAvailability("confidential"); //$NON-NLS-1$
+        }
+
+        // Commentaire
+        cruiseModel.setComment(commentaires.getText());
+        
+        // Mise à jour du model
+        Nemo.getInstance().getDomain().getCruise().updateCruise(cruiseModel);
+
+        // remplissage de la liste des dataTypes de la campagne
+        sectionType.initModel(cruiseModel);
+
+        validee = true;
+    }
+    @Override
+    public void fillFromModel()
+    {
+        // recuperation du model correspondant
+        CruiseModel cruiseModel = Nemo.getInstance().getDomain().getCruise().getModel();
+        
+        // recupération des items
+        Couple refCampagne = sectionReference.getItem(Messages.edit_cruise_cruiseRef);
+        Couple nomCampagne = sectionReference.getItem(Messages.edit_cruise_cruiseName);
+        Couple navire = sectionReference.getItem(Messages.edit_cruise_ship);
+        Couple dateDebut = sectionLocalisation.getItem(Messages.edit_cruise_startDate);
+        Couple dateFin = sectionLocalisation.getItem(Messages.edit_cruise_endDate);
+        Couple region = sectionLocalisation.getItem(Messages.edit_cruise_region);
+        Couple pays = sectionSource.getItem(Messages.edit_cruise_country);
+        Couple labo = sectionSource.getItem(Messages.edit_cruise_lab);
+        Couple chef = sectionSource.getItem(Messages.edit_cruise_chief);
+        Couple projet = sectionSource.getItem(Messages.edit_cruise_project);
+        Couple centreDonnee = sectionCentre.getItem(Messages.edit_cruise_dataCenter);
+        Couple confidentialite = sectionCentre.getItem(Messages.edit_cruise_confident);
+        Couple commentaires = sectionCommentaire.getItem(Global.EMPTY_STRING);
+
+
+        // injection des valeurs de l'IHM -> datamodel
+        // reference
+        refCampagne.setText(cruiseModel.getReference());
+        nomCampagne.setText(cruiseModel.getName());
+        Utils.selectComboCodePlus(navire.getValueCombo(), cruiseModel.getShipCode(),
+            cruiseModel.getShipName());
+
+        // Localisation
+
+        // DATES
+        // FAE 2607
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); //$NON-NLS-1$
+        Date startValue = new Date(cruiseModel.getStartDate());
+        dateDebut.setText(dateFormat.format(startValue));
+        
+
+        Date endValue = new Date(cruiseModel.getEndDate());
+        dateFin.setText(dateFormat.format(endValue));
+
+        Utils
+            .selectComboLibelle(region.getValueCombo(), cruiseModel.getRegionName());
+
+        // Source de donnees
+        if (cruiseModel.getCountryName() != null) {
+            Utils.selectComboLibelle(pays.getValueCombo(), cruiseModel.getCountryName());
+        }else{
+            Utils.selectComboCode(pays.getValueCombo(), cruiseModel.getCountryCode());
+        }
+        labo.setText(cruiseModel.getLaboratories());
+        chef.setText(cruiseModel.getChiefScientist());
+        projet.setText(cruiseModel.getProjectName());
+
+        // Centre d'archivage
+        Utils.selectComboCode(centreDonnee.getValueCombo(), cruiseModel
+            .getDataCentre());
+
+        // confidentialite
+        String code = cruiseModel.getAvailability().getCode();
+        Utils.selectComboCode(confidentialite.getValueCombo(), code);
+
+        // Commentaire
+        commentaires.setText(cruiseModel.getComment());
+
+        // Remplissage de la liste des dataTypes de la campagne
+        sectionType.fillFromModel(cruiseModel); 
+    }
 }

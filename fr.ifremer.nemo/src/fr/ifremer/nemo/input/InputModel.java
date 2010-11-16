@@ -10,6 +10,7 @@ import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
 
 /**
  * Class InputModel
@@ -22,7 +23,11 @@ public class InputModel extends AbstractModel
      * numéro de version de l'application à l'enregistrement du modèle
      */
     protected String _version;
-
+    /**
+     * Type de fichier en sortie (type de conversion)
+     */
+    protected E_TypeConversion _outputFormat;
+    
 	/**
 	 * Model du media
 	 */
@@ -391,5 +396,14 @@ public class InputModel extends AbstractModel
         if (_conversionModel == x)
             return;
         _conversionModel = x;
+    }
+    public E_TypeConversion getOutputFormat()
+    {
+        return _outputFormat;
+    }
+
+    public void setOutputFormat(E_TypeConversion outputFormat)
+    {
+        _outputFormat = outputFormat;
     }
 }

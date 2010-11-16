@@ -44,7 +44,7 @@ public class OpenAction extends Action implements ISelectionListener,
     public void run()
     {
         // verifier que un fichier est charge avant d'ouvrir un modele
-        if (!ViewMain.editFileForm.loaded)
+        if (!Nemo.getInstance().getViewMain().getEditFileForm().isLoaded())
         {
             Utils.messageErreurAppend(Messages.error_openModel);
         }
@@ -71,28 +71,29 @@ public class OpenAction extends Action implements ISelectionListener,
                     Nemo.getInstance().openModel(nomModele);
 
                     // forcage affichage onglet 0
-                    ViewMain.tabFolder.setSelection(0);
-                    ViewMain.affiche = 0;
+                    Nemo.getInstance().getViewMain().selectTabByIndex(0);
+                    Nemo.getInstance().getViewMain().setAffiche(0);
 
                     // RAZ global
                     Utils.razGlobal();
 
                     // reset de l'etape de conversion
-                    ViewMain.etape = 0;
+                    Nemo.getInstance().getViewMain().setEtape(0);
 
                     // lancement du processus sur le premier onglet et
                     // effacement preventif
                     // si besoin
                     // fillDesc(true);
-                    ViewMain.editFileForm.afficheEdition();
+                    Nemo.getInstance().getViewMain().getEditFileForm().afficheEdition();
 
                     ViewLog.styledTextLogInfos
                         .append(Messages.success_openModel + nomModele);
 
                     // reinitialisation du tableau de paramètres
-                    if (ViewMain.tableData != null)
+                    if (Nemo.getInstance().getViewMain().tableData != null)
+                    {
                         TableData.go();
-                    
+                    }
                     // 4063 affectation du nom de modele courant
                     Nemo.getInstance().setCurrentOpenModelPath(nomModele);
                 }

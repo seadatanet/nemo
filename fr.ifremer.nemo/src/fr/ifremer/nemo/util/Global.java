@@ -101,6 +101,6 @@ public interface Global
     }
     
     public enum E_TypeConversion{
-        MEDALAS, ODV_MULTISTATIONS, ODV_MONOSTATION
+        MEDATLAS, ODV_MULTISTATIONS, ODV_MONOSTATION;
     }
 }

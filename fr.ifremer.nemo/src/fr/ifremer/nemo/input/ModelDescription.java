@@ -94,8 +94,9 @@ public class ModelDescription extends NLS
     public static String node_sort;
     public static String node_defaultselected;
     public static String node_defaultvalue;  
-    
-    
+   
+    public static String node_outputFormat;
+
     public static String a_version;
     public static String a_sourcepath;
     public static String a_multistations;
@@ -156,6 +157,7 @@ public class ModelDescription extends NLS
     public static String setter_sort;
     public static String setter_defaultselected;
     public static String setter_defaultvalue;
+    public static String setter_outputFormat;
     static {
         // initialize resource bundle
         NLS.initializeMessages(BUNDLE_NAME, ModelDescription.class);

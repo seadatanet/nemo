@@ -72,10 +72,13 @@ public abstract class NemoSection
     protected String name; // nom correspondant au tag xml (PropertyModel)
     protected String title;
     private final String description;
+    // reference sur le formulaire d'edition auquel appartien la section
+    protected EditForm myForm;
 
-    public NemoSection(String name, String title, String description)
+    public NemoSection(String name, String title, String description, EditForm form)
     {
         this(name, title, description,40);
+        myForm = form;
     }
 
     

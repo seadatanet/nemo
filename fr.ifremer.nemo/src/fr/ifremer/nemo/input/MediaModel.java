@@ -10,6 +10,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_EndData;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
 
 /**
  * Class MediaModel
@@ -42,6 +43,7 @@ public class MediaModel extends AbstractModel
      * Type de fichier en entrée
      */
     protected E_InputType _inputType;
+
     
     /**
      * nombre de lignes de l'entête fichier
@@ -52,7 +54,7 @@ public class MediaModel extends AbstractModel
      * nombre de lignes de l'entête station
      * ou séparant _stationHeaderPattern du début des données
      */
-    protected int _stationHeader;
+    private int _stationHeader;
     
     /**
      * indicateur de fin d'entête station
@@ -518,4 +520,6 @@ public class MediaModel extends AbstractModel
     public void setStationHeaderPattern(String x){
         _stationHeaderPattern = x;
     }
+
+ 
 }

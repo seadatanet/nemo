@@ -15,6 +15,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.cruise.TableDataSurvey;
@@ -122,7 +123,7 @@ public enum ComboType
             break;
             case DATATYPE:
                 // FAE022
-                if (!ViewMain.isCollection() && TableDataSurvey.types != null)
+                if (! Nemo.getInstance().getViewMain().getEditFileForm().isCollection() && TableDataSurvey.types != null)
                 {
                     int taille = TableDataSurvey.types.size();
                     for (int i = 0; i < taille; i++)

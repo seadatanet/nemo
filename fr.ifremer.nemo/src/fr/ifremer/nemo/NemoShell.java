@@ -86,7 +86,7 @@ public class NemoShell
             if (strDefault.equals(Global.EMPTY_STRING))
                 strDefault = nemo.getDomain().getCruise().getModel().getName();
 
-            if (odvConv != E_TypeConversion.MEDALAS)
+            if (odvConv != E_TypeConversion.MEDATLAS)
                 nemo.getDomain().getCruise().setDataSetRef(strDefault);
 
             // Is a station property in file

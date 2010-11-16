@@ -104,7 +104,7 @@ public class Application implements IPlatformRunnable
                     switch (convType)
                     {
                         case MEDATLAS:
-                            convOdv = E_TypeConversion.MEDALAS;
+                            convOdv = E_TypeConversion.MEDATLAS;
                             break;
                         case ODV:
                             convOdv = E_TypeConversion.ODV_MONOSTATION;

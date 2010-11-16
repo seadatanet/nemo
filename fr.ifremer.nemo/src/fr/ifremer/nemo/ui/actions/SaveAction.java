@@ -17,7 +17,10 @@ import org.eclipse.ui.actions.ActionFactory;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.view.ViewMain;
+import fr.ifremer.nemo.ui.edit.cruise.EditCruiseForm;
+import fr.ifremer.nemo.ui.edit.data.EditDataForm;
+import fr.ifremer.nemo.ui.edit.file.EditFileForm;
+import fr.ifremer.nemo.ui.edit.station.EditStationForm;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -32,7 +35,7 @@ ActionFactory.IWorkbenchAction
 
     public static Shell shelloptions;
 
-    public static String nomFichierSortieXML="";
+    public static String nomFichierSortieXML=""; //$NON-NLS-1$
 
     public static File fichierSortieXML;
 
@@ -54,19 +57,24 @@ ActionFactory.IWorkbenchAction
     @Override
     public void run()
     {
+        EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
+        EditCruiseForm editCruiseForm = Nemo.getInstance().getViewMain().getEditCruiseForm();
+        EditStationForm editStationForm = Nemo.getInstance().getViewMain().getEditStationForm();
+        EditDataForm editDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
+        
         // sauvegarde du modele
         FileOutputStream fileOutputStream = null;
 
-        if (!ViewMain.editDataForm.validee)
+        if (!editDataForm.validee)
         {
             Utils.messageErreur(Messages.SaveAction_3);
         }
         else
         {
-            if (ViewMain.editFileForm.okApresReset
-                    && ViewMain.editCruiseForm.okApresReset
-                    && ViewMain.editStationForm.okApresReset
-                    && ViewMain.editDataForm.okApresReset)
+            if (editFileForm.isOkApresReset()
+                    && editCruiseForm.isOkApresReset()
+                    && editStationForm.isOkApresReset()
+                    && editDataForm.isOkApresReset())
             {
                 choixFichierSortie();
                 try
@@ -82,7 +90,7 @@ ActionFactory.IWorkbenchAction
 
                 Nemo.getInstance().setNomModele(fichierSortieXML.getName());
 
-                Nemo.refreshNomNemo();
+                Nemo.getInstance().refreshNomNemo();
 
                 Utils.messageOK(Messages.SaveAction_4);
             }
@@ -96,7 +104,7 @@ ActionFactory.IWorkbenchAction
     public static void choixFichierSortie()
     {
        //4063 gestion de la sauvegarde du modèle
-        String currentModelPath="";
+        String currentModelPath=""; //$NON-NLS-1$
         File currentModelFile;
         String currentModelFileName;
 
@@ -110,18 +118,18 @@ ActionFactory.IWorkbenchAction
         //si le modele est un fichier qui a été ouvert, ou si il a déjà été enregistré, on conserve ces infos pour proposer d'enregistrer sous le nom courant)
         // sinon on utilise les valeurs par défaut (repertoire des modeles de la config et nom de fichier = *.xml)
         // nom connu car deja enregistre recemment
-        if (!nomFichierSortieXML.equals("")){
+        if (!nomFichierSortieXML.equals("")){ //$NON-NLS-1$
             currentModelPath=nomFichierSortieXML;
         }
         // nom connu car le modele est un fichier existant qui a été ouvert
         else if(
                 (Nemo.getInstance().getCurrentOpenModelPath()!= null)   
                 &&
-                (! Nemo.getInstance().getCurrentOpenModelPath().equals(""))
+                (! Nemo.getInstance().getCurrentOpenModelPath().equals("")) //$NON-NLS-1$
         ){
             currentModelPath=Nemo.getInstance().getCurrentOpenModelPath();
         }
-        if (!currentModelPath.equals(""))
+        if (!currentModelPath.equals("")) //$NON-NLS-1$
         {
             currentModelFile = new File(currentModelPath);
             currentModelFileName = currentModelFile.getName();

@@ -16,6 +16,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.edit.ComboType;
 import fr.ifremer.nemo.ui.edit.Couple;
 import fr.ifremer.nemo.ui.edit.UIobject;
@@ -73,7 +74,7 @@ public class GrpManualInput implements UIobject
 
         buttonSaisie = new Button(compo, SWT.RADIO);
         buttonSaisie.setParent(compo);
-        buttonSaisie.setBackground(ViewMain.backgroungEdit);
+        buttonSaisie.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
         buttonSaisie.setText(labelButton);
 
         for (Couple line : lines)

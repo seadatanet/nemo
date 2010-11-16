@@ -21,6 +21,7 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.ui.FiltrageTableType;
 import fr.ifremer.nemo.ui.Utils;
@@ -543,7 +544,7 @@ public class TableDataSurvey
         // refresh de la table
         creationTable();
 
-        Composite c = ViewMain.editCruiseForm.sectionType.getSection();
+        Composite c = Nemo.getInstance().getViewMain().getEditCruiseForm().sectionType.getSection();
         while (c != null)
         {
             // c.setRedraw(false);
@@ -553,7 +554,7 @@ public class TableDataSurvey
                 break;
             }
         }
-        c = ViewMain.editCruiseForm.sectionType.getSection();
+        c = Nemo.getInstance().getViewMain().getEditCruiseForm().sectionType.getSection();
         while (c != null)
         {
             // c.layout(true);
@@ -564,7 +565,7 @@ public class TableDataSurvey
                 break;
             }
         }
-        c = ViewMain.editCruiseForm.sectionType.getSection();
+        c = Nemo.getInstance().getViewMain().getEditCruiseForm().sectionType.getSection();
         while (c != null)
         {
             // c.setRedraw(true);

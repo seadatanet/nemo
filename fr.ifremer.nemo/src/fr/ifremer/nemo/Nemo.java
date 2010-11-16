@@ -27,7 +27,6 @@ import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.input.InputModel;
 import fr.ifremer.nemo.ui.ApplicationWorkbenchWindowAdvisor;
-import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
@@ -48,6 +47,8 @@ public class Nemo
     //4063
     private String currentOpenModelPath;
     private boolean needToSaveCurrentModel=false;
+    
+    private ViewMain myViewMain;
 
     /**
      * Getter pour instance.
@@ -62,6 +63,8 @@ public class Nemo
     }
     
     private Nemo(){
+        
+        System.out.println("constructeur Nemo");
         // TODO
         config = new Configuration();
         //InputModel model = new InputModel();
@@ -178,15 +181,15 @@ public class Nemo
         nomModele = nomModel;
     }
     
-    public static void refreshNomNemo()
+    public void refreshNomNemo()
     {
         // nom du model
         String modelName = Nemo.getInstance().getNomModele();
         
         // nom de l'application
-        if (ViewMain.dossierCampagne){
+        if (getViewMain().getEditFileForm().isCruiseInADirectory()){
             // dossier campagne
-            File fich = new File(ViewMain.nomRepertoire);
+            File fich = new File(myViewMain.getEditFileForm().nomRepertoire);
             if (!Global.EMPTY_STRING.equals(modelName)){
                 ApplicationWorkbenchWindowAdvisor.configurer_titre
                     .setTitle(Messages.application_directoryTitle
@@ -204,7 +207,7 @@ public class Nemo
         else{
             // fichier campagne
             File fich;
-            fich = new File(ViewMain.nomFichier);
+            fich = new File(myViewMain.getEditFileForm().nomFichier);
 
             if (!Global.EMPTY_STRING.equals(modelName)){
                 ApplicationWorkbenchWindowAdvisor.configurer_titre
@@ -230,4 +233,13 @@ public class Nemo
         this.currentOpenModelPath = currentOpenModelPath;
     }
 
+    public void setViewMain(ViewMain viewMain)
+    {
+        myViewMain = viewMain;
+    }
+    
+    public ViewMain getViewMain()
+    {
+        return myViewMain;
+    }
 }

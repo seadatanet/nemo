@@ -27,9 +27,9 @@ public class FileSection extends NemoSection
     protected Composite compo;
     protected SetText setter;
 
-    public FileSection(String name, String title, String description)
+    public FileSection(String name, String title, String description, EditFileForm form)
     {
-        super(name, title, description);
+        super(name, title, description, form);
 
     }
 

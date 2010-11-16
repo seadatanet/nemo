@@ -13,6 +13,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
@@ -35,9 +36,9 @@ public class FileStationHeader extends FileSection
      * @param title
      * @param description
      */
-    public FileStationHeader(String name, String title, String description)
+    public FileStationHeader(String name, String title, String description, EditFileForm form)
     {
-        super(name, title, description);
+        super(name, title, description, form);
 
         setterIndicator =
             new SetText(Messages.edit_file_enteteStation_indicator,
@@ -92,13 +93,13 @@ public class FileStationHeader extends FileSection
         GridDataFactory.fillDefaults().grab(false, false).applyTo(compo);
 
         radNumber = new Button(compo, SWT.RADIO);
-        radNumber.setBackground(ViewMain.backgroungEdit);
+        radNumber.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
         radNumber.setText(Messages.edit_file_enteteStation_radNumber);
 
         setter.draw(compo, filled);
 
         radIndicator = new Button(compo, SWT.RADIO);
-        radIndicator.setBackground(ViewMain.backgroungEdit);
+        radIndicator.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
         radIndicator.setText(Messages.edit_file_enteteStation_radIndicator);
 
         subCompo = new Composite(compo, SWT.NONE);

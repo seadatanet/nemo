@@ -12,15 +12,20 @@ public class TypeData extends Object {
 	
 	private String debutFlag, finFlag, testIn, testOut;
 
-    private boolean p011;
-    
-    private String codeP011, abbr;
-
-    private String nomP011;
+	private String abbr;
     
 	private Boolean sensor;
+
+	public static final String DEFAULT_CONVERT = "x*1"; //$NON-NLS-1$
+
     
-    public static final String DEFAULT_CONVERT = "x*1"; //$NON-NLS-1$
+    private String codeP011;
+    private boolean isP011;
+    private String nomP011;
+    
+    private String codeP021;
+    private boolean isP021;
+    private String nomP021;
 
 	public Boolean getSensor() {
 		return sensor;
@@ -43,7 +48,7 @@ public class TypeData extends Object {
         this.setNomP011(Global.EMPTY_STRING);
         this.setCodeP011(Global.EMPTY_STRING);
         this.setAbbr(Global.EMPTY_STRING);
-        this.setP011(false);
+        this.setIsP011(false);
 	}
 
 	public TypeData(TypeData typeData) {
@@ -58,7 +63,7 @@ public class TypeData extends Object {
         this.setNomP011(typeData.nomP011);
         this.setCodeP011(typeData.codeP011);
         this.setAbbr(typeData.abbr);
-        this.setP011(typeData.p011);
+        this.setIsP011(typeData.isP011);
 	}
 
 	public TypeData() {
@@ -74,7 +79,7 @@ public class TypeData extends Object {
         this.setNomP011(Global.EMPTY_STRING);
         this.setCodeP011(Global.EMPTY_STRING);
         this.setAbbr(Global.EMPTY_STRING);
-        this.setP011(false);
+        this.setIsP011(false);
 	}
 
 	public String getCode() {
@@ -203,20 +208,22 @@ public class TypeData extends Object {
 		this.testOut = testOut;
 	}
     
-    public String getCodeP011() {
-        return codeP011;
-    }
-
-    public void setCodeP011(String codeP011) {
-        this.codeP011 = codeP011;
-    }
-    
     public String getAbbr() {
         return abbr;
     }
 
     public void setAbbr(String abbr) {
         this.abbr = abbr;
+    }
+    
+    
+    // P011************************************************
+    public String getCodeP011() {
+        return codeP011;
+    }
+
+    public void setCodeP011(String codeP011) {
+        this.codeP011 = codeP011;
     }
     
     public String getNomP011() {
@@ -228,10 +235,12 @@ public class TypeData extends Object {
     }
     
     public boolean isP011() {
-        return p011;
+        return isP011;
     }
 
-    public void setP011(boolean isP011) {
-        this.p011 = isP011;
+    public void setIsP011(boolean isP011) {
+        this.isP021 = !isP011;
+        this.isP011 = isP011;
     }
+    
 }

@@ -46,7 +46,7 @@ public class SWTProcess implements IRunnableWithProgress
         Configuration config = Nemo.getInstance().getConfig();
         
         Conversion formatConversion = Conversion.MEDATLAS;
-        if (iDomain.getConversion().getCurrent() != E_TypeConversion.MEDALAS)
+        if (iDomain.getConversion().getCurrent() != E_TypeConversion.MEDATLAS)
             formatConversion = Conversion.ODV;
 
         try

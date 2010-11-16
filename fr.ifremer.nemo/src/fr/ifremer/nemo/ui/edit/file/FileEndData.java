@@ -13,6 +13,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
@@ -36,9 +37,9 @@ public class FileEndData extends FileSection
      * @param title
      * @param description
      */
-    public FileEndData(String name, String title, String description)
+    public FileEndData(String name, String title, String description, EditFileForm form)
     {
-        super(name, title, description);
+        super(name, title, description, form);
         setterStartStation = new SetText(Messages.edit_file_termination_start, Global.EMPTY_STRING, true); //$NON-NLS-1$
     }
 
@@ -75,20 +76,20 @@ public class FileEndData extends FileSection
         GridDataFactory.fillDefaults().grab(true, false).applyTo(compo);
 
         radEOF = new Button(compo, SWT.RADIO);
-        radEOF.setBackground(ViewMain.backgroungEdit);
+        radEOF.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
         radEOF.setText(Messages.edit_file_idcEOF);
 
         radLigne = new Button(compo, SWT.RADIO);
-        radLigne.setBackground(ViewMain.backgroungEdit);
+        radLigne.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
         radLigne.setText(Messages.edit_file_idcEmptyLine);
 
         radNextStation = new Button(compo, SWT.RADIO);
-        radNextStation.setBackground(ViewMain.backgroungEdit);
+        radNextStation.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
         radNextStation.setText(Messages.edit_file_idcNextStation);
         setterStartStation.draw(compo, filled);
 
         radManuel = new Button(compo, SWT.RADIO);
-        radManuel.setBackground(ViewMain.backgroungEdit);
+        radManuel.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
         radManuel.setText(Messages.edit_file_idcManual);
         setter.draw(compo, filled);
 

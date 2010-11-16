@@ -133,7 +133,11 @@ public class OptionsAction extends Action implements ISelectionListener,
     // DataList
     public Configuration.DataListEnum dataList;
 
-    private Button buttonP011, buttonP091;
+    
+    // choix du format des parametres
+    private Button button_P011viaP091;
+    private Button button_P091;
+    private Button button_P011viaP021;
 
     // -- options necessitant un redemarrage
     private String configLangage;
@@ -356,11 +360,14 @@ public class OptionsAction extends Action implements ISelectionListener,
         // DataList
         switch (config.getDataList())
         {
-            case P011:
-                buttonP011.setSelection(true);
+            case P011_VIA_P091:
+                button_P011viaP091.setSelection(true);
             break;
             case P091:
-                buttonP091.setSelection(true);
+                button_P091.setSelection(true);
+            break;
+            case P011_VIA_P021:
+                button_P011viaP021.setSelection(true);
             break;
         }
 
@@ -894,16 +901,21 @@ public class OptionsAction extends Action implements ISelectionListener,
         group = new Group(parent, SWT.NONE);
         group.setFont(Utils.font08);
         group.setText(Messages.settings_parametersList);
-        GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(true)
+        GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(true)
             .margins(4, 4).applyTo(group);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
 
-        buttonP091 = new Button(group, SWT.RADIO);
-        buttonP091.setText(Messages.settings_parameterListP091);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(buttonP091);
-        buttonP011 = new Button(group, SWT.RADIO);
-        buttonP011.setText(Messages.settings_parameterListP011);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(buttonP011);
+        button_P091 = new Button(group, SWT.RADIO);
+        button_P091.setText(Messages.settings_parameterListP091);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(button_P091);
+        
+        button_P011viaP091 = new Button(group, SWT.RADIO);
+        button_P011viaP091.setText(Messages.settings_parameterListP011viaP091);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(button_P011viaP091);
+        
+        button_P011viaP021 = new Button(group, SWT.RADIO);
+        button_P011viaP021.setText(Messages.settings_parameterListP011viaP021);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(button_P011viaP021);
     }
 
     /**
@@ -1797,11 +1809,19 @@ public class OptionsAction extends Action implements ISelectionListener,
         configuration.setFlagTables(flagTables);
 
         // DataList
-        if (buttonP011.getSelection())
-            dataList = DataListEnum.P011;
-        else if (buttonP091.getSelection())
+        if (button_P011viaP091.getSelection())
+        {
+            dataList = DataListEnum.P011_VIA_P091;
+        }
+        else if (button_P091.getSelection())
+        {
             dataList = DataListEnum.P091;
-
+        }
+        else if(button_P011viaP021.getSelection())
+        {
+            dataList = DataListEnum.P011_VIA_P021;
+        }
+        
         if (!dataList.equals(configuration.getDataList()))
         {
             TableData.removeAllElts();

@@ -8,8 +8,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -17,14 +17,28 @@ public abstract class EditForm
 {
     public ScrolledForm formEdition;
     protected FormToolkit toolkitEdition;
+
+    private boolean loaded;
     
     protected Button buttonValidate, buttonRAZ, buttonExpand;
 
-    public Boolean okApresReset;
-    public boolean expand, validee, loaded, filled;
+    private Boolean okApresReset;
+    public boolean expand, validee;
+    public boolean filled;
     
     public ArrayList<NemoSection> listeSections;
+    
 
+    
+    
+    /**
+     * Constructor
+     * @param viewMain
+     */
+    public EditForm()
+    {
+    }
+    
     public void createEditionForm(Composite parent)
     {
         listeSections = new ArrayList<NemoSection>();
@@ -102,13 +116,13 @@ public abstract class EditForm
     
     protected void createButtonValidate(){
         buttonValidate = new Button(formEdition.getBody(), SWT.NONE);
-        buttonValidate.setBackground(ViewMain.backgroungEdit);
+        buttonValidate.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
         buttonValidate.setText(Messages.button_validateStep);
     }
     
     protected void createButtonRaz(){
         buttonRAZ = new Button(formEdition.getBody(), SWT.NONE);
-        buttonRAZ.setBackground(ViewMain.backgroungEdit);
+        buttonRAZ.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
         buttonRAZ.setText(Messages.button_reset);
         buttonRAZ
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -127,7 +141,7 @@ public abstract class EditForm
     
     protected void createButtonExpand(){
         buttonExpand = new Button(formEdition.getBody(), SWT.NONE);
-        buttonExpand.setBackground(ViewMain.backgroungEdit);
+        buttonExpand.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
         buttonExpand.setText(Global.PLUS);
         buttonExpand
             .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
@@ -172,11 +186,34 @@ public abstract class EditForm
         okApresReset = false;
         validee = false;
         
-        if (ViewMain.affiche != current && loaded){
+        if (Nemo.getInstance().getViewMain().getAffiche() != current && loaded){
             loaded = false;
             razEdition();
             //disposeElements();
         }
     }
+    public abstract void fillFromModel();
+    public abstract void initFromNewModel();
+    
+    public boolean isLoaded()
+    {
+        return loaded;
+    }
 
+    protected void setLoaded(boolean loaded)
+    {
+        this.loaded = loaded;
+    }
+
+    public Boolean isOkApresReset()
+    {
+        return okApresReset;
+    }
+
+    public void setOkApresReset(Boolean okApresReset)
+    {
+        this.okApresReset = okApresReset;
+    }
+
+    
 }

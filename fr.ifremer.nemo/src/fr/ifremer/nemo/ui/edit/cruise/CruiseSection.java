@@ -31,6 +31,7 @@ public class CruiseSection extends NemoSection
 {
     protected Composite compo;
     protected List<Couple> items;
+    protected EditCruiseForm myForm;
 
     /**
      * @param shell
@@ -38,9 +39,10 @@ public class CruiseSection extends NemoSection
      * @param title
      * @param description
      */
-    public CruiseSection(String name, String title, String description)
+    public CruiseSection(String name, String title, String description, EditCruiseForm form)
     {
-        super(name, title, description);
+        super(name, title, description, form);
+        myForm = form;
         items = new ArrayList<Couple>();
     }
 
