@@ -34,7 +34,7 @@ import fr.ifremer.nemo.util.Messages;
 
 /**
  * Class Nemo.java
- * Description: TODO
+ * Description: Classe principale de l'application - utilisée en singleton
  * @author dboulang 
  */
 public class Nemo
@@ -62,10 +62,11 @@ public class Nemo
         return instance;
     }
     
+    /**
+     * constructeur
+     *
+     */
     private Nemo(){
-        
-        System.out.println("constructeur Nemo");
-        // TODO
         config = new Configuration();
         //InputModel model = new InputModel();
         domain = new InputDomain();

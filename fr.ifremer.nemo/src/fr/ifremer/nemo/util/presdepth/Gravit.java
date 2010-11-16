@@ -8,7 +8,7 @@
 package fr.ifremer.nemo.util.presdepth;
 
 /**
- * Description: TODO
+ * Description: calcul de gravité en fonction de la latitude
  * @author ycaudal
  *
  */
