@@ -12,10 +12,8 @@ import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Table;
@@ -23,13 +21,11 @@ import org.eclipse.ui.part.ViewPart;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.ApplicationWorkbenchWindowAdvisor;
-import fr.ifremer.nemo.ui.FiltrageTableType;
+import fr.ifremer.nemo.ui.FilteredTableFactory;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.edit.DataModel;
 import fr.ifremer.nemo.ui.edit.conversion.EditConversionForm;
 import fr.ifremer.nemo.ui.edit.cruise.EditCruiseForm;
 import fr.ifremer.nemo.ui.edit.data.EditDataForm;
-import fr.ifremer.nemo.ui.edit.data.TableData;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.ui.edit.station.EditStationForm;
 import fr.ifremer.nemo.util.Global;
@@ -71,10 +67,8 @@ public class ViewMain extends ViewPart
 
     public  Button btnTestWS = null;
 
-    public  StyledText textAreaCruise,  textAreaStation,
-    textAreaData;
-    public  Table tableData;
-
+    public  StyledText textAreaCruise,  textAreaStation, textAreaData;
+    private FilteredTableFactory myFilteredTableFactory;
     
     
     public ViewMain()
@@ -85,7 +79,9 @@ public class ViewMain extends ViewPart
         editFileForm = new EditFileForm();
         editStationForm = new EditStationForm();
         editConversionForm = new EditConversionForm();
+        myFilteredTableFactory = new FilteredTableFactory();
         Nemo.getInstance().setViewMain(this);
+
     }
    
     /**
@@ -98,8 +94,9 @@ public class ViewMain extends ViewPart
         // etape de depart
         setEtape(0);
 
-        // init des flags
-        FiltrageTableType.listeOuverte = 0;
+        // init des flags 
+        //TODO BGT inutilisé?
+        myFilteredTableFactory.setListeOuverte(0);
         setAffiche(0);
         editFileForm.setFileLoaded(false);
 
@@ -275,7 +272,6 @@ public class ViewMain extends ViewPart
 
         compositeData = new Composite(left, SWT.NONE);
         compositeData.setLayout(new FillLayout());
-        TableData.go();
 
         
         //RIGHT
@@ -300,10 +296,7 @@ public class ViewMain extends ViewPart
         editFileForm.setFileLoaded(false);
 
         // --- renitialisation du tableau de paramètres (onglet Data)
-        if (tableData != null)
-        {
-            TableData.go();
-        }
+        editDataForm.reinitTableData();
 
         // --- le titre de l'application
         ApplicationWorkbenchWindowAdvisor.configurer_titre
@@ -407,6 +400,11 @@ public class ViewMain extends ViewPart
     public void selectTabByIndex(int tabIndex)
     {
         tabFolder.setSelection(tabIndex);
+    }
+
+    public FilteredTableFactory getMyFilteredTableFactory()
+    {
+        return myFilteredTableFactory;
     }
     
    

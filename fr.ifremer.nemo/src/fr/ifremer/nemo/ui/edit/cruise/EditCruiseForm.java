@@ -20,7 +20,6 @@ import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.input.CruiseModel;
-import fr.ifremer.nemo.ui.FiltrageTableType;
 import fr.ifremer.nemo.ui.SWTProcessWS;
 import fr.ifremer.nemo.ui.SWTProgressWS;
 import fr.ifremer.nemo.ui.Utils;
@@ -232,7 +231,7 @@ public class EditCruiseForm extends EditForm
     public void init_webService()
     {
         // selection de la ref campagne dans une liste
-        FiltrageTableType.go(_parent, Global.WSSURVEY, null);
+        Nemo.getInstance().getViewMain().getMyFilteredTableFactory().go(_parent, Global.WSSURVEY, null);
     }
 
     public void webService(String reference)

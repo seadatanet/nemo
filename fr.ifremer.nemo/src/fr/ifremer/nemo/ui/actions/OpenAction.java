@@ -14,9 +14,7 @@ import org.eclipse.ui.actions.ActionFactory;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.edit.data.TableData;
 import fr.ifremer.nemo.ui.view.ViewLog;
-import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -90,10 +88,11 @@ public class OpenAction extends Action implements ISelectionListener,
                         .append(Messages.success_openModel + nomModele);
 
                     // reinitialisation du tableau de paramètres
-                    if (Nemo.getInstance().getViewMain().tableData != null)
-                    {
-                        TableData.go();
-                    }
+                    Nemo.getInstance().getViewMain().getEditDataForm().reinitTableData();
+//                    if (Nemo.getInstance().getViewMain().getEditDataForm().getMyTable() != null)
+//                    {
+//                        Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().go();
+//                    }
                     // 4063 affectation du nom de modele courant
                     Nemo.getInstance().setCurrentOpenModelPath(nomModele);
                 }

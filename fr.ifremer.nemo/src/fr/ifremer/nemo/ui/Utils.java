@@ -245,12 +245,13 @@ public class Utils
 
     public static void injectData(StyledText styledtext, int debut, int fin)
     {
+        //TODO BGT revoir acces aux donnees de la table
         int deb, fi, lign, i, index;
 
         // on recupere les coordonnees de la selection
         deb = styledtext.getSelection().x;
         fi = styledtext.getSelection().y;
-        index = Nemo.getInstance().getViewMain().tableData.getSelectionIndex();
+        index = Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getSelectionIndex();
 
         if (deb == fi)
         {
@@ -296,9 +297,9 @@ public class Utils
             fi = fi - taillesCumLignes[lign - 1]; // fin reelle sur ligne
 
             // remplissage debut et fin dans interface
-            Nemo.getInstance().getViewMain().tableData.getItems()[index].setText(debut, String
+            Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[index].setText(debut, String
                 .valueOf(deb));
-            Nemo.getInstance().getViewMain().tableData.getItems()[index].setText(fin, String
+            Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[index].setText(fin, String
                 .valueOf(fi));
 
         }
@@ -1434,8 +1435,7 @@ public class Utils
         itemSearch.addListener(SWT.Selection, new Listener() {
             public void handleEvent(Event e)
             {
-                FiltrageTableType.comboRecherche = comb;
-                FiltrageTableType.go(comb.getShell(), tab, comb);
+                Nemo.getInstance().getViewMain().getMyFilteredTableFactory().go(comb.getShell(), tab, comb);
             }
         });
     }

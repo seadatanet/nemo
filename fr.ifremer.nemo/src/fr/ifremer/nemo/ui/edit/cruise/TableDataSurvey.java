@@ -23,13 +23,18 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.ui.FiltrageTableType;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.view.ViewMain;
+import fr.ifremer.nemo.ui.tables.DatatypeFilteredTable;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSDataType;
 
+/**
+ * 
+ * Description: Table affichée dans l'onglet Cruise, section "Type of data"
+ * @author sbregent
+ *
+ */
 public class TableDataSurvey
 {
 
@@ -281,7 +286,7 @@ public class TableDataSurvey
             public void handleEvent(Event e)
             {
                 // System.out.println("selection liste");
-                FiltrageTableType.go(sectionClientType, Global.DATATYPE, null);
+                Nemo.getInstance().getViewMain().getMyFilteredTableFactory().go(sectionClientType, Global.DATATYPE, null);
 
             }
         });

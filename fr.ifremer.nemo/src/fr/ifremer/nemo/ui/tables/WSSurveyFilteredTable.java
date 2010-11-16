@@ -88,12 +88,14 @@ public class WSSurveyFilteredTable extends AbstractFilteredTable
                   .add(TableDataSurvey.typesWS.get(i));
           }
 
-          TableData.listeFiltree = new ArrayList<TypeData>();
-          // liste filtree initialisee e typesWS au depart
-          taille = TableData.typesWS.size();
-          for (int i = 0; i < taille; i++){
-              TableData.listeFiltree.add(TableData.typesWS.get(i));
-          }
+          
+          //TODO BGT code inutile???
+//          TableData.listeFiltree = new ArrayList<TypeData>();
+//          // liste filtree initialisee e typesWS au depart
+//          taille = TableData.typesWS.size();
+//          for (int i = 0; i < taille; i++){
+//              TableData.listeFiltree.add(TableData.typesWS.get(i));
+//          }
       }
       catch (Exception e){
           e.printStackTrace();

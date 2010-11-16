@@ -27,7 +27,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 /**
- * Description: TODO
+ * Description: Classe abstraite pour la gestion des tables sur lesquelles on peut filtrer les données
  * 
  * @author ycaudal
  * 

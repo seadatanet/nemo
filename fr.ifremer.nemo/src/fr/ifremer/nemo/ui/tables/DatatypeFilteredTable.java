@@ -18,6 +18,7 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.cruise.TableDataSurvey;
@@ -83,13 +84,11 @@ public class DatatypeFilteredTable extends AbstractFilteredTable
                     .add(TableDataSurvey.typesWS.get(i));
             }
 
-            TableData.listeFiltree = new ArrayList<TypeData>();
-            // liste filtree initialisee e typesWS au depart
-            taille = TableData.typesWS.size();
-            for (int i = 0; i < taille; i++)
-            {
-                TableData.listeFiltree.add(TableData.typesWS.get(i));
-            }
+            // TODO BGT utile?? - code deplace dans TableData
+            // le code de depart rechargeait les typesWS ET le tableau de ParameterFilteredTable, ce qui semble inutile
+            // puisque celui-ci recharge ses données filtrées à la création
+//            Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().reloadListeFiltree();
+            Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().initTypesWS();
         }
         catch (Exception e)
         {

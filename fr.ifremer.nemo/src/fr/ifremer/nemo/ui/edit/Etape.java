@@ -1300,13 +1300,13 @@ public class Etape
         Utils.messageErreur(Global.EMPTY_STRING);
 
         // mise e jour avant toute chose
-        TableData.majTypeData();
+        editDataForm.getMyTableData().majTypeData();
 
         // test de toutes les valeurs debut / fin des Data
         Boolean ok = true;
         try
         {
-            ok = TableData.majChampTest();
+            ok = editDataForm.getMyTableData().majChampTest();
         }
         catch (Exception e)
         {
@@ -1319,7 +1319,7 @@ public class Etape
             Utils.messageErreurAppend(Messages.Etape_131);
         }
 
-        int nbreParam = TableData.types.size();
+        int nbreParam = editDataForm.getMyTableData().getTypes().size();
         int[] debuts, fins;
         String[] debutsFlag, finsFlag;
         int cptDebut = 0;
@@ -1344,7 +1344,7 @@ public class Etape
             // remplissage des listes
             for (int i = 0; i < nbreParam; i++)
             {
-                TypeData typeCourant = TableData.types.get(i);
+                TypeData typeCourant = editDataForm.getMyTableData().getTypes().get(i);
                 debuts[i] = typeCourant.getDebut();
                 fins[i] = typeCourant.getFin();
                 debutsFlag[i] = typeCourant.getDebutFlag();
@@ -1470,7 +1470,7 @@ public class Etape
 
             // TEST pour savoir si PRES est bien en premier mais pas pour
             // profile ou trajectoire
-            TypeData premierType = TableData.types.get(0);
+            TypeData premierType = editDataForm.getMyTableData().getTypes().get(0);
 
             // split sur " - "
             Pattern p = Pattern.compile(Global.SEP);
@@ -1508,7 +1508,7 @@ public class Etape
                     boolean isTEMP = false;
                     boolean isDEPH = false;
 
-                    for (TypeData donnee : TableData.types)
+                    for (TypeData donnee : editDataForm.getMyTableData().getTypes())
                     {
                         if (donnee.getCode().split("-")[0].trim().equals(
                             Intern.paramDEPH))

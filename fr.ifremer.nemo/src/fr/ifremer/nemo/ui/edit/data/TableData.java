@@ -23,8 +23,9 @@ import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.config.Configuration.DataListEnum;
 import fr.ifremer.nemo.domain.MediaDomain;
-import fr.ifremer.nemo.ui.FiltrageTableType;
+import fr.ifremer.nemo.ui.FilteredTableFactory;
 import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.ui.tables.ParameterFilteredTable;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
@@ -32,104 +33,183 @@ import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
 public class TableData
 {
+    /** 
+     * Parametres provenant des web services (fichiers xml mis à jour par les web services)
+     * les parametres P091 sont lus depuis le fichier parameters.xml
+     * pour les autres, il faut lire le fichier Pxxx.xml
+     * 
+     */
+    private ArrayList<TypeData> typesWS;
+    
+    /**
+     * Parametres à afficher dans le tableau de l'onglet data
+     */
+    private ArrayList<TypeData> types;
+    
+    /**
+     * la table contenant les parametres, affichée dans l'onglet data
+     */  
+    private Table myTable;
 
-    public static Table filtreTable;
-
-    public static ArrayList<TypeData> types;
-    public static ArrayList<TypeData> listeFiltree;
-    public static ArrayList<TypeData> typesWS;
-
-    public static void go()
+    /**
+     * reference sur le panneau de choix des parametres
+     */
+    private ParameterFilteredTable myParameterFilteredTable;
+    
+    /**
+     * constructeur
+     * initialise automatiquement les typesWS
+     *
+     */
+    public TableData()
     {
         initTypesWS();
+    }
+    
+    
+    public void reinitTable()
+    {
+        if (myTable != null)
+        {
+        //TODO BGT verifier que initTypesWS est vraiment inutile ici
+//            initTypesWS();
+            go();
+        }
+    }
+    
+    public void razAndRecreateTable()
+    {
+        razTableData();
+        creationTable();
+    }
+    public void go()
+    {
+//        initTypesWS();
         types = new ArrayList<TypeData>();
-        if (!(Nemo.getInstance().getViewMain().tableData == null || Nemo.getInstance().getViewMain().tableData.isDisposed()))
+        if (!(myTable == null || myTable.isDisposed()))
         {
             razTableData();
         }
         creationTable();
     }
-
-    public static void creationTable()
+    public void setMyParameterFilteredTable(ParameterFilteredTable paramTable)
     {
+        myParameterFilteredTable = paramTable;
+    }
+    /**
+     * reinitialise la liste des paramètres de la table
+     *
+     */
+    public void reinitTypes()
+    {
+        types = null;
+        types = new ArrayList<TypeData>();
+    }
+    
+    /**
+     * ajoute un parametre à la liste des parametres de la table
+     * @param typeData
+     */
+    public void addType(TypeData typeData)
+    {
+        types.add(typeData);
+    }
+    
+    
+    /**
+     * recharge la liste des paramètres filtrée depuis la liste des typesWS
+     * (= annule le filtre)
+     *
+     */
+//    public void reloadListeFiltree()
+//    {
+//        listeFiltree = new ArrayList<TypeData>();
+//        // liste filtree initialisee e typesWS au depart
+//        int taille = typesWS.size();
+//        for (int i = 0; i < taille; i++)
+//        {
+//            listeFiltree.add(typesWS.get(i));
+//        }
+//    }
+ 
+    /**
+     * creation de la table contenant les paramètres dans l'onglet data
+     *
+     */
+    public void creationTable()
+    {
+        myTable = new Table(Nemo.getInstance().getViewMain().compositeData, SWT.FULL_SELECTION | SWT.H_SCROLL);
 
-        final Table table;
-
-        Nemo.getInstance().getViewMain().tableData =
-            new Table(Nemo.getInstance().getViewMain().compositeData, SWT.FULL_SELECTION | SWT.H_SCROLL);
-
-        table = Nemo.getInstance().getViewMain().tableData;
-
-        table.setHeaderVisible(true);
-        table.setLinesVisible(true);
-        TableColumn tableColumn0 = new TableColumn(table, SWT.NONE);
+        myTable.setHeaderVisible(true);
+        myTable.setLinesVisible(true);
+        TableColumn tableColumn0 = new TableColumn(myTable, SWT.NONE);
         // tableColumn0.setWidth(110);
         tableColumn0.setWidth(100);
         tableColumn0.setText(Messages.table_label_code.toUpperCase());
 
-        TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);
+        TableColumn tableColumn1 = new TableColumn(myTable, SWT.NONE);
         tableColumn1.setWidth(90);
         tableColumn1.setText(Messages.table_label_unit);
 
-        TableColumn tableColumn2 = new TableColumn(table, SWT.NONE);
+        TableColumn tableColumn2 = new TableColumn(myTable, SWT.NONE);
         // tableColumn2.setWidth(100);
         tableColumn2.setWidth(70);
         tableColumn2.setText(Messages.label_conversion);
         tableColumn2.setAlignment(SWT.RIGHT);
 
-        TableColumn tableColumn3 = new TableColumn(table, SWT.NONE);
+        TableColumn tableColumn3 = new TableColumn(myTable, SWT.NONE);
         tableColumn3.setWidth(50);
         tableColumn3.setText(Messages.label_test);
         tableColumn3.setAlignment(SWT.RIGHT);
 
-        TableColumn tableColumn4 = new TableColumn(table, SWT.NONE);
+        TableColumn tableColumn4 = new TableColumn(myTable, SWT.NONE);
         // tableColumn4.setWidth(50);
         tableColumn4.setWidth(45);
         tableColumn4.setText(Messages.label_start);
         tableColumn4.setAlignment(SWT.RIGHT);
 
-        TableColumn tableColumn5 = new TableColumn(table, SWT.NONE);
+        TableColumn tableColumn5 = new TableColumn(myTable, SWT.NONE);
         // tableColumn5.setWidth(50);
         tableColumn5.setWidth(45);
         tableColumn5.setText(Messages.label_end);
         tableColumn5.setAlignment(SWT.RIGHT);
 
-        TableColumn tableColumn6 = new TableColumn(table, SWT.NONE);
+        TableColumn tableColumn6 = new TableColumn(myTable, SWT.NONE);
         // tableColumn6.setWidth(100);
         tableColumn6.setWidth(50);
         tableColumn6.setText(Messages.label_format);
         tableColumn6.setAlignment(SWT.RIGHT);
 
-        TableColumn tableColumn7 = new TableColumn(table, SWT.NONE);
+        TableColumn tableColumn7 = new TableColumn(myTable, SWT.NONE);
         // tableColumn7.setWidth(100);
         tableColumn7.setWidth(90);
         tableColumn7.setText(Messages.table_label_valueIn);
         tableColumn7.setAlignment(SWT.RIGHT);
 
-        TableColumn tableColumn8 = new TableColumn(table, SWT.NONE);
+        TableColumn tableColumn8 = new TableColumn(myTable, SWT.NONE);
         // tableColumn8.setWidth(100);
         tableColumn8.setWidth(90);
         tableColumn8.setText(Messages.table_label_valueOut);
         tableColumn8.setAlignment(SWT.RIGHT);
 
-        TableColumn tableColumn9 = new TableColumn(table, SWT.NONE);
+        TableColumn tableColumn9 = new TableColumn(myTable, SWT.NONE);
         // tableColumn9.setWidth(65);
         tableColumn9.setWidth(75);
         tableColumn9.setText(Messages.table_label_testIn);
         tableColumn9.setAlignment(SWT.RIGHT);
 
-        TableColumn tableColumn10 = new TableColumn(table, SWT.NONE);
+        TableColumn tableColumn10 = new TableColumn(myTable, SWT.NONE);
         // tableColumn10.setWidth(65);
         tableColumn10.setWidth(75);
         tableColumn10.setText(Messages.table_label_testOut);
         tableColumn10.setAlignment(SWT.RIGHT);
 
-        TableColumn tableColumn11 = new TableColumn(table, SWT.NONE);
+        TableColumn tableColumn11 = new TableColumn(myTable, SWT.NONE);
         tableColumn11.setWidth(65);
         tableColumn11.setText(Messages.table_label_startFlag);
         tableColumn11.setAlignment(SWT.RIGHT);
 
-        TableColumn tableColumn12 = new TableColumn(table, SWT.NONE);
+        TableColumn tableColumn12 = new TableColumn(myTable, SWT.NONE);
         tableColumn12.setWidth(65);
         tableColumn12.setText(Messages.table_label_endFlag);
         tableColumn12.setAlignment(SWT.RIGHT);
@@ -141,8 +221,10 @@ public class TableData
 
     }
 
-    public static void initTypesWS()
+    public void initTypesWS()
     {
+        System.out.println("initTypesWS");
+        // TODO BGT code ci dessous pour test uniquement (FAE5863 en cours)
 
         // initialisation de la ArrayList des types des donnees e partir du fichier parameters.xml
 //        typesWS = null;
@@ -203,7 +285,7 @@ public class TableData
         
     }
 
-    public static void fillTypes()
+    public void fillTypes()
     {
         // initialisation de la ArrayList des types des donnees e partir du
         types = null;
@@ -223,15 +305,18 @@ public class TableData
                         && Nemo.getInstance().getViewMain().getEditFileForm().radProfilVertical.getSelection())
                 {
                     // on rajoute PRES
-                    types.add(type);
+                    addType(type);
                 }
             }
         }
-        razTableData();
-        creationTable();
+        razAndRecreateTable();
     }
 
-    public static void initTable()
+    /**
+     * initialisation de la table des paramètres de l'onglet data
+     *
+     */
+    public void initTable()
     {
 
         /*
@@ -240,7 +325,7 @@ public class TableData
          */
 
         final Table table;
-        table = Nemo.getInstance().getViewMain().tableData;
+        table = myTable;
 
         // REMPLISSAGE temporaire de la table
         initTableData();
@@ -340,8 +425,12 @@ public class TableData
             }
         });
 
-        // creation du menu
+        /** ****************************************************************************
+         * creation du menu
+         **************************************************************************** */ 
         Menu menu = new Menu(table.getShell(), SWT.POP_UP);
+        
+        // ========= Injecter debut/fin
         MenuItem itemInject = new MenuItem(menu, SWT.NONE);
         itemInject.setText(Messages.menu_label_setValue);
         itemInject.addListener(SWT.Selection, new Listener() {
@@ -349,17 +438,13 @@ public class TableData
             {
                 // table.forceFocus();
                 Utils.injectData(Nemo.getInstance().getViewMain().textAreaData, 4, 5);
-
                 majTypeData();
-                razTableData();
-
                 // refresh de la table
-                creationTable();
-
+                razAndRecreateTable();
                 Utils.invalidEtapes();
             }
         });
-
+        // ========= Maj champ test
         MenuItem itemMaj = new MenuItem(menu, SWT.NONE);
         itemMaj.setText(Messages.menu_label_updateTest);
         itemMaj.addListener(SWT.Selection, new Listener() {
@@ -368,18 +453,16 @@ public class TableData
                 majChampTest();
             }
         });
-
+        // ========= Liste de paramètres
         MenuItem itemList = new MenuItem(menu, SWT.NONE);
         itemList.setText(Messages.menu_label_paramList);
         itemList.addListener(SWT.Selection, new Listener() {
             public void handleEvent(Event e)
             {
-                FiltrageTableType.go(Nemo.getInstance().getViewMain().compositeData.getParent(),
-                    Global.PARAMETER, null);
-
+                openMyParameterFilteredTable();
             }
         });
-
+        // ========= Monter paramètre sélectionné
         MenuItem itemUp = new MenuItem(menu, SWT.NONE);
         itemUp.setText(Messages.menu_label_upParam);
         itemUp.addListener(SWT.Selection, new Listener() {
@@ -391,7 +474,7 @@ public class TableData
                 Utils.invalidEtapes();
             }
         });
-
+        // ========= descendre paramètres sélectionné
         MenuItem itemDown = new MenuItem(menu, SWT.NONE);
         itemDown.setText(Messages.menu_label_downParam);
         itemDown.addListener(SWT.Selection, new Listener() {
@@ -402,7 +485,7 @@ public class TableData
                 Utils.invalidEtapes();
             }
         });
-
+        // ========= supprimer paramètre sélectionné
         MenuItem itemDel = new MenuItem(menu, SWT.NONE);
         itemDel.setText(Messages.menu_label_removeParam);
         itemDel.addListener(SWT.Selection, new Listener() {
@@ -412,9 +495,11 @@ public class TableData
                 Utils.invalidEtapes();
             }
         });
-
+        
+        // separateur
         new MenuItem(menu, SWT.SEPARATOR);
 
+        // ========= Injecter flag
         MenuItem itemInjectFlag = new MenuItem(menu, SWT.NONE);
         itemInjectFlag.setText(Messages.menu_label_setFlag);
         itemInjectFlag.addListener(SWT.Selection, new Listener() {
@@ -426,7 +511,7 @@ public class TableData
                 Utils.invalidEtapes();
             }
         });
-
+        // ========= supprimer flag
         MenuItem itemRemoveFlag = new MenuItem(menu, SWT.NONE);
         itemRemoveFlag.setText(Messages.menu_label_deleteFlag);
         itemRemoveFlag.addListener(SWT.Selection, new Listener() {
@@ -447,8 +532,9 @@ public class TableData
                 Utils.invalidEtapes();
             }
         });
+        
+        
         table.setMenu(menu);
-
         Utils.forceMenu(table, menu);
 
         // agrandissement de la table
@@ -456,21 +542,24 @@ public class TableData
         table.setLayout(new FillLayout());
         table.redraw();
     }
-
-    public static void initTableData()
+ 
+    /**
+     * ouvre la fenetre de choix de parametres
+     */
+    public void openMyParameterFilteredTable()
+    {
+       getMyParameterFilteredTable().open(Nemo.getInstance().getViewMain().compositeData.getParent());
+    }
+    
+   
+    public void initTableData()
     {
         // creation des TableItems e partir de la ArrayList types
 
-        int nbre;
-        nbre = types.size();
-
-        Table table;
-        table = Nemo.getInstance().getViewMain().tableData;
-
         // nouvelle creation des items
-        for (int i = 0; i < nbre; i++)
+        for (int i = 0; i < types.size(); i++)
         {
-            TableItem item = new TableItem(table, SWT.NONE);
+            TableItem item = new TableItem(myTable, SWT.NONE);
             if (types.get(i).isP011())
             {
                 item.setText(new String[] {
@@ -502,30 +591,14 @@ public class TableData
 
     }
 
-    public static void razTableData()
+    public void razTableData()
     {
         // effacement de tous les items de la table
-
-        Nemo.getInstance().getViewMain().tableData.dispose();
-
+        myTable.dispose();
     }
 
-    // public static void nouvelElt()
-    // {
-    // // rajoute une ligne en derniere position de la table
-    //
-    // TypeData type = new TypeData();
-    // types.add(type);
-    //
-    // // razTableData
-    // razTableData();
-    //
-    // // refresh de la table
-    // creationTable();
-    //
-    // }
 
-    public static void monterEltTableData()
+    public void monterEltTableData()
     {
         // on monte d'un cran l'element e la position indice
         // swap (indice-1) <-> indice
@@ -536,7 +609,7 @@ public class TableData
         ArrayList<TypeData> listeTempo;
         nbre = types.size();
 
-        int indice = Nemo.getInstance().getViewMain().tableData.getSelectionIndex();
+        int indice = myTable.getSelectionIndex();
 
         // si l'indice est 0, on ne fait rien
         if (indice != 0)
@@ -575,25 +648,22 @@ public class TableData
                 types.add(listeTempo.get(i));
             }
 
-            // razTableData
-            razTableData();
-
             // refresh de la table
-            creationTable();
+            razAndRecreateTable();
 
         }
 
     }
 
-    public static void descendreEltTableData()
+    public void descendreEltTableData()
     {
         // on descend d'un cran l'element e la position indice
         // swap (indice-1) <-> indice
 
-        int indice = Nemo.getInstance().getViewMain().tableData.getSelectionIndex();
+        int indice = myTable.getSelectionIndex();
 
         // Si derniere ligne, on ne fait rien
-        if (indice != Nemo.getInstance().getViewMain().tableData.getItemCount() - 1)
+        if (indice != myTable.getItemCount() - 1)
         {
 
             int nbre;
@@ -632,19 +702,14 @@ public class TableData
             {
                 types.add(listeTempo.get(i));
             }
-
-            // razTableData
-            razTableData();
-
-            // refresh de la table
-            creationTable();
+            razAndRecreateTable();
         }
     }
 
-    public static void supprEltTableData()
+    public void supprEltTableData()
     {
         // suppression de la ligne selectionnee
-        int indice = Nemo.getInstance().getViewMain().tableData.getSelectionIndex();
+        int indice = myTable.getSelectionIndex();
         // d'abord mise e jour des donnees
         majTypeData();
 
@@ -669,28 +734,20 @@ public class TableData
         // Utils.messageErreurAppend(Messages.error_data_removePRES);
         // }
 
-        // razTableData
-        razTableData();
-
         // refresh de la table
-        creationTable();
+        razAndRecreateTable();
 
     }
 
-    public static void removeAllElts()
+    public void removeAllElts()
     {
-
         types.clear();
-
-        // razTableData
-        razTableData();
-
         // refresh de la table
-        creationTable();
+        razAndRecreateTable();
 
     }
 
-    public static boolean majChampTest()
+    public boolean majChampTest()
     {
 
         // maj preventive de tout
@@ -702,13 +759,13 @@ public class TableData
         String selection, ligne, resultat;
         double resultJEP;
 
-        nbre = Nemo.getInstance().getViewMain().tableData.getItemCount();
+        nbre = myTable.getItemCount();
         for (int i = 0; i < nbre; i++)
         {
 
-            if ((!Nemo.getInstance().getViewMain().tableData.getItem(i).getText(4).equals(
+            if ((!myTable.getItem(i).getText(4).equals(
                 Global.EMPTY_STRING))
-                    && (!Nemo.getInstance().getViewMain().tableData.getItem(i).getText(2).equals(
+                    && (!myTable.getItem(i).getText(2).equals(
                         Global.EMPTY_STRING)))
             {
                 // on a selectionne un debut et une fin et il y a une conversion
@@ -723,20 +780,20 @@ public class TableData
 
                 selection =
                     ligne.substring(
-                        Integer.valueOf(Nemo.getInstance().getViewMain().tableData.getItem(i)
+                        Integer.valueOf(myTable.getItem(i)
                             .getText(4)) - 1,
-                        Integer.valueOf(Nemo.getInstance().getViewMain().tableData.getItem(i)
+                        Integer.valueOf(myTable.getItem(i)
                             .getText(5))).trim();
 
                 // on formate puis on reaffiche la liste
                 try
                 {
                     String formatString =
-                        Nemo.getInstance().getViewMain().tableData.getItem(i).getText(6);
+                        myTable.getItem(i).getText(6);
                     String type =
                         formatString.substring(formatString.length() - 1);
 
-                    if (selection.equals(Nemo.getInstance().getViewMain().tableData.getItem(i).getText(
+                    if (selection.equals(myTable.getItem(i).getText(
                         7)))
                     {
 
@@ -744,7 +801,7 @@ public class TableData
                         // par defaut formatee
                         String fmOut = Global.EMPTY_STRING;
                         String outputDefaultValue =
-                            Nemo.getInstance().getViewMain().tableData.getItem(i).getText(8);
+                            myTable.getItem(i).getText(8);
 
                         // Float ou Decimal ?
                         if (type.equals("f") || type.equals("F")) { //$NON-NLS-1$//$NON-NLS-2$
@@ -780,18 +837,18 @@ public class TableData
                         parser.addStandardFunctions();
                         parser.addStandardConstants();
                         parser.addVariable("x", Float.valueOf(selection)); //$NON-NLS-1$
-                        parser.parseExpression(Nemo.getInstance().getViewMain().tableData.getItem(i)
+                        parser.parseExpression(myTable.getItem(i)
                             .getText(2));
                         resultJEP = parser.getValue();
 
                         if (type.equals("f") || type.equals("F")) { //$NON-NLS-1$//$NON-NLS-2$
                             resultat =
-                                String.format(Nemo.getInstance().getViewMain().tableData.getItem(i)
+                                String.format(myTable.getItem(i)
                                     .getText(6), new Float(resultJEP));
                         }
                         else if (type.equals("d") || type.equals("D")) { //$NON-NLS-1$ //$NON-NLS-2$
                             resultat =
-                                String.format(Nemo.getInstance().getViewMain().tableData.getItem(i)
+                                String.format(myTable.getItem(i)
                                     .getText(6), (Double.valueOf(resultJEP))
                                     .intValue());
                         }
@@ -813,9 +870,9 @@ public class TableData
                 types.get(i).setTest(resultat);
             }
 
-            if ((!Nemo.getInstance().getViewMain().tableData.getItem(i).getText(11).equals(
+            if ((!myTable.getItem(i).getText(11).equals(
                 Global.EMPTY_STRING))
-                    && (!Nemo.getInstance().getViewMain().tableData.getItem(i).getText(12).equals(
+                    && (!myTable.getItem(i).getText(12).equals(
                         Global.EMPTY_STRING)))
             {
                 /*
@@ -833,9 +890,9 @@ public class TableData
 
                 selection =
                     ligne.substring(
-                        Integer.valueOf(Nemo.getInstance().getViewMain().tableData.getItem(i).getText(
+                        Integer.valueOf(myTable.getItem(i).getText(
                             11)) - 1,
-                        Integer.valueOf(Nemo.getInstance().getViewMain().tableData.getItem(i).getText(
+                        Integer.valueOf(myTable.getItem(i).getText(
                             12))).trim();
 
                 types.get(i).setTestIn(selection);
@@ -864,51 +921,69 @@ public class TableData
             }
         }
 
-        // razTableData
-        razTableData();
-
         // refresh de la table
-        creationTable();
+        razAndRecreateTable();
 
         return ok;
     }
 
-    public static void majTypeData()
+    public void majTypeData()
     {
-        // on met e jour tous les types de donnees dans l'ArrayList global
-        // e partir des valeurs de la table
+        // on met a jour tous les types de donnees dans l'ArrayList global
+        // a partir des valeurs de la table
 
         int nbre;
+        nbre = myTable.getItemCount();
 
-        nbre = Nemo.getInstance().getViewMain().tableData.getItemCount();
         for (int i = 0; i < nbre; i++)
         {
             if (!types.get(i).isP011())
-                types.get(i).setCode(Nemo.getInstance().getViewMain().tableData.getItem(i).getText(0));
+            {
+                types.get(i).setCode(myTable.getItem(i).getText(0));
+            }
+            types.get(i).setUnite(myTable.getItem(i).getText(1));
+            types.get(i).setConversion(myTable.getItem(i).getText(2));
+            types.get(i).setTest(myTable.getItem(i).getText(3));
+            types.get(i).setDebut( Integer.valueOf(myTable.getItem(i).getText(4)) );
+            types.get(i).setFin( Integer.valueOf(myTable.getItem(i).getText(5)) );
+            types.get(i).setFormat(myTable.getItem(i).getText(6));
+            types.get(i).setEntree(myTable.getItem(i).getText(7));
+            types.get(i).setSortie(myTable.getItem(i).getText(8));
 
-            types.get(i).setUnite(Nemo.getInstance().getViewMain().tableData.getItem(i).getText(1));
-            types.get(i)
-                .setConversion(Nemo.getInstance().getViewMain().tableData.getItem(i).getText(2));
-            types.get(i).setTest(Nemo.getInstance().getViewMain().tableData.getItem(i).getText(3));
-            types.get(i).setDebut(
-                Integer.valueOf(Nemo.getInstance().getViewMain().tableData.getItem(i).getText(4)));
-            types.get(i).setFin(
-                Integer.valueOf(Nemo.getInstance().getViewMain().tableData.getItem(i).getText(5)));
-            types.get(i).setFormat(Nemo.getInstance().getViewMain().tableData.getItem(i).getText(6));
-            types.get(i).setEntree(Nemo.getInstance().getViewMain().tableData.getItem(i).getText(7));
-            types.get(i).setSortie(Nemo.getInstance().getViewMain().tableData.getItem(i).getText(8));
-
-            if (!Nemo.getInstance().getViewMain().tableData.getItem(i).getText(11).equals(
-                Global.EMPTY_STRING)
-                    && !Nemo.getInstance().getViewMain().tableData.getItem(i).getText(12).equals(
-                        Global.EMPTY_STRING))
+            if (!myTable.getItem(i).getText(11).equals(Global.EMPTY_STRING)
+                    && !myTable.getItem(i).getText(12).equals(Global.EMPTY_STRING))
             {
                 types.get(i).setDebutFlag(
-                    Nemo.getInstance().getViewMain().tableData.getItem(i).getText(11));
+                    myTable.getItem(i).getText(11));
                 types.get(i).setFinFlag(
-                    Nemo.getInstance().getViewMain().tableData.getItem(i).getText(12));
+                    myTable.getItem(i).getText(12));
             }
         }
     }
 
+    public ArrayList<TypeData> getTypesWS()
+    {
+        return typesWS;
+    }
+    public ArrayList<TypeData> getTypes()
+    {
+        return types;
+    }
+
+    public Table getMyTable()
+    {
+        return myTable;
+    }
+
+
+    public ParameterFilteredTable getMyParameterFilteredTable()
+    {
+        if (myParameterFilteredTable==null)
+        {
+            FilteredTableFactory filteredFactory = Nemo.getInstance().getViewMain().getMyFilteredTableFactory();
+            myParameterFilteredTable= (ParameterFilteredTable)filteredFactory.go(Nemo.getInstance().getViewMain().compositeData.getParent(),
+                Global.PARAMETER, null);
+        }
+        return myParameterFilteredTable;
+    }
 }

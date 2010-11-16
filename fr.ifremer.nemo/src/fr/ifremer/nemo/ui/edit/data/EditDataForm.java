@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Table;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.input.LineFragment;
@@ -20,11 +21,15 @@ import fr.ifremer.nemo.util.Messages;
 public class EditDataForm extends EditForm
 {
     
+    // les données utilisées dans cette table myTable
+    private TableData myTableData;
     
     @Override
     public void createEditionForm(Composite parent)
     {
         super.createEditionForm(parent);
+        myTableData = new TableData();
+        myTableData.go();
 
         // init composants IHM
         initSections();
@@ -58,7 +63,6 @@ public class EditDataForm extends EditForm
     {
         
     }
-
     @Override
     public void afficheEdition()
     {
@@ -76,15 +80,14 @@ public class EditDataForm extends EditForm
         // nom du model
         String modelName = Nemo.getInstance().getNomModele();
         
-        if (TableData.types != null && !TableData.types.isEmpty()){
-            TableData.razTableData();
-            TableData.creationTable();
+        if (myTableData.getTypes() != null && !myTableData.getTypes().isEmpty()){
+            myTableData.razAndRecreateTable();
         }
         else if (!Global.EMPTY_STRING.equals(modelName)){
             fillFromModel();
         }
         else{
-            TableData.fillTypes();
+            myTableData.fillTypes();
         }
     }
 
@@ -100,7 +103,7 @@ public class EditDataForm extends EditForm
     @Override
     public void razText()
     {
-        TableData.fillTypes();
+        myTableData.fillTypes();
     }
 
     @Override
@@ -121,10 +124,8 @@ public class EditDataForm extends EditForm
     @Override
     public void fillFromModel()
     {
-        // /////////////////////////////////
-        TableData.types = null;
-        TableData.types = new ArrayList<TypeData>();
-
+       
+        myTableData.reinitTypes();
         ParameterModel[] parameterModels =
             Nemo.getInstance().getDomain().getCruise().getStation().getData().getModel().getParameterModels();
 
@@ -167,16 +168,12 @@ public class EditDataForm extends EditForm
             typeData.setNomP011(modeleCourant.getNameP011());
             typeData.setIsP011(modeleCourant.isP011());
             
-            
-            TableData.types.add(typeData);
-
+            myTableData.addType(typeData);
         }
 
         // refresh de la table de l'onglet Data
-        TableData.razTableData();
+        myTableData.razAndRecreateTable();
 
-        // refresh de la table
-        TableData.creationTable();
     }
 
     /**
@@ -191,7 +188,7 @@ public class EditDataForm extends EditForm
         //int indexPRES = -1;
 
         // mise e jour des types avant validation
-        TableData.majTypeData();
+        myTableData.majTypeData();
 
         // remplissage des parametres mesures
         //int nbreParam = TableData.types.size();
@@ -199,7 +196,7 @@ public class EditDataForm extends EditForm
         // reset systematique des parametres stockes dans le dataModel
         Nemo.getInstance().getDomain().getCruise().getStation().getData().getModel().releaseParameterModels();
 
-        for (TypeData typeCourant : TableData.types)
+        for (TypeData typeCourant : myTableData.getTypes())
         {
             //TypeData typeCourant = TableData.types.get(i);
 
@@ -266,4 +263,14 @@ public class EditDataForm extends EditForm
         Nemo.getInstance().getViewMain().getEditDataForm().validee = true;
 
     }
+    public void reinitTableData()
+    {
+       myTableData.reinitTable();
+    }
+    public TableData getMyTableData()
+    {
+        return myTableData;
+    }
+
+   
 }

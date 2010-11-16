@@ -1824,7 +1824,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         
         if (!dataList.equals(configuration.getDataList()))
         {
-            TableData.removeAllElts();
+            Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().removeAllElts();
         }
 
         configuration.setDataList(dataList.toString());

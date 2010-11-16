@@ -35,14 +35,27 @@ import fr.ifremer.nemo.util.Messages;
  */
 public class ParameterFilteredTable extends AbstractFilteredTable
 {
-
-   
+    /**
+     * la table permettant d'afficher les parametres
+     */  
+    private Table myFiltreTable;
+    
+    /**
+     *  reference sur la tableData (de l'onglet data) depuis laquelle cette table a été ouverte
+     */
+    private TableData myTableDataRef;
+    
+    /**
+     * copie de la liste des parametres typesWS pouvant être filtrée
+     */
+    private ArrayList<TypeData> listeFiltree;
     /**
      * @param comboRecherche
      */
     public ParameterFilteredTable(Combo comboRecherche)
     {
         _comboRecherche = comboRecherche;
+        myTableDataRef =  Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData();
     }
 
     /**
@@ -52,22 +65,7 @@ public class ParameterFilteredTable extends AbstractFilteredTable
     protected void createDataList()
     {
         // liste filtree initialisee e typesWS au depart
-        try
-        {
-//            TableData.initTypesWS();
-            
-            TableData.listeFiltree = new ArrayList<TypeData>();
-            // liste filtree initialisee e typesWS au depart
-            int taille = TableData.typesWS.size();
-            for (int i = 0; i < taille; i++)
-            {
-                TableData.listeFiltree.add(TableData.typesWS.get(i));
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+            reloadListeFiltree();
     }
 
     /**
@@ -76,34 +74,45 @@ public class ParameterFilteredTable extends AbstractFilteredTable
     @Override
     protected void createTable()
     {
-        final Table table;
-        int nbre;
+//        ArrayList<TypeData> filteredList =myTableDataRef.getListeFiltree();
+        myFiltreTable = new Table(top, SWT.FULL_SELECTION);
 
-        TableData.filtreTable = new Table(top, SWT.FULL_SELECTION);
+        myFiltreTable.setHeaderVisible(true);
+        myFiltreTable.setLinesVisible(true);
+        myFiltreTable.setBounds(new Rectangle(3, 45, 298, 237));
 
-        table = TableData.filtreTable;
-        table.setHeaderVisible(true);
-        table.setLinesVisible(true);
-        table.setBounds(new Rectangle(3, 45, 298, 237));
-
-        nbre = TableData.listeFiltree.size();
         // creation des colonnes...
-        TableColumn tableColumn = new TableColumn(table, SWT.NONE);
+        TableColumn tableColumn = new TableColumn(myFiltreTable, SWT.NONE);
         tableColumn.setWidth(200);
         tableColumn.setText(Messages.table_label_codeName);
 
-        TableColumn tableColumn2 = new TableColumn(table, SWT.NONE);
+        TableColumn tableColumn2 = new TableColumn(myFiltreTable, SWT.NONE);
         tableColumn2.setWidth(81);
         tableColumn2.setText(Messages.table_label_unit);
 
-        for (int i = 0; i < nbre; i++)
+        for (int i = 0; i < listeFiltree.size(); i++)
         {
-            TableItem item = new TableItem(table, SWT.NONE);
-            item.setText(new String[] {TableData.listeFiltree.get(i).getCode(),
-                    TableData.listeFiltree.get(i).getUnite()});
+            TableItem item = new TableItem(myFiltreTable, SWT.NONE);
+            item.setText(new String[] {listeFiltree.get(i).getCode(),
+                    listeFiltree.get(i).getUnite()});
         }
     }
-
+    
+    /**
+     * recharge la liste des paramètres filtrée depuis la liste des typesWS
+     * (= annule le filtre)
+     */
+    private void reloadListeFiltree()
+    {
+        listeFiltree = new ArrayList<TypeData>();
+        // liste filtree initialisee e typesWS au depart
+        int taille = myTableDataRef.getTypesWS().size();
+        for (int i = 0; i < taille; i++)
+        {
+            listeFiltree.add(myTableDataRef.getTypesWS().get(i));
+        }
+    }
+    
     /**
      * {@inheritDoc}
      */
@@ -112,16 +121,14 @@ public class ParameterFilteredTable extends AbstractFilteredTable
     {
 
         ArrayList<TypeData> origine, filtree;
-        int nbre;
         String regexp;
 
         filtree = new ArrayList<TypeData>();
-        origine = TableData.typesWS;
+        origine = myTableDataRef.getTypesWS();
 
-        nbre = origine.size();
 
         // remplissage de la liste filtree
-        for (int i = 0; i < nbre; i++)
+        for (int i = 0; i < origine.size(); i++)
         {
             regexp = "^.*" + chaine + ".*$"; //$NON-NLS-1$ //$NON-NLS-2$
             Pattern p = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE);
@@ -132,11 +139,9 @@ public class ParameterFilteredTable extends AbstractFilteredTable
                 filtree.add(origine.get(i));
             }
         }
-
-        TableData.listeFiltree = filtree;
+        listeFiltree = filtree;
         // affichage de la liste filtree
-
-        razTable(TableData.filtreTable);
+        razTable(myFiltreTable);
         createTable();
     }
 
@@ -150,6 +155,8 @@ public class ParameterFilteredTable extends AbstractFilteredTable
     }
 
     /**
+     * action appelée lorsqu'un parametre est selectionné dans le panneau ParameterFilteredTable
+     * -> ajoute la parametre au tableau des data ou ouvre la liste des SubParameters
      * {@inheritDoc}
      */
     @Override
@@ -158,8 +165,8 @@ public class ParameterFilteredTable extends AbstractFilteredTable
               
       TypeData typeData;
       
-      int index = TableData.filtreTable.getSelectionIndex();
-      typeData = TableData.listeFiltree.get(index);
+      int index = myFiltreTable.getSelectionIndex();
+      typeData = listeFiltree.get(index);
       Configuration config = Nemo.getInstance().getConfig();
       
       
@@ -167,16 +174,14 @@ public class ParameterFilteredTable extends AbstractFilteredTable
       boolean isTypeP011=false;
       DataListEnum currentType=config.getDataList();
       
-      if (!TableData.types.isEmpty())
+      if (!myTableDataRef.getTypes().isEmpty())
       {
-          if (TableData.types.get(0).isP011())
+          if (myTableDataRef.getTypes().get(0).isP011())
           {
               isTypeP011=true;
               currentType= DataListEnum.P011_VIA_P091;
           }
       }
-      
-      
       if (isTypeP011)
       {
           SubParameterFilteredTable subTable = new SubParameterFilteredTable(typeData);
@@ -191,14 +196,12 @@ public class ParameterFilteredTable extends AbstractFilteredTable
         // ajout d'un parameter dans l'onglet Data
         Utils.invalidEtapes();
 
-
         // test avant ajout pour doublons
-        int taille = TableData.types.size();
+        int taille = myTableDataRef.getTypes().size();
         Boolean found = false;
 
         if (taille != 0)
         {
-
             for (int i = 0; i < taille; i++)
             {
                 String codeModele, codeActuel;
@@ -208,7 +211,7 @@ public class ParameterFilteredTable extends AbstractFilteredTable
                 String mots[] = p.split(typeData.getCode());
                 codeActuel = mots[0];
 
-                String mots2[] = p.split(TableData.types.get(i).getCode());
+                String mots2[] = p.split(myTableDataRef.getTypes().get(i).getCode());
                 codeModele = mots2[0];
 
                 if (codeModele.equals(codeActuel))
@@ -219,9 +222,9 @@ public class ParameterFilteredTable extends AbstractFilteredTable
 
             if (found == false)
             {
-                TableData.types.add(new TypeData(typeData));
+                myTableDataRef.addType(new TypeData(typeData));
                 // Suppression message erreur FAE 3752
-                Utils.messageErreur("");
+                Utils.messageErreur(""); //$NON-NLS-1$
             }
             else
             {
@@ -230,18 +233,14 @@ public class ParameterFilteredTable extends AbstractFilteredTable
         }
         else
         {
-            TableData.types.add(new TypeData(typeData));
+            myTableDataRef.addType(new TypeData(typeData));
         }
 
-        TableData.majTypeData();
-
-        // razTableData
-        TableData.razTableData();
+        myTableDataRef.majTypeData();
 
         // refresh de la table
-        TableData.creationTable();
+        myTableDataRef.razAndRecreateTable();
 
         shell.close();
     }
-
 }
