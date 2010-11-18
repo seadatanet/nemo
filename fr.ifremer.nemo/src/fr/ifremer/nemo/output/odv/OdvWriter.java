@@ -77,6 +77,9 @@ public class OdvWriter extends NemoWriter{
                     StringBuffer cruiseHeader = cruise.getHeader(c);
                     outputFileWriter.println(cruiseHeader);
                     
+                    //FAE 6087 reinitialisation de la reference à chaque fichier
+                    iDomain.getCruise().getStation().updateRef();
+                    
                     writeStation(st, inputFilePath, mOutputFileName);
                     
                     outputFileWriter.close();
@@ -94,6 +97,8 @@ public class OdvWriter extends NemoWriter{
                 outputFileWriter.println(cruiseHeader);
     
                 for (Station st : station.getStations(inputFilePath)){
+                    //FAE 6087 reinitialisation de la reference à lecture fichier entree (car pour ecrire une station on lit tout le fichier)
+                    iDomain.getCruise().getStation().updateRef();
                     writeStation(st, inputFilePath, outputFileName);
                 }
                 
@@ -166,10 +171,11 @@ public class OdvWriter extends NemoWriter{
 
             if (isStartStationHeader()){
                 String[] inputStationHeader = consumeStationHeader();
-                if (inputStationHeader != null &&
-                        currentStation.getReference().equals(station.getReference(currentStation.getFileName(), inputStationHeader))){
-
-                    stationHeader = station.getHeader(c, currentStation, inputStationHeader);
+               String stRef = iDomain.getCruise().getStation().getReference(currentStation.getFileName(), inputStationHeader);
+               
+                if (inputStationHeader != null && currentStation.getReference().equals(stRef)){
+                   
+                    stationHeader =  iDomain.getCruise().getStation().getHeader(c, currentStation, inputStationHeader);
                     
                     if (station.isSomeInData()){
                         // la première ligne des données est déjà "consommée" dans stationHeaderBuffer 

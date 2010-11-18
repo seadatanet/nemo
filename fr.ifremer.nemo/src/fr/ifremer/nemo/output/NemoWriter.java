@@ -19,6 +19,7 @@ import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Global.E_EndData;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
 
 
 /**
@@ -117,6 +118,17 @@ public abstract class NemoWriter{
                                         st.updateGlobalParamQc(readedLine);
                                     
                                     nbrecords++;
+                                    
+                                    // BGT FAE 6087 ajout de la station
+                                    E_TypeConversion selectedConversion = iDomain.getConversion().getCurrent();
+                                    if (selectedConversion == E_TypeConversion.ODV_MONOSTATION){
+                                        if (st != null){
+                                            // endData = EOF : la station n'a pas été enregistrée
+                                            st.setNbRecords(nbrecords);
+                                            stationDomain.addStation(inputFilePath, st);
+                                        }
+                                    }
+                                    
                                 }
                                 else{
                                     break;
