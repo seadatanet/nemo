@@ -861,36 +861,13 @@ public class NemoLists implements Cloneable {
 	 * 
 	 */
 	public static void initLists() {
-        long debut ;
-        long fin;
         
 		initParameters();
-        
-        debut = System.currentTimeMillis();
 		initSurveys();
-        fin = System.currentTimeMillis();
-        System.out.println("initSurveys temps ecoule : "+(fin-debut)/3600);
-            
-            
-        debut = System.currentTimeMillis();
 		initVocabLists();
-        fin = System.currentTimeMillis();
-        System.out.println("initVocabLists temps ecoule : "+(fin-debut)/3600);
-        
-        debut = System.currentTimeMillis();
         initVocabMaps();
-        fin = System.currentTimeMillis();
-        System.out.println("initVocabMaps temps ecoule : "+(fin-debut)/3600);
-        
-        debut = System.currentTimeMillis();
         initDataTypes();
-        fin = System.currentTimeMillis();
-        System.out.println("initDataTypes temps ecoule : "+(fin-debut)/3600);
-        
-        debut = System.currentTimeMillis();
 		initEdmo();
-        fin = System.currentTimeMillis();
-        System.out.println("initEdmo temps ecoule : "+(fin-debut)/3600);
 	}
 
 	/**
