@@ -17,8 +17,10 @@
   <accesDonnees>LS</accesDonnees>
   <typePlateforme></typePlateforme>
   <writeMapping>false</writeMapping>
-  <fichierMapping>coupling.txt</fichierMapping>
+  <fichierMapping>couplingTest.txt</fichierMapping>
   <dateISO>true</dateISO>
+  <dataList>P091</dataList>
+  <defaultConvertType>UNKNOWN</defaultConvertType>
   <proxy use="false" address="" port="" login="" password=""/>
   <edmoURL>http://seadatanet.maris2.nl/ws/ws_edmo.asmx</edmoURL>
   <vocabURL>http://vocab.ndg.nerc.ac.uk/1.1/VocabServerAPI_dl.wsdl</vocabURL>

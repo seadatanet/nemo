@@ -16,7 +16,6 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
-import org.eclipse.swt.widgets.Table;
 import org.eclipse.ui.part.ViewPart;
 
 import fr.ifremer.nemo.Nemo;
@@ -55,25 +54,19 @@ public class ViewMain extends ViewPart
     // IHM config
     private Color backgroundEdit;
 
-   
     private  int etape;
     private  int  affiche;
 
-   
     public  boolean writeResume;
-    protected  Composite  textFileCruise;
+  
     private  TabFolder tabFolder;
-    public  Composite compositeData;
 
     public  Button btnTestWS = null;
-
-    public  StyledText textAreaCruise,  textAreaStation, textAreaData;
     private FilteredTableFactory myFilteredTableFactory;
-    
+    private boolean cruiseEnabled;
     
     public ViewMain()
     {
-        System.out.println("constructeur ViewMain");
         editCruiseForm = new EditCruiseForm(); 
         editDataForm = new EditDataForm();
         editFileForm = new EditFileForm();
@@ -95,7 +88,6 @@ public class ViewMain extends ViewPart
         setEtape(0);
 
         // init des flags 
-        //TODO BGT inutilisé?
         myFilteredTableFactory.setListeOuverte(0);
         setAffiche(0);
         editFileForm.setFileLoaded(false);
@@ -114,9 +106,11 @@ public class ViewMain extends ViewPart
             {
                 int tmp = tabFolder.getSelectionIndex();
 
-                if (editFileForm.isCollection() && tmp > 0)
+                if( ( ! Nemo.getInstance().getViewMain().isCruiseEnabled()) 
+                        && tmp>0)
+                {
                     tmp++;
-
+                }
                 Utils.validationEtape(tmp);
             }
         });
@@ -221,12 +215,13 @@ public class ViewMain extends ViewPart
         Composite left = new Composite(parentForm, SWT.NONE);
         left.setLayout(new FillLayout());
 
+        Composite  textFileCruise;
         textFileCruise = new Composite(left, SWT.NONE);
         textFileCruise.setLayout(new FillLayout());
-        textAreaCruise =
+        editCruiseForm.setTextAreaCruise(
             new StyledText(textFileCruise, SWT.MULTI | SWT.READ_ONLY
-                | SWT.H_SCROLL | SWT.V_SCROLL);
-        textAreaCruise.setFont(Utils.fontCourier);
+                | SWT.H_SCROLL | SWT.V_SCROLL));
+        editCruiseForm.getTextAreaCruise() .setFont(Utils.fontCourier);
 
         // RIGHT
         Composite right = getNewRightComposite(parentForm);
@@ -244,10 +239,10 @@ public class ViewMain extends ViewPart
 
         Composite textFile = new Composite(left, SWT.NONE);
         textFile.setLayout(new FillLayout());
-        textAreaStation =
+        editStationForm.setTextAreaStation(
             new StyledText(textFile, SWT.MULTI | SWT.READ_ONLY | SWT.H_SCROLL
-                | SWT.V_SCROLL);
-        textAreaStation.setFont(Utils.fontCourier);
+                | SWT.V_SCROLL));
+        editStationForm.getTextAreaStation().setFont(Utils.fontCourier);
 
         //RIGHT
         Composite right = getNewRightComposite(parentForm);
@@ -261,18 +256,7 @@ public class ViewMain extends ViewPart
         
         //LEFT
         SashForm left = new SashForm(parentForm, SWT.VERTICAL);
-        left.setLayout(new FillLayout(SWT.VERTICAL));
-
-        Composite textFile = new Composite(left, SWT.NONE);
-        textFile.setLayout(new FillLayout());
-        textAreaData =
-            new StyledText(textFile, SWT.MULTI | SWT.READ_ONLY | SWT.H_SCROLL
-                | SWT.V_SCROLL);
-        textAreaData.setFont(Utils.fontCourier);
-
-        compositeData = new Composite(left, SWT.NONE);
-        compositeData.setLayout(new FillLayout());
-
+        editDataForm.createLeft(left);
         
         //RIGHT
         Composite right = getNewRightComposite(parentForm);
@@ -316,6 +300,8 @@ public class ViewMain extends ViewPart
 
     public void enableCruise(boolean enabled)
     {
+        
+        setCruiseEnabled(enabled);
         if (enabled)
         {
             if (tabCruise.isDisposed())
@@ -334,7 +320,11 @@ public class ViewMain extends ViewPart
         }
     }
 
-   
+   public void updateTabsVisibility()
+   {
+       enableCruise(!editFileForm.isConversionToODV());
+       
+   }
 
    
 
@@ -405,6 +395,16 @@ public class ViewMain extends ViewPart
     public FilteredTableFactory getMyFilteredTableFactory()
     {
         return myFilteredTableFactory;
+    }
+
+    public boolean isCruiseEnabled()
+    {
+        return cruiseEnabled;
+    }
+
+    public void setCruiseEnabled(boolean cruiseEnabled)
+    {
+        this.cruiseEnabled = cruiseEnabled;
     }
     
    

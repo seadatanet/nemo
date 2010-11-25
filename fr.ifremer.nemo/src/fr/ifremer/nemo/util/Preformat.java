@@ -147,57 +147,24 @@ public class Preformat
         _nbColonne = 1;
         _preformatOK = false;
 
-        _enTeteFichier =
-            Integer.parseInt(editFileForm.getSectionEnteteFichier().getValue());
+        _enTeteFichier = Integer.parseInt(editFileForm.getSectionFileHeader().getValue());
+        _isPattern = !editFileForm.getSectionStationHeader().isSelectNumber();
+        _enTeteStation = Integer.parseInt(editFileForm.getSectionStationHeader().getValue());
+        _enTeteStationPattern = editFileForm.getSectionStationHeader().getIndicatorText();
+        _lgBeforeData = Integer.parseInt(editFileForm.getSectionStationHeader().getNbLinesBeforeData());
 
-        _isPattern = !editFileForm.sectionEnteteStation.isSelectNumber();
-        _enTeteStation =
-            Integer.parseInt(editFileForm.sectionEnteteStation.getValue());
-        _enTeteStationPattern =
-            editFileForm.sectionEnteteStation.getIndicatorText();
-        _lgBeforeData =
-            Integer.parseInt(editFileForm.sectionEnteteStation
-                .getNbLinesBeforeData());
-
-        if (editFileForm.sectionRuptureDonnees.radEOFselected())
-        {
-
+        
+        String indic =editFileForm.getSectionDataTerminator().getIndicatorValue();
+        if (indic != null){
+            _indicateur=indic;
         }
-        else if (editFileForm.sectionRuptureDonnees.radLigneSelected())
-        {
-
-        }
-        else if (editFileForm.sectionRuptureDonnees.radNextStationSelected())
-        {
-
-        }
-        else if (editFileForm.sectionRuptureDonnees.radManuelSelected())
-        {
-            _indicateur = editFileForm.sectionRuptureDonnees.getValue();
-        }
-
-        if (editFileForm.radioTabulation.getSelection())
-        {
-            _separateur = '\t';
-        }
-        else if (editFileForm.radioPointVirgule.getSelection())
-        {
-            _separateur = ';';
-        }
-        else if (editFileForm.radioVirgule.getSelection())
-        {
-            _separateur = ',';
-        }
-        else if (editFileForm.radioEspace.getSelection())
-        {
-            _separateur = ' ';
-        }
-        else if (editFileForm.radioSeparateurAutre.getSelection())
-        {
-            _separateur = editFileForm.textSeparateur.getText().toCharArray()[0];
-        }
-
-        if (editFileForm.radioFichier.getSelection())
+        
+         if(editFileForm.isSeparatorChecked())
+         {
+             _separateur = editFileForm.getSeparatorAsChar();
+         }
+         
+        if (editFileForm.isCruiseIsAFile())
         {
 
             File ficEntree = new File(editFileForm.nomFichier);
@@ -209,12 +176,12 @@ public class Preformat
                 ficEntree.getParent() + PF + ficEntree.getName();
             editFileForm.setFileLoaded(true);
 
-            Utils.insertTextFich(editFileForm.nomFichier, Nemo.getInstance().getViewMain().textAreaCruise,
+            Utils.insertTextFich(editFileForm.nomFichier, Nemo.getInstance().getViewMain().getEditCruiseForm().getTextAreaCruise(),
                 false);
-            editFileForm.textAreaFile.setText(Utils.texteBrut);
+            editFileForm.getTextAreaFile().setText(Utils.texteBrut);
 
         }
-        else if (editFileForm.radioCollectCas1.getSelection())
+        else if (editFileForm.isGroupedByCruise())
         {
 
             File repCollection = new File(editFileForm.nomRepertoire);
@@ -236,7 +203,7 @@ public class Preformat
             if (Utils.findFilesCollectCas1(repCollection.getAbsolutePath(),
                 false))
             {
-                editFileForm.textAreaFile.setText(Utils.texteBrut);
+                editFileForm.getTextAreaFile().setText(Utils.texteBrut);
             }
         }
         else
@@ -253,7 +220,7 @@ public class Preformat
 
             if (Utils.findFiles(editFileForm.nomRepertoire, false))
             {
-                editFileForm.textAreaFile.setText(Utils.texteBrut);
+                editFileForm.getTextAreaFile().setText(Utils.texteBrut);
             }
         }
         setPreformat(true);
@@ -402,7 +369,7 @@ public class Preformat
 
             if (!batchMode)
             {
-                if (!Nemo.getInstance().getViewMain().getEditFileForm().radioFichier.getSelection())
+                if (!Nemo.getInstance().getViewMain().getEditFileForm().isCruiseIsAFile())
                     outputDir += PF + repertoire.getName();
             }
             else
@@ -558,23 +525,7 @@ public class Preformat
         else
         {
             EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
-
-            if (editFileForm.sectionRuptureDonnees.radEOFselected())
-            {
-                endData = E_EndData.EOF;
-            }
-            else if (editFileForm.sectionRuptureDonnees.radLigneSelected())
-            {
-                endData = E_EndData.EMPTY_LINE;
-            }
-            else if (editFileForm.sectionRuptureDonnees.radNextStationSelected())
-            {
-                endData = E_EndData.NEXT_START_WITH;
-            }
-            else if (editFileForm.sectionRuptureDonnees.radManuelSelected())
-            {
-                endData = E_EndData.END_WITH;
-            }
+            endData = editFileForm.getSectionDataTerminator().getEndData();
         }
 
         try

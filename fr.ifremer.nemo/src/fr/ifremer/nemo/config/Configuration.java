@@ -17,10 +17,14 @@ import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLBootstrapParser;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.input.AbstractModel;
 import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.ui.edit.data.TableData;
+import fr.ifremer.nemo.ui.edit.data.TypeData;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
 
 /**
  * Class Configuration
@@ -100,7 +104,20 @@ public class Configuration extends AbstractModel
 
     public enum DataListEnum {P011_VIA_P091, P091, P011_VIA_P021};
     
-    private DataListEnum _dataList;
+    /**
+     * type de parametres choisi dans les settings
+     */
+    private DataListEnum _dataListInSettings;
+    
+    /**
+     * format d'export par défaut choisi dans les settings
+     */
+    // choix du format d'export pour conversion par défaut
+    private E_TypeConversion _defaultConversionType;
+    /**
+     * type de parametres à utiliser (depend de _dataListInSettings, du format de sortie et des parametres deja presents dans un modele)
+     */
+    private DataListEnum _dataListToUse;
     
 	public Configuration() {
         _tagName = ConfigDescription.node_root;
@@ -147,7 +164,8 @@ public class Configuration extends AbstractModel
         _predicate = 255;
         _fichierMapping = Global.EMPTY_STRING;
         _defaultCode = Global.EMPTY_STRING;
-        _dataList = DataListEnum.P091;
+        _dataListInSettings = DataListEnum.P091;
+        _defaultConversionType = E_TypeConversion.UNKNOWN;
         
         _vocabLists = new HashMap<String, BODCList>();
         
@@ -306,11 +324,14 @@ public class Configuration extends AbstractModel
 			Element2Field setter = new Element2Field(this, ConfigDescription.setter_DefaultCode);  
 			return setter;
 		}
-        if (a_LocalName.equals("dataList")) {
-            Element2Field setter = new Element2Field(this, "setDataList");  
+        if (a_LocalName.equals(ConfigDescription.node_defaultDatalist)) {
+            Element2Field setter = new Element2Field(this, ConfigDescription.setter_datalist);  
             return setter;
         }
-        
+        if (a_LocalName.equals(ConfigDescription.node_defaultConversionType)) {
+            Element2Field setter = new Element2Field(this, ConfigDescription.setter_defaultConversionType);  
+            return setter;
+        }
 		if (a_LocalName.equals(ConfigDescription.node_FlagTable)) {
 			String code = null;
 			String label = null;
@@ -389,7 +410,8 @@ public class Configuration extends AbstractModel
         a_Writer.putTag(ConfigDescription.node_writeMapping, isWriteMapping());
 		a_Writer.putTag(ConfigDescription.node_fichierMapping, getFichierMapping());
         a_Writer.putTag(ConfigDescription.node_dateISO, isDateISO());
-        a_Writer.putTag("dataList", _dataList.toString());
+        a_Writer.putTag(ConfigDescription.node_defaultDatalist, _dataListInSettings.toString());
+        a_Writer.putTag(ConfigDescription.node_defaultConversionType, _defaultConversionType.toString());
 		//a_Writer.putTag("arboMapping", getArboMapping());
         
         //proxy:
@@ -951,12 +973,14 @@ public class Configuration extends AbstractModel
         _defaultFlag = defaultFlag;
     }
 
-    public DataListEnum getDataList() {
-        return _dataList;
+    public DataListEnum getDataListInSettings() {
+        return _dataListInSettings;
     }
 
-    public void setDataList(String flagTable) {
-        _dataList = DataListEnum.valueOf(flagTable);
+   
+
+    public void setDefaultConversionType(String defaultConversionType) {
+        _defaultConversionType = E_TypeConversion.valueOf(defaultConversionType);
     }
     
 	public FlagTable getDefaultFlagTable() {
@@ -1088,5 +1112,88 @@ public class Configuration extends AbstractModel
     {
         this.dateISO = Boolean.parseBoolean(dateISO);
     }
-	
+
+    public DataListEnum getDataListToUse()
+    {
+        return _dataListToUse;
+    }
+    /**
+     * give the parameter type to use, depends on dataList choosen in settings, typeData present in data Table and output format
+     * @param typeData
+     * @return
+     */
+    public DataListEnum getDataListToUse(TableData tableData)
+    {
+        // contient Correction FAE 3760: si on charge un modele si on a utilisé liste P091 on continue à utiliser la liste P091
+        
+        
+        E_TypeConversion currentConversion = Nemo.getInstance().getViewMain().getEditFileForm().getSelectedConversion();
+       
+        TypeData typeData=null;
+        if (tableData.getTypes()!=null && !tableData.getTypes().isEmpty())
+        {
+            typeData =  tableData.getTypes().get(0);
+        }
+        
+        // s'il n'y a aucun parametre dans le tableau, on applique le type choisi dans les settings
+        // SAUF s'il n'est pas compatible avec le format de sortie
+        if(typeData==null)
+        {
+            if (currentConversion == E_TypeConversion.MEDATLAS && getDataListInSettings()==DataListEnum.P011_VIA_P021)
+            {
+                _dataListToUse = DataListEnum.P091;
+            }
+            else
+            {
+                _dataListToUse = getDataListInSettings();
+            }
+        }
+        // si les parametres presents ne sont pas P011, ils sont donc P091 -> on force le P091
+        else if (!typeData.isP011())
+        {
+            _dataListToUse = DataListEnum.P091;
+        }
+        // si les parametres presents sont P011
+        else if(typeData.isP011())
+        {
+            // format de sortie MEDATLAS
+            if (currentConversion == E_TypeConversion.MEDATLAS )
+            {
+                _dataListToUse = DataListEnum.P011_VIA_P091;
+            }
+            // format de sortie ODV
+            else
+            {
+                // si P011 via P021 demandé, on applique
+                if (getDataListInSettings() == DataListEnum.P011_VIA_P021)
+                {
+                    _dataListToUse = DataListEnum.P011_VIA_P021;
+                }
+                // si P091 ou P091 via P011 demandé, on force à P011 via P091
+                else
+                {
+                    _dataListToUse = DataListEnum.P011_VIA_P091;
+                }
+            }
+        }
+        return _dataListToUse;
+    }
+    public void setDataListToUse(DataListEnum dataListToUse)
+    {
+        _dataListToUse = dataListToUse;
+    }
+
+    public E_TypeConversion getDefaultConversionType()
+    {
+        return _defaultConversionType;
+    }
+
+    public void setDefaultConversionType(E_TypeConversion defaultConversionType)
+    {
+        _defaultConversionType = defaultConversionType;
+    }
+    public void setDataListInSettings(String flagTable) {
+        _dataListInSettings = DataListEnum.valueOf(flagTable);
+    }
+    
 }

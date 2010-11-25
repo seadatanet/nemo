@@ -34,7 +34,6 @@ import fr.ifremer.nemo.ui.edit.data.EditDataForm;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.ui.edit.station.EditStationForm;
 import fr.ifremer.nemo.ui.view.ViewLog;
-import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -137,7 +136,6 @@ public class Utils
         {
             Utils.razGlobal();
             // invalidEtapes();
-            // TODO à verifier
             Nemo.getInstance().resetModel();
 
             // reset de l'etape de conversion
@@ -245,7 +243,6 @@ public class Utils
 
     public static void injectData(StyledText styledtext, int debut, int fin)
     {
-        //TODO BGT revoir acces aux donnees de la table
         int deb, fi, lign, i, index;
 
         // on recupere les coordonnees de la selection
@@ -540,7 +537,7 @@ public class Utils
         EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
         int offsetFin;
         int enteteFichier =
-            Integer.parseInt(editFileForm.getSectionEnteteFichier()
+            Integer.parseInt(editFileForm.getSectionFileHeader()
                 .getValue());
 
         // calcul de l'offset de fin après rechargement du modèle
@@ -551,11 +548,11 @@ public class Utils
                 frag.getLastCharOffset()
                         + taillesCumLignes[frag.getLastLine()
                                 + Integer
-                                    .parseInt(editFileForm.getSectionEnteteFichier()
+                                    .parseInt(editFileForm.getSectionFileHeader()
                                         .getValue())]
                         - taillesCumLignes[frag.getFirstLine()
                                 + Integer
-                                    .parseInt(editFileForm.getSectionEnteteFichier()
+                                    .parseInt(editFileForm.getSectionFileHeader()
                                         .getValue())];
         }
         else
@@ -798,7 +795,7 @@ public class Utils
                     }
                     else
                     {
-                        editFileForm.textAreaFile.setText(Global.EMPTY_STRING);
+                        editFileForm.reinitTextArea();
                     }
                 }
                 Nemo.getInstance().getViewMain().setAffiche(0);
@@ -809,14 +806,14 @@ public class Utils
                 {
                     editCruiseForm.drawingBack();
                 }
-                else if (editFileForm.validee)
+                else if (editFileForm.isValidated())
                 {
                     editCruiseForm.afficheEdition();
                 }
                 else
                 {
                     ViewLog.aideCruise();
-                    Nemo.getInstance().getViewMain().textAreaCruise.setText(Global.EMPTY_STRING);
+                    Nemo.getInstance().getViewMain().getEditCruiseForm().getTextAreaCruise().setText(Global.EMPTY_STRING);
                     Nemo.getInstance().getViewMain().setAffiche(1);
                 }
             break;
@@ -826,15 +823,15 @@ public class Utils
                 {
                     editStationForm.drawingBack();
                 }
-                else if ((!Nemo.getInstance().getViewMain().tabCruise.isDisposed() && editCruiseForm.validee)
-                        || (Nemo.getInstance().getViewMain().tabCruise.isDisposed() && editFileForm.validee))
+                else if ((!Nemo.getInstance().getViewMain().tabCruise.isDisposed() && editCruiseForm.isValidated())
+                        || (Nemo.getInstance().getViewMain().tabCruise.isDisposed() && editFileForm.isValidated()))
                 {
                     editStationForm.afficheEdition();
                 }
                 else
                 {
                     ViewLog.aideStation();
-                    Nemo.getInstance().getViewMain().textAreaStation.setText(Global.EMPTY_STRING);
+                    Nemo.getInstance().getViewMain().getEditStationForm().getTextAreaStation().setText(Global.EMPTY_STRING);
                     Nemo.getInstance().getViewMain().setAffiche(2);
                 }
             break;
@@ -844,14 +841,14 @@ public class Utils
                 {
                     editDataForm.drawingBack();
                 }
-                else if (editStationForm.validee)
+                else if (editStationForm.isValidated())
                 {
                     editDataForm.afficheEdition();
                 }
                 else
                 {
                     ViewLog.aideData();
-                    Nemo.getInstance().getViewMain().textAreaData.setText(Global.EMPTY_STRING);
+                    Nemo.getInstance().getViewMain().getEditDataForm().getTextAreaData().setText(Global.EMPTY_STRING);
                     Nemo.getInstance().getViewMain().setAffiche(3);
                 }
             break;
@@ -861,7 +858,7 @@ public class Utils
                 {
                     editConversionForm.drawingBack();
                 }
-                else if (editDataForm.validee)
+                else if (editDataForm.isValidated())
                 {
                     editConversionForm.afficheEdition();
                 }
@@ -974,7 +971,7 @@ public class Utils
             try
             {
                 Utils.insertTextFich(editFileForm.nomFichier,
-                    editFileForm.textAreaFile, raz);
+                    editFileForm.getTextAreaFile(), raz);
             }
             catch (IOException e)
             {
@@ -1092,7 +1089,7 @@ public class Utils
             try
             {
                 Utils.insertTextFich(editFileForm.nomFichier,
-                    editFileForm.textAreaFile, raz);
+                    editFileForm.getTextAreaFile(), raz);
             }
             catch (IOException e)
             {
@@ -1192,7 +1189,7 @@ public class Utils
         
         // efface tous les onglets qui ont ete affiches jusque le en preparation
         // du chargement d'un nouveau fichier
-        if (editFileForm.getSectionEnteteFichier() != null)
+        if (editFileForm.getSectionFileHeader() != null)
         {
             // //effacement boutons
             editFileForm.razEdition();

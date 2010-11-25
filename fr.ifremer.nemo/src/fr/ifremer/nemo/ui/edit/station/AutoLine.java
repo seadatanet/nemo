@@ -142,7 +142,7 @@ public class AutoLine implements UIobject
                         org.eclipse.swt.events.SelectionEvent g)
                 {
 
-                    StyledText styledtext = Nemo.getInstance().getViewMain().textAreaStation;
+                    StyledText styledtext = Nemo.getInstance().getViewMain().getEditStationForm().getTextAreaStation();
                     int deb, fi, lign;
 
                     // on recupere les coordonnees de la selection
@@ -220,8 +220,8 @@ public class AutoLine implements UIobject
                     }
                     if (cursor != null)
                     {
-                        cursor.setX(Nemo.getInstance().getViewMain().textAreaStation.getSelection().x);
-                        cursor.setY(Nemo.getInstance().getViewMain().textAreaStation.getSelection().y);
+                        cursor.setX(Nemo.getInstance().getViewMain().getEditStationForm().getTextAreaStation().getSelection().x);
+                        cursor.setY(Nemo.getInstance().getViewMain().getEditStationForm().getTextAreaStation().getSelection().y);
                     }
                 }
             });
@@ -281,7 +281,8 @@ public class AutoLine implements UIobject
     protected int getFileHeaderPos()
     {
         int fileHeader = 0;
-        if (!Nemo.getInstance().getViewMain().getEditFileForm().isCruiseInADirectory() || Nemo.getInstance().getViewMain().getEditFileForm().chkMultiStations.getSelection()){
+        if (!Nemo.getInstance().getViewMain().getEditFileForm().isCruiseInADirectory() 
+                || Nemo.getInstance().getViewMain().getEditFileForm().isMultiStationFileChecked()){
             // fichier campagne
             fileHeader = Nemo.getInstance().getDomain().getMedia().getModel().getFileHeader();
             // fileHeader = DataModel.singleSurvey.getHeaderLinesNumber();
@@ -456,7 +457,7 @@ public class AutoLine implements UIobject
             else if (numberLine.getText().equals(Global.ZERO))
             {
                 // la ligne correspond au nom du fichier
-                if (Nemo.getInstance().getViewMain().getEditFileForm().radioFichier.getSelection())
+                if (Nemo.getInstance().getViewMain().getEditFileForm().isCruiseIsAFile())
                 {
                     ligne = Utils.extraitFichierChemin(Nemo.getInstance().getViewMain().getEditFileForm().nomFichier);
                 }
@@ -535,7 +536,7 @@ public class AutoLine implements UIobject
                     + Utils.taillesCumLignes[lign - 1];
         fi = Integer.parseInt(end.getText()) + Utils.taillesCumLignes[lign - 1];
 
-        Nemo.getInstance().getViewMain().textAreaStation.setSelection(deb - 1, fi);
+        Nemo.getInstance().getViewMain().getEditStationForm().getTextAreaStation().setSelection(deb - 1, fi);
     }
 
     public boolean checkValues(String nomSection)
@@ -665,7 +666,8 @@ public class AutoLine implements UIobject
         int ligneFin = Integer.parseInt(numberLine.getText()) + nbreLignes - 1;
 
         int enteteFichier = 0;
-        if (!Nemo.getInstance().getViewMain().getEditFileForm().isCruiseInADirectory() || Nemo.getInstance().getViewMain().getEditFileForm().chkMultiStations.getSelection()){
+        if (!Nemo.getInstance().getViewMain().getEditFileForm().isCruiseInADirectory() 
+                || Nemo.getInstance().getViewMain().getEditFileForm().isMultiStationFileChecked()){
             // fichier campagne
             enteteFichier = Nemo.getInstance().getDomain().getMedia().getModel().getFileHeader();
             // enteteFichier = DataModel.singleSurvey.getHeaderLinesNumber();

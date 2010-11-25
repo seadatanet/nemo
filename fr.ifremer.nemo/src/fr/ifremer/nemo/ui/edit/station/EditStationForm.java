@@ -2,6 +2,7 @@ package fr.ifremer.nemo.ui.edit.station;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridLayout;
@@ -19,6 +20,7 @@ import fr.ifremer.nemo.ui.edit.EditForm;
 import fr.ifremer.nemo.ui.edit.Etape;
 import fr.ifremer.nemo.ui.edit.NemoSection;
 import fr.ifremer.nemo.ui.edit.cruise.TableDataSurvey;
+import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.ui.edit.station.AutoLine.MetaInData;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
@@ -29,7 +31,8 @@ import fr.ifremer.nemo.util.Global.E_InputType;
 public class EditStationForm extends EditForm
 {
 
-    public StationSection stationNumber, dataType, historique, comments,
+    public StationSection stationNumber;
+    public StationSection dataType, historique, comments,
     surfaceSample, utConvertion, time, date, latitude, endLatitude,
     longitude, endLongitude, depth, sensorDepth,
     magneticDeclin, samplingRate;
@@ -38,7 +41,7 @@ public class EditStationForm extends EditForm
 
     public QCflagsSection qcFlags;
 
-
+    private  StyledText  textAreaStation;
 
 
     @Override
@@ -113,7 +116,7 @@ public class EditStationForm extends EditForm
         ViewLog.aideStation();
 
         // affichage du texte dans la zone de gauche
-        Nemo.getInstance().getViewMain().textAreaStation.setText(Utils.texteBrut);
+        textAreaStation.setText(Utils.texteBrut);
 
         // affichage courant
         setLoaded(true);
@@ -152,7 +155,7 @@ public class EditStationForm extends EditForm
     @Override
     protected void initSections()
     {
-        System.out.println("EditStationForm: initSections");
+        EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
         /**
          * ==============================================================================================
          * station number
@@ -163,7 +166,7 @@ public class EditStationForm extends EditForm
                 .getString(Intern.S_STATIONNUMBER),
                 Messages.edit_station_sectionReference_lib, true, true, 1, this);
         stationNumber.addManualInput(null, ComboType.NONE, "1"); //$NON-NLS-1$ 
-        if (!Nemo.getInstance().getViewMain().getEditFileForm().radTrajectoire.getSelection())
+        if (!editFileForm.isTrajectory())
         {
             stationNumber.getManualInput().setNbColumns(2);
             stationNumber.getManualInput().setLabelButton(
@@ -177,7 +180,7 @@ public class EditStationForm extends EditForm
          * data type
          * ==============================================================================================
          */
-        if (!Nemo.getInstance().getViewMain().getEditFileForm().isCollection())
+        if (!editFileForm.isCollection())
         {
             dataType =
                 new StationSection(Intern.S_DATATYPE, Messages
@@ -251,7 +254,7 @@ public class EditStationForm extends EditForm
         time.addConverter(ComboType.TIME, Global.EMPTY_STRING);
         time.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
 
-        boolean defaultValueEnable = Nemo.getInstance().getViewMain().getEditFileForm().getTypeFichierEntree().equals(E_InputType.PROFILE);
+        boolean defaultValueEnable = editFileForm.getInputFileType().equals(E_InputType.PROFILE);
         time.addAutoInput(null, false, MetaInData.FACULTATIF, false, defaultValueEnable);
         listeSections.add(time);
         /**
@@ -280,7 +283,7 @@ public class EditStationForm extends EditForm
         latitude.addAutoInput(null, true, MetaInData.FACULTATIF, false, false);
         listeSections.add(latitude);
 
-        if (Nemo.getInstance().getViewMain().getEditFileForm().radSerieTempo.getSelection())
+        if (editFileForm.isTimeSeries())
         {
             endLatitude =
                 new StationSection(Intern.S_ELAT, Messages
@@ -307,7 +310,7 @@ public class EditStationForm extends EditForm
         longitude.addAutoInput(null, true, MetaInData.FACULTATIF, false, false);
         listeSections.add(longitude);
 
-        if (Nemo.getInstance().getViewMain().getEditFileForm().radSerieTempo.getSelection())
+        if (editFileForm.isTimeSeries())
         {
             endLongitude =
                 new StationSection(Intern.S_ELON, Messages
@@ -337,9 +340,9 @@ public class EditStationForm extends EditForm
         depth.addAutoInput(null, true, MetaInData.FACULTATIF, false, true);
         listeSections.add(depth);
 
-        if (!Nemo.getInstance().getViewMain().getEditFileForm().radProfilVertical.getSelection())
+        if (!editFileForm.isProfile())
         {
-            if (Nemo.getInstance().getViewMain().getEditFileForm().radSerieTempo.getSelection())
+            if (editFileForm.isTimeSeries())
             {
                 endDepth =
                     new StationSection(Intern.S_EDEPTH, Messages
@@ -369,7 +372,7 @@ public class EditStationForm extends EditForm
             sensorDepth.setTimeSeriesInfo(true);
             listeSections.add(sensorDepth);
 
-            if (Nemo.getInstance().getViewMain().getEditFileForm().radSerieTempo.getSelection())
+            if (editFileForm.isTimeSeries())
             {
                 magneticDeclin =
                     new StationSection(Intern.S_MAGNETIC, Messages
@@ -413,9 +416,9 @@ public class EditStationForm extends EditForm
     @Override
     public void actualiseEdition()
     {
+        EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
         // pour trajectoires et time-series
-        if (Nemo.getInstance().getViewMain().getEditFileForm().radTrajectoire.getSelection()
-                || Nemo.getInstance().getViewMain().getEditFileForm().radSerieTempo.getSelection())
+        if (editFileForm.isTrajectory()|| editFileForm.isTimeSeries())
         {
             // si Date est saisie dans les données
             boolean dateInData =
@@ -429,7 +432,7 @@ public class EditStationForm extends EditForm
             time.setEnabledManual(!(dateInData || timeInData));
         }
 
-        if (Nemo.getInstance().getViewMain().getEditFileForm().radTrajectoire.getSelection())
+        if (editFileForm.isTrajectory())
         {
             // in trajectory, latitude must be in data
             latitude.setEnableInData(MetaInData.OBLIGATOIRE);
@@ -611,7 +614,7 @@ public class EditStationForm extends EditForm
         Nemo.getInstance().getDomain().getCruise().getStation().updateStation(stationModel);
 
         // flag validation à 1
-        validee = true;
+        setValidated(true);
     }
     private static void initDiseabledField(StationModel sModel, String property)
     {
@@ -620,5 +623,15 @@ public class EditStationForm extends EditForm
         propertyModel.setFlag(Nemo.getInstance().getViewMain().getEditStationForm().qcFlags.getFlagFragment(property)); // Flag qualite
         propertyModel.setToCompute(true);
         sModel.addProperty(propertyModel);
+    }
+
+    public StyledText getTextAreaStation()
+    {
+        return textAreaStation;
+    }
+
+    public void setTextAreaStation(StyledText textAreaStation)
+    {
+        this.textAreaStation = textAreaStation;
     }
 }

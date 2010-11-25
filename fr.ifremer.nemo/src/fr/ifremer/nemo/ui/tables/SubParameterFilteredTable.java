@@ -21,8 +21,10 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
 import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.config.Configuration.DataListEnum;
 import fr.ifremer.nemo.ui.edit.data.TypeData;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
@@ -39,19 +41,25 @@ public class SubParameterFilteredTable extends AbstractFilteredTable
 
     private ArrayList<TypeData> _datasFiltered;
 
-    private TypeData _typeP091;
+    private TypeData _typeParameter;
 
     private Table _table;
 
     private boolean _validate;
 
     private TypeData _selectedData;
+    /**
+     * type de parametres utilisé (P091, P011 via P091, P011 via P021...)
+     */
+    private DataListEnum _typeToUse;
+    
 
-    public SubParameterFilteredTable(TypeData typeP091)
+    public SubParameterFilteredTable(TypeData typeParameter, DataListEnum typeToUse)
     {
-        _typeP091 = typeP091;
+        _typeParameter = typeParameter;
         _datas = new ArrayList<TypeData>();
         _datasFiltered = new ArrayList<TypeData>();
+        _typeToUse = typeToUse;
     }
 
     /**
@@ -60,23 +68,42 @@ public class SubParameterFilteredTable extends AbstractFilteredTable
     @Override
     protected void createDataList()
     {
-
-        List<CodeTableRecordType> listeCompleteP091_P021_P011 =
-            new ArrayList<CodeTableRecordType>();
-
-        List<CodeTableRecordType> listeP091_P021 =
-            NemoLists.getVocabMatchs("P091", "P021", _typeP091.getCode().split( //$NON-NLS-1$ //$NON-NLS-2$
-                Global.SEP)[0]);
-
-        for (CodeTableRecordType liste : listeP091_P021)
+        if (_typeToUse == DataListEnum.P011_VIA_P091)
         {
-            listeCompleteP091_P021_P011.addAll(NemoLists.getVocabMatchs("P021", //$NON-NLS-1$
-                "P011", liste.getEntryTermAbbr())); //$NON-NLS-1$
+           createDataList_P011_via_P091();
         }
-
-        for (CodeTableRecordType code : listeCompleteP091_P021_P011)
+        else if(_typeToUse == DataListEnum.P011_VIA_P021)
         {
-            TypeData newElement = new TypeData(_typeP091);
+            createDataList_P011_via_P021();
+        }
+        
+        
+        Collections.sort(_datas, new Comparator<TypeData>(){
+
+            public int compare(TypeData arg0, TypeData arg1)
+            {
+                return arg0.getCodeP011().compareTo(arg1.getCodeP011());
+            }
+
+        });
+
+        for (TypeData elmt : _datas)
+        {
+            _datasFiltered.add(elmt);
+        }
+    }
+    
+    /**
+     * creation de la liste de parametres P011 correspondant au paramètre P021 choisi dans le panneau précedent
+     */
+    private void createDataList_P011_via_P021()
+    {
+        List<CodeTableRecordType> listeP021_P011 =
+            NemoLists.getVocabMatchs(Intern.list_BODCpdv, Intern.list_P011, _typeParameter.getAbbr());
+
+        for (CodeTableRecordType code : listeP021_P011)
+        {
+            TypeData newElement = new TypeData(_typeParameter);
 
             String entryKey = code.getEntryKey();
             String[] entryKeySplit = entryKey.split("/"); //$NON-NLS-1$
@@ -92,21 +119,47 @@ public class SubParameterFilteredTable extends AbstractFilteredTable
             _datas.add(newElement);
 
         }
-        
-        Collections.sort(_datas, new Comparator<TypeData>(){
-
-            public int compare(TypeData arg0, TypeData arg1)
-            {
-                return arg0.getCodeP011().compareTo(arg1.getCodeP011());
-             }
-            
-        });
-        
-        for (TypeData elmt : _datas)
-            _datasFiltered.add(elmt);
-
     }
+    /**
+     * creation de la liste de parametres P011 correspondant au paramètre P091 choisi dans le panneau précedent
+     * on passe par le type P021
+     */
+    private void createDataList_P011_via_P091()
+    {
+        List<CodeTableRecordType> listeCompleteP091_P021_P011 = new ArrayList<CodeTableRecordType>();
+        //list_BODCpdv = P021
+        List<CodeTableRecordType> listeP091_P021 =
+            NemoLists.getVocabMatchs(Intern.list_P091, Intern.list_BODCpdv, _typeParameter.getCode().split( 
+                Global.SEP)[0]);
 
+        for (CodeTableRecordType liste : listeP091_P021)
+        {
+            listeCompleteP091_P021_P011.addAll(NemoLists.getVocabMatchs(Intern.list_BODCpdv, 
+                Intern.list_P011, liste.getEntryTermAbbr())); 
+        }
+
+        for (CodeTableRecordType code : listeCompleteP091_P021_P011)
+        {
+            TypeData newElement = new TypeData(_typeParameter);
+
+            String entryKey = code.getEntryKey();
+            String[] entryKeySplit = entryKey.split("/"); //$NON-NLS-1$
+
+            newElement.setIsP011(true);
+
+            newElement.setCodeP011(entryKeySplit[entryKeySplit.length - 1]);
+
+            newElement.setAbbr(code.getEntryTermAbbr());
+
+            newElement.setNomP011(code.getEntryTerm());
+
+            _datas.add(newElement);
+
+        }
+
+       
+    }
+    
     /**
      * {@inheritDoc}
      */
@@ -196,7 +249,10 @@ public class SubParameterFilteredTable extends AbstractFilteredTable
     @Override
     protected String getDialogTitle()
     {
-        return _typeP091.getCode().split("-")[0].trim() + " - " + Messages.table_subparameters; //$NON-NLS-1$ //$NON-NLS-2$ 
+        return _typeParameter.getCode().split(Global.MOINS)[0].trim() + Global.SEP 
+        + Messages.table_subparameters
+        + Global.SEP
+        + Messages.edit_data_P011;
     }
 
     /**

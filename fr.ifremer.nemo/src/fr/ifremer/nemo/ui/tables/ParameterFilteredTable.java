@@ -19,7 +19,6 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.Configuration.DataListEnum;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.data.TableData;
@@ -75,6 +74,8 @@ public class ParameterFilteredTable extends AbstractFilteredTable
     protected void createTable()
     {
 //        ArrayList<TypeData> filteredList =myTableDataRef.getListeFiltree();
+       
+        
         myFiltreTable = new Table(top, SWT.FULL_SELECTION);
 
         myFiltreTable.setHeaderVisible(true);
@@ -151,7 +152,22 @@ public class ParameterFilteredTable extends AbstractFilteredTable
     @Override
     protected String getDialogTitle()
     {
-        return Messages.table_parameters;
+        
+        DataListEnum listToUse =Nemo.getInstance().getConfig().getDataListToUse(myTableDataRef);
+       
+        String title = Messages.table_parameters;
+        title += Global.SPACE;
+//        title += listToUse.name();
+        title += Global.SPACE;
+        
+        if (listToUse==DataListEnum.P011_VIA_P021 )
+        {
+            title += Messages.edit_data_P021;
+        }else if (listToUse==DataListEnum.P011_VIA_P091 || listToUse==DataListEnum.P091)
+        {
+            title += Messages.edit_data_P091;
+        }
+        return title;
     }
 
     /**
@@ -167,24 +183,12 @@ public class ParameterFilteredTable extends AbstractFilteredTable
       
       int index = myFiltreTable.getSelectionIndex();
       typeData = listeFiltree.get(index);
-      Configuration config = Nemo.getInstance().getConfig();
       
+      DataListEnum typeToUse= Nemo.getInstance().getConfig().getDataListToUse(myTableDataRef);
       
-      // Correction FAE 3760 si on charge un modele si on a utilisé liste P091 on continue à utiliser la liste P091
-      boolean isTypeP011=false;
-      DataListEnum currentType=config.getDataList();
-      
-      if (!myTableDataRef.getTypes().isEmpty())
+      if (typeToUse==DataListEnum.P011_VIA_P021 || typeToUse==DataListEnum.P011_VIA_P091)
       {
-          if (myTableDataRef.getTypes().get(0).isP011())
-          {
-              isTypeP011=true;
-              currentType= DataListEnum.P011_VIA_P091;
-          }
-      }
-      if (isTypeP011)
-      {
-          SubParameterFilteredTable subTable = new SubParameterFilteredTable(typeData);
+          SubParameterFilteredTable subTable = new SubParameterFilteredTable(typeData, typeToUse);
           subTable.open(this.shell);
           if (subTable.isValidated())
               typeData = subTable.getSelectedData();

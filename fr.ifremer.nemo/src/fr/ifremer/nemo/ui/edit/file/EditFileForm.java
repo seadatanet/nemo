@@ -1,27 +1,17 @@
 package fr.ifremer.nemo.ui.edit.file;
 
-import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.DirectoryDialog;
-import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
@@ -29,11 +19,12 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.input.MediaModel;
-import fr.ifremer.nemo.ui.Application;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.EditForm;
 import fr.ifremer.nemo.ui.edit.Etape;
 import fr.ifremer.nemo.ui.edit.NemoSection;
+import fr.ifremer.nemo.ui.edit.file.listeners.InputFileBrowseListener;
+import fr.ifremer.nemo.ui.edit.file.listeners.InputFileRadioSelectionListener;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Conversion;
@@ -44,53 +35,77 @@ import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 
+/**
+ * 
+ * Description: editeur de l'onglet File
+ * @author sbregent
+ *
+ */
 public class EditFileForm extends EditForm
 {
+    // variables publiques **********************************************
+    public  String nomFichier, nomRepertoire;
     
-    
+    // variables privées ************************************************
     private  boolean isCruiseInADirectory;
     
     // sections    
-    private FileSection sectionEnteteFichier;
-    private FileSection sectionFinStation;
+    private FileSection sectionFileHeader;
+    private FileStationHeader sectionStationHeader;
+    private FileSection sectionEndOfStation;   
+    private FileEndData sectionDataTerminator;
     
-    public FileStationHeader sectionEnteteStation;
-    public FileEndData sectionRuptureDonnees;
-    public  StyledText  textAreaFile;
-    public  String nomFichier, nomRepertoire;
-    public  Button radioFichier = null;
-    public  Button radioDossier = null;
-    private Button buttonValidateAll;
-    public  Button radioCollectCas1 = null;
-    public  Button radioCollectCasN = null;
-    public  boolean collectionCas1;
-    public  boolean collectionCasN;
-    public  Button radProfilVertical, radSerieTempo, radTrajectoire;
+    // zone de texte pour l'affichage des données en entrée
+    private  StyledText  textAreaFile;
+    
+    // choix pour Cruise: fichier ou répertoire
+    protected  Button radioFichier = null;
+    protected  Button radioDossier = null;
+    
+    // choix du type de collection
+    protected  Button radioCollectGroupedByCruise = null; //cas 1 fichier
+    protected  Button radioCollectNotGroupedByCruise = null;// cas N fichiers
+    protected  boolean collectionGroupedByCruise;
+    protected  boolean collectionNotGroupedByCruise;
+    protected  Button chkMultiStations;
+    
+    
+    // choix pour File type: profile, time series ou trajectory
+    private  Button radProfilVertical, radSerieTempo, radTrajectoire;
+    
+    // choix du format d'export
     private  Button radMedatlas;
     private  Button radODV;
-    public  Button radODVMonoFichier;
-    public  Button radODVMonoStation ;
-    public  Button radioTabulation, radioPointVirgule, radioVirgule,
-    radioEspace, radioSeparateurAutre = null;
-    public  Text textSeparateur = null;
-    public  Button chkSeparateur = null;
-    public  Button chkForcerTri = null;
-    public  Button chkMultiStations;
+    private  Button radODVMonoFichier;
+    private  Button radODVMonoStation ;
+    private  Button chkForcerTri = null;
+//    private  boolean blnForcerTri; inutilisé
+    
+    // choix du séparateur
+    private  Button radioTabulation, radioPointVirgule, radioVirgule, radioEspace, radioSeparateurAutre = null;
+    private  Text textSeparateur = null;
+    private  Button chkSeparateur = null;
+    
+    // disposition IHM
     protected  Group grpODV;
     protected  Composite compositeSeparateur;
-    public  boolean blnForcerTri;
-    private  boolean  fileLoaded;
+    protected  boolean  fileLoaded;
     
+    // validation
+    private Button buttonValidateAll;
     
-    
+    /**
+     * constructeur
+     *
+     */
     public EditFileForm()
     {
         super();
     }
     public void init()
     {
-        collectionCas1 = false;
-        collectionCasN = false;
+        collectionGroupedByCruise = false;
+        collectionNotGroupedByCruise = false;
         fileLoaded = false;
         setLoaded (false);
         textAreaFile.setText(Global.EMPTY_STRING);
@@ -105,14 +120,15 @@ public class EditFileForm extends EditForm
         textSeparateur.setText(Global.EMPTY_STRING);
         setSeparatorVisible();
         razOutputChoice();
+        Nemo.getInstance().getViewMain().enableCruise(!radODV.getSelection());
     }
     public void createLeftForm(Composite parent)
     {
+        
+        // composant text (affichage du fichier en entrée)
         Composite textFile = new Composite(parent, SWT.NONE);
         textFile.setLayout(new FillLayout());
-        textAreaFile =
-            new StyledText(textFile, SWT.MULTI | SWT.READ_ONLY | SWT.H_SCROLL
-                | SWT.V_SCROLL);
+        textAreaFile = new StyledText(textFile, SWT.MULTI | SWT.READ_ONLY | SWT.H_SCROLL | SWT.V_SCROLL);
         textAreaFile.setFont(Utils.fontCourier);
 
         FormToolkit toolkitViewFile = new FormToolkit(parent.getDisplay());
@@ -121,20 +137,14 @@ public class EditFileForm extends EditForm
         formViewFile.setBackground(parent.getBackground());
         formViewFile.getBody().setLayout(new GridLayout());
 
-        createGroupChoixFichierInFile(formViewFile.getBody());
+        // input        
+        createGroupInputParameters(formViewFile.getBody());
+      
+      
+        //output
+        createGroupOutputParameters(formViewFile.getBody());
         
-        // create subGroup for Separator and FileType
-//        Group grpSeparateurAndFileType = new Group(parent, SWT.NONE);
-//        GridLayoutFactory.fillDefaults().applyTo(grpSeparateurAndFileType);
-//        GridDataFactory.fillDefaults().grab(false, false)
-//        .applyTo(grpSeparateurAndFileType);
-        
-        createGroupSeparateurInFile(formViewFile.getBody());
-        createGroupTypeFichierInFile(formViewFile.getBody());
-        //BGT test ajout ici choix sortie***************************************************
-        createGroupChooseOutputFormat(formViewFile.getBody());
-        
-        ((SashForm)parent).setWeights(new int[] {45, 55});
+        ((SashForm)parent).setWeights(new int[] {38, 62});
         
     }
     @Override
@@ -147,7 +157,6 @@ public class EditFileForm extends EditForm
 
         // init des objets
         initSections();
-        
 
         buttonValidateAll = new Button(formEdition.getBody(), SWT.PUSH);
         buttonValidateAll.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
@@ -167,7 +176,8 @@ public class EditFileForm extends EditForm
                 // Les onglets sont décalés si on on est en collection => pas d'étape cruise
                 // FAE 3796
                 int offset = 0;
-                if (isCollection())
+//                if (isCollection())
+                if(! Nemo.getInstance().getViewMain().isCruiseEnabled())
                 {
                     offset--;
                 }
@@ -230,8 +240,6 @@ public class EditFileForm extends EditForm
     @Override
     public void afficheEdition()
     {
-        // nom du model
-        //String modelName = Nemo.getInstance().getNomModele();
         
         if (fileLoaded)
         {
@@ -283,38 +291,38 @@ public class EditFileForm extends EditForm
     @Override
     public void initSections()
     {
-        sectionEnteteFichier =
+        sectionFileHeader =
             new FileSection(NemoSection.F_FILEHEADER,
                 Messages.getString(NemoSection.F_FILEHEADER),
                 Messages.edit_file_enteteFichier,
                 this);
-        sectionEnteteFichier.addSetter(null, Global.ZERO);
-        listeSections.add(sectionEnteteFichier);
+        sectionFileHeader.addSetter(null, Global.ZERO);
+        listeSections.add(sectionFileHeader);
 
-        sectionEnteteStation =
+        sectionStationHeader =
             new FileStationHeader(NemoSection.F_STATIONHEADER, Messages
                 .getString(NemoSection.F_STATIONHEADER),
                 Messages.edit_file_enteteStation, this);
-        sectionEnteteStation.addSetter(Messages.edit_file_enteteStation_setter,
+        sectionStationHeader.addSetter(Messages.edit_file_enteteStation_setter,
             Global.ZERO);
-        listeSections.add(sectionEnteteStation);
+        listeSections.add(sectionStationHeader);
 
-        sectionFinStation =
+        sectionEndOfStation =
             new FileSection(NemoSection.F_ENDSTATION, Messages
                 .getString(NemoSection.F_ENDSTATION),
                 Messages.edit_file_finStation, this);
-        sectionFinStation.addSetter(null, Global.ZERO);
-        listeSections.add(sectionFinStation);
+        sectionEndOfStation.addSetter(null, Global.ZERO);
+        listeSections.add(sectionEndOfStation);
 
-        sectionRuptureDonnees =
+        sectionDataTerminator =
             new FileEndData(NemoSection.F_ENDDATA, Messages
                 .getString(NemoSection.F_ENDDATA),
                 Messages.edit_file_indicFinDonnees, this);
-        sectionRuptureDonnees.addSetter(Messages.edit_file_sectionRuptureDonnees_end_with, Global.EMPTY_STRING);
-        listeSections.add(sectionRuptureDonnees);
+        sectionDataTerminator.addSetter(Messages.edit_file_sectionRuptureDonnees_end_with, Global.EMPTY_STRING);
+        listeSections.add(sectionDataTerminator);
     }
     
-
+   
     @Override
     protected void disposeElements()
     {
@@ -326,14 +334,13 @@ public class EditFileForm extends EditForm
     public void actualiseEdition()
     {
         // FAE 1810 - FileHeader accessible que pour un fichier campagne
-        sectionEnteteFichier.setEnabled(radioFichier.getSelection() || chkMultiStations.getSelection());
+        sectionFileHeader.setEnabled(radioFichier.getSelection() || isMultiStationFileChecked());
         
         buttonValidateAll.setEnabled(!Nemo.getInstance().getNomModele().equals(Global.EMPTY_STRING));
     }
 
     /**
      * fill with current model values 
-     * @param raz
      */
     @Override
     public void fillFromModel()
@@ -341,8 +348,8 @@ public class EditFileForm extends EditForm
         fillFromModel(false);
     }
     /**
-     * fill with current model values if raz=false (else, fill with default values)
-     * @param raz
+     * fill with current model values 
+     * @param raz: if true, release all domain values before filling
      */
     public void fillFromModel(Boolean raz)
     {
@@ -358,38 +365,43 @@ public class EditFileForm extends EditForm
         // Type de fichier
         selectTypeFile(mediaModel.getInputType());
         
-        setSelectedConversion(Nemo.getInstance().getDomain().getConversion().getModel().getOutputFormat());
-
         // --- remplissage du formulaire de droite (editFileForm)
         // Entête Fichier
         if (Nemo.getInstance().getViewMain().getEditFileForm().isCruiseInADirectory()
-                && !chkMultiStations.getSelection()){
-            sectionEnteteFichier.razValues();
+                && !isMultiStationFileChecked()){
+            sectionFileHeader.razValues();
         }
         else{
-            sectionEnteteFichier.setValue(String.valueOf(mediaModel.getFileHeader()));            
+            sectionFileHeader.setValue(String.valueOf(mediaModel.getFileHeader()));            
         }
 
         // Entête Station
         if (mediaModel.getStationHeaderPattern().equals(Global.EMPTY_STRING)){
-            sectionEnteteStation.selectNumber(true);
-            sectionEnteteStation.setValue(String.valueOf(mediaModel.getStationHeader()));
+            sectionStationHeader.selectNumber(true);
+            sectionStationHeader.setValue(String.valueOf(mediaModel.getStationHeader()));
         }
         else{
-            sectionEnteteStation.selectNumber(false);
-            sectionEnteteStation.setIndicatorText(mediaModel.getStationHeaderPattern());
-            sectionEnteteStation.setNbLinesBeforeData(String.valueOf(mediaModel.getStationHeader()));
+            sectionStationHeader.selectNumber(false);
+            sectionStationHeader.setIndicatorText(mediaModel.getStationHeaderPattern());
+            sectionStationHeader.setNbLinesBeforeData(String.valueOf(mediaModel.getStationHeader()));
         }
         
         // Fin de Station
-        sectionFinStation.setValue(String.valueOf(mediaModel.getEndStation()));
+        sectionEndOfStation.setValue(String.valueOf(mediaModel.getEndStation()));
         
         // Fin des données
-        sectionRuptureDonnees.setEndData(mediaModel.getEndData(), mediaModel.getEndDataPattern());
-
+        sectionDataTerminator.setEndData(mediaModel.getEndData(), mediaModel.getEndDataPattern());
         
-        //BGT
-        setSelectedConversion(Nemo.getInstance().getDomain().getConversion().getModel().getOutputFormat());
+        // conversion:
+        // si un modele est ouvert, on affecte la valeur de ce modèle. Sinon on affecte la valeur choisie dans les settings
+        if ( Nemo.getInstance().getNomModele().equals(Global.EMPTY_STRING))
+        {
+            setSelectedConversion(Nemo.getInstance().getConfig().getDefaultConversionType());
+        }else{
+            setSelectedConversion(Nemo.getInstance().getDomain().getConversion().getModel().getOutputFormat());
+        }
+     
+        Nemo.getInstance().getViewMain().updateTabsVisibility();
         // activation option serie tempo
         enableChoice(true);
     }
@@ -399,63 +411,115 @@ public class EditFileForm extends EditForm
         super.invalidEtape(0);
         Nemo.getInstance().getViewMain().tabFile.setText(Messages.onglet_file);
     }
-    private void createGroupChooseOutputFormat(Composite parent)
+    
+    
+    private void createGroupOutputParameters(Composite parent)
     {
-        Composite compositeConversion = new Composite(parent, SWT.NONE);
-        GridLayout layout = new GridLayout();
-        layout.numColumns = 1;
-        compositeConversion.setLayout(layout);
-
-        GridLayout layout2 = new GridLayout();
-        layout.numColumns = 1;
-        compositeConversion.setLayout(layout);
-
-
-        Group group = new Group(compositeConversion, SWT.NONE);
-        group.setText(Messages.view_convert_title);
-        group.setLayout(layout);
-
-        radMedatlas = new Button(group, SWT.RADIO);
+        
+        //****************************************************************************************
+        // principal composite
+        GridLayout mainBoxLayout = new GridLayout();
+        mainBoxLayout.numColumns= 1;
+        mainBoxLayout.marginHeight = 0;
+        GridData mainGridData = new GridData();
+        mainGridData.horizontalAlignment = GridData.FILL;
+        mainGridData.verticalAlignment = GridData.FILL;
+        
+        Group mainBoxGroup = new Group(parent, SWT.NONE);
+        mainBoxGroup.setText(Messages.view_file_outputTitle); 
+        mainBoxGroup.setLayout(mainBoxLayout);
+        mainBoxGroup.setLayoutData(mainGridData);
+       
+        //****************************************************************************************
+        // FORMAT
+        GridData gridData = new GridData();
+        gridData.grabExcessHorizontalSpace = true;
+        gridData.horizontalAlignment = GridData.FILL;
+        
+        GridLayout mainFormatLayout = new GridLayout();
+        mainFormatLayout.numColumns = 2;
+        mainFormatLayout.marginHeight=0;
+        mainFormatLayout.makeColumnsEqualWidth = true;
+        Composite mainFormatGroup = new Composite(mainBoxGroup, SWT.NONE);
+        mainFormatGroup.setLayout(mainFormatLayout);
+        mainFormatGroup.setLayoutData(gridData);
+        
+        //****************************************************************************************
+        // MEDATLAS/ODV
+        GridData medOrOdvgridData = new GridData();
+        medOrOdvgridData.grabExcessHorizontalSpace = true;
+        medOrOdvgridData.horizontalAlignment = GridData.FILL;
+        
+        GridLayout medOrOdvLayout = new GridLayout();
+        medOrOdvLayout.numColumns = 1;
+        medOrOdvLayout.marginHeight = 0;
+        
+        Group medOrOdvGroup = new Group(mainFormatGroup, SWT.NONE);
+        medOrOdvGroup.setLayout(medOrOdvLayout);
+        medOrOdvGroup.setLayoutData(medOrOdvgridData);
+        
+        radMedatlas = new Button(medOrOdvGroup, SWT.RADIO);
         radMedatlas.setText(Conversion.MEDATLAS.getName());
-        radMedatlas.setSelection(true);
+        radMedatlas.setSelection(false);
         addRadConvertListener(radMedatlas);
-
-        // Composite vide pour mise en page
-//        Composite compoVide1 = new Composite(group, SWT.NONE);
-
-        radODV = new Button(group, SWT.RADIO);
+        
+        radODV = new Button(medOrOdvGroup, SWT.RADIO);
         radODV.setText(Conversion.ODV.getName());
         radODV.setSelection(false);
         addRadConvertListener(radODV);
-
-        grpODV = new Group(group, SWT.NONE);
-        grpODV.setLayout(layout2);
-         afficheGrpODV();
-
+        
+        //****************************************************************************************
+        // ODV type
+        GridData odvTypegridData = new GridData();
+        odvTypegridData.grabExcessHorizontalSpace = true;
+        odvTypegridData.horizontalAlignment = GridData.FILL;
+        
+        GridLayout odvTypeLayout = new GridLayout();
+        odvTypeLayout.numColumns = 1;
+        odvTypeLayout.marginHeight = 0;
+        
+        grpODV = new Group(mainFormatGroup, SWT.NONE);
+        grpODV.setLayout(odvTypeLayout);
+        grpODV.setLayoutData(odvTypegridData);
+        
         radODVMonoStation = new Button(grpODV, SWT.RADIO);
         radODVMonoStation.setText(Messages.view_convert_monoStation);
-        radODVMonoStation.setSelection(true);
+        radODVMonoStation.setSelection(false);
         addRadConvertListener(radODVMonoStation);
         radODVMonoFichier = new Button(grpODV, SWT.RADIO);
         radODVMonoFichier.setText(Messages.view_convert_monoFichier);
         addRadConvertListener(radODVMonoFichier);
-        // Composite vide pour mise en page
-//        Composite compoVide2 = new Composite(compositeConversion, SWT.NONE);
-
-        chkForcerTri = new Button(group, SWT.CHECK);
+        
+        setSelectedConversion(Nemo.getInstance().getConfig().getDefaultConversionType());
+        afficheGrpODV();
+        
+        //****************************************************************************************
+        //sort
+        chkForcerTri = new Button(mainBoxGroup, SWT.CHECK);
         chkForcerTri.setFont(Utils.font08);
         chkForcerTri.setText(Messages.view_convert_sort);
-        chkForcerTri
-        .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-            @Override
-            public void widgetSelected(
-                    org.eclipse.swt.events.SelectionEvent g)
-            {
-                blnForcerTri = chkForcerTri.getSelection();
-            }
-        });
     }
-    private void createGroupSeparateurInFile(Composite parent)
+
+    
+    
+    
+    private Composite createSubGroupSeparatorAndFileType(Composite parent)
+    {
+        //****************************************************************************************
+        // principal composite
+        GridLayout mainBoxLayout = new GridLayout();
+        mainBoxLayout.numColumns= 2;
+        GridData mainGridData = new GridData();
+        mainGridData.horizontalAlignment = GridData.FILL;
+        mainGridData.verticalAlignment = GridData.FILL;
+        
+        Composite box = new Composite(parent, SWT.NONE);
+        box.setLayout(mainBoxLayout);
+        box.setLayoutData(mainGridData);
+        
+        return box;
+    }
+    private void createSubGroupSeparator(Composite parent)
     {
         Group grpSeparateur = new Group(parent, SWT.NONE);
         GridLayoutFactory.fillDefaults().applyTo(grpSeparateur);
@@ -507,7 +571,7 @@ public class EditFileForm extends EditForm
     /**
      * This method initializes groupFichier
      */
-    private void createGroupTypeFichierInFile(Composite parent)
+    private void createSubGroupFileType(Composite parent)
     {
         Group grpFichier = new Group(parent, SWT.NONE);
         grpFichier.setText(Messages.view_file_fileType);
@@ -527,331 +591,107 @@ public class EditFileForm extends EditForm
         radProfilVertical.setSelection(true);
     }
     
-    private void createGroupChoixFichierInFile(Composite parent)
+    
+    private void createGroupInputParameters(Composite parent)
     {
+        InputFileRadioSelectionListener inputFileRadioSelectionListener = new InputFileRadioSelectionListener(this);
+        
+        GridData subGridData = new GridData();
+        subGridData.grabExcessHorizontalSpace = true;
+        subGridData.horizontalAlignment = SWT.FILL;
+        GridLayout sublayout = new GridLayout();
+        sublayout.numColumns = 1;
+        
+        
+        //****************************************************************************************
+        // principal composite
+        GridLayout mainBoxLayout = new GridLayout();
+        mainBoxLayout.numColumns= 1;
+        mainBoxLayout.marginHeight = 1;
+        mainBoxLayout.verticalSpacing = 1;
+        GridData mainGridData = new GridData();
+        mainGridData.horizontalAlignment = SWT.FILL;
+        mainGridData.verticalAlignment = SWT.FILL;
+        mainGridData.grabExcessHorizontalSpace = true;
+        
+        Group mainBoxGroup = new Group(parent, SWT.NONE);
+        mainBoxGroup.setText(Messages.view_file_inputTitle); 
+        mainBoxGroup.setLayout(mainBoxLayout);
+        mainBoxGroup.setLayoutData(mainGridData);
+        
+        
+        //****************************************************************************************
+        // groupe process
+        
+        GridData processGridData = new GridData();
+        processGridData.horizontalAlignment = SWT.FILL;
+        processGridData.verticalAlignment = SWT.FILL;
+        processGridData.grabExcessHorizontalSpace = true;
+        
+        GridLayout processLayout = new GridLayout();
+        processLayout.numColumns = 3;
+        processLayout.marginHeight = 1;
 
-        Composite compositeChoixFichier = new Composite(parent, SWT.NONE);
-        GridLayoutFactory.fillDefaults().numColumns(3).applyTo(
-            compositeChoixFichier);
-        // GridDataFactory.fillDefaults().grab(true,
-        // false).applyTo(compositeChoixFichier);
+        Group processGroup = new Group(mainBoxGroup, SWT.NONE);
+        processGroup.setLayout(processLayout);
+        processGroup.setLayoutData(processGridData);
 
-        Composite col1 = new Composite(compositeChoixFichier, SWT.NONE);
-        col1.setLayout(new FillLayout(SWT.VERTICAL));
-        GridData dataCol = new GridData();
-        // dataCol.grabExcessHorizontalSpace = true;
-//        dataCol.grabExcessVerticalSpace = true;
-        col1.setLayoutData(dataCol);
-
-        Label labelCampagne = new Label(col1, SWT.NONE);
-        FontData fontdata = labelCampagne.getFont().getFontData()[0];
-        fontdata.setStyle(SWT.BOLD);
-        labelCampagne.setFont(new Font(Application.display, fontdata));
-        labelCampagne.setText(Messages.view_file_processCruise + "           "); //$NON-NLS-1$
-
-        radioFichier = new Button(col1, SWT.RADIO);
+        //****************************************************************************************
+        // process a cruise
+        
+        Group inputFileCruiseGroup = new Group(processGroup, SWT.NONE);
+        inputFileCruiseGroup.setText(Messages.view_file_processCruise); 
+        inputFileCruiseGroup.setLayout(sublayout);
+        inputFileCruiseGroup.setLayoutData(subGridData);
+        
+        radioFichier = new Button(inputFileCruiseGroup, SWT.RADIO);
         radioFichier.setSelection(true);
         radioFichier.setText(Messages.view_file_cruiseFile);
-
-        radioFichier.addSelectionListener(new SelectionListener() {
-
-            public void widgetDefaultSelected(SelectionEvent e)
-            {
-                widgetSelected(e);
-            }
-
-            public void widgetSelected(SelectionEvent e)
-            {
-                chkMultiStations.setSelection(false);
-                chkMultiStations.setEnabled(false);
-            }
-
-        });
-
-        addRadFileListener(radioFichier);
-
-        radioDossier = new Button(col1, SWT.RADIO);
+        radioFichier.addSelectionListener(inputFileRadioSelectionListener);
+      
+        
+        radioDossier = new Button(inputFileCruiseGroup, SWT.RADIO);
         radioDossier.setText(Messages.view_file_cruiseDir);
-        addRadFileListener(radioDossier);
-        radioDossier.addSelectionListener(new SelectionListener() {
+        radioDossier.addSelectionListener(inputFileRadioSelectionListener);
 
-            public void widgetDefaultSelected(SelectionEvent e)
-            {
-                widgetSelected(e);
-            }
-
-            public void widgetSelected(SelectionEvent e)
-            {
-                chkMultiStations.setSelection(false);
-                chkMultiStations.setEnabled(false);
-            }
-
-        });
-
-        Composite col2 = new Composite(compositeChoixFichier, SWT.NONE);
-        GridData data = new GridData();
-        data.widthHint = 50;
-        col2.setLayoutData(data);
-        // col2.setLayoutData(dataCol);
-        col2.setLayout(new FillLayout(SWT.VERTICAL));
-        new Label(col2, SWT.SEPARATOR | SWT.VERTICAL);
-
-        Composite col3 = new Composite(compositeChoixFichier, SWT.NONE);
-        col3.setLayout(new FillLayout(SWT.VERTICAL));
-        col3.setLayoutData(dataCol);
-
-        Label labelCollection = new Label(col3, SWT.NONE);
-        labelCollection.setFont(new Font(Application.display, fontdata));
-        labelCollection.setText(Messages.view_file_processCollection);
-
-        radioCollectCas1 = new Button(col3, SWT.RADIO);
-        radioCollectCas1.setText(Messages.view_file_collectionCas1);
-        addRadFileListener(radioCollectCas1);
-        radioCollectCas1.addSelectionListener(new SelectionListener() {
-
-            public void widgetDefaultSelected(SelectionEvent e)
-            {
-                widgetSelected(e);
-            }
-
-            public void widgetSelected(SelectionEvent e)
-            {
-                chkMultiStations.setEnabled(true);
-            }
-
-        });
-
-        radioCollectCasN = new Button(col3, SWT.RADIO);
-        radioCollectCasN.setText(Messages.view_file_collectionCasN);
-        addRadFileListener(radioCollectCasN);
-        radioCollectCasN.addSelectionListener(new SelectionListener() {
-
-            public void widgetDefaultSelected(SelectionEvent e)
-            {
-                widgetSelected(e);
-            }
-
-            public void widgetSelected(SelectionEvent e)
-            {
-                chkMultiStations.setEnabled(true);
-            }
-
-        });
-
-        new Label(col3, SWT.SEPARATOR | SWT.HORIZONTAL);
-
-        chkMultiStations = new Button(col3, SWT.CHECK);
+        //****************************************************************************************
+        // process a collection
+        
+        Group inputFileCollectionGroup = new Group(processGroup, SWT.NONE);
+        inputFileCollectionGroup.setText(Messages.view_file_processCollection); 
+        inputFileCollectionGroup.setLayout(sublayout);
+        inputFileCollectionGroup.setLayoutData(subGridData);
+        
+        radioCollectGroupedByCruise = new Button(inputFileCollectionGroup, SWT.RADIO);
+        radioCollectGroupedByCruise.setText(Messages.view_file_collectionCas1);
+        radioCollectGroupedByCruise.addSelectionListener(inputFileRadioSelectionListener);
+        
+        radioCollectNotGroupedByCruise = new Button(inputFileCollectionGroup, SWT.RADIO);
+        radioCollectNotGroupedByCruise.setText(Messages.view_file_collectionCasN);
+        radioCollectNotGroupedByCruise.addSelectionListener(inputFileRadioSelectionListener);
+        
+        chkMultiStations = new Button(inputFileCollectionGroup, SWT.CHECK);
         chkMultiStations.setEnabled(false);
         chkMultiStations.setText(Messages.view_file_multiStations);
-
         
-        // bug 4181
-        chkMultiStations.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-            @Override
-            public void widgetSelected(
-                    org.eclipse.swt.events.SelectionEvent g)
-            {
-                if (chkMultiStations.getSelection()){
-                    sectionEnteteFichier.setEnabled(true);
-                }
-                else{
-                   sectionEnteteFichier.setEnabled(false);
-                }
-            }
-
-        });
-
-
-
-
-
-        // FAE 0001140 : deplacement du bouton Parcourir
-        Button buttonParcourir = new Button(parent, SWT.NONE);
+        //****************************************************************************************
+        //browse
+        Button buttonParcourir = new Button(processGroup, SWT.NONE);
         buttonParcourir.setText(Messages.button_browse);
-        buttonParcourir
-        .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-            @Override
-            public void widgetSelected(
-                    org.eclipse.swt.events.SelectionEvent e)
-            {
-
-                // reinitialisation de la conversion et de l'affichage
-                init();
-
-                if (radioFichier.getSelection())
-                {
-                    // si fichier campagne
-
-                    // reactivation de l'onglet campagne
-                    Nemo.getInstance().getViewMain().enableCruise(true);
-
-                    Shell shell = Utils.getMainShell();
-
-                    FileDialog dialog =
-                        new FileDialog(shell, SWT.OPEN
-                            | SWT.APPLICATION_MODAL);
-                    dialog.setFilterPath(Nemo.getInstance().getConfig()
-                        .getCruisesDirectory());
-                    nomFichier = dialog.open();
-
-                    if (nomFichier != null)
-                    {
-
-                        fileLoaded = true;
-                        nomRepertoire =
-                            new File(nomFichier).getParent()
-                            + File.separator;
-
-                        try
-                        {
-                            // affichage du corps du fichier
-                            Utils.insertTextFich(nomFichier,
-                                Nemo.getInstance().getViewMain().textAreaCruise, true);
-                            textAreaFile.setText(Utils.texteBrut);
-
-                            // affichage etape0 dans formulaire d'edition
-                           afficheEdition();
-
-                        }
-                        catch (IOException e1)
-                        {
-                            ViewLog.styledTextLogErreurs
-                            .setText(Messages.error);
-                            e1.printStackTrace();
-                        }
-                    }
-                    else
-                    {
-                        ViewLog.styledTextLogErreurs
-                        .setText(Messages.error_file_selectFile);
-                    }
-                }
-                else if (radioDossier.getSelection())
-                {
-                    // si dossier campagne
-                   setCruiseInADirectory(true);
-
-                    // reactivation de l'onglet campagne
-                    Nemo.getInstance().getViewMain().enableCruise(true);
-
-                    Shell shell = Utils.getMainShell();
-
-                    DirectoryDialog dialog =
-                        new DirectoryDialog(shell, SWT.OPEN
-                            | SWT.APPLICATION_MODAL);
-                    dialog.setFilterPath(Nemo.getInstance().getConfig()
-                        .getCruisesDirectory());
-                    nomRepertoire = dialog.open();
-
-                    if (nomRepertoire != null)
-                    {
-
-                        fileLoaded = true;
-
-                        if (Utils.findFiles(nomRepertoire, true))
-                        {
-                            // affichage du corps du fichier
-                            textAreaFile.setText(Utils.texteBrut);
-
-                            // affichage etape0 dans formulaire d'edition
-                            afficheEdition();
-                        }
-                    }
-                    else
-                    {
-                        ViewLog.styledTextLogErreurs
-                        .setText(Messages.error_file_selectDir);
-                    }
-                }
-                else if (radioCollectCas1.getSelection())
-                {
-
-                    setCruiseInADirectory (true);
-                    collectionCas1 = true;
-
-                    // desactivation de l'onglet campagne
-                    Nemo.getInstance().getViewMain().enableCruise(false);
-
-                    Shell shell = Utils.getMainShell();
-
-                    DirectoryDialog dialog =
-                        new DirectoryDialog(shell, SWT.OPEN
-                            | SWT.APPLICATION_MODAL);
-                    dialog.setFilterPath(Nemo.getInstance().getConfig()
-                        .getCruisesDirectory());
-                    nomRepertoire = dialog.open();
-                    System.out.println("nom nomRepertoire: "+ nomRepertoire);
-                    if (nomRepertoire != null)
-                    {
-                        fileLoaded = true;
-
-                        if (Utils
-                                .findFilesCollectCas1(nomRepertoire, false))
-                        {
-                            // affichage du corps du fichier
-                            textAreaFile.setText(Utils.texteBrut);
-
-                            // affichage etape0 dans formulaire d'edition
-                            afficheEdition();
-
-                            // dans le cas d'une collection, on ne peut
-                            // generer que le format ODV
-                            enableCollectionMedatlas(false);
-                        }
-                    }
-                    else
-                    {
-                        ViewLog.styledTextLogErreurs
-                        .setText(Messages.error_file_selectDir);
-                    }
-                }
-                else if (radioCollectCasN.getSelection())
-                {
-
-                    collectionCasN = true;
-
-                    // desactivation de l'onglet campagne
-                    Nemo.getInstance().getViewMain().enableCruise(false);
-
-                    Shell shell = Utils.getMainShell();
-
-                    DirectoryDialog dialog =
-                        new DirectoryDialog(shell, SWT.OPEN
-                            | SWT.APPLICATION_MODAL);
-                    dialog.setFilterPath(Nemo.getInstance().getConfig()
-                        .getCruisesDirectory());
-                    nomRepertoire = dialog.open();
-
-                    if (nomRepertoire != null)
-                    {
-                        fileLoaded = true;
-
-                        if (Utils.findFiles(nomRepertoire, true))
-                        {
-                            // affichage du corps du fichier
-                            textAreaFile.setText(Utils.texteBrut);
-
-                            // affichage etape0 dans formulaire d'edition
-                            afficheEdition();
-
-                            // dans le cas d'une collection, on ne peut
-                            // generer que le format ODV
-                            enableCollectionMedatlas(false);
-                            radODVMonoFichier.setEnabled(false); // FAE
-                            // 0001134
-                        }
-                    }
-                    else
-                    {
-                        ViewLog.styledTextLogErreurs
-                        .setText(Messages.error_file_selectDir);
-                    }
-                }
-            }
-
-        });
+        InputFileBrowseListener browseListener = new InputFileBrowseListener(this);
+        buttonParcourir.addSelectionListener(browseListener);
+        
+        
+        //****************************************************************************************
+        // separator & fileType
+        Composite separatorAndFileType = createSubGroupSeparatorAndFileType(mainBoxGroup);
+        createSubGroupSeparator(separatorAndFileType);
+        createSubGroupFileType(separatorAndFileType);
     }
-    
+    /**
+     * initialise avec les valeurs du modèle par défaut
+     * {@inheritDoc}
+     */
     @Override
     public void initFromNewModel()
     {
@@ -879,64 +719,64 @@ public class EditFileForm extends EditForm
         mediaModel.setSeparator(getSeparateur());
 
         // Type de fichier
-        mediaModel.setInputType(getTypeFichierEntree());
+        mediaModel.setInputType(getInputFileType());
         
 
         // Fichier multiStation ?
-        mediaModel.setMultiStations(chkMultiStations.getSelection());
+        mediaModel.setMultiStations(isMultiStationFileChecked());
         
         // --- enregistrement du formulaire de droite (editFileForm)
         // Entête Fichier
         int fileHeader = 0;
         if (!Nemo.getInstance().getViewMain().getEditFileForm().isCruiseInADirectory() || mediaModel.isMultiStations()){
-            fileHeader = Integer.parseInt(getSectionEnteteFichier().getValue());
+            fileHeader = Integer.parseInt(getSectionFileHeader().getValue());
         }
         
         mediaModel.setFileHeader(fileHeader);
 
         // Entête Station
-        if (!sectionEnteteStation.isSelectNumber()){
-            mediaModel.setStationHeaderPattern(sectionEnteteStation.getIndicatorText());
-            mediaModel.setStationHeader(sectionEnteteStation.getNbLinesBeforeData());
+        if (!sectionStationHeader.isSelectNumber()){
+            mediaModel.setStationHeaderPattern(sectionStationHeader.getIndicatorText());
+            mediaModel.setStationHeader(sectionStationHeader.getNbLinesBeforeData());
         }
         else{
-            mediaModel.setStationHeader(sectionEnteteStation.getValue());
+            mediaModel.setStationHeader(sectionStationHeader.getValue());
         }
         
         // Fin de Station
-        mediaModel.setEndStation(getSectionFinStation().getValue());
+        mediaModel.setEndStation(getSectionEndOfStation().getValue());
         
         // Fin des données
-        E_EndData end = sectionRuptureDonnees.getEndData();
+        E_EndData end = sectionDataTerminator.getEndData();
         mediaModel.setEndData(end);
         if (end == E_EndData.END_WITH){
-            mediaModel.setEndDataPattern(sectionRuptureDonnees.getValue());
+            mediaModel.setEndDataPattern(sectionDataTerminator.getValue());
         }
         else if(end == E_EndData.NEXT_START_WITH){
-            mediaModel.setEndDataPattern(sectionRuptureDonnees.getStartStationIndicator());
+            mediaModel.setEndDataPattern(sectionDataTerminator.getStartStationIndicator());
         }
-        //BGT
         Nemo.getInstance().getDomain().getConversion().setCurrentConversion(getSelectedConversion());
+        Nemo.getInstance().getViewMain().updateTabsVisibility();
         
         // Mise à jour du model
         Nemo.getInstance().getDomain().getMedia().updateMedia(mediaModel);
 
     }
  
-    private void selectTypeProcess(Button radioSelected)
+    protected void selectTypeProcess(Button radioSelected)
     {
         // les boutons radios ne sont plus dans le même conteneur :
         // il faut forcer la deselection
-        if (radioSelected == radioCollectCasN
-                || radioSelected == radioCollectCas1)
+        if (radioSelected == radioCollectNotGroupedByCruise
+                || radioSelected == radioCollectGroupedByCruise)
         {
             radioDossier.setSelection(false);
             radioFichier.setSelection(false);
         }
         else
         {
-            radioCollectCasN.setSelection(false);
-            radioCollectCas1.setSelection(false);
+            radioCollectNotGroupedByCruise.setSelection(false);
+            radioCollectGroupedByCruise.setSelection(false);
         }
     }
     public void afficheGrpODV()
@@ -965,9 +805,14 @@ public class EditFileForm extends EditForm
                     org.eclipse.swt.events.SelectionEvent g)
             {
                 afficheGrpODV();
-                //BGT
+                Nemo.getInstance().getViewMain().enableCruise(!radODV.getSelection());
+                
                 Nemo.getInstance().getDomain().getConversion().setCurrentConversion(getSelectedConversion());
                 Nemo.getInstance().getDomain().getConversion().getModel().setOutputFormat(getSelectedConversion());
+                
+                Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();
+                // invalidation de l'etape quand modif
+                Utils.invalidEtapes();
             }
         });
     }
@@ -986,7 +831,10 @@ public class EditFileForm extends EditForm
             System.out.println("error: cannot enable MEDATLAS for collection");
         }
     }
-
+    public void enableODVMonoFichier(boolean enable)
+    {
+        radODVMonoFichier.setEnabled(enable);
+    }
     public void enableCollectionMedatlas(boolean enable)
     {
         radMedatlas.setEnabled(enable);
@@ -1010,6 +858,17 @@ public class EditFileForm extends EditForm
         radODVMonoFichier.setSelection(enable);
         afficheGrpODV(); 
     }
+    
+    private void setConversionUnknown()
+    {
+        radMedatlas.setEnabled(true);
+        radODV.setEnabled(true);
+        radMedatlas.setSelection(false);
+        radODV.setSelection(false);
+        radODVMonoStation.setSelection(false);
+        radODVMonoFichier.setSelection(false);
+        afficheGrpODV(); 
+    }
     public void setSelectedConversion(E_TypeConversion conv)
     {
         if (conv == E_TypeConversion.MEDATLAS)
@@ -1024,7 +883,10 @@ public class EditFileForm extends EditForm
         {
             enableOdvMultistation(true);
         }
-//        Nemo.getInstance().getDomain().getConversion().getModel().setOutputFormat(conv);
+        else if (conv == E_TypeConversion.UNKNOWN)
+        {
+            setConversionUnknown();
+        }
     }
     public void enableChoice(boolean enabled)
     {
@@ -1052,11 +914,11 @@ public class EditFileForm extends EditForm
         if (radODVMonoFichier != null)
         {
             radMedatlas.setEnabled(true);
-            radMedatlas.setSelection(true);
+            radMedatlas.setSelection(false);
             radODV.setEnabled(true);
             radODV.setSelection(false);
             radODVMonoStation.setEnabled(true);
-            radODVMonoStation.setSelection(true);
+            radODVMonoStation.setSelection(false);
             radODVMonoFichier.setEnabled(true);
             radODVMonoFichier.setSelection(false);
             afficheGrpODV();
@@ -1112,22 +974,25 @@ public class EditFileForm extends EditForm
     // TRADUCTION DES BOUTONS RADIO
     public E_TypeConversion getSelectedConversion()
     {
-        
-        //*************
+        E_TypeConversion selected = E_TypeConversion.UNKNOWN;
         if (radMedatlas.getSelection())
         {
-            return E_TypeConversion.MEDATLAS;
+            selected= E_TypeConversion.MEDATLAS;
         }
-        // else
-        if (radODVMonoStation.getSelection())
+        else if (radODV.getSelection())
         {
-            return E_TypeConversion.ODV_MONOSTATION;
+            if (radODVMonoStation.getSelection())
+            {
+                selected = E_TypeConversion.ODV_MONOSTATION;
+            }else if (radODVMonoFichier.getSelection())
+            {
+                selected = E_TypeConversion.ODV_MULTISTATIONS;
+            }
         }
-        // else{
-        return E_TypeConversion.ODV_MULTISTATIONS;
+            return selected;
     }
 
-    public E_InputType getTypeFichierEntree()
+    public E_InputType getInputFileType()
     {
         if (radSerieTempo.getSelection())
         {
@@ -1147,11 +1012,11 @@ public class EditFileForm extends EditForm
 
     public E_ProcessType getTypeTraitement()
     {
-        if (radioCollectCasN.getSelection())
+        if (radioCollectNotGroupedByCruise.getSelection())
         {
             return E_ProcessType.COLLECTION_FILES;
         }
-        else if (radioCollectCas1.getSelection())
+        else if (radioCollectGroupedByCruise.getSelection())
         {
             return E_ProcessType.COLLECTION_DIR;
         }
@@ -1164,7 +1029,37 @@ public class EditFileForm extends EditForm
             return E_ProcessType.CRUISE_FILE;
         }
     }
-
+    
+    
+    /**
+     * gets the separator choosen by the user in the file tab
+     * @return the separator specified by the user
+     */
+    public char getSeparatorAsChar()
+    {
+        char separator=' ';
+        if (radioTabulation.getSelection())
+        {
+            separator = '\t';
+        }
+        else if (radioPointVirgule.getSelection())
+        {
+            separator = ';';
+        }
+        else if (radioVirgule.getSelection())
+        {
+            separator = ',';
+        }
+        else if (radioEspace.getSelection())
+        {
+            separator = ' ';
+        }
+        else if (radioSeparateurAutre.getSelection())
+        {
+            separator = getTextSeparateur().getText().toCharArray()[0];
+        }
+        return separator;
+    }
     public String getSeparateur()
     {
         if (chkSeparateur.getSelection())
@@ -1270,7 +1165,42 @@ public class EditFileForm extends EditForm
 
     public boolean isCollection()
     {
-        return (collectionCas1 || collectionCasN);
+        return (collectionGroupedByCruise || collectionNotGroupedByCruise);
+    }
+    public void updateOdvTypeFromFileType()
+    {
+        // FAE1386 : desactiver "One File per station" si Trajectory
+        if (radTrajectoire.getSelection())
+        {
+            radODVMonoStation.setSelection(false);
+            radODVMonoStation.setEnabled(false);
+            radODVMonoFichier.setEnabled(true);
+            radODVMonoFichier.setSelection(true);
+        }
+    }
+    public String getSelectedText()
+    {
+       return textAreaFile.getText().substring( textAreaFile.getSelection().x, textAreaFile.getSelection().y);
+    }
+    public int getSelectedTextStartPosition()
+    {
+        return textAreaFile.getSelection().x;
+    }
+    public int getSelectedTextEndPosition()
+    {
+        return textAreaFile.getSelection().y;
+    }
+    public void reinitTextArea()
+    {
+        textAreaFile.setText(Global.EMPTY_STRING);
+    }
+    public StyledText getTextAreaFile()
+    {
+        return textAreaFile;
+    }
+    public void addSpaceBeforeDataTerminator()
+    {
+        sectionDataTerminator.addSpaceBeforeDataTerminator();
     }
     public boolean isCruiseInADirectory()
     {
@@ -1288,16 +1218,88 @@ public class EditFileForm extends EditForm
     {
         this.fileLoaded = fileLoaded;
     }
-    public FileSection getSectionEnteteFichier()
+    public FileSection getSectionFileHeader()
     {
-        return sectionEnteteFichier;
+        return sectionFileHeader;
     }
-    public FileStationHeader getSectionEnteteStation()
+    public FileStationHeader getSectionStationHeader()
     {
-        return sectionEnteteStation;
+        return sectionStationHeader;
     }
-    public FileSection getSectionFinStation()
+    public FileSection getSectionEndOfStation()
     {
-        return sectionFinStation;
+        return sectionEndOfStation;
+    }
+    public boolean isGroupedByCruise()
+    {
+        return radioCollectGroupedByCruise.getSelection();
+    }
+    public boolean isCruiseIsAFile()
+    {
+        return radioFichier.getSelection();
+    }
+    public boolean isCollectionGroupedByCruise()
+    {
+        return collectionGroupedByCruise;
+    }
+    public void setCollectionGroupedByCruise(boolean isGroup)
+    {
+        collectionGroupedByCruise = isGroup;
+    }
+    public void setCollectionNotGroupedByCruise(boolean isGroup)
+    {
+        collectionNotGroupedByCruise= isGroup;
+    }
+    public boolean isProfile()
+    {
+        return radProfilVertical.getSelection();
+    }
+    public boolean isTimeSeries()
+    {
+        return radSerieTempo.getSelection();
+    }
+    public boolean isTrajectory()
+    {
+        return radTrajectoire.getSelection();
+    }
+    public Text getTextSeparateur()
+    {
+        return textSeparateur;
+    }
+    public boolean isSeparatorChecked()
+    {
+        return chkSeparateur.getSelection();
+    }
+    public FileEndData getSectionDataTerminator()
+    {
+        return sectionDataTerminator;
+    }
+    public boolean isSortForced()
+    {
+        return chkForcerTri.getSelection();
+    }
+    public boolean isMultiStationFileChecked()
+    {
+        return chkMultiStations.getSelection();
+    }
+    public Button getRadioCollectGroupedByCruise()
+    {
+        return radioCollectGroupedByCruise;
+    }
+    public Button getRadioCollectNotGroupedByCruise()
+    {
+        return radioCollectNotGroupedByCruise;
+    }
+    public Button getRadioDossier()
+    {
+        return radioDossier;
+    }
+    public Button getRadioFichier()
+    {
+        return radioFichier;
+    }
+    public Button getChkMultiStations()
+    {
+        return chkMultiStations;
     }
 }

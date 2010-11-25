@@ -295,8 +295,11 @@ public class FileEndData extends FileSection
         else if (radLigne.getSelection()){
             return E_EndData.EMPTY_LINE;
         }
-        else{
+        else if (radEOF.getSelection()){
             return E_EndData.EOF;
+        }else{
+            // should not happend
+            return E_EndData.EOF;  
         }
     }
     
@@ -317,5 +320,20 @@ public class FileEndData extends FileSection
                 selectEndData(getRadEOF());
                 break;
         }
+    }
+    
+    public void addSpaceBeforeDataTerminator()
+    {
+        setStartStationIndicator(Global.SPACE +  getStartStationIndicator());
+    }
+    
+    public String getIndicatorValue()
+    {
+        String indic = null;
+        if (radManuelSelected())
+        {
+            indic = getValue();
+        }
+        return indic;
     }
 }

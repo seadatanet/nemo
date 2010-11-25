@@ -324,7 +324,7 @@ public class StationSection extends NemoSection
             real_ligne =
                 new Integer(ligne
                         + Integer
-                            .valueOf(Nemo.getInstance().getViewMain().getEditFileForm().getSectionEnteteFichier()
+                            .valueOf(Nemo.getInstance().getViewMain().getEditFileForm().getSectionFileHeader()
                                 .getValue()));
         }
 
@@ -739,7 +739,7 @@ public class StationSection extends NemoSection
             {
                 // On recupere le numero de station dans le nom du fichier
                 String strFichier = Global.EMPTY_STRING;
-                if (Nemo.getInstance().getViewMain().getEditFileForm().radioFichier.getSelection())
+                if (Nemo.getInstance().getViewMain().getEditFileForm().isCruiseIsAFile())
                 {
                     strFichier =
                         Utils.extraitFichierChemin(Nemo.getInstance().getViewMain().getEditFileForm().nomFichier);
@@ -1178,7 +1178,7 @@ public class StationSection extends NemoSection
                     String
                         .valueOf(ligneSaisie
                                 - Integer
-                                    .valueOf(Nemo.getInstance().getViewMain().getEditFileForm().getSectionEnteteFichier()
+                                    .valueOf(Nemo.getInstance().getViewMain().getEditFileForm().getSectionFileHeader()
                                         .getValue()));
             }
             propertyModel.fillFragment(myForm.stationNumber,

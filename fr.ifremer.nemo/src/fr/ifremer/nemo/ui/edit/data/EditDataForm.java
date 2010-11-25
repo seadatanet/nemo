@@ -3,6 +3,10 @@ package fr.ifremer.nemo.ui.edit.data;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Table;
@@ -23,6 +27,8 @@ public class EditDataForm extends EditForm
     
     // les données utilisées dans cette table myTable
     private TableData myTableData;
+    private  StyledText  textAreaData;
+    private  Composite compositeData;
     
     @Override
     public void createEditionForm(Composite parent)
@@ -71,7 +77,7 @@ public class EditDataForm extends EditForm
         ViewLog.aideData();
 
         // affichage du texte dans la zone de gauche
-        Nemo.getInstance().getViewMain().textAreaData.setText(Utils.texteBrut);
+        textAreaData.setText(Utils.texteBrut);
 
         setLoaded(true);
         Nemo.getInstance().getViewMain().setAffiche(3);
@@ -173,6 +179,8 @@ public class EditDataForm extends EditForm
 
         // refresh de la table de l'onglet Data
         myTableData.razAndRecreateTable();
+        // update dataList to use
+        Nemo.getInstance().getConfig().getDataListToUse(myTableData);
 
     }
 
@@ -260,8 +268,23 @@ public class EditDataForm extends EditForm
         Nemo.getInstance().getDomain().getCruise().getStation().getData().updateData(dataModel);
         
 
-        Nemo.getInstance().getViewMain().getEditDataForm().validee = true;
+        Nemo.getInstance().getViewMain().getEditDataForm().setValidated(true);
 
+    }
+    
+    public void createLeft(Composite left)
+    {
+        
+        left.setLayout(new FillLayout(SWT.VERTICAL));
+
+        Composite textFile = new Composite(left, SWT.NONE);
+        textFile.setLayout(new FillLayout());
+        setTextAreaData(
+            new StyledText(textFile, SWT.MULTI | SWT.READ_ONLY | SWT.H_SCROLL
+                | SWT.V_SCROLL));
+        getTextAreaData().setFont(Utils.fontCourier);
+        setCompositeData( new Composite(left, SWT.NONE));
+        compositeData.setLayout(new FillLayout());
     }
     public void reinitTableData()
     {
@@ -270,6 +293,26 @@ public class EditDataForm extends EditForm
     public TableData getMyTableData()
     {
         return myTableData;
+    }
+
+    public StyledText getTextAreaData()
+    {
+        return textAreaData;
+    }
+
+    public void setTextAreaData(StyledText textAreaData)
+    {
+        this.textAreaData = textAreaData;
+    }
+
+    public Composite getCompositeData()
+    {
+        return compositeData;
+    }
+
+    public void setCompositeData(Composite compositeData)
+    {
+        this.compositeData = compositeData;
     }
 
    

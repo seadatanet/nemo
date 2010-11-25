@@ -63,7 +63,7 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor
             EditDataForm editDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
             
             // demande pour sauver le modele
-            if (editDataForm.validee )
+            if (editDataForm.isValidated() )
             {
                 if (editFileForm.isOkApresReset()
                         && editCruiseForm.isOkApresReset()

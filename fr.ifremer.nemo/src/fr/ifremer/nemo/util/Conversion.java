@@ -2,7 +2,7 @@ package fr.ifremer.nemo.util;
 
 
 /**
- * Description: Types de convertion
+ * Description: Types de conversion
  * @author dboulang
  *
  */

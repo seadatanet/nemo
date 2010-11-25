@@ -53,6 +53,8 @@ public class Messages {
     public static String typeFile_trajectory;
     
     // ECRAN PRINCIPAL    
+    public static String view_file_inputTitle;
+    public static String view_file_outputTitle;
     public static String view_file_fileType;
     public static String view_file_processCruise;
     public static String view_file_cruiseFile;
@@ -68,10 +70,14 @@ public class Messages {
     public static String view_file_sepSpace;
     public static String view_file_sepOther;
     
-    public static String view_convert_title;
     public static String view_convert_monoFichier;
     public static String view_convert_monoStation;
     public static String view_convert_sort;
+    public static String view_convert_summary_title;
+    public static String view_convert_summary_inputFileLabel;
+    public static String view_convert_summary_inputDirectoryLabel;
+    public static String view_convert_summary_outputFormatLabel;
+    
     
     public static String table_label_meta;
     public static String table_label_code;
@@ -87,9 +93,14 @@ public class Messages {
     public static String table_label_sensor;
     public static String table_label_qc;
     
+    public static String unitTable_label_unit;
+    public static String unitTable_label_unitAbbr;
+    public static String unitTable_label_unitDef;
+    
     public static String menu_label_setValue;
     public static String menu_label_updateTest;
     public static String menu_label_paramList;
+    public static String menu_label_selectP061Unit;
     public static String menu_label_upType;
     public static String menu_label_downType;
     public static String menu_label_removeType;
@@ -100,6 +111,7 @@ public class Messages {
     public static String menu_label_deleteFlag;
     public static String menu_label_addFlag;
     public static String menu_label_removeFlag;
+    public static String menu_label_deleteAllParameters;
     public static String menu_label_list;
     
     public static String label_manual_01;
@@ -192,6 +204,10 @@ public class Messages {
     public static String edit_station_sectionQCflags_lib;
     
     public static String edit_data_title;
+    public static String edit_data_P091;
+    public static String edit_data_P021;
+    public static String edit_data_P011;
+    public static String edit_data_P061;
     
     public static String edit_convert_title;
     public static String edit_convert_endODV;
@@ -212,10 +228,12 @@ public class Messages {
     public static String error_file_selectDir;
     public static String error_file_idcEmpty;
     public static String error_file_idcStartStationEmpty;
+    public static String error_file_convertFormatUnknown;
     public static String error_cruise_openXml;
     public static String error_cruise_invalidXML;
     public static String error_data_removePRES;
-    public static String error_data_firstPRES;
+    public static String error_data_p091_firstPRES;
+    public static String error_data_p011_firstPRES;
     public static String error_data_firstDEPH_TRAJ;
     public static String error_convert_invalideSteps;
     public static String error_convert_cancel;
@@ -292,6 +310,7 @@ public class Messages {
     public static String settings_web_edmo;
     public static String error_missing;
     public static String error_table;
+    public static String settings_defaultOutputFormat;
     public static String settings_parametersList;
     public static String settings_parameterListP091;
     public static String settings_parameterListP011viaP091;

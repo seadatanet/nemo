@@ -23,9 +23,6 @@ public class TypeData extends Object {
     private boolean isP011;
     private String nomP011;
     
-    private String codeP021;
-    private boolean isP021;
-    private String nomP021;
 
 	public Boolean getSensor() {
 		return sensor;
@@ -239,7 +236,6 @@ public class TypeData extends Object {
     }
 
     public void setIsP011(boolean isP011) {
-        this.isP021 = !isP011;
         this.isP011 = isP011;
     }
     

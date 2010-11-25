@@ -23,8 +23,11 @@ public abstract class EditForm
     protected Button buttonValidate, buttonRAZ, buttonExpand;
 
     private Boolean okApresReset;
-    public boolean expand, validee;
+    private boolean validated;
+    public boolean expand;
     public boolean filled;
+    
+    protected boolean visible;
     
     public ArrayList<NemoSection> listeSections;
     
@@ -43,7 +46,7 @@ public abstract class EditForm
     {
         listeSections = new ArrayList<NemoSection>();
         
-        validee = false;
+        validated = false;
         loaded = false;
 
         toolkitEdition = new FormToolkit(parent.getDisplay());
@@ -184,7 +187,7 @@ public abstract class EditForm
     public void invalidEtape(int current)
     {
         okApresReset = false;
-        validee = false;
+        validated = false;
         
         if (Nemo.getInstance().getViewMain().getAffiche() != current && loaded){
             loaded = false;
@@ -192,7 +195,15 @@ public abstract class EditForm
             //disposeElements();
         }
     }
+    /**
+     * remplissage avec les valeurs du modèle courant
+     *
+     */
     public abstract void fillFromModel();
+    /**
+     * remplissage avec les valeurs par défaut
+     *
+     */
     public abstract void initFromNewModel();
     
     public boolean isLoaded()
@@ -213,6 +224,26 @@ public abstract class EditForm
     public void setOkApresReset(Boolean okApresReset)
     {
         this.okApresReset = okApresReset;
+    }
+
+    public boolean isValidated()
+    {
+        return validated;
+    }
+
+    public void setValidated(boolean validated)
+    {
+        this.validated = validated;
+    }
+
+    public boolean isVisible()
+    {
+        return visible;
+    }
+
+    public void setVisible(boolean visible)
+    {
+        this.visible = visible;
     }
 
     

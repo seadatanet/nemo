@@ -70,9 +70,11 @@ import fr.ifremer.nemo.ui.ApplicationActionBarAdvisor;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.data.TableData;
 import fr.ifremer.nemo.ui.view.ViewLog;
+import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
 public class OptionsAction extends Action implements ISelectionListener,
@@ -122,7 +124,12 @@ public class OptionsAction extends Action implements ISelectionListener,
 
     private Composite /*top, */compo, compo01, compo02;
     private Group group, group01, group02;
-
+    // choix du format d'export
+    private  Button radMedatlas;
+    private  Button radODV;
+    private  Button radODVMonoFichier;
+    private  Button radODVMonoStation ;
+    protected  Group grpODV;
     // -- PROXY
     public static Button useProxy;
     private Label label, labelAdrProxy, labelPortProxy, labelLoginProxy,
@@ -130,15 +137,14 @@ public class OptionsAction extends Action implements ISelectionListener,
     public static Text textAdrProxy, textPortProxy, textLoginProxy,
             textPassProxy;
 
-    // DataList
-    public Configuration.DataListEnum dataList;
-
-    
+    // DataList paramètres
+    private Configuration.DataListEnum dataList;
     // choix du format des parametres
     private Button button_P011viaP091;
     private Button button_P091;
     private Button button_P011viaP021;
 
+    
     // -- options necessitant un redemarrage
     private String configLangage;
     private Proxy configProxy;
@@ -358,7 +364,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         selectDefaultFlagsTab(config.getDefaultCode());
 
         // DataList
-        switch (config.getDataList())
+        switch (config.getDataListInSettings())
         {
             case P011_VIA_P091:
                 button_P011viaP091.setSelection(true);
@@ -371,6 +377,29 @@ public class OptionsAction extends Action implements ISelectionListener,
             break;
         }
 
+        // convert type
+        radMedatlas.setSelection(false);
+        radODV.setSelection(false);
+        radODVMonoStation.setSelection(false);
+        radODVMonoFichier.setSelection(false);
+        switch (config.getDefaultConversionType())
+        {
+            case MEDATLAS:
+                radMedatlas.setSelection(true);
+                break;
+            case ODV_MONOSTATION:
+                radODV.setSelection(true);
+                radODVMonoStation.setSelection(true);
+                break;
+            case ODV_MULTISTATIONS:
+                radODV.setSelection(true);
+                radODVMonoFichier.setSelection(true);
+                break;
+            case UNKNOWN:
+                break;
+        }
+        afficheGrpODV();
+        
         // FAE 4431 Flag qualité par défault configurable
         if (config.getDefaultFlag().equals("1"))
             _flagDefault.select(1);
@@ -917,7 +946,103 @@ public class OptionsAction extends Action implements ISelectionListener,
         button_P011viaP021.setText(Messages.settings_parameterListP011viaP021);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(button_P011viaP021);
     }
+    /**
+     * This method initializes data list group
+     */
+    private void createGroupOutputFormat(Composite parent)
+    {
+        group = new Group(parent, SWT.NONE);
+        group.setFont(Utils.font08);
+        group.setText(Messages.settings_defaultOutputFormat);
+        GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(true)
+            .margins(4, 4).applyTo(group);
+        GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
 
+        
+        //****************************************************************************************
+        // MEDATLAS/ODV
+        GridData medOrOdvgridData = new GridData();
+        medOrOdvgridData.grabExcessHorizontalSpace = true;
+        medOrOdvgridData.horizontalAlignment = GridData.FILL;
+        
+        GridLayout medOrOdvLayout = new GridLayout();
+        medOrOdvLayout.numColumns = 1;
+        medOrOdvLayout.marginHeight = 0;
+        
+        Group medOrOdvGroup = new Group(group, SWT.NONE);
+        medOrOdvGroup.setLayout(medOrOdvLayout);
+        medOrOdvGroup.setLayoutData(medOrOdvgridData);
+        
+        radMedatlas = new Button(medOrOdvGroup, SWT.RADIO);
+        radMedatlas.setText(Conversion.MEDATLAS.getName());
+        radMedatlas.setSelection(false);
+        addRadConvertListener(radMedatlas);
+        
+        radODV = new Button(medOrOdvGroup, SWT.RADIO);
+        radODV.setText(Conversion.ODV.getName());
+        radODV.setSelection(false);
+        addRadConvertListener(radODV);
+        
+        //****************************************************************************************
+        // ODV type
+        GridData odvTypegridData = new GridData();
+        odvTypegridData.grabExcessHorizontalSpace = true;
+        odvTypegridData.horizontalAlignment = GridData.FILL;
+        
+        GridLayout odvTypeLayout = new GridLayout();
+        odvTypeLayout.numColumns = 1;
+        odvTypeLayout.marginHeight = 0;
+        
+        grpODV = new Group(group, SWT.NONE);
+        grpODV.setLayout(odvTypeLayout);
+        grpODV.setLayoutData(odvTypegridData);
+        
+        radODVMonoStation = new Button(grpODV, SWT.RADIO);
+        radODVMonoStation.setText(Messages.view_convert_monoStation);
+        radODVMonoStation.setSelection(false);
+        addRadConvertListener(radODVMonoStation);
+        radODVMonoFichier = new Button(grpODV, SWT.RADIO);
+        radODVMonoFichier.setText(Messages.view_convert_monoFichier);
+        addRadConvertListener(radODVMonoFichier);
+        
+        afficheGrpODV();
+    }
+    public void afficheGrpODV()
+    {
+        grpODV.setVisible(radODV.getSelection());
+    }
+    private void addRadConvertListener(final Button radio)
+    {
+        radio
+        .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+            @Override
+            public void widgetSelected(
+                    org.eclipse.swt.events.SelectionEvent g)
+            {
+                afficheGrpODV();
+            }
+        });
+    }
+    // TRADUCTION DES BOUTONS RADIO
+    public E_TypeConversion getSelectedConversion()
+    {
+        E_TypeConversion selected = E_TypeConversion.UNKNOWN;
+        if (radMedatlas.getSelection())
+        {
+            selected= E_TypeConversion.MEDATLAS;
+        }
+        else if (radODV.getSelection())
+        {
+            if (radODVMonoStation.getSelection())
+            {
+                selected = E_TypeConversion.ODV_MONOSTATION;
+            }else if (radODVMonoFichier.getSelection())
+            {
+                selected = E_TypeConversion.ODV_MULTISTATIONS;
+            }
+        }
+            return selected;
+    }
     /**
      * This method initializes groupMapping
      */
@@ -1500,6 +1625,7 @@ public class OptionsAction extends Action implements ISelectionListener,
             createGroupEdmo(sectionClient);
             createCompoBas(sectionClient);
             createGroupDataList(sectionClient);
+            createGroupOutputFormat(sectionClient);
         }
         else if (title.equals(Messages.settings_web))
         {
@@ -1822,13 +1948,18 @@ public class OptionsAction extends Action implements ISelectionListener,
             dataList = DataListEnum.P011_VIA_P021;
         }
         
-        if (!dataList.equals(configuration.getDataList()))
+        if (!dataList.equals(configuration.getDataListInSettings()))
         {
             Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().removeAllElts();
         }
 
-        configuration.setDataList(dataList.toString());
+        configuration.setDataListInSettings(dataList.toString());
 
+        
+        // output conversion format
+        configuration.setDefaultConversionType(getSelectedConversion());
+        
+        
         // FAE 4431 Flag qualité par défault configurable
         configuration.setDefaultFlag(_flagDefault.getText());
 

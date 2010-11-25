@@ -36,7 +36,6 @@ public interface Global
     public static final String EXT_TXT = ".txt"; //$NON-NLS-1$
 
     // Séparateurs
-    // TODO passer en Enum ?
     public static final String TAB = "\t"; //$NON-NLS-1$
     public static final String SEMICOLON = ";"; //$NON-NLS-1$
     public static final String COMMA = ","; //$NON-NLS-1$
@@ -101,6 +100,6 @@ public interface Global
     }
     
     public enum E_TypeConversion{
-        MEDATLAS, ODV_MULTISTATIONS, ODV_MONOSTATION;
+        MEDATLAS, ODV_MULTISTATIONS, ODV_MONOSTATION, UNKNOWN;
     }
 }

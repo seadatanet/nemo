@@ -46,7 +46,7 @@ public class ConversionDomain
     
     public void initValues(){
         _model = new ConversionModel();
-        _current = E_TypeConversion.MEDATLAS;
+        _current = E_TypeConversion.UNKNOWN;
         _nomMappingHorsPrefix = null;
     }
     

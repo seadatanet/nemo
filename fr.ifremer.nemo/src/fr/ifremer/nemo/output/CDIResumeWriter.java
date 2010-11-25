@@ -145,7 +145,7 @@ public class CDIResumeWriter
                         // Dataset ID
                         if (cDomain.getModel().getReference().isEmpty())
                         {
-                            if (Nemo.getInstance().getViewMain().getEditFileForm().collectionCas1)
+                            if (Nemo.getInstance().getViewMain().getEditFileForm().isCollectionGroupedByCruise())
                             {
                                 writer
                                     .write(sep + cDomain.getModel().getName());

@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ListDialog;
 
 import fr.ifremer.nemo.Nemo;
@@ -63,6 +64,9 @@ public class EditConversionForm extends EditForm
      * Nombre de lignes du fichier lu
      */
     protected int _totalLigne;
+    
+    // Résumé des infos de conversion
+    private Text conversionSummary;
 
     /**
      * Liste des stations triees
@@ -86,10 +90,13 @@ public class EditConversionForm extends EditForm
     public void createEditionForm(Composite parent)
     {
         super.createEditionForm(parent);
-        
         formEdition.getBody().setLayout(new GridLayout());
         formEdition.setText(Messages.edit_convert_title);
 
+        createSummary();
+       
+       
+       
         // bouton conversion
         buttonConversion = new Button(formEdition.getBody(), SWT.NONE);
         buttonConversion.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
@@ -117,7 +124,7 @@ public class EditConversionForm extends EditForm
                         // type de la conversion
                         E_TypeConversion currentConversion = editFileForm.getSelectedConversion();
                         Nemo.getInstance().getDomain().getConversion().setCurrentConversion(currentConversion);
-                        boolean sortData = editFileForm.chkForcerTri.getSelection();
+                        boolean sortData = editFileForm.isSortForced();
                         Nemo.getInstance().getDomain().getConversion().setSortData(sortData);
 
 
@@ -127,9 +134,15 @@ public class EditConversionForm extends EditForm
                                 && Nemo.getInstance().getViewMain().getEditDataForm().isOkApresReset())
                         {
 
-                            if ((currentConversion != E_TypeConversion.MEDATLAS)
-                                    && (!editFileForm.collectionCas1))
+                            if (currentConversion == E_TypeConversion.UNKNOWN)
                             {
+                                Utils.messageErreur(Messages.error_convert_cancel);
+                                throw new Exception("Cancelled"); //$NON-NLS-1$
+                            }
+                            if ((currentConversion != E_TypeConversion.MEDATLAS)
+                                    && (!editFileForm.isCollectionGroupedByCruise()))
+                            {
+                                // TODO BGT voir si mieux d'utiliser Nemo.getInstance().getViewMain().isCruiseEnabled()
                                 if (!askDataSetRef())
                                 {
                                     throw new Exception("Cancelled"); //$NON-NLS-1$
@@ -197,7 +210,7 @@ public class EditConversionForm extends EditForm
     {
         super.afficheEdition();
 
-        EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
+//        EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
         ViewLog.aideConversion();
 
         // FAE 1143 : déactivation MEDATLAS
@@ -210,15 +223,15 @@ public class EditConversionForm extends EditForm
         Utils.messageErreur(msg.toString());
 
         // FAE 1143 : déactivation MEDATLAS
-        boolean medOK = true;
-        if (!warningFile.equals(Global.EMPTY_STRING)
-                || !warningCampagne.equals(Global.EMPTY_STRING)
-                || !warningStation.equals(Global.EMPTY_STRING)
-                || !warningData.equals(Global.EMPTY_STRING))
-        {
-            medOK = false;
-        }
-        editFileForm.enableMedatlas(medOK);
+//        boolean medOK = true;
+//        if (!warningFile.equals(Global.EMPTY_STRING)
+//                || !warningCampagne.equals(Global.EMPTY_STRING)
+//                || !warningStation.equals(Global.EMPTY_STRING)
+//                || !warningData.equals(Global.EMPTY_STRING))
+//        {
+//            medOK = false;
+//        }
+//        editFileForm.enableMedatlas(medOK);
 
         setLoaded(true);
         Nemo.getInstance().getViewMain().setAffiche(4);
@@ -243,25 +256,6 @@ public class EditConversionForm extends EditForm
         // pas d'actualisation nécessaire pour cet onglet
     }
 
-//    @Override
-//    public void razText()
-//    {
-//        // on rend sélectionnables les radios ODV et Medatlas dans
-//        // l'onglet Conversion
-//        EditFileForm fileForm = Nemo.getInstance().getViewMain().getEditFileForm();
-//        if (fileForm.radMonoFichier != null)
-//        {
-//            fileForm.radMedatlas.setEnabled(true);
-//            fileForm.radMedatlas.setSelection(true);
-//            fileForm.radODV.setEnabled(true);
-//            fileForm.radODV.setSelection(false);
-//            fileForm.radMonoStation.setEnabled(true);
-//            fileForm.radMonoStation.setSelection(true);
-//            fileForm.radMonoFichier.setEnabled(true);
-//            fileForm.radMonoFichier.setSelection(false);
-//            fileForm.afficheGrpODV();
-//        }
-//    }
 
     @Override
     public void disposeElements()
@@ -278,7 +272,7 @@ public class EditConversionForm extends EditForm
     @Override
     public void initFromNewModel()
     {
-        
+        System.out.println("ici");
     }
     /*
      * Méthodes de traitement du lancement de la conversion
@@ -314,7 +308,7 @@ public class EditConversionForm extends EditForm
         }
 
         // FAE45
-        if (editFileForm.radioFichier.getSelection())
+        if (editFileForm.isCruiseIsAFile())
         {
             dialog.setFilterPath(editFileForm.nomFichier);
         }
@@ -333,7 +327,7 @@ public class EditConversionForm extends EditForm
 
             // Teste si le repertoire de sortie est different du repertoire
             // d'entree
-            if (editFileForm.radioFichier.getSelection())
+            if (editFileForm.isCruiseIsAFile())
             {
                 if (nomFichierSortie.equals(editFileForm.nomFichier))
                 {
@@ -399,7 +393,7 @@ public class EditConversionForm extends EditForm
                     | SWT.APPLICATION_MODAL);
         dialog.setText(Messages.edit_convert_outputDir);
 
-        if (editFileForm.radioFichier.getSelection())
+        if (editFileForm.isCruiseIsAFile())
         {
             dialog.setFilterPath(editFileForm.nomRepertoire);
         }
@@ -415,7 +409,7 @@ public class EditConversionForm extends EditForm
         {
             // Teste si le répertoire de sortie est différent du répertoire
             // d'entrée
-            if (!editFileForm.radioFichier.getSelection()
+            if (!editFileForm.isCruiseIsAFile()
                     && nomDossierSortie.equals(editFileForm.nomRepertoire))
             {
                 MessageBox mb =
@@ -569,16 +563,6 @@ public class EditConversionForm extends EditForm
         }
         return message;
     }
-
-    /*public String getDataSetRef()
-    {
-        return _dataSetRef;
-    }
-
-    public void setDataSetRef(String value)
-    {
-        _dataSetRef = value;
-    }*/
 
     public boolean askDataSetRef()
     {
@@ -779,6 +763,55 @@ public class EditConversionForm extends EditForm
         return true;
     }
 
+    
+    private void createSummary()
+    {
+        
+        conversionSummary =  new Text(formEdition.getBody(), SWT.READ_ONLY | SWT.WRAP );
+        conversionSummary.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
+        fillSummary();
+    }
+    
+    
+    public void fillSummary()
+    {
+        
+        String summary=Global.EMPTY_STRING;
+        
+        summary += Global.RN+ Global.RN+ Messages.view_convert_summary_title+Global.RN+ Global.RN;
+        
+        EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
+        if(editFileForm.isCruiseIsAFile())
+        {
+            summary += Messages.view_convert_summary_inputFileLabel + Global.DBL_PT 
+                +Global.RN + editFileForm.nomFichier;  
+        }
+        if(editFileForm.isCruiseInADirectory())
+        {
+            summary += Messages.view_convert_summary_inputDirectoryLabel + Global.DBL_PT 
+                + Global.RN  + editFileForm.nomRepertoire;   
+        }
+        summary += Global.RN+ Global.RN+ Global.RN;
+        summary += Messages.view_convert_summary_outputFormatLabel+ Global.DBL_PT 
+            + Global.RN + editFileForm.getSelectedConversion();
+        
+        if (editFileForm.isConversionToODV())
+        {
+            summary += Global.COMMA + Global.SPACE;
+            if (editFileForm.isConversionToODVMonoStation())
+            {
+                summary += Messages.view_convert_monoStation;
+            }
+            if (editFileForm.isConversionToODVMultiStation())
+            {
+                summary += Messages.view_convert_monoFichier;
+            }
+        }
+        summary += Global.RN+ Global.RN+ Global.RN;
+        
+        conversionSummary.setText(summary);
+        
+    }
     public int getTotalLigne()
     {
         return _totalLigne;
@@ -889,7 +922,6 @@ public class EditConversionForm extends EditForm
     @Override
     public void fillFromModel()
     {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Not Implemented yet !");
     }
 }

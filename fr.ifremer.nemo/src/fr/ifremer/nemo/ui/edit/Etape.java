@@ -6,12 +6,12 @@ import java.util.regex.Pattern;
 import org.eclipse.swt.widgets.Shell;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.config.Configuration.DataListEnum;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.conversion.EditConversionForm;
 import fr.ifremer.nemo.ui.edit.cruise.EditCruiseForm;
 import fr.ifremer.nemo.ui.edit.cruise.TableDataSurvey;
 import fr.ifremer.nemo.ui.edit.data.EditDataForm;
-import fr.ifremer.nemo.ui.edit.data.TableData;
 import fr.ifremer.nemo.ui.edit.data.TypeData;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.ui.edit.file.FileSection;
@@ -25,6 +25,7 @@ import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
 import fr.ifremer.nemo.util.Global.E_InputType;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.format.DateTimeFormat;
 import fr.ifremer.nemo.util.format.LatitudeFormat;
 import fr.ifremer.nemo.util.format.LongitudeFormat;
@@ -54,9 +55,15 @@ public class Etape
             Boolean ok, resultat;
             ok = true;
 
+            // first check if an output format has been set
+            if (editFileForm.getSelectedConversion() == E_TypeConversion.UNKNOWN)
+            {
+                Utils.messageErreur(Messages.error_file_convertFormatUnknown);
+                return;
+            }
+            
             // Fichier avec séparateur
-            if (editFileForm.chkSeparateur.getSelection()
-                    && !Preformat.isPreformat())
+            if (editFileForm.isSeparatorChecked() && !Preformat.isPreformat())
             {
                 try
                 {
@@ -65,14 +72,10 @@ public class Etape
                     // le préformattage a ajouté un espace au début de chaque
                     // ligne
                     // de données
-                    if (Preformat.isSpaceAdded()
-                            && editFileForm.sectionRuptureDonnees
-                                .radNextStationSelected())
+                    if (Preformat.isSpaceAdded() 
+                            && editFileForm.getSectionDataTerminator().radNextStationSelected())
                     {
-                        editFileForm.sectionRuptureDonnees
-                            .setStartStationIndicator(Global.SPACE
-                                    + editFileForm.sectionRuptureDonnees
-                                        .getStartStationIndicator());
+                        editFileForm.addSpaceBeforeDataTerminator();
                     }
 
                 }
@@ -107,6 +110,8 @@ public class Etape
                 Nemo.getInstance().getViewMain().tabFile.setText(Messages.onglet_file_error);
                 Nemo.getInstance().getViewMain().setEtape(0);
             }
+           
+            Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();
         }
         catch (Exception e)
         {
@@ -119,7 +124,6 @@ public class Etape
         
         EditCruiseForm editCruiseForm = Nemo.getInstance().getViewMain().getEditCruiseForm();
         EditConversionForm editConversionForm = Nemo.getInstance().getViewMain().getEditConversionForm();
-        
         
         // test de toutes les valeurs de Survey
 
@@ -136,53 +140,34 @@ public class Etape
         Utils.messageErreur(Global.EMPTY_STRING);
 
         // check valeurs obligatoires
-        resultat =
-            editCruiseForm.sectionReference
-                .checkMandatory(Messages.edit_cruise_cruiseRef);
+        resultat = editCruiseForm.sectionReference.checkMandatory(Messages.edit_cruise_cruiseRef);
         ok = ok && resultat;
 
-        resultat =
-            editCruiseForm.sectionReference
-                .checkMandatory(Messages.edit_cruise_cruiseName);
+        resultat =  editCruiseForm.sectionReference.checkMandatory(Messages.edit_cruise_cruiseName);
         ok = ok && resultat;
 
-        resultat =
-            editCruiseForm.sectionReference
-                .checkMandatory(Messages.edit_cruise_ship);
+        resultat = editCruiseForm.sectionReference.checkMandatory(Messages.edit_cruise_ship);
         ok = ok && resultat;
 
-        resultat =
-            editCruiseForm.sectionLocalisation
-                .checkMandatory(Messages.edit_cruise_startDate);
+        resultat =  editCruiseForm.sectionLocalisation.checkMandatory(Messages.edit_cruise_startDate);
         ok = ok && resultat;
 
-        resultat =
-            editCruiseForm.sectionLocalisation
-                .checkMandatory(Messages.edit_cruise_endDate);
+        resultat = editCruiseForm.sectionLocalisation.checkMandatory(Messages.edit_cruise_endDate);
         ok = ok && resultat;
 
-        resultat =
-            editCruiseForm.sectionLocalisation
-                .checkMandatory(Messages.edit_cruise_region);
+        resultat = editCruiseForm.sectionLocalisation.checkMandatory(Messages.edit_cruise_region);
         ok = ok && resultat;
 
-        resultat =
-            editCruiseForm.sectionSource
-                .checkMandatory(Messages.edit_cruise_country);
+        resultat = editCruiseForm.sectionSource.checkMandatory(Messages.edit_cruise_country);
         ok = ok && resultat;
 
-        resultat =
-            editCruiseForm.sectionSource
-                .checkMandatory(Messages.edit_cruise_chief);
+        resultat = editCruiseForm.sectionSource.checkMandatory(Messages.edit_cruise_chief);
         ok = ok && resultat;
 
         // CHECK DATES
-        String startDate =
-            editCruiseForm.sectionLocalisation.getItem(
-                Messages.edit_cruise_startDate).getText();
-        String endDate =
-            editCruiseForm.sectionLocalisation.getItem(
-                Messages.edit_cruise_endDate).getText();
+        String startDate = editCruiseForm.sectionLocalisation.getItem(Messages.edit_cruise_startDate).getText();
+        String endDate = editCruiseForm.sectionLocalisation.getItem(Messages.edit_cruise_endDate).getText();
+        
         if (!startDate.equals(Global.EMPTY_STRING))
         {
             try
@@ -306,7 +291,7 @@ public class Etape
             else
             {
                 value = editStationForm.stationNumber.getManualValue();
-                if (Nemo.getInstance().getViewMain().getEditFileForm().radTrajectoire.getSelection())
+                if (Nemo.getInstance().getViewMain().getEditFileForm().isTrajectory())
                 {
                     // saisie manuelle - obligatoire
                     if (value.trim().equals("") || value.equals("NaN")) { //$NON-NLS-1$ //$NON-NLS-2$
@@ -333,7 +318,12 @@ public class Etape
             // FAE 1143 : dans tous les cas, le numéro de station doit être <= 5
             // caractères pour MEDATLAS
             editConversionForm.setWarningStation(Global.EMPTY_STRING);
-            value = editStationForm.stationNumber.getValue().trim();
+            
+            value = editStationForm.stationNumber.getValue();
+            if (value!= null)
+            {
+                value = value.trim();
+            }
             if (!editFileForm.isCollection() && value.length() > 5)
             {
                 editConversionForm
@@ -346,7 +336,7 @@ public class Etape
             }
 
             // FAE022 : TYPE DE DONNEES
-            if (!editFileForm.isCollection())
+                if (Nemo.getInstance().getViewMain().isCruiseEnabled())
             {
                 if (editStationForm.dataType.getDatatype()
                     .getValueCombo().getSelectionIndex() == -1)
@@ -554,11 +544,12 @@ public class Etape
                 // check value (creer une nouvelle heure)
                 if (checkValue)
                 {
-                    value =
-                        editStationForm.time.getValue().replace(' ',
-                            '0');
+                  
                     try
                     {
+                        value =
+                            editStationForm.time.getValue().replace(' ',
+                                '0');
                         DateTimeFormat format = new DateTimeFormat(formatSaisi);
 
                         if (!value.equals(StationSection.defaultValue))
@@ -626,7 +617,7 @@ public class Etape
             checkValue = true;
             // if (value != null && !value.trim().equals(Global.EMPTY_STRING)){
             if (!editStationForm.depth.isManual()
-                    && !editFileForm.radTrajectoire.getSelection())
+                    && !editFileForm.isTrajectory())
             {
                 // non-obligatoire
 
@@ -831,8 +822,7 @@ public class Etape
              * ==============================================================================================
              */
             // specifique SERIE TEMPO ou TRAJECTOIRE
-            if (editFileForm.radSerieTempo.getSelection()
-                    || editFileForm.radTrajectoire.getSelection())
+            if (editFileForm.isTimeSeries() || editFileForm.isTrajectory())
             {
 
                 /**
@@ -869,7 +859,7 @@ public class Etape
                     value = editStationForm.sensorDepth.getValue();
 
                     // FT 4466 valeur vide autorisée dans le cas trajectory
-                    if (!editFileForm.radTrajectoire.getSelection())
+                    if (!editFileForm.isTrajectory())
                     {
                         if (value.trim().equals(Global.EMPTY_STRING))
                         {
@@ -889,7 +879,7 @@ public class Etape
                     value = editStationForm.sensorDepth.getValue();
                     
                     // FT 4466 valeur vide autorisée dans le cas trajectory
-                    if (!(editFileForm.radTrajectoire.getSelection() && ""
+                    if (!(editFileForm.isTrajectory() && ""
                         .equals(value)))
                     {
                         if (!Pattern.matches(
@@ -992,7 +982,7 @@ public class Etape
              * ==============================================================================================
              */
             // specifique SERIE TEMPO
-            if (editFileForm.radSerieTempo.getSelection())
+            if (editFileForm.isTimeSeries())
             {
                 /**
                  * ==============================================================================================
@@ -1292,7 +1282,7 @@ public class Etape
         EditDataForm editDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
         
         Boolean valeurNonRemplie = false;
-        boolean existDEPH = false;
+//        boolean existDEPH = false;
         // retour e l'onglet message d'erreur
         ViewLog.tabFolderLog.setSelection(0);
 
@@ -1350,11 +1340,11 @@ public class Etape
                 debutsFlag[i] = typeCourant.getDebutFlag();
                 finsFlag[i] = typeCourant.getFinFlag();
 
-                // recherche de l'existance du paramètre DEPH
-                if (typeCourant.getCode().startsWith(Intern.paramDEPH))
-                {
-                    existDEPH = true;
-                }
+                // recherche de l'existence du paramètre DEPH
+//                if (typeCourant.getCode().startsWith(Intern.paramDEPH))
+//                {
+//                    existDEPH = true;
+//                }
                 // test direct sur valeur entree
                 ok = ok && true;
 
@@ -1475,34 +1465,19 @@ public class Etape
             // split sur " - "
             Pattern p = Pattern.compile(Global.SEP);
             String[] mots = p.split(premierType.getCode());
-            String code = mots[0];
-
-            
+            String firstParameterCode = mots[0];
             
             editConversionForm.setWarningData(Global.EMPTY_STRING);
-            if (editFileForm.getTypeFichierEntree() == E_InputType.PROFILE)
+            
+            if (editFileForm.getInputFileType() == E_InputType.PROFILE)
             {
                 
-                
-                //FAE 5819 : ajout du code DPSF comme parametre possible
-                if (!(code.equals(Intern.paramPRES) 
-                        || code.equals(Intern.paramDEPH)
-                          || code.equals(Intern.paramDPSF)
-                        ))
-                {
-                    // PRES ou DEPH n'est pas en premier
-                    Utils.messageErreurAppend(Messages.error_data_firstPRES);
-                    ok = ok && false;
-                }
-                else
-                {
-                    ok = ok && true;
-                }
+               boolean checkOk = data_checkPressureIsInFirstPosition(firstParameterCode);
+               ok = ok && checkOk;
 
                 // Si PRES n'est pas premier => Medatlas impossible
-                // A moins que l'on est les parametre DEPH, PSAL et TEMP ( FAE
-                // 3228 )
-                if (!editFileForm.isCollection() && !code.equals(Intern.paramPRES))
+                // A moins que l'on ait les parametre DEPH, PSAL et TEMP ( FAE 3228 )
+                if (!editFileForm.isCollection() && !firstParameterCode.equals(Intern.paramPRES))
                 {
                     boolean isPSAL = false;
                     boolean isTEMP = false;
@@ -1557,20 +1532,53 @@ public class Etape
             Nemo.getInstance().getViewMain().setEtape(3);
         }
     }
+/**
+ * verification: un parametre de type pression ou equivalent doit être présent sur la première ligne
+ * Note: dans certains cas on calculera la pression a partir de la profondeur ou inversement. 
+ * cf. DataDomain.setAddedParameter et AddedParameter
+ * @param firstParameterCode
+ * @return
+ */
+    private static boolean data_checkPressureIsInFirstPosition(String firstParameterCode)
+    {
+        boolean checkOk = true;
+        DataListEnum dataList = Nemo.getInstance().getConfig().getDataListToUse();
 
+        if (dataList == DataListEnum.P011_VIA_P091 || dataList == DataListEnum.P091)
+        {
+            //FAE 5819 : ajout du code DPSF comme parametre possible
+            if (!(firstParameterCode.equals(Intern.paramPRES) 
+                    || firstParameterCode.equals(Intern.paramDEPH)
+                    || firstParameterCode.equals(Intern.paramDPSF)
+            ))
+            {
+                // PRES ou DEPH ou DPSF n'est pas en premier
+                Utils.messageErreurAppend(Messages.error_data_p091_firstPRES);
+                checkOk=false;
+            }
+        }
+        else if (dataList == DataListEnum.P011_VIA_P021)
+        {
+            //FAE 5819 : ajout du code DPSF comme parametre possible
+            if (!(firstParameterCode.equals(Intern.paramPREX) 
+                    || firstParameterCode.equals(Intern.paramMPMN)
+                    || firstParameterCode.equals(Intern.paramAHGT)
+            ))
+            {
+                // PREX ou MPMN ou AHGT n'est pas en premier
+                Utils.messageErreurAppend(Messages.error_data_p011_firstPRES);
+                checkOk=false;
+            }
+        }
+        return checkOk;
+    }
     private static void okFile()
     {
         EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
         EditCruiseForm editCruiseForm = Nemo.getInstance().getViewMain().getEditCruiseForm();
         
         // FAE1386 : desactiver "One File per station" si Trajectory
-        if (editFileForm.radTrajectoire.getSelection())
-        {
-            editFileForm.radODVMonoStation.setSelection(false);
-            editFileForm.radODVMonoStation.setEnabled(false);
-            editFileForm.radODVMonoFichier.setEnabled(true);
-            editFileForm.radODVMonoFichier.setSelection(true);
-        }
+        editFileForm.updateOdvTypeFromFileType();
 
         // envoi des valeurs dans le modele
         // attention aux boutons radio
@@ -1588,7 +1596,7 @@ public class Etape
         Nemo.getInstance().getViewMain().tabFile.setText(Messages.onglet_file_valid);
 
         // on valide l'etape 1
-        editFileForm.validee = true;
+        editFileForm.setValidated(true);
 
         // verrouillage de l'option serieTemporelle pour eviter les changements
         editFileForm.enableChoice(false);
@@ -1596,10 +1604,11 @@ public class Etape
         try
         {
             // FAE 022
-            if (editFileForm.isCollection())
+            if(! Nemo.getInstance().getViewMain().isCruiseEnabled())
+//            if (editFileForm.isCollection())
             {
                 editCruiseForm.setOkApresReset(true);
-                editCruiseForm.validee = true;
+                editCruiseForm.setValidated(true);
 
                 editCruiseForm.initFromNewModel();
                 Nemo.getInstance().getViewMain().setEtape(2);

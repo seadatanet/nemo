@@ -65,7 +65,7 @@ ActionFactory.IWorkbenchAction
         // sauvegarde du modele
         FileOutputStream fileOutputStream = null;
 
-        if (!editDataForm.validee)
+        if (!editDataForm.isValidated())
         {
             Utils.messageErreur(Messages.SaveAction_3);
         }
@@ -118,7 +118,7 @@ ActionFactory.IWorkbenchAction
         //si le modele est un fichier qui a été ouvert, ou si il a déjà été enregistré, on conserve ces infos pour proposer d'enregistrer sous le nom courant)
         // sinon on utilise les valeurs par défaut (repertoire des modeles de la config et nom de fichier = *.xml)
         // nom connu car deja enregistre recemment
-        if (!nomFichierSortieXML.equals("")){ //$NON-NLS-1$
+        if (nomFichierSortieXML!=null && !nomFichierSortieXML.equals("")){ //$NON-NLS-1$
             currentModelPath=nomFichierSortieXML;
         }
         // nom connu car le modele est un fichier existant qui a été ouvert

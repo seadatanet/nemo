@@ -7,6 +7,7 @@ import java.util.Date;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
@@ -28,6 +29,7 @@ import fr.ifremer.nemo.ui.edit.Couple;
 import fr.ifremer.nemo.ui.edit.EditForm;
 import fr.ifremer.nemo.ui.edit.Etape;
 import fr.ifremer.nemo.ui.edit.NemoSection;
+import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
@@ -37,12 +39,13 @@ import fr.ifremer.nemo.ws.WSDataType;
 public class EditCruiseForm extends EditForm
 {
     public Button buttonInitServeur, buttonXML;
-    public CruiseSection sectionReference, sectionLocalisation, sectionSource,
+    public CruiseSection sectionReference;
+    public CruiseSection sectionLocalisation, sectionSource,
             sectionCentre;
     public CruiseSection sectionCommentaire;
     public CruiseDatatypeSection sectionType;
     private Composite _parent;
-
+    private StyledText textAreaCruise;
     
     
     @Override
@@ -118,12 +121,13 @@ public class EditCruiseForm extends EditForm
         ViewLog.aideCruise();
 
         // affichage du texte dans la zone de gauche
-        Nemo.getInstance().getViewMain().textAreaCruise.setText(Utils.texteBrut);
-
+       textAreaCruise.setText(Utils.texteBrut);
+       EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
+       
         if (!isLoaded())
         {
             // INFOS sur les fichiers utilises
-            if (Nemo.getInstance().getViewMain().getEditFileForm().radioFichier.getSelection())
+            if (editFileForm.isCruiseIsAFile())
             {
                 // fichier campagne
                 Utils.messageInfoAppend(Messages.view_file_cruiseFile);
@@ -132,15 +136,15 @@ public class EditCruiseForm extends EditForm
             {
                 // dossier campagne
                 Utils.messageInfoAppend(Messages.view_file_cruiseDir
-                        + Nemo.getInstance().getViewMain().getEditFileForm().nomRepertoire);
+                        + editFileForm.nomRepertoire);
             }
 
-            if (Nemo.getInstance().getViewMain().getEditFileForm().radSerieTempo.getSelection())
+            if (editFileForm.isTimeSeries())
             {
                 // Série temporelle
                 Utils.messageInfoAppend(Messages.typeFile_timeseries);
             }
-            else if (Nemo.getInstance().getViewMain().getEditFileForm().radTrajectoire.getSelection())
+            else if (editFileForm.isTrajectory())
             {
                 // Trajectoire
                 Utils.messageInfoAppend(Messages.typeFile_trajectory);
@@ -267,7 +271,7 @@ public class EditCruiseForm extends EditForm
         // description
 
         // verifier que un fichier est charge avant d'ouvrir un modele
-        if ((!Nemo.getInstance().getViewMain().getEditFileForm().validee) && (!isLoaded()))
+        if ((!Nemo.getInstance().getViewMain().getEditFileForm().isValidated()) && (!isLoaded()))
         {
             Utils.messageErreurAppend(Messages.error_cruise_openXml);
         }
@@ -370,10 +374,9 @@ public class EditCruiseForm extends EditForm
     public void initSections()
     {
 
-        sectionReference =
-            new CruiseSection(NemoSection.C_REFERENCE,
-                Messages.edit_cruise_sectionReference,
-                Messages.edit_cruise_sectionReference_lib, this);
+        sectionReference = new CruiseSection(NemoSection.C_REFERENCE,
+                                Messages.edit_cruise_sectionReference,
+                                Messages.edit_cruise_sectionReference_lib, this);
         sectionReference.addItem(Messages.edit_cruise_cruiseRef,
             ComboType.NONE, Global.EMPTY_STRING);
         sectionReference.addItem(Messages.edit_cruise_cruiseName,
@@ -481,7 +484,7 @@ public class EditCruiseForm extends EditForm
         // injection des valeurs de l'IHM -> datamodel
         // reference
         if (Nemo.getInstance().getViewMain().tabCruise.isDisposed()){
-            validee = true;
+            setValidated(true);
             return;
         }
 
@@ -549,7 +552,7 @@ public class EditCruiseForm extends EditForm
         // remplissage de la liste des dataTypes de la campagne
         sectionType.initModel(cruiseModel);
 
-        validee = true;
+        setValidated(true);
     }
     @Override
     public void fillFromModel()
@@ -618,5 +621,15 @@ public class EditCruiseForm extends EditForm
 
         // Remplissage de la liste des dataTypes de la campagne
         sectionType.fillFromModel(cruiseModel); 
+    }
+
+    public StyledText getTextAreaCruise()
+    {
+        return textAreaCruise;
+    }
+
+    public void setTextAreaCruise(StyledText textAreaCruise)
+    {
+        this.textAreaCruise = textAreaCruise;
     }
 }

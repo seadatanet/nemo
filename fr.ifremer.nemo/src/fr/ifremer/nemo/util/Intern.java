@@ -39,6 +39,9 @@ public class Intern extends NLS {
     public static String list_accesDonnees;
     public static String list_flagsSDN;
     public static String list_BODCpdv;
+    public static String list_P091;
+    public static String list_P011;
+    public static String list_P061;
     public static String list_nemo_parameters;
     public static String list_nemo_survey;
     public static String list_edmo;
@@ -81,11 +84,17 @@ public class Intern extends NLS {
     public static String CJDY;
     public static String DTUT;
     
+    //P091
     public static String paramPRES;
     public static String paramDEPH;
     public static String paramDPSF;
     public static String paramPSAL;
     public static String paramTEMP;
+    
+    //P011
+    public static String paramPREX;
+    public static String paramMPMN;
+    public static String paramAHGT;
     
     public static String unknown;
     public static String CDIResumeWriter_notSpecified;

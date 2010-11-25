@@ -84,10 +84,6 @@ public class DatatypeFilteredTable extends AbstractFilteredTable
                     .add(TableDataSurvey.typesWS.get(i));
             }
 
-            // TODO BGT utile?? - code deplace dans TableData
-            // le code de depart rechargeait les typesWS ET le tableau de ParameterFilteredTable, ce qui semble inutile
-            // puisque celui-ci recharge ses données filtrées à la création
-//            Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().reloadListeFiltree();
             Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().initTypesWS();
         }
         catch (Exception e)

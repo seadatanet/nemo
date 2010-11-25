@@ -53,20 +53,19 @@ public class SetText implements UIobject
 
     protected void injectText()
     {
-        text.setText(Nemo.getInstance().getViewMain().getEditFileForm().textAreaFile.getText().substring(
-            Nemo.getInstance().getViewMain().getEditFileForm().textAreaFile.getSelection().x,
-            Nemo.getInstance().getViewMain().getEditFileForm().textAreaFile.getSelection().y));
+        EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
+        text.setText(editFileForm.getSelectedText());
         text.pack();
     }
 
     protected void injectNumberLines()
     {
         int deb, fi, lignDepart, lignFin, i;
-
+        EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
         // on recupere les coordonnees de la selection
-        deb = Nemo.getInstance().getViewMain().getEditFileForm().textAreaFile.getSelection().x;
-        fi = Nemo.getInstance().getViewMain().getEditFileForm().textAreaFile.getSelection().y;
-
+        deb = editFileForm.getSelectedTextStartPosition();
+        fi = editFileForm.getSelectedTextEndPosition();
+        
         lignDepart = 1;
         lignFin = 1;
         // calcul de la ligne en fonction de la valeur de x
