@@ -119,7 +119,7 @@ public class EditFileForm extends EditForm
         radioSeparateurAutre.setSelection(false);
         textSeparateur.setText(Global.EMPTY_STRING);
         setSeparatorVisible();
-        razOutputChoice();
+        setSelectedConversion(Nemo.getInstance().getConfig().getDefaultConversionType());
         Nemo.getInstance().getViewMain().enableCruise(!radODV.getSelection());
     }
     public void createLeftForm(Composite parent)
@@ -905,23 +905,6 @@ public class EditFileForm extends EditForm
             radioEspace.setEnabled(enabled);
             radioSeparateurAutre.setEnabled(enabled);
             textSeparateur.setEnabled(enabled);
-        }
-    }
-    public void razOutputChoice()
-    {
-        // on rend sélectionnables les radios ODV et Medatlas dans
-        // l'onglet Conversion
-        if (radODVMonoFichier != null)
-        {
-            radMedatlas.setEnabled(true);
-            radMedatlas.setSelection(false);
-            radODV.setEnabled(true);
-            radODV.setSelection(false);
-            radODVMonoStation.setEnabled(true);
-            radODVMonoStation.setSelection(false);
-            radODVMonoFichier.setEnabled(true);
-            radODVMonoFichier.setSelection(false);
-            afficheGrpODV();
         }
     }
     
