@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.6.0_02" class="java.beans.XMLDecoder"> 
- <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="236"> 
+<java version="1.6.0_21" class="java.beans.XMLDecoder"> 
+ <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="257"> 
   <void index="0"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMKS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMKS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>10^-8 * Cubic metres per kilogram</string> 
@@ -25,14 +25,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
   <void index="1"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UAQU</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UAQU</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Angstrom squared per quantum</string> 
@@ -41,26 +41,26 @@
      <string>A^2/Q</string> 
     </void> 
     <void property="entryTermDef"> 
-     <string>Unavailable</string> 
+     <string>Scaled unit by Avagadro&apos;s number and powers of ten to m**2/mol</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1107362993000</long> 
+        <long>1284633230000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
   <void index="2"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UAMN</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UAMN</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Arc minutes</string> 
@@ -69,26 +69,26 @@
      <string>arc_min</string> 
     </void> 
     <void property="entryTermDef"> 
-     <string>Unavailable</string> 
+     <string>Unit of angle described as one sixtieth of a degree</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1203508686000</long> 
+        <long>1284633230000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
   <void index="3"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UBQK</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UBQK</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Bequerels per kilogram</string> 
@@ -109,14 +109,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
   <void index="4"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UBQL</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UBQL</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Bequerels per litre</string> 
@@ -137,14 +137,42 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
   <void index="5"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/BYTE</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UYGA</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Billions of years before present</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>Gyr</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>The length of time elapsed expressed as billions (10**9) of years between the event of interest and the year 1950 AD</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1285848460000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="6"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/BYTE</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Bytes</string> 
@@ -165,14 +193,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="6"> 
+  <void index="7"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/ULCM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/ULCM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Centimetres</string> 
@@ -181,26 +209,26 @@
      <string>cm</string> 
     </void> 
     <void property="entryTermDef"> 
-     <string>Unavailable</string> 
+     <string>Unit of length which is one hundredth of a metre</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1239350627000</long> 
+        <long>1284633230000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="7"> 
+  <void index="8"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UVBB</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UVBB</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Centimetres per second</string> 
@@ -221,14 +249,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="8"> 
+  <void index="9"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UCKA</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UCKA</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Centimetres per thousand years</string> 
@@ -249,14 +277,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="9"> 
+  <void index="10"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UCPS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UCPS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Counts per second</string> 
@@ -277,14 +305,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="10"> 
+  <void index="11"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/MCUB</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/MCUB</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Cubic metres</string> 
@@ -305,14 +333,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="11"> 
+  <void index="12"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/CMPS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/CMPS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Cubic metres per second</string> 
@@ -333,14 +361,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="12"> 
+  <void index="13"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/MCS2</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/MCS2</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Cubic metres per second squared</string> 
@@ -361,14 +389,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="13"> 
+  <void index="14"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMCU</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMCU</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Cubic micrometres (microns)</string> 
@@ -389,14 +417,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="14"> 
+  <void index="15"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UCCM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UCCM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Cubic microns per cubic metre</string> 
@@ -417,14 +445,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="15"> 
+  <void index="16"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UNVH</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UNVH</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Cubic microns per individual per hour</string> 
@@ -445,14 +473,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="16"> 
+  <void index="17"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UCUM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UCUM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Cubic microns per millilitre</string> 
@@ -473,14 +501,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="17"> 
+  <void index="18"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UTAA</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UTAA</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Days</string> 
@@ -501,14 +529,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="18"> 
+  <void index="19"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPDB</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPDB</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Decibars</string> 
@@ -529,14 +557,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="19"> 
+  <void index="20"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UDBL</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UDBL</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Decibels</string> 
@@ -557,14 +585,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="20"> 
+  <void index="21"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UDBZ</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UDBZ</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Decibels of Z</string> 
@@ -573,26 +601,26 @@
      <string>dBZ</string> 
     </void> 
     <void property="entryTermDef"> 
-     <string>Unavailable</string> 
+     <string>Radar reflectivity unit. Decibels with a reference level of 1mm^6/m^3, which is equal to a cubic micron.</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1248940171000</long> 
+        <long>1284633230000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="21"> 
+  <void index="22"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UAAA</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UAAA</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Degrees</string> 
@@ -613,14 +641,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="22"> 
+  <void index="23"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPAA</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPAA</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Degrees Celsius</string> 
@@ -641,14 +669,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="23"> 
+  <void index="24"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPCC</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPCC</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Degrees Celsius per metre</string> 
@@ -669,14 +697,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="24"> 
+  <void index="25"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UCSS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UCSS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Degrees Celsius squared per second</string> 
@@ -697,14 +725,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="25"> 
+  <void index="26"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPKA</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPKA</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Degrees Kelvin</string> 
@@ -725,14 +753,42 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="26"> 
+  <void index="27"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UABB</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/DKPM</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Degrees Kelvin per metre</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>degK/m</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A rate of change of one unit on the Kelvin temperature scale per unit length of one metre.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1288876628000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="28"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UABB</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Degrees True</string> 
@@ -753,14 +809,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="27"> 
+  <void index="29"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/DEGE</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/DEGE</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Degrees east</string> 
@@ -781,14 +837,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="28"> 
+  <void index="30"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/DEGN</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/DEGN</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Degrees north</string> 
@@ -809,14 +865,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="29"> 
+  <void index="31"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/DGPS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/DGPS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Degrees per second</string> 
@@ -837,14 +893,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="30"> 
+  <void index="32"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UUUU</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UUUU</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Dimensionless</string> 
@@ -865,14 +921,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="31"> 
+  <void index="33"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPFM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPFM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Femtomoles per litre</string> 
@@ -893,14 +949,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="32"> 
+  <void index="34"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UFFU</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UFFU</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Fluorescein Fluorescence Units</string> 
@@ -909,26 +965,26 @@
      <string>FFU</string> 
     </void> 
     <void property="entryTermDef"> 
-     <string>Unavailable</string> 
+     <string>Dimensionless scale derived in the laboratory using fluorescein as a proxy for environmental pigments</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1204647623000</long> 
+        <long>1284633230000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="33"> 
+  <void index="35"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UGCC</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UGCC</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Grams per cubic centimetre</string> 
@@ -949,14 +1005,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="34"> 
+  <void index="36"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UGMC</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UGMC</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Grams per cubic metre</string> 
@@ -977,14 +1033,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="35"> 
+  <void index="37"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UGKG</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UGKG</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Grams per kilogram</string> 
@@ -1005,14 +1061,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="36"> 
+  <void index="38"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UGMS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UGMS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Grams per square metre</string> 
@@ -1033,14 +1089,98 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="37"> 
+  <void index="39"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UTHZ</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UYAD</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Gregorian calendar years anno Domini</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>AD</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A calendar year after the origin of the Gregorian calendar</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1285848124000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="40"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UYBC</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Gregorian calendar years before Christ</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>BC</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A calendar year prior to the origin of the Gregorian calendar expressed as a incrementing integer going back into the past</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1285848023000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="41"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UYMD</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Gregorian date (yyyymmdd)</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>yyyymmdd</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A date according to the Gregorian Calendar expressed as an 8-byte string with the year in bytes 1-4, month within year in bytes 5-6 and day within month in bytes 7-8.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1285848789000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="42"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UTHZ</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Hertz</string> 
@@ -1061,14 +1201,42 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="38"> 
+  <void index="43"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UHMS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UHOR</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Hours</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>h</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A time interval of sixty minutes or 3600 seconds.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1284652477000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="44"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UHMS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Hours Minutes Seconds</string> 
@@ -1089,14 +1257,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="39"> 
+  <void index="45"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/TISO</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/TISO</string> 
     </void> 
     <void property="entryTerm"> 
      <string>ISO8601</string> 
@@ -1105,26 +1273,26 @@
      <string>ISO8601</string> 
     </void> 
     <void property="entryTermDef"> 
-     <string>Unavailable</string> 
+     <string>String corresponding to any legal ISO8601 format mask. This is the concatenation of &apos;yyyy-mm-dd&apos; with any part of &apos;Thh:mm:ss.sss&apos; (including none) depending on precision and an optional time zone indicator &apos;Zxxx&apos; where xxx is the offset from UT</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1234367397000</long> 
+        <long>1284633230000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="40"> 
+  <void index="46"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/JPKG</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/JPKG</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Joules per kilogram</string> 
@@ -1145,14 +1313,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="41"> 
+  <void index="47"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/JKGK</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/JKGK</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Joules per kilogram per Kelvin</string> 
@@ -1173,14 +1341,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="42"> 
+  <void index="48"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/JMSQ</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/JMSQ</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Joules per square metre</string> 
@@ -1201,14 +1369,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="43"> 
+  <void index="49"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/KPAS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/KPAS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Kelvin Pascals per second</string> 
@@ -1229,14 +1397,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="44"> 
+  <void index="50"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/KMTX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/KMTX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Kelvin metres</string> 
@@ -1257,14 +1425,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="45"> 
+  <void index="51"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/KMTS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/KMTS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Kelvin metres per second</string> 
@@ -1285,14 +1453,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="46"> 
+  <void index="52"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/KPMT</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/KPMT</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Kelvin per metre</string> 
@@ -1313,14 +1481,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="47"> 
+  <void index="53"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/KPRS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/KPRS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Kelvin per second</string> 
@@ -1341,14 +1509,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="48"> 
+  <void index="54"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/KSXX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/KSXX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Kelvin second</string> 
@@ -1369,14 +1537,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="49"> 
+  <void index="55"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/KMSS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/KMSS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Kelvin square metres per kilogram per second</string> 
@@ -1397,14 +1565,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="50"> 
+  <void index="56"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/KLSQ</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/KLSQ</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Kelvin squared</string> 
@@ -1425,14 +1593,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="51"> 
+  <void index="57"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/KGPS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/KGPS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Kilogram per second</string> 
@@ -1453,14 +1621,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="52"> 
+  <void index="58"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/KGXX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/KGXX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Kilograms</string> 
@@ -1481,14 +1649,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="53"> 
+  <void index="59"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UKMC</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UKMC</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Kilograms per cubic metre</string> 
@@ -1509,14 +1677,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="54"> 
+  <void index="60"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/KSP3</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/KSP3</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Kilograms per cubic metre per second</string> 
@@ -1537,14 +1705,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="55"> 
+  <void index="61"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/KMPS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/KMPS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Kilograms per metre per second</string> 
@@ -1565,14 +1733,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="56"> 
+  <void index="62"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/KMP2</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/KMP2</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Kilograms per square metre</string> 
@@ -1593,14 +1761,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="57"> 
+  <void index="63"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/KSP2</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/KSP2</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Kilograms per square metre per second</string> 
@@ -1621,14 +1789,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="58"> 
+  <void index="64"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/KGS2</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/KGS2</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Kilograms squared per second squared</string> 
@@ -1649,14 +1817,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="59"> 
+  <void index="65"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/ULKM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/ULKM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Kilometres</string> 
@@ -1677,14 +1845,42 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="60"> 
+  <void index="66"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UKNT</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UYKA</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Kiloyears before present</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>kyr</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>The length of time elapsed expressed as thousands of years between the event of interest and the year 1950 AD</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1285848305000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="67"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UKNT</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Knots (nautical miles per hour)</string> 
@@ -1705,14 +1901,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="61"> 
+  <void index="68"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/ULIT</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/ULIT</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Litres</string> 
@@ -1733,14 +1929,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="62"> 
+  <void index="69"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/ULKG</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/ULKG</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Litres per kilogram</string> 
@@ -1761,14 +1957,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="63"> 
+  <void index="70"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/ULPM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/ULPM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Litres per minute</string> 
@@ -1789,14 +1985,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="64"> 
+  <void index="71"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UCGS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UCGS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Magnetic susceptibility cgs units</string> 
@@ -1817,14 +2013,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="65"> 
+  <void index="72"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UCGG</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UCGG</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Magnetic susceptibility cgs units per gram</string> 
@@ -1845,14 +2041,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="66"> 
+  <void index="73"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/MBYT</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/MBYT</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Megabytes</string> 
@@ -1873,14 +2069,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="67"> 
+  <void index="74"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/ULAA</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/ULAA</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Metres</string> 
@@ -1901,14 +2097,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="68"> 
+  <void index="75"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UVAA</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UVAA</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Metres per second</string> 
@@ -1929,14 +2125,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="69"> 
+  <void index="76"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/MPS2</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/MPS2</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Metres per second squared</string> 
@@ -1957,14 +2153,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="70"> 
+  <void index="77"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMEC</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMEC</string> 
     </void> 
     <void property="entryTerm"> 
      <string>MicroEinsteins per cubic metre per second</string> 
@@ -1985,14 +2181,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="71"> 
+  <void index="78"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMES</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMES</string> 
     </void> 
     <void property="entryTerm"> 
      <string>MicroEinsteins per square metre per second</string> 
@@ -2013,14 +2209,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="72"> 
+  <void index="79"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UEQL</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UEQL</string> 
     </void> 
     <void property="entryTerm"> 
      <string>MicroEquivalents per litre</string> 
@@ -2041,14 +2237,42 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="73"> 
+  <void index="80"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UATM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UGPM</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>MicroGals per metre</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>uGal/m</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A rate of change of one millionth part of a unit of gravitational acceleration equal to one centimetre per second per second over a distance of one metre.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1288874284000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="81"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UATM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Microatmospheres</string> 
@@ -2069,14 +2293,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="74"> 
+  <void index="82"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UUBQ</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UUBQ</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Microbequerels per litre</string> 
@@ -2097,14 +2321,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="75"> 
+  <void index="83"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UGUG</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UGUG</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Micrograms</string> 
@@ -2125,14 +2349,42 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="76"> 
+  <void index="84"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UGM3</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/MCUG</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Micrograms per cubic metre</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>ug/m^3</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Unavailable</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1271080387000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="85"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UGM3</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Micrograms per cubic metre per hour</string> 
@@ -2153,14 +2405,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="77"> 
+  <void index="86"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UUKG</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UUKG</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Micrograms per kilogram</string> 
@@ -2181,14 +2433,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="78"> 
+  <void index="87"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UGPL</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UGPL</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Micrograms per litre</string> 
@@ -2209,14 +2461,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="79"> 
+  <void index="88"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UUGS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UUGS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Micrograms per millilitre of wet sediment</string> 
@@ -2237,14 +2489,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="80"> 
+  <void index="89"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UUDX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UUDX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Micrograms per square metre per day</string> 
@@ -2265,14 +2517,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="81"> 
+  <void index="90"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UUML</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UUML</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Microlitres per litre</string> 
@@ -2293,14 +2545,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="82"> 
+  <void index="91"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMIC</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMIC</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Micrometres (microns)</string> 
@@ -2321,14 +2573,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="83"> 
+  <void index="92"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMUB</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMUB</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Micromole per micromole of biomass per day</string> 
@@ -2349,14 +2601,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="84"> 
+  <void index="93"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/KGUM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/KGUM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Micromoles per kilogram</string> 
@@ -2377,14 +2629,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="85"> 
+  <void index="94"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPOX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPOX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Micromoles per litre</string> 
@@ -2405,14 +2657,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="86"> 
+  <void index="95"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMMD</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMMD</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Micromoles per litre per day</string> 
@@ -2433,14 +2685,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="87"> 
+  <void index="96"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMMH</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMMH</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Micromoles per litre per hour</string> 
@@ -2461,14 +2713,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="88"> 
+  <void index="97"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMPM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMPM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Micromoles per mole</string> 
@@ -2489,14 +2741,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="89"> 
+  <void index="98"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UUUD</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UUUD</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Micromoles per square metre per day</string> 
@@ -2517,14 +2769,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="90"> 
+  <void index="99"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMFX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMFX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Micromoles per square metre per hour</string> 
@@ -2545,14 +2797,70 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="91"> 
+  <void index="100"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMAM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/USEC</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Microseconds</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>us</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Unavailable</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1268771788000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="101"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/MGAL</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>MilliGals</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>mGal</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>One thousandth part of a unit of gravitational acceleration equal to one centimetre per second per second</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1288874242000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="102"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMAM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Milliamps</string> 
@@ -2573,14 +2881,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="92"> 
+  <void index="103"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPBB</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPBB</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Millibars</string> 
@@ -2601,14 +2909,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="93"> 
+  <void index="104"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMBQ</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMBQ</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Millibequerels per litre</string> 
@@ -2629,14 +2937,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="94"> 
+  <void index="105"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UCLC</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UCLC</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Milligrams of carbon per (microEinstein per square metre per second) per milligram of chlorophyll per hour</string> 
@@ -2657,14 +2965,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="95"> 
+  <void index="106"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UCCL</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UCCL</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Milligrams of carbon per milligram of chlorophyll per hour</string> 
@@ -2685,14 +2993,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="96"> 
+  <void index="107"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMMC</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMMC</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Milligrams per cubic metre</string> 
@@ -2713,14 +3021,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="97"> 
+  <void index="108"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UGDC</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UGDC</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Milligrams per cubic metre per day</string> 
@@ -2741,14 +3049,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="98"> 
+  <void index="109"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UGLH</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UGLH</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Milligrams per cubic metre per hour</string> 
@@ -2769,14 +3077,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="99"> 
+  <void index="110"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMKG</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMKG</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Milligrams per kilogram</string> 
@@ -2797,14 +3105,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="100"> 
+  <void index="111"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMGL</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMGL</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Milligrams per litre</string> 
@@ -2825,14 +3133,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="101"> 
+  <void index="112"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMMS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMMS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Milligrams per square metre</string> 
@@ -2853,14 +3161,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="102"> 
+  <void index="113"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UGDX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UGDX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Milligrams per square metre per day</string> 
@@ -2881,14 +3189,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="103"> 
+  <void index="114"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/MGSQ</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/MGSQ</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Milligrams per square metre per hour</string> 
@@ -2909,14 +3217,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="104"> 
+  <void index="115"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UM2D</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UM2D</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Milligrams per square metre per incubation duration</string> 
@@ -2937,14 +3245,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="105"> 
+  <void index="116"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMCH</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMCH</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Millilitres cleared per individual per hour</string> 
@@ -2965,14 +3273,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="106"> 
+  <void index="117"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/MPM3</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/MPM3</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Millilitres per cubic metre</string> 
@@ -2993,14 +3301,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="107"> 
+  <void index="118"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMLL</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMLL</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Millilitres per litre</string> 
@@ -3021,14 +3329,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="108"> 
+  <void index="119"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/CCPM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/CCPM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Millilitres per minute</string> 
@@ -3049,14 +3357,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="109"> 
+  <void index="120"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/MSMD</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/MSMD</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Millilitres per square metre per day</string> 
@@ -3077,14 +3385,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="110"> 
+  <void index="121"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UXMM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UXMM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Millimetres</string> 
@@ -3105,14 +3413,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="111"> 
+  <void index="122"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/MMPD</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/MMPD</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Millimetres per day</string> 
@@ -3133,14 +3441,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="112"> 
+  <void index="123"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/MMPH</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/MMPH</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Millimetres per hour</string> 
@@ -3161,14 +3469,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="113"> 
+  <void index="124"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMMM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMMM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Millimetres per minute</string> 
@@ -3189,14 +3497,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="114"> 
+  <void index="125"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UVCC</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UVCC</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Millimetres per second</string> 
@@ -3217,14 +3525,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="115"> 
+  <void index="126"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/MMPL</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/MMPL</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Millimoles per litre</string> 
@@ -3245,14 +3553,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="116"> 
+  <void index="127"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/MMOM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/MMOM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Millimoles per mole</string> 
@@ -3273,14 +3581,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="117"> 
+  <void index="128"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMDX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMDX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Millimoles per square metre per day</string> 
@@ -3301,14 +3609,70 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="118"> 
+  <void index="129"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMSC</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UYMA</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Millions of years before present</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>Myr</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>The length of time elapsed expressed as millions of years between the event of interest and the year 1950 AD</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1285848422000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="130"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/MRAD</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Millirads per hour</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>mRad/hr</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>One thousandth part of an absorbed ionizing radiation dose equal to 100 ergs per gram of irradiated material received per hour</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1288873328000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="131"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMSC</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Milliseconds</string> 
@@ -3329,14 +3693,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="119"> 
+  <void index="132"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UUMV</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UUMV</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Millivolts</string> 
@@ -3357,14 +3721,42 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="120"> 
+  <void index="133"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/MOLE</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMIN</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Minutes</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>min</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A time interval of sixty seconds</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1284652408000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="134"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/MOLE</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Moles</string> 
@@ -3385,14 +3777,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="121"> 
+  <void index="135"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMPE</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMPE</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Moles per Einstein</string> 
@@ -3413,14 +3805,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="122"> 
+  <void index="136"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/MLM3</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/MLM3</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Moles per cubic metre</string> 
@@ -3441,14 +3833,42 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="123"> 
+  <void index="137"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/MLKG</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/MM3S</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Moles per cubic metre per second</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>mol/m^3/s</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Unavailable</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1273675927000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="138"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/MLKG</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Moles per kilogram</string> 
@@ -3469,14 +3889,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="124"> 
+  <void index="139"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/MLPS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/MLPS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Moles per second</string> 
@@ -3497,14 +3917,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="125"> 
+  <void index="140"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/M2MS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/M2MS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Moles per square metre per second</string> 
@@ -3525,14 +3945,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="126"> 
+  <void index="141"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/M2MM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/M2MM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Moles per square metre per second per metre</string> 
@@ -3553,14 +3973,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="127"> 
+  <void index="142"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/M2SR</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/M2SR</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Moles per square metre per second per metre per steradian</string> 
@@ -3581,14 +4001,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="128"> 
+  <void index="143"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/M3SR</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/M3SR</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Moles per square metre per second per steradian</string> 
@@ -3609,14 +4029,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="129"> 
+  <void index="144"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UNBQ</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UNBQ</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Nanobequerels per litre</string> 
@@ -3637,14 +4057,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="130"> 
+  <void index="145"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UNPI</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UNPI</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Nanograms</string> 
@@ -3665,14 +4085,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="131"> 
+  <void index="146"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UNID</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UNID</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Nanograms per day</string> 
@@ -3693,14 +4113,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="132"> 
+  <void index="147"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UNIM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UNIM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Nanograms per individual per minute</string> 
@@ -3721,14 +4141,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="133"> 
+  <void index="148"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UNGL</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UNGL</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Nanograms per litre</string> 
@@ -3749,14 +4169,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="134"> 
+  <void index="149"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UXNM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UXNM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Nanometres</string> 
@@ -3777,14 +4197,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="135"> 
+  <void index="150"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/KGNM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/KGNM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Nanomoles per kilogram</string> 
@@ -3805,14 +4225,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="136"> 
+  <void index="151"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPNM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPNM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Nanomoles per litre</string> 
@@ -3833,14 +4253,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="137"> 
+  <void index="152"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UNMD</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UNMD</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Nanomoles per litre per day</string> 
@@ -3861,14 +4281,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="138"> 
+  <void index="153"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UNMH</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UNMH</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Nanomoles per litre per hour</string> 
@@ -3889,14 +4309,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="139"> 
+  <void index="154"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/NMGH</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/NMGH</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Nanomoles per microgram per hour</string> 
@@ -3917,14 +4337,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="140"> 
+  <void index="155"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/NSQD</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/NSQD</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Nanomoles per square metre per day</string> 
@@ -3945,14 +4365,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="141"> 
+  <void index="156"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMAA</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMAA</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Nanoteslas</string> 
@@ -3973,14 +4393,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="142"> 
+  <void index="157"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/USTU</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/USTU</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Nephelometric Turbidity Units</string> 
@@ -3989,26 +4409,26 @@
      <string>NTU</string> 
     </void> 
     <void property="entryTermDef"> 
-     <string>Unavailable</string> 
+     <string>Standardised scale for nephelometric measurement of turbidity based on laboratory measurements against different concentrations of formazine.  Sometimes labelled STU or FTU.</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>788054400000</long> 
+        <long>1284633230000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="143"> 
+  <void index="158"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/NCUM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/NCUM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Newtons per cubic metre</string> 
@@ -4029,14 +4449,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="144"> 
+  <void index="159"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UNSM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UNSM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Newtons per square metre</string> 
@@ -4057,14 +4477,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="145"> 
+  <void index="160"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UKWN</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UKWN</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Not known</string> 
@@ -4073,26 +4493,26 @@
      <string>Unknown</string> 
     </void> 
     <void property="entryTermDef"> 
-     <string>Unavailable</string> 
+     <string>A unit of measure exists, but it is not known.</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1107361012000</long> 
+        <long>1284633230000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="146"> 
+  <void index="161"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/USPC</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/USPC</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Not specified</string> 
@@ -4101,26 +4521,26 @@
      <string>Unspec.</string> 
     </void> 
     <void property="entryTermDef"> 
-     <string>Unavailable</string> 
+     <string>The units are deliberately undefined such as abritrary units</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1107360892000</long> 
+        <long>1284633230000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="147"> 
+  <void index="162"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPMM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPMM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Number per cubic metre</string> 
@@ -4141,14 +4561,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="148"> 
+  <void index="163"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UNPG</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UNPG</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Number per gram</string> 
@@ -4169,14 +4589,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="149"> 
+  <void index="164"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UNAH</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UNAH</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Number per individual per hour</string> 
@@ -4197,14 +4617,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="150"> 
+  <void index="165"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UCPL</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UCPL</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Number per litre</string> 
@@ -4225,14 +4645,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="151"> 
+  <void index="166"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UCUL</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UCUL</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Number per microlitre</string> 
@@ -4253,14 +4673,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="152"> 
+  <void index="167"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UCML</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UCML</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Number per millilitre</string> 
@@ -4281,14 +4701,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="153"> 
+  <void index="168"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UCNL</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UCNL</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Number per nanolitre</string> 
@@ -4309,14 +4729,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="154"> 
+  <void index="169"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UVAY</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UVAY</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Number per square centimetre per thousand years</string> 
@@ -4337,14 +4757,42 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="155"> 
+  <void index="170"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPMS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/NPKM</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Number per square kilometre</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>#/km^2</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Unavailable</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1279610514000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="171"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPMS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Number per square metre</string> 
@@ -4365,14 +4813,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="156"> 
+  <void index="172"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UNDX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UNDX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Number per square metre per day</string> 
@@ -4393,14 +4841,42 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="157"> 
+  <void index="173"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UOHM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/OHMM</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Ohm metres</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>ohm.m</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Electrical resistance expressed in Ohms of a one metre length of conductor. Ohm is the SI unit of electrical resistance defined as the electrical resistance offered by a current-carrying element that produces a voltage drop of one volt when a current of one ampere is flowing through it.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1288872015000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="174"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UOHM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Ohms</string> 
@@ -4409,26 +4885,26 @@
      <string>ohm</string> 
     </void> 
     <void property="entryTermDef"> 
-     <string>Unavailable</string> 
+     <string>SI unit of electrical resistance defined as the electrical resistance offered by a current-carrying element that produces a voltage drop of one volt when a current of one ampere is flowing through it.</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1197376018000</long> 
+        <long>1284633230000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="158"> 
+  <void index="175"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPPB</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPPB</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Parts per billion</string> 
@@ -4449,14 +4925,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="159"> 
+  <void index="176"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UBLV</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UBLV</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Parts per billion by volume</string> 
@@ -4477,14 +4953,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="160"> 
+  <void index="177"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPPM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPPM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Parts per million</string> 
@@ -4493,26 +4969,26 @@
      <string>ppm</string> 
     </void> 
     <void property="entryTermDef"> 
-     <string>Unavailable</string> 
+     <string>Proportion of one part in 10**6 by weight, volume or amount (i.e. moles).  Milligrams/kilogram is a more explicit alternative for part per million by weight.</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>814019771000</long> 
+        <long>1284633230000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="161"> 
+  <void index="178"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMLV</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMLV</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Parts per million by volume</string> 
@@ -4533,14 +5009,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="162"> 
+  <void index="179"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPPT</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPPT</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Parts per thousand</string> 
@@ -4561,14 +5037,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="163"> 
+  <void index="180"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPTH</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPTH</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Parts per thousand per hour</string> 
@@ -4589,14 +5065,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="164"> 
+  <void index="181"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UTRV</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UTRV</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Parts per trillion by volume</string> 
@@ -4617,14 +5093,42 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="165"> 
+  <void index="182"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/PAMS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/PAMT</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Pascal metres</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>Pa.m</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Unavailable</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1286805667000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="183"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/PAMS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Pascal metres per second</string> 
@@ -4645,14 +5149,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="166"> 
+  <void index="184"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/PAM2</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/PAM2</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Pascal metres per second squared</string> 
@@ -4673,14 +5177,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="167"> 
+  <void index="185"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/PASS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/PASS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Pascal seconds</string> 
@@ -4701,14 +5205,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="168"> 
+  <void index="186"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/PPS2</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/PPS2</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Pascal squared per second squared</string> 
@@ -4729,14 +5233,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="169"> 
+  <void index="187"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/PASX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/PASX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Pascals</string> 
@@ -4757,14 +5261,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="170"> 
+  <void index="188"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/PAPM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/PAPM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Pascals per metre</string> 
@@ -4785,14 +5289,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="171"> 
+  <void index="189"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/PAPS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/PAPS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Pascals per second</string> 
@@ -4813,14 +5317,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="172"> 
+  <void index="190"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPCT</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPCT</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Percent</string> 
@@ -4841,14 +5345,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="173"> 
+  <void index="191"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPCD</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPCD</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Percent per day</string> 
@@ -4869,14 +5373,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="174"> 
+  <void index="192"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPCH</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPCH</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Percent per hour</string> 
@@ -4897,14 +5401,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="175"> 
+  <void index="193"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPOP</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPOP</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Percent per metre</string> 
@@ -4925,14 +5429,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="176"> 
+  <void index="194"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPDS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPDS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Percentage of dry sediment</string> 
@@ -4953,14 +5457,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="177"> 
+  <void index="195"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UGPG</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UGPG</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Picograms</string> 
@@ -4981,14 +5485,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="178"> 
+  <void index="196"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPMA</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPMA</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Picomoles per cubic metre</string> 
@@ -5009,14 +5513,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="179"> 
+  <void index="197"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPVT</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPVT</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Picomoles per cubic metre per second</string> 
@@ -5037,14 +5541,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="180"> 
+  <void index="198"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/KGPM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/KGPM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Picomoles per kilogram</string> 
@@ -5065,14 +5569,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="181"> 
+  <void index="199"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPML</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPML</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Picomoles per litre</string> 
@@ -5093,14 +5597,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="182"> 
+  <void index="200"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPMH</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPMH</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Picomoles per litre per hour</string> 
@@ -5121,14 +5625,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="183"> 
+  <void index="201"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPVW</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPVW</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Picomoles per metre per watt per second</string> 
@@ -5149,14 +5653,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="184"> 
+  <void index="202"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPMD</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPMD</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Picomoles per square metre per day</string> 
@@ -5177,14 +5681,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="185"> 
+  <void index="203"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/URAD</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/URAD</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Radians</string> 
@@ -5205,14 +5709,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="186"> 
+  <void index="204"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UTBB</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UTBB</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Seconds</string> 
@@ -5233,14 +5737,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="187"> 
+  <void index="205"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UECA</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UECA</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Siemens per metre</string> 
@@ -5261,14 +5765,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="188"> 
+  <void index="206"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMTC</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMTC</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Square Metres.Hertz squared</string> 
@@ -5289,14 +5793,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="189"> 
+  <void index="207"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UCMS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UCMS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Square centimetres per second</string> 
@@ -5317,14 +5821,42 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="190"> 
+  <void index="208"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/M2SX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/SQKM</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Square kilometres</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>km^2</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Unavailable</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1279610608000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="209"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/M2SX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Square metre seconds</string> 
@@ -5345,14 +5877,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="191"> 
+  <void index="210"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/M2RD</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/M2RD</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Square metre seconds per radian</string> 
@@ -5373,14 +5905,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="192"> 
+  <void index="211"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMSQ</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMSQ</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Square metres</string> 
@@ -5401,14 +5933,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="193"> 
+  <void index="212"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMHZ</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMHZ</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Square metres per Hertz</string> 
@@ -5429,14 +5961,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="194"> 
+  <void index="213"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMSG</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMSG</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Square metres per gram of dry sediment</string> 
@@ -5457,14 +5989,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="195"> 
+  <void index="214"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/SQMS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/SQMS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Square metres per second</string> 
@@ -5485,14 +6017,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="196"> 
+  <void index="215"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/SQM2</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/SQM2</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Square metres per second squared</string> 
@@ -5513,14 +6045,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="197"> 
+  <void index="216"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMTN</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMTN</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Square metres per squared hertz</string> 
@@ -5541,14 +6073,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="198"> 
+  <void index="217"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMTB</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMTB</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Square metres.Hertz</string> 
@@ -5569,14 +6101,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="199"> 
+  <void index="218"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMTE</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMTE</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Square metres.Hertz^4</string> 
@@ -5597,14 +6129,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="200"> 
+  <void index="219"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMTD</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMTD</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Square metres.cubic Hertz</string> 
@@ -5625,14 +6157,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="201"> 
+  <void index="220"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/USUM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/USUM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Square microns per millilitre</string> 
@@ -5653,14 +6185,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="202"> 
+  <void index="221"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/USVD</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/USVD</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Sverdrup</string> 
@@ -5669,26 +6201,26 @@
      <string>Sv</string> 
     </void> 
     <void property="entryTermDef"> 
-     <string>Unavailable</string> 
+     <string>One Sverdrup is a million cubic metres per second or a million cumecs</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1129286870000</long> 
+        <long>1284633230000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="203"> 
+  <void index="222"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UUTU</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UUTU</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Tritium units (10**18H/Tr)</string> 
@@ -5709,14 +6241,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="204"> 
+  <void index="223"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UVLT</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UVLT</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Volts</string> 
@@ -5737,14 +6269,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="205"> 
+  <void index="224"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/WSMM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/WSMM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Watt seconds per square metre</string> 
@@ -5765,14 +6297,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="206"> 
+  <void index="225"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/WATT</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/WATT</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Watts</string> 
@@ -5793,14 +6325,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="207"> 
+  <void index="226"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UWCM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UWCM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Watts per cubic metre</string> 
@@ -5821,14 +6353,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="208"> 
+  <void index="227"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/WAPM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/WAPM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Watts per metre</string> 
@@ -5849,14 +6381,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="209"> 
+  <void index="228"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/WAPK</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/WAPK</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Watts per metre per Kelvin</string> 
@@ -5877,14 +6409,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="210"> 
+  <void index="229"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UFAA</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UFAA</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Watts per square metre</string> 
@@ -5905,14 +6437,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="211"> 
+  <void index="230"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/WM2M</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/WM2M</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Watts per square metre per metre</string> 
@@ -5933,14 +6465,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="212"> 
+  <void index="231"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/WM2S</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/WM2S</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Watts per square metre per metre per steradian</string> 
@@ -5961,14 +6493,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="213"> 
+  <void index="232"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UWNM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UWNM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Watts per square metre per nanometre</string> 
@@ -5989,14 +6521,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="214"> 
+  <void index="233"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UWNS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UWNS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Watts per square metre per nanometre per steradian</string> 
@@ -6017,14 +6549,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="215"> 
+  <void index="234"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/WMSS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/WMSS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Watts per square metre per steradian</string> 
@@ -6045,14 +6577,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="216"> 
+  <void index="235"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UYRS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UYRS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>Years</string> 
@@ -6061,82 +6593,54 @@
      <string>yr</string> 
     </void> 
     <void property="entryTermDef"> 
-     <string>Unavailable</string> 
+     <string>A time interval of 365.25 days or 31557600 seconds</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>1068045192000</long> 
+        <long>1284652621000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="217"> 
+  <void index="236"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UYMD</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UYBP</string> 
     </void> 
     <void property="entryTerm"> 
-     <string>Years Months Days (yyyymmdd)</string> 
-    </void> 
-    <void property="entryTermAbbr"> 
-     <string>yyyymmdd</string> 
-    </void> 
-    <void property="entryTermDef"> 
-     <string>Unavailable</string> 
-    </void> 
-    <void property="entryTermLastMod"> 
-     <object class="java.util.GregorianCalendar"> 
-      <void property="time"> 
-       <object class="java.util.Date"> 
-        <long>881020800000</long> 
-       </object> 
-      </void> 
-     </object> 
-    </void> 
-    <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void index="218"> 
-   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
-    <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UYBP</string> 
-    </void> 
-    <void property="entryTerm"> 
-     <string>Years before present (1950)</string> 
+     <string>Years before present</string> 
     </void> 
     <void property="entryTermAbbr"> 
      <string>BP</string> 
     </void> 
     <void property="entryTermDef"> 
-     <string>Unavailable</string> 
+     <string>The length of time elapsed expressed as years between the event of interest and the year 1950 AD</string> 
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
       <void property="time"> 
        <object class="java.util.Date"> 
-        <long>846198000000</long> 
+        <long>1285848576000</long> 
        </object> 
       </void> 
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="219"> 
+  <void index="237"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/M4S1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/M4S1</string> 
     </void> 
     <void property="entryTerm"> 
      <string>metres to the power four per second</string> 
@@ -6157,14 +6661,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="220"> 
+  <void index="238"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UUPH</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UUPH</string> 
     </void> 
     <void property="entryTerm"> 
      <string>pH units</string> 
@@ -6185,14 +6689,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="221"> 
+  <void index="239"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/PPPS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/PPPS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>per Pascal per second</string> 
@@ -6213,14 +6717,42 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="222"> 
+  <void index="240"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/M3PS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/PCUM</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>per cubic metre</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>/m^3</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Volume of a cube with sides of length 1 metre</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1286805488000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="241"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/M3PS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>per cubic metre per second</string> 
@@ -6241,14 +6773,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="223"> 
+  <void index="242"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPDY</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPDY</string> 
     </void> 
     <void property="entryTerm"> 
      <string>per day</string> 
@@ -6269,14 +6801,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="224"> 
+  <void index="243"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UFPD</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UFPD</string> 
     </void> 
     <void property="entryTerm"> 
      <string>per female per day</string> 
@@ -6297,14 +6829,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="225"> 
+  <void index="244"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPRM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPRM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>per metre</string> 
@@ -6325,14 +6857,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="226"> 
+  <void index="245"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMNX</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMNX</string> 
     </void> 
     <void property="entryTerm"> 
      <string>per metre per nanometre</string> 
@@ -6353,14 +6885,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="227"> 
+  <void index="246"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UMNS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UMNS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>per metre per nanometre per steradian</string> 
@@ -6381,14 +6913,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="228"> 
+  <void index="247"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/PMPS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/PMPS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>per metre per second</string> 
@@ -6409,14 +6941,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="229"> 
+  <void index="248"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/PMSR</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/PMSR</string> 
     </void> 
     <void property="entryTerm"> 
      <string>per metre per steradian</string> 
@@ -6437,14 +6969,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="230"> 
+  <void index="249"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/PMSC</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/PMSC</string> 
     </void> 
     <void property="entryTerm"> 
      <string>per millisecond</string> 
@@ -6465,14 +6997,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="231"> 
+  <void index="250"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/PRSC</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/PRSC</string> 
     </void> 
     <void property="entryTerm"> 
      <string>per second</string> 
@@ -6493,14 +7025,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="232"> 
+  <void index="251"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UPSS</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UPSS</string> 
     </void> 
     <void property="entryTerm"> 
      <string>per second squared</string> 
@@ -6521,14 +7053,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="233"> 
+  <void index="252"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/PMSQ</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/PMSQ</string> 
     </void> 
     <void property="entryTerm"> 
      <string>per square metre</string> 
@@ -6549,14 +7081,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="234"> 
+  <void index="253"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/M2S2</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/M2S2</string> 
     </void> 
     <void property="entryTerm"> 
      <string>per square metre per second</string> 
@@ -6577,14 +7109,70 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 
-  <void index="235"> 
+  <void index="254"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/P061/21/UDTM</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/PSTR</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>per steradian</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>/sr</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Unavailable</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1268385878000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="255"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/PMLD</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>picomoles/litre/day</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>pmol/l/d</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Unavailable</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1277896477000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="256"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/P061/31/UDTM</string> 
     </void> 
     <void property="entryTerm"> 
      <string>yyyymmddhh24miss.dd</string> 
@@ -6605,7 +7193,7 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/P061/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/P061/31</string> 
     </void> 
    </object> 
   </void> 

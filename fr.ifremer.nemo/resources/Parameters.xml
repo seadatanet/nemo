@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.6.0_02" class="java.beans.XMLDecoder"> 
+<java version="1.6.0_21" class="java.beans.XMLDecoder"> 
  <object class="java.util.ArrayList"> 
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
@@ -90,6 +90,25 @@
     </void> 
     <void property="name"> 
      <string>AMMONIUM (NH4-N) CONTENT</string> 
+    </void> 
+    <void property="unit"> 
+     <string>millimole/m3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
+     <string>AMOP</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>999.999</string> 
+    </void> 
+    <void property="format"> 
+     <string>%7.3f</string> 
+    </void> 
+    <void property="name"> 
+     <string>AMONIUM IN SEDIMENT PORE WATER</string> 
     </void> 
     <void property="unit"> 
      <string>millimole/m3</string> 
@@ -1277,6 +1296,25 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
     <void property="code"> 
+     <string>DICP</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>99.999</string> 
+    </void> 
+    <void property="format"> 
+     <string>%6.3f</string> 
+    </void> 
+    <void property="name"> 
+     <string>DIC IN SEDIMENT PORE WATER</string> 
+    </void> 
+    <void property="unit"> 
+     <string>gram/m3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
      <string>DINW</string> 
     </void> 
     <void property="defaultValue"> 
@@ -1309,6 +1347,25 @@
     </void> 
     <void property="unit"> 
      <string>milligram carbon/(m2.day)</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
+     <string>DOCP</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>99.999</string> 
+    </void> 
+    <void property="format"> 
+     <string>%6.3f</string> 
+    </void> 
+    <void property="name"> 
+     <string>DOC IN SEDIMENT PORE WATER</string> 
+    </void> 
+    <void property="unit"> 
+     <string>gram/m3</string> 
     </void> 
    </object> 
   </void> 
@@ -3747,6 +3804,25 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
     <void property="code"> 
+     <string>NTAP</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>999.999</string> 
+    </void> 
+    <void property="format"> 
+     <string>%7.3f</string> 
+    </void> 
+    <void property="name"> 
+     <string>NITRATE IN SEDIMENT PORE WATER</string> 
+    </void> 
+    <void property="unit"> 
+     <string>millimole/m3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
      <string>NTAW</string> 
     </void> 
     <void property="defaultValue"> 
@@ -3760,6 +3836,25 @@
     </void> 
     <void property="unit"> 
      <string>micromole/kg</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
+     <string>NTIP</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>9.999</string> 
+    </void> 
+    <void property="format"> 
+     <string>%5.3f</string> 
+    </void> 
+    <void property="name"> 
+     <string>NITRITE IN SEDIMENT PORE WATER</string> 
+    </void> 
+    <void property="unit"> 
+     <string>millimole/m3</string> 
     </void> 
    </object> 
   </void> 
@@ -4292,6 +4387,25 @@
     </void> 
     <void property="unit"> 
      <string>microgram/g</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
+     <string>PHOP</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>99.999</string> 
+    </void> 
+    <void property="format"> 
+     <string>%6.3f</string> 
+    </void> 
+    <void property="name"> 
+     <string>PHOSPHATE IN SEDIMT PORE WATER</string> 
+    </void> 
+    <void property="unit"> 
+     <string>millimole/m3</string> 
     </void> 
    </object> 
   </void> 
@@ -6103,6 +6217,25 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
     <void property="code"> 
+     <string>VEPK</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>999.99999</string> 
+    </void> 
+    <void property="format"> 
+     <string>%9.5f</string> 
+    </void> 
+    <void property="name"> 
+     <string>WAVE SPECTRUM PEAK ENERGY</string> 
+    </void> 
+    <void property="unit"> 
+     <string>m2.second</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
      <string>VERR</string> 
     </void> 
     <void property="defaultValue"> 
@@ -6211,6 +6344,63 @@
     </void> 
     <void property="unit"> 
      <string>ppm</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
+     <string>VPED</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>999</string> 
+    </void> 
+    <void property="format"> 
+     <string>%3.0f</string> 
+    </void> 
+    <void property="name"> 
+     <string>WAVE SPECTRUM PEAK ENERGY DIR.</string> 
+    </void> 
+    <void property="unit"> 
+     <string>degree</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
+     <string>VPSP</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>999</string> 
+    </void> 
+    <void property="format"> 
+     <string>%3.0f</string> 
+    </void> 
+    <void property="name"> 
+     <string>DIR. SPREADING AT WAVE PEAK</string> 
+    </void> 
+    <void property="unit"> 
+     <string>degree</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
+     <string>VSMC</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>99.9</string> 
+    </void> 
+    <void property="format"> 
+     <string>%4.1f</string> 
+    </void> 
+    <void property="name"> 
+     <string>SPECT. MOMENT(0,2) WAVE PERIOD</string> 
+    </void> 
+    <void property="unit"> 
+     <string>second</string> 
     </void> 
    </object> 
   </void> 
