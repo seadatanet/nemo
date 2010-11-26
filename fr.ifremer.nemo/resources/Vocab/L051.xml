@@ -1,10 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.6.0_06" class="java.beans.XMLDecoder"> 
- <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="24"> 
+<java version="1.6.0_21" class="java.beans.XMLDecoder"> 
+ <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="30"> 
   <void index="0"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/13</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/64</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>active fishing gear</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Apparatus where capture is based on chasing the target species (e.g. a trawl).</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1280481877000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="1"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/13</string> 
     </void> 
     <void property="entryTerm"> 
      <string>aerosol samplers</string> 
@@ -22,14 +47,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
     </void> 
    </object> 
   </void> 
-  <void index="1"> 
+  <void index="2"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/24</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/62</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>beam trawls</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Nets towed over the sea floor having the horizontal net opening provided by a wooden or metal beam that disrupts the surface of the bed.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1280481575000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="3"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/24</string> 
     </void> 
     <void property="entryTerm"> 
      <string>benthos samplers</string> 
@@ -47,14 +97,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
     </void> 
    </object> 
   </void> 
-  <void index="2"> 
+  <void index="4"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/58</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/58</string> 
     </void> 
     <void property="entryTerm"> 
      <string>continuous air samplers</string> 
@@ -72,14 +122,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
     </void> 
    </object> 
   </void> 
-  <void index="3"> 
+  <void index="5"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/31</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/31</string> 
     </void> 
     <void property="entryTerm"> 
      <string>continuous water samplers</string> 
@@ -97,14 +147,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
     </void> 
    </object> 
   </void> 
-  <void index="4"> 
+  <void index="6"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/11</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/61</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>demersal trawl nets</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Nets towed over the sea floor designed to sample species living on or near the bottom.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1280481381000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="7"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/11</string> 
     </void> 
     <void property="entryTerm"> 
      <string>discrete air samplers</string> 
@@ -122,14 +197,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
     </void> 
    </object> 
   </void> 
-  <void index="5"> 
+  <void index="8"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/30</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/30</string> 
     </void> 
     <void property="entryTerm"> 
      <string>discrete water samplers</string> 
@@ -147,14 +222,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
     </void> 
    </object> 
   </void> 
-  <void index="6"> 
+  <void index="9"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/12</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/12</string> 
     </void> 
     <void property="entryTerm"> 
      <string>fog samplers</string> 
@@ -172,14 +247,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
     </void> 
    </object> 
   </void> 
-  <void index="7"> 
+  <void index="10"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/90</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/90</string> 
     </void> 
     <void property="entryTerm"> 
      <string>manual biota samplers</string> 
@@ -197,14 +272,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
     </void> 
    </object> 
   </void> 
-  <void index="8"> 
+  <void index="11"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/57</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/57</string> 
     </void> 
     <void property="entryTerm"> 
      <string>manual rock samplers</string> 
@@ -222,39 +297,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
     </void> 
    </object> 
   </void> 
-  <void index="9"> 
+  <void index="12"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/51</string> 
-    </void> 
-    <void property="entryTerm"> 
-     <string>mud corers</string> 
-    </void> 
-    <void property="entryTermDef"> 
-     <string>A device designed to collect a sample of mud from between the surface and depths from a metre to 10s of metres with minimal disturbance of the sediment structure</string> 
-    </void> 
-    <void property="entryTermLastMod"> 
-     <object class="java.util.GregorianCalendar"> 
-      <void property="time"> 
-       <object class="java.util.Date"> 
-        <long>1195548603000</long> 
-       </object> 
-      </void> 
-     </object> 
-    </void> 
-    <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void index="10"> 
-   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
-    <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/182</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/182</string> 
     </void> 
     <void property="entryTerm"> 
      <string>not applicable</string> 
@@ -272,14 +322,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
     </void> 
    </object> 
   </void> 
-  <void index="11"> 
+  <void index="13"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/32</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/32</string> 
     </void> 
     <void property="entryTerm"> 
      <string>particulates samplers</string> 
@@ -297,14 +347,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
     </void> 
    </object> 
   </void> 
-  <void index="12"> 
+  <void index="14"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/23</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/63</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>passive fishing gear</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Apparatus where capture is based on the movement of the target species towards the gear (e.g. creels and fish traps).</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1280481768000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="15"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/23</string> 
     </void> 
     <void property="entryTerm"> 
      <string>pelagic trawl nets</string> 
@@ -322,14 +397,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
     </void> 
    </object> 
   </void> 
-  <void index="13"> 
+  <void index="16"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/22</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/22</string> 
     </void> 
     <void property="entryTerm"> 
      <string>plankton nets</string> 
@@ -347,14 +422,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
     </void> 
    </object> 
   </void> 
-  <void index="14"> 
+  <void index="17"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/21</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/21</string> 
     </void> 
     <void property="entryTerm"> 
      <string>plankton recorders</string> 
@@ -372,14 +447,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
     </void> 
    </object> 
   </void> 
-  <void index="15"> 
+  <void index="18"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/14</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/14</string> 
     </void> 
     <void property="entryTerm"> 
      <string>precipitation samplers</string> 
@@ -397,14 +472,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
     </void> 
    </object> 
   </void> 
-  <void index="16"> 
+  <void index="19"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/53</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/53</string> 
     </void> 
     <void property="entryTerm"> 
      <string>rock corers</string> 
@@ -422,14 +497,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
     </void> 
    </object> 
   </void> 
-  <void index="17"> 
+  <void index="20"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/54</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/54</string> 
     </void> 
     <void property="entryTerm"> 
      <string>rock dredges</string> 
@@ -447,14 +522,64 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
     </void> 
    </object> 
   </void> 
-  <void index="18"> 
+  <void index="21"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/50</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/59</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>sampling extent markers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Devices that label the region within which sampling is to be confined such as permanent quadrants and location markers.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1271944590000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="22"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/60</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>sediment dredges</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Bucket-like containers hauled over the sea bed collecting integrated samples of surface sediment along a segment of ship track.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1279609614000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="23"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/50</string> 
     </void> 
     <void property="entryTerm"> 
      <string>sediment grabs</string> 
@@ -472,14 +597,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
     </void> 
    </object> 
   </void> 
-  <void index="19"> 
+  <void index="24"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/52</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/52</string> 
     </void> 
     <void property="entryTerm"> 
      <string>sediment porewater samplers</string> 
@@ -497,14 +622,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
     </void> 
    </object> 
   </void> 
-  <void index="20"> 
+  <void index="25"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/55</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/55</string> 
     </void> 
     <void property="entryTerm"> 
      <string>sediment settling tubes</string> 
@@ -522,14 +647,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
     </void> 
    </object> 
   </void> 
-  <void index="21"> 
+  <void index="26"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/33</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/33</string> 
     </void> 
     <void property="entryTerm"> 
      <string>sediment traps</string> 
@@ -547,14 +672,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
     </void> 
    </object> 
   </void> 
-  <void index="22"> 
+  <void index="27"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/56</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/56</string> 
     </void> 
     <void property="entryTerm"> 
      <string>snow and ice samplers</string> 
@@ -572,14 +697,39 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
     </void> 
    </object> 
   </void> 
-  <void index="23"> 
+  <void index="28"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L051/1/999</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/51</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>unconsolidated sediment corers</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Devices designed to collect samples of unconsolidated sediment from between the surface and depths from a metre to 10s of metres with minimal disturbance of the sediment structure.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1279609417000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="29"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L051/4/999</string> 
     </void> 
     <void property="entryTerm"> 
      <string>unknown</string> 
@@ -597,7 +747,7 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L051/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L051/4</string> 
     </void> 
    </object> 
   </void> 
