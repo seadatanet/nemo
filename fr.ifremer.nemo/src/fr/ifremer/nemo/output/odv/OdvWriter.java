@@ -20,6 +20,7 @@ import fr.ifremer.nemo.input.ParameterModel;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.util.Conversion;
+import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
@@ -65,6 +66,10 @@ public class OdvWriter extends NemoWriter{
                 
                 for (Station st : station.getStations(inputFilePath)){
                     
+                    if (checkStationAlreadyExists(st.getReference()))
+                    {
+                        throw new GenerationException(Messages.error_convert_stationsDoubles); 
+                    }
                     if (processType == E_ProcessType.COLLECTION_DIR){
                         new File(outputFileName).mkdir();
                     }
@@ -97,6 +102,10 @@ public class OdvWriter extends NemoWriter{
                 outputFileWriter.println(cruiseHeader);
     
                 for (Station st : station.getStations(inputFilePath)){
+                    if (checkStationAlreadyExists(st.getReference()))
+                    {
+                        throw new GenerationException(Messages.error_convert_stationsDoubles); 
+                    }
                     //FAE 6087 reinitialisation de la reference à lecture fichier entree (car pour ecrire une station on lit tout le fichier)
                     iDomain.getCruise().getStation().updateRef();
                     writeStation(st, inputFilePath, outputFileName);

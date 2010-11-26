@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.Collections;
+import java.util.HashSet;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.domain.InputDomain;
@@ -49,11 +50,26 @@ public abstract class NemoWriter{
     
     protected final InputDomain iDomain;
 
+    protected HashSet<String> stationsList;
 
 	protected NemoWriter() {
         iDomain = Nemo.getInstance().getDomain();
+        stationsList = new HashSet<String>();
 	}
 	
+    protected boolean checkStationAlreadyExists(String stationRef)
+    {
+        boolean alreadyExist = false;
+        if (stationsList.contains(stationRef))
+        {
+            alreadyExist=true;
+        }else
+        {
+            stationsList.add(stationRef);
+        }
+        
+        return alreadyExist;
+    }
 	/**
 	 * @throws GenerationException
 	 */
@@ -100,7 +116,8 @@ public abstract class NemoWriter{
                                 if (inputStationHeader != null){
                                     st = new Station(inputFile.getName(),inputStationHeader);
                                     String ref = stationDomain.getReference(inputFile.getName(), inputStationHeader);
-                                    st.setReference(ref);
+                                  
+                                   st.setReference(ref);
                                     
                                     if (stationDomain.isSomeInData()){
                                         // la première ligne des données est déjà "consommée" dans stationHeaderBuffer 

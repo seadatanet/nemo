@@ -20,6 +20,7 @@ import fr.ifremer.nemo.input.ParameterModel;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.util.Conversion;
+import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Global.E_EndData;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.presdepth.CalcPres;
@@ -63,6 +64,10 @@ public class MedatlasWriter extends NemoWriter{
             
             for (Station currentStation : station.getStations(inputFilePath)){
                 
+               if (checkStationAlreadyExists(currentStation.getReference()))
+               {
+                   throw new GenerationException(Messages.error_convert_stationsDoubles); 
+               }
                 CalcPres.init();     
                 
                 File inputFile= new File(inputFilePath + File.separator + currentStation.getFileName());

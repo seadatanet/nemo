@@ -240,6 +240,7 @@ public class Messages {
     public static String error_convert_position;
     public static String error_convert_outputDir;
     public static String error_convert_outputFile;
+    public static String error_convert_stationsDoubles;
     
     public static String error_unknown_format;
 
