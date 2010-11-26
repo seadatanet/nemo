@@ -1,15 +1,12 @@
 package fr.ifremer.nemo.ui.edit.data;
 
-import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Table;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.input.LineFragment;

@@ -15,7 +15,6 @@ import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.input.DataType;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.NemoSection;
-import fr.ifremer.nemo.ui.edit.station.EditStationForm;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 

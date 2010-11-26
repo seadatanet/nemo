@@ -1,30 +1,8 @@
 package fr.ifremer.nemo.ui;
 
-import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.swt.widgets.Text;
-
-import fr.ifremer.nemo.config.EdmoHandler;
-import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.ui.edit.cruise.TableDataSurvey;
-import fr.ifremer.nemo.ui.edit.cruise.TableWS_Survey;
-import fr.ifremer.nemo.ui.edit.cruise.TypeSurvey;
-import fr.ifremer.nemo.ui.edit.data.TableData;
-import fr.ifremer.nemo.ui.edit.data.TypeData;
 import fr.ifremer.nemo.ui.tables.AbstractFilteredTable;
 import fr.ifremer.nemo.ui.tables.DatacentreFilteredTable;
 import fr.ifremer.nemo.ui.tables.DatatypeFilteredTable;

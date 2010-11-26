@@ -13,8 +13,6 @@ import java.util.regex.Pattern;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
@@ -23,9 +21,7 @@ import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.Configuration.DataListEnum;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.data.TableData;
-import fr.ifremer.nemo.ui.edit.data.TypeData;
 import fr.ifremer.nemo.ui.edit.data.TypeUnit;
-import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 /**

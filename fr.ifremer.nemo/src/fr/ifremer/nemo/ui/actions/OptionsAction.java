@@ -68,7 +68,6 @@ import fr.ifremer.nemo.domain.AddedParameter.IdParameter;
 import fr.ifremer.nemo.ui.Application;
 import fr.ifremer.nemo.ui.ApplicationActionBarAdvisor;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.edit.data.TableData;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;

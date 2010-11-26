@@ -19,7 +19,6 @@ import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.cruise.TableDataSurvey;
-import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;

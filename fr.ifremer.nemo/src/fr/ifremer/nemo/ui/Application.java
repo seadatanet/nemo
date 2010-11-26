@@ -11,7 +11,6 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 import org.eclipse.core.runtime.IPlatformRunnable;
-import org.eclipse.swt.opengl.GLCanvas;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 

@@ -12,7 +12,6 @@ import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
@@ -57,11 +56,8 @@ public class ViewMain extends ViewPart
     private  int etape;
     private  int  affiche;
 
-    public  boolean writeResume;
-  
     private  TabFolder tabFolder;
 
-    public  Button btnTestWS = null;
     private FilteredTableFactory myFilteredTableFactory;
     private boolean cruiseEnabled;
     

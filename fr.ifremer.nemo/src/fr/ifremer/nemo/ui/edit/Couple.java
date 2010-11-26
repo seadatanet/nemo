@@ -21,11 +21,9 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com.sun.xml.internal.bind.v2.runtime.reflect.Lister.Pack;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 

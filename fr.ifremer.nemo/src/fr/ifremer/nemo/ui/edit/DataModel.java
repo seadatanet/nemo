@@ -1,36 +1,5 @@
 package fr.ifremer.nemo.ui.edit;
 
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.regex.Pattern;
-
-import com.ibm.icu.text.SimpleDateFormat;
-
-import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.domain.StationDomain;
-import fr.ifremer.nemo.input.CruiseModel;
-import fr.ifremer.nemo.input.LineFragment;
-import fr.ifremer.nemo.input.MediaModel;
-import fr.ifremer.nemo.input.Parameter;
-import fr.ifremer.nemo.input.ParameterModel;
-import fr.ifremer.nemo.input.PropertyModel;
-import fr.ifremer.nemo.input.StationModel;
-import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.edit.cruise.EditCruiseForm;
-import fr.ifremer.nemo.ui.edit.cruise.TableDataSurvey;
-import fr.ifremer.nemo.ui.edit.data.TableData;
-import fr.ifremer.nemo.ui.edit.data.TypeData;
-import fr.ifremer.nemo.ui.edit.file.EditFileForm;
-import fr.ifremer.nemo.ui.edit.station.EditStationForm;
-import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.Intern;
-import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.nemo.util.Global.E_EndData;
-import fr.ifremer.nemo.util.Global.E_InputType;
-import fr.ifremer.nemo.util.format.DateTimeFormat;
-import fr.ifremer.nemo.ws.WSDataType;
-
 public class DataModel
 {
     /*

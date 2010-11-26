@@ -22,7 +22,6 @@ import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.StationDomain;
 import fr.ifremer.nemo.input.ParameterModel;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;

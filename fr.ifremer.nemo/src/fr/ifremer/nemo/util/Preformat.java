@@ -14,7 +14,6 @@ import fr.ifremer.nemo.domain.MediaDomain;
 import fr.ifremer.nemo.ui.Application;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
-import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global.E_EndData;
 
 public class Preformat

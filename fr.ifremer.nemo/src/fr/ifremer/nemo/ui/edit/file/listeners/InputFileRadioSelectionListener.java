@@ -10,7 +10,6 @@ import org.eclipse.swt.events.SelectionListener;
 import  org.eclipse.swt.events.SelectionEvent;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 /**
  * Description: gestion des boutons radio et checkbox pour la e groupe inputFile de l'onglet File

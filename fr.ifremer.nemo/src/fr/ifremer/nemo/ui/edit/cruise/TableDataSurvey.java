@@ -24,7 +24,6 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.tables.DatatypeFilteredTable;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSDataType;
