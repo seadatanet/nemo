@@ -68,7 +68,7 @@ public class OdvWriter extends NemoWriter{
                     
                     if (checkStationAlreadyExists(st.getReference()))
                     {
-                        throw new GenerationException(Messages.error_convert_stationsDoubles); 
+                        throw new GenerationException(Messages.error_convert_stationsDoubles + st.getReference()); 
                     }
                     if (processType == E_ProcessType.COLLECTION_DIR){
                         new File(outputFileName).mkdir();
@@ -104,7 +104,7 @@ public class OdvWriter extends NemoWriter{
                 for (Station st : station.getStations(inputFilePath)){
                     if (checkStationAlreadyExists(st.getReference()))
                     {
-                        throw new GenerationException(Messages.error_convert_stationsDoubles); 
+                        throw new GenerationException(Messages.error_convert_stationsDoubles + st.getReference()); 
                     }
                     //FAE 6087 reinitialisation de la reference à lecture fichier entree (car pour ecrire une station on lit tout le fichier)
                     iDomain.getCruise().getStation().updateRef();
