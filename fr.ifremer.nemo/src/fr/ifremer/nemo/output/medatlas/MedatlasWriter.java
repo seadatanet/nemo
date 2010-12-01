@@ -46,91 +46,97 @@ public class MedatlasWriter extends NemoWriter{
 	 */
 	@Override
 	public final void writeFile(String inputFilePath) throws GenerationException {
-        try{
-            String outputFileName = iDomain.getMedia().getOutputFileName();
-            outputFileWriter = new PrintWriter(new BufferedWriter(new FileWriter(outputFileName)));
-            
-            CruiseDomain cruise = iDomain.getCruise();
-            StationDomain station = cruise.getStation();
-            DataDomain data = station.getData();
-            
-    
-            // écriture de l'entête campagne
-            StringBuffer cruiseHeader = cruise.getHeader(c);
-            outputFileWriter.println(cruiseHeader);
-            
-            station.updateRef();
-            
-            
-            for (Station currentStation : station.getStations(inputFilePath)){
+	    try{
+	        String outputFileName = iDomain.getMedia().getOutputFileName();
+	        outputFileWriter = new PrintWriter(new BufferedWriter(new FileWriter(outputFileName)));
+
+	        CruiseDomain cruise = iDomain.getCruise();
+	        StationDomain station = cruise.getStation();
+	        DataDomain data = station.getData();
+
+
+	        // écriture de l'entête campagne
+	        StringBuffer cruiseHeader = cruise.getHeader(c);
+	        outputFileWriter.println(cruiseHeader);
+
+	        station.updateRef();
+
+
+	        for (Station currentStation : station.getStations(inputFilePath)){
+
+	            if (checkStationAlreadyExists(currentStation.getReference()))
+	            {
+	                throw new GenerationException(Messages.error_convert_stationsDoubles + currentStation.getReference()); 
+	            }
+	            CalcPres.init();     
+
+	            File inputFile= new File(inputFilePath + File.separator + currentStation.getFileName());
+	            bufferedReader = new BufferedReader(new FileReader(inputFile));
+
+	            indexRecord = 0;           
+	            stationDatas.clear();
+	            boolean stationWrited = false;
+
+	            // scan the InputFile line by line
+	            while ((readedLine = bufferedReader.readLine()) != null) {
+	                numLine++;
+
+	                if (numLine == 1){
+	                    consumeFileHeader();
+	                }
+
+	                if (isEndData() && stationWrited){
+	                    // écriture de la dernière ligne de données
+	                    writeLastDataLine(data, currentStation, outputFileName);
+	                }
+
+	                if (isStartStationHeader()){
+	                    // écriture de l'entête station
+	                    String[] inputStationHeader = consumeStationHeader();
+	                    if (inputStationHeader != null &&
+	                            currentStation.getReference().equals(station.getReference(currentStation.getFileName(), inputStationHeader))){
+	                        outputFileWriter.println(station.getHeader(c, currentStation, inputStationHeader));
+
+	                        // écriture de l'entête des données (titres des colonnes)
+	                        outputFileWriter.println(data.getDataHeader(c));
+
+	                        if (station.isSomeInData()){
+	                            // la première ligne des données est déjà "consommée" dans stationHeaderBuffer
+	                            String inputLine = inputStationHeader[inputStationHeader.length -1];
+	                            writeDataLine(data, currentStation, inputLine);
+	                        }
+	                        writeDataLine(data, currentStation, readedLine);
+	                        stationWrited = true;
+	                    }
+	                    else if (stationWrited || inputStationHeader == null){
+	                        break;
+	                    }
+	                }
+	                else if (stationWrited){
+	                    // écriture de la ligne de données
+	                    //indexRecord++;
+	                    //outputFileWriter.println(data.getDataLine(c, currentStation, readedLine, indexRecord));
+	                    writeDataLine(data, currentStation, readedLine);
+	                }
+	            }
+
+	            if (iDomain.getMedia().getModel().getEndData() == E_EndData.EOF && stationWrited){
+	                // écriture de la dernière ligne de données
+	                writeLastDataLine(data, currentStation, outputFileName);
+	            }
                 
-               if (checkStationAlreadyExists(currentStation.getReference()))
-               {
-                   throw new GenerationException(Messages.error_convert_stationsDoubles); 
-               }
-                CalcPres.init();     
-                
-                File inputFile= new File(inputFilePath + File.separator + currentStation.getFileName());
-                bufferedReader = new BufferedReader(new FileReader(inputFile));
-                
-                indexRecord = 0;           
-                stationDatas.clear();
-                boolean stationWrited = false;
-        		
-        		// scan the InputFile line by line
-        		while ((readedLine = bufferedReader.readLine()) != null) {
-        			numLine++;
-                    
-                    if (numLine == 1){
-                        consumeFileHeader();
-                    }
-                    
-                    if (isEndData() && stationWrited){
-                        // écriture de la dernière ligne de données
-                        writeLastDataLine(data, currentStation, outputFileName);
-                    }
-                    
-                    if (isStartStationHeader()){
-                        // écriture de l'entête station
-                        String[] inputStationHeader = consumeStationHeader();
-                        if (inputStationHeader != null &&
-                                currentStation.getReference().equals(station.getReference(currentStation.getFileName(), inputStationHeader))){
-                            outputFileWriter.println(station.getHeader(c, currentStation, inputStationHeader));
-            
-                            // écriture de l'entête des données (titres des colonnes)
-                            outputFileWriter.println(data.getDataHeader(c));
-                            
-                            if (station.isSomeInData()){
-                                // la première ligne des données est déjà "consommée" dans stationHeaderBuffer
-                                String inputLine = inputStationHeader[inputStationHeader.length -1];
-                                writeDataLine(data, currentStation, inputLine);
-                            }
-                            writeDataLine(data, currentStation, readedLine);
-                            stationWrited = true;
-                        }
-                        else if (stationWrited || inputStationHeader == null){
-                            break;
-                        }
-                    }
-                    else if (stationWrited){
-                        // écriture de la ligne de données
-                        //indexRecord++;
-                        //outputFileWriter.println(data.getDataLine(c, currentStation, readedLine, indexRecord));
-                        writeDataLine(data, currentStation, readedLine);
-                    }
-        		}
-                
-                if (iDomain.getMedia().getModel().getEndData() == E_EndData.EOF && stationWrited){
-                    // écriture de la dernière ligne de données
-                    writeLastDataLine(data, currentStation, outputFileName);
-                }
-                
-                numLine = 0;                
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-            throw new GenerationException(e);
-        }
+                //FAE6315 on ajoute la station pour le CDI ici au lieu de le faire dans la methode writeLastDataLine
+                // qui n'est pas appelée dans tous les cas (slmt si endData=EOF)
+	            if (stationWrited)
+	            {
+	                iDomain.getMedia().addStationInOutput(outputFileName, currentStation.getReference());
+	            }
+	            numLine = 0;                
+	        }
+	    } catch (Exception e){
+	        e.printStackTrace();
+	        throw new GenerationException(e);
+	    }
 	}
     
     private void writeDataLine(DataDomain data, Station currentStation, String inputLine) throws Exception{
@@ -166,7 +172,6 @@ public class MedatlasWriter extends NemoWriter{
         }        
         // écriture de la dernière ligne de données
         outputFileWriter.println(data.getMedatlasLastDataLine());
-        iDomain.getMedia().addStationInOutput(outputFileName, currentStation.getReference());
     }
     
 }
