@@ -702,7 +702,7 @@ public class EditFileForm extends EditForm
         processGridData.grabExcessHorizontalSpace = true;
         
         GridLayout processLayout = new GridLayout();
-        processLayout.numColumns = 3;
+        processLayout.numColumns = 4; // en realite 3 colonnes, mais bug si on met 3
         processLayout.marginHeight = 1;
 
         Group processGroup = new Group(mainBoxGroup, SWT.NONE);
@@ -722,10 +722,16 @@ public class EditFileForm extends EditForm
         radioFichier.setText(Messages.view_file_cruiseFile);
         radioFichier.addSelectionListener(inputFileRadioSelectionListener);
       
-        
+        // TODO BGT: j'ai ajouté ici un faux bouton pour aligner correctement
+        // trouver une solution plus propre
         radioDossier = new Button(inputFileCruiseGroup, SWT.RADIO);
         radioDossier.setText(Messages.view_file_cruiseDir);
         radioDossier.addSelectionListener(inputFileRadioSelectionListener);
+        
+        Button test = new Button(inputFileCruiseGroup, SWT.CHECK);
+        test.setEnabled(false);
+        test.setText(Messages.view_file_multiStations);
+        test.setVisible(false);
 
         //****************************************************************************************
         // process a collection

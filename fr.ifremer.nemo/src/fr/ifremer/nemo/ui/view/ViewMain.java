@@ -190,6 +190,7 @@ public class ViewMain extends ViewPart
         editFileForm.createEditionForm(right);
         
         editFileForm.init();
+        parentForm.setWeights(new int[] {55,45});
     }
 
     protected void createContentConversion(Composite parent)
