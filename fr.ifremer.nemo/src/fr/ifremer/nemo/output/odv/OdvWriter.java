@@ -66,6 +66,7 @@ public class OdvWriter extends NemoWriter{
                 
                 for (Station st : station.getStations(inputFilePath)){
                     
+//                  FAE 6143
                     if (checkStationAlreadyExists(st.getReference()))
                     {
                         throw new GenerationException(Messages.error_convert_stationsDoubles + st.getReference()); 
@@ -102,6 +103,7 @@ public class OdvWriter extends NemoWriter{
                 outputFileWriter.println(cruiseHeader);
     
                 for (Station st : station.getStations(inputFilePath)){
+//                  FAE 6143
                     if (checkStationAlreadyExists(st.getReference()))
                     {
                         throw new GenerationException(Messages.error_convert_stationsDoubles + st.getReference()); 
