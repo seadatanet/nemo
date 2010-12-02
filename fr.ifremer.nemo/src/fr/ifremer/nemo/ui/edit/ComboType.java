@@ -122,8 +122,9 @@ public enum ComboType
             break;
             case DATATYPE:
                 // FAE022
-                if (! Nemo.getInstance().getViewMain().getEditFileForm().isCollection() && TableDataSurvey.types != null)
-                {
+                    if (! Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection() 
+                            && TableDataSurvey.types != null)
+                           {
                     int taille = TableDataSurvey.types.size();
                     for (int i = 0; i < taille; i++)
                     {

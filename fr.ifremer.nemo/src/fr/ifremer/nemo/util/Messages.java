@@ -216,7 +216,11 @@ public class Messages {
     public static String edit_convert_outputDir;
     public static String edit_convert_sortStations;
     
-    
+    // MESSAGES D'INFORMATIONS REGLES INPUT/CONV (onglet File)
+    public static String edit_file_info_medatlasForbiddenBecauseCollection;
+    public static String edit_file_info_cruiseDisabledBecauseODV;
+    public static String edit_file_info_odvMonoForbiddenBecauseTrajectory;
+    public static String edit_file_info_conversionNotApplicable;
     // RESULTATS
     public static String success_file_preformat;
     public static String progress_file_preformat;
@@ -310,6 +314,7 @@ public class Messages {
     public static String settings_web_nautilus;
     public static String settings_web_edmo;
     public static String error_missing;
+    public static String error_settings_outputFormat;
     public static String error_table;
     public static String settings_defaultOutputFormat;
     public static String settings_parametersList;
@@ -540,6 +545,7 @@ public class Messages {
             String langue = Nemo.getInstance().getConfig().getLang();
             
             StringBuffer bundleName = new StringBuffer(BUNDLE_NAME);
+            
             if (langue.equals(Intern.lang_fr) || langue.equals(Intern.lang_en))
             {
                 bundleName.append(Global.UNDERSCORE);

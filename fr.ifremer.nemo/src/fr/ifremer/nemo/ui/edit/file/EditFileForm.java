@@ -19,12 +19,15 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.input.MediaModel;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.EditForm;
 import fr.ifremer.nemo.ui.edit.Etape;
 import fr.ifremer.nemo.ui.edit.NemoSection;
+import fr.ifremer.nemo.ui.edit.file.listeners.FileTypeSelectionListener;
 import fr.ifremer.nemo.ui.edit.file.listeners.InputFileBrowseListener;
 import fr.ifremer.nemo.ui.edit.file.listeners.InputFileRadioSelectionListener;
+import fr.ifremer.nemo.ui.edit.file.listeners.OutputFormatRadioSelectionListener;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Conversion;
@@ -46,8 +49,6 @@ public class EditFileForm extends EditForm
     // variables publiques **********************************************
     public  String nomFichier, nomRepertoire;
     
-    // variables privées ************************************************
-    private  boolean isCruiseInADirectory;
     
     // sections    
     private FileSection sectionFileHeader;
@@ -65,8 +66,6 @@ public class EditFileForm extends EditForm
     // choix du type de collection
     protected  Button radioCollectGroupedByCruise = null; //cas 1 fichier
     protected  Button radioCollectNotGroupedByCruise = null;// cas N fichiers
-    protected  boolean collectionGroupedByCruise;
-    protected  boolean collectionNotGroupedByCruise;
     protected  Button chkMultiStations;
     
     
@@ -79,7 +78,6 @@ public class EditFileForm extends EditForm
     private  Button radODVMonoFichier;
     private  Button radODVMonoStation ;
     private  Button chkForcerTri = null;
-//    private  boolean blnForcerTri; inutilisé
     
     // choix du séparateur
     private  Button radioTabulation, radioPointVirgule, radioVirgule, radioEspace, radioSeparateurAutre = null;
@@ -101,15 +99,73 @@ public class EditFileForm extends EditForm
     public EditFileForm()
     {
         super();
+
+       
     }
+    /**
+     * initialisation à partir des valeurs par défaut (fixes ou definies dans les settings)
+     *
+     */
     public void init()
     {
-        collectionGroupedByCruise = false;
-        collectionNotGroupedByCruise = false;
         fileLoaded = false;
         setLoaded (false);
         textAreaFile.setText(Global.EMPTY_STRING);
-        enableChoice(true);
+        //separator
+        enableSeparatorChoice(true);
+        Nemo.getInstance().getViewMain().getMyRulesManager().resetFileForm();
+    }
+    
+    public void resetDefaultEnableConversionTypes()
+    {
+       RulesManager rulesMgr =Nemo.getInstance().getViewMain().getMyRulesManager();
+        radMedatlas.setEnabled(rulesMgr.DEFAULT_MEDATLAS_ENABLED);
+        radODV.setEnabled(rulesMgr.DEFAULT_ODVMULTISTATION_ENABLED || rulesMgr.DEFAULT_ODVMULTISTATION_ENABLED);
+        radODVMonoFichier.setEnabled(rulesMgr.DEFAULT_ODVMULTISTATION_ENABLED);
+        radODVMonoStation.setEnabled(rulesMgr.DEFAULT_ODVMONOSTATION_ENABLED);
+    }
+    public void updateEnableConversionTypes()
+    {
+       RulesManager rulesMgr =Nemo.getInstance().getViewMain().getMyRulesManager();
+        radMedatlas.setEnabled(rulesMgr.isMedatlasEnabled());
+        radODV.setEnabled(rulesMgr.isOdvMonostationEnabled() || rulesMgr.isOdvMultistationEnabled());
+        radODVMonoFichier.setEnabled(rulesMgr.isOdvMultistationEnabled());
+        radODVMonoStation.setEnabled(rulesMgr.isOdvMonostationEnabled());
+    }
+    public void selectConversion(E_TypeConversion conversionType)
+    {
+        radMedatlas.setSelection(false);
+        radODV.setSelection(false);
+        radODVMonoFichier.setSelection(false);
+        radODVMonoStation.setSelection(false);
+        if (conversionType == E_TypeConversion.MEDATLAS)
+        {
+            radMedatlas.setSelection(true);
+        }
+        else if(conversionType == E_TypeConversion.ODV_MONOSTATION)
+        {
+            radODV.setSelection(true);
+            radODVMonoStation.setSelection(true);
+        }
+        else if(conversionType == E_TypeConversion.ODV_MULTISTATIONS)
+        {
+            radODV.setSelection(true);
+            radODVMonoFichier.setSelection(true);
+        }
+        // else, conversion=UNKNOWN
+        afficheGrpODV();
+    }
+    
+    public void resetDefaultSelectionProcess()
+    {
+        RulesManager rulesMgr = Nemo.getInstance().getViewMain().getMyRulesManager();
+        radioFichier.setSelection( rulesMgr.DEFAULT_PROCESSTYPE == E_ProcessType.CRUISE_FILE);
+        radioDossier.setSelection(rulesMgr.DEFAULT_PROCESSTYPE == E_ProcessType.CRUISE_DIR);
+        radioCollectGroupedByCruise.setSelection(rulesMgr.DEFAULT_PROCESSTYPE == E_ProcessType.COLLECTION_DIR);
+        radioCollectNotGroupedByCruise.setSelection(rulesMgr.DEFAULT_PROCESSTYPE == E_ProcessType.COLLECTION_FILES);
+    }
+    public void resetDefaultSelectionSeparator()
+    {
         // reinitialisation des selections
         chkSeparateur.setSelection(false);
         radioTabulation.setSelection(true);
@@ -119,8 +175,14 @@ public class EditFileForm extends EditForm
         radioSeparateurAutre.setSelection(false);
         textSeparateur.setText(Global.EMPTY_STRING);
         setSeparatorVisible();
-        setSelectedConversion(Nemo.getInstance().getConfig().getDefaultConversionType());
-        Nemo.getInstance().getViewMain().enableCruise(!radODV.getSelection());
+    }
+    public void resetDefaultSelectionFileType()
+    {
+        enableFileTypeChoice(true);
+        RulesManager rulesMgr = Nemo.getInstance().getViewMain().getMyRulesManager();
+        radSerieTempo.setSelection( rulesMgr.DEFAULT_FILETYPE == E_InputType.TIMESERIES);
+        radTrajectoire.setSelection( rulesMgr.DEFAULT_FILETYPE == E_InputType.TRAJECTORY);
+        radProfilVertical.setSelection( rulesMgr.DEFAULT_FILETYPE == E_InputType.PROFILE);
     }
     public void createLeftForm(Composite parent)
     {
@@ -177,9 +239,11 @@ public class EditFileForm extends EditForm
                 // FAE 3796
                 int offset = 0;
 //                if (isCollection())
-                if(! Nemo.getInstance().getViewMain().isCruiseEnabled())
+                if(! Nemo.getInstance().getViewMain().getMyRulesManager().isCruiseEnabled())
                 {
                     offset--;
+                    // on efface les erreurs sur cruise car il peut en rester d'une precendente conversion
+                    Nemo.getInstance().getViewMain().getEditConversionForm().setWarningCampagne(Global.EMPTY_STRING);
                 }
                 
                 if (theViewMain.getEtape() == 1){
@@ -334,8 +398,8 @@ public class EditFileForm extends EditForm
     public void actualiseEdition()
     {
         // FAE 1810 - FileHeader accessible que pour un fichier campagne
+        // TODO BGT fonctionnement ok mais a deplacer dans rules
         sectionFileHeader.setEnabled(radioFichier.getSelection() || isMultiStationFileChecked());
-        
         buttonValidateAll.setEnabled(!Nemo.getInstance().getNomModele().equals(Global.EMPTY_STRING));
     }
 
@@ -363,11 +427,11 @@ public class EditFileForm extends EditForm
         setSeparateur(mediaModel.getSeparator());
 
         // Type de fichier
-        selectTypeFile(mediaModel.getInputType());
+        Nemo.getInstance().getViewMain().getMyRulesManager().updateFromModel(mediaModel.getInputType())    ;    
         
         // --- remplissage du formulaire de droite (editFileForm)
         // Entête Fichier
-        if (Nemo.getInstance().getViewMain().getEditFileForm().isCruiseInADirectory()
+        if (Nemo.getInstance().getViewMain().getMyRulesManager().isCruiseInADirectory()
                 && !isMultiStationFileChecked()){
             sectionFileHeader.razValues();
         }
@@ -393,17 +457,18 @@ public class EditFileForm extends EditForm
         sectionDataTerminator.setEndData(mediaModel.getEndData(), mediaModel.getEndDataPattern());
         
         // conversion:
+        RulesManager rulesMgr = Nemo.getInstance().getViewMain().getMyRulesManager();
         // si un modele est ouvert, on affecte la valeur de ce modèle. Sinon on affecte la valeur choisie dans les settings
         if ( Nemo.getInstance().getNomModele().equals(Global.EMPTY_STRING))
         {
-            setSelectedConversion(Nemo.getInstance().getConfig().getDefaultConversionType());
+            rulesMgr.updateFromModel(Nemo.getInstance().getConfig().getDefaultConversionType());
         }else{
-            setSelectedConversion(Nemo.getInstance().getDomain().getConversion().getModel().getOutputFormat());
+            rulesMgr.updateFromModel(Nemo.getInstance().getDomain().getConversion().getModel().getOutputFormat());
         }
-     
-        Nemo.getInstance().getViewMain().updateTabsVisibility();
+        
         // activation option serie tempo
-        enableChoice(true);
+        enableSeparatorChoice(true);
+        enableFileTypeChoice(true);
     }
     
     public void invalidEtape()
@@ -446,6 +511,8 @@ public class EditFileForm extends EditForm
         
         //****************************************************************************************
         // MEDATLAS/ODV
+        
+        OutputFormatRadioSelectionListener outputFormatRadioSelectionListener = new OutputFormatRadioSelectionListener(this);
         GridData medOrOdvgridData = new GridData();
         medOrOdvgridData.grabExcessHorizontalSpace = true;
         medOrOdvgridData.horizontalAlignment = GridData.FILL;
@@ -461,12 +528,12 @@ public class EditFileForm extends EditForm
         radMedatlas = new Button(medOrOdvGroup, SWT.RADIO);
         radMedatlas.setText(Conversion.MEDATLAS.getName());
         radMedatlas.setSelection(false);
-        addRadConvertListener(radMedatlas);
+        radMedatlas.addSelectionListener(outputFormatRadioSelectionListener );
         
         radODV = new Button(medOrOdvGroup, SWT.RADIO);
         radODV.setText(Conversion.ODV.getName());
         radODV.setSelection(false);
-        addRadConvertListener(radODV);
+        radODV.addSelectionListener(outputFormatRadioSelectionListener );
         
         //****************************************************************************************
         // ODV type
@@ -485,12 +552,13 @@ public class EditFileForm extends EditForm
         radODVMonoStation = new Button(grpODV, SWT.RADIO);
         radODVMonoStation.setText(Messages.view_convert_monoStation);
         radODVMonoStation.setSelection(false);
-        addRadConvertListener(radODVMonoStation);
+
+        
+        radODVMonoStation.addSelectionListener(outputFormatRadioSelectionListener );
         radODVMonoFichier = new Button(grpODV, SWT.RADIO);
         radODVMonoFichier.setText(Messages.view_convert_monoFichier);
-        addRadConvertListener(radODVMonoFichier);
+        radODVMonoFichier.addSelectionListener(outputFormatRadioSelectionListener );
         
-        setSelectedConversion(Nemo.getInstance().getConfig().getDefaultConversionType());
         afficheGrpODV();
         
         //****************************************************************************************
@@ -578,17 +646,22 @@ public class EditFileForm extends EditForm
         GridLayoutFactory.fillDefaults().applyTo(grpFichier);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(grpFichier);
 
+        FileTypeSelectionListener fileTypeSelectionListener = new FileTypeSelectionListener(this);
         radProfilVertical = new Button(grpFichier, SWT.RADIO);
         radProfilVertical.setText(Messages.typeFile_profile);
-
+        radProfilVertical.addSelectionListener(fileTypeSelectionListener);
+        
         radSerieTempo = new Button(grpFichier, SWT.RADIO);
         radSerieTempo.setText(Messages.typeFile_timeseries);
-
+        radSerieTempo.addSelectionListener(fileTypeSelectionListener);
+        
         radTrajectoire = new Button(grpFichier, SWT.RADIO);
         radTrajectoire.setText(Messages.typeFile_trajectory);
+        radTrajectoire.addSelectionListener(fileTypeSelectionListener);
 
         // Selection du type par defaut
-        radProfilVertical.setSelection(true);
+      
+        resetDefaultSelectionFileType();
     }
     
     
@@ -713,13 +786,13 @@ public class EditFileForm extends EditForm
         
         // --- enregistrement du formulaire de gauche (ViewMain)
         // Type de traitement
-        mediaModel.setProcessType(getTypeTraitement());
+        mediaModel.setProcessType(Nemo.getInstance().getViewMain().getMyRulesManager().getMyProcessType());
 
         // Séparateur
         mediaModel.setSeparator(getSeparateur());
 
         // Type de fichier
-        mediaModel.setInputType(getInputFileType());
+        mediaModel.setInputType(Nemo.getInstance().getViewMain().getMyRulesManager().getMyFileType());
         
 
         // Fichier multiStation ?
@@ -728,7 +801,7 @@ public class EditFileForm extends EditForm
         // --- enregistrement du formulaire de droite (editFileForm)
         // Entête Fichier
         int fileHeader = 0;
-        if (!Nemo.getInstance().getViewMain().getEditFileForm().isCruiseInADirectory() || mediaModel.isMultiStations()){
+        if (!Nemo.getInstance().getViewMain().getMyRulesManager().isCruiseInADirectory() || mediaModel.isMultiStations()){
             fileHeader = Integer.parseInt(getSectionFileHeader().getValue());
         }
         
@@ -755,149 +828,30 @@ public class EditFileForm extends EditForm
         else if(end == E_EndData.NEXT_START_WITH){
             mediaModel.setEndDataPattern(sectionDataTerminator.getStartStationIndicator());
         }
-        Nemo.getInstance().getDomain().getConversion().setCurrentConversion(getSelectedConversion());
-        Nemo.getInstance().getViewMain().updateTabsVisibility();
+        Nemo.getInstance().getDomain().getConversion().setCurrentConversion(Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType());
+   
         
         // Mise à jour du model
         Nemo.getInstance().getDomain().getMedia().updateMedia(mediaModel);
 
     }
  
-    protected void selectTypeProcess(Button radioSelected)
-    {
-        // les boutons radios ne sont plus dans le même conteneur :
-        // il faut forcer la deselection
-        if (radioSelected == radioCollectNotGroupedByCruise
-                || radioSelected == radioCollectGroupedByCruise)
-        {
-            radioDossier.setSelection(false);
-            radioFichier.setSelection(false);
-        }
-        else
-        {
-            radioCollectNotGroupedByCruise.setSelection(false);
-            radioCollectGroupedByCruise.setSelection(false);
-        }
-    }
     public void afficheGrpODV()
     {
         grpODV.setVisible(radODV.getSelection());
     }
-    private void addRadFileListener(final Button radio)
-    {
-        radio
-        .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-            @Override
-            public void widgetSelected(
-                    org.eclipse.swt.events.SelectionEvent g)
-            {
-                selectTypeProcess(radio);
-                init();
-            }
-        });
-    }
-    private void addRadConvertListener(final Button radio)
-    {
-        radio
-        .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-            @Override
-            public void widgetSelected(
-                    org.eclipse.swt.events.SelectionEvent g)
-            {
-                afficheGrpODV();
-                Nemo.getInstance().getViewMain().enableCruise(!radODV.getSelection());
-                
-                Nemo.getInstance().getDomain().getConversion().setCurrentConversion(getSelectedConversion());
-                Nemo.getInstance().getDomain().getConversion().getModel().setOutputFormat(getSelectedConversion());
-                
-                Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();
-                // invalidation de l'etape quand modif
-                Utils.invalidEtapes();
-            }
-        });
-    }
-    
-    
     
     public void enableMedatlas(boolean enable)
     {
-        if (!isCollection())
-        {
             radMedatlas.setEnabled(enable);
-            radMedatlas.setSelection(enable);
-            radODV.setSelection(!enable);
-            afficheGrpODV();
-        }else{
-            System.out.println("error: cannot enable MEDATLAS for collection");
-        }
-    }
-    public void enableODVMonoFichier(boolean enable)
-    {
-        radODVMonoFichier.setEnabled(enable);
-    }
-    public void enableCollectionMedatlas(boolean enable)
-    {
-        radMedatlas.setEnabled(enable);
-        radMedatlas.setSelection(enable);
-        radODV.setSelection(!enable);
-        afficheGrpODV();
-    }
-    public void enableOdvMonostation(boolean enable)
-    {
-        radMedatlas.setSelection(!enable);
-        radODV.setSelection(enable);
-        radODVMonoStation.setSelection(enable);
-        radODVMonoFichier.setSelection(!enable);
-        afficheGrpODV(); 
-    }
-    public void enableOdvMultistation(boolean enable)
-    {
-        radMedatlas.setSelection(!enable);
-        radODV.setSelection(enable);
-        radODVMonoStation.setSelection(!enable);
-        radODVMonoFichier.setSelection(enable);
-        afficheGrpODV(); 
     }
     
-    private void setConversionUnknown()
+    
+    
+    public void enableSeparatorChoice(boolean enabled)
     {
-        radMedatlas.setEnabled(true);
-        radODV.setEnabled(true);
-        radMedatlas.setSelection(false);
-        radODV.setSelection(false);
-        radODVMonoStation.setSelection(false);
-        radODVMonoFichier.setSelection(false);
-        afficheGrpODV(); 
-    }
-    public void setSelectedConversion(E_TypeConversion conv)
-    {
-        if (conv == E_TypeConversion.MEDATLAS)
-        {
-            enableMedatlas(true);
-        }
-        else if (conv == E_TypeConversion.ODV_MONOSTATION)
-        {
-            enableOdvMonostation(true);
-        }
-        else if (conv == E_TypeConversion.ODV_MULTISTATIONS)
-        {
-            enableOdvMultistation(true);
-        }
-        else if (conv == E_TypeConversion.UNKNOWN)
-        {
-            setConversionUnknown();
-        }
-    }
-    public void enableChoice(boolean enabled)
-    {
-        // grpFichier.setEnabled(enabled);
-        radProfilVertical.setEnabled(enabled);
-        radSerieTempo.setEnabled(enabled);
-        radTrajectoire.setEnabled(enabled);
-
         if (chkSeparateur.getSelection())
         {
-            // grpSeparateur.setEnabled(enabled);
             chkSeparateur.setEnabled(enabled);
             radioTabulation.setEnabled(enabled);
             radioPointVirgule.setEnabled(enabled);
@@ -907,7 +861,12 @@ public class EditFileForm extends EditForm
             textSeparateur.setEnabled(enabled);
         }
     }
-    
+    public void enableFileTypeChoice(boolean enabled)
+    {
+        radProfilVertical.setEnabled(enabled);
+        radSerieTempo.setEnabled(enabled);
+        radTrajectoire.setEnabled(enabled);
+    }
     /**
      * select the appropriate radio choice depending on typeFile
      * @param typeFile
@@ -928,92 +887,15 @@ public class EditFileForm extends EditForm
                 break;
             default:
                 radProfilVertical.setSelection(true);
-            radSerieTempo.setSelection(false);
-            radTrajectoire.setSelection(false);
-            break;
+                radSerieTempo.setSelection(false);
+                radTrajectoire.setSelection(false);
+                break;
         }
     }
     
-    
-    
-    public boolean isConversionToMEDATLAS()
-    {
-        return radMedatlas.getSelection();
-    }
-    public boolean isConversionToODV()
-    {
-        return radODV.getSelection();
-    }
-    public boolean isConversionToODVMonoStation()
-    {
-        return radODVMonoStation.getSelection();
-    }
-    public boolean isConversionToODVMultiStation()
-    {
-        return radODVMonoFichier.getSelection();
-    }
-    
-    
-    // TRADUCTION DES BOUTONS RADIO
-    public E_TypeConversion getSelectedConversion()
-    {
-        E_TypeConversion selected = E_TypeConversion.UNKNOWN;
-        if (radMedatlas.getSelection())
-        {
-            selected= E_TypeConversion.MEDATLAS;
-        }
-        else if (radODV.getSelection())
-        {
-            if (radODVMonoStation.getSelection())
-            {
-                selected = E_TypeConversion.ODV_MONOSTATION;
-            }else if (radODVMonoFichier.getSelection())
-            {
-                selected = E_TypeConversion.ODV_MULTISTATIONS;
-            }
-        }
-            return selected;
-    }
-
-    public E_InputType getInputFileType()
-    {
-        if (radSerieTempo.getSelection())
-        {
-            return E_InputType.TIMESERIES;
-        }
-        else if (radTrajectoire.getSelection())
-        {
-            return E_InputType.TRAJECTORY;
-        }
-        else
-        {
-            return E_InputType.PROFILE;
-        }
-    }
 
    
 
-    public E_ProcessType getTypeTraitement()
-    {
-        if (radioCollectNotGroupedByCruise.getSelection())
-        {
-            return E_ProcessType.COLLECTION_FILES;
-        }
-        else if (radioCollectGroupedByCruise.getSelection())
-        {
-            return E_ProcessType.COLLECTION_DIR;
-        }
-        else if (radioDossier.getSelection())
-        {
-            return E_ProcessType.CRUISE_DIR;
-        }
-        else
-        {
-            return E_ProcessType.CRUISE_FILE;
-        }
-    }
-    
-    
     /**
      * gets the separator choosen by the user in the file tab
      * @return the separator specified by the user
@@ -1146,21 +1028,6 @@ public class EditFileForm extends EditForm
         compositeSeparateur.setVisible(chkSeparateur.getSelection());
     }
 
-    public boolean isCollection()
-    {
-        return (collectionGroupedByCruise || collectionNotGroupedByCruise);
-    }
-    public void updateOdvTypeFromFileType()
-    {
-        // FAE1386 : desactiver "One File per station" si Trajectory
-        if (radTrajectoire.getSelection())
-        {
-            radODVMonoStation.setSelection(false);
-            radODVMonoStation.setEnabled(false);
-            radODVMonoFichier.setEnabled(true);
-            radODVMonoFichier.setSelection(true);
-        }
-    }
     public String getSelectedText()
     {
        return textAreaFile.getText().substring( textAreaFile.getSelection().x, textAreaFile.getSelection().y);
@@ -1185,14 +1052,7 @@ public class EditFileForm extends EditForm
     {
         sectionDataTerminator.addSpaceBeforeDataTerminator();
     }
-    public boolean isCruiseInADirectory()
-    {
-        return isCruiseInADirectory;
-    }
-    public void setCruiseInADirectory(boolean isCruiseInADirectory)
-    {
-        this.isCruiseInADirectory = isCruiseInADirectory;
-    }
+  
     public boolean isFileLoaded()
     {
         return fileLoaded;
@@ -1220,30 +1080,6 @@ public class EditFileForm extends EditForm
     public boolean isCruiseIsAFile()
     {
         return radioFichier.getSelection();
-    }
-    public boolean isCollectionGroupedByCruise()
-    {
-        return collectionGroupedByCruise;
-    }
-    public void setCollectionGroupedByCruise(boolean isGroup)
-    {
-        collectionGroupedByCruise = isGroup;
-    }
-    public void setCollectionNotGroupedByCruise(boolean isGroup)
-    {
-        collectionNotGroupedByCruise= isGroup;
-    }
-    public boolean isProfile()
-    {
-        return radProfilVertical.getSelection();
-    }
-    public boolean isTimeSeries()
-    {
-        return radSerieTempo.getSelection();
-    }
-    public boolean isTrajectory()
-    {
-        return radTrajectoire.getSelection();
     }
     public Text getTextSeparateur()
     {
@@ -1285,4 +1121,33 @@ public class EditFileForm extends EditForm
     {
         return chkMultiStations;
     }
+    public Button getRadMedatlas()
+    {
+        return radMedatlas;
+    }
+    public Button getRadODV()
+    {
+        return radODV;
+    }
+    public Button getRadODVMonoFichier()
+    {
+        return radODVMonoFichier;
+    }
+    public Button getRadODVMonoStation()
+    {
+        return radODVMonoStation;
+    }
+    public Button getRadProfilVertical()
+    {
+        return radProfilVertical;
+    }
+    public Button getRadSerieTempo()
+    {
+        return radSerieTempo;
+    }
+    public Button getRadTrajectoire()
+    {
+        return radTrajectoire;
+    }
+  
 }

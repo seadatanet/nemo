@@ -126,7 +126,8 @@ public class Utils
         ViewLog.styledTextLogInfos.append(Messages.Utils_6 + nbreLignes);
 
         // reactivation de l'option serie temporelle onglet DESC
-        Nemo.getInstance().getViewMain().getEditFileForm().enableChoice(true);
+        Nemo.getInstance().getViewMain().getEditFileForm().enableSeparatorChoice(true);
+        Nemo.getInstance().getViewMain().getEditFileForm().enableFileTypeChoice(true);
 
         // FAE 089
         // RAZ global si reouverture fichier en cours de processus
@@ -1199,6 +1200,9 @@ public class Utils
             editCruiseForm.razText();
             editStationForm.razText();
             editDataForm.razText();
+            editDataForm.getMyTableData().razAndRecreateTable();
+            // --- l'onglet d'erreur
+            Utils.messageErreur(Global.EMPTY_STRING);
         }
 
         invalidEtapes();

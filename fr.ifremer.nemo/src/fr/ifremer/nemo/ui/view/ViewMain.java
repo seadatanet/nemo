@@ -20,6 +20,7 @@ import org.eclipse.ui.part.ViewPart;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.ApplicationWorkbenchWindowAdvisor;
 import fr.ifremer.nemo.ui.FilteredTableFactory;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.conversion.EditConversionForm;
 import fr.ifremer.nemo.ui.edit.cruise.EditCruiseForm;
@@ -59,7 +60,10 @@ public class ViewMain extends ViewPart
     private  TabFolder tabFolder;
 
     private FilteredTableFactory myFilteredTableFactory;
-    private boolean cruiseEnabled;
+    
+    // manager pour la gestion de l'IHM en fonction des règles
+    private RulesManager myRulesManager;
+    
     
     public ViewMain()
     {
@@ -70,6 +74,7 @@ public class ViewMain extends ViewPart
         editConversionForm = new EditConversionForm();
         myFilteredTableFactory = new FilteredTableFactory();
         Nemo.getInstance().setViewMain(this);
+        myRulesManager = new RulesManager();
 
     }
    
@@ -102,7 +107,7 @@ public class ViewMain extends ViewPart
             {
                 int tmp = tabFolder.getSelectionIndex();
 
-                if( ( ! Nemo.getInstance().getViewMain().isCruiseEnabled()) 
+                if( ( ! Nemo.getInstance().getViewMain().getMyRulesManager().isCruiseEnabled()) 
                         && tmp>0)
                 {
                     tmp++;
@@ -183,6 +188,8 @@ public class ViewMain extends ViewPart
         //RIGHT PANEL
         Composite right = getNewRightComposite(parentForm);
         editFileForm.createEditionForm(right);
+        
+        editFileForm.init();
     }
 
     protected void createContentConversion(Composite parent)
@@ -263,7 +270,7 @@ public class ViewMain extends ViewPart
 
     public void init()
     {
-
+        Nemo.getInstance().getViewMain().getMyRulesManager().init();
         // reinitialisation de la conversion
         Nemo.getInstance().resetModel();
 
@@ -291,38 +298,30 @@ public class ViewMain extends ViewPart
         // --- le contenu du fichier
       editFileForm.init();
 
-      editFileForm.setCruiseInADirectory( false);
     }
 
-    public void enableCruise(boolean enabled)
+    public void enableCruiseTab(boolean enabled)
     {
-        
-        setCruiseEnabled(enabled);
-        if (enabled)
+        if (tabCruise != null)
         {
-            if (tabCruise.isDisposed())
+            if (enabled)
             {
-                Composite contentCruise = new Composite(tabFolder, SWT.NONE);
-                createContentCruise(contentCruise);
+                if (tabCruise.isDisposed())
+                {
+                    Composite contentCruise = new Composite(tabFolder, SWT.NONE);
+                    createContentCruise(contentCruise);
 
-                tabCruise = new TabItem(tabFolder, SWT.NONE, 1);
-                tabCruise.setText(Messages.onglet_cruise);
-                tabCruise.setControl(contentCruise);
+                    tabCruise = new TabItem(tabFolder, SWT.NONE, 1);
+                    tabCruise.setText(Messages.onglet_cruise);
+                    tabCruise.setControl(contentCruise);
+                }
+            }
+            else
+            {
+                tabCruise.dispose();
             }
         }
-        else
-        {
-            tabCruise.dispose();
-        }
     }
-
-   public void updateTabsVisibility()
-   {
-       enableCruise(!editFileForm.isConversionToODV());
-       
-   }
-
-   
 
    
 
@@ -393,15 +392,9 @@ public class ViewMain extends ViewPart
         return myFilteredTableFactory;
     }
 
-    public boolean isCruiseEnabled()
+    public RulesManager getMyRulesManager()
     {
-        return cruiseEnabled;
+        return myRulesManager;
     }
-
-    public void setCruiseEnabled(boolean cruiseEnabled)
-    {
-        this.cruiseEnabled = cruiseEnabled;
-    }
-    
    
 }

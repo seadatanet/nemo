@@ -19,7 +19,10 @@ import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.ui.view.ViewLog;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.util.Global.E_ProcessType;
+
 import  org.eclipse.swt.events.SelectionEvent;
 
 /**
@@ -38,14 +41,47 @@ public class InputFileBrowseListener extends SelectionAdapter
         myEditFileForm = editFileForm;
     }
     
+    
+    
+    private void reinit()
+    {
+        Nemo.getInstance().getViewMain().getEditFileForm().setFileLoaded(false);
+        
+        Nemo.getInstance().getViewMain().getEditFileForm().reinitTextArea();
+        // forcage affichage onglet 0
+        Nemo.getInstance().getViewMain().selectTabByIndex(0);
+        Nemo.getInstance().getViewMain().setAffiche(0);
+
+        // RAZ global
+        Utils.razGlobal();
+
+        // reset de l'etape de conversion
+        Nemo.getInstance().getViewMain().setEtape(0);
+
+        // lancement du processus sur le premier onglet et
+        // effacement preventif
+        // si besoin
+        // fillDesc(true);
+        Nemo.getInstance().getViewMain().getEditFileForm().afficheEdition();
+
+
+        // reinitialisation du tableau de paramètres
+        Nemo.getInstance().getViewMain().getEditDataForm().reinitTableData();
+        
+        
+        ViewLog.styledTextLogErreurs
+        .setText(Global.EMPTY_STRING);
+    }
+    
+    
     @Override
     public void widgetSelected( SelectionEvent e)
     {
-
-        // reinitialisation de la conversion et de l'affichage
-        myEditFileForm.init();
-
-        if (myEditFileForm.getRadioFichier().getSelection())
+       
+        E_ProcessType currentProcessType =  Nemo.getInstance().getViewMain().getMyRulesManager().getMyProcessType();
+        reinit();
+        
+        if (currentProcessType == E_ProcessType.CRUISE_FILE)
         {
             // si fichier campagne
             browseForCruiseFile();
@@ -63,24 +99,24 @@ public class InputFileBrowseListener extends SelectionAdapter
         {
             browseForCollectionNotGroupedByCruise();
         }
-        
+       
+        // reinitialisation de la conversion et de l'affichage
+        Nemo.getInstance().getViewMain().getMyRulesManager().updateFromBrowse();
         Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();
     }
      private void browseForCruiseFile()
      {
-         // reactivation de l'onglet campagne
-//         Nemo.getInstance().getViewMain().enableCruise(true);
-
-         FileDialog dialog = getFileDialog();
-         myEditFileForm.nomFichier = dialog.open();
-
-         if (myEditFileForm.nomFichier != null)
+         try
          {
+             FileDialog dialog = getFileDialog();
+             myEditFileForm.nomFichier = dialog.open();
 
-             myEditFileForm.setFileLoaded(true);
-             myEditFileForm.nomRepertoire =  new File(myEditFileForm.nomFichier).getParent() + File.separator;
-             try
+             if (myEditFileForm.nomFichier != null)
              {
+
+                 myEditFileForm.setFileLoaded(true);
+                 myEditFileForm.nomRepertoire =  new File(myEditFileForm.nomFichier).getParent() + File.separator;
+
                  // affichage du corps du fichier
                  Utils.insertTextFich(myEditFileForm.nomFichier,
                      Nemo.getInstance().getViewMain().getEditCruiseForm().getTextAreaCruise(),
@@ -88,43 +124,45 @@ public class InputFileBrowseListener extends SelectionAdapter
                  myEditFileForm.getTextAreaFile().setText(Utils.texteBrut);
                  // affichage etape0 dans formulaire d'edition
                  myEditFileForm.afficheEdition();
+
              }
-             catch (IOException e1)
+             else
              {
                  ViewLog.styledTextLogErreurs
-                 .setText(Messages.error);
-                 e1.printStackTrace();
+                 .setText(Messages.error_file_selectFile);
              }
          }
-         else
+         catch (IOException e1)
          {
              ViewLog.styledTextLogErreurs
-             .setText(Messages.error_file_selectFile);
+             .setText(Messages.error);
+             e1.printStackTrace();
          }
      }
      
      private void browseForCruiseDirectory()
      {
-         myEditFileForm.setCruiseInADirectory(true);
+         try{
+             DirectoryDialog dialog = getDirectoryDialog();
+             myEditFileForm.nomRepertoire = dialog.open();
 
-         // reactivation de l'onglet campagne
-//         Nemo.getInstance().getViewMain().enableCruise(true);
-
-         DirectoryDialog dialog = getDirectoryDialog();
-         myEditFileForm.nomRepertoire = dialog.open();
-
-         if (myEditFileForm.nomRepertoire != null)
-         {
-             myEditFileForm.setFileLoaded(true);
-             if (Utils.findFiles(myEditFileForm.nomRepertoire, true))
+             if (myEditFileForm.nomRepertoire != null)
              {
-                 // affichage du corps du fichier
-                 myEditFileForm.getTextAreaFile().setText(Utils.texteBrut);
-                 // affichage etape0 dans formulaire d'edition
-                 myEditFileForm.afficheEdition();
+                 myEditFileForm.setFileLoaded(true);
+                 if (Utils.findFiles(myEditFileForm.nomRepertoire, true))
+                 {
+                     // affichage du corps du fichier
+                     myEditFileForm.getTextAreaFile().setText(Utils.texteBrut);
+                     // affichage etape0 dans formulaire d'edition
+                     myEditFileForm.afficheEdition();
+                 }
              }
-         }
-         else
+             else
+             {
+                 ViewLog.styledTextLogErreurs
+                 .setText(Messages.error_file_selectDir);
+             }
+         }catch(Exception e)
          {
              ViewLog.styledTextLogErreurs
              .setText(Messages.error_file_selectDir);
@@ -134,68 +172,63 @@ public class InputFileBrowseListener extends SelectionAdapter
      
      private void browseForCollectionGroupedByCruise()
      {
-         myEditFileForm.setCruiseInADirectory (true);
-         myEditFileForm.setCollectionGroupedByCruise(true);
 
-         // desactivation de l'onglet campagne
-//         Nemo.getInstance().getViewMain().enableCruise(false);
-
-         DirectoryDialog dialog = getDirectoryDialog();
-         myEditFileForm.nomRepertoire = dialog.open();
-         
-         if (myEditFileForm.nomRepertoire != null)
+         try
          {
-             myEditFileForm.setFileLoaded(true);
+             DirectoryDialog dialog = getDirectoryDialog();
+             myEditFileForm.nomRepertoire = dialog.open();
 
-             if (Utils.findFilesCollectCas1(myEditFileForm.nomRepertoire, false))
+             if (myEditFileForm.nomRepertoire != null)
              {
-                 // affichage du corps du fichier
-                 myEditFileForm.getTextAreaFile().setText(Utils.texteBrut);
+                 myEditFileForm.setFileLoaded(true);
 
-                 // affichage etape0 dans formulaire d'edition
-                 myEditFileForm.afficheEdition();
+                 if (Utils.findFilesCollectCas1(myEditFileForm.nomRepertoire, false))
+                 {
+                     // affichage du corps du fichier
+                     myEditFileForm.getTextAreaFile().setText(Utils.texteBrut);
 
-                 // dans le cas d'une collection, on ne peut
-                 // generer que le format ODV
-                 myEditFileForm.enableCollectionMedatlas(false);
+                     // affichage etape0 dans formulaire d'edition
+                     myEditFileForm.afficheEdition();
+                 }
              }
-         }
-         else
+             else
+             {
+                 ViewLog.styledTextLogErreurs
+                 .setText(Messages.error_file_selectDir);
+             } 
+         }catch(Exception e)
          {
              ViewLog.styledTextLogErreurs
              .setText(Messages.error_file_selectDir);
-         } 
+         }
      }
      
      private void browseForCollectionNotGroupedByCruise()
      {
-         myEditFileForm.setCollectionNotGroupedByCruise(true);
-
-         // desactivation de l'onglet campagne
-//         Nemo.getInstance().getViewMain().enableCruise(false);
-
-         DirectoryDialog dialog = getDirectoryDialog();
-         myEditFileForm.nomRepertoire = dialog.open();
-
-         if (myEditFileForm.nomRepertoire != null)
+         try
          {
-             myEditFileForm.setFileLoaded(true);
+             DirectoryDialog dialog = getDirectoryDialog();
+             myEditFileForm.nomRepertoire = dialog.open();
 
-             if (Utils.findFiles(myEditFileForm.nomRepertoire, true))
+             if (myEditFileForm.nomRepertoire != null)
              {
-                 // affichage du corps du fichier
-                 myEditFileForm.getTextAreaFile().setText(Utils.texteBrut);
+                 myEditFileForm.setFileLoaded(true);
 
-                 // affichage etape0 dans formulaire d'edition
-                 myEditFileForm.afficheEdition();
+                 if (Utils.findFiles(myEditFileForm.nomRepertoire, true))
+                 {
+                     // affichage du corps du fichier
+                     myEditFileForm.getTextAreaFile().setText(Utils.texteBrut);
 
-                 // dans le cas d'une collection, on ne peut
-                 // generer que le format ODV
-                 myEditFileForm.enableCollectionMedatlas(false);
-                 myEditFileForm.enableODVMonoFichier(false); // FAE 0001134
+                     // affichage etape0 dans formulaire d'edition
+                     myEditFileForm.afficheEdition();
+                 }
              }
-         }
-         else
+             else
+             {
+                 ViewLog.styledTextLogErreurs
+                 .setText(Messages.error_file_selectDir);
+             }
+         }catch(Exception e)
          {
              ViewLog.styledTextLogErreurs
              .setText(Messages.error_file_selectDir);

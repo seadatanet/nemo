@@ -281,7 +281,7 @@ public class AutoLine implements UIobject
     protected int getFileHeaderPos()
     {
         int fileHeader = 0;
-        if (!Nemo.getInstance().getViewMain().getEditFileForm().isCruiseInADirectory() 
+        if (!Nemo.getInstance().getViewMain().getMyRulesManager().isCruiseInADirectory() 
                 || Nemo.getInstance().getViewMain().getEditFileForm().isMultiStationFileChecked()){
             // fichier campagne
             fileHeader = Nemo.getInstance().getDomain().getMedia().getModel().getFileHeader();
@@ -666,7 +666,7 @@ public class AutoLine implements UIobject
         int ligneFin = Integer.parseInt(numberLine.getText()) + nbreLignes - 1;
 
         int enteteFichier = 0;
-        if (!Nemo.getInstance().getViewMain().getEditFileForm().isCruiseInADirectory() 
+        if (!Nemo.getInstance().getViewMain().getMyRulesManager().isCruiseInADirectory() 
                 || Nemo.getInstance().getViewMain().getEditFileForm().isMultiStationFileChecked()){
             // fichier campagne
             enteteFichier = Nemo.getInstance().getDomain().getMedia().getModel().getFileHeader();

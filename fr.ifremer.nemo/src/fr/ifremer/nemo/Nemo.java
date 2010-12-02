@@ -188,7 +188,7 @@ public class Nemo
         String modelName = Nemo.getInstance().getNomModele();
         
         // nom de l'application
-        if (getViewMain().getEditFileForm().isCruiseInADirectory()){
+        if (getViewMain().getMyRulesManager().isCruiseInADirectory()){
             // dossier campagne
             File fich = new File(myViewMain.getEditFileForm().nomRepertoire);
             if (!Global.EMPTY_STRING.equals(modelName)){

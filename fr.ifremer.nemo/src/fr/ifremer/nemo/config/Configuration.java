@@ -1127,7 +1127,7 @@ public class Configuration extends AbstractModel
         // contient Correction FAE 3760: si on charge un modele si on a utilisé liste P091 on continue à utiliser la liste P091
         
         
-        E_TypeConversion currentConversion = Nemo.getInstance().getViewMain().getEditFileForm().getSelectedConversion();
+        E_TypeConversion currentConversion = Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType();
        
         TypeData typeData=null;
         if (tableData.getTypes()!=null && !tableData.getTypes().isEmpty())

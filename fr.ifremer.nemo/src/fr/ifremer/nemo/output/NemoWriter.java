@@ -56,10 +56,11 @@ public abstract class NemoWriter{
         iDomain = Nemo.getInstance().getDomain();
         stationsList = new HashSet<String>();
 	}
-	
+	//FAE 6143
     protected boolean checkStationAlreadyExists(String stationRef)
     {
         boolean alreadyExist = false;
+        stationRef = stationRef.trim();
         if (stationsList.contains(stationRef))
         {
             alreadyExist=true;
@@ -136,15 +137,20 @@ public abstract class NemoWriter{
                                     
                                     nbrecords++;
                                     
+                                    
+                                    // BGT suppr code 6087: n'est plus necessaire (pourquoi?) et fait planter car genere des doublons
                                     // BGT FAE 6087 ajout de la station
-                                    E_TypeConversion selectedConversion = iDomain.getConversion().getCurrent();
-                                    if (selectedConversion == E_TypeConversion.ODV_MONOSTATION){
-                                        if (st != null){
-                                            // endData = EOF : la station n'a pas été enregistrée
-                                            st.setNbRecords(nbrecords);
-                                            stationDomain.addStation(inputFilePath, st);
-                                        }
-                                    }
+//                                    E_TypeConversion selectedConversion = iDomain.getConversion().getCurrent();
+//                                    
+//                                    if (selectedConversion == E_TypeConversion.ODV_MONOSTATION
+//                                            && stationDomain.getModel().getReferenceProperty().isUserProvided()){
+//                                        if (st != null ){
+//                                            // endData = EOF : la station n'a pas été enregistrée
+//                                            st.setNbRecords(nbrecords);
+//                                            System.out.println("6087");
+//                                            stationDomain.addStation(inputFilePath, st);
+//                                        }
+//                                    }
                                     
                                 }
                                 else{

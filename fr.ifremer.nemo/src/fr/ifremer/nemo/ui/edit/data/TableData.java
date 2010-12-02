@@ -390,14 +390,14 @@ public class TableData
 
         // On ajoute systématiquement le paramètre pression pour les profils
         // verticaux sauf si la liste de paramètres à utiliser est la P011
-        if (Nemo.getInstance().getViewMain().getEditFileForm().isProfile()
+        if (Nemo.getInstance().getViewMain().getMyRulesManager().isProfile()
                 && config.getDataListInSettings().equals(DataListEnum.P091))
         {
             for (TypeData type : typesWS)
             {
                 // ajout systematique de PRES
                 if (type.getCode().startsWith(Intern.paramPRES)
-                        && Nemo.getInstance().getViewMain().getEditFileForm().isProfile())
+                        && Nemo.getInstance().getViewMain().getMyRulesManager().isProfile())
                 {
                     // on rajoute PRES
                     addType(type);
@@ -1148,7 +1148,6 @@ public class TableData
     }
     public void setUnit(TypeUnit typeUnit)
     {
-        // TODO BGT verifier qu'on doit bien ajouter l'abbr
         int selectedRow = myTable.getSelectionIndex();
         if (selectedRow>-1){
             TableItem item =  myTable.getItem(selectedRow);

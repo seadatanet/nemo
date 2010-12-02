@@ -1189,7 +1189,7 @@ public class StationSection extends NemoSection
 
     private void initDataTypeModel(StationModel stationModel)
     {
-        if (!Nemo.getInstance().getViewMain().getEditFileForm().isCollection()) // FAE 022
+            if (!Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection()) // FAE 022
         {
             String typeCombo = datatype.getText();
             DataType newDataType = new DataType();
@@ -1408,7 +1408,7 @@ public class StationSection extends NemoSection
     {
 
         // SECTION type de donnee
-        if (!Nemo.getInstance().getViewMain().getEditFileForm().isCollection()) // FAE022
+        if (!Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection()) // FAE022
         {
             DataType dataType = station.getDataType();
             if (dataType != null)

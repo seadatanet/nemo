@@ -139,12 +139,12 @@ public class EditCruiseForm extends EditForm
                         + editFileForm.nomRepertoire);
             }
 
-            if (editFileForm.isTimeSeries())
+            if (Nemo.getInstance().getViewMain().getMyRulesManager().isTimeSeries())
             {
                 // Série temporelle
                 Utils.messageInfoAppend(Messages.typeFile_timeseries);
             }
-            else if (editFileForm.isTrajectory())
+            else if (Nemo.getInstance().getViewMain().getMyRulesManager().isTrajectory())
             {
                 // Trajectoire
                 Utils.messageInfoAppend(Messages.typeFile_trajectory);

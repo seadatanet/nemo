@@ -10,7 +10,9 @@ import org.eclipse.swt.events.SelectionListener;
 import  org.eclipse.swt.events.SelectionEvent;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
+import fr.ifremer.nemo.util.Global.E_ProcessType;
 /**
  * Description: gestion des boutons radio et checkbox pour la e groupe inputFile de l'onglet File
  * @author sbregent
@@ -33,26 +35,37 @@ public class InputFileRadioSelectionListener implements SelectionListener
     
     public void widgetSelected(SelectionEvent g)
     {
-        selectTypeProcess(g);
-        myEditFileForm.init();
-        
-        if (g.getSource().equals(myEditFileForm.getRadioCollectNotGroupedByCruise())
-                || g.getSource().equals(myEditFileForm.getRadioCollectGroupedByCruise()))
-        {
-            Nemo.getInstance().getViewMain().enableCruise(false);
-        }
-        else{
-            Nemo.getInstance().getViewMain().enableCruise(true);
-        }
       
+        RulesManager rulesMgr = Nemo.getInstance().getViewMain().getMyRulesManager();
+        E_ProcessType processType=E_ProcessType.CRUISE_FILE;
+        
+        if (g.getSource().equals(myEditFileForm.getRadioFichier()))
+        {
+            processType=E_ProcessType.CRUISE_FILE;
+        }
+        else if(g.getSource().equals(myEditFileForm.getRadioDossier()))
+        {
+            processType=E_ProcessType.CRUISE_DIR;
+        }
+        else if (g.getSource().equals(myEditFileForm.getRadioCollectNotGroupedByCruise()))
+        {
+            processType=E_ProcessType.COLLECTION_FILES;
+        }
+        else if (g.getSource().equals(myEditFileForm.getRadioCollectGroupedByCruise()))
+        {
+            processType=E_ProcessType.COLLECTION_DIR;
+        } 
+        rulesMgr.updateFromIHM(processType);
+        selectTypeProcess(g.getSource());
+       
     }
-    protected void selectTypeProcess(SelectionEvent g)
+    protected void selectTypeProcess(Object source)
     {
        
 //         les boutons radios ne sont plus dans le même conteneur :
 //         il faut forcer la deselection
-        if (g.getSource().equals(myEditFileForm.getRadioCollectNotGroupedByCruise())
-                || g.getSource().equals(myEditFileForm.getRadioCollectGroupedByCruise()))
+        if (source.equals(myEditFileForm.getRadioCollectNotGroupedByCruise())
+                || source.equals(myEditFileForm.getRadioCollectGroupedByCruise()))
         {
             myEditFileForm.getRadioDossier().setSelection(false);
             myEditFileForm.getRadioFichier().setSelection(false);

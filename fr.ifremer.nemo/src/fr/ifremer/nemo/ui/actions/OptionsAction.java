@@ -1025,7 +1025,7 @@ public class OptionsAction extends Action implements ISelectionListener,
     // TRADUCTION DES BOUTONS RADIO
     public E_TypeConversion getSelectedConversion()
     {
-        E_TypeConversion selected = E_TypeConversion.UNKNOWN;
+        E_TypeConversion selected = null;
         if (radMedatlas.getSelection())
         {
             selected= E_TypeConversion.MEDATLAS;
@@ -1038,10 +1038,17 @@ public class OptionsAction extends Action implements ISelectionListener,
             }else if (radODVMonoFichier.getSelection())
             {
                 selected = E_TypeConversion.ODV_MULTISTATIONS;
+            }else{
+               // on laisse null, ce qui provoquera une alerte au check
             }
+        }else{
+            selected = E_TypeConversion.UNKNOWN;
         }
+        
             return selected;
     }
+    
+    
     /**
      * This method initializes groupMapping
      */
@@ -1700,6 +1707,11 @@ public class OptionsAction extends Action implements ISelectionListener,
             }
         }
 
+        if (getSelectedConversion()==null)
+        {
+            message.append(Messages.error_settings_outputFormat);
+            blnOK = false;
+        }
         if (!blnOK)
         {
             try

@@ -7,6 +7,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.Configuration.DataListEnum;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.conversion.EditConversionForm;
 import fr.ifremer.nemo.ui.edit.cruise.EditCruiseForm;
@@ -56,7 +57,7 @@ public class Etape
             ok = true;
 
             // first check if an output format has been set
-            if (editFileForm.getSelectedConversion() == E_TypeConversion.UNKNOWN)
+            if (Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType() == E_TypeConversion.UNKNOWN)
             {
                 Utils.messageErreur(Messages.error_file_convertFormatUnknown);
                 return;
@@ -212,7 +213,7 @@ public class Etape
         String value =
             editCruiseForm.sectionReference.getItem(
                 Messages.edit_cruise_cruiseRef).getText().trim();
-        if (value.length() != 13)
+        if (value.length() != 13 && (Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType()==E_TypeConversion.MEDATLAS))
         {
             editConversionForm.setWarningCampagne(Messages.ViewLog_5);
         }
@@ -244,6 +245,7 @@ public class Etape
             EditStationForm editStationForm = Nemo.getInstance().getViewMain().getEditStationForm();
             EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
             EditConversionForm editConversionForm= Nemo.getInstance().getViewMain().getEditConversionForm();
+            RulesManager rulesManager = Nemo.getInstance().getViewMain().getMyRulesManager();
             
             // test des valeurs de Station
 
@@ -291,7 +293,7 @@ public class Etape
             else
             {
                 value = editStationForm.stationNumber.getManualValue();
-                if (Nemo.getInstance().getViewMain().getEditFileForm().isTrajectory())
+                if (Nemo.getInstance().getViewMain().getMyRulesManager().isTrajectory())
                 {
                     // saisie manuelle - obligatoire
                     if (value.trim().equals("") || value.equals("NaN")) { //$NON-NLS-1$ //$NON-NLS-2$
@@ -324,7 +326,7 @@ public class Etape
             {
                 value = value.trim();
             }
-            if (!editFileForm.isCollection() && value.length() > 5)
+            if (!Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection() && value.length() > 5)
             {
                 editConversionForm
                     .setWarningStation(Messages.ViewLog_6);
@@ -336,7 +338,8 @@ public class Etape
             }
 
             // FAE022 : TYPE DE DONNEES
-                if (Nemo.getInstance().getViewMain().isCruiseEnabled())
+                if (Nemo.getInstance().getViewMain().getMyRulesManager().isCruiseEnabled() 
+                        && !Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection())
             {
                 if (editStationForm.dataType.getDatatype()
                     .getValueCombo().getSelectionIndex() == -1)
@@ -617,7 +620,7 @@ public class Etape
             checkValue = true;
             // if (value != null && !value.trim().equals(Global.EMPTY_STRING)){
             if (!editStationForm.depth.isManual()
-                    && !editFileForm.isTrajectory())
+                    && !rulesManager.isTrajectory())
             {
                 // non-obligatoire
 
@@ -822,7 +825,7 @@ public class Etape
              * ==============================================================================================
              */
             // specifique SERIE TEMPO ou TRAJECTOIRE
-            if (editFileForm.isTimeSeries() || editFileForm.isTrajectory())
+            if (rulesManager.isTimeSeries() || rulesManager.isTrajectory())
             {
 
                 /**
@@ -859,7 +862,7 @@ public class Etape
                     value = editStationForm.sensorDepth.getValue();
 
                     // FT 4466 valeur vide autorisée dans le cas trajectory
-                    if (!editFileForm.isTrajectory())
+                    if (!rulesManager.isTrajectory())
                     {
                         if (value.trim().equals(Global.EMPTY_STRING))
                         {
@@ -879,7 +882,7 @@ public class Etape
                     value = editStationForm.sensorDepth.getValue();
                     
                     // FT 4466 valeur vide autorisée dans le cas trajectory
-                    if (!(editFileForm.isTrajectory() && ""
+                    if (!(rulesManager.isTrajectory() && ""
                         .equals(value)))
                     {
                         if (!Pattern.matches(
@@ -982,7 +985,7 @@ public class Etape
              * ==============================================================================================
              */
             // specifique SERIE TEMPO
-            if (editFileForm.isTimeSeries())
+            if (rulesManager.isTimeSeries())
             {
                 /**
                  * ==============================================================================================
@@ -1469,7 +1472,7 @@ public class Etape
             
             editConversionForm.setWarningData(Global.EMPTY_STRING);
             
-            if (editFileForm.getInputFileType() == E_InputType.PROFILE)
+                if (Nemo.getInstance().getViewMain().getMyRulesManager().isProfile())
             {
                 
                boolean checkOk = data_checkPressureIsInFirstPosition(firstParameterCode);
@@ -1477,37 +1480,39 @@ public class Etape
 
                 // Si PRES n'est pas premier => Medatlas impossible
                 // A moins que l'on ait les parametre DEPH, PSAL et TEMP ( FAE 3228 )
-                if (!editFileForm.isCollection() && !firstParameterCode.equals(Intern.paramPRES))
-                {
-                    boolean isPSAL = false;
-                    boolean isTEMP = false;
-                    boolean isDEPH = false;
+               if ((Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType() == E_TypeConversion.MEDATLAS)
+                       && !Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection() 
+                       && !firstParameterCode.equals(Intern.paramPRES))
+               {
+                   boolean isPSAL = false;
+                   boolean isTEMP = false;
+                   boolean isDEPH = false;
 
-                    for (TypeData donnee : editDataForm.getMyTableData().getTypes())
-                    {
-                        if (donnee.getCode().split("-")[0].trim().equals(
-                            Intern.paramDEPH))
-                            isDEPH = true;
-                        else if (donnee.getCode().split("-")[0].trim().equals(
-                            Intern.paramPSAL))
-                            isPSAL = true;
-                        else if (donnee.getCode().split("-")[0].trim().equals(
-                            Intern.paramTEMP))
-                            isTEMP = true;
-                    }
+                   for (TypeData donnee : editDataForm.getMyTableData().getTypes())
+                   {
+                       if (donnee.getCode().split("-")[0].trim().equals(
+                           Intern.paramDEPH))
+                           isDEPH = true;
+                       else if (donnee.getCode().split("-")[0].trim().equals(
+                           Intern.paramPSAL))
+                           isPSAL = true;
+                       else if (donnee.getCode().split("-")[0].trim().equals(
+                           Intern.paramTEMP))
+                           isTEMP = true;
+                   }
 
-                    if (!(isPSAL && isTEMP && isDEPH))
-                        editConversionForm
-                            .setWarningData(Messages.ViewLog_7);
-                    else
-                        editConversionForm
-                            .setWarningData(Global.EMPTY_STRING);
-                }
-                else
-                {
-                    editConversionForm
-                        .setWarningData(Global.EMPTY_STRING);
-                }
+                   if (!(isPSAL && isTEMP && isDEPH))
+                       editConversionForm
+                       .setWarningData(Messages.ViewLog_7);
+                   else
+                       editConversionForm
+                       .setWarningData(Global.EMPTY_STRING);
+               }
+               else
+               {
+                   editConversionForm
+                   .setWarningData(Global.EMPTY_STRING);
+               }
             }
             // code commenté car non accessible (condition ne sera jamais vérifiée)
 //            else if (ViewMain.getTypeFichierEntree() == E_InputType.PROFILE)
@@ -1577,8 +1582,6 @@ public class Etape
         EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
         EditCruiseForm editCruiseForm = Nemo.getInstance().getViewMain().getEditCruiseForm();
         
-        // FAE1386 : desactiver "One File per station" si Trajectory
-        editFileForm.updateOdvTypeFromFileType();
 
         // envoi des valeurs dans le modele
         // attention aux boutons radio
@@ -1599,13 +1602,13 @@ public class Etape
         editFileForm.setValidated(true);
 
         // verrouillage de l'option serieTemporelle pour eviter les changements
-        editFileForm.enableChoice(false);
+        editFileForm.enableSeparatorChoice(false);
+        editFileForm.enableFileTypeChoice(false);
 
         try
         {
             // FAE 022
-            if(! Nemo.getInstance().getViewMain().isCruiseEnabled())
-//            if (editFileForm.isCollection())
+            if(! Nemo.getInstance().getViewMain().getMyRulesManager().isCruiseEnabled())
             {
                 editCruiseForm.setOkApresReset(true);
                 editCruiseForm.setValidated(true);

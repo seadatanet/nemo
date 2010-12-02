@@ -14,6 +14,7 @@ import fr.ifremer.nemo.domain.StationDomain;
 import fr.ifremer.nemo.input.MediaModel;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.input.StationModel;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.ComboType;
 import fr.ifremer.nemo.ui.edit.EditForm;
@@ -94,7 +95,7 @@ public class EditStationForm extends EditForm
             // bouton collapse all / expand all
             createButtonExpand();
 
-            if (Nemo.getInstance().getViewMain().getEditFileForm().isCollection())
+                if (Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection())
             {
                 TableDataSurvey.initTypes();
             }
@@ -155,7 +156,7 @@ public class EditStationForm extends EditForm
     @Override
     protected void initSections()
     {
-        EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
+        RulesManager rulesManager = Nemo.getInstance().getViewMain().getMyRulesManager();
         /**
          * ==============================================================================================
          * station number
@@ -166,7 +167,7 @@ public class EditStationForm extends EditForm
                 .getString(Intern.S_STATIONNUMBER),
                 Messages.edit_station_sectionReference_lib, true, true, 1, this);
         stationNumber.addManualInput(null, ComboType.NONE, "1"); //$NON-NLS-1$ 
-        if (!editFileForm.isTrajectory())
+        if (!rulesManager.isTrajectory())
         {
             stationNumber.getManualInput().setNbColumns(2);
             stationNumber.getManualInput().setLabelButton(
@@ -180,7 +181,7 @@ public class EditStationForm extends EditForm
          * data type
          * ==============================================================================================
          */
-        if (!editFileForm.isCollection())
+        if (!Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection())
         {
             dataType =
                 new StationSection(Intern.S_DATATYPE, Messages
@@ -254,7 +255,7 @@ public class EditStationForm extends EditForm
         time.addConverter(ComboType.TIME, Global.EMPTY_STRING);
         time.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
 
-        boolean defaultValueEnable = editFileForm.getInputFileType().equals(E_InputType.PROFILE);
+        boolean defaultValueEnable = rulesManager.isProfile();
         time.addAutoInput(null, false, MetaInData.FACULTATIF, false, defaultValueEnable);
         listeSections.add(time);
         /**
@@ -283,7 +284,7 @@ public class EditStationForm extends EditForm
         latitude.addAutoInput(null, true, MetaInData.FACULTATIF, false, false);
         listeSections.add(latitude);
 
-        if (editFileForm.isTimeSeries())
+        if (rulesManager.isTimeSeries())
         {
             endLatitude =
                 new StationSection(Intern.S_ELAT, Messages
@@ -310,7 +311,7 @@ public class EditStationForm extends EditForm
         longitude.addAutoInput(null, true, MetaInData.FACULTATIF, false, false);
         listeSections.add(longitude);
 
-        if (editFileForm.isTimeSeries())
+        if (rulesManager.isTimeSeries())
         {
             endLongitude =
                 new StationSection(Intern.S_ELON, Messages
@@ -340,9 +341,9 @@ public class EditStationForm extends EditForm
         depth.addAutoInput(null, true, MetaInData.FACULTATIF, false, true);
         listeSections.add(depth);
 
-        if (!editFileForm.isProfile())
+        if (!rulesManager.isProfile())
         {
-            if (editFileForm.isTimeSeries())
+            if (rulesManager.isTimeSeries())
             {
                 endDepth =
                     new StationSection(Intern.S_EDEPTH, Messages
@@ -372,7 +373,7 @@ public class EditStationForm extends EditForm
             sensorDepth.setTimeSeriesInfo(true);
             listeSections.add(sensorDepth);
 
-            if (editFileForm.isTimeSeries())
+            if (rulesManager.isTimeSeries())
             {
                 magneticDeclin =
                     new StationSection(Intern.S_MAGNETIC, Messages
@@ -416,9 +417,9 @@ public class EditStationForm extends EditForm
     @Override
     public void actualiseEdition()
     {
-        EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
+        RulesManager rulesManager = Nemo.getInstance().getViewMain().getMyRulesManager();
         // pour trajectoires et time-series
-        if (editFileForm.isTrajectory()|| editFileForm.isTimeSeries())
+        if (rulesManager.isTrajectory()|| rulesManager.isTimeSeries())
         {
             // si Date est saisie dans les données
             boolean dateInData =
@@ -432,7 +433,7 @@ public class EditStationForm extends EditForm
             time.setEnabledManual(!(dateInData || timeInData));
         }
 
-        if (editFileForm.isTrajectory())
+        if (rulesManager.isTrajectory())
         {
             // in trajectory, latitude must be in data
             latitude.setEnableInData(MetaInData.OBLIGATOIRE);

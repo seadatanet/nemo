@@ -154,7 +154,6 @@ public class UnitFilteredTable extends AbstractFilteredTable
     @Override
     protected String getDialogTitle()
     {
-        //TODO BGT
         return Messages.edit_data_P061;
     }
 
