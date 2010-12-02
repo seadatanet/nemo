@@ -4,8 +4,8 @@
   <nautilusWsURL>http://www.ifremer.fr/WSnautilus/services/NAUTILUS</nautilusWsURL>
   <showRule>true</showRule>
   <contact></contact>
-  <modelsDirectory>\\Siec\9064780_conv\Developpement\JeuxDeTests\Modeles</modelsDirectory>
-  <cruisesDirectory>\\Siec\9064780_conv\Developpement\JeuxDeTests\Donnees</cruisesDirectory>
+  <modelsDirectory></modelsDirectory>
+  <cruisesDirectory></cruisesDirectory>
   <outputDirectory></outputDirectory>
   <writeCdi>true</writeCdi>
   <idEdmoRespCdi>486</idEdmoRespCdi>
@@ -16,11 +16,11 @@
   <cdiMethod>CDIMTH01</cdiMethod>
   <accesDonnees>LS</accesDonnees>
   <typePlateforme>12</typePlateforme>
-  <writeMapping>false</writeMapping>
+  <writeMapping>true</writeMapping>
   <fichierMapping>coupling.txt</fichierMapping>
   <dateISO>true</dateISO>
   <dataList>P011_VIA_P021</dataList>
-  <defaultConversionType>ODV_MULTISTATIONS</defaultConversionType>
+  <defaultConversionType>MEDATLAS</defaultConversionType>
   <proxy use="false" address="" port="" login="" password=""/>
   <edmoURL>http://seadatanet.maris2.nl/ws/ws_edmo.asmx</edmoURL>
   <vocabURL>http://vocab.ndg.nerc.ac.uk/1.1/VocabServerAPI_dl.wsdl</vocabURL>
