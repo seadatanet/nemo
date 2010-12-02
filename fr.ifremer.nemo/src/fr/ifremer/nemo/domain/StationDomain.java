@@ -138,7 +138,7 @@ public class StationDomain
         odvStationHeader.append(Global.TAB);
         odvStationHeader.append("LOCAL_CDI_ID");
         odvStationHeader.append(Global.TAB);
-        odvStationHeader.append("EDMO_CODE");
+        odvStationHeader.append("EDMO_code");
         odvStationHeader.append(Global.TAB);
         odvStationHeader.append("Bot. Depth [m]");
         odvStationHeader.append(Global.TAB);
