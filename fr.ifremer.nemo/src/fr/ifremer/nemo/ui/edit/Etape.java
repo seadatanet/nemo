@@ -1551,7 +1551,7 @@ public class Etape
 
         if (dataList == DataListEnum.P011_VIA_P091 || dataList == DataListEnum.P091)
         {
-            //FAE 5819 : ajout du code DPSF comme parametre possible
+            //FAE 5819 : ajout du code DPSF(P091) ou MINCDIST(P011) comme parametre possible
             if (!(firstParameterCode.equals(Intern.paramPRES) 
                     || firstParameterCode.equals(Intern.paramDEPH)
                     || firstParameterCode.equals(Intern.paramDPSF)
@@ -1564,7 +1564,7 @@ public class Etape
         }
         else if (dataList == DataListEnum.P011_VIA_P021)
         {
-            //FAE 5819 : ajout du code DPSF comme parametre possible
+            //FAE 5819 : ajout du code DPSF(P091) ou MINCDIST(P011) comme parametre possible
             if (!(firstParameterCode.equals(Intern.paramPREX) 
                     || firstParameterCode.equals(Intern.paramMPMN)
                     || firstParameterCode.equals(Intern.paramAHGT)
