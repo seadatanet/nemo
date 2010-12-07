@@ -1,0 +1,1225 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0" class="java.beans.XMLDecoder"> 
+ <object class="java.util.ArrayList"> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>A00</string> 
+    </void> 
+    <void property="name"> 
+     <string>ATLANTIC OCEAN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>A01</string> 
+    </void> 
+    <void property="name"> 
+     <string>NORTH ATLANTIC OCEAN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>A10</string> 
+    </void> 
+    <void property="name"> 
+     <string>NORTHEAST ATLANTIC</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>A12</string> 
+    </void> 
+    <void property="name"> 
+     <string>BAY OF BISCAY</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>A13</string> 
+    </void> 
+    <void property="name"> 
+     <string>ENGLISH CHANNEL</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>A14</string> 
+    </void> 
+    <void property="name"> 
+     <string>NORTH SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>A15</string> 
+    </void> 
+    <void property="name"> 
+     <string>GREENLAND SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>A16</string> 
+    </void> 
+    <void property="name"> 
+     <string>NORWEGIAN SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>A17</string> 
+    </void> 
+    <void property="name"> 
+     <string>BRISTOL CHANNEL</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>A18</string> 
+    </void> 
+    <void property="name"> 
+     <string>WEST SCOTLAND COASTAL WATERS</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>A19</string> 
+    </void> 
+    <void property="name"> 
+     <string>IRISH SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>A21</string> 
+    </void> 
+    <void property="name"> 
+     <string>BALTIC SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>A22</string> 
+    </void> 
+    <void property="name"> 
+     <string>GULF OF BOTHNIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>A23</string> 
+    </void> 
+    <void property="name"> 
+     <string>GULF OF FINLAND</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>A24</string> 
+    </void> 
+    <void property="name"> 
+     <string>GULF OF RIGA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>A25</string> 
+    </void> 
+    <void property="name"> 
+     <string>KATTEGAT  SOUND AND BELTS</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>A26</string> 
+    </void> 
+    <void property="name"> 
+     <string>SKAGGERAK</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>B10</string> 
+    </void> 
+    <void property="name"> 
+     <string>NORTHWEST ATLANTIC</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>B34</string> 
+    </void> 
+    <void property="name"> 
+     <string>NORTHWEST PASSAGE</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>B35</string> 
+    </void> 
+    <void property="name"> 
+     <string>BAFFIN BAY</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>B36</string> 
+    </void> 
+    <void property="name"> 
+     <string>DAVIS STRAIT</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>B37</string> 
+    </void> 
+    <void property="name"> 
+     <string>LABRADOR SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>B38</string> 
+    </void> 
+    <void property="name"> 
+     <string>HUDSON BAY</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>B39</string> 
+    </void> 
+    <void property="name"> 
+     <string>HUDSON STRAIT</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>B64</string> 
+    </void> 
+    <void property="name"> 
+     <string>GULF OF ST. LAWRENCE</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>B65</string> 
+    </void> 
+    <void property="name"> 
+     <string>BAY OF FUNDY</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>B86</string> 
+    </void> 
+    <void property="name"> 
+     <string>GULF OF MEXICO</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>B87</string> 
+    </void> 
+    <void property="name"> 
+     <string>CARIBBEAN SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>C10</string> 
+    </void> 
+    <void property="name"> 
+     <string>EQUATORIAL ATLANTIC OCEAN (10N-10S)</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>C14</string> 
+    </void> 
+    <void property="name"> 
+     <string>GULF OF GUINEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>C20</string> 
+    </void> 
+    <void property="name"> 
+     <string>SOUTHEAST ATLANTIC</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>C30</string> 
+    </void> 
+    <void property="name"> 
+     <string>SOUTHWEST ATLANTIC</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>C31</string> 
+    </void> 
+    <void property="name"> 
+     <string>RIO DE LA PLATA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>C80</string> 
+    </void> 
+    <void property="name"> 
+     <string>SOUTH ATLANTIC OCEAN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>DH3</string> 
+    </void> 
+    <void property="name"> 
+     <string>LEVANTINE BASIN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>D00</string> 
+    </void> 
+    <void property="name"> 
+     <string>MEDITERRANEAN SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>D10</string> 
+    </void> 
+    <void property="name"> 
+     <string>MED. WESTERN BASIN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>D11</string> 
+    </void> 
+    <void property="name"> 
+     <string>GIBRALTAR STRAIT</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>D12</string> 
+    </void> 
+    <void property="name"> 
+     <string>ALBORAN SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>D13</string> 
+    </void> 
+    <void property="name"> 
+     <string>BALEARIC SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>D14</string> 
+    </void> 
+    <void property="name"> 
+     <string>LIGURIAN SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>D15</string> 
+    </void> 
+    <void property="name"> 
+     <string>TYRRHENIAN SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>D17</string> 
+    </void> 
+    <void property="name"> 
+     <string>SICILIA STRAIT</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>D30</string> 
+    </void> 
+    <void property="name"> 
+     <string>MED., EASTERN BASIN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>D31</string> 
+    </void> 
+    <void property="name"> 
+     <string>IONIAN SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>D32</string> 
+    </void> 
+    <void property="name"> 
+     <string>ADRIATIC SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>D33</string> 
+    </void> 
+    <void property="name"> 
+     <string>AEGEAN SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>D41</string> 
+    </void> 
+    <void property="name"> 
+     <string>BLACK SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>D42</string> 
+    </void> 
+    <void property="name"> 
+     <string>SEA OF MARMARA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>D43</string> 
+    </void> 
+    <void property="name"> 
+     <string>SEA OF AZOV</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>G00</string> 
+    </void> 
+    <void property="name"> 
+     <string>ARCTIC OCEAN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>G11</string> 
+    </void> 
+    <void property="name"> 
+     <string>EAST SIBERIAN SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>G12</string> 
+    </void> 
+    <void property="name"> 
+     <string>CHUKCHI SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>G13</string> 
+    </void> 
+    <void property="name"> 
+     <string>BEAUFORT SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>G14</string> 
+    </void> 
+    <void property="name"> 
+     <string>LINCOLN SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>G17</string> 
+    </void> 
+    <void property="name"> 
+     <string>BARENTS SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>G18</string> 
+    </void> 
+    <void property="name"> 
+     <string>WHITE SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>G19</string> 
+    </void> 
+    <void property="name"> 
+     <string>KARA SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>G21</string> 
+    </void> 
+    <void property="name"> 
+     <string>LAPTEV SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>I00</string> 
+    </void> 
+    <void property="name"> 
+     <string>INDIAN OCEAN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>I11</string> 
+    </void> 
+    <void property="name"> 
+     <string>GULF OF ADEN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>I21</string> 
+    </void> 
+    <void property="name"> 
+     <string>RED SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>I22</string> 
+    </void> 
+    <void property="name"> 
+     <string>GULF OF SUEZ</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>I23</string> 
+    </void> 
+    <void property="name"> 
+     <string>GULF OF AQABA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>I31</string> 
+    </void> 
+    <void property="name"> 
+     <string>OMAN SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>I32</string> 
+    </void> 
+    <void property="name"> 
+     <string>GULF OF OMAN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>I33</string> 
+    </void> 
+    <void property="name"> 
+     <string>PERSIAN GULF</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>I34</string> 
+    </void> 
+    <void property="name"> 
+     <string>LACCADIVE SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>I35</string> 
+    </void> 
+    <void property="name"> 
+     <string>MOZAMBIQUE CHANNEL</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>I41</string> 
+    </void> 
+    <void property="name"> 
+     <string>BAY OF BENGAL</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>I42</string> 
+    </void> 
+    <void property="name"> 
+     <string>ANDAMAN SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>I43</string> 
+    </void> 
+    <void property="name"> 
+     <string>MALACCA STRAIT</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>I44</string> 
+    </void> 
+    <void property="name"> 
+     <string>SINGAPORE STRAIT</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>I51</string> 
+    </void> 
+    <void property="name"> 
+     <string>GREAT AUSTRALIAN BIGHT</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>I52</string> 
+    </void> 
+    <void property="name"> 
+     <string>BASS STRAIT</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>J70</string> 
+    </void> 
+    <void property="name"> 
+     <string>ARCHIPELAGO INDONESIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>J71</string> 
+    </void> 
+    <void property="name"> 
+     <string>SULU SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>J72</string> 
+    </void> 
+    <void property="name"> 
+     <string>CELEBES SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>J73</string> 
+    </void> 
+    <void property="name"> 
+     <string>MOLUCCA SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>J74</string> 
+    </void> 
+    <void property="name"> 
+     <string>GULF OF TOMINI</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>J75</string> 
+    </void> 
+    <void property="name"> 
+     <string>HALMAHERA SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>J76</string> 
+    </void> 
+    <void property="name"> 
+     <string>CERAM SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>J77</string> 
+    </void> 
+    <void property="name"> 
+     <string>BANDA SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>J78</string> 
+    </void> 
+    <void property="name"> 
+     <string>ARAFURA SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>J79</string> 
+    </void> 
+    <void property="name"> 
+     <string>TIMOR SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>J81</string> 
+    </void> 
+    <void property="name"> 
+     <string>FLORES SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>J82</string> 
+    </void> 
+    <void property="name"> 
+     <string>BONI SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>J83</string> 
+    </void> 
+    <void property="name"> 
+     <string>BALI SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>J84</string> 
+    </void> 
+    <void property="name"> 
+     <string>MAKASSAR STRAIT</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>J85</string> 
+    </void> 
+    <void property="name"> 
+     <string>JAVA SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>J86</string> 
+    </void> 
+    <void property="name"> 
+     <string>SAVU SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>P00</string> 
+    </void> 
+    <void property="name"> 
+     <string>PACIFIC OCEAN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>P01</string> 
+    </void> 
+    <void property="name"> 
+     <string>NORTH PACIFIC OCEAN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>P06</string> 
+    </void> 
+    <void property="name"> 
+     <string>BERING SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>P10</string> 
+    </void> 
+    <void property="name"> 
+     <string>NORTHEAST PACIFIC</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>P11</string> 
+    </void> 
+    <void property="name"> 
+     <string>GULF OF ALASKA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>P12</string> 
+    </void> 
+    <void property="name"> 
+     <string>COASTAL WATERS OF SE ALASKA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>P13</string> 
+    </void> 
+    <void property="name"> 
+     <string>COASTAL WATERS OF BRITISH COLUMBIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>P14</string> 
+    </void> 
+    <void property="name"> 
+     <string>GULF OF CALIFORNIA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>P20</string> 
+    </void> 
+    <void property="name"> 
+     <string>NORTHWEST PACIFIC (LIMIT 180)</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>P21</string> 
+    </void> 
+    <void property="name"> 
+     <string>SEA OF OKHOTSK</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>P22</string> 
+    </void> 
+    <void property="name"> 
+     <string>SEA OF JAPAN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>P23</string> 
+    </void> 
+    <void property="name"> 
+     <string>INLAND SEA OF JAPAN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>P24</string> 
+    </void> 
+    <void property="name"> 
+     <string>YELLOW SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>P25</string> 
+    </void> 
+    <void property="name"> 
+     <string>SOUTH CHINA SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>P26</string> 
+    </void> 
+    <void property="name"> 
+     <string>EAST CHINA SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>P27</string> 
+    </void> 
+    <void property="name"> 
+     <string>GULF OF THAILAND</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>P28</string> 
+    </void> 
+    <void property="name"> 
+     <string>PHILIPPINE SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>Q10</string> 
+    </void> 
+    <void property="name"> 
+     <string>SOUTHEAST PACIFIC (LIMIT 140 W)</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>Q20</string> 
+    </void> 
+    <void property="name"> 
+     <string>SOUTHWEST PACIFIC (LIMIT 140 W)</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>Q21</string> 
+    </void> 
+    <void property="name"> 
+     <string>TASMAN SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>Q22</string> 
+    </void> 
+    <void property="name"> 
+     <string>CORAL SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>Q23</string> 
+    </void> 
+    <void property="name"> 
+     <string>SOLOMON SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>Q24</string> 
+    </void> 
+    <void property="name"> 
+     <string>BISMARCK SEA</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>Q80</string> 
+    </void> 
+    <void property="name"> 
+     <string>SOUTH PACIFIC OCEAN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>T00</string> 
+    </void> 
+    <void property="name"> 
+     <string>ANTARCTIC OCEAN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>T11</string> 
+    </void> 
+    <void property="name"> 
+     <string>ANTARCTIC OCEAN ATLANTIC SECTOR</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>T21</string> 
+    </void> 
+    <void property="name"> 
+     <string>ANTARCTIC OCEAN INDIAN SECTOR</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>T31</string> 
+    </void> 
+    <void property="name"> 
+     <string>ANTARCTIC OCEAN PACIFIC SECTOR</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>WWW</string> 
+    </void> 
+    <void property="name"> 
+     <string>WORLD WIDE COVERAGE</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>XXX</string> 
+    </void> 
+    <void property="name"> 
+     <string>UNKNOWN</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSRegion"> 
+    <void property="code"> 
+     <string>Z99</string> 
+    </void> 
+    <void property="name"> 
+     <string>EMERGED LAND</string> 
+    </void> 
+   </object> 
+  </void> 
+ </object> 
+</java> 

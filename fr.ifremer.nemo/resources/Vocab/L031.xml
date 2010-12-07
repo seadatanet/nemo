@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_06" class="java.beans.XMLDecoder"> 
+ <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="12"> 
+  <void index="0"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L031/2/5</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>day to sub-week</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>day2week</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Sampling interval is one day or longer, but shorter than one week.  Sampling frequency is daily or less, but greater than weekly.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1155907982000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L031/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="1"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L031/2/15</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>decadal</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>decadal</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Sampling interval is 10 years or more.  Sampling frequency is less than or equal to decadal.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1155907982000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L031/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="2"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L031/2/4</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>hour to sub-day</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>hour2day</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Sampling interval is one hour or longer, but shorter than one day.  Sampling frequency is hourly or less, but greater than daily.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1155907982000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L031/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="3"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L031/2/0</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>indeterminate</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>indeterminate</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>No regular sampling interval exists because measurements are made at irregular and unpredictable times.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1166613975000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L031/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="4"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L031/2/3</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>minute to sub-hour</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>minute2hour</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Sampling interval is one minute or longer, but shorter than one hour.  Sampling frequency is 1/60 hertz or less, but greater than 1/3600 hertz.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1155907982000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L031/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="5"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L031/2/7</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>month to sub-year</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>month2year</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Sampling interval is one month or longer, but shorter than one year.  Sampling frequency is monthly or less, but greater than yearly.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1155907982000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L031/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="6"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L031/2/98</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>not applicable</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>NA</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>There is no meaningful sampling interval either because measurements have not not repreated (e.g. sediment core measurements) or measurements have been averaged along a spatial axis (e.g. binned CTD data).</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1166614268000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L031/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="7"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L031/2/2</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>second to sub-minute</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>second2minute</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Sampling interval is one second or longer, but shorter than one minute.  Sampling frequency is 1 hertz or less, but greater than 1/60 hertz.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1155907982000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L031/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="8"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L031/2/1</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>sub-second</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>sub-second</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Sampling interval is less than a second.  Sampling frequency is greater than one hertz.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1155907982000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L031/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="9"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L031/2/99</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>unknown</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>unknown</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>A regular sampling interval probably exists but is not known to, or computable by, the information provider.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1166614192000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L031/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="10"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L031/2/6</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>week to sub-month</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>week2month</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Sampling interval is one week or longer, but shorter than one month.  Sampling frequency is weekly or less, but greater than monthly.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1155907982000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L031/2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="11"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L031/2/13</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>year to sub-decade</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>annual</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Sampling interval is one year or longer, but shorter than ten years.  Sampling frequency is yearly or less, but greater than decadal.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1155907982000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L031/2</string> 
+    </void> 
+   </object> 
+  </void> 
+ </array> 
+</java> 
