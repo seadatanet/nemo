@@ -147,8 +147,10 @@ public class StationSection extends NemoSection
             MetaInData enable, boolean withCursor, boolean defaultValueEnable)
     {
         enableInData = enable;
+        //correction retour 5803 
+        // correction de l'erreur amenée dans correction du 4471: 1er arg=nbLignes et non 1
         autoInput =
-            new GrpAutoInput(1, autoLabel, variablePos, enableInData,
+            new GrpAutoInput(nbLignes, autoLabel, variablePos, enableInData,
                 withCursor, defaultValueEnable);
     }
   
