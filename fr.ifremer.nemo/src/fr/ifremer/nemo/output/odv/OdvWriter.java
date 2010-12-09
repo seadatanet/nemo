@@ -84,8 +84,11 @@ public class OdvWriter extends NemoWriter{
                     outputFileWriter.println(cruiseHeader);
                     
                     //FAE 6087 reinitialisation de la reference à chaque fichier
-                    iDomain.getCruise().getStation().updateRef();
-                    
+                    // 07/12/2010: 6087 ajout du if CRUISE_FILE, sinon erreur dans le cas cruise dir
+                    if (processType == E_ProcessType.CRUISE_FILE)
+                    {
+                        iDomain.getCruise().getStation().updateRef();
+                    }
                     writeStation(st, inputFilePath, mOutputFileName);
                     
                     outputFileWriter.close();
@@ -109,7 +112,11 @@ public class OdvWriter extends NemoWriter{
                         throw new GenerationException(Messages.error_convert_stationsDoubles + st.getReference()); 
                     }
                     //FAE 6087 reinitialisation de la reference à lecture fichier entree (car pour ecrire une station on lit tout le fichier)
-                    iDomain.getCruise().getStation().updateRef();
+                   // 07/12/2010: 6087 ajout du if CRUISE_FILE, sinon erreur dans le cas cruise dir
+                    if (processType == E_ProcessType.CRUISE_FILE)
+                    {
+                        iDomain.getCruise().getStation().updateRef();
+                    }
                     writeStation(st, inputFilePath, outputFileName);
                 }
                 
