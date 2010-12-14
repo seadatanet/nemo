@@ -94,7 +94,7 @@ public interface Global
     public enum E_InputType{
         PROFILE, TIMESERIES, TRAJECTORY;
     }
-    
+    // COLLECTION_DIR = group by cruise
     public enum E_ProcessType{
         CRUISE_FILE, CRUISE_DIR, COLLECTION_DIR, COLLECTION_FILES;
     }
