@@ -976,8 +976,10 @@ public class Utils
             }
             catch (IOException e)
             {
-
                 e.printStackTrace();
+                // gestion de l'erreur si le dossier ne contient aucun fichier - affichage d'un message a l'utilisateur
+                Utils.messageErreurAppend(Messages.error_file_selectDir);
+                ok=false;
             }
 
         }

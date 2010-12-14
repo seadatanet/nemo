@@ -57,6 +57,7 @@ public class OdvWriter extends NemoWriter{
             if (processType == E_ProcessType.COLLECTION_DIR){
                 cruise.setDataSetRef(new File(inputFilePath).getName());
                 outputFileName += File.separator + cruise.getDataSetRef();
+               // System.out.println( "outputFileName "+ outputFileName);
             }
             
     
@@ -66,25 +67,18 @@ public class OdvWriter extends NemoWriter{
                 
                 for (Station st : station.getStations(inputFilePath)){
                     
-//                  FAE 6143
-                    if (checkStationAlreadyExists(st.getReference()))
-                    {
-                        throw new GenerationException(Messages.error_convert_stationsDoubles + st.getReference()); 
-                    }
                     if (processType == E_ProcessType.COLLECTION_DIR){
                         new File(outputFileName).mkdir();
                     }
                     
-                    String localCdiId = station.getLocalCdiId(cruise, Conversion.ODV, st.getReference());
+                  //FAE 6143
+                    String localCdiId = station.getAndCheckLocalCDI(cruise, Conversion.ODV, st.getReference());
                     String mOutputFileName = outputFileName + File.separator + localCdiId + Conversion.ODV.getExt();
                     outputFileWriter = new PrintWriter(new BufferedWriter(new FileWriter(mOutputFileName)));
     
                     // écriture de l'entête campagne
                     StringBuffer cruiseHeader = cruise.getHeader(c);
                     outputFileWriter.println(cruiseHeader);
-                    
-                    //FAE 6087 reinitialisation de la reference à chaque fichier
-                    // 07/12/2010: 6087 ajout du if CRUISE_FILE, sinon erreur dans le cas cruise dir
                     if (processType == E_ProcessType.CRUISE_FILE)
                     {
                         iDomain.getCruise().getStation().updateRef();
@@ -97,20 +91,18 @@ public class OdvWriter extends NemoWriter{
             else{
                 // conversion ODV multistations => 1 fichier de sortie
                 
-                if (processType == E_ProcessType.COLLECTION_DIR)
+                if (processType == E_ProcessType.COLLECTION_DIR){
                     outputFileName += Conversion.ODV.getExt();
+                    iDomain.getCruise().getStation().updateRef();
+                }
                 outputFileWriter = new PrintWriter(new BufferedWriter(new FileWriter(outputFileName)));
                 
+//                System.out.println("outputFileName "+outputFileName);
                 // écriture de l'entête campagne
                 StringBuffer cruiseHeader = cruise.getHeader(c);
                 outputFileWriter.println(cruiseHeader);
     
                 for (Station st : station.getStations(inputFilePath)){
-//                  FAE 6143
-                    if (checkStationAlreadyExists(st.getReference()))
-                    {
-                        throw new GenerationException(Messages.error_convert_stationsDoubles + st.getReference()); 
-                    }
                     //FAE 6087 reinitialisation de la reference à lecture fichier entree (car pour ecrire une station on lit tout le fichier)
                    // 07/12/2010: 6087 ajout du if CRUISE_FILE, sinon erreur dans le cas cruise dir
                     if (processType == E_ProcessType.CRUISE_FILE)

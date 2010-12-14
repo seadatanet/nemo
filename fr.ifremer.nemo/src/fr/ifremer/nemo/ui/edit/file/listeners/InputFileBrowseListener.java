@@ -21,6 +21,7 @@ import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.util.Preformat;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
 
 import  org.eclipse.swt.events.SelectionEvent;
@@ -45,32 +46,8 @@ public class InputFileBrowseListener extends SelectionAdapter
     
     private void reinit()
     {
-        Nemo.getInstance().getViewMain().getEditFileForm().setFileLoaded(false);
-        
-        Nemo.getInstance().getViewMain().getEditFileForm().reinitTextArea();
-        // forcage affichage onglet 0
-        Nemo.getInstance().getViewMain().selectTabByIndex(0);
-        Nemo.getInstance().getViewMain().setAffiche(0);
-
-        // RAZ global
-        Utils.razGlobal();
-
-        // reset de l'etape de conversion
-        Nemo.getInstance().getViewMain().setEtape(0);
-
-        // lancement du processus sur le premier onglet et
-        // effacement preventif
-        // si besoin
-        // fillDesc(true);
-        Nemo.getInstance().getViewMain().getEditFileForm().afficheEdition();
-
-
-        // reinitialisation du tableau de paramètres
-        Nemo.getInstance().getViewMain().getEditDataForm().reinitTableData();
-        
-        
-        ViewLog.styledTextLogErreurs
-        .setText(Global.EMPTY_STRING);
+        //6414
+        Nemo.getInstance().getViewMain().getEditFileForm().reinitAllButProcess();
     }
     
     
@@ -80,6 +57,8 @@ public class InputFileBrowseListener extends SelectionAdapter
        
         E_ProcessType currentProcessType =  Nemo.getInstance().getViewMain().getMyRulesManager().getMyProcessType();
         reinit();
+        
+        Preformat.setPreformat(false);
         
         if (currentProcessType == E_ProcessType.CRUISE_FILE)
         {

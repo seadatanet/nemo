@@ -14,6 +14,7 @@ import java.io.StringReader;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import fr.ifremer.nemo.Nemo;
@@ -22,12 +23,14 @@ import fr.ifremer.nemo.input.Fragment;
 import fr.ifremer.nemo.input.InputModel;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.input.StationModel;
+import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.medatlas.Elts;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
+import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
 
@@ -54,6 +57,9 @@ public class StationDomain
     protected int _ref = -1;
 
     protected boolean _computed;
+    
+    protected HashSet<String> stationsLocalCDIList;
+    
 
     public StationDomain()
     {
@@ -82,6 +88,7 @@ public class StationDomain
         _listStations = new HashMap<String, List<Station>>();
         _ref = -1;
         _someInData = false;
+        stationsLocalCDIList = new HashSet<String>();
         // _currentStationValues = new HashMap<String, Object>();
         // _currentStationMetaFlags = new HashMap<String, String>();
     }
@@ -410,7 +417,7 @@ public class StationDomain
             throws ParseException
     {
         // FAE 1143 : nommage du LOCAL_CDI_ID
-
+        String localCDIId="";
         String cruiseRef = Global.EMPTY_STRING;
         String stationReference = ref.trim();
 
@@ -468,9 +475,28 @@ public class StationDomain
                 temp += dataType.getCode();
             }
         }
-        return Utils.validFileName(temp);
+        localCDIId = Utils.validFileName(temp);
+       
+        return localCDIId;
     }
-
+    
+    // FAE 6143
+    public String getAndCheckLocalCDI(CruiseDomain cDomain, Conversion c, String ref) throws ParseException, GenerationException
+    {
+       String localCdi= getLocalCdiId(cDomain,c, ref);
+        if (stationsLocalCDIList.contains(localCdi))
+        {
+            //System.out.println("doublon"); //$NON-NLS-1$
+            throw new GenerationException(Messages.error_convert_stationsDoubles + localCdi); 
+        }else{
+            stationsLocalCDIList.add(localCdi);
+        }
+        return localCdi;
+    }
+    public void resetlocalCDIList()
+    {
+        stationsLocalCDIList = new HashSet<String>();
+    }
     @SuppressWarnings("nls")
     private StringBuffer getMedatlasHeader(Station currentStation,
             String[] inputFile) throws ParseException

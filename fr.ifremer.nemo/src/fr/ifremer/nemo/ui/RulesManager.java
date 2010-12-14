@@ -153,7 +153,8 @@ public class RulesManager
       
        // si modif process, on fait un reset global
        resetFileForm();
-       
+       //FAE 6414
+       myEditFileForm.reinitAllButProcess();
        myProcessType = processType;
        reinitRules();
        rule_process(true);

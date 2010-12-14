@@ -115,6 +115,24 @@ public class EditFileForm extends EditForm
         enableSeparatorChoice(true);
         Nemo.getInstance().getViewMain().getMyRulesManager().resetFileForm();
     }
+    public void reinitAllButProcess()
+    {
+        setFileLoaded(false);
+        reinitTextArea();
+        Nemo.getInstance().getViewMain().setAffiche(0);
+        // RAZ global
+        Utils.razGlobal();
+        // reset de l'etape de conversion
+        Nemo.getInstance().getViewMain().setEtape(0);
+        // lancement du processus sur le premier onglet et
+        // effacement preventif
+        // si besoin
+        // fillDesc(true);
+        Nemo.getInstance().getViewMain().getEditFileForm().afficheEdition();
+        // reinitialisation du tableau de paramètres
+        Nemo.getInstance().getViewMain().getEditDataForm().reinitTableData();
+        ViewLog.styledTextLogErreurs.setText(Global.EMPTY_STRING);
+    }
     
     public void resetDefaultEnableConversionTypes()
     {
@@ -166,6 +184,14 @@ public class EditFileForm extends EditForm
     }
     public void resetDefaultSelectionSeparator()
     {
+        // 6414 reinitialisation enable
+        chkSeparateur.setEnabled(true);
+        radioTabulation.setEnabled(true);
+        radioPointVirgule.setEnabled(true);
+        radioVirgule.setEnabled(true);
+        radioEspace.setEnabled(true);
+        radioSeparateurAutre.setEnabled(true);
+        textSeparateur.setEnabled(true);
         // reinitialisation des selections
         chkSeparateur.setSelection(false);
         radioTabulation.setSelection(true);

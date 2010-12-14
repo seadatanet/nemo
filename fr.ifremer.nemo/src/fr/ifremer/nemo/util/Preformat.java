@@ -422,10 +422,14 @@ public class Preformat
         // Decoupage des colonnes
         for (i = 0; i < _nbColonne; i++)
         {
+            try{
             _colonne[i] =
                 ligneLue.substring(indexSeparateur[i] + 1,
                     indexSeparateur[i + 1]);
-
+            }catch(Exception e)
+            {
+                System.out.println("error preformat"); //$NON-NLS-1$
+            }
             // System.out.println("ligne " + ligneLue + "i " + i + "index sep "
             // +
             // indexSeparateur);

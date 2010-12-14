@@ -87,7 +87,7 @@ public class CDIResumeWriter
             InputDomain iDomain = nemo.getDomain();
             CruiseDomain cDomain = iDomain.getCruise();
             StationDomain sDomain = cDomain.getStation();
-
+            sDomain.resetlocalCDIList();
             Configuration config = nemo.getConfig();
 
             for (String outputPath : iDomain.getMedia().getOutputFiles()

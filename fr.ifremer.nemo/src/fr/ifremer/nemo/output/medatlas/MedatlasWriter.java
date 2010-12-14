@@ -63,12 +63,10 @@ public class MedatlasWriter extends NemoWriter{
 
 
 	        for (Station currentStation : station.getStations(inputFilePath)){
-//            FAE 6143 
-	            if (checkStationAlreadyExists(currentStation.getReference()))
-	            {
-	                throw new GenerationException(Messages.error_convert_stationsDoubles + currentStation.getReference()); 
-	            }
-	            CalcPres.init();     
+//            FAE 6143 check doublons
+                station.getAndCheckLocalCDI(cruise, Conversion.ODV, currentStation.getReference());
+	            
+                CalcPres.init();     
 
 	            File inputFile= new File(inputFilePath + File.separator + currentStation.getFileName());
 	            bufferedReader = new BufferedReader(new FileReader(inputFile));

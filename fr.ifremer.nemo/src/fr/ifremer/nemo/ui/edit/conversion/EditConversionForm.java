@@ -141,8 +141,10 @@ public class EditConversionForm extends EditForm
                                 Utils.messageErreur(Messages.error_convert_cancel);
                                 throw new Exception("Cancelled"); //$NON-NLS-1$
                             }
+                            //FAE 6399 correction: process != E_ProcessType.COLLECTION_DIR
+                            // et non == 
                             if ((currentConversion != E_TypeConversion.MEDATLAS)
-                                && Nemo.getInstance().getViewMain().getMyRulesManager().getMyProcessType() == E_ProcessType.COLLECTION_DIR)
+                                && Nemo.getInstance().getViewMain().getMyRulesManager().getMyProcessType() != E_ProcessType.COLLECTION_DIR)
                             {
                                 if (!askDataSetRef())
                                 {

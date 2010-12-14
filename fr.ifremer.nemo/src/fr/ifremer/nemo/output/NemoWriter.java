@@ -15,6 +15,7 @@ import fr.ifremer.nemo.domain.MediaDomain;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.StationDomain;
 import fr.ifremer.nemo.input.MediaModel;
+import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Global.E_EndData;
@@ -56,153 +57,137 @@ public abstract class NemoWriter{
         iDomain = Nemo.getInstance().getDomain();
         stationsList = new HashSet<String>();
 	}
-	//FAE 6143
-    protected boolean checkStationAlreadyExists(String stationRef)
-    {
-        boolean alreadyExist = false;
-        stationRef = stationRef.trim();
-        if (stationsList.contains(stationRef))
-        {
-            alreadyExist=true;
-        }else
-        {
-            stationsList.add(stationRef);
-        }
-        
-        return alreadyExist;
-    }
+
 	/**
 	 * @throws GenerationException
 	 */
 	public void write(ProgressNotification a_Progress) throws GenerationException{
-        
-        MediaDomain media = iDomain.getMedia();
-        StationDomain stationDomain = iDomain.getCruise().getStation();
-        stationDomain.updateRef();
 
-		try {
-            
-            int readerSize = 0;         
-            for (String inputFilePath : media.getInputFilesNames().keySet()){
-                for (String inputFileName : media.getInputFilesNames().get(inputFilePath)){
-                    
-                    File inputFile= new File(inputFilePath + File.separator + inputFileName);
-                    bufferedReader = new BufferedReader(new FileReader(inputFile));
-                    readerSize = Long.valueOf(inputFile.length()).intValue();
-                    bufferedReader.mark(readerSize + 1);
+	    MediaDomain media = iDomain.getMedia();
+	    StationDomain stationDomain = iDomain.getCruise().getStation();
 
-                    if (!stationDomain.stationIsRegistered(inputFilePath, inputFileName)){
-                        // première lecture pour obtenir le nombre de valeurs par stations
-                        Station st = null;
-                        int nbrecords = 0;
-            
-                        while ((readedLine = bufferedReader.readLine()) != null) {
-                            numLine++;
-                            
-                            if (numLine == 1){
-                                consumeFileHeader();
-                            }
-            
-                            
-                            if (isEndData() && (st != null)){
-                                st.setNbRecords(nbrecords);
-                                stationDomain.addStation(inputFilePath, st);
-                                st = null;
-                            }
-                            
-                            if (isStartStationHeader()){
-                                nbrecords = 0;
 
-                                String[] inputStationHeader = consumeStationHeader();
-                                if (inputStationHeader != null){
-                                    st = new Station(inputFile.getName(),inputStationHeader);
-                                    String ref = stationDomain.getReference(inputFile.getName(), inputStationHeader);
-                                  
-                                   st.setReference(ref);
-                                    
-                                    if (stationDomain.isSomeInData()){
-                                        // la première ligne des données est déjà "consommée" dans stationHeaderBuffer 
-                                        st.updateGlobalParamQc(inputStationHeader[inputStationHeader.length -1]);
-                                        nbrecords++;
-                                        
-                                        // sampling rate peut etre à calculer
-                                        if (media.getModel().getInputType() != E_InputType.PROFILE)
-                                            if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData()){
-                                                if (!isEndData()) // FAE 4673 Pb si une seule ligne données et pas d'entête station
-                                                    st.calculSamplingRate(readedLine);
-                                        }
-                                    }
-                                    if (!isEndData()) // FAE 4673 Pb si une seule ligne données et pas d'entête station
-                                        st.updateGlobalParamQc(readedLine);
-                                    
-                                    nbrecords++;
-                                    
-                                    
-                                    // BGT suppr code 6087: n'est plus necessaire (pourquoi?) et fait planter car genere des doublons
-                                    // BGT FAE 6087 ajout de la station
-//                                    E_TypeConversion selectedConversion = iDomain.getConversion().getCurrent();
-//                                    
-//                                    if (selectedConversion == E_TypeConversion.ODV_MONOSTATION
-//                                            && stationDomain.getModel().getReferenceProperty().isUserProvided()){
-//                                        if (st != null ){
-//                                            // endData = EOF : la station n'a pas été enregistrée
-//                                            st.setNbRecords(nbrecords);
-//                                            System.out.println("6087");
-//                                            stationDomain.addStation(inputFilePath, st);
-//                                        }
-//                                    }
-                                    
-                                }
-                                else{
-                                    break;
-                                }
-                            }
-                            else if (st != null){
-                                if (media.getModel().getInputType() == E_InputType.TRAJECTORY){
-                                    st.completeMedatlasTrajectory(readedLine);
-                                }
-                                st.updateGlobalParamQc(readedLine);
-                                nbrecords++;
-                            }
-                        }
-                        
-                        if (st != null){
-                            // endData = EOF : la station n'a pas été enregistrée
-                            st.setNbRecords(nbrecords);
-                            stationDomain.addStation(inputFilePath, st);
-                        }
+	    stationDomain.updateRef();
 
-                    }
-                    
-                    // FAE1105 : tri des stations selon Nom Fichier - Date - Référence Station
-                    Collections.sort(stationDomain.getStations(inputFilePath));
-                    
-                    numLine = 0;
-                    bufferedReader.reset();
-                    
-                }
-                bufferedReader.close();
-                
-                writeFile(inputFilePath);   
-            }
+	    try {
 
-		} catch (Exception e) {
-            stationDomain.resetStations();
-            e.printStackTrace();
-			throw new GenerationException(e);
+	        int readerSize = 0;         
+	        // pour chaque repertoire d'entree
+	        for (String inputFilePath : media.getInputFilesNames().keySet()){
 
-		} finally {
-            numLine = 0;
-			try {
-				if (bufferedReader != null)
-					bufferedReader.close();
-				if (outputFileWriter != null)
-					outputFileWriter.close();
-			} catch (IOException ioe) {
-				throw new GenerationException(ioe);
-			}
-		}
-		
+	            //  FAE 6087
+	            iDomain.getCruise().getStation().updateRef();
+
+
+	            // pour chaque fichier de ce repertoire d'entree
+	            for (String inputFileName : media.getInputFilesNames().get(inputFilePath)){
+
+	               // System.out.println("nemoWriter: "+inputFileName );    
+	                File inputFile= new File(inputFilePath + File.separator + inputFileName);
+	                bufferedReader = new BufferedReader(new FileReader(inputFile));
+	                readerSize = Long.valueOf(inputFile.length()).intValue();
+	                bufferedReader.mark(readerSize + 1);
+
+	                if (!stationDomain.stationIsRegistered(inputFilePath, inputFileName)){
+	                    // première lecture pour obtenir le nombre de valeurs par stations
+	                    Station st = null;
+	                    int nbrecords = 0;
+
+	                    while ((readedLine = bufferedReader.readLine()) != null) {
+	                        numLine++;
+
+	                        if (numLine == 1){
+	                            consumeFileHeader();
+	                        }
+
+
+	                        if (isEndData() && (st != null)){
+	                            st.setNbRecords(nbrecords);
+	                            stationDomain.addStation(inputFilePath, st);
+	                            st = null;
+	                        }
+
+	                        if (isStartStationHeader()){
+	                            nbrecords = 0;
+
+	                            String[] inputStationHeader = consumeStationHeader();
+	                            if (inputStationHeader != null){
+	                                st = new Station(inputFile.getName(),inputStationHeader);
+	                                String ref = stationDomain.getReference(inputFile.getName(), inputStationHeader);
+
+	                                st.setReference(ref);
+
+	                                if (stationDomain.isSomeInData()){
+	                                    // la première ligne des données est déjà "consommée" dans stationHeaderBuffer 
+	                                    st.updateGlobalParamQc(inputStationHeader[inputStationHeader.length -1]);
+	                                    nbrecords++;
+
+	                                    // sampling rate peut etre à calculer
+	                                    if (media.getModel().getInputType() != E_InputType.PROFILE)
+	                                        if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData()){
+	                                            if (!isEndData()) // FAE 4673 Pb si une seule ligne données et pas d'entête station
+	                                                st.calculSamplingRate(readedLine);
+	                                        }
+	                                }
+	                                if (!isEndData()) // FAE 4673 Pb si une seule ligne données et pas d'entête station
+	                                    st.updateGlobalParamQc(readedLine);
+
+	                                nbrecords++;
+
+
+	                          
+
+	                            }
+	                            else{
+	                                break;
+	                            }
+	                        }
+	                        else if (st != null){
+	                            if (media.getModel().getInputType() == E_InputType.TRAJECTORY){
+	                                st.completeMedatlasTrajectory(readedLine);
+	                            }
+	                            st.updateGlobalParamQc(readedLine);
+	                            nbrecords++;
+	                        }
+	                    }
+
+	                    if (st != null){
+	                        // endData = EOF : la station n'a pas été enregistrée
+	                        st.setNbRecords(nbrecords);
+	                        stationDomain.addStation(inputFilePath, st);
+	                    }
+
+	                }
+
+	                // FAE1105 : tri des stations selon Nom Fichier - Date - Référence Station
+	                Collections.sort(stationDomain.getStations(inputFilePath));
+
+	                numLine = 0;
+	                bufferedReader.reset();
+
+	            }
+	            bufferedReader.close();
+
+	            writeFile(inputFilePath);   
+	        }
+
+	    } catch (Exception e) {
+	        stationDomain.resetStations();
+	        e.printStackTrace();
+	        throw new GenerationException(e);
+
+	    } finally {
+	        numLine = 0;
+	        try {
+	            if (bufferedReader != null)
+	                bufferedReader.close();
+	            if (outputFileWriter != null)
+	                outputFileWriter.close();
+	        } catch (IOException ioe) {
+	            throw new GenerationException(ioe);
+	        }
+	    }
+
 	}
 
 	/**
