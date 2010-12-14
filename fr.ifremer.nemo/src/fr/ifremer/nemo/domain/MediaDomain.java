@@ -82,6 +82,12 @@ public class MediaDomain
         
     }
     
+    
+    /**
+     * stockage des chemins et noms des fichiers d'entree
+     * dans une map dont cle=repertoire, valeur=nom fichier
+     *
+     */
     public void buildInputFilesNames(){
         _inputFilesNames = new HashMap<String, List<String>>();
         // FAE1105 : tri des stations selon Nom Fichier - Date - Référence Station
