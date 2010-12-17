@@ -26,6 +26,7 @@ import fr.ifremer.nemo.ui.edit.Etape;
 import fr.ifremer.nemo.ui.edit.NemoSection;
 import fr.ifremer.nemo.ui.edit.file.listeners.FileTypeSelectionListener;
 import fr.ifremer.nemo.ui.edit.file.listeners.InputFileBrowseListener;
+import fr.ifremer.nemo.ui.edit.file.listeners.InputFileCheckMultistationsListener;
 import fr.ifremer.nemo.ui.edit.file.listeners.InputFileRadioSelectionListener;
 import fr.ifremer.nemo.ui.edit.file.listeners.OutputFormatRadioSelectionListener;
 import fr.ifremer.nemo.ui.view.ViewLog;
@@ -778,6 +779,9 @@ public class EditFileForm extends EditForm
         chkMultiStations = new Button(inputFileCollectionGroup, SWT.CHECK);
         chkMultiStations.setEnabled(false);
         chkMultiStations.setText(Messages.view_file_multiStations);
+        // FAE 4181
+        InputFileCheckMultistationsListener inputFileCheckMultistationsListener=  new InputFileCheckMultistationsListener(this);
+        chkMultiStations.addSelectionListener(inputFileCheckMultistationsListener);
         
         //****************************************************************************************
         //browse
