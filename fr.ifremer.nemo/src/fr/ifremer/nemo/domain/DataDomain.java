@@ -631,16 +631,20 @@ public class DataDomain
                 sdnMapping.append(getURNSyntaxe(URNtype.subject, param
                     .getCodeP011(), null, null));
             }
-            else
+            else{
                 sdnMapping.append(getURNSyntaxe(URNtype.subject, code, null,
                     null));
-
+            }
             if (param.isP011())
+            {
                 sdnMapping.append(getURNSyntaxe(URNtype.object, param
                     .getCodeP011(), null, Intern.mapping_objet));
+            }
             else
+            {
                 sdnMapping.append(getURNSyntaxe(URNtype.object, code,
                     Intern.mapping_subject, Intern.mapping_objet));
+            }
 
             sdnMapping.append(getURNSyntaxe(URNtype.units, code,
                 Intern.mapping_subject, Intern.mapping_unit));
