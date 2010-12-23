@@ -49,6 +49,8 @@ public class Nemo
     private boolean needToSaveCurrentModel=false;
     
     private ViewMain myViewMain;
+    
+    private boolean batchMode;
 
     /**
      * Getter pour instance.
@@ -242,5 +244,15 @@ public class Nemo
     public ViewMain getViewMain()
     {
         return myViewMain;
+    }
+
+    public boolean isBatchMode()
+    {
+        return batchMode;
+    }
+
+    public void setBatchMode(boolean batchMode)
+    {
+        this.batchMode = batchMode;
     }
 }

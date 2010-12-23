@@ -338,16 +338,16 @@ public class Etape
             }
 
             // FAE022 : TYPE DE DONNEES
-            if (Nemo.getInstance().getViewMain().getMyRulesManager().isCruiseEnabled() 
-                    && !Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection())
-            {
+            // FAE 6536 : on exige un dataType même si pas onglet Cruise
+//            if ( !Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection())
+//            {
                 if (editStationForm.dataType.getDatatype()
                         .getValueCombo().getSelectionIndex() == -1)
                 {
                     Utils.messageErreurAppend(Messages.Etape_32);
                     ok = ok && false;
                 }
-            }
+//            }
 
             // HISTORIQUE ACQUISITION
             if (!editStationForm.historique.isManual())
@@ -1401,7 +1401,7 @@ public class Etape
                         ok = ok && false;
                         Utils
                         .messageErreurAppend(Messages.Etape_106
-                            + " " + typeCourant.getCode() + " : " + Messages.Etape_106b); //$NON-NLS-1$ //$NON-NLS-2$
+                            + " " + typeCourant.getCodeToUse() + " : " + Messages.Etape_106b); //$NON-NLS-1$ //$NON-NLS-2$
                     }
                 }
                 catch (Exception e)
@@ -1410,7 +1410,7 @@ public class Etape
                     ok = ok && false;
                     Utils
                     .messageErreurAppend(Messages.Etape_106
-                        + " " + typeCourant.getCode() + " : " + Messages.Etape_106b); //$NON-NLS-1$ //$NON-NLS-2$
+                        + " " + typeCourant.getCodeToUse() + " : " + Messages.Etape_106b); //$NON-NLS-1$ //$NON-NLS-2$
                     System.out.print(e.getMessage());
                 }
 
@@ -1418,7 +1418,7 @@ public class Etape
                 if (typeCourant.getDebut() > typeCourant.getFin())
                 {
                     Utils.messageErreurAppend(Messages.Etape_98 + Global.SPACE
-                        + typeCourant.getCode());
+                        + typeCourant.getCodeToUse());
                     ok = false;
                 }
 
@@ -1431,7 +1431,7 @@ public class Etape
                             .parseInt(typeCourant.getFinFlag()))
                     {
                         Utils.messageErreurAppend(Messages.Etape_125
-                            + Global.SPACE + typeCourant.getCode());
+                            + Global.SPACE + typeCourant.getCodeToUse());
                         ok = false;
                     }
                 }
@@ -1539,7 +1539,7 @@ public class Etape
         boolean checkOk = true;
         DataListEnum dataList = Nemo.getInstance().getConfig().getDataListToUse();
 
-        if (dataList == DataListEnum.P011_VIA_P091 || dataList == DataListEnum.P091)
+        if (dataList == DataListEnum.P091)
         {
             //FAE 5819 : ajout du code DPSF(P091) ou MINCDIST(P011) comme parametre possible
             if (!(firstParameterCode.equals(Intern.paramPRES) 
@@ -1552,7 +1552,7 @@ public class Etape
                 checkOk=false;
             }
         }
-        else if (dataList == DataListEnum.P011_VIA_P021)
+        else if (dataList == DataListEnum.P011_VIA_P091 || dataList == DataListEnum.P011_VIA_P021)
         {
             //FAE 5819 : ajout du code DPSF(P091) ou MINCDIST(P011) comme parametre possible
             if (!(firstParameterCode.equals(Intern.paramPREX) 

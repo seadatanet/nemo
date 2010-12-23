@@ -212,10 +212,12 @@ public class ParameterFilteredTable extends AbstractFilteredTable
 
                 // split sur " - "
                 Pattern p = Pattern.compile(Global.SEP);
-                String mots[] = p.split(typeData.getCode());
+                // FAE 6537: on teste le codeToUse et non plus le code (car getCode peut être P091 ou P021 pour un parametre P011,
+                //et ce n'est pas cela que l'on veut tester pour un param P011
+                String mots[] = p.split(typeData.getCodeToUse());
                 codeActuel = mots[0];
 
-                String mots2[] = p.split(myTableDataRef.getTypes().get(i).getCode());
+                String mots2[] = p.split(myTableDataRef.getTypes().get(i).getCodeToUse());
                 codeModele = mots2[0];
 
                 if (codeModele.equals(codeActuel))

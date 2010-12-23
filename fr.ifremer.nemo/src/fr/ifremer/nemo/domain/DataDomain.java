@@ -577,6 +577,9 @@ public class DataDomain
         sdnParams.append(Intern.file_mapping);
         sdnParams.append(Global.RN);
 
+        /** 
+         * added parameters
+         */
         if (c.equals(Conversion.ODV))
         {
             for (ParameterModel param : getAddedParameterModels(c))
@@ -591,11 +594,16 @@ public class DataDomain
                 param.getParameter().setP011(false);
             }
         }
+        
+        
         for (ParameterModel param : getAddedParameterModels(c))
         {
             sdnParams.append(parameterMap(c.getDebut(), param.getParameter(), c));
         }
 
+        /**
+         * parameters
+         */
         for (ParameterModel param : _model.getParameterModels())
         {
             sdnParams.append(parameterMap(c.getDebut(), param.getParameter(), c));
@@ -607,48 +615,92 @@ public class DataDomain
     private static StringBuffer parameterMap(String start, Parameter param,
             Conversion c)
     {
-        String code = param.getCode();
+//        String code = param.getCode();
         StringBuffer sdnMapping = new StringBuffer();
         sdnMapping.append(start);
-        try
-        {
-            sdnMapping.append(Intern.getString(code));
-        }
-        catch (MissingResourceException e)
-        {
-
+//        try
+//        {
+//            sdnMapping.append(Intern.getString(code));
+//        }
+//        catch (MissingResourceException e)
+//        {
+            /**
+             * -----------------------------------------------------
+             * subject
+             */
             // FAE 4045
-            if (c.equals(Conversion.ODV) && param.isP011())
-
-            {
-                if (param.getCodeP011() == null
-                        || param.getCodeP011().equals(""))
-                {
-                    param.setCodeP011(Utils.extraitCodeURN(NemoLists.getVocabMatch(
-                        Intern.mapping_subject, Intern.mapping_objet, code,
-                        Intern.NemoLists_unknown)));
-                }
-                sdnMapping.append(getURNSyntaxe(URNtype.subject, param
-                    .getCodeP011(), null, null));
-            }
-            else{
-                sdnMapping.append(getURNSyntaxe(URNtype.subject, code, null,
-                    null));
-            }
+//            if (c.equals(Conversion.ODV) && param.isP011())
+//
+//            {
+//                if (param.getCodeP011() == null
+//                        || param.getCodeP011().equals(""))
+//                {
+//                    param.setCodeP011(Utils.extraitCodeURN(NemoLists.getVocabMatch(
+//                        Intern.mapping_subject, Intern.mapping_objet, code,
+//                        Intern.NemoLists_unknown)));
+//                }
+//                sdnMapping.append(getURNSyntaxe(URNtype.subject, 
+//                    param.getCodeP011(),
+//                    null, 
+//                    null));
+//            }
+//            else{
+//                sdnMapping.append(getURNSyntaxe(URNtype.subject, 
+//                    code, 
+//                    null,
+//                    null));
+//            }
+        sdnMapping.append(getURNSyntaxe(URNtype.subject, 
+            param.getCodeToUse(), 
+          null,
+          null));
+            /** -----------------------------------------------------
+             * object 
+             * 
+             * si param P011, on met le code P011
+             * si param P091, on met le premier P011 de la liste de P011 correspondants au P091
+             */
             if (param.isP011())
             {
-                sdnMapping.append(getURNSyntaxe(URNtype.object, param
-                    .getCodeP011(), null, Intern.mapping_objet));
+                sdnMapping.append(getURNSyntaxe(
+                    URNtype.object, 
+                    param.getCodeP011(), 
+                    null, 
+                    Intern.mapping_objet));
             }
             else
             {
-                sdnMapping.append(getURNSyntaxe(URNtype.object, code,
-                    Intern.mapping_subject, Intern.mapping_objet));
+                sdnMapping.append(getURNSyntaxe(
+                    URNtype.object, 
+                    param.getCode(),
+                    Intern.mapping_subject, 
+                    Intern.mapping_objet));
             }
 
-            sdnMapping.append(getURNSyntaxe(URNtype.units, code,
-                Intern.mapping_subject, Intern.mapping_unit));
-        }
+            /** -----------------------------------------------------
+             * units 
+             * 
+             * unitCode utilisé seulement pour les parametres P011 choisis depuis P021 
+             * (qui n'ont pas d'unité, et dont l'unité est donc choisie manuellement 
+             * par l'utilisateur depuis la liste P061)
+             * 
+             * 
+             * s'il est vide, on va chercher l'unité correspondant au P091 choisi ou ayant servi à choisir le P021
+             * sinon, on prend sa valeur qui a été renseignée quen l'utilisateur a choisi l'unité dans la liste des P061
+             */
+            if (param.getUnitCode()==null  || param.getUnitCode().equals(Global.EMPTY_STRING)){
+                sdnMapping.append(getURNSyntaxe(URNtype.units, 
+                    param.getCode(),
+                    Intern.mapping_subject, 
+                    Intern.mapping_unit));
+            }else{
+                // FAE 6542
+                sdnMapping.append(getURNSyntaxe(URNtype.units, 
+                    param.getUnitCode(),
+                    null, 
+                    Intern.mapping_unit));
+            }
+//        }
         sdnMapping.append(Global.RN);
         return sdnMapping;
     }

@@ -4,9 +4,10 @@ import fr.ifremer.nemo.util.Global;
 
 public class TypeData extends Object {
 
+    // code P091 ou P021
 	private String code;
     
-    private String unite, conversion, format, entree, sortie, test, nom;
+    private String unite, uniteCode, conversion, format, entree, sortie, test, nom;
     
 	private int position, debut, fin;
 	
@@ -18,7 +19,9 @@ public class TypeData extends Object {
 
 	public static final String DEFAULT_CONVERT = "x*1"; //$NON-NLS-1$
 
-    
+    /**
+     * A CONSERVER pour compatibilite anciens modeles!
+     */
     private String codeP011;
     private boolean isP011;
     private String nomP011;
@@ -82,7 +85,19 @@ public class TypeData extends Object {
 	public String getCode() {
 		return code;
 	}
-
+	// FAE 6537
+	public String getCodeToUse()
+	{
+	    String code;
+	    if (isP011())
+	    {
+	        code= getCodeP011();
+	    }else
+	    {
+	        code = getCode();//P021 ou P091 selon le contexte d'utilisation   
+	    }
+	    return code;
+	}
 	public void setCode(String code) {
 		this.code = code;
 	}
@@ -237,6 +252,16 @@ public class TypeData extends Object {
 
     public void setIsP011(boolean isP011) {
         this.isP011 = isP011;
+    }
+// FAE 6542
+    public String getUniteCode()
+    {
+        return uniteCode;
+    }
+
+    public void setUniteCode(String uniteCode)
+    {
+        this.uniteCode = uniteCode;
     }
     
 }

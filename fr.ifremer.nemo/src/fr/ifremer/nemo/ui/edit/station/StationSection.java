@@ -9,6 +9,7 @@ package fr.ifremer.nemo.ui.edit.station;
 
 import java.io.File;
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
@@ -17,10 +18,12 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.input.DataType;
 import fr.ifremer.nemo.input.Fragment;
 import fr.ifremer.nemo.input.PropertyModel;
@@ -42,6 +45,7 @@ import fr.ifremer.nemo.util.format.DateTimeFormat;
 import fr.ifremer.nemo.util.format.ExternalizableFormat;
 import fr.ifremer.nemo.util.format.LatitudeFormat;
 import fr.ifremer.nemo.util.format.LongitudeFormat;
+import fr.ifremer.nemo.ws.WSDataType;
 
 /**
  * Description: objet graphique représentant une section dans l'onglet station
@@ -1191,8 +1195,9 @@ public class StationSection extends NemoSection
 
     private void initDataTypeModel(StationModel stationModel)
     {
-            if (!Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection()) // FAE 022
-        {
+//        6536
+//    if (!Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection()) // FAE 022
+//        {
             String typeCombo = datatype.getText();
             DataType newDataType = new DataType();
             String code = Global.EMPTY_STRING;
@@ -1234,7 +1239,7 @@ public class StationSection extends NemoSection
                 }
             }
             stationModel.setDataType(newDataType);
-        }
+//        }
     }
 
     @Override
@@ -1374,6 +1379,8 @@ public class StationSection extends NemoSection
     {
         // SECTION numero de station
         // PropertyModel propertyModel = stationModel.getReferenceProperty();
+        //6406 (en cours)
+        if (refProperty!=null ){
         if (refProperty.isUserProvided())
         {
             Nemo.getInstance().getViewMain().getEditStationForm().stationNumber
@@ -1389,7 +1396,7 @@ public class StationSection extends NemoSection
             Nemo.getInstance().getViewMain().getEditStationForm().stationNumber.setAutoValueInput(
                 refProperty, realLigne);
         }
-
+        }
         /*
          * if (stationModel.isIncrementRef()){ String value = null; if
          * (stationModel.getInputType().equals(Global.TRAJECTORY)) { // FAE 1386 :
@@ -1406,56 +1413,91 @@ public class StationSection extends NemoSection
          */
     }
 
-    private void fillDataType(StationModel station)
+    public void fillDataTypeWithDataTypesIsSensor()
     {
+        Combo combo = myForm.dataType.getDatatype().getValueCombo();
+        combo.removeAll();
+        combo.add(Global.EMPTY_STRING);
 
-        // SECTION type de donnee
-        if (!Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection()) // FAE022
+        WSDataType[] dataTypeList =NemoLists.getDataTypesIsSensor();
+        for (WSDataType dataType : dataTypeList){
+            // ajout dans la combo (on affiche le libelle qui sera automatiquement retiré dans fr.ifremer.nemo.ui.edit.station.StationSection.initDataTypeModel(StationModel)
+            combo.add(dataType.getCode()+Global.SPACE+Global.DBL_PT+Global.SPACE+dataType.getLibelle());
+        }
+
+        myForm.dataType
+        .getDatatype().getValueCombo().select(-1);
+    }
+    
+    private boolean checkAddDatatypeOk(String code)
+    {
+//      faire un split sur - au cas oe et n'avoir QUE le code
+
+        Pattern p = Pattern.compile(Global.SEP);
+        String mots[] = p.split(code);
+        String vraiCode = mots[0];
+
+        // avant de charger le type de donnees, verifier qu'il existe
+        // bien
+        // dans la liste mise à jour!!
+        int taille = TableDataSurvey.types.size();
+        Boolean ok = false;
+        Boolean capteur = false;
+        for (int i = 0; i < taille; i++)
         {
-            DataType dataType = station.getDataType();
-            if (dataType != null)
+            // check si le type existe toujours ou pas
+            Pattern pat = Pattern.compile(Global.SEP);
+            String motsType[] =
+                pat.split(TableDataSurvey.types.get(i).getCode());
+            String vraiCodeType = motsType[0];
+
+            if (vraiCode.equals(vraiCodeType))
             {
-                String code = dataType.getCode();
-                // faire un split sur - au cas oe et n'avoir QUE le code
-
-                Pattern p = Pattern.compile(Global.SEP);
-                String mots[] = p.split(code);
-                String vraiCode = mots[0];
-
-                // avant de charger le type de donnees, verifier qu'il existe
-                // bien
-                // dans la liste mise à jour!!
-                int taille = TableDataSurvey.types.size();
-                Boolean ok = false, capteur = false;
-                for (int i = 0; i < taille; i++)
+                ok = true;
+                if (TableDataSurvey.types.get(i).getSensor())
                 {
-                    // check si le type existe toujours ou pas
-                    Pattern pat = Pattern.compile(Global.SEP);
-                    String motsType[] =
-                        pat.split(TableDataSurvey.types.get(i).getCode());
-                    String vraiCodeType = motsType[0];
-
-                    if (vraiCode.equals(vraiCodeType))
-                    {
-                        ok = true;
-                        if (TableDataSurvey.types.get(i).getSensor())
-                        {
-                            capteur = true;
-                        }
-                    }
-                }
-                // ajout du parametre ou non du coup
-                if (ok)
-                {
-                    // ajoute que si c'est un capteur
-                    if (capteur)
-                    {
-                        Utils.selectComboCode(myForm.dataType
-                            .getDatatype().getValueCombo(), code);
-                    }
+                    capteur = true;
                 }
             }
         }
+        
+        return ok && capteur;
+    }
+    private void fillDataType(StationModel station)
+    { 
+        // SECTION type de donnee
+        Combo combo = myForm.dataType.getDatatype().getValueCombo();
+        
+        Boolean isCruiseEnabled = Nemo.getInstance().getViewMain().getMyRulesManager().isCruiseEnabled();
+        Boolean addOk=true;
+        DataType dataType = station.getDataType();
+
+        
+        //FAE 6536 - si pas d'onglet Cruise, ni de dataType dans le modele, on remplit la combo avec tous les dataTypes avec sensor true
+        if (!isCruiseEnabled)
+        {
+            fillDataTypeWithDataTypesIsSensor();
+        }
+
+      
+
+        if (dataType != null)
+        {
+            String code = dataType.getCode();
+            
+            // si l'onglet cruise existe, on verifie que le dataType est bien dans la liste des datatypes de cet onglet
+            if (isCruiseEnabled){
+                addOk = checkAddDatatypeOk(code);
+            }
+            
+            // ajout du parametre ou non du coup, ajoute que si c'est un capteur
+            if (addOk)
+            {
+                Utils.selectComboCode(combo, code);
+            }
+
+        }
+
     }
 
     private String getTagXml(int i)

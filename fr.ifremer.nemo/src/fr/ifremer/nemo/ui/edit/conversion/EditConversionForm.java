@@ -165,9 +165,10 @@ public class EditConversionForm extends EditForm
                             // test pour savoir si on est en campagne ou pas
                             if (Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection())
                             {
-                                DataType dt = askDataType();
-                                Nemo.getInstance().getDomain().getCruise()
-                                    .getStation().getModel().setDataType(dt);
+//                               // FAE 6536 
+//								 DataType dt = askDataType();
+//                                Nemo.getInstance().getDomain().getCruise()
+//                                    .getStation().getModel().setDataType(dt);
                                 okChoixSortie = choixDossierSortie();
                             }
                             else if (currentConversion == E_TypeConversion.ODV_MONOSTATION)
@@ -677,22 +678,22 @@ public class EditConversionForm extends EditForm
         }
     }
 
-    public DataType askDataType()
-    {
-        ListDialog ld = new ListDialog(Utils.getMainShell());
-        ld.setAddCancelButton(true);
-        ld.setContentProvider(new ArrayContentProvider());
-        ld.setLabelProvider(new LabelProvider());
-
-        ld.setInput(Arrays.asList(NemoLists.getDataTypesIsSensor()));
-        ld.setTitle(Messages.askDataType_Title);
-        ld.open();
-        WSDataType result = (WSDataType) ld.getResult()[0];
-
-        DataType dt = new DataType(result.getCode(), true, result.isSensor());
-
-        return dt;
-    }
+//    public DataType askDataType()
+//    {
+//        ListDialog ld = new ListDialog(Utils.getMainShell());
+//        ld.setAddCancelButton(true);
+//        ld.setContentProvider(new ArrayContentProvider());
+//        ld.setLabelProvider(new LabelProvider());
+//
+//        ld.setInput(Arrays.asList(NemoLists.getDataTypesIsSensor()));
+//        ld.setTitle(Messages.askDataType_Title);
+//        ld.open();
+//        WSDataType result = (WSDataType) ld.getResult()[0];
+//
+//        DataType dt = new DataType(result.getCode(), true, result.isSensor());
+//
+//        return dt;
+//    }
 
     public boolean checkConfig()
     {

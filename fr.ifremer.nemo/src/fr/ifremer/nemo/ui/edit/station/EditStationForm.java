@@ -95,6 +95,7 @@ public class EditStationForm extends EditForm
             // bouton collapse all / expand all
             createButtonExpand();
 
+            // TODO BGT tjs utile 6536?
                 if (Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection())
             {
                 TableDataSurvey.initTypes();
@@ -181,15 +182,16 @@ public class EditStationForm extends EditForm
          * data type
          * ==============================================================================================
          */
-        if (!Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection())
-        {
+// 6536
+//       if (!Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection())
+//        {
             dataType =
                 new StationSection(Intern.S_DATATYPE, Messages
                     .getString(Intern.S_DATATYPE),
                     Messages.edit_station_sectionDataType_lib, true, false, 1, this);
             dataType.addCouple(ComboType.DATATYPE, Global.EMPTY_STRING);
             listeSections.add(dataType);
-        }
+//        }
         /**
          * ==============================================================================================
          * acquisition history

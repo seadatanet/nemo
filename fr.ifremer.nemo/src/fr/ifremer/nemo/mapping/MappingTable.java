@@ -18,6 +18,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.util.Messages;
 
 
@@ -141,11 +142,13 @@ public class MappingTable
                     {
                         ligne = "\r\n"+mapping.mappingPK.getLocalCdiId()+";"+mapping.getModus()+";"+mapping.mappingPK.getFormat()+";"+mapping.getFilename(); 
                         monFluxFichier.write(ligne.getBytes()); 
-                        
+
                     }
 
                     monFluxFichier.flush();
-                    fr.ifremer.nemo.ui.Utils.messageOKAppend(Messages.CouplingTableExport_1+"\n\r");
+                    if (!Nemo.getInstance().isBatchMode()){
+                        fr.ifremer.nemo.ui.Utils.messageOKAppend(Messages.CouplingTableExport_1+"\n\r");
+                    }
                 }
                 catch (IOException e)
                 {

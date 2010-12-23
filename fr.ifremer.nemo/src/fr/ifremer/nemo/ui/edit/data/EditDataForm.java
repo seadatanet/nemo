@@ -165,6 +165,7 @@ public class EditDataForm extends EditForm
             typeData.setEntree(inputDefault);
 
             typeData.setUnite(modeleCourant.getUnit());
+            typeData.setUniteCode(modeleCourant.getUnitCode());
             typeData.setFormat(modeleCourant.getFormat());
             typeData.setSortie(modeleCourant.getDefault());
             typeData.setCodeP011(modeleCourant.getCodeP011());
@@ -223,6 +224,8 @@ public class EditDataForm extends EditForm
             para.setCode(code);
             para.setFullName(nom);
             para.setUnit(typeCourant.getUnite());
+            // FAE 6542
+            para.setUnitCode(typeCourant.getUniteCode());
 
             // specific P011
             para.setCodeP011(typeCourant.getCodeP011());

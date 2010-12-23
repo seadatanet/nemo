@@ -6,11 +6,14 @@ import com.ago.xml.Element2Field;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.AddedParameter;
 import fr.ifremer.nemo.domain.AddedParameter.IdParameter;
+import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
 
 /**
  * Class Parameter Description : Classe permettant la description d'un parametre
@@ -60,6 +63,8 @@ public class Parameter extends AbstractModel
      * Unité IS/IOC (MEDATLAS: 30 char max)
      */
     protected String _unit;
+    // FAE 6542
+    protected String _unitCode;
 
     public Parameter()
     {
@@ -78,6 +83,7 @@ public class Parameter extends AbstractModel
         _format = Global.EMPTY_STRING;
         _fullName = Global.EMPTY_STRING;
         _unit = Global.EMPTY_STRING;
+        _unitCode = Global.EMPTY_STRING;
         _codeP011 = Global.EMPTY_STRING;
         _nameP011 = Global.EMPTY_STRING;
         _P011 = false;
@@ -125,6 +131,12 @@ public class Parameter extends AbstractModel
         {
             Element2Field setter =
                 new Element2Field(this, ModelDescription.setter_unit);
+            return setter;
+        }
+        if (a_LocalName.equals(ModelDescription.node_unitCode))
+        {
+            Element2Field setter =
+                new Element2Field(this, ModelDescription.setter_unitCode);
             return setter;
         }
         if (a_LocalName.equals(ModelDescription.node_outdefault))
@@ -186,6 +198,7 @@ public class Parameter extends AbstractModel
         a_Writer.putAttribute(ModelDescription.a_code, getCode());
         a_Writer.putTag(ModelDescription.node_fullname, getFullName());
         a_Writer.putTag(ModelDescription.node_unit, getUnit());
+        a_Writer.putTag(ModelDescription.node_unitCode, getUnitCode());
         a_Writer.putTag(ModelDescription.node_outdefault, getDefault());
         a_Writer.putTag(ModelDescription.node_format, getFormat());
         a_Writer.putTag(ModelDescription.node_codeP011, getCodeP011());
@@ -256,6 +269,28 @@ public class Parameter extends AbstractModel
         return _codeP011;
     }
 
+    
+    
+    public String getCodeToUse()
+    {
+        String codeToUse;
+        if (isP011())
+        {
+            if (getCodeP011() == null
+                    || getCodeP011().equals(""))
+            {
+                setCodeP011(Utils.extraitCodeURN(NemoLists.getVocabMatch(
+                    Intern.mapping_subject, Intern.mapping_objet, getCode(),
+                    Intern.NemoLists_unknown)));
+            }
+            codeToUse=getCodeP011();
+
+
+        }else{
+            codeToUse=getCode();
+        }
+        return codeToUse;
+    }
     /**
      * Setter pour _nameP011
      * 
@@ -471,5 +506,15 @@ public class Parameter extends AbstractModel
             paramHeader.append(Global.TAB);
 
         return paramHeader.toString();
+    }
+
+    public String getUnitCode()
+    {
+        return _unitCode;
+    }
+
+    public void setUnitCode(String unitCode)
+    {
+        _unitCode = unitCode;
     }
 }

@@ -118,6 +118,7 @@ public class TableData
         columnsMap.put(10,Messages.table_label_testOut);
         columnsMap.put(11,Messages.table_label_startFlag);
         columnsMap.put(12,Messages.table_label_endFlag);
+        columnsMap.put(13,Global.EMPTY_STRING);// unite code non visible
     }
 
     public void reinitTable()
@@ -265,6 +266,13 @@ public class TableData
         tableColumn12.setWidth(65);
         tableColumn12.setText(columnsMap.get(12));
         tableColumn12.setAlignment(SWT.RIGHT);
+        
+        // FAE 6542
+        TableColumn tableColumn13 = new TableColumn(myTable, SWT.NONE);
+        tableColumn13.setWidth(0);
+        tableColumn13.setText(columnsMap.get(13));
+        tableColumn13.setAlignment(SWT.RIGHT);
+        
 
         initTable();
 
@@ -368,12 +376,18 @@ public class TableData
             String term;
             String termAbbr;
             String def;
+            // FAE 6542
+            String unitKey;
             for (CodeTableRecordType record : listP061)
             {
+                
+                String entryKey = record.getEntryKey();
+                String[] entryKeySplit = entryKey.split("/"); //$NON-NLS-1$
+                unitKey = entryKeySplit[entryKeySplit.length - 1];
                 term = record.getEntryTerm();
                 termAbbr = record.getEntryTermAbbr();
                 def = record.getEntryTermDef();
-                typeUnit = new TypeUnit(term, termAbbr, def);
+                typeUnit = new TypeUnit(term, termAbbr, def, unitKey);
                 typesP061.add(typeUnit);
             }
         }
@@ -719,7 +733,10 @@ public class TableData
                         types.get(i).getFormat(), types.get(i).getEntree(),
                         types.get(i).getSortie(), types.get(i).getTestIn(),
                         types.get(i).getTestOut(), types.get(i).getDebutFlag(),
-                        types.get(i).getFinFlag()});
+                        types.get(i).getFinFlag(),
+               // FAE 6542
+                types.get(i).getUniteCode()        
+                });
             }
             else
             {
@@ -732,7 +749,9 @@ public class TableData
                         types.get(i).getFormat(), types.get(i).getEntree(),
                         types.get(i).getSortie(), types.get(i).getTestIn(),
                         types.get(i).getTestOut(), types.get(i).getDebutFlag(),
-                        types.get(i).getFinFlag()});
+                        types.get(i).getFinFlag(),
+                        // FAE 6542
+                        types.get(i).getUniteCode()        });
             }
         }
 
@@ -1112,6 +1131,8 @@ public class TableData
                 types.get(i).setFinFlag(
                     myTable.getItem(i).getText(12));
             }
+            // FAE 6542
+            types.get(i).setUniteCode(myTable.getItem(i).getText(13));
         }
     }
 
@@ -1152,6 +1173,8 @@ public class TableData
         if (selectedRow>-1){
             TableItem item =  myTable.getItem(selectedRow);
             item.setText(1, typeUnit.getTerm());
+            // FAE 6542
+            item.setText(13, typeUnit.getUnitKey());
         }
     }
     public ArrayList<TypeUnit> getTypesP061()

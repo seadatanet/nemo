@@ -3,12 +3,14 @@ package fr.ifremer.nemo.ui.edit.data;
 public class TypeUnit extends Object {
 
     
-    private String term, termAbbr, untiDef;
+    private String term, termAbbr, untiDef, unitKey;
 
-	public TypeUnit(String term, String termAbbr, String untiDef) {
+	public TypeUnit(String term, String termAbbr, String untiDef, String unitKey) {
         this.setTerm(term);
         this.setTermAbbr(termAbbr);
         this.setUntiDef(untiDef);
+        // FAE 6542
+        this.setUnitKey(unitKey);
 	}
     public String getTerm()
     {
@@ -38,6 +40,15 @@ public class TypeUnit extends Object {
     public void setUntiDef(String untiDef)
     {
         this.untiDef = untiDef;
+    }
+// FAE 6542
+    public String getUnitKey()
+    {
+        return unitKey;
+    }
+    public void setUnitKey(String unitKey)
+    {
+        this.unitKey = unitKey;
     }
     
 }

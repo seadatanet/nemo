@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.Shell;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.config.Configuration.DataListEnum;
 import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.domain.DateTimeUtils;
 import fr.ifremer.nemo.domain.InputDomain;
@@ -183,11 +184,9 @@ public class CDIResumeWriter
                         writer.write(sep + config.getIdEdmoRespDonnees());
 
                         // PDV code
-                        String pdvCode =
-                            Utils.extraitCodeURN(NemoLists.getVocabMatch(
-                                Intern.mapping_subject, Intern.list_BODCpdv,
-                                param.getParameter().getCode(),
-                                Intern.NemoLists_unknown));
+                        //6542
+                        String pdvCode =param.getParameter().getCodeToUse();
+                        
                         writer.write(sep + pdvCode + Global.EMPTY_STRING);
 
                         // Platform Type

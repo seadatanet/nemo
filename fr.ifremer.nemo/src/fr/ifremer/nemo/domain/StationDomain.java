@@ -472,7 +472,8 @@ public class StationDomain
                 {
                     temp += Global.UNDERSCORE;
                 }
-                temp += dataType.getCode();
+               //FAE 6536
+                temp += Utils.extraitCode(dataType.getCode());
             }
         }
         localCDIId = Utils.validFileName(temp);

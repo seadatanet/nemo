@@ -76,7 +76,7 @@ public class Application implements IPlatformRunnable
              **************************************************************************/ 
             if (cl.hasOption(optBatchMode))
             {
-
+                Nemo.getInstance().setBatchMode(true);
                 String inputFile;
                 String outputFile;
                 String modelFile;
@@ -168,6 +168,7 @@ public class Application implements IPlatformRunnable
              **************************************************************************/ 
             else
             {
+                Nemo.getInstance().setBatchMode(false);
                 display = PlatformUI.createDisplay();
                 try
                 {
