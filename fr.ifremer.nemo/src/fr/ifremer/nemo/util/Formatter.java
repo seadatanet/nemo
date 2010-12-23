@@ -2,6 +2,8 @@ package fr.ifremer.nemo.util;
 
 import java.text.ParseException;
 
+import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.format.DateTimeFormat;
 import fr.ifremer.nemo.util.format.LatitudeFormat;
 import fr.ifremer.nemo.util.format.LongitudeFormat;
@@ -21,6 +23,10 @@ public class Formatter implements Cloneable {
     private static final String SPACES = "   "; //$NON-NLS-1$
     private static final String NaN = "NaN"; //$NON-NLS-1$
 
+    
+    public static final int StationNumberLength_MEDATLAS=5;
+    public static final int StationNumberLength_ODV=55;
+    
 	static {
 		_singleton = new Formatter();
 	}
@@ -305,5 +311,23 @@ public class Formatter implements Cloneable {
             else buff.append(padChar);
         }
         return buff.toString();
+    }
+    
+    public String  formatStationNumber(String stNumber)
+    {
+        //6406
+        String res = stNumber;
+        E_TypeConversion conv =  Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType();
+        if (conv==E_TypeConversion.MEDATLAS)
+        {
+            res =padZero( stNumber,  StationNumberLength_MEDATLAS);
+        }
+        else if (conv==E_TypeConversion.ODV_MONOSTATION || conv==E_TypeConversion.ODV_MULTISTATIONS)
+        {
+            if (res.length() > StationNumberLength_ODV) {
+                res= res.substring(0, StationNumberLength_ODV);
+            }
+        }
+        return res;
     }
 }

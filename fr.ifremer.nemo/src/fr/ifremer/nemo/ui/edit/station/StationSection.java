@@ -774,7 +774,8 @@ public class StationSection extends NemoSection
             result = manualInput.getValue().trim();
         }
 
-        resultTest.setText(Formatter.getSingleton().padZero(result, 5));
+        //6406
+        resultTest.setText(Formatter.getSingleton().formatStationNumber(result));
         resultTest.pack();
     }
 
