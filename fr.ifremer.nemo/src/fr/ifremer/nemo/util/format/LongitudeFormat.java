@@ -364,6 +364,7 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
         /// VOIR FAE 2967 PB avec des longitude "+DDD.dddd" et récupération de la chaine "  -2.5000"
         /// remplacement de la chaine par "-002.5000"
         /// (UglyHack)
+        //TODO BGT: fonctionnement variable length a revoir
         String tmp = source.replace(' ', '0');
         if (tmp.startsWith("0"))
         {
@@ -381,6 +382,9 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
             }
         }
         
+        
+//        String tmp;
+//        source = source.trim();
 		try {
 			for (int i = 0; i < _elements.length && index < source.length(); i++) {
 				switch (_elements[i]._type) {
@@ -388,24 +392,29 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
     					tmp = source.substring(index, index + 1);
     					if (tmp.equals(Global.EST)) {
     						sign = 1.0;
+//                            index += 1;
     					} else if (tmp.equals(Global.OUEST_EN) || tmp.equals(Global.OUEST)) {
     						sign = -1.0;
+//                            index += 1;
     					} else {
     						throw new ParseException(Intern.errorParseCoordW, index);
     					}
-    					index += 1;
+                           index += 1; // ancien code
     					break;
                     }
     				case SIGN:{
                         tmp = source.substring(index, index + 1);
     					if (tmp.equals(Global.PLUS) || tmp.equals(Global.SPACE) || tmp.equals(Global.EMPTY_STRING)) {
     						sign = 1.0;
+                            index += 1;
     					} else if (tmp.equals(Global.MOINS)) {
     						sign = -1.0;
+                            index += 1;
     					} else {
-    						throw new ParseException(Intern.errorParseSign, index);
+                            sign = 1.0;
+//  						throw new ParseException(Intern.errorParseSign, index);
     					}
-    					index += 1;
+//    					index += 1;
     					break;
                     }
     				case CHARS: {
@@ -475,6 +484,7 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
 			return null;
 		}
 		value *= sign;
+
 		return new Double(value);
 	}
 
@@ -514,12 +524,17 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
     					String tmp = source.substring(index, index + 1);
     					if (tmp.equals(Global.PLUS) || tmp.equals(Global.SPACE) || tmp.equals(Global.EMPTY_STRING)) {
     						sign = 1.0;
+                            index += 1;
     					} else if (tmp.equals(Global.MOINS)) {
     						sign = -1.0;
+                            index += 1;
     					} else {
-    						throw new ParseException(Intern.errorParseSign, index);
+                            // FAE 6432: si on attend un signe et qu'il n'y en a pas, on considere que c'est positif
+                            // mais on incremente pas l'index, car on est en fait ici sur le premier chiffre, qu'il faudra lire comme tel au prochain tour
+                            // avant, le signe + par defaut etait mis par l'espace 1er caractere, mais celui-ci a ete enleve pour le FAE 2967
+                            sign = 1.0;
     					}
-    					index += 1;
+    					
     					break;
     				}
     				case CHARS: {
