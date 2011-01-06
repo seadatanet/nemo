@@ -427,6 +427,7 @@ public class Messages {
     public static String Etape_43;
     public static String Etape_44;
     public static String Etape_52;
+    public static String Etape_52traj;
     public static String Etape_53;
     public static String Etape_55;
     public static String Etape_56;

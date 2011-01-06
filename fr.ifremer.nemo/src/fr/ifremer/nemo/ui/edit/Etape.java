@@ -616,14 +616,10 @@ public class Etape
              * ==============================================================================================
              */
             // PROFONDEUR non-obligatoire
-            // value = editStationForm.depth.getValue();
             checkValue = true;
-            // if (value != null && !value.trim().equals(Global.EMPTY_STRING)){
             if (!editStationForm.depth.isManual()
                     && !rulesManager.isTrajectory())
             {
-                // non-obligatoire
-
                 resultat1 =
                     editStationForm.depth
                     .checkAutoInputValues(Messages
@@ -647,7 +643,13 @@ public class Etape
                 value = editStationForm.depth.getValue();
                 if (value != null)
                 {
-                    if (!value.trim().equals("") && !value.equals("NaN") && !value.equals(StationSection.defaultValue)) { //$NON-NLS-1$ //$NON-NLS-2$
+                    // 4471: depth manuel possible pour les trajectoire, mais doit être vide (une valeur fixe n'a pas de sens pour une trajectoire)
+                    if (rulesManager.isTrajectory() && editStationForm.depth.isManual() && !value.trim().equals(""))
+                    {
+                        ok = ok && false;
+                        Utils.messageErreurAppend(Messages.Etape_52traj);
+                    }
+                    else if (!value.trim().equals("") && !value.equals("NaN") && !value.equals(StationSection.defaultValue)) { //$NON-NLS-1$ //$NON-NLS-2$
                         if (!Pattern.matches(
                             "^[0-9]*[0-9][.]?[0-9]*[0-9]*$", value.trim())) { //$NON-NLS-1$
                             ok = ok && false;
@@ -661,7 +663,6 @@ public class Etape
                     Utils.messageErreurAppend(Messages.Etape_52);
                 }
             }
-            // }
             /**
              * ==============================================================================================
              * UT conversion

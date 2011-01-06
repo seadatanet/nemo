@@ -337,9 +337,9 @@ public class EditStationForm extends EditForm
             new StationSection(Intern.S_DEPTH, Messages
                 .getString(Intern.S_DEPTH),
                 Messages.edit_station_sectionDepth_lib, true, true, 1, this);
-        //FAE 4471
-//      depth.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
-        depth.addNoValueInput(null, ComboType.NONE, Global.EMPTY_STRING);
+        // FAE 4471 (2e version: on remet le champ manuel)
+      depth.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
+//        depth.addNoValueInput(null, ComboType.NONE, Global.EMPTY_STRING);
         depth.addAutoInput(null, true, MetaInData.FACULTATIF, false, true);
         listeSections.add(depth);
 
