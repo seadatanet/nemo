@@ -138,7 +138,9 @@ public class ViewMain extends ViewPart
         tabCruise = new TabItem(tabFolder, SWT.NONE);
         tabCruise.setText(Messages.onglet_cruise);
         tabCruise.setControl(contentCruise);
-
+       // FAE 6739
+        enableCruiseTab(getMyRulesManager().isCruiseEnabled());
+        
         tabStation = new TabItem(tabFolder, SWT.NONE);
         tabStation.setText(Messages.onglet_station);
         tabStation.setControl(contentStation);

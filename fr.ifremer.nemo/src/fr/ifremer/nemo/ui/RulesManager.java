@@ -75,8 +75,7 @@ public class RulesManager
     {
         messageLog=Global.EMPTY_STRING;
         myProcessType = DEFAULT_PROCESSTYPE;
-        myFileType = DEFAULT_FILETYPE;
-        cruiseEnabled = DEFAULT_CRUISE_ENABLED;
+        myFileType = DEFAULT_FILETYPE;    
         medatlasEnabled = DEFAULT_MEDATLAS_ENABLED;
         odvMonostationEnabled = DEFAULT_ODVMONOSTATION_ENABLED;
         odvMultistationEnabled = DEFAULT_ODVMULTISTATION_ENABLED;
@@ -84,6 +83,8 @@ public class RulesManager
         // en dernier, on recupère la conversion choisie dans les settings
         // on l'applique si elle est compatible avec les autres parametres, sinon on la met à UNKNOWN
         myConversionType = getDefaultConversionTypeWithRules();
+       // FAE 6739
+        cruiseEnabled = !isConversionToODV();
     }
     
     public void resetFileForm()

@@ -68,7 +68,7 @@ public class OutputFormatRadioSelectionListener implements SelectionListener
         }
 
      
-        rulesMgr.updateFromIHM(currentConv);
+      
      
         Nemo.getInstance().getDomain().getConversion().setCurrentConversion(currentConv);
         Nemo.getInstance().getViewMain().getEditFileForm().afficheGrpODV();
@@ -76,6 +76,7 @@ public class OutputFormatRadioSelectionListener implements SelectionListener
         
         Nemo.getInstance().getDomain().getConversion().getModel().setOutputFormat(currentConv);
         Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();
+        rulesMgr.updateFromIHM(currentConv);
         // invalidation de l'etape quand modif
         Utils.invalidEtapes();
     }
