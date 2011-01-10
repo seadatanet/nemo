@@ -29,11 +29,14 @@ and the file containing this LOCAL_CDI_ID.
 3/ If needed, load a model via the model/open menu and by choosing the XML file of the model you want to use for the current dataset.
 4/ If the file contains separators, click on separator and choose the correct separator.
 5/ Select the type of data you are processing : vertical profiles, time-series or trajectories.
-
+6/ Input the parameters for converting files 
+	- output format : MEDATLAS or ODV (for ODV, choose one file per station or one unique file for all stations)
+	- click on "Sort data within stations by increasing reference parameter" if necessary. 
+	
 ==Right part of the screen :
 Once the type of file and the input file or directory is chosen, file description appears on the right of NEMO screen.
- - Validate all steps button : The “validate all steps button” is only available  when input file(s) and model have been loaded.
-                               This button allows to validate all the steps of NEMO to go directly to the Convert folder for data conversion. 
+ - Validate all steps button : is only available when input file(s) and model have been loaded.
+                               This button allows to validate all the steps of NEMO to go directly to the Conversion step. 
  - Validate Button : One step must be validated before moving to the next one.
  - Reset button : erase all the values of the current step
 
@@ -57,12 +60,15 @@ Once the type of file and the input file or directory is chosen, file descriptio
  
 4/ Data termination indicator: This section describes the indicator of the end of a station in a file.
     - For single station file, most of the time the end of file (EOF) is the indicator of end of data, but it may be an empty line at the end of the file or a line with a specific text.
-    - For multiple stations file, NEMO needs a separator between the stations, to be able to know that station is changing. This separator can be an empty line or a set of specific characters that may
-      be located on the first line of the next station  (in that case it is necessary to check the corresponding box)
-    For example, in a MEDATLAS file, the indicator of end of data is the line starting with "-999.9 99.999". It is not necessary to type all the line; the first significant characters are enough.
+    - For multiple stations file, NEMO needs a separator between the stations, to be able to know that the station is changing. 
+      This separator can be : 
+        - an empty line 
+        - a set of specific characters located on the first line of the next station.
+        - a set of specific caharcters located after the measurements
+            For example, in a MEDATLAS file, the indicator of end of data is the line starting with "-999.9 99.999". It is not necessary to type all the line; the first significant characters are enough.
 
-    For each of these sections the number of lines or the specific set of characters can be input manually
-    or selected in the left part of the screen in the file and then input through the "Set" button.
+For each of these sections the number of lines or the specific set of characters can be input manually
+or selected in the left part of the screen in the file and then input through the "Set" button.
 
 ==Bottom part of the screen
 3 tabs are available
@@ -96,7 +102,7 @@ The information on this screen are necessary for MEDATLAS format.
 2/ Location : Start and end date, Sea area (SeaDataNet List C16)
 3/ Data source : source country (SeaDataNet List C180), laboratory, project and chief scientist 
 4/ Archiving centre : MEDATLAS code of the data archiving center (define in NEMO settings), MEDATLAS code for data availability.
-5/ Type of data : ROSCOP code for data type (SeaDataNet List C77)
+5/ Type of data : ROSCOP code for data type (SeaDataNet List C77), NEMO needs at list one data type with Sensor = true, the number of the data types must be different from 0.
 6/ Comments : Free text
 
 **********
@@ -114,13 +120,12 @@ Mandatory fields are: Station number, Data type, Time, Date, Latitude and Longit
           If station's number is located within the input file(s) filename, use 0 as line number, and give the start and end character in the file name.   
           Example : File name is xxxxyyyy1234.dat, station number is 1234. Input 0, 9 and 12 in the fields Line, Start and End of Station number section.
 
-2/ Data type : It is the ROSCOP code of the instrument (H10 - Ctd for example) used for data collection; it is selected in the list of data types input during the previous step (cruise description).
-          If processing a collection of files, "Data type" field is not available, it will be asked during conversion step
-
+2/ Data type : It is the ROSCOP code of the instrument (H10 - Ctd for example) used for data collection; it can be selected in the list of data types input during the previous step (cruise description).
+          
 3/ Acquisition history : They are 2 lines for comments about method and/or instrument used for data collection. They can be manually or automatically input using the set button.
 
 4/ Comments : Comments about the station can be manually or automatically input. There is no limitation on the number of comment lines.
-          If the comment is spread among several lines which do not have the same length, click on "Variable end of line position".
+          If the comment,automaticcaly input, is spread among several lines which do not have the same length, click on "Variable end of line position".
 
 5/ Surface samples : Same principle as Acquisition history, 2 lines for comments about surface samples if there are some.
 
@@ -129,7 +134,7 @@ Mandatory fields are: Station number, Data type, Time, Date, Latitude and Longit
           The default value is zero
 
 7/ Time : input the format in which time is provided in the input file and then, select time in the file and press Set and Test.
-          Format is either predefined but can be input by the user within the following :
+          Format is either predefined or can be input by the user within the following :
                hh: hour expressed in 2 digits (hh24 indicates time on 24 hours, 0 to 23)
                mm: minutes expressed in 2 digits (0 to 59)
                ccc: hundredth in the time expressed in 1 up to 7 digits (example : format hh24.ccc, value = 17.125, time = 17:07:30.000)
@@ -144,7 +149,7 @@ Mandatory fields are: Station number, Data type, Time, Date, Latitude and Longit
 
 
 8/ Date : input the format in which time is provided in the input file and then, select time in the file and press Set and Test.
-          Format is either predefined but can be input by the user within the following :
+          Format is either predefined or can be input by the user within the following :
                YY or YYYY: year expressed in 2 or 4 digits
                MM: month expressed in 2 digits (1 to 12)
                MMM: month expressed in 3 alphabetic characters (JAN,FEB,MAR,APR,MAY,JUN,JUL,AGU,SEP,OCT,NOV,DEC)
@@ -155,9 +160,9 @@ Mandatory fields are: Station number, Data type, Time, Date, Latitude and Longit
                                For TIME read  2.09687   - format D.ddddd
 
 9-10/ Latitude and Longitude : input the format in which Latitude is provided in the input file and then, select time in the file and press Set and Test.
-          Format is either predefined but can be input by the user within the following:
-               N: expresses the hemisphere. Input values have to equal N or S in the case of latitudes and W or E in the case of longitudes
-               +: expresses the hemisphere. Input values have to equal ' ' or '+' to express N in the case of latitudes, E in the case of longitudes
+          Format is either predefined or can be input by the user within the following:
+               N: Input values have to equal N or S in the case of latitudes and W or E in the case of longitudes
+               +: Input values have to equal ' ' or '+' to express N in the case of latitudes, E in the case of longitudes
                     and '-' to express S in the case of latitudes, W in the case of longitudes
                DDD or DD or D: Degrees (0 to 90 for latitude, 0 to 180 for longitude)
                DDD.ddd or DD.ddd: Degrees in decimal values. The maximum number of D must be 3 in the case of longitudes and 2 in the case of latitudes
@@ -170,7 +175,7 @@ Mandatory fields are: Station number, Data type, Time, Date, Latitude and Longit
 
 11/ Bottom Depth :  Bottom depth of stations, must be given in meter in the input file. This field can be input manually or automatically.
              Click on "Variable end of line position or variable start position" if all bottom depths do not end or start at the same character in every station (this often happens with not significant zero values)
-	     Some files could contain default values if bottom depth is not measured (-999, for example). To described this value click default value and enter the corresponding value in the text field.
+	     Some files may contain default values if bottom depth is not measured (-999, for example). To described this value click default value and enter the corresponding value in the text field.
 
 
 12/ QC flags : quality flags on station header information that could exists in the input file.
@@ -215,8 +220,8 @@ This step is performed to indicate NEMO where to find the data measurements in i
 This information concern the name and unit of the measured parameters, their default values (found in the input file 
 when the parameter is not measured), and the format in which the parameter will be kept in the output file.
 
-- For vertical profiles, PRES (for sea pressure in decibars) is a mandatory parameter; 
-   it is input by default when entering the step, and it cannot be deleted (it is a MEDATLAS requirement).
+- For vertical profiles, Pressure or Depth is a mandatory parameter; 
+   if MEDATLAS conversion is required and P091 choosed as parameter set, PRES is input by default when entering the step.
 
 - For time series, date and time of measurements will be automatically put in output files,
    they do not need to be described in the measurement description.
@@ -236,13 +241,22 @@ when the parameter is not measured), and the format in which the parameter will 
    in the output file. 
  
 - Parameter list:
-   To add a new parameter in the table of measured parameters. This is the list P091 of SeaDataNet, it corresponds to the MEDATLAS codes of parameters.
+   To add a new parameter in the table of measured parameters.
    + If default parameter list is P091 in NEMO settings
-       The selected parameter is added in the table, with some values filled by default; all these default values can be modified. The default and the format values linked to the parameter are downloaded in the parameters list of NEMO Web service
-   +If default parameter list is P011 in NEMO settings
-       Another window with the corresponding P011 opens
-       Then you have to select the P011 parameter in the list (use filter to find a specific parameter)
+       The selected parameter is added in the table, with some values filled by default; all these default values can be modified. The default and the format values linked to the parameter are downloaded in the P091 parameters list of NEMO Web service
+   + If default parameter list is P011 via P091 in NEMO settings
+       First select a parameter in P091 proposed list then
+       Another window with the corresponding P011 codes opens
+       Then you have to select the P011 parameter in the list (use filter to find a specific parameter) 
+       The selected parameter is added in the table, with some values filled by default; all these default values can be modified. The default and the format values linked to the parameter are downloaded in the P091 parameters list of NEMO Web service
+   + If default parameter list is P011 via P021 in NEMO settings
+       First select a parameter in P021 proposed list then
+       Another window with the corresponding P011 codes opens
+       Then you have to select the P011 parameter in the list (use filter to find a specific parameter) 
+       The selected parameter is added in the table with no default value : user have to input the unit, the format and de default output value of the parameter.
 
+- Select a P061 unit
+   Used top defined the unit of the parameter if default parameter list is P011 via P021 in NEMO settings
 
 - Move current parameter up:
    To move up a parameter in the table of measured parameters.
@@ -262,12 +276,15 @@ when the parameter is not measured), and the format in which the parameter will 
 
 - Delete flag:
    To delete the quality flag information of the selected parameter.
+   
+- Delete all parameters:
+   to delete all the parametrs of the table at once.
 
 ==The table of measured parameters contains the following columns :
 ===================================================================
-- Code : MEDATLAS code of the parameter
+- Code : MEDATLAS (P091) or P011 code of the parameter
 
-- Unit : MEDATLAS Unit of the parameter
+- Unit : MEDATLAS or P061 Unit of the parameter
 
 - Conversion : to input a conversion formula which should be like x*1000+3; with x the value read in the input file(s).
 
@@ -306,16 +323,14 @@ when the parameter is not measured), and the format in which the parameter will 
 Last step of NEMO; once the description of the input file(s) is completed, it is possible to run the conversion either to ODV or to MEDATLAS format.
 
 This conversion step generates:
-- output file(s) at the needed format
+- output file(s) at the requested format
 - If "Generate SeaDataNet CDI summary" is clicked in NEMO settings, a CDI summary file will be created 
   while NEMO is converting the input file(s). It is a Coma Separated Values (CSV) file that can be converted
   to an Excel file directly usable by Mikado to generate a CDI XML export, corresponding to the stations that
   are converted to ODV or MEDATLAS format. 
-- If "Generate mapping for SeaDataNet download manager” is clicked in NEMO settings, mapping information
+- If "Generate mapping for SeaDataNet download manager" is clicked in NEMO settings, mapping information
   (for all the stations that are converted to ODV or MEDATLAS format) are inserted in the local database of NEMO.
  
-If both conversion to MEDATLAS and ODV are available, user can generate both formats consecutively without revalidating all the steps.
-
 Conversion is divided in two steps:
 1-file conversion into memory: you still can cancel all the conversion process!
 2-file writing on disk: you can't cancel the conversion process while this step is running!

@@ -1,314 +1,330 @@
-Pour plus de dÃ©tails, se rÃ©fÃ©rer au manuel utilisateur de NEMO.
+Pour plus de détails, se référer au manuel utilisateur de NEMO.
 
 ==MODELE============================
 
-1/ ModÃ¨le/Ouvrir un modÃ¨le : charge un modÃ¨le existant, seulement si le type de fichier et l'emplacement du ou des fichiers a tÃ©tÃ© saisi au prÃ©alable.
-2/ ModÃ¨le/Enregistrer le modÃ¨le : sauve le modÃ¨le au format XML dans le rÃ©pertoire par dÃ©faut des modÃ¨les dÃ©fini dans la configuration de NEMO
-    Cette fonction n'est possible que si les 4 Ã©tapes de description du ou des fichiers ont Ã©tÃ© rÃ©alisÃ©es.
-3/ Quitter : ferme l'application aprÃ¨s demande de confirmation.
+1/ Modèle/Ouvrir un modèle : charge un modèle existant, seulement si le type de fichier et l'emplacement du ou des fichiers a tété saisi au préalable.
+2/ Modèle/Enregistrer le modèle : sauve le modèle au format XML dans le répertoire par défaut des modèles défini dans la configuration de NEMO
+    Cette fonction n'est possible que si les 4 étapes de description du ou des fichiers ont été réalisées.
+3/ Quitter : ferme l'application après demande de confirmation.
 
 ==TABLE DE COUPLAGE=================
 
-Ce menu permet la gestion de la table de couplage de NEMO qui permet la gÃ©nÃ©ration du fichier de mapping utilisÃ© par le Download Manager de SeaDataNet 
-pour faire la correspondance entre un LICAL_CDI_ID (un profil vertical, une sÃ©rie temporelle ou une trajectoire) et le fichier contenant ce LOCAL_CDI_ID.
+Ce menu permet la gestion de la table de couplage de NEMO qui permet la génération du fichier de mapping utilisé par le Download Manager de SeaDataNet 
+pour faire la correspondance entre un LICAL_CDI_ID (un profil vertical, une série temporelle ou une trajectoire) et le fichier contenant ce LOCAL_CDI_ID.
 1/ Table de couplage/Importer: importe un fichier de mapping dans la table de couplage de NEMO.
 2/ Table de couplage/Exporter: exporte la table de couplage dans un fichier.
-3/ Table de couplage/Editer la table de couplage: permet de modifier le contenu de la table de couplage de NEMO : effacer des lignes, insÃ©rer de nouvelles lignes, mettre Ã  jour des lignes existantes.
+3/ Table de couplage/Editer la table de couplage: permet de modifier le contenu de la table de couplage de NEMO : effacer des lignes, insérer de nouvelles lignes, mettre à  jour des lignes existantes.
 
 ==OPTIONS===========================
 
-1/ Options/Configurer: dÃ©finit la configuration of NEMO comme par exemple les valeurs par dÃ©faut pour des informations nÃ©cessaires Ã  NEMO, l'adresse des web services, le mapping des flags de Qc, ... (Voir les explications dÃ©taillÃ©es dans le manuel utilisateur)
-2/ Options/Mise Ã  jour constantes : Met Ã  jour NEMO avec les derniÃ¨res version des listes de valeurs nÃ©cessaires (EDMO, liste de vocabulaires de SeaDataNet, ...).
+1/ Options/Configurer: définit la configuration of NEMO comme par exemple les valeurs par défaut pour des informations nécessaires à  NEMO, l'adresse des web services, le mapping des flags de Qc, ... (Voir les explications détaillées dans le manuel utilisateur)
+2/ Options/Mise à  jour constantes : Met à  jour NEMO avec les dernières version des listes de valeurs nécessaires (EDMO, liste de vocabulaires de SeaDataNet, ...).
 
 ==FICHIER===========================
 
-==Partie gauche de l'Ã©cran :
-1/ SÃ©lectionner le type de fichier que vous souhaitez reformater (Fichier campagne : un fichier pour toutes les stations d'une campagne, Dossier campagne : Un fichier par station, Une collection de fichier (muti-stations ou pas) regroupÃ©s par campagne, Collection de fichier (multi-stations ou pas) non regroupÃ©s par campagne)
-2/ Puis cliquer sur "Parcourir" pour choisir le fichier ou le rÃ©pertoire.
-3/ Si nÃ©cessaire, charger un modÃ¨le Ã  l'aide du menu "ModÃ¨le/Ouvrir un modÃ¨le" et sÃ©lectionner le fichier XML correspondant.
-4/ Si le fichier en entrÃ©e contient des sÃ©parateurs, cliquer sur "SÃ©parateur" et choisissez le sÃ©parateur qui convient.
-5/ SÃ©lectionner le type de donnÃ©es traitÃ©es : profil vertical, sÃ©rie temporelle ou trajectoire.
+==Partie gauche de l'écran :
+1/ Sélectionner le type de fichier que vous souhaitez reformater (Fichier campagne : un fichier pour toutes les stations d'une campagne, Dossier campagne : Un fichier par station, Une collection de fichier (muti-stations ou pas) regroupés par campagne, Collection de fichier (multi-stations ou pas) non regroupés par campagne)
+2/ Puis cliquer sur "Parcourir" pour choisir le fichier ou le répertoire.
+3/ Si nécessaire, charger un modèle à  l'aide du menu "Modèle/Ouvrir un modèle" et sélectionner le fichier XML correspondant.
+4/ Si le fichier en entrée contient des séparateurs, cliquer sur "Séparateur" et choisissez le séparateur qui convient.
+5/ Sélectionner le type de données traitées : profil vertical, série temporelle ou trajectoire.
+6/ Préciser les paramètres de conversion 
+	- le format de sortie : MEDATLAS ou ODV (pour ODV, choisir un fichier par station ou un fichier pour toutes les stations)
+	- cliquer sur "Trier les données au sein des stations par paramètre de référence croissant" si nécessaire. 
+	
+==Partie droite de l'écran :
+Une fois que le type de fichier et le fichier ou répertoire ont été choisi, la description de fichier apparaît sur la droite de l'écran de NEMO.
+ - Bouton "Valider toutes les étapes" : permet de valider toutes les étapes de description de format si un modèle est chargé, et d'aller ensuite directement à  l'étape de Conversion.
+ - Bouton "Valider étape" : Une étape doit être validée avant de passer à  la suivante.
+ - bouton "Reset" : efface toutes les valeurs de l'étape courante.
 
-==Partie droite de l'Ã©cran :
-Une fois que le type de fichier et le fichier ou rÃ©pertoire ont Ã©tÃ© choisi, la description de fichier apparaÃ®t sur la droite de l'Ã©cran de NEMO.
- - Bouton "Valider Ã©tape" : Une Ã©tape doit Ãªtre validÃ©e avant de passer Ã  la suivante.
- - bouton "Reset" : efface toutes les valeurs de l'Ã©tape courante.
+4 parties : Cliquer sur chaque partie pour modifier les valeurs si nécessaire
 
-4 parties : Cliquer sur chaque partie pour modifier les valeurs si nÃ©cessaire
-
-1/ EntÃªte de fichier : Ce champ dÃ©crit le nombre de lignes de l'entÃªte de fichier, il nâ€™est accessible que dans le cas d'un fichier multi-stations. 
-    L'entÃªte fichier correspond aux lignes relatives Ã  l'ensemble des stations du fichier qui ne sont pas rÃ©pÃ©tÃ©es, pour chaque station, dans le reste du fichier.
+1/ Entête de fichier : Ce champ décrit le nombre de lignes de l'entête de fichier, il n'est accessible que dans le cas d'un fichier multi-stations. 
+    L'entête fichier correspond aux lignes relatives à  l'ensemble des stations du fichier qui ne sont pas répétées, pour chaque station, dans le reste du fichier.
     
-2/ EntÃªte station : Ce champ dÃ©crit le nombre de lignes de l'entÃªte station ou (exclusif) un indicateur de fin d'en-tÃªte station. 
-    Une entÃªte station est un ensemble de lignes contenant des information sur une station.
-    Ces lignes sont Ã©crites avant les lignes de donnÃ©es, elles sont rÃ©pÃ©tÃ©es pour chaque station.
-    + Le nombre de lignes de l'entÃªte station peut Ãªtre entrÃ© manuellement ou sÃ©lectionnÃ© dans la partie gauche de l'Ã©cran et insÃ©rÃ© Ã  l'aide du bouton "Injecter". 
-    + Lâ€™indicateur de fin de l'en-tÃªte station peut Ãªtre entrÃ© manuellement ou sÃ©lectionnÃ© dans la partie gauche de l'Ã©cran et insÃ©rÃ© Ã  l'aide du bouton "Injecter". 
-      Cet indicateur peut Ãªtre accompagnÃ© d'un nombre de lignes (Ã©gal Ã  0 par dÃ©faut) correspondant au nombre de ligne entre l'indicateur de fin de station et la premiÃ¨re ligne de donnÃ©es.
+2/ Entête station : Ce champ décrit le nombre de lignes de l'entête station ou (exclusif) un indicateur de fin d'en-tête station. 
+    Une entête station est un ensemble de lignes contenant des information sur une station.
+    Ces lignes sont écrites avant les lignes de données, elles sont répétées pour chaque station.
+    + Le nombre de lignes de l'entête station peut être entré manuellement ou sélectionné dans la partie gauche de l'écran et inséré à  l'aide du bouton "Injecter". 
+    + L'indicateur de rupture de l'en-tête station peut être entré manuellement ou sélectionné dans la partie gauche de l'écran et inséré à  l'aide du bouton "Injecter". 
+      Cet indicateur peut être accompagné d'un nombre de lignes (égal à  0 par défaut) correspondant au nombre de ligne entre l'indicateur de fin de station et la première ligne de données.
     
-3/ Fin de station : Ce champ dÃ©crit le nombre de lignes de la fin de station.
-    Ces lignes sont gÃ©nÃ©ralement prÃ©sentent quand il s'agit d'un fichier multi-stations et que plusieurs lignes sÃ©parent les donnÃ©es d'une station de l'en-tÃªte de la station suivante.
-    La ligne contenant l'indicateur de fin de donnÃ©es ne doit pas Ãªtre prise en compte dans ce nombre de lignes de fin de station.
+3/ Fin de station : Ce champ décrit le nombre de lignes de la fin de station.
+    Ces lignes sont généralement présentent quand il s'agit d'un fichier multi-stations et que plusieurs lignes séparent les données d'une station de l'en-tête de la station suivante.
+    La ligne contenant l'indicateur de fin de données ne doit pas être prise en compte dans ce nombre de lignes de fin de station.
        
-4/ Indicateur de fin de donnÃ©es : Ce champ dÃ©crit l'indicateur de fin des donnÃ©es mesurÃ©es.
-    - Pour les fichiers mono-station, la plupart du temps, la fin de fichier (EOF) est l'indicateur de fin de donnÃ©es, mais il peut y avoir une ligne vide ou une ligne avec un texte spÃ©cifique qui indique la fin des mesures.
-    - Pour les fichiers multi-stations, NEMO a besoin d'un sÃ©parateur entre les stations pour pouvoir reconnaÃ®tre le changement de station.
-      Cet indicateur peut Ãªtre une ligne vide ou un texte spÃ©cifique, qui peut se trouver sur la premiÃ¨re ligne de la station suivante (dans ce cas il est nÃ©cessaire de cocher le champ correspondant.
-      Par exemple, pour les fichiers au format MEDATLAS, l'indicateur de fin de donnÃ©es est la ligne de valeurs par dÃ©faut commenÃ§ant par exemple par "-999.9 99.999". 
-      Il n'est pas nÃ©cessaire de taper toutes la lignes, les premiers caractÃ¨res significatifs suffisent.
+4/ Indicateur de fin de données : Ce champ décrit l'indicateur de fin des données mesurées.
+    - Pour les fichiers mono-station, la plupart du temps, la fin de fichier (EOF) est l'indicateur de fin de données, mais il peut y avoir une ligne vide ou une ligne avec un texte spécifique qui indique la fin des mesures.
+    - Pour les fichiers multi-stations, NEMO a besoin d'un séparateur entre les stations pour pouvoir reconnaître le changement de station.
+      Cet indicateur peut être : 
+      	- une ligne vide, 
+      	- un texte spécifique, qui se trouve sur la première ligne de la station suivante 
+      	- un texte spécifique, qui se trouve à  la fin des données.
+      Par exemple, pour les fichiers au format MEDATLAS, l'indicateur de fin de données est la ligne de valeurs par défaut commençant par exemple par "-999.9 99.999". 
+      Il n'est pas nécessaire de taper toutes la lignes, les premiers caractères significatifs suffisent.
       
-    Pour chacune de ces parties les champs peuvent peut Ãªtre soit entrÃ©s manuellement ou sÃ©lectionnÃ©s dans la partie gauche de l'Ã©cran et insÃ©rÃ©s Ã  l'aide du bouton "Injecter".
+Pour chacune de ces parties, le nombre de lignes ou le texte spécifique peuvent être entrés manuellement ou sélectionnés dans la partie gauche de l'écran et insérés à  l'aide du bouton "Injecter".	    
     
-==Partie infÃ©rieure de l'Ã©cran
+==Partie inférieure de l'écran
 3 onglets sont accessibles
 
-1/ Onglet Erreurs : Cet onglet donne des informations sur le dÃ©roulement de la validation de l'Ã©tape.
-    Si l'information est une erreur elle est Ã©crite en rouge, sinon elle est Ã©crite en vert.
+1/ Onglet Erreurs : Cet onglet donne des informations sur le déroulement de la validation de l'étape.
+    Si l'information est une erreur elle est écrite en rouge, sinon elle est écrite en vert.
     
-2/ Onglet Infos : Cet onglet donne des informations sur le fichier ou le rÃ©pertoire d'entrÃ©e, et aussi sur le modÃ¨le utilisÃ© (s'il y en a un).
+2/ Onglet Infos : Cet onglet donne des informations sur le fichier ou le répertoire d'entrée, et aussi sur le modèle utilisé (s'il y en a un).
 
-3/ Onglet aide : Cet onglet affiche l'aide en ligne, Ã  chaque Ã©tape.
+3/ Onglet aide : Cet onglet affiche l'aide en ligne, à  chaque étape.
 
 **********
-Pour plus de dÃ©tails, se rÃ©fÃ©rer au manuel utilisateur de NEMO.
+Pour plus de détails, se référer au manuel utilisateur de NEMO.
 
 ==DESCRIPTION DE CAMPAGNE===========================
 
-Les informations de cet Ã©cran sont nÃ©cessaires pour le format MEDATLAS
- - Bouton "Valider Ã©tape" : Une Ã©tape doit Ãªtre validÃ©e avant de passer Ã  la suivante.
- - bouton "Reset" : efface toutes les valeurs de l'Ã©tape courante.
+Les informations de cet écran sont nécessaires pour le format MEDATLAS
+ - Bouton "Valider étape" : Une étape doit être validée avant de passer à  la suivante.
+ - bouton "Reset" : efface toutes les valeurs de l'étape courante.
 
-3 possibilitÃ©s Ã  cette Ã©tape: 
+3 possibilités à  cette étape: 
 
 1/ Entrer les valeurs manuellement 
 2/ Interroger le Web service en cliquant sur "Initialisation serveur" (pour IFREMER seulement)
-3/ Importer les informations Ã  partir d'un fichier XML de rapport de campagne (CSR de SeaDataNet) en cliquant sur "Initialisation XML".
+3/ Importer les informations à  partir d'un fichier XML de rapport de campagne (CSR de SeaDataNet) en cliquant sur "Initialisation XML".
 
-6 sections : Cliquer sur chaque section pour modifier les valeurs si nÃ©cessaire
+6 sections : Cliquer sur chaque section pour modifier les valeurs si nécessaire
 
-1/ RÃ©fÃ©rence : rÃ©fÃ©rence MEDATLAS de la campagne, nom de la campagne et navire (SeaDataNet Liste C174).
-2/ Localisation : Dates dÃ©but et fin, Zone ocÃ©anique (SeaDataNet Liste C16)
-3/ Source des donnÃ©es: pays (SeaDataNet Liste C180), laboratoire, projet et chef de mission 
-4/ Centre d'archivage : code MEDATLAS du centre de donnÃ©es responsable de l'archivage (dÃ©fini dans la configuration de NEMO), code MEDATLAS pour la confidentialitÃ© des donnÃ©es.
-5/ Type de donnÃ©es : code ROSCOP des types de donnÃ©es (SeaDataNet Liste C77)
-6/ Commentaires Ã©ventuels : Texte libre pour dÃ©crire par exemple les mÃ©thodes de mesure des paramÃ¨tres
+1/ Référence : référence MEDATLAS de la campagne, nom de la campagne et navire (SeaDataNet Liste C174).
+2/ Localisation : Dates début et fin, Zone océanique (SeaDataNet Liste C16)
+3/ Source des données: pays (SeaDataNet Liste C180), laboratoire, projet et chef de mission 
+4/ Centre d'archivage : code MEDATLAS du centre de données responsable de l'archivage (défini dans la configuration de NEMO), code MEDATLAS pour la confidentialité des données.
+5/ Type de données : code ROSCOP des types de données (SeaDataNet Liste C77), il faut au minimum un type de données de type capteur, le nombre des types de données doit ÃƒÂ¢tre différent de 0. 
+6/ Commentaires éventuels : Texte libre pour décrire par exemple les méthodes de mesure des paramètres
 
 **********
-Pour plus de dÃ©tails, se rÃ©fÃ©rer au manuel utilisateur de NEMO.
+Pour plus de détails, se référer au manuel utilisateur de NEMO.
 
 ==DESCRIPTION DE STATION=============================
 
-Cette Ã©tape sert Ã  NEMO pour retrouver les informations obligatoire ou importantes des en-tÃªtes station du (ou des) fichier(s).
-Cette information change suivant si l'on traite des profils verticaux, des sÃ©ries temporelles ou des trajectoires. 
+Cette étape sert à  NEMO pour retrouver les informations obligatoire ou importantes des en-têtes station du (ou des) fichier(s).
+Cette information change suivant si l'on traite des profils verticaux, des séries temporelles ou des trajectoires. 
 
 ==Pour les profils verticaux============
-12 sections sont affichÃ©es : Cliquer sur chaque partie pour modifier les valeurs si nÃ©cessaire.
-Les champs obligatoires sont : NumÃ©ro de station, Type de donnÃ©es, Heure, Date, Latitude et Longitude. 
+12 sections sont affichées : Cliquer sur chaque partie pour modifier les valeurs si nécessaire.
+Les champs obligatoires sont : Numéro de station, Type de données, Heure, Date, Latitude et Longitude. 
 
-1/ NumÃ©ro de station : Le numÃ©ro des stations peut Ãªtre incrÃ©mentÃ© Ã  partir d'un nombre donnÃ© par l'utilisateur ou il peut Ãªtre lu dans l'en-tÃªte station et saisi dans NEMO Ã  l'aide des boutons injecter et Test.
-          Si le numÃ©ro des stations est donnÃ© dans le nom des fichiers en entrÃ©e, mettre 0 dans champ ligne, et mettre les rang des premier et dernier caractÃ¨res du numÃ©ro de station dans le nom du fichier.
-          exemple : nom de fichier en entrÃ©e xxxxyyyy1234.dat, le numÃ©ro de station est entre les caractÃ¨res 9 et 12 du nom de fichier, 
-                    mettre respectivement 0, 9 et 12 dans les champs Ligne, DÃ©but et fin de la section "NumÃ©ro de station".  
+1/ Numéro de station : Le numéro des stations peut être incrémenté à  partir d'un nombre donné par l'utilisateur ou il peut être lu dans l'en-tête station et saisi dans NEMO à  l'aide des boutons Injecter et Test.
+          Si le numéro des stations est donné dans le nom des fichiers en entrée, mettre 0 dans champ ligne, et mettre les rang des premier et dernier caractères du numéro de station dans le nom du fichier.
+          exemple : nom de fichier en entrée xxxxyyyy1234.dat, le numéro de station est entre les caractères 9 et 12 du nom de fichier, 
+                    mettre respectivement 0, 9 et 12 dans les champs Ligne, Début et fin de la section "Numéro de station".  
 
-2/ Type de donnÃ©es : C'est le code ROSCOP de l'instrument utilisÃ© pour collecter les donnÃ©es (H10 - Ctd par exemple), les codes proposÃ©s sont sÃ©lectionnÃ©s dans la liste des Types de donnÃ©es 
-                     de l'Ã©tape prÃ©cÃ©dente (Description de campagne).
-                     Si l'utilisateur travaille sur une collection de fichiers, ce champ n'est pas accessible ; le type de donnÃ©es est demandÃ© au moment de la conversion.
+2/ Type de données : C'est le code ROSCOP de l'instrument utilisé pour collecter les données (H10 - Ctd par exemple), les codes proposés peuvent être sélectionnés dans la liste des Types de données 
+                     de l'étape précédente (Description de campagne).
 
-3/ Historique Acquisition : 2 lignes peuvent Ãªtre utilisÃ©es pour mettre des commentaires sur la mÃ©thode et/ou l'instrument utilisÃ© pour la collecte des donnÃ©es
-			    Ces lignes peuvent Ãªtre saisies manuellement ou lues dans le fichier Ã  l'aide du bouton "Injecter".
+3/ Historique Acquisition : 2 lignes peuvent être utilisées pour mettre des commentaires sur la méthode et/ou l'instrument utilisé pour la collecte des données
+			    Ces lignes peuvent être saisies manuellement ou lues dans le fichier à  l'aide du bouton "Injecter".
 
-4/ Commentaire : Commentaire sur la station, pas de limitation sur le nombre de lignes. Ce commentaire peut Ãªtre saisies manuellement ou lues dans le fichier Ã  l'aide du bouton "Injecter".
-                 Si le commentaire est sur plusieurs lignes de longueurs diffÃ©rentes, cocher le champ "Position fin de ligne variable".
+4/ Commentaire : Commentaire sur la station, pas de limitation sur le nombre de lignes. Ce commentaire peut être saisi manuellement ou lu dans le fichier à  l'aide du bouton "Injecter".
+                 Dans le cas d'une lecture dans le fichier, si le commentaire est sur plusieurs lignes de longueurs différentes, cocher le champ "Position fin de ligne variable".
 
-5/ Echantillon de surface : MÃªme principe que pour "Historique Acquisition", 2 lignes de commentaires sur les Ã©ventuels Ã©chantillons de surface.
+5/ Echantillon de surface : Même principe que pour "Historique Acquisition", 2 lignes de commentaires sur les éventuels échantillons de surface.
 
-6/ DÃ©calage/TU : Ce champ sert Ã  gÃ©rer les heures non TU dans les fichiers en entrÃ©e.
-                 Si l'heure de la station est en TU-5 dans les fichiers en entrÃ©e, mettre 5 (ou utiliser le bouton injecter pour lire la valeur dans le fichier) dans le champ prÃ©vu.
-                 NEMO ajoutera alors 5 heures Ã  l'heure lue dans le fichier. Si l'heure en entrÃ©e est Ã  TU+5, mettre -5 dans le champ.
-                 La valeur par dÃ©faut est fixÃ©e Ã  0.
+6/ Décalage/TU : Ce champ sert à  gérer les heures non TU dans les fichiers en entrée.
+                 Si l'heure de la station est en TU-5 dans les fichiers en entrée, mettre 5 (ou utiliser le bouton injecter pour lire la valeur dans le fichier) dans le champ prévu.
+                 NEMO ajoutera alors 5 heures à  l'heure lue dans le fichier. Si l'heure en entrée est à  TU+5, mettre -5 dans le champ.
+                 La valeur par défaut est fixée à  0.
 
-7/ Heure : Entrer le format de l'heure du fichier en entrÃ©e, puis, sÃ©lectionner l'heure dans le fichier, appuyer sur le bouton "Injecter", puis sur le bouton Test pour vÃ©rifier la valeur.
-           Le format peut Ãªtre sÃ©lectionnÃ© dans la liste, ou saisi par l'utilisateur en utilisant les valeurs suivantes :
-               hh: heure exprimÃ©e sur 2 caractÃ¨res (hh24 indique une heure comprise entre 0 et 23).
-               mm: minutes exprimÃ©e sur 2 caractÃ¨res (entre 0 et 59)
-               ccc: centiÃ¨me d'heure sur 1 Ã  7 caractÃ¨res (exemple : format hh24.ccc, valeur = 17.125, heure = 17:07:30.000)
-               ss: secondes exprimÃ©es sur 2 caractÃ¨res (entre 0 et 59)
+7/ Heure : Entrer le format de l'heure du fichier en entrée, puis, sélectionner l'heure dans le fichier, appuyer sur le bouton "Injecter", puis sur le bouton Test pour vérifier la valeur.
+           Le format peut être sélectionné dans la liste, ou saisi par l'utilisateur en utilisant les valeurs suivantes :
+               hh: heure exprimée sur 2 caractères (hh24 indique une heure comprise entre 0 et 23).
+               mm: minutes exprimée sur 2 caractères (entre 0 et 59)
+               ccc: centième d'heure sur 1 à  7 caractères (exemple : format hh24.ccc, valeur = 17.125, heure = 17:07:30.000)
+               ss: secondes exprimées sur 2 caractères (entre 0 et 59)
                PM: heure au format anglo-saxon (PM et AM)
-               ttttt: secondes exprimÃ©es sur 1 Ã  5 caractÃ¨res (pour les heures exprimÃ©es en secondes, exemple : format tttt, valeur=3610, heure = 01:00:10.00)
-               D.dddddd: heure des jours juliens chronoliques (utilisÃ©e par exemple dans le format ODV)
-                   exemple : si la date Ã  lire est la suivante : 2454972.09687, 
+               ttttt: secondes exprimées sur 1 à  5 caractères (pour les heures exprimées en secondes, exemple : format tttt, valeur=3610, heure = 01:00:10.00)
+               D.dddddd: heure des jours juliens chronoliques (utilisée par exemple dans le format ODV)
+                   exemple : si la date à  lire est la suivante : 2454972.09687, 
                                pour le jour il faut lire 2454972.0, format DDDDDDD.d
                                pour l'heure il faut lire 2.09687    format D.ddddd
-           L'heure peut ne pas Ãªtre conues pour certaines stations et dans ce cas la valeur par dÃ©faut doit Ãªtre renseignÃ©e : l'utilisateur doit cocher le champ "Valeur par dÃ©faut" et renseigner cette valeur dans le champ correspondant.
+           L'heure peut ne pas être conues pour certaines stations et dans ce cas la valeur par défaut doit être renseignée : l'utilisateur doit cocher le champ "Valeur par défaut" et renseigner cette valeur dans le champ correspondant.
                
 
-8/ Date : Entrer le format de la date du fichier en entrÃ©e, puis, sÃ©lectionner l'heure dans le fichier, appuyer sur le bouton "Injecter", puis sur le bouton Test pour vÃ©rifier la valeur.
-          Le format peut Ãªtre sÃ©lectionnÃ© dans la liste, ou saisi par l'utilisateur en utilisant les valeurs suivantes :
-               YY or YYYY: annÃ©e sur 2 ou 4 caractÃ¨res
-               MM: mois sur 2 caractÃ¨res (1 Ã  12)
-               MMM: mois sur 3 caractÃ¨res alphabÃ©tiques (JAN,FEB,MAR,APR,MAY,JUN,JUL,AGU,SEP,OCT,NOV,DEC)
-               DD: Jour dans le mois sur 2 caractÃ¨res (1 Ã  31)
-	       	   DDDDDDD.d: Jour julien chronologique de (utilisÃ© dans le format ODV)
-                  exemple : si la date Ã  lire est la suivante : 2454972.09687, 
+8/ Date : Entrer le format de la date du fichier en entrée, puis, sélectionner l'heure dans le fichier, appuyer sur le bouton "Injecter", puis sur le bouton Test pour vérifier la valeur.
+          Le format peut être sélectionné dans la liste, ou saisi par l'utilisateur en utilisant les valeurs suivantes :
+               YY or YYYY: année sur 2 ou 4 caractères
+               MM: mois sur 2 caractères (1 à  12)
+               MMM: mois sur 3 caractères alphabétiques (JAN,FEB,MAR,APR,MAY,JUN,JUL,AGU,SEP,OCT,NOV,DEC)
+               DD: Jour dans le mois sur 2 caractères (1 à  31)
+	       	   DDDDDDD.d: Jour julien chronologique de (utilisé dans le format ODV)
+                  exemple : si la date à  lire est la suivante : 2454972.09687, 
                                pour le jour il faut lire 2454972.0, format DDDDDDD.d
                                pour l'heure il faut lire 2.09687    format D.ddddd
    
-9-10/ Latitude et Longitude : Entrer le format de la latitude ou de la longitude du fichier en entrÃ©e, puis, sÃ©lectionner l'heure dans le fichier, appuyer sur le bouton "Injecter", puis sur le bouton Test pour vÃ©rifier la valeur.
-      Le format peut Ãªtre sÃ©lectionnÃ© dans la liste, ou saisi par l'utilisateur en utilisant les valeurs suivantes :
-               N: dÃ©signe l'hÃ©misphÃ¨re. Les valeurs en entrÃ©e doivent Ãªtre Ã©gales Ã  N ou S pour les latitudes et W ou E dans le cas des longitudes
-               +: dÃ©signe l'hÃ©misphÃ¨re. Les valeurs en entrÃ©e doivent Ãªtre Ã©gales Ã  ' ' ou '+' pour exprimer une latitude Nord, et une longitude Est ou
-                                                                                          Ã '-' pour exprimer une latitude Sud, et une longitude Ouest
-               DDD or DD or D: DegrÃ©s (0 Ã  90 pour la latitude, 0 Ã  180 pour la longitude)
-               DDD.ddd or DD.ddd: DegrÃ©s dÃ©cimaux. Le nombre maximum de D est 3 pour la longitude et 2 pour la latitude
-                    le nombre de 'd' exprime le nombre de dÃ©cimales.
-               MM: Minutes (0 Ã  59)
-               MM.mm: Minutes dÃ©cimales. Le nombre de 'm' exprime le nombre de dÃ©cimales.
-               SS: Seconds (0 Ã  59)
+9-10/ Latitude et Longitude : Entrer le format de la latitude ou de la longitude du fichier en entrée, puis, sélectionner l'heure dans le fichier, appuyer sur le bouton "Injecter", puis sur le bouton Test pour vérifier la valeur.
+      Le format peut être sélectionné dans la liste, ou saisi par l'utilisateur en utilisant les valeurs suivantes :
+               N: Les valeurs en entrée doivent être égales à  N ou S pour les latitudes et W ou E dans le cas des longitudes
+               +: Les valeurs en entrée doivent être égales à  ' ' ou '+' pour exprimer une latitude Nord, et une longitude Est ou
+                                                                                          à '-' pour exprimer une latitude Sud, et une longitude Ouest
+               DDD or DD or D: Degrés (0 à  90 pour la latitude, 0 à  180 pour la longitude)
+               DDD.ddd or DD.ddd: Degrés décimaux. Le nombre maximum de D est 3 pour la longitude et 2 pour la latitude
+                    le nombre de 'd' exprime le nombre de décimales.
+               MM: Minutes (0 à  59)
+               MM.mm: Minutes décimales. Le nombre de 'm' exprime le nombre de décimales.
+               SS: Seconds (0 à  59)
 
-               Cliquer sur "Position de fin de ligne variable" si toutes les latitudes ou longitudes des stations en entrÃ©e ne commence pas ou ne se termine pas Ã  la mÃªme position 
-               (cela arrive souvent avec si les zÃ©ros non significatifs de fin ne sont pas Ã©crits, cf exemples dans le manuel utilisateur de NEMO).
+               Cliquer sur "Position de fin de ligne variable" si toutes les latitudes ou longitudes des stations en entrée ne commence pas ou ne se termine pas à  la même position 
+               (cela arrive souvent avec si les zéros non significatifs de fin ne sont pas écrits, cf exemples dans le manuel utilisateur de NEMO).
 
-11/ BathymÃ©trie : Profondeur de l'ocÃ©an au point de la station en mÃ¨tres. Cette valeur peut Ãªtre saisie manuellement ou lue dans le fichier Ã  l'aide du bouton "Injecter", puis testÃ©e Ã  l'aide du bouton "Test".
-                  Cliquer sur "Position de fin de ligne variable" si toutes les profondeurs des stations en entrÃ©e ne se termine pas Ã  la mÃªme position.
-                  Certains fichiers peuvent contenir une valeur par dÃ©faut si la bathymÃ©trie n'est pas renseignÃ©e (-999 par exemple). Pour dÃ©crire cette valeur, cocher "Valeur par dÃ©faut" et entrer la valeur dans le champ correspondant.
+11/ Bathymétrie : Profondeur de l'océan au point de la station, en mètres. Cette valeur peut être saisie manuellement ou lue dans le fichier à  l'aide du bouton "Injecter", puis testée à  l'aide du bouton "Test".
+                  Cliquer sur "Position de fin de ligne variable" si toutes les profondeurs des stations en entrée ne se termine pas à  la même position.
+                  Certains fichiers peuvent contenir une valeur par défaut si la bathymétrie n'est pas renseignée (-999 par exemple). Pour décrire cette valeur, cocher "Valeur par défaut" et entrer la valeur dans le champ correspondant.
 
-12/ QC flags : Flags qualitÃ©s sur les mÃ©ta-donnÃ©es de l'entÃªte station qui peuvent exister en entrÃ©e (cas du format MEDATLAS, par exemple).
-               Ces flags qualitÃ© sont utilisÃ©s en sortie uniquement dans le format MEDATLAS, ils concernent la date/heure, la latitude, la longitude et la profondeur.
+12/ QC flags : Flags qualités sur les méta-données de l'entête station qui peuvent exister en entrée (cas du format MEDATLAS, par exemple).
+               Ces flags qualité sont utilisés en sortie uniquement dans le format MEDATLAS, ils concernent la date/heure, la latitude, la longitude et la profondeur.
 
-==Pour les sÃ©ries temporelles ==========
-6 sections supplÃ©mentaires sont affichÃ©es.
-Les champs obligatoires sont : NumÃ©ro de station, Type de donnÃ©es, Heure, Date, Latitude, Longitude, et Profondeur du capteur.
+==Pour les séries temporelles ==========
+6 sections supplémentaires sont affichées.
+Les champs obligatoires sont : Numéro de station, Type de données, Heure, Date, Latitude, Longitude, et Profondeur du capteur.
 
-13-14/ Latitude de fin et Longitude de fin: latitude et longitude Ã  la date de fin des sÃ©ries temporelles.
-          Si rien n'est saisi, les valeurs sont les mÃªmes que celles de Latitude et Longitude qui sont les positions Ã  la date de dÃ©but des sÃ©ries temporelles.
-          Les valeurs autorisÃ©es sont les mÃªmes que pour les champs Latitude et Longitude dÃ©crits pour les profils verticaux.
+13-14/ Latitude de fin et Longitude de fin: latitude et longitude à  la date de fin des séries temporelles.
+          Si rien n'est saisi, les valeurs sont les mêmes que celles de Latitude et Longitude qui sont les positions à  la date de début des séries temporelles.
+          Les valeurs autorisées sont les mêmes que pour les champs Latitude et Longitude décrits pour les profils verticaux.
 
-15/ BathymÃ©trie de fin : Profondeur de l'ocÃ©an au point de la station en mÃ¨tres, Ã  la date de fin des sÃ©ries temporelles.
-               Si rien n'est saisi, les valeurs sont les mÃªmes que celles du champ "Profondeur" qui est la profondeur Ã  la date de dÃ©but des sÃ©ries temporelles.
-               La saisie se fait de la mÃªme faÃ§on que dans le champ "Profondeur" dÃ©crit pour les profils verticaux. 
+15/ Bathymétrie de fin : Profondeur de l'océan au point de la station en mètres, à  la date de fin des séries temporelles.
+               Si rien n'est saisi, les valeurs sont les mêmes que celles du champ "Profondeur" qui est la profondeur à  la date de début des séries temporelles.
+               La saisie se fait de la même façon que dans le champ "Profondeur" décrit pour les profils verticaux. 
           
-16/ Profondeur du capteur : Profondeur du capteur mesurant les donnÃ©es, elle doit Ãªtre donnÃ©e en mÃ¨tres. Ce champ peut Ãªtre renseignÃ© manuellement ou automatiquement en utilisant le bouton Â« Injecter Â».
+16/ Profondeur du capteur : Profondeur du capteur mesurant les données, elle doit être donnée en mètres. Ce champ peut être renseigné manuellement ou automatiquement en utilisant le bouton « Injecter ».
  
-17/ DÃ©clinaison magnÃ©tique : DÃ©clinaison magnÃ©tique Ã  la position des sÃ©ries temporelles, utile pour les courantomÃ¨tres.
-          Câ€™est un enter signÃ© : une dÃ©clinaison magnÃ©tique de W007 doit Ãªtre saisie  -7 et E005 doit Ãªtre saisie +5 or 5.
-          Ce champ peut Ãªtre renseignÃ© manuellement ou automatiquement en utilisant le bouton Â« Injecter Â».
+17/ Déclinaison magnétique : Déclinaison magnétique à  la position des séries temporelles, utile pour les courantomètres.
+          C'est un entier signé : une déclinaison magnétique de W007 doit être saisie  -7 et E005 doit être saisie +5 or 5.
+          Ce champ peut être renseigné manuellement ou automatiquement en utilisant le bouton « Injecter ».
 
-18/ FrÃ©quence d'Ã©chantillonnage : FrÃ©quence d'Ã©chantillonnage des capteurs. Ce champ peut Ãªtre renseignÃ© manuellement ou automatiquement.
-          NEMO le calcule automatiquement (et empÃªche sa saisie) si la date et l'heure sont lues dans la premiÃ¨re lige de donnÃ©es.
-          L'unitÃ© de la frÃ©quence d'Ã©chantillonnage est la seconde. Si elle n'est pas donnÃ©es en secondes dans les fichiers en entrÃ©e, elle doit Ãªtre convertie en utilisant le champ "Formule de conversion" 
-          (exemple : si la frÃ©quence d'Ã©chantillonnage est donnÃ©es en heure dans les fichiers en entrÃ©e, mettre *3600 dans la formule de conversion).
+18/ Fréquence d'échantillonnage : Fréquence d'échantillonnage des capteurs. Ce champ peut être renseigné manuellement ou automatiquement.
+          NEMO le calcule automatiquement (et empêche sa saisie) si la date et l'heure sont lues dans la première ligne de données.
+          L'unité de la fréquence d'échantillonnage est la seconde. Si elle n'est pas données en secondes dans les fichiers en entrée, elle doit être convertie en utilisant le champ "Formule de conversion" 
+          (exemple : si la fréquence d'échantillonnage est données en heure dans les fichiers en entrée, mettre *3600 dans la formule de conversion).
 
 == Pour les trajectoires ==========
-14 sections peuvent Ãªtre renseignÃ©es, elles ont dÃ©jÃ  Ã©tÃ© dÃ©crites pour les profils verticaux et les sÃ©ries temporelles.
-les champs obligatoires sont : NumÃ©ro de station, Type de donnÃ©es, Heure, Date, Latitude et Longitude.
+14 sections peuvent être renseignées, elles ont déjÃƒÂ  été décrites pour les profils verticaux et les séries temporelles.
+les champs obligatoires sont : Numéro de station, Type de données, Heure, Date, Latitude et Longitude.
 
-    NumÃ©ro de station : dans le format ODV, une trajectoire est considÃ©rÃ©e comme une sÃ©rie de stations ayant chacune un seul point de mesure, mais
-                        ayant toute le mÃªme LOCAL_CDI_ID.
-                        En MEDATLAS, une trajectoire est une seule station dans laquelle la latitude et la longitude sont considÃ©rÃ©es comme des paramÃ¨tres mesurÃ©s. 
-                        Le numÃ©ro de station ne peut pas Ãªtre incrÃ©mental.
+    Numéro de station : dans le format ODV, une trajectoire est considérée comme une série de stations ayant chacune un seul point de mesure, mais
+                        ayant toute le même LOCAL_CDI_ID.
+                        En MEDATLAS, une trajectoire est une seule station dans laquelle la latitude et la longitude sont considérées comme des paramètres mesurés. 
+                        Le numéro de station ne peut pas être incrémental.
 
 **********
-Pour plus de dÃ©tails, se rÃ©fÃ©rer au manuel utilisateur de NEMO.
+Pour plus de détails, se référer au manuel utilisateur de NEMO.
 
 ==DESCRIPTION DES DONNEES=============================================
 
-Cette Ã©tape permet d'indiquer Ã  NEMO oÃ¹ trouver les valeurs des paramÃ¨tres mesurÃ©s dans les fichiers en entrÃ©e.
-Cette information concerne le nom,l'unitÃ©, les valeurs par dÃ©faut en entrÃ©e et en sortie et le format de sortie des paramÃ¨tres mesurÃ©s 
+Cette étape permet d'indiquer à  NEMO où trouver les valeurs des paramètres mesurés dans les fichiers en entrée.
+Cette information concerne le nom,l'unité, les valeurs par défaut en entrée et en sortie et le format de sortie des paramètres mesurés 
 
-- Pour les profils verticaux, PRES (pour Pression de l'eau de mer, en dÃ©cibars) est un paramÃ¨tre obligatoire.
-  Il est mis par dÃ©faut dans NEMO et il ne peut pas Ãªtre effacÃ© (c'est un paramÃ¨tre obligatoire dans le format MEDATLAS).
+- Pour les profils verticaux si MEDATLAS et P091 sont choisis : PRES (pour Pression de l'eau de mer, en décibars) est un paramètre obligatoire.
+  Il est mis par défaut dans NEMO et il ne peut pas être effacé (c'est un paramètre obligatoire dans le format MEDATLAS).
 
-- Pour les sÃ©ries temporelles, la date et l'heure des mesures sont mises automatiquement dans les fichiers de sortie,
-  il ne faut pas les dÃ©crire dans la description des donnÃ©es.
+- Pour les séries temporelles, la date et l'heure des mesures sont mises automatiquement dans les fichiers de sortie,
+  il ne faut pas les décrire dans la description des données.
 
 - Pour les trajectoire la date, l'heure, la latitude, la longitude et la profondeur du fond (si elle existe) des points de mesures
-  sont mises automatiquement dans les fichiers de sortie, il ne faut pas les dÃ©crire dans la description des donnÃ©es.
+  sont mises automatiquement dans les fichiers de sortie, il ne faut pas les décrire dans la description des données.
 
-==Un click droit sur le tableau des paramÃ¨tres mesurÃ©s ouvre le Menu contenant les choix suivants :
+==Un click droit sur le tableau des paramètres mesurés ouvre le Menu contenant les choix suivants :
 ===================================================================================================
-- Injecter dÃ©but/fin:
-   Pour insÃ©rer les caractÃ¨res dÃ©but et fin du paramÃ¨tre mesurÃ© dans la ligne de donnÃ©es du fichier en entrÃ©e.
-   La valeur du paramÃ¨tre doit Ãªtre surlignÃ©e dans le fichier en entrÃ©e, avant d'utiliser ce choix du menu.
+- Injecter début/fin:
+   Pour insérer les caractères début et fin du paramètre mesuré dans la ligne de données du fichier en entrée.
+   La valeur du paramètre doit être surlignée dans le fichier en entrée, avant d'utiliser ce choix du menu.
 
 - Maj. champ test:
-   Pour afficher les valeurs lues dans les champs tests incluant :"Test" (pour les paramÃ¨tres mesurÃ©s), "Test (entrÃ©e)" 
-   pour les valeurs des flags qualitÃ©s lue dans le fichier en entrÃ©e et "Test (sortie)" Pour les valeurs des flags qualitÃ©s Ã©crites dans les fichiers en sortie.
+   Pour afficher les valeurs lues dans les champs tests incluant :"Test" (pour les paramètres mesurés), "Test (entrée)" 
+   pour les valeurs des flags qualités lue dans le fichier en entrée et "Test (sortie)" Pour les valeurs des flags qualités écrites dans les fichiers en sortie.
    
-- Liste de paramÃ¨tres:
-   Pour ajouter un paramÃ¨tre dans le tableau des paramÃ¨tres mesurÃ©s. Cette liste est la liste P091 de SeaDataNet et correspond aux codes MEDATLAS des paramÃ¨tres.
-   + Si la liste de paramÃ¨tres par dÃ©faut est P091 dans la configuration de NEMO
-         Le paramÃ¨tre sÃ©lectionnÃ© dans la liste P091 est ajoutÃ© dans la liste des paramÃ¨tres mesurÃ©s ainsi que quelques valeurs qui lui correspondent et qui sont modifiables.
-   + Si la liste de paramÃ¨tres par dÃ©faut est P011 dans la configuration de NEMO
-         Une autre fenÃªtre contenant la liste des paramÃ¨tres P011 correspondants s'ouvre
-         Les code P011 souhaitÃ© doit Ãªtre sÃ©lectionnÃ© dans cet liste et est ensuite ajoutÃ© dans la liste des paramÃ¨tres mesurÃ©s ainsi que quelques valeurs qui lui correspondent et qui sont modifiables.
-- Monter paramÃ¨tre sÃ©lectionnÃ©:
-   Pour dÃ©placer un paramÃ¨tre vers le haut, dans le tableau des paramÃ¨tres mesurÃ©s. 
-   L'ordre des paramÃ¨tres dans le tableau est l'ordre des paramÃ¨tres dans le fichier de sortie.
+- Liste de paramètres:
+   Pour ajouter un paramètre dans le tableau des paramètres mesurés : 
+      + Si la liste de paramètres par défaut est P091 dans la configuration de NEMO
+         Le paramètre sélectionné dans la liste P091 est ajouté dans la liste des paramètres mesurés ainsi que quelques valeurs qui lui correspondent et qui sont modifiables.
+      + Si la liste de paramètres par défaut est "P011 via P091" dans la configuration de NEMO
+         une première fenêtre s'ouvre avec la liste P091, l'utilisateur y sélectionne un code puis 
+         Une autre fenêtre contenant la liste des paramètres P011 correspondants s'ouvre
+         Le code P011 souhaité doit être sélectionné dans cet liste et est ensuite ajouté dans la liste des paramètres mesurés ainsi que quelques valeurs qui lui correspondent et qui sont modifiables.
+      + Si la liste de paramètres par défaut est "P011 via P021" dans la configuration de NEMO
+         une première fenêtre s'ouvre avec la liste P011, l'utilisateur y sélectionne un code puis 
+         Une autre fenêtre contenant la liste des paramètres P011 correspondants s'ouvre
+         Le code P011 souhaité doit être sélectionné dans cet liste et est ensuite ajouté dans la liste des paramètres mesurés. L'unité, le format et la valeur par défaut de sortie doivent être saisies.
 
-- Descendre paramÃ¨tre sÃ©lectionnÃ©:
-   Pour dÃ©placer un paramÃ¨tre vers le bas, dans le tableau des paramÃ¨tres mesurÃ©s. 
-   L'ordre des paramÃ¨tres dans le tableau est l'ordre des paramÃ¨tres dans le fichier de sortie.
+- Sélectionner une unité P061
+   Utiliser pour sélectionner l'unité du paramètre si la liste de paramètres par défaut est "P011 via P021" dans la configuration de NEMO.
 
-- Supprimer paramÃ¨tre sÃ©lectionnÃ©:
-   Pour supprimer un paramÃ¨tre du tableau des paramÃ¨tres mesurÃ©s.
+- Monter paramètre sélectionné:
+   Pour déplacer un paramètre vers le haut, dans le tableau des paramètres mesurés. 
+   L'ordre des paramètres dans le tableau est l'ordre des paramètres dans le fichier de sortie.
+
+- Descendre paramètre sélectionné:
+   Pour déplacer un paramètre vers le bas, dans le tableau des paramètres mesurés. 
+   L'ordre des paramètres dans le tableau est l'ordre des paramètres dans le fichier de sortie.
+
+- Supprimer paramètre sélectionné:
+   Pour supprimer un paramètre du tableau des paramètres mesurés.
 
 - Injecter flag:
-   Pour insÃ©rer les caractÃ¨res dÃ©but et fin du flag qualitÃ© du paramÃ¨tre mesurÃ© dans la ligne de donnÃ©es du fichier en entrÃ©e.
-   La valeur du flag qualitÃ© doit Ãªtre surlignÃ©e dans le fichier en entrÃ©e, avant d'utiliser ce choix du menu.
-   la conversion d'Ã©chelle de flags est celle utilisÃ©e Ã  l'Ã©tape prÃ©cÃ©dente (Description de station, section QC flags).
+   Pour insérer les caractères début et fin du flag qualité du paramètre mesuré dans la ligne de données du fichier en entrée.
+   La valeur du flag qualité doit être surlignée dans le fichier en entrée, avant d'utiliser ce choix du menu.
+   la conversion d'échelle de flags est celle utilisée à  l'étape précédente (Description de station, section QC flags).
 
 - Supprimer flag:
-   Pour effacer l'information sur le flag qualitÃ© du paramÃ¨tre sÃ©lectionnÃ©.
+   Pour effacer l'information sur le flag qualité du paramètre sélectionné.
+   
+- Supprimer tous les paramètres:
+   Pour supprimer tout le tableau de paramètre en un seul clic.
 
-==Le tableau des paramÃ¨tres mesurÃ©s contient les colonnes suivantes :
+==Le tableau des paramètres mesurés contient les colonnes suivantes :
 =====================================================================
-- Code : code MEDATLAS du paramÃ¨tre
+- Code : code MEDATLAS ou P011 du paramètre
 
-- UnitÃ© : unitÃ© MEDATLAS du paramÃ¨tre
+- Unité : unité MEDATLAS ou P061 du paramètre
 
-- Conversion : pour insÃ©rer une formule de conversion qui doit Ãªtre de la forme : x*1000+3; oÃ¹ x est la valeur lue dans le fichier en entrÃ©e.
+- Conversion : pour insérer une formule de conversion qui doit être de la forme : x*1000+3; où x est la valeur lue dans le fichier en entrée.
 
-- Test : Ce champ affiche la valeur telle qu'elle sera Ã©crite dans le fichier en sortie.
+- Test : Ce champ affiche la valeur telle qu'elle sera écrite dans le fichier en sortie.
          Pour rentrer des valeurs dans ce champ, clic droit dans le tableau et choisir "Maj. champ test" dans le menu;
-         Les champs dÃ©but et fin, format et val def entrÃ©e doivent Ãªtre renseignÃ©s avant d'actionner la mise Ã  jour du champ test.
+         Les champs début et fin, format et val def entrée doivent être renseignés avant d'actionner la mise à  jour du champ test.
 
-- DÃ©but - Fin : Ces champs indiquent les caractÃ¨res dÃ©but et fin du paramÃ¨tre sur la ligne de donnÃ©es du fichier en entrÃ©e.
-                Pour rentrer des valeurs dans ces champs, surligner la valeur du paramÃ¨tre dans le fichier en entrÃ©e, puis clic droit dans le tableau et choisir "Injecter dÃ©but/fin" dans le menu.
+- Début - Fin : Ces champs indiquent les caractères début et fin du paramètre sur la ligne de données du fichier en entrée.
+                Pour rentrer des valeurs dans ces champs, surligner la valeur du paramètre dans le fichier en entrée, puis clic droit dans le tableau et choisir "Injecter début/fin" dans le menu.
 
-- Format : Ce champ dÃ©crit le format de sortie du paramÃ¨tre mesurÃ©.
+- Format : Ce champ décrit le format de sortie du paramètre mesuré.
            Exemples de formats corrects : %3d pour 150, %+4d pour +150 ou -150, %6.3f pour 12.124, %+7.5f pour +1.12345 ou -1.12345
 
-- Val. def entrÃ©e : Ce champ dÃ©crit la valeur que l'on trouve dans les fichiers en entrÃ©e quand le paramÃ¨tre n'est pas mesurÃ©.
-                    Cette valeur par dÃ©faut est de type alphanumÃ©rique. Si la valeur est vide dans le fichier en entrÃ©e (comme dans ODV, par exemple), laisser ce champ vide Ã©galement.
+- Val. def entrée : Ce champ décrit la valeur que l'on trouve dans les fichiers en entrée quand le paramètre n'est pas mesuré.
+                    Cette valeur par défaut est de type alphanumérique. Si la valeur est vide dans le fichier en entrée (comme dans ODV, par exemple), laisser ce champ vide également.
 
-- Val. def. sortie : Ce champ dÃ©crit la valeur que l'on trouve dans les fichiers en sortie quand le paramÃ¨tre n'est pas mesurÃ©.
-                     Pour MEDATLAS, la valeur par dÃ©faut en sortie doit Ãªtre un nombre (une suite de 9) au m^me format que le paramÃ¨tre mesurÃ©, dÃ©crit dans la colonne format.
+- Val. def. sortie : Ce champ décrit la valeur que l'on trouve dans les fichiers en sortie quand le paramètre n'est pas mesuré.
+                     Pour MEDATLAS, la valeur par défaut en sortie doit être un nombre (une suite de 9) au même format que le paramètre mesuré, décrit dans la colonne format.
 
-- Test (EntrÃ©e) : Ce champ dÃ©crit la valeur du flag qualitÃ© dans le fichier en entrÃ©e.
+- Test (Entrée) : Ce champ décrit la valeur du flag qualité dans le fichier en entrée.
 
-- Test (Sortie) : Ce champ dÃ©crit la valeur de flag correspondante telle quelle sera Ã©crite dans le fichier en sortie.
+- Test (Sortie) : Ce champ décrit la valeur de flag correspondante telle quelle sera écrite dans le fichier en sortie.
 
      Pour entrer des valeurs dans ces 2 derniers champs, clic droit dans le tableau et choisir "Maj. champ test" dans le menu; 
-     les champs DÃ©but (flag) et Fin (flag) doivent avoir Ã©tÃ© renseignÃ©s au prÃ©alable.
+     les champs Début (flag) et Fin (flag) doivent avoir été renseignés au préalable.
 
-- DÃ©but (Flag) - Fin (Flag): Ces champs indiquent les caractÃ¨res dÃ©but et fin du flag qualitÃ© du paramÃ¨tre sur la ligne de donnÃ©es du fichier en entrÃ©e.
-                 Pour rentrer des valeurs dans ces champs, surligner la valeur du flag qualitÃ© dans le fichier en entrÃ©e, puis clic droit dans le tableau et choisir "Injecter flag" dans le menu.
+- Début (Flag) - Fin (Flag): Ces champs indiquent les caractères début et fin du flag qualité du paramètre sur la ligne de données du fichier en entrée.
+                 Pour rentrer des valeurs dans ces champs, surligner la valeur du flag qualité dans le fichier en entrée, puis clic droit dans le tableau et choisir "Injecter flag" dans le menu.
 
 **********
 ==CONVERSION==
 
-DerniÃ¨re Ã©tape de NEMO, une fois que la description des fichiers en entrÃ©e est complÃ¨te, il est possible de convertir les fichiers au format ODV ou au format MEDATLAS.
+Dernière étape de NEMO, une fois que la description des fichiers en entrée est complète, il est possible de convertir les fichiers au format ODV ou au format MEDATLAS.
 
-Cette Ã©tape de conversion gÃ©nÃ¨re :
-- Le ou les fichiers de sortie au format demandÃ©.
-- If "CrÃ©ation d'un rÃ©sumÃ© pour le CDI de SeaDataNet" est cochÃ© dans la configuration de NEMO, un fichier de rÃ©sumÃ© pour le CDI est crÃ©Ã©, pendant le processus de conversion.
-  C'est un fichier au format (CSV) qui doit Ãªtre converti en fichier Excel pour Ãªtre directement utilisable par le logiciel MIKADO pour gÃ©nÃ©rer les descriptions XML des
+Cette étape de conversion génère :
+- Le ou les fichiers de sortie au format demandé.
+- If "Création d'un résumé pour le CDI de SeaDataNet" est coché dans la configuration de NEMO, un fichier de résumé pour le CDI est créé, pendant le processus de conversion.
+  C'est un fichier au format (CSV) qui doit être converti en fichier Excel pour être directement utilisable par le logiciel MIKADO pour générer les descriptions XML des
   stations converties au format ODV et/ou au format MEDATLAS. 
-- If "CrÃ©ation du mapping pour le download manager de SeaDataNetâ€ est cochÃ© dans la configuration de NEMO, l'information est insÃ©rÃ©e dans la table de couplage de NEMO pour toute les stations converties au format ODV et/ou au format MEDATLAS. 
+- If "Création du mapping pour le download manager de SeaDataNet est coché dans la configuration de NEMO, l'information est insérée dans la table de couplage de NEMO pour toute les stations converties au format ODV et/ou au format MEDATLAS. 
   
-Si l'utilisateur veut convertir ses donnÃ©es aux 2 formats (MEDATLAS et ODV) il peut lancer les 2 conversions de faÃ§on consÃ©cutives sans repasser par toutes les Ã©tapes de NEMO.
-
-La conversion est divisÃ©e en 2 Ã©tapes:
-1-conversion du fichier en mÃ©moire : la conversion en mÃ©moire peut Ãªtre interrompue Ã  tout moment.
-2-Ã©criture du ou des fichier(s) converti(s) sur disque : une fois commencÃ©e, cette Ã©criture ne peut pas Ãªtre interrompue.
+La conversion est divisée en 2 étapes:
+1-conversion du fichier en mémoire : la conversion en mémoire peut être interrompue à  tout moment.
+2-écriture du ou des fichier(s) converti(s) sur disque : une fois commencée, cette écriture ne peut pas être interrompue.
 
