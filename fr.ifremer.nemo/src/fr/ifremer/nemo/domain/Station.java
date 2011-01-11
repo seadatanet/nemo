@@ -89,7 +89,24 @@ public class Station implements Comparable
         {
             _sensorDepth = ((Float) stationDomain.getModel().getProperty(Intern.S_SENSORDEPTH).applyOn(inputStationHeader)).floatValue();
             _samplingRate = ((Float) stationDomain.getModel().getProperty(Intern.S_SAMPLINGRATE).applyOn(inputStationHeader)).floatValue();
+            
+            String conversionFormula = stationDomain.getModel().getProperty(Intern.S_SAMPLINGRATE).getConversionFormula();
 
+            if (conversionFormula != null && conversionFormula != "")
+            {
+            org.nfunk.jep.JEP parser =
+                new org.nfunk.jep.JEP();
+            parser.addStandardFunctions();
+            parser.addStandardConstants();
+            parser.addVariable(Global.STR_CONVERT,
+                _samplingRate);
+            parser
+            .parseExpression(Global.STR_CONVERT
+                + conversionFormula);
+            
+            _samplingRate = (float) parser.getValue();
+            }
+            
             addMetaFlag(Intern.S_SENSORDEPTH, stationDomain.getMetaFlag(Intern.S_SENSORDEPTH, inputStationHeader));
             addMetaFlag(Intern.ENDDATETIME, stationDomain.getMetaFlag(Intern.ENDDATETIME, inputStationHeader));
             addMetaFlag(Intern.S_ELAT, stationDomain.getMetaFlag(Intern.S_ELAT, inputStationHeader));
@@ -438,7 +455,7 @@ public class Station implements Comparable
     public float getSamplingRate(){
         return _samplingRate;
     }
-
+    
     /**
      * Setter pour _samplingRate
      * 
