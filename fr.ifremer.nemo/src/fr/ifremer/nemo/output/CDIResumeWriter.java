@@ -29,6 +29,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Global.E_InputType;
+import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 
 public class CDIResumeWriter
@@ -145,7 +146,9 @@ public class CDIResumeWriter
                         // Dataset ID
                         if (cDomain.getModel().getReference().isEmpty())
                         {
-                            if (Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollectionDir())
+                            
+                            // FAE 4525 (retour 03/01/2011)
+                            if (iDomain.getMedia().getModel().getProcessType().equals(E_ProcessType.COLLECTION_DIR))
                             {
                                 writer
                                     .write(sep + cDomain.getModel().getName());

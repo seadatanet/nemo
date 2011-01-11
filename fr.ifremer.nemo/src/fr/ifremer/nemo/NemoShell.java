@@ -12,10 +12,17 @@ package fr.ifremer.nemo;
 import java.io.File;
 import java.io.FileReader;
 import java.io.RandomAccessFile;
+import java.text.ParseException;
+import java.util.Date;
 
 import org.apache.log4j.Logger;
 
+import fr.ifremer.nemo.domain.CruiseDomain;
+import fr.ifremer.nemo.domain.InputDomain;
+import fr.ifremer.nemo.domain.Station;
+import fr.ifremer.nemo.domain.StationDomain;
 import fr.ifremer.nemo.input.PropertyModel;
+import fr.ifremer.nemo.mapping.Mapping;
 import fr.ifremer.nemo.mapping.MappingTable;
 import fr.ifremer.nemo.output.CDIResumeWriter;
 import fr.ifremer.nemo.output.NemoWriter;
@@ -24,6 +31,7 @@ import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Preformat;
+import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 
 /**
@@ -39,7 +47,9 @@ public class NemoShell
      */
     public static boolean main(String inputFile, String outputFile,
             String modelFile, Conversion conv, boolean sortDatas,
-            E_TypeConversion odvConv, String datasetRef, String cdiSummaryFile, String couplingTableFile, Logger logger)
+            E_TypeConversion odvConv, String datasetRef, String cdiSummaryFile,
+            boolean couplingTableUpdate, String couplingTablePrefix,
+            Logger logger)
     {
 
         try
@@ -133,8 +143,14 @@ public class NemoShell
                 CDIResumeWriter.getInstance().writeResume(conv);
             }
            
-            // export coupling table (FAE 4525)
-            new MappingTable().exporter(couplingTableFile);
+            if (couplingTableUpdate){
+            // update coupling table (FAE 4525)
+            logger.info("BGT avant mappingTable update");
+            MappingTable mappingTable = new MappingTable();
+            mapping(conv, mappingTable, couplingTablePrefix);
+         //   mappingTable.exporter(couplingTableFile, logger);
+            logger.info("BGT apres mappingTable updated successfully");
+            }
             
             return true;
         }
@@ -144,6 +160,65 @@ public class NemoShell
             return false;
         }
 
+    }
+    private static void mapping(Conversion conv, MappingTable mappingTable, String couplingTablePrefix)
+    {
+        Mapping mapping;
+
+
+        InputDomain iDomain = Nemo.getInstance().getDomain();
+        CruiseDomain cDomain = iDomain.getCruise();
+        StationDomain sDomain = cDomain.getStation();
+        try
+        {
+            for (String outputPath : iDomain.getMedia().getOutputFiles().keySet()){
+                File outputFile = new File(outputPath);
+                for (String stRef : iDomain.getMedia().getOutputFiles().get(outputPath)){
+                    Station st = sDomain.getStationByRef(stRef);
+                    String localCdiId;
+
+                    localCdiId = sDomain.getLocalCdiId(cDomain, conv, st.getReference());
+
+                    mapping = new Mapping(localCdiId, conv.toString());
+
+                    String modus = Mapping.MODUS_MULTISTATIONS;
+
+                    StringBuffer filename = new StringBuffer();
+                    Nemo.getInstance().getDomain().getConversion().setNomMappingHorsPrefix(couplingTablePrefix);
+                    filename.append(iDomain.getConversion().getNomMappingHorsPrefix());
+
+                    if (iDomain.getMedia().getModel().getProcessType() == E_ProcessType.CRUISE_DIR){
+                        if (!filename.equals(Global.EMPTY_STRING))
+                            filename.append(File.separator);
+                        if (iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION){
+                            filename.append(outputFile.getParentFile().getName());
+                            filename.append(File.separator);
+                            modus = Mapping.MODUS_MONOSTATION;
+                        }
+                        filename.append(outputFile.getName());
+                    }
+                    else{
+                        if (iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION){
+                            if (!filename.equals(Global.EMPTY_STRING))
+                                filename.append(File.separator);
+                            filename.append(outputFile.getName());
+                            modus = Mapping.MODUS_MONOSTATION;
+                        }
+                    }
+
+                    mapping.setFilename(filename.toString());
+                    mapping.setDate(new Date());
+                    mapping.setModus(modus);
+
+                    mappingTable.persist(mapping);
+                }
+            }
+        }
+        catch (ParseException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
 }
