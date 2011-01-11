@@ -211,12 +211,12 @@ public class CDIResumeWriter
                         // station latitude
                         writer.write(sep
                                 + Formatter.getSingleton().formatLatitude(
-                                    "+DD.ddd ", st.getLatitude()));
+                                    "+DD.dddddd ", st.getLatitude()));
 
                         // station longitude
                         writer.write(sep
                                 + Formatter.getSingleton().formatLongitude(
-                                    "+DDD.ddd", st.getLongitude()));
+                                    "+DDD.dddddd", st.getLongitude()));
 
                         // station date
                         Formatter format = new Formatter();
