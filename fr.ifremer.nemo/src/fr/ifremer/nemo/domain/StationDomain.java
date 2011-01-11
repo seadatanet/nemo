@@ -752,7 +752,7 @@ public class StationDomain
         {
             if (_model.getProperty(Intern.S_ELON).isUserProvided() && _model.getProperty(Intern.S_ELON).getUserValue().equals(Global.EMPTY_STRING))
             {
-                endlat = (Double)_model.getProperty(Intern.S_LON).applyOn(inputFile);
+                endlon = (Double)_model.getProperty(Intern.S_LON).applyOn(inputFile);
             }
             else
             {
