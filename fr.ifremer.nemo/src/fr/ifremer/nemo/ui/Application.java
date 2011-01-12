@@ -53,7 +53,8 @@ public class Application implements IPlatformRunnable
     private static final String optDatasetRef = "datasetRef"; 
     
     private static final String  optCdiSummary = "cdiSummary"; 
-    private static final String  optCouplingTable = "couplingTable"; 
+    private static final String  optCouplingTableUpdate = "couplingTableUpdate"; 
+    private static final String  optCouplingTablePrefix = "couplingTablePrefix"; 
     /*
      * (non-Javadoc)
      * 
@@ -85,14 +86,17 @@ public class Application implements IPlatformRunnable
                 String datasetReference = "";
                 boolean sortDatas = false;
                 String cdiSummaryFile=Global.EMPTY_STRING;
-                String couplingTableFile=Global.EMPTY_STRING;
+                boolean couplingTableUpdate=false;
+                String couplingTablePrefix=Global.EMPTY_STRING;
                 
                 // LOGGER
                 DOMConfigurator.configure("resources/log4jBatch.xml"); //$NON-NLS-1$
                 batchLogger = Logger.getLogger("nemoBatch");//$NON-NLS-1$
                 batchLogger.setLevel(Level.DEBUG);
 
-
+                // TODO 4525: creer un mode batch uniquement pour exoprter la coupling table (1 seul argument: le nom du fichier) 
+                //+ mettre à jour la doc
+                
                 if ( checkBatchOptionsOk(cl))
                 {
                     inputFile = cl.getOptionValue(optInputFile);
@@ -129,9 +133,10 @@ public class Application implements IPlatformRunnable
                         cdiSummaryFile = cl.getOptionValue(optCdiSummary);
                     }
                     // COUPLING TABLE
-                    if (cl.hasOption(optCouplingTable))
+                    if (cl.hasOption(optCouplingTableUpdate))
                     {
-                        couplingTableFile = cl.getOptionValue(optCouplingTable);
+                        couplingTableUpdate = true;
+                        couplingTablePrefix =  cl.getOptionValue(optCouplingTablePrefix);
                     }
                     
                     // print arguments in the log file
@@ -143,7 +148,7 @@ public class Application implements IPlatformRunnable
 
                     boolean success =
                         NemoShell.main(inputFile, outputFile, modelFile, convType,
-                            sortDatas, convOdv, datasetReference, cdiSummaryFile, couplingTableFile, batchLogger);
+                            sortDatas, convOdv, datasetReference, cdiSummaryFile, couplingTableUpdate, couplingTablePrefix,batchLogger);
 
                     if (success)
                     {
@@ -243,7 +248,8 @@ public class Application implements IPlatformRunnable
         "Optional dataset reference, default value is the cruise reference or the cruise name");
         
         opt.addOption(optCdiSummary, true, "CDI Summary file path (mandatory)");
-        opt.addOption(optCouplingTable, true, "Coupling table file path (mandatory)");
+        opt.addOption(optCouplingTableUpdate, true, "update the coupling table database (optional)");
+        opt.addOption(optCouplingTablePrefix, false, "update the coupling table database ");
     }
 
 
@@ -271,16 +277,23 @@ public class Application implements IPlatformRunnable
         }else
         {
             // check conversion value
-           if ( !(
-                   cl.getOptionValue(optConv).toUpperCase().equals(Conversion.MEDATLAS.name())
-                   ||
-                   cl.getOptionValue(optConv).toUpperCase().equals(Conversion.ODV.name())
-                   ))
-                   {
-               checkOptionsOk=false;
-                   }
+            if ( !(
+                    cl.getOptionValue(optConv).toUpperCase().equals(Conversion.MEDATLAS.name())
+                    ||
+                    cl.getOptionValue(optConv).toUpperCase().equals(Conversion.ODV.name())
+            ))
+            {
+                checkOptionsOk=false;
+            }
         }
-
+        // if update coupling table is used, we must know the prefix to use
+        if ( cl.hasOption(optCouplingTableUpdate))
+        {
+            if (!cl.hasOption(optCouplingTablePrefix))
+            {
+                checkOptionsOk=false;
+            }
+        }
 
         return checkOptionsOk;
     }
