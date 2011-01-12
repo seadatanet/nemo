@@ -44,7 +44,7 @@ public class InputFileCheckMultistationsListener  implements SelectionListener
         }else{
             myEditFileForm.getSectionFileHeader().setEnabled(false);
         }
-      
+        myEditFileForm.getSectionFileHeader().getSection().layout();
     }
     
 }
