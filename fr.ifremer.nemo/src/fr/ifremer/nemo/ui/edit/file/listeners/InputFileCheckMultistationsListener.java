@@ -44,6 +44,7 @@ public class InputFileCheckMultistationsListener  implements SelectionListener
         }else{
             myEditFileForm.getSectionFileHeader().setEnabled(false);
         }
+        //FAE 4181 (sinon la fleche ne se dégrise pas...)
         myEditFileForm.getSectionFileHeader().getSection().layout();
     }
     
