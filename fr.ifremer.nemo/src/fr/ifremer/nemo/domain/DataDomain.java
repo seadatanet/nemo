@@ -498,6 +498,7 @@ public class DataDomain
 
                 
                 // si bottomDepth est en manuel
+                // info: Nemo.getInstance().getDomain().getCruise().getStation().getModel().getProperty(Intern.S_DEPTH).isInData()=true <=> automatique
                 if (Nemo.getInstance().getDomain().getCruise().getStation()
                     .getModel().getProperty(Intern.S_DEPTH).isInData())
                 {
@@ -615,15 +616,21 @@ public class DataDomain
     private static StringBuffer parameterMap(String start, Parameter param,
             Conversion c)
     {
-//        String code = param.getCode();
+        String code = param.getCode();
         StringBuffer sdnMapping = new StringBuffer();
         sdnMapping.append(start);
-//        try
-//        {
-//            sdnMapping.append(Intern.getString(code));
-//        }
-//        catch (MissingResourceException e)
-//        {
+        
+        /** BGT 6838: bug introduit parce que j'avais enlevé le try/catch ci dessous
+         * en fait, on essaie de trouver le code dans la liste Intern
+         * si c'est un addedParameter, on va le trouver, et on ajoute la valeur de la variable Inter.code (qui contient TOUTE la ligne à ajouter)
+         * sinon, on fabrique la ligne
+         */
+        try
+        {
+            sdnMapping.append(Intern.getString(code));
+        }
+        catch (MissingResourceException e)
+        {
             /**
              * -----------------------------------------------------
              * subject
@@ -700,7 +707,7 @@ public class DataDomain
                     null, 
                     Intern.mapping_unit));
             }
-//        }
+        }
         sdnMapping.append(Global.RN);
         return sdnMapping;
     }
