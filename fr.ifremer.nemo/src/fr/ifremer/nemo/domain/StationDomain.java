@@ -581,8 +581,9 @@ public class StationDomain
 
         // *DC HISTORY=
         medStationHeader.append(start);
-        medStationHeader.append(Elts.getElt(Elts.station_dcHistory, _model
-            .getProperty(Intern.S_DCHIST + "1").applyOn(inputFile)));
+        //Ajout du trim FAE 5803
+        medStationHeader.append(Elts.getElt(Elts.station_dcHistory, ((String)_model
+            .getProperty(Intern.S_DCHIST + "1").applyOn(inputFile)).trim()));
         medStationHeader.append(Global.RN);
 
         medStationHeader.append(start);
