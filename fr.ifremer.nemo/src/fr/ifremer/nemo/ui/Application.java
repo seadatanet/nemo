@@ -103,6 +103,7 @@ public class Application implements IPlatformRunnable
                     outputFile = cl.getOptionValue(optOutputFile);
                     modelFile = cl.getOptionValue(optModelFile);
                     convType = Conversion.valueOf(cl.getOptionValue(optConv).toUpperCase());
+                    
                     // CONVERSION TYPE
                     switch (convType)
                     {
@@ -121,6 +122,7 @@ public class Application implements IPlatformRunnable
                     {
                         datasetReference = cl.getOptionValue(optDatasetRef);
                     }
+                    
                     // SORT DATA
                     if (cl.hasOption(optSortDatas))
                     {
@@ -132,6 +134,7 @@ public class Application implements IPlatformRunnable
                     {
                         cdiSummaryFile = cl.getOptionValue(optCdiSummary);
                     }
+                    
                     // COUPLING TABLE
                     if (cl.hasOption(optCouplingTableUpdate))
                     {
@@ -248,8 +251,8 @@ public class Application implements IPlatformRunnable
         "Optional dataset reference, default value is the cruise reference or the cruise name");
         
         opt.addOption(optCdiSummary, true, "CDI Summary file path (mandatory)");
-        opt.addOption(optCouplingTableUpdate, true, "update the coupling table database (optional)");
-        opt.addOption(optCouplingTablePrefix, false, "update the coupling table database ");
+        opt.addOption(optCouplingTableUpdate, false, "update the coupling table database (optional)");
+        opt.addOption(optCouplingTablePrefix, true, "update the coupling table database ");
     }
 
 
@@ -289,7 +292,7 @@ public class Application implements IPlatformRunnable
         // if update coupling table is used, we must know the prefix to use
         if ( cl.hasOption(optCouplingTableUpdate))
         {
-            if (!cl.hasOption(optCouplingTablePrefix))
+          if (!cl.hasOption(optCouplingTablePrefix))
             {
                 checkOptionsOk=false;
             }
