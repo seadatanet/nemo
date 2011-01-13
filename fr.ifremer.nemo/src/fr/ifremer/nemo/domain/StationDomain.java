@@ -306,16 +306,12 @@ public class StationDomain
         E_ProcessType processType =
             Nemo.getInstance().getDomain().getMedia().getModel()
                 .getProcessType();
-        if (processType == E_ProcessType.COLLECTION_DIR)
-        {
-            cruiseName =
-                Nemo.getInstance().getDomain().getCruise().getDataSetRef();
-        }
-        else
-        {
-            cruiseName =
-                Nemo.getInstance().getDomain().getCruise().getModel().getName();
-        }
+        
+
+        //6399
+        // en ODV plus d'onglet cruise donc .getCruise().getModel().getName() == "" on met la référence
+        cruiseName = Nemo.getInstance().getDomain().getCruise().getDataSetRef();
+      
         odvStationHeader.append(form.limitString(cruiseName, 20));
         odvStationHeader.append(Global.TAB);
 
