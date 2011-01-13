@@ -1340,17 +1340,19 @@ public class Etape
             {
 
                 TypeData typeCourant = editDataForm.getMyTableData().getTypes().get(i);
-                // FAE 6538
-                if (typeCourant.getUnite().equals(Global.EMPTY_STRING)){
-                    ok = false;
-                    Utils.messageErreurAppend(Messages.Etape_118);
-                    break;
-                }
+
                 debuts[i] = typeCourant.getDebut();
                 fins[i] = typeCourant.getFin();
                 debutsFlag[i] = typeCourant.getDebutFlag();
                 finsFlag[i] = typeCourant.getFinFlag();
 
+                // FAE 6538
+                if (typeCourant.getUnite().equals(Global.EMPTY_STRING)){
+                    ok = false;
+                    Utils.messageErreurAppend(Messages.Etape_118);
+                    continue;
+                }
+                
                 // test direct sur valeur entree
                 ok = ok && true;
 
