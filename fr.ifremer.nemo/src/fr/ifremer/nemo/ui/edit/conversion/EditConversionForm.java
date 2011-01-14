@@ -281,7 +281,7 @@ public class EditConversionForm extends EditForm
     @Override
     public void initFromNewModel()
     {
-        System.out.println("ici");
+//        System.out.println("ici");
     }
     /*
      * Méthodes de traitement du lancement de la conversion
