@@ -10,8 +10,6 @@
 package fr.ifremer.nemo;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.RandomAccessFile;
 import java.text.ParseException;
 import java.util.Date;
 
@@ -27,7 +25,6 @@ import fr.ifremer.nemo.mapping.MappingTable;
 import fr.ifremer.nemo.output.CDIResumeWriter;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.output.NemoWriterFactory;
-import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Preformat;
@@ -77,7 +74,57 @@ public class NemoShell
                     Preformat.runBatch(new File(inputFile)).getAbsolutePath();
 
             nemo.getDomain().getMedia().getModel().setSourcePath(inputFile);
+ 
+            
+            
+            E_TypeConversion convertModel = nemo.getDomain().getConversion().getModel().getOutputFormat();
+            E_TypeConversion convertArgument = odvConv;
+            
 
+            // les deux sont égaux et différents de UNKNOWN
+            if (convertModel == convertArgument)
+            {
+                if (convertModel != E_TypeConversion.UNKNOWN)
+                {
+                    nemo.getDomain().getConversion().setCurrentConversion(convertArgument);
+                }
+                else
+                {
+                    //ERREUR les deux sont UNKNOWN
+                    logger.error("Error, Conversion format must be set");
+                    return false;
+                }
+            }
+            // Argument UNKNOWN Modele NON UNKNOWN
+            else if (convertArgument == E_TypeConversion.UNKNOWN)
+            {
+                switch (convertModel)
+                {
+                    case ODV_MONOSTATION :
+                    case ODV_MULTISTATIONS :
+                        conv = Conversion.ODV;
+                        break;
+                    case MEDATLAS :
+                        conv = Conversion.MEDATLAS;
+                        break;                               
+                    default :
+                        return false;                                
+                }
+                
+                nemo.getDomain().getConversion().setCurrentConversion(convertModel);                    
+            }
+            // Modele UNKNOWN Argument NON UNKNOWN
+            else if (convertModel == E_TypeConversion.UNKNOWN)
+            {
+                nemo.getDomain().getConversion().setCurrentConversion(convertArgument);                        
+            }
+            else
+            {
+                //ERREUR argument et modele sont différents !!
+                logger.error("Error, Conversion format incompatible with the model");
+                return false;                
+            } 
+            
             nemo.getDomain().getConversion().setCurrentConversion(odvConv);
 
             nemo.getDomain().getMedia().buildInputFilesNames();
@@ -129,7 +176,7 @@ public class NemoShell
             
             if (!(repertory == null) && !repertory.exists())
                 repertory.mkdirs();
-            
+    
             NemoWriter writer = NemoWriterFactory.createWriter(conv);
 
             writer.write(null);
@@ -145,11 +192,9 @@ public class NemoShell
            
             if (couplingTableUpdate){
             // update coupling table (FAE 4525)
-            logger.info("BGT avant mappingTable update");
             MappingTable mappingTable = new MappingTable();
             mapping(conv, mappingTable, couplingTablePrefix);
          //   mappingTable.exporter(couplingTableFile, logger);
-            logger.info("BGT apres mappingTable updated successfully");
             }
             
             return true;
@@ -161,6 +206,11 @@ public class NemoShell
         }
 
     }
+    
+    
+    
+    
+    
     private static void mapping(Conversion conv, MappingTable mappingTable, String couplingTablePrefix)
     {
         Mapping mapping;

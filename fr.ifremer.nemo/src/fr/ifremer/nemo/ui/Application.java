@@ -81,7 +81,7 @@ public class Application implements IPlatformRunnable
                 String inputFile;
                 String outputFile;
                 String modelFile;
-                Conversion convType;
+                Conversion convType = null;
                 E_TypeConversion convOdv = null;
                 String datasetReference = "";
                 boolean sortDatas = false;
@@ -102,19 +102,28 @@ public class Application implements IPlatformRunnable
                     inputFile = cl.getOptionValue(optInputFile);
                     outputFile = cl.getOptionValue(optOutputFile);
                     modelFile = cl.getOptionValue(optModelFile);
-                    convType = Conversion.valueOf(cl.getOptionValue(optConv).toUpperCase());
                     
-                    // CONVERSION TYPE
-                    switch (convType)
+                    if (cl.getOptionValue(optConv)!=null)
                     {
-                        case MEDATLAS:
-                            convOdv = E_TypeConversion.MEDATLAS;
-                            break;
-                        case ODV:
-                            convOdv = E_TypeConversion.ODV_MONOSTATION;
-                            if (cl.hasOption(optOdvMulti))
-                                convOdv = E_TypeConversion.ODV_MULTISTATIONS;
-                            break;
+                        convType = Conversion.valueOf(cl.getOptionValue(optConv).toUpperCase());
+
+                        // CONVERSION TYPE
+                        switch (convType)
+                        {
+                            case MEDATLAS:
+                                convOdv = E_TypeConversion.MEDATLAS;
+                                break;
+                            case ODV:
+                                convOdv = E_TypeConversion.ODV_MONOSTATION;
+                                if (cl.hasOption(optOdvMulti))
+                                    convOdv = E_TypeConversion.ODV_MULTISTATIONS;
+                                break;
+                        }
+                    
+                    }
+                    else
+                    {
+                        convOdv = E_TypeConversion.UNKNOWN;
                     }
                     
                     // DATASET REFERENCE
@@ -148,7 +157,7 @@ public class Application implements IPlatformRunnable
                     for (String s : strArgs)
                         sb.append(s + " ");
                     batchLogger.info(sb.toString());
-
+                    
                     boolean success =
                         NemoShell.main(inputFile, outputFile, modelFile, convType,
                             sortDatas, convOdv, datasetReference, cdiSummaryFile, couplingTableUpdate, couplingTablePrefix,batchLogger);
@@ -265,30 +274,30 @@ public class Application implements IPlatformRunnable
     {
         boolean checkOptionsOk=true;
 
-        // check obligatory options
-        if ( 
-                cl.getOptionValue(optInputFile) == null 
+        // check mandatory options
+        if (    cl.getOptionValue(optInputFile) == null 
                 ||
                 cl.getOptionValue(optOutputFile) == null
                 ||
                 cl.getOptionValue(optModelFile) == null
-                ||
-                cl.getOptionValue(optConv) == null
         )
         {
+            batchLogger.info("Error, input output and model file are mandatory options");
             checkOptionsOk=false;
-        }else
+        }        
+        
+        if ( cl.getOptionValue(optConv) != null)
         {
             // check conversion value
-            if ( !(
-                    cl.getOptionValue(optConv).toUpperCase().equals(Conversion.MEDATLAS.name())
+            if ( !(cl.getOptionValue(optConv).toUpperCase().equals(Conversion.MEDATLAS.name())
                     ||
-                    cl.getOptionValue(optConv).toUpperCase().equals(Conversion.ODV.name())
-            ))
+                    cl.getOptionValue(optConv).toUpperCase().equals(Conversion.ODV.name())))
             {
+                batchLogger.info("Error, Conversion type must be \"medatlas\" or \"odv\"");
                 checkOptionsOk=false;
             }
         }
+        
         // if update coupling table is used, we must know the prefix to use
         if ( cl.hasOption(optCouplingTableUpdate))
         {
@@ -297,7 +306,8 @@ public class Application implements IPlatformRunnable
                 checkOptionsOk=false;
             }
         }
-
+        
+        
         return checkOptionsOk;
     }
 }
