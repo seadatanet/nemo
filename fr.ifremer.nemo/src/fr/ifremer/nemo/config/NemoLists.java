@@ -777,7 +777,7 @@ public class NemoLists implements Cloneable {
      * 
      * @param list1 nom de la liste de parametres de depart
      * @param list2 nom de la liste des parametres d'arrivée
-     * @param value
+     * @param value valeur du entryTermAbbr
      * @return liste des paramètres d'arrivée qui correspondent à la valeur value dans le liste de départ
      * 
      * ex: list1=P091 list2=P021, value=BATH renvoie les parametres P021 correspondant au parametre BATH en P091
