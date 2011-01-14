@@ -14,6 +14,7 @@ import java.util.Locale;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.input.DataModel;
 import fr.ifremer.nemo.input.Parameter;
 import fr.ifremer.nemo.input.ParameterModel;
 import fr.ifremer.nemo.input.PropertyModel;
@@ -59,7 +60,7 @@ public class AddedParameter extends Parameter
                 case DEPH : 
                     InputDomain iDomain = Nemo.getInstance().getDomain();
                     if (iDomain.getMedia().getModel().getInputType() == E_InputType.PROFILE){
-                        ParameterModel pModelPRES = iDomain.getCruise().getStation().getData().getModel().getParameterModel(Intern.paramPRES);
+                        ParameterModel pModelPRES = iDomain.getData().getModel().getParameterModel(Intern.paramPRES);
                         return pModelPRES.getParameter().getFormat();
                     }                    
                     for (int i = 0; i < NemoLists.getParameters().length; i++) {
@@ -131,12 +132,11 @@ public class AddedParameter extends Parameter
                               String inputLine){
 
             InputDomain iDomain = Nemo.getInstance().getDomain();
-            StationDomain sDomain = iDomain.getCruise().getStation();
             
             switch (this){
                 case DEPH:
                     if (iDomain.getMedia().getModel().getInputType() == E_InputType.PROFILE){
-                        return sDomain.getData().getModel().getParameterModel(Intern.paramPRES).retreiveParameterFlag(inputLine);
+                        return iDomain.getData().getModel().getParameterModel(Intern.paramPRES).retreiveParameterFlag(inputLine);
                     }
                     return currentStation.getMetaFlags().get(Intern.S_SENSORDEPTH);
                 case LATX :
@@ -164,7 +164,7 @@ public class AddedParameter extends Parameter
                                String inputLine,
                                long currentDate) throws ParseException{
             InputDomain iDomain = Nemo.getInstance().getDomain();
-            StationDomain sDomain = iDomain.getCruise().getStation();
+            StationDomain sDomain = iDomain.getStation();
             
             String formatString = this.getFormat();
             DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
@@ -175,7 +175,7 @@ public class AddedParameter extends Parameter
                     if (iDomain.getMedia().getModel().getInputType() == E_InputType.PROFILE){
                         
                         // récupération de la valeur de la pression
-                        ParameterModel pModelPRES = sDomain.getData().getModel().getParameterModel(Intern.paramPRES);
+                        ParameterModel pModelPRES = iDomain.getData().getModel().getParameterModel(Intern.paramPRES);
                         pModelPRES.computeParameterValue(inputLine);
                         ParameterValue valuePRES = pModelPRES.getLineValue();                   
                         
@@ -248,18 +248,19 @@ public class AddedParameter extends Parameter
                     }
                     break;
                 case PRES :
+                    DataModel dataModel = iDomain.getData().getModel();
                     // récupération de la valeur de la profondeur
-                    ParameterModel pModelDEPTH = sDomain.getData().getModel().getParameterModel(Intern.paramDEPH);
+                    ParameterModel pModelDEPTH = dataModel.getParameterModel(Intern.paramDEPH);
                     pModelDEPTH.computeParameterValue(inputLine);
                     ParameterValue valueDEPTH = pModelDEPTH.getLineValue();  
                     
                     // récupération de la valeur de la salinite
-                    ParameterModel pModelPSAL = sDomain.getData().getModel().getParameterModel(Intern.paramPSAL);
+                    ParameterModel pModelPSAL = dataModel.getParameterModel(Intern.paramPSAL);
                     pModelPSAL.computeParameterValue(inputLine);
                     ParameterValue valuePSAL = pModelPSAL.getLineValue();  
                     
                     // récupération de la valeur de la temperature
-                    ParameterModel pModelTEMP = sDomain.getData().getModel().getParameterModel(Intern.paramTEMP);
+                    ParameterModel pModelTEMP = dataModel.getParameterModel(Intern.paramTEMP);
                     pModelTEMP.computeParameterValue(inputLine);
                     ParameterValue valueTEMP = pModelTEMP.getLineValue();  
                     

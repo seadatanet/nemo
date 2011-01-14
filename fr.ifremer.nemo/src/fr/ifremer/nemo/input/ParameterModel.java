@@ -262,7 +262,7 @@ public class ParameterModel extends AbstractModel
             if (_flag != null) {
                 // le flag est a récupérer dans fichier
                 // table de correspondance SDN
-                FlagTable flagTable = Nemo.getInstance().getDomain().getCruise().getStation().getModel().getFlagTable();
+                FlagTable flagTable = Nemo.getInstance().getDomain().getStation().getModel().getFlagTable();
                 flagQc = flagTable.getFlagSDN(_flag.retreive(inputLine));
             }
                 

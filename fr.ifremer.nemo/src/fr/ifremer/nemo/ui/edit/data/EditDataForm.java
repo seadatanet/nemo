@@ -130,7 +130,7 @@ public class EditDataForm extends EditForm
        
         myTableData.reinitTypes();
         ParameterModel[] parameterModels =
-            Nemo.getInstance().getDomain().getCruise().getStation().getData().getModel().getParameterModels();
+            Nemo.getInstance().getDomain().getData().getModel().getParameterModels();
 
         // remplissage des parametres mesures
         for (ParameterModel paraCourant : parameterModels)
@@ -200,7 +200,7 @@ public class EditDataForm extends EditForm
         //int nbreParam = TableData.types.size();
 
         // reset systematique des parametres stockes dans le dataModel
-        Nemo.getInstance().getDomain().getCruise().getStation().getData().getModel().releaseParameterModels();
+        Nemo.getInstance().getDomain().getData().getModel().releaseParameterModels();
 
         for (TypeData typeCourant : myTableData.getTypes())
         {
@@ -265,7 +265,7 @@ public class EditDataForm extends EditForm
         }
         // enregistrement de l'indexPRES
         //dModel.setPresIndex(indexPRES);
-        Nemo.getInstance().getDomain().getCruise().getStation().getData().updateData(dataModel);
+        Nemo.getInstance().getDomain().getData().updateData(dataModel);
         
 
         Nemo.getInstance().getViewMain().getEditDataForm().setValidated(true);

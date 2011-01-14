@@ -121,8 +121,8 @@ public class Nemo
     public void saveModel(OutputStream a_Stream){
         InputModel inputModel = new InputModel(domain.getMedia().getModel(),
                                                domain.getCruise().getModel(),
-                                               domain.getCruise().getStation().getModel(),
-                                               domain.getCruise().getStation().getData().getModel(),
+                                               domain.getStation().getModel(),
+                                               domain.getData().getModel(),
                                                domain.getConversion().getModel());
         inputModel.writeXMLOn(a_Stream);
     }

@@ -433,6 +433,7 @@ public class DataDomain
         boolean existPRES = false;
         boolean existTEMP = false;
         boolean existPSAL = false;
+        // TODO BGT ko en P021 ne trouve pas PRES
         for (ParameterModel param : _model.getParameterModels())
         {
             if (param.getParameter().getCode().equals(
@@ -499,12 +500,12 @@ public class DataDomain
                 
                 // si bottomDepth est en manuel
                 // info: Nemo.getInstance().getDomain().getCruise().getStation().getModel().getProperty(Intern.S_DEPTH).isInData()=true <=> automatique
-                if (Nemo.getInstance().getDomain().getCruise().getStation()
+                if (Nemo.getInstance().getDomain().getStation()
                     .getModel().getProperty(Intern.S_DEPTH).isInData())
                 {
                     // FAE 4471 on regarde si le parametre BATH est dans les parametres de l'onlget données
                     boolean isBathPresentInDataTab=false;
-                    for (ParameterModel param : Nemo.getInstance().getDomain().getCruise().getStation().getData().getModel().getParameterModels())
+                    for (ParameterModel param : getModel().getParameterModels())
                     {
                         if(param.getParameter().getCode().equals(IdParameter.BATH.name()))
                         {
@@ -529,6 +530,8 @@ public class DataDomain
 
     private void addFixedParameterModel(IdParameter code)
     {
+        
+        System.out.println("ajout du parametre: "+ code.toString());
         AddedParameter para = new AddedParameter(code);
 
         // FAE 4045
@@ -542,8 +545,7 @@ public class DataDomain
         parameterModel.setParameter(para);
 
         PropertyModel propertyModel =
-            para.getPropertyModel(Nemo.getInstance().getDomain().getCruise()
-                .getStation().getModel());
+            para.getPropertyModel(Nemo.getInstance().getDomain().getStation().getModel());
         if (propertyModel != null)
         {
             // fragment du parametre

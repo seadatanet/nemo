@@ -50,21 +50,21 @@ public class MedatlasWriter extends NemoWriter{
 	        String outputFileName = iDomain.getMedia().getOutputFileName();
 	        outputFileWriter = new PrintWriter(new BufferedWriter(new FileWriter(outputFileName)));
 
-	        CruiseDomain cruise = iDomain.getCruise();
-	        StationDomain station = cruise.getStation();
-	        DataDomain data = station.getData();
+	        CruiseDomain cruiseDomain = iDomain.getCruise();
+	        StationDomain stationDomain = iDomain.getStation();
+	        DataDomain dataDomain = iDomain.getData();
 
 
 	        // écriture de l'entête campagne
-	        StringBuffer cruiseHeader = cruise.getHeader(c);
+	        StringBuffer cruiseHeader = cruiseDomain.getHeader(c);
 	        outputFileWriter.println(cruiseHeader);
 
-	        station.updateRef();
+	        stationDomain.updateRef();
 
 
-	        for (Station currentStation : station.getStations(inputFilePath)){
+	        for (Station currentStation : stationDomain.getStations(inputFilePath)){
 //            FAE 6143 check doublons
-                station.getAndCheckLocalCDI(cruise, Conversion.ODV, currentStation.getReference());
+                stationDomain.getAndCheckLocalCDI(cruiseDomain, Conversion.ODV, currentStation.getReference());
 	            
                 CalcPres.init();     
 
@@ -85,25 +85,25 @@ public class MedatlasWriter extends NemoWriter{
 
 	                if (isEndData() && stationWrited){
 	                    // écriture de la dernière ligne de données
-	                    writeLastDataLine(data, currentStation, outputFileName);
+	                    writeLastDataLine(dataDomain, currentStation, outputFileName);
 	                }
 
 	                if (isStartStationHeader()){
 	                    // écriture de l'entête station
 	                    String[] inputStationHeader = consumeStationHeader();
 	                    if (inputStationHeader != null &&
-	                            currentStation.getReference().equals(station.getReference(currentStation.getFileName(), inputStationHeader))){
-	                        outputFileWriter.println(station.getHeader(c, currentStation, inputStationHeader));
+	                            currentStation.getReference().equals(stationDomain.getReference(currentStation.getFileName(), inputStationHeader))){
+	                        outputFileWriter.println(stationDomain.getHeader(c, currentStation, inputStationHeader));
 
 	                        // écriture de l'entête des données (titres des colonnes)
-	                        outputFileWriter.println(data.getDataHeader(c));
+	                        outputFileWriter.println(dataDomain.getDataHeader(c));
 
-	                        if (station.isSomeInData()){
+	                        if (stationDomain.isSomeInData()){
 	                            // la première ligne des données est déjà "consommée" dans stationHeaderBuffer
 	                            String inputLine = inputStationHeader[inputStationHeader.length -1];
-	                            writeDataLine(data, currentStation, inputLine);
+	                            writeDataLine(dataDomain, currentStation, inputLine);
 	                        }
-	                        writeDataLine(data, currentStation, readedLine);
+	                        writeDataLine(dataDomain, currentStation, readedLine);
 	                        stationWrited = true;
 	                    }
 	                    else if (stationWrited || inputStationHeader == null){
@@ -114,13 +114,13 @@ public class MedatlasWriter extends NemoWriter{
 	                    // écriture de la ligne de données
 	                    //indexRecord++;
 	                    //outputFileWriter.println(data.getDataLine(c, currentStation, readedLine, indexRecord));
-	                    writeDataLine(data, currentStation, readedLine);
+	                    writeDataLine(dataDomain, currentStation, readedLine);
 	                }
 	            }
 
 	            if (iDomain.getMedia().getModel().getEndData() == E_EndData.EOF && stationWrited){
 	                // écriture de la dernière ligne de données
-	                writeLastDataLine(data, currentStation, outputFileName);
+	                writeLastDataLine(dataDomain, currentStation, outputFileName);
 	            }
                 
                 //FAE6315 on ajoute la station pour le CDI ici au lieu de le faire dans la methode writeLastDataLine

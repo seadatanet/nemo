@@ -48,7 +48,7 @@ public class OdvWriter extends NemoWriter{
 	public final void writeFile(String inputFilePath) throws GenerationException {
 	    try{
             CruiseDomain cruise = iDomain.getCruise();
-            StationDomain station = cruise.getStation();
+            StationDomain station = iDomain.getStation();
             
             station.updateRef();
             
@@ -81,7 +81,7 @@ public class OdvWriter extends NemoWriter{
                     outputFileWriter.println(cruiseHeader);
                     if (processType == E_ProcessType.CRUISE_FILE)
                     {
-                        iDomain.getCruise().getStation().updateRef();
+                        iDomain.getStation().updateRef();
                     }
                     writeStation(st, inputFilePath, mOutputFileName);
                     
@@ -93,7 +93,7 @@ public class OdvWriter extends NemoWriter{
                 
                 if (processType == E_ProcessType.COLLECTION_DIR){
                     outputFileName += Conversion.ODV.getExt();
-                    iDomain.getCruise().getStation().updateRef();
+                    iDomain.getStation().updateRef();
                 }
                 outputFileWriter = new PrintWriter(new BufferedWriter(new FileWriter(outputFileName)));
                 
@@ -107,7 +107,7 @@ public class OdvWriter extends NemoWriter{
                    // 07/12/2010: 6087 ajout du if CRUISE_FILE, sinon erreur dans le cas cruise dir
                     if (processType == E_ProcessType.CRUISE_FILE)
                     {
-                        iDomain.getCruise().getStation().updateRef();
+                        iDomain.getStation().updateRef();
                     }
                     writeStation(st, inputFilePath, outputFileName);
                 }
@@ -124,17 +124,17 @@ public class OdvWriter extends NemoWriter{
     private void writeDataLine(StringBuffer stationHeader,
                                Station currentStation,
                                String line) throws Exception{
-        DataDomain data = iDomain.getCruise().getStation().getData();
+        DataDomain data = iDomain.getData();
 
         StringBuffer dataLine = new StringBuffer();
         if (indexRecord == 0){
             dataLine.append(stationHeader);
         }
         else if(iDomain.getMedia().getModel().getInputType() == E_InputType.TRAJECTORY){
-            dataLine.append(iDomain.getCruise().getStation().getOdvTrajectoryHeader(currentStation, line, indexRecord));
+            dataLine.append(iDomain.getStation().getOdvTrajectoryHeader(currentStation, line, indexRecord));
         }
         else{
-            dataLine.append(iDomain.getCruise().getStation().getOdvEmptyStationHeader());
+            dataLine.append(iDomain.getStation().getOdvEmptyStationHeader());
         }
         dataLine.append(data.getDataLine(c, currentStation, line, indexRecord));
         
@@ -162,7 +162,7 @@ public class OdvWriter extends NemoWriter{
                               String inputFilePath,
                               String outputFileName) throws Exception{
 
-        StationDomain station = iDomain.getCruise().getStation();
+        StationDomain station = iDomain.getStation();
         File inputFile= new File(inputFilePath + File.separator + currentStation.getFileName());
         bufferedReader = new BufferedReader(new FileReader(inputFile));
 
@@ -186,12 +186,12 @@ public class OdvWriter extends NemoWriter{
                 // si inputStationHeader est null, c'est qu'on a terminé la derniere station
                 if(inputStationHeader != null)
                 {
-                    stRef = iDomain.getCruise().getStation().getReference(currentStation.getFileName(), inputStationHeader);
+                    stRef = iDomain.getStation().getReference(currentStation.getFileName(), inputStationHeader);
                 }
                
                 if (inputStationHeader != null && currentStation.getReference().equals(stRef)){
                    
-                    stationHeader =  iDomain.getCruise().getStation().getHeader(c, currentStation, inputStationHeader);
+                    stationHeader =  iDomain.getStation().getHeader(c, currentStation, inputStationHeader);
                     
                     if (station.isSomeInData()){
                         // la première ligne des données est déjà "consommée" dans stationHeaderBuffer 

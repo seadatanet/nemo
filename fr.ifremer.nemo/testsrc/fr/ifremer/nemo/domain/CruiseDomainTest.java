@@ -99,12 +99,12 @@ public class CruiseDomainTest
         when(dDomain.getOdvParameterModels()).thenReturn(new ParameterModel[]{addpmTEST});
         
         StationDomain sDomain = mock(StationDomain.class);
-        when(sDomain.getData()).thenReturn(dDomain);
+//        when(sDomain.getData()).thenReturn(dDomain);
         
         
         CruiseDomain cruise = new CruiseDomain();
         cruise.setModel(model);
-        cruise.setStation(sDomain);
+//        cruise.setStation(sDomain);
         
         StringBuffer cruiseHeader = cruise.getHeader(Conversion.ODV);
         System.out.println(cruiseHeader);

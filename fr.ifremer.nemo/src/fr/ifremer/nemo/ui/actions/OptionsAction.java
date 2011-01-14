@@ -1573,8 +1573,7 @@ public class OptionsAction extends Action implements ISelectionListener,
                         saveConfig(writeIni);
 
                         // reinitialisation de la conversion
-                        Nemo.getInstance().getDomain().getCruise().getStation()
-                            .getData().setAddedParameterModel();
+                        Nemo.getInstance().getDomain().getData().setAddedParameterModel();
                         // if (DataModel.inputModel != null)
                         // DataModel.inputModel.setConverted(false);
 
@@ -1985,7 +1984,7 @@ public class OptionsAction extends Action implements ISelectionListener,
             CruiseDomain cd = id.getCruise();
             if (cd != null)
             {
-                StationDomain sd = cd.getStation();
+                StationDomain sd = id.getStation();
                 if (sd != null)
                 {
                     sd.resetStations();

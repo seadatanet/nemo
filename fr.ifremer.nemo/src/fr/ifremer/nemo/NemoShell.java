@@ -68,8 +68,8 @@ public class NemoShell
             boolean sort = sortDatas;
 
             nemo.openModel(modelFile);
-
-            if (nemo.getDomain().getMedia().getModel().getSeparator() != Global.EMPTY_STRING)
+            InputDomain inputDomain = Nemo.getInstance().getDomain();
+            if (inputDomain.getMedia().getModel().getSeparator() != Global.EMPTY_STRING)
                 inputFile =
                     Preformat.runBatch(new File(inputFile)).getAbsolutePath();
 
@@ -77,7 +77,7 @@ public class NemoShell
  
             
             
-            E_TypeConversion convertModel = nemo.getDomain().getConversion().getModel().getOutputFormat();
+            E_TypeConversion convertModel = inputDomain.getConversion().getModel().getOutputFormat();
             E_TypeConversion convertArgument = odvConv;
             
 
@@ -111,12 +111,12 @@ public class NemoShell
                         return false;                                
                 }
                 
-                nemo.getDomain().getConversion().setCurrentConversion(convertModel);                    
+                inputDomain.getConversion().setCurrentConversion(convertModel);                    
             }
             // Modele UNKNOWN Argument NON UNKNOWN
             else if (convertModel == E_TypeConversion.UNKNOWN)
             {
-                nemo.getDomain().getConversion().setCurrentConversion(convertArgument);                        
+                inputDomain.getConversion().setCurrentConversion(convertArgument);                        
             }
             else
             {
@@ -125,38 +125,37 @@ public class NemoShell
                 return false;                
             } 
             
-            nemo.getDomain().getConversion().setCurrentConversion(odvConv);
+            inputDomain.getConversion().setCurrentConversion(odvConv);
 
-            nemo.getDomain().getMedia().buildInputFilesNames();
+            inputDomain.getMedia().buildInputFilesNames();
 
-            nemo.getDomain().getMedia().setOutputFileName(outputFile);
+            inputDomain.getMedia().setOutputFileName(outputFile);
 
-            nemo.getDomain().getConversion().setSortData(sort);
+            inputDomain.getConversion().setSortData(sort);
 
             // The default dataset ref
             String strDefault = datasetRef;
 
             if (strDefault.equals(Global.EMPTY_STRING))
                 strDefault =
-                    nemo.getDomain().getCruise().getModel().getReference();
+                    inputDomain.getCruise().getModel().getReference();
 
             if (strDefault.equals(Global.EMPTY_STRING))
-                strDefault = nemo.getDomain().getCruise().getModel().getName();
+                strDefault = inputDomain.getCruise().getModel().getName();
 
             if (odvConv != E_TypeConversion.MEDATLAS)
-                nemo.getDomain().getCruise().setDataSetRef(strDefault);
+                inputDomain.getCruise().setDataSetRef(strDefault);
 
             // Is a station property in file
-            int nbLignes = Nemo.getInstance().getDomain().getMedia().getModel().getFileHeader() + Nemo.getInstance().getDomain().getMedia().getShellStationHeaderNumberLines();
+            int nbLignes = inputDomain.getMedia().getModel().getFileHeader() + Nemo.getInstance().getDomain().getMedia().getShellStationHeaderNumberLines();
             
-            for (PropertyModel pModel : nemo.getDomain().getCruise()
-                .getStation().getModel().getProperties())
+            for (PropertyModel pModel : inputDomain.getStation().getModel().getProperties())
             {
                 if (pModel.getFragment() != null)
                 {
                     if (pModel.getFragment().getLastLine() > nbLignes)
                     {
-                        nemo.getDomain().getCruise().getStation()
+                        nemo.getDomain().getStation()
                             .setSomeInData(true);
                         pModel.setInData(true);
                     }
@@ -216,14 +215,14 @@ public class NemoShell
         Mapping mapping;
 
 
-        InputDomain iDomain = Nemo.getInstance().getDomain();
-        CruiseDomain cDomain = iDomain.getCruise();
-        StationDomain sDomain = cDomain.getStation();
+        InputDomain inputDomain = Nemo.getInstance().getDomain();
+        CruiseDomain cDomain = inputDomain.getCruise();
+        StationDomain sDomain = inputDomain.getStation();
         try
         {
-            for (String outputPath : iDomain.getMedia().getOutputFiles().keySet()){
+            for (String outputPath : inputDomain.getMedia().getOutputFiles().keySet()){
                 File outputFile = new File(outputPath);
-                for (String stRef : iDomain.getMedia().getOutputFiles().get(outputPath)){
+                for (String stRef : inputDomain.getMedia().getOutputFiles().get(outputPath)){
                     Station st = sDomain.getStationByRef(stRef);
                     String localCdiId;
 
@@ -234,13 +233,13 @@ public class NemoShell
                     String modus = Mapping.MODUS_MULTISTATIONS;
 
                     StringBuffer filename = new StringBuffer();
-                    Nemo.getInstance().getDomain().getConversion().setNomMappingHorsPrefix(couplingTablePrefix);
-                    filename.append(iDomain.getConversion().getNomMappingHorsPrefix());
+                    inputDomain.getConversion().setNomMappingHorsPrefix(couplingTablePrefix);
+                    filename.append(inputDomain.getConversion().getNomMappingHorsPrefix());
 
-                    if (iDomain.getMedia().getModel().getProcessType() == E_ProcessType.CRUISE_DIR){
+                    if (inputDomain.getMedia().getModel().getProcessType() == E_ProcessType.CRUISE_DIR){
                         if (!filename.equals(Global.EMPTY_STRING))
                             filename.append(File.separator);
-                        if (iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION){
+                        if (inputDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION){
                             filename.append(outputFile.getParentFile().getName());
                             filename.append(File.separator);
                             modus = Mapping.MODUS_MONOSTATION;
@@ -248,7 +247,7 @@ public class NemoShell
                         filename.append(outputFile.getName());
                     }
                     else{
-                        if (iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION){
+                        if (inputDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION){
                             if (!filename.equals(Global.EMPTY_STRING))
                                 filename.append(File.separator);
                             filename.append(outputFile.getName());

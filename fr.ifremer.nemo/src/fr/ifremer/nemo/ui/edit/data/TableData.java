@@ -1072,7 +1072,7 @@ public class TableData
 
                 String flagSDN = Global.ZERO;
                 ArrayList<Flag> flags =
-                    Nemo.getInstance().getDomain().getCruise().getStation()
+                    Nemo.getInstance().getDomain().getStation()
                     .getModel().getFlagTable().getFlags();
                 int size = flags.size();
                 for (int j = 0; j < size; j++)

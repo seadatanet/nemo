@@ -24,6 +24,7 @@ import fr.ifremer.nemo.ui.edit.data.TableData;
 import fr.ifremer.nemo.ui.edit.data.TypeData;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
+import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 
 /**
@@ -1124,58 +1125,76 @@ public class Configuration extends AbstractModel
      */
     public DataListEnum getDataListToUse(TableData tableData)
     {
+
+        DataListEnum listInSettings=getDataListInSettings();
+        ;        _dataListToUse = listInSettings;
         // contient Correction FAE 3760: si on charge un modele si on a utilisé liste P091 on continue à utiliser la liste P091
-        
-        
+        Utils.messageInfo("format dans settings: "+ listInSettings);
+
         E_TypeConversion currentConversion = Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType();
-       
+
         TypeData typeData=null;
         if (tableData.getTypes()!=null && !tableData.getTypes().isEmpty())
         {
             typeData =  tableData.getTypes().get(0);
         }
-        
+
+        /**
+         * =================================================================
+         * pas de parametres presents dans le tableau
+         */
         // s'il n'y a aucun parametre dans le tableau, on applique le type choisi dans les settings
         // SAUF s'il n'est pas compatible avec le format de sortie
         if(typeData==null)
         {
-            if (currentConversion == E_TypeConversion.MEDATLAS && getDataListInSettings()==DataListEnum.P011_VIA_P021)
-            {
-                _dataListToUse = DataListEnum.P091;
-            }
-            else
-            {
-                _dataListToUse = getDataListInSettings();
-            }
-        }
-        // si les parametres presents ne sont pas P011, ils sont donc P091 -> on force le P091
-        else if (!typeData.isP011())
-        {
-            _dataListToUse = DataListEnum.P091;
-        }
-        // si les parametres presents sont P011
-        else if(typeData.isP011())
-        {
-            // format de sortie MEDATLAS
-            if (currentConversion == E_TypeConversion.MEDATLAS )
+            // TODO passer plutot au P011viaP091 si on voulait du P011
+            if (currentConversion == E_TypeConversion.MEDATLAS 
+                    && listInSettings==DataListEnum.P011_VIA_P021
+                    )
             {
                 _dataListToUse = DataListEnum.P011_VIA_P091;
-            }
-            // format de sortie ODV
-            else
-            {
-                // si P011 via P021 demandé, on applique
-                if (getDataListInSettings() == DataListEnum.P011_VIA_P021)
-                {
-                    _dataListToUse = DataListEnum.P011_VIA_P021;
-                }
-                // si P091 ou P091 via P011 demandé, on force à P011 via P091
-                else
-                {
-                    _dataListToUse = DataListEnum.P011_VIA_P091;
-                }
+                Utils.messageInfoAppend("P011 via P091 (et non via P021) car medatlas");
             }
         }
+        /**
+         * =================================================================
+         * parametres deja presents dans le tableau
+         */
+        else{
+            /**
+             * ************************
+             * parametres presents P091
+             */
+            // si les parametres presents ne sont pas P011, ils sont donc P091 -> on force le P091
+            if (!typeData.isP011() && listInSettings!=DataListEnum.P091)
+            {
+                _dataListToUse = DataListEnum.P091;
+                Utils.messageInfoAppend("P091 car param presents P091");
+            }
+            /**
+             * ************************
+             * parametres presents P011
+             */
+            // si les parametres presents sont P011
+            else if(typeData.isP011())
+            {
+                // format de sortie MEDATLAS
+                if (currentConversion == E_TypeConversion.MEDATLAS && listInSettings!=DataListEnum.P011_VIA_P091)
+                {
+                    _dataListToUse = DataListEnum.P011_VIA_P091;
+                    Utils.messageInfoAppend("P091 via P011 car medatlas");
+                }
+                // format de sortie ODV
+                // si P091 demandé, on force à P011 via P091
+                else if ( currentConversion != E_TypeConversion.MEDATLAS && listInSettings == DataListEnum.P091)
+                {
+                    _dataListToUse = DataListEnum.P011_VIA_P091;
+                    Utils.messageInfoAppend("P011_VIA_P091 car P011 presents");
+                }
+
+            }
+        }
+        Utils.messageInfoAppend("format utilisé "+_dataListToUse);
         return _dataListToUse;
     }
     public void setDataListToUse(DataListEnum dataListToUse)

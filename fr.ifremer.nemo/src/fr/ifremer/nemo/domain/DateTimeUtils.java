@@ -103,7 +103,7 @@ public class DateTimeUtils
         String formatFullDate = null;
         DateTimeFormat format = new DateTimeFormat();
 
-        StationDomain stationDomain = Nemo.getInstance().getDomain().getCruise().getStation();
+        StationDomain stationDomain = Nemo.getInstance().getDomain().getStation();
         
         PropertyModel dateModel = stationDomain.getModel().getProperty(Intern.S_DATE);
         String dFormat = ((DateTimeFormat)dateModel.getFormat()).getFormatString();

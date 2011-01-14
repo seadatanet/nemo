@@ -41,7 +41,7 @@ public class SWTProcess implements IRunnableWithProgress
 
         InputDomain iDomain = Nemo.getInstance().getDomain();
         CruiseDomain cDomain = iDomain.getCruise();
-        StationDomain sDomain = cDomain.getStation();
+        StationDomain sDomain = iDomain.getStation();
         
         Configuration config = Nemo.getInstance().getConfig();
         

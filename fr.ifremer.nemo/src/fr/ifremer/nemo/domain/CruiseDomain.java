@@ -15,6 +15,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.input.DataType;
 import fr.ifremer.nemo.input.InputModel;
@@ -34,7 +35,7 @@ public class CruiseDomain
      * Informations descrivant l'onglet Cuise
      */
     protected CruiseModel _model;
-    protected StationDomain _station; //onglet Station
+//    protected StationDomain _station; //onglet Station
     final private Formatter form;
     
     private String _dataSetRef;
@@ -51,13 +52,14 @@ public class CruiseDomain
     
     public void initValues(){
         _model = new CruiseModel();
-        _station = new StationDomain();
+//        _station = new StationDomain();
         _dataSetRef = Global.EMPTY_STRING;
     }
     
     public void update(InputModel model){
         updateCruise(model.getCruiseModel());
-        _station.update(model);
+        // TODO BGT avant data et station étaient rattachés à cruise et rafraichis en même temps -> voir si maintenant ca manque
+        // a priori non, ils ont ete rajoutes dans fr.ifremer.nemo.domain.InputDomain.update(InputModel)
     }
     
     public void updateCruise(CruiseModel cruiseModel){
@@ -67,7 +69,7 @@ public class CruiseDomain
     
     //RELEASE
     public void release(){
-        _station.release();
+//        _station.release();
         _model.release();
     }
     
@@ -98,13 +100,14 @@ public class CruiseDomain
         
         odvCruiseHeader.append(start);
         odvCruiseHeader.append(Global.RN);
-        
-        odvCruiseHeader.append(_station.getData().getSDNparameters(Conversion.ODV));
+        StationDomain stationDomain = Nemo.getInstance().getDomain().getStation();
+        DataDomain dataDomain = Nemo.getInstance().getDomain().getData();
+        odvCruiseHeader.append(dataDomain.getSDNparameters(Conversion.ODV));
         odvCruiseHeader.append(start);
         odvCruiseHeader.append(Global.RN);
         
-        odvCruiseHeader.append(_station.getOdvStationHeaderLabels());
-        odvCruiseHeader.append(_station.getData().getDataHeader(Conversion.ODV));
+        odvCruiseHeader.append(stationDomain.getOdvStationHeaderLabels());
+        odvCruiseHeader.append(dataDomain.getDataHeader(Conversion.ODV));
         
         return odvCruiseHeader;
     }
@@ -213,23 +216,23 @@ public class CruiseDomain
         _model = model;
     }    
 
-    /**
-     * Getter pour station.
-     * @return StationDomain
-     * @see InputDomain.java#station
-     */
-    public StationDomain getStation(){
-        return _station;
-    }
-
-    /**
-     * Setter pour station
-     * @param station : nouvelle valeur pour station
-     * @see InputDomain.java#station
-     */
-    public void setStation(StationDomain station){
-        _station = station;
-    }
+//    /**
+//     * Getter pour station.
+//     * @return StationDomain
+//     * @see InputDomain.java#station
+//     */
+//    public StationDomain getStation(){
+//        return _station;
+//    }
+//
+//    /**
+//     * Setter pour station
+//     * @param station : nouvelle valeur pour station
+//     * @see InputDomain.java#station
+//     */
+//    public void setStation(StationDomain station){
+//        _station = station;
+//    }
 
     /**
      * Getter pour _dataSetRef.

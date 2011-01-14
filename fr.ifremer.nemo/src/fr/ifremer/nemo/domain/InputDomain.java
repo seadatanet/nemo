@@ -20,12 +20,16 @@ import fr.ifremer.nemo.input.InputModel;
 public class InputDomain
 {
     protected MediaDomain _media; //onglet File
-    protected CruiseDomain _cruise; //onglet Cruise (contient ref sur Station + Data)
+    protected CruiseDomain _cruise; //onglet Cruise 
+    protected StationDomain _station; //onglet Station
+    protected DataDomain _data; // onglet Data
     protected ConversionDomain _conversion; // onglet Conversion
         
     public InputDomain(){
         _media = new MediaDomain();
         _cruise = new CruiseDomain();
+        _station = new StationDomain();
+        _data = new DataDomain();
         _conversion = new ConversionDomain();
     }
         
@@ -38,6 +42,8 @@ public class InputDomain
     public void update(InputModel model){
         _media.update(model);
         _cruise.update(model);
+        _station.update(model);
+        _data.update(model);
         _conversion.update(model);
     }
     
@@ -45,6 +51,8 @@ public class InputDomain
     public void release(){
         _media.release();
         _cruise.release();
+        _station.release();
+        _data.release();
         _conversion.release();
     }
 
@@ -83,7 +91,23 @@ public class InputDomain
     public void setCruise(CruiseDomain cruise){
         _cruise = cruise;
     }
+    /**
+     * Getter pour ststion.
+     * @return StationDomain
+     * @see InputDomain.java#station
+     */
+    public StationDomain getStation(){
+        return _station;
+    }
 
+    /**
+     * Setter pour cruise
+     * @param station : nouvelle valeur pour station
+     * @see InputDomain.java#station
+     */
+    public void setStation(StationDomain station){
+        _station = station;
+    }
     /**
      * Getter pour _media.
      * @return MediaDomain
@@ -100,5 +124,27 @@ public class InputDomain
      */
     public void setMedia(MediaDomain file){
         _media = file;
+    }
+    /**
+     * Getter pour data.
+     * 
+     * @return DataDomain
+     * @see InputDomain.java#data
+     */
+    public DataDomain getData()
+    {
+        return _data;
+    }
+
+    /**
+     * Setter pour data
+     * 
+     * @param data :
+     *            nouvelle valeur pour data
+     * @see InputDomain.java#data
+     */
+    public void setData(DataDomain data)
+    {
+        _data = data;
     }
 }

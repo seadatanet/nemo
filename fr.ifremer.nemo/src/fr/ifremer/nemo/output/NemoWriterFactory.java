@@ -28,7 +28,7 @@ public final class NemoWriterFactory {
             CruiseDomain cd = id.getCruise();
             if (cd != null)
             {
-                StationDomain sd = cd.getStation();
+                StationDomain sd = id.getStation();
                 if (sd != null)
                 {
                     sd.resetlocalCDIList();

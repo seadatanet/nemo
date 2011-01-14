@@ -49,7 +49,7 @@ public class StationDomain
 
     private Station _currentStation;
 
-    protected DataDomain _data; // onglet Data
+  
     protected HashMap<String, List<Station>> _listStations;
 
     protected boolean _someInData;
@@ -84,7 +84,6 @@ public class StationDomain
     public void initValues()
     {
         _model = new StationModel();
-        _data = new DataDomain();
         _listStations = new HashMap<String, List<Station>>();
         _ref = -1;
         _someInData = false;
@@ -96,7 +95,7 @@ public class StationDomain
     public void update(InputModel model)
     {
         updateStation(model.getStationModel());
-        _data.update(model);
+    
     }
 
     public void updateStation(StationModel model)
@@ -555,9 +554,10 @@ public class StationDomain
         medStationHeader.append(Global.RN);
 
         // *NB PARAMETERS=07 RECORD LINES=08651
+       DataDomain dataDomain =  Nemo.getInstance().getDomain().getData();
         int paramNumbers =
-            _data.getMedParameterModels().length
-                    + _data.getModel().getParameterModels().length;
+            dataDomain.getMedParameterModels().length
+                    + dataDomain.getModel().getParameterModels().length;
         medStationHeader.append(start);
         medStationHeader.append(Elts.getElt(Elts.station_param, Integer
             .toString(paramNumbers)));
@@ -565,7 +565,7 @@ public class StationDomain
             currentStation.getNbRecords()));
         medStationHeader.append(Global.RN);
 
-        medStationHeader.append(_data.getMedParametersDesc());
+        medStationHeader.append(dataDomain.getMedParametersDesc());
 
         // *GLOBAL PROFILE QUALITY FLAG=0 GLOBAL PARAMETERS QC FLAGS=0000000
         medStationHeader.append(start);
@@ -623,7 +623,7 @@ public class StationDomain
                 inputFile));
 
         // --SDN_parameter_mapping--
-        medStationHeader.append(_data.getSDNparameters(Conversion.MEDATLAS));
+        medStationHeader.append(dataDomain.getSDNparameters(Conversion.MEDATLAS));
 
         // *EDMO_CODE=1
         medStationHeader.append(start);
@@ -834,7 +834,7 @@ public class StationDomain
     public void release()
     {
         _model.release();
-        _data.release();
+      
     }
 
     /**
@@ -860,28 +860,7 @@ public class StationDomain
         _model = model;
     }
 
-    /**
-     * Getter pour data.
-     * 
-     * @return DataDomain
-     * @see InputDomain.java#data
-     */
-    public DataDomain getData()
-    {
-        return _data;
-    }
-
-    /**
-     * Setter pour data
-     * 
-     * @param data :
-     *            nouvelle valeur pour data
-     * @see InputDomain.java#data
-     */
-    public void setData(DataDomain data)
-    {
-        _data = data;
-    }
+    
 
     /**
      * Getter pour _someInData.

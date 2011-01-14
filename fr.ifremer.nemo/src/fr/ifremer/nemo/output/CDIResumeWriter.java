@@ -17,6 +17,7 @@ import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.config.Configuration.DataListEnum;
 import fr.ifremer.nemo.domain.CruiseDomain;
+import fr.ifremer.nemo.domain.DataDomain;
 import fr.ifremer.nemo.domain.DateTimeUtils;
 import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.domain.Station;
@@ -88,7 +89,8 @@ public class CDIResumeWriter
 
             InputDomain iDomain = nemo.getDomain();
             CruiseDomain cDomain = iDomain.getCruise();
-            StationDomain sDomain = cDomain.getStation();
+            StationDomain sDomain = iDomain.getStation();
+            DataDomain dataDomain = iDomain.getData();
             sDomain.resetlocalCDIList();
             Configuration config = nemo.getConfig();
 
@@ -103,8 +105,7 @@ public class CDIResumeWriter
                     // sDomain.getStations(outputFile.getName())){
                     Station st = sDomain.getStationByRef(stRef);
                     // seuls les paramètres mesurés sont à prendre en compte
-                    for (ParameterModel param : iDomain.getCruise()
-                        .getStation().getData().getModel().getParameterModels())
+                    for (ParameterModel param : dataDomain.getModel().getParameterModels())
                     {
                         // writeLineResume(inputFilePath, st, param);
 

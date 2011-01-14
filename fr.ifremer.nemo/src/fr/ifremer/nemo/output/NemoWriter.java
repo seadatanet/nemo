@@ -64,7 +64,7 @@ public abstract class NemoWriter{
 	public void write(ProgressNotification a_Progress) throws GenerationException{
 
 	    MediaDomain media = iDomain.getMedia();
-	    StationDomain stationDomain = iDomain.getCruise().getStation();
+	    StationDomain stationDomain = iDomain.getStation();
 
 
 	    stationDomain.updateRef();
@@ -76,7 +76,7 @@ public abstract class NemoWriter{
 	        for (String inputFilePath : media.getInputFilesNames().keySet()){
 
 	            //  FAE 6087
-	            iDomain.getCruise().getStation().updateRef();
+                stationDomain.updateRef();
 
 
 	            // pour chaque fichier de ce repertoire d'entree
@@ -290,7 +290,7 @@ public abstract class NemoWriter{
         }
         
         // + 1 ligne si certaines informations station sont dans les données
-        if (iDomain.getCruise().getStation().isSomeInData() && readedLine != null){
+        if (iDomain.getStation().isSomeInData() && readedLine != null){
             stationHeader.append(consumeLine());
         }
         

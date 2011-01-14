@@ -62,7 +62,7 @@ public class Station implements Comparable
         _endlongitude = Double.NaN;
         _enddepth = Float.NaN;
 
-        StationDomain stationDomain = Nemo.getInstance().getDomain().getCruise().getStation();
+        StationDomain stationDomain = Nemo.getInstance().getDomain().getStation();
 
         _latitude = ((Double) stationDomain.getModel().getProperty(Intern.S_LAT).applyOn(inputStationHeader)).doubleValue();
         _longitude = ((Double) stationDomain.getModel().getProperty(Intern.S_LON).applyOn(inputStationHeader)).doubleValue();
@@ -119,18 +119,19 @@ public class Station implements Comparable
 
         _globalParamQc = new HashMap<String, String>();
         _missingValueParams = new HashMap<String, Boolean>();
-        for (ParameterModel paramModel : stationDomain.getData().getMedParameterModels()){
+        DataDomain dataDomain = Nemo.getInstance().getDomain().getData();
+        for (ParameterModel paramModel : dataDomain.getMedParameterModels()){
             _globalParamQc.put(paramModel.getParameter().getCode(), ((AddedParameter)paramModel.getParameter()).getIdParam().getFlag(this, null));
             _missingValueParams.put(paramModel.getParameter().getCode(), true);
         }
-        for (ParameterModel paramModel : stationDomain.getData().getModel().getParameterModels()){
+        for (ParameterModel paramModel : dataDomain.getModel().getParameterModels()){
             _globalParamQc.put(paramModel.getParameter().getCode(),Global.WORSE_FLAG);
             _missingValueParams.put(paramModel.getParameter().getCode(), true);
         }
     }
 
     public void updateGlobalParamQc(String inputLine){
-        DataDomain dataDomain = Nemo.getInstance().getDomain().getCruise().getStation().getData();
+        DataDomain dataDomain = Nemo.getInstance().getDomain().getData();
         // les qcFlags des paramètres ajoutés pour MEDATLAS ne varient pas (= MetaFlags)
         String qcFlag = null;
         for (ParameterModel paramModel : dataDomain.getModel().getParameterModels()){
@@ -154,7 +155,7 @@ public class Station implements Comparable
     public String getGlobalParamQc(){
         StringBuffer globalParamQc = new StringBuffer();
 
-        DataDomain dataDomain = Nemo.getInstance().getDomain().getCruise().getStation().getData();
+        DataDomain dataDomain = Nemo.getInstance().getDomain().getData();
         String globalQc = null;
         for (ParameterModel paramModel : dataDomain.getMedParameterModels()){
             globalQc = _globalParamQc.get(paramModel.getParameter().getCode());
@@ -197,7 +198,7 @@ public class Station implements Comparable
     }
     
     public void completeMedatlasTrajectory(String inputLine) throws NumberFormatException, StringIndexOutOfBoundsException, ParseException{
-        StationDomain stationDomain= Nemo.getInstance().getDomain().getCruise().getStation();
+        StationDomain stationDomain= Nemo.getInstance().getDomain().getStation();
         
         // ENDLAT => LATX
         _endlatitude = (Double)stationDomain.getModel().getProperty(Intern.S_LAT).applyOnLine(inputLine);

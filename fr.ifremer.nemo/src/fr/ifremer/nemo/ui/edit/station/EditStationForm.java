@@ -496,7 +496,7 @@ public class EditStationForm extends EditForm
 
 
         MediaModel mModel = Nemo.getInstance().getDomain().getMedia().getModel();
-        StationModel sModel = Nemo.getInstance().getDomain().getCruise().getStation().getModel();
+        StationModel sModel = Nemo.getInstance().getDomain().getStation().getModel();
 
         for (NemoSection stationSection : listeSections){
             stationSection.fillFromModel(sModel);
@@ -518,7 +518,7 @@ public class EditStationForm extends EditForm
     public void initFromNewModel()
     {
 //      recuperation du model correspondant
-        StationDomain sDomain = Nemo.getInstance().getDomain().getCruise().getStation();
+        StationDomain stationDomain = Nemo.getInstance().getDomain().getStation();
         StationModel stationModel = new StationModel();
         E_InputType inputType = Nemo.getInstance().getDomain().getMedia().getModel().getInputType();
         
@@ -566,11 +566,11 @@ public class EditStationForm extends EditForm
             // GESTION Time/Date in Data
             if ( samplingRate.isEnabled()){
                 // calcul e partir frequence echantillonnage
-                sDomain.setComputed(true);
+                stationDomain.setComputed(true);
             }
             else{
                 // calcul position date/heure dans les donnees
-                sDomain.setComputed(false);
+                stationDomain.setComputed(false);
                 // remplissage avec les données par défaut
                 propertyModel = stationModel.propertiesAt(Intern.S_SAMPLINGRATE);
                 propertyModel.setUserProvided(true);
@@ -614,7 +614,7 @@ public class EditStationForm extends EditForm
         } // fin specifique SERIE TEMPO ou TRAJECTOIRE
 
         // Mise à jour du model
-        Nemo.getInstance().getDomain().getCruise().getStation().updateStation(stationModel);
+        stationDomain.updateStation(stationModel);
 
         // flag validation à 1
         setValidated(true);
