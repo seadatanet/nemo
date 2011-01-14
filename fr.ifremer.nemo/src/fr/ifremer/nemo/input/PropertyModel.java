@@ -332,7 +332,9 @@ public class PropertyModel extends AbstractModel
                             sResult = _fragment.retreiveVariable(a_Header);
                     }
                     if (_format instanceof DateTimeFormat)
+                    {
                         sResult = sResult.replace(' ', '0');
+                    }
                     result = _format.parseObject(sResult);
                 }
                 catch (ParseException e){
