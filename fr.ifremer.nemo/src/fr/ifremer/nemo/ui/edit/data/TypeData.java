@@ -1,6 +1,11 @@
 package fr.ifremer.nemo.ui.edit.data;
 
+import fr.ifremer.nemo.input.LineFragment;
+import fr.ifremer.nemo.input.Parameter;
+import fr.ifremer.nemo.input.ParameterModel;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.ws.WSParameter;
+import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
 public class TypeData extends Object {
 
@@ -65,7 +70,54 @@ public class TypeData extends Object {
         this.setAbbr(typeData.abbr);
         this.setIsP011(typeData.isP011);
 	}
+    
+    
+    public TypeData(WSParameter wsParameter)
+    {
+        setCode(wsParameter.getCode() + Global.SEP + wsParameter.getName());
+        setUnite(wsParameter.getUnit());
+        setFormat(wsParameter.getFormat());
+        setEntree(Global.EMPTY_STRING);
+        setSortie(wsParameter.getDefaultValue());
+    }
 
+    public TypeData(ParameterModel parameterModel)
+    {
+        Parameter parameter = parameterModel.getParameter();
+        LineFragment frag = parameterModel.getFragment();
+        LineFragment flag = parameterModel.getFlag();
+
+        // code / fullName / sortie / format
+        setCode(parameter.getCode() + Global.SEP
+                + parameter.getFullName());
+        setNom(parameter.getFullName());
+
+        if (parameterModel.getConversionFormula().equals(Global.EMPTY_STRING)){
+            setConversion(TypeData.DEFAULT_CONVERT);
+        }
+        else{
+            setConversion(parameterModel.getConversionFormula());
+        }
+        setDebut(frag.getFirstCharOffset());
+        setFin(frag.getLastCharOffset());
+        if (flag != null)
+        {
+            setDebutFlag(String.valueOf(flag.getFirstCharOffset()));
+            setFinFlag(String.valueOf(flag.getLastCharOffset()));
+        }
+
+        String inputDefault = parameterModel.getInputDefault();
+        if (inputDefault == null || inputDefault.equals("null"))inputDefault = Global.EMPTY_STRING; //$NON-NLS-1$
+        setEntree(inputDefault);
+
+        setUnite(parameter.getUnit());
+        setUniteCode(parameter.getUnitCode());
+        setFormat(parameter.getFormat());
+        setSortie(parameter.getDefault());
+        setCodeP011(parameter.getCodeP011());
+        setNomP011(parameter.getNameP011());
+        setIsP011(parameter.isP011()); 
+    }
 	public TypeData() {
 
 		this.setCode("Code"); //$NON-NLS-1$
@@ -82,6 +134,22 @@ public class TypeData extends Object {
         this.setIsP011(false);
 	}
 
+    public TypeData (CodeTableRecordType record)
+    {
+        String code;
+        String name;
+        String entryKey = record.getEntryKey();
+        String[] entryKeySplit = entryKey.split("/"); //$NON-NLS-1$
+        code = entryKeySplit[entryKeySplit.length - 1];
+        name = record.getEntryTerm();
+//        setIsP011(false);
+        setCode(code +  Global.SEP+name);
+        setAbbr(record.getEntryTermAbbr());
+        setFormat(Global.EMPTY_STRING);
+        setEntree(Global.EMPTY_STRING);
+        setSortie(Global.EMPTY_STRING);
+        setUnite(Global.EMPTY_STRING);
+    }
 	public String getCode() {
 		return code;
 	}

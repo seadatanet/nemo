@@ -135,43 +135,7 @@ public class EditDataForm extends EditForm
         // remplissage des parametres mesures
         for (ParameterModel paraCourant : parameterModels)
         {
-            TypeData typeData = new TypeData();
-            Parameter modeleCourant = paraCourant.getParameter();
-            LineFragment frag = paraCourant.getFragment();
-            LineFragment flag = paraCourant.getFlag();
-
-            // code / fullName / sortie / format
-            typeData.setCode(modeleCourant.getCode() + Global.SEP
-                    + modeleCourant.getFullName());
-            typeData.setNom(modeleCourant.getFullName());
-
-            if (paraCourant.getConversionFormula().equals(Global.EMPTY_STRING)){
-                typeData.setConversion(TypeData.DEFAULT_CONVERT);
-            }
-            else{
-                typeData.setConversion(paraCourant.getConversionFormula());
-            }
-            typeData.setDebut(frag.getFirstCharOffset());
-            typeData.setFin(frag.getLastCharOffset());
-            if (flag != null)
-            {
-                typeData
-                    .setDebutFlag(String.valueOf(flag.getFirstCharOffset()));
-                typeData.setFinFlag(String.valueOf(flag.getLastCharOffset()));
-            }
-
-            String inputDefault = paraCourant.getInputDefault();
-            if (inputDefault == null || inputDefault.equals("null"))inputDefault = Global.EMPTY_STRING; //$NON-NLS-1$
-            typeData.setEntree(inputDefault);
-
-            typeData.setUnite(modeleCourant.getUnit());
-            typeData.setUniteCode(modeleCourant.getUnitCode());
-            typeData.setFormat(modeleCourant.getFormat());
-            typeData.setSortie(modeleCourant.getDefault());
-            typeData.setCodeP011(modeleCourant.getCodeP011());
-            typeData.setNomP011(modeleCourant.getNameP011());
-            typeData.setIsP011(modeleCourant.isP011());
-            
+            TypeData typeData = new TypeData(paraCourant);
             myTableData.addType(typeData);
         }
 
@@ -191,83 +155,18 @@ public class EditDataForm extends EditForm
         // recuperation du model correspondant
         fr.ifremer.nemo.input.DataModel dataModel = new fr.ifremer.nemo.input.DataModel();
         
-        //int indexPRES = -1;
-
         // mise e jour des types avant validation
         myTableData.majTypeData();
-
-        // remplissage des parametres mesures
-        //int nbreParam = TableData.types.size();
 
         // reset systematique des parametres stockes dans le dataModel
         Nemo.getInstance().getDomain().getData().getModel().releaseParameterModels();
 
         for (TypeData typeCourant : myTableData.getTypes())
         {
-            //TypeData typeCourant = TableData.types.get(i);
-
-            // code / fullName / sortie / format
-            //Parameter para = new Parameter();
-            ParameterModel parameterModel = new ParameterModel();
-            //parameterModel.setModel(para);
-
-            // parameterModel.setModel(para);
-
-            // split sur " - "
-            Pattern p = Pattern.compile(Global.SEP);
-            String mots[] = p.split(typeCourant.getCode());
-            String code = mots[0];
-            String nom = mots[1];
-
-            Parameter para = new Parameter();
-            // code, nom, unite
-            para.setCode(code);
-            para.setFullName(nom);
-            para.setUnit(typeCourant.getUnite());
-            // FAE 6542
-            para.setUnitCode(typeCourant.getUniteCode());
-
-            // specific P011
-            para.setCodeP011(typeCourant.getCodeP011());
-            para.setNameP011(typeCourant.getNomP011());
-            para.setP011(typeCourant.isP011());
-            
-            
-            para.setDefault(typeCourant.getSortie());
-            para.setFormat(typeCourant.getFormat());
-            parameterModel.setParameter(para);
-
-            // conversion / entree
-            parameterModel.setConversionFormula(typeCourant.getConversion());
-            parameterModel.setInputDefault(typeCourant.getEntree());
-
-            // fragment du parametre
-            LineFragment frag = new LineFragment();
-            frag.setFirstCharOffset(typeCourant.getDebut());
-            frag.setLastCharOffset(typeCourant.getFin());
-            parameterModel.setFragment(frag);
-
-            if (!typeCourant.getDebutFlag().equals(Global.EMPTY_STRING)
-                    && !typeCourant.getFinFlag().equals(Global.EMPTY_STRING))
-            {
-                LineFragment flag = new LineFragment();
-                flag.setFirstCharOffset(typeCourant.getDebutFlag());
-                flag.setLastCharOffset(typeCourant.getFinFlag());
-                parameterModel.setFlag(flag);
-            }
-
-            //if (code.trim().equals(Intern.paramPRES)){
-            //    indexPRES = i;
-            //}
-
+            ParameterModel parameterModel = new ParameterModel(typeCourant);
             dataModel.addParameterModel(parameterModel);
-
         }
-        // enregistrement de l'indexPRES
-        //dModel.setPresIndex(indexPRES);
         Nemo.getInstance().getDomain().getData().updateData(dataModel);
-        
-
         Nemo.getInstance().getViewMain().getEditDataForm().setValidated(true);
 
     }

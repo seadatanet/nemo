@@ -1,5 +1,7 @@
 package fr.ifremer.nemo.input;
 
+import java.util.regex.Pattern;
+
 import org.nfunk.jep.JEP;
 import org.xml.sax.Attributes;
 
@@ -15,6 +17,7 @@ import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ui.actions.OptionsAction;
+import fr.ifremer.nemo.ui.edit.data.TypeData;
 
 /**
  * Class ParameterModel
@@ -61,6 +64,56 @@ public class ParameterModel extends AbstractModel
         _tagName = ModelDescription.node_parameterModel;
         initValues();
 	}
+    
+    public ParameterModel(TypeData typeData)
+    {
+        // split sur " - "
+        Pattern p = Pattern.compile(Global.SEP);
+        String mots[] = p.split(typeData.getCode());
+        String code = mots[0];
+        String nom = mots[1];
+
+        Parameter para = new Parameter();
+        // code, nom, unite
+        para.setCode(code);
+        para.setFullName(nom);
+        para.setUnit(typeData.getUnite());
+        // FAE 6542
+        para.setUnitCode(typeData.getUniteCode());
+
+        // specific P011
+        para.setCodeP011(typeData.getCodeP011());
+        para.setNameP011(typeData.getNomP011());
+        para.setP011(typeData.isP011());
+        
+        
+        para.setDefault(typeData.getSortie());
+        para.setFormat(typeData.getFormat());
+        this.setParameter(para);
+
+        // conversion / entree
+        this.setConversionFormula(typeData.getConversion());
+        this.setInputDefault(typeData.getEntree());
+
+        // fragment du parametre
+        LineFragment frag = new LineFragment();
+        frag.setFirstCharOffset(typeData.getDebut());
+        frag.setLastCharOffset(typeData.getFin());
+        this.setFragment(frag);
+
+        if (!typeData.getDebutFlag().equals(Global.EMPTY_STRING)
+                && !typeData.getFinFlag().equals(Global.EMPTY_STRING))
+        {
+            LineFragment flag = new LineFragment();
+            flag.setFirstCharOffset(typeData.getDebutFlag());
+            flag.setLastCharOffset(typeData.getFinFlag());
+            this.setFlag(flag);
+        }
+
+        //if (code.trim().equals(Intern.paramPRES)){
+        //    indexPRES = i;
+        //}
+    }
     
     /**
      * {@inheritDoc}

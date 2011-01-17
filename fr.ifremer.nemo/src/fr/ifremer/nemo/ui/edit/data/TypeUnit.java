@@ -1,5 +1,7 @@
 package fr.ifremer.nemo.ui.edit.data;
 
+import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
+
 public class TypeUnit extends Object {
 
     
@@ -12,6 +14,16 @@ public class TypeUnit extends Object {
         // FAE 6542
         this.setUnitKey(unitKey);
 	}
+    public TypeUnit(CodeTableRecordType record)
+    {
+        // FAE 6542
+        String entryKey = record.getEntryKey();
+        String[] entryKeySplit = entryKey.split("/"); //$NON-NLS-1$
+        this.unitKey = entryKeySplit[entryKeySplit.length - 1];
+        this.term = record.getEntryTerm();
+        this.termAbbr = record.getEntryTermAbbr();
+        this.untiDef = record.getEntryTermDef();
+    }
     public String getTerm()
     {
         return term;

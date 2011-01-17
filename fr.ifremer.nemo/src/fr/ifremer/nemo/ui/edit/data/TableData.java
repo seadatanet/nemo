@@ -325,13 +325,8 @@ public class TableData
             WSParameter wsParameter = new WSParameter();
             wsParameter = NemoLists.getParameters()[i];
 
-            TypeData type = new TypeData();
-            type.setCode(wsParameter.getCode() + Global.SEP
-                + wsParameter.getName());
-            type.setUnite(wsParameter.getUnit());
-            type.setFormat(wsParameter.getFormat());
-            type.setEntree(Global.EMPTY_STRING);
-            type.setSortie(wsParameter.getDefaultValue());
+            TypeData type = new TypeData(wsParameter);
+          
             // ajout dans liste
             typesWS.add(type);
         }
@@ -341,22 +336,11 @@ public class TableData
         //  init des données a partir du fichier P021 p021.xml
         CodeTableRecordType[] listP021 = NemoLists.getVocabList(Intern.list_BODCpdv);
         TypeData type;
-        String code;
-        String name;
+      
         for (CodeTableRecordType record : listP021)
         {
-            type = new TypeData();
-            String entryKey = record.getEntryKey();
-            String[] entryKeySplit = entryKey.split("/"); //$NON-NLS-1$
-            code = entryKeySplit[entryKeySplit.length - 1];
-            name = record.getEntryTerm();
+            type = new TypeData(record);
             type.setIsP011(false);
-            type.setCode(code +  Global.SEP+name);
-            type.setAbbr(record.getEntryTermAbbr());
-            type.setFormat(Global.EMPTY_STRING);
-            type.setEntree(Global.EMPTY_STRING);
-            type.setSortie(Global.EMPTY_STRING);
-            type.setUnite(Global.EMPTY_STRING);
             // ajout dans liste
             typesWS.add(type);
         }
@@ -373,21 +357,9 @@ public class TableData
             //  init des données a partir du fichier P021 p021.xml
             CodeTableRecordType[] listP061 = NemoLists.getVocabList(Intern.list_P061);
             TypeUnit typeUnit;
-            String term;
-            String termAbbr;
-            String def;
-            // FAE 6542
-            String unitKey;
             for (CodeTableRecordType record : listP061)
             {
-                
-                String entryKey = record.getEntryKey();
-                String[] entryKeySplit = entryKey.split("/"); //$NON-NLS-1$
-                unitKey = entryKeySplit[entryKeySplit.length - 1];
-                term = record.getEntryTerm();
-                termAbbr = record.getEntryTermAbbr();
-                def = record.getEntryTermDef();
-                typeUnit = new TypeUnit(term, termAbbr, def, unitKey);
+                typeUnit = new TypeUnit(record);
                 typesP061.add(typeUnit);
             }
         }
@@ -405,7 +377,7 @@ public class TableData
         // On ajoute systématiquement le paramètre pression pour les profils
         // verticaux sauf si la liste de paramètres à utiliser est la P011
         if (Nemo.getInstance().getViewMain().getMyRulesManager().isProfile()
-                && config.getDataListInSettings().equals(DataListEnum.P091))
+                && config.getDataListToUse().equals(DataListEnum.P091))
         {
             for (TypeData type : typesWS)
             {
@@ -414,6 +386,7 @@ public class TableData
                         && Nemo.getInstance().getViewMain().getMyRulesManager().isProfile())
                 {
                     // on rajoute PRES
+                    System.out.println("ajout PRES dans le tableau");
                     addType(type);
                 }
             }
