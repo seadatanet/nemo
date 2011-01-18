@@ -21,7 +21,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
 import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.config.Configuration.DataListEnum;
+import fr.ifremer.nemo.util.Global.DataListEnum;
 import fr.ifremer.nemo.ui.edit.data.TypeData;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;

@@ -5,9 +5,12 @@ import java.util.List;
 
 import org.xml.sax.Attributes;
 
+import com.ago.xml.Element2Field;
 import com.ago.xml.PathElementConsumer;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
+
+import fr.ifremer.nemo.util.Global.DataListEnum;
 
 
 /**
@@ -21,6 +24,11 @@ public class DataModel extends AbstractModel
      * Liste, ordonnee, des paramètres mesurés sur la station
      */
     protected List<ParameterModel> _parameterModels;
+    /**
+     * liste de paramètres à utiliser
+     *
+     */
+    private DataListEnum _dataList;
 
     public DataModel(){
         _tagName = ModelDescription.node_dataModel;
@@ -33,9 +41,12 @@ public class DataModel extends AbstractModel
     @Override
     public void initValues(){
         _parameterModels = new ArrayList<ParameterModel>();
+        _dataList = DataListEnum.UNKNOWN;
     }
 
-
+    public DataListEnum getDataList(){
+        return _dataList;
+    }
     /**
      * @see AbstractModel.java#fromElement
      */
@@ -71,6 +82,11 @@ public class DataModel extends AbstractModel
         if (a_LocalName.equals(ModelDescription.node_listParameters)){
             return new PathElementConsumer(ModelDescription.node_listParameters, this);
         }
+        else if (a_LocalName.equals(ModelDescription.node_datalist))
+        {
+            Element2Field setter = new Element2Field(this, ModelDescription.setter_dataList);
+            return setter;
+        }
         return null;
     }
     
@@ -97,6 +113,7 @@ public class DataModel extends AbstractModel
      */
     @Override
     public void writeXMLBodyOn(XMLOutputWriter a_Writer){
+        a_Writer.putTag(ModelDescription.node_datalist, getDataList().toString());
         a_Writer.openTag(ModelDescription.node_listParameters);
         for (ParameterModel el : getParameterModels()){
             el.writeXMLOn(a_Writer);
@@ -191,4 +208,26 @@ public class DataModel extends AbstractModel
         if (!_parameterModels.contains(x))
             _parameterModels.add(x);
     }
+    public void setDataList(String dataList)
+    {
+        if (dataList.equals(DataListEnum.P091.toString()))
+        {
+            setDataList(DataListEnum.P091);
+        }
+        else if(dataList.equals(DataListEnum.P011_VIA_P091.toString()))
+        {
+            setDataList(DataListEnum.P011_VIA_P091);
+        }
+        else if(dataList.equals(DataListEnum.P011_VIA_P021.toString()))
+        {
+            setDataList(DataListEnum.P011_VIA_P021);
+        }else
+        {
+            setDataList(DataListEnum.UNKNOWN);
+        }
+    }
+    public void setDataList(DataListEnum dataList)
+    {
+        _dataList = dataList;
+    }   
 }

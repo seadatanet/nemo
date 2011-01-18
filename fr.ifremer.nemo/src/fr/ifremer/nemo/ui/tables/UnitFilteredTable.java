@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.config.Configuration.DataListEnum;
+import fr.ifremer.nemo.util.Global.DataListEnum;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.data.TableData;
 import fr.ifremer.nemo.ui.edit.data.TypeUnit;
@@ -171,8 +171,7 @@ public class UnitFilteredTable extends AbstractFilteredTable
       int index = myFiltreTable.getSelectionIndex();
       typeUnit = listeFiltree.get(index);
       
-      DataListEnum typeToUse= Nemo.getInstance().getConfig().getDataListToUse(myTableDataRef);
-      
+      DataListEnum typeToUse =Nemo.getInstance().getDomain().getData().getModel().getDataList();
         // reinit validation
         Utils.invalidEtapes();
 

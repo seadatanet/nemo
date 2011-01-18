@@ -8,6 +8,7 @@
 package fr.ifremer.nemo.ui;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.util.Global.DataListEnum;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
@@ -37,7 +38,7 @@ public class RulesManager
     private E_ProcessType myProcessType;
     private E_TypeConversion myConversionType;
     private E_InputType myFileType;
-    
+    private DataListEnum myDataList;
     /**
      * description des autorisations d'après les règles
      */
@@ -45,6 +46,7 @@ public class RulesManager
     private boolean medatlasEnabled;
     private boolean odvMonostationEnabled;
     private boolean odvMultistationEnabled;
+    private boolean dataList_P011viaP021_Enabled=false;
     
     /**
      * valeurs par défaut (à l'ouverture)
@@ -53,12 +55,14 @@ public class RulesManager
     public static boolean DEFAULT_MEDATLAS_ENABLED=true;
     public static  boolean DEFAULT_ODVMONOSTATION_ENABLED=true;
     public static boolean DEFAULT_ODVMULTISTATION_ENABLED=true;
+    public static boolean DEFAULT_DATALIST_P011viaP021_ENABLED=false;
+    
     
     public static E_ProcessType DEFAULT_PROCESSTYPE = E_ProcessType.CRUISE_FILE;
     public static E_TypeConversion DEFAULT_CONVERSIONTYPE = E_TypeConversion.UNKNOWN;
     public static E_InputType DEFAULT_FILETYPE =E_InputType.PROFILE;
-    
-    
+    public static DataListEnum DEFAULT_DATALIST=DataListEnum.UNKNOWN;
+   
     private String messageLog=Global.EMPTY_STRING;
     
     public RulesManager()
@@ -85,6 +89,8 @@ public class RulesManager
         myConversionType = getDefaultConversionTypeWithRules();
        // FAE 6739
         cruiseEnabled = !isConversionToODV();
+        myDataList = DEFAULT_DATALIST;
+        dataList_P011viaP021_Enabled = isConversionToODV();
     }
     
     public void resetFileForm()
@@ -95,6 +101,7 @@ public class RulesManager
         myEditFileForm.resetDefaultEnableConversionTypes();
         myConversionType = getDefaultConversionTypeWithRules();
         myEditFileForm.selectConversion(myConversionType);
+        
     }
     
     /**
@@ -165,7 +172,7 @@ public class RulesManager
        myEditFileForm.updateEnableConversionTypes();
        myEditFileForm.selectConversion(myConversionType);
        Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
-       
+       Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV());
        ViewLog.styledTextLogErreurs.setText(messageLog);
    }
    
@@ -190,7 +197,7 @@ public class RulesManager
        myEditFileForm.updateEnableConversionTypes();
        myEditFileForm.selectConversion(myConversionType);
        Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
-       
+       Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV());
        ViewLog.styledTextLogErreurs.setText(messageLog);
    }
    public void updateFromModel(E_InputType fileType)
@@ -211,7 +218,7 @@ public class RulesManager
        myEditFileForm.updateEnableConversionTypes();
        myEditFileForm.selectConversion(myConversionType);
        Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
-       
+       Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV());
        ViewLog.styledTextLogErreurs.setText(messageLog);
    }
 
@@ -227,7 +234,7 @@ public class RulesManager
        myConversionType=convType;
        rule_conversionType(true);
        Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
-       
+       Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV());
        ViewLog.styledTextLogErreurs.setText(messageLog);
        
    }
@@ -246,7 +253,7 @@ public class RulesManager
        myEditFileForm.selectConversion(myConversionType);
        
        Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
-       
+       Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV());
        ViewLog.styledTextLogErreurs.setText(messageLog);
        
    }
@@ -269,10 +276,32 @@ public class RulesManager
        myEditFileForm.updateEnableConversionTypes();
        myEditFileForm.selectConversion(myConversionType);
        Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
-       
+       Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV());
        ViewLog.styledTextLogErreurs.setText(messageLog);
    }
+   /**
+    * RECEPTION MAJ DATALIST
+    */
    
+   public void updateFromIHM(DataListEnum dataList)
+   {
+       System.out.println(myDataList + " >>> "+dataList);
+       if (dataList != myDataList){   
+           myDataList = dataList;
+           Nemo.getInstance().getDomain().getData().getModel().setDataList(dataList);
+           Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().reinitTable();
+       }
+   }
+   public void updateFromModel(DataListEnum dataList)
+   {
+       if (dataList != myDataList){   
+           myDataList = dataList;
+           Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV());
+           Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(dataList);
+           ViewLog.styledTextLogErreurs.setText(messageLog);
+           
+       }
+   }
    /******************************************
     * REGLES
     * ******************************************/
@@ -307,8 +336,14 @@ public class RulesManager
                myConversionType==E_TypeConversion.ODV_MULTISTATIONS)
        {
            cruiseEnabled=false;
+           dataList_P011viaP021_Enabled=true;
            if(addToLog){
                messageLog += Messages.edit_file_info_cruiseDisabledBecauseODV+Global.RN;
+               messageLog += "P011 via P021 enabled";
+           }
+       }else{
+           if(addToLog){
+               messageLog += "P011 via P021 disabled";
            }
        }
    }
@@ -412,6 +447,14 @@ public class RulesManager
     public boolean isCruiseEnabled()
     {
         return cruiseEnabled;
+    }
+    public boolean isDataList_P011viaP021_Enabled()
+    {
+        return dataList_P011viaP021_Enabled;
+    }
+    public DataListEnum getMyDataList()
+    {
+        return myDataList;
     }
     
 

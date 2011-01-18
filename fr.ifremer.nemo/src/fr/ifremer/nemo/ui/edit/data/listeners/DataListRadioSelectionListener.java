@@ -1,0 +1,62 @@
+/* ============================================================================
+ * Nom du fichier	: DataListRadioSelectionListener.java
+ * Auteur			: sbregent
+ * Date				: 17 jav. 2010
+ * Copyright		: Altran
+ * ============================================================================
+ */
+package fr.ifremer.nemo.ui.edit.data.listeners;
+
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
+
+import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.util.Global.DataListEnum;
+import fr.ifremer.nemo.ui.RulesManager;
+import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.ui.edit.data.EditDataForm;
+import fr.ifremer.nemo.ui.edit.file.EditFileForm;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
+
+/**
+ * Description: TODO
+ * @author sbregent
+ *
+ */
+public class DataListRadioSelectionListener implements SelectionListener
+{
+    // reference sur l'editeur
+    private EditDataForm myEditDataForm;
+    
+    
+    public DataListRadioSelectionListener(EditDataForm editDataForm)
+    {
+        myEditDataForm = editDataForm;
+    }
+    public void widgetDefaultSelected( SelectionEvent g)
+    {
+        widgetSelected(g);
+    }
+    
+    public void widgetSelected(SelectionEvent g)
+    {
+
+        DataListEnum currentDataList =DataListEnum.UNKNOWN;
+
+        if (g.getSource().equals(myEditDataForm.getButton_P091()))
+        {
+            currentDataList = DataListEnum.P091;
+        }
+        else if(g.getSource().equals(myEditDataForm.getButton_P011viaP091()))
+        {
+            currentDataList = DataListEnum.P011_VIA_P091;
+        }
+        else if(g.getSource().equals(myEditDataForm.getButton_P011viaP021()))
+        {
+            currentDataList = DataListEnum.P011_VIA_P021;
+        }
+        
+        Nemo.getInstance().getViewMain().getMyRulesManager().updateFromIHM(currentDataList);
+     
+    }
+}

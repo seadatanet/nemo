@@ -15,7 +15,6 @@ import org.eclipse.swt.widgets.Shell;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.config.Configuration.DataListEnum;
 import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.domain.DataDomain;
 import fr.ifremer.nemo.domain.DateTimeUtils;

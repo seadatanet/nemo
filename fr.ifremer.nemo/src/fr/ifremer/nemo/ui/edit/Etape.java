@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import org.eclipse.swt.widgets.Shell;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.config.Configuration.DataListEnum;
+import fr.ifremer.nemo.util.Global.DataListEnum;
 import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.conversion.EditConversionForm;
@@ -1439,31 +1439,31 @@ public class Etape
                     }
                 }
             }
-                // parcours des listes et test des valeurs
-                for (int i = 0; i < nbreParam; i++)
+            // parcours des listes et test des valeurs
+            for (int i = 0; i < nbreParam; i++)
+            {
+                for (int j = 0; j < nbreParam; j++)
                 {
-                    for (int j = 0; j < nbreParam; j++)
+                    if (debuts[i] == debuts[j])
                     {
-                        if (debuts[i] == debuts[j])
+                        if (debuts[i] == 0)
                         {
-                            if (debuts[i] == 0)
-                            {
-                                valeurNonRemplie = true;
-                            }
-                            cptDebut = cptDebut + 1;
+                            valeurNonRemplie = true;
                         }
-                        if (fins[i] == fins[j])
-                        {
-                            cptFin = cptFin + 1;
-                        }
+                        cptDebut = cptDebut + 1;
+                    }
+                    if (fins[i] == fins[j])
+                    {
+                        cptFin = cptFin + 1;
                     }
                 }
+            }
 
-                if (valeurNonRemplie)
-                {
-                    Utils.messageErreurAppend(Messages.Etape_88);
-                    ok = false;
-                }
+            if (valeurNonRemplie)
+            {
+                Utils.messageErreurAppend(Messages.Etape_88);
+                ok = false;
+            }
 
             // TEST pour savoir si PRES est bien en premier mais pas pour
             // profile ou trajectoire
@@ -1478,45 +1478,32 @@ public class Etape
 
             if (Nemo.getInstance().getViewMain().getMyRulesManager().isProfile())
             {
+                boolean checkPressureOk;
 
-                boolean checkOk = data_checkPressureIsInFirstPosition(firstParameterCode);
-                ok = ok && checkOk;
+                checkPressureOk = data_checkPressureIsInFirstPosition(firstParameterCode);
 
                 // Si PRES n'est pas premier => Medatlas impossible
                 // A moins que l'on ait les parametre DEPH, PSAL et TEMP ( FAE 3228 )
-                if ((Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType() == E_TypeConversion.MEDATLAS)
-                        && !Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection() 
-                        && !firstParameterCode.equals(Intern.paramPRES))
-                {
-                    boolean isPSAL = false;
-                    boolean isTEMP = false;
-                    boolean isDEPH = false;
 
-                    for (TypeData donnee : editDataForm.getMyTableData().getTypes())
+                if (!checkPressureOk){
+                    if ((Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType() == E_TypeConversion.MEDATLAS)
+                            && !Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection() )
                     {
-                        if (donnee.getCode().split("-")[0].trim().equals(
-                            Intern.paramDEPH))
-                            isDEPH = true;
-                        else if (donnee.getCode().split("-")[0].trim().equals(
-                            Intern.paramPSAL))
-                            isPSAL = true;
-                        else if (donnee.getCode().split("-")[0].trim().equals(
-                            Intern.paramTEMP))
-                            isTEMP = true;
-                    }
 
-                    if (!(isPSAL && isTEMP && isDEPH))
-                        editConversionForm
-                        .setWarningData(Messages.ViewLog_7);
+                        checkPressureOk = data_checkDepthAndSalinityAndTemperature();
+                        if (!checkPressureOk){
+
+                            editConversionForm
+                            .setWarningData(Messages.ViewLog_7);
+                        }
+                    }
                     else
+                    {
                         editConversionForm
                         .setWarningData(Global.EMPTY_STRING);
+                    }
                 }
-                else
-                {
-                    editConversionForm
-                    .setWarningData(Global.EMPTY_STRING);
-                }
+                ok = ok && checkPressureOk;
             }
         }
         if (ok)
@@ -1530,6 +1517,29 @@ public class Etape
             Nemo.getInstance().getViewMain().setEtape(3);
         }
     }
+    private static boolean data_checkDepthAndSalinityAndTemperature()
+    {
+
+        EditDataForm editDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
+        boolean isPSAL = false;
+        boolean isTEMP = false;
+        boolean isDEPH = false;
+
+        for (TypeData donnee : editDataForm.getMyTableData().getTypes())
+        {
+            if (donnee.getCode().split("-")[0].trim().equals(
+                Intern.paramDEPH))
+                isDEPH = true;
+            else if (donnee.getCode().split("-")[0].trim().equals(
+                Intern.paramPSAL))
+                isPSAL = true;
+            else if (donnee.getCode().split("-")[0].trim().equals(
+                Intern.paramTEMP))
+                isTEMP = true;
+        }
+        return isPSAL && isTEMP && isDEPH;
+
+    }
     /**
      * verification: un parametre de type pression ou equivalent doit être présent sur la première ligne
      * Note: dans certains cas on calculera la pression a partir de la profondeur ou inversement. 
@@ -1540,9 +1550,10 @@ public class Etape
     private static boolean data_checkPressureIsInFirstPosition(String firstParameterCode)
     {
         boolean checkOk = true;
-        DataListEnum dataList = Nemo.getInstance().getConfig().getDataListToUse();
-
-        if (dataList == DataListEnum.P091)
+//        DataListEnum dataList = Nemo.getInstance().getConfig().getDataListToUse();
+        DataListEnum dataList = Nemo.getInstance().getDomain().getData().getModel().getDataList();
+        
+        if (dataList == DataListEnum.P011_VIA_P091 || dataList == DataListEnum.P091)
         {
             //FAE 5819 : ajout du code DPSF(P091) ou MINCDIST(P011) comme parametre possible
             if (!(firstParameterCode.equals(Intern.paramPRES) 
@@ -1555,7 +1566,7 @@ public class Etape
                 checkOk=false;
             }
         }
-        else if (dataList == DataListEnum.P011_VIA_P091 || dataList == DataListEnum.P011_VIA_P021)
+        else if (dataList == DataListEnum.P011_VIA_P021)
         {
             //FAE 5819 : ajout du code DPSF(P091) ou MINCDIST(P011) comme parametre possible
             if (!(firstParameterCode.equals(Intern.paramPREX) 

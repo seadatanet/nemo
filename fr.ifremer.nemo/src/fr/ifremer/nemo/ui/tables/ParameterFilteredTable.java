@@ -19,7 +19,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.config.Configuration.DataListEnum;
+import fr.ifremer.nemo.util.Global.DataListEnum;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.data.TableData;
 import fr.ifremer.nemo.ui.edit.data.TypeData;
@@ -153,8 +153,7 @@ public class ParameterFilteredTable extends AbstractFilteredTable
     protected String getDialogTitle()
     {
         
-        DataListEnum listToUse =Nemo.getInstance().getConfig().getDataListToUse(myTableDataRef);
-       
+        DataListEnum listToUse =Nemo.getInstance().getDomain().getData().getModel().getDataList();
         String title = Messages.table_parameters;
         title += Global.SPACE;
 //        title += listToUse.name();
@@ -184,8 +183,7 @@ public class ParameterFilteredTable extends AbstractFilteredTable
       int index = myFiltreTable.getSelectionIndex();
       typeData = listeFiltree.get(index);
       
-      DataListEnum typeToUse= Nemo.getInstance().getConfig().getDataListToUse(myTableDataRef);
-      
+      DataListEnum typeToUse =Nemo.getInstance().getDomain().getData().getModel().getDataList();
       if (typeToUse==DataListEnum.P011_VIA_P021 || typeToUse==DataListEnum.P011_VIA_P091)
       {
           SubParameterFilteredTable subTable = new SubParameterFilteredTable(typeData, typeToUse);

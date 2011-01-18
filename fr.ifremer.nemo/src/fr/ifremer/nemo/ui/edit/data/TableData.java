@@ -22,7 +22,7 @@ import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.config.Configuration.DataListEnum;
+import fr.ifremer.nemo.util.Global.DataListEnum;
 import fr.ifremer.nemo.domain.MediaDomain;
 import fr.ifremer.nemo.ui.FilteredTableFactory;
 import fr.ifremer.nemo.ui.Utils;
@@ -64,10 +64,7 @@ public class TableData
      */
     private ParameterFilteredTable myParameterFilteredTable;
 
-    /**
-     * type de parametres courant
-     */
-    private DataListEnum myCurrentDataList;
+
     
     /**
      * liste des colonnes modifiables
@@ -82,22 +79,20 @@ public class TableData
      * initialise automatiquement les typesWS
      *
      */
+    
+   
     public TableData()
     {
         initTypesWS();
         initColumnsMap();
-        
+       
         // definit les colonnes pouvant être modfifiées par l'utilisateur
         columnsWritable = new ArrayList<Integer>();
         columnsWritable.add(2); //label_conversion
         columnsWritable.add(6);//label_format
         columnsWritable.add(7);//table_label_valueIn
         columnsWritable.add(8);//table_label_valueOut);
-     
-        
     }
-    
-    
     /**
      * initialise les noms des colonnes
      *
@@ -282,12 +277,7 @@ public class TableData
     }
     private void checkTypesWS()
     {
-        DataListEnum dataListToUse=Nemo.getInstance().getConfig().getDataListToUse(this);
-        if ( myCurrentDataList != dataListToUse)
-        {
-            myCurrentDataList = dataListToUse;
             initTypesWS();
-        }
     }
     
     
@@ -298,12 +288,9 @@ public class TableData
      */
     public void initTypesWS()
     {
-        // verification de du type de parametres a utiliser
-        myCurrentDataList = Nemo.getInstance().getConfig().getDataListToUse(this);
-        
         typesWS = null;
         typesWS = new ArrayList<TypeData>();
-        if (myCurrentDataList!=DataListEnum.P011_VIA_P021)
+        if (Nemo.getInstance().getViewMain().getMyRulesManager().getMyDataList()!=DataListEnum.P011_VIA_P021)
 
         {
             iniTypesWSP091();
@@ -376,8 +363,10 @@ public class TableData
 
         // On ajoute systématiquement le paramètre pression pour les profils
         // verticaux sauf si la liste de paramètres à utiliser est la P011
+        //TODO BGT 2.6.3.2 deplacer ce code dans appel qd choix dataType coché
         if (Nemo.getInstance().getViewMain().getMyRulesManager().isProfile()
-                && config.getDataListToUse().equals(DataListEnum.P091))
+//                && config.getDataListToUse().equals(DataListEnum.P091))
+                && Nemo.getInstance().getDomain().getData().getModel().getDataList()==DataListEnum.P091)
         {
             for (TypeData type : typesWS)
             {
@@ -560,12 +549,17 @@ public class TableData
         itemList.addListener(SWT.Selection, new Listener() {
             public void handleEvent(Event e)
             {
+                if (Nemo.getInstance().getViewMain().getMyRulesManager().getMyDataList() != DataListEnum.UNKNOWN){
                 checkTypesWS();
                 openMyParameterFilteredTable();
+                }else{
+                //TODO BGT
+                    Utils.messageErreur("TODO aucun type de parametre choisi");
+                }
             }
         });
         // ========= Liste des unités P061
-        if (Nemo.getInstance().getConfig().getDataListToUse() == DataListEnum.P011_VIA_P021)
+        if (Nemo.getInstance().getViewMain().getMyRulesManager().getMyDataList() == DataListEnum.P011_VIA_P021)
         {
             MenuItem itemAddP061Unit = new MenuItem(menu, SWT.NONE);
             itemAddP061Unit.setText(Messages.menu_label_selectP061Unit);

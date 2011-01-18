@@ -59,7 +59,6 @@ import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.config.Proxy;
-import fr.ifremer.nemo.config.Configuration.DataListEnum;
 import fr.ifremer.nemo.domain.AddedParameter;
 import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.domain.InputDomain;
@@ -136,12 +135,6 @@ public class OptionsAction extends Action implements ISelectionListener,
     public static Text textAdrProxy, textPortProxy, textLoginProxy,
             textPassProxy;
 
-    // DataList paramètres
-    private Configuration.DataListEnum dataList;
-    // choix du format des parametres
-    private Button button_P011viaP091;
-    private Button button_P091;
-    private Button button_P011viaP021;
 
     
     // -- options necessitant un redemarrage
@@ -362,19 +355,6 @@ public class OptionsAction extends Action implements ISelectionListener,
         // Flags
         selectDefaultFlagsTab(config.getDefaultCode());
 
-        // DataList
-        switch (config.getDataListInSettings())
-        {
-            case P011_VIA_P091:
-                button_P011viaP091.setSelection(true);
-            break;
-            case P091:
-                button_P091.setSelection(true);
-            break;
-            case P011_VIA_P021:
-                button_P011viaP021.setSelection(true);
-            break;
-        }
 
         // convert type
         radMedatlas.setSelection(false);
@@ -921,30 +901,6 @@ public class OptionsAction extends Action implements ISelectionListener,
         createGroupDateODV(compo);
     }
 
-    /**
-     * This method initializes data list group
-     */
-    private void createGroupDataList(Composite parent)
-    {
-        group = new Group(parent, SWT.NONE);
-        group.setFont(Utils.font08);
-        group.setText(Messages.settings_parametersList);
-        GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(true)
-            .margins(4, 4).applyTo(group);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
-
-        button_P091 = new Button(group, SWT.RADIO);
-        button_P091.setText(Messages.settings_parameterListP091);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(button_P091);
-        
-        button_P011viaP091 = new Button(group, SWT.RADIO);
-        button_P011viaP091.setText(Messages.settings_parameterListP011viaP091);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(button_P011viaP091);
-        
-        button_P011viaP021 = new Button(group, SWT.RADIO);
-        button_P011viaP021.setText(Messages.settings_parameterListP011viaP021);
-        GridDataFactory.fillDefaults().grab(true, false).applyTo(button_P011viaP021);
-    }
     /**
      * This method initializes data list group
      */
@@ -1629,7 +1585,6 @@ public class OptionsAction extends Action implements ISelectionListener,
             createCompoHaut(sectionClient);
             createGroupEdmo(sectionClient);
             createCompoBas(sectionClient);
-            createGroupDataList(sectionClient);
             createGroupOutputFormat(sectionClient);
         }
         else if (title.equals(Messages.settings_web))
@@ -1944,26 +1899,6 @@ public class OptionsAction extends Action implements ISelectionListener,
         }
         configuration.setFlagTables(flagTables);
 
-        // DataList
-        if (button_P011viaP091.getSelection())
-        {
-            dataList = DataListEnum.P011_VIA_P091;
-        }
-        else if (button_P091.getSelection())
-        {
-            dataList = DataListEnum.P091;
-        }
-        else if(button_P011viaP021.getSelection())
-        {
-            dataList = DataListEnum.P011_VIA_P021;
-        }
-        
-        if (!dataList.equals(configuration.getDataListInSettings()))
-        {
-            Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().removeAllElts();
-        }
-
-        configuration.setDataListInSettings(dataList.toString());
 
         
         // output conversion format
