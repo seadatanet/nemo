@@ -18,10 +18,8 @@ import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.ComboType;
 import fr.ifremer.nemo.ui.edit.EditForm;
-import fr.ifremer.nemo.ui.edit.Etape;
 import fr.ifremer.nemo.ui.edit.NemoSection;
 import fr.ifremer.nemo.ui.edit.cruise.TableDataSurvey;
-import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.ui.edit.station.AutoLine.MetaInData;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
@@ -44,6 +42,12 @@ public class EditStationForm extends EditForm
 
     private  StyledText  textAreaStation;
 
+    
+    public EditStationForm()
+    {
+        super();
+        myValidator = new StationFormValidator();
+    }
 
     @Override
     public void createEditionForm(Composite parent)
@@ -51,7 +55,8 @@ public class EditStationForm extends EditForm
         try
         {
             super.createEditionForm(parent);
-
+           
+            
             formEdition.getBody().setLayout(new GridLayout());
             formEdition.setText(Messages.edit_station_title);
 
@@ -66,7 +71,8 @@ public class EditStationForm extends EditForm
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
-                    Etape.validationStation();
+//                  Etape.validationStation();
+                    validate();
                 }
             });
 

@@ -32,7 +32,7 @@ public abstract class EditForm
     public ArrayList<NemoSection> listeSections;
     
 
-    
+    public FormValidator myValidator;
     
     /**
      * Constructor
@@ -245,6 +245,9 @@ public abstract class EditForm
     {
         this.visible = visible;
     }
-
+    public void validate()
+    {
+        myValidator.validate();
+    }
     
 }

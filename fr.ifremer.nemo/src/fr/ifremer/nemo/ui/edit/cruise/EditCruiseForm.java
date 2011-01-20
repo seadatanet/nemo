@@ -27,7 +27,6 @@ import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.ComboType;
 import fr.ifremer.nemo.ui.edit.Couple;
 import fr.ifremer.nemo.ui.edit.EditForm;
-import fr.ifremer.nemo.ui.edit.Etape;
 import fr.ifremer.nemo.ui.edit.NemoSection;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.ui.view.ViewLog;
@@ -47,12 +46,16 @@ public class EditCruiseForm extends EditForm
     private Composite _parent;
     private StyledText textAreaCruise;
     
-    
+    public EditCruiseForm()
+    {
+        super();
+        myValidator = new CruiseFormValidator();
+    }
     @Override
     public void createEditionForm(Composite parent)
     {
         super.createEditionForm(parent);
-
+      
         _parent = parent;
 
         formEdition.getBody().setLayout(new GridLayout());
@@ -69,7 +72,8 @@ public class EditCruiseForm extends EditForm
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
-                    Etape.validationCruise();
+//                    Etape.validationCruise();
+                    validate();
                 }
             });
 

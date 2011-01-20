@@ -12,12 +12,10 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.util.Global.DataListEnum;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.EditForm;
-import fr.ifremer.nemo.ui.edit.Etape;
 import fr.ifremer.nemo.ui.edit.data.listeners.DataListRadioSelectionListener;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
@@ -32,15 +30,24 @@ public class EditDataForm extends EditForm
     private  Composite compositeData;
     
     
+    
     // choix du format des parametres
     private Button button_P011viaP091;
     private Button button_P091;
     private Button button_P011viaP021;
     
+    
+    public EditDataForm()
+    {
+        super();
+        myValidator = new DataFormValidator();
+    }
     @Override
     public void createEditionForm(Composite parent)
     {
         super.createEditionForm(parent);
+        
+        
         myTableData = new TableData();
         myTableData.go();
 
@@ -60,7 +67,8 @@ public class EditDataForm extends EditForm
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
-                    Etape.validationData();
+//                    Etape.validationData();
+                    validate();
                 }
             });
 
@@ -78,6 +86,7 @@ public class EditDataForm extends EditForm
     {
         
     }
+   
     @Override
     public void afficheEdition()
     {

@@ -22,7 +22,6 @@ import fr.ifremer.nemo.input.MediaModel;
 import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.EditForm;
-import fr.ifremer.nemo.ui.edit.Etape;
 import fr.ifremer.nemo.ui.edit.NemoSection;
 import fr.ifremer.nemo.ui.edit.file.listeners.FileTypeSelectionListener;
 import fr.ifremer.nemo.ui.edit.file.listeners.InputFileBrowseListener;
@@ -100,6 +99,7 @@ public class EditFileForm extends EditForm
     public EditFileForm()
     {
         super();
+        myValidator = new FileFormValidator();
 
        
     }
@@ -260,7 +260,8 @@ public class EditFileForm extends EditForm
                 ViewMain theViewMain = Nemo.getInstance().getViewMain();
                 
                 // validation de l'onglet FILE
-                Etape.validationFile();
+//                Etape.validationFile();
+                validate();
                 
                 // Les onglets sont décalés si on on est en collection => pas d'étape cruise
                 // FAE 3796
@@ -278,7 +279,8 @@ public class EditFileForm extends EditForm
                     theViewMain.selectTabByIndex(1);
                     Utils.validationEtape(1);
                     // Validation de l'onglet CRUISE
-                    Etape.validationCruise();
+//                    Etape.validationCruise();
+                    Nemo.getInstance().getViewMain().getEditCruiseForm().validate();
                 }
                 
                 if (theViewMain.getEtape() == 2){
@@ -286,7 +288,8 @@ public class EditFileForm extends EditForm
                     theViewMain.selectTabByIndex(2 + offset);
                     Utils.validationEtape(2);
                     // Validation de l'onglet STATION
-                    Etape.validationStation();
+//                    Etape.validationStation();
+                    Nemo.getInstance().getViewMain().getEditStationForm().validate();
                 }
                 
                 if (theViewMain.getEtape() == 3){
@@ -294,7 +297,8 @@ public class EditFileForm extends EditForm
                     theViewMain.selectTabByIndex(3 + offset);
                     Utils.validationEtape(3);
                     // Validation de l'onglet DATA
-                    Etape.validationData();
+//                    Etape.validationData();
+                    Nemo.getInstance().getViewMain().getEditDataForm().validate();
                 }
                 
                 if (theViewMain.getEtape() == 4){
@@ -314,7 +318,8 @@ public class EditFileForm extends EditForm
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
-                    Etape.validationFile();
+//                    Etape.validationFile();
+                    validate();
                 }
             });
 
