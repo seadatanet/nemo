@@ -1486,8 +1486,7 @@ public class Etape
                 // A moins que l'on ait les parametre DEPH, PSAL et TEMP ( FAE 3228 )
 
                 if (!checkPressureOk){
-                    if ((Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType() == E_TypeConversion.MEDATLAS)
-                            && !Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection() )
+                    if ((Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType() == E_TypeConversion.MEDATLAS))
                     {
 
                         checkPressureOk = data_checkDepthAndSalinityAndTemperature();
