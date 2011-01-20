@@ -1,4 +1,4 @@
-package fr.ifremer.nemo.input;
+package fr.ifremer.nemo.input.parameters;
 
 import java.util.regex.Pattern;
 
@@ -11,9 +11,11 @@ import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.FlagTable;
-import fr.ifremer.nemo.domain.AddedParameter;
 import fr.ifremer.nemo.domain.ParameterValue;
 import fr.ifremer.nemo.domain.Station;
+import fr.ifremer.nemo.input.AbstractModel;
+import fr.ifremer.nemo.input.LineFragment;
+import fr.ifremer.nemo.input.ModelDescription;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ui.actions.OptionsAction;

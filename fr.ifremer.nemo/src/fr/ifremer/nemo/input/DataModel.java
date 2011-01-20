@@ -10,6 +10,7 @@ import com.ago.xml.PathElementConsumer;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.util.Global.DataListEnum;
 
 

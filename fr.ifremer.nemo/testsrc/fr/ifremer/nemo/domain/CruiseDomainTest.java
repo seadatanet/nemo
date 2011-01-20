@@ -24,8 +24,9 @@ import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.input.DataModel;
 import fr.ifremer.nemo.input.DataType;
-import fr.ifremer.nemo.input.Parameter;
-import fr.ifremer.nemo.input.ParameterModel;
+import fr.ifremer.nemo.input.parameters.AddedParameter;
+import fr.ifremer.nemo.input.parameters.Parameter;
+import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global.E_Availability;
 

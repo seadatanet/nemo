@@ -21,7 +21,7 @@ import fr.ifremer.nemo.domain.DateTimeUtils;
 import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.StationDomain;
-import fr.ifremer.nemo.input.ParameterModel;
+import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Formatter;

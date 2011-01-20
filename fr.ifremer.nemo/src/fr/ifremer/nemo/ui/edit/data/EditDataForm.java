@@ -14,7 +14,7 @@ import org.eclipse.swt.widgets.Group;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.util.Global.DataListEnum;
-import fr.ifremer.nemo.input.ParameterModel;
+import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.EditForm;
 import fr.ifremer.nemo.ui.edit.Etape;

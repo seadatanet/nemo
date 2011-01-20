@@ -20,8 +20,8 @@ import org.junit.Test;
 
 import fr.ifremer.nemo.input.DataModel;
 import fr.ifremer.nemo.input.InputModel;
-import fr.ifremer.nemo.input.Parameter;
-import fr.ifremer.nemo.input.ParameterModel;
+import fr.ifremer.nemo.input.parameters.Parameter;
+import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.util.Conversion;
 
 /**

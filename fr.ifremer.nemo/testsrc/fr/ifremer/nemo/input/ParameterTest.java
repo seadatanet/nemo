@@ -16,6 +16,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import fr.ifremer.nemo.input.parameters.Parameter;
 import fr.ifremer.nemo.util.Conversion;
 
 /**

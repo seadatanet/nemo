@@ -5,7 +5,7 @@
  * Copyright		: Altran
  * ============================================================================
  */
-package fr.ifremer.nemo.domain;
+package fr.ifremer.nemo.input.parameters;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -14,9 +14,12 @@ import java.util.Locale;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.domain.DateTimeUtils;
+import fr.ifremer.nemo.domain.InputDomain;
+import fr.ifremer.nemo.domain.ParameterValue;
+import fr.ifremer.nemo.domain.Station;
+import fr.ifremer.nemo.domain.StationDomain;
 import fr.ifremer.nemo.input.DataModel;
-import fr.ifremer.nemo.input.Parameter;
-import fr.ifremer.nemo.input.ParameterModel;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.util.Conversion;
@@ -265,7 +268,7 @@ public class AddedParameter extends Parameter
                     ParameterValue valueTEMP = pModelTEMP.getLineValue();  
                     
                     //récupération de la valeur de la latitude
-                    double valueLAT = sDomain.getCurrentStation()._latitude;  
+                    double valueLAT = sDomain.getCurrentStation().getLatitude();  
                                        
                     double pres = CalcPres.calcPres(valueLAT, valuePSAL.getValue(), valueDEPTH.getValue(), valueTEMP.getValue());
                     stringValue = Formatter.getSingleton().formatDouble(formatString, pres);              

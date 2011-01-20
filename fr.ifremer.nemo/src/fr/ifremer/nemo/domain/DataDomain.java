@@ -16,14 +16,15 @@ import java.util.MissingResourceException;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.domain.AddedParameter.IdParameter;
 import fr.ifremer.nemo.input.DataModel;
 import fr.ifremer.nemo.input.Fragment;
 import fr.ifremer.nemo.input.InputModel;
 import fr.ifremer.nemo.input.LineFragment;
-import fr.ifremer.nemo.input.Parameter;
-import fr.ifremer.nemo.input.ParameterModel;
 import fr.ifremer.nemo.input.PropertyModel;
+import fr.ifremer.nemo.input.parameters.AddedParameter;
+import fr.ifremer.nemo.input.parameters.Parameter;
+import fr.ifremer.nemo.input.parameters.ParameterModel;
+import fr.ifremer.nemo.input.parameters.AddedParameter.IdParameter;
 import fr.ifremer.nemo.output.medatlas.Elts;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Conversion;

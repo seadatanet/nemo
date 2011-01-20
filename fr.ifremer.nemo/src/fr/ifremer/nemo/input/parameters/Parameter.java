@@ -1,4 +1,4 @@
-package fr.ifremer.nemo.input;
+package fr.ifremer.nemo.input.parameters;
 
 import org.xml.sax.Attributes;
 
@@ -7,8 +7,9 @@ import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.domain.AddedParameter;
-import fr.ifremer.nemo.domain.AddedParameter.IdParameter;
+import fr.ifremer.nemo.input.AbstractModel;
+import fr.ifremer.nemo.input.ModelDescription;
+import fr.ifremer.nemo.input.parameters.AddedParameter.IdParameter;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Formatter;
@@ -452,7 +453,7 @@ public class Parameter extends AbstractModel
     {
         _unit = x;
     }
-
+//TODO BGT utiliser plutot getLocalCode (plus parlant > pour titres colonnes et SDN mapping)
     public String getOutputCode(Conversion c, boolean lastParam)
     {
         String code = null;

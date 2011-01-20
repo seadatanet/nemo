@@ -16,7 +16,7 @@ import fr.ifremer.nemo.domain.DataDomain;
 import fr.ifremer.nemo.domain.DateTimeUtils;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.StationDomain;
-import fr.ifremer.nemo.input.ParameterModel;
+import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.util.Conversion;

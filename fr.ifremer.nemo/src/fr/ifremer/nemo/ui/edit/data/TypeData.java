@@ -1,8 +1,8 @@
 package fr.ifremer.nemo.ui.edit.data;
 
 import fr.ifremer.nemo.input.LineFragment;
-import fr.ifremer.nemo.input.Parameter;
-import fr.ifremer.nemo.input.ParameterModel;
+import fr.ifremer.nemo.input.parameters.Parameter;
+import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.ws.WSParameter;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
