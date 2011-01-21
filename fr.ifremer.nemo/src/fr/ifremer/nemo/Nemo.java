@@ -26,11 +26,14 @@ import com.ago.xml.XMLBootstrapParser;
 import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.input.InputModel;
+import fr.ifremer.nemo.input.parameters.Parameter;
+import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.ui.ApplicationWorkbenchWindowAdvisor;
 import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 
 /**
  * Class Nemo.java
@@ -99,9 +102,11 @@ public class Nemo
         
         FileInputStream stream = new FileInputStream(pathModel);
         parser.parse(stream, false);
+        boolean isBeforeP011=false;
         
         if (Global.EMPTY_STRING.equals(model.getVersion())){
-            // traduction des modèles antérieurs à la version 1.2.20
+            isBeforeP011=true;
+            // traduction des modèles antérieurs à la version 1.2.20 (P011 introduits en version 1.2.20)
             model = new InputModel();
             parser = new XMLBootstrapParser(model);
             
@@ -115,9 +120,40 @@ public class Nemo
             Transformer transformer = factory.newTransformer(xslSource);
             transformer.transform(xmlSource, result);
         }
+        completeDataList(model, isBeforeP011);
         domain.update(model);
     }
     
+    
+    private void completeDataList(InputModel model, boolean isBeforeP011){
+        DataListTypeEnum dataList = model.getDataModel().getDataListType();
+        
+        // balise dataList inconnue -> version <1.2.33 (avant les P021 si on exclue les versions non distribuées de 1.2.29 à 1.2.32)
+        if (dataList==DataListTypeEnum.UNKNOWN)
+        {
+            // si on est avant l'usage des P011 (introduits en 1.2.20), on est forcément en P091
+           if (isBeforeP011)
+           {
+               dataList=DataListTypeEnum.P091;
+           }
+           // si on est apres l'introduction des P011 mais qu'on a pas de valeur de dataList, c'est qu'on est dans les version intermédiaires
+           // donc les listes possibles sont P091 ou P011viaP091
+           // on détecte le type à partir de l'attribut isP011 du premier paramètre
+           else
+           {
+               if (  model.getDataModel().getParameterModels()[0].getParameter().isP011())
+               {
+                   dataList = DataListTypeEnum.P011_VIA_P091;
+               }else
+               {
+                   dataList=DataListTypeEnum.P091;
+               }
+           }
+        }
+        
+        model.getDataModel().setDataListType(dataList);
+        
+    }
     public void saveModel(OutputStream a_Stream){
         InputModel inputModel = new InputModel(domain.getMedia().getModel(),
                                                domain.getCruise().getModel(),

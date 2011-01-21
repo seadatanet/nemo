@@ -69,28 +69,8 @@ public class ParameterModel extends AbstractModel
     
     public ParameterModel(TypeData typeData)
     {
-        // split sur " - "
-        Pattern p = Pattern.compile(Global.SEP);
-        String mots[] = p.split(typeData.getCode());
-        String code = mots[0];
-        String nom = mots[1];
 
-        Parameter para = new Parameter();
-        // code, nom, unite
-        para.setCode(code);
-        para.setFullName(nom);
-        para.setUnit(typeData.getUnite());
-        // FAE 6542
-        para.setUnitCode(typeData.getUniteCode());
-
-        // specific P011
-        para.setCodeP011(typeData.getCodeP011());
-        para.setNameP011(typeData.getNomP011());
-        para.setP011(typeData.isP011());
-        
-        
-        para.setDefault(typeData.getSortie());
-        para.setFormat(typeData.getFormat());
+        Parameter para = new Parameter(typeData);
         this.setParameter(para);
 
         // conversion / entree
@@ -112,9 +92,6 @@ public class ParameterModel extends AbstractModel
             this.setFlag(flag);
         }
 
-        //if (code.trim().equals(Intern.paramPRES)){
-        //    indexPRES = i;
-        //}
     }
     
     /**

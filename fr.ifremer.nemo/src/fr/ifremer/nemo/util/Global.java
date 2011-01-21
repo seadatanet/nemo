@@ -102,5 +102,7 @@ public interface Global
     public enum E_TypeConversion{
         MEDATLAS, ODV_MULTISTATIONS, ODV_MONOSTATION, UNKNOWN;
     }
-    public enum DataListEnum {P011_VIA_P091, P091, P011_VIA_P021, UNKNOWN};
+    public enum DataListTypeEnum {P011_VIA_P091, P091, P011_VIA_P021, UNKNOWN};
+    
+    public enum E_MesureType{BSSURF, BSBED};
 }

@@ -10,11 +10,10 @@ import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.nemo.util.Global.DataListEnum;
+import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 
 /**
- * Class EtapeData.java
  * Description: TODO
  * @author sbregent 
  */
@@ -32,7 +31,9 @@ public class DataFormValidator extends FormValidator
         EditConversionForm editConversionForm = Nemo.getInstance().getViewMain().getEditConversionForm();
         EditDataForm editDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
 
-        Boolean valeurNonRemplie = false;
+        Boolean ok = true;
+      
+        Boolean exitValid = false;
         // retour e l'onglet message d'erreur
         ViewLog.tabFolderLog.setSelection(0);
 
@@ -41,40 +42,38 @@ public class DataFormValidator extends FormValidator
 
         // mise e jour avant toute chose
         editDataForm.getMyTableData().majTypeData();
-
-        // test de toutes les valeurs debut / fin des Data
-        Boolean ok = true;
-        try
-        {
-            ok = editDataForm.getMyTableData().majChampTest();
-        }
-        catch (Exception e)
-        {
-            ok = false;
-            e.printStackTrace();
-        }
-
-        if (!ok)
-        {
-            Utils.messageErreurAppend(Messages.Etape_131);
-        }
-
+        
+        
         int nbreParam = editDataForm.getMyTableData().getTypes().size();
-        int[] debuts, fins;
-        String[] debutsFlag, finsFlag;
-        int cptDebut = 0;
-        int cptFin = 0;
-
-        String fmOut = new String();
-        // Formatter formatter = new Formatter();
-
+        /**-----------------------------------------------------------------------
+         * data05 presence d'au moins 1 paramètre dans le tableau
+         */
         if (nbreParam == 0)
         {
             ok = false;
             Utils.messageErreurAppend(Messages.Etape_117);
+            exitValid=true;
         }
-        else
+        // -------------------------------------------------------------------------
+        
+        
+        /**-----------------------------------------------------------------------
+         * data10
+         */
+        ok = updateTestValues();
+        if (!ok)
         {
+            Utils.messageErreurAppend(Messages.Etape_131);
+        }
+        // -------------------------------------------------------------------------
+        
+       
+        if (!exitValid)
+        {
+            int[] debuts, fins;
+            String[] debutsFlag, finsFlag;
+            int cptDebut = 0;
+            int cptFin = 0;
 
             debuts = new int[nbreParam];
             fins = new int[nbreParam];
@@ -92,86 +91,38 @@ public class DataFormValidator extends FormValidator
                 debutsFlag[i] = typeCourant.getDebutFlag();
                 finsFlag[i] = typeCourant.getFinFlag();
 
+                /**-----------------------------------------------------------------------
+                 * data20 verif presence de l'unité pour chaque paramètre
+                 */
                 // FAE 6538
                 if (typeCourant.getUnite().equals(Global.EMPTY_STRING)){
                     ok = false;
                     Utils.messageErreurAppend(Messages.Etape_118);
                     continue;
                 }
-                
-                // test direct sur valeur entree
-                ok = ok && true;
+                //  ----------------------------------------------------------
 
-                // test direct sur valeur sortie (valeur par defaut)
-                try
-                {
-                    fmOut = Global.EMPTY_STRING;
-                    String formatString = typeCourant.getFormat();
+                /**-----------------------------------------------------------------------
+                 * data30 verif compatibilité valeur par defaut et valeur output
+                 */
 
-                    // compatiblité des tailles
-                    int index = 0;
-                    int indexSign = formatString.indexOf('+');
-                    if (indexSign == -1)
-                    {
-                        index = formatString.indexOf('%') + 1;
-                    }
-                    else
-                    {
-                        index = indexSign + 1;
-                    }
-                    int totLength =
-                        Integer.parseInt(formatString.substring(index,
-                            index + 1));
+                ok = checkDefaultAndOutputCompatibility(ok, typeCourant);
+                //  ----------------------------------------------------------
 
-                    // Float ou Decimal ?
-                    String type =
-                        formatString.substring(formatString.length() - 1);
-                    if (type.equals("f") || type.equals("F")) { //$NON-NLS-1$ //$NON-NLS-2$
-                        fmOut =
-                            String.format(java.util.Locale.US, formatString,
-                                Float.parseFloat(typeCourant.getSortie()));
-                    }
-                    else if (type.equals("d") || type.equals("D")) { //$NON-NLS-1$ //$NON-NLS-2$
-                        fmOut =
-                            String.format(java.util.Locale.US, formatString,
-                                Integer.parseInt(typeCourant.getSortie()));
-                    }
-
-                    if ((fmOut.equals(typeCourant.getSortie()))
-                            && (typeCourant.getSortie().length() == totLength))
-                    {
-                        // ok
-                        ok = ok && true;
-
-                    }
-                    else
-                    {
-                        // erreur
-                        ok = ok && false;
-                        Utils
-                        .messageErreurAppend(Messages.Etape_106
-                            + " " + typeCourant.getCodeToUse() + " : " + Messages.Etape_106b); //$NON-NLS-1$ //$NON-NLS-2$
-                    }
-                }
-                catch (Exception e)
-                {
-                    // erreur
-                    ok = ok && false;
-                    Utils
-                    .messageErreurAppend(Messages.Etape_106
-                        + " " + typeCourant.getCodeToUse() + " : " + Messages.Etape_106b); //$NON-NLS-1$ //$NON-NLS-2$
-                    System.out.print(e.getMessage());
-                }
-
-                // check des valeurs debut<fin
+                /**-----------------------------------------------------------------------
+                 * data40 check des valeurs debut<fin
+                 */
                 if (typeCourant.getDebut() > typeCourant.getFin())
                 {
                     Utils.messageErreurAppend(Messages.Etape_98 + Global.SPACE
                         + typeCourant.getCodeToUse());
                     ok = false;
                 }
-
-                // check des valeurs debut<fin flag
+                //  ----------------------------------------------------------
+                
+                /**-----------------------------------------------------------------------
+                 * data45 check des valeurs debut<fin flag
+                 */
                 if (!typeCourant.getDebutFlag().equals(Global.EMPTY_STRING)
                         && !typeCourant.getFinFlag()
                         .equals(Global.EMPTY_STRING))
@@ -185,6 +136,12 @@ public class DataFormValidator extends FormValidator
                     }
                 }
             }
+            
+            /**-----------------------------------------------------------------------
+             * data50
+             * verif que les valeurs de « debut » et « fin » sont différentes des valeurs affichées par défaut
+             **/
+            Boolean valeurNonRemplie = false;
             // parcours des listes et test des valeurs
             for (int i = 0; i < nbreParam; i++)
             {
@@ -204,29 +161,34 @@ public class DataFormValidator extends FormValidator
                     }
                 }
             }
-
             if (valeurNonRemplie)
             {
                 Utils.messageErreurAppend(Messages.Etape_88);
                 ok = false;
             }
-
+            //  ----------------------------------------------------------
+            
+            
+            /**-----------------------------------------------------------------------
+             * data60
+             * verif que les valeurs de « debut » et « fin » sont différentes des valeurs affichées par défaut
+             **/
             // TEST pour savoir si PRES est bien en premier mais pas pour
             // profile ou trajectoire
             TypeData premierType = editDataForm.getMyTableData().getTypes().get(0);
 
             // split sur " - "
-            Pattern p = Pattern.compile(Global.SEP);
-            String[] mots = p.split(premierType.getCode());
-            String firstParameterCode = mots[0];
-
+//            Pattern p = Pattern.compile(Global.SEP);
+//            String[] mots = p.split(premierType.getCode());
+//            String firstParameterCode = mots[0];
+            String firstParameterCode = premierType.getEntryKey();
             editConversionForm.setWarningData(Global.EMPTY_STRING);
 
             if (Nemo.getInstance().getViewMain().getMyRulesManager().isProfile())
             {
                 boolean checkPressureOk;
 
-                checkPressureOk = data_checkPressureIsInFirstPosition(firstParameterCode);
+                checkPressureOk = checkPressureIsInFirstPosition(firstParameterCode);
 
                 // Si PRES n'est pas premier => Medatlas impossible
                 // A moins que l'on ait les parametre DEPH, PSAL et TEMP ( FAE 3228 )
@@ -235,7 +197,7 @@ public class DataFormValidator extends FormValidator
                     if ((Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType() == E_TypeConversion.MEDATLAS))
                     {
 
-                        checkPressureOk = data_checkDepthAndSalinityAndTemperature();
+                        checkPressureOk = checkDepthAndSalinityAndTemperature();
                         if (!checkPressureOk){
 
                             editConversionForm
@@ -280,7 +242,7 @@ public class DataFormValidator extends FormValidator
      * 
      * @return
      */
-    private static boolean data_checkDepthAndSalinityAndTemperature()
+    private static boolean checkDepthAndSalinityAndTemperature()
     {
 
         EditDataForm editDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
@@ -290,13 +252,13 @@ public class DataFormValidator extends FormValidator
 
         for (TypeData donnee : editDataForm.getMyTableData().getTypes())
         {
-            if (donnee.getCode().split("-")[0].trim().equals(
+            if (donnee.getEntryKey().equals(
                 Intern.paramDEPH))
                 isDEPH = true;
-            else if (donnee.getCode().split("-")[0].trim().equals(
+            else if (donnee.getEntryKey().equals(
                 Intern.paramPSAL))
                 isPSAL = true;
-            else if (donnee.getCode().split("-")[0].trim().equals(
+            else if (donnee.getEntryKey().equals(
                 Intern.paramTEMP))
                 isTEMP = true;
         }
@@ -311,12 +273,12 @@ public class DataFormValidator extends FormValidator
      * @param firstParameterCode
      * @return
      */
-    private static boolean data_checkPressureIsInFirstPosition(String firstParameterCode)
+    private static boolean checkPressureIsInFirstPosition(String firstParameterCode)
     {
         boolean checkOk = true;
-        DataListEnum dataList = Nemo.getInstance().getDomain().getData().getModel().getDataList();
+        DataListTypeEnum dataList = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
         
-        if (dataList == DataListEnum.P011_VIA_P091 || dataList == DataListEnum.P091)
+        if (dataList == DataListTypeEnum.P011_VIA_P091 || dataList == DataListTypeEnum.P091)
         {
             //FAE 5819 : ajout du code DPSF(P091) ou MINCDIST(P011) comme parametre possible
             if (!(firstParameterCode.equals(Intern.paramPRES) 
@@ -329,7 +291,7 @@ public class DataFormValidator extends FormValidator
                 checkOk=false;
             }
         }
-        else if (dataList == DataListEnum.P011_VIA_P021)
+        else if (dataList == DataListTypeEnum.P011_VIA_P021)
         {
             //FAE 5819 : ajout du code DPSF(P091) ou MINCDIST(P011) comme parametre possible
             if (!(firstParameterCode.equals(Intern.paramPREX) 
@@ -344,4 +306,96 @@ public class DataFormValidator extends FormValidator
         }
         return checkOk;
     }
+    
+    
+    private boolean updateTestValues()
+    {
+        boolean res;
+        EditDataForm editDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
+        // test de toutes les valeurs debut / fin des Data
+        try
+        {
+            res = editDataForm.getMyTableData().majChampTest();
+        }
+        catch (Exception e)
+        {
+            res = false;
+            e.printStackTrace();
+        }
+        return res;
+    }
+    
+    
+   private boolean checkDefaultAndOutputCompatibility(boolean ok, TypeData typeCourant )
+   {
+       boolean okRes = ok;
+       String fmOut = new String();
+
+       // test direct sur valeur entree
+       okRes = okRes && true;
+
+       // test direct sur valeur sortie (valeur par defaut)
+       try
+       {
+           fmOut = Global.EMPTY_STRING;
+           String formatString = typeCourant.getFormat();
+
+           // compatiblité des tailles
+           int index = 0;
+           int indexSign = formatString.indexOf('+');
+           if (indexSign == -1)
+           {
+               index = formatString.indexOf('%') + 1;
+           }
+           else
+           {
+               index = indexSign + 1;
+           }
+           int totLength =
+               Integer.parseInt(formatString.substring(index,
+                   index + 1));
+
+           // Float ou Decimal ?
+           String type =
+               formatString.substring(formatString.length() - 1);
+           if (type.equals("f") || type.equals("F")) { //$NON-NLS-1$ //$NON-NLS-2$
+               fmOut =
+                   String.format(java.util.Locale.US, formatString,
+                       Float.parseFloat(typeCourant.getSortie()));
+           }
+           else if (type.equals("d") || type.equals("D")) { //$NON-NLS-1$ //$NON-NLS-2$
+               fmOut =
+                   String.format(java.util.Locale.US, formatString,
+                       Integer.parseInt(typeCourant.getSortie()));
+           }
+
+           if ((fmOut.equals(typeCourant.getSortie()))
+                   && (typeCourant.getSortie().length() == totLength))
+           {
+               // ok
+               okRes = okRes && true;
+
+           }
+           else
+           {
+               // erreur
+               okRes = okRes && false;
+               Utils
+               .messageErreurAppend(Messages.Etape_106
+                   + " " + typeCourant.getCodeToUse() + " : " + Messages.Etape_106b); //$NON-NLS-1$ //$NON-NLS-2$
+           }
+
+       }
+       catch (Exception e)
+       {
+           // erreur
+           okRes = okRes && false;
+           Utils
+           .messageErreurAppend(Messages.Etape_106
+               + " " + typeCourant.getCodeToUse() + " : " + Messages.Etape_106b); //$NON-NLS-1$ //$NON-NLS-2$
+           System.out.print(e.getMessage());
+       }
+
+       return okRes;
+   }
 }

@@ -22,7 +22,7 @@ import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.util.Global.DataListEnum;
+import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.domain.MediaDomain;
 import fr.ifremer.nemo.ui.FilteredTableFactory;
 import fr.ifremer.nemo.ui.Utils;
@@ -79,7 +79,7 @@ public class TableData
      * initialise automatiquement les typesWS
      *
      */
-    
+    private GroupVerticalParameters myGroupVerticalParameters;
    
     public TableData()
     {
@@ -92,6 +92,7 @@ public class TableData
         columnsWritable.add(6);//label_format
         columnsWritable.add(7);//table_label_valueIn
         columnsWritable.add(8);//table_label_valueOut);
+        myGroupVerticalParameters = Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters();
     }
     /**
      * initialise les noms des colonnes
@@ -129,6 +130,7 @@ public class TableData
     {
         razTableData();
         creationTable();
+
     }
     public void go()
     {
@@ -161,24 +163,11 @@ public class TableData
     public void addType(TypeData typeData)
     {
         types.add(typeData);
+        System.out.println("add "+typeData.getEntryKey());
+        myGroupVerticalParameters.addToAllCombo(typeData);
     }
 
 
-    /**
-     * recharge la liste des paramètres filtrée depuis la liste des typesWS
-     * (= annule le filtre)
-     *
-     */
-//  public void reloadListeFiltree()
-//  {
-//  listeFiltree = new ArrayList<TypeData>();
-//  // liste filtree initialisee e typesWS au depart
-//  int taille = typesWS.size();
-//  for (int i = 0; i < taille; i++)
-//  {
-//  listeFiltree.add(typesWS.get(i));
-//  }
-//  }
 
     /**
      * creation de la table contenant les paramètres dans l'onglet data
@@ -290,7 +279,7 @@ public class TableData
     {
         typesWS = null;
         typesWS = new ArrayList<TypeData>();
-        if (Nemo.getInstance().getViewMain().getMyRulesManager().getMyDataList()!=DataListEnum.P011_VIA_P021)
+        if (Nemo.getInstance().getViewMain().getMyRulesManager().getMyDataListType()!=DataListTypeEnum.P011_VIA_P021)
 
         {
             iniTypesWSP091();
@@ -366,12 +355,12 @@ public class TableData
         //TODO BGT 2.6.3.2 deplacer ce code dans appel qd choix dataType coché
         if (Nemo.getInstance().getViewMain().getMyRulesManager().isProfile()
 //                && config.getDataListToUse().equals(DataListEnum.P091))
-                && Nemo.getInstance().getDomain().getData().getModel().getDataList()==DataListEnum.P091)
+                && Nemo.getInstance().getDomain().getData().getModel().getDataListType()==DataListTypeEnum.P091)
         {
             for (TypeData type : typesWS)
             {
                 // ajout systematique de PRES
-                if (type.getCode().startsWith(Intern.paramPRES)
+                if (type.getEntryKey().equals(Intern.paramPRES)
                         && Nemo.getInstance().getViewMain().getMyRulesManager().isProfile())
                 {
                     // on rajoute PRES
@@ -549,7 +538,7 @@ public class TableData
         itemList.addListener(SWT.Selection, new Listener() {
             public void handleEvent(Event e)
             {
-                if (Nemo.getInstance().getViewMain().getMyRulesManager().getMyDataList() != DataListEnum.UNKNOWN){
+                if (Nemo.getInstance().getViewMain().getMyRulesManager().getMyDataListType() != DataListTypeEnum.UNKNOWN){
                 checkTypesWS();
                 openMyParameterFilteredTable();
                 }else{
@@ -559,7 +548,7 @@ public class TableData
             }
         });
         // ========= Liste des unités P061
-        if (Nemo.getInstance().getViewMain().getMyRulesManager().getMyDataList() == DataListEnum.P011_VIA_P021)
+        if (Nemo.getInstance().getViewMain().getMyRulesManager().getMyDataListType() == DataListTypeEnum.P011_VIA_P021)
         {
             MenuItem itemAddP061Unit = new MenuItem(menu, SWT.NONE);
             itemAddP061Unit.setText(Messages.menu_label_selectP061Unit);
@@ -691,8 +680,8 @@ public class TableData
             if (types.get(i).isP011())
             {
                 item.setText(new String[] {
-                        types.get(i).getCodeP011() + Global.SEP
-                        + types.get(i).getNomP011(),
+                        types.get(i).getEntryKeyP011() + Global.SEP
+                        + types.get(i).getEntryTermP011(),
                         types.get(i).getUnite(), types.get(i).getConversion(),
                         types.get(i).getTest(),
                         String.valueOf(types.get(i).getDebut()),
@@ -708,7 +697,7 @@ public class TableData
             else
             {
 
-                item.setText(new String[] {types.get(i).getCode(),
+                item.setText(new String[] {types.get(i).getFormattedCodeAndName(),
                         types.get(i).getUnite(), types.get(i).getConversion(),
                         types.get(i).getTest(),
                         String.valueOf(types.get(i).getDebut()),
@@ -728,6 +717,7 @@ public class TableData
     {
         // effacement de tous les items de la table
         myTable.dispose();
+      
     }
 
 
@@ -841,8 +831,10 @@ public class TableData
 
     public void supprAllEltTableData()
     {
+        System.out.println("suppr tout");
 //        majTypeData();
         types.clear();
+        myGroupVerticalParameters.removeAllToAllCombos();
         // refresh de la table
         razAndRecreateTable();
     }
@@ -855,24 +847,18 @@ public class TableData
 
         // on supprime l'element e l'indice donne
         // split sur " - "
-        Pattern p = Pattern.compile(Global.SEP);
-        String mots[] = p.split(types.get(indice).getCode());
-        String code = mots[0];
-
-        // On peut maintenant retirer PRES (FAE 3228)
-
-        // pas forcement de - dans le nom du type
-        // if (!code.equals(Intern.paramPRES)
-        // || ViewMain.radSerieTempo.getSelection()
-        // || ViewMain.radTrajectoire.getSelection())
-        // {
+        TypeData typeData = types.get(indice);
+//        Pattern p = Pattern.compile(Global.SEP);
+//        String mots[] = p.split(typeData.getCode());
+//        String code = mots[0];
+//
+//        
+        System.out.println("suppr "+typeData.getEntryKey());
 
         types.remove(indice);
-        // }
-        // else
-        // {
-        // Utils.messageErreurAppend(Messages.error_data_removePRES);
-        // }
+        
+        
+        myGroupVerticalParameters.removeToAllCombo(typeData);
 
         // refresh de la table
         razAndRecreateTable();
@@ -1079,7 +1065,7 @@ public class TableData
         {
             if (!types.get(i).isP011())
             {
-                types.get(i).setCode(myTable.getItem(i).getText(0));
+                types.get(i).setEntryKeyAndEntryTerm(myTable.getItem(i).getText(0));
             }
             types.get(i).setUnite(myTable.getItem(i).getText(1));
             types.get(i).setConversion(myTable.getItem(i).getText(2));

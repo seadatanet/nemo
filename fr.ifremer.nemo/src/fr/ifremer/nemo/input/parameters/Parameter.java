@@ -11,6 +11,7 @@ import fr.ifremer.nemo.input.AbstractModel;
 import fr.ifremer.nemo.input.ModelDescription;
 import fr.ifremer.nemo.input.parameters.AddedParameter.IdParameter;
 import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.ui.edit.data.TypeData;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
@@ -71,6 +72,27 @@ public class Parameter extends AbstractModel
     {
         _tagName = ModelDescription.node_parameter;
         initValues();
+    }
+    public Parameter(TypeData typeData)
+    {
+        _tagName = ModelDescription.node_parameter;
+        initValues();
+        
+        // code, nom, unite
+        setCode(typeData.getEntryKey());
+        setFullName(typeData.getEntryTerm());
+        setUnit(typeData.getUnite());
+        // FAE 6542
+        setUnitCode(typeData.getUniteCode());
+
+        // specific P011
+        setCodeP011(typeData.getEntryKeyP011());
+        setNameP011(typeData.getEntryTermP011());
+        setP011(typeData.isP011());
+        
+        
+        setDefault(typeData.getSortie());
+        setFormat(typeData.getFormat());
     }
 
     /**

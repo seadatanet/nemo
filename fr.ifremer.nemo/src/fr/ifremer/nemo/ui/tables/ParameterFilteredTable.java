@@ -19,7 +19,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.util.Global.DataListEnum;
+import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.data.TableData;
 import fr.ifremer.nemo.ui.edit.data.TypeData;
@@ -94,7 +94,7 @@ public class ParameterFilteredTable extends AbstractFilteredTable
         for (int i = 0; i < listeFiltree.size(); i++)
         {
             TableItem item = new TableItem(myFiltreTable, SWT.NONE);
-            item.setText(new String[] {listeFiltree.get(i).getCode(),
+            item.setText(new String[] {listeFiltree.get(i).getFormattedCodeAndName(),
                     listeFiltree.get(i).getUnite()});
         }
     }
@@ -133,7 +133,7 @@ public class ParameterFilteredTable extends AbstractFilteredTable
         {
             regexp = "^.*" + chaine + ".*$"; //$NON-NLS-1$ //$NON-NLS-2$
             Pattern p = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE);
-            Matcher m = p.matcher(origine.get(i).getCode());
+            Matcher m = p.matcher(origine.get(i).getFormattedCodeAndName());
             if (m.matches())
             {
                 // ajout dans la liste filtree
@@ -153,16 +153,16 @@ public class ParameterFilteredTable extends AbstractFilteredTable
     protected String getDialogTitle()
     {
         
-        DataListEnum listToUse =Nemo.getInstance().getDomain().getData().getModel().getDataList();
+        DataListTypeEnum listToUse =Nemo.getInstance().getDomain().getData().getModel().getDataListType();
         String title = Messages.table_parameters;
         title += Global.SPACE;
 //        title += listToUse.name();
         title += Global.SPACE;
         
-        if (listToUse==DataListEnum.P011_VIA_P021 )
+        if (listToUse==DataListTypeEnum.P011_VIA_P021 )
         {
             title += Messages.edit_data_P021;
-        }else if (listToUse==DataListEnum.P011_VIA_P091 || listToUse==DataListEnum.P091)
+        }else if (listToUse==DataListTypeEnum.P011_VIA_P091 || listToUse==DataListTypeEnum.P091)
         {
             title += Messages.edit_data_P091;
         }
@@ -183,8 +183,8 @@ public class ParameterFilteredTable extends AbstractFilteredTable
       int index = myFiltreTable.getSelectionIndex();
       typeData = listeFiltree.get(index);
       
-      DataListEnum typeToUse =Nemo.getInstance().getDomain().getData().getModel().getDataList();
-      if (typeToUse==DataListEnum.P011_VIA_P021 || typeToUse==DataListEnum.P011_VIA_P091)
+      DataListTypeEnum typeToUse =Nemo.getInstance().getDomain().getData().getModel().getDataListType();
+      if (typeToUse==DataListTypeEnum.P011_VIA_P021 || typeToUse==DataListTypeEnum.P011_VIA_P091)
       {
           SubParameterFilteredTable subTable = new SubParameterFilteredTable(typeData, typeToUse);
           subTable.open(this.shell);
@@ -227,6 +227,7 @@ public class ParameterFilteredTable extends AbstractFilteredTable
             if (found == false)
             {
                 myTableDataRef.addType(new TypeData(typeData));
+                
                 // Suppression message erreur FAE 3752
                 Utils.messageErreur(""); //$NON-NLS-1$
             }

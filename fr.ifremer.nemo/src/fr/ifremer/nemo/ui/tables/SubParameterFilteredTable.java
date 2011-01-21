@@ -21,7 +21,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
 import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.util.Global.DataListEnum;
+import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.ui.edit.data.TypeData;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
@@ -51,10 +51,10 @@ public class SubParameterFilteredTable extends AbstractFilteredTable
     /**
      * type de parametres utilisé (P091, P011 via P091, P011 via P021...)
      */
-    private DataListEnum _typeToUse;
+    private DataListTypeEnum _typeToUse;
     
 
-    public SubParameterFilteredTable(TypeData typeParameter, DataListEnum typeToUse)
+    public SubParameterFilteredTable(TypeData typeParameter, DataListTypeEnum typeToUse)
     {
         _typeParameter = typeParameter;
         _datas = new ArrayList<TypeData>();
@@ -68,11 +68,11 @@ public class SubParameterFilteredTable extends AbstractFilteredTable
     @Override
     protected void createDataList()
     {
-        if (_typeToUse == DataListEnum.P011_VIA_P091)
+        if (_typeToUse == DataListTypeEnum.P011_VIA_P091)
         {
            createDataList_P011_via_P091();
         }
-        else if(_typeToUse == DataListEnum.P011_VIA_P021)
+        else if(_typeToUse == DataListTypeEnum.P011_VIA_P021)
         {
             createDataList_P011_via_P021();
         }
@@ -82,7 +82,7 @@ public class SubParameterFilteredTable extends AbstractFilteredTable
 
             public int compare(TypeData arg0, TypeData arg1)
             {
-                return arg0.getCodeP011().compareTo(arg1.getCodeP011());
+                return arg0.getEntryKeyP011().compareTo(arg1.getEntryKeyP011());
             }
 
         });
@@ -99,22 +99,22 @@ public class SubParameterFilteredTable extends AbstractFilteredTable
     private void createDataList_P011_via_P021()
     {
         List<CodeTableRecordType> listeP021_P011 =
-            NemoLists.getVocabMatchs(Intern.list_BODCpdv, Intern.list_P011, _typeParameter.getAbbr());
+            NemoLists.getVocabMatchs(Intern.list_BODCpdv, Intern.list_P011, _typeParameter.getEntryTermAbbr());
 
-        for (CodeTableRecordType code : listeP021_P011)
+        for (CodeTableRecordType record : listeP021_P011)
         {
             TypeData newElement = new TypeData(_typeParameter);
 
-            String entryKey = code.getEntryKey();
+            String entryKey = record.getEntryKey();
             String[] entryKeySplit = entryKey.split("/"); //$NON-NLS-1$
 
             newElement.setIsP011(true);
 
-            newElement.setCodeP011(entryKeySplit[entryKeySplit.length - 1]);
+            newElement.setEntryKeyP011(entryKeySplit[entryKeySplit.length - 1]);
 
-            newElement.setAbbr(code.getEntryTermAbbr());
+            newElement.setEntryTermAbbr(record.getEntryTermAbbr());
 
-            newElement.setNomP011(code.getEntryTerm());
+            newElement.setEntryTermP011(record.getEntryTerm());
 
             _datas.add(newElement);
 
@@ -128,9 +128,11 @@ public class SubParameterFilteredTable extends AbstractFilteredTable
     {
         List<CodeTableRecordType> listeCompleteP091_P021_P011 = new ArrayList<CodeTableRecordType>();
         //list_BODCpdv = P021
+//        List<CodeTableRecordType> listeP091_P021 =
+//            NemoLists.getVocabMatchs(Intern.list_P091, Intern.list_BODCpdv, _typeParameter.getCode().split( 
+//                Global.SEP)[0]);
         List<CodeTableRecordType> listeP091_P021 =
-            NemoLists.getVocabMatchs(Intern.list_P091, Intern.list_BODCpdv, _typeParameter.getCode().split( 
-                Global.SEP)[0]);
+            NemoLists.getVocabMatchs(Intern.list_P091, Intern.list_BODCpdv, _typeParameter.getEntryKey());
 
         for (CodeTableRecordType liste : listeP091_P021)
         {
@@ -147,11 +149,11 @@ public class SubParameterFilteredTable extends AbstractFilteredTable
 
             newElement.setIsP011(true);
 
-            newElement.setCodeP011(entryKeySplit[entryKeySplit.length - 1]);
+            newElement.setEntryKeyP011(entryKeySplit[entryKeySplit.length - 1]);
 
-            newElement.setAbbr(code.getEntryTermAbbr());
+            newElement.setEntryTermAbbr(code.getEntryTermAbbr());
 
-            newElement.setNomP011(code.getEntryTerm());
+            newElement.setEntryTermP011(code.getEntryTerm());
 
             _datas.add(newElement);
 
@@ -202,9 +204,9 @@ public class SubParameterFilteredTable extends AbstractFilteredTable
             TableItem item = new TableItem(_table, SWT.NONE);
             TypeData currentTypeData = _datasFiltered.get(i);
             item.setText(new String[] {
-                    currentTypeData.getCodeP011() + Global.SEP
-                            + currentTypeData.getNomP011(),
-                    currentTypeData.getAbbr()});
+                    currentTypeData.getEntryKeyP011() + Global.SEP
+                            + currentTypeData.getEntryTermP011(),
+                    currentTypeData.getEntryTermAbbr()});
         }
     }
 
@@ -228,9 +230,9 @@ public class SubParameterFilteredTable extends AbstractFilteredTable
 
             TypeData currentTypeData = _datas.get(i);
 
-            Matcher m = p.matcher(currentTypeData.getCodeP011());
-            Matcher m2 = p.matcher(currentTypeData.getNomP011());
-            Matcher m3 = p.matcher(currentTypeData.getAbbr());
+            Matcher m = p.matcher(currentTypeData.getEntryKeyP011());
+            Matcher m2 = p.matcher(currentTypeData.getEntryTermP011());
+            Matcher m3 = p.matcher(currentTypeData.getEntryTermAbbr());
 
             if (m.matches() || m2.matches() || m3.matches())
             {
@@ -249,7 +251,12 @@ public class SubParameterFilteredTable extends AbstractFilteredTable
     @Override
     protected String getDialogTitle()
     {
-        return _typeParameter.getCode().split(Global.MOINS)[0].trim() + Global.SEP 
+//        return _typeParameter.getCode().split(Global.MOINS)[0].trim() + Global.SEP 
+//        + Messages.table_subparameters
+//        + Global.SEP
+//        + Messages.edit_data_P011;
+        
+        return _typeParameter.getEntryKey()
         + Messages.table_subparameters
         + Global.SEP
         + Messages.edit_data_P011;

@@ -121,7 +121,7 @@ public class Station implements Comparable
         _globalParamQc = new HashMap<String, String>();
         _missingValueParams = new HashMap<String, Boolean>();
         DataDomain dataDomain = Nemo.getInstance().getDomain().getData();
-        for (ParameterModel paramModel : dataDomain.getMedParameterModels()){
+        for (ParameterModel paramModel : dataDomain.getMyParameterManager().getMedParameterModels()){
             _globalParamQc.put(paramModel.getParameter().getCode(), ((AddedParameter)paramModel.getParameter()).getIdParam().getFlag(this, null));
             _missingValueParams.put(paramModel.getParameter().getCode(), true);
         }
@@ -158,7 +158,7 @@ public class Station implements Comparable
 
         DataDomain dataDomain = Nemo.getInstance().getDomain().getData();
         String globalQc = null;
-        for (ParameterModel paramModel : dataDomain.getMedParameterModels()){
+        for (ParameterModel paramModel : dataDomain.getMyParameterManager().getMedParameterModels()){
             globalQc = _globalParamQc.get(paramModel.getParameter().getCode());
             if (globalQc.equals(Global.WORSE_FLAG)) 
                 globalQc = Global.ZERO;

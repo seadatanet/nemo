@@ -8,13 +8,15 @@
 package fr.ifremer.nemo.ui;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.util.Global.DataListEnum;
+import fr.ifremer.nemo.util.Global.DataListTypeEnum;
+import fr.ifremer.nemo.ui.edit.data.GroupVerticalParameters;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_InputType;
+import fr.ifremer.nemo.util.Global.E_MesureType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 
@@ -38,7 +40,9 @@ public class RulesManager
     private E_ProcessType myProcessType;
     private E_TypeConversion myConversionType;
     private E_InputType myFileType;
-    private DataListEnum myDataList;
+    private DataListTypeEnum myDataListType;
+    private E_MesureType myMesureType;
+    
     /**
      * description des autorisations d'après les règles
      */
@@ -47,6 +51,10 @@ public class RulesManager
     private boolean odvMonostationEnabled;
     private boolean odvMultistationEnabled;
     private boolean dataList_P011viaP021_Enabled=false;
+    
+    private boolean p_depthBSSurf_enabled;
+    private boolean p_depthBSBed_enabled;
+    private boolean p_pressure_enabled;
     
     /**
      * valeurs par défaut (à l'ouverture)
@@ -61,7 +69,7 @@ public class RulesManager
     public static E_ProcessType DEFAULT_PROCESSTYPE = E_ProcessType.CRUISE_FILE;
     public static E_TypeConversion DEFAULT_CONVERSIONTYPE = E_TypeConversion.UNKNOWN;
     public static E_InputType DEFAULT_FILETYPE =E_InputType.PROFILE;
-    public static DataListEnum DEFAULT_DATALIST=DataListEnum.UNKNOWN;
+    public static DataListTypeEnum DEFAULT_DATALIST=DataListTypeEnum.UNKNOWN;
    
     private String messageLog=Global.EMPTY_STRING;
     
@@ -89,7 +97,7 @@ public class RulesManager
         myConversionType = getDefaultConversionTypeWithRules();
        // FAE 6739
         cruiseEnabled = !isConversionToODV();
-        myDataList = DEFAULT_DATALIST;
+        myDataListType = DEFAULT_DATALIST;
         dataList_P011viaP021_Enabled = isConversionToODV();
     }
     
@@ -283,24 +291,81 @@ public class RulesManager
     * RECEPTION MAJ DATALIST
     */
    
-   public void updateFromIHM(DataListEnum dataList)
+   public void updateFromIHM(DataListTypeEnum dataListType)
    {
-       System.out.println(myDataList + " >>> "+dataList);
-       if (dataList != myDataList){   
-           myDataList = dataList;
-           Nemo.getInstance().getDomain().getData().getModel().setDataList(dataList);
+       System.out.println(myDataListType + " >>> "+dataListType);
+       if (dataListType != myDataListType){   
+           myDataListType = dataListType;
+           Nemo.getInstance().getDomain().getData().getModel().setDataListType(dataListType);
            Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().reinitTable();
        }
    }
-   public void updateFromModel(DataListEnum dataList)
+   public void updateFromModel(DataListTypeEnum dataListType)
    {
-       if (dataList != myDataList){   
-           myDataList = dataList;
+       if (dataListType != myDataListType){   
+           myDataListType = dataListType;
            Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV());
-           Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(dataList);
+           Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(dataListType);
            ViewLog.styledTextLogErreurs.setText(messageLog);
-           
        }
+   }
+   
+   
+   /**
+    * RECEPTION MAJ MesureType
+    */
+   
+   public void updateFromIHM(E_MesureType mesureType)
+   {
+           myMesureType = mesureType;
+           rule_mesureType();
+           GroupVerticalParameters verticGroup = Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters();
+           verticGroup.enable_pDepthBSBed(isP_depthBSBed_enabled());
+           verticGroup.enable_pDepthBSSurf(isP_depthBSSurf_enabled());
+           verticGroup.enable_pPressure(isP_pressure_enabled());
+   }
+   public void updateFromModel(E_MesureType mesureType)
+   {
+           myMesureType = mesureType;
+           rule_mesureType();
+           GroupVerticalParameters verticGroup = Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters();
+           verticGroup.enable_pDepthBSBed(isP_depthBSBed_enabled());
+           verticGroup.enable_pDepthBSSurf(isP_depthBSBed_enabled());
+           verticGroup.enable_pPressure(isP_depthBSBed_enabled());
+   }
+   
+   /**
+    * gère l'activation des combo pour les paramètres de reference verticale
+    * (griséees ou non)
+    */
+   private void rule_mesureType()
+   {
+       setP_depthBSBed_enabled(false);
+       setP_depthBSSurf_enabled(false);
+       setP_pressure_enabled(false);
+
+       boolean p_depthBSBed = 
+           isConversionToODV() 
+           && myMesureType==E_MesureType.BSBED 
+           && isProfile();
+       
+       boolean p_depthBSSurf = 
+           (isProfile() 
+                   && myMesureType==E_MesureType.BSSURF
+           )
+           ||
+           (isTimeSeries() 
+                   && isConversionToODV()
+           );
+       
+       
+       boolean p_pressure=
+           isProfile() 
+           && myMesureType==E_MesureType.BSSURF ;
+
+       setP_depthBSBed_enabled(p_depthBSBed);
+       setP_depthBSSurf_enabled(p_depthBSSurf);
+           setP_pressure_enabled(p_pressure);
    }
    /******************************************
     * REGLES
@@ -452,9 +517,33 @@ public class RulesManager
     {
         return dataList_P011viaP021_Enabled;
     }
-    public DataListEnum getMyDataList()
+    public DataListTypeEnum getMyDataListType()
     {
-        return myDataList;
+        return myDataListType;
+    }
+    public boolean isP_depthBSBed_enabled()
+    {
+        return p_depthBSBed_enabled;
+    }
+    public void setP_depthBSBed_enabled(boolean bed_enabled)
+    {
+        p_depthBSBed_enabled = bed_enabled;
+    }
+    public boolean isP_depthBSSurf_enabled()
+    {
+        return p_depthBSSurf_enabled;
+    }
+    public void setP_depthBSSurf_enabled(boolean surf_enabled)
+    {
+        p_depthBSSurf_enabled = surf_enabled;
+    }
+    public boolean isP_pressure_enabled()
+    {
+        return p_pressure_enabled;
+    }
+    public void setP_pressure_enabled(boolean p_pressure_enabled)
+    {
+        this.p_pressure_enabled = p_pressure_enabled;
     }
     
 

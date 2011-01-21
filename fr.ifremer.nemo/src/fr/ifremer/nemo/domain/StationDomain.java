@@ -556,7 +556,7 @@ public class StationDomain
         // *NB PARAMETERS=07 RECORD LINES=08651
        DataDomain dataDomain =  Nemo.getInstance().getDomain().getData();
         int paramNumbers =
-            dataDomain.getMedParameterModels().length
+            dataDomain.getMyParameterManager().getMedParameterModels().length
                     + dataDomain.getModel().getParameterModels().length;
         medStationHeader.append(start);
         medStationHeader.append(Elts.getElt(Elts.station_param, Integer

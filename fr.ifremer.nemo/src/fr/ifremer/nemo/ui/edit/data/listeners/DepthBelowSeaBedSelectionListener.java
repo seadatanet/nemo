@@ -1,0 +1,42 @@
+/* ============================================================================
+ * Nom du fichier	: DataListRadioSelectionListener.java
+ * Auteur			: sbregent
+ * Date				: 17 jav. 2010
+ * Copyright		: Altran
+ * ============================================================================
+ */
+package fr.ifremer.nemo.ui.edit.data.listeners;
+
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.widgets.Combo;
+
+import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.ui.edit.data.EditDataForm;
+
+/**
+ * Description: TODO
+ * @author sbregent
+ *
+ */
+public class DepthBelowSeaBedSelectionListener implements SelectionListener
+{
+    
+    
+    public DepthBelowSeaBedSelectionListener()
+    {
+    }
+    public void widgetDefaultSelected( SelectionEvent g)
+    {
+        widgetSelected(g);
+    }
+    
+    public void widgetSelected(SelectionEvent g)
+    {
+Combo combo = (Combo) g.getSource();
+System.out.println(combo.getSelectionIndex());
+       System.out.println("choose"); //$NON-NLS-1$
+       
+     
+    }
+}

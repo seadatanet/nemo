@@ -11,12 +11,8 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.util.Global.DataListEnum;
-import fr.ifremer.nemo.ui.RulesManager;
-import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.ui.edit.data.EditDataForm;
-import fr.ifremer.nemo.ui.edit.file.EditFileForm;
-import fr.ifremer.nemo.util.Global.E_TypeConversion;
 
 /**
  * Description: TODO
@@ -41,19 +37,19 @@ public class DataListRadioSelectionListener implements SelectionListener
     public void widgetSelected(SelectionEvent g)
     {
 
-        DataListEnum currentDataList =DataListEnum.UNKNOWN;
+        DataListTypeEnum currentDataList =DataListTypeEnum.UNKNOWN;
 
         if (g.getSource().equals(myEditDataForm.getButton_P091()))
         {
-            currentDataList = DataListEnum.P091;
+            currentDataList = DataListTypeEnum.P091;
         }
         else if(g.getSource().equals(myEditDataForm.getButton_P011viaP091()))
         {
-            currentDataList = DataListEnum.P011_VIA_P091;
+            currentDataList = DataListTypeEnum.P011_VIA_P091;
         }
         else if(g.getSource().equals(myEditDataForm.getButton_P011viaP021()))
         {
-            currentDataList = DataListEnum.P011_VIA_P021;
+            currentDataList = DataListTypeEnum.P011_VIA_P021;
         }
         
         Nemo.getInstance().getViewMain().getMyRulesManager().updateFromIHM(currentDataList);

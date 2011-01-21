@@ -204,6 +204,9 @@ public class Messages {
     public static String edit_station_sectionQCflags_lib;
     
     public static String edit_data_title;
+    public static String edit_data_mesureType_label;
+    public static String edit_data_belowSeaSurface;
+    public static String edit_data_belowSeaBed;
     public static String edit_data_P091;
     public static String edit_data_P021;
     public static String edit_data_P011;

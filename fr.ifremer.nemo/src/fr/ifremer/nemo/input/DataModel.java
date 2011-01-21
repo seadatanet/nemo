@@ -11,7 +11,7 @@ import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.input.parameters.ParameterModel;
-import fr.ifremer.nemo.util.Global.DataListEnum;
+import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 
 
 /**
@@ -29,7 +29,7 @@ public class DataModel extends AbstractModel
      * liste de paramètres à utiliser
      *
      */
-    private DataListEnum _dataList;
+    private DataListTypeEnum _dataListType;
 
     public DataModel(){
         _tagName = ModelDescription.node_dataModel;
@@ -42,11 +42,11 @@ public class DataModel extends AbstractModel
     @Override
     public void initValues(){
         _parameterModels = new ArrayList<ParameterModel>();
-        _dataList = DataListEnum.UNKNOWN;
+        _dataListType = DataListTypeEnum.UNKNOWN;
     }
 
-    public DataListEnum getDataList(){
-        return _dataList;
+    public DataListTypeEnum getDataListType(){
+        return _dataListType;
     }
     /**
      * @see AbstractModel.java#fromElement
@@ -83,9 +83,9 @@ public class DataModel extends AbstractModel
         if (a_LocalName.equals(ModelDescription.node_listParameters)){
             return new PathElementConsumer(ModelDescription.node_listParameters, this);
         }
-        else if (a_LocalName.equals(ModelDescription.node_datalist))
+        else if (a_LocalName.equals(ModelDescription.node_dataListType))
         {
-            Element2Field setter = new Element2Field(this, ModelDescription.setter_dataList);
+            Element2Field setter = new Element2Field(this, ModelDescription.setter_dataListType);
             return setter;
         }
         return null;
@@ -114,7 +114,7 @@ public class DataModel extends AbstractModel
      */
     @Override
     public void writeXMLBodyOn(XMLOutputWriter a_Writer){
-        a_Writer.putTag(ModelDescription.node_datalist, getDataList().toString());
+        a_Writer.putTag(ModelDescription.node_dataListType, getDataListType().toString());
         a_Writer.openTag(ModelDescription.node_listParameters);
         for (ParameterModel el : getParameterModels()){
             el.writeXMLOn(a_Writer);
@@ -209,26 +209,8 @@ public class DataModel extends AbstractModel
         if (!_parameterModels.contains(x))
             _parameterModels.add(x);
     }
-    public void setDataList(String dataList)
+    public void setDataListType(DataListTypeEnum dataList)
     {
-        if (dataList.equals(DataListEnum.P091.toString()))
-        {
-            setDataList(DataListEnum.P091);
-        }
-        else if(dataList.equals(DataListEnum.P011_VIA_P091.toString()))
-        {
-            setDataList(DataListEnum.P011_VIA_P091);
-        }
-        else if(dataList.equals(DataListEnum.P011_VIA_P021.toString()))
-        {
-            setDataList(DataListEnum.P011_VIA_P021);
-        }else
-        {
-            setDataList(DataListEnum.UNKNOWN);
-        }
-    }
-    public void setDataList(DataListEnum dataList)
-    {
-        _dataList = dataList;
+        _dataListType = dataList;
     }   
 }

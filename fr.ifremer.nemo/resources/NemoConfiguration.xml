@@ -4,11 +4,11 @@
   <nautilusWsURL>http://www.ifremer.fr/WSnautilus/services/NAUTILUS</nautilusWsURL>
   <showRule>true</showRule>
   <contact></contact>
-  <modelsDirectory></modelsDirectory>
+  <modelsDirectory>/modelsDirectory>
   <cruisesDirectory></cruisesDirectory>
   <outputDirectory></outputDirectory>
-  <writeCdi>true</writeCdi>
-  <idEdmoRespCdi>486</idEdmoRespCdi>
+  <writeCdi>false</writeCdi>
+  <idEdmoRespCdi>487</idEdmoRespCdi>
   <codeEdmoDonnees>2</codeEdmoDonnees>
   <idEdmoRespDonnees>6</idEdmoRespDonnees>
   <idEdmoDistDonnees>30</idEdmoDistDonnees>
@@ -19,7 +19,6 @@
   <writeMapping>true</writeMapping>
   <fichierMapping>coupling.txt</fichierMapping>
   <dateISO>true</dateISO>
-  <dataList>P011_VIA_P021</dataList>
   <defaultConversionType>MEDATLAS</defaultConversionType>
   <proxy use="false" address="" port="" login="" password=""/>
   <edmoURL>http://seadatanet.maris2.nl/ws/ws_edmo.asmx</edmoURL>
