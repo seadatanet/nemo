@@ -19,7 +19,6 @@
   <writeMapping>false</writeMapping>
   <fichierMapping>couplingTest.txt</fichierMapping>
   <dateISO>true</dateISO>
-  <dataList>P091</dataList>
   <defaultConvertType>UNKNOWN</defaultConvertType>
   <proxy use="false" address="" port="" login="" password=""/>
   <edmoURL>http://seadatanet.maris2.nl/ws/ws_edmo.asmx</edmoURL>

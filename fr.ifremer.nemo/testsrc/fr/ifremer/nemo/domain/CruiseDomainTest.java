@@ -97,7 +97,7 @@ public class CruiseDomainTest
         
         DataDomain dDomain = mock(DataDomain.class);
         when(dDomain.getModel()).thenReturn(dModel);
-        when(dDomain.getOdvParameterModels()).thenReturn(new ParameterModel[]{addpmTEST});
+        when(dDomain.getMyParameterManager().getOdvParameterModels()).thenReturn(new ParameterModel[]{addpmTEST});
         
         StationDomain sDomain = mock(StationDomain.class);
 //        when(sDomain.getData()).thenReturn(dDomain);

@@ -4,7 +4,7 @@
   <nautilusWsURL>http://www.ifremer.fr/WSnautilus/services/NAUTILUS</nautilusWsURL>
   <showRule>true</showRule>
   <contact></contact>
-  <modelsDirectory>/modelsDirectory>
+  <modelsDirectory></modelsDirectory>
   <cruisesDirectory></cruisesDirectory>
   <outputDirectory></outputDirectory>
   <writeCdi>false</writeCdi>

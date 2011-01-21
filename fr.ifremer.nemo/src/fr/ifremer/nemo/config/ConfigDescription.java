@@ -99,7 +99,6 @@ public class ConfigDescription extends NLS
 
     public static String nodetitle_default;
     
-    public static String node_defaultDatalist;
     
     public static String node_defaultConversionType;
 
@@ -153,7 +152,6 @@ public class ConfigDescription extends NLS
 
     public static String setter_WriteMapping;
     
-    public static String setter_datalist;
     
     public static String setter_defaultConversionType;
     
