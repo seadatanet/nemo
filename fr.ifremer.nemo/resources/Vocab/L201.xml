@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_06" class="java.beans.XMLDecoder"> 
+ <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="11"> 
+  <void index="0"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L201/3/4</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>bad value</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>bad</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>An obviously erroneous data value.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1179395250000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L201/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="1"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L201/3/5</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>changed value</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>changed</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Data value adjusted during quality control.  Best practice strongly recommends that the value before the change be preserved in the data or its accompanying metadata.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1179395250000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L201/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="2"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L201/3/1</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>good value</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>good</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Good quality data value that is not part of any identified malfunction and has been verified as consistent with real phenomena during the quality control process.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1242115915000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L201/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="3"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L201/3/8</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>interpolated value</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>interpolated</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>This value has been derived by interpolation from other values in the data object.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1179395250000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L201/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="4"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L201/3/9</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>missing value</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>missing</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>The data value is missing. Any accompanying value will be a magic number representing absent data.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1179395250000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L201/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="5"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L201/3/0</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>no quality control</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>none</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>No quality control procedures have been applied to the data value. This is the initial status for all data values entering the working archive.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1179395250000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L201/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="6"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L201/3/3</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>probably bad value</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>probably_bad</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Data value recognised as unusual during quality control that forms part of a feature that is probably inconsistent with real phenomena.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1179395250000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L201/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="7"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L201/3/2</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>probably good value</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>probably_good</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Data value that is probably consistent with real phenomena but this is unconfirmed or data value forming part of a malfunction that is considered too small to affect the overall quality of the data object of which it is a part.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1179395250000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L201/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="8"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L201/3/6</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>value below detection</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>BD</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>The level of the measured phenomenon was too small to be quantified by the technique employed to measure it. The accompanying value is the detection limit for the technique or zero if that value is unknown.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1242116102000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L201/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="9"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L201/3/7</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>value in excess</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>excess</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>The level of the measured phenomenon was too large to be quantified by the technique employed to measure it.  The accompanying value is the measurement limit for the technique.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1242116102000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L201/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="10"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L201/3/A</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>value phenomenon uncertain</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>ID_uncertain</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>There is uncertainty in the description of the measured phenomenon associated with the value such as chemical species or biological entity.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1179395250000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L201/3</string> 
+    </void> 
+   </object> 
+  </void> 
+ </array> 
+</java> 

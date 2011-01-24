@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_06" class="java.beans.XMLDecoder"> 
+ <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="5"> 
+  <void index="0"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L071/1/CDIMTH03</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>data request order</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>order</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>The data object may be obtained though a manual ordering process from the holding data centre.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1171645116000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L071/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="1"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L071/1/CDIMTH04</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>delayed online access</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>offlineAccess</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>The data object may be obtained through an automated ordering process from the holding data centre.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1171645116000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L071/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="2"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L071/1/CDIMTH05</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>universal resource locator</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>URL</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>The data object may be accessed as a URL over the internet.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1171645116000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L071/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="3"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L071/1/CDIMTH01</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>web data access</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>download</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>The data object may be downloaded through manual interaction with an on-line system.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1171645116000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L071/1</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="4"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L071/1/CDIMTH02</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>web data access with registration</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>downloadRegistration</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>The data object may be downloaded through manual interaction with an on-line system by registered users following successful authentication and authorisation.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1171645116000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L071/1</string> 
+    </void> 
+   </object> 
+  </void> 
+ </array> 
+</java> 
