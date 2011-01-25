@@ -3,6 +3,7 @@ package fr.ifremer.nemo.ui.edit.data;
 import java.util.regex.Pattern;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.input.parameters.VerticalParametersList;
 import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.FormValidator;
@@ -252,6 +253,13 @@ public class DataFormValidator extends FormValidator
         editDataForm.initFromNewModel();
         Nemo.getInstance().getViewMain().tabData.setText(Messages.onglet_data_valid);
         Nemo.getInstance().getViewMain().setEtape(4);
+        
+        
+        VerticalParametersList modelList = Nemo.getInstance().getDomain().getData().getModel().getVerticalParametersList();
+        modelList.setP_depthBSBed(p_depthBBed_entryKey);
+        modelList.setP_depthBSSurf(p_depthBSurf_entryKey);
+        modelList.setP_pressure(p_pressure_entryKey);
+        Nemo.getInstance().getDomain().getData().getModel().setMesureType(Nemo.getInstance().getViewMain().getMyRulesManager().getMyMesureType());
         // envoi des valeurs dans le modele
 
     }

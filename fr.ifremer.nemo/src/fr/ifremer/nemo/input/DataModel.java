@@ -11,6 +11,7 @@ import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.input.parameters.ParameterModel;
+import fr.ifremer.nemo.input.parameters.VerticalParametersList;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_MesureType;
 
@@ -32,7 +33,7 @@ public class DataModel extends AbstractModel
      */
     private DataListTypeEnum _dataListType;
     private E_MesureType _mesureType;
-
+    private VerticalParametersList _verticalParametersList;
     
     
     
@@ -47,6 +48,7 @@ public class DataModel extends AbstractModel
      */
     @Override
     public void initValues(){
+        _verticalParametersList = new VerticalParametersList();
         _parameterModels = new ArrayList<ParameterModel>();
         _dataListType = DataListTypeEnum.UNKNOWN;
         _mesureType = E_MesureType.UNKNOWN;
@@ -86,7 +88,7 @@ public class DataModel extends AbstractModel
                                       String a_LocalName,
                                       String a_QName, 
                                       Attributes a_Attributes){
-        
+        SAXConsumer el = null;
         if (a_LocalName.equals(ModelDescription.node_listParameters)){
             return new PathElementConsumer(ModelDescription.node_listParameters, this);
         }
@@ -99,6 +101,11 @@ public class DataModel extends AbstractModel
         {
             Element2Field setter = new Element2Field(this, ModelDescription.setter_mesureType);
             return setter;
+        }
+        else if (a_LocalName.equals(ModelDescription.node_verticalParametersList)) {
+            el = VerticalParametersList.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+            setVerticalParametersList((VerticalParametersList) el);
+            return el;
         }
         return null;
     }
@@ -128,6 +135,11 @@ public class DataModel extends AbstractModel
     public void writeXMLBodyOn(XMLOutputWriter a_Writer){
         a_Writer.putTag(ModelDescription.node_dataListType, getDataListType().toString());
         a_Writer.putTag(ModelDescription.node_mesureType, getMesureType().toString());
+        
+        // ref parametres verticaux
+        getVerticalParametersList().writeXMLOn(a_Writer);
+        
+        // liste des parametres
         a_Writer.openTag(ModelDescription.node_listParameters);
         for (ParameterModel el : getParameterModels()){
             el.writeXMLOn(a_Writer);
@@ -222,11 +234,29 @@ public class DataModel extends AbstractModel
         if (!_parameterModels.contains(x))
             _parameterModels.add(x);
     }
+    public void setVerticalParametersList(VerticalParametersList list)
+    {
+        _verticalParametersList = list;
+    }
     public void setDataListType(DataListTypeEnum dataList)
     {
         _dataListType = dataList;
     }
-
+    public void setDataListType(String dataList)
+    {
+       if (dataList.equals(DataListTypeEnum.P091.toString()))
+       {
+           setDataListType(DataListTypeEnum.P091);
+       }
+       else if (dataList.equals(DataListTypeEnum.P011_VIA_P021.toString()))
+       {
+           setDataListType(DataListTypeEnum.P011_VIA_P021);
+       }
+       else if (dataList.equals(DataListTypeEnum.P011_VIA_P091.toString()))
+       {
+           setDataListType(DataListTypeEnum.P011_VIA_P091);
+       }
+    }
     public E_MesureType getMesureType()
     {
         return _mesureType;
@@ -235,5 +265,21 @@ public class DataModel extends AbstractModel
     public void setMesureType(E_MesureType mesureType)
     {
         _mesureType = mesureType;
+    }
+    public void setMesureType(String mesureType)
+    {
+       
+       if (mesureType.equals(E_MesureType.BSSURF.toString()))
+       {
+           setMesureType(E_MesureType.BSSURF);
+       }
+       else if (mesureType.equals(E_MesureType.BSBED.toString()))
+       {
+           setMesureType(E_MesureType.BSBED);
+       }
+    }
+    public VerticalParametersList getVerticalParametersList()
+    {
+        return _verticalParametersList;
     }   
 }

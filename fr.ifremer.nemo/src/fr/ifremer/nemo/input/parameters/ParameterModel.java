@@ -69,7 +69,7 @@ public class ParameterModel extends AbstractModel
     
     public ParameterModel(TypeData typeData)
     {
-
+        _tagName = ModelDescription.node_parameterModel;
         Parameter para = new Parameter(typeData);
         this.setParameter(para);
 

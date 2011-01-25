@@ -18,6 +18,7 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.domain.ParameterManager;
+import fr.ifremer.nemo.input.parameters.VerticalParametersList;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Messages;
 
@@ -178,5 +179,25 @@ public class GroupVerticalParameters
     public Combo getComboP()
     {
         return comboP;
+    }
+    
+    
+    public void select(VerticalParametersList list)
+    {
+        for (int i=0; i<comboDBSSurf.getItemCount(); i++){
+            if (comboDBSSurf.getItem(i).equals(list.getP_depthBSSurf())){
+                comboDBSSurf.select(i);
+            }
+        }
+        for (int i=0; i<comboDBSBed.getItemCount(); i++){
+            if (comboDBSBed.getItem(i).equals(list.getP_depthBSBed())){
+                comboDBSBed.select(i);
+            }
+        }
+        for (int i=0; i<comboP.getItemCount(); i++){
+            if (comboP.getItem(i).equals(list.getP_pressure())){
+                comboP.select(i);
+            }
+        }
     }
 }

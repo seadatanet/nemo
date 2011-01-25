@@ -18,6 +18,7 @@ import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_MesureType;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
+import fr.ifremer.nemo.input.parameters.VerticalParametersList;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.EditForm;
 import fr.ifremer.nemo.ui.edit.data.listeners.DataListRadioSelectionListener;
@@ -186,7 +187,12 @@ public class EditDataForm extends EditForm
         
         // update mesureType to use   
         E_MesureType mesureType = Nemo.getInstance().getDomain().getData().getModel().getMesureType();
-        Nemo.getInstance().getViewMain().getMyRulesManager().updateFromModel(mesureType)    ;    
+        Nemo.getInstance().getViewMain().getMyRulesManager().updateFromModel(mesureType);
+        // update vertical params
+        VerticalParametersList verticParams = Nemo.getInstance().getDomain().getData().getModel().getVerticalParametersList();
+        myGroupeVerticalParameters.select(verticParams)  ;
+        
+        
       
     }
     
