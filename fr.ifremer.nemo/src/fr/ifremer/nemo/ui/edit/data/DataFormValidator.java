@@ -22,11 +22,11 @@ public class DataFormValidator extends FormValidator
 {
     RulesManager rm ;
     GroupVerticalParameters verticalParamGroup;
-   private String p_depthBBed_entryKey="";
-   private String p_depthBSurf_entryKey="";
-   private String p_pressure_entryKey="";
-   private String p_salinity_entryKey="";
-   private String p_temperature="";
+   private String p_depthBBed_entryKey=Global.EMPTY_STRING;
+   private String p_depthBSurf_entryKey=Global.EMPTY_STRING;
+   private String p_pressure_entryKey=Global.EMPTY_STRING;
+   private String p_salinity_entryKey=Global.EMPTY_STRING;
+   private String p_temperature=Global.EMPTY_STRING;
     
     public DataFormValidator()
     {
@@ -37,25 +37,23 @@ public class DataFormValidator extends FormValidator
     
     private void reinitVerticalParams()
     {
-        p_depthBBed_entryKey="";
-        p_depthBSurf_entryKey="";
-        p_pressure_entryKey="";
-        p_salinity_entryKey="";
-        p_temperature="";
+        p_depthBBed_entryKey=Global.EMPTY_STRING;
+        p_depthBSurf_entryKey=Global.EMPTY_STRING;
+        p_pressure_entryKey=Global.EMPTY_STRING;
+        p_salinity_entryKey=Global.EMPTY_STRING;
+        p_temperature=Global.EMPTY_STRING;
     }
     @Override
     public void validate()
     {
         reinitVerticalParams();
-        // TODO BGT mettre a jour les valeurs du modele pour les params, lemesureType et le dataListType qd tout ok
         rm = Nemo.getInstance().getViewMain().getMyRulesManager();
         verticalParamGroup =Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters();
         EditConversionForm editConversionForm = Nemo.getInstance().getViewMain().getEditConversionForm();
         EditDataForm editDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
 
         Boolean ok = true;
-      
-        Boolean exitValid = false;
+
         // retour e l'onglet message d'erreur
         ViewLog.tabFolderLog.setSelection(0);
 
@@ -64,175 +62,78 @@ public class DataFormValidator extends FormValidator
 
         // mise e jour avant toute chose
         editDataForm.getMyTableData().majTypeData();
-        
-        
+
+
         int nbreParam = editDataForm.getMyTableData().getTypes().size();
+
         /**-----------------------------------------------------------------------
          * data05 presence d'au moins 1 paramètre dans le tableau
          */
-        if (nbreParam == 0)
-        {
-            ok = false;
-            Utils.messageErreurAppend(Messages.Etape_117);
-            exitValid=true;
-        }
+        ok = checkNbParams(nbreParam);
         // -------------------------------------------------------------------------
-        
-        if (!exitValid)
-        {
-        /**-----------------------------------------------------------------------
-         * data10
-         */
-        ok = updateTestValues();
-        if (!ok)
-        {
-            Utils.messageErreurAppend(Messages.Etape_131);
-        }
-        // -------------------------------------------------------------------------
-        
-       
-     
-            int[] debuts, fins;
-            String[] debutsFlag, finsFlag;
-            int cptDebut = 0;
-            int cptFin = 0;
 
+        if (ok)
+        {
+            /** data10 */
+            ok = ok && updateTestValues();
+
+            int[] debuts, fins;
             debuts = new int[nbreParam];
             fins = new int[nbreParam];
-            debutsFlag = new String[nbreParam];
-            finsFlag = new String[nbreParam];
 
-            // remplissage des listes
             for (int i = 0; i < nbreParam; i++)
             {
-
                 TypeData typeCourant = editDataForm.getMyTableData().getTypes().get(i);
-
                 debuts[i] = typeCourant.getDebut();
                 fins[i] = typeCourant.getFin();
-                debutsFlag[i] = typeCourant.getDebutFlag();
-                finsFlag[i] = typeCourant.getFinFlag();
-
-                /**-----------------------------------------------------------------------
-                 * data20 verif presence de l'unité pour chaque paramètre
-                 */
-                // FAE 6538
-                if (typeCourant.getUnite().equals(Global.EMPTY_STRING)){
-                    ok = false;
-                    Utils.messageErreurAppend(Messages.Etape_118);
-                    continue;
-                }
-                //  ----------------------------------------------------------
-
-                /**-----------------------------------------------------------------------
-                 * data30 verif compatibilité valeur par defaut et valeur output
-                 */
-
-                ok = checkDefaultAndOutputCompatibility(ok, typeCourant);
-                //  ----------------------------------------------------------
-
-                /**-----------------------------------------------------------------------
-                 * data40 check des valeurs debut<fin
-                 */
-                if (typeCourant.getDebut() > typeCourant.getFin())
-                {
-                    Utils.messageErreurAppend(Messages.Etape_98 + Global.SPACE
-                        + typeCourant.getCodeToUse());
-                    ok = false;
-                }
-                //  ----------------------------------------------------------
                 
-                /**-----------------------------------------------------------------------
-                 * data45 check des valeurs debut<fin flag
-                 */
-                if (!typeCourant.getDebutFlag().equals(Global.EMPTY_STRING)
-                        && !typeCourant.getFinFlag()
-                        .equals(Global.EMPTY_STRING))
-                {
-                    if (Integer.parseInt(typeCourant.getDebutFlag()) > Integer
-                            .parseInt(typeCourant.getFinFlag()))
-                    {
-                        Utils.messageErreurAppend(Messages.Etape_125
-                            + Global.SPACE + typeCourant.getCodeToUse());
-                        ok = false;
-                    }
-                }
+                /** data20 verif presence de l'unité pour chaque paramètre -FAE 6538 */
+                ok = ok && checkUniteIsPresent(typeCourant);
+
+                /** data30 verif compatibilité valeur par defaut et valeur output */
+                ok = ok && checkDefaultAndOutputCompatibility( typeCourant);
+
+                /** data40 check des valeurs debut<fin */
+                ok = ok && checkStartAndEnd(typeCourant);
+
+                /** data45 check des valeurs debut<fin flag */
+                ok = ok && checkStartAndEndFlags(typeCourant);
             }
+
+            /** data50 verif que les valeurs de « debut » et « fin » sont différentes des valeurs affichées par défaut **/
+            ok = ok && checkStartAndEndAreFilled(nbreParam,debuts, fins );
+        
             
-            /**-----------------------------------------------------------------------
-             * data50
-             * verif que les valeurs de « debut » et « fin » sont différentes des valeurs affichées par défaut
-             **/
-            Boolean valeurNonRemplie = false;
-            // parcours des listes et test des valeurs
-            for (int i = 0; i < nbreParam; i++)
-            {
-                for (int j = 0; j < nbreParam; j++)
-                {
-                    if (debuts[i] == debuts[j])
-                    {
-                        if (debuts[i] == 0)
-                        {
-                            valeurNonRemplie = true;
-                        }
-                        cptDebut = cptDebut + 1;
-                    }
-                    if (fins[i] == fins[j])
-                    {
-                        cptFin = cptFin + 1;
-                    }
-                }
-            }
-            if (valeurNonRemplie)
-            {
-                Utils.messageErreurAppend(Messages.Etape_88);
-                ok = false;
-            }
             //  ----------------------------------------------------------
-         boolean verticOK=   detectVerticalParameters();
-            
-            /**-----------------------------------------------------------------------
-             * data60
-             * 
-             **/
-            // TEST pour savoir si PRES est bien en premier mais pas pour
-            // profile ou trajectoire
-            TypeData premierType = editDataForm.getMyTableData().getTypes().get(0);
-
-            String firstParameterCode = premierType.getCodeToUse();
-            editConversionForm.setWarningData(Global.EMPTY_STRING);
-
-            if (Nemo.getInstance().getViewMain().getMyRulesManager().isProfile())
+            // PARAMETRES
+           ok= ok && detectVerticalParameters();
+            if (ok)
             {
-                boolean checkPressureOk;
-                checkPressureOk = checkVerticalParameterIsInFirstPosition(firstParameterCode);
+                editConversionForm.setWarningData(Global.EMPTY_STRING);
 
-                // Si PRES n'est pas premier => Medatlas impossible
-                // A moins que l'on ait les parametre DEPH, PSAL et TEMP ( FAE 3228 )
-                /**-----------------------------------------------------------------------
-                 * data70
-                 * 
-                 **/
-                if (!checkPressureOk){
-                    if ((Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas()))
+                if (Nemo.getInstance().getViewMain().getMyRulesManager().isProfile() )
+                {
+                    /** data60/data65 parametre de reference verticale en premiere position **/
+                    boolean verticParamOk;
+                    verticParamOk = checkVerticalParameterIsInFirstPosition();
+
+                    /** data70 Si data60 ko => Medatlas impossible
+                 A moins que l'on ait les parametre DEPH, PSAL et TEMP ( FAE 3228 )**/
+
+                    if (!verticParamOk && (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas()))
                     {
-
-                        checkPressureOk = checkDepthAndSalinityAndTemperature();
-                        if (!checkPressureOk){
-
-                            editConversionForm
-                            .setWarningData(Messages.ViewLog_7);
-                        }
+                        verticParamOk = checkDepthAndSalinityAndTemperature();
                     }
-                    else
-                    {
-                        editConversionForm
-                        .setWarningData(Global.EMPTY_STRING);
-                    }
+                    ok = ok && verticParamOk;
                 }
-                ok = ok && checkPressureOk;
             }
         }
+        
+        
+        
+        /**
+         * 
+         */
         if (ok)
         {
             editDataForm.setOkApresReset (true);
@@ -264,15 +165,100 @@ public class DataFormValidator extends FormValidator
 
     }
     
+    private boolean checkStartAndEndAreFilled(int nbreParam, int[]debuts, int[]fins )
+    {
+        boolean ok=true;
+        int cptDebut = 0;
+        int cptFin = 0;
+        Boolean valeurNonRemplie = false;
+        // parcours des listes et test des valeurs
+        for (int i = 0; i < nbreParam; i++)
+        {
+            for (int j = 0; j < nbreParam; j++)
+            {
+                if (debuts[i] == debuts[j])
+                {
+                    if (debuts[i] == 0)
+                    {
+                        valeurNonRemplie = true;
+                    }
+                    cptDebut = cptDebut + 1;
+                }
+                if (fins[i] == fins[j])
+                {
+                    cptFin = cptFin + 1;
+                }
+            }
+        }
+        if (valeurNonRemplie)
+        {
+            Utils.messageErreurAppend(Messages.Etape_88);
+            ok = false;
+        }
+        
+        return ok;
+    }
+    
+    private boolean checkNbParams(int nbParams)
+    {
+        boolean ok= (nbParams > 0);
+        if (!ok)
+        {
+            Utils.messageErreurAppend(Messages.Etape_117);
+        }
+        return ok;
+    }
+    
+    
+    private boolean checkUniteIsPresent(TypeData typeCourant)
+    {
+        boolean ok;
+        ok = !(typeCourant.getUnite().equals(Global.EMPTY_STRING));
+        if (!ok){
+            Utils.messageErreurAppend(Messages.Etape_118);
+        }
+        return ok;
+    }
+    
+    
+    private boolean checkStartAndEnd(TypeData typeCourant)
+    {
+        boolean ok=true;
+        if (typeCourant.getDebut() > typeCourant.getFin())
+        {
+            Utils.messageErreurAppend(Messages.Etape_98 + Global.SPACE
+                + typeCourant.getCodeToUse());
+            ok = false;
+        }
+        return ok;
+    }
+    
+    private boolean checkStartAndEndFlags(TypeData typeCourant)
+    {
+        boolean ok=true;
+        if (!typeCourant.getDebutFlag().equals(Global.EMPTY_STRING)
+                && 
+                !typeCourant.getFinFlag().equals(Global.EMPTY_STRING))
+        {
+            if (Integer.parseInt(typeCourant.getDebutFlag()) > Integer.parseInt(typeCourant.getFinFlag()))
+            {
+                Utils.messageErreurAppend(Messages.Etape_125
+                    + Global.SPACE + typeCourant.getCodeToUse());
+                ok = false;
+            }
+        }
+        return ok;
+    }
     
     /**
      * 
      * @return
      */
-    private static boolean checkDepthAndSalinityAndTemperature()
+    private boolean checkDepthAndSalinityAndTemperature()
     {
-
+        boolean ok;
         EditDataForm editDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
+        EditConversionForm editConversionForm = Nemo.getInstance().getViewMain().getEditConversionForm();
         boolean isPSAL = false;
         boolean isTEMP = false;
         boolean isDEPH = false;
@@ -289,7 +275,12 @@ public class DataFormValidator extends FormValidator
                 Intern.paramTEMP))
                 isTEMP = true;
         }
-        return isPSAL && isTEMP && isDEPH;
+        ok=isPSAL && isTEMP && isDEPH;
+        if (!ok)
+        {
+            editConversionForm.setWarningData(Messages.ViewLog_7);
+        }
+        return ok;
 
     }
     
@@ -300,19 +291,25 @@ public class DataFormValidator extends FormValidator
      * @param firstParameterCode
      * @return
      */
-    private boolean checkVerticalParameterIsInFirstPosition(String firstParameterCode)
+    private boolean checkVerticalParameterIsInFirstPosition()
     {
         boolean checkOk = true;
-
+        
+        // recup du premier parametre
+        TypeData premierType = Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getTypes().get(0);
+        String firstParameterCode = premierType.getCodeToUse();
+        E_MesureType mesureType=Nemo.getInstance().getViewMain().getMyRulesManager().getMyMesureType();
+      
         // cas below sea bed
-        if( Nemo.getInstance().getViewMain().getMyRulesManager().getMyMesureType()==E_MesureType.BSBED)
+        if(mesureType==E_MesureType.BSBED)
         {
             checkOk = firstParameterCode.equals(p_depthBBed_entryKey);
             if (!checkOk){
                 Utils.messageErreurAppend(Messages.error_data_firstParam_depthBSBed);
             }
         }
-        else if( Nemo.getInstance().getViewMain().getMyRulesManager().getMyMesureType()==E_MesureType.BSSURF)
+        // cas below sea surface
+        else if(mesureType==E_MesureType.BSSURF)
         {
             checkOk = firstParameterCode.equals(p_depthBSurf_entryKey)
             || firstParameterCode.equals(p_pressure_entryKey);
@@ -339,17 +336,21 @@ public class DataFormValidator extends FormValidator
             res = false;
             e.printStackTrace();
         }
+        
+        if (!res)
+        {
+            Utils.messageErreurAppend(Messages.Etape_131);
+        }
+        
         return res;
     }
     
     
-   private boolean checkDefaultAndOutputCompatibility(boolean ok, TypeData typeCourant )
+   private boolean checkDefaultAndOutputCompatibility( TypeData typeCourant )
    {
-       boolean okRes = ok;
+       boolean okRes = true;
        String fmOut = new String();
 
-       // test direct sur valeur entree
-       okRes = okRes && true;
 
        // test direct sur valeur sortie (valeur par defaut)
        try
@@ -390,13 +391,13 @@ public class DataFormValidator extends FormValidator
                    && (typeCourant.getSortie().length() == totLength))
            {
                // ok
-               okRes = okRes && true;
+               okRes =true;
 
            }
            else
            {
                // erreur
-               okRes = okRes && false;
+               okRes = false;
                Utils
                .messageErreurAppend(Messages.Etape_106
                    + " " + typeCourant.getCodeToUse() + " : " + Messages.Etape_106b); //$NON-NLS-1$ //$NON-NLS-2$
@@ -406,7 +407,7 @@ public class DataFormValidator extends FormValidator
        catch (Exception e)
        {
            // erreur
-           okRes = okRes && false;
+           okRes =  false;
            Utils
            .messageErreurAppend(Messages.Etape_106
                + " " + typeCourant.getCodeToUse() + " : " + Messages.Etape_106b); //$NON-NLS-1$ //$NON-NLS-2$
@@ -432,30 +433,29 @@ public class DataFormValidator extends FormValidator
    
    private void detectVerticalParametersForP011()
    {
-       boolean ok=true;
        int index;
        // depth below sea surface
        if (rm.isP_depthBSSurf_enabled()){
            index= verticalParamGroup.getComboDBSSurf().getSelectionIndex();
            if (index != -1){
-           p_depthBSurf_entryKey = verticalParamGroup.getComboDBSSurf().getItem(index);
+               p_depthBSurf_entryKey = verticalParamGroup.getComboDBSSurf().getItem(index);
            }
-        }
+       }
        // Depth below sea bed
        if (rm.isP_depthBSBed_enabled()){
-          index= verticalParamGroup.getComboDBSBed().getSelectionIndex();
-          if (index != -1){
-              p_depthBBed_entryKey = verticalParamGroup.getComboDBSBed().getItem(index);
-          }
+           index= verticalParamGroup.getComboDBSBed().getSelectionIndex();
+           if (index != -1){
+               p_depthBBed_entryKey = verticalParamGroup.getComboDBSBed().getItem(index);
+           }
        }
-      // pressure
+       // pressure
        if (rm.isP_pressure_enabled()){
            index= verticalParamGroup.getComboP().getSelectionIndex();
            if (index != -1){
-           p_pressure_entryKey = verticalParamGroup.getComboP().getItem(index);
+               p_pressure_entryKey = verticalParamGroup.getComboP().getItem(index);
            }
-        }
-       
+       }
+
    }
    
    private boolean checkVerticalParametersWellDetected()
@@ -488,9 +488,7 @@ public class DataFormValidator extends FormValidator
    private void autoFillVerticalParametersForP091()
    {
        // reinit des valeurs
-       p_depthBBed_entryKey="";
-       p_depthBSurf_entryKey="";
-       p_pressure_entryKey="";
+      reinitVerticalParams();
        
        int waitedNbItems = 2; // la valeur vide "" + la valeur attendue pour ce param en P091
        int indexToSelect = 1; // index de la valeur à selectionner (index de la valeur vide = 0, index de la valeur attendue est 1)
