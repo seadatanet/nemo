@@ -51,13 +51,11 @@ public class TypeData extends Object {
 
 	public TypeData(TypeData typeData) {
 
-//		this.setCode(typeData.code);
 		this.setConversion(typeData.conversion);
 		this.setEntree(typeData.entree);
 		this.setFormat(typeData.format);
 		this.setSortie(typeData.sortie);
 		this.setUnite(typeData.unite);
-//		this.setFullname(typeData.fullname);
         this.setEntryKey(typeData.getEntryKey());
         this.setEntryTerm(typeData.getEntryTerm());
         this.setEntryTermP011(typeData.entryTermP011);
@@ -71,11 +69,11 @@ public class TypeData extends Object {
     {
         setEntryKey(wsParameter.getCode());
         setEntryTerm(wsParameter.getName());
-//        setCode(wsParameter.getCode() + Global.SEP + wsParameter.getName());
         setUnite(wsParameter.getUnit());
         setFormat(wsParameter.getFormat());
         setEntree(Global.EMPTY_STRING);
         setSortie(wsParameter.getDefaultValue());
+        setConversion(DEFAULT_CONVERT);
     }
 
     public TypeData(ParameterModel parameterModel)
@@ -152,6 +150,7 @@ public class TypeData extends Object {
         setEntree(Global.EMPTY_STRING);
         setSortie(Global.EMPTY_STRING);
         setUnite(Global.EMPTY_STRING);
+        setConversion(DEFAULT_CONVERT);
     }
 	public String getFormattedCodeAndName() {
 		return entryKey +  Global.SEP + entryTerm;
