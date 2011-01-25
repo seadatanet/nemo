@@ -2,7 +2,7 @@
 <project name="com.shom.daurade.build" default="build">
 	<!--sets the path of the properties file-->
 	<property name="pdeBuildPluginVersion" value="3.6.1.R36x_v20100823" />
-	<property name="equinoxLauncherPluginVersion" value="1.1.1.R36x_v20100810" />
+	<property name="equinoxLauncherPluginVersion" value="1.1.0.v20100507" />
 
 	<target name="init" description="Copie des sources">
 		<!-- ### Ugly hack pour eviter les antislashs dans repertoire courant ###  -->
@@ -19,9 +19,10 @@
 		<!-- ### -->
 		
 		<property file="build.properties" />
-		
+		<!--
 		<mkdir dir="${buildDirectory}/plugins" />
 		<mkdir dir="${buildDirectory}/features" />
+		-->
 	</target>
 
 	<target name="pde-build" description="Eclipse PDE Build">
@@ -44,6 +45,25 @@
 		</copy>   -->
 	</target>
 
+	<target name="installer" description="Make installer with IzPack">
+
+	<property name="buildDirectory" value="D:/HUDSON/workspace"/>
+	
+		<mkdir dir="${buildDirectory}/Nemo_IzPack/src/win32.win32.x86"/>
+		<unzip src="${buildDirectory}/Nemo-win32.win32.x86.zip" dest="${buildDirectory}/Nemo_IzPack/src/win32.win32.x86"/>
+		<mkdir dir="${buildDirectory}/Nemo_IzPack/src/win32.win32.x86_64"/>
+		<unzip src="${buildDirectory}/Nemo-win32.win32.x86_64.zip" dest="${buildDirectory}/Nemo_IzPack/src/win32.win32.x86_64"/>
+		<mkdir dir="${buildDirectory}/Nemo_IzPack/src/linux.gtk.x86"/>
+		<unzip src="${buildDirectory}/Nemo-linux.gtk.x86.zip" dest="${buildDirectory}/Nemo_IzPack/src/linux.gtk.x86"/>
+		<mkdir dir="${buildDirectory}/Nemo_IzPack/src/linux.gtk.x86_64"/>
+		<unzip src="${buildDirectory}/Nemo-linux.gtk.x86_64.zip" dest="${buildDirectory}/Nemo_IzPack/src/linux.gtk.x86_64"/>
+		<mkdir dir="${buildDirectory}/Nemo_IzPack/src/solaris.gtk.sparc"/>
+		<unzip src="${buildDirectory}/Nemo-solaris.gtk.sparc.zip" dest="${buildDirectory}/Nemo_IzPack/src/solaris.gtk.sparc"/>
+		
+		<ant dir="${buildDirectory}/Nemo_IzPack" inheritAll="false"/> 
+		
+	</target>
+	
 	<!--This target defines the run-order of the targets-->
-	<target name="build" depends="init, pde-build" />
+	<target name="build" depends="init, pde-build, installer" />
 </project>
