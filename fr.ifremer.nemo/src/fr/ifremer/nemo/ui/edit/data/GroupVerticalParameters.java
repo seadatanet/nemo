@@ -20,6 +20,7 @@ import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.domain.ParameterManager;
 import fr.ifremer.nemo.input.parameters.VerticalParametersList;
 import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 /**
@@ -34,11 +35,6 @@ public class GroupVerticalParameters
     private Combo comboDBSSurf;
     private Combo comboDBSBed;
     private Combo comboP;
-    
-    // etat des combos (pas toujours necessaires, donc peuvent être grisées)
-    private boolean isComboDBSSurfEnabled;
-    private boolean isComboDBBedEnabled;
-    private boolean isComboDPEnabled;
     
     
     public GroupVerticalParameters()
@@ -60,32 +56,29 @@ public class GroupVerticalParameters
         Label labelDBSSurf = new Label(group, SWT.NO_BACKGROUND);
         labelDBSSurf.setText("Depth below sea surface");
         comboDBSSurf = new Combo(group, SWT.BORDER);
-        comboDBSSurf.setBackground( new Color(formEdition.getBody().getDisplay(), 255, 0, 0));
+//        comboDBSSurf.setBackground( new Color(formEdition.getBody().getDisplay(), 255, 0, 0));
         
       
         // Depth below sea bed
         Label labelDBSBed = new Label(group, SWT.NO_BACKGROUND);
         labelDBSBed.setText("depth below sea bed code");
         comboDBSBed = new Combo(group, SWT.BORDER);
-        comboDBSBed.setBackground( new Color(formEdition.getBody().getDisplay(), 255, 0, 0));
+//        comboDBSBed.setBackground( new Color(formEdition.getBody().getDisplay(), 255, 0, 0));
         
 //      Pressure
         Label labelP = new Label(group, SWT.NO_BACKGROUND);
         labelP.setText("pressure code");
         comboP = new Combo(group, SWT.BORDER);
-        comboP.setBackground( new Color(formEdition.getBody().getDisplay(), 255, 0, 0));
-        
-        
-        
+//        comboP.setBackground( new Color(formEdition.getBody().getDisplay(), 255, 0, 0));
         
         init();
     }
     
     private void init()
     {
-        comboDBSSurf.add("");
-        comboDBSBed.add("");
-        comboP.add("");
+        comboDBSSurf.add(Global.EMPTY_STRING);
+        comboDBSBed.add(Global.EMPTY_STRING);
+        comboP.add(Global.EMPTY_STRING);
     }
     
     public void addTypeData(TypeData typeData)
