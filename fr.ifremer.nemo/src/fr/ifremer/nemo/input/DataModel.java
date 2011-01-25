@@ -12,6 +12,7 @@ import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
+import fr.ifremer.nemo.util.Global.E_MesureType;
 
 
 /**
@@ -30,7 +31,12 @@ public class DataModel extends AbstractModel
      *
      */
     private DataListTypeEnum _dataListType;
+    private E_MesureType _mesureType;
 
+    
+    
+    
+    
     public DataModel(){
         _tagName = ModelDescription.node_dataModel;
         initValues();
@@ -43,6 +49,7 @@ public class DataModel extends AbstractModel
     public void initValues(){
         _parameterModels = new ArrayList<ParameterModel>();
         _dataListType = DataListTypeEnum.UNKNOWN;
+        _mesureType = E_MesureType.UNKNOWN;
     }
 
     public DataListTypeEnum getDataListType(){
@@ -88,6 +95,11 @@ public class DataModel extends AbstractModel
             Element2Field setter = new Element2Field(this, ModelDescription.setter_dataListType);
             return setter;
         }
+        else if (a_LocalName.equals(ModelDescription.node_mesureType))
+        {
+            Element2Field setter = new Element2Field(this, ModelDescription.setter_mesureType);
+            return setter;
+        }
         return null;
     }
     
@@ -115,6 +127,7 @@ public class DataModel extends AbstractModel
     @Override
     public void writeXMLBodyOn(XMLOutputWriter a_Writer){
         a_Writer.putTag(ModelDescription.node_dataListType, getDataListType().toString());
+        a_Writer.putTag(ModelDescription.node_mesureType, getMesureType().toString());
         a_Writer.openTag(ModelDescription.node_listParameters);
         for (ParameterModel el : getParameterModels()){
             el.writeXMLOn(a_Writer);
@@ -212,5 +225,15 @@ public class DataModel extends AbstractModel
     public void setDataListType(DataListTypeEnum dataList)
     {
         _dataListType = dataList;
+    }
+
+    public E_MesureType getMesureType()
+    {
+        return _mesureType;
+    }
+
+    public void setMesureType(E_MesureType mesureType)
+    {
+        _mesureType = mesureType;
     }   
 }

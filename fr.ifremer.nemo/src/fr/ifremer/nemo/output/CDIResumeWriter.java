@@ -266,7 +266,7 @@ public class CDIResumeWriter
         }
         finally
         {
-            reset();
+//            reset();
             if (writer != null)
                 writer.close();
         }
@@ -333,6 +333,11 @@ public class CDIResumeWriter
     public void setNomFichierSortie(String nomFichierSortie)
     {
         this.nomFichierSortie = nomFichierSortie;
+    }
+
+    public String getNomFichierSortie()
+    {
+        return nomFichierSortie;
     }
 
 }

@@ -27,7 +27,7 @@ import fr.ifremer.nemo.util.Global.E_ProcessType;
 import  org.eclipse.swt.events.SelectionEvent;
 
 /**
- * Description: TODO
+ * Description: listener sur le bouton browse de l'onget File (ouverture fichier entree)
  * @author sbregent
  *
  */

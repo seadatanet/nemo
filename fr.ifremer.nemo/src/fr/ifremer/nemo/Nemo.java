@@ -26,8 +26,6 @@ import com.ago.xml.XMLBootstrapParser;
 import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.input.InputModel;
-import fr.ifremer.nemo.input.parameters.Parameter;
-import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.ui.ApplicationWorkbenchWindowAdvisor;
 import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;

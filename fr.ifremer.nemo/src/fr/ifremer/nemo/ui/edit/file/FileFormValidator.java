@@ -21,7 +21,7 @@ import fr.ifremer.nemo.util.Preformat;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 
 /**
- * Description: TODO
+ * Description: validation de l'onglet File
  * @author sbregent 
  */
 public class FileFormValidator extends FormValidator

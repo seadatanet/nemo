@@ -70,6 +70,7 @@ public class RulesManager
     public static E_TypeConversion DEFAULT_CONVERSIONTYPE = E_TypeConversion.UNKNOWN;
     public static E_InputType DEFAULT_FILETYPE =E_InputType.PROFILE;
     public static DataListTypeEnum DEFAULT_DATALIST=DataListTypeEnum.UNKNOWN;
+    public static E_MesureType DEFAULT_MESURETYPE = E_MesureType.BSSURF;
    
     private String messageLog=Global.EMPTY_STRING;
     
@@ -298,6 +299,7 @@ public class RulesManager
            myDataListType = dataListType;
            Nemo.getInstance().getDomain().getData().getModel().setDataListType(dataListType);
            Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().reinitTable();
+           Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters().removeAllToAllCombos();
        }
    }
    public void updateFromModel(DataListTypeEnum dataListType)
@@ -323,15 +325,24 @@ public class RulesManager
            verticGroup.enable_pDepthBSBed(isP_depthBSBed_enabled());
            verticGroup.enable_pDepthBSSurf(isP_depthBSSurf_enabled());
            verticGroup.enable_pPressure(isP_pressure_enabled());
+//           verticGroup.removeAllToAllCombos();
    }
    public void updateFromModel(E_MesureType mesureType)
    {
+       if (mesureType==E_MesureType.UNKNOWN)
+       {
+           myMesureType=DEFAULT_MESURETYPE;
+       }else{
            myMesureType = mesureType;
-           rule_mesureType();
-           GroupVerticalParameters verticGroup = Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters();
-           verticGroup.enable_pDepthBSBed(isP_depthBSBed_enabled());
-           verticGroup.enable_pDepthBSSurf(isP_depthBSBed_enabled());
-           verticGroup.enable_pPressure(isP_depthBSBed_enabled());
+       }
+       rule_mesureType();
+       GroupVerticalParameters verticGroup = Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters();
+       verticGroup.enable_pDepthBSBed(isP_depthBSBed_enabled());
+       verticGroup.enable_pDepthBSSurf(isP_depthBSSurf_enabled());
+       verticGroup.enable_pPressure(isP_pressure_enabled());
+//       verticGroup.removeAllToAllCombos();
+
+       Nemo.getInstance().getViewMain().getEditDataForm().selectMesureType(myMesureType);
    }
    
    /**
@@ -345,9 +356,9 @@ public class RulesManager
        setP_pressure_enabled(false);
 
        boolean p_depthBSBed = 
-           isConversionToODV() 
-           && myMesureType==E_MesureType.BSBED 
-           && isProfile();
+           isProfile()
+           && isConversionToODV() 
+           && myMesureType==E_MesureType.BSBED ;
        
        boolean p_depthBSSurf = 
            (isProfile() 
@@ -365,7 +376,7 @@ public class RulesManager
 
        setP_depthBSBed_enabled(p_depthBSBed);
        setP_depthBSSurf_enabled(p_depthBSSurf);
-           setP_pressure_enabled(p_pressure);
+       setP_pressure_enabled(p_pressure);
    }
    /******************************************
     * REGLES
@@ -443,7 +454,10 @@ public class RulesManager
                ||myConversionType == E_TypeConversion.ODV_MULTISTATIONS);
    }
  
-   
+   public boolean isDataListTypeP011viaP021()
+   {
+       return myDataListType==DataListTypeEnum.P011_VIA_P021;
+   }
    /***********************************************************************************************************
     * getters & setters
     *********************************************************************************************************/
@@ -544,6 +558,10 @@ public class RulesManager
     public void setP_pressure_enabled(boolean p_pressure_enabled)
     {
         this.p_pressure_enabled = p_pressure_enabled;
+    }
+    public E_MesureType getMyMesureType()
+    {
+        return myMesureType;
     }
     
 

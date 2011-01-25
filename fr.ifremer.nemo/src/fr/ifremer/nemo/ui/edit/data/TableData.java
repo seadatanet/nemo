@@ -164,7 +164,7 @@ public class TableData
     {
         types.add(typeData);
         System.out.println("add "+typeData.getEntryKey());
-        myGroupVerticalParameters.addToAllCombo(typeData);
+        myGroupVerticalParameters.addTypeData(typeData);
     }
 
 
@@ -542,7 +542,7 @@ public class TableData
                 checkTypesWS();
                 openMyParameterFilteredTable();
                 }else{
-                //TODO BGT
+                //TODO BGT message
                     Utils.messageErreur("TODO aucun type de parametre choisi");
                 }
             }
@@ -888,11 +888,10 @@ public class TableData
         nbre = myTable.getItemCount();
         for (int i = 0; i < nbre; i++)
         {
-
-            if ((!myTable.getItem(i).getText(4).equals(
-                Global.EMPTY_STRING))
-                && (!myTable.getItem(i).getText(2).equals(
-                    Global.EMPTY_STRING)))
+            // 4e position = start
+            // 2e position = conversion
+            if ((!myTable.getItem(i).getText(4).equals(Global.EMPTY_STRING))
+                && (!myTable.getItem(i).getText(2).equals(Global.EMPTY_STRING)))
             {
                 // on a selectionne un debut et une fin et il y a une conversion
                 // e faire

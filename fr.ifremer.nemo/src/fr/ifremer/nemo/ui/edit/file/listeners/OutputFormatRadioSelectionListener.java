@@ -17,7 +17,7 @@ import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 
 /**
- * Description: TODO
+ * Description: listener
  * @author sbregent
  *
  */

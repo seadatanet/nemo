@@ -98,7 +98,8 @@ public class ModelDescription extends NLS
    
     public static String node_outputFormat;
     public static String node_dataListType;
-
+    public static String node_mesureType;
+    
     public static String a_version;
     public static String a_sourcepath;
     public static String a_multistations;
@@ -162,6 +163,7 @@ public class ModelDescription extends NLS
     public static String setter_defaultvalue;
     public static String setter_outputFormat;
     public static String setter_dataListType;
+    public static String setter_mesureType;
     static {
         // initialize resource bundle
         NLS.initializeMessages(BUNDLE_NAME, ModelDescription.class);

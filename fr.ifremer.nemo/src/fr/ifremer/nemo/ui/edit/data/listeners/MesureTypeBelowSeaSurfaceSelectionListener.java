@@ -15,7 +15,7 @@ import fr.ifremer.nemo.ui.edit.data.EditDataForm;
 import fr.ifremer.nemo.util.Global;
 
 /**
- * Description: TODO
+ * Description: listener
  * @author sbregent
  *
  */

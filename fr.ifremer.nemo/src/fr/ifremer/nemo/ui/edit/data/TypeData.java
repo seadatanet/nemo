@@ -58,6 +58,7 @@ public class TypeData extends Object {
 		this.setSortie(typeData.sortie);
 		this.setUnite(typeData.unite);
 //		this.setFullname(typeData.fullname);
+        this.setEntryKey(typeData.getEntryKey());
         this.setEntryTerm(typeData.getEntryTerm());
         this.setEntryTermP011(typeData.entryTermP011);
         this.setEntryKeyP011(typeData.entryKeyP011);
@@ -172,7 +173,8 @@ public class TypeData extends Object {
 	        code= getEntryKeyP011();
 	    }else
 	    {
-	        code = getFormattedCodeAndName();//P021 ou P091 selon le contexte d'utilisation   
+//	        code = getFormattedCodeAndName();//P021 ou P091 selon le contexte d'utilisation   
+            code = getEntryKey();
 	    }
 	    return code;
 	}

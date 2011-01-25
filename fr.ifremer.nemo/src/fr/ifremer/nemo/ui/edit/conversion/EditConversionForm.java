@@ -1,12 +1,9 @@
 package fr.ifremer.nemo.ui.edit.conversion;
 
 import java.io.File;
-import java.util.Arrays;
 
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.ArrayContentProvider;
-import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
@@ -16,13 +13,10 @@ import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.dialogs.ListDialog;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.input.CruiseModel;
-import fr.ifremer.nemo.input.DataType;
 import fr.ifremer.nemo.output.CDIResumeWriter;
 import fr.ifremer.nemo.output.ProgressNotification;
 import fr.ifremer.nemo.ui.ApplicationActionBarAdvisor;
@@ -30,22 +24,19 @@ import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.SWTProgress;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.EditForm;
+import fr.ifremer.nemo.ui.edit.conversion.listeners.ConversionSelectionListener;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.ui.view.ViewLog;
+import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.nemo.util.Global.E_ProcessType;
-import fr.ifremer.nemo.util.Global.E_TypeConversion;
-import fr.ifremer.nemo.ws.WSDataType;
 
 public class EditConversionForm extends EditForm
 {
     private Button buttonConversion;
 
-    // public String nomFichierSortie, nomDossierSortie;
     public ProgressNotification notifier;
 
-    // private String _dataSetRef;
 
     /**
      * Nom du fichier lu à retourner en cas d'erreur
@@ -70,11 +61,8 @@ public class EditConversionForm extends EditForm
     // Résumé des infos de conversion
     private Text conversionSummary;
 
-    /**
-     * Liste des stations triees
-     */
-    /*protected LinkedHashMap<String, Integer> _sortedStations =
-        new LinkedHashMap<String, Integer>();*/
+    // commande batch correspondant à la conversion effectuée ici en mode graphique
+    private Text batchCommandLine;
 
     /**
      * messages d'avertissement de formats grisés car données non conformae
@@ -96,6 +84,8 @@ public class EditConversionForm extends EditForm
         formEdition.setText(Messages.edit_convert_title);
 
         createSummary();
+        
+       
        
        
        
@@ -103,104 +93,11 @@ public class EditConversionForm extends EditForm
         buttonConversion = new Button(formEdition.getBody(), SWT.NONE);
         buttonConversion.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
         buttonConversion.setText(Messages.button_convert);
-        buttonConversion
-            .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-                @Override
-                public void widgetSelected(
-                        org.eclipse.swt.events.SelectionEvent e)
-                {
-                    try
-                    {
-                        // Test si la config est bien remplie
-                        if (!checkConfig())
-                        {
-                            throw new Exception("CDI cancelled"); //$NON-NLS-1$
-                        }
-                        EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
-                        // RaZ
-                        Nemo.getInstance().getDomain().getCruise().setDataSetRef(Global.EMPTY_STRING);
-                        Nemo.getInstance().getDomain().getMedia().initOutput();
-                        Nemo.getInstance().getDomain().getConversion().setNomMappingHorsPrefix(Global.EMPTY_STRING);
-                        Utils.messageErreur(Global.EMPTY_STRING);
-
-                        // type de la conversion
-                         E_TypeConversion currentConversion = Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType();
-                        Nemo.getInstance().getDomain().getConversion().setCurrentConversion(currentConversion);
-                        boolean sortData = editFileForm.isSortForced();
-                        Nemo.getInstance().getDomain().getConversion().setSortData(sortData);
-
-
-                        if (editFileForm.isOkApresReset()
-                                && Nemo.getInstance().getViewMain().getEditCruiseForm().isOkApresReset()
-                                && Nemo.getInstance().getViewMain().getEditStationForm().isOkApresReset()
-                                && Nemo.getInstance().getViewMain().getEditDataForm().isOkApresReset())
-                        {
-
-                            if (currentConversion == E_TypeConversion.UNKNOWN)
-                            {
-                                Utils.messageErreur(Messages.error_convert_cancel);
-                                throw new Exception("Cancelled"); //$NON-NLS-1$
-                            }
-                            //FAE 6399 correction: process != E_ProcessType.COLLECTION_DIR
-                            // et non == 
-                            if ((currentConversion != E_TypeConversion.MEDATLAS)
-                                && Nemo.getInstance().getViewMain().getMyRulesManager().getMyProcessType() != E_ProcessType.COLLECTION_DIR)
-                            {
-                                if (!askDataSetRef())
-                                {
-                                    throw new Exception("Cancelled"); //$NON-NLS-1$
-                                }
-                            }
-
-                            // On demande les infos pour faire le résumé CDI,
-                            // qui sera fait plus tard
-                            if (Nemo.getInstance().getConfig().isWriteCdi())
-                            {
-                                CDIResumeWriter.getInstance().reset();
-                                CDIResumeWriter.getInstance()
-                                    .choixFichierSortie();
-                            }
-
-                            boolean okChoixSortie;
-                            // test pour savoir si on est en campagne ou pas
-                            if (Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection())
-                            {
-//                               // FAE 6536 
-//								 DataType dt = askDataType();
-//                                Nemo.getInstance().getDomain().getCruise()
-//                                    .getStation().getModel().setDataType(dt);
-                                okChoixSortie = choixDossierSortie();
-                            }
-                            else if (currentConversion == E_TypeConversion.ODV_MONOSTATION)
-                            {
-                                okChoixSortie = choixDossierSortie();
-                            }
-                            else
-                            {
-                                okChoixSortie = choixFichierSortie();
-                            }
-
-                            if (okChoixSortie)
-                            {
-                                definePrefixDossier();
-
-                                // affichage des résultats en fin de conversion
-                                afficheResultat(runSWTProgress());
-                            }
-                        }
-                        else
-                        {
-                            Utils
-                                .messageErreur(Messages.error_convert_invalideSteps);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        ex.printStackTrace();
-                        Utils.messageErreur(Messages.error_convert_cancel);
-                    }
-                }
-            });
+        
+        ConversionSelectionListener listener = new ConversionSelectionListener();
+        buttonConversion.addSelectionListener(listener);
+        
+        createBatchCommandLine();
     }
 
     @Override
@@ -216,7 +113,7 @@ public class EditConversionForm extends EditForm
         
         // activation du bouton, par defaut
         buttonConversion.setEnabled(true);
-        
+        batchCommandLine.setText(Global.EMPTY_STRING);
         
         ViewLog.aideConversion();
 
@@ -780,8 +677,103 @@ public class EditConversionForm extends EditForm
         conversionSummary.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
         fillSummary();
     }
+    private void createBatchCommandLine()
+    {
+        batchCommandLine=  new Text(formEdition.getBody(), SWT.READ_ONLY | SWT.WRAP );
+        batchCommandLine.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
+    }
     
     
+    public void fillBatchCommandLine()
+    {
+        RulesManager rm = Nemo.getInstance().getViewMain().getMyRulesManager();
+        EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
+        String command="nemo_batch";
+        command += Global.RN;
+        
+        //input 
+        command += Global.MOINS + Global.optInputFile;
+        command += Global.SPACE;
+        command += "\"";
+        if(editFileForm.isCruiseIsAFile())
+        {
+            command += editFileForm.nomFichier;  
+        }
+        if(rm.isCruiseInADirectory())
+        {
+            command += editFileForm.nomRepertoire;   
+        }
+        command += "\"";
+        
+        //model
+        command += Global.RN;
+        command += Global.MOINS + Global.optModelFile;
+        command += Global.SPACE;
+        command += "\"";
+        command += Nemo.getInstance().getCurrentOpenModelPath();
+        command += "\"";
+        
+        // output 
+        command += Global.RN;
+        command += Global.MOINS + Global.optOutputFile;
+        command += Global.SPACE;
+        command += "\"";
+        command += Nemo.getInstance().getDomain().getMedia().getOutputFileName();
+        command += "\"";
+        
+        // conversion
+        command += Global.RN;
+        command += Global.MOINS + Global.optConv;
+        command += Global.SPACE;
+        if (rm.isConversionToMedatlas())
+        {
+            command += Conversion.MEDATLAS.toString();
+        }
+        if (rm.isConversionToODV())
+        {
+            command += Conversion.ODV.toString();
+        }
+        
+        if (rm.isConversionToODVMultiStation())
+        {
+            command +=Global.RN;
+            command += Global.SPACE;
+            command += Global.MOINS + Global.optOdvMulti;
+        }
+
+        
+        //datasetRef
+        command +=Global.RN;
+        command += Global.MOINS + Global.optDatasetRef;
+        command += Global.SPACE;
+        command += Nemo.getInstance().getDomain().getCruise().getDataSetRef();
+        
+        //cdisummary
+        if ( Nemo.getInstance().getConfig().isWriteCdi())
+        {
+            command += Global.RN;
+            command += Global.MOINS + Global.optCdiSummary;
+            command += Global.SPACE;
+            command += "\"";
+            command += CDIResumeWriter.getInstance().getNomFichierSortie();
+            command += "\"";
+        }
+        
+        batchCommandLine.setText(command);
+        batchCommandLine.pack();
+        
+        // ajout onglet infos
+        ViewLog.styledTextLogInfos.setText("");
+        ViewLog.styledTextLogInfos.append("commande batch: ");
+        ViewLog.styledTextLogInfos.append(Global.RN);
+        ViewLog.styledTextLogInfos.append(Global.RN);
+        
+        // ajout onglet erreurs
+        Utils.messageOKAppend(Global.RN);
+        Utils.messageOKAppend("commande batch: ");
+        Utils.messageOKAppend(command);
+        
+    }
     public void fillSummary()
     {
         RulesManager rm = Nemo.getInstance().getViewMain().getMyRulesManager();

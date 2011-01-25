@@ -239,9 +239,11 @@ public class Messages {
     public static String error_cruise_openXml;
     public static String error_cruise_invalidXML;
     public static String error_data_removePRES;
-    public static String error_data_p091_firstPRES;
-    public static String error_data_p011_firstPRES;
-    public static String error_data_firstDEPH_TRAJ;
+//    public static String error_data_p091_firstPRES;
+//    public static String error_data_p011_firstPRES;
+    public static String error_data_firstParam_depthBSBed;
+    public static String error_data_firstParam_depthBSSurfOrPres;
+//    public static String error_data_firstDEPH_TRAJ;
     public static String error_convert_invalideSteps;
     public static String error_convert_cancel;
     public static String error_convert_position;

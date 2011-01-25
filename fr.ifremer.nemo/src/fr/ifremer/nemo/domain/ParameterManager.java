@@ -10,20 +10,31 @@ package fr.ifremer.nemo.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.swt.internal.ole.win32.ISpecifyPropertyPages;
+
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.input.DataModel;
 import fr.ifremer.nemo.input.Fragment;
 import fr.ifremer.nemo.input.LineFragment;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.input.parameters.AddedParameter;
+import fr.ifremer.nemo.input.parameters.Parameter;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.input.parameters.AddedParameter.IdParameter;
+import fr.ifremer.nemo.ui.edit.data.TypeData;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Intern;
+import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_InputType;
+import fr.ifremer.nemo.util.Global.E_MesureType;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
 
 /**
- * Description: TODO
+ * Description: classe de gestion des regles sur les parametres
+ * gere les regles de detection et d'ajout automatique a partir du modele (appelees lors de la conversion)
+ * cette classe ne DOIT PAS appeler l'IHM car ces methodes doivent pouvoir etre appelees en batch
+ * 
+ * Par contre, l'IHM peut utiliser des methodes de ceette classe, car les tests peuvent être utilisés pour la validation de l'onglet data
  * @author sbregent
  *
  */
@@ -42,6 +53,15 @@ public class ParameterManager
      * Informations descrivant l'onglet Data
      */
     protected DataModel _model;
+    
+    
+    /**
+     * codes des parametres verticaux de reference
+     */
+    private String _p_depthBSSurf_entryKey;
+    private String _p_depthBBed_entryKey;
+    private String _p_pressure_entryKey;
+
     
     public ParameterManager(DataModel model)
     {
@@ -292,5 +312,115 @@ public class ParameterManager
             }
         }
         return param;
+    }
+    
+    
+    public boolean isPossiblePressureParameter(TypeData typeData)
+    {
+        return  isPossiblePressureParameter(new Parameter(typeData));
+    }
+    public boolean isPossiblePressureParameter(Parameter param)
+    {
+        boolean res = false;
+        DataListTypeEnum dataListType = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
+        if (dataListType == DataListTypeEnum.P011_VIA_P021)
+        {
+            if(param.getCode().equals(Intern.paramAHGT)){
+                res=true;
+            }
+        }else if(dataListType == DataListTypeEnum.P091 ||dataListType == DataListTypeEnum.P011_VIA_P091 ){
+            if (param.getCode().equals(Intern.paramPRES))
+            {
+                res=true;
+            }
+        }
+        return res;
+    }
+    
+    public boolean isPossibleDepthBSSurfParameter(TypeData typeData)
+    {
+        return  isPossibleDepthBSSurfParameter(new Parameter(typeData));
+    }
+    public boolean isPossibleDepthBSSurfParameter(Parameter param)
+    {
+        boolean res = false;
+        DataListTypeEnum dataListType = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
+        if (dataListType == DataListTypeEnum.P011_VIA_P021)
+        {
+            if(param.getCode().equals(Intern.paramAHGT)){
+                res=true;
+            }
+        }else if(dataListType == DataListTypeEnum.P091 ||dataListType == DataListTypeEnum.P011_VIA_P091 ){
+            if (param.getCode().equals(Intern.paramDEPH))
+            {
+                res=true;
+            }
+        }
+        return res;
+    }
+    public boolean isPossibleDepthBSBedParameter(TypeData typeData)
+    {
+        return  isPossibleDepthBSBedParameter(new Parameter(typeData));
+    }
+    public boolean isPossibleDepthBSBedParameter(Parameter param)
+    {
+        boolean res = false;
+        DataListTypeEnum dataListType = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
+        if (dataListType == DataListTypeEnum.P011_VIA_P021)
+        {
+            if(param.getCode().equals(Intern.paramAHGT)){
+                res=true;
+            }
+        }else if(dataListType == DataListTypeEnum.P091 ||dataListType == DataListTypeEnum.P011_VIA_P091 ){
+            if (param.getCode().equals(Intern.paramDPSF))
+            {
+                res=true;
+            }
+        }
+        return res;
+    }
+    
+    
+//    public boolean isDepthBSBedParameterNeeded()
+//    {
+//        boolean res = false;
+//        res = 
+//            (
+//                    Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.PROFILE
+//                    &&
+//                    (
+//                            Nemo.getInstance().getDomain().getConversion().getModel().getOutputFormat()==E_TypeConversion.ODV_MONOSTATION
+//                            ||
+//                            Nemo.getInstance().getDomain().getConversion().getModel().getOutputFormat()==E_TypeConversion.ODV_MULTISTATIONS
+//                    )
+//                    &&
+//                    Nemo.getInstance().getDomain().getData().getModel().getMesureType()==E_MesureType.BSBED
+//            );
+//        return res;
+//    }
+    
+    public String getP_depthBBed_entryKey()
+    {
+        return _p_depthBBed_entryKey;
+    }
+    public void setP_depthBBed_entryKey(String bed_entryKey)
+    {
+        _p_depthBBed_entryKey = bed_entryKey;
+    }
+    public String getP_depthBSSurf_entryKey()
+    {
+        return _p_depthBSSurf_entryKey;
+    }
+    public void setP_depthBSSurf_entryKey(String surf_entryKey)
+    {
+        _p_depthBSSurf_entryKey = surf_entryKey;
+    }
+    public String getP_pressure_entryKey()
+    {
+        return _p_pressure_entryKey;
+    }
+    public void setP_pressure_entryKey(String key)
+    {
+        _p_pressure_entryKey = key;
     }
 }

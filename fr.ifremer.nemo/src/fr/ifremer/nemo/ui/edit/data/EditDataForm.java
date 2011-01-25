@@ -16,12 +16,11 @@ import org.eclipse.swt.widgets.Label;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
+import fr.ifremer.nemo.util.Global.E_MesureType;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.EditForm;
 import fr.ifremer.nemo.ui.edit.data.listeners.DataListRadioSelectionListener;
-import fr.ifremer.nemo.ui.edit.data.listeners.DepthBelowSeaBedSelectionListener;
-import fr.ifremer.nemo.ui.edit.data.listeners.DepthBelowSeaSurfSelectionListener;
 import fr.ifremer.nemo.ui.edit.data.listeners.MesureTypeBelowSeaBedSelectionListener;
 import fr.ifremer.nemo.ui.edit.data.listeners.MesureTypeBelowSeaSurfaceSelectionListener;
 import fr.ifremer.nemo.ui.view.ViewLog;
@@ -42,6 +41,9 @@ public class EditDataForm extends EditForm
     private Button button_P011viaP091;
     private Button button_P091;
     private Button button_P011viaP021;
+    // choix du type de mesure
+    private Button mesType_belowSeaSurface ;
+    private Button mesType_belowSeaBed ;
     
     private GroupVerticalParameters myGroupeVerticalParameters;
    
@@ -181,6 +183,10 @@ public class EditDataForm extends EditForm
         // update dataList to use   
         DataListTypeEnum dataList = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
         Nemo.getInstance().getViewMain().getMyRulesManager().updateFromModel(dataList)    ;    
+        
+        // update mesureType to use   
+        E_MesureType mesureType = Nemo.getInstance().getDomain().getData().getModel().getMesureType();
+        Nemo.getInstance().getViewMain().getMyRulesManager().updateFromModel(mesureType)    ;    
       
     }
     
@@ -211,7 +217,20 @@ public class EditDataForm extends EditForm
 
 
     }
+    public void selectMesureType(E_MesureType mesureType)
+    {
+        mesType_belowSeaSurface .setSelection(false);
+        mesType_belowSeaBed .setSelection(false);
 
+        if (mesureType == E_MesureType.BSBED)
+        { 
+            mesType_belowSeaBed.setSelection(true);
+        }
+        else if(mesureType == E_MesureType.BSSURF)
+        {
+            mesType_belowSeaSurface.setSelection(true);
+        }
+    }
     private DataListTypeEnum getSelectedDataList()
     {
         DataListTypeEnum res=DataListTypeEnum.UNKNOWN;
@@ -317,13 +336,13 @@ public class EditDataForm extends EditForm
 
         
         MesureTypeBelowSeaSurfaceSelectionListener surfListener = new MesureTypeBelowSeaSurfaceSelectionListener();
-        Button mesType_belowSeaSurface = new Button(group, SWT.RADIO);
+        mesType_belowSeaSurface = new Button(group, SWT.RADIO);
         mesType_belowSeaSurface.setText(Messages.edit_data_belowSeaSurface);
         mesType_belowSeaSurface.addSelectionListener(surfListener);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(mesType_belowSeaSurface);
         
         MesureTypeBelowSeaBedSelectionListener bedListener = new MesureTypeBelowSeaBedSelectionListener();
-        Button mesType_belowSeaBed = new Button(group, SWT.RADIO);
+        mesType_belowSeaBed = new Button(group, SWT.RADIO);
         mesType_belowSeaBed.setText(Messages.edit_data_belowSeaBed);
         mesType_belowSeaBed.addSelectionListener(bedListener);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(mesType_belowSeaBed);

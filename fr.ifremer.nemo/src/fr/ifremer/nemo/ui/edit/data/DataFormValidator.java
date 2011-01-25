@@ -3,6 +3,7 @@ package fr.ifremer.nemo.ui.edit.data;
 import java.util.regex.Pattern;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.FormValidator;
 import fr.ifremer.nemo.ui.edit.conversion.EditConversionForm;
@@ -10,24 +11,44 @@ import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.nemo.util.Global.DataListTypeEnum;
-import fr.ifremer.nemo.util.Global.E_TypeConversion;
+import fr.ifremer.nemo.util.Global.E_MesureType;
 
 /**
- * Description: TODO
+ * Description: validation de l'onglet data
  * @author sbregent 
  */
 public class DataFormValidator extends FormValidator
 {
-    
+    RulesManager rm ;
+    GroupVerticalParameters verticalParamGroup;
+   private String p_depthBBed_entryKey="";
+   private String p_depthBSurf_entryKey="";
+   private String p_pressure_entryKey="";
+   private String p_salinity_entryKey="";
+   private String p_temperature="";
     
     public DataFormValidator()
     {
         super();
+       
+    }
+    
+    
+    private void reinitVerticalParams()
+    {
+        p_depthBBed_entryKey="";
+        p_depthBSurf_entryKey="";
+        p_pressure_entryKey="";
+        p_salinity_entryKey="";
+        p_temperature="";
     }
     @Override
     public void validate()
     {
+        reinitVerticalParams();
+        // TODO BGT mettre a jour les valeurs du modele pour les params, lemesureType et le dataListType qd tout ok
+        rm = Nemo.getInstance().getViewMain().getMyRulesManager();
+        verticalParamGroup =Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters();
         EditConversionForm editConversionForm = Nemo.getInstance().getViewMain().getEditConversionForm();
         EditDataForm editDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
 
@@ -56,7 +77,8 @@ public class DataFormValidator extends FormValidator
         }
         // -------------------------------------------------------------------------
         
-        
+        if (!exitValid)
+        {
         /**-----------------------------------------------------------------------
          * data10
          */
@@ -68,8 +90,7 @@ public class DataFormValidator extends FormValidator
         // -------------------------------------------------------------------------
         
        
-        if (!exitValid)
-        {
+     
             int[] debuts, fins;
             String[] debutsFlag, finsFlag;
             int cptDebut = 0;
@@ -167,34 +188,32 @@ public class DataFormValidator extends FormValidator
                 ok = false;
             }
             //  ----------------------------------------------------------
-            
+         boolean verticOK=   detectVerticalParameters();
             
             /**-----------------------------------------------------------------------
              * data60
-             * verif que les valeurs de « debut » et « fin » sont différentes des valeurs affichées par défaut
+             * 
              **/
             // TEST pour savoir si PRES est bien en premier mais pas pour
             // profile ou trajectoire
             TypeData premierType = editDataForm.getMyTableData().getTypes().get(0);
 
-            // split sur " - "
-//            Pattern p = Pattern.compile(Global.SEP);
-//            String[] mots = p.split(premierType.getCode());
-//            String firstParameterCode = mots[0];
-            String firstParameterCode = premierType.getEntryKey();
+            String firstParameterCode = premierType.getCodeToUse();
             editConversionForm.setWarningData(Global.EMPTY_STRING);
 
             if (Nemo.getInstance().getViewMain().getMyRulesManager().isProfile())
             {
                 boolean checkPressureOk;
-
-                checkPressureOk = checkPressureIsInFirstPosition(firstParameterCode);
+                checkPressureOk = checkVerticalParameterIsInFirstPosition(firstParameterCode);
 
                 // Si PRES n'est pas premier => Medatlas impossible
                 // A moins que l'on ait les parametre DEPH, PSAL et TEMP ( FAE 3228 )
-
+                /**-----------------------------------------------------------------------
+                 * data70
+                 * 
+                 **/
                 if (!checkPressureOk){
-                    if ((Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType() == E_TypeConversion.MEDATLAS))
+                    if ((Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas()))
                     {
 
                         checkPressureOk = checkDepthAndSalinityAndTemperature();
@@ -273,37 +292,27 @@ public class DataFormValidator extends FormValidator
      * @param firstParameterCode
      * @return
      */
-    private static boolean checkPressureIsInFirstPosition(String firstParameterCode)
+    private boolean checkVerticalParameterIsInFirstPosition(String firstParameterCode)
     {
         boolean checkOk = true;
-        DataListTypeEnum dataList = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
-        
-        if (dataList == DataListTypeEnum.P011_VIA_P091 || dataList == DataListTypeEnum.P091)
+
+        // cas below sea bed
+        if( Nemo.getInstance().getViewMain().getMyRulesManager().getMyMesureType()==E_MesureType.BSBED)
         {
-            //FAE 5819 : ajout du code DPSF(P091) ou MINCDIST(P011) comme parametre possible
-            if (!(firstParameterCode.equals(Intern.paramPRES) 
-                    || firstParameterCode.equals(Intern.paramDEPH)
-                    || firstParameterCode.equals(Intern.paramDPSF)
-            ))
-            {
-                // PRES ou DEPH ou DPSF n'est pas en premier
-                Utils.messageErreurAppend(Messages.error_data_p091_firstPRES);
-                checkOk=false;
+            checkOk = firstParameterCode.equals(p_depthBBed_entryKey);
+            if (!checkOk){
+                Utils.messageErreurAppend(Messages.error_data_firstParam_depthBSBed);
             }
         }
-        else if (dataList == DataListTypeEnum.P011_VIA_P021)
+        else if( Nemo.getInstance().getViewMain().getMyRulesManager().getMyMesureType()==E_MesureType.BSSURF)
         {
-            //FAE 5819 : ajout du code DPSF(P091) ou MINCDIST(P011) comme parametre possible
-            if (!(firstParameterCode.equals(Intern.paramPREX) 
-                    || firstParameterCode.equals(Intern.paramMPMN)
-                    || firstParameterCode.equals(Intern.paramAHGT)
-            ))
-            {
-                // PREX ou MPMN ou AHGT n'est pas en premier
-                Utils.messageErreurAppend(Messages.error_data_p011_firstPRES);
-                checkOk=false;
+            checkOk = firstParameterCode.equals(p_depthBSurf_entryKey)
+            || firstParameterCode.equals(p_pressure_entryKey);
+            if (!checkOk){
+                Utils.messageErreurAppend(Messages.error_data_firstParam_depthBSSurfOrPres);
             }
         }
+
         return checkOk;
     }
     
@@ -397,5 +406,110 @@ public class DataFormValidator extends FormValidator
        }
 
        return okRes;
+   }
+   
+   
+   private boolean detectVerticalParameters()
+   {
+      if( Nemo.getInstance().getViewMain().getMyRulesManager().isDataListTypeP011viaP021())
+      {
+           detectVerticalParametersForP011();
+      }
+      else
+      {
+           detectVerticalParametersForP091();
+      }
+      return checkVerticalParametersWellDetected();
+   }
+   
+   private void detectVerticalParametersForP011()
+   {
+       boolean ok=true;
+       int index;
+       // depth below sea surface
+       if (rm.isP_depthBSSurf_enabled()){
+           index= verticalParamGroup.getComboDBSSurf().getSelectionIndex();
+           if (index != -1){
+           p_depthBSurf_entryKey = verticalParamGroup.getComboDBSSurf().getItem(index);
+           }
+        }
+       // Depth below sea bed
+       if (rm.isP_depthBSBed_enabled()){
+          index= verticalParamGroup.getComboDBSBed().getSelectionIndex();
+          if (index != -1){
+              p_depthBBed_entryKey = verticalParamGroup.getComboDBSBed().getItem(index);
+          }
+       }
+      // pressure
+       if (rm.isP_pressure_enabled()){
+           index= verticalParamGroup.getComboP().getSelectionIndex();
+           if (index != -1){
+           p_pressure_entryKey = verticalParamGroup.getComboP().getItem(index);
+           }
+        }
+       
+   }
+   
+   private boolean checkVerticalParametersWellDetected()
+   {
+       
+       boolean ok=true;
+       if (rm.isP_depthBSBed_enabled() && p_depthBBed_entryKey.equals(Global.EMPTY_STRING))
+       {
+           Utils.messageErreurAppend("must choose depht below bed");
+           //TODO BGT message
+           ok=false;
+       }
+       
+       if (
+               (rm.isP_depthBSSurf_enabled()&& rm.isP_pressure_enabled() )
+               &&
+               (p_depthBSurf_entryKey.equals(Global.EMPTY_STRING) && p_pressure_entryKey.equals(Global.EMPTY_STRING))
+               ){
+           Utils.messageErreurAppend("must choose depth below sea surf or pressure");
+           //TODO BGT message
+           ok=false;
+       }
+       return ok;
+   }
+   private  void detectVerticalParametersForP091()
+   {
+        autoFillVerticalParametersForP091();
+   }
+   
+   private void autoFillVerticalParametersForP091()
+   {
+       // reinit des valeurs
+       p_depthBBed_entryKey="";
+       p_depthBSurf_entryKey="";
+       p_pressure_entryKey="";
+       
+       int waitedNbItems = 2; // la valeur vide "" + la valeur attendue pour ce param en P091
+       int indexToSelect = 1; // index de la valeur à selectionner (index de la valeur vide = 0, index de la valeur attendue est 1)
+       
+       // Depth below sea bed
+       if (rm.isP_depthBSBed_enabled()){
+           if(verticalParamGroup.getComboDBSBed().getItemCount()== waitedNbItems)
+           {
+               p_depthBBed_entryKey = verticalParamGroup.getComboDBSBed().getItem(indexToSelect);
+               verticalParamGroup.getComboDBSBed().select(indexToSelect);
+           }
+       }
+       // depth below sea surface
+       if (rm.isP_depthBSSurf_enabled()){
+           if(verticalParamGroup.getComboDBSSurf().getItemCount()== waitedNbItems)
+           {
+               p_depthBSurf_entryKey = verticalParamGroup.getComboDBSSurf().getItem(indexToSelect);
+               verticalParamGroup.getComboDBSSurf().select(indexToSelect);
+           }
+       }
+       // pressure
+       if (rm.isP_pressure_enabled()){
+           if(verticalParamGroup.getComboP().getItemCount()== waitedNbItems)
+           {
+               p_pressure_entryKey = verticalParamGroup.getComboP().getItem(indexToSelect);
+               verticalParamGroup.getComboP().select(indexToSelect);
+           }
+       }
    }
 }
