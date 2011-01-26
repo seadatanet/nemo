@@ -1,5 +1,5 @@
 <!-- Generation de l'installeur de la structure d'accueil Daurade -->
-<project name="com.shom.daurade.build" default="build">
+<project name="fr.ifremer.nemo.build" default="build">
 	<!--sets the path of the properties file-->
 	<property name="pdeBuildPluginVersion" value="3.6.1.R36x_v20100823" />
 	<property name="equinoxLauncherPluginVersion" value="1.1.0.v20100507" />
@@ -19,13 +19,11 @@
 		<!-- ### -->
 		
 		<property file="build.properties" />
-		<!--
-		<mkdir dir="${buildDirectory}/plugins" />
-		<mkdir dir="${buildDirectory}/features" />
-		-->
+
 	</target>
 
 	<target name="pde-build" description="Eclipse PDE Build">
+	
 		<java classname="org.eclipse.equinox.launcher.Main" fork="true" failonerror="true">
 			<arg value="-application" />
 			<arg value="org.eclipse.ant.core.antRunner" />
@@ -37,12 +35,6 @@
 			</classpath>
 		</java>
 
-		<!-- Ajout des fichiers necessaire a l'application-->
-<!--		<copy todir="${buildDirectory}/tmp/${archivePrefix}">
-			<fileset dir="plugins/com.shom.daurade.sa/">
-				<include name="conf/**" />
-			</fileset>
-		</copy>   -->
 	</target>
 
 	<target name="installer" description="Make installer with IzPack">
