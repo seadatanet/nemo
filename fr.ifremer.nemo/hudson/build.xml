@@ -58,7 +58,7 @@
 		<mkdir dir="${buildDirectory}/Nemo_IzPack/src/solaris.gtk.sparc"/>
 		<unzip src="${buildDirectory}/Nemo-solaris.gtk.sparc.zip" dest="${buildDirectory}/Nemo_IzPack/src/solaris.gtk.sparc"/>
 		
-		<ant dir="${buildDirectory}/Nemo_IzPack" inheritAll="false"/> 
+		<ant dir="${buildDirectory}/Nemo_IzPack/hudson" inheritAll="false"/> 
 		
 	</target>
 	
