@@ -204,7 +204,16 @@ public class DataModel extends AbstractModel
         }
         return parameter;
     }
-
+    public ParameterModel getParameterModelByP011(String codeP011){
+        ParameterModel parameter = null;
+        for (ParameterModel p : getParameterModels()){
+            if (p.getParameter().getCodeP011().equals(codeP011)){
+                parameter = p;
+                break;
+            }
+        }
+        return parameter;
+    }
     /**
      * Renvoit le ParameterModel trouvé à l'index i de _parameterModels
      * @param i : index

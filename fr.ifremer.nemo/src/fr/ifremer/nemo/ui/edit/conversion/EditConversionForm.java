@@ -61,8 +61,6 @@ public class EditConversionForm extends EditForm
     // Résumé des infos de conversion
     private Text conversionSummary;
 
-    // commande batch correspondant à la conversion effectuée ici en mode graphique
-    private Text batchCommandLine;
 
     /**
      * messages d'avertissement de formats grisés car données non conformae
@@ -97,7 +95,6 @@ public class EditConversionForm extends EditForm
         ConversionSelectionListener listener = new ConversionSelectionListener();
         buttonConversion.addSelectionListener(listener);
         
-        createBatchCommandLine();
     }
 
     @Override
@@ -113,7 +110,6 @@ public class EditConversionForm extends EditForm
         
         // activation du bouton, par defaut
         buttonConversion.setEnabled(true);
-        batchCommandLine.setText(Global.EMPTY_STRING);
         
         ViewLog.aideConversion();
 
@@ -677,11 +673,6 @@ public class EditConversionForm extends EditForm
         conversionSummary.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
         fillSummary();
     }
-    private void createBatchCommandLine()
-    {
-        batchCommandLine=  new Text(formEdition.getBody(), SWT.READ_ONLY | SWT.WRAP );
-        batchCommandLine.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
-    }
     
     
     public void fillBatchCommandLine()
@@ -743,10 +734,13 @@ public class EditConversionForm extends EditForm
 
         
         //datasetRef
-        command +=Global.RN;
-        command += Global.MOINS + Global.optDatasetRef;
-        command += Global.SPACE;
-        command += Nemo.getInstance().getDomain().getCruise().getDataSetRef();
+        String dataSetRef=Nemo.getInstance().getDomain().getCruise().getDataSetRef();
+        if (!dataSetRef.equals(Global.EMPTY_STRING)){
+            command +=Global.RN;
+            command += Global.MOINS + Global.optDatasetRef;
+            command += Global.SPACE;
+            command += Nemo.getInstance().getDomain().getCruise().getDataSetRef();
+        }
         
         //cdisummary
         if ( Nemo.getInstance().getConfig().isWriteCdi())
@@ -759,14 +753,7 @@ public class EditConversionForm extends EditForm
             command += "\"";
         }
         
-        batchCommandLine.setText(command);
-        batchCommandLine.pack();
         
-        // ajout onglet infos
-        ViewLog.styledTextLogInfos.setText("");
-        ViewLog.styledTextLogInfos.append("commande batch: ");
-        ViewLog.styledTextLogInfos.append(Global.RN);
-        ViewLog.styledTextLogInfos.append(Global.RN);
         
         // ajout onglet erreurs
         Utils.messageOKAppend(Global.RN);

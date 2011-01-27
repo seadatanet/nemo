@@ -287,7 +287,7 @@ public class ViewMain extends ViewPart
 
         // --- renitialisation du tableau de paramètres (onglet Data)
         editDataForm.reinitTableData();
-
+        editDataForm.reinitParameters();
         // --- le titre de l'application
         ApplicationWorkbenchWindowAdvisor.configurer_titre
         .setTitle(Intern.application_title);

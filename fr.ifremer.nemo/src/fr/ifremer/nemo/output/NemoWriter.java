@@ -95,7 +95,8 @@ public abstract class NemoWriter{
 
 	                    while ((readedLine = bufferedReader.readLine()) != null) {
 	                        numLine++;
-
+//TODO BGT afficher le no de ligne en cas de plantage
+//System.out.println("!!!!!!!!!!!!numLine" + numLine);
 	                        if (numLine == 1){
 	                            consumeFileHeader();
 	                        }

@@ -7,6 +7,10 @@
  */
 package fr.ifremer.nemo.ui;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Dialog;
+import org.eclipse.swt.widgets.Shell;
+
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.ui.edit.data.GroupVerticalParameters;
@@ -295,7 +299,13 @@ public class RulesManager
    public void updateFromIHM(DataListTypeEnum dataListType)
    {
        System.out.println(myDataListType + " >>> "+dataListType);
-       if (dataListType != myDataListType){   
+       if (dataListType != myDataListType){  
+           //TODO BGT faire une boite propre
+           Shell dialog = new Shell( SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL); 
+           dialog.setSize(100,100);
+           dialog.setText("ATTENTION!!!!!!!!"); 
+           
+          dialog.open();
            myDataListType = dataListType;
            Nemo.getInstance().getDomain().getData().getModel().setDataListType(dataListType);
            Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().reinitTable();
@@ -357,7 +367,7 @@ public class RulesManager
 
        boolean p_depthBSBed = 
            isProfile()
-           && isConversionToODV() 
+       
            && myMesureType==E_MesureType.BSBED ;
        
        boolean p_depthBSSurf = 
@@ -365,7 +375,7 @@ public class RulesManager
                    && myMesureType==E_MesureType.BSSURF
            )
            ||
-           (isTimeSeries() 
+           ((isTimeSeries() ||isTrajectory())
                    && isConversionToODV()
            );
        
@@ -407,7 +417,7 @@ public class RulesManager
    }
    private void rule_conversionType(boolean addToLog)
    {
-
+// TODO BGT pb si on choisit medatlas mais que le modele en cours est en P021
        if ( myConversionType==E_TypeConversion.ODV_MONOSTATION ||
                myConversionType==E_TypeConversion.ODV_MULTISTATIONS)
        {
@@ -457,6 +467,14 @@ public class RulesManager
    public boolean isDataListTypeP011viaP021()
    {
        return myDataListType==DataListTypeEnum.P011_VIA_P021;
+   }
+   public boolean isDataListTypeP091()
+   {
+       return myDataListType==DataListTypeEnum.P091;
+   }
+   public boolean isDataListTypeP011viaP091()
+   {
+       return myDataListType==DataListTypeEnum.P011_VIA_P091;
    }
    /***********************************************************************************************************
     * getters & setters

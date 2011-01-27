@@ -13,8 +13,8 @@ import java.text.ParseException;
 import java.util.HashMap;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.input.parameters.AddedParameter;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
+import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Global.E_InputType;
@@ -122,7 +122,7 @@ public class Station implements Comparable
         _missingValueParams = new HashMap<String, Boolean>();
         DataDomain dataDomain = Nemo.getInstance().getDomain().getData();
         for (ParameterModel paramModel : dataDomain.getMyParameterManager().getMedParameterModels()){
-            _globalParamQc.put(paramModel.getParameter().getCode(), ((AddedParameter)paramModel.getParameter()).getIdParam().getFlag(this, null));
+            _globalParamQc.put(paramModel.getParameter().getCode(), ((AddedParam)paramModel.getParameter()).getFlag(this, null));
             _missingValueParams.put(paramModel.getParameter().getCode(), true);
         }
         for (ParameterModel paramModel : dataDomain.getModel().getParameterModels()){

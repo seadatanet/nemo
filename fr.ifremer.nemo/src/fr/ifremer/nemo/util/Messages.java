@@ -205,6 +205,7 @@ public class Messages {
     
     public static String edit_data_title;
     public static String edit_data_mesureType_label;
+    public static String edit_data_verticalParameters_label;
     public static String edit_data_belowSeaSurface;
     public static String edit_data_belowSeaBed;
     public static String edit_data_P091;

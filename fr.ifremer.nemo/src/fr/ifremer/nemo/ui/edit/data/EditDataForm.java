@@ -298,7 +298,12 @@ public class EditDataForm extends EditForm
     {
        myTableData.reinitTable();
     }
-    
+    public void reinitParameters()
+    {
+        selectDataList(DataListTypeEnum.P091);
+        selectMesureType(E_MesureType.BSSURF);
+        myGroupeVerticalParameters.removeAllToAllCombos();
+    }
     /**
      * This method initializes data list group
      */

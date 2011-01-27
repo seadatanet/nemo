@@ -2,7 +2,10 @@ package fr.ifremer.nemo.ui.edit.data;
 
 import java.util.regex.Pattern;
 
+import org.eclipse.swt.widgets.Combo;
+
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.domain.ParameterManager;
 import fr.ifremer.nemo.input.parameters.VerticalParametersList;
 import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
@@ -22,12 +25,11 @@ public class DataFormValidator extends FormValidator
 {
     RulesManager rm ;
     GroupVerticalParameters verticalParamGroup;
+    ParameterManager myParameterManager;
    private String p_depthBBed_entryKey=Global.EMPTY_STRING;
    private String p_depthBSurf_entryKey=Global.EMPTY_STRING;
    private String p_pressure_entryKey=Global.EMPTY_STRING;
-   private String p_salinity_entryKey=Global.EMPTY_STRING;
-   private String p_temperature=Global.EMPTY_STRING;
-    
+   private Combo comboDBSBed, comboDBBSurf, comboP ;
     public DataFormValidator()
     {
         super();
@@ -40,17 +42,21 @@ public class DataFormValidator extends FormValidator
         p_depthBBed_entryKey=Global.EMPTY_STRING;
         p_depthBSurf_entryKey=Global.EMPTY_STRING;
         p_pressure_entryKey=Global.EMPTY_STRING;
-        p_salinity_entryKey=Global.EMPTY_STRING;
-        p_temperature=Global.EMPTY_STRING;
     }
     @Override
     public void validate()
     {
+       
+        
         reinitVerticalParams();
         rm = Nemo.getInstance().getViewMain().getMyRulesManager();
         verticalParamGroup =Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters();
+        comboDBSBed = verticalParamGroup.getComboDBSBed();    
+        comboDBBSurf = verticalParamGroup.getComboDBSSurf();
+        comboP = verticalParamGroup.getComboP();
         EditConversionForm editConversionForm = Nemo.getInstance().getViewMain().getEditConversionForm();
         EditDataForm editDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
+        myParameterManager =Nemo.getInstance().getDomain().getData().getMyParameterManager();
 
         Boolean ok = true;
 
@@ -156,12 +162,15 @@ public class DataFormValidator extends FormValidator
         Nemo.getInstance().getViewMain().setEtape(4);
         
         
+        // envoi des valeurs dans le modele
+
         VerticalParametersList modelList = Nemo.getInstance().getDomain().getData().getModel().getVerticalParametersList();
         modelList.setP_depthBSBed(p_depthBBed_entryKey);
         modelList.setP_depthBSSurf(p_depthBSurf_entryKey);
         modelList.setP_pressure(p_pressure_entryKey);
+//        Nemo.getInstance().getDomain().getData().getMyParameterManager().setP_temperature_entryKey(p_temperature_entryKey);
+//        Nemo.getInstance().getDomain().getData().getMyParameterManager().setP_salinity_entryKey(p_salinity_entryKey);
         Nemo.getInstance().getDomain().getData().getModel().setMesureType(Nemo.getInstance().getViewMain().getMyRulesManager().getMyMesureType());
-        // envoi des valeurs dans le modele
 
     }
     
@@ -259,21 +268,22 @@ public class DataFormValidator extends FormValidator
         boolean ok;
         EditDataForm editDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
         EditConversionForm editConversionForm = Nemo.getInstance().getViewMain().getEditConversionForm();
+        ParameterManager pm = Nemo.getInstance().getDomain().getData().getMyParameterManager();
+
+        boolean isDEPH = !p_depthBSurf_entryKey.equals(Global.EMPTY_STRING); //false;
+        
         boolean isPSAL = false;
         boolean isTEMP = false;
-        boolean isDEPH = false;
-
         for (TypeData donnee : editDataForm.getMyTableData().getTypes())
         {
-            if (donnee.getEntryKey().equals(
-                Intern.paramDEPH))
-                isDEPH = true;
-            else if (donnee.getEntryKey().equals(
-                Intern.paramPSAL))
+            if (donnee.getEntryKey().equals(pm.getP_salinityCode()))
+            {
                 isPSAL = true;
-            else if (donnee.getEntryKey().equals(
-                Intern.paramTEMP))
+            }
+            else if (donnee.getEntryKey().equals(pm.getP_temperatureCode()))
+            {
                 isTEMP = true;
+            }
         }
         ok=isPSAL && isTEMP && isDEPH;
         if (!ok)
@@ -420,61 +430,75 @@ public class DataFormValidator extends FormValidator
    
    private boolean detectVerticalParameters()
    {
-      if( Nemo.getInstance().getViewMain().getMyRulesManager().isDataListTypeP011viaP021())
+       RulesManager rm =  Nemo.getInstance().getViewMain().getMyRulesManager();
+
+       if( rm.isDataListTypeP091())
       {
-           detectVerticalParametersForP011();
+          detectVerticalParametersForP091();
       }
-      else
+      else if(rm.isDataListTypeP011viaP021())
       {
-           detectVerticalParametersForP091();
+          detectVerticalParametersForP011();
       }
+      else if(rm.isDataListTypeP011viaP091())
+      {
+          detectVerticalParametersForP011viaP091();
+          
+      }
+       
       return checkVerticalParametersWellDetected();
    }
    
    private void detectVerticalParametersForP011()
    {
+      
        int index;
        // depth below sea surface
        if (rm.isP_depthBSSurf_enabled()){
-           index= verticalParamGroup.getComboDBSSurf().getSelectionIndex();
+           index= comboDBBSurf.getSelectionIndex();
            if (index != -1){
-               p_depthBSurf_entryKey = verticalParamGroup.getComboDBSSurf().getItem(index);
+               p_depthBSurf_entryKey = comboDBBSurf.getItem(index);
            }
        }
        // Depth below sea bed
        if (rm.isP_depthBSBed_enabled()){
-           index= verticalParamGroup.getComboDBSBed().getSelectionIndex();
+           index= comboDBSBed.getSelectionIndex();
            if (index != -1){
-               p_depthBBed_entryKey = verticalParamGroup.getComboDBSBed().getItem(index);
+               p_depthBBed_entryKey = comboDBSBed.getItem(index);
            }
        }
        // pressure
        if (rm.isP_pressure_enabled()){
-           index= verticalParamGroup.getComboP().getSelectionIndex();
+           index= comboP.getSelectionIndex();
            if (index != -1){
-               p_pressure_entryKey = verticalParamGroup.getComboP().getItem(index);
+               p_pressure_entryKey = comboP.getItem(index);
            }
        }
 
    }
-   
+ 
    private boolean checkVerticalParametersWellDetected()
    {
        
        boolean ok=true;
        if (rm.isP_depthBSBed_enabled() && p_depthBBed_entryKey.equals(Global.EMPTY_STRING))
        {
-           Utils.messageErreurAppend("must choose depht below bed");
+           Utils.messageErreurAppend("must choose depht below bed" + myParameterManager.getP_depthBSBedCode());
            //TODO BGT message
            ok=false;
        }
+       
        
        if (
                (rm.isP_depthBSSurf_enabled()&& rm.isP_pressure_enabled() )
                &&
                (p_depthBSurf_entryKey.equals(Global.EMPTY_STRING) && p_pressure_entryKey.equals(Global.EMPTY_STRING))
-               ){
-           Utils.messageErreurAppend("must choose depth below sea surf or pressure");
+               )
+       {
+           Utils.messageErreurAppend("must choose depth below sea surf or pressure" 
+               + myParameterManager.getP_depthBSSurfCode()
+               + " or "
+               + myParameterManager.getP_pressureCode());
            //TODO BGT message
            ok=false;
        }
@@ -484,38 +508,96 @@ public class DataFormValidator extends FormValidator
    {
         autoFillVerticalParametersForP091();
    }
-   
+   private  void detectVerticalParametersForP011viaP091()
+   {
+       
+       // on regarde si un choix a été fait dans les combos
+       // sinon et si un seul choix possible, on le fait
+       // sinon et si plusieurs choix possibles, on prend celui qui est en 1er param si il correspond au type de combo?
+       
+       // reinit des valeurs
+       reinitVerticalParams();
+        
+        // Depth below sea bed
+        if (rm.isP_depthBSBed_enabled())
+        {
+            p_depthBBed_entryKey = fillComboAsP011viaP091(comboDBSBed );
+        }
+        // depth below sea surface
+        if (rm.isP_depthBSSurf_enabled())
+        {
+            p_depthBSurf_entryKey = fillComboAsP011viaP091(comboDBBSurf );
+        }
+        // pressure
+        if (rm.isP_pressure_enabled())
+        {
+            p_pressure_entryKey = fillComboAsP011viaP091(comboP );
+        }  
+   }
+  private String fillComboAsP091(Combo combo)
+  {
+      String entryKey=Global.EMPTY_STRING;
+      int waitedNbItems = 2; // la valeur vide "" + la valeur attendue pour ce param en P091
+      int indexToSelect = 1; // index de la valeur à selectionner (index de la valeur vide = 0, index de la valeur attendue est 1)
+      if(combo.getItemCount()== waitedNbItems)
+      {
+          entryKey = combo.getItem(indexToSelect);
+          combo.select(indexToSelect);
+      }
+      return entryKey;
+  }
+  
+  
+  private String fillComboAsP011viaP091(Combo combo)
+  { 
+      String entryKey=Global.EMPTY_STRING;
+      int waitedNbItems = 2; // la valeur vide "" + la valeur attendue pour ce param en P091
+      int indexToSelect = 1; // index de la valeur à selectionner (index de la valeur vide = 0, index de la valeur attendue est 1)
+      TypeData premierType = Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getTypes().get(0);
+      String firstParameterCode = premierType.getCodeToUse();
+      
+      
+      // cas ideal: on n'a qu'une possibilite -> on la selectionne
+      if(combo.getItemCount()== waitedNbItems)
+      {
+          entryKey = combo.getItem(indexToSelect);
+          combo.select(indexToSelect);
+      }
+      // cas ambigu: on a plusieurs choix possibles -> on selectionne celui qui correspond au premier parametre du tableau
+      else if(combo.getItemCount()> waitedNbItems)
+      {
+          String selected=combo.getItem(combo.getSelectionIndex());
+          if( combo.getItem(combo.getSelectionIndex()).equals(Global.EMPTY_STRING))
+          {
+              for (int i=0; i<combo.getItems().length; i++)
+              {
+                  if (combo.getItem(i).equals(firstParameterCode)){
+                      combo.select(i);
+                      entryKey = combo.getItem(i);
+                  }
+              }
+          }else{
+              entryKey = selected;
+          }
+      }
+      return entryKey;
+  }
    private void autoFillVerticalParametersForP091()
    {
        // reinit des valeurs
       reinitVerticalParams();
        
-       int waitedNbItems = 2; // la valeur vide "" + la valeur attendue pour ce param en P091
-       int indexToSelect = 1; // index de la valeur à selectionner (index de la valeur vide = 0, index de la valeur attendue est 1)
-       
        // Depth below sea bed
        if (rm.isP_depthBSBed_enabled()){
-           if(verticalParamGroup.getComboDBSBed().getItemCount()== waitedNbItems)
-           {
-               p_depthBBed_entryKey = verticalParamGroup.getComboDBSBed().getItem(indexToSelect);
-               verticalParamGroup.getComboDBSBed().select(indexToSelect);
-           }
+           p_depthBBed_entryKey = fillComboAsP091(comboDBSBed);
        }
        // depth below sea surface
        if (rm.isP_depthBSSurf_enabled()){
-           if(verticalParamGroup.getComboDBSSurf().getItemCount()== waitedNbItems)
-           {
-               p_depthBSurf_entryKey = verticalParamGroup.getComboDBSSurf().getItem(indexToSelect);
-               verticalParamGroup.getComboDBSSurf().select(indexToSelect);
-           }
+           p_depthBSurf_entryKey = fillComboAsP091(comboDBBSurf);
        }
        // pressure
        if (rm.isP_pressure_enabled()){
-           if(verticalParamGroup.getComboP().getItemCount()== waitedNbItems)
-           {
-               p_pressure_entryKey = verticalParamGroup.getComboP().getItem(indexToSelect);
-               verticalParamGroup.getComboP().select(indexToSelect);
-           }
+           p_pressure_entryKey = fillComboAsP091(comboP );
        }
    }
 }

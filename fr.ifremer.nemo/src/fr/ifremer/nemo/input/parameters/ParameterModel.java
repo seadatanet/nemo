@@ -16,6 +16,7 @@ import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.input.AbstractModel;
 import fr.ifremer.nemo.input.LineFragment;
 import fr.ifremer.nemo.input.ModelDescription;
+import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ui.actions.OptionsAction;
@@ -307,20 +308,20 @@ public class ParameterModel extends AbstractModel
                                            String inputLine,
                                            long currentDate) throws Exception{
         ParameterValue pValue = new ParameterValue();
-        AddedParameter p = (AddedParameter) _parameter;
+        AddedParam p = (AddedParam) _parameter;
         
         String stringValue = null;
         
-        if (p.getIdParam().isMesured()){
+        if (p.isMesured()){
             stringValue = p.compute(_fragment.fullRetreive(inputLine));
         }
         else{
-            stringValue = p.getIdParam().getValue(currentStation, inputLine, currentDate);
+            stringValue = p.getValue(currentStation, inputLine, currentDate);
         }
         
         if (stringValue != null){
             pValue.setStringValue(stringValue);
-            pValue.setQc(((AddedParameter)_parameter).getIdParam().getFlag(currentStation, inputLine));
+            pValue.setQc(((AddedParam)_parameter).getFlag(currentStation, inputLine));
         }
 
         _lineValue = pValue;

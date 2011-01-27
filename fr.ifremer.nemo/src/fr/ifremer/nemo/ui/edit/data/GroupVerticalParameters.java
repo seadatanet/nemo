@@ -47,7 +47,7 @@ public class GroupVerticalParameters
         
         Group group = new Group(formEdition.getBody(), SWT.NONE);
         group.setFont(Utils.font08);
-        group.setText(Messages.edit_data_mesureType_label);
+        group.setText(Messages.edit_data_verticalParameters_label);
         GridLayoutFactory.fillDefaults().numColumns(1).equalWidth(true)
             .margins(4, 4).applyTo(group);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
@@ -84,15 +84,15 @@ public class GroupVerticalParameters
     public void addTypeData(TypeData typeData)
     {
         ParameterManager pm = Nemo.getInstance().getDomain().getData().getMyParameterManager();
-        if (pm.isPossiblePressureParameter(typeData) )
+        if (pm.isPossible_PressureParameter(typeData) )
         {
             comboP.add(typeData.getCodeToUse());
         }
-        if ( pm.isPossibleDepthBSSurfParameter(typeData))
+        if ( pm.isPossible_DepthBSSurfParameter(typeData))
         {
             comboDBSSurf.add(typeData.getCodeToUse());
         }
-        if ( pm.isPossibleDepthBSBedParameter(typeData) )
+        if ( pm.isPossible_DepthBSBedParameter(typeData) )
         {
             comboDBSBed.add(typeData.getCodeToUse());
         }
