@@ -174,7 +174,6 @@ public class EditConversionForm extends EditForm
     @Override
     public void initFromNewModel()
     {
-//        System.out.println("ici");
     }
     /*
      * Méthodes de traitement du lancement de la conversion
@@ -677,6 +676,7 @@ public class EditConversionForm extends EditForm
     
     public void fillBatchCommandLine()
     {
+        
         RulesManager rm = Nemo.getInstance().getViewMain().getMyRulesManager();
         EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
         String command="nemo_batch";
@@ -757,7 +757,7 @@ public class EditConversionForm extends EditForm
         
         // ajout onglet erreurs
         Utils.messageOKAppend(Global.RN);
-        Utils.messageOKAppend("commande batch: ");
+        Utils.messageOKAppend(Messages.edit_convert_batchInfoTitle);
         Utils.messageOKAppend(command);
         
     }
@@ -769,6 +769,12 @@ public class EditConversionForm extends EditForm
         summary += Global.RN+ Global.RN+ Messages.view_convert_summary_title+Global.RN+ Global.RN;
         
         EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
+        
+        summary += Messages.view_convert_summary_dataTypeLabel + Global.DBL_PT 
+        +Global.RN + Nemo.getInstance().getDomain().getData().getModel().getDataListType().toString();  
+        summary += Global.RN+ Global.RN+ Global.RN;
+        
+        
         if(editFileForm.isCruiseIsAFile())
         {
             summary += Messages.view_convert_summary_inputFileLabel + Global.DBL_PT 

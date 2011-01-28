@@ -7,20 +7,7 @@
  */
 package fr.ifremer.nemo.input.parameters.addedParameters;
 
-import java.text.ParseException;
-
-import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.domain.DateTimeUtils;
-import fr.ifremer.nemo.domain.InputDomain;
-import fr.ifremer.nemo.domain.ParameterValue;
-import fr.ifremer.nemo.domain.Station;
-import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.util.Conversion;
-import fr.ifremer.nemo.util.Formatter;
-import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.Intern;
-import fr.ifremer.nemo.util.Global.E_InputType;
 
 /**
  * Description: TODO
@@ -39,6 +26,7 @@ public class AP_DEPHPR01 extends AP_DEPH
         cible = Conversion.ODV;
         _P011=true;
         _codeP011 = "DEPHPR01";
+        _unitCode="ULAA";
     }
 
     

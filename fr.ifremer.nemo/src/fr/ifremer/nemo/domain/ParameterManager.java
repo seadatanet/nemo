@@ -24,6 +24,7 @@ import fr.ifremer.nemo.input.parameters.addedParameters.AP_CJDY;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_DAYX;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_DEPH;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_DEPHPR01;
+import fr.ifremer.nemo.input.parameters.addedParameters.AP_DTUT;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_LATX;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_LONX;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_MNTH;
@@ -64,7 +65,7 @@ public class ParameterManager
     /**
      * Informations descrivant l'onglet Data
      */
-    protected DataModel _model;
+//    protected DataModel _model;
     
 
     
@@ -72,12 +73,12 @@ public class ParameterManager
     {
         _odvParameterModels = new ArrayList<ParameterModel>();
         _medParameterModels = new ArrayList<ParameterModel>();
-        _model = model;
+//        _model = model;
     }
     
     private AddedParam createAddedParam(IdParameter code)
     {
-        DataListTypeEnum dataList = _model.getDataListType();
+        DataListTypeEnum dataList = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
         AddedParam addedParam=null;
         if (code==IdParameter.YEAR)
         {
@@ -94,6 +95,14 @@ public class ParameterManager
         else if(code==IdParameter.TIME)
         {
             addedParam= new AP_TIME();
+        }
+        else if(code==IdParameter.DTUT)
+        {
+            addedParam= new AP_DTUT();
+        }
+        else if(code==IdParameter.CJDY)
+        {
+            addedParam= new AP_CJDY();
         }
         else if(code==IdParameter.LATX)
         {
@@ -136,17 +145,7 @@ public class ParameterManager
     }
     private void addFixedParameterModel(IdParameter code)
     {
-        
-        System.out.println("addFixedParameterModel: "+ code.toString());
-      
-//        AddedParameter addedParam = new AddedParameter(code);
         AddedParam addedParam =  createAddedParam(code);
-        // FAE 4045
-//        if (_model.getParameterModels().length > 1)
-//        {
-//            addedParam.setP011(_model.getParameterModels()[_model
-//                .getParameterModels().length - 1].getParameter().isP011());
-//        }
 
         ParameterModel parameterModel = new ParameterModel();
         parameterModel.setParameter(addedParam);
@@ -186,7 +185,6 @@ public class ParameterManager
          * ====================================================================
          * reset systematique des parametres stockes dans le dataModel
          */ 
-        releaseAddedParameterModels();
         _odvParameterModels = new ArrayList<ParameterModel>();
         _medParameterModels = new ArrayList<ParameterModel>();
         
@@ -203,11 +201,11 @@ public class ParameterManager
         boolean isMedatlas = conversionType==E_TypeConversion.MEDATLAS;
         boolean isODV = conversionType==E_TypeConversion.ODV_MONOSTATION ||conversionType==E_TypeConversion.ODV_MULTISTATIONS;
         
-       
+      DataModel dataModel =  Nemo.getInstance().getDomain().getData().getModel();
         // recuperation des parametres verticaux
-        String p_depthBSBed = _model.getVerticalParametersList().getP_depthBSBed();
-        String p_depthBSSurf = _model.getVerticalParametersList().getP_depthBSSurf();
-        String p_pressure = _model.getVerticalParametersList().getP_pressure();
+        String p_depthBSBed = dataModel.getVerticalParametersList().getP_depthBSBed();
+        String p_depthBSSurf = dataModel.getVerticalParametersList().getP_depthBSSurf();
+        String p_pressure = dataModel.getVerticalParametersList().getP_pressure();
         
         boolean exist_p_depthBSSurf =!p_depthBSSurf.equals(Global.EMPTY_STRING);
         boolean exist_p_pressure = !p_pressure.equals(Global.EMPTY_STRING);
@@ -215,7 +213,7 @@ public class ParameterManager
         // verif PSAL et TEMP (code P091 uniquement car test pour MEDATLAS, donc inutilisé en P011viaP021)        
         boolean existTEMP = false;
         boolean existPSAL = false;
-        for (ParameterModel param : _model.getParameterModels())
+        for (ParameterModel param : dataModel.getParameterModels())
         {
             if (param.getParameter().getCode().equals(getP_salinityCode()))
                 existPSAL = true;
@@ -224,7 +222,7 @@ public class ParameterManager
         }
 
         boolean isBathPresentInDataTab=false;
-        for (ParameterModel param : _model.getParameterModels())
+        for (ParameterModel param : dataModel.getParameterModels())
         {
             if(param.getParameter().getCode().equals(IdParameter.BATH.name()))
             {
@@ -326,7 +324,7 @@ public class ParameterManager
         
         
         // reset systematique des parametres stockes dans le dataModel
-        releaseAddedParameterModels();
+//        releaseAddedParameterModels();
         _odvParameterModels = new ArrayList<ParameterModel>();
         _medParameterModels = new ArrayList<ParameterModel>();
 
@@ -335,8 +333,8 @@ public class ParameterManager
         boolean existPRES = false;
         boolean existTEMP = false;
         boolean existPSAL = false;
-        // TODO BGT ko en P021 ne trouve pas PRES
-        for (ParameterModel param : _model.getParameterModels())
+        DataModel dataModel = Nemo.getInstance().getDomain().getData().getModel();
+        for (ParameterModel param : dataModel.getParameterModels())
         {
             if (param.getParameter().getCode().equals(
                 IdParameter.DEPH.toString()))
@@ -423,7 +421,7 @@ public class ParameterManager
                 {
                     // FAE 4471 on regarde si le parametre BATH est dans les parametres de l'onlget données
                     boolean isBathPresentInDataTab=false;
-                    for (ParameterModel param : _model.getParameterModels())
+                    for (ParameterModel param : dataModel.getParameterModels())
                     {
                         if(param.getParameter().getCode().equals(IdParameter.BATH.name()))
                         {
@@ -595,7 +593,7 @@ public class ParameterManager
     {
         String code=Global.EMPTY_STRING;
         DataListTypeEnum dataListType = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
-        if (dataListType == DataListTypeEnum.P011_VIA_P021)
+        if (dataListType == DataListTypeEnum.P011_VIA_P021 )
         {
             code=Intern.paramAHGT;
         }else if(dataListType == DataListTypeEnum.P091 ||dataListType == DataListTypeEnum.P011_VIA_P091 ){

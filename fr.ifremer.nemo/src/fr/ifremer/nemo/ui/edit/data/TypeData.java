@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 import fr.ifremer.nemo.input.LineFragment;
 import fr.ifremer.nemo.input.parameters.Parameter;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
+import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.ws.WSParameter;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
@@ -82,10 +83,6 @@ public class TypeData extends Object {
         LineFragment frag = parameterModel.getFragment();
         LineFragment flag = parameterModel.getFlag();
 
-        // code / fullName / sortie / format
-//        setCode(parameter.getCode() + Global.SEP
-//                + parameter.getFullName());
-//        setFullname(parameter.getFullName());
         setEntryKey(parameter.getCode());
         setEntryTerm(parameter.getFullName());
 

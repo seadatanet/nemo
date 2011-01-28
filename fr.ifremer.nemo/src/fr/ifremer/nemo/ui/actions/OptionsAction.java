@@ -221,7 +221,6 @@ public class OptionsAction extends Action implements ISelectionListener,
         for (CodeTableRecordType record : records)
         {
             String champCombo = Global.EMPTY_STRING;
-            // System.out.println(record.getEntryKey());
             String contenuCleDecoup[] =
                 record.getEntryKey().split(Global.SLASH);
             champCombo += contenuCleDecoup[contenuCleDecoup.length - 1];

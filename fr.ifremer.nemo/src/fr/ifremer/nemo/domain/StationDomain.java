@@ -482,7 +482,6 @@ public class StationDomain
        String localCdi= getLocalCdiId(cDomain,c, ref);
         if (stationsLocalCDIList.contains(localCdi))
         {
-            //System.out.println("doublon"); //$NON-NLS-1$
             throw new GenerationException(Messages.error_convert_stationsDoubles + localCdi); 
         }else{
             stationsLocalCDIList.add(localCdi);

@@ -156,20 +156,23 @@ public class DataFormValidator extends FormValidator
     protected void onSuccess()
     {
         super.onSuccess();
+        
+        
         EditDataForm editDataForm= Nemo.getInstance().getViewMain().getEditDataForm();
-        editDataForm.initFromNewModel();
-        Nemo.getInstance().getViewMain().tabData.setText(Messages.onglet_data_valid);
-        Nemo.getInstance().getViewMain().setEtape(4);
         
-        
-        // envoi des valeurs dans le modele
-
+        // envoi des valeurs dans le modele 
         VerticalParametersList modelList = Nemo.getInstance().getDomain().getData().getModel().getVerticalParametersList();
         modelList.setP_depthBSBed(p_depthBBed_entryKey);
         modelList.setP_depthBSSurf(p_depthBSurf_entryKey);
         modelList.setP_pressure(p_pressure_entryKey);
-//        Nemo.getInstance().getDomain().getData().getMyParameterManager().setP_temperature_entryKey(p_temperature_entryKey);
-//        Nemo.getInstance().getDomain().getData().getMyParameterManager().setP_salinity_entryKey(p_salinity_entryKey);
+        Nemo.getInstance().getDomain().getData().getModel().setVerticalParametersList(modelList);
+        editDataForm.initFromNewModel();
+        
+       
+        
+        Nemo.getInstance().getViewMain().tabData.setText(Messages.onglet_data_valid);
+        Nemo.getInstance().getViewMain().setEtape(4);
+       
         Nemo.getInstance().getDomain().getData().getModel().setMesureType(Nemo.getInstance().getViewMain().getMyRulesManager().getMyMesureType());
 
     }
@@ -483,8 +486,9 @@ public class DataFormValidator extends FormValidator
        boolean ok=true;
        if (rm.isP_depthBSBed_enabled() && p_depthBBed_entryKey.equals(Global.EMPTY_STRING))
        {
-           Utils.messageErreurAppend("must choose depht below bed" + myParameterManager.getP_depthBSBedCode());
-           //TODO BGT message
+           Utils.messageErreurAppend(Messages.edit_data_verticalParameters_info_chooseDepthBSBed 
+               +Global.SPACE
+               + myParameterManager.getP_depthBSBedCode());
            ok=false;
        }
        
@@ -495,11 +499,11 @@ public class DataFormValidator extends FormValidator
                (p_depthBSurf_entryKey.equals(Global.EMPTY_STRING) && p_pressure_entryKey.equals(Global.EMPTY_STRING))
                )
        {
-           Utils.messageErreurAppend("must choose depth below sea surf or pressure" 
+           Utils.messageErreurAppend(Messages.edit_data_verticalParameters_info_chooseDepthBSurfOrPressure
+               +Global.SPACE
                + myParameterManager.getP_depthBSSurfCode()
                + " or "
                + myParameterManager.getP_pressureCode());
-           //TODO BGT message
            ok=false;
        }
        return ok;

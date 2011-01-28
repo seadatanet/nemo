@@ -74,6 +74,7 @@ public class Messages {
     public static String view_convert_monoStation;
     public static String view_convert_sort;
     public static String view_convert_summary_title;
+    public static String view_convert_summary_dataTypeLabel;;
     public static String view_convert_summary_inputFileLabel;
     public static String view_convert_summary_inputDirectoryLabel;
     public static String view_convert_summary_outputFormatLabel;
@@ -137,7 +138,7 @@ public class Messages {
     public static String confirm_eraseFile;
     public static String confirm_useDir;
     
-    // EDIT
+    // FILE
     public static String edit_file_title;
     public static String edit_file_enteteFichier;
     public static String edit_file_enteteStation;
@@ -155,6 +156,7 @@ public class Messages {
     public static String edit_file_sectionRuptureDonnees_end_with;
     public static String edit_file_termination_start;
     
+    //CRUISE
     public static String edit_cruise_title;
     public static String edit_cruise_sectionReference;
     public static String edit_cruise_sectionReference_lib;
@@ -182,6 +184,7 @@ public class Messages {
     public static String edit_cruise_sectionComments_lib;
     public static String edit_cruise_openXML;
     
+    //STATION
     public static String edit_station_title;
     public static String edit_station_sectionReference_lib;
     public static String edit_station_refIncrement;
@@ -189,36 +192,49 @@ public class Messages {
     public static String edit_station_sectionHistory_lib;
     public static String edit_station_sectionComment_lib;
     public static String edit_station_sectionSurface_lib;
-    //public static String edit_station_sectionOffsetTU_lib;
     public static String edit_station_sectionTime_lib;
     public static String edit_station_sectionDate_lib;
     public static String edit_station_sectionLat_lib;
-    //public static String edit_station_sectionEndLat_lib;
     public static String edit_station_sectionLon_lib;
-    //public static String edit_station_sectionEndLon_lib;
     public static String edit_station_sectionDepth_lib;
-    //public static String edit_station_sectionEndDepth_lib;
     public static String edit_station_sectionSensorDepth_lib;
     public static String edit_station_sectionMagn_lib;
     public static String edit_station_sectionSampling_lib;
     public static String edit_station_sectionQCflags_lib;
     
+    //DATA
     public static String edit_data_title;
+    public static String edit_data_parametersList;
+    public static String edit_data_parameterListP091;
+    public static String edit_data_parameterListP011viaP091;
+    public static String edit_data_parameterListP011viaP021;
     public static String edit_data_mesureType_label;
     public static String edit_data_verticalParameters_label;
+    public static String edit_data_verticalParameters_depthBSSurf;
+    public static String edit_data_verticalParameters_depthBSBed;
+    public static String edit_data_verticalParameters_pressure;
+    public static String edit_data_verticalParameters_info_chooseDepthBSBed;
+    public static String edit_data_verticalParameters_info_chooseDepthBSurfOrPressure;
+    
     public static String edit_data_belowSeaSurface;
     public static String edit_data_belowSeaBed;
     public static String edit_data_P091;
     public static String edit_data_P021;
     public static String edit_data_P011;
     public static String edit_data_P061;
+    public static String edit_data_error_dataListUnknown;
+    public static String edit_data_dataListDialogBox_title;
+    public static String edit_data_dataListDialogBox_text;
     
+    
+    //CONVERSION
     public static String edit_convert_title;
     public static String edit_convert_endODV;
     public static String edit_convert_endMED;
     public static String edit_convert_outputFilename;
     public static String edit_convert_outputDir;
     public static String edit_convert_sortStations;
+    public static String edit_convert_batchInfoTitle;
     
     // MESSAGES D'INFORMATIONS REGLES INPUT/CONV (onglet File)
     public static String edit_file_info_medatlasForbiddenBecauseCollection;
@@ -240,11 +256,8 @@ public class Messages {
     public static String error_cruise_openXml;
     public static String error_cruise_invalidXML;
     public static String error_data_removePRES;
-//    public static String error_data_p091_firstPRES;
-//    public static String error_data_p011_firstPRES;
     public static String error_data_firstParam_depthBSBed;
     public static String error_data_firstParam_depthBSSurfOrPres;
-//    public static String error_data_firstDEPH_TRAJ;
     public static String error_convert_invalideSteps;
     public static String error_convert_cancel;
     public static String error_convert_position;
@@ -323,10 +336,6 @@ public class Messages {
     public static String error_settings_outputFormat;
     public static String error_table;
     public static String settings_defaultOutputFormat;
-    public static String settings_parametersList;
-    public static String settings_parameterListP091;
-    public static String settings_parameterListP011viaP091;
-    public static String settings_parameterListP011viaP021;
     public static String settings_flagDefault;
     
     public static String table_edmo;

@@ -7,8 +7,8 @@
  */
 package fr.ifremer.nemo.ui;
 
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Shell;
 
 import fr.ifremer.nemo.Nemo;
@@ -18,7 +18,6 @@ import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_MesureType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
@@ -298,19 +297,28 @@ public class RulesManager
    
    public void updateFromIHM(DataListTypeEnum dataListType)
    {
-       System.out.println(myDataListType + " >>> "+dataListType);
-       if (dataListType != myDataListType){  
-           //TODO BGT faire une boite propre
-           Shell dialog = new Shell( SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL); 
-           dialog.setSize(100,100);
-           dialog.setText("ATTENTION!!!!!!!!"); 
-           
-          dialog.open();
-           myDataListType = dataListType;
-           Nemo.getInstance().getDomain().getData().getModel().setDataListType(dataListType);
-           Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().reinitTable();
-           Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters().removeAllToAllCombos();
+       boolean confirm=false;
+       if (dataListType != myDataListType)
+       {  
+           if ( Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getTypes().size()>0)
+           {
+               confirm = MessageDialog.openConfirm(null, 
+                   Messages.edit_data_dataListDialogBox_title,
+                   Messages.edit_data_dataListDialogBox_text);
+           }
+           if (confirm){
+               myDataListType = dataListType;
+               Nemo.getInstance().getDomain().getData().getModel().setDataListType(dataListType);
+               Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().reinitTable();
+               Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().fillTypes();
+               Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters().removeAllToAllCombos();
+           }
+           else{
+               // si pas confirmation, et ne touche a rien et on remet la valeur de depart
+               Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(myDataListType);
+           }
        }
+
    }
    public void updateFromModel(DataListTypeEnum dataListType)
    {

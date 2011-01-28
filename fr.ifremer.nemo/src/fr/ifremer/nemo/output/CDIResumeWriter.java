@@ -290,7 +290,6 @@ public class CDIResumeWriter
         if (nomFichierSortie != null)
         {
 
-            // System.out.println("Fichier = " + nomFichierSortie);
             File fich = new File(nomFichierSortie);
             if (fich.exists())
             {

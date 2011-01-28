@@ -82,7 +82,6 @@ public abstract class NemoWriter{
 	            // pour chaque fichier de ce repertoire d'entree
 	            for (String inputFileName : media.getInputFilesNames().get(inputFilePath)){
 
-	               // System.out.println("nemoWriter: "+inputFileName );    
 	                File inputFile= new File(inputFilePath + File.separator + inputFileName);
 	                bufferedReader = new BufferedReader(new FileReader(inputFile));
 	                readerSize = Long.valueOf(inputFile.length()).intValue();

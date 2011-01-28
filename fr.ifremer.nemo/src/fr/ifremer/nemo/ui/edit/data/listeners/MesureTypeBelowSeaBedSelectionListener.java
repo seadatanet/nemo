@@ -31,8 +31,6 @@ public class MesureTypeBelowSeaBedSelectionListener implements SelectionListener
     
     public void widgetSelected(SelectionEvent g)
     {
-
-        System.out.println("below sea bed");
         Nemo.getInstance().getViewMain().getMyRulesManager().updateFromIHM(Global.E_MesureType.BSBED);
     }
 }

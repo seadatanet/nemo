@@ -252,7 +252,6 @@ public class Station implements Comparable
      * @see Station.java#reference
      */
     public void setReference(String reference){
-    //    System.out.println(reference);
         _reference = reference;
     }
 

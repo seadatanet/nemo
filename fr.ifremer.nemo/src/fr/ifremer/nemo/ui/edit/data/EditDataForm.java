@@ -5,14 +5,11 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
@@ -260,14 +257,25 @@ public class EditDataForm extends EditForm
     @Override
     public void initFromNewModel()
     {
+        /**
+         * cette methode consiste à recréer un nouveau modele qu'on remplit avec les valeurs recupérées dans l'IHM
+         * mais la liste des parametres verticaux travaille directement avec le modele
+         * donc on la recupere avant de recréer le modele pour la réinjecter dans le nouveau
+         * 
+         * 
+         * TODO BGT voir pour fonctionner de cette manière dans tout le reste de l'appli
+         *  au lieu de faire des resets complets (et donc arreter d'utiliser cette methode initFromNewModel)
+         */ 
+        
+        VerticalParametersList list = Nemo.getInstance().getDomain().getData().getModel().getVerticalParametersList();
         // recuperation du model correspondant
         fr.ifremer.nemo.input.DataModel dataModel = new fr.ifremer.nemo.input.DataModel();
+        dataModel.setVerticalParametersList(list);
+        
         
         // mise e jour des types avant validation
         myTableData.majTypeData();
 
-        // reset systematique des parametres stockes dans le dataModel
-        Nemo.getInstance().getDomain().getData().getModel().releaseParameterModels();
 
         for (TypeData typeCourant : myTableData.getTypes())
         {
@@ -311,7 +319,7 @@ public class EditDataForm extends EditForm
     {
         Group group = new Group(formEdition.getBody(), SWT.NONE);
         group.setFont(Utils.font08);
-        group.setText(Messages.settings_parametersList);
+        group.setText(Messages.edit_data_parametersList);
         GridLayoutFactory.fillDefaults().numColumns(1).equalWidth(true)
             .margins(4, 4).applyTo(group);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
@@ -319,17 +327,17 @@ public class EditDataForm extends EditForm
         
         DataListRadioSelectionListener listener = new DataListRadioSelectionListener(this);
         button_P091 = new Button(group, SWT.RADIO);
-        button_P091.setText(Messages.settings_parameterListP091);
+        button_P091.setText(Messages.edit_data_parameterListP091);
         button_P091.addSelectionListener(listener);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(button_P091);
         
         button_P011viaP091 = new Button(group, SWT.RADIO);
-        button_P011viaP091.setText(Messages.settings_parameterListP011viaP091);
+        button_P011viaP091.setText(Messages.edit_data_parameterListP011viaP091);
         button_P011viaP091.addSelectionListener(listener);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(button_P011viaP091);
         
         button_P011viaP021 = new Button(group, SWT.RADIO);
-        button_P011viaP021.setText(Messages.settings_parameterListP011viaP021);
+        button_P011viaP021.setText(Messages.edit_data_parameterListP011viaP021);
         button_P011viaP021.addSelectionListener(listener);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(button_P011viaP021);
     }

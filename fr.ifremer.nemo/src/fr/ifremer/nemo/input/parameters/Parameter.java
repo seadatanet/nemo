@@ -322,8 +322,6 @@ public class Parameter extends AbstractModel
     
     public String getLocalCode()
     {
-        
-        //TODO BGT CODE!!!!!!!!!!!!
         String localCode;
         DataListTypeEnum dataListType = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
         E_TypeConversion conv= Nemo.getInstance().getDomain().getConversion().getModel().getOutputFormat();
@@ -499,7 +497,6 @@ public class Parameter extends AbstractModel
     {
         _unit = x;
     }
-//TODO BGT utiliser plutot getLocalCode (plus parlant > pour titres colonnes et SDN mapping)
     public String getOutputCode(Conversion c, boolean lastParam)
     {
         String code = null;
@@ -529,21 +526,8 @@ public class Parameter extends AbstractModel
     {
         StringBuffer paramHeader = new StringBuffer();
         String code;
-//        //voir bug 4454
-//        //TODO BGT CODE!!!! revoir code ici suite refactoring -> FAIRE MIEUX
-//        if (isP011() && !(this instanceof AddedParam))
-//            code = _codeP011;
-//        else
-//            code = _code;
-        
-        
         // on ne fabrique le code qu'à un seul endroit comme ca on sera sur que c'est le meme!!!!
         code = getLocalCode();
-//        if (code.equals(IdParameter.CJDY.toString())
-//                || code.equals(IdParameter.DTUT.toString()))
-//        {
-//            code = _fullName;
-//        }
 
         paramHeader.append(code);
         paramHeader.append(Global.SPACE);
