@@ -322,17 +322,25 @@ public class Parameter extends AbstractModel
     
     public String getLocalCode()
     {
-        String localCode;
+        String localCode = null;
         DataListTypeEnum dataListType = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
         E_TypeConversion conv= Nemo.getInstance().getDomain().getConversion().getModel().getOutputFormat();
-        if (conv==E_TypeConversion.MEDATLAS 
-                &&
-                (dataListType==DataListTypeEnum.P011_VIA_P091 || dataListType==DataListTypeEnum.P091)
-                )
+
+        if (conv==E_TypeConversion.MEDATLAS )
         {
-            localCode = getCode();
-        }else{
-            localCode = getCodeP011();
+            if(dataListType==DataListTypeEnum.P011_VIA_P091 || dataListType==DataListTypeEnum.P091)
+            {
+
+                localCode = getCode();
+            }
+        }
+        else {
+            if (dataListType==DataListTypeEnum.P091)
+            {
+                localCode = getCode();
+            }else{
+                localCode = getCodeP011();
+            }
         }
         return localCode;
     }
