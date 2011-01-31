@@ -95,23 +95,24 @@ public class ConversionSelectionListener implements SelectionListener
                         .choixFichierSortie();
                 }
 
-                boolean okChoixSortie;
-                // test pour savoir si on est en campagne ou pas
-                if (Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection())
-                {
-//                   // FAE 6536 
-//                   DataType dt = askDataType();
-//                    Nemo.getInstance().getDomain().getCruise()
-//                        .getStation().getModel().setDataType(dt);
-                    okChoixSortie = convForm.choixDossierSortie();
-                }
-                else if (currentConversion == E_TypeConversion.ODV_MONOSTATION)
+                boolean okChoixSortie=false;
+                
+                if (currentConversion == E_TypeConversion.ODV_MONOSTATION)
                 {
                     okChoixSortie = convForm.choixDossierSortie();
                 }
-                else
+                else if(currentConversion == E_TypeConversion.MEDATLAS)
                 {
                     okChoixSortie = convForm.choixFichierSortie();
+                }
+                else if(currentConversion == E_TypeConversion.ODV_MULTISTATIONS)
+                {
+                    if(Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollectionDir())
+                    {
+                        okChoixSortie = convForm.choixDossierSortie();
+                    }else{
+                        okChoixSortie = convForm.choixFichierSortie();
+                    }
                 }
 
                 if (okChoixSortie)
