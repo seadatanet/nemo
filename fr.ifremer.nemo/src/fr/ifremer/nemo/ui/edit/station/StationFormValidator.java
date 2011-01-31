@@ -32,10 +32,17 @@ public class StationFormValidator extends FormValidator
         super();
     }
     
-    
     @Override
     public void validate()
     {
+        Nemo.getInstance().getViewMain().getEditStationForm().setOkApresReset(true);
+        onSuccess();
+    }
+//    @Override
+    public void validateOrig()
+    {
+        
+       
         try
         {
 

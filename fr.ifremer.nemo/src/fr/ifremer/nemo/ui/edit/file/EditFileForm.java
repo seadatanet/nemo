@@ -132,6 +132,8 @@ public class EditFileForm extends EditForm
         Nemo.getInstance().getViewMain().getEditFileForm().afficheEdition();
         // reinitialisation du tableau de paramètres
         Nemo.getInstance().getViewMain().getEditDataForm().reinitTableData();
+     
+        Nemo.getInstance().getViewMain().getEditDataForm().reinitParameters();
         ViewLog.styledTextLogErreurs.setText(Global.EMPTY_STRING);
     }
     
@@ -926,8 +928,13 @@ public class EditFileForm extends EditForm
                 radProfilVertical.setSelection(false);
                 radTrajectoire.setSelection(false);
                 break;
-            default:
+            case PROFILE:
                 radProfilVertical.setSelection(true);
+                radSerieTempo.setSelection(false);
+                radTrajectoire.setSelection(false);
+                break;
+            default:
+                radProfilVertical.setSelection(false);
                 radSerieTempo.setSelection(false);
                 radTrajectoire.setSelection(false);
                 break;

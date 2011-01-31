@@ -7,6 +7,7 @@
  */
 package fr.ifremer.nemo.ui.edit.file.listeners;
 
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 
@@ -14,6 +15,7 @@ import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
+import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 
 /**
@@ -68,7 +70,9 @@ public class OutputFormatRadioSelectionListener implements SelectionListener
         }
 
      
-      
+//        boolean confirm = MessageDialog.openConfirm(null, 
+//            Messages.edit_data_dataListDialogBox_title,
+//            Messages.edit_data_dataListDialogBox_text);
      
         Nemo.getInstance().getDomain().getConversion().setCurrentConversion(currentConv);
         Nemo.getInstance().getViewMain().getEditFileForm().afficheGrpODV();

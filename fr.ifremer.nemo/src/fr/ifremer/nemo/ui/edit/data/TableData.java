@@ -356,8 +356,9 @@ public class TableData
         // On ajoute systématiquement le paramètre pression pour les profils en medatlas
         // verticaux sauf si la liste de paramètres à utiliser est la P011
         if (Nemo.getInstance().getViewMain().getMyRulesManager().isProfile()
-                && Nemo.getInstance().getDomain().getConversion().getModel().getOutputFormat()==E_TypeConversion.MEDATLAS
-                && Nemo.getInstance().getDomain().getData().getModel().getDataListType()==DataListTypeEnum.P091)
+               && Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas()
+               &&Nemo.getInstance().getViewMain().getMyRulesManager().getMyDataListType()==DataListTypeEnum.P091
+                )
         {
             for (TypeData type : typesWS)
             {

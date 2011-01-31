@@ -104,7 +104,7 @@ public interface Global
     
     //  Types de fichier
     public enum E_InputType{
-        PROFILE, TIMESERIES, TRAJECTORY;
+        PROFILE, TIMESERIES, TRAJECTORY, UNKNOWN;
     }
     // COLLECTION_DIR = group by cruise
     public enum E_ProcessType{

@@ -18,6 +18,7 @@ import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
+import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 
 /**
@@ -52,7 +53,11 @@ public class FileFormValidator extends FormValidator
                 Utils.messageErreur(Messages.error_file_convertFormatUnknown);
                 return;
             }
-
+            if (Nemo.getInstance().getViewMain().getMyRulesManager().getMyFileType()== E_InputType.UNKNOWN)
+            {
+                Utils.messageErreur(Messages.error_file_inputTypeUnknown);
+                return;
+            }
             // Fichier avec séparateur
             if (editFileForm.isSeparatorChecked() && !Preformat.isPreformat())
             {

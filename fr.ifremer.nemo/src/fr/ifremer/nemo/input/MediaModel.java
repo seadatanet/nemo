@@ -90,8 +90,7 @@ public class MediaModel extends AbstractModel
         _processType = E_ProcessType.CRUISE_FILE;
         _multiStations = false;
         _separator = Global.EMPTY_STRING;
-        _inputType = E_InputType.PROFILE;
-        
+        _inputType = E_InputType.UNKNOWN;
         _fileHeader = 0;
         _stationHeader = 0;
         _stationHeaderPattern = Global.EMPTY_STRING;

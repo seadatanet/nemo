@@ -71,7 +71,7 @@ public class RulesManager
     
     public static E_ProcessType DEFAULT_PROCESSTYPE = E_ProcessType.CRUISE_FILE;
     public static E_TypeConversion DEFAULT_CONVERSIONTYPE = E_TypeConversion.UNKNOWN;
-    public static E_InputType DEFAULT_FILETYPE =E_InputType.PROFILE;
+    public static E_InputType DEFAULT_FILETYPE =E_InputType.UNKNOWN;
     public static DataListTypeEnum DEFAULT_DATALIST=DataListTypeEnum.UNKNOWN;
     public static E_MesureType DEFAULT_MESURETYPE = E_MesureType.BSSURF;
    
@@ -297,7 +297,7 @@ public class RulesManager
    
    public void updateFromIHM(DataListTypeEnum dataListType)
    {
-       boolean confirm=false;
+       boolean confirm=true;
        if (dataListType != myDataListType)
        {  
            if ( Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getTypes().size()>0)
@@ -327,6 +327,8 @@ public class RulesManager
            Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV());
            Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(dataListType);
            ViewLog.styledTextLogErreurs.setText(messageLog);
+           Nemo.getInstance().getDomain().getData().getModel().setDataListType(myDataListType);
+
        }
    }
    

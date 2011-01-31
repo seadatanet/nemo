@@ -63,14 +63,7 @@ public class EditDataForm extends EditForm
         // init composants IHM
         initSections();
 
-        // groupe de selection du dataList (pour selectionner la liste à utiliser: P091, P011viaP091 ou P011viaP021)
-        createGroupDataList();
-        
-        // groupe de selection du type de mesure (sous l'eau ou dans le sol)
-        createGroupMesureType();
        
-        // groupe de selection des paramètres verticaux
-        createGroupVerticalParametersChoices();
         
         formEdition.getBody().setLayout(new GridLayout());
         formEdition.setText(Messages.edit_data_title);
@@ -86,7 +79,14 @@ public class EditDataForm extends EditForm
                     validate();
                 }
             });
-
+        // groupe de selection du dataList (pour selectionner la liste à utiliser: P091, P011viaP091 ou P011viaP021)
+        createGroupDataList();
+        
+        // groupe de selection du type de mesure (sous l'eau ou dans le sol)
+        createGroupMesureType();
+       
+        // groupe de selection des paramètres verticaux
+        createGroupVerticalParametersChoices();
         // reset
         createButtonRaz();
 
@@ -308,7 +308,7 @@ public class EditDataForm extends EditForm
     }
     public void reinitParameters()
     {
-        selectDataList(DataListTypeEnum.P091);
+        Nemo.getInstance().getViewMain().getMyRulesManager().updateFromModel(DataListTypeEnum.UNKNOWN);
         selectMesureType(E_MesureType.BSSURF);
         myGroupeVerticalParameters.removeAllToAllCombos();
     }
