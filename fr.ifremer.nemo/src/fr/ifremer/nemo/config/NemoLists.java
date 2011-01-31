@@ -978,6 +978,7 @@ public class NemoLists implements Cloneable {
     {
         // récupération de la liste des datatypes
         CodeTableRecordType[] liste = getVocabList(Intern.list_ROSCOPparameters);
+        
         for (CodeTableRecordType item : liste){
             WSDataType dataType = new WSDataType();
             dataType.setCode(Utils.extraitCodeURN(item.getEntryKey()));
@@ -987,7 +988,20 @@ public class NemoLists implements Cloneable {
             // is sensor ??
             for (CodeTableRecordType sensor : getVocabMap(Intern.list_ROSCOPparameters, Intern.list_instruments)){
                 if (item.getEntryKey().equals(sensor.getEntryKey())){
+                    
+                    if (
+                            (sensor.getExactMatch()!=null && sensor.getExactMatch().length>0)
+                            ||
+                            sensor.getNarrowMatch()!=null && sensor.getNarrowMatch().length>0
+                            ||
+                            sensor.getMajorMatch()!=null && sensor.getMajorMatch().length>0
+                            ||
+                            sensor.getMinorMatch()!=null && sensor.getMinorMatch().length>0
+                            ||
+                            sensor.getBroadMatch()!=null && sensor.getBroadMatch().length>0
+                            ){
                     dataType.setSensor(true);
+                    }
                 }
             }
             _dataTypes.add(dataType);
