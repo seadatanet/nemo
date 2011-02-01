@@ -585,13 +585,15 @@ public class StationDomain
        try{
         medStationHeader.append(Elts.limit((String) _model.getProperty(
             Intern.S_DCHIST + "2").applyOn(inputFile), Elts.station_line));
-        medStationHeader.append(Global.RN);
         }catch(Exception nulException){
             // this is authorized: only DCHistory1 is used, DC History2 is empty
             // so this is not an error
             System.out.println("no value for "+Intern.S_DCHIST + "2");
         }
-
+        
+        //FAE 5803 Sortie du try catch du passage à la ligne
+        medStationHeader.append(Global.RN);
+        
         // *DM HISTORY=
         medStationHeader.append(start);
         medStationHeader.append(Elts.getElt(Elts.station_dmHistory,
