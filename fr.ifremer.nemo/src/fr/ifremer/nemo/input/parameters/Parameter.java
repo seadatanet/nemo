@@ -6,16 +6,20 @@ import com.ago.xml.Element2Field;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.input.AbstractModel;
 import fr.ifremer.nemo.input.ModelDescription;
-import fr.ifremer.nemo.input.parameters.AddedParameter.IdParameter;
+import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam;
+import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam.IdParameter;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.data.TypeData;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
+import fr.ifremer.nemo.util.Global.DataListTypeEnum;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
 
 /**
  * Class Parameter Description : Classe permettant la description d'un parametre
@@ -314,6 +318,32 @@ public class Parameter extends AbstractModel
         }
         return codeToUse;
     }
+    
+    
+    public String getLocalCode()
+    {
+        String localCode = null;
+        DataListTypeEnum dataListType = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
+        E_TypeConversion conv= Nemo.getInstance().getDomain().getConversion().getModel().getOutputFormat();
+
+        if (conv==E_TypeConversion.MEDATLAS )
+        {
+            if(dataListType==DataListTypeEnum.P011_VIA_P091 || dataListType==DataListTypeEnum.P091)
+            {
+
+                localCode = getCode();
+            }
+        }
+        else {
+            if (dataListType==DataListTypeEnum.P091)
+            {
+                localCode = getCode();
+            }else{
+                localCode = getCodeP011();
+            }
+        }
+        return localCode;
+    }
     /**
      * Setter pour _nameP011
      * 
@@ -475,7 +505,6 @@ public class Parameter extends AbstractModel
     {
         _unit = x;
     }
-//TODO BGT utiliser plutot getLocalCode (plus parlant > pour titres colonnes et SDN mapping)
     public String getOutputCode(Conversion c, boolean lastParam)
     {
         String code = null;
@@ -505,16 +534,8 @@ public class Parameter extends AbstractModel
     {
         StringBuffer paramHeader = new StringBuffer();
         String code;
-        //voir bug 4454
-        if (isP011() && !(this instanceof AddedParameter))
-            code = _codeP011;
-        else
-            code = _code;
-        if (code.equals(IdParameter.CJDY.toString())
-                || code.equals(IdParameter.DTUT.toString()))
-        {
-            code = _fullName;
-        }
+        // on ne fabrique le code qu'à un seul endroit comme ca on sera sur que c'est le meme!!!!
+        code = getLocalCode();
 
         paramHeader.append(code);
         paramHeader.append(Global.SPACE);

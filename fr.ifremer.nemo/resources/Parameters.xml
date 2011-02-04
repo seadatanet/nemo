@@ -61,6 +61,25 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
     <void property="code"> 
+     <string>ALTS</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>9999.99</string> 
+    </void> 
+    <void property="format"> 
+     <string>%7.2f</string> 
+    </void> 
+    <void property="name"> 
+     <string>HEIGHT ABOVE MEAN SEA LEVEL</string> 
+    </void> 
+    <void property="unit"> 
+     <string>meter</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
      <string>AMIS</string> 
     </void> 
     <void property="defaultValue"> 
@@ -188,6 +207,25 @@
     </void> 
     <void property="unit"> 
      <string>hectopascal</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
+     <string>ATPT</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>999.99</string> 
+    </void> 
+    <void property="format"> 
+     <string>%6.3f</string> 
+    </void> 
+    <void property="name"> 
+     <string>ATMOSPHERIC PRESSURE TENDENCY</string> 
+    </void> 
+    <void property="unit"> 
+     <string>hectopascal/hour</string> 
     </void> 
    </object> 
   </void> 
@@ -3690,6 +3728,25 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
     <void property="code"> 
+     <string>NIUW</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>99999</string> 
+    </void> 
+    <void property="format"> 
+     <string>%5.0f</string> 
+    </void> 
+    <void property="name"> 
+     <string>NITROGEN UPTAKE (FIXATION)</string> 
+    </void> 
+    <void property="unit"> 
+     <string>micromole nitrogen/(m3.day)</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
      <string>NODW</string> 
     </void> 
     <void property="defaultValue"> 
@@ -6572,6 +6629,44 @@
     </void> 
     <void property="unit"> 
      <string>meter/second</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
+     <string>WSTE</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>99.999</string> 
+    </void> 
+    <void property="format"> 
+     <string>%6.3f</string> 
+    </void> 
+    <void property="name"> 
+     <string>WIND STRESS EAST COMPONENT</string> 
+    </void> 
+    <void property="unit"> 
+     <string>newton/m2</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
+     <string>WSTN</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>99.999</string> 
+    </void> 
+    <void property="format"> 
+     <string>%6.3f</string> 
+    </void> 
+    <void property="name"> 
+     <string>WIND STRESS NORTH COMPONENT</string> 
+    </void> 
+    <void property="unit"> 
+     <string>newton/m2</string> 
     </void> 
    </object> 
   </void> 

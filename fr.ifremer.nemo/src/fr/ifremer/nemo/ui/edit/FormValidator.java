@@ -11,7 +11,7 @@ import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Messages;
 
 /**
- * Description: TODO
+ * Description: validateur d'onglet - voir les classes surcharge pour chaque onglet
  * @author sbregent
  *
  */

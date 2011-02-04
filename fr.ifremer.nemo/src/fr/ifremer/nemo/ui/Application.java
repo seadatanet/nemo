@@ -38,23 +38,23 @@ public class Application implements IPlatformRunnable
     private static final String optBatchMode = "batch";
 
     /** obligatory options**/
-    private static final String optInputFile = "i";
-    private static final String optOutputFile = "o";
-    private static final String optModelFile = "m";
-    private static final String optConv = "c";
+    private static final String optInputFile = Global.optInputFile;
+    private static final String optOutputFile = Global.optOutputFile;
+    private static final String optModelFile = Global.optModelFile;
+    private static final String optConv = Global.optConv;
 
     /** mandatory options **/
 
     // ODV mono or multi: default is mono - set multi only if optOdvMulti is present
-    private static final String optOdvMono = "mono"; 
-    private static final String optOdvMulti = "multi";
+    private static final String optOdvMono = Global.optOdvMono; 
+    private static final String optOdvMulti = Global.optOdvMulti;
 
-    private static final String optSortDatas = "sort"; 
-    private static final String optDatasetRef = "datasetRef"; 
+    private static final String optSortDatas = Global.optSortDatas;
+    private static final String optDatasetRef = Global.optDatasetRef;
     
-    private static final String  optCdiSummary = "cdiSummary"; 
-    private static final String  optCouplingTableUpdate = "couplingTableUpdate"; 
-    private static final String  optCouplingTablePrefix = "couplingTablePrefix"; 
+    private static final String  optCdiSummary = Global.optCdiSummary;
+    private static final String  optCouplingTableUpdate = Global.optCouplingTableUpdate;
+    private static final String  optCouplingTablePrefix = Global.optCouplingTablePrefix;
     /*
      * (non-Javadoc)
      * 
@@ -94,7 +94,7 @@ public class Application implements IPlatformRunnable
                 batchLogger = Logger.getLogger("nemoBatch");//$NON-NLS-1$
                 batchLogger.setLevel(Level.DEBUG);
 
-                // TODO 4525: creer un mode batch uniquement pour exoprter la coupling table (1 seul argument: le nom du fichier) 
+                // TODO BGT 4525: creer un mode batch uniquement pour exoprter la coupling table (1 seul argument: le nom du fichier) 
                 //+ mettre à jour la doc
                 
                 if ( checkBatchOptionsOk(cl))

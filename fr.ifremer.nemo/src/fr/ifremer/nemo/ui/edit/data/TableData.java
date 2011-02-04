@@ -23,7 +23,11 @@ import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.domain.MediaDomain;
+import fr.ifremer.nemo.input.parameters.Parameter;
+import fr.ifremer.nemo.input.parameters.addedParameters.AP_PRES;
+import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam;
 import fr.ifremer.nemo.ui.FilteredTableFactory;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.tables.ParameterFilteredTable;
@@ -164,7 +168,7 @@ public class TableData
     {
         types.add(typeData);
         System.out.println("add "+typeData.getEntryKey());
-        myGroupVerticalParameters.addToAllCombo(typeData);
+        myGroupVerticalParameters.addTypeData(typeData);
     }
 
 
@@ -348,14 +352,13 @@ public class TableData
         types = null;
         types = new ArrayList<TypeData>();
 
-        Configuration config = Nemo.getInstance().getConfig();
 
-        // On ajoute systématiquement le paramètre pression pour les profils
+        // On ajoute systématiquement le paramètre pression pour les profils en medatlas
         // verticaux sauf si la liste de paramètres à utiliser est la P011
-        //TODO BGT 2.6.3.2 deplacer ce code dans appel qd choix dataType coché
         if (Nemo.getInstance().getViewMain().getMyRulesManager().isProfile()
-//                && config.getDataListToUse().equals(DataListEnum.P091))
-                && Nemo.getInstance().getDomain().getData().getModel().getDataListType()==DataListTypeEnum.P091)
+               && Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas()
+               &&Nemo.getInstance().getViewMain().getMyRulesManager().getMyDataListType()==DataListTypeEnum.P091
+                )
         {
             for (TypeData type : typesWS)
             {
@@ -364,7 +367,6 @@ public class TableData
                         && Nemo.getInstance().getViewMain().getMyRulesManager().isProfile())
                 {
                     // on rajoute PRES
-                    System.out.println("ajout PRES dans le tableau");
                     addType(type);
                 }
             }
@@ -542,8 +544,7 @@ public class TableData
                 checkTypesWS();
                 openMyParameterFilteredTable();
                 }else{
-                //TODO BGT
-                    Utils.messageErreur("TODO aucun type de parametre choisi");
+                    Utils.messageErreur(Messages.edit_data_error_dataListUnknown);
                 }
             }
         });
@@ -888,11 +889,10 @@ public class TableData
         nbre = myTable.getItemCount();
         for (int i = 0; i < nbre; i++)
         {
-
-            if ((!myTable.getItem(i).getText(4).equals(
-                Global.EMPTY_STRING))
-                && (!myTable.getItem(i).getText(2).equals(
-                    Global.EMPTY_STRING)))
+            // 4e position = start
+            // 2e position = conversion
+            if ((!myTable.getItem(i).getText(4).equals(Global.EMPTY_STRING))
+                && (!myTable.getItem(i).getText(2).equals(Global.EMPTY_STRING)))
             {
                 // on a selectionne un debut et une fin et il y a une conversion
                 // e faire
@@ -904,6 +904,7 @@ public class TableData
                         .getFileHeader()
                         + mediaDomain.getStationHeaderNumberLines());
 
+                //TODO BGT afficher erreur propre si erreur ici a cause du fait que start/end n'est pas defini
                 selection =
                     ligne.substring(
                         Integer.valueOf(myTable.getItem(i)

@@ -21,8 +21,7 @@ import fr.ifremer.nemo.util.format.LatitudeFormat;
 import fr.ifremer.nemo.util.format.LongitudeFormat;
 
 /**
- * Class EtapeStation.java
- * Description: TODO
+ * Description: validation de l'onglet station
  * @author sbregent 
  */
 public class StationFormValidator extends FormValidator
@@ -33,10 +32,11 @@ public class StationFormValidator extends FormValidator
         super();
     }
     
-    
     @Override
     public void validate()
     {
+        
+       
         try
         {
 

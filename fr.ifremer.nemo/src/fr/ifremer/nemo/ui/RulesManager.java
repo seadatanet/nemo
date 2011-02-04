@@ -7,6 +7,10 @@
  */
 package fr.ifremer.nemo.ui;
 
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Shell;
+
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.ui.edit.data.GroupVerticalParameters;
@@ -14,7 +18,6 @@ import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_MesureType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
@@ -68,8 +71,9 @@ public class RulesManager
     
     public static E_ProcessType DEFAULT_PROCESSTYPE = E_ProcessType.CRUISE_FILE;
     public static E_TypeConversion DEFAULT_CONVERSIONTYPE = E_TypeConversion.UNKNOWN;
-    public static E_InputType DEFAULT_FILETYPE =E_InputType.PROFILE;
+    public static E_InputType DEFAULT_FILETYPE =E_InputType.UNKNOWN;
     public static DataListTypeEnum DEFAULT_DATALIST=DataListTypeEnum.UNKNOWN;
+    public static E_MesureType DEFAULT_MESURETYPE = E_MesureType.BSSURF;
    
     private String messageLog=Global.EMPTY_STRING;
     
@@ -293,12 +297,28 @@ public class RulesManager
    
    public void updateFromIHM(DataListTypeEnum dataListType)
    {
-       System.out.println(myDataListType + " >>> "+dataListType);
-       if (dataListType != myDataListType){   
-           myDataListType = dataListType;
-           Nemo.getInstance().getDomain().getData().getModel().setDataListType(dataListType);
-           Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().reinitTable();
+       boolean confirm=true;
+       if (dataListType != myDataListType)
+       {  
+           if ( Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getTypes().size()>0)
+           {
+               confirm = MessageDialog.openConfirm(null, 
+                   Messages.edit_data_dataListDialogBox_title,
+                   Messages.edit_data_dataListDialogBox_text);
+           }
+           if (confirm){
+               myDataListType = dataListType;
+               Nemo.getInstance().getDomain().getData().getModel().setDataListType(dataListType);
+               Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().reinitTable();
+               Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().fillTypes();
+               Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters().removeAllToAllCombos();
+           }
+           else{
+               // si pas confirmation, et ne touche a rien et on remet la valeur de depart
+               Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(myDataListType);
+           }
        }
+
    }
    public void updateFromModel(DataListTypeEnum dataListType)
    {
@@ -307,6 +327,8 @@ public class RulesManager
            Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV());
            Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(dataListType);
            ViewLog.styledTextLogErreurs.setText(messageLog);
+           Nemo.getInstance().getDomain().getData().getModel().setDataListType(myDataListType);
+
        }
    }
    
@@ -323,15 +345,24 @@ public class RulesManager
            verticGroup.enable_pDepthBSBed(isP_depthBSBed_enabled());
            verticGroup.enable_pDepthBSSurf(isP_depthBSSurf_enabled());
            verticGroup.enable_pPressure(isP_pressure_enabled());
+//           verticGroup.removeAllToAllCombos();
    }
    public void updateFromModel(E_MesureType mesureType)
    {
+       if (mesureType==E_MesureType.UNKNOWN)
+       {
+           myMesureType=DEFAULT_MESURETYPE;
+       }else{
            myMesureType = mesureType;
-           rule_mesureType();
-           GroupVerticalParameters verticGroup = Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters();
-           verticGroup.enable_pDepthBSBed(isP_depthBSBed_enabled());
-           verticGroup.enable_pDepthBSSurf(isP_depthBSBed_enabled());
-           verticGroup.enable_pPressure(isP_depthBSBed_enabled());
+       }
+       rule_mesureType();
+       GroupVerticalParameters verticGroup = Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters();
+       verticGroup.enable_pDepthBSBed(isP_depthBSBed_enabled());
+       verticGroup.enable_pDepthBSSurf(isP_depthBSSurf_enabled());
+       verticGroup.enable_pPressure(isP_pressure_enabled());
+//       verticGroup.removeAllToAllCombos();
+
+       Nemo.getInstance().getViewMain().getEditDataForm().selectMesureType(myMesureType);
    }
    
    /**
@@ -345,16 +376,16 @@ public class RulesManager
        setP_pressure_enabled(false);
 
        boolean p_depthBSBed = 
-           isConversionToODV() 
-           && myMesureType==E_MesureType.BSBED 
-           && isProfile();
+           isProfile()
+       
+           && myMesureType==E_MesureType.BSBED ;
        
        boolean p_depthBSSurf = 
            (isProfile() 
                    && myMesureType==E_MesureType.BSSURF
            )
            ||
-           (isTimeSeries() 
+           ((isTimeSeries() ||isTrajectory())
                    && isConversionToODV()
            );
        
@@ -365,7 +396,7 @@ public class RulesManager
 
        setP_depthBSBed_enabled(p_depthBSBed);
        setP_depthBSSurf_enabled(p_depthBSSurf);
-           setP_pressure_enabled(p_pressure);
+       setP_pressure_enabled(p_pressure);
    }
    /******************************************
     * REGLES
@@ -396,7 +427,7 @@ public class RulesManager
    }
    private void rule_conversionType(boolean addToLog)
    {
-
+// TODO BGT pb si on choisit medatlas mais que le modele en cours est en P021
        if ( myConversionType==E_TypeConversion.ODV_MONOSTATION ||
                myConversionType==E_TypeConversion.ODV_MULTISTATIONS)
        {
@@ -443,7 +474,18 @@ public class RulesManager
                ||myConversionType == E_TypeConversion.ODV_MULTISTATIONS);
    }
  
-   
+   public boolean isDataListTypeP011viaP021()
+   {
+       return myDataListType==DataListTypeEnum.P011_VIA_P021;
+   }
+   public boolean isDataListTypeP091()
+   {
+       return myDataListType==DataListTypeEnum.P091;
+   }
+   public boolean isDataListTypeP011viaP091()
+   {
+       return myDataListType==DataListTypeEnum.P011_VIA_P091;
+   }
    /***********************************************************************************************************
     * getters & setters
     *********************************************************************************************************/
@@ -544,6 +586,10 @@ public class RulesManager
     public void setP_pressure_enabled(boolean p_pressure_enabled)
     {
         this.p_pressure_enabled = p_pressure_enabled;
+    }
+    public E_MesureType getMyMesureType()
+    {
+        return myMesureType;
     }
     
 

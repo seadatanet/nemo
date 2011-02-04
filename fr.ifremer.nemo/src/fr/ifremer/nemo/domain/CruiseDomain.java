@@ -58,8 +58,6 @@ public class CruiseDomain
     
     public void update(InputModel model){
         updateCruise(model.getCruiseModel());
-        // TODO BGT avant data et station étaient rattachés à cruise et rafraichis en même temps -> voir si maintenant ca manque
-        // a priori non, ils ont ete rajoutes dans fr.ifremer.nemo.domain.InputDomain.update(InputModel)
     }
     
     public void updateCruise(CruiseModel cruiseModel){

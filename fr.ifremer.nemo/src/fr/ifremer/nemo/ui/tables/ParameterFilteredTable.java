@@ -27,7 +27,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
 /**
- * Description: TODO
+ * Description: 
  * 
  * @author ycaudal
  * 
@@ -208,16 +208,12 @@ public class ParameterFilteredTable extends AbstractFilteredTable
             {
                 String codeModele, codeActuel;
 
-                // split sur " - "
-                Pattern p = Pattern.compile(Global.SEP);
-                // FAE 6537: on teste le codeToUse et non plus le code (car getCode peut être P091 ou P021 pour un parametre P011,
-                //et ce n'est pas cela que l'on veut tester pour un param P011
-                String mots[] = p.split(typeData.getCodeToUse());
-                codeActuel = mots[0];
 
-                String mots2[] = p.split(myTableDataRef.getTypes().get(i).getCodeToUse());
-                codeModele = mots2[0];
 
+                
+                codeActuel = typeData.getCodeToUse();
+                codeModele = myTableDataRef.getTypes().get(i).getCodeToUse();
+                
                 if (codeModele.equals(codeActuel))
                 {
                     found = true;

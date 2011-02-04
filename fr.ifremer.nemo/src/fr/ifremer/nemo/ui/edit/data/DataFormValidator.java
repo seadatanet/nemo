@@ -2,7 +2,12 @@ package fr.ifremer.nemo.ui.edit.data;
 
 import java.util.regex.Pattern;
 
+import org.eclipse.swt.widgets.Combo;
+
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.domain.ParameterManager;
+import fr.ifremer.nemo.input.parameters.VerticalParametersList;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.FormValidator;
 import fr.ifremer.nemo.ui.edit.conversion.EditConversionForm;
@@ -10,30 +15,51 @@ import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.nemo.util.Global.DataListTypeEnum;
-import fr.ifremer.nemo.util.Global.E_TypeConversion;
+import fr.ifremer.nemo.util.Global.E_MesureType;
 
 /**
- * Description: TODO
+ * Description: validation de l'onglet data
  * @author sbregent 
  */
 public class DataFormValidator extends FormValidator
 {
-    
-    
+    RulesManager rm ;
+    GroupVerticalParameters verticalParamGroup;
+    ParameterManager myParameterManager;
+   private String p_depthBBed_entryKey=Global.EMPTY_STRING;
+   private String p_depthBSurf_entryKey=Global.EMPTY_STRING;
+   private String p_pressure_entryKey=Global.EMPTY_STRING;
+   private Combo comboDBSBed, comboDBBSurf, comboP ;
     public DataFormValidator()
     {
         super();
+       
+    }
+    
+    
+    private void reinitVerticalParams()
+    {
+        p_depthBBed_entryKey=Global.EMPTY_STRING;
+        p_depthBSurf_entryKey=Global.EMPTY_STRING;
+        p_pressure_entryKey=Global.EMPTY_STRING;
     }
     @Override
     public void validate()
     {
+       
+        
+        reinitVerticalParams();
+        rm = Nemo.getInstance().getViewMain().getMyRulesManager();
+        verticalParamGroup =Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters();
+        comboDBSBed = verticalParamGroup.getComboDBSBed();    
+        comboDBBSurf = verticalParamGroup.getComboDBSSurf();
+        comboP = verticalParamGroup.getComboP();
         EditConversionForm editConversionForm = Nemo.getInstance().getViewMain().getEditConversionForm();
         EditDataForm editDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
+        myParameterManager =Nemo.getInstance().getDomain().getData().getMyParameterManager();
 
         Boolean ok = true;
-      
-        Boolean exitValid = false;
+
         // retour e l'onglet message d'erreur
         ViewLog.tabFolderLog.setSelection(0);
 
@@ -42,177 +68,78 @@ public class DataFormValidator extends FormValidator
 
         // mise e jour avant toute chose
         editDataForm.getMyTableData().majTypeData();
-        
-        
+
+
         int nbreParam = editDataForm.getMyTableData().getTypes().size();
+
         /**-----------------------------------------------------------------------
          * data05 presence d'au moins 1 paramètre dans le tableau
          */
-        if (nbreParam == 0)
-        {
-            ok = false;
-            Utils.messageErreurAppend(Messages.Etape_117);
-            exitValid=true;
-        }
+        ok = checkNbParams(nbreParam);
         // -------------------------------------------------------------------------
-        
-        
-        /**-----------------------------------------------------------------------
-         * data10
-         */
-        ok = updateTestValues();
-        if (!ok)
-        {
-            Utils.messageErreurAppend(Messages.Etape_131);
-        }
-        // -------------------------------------------------------------------------
-        
-       
-        if (!exitValid)
-        {
-            int[] debuts, fins;
-            String[] debutsFlag, finsFlag;
-            int cptDebut = 0;
-            int cptFin = 0;
 
+        if (ok)
+        {
+            /** data10 */
+            ok = ok && updateTestValues();
+
+            int[] debuts, fins;
             debuts = new int[nbreParam];
             fins = new int[nbreParam];
-            debutsFlag = new String[nbreParam];
-            finsFlag = new String[nbreParam];
 
-            // remplissage des listes
             for (int i = 0; i < nbreParam; i++)
             {
-
                 TypeData typeCourant = editDataForm.getMyTableData().getTypes().get(i);
-
                 debuts[i] = typeCourant.getDebut();
                 fins[i] = typeCourant.getFin();
-                debutsFlag[i] = typeCourant.getDebutFlag();
-                finsFlag[i] = typeCourant.getFinFlag();
-
-                /**-----------------------------------------------------------------------
-                 * data20 verif presence de l'unité pour chaque paramètre
-                 */
-                // FAE 6538
-                if (typeCourant.getUnite().equals(Global.EMPTY_STRING)){
-                    ok = false;
-                    Utils.messageErreurAppend(Messages.Etape_118);
-                    continue;
-                }
-                //  ----------------------------------------------------------
-
-                /**-----------------------------------------------------------------------
-                 * data30 verif compatibilité valeur par defaut et valeur output
-                 */
-
-                ok = checkDefaultAndOutputCompatibility(ok, typeCourant);
-                //  ----------------------------------------------------------
-
-                /**-----------------------------------------------------------------------
-                 * data40 check des valeurs debut<fin
-                 */
-                if (typeCourant.getDebut() > typeCourant.getFin())
-                {
-                    Utils.messageErreurAppend(Messages.Etape_98 + Global.SPACE
-                        + typeCourant.getCodeToUse());
-                    ok = false;
-                }
-                //  ----------------------------------------------------------
                 
-                /**-----------------------------------------------------------------------
-                 * data45 check des valeurs debut<fin flag
-                 */
-                if (!typeCourant.getDebutFlag().equals(Global.EMPTY_STRING)
-                        && !typeCourant.getFinFlag()
-                        .equals(Global.EMPTY_STRING))
-                {
-                    if (Integer.parseInt(typeCourant.getDebutFlag()) > Integer
-                            .parseInt(typeCourant.getFinFlag()))
-                    {
-                        Utils.messageErreurAppend(Messages.Etape_125
-                            + Global.SPACE + typeCourant.getCodeToUse());
-                        ok = false;
-                    }
-                }
+                /** data20 verif presence de l'unité pour chaque paramètre -FAE 6538 */
+                ok = ok && checkUniteIsPresent(typeCourant);
+
+                /** data30 verif compatibilité valeur par defaut et valeur output */
+                ok = ok && checkDefaultAndOutputCompatibility( typeCourant);
+
+                /** data40 check des valeurs debut<fin */
+                ok = ok && checkStartAndEnd(typeCourant);
+
+                /** data45 check des valeurs debut<fin flag */
+                ok = ok && checkStartAndEndFlags(typeCourant);
             }
+
+            /** data50 verif que les valeurs de « debut » et « fin » sont différentes des valeurs affichées par défaut **/
+            ok = ok && checkStartAndEndAreFilled(nbreParam,debuts, fins );
+        
             
-            /**-----------------------------------------------------------------------
-             * data50
-             * verif que les valeurs de « debut » et « fin » sont différentes des valeurs affichées par défaut
-             **/
-            Boolean valeurNonRemplie = false;
-            // parcours des listes et test des valeurs
-            for (int i = 0; i < nbreParam; i++)
-            {
-                for (int j = 0; j < nbreParam; j++)
-                {
-                    if (debuts[i] == debuts[j])
-                    {
-                        if (debuts[i] == 0)
-                        {
-                            valeurNonRemplie = true;
-                        }
-                        cptDebut = cptDebut + 1;
-                    }
-                    if (fins[i] == fins[j])
-                    {
-                        cptFin = cptFin + 1;
-                    }
-                }
-            }
-            if (valeurNonRemplie)
-            {
-                Utils.messageErreurAppend(Messages.Etape_88);
-                ok = false;
-            }
             //  ----------------------------------------------------------
-            
-            
-            /**-----------------------------------------------------------------------
-             * data60
-             * verif que les valeurs de « debut » et « fin » sont différentes des valeurs affichées par défaut
-             **/
-            // TEST pour savoir si PRES est bien en premier mais pas pour
-            // profile ou trajectoire
-            TypeData premierType = editDataForm.getMyTableData().getTypes().get(0);
-
-            // split sur " - "
-//            Pattern p = Pattern.compile(Global.SEP);
-//            String[] mots = p.split(premierType.getCode());
-//            String firstParameterCode = mots[0];
-            String firstParameterCode = premierType.getEntryKey();
-            editConversionForm.setWarningData(Global.EMPTY_STRING);
-
-            if (Nemo.getInstance().getViewMain().getMyRulesManager().isProfile())
+            // PARAMETRES
+           ok= ok && detectVerticalParameters();
+            if (ok)
             {
-                boolean checkPressureOk;
+                editConversionForm.setWarningData(Global.EMPTY_STRING);
 
-                checkPressureOk = checkPressureIsInFirstPosition(firstParameterCode);
+                if (Nemo.getInstance().getViewMain().getMyRulesManager().isProfile() )
+                {
+                    /** data60/data65 parametre de reference verticale en premiere position **/
+                    boolean verticParamOk;
+                    verticParamOk = checkVerticalParameterIsInFirstPosition();
 
-                // Si PRES n'est pas premier => Medatlas impossible
-                // A moins que l'on ait les parametre DEPH, PSAL et TEMP ( FAE 3228 )
+                    /** data70 Si data60 ko => Medatlas impossible
+                 A moins que l'on ait les parametre DEPH, PSAL et TEMP ( FAE 3228 )**/
 
-                if (!checkPressureOk){
-                    if ((Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType() == E_TypeConversion.MEDATLAS))
+                    if (!verticParamOk && (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas()))
                     {
-
-                        checkPressureOk = checkDepthAndSalinityAndTemperature();
-                        if (!checkPressureOk){
-
-                            editConversionForm
-                            .setWarningData(Messages.ViewLog_7);
-                        }
+                        verticParamOk = checkDepthAndSalinityAndTemperature();
                     }
-                    else
-                    {
-                        editConversionForm
-                        .setWarningData(Global.EMPTY_STRING);
-                    }
+                    ok = ok && verticParamOk;
                 }
-                ok = ok && checkPressureOk;
             }
         }
+        
+        
+        
+        /**
+         * 
+         */
         if (ok)
         {
             editDataForm.setOkApresReset (true);
@@ -229,40 +156,144 @@ public class DataFormValidator extends FormValidator
     protected void onSuccess()
     {
         super.onSuccess();
+        
+        
         EditDataForm editDataForm= Nemo.getInstance().getViewMain().getEditDataForm();
+        
+        // envoi des valeurs dans le modele 
+        VerticalParametersList modelList = Nemo.getInstance().getDomain().getData().getModel().getVerticalParametersList();
+        modelList.setP_depthBSBed(p_depthBBed_entryKey);
+        modelList.setP_depthBSSurf(p_depthBSurf_entryKey);
+        modelList.setP_pressure(p_pressure_entryKey);
+        Nemo.getInstance().getDomain().getData().getModel().setVerticalParametersList(modelList);
         editDataForm.initFromNewModel();
+        
+       
+        
         Nemo.getInstance().getViewMain().tabData.setText(Messages.onglet_data_valid);
         Nemo.getInstance().getViewMain().setEtape(4);
-        // envoi des valeurs dans le modele
+       
+        Nemo.getInstance().getDomain().getData().getModel().setMesureType(Nemo.getInstance().getViewMain().getMyRulesManager().getMyMesureType());
 
     }
     
+    private boolean checkStartAndEndAreFilled(int nbreParam, int[]debuts, int[]fins )
+    {
+        boolean ok=true;
+        int cptDebut = 0;
+        int cptFin = 0;
+        Boolean valeurNonRemplie = false;
+        // parcours des listes et test des valeurs
+        for (int i = 0; i < nbreParam; i++)
+        {
+            for (int j = 0; j < nbreParam; j++)
+            {
+                if (debuts[i] == debuts[j])
+                {
+                    if (debuts[i] == 0)
+                    {
+                        valeurNonRemplie = true;
+                    }
+                    cptDebut = cptDebut + 1;
+                }
+                if (fins[i] == fins[j])
+                {
+                    cptFin = cptFin + 1;
+                }
+            }
+        }
+        if (valeurNonRemplie)
+        {
+            Utils.messageErreurAppend(Messages.Etape_88);
+            ok = false;
+        }
+        
+        return ok;
+    }
+    
+    private boolean checkNbParams(int nbParams)
+    {
+        boolean ok= (nbParams > 0);
+        if (!ok)
+        {
+            Utils.messageErreurAppend(Messages.Etape_117);
+        }
+        return ok;
+    }
+    
+    
+    private boolean checkUniteIsPresent(TypeData typeCourant)
+    {
+        boolean ok;
+        ok = !(typeCourant.getUnite().equals(Global.EMPTY_STRING));
+        if (!ok){
+            Utils.messageErreurAppend(Messages.Etape_118);
+        }
+        return ok;
+    }
+    
+    
+    private boolean checkStartAndEnd(TypeData typeCourant)
+    {
+        boolean ok=true;
+        if (typeCourant.getDebut() > typeCourant.getFin())
+        {
+            Utils.messageErreurAppend(Messages.Etape_98 + Global.SPACE
+                + typeCourant.getCodeToUse());
+            ok = false;
+        }
+        return ok;
+    }
+    
+    private boolean checkStartAndEndFlags(TypeData typeCourant)
+    {
+        boolean ok=true;
+        if (!typeCourant.getDebutFlag().equals(Global.EMPTY_STRING)
+                && 
+                !typeCourant.getFinFlag().equals(Global.EMPTY_STRING))
+        {
+            if (Integer.parseInt(typeCourant.getDebutFlag()) > Integer.parseInt(typeCourant.getFinFlag()))
+            {
+                Utils.messageErreurAppend(Messages.Etape_125
+                    + Global.SPACE + typeCourant.getCodeToUse());
+                ok = false;
+            }
+        }
+        return ok;
+    }
     
     /**
      * 
      * @return
      */
-    private static boolean checkDepthAndSalinityAndTemperature()
+    private boolean checkDepthAndSalinityAndTemperature()
     {
-
+        boolean ok;
         EditDataForm editDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
+        EditConversionForm editConversionForm = Nemo.getInstance().getViewMain().getEditConversionForm();
+        ParameterManager pm = Nemo.getInstance().getDomain().getData().getMyParameterManager();
+
+        boolean isDEPH = !p_depthBSurf_entryKey.equals(Global.EMPTY_STRING); //false;
+        
         boolean isPSAL = false;
         boolean isTEMP = false;
-        boolean isDEPH = false;
-
         for (TypeData donnee : editDataForm.getMyTableData().getTypes())
         {
-            if (donnee.getEntryKey().equals(
-                Intern.paramDEPH))
-                isDEPH = true;
-            else if (donnee.getEntryKey().equals(
-                Intern.paramPSAL))
+            if (donnee.getEntryKey().equals(pm.getP_salinityCode()))
+            {
                 isPSAL = true;
-            else if (donnee.getEntryKey().equals(
-                Intern.paramTEMP))
+            }
+            else if (donnee.getEntryKey().equals(pm.getP_temperatureCode()))
+            {
                 isTEMP = true;
+            }
         }
-        return isPSAL && isTEMP && isDEPH;
+        ok=isPSAL && isTEMP && isDEPH;
+        if (!ok)
+        {
+            editConversionForm.setWarningData(Messages.ViewLog_7);
+        }
+        return ok;
 
     }
     
@@ -273,37 +304,33 @@ public class DataFormValidator extends FormValidator
      * @param firstParameterCode
      * @return
      */
-    private static boolean checkPressureIsInFirstPosition(String firstParameterCode)
+    private boolean checkVerticalParameterIsInFirstPosition()
     {
         boolean checkOk = true;
-        DataListTypeEnum dataList = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
         
-        if (dataList == DataListTypeEnum.P011_VIA_P091 || dataList == DataListTypeEnum.P091)
+        // recup du premier parametre
+        TypeData premierType = Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getTypes().get(0);
+        String firstParameterCode = premierType.getCodeToUse();
+        E_MesureType mesureType=Nemo.getInstance().getViewMain().getMyRulesManager().getMyMesureType();
+      
+        // cas below sea bed
+        if(mesureType==E_MesureType.BSBED)
         {
-            //FAE 5819 : ajout du code DPSF(P091) ou MINCDIST(P011) comme parametre possible
-            if (!(firstParameterCode.equals(Intern.paramPRES) 
-                    || firstParameterCode.equals(Intern.paramDEPH)
-                    || firstParameterCode.equals(Intern.paramDPSF)
-            ))
-            {
-                // PRES ou DEPH ou DPSF n'est pas en premier
-                Utils.messageErreurAppend(Messages.error_data_p091_firstPRES);
-                checkOk=false;
+            checkOk = firstParameterCode.equals(p_depthBBed_entryKey);
+            if (!checkOk){
+                Utils.messageErreurAppend(Messages.error_data_firstParam_depthBSBed);
             }
         }
-        else if (dataList == DataListTypeEnum.P011_VIA_P021)
+        // cas below sea surface
+        else if(mesureType==E_MesureType.BSSURF)
         {
-            //FAE 5819 : ajout du code DPSF(P091) ou MINCDIST(P011) comme parametre possible
-            if (!(firstParameterCode.equals(Intern.paramPREX) 
-                    || firstParameterCode.equals(Intern.paramMPMN)
-                    || firstParameterCode.equals(Intern.paramAHGT)
-            ))
-            {
-                // PREX ou MPMN ou AHGT n'est pas en premier
-                Utils.messageErreurAppend(Messages.error_data_p011_firstPRES);
-                checkOk=false;
+            checkOk = firstParameterCode.equals(p_depthBSurf_entryKey)
+            || firstParameterCode.equals(p_pressure_entryKey);
+            if (!checkOk){
+                Utils.messageErreurAppend(Messages.error_data_firstParam_depthBSSurfOrPres);
             }
         }
+
         return checkOk;
     }
     
@@ -322,17 +349,21 @@ public class DataFormValidator extends FormValidator
             res = false;
             e.printStackTrace();
         }
+        
+        if (!res)
+        {
+            Utils.messageErreurAppend(Messages.Etape_131);
+        }
+        
         return res;
     }
     
     
-   private boolean checkDefaultAndOutputCompatibility(boolean ok, TypeData typeCourant )
+   private boolean checkDefaultAndOutputCompatibility( TypeData typeCourant )
    {
-       boolean okRes = ok;
+       boolean okRes = true;
        String fmOut = new String();
 
-       // test direct sur valeur entree
-       okRes = okRes && true;
 
        // test direct sur valeur sortie (valeur par defaut)
        try
@@ -373,13 +404,13 @@ public class DataFormValidator extends FormValidator
                    && (typeCourant.getSortie().length() == totLength))
            {
                // ok
-               okRes = okRes && true;
+               okRes =true;
 
            }
            else
            {
                // erreur
-               okRes = okRes && false;
+               okRes = false;
                Utils
                .messageErreurAppend(Messages.Etape_106
                    + " " + typeCourant.getCodeToUse() + " : " + Messages.Etape_106b); //$NON-NLS-1$ //$NON-NLS-2$
@@ -389,7 +420,7 @@ public class DataFormValidator extends FormValidator
        catch (Exception e)
        {
            // erreur
-           okRes = okRes && false;
+           okRes =  false;
            Utils
            .messageErreurAppend(Messages.Etape_106
                + " " + typeCourant.getCodeToUse() + " : " + Messages.Etape_106b); //$NON-NLS-1$ //$NON-NLS-2$
@@ -397,5 +428,180 @@ public class DataFormValidator extends FormValidator
        }
 
        return okRes;
+   }
+   
+   
+   private boolean detectVerticalParameters()
+   {
+       RulesManager rm =  Nemo.getInstance().getViewMain().getMyRulesManager();
+
+       if( rm.isDataListTypeP091())
+      {
+          detectVerticalParametersForP091();
+      }
+      else if(rm.isDataListTypeP011viaP021())
+      {
+          detectVerticalParametersForP011();
+      }
+      else if(rm.isDataListTypeP011viaP091())
+      {
+          detectVerticalParametersForP011viaP091();
+          
+      }
+       
+      return checkVerticalParametersWellDetected();
+   }
+   
+   private void detectVerticalParametersForP011()
+   {
+      
+       int index;
+       // depth below sea surface
+       if (rm.isP_depthBSSurf_enabled()){
+           index= comboDBBSurf.getSelectionIndex();
+           if (index != -1){
+               p_depthBSurf_entryKey = comboDBBSurf.getItem(index);
+           }
+       }
+       // Depth below sea bed
+       if (rm.isP_depthBSBed_enabled()){
+           index= comboDBSBed.getSelectionIndex();
+           if (index != -1){
+               p_depthBBed_entryKey = comboDBSBed.getItem(index);
+           }
+       }
+       // pressure
+       if (rm.isP_pressure_enabled()){
+           index= comboP.getSelectionIndex();
+           if (index != -1){
+               p_pressure_entryKey = comboP.getItem(index);
+           }
+       }
+
+   }
+ 
+   private boolean checkVerticalParametersWellDetected()
+   {
+       
+       boolean ok=true;
+       if (rm.isP_depthBSBed_enabled() && p_depthBBed_entryKey.equals(Global.EMPTY_STRING))
+       {
+           Utils.messageErreurAppend(Messages.edit_data_verticalParameters_info_chooseDepthBSBed 
+               +Global.SPACE
+               + myParameterManager.getP_depthBSBedCode());
+           ok=false;
+       }
+       
+       
+       if (
+               (rm.isP_depthBSSurf_enabled()&& rm.isP_pressure_enabled() )
+               &&
+               (p_depthBSurf_entryKey.equals(Global.EMPTY_STRING) && p_pressure_entryKey.equals(Global.EMPTY_STRING))
+               )
+       {
+           Utils.messageErreurAppend(Messages.edit_data_verticalParameters_info_chooseDepthBSurfOrPressure
+               +Global.SPACE
+               + myParameterManager.getP_depthBSSurfCode()
+               + " or "
+               + myParameterManager.getP_pressureCode());
+           ok=false;
+       }
+       return ok;
+   }
+   private  void detectVerticalParametersForP091()
+   {
+        autoFillVerticalParametersForP091();
+   }
+   private  void detectVerticalParametersForP011viaP091()
+   {
+       
+       // on regarde si un choix a été fait dans les combos
+       // sinon et si un seul choix possible, on le fait
+       // sinon et si plusieurs choix possibles, on prend celui qui est en 1er param si il correspond au type de combo?
+       
+       // reinit des valeurs
+       reinitVerticalParams();
+        
+        // Depth below sea bed
+        if (rm.isP_depthBSBed_enabled())
+        {
+            p_depthBBed_entryKey = fillComboAsP011viaP091(comboDBSBed );
+        }
+        // depth below sea surface
+        if (rm.isP_depthBSSurf_enabled())
+        {
+            p_depthBSurf_entryKey = fillComboAsP011viaP091(comboDBBSurf );
+        }
+        // pressure
+        if (rm.isP_pressure_enabled())
+        {
+            p_pressure_entryKey = fillComboAsP011viaP091(comboP );
+        }  
+   }
+  private String fillComboAsP091(Combo combo)
+  {
+      String entryKey=Global.EMPTY_STRING;
+      int waitedNbItems = 2; // la valeur vide "" + la valeur attendue pour ce param en P091
+      int indexToSelect = 1; // index de la valeur à selectionner (index de la valeur vide = 0, index de la valeur attendue est 1)
+      if(combo.getItemCount()== waitedNbItems)
+      {
+          entryKey = combo.getItem(indexToSelect);
+          combo.select(indexToSelect);
+      }
+      return entryKey;
+  }
+  
+  
+  private String fillComboAsP011viaP091(Combo combo)
+  { 
+      String entryKey=Global.EMPTY_STRING;
+      int waitedNbItems = 2; // la valeur vide "" + la valeur attendue pour ce param en P091
+      int indexToSelect = 1; // index de la valeur à selectionner (index de la valeur vide = 0, index de la valeur attendue est 1)
+      TypeData premierType = Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getTypes().get(0);
+      String firstParameterCode = premierType.getCodeToUse();
+      
+      
+      // cas ideal: on n'a qu'une possibilite -> on la selectionne
+      if(combo.getItemCount()== waitedNbItems)
+      {
+          entryKey = combo.getItem(indexToSelect);
+          combo.select(indexToSelect);
+      }
+      // cas ambigu: on a plusieurs choix possibles -> on selectionne celui qui correspond au premier parametre du tableau
+      else if(combo.getItemCount()> waitedNbItems)
+      {
+          String selected=combo.getItem(combo.getSelectionIndex());
+          if( combo.getItem(combo.getSelectionIndex()).equals(Global.EMPTY_STRING))
+          {
+              for (int i=0; i<combo.getItems().length; i++)
+              {
+                  if (combo.getItem(i).equals(firstParameterCode)){
+                      combo.select(i);
+                      entryKey = combo.getItem(i);
+                  }
+              }
+          }else{
+              entryKey = selected;
+          }
+      }
+      return entryKey;
+  }
+   private void autoFillVerticalParametersForP091()
+   {
+       // reinit des valeurs
+      reinitVerticalParams();
+       
+       // Depth below sea bed
+       if (rm.isP_depthBSBed_enabled()){
+           p_depthBBed_entryKey = fillComboAsP091(comboDBSBed);
+       }
+       // depth below sea surface
+       if (rm.isP_depthBSSurf_enabled()){
+           p_depthBSurf_entryKey = fillComboAsP091(comboDBBSurf);
+       }
+       // pressure
+       if (rm.isP_pressure_enabled()){
+           p_pressure_entryKey = fillComboAsP091(comboP );
+       }
    }
 }

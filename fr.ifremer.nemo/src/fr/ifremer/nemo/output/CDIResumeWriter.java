@@ -266,7 +266,7 @@ public class CDIResumeWriter
         }
         finally
         {
-            reset();
+//            reset();
             if (writer != null)
                 writer.close();
         }
@@ -290,7 +290,6 @@ public class CDIResumeWriter
         if (nomFichierSortie != null)
         {
 
-            // System.out.println("Fichier = " + nomFichierSortie);
             File fich = new File(nomFichierSortie);
             if (fich.exists())
             {
@@ -333,6 +332,11 @@ public class CDIResumeWriter
     public void setNomFichierSortie(String nomFichierSortie)
     {
         this.nomFichierSortie = nomFichierSortie;
+    }
+
+    public String getNomFichierSortie()
+    {
+        return nomFichierSortie;
     }
 
 }

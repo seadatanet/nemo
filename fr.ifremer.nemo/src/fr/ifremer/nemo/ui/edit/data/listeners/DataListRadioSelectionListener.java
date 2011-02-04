@@ -15,7 +15,7 @@ import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.ui.edit.data.EditDataForm;
 
 /**
- * Description: TODO
+ * Description: listener sur les boutons de selection du type de liste (P091, P011viaP091 ou P011viaP021)
  * @author sbregent
  *
  */

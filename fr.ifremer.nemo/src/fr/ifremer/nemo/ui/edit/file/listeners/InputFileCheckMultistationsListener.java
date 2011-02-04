@@ -13,10 +13,9 @@ import org.eclipse.swt.events.SelectionListener;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
-import fr.ifremer.nemo.util.Global.E_InputType;
 
 /**
- * Description: TODO
+ * Description: listener sur case a cocher multistation onglet File
  * @author sbregent
  *
  */

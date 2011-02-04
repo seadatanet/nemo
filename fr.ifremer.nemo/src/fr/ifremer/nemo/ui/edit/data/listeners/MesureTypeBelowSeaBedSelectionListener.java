@@ -12,11 +12,9 @@ import org.eclipse.swt.events.SelectionListener;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.Global.DataListTypeEnum;
-import fr.ifremer.nemo.ui.edit.data.EditDataForm;
 
 /**
- * Description: TODO
+ * Description: listener
  * @author sbregent
  *
  */
@@ -33,8 +31,6 @@ public class MesureTypeBelowSeaBedSelectionListener implements SelectionListener
     
     public void widgetSelected(SelectionEvent g)
     {
-
-        System.out.println("below sea bed");
         Nemo.getInstance().getViewMain().getMyRulesManager().updateFromIHM(Global.E_MesureType.BSBED);
     }
 }

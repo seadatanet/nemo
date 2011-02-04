@@ -58,6 +58,18 @@ public interface Global
     public static final String REGION = "REGION"; //$NON-NLS-1$
     public static final String SUBPARAMETER = "subParameter"; //$NON-NLS-1$    
     
+    // batch arguments
+    public static final String optInputFile="i";
+    public static final String optOutputFile="o";
+    public static final String optModelFile="m";
+    public static final String optConv="c";
+    public static final String optOdvMono = "mono";
+    public static final String optOdvMulti = "multi";
+    public static final String optSortDatas = "sort";
+    public static final String optDatasetRef ="datasetRef";
+    public static final String optCdiSummary ="cdiSummary";
+    public static final String optCouplingTableUpdate ="couplingTableUpdate";
+    public static final String optCouplingTablePrefix = "couplingTablePrefix";
     /*
     // Types de metadonnee
     public static final String DATETIME = "dateTime"; //$NON-NLS-1$
@@ -92,7 +104,7 @@ public interface Global
     
     //  Types de fichier
     public enum E_InputType{
-        PROFILE, TIMESERIES, TRAJECTORY;
+        PROFILE, TIMESERIES, TRAJECTORY, UNKNOWN;
     }
     // COLLECTION_DIR = group by cruise
     public enum E_ProcessType{
@@ -104,5 +116,5 @@ public interface Global
     }
     public enum DataListTypeEnum {P011_VIA_P091, P091, P011_VIA_P021, UNKNOWN};
     
-    public enum E_MesureType{BSSURF, BSBED};
+    public enum E_MesureType{BSSURF, BSBED, UNKNOWN};
 }

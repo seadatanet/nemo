@@ -37,12 +37,21 @@ import fr.ifremer.nemo.util.presdepth.CalcPres;
  * @author dboulang
  *
  */
-public class AddedParameter extends Parameter
+public class AddedParameter_oldNotUsed extends Parameter
 {
 
     @SuppressWarnings("nls")
     public static enum IdParameter{
-        DEPH, YEAR, MNTH, DAYX, TIME, CJDY, DTUT, LATX, LONX, BATH, PRES;
+        generic_depthBSSurf_FromPressure ,
+        generic_depthBSSurf_FromSensor ,
+        YEAR, MNTH, DAYX, TIME, 
+        CJDY, DTUT, 
+        LATX, LONX, 
+        BATH, 
+        PRES, 
+        DEPH , 
+        DEPHPR01, ADEPZZ01,
+        ;
         
         public String getDefault(){
             switch (this){
@@ -301,7 +310,7 @@ public class AddedParameter extends Parameter
     
     private IdParameter _idParam;
 
-    public AddedParameter(IdParameter idParam)
+    public AddedParameter_oldNotUsed(IdParameter idParam)
     {
         _idParam = idParam;
         _code = idParam.toString();
@@ -317,8 +326,8 @@ public class AddedParameter extends Parameter
      */
     @Override
     public Object clone() throws CloneNotSupportedException {
-        AddedParameter copy = null;
-        copy = (AddedParameter) super.clone();
+        AddedParameter_oldNotUsed copy = null;
+        copy = (AddedParameter_oldNotUsed) super.clone();
         return copy;
     }
 

@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 import fr.ifremer.nemo.input.LineFragment;
 import fr.ifremer.nemo.input.parameters.Parameter;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
+import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.ws.WSParameter;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
@@ -51,13 +52,12 @@ public class TypeData extends Object {
 
 	public TypeData(TypeData typeData) {
 
-//		this.setCode(typeData.code);
 		this.setConversion(typeData.conversion);
 		this.setEntree(typeData.entree);
 		this.setFormat(typeData.format);
 		this.setSortie(typeData.sortie);
 		this.setUnite(typeData.unite);
-//		this.setFullname(typeData.fullname);
+        this.setEntryKey(typeData.getEntryKey());
         this.setEntryTerm(typeData.getEntryTerm());
         this.setEntryTermP011(typeData.entryTermP011);
         this.setEntryKeyP011(typeData.entryKeyP011);
@@ -70,11 +70,11 @@ public class TypeData extends Object {
     {
         setEntryKey(wsParameter.getCode());
         setEntryTerm(wsParameter.getName());
-//        setCode(wsParameter.getCode() + Global.SEP + wsParameter.getName());
         setUnite(wsParameter.getUnit());
         setFormat(wsParameter.getFormat());
         setEntree(Global.EMPTY_STRING);
         setSortie(wsParameter.getDefaultValue());
+        setConversion(DEFAULT_CONVERT);
     }
 
     public TypeData(ParameterModel parameterModel)
@@ -83,10 +83,6 @@ public class TypeData extends Object {
         LineFragment frag = parameterModel.getFragment();
         LineFragment flag = parameterModel.getFlag();
 
-        // code / fullName / sortie / format
-//        setCode(parameter.getCode() + Global.SEP
-//                + parameter.getFullName());
-//        setFullname(parameter.getFullName());
         setEntryKey(parameter.getCode());
         setEntryTerm(parameter.getFullName());
 
@@ -151,6 +147,7 @@ public class TypeData extends Object {
         setEntree(Global.EMPTY_STRING);
         setSortie(Global.EMPTY_STRING);
         setUnite(Global.EMPTY_STRING);
+        setConversion(DEFAULT_CONVERT);
     }
 	public String getFormattedCodeAndName() {
 		return entryKey +  Global.SEP + entryTerm;
@@ -172,7 +169,8 @@ public class TypeData extends Object {
 	        code= getEntryKeyP011();
 	    }else
 	    {
-	        code = getFormattedCodeAndName();//P021 ou P091 selon le contexte d'utilisation   
+//	        code = getFormattedCodeAndName();//P021 ou P091 selon le contexte d'utilisation   
+            code = getEntryKey();
 	    }
 	    return code;
 	}

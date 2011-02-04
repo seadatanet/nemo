@@ -62,8 +62,9 @@ import fr.ifremer.nemo.config.Proxy;
 import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.domain.StationDomain;
-import fr.ifremer.nemo.input.parameters.AddedParameter;
-import fr.ifremer.nemo.input.parameters.AddedParameter.IdParameter;
+import fr.ifremer.nemo.input.parameters.addedParameters.AP_CJDY;
+import fr.ifremer.nemo.input.parameters.addedParameters.AP_DTUT;
+import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam;
 import fr.ifremer.nemo.ui.Application;
 import fr.ifremer.nemo.ui.ApplicationActionBarAdvisor;
 import fr.ifremer.nemo.ui.Utils;
@@ -220,7 +221,6 @@ public class OptionsAction extends Action implements ISelectionListener,
         for (CodeTableRecordType record : records)
         {
             String champCombo = Global.EMPTY_STRING;
-            // System.out.println(record.getEntryKey());
             String contenuCleDecoup[] =
                 record.getEntryKey().split(Global.SLASH);
             champCombo += contenuCleDecoup[contenuCleDecoup.length - 1];
@@ -1058,7 +1058,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         GridLayoutFactory.fillDefaults().margins(4, 4).applyTo(group);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
 
-        AddedParameter dateISO = new AddedParameter(IdParameter.DTUT);
+        AddedParam dateISO = new AP_DTUT();
         radDateISO = new Button(group, SWT.RADIO);
         radDateISO.setFont(Utils.font08);
         radDateISO.setText(dateISO.getFullName()
@@ -1073,7 +1073,7 @@ public class OptionsAction extends Action implements ISelectionListener,
                 }
             });
 
-        AddedParameter dateJulian = new AddedParameter(IdParameter.CJDY);
+        AddedParam dateJulian = new AP_CJDY();
         radDateJulian = new Button(group, SWT.RADIO);
         radDateJulian.setFont(Utils.font08);
         radDateJulian.setText(dateJulian.getFullName()

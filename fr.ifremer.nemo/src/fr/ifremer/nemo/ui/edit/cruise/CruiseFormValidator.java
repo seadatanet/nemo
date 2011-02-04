@@ -13,8 +13,7 @@ import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.format.DateTimeFormat;
 
 /**
- * Class EtapeCruise.java
- * Description: TODO
+ * Description: validation de l'onget cruise
  * @author sbregent 
  */
 public class CruiseFormValidator extends FormValidator

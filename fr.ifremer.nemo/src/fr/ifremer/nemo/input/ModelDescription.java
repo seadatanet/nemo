@@ -89,6 +89,12 @@ public class ModelDescription extends NLS
     public static String node_reference;
     public static String node_listProperties;
     public static String node_listParameters;
+    public static String node_verticalParametersList;
+    public static String node_p_depthBSBed;
+    public static String node_p_depthBSSurf;
+    public static String node_p_pressure;
+    
+    
     public static String node_dataModel;
     public static String node_conversionModel;
     public static String node_listPermissions;
@@ -98,7 +104,8 @@ public class ModelDescription extends NLS
    
     public static String node_outputFormat;
     public static String node_dataListType;
-
+    public static String node_mesureType;
+    
     public static String a_version;
     public static String a_sourcepath;
     public static String a_multistations;
@@ -162,6 +169,15 @@ public class ModelDescription extends NLS
     public static String setter_defaultvalue;
     public static String setter_outputFormat;
     public static String setter_dataListType;
+    public static String setter_mesureType;
+    public static String setter_verticalParametersList;
+    public static String setter_p_depthBSBed;
+    public static String setter_p_depthBSSurf;
+    public static String setter_p_pressure;
+    
+    
+    
+    
     static {
         // initialize resource bundle
         NLS.initializeMessages(BUNDLE_NAME, ModelDescription.class);

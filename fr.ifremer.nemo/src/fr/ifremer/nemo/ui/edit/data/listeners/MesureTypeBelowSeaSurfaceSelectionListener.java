@@ -15,7 +15,7 @@ import fr.ifremer.nemo.ui.edit.data.EditDataForm;
 import fr.ifremer.nemo.util.Global;
 
 /**
- * Description: TODO
+ * Description: listener
  * @author sbregent
  *
  */
@@ -33,8 +33,6 @@ public class MesureTypeBelowSeaSurfaceSelectionListener implements SelectionList
     
     public void widgetSelected(SelectionEvent g)
     {
-
-       System.out.println("below sea surface");
        Nemo.getInstance().getViewMain().getMyRulesManager().updateFromIHM(Global.E_MesureType.BSSURF);
     }
 }

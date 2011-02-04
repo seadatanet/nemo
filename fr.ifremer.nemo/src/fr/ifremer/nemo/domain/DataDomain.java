@@ -10,27 +10,21 @@
 package fr.ifremer.nemo.domain;
 
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.MissingResourceException;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.input.DataModel;
-import fr.ifremer.nemo.input.Fragment;
 import fr.ifremer.nemo.input.InputModel;
-import fr.ifremer.nemo.input.LineFragment;
-import fr.ifremer.nemo.input.PropertyModel;
-import fr.ifremer.nemo.input.parameters.AddedParameter;
 import fr.ifremer.nemo.input.parameters.Parameter;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
-import fr.ifremer.nemo.input.parameters.AddedParameter.IdParameter;
 import fr.ifremer.nemo.output.medatlas.Elts;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
+import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_InputType;
 
 /**
@@ -369,7 +363,7 @@ public class DataDomain
         return sdnParams;
     }
 
-    private static StringBuffer parameterMap(String start, Parameter param,
+    private  StringBuffer parameterMap(String start, Parameter param,
             Conversion c)
     {
         String code = param.getCode();
@@ -391,30 +385,9 @@ public class DataDomain
              * -----------------------------------------------------
              * subject
              */
-            // FAE 4045
-//            if (c.equals(Conversion.ODV) && param.isP011())
-//
-//            {
-//                if (param.getCodeP011() == null
-//                        || param.getCodeP011().equals(""))
-//                {
-//                    param.setCodeP011(Utils.extraitCodeURN(NemoLists.getVocabMatch(
-//                        Intern.mapping_subject, Intern.mapping_objet, code,
-//                        Intern.NemoLists_unknown)));
-//                }
-//                sdnMapping.append(getURNSyntaxe(URNtype.subject, 
-//                    param.getCodeP011(),
-//                    null, 
-//                    null));
-//            }
-//            else{
-//                sdnMapping.append(getURNSyntaxe(URNtype.subject, 
-//                    code, 
-//                    null,
-//                    null));
-//            }
+            // FAE 4045 getLocalCode
         sdnMapping.append(getURNSyntaxe(URNtype.subject, 
-            param.getCodeToUse(), 
+            param.getLocalCode(), 
           null,
           null));
             /** -----------------------------------------------------

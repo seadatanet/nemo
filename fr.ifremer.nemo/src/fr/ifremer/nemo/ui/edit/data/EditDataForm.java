@@ -5,23 +5,20 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
+import fr.ifremer.nemo.util.Global.E_MesureType;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
+import fr.ifremer.nemo.input.parameters.VerticalParametersList;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.EditForm;
 import fr.ifremer.nemo.ui.edit.data.listeners.DataListRadioSelectionListener;
-import fr.ifremer.nemo.ui.edit.data.listeners.DepthBelowSeaBedSelectionListener;
-import fr.ifremer.nemo.ui.edit.data.listeners.DepthBelowSeaSurfSelectionListener;
 import fr.ifremer.nemo.ui.edit.data.listeners.MesureTypeBelowSeaBedSelectionListener;
 import fr.ifremer.nemo.ui.edit.data.listeners.MesureTypeBelowSeaSurfaceSelectionListener;
 import fr.ifremer.nemo.ui.view.ViewLog;
@@ -42,6 +39,9 @@ public class EditDataForm extends EditForm
     private Button button_P011viaP091;
     private Button button_P091;
     private Button button_P011viaP021;
+    // choix du type de mesure
+    private Button mesType_belowSeaSurface ;
+    private Button mesType_belowSeaBed ;
     
     private GroupVerticalParameters myGroupeVerticalParameters;
    
@@ -63,14 +63,7 @@ public class EditDataForm extends EditForm
         // init composants IHM
         initSections();
 
-        // groupe de selection du dataList (pour selectionner la liste à utiliser: P091, P011viaP091 ou P011viaP021)
-        createGroupDataList();
-        
-        // groupe de selection du type de mesure (sous l'eau ou dans le sol)
-        createGroupMesureType();
        
-        // groupe de selection des paramètres verticaux
-        createGroupVerticalParametersChoices();
         
         formEdition.getBody().setLayout(new GridLayout());
         formEdition.setText(Messages.edit_data_title);
@@ -86,7 +79,14 @@ public class EditDataForm extends EditForm
                     validate();
                 }
             });
-
+        // groupe de selection du dataList (pour selectionner la liste à utiliser: P091, P011viaP091 ou P011viaP021)
+        createGroupDataList();
+        
+        // groupe de selection du type de mesure (sous l'eau ou dans le sol)
+        createGroupMesureType();
+       
+        // groupe de selection des paramètres verticaux
+        createGroupVerticalParametersChoices();
         // reset
         createButtonRaz();
 
@@ -181,6 +181,15 @@ public class EditDataForm extends EditForm
         // update dataList to use   
         DataListTypeEnum dataList = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
         Nemo.getInstance().getViewMain().getMyRulesManager().updateFromModel(dataList)    ;    
+        
+        // update mesureType to use   
+        E_MesureType mesureType = Nemo.getInstance().getDomain().getData().getModel().getMesureType();
+        Nemo.getInstance().getViewMain().getMyRulesManager().updateFromModel(mesureType);
+        // update vertical params
+        VerticalParametersList verticParams = Nemo.getInstance().getDomain().getData().getModel().getVerticalParametersList();
+        myGroupeVerticalParameters.select(verticParams)  ;
+        
+        
       
     }
     
@@ -211,7 +220,20 @@ public class EditDataForm extends EditForm
 
 
     }
+    public void selectMesureType(E_MesureType mesureType)
+    {
+        mesType_belowSeaSurface .setSelection(false);
+        mesType_belowSeaBed .setSelection(false);
 
+        if (mesureType == E_MesureType.BSBED)
+        { 
+            mesType_belowSeaBed.setSelection(true);
+        }
+        else if(mesureType == E_MesureType.BSSURF)
+        {
+            mesType_belowSeaSurface.setSelection(true);
+        }
+    }
     private DataListTypeEnum getSelectedDataList()
     {
         DataListTypeEnum res=DataListTypeEnum.UNKNOWN;
@@ -235,14 +257,25 @@ public class EditDataForm extends EditForm
     @Override
     public void initFromNewModel()
     {
+        /**
+         * cette methode consiste à recréer un nouveau modele qu'on remplit avec les valeurs recupérées dans l'IHM
+         * mais la liste des parametres verticaux travaille directement avec le modele
+         * donc on la recupere avant de recréer le modele pour la réinjecter dans le nouveau
+         * 
+         * 
+         * TODO BGT voir pour fonctionner de cette manière dans tout le reste de l'appli
+         *  au lieu de faire des resets complets (et donc arreter d'utiliser cette methode initFromNewModel)
+         */ 
+        
+        VerticalParametersList list = Nemo.getInstance().getDomain().getData().getModel().getVerticalParametersList();
         // recuperation du model correspondant
         fr.ifremer.nemo.input.DataModel dataModel = new fr.ifremer.nemo.input.DataModel();
+        dataModel.setVerticalParametersList(list);
+        
         
         // mise e jour des types avant validation
         myTableData.majTypeData();
 
-        // reset systematique des parametres stockes dans le dataModel
-        Nemo.getInstance().getDomain().getData().getModel().releaseParameterModels();
 
         for (TypeData typeCourant : myTableData.getTypes())
         {
@@ -273,7 +306,12 @@ public class EditDataForm extends EditForm
     {
        myTableData.reinitTable();
     }
-    
+    public void reinitParameters()
+    {
+        Nemo.getInstance().getViewMain().getMyRulesManager().updateFromModel(DataListTypeEnum.UNKNOWN);
+        selectMesureType(E_MesureType.BSSURF);
+        myGroupeVerticalParameters.removeAllToAllCombos();
+    }
     /**
      * This method initializes data list group
      */
@@ -281,7 +319,7 @@ public class EditDataForm extends EditForm
     {
         Group group = new Group(formEdition.getBody(), SWT.NONE);
         group.setFont(Utils.font08);
-        group.setText(Messages.settings_parametersList);
+        group.setText(Messages.edit_data_parametersList);
         GridLayoutFactory.fillDefaults().numColumns(1).equalWidth(true)
             .margins(4, 4).applyTo(group);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
@@ -289,17 +327,17 @@ public class EditDataForm extends EditForm
         
         DataListRadioSelectionListener listener = new DataListRadioSelectionListener(this);
         button_P091 = new Button(group, SWT.RADIO);
-        button_P091.setText(Messages.settings_parameterListP091);
+        button_P091.setText(Messages.edit_data_parameterListP091);
         button_P091.addSelectionListener(listener);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(button_P091);
         
         button_P011viaP091 = new Button(group, SWT.RADIO);
-        button_P011viaP091.setText(Messages.settings_parameterListP011viaP091);
+        button_P011viaP091.setText(Messages.edit_data_parameterListP011viaP091);
         button_P011viaP091.addSelectionListener(listener);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(button_P011viaP091);
         
         button_P011viaP021 = new Button(group, SWT.RADIO);
-        button_P011viaP021.setText(Messages.settings_parameterListP011viaP021);
+        button_P011viaP021.setText(Messages.edit_data_parameterListP011viaP021);
         button_P011viaP021.addSelectionListener(listener);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(button_P011viaP021);
     }
@@ -317,13 +355,13 @@ public class EditDataForm extends EditForm
 
         
         MesureTypeBelowSeaSurfaceSelectionListener surfListener = new MesureTypeBelowSeaSurfaceSelectionListener();
-        Button mesType_belowSeaSurface = new Button(group, SWT.RADIO);
+        mesType_belowSeaSurface = new Button(group, SWT.RADIO);
         mesType_belowSeaSurface.setText(Messages.edit_data_belowSeaSurface);
         mesType_belowSeaSurface.addSelectionListener(surfListener);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(mesType_belowSeaSurface);
         
         MesureTypeBelowSeaBedSelectionListener bedListener = new MesureTypeBelowSeaBedSelectionListener();
-        Button mesType_belowSeaBed = new Button(group, SWT.RADIO);
+        mesType_belowSeaBed = new Button(group, SWT.RADIO);
         mesType_belowSeaBed.setText(Messages.edit_data_belowSeaBed);
         mesType_belowSeaBed.addSelectionListener(bedListener);
         GridDataFactory.fillDefaults().grab(true, false).applyTo(mesType_belowSeaBed);

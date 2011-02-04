@@ -140,7 +140,6 @@ public class ViewLog extends ViewPart
                 public void widgetSelected(
                         org.eclipse.swt.events.SelectionEvent e)
                 {
-// System.out.println("widgetSelected()");
                 }
             });
         TabItem tabItem = new TabItem(tabFolderLog, SWT.NONE);

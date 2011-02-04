@@ -24,9 +24,9 @@ import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.input.DataModel;
 import fr.ifremer.nemo.input.DataType;
-import fr.ifremer.nemo.input.parameters.AddedParameter;
 import fr.ifremer.nemo.input.parameters.Parameter;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
+import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global.E_Availability;
 
@@ -85,7 +85,7 @@ public class CruiseDomainTest
         ParameterModel pmNTRI = mock(ParameterModel.class);
         when(pmNTRI.getParameter()).thenReturn(pNTRI);
         
-        AddedParameter addpTEST = mock(AddedParameter.class);
+        AddedParam addpTEST = mock(AddedParam.class);
         when(addpTEST.getCode()).thenReturn("DEPH");
         //when(addpTEST.getCible()).thenReturn(Conversion.ODV);
         ParameterModel addpmTEST = mock(ParameterModel.class);

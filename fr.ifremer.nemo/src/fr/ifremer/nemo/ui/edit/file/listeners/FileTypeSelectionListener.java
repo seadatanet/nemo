@@ -16,7 +16,7 @@ import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.util.Global.E_InputType;
 
 /**
- * Description: TODO
+ * Description: listener sur la selection du type de fichier
  * @author sbregent
  *
  */

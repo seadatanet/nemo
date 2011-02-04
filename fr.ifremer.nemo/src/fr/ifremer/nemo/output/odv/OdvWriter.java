@@ -57,7 +57,6 @@ public class OdvWriter extends NemoWriter{
             if (processType == E_ProcessType.COLLECTION_DIR){
                 cruise.setDataSetRef(new File(inputFilePath).getName());
                 outputFileName += File.separator + cruise.getDataSetRef();
-               // System.out.println( "outputFileName "+ outputFileName);
             }
             
     
@@ -97,7 +96,6 @@ public class OdvWriter extends NemoWriter{
                 }
                 outputFileWriter = new PrintWriter(new BufferedWriter(new FileWriter(outputFileName)));
                 
-//                System.out.println("outputFileName "+outputFileName);
                 // écriture de l'entête campagne
                 StringBuffer cruiseHeader = cruise.getHeader(c);
                 outputFileWriter.println(cruiseHeader);
