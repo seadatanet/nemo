@@ -21,7 +21,18 @@
 			<param name="ConversionPattern" value="%d [%t] %-5p %c / %m%n" />
 		</layout>
 	</appender>
-
+	
+	<appender name="junits" class="org.apache.log4j.ConsoleAppender">
+		<!-- Format des traces -->
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value=" ________________________________ %C{1} %M   " />
+		</layout>
+	</appender>
+	
+	<logger name="nemoJunits" additivity="true">
+		<appender-ref ref="junits" />
+	</logger>
+	
 	<logger name="nemoBatch" additivity="true">
 		<appender-ref ref="file" />
 	</logger>
