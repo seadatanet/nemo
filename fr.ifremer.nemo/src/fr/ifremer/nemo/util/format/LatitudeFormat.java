@@ -407,35 +407,35 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
     					break;
     				}
     				case DEGREES:{
-                        String tmp = source.replace(' ', '0');
+                        String tmp = source;//.replace(' ', '0');
     					DecimalFormat format = new DecimalFormat(_elements[i]._element);
     					value += ((Number) format.parseObject(tmp, pos)).doubleValue();
     					index = pos.getIndex();
     					break;
                     }
     				case DEGREES_DECIMAL:{
-                        String tmp = source.replace(' ', '0');
+                        String tmp = source;//.replace(' ', '0');
                         DecimalFormat format = new DecimalFormat(_elements[i]._element, symbols);
     					value += ((Number) format.parseObject(tmp, pos)).doubleValue();
     					index = pos.getIndex();
     					break;
                     }
     				case MINUTES:{
-                        String tmp = source.replace(' ', '0');
+                        String tmp = source;//.replace(' ', '0');
                         DecimalFormat format = new DecimalFormat(_elements[i]._element);
     					value += ((Number) format.parseObject(tmp, pos)).doubleValue() / 60.0;
     					index = pos.getIndex();
     					break;
                     }
     				case MINUTES_DECIMAL:{
-                        String tmp = source.replace(' ', '0');
+                        String tmp = source;//.replace(' ', '0');
                         DecimalFormat format = new DecimalFormat(_elements[i]._element, symbols);
     					value += ((Number) format.parseObject(tmp, pos)).doubleValue() / 60.0;
     					index = pos.getIndex();
     					break;
                     }
     				case SECONDS:{
-                        String tmp = source.replace(' ', '0');
+                        String tmp = source;//.replace(' ', '0');
                         DecimalFormat format = new DecimalFormat(_elements[i]._element);
     					value += ((Number) format.parseObject(tmp, pos)).doubleValue() / 3600.0;
     					index = pos.getIndex();
@@ -448,13 +448,32 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 				pos.setIndex(index);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+            System.out.println("exception "+e.getMessage());
 			return null;
 		}
 		value *= sign;
 		return new Double(value);
 	}
-
+      protected String replaceSpacesByZeros(String source){
+          String tmp1 = source.replace(' ', '0');
+          if (tmp1.startsWith("0"))
+          {
+              if (tmp1.contains("+"))
+              {
+                  tmp1 = tmp1.replaceFirst("\\+", "0");
+                  tmp1 = tmp1.replaceFirst("0", "\\+");
+                  source = tmp1;
+              }
+              if (tmp1.contains("-"))
+              {
+                  tmp1 = tmp1.replaceFirst("\\-","0");
+                  tmp1 = tmp1.replaceFirst("0", "\\-");
+                  source = tmp1;
+              }
+          }
+              return source;
+      }
 	/**
 	 * 
 	 * @param source
@@ -468,7 +487,11 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 		java.util.Locale locale = java.util.Locale.US;
 		java.text.DecimalFormatSymbols symbols = new java.text.DecimalFormatSymbols(
 				locale);
+        
+        
+//        System.out.println("pos " + pos.getIndex()+ " source :::"+source+"");
 		try {
+            source = replaceSpacesByZeros(source);
 			for (int i = 0; i < _elements.length && index < source.length(); i++) {
 				switch (_elements[i]._type) {
     				case HEMISPHERE: {
@@ -596,7 +619,8 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable {
 				}
 			}
 		} catch (ParseException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+            System.out.println("exception "+e.getMessage());
             return null;
 		}
 		value *= sign;

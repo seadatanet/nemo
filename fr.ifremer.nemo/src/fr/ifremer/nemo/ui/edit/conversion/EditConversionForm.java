@@ -204,7 +204,7 @@ public class EditConversionForm extends EditForm
             {
                 fileName = cruiseModel.getName().trim();
             }
-            fileName = Utils.validFileName(fileName);
+            fileName = fr.ifremer.nemo.util.Utils.validFileName(fileName);
             dialog.setFileName(fileName);
         }
 
@@ -224,7 +224,7 @@ public class EditConversionForm extends EditForm
         if (nomFichierSortie != null)
         {
             String nomDossierSortie =
-                Utils.extraitCheminFichier(nomFichierSortie);
+                fr.ifremer.nemo.util.Utils.extraitCheminFichier(nomFichierSortie);
 
             // Teste si le repertoire de sortie est different du repertoire
             // d'entree

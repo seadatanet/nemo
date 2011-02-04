@@ -306,7 +306,7 @@ public class Parameter extends AbstractModel
             if (getCodeP011() == null
                     || getCodeP011().equals(""))
             {
-                setCodeP011(Utils.extraitCodeURN(NemoLists.getVocabMatch(
+                setCodeP011(fr.ifremer.nemo.util.Utils.extraitCodeURN(NemoLists.getVocabMatch(
                     Intern.mapping_subject, Intern.mapping_objet, getCode(),
                     Intern.NemoLists_unknown)));
             }

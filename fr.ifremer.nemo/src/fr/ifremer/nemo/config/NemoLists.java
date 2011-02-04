@@ -729,12 +729,12 @@ public class NemoLists implements Cloneable {
     }
 
     public static CodeTableRecordType[] getVocabMap(String list1, String list2) {
-        return _vocabMap.get(Utils.concat(list1, list2, Global.UNDERSCORE));
+        return _vocabMap.get(fr.ifremer.nemo.util.Utils.concat(list1, list2, Global.UNDERSCORE));
     }
 
     public static void setVocabMap(String list1, String list2,
             CodeTableRecordType[] map) {
-        _vocabMap.put(Utils.concat(list1, list2, Global.UNDERSCORE), map);
+        _vocabMap.put(fr.ifremer.nemo.util.Utils.concat(list1, list2, Global.UNDERSCORE), map);
     }
 
     public static String getVocabMatch(String list1, String list2,
@@ -981,7 +981,7 @@ public class NemoLists implements Cloneable {
         
         for (CodeTableRecordType item : liste){
             WSDataType dataType = new WSDataType();
-            dataType.setCode(Utils.extraitCodeURN(item.getEntryKey()));
+            dataType.setCode(fr.ifremer.nemo.util.Utils.extraitCodeURN(item.getEntryKey()));
             dataType.setLibelle(item.getEntryTerm());
             dataType.setSensor(false);
             

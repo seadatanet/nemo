@@ -79,6 +79,12 @@ public class EditDataForm extends EditForm
                     validate();
                 }
             });
+        // reset
+        createButtonRaz();
+
+        // bouton collapse all / expand all
+        createButtonExpand();
+        
         // groupe de selection du dataList (pour selectionner la liste à utiliser: P091, P011viaP091 ou P011viaP021)
         createGroupDataList();
         
@@ -87,11 +93,7 @@ public class EditDataForm extends EditForm
        
         // groupe de selection des paramètres verticaux
         createGroupVerticalParametersChoices();
-        // reset
-        createButtonRaz();
-
-        // bouton collapse all / expand all
-        createButtonExpand();
+    
 
         drawSections();
     }

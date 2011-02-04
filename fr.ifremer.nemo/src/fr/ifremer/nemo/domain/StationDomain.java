@@ -468,10 +468,10 @@ public class StationDomain
                     temp += Global.UNDERSCORE;
                 }
                //FAE 6536
-                temp += Utils.extraitCode(dataType.getCode());
+                temp += fr.ifremer.nemo.util.Utils.extraitCode(dataType.getCode());
             }
         }
-        localCDIId = Utils.validFileName(temp);
+        localCDIId = fr.ifremer.nemo.util.Utils.validFileName(temp);
        
         return localCDIId;
     }

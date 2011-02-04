@@ -748,7 +748,7 @@ public class StationSection extends NemoSection
                 if (Nemo.getInstance().getViewMain().getEditFileForm().isCruiseIsAFile())
                 {
                     strFichier =
-                        Utils.extraitFichierChemin(Nemo.getInstance().getViewMain().getEditFileForm().nomFichier);
+                        fr.ifremer.nemo.util.Utils.extraitFichierChemin(Nemo.getInstance().getViewMain().getEditFileForm().nomFichier);
                 }
                 else
                 {
@@ -1307,7 +1307,7 @@ public class StationSection extends NemoSection
             }
             // creation d'un nouveau Datatype avec les infos recuperees au
             // dessus.
-            newDataType.setCode(Utils.extraitCode(code));
+            newDataType.setCode(fr.ifremer.nemo.util.Utils.extraitCode(code));
             for (int i = 0; i < TableDataSurvey.types.size(); i++)
             {
                 if (typeCombo.contentEquals(TableDataSurvey.types.get(i)

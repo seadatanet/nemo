@@ -459,7 +459,7 @@ public class AutoLine implements UIobject
                 // la ligne correspond au nom du fichier
                 if (Nemo.getInstance().getViewMain().getEditFileForm().isCruiseIsAFile())
                 {
-                    ligne = Utils.extraitFichierChemin(Nemo.getInstance().getViewMain().getEditFileForm().nomFichier);
+                    ligne = fr.ifremer.nemo.util.Utils.extraitFichierChemin(Nemo.getInstance().getViewMain().getEditFileForm().nomFichier);
                 }
                 else
                 {

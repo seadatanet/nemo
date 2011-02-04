@@ -112,7 +112,7 @@ public class FlagTable {
 		for (int i = 0; i < getFlags().size(); i++) {
             if (local.startsWith(getFlags().get(i).getLocal())){
 			//if (getFlags().get(i).getLocal().equals(local)) {
-				return Utils.extraitCode(getFlags().get(i).getSdn());
+				return fr.ifremer.nemo.util.Utils.extraitCode(getFlags().get(i).getSdn());
 			}
 		}
 		return Global.ZERO;
@@ -125,7 +125,7 @@ public class FlagTable {
         for (int i = 0; i < getFlags().size(); i++) {
             if (sdn.startsWith(getFlags().get(i).getSdn())){
             //if (getFlags().get(i).getLocal().equals(local)) {
-                return Utils.extraitCode(getFlags().get(i).getLocal());
+                return fr.ifremer.nemo.util.Utils.extraitCode(getFlags().get(i).getLocal());
             }
         }
         return Global.ZERO;

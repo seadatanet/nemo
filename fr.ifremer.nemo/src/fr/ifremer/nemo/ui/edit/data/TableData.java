@@ -1034,7 +1034,7 @@ public class TableData
                     if (flags.get(j).getLocal()
                             .equals(types.get(i).getTestIn()))
                     {
-                        flagSDN = Utils.extraitCode(flags.get(j).getSdn());
+                        flagSDN = fr.ifremer.nemo.util.Utils.extraitCode(flags.get(j).getSdn());
                         break;
                     }
                 }

@@ -494,8 +494,8 @@ public class EditCruiseForm extends EditForm
 
         cruiseModel.setReference(refCampagne.getText());
         cruiseModel.setName(nomCampagne.getText());
-        cruiseModel.setShipCode(Utils.extraitCode(navire.getText()));
-        cruiseModel.setShipName(Utils.extraitValeur(navire.getText()));
+        cruiseModel.setShipCode(fr.ifremer.nemo.util.Utils.extraitCode(navire.getText()));
+        cruiseModel.setShipName(fr.ifremer.nemo.util.Utils.extraitValeur(navire.getText()));
 
         // Localisation
 
@@ -525,16 +525,16 @@ public class EditCruiseForm extends EditForm
             e.printStackTrace();
         }
 
-        cruiseModel.setRegionName(Utils.extraitValeur(region.getText()));
+        cruiseModel.setRegionName(fr.ifremer.nemo.util.Utils.extraitValeur(region.getText()));
 
         // Source de données
-        cruiseModel.setCountryCode(Utils.extraitCode(pays.getText()));
+        cruiseModel.setCountryCode(fr.ifremer.nemo.util.Utils.extraitCode(pays.getText()));
         cruiseModel.setLaboratories(labo.getText());
         cruiseModel.setChiefScientist(chef.getText());
         cruiseModel.setProjectName(projet.getText());
 
         // Centre d'archivage
-        cruiseModel.setDataCentre(Utils.extraitCode(centreDonnee.getText()));
+        cruiseModel.setDataCentre(fr.ifremer.nemo.util.Utils.extraitCode(centreDonnee.getText()));
 
         // confidentialité
         if (confidentialite.getText().equals("P - Public")) { //$NON-NLS-1$
