@@ -99,7 +99,7 @@ public class StationSection extends NemoSection
         this.nbLignes = nbLignes;
         myForm = form;
     }
-
+    
     /**
      * add a converter group
      * 
@@ -846,19 +846,61 @@ public class StationSection extends NemoSection
         if (!isManual())
             autoInput.selectInViewFile();
 
-        LatitudeFormat format = new LatitudeFormat(converter.getText());
-        format.setVariableLength(autoInput.getButtonVari().getSelection());
-
-        Double latitudeDouble =
-            (Double) format.parseObject(resultTest.getText());
-
-        Formatter formatter = Formatter.getSingleton();
-
-        resultTest.setText(formatter
-            .formatLatitude("NDD MM.mm", latitudeDouble)); //$NON-NLS-1$
+//        LatitudeFormat format = new LatitudeFormat(converter.getText());
+//        format.setVariableLength(autoInput.getButtonVari().getSelection());
+//
+//        Double latitudeDouble =
+//            (Double) format.parseObject(resultTest.getText());
+//
+//        Formatter formatter = Formatter.getSingleton();
+//
+//        resultTest.setText(formatter
+//            .formatLatitude("NDD MM.mm", latitudeDouble)); //$NON-NLS-1$
+        
+        String res = calcLatitudeTest(converter.getText(),
+            resultTest.getText(),
+            autoInput.getButtonVari().getSelection(),
+            false);
+        resultTest.setText(res);
         resultTest.pack();
     }
+    protected String calcLatitudeTest(String formatString, String value, boolean isVariableLength, boolean displayDebugMessages) 
+    {
+        LatitudeFormat format;
+        String res;
+        if (displayDebugMessages)
+        {
+            System.out.println("["+value+ "] ["+formatString+ "]  var= "+isVariableLength);
+        }
+        try
+        {
+            format = new LatitudeFormat(formatString);
+            format.setVariableLength(isVariableLength);
 
+            Double latitudeDouble =
+                (Double) format.parseObject(value);
+
+            Formatter formatter = Formatter.getSingleton();
+
+            res= formatter
+            .formatLatitude("NDD MM.mm", latitudeDouble);
+        }
+        catch (ParseException e)
+        {
+            res= null;
+        }
+        if (displayDebugMessages)
+        {
+            if (res==null)
+            {
+                System.out.println("********error*******");
+            }else{
+                System.out.println(res);
+            }
+        }
+        return res;
+    }
+        
     protected void longitudeTest() throws ParseException
     {
 
@@ -866,17 +908,58 @@ public class StationSection extends NemoSection
         if (!isManual())
             autoInput.selectInViewFile();
 
-        LongitudeFormat format = new LongitudeFormat(converter.getText());
-        format.setVariableLength(autoInput.getButtonVari().getSelection());
-        Double longitudeDouble =
-            (Double) format.parseObject(resultTest.getText());
-        Formatter formatter = Formatter.getSingleton();
-
-        resultTest.setText(formatter.formatLongitude(
-            "NDDD MM.mm", longitudeDouble)); //$NON-NLS-1$
+//        LongitudeFormat format = new LongitudeFormat(converter.getText());
+//        format.setVariableLength(autoInput.getButtonVari().getSelection());
+//        Double longitudeDouble =
+//            (Double) format.parseObject(resultTest.getText());
+//        Formatter formatter = Formatter.getSingleton();
+//
+//        resultTest.setText(formatter.formatLongitude(
+//            "NDDD MM.mm", longitudeDouble)); //$NON-NLS-1$
+        
+        String res= calcLongitudeTest(converter.getText(), 
+            resultTest.getText(),
+            autoInput.getButtonVari().getSelection(),
+            false);
+        resultTest.setText(res);
         resultTest.pack();
     }
 
+    protected String calcLongitudeTest(String formatString, String value, boolean isVariableLength, boolean displayDebugMessages) 
+    {
+        LongitudeFormat format;
+        String res;
+        if (displayDebugMessages)
+        {
+            System.out.println("["+value+ "] ["+formatString+ "]  var= "+isVariableLength);
+        }
+        try
+        {
+            format = new LongitudeFormat(formatString);
+            format.setVariableLength(isVariableLength);
+            Double longitudeDouble = (Double) format.parseObject(value);
+            Formatter formatter = Formatter.getSingleton();
+
+
+            res= formatter.formatLongitude( "NDDD MM.mm", longitudeDouble);
+        }
+        catch (ParseException e)
+        {
+            res= null;
+        }
+        
+        if (displayDebugMessages)
+        {
+            if (res==null)
+            {
+                System.out.println("********error*******");
+            }else{
+                System.out.println(res);
+            }
+        }
+        return  res;
+
+    }
     protected void samplingRateTest()
     {
 
