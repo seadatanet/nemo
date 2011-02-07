@@ -226,7 +226,9 @@ public class StationDomain
         }
         else
         {
-            odvStationHeader.append(Global.ZERO);
+            //6998
+//            odvStationHeader.append(Global.ZERO);
+            odvStationHeader.append(Global.SPACE);
         }
 
         odvStationHeader.append(Global.TAB);
@@ -366,7 +368,9 @@ public class StationDomain
         }
         else
         {
-            odvStationHeader.append(Global.ZERO);
+//          6998
+//            odvStationHeader.append(Global.ZERO);
+            odvStationHeader.append(Global.SPACE);
         }
         odvStationHeader.append(Global.TAB);
 
