@@ -261,7 +261,7 @@ public class Application implements IPlatformRunnable
         
         opt.addOption(optCdiSummary, true, "CDI Summary file path (mandatory)");
         opt.addOption(optCouplingTableUpdate, false, "update the coupling table database (optional)");
-        opt.addOption(optCouplingTablePrefix, true, "update the coupling table database ");
+        opt.addOption(optCouplingTablePrefix, true, "coupling table database prefix");
     }
 
 
