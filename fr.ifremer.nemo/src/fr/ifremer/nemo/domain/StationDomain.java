@@ -217,16 +217,21 @@ public class StationDomain
         else
             botDepth = _model.getProperty(Intern.S_DEPTH).applyOnLine(inputLine);
 
-        if (botDepth.equals("Default"))
-            botDepth = 0f;
-
-        if (!((Float) botDepth).isNaN())
+        
+        //6998
+//        if (botDepth.equals("Default"))
+//            botDepth = 0f;
+        if ( 
+                (!botDepth.equals("Default")) 
+                && 
+                !((Float) botDepth).isNaN() )
+//        if (!((Float) botDepth).isNaN())
         {
             odvStationHeader.append(botDepth);
         }
         else
         {
-            //6998
+           
 //            odvStationHeader.append(Global.ZERO);
             odvStationHeader.append(Global.SPACE);
         }
@@ -359,16 +364,18 @@ public class StationDomain
         // Bot. Depth [m]
         Object botDepth = _model.getProperty(Intern.S_DEPTH).applyOn(inputFile);
 
-        if (botDepth.equals("Default"))
-            botDepth = 0f;
-
-        if (!((Float) botDepth).isNaN())
+//      6998
+//        if (botDepth.equals("Default"))
+//            botDepth = 0f; 
+        if ( 
+                (!botDepth.equals("Default")) 
+                && 
+                !((Float) botDepth).isNaN() )
         {
             odvStationHeader.append((Float) botDepth);
         }
         else
         {
-//          6998
 //            odvStationHeader.append(Global.ZERO);
             odvStationHeader.append(Global.SPACE);
         }
