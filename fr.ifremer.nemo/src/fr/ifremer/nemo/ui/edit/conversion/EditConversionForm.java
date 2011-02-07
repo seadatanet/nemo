@@ -360,6 +360,7 @@ public class EditConversionForm extends EditForm
         catch (Exception e)
         {
             Utils.messageErreur(e.getMessage());
+            Utils.messageErreurAppend( Nemo.getInstance().getLog_currentInputFile()+" l."+Nemo.getInstance().getLog_currentInputLine());
             return false;
         }
     }
