@@ -96,7 +96,8 @@ public class GroupVerticalParameters
 
     public void removeToAllCombo(TypeData typeData)
     {
-        String code =typeData.getEntryKey();
+//        String code =typeData.getEntryKey();
+        String code = typeData.getCodeToUse();
         try{
             comboDBSSurf.remove(code);
         }catch (Exception e) {
