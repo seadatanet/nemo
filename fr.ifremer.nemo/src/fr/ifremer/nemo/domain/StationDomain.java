@@ -169,8 +169,11 @@ public class StationDomain
         StringBuffer odvStationHeader = new StringBuffer();
         String stationRef = currentStation.getReference();
         // Cruise
+//        String cruiseName =
+//            Nemo.getInstance().getDomain().getCruise().getModel().getName();
+        
         String cruiseName =
-            Nemo.getInstance().getDomain().getCruise().getModel().getName();
+          Nemo.getInstance().getDomain().getCruise().getDataSetRef();
         odvStationHeader.append(form.limitString(cruiseName, 20));
         odvStationHeader.append(Global.TAB);
 
