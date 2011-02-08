@@ -19,6 +19,7 @@ import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_MesureType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
@@ -265,15 +266,36 @@ public class RulesManager
    
    public void updateFromIHM( E_TypeConversion convType)
    {
-       reinitRules();
-       rule_process(true);
-       rule_fileType(true);
-       myConversionType=convType;
-       rule_conversionType(true);
-       Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
-       Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV());
-       ViewLog.styledTextLogErreurs.setText(messageLog);
-       
+       boolean confirm =true;
+       E_TypeConversion tmp = myConversionType;
+       if(myDataListType==DataListTypeEnum.P011_VIA_P021 && convType==E_TypeConversion.MEDATLAS)
+       {
+           confirm = MessageDialog.openConfirm(null, 
+               Messages.edit_data_dataListDialogBox_title,
+               Messages.edit_data_dataListDialogBox_text);
+           myDataListType=DataListTypeEnum.P091;
+       }
+       if(confirm)
+       {
+           reinitRules();
+           rule_process(true);
+           rule_fileType(true);
+           myConversionType=convType;
+           rule_conversionType(true);
+           Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
+           dataList_P011viaP021_Enabled = isConversionToODV();
+           Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(dataList_P011viaP021_Enabled);
+           // reinit onglet data
+           //TODO decocher qqpart le P011viaP021
+           myEditDataForm.reinitParameters();
+           myEditDataForm.reinitTableData();
+           
+           ViewLog.styledTextLogErreurs.setText(messageLog);
+       }else{
+           myEditFileForm.selectConversion(tmp);
+       }
+
+
    }
    public void updateFromModel( E_TypeConversion convType)
    {
