@@ -621,7 +621,7 @@ public class ParameterManager
         {
             code=null;
         }else if(dataListType == DataListTypeEnum.P091 ||dataListType == DataListTypeEnum.P011_VIA_P091 ){
-           code=Intern.paramPSAL;
+           code=Intern.paramTEMP;
         }
         return code;
     }
