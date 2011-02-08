@@ -28,7 +28,7 @@ public class UpdateAction extends Action implements ISelectionListener,
 
     public final static String ID = "fr.ifremer.nemo.ui.UpdateAction"; //$NON-NLS-1$
 
-    private static boolean interrompu = false;
+//    private static boolean interrompu = false;
 
     // vars necessaires e la fenetre d'options
 
@@ -63,11 +63,13 @@ public class UpdateAction extends Action implements ISelectionListener,
         SWTProcessWS.fichiersConstantes = true;
         StringBuffer message = new StringBuffer();
 
-        interrompu = new SWTProgressWS().run();
+       String interrompuError = new SWTProgressWS().run();
 
-        if (interrompu)
+        if (!interrompuError.equals(""))
         {
             message.append(Messages.update_info);
+            message.append(Global.RN);
+            message.append(interrompuError);
             message.append(Global.RN);
             message.append(Global.RN);
         }

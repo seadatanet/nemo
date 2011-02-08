@@ -255,13 +255,16 @@ public class EditCruiseForm extends EditForm
          * if (ViewMain.dossierCampagne){ SWTProcessWS.dossier = true; } else{
          * SWTProcessWS.dossier = false; }
          */
-
-        new SWTProgressWS().run();
-
+      String error =   new SWTProgressWS().run();
+      Utils.messageErreur("");
+      if (!error.equals(""))
+      {
+          Utils.messageErreur(error);
+      }else{
         // mise à jour de l'onglet courant
 //        DataModel.fillCruise();
         fillFromModel();
-
+      }
         // majApresWS();
 
     }
