@@ -490,7 +490,10 @@ public class DataFormValidator extends FormValidator
        {
            Utils.messageErreurAppend(Messages.edit_data_verticalParameters_info_chooseDepthBSBed 
                +Global.SPACE
-               + myParameterManager.getP_depthBSBedCode());
+               + "("
+               + myParameterManager.getP_depthBSBedCode()
+               + ")"
+               );
            ok=false;
        }
        
@@ -501,11 +504,14 @@ public class DataFormValidator extends FormValidator
                (p_depthBSurf_entryKey.equals(Global.EMPTY_STRING) && p_pressure_entryKey.equals(Global.EMPTY_STRING))
                )
        {
-           Utils.messageErreurAppend(Messages.edit_data_verticalParameters_info_chooseDepthBSurfOrPressure
-               +Global.SPACE
-               + myParameterManager.getP_depthBSSurfCode()
-               + " or "
-               + myParameterManager.getP_pressureCode());
+           String message = Messages.edit_data_verticalParameters_info_chooseDepthBSurfOrPressure;
+           message += Global.SPACE;
+           message += "(";
+               message += myParameterManager.getP_depthBSSurfCode();
+           message +=  " / ";
+           message +=  myParameterManager.getP_pressureCode();
+           message += ")";
+               Utils.messageErreurAppend(message);
            ok=false;
        }
        return ok;
