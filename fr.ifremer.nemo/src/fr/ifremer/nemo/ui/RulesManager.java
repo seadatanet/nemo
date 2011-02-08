@@ -335,8 +335,9 @@ public class RulesManager
                myDataListType = dataListType;
                Nemo.getInstance().getDomain().getData().getModel().setDataListType(dataListType);
                Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().reinitTable();
-               Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().fillTypes();
                Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters().removeAllToAllCombos();
+             // !!! le fillTypes doit être appelé APRES le removeToAllcombos, car il peut ajouter PRES automatiquement
+               Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().fillTypes();
            }
            else{
                // si pas confirmation, et ne touche a rien et on remet la valeur de depart
