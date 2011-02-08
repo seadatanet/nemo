@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Group;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_MesureType;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.input.parameters.VerticalParametersList;
 import fr.ifremer.nemo.ui.Utils;
@@ -50,6 +51,12 @@ public class EditDataForm extends EditForm
     {
         super();
         myValidator = new DataFormValidator();
+    }
+    
+    
+    public void init()
+    {
+        Nemo.getInstance().getViewMain().getMyRulesManager().resetDataForm();
     }
     @Override
     public void createEditionForm(Composite parent)
@@ -90,7 +97,6 @@ public class EditDataForm extends EditForm
         
         // groupe de selection du type de mesure (sous l'eau ou dans le sol)
         createGroupMesureType();
-       
         // groupe de selection des paramètres verticaux
         createGroupVerticalParametersChoices();
     
@@ -151,6 +157,7 @@ public class EditDataForm extends EditForm
     public void actualiseEdition()
     {
         // pas d'actualisation nécessaire pour cet onglet
+        System.out.println("act");
     }
 
     public void invalidEtape()
@@ -270,10 +277,11 @@ public class EditDataForm extends EditForm
          */ 
         
         VerticalParametersList list = Nemo.getInstance().getDomain().getData().getModel().getVerticalParametersList();
+        E_MesureType mesureType = Nemo.getInstance().getDomain().getData().getModel().getMesureType();
         // recuperation du model correspondant
         fr.ifremer.nemo.input.DataModel dataModel = new fr.ifremer.nemo.input.DataModel();
         dataModel.setVerticalParametersList(list);
-        
+        dataModel.setMesureType(mesureType);
         
         // mise e jour des types avant validation
         myTableData.majTypeData();
@@ -287,6 +295,11 @@ public class EditDataForm extends EditForm
         dataModel.setDataListType(Nemo.getInstance().getViewMain().getMyRulesManager().getMyDataListType());
         Nemo.getInstance().getDomain().getData().updateData(dataModel);
         Nemo.getInstance().getViewMain().getEditDataForm().setValidated(true);
+        
+        // update mesureType to use   
+      
+        Nemo.getInstance().getViewMain().getMyRulesManager().updateFromModel(mesureType);
+        
 
     }
     
@@ -366,6 +379,7 @@ public class EditDataForm extends EditForm
         mesType_belowSeaBed = new Button(group, SWT.RADIO);
         mesType_belowSeaBed.setText(Messages.edit_data_belowSeaBed);
         mesType_belowSeaBed.addSelectionListener(bedListener);
+        
         GridDataFactory.fillDefaults().grab(true, false).applyTo(mesType_belowSeaBed);
         
     }

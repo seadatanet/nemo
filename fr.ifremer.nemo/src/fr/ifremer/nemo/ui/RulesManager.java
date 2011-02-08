@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
+import fr.ifremer.nemo.ui.edit.data.EditDataForm;
 import fr.ifremer.nemo.ui.edit.data.GroupVerticalParameters;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.ui.view.ViewLog;
@@ -36,6 +37,7 @@ public class RulesManager
      * referance sur le panneau file
      */
     EditFileForm myEditFileForm;
+    EditDataForm myEditDataForm;
     /**
      * description des paramètres Input
      *
@@ -80,6 +82,7 @@ public class RulesManager
     public RulesManager()
     {
         myEditFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
+        myEditDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
        setDefaultValues();
     }
     public void init()
@@ -103,6 +106,11 @@ public class RulesManager
         cruiseEnabled = !isConversionToODV();
         myDataListType = DEFAULT_DATALIST;
         dataList_P011viaP021_Enabled = isConversionToODV();
+        
+        
+        myMesureType = DEFAULT_MESURETYPE;
+        rule_mesureType();  
+
     }
     
     public void resetFileForm()
@@ -114,6 +122,14 @@ public class RulesManager
         myConversionType = getDefaultConversionTypeWithRules();
         myEditFileForm.selectConversion(myConversionType);
         
+    }
+    public void resetDataForm()
+    {
+        myDataListType = DEFAULT_DATALIST;
+        dataList_P011viaP021_Enabled = isConversionToODV();
+        myMesureType = DEFAULT_MESURETYPE;
+        myEditDataForm.selectMesureType(myMesureType);
+        rule_mesureType();
     }
     
     /**
@@ -173,6 +189,7 @@ public class RulesManager
       
        // si modif process, on fait un reset global
        resetFileForm();
+      
        //FAE 6414
        myEditFileForm.reinitAllButProcess();
        myProcessType = processType;
@@ -186,6 +203,7 @@ public class RulesManager
        Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
        Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV());
        ViewLog.styledTextLogErreurs.setText(messageLog);
+        resetDataForm();
    }
    
    /**
@@ -205,12 +223,19 @@ public class RulesManager
        
        myConversionType = getCurrentConversionTypeWithRules(myConversionType);
        rule_conversionType(true);
-
        myEditFileForm.updateEnableConversionTypes();
        myEditFileForm.selectConversion(myConversionType);
        Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
        Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV());
        ViewLog.styledTextLogErreurs.setText(messageLog);
+       
+       rule_mesureType();
+       GroupVerticalParameters verticGroup = Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters();
+       verticGroup.enable_pDepthBSBed(isP_depthBSBed_enabled());
+       verticGroup.enable_pDepthBSSurf(isP_depthBSSurf_enabled());
+       verticGroup.enable_pPressure(isP_pressure_enabled());
+     
+    
    }
    public void updateFromModel(E_InputType fileType)
    {

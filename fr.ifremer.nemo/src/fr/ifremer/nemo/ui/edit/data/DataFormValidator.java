@@ -174,6 +174,8 @@ public class DataFormValidator extends FormValidator
         Nemo.getInstance().getViewMain().setEtape(4);
        
         Nemo.getInstance().getDomain().getData().getModel().setMesureType(Nemo.getInstance().getViewMain().getMyRulesManager().getMyMesureType());
+        
+        Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();
 
     }
     

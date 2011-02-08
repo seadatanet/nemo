@@ -872,7 +872,7 @@ public class EditFileForm extends EditForm
             mediaModel.setEndDataPattern(sectionDataTerminator.getStartStationIndicator());
         }
         Nemo.getInstance().getDomain().getConversion().setCurrentConversion(Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType());
-   
+        Nemo.getInstance().getDomain().getConversion().getModel().setOutputFormat(Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType());
         
         // Mise à jour du model
         Nemo.getInstance().getDomain().getMedia().updateMedia(mediaModel);

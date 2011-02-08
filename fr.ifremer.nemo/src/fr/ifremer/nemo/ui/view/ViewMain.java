@@ -267,6 +267,7 @@ public class ViewMain extends ViewPart
         //RIGHT
         Composite right = getNewRightComposite(parentForm);
         editDataForm.createEditionForm(right);
+        editDataForm.init();
         
         parentForm.setWeights(new int[] {75, 25});
     }
@@ -300,6 +301,7 @@ public class ViewMain extends ViewPart
         // init onglet File
         // --- le contenu du fichier
       editFileForm.init();
+      editDataForm.init();
 
     }
 
