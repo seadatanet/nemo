@@ -242,8 +242,9 @@ public class EditCruiseForm extends EditForm
         Nemo.getInstance().getViewMain().getMyFilteredTableFactory().go(_parent, Global.WSSURVEY, null);
     }
 
-    public void webService(String reference)
+    public boolean webService(String reference)
     {
+        boolean ok=true;
         // remplissage du dataModel à partir des valeurs du ws
 
         TableDataSurvey.types.clear();
@@ -260,13 +261,14 @@ public class EditCruiseForm extends EditForm
       if (!error.equals(""))
       {
           Utils.messageErreur(error);
+          ok=false;
       }else{
         // mise à jour de l'onglet courant
 //        DataModel.fillCruise();
         fillFromModel();
       }
         // majApresWS();
-
+      return ok;
     }
 
     protected void ouvertureDescriptionXML()

@@ -191,8 +191,10 @@ public class WSSurveyFilteredTable extends AbstractFilteredTable
         Pattern p = Pattern.compile(Global.SEP);
 
         String mots[] = p.split(reference);
-        Nemo.getInstance().getViewMain().getEditCruiseForm().webService(mots[0]);
-//        Utils.messageOK(Messages.success_openSurveyDesc);
+        boolean ok=Nemo.getInstance().getViewMain().getEditCruiseForm().webService(mots[0]);
+        if (ok){
+            Utils.messageOK(Messages.success_openSurveyDesc);
+        }
         shell.close();
 
     }
