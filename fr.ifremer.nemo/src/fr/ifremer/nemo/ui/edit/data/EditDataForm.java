@@ -321,7 +321,7 @@ public class EditDataForm extends EditForm
     }
     public void reinitParameters()
     {
-        Nemo.getInstance().getViewMain().getMyRulesManager().updateFromModel(DataListTypeEnum.UNKNOWN);
+//        Nemo.getInstance().getViewMain().getMyRulesManager().updateFromModel(DataListTypeEnum.UNKNOWN);
         selectMesureType(E_MesureType.BSSURF);
         myGroupeVerticalParameters.removeAllToAllCombos();
     }

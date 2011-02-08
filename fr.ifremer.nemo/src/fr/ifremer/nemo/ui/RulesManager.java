@@ -267,34 +267,53 @@ public class RulesManager
    public void updateFromIHM( E_TypeConversion convType)
    {
        boolean confirm =true;
+       boolean mustChangeDatalist=false;
        E_TypeConversion tmp = myConversionType;
-       if(myDataListType==DataListTypeEnum.P011_VIA_P021 && convType==E_TypeConversion.MEDATLAS)
-       {
-           confirm = MessageDialog.openConfirm(null, 
-               Messages.edit_data_dataListDialogBox_title,
-               Messages.edit_data_dataListDialogBox_text);
-           myDataListType=DataListTypeEnum.P091;
-       }
-       if(confirm)
-       {
-           reinitRules();
-           rule_process(true);
-           rule_fileType(true);
-           myConversionType=convType;
-           rule_conversionType(true);
-           Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
-           dataList_P011viaP021_Enabled = isConversionToODV();
-           Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(dataList_P011viaP021_Enabled);
-           // reinit onglet data
-           //TODO decocher qqpart le P011viaP021
-           myEditDataForm.reinitParameters();
-           myEditDataForm.reinitTableData();
-           
-           ViewLog.styledTextLogErreurs.setText(messageLog);
-       }else{
-           myEditFileForm.selectConversion(tmp);
-       }
+       DataListTypeEnum newDataList=myDataListType;
+       if (myConversionType!=convType){
+           if(myDataListType==DataListTypeEnum.P011_VIA_P021 && convType==E_TypeConversion.MEDATLAS)
+           {
+               confirm = MessageDialog.openConfirm(null, 
+                   Messages.edit_data_dataListDialogBox_title,
+                   Messages.edit_data_dataListDialogBox_text);
+               myDataListType=DataListTypeEnum.P091;
+               newDataList=myDataListType;
+               mustChangeDatalist=true;
+           }
+           if(confirm)
+           {
+               reinitRules();
+               rule_process(true);
+               rule_fileType(true);
+               myConversionType=convType;
+               rule_conversionType(true);
+               Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
+               dataList_P011viaP021_Enabled = isConversionToODV();
+               Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(dataList_P011viaP021_Enabled);
+               
+              
+               
+               // ensuite on selectionne si necessaire
+               if (mustChangeDatalist)
+               {
+                   // 1 affectation nouvelle valeur au modele (necessaire pour la suite)
+                   Nemo.getInstance().getDomain().getData().getModel().setDataListType(newDataList);
+                   // 2 reinit
+                  Nemo.getInstance().getViewMain().getEditDataForm().reinitParameters();
+                   Nemo.getInstance().getViewMain().getEditDataForm().reinitTableData();
+                   Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters().removeAllToAllCombos();
+                   // !!! le fillTypes doit être appelé APRES le removeToAllcombos, car il peut ajouter PRES automatiquement
+                     Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().fillTypes();
+                   Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(newDataList);
+                  
+               }
+             
 
+               ViewLog.styledTextLogErreurs.setText(messageLog);
+           }else{
+               myEditFileForm.selectConversion(tmp);
+           }
+       }
 
    }
    public void updateFromModel( E_TypeConversion convType)
@@ -356,7 +375,7 @@ public class RulesManager
            if (confirm){
                myDataListType = dataListType;
                Nemo.getInstance().getDomain().getData().getModel().setDataListType(dataListType);
-               Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().reinitTable();
+               Nemo.getInstance().getViewMain().getEditDataForm().reinitTableData();
                Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters().removeAllToAllCombos();
              // !!! le fillTypes doit être appelé APRES le removeToAllcombos, car il peut ajouter PRES automatiquement
                Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().fillTypes();
