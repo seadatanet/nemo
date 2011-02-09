@@ -322,6 +322,7 @@ public class Nemo
         +Global.DBL_PT
         +Global.SPACE
         + getLog_currentInputFile() 
+           +Global.SPACE
         + Messages.error_lineNumber_message
         +Global.DBL_PT
         +Global.SPACE
