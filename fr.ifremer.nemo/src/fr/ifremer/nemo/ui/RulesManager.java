@@ -454,6 +454,7 @@ public class RulesManager
            ||
            ((isTimeSeries() ||isTrajectory())
                    && isConversionToODV()
+                   && myMesureType==E_MesureType.BSSURF
            );
        
        
