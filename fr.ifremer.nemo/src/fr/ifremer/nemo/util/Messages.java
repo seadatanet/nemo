@@ -267,8 +267,11 @@ public class Messages {
     public static String error_convert_outputDir;
     public static String error_convert_outputFile;
     public static String error_convert_stationsDoubles;
-    
     public static String error_unknown_format;
+    
+    public static String error_fileName_message;
+    public static String error_lineNumber_message;
+    
 
     //ACTIONS
     public static String settings_typePlateForme;

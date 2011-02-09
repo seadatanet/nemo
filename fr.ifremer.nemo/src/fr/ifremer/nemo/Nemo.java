@@ -315,4 +315,16 @@ public class Nemo
     {
         this.log_currentInputLine = log_currentInputLine;
     }
+    
+    public String getErrorMessageWithFileAndLineNumber()
+    {
+        return Messages.error_fileName_message
+        +Global.DBL_PT
+        +Global.SPACE
+        + getLog_currentInputFile() 
+        + Messages.error_lineNumber_message
+        +Global.DBL_PT
+        +Global.SPACE
+        + getLog_currentInputLine();
+    }
 }

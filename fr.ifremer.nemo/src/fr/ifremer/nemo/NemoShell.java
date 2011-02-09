@@ -201,7 +201,7 @@ public class NemoShell
         catch (Exception e)
         {
             logger.error(e.getMessage(), e);
-            logger.error(Nemo.getInstance().getLog_currentInputFile()+" l."+Nemo.getInstance().getLog_currentInputLine());
+            logger.error(Nemo.getInstance().getErrorMessageWithFileAndLineNumber());
             return false;
         }
 
