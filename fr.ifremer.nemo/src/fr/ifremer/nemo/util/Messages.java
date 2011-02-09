@@ -260,6 +260,7 @@ public class Messages {
     public static String error_data_removePRES;
     public static String error_data_firstParam_depthBSBed;
     public static String error_data_firstParam_depthBSSurfOrPres;
+    public static String error_data_firstParam_depthBSSurf;
     public static String error_convert_invalideSteps;
     public static String error_convert_cancel;
     public static String error_convert_position;

@@ -443,9 +443,9 @@ public class RulesManager
        setP_pressure_enabled(false);
 
        boolean p_depthBSBed = 
-           isProfile()
-       
-           && myMesureType==E_MesureType.BSBED ;
+          ( isProfile()||isTrajectory())
+           && 
+           myMesureType==E_MesureType.BSBED ;
        
        boolean p_depthBSSurf = 
            (isProfile() 
