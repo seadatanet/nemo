@@ -241,6 +241,7 @@ public class Messages {
     public static String edit_file_info_cruiseDisabledBecauseODV;
     public static String edit_file_info_odvMonoForbiddenBecauseTrajectory;
     public static String edit_file_info_conversionNotApplicable;
+    public static String edit_file_info_P011viaP021_disabled;
     // RESULTATS
     public static String success_file_preformat;
     public static String progress_file_preformat;

@@ -12,6 +12,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.input.DataModel;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.ui.edit.data.EditDataForm;
 import fr.ifremer.nemo.ui.edit.data.GroupVerticalParameters;
@@ -376,8 +377,9 @@ public class RulesManager
                myDataListType = dataListType;
                Nemo.getInstance().getDomain().getData().getModel().setDataListType(dataListType);
                Nemo.getInstance().getViewMain().getEditDataForm().reinitTableData();
+               Nemo.getInstance().getDomain().getData().getModel().reinitParameterModelList();
                Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters().removeAllToAllCombos();
-             // !!! le fillTypes doit être appelé APRES le removeToAllcombos, car il peut ajouter PRES automatiquement
+               // !!! le fillTypes doit être appelé APRES le removeToAllcombos, car il peut ajouter PRES automatiquement
                Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().fillTypes();
            }
            else{
@@ -492,7 +494,6 @@ public class RulesManager
    }
    private void rule_conversionType(boolean addToLog)
    {
-// TODO BGT pb si on choisit medatlas mais que le modele en cours est en P021
        if ( myConversionType==E_TypeConversion.ODV_MONOSTATION ||
                myConversionType==E_TypeConversion.ODV_MULTISTATIONS)
        {
@@ -500,11 +501,10 @@ public class RulesManager
            dataList_P011viaP021_Enabled=true;
            if(addToLog){
                messageLog += Messages.edit_file_info_cruiseDisabledBecauseODV+Global.RN;
-               messageLog += "P011 via P021 enabled";
            }
        }else{
            if(addToLog){
-               messageLog += "P011 via P021 disabled";
+               messageLog += Messages.edit_file_info_P011viaP021_disabled+Global.RN;
            }
        }
    }

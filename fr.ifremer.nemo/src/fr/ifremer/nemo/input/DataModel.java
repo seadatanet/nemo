@@ -172,6 +172,10 @@ public class DataModel extends AbstractModel
         releaseParameterModels();
     }
 
+    public void reinitParameterModelList()
+    {
+        _parameterModels = new ArrayList<ParameterModel>();
+    }
     /**
      * Supprime _parameterModels
      */
