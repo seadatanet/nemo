@@ -674,10 +674,8 @@ public class EditConversionForm extends EditForm
         fillSummary();
     }
     
-    
-    public void fillBatchCommandLine()
+    public String calcBatchCommandLine()
     {
-        
         RulesManager rm = Nemo.getInstance().getViewMain().getMyRulesManager();
         EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
         String command="nemo_batch";
@@ -693,7 +691,7 @@ public class EditConversionForm extends EditForm
         }
         if(rm.isCruiseInADirectory())
         {
-            command += editFileForm.nomRepertoire;   
+            command += editFileForm.nomRepertoireOrigin;   
         }
         command += "\"";
         
@@ -753,13 +751,14 @@ public class EditConversionForm extends EditForm
             command += CDIResumeWriter.getInstance().getNomFichierSortie();
             command += "\"";
         }
-        
-        
-        
+        return command; 
+    }
+    public void fillBatchCommandLine()
+    {
         // ajout onglet erreurs
         Utils.messageOKAppend(Global.RN);
         Utils.messageOKAppend(Messages.edit_convert_batchInfoTitle);
-        Utils.messageOKAppend(command);
+        Utils.messageOKAppend(calcBatchCommandLine());
         
     }
     public void fillSummary()
@@ -784,7 +783,7 @@ public class EditConversionForm extends EditForm
         if(rm.isCruiseInADirectory())
         {
             summary += Messages.view_convert_summary_inputDirectoryLabel + Global.DBL_PT 
-                + Global.RN  + editFileForm.nomRepertoire;   
+                + Global.RN  + editFileForm.nomRepertoireOrigin;   
         }
         summary += Global.RN+ Global.RN+ Global.RN;
         summary += Messages.view_convert_summary_outputFormatLabel+ Global.DBL_PT 
