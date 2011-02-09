@@ -66,9 +66,9 @@
 				    <exclude name="CVS/**,Vocab/CVS/**"/>   
 				  </fileset>   
 				</copy> 
-				<copy file="${buildDirectory}/Nemo_Test/eclipse/resources/NemoConfiguration_ini.xml" 
+				<!--<copy file="${buildDirectory}/Nemo_Test/eclipse/resources/NemoConfiguration_ini.xml" 
 					  tofile="${buildDirectory}/Nemo_Test/eclipse/resources/NemoConfiguration.xml"
-					  overwrite="true"/>
+					  overwrite="true"/>-->
 		<copy file="${buildDirectory}/Nemo_Test/eclipse/nemo.exe" 
 					  tofile="${buildDirectory}/Nemo_Test/eclipse/nemo_batch.exe"
 					  overwrite="true"/>
@@ -94,4 +94,17 @@
 			 </condition>
 		</fail>
 	</target>
+	<!--<target name="test" depends="init">
+		<junit>
+			<formatter type="xml"/>
+			<classpath>
+				<pathelement path="${buildDirectory}/Nemo_product/lib"/>
+				<pathelement path="${buildDirectory}/Nemo_product/src"/>
+				<pathelement path="${buildDirectory}/Nemo_product/testsrc"/>
+			</classpath>
+			<test name="fr.ifremer.nemo.ui.edit.station.StationSectionTest" outfile="result">
+				<formatter type="xml"/>
+			</test>
+		</junit>
+	</target>-->
 </project>
