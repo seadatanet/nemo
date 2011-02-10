@@ -277,9 +277,11 @@ public class EditDataForm extends EditForm
          */ 
         
         VerticalParametersList list = Nemo.getInstance().getDomain().getData().getModel().getVerticalParametersList();
+        E_MesureType mesureType =  Nemo.getInstance().getDomain().getData().getModel().getMesureType();
         // recuperation du model correspondant
         fr.ifremer.nemo.input.DataModel dataModel = new fr.ifremer.nemo.input.DataModel();
         dataModel.setVerticalParametersList(list);
+        dataModel.setMesureType(mesureType);
         
         // mise e jour des types avant validation
         myTableData.majTypeData();
