@@ -11,10 +11,8 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.Locale;
 
-import org.mockito.cglib.core.Local;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.domain.DateTimeUtils;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Intern;
