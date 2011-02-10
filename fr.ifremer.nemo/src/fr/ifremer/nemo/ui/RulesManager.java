@@ -415,6 +415,7 @@ public class RulesManager
            verticGroup.enable_pDepthBSBed(isP_depthBSBed_enabled());
            verticGroup.enable_pDepthBSSurf(isP_depthBSSurf_enabled());
            verticGroup.enable_pPressure(isP_pressure_enabled());
+           Nemo.getInstance().getDomain().getData().getModel().setMesureType(mesureType);
 //           verticGroup.removeAllToAllCombos();
    }
    public void updateFromModel(E_MesureType mesureType)
