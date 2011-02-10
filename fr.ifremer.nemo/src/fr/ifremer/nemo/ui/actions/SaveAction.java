@@ -118,6 +118,8 @@ ActionFactory.IWorkbenchAction
         //si le modele est un fichier qui a été ouvert, ou si il a déjà été enregistré, on conserve ces infos pour proposer d'enregistrer sous le nom courant)
         // sinon on utilise les valeurs par défaut (repertoire des modeles de la config et nom de fichier = *.xml)
         // nom connu car deja enregistre recemment
+      // retour 4063
+        nomFichierSortieXML=Nemo.getInstance().getCurrentOpenModelPath();
         if (nomFichierSortieXML!=null && !nomFichierSortieXML.equals("")){ //$NON-NLS-1$
             currentModelPath=nomFichierSortieXML;
         }
