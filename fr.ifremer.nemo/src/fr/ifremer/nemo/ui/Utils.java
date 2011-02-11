@@ -1428,20 +1428,7 @@ public class Utils
         });
     }
 
-    public static boolean isNumeric(String inputString)
-    {
-        boolean numeric = false;
-        try
-        {
-            Integer.parseInt(inputString);
-            numeric = true;
-        }
-        catch (Exception e)
-        {
-            numeric = false;
-        }
-        return numeric;
-    }
+   
 
     public static void invalidEtapes()
     {

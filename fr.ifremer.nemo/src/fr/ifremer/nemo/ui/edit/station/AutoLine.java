@@ -491,7 +491,7 @@ public class AutoLine implements UIobject
                     nextChar = ligne.substring(index, index + 1);
                     if (index < iEnd || nextChar.equals(".") //$NON-NLS-1$
                             || nextChar.equals(",") //$NON-NLS-1$
-                            || Utils.isNumeric(nextChar))
+                            || fr.ifremer.nemo.util.Utils.isNumeric(nextChar))
                     {
                         index++;
                     }
