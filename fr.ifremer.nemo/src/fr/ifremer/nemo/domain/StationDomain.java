@@ -656,12 +656,18 @@ public class StationDomain
         // *SURFACE SAMPLES=
         medStationHeader.append(start);
         medStationHeader.append(Elts.getElt(Elts.station_surface, _model
-            .getProperty(Intern.S_SURFACE + "1").applyOn(inputFile)));
+            .getProperty(Intern.S_SURFACE + "1").applyOn(inputFile)).trim());
         medStationHeader.append(Global.RN);
 
         medStationHeader.append(start);
+        try{
         medStationHeader.append(Elts.limit((String) _model.getProperty(
             Intern.S_SURFACE + "2").applyOn(inputFile), Elts.station_line));
+        }catch(Exception nulException){
+            // this is authorized: only DCHistory1 is used, DC History2 is empty
+            // so this is not an error
+            System.out.println("no value for "+Intern.S_SURFACE + "2");
+        }
 
         return medStationHeader;
     }
