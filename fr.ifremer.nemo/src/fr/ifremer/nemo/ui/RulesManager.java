@@ -392,18 +392,18 @@ public class RulesManager
    }
    public void updateFromModel(DataListTypeEnum dataListType)
    {
-       if (dataListType != myDataListType){   
+//       if (dataListType != myDataListType){   
            myDataListType = dataListType;
            Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV());
            Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(dataListType);
            ViewLog.styledTextLogErreurs.setText(messageLog);
            Nemo.getInstance().getDomain().getData().getModel().setDataListType(myDataListType);
 
-       }
-       if ( Nemo.getInstance().getViewMain().getEditDataForm().getSelectedDataList()==dataListType.UNKNOWN)
-       {
-           Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(dataListType);
-       }
+//       }
+//       if ( Nemo.getInstance().getViewMain().getEditDataForm().getSelectedDataList()==dataListType.UNKNOWN)
+//       {
+//           Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(dataListType);
+//       }
    }
    
    
