@@ -400,6 +400,10 @@ public class RulesManager
            Nemo.getInstance().getDomain().getData().getModel().setDataListType(myDataListType);
 
        }
+       if ( Nemo.getInstance().getViewMain().getEditDataForm().getSelectedDataList()==dataListType.UNKNOWN)
+       {
+           Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(dataListType);
+       }
    }
    
    
