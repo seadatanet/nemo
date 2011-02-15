@@ -147,21 +147,28 @@ public class NemoShell
                 inputDomain.getCruise().setDataSetRef(strDefault);
 
             // Is a station property in file
-            int nbLignes = inputDomain.getMedia().getModel().getFileHeader() + Nemo.getInstance().getDomain().getMedia().getShellStationHeaderNumberLines();
+            int nbLignes = inputDomain.getMedia().getModel().getFileHeader() 
+            + Nemo.getInstance().getDomain().getMedia().getShellStationHeaderNumberLines();
             
             for (PropertyModel pModel : inputDomain.getStation().getModel().getProperties())
             {
                 if (pModel.getFragment() != null)
                 {
-                    if (pModel.getFragment().getLastLine() > nbLignes)
+                   
+                     // FAE 7138 > remplace par >=
+                      if (pModel.getFragment().getLastLine() >= nbLignes)
                     {
-                        nemo.getDomain().getStation()
-                            .setSomeInData(true);
+                        nemo.getDomain().getStation().setSomeInData(true);
                         pModel.setInData(true);
                     }
                 }
             }
-
+            
+            // FAE 7138
+            // on repasse sur la methode setAddedParameterModel car on n'avait pas toutes les infos necessaires
+            // la premiere fois (1er appel via openModel ci-dessus)
+            // a ce stade, il manque notamment la taille du stationHeader si celui-ci est variable
+            nemo.getDomain().getData().getMyParameterManager().setAddedParameterModel();
             File repertory = null;
             
             if (odvConv.equals(E_TypeConversion.ODV_MONOSTATION))
