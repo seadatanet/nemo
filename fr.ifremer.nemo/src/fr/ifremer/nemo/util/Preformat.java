@@ -15,6 +15,7 @@ import fr.ifremer.nemo.ui.Application;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.util.Global.E_EndData;
+import fr.ifremer.nemo.util.Global.E_ProcessType;
 
 public class Preformat
 {
@@ -238,7 +239,7 @@ public class Preformat
 
         _isPattern = mediaDom.getModel().getStationHeaderPattern().length() > 0;
 
-        _enTeteStation = mediaDom.getModel().getEndStation();
+        _enTeteStation = mediaDom.getModel().getStationHeader();
 
         _enTeteStationPattern = mediaDom.getModel().getStationHeaderPattern();
 
@@ -366,16 +367,10 @@ public class Preformat
             // Creation du repertoire pour les fichiers preformates
             String outputDir = repSortie.getAbsolutePath();
 
-            if (!batchMode)
-            {
-                if (!Nemo.getInstance().getViewMain().getEditFileForm().isCruiseIsAFile())
-                    outputDir += PF + repertoire.getName();
-            }
-            else
+            if (Nemo.getInstance().getDomain().getMedia().getModel().getProcessType()!=E_ProcessType.CRUISE_FILE)
             {
                 outputDir += PF + repertoire.getName();
             }
-
             File repPreformat = new File(outputDir);
             if (!repPreformat.exists())
             {
