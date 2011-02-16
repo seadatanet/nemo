@@ -7,16 +7,12 @@
  */
 package fr.ifremer.nemo;
 
-import static org.junit.Assert.*;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-import org.apache.commons.cli.BasicParser;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.ParseException;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
@@ -27,7 +23,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import fr.ifremer.nemo.ui.Application;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
@@ -41,17 +36,18 @@ import fr.ifremer.nemo.util.Global.E_TypeConversion;
 public class NemoShellTest
 {
     public NemoShell shell = new NemoShell();
-    
-    
+
+
     public String dataPath="C:\\test_1_2_32";
-    String dataDir = "";
-    String versionDir="";
-    String dataList = "";
-    String conversionDir = E_TypeConversion.UNKNOWN.toString();
-    
-    
-    public String inputFile;
-    public String outputFile;
+    public String dataDir = "";
+    public String versionDir="1_2_32_ok";
+    public String dataList = "";
+    public String conversionDir = E_TypeConversion.UNKNOWN.toString();
+
+
+    public String input;
+    public String output;
+    public String output_REFERENCE;
     public String modelFile;
     public Conversion conv=Conversion.MEDATLAS;
     public boolean sortDatas=false;
@@ -62,9 +58,9 @@ public class NemoShellTest
     public String couplingTablePrefix=Global.EMPTY_STRING;
     public static Logger batchLogger;
     public static Logger testLogger ;
-    
-    
-    
+
+
+
     /**
      * @throws java.lang.Exception
      */
@@ -74,12 +70,12 @@ public class NemoShellTest
         DOMConfigurator.configure("resources/log4jBatch.xml"); //$NON-NLS-1$
         batchLogger = Logger.getLogger("nemoBatch");//$NON-NLS-1$
         batchLogger.setLevel(Level.DEBUG);
-        
+
         // LOGGER
         DOMConfigurator.configure("resources/log4jBatch.xml"); //$NON-NLS-1$
         testLogger = Logger.getLogger("nemoJunits");//$NON-NLS-1$
         testLogger.setLevel(Level.DEBUG);
-        
+
     }
 
     /**
@@ -96,9 +92,10 @@ public class NemoShellTest
     @Before
     public void setUp() throws Exception
     {
-        inputFile="";
-        outputFile="";
-        modelFile="";
+        input="input";
+        output="output_junit";
+        modelFile="model.xml";
+        output_REFERENCE = "output_REFERENCE";
         conv=Conversion.MEDATLAS;
         sortDatas=false;
         odvConv= E_TypeConversion.MEDATLAS;
@@ -123,195 +120,185 @@ public class NemoShellTest
     public final void testMain_diapalis_1232_MEDATLAS_P091()
     {
         testLogger.info("");
+        /**
+         * nemo_batch 
+         * -i "C:\test_1_2_32\cruiseFile_profile_diap\diapalis2_bot.prn" 
+         * -m "C:\test_1_2_32\cruiseFile_profile_diap\1_2_32_ok\P091\MEDATLAS\diap_MEDATLAS_P091.xml"
+         * -o "C:\test_1_2_32\cruiseFile_profile_diap\1_2_32_ok\P091\MEDATLAS\diap_out_eclipse" 
+         * -c MEDATLAS
+         */
+
         dataDir = "cruiseFile_profile_diap";
-        versionDir="1_2_32_ok";
         dataList = DataListTypeEnum.P091.toString();
         conversionDir = E_TypeConversion.MEDATLAS.toString();
-        inputFile = getInputPath()+"diapalis2_bot.prn";
-        outputFile = getOutputPath()+"diap_out_junit";
-        modelFile = getOutputPath()+getModelFileName("diap");//"diap_1232_MEDATLAS_P091.xml";
         conv =Conversion.MEDATLAS;
-        
+        cdiSummaryFile = getOutputPath()+"cdiSummary_junit.txt";
+        // coupling table ne marche pas en junit -> voir s'il faut recopier un fichier dans le rep tests?
+//      couplingTableUpdate=true;
+//      couplingTablePrefix= getOutputPath();
         // fichier de reference avec lequel comparer
-        String refFile = getOutputPath()+"diap_out_REFERENCE";
-        
-     boolean  res= shell.main(inputFile, outputFile, modelFile, conv, sortDatas, odvConv, 
+
+        boolean  res= shell.main(getInput(), getOutput(), getModel(), conv, sortDatas, odvConv, 
             datasetRef, cdiSummaryFile, couplingTableUpdate, couplingTablePrefix, batchLogger);
-     
-     Assert.assertTrue(res);
-     Assert.assertTrue(compareFiles(outputFile, refFile));
-     
+
+        Assert.assertTrue(res);
+        Assert.assertTrue(compareFiles(output, getReference()));
+
     }
     @Test
     public final void testMain_diapalis_1232_ODVMULTI_P091()
     {
         testLogger.info("");
         dataDir = "cruiseFile_profile_diap";
-        versionDir="1_2_32_ok";
         dataList = "P091";
         conversionDir = E_TypeConversion.ODV_MULTISTATIONS.toString();
-        inputFile = getInputPath()+"diapalis2_bot.prn";
-        outputFile = getOutputPath()+"diap_out_junit";
-        modelFile = getOutputPath()+getModelFileName("diap");
         conv =Conversion.ODV;
         odvConv = E_TypeConversion.ODV_MULTISTATIONS;
         // fichier de reference avec lequel comparer
-        String refFile = getOutputPath()+"diap_ODVMULTI_P091_REFERENCE";
-        
-     boolean  res= shell.main(inputFile, outputFile, modelFile, conv, sortDatas, odvConv, 
+
+        boolean  res= shell.main(getInput(), getOutput(), getModel(), conv, sortDatas, odvConv, 
             datasetRef, cdiSummaryFile, couplingTableUpdate, couplingTablePrefix, batchLogger);
-     
-     Assert.assertTrue(res);
-     Assert.assertTrue(compareFiles(outputFile, refFile));
+
+        Assert.assertTrue(res);
+        Assert.assertTrue(compareFiles(output, getReference()));
     }
-    
+
     @Test
     public final void testMain_diapalis_1232_MEDATLAS_P011viaP091()
     {
         testLogger.info("");
-         dataDir = "cruiseFile_profile_diap";
-         versionDir="1_2_32_ok";
-         dataList = DataListTypeEnum.P011_VIA_P091.toString();
-         conversionDir = E_TypeConversion.MEDATLAS.toString();
-        inputFile = getInputPath()+"diapalis2_bot.prn";
-        outputFile = getOutputPath()+"diap_out_junit";
-        modelFile = getOutputPath()+getModelFileName("diap");//"diap_1232_MEDATLAS_P011viaP091.xml";
+        dataDir = "cruiseFile_profile_diap";
+        dataList = DataListTypeEnum.P011_VIA_P091.toString();
+        conversionDir = E_TypeConversion.MEDATLAS.toString();
         conv =Conversion.MEDATLAS;
-        
-        // fichier de reference avec lequel comparer
-        String refFile = getOutputPath()+"diap_out_REFERENCE";
-        
-     boolean  res= shell.main(inputFile, outputFile, modelFile, conv, sortDatas, odvConv, 
+
+
+        boolean  res= shell.main(getInput(), getOutput(), getModel(), conv, sortDatas, odvConv, 
             datasetRef, cdiSummaryFile, couplingTableUpdate, couplingTablePrefix, batchLogger);
-     
-     Assert.assertTrue(res);
-     Assert.assertTrue(compareFiles(outputFile, refFile));
-     
+
+        Assert.assertTrue(res);
+        Assert.assertTrue(compareFiles(output, getReference()));
+
     }
     @Test
     public final void testMain_diapalis_1232_ODVMULTI_P011viaP091()
     {
         testLogger.info("");
-         dataDir = "cruiseFile_profile_diap";
-         versionDir="1_2_32_ok";
-         dataList = DataListTypeEnum.P011_VIA_P091.toString();
-         conversionDir = E_TypeConversion.ODV_MULTISTATIONS.toString();
-        inputFile = getInputPath()+"diapalis2_bot.prn";
-        outputFile = getOutputPath()+"diap_out_junit";
-        modelFile = getOutputPath()+getModelFileName("diap");//"diap_1232_MEDATLAS_P011viaP091.xml";
+        dataDir = "cruiseFile_profile_diap";
+        dataList = DataListTypeEnum.P011_VIA_P091.toString();
+        conversionDir = E_TypeConversion.ODV_MULTISTATIONS.toString();
         conv =Conversion.ODV;
         odvConv = E_TypeConversion.ODV_MULTISTATIONS;
-        
-        // fichier de reference avec lequel comparer
-        String refFile = getOutputPath()+"diap_out_REFERENCE";
-        
-     boolean  res= shell.main(inputFile, outputFile, modelFile, conv, sortDatas, odvConv, 
+
+
+        boolean  res= shell.main(getInput(), getOutput(), getModel(), conv, sortDatas, odvConv, 
             datasetRef, cdiSummaryFile, couplingTableUpdate, couplingTablePrefix, batchLogger);
-     
-     Assert.assertTrue(res);
-     Assert.assertTrue(compareFiles(outputFile, refFile));
-     
+
+        Assert.assertTrue(res);
+        Assert.assertTrue(compareFiles(output, getReference()));
+
     }
     @Test
     public final void testMain_diapalis_1232_ODVMULTI_P011viaP021()
     {
         testLogger.info("");
-         dataDir = "cruiseFile_profile_diap";
-         versionDir="1_2_32_ok";
-         dataList = DataListTypeEnum.P011_VIA_P021.toString();
-         conversionDir = E_TypeConversion.ODV_MULTISTATIONS.toString();
-        inputFile = getInputPath()+"diapalis2_bot.prn";
-        outputFile = getOutputPath()+"diap_out_junit";
-        modelFile = getOutputPath()+getModelFileName("diap");//"diap_1232_MEDATLAS_P011viaP091.xml";
+        dataDir = "cruiseFile_profile_diap";
+        dataList = DataListTypeEnum.P011_VIA_P021.toString();
+        conversionDir = E_TypeConversion.ODV_MULTISTATIONS.toString();
         conv =Conversion.ODV;
         odvConv = E_TypeConversion.ODV_MULTISTATIONS;
-        
-        // fichier de reference avec lequel comparer
-        String refFile = getOutputPath()+"diap_out_REFERENCE";
-        
-     boolean  res= shell.main(inputFile, outputFile, modelFile, conv, sortDatas, odvConv, 
+
+
+        boolean  res= shell.main(getInput(), getOutput(), getModel(), conv, sortDatas, odvConv, 
             datasetRef, cdiSummaryFile, couplingTableUpdate, couplingTablePrefix, batchLogger);
-     
-     Assert.assertTrue(res);
-     Assert.assertTrue(compareFiles(outputFile, refFile));
-     
+
+        Assert.assertTrue(res);
+        Assert.assertTrue(compareFiles(output, getReference()));
+
     }
+
+    @Test
+    public final void testMain()
+    {
+
+    }
+
     @Test
     public final void testMain_6839_1232_ODVMULTI_P011viaP021()
     {
         testLogger.info("");
         dataDir = "6839";
-        versionDir="1_2_32_ok";
         dataList = DataListTypeEnum.P011_VIA_P091.toString();
         conversionDir = E_TypeConversion.ODV_MULTISTATIONS.toString();
-        inputFile = getInputPath()+"TSG_FNIN_20101230_000000.txt";
-        outputFile = getOutputPath()+"out_junit";
-        modelFile = getOutputPath()+getModelFileName("6839");
         conv =Conversion.ODV;
         odvConv = E_TypeConversion.ODV_MULTISTATIONS;
         datasetRef="ref";
 
-        // fichier de reference avec lequel comparer
-        String refFile = getOutputPath()+"6839_out_REFERENCE";
 
-        boolean  res= shell.main(inputFile, outputFile, modelFile, conv, sortDatas, odvConv, 
+        boolean  res= shell.main(getInput(), getOutput(), getModel(), conv, sortDatas, odvConv, 
             datasetRef, cdiSummaryFile, couplingTableUpdate, couplingTablePrefix, batchLogger);
 
         Assert.assertTrue(res);
-        Assert.assertTrue(compareFiles(outputFile, refFile));
+        Assert.assertTrue(compareFiles(output, getReference()));
 
     }
     @Test
-    public final void testMain_diapalis_6903_ODVMULTI_P011viaP091()
+    public final void testMain_6903_ODVMULTI_P011viaP091()
     {
         testLogger.info("");
-         dataDir = "6903";
-         versionDir="1_2_32_ok";
-         dataList = DataListTypeEnum.P011_VIA_P091.toString();
-         conversionDir = E_TypeConversion.ODV_MULTISTATIONS.toString();
-        inputFile = getInputPath()+"diapalis2_bot.prn";
-        outputFile = getOutputPath()+"diap_out_junit";
-        modelFile = getOutputPath()+getModelFileName("6903");//"diap_1232_MEDATLAS_P011viaP091.xml";
+        dataDir = "6903";
+        dataList = DataListTypeEnum.P011_VIA_P091.toString();
+        conversionDir = E_TypeConversion.ODV_MULTISTATIONS.toString();
         conv =Conversion.ODV;
         odvConv = E_TypeConversion.ODV_MULTISTATIONS;
         datasetRef="FI35200110014";
-        // fichier de reference avec lequel comparer
-        String refFile = getOutputPath()+"diap_out_REFERENCE";
-        
-     boolean  res= shell.main(inputFile, outputFile, modelFile, conv, sortDatas, odvConv, 
+
+        boolean  res= shell.main(getInput(), getOutput(), getModel(), conv, sortDatas, odvConv, 
             datasetRef, cdiSummaryFile, couplingTableUpdate, couplingTablePrefix, batchLogger);
-     
-     Assert.assertTrue(res);
-     Assert.assertTrue(compareFiles(outputFile, refFile));
-     
+
+        Assert.assertTrue(res);
+        Assert.assertTrue(compareFiles(output, getReference()));
+
     }
     @Test
-    public final void testMain_diapalis_6903_ODVMULTI_P011viaP021()
+    public final void testMain_6903_ODVMULTI_P011viaP021()
     {
         testLogger.info("");
-         dataDir = "6903";
-         versionDir="1_2_32_ok";
-         dataList = DataListTypeEnum.P011_VIA_P021.toString();
-         conversionDir = E_TypeConversion.ODV_MULTISTATIONS.toString();
-        inputFile = getInputPath()+"diapalis2_bot.prn";
-        outputFile = getOutputPath()+"diap_out_junit";
-        modelFile = getOutputPath()+getModelFileName("6903");//"diap_1232_MEDATLAS_P011viaP091.xml";
+        dataDir = "6903";
+        dataList = DataListTypeEnum.P011_VIA_P021.toString();
+        conversionDir = E_TypeConversion.ODV_MULTISTATIONS.toString();
         conv =Conversion.ODV;
         odvConv = E_TypeConversion.ODV_MULTISTATIONS;
         datasetRef="FI35200110014";
-        // fichier de reference avec lequel comparer
-        String refFile = getOutputPath()+"diap_out_REFERENCE";
-        
-     boolean  res= shell.main(inputFile, outputFile, modelFile, conv, sortDatas, odvConv, 
+
+        boolean  res= shell.main(getInput(), getOutput(), getModel(), conv, sortDatas, odvConv, 
             datasetRef, cdiSummaryFile, couplingTableUpdate, couplingTablePrefix, batchLogger);
-     
-     Assert.assertTrue(res);
-     Assert.assertTrue(compareFiles(outputFile, refFile));
-     
+
+        Assert.assertTrue(res);
+        Assert.assertTrue(compareFiles(output, getReference()));
+
     }
-    public String getModelFileName(String prefix)
+//  public String getModelFileName(String prefix)
+//  {
+//  return prefix+"_"+conversionDir+"_"+dataList+".xml";
+//  }
+    private String getModel()
     {
-        return prefix+"_"+conversionDir+"_"+dataList+".xml";
+        return getOutputPath()+modelFile;
+    }
+
+    private String getInput()
+    {
+        return  getInputPath()+input;
+    }
+
+    private String getOutput()
+    {
+        return getOutputPath()+output;
+    }
+    private String getReference()
+    {
+        return getOutputPath()+output_REFERENCE;
     }
     public String getOutputPath()
     {
@@ -321,38 +308,38 @@ public class NemoShellTest
     {
         return dataPath+"\\"+dataDir+"\\";
     }
-    
+
     public boolean compareFiles(String output, String refFile){
         BufferedReader bufOut;
         BufferedReader bufRef;
         String outputLine="";
         String refFileLine;
         boolean identical=true;
-       try
-       {
-           bufOut = new BufferedReader(new FileReader(output));
-           bufRef = new BufferedReader(new FileReader(refFile));
-           
-           while( bufOut.ready() && identical)
-           {
-               outputLine = bufOut.readLine();
-               refFileLine = bufRef.readLine();
-               identical= outputLine.equals(refFileLine);
-           }
-           return identical;
-          
-       }
-       catch (FileNotFoundException e)
-       {
-           // TODO Auto-generated catch block
-           e.printStackTrace();
-           return false;
-       }
-       catch (IOException e)
-       {
-           // TODO Auto-generated catch block
-           e.printStackTrace();
-           return false;
-       }
+        try
+        {
+            bufOut = new BufferedReader(new FileReader(output));
+            bufRef = new BufferedReader(new FileReader(refFile));
+
+            while( bufOut.ready() && identical)
+            {
+                outputLine = bufOut.readLine();
+                refFileLine = bufRef.readLine();
+                identical= outputLine.equals(refFileLine);
+            }
+            return identical;
+
+        }
+        catch (FileNotFoundException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        }
+        catch (IOException e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return false;
+        }
     }
 }
