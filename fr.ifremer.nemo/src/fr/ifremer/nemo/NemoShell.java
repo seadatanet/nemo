@@ -150,6 +150,19 @@ public class NemoShell
             int nbLignes = inputDomain.getMedia().getModel().getFileHeader() 
             + Nemo.getInstance().getDomain().getMedia().getShellStationHeaderNumberLines();
             
+			//FAE 7239
+            PropertyModel prefModel = inputDomain.getStation().getModel().getReferenceProperty();
+            if (prefModel.getFragment() != null)
+            {
+               
+                 // FAE 7138 > remplace par >=
+                  if (prefModel.getFragment().getLastLine() >= nbLignes)
+                {
+                    nemo.getDomain().getStation().setSomeInData(true);
+                    prefModel.setInData(true);
+                }
+            }
+            
             for (PropertyModel pModel : inputDomain.getStation().getModel().getProperties())
             {
                 if (pModel.getFragment() != null)

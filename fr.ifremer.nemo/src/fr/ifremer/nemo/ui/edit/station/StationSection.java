@@ -1275,6 +1275,8 @@ public class StationSection extends NemoSection
                 ligne);
         }
         stationModel.setReferenceProperty(propertyModel);
+        // FAE 7239
+        propertyModel.setInData(myForm.stationNumber.isInData());
     }
 
     private void initDataTypeModel(StationModel stationModel)
