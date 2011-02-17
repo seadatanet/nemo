@@ -64,7 +64,7 @@ public class NemoShellTestauto
     public NemoShell shell = new NemoShell();
 
 
-    public String dataRootPath="C:\\test_1_2_32";
+    public String dataRootPath="C:\\tests_nemo";
 
 
     public String inputName="input";
@@ -370,22 +370,9 @@ public class NemoShellTestauto
             testLogger.info("error main");
         }
         
-        
-//        if (res){
-//            testLogger.info("conversion: OK ");
-//        }else{
-//            testLogger.info("!!!!!!!!!!!!conversion: KO <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-//            testLogger.info("");
-//        }
         if (res)
         {
             comp = compareFiles(output, output_REFERENCE);
-//            if (comp){
-//                testLogger.info("comparison: OK ");
-//            }else{
-//                testLogger.info("!!!!!!!!!!!!comparison: KO <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-//                testLogger.info("");
-//            }
         }
         if (!res)
         {
