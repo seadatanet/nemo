@@ -23,13 +23,14 @@ import fr.ifremer.nemo.util.Global.E_MesureType;
  */
 public class DataFormValidator extends FormValidator
 {
-    RulesManager rm ;
-    GroupVerticalParameters verticalParamGroup;
-    ParameterManager myParameterManager;
-   private String p_depthBBed_entryKey=Global.EMPTY_STRING;
-   private String p_depthBSurf_entryKey=Global.EMPTY_STRING;
-   private String p_pressure_entryKey=Global.EMPTY_STRING;
-   private Combo comboDBSBed, comboDBBSurf, comboP ;
+    private RulesManager rm ;
+    private GroupVerticalParameters verticalParamGroup;
+    private ParameterManager myParameterManager;
+    private String p_depthBBed_entryKey=Global.EMPTY_STRING;
+    private String p_depthBSurf_entryKey=Global.EMPTY_STRING;
+    private String p_pressure_entryKey=Global.EMPTY_STRING;
+    private Combo comboDBSBed, comboDBBSurf, comboP ;
+
     public DataFormValidator()
     {
         super();
@@ -127,16 +128,32 @@ public class DataFormValidator extends FormValidator
                     /** data60/data65 profil parametre de reference verticale en premiere position **/
                     boolean verticProfilParamOk;
                     verticProfilParamOk = checkProfilVerticalParameterIsInFirstPosition();
-
-                    /** data70 Si data60 ko => Medatlas impossible
-                 A moins que l'on ait les parametre DEPH, PSAL et TEMP ( FAE 3228 )**/
-
-                    if (!verticProfilParamOk 
-                            && (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas()))
-                    {
-                        verticProfilParamOk = checkDepthAndSalinityAndTemperature();
-                    }
                     ok = ok && verticProfilParamOk;
+                    /** data70/75  Medatlas( FAE 3228/7257 )**/
+
+                    if (ok && Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas())
+                    {
+                        // data70 Si on a PRES dans le tableau, il faut qu'il soit en 1ère position
+                        if( p_pressure_entryKey!=Global.EMPTY_STRING)
+                        {
+                            boolean data70 = getFirstParameterCode().equals(p_pressure_entryKey);
+                            if (!data70)
+                            {
+                                Utils.messageErreurAppend(Messages.ViewLog_70);
+                            }
+                            ok = ok && data70;
+                        }
+                        //data75 Si on a DEPH en 1er, il faut TEMP et PSAL présents
+                        else if (getFirstParameterCode().equals(p_depthBSurf_entryKey))
+                        {
+                            boolean data75 = checkDepthAndSalinityAndTemperature();
+                            if (!data75)
+                            {
+                                Utils.messageErreurAppend(Messages.ViewLog_75);
+                            }
+                            ok = ok && data75;
+                        }
+                    }
                 }
                 else if(Nemo.getInstance().getViewMain().getMyRulesManager().isTrajectory()
                         &&  Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToODV())
@@ -284,6 +301,12 @@ public class DataFormValidator extends FormValidator
         return ok;
     }
     
+    private String getFirstParameterCode()
+    {
+        // recup du premier parametre (on reliut a chaque fois, car le tableau peut être modifie par le user entre 2 validations)
+        TypeData premierType = Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getTypes().get(0);
+        return premierType.getCodeToUse();
+    }
     /**
      * 
      * @return
@@ -313,7 +336,7 @@ public class DataFormValidator extends FormValidator
         ok=isPSAL && isTEMP && isDEPH;
         if (!ok)
         {
-            editConversionForm.setWarningData(Messages.ViewLog_7);
+            editConversionForm.setWarningData(Messages.ViewLog_75);
         }
         return ok;
 
@@ -329,16 +352,14 @@ public class DataFormValidator extends FormValidator
     private boolean checkProfilVerticalParameterIsInFirstPosition()
     {
         boolean checkOk = true;
-        
-        // recup du premier parametre
-        TypeData premierType = Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getTypes().get(0);
-        String firstParameterCode = premierType.getCodeToUse();
+
+
         E_MesureType mesureType=Nemo.getInstance().getViewMain().getMyRulesManager().getMyMesureType();
       
         // cas below sea bed (data65)
         if(mesureType==E_MesureType.BSBED)
         {
-            checkOk = firstParameterCode.equals(p_depthBBed_entryKey);
+            checkOk = getFirstParameterCode().equals(p_depthBBed_entryKey);
             if (!checkOk){
                 Utils.messageErreurAppend(Messages.error_data_firstParam_depthBSBed);
             }
@@ -346,8 +367,8 @@ public class DataFormValidator extends FormValidator
         // cas below sea surface (data60)
         else if(mesureType==E_MesureType.BSSURF)
         {
-            checkOk = firstParameterCode.equals(p_depthBSurf_entryKey)
-            || firstParameterCode.equals(p_pressure_entryKey);
+            checkOk = getFirstParameterCode().equals(p_depthBSurf_entryKey)
+            || getFirstParameterCode().equals(p_pressure_entryKey);
             if (!checkOk){
                 Utils.messageErreurAppend(Messages.error_data_firstParam_depthBSSurfOrPres);
             }

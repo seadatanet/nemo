@@ -504,7 +504,8 @@ public class Messages {
     public static String ViewLog_4;
     public static String ViewLog_5;
     public static String ViewLog_6;
-    public static String ViewLog_7;
+    public static String ViewLog_70;
+    public static String ViewLog_75;
     public static String ViewLog_8;
     public static String Utils_4;
     public static String Utils_5;
