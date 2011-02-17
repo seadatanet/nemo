@@ -2,10 +2,10 @@ For detailed explanation, please see NEMO user manual.
 
 ==MODEL==
 
-1/ Model/Open model : loads a model only if a file or a directory containing data files has previously been opened.
-2/ Model/Save model : creates on the disk a XML-type file corresponding to the values entered in the different steps.
+1/ Model/Open model: loads a model only if a file or a directory containing data files has previously been opened.
+2/ Model/Save model: creates on the disk a XML-type file corresponding to the values entered in the different steps.
     It is functional only once the first 4 steps have been validated.
-3/ Quit : shuts down the application after having been asked to confirm.
+3/ Quit: shuts down the application after having been asked to confirm.
 
 ==COUPLING TABLE==
 
@@ -14,71 +14,67 @@ Coupling file is used by SeaDataNet download manager to make the mapping between
 and the file containing this LOCAL_CDI_ID.
 1/ Coupling Table/Import: to import a coupling file into the coupling table of NEMO.
 2/ Coupling Table/Export: to export the coupling table of NEMO into a coupling file.
-3/ Coupling Table/Edit: to modify the content of the coupling table of NEMO : delete records, insert new records, update existing records.
+3/ Coupling Table/Edit: to modify the content of the coupling table of NEMO: delete records, insert new records, update existing records.
 
 ==OPTIONS==
 
-1/ Options/Settings: define the configuration of NEMO such as default values for several information, web services addresses, Qc flags mapping, ...(see detail explanation in User Manuel)
-2/ Options/Vocabulary update : update NEMO with the last versions of the common vocabulary of SeaDataNet, EDMO.
+1/ Options/Settings: define the configuration of NEMO such as default values for several information, web services addresses, Qc flags mapping... (see detail explanation in User Manuel)
+2/ Options/Vocabulary update: update NEMO with the last versions of the common vocabulary of SeaDataNet, EDMO.
 
 ==FILE==
 
-==Left part of the screen :
+==Left part of the screen:
 1/ First select the type of file you want to process  (Cruise file=one file for all the stations of one cruise, Cruise directory= one file per station, Collection of files grouped by cruise (multi-station files or not), Collection of files not group by cruise (multi-station files or not)
 2/ Then 'Browse' Button  and choose a file or directory.
 3/ If needed, load a model via the model/open menu and by choosing the XML file of the model you want to use for the current dataset.
 4/ If the file contains separators, click on separator and choose the correct separator.
-5/ Select the type of data you are processing : vertical profiles, time-series or trajectories.
-6/ Input the parameters for converting files 
-	- output format : MEDATLAS or ODV (for ODV, choose one file per station or one unique file for all stations)
-	- click on "Sort data within stations by increasing reference parameter" if necessary. 
-	
-==Right part of the screen :
-Once the type of file and the input file or directory is chosen, file description appears on the right of NEMO screen.
- - Validate all steps button : is only available when input file(s) and model have been loaded.
-                               This button allows to validate all the steps of NEMO to go directly to the Conversion step. 
- - Validate Button : One step must be validated before moving to the next one.
- - Reset button : erase all the values of the current step
+5/ Select the type of data you are processing: vertical profiles, time-series or trajectories.
+6/ Select the output format: MEDATLAS or ODV (one file per station or one unique file for all the stations)
+You can click on "Sort data within stations by increasing reference parameter (Pressure or time)" if the measurements are not order by increasing reference parameter in the input file.
 
-4 sections are available : Click on each section and modify the values if necessary
+==Right part of the screen:
+Once the type of file and the input file or directory is chosen, file description appears on the right part of NEMO screen.
+ - Validate all steps button: The "Validate all steps button" is only available  when input file(s) and model have been loaded.
+                               This button allows to validate all the steps of NEMO to go directly to the Convert folder for data conversion. 
+ - Validate Button: One step must be validated before moving to the next one.
+ - Reset button: erase all the values of all the steps.
 
-1/ File header : This field describes the number of lines of the file header. A file header is generally present when it is a multi-station file, 
+4 sections are available: Click on each section and modify the values if necessary
+
+1/ File header: This field describes the number of lines of the file header. A file header is generally present when it is a multi-station file, 
     and that there are some lines at the beginning of the file which are related to all the stations. These lines are not repeated in the file.
     The number of lines of the file header can be input manually or selected in the left part of the screen 
     in the file and then input through the "Set" button.
 
-2/ Station header : This field describes the number of lines or (exclusive) a station header termination record text. 
+2/ Station header: This field describes the number of lines or (exclusive) a station header termination record text. 
     A station header is a set of lines containing information on the station. 
     Theses lines are the lines before the data lines; they are repeated for each station.
-    + The number of lines of the station header must be described.
+    + If the number of lines of the station header is constant for all the stations of the input dataset : it has to be described, either manually or automatically by selecting the lines in the left part of the screen and by using the Set button.
     + For a set of files with variable length of station headers, the text that identifies the end of the station header (station header termination record text) must also be described.
       There may be some lines between this station header termination record and the first data record (number of lines equal to 0 by default). If this number of lines is > 0 it has to be described.
 
-3/ End of station : This field describes the number of lines of the end of a station.
-    These lines are generally present when it is a multi-station file and there are several lines between each station.
+3/ End of station: This field describes the number of lines of the end of a station.
+    These lines are generally present when it is a multi-station file and that there are several lines between each station.
     The data termination indicator (see below) must not be taken into account in this number of lines.
  
 4/ Data termination indicator: This section describes the indicator of the end of a station in a file.
     - For single station file, most of the time the end of file (EOF) is the indicator of end of data, but it may be an empty line at the end of the file or a line with a specific text.
-    - For multiple stations file, NEMO needs a separator between the stations, to be able to know that the station is changing. 
-      This separator can be : 
-        - an empty line 
-        - a set of specific characters located on the first line of the next station.
-        - a set of specific caharcters located after the measurements
-            For example, in a MEDATLAS file, the indicator of end of data is the line starting with "-999.9 99.999". It is not necessary to type all the line; the first significant characters are enough.
+    - For multiple stations file, NEMO needs a separator between the stations, to be able to know that station is changing. This separator can be an empty line or a set of specific characters that may
+      be located on the first line of the next station  (in that case it is necessary to check the corresponding box)
+    For example, in a MEDATLAS file, the indicator of end of data is the line starting with "-999.9 99.999". It is not necessary to type all the line; the first significant characters are enough.
 
-For each of these sections the number of lines or the specific set of characters can be input manually
-or selected in the left part of the screen in the file and then input through the "Set" button.
+    For each of these sections the number of lines or the specific set of characters can be input manually
+    or selected in the left part of the screen in the file and then input through the "Set" button.
 
 ==Bottom part of the screen
 3 tabs are available
-1/ Errors tab : This tab gives information about the validation of the current step.
+1/ Log tab: This tab gives information about the validation of the current step.
     If the information is an error, it is written in red, if not it is written in green
 
-2/ Info tab : This tab gives information on the input file or the input directory,
+2/ Info tab: This tab gives information on the input file or the input directory,
     and also on the used model, if a model has been loaded.
 
-3/ Help tab : displays at each step the corresponding help.
+3/ Help tab: displays at each step the corresponding help.
 
 
 **********
@@ -86,9 +82,9 @@ For detailed explanation, please see NEMO user manual.
 
 ==CRUISE DESCRIPTION==
 
-The information on this screen are necessary for MEDATLAS format.
- - Validate Button : One step must be validated once all information have been input, before moving to the next one.
- - Reset button : Erase all the values of the current step
+The information on this screen is necessary for MEDATLAS format, this step is skipped if the chosen output format is ODV.
+ - Validate Button: One step must be validated once all information has been input, before moving to the next one.
+ - Reset button: Erase all the values of the current step
 
 3 possibilities for fulfilling this step: 
 
@@ -96,14 +92,14 @@ The information on this screen are necessary for MEDATLAS format.
 2/ Ask the web services by clicking on "Server initialisation" (IFREMER only) or 
 3/ Load a XML Cruise Summary Report (CSR) file by clicking on "XML Initialisation".
 
-6 sections are available : Click on each section and modify the values if necessary
+6 sections are available: Click on each section and modify the values if necessary
 
-1/ Reference : cruise reference, cruise name and ship (SeaDataNet List C174).
-2/ Location : Start and end date, Sea area (SeaDataNet List C16)
-3/ Data source : source country (SeaDataNet List C180), laboratory, project and chief scientist 
-4/ Archiving centre : MEDATLAS code of the data archiving center (define in NEMO settings), MEDATLAS code for data availability.
-5/ Type of data : ROSCOP code for data type (SeaDataNet List C77), NEMO needs at list one data type with Sensor = true, the number of the data types must be different from 0.
-6/ Comments : Free text
+1/ Reference: cruise reference, cruise name and ship (SeaDataNet List C174).
+2/ Location: Start and end date, Sea area (SeaDataNet List C16)
+3/ Data source: source country (SeaDataNet List C180), laboratory, project and chief scientist 
+4/ Archiving centre: MEDATLAS code of the data archiving centre (define in NEMO settings), MEDATLAS code for data availability.
+5/ Type of data: ROSCOP code for data type (SeaDataNet List C77)
+6/ Comments: Free text
 
 **********
 For detailed explanation, please see NEMO user manual.
@@ -113,56 +109,56 @@ For detailed explanation, please see NEMO user manual.
 This step is performed to indicate to NEMO where to find the mandatory or important information in the station header(s) of the file(s). 
 This information is changing as it deals with vertical profiles, time series or trajectories. 
 
-==For vertical profiles 12 sections are available : Click on each section and modify the values if necessary
+==For vertical profiles 12 sections are available: Click on each section and modify the values if necessary
 Mandatory fields are: Station number, Data type, Time, Date, Latitude and Longitude. 
 
-1/ Station number : The station number can be incremental starting at a number given by the user or can be in the station header and input in NEMO using the set and test buttons.
+1/ Station number: The station number can be incremental starting at a number given by the user or can be in the station header and input in NEMO using the set and test buttons.
           If station's number is located within the input file(s) filename, use 0 as line number, and give the start and end character in the file name.   
-          Example : File name is xxxxyyyy1234.dat, station number is 1234. Input 0, 9 and 12 in the fields Line, Start and End of Station number section.
+          Example: File name is xxxxyyyy1234.dat, station number is 1234. Input 0, 9 and 12 in the fields Line, Start and End of Station number section.
 
-2/ Data type : It is the ROSCOP code of the instrument (H10 - Ctd for example) used for data collection; it can be selected in the list of data types input during the previous step (cruise description).
-          
-3/ Acquisition history : They are 2 lines for comments about method and/or instrument used for data collection. They can be manually or automatically input using the set button.
+2/ Data type: It is the ROSCOP code of the instrument (H10 - Ctd for example) used for data collection; it is selected in the list of data types input during the previous step (cruise description), or chosen in the proposed list if there is no cruise description step (ODV format).
 
-4/ Comments : Comments about the station can be manually or automatically input. There is no limitation on the number of comment lines.
-          If the comment,automaticcaly input, is spread among several lines which do not have the same length, click on "Variable end of line position".
+3/ Acquisition history: They are 2 lines for comments about method and/or instrument used for data collection. They can be manually or automatically input using the set button.
 
-5/ Surface samples : Same principle as Acquisition history, 2 lines for comments about surface samples if there are some.
+4/ Comments: Comments about the station can be manually or automatically input. There is no limitation on the number of comment lines.
+          If the comment is spread among several lines which do not have the same length, click on "Variable end of line position".
 
-6/ UT/Conversion : This field is to manage non universal time in the input files.
+5/ Surface samples: Same principle as Acquisition history, 2 lines for comments about surface samples if there are some.
+
+6/ UT/Conversion: This field is to manage non universal time in the input files.
           If station time in the input file is TU-5, type 5 (or read by automatic input) in the UT/Conversion field and NEMO will add 5 hours to the input time. If time in the input file is TU+5, type -5 in the field.
-          The default value is zero
+          The default value is set to zero
 
-7/ Time : input the format in which time is provided in the input file and then, select time in the file and press Set and Test.
+7/ Time: input the format in which time is provided in the input file and then, select time in the file and press Set and Test.
           Format is either predefined or can be input by the user within the following :
                hh: hour expressed in 2 digits (hh24 indicates time on 24 hours, 0 to 23)
                mm: minutes expressed in 2 digits (0 to 59)
-               ccc: hundredth in the time expressed in 1 up to 7 digits (example : format hh24.ccc, value = 17.125, time = 17:07:30.000)
+               ccc: hundredth in the time expressed in 1 up to 7 digits (example: format hh24.ccc, value = 17.125, time = 17:07:30.000)
                ss: seconds expressed in 2 digits (0 59)
-               ttttt: seconds expressed in 1 up to 5 digits (for hour given in seconds, example : format tttt, value=3610, time = 01:00:10.00)
+               ttttt: seconds expressed in 1 up to 5 digits (for hour given in seconds, example: format tttt, value=3610, time = 01:00:10.00)
                PM: allows NEMO to read PM and AM time
 	       D.dddddd: chronological Julian time (used in ODV format)
-                   example : Chronological Julian date = 2454972.09687, 
+                   example: Chronological Julian date = 2454972.09687, 
                              For DATE, read 2454972.0 - format DDDDDDD.d
                              For TIME read  2.09687   - format D.ddddd
           Time may be unknown for some stations of vertical profiles and in that case a default value must be specified, user has to click on Default value and to input this value in the corresponding field.
 
 
-8/ Date : input the format in which time is provided in the input file and then, select time in the file and press Set and Test.
-          Format is either predefined or can be input by the user within the following :
+8/ Date: input the format in which time is provided in the input file and then, select date in the file and press Set and Test.
+          Format is either predefined but can be input by the user within the following :
                YY or YYYY: year expressed in 2 or 4 digits
                MM: month expressed in 2 digits (1 to 12)
                MMM: month expressed in 3 alphabetic characters (JAN,FEB,MAR,APR,MAY,JUN,JUL,AGU,SEP,OCT,NOV,DEC)
                DD: day in the month expressed in 2 digits
 	       	   DDDDDDD.d: chronological Julian day (used in ODV format, for example)
-                       example : Chronological Julian date = 2454972.09687, 
+                       example: Chronological Julian date = 2454972.09687, 
                                For DATE, read 2454972.0 - format DDDDDDD.d
                                For TIME read  2.09687   - format D.ddddd
 
-9-10/ Latitude and Longitude : input the format in which Latitude is provided in the input file and then, select time in the file and press Set and Test.
+9-10/ Latitude and Longitude: input the format in which Latitude is provided in the input file and then, select latitude or longitude in the file and press Set and Test.
           Format is either predefined or can be input by the user within the following:
-               N: Input values have to equal N or S in the case of latitudes and W or E in the case of longitudes
-               +: Input values have to equal ' ' or '+' to express N in the case of latitudes, E in the case of longitudes
+               N: expresses the hemisphere. Input values have to equal N or S in the case of latitudes and W or E in the case of longitudes
+               +: expresses the hemisphere. Input values have to equal ' ' or '+' to express N in the case of latitudes, E in the case of longitudes
                     and '-' to express S in the case of latitudes, W in the case of longitudes
                DDD or DD or D: Degrees (0 to 90 for latitude, 0 to 180 for longitude)
                DDD.ddd or DD.ddd: Degrees in decimal values. The maximum number of D must be 3 in the case of longitudes and 2 in the case of latitudes
@@ -173,12 +169,12 @@ Mandatory fields are: Station number, Data type, Time, Date, Latitude and Longit
 
                Click on "variable end of line position" if all latitudes and longitudes do not end or start at the same character in every station (this often happens with not significant zero values, see examples in NEMO's user manual).
 
-11/ Bottom Depth :  Bottom depth of stations, must be given in meter in the input file. This field can be input manually or automatically.
+11/ Bottom Depth:  Bottom depth of stations, must be given in meter in the input file. This field can be input manually or automatically.
              Click on "Variable end of line position or variable start position" if all bottom depths do not end or start at the same character in every station (this often happens with not significant zero values)
-	     Some files may contain default values if bottom depth is not measured (-999, for example). To described this value click default value and enter the corresponding value in the text field.
+	     Some files could contain default values if bottom depth is not measured (-999, for example). To describe this value click default value and enter the corresponding value in the text field.
 
 
-12/ QC flags : quality flags on station header information that could exists in the input file.
+12/ QC flags: quality flags on station header information that could exists in the input file.
                Header QC flags are only used in MEDATLAS format, they concerns Date/Time, Latitude, Longitude and Bottom depth.
 
 ==For time-series 6 more sections are available :
@@ -188,25 +184,25 @@ Mandatory fields are: Station number, Data type, Time, Date, Latitude, Longitude
           By default, if not input, the values will be the same than "Latitude" and "Longitude" which are the position at the start time of the time series.
           Input in these fields is the same than for "Latitude" and "Longitude" described for vertical profiles.
 
-15/ End Bottom Depth : Bottom depth at the end time of time series.
-          By default, if not input, the value will be the same than Depth which is as the bottom depth at the start time of the time series.
-          Input in this field is the same than for "Depth" described for vertical profiles.
+15/ End Bottom Depth: Bottom depth at the end time of time series.
+          By default, if not input, the value will be the same than "Bottom depth" which is as the bottom depth at the start time of the time series.
+          Input in this field is the same than for "Bottom depth" described for vertical profiles.
 
-16/ Sensor Depth : Depth of the sensor measuring time series. Given in meter in the input file. This field can be input manually or automatically.
+16/ Sensor Depth: Depth of the sensor measuring time series. Given in meter in the input file. This field can be input manually or automatically.
 
-17/ Magnetic declination : Magnetic declination at the location of the time series, useful for current meters.
+17/ Magnetic declination: Magnetic declination at the location of the time series, useful for current meters.
           It is a signed integer:  W007 declination must be input as -7 and E005 as +5 or 5.
           This field can be input manually or automatically.
 
-18/ Sampling rate : Sampling rate of the sensors. This field can be input manually, or automatically. 
+18/ Sampling rate: Sampling rate of the sensors. This field can be input manually, or automatically. 
           NEMO will calculate it automatically if time and date are selected in the first line of measurements. 
           The unit of the sampling rate is Second. If it is not given in second in the input file, it must be converted by using the field "Conversion formula" 
-          (example : if the sampling rate is given in Hour in the input file, input *3600 in the formula).
+          (example: if the sampling rate is given in Hour in the input file, input *3600 in the formula).
 
-== For trajectories : 14 sections are available already described for Vertical profiles and Time-series.
+== For trajectories: 14 sections are available already described for Vertical profiles and Time-series.
 Mandatory fields are: Station number, Data type, Time, Date, Latitude and Longitude. 
 
-    Station number : In ODV, a trajectory is considered as a series of stations with one point of measurement 
+    Station number: In ODV, a trajectory is considered as a series of stations with one point of measurement 
           at each station, but the LOCAL_CDI_ID is the same for all the stations. 
           In MEDATLAS a trajectory is only one station within which latitude and longitude are considered as measured parameters. 
           The station number cannot be incremental.
@@ -220,14 +216,38 @@ This step is performed to indicate NEMO where to find the data measurements in i
 This information concern the name and unit of the measured parameters, their default values (found in the input file 
 when the parameter is not measured), and the format in which the parameter will be kept in the output file.
 
-- For vertical profiles, Pressure or Depth is a mandatory parameter; 
-   if MEDATLAS conversion is required and P091 choosed as parameter set, PRES is input by default when entering the step.
 
-- For time series, date and time of measurements will be automatically put in output files,
-   they do not need to be described in the measurement description.
++ First step is to choose the parameters list to use: P091, P011viaP091 or P011viaP021 If output format MEDATLAS has been selected, P011 via P021 can not be chosen.
++ Then choose the measure type: below sea surface or below sea bed.
++ Then fulfil the parameter table
 
-- For trajectories date, time, latitude, longitude and bottom depth (if existing) of measurements 
-   will be automatically put in output files, they do not need to be described in the measurement description.
+  - For vertical profiles :
+    MEDATLAS format (Parameter list P091, or P011 via P091), in the water column :
+       PRES is a mandatory parameter. It is set, by default, in the parameter table; it can be deleted from the table only if DEPH, TEMP and PSAL are in the table.
+       In that case, pressure will be calculated by NEMO and added in the output MEDATLAS file to be compliant with MEDATLAS requirements.
+       PRES or DEPH must be in first position in the parameter table.
+  
+    MEDATLAS format (Parameter list P091, or P011 via P091), in the sediment :
+       DPSF (Depth below sea floor) must be in first position in the parameter table.
+  
+    ODV format (all parameter lists),in the water column:
+       Pressure or depth are mandatory regardless of the list of parameters chosen.
+       Depth is a mandatory parameter in ODV and will be calculated from the pressure if it is not included in the parameter table.  
+       
+    ODV format (all parameter lists), in the sediment:
+       Depth below sea bed is mandatory : DPSF if P091, COREDIST if P011 via P091 or P011 via P021
+
+  - For time series, date and time of measurements will be automatically put in output files,
+    they do not need to be described in the measurement description.
+
+  - For trajectories date, time, latitude, longitude and bottom depth (if existing) of measurements 
+    will be automatically put in output files, they do not need to be described in the measurement description.
+   
++ Final step is to input the vertical references (in the right hand side of the screen): This step is needed to control the user input: existence of mandatory parameters, their position in the list, it also
+  identify the parameters that will be used by NEMO for automatic additions of calculated parameters (see user manual).
+    The parameters list in these fields are filled from the parameters added in the table.
+    If P091 or P011viaP091 is used, the vertical reference fields will be automatically selected when click on the "Validate step" button (.
+    If P011viaP021 is used, you will have to select manually the vertical reference.
 
 ==Right click on the table of measured parameters to open the Menu with the following items :
 =============================================================================================
@@ -236,27 +256,24 @@ when the parameter is not measured), and the format in which the parameter will 
    The value of the parameter has to be highlighted on the first data line before using this menu.
 
 - Update test:
-   To insert the value in the test fields including : "Test" (for the measured parameters), "Test (input)" 
+   To insert the value in the test fields including: "Test" (for the measured parameters), "Test (input)" 
    for the value of the quality flag read in the input file and "Test (output)" for the value of the quality flag 
    in the output file. 
  
 - Parameter list:
-   To add a new parameter in the table of measured parameters.
-   + If default parameter list is P091 in NEMO settings
-       The selected parameter is added in the table, with some values filled by default; all these default values can be modified. The default and the format values linked to the parameter are downloaded in the P091 parameters list of NEMO Web service
-   + If default parameter list is P011 via P091 in NEMO settings
-       First select a parameter in P091 proposed list then
-       Another window with the corresponding P011 codes opens
-       Then you have to select the P011 parameter in the list (use filter to find a specific parameter) 
-       The selected parameter is added in the table, with some values filled by default; all these default values can be modified. The default and the format values linked to the parameter are downloaded in the P091 parameters list of NEMO Web service
-   + If default parameter list is P011 via P021 in NEMO settings
-       First select a parameter in P021 proposed list then
-       Another window with the corresponding P011 codes opens
-       Then you have to select the P011 parameter in the list (use filter to find a specific parameter) 
-       The selected parameter is added in the table with no default value : user have to input the unit, the format and de default output value of the parameter.
-
-- Select a P061 unit
-   Used top defined the unit of the parameter if default parameter list is P011 via P021 in NEMO settings
+   To add a new parameter in the table of measured parameters. 
+   + If chosen parameter list is P091
+       The selected parameter in P091 list is added in the table, with some values filled by default; all these default values can be modified. 
+   +If chosen parameter list is P011 via P091
+       A first window with P091 codes opens, then when a P091 code is selected, another window with the corresponding P011 opens
+       You have to select the P011 parameter in the list, it is then  added in the table, with some values filled by default; all these default values can be modified.
+   +If chosen parameter list is P011 via P021
+       A first window with P021 codes opens, then when a P021 code is selected, another window with the corresponding P011 opens
+      You have to select the P011 parameter in the list, it is then  added in the table, with no default values.
+      
+- Select a P061 unit:
+   To select the unit of the parameter in P061 list.
+   This choice is only available if P011 via P021 list of parameters is used.
 
 - Move current parameter up:
    To move up a parameter in the table of measured parameters.
@@ -278,37 +295,37 @@ when the parameter is not measured), and the format in which the parameter will 
    To delete the quality flag information of the selected parameter.
    
 - Delete all parameters:
-   to delete all the parametrs of the table at once.
+   To delete all the parameters from the table of measured parameters.
 
 ==The table of measured parameters contains the following columns :
 ===================================================================
-- Code : MEDATLAS (P091) or P011 code of the parameter
+- Code: MEDATLAS code of the parameter
 
-- Unit : MEDATLAS or P061 Unit of the parameter
+- Unit: MEDATLAS Unit of the parameter
 
-- Conversion : to input a conversion formula which should be like x*1000+3; with x the value read in the input file(s).
+- Conversion: to input a conversion formula which should be like x*1000+3; with x the value read in the input file(s).
 
-- Test : This field displays the value as it will be written in the output file.
+- Test: This field displays the value as it will be written in the output file.
      To input value in this field, right click in the table and choose "Update test" in the menu;
      the start and end fields must have been input before.
 
-- Start - End : These fields indicate the start character and the end character of the parameter in the data line.
+- Start - End: These fields indicate the start character and the end character of the parameter in the data line.
      To input the values in these fields, you have to select the measured parameter value on the first line of measurement, then right click in the table and choose "Set start/end".
 
-- Format : This field describes the output format (in the output file) of the measured parameter.
-     Examples of valid format : %3d for 150, %+4d for +150 or -150, %6.3f for 12.124, %+7.5f for +1.12345 or -1.12345
+- Format: This field describes the output format (in the output file) of the measured parameter.
+     Examples of valid format: %3d for 150, %+4d for +150 or -150, %6.3f for 12.124, %+7.5f for +1.12345 or -1.12345
 
-- Input def. value : This field describes the values found in the input file where the parameter is not measured.
+- Input def. value: This field describes the values found in the input file where the parameter is not measured.
      This input value can be any type of characters (number, alphabetic). If the value is empty (like in ODV for example), let this field empty too.
 
-- Output def. value : This field describes the values written in the output file where the parameter is not measured.
+- Output def. value: This field describes the values written in the output file where the parameter is not measured.
      For MEDATLAS, the output value must be a number (a suite of '9') at the same format than the measured parameters described in the format column.
 
-- Test (input) : This field displays the value of the QC flag in the input file.
+- Test (input): This field displays the value of the QC flag in the input file.
       To input value in this field, right click in the table and choose "Update test" in the menu; 
  
 
-- Test (Output) : This field displays the value of the corresponding QC flag that will be written in the output file.
+- Test (Output): This field displays the value of the corresponding QC flag that will be written in the output file.
      
      To input value in these 2 last fields, right click in the table and choose "Update test" in the menu; 
      the start (flag) and end (flag) fields must have been input before.
@@ -323,14 +340,18 @@ when the parameter is not measured), and the format in which the parameter will 
 Last step of NEMO; once the description of the input file(s) is completed, it is possible to run the conversion either to ODV or to MEDATLAS format.
 
 This conversion step generates:
-- output file(s) at the requested format
+- output file(s) at the needed format
 - If "Generate SeaDataNet CDI summary" is clicked in NEMO settings, a CDI summary file will be created 
   while NEMO is converting the input file(s). It is a Coma Separated Values (CSV) file that can be converted
   to an Excel file directly usable by Mikado to generate a CDI XML export, corresponding to the stations that
   are converted to ODV or MEDATLAS format. 
 - If "Generate mapping for SeaDataNet download manager" is clicked in NEMO settings, mapping information
   (for all the stations that are converted to ODV or MEDATLAS format) are inserted in the local database of NEMO.
- 
+
 Conversion is divided in two steps:
 1-file conversion into memory: you still can cancel all the conversion process!
 2-file writing on disk: you can't cancel the conversion process while this step is running!
+
+A summary of the user choices is written in NEMO main screen.
+At the end of the file conversion, a green message indicates that conversion is OK.
+The corresponding batch command is given in the log window, it can be copied (removing line feeds) to be used in a batch file.
