@@ -115,6 +115,11 @@ public class DataFormValidator extends FormValidator
            ok= ok && detectVerticalParameters();
             if (ok)
             {
+                /**
+                 * *****************************************************
+                 * tests sur params (cf. tableau excel doc technique)
+                 * *****************************************************
+                 */
                 editConversionForm.setWarningData(Global.EMPTY_STRING);
 
                 if (Nemo.getInstance().getViewMain().getMyRulesManager().isProfile() )
@@ -133,13 +138,20 @@ public class DataFormValidator extends FormValidator
                     }
                     ok = ok && verticProfilParamOk;
                 }
-                else if(Nemo.getInstance().getViewMain().getMyRulesManager().isTrajectory())
+                else if(Nemo.getInstance().getViewMain().getMyRulesManager().isTrajectory()
+                        &&  Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToODV())
                 {
                     /** data80/data85 traj parametre de reference verticale en premiere position **/
                     boolean verticTrajParamOk;
                     verticTrajParamOk = checkTrajectoryVerticalParameterIsInFirstPosition();
                     ok = ok && verticTrajParamOk;
                 }
+                
+                /**
+                 * *****************************************************
+                 * fin tests sur params
+                 * *****************************************************
+                 */
             }
         }
         
