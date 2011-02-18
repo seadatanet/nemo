@@ -4,8 +4,8 @@
   <nautilusWsURL>http://www.ifremer.fr/WSnautilus/services/NAUTILUS</nautilusWsURL>
   <showRule>true</showRule>
   <contact></contact>
-  <modelsDirectory>C:\test_1_2_32</modelsDirectory>
-  <cruisesDirectory>C:\test_1_2_32</cruisesDirectory>
+  <modelsDirectory></modelsDirectory>
+  <cruisesDirectory></cruisesDirectory>
   <outputDirectory></outputDirectory>
   <writeCdi>false</writeCdi>
   <idEdmoRespCdi>486</idEdmoRespCdi>
