@@ -17,7 +17,7 @@
   <accesDonnees>LS</accesDonnees>
   <typePlateforme></typePlateforme>
   <writeMapping>false</writeMapping>
-  <fichierMapping>couplingTest.txt</fichierMapping>
+  <fichierMapping>coupling.txt</fichierMapping>
   <dateISO>true</dateISO>
   <defaultConvertType>UNKNOWN</defaultConvertType>
   <proxy use="false" address="" port="" login="" password=""/>
