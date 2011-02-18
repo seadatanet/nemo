@@ -28,6 +28,7 @@ import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
@@ -186,10 +187,23 @@ public class CDIResumeWriter
                         // EDMO Custodian
                         writer.write(sep + config.getIdEdmoRespDonnees());
 
-                        // PDV code
-                        //6542
-                        String pdvCode =param.getParameter().getCodeToUse();
-                        
+                        // PDV code: le code P021 du parametre (FAE 7308)
+                        String pdvCode="";
+                        // si on est deja en P021, on met directement le code P021
+                        if (iDomain.getData().getModel().getDataListType()==DataListTypeEnum.P011_VIA_P021)
+                        {
+                            pdvCode = param.getParameter().getCode();
+                        }
+                        else
+                        {
+                            // si on est en P091 ou P011viaP091, on map code P091 -> P021
+                            // 6542
+                        pdvCode =
+                            fr.ifremer.nemo.util.Utils.extraitCodeURN(NemoLists.getVocabMatch(
+                                Intern.mapping_subject, Intern.list_BODCpdv,
+                                param.getParameter().getCode(), 
+                                Intern.NemoLists_unknown));
+                        }
                         writer.write(sep + pdvCode + Global.EMPTY_STRING);
 
                         // Platform Type
