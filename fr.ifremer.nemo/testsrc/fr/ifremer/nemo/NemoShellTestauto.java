@@ -45,11 +45,12 @@ import fr.ifremer.nemo.util.Global.E_TypeConversion;
  * - xxx est un nom representant le type de données (ex: diapalis,...) - choix libre
  * - yyy est un nom quelconque, nb de char quelconque
  * 
- * pur xxx: si le repertoire commence par "_", il est ignoré
+ * pour xxx: si le repertoire commence par "_", il est ignoré
  * pour tyyy: si ce répertoire commence par "t", il est considéré comme un test. S'il commence par "_", il est considéré comme un test désactivé.
  * S'il commence par un autre caractère, il est ignoré.
  * 
- * 
+ * Pour ne lancer les tests que sur un répertoire, utiliser testDirAlone
+ * ex: public static String[] testDirAlone={"cruiseFile_trajectory_6959"}; ne lancera les tests que sur cruiseFile_trajectory_6959
  * 
  * utiliser 
  *  - EDMO code = 486
@@ -61,28 +62,42 @@ import fr.ifremer.nemo.util.Global.E_TypeConversion;
  */
 public class NemoShellTestauto
 {
-    public NemoShell shell = new NemoShell();
-
-
+    
     public String dataRootPath="C:\\tests_nemo";
 
+    
+    // générer les fichiers en batch et les comparer aux fichiers REFERENCE
+    boolean testBatchs=true;
+    // comparer les fichiers manuels (output_eclipse) aux fichiers REFERENCE
+    boolean compareManualFiles=true;
+    
+    
+    public static String[] testDirAlone={};
+//   public static String[] testDirAlone={"carotte_sed"};
+//  public static String[] testDirAlone={"smatch_timeseries"}; 
+//  public static String[] testDirAlone={"cruiseDir_profile_diap"}; 
+//    public static String[] testDirAlone={"cruiseFile_profile_diap"};
+//  public static String[] testDirAlone={"michele_tsg_trajectory"}; 
+//  public static String[] testDirAlone={"cruiseDir_profile_diap_avec stHeaderDiffDansFichiersInput"}; 
+//  public static String[] testDirAlone={"cruiseFile_trajectory_6959"}; 
+//  public static String[] testDirAlone={"microdyn"}; 
 
     public String inputName="input";
     public String outputName="output_junit";
+    public String outputManualName="output_michele";
     public String modelName="model.xml";
     public String outputReferenceName= "output_REFERENCE";
 
+    public NemoShell shell = new NemoShell();
 
+//    public String inputAbsolutePath;
+//    public String outputAbsolutePath;
 
-    public String inputAbsolutePath;
-    public String outputAbsolutePath;
-
-    String currentDataList;
 
     public boolean sortDatas=false;
 
-    public Conversion conv=Conversion.MEDATLAS;
-    public E_TypeConversion odvConv= E_TypeConversion.MEDATLAS;
+//    public Conversion conv=Conversion.MEDATLAS;
+//    public E_TypeConversion odvConv= E_TypeConversion.MEDATLAS;
 
     public String datasetRef=Global.EMPTY_STRING;
     public String cdiSummaryFile=Global.EMPTY_STRING;
@@ -95,16 +110,7 @@ public class NemoShellTestauto
     public static int nbTotalFailed=0;
     public static int nbTotalSuccess=0;
 
-    // repertoires sous la racine a exclure des tests
-//    public static String[] testDirExluded={"_structType", "_results","_michele"};
-    // repertoire a tester (si vide, on teste tous sauf testDirExluded)
-    public static String[] testDirAlone={};
-//     public static String[] testDirAlone={"carotte_sed"};
-//    public static String[] testDirAlone={"smatch_timeseries"}; 
-//    public static String[] testDirAlone={"cruiseDir_profile_diap"}; 
-//    public static String[] testDirAlone={"michele_tsg_trajectory"}; 
-//    public static String[] testDirAlone={"cruiseDir_profile_diap_avec stHeaderDiffDansFichiersInput"}; 
-//    public static String[] testDirAlone={"cruiseFile_trajectory_6959"}; 
+
     /**
      * @throws java.lang.Exception
      */
@@ -126,9 +132,18 @@ public class NemoShellTestauto
          String dat = dateFormat.format(actuelle);
          
          testLogger.info(" ");
-         testLogger.info("================================================================");
-        testLogger.info("====================================="+dat+"=====================================");
-        testLogger.info("================================================================");
+         testLogger.info(" ");
+         testLogger.info(" ");
+         testLogger.info(" ");
+         testLogger.info(" ");
+         testLogger.info("================================================================================");
+         testLogger.info("================================================================================");
+         testLogger.info("================================================================================");
+         testLogger.info("================================================================================");
+         testLogger.info("================================================================================");
+         testLogger.info("================================================================================");
+        testLogger.info("===================================== "+dat+" =========================");
+        testLogger.info("================================================================================");
     }
 
     /**
@@ -138,7 +153,7 @@ public class NemoShellTestauto
     public static void tearDownAfterClass() throws Exception
     {
         
-        testLogger.info("=====================================================================================");
+        testLogger.info("TOTAL =====================================================================================");
         testLogger.info(nbTotalSuccess+ " tests succeed on " + nbTotalTests);
         testLogger.info(nbTotalFailed + " tests failed");
     }
@@ -150,8 +165,6 @@ public class NemoShellTestauto
     public void setUp() throws Exception
     {
 
-        conv=Conversion.MEDATLAS;
-        odvConv= E_TypeConversion.MEDATLAS;
         sortDatas=false;
         datasetRef=Global.EMPTY_STRING;
         cdiSummaryFile=Global.EMPTY_STRING;
@@ -174,25 +187,25 @@ public class NemoShellTestauto
     @Test
     public final void test_P091_Medatlas()
     {
-        decoA();
-        testLogger.info("________________________________________________________");
-        decoP();
-        currentDataList = DataListTypeEnum.P091.toString();
-        conv = Conversion.MEDATLAS;
-        odvConv= E_TypeConversion.MEDATLAS;
-        boolean res = testOneType();
+        decoA_______________();
+        testLogger.info("___________________________test_P091_Medatlas_____________________________");
+        decoP_______________();
+        boolean res = testOneType_ListConv(
+            DataListTypeEnum.P091, 
+            Conversion.MEDATLAS, 
+            E_TypeConversion.MEDATLAS);
         Assert.assertTrue(res);
     }
     @Test
     public final void test_P011viaP091_Medatlas()
     {
-        decoA();
-        testLogger.info("________________________________________________________");
-        decoP();
-        currentDataList = DataListTypeEnum.P011_VIA_P091.toString();
-        conv = Conversion.MEDATLAS;
-        odvConv= E_TypeConversion.MEDATLAS;
-        Assert.assertTrue(testOneType());
+        decoA_______________();
+        testLogger.info("___________________________test_P011viaP091_Medatlas_____________________________");
+        decoP_______________();
+        Assert.assertTrue(testOneType_ListConv(
+            DataListTypeEnum.P011_VIA_P091, 
+            Conversion.MEDATLAS, 
+            E_TypeConversion.MEDATLAS));
     }
     
     /**
@@ -203,47 +216,50 @@ public class NemoShellTestauto
     @Test
     public final void test_P091_ODVMULTI()
     {
-        decoA();
-        testLogger.info("________________________________________________________");
-        decoP();
-        currentDataList = DataListTypeEnum.P091.toString();
-        conv = Conversion.ODV;
-        odvConv= E_TypeConversion.ODV_MULTISTATIONS;
-        Assert.assertTrue(testOneType());
+        decoA_______________();
+        testLogger.info("____________________________test_P091_ODVMULTI____________________________");
+        decoP_______________();
+        Assert.assertTrue(testOneType_ListConv(
+            DataListTypeEnum.P091, 
+            Conversion.ODV, 
+            E_TypeConversion.ODV_MULTISTATIONS));
     }
     @Test
     public final void test_P011viaP091_ODVMULTI()
     {
-        decoA();
-        testLogger.info("________________________________________________________");
-        decoP();
-        currentDataList = DataListTypeEnum.P011_VIA_P091.toString();
-        conv = Conversion.ODV;
-        odvConv= E_TypeConversion.ODV_MULTISTATIONS;
-        Assert.assertTrue(testOneType());
+        decoA_______________();
+        testLogger.info("____________________________test_P011viaP091_ODVMULTI____________________________");
+        decoP_______________();
+        Assert.assertTrue(testOneType_ListConv(
+            DataListTypeEnum.P011_VIA_P091, 
+            Conversion.ODV, 
+            E_TypeConversion.ODV_MULTISTATIONS));
     }
     @Test
     public final void test_P011viaP021_ODVMULTI()
     {
-        decoA();
-        testLogger.info("________________________________________________________");
-        decoP();
-
-        currentDataList = DataListTypeEnum.P011_VIA_P021.toString();
-        conv = Conversion.ODV;
-        odvConv= E_TypeConversion.ODV_MULTISTATIONS;
-        Assert.assertTrue(testOneType());
+        decoA_______________();
+        testLogger.info("___________________________test_P011viaP021_ODVMULTI_____________________________");
+        decoP_______________();
+        Assert.assertTrue(testOneType_ListConv(
+            DataListTypeEnum.P011_VIA_P021,
+            Conversion.ODV,
+            E_TypeConversion.ODV_MULTISTATIONS));
     }
-    private void decoA()
+    private void decoA_______________()
     {
+        testLogger.info("");
         testLogger.info("");
         testLogger.info("*******************************************************");
         testLogger.info("");
+        testLogger.info("");
     }
-    private void decoP()
+    private void decoP_______________()
     {
         testLogger.info("");
+        testLogger.info("");
         testLogger.info("*******************************************************");
+        testLogger.info("");
         testLogger.info("");
     }
     /**
@@ -251,10 +267,12 @@ public class NemoShellTestauto
      * methodes
      * =================================================================
      */
-    public boolean testOneType()
+    public boolean testOneType_ListConv(DataListTypeEnum dataList, Conversion conversion, E_TypeConversion odvConv)
     {
+        
         boolean ok=true;
         boolean res ;
+        boolean comp=false;
         int cptTests=0;
         int cptFail=0;
         boolean testFound;
@@ -263,12 +281,13 @@ public class NemoShellTestauto
         {
             if (isToTest(testDir.getName()))
             {
+                testLogger.info("");
                 testLogger.info("[______________ "+testDir.getName()+"_____________]");
                 testFound=false;
 
                 for (File paramListDir : testDir.listFiles())
                 {
-                    if (paramListDir.getName().equals(currentDataList))
+                    if (paramListDir.getName().equals(dataList.toString()))
                     {
 
                         for (File convDir : paramListDir.listFiles())
@@ -279,21 +298,49 @@ public class NemoShellTestauto
                                 {
                                     if (unitTest.getName().startsWith("t") )
                                     {
+                                        res=false;
+                                        comp=false;
                                         testLogger.info("- "+paramListDir.getName()+" "+convDir.getName()+" "+unitTest.getName());
-                                        inputAbsolutePath = testDir.getAbsolutePath()+"\\"+inputName;
-                                        outputAbsolutePath=unitTest.getAbsolutePath();
+                                        String inputAbsolutePath = testDir.getAbsolutePath()+"\\"+inputName;
+                                        String outputAbsolutePath=unitTest.getAbsolutePath();
                                         cptTests++;
                                         nbTotalTests++;
                                         testFound=true;
-                                        res=conv();
-                                        if (!res)
+
+                                        if (testBatchs)
                                         {
-                                            cptFail++;
-                                            nbTotalFailed++;
-                                        }else{
-                                            nbTotalSuccess++;
+                                            res=convertWithNemoBatch(conversion, odvConv, inputAbsolutePath, outputAbsolutePath);
+
+                                            if (res)
+                                            {
+                                                nbTotalSuccess++;
+                                                comp = compareWithReference(outputAbsolutePath, outputName);
+                                            }
+                                            if (!res)
+                                            {
+                                                cptFail++;
+                                                nbTotalFailed++;
+                                                testLogger.error("!!!!!!!!!!!!conversion: KO <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+                                            }
+                                            else if (res && comp)
+                                            {
+                                                testLogger.info(" OK ");
+                                            }
+                                            else if (res && !comp)
+                                            {
+                                                testLogger.error("!!!!!!!!!!!!comparison: KO <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+                                            }
+
+                                            ok= res && ok;
                                         }
-                                        ok= res && ok;
+
+                                        if (compareManualFiles)
+                                        {
+                                            testLogger.info("comp manual");
+                                            comp= compareWithReference(outputAbsolutePath, outputManualName);
+                                           ok= comp && ok;
+                                        }
+
                                     }else if(unitTest.getName().startsWith("_t"))
                                     {
                                         testLogger.info("- "+paramListDir.getName()+" "+convDir.getName()+" "+unitTest.getName());
@@ -344,77 +391,89 @@ public class NemoShellTestauto
         }
         return res;
     }
-    public boolean conv()
+    public boolean convertWithNemoBatch(Conversion conversion, E_TypeConversion odvConv, String inputAbsolutePath,String outputAbsolutePath)
     {
         boolean res = false;
-        boolean comp = false;
-        String input = inputAbsolutePath;
         String output = outputAbsolutePath+"\\"+outputName;
-        String output_REFERENCE= outputAbsolutePath+"\\"+outputReferenceName;
         String model = outputAbsolutePath+"\\"+modelName;
-//      testLogger.info(input);
-//      testLogger.info(output);
-//      testLogger.info(model);
-//      testLogger.info(conv);
-//      testLogger.info(odvConv);
-        Nemo.getInstance().setBatchMode(true);
-        try{
-            res= shell.main(
-                input,
-                output,
-                model,
-                conv, sortDatas, odvConv, 
-                datasetRef, cdiSummaryFile, couplingTableUpdate, couplingTablePrefix, batchLogger);
-        }catch(Exception e)
+
+        File mod=new File(model);
+        if (!mod.exists())
         {
-            testLogger.info("error main");
+            testLogger.error("!!!!!!!!!!!!model not found");
+        }else{
+            Nemo.getInstance().setBatchMode(true);
+            try{
+                res= shell.main(
+                    inputAbsolutePath,
+                    output,
+                    model,
+                    conversion, 
+                    sortDatas, 
+                    odvConv, 
+                    datasetRef, cdiSummaryFile, couplingTableUpdate, couplingTablePrefix, batchLogger);
+            }catch(Exception e)
+            {
+                testLogger.info("error main");
+            }
+
         }
+        return res ;
+    }
+    
+    public boolean compareWithReference( String outputAbsolutePath, String outputTestName)
+    {
+        boolean comp = false;
         
-        if (res)
+        comp = compare_____TwoFiles(outputAbsolutePath, outputTestName, outputReferenceName);
+            
+         if (!comp)
         {
-            comp = compareFiles(output, output_REFERENCE);
+            testLogger.error("!!!!!!!!!!!!comparison: KO "+outputTestName+"<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         }
-        if (!res)
-        {
-            testLogger.error("!!!!!!!!!!!!conversion: KO <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-        }
-        else if (res && comp)
-        {
-            testLogger.info(" OK ");
-        }
-        else if (res && !comp)
-        {
-            testLogger.error("!!!!!!!!!!!!comparison: KO <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
-        }
-        return res && comp;
+         return comp;
     }
 
-
-    public boolean compareFiles(String output, String refFile){
-        BufferedReader bufOut;
-        BufferedReader bufRef;
+    public boolean compare_____TwoFiles(String outputAbsolutePath, String fileA, String fileB){
+        
+        BufferedReader bufOut = null;
+        BufferedReader bufRef = null;
         String outputLine="";
         String refFileLine;
+        String outputTest = outputAbsolutePath+"\\"+fileA;
+        String output_REFERENCE= outputAbsolutePath+"\\"+fileB;
         boolean identical=true;
+
         try
         {
-            bufOut = new BufferedReader(new FileReader(output));
-            bufRef = new BufferedReader(new FileReader(refFile));
+            bufOut = new BufferedReader(new FileReader(outputTest));
+        }
+        catch (FileNotFoundException e1)
+        {
+            testLogger.error(fileA+" file not found");
+        }
+        try
+        {
+            bufRef = new BufferedReader(new FileReader(output_REFERENCE));
+        }
+        catch (FileNotFoundException e1)
+        {
+            testLogger.error(fileB+" file not found");
+        }
 
-            while( bufOut.ready() && identical)
-            {
-                outputLine = bufOut.readLine();
-                refFileLine = bufRef.readLine();
-                identical= outputLine.equals(refFileLine);
+
+        try
+        {
+            if (bufOut!=null && bufRef!=null){
+                while( bufOut.ready() && identical)
+                {
+                    outputLine = bufOut.readLine();
+                    refFileLine = bufRef.readLine();
+                    identical= outputLine.equals(refFileLine);
+                }
             }
             return identical;
 
-        }
-        catch (FileNotFoundException e)
-        {
-            // TODO Auto-generated catch block
-           testLogger.error("FileNotFoundException");
-            return false;
         }
         catch (IOException e)
         {
