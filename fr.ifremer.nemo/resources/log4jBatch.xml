@@ -37,7 +37,7 @@
 	<appender name="junits" class="org.apache.log4j.ConsoleAppender">
 		<!-- Format des traces <param name="ConversionPattern" value=" ___ %C{1} %M   " />-->
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value=" ___ %M   " />
+			<param name="ConversionPattern" value=" _   " />
 		</layout>
 	</appender>
 	
