@@ -155,8 +155,8 @@ public class NemoShell
             if (prefModel.getFragment() != null)
             {
                
-                 // FAE 7138 > remplace par >=
-                  if (prefModel.getFragment().getLastLine() >= nbLignes)
+                 // FAE 7138 
+                  if (prefModel.getFragment().getLastLine() +inputDomain.getMedia().getModel().getFileHeader() > nbLignes)
                 {
                     nemo.getDomain().getStation().setSomeInData(true);
                     prefModel.setInData(true);
@@ -168,8 +168,8 @@ public class NemoShell
                 if (pModel.getFragment() != null)
                 {
                    
-                     // FAE 7138 > remplace par >=
-                      if (pModel.getFragment().getLastLine() >= nbLignes)
+                     // FAE 7138 
+                      if (pModel.getFragment().getLastLine()+inputDomain.getMedia().getModel().getFileHeader()  > nbLignes)
                     {
                         nemo.getDomain().getStation().setSomeInData(true);
                         pModel.setInData(true);
