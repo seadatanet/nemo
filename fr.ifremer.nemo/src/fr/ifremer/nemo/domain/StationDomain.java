@@ -178,7 +178,7 @@ public class StationDomain
         odvStationHeader.append(Global.TAB);
 
         // Station
-        odvStationHeader.append(form.limitString(getRef(), 20));
+        odvStationHeader.append(form.limitString(getRef(true), 20));
         odvStationHeader.append(Global.TAB);
 
         // Type
@@ -244,7 +244,7 @@ public class StationDomain
         return odvStationHeader;
     }
 
-    public String getReference(String inputFileName, String[] inputFile)
+    public String getReference(String inputFileName, String[] inputStationHeader, boolean mustIncrement)
             throws ParseException
     {
         // STATION NUMBER
@@ -258,7 +258,7 @@ public class StationDomain
             }
             else
             {
-                ref = getRef();
+                ref = getRef(mustIncrement);
             }
         }
         else if (_model.getReferenceProperty().getFragment().getFirstLine() == 0)
@@ -271,19 +271,25 @@ public class StationDomain
         else
         {
             // dans le Header
-            ref = (String) _model.getReferenceProperty().applyOn(inputFile);
+            ref = (String) _model.getReferenceProperty().applyOn(inputStationHeader);
         }
         return ref;
     }
 
-    private String getRef()
+    private String getRef(boolean mustIncrement)
     {
         // incrementation du numÃ©ro
         String ref = Integer.toString(_ref);
-        _ref++;
+        if (mustIncrement){
+            _ref++;
+        }
         return ref;
     }
-
+    public void incrementRef()
+    {
+        // incrementation du numÃ©ro
+            _ref++;
+    }
     public StringBuffer getHeader(Conversion c, Station currentStation,
             String[] inputFile) throws ParseException
     {
@@ -328,7 +334,7 @@ public class StationDomain
         if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TRAJECTORY)
         {
             _ref = 1;
-            odvStationHeader.append(form.limitString(getRef(), 20));
+            odvStationHeader.append(form.limitString(getRef(true), 20));
         }
         else
         {

@@ -113,7 +113,7 @@ public abstract class NemoWriter{
 	                            String[] inputStationHeader = consumeStationHeader();
 	                            if (inputStationHeader != null){
 	                                st = new Station(inputFile.getName(),inputStationHeader);
-	                                String ref = stationDomain.getReference(inputFile.getName(), inputStationHeader);
+	                                String ref = stationDomain.getReference(inputFile.getName(), inputStationHeader, true);
 
 	                                st.setReference(ref);
 
