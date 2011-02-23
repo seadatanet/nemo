@@ -63,7 +63,9 @@ public class DateTimeUtils
         Calendar cal = Calendar.getInstance(tz);
         cal.clear();
         cal.setTimeInMillis(date);
-        if (!Float.isNaN(time)){
+        // la valeur par defaut de time est -1 et non NaN
+        //cf. fr.ifremer.nemo.domain.DateTimeUtils.getDateTime(Station) et fr.ifremer.nemo.domain.Station.Station(String, String[])
+        if (!Float.isNaN(time)&& time!=-1){
             cal.setTimeInMillis(date + (time));
         }
         else
