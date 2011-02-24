@@ -1115,6 +1115,10 @@ public class TableData
         }
         return myParameterFilteredTable;
     }
+    public void reinitMyParameterFilteredTable()
+    {
+        myParameterFilteredTable=null;
+    }
 
     public UnitFilteredTable getMyUnitFilteredTable()
     {

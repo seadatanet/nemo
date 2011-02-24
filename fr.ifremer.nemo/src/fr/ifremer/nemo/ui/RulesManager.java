@@ -356,7 +356,9 @@ public class RulesManager
        myEditFileForm.selectConversion(myConversionType);
        Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
        Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV());
+       myDataListType=DEFAULT_DATALIST;
        Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(DataListTypeEnum.UNKNOWN);
+       Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().reinitMyParameterFilteredTable();
        ViewLog.styledTextLogErreurs.setText(messageLog);
    }
    /**
