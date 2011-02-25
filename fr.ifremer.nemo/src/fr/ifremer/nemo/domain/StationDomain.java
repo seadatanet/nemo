@@ -169,13 +169,16 @@ public class StationDomain
         StringBuffer odvStationHeader = new StringBuffer();
         String stationRef = currentStation.getReference();
         // Cruise
+//        String cruiseName =
+//            Nemo.getInstance().getDomain().getCruise().getModel().getName();
+        
         String cruiseName =
-            Nemo.getInstance().getDomain().getCruise().getModel().getName();
+          Nemo.getInstance().getDomain().getCruise().getDataSetRef();
         odvStationHeader.append(form.limitString(cruiseName, 20));
         odvStationHeader.append(Global.TAB);
 
         // Station
-        odvStationHeader.append(form.limitString(getRef(), 20));
+        odvStationHeader.append(form.limitString(getRef(true), 20));
         odvStationHeader.append(Global.TAB);
 
         // Type
@@ -217,16 +220,23 @@ public class StationDomain
         else
             botDepth = _model.getProperty(Intern.S_DEPTH).applyOnLine(inputLine);
 
-        if (botDepth.equals("Default"))
-            botDepth = 0f;
-
-        if (!((Float) botDepth).isNaN())
+        
+        //6998
+//        if (botDepth.equals("Default"))
+//            botDepth = 0f;
+        if ( 
+                (!botDepth.equals("Default")) 
+                && 
+                !((Float) botDepth).isNaN() )
+//        if (!((Float) botDepth).isNaN())
         {
             odvStationHeader.append(botDepth);
         }
         else
         {
-            odvStationHeader.append(Global.ZERO);
+           
+//            odvStationHeader.append(Global.ZERO);
+            odvStationHeader.append(Global.SPACE);
         }
 
         odvStationHeader.append(Global.TAB);
@@ -234,7 +244,7 @@ public class StationDomain
         return odvStationHeader;
     }
 
-    public String getReference(String inputFileName, String[] inputFile)
+    public String getReference(String inputFileName, String[] inputStationHeader, boolean mustIncrement)
             throws ParseException
     {
         // STATION NUMBER
@@ -248,7 +258,7 @@ public class StationDomain
             }
             else
             {
-                ref = getRef();
+                ref = getRef(mustIncrement);
             }
         }
         else if (_model.getReferenceProperty().getFragment().getFirstLine() == 0)
@@ -261,19 +271,25 @@ public class StationDomain
         else
         {
             // dans le Header
-            ref = (String) _model.getReferenceProperty().applyOn(inputFile);
+            ref = (String) _model.getReferenceProperty().applyOn(inputStationHeader);
         }
         return ref;
     }
 
-    private String getRef()
+    private String getRef(boolean mustIncrement)
     {
         // incrementation du numÃ©ro
         String ref = Integer.toString(_ref);
-        _ref++;
+        if (mustIncrement){
+            _ref++;
+        }
         return ref;
     }
-
+    public void incrementRef()
+    {
+        // incrementation du numÃ©ro
+            _ref++;
+    }
     public StringBuffer getHeader(Conversion c, Station currentStation,
             String[] inputFile) throws ParseException
     {
@@ -318,7 +334,7 @@ public class StationDomain
         if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TRAJECTORY)
         {
             _ref = 1;
-            odvStationHeader.append(form.limitString(getRef(), 20));
+            odvStationHeader.append(form.limitString(getRef(true), 20));
         }
         else
         {
@@ -357,16 +373,20 @@ public class StationDomain
         // Bot. Depth [m]
         Object botDepth = _model.getProperty(Intern.S_DEPTH).applyOn(inputFile);
 
-        if (botDepth.equals("Default"))
-            botDepth = 0f;
-
-        if (!((Float) botDepth).isNaN())
+//      6998
+//        if (botDepth.equals("Default"))
+//            botDepth = 0f; 
+        if ( 
+                (!botDepth.equals("Default")) 
+                && 
+                !((Float) botDepth).isNaN() )
         {
             odvStationHeader.append((Float) botDepth);
         }
         else
         {
-            odvStationHeader.append(Global.ZERO);
+//            odvStationHeader.append(Global.ZERO);
+            odvStationHeader.append(Global.SPACE);
         }
         odvStationHeader.append(Global.TAB);
 
@@ -468,10 +488,10 @@ public class StationDomain
                     temp += Global.UNDERSCORE;
                 }
                //FAE 6536
-                temp += Utils.extraitCode(dataType.getCode());
+                temp += fr.ifremer.nemo.util.Utils.extraitCode(dataType.getCode());
             }
         }
-        localCDIId = Utils.validFileName(temp);
+        localCDIId = fr.ifremer.nemo.util.Utils.validFileName(temp);
        
         return localCDIId;
     }
@@ -642,12 +662,18 @@ public class StationDomain
         // *SURFACE SAMPLES=
         medStationHeader.append(start);
         medStationHeader.append(Elts.getElt(Elts.station_surface, _model
-            .getProperty(Intern.S_SURFACE + "1").applyOn(inputFile)));
+            .getProperty(Intern.S_SURFACE + "1").applyOn(inputFile)).trim());
         medStationHeader.append(Global.RN);
 
         medStationHeader.append(start);
+        try{
         medStationHeader.append(Elts.limit((String) _model.getProperty(
             Intern.S_SURFACE + "2").applyOn(inputFile), Elts.station_line));
+        }catch(Exception nulException){
+            // this is authorized: only DCHistory1 is used, DC History2 is empty
+            // so this is not an error
+            System.out.println("no value for "+Intern.S_SURFACE + "2");
+        }
 
         return medStationHeader;
     }

@@ -459,7 +459,7 @@ public class AutoLine implements UIobject
                 // la ligne correspond au nom du fichier
                 if (Nemo.getInstance().getViewMain().getEditFileForm().isCruiseIsAFile())
                 {
-                    ligne = Utils.extraitFichierChemin(Nemo.getInstance().getViewMain().getEditFileForm().nomFichier);
+                    ligne = fr.ifremer.nemo.util.Utils.extraitFichierChemin(Nemo.getInstance().getViewMain().getEditFileForm().nomFichier);
                 }
                 else
                 {
@@ -491,7 +491,7 @@ public class AutoLine implements UIobject
                     nextChar = ligne.substring(index, index + 1);
                     if (index < iEnd || nextChar.equals(".") //$NON-NLS-1$
                             || nextChar.equals(",") //$NON-NLS-1$
-                            || Utils.isNumeric(nextChar))
+                            || fr.ifremer.nemo.util.Utils.isNumeric(nextChar))
                     {
                         index++;
                     }

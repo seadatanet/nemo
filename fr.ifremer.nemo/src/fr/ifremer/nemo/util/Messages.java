@@ -241,6 +241,7 @@ public class Messages {
     public static String edit_file_info_cruiseDisabledBecauseODV;
     public static String edit_file_info_odvMonoForbiddenBecauseTrajectory;
     public static String edit_file_info_conversionNotApplicable;
+    public static String edit_file_info_P011viaP021_disabled;
     // RESULTATS
     public static String success_file_preformat;
     public static String progress_file_preformat;
@@ -259,14 +260,18 @@ public class Messages {
     public static String error_data_removePRES;
     public static String error_data_firstParam_depthBSBed;
     public static String error_data_firstParam_depthBSSurfOrPres;
+    public static String error_data_firstParam_depthBSSurf;
     public static String error_convert_invalideSteps;
     public static String error_convert_cancel;
     public static String error_convert_position;
     public static String error_convert_outputDir;
     public static String error_convert_outputFile;
     public static String error_convert_stationsDoubles;
-    
     public static String error_unknown_format;
+    
+    public static String error_fileName_message;
+    public static String error_lineNumber_message;
+    
 
     //ACTIONS
     public static String settings_typePlateForme;
@@ -499,7 +504,8 @@ public class Messages {
     public static String ViewLog_4;
     public static String ViewLog_5;
     public static String ViewLog_6;
-    public static String ViewLog_7;
+    public static String ViewLog_70;
+    public static String ViewLog_75;
     public static String ViewLog_8;
     public static String Utils_4;
     public static String Utils_5;

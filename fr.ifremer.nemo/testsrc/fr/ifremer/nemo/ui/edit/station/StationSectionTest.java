@@ -351,6 +351,26 @@ public class StationSectionTest
           res = longitudeSection.calcLongitudeTest("DDD MM.mmN","148 58.885E", true , isDebug);
         checkRes( "E148 58.88", res);
     }
+    @Test
+    public final void testCalcLongitudeTest_canyon()
+    {
+// mail collection fichiers origine, extraits = 3603881_t5_00806.edf et 3624379_t5_00851.edf
+//        48 58.885E
+//        57 27.819E
+        testLogger.info("");
+          res = longitudeSection.calcLongitudeTest("DD.ddddd","3.22480", true , isDebug);
+        checkRes( "E003 13.49", res);
+    }
+    @Test
+    public final void testCalcLongitudeTest_canyon2()
+    {
+// mail collection fichiers origine, extraits = 3603881_t5_00806.edf et 3624379_t5_00851.edf
+//        48 58.885E
+//        57 27.819E
+        testLogger.info("");
+          res = longitudeSection.calcLongitudeTest("DD.ddddd"," 3.22480", false , isDebug);
+        checkRes( "E003 13.49", res);
+    }
     /**
      * LATITUDES
      *

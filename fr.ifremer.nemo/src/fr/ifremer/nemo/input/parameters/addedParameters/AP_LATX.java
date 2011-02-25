@@ -11,9 +11,8 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.domain.DateTimeUtils;
 import fr.ifremer.nemo.domain.Station;
-import fr.ifremer.nemo.util.Conversion;
+import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.format.LatitudeFormat;
@@ -53,9 +52,15 @@ public class AP_LATX extends AddedParam
     public String getValue(Station currentStation, String inputLine, long currentDate) throws ParseException
     {
         String stringValue=null;
-        LatitudeFormat formatLAT = new LatitudeFormat(getFormat(), true);
-        stringValue = (new DecimalFormat("#0.000000", symbols)).format(formatLAT.parseObject(inputLine));
-        stringValue = Formatter.getSingleton().padStringLeft(stringValue, getFormat().length());
+        // 7339 on lit le format de parsing dans les valeurs du modele saisies depuis l'onglet station
+        PropertyModel prop=Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_LAT);
+        String format = prop.getFormat().toString();
+        LatitudeFormat formatLAT = new LatitudeFormat(format,   prop.getFragment().isVariable());
+        DecimalFormat decimalFormat= new DecimalFormat("#0.000000", symbols);
+        Object parsedLat =  formatLAT.parseObject(inputLine);
+        stringValue = decimalFormat.format(parsedLat);
+        stringValue = Formatter.getSingleton().padStringLeft(stringValue, getFormat().length());       
+        
         return stringValue;
     }
 }

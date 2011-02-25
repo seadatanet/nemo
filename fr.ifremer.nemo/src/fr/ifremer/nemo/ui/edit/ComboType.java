@@ -146,7 +146,7 @@ public enum ComboType
 
                 for (CodeTableRecordType record : navires)
                 {
-                    treeNavire.put(record.getEntryTerm(), Utils
+                    treeNavire.put(record.getEntryTerm(), fr.ifremer.nemo.util.Utils
                         .extraitCodeURN(record.getEntryKey()));
                 }
 
@@ -172,7 +172,7 @@ public enum ComboType
 
                 for (CodeTableRecordType record : regions)
                 {
-                    treeRegion.put(record.getEntryTerm(), Utils
+                    treeRegion.put(record.getEntryTerm(), fr.ifremer.nemo.util.Utils
                         .extraitCodeURN(record.getEntryKey()));
                 }
 
@@ -196,7 +196,7 @@ public enum ComboType
 
                 for (CodeTableRecordType record : records)
                 {
-                    treePays.put(record.getEntryTerm(), Utils
+                    treePays.put(record.getEntryTerm(), fr.ifremer.nemo.util.Utils
                         .extraitCodeURN(record.getEntryKey()));
                 }
 
@@ -215,7 +215,7 @@ public enum ComboType
 
                 for (CodeTableRecordType record : centres)
                 {
-                    treeCentre.put(Utils.extraitCodeURN(record.getEntryKey()),
+                    treeCentre.put(fr.ifremer.nemo.util.Utils.extraitCodeURN(record.getEntryKey()),
                         record.getEntryTerm());
                 }
 

@@ -12,12 +12,15 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.input.DataModel;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
+import fr.ifremer.nemo.ui.edit.data.EditDataForm;
 import fr.ifremer.nemo.ui.edit.data.GroupVerticalParameters;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_MesureType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
@@ -36,6 +39,7 @@ public class RulesManager
      * referance sur le panneau file
      */
     EditFileForm myEditFileForm;
+    EditDataForm myEditDataForm;
     /**
      * description des paramètres Input
      *
@@ -80,6 +84,7 @@ public class RulesManager
     public RulesManager()
     {
         myEditFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
+        myEditDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
        setDefaultValues();
     }
     public void init()
@@ -103,6 +108,11 @@ public class RulesManager
         cruiseEnabled = !isConversionToODV();
         myDataListType = DEFAULT_DATALIST;
         dataList_P011viaP021_Enabled = isConversionToODV();
+        
+        
+        myMesureType = DEFAULT_MESURETYPE;
+        rule_mesureType();  
+
     }
     
     public void resetFileForm()
@@ -114,6 +124,14 @@ public class RulesManager
         myConversionType = getDefaultConversionTypeWithRules();
         myEditFileForm.selectConversion(myConversionType);
         
+    }
+    public void resetDataForm()
+    {
+        myDataListType = DEFAULT_DATALIST;
+        dataList_P011viaP021_Enabled = isConversionToODV();
+        myMesureType = DEFAULT_MESURETYPE;
+        myEditDataForm.selectMesureType(myMesureType);
+        rule_mesureType();
     }
     
     /**
@@ -173,6 +191,7 @@ public class RulesManager
       
        // si modif process, on fait un reset global
        resetFileForm();
+      
        //FAE 6414
        myEditFileForm.reinitAllButProcess();
        myProcessType = processType;
@@ -186,6 +205,7 @@ public class RulesManager
        Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
        Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV());
        ViewLog.styledTextLogErreurs.setText(messageLog);
+        resetDataForm();
    }
    
    /**
@@ -205,12 +225,19 @@ public class RulesManager
        
        myConversionType = getCurrentConversionTypeWithRules(myConversionType);
        rule_conversionType(true);
-
        myEditFileForm.updateEnableConversionTypes();
        myEditFileForm.selectConversion(myConversionType);
        Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
        Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV());
        ViewLog.styledTextLogErreurs.setText(messageLog);
+       
+       rule_mesureType();
+       GroupVerticalParameters verticGroup = Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters();
+       verticGroup.enable_pDepthBSBed(isP_depthBSBed_enabled());
+       verticGroup.enable_pDepthBSSurf(isP_depthBSSurf_enabled());
+       verticGroup.enable_pPressure(isP_pressure_enabled());
+     
+    
    }
    public void updateFromModel(E_InputType fileType)
    {
@@ -240,15 +267,55 @@ public class RulesManager
    
    public void updateFromIHM( E_TypeConversion convType)
    {
-       reinitRules();
-       rule_process(true);
-       rule_fileType(true);
-       myConversionType=convType;
-       rule_conversionType(true);
-       Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
-       Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV());
-       ViewLog.styledTextLogErreurs.setText(messageLog);
-       
+       boolean confirm =true;
+       boolean mustChangeDatalist=false;
+       E_TypeConversion tmp = myConversionType;
+       DataListTypeEnum newDataList=myDataListType;
+       if (myConversionType!=convType){
+           if(myDataListType==DataListTypeEnum.P011_VIA_P021 && convType==E_TypeConversion.MEDATLAS)
+           {
+               confirm = MessageDialog.openConfirm(null, 
+                   Messages.edit_data_dataListDialogBox_title,
+                   Messages.edit_data_dataListDialogBox_text);
+               myDataListType=DataListTypeEnum.P091;
+               newDataList=myDataListType;
+               mustChangeDatalist=true;
+           }
+           if(confirm)
+           {
+               reinitRules();
+               rule_process(true);
+               rule_fileType(true);
+               myConversionType=convType;
+               rule_conversionType(true);
+               Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
+               dataList_P011viaP021_Enabled = isConversionToODV();
+               Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(dataList_P011viaP021_Enabled);
+               
+              
+               
+               // ensuite on selectionne si necessaire
+               if (mustChangeDatalist)
+               {
+                   // 1 affectation nouvelle valeur au modele (necessaire pour la suite)
+                   Nemo.getInstance().getDomain().getData().getModel().setDataListType(newDataList);
+                   // 2 reinit
+                  Nemo.getInstance().getViewMain().getEditDataForm().reinitParameters();
+                   Nemo.getInstance().getViewMain().getEditDataForm().reinitTableData();
+                   Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters().removeAllToAllCombos();
+                   // !!! le fillTypes doit être appelé APRES le removeToAllcombos, car il peut ajouter PRES automatiquement
+                     Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().fillTypes();
+                   Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(newDataList);
+                  
+               }
+             
+
+               ViewLog.styledTextLogErreurs.setText(messageLog);
+           }else{
+               myEditFileForm.selectConversion(tmp);
+           }
+       }
+
    }
    public void updateFromModel( E_TypeConversion convType)
    {
@@ -289,6 +356,9 @@ public class RulesManager
        myEditFileForm.selectConversion(myConversionType);
        Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
        Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV());
+       myDataListType=DEFAULT_DATALIST;
+       Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(DataListTypeEnum.UNKNOWN);
+       Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().reinitMyParameterFilteredTable();
        ViewLog.styledTextLogErreurs.setText(messageLog);
    }
    /**
@@ -309,9 +379,11 @@ public class RulesManager
            if (confirm){
                myDataListType = dataListType;
                Nemo.getInstance().getDomain().getData().getModel().setDataListType(dataListType);
-               Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().reinitTable();
-               Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().fillTypes();
+               Nemo.getInstance().getViewMain().getEditDataForm().reinitTableData();
+               Nemo.getInstance().getDomain().getData().getModel().reinitParameterModelList();
                Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters().removeAllToAllCombos();
+               // !!! le fillTypes doit être appelé APRES le removeToAllcombos, car il peut ajouter PRES automatiquement
+               Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().fillTypes();
            }
            else{
                // si pas confirmation, et ne touche a rien et on remet la valeur de depart
@@ -322,14 +394,18 @@ public class RulesManager
    }
    public void updateFromModel(DataListTypeEnum dataListType)
    {
-       if (dataListType != myDataListType){   
+//       if (dataListType != myDataListType){   
            myDataListType = dataListType;
            Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV());
            Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(dataListType);
            ViewLog.styledTextLogErreurs.setText(messageLog);
            Nemo.getInstance().getDomain().getData().getModel().setDataListType(myDataListType);
 
-       }
+//       }
+//       if ( Nemo.getInstance().getViewMain().getEditDataForm().getSelectedDataList()==dataListType.UNKNOWN)
+//       {
+//           Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(dataListType);
+//       }
    }
    
    
@@ -345,6 +421,7 @@ public class RulesManager
            verticGroup.enable_pDepthBSBed(isP_depthBSBed_enabled());
            verticGroup.enable_pDepthBSSurf(isP_depthBSSurf_enabled());
            verticGroup.enable_pPressure(isP_pressure_enabled());
+           Nemo.getInstance().getDomain().getData().getModel().setMesureType(mesureType);
 //           verticGroup.removeAllToAllCombos();
    }
    public void updateFromModel(E_MesureType mesureType)
@@ -360,9 +437,8 @@ public class RulesManager
        verticGroup.enable_pDepthBSBed(isP_depthBSBed_enabled());
        verticGroup.enable_pDepthBSSurf(isP_depthBSSurf_enabled());
        verticGroup.enable_pPressure(isP_pressure_enabled());
-//       verticGroup.removeAllToAllCombos();
+       Nemo.getInstance().getViewMain().getEditDataForm().selectMesureType(mesureType);
 
-       Nemo.getInstance().getViewMain().getEditDataForm().selectMesureType(myMesureType);
    }
    
    /**
@@ -376,9 +452,9 @@ public class RulesManager
        setP_pressure_enabled(false);
 
        boolean p_depthBSBed = 
-           isProfile()
-       
-           && myMesureType==E_MesureType.BSBED ;
+          ( isProfile()||isTrajectory())
+           && 
+           myMesureType==E_MesureType.BSBED ;
        
        boolean p_depthBSSurf = 
            (isProfile() 
@@ -387,6 +463,7 @@ public class RulesManager
            ||
            ((isTimeSeries() ||isTrajectory())
                    && isConversionToODV()
+                   && myMesureType==E_MesureType.BSSURF
            );
        
        
@@ -427,7 +504,6 @@ public class RulesManager
    }
    private void rule_conversionType(boolean addToLog)
    {
-// TODO BGT pb si on choisit medatlas mais que le modele en cours est en P021
        if ( myConversionType==E_TypeConversion.ODV_MONOSTATION ||
                myConversionType==E_TypeConversion.ODV_MULTISTATIONS)
        {
@@ -435,11 +511,10 @@ public class RulesManager
            dataList_P011viaP021_Enabled=true;
            if(addToLog){
                messageLog += Messages.edit_file_info_cruiseDisabledBecauseODV+Global.RN;
-               messageLog += "P011 via P021 enabled";
            }
        }else{
            if(addToLog){
-               messageLog += "P011 via P021 disabled";
+               messageLog += Messages.edit_file_info_P011viaP021_disabled+Global.RN;
            }
        }
    }

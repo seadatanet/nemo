@@ -43,8 +43,9 @@ public class InputDomain
         _media.update(model);
         _cruise.update(model);
         _station.update(model);
-        _data.update(model);
+        // mettre a jour la conversion AVANT le data, car l'ajout des parametres dans le dataModel depend du forma de conversion -> doit être connu avant!
         _conversion.update(model);
+        _data.update(model);
     }
     
     //RELEASE

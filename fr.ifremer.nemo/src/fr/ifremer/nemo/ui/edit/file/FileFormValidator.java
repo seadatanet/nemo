@@ -108,7 +108,8 @@ public class FileFormValidator extends FormValidator
                 Nemo.getInstance().getViewMain().setEtape(0);
             }
 
-            Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();
+//            // TODO bouger apres car param list inconnue ici
+//            Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();
         }
         catch (Exception e)
         {

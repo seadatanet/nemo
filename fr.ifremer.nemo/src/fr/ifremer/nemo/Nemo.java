@@ -52,6 +52,12 @@ public class Nemo
     private ViewMain myViewMain;
     
     private boolean batchMode;
+    
+    /**
+     * informations stockées pour afficher dans la log en cas d'erreur
+     */
+    private String log_currentInputFile;
+    private String log_currentInputLine;
 
     /**
      * Getter pour instance.
@@ -288,5 +294,38 @@ public class Nemo
     public void setBatchMode(boolean batchMode)
     {
         this.batchMode = batchMode;
+    }
+
+    public String getLog_currentInputFile()
+    {
+        return log_currentInputFile;
+    }
+
+    public void setLog_currentInputFile(String log_currentInputFile)
+    {
+        this.log_currentInputFile = log_currentInputFile;
+    }
+
+    public String getLog_currentInputLine()
+    {
+        return log_currentInputLine;
+    }
+
+    public void setLog_currentInputLine(String log_currentInputLine)
+    {
+        this.log_currentInputLine = log_currentInputLine;
+    }
+    
+    public String getErrorMessageWithFileAndLineNumber()
+    {
+        return Messages.error_fileName_message
+        +Global.DBL_PT
+        +Global.SPACE
+        + getLog_currentInputFile() 
+           +Global.SPACE
+        + Messages.error_lineNumber_message
+        +Global.DBL_PT
+        +Global.SPACE
+        + getLog_currentInputLine();
     }
 }

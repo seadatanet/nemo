@@ -13,9 +13,11 @@ import java.text.ParseException;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.domain.DateTimeUtils;
 import fr.ifremer.nemo.domain.Station;
+import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Intern;
+import fr.ifremer.nemo.util.format.ExternalizableFormat;
 import fr.ifremer.nemo.util.format.LongitudeFormat;
 
 /**
@@ -54,8 +56,13 @@ public class AP_LONX extends AddedParam
     public String getValue(Station currentStation, String inputLine, long currentDate) throws ParseException
     {
         String stringValue=null;
-        LongitudeFormat formatLON = new LongitudeFormat(getFormat(), true);
-        stringValue = (new DecimalFormat("#0.000000", symbols)).format(formatLON.parseObject(inputLine));
+        // 7339 on lit le format de parsing dans les valeurs du modele saisies depuis l'onglet station
+        PropertyModel prop=Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_LON);
+        String format = prop.getFormat().toString();
+        LongitudeFormat formatLON = new LongitudeFormat(format,   prop.getFragment().isVariable());
+        DecimalFormat decimalFormat= new DecimalFormat("#0.000000", symbols);
+        Object parsedLong =  formatLON.parseObject(inputLine);
+        stringValue = decimalFormat.format(parsedLong);
         stringValue = Formatter.getSingleton().padStringLeft(stringValue, getFormat().length());                        
        return stringValue;
     }

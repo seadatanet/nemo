@@ -242,8 +242,9 @@ public class EditCruiseForm extends EditForm
         Nemo.getInstance().getViewMain().getMyFilteredTableFactory().go(_parent, Global.WSSURVEY, null);
     }
 
-    public void webService(String reference)
+    public boolean webService(String reference)
     {
+        boolean ok=true;
         // remplissage du dataModel à partir des valeurs du ws
 
         TableDataSurvey.types.clear();
@@ -255,15 +256,19 @@ public class EditCruiseForm extends EditForm
          * if (ViewMain.dossierCampagne){ SWTProcessWS.dossier = true; } else{
          * SWTProcessWS.dossier = false; }
          */
-
-        new SWTProgressWS().run();
-
+      String error =   new SWTProgressWS().run();
+      Utils.messageErreur("");
+      if (!error.equals(""))
+      {
+          Utils.messageErreur(error);
+          ok=false;
+      }else{
         // mise à jour de l'onglet courant
 //        DataModel.fillCruise();
         fillFromModel();
-
+      }
         // majApresWS();
-
+      return ok;
     }
 
     protected void ouvertureDescriptionXML()
@@ -494,8 +499,8 @@ public class EditCruiseForm extends EditForm
 
         cruiseModel.setReference(refCampagne.getText());
         cruiseModel.setName(nomCampagne.getText());
-        cruiseModel.setShipCode(Utils.extraitCode(navire.getText()));
-        cruiseModel.setShipName(Utils.extraitValeur(navire.getText()));
+        cruiseModel.setShipCode(fr.ifremer.nemo.util.Utils.extraitCode(navire.getText()));
+        cruiseModel.setShipName(fr.ifremer.nemo.util.Utils.extraitValeur(navire.getText()));
 
         // Localisation
 
@@ -525,16 +530,16 @@ public class EditCruiseForm extends EditForm
             e.printStackTrace();
         }
 
-        cruiseModel.setRegionName(Utils.extraitValeur(region.getText()));
+        cruiseModel.setRegionName(fr.ifremer.nemo.util.Utils.extraitValeur(region.getText()));
 
         // Source de données
-        cruiseModel.setCountryCode(Utils.extraitCode(pays.getText()));
+        cruiseModel.setCountryCode(fr.ifremer.nemo.util.Utils.extraitCode(pays.getText()));
         cruiseModel.setLaboratories(labo.getText());
         cruiseModel.setChiefScientist(chef.getText());
         cruiseModel.setProjectName(projet.getText());
 
         // Centre d'archivage
-        cruiseModel.setDataCentre(Utils.extraitCode(centreDonnee.getText()));
+        cruiseModel.setDataCentre(fr.ifremer.nemo.util.Utils.extraitCode(centreDonnee.getText()));
 
         // confidentialité
         if (confidentialite.getText().equals("P - Public")) { //$NON-NLS-1$

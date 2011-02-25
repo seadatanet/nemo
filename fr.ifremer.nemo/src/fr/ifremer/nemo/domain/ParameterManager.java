@@ -39,6 +39,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_InputType;
+import fr.ifremer.nemo.util.Global.E_MesureType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 
@@ -201,12 +202,12 @@ public class ParameterManager
         boolean isMedatlas = conversionType==E_TypeConversion.MEDATLAS;
         boolean isODV = conversionType==E_TypeConversion.ODV_MONOSTATION ||conversionType==E_TypeConversion.ODV_MULTISTATIONS;
         
-      DataModel dataModel =  Nemo.getInstance().getDomain().getData().getModel();
+        DataModel dataModel =  Nemo.getInstance().getDomain().getData().getModel();
         // recuperation des parametres verticaux
         String p_depthBSBed = dataModel.getVerticalParametersList().getP_depthBSBed();
         String p_depthBSSurf = dataModel.getVerticalParametersList().getP_depthBSSurf();
         String p_pressure = dataModel.getVerticalParametersList().getP_pressure();
-        
+        E_MesureType mesureType = dataModel.getMesureType();
         boolean exist_p_depthBSSurf =!p_depthBSSurf.equals(Global.EMPTY_STRING);
         boolean exist_p_pressure = !p_pressure.equals(Global.EMPTY_STRING);
         
@@ -302,7 +303,7 @@ public class ParameterManager
             
             /** aap_p 1 2 */
             // Ajout du paramètre DEPH ( = Sensor Depth) pour ODV
-            if (!exist_p_depthBSSurf)
+            if (!exist_p_depthBSSurf && mesureType==E_MesureType.BSSURF)
             {
                 if (isProfile){
                     addFixedParameterModel(IdParameter.generic_depthBSSurf_FromPressure);
@@ -621,7 +622,7 @@ public class ParameterManager
         {
             code=null;
         }else if(dataListType == DataListTypeEnum.P091 ||dataListType == DataListTypeEnum.P011_VIA_P091 ){
-           code=Intern.paramPSAL;
+           code=Intern.paramTEMP;
         }
         return code;
     }

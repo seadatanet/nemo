@@ -227,32 +227,60 @@ public class ParameterModel extends AbstractModel
 		return copy;
 	}
     
+    public boolean hasDefaultValue(String inputLine)
+    {
+        boolean hasDefaultValue=false;
+        String value = _fragment.retreive(inputLine);
+        if (_inputDefault.trim().equals(value)) {
+            hasDefaultValue=true;
+        }
+        return hasDefaultValue;
+    }
+    public boolean hasNaNValue(String inputLine)
+    {
+        boolean hasNaNValue=false;
+        String value = _fragment.retreive(inputLine);
+        if (value.equals(Global.EMPTY_STRING) && !_inputDefault.trim().equals(Global.EMPTY_STRING)) {
+            hasNaNValue=true;
+        }
+        return hasNaNValue;
+    }
     @SuppressWarnings("nls")
-    public void computeParameterValue(String inputLine){
+    public void computeParameterValue(String inputLine)
+    {
         ParameterValue pValue = new ParameterValue();
         JEP parser = null;
         String value = _fragment.retreive(inputLine);
 
         // calcul de la valeur du paramètre
-        if (value.equals(Global.EMPTY_STRING) && !_inputDefault.trim().equals(Global.EMPTY_STRING)) {
+        if (hasNaNValue(inputLine)) {
             pValue.setValue(Double.NaN);
-        } else {
-            if (_inputDefault.trim().equals(value)) {
+        } 
+        else 
+        {
+            if (hasDefaultValue(inputLine)) {
                 pValue.setValue(Double.parseDouble(_parameter.getDefault()));
-            }else {
+            }
+            else 
+            {
                 double val;
-                try {
+                try 
+                {
                     val = Double.parseDouble(value);
-                } catch (NumberFormatException e) {
+                } 
+                catch (NumberFormatException e)
+                {
                     throw new NumberFormatException(Messages
-                            .ParameterModel_1
-                            + e.getMessage().substring(
-                                    e.getMessage().indexOf("\""),
-                                    e.getMessage().lastIndexOf("\""))
+                        .ParameterModel_1
+                        + e.getMessage().substring(
+                            e.getMessage().indexOf("\""),
+                            e.getMessage().lastIndexOf("\""))
                             + Messages.ParameterModel_2 + Global.RN);
                 }
-                if (_conversionFormula.trim().length() > 0) {
-                    if (getJepParser() == null) {
+                if (_conversionFormula.trim().length() > 0) 
+                {
+                    if (getJepParser() == null) 
+                    {
                         parser = new org.nfunk.jep.JEP();
                         parser.addStandardFunctions();
                         parser.addStandardConstants();
@@ -261,21 +289,25 @@ public class ParameterModel extends AbstractModel
                         setJepParser(parser);
                         double result = parser.getValue();
                         pValue.setValue(result);
-                    } else {
+                    }
+                    else 
+                    {
                         parser = getJepParser();
                         parser.addVariable("x", val);
                         double result = parser.getValue();
                         pValue.setValue(result);
                     }
-                } else {
+                } 
+                else 
+                {
                     pValue.setValue(val);
                 }
             }
         }
-        
+
         // détermination du flag du paramètre
         pValue.setQc(retreiveParameterFlag(inputLine));
-        
+
         _lineValue = pValue;
     }
     

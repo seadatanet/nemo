@@ -365,22 +365,23 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
         /// remplacement de la chaine par "-002.5000"
         /// (UglyHack)
         //TODO BGT: fonctionnement variable length a revoir
-        String tmp = source.replace(' ', '0');
-        if (tmp.startsWith("0"))
-        {
-            if (tmp.contains("+"))
-            {
-                tmp = tmp.replaceFirst("+", "0");
-                tmp = tmp.replaceFirst("0", "+");
-                source = tmp;
-            }
-            if (tmp.contains("-"))
-            {
-                tmp = tmp.replaceFirst("-","0");
-                tmp = tmp.replaceFirst("0", "-");
-                source = tmp;
-            }
-        }
+        String tmp;
+//        String tmp = source.replace(' ', '0');
+//        if (tmp.startsWith("0"))
+//        {
+//            if (tmp.contains("+"))
+//            {
+//                tmp = tmp.replaceFirst("+", "0");
+//                tmp = tmp.replaceFirst("0", "+");
+//                source = tmp;
+//            }
+//            if (tmp.contains("-"))
+//            {
+//                tmp = tmp.replaceFirst("-","0");
+//                tmp = tmp.replaceFirst("0", "-");
+//                source = tmp;
+//            }
+//        }
         
         
 //        String tmp;
@@ -406,15 +407,15 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
                         tmp = source.substring(index, index + 1);
     					if (tmp.equals(Global.PLUS) || tmp.equals(Global.SPACE) || tmp.equals(Global.EMPTY_STRING)) {
     						sign = 1.0;
-                            index += 1;
+//                            index += 1;
     					} else if (tmp.equals(Global.MOINS)) {
     						sign = -1.0;
-                            index += 1;
+//                            index += 1;
     					} else {
-                            sign = 1.0;
-//  						throw new ParseException(Intern.errorParseSign, index);
+//                            sign = 1.0;
+  						throw new ParseException(Intern.errorParseSign, index);
     					}
-//    					index += 1;
+    					index += 1;
     					break;
                     }
     				case CHARS: {
@@ -434,7 +435,7 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
     					break;
     				}
     				case DEGREES: {
-                        tmp = source.replace(' ', '0');
+                        tmp = source;//.replace(' ', '0');
     					DecimalFormat format = new DecimalFormat(
     							_elements[i]._element);
     					value += ((Number) format.parseObject(tmp, pos)).doubleValue();
@@ -442,7 +443,7 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
     					break;
     				}
     				case DEGREES_DECIMAL: {
-                        tmp = source.replace(' ', '0');
+                        tmp = source;//.replace(' ', '0');
     					DecimalFormat format = new DecimalFormat(
     							_elements[i]._element, symbols);
     					value += ((Number) format.parseObject(tmp, pos)).doubleValue();
@@ -450,7 +451,7 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
     					break;
     				}
     				case MINUTES: {
-                        tmp = source.replace(' ', '0');
+                        tmp = source;//.replace(' ', '0');
     					DecimalFormat format = new DecimalFormat(
     							_elements[i]._element);
     					value += ((Number) format.parseObject(tmp, pos)).doubleValue() / 60.0;
@@ -458,7 +459,7 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
     					break;
     				}
     				case MINUTES_DECIMAL: {
-                        tmp = source.replace(' ', '0');
+                        tmp = source;//.replace(' ', '0');
     					DecimalFormat format = new DecimalFormat(
     							_elements[i]._element, symbols);
     					value += ((Number) format.parseObject(tmp, pos)).doubleValue() / 60.0;
@@ -466,7 +467,7 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
     					break;
     				}
     				case SECONDS: {
-                        tmp = source.replace(' ', '0');
+                        tmp = source;//.replace(' ', '0');
     					DecimalFormat format = new DecimalFormat(
     							_elements[i]._element);
     					value += ((Number) format.parseObject(tmp, pos)).doubleValue() / 3600.0;
@@ -480,14 +481,33 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
 				pos.setIndex(index);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+            System.out.println("exception "+e.getMessage());
 			return null;
 		}
 		value *= sign;
 
 		return new Double(value);
 	}
-
+     protected String replaceSpacesByZeros(String source){
+            String tmp1 = source.replace(' ', '0');
+            if (tmp1.startsWith("0"))
+            {
+                if (tmp1.contains("+"))
+                {
+                    tmp1 = tmp1.replaceFirst("\\+", "0");
+                    tmp1 = tmp1.replaceFirst("0", "\\+");
+                    source = tmp1;
+                }
+                if (tmp1.contains("-"))
+                {
+                    tmp1 = tmp1.replaceFirst("\\-","0");
+                    tmp1 = tmp1.replaceFirst("0", "\\-");
+                    source = tmp1;
+                }
+            }
+                return source;
+        }
 	/**
 	 * 
 	 * @param source
@@ -501,11 +521,12 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
 		java.util.Locale locale = java.util.Locale.US;
 		java.text.DecimalFormatSymbols symbols = new java.text.DecimalFormatSymbols(
 				locale);
-        
+//        System.out.println("source lon "+source); //$NON-NLS-1$
         //2967 first trim because sometimes leading zeros are missing
-        source = source.trim();
-        
+//        source = source.trim();
+      
 		try {
+            source = replaceSpacesByZeros(source);
 			for (int i = 0; i < _elements.length && index < source.length(); i++) {
 				switch (_elements[i]._type) {
     				case HEMISPHERE: {
@@ -524,17 +545,19 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
     					String tmp = source.substring(index, index + 1);
     					if (tmp.equals(Global.PLUS) || tmp.equals(Global.SPACE) || tmp.equals(Global.EMPTY_STRING)) {
     						sign = 1.0;
-                            index += 1;
+//                            index += 1;
     					} else if (tmp.equals(Global.MOINS)) {
     						sign = -1.0;
-                            index += 1;
+//                            index += 1;
     					} else {
                             // FAE 6432: si on attend un signe et qu'il n'y en a pas, on considere que c'est positif
                             // mais on incremente pas l'index, car on est en fait ici sur le premier chiffre, qu'il faudra lire comme tel au prochain tour
                             // avant, le signe + par defaut etait mis par l'espace 1er caractere, mais celui-ci a ete enleve pour le FAE 2967
-                            sign = 1.0;
+//                            sign = 1.0;
+                            throw new ParseException(Intern.errorParseSign, index);
     					}
     					
+    					index += 1;
     					break;
     				}
     				case CHARS: {
@@ -564,12 +587,13 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
     				}
     				case DEGREES_DECIMAL: {
                         int endIndex;
-                        if (source.length()< (index+_elements[i]._element.length()))
-                        { // 2967 endIndex can be less than the format length if leading zeros are not present (ex: 2.5000 is smaller that the format 00.0000)
-                            endIndex=source.length();
-                        }else{
+                        //TODO BGT faire une erreur plutot car pas normal?
+//                        if (source.length()< (index+_elements[i]._element.length()))
+//                        { // 2967 endIndex can be less than the format length if leading zeros are not present (ex: 2.5000 is smaller that the format 00.0000)
+//                            endIndex=source.length();
+//                        }else{
                             endIndex=index + _elements[i]._element.length();
-                        }
+//                        }
     					String tmp = source.substring(index, endIndex);
     					if (tmp.matches("\\s*\\d+\\.\\d+\\s*")) { //$NON-NLS-1$
     						DecimalFormat format = new DecimalFormat(_elements[i]._element, symbols);
@@ -650,7 +674,8 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+            System.out.println("exception "+e.getMessage());
 			return null;
 		}
 		value *= sign;

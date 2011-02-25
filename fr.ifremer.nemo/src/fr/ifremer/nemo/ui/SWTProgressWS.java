@@ -15,12 +15,12 @@ public class SWTProgressWS extends ApplicationWindow
         super(null);
     }
 
-    public boolean run()
+    public String run()
     {
 
         final Shell shell = Utils.getMainShell();
         boolean interrompu = false;
-
+        String error="";
         try
         {
             // FAE 0001132 : enable the cancelation
@@ -31,13 +31,15 @@ public class SWTProgressWS extends ApplicationWindow
         catch (InvocationTargetException e)
         {
             e.printStackTrace();
+            error=e.getMessage();
         }
         catch (InterruptedException e)
         {
             interrompu = true;
+            error=e.getMessage();
         }
 
-        return interrompu;
+        return error;
     }
 
 }

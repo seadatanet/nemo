@@ -120,8 +120,11 @@ public class ConversionSelectionListener implements SelectionListener
                     convForm.definePrefixDossier();
 
                     // affichage des résultats en fin de conversion
-                    convForm.afficheResultat(convForm.runSWTProgress());
+                    boolean ok=convForm.runSWTProgress();
+                    convForm.afficheResultat(ok);
+                    if (ok){
                     convForm.fillBatchCommandLine();
+                    }
                 }
             }
             else

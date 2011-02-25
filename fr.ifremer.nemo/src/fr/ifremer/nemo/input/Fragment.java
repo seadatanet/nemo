@@ -302,7 +302,7 @@ public class Fragment extends AbstractModel
                     if (index < _lastCharOffset
                         || nextChar.equals(".")  //$NON-NLS-1$
                         || nextChar.equals(",")  //$NON-NLS-1$
-                        || Utils.isNumeric(nextChar)){
+                        || fr.ifremer.nemo.util.Utils.isNumeric(nextChar)){
                         index++;
                     }else{
                         continueBoucle = false;
@@ -343,7 +343,7 @@ public class Fragment extends AbstractModel
                     if (index < _lastCharOffset
                         || nextChar.equals(".")  //$NON-NLS-1$
                         || nextChar.equals(",")  //$NON-NLS-1$
-                        || Utils.isNumeric(nextChar)){
+                        || fr.ifremer.nemo.util.Utils.isNumeric(nextChar)){
                         index++;
                     }else{
                         continueBoucle = false;

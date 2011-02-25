@@ -70,7 +70,7 @@ public class Station implements Comparable
         _date = ((Long) stationDomain.getModel().getProperty(Intern.S_DATE).applyOn(inputStationHeader)).longValue();
         
         Object time = stationDomain.getModel().getProperty(Intern.S_TIME).applyOn(inputStationHeader);
-        
+        // default time = -1 voir aussi fr.ifremer.nemo.domain.DateTimeUtils.getDateTime(Station)
         if (time.toString().equals("Default"))
             _time = -1;
         else

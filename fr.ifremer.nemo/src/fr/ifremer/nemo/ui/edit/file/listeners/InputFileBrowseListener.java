@@ -77,7 +77,7 @@ public class InputFileBrowseListener extends SelectionAdapter
         {
             browseForCollectionNotGroupedByCruise();
         }
-       
+        myEditFileForm.nomRepertoireOrigin = myEditFileForm.nomRepertoire;
         // reinitialisation de la conversion et de l'affichage
         Nemo.getInstance().getViewMain().getMyRulesManager().updateFromBrowse();
         Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();

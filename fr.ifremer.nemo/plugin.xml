@@ -3,7 +3,7 @@
 <plugin
    id="fr.ifremer.nemo"
    name="Nemo Plug-in"
-   version="1.2.30"
+   version="1.3.0"
    provider-name="IFREMER">
 
    <extension

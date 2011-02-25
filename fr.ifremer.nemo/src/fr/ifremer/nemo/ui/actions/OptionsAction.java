@@ -201,7 +201,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         TreeMap<String, String> treeCentre = new TreeMap<String, String>();
         for (CodeTableRecordType record : centres)
         {
-            treeCentre.put(Utils.extraitCodeURN(record.getEntryKey()), record
+            treeCentre.put(fr.ifremer.nemo.util.Utils.extraitCodeURN(record.getEntryKey()), record
                 .getEntryTerm());
         }
         NemoLists.listeCentreDonnees = new ArrayList<String>();
@@ -1848,7 +1848,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         }
 
         // CENTRE DE DONNEES
-        configuration.setDataCenter(Utils.extraitCode(comboCentreDonnees
+        configuration.setDataCenter(fr.ifremer.nemo.util.Utils.extraitCode(comboCentreDonnees
             .getText()));
 
         // WS
@@ -1865,20 +1865,20 @@ public class OptionsAction extends Action implements ISelectionListener,
 
         // CDI
         configuration.setWriteCdi(checkCDI.getSelection());
-        configuration.setIdEdmoRespCdi(Utils.extraitCode(comboIdEdmoRespCdi
+        configuration.setIdEdmoRespCdi(fr.ifremer.nemo.util.Utils.extraitCode(comboIdEdmoRespCdi
             .getText()));
-        configuration.setCodeEdmoDonnees(Utils.extraitCode(comboCodeEdmoDonnees
+        configuration.setCodeEdmoDonnees(fr.ifremer.nemo.util.Utils.extraitCode(comboCodeEdmoDonnees
             .getText()));
-        configuration.setIdEdmoRespDonnees(Utils
+        configuration.setIdEdmoRespDonnees(fr.ifremer.nemo.util.Utils
             .extraitCode(comboIdEdmoRespDonnees.getText()));
-        configuration.setIdEdmoDistDonnees(Utils
+        configuration.setIdEdmoDistDonnees(fr.ifremer.nemo.util.Utils
             .extraitCode(comboIdEdmoDistDonnees.getText()));
         configuration.setCdiURL(textUrlCdi.getText());
         configuration
-            .setCdiMethod(Utils.extraitCode(comboMethodeCdi.getText()));
-        configuration.setAccesDonnees(Utils.extraitCode(comboAccesDonnees
+            .setCdiMethod(fr.ifremer.nemo.util.Utils.extraitCode(comboMethodeCdi.getText()));
+        configuration.setAccesDonnees(fr.ifremer.nemo.util.Utils.extraitCode(comboAccesDonnees
             .getText()));
-        configuration.setTypePlateForme(Utils.extraitCode(comboTypePlateForme
+        configuration.setTypePlateForme(fr.ifremer.nemo.util.Utils.extraitCode(comboTypePlateForme
             .getText()));
 
         // MAPPING

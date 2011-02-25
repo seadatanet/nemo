@@ -81,6 +81,7 @@ public abstract class NemoWriter{
 
 	            // pour chaque fichier de ce repertoire d'entree
 	            for (String inputFileName : media.getInputFilesNames().get(inputFilePath)){
+                    Nemo.getInstance().setLog_currentInputFile(inputFilePath+"/"+inputFileName);
 
 	                File inputFile= new File(inputFilePath + File.separator + inputFileName);
 	                bufferedReader = new BufferedReader(new FileReader(inputFile));
@@ -94,8 +95,7 @@ public abstract class NemoWriter{
 
 	                    while ((readedLine = bufferedReader.readLine()) != null) {
 	                        numLine++;
-//TODO BGT afficher le no de ligne en cas de plantage
-//System.out.println("!!!!!!!!!!!!numLine" + numLine);
+                            Nemo.getInstance().setLog_currentInputLine(String.valueOf(numLine));
 	                        if (numLine == 1){
 	                            consumeFileHeader();
 	                        }
@@ -113,7 +113,7 @@ public abstract class NemoWriter{
 	                            String[] inputStationHeader = consumeStationHeader();
 	                            if (inputStationHeader != null){
 	                                st = new Station(inputFile.getName(),inputStationHeader);
-	                                String ref = stationDomain.getReference(inputFile.getName(), inputStationHeader);
+	                                String ref = stationDomain.getReference(inputFile.getName(), inputStationHeader, true);
 
 	                                st.setReference(ref);
 

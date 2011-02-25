@@ -403,7 +403,7 @@ public class Utils
                         table.getItems()[i].getText(indexTest1)))
                     {
                         flagSDN =
-                            Utils.extraitCode(flagTable.getFlags().get(j)
+                            fr.ifremer.nemo.util.Utils.extraitCode(flagTable.getFlags().get(j)
                                 .getSdn());
                         break;
                     }
@@ -1351,77 +1351,7 @@ public class Utils
         }
     }
 
-    public static String extraitCode(String valeur)
-    {
-        if (valeur.indexOf(Global.SPACE) > -1)
-        {
-            return valeur.substring(0, valeur.indexOf(Global.SPACE));
-        } // else {
-        return valeur;
-        // }
-    }
-
-    public static String extraitCodeURN(String valeur)
-    {
-        if (valeur.lastIndexOf('/') > -1)
-        {
-            return valeur.substring(valeur.lastIndexOf('/') + 1);
-        } // else {
-        return valeur;
-        // }
-
-    }
-
-    public static String extraitValeur(String valeur)
-    {
-        if (valeur.indexOf(Global.SEP) > -1)
-        {
-            return valeur.substring(valeur.indexOf(Global.SEP) + 3);
-        } // else {
-        return valeur;
-        // }
-    }
-
-    public static String extraitFichierChemin(String chemin)
-    {
-        if (chemin.lastIndexOf(File.separator) > -1)
-        {
-            return chemin.substring(chemin.lastIndexOf(File.separator) + 1);
-        } // else {
-        return chemin;
-        // }
-    }
-
-    public static String extraitCheminFichier(String chemin)
-    {
-        if (chemin.lastIndexOf(File.separator) > -1)
-        {
-            return chemin.substring(0, chemin.lastIndexOf(File.separator));
-        } // else {
-        return chemin;
-        // }
-    }
-
-    public static String concat(String list1, String list2, String separator)
-    {
-        return list1 + separator + list2;
-    }
-
-    public static String validFileName(String value)
-    {
-        char newChar = '_';
-        value = value.replace(' ', newChar);
-        value = value.replace('/', newChar);
-        value = value.replace('\\', newChar);
-        value = value.replace(':', newChar);
-        value = value.replace('*', newChar);
-        value = value.replace('?', newChar);
-        value = value.replace('\"', newChar);
-        value = value.replace('<', newChar);
-        value = value.replace('>', newChar);
-        value = value.replace('|', newChar);
-        return value;
-    }
+  
 
     public static void createSearchMenu(Combo combo, String table)
     {
@@ -1475,7 +1405,7 @@ public class Utils
             for (int i = 0; i < flags.length; i++)
             {
                 _blank.getFlags().add(
-                    new Flag(Utils.extraitCode(flags[i]), flags[i]));
+                    new Flag(fr.ifremer.nemo.util.Utils.extraitCode(flags[i]), flags[i]));
             }
         }
 
@@ -1498,20 +1428,7 @@ public class Utils
         });
     }
 
-    public static boolean isNumeric(String inputString)
-    {
-        boolean numeric = false;
-        try
-        {
-            Integer.parseInt(inputString);
-            numeric = true;
-        }
-        catch (Exception e)
-        {
-            numeric = false;
-        }
-        return numeric;
-    }
+   
 
     public static void invalidEtapes()
     {

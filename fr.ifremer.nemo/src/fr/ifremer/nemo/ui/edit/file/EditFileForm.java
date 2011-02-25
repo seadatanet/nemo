@@ -47,7 +47,11 @@ import fr.ifremer.nemo.util.Global.E_TypeConversion;
 public class EditFileForm extends EditForm
 {
     // variables publiques **********************************************
-    public  String nomFichier, nomRepertoire;
+    public String nomFichier;
+    public String nomRepertoire;
+    // nom du repertoire choisi par le user (on le garde car le nomRepertoire peut être ecrasé par PF_nomRepertoire,
+    // et on a besoin du vrai nom pour ecrire la commande batch)
+    public String nomRepertoireOrigin;
     
     
     // sections    
@@ -872,7 +876,7 @@ public class EditFileForm extends EditForm
             mediaModel.setEndDataPattern(sectionDataTerminator.getStartStationIndicator());
         }
         Nemo.getInstance().getDomain().getConversion().setCurrentConversion(Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType());
-   
+        Nemo.getInstance().getDomain().getConversion().getModel().setOutputFormat(Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType());
         
         // Mise à jour du model
         Nemo.getInstance().getDomain().getMedia().updateMedia(mediaModel);
@@ -1196,6 +1200,22 @@ public class EditFileForm extends EditForm
     public Button getRadTrajectoire()
     {
         return radTrajectoire;
+    }
+    public String getNomFichier()
+    {
+        return nomFichier;
+    }
+    public void setNomFichier(String nomFichier)
+    {
+        this.nomFichier = nomFichier;
+    }
+    public String getNomRepertoire()
+    {
+        return nomRepertoire;
+    }
+    public void setNomRepertoire(String nomRepertoire)
+    {
+        this.nomRepertoire = nomRepertoire;
     }
   
 }

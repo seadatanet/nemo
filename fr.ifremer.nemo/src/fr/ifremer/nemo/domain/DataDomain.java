@@ -468,7 +468,7 @@ public class DataDomain
                 String pdvCode;
                 if (list1 != null)
                     pdvCode =
-                        Utils.extraitCodeURN(NemoLists.getVocabMatch(list1,
+                        fr.ifremer.nemo.util.Utils.extraitCodeURN(NemoLists.getVocabMatch(list1,
                             list2, code, Intern.NemoLists_unknown));
                 else
                     pdvCode = code;

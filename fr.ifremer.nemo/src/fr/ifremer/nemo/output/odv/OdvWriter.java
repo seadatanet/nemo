@@ -184,7 +184,7 @@ public class OdvWriter extends NemoWriter{
                 // si inputStationHeader est null, c'est qu'on a terminé la derniere station
                 if(inputStationHeader != null)
                 {
-                    stRef = iDomain.getStation().getReference(currentStation.getFileName(), inputStationHeader);
+                    stRef = iDomain.getStation().getReference(currentStation.getFileName(), inputStationHeader, true);
                 }
                
                 if (inputStationHeader != null && currentStation.getReference().equals(stRef)){

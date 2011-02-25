@@ -9,9 +9,10 @@ package fr.ifremer.nemo.input.parameters.addedParameters;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
+import java.util.Locale;
+
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.domain.DateTimeUtils;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Intern;
@@ -40,9 +41,20 @@ public class AP_CJDY extends AddedParam
     @Override
     public String getValue(Station currentStation, String inputLine, long currentDate) throws ParseException 
     {
-        // julianDate = $stationModel.julianDate($station, $i)
+        //7129: locale US
+        Locale loc=Locale.getDefault();
+        Locale.setDefault(Locale.US);
+
         JulianDate jDate = new JulianDate(currentDate);
-        return (new DecimalFormat(getFormat())).format(jDate.getJour());
+        String format=getFormat();
+        Double jour = jDate.getJour();
+        DecimalFormat decFormat = new DecimalFormat(format);
+        String res = decFormat.format(jour);
+        Locale.setDefault(loc);
+        
+        
+        return res;
+
     }
     /**
      * {@inheritDoc}

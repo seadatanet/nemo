@@ -82,7 +82,7 @@ public class PropertyModel extends AbstractModel
      */
     protected boolean _toCompute = false;
     
-    // variables non présentes dans le model XML (?)
+    // variable présente dans les données (et non dans l'entête)
     protected boolean _inData;
     
     public PropertyModel(){
@@ -315,13 +315,18 @@ public class PropertyModel extends AbstractModel
             }
         }
         else{
-            sResult = _fragment.retreive(a_Header);
-
+          //FAE 7239
+            if (isInData())
+            {
+                sResult = _fragment.retreiveInLine(a_Header[a_Header.length-1]);
+            }else{
+                sResult = _fragment.retreive(a_Header);
+            }
             if (_fragment.isDefaultValue())
-                 if (_fragment.isDefaultValueSelected())
-                     if (sResult.trim().equals(_fragment.getDefaultValue().trim()))
-                            return "Default";
-            
+                if (_fragment.isDefaultValueSelected())
+                    if (sResult.trim().equals(_fragment.getDefaultValue().trim()))
+                        return "Default";
+
             if (!sResult.trim().equals(Global.EMPTY_STRING) && _format != null){
                 try{
                     if (!(_format instanceof LatitudeFormat)

@@ -103,16 +103,19 @@ public class SWTProcessWS implements IRunnableWithProgress {
                 
             } catch (MalformedURLException e) {
                 // 
-                Utils.messageErreur(Messages.error_updateSurvey_url);
-                e.printStackTrace();
+//                Utils.messageErreur(Messages.error_updateSurvey_url);
+//                e.printStackTrace();
+                throw new InterruptedException(e.getMessage());
             } catch (RemoteException e) {
                 //
-                e.printStackTrace();
-                Utils.messageErreur(Messages.error_updateSurvey_distant);
+                throw new InterruptedException(e.getMessage());
+//                e.printStackTrace();
+//                Utils.messageErreur(Messages.error_updateSurvey_distant);
             } catch (ServiceException e) {
                 // 
-                e.printStackTrace();
-                Utils.messageErreur(Messages.error_updateSurvey_service);
+//                e.printStackTrace();
+                throw new InterruptedException(e.getMessage());
+//                Utils.messageErreur(Messages.error_updateSurvey_service);
             }
             
             /*

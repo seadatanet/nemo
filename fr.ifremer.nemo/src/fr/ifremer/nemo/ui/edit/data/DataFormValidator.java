@@ -23,13 +23,14 @@ import fr.ifremer.nemo.util.Global.E_MesureType;
  */
 public class DataFormValidator extends FormValidator
 {
-    RulesManager rm ;
-    GroupVerticalParameters verticalParamGroup;
-    ParameterManager myParameterManager;
-   private String p_depthBBed_entryKey=Global.EMPTY_STRING;
-   private String p_depthBSurf_entryKey=Global.EMPTY_STRING;
-   private String p_pressure_entryKey=Global.EMPTY_STRING;
-   private Combo comboDBSBed, comboDBBSurf, comboP ;
+    private RulesManager rm ;
+    private GroupVerticalParameters verticalParamGroup;
+    private ParameterManager myParameterManager;
+    private String p_depthBBed_entryKey=Global.EMPTY_STRING;
+    private String p_depthBSurf_entryKey=Global.EMPTY_STRING;
+    private String p_pressure_entryKey=Global.EMPTY_STRING;
+    private Combo comboDBSBed, comboDBBSurf, comboP ;
+
     public DataFormValidator()
     {
         super();
@@ -115,23 +116,59 @@ public class DataFormValidator extends FormValidator
            ok= ok && detectVerticalParameters();
             if (ok)
             {
+                /**
+                 * *****************************************************
+                 * tests sur params (cf. tableau excel doc technique)
+                 * *****************************************************
+                 */
                 editConversionForm.setWarningData(Global.EMPTY_STRING);
 
                 if (Nemo.getInstance().getViewMain().getMyRulesManager().isProfile() )
                 {
-                    /** data60/data65 parametre de reference verticale en premiere position **/
-                    boolean verticParamOk;
-                    verticParamOk = checkVerticalParameterIsInFirstPosition();
+                    /** data60/data65 profil parametre de reference verticale en premiere position **/
+                    boolean verticProfilParamOk;
+                    verticProfilParamOk = checkProfilVerticalParameterIsInFirstPosition();
+                    ok = ok && verticProfilParamOk;
+                    /** data70/75  Medatlas( FAE 3228/7257 )**/
 
-                    /** data70 Si data60 ko => Medatlas impossible
-                 A moins que l'on ait les parametre DEPH, PSAL et TEMP ( FAE 3228 )**/
-
-                    if (!verticParamOk && (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas()))
+                    if (ok && Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas())
                     {
-                        verticParamOk = checkDepthAndSalinityAndTemperature();
+                        // data70 Si on a PRES dans le tableau, il faut qu'il soit en 1ère position
+                        if( p_pressure_entryKey!=Global.EMPTY_STRING)
+                        {
+                            boolean data70 = getFirstParameterCode().equals(p_pressure_entryKey);
+                            if (!data70)
+                            {
+                                Utils.messageErreurAppend(Messages.ViewLog_70);
+                            }
+                            ok = ok && data70;
+                        }
+                        //data75 Si on a DEPH en 1er, il faut TEMP et PSAL présents
+                        else if (getFirstParameterCode().equals(p_depthBSurf_entryKey))
+                        {
+                            boolean data75 = checkDepthAndSalinityAndTemperature();
+                            if (!data75)
+                            {
+                                Utils.messageErreurAppend(Messages.ViewLog_75);
+                            }
+                            ok = ok && data75;
+                        }
                     }
-                    ok = ok && verticParamOk;
                 }
+                else if(Nemo.getInstance().getViewMain().getMyRulesManager().isTrajectory()
+                        &&  Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToODV())
+                {
+                    /** data80/data85 traj parametre de reference verticale en premiere position **/
+                    boolean verticTrajParamOk;
+                    verticTrajParamOk = checkTrajectoryVerticalParameterIsInFirstPosition();
+                    ok = ok && verticTrajParamOk;
+                }
+                
+                /**
+                 * *****************************************************
+                 * fin tests sur params
+                 * *****************************************************
+                 */
             }
         }
         
@@ -174,6 +211,8 @@ public class DataFormValidator extends FormValidator
         Nemo.getInstance().getViewMain().setEtape(4);
        
         Nemo.getInstance().getDomain().getData().getModel().setMesureType(Nemo.getInstance().getViewMain().getMyRulesManager().getMyMesureType());
+        
+        Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();
 
     }
     
@@ -262,6 +301,12 @@ public class DataFormValidator extends FormValidator
         return ok;
     }
     
+    private String getFirstParameterCode()
+    {
+        // recup du premier parametre (on reliut a chaque fois, car le tableau peut être modifie par le user entre 2 validations)
+        TypeData premierType = Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getTypes().get(0);
+        return premierType.getCodeToUse();
+    }
     /**
      * 
      * @return
@@ -291,7 +336,7 @@ public class DataFormValidator extends FormValidator
         ok=isPSAL && isTEMP && isDEPH;
         if (!ok)
         {
-            editConversionForm.setWarningData(Messages.ViewLog_7);
+            editConversionForm.setWarningData(Messages.ViewLog_75);
         }
         return ok;
 
@@ -304,7 +349,34 @@ public class DataFormValidator extends FormValidator
      * @param firstParameterCode
      * @return
      */
-    private boolean checkVerticalParameterIsInFirstPosition()
+    private boolean checkProfilVerticalParameterIsInFirstPosition()
+    {
+        boolean checkOk = true;
+
+
+        E_MesureType mesureType=Nemo.getInstance().getViewMain().getMyRulesManager().getMyMesureType();
+      
+        // cas below sea bed (data65)
+        if(mesureType==E_MesureType.BSBED)
+        {
+            checkOk = getFirstParameterCode().equals(p_depthBBed_entryKey);
+            if (!checkOk){
+                Utils.messageErreurAppend(Messages.error_data_firstParam_depthBSBed);
+            }
+        }
+        // cas below sea surface (data60)
+        else if(mesureType==E_MesureType.BSSURF)
+        {
+            checkOk = getFirstParameterCode().equals(p_depthBSurf_entryKey)
+            || getFirstParameterCode().equals(p_pressure_entryKey);
+            if (!checkOk){
+                Utils.messageErreurAppend(Messages.error_data_firstParam_depthBSSurfOrPres);
+            }
+        }
+
+        return checkOk;
+    }
+    private boolean checkTrajectoryVerticalParameterIsInFirstPosition()
     {
         boolean checkOk = true;
         
@@ -313,27 +385,28 @@ public class DataFormValidator extends FormValidator
         String firstParameterCode = premierType.getCodeToUse();
         E_MesureType mesureType=Nemo.getInstance().getViewMain().getMyRulesManager().getMyMesureType();
       
-        // cas below sea bed
-        if(mesureType==E_MesureType.BSBED)
+        // cas below sea bed (data85)
+        if(mesureType==E_MesureType.BSBED 
+                && !p_depthBBed_entryKey.equals(Global.EMPTY_STRING))
         {
             checkOk = firstParameterCode.equals(p_depthBBed_entryKey);
             if (!checkOk){
                 Utils.messageErreurAppend(Messages.error_data_firstParam_depthBSBed);
             }
         }
-        // cas below sea surface
-        else if(mesureType==E_MesureType.BSSURF)
+        // cas below sea surface (data80)
+        else if(mesureType==E_MesureType.BSSURF
+                && !p_depthBSurf_entryKey.equals(Global.EMPTY_STRING))
         {
             checkOk = firstParameterCode.equals(p_depthBSurf_entryKey)
             || firstParameterCode.equals(p_pressure_entryKey);
             if (!checkOk){
-                Utils.messageErreurAppend(Messages.error_data_firstParam_depthBSSurfOrPres);
+                Utils.messageErreurAppend(Messages.error_data_firstParam_depthBSSurf);
             }
         }
 
         return checkOk;
     }
-    
     
     private boolean updateTestValues()
     {
@@ -488,7 +561,10 @@ public class DataFormValidator extends FormValidator
        {
            Utils.messageErreurAppend(Messages.edit_data_verticalParameters_info_chooseDepthBSBed 
                +Global.SPACE
-               + myParameterManager.getP_depthBSBedCode());
+               + "("
+               + myParameterManager.getP_depthBSBedCode()
+               + ")"
+               );
            ok=false;
        }
        
@@ -499,11 +575,14 @@ public class DataFormValidator extends FormValidator
                (p_depthBSurf_entryKey.equals(Global.EMPTY_STRING) && p_pressure_entryKey.equals(Global.EMPTY_STRING))
                )
        {
-           Utils.messageErreurAppend(Messages.edit_data_verticalParameters_info_chooseDepthBSurfOrPressure
-               +Global.SPACE
-               + myParameterManager.getP_depthBSSurfCode()
-               + " or "
-               + myParameterManager.getP_pressureCode());
+           String message = Messages.edit_data_verticalParameters_info_chooseDepthBSurfOrPressure;
+           message += Global.SPACE;
+           message += "(";
+               message += myParameterManager.getP_depthBSSurfCode();
+           message +=  " / ";
+           message +=  myParameterManager.getP_pressureCode();
+           message += ")";
+               Utils.messageErreurAppend(message);
            ok=false;
        }
        return ok;

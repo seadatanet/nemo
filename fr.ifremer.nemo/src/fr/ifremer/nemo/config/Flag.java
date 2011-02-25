@@ -71,7 +71,7 @@ public class Flag {
 		TreeMap<String, String> treeFlags = new TreeMap<String, String>();
 
 		for (CodeTableRecordType record : flags) {
-			treeFlags.put(Utils.extraitCodeURN(record.getEntryKey()), record
+			treeFlags.put(fr.ifremer.nemo.util.Utils.extraitCodeURN(record.getEntryKey()), record
 					.getEntryTerm());
 		}
 

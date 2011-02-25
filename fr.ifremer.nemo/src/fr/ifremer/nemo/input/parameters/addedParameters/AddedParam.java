@@ -52,6 +52,8 @@ public class AddedParam extends Parameter
     protected String propertyCode;
     protected String value;
     protected boolean isMesured;
+   // FAE 6959
+    protected boolean hasDefaultValue;
     
     public AddedParam()
     {
@@ -67,6 +69,7 @@ public class AddedParam extends Parameter
         propertyCode = null;
         value = null;
         isMesured = false;
+        hasDefaultValue=false;
         DataListTypeEnum dataListType = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
         _P011 = false;//(dataListType==DataListTypeEnum.P011_VIA_P021 || dataListType==DataListTypeEnum.P011_VIA_P091);
         
@@ -91,7 +94,15 @@ public class AddedParam extends Parameter
     
     public String getFlag(Station currentStation, String inputLine)
     {
-        return flag;
+        String flagQc;
+        if (hasDefaultValue)
+        {
+           // FAE 6959
+            flagQc = Global.DEFAULT_FLAG;
+        }else{
+            flagQc=flag;
+        }
+        return flagQc;
     }
     public String getValue(Station currentStation, String inputLine, long currentDate) throws ParseException
     {
