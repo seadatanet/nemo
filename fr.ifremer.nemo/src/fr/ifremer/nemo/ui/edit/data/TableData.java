@@ -2,7 +2,6 @@ package fr.ifremer.nemo.ui.edit.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.regex.Pattern;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TableEditor;
@@ -19,20 +18,15 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.util.Global.DataListTypeEnum;
-import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.domain.MediaDomain;
-import fr.ifremer.nemo.input.parameters.Parameter;
-import fr.ifremer.nemo.input.parameters.addedParameters.AP_PRES;
-import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam;
 import fr.ifremer.nemo.ui.FilteredTableFactory;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.tables.ParameterFilteredTable;
 import fr.ifremer.nemo.ui.tables.UnitFilteredTable;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSParameter;
@@ -40,17 +34,16 @@ import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
 public class TableData
 {
-    /** 
-     * Parametres provenant des web services (fichiers xml mis à jour par les web services)
-     * les parametres P091 sont lus depuis le fichier parameters.xml
-     * pour les autres, il faut lire le fichier Pxxx.xml
-     * 
+    /**
+     * Parametres provenant des web services (fichiers xml mis à jour par les
+     * web services) les parametres P091 sont lus depuis le fichier
+     * parameters.xml pour les autres, il faut lire le fichier Pxxx.xml
      */
     private ArrayList<TypeData> typesWS;
-    /** 
-     * Parametres P061 provenant des web services (fichier P061.xml mis à jour par les web services)
-     * ces parametres sont utilisés uniquement dans le cas où on est en P011viaP021, pour affecter une unité
-     * 
+    /**
+     * Parametres P061 provenant des web services (fichier P061.xml mis à jour
+     * par les web services) ces parametres sont utilisés uniquement dans le cas
+     * où on est en P011viaP021, pour affecter une unité
      */
     private ArrayList<TypeUnit> typesP061;
     /**
@@ -60,7 +53,7 @@ public class TableData
 
     /**
      * la table contenant les parametres, affichée dans l'onglet data
-     */  
+     */
     private Table myTable;
 
     /**
@@ -68,8 +61,6 @@ public class TableData
      */
     private ParameterFilteredTable myParameterFilteredTable;
 
-
-    
     /**
      * liste des colonnes modifiables
      */
@@ -79,46 +70,46 @@ public class TableData
      */
     private HashMap<Integer, String> columnsMap;
     /**
-     * constructeur
-     * initialise automatiquement les typesWS
-     *
+     * constructeur initialise automatiquement les typesWS
      */
-    private GroupVerticalParameters myGroupVerticalParameters;
-   
+    private final GroupVerticalParameters myGroupVerticalParameters;
+
     public TableData()
     {
         initTypesWS();
         initColumnsMap();
-       
+
         // definit les colonnes pouvant être modfifiées par l'utilisateur
         columnsWritable = new ArrayList<Integer>();
-        columnsWritable.add(2); //label_conversion
-        columnsWritable.add(6);//label_format
-        columnsWritable.add(7);//table_label_valueIn
-        columnsWritable.add(8);//table_label_valueOut);
-        myGroupVerticalParameters = Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters();
+        columnsWritable.add(2); // label_conversion
+        columnsWritable.add(6);// label_format
+        columnsWritable.add(7);// table_label_valueIn
+        columnsWritable.add(8);// table_label_valueOut);
+        myGroupVerticalParameters =
+            Nemo.getInstance().getViewMain().getEditDataForm()
+                .getMyGroupeVerticalParameters();
     }
+
     /**
      * initialise les noms des colonnes
-     *
      */
     private void initColumnsMap()
     {
         columnsMap = new HashMap<Integer, String>();
         columnsMap.put(0, Messages.table_label_code);
-        columnsMap.put(1,Messages.table_label_unit);
-        columnsMap.put(2,Messages.label_conversion);
-        columnsMap.put(3,Messages.label_test);
-        columnsMap.put(4,Messages.label_start);
-        columnsMap.put(5,Messages.label_end);
-        columnsMap.put(6,Messages.label_format);
-        columnsMap.put(7,Messages.table_label_valueIn);
-        columnsMap.put(8,Messages.table_label_valueOut);
-        columnsMap.put(9,Messages.table_label_testIn);
-        columnsMap.put(10,Messages.table_label_testOut);
-        columnsMap.put(11,Messages.table_label_startFlag);
-        columnsMap.put(12,Messages.table_label_endFlag);
-        columnsMap.put(13,Global.EMPTY_STRING);// unite code non visible
+        columnsMap.put(1, Messages.table_label_unit);
+        columnsMap.put(2, Messages.label_conversion);
+        columnsMap.put(3, Messages.label_test);
+        columnsMap.put(4, Messages.label_start);
+        columnsMap.put(5, Messages.label_end);
+        columnsMap.put(6, Messages.label_format);
+        columnsMap.put(7, Messages.table_label_valueIn);
+        columnsMap.put(8, Messages.table_label_valueOut);
+        columnsMap.put(9, Messages.table_label_testIn);
+        columnsMap.put(10, Messages.table_label_testOut);
+        columnsMap.put(11, Messages.table_label_startFlag);
+        columnsMap.put(12, Messages.table_label_endFlag);
+        columnsMap.put(13, Global.EMPTY_STRING);// unite code non visible
     }
 
     public void reinitTable()
@@ -136,9 +127,10 @@ public class TableData
         creationTable();
 
     }
+
     public void go()
     {
-      initTypesWS();
+        initTypesWS();
         types = new ArrayList<TypeData>();
         if (!(myTable == null || myTable.isDisposed()))
         {
@@ -146,13 +138,14 @@ public class TableData
         }
         creationTable();
     }
+
     public void setMyParameterFilteredTable(ParameterFilteredTable paramTable)
     {
         myParameterFilteredTable = paramTable;
     }
+
     /**
      * reinitialise la liste des paramètres de la table
-     *
      */
     public void reinitTypes()
     {
@@ -162,24 +155,24 @@ public class TableData
 
     /**
      * ajoute un parametre à la liste des parametres de la table
+     * 
      * @param typeData
      */
     public void addType(TypeData typeData)
     {
         types.add(typeData);
-        System.out.println("add "+typeData.getEntryKey());
+        System.out.println("add " + typeData.getEntryKey());
         myGroupVerticalParameters.addTypeData(typeData);
     }
 
-
-
     /**
      * creation de la table contenant les paramètres dans l'onglet data
-     *
      */
     public void creationTable()
     {
-        myTable = new Table(Nemo.getInstance().getViewMain().getEditDataForm().getCompositeData(), SWT.FULL_SELECTION | SWT.H_SCROLL);
+        myTable =
+            new Table(Nemo.getInstance().getViewMain().getEditDataForm()
+                .getCompositeData(), SWT.FULL_SELECTION | SWT.H_SCROLL);
 
         myTable.setHeaderVisible(true);
         myTable.setLinesVisible(true);
@@ -254,36 +247,36 @@ public class TableData
         tableColumn12.setWidth(65);
         tableColumn12.setText(columnsMap.get(12));
         tableColumn12.setAlignment(SWT.RIGHT);
-        
+
         // FAE 6542
         TableColumn tableColumn13 = new TableColumn(myTable, SWT.NONE);
         tableColumn13.setWidth(0);
         tableColumn13.setText(columnsMap.get(13));
         tableColumn13.setAlignment(SWT.RIGHT);
-        
 
         initTable();
 
         // agrandissement de la table
-        Nemo.getInstance().getViewMain().getEditDataForm().getCompositeData().getShell().layout();
+        Nemo.getInstance().getViewMain().getEditDataForm().getCompositeData()
+            .getShell().layout();
 
     }
+
     private void checkTypesWS()
     {
-            initTypesWS();
+        initTypesWS();
     }
-    
-    
+
     /**
-     * chargement des parametres pour l'affichage de la liste de choix des parametres
-     * (menu Parameter List du tableau de l'onget data)
-     *
+     * chargement des parametres pour l'affichage de la liste de choix des
+     * parametres (menu Parameter List du tableau de l'onget data)
      */
     public void initTypesWS()
     {
         typesWS = null;
         typesWS = new ArrayList<TypeData>();
-        if (Nemo.getInstance().getViewMain().getMyRulesManager().getMyDataListType()!=DataListTypeEnum.P011_VIA_P021)
+        if (Nemo.getInstance().getViewMain().getMyRulesManager()
+            .getMyDataListType() != DataListTypeEnum.P011_VIA_P021)
 
         {
             iniTypesWSP091();
@@ -301,22 +294,25 @@ public class TableData
 
         for (int i = 0; i < taille; i++)
         {
-            // initialisation de la ArrayList des types des donnees a partir du fichier P091 parameters.xml
+            // initialisation de la ArrayList des types des donnees a partir du
+// fichier P091 parameters.xml
             WSParameter wsParameter = new WSParameter();
             wsParameter = NemoLists.getParameters()[i];
 
             TypeData type = new TypeData(wsParameter);
-          
+
             // ajout dans liste
             typesWS.add(type);
         }
     }
+
     private void iniTypesWSP021()
     {
-        //  init des données a partir du fichier P021 p021.xml
-        CodeTableRecordType[] listP021 = NemoLists.getVocabList(Intern.list_BODCpdv);
+        // init des données a partir du fichier P021 p021.xml
+        CodeTableRecordType[] listP021 =
+            NemoLists.getVocabList(Intern.list_BODCpdv);
         TypeData type;
-      
+
         for (CodeTableRecordType record : listP021)
         {
             type = new TypeData(record);
@@ -325,17 +321,18 @@ public class TableData
             typesWS.add(type);
         }
     }
-    
+
     /**
      * initialize the P061 types to use as units choice in P011viaP021 case
-     *
      */
     public void initTypesP061()
     {
-        if (typesP061==null){
+        if (typesP061 == null)
+        {
             typesP061 = new ArrayList<TypeUnit>();
-            //  init des données a partir du fichier P021 p021.xml
-            CodeTableRecordType[] listP061 = NemoLists.getVocabList(Intern.list_P061);
+            // init des données a partir du fichier P021 p021.xml
+            CodeTableRecordType[] listP061 =
+                NemoLists.getVocabList(Intern.list_P061);
             TypeUnit typeUnit;
             for (CodeTableRecordType record : listP061)
             {
@@ -352,19 +349,21 @@ public class TableData
         types = null;
         types = new ArrayList<TypeData>();
 
-
-        // On ajoute systématiquement le paramètre pression pour les profils en medatlas
+        // On ajoute systématiquement le paramètre pression pour les profils en
+// medatlas
         // verticaux sauf si la liste de paramètres à utiliser est la P011
         if (Nemo.getInstance().getViewMain().getMyRulesManager().isProfile()
-               && Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas()
-               &&Nemo.getInstance().getViewMain().getMyRulesManager().getMyDataListType()==DataListTypeEnum.P091
-                )
+                && Nemo.getInstance().getViewMain().getMyRulesManager()
+                    .isConversionToMedatlas()
+                && Nemo.getInstance().getViewMain().getMyRulesManager()
+                    .getMyDataListType() == DataListTypeEnum.P091)
         {
             for (TypeData type : typesWS)
             {
                 // ajout systematique de PRES
                 if (type.getEntryKey().equals(Intern.paramPRES)
-                        && Nemo.getInstance().getViewMain().getMyRulesManager().isProfile())
+                        && Nemo.getInstance().getViewMain().getMyRulesManager()
+                            .isProfile())
                 {
                     // on rajoute PRES
                     addType(type);
@@ -376,7 +375,6 @@ public class TableData
 
     /**
      * initialisation de la table des paramètres de l'onglet data
-     *
      */
     public void initTable()
     {
@@ -403,20 +401,16 @@ public class TableData
 
         Point size = table.computeSize(SWT.DEFAULT, SWT.DEFAULT);
         table.setSize(size);
-        
+
         /**
-         * Listener pour le clic sur la table
-         * les colonnes modifiables sont
-         * format
-         * entree
-         * sortie
-         * conversion 
+         * Listener pour le clic sur la table les colonnes modifiables sont
+         * format entree sortie conversion
          */
         table.addListener(SWT.MouseDown, new Listener() {
             public void handleEvent(Event event)
             {
                 // clic 3e bouton (=clic droit): comportement par defaut
-                if (event.button == 3) 
+                if (event.button == 3)
                 {
                     return;
                 }
@@ -424,7 +418,8 @@ public class TableData
                 Point pt = new Point(event.x, event.y);
                 TableItem item = table.getItem(pt);
 
-                if (item == null){
+                if (item == null)
+                {
                     return;
                 }
 
@@ -439,8 +434,9 @@ public class TableData
 
                     for (int colNumber = 0; colNumber < table.getColumnCount(); colNumber++)
                     {
-                        // edition des colonnes autorisées en écriture uniquement
-                        if(columnsWritable.contains(colNumber))
+                        // edition des colonnes autorisées en écriture
+// uniquement
+                        if (columnsWritable.contains(colNumber))
                         {
                             Rectangle rect = itemTmp.getBounds(colNumber);
                             if (rect.contains(pt))
@@ -455,16 +451,17 @@ public class TableData
                                 Listener textListener = new Listener() {
 
                                     String s = text.getText();
+
                                     public void handleEvent(final Event e)
                                     {
 
                                         switch (e.type)
                                         {
                                             case SWT.FocusOut:
-                                                itemTmp.setText(column, text
-                                                    .getText());
+                                                itemTmp.setText(column,
+                                                    text.getText());
                                                 text.dispose();
-                                                break;
+                                            break;
                                             case SWT.Traverse:
                                                 switch (e.detail)
                                                 {
@@ -476,12 +473,13 @@ public class TableData
                                                         text.dispose();
                                                         e.doit = false;
                                                 }
-                                                break;
+                                            break;
 
                                             case SWT.Modify:
-                                                if (!((Text)e.widget).getText().equals(s))                                            
+                                                if (!((Text) e.widget)
+                                                    .getText().equals(s))
                                                     Utils.invalidEtapes();
-                                                break;
+                                            break;
                                         }
                                     }
                                 };
@@ -498,7 +496,8 @@ public class TableData
                             {
                                 visible = true;
                             }
-                        } }
+                        }
+                    }
                     if (!visible)
                         return;
                     index++;
@@ -506,9 +505,10 @@ public class TableData
             }
         });
 
-        /** ****************************************************************************
-         * creation du menu
-         **************************************************************************** */ 
+        /**
+         * *********************************************************************
+         * ******* creation du menu
+         */
         Menu menu = new Menu(table.getShell(), SWT.POP_UP);
 
         // ========= Injecter debut/fin
@@ -518,7 +518,8 @@ public class TableData
             public void handleEvent(Event e)
             {
                 // table.forceFocus();
-                Utils.injectData(Nemo.getInstance().getViewMain().getEditDataForm().getTextAreaData(), 4, 5);
+                Utils.injectData(Nemo.getInstance().getViewMain()
+                    .getEditDataForm().getTextAreaData(), 4, 5);
                 majTypeData();
                 // refresh de la table
                 razAndRecreateTable();
@@ -540,16 +541,22 @@ public class TableData
         itemList.addListener(SWT.Selection, new Listener() {
             public void handleEvent(Event e)
             {
-                if (Nemo.getInstance().getViewMain().getMyRulesManager().getMyDataListType() != DataListTypeEnum.UNKNOWN){
-                checkTypesWS();
-                openMyParameterFilteredTable();
-                }else{
-                    Utils.messageErreur(Messages.edit_data_error_dataListUnknown);
+                if (Nemo.getInstance().getViewMain().getMyRulesManager()
+                    .getMyDataListType() != DataListTypeEnum.UNKNOWN)
+                {
+                    checkTypesWS();
+                    openMyParameterFilteredTable();
+                }
+                else
+                {
+                    Utils
+                        .messageErreur(Messages.edit_data_error_dataListUnknown);
                 }
             }
         });
         // ========= Liste des unités P061
-        if (Nemo.getInstance().getViewMain().getMyRulesManager().getMyDataListType() == DataListTypeEnum.P011_VIA_P021)
+        if (Nemo.getInstance().getViewMain().getMyRulesManager()
+            .getMyDataListType() == DataListTypeEnum.P011_VIA_P021)
         {
             MenuItem itemAddP061Unit = new MenuItem(menu, SWT.NONE);
             itemAddP061Unit.setText(Messages.menu_label_selectP061Unit);
@@ -562,6 +569,18 @@ public class TableData
                 }
             });
         }
+        // ========= Monter paramètre sélectionné tout en haut de la liste
+        MenuItem itemUpToTop = new MenuItem(menu, SWT.NONE);
+        itemUpToTop.setText(Messages.menu_label_upToTopParam);
+        itemUpToTop.addListener(SWT.Selection, new Listener() {
+            public void handleEvent(Event e)
+            {
+                // System.out.println("up");
+                monterEltToTopTableData();
+
+                Utils.invalidEtapes();
+            }
+        });
         // ========= Monter paramètre sélectionné
         MenuItem itemUp = new MenuItem(menu, SWT.NONE);
         itemUp.setText(Messages.menu_label_upParam);
@@ -581,6 +600,17 @@ public class TableData
             public void handleEvent(Event e)
             {
                 descendreEltTableData();
+
+                Utils.invalidEtapes();
+            }
+        });
+        // ========= descendre paramètre sélectionné en bas de liste
+        MenuItem itemDownToBottom = new MenuItem(menu, SWT.NONE);
+        itemDownToBottom.setText(Messages.menu_label_downToBottomParam);
+        itemDownToBottom.addListener(SWT.Selection, new Listener() {
+            public void handleEvent(Event e)
+            {
+                descendreEltToBottomTableData();
 
                 Utils.invalidEtapes();
             }
@@ -606,7 +636,8 @@ public class TableData
             public void handleEvent(Event e)
             {
                 table.forceFocus();
-                Utils.injectData(Nemo.getInstance().getViewMain().getEditDataForm().getTextAreaData(), 11, 12);
+                Utils.injectData(Nemo.getInstance().getViewMain()
+                    .getEditDataForm().getTextAreaData(), 11, 12);
 
                 Utils.invalidEtapes();
             }
@@ -632,7 +663,7 @@ public class TableData
                 Utils.invalidEtapes();
             }
         });
-        
+
         // separateur
         new MenuItem(menu, SWT.SEPARATOR);
 
@@ -644,16 +675,16 @@ public class TableData
             {
                 table.clearAll();
                 supprAllEltTableData();
-               
+
             }
         });
-
 
         table.setMenu(menu);
         Utils.forceMenu(table, menu);
 
         // agrandissement de la table
-        Nemo.getInstance().getViewMain().getEditDataForm().getCompositeData().getParent().layout(true, true);
+        Nemo.getInstance().getViewMain().getEditDataForm().getCompositeData()
+            .getParent().layout(true, true);
         table.setLayout(new FillLayout());
         table.redraw();
     }
@@ -663,11 +694,16 @@ public class TableData
      */
     public void openMyParameterFilteredTable()
     {
-        getMyParameterFilteredTable().open(Nemo.getInstance().getViewMain().getEditDataForm().getCompositeData().getParent());
+        getMyParameterFilteredTable().open(
+            Nemo.getInstance().getViewMain().getEditDataForm()
+                .getCompositeData().getParent());
     }
+
     public void openMyUnitFilteredTable(int rowIndex)
     {
-        getMyUnitFilteredTable().open(Nemo.getInstance().getViewMain().getEditDataForm().getCompositeData().getParent());
+        getMyUnitFilteredTable().open(
+            Nemo.getInstance().getViewMain().getEditDataForm()
+                .getCompositeData().getParent());
     }
 
     public void initTableData()
@@ -682,23 +718,7 @@ public class TableData
             {
                 item.setText(new String[] {
                         types.get(i).getEntryKeyP011() + Global.SEP
-                        + types.get(i).getEntryTermP011(),
-                        types.get(i).getUnite(), types.get(i).getConversion(),
-                        types.get(i).getTest(),
-                        String.valueOf(types.get(i).getDebut()),
-                        String.valueOf(types.get(i).getFin()),
-                        types.get(i).getFormat(), types.get(i).getEntree(),
-                        types.get(i).getSortie(), types.get(i).getTestIn(),
-                        types.get(i).getTestOut(), types.get(i).getDebutFlag(),
-                        types.get(i).getFinFlag(),
-               // FAE 6542
-                types.get(i).getUniteCode()        
-                });
-            }
-            else
-            {
-
-                item.setText(new String[] {types.get(i).getFormattedCodeAndName(),
+                                + types.get(i).getEntryTermP011(),
                         types.get(i).getUnite(), types.get(i).getConversion(),
                         types.get(i).getTest(),
                         String.valueOf(types.get(i).getDebut()),
@@ -708,7 +728,23 @@ public class TableData
                         types.get(i).getTestOut(), types.get(i).getDebutFlag(),
                         types.get(i).getFinFlag(),
                         // FAE 6542
-                        types.get(i).getUniteCode()        });
+                        types.get(i).getUniteCode()});
+            }
+            else
+            {
+
+                item.setText(new String[] {
+                        types.get(i).getFormattedCodeAndName(),
+                        types.get(i).getUnite(), types.get(i).getConversion(),
+                        types.get(i).getTest(),
+                        String.valueOf(types.get(i).getDebut()),
+                        String.valueOf(types.get(i).getFin()),
+                        types.get(i).getFormat(), types.get(i).getEntree(),
+                        types.get(i).getSortie(), types.get(i).getTestIn(),
+                        types.get(i).getTestOut(), types.get(i).getDebutFlag(),
+                        types.get(i).getFinFlag(),
+                        // FAE 6542
+                        types.get(i).getUniteCode()});
             }
         }
 
@@ -718,15 +754,70 @@ public class TableData
     {
         // effacement de tous les items de la table
         myTable.dispose();
-      
+
     }
 
+    public void monterEltToTopTableData()
+    {
+        // on monte d'un cran l'element e la position indice
+        // swap (indice-1) <-> indice
+        //
+
+        // Utils.messageErreur(Global.EMPTY_STRING);
+        int nbre;
+        ArrayList<TypeData> listeTempo;
+        nbre = types.size();
+
+        int indice = myTable.getSelectionIndex();
+
+        // si l'indice est 0, on ne fait rien
+        if (indice != 0)
+        {
+
+            listeTempo = new ArrayList<TypeData>();
+
+            // mise e jour prealable
+            majTypeData();
+            listeTempo.add(types.get(indice));
+
+            // parcours de la liste
+            for (int i = 0; i < (indice - 1); i++)
+            {
+                listeTempo.add(types.get(i));
+            }
+            // swap des 2
+            listeTempo.add(types.get(indice - 1));
+
+            // fin de parcours
+            for (int i = (indice + 1); i < nbre; i++)
+            {
+                listeTempo.add(types.get(i));
+            }
+
+            // effacement de la liste principale avant re-remplissage
+            for (int i = 0; i < nbre; i++)
+            {
+                types.remove(0);
+            }
+
+            // re-remplissage de la liste principale
+            nbre = listeTempo.size();
+            for (int i = 0; i < nbre; i++)
+            {
+                types.add(listeTempo.get(i));
+            }
+
+            // refresh de la table
+            razAndRecreateTable();
+
+        }
+    }
 
     public void monterEltTableData()
     {
         // on monte d'un cran l'element e la position indice
         // swap (indice-1) <-> indice
-        // 
+        //
 
         // Utils.messageErreur(Global.EMPTY_STRING);
         int nbre;
@@ -830,15 +921,64 @@ public class TableData
         }
     }
 
+    public void descendreEltToBottomTableData()
+    {
+        // on descend d'un cran l'element e la position indice
+        // swap (indice-1) <-> indice
+
+        int indice = myTable.getSelectionIndex();
+
+        // Si derniere ligne, on ne fait rien
+        if (indice != myTable.getItemCount() - 1)
+        {
+
+            int nbre;
+            ArrayList<TypeData> listeTempo;
+            nbre = types.size();
+
+            listeTempo = new ArrayList<TypeData>();
+
+            // mise e jour prealable
+            majTypeData();
+
+            // parcours de la liste
+            for (int i = 0; i < indice; i++)
+            {
+                listeTempo.add(types.get(i));
+            }
+
+            // fin de parcours
+            for (int i = (indice + 1); i < nbre; i++)
+            {
+                listeTempo.add(types.get(i));
+            }
+            listeTempo.add(types.get(indice));
+            // effacement de la liste principale avant re-remplissage
+            for (int i = 0; i < nbre; i++)
+            {
+                types.remove(0);
+            }
+
+            // re-remplissage de la liste principale
+            nbre = listeTempo.size();
+            for (int i = 0; i < nbre; i++)
+            {
+                types.add(listeTempo.get(i));
+            }
+            razAndRecreateTable();
+        }
+    }
+
     public void supprAllEltTableData()
     {
         System.out.println("suppr tout");
-//        majTypeData();
+// majTypeData();
         types.clear();
         myGroupVerticalParameters.removeAllToAllCombos();
         // refresh de la table
         razAndRecreateTable();
     }
+
     public void supprEltTableData()
     {
         // suppression de la ligne selectionnee
@@ -849,16 +989,15 @@ public class TableData
         // on supprime l'element e l'indice donne
         // split sur " - "
         TypeData typeData = types.get(indice);
-//        Pattern p = Pattern.compile(Global.SEP);
-//        String mots[] = p.split(typeData.getCode());
-//        String code = mots[0];
+// Pattern p = Pattern.compile(Global.SEP);
+// String mots[] = p.split(typeData.getCode());
+// String code = mots[0];
 //
-//        
-        System.out.println("suppr "+typeData.getEntryKey());
+//
+        System.out.println("suppr " + typeData.getEntryKey());
 
         types.remove(indice);
-        
-        
+
         myGroupVerticalParameters.removeToAllCombo(typeData);
 
         // refresh de la table
@@ -892,7 +1031,8 @@ public class TableData
             // 4e position = start
             // 2e position = conversion
             if ((!myTable.getItem(i).getText(4).equals(Global.EMPTY_STRING))
-                && (!myTable.getItem(i).getText(2).equals(Global.EMPTY_STRING)))
+                    && (!myTable.getItem(i).getText(2)
+                        .equals(Global.EMPTY_STRING)))
             {
                 // on a selectionne un debut et une fin et il y a une conversion
                 // e faire
@@ -902,26 +1042,23 @@ public class TableData
                 ligne =
                     Utils.lignesBrutes.get(mediaDomain.getModel()
                         .getFileHeader()
-                        + mediaDomain.getStationHeaderNumberLines());
+                            + mediaDomain.getStationHeaderNumberLines());
 
-                //TODO BGT afficher erreur propre si erreur ici a cause du fait que start/end n'est pas defini
+                // TODO BGT afficher erreur propre si erreur ici a cause du fait
+// que start/end n'est pas defini
                 selection =
                     ligne.substring(
-                        Integer.valueOf(myTable.getItem(i)
-                            .getText(4)) - 1,
-                            Integer.valueOf(myTable.getItem(i)
-                                .getText(5))).trim();
+                        Integer.valueOf(myTable.getItem(i).getText(4)) - 1,
+                        Integer.valueOf(myTable.getItem(i).getText(5))).trim();
 
                 // on formate puis on reaffiche la liste
                 try
                 {
-                    String formatString =
-                        myTable.getItem(i).getText(6);
+                    String formatString = myTable.getItem(i).getText(6);
                     String type =
                         formatString.substring(formatString.length() - 1);
 
-                    if (selection.equals(myTable.getItem(i).getText(
-                        7)))
+                    if (selection.equals(myTable.getItem(i).getText(7)))
                     {
 
                         // entree par defaut, le test est la valeur de sortie
@@ -934,14 +1071,14 @@ public class TableData
                         if (type.equals("f") || type.equals("F")) { //$NON-NLS-1$//$NON-NLS-2$
                             fmOut =
                                 String.format(java.util.Locale.US,
-                                    formatString, Float
-                                    .parseFloat(outputDefaultValue));
+                                    formatString,
+                                    Float.parseFloat(outputDefaultValue));
                         }
                         else if (type.equals("d") || type.equals("D")) { //$NON-NLS-1$ //$NON-NLS-2$
                             fmOut =
                                 String.format(java.util.Locale.US,
-                                    formatString, Integer
-                                    .parseInt(outputDefaultValue));
+                                    formatString,
+                                    Integer.parseInt(outputDefaultValue));
                         }
 
                         if (fmOut.equals(outputDefaultValue))
@@ -964,20 +1101,18 @@ public class TableData
                         parser.addStandardFunctions();
                         parser.addStandardConstants();
                         parser.addVariable("x", Float.valueOf(selection)); //$NON-NLS-1$
-                        parser.parseExpression(myTable.getItem(i)
-                            .getText(2));
+                        parser.parseExpression(myTable.getItem(i).getText(2));
                         resultJEP = parser.getValue();
 
                         if (type.equals("f") || type.equals("F")) { //$NON-NLS-1$//$NON-NLS-2$
                             resultat =
-                                String.format(myTable.getItem(i)
-                                    .getText(6), new Float(resultJEP));
+                                String.format(myTable.getItem(i).getText(6),
+                                    new Float(resultJEP));
                         }
                         else if (type.equals("d") || type.equals("D")) { //$NON-NLS-1$ //$NON-NLS-2$
                             resultat =
-                                String.format(myTable.getItem(i)
-                                    .getText(6), (Double.valueOf(resultJEP))
-                                    .intValue());
+                                String.format(myTable.getItem(i).getText(6),
+                                    (Double.valueOf(resultJEP)).intValue());
                         }
                         else
                         {
@@ -997,10 +1132,9 @@ public class TableData
                 types.get(i).setTest(resultat);
             }
 
-            if ((!myTable.getItem(i).getText(11).equals(
-                Global.EMPTY_STRING))
-                && (!myTable.getItem(i).getText(12).equals(
-                    Global.EMPTY_STRING)))
+            if ((!myTable.getItem(i).getText(11).equals(Global.EMPTY_STRING))
+                    && (!myTable.getItem(i).getText(12)
+                        .equals(Global.EMPTY_STRING)))
             {
                 /*
                  * ligne = Utils.lignesBrutes.get(Integer
@@ -1013,28 +1147,28 @@ public class TableData
                 ligne =
                     Utils.lignesBrutes.get(mediaDomain.getModel()
                         .getFileHeader()
-                        + mediaDomain.getStationHeaderNumberLines() + 1);
+                            + mediaDomain.getStationHeaderNumberLines() + 1);
 
                 selection =
                     ligne.substring(
-                        Integer.valueOf(myTable.getItem(i).getText(
-                            11)) - 1,
-                            Integer.valueOf(myTable.getItem(i).getText(
-                                12))).trim();
+                        Integer.valueOf(myTable.getItem(i).getText(11)) - 1,
+                        Integer.valueOf(myTable.getItem(i).getText(12))).trim();
 
                 types.get(i).setTestIn(selection);
 
                 String flagSDN = Global.ZERO;
                 ArrayList<Flag> flags =
-                    Nemo.getInstance().getDomain().getStation()
-                    .getModel().getFlagTable().getFlags();
+                    Nemo.getInstance().getDomain().getStation().getModel()
+                        .getFlagTable().getFlags();
                 int size = flags.size();
                 for (int j = 0; j < size; j++)
                 {
                     if (flags.get(j).getLocal()
-                            .equals(types.get(i).getTestIn()))
+                        .equals(types.get(i).getTestIn()))
                     {
-                        flagSDN = fr.ifremer.nemo.util.Utils.extraitCode(flags.get(j).getSdn());
+                        flagSDN =
+                            fr.ifremer.nemo.util.Utils.extraitCode(flags.get(j)
+                                .getSdn());
                         break;
                     }
                 }
@@ -1066,24 +1200,25 @@ public class TableData
         {
             if (!types.get(i).isP011())
             {
-                types.get(i).setEntryKeyAndEntryTerm(myTable.getItem(i).getText(0));
+                types.get(i).setEntryKeyAndEntryTerm(
+                    myTable.getItem(i).getText(0));
             }
             types.get(i).setUnite(myTable.getItem(i).getText(1));
             types.get(i).setConversion(myTable.getItem(i).getText(2));
             types.get(i).setTest(myTable.getItem(i).getText(3));
-            types.get(i).setDebut( Integer.valueOf(myTable.getItem(i).getText(4)) );
-            types.get(i).setFin( Integer.valueOf(myTable.getItem(i).getText(5)) );
+            types.get(i).setDebut(
+                Integer.valueOf(myTable.getItem(i).getText(4)));
+            types.get(i).setFin(Integer.valueOf(myTable.getItem(i).getText(5)));
             types.get(i).setFormat(myTable.getItem(i).getText(6));
             types.get(i).setEntree(myTable.getItem(i).getText(7));
             types.get(i).setSortie(myTable.getItem(i).getText(8));
 
             if (!myTable.getItem(i).getText(11).equals(Global.EMPTY_STRING)
-                    && !myTable.getItem(i).getText(12).equals(Global.EMPTY_STRING))
+                    && !myTable.getItem(i).getText(12)
+                        .equals(Global.EMPTY_STRING))
             {
-                types.get(i).setDebutFlag(
-                    myTable.getItem(i).getText(11));
-                types.get(i).setFinFlag(
-                    myTable.getItem(i).getText(12));
+                types.get(i).setDebutFlag(myTable.getItem(i).getText(11));
+                types.get(i).setFinFlag(myTable.getItem(i).getText(12));
             }
             // FAE 6542
             types.get(i).setUniteCode(myTable.getItem(i).getText(13));
@@ -1094,6 +1229,7 @@ public class TableData
     {
         return typesWS;
     }
+
     public ArrayList<TypeData> getTypes()
     {
         return types;
@@ -1104,20 +1240,23 @@ public class TableData
         return myTable;
     }
 
-
     public ParameterFilteredTable getMyParameterFilteredTable()
     {
-        if (myParameterFilteredTable==null)
+        if (myParameterFilteredTable == null)
         {
-            FilteredTableFactory filteredFactory = Nemo.getInstance().getViewMain().getMyFilteredTableFactory();
-            myParameterFilteredTable= (ParameterFilteredTable)filteredFactory.go(Nemo.getInstance().getViewMain().getEditDataForm().getCompositeData().getParent(),
-                Global.PARAMETER, null);
+            FilteredTableFactory filteredFactory =
+                Nemo.getInstance().getViewMain().getMyFilteredTableFactory();
+            myParameterFilteredTable =
+                (ParameterFilteredTable) filteredFactory.go(Nemo.getInstance()
+                    .getViewMain().getEditDataForm().getCompositeData()
+                    .getParent(), Global.PARAMETER, null);
         }
         return myParameterFilteredTable;
     }
+
     public void reinitMyParameterFilteredTable()
     {
-        myParameterFilteredTable=null;
+        myParameterFilteredTable = null;
     }
 
     public UnitFilteredTable getMyUnitFilteredTable()
@@ -1125,16 +1264,19 @@ public class TableData
         UnitFilteredTable theTable = new UnitFilteredTable();
         return theTable;
     }
+
     public void setUnit(TypeUnit typeUnit)
     {
         int selectedRow = myTable.getSelectionIndex();
-        if (selectedRow>-1){
-            TableItem item =  myTable.getItem(selectedRow);
+        if (selectedRow > -1)
+        {
+            TableItem item = myTable.getItem(selectedRow);
             item.setText(1, typeUnit.getTerm());
             // FAE 6542
             item.setText(13, typeUnit.getUnitKey());
         }
     }
+
     public ArrayList<TypeUnit> getTypesP061()
     {
         return typesP061;

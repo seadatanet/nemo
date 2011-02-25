@@ -7,22 +7,23 @@ import org.eclipse.osgi.util.NLS;
 
 import fr.ifremer.nemo.Nemo;
 
-public class Messages {
+public class Messages
+{
     private static final String BUNDLE_NAME = "fr.ifremer.nemo.util.messages"; //$NON-NLS-1$
-    
+
     public static String application_directoryTitle;
     public static String application_fileTitle;
     public static String application_modelTitle;
-    
+
     public static String success;
     public static String error;
-    
+
     public static String menu_model;
     public static String menu_couplingTable;
     public static String menu_options;
     public static String menu_help;
     public static String menu_quit;
-    
+
     public static String onglet_file;
     public static String onglet_cruise;
     public static String onglet_station;
@@ -37,7 +38,7 @@ public class Messages {
     public static String onglet_station_valid;
     public static String onglet_data_valid;
     public static String success_etape;
-    
+
     public static String button_browse;
     public static String button_validateStep;
     public static String button_validateAllSteps;
@@ -47,12 +48,12 @@ public class Messages {
     public static String button_set;
     public static String button_convert;
     public static String button_restore;
-    
+
     public static String typeFile_profile;
     public static String typeFile_timeseries;
     public static String typeFile_trajectory;
-    
-    // ECRAN PRINCIPAL    
+
+    // ECRAN PRINCIPAL
     public static String view_file_inputTitle;
     public static String view_file_outputTitle;
     public static String view_file_fileType;
@@ -69,7 +70,7 @@ public class Messages {
     public static String view_file_sepComma;
     public static String view_file_sepSpace;
     public static String view_file_sepOther;
-    
+
     public static String view_convert_monoFichier;
     public static String view_convert_monoStation;
     public static String view_convert_sort;
@@ -78,8 +79,7 @@ public class Messages {
     public static String view_convert_summary_inputFileLabel;
     public static String view_convert_summary_inputDirectoryLabel;
     public static String view_convert_summary_outputFormatLabel;
-    
-    
+
     public static String table_label_meta;
     public static String table_label_code;
     public static String table_label_testIn;
@@ -93,20 +93,23 @@ public class Messages {
     public static String table_label_number;
     public static String table_label_sensor;
     public static String table_label_qc;
-    
+
     public static String unitTable_label_unit;
     public static String unitTable_label_unitAbbr;
     public static String unitTable_label_unitDef;
-    
+
     public static String menu_label_setValue;
     public static String menu_label_updateTest;
     public static String menu_label_paramList;
     public static String menu_label_selectP061Unit;
+
     public static String menu_label_upType;
     public static String menu_label_downType;
     public static String menu_label_removeType;
+    public static String menu_label_upToTopParam;
     public static String menu_label_upParam;
     public static String menu_label_downParam;
+    public static String menu_label_downToBottomParam;
     public static String menu_label_removeParam;
     public static String menu_label_setFlag;
     public static String menu_label_deleteFlag;
@@ -114,7 +117,7 @@ public class Messages {
     public static String menu_label_removeFlag;
     public static String menu_label_deleteAllParameters;
     public static String menu_label_list;
-    
+
     public static String label_manual_01;
     public static String label_noValue_01;
     public static String label_auto_01;
@@ -132,12 +135,12 @@ public class Messages {
     public static String label_file;
     public static String label_string;
     public static String label_defaultValue;
-    
+
     public static String confirm_saveModel;
     public static String confirm_quit;
     public static String confirm_eraseFile;
     public static String confirm_useDir;
-    
+
     // FILE
     public static String edit_file_title;
     public static String edit_file_enteteFichier;
@@ -155,8 +158,8 @@ public class Messages {
     public static String edit_file_idcManual;
     public static String edit_file_sectionRuptureDonnees_end_with;
     public static String edit_file_termination_start;
-    
-    //CRUISE
+
+    // CRUISE
     public static String edit_cruise_title;
     public static String edit_cruise_sectionReference;
     public static String edit_cruise_sectionReference_lib;
@@ -183,8 +186,8 @@ public class Messages {
     public static String edit_cruise_sectionComments;
     public static String edit_cruise_sectionComments_lib;
     public static String edit_cruise_openXML;
-    
-    //STATION
+
+    // STATION
     public static String edit_station_title;
     public static String edit_station_sectionReference_lib;
     public static String edit_station_refIncrement;
@@ -201,8 +204,8 @@ public class Messages {
     public static String edit_station_sectionMagn_lib;
     public static String edit_station_sectionSampling_lib;
     public static String edit_station_sectionQCflags_lib;
-    
-    //DATA
+
+    // DATA
     public static String edit_data_title;
     public static String edit_data_parametersList;
     public static String edit_data_parameterListP091;
@@ -215,7 +218,7 @@ public class Messages {
     public static String edit_data_verticalParameters_pressure;
     public static String edit_data_verticalParameters_info_chooseDepthBSBed;
     public static String edit_data_verticalParameters_info_chooseDepthBSurfOrPressure;
-    
+
     public static String edit_data_belowSeaSurface;
     public static String edit_data_belowSeaBed;
     public static String edit_data_P091;
@@ -225,9 +228,8 @@ public class Messages {
     public static String edit_data_error_dataListUnknown;
     public static String edit_data_dataListDialogBox_title;
     public static String edit_data_dataListDialogBox_text;
-    
-    
-    //CONVERSION
+
+    // CONVERSION
     public static String edit_convert_title;
     public static String edit_convert_endODV;
     public static String edit_convert_endMED;
@@ -235,7 +237,7 @@ public class Messages {
     public static String edit_convert_outputDir;
     public static String edit_convert_sortStations;
     public static String edit_convert_batchInfoTitle;
-    
+
     // MESSAGES D'INFORMATIONS REGLES INPUT/CONV (onglet File)
     public static String edit_file_info_medatlasForbiddenBecauseCollection;
     public static String edit_file_info_cruiseDisabledBecauseODV;
@@ -268,12 +270,11 @@ public class Messages {
     public static String error_convert_outputFile;
     public static String error_convert_stationsDoubles;
     public static String error_unknown_format;
-    
+
     public static String error_fileName_message;
     public static String error_lineNumber_message;
-    
 
-    //ACTIONS
+    // ACTIONS
     public static String settings_typePlateForme;
     public static String settings_accesDonnees;
     public static String error_updateSurvey_url;
@@ -343,7 +344,7 @@ public class Messages {
     public static String error_table;
     public static String settings_defaultOutputFormat;
     public static String settings_flagDefault;
-    
+
     public static String table_edmo;
     public static String table_dataTypes;
     public static String table_parameters;
@@ -352,7 +353,7 @@ public class Messages {
     public static String table_datacenter;
     public static String table_region;
     public static String table_survey;
-    
+
     public static String table_label_filter;
     public static String button_select;
     public static String error_table_dataTypes;
@@ -360,8 +361,8 @@ public class Messages {
     public static String table_label_codeName;
     public static String success_openSurveyDesc;
     public static String table_label_refName;
-    
-    // VOCABULARY UPDATE 
+
+    // VOCABULARY UPDATE
     public static String connect_nemo;
     public static String connect_vocab;
     public static String connect_edmo;
@@ -381,7 +382,7 @@ public class Messages {
     public static String CHECKED;
     public static String FAILED;
     public static String INTERRUPTED;
-    
+
     // MAPPING
     public static String ImportMappingAction_1;
     public static String ImportMappingAction_5;
@@ -433,7 +434,7 @@ public class Messages {
     public static String CouplingTableExport_2;
     public static String CouplingTableExit_confirm;
     public static String askDataType_Title;
-    
+
     // etape
     public static String Etape_24;
     public static String Etape_27;
@@ -492,8 +493,7 @@ public class Messages {
     public static String Etape_130;
     public static String Etape_131;
     public static String Etape_132;
-    
-    
+
     public static String SaveAction_1;
     public static String SaveAction_3;
     public static String SaveAction_4;
@@ -542,12 +542,12 @@ public class Messages {
     public static String SingleFileSurvey_1;
     public static String ParameterModel_1;
     public static String ParameterModel_2;
-    
-    
-    static {
+
+    static
+    {
         // check config de la langue
         String langue = Nemo.getInstance().getConfig().getLang();
-        
+
         // initialize resource bundle
         StringBuffer bundleName = new StringBuffer(BUNDLE_NAME);
         if (langue.equals(Intern.lang_fr) || langue.equals(Intern.lang_en))
@@ -558,29 +558,31 @@ public class Messages {
         NLS.initializeMessages(bundleName.toString(), Messages.class);
     }
 
-	private Messages() {
-	}
+    private Messages()
+    {
+    }
 
-	public static String getString(String key) 
+    public static String getString(String key)
     {
         try
         {
             // check config de la langue
             String langue = Nemo.getInstance().getConfig().getLang();
-            
+
             StringBuffer bundleName = new StringBuffer(BUNDLE_NAME);
-            
+
             if (langue.equals(Intern.lang_fr) || langue.equals(Intern.lang_en))
             {
                 bundleName.append(Global.UNDERSCORE);
                 bundleName.append(langue);
             }
-            ResourceBundle resource = ResourceBundle.getBundle(bundleName.toString());
+            ResourceBundle resource =
+                ResourceBundle.getBundle(bundleName.toString());
             return resource.getString(key);
-        } 
-        catch (MissingResourceException e) 
+        }
+        catch (MissingResourceException e)
         {
             return '!' + key + '!';
         }
-	}
+    }
 }
