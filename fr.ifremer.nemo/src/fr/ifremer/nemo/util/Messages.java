@@ -102,7 +102,7 @@ public class Messages
     public static String menu_label_updateTest;
     public static String menu_label_paramList;
     public static String menu_label_selectP061Unit;
-
+    public static String menu_label_selectFormat;
     public static String menu_label_upType;
     public static String menu_label_downType;
     public static String menu_label_removeType;

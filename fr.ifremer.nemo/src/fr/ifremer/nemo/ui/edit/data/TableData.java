@@ -23,6 +23,7 @@ import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.domain.MediaDomain;
 import fr.ifremer.nemo.ui.FilteredTableFactory;
 import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.ui.tables.FormatsFilteredTable;
 import fr.ifremer.nemo.ui.tables.ParameterFilteredTable;
 import fr.ifremer.nemo.ui.tables.UnitFilteredTable;
 import fr.ifremer.nemo.util.Global;
@@ -46,6 +47,32 @@ public class TableData
      * où on est en P011viaP021, pour affecter une unité
      */
     private ArrayList<TypeUnit> typesP061;
+    /**
+     * formats output
+     */
+    private ArrayList<TypeFormat> typesFormat;
+
+    /**
+     * Getter sur typesFormat.
+     * 
+     * @return the typesFormat
+     */
+    public ArrayList<TypeFormat> getTypesFormat()
+    {
+        return typesFormat;
+    }
+
+    /**
+     * Setter sur typesFormat.
+     * 
+     * @param typesFormat
+     *            the typesFormat to set
+     */
+    public void setTypesFormat(ArrayList<TypeFormat> typesFormat)
+    {
+        this.typesFormat = typesFormat;
+    }
+
     /**
      * Parametres à afficher dans le tableau de l'onglet data
      */
@@ -554,7 +581,7 @@ public class TableData
                 }
             }
         });
-        // ========= Liste des unités P061
+        // ========= Liste des unités P061 (P011 via P021 seulement)
         if (Nemo.getInstance().getViewMain().getMyRulesManager()
             .getMyDataListType() == DataListTypeEnum.P011_VIA_P021)
         {
@@ -566,6 +593,21 @@ public class TableData
                     initTypesP061();
                     int indice = myTable.getSelectionIndex();
                     openMyUnitFilteredTable(indice);
+                }
+            });
+        }
+        // ========= Selection d'un format (P011 via P021 seulement)
+        if (Nemo.getInstance().getViewMain().getMyRulesManager()
+            .getMyDataListType() == DataListTypeEnum.P011_VIA_P021)
+        {
+            MenuItem selectFormat = new MenuItem(menu, SWT.NONE);
+            selectFormat.setText(Messages.menu_label_selectFormat);
+            selectFormat.addListener(SWT.Selection, new Listener() {
+                public void handleEvent(Event e)
+                {
+                    initTypesP061();
+                    int indice = myTable.getSelectionIndex();
+                    openMyFormatFilteredTable(indice);
                 }
             });
         }
@@ -702,6 +744,13 @@ public class TableData
     public void openMyUnitFilteredTable(int rowIndex)
     {
         getMyUnitFilteredTable().open(
+            Nemo.getInstance().getViewMain().getEditDataForm()
+                .getCompositeData().getParent());
+    }
+
+    public void openMyFormatFilteredTable(int rowIndex)
+    {
+        getMyFormatFilteredTable().open(
             Nemo.getInstance().getViewMain().getEditDataForm()
                 .getCompositeData().getParent());
     }
@@ -1265,6 +1314,12 @@ public class TableData
         return theTable;
     }
 
+    public FormatsFilteredTable getMyFormatFilteredTable()
+    {
+        FormatsFilteredTable theTable = new FormatsFilteredTable();
+        return theTable;
+    }
+
     public void setUnit(TypeUnit typeUnit)
     {
         int selectedRow = myTable.getSelectionIndex();
@@ -1274,6 +1329,17 @@ public class TableData
             item.setText(1, typeUnit.getTerm());
             // FAE 6542
             item.setText(13, typeUnit.getUnitKey());
+        }
+    }
+
+    public void setFormat(TypeFormat typeFormat)
+    {
+        int selectedRow = myTable.getSelectionIndex();
+        if (selectedRow > -1)
+        {
+            TableItem item = myTable.getItem(selectedRow);
+            item.setText(6, typeFormat.getFormat());
+            item.setText(8, typeFormat.getExample());
         }
     }
 
