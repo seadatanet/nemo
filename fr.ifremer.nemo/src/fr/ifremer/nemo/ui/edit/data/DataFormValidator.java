@@ -105,9 +105,13 @@ public class DataFormValidator extends FormValidator
 
                 /**
                  * data30 verif compatibilité valeur par defaut et valeur output
+                 * FAE 7241: pas de test pour ODV (outputDef optionelle car ne sert pas en ODV)
                  */
-                ok = ok && checkDefaultAndOutputCompatibility(typeCourant);
-
+                if (!Nemo.getInstance().getViewMain().getMyRulesManager()
+                    .isConversionToODV())
+                {
+                    ok = ok && checkDefaultAndOutputCompatibility(typeCourant);
+                }
                 /** data40 check des valeurs debut<fin */
                 ok = ok && checkStartAndEnd(typeCourant);
 
@@ -480,15 +484,8 @@ public class DataFormValidator extends FormValidator
         EditDataForm editDataForm =
             Nemo.getInstance().getViewMain().getEditDataForm();
         // test de toutes les valeurs debut / fin des Data
-        try
-        {
-            res = editDataForm.getMyTableData().majChampTest();
-        }
-        catch (Exception e)
-        {
-            res = false;
-            e.printStackTrace();
-        }
+
+        res = editDataForm.getMyTableData().majChampTest();
 
         if (!res)
         {
