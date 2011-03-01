@@ -15,301 +15,352 @@ import fr.ifremer.nemo.domain.MediaDomain;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.StationDomain;
 import fr.ifremer.nemo.input.MediaModel;
-import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Global.E_EndData;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
-import fr.ifremer.nemo.util.Global.E_TypeConversion;
-
+import fr.ifremer.nemo.util.Intern;
 
 /**
  * 
  */
-public abstract class NemoWriter{
-	
-	/**
-	 * Input File Reader
-	 */
-	protected BufferedReader bufferedReader = null;
-    //protected String inputFilePath;
-    //protected int readerSize = 0;
-    
-	/**
-	 * Ouput File Writer
-	 */
-	protected PrintWriter outputFileWriter = null;
-	/**
-	 * current readed line
-	 */
-	protected String readedLine = Global.EMPTY_STRING;
-	/**
-	 * current number of line
-	 */
-	protected int numLine = 0;
-    
+public abstract class NemoWriter
+{
+
+    /**
+     * Input File Reader
+     */
+    protected BufferedReader bufferedReader = null;
+    // protected String inputFilePath;
+    // protected int readerSize = 0;
+
+    /**
+     * Ouput File Writer
+     */
+    protected PrintWriter outputFileWriter = null;
+    /**
+     * current readed line
+     */
+    protected String readedLine = Global.EMPTY_STRING;
+    /**
+     * current number of line
+     */
+    protected int numLine = 0;
+
     protected final InputDomain iDomain;
 
     protected HashSet<String> stationsList;
 
-	protected NemoWriter() {
+    protected NemoWriter()
+    {
         iDomain = Nemo.getInstance().getDomain();
         stationsList = new HashSet<String>();
-	}
+    }
 
-	/**
-	 * @throws GenerationException
-	 */
-	public void write(ProgressNotification a_Progress) throws GenerationException{
+    /**
+     * @throws GenerationException
+     */
+    public void write(ProgressNotification a_Progress)
+            throws GenerationException
+    {
 
-	    MediaDomain media = iDomain.getMedia();
-	    StationDomain stationDomain = iDomain.getStation();
+        MediaDomain media = iDomain.getMedia();
+        StationDomain stationDomain = iDomain.getStation();
 
+        stationDomain.updateRef();
 
-	    stationDomain.updateRef();
+        try
+        {
 
-	    try {
+            int readerSize = 0;
+            // pour chaque repertoire d'entree
+            for (String inputFilePath : media.getInputFilesNames().keySet())
+            {
 
-	        int readerSize = 0;         
-	        // pour chaque repertoire d'entree
-	        for (String inputFilePath : media.getInputFilesNames().keySet()){
-
-	            //  FAE 6087
+                // FAE 6087
                 stationDomain.updateRef();
 
+                // pour chaque fichier de ce repertoire d'entree
+                for (String inputFileName : media.getInputFilesNames().get(
+                    inputFilePath))
+                {
+                    Nemo.getInstance().setLog_currentInputFile(
+                        inputFilePath + "/" + inputFileName);
 
-	            // pour chaque fichier de ce repertoire d'entree
-	            for (String inputFileName : media.getInputFilesNames().get(inputFilePath)){
-                    Nemo.getInstance().setLog_currentInputFile(inputFilePath+"/"+inputFileName);
+                    File inputFile =
+                        new File(inputFilePath + File.separator + inputFileName);
+                    bufferedReader =
+                        new BufferedReader(new FileReader(inputFile));
+                    readerSize = Long.valueOf(inputFile.length()).intValue();
+                    bufferedReader.mark(readerSize + 1);
 
-	                File inputFile= new File(inputFilePath + File.separator + inputFileName);
-	                bufferedReader = new BufferedReader(new FileReader(inputFile));
-	                readerSize = Long.valueOf(inputFile.length()).intValue();
-	                bufferedReader.mark(readerSize + 1);
+                    if (!stationDomain.stationIsRegistered(inputFilePath,
+                        inputFileName))
+                    {
+                        // première lecture pour obtenir le nombre de valeurs
+// par stations
+                        Station st = null;
+                        int nbrecords = 0;
 
-	                if (!stationDomain.stationIsRegistered(inputFilePath, inputFileName)){
-	                    // première lecture pour obtenir le nombre de valeurs par stations
-	                    Station st = null;
-	                    int nbrecords = 0;
+                        while ((readedLine = bufferedReader.readLine()) != null)
+                        {
+                            numLine++;
+                            Nemo.getInstance().setLog_currentInputLine(
+                                String.valueOf(numLine));
+                            if (numLine == 1)
+                            {
+                                consumeFileHeader();
+                            }
 
-	                    while ((readedLine = bufferedReader.readLine()) != null) {
-	                        numLine++;
-                            Nemo.getInstance().setLog_currentInputLine(String.valueOf(numLine));
-	                        if (numLine == 1){
-	                            consumeFileHeader();
-	                        }
+                            if (isEndData() && (st != null))
+                            {
+                                st.setNbRecords(nbrecords);
+                                stationDomain.addStation(inputFilePath, st);
+                                st = null;
+                            }
 
+                            if (isStartStationHeader())
+                            {
+                                nbrecords = 0;
 
-	                        if (isEndData() && (st != null)){
-	                            st.setNbRecords(nbrecords);
-	                            stationDomain.addStation(inputFilePath, st);
-	                            st = null;
-	                        }
+                                String[] inputStationHeader =
+                                    consumeStationHeader();
+                                if (inputStationHeader != null)
+                                {
+                                    st =
+                                        new Station(inputFile.getName(),
+                                            inputStationHeader);
+                                    String ref =
+                                        stationDomain.getReference(
+                                            inputFile.getName(),
+                                            inputStationHeader, true);
 
-	                        if (isStartStationHeader()){
-	                            nbrecords = 0;
+                                    st.setReference(ref);
 
-	                            String[] inputStationHeader = consumeStationHeader();
-	                            if (inputStationHeader != null){
-	                                st = new Station(inputFile.getName(),inputStationHeader);
-	                                String ref = stationDomain.getReference(inputFile.getName(), inputStationHeader, true);
+                                    if (stationDomain.isSomeInData())
+                                    {
+                                        // la première ligne des données est
+// déjà "consommée" dans stationHeaderBuffer
+                                        st.updateGlobalParamQc(inputStationHeader[inputStationHeader.length - 1]);
+                                        nbrecords++;
 
-	                                st.setReference(ref);
+                                        // sampling rate peut etre à calculer
+                                        if (media.getModel().getInputType() != E_InputType.PROFILE)
+                                            if (stationDomain.getModel()
+                                                .getProperty(Intern.S_DATE)
+                                                .isInData())
+                                            {
+                                                if (!isEndData()) // FAE 4673 Pb
+// si une seule ligne données et pas d'entête station
+                                                    st.calculSamplingRate(readedLine);
+                                            }
+                                    }
+                                    if (!isEndData()) // FAE 4673 Pb si une
+// seule ligne données et pas d'entête station
+                                        st.updateGlobalParamQc(readedLine);
 
-	                                if (stationDomain.isSomeInData()){
-	                                    // la première ligne des données est déjà "consommée" dans stationHeaderBuffer 
-	                                    st.updateGlobalParamQc(inputStationHeader[inputStationHeader.length -1]);
-	                                    nbrecords++;
+                                    nbrecords++;
 
-	                                    // sampling rate peut etre à calculer
-	                                    if (media.getModel().getInputType() != E_InputType.PROFILE)
-	                                        if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData()){
-	                                            if (!isEndData()) // FAE 4673 Pb si une seule ligne données et pas d'entête station
-	                                                st.calculSamplingRate(readedLine);
-	                                        }
-	                                }
-	                                if (!isEndData()) // FAE 4673 Pb si une seule ligne données et pas d'entête station
-	                                    st.updateGlobalParamQc(readedLine);
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+                            else if (st != null)
+                            {
+                                if (media.getModel().getInputType() == E_InputType.TRAJECTORY)
+                                {
+                                    st.completeMedatlasTrajectory(readedLine);
+                                }
+                                st.updateGlobalParamQc(readedLine);
+                                nbrecords++;
+                            }
+                        }
 
-	                                nbrecords++;
+                        if (st != null)
+                        {
+                            // endData = EOF : la station n'a pas été
+// enregistrée
+                            st.setNbRecords(nbrecords);
+                            stationDomain.addStation(inputFilePath, st);
+                        }
 
+                    }
 
-	                          
+                    // FAE1105 : tri des stations selon Nom Fichier - Date -
+// Référence Station
+                    Collections.sort(stationDomain.getStations(inputFilePath));
 
-	                            }
-	                            else{
-	                                break;
-	                            }
-	                        }
-	                        else if (st != null){
-	                            if (media.getModel().getInputType() == E_InputType.TRAJECTORY){
-	                                st.completeMedatlasTrajectory(readedLine);
-	                            }
-	                            st.updateGlobalParamQc(readedLine);
-	                            nbrecords++;
-	                        }
-	                    }
+                    numLine = 0;
+                    bufferedReader.reset();
 
-	                    if (st != null){
-	                        // endData = EOF : la station n'a pas été enregistrée
-	                        st.setNbRecords(nbrecords);
-	                        stationDomain.addStation(inputFilePath, st);
-	                    }
+                }
+                bufferedReader.close();
 
-	                }
+                writeFile(inputFilePath);
+            }
 
-	                // FAE1105 : tri des stations selon Nom Fichier - Date - Référence Station
-	                Collections.sort(stationDomain.getStations(inputFilePath));
+        }
+        catch (Exception e)
+        {
+            stationDomain.resetStations();
+            e.printStackTrace();
+            throw new GenerationException(e);
 
-	                numLine = 0;
-	                bufferedReader.reset();
+        }
+        finally
+        {
+            numLine = 0;
+            try
+            {
+                if (bufferedReader != null)
+                    bufferedReader.close();
+                if (outputFileWriter != null)
+                    outputFileWriter.close();
+            }
+            catch (IOException ioe)
+            {
+                throw new GenerationException(ioe);
+            }
+        }
 
-	            }
-	            bufferedReader.close();
+    }
 
-	            writeFile(inputFilePath);   
-	        }
+    /**
+     * adapted writing processing
+     * 
+     * @throws SplitterException
+     * @throws IOException
+     * @throws ParseException
+     */
+    public abstract void writeFile(String inputFilePath) throws Exception;
 
-	    } catch (Exception e) {
-	        stationDomain.resetStations();
-	        e.printStackTrace();
-	        throw new GenerationException(e);
-
-	    } finally {
-	        numLine = 0;
-	        try {
-	            if (bufferedReader != null)
-	                bufferedReader.close();
-	            if (outputFileWriter != null)
-	                outputFileWriter.close();
-	        } catch (IOException ioe) {
-	            throw new GenerationException(ioe);
-	        }
-	    }
-
-	}
-
-	/**
-	 * adapted writing processing
-	 * @throws SplitterException
-	 * @throws IOException
-	 * @throws ParseException
-	 */
-	public abstract void writeFile(String inputFilePath) 
-           throws Exception;
-    
     /**
      * place le Reader après l'entête de fichier
+     * 
      * @return StringBuffer (fileHeader)
-     * @throws IOException 
+     * @throws IOException
      */
-    protected String[] consumeFileHeader() throws IOException{
+    protected String[] consumeFileHeader() throws IOException
+    {
         StringBuffer fileHeader = new StringBuffer();
         int nbLignes = iDomain.getMedia().getModel().getFileHeader();
 
-        for (int i = 0; i < nbLignes; i++){
+        for (int i = 0; i < nbLignes; i++)
+        {
             fileHeader.append(consumeLine());
         }
         return fileHeader.toString().split(Global.RN);
     }
-    
+
     /**
-     * 
      * @return
      */
-    protected boolean isStartStationHeader(){
+    protected boolean isStartStationHeader()
+    {
         boolean start = false;
         MediaModel media = iDomain.getMedia().getModel();
         int nbLignesFileHeader = media.getFileHeader();
-        if (numLine == (nbLignesFileHeader + 1)){
+        if (numLine == (nbLignesFileHeader + 1))
+        {
             start = true;
         }
-        else if (media.getProcessType() == E_ProcessType.CRUISE_FILE || media.isMultiStations()){
+        else if (media.getProcessType() == E_ProcessType.CRUISE_FILE
+                || media.isMultiStations())
+        {
             start = isEndData();
         }
         return start;
     }
-    
-    protected boolean isEndData(){
+
+    protected boolean isEndData()
+    {
         MediaModel media = iDomain.getMedia().getModel();
-        
+
         boolean end = false;
-        switch (media.getEndData()){
-            case NEXT_START_WITH :
-            case END_WITH :
+        switch (media.getEndData())
+        {
+            case NEXT_START_WITH:
+            case END_WITH:
                 end = readedLine.startsWith(media.getEndDataPattern());
-                break;
-            case EMPTY_LINE :
+            break;
+            case EMPTY_LINE:
                 end = readedLine.trim().matches("^$"); //$NON-NLS-1$
-                break;
-            default :
+            break;
+            default:
                 end = false;
-                break;
+            break;
         }
         return end;
     }
-    
-    
+
     /**
-     * 
      * @return
      * @throws IOException
      */
-    protected String[] consumeStationHeader() throws IOException{
-        
+    protected String[] consumeStationHeader() throws IOException
+    {
+
         MediaModel media = iDomain.getMedia().getModel();
         StringBuffer stationHeader = new StringBuffer();
-        
-        if (numLine > (media.getFileHeader() + 1)){
+
+        if (numLine > (media.getFileHeader() + 1))
+        {
             // consommation de la ligne de fin de données
-            if (media.getEndData() != E_EndData.NEXT_START_WITH){
+            if (media.getEndData() != E_EndData.NEXT_START_WITH)
+            {
                 consumeLine();
             }
-            
+
             // consommation des lignes séparant les stations
-            for (int i = 0; i < media.getEndStation(); i++){
+            for (int i = 0; i < media.getEndStation(); i++)
+            {
                 if (readedLine != null)
                     consumeLine();
             }
         }
-        
+
         // récupération des lignes de l'entête station
         String pattern = media.getStationHeaderPattern();
-        if (!pattern.equals(Global.EMPTY_STRING)){
-            while (readedLine != null && !readedLine.startsWith(pattern)){
+        if (!pattern.equals(Global.EMPTY_STRING))
+        {
+            while (readedLine != null && !readedLine.startsWith(pattern))
+            {
                 // récupération de toutes les lignes avant "pattern"
                 stationHeader.append(consumeLine());
             }
             // récupération de la ligne commencant par "pattern"
             stationHeader.append(consumeLine());
         }
-        for (int i = 0; i < media.getStationHeader(); i++){
+        for (int i = 0; i < media.getStationHeader(); i++)
+        {
             if (readedLine != null)
                 stationHeader.append(consumeLine());
         }
-        
+
         // + 1 ligne si certaines informations station sont dans les données
-        if (iDomain.getStation().isSomeInData() && readedLine != null){
+        if (iDomain.getStation().isSomeInData() && readedLine != null)
+        {
             stationHeader.append(consumeLine());
         }
-        
+
         if (readedLine == null)
             return null;
-        
+
         return stationHeader.toString().split(Global.RN);
     }
-    
+
     /**
-     * 
      * @return
      * @throws IOException
      */
-    private StringBuffer consumeLine() throws IOException{
+    private StringBuffer consumeLine() throws IOException
+    {
         StringBuffer buffer = new StringBuffer();
         buffer.append(readedLine);
         buffer.append(Global.RN);
-        
+
         readedLine = bufferedReader.readLine();
         numLine++;
         return buffer;
