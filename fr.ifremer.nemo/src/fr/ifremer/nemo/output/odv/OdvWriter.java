@@ -1,17 +1,13 @@
 package fr.ifremer.nemo.output.odv;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
-import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.domain.DataDomain;
 import fr.ifremer.nemo.domain.DateTimeUtils;
 import fr.ifremer.nemo.domain.Station;
@@ -21,8 +17,6 @@ import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global.E_InputType;
-import fr.ifremer.nemo.util.Global.E_ProcessType;
-import fr.ifremer.nemo.util.Global.E_TypeConversion;
 
 /**
  * specific NemoWriter : ODV
@@ -30,14 +24,24 @@ import fr.ifremer.nemo.util.Global.E_TypeConversion;
 public class OdvWriter extends NemoWriter
 {
 
-	Conversion c = Conversion.ODV;
-	HashMap<Double, String> stationDatas;
 	int indexRecord;
 
 	public OdvWriter()
 	{
 		super();
-		stationDatas = new HashMap<Double, String>();
+		myConversion = Conversion.ODV;
+	}
+
+	@Override
+	protected String getOutputFileName(String inputFilePath)
+	{
+		outputFileName = iDomain.getMedia().getOutputFileName();
+		if (isProcessTypeCollectionDir)
+		{
+			cruiseDomain.setDataSetRef(new File(inputFilePath).getName());
+			outputFileName += File.separator + cruiseDomain.getDataSetRef();
+		}
+		return outputFileName;
 	}
 
 	/*
@@ -50,41 +54,30 @@ public class OdvWriter extends NemoWriter
 	{
 		try
 		{
-			CruiseDomain cruise = iDomain.getCruise();
-			StationDomain station = iDomain.getStation();
+			stationDomain.updateRef();
+			outputFileName = getOutputFileName(inputFilePath);
 
-			station.updateRef();
-
-			String outputFileName = iDomain.getMedia().getOutputFileName();
-			E_ProcessType processType = iDomain.getMedia().getModel().getProcessType();
-			if (processType == E_ProcessType.COLLECTION_DIR)
-			{
-				cruise.setDataSetRef(new File(inputFilePath).getName());
-				outputFileName += File.separator + cruise.getDataSetRef();
-			}
-
-			E_TypeConversion selectedConversion = iDomain.getConversion().getCurrent();
-			if (selectedConversion == E_TypeConversion.ODV_MONOSTATION)
+			if (isConversionToODVMonostation)
 			{
 				// Conversion ODV - fichiers monostation => N fichiers de sortie
 
-				for (Station st : station.getStations(inputFilePath))
+				for (Station st : stationDomain.getStations(inputFilePath))
 				{
 
-					if (processType == E_ProcessType.COLLECTION_DIR)
+					if (isProcessTypeCollectionDir)
 					{
 						new File(outputFileName).mkdir();
 					}
 
 					// FAE 6143
-					String localCdiId = station.getAndCheckLocalCDI(cruise, Conversion.ODV, st.getReference());
+					String localCdiId = stationDomain.getAndCheckLocalCDI(cruiseDomain, Conversion.ODV, st.getReference());
 					String mOutputFileName = outputFileName + File.separator + localCdiId + Conversion.ODV.getExt();
 					outputFileWriter = new PrintWriter(new BufferedWriter(new FileWriter(mOutputFileName)));
 
 					// écriture de l'entête campagne
-					StringBuffer cruiseHeader = cruise.getHeader(c);
-					outputFileWriter.println(cruiseHeader);
-					if (processType == E_ProcessType.CRUISE_FILE)
+					printCruiseHeader();
+
+					if (isProcessTypeCruiseFile)
 					{
 						iDomain.getStation().updateRef();
 					}
@@ -96,7 +89,7 @@ public class OdvWriter extends NemoWriter
 			{
 				// conversion ODV multistations => 1 fichier de sortie
 
-				if (processType == E_ProcessType.COLLECTION_DIR)
+				if (isProcessTypeCollectionDir)
 				{
 					outputFileName += Conversion.ODV.getExt();
 					iDomain.getStation().updateRef();
@@ -104,17 +97,16 @@ public class OdvWriter extends NemoWriter
 				outputFileWriter = new PrintWriter(new BufferedWriter(new FileWriter(outputFileName)));
 
 				// écriture de l'entête campagne
-				StringBuffer cruiseHeader = cruise.getHeader(c);
-				outputFileWriter.println(cruiseHeader);
+				printCruiseHeader();
 
-				for (Station st : station.getStations(inputFilePath))
+				for (Station st : stationDomain.getStations(inputFilePath))
 				{
-					// FAE 6087 reinitialisation de la reference à lecture
+					// FAE 6087 reinitialisation de la reference à lecture le
 					// fichier entree (car pour ecrire une station on lit tout
 					// le fichier)
 					// 07/12/2010: 6087 ajout du if CRUISE_FILE, sinon erreur
 					// dans le cas cruise dir
-					if (processType == E_ProcessType.CRUISE_FILE)
+					if (isProcessTypeCruiseFile)
 					{
 						iDomain.getStation().updateRef();
 					}
@@ -146,7 +138,7 @@ public class OdvWriter extends NemoWriter
 		{
 			dataLine.append(iDomain.getStation().getOdvEmptyStationHeader());
 		}
-		dataLine.append(data.getDataLine(c, currentStation, line, indexRecord));
+		dataLine.append(data.getDataLine(myConversion, currentStation, line, indexRecord));
 
 		if (iDomain.getConversion().isSortData())
 		{
@@ -176,9 +168,8 @@ public class OdvWriter extends NemoWriter
 	{
 
 		StationDomain station = iDomain.getStation();
-		File inputFile = new File(inputFilePath + File.separator + currentStation.getFileName());
-		bufferedReader = new BufferedReader(new FileReader(inputFile));
 
+		bufferedReader = getBufferReader(inputFilePath, currentStation);
 		StringBuffer stationHeader = station.getOdvEmptyStationHeader();
 		boolean stationWrited = false;
 		indexRecord = 0;
@@ -188,12 +179,11 @@ public class OdvWriter extends NemoWriter
 		while ((readedLine = bufferedReader.readLine()) != null)
 		{
 			numLine++;
-
-			if (numLine == 1)
+			// System.out.println("2ere passe no ligne= " + numLine);
+			if (inFileHeader())
 			{
-				consumeFileHeader();
+				continue;
 			}
-
 			if (isStartStationHeader())
 			{
 				String[] inputStationHeader = consumeStationHeader();
@@ -209,7 +199,7 @@ public class OdvWriter extends NemoWriter
 				if (inputStationHeader != null && currentStation.getReference().equals(stRef))
 				{
 
-					stationHeader = iDomain.getStation().getHeader(c, currentStation, inputStationHeader);
+					stationHeader = iDomain.getStation().getHeader(myConversion, currentStation, inputStationHeader);
 
 					if (station.isSomeInData())
 					{

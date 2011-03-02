@@ -8,11 +8,13 @@
 package fr.ifremer.nemo.util;
 
 import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Description: TODO
+ * 
  * @author sbregent
- *
  */
 public class Utils
 {
@@ -87,7 +89,7 @@ public class Utils
         value = value.replace('|', newChar);
         return value;
     }
-    
+
     public static boolean isNumeric(String inputString)
     {
         boolean numeric = false;
@@ -101,5 +103,18 @@ public class Utils
             numeric = false;
         }
         return numeric;
+    }
+
+    public static boolean isreadedLineMatchesRegexp(String readedLine,
+            String regexp)
+    {
+        boolean res = false;
+        // pattern
+        Pattern p = Pattern.compile(regexp);
+        // création d’un moteur de recherche
+        Matcher m = p.matcher(readedLine);
+        // lancement de la recherche de toutes les occurrences
+        res = m.matches();
+        return res;
     }
 }

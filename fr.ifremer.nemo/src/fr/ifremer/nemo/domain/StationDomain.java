@@ -291,7 +291,7 @@ public class StationDomain
             _ref++;
     }
     public StringBuffer getHeader(Conversion c, Station currentStation,
-            String[] inputFile) throws ParseException
+            String[] inputStationHeader) throws ParseException
     {
 
         _currentStation = currentStation;
@@ -300,17 +300,17 @@ public class StationDomain
         switch (c)
         {
             case ODV:
-                stationHeader = getOdvHeader(currentStation, inputFile);
+                stationHeader = getOdvHeader(currentStation, inputStationHeader);
             break;
             case MEDATLAS:
-                stationHeader = getMedatlasHeader(currentStation, inputFile);
+                stationHeader = getMedatlasHeader(currentStation, inputStationHeader);
             break;
         }
         return stationHeader;
     }
 
     @SuppressWarnings("nls")
-    private StringBuffer getOdvHeader(Station currentStation, String[] inputFile)
+    private StringBuffer getOdvHeader(Station currentStation, String[] inputStationHeader)
             throws ParseException
     {
 
@@ -371,7 +371,7 @@ public class StationDomain
         odvStationHeader.append(Global.TAB);
 
         // Bot. Depth [m]
-        Object botDepth = _model.getProperty(Intern.S_DEPTH).applyOn(inputFile);
+        Object botDepth = _model.getProperty(Intern.S_DEPTH).applyOn(inputStationHeader);
 
 //      6998
 //        if (botDepth.equals("Default"))
@@ -514,7 +514,7 @@ public class StationDomain
     }
     @SuppressWarnings("nls")
     private StringBuffer getMedatlasHeader(Station currentStation,
-            String[] inputFile) throws ParseException
+            String[] inputStationHeader) throws ParseException
     {
         StringBuffer medStationHeader = new StringBuffer();
         String stationRef = currentStation.getReference();
@@ -548,7 +548,7 @@ public class StationDomain
         medStationHeader.append(Elts.getElt(Elts.station_lon, currentStation
             .getLongitude()));
 
-        Object value = _model.getProperty(Intern.S_DEPTH).applyOn(inputFile);
+        Object value = _model.getProperty(Intern.S_DEPTH).applyOn(inputStationHeader);
 
         boolean depthIsDefault = false;
         if (value.equals("Default"))
@@ -598,13 +598,13 @@ public class StationDomain
         medStationHeader.append(start);
         //Ajout du trim FAE 5803
         medStationHeader.append(Elts.getElt(Elts.station_dcHistory, ((String)_model
-            .getProperty(Intern.S_DCHIST + "1").applyOn(inputFile)).trim()));
+            .getProperty(Intern.S_DCHIST + "1").applyOn(inputStationHeader)).trim()));
         medStationHeader.append(Global.RN);
 
         medStationHeader.append(start);
        try{
         medStationHeader.append(Elts.limit((String) _model.getProperty(
-            Intern.S_DCHIST + "2").applyOn(inputFile), Elts.station_line));
+            Intern.S_DCHIST + "2").applyOn(inputStationHeader), Elts.station_line));
         }catch(Exception nulException){
             // this is authorized: only DCHistory1 is used, DC History2 is empty
             // so this is not an error
@@ -629,7 +629,7 @@ public class StationDomain
         medStationHeader.append(Global.RN);
 
         // pour chaque ligne de commentaires
-        for (String line : getCommentLines(inputFile))
+        for (String line : getCommentLines(inputStationHeader))
         {
             medStationHeader.append(start);
             medStationHeader.append(line);
@@ -641,7 +641,7 @@ public class StationDomain
 
         if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() != E_InputType.PROFILE)
             medStationHeader.append(getMedTimeSeriesHeader(currentStation,
-                inputFile));
+                inputStationHeader));
 
         // --SDN_parameter_mapping--
         medStationHeader.append(dataDomain.getSDNparameters(Conversion.MEDATLAS));
@@ -662,13 +662,13 @@ public class StationDomain
         // *SURFACE SAMPLES=
         medStationHeader.append(start);
         medStationHeader.append(Elts.getElt(Elts.station_surface, _model
-            .getProperty(Intern.S_SURFACE + "1").applyOn(inputFile)).trim());
+            .getProperty(Intern.S_SURFACE + "1").applyOn(inputStationHeader)).trim());
         medStationHeader.append(Global.RN);
 
         medStationHeader.append(start);
         try{
         medStationHeader.append(Elts.limit((String) _model.getProperty(
-            Intern.S_SURFACE + "2").applyOn(inputFile), Elts.station_line));
+            Intern.S_SURFACE + "2").applyOn(inputStationHeader), Elts.station_line));
         }catch(Exception nulException){
             // this is authorized: only DCHistory1 is used, DC History2 is empty
             // so this is not an error

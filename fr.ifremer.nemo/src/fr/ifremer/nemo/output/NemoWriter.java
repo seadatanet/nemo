@@ -2,24 +2,31 @@ package fr.ifremer.nemo.output;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.domain.CruiseDomain;
+import fr.ifremer.nemo.domain.DataDomain;
 import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.domain.MediaDomain;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.StationDomain;
 import fr.ifremer.nemo.input.MediaModel;
+import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_EndData;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
+import fr.ifremer.nemo.util.Utils;
 
 /**
  * 
@@ -27,17 +34,19 @@ import fr.ifremer.nemo.util.Intern;
 public abstract class NemoWriter
 {
 
+	protected HashMap<Double, String> stationDatas;
+
 	/**
 	 * Input File Reader
 	 */
 	protected BufferedReader bufferedReader = null;
-	// protected String inputFilePath;
-	// protected int readerSize = 0;
 
 	/**
 	 * Ouput File Writer
 	 */
 	protected PrintWriter outputFileWriter = null;
+	protected String outputFileName;
+
 	/**
 	 * current readed line
 	 */
@@ -48,13 +57,40 @@ public abstract class NemoWriter
 	protected int numLine = 0;
 
 	protected final InputDomain iDomain;
+	protected MediaDomain mediaDomain;
+	protected MediaModel mediaModel;
+	protected StationDomain stationDomain;
+	protected CruiseDomain cruiseDomain;
+	protected DataDomain dataDomain;
 
 	protected HashSet<String> stationsList;
 
+	protected boolean isProcessTypeCruiseFile = false;
+	protected boolean isProcessTypeCollectionDir = false;
+
+	protected Conversion myConversion;
+	protected boolean isConversionToODVMonostation = false;
+	protected boolean isConversionToODVMultistations = false;
+	protected boolean isRefIncremented = false;
+
 	protected NemoWriter()
 	{
-		iDomain = Nemo.getInstance().getDomain();
 		stationsList = new HashSet<String>();
+		iDomain = Nemo.getInstance().getDomain();
+		mediaDomain = iDomain.getMedia();
+		mediaModel = mediaDomain.getModel();
+		stationDomain = iDomain.getStation();
+		cruiseDomain = iDomain.getCruise();
+		dataDomain = iDomain.getData();
+		stationDatas = new HashMap<Double, String>();
+		isRefIncremented = iDomain.getStation().getModel().getReferenceProperty().isUserProvided();
+		isProcessTypeCruiseFile = mediaDomain.getModel().getProcessType() == E_ProcessType.CRUISE_FILE;
+		isProcessTypeCollectionDir = mediaDomain.getModel().getProcessType() == E_ProcessType.COLLECTION_DIR;
+
+		E_TypeConversion selectedConversion = iDomain.getConversion().getCurrent();
+		isConversionToODVMonostation = (selectedConversion == E_TypeConversion.ODV_MONOSTATION);
+		isConversionToODVMultistations = (selectedConversion == E_TypeConversion.ODV_MULTISTATIONS);
+
 	}
 
 	/**
@@ -63,9 +99,6 @@ public abstract class NemoWriter
 	public void write(ProgressNotification a_Progress) throws GenerationException
 	{
 
-		MediaDomain media = iDomain.getMedia();
-		StationDomain stationDomain = iDomain.getStation();
-
 		stationDomain.updateRef();
 
 		try
@@ -73,14 +106,14 @@ public abstract class NemoWriter
 
 			int readerSize = 0;
 			// pour chaque repertoire d'entree
-			for (String inputFilePath : media.getInputFilesNames().keySet())
+			for (String inputFilePath : mediaDomain.getInputFilesNames().keySet())
 			{
 
 				// FAE 6087
 				stationDomain.updateRef();
 
 				// pour chaque fichier de ce repertoire d'entree
-				for (String inputFileName : media.getInputFilesNames().get(inputFilePath))
+				for (String inputFileName : mediaDomain.getInputFilesNames().get(inputFilePath))
 				{
 					Nemo.getInstance().setLog_currentInputFile(inputFilePath + "/" + inputFileName);
 
@@ -100,11 +133,11 @@ public abstract class NemoWriter
 						{
 							numLine++;
 							Nemo.getInstance().setLog_currentInputLine(String.valueOf(numLine));
-							if (numLine == 1)
-							{
-								consumeFileHeader();
-							}
 
+							if (inFileHeader())
+							{
+								continue;
+							}
 							if (isEndData() && (st != null))
 							{
 								st.setNbRecords(nbrecords);
@@ -133,18 +166,19 @@ public abstract class NemoWriter
 										nbrecords++;
 
 										// sampling rate peut etre à calculer
-										if (media.getModel().getInputType() != E_InputType.PROFILE)
+										if (mediaDomain.getModel().getInputType() != E_InputType.PROFILE)
 											if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData())
 											{
 												if (!isEndData()) // FAE 4673 Pb
-												// si une seule ligne données et
-												// pas d'entête station
+													// si une seule ligne
+													// données et
+													// pas d'entête station
 													st.calculSamplingRate(readedLine);
 											}
 									}
 									if (!isEndData()) // FAE 4673 Pb si une
-									// seule ligne données et pas d'entête
-									// station
+										// seule ligne données et pas d'entête
+										// station
 										st.updateGlobalParamQc(readedLine);
 
 									nbrecords++;
@@ -155,7 +189,7 @@ public abstract class NemoWriter
 								}
 							} else if (st != null)
 							{
-								if (media.getModel().getInputType() == E_InputType.TRAJECTORY)
+								if (mediaDomain.getModel().getInputType() == E_InputType.TRAJECTORY)
 								{
 									st.completeMedatlasTrajectory(readedLine);
 								}
@@ -210,6 +244,15 @@ public abstract class NemoWriter
 
 	}
 
+	protected abstract String getOutputFileName(String inputFilePath);
+
+	protected void printCruiseHeader() throws ParseException
+	{
+		// écriture de l'entête campagne
+		StringBuffer cruiseHeader = cruiseDomain.getHeader(myConversion);
+		outputFileWriter.println(cruiseHeader);
+	}
+
 	/**
 	 * adapted writing processing
 	 * 
@@ -219,22 +262,16 @@ public abstract class NemoWriter
 	 */
 	public abstract void writeFile(String inputFilePath) throws Exception;
 
-	/**
-	 * place le Reader après l'entête de fichier
-	 * 
-	 * @return StringBuffer (fileHeader)
-	 * @throws IOException
-	 */
-	protected String[] consumeFileHeader() throws IOException
+	protected BufferedReader getBufferReader(String inputFilePath, Station currentStation) throws FileNotFoundException
 	{
-		StringBuffer fileHeader = new StringBuffer();
-		int nbLignes = iDomain.getMedia().getModel().getFileHeader();
+		File inputFile = new File(inputFilePath + File.separator + currentStation.getFileName());
+		return new BufferedReader(new FileReader(inputFile));
 
-		for (int i = 0; i < nbLignes; i++)
-		{
-			fileHeader.append(consumeLine());
-		}
-		return fileHeader.toString().split(Global.RN);
+	}
+
+	protected boolean inFileHeader()
+	{
+		return numLine <= mediaModel.getFileHeader();
 	}
 
 	/**
@@ -243,12 +280,11 @@ public abstract class NemoWriter
 	protected boolean isStartStationHeader()
 	{
 		boolean start = false;
-		MediaModel media = iDomain.getMedia().getModel();
-		int nbLignesFileHeader = media.getFileHeader();
+		int nbLignesFileHeader = mediaModel.getFileHeader();
 		if (numLine == (nbLignesFileHeader + 1))
 		{
 			start = true;
-		} else if (media.getProcessType() == E_ProcessType.CRUISE_FILE || media.isMultiStations())
+		} else if (isProcessTypeCruiseFile || mediaModel.isMultiStations())
 		{
 			start = isEndData();
 		}
@@ -257,13 +293,18 @@ public abstract class NemoWriter
 
 	protected boolean isEndData()
 	{
-		MediaModel media = iDomain.getMedia().getModel();
 
 		boolean end = false;
-		switch (media.getEndData()) {
+		switch (mediaModel.getEndData()) {
 		case NEXT_START_WITH:
 		case END_WITH:
-			end = readedLine.startsWith(media.getEndDataPattern());
+			if (mediaModel.getEndDataPatternIsRegexp())
+			{
+				end = Utils.isreadedLineMatchesRegexp(readedLine, mediaModel.getEndDataPattern() + ".*");
+			} else
+			{
+				end = readedLine.startsWith(mediaModel.getEndDataPattern());
+			}
 			break;
 		case EMPTY_LINE:
 			end = readedLine.trim().matches("^$"); //$NON-NLS-1$
@@ -282,27 +323,27 @@ public abstract class NemoWriter
 	protected String[] consumeStationHeader() throws IOException
 	{
 
-		MediaModel media = iDomain.getMedia().getModel();
 		StringBuffer stationHeader = new StringBuffer();
 
-		if (numLine > (media.getFileHeader() + 1))
+		if (numLine > (mediaModel.getFileHeader() + 1))
 		{
 			// consommation de la ligne de fin de données
-			if (media.getEndData() != E_EndData.NEXT_START_WITH)
+			if (mediaModel.getEndData() != E_EndData.NEXT_START_WITH)
 			{
 				consumeLine();
 			}
 
 			// consommation des lignes séparant les stations
-			for (int i = 0; i < media.getEndStation(); i++)
+			for (int i = 0; i < mediaModel.getEndStation(); i++)
 			{
 				if (readedLine != null)
 					consumeLine();
 			}
 		}
 
-		// récupération des lignes de l'entête station
-		String pattern = media.getStationHeaderPattern();
+		/** récupération des lignes de l'entête station **/
+		// si pattern
+		String pattern = mediaModel.getStationHeaderPattern();
 		if (!pattern.equals(Global.EMPTY_STRING))
 		{
 			while (readedLine != null && !readedLine.startsWith(pattern))
@@ -313,16 +354,19 @@ public abstract class NemoWriter
 			// récupération de la ligne commencant par "pattern"
 			stationHeader.append(consumeLine());
 		}
-		for (int i = 0; i < media.getStationHeader(); i++)
+		// si nb lignes fixe?
+		for (int i = 0; i < mediaModel.getStationHeader(); i++)
 		{
 			if (readedLine != null)
+			{
 				stationHeader.append(consumeLine());
+			}
 		}
 
 		// + 1 ligne si certaines informations station sont dans les données
 		if (iDomain.getStation().isSomeInData() && readedLine != null)
 		{
-			stationHeader.append(consumeLine());
+			stationHeader.append(readedLine);
 		}
 
 		if (readedLine == null)
