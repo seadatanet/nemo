@@ -154,11 +154,13 @@ public class Messages
 	public static String edit_file_indicFinDonnees;
 	public static String edit_file_idcEOF;
 	public static String edit_file_idcEmptyLine;
+	public static String edit_file_idcBeginLineChange;
 	public static String edit_file_idcNextStation;
 	public static String edit_file_idcNextStationRegexp;
 	public static String edit_file_idcManual;
 	public static String edit_file_sectionRuptureDonnees_end_with;
 	public static String edit_file_termination_start;
+	public static String edit_file_beginLineChange;
 
 	// CRUISE
 	public static String edit_cruise_title;
@@ -256,6 +258,7 @@ public class Messages
 	public static String error_file_selectDir;
 	public static String error_file_idcEmpty;
 	public static String error_file_idcStartStationEmpty;
+	public static String error_file_idcBeginLineChangeEmpty;
 	public static String error_file_convertFormatUnknown;
 	public static String error_file_inputTypeUnknown;
 	public static String error_cruise_openXml;

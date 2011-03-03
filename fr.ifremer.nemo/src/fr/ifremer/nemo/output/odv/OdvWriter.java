@@ -16,7 +16,6 @@ import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.util.Conversion;
-import fr.ifremer.nemo.util.Global.E_InputType;
 
 /**
  * specific NemoWriter : ODV
@@ -36,7 +35,7 @@ public class OdvWriter extends NemoWriter
 	protected String getOutputFileName(String inputFilePath)
 	{
 		outputFileName = iDomain.getMedia().getOutputFileName();
-		if (isProcessTypeCollectionDir)
+		if (isProcessType_CollectionDir)
 		{
 			cruiseDomain.setDataSetRef(new File(inputFilePath).getName());
 			outputFileName += File.separator + cruiseDomain.getDataSetRef();
@@ -57,14 +56,14 @@ public class OdvWriter extends NemoWriter
 			stationDomain.updateRef();
 			outputFileName = getOutputFileName(inputFilePath);
 
-			if (isConversionToODVMonostation)
+			if (isConversionTo_ODVMonostation)
 			{
 				// Conversion ODV - fichiers monostation => N fichiers de sortie
 
 				for (Station st : stationDomain.getStations(inputFilePath))
 				{
 
-					if (isProcessTypeCollectionDir)
+					if (isProcessType_CollectionDir)
 					{
 						new File(outputFileName).mkdir();
 					}
@@ -77,7 +76,7 @@ public class OdvWriter extends NemoWriter
 					// écriture de l'entête campagne
 					printCruiseHeader();
 
-					if (isProcessTypeCruiseFile)
+					if (isProcessType_CruiseFile)
 					{
 						iDomain.getStation().updateRef();
 					}
@@ -89,7 +88,7 @@ public class OdvWriter extends NemoWriter
 			{
 				// conversion ODV multistations => 1 fichier de sortie
 
-				if (isProcessTypeCollectionDir)
+				if (isProcessType_CollectionDir)
 				{
 					outputFileName += Conversion.ODV.getExt();
 					iDomain.getStation().updateRef();
@@ -106,7 +105,7 @@ public class OdvWriter extends NemoWriter
 					// le fichier)
 					// 07/12/2010: 6087 ajout du if CRUISE_FILE, sinon erreur
 					// dans le cas cruise dir
-					if (isProcessTypeCruiseFile)
+					if (isProcessType_CruiseFile)
 					{
 						iDomain.getStation().updateRef();
 					}
@@ -131,7 +130,7 @@ public class OdvWriter extends NemoWriter
 		if (indexRecord == 0)
 		{
 			dataLine.append(stationHeader);
-		} else if (iDomain.getMedia().getModel().getInputType() == E_InputType.TRAJECTORY)
+		} else if (isInputType_Trajectory)
 		{
 			dataLine.append(iDomain.getStation().getOdvTrajectoryHeader(currentStation, line, indexRecord));
 		} else
@@ -144,7 +143,7 @@ public class OdvWriter extends NemoWriter
 		{
 			// préparation des données pour le tri
 			Double key = Double.NaN;
-			if (iDomain.getMedia().getModel().getInputType() == E_InputType.PROFILE)
+			if (isInputType_Profile)
 			{
 				ParameterModel keyParam = data.getModel().getParameterModels()[0];
 				keyParam.computeParameterValue(line);
@@ -178,8 +177,7 @@ public class OdvWriter extends NemoWriter
 		// scan the InputFile line by line
 		while ((readedLine = bufferedReader.readLine()) != null)
 		{
-			numLine++;
-			// System.out.println("2ere passe no ligne= " + numLine);
+			incrementLine();
 			if (inFileHeader())
 			{
 				continue;

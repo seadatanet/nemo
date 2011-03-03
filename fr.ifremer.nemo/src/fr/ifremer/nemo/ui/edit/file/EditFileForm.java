@@ -46,7 +46,8 @@ public class EditFileForm extends EditForm
 	// variables publiques **********************************************
 	public String nomFichier;
 	public String nomRepertoire;
-    // nom du repertoire choisi par le user (on le garde car le nomRepertoire peut être ecrasé par PF_nomRepertoire,
+	// nom du repertoire choisi par le user (on le garde car le nomRepertoire
+	// peut être ecrasé par PF_nomRepertoire,
 	// et on a besoin du vrai nom pour ecrire la commande batch)
 	public String nomRepertoireOrigin;
 
@@ -488,7 +489,8 @@ public class EditFileForm extends EditForm
 
 		// conversion:
 		RulesManager rulesMgr = Nemo.getInstance().getViewMain().getMyRulesManager();
-        // si un modele est ouvert, on affecte la valeur de ce modèle. Sinon on affecte la valeur choisie dans les settings
+		// si un modele est ouvert, on affecte la valeur de ce modèle. Sinon on
+		// affecte la valeur choisie dans les settings
 		if (Nemo.getInstance().getNomModele().equals(Global.EMPTY_STRING))
 		{
 			rulesMgr.updateFromModel(Nemo.getInstance().getConfig().getDefaultConversionType());
@@ -722,7 +724,8 @@ public class EditFileForm extends EditForm
 		processGridData.grabExcessHorizontalSpace = true;
 
 		GridLayout processLayout = new GridLayout();
-		processLayout.numColumns = 4; // en realite 3 colonnes, mais bug si on met 3
+		processLayout.numColumns = 4; // en realite 3 colonnes, mais bug si on
+										// met 3
 		processLayout.marginHeight = 1;
 
 		Group processGroup = new Group(mainBoxGroup, SWT.NONE);
@@ -791,8 +794,7 @@ public class EditFileForm extends EditForm
 	}
 
 	/**
-     * initialise avec les valeurs du modèle par défaut
-     * {@inheritDoc}
+	 * initialise avec les valeurs du modèle par défaut {@inheritDoc}
 	 */
 	@Override
 	public void initFromNewModel()
@@ -858,6 +860,10 @@ public class EditFileForm extends EditForm
 		{
 			mediaModel.setEndDataPattern(sectionDataTerminator.getStartStationIndicator());
 			mediaModel.setEndDataPatternIsRegexp(sectionDataTerminator.getStartStationIndicatorRegexpCheckbox());
+		} else if (end == E_EndData.BEGIN_LINE_CHANGES)
+		{
+			mediaModel.setEndDataPattern(sectionDataTerminator.getBeginLineChangeIndicator());
+			mediaModel.setEndDataPatternIsRegexp(false);
 		}
 		Nemo.getInstance().getDomain().getConversion().setCurrentConversion(Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType());
 		Nemo.getInstance().getDomain().getConversion().getModel().setOutputFormat(Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType());

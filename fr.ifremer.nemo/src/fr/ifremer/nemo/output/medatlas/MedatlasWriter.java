@@ -99,8 +99,7 @@ public class MedatlasWriter extends NemoWriter
 				// scan the InputFile line by line
 				while ((readedLine = bufferedReader.readLine()) != null)
 				{
-					numLine++;
-
+					incrementLine();
 					/**
 					 * file header
 					 */
@@ -150,7 +149,7 @@ public class MedatlasWriter extends NemoWriter
 						{
 							break;
 						}
-						if (isProcessTypeCruiseFile)
+						if (isProcessType_CruiseFile)
 						{
 
 							increment++;
@@ -167,7 +166,7 @@ public class MedatlasWriter extends NemoWriter
 					}
 				}
 				// fin de lecture du fichier d'entree courant
-				if (isProcessTypeCruiseFile && isRefIncremented)
+				if (isProcessType_CruiseFile && isRefIncremented)
 				{
 					increment = Integer.valueOf(Nemo.getInstance().getDomain().getStation().getModel().getReferenceProperty().getUserValue());
 				}
@@ -180,7 +179,7 @@ public class MedatlasWriter extends NemoWriter
 					// écriture de la dernière ligne de données
 					writeLastDataLine(dataDomain, currentStation, outputFileName);
 
-				} else if ((mediaModel.getEndData() == E_EndData.NEXT_START_WITH) && stationWrited && (!lastLineWrited))
+				} else if (((mediaModel.getEndData() == E_EndData.BEGIN_LINE_CHANGES) || (mediaModel.getEndData() == E_EndData.NEXT_START_WITH)) && stationWrited && (!lastLineWrited))
 				{
 					// écriture de la dernière ligne de données
 					writeLastDataLine(dataDomain, currentStation, outputFileName);
@@ -196,7 +195,7 @@ public class MedatlasWriter extends NemoWriter
 				}
 
 				numLine = 0;
-				if (!isProcessTypeCruiseFile && isRefIncremented)
+				if (!isProcessType_CruiseFile && isRefIncremented)
 				{
 					increment++;
 				}

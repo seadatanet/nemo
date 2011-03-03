@@ -26,9 +26,10 @@ import fr.ifremer.nemo.util.Messages;
 public class FileEndData extends FileSection
 {
 	protected Composite subCompo, col01, col02;
-	protected Button radEOF, radLigne, radNextStation, radManuel;
+	protected Button radEOF, radEmptyLine, radBeginLineChanges, radNextStationBeginsWith, radManuel;
 	protected Button radNextStationIsRegexpCheckbox;
 	protected SetText setterStartStation;
+	protected SetText setterBeginLineChange;
 
 	/**
 	 * @param shell
@@ -40,6 +41,7 @@ public class FileEndData extends FileSection
 	{
 		super(name, title, description, form);
 		setterStartStation = new SetText(Messages.edit_file_termination_start, Global.EMPTY_STRING, true); //$NON-NLS-1$
+		setterBeginLineChange = new SetText(Messages.edit_file_beginLineChange, Global.EMPTY_STRING, true); //$NON-NLS-1$
 	}
 
 	@Override
@@ -77,13 +79,19 @@ public class FileEndData extends FileSection
 		radEOF.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
 		radEOF.setText(Messages.edit_file_idcEOF);
 
-		radLigne = new Button(compo, SWT.RADIO);
-		radLigne.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
-		radLigne.setText(Messages.edit_file_idcEmptyLine);
+		radEmptyLine = new Button(compo, SWT.RADIO);
+		radEmptyLine.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
+		radEmptyLine.setText(Messages.edit_file_idcEmptyLine);
 
-		radNextStation = new Button(compo, SWT.RADIO);
-		radNextStation.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
-		radNextStation.setText(Messages.edit_file_idcNextStation);
+		radBeginLineChanges = new Button(compo, SWT.RADIO);
+		radBeginLineChanges.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
+		radBeginLineChanges.setText(Messages.edit_file_idcBeginLineChange);
+		setterBeginLineChange.draw(compo, filled);
+
+
+		radNextStationBeginsWith = new Button(compo, SWT.RADIO);
+		radNextStationBeginsWith.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
+		radNextStationBeginsWith.setText(Messages.edit_file_idcNextStation);
 
 		radNextStationIsRegexpCheckbox = new Button(compo, SWT.CHECK);
 		radNextStationIsRegexpCheckbox.setText(Messages.edit_file_idcNextStationRegexp);
@@ -105,8 +113,9 @@ public class FileEndData extends FileSection
 
 		selectEndData(radEOF);
 		addRadListener(radEOF);
-		addRadListener(radLigne);
-		addRadListener(radNextStation);
+		addRadListener(radEmptyLine);
+		addRadListener(radBeginLineChanges);
+		addRadListener(radNextStationBeginsWith);
 		addRadListener(radManuel);
 	}
 
@@ -120,10 +129,14 @@ public class FileEndData extends FileSection
 		{
 			ok = setter.checkMandatoryValue();
 			log = log + Messages.error_file_idcEmpty;
-		} else if (radNextStation.getSelection())
+		} else if (radNextStationBeginsWith.getSelection())
 		{
 			ok = setterStartStation.checkMandatoryValue();
 			log = log + Messages.error_file_idcStartStationEmpty;
+		} else if (radBeginLineChanges.getSelection())
+		{
+			ok = setterBeginLineChange.checkMandatoryValue();
+			log = log + Messages.error_file_idcBeginLineChangeEmpty;
 		}
 
 		if (!ok)
@@ -140,6 +153,7 @@ public class FileEndData extends FileSection
 	{
 		super.razValues();
 		setterStartStation.razValues();
+		setterBeginLineChange.razValues();
 		selectEndData(radEOF);
 	}
 
@@ -151,8 +165,8 @@ public class FileEndData extends FileSection
 	{
 		super.dispose();
 		radEOF.dispose();
-		radLigne.dispose();
-		radNextStation.dispose();
+		radEmptyLine.dispose();
+		radNextStationBeginsWith.dispose();
 		radManuel.dispose();
 		if (subCompo != null)
 			subCompo.dispose();
@@ -164,57 +178,46 @@ public class FileEndData extends FileSection
 
 	public void selectEndData(Button radio)
 	{
+		radEOF.setSelection(false);
+		radEmptyLine.setSelection(false);
+		radBeginLineChanges.setSelection(false);
+		radNextStationBeginsWith.setSelection(false);
+		radManuel.setSelection(false);
+
+		radNextStationIsRegexpCheckbox.setEnabled(false);
+		setterStartStation.setEnabled(false);
+		setterBeginLineChange.setEnabled(false);
+		setter.setEnabled(false);
+
 		if (radio != null)
 		{
 			if (radio == radEOF)
 			{
 				radEOF.setSelection(true);
-				radLigne.setSelection(false);
-				radNextStation.setSelection(false);
-				radNextStationIsRegexpCheckbox.setEnabled(false);
-				setterStartStation.setEnabled(false);
-				radManuel.setSelection(false);
-				setter.setEnabled(false);
 
-			} else if (radio == radLigne)
+			} else if (radio == radEmptyLine)
 			{
-				radEOF.setSelection(false);
-				radLigne.setSelection(true);
-				radNextStation.setSelection(false);
-				radNextStationIsRegexpCheckbox.setEnabled(false);
-				setterStartStation.setEnabled(false);
-				radManuel.setSelection(false);
-				setter.setEnabled(false);
+				radEmptyLine.setSelection(true);
 
-			} else if (radio == radNextStation)
+			} else if (radio == radBeginLineChanges)
 			{
-				radEOF.setSelection(false);
-				radLigne.setSelection(false);
-				radNextStation.setSelection(true);
+				radBeginLineChanges.setSelection(true);
+				setterBeginLineChange.setEnabled(true);
+
+			} else if (radio == radNextStationBeginsWith)
+			{
+				radNextStationBeginsWith.setSelection(true);
 				radNextStationIsRegexpCheckbox.setEnabled(true);
 				setterStartStation.setEnabled(true);
-				radManuel.setSelection(false);
-				setter.setEnabled(false);
 
 			} else if (radio == radManuel)
 			{
-				radEOF.setSelection(false);
-				radLigne.setSelection(false);
-				radNextStation.setSelection(false);
-				radNextStationIsRegexpCheckbox.setEnabled(false);
-				setterStartStation.setEnabled(false);
 				radManuel.setSelection(true);
 				setter.setEnabled(true);
 
 			} else
 			{
 				radEOF.setSelection(true);
-				radLigne.setSelection(false);
-				radNextStation.setSelection(false);
-				radNextStationIsRegexpCheckbox.setEnabled(false);
-				setterStartStation.setEnabled(false);
-				radManuel.setSelection(false);
-				setter.setEnabled(false);
 			}
 
 		}
@@ -237,7 +240,17 @@ public class FileEndData extends FileSection
 	 */
 	public Button getRadLigne()
 	{
-		return radLigne;
+		return radEmptyLine;
+	}
+
+	/**
+	 * Getter sur radLigne.
+	 * 
+	 * @return the radLigne
+	 */
+	public Button getRadBeginLineChanges()
+	{
+		return radBeginLineChanges;
 	}
 
 	/**
@@ -247,7 +260,7 @@ public class FileEndData extends FileSection
 	 */
 	public Button getRadNextStation()
 	{
-		return radNextStation;
+		return radNextStationBeginsWith;
 	}
 
 	/**
@@ -267,12 +280,12 @@ public class FileEndData extends FileSection
 
 	public boolean radLigneSelected()
 	{
-		return radLigne.getSelection();
+		return radEmptyLine.getSelection();
 	}
 
 	public boolean radNextStationSelected()
 	{
-		return radNextStation.getSelection();
+		return radNextStationBeginsWith.getSelection();
 	}
 
 	public boolean radManuelSelected()
@@ -290,6 +303,16 @@ public class FileEndData extends FileSection
 		setterStartStation.setValue(value);
 	}
 
+	public String getBeginLineChangeIndicator()
+	{
+		return setterBeginLineChange.getValue();
+	}
+
+	public void setBeginLineChangeIndicator(String value)
+	{
+		setterBeginLineChange.setValue(value);
+	}
+
 	public void setStartStationIndicatorRegexpCheckbox(boolean isRegexp)
 	{
 		radNextStationIsRegexpCheckbox.setSelection(isRegexp);
@@ -303,15 +326,18 @@ public class FileEndData extends FileSection
 	// TRADUCTION DES BOUTONS RADIO
 	public E_EndData getEndData()
 	{
-		if (radNextStation.getSelection())
+		if (radNextStationBeginsWith.getSelection())
 		{
 			return E_EndData.NEXT_START_WITH;
 		} else if (radManuel.getSelection())
 		{
 			return E_EndData.END_WITH;
-		} else if (radLigne.getSelection())
+		} else if (radEmptyLine.getSelection())
 		{
 			return E_EndData.EMPTY_LINE;
+		} else if (radBeginLineChanges.getSelection())
+		{
+			return E_EndData.BEGIN_LINE_CHANGES;
 		} else if (radEOF.getSelection())
 		{
 			return E_EndData.EOF;
@@ -336,6 +362,10 @@ public class FileEndData extends FileSection
 			break;
 		case EMPTY_LINE:
 			selectEndData(getRadLigne());
+			break;
+		case BEGIN_LINE_CHANGES:
+			selectEndData(getRadBeginLineChanges());
+			setBeginLineChangeIndicator(pattern);
 			break;
 		default:
 			selectEndData(getRadEOF());

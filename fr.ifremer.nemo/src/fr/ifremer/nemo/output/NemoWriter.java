@@ -65,13 +65,22 @@ public abstract class NemoWriter
 
 	protected HashSet<String> stationsList;
 
-	protected boolean isProcessTypeCruiseFile = false;
-	protected boolean isProcessTypeCollectionDir = false;
+	protected boolean isProcessType_CruiseFile = false;
+	protected boolean isProcessType_CollectionDir = false;
 
+	protected boolean isInputType_Trajectory;
+	protected boolean isInputType_Profile;
+
+	protected boolean isEndData_BeginLineChanges = false;
+	protected boolean isEndData_NextStartWith = false;
 	protected Conversion myConversion;
-	protected boolean isConversionToODVMonostation = false;
-	protected boolean isConversionToODVMultistations = false;
+	protected boolean isConversionTo_ODVMonostation = false;
+	protected boolean isConversionTo_ODVMultistations = false;
 	protected boolean isRefIncremented = false;
+
+	protected String beginningOfPreviousLine = Global.NO_VALUE;
+	protected String previousReadedLine = Global.NO_VALUE;
+	protected boolean isBeginningOfStation = false;
 
 	protected NemoWriter()
 	{
@@ -84,13 +93,33 @@ public abstract class NemoWriter
 		dataDomain = iDomain.getData();
 		stationDatas = new HashMap<Double, String>();
 		isRefIncremented = iDomain.getStation().getModel().getReferenceProperty().isUserProvided();
-		isProcessTypeCruiseFile = mediaDomain.getModel().getProcessType() == E_ProcessType.CRUISE_FILE;
-		isProcessTypeCollectionDir = mediaDomain.getModel().getProcessType() == E_ProcessType.COLLECTION_DIR;
+		isProcessType_CruiseFile = mediaDomain.getModel().getProcessType() == E_ProcessType.CRUISE_FILE;
+		isProcessType_CollectionDir = mediaDomain.getModel().getProcessType() == E_ProcessType.COLLECTION_DIR;
 
 		E_TypeConversion selectedConversion = iDomain.getConversion().getCurrent();
-		isConversionToODVMonostation = (selectedConversion == E_TypeConversion.ODV_MONOSTATION);
-		isConversionToODVMultistations = (selectedConversion == E_TypeConversion.ODV_MULTISTATIONS);
+		isConversionTo_ODVMonostation = (selectedConversion == E_TypeConversion.ODV_MONOSTATION);
+		isConversionTo_ODVMultistations = (selectedConversion == E_TypeConversion.ODV_MULTISTATIONS);
 
+		E_InputType inputType = iDomain.getMedia().getModel().getInputType();
+		isInputType_Trajectory = inputType == E_InputType.TRAJECTORY;
+		isInputType_Profile = inputType == E_InputType.PROFILE;
+
+		isEndData_BeginLineChanges = mediaModel.getEndData() == E_EndData.BEGIN_LINE_CHANGES;
+		isEndData_NextStartWith = mediaModel.getEndData() == E_EndData.NEXT_START_WITH;
+
+	}
+
+	protected void incrementLine()
+	{
+		numLine++;
+		Nemo.getInstance().setLog_currentInputLine(String.valueOf(numLine));
+	}
+
+	protected void setBeginningOfPreviousLine()
+	{
+		isBeginningOfStation = !beginningOfPreviousLine.equals(readedLine.substring(0, mediaModel.getEndDataPattern().length()));
+		beginningOfPreviousLine = readedLine.substring(0, mediaModel.getEndDataPattern().length());
+		previousReadedLine = readedLine;
 	}
 
 	/**
@@ -131,8 +160,7 @@ public abstract class NemoWriter
 
 						while ((readedLine = bufferedReader.readLine()) != null)
 						{
-							numLine++;
-							Nemo.getInstance().setLog_currentInputLine(String.valueOf(numLine));
+							incrementLine();
 
 							if (inFileHeader())
 							{
@@ -140,6 +168,7 @@ public abstract class NemoWriter
 							}
 							if (isEndData() && (st != null))
 							{
+
 								st.setNbRecords(nbrecords);
 								stationDomain.addStation(inputFilePath, st);
 								st = null;
@@ -148,8 +177,8 @@ public abstract class NemoWriter
 							if (isStartStationHeader())
 							{
 								nbrecords = 0;
-
-								String[] inputStationHeader = consumeStationHeader();
+								String[] inputStationHeader = null;
+								inputStationHeader = consumeStationHeader();
 								if (inputStationHeader != null)
 								{
 									st = new Station(inputFile.getName(), inputStationHeader);
@@ -159,11 +188,6 @@ public abstract class NemoWriter
 
 									if (stationDomain.isSomeInData())
 									{
-										// la première ligne des données est
-										// déjà "consommée" dans
-										// stationHeaderBuffer
-										st.updateGlobalParamQc(inputStationHeader[inputStationHeader.length - 1]);
-										nbrecords++;
 
 										// sampling rate peut etre à calculer
 										if (mediaDomain.getModel().getInputType() != E_InputType.PROFILE)
@@ -175,6 +199,7 @@ public abstract class NemoWriter
 													// pas d'entête station
 													st.calculSamplingRate(readedLine);
 											}
+
 									}
 									if (!isEndData()) // FAE 4673 Pb si une
 										// seule ligne données et pas d'entête
@@ -284,9 +309,18 @@ public abstract class NemoWriter
 		if (numLine == (nbLignesFileHeader + 1))
 		{
 			start = true;
-		} else if (isProcessTypeCruiseFile || mediaModel.isMultiStations())
+		} 
+		else if (mediaModel.getEndData() == E_EndData.BEGIN_LINE_CHANGES)
 		{
 			start = isEndData();
+		}
+		else if (isProcessType_CruiseFile || mediaModel.isMultiStations())
+		{
+			start = isEndData();
+		}
+		if (start)
+		{
+			setBeginningOfPreviousLine();
 		}
 		return start;
 	}
@@ -309,11 +343,34 @@ public abstract class NemoWriter
 		case EMPTY_LINE:
 			end = readedLine.trim().matches("^$"); //$NON-NLS-1$
 			break;
+		case BEGIN_LINE_CHANGES:
+			if (numLine == (mediaModel.getFileHeader() + 1))
+			{
+				end = false;
+			} else
+			{
+				end = hasBeginLineChanged(readedLine);
+			}
+
+			break;
 		default:
 			end = false;
 			break;
 		}
+
+		if (end)
+		{
+			// System.out.println("is end = " + end);
+		}
 		return end;
+	}
+
+	private boolean hasBeginLineChanged(String readedLine)
+	{
+		boolean hasChanged = false;
+		String beginningOfCurrentLine = readedLine.substring(0, mediaModel.getEndDataPattern().length());
+		hasChanged = !beginningOfCurrentLine.equals(beginningOfPreviousLine);
+		return hasChanged;
 	}
 
 	/**
@@ -322,57 +379,64 @@ public abstract class NemoWriter
 	 */
 	protected String[] consumeStationHeader() throws IOException
 	{
-
+		String[] res = null;
 		StringBuffer stationHeader = new StringBuffer();
 
-		if (numLine > (mediaModel.getFileHeader() + 1))
+		if (mediaModel.getEndData() == E_EndData.BEGIN_LINE_CHANGES)
 		{
-			// consommation de la ligne de fin de données
-			if (mediaModel.getEndData() != E_EndData.NEXT_START_WITH)
+			res = new String[] { readedLine };
+		} else
+		{
+			if (numLine > (mediaModel.getFileHeader() + 1))
 			{
-				consumeLine();
+				// consommation de la ligne de fin de données
+				if (mediaModel.getEndData() != E_EndData.NEXT_START_WITH)
+				{
+					consumeLine();
+				}
+
+				// consommation des lignes séparant les stations
+				for (int i = 0; i < mediaModel.getEndStation(); i++)
+				{
+					if (readedLine != null)
+						consumeLine();
+				}
 			}
 
-			// consommation des lignes séparant les stations
-			for (int i = 0; i < mediaModel.getEndStation(); i++)
+			/** récupération des lignes de l'entête station **/
+			// si pattern
+			String pattern = mediaModel.getStationHeaderPattern();
+			if (!pattern.equals(Global.EMPTY_STRING))
+			{
+				while (readedLine != null && !readedLine.startsWith(pattern))
+				{
+					// récupération de toutes les lignes avant "pattern"
+					stationHeader.append(consumeLine());
+				}
+				// récupération de la ligne commencant par "pattern"
+				stationHeader.append(consumeLine());
+			}
+			// si nb lignes fixe?
+			for (int i = 0; i < mediaModel.getStationHeader(); i++)
 			{
 				if (readedLine != null)
-					consumeLine();
+				{
+					stationHeader.append(consumeLine());
+				}
 			}
-		}
 
-		/** récupération des lignes de l'entête station **/
-		// si pattern
-		String pattern = mediaModel.getStationHeaderPattern();
-		if (!pattern.equals(Global.EMPTY_STRING))
-		{
-			while (readedLine != null && !readedLine.startsWith(pattern))
+			// + 1 ligne si certaines informations station sont dans les données
+			if (iDomain.getStation().isSomeInData() && readedLine != null)
 			{
-				// récupération de toutes les lignes avant "pattern"
-				stationHeader.append(consumeLine());
+				stationHeader.append(readedLine);
 			}
-			// récupération de la ligne commencant par "pattern"
-			stationHeader.append(consumeLine());
-		}
-		// si nb lignes fixe?
-		for (int i = 0; i < mediaModel.getStationHeader(); i++)
-		{
-			if (readedLine != null)
-			{
-				stationHeader.append(consumeLine());
-			}
-		}
 
-		// + 1 ligne si certaines informations station sont dans les données
-		if (iDomain.getStation().isSomeInData() && readedLine != null)
-		{
-			stationHeader.append(readedLine);
+			res = stationHeader.toString().split(Global.RN);
+
+			if (readedLine == null)
+				res = null;
 		}
-
-		if (readedLine == null)
-			return null;
-
-		return stationHeader.toString().split(Global.RN);
+		return res;
 	}
 
 	/**
@@ -386,7 +450,7 @@ public abstract class NemoWriter
 		buffer.append(Global.RN);
 
 		readedLine = bufferedReader.readLine();
-		numLine++;
+		incrementLine();
 		return buffer;
 	}
 }
