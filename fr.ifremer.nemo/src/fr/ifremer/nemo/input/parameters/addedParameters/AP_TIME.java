@@ -9,45 +9,46 @@ package fr.ifremer.nemo.input.parameters.addedParameters;
 
 import java.text.ParseException;
 
-import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.domain.DateTimeUtils;
 import fr.ifremer.nemo.domain.Station;
-import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Intern;
 
 /**
- * Description: TODO
+ * Description: description du paramètre TIME
+ * 
  * @author sbregent
- *
+ * 
  */
 public class AP_TIME extends AddedParam
 {
 
-    public AP_TIME()
-    {
-        super();
-        _code = "TIME";
-        _default = "999999";
-        _format = "hh24mmss";
-        _fullName = "TIME WITHIN DAY";
-        _unit = "hhmmss";
-    }
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getFlag(Station currentStation, String inputLine)
-    {
-        return currentStation.getMetaFlags().get(Intern.DATETIME);
-    }
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getValue(Station currentStation, String inputLine, long currentDate) throws ParseException
-    {
-        // $formatter.formatDateTime( "hh24mmss", $station.parametersAt(0).valuesAt($i).date )
-        return  Formatter.getSingleton().formatDateTime(getFormat(), currentDate);
-    }
+	public AP_TIME()
+	{
+		super();
+		_code = "TIME";
+		_default = "999999";
+		_format = "hh24mmss";
+		_fullName = "TIME WITHIN DAY";
+		_unit = "hhmmss";
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getFlag(Station currentStation, String inputLine)
+	{
+		return currentStation.getMetaFlags().get(Intern.DATETIME);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getValue(Station currentStation, String inputLine, long currentDate) throws ParseException
+	{
+		// $formatter.formatDateTime( "hh24mmss",
+		// $station.parametersAt(0).valuesAt($i).date )
+		return Formatter.getSingleton().formatDateTime(getFormat(), currentDate);
+	}
 }

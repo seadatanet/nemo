@@ -11,59 +11,58 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.domain.DateTimeUtils;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.input.PropertyModel;
-import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Intern;
-import fr.ifremer.nemo.util.format.ExternalizableFormat;
 import fr.ifremer.nemo.util.format.LongitudeFormat;
 
 /**
- * Description: TODO
+ * Description: description du paramètre LONX
+ * 
  * @author sbregent
- *
+ * 
  */
 public class AP_LONX extends AddedParam
 {
 
-    public AP_LONX()
-    {
-        super();
-        _code = "LONX";
-        _default = "+999.999999";
-        _format = "+DDD.dddddd";
-        _fullName = "LONGITUDE";
-        _unit = "decimal degree";
-        propertyCode=Intern.S_LON;
-        isMesured = true;
-    }
+	public AP_LONX()
+	{
+		super();
+		_code = "LONX";
+		_default = "+999.999999";
+		_format = "+DDD.dddddd";
+		_fullName = "LONGITUDE";
+		_unit = "decimal degree";
+		propertyCode = Intern.S_LON;
+		isMesured = true;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getFlag(Station currentStation, String inputLine)
-    {
-        return currentStation.getMetaFlags().get(Intern.S_LON);
-    }
-    
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getValue(Station currentStation, String inputLine, long currentDate) throws ParseException
-    {
-        String stringValue=null;
-        // 7339 on lit le format de parsing dans les valeurs du modele saisies depuis l'onglet station
-        PropertyModel prop=Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_LON);
-        String format = prop.getFormat().toString();
-        LongitudeFormat formatLON = new LongitudeFormat(format,   prop.getFragment().isVariable());
-        DecimalFormat decimalFormat= new DecimalFormat("#0.000000", symbols);
-        Object parsedLong =  formatLON.parseObject(inputLine);
-        stringValue = decimalFormat.format(parsedLong);
-        stringValue = Formatter.getSingleton().padStringLeft(stringValue, getFormat().length());                        
-       return stringValue;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getFlag(Station currentStation, String inputLine)
+	{
+		return currentStation.getMetaFlags().get(Intern.S_LON);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getValue(Station currentStation, String inputLine, long currentDate) throws ParseException
+	{
+		String stringValue = null;
+		// 7339 on lit le format de parsing dans les valeurs du modele saisies
+		// depuis l'onglet station
+		PropertyModel prop = Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_LON);
+		String format = prop.getFormat().toString();
+		LongitudeFormat formatLON = new LongitudeFormat(format, prop.getFragment().isVariable());
+		DecimalFormat decimalFormat = new DecimalFormat("#0.000000", symbols);
+		Object parsedLong = formatLON.parseObject(inputLine);
+		stringValue = decimalFormat.format(parsedLong);
+		stringValue = Formatter.getSingleton().padStringLeft(stringValue, getFormat().length());
+		return stringValue;
+	}
 }
