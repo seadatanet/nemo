@@ -126,8 +126,6 @@ public class FileFormValidator extends FormValidator
 
 		Nemo.getInstance().getDomain().getMedia().buildInputFilesNames();
 
-		// DataModel.initModele(ViewMain.nomFichier);
-
 		Utils.messageOK(Messages.success_etape);
 
 		// on rajoute "ok" dans l'onglet description
