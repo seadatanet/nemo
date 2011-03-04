@@ -1,12 +1,14 @@
-/* ============================================================================
- * Nom du fichier	: AP_date.java
- * Auteur			: sbregent
- * Date				: 26 janv. 11
- * Copyright		: Altran
+/*
+ * ============================================================================
+ * Nom du fichier : AP_date.java
+ * Auteur : sbregent
+ * Date : 26 janv. 11
+ * Copyright : Altran
  * ============================================================================
  */
 package fr.ifremer.nemo.input.parameters.addedParameters;
 
+import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 
@@ -49,9 +51,11 @@ public class AP_LONX extends AddedParam
 
 	/**
 	 * {@inheritDoc}
+	 * 
+	 * @throws UnsupportedEncodingException
 	 */
 	@Override
-	public String getValue(Station currentStation, String inputLine, long currentDate) throws ParseException
+	public String getValue(Station currentStation, String inputLine, long currentDate) throws ParseException, UnsupportedEncodingException
 	{
 		String stringValue = null;
 		// 7339 on lit le format de parsing dans les valeurs du modele saisies

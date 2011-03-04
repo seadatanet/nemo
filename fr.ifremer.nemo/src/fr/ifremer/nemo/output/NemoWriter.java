@@ -2,10 +2,13 @@ package fr.ifremer.nemo.output;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.Collections;
 import java.util.HashMap;
@@ -147,7 +150,8 @@ public abstract class NemoWriter
 					Nemo.getInstance().setLog_currentInputFile(inputFilePath + "/" + inputFileName);
 
 					File inputFile = new File(inputFilePath + File.separator + inputFileName);
-					bufferedReader = new BufferedReader(new FileReader(inputFile));
+
+					bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFile), Global.NEMO_ENCODING));
 					readerSize = Long.valueOf(inputFile.length()).intValue();
 					bufferedReader.mark(readerSize + 1);
 
@@ -271,7 +275,7 @@ public abstract class NemoWriter
 
 	protected abstract String getOutputFileName(String inputFilePath);
 
-	protected void printCruiseHeader() throws ParseException
+	protected void printCruiseHeader() throws ParseException, UnsupportedEncodingException
 	{
 		// écriture de l'entête campagne
 		StringBuffer cruiseHeader = cruiseDomain.getHeader(myConversion);
@@ -309,12 +313,10 @@ public abstract class NemoWriter
 		if (numLine == (nbLignesFileHeader + 1))
 		{
 			start = true;
-		} 
-		else if (mediaModel.getEndData() == E_EndData.BEGIN_LINE_CHANGES)
+		} else if (mediaModel.getEndData() == E_EndData.BEGIN_LINE_CHANGES)
 		{
 			start = isEndData();
-		}
-		else if (isProcessType_CruiseFile || mediaModel.isMultiStations())
+		} else if (isProcessType_CruiseFile || mediaModel.isMultiStations())
 		{
 			start = isEndData();
 		}

@@ -2,8 +2,10 @@ package fr.ifremer.nemo.ui;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Pattern;
@@ -78,7 +80,7 @@ public class Utils
 		stringBuffer = new StringBuffer();
 
 		// lecture et concatenation
-		BufferedReader entree = new BufferedReader(new FileReader(fich));
+		BufferedReader entree = new BufferedReader(new InputStreamReader(new FileInputStream(fich), Global.NEMO_ENCODING));
 		do
 		{
 			ligne = entree.readLine();

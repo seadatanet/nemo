@@ -8,6 +8,7 @@
  */
 package fr.ifremer.nemo.input.parameters.addedParameters;
 
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 
 import fr.ifremer.nemo.domain.DateTimeUtils;
@@ -36,7 +37,7 @@ public class AP_DTUT extends AddedParam
 	}
 
 	@Override
-	public String getValue(Station currentStation, String inputLine, long currentDate) throws ParseException
+	public String getValue(Station currentStation, String inputLine, long currentDate) throws ParseException, UnsupportedEncodingException
 	{
 		// time-ISO8601
 		return DateTimeUtils.getVariantDateTime(currentDate);

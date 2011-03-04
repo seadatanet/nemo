@@ -11,10 +11,13 @@ import com.ago.xml.XMLOutputWriter;
  * 
  * @author Gerard BUNEL
  */
-public abstract class ExternalizableFormat extends Format 
-                                           implements Cloneable, SAXConsumer {
+public abstract class ExternalizableFormat extends Format implements Cloneable, SAXConsumer
+{
 
-	public ExternalizableFormat() {
+	protected String errorMessage;
+
+	public ExternalizableFormat()
+	{
 		super();
 	}
 
@@ -23,14 +26,24 @@ public abstract class ExternalizableFormat extends Format
 	 * @return Object
 	 */
 	@Override
-    public abstract Object clone();
+	public abstract Object clone();
 
 	/**
 	 * 
 	 * @param a_Writer
 	 */
-	public void writeXMLOn(XMLOutputWriter a_Writer) {
+	public void writeXMLOn(XMLOutputWriter a_Writer)
+	{
 
 	}
 
+	/**
+	 * Getter sur errorMessage.
+	 * 
+	 * @return the errorMessage
+	 */
+	public String getErrorMessage()
+	{
+		return errorMessage;
+	}
 }

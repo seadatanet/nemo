@@ -2,7 +2,8 @@ package fr.ifremer.nemo.output.odv;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,6 +17,7 @@ import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.util.Conversion;
+import fr.ifremer.nemo.util.Global;
 
 /**
  * specific NemoWriter : ODV
@@ -71,7 +73,9 @@ public class OdvWriter extends NemoWriter
 					// FAE 6143
 					String localCdiId = stationDomain.getAndCheckLocalCDI(cruiseDomain, Conversion.ODV, st.getReference());
 					String mOutputFileName = outputFileName + File.separator + localCdiId + Conversion.ODV.getExt();
-					outputFileWriter = new PrintWriter(new BufferedWriter(new FileWriter(mOutputFileName)));
+					// outputFileWriter = new PrintWriter(new BufferedWriter(new
+					// FileWriter(mOutputFileName)));
+					outputFileWriter = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(mOutputFileName), Global.NEMO_ENCODING)));
 
 					// écriture de l'entête campagne
 					printCruiseHeader();
@@ -93,7 +97,9 @@ public class OdvWriter extends NemoWriter
 					outputFileName += Conversion.ODV.getExt();
 					iDomain.getStation().updateRef();
 				}
-				outputFileWriter = new PrintWriter(new BufferedWriter(new FileWriter(outputFileName)));
+				// outputFileWriter = new PrintWriter(new BufferedWriter(new
+				// FileWriter(outputFileName)));
+				outputFileWriter = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFileName), Global.NEMO_ENCODING)));
 
 				// écriture de l'entête campagne
 				printCruiseHeader();

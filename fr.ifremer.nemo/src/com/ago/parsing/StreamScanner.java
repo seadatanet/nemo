@@ -127,39 +127,44 @@ public class StreamScanner {
 		}
 
 		String separators = " \r\n\t";
-		for (int i = 0; i < separators.length(); i++) {
-			typeTable[(int) separators.charAt(i)] = XDELIMITER;
+		for (int i = 0; i < separators.length(); i++)
+		{
+			typeTable[separators.charAt(i)] = XDELIMITER;
 		}
 		String digits = "0123456789";
-		for (int i = 0; i < digits.length(); i++) {
-			typeTable[(int) digits.charAt(i)] = XDIGIT;
+		for (int i = 0; i < digits.length(); i++)
+		{
+			typeTable[digits.charAt(i)] = XDIGIT;
 		}
 		String letters = "abcdefghijklmnopqrstuvwxytzABCDEFGHIJKLMNOPQRSTUVWXYTZ_";
-		for (int i = 0; i < letters.length(); i++) {
-			typeTable[(int) letters.charAt(i)] = XLETTER;
+		for (int i = 0; i < letters.length(); i++)
+		{
+			typeTable[letters.charAt(i)] = XLETTER;
 		}
 		String binaries = "!%&*+-/<=>?@\\~";
-		for (int i = 0; i < binaries.length(); i++) {
-			typeTable[(int) binaries.charAt(i)] = XBINARY;
+		for (int i = 0; i < binaries.length(); i++)
+		{
+			typeTable[binaries.charAt(i)] = XBINARY;
 		}
 
 		// Other multi-character tokens
-		typeTable[(int) '"'] = XDOUBLEQUOTE;
-		typeTable[(int) '\''] = XSINGLEQUOTE;
-		typeTable[(int) '#'] = CHARACTER;
-		typeTable[(int) '('] = CHARACTER;
-		typeTable[(int) ')'] = CHARACTER;
-		typeTable[(int) '$'] = CHARACTER;
-		typeTable[(int) ','] = CHARACTER;
-		typeTable[(int) '.'] = CHARACTER;
-		typeTable[(int) ':'] = CHARACTER;
-		typeTable[(int) ';'] = CHARACTER;
-		typeTable[(int) '['] = CHARACTER;
-		typeTable[(int) ']'] = CHARACTER;
-		typeTable[(int) '{'] = CHARACTER;
-		typeTable[(int) '}'] = CHARACTER;
-		typeTable[(int) '^'] = CHARACTER;
-		typeTable[(int) '|'] = CHARACTER;
+		typeTable['"'] = XDOUBLEQUOTE;
+		typeTable['\''] = XSINGLEQUOTE;
+		typeTable['#'] = CHARACTER;
+		typeTable['('] = CHARACTER;
+		typeTable[')'] = CHARACTER;
+		typeTable['$'] = CHARACTER;
+		typeTable[','] = CHARACTER;
+		typeTable['.'] = CHARACTER;
+		typeTable[':'] = CHARACTER;
+		typeTable[';'] = CHARACTER;
+		typeTable['['] = CHARACTER;
+		typeTable[']'] = CHARACTER;
+		typeTable['{'] = CHARACTER;
+		typeTable['}'] = CHARACTER;
+		typeTable['^'] = CHARACTER;
+		typeTable['|'] = CHARACTER;
+		typeTable['°'] = CHARACTER;
 	}
 
 	/**
@@ -247,8 +252,9 @@ public class StreamScanner {
 			scanToken();
 		}
 		int[] pos = new int[positions.size()];
-		for (int i = 0; i < positions.size(); i++) {
-			pos[i] = ((Integer) positions.elementAt(i)).intValue();
+		for (int i = 0; i < positions.size(); i++)
+		{
+			pos[i] = (positions.elementAt(i)).intValue();
 		}
 		return pos;
 	}

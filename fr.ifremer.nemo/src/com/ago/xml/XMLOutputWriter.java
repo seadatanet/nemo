@@ -1,7 +1,13 @@
 package com.ago.xml;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+import fr.ifremer.nemo.util.Global;
 
 public class XMLOutputWriter {
 
@@ -175,7 +181,6 @@ public class XMLOutputWriter {
 
 	/*
 	 * XMLOutputWriter default constructor
-	 * 
 	 */
 	public XMLOutputWriter() {
 	}
@@ -185,8 +190,14 @@ public class XMLOutputWriter {
 	 * 
 	 * @param a_Stream OutputStream on which to write
 	 */
-	public XMLOutputWriter(OutputStream a_Stream) {
-		_writer = new PrintWriter(a_Stream);
+	public XMLOutputWriter(FileOutputStream a_Stream) {
+
+		try {
+			_writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(a_Stream, Global.NEMO_ENCODING)));
+		} catch (UnsupportedEncodingException e) {
+			// TODO BGT Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/*
@@ -205,7 +216,14 @@ public class XMLOutputWriter {
 	 * of the root element
 	 */
 	public XMLOutputWriter(OutputStream a_Stream, String a_TagName) {
-		_writer = new PrintWriter(a_Stream);
+
+		try {
+			_writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(a_Stream, Global.NEMO_ENCODING)));
+		} catch (UnsupportedEncodingException e) {
+			// BGT TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		openTag(a_TagName);
 	}
 
@@ -225,10 +243,16 @@ public class XMLOutputWriter {
 			try {
 				_writer.close();
 			} catch (Exception e) {
-                e.printStackTrace();
+				// TODO BGT
+				e.printStackTrace();
 			}
 		}
-		_writer = new PrintWriter(a_Stream);
+		try {
+			_writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(a_Stream, Global.NEMO_ENCODING)));
+		} catch (UnsupportedEncodingException e) {
+			// TODO BGT Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public static String normalizedString(String a_String) {
@@ -257,6 +281,9 @@ public class XMLOutputWriter {
 			case 0x00: {
 				break;
 			}
+			case '°':
+				str.append("°");
+				break;
 			case '\r':
 			case '\n':
 			case '\t': {
@@ -292,7 +319,7 @@ public class XMLOutputWriter {
 		try {
 			_writer.close();
 		} catch (Exception e) {
-            e.printStackTrace();
+			e.printStackTrace();
 		}
 	}
 
@@ -405,16 +432,16 @@ public class XMLOutputWriter {
 	}
 
 	public static void main(String[] args) {
-		XMLOutputWriter writer = new XMLOutputWriter(System.out);
-		writer.openTag("TEST");
-		writer.putAttribute("TIMESTAMP", System.currentTimeMillis());
-		writer.putTag("TEST2", 'A');
-		writer.openTag("TEST3");
-		writer.putAttribute("SYS", 1);
-		writer.closeTag();
-		writer.openTag("TEST4");
-		writer.putAttribute("BOOL", true);
-		writer.closeTag(1.2);
-		writer.closeTag();
+		// XMLOutputWriter writer = new XMLOutputWriter(System.out);
+		// writer.openTag("TEST");
+		// writer.putAttribute("TIMESTAMP", System.currentTimeMillis());
+		// writer.putTag("TEST2", 'A');
+		// writer.openTag("TEST3");
+		// writer.putAttribute("SYS", 1);
+		// writer.closeTag();
+		// writer.openTag("TEST4");
+		// writer.putAttribute("BOOL", true);
+		// writer.closeTag(1.2);
+		// writer.closeTag();
 	}
 }

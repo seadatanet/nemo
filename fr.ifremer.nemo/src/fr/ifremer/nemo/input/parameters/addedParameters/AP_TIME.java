@@ -1,12 +1,14 @@
-/* ============================================================================
- * Nom du fichier	: AP_date.java
- * Auteur			: sbregent
- * Date				: 26 janv. 11
- * Copyright		: Altran
+/*
+ * ============================================================================
+ * Nom du fichier : AP_date.java
+ * Auteur : sbregent
+ * Date : 26 janv. 11
+ * Copyright : Altran
  * ============================================================================
  */
 package fr.ifremer.nemo.input.parameters.addedParameters;
 
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 
 import fr.ifremer.nemo.domain.Station;
@@ -43,9 +45,11 @@ public class AP_TIME extends AddedParam
 
 	/**
 	 * {@inheritDoc}
+	 * 
+	 * @throws UnsupportedEncodingException
 	 */
 	@Override
-	public String getValue(Station currentStation, String inputLine, long currentDate) throws ParseException
+	public String getValue(Station currentStation, String inputLine, long currentDate) throws ParseException, UnsupportedEncodingException
 	{
 		// $formatter.formatDateTime( "hh24mmss",
 		// $station.parametersAt(0).valuesAt($i).date )

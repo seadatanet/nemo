@@ -547,6 +547,7 @@ public class Messages
 	public static String ParameterModel_1;
 	public static String ParameterModel_2;
 
+	public static String errorParseChar;
 	static
 	{
 		// check config de la langue

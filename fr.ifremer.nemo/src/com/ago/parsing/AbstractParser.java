@@ -1,5 +1,6 @@
 package com.ago.parsing;
 
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.EmptyStackException;
 import java.util.Stack;
@@ -7,6 +8,8 @@ import java.util.Vector;
 
 import com.ago.io.PositionableByteArrayInputStream;
 import com.ago.io.PositionableStream;
+
+import fr.ifremer.nemo.util.Global;
 
 /**
  * class AbstractParser
@@ -43,8 +46,9 @@ public class AbstractParser extends StreamScanner {
 			_backupStack.pop();
 			_backupStack.pop();
 			return true;
-		} catch (EmptyStackException e) {
-			throw new ParseException(e.getMessage(), (int) mark);
+		} catch (EmptyStackException e)
+		{
+			throw new ParseException(e.getMessage(), mark);
 		}
 	}
 
@@ -57,15 +61,17 @@ public class AbstractParser extends StreamScanner {
 			popStackTo(_backupStack.pop());
 			setSourcePosition(_backupStack.pop());
 			return false;
-		} catch (EmptyStackException e) {
-			throw new ParseException(e.getMessage(), (int) mark);
+		} catch (EmptyStackException e)
+		{
+			throw new ParseException(e.getMessage(), mark);
 		}
 	}
 
 	/**
 	 * Save current Stack size and source position on the _backupStack
 	 */
-	protected void backupSave() throws ParseException {
+	protected void backupSave()
+	{
 		_backupStack.push((int) getSourcePosition());
 		_backupStack.push(_stack.size());
 	}
@@ -77,15 +83,15 @@ public class AbstractParser extends StreamScanner {
 	protected void combineStackTo(int oldSize) throws ParseException {
 		int size = _stack.size();
 		if (oldSize > size || oldSize < 0)
-			throw new ParseException("Invalid size for combining _stack",
-					(int) mark);
+			throw new ParseException("Invalid size for combining _stack", mark); //$NON-NLS-1$
 		Vector<Object> vector = new Vector<Object>();
 		try {
 			for (int i = 0; i < size - oldSize; i++) {
 				vector.insertElementAt(_stack.pop(), 0);
 			}
-		} catch (EmptyStackException e) {
-			throw new ParseException(e.getMessage(), (int) mark);
+		} catch (EmptyStackException e)
+		{
+			throw new ParseException(e.getMessage(), mark);
 		}
 		_stack.push(vector);
 	}
@@ -111,7 +117,8 @@ public class AbstractParser extends StreamScanner {
 	/**
 	 * return the current stream position
 	 */
-	public long getSourcePosition() throws ParseException {
+	public long getSourcePosition()
+	{
 		return mark - 1;
 	}
 
@@ -131,7 +138,9 @@ public class AbstractParser extends StreamScanner {
 		throw new ParseException(message, pos);
 	}
 
-	public void on(PositionableStream stream) throws ParseException {
+	@Override
+	public void on(PositionableStream stream) throws ParseException
+	{
 		super.on(stream);
 		_stack = new Stack<Object>();
 		_backupStack = new Stack<Integer>();
@@ -141,11 +150,17 @@ public class AbstractParser extends StreamScanner {
 	/**
 	 * Parse the string beginning by the rule construct construct corresponds to
 	 * a method name
+	 * 
+	 * @throws UnsupportedEncodingException
 	 */
-	public Stack<Object> parse(String s, String construct)
-			throws ParseException {
-		return parse(new PositionableByteArrayInputStream(s.getBytes()),
-				construct);
+	public Stack<Object> parse(String s, String construct) throws ParseException, UnsupportedEncodingException
+	{
+		Stack<Object> res = null;
+		res = parse(
+				new PositionableByteArrayInputStream(s.getBytes(Global.NEMO_ENCODING)),
+				construct
+				);
+		return res;
 	}
 
 	/**
@@ -193,7 +208,8 @@ public class AbstractParser extends StreamScanner {
 	 * return true if the current token is of type s and its value is value The
 	 * scan next token
 	 */
-	public boolean peekForValueType(char value) throws ParseException {
+	public boolean peekForValueType(char value)
+	{
 		return peekForValueType(CHARACTER, new Character(value));
 	}
 
@@ -202,16 +218,14 @@ public class AbstractParser extends StreamScanner {
 	 * scan next token
 	 */
 	public boolean peekForValueType(String s, Object value)
-			throws ParseException {
-		if (tokenType == s && token.equals(value)) {
-			scanToken();
-			return true;
-		} else {
-			return false;
-		}
+	{
+		boolean res = false;
+		res = (tokenType == s && token.equals(value));
+		return res;
 	}
 
-	public boolean popNoTest() throws ParseException {
+	public boolean popNoTest()
+	{
 		_stack.pop();
 		return true;
 	}
@@ -227,8 +241,9 @@ public class AbstractParser extends StreamScanner {
 			while (_stack.size() != oldSize) {
 				_stack.pop();
 			}
-		} catch (EmptyStackException e) {
-			throw new ParseException(e.getMessage(), (int) mark);
+		} catch (EmptyStackException e)
+		{
+			throw new ParseException(e.getMessage(), mark);
 		}
 		return true;
 	}
@@ -246,8 +261,9 @@ public class AbstractParser extends StreamScanner {
 	public void replaceStackTop(Object element) throws ParseException {
 		try {
 			_stack.setElementAt(element, _stack.size() - 1);
-		} catch (Exception e) {
-			throw new ParseException(e.getMessage(), (int) mark);
+		} catch (Exception e)
+		{
+			throw new ParseException(e.getMessage(), mark);
 		}
 	}
 
@@ -257,21 +273,24 @@ public class AbstractParser extends StreamScanner {
 	protected void setSourcePosition(long pos) throws ParseException {
 		try {
 			source.setPosition(pos);
-		} catch (Exception e) {
-			throw new ParseException(e.getMessage(), (int) mark);
+		} catch (Exception e)
+		{
+			throw new ParseException(e.getMessage(), mark);
 		}
 		step();
 		scanToken();
 	}
 
-	public boolean sourcePop() throws ParseException {
+	public boolean sourcePop() 
+	{
 		PositionableSource v = (PositionableSource) _stack.pop();
 		v.setSourcePositions(((Integer) _stack.pop()).intValue(), mark);
 		_stack.push(v);
 		return true;
 	}
 
-	public boolean sourcePush() throws ParseException {
+	public boolean sourcePush() 
+	{
 		_stack.push(new Integer(mark));
 		return true;
 	}

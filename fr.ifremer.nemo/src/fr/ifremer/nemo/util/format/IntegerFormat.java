@@ -1,6 +1,6 @@
 package fr.ifremer.nemo.util.format;
 
-import java.io.OutputStream;
+import java.io.FileOutputStream;
 import java.text.FieldPosition;
 import java.text.ParsePosition;
 
@@ -12,19 +12,20 @@ import com.ago.xml.XMLOutputWriter;
 import fr.ifremer.nemo.input.ModelDescription;
 import fr.ifremer.nemo.util.Global;
 
-
 /**
  * Class IntegerFormat
  * 
  * 
  * @author Gerard BUNEL
  */
-public class IntegerFormat extends ExternalizableFormat implements Cloneable {
+public class IntegerFormat extends ExternalizableFormat implements Cloneable
+{
 
-    private static final long serialVersionUID = 8178150076649342176L;
-    protected String _formatString;
+	private static final long serialVersionUID = 8178150076649342176L;
+	protected String _formatString;
 
-	public IntegerFormat() {
+	public IntegerFormat()
+	{
 		super();
 		_formatString = Global.EMPTY_STRING;
 	}
@@ -33,7 +34,8 @@ public class IntegerFormat extends ExternalizableFormat implements Cloneable {
 	 * 
 	 * @param a_Format
 	 */
-	public IntegerFormat(String a_Format) {
+	public IntegerFormat(String a_Format)
+	{
 		this();
 		_formatString = a_Format;
 	}
@@ -53,10 +55,8 @@ public class IntegerFormat extends ExternalizableFormat implements Cloneable {
 	 * @return SAXConsumer
 	 * 
 	 */
-	public static SAXConsumer fromElement(String a_URI, 
-                                          String a_LocalName,
-                                          String a_QName, 
-                                          Attributes a_Attributes){
+	public static SAXConsumer fromElement(String a_URI, String a_LocalName, String a_QName, Attributes a_Attributes)
+	{
 		IntegerFormat tmp = new IntegerFormat();
 		tmp.buildFromElement(a_URI, a_LocalName, a_QName, a_Attributes);
 		return tmp;
@@ -76,12 +76,11 @@ public class IntegerFormat extends ExternalizableFormat implements Cloneable {
 	 *            XML Element attributes
 	 * 
 	 */
-	public void buildFromElement(String a_URI, 
-                                 String a_LocalName,
-                                 String a_QName, 
-                                 Attributes a_Attributes){
+	public void buildFromElement(String a_URI, String a_LocalName, String a_QName, Attributes a_Attributes)
+	{
 		String tmp;
-		if ((tmp = a_Attributes.getValue(ModelDescription.a_string)) != null) {
+		if ((tmp = a_Attributes.getValue(ModelDescription.a_string)) != null)
+		{
 			setFormatString(tmp);
 		}
 	}
@@ -101,10 +100,8 @@ public class IntegerFormat extends ExternalizableFormat implements Cloneable {
 	 * @return SAXConsumer
 	 * 
 	 */
-	public SAXConsumer consumeElement(String a_URI, 
-                                      String a_LocalName,
-                                      String a_QName, 
-                                      Attributes a_Attributes){
+	public SAXConsumer consumeElement(String a_URI, String a_LocalName, String a_QName, Attributes a_Attributes)
+	{
 		return null;
 	}
 
@@ -116,7 +113,8 @@ public class IntegerFormat extends ExternalizableFormat implements Cloneable {
 	 *            The CDATA content
 	 * 
 	 */
-	public void consumeCharacters(String a_Characters) {
+	public void consumeCharacters(String a_Characters)
+	{
 	}
 
 	/**
@@ -127,7 +125,8 @@ public class IntegerFormat extends ExternalizableFormat implements Cloneable {
 	 *            XMLOutputWriter to which to write the XML Definition
 	 * 
 	 */
-	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
+	public void writeXMLBodyOn(XMLOutputWriter a_Writer)
+	{
 		a_Writer.putAttribute(ModelDescription.a_string, getFormatString());
 	}
 
@@ -140,7 +139,8 @@ public class IntegerFormat extends ExternalizableFormat implements Cloneable {
 	 * 
 	 */
 	@Override
-    public void writeXMLOn(XMLOutputWriter a_Writer) {
+	public void writeXMLOn(XMLOutputWriter a_Writer)
+	{
 		a_Writer.openTag(ModelDescription.node_fInteger);
 		writeXMLBodyOn(a_Writer);
 		a_Writer.closeTag();
@@ -154,7 +154,8 @@ public class IntegerFormat extends ExternalizableFormat implements Cloneable {
 	 *            the OutptStream to which to write the XML Definition
 	 * 
 	 */
-	public void writeXMLOn(OutputStream a_Stream) {
+	public void writeXMLOn(FileOutputStream a_Stream)
+	{
 		XMLOutputWriter writer = new XMLOutputWriter(a_Stream);
 		writeXMLOn(writer);
 	}
@@ -165,7 +166,8 @@ public class IntegerFormat extends ExternalizableFormat implements Cloneable {
 	 * @return String
 	 * @see IntegerFormat#_formatString
 	 */
-	public String getFormatString() {
+	public String getFormatString()
+	{
 		return _formatString;
 	}
 
@@ -176,7 +178,8 @@ public class IntegerFormat extends ExternalizableFormat implements Cloneable {
 	 *            new value for _formatString
 	 * @see IntegerFormat#_formatString
 	 */
-	public void setFormatString(String x) {
+	public void setFormatString(String x)
+	{
 		_formatString = x;
 	}
 
@@ -185,7 +188,8 @@ public class IntegerFormat extends ExternalizableFormat implements Cloneable {
 	 * @return Object
 	 */
 	@Override
-    public Object clone() {
+	public Object clone()
+	{
 		return new IntegerFormat(new String(_formatString));
 	}
 
@@ -197,11 +201,9 @@ public class IntegerFormat extends ExternalizableFormat implements Cloneable {
 	 * @return StringBuffer
 	 */
 	@Override
-    public StringBuffer format(Object obj, 
-                               StringBuffer toAppendTo,
-                               FieldPosition pos) {
-		toAppendTo.append(String
-				.format(java.util.Locale.US, _formatString, obj));
+	public StringBuffer format(Object obj, StringBuffer toAppendTo, FieldPosition pos)
+	{
+		toAppendTo.append(String.format(java.util.Locale.US, _formatString, obj));
 		return toAppendTo;
 	}
 
@@ -212,7 +214,8 @@ public class IntegerFormat extends ExternalizableFormat implements Cloneable {
 	 * @return Integer
 	 */
 	@Override
-    public Integer parseObject(String source, ParsePosition pos) {
+	public Integer parseObject(String source, ParsePosition pos)
+	{
 		pos.setIndex(source.length());
 		return Integer.valueOf(source);
 	}
@@ -222,7 +225,8 @@ public class IntegerFormat extends ExternalizableFormat implements Cloneable {
 	 * @return String
 	 */
 	@Override
-    public String toString() {
+	public String toString()
+	{
 		return _formatString;
 	}
 

@@ -1,16 +1,18 @@
-/* ============================================================================
- * Nom du fichier   : StationDomain.java
- * Application      : NEMO version 1.2.20
- * Auteur           : Delphine BOULANGER
+/*
+ * ============================================================================
+ * Nom du fichier : StationDomain.java
+ * Application : NEMO version 1.2.20
+ * Auteur : Delphine BOULANGER
  * Date de crÃ©ation : 30 nov. 09
- * Client           : Ifremer
- * Copyright        : Altran
+ * Client : Ifremer
+ * Copyright : Altran
  * ============================================================================
  */
 package fr.ifremer.nemo.domain;
 
 import java.io.LineNumberReader;
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,8 +40,7 @@ import fr.ifremer.nemo.util.Messages;
  * 
  * @author Delphine BOULANGER
  */
-public class StationDomain
-{
+public class StationDomain {
 	/**
 	 * Informations descrivant l'onglet Station
 	 */
@@ -58,28 +59,24 @@ public class StationDomain
 
 	protected HashSet<String> stationsLocalCDIList;
 
-	public StationDomain()
-	{
+	public StationDomain() {
 		form = Formatter.getSingleton();
 		initValues();
 	}
 
-	public StationDomain(InputModel model)
-	{
+	public StationDomain(InputModel model) {
 		form = Formatter.getSingleton();
 		initValues();
 		update(model);
 	}
 
-	public void resetCurrent()
-	{
+	public void resetCurrent() {
 		_ref = -1;
 		// _currentStationValues = new HashMap<String, Object>();
 		// _currentStationMetaFlags = new HashMap<String, String>();
 	}
 
-	public void initValues()
-	{
+	public void initValues() {
 		_model = new StationModel();
 		_listStations = new HashMap<String, List<Station>>();
 		_ref = -1;
@@ -89,30 +86,25 @@ public class StationDomain
 		// _currentStationMetaFlags = new HashMap<String, String>();
 	}
 
-	public void update(InputModel model)
-	{
+	public void update(InputModel model) {
 		updateStation(model.getStationModel());
 
 	}
 
-	public void updateStation(StationModel model)
-	{
+	public void updateStation(StationModel model) {
 		_model = model;
 		_listStations = new HashMap<String, List<Station>>();
 		updateRef();
 		_someInData = false;
-		for (PropertyModel pModel : _model.getProperties())
-		{
-			if (pModel.isInData())
-			{
+		for (PropertyModel pModel : _model.getProperties()) {
+			if (pModel.isInData()) {
 				_someInData = true;
 				break;
 			}
 		}
 	}
 
-	public void updateRef()
-	{
+	public void updateRef() {
 		if (_model.getReferenceProperty() != null && _model.getReferenceProperty().isUserProvided() && !_model.getReferenceProperty().getUserValue().trim().equals(Global.EMPTY_STRING))
 			_ref = Integer.parseInt(_model.getReferenceProperty().getUserValue());
 		else
@@ -120,8 +112,7 @@ public class StationDomain
 	}
 
 	@SuppressWarnings("nls")
-	public StringBuffer getOdvStationHeaderLabels()
-	{
+	public StringBuffer getOdvStationHeaderLabels() {
 		StringBuffer odvStationHeader = new StringBuffer();
 		odvStationHeader.append("Cruise");
 		odvStationHeader.append(Global.TAB);
@@ -144,18 +135,15 @@ public class StationDomain
 		return odvStationHeader;
 	}
 
-	public StringBuffer getOdvEmptyStationHeader()
-	{
+	public StringBuffer getOdvEmptyStationHeader() {
 		StringBuffer odvStationHeader = new StringBuffer();
-		for (int i = 0; i < 9; i++)
-		{
+		for (int i = 0; i < 9; i++) {
 			odvStationHeader.append(Global.TAB);
 		}
 		return odvStationHeader;
 	}
 
-	public StringBuffer getOdvTrajectoryHeader(Station currentStation, String inputLine, int indexRecord) throws ParseException
-	{
+	public StringBuffer getOdvTrajectoryHeader(Station currentStation, String inputLine, int indexRecord) throws ParseException, UnsupportedEncodingException {
 		_currentStation = currentStation;
 
 		StringBuffer odvStationHeader = new StringBuffer();
@@ -210,8 +198,7 @@ public class StationDomain
 		// if (!((Float) botDepth).isNaN())
 		{
 			odvStationHeader.append(botDepth);
-		} else
-		{
+		} else {
 
 			// odvStationHeader.append(Global.ZERO);
 			odvStationHeader.append(Global.SPACE);
@@ -222,50 +209,40 @@ public class StationDomain
 		return odvStationHeader;
 	}
 
-	public String getReference(String inputFileName, String[] inputStationHeader, boolean mustIncrement) throws ParseException
-	{
+	public String getReference(String inputFileName, String[] inputStationHeader, boolean mustIncrement) throws ParseException {
 		// STATION NUMBER
 		String ref = Global.EMPTY_STRING;
-		if (_model.getReferenceProperty().isUserProvided())
-		{
-			if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TRAJECTORY)
-			{
+		if (_model.getReferenceProperty().isUserProvided()) {
+			if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TRAJECTORY) {
 				ref = _model.getReferenceProperty().getUserValue();
-			} else
-			{
+			} else {
 				ref = getRef(mustIncrement);
 			}
-		} else if (_model.getReferenceProperty().getFragment().getFirstLine() == 0)
-		{
+		} else if (_model.getReferenceProperty().getFragment().getFirstLine() == 0) {
 			// dans le nom du fichier
 			ref = (String) _model.getReferenceProperty().applyOn(new String[] { inputFileName });
-		} else
-		{
+		} else {
 			// dans le Header
 			ref = (String) _model.getReferenceProperty().applyOn(inputStationHeader);
 		}
 		return ref;
 	}
 
-	private String getRef(boolean mustIncrement)
-	{
+	private String getRef(boolean mustIncrement) {
 		// incrementation du numÃ©ro
 		String ref = Integer.toString(_ref);
-		if (mustIncrement)
-		{
+		if (mustIncrement) {
 			_ref++;
 		}
 		return ref;
 	}
 
-	public void incrementRef()
-	{
+	public void incrementRef() {
 		// incrementation du numÃ©ro
 		_ref++;
 	}
 
-	public StringBuffer getHeader(Conversion c, Station currentStation, String[] inputStationHeader) throws ParseException, GenerationException
-	{
+	public StringBuffer getHeader(Conversion c, Station currentStation, String[] inputStationHeader) throws ParseException, GenerationException {
 
 		_currentStation = currentStation;
 
@@ -282,11 +259,9 @@ public class StationDomain
 	}
 
 	@SuppressWarnings("nls")
-	private StringBuffer getOdvHeader(Station currentStation, String[] inputStationHeader) throws ParseException, GenerationException
-	{
+	private StringBuffer getOdvHeader(Station currentStation, String[] inputStationHeader) throws ParseException, GenerationException {
 		String errorMessage = "";
-		try
-		{
+		try {
 			StringBuffer odvStationHeader = new StringBuffer();
 			String stationRef = currentStation.getReference();
 			// Cruise
@@ -304,12 +279,10 @@ public class StationDomain
 
 			// Station
 			errorMessage = "station reference";
-			if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TRAJECTORY)
-			{
+			if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TRAJECTORY) {
 				_ref = 1;
 				odvStationHeader.append(form.limitString(getRef(true), 20));
-			} else
-			{
+			} else {
 				odvStationHeader.append(form.limitString(stationRef, 20));
 			}
 			odvStationHeader.append(Global.TAB);
@@ -351,44 +324,34 @@ public class StationDomain
 			// 6998
 			// if (botDepth.equals("Default"))
 			// botDepth = 0f;
-			if ((!botDepth.equals("Default")) && !((Float) botDepth).isNaN())
-			{
+			if ((!botDepth.equals("Default")) && !((Float) botDepth).isNaN()) {
 				odvStationHeader.append(botDepth);
-			} else
-			{
+			} else {
 				// odvStationHeader.append(Global.ZERO);
 				odvStationHeader.append(Global.SPACE);
 			}
 			odvStationHeader.append(Global.TAB);
 
 			return odvStationHeader;
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			throw new GenerationException(errorMessage);
 		}
 	}
 
 	@SuppressWarnings("nls")
-	private String getTypeBC(String ref)
-	{
+	private String getTypeBC(String ref) {
 		String typeBC = "*";
-		if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.PROFILE)
-		{
+		if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.PROFILE) {
 			DataType dataType = _model.getDataType();
-			if (dataType != null && dataType.getCode() != null && dataType.getCode().equals("H09"))
-			{
+			if (dataType != null && dataType.getCode() != null && dataType.getCode().equals("H09")) {
 				typeBC = "B";
-			} else if (dataType != null && dataType.getCode() != null && (dataType.getCode().equals("H10") || dataType.getCode().equals("H13")))
-			{
+			} else if (dataType != null && dataType.getCode() != null && (dataType.getCode().equals("H10") || dataType.getCode().equals("H13"))) {
 				typeBC = "C";
-			} else
-			{
+			} else {
 				int nbRecords = getStationByRef(ref).getNbRecords();
-				if (nbRecords < 250)
-				{
+				if (nbRecords < 250) {
 					typeBC = "B";
-				} else
-				{
+				} else {
 					typeBC = "C";
 				}
 			}
@@ -396,8 +359,7 @@ public class StationDomain
 		return typeBC;
 	}
 
-	public String getLocalCdiId(CruiseDomain cDomain, Conversion c, String ref) throws ParseException
-	{
+	public String getLocalCdiId(CruiseDomain cDomain, Conversion c, String ref) throws ParseException, UnsupportedEncodingException {
 		// FAE 1143 : nommage du LOCAL_CDI_ID
 		String localCDIId = "";
 		String cruiseRef = Global.EMPTY_STRING;
@@ -415,8 +377,7 @@ public class StationDomain
 			// [NumÃ©ro station]si < 5 : codÃ© sur 5 caractÃ¨res il est
 			// complÃ©tÃ© Ã 
 			// gauche par des '0'.
-			if (stationReference.length() < 5)
-			{
+			if (stationReference.length() < 5) {
 				stationReference = form.padZero(stationReference, 5);
 			}
 			break;
@@ -443,12 +404,9 @@ public class StationDomain
 
 		// [Type de donnÃ©es] s'il existe
 		DataType dataType = _model.getDataType();
-		if (dataType != null)
-		{
-			if (!dataType.getCode().equals(Global.EMPTY_STRING))
-			{
-				if (!temp.equals(Global.EMPTY_STRING))
-				{
+		if (dataType != null) {
+			if (!dataType.getCode().equals(Global.EMPTY_STRING)) {
+				if (!temp.equals(Global.EMPTY_STRING)) {
 					temp += Global.UNDERSCORE;
 				}
 				// FAE 6536
@@ -461,31 +419,25 @@ public class StationDomain
 	}
 
 	// FAE 6143
-	public String getAndCheckLocalCDI(CruiseDomain cDomain, Conversion c, String ref) throws ParseException, GenerationException
-	{
+	public String getAndCheckLocalCDI(CruiseDomain cDomain, Conversion c, String ref) throws ParseException, GenerationException, UnsupportedEncodingException {
 		String localCdi = getLocalCdiId(cDomain, c, ref);
-		if (stationsLocalCDIList.contains(localCdi))
-		{
+		if (stationsLocalCDIList.contains(localCdi)) {
 			throw new GenerationException(Messages.error_convert_stationsDoubles + localCdi);
-		} else
-		{
+		} else {
 			stationsLocalCDIList.add(localCdi);
 		}
 		return localCdi;
 	}
 
-	public void resetlocalCDIList()
-	{
+	public void resetlocalCDIList() {
 		stationsLocalCDIList = new HashSet<String>();
 	}
 
 	@SuppressWarnings("nls")
-	private StringBuffer getMedatlasHeader(Station currentStation, String[] inputStationHeader) throws ParseException, GenerationException
-	{
+	private StringBuffer getMedatlasHeader(Station currentStation, String[] inputStationHeader) throws ParseException, GenerationException {
 
 		String errorMessage = "";
-		try
-		{
+		try {
 
 			StringBuffer medStationHeader = new StringBuffer();
 			String stationRef = currentStation.getReference();
@@ -519,8 +471,7 @@ public class StationDomain
 			Object value = _model.getProperty(Intern.S_DEPTH).applyOn(inputStationHeader);
 
 			boolean depthIsDefault = false;
-			if (value.equals("Default"))
-			{
+			if (value.equals("Default")) {
 				value = Float.NaN;
 				depthIsDefault = true;
 			}
@@ -566,11 +517,9 @@ public class StationDomain
 			medStationHeader.append(Global.RN);
 
 			medStationHeader.append(start);
-			try
-			{
+			try {
 				medStationHeader.append(Elts.limit((String) _model.getProperty(Intern.S_DCHIST + "2").applyOn(inputStationHeader), Elts.station_line));
-			} catch (Exception nulException)
-			{
+			} catch (Exception nulException) {
 				// this is authorized: only DCHistory1 is used, DC History2 is
 				// empty
 				// so this is not an error
@@ -596,8 +545,7 @@ public class StationDomain
 			medStationHeader.append(Global.RN);
 
 			// pour chaque ligne de commentaires
-			for (String line : getCommentLines(inputStationHeader))
-			{
+			for (String line : getCommentLines(inputStationHeader)) {
 				medStationHeader.append(start);
 				medStationHeader.append(line);
 				medStationHeader.append(Global.RN);
@@ -632,11 +580,9 @@ public class StationDomain
 			medStationHeader.append(Global.RN);
 
 			medStationHeader.append(start);
-			try
-			{
+			try {
 				medStationHeader.append(Elts.limit((String) _model.getProperty(Intern.S_SURFACE + "2").applyOn(inputStationHeader), Elts.station_line));
-			} catch (Exception nulException)
-			{
+			} catch (Exception nulException) {
 				// this is authorized: only DCHistory1 is used, DC History2 is
 				// empty
 				// so this is not an error
@@ -646,8 +592,7 @@ public class StationDomain
 			return medStationHeader;
 		}
 
-		catch (Exception e)
-		{
+		catch (Exception e) {
 			throw new GenerationException(errorMessage);
 		}
 	}
@@ -657,27 +602,20 @@ public class StationDomain
 	 * @return String[]
 	 * @throws ParseException
 	 */
-	private String[] getCommentLines(String[] inputFile) throws ParseException
-	{
+	private String[] getCommentLines(String[] inputFile) throws ParseException {
 		LineNumberReader reader = new LineNumberReader(new StringReader((String) _model.getProperty(Intern.S_COMMENT).applyOn(inputFile)));
 		String line = null;
 		java.util.Vector<String> lines = new java.util.Vector<String>();
-		try
-		{
-			while ((line = reader.readLine()) != null)
-			{
+		try {
+			while ((line = reader.readLine()) != null) {
 				lines.add(line);
 			}
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
-		} finally
-		{
-			try
-			{
+		} finally {
+			try {
 				reader.close();
-			} catch (Exception ex)
-			{
+			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
 		}
@@ -685,27 +623,22 @@ public class StationDomain
 		return lines.toArray(lineArray);
 	}
 
-	public String getMetaFlag(String key, String[] inputFile)
-	{
+	public String getMetaFlag(String key, String[] inputFile) {
 		// FAE 4431
 		String metaFlag = Nemo.getInstance().getConfig().getDefaultFlag();
-		if (key.equals(Intern.DATETIME))
-		{
+		if (key.equals(Intern.DATETIME)) {
 			key = Intern.S_DATE;
-		} else if (key.equals(Intern.ENDDATETIME))
-		{
+		} else if (key.equals(Intern.ENDDATETIME)) {
 			key = Intern.S_EDATE;
 		}
 		Fragment flag = _model.getProperty(key).getFlag();
-		if (flag != null)
-		{
+		if (flag != null) {
 			metaFlag = _model.getFlagTable().getFlagSDN(flag.retreive(inputFile));
 		}
 		return metaFlag;
 	}
 
-	private StringBuffer getMedTimeSeriesHeader(Station currentStation, String[] inputFile) throws ParseException
-	{
+	private StringBuffer getMedTimeSeriesHeader(Station currentStation, String[] inputFile) throws ParseException, UnsupportedEncodingException {
 		StringBuffer timeseriesHeader = new StringBuffer();
 		String start = Conversion.MEDATLAS.getDebut();
 
@@ -724,39 +657,30 @@ public class StationDomain
 		timeseriesHeader.append(Elts.getElt(Elts.station_endTime, endTime));
 
 		double endlat = currentStation.getEndlatitude();
-		if (Double.isNaN(endlat))
-		{
-			if (_model.getProperty(Intern.S_ELAT).isUserProvided() && _model.getProperty(Intern.S_ELAT).getUserValue().equals(Global.EMPTY_STRING))
-			{
+		if (Double.isNaN(endlat)) {
+			if (_model.getProperty(Intern.S_ELAT).isUserProvided() && _model.getProperty(Intern.S_ELAT).getUserValue().equals(Global.EMPTY_STRING)) {
 				endlat = (Double) _model.getProperty(Intern.S_LAT).applyOn(inputFile);
-			} else
-			{
+			} else {
 				endlat = (Double) _model.getProperty(Intern.S_ELAT).applyOn(inputFile);
 			}
 		}
 
 		timeseriesHeader.append(Elts.getElt(Elts.station_endLat, endlat));
 		double endlon = currentStation.getEndlongitude();
-		if (Double.isNaN(endlon))
-		{
-			if (_model.getProperty(Intern.S_ELON).isUserProvided() && _model.getProperty(Intern.S_ELON).getUserValue().equals(Global.EMPTY_STRING))
-			{
+		if (Double.isNaN(endlon)) {
+			if (_model.getProperty(Intern.S_ELON).isUserProvided() && _model.getProperty(Intern.S_ELON).getUserValue().equals(Global.EMPTY_STRING)) {
 				endlon = (Double) _model.getProperty(Intern.S_LON).applyOn(inputFile);
-			} else
-			{
+			} else {
 				endlon = (Double) _model.getProperty(Intern.S_ELON).applyOn(inputFile);
 			}
 		}
 
 		timeseriesHeader.append(Elts.getElt(Elts.station_endLon, endlon));
 		float endDepth = currentStation.getEnddepth();
-		if (Float.isNaN(endDepth))
-		{
-			if (_model.getProperty(Intern.S_EDEPTH).isUserProvided() && _model.getProperty(Intern.S_EDEPTH).getUserValue().equals(Global.EMPTY_STRING))
-			{
+		if (Float.isNaN(endDepth)) {
+			if (_model.getProperty(Intern.S_EDEPTH).isUserProvided() && _model.getProperty(Intern.S_EDEPTH).getUserValue().equals(Global.EMPTY_STRING)) {
 				endDepth = (Float) _model.getProperty(Intern.S_DEPTH).applyOn(inputFile);
-			} else
-			{
+			} else {
 				if (_model.getProperty(Intern.S_EDEPTH).getFragment() == null && Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TRAJECTORY)
 					endDepth = Float.NaN;
 				else
@@ -778,8 +702,7 @@ public class StationDomain
 
 		// *SENSOR DEPTH=17 (metre) DISTANCE TO BOTTOM= (metre) QC=00
 		Float bottomDepth = Float.NaN;
-		if (!Float.isNaN(endDepth) && !Float.isNaN(sensorDepth))
-		{
+		if (!Float.isNaN(endDepth) && !Float.isNaN(sensorDepth)) {
 			bottomDepth = endDepth - sensorDepth;
 		}
 		timeseriesHeader.append(start);
@@ -797,8 +720,7 @@ public class StationDomain
 		duration = duration / (1000.0f * 60.0f * 60.0f * 24.0f);
 		timeseriesHeader.append(start);
 		timeseriesHeader.append(Elts.getElt(Elts.station_duration, duration));
-		for (int i = 0; i < 50; i++)
-		{
+		for (int i = 0; i < 50; i++) {
 			timeseriesHeader.append(Global.SPACE);
 		}
 		timeseriesHeader.append(Elts.getElt(Elts.qc, currentStation.getMetaFlag(Intern.DURATION)));
@@ -815,8 +737,7 @@ public class StationDomain
 	}
 
 	// RELEASE
-	public void release()
-	{
+	public void release() {
 		_model.release();
 
 	}
@@ -827,8 +748,7 @@ public class StationDomain
 	 * @return StationModel
 	 * @see StationDomain.java#model
 	 */
-	public StationModel getModel()
-	{
+	public StationModel getModel() {
 		return _model;
 	}
 
@@ -839,8 +759,7 @@ public class StationDomain
 	 *            : nouvelle valeur pour model
 	 * @see StationDomain.java#model
 	 */
-	public void setModel(StationModel model)
-	{
+	public void setModel(StationModel model) {
 		_model = model;
 	}
 
@@ -850,8 +769,7 @@ public class StationDomain
 	 * @return boolean
 	 * @see StationDomain.java#_someInData
 	 */
-	public boolean isSomeInData()
-	{
+	public boolean isSomeInData() {
 		return _someInData;
 	}
 
@@ -862,30 +780,23 @@ public class StationDomain
 	 *            : nouvelle valeur pour someInData
 	 * @see StationDomain.java#_someInData
 	 */
-	public void setSomeInData(boolean someInData)
-	{
+	public void setSomeInData(boolean someInData) {
 		_someInData = someInData;
 	}
 
-	public void addStation(String inputFilePath, Station st)
-	{
-		if (_listStations.containsKey(inputFilePath))
-		{
+	public void addStation(String inputFilePath, Station st) {
+		if (_listStations.containsKey(inputFilePath)) {
 			_listStations.get(inputFilePath).add(st);
-		} else
-		{
+		} else {
 			List<Station> stations = new ArrayList<Station>();
 			stations.add(st);
 			_listStations.put(inputFilePath, stations);
 		}
 	}
 
-	public boolean stationIsRegistered(String inputFilePath, String inputFileName)
-	{
-		if (_listStations.containsKey(inputFilePath))
-		{
-			for (Station st : _listStations.get(inputFilePath))
-			{
+	public boolean stationIsRegistered(String inputFilePath, String inputFileName) {
+		if (_listStations.containsKey(inputFilePath)) {
+			for (Station st : _listStations.get(inputFilePath)) {
 				if (st.getFileName().equals(inputFileName))
 					return true;
 			}
@@ -893,20 +804,15 @@ public class StationDomain
 		return false;
 	}
 
-	public List<Station> getStations(String inputFilePath)
-	{
+	public List<Station> getStations(String inputFilePath) {
 		return _listStations.get(inputFilePath);
 	}
 
-	public Station getStationByRef(String ref)
-	{
+	public Station getStationByRef(String ref) {
 		Station selected = null;
-		for (String inputFilePath : _listStations.keySet())
-		{
-			for (Station st : _listStations.get(inputFilePath))
-			{
-				if (ref.equals(st.getReference()))
-				{
+		for (String inputFilePath : _listStations.keySet()) {
+			for (Station st : _listStations.get(inputFilePath)) {
+				if (ref.equals(st.getReference())) {
 					selected = st;
 					break;
 				}
@@ -915,8 +821,7 @@ public class StationDomain
 		return selected;
 	}
 
-	public void resetStations()
-	{
+	public void resetStations() {
 		_listStations.clear();
 	}
 
@@ -926,8 +831,7 @@ public class StationDomain
 	 * @return boolean
 	 * @see StationDomain.java#_computed
 	 */
-	public boolean isComputed()
-	{
+	public boolean isComputed() {
 		return _computed;
 	}
 
@@ -938,8 +842,7 @@ public class StationDomain
 	 *            : nouvelle valeur pour computed
 	 * @see StationDomain.java#_computed
 	 */
-	public void setComputed(boolean computed)
-	{
+	public void setComputed(boolean computed) {
 		_computed = computed;
 	}
 
@@ -948,8 +851,7 @@ public class StationDomain
 	 * 
 	 * @return the currentStation
 	 */
-	public Station getCurrentStation()
-	{
+	public Station getCurrentStation() {
 		return _currentStation;
 	}
 }

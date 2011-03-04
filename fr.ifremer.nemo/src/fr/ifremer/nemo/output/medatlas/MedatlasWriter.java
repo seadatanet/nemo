@@ -1,7 +1,8 @@
 package fr.ifremer.nemo.output.medatlas;
 
 import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.util.Conversion;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_EndData;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.presdepth.CalcPres;
@@ -72,8 +74,9 @@ public class MedatlasWriter extends NemoWriter
 			stationDomain.updateRef();
 			outputFileName = getOutputFileName(inputFilePath);
 
-			outputFileWriter = new PrintWriter(new BufferedWriter(new FileWriter(outputFileName)));
-
+			// outputFileWriter = new PrintWriter(new BufferedWriter(new
+			// FileWriter(outputFileName)));
+			outputFileWriter = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFileName), Global.NEMO_ENCODING)));
 			// écriture de l'entête campagne
 			printCruiseHeader();
 

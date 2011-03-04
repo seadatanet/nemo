@@ -1,11 +1,11 @@
 /**
  * 
  * 
- * @class	XMLBootstrapParser
- * @project	CTI
- * @package	com.ftrd.util
- * @author 	Gerard BUNEL - Atlantide (2001 - 2002)
- * @version	1.0 - January 21, 2002
+ * @class XMLBootstrapParser
+ * @project CTI
+ * @package com.ftrd.util
+ * @author Gerard BUNEL - Atlantide (2001 - 2002)
+ * @version 1.0 - January 21, 2002
  */
 
 package com.ago.xml;
@@ -21,7 +21,10 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-public class XMLBootstrapParser extends XmlSAXParser {
+import fr.ifremer.nemo.util.Global;
+
+public class XMLBootstrapParser extends XmlSAXParser
+{
 
 	protected RootSAXConsumer _saxConsumer;
 
@@ -150,7 +153,9 @@ public class XMLBootstrapParser extends XmlSAXParser {
 	 * @param a_Stream
 	 * 
 	 */
-	public synchronized SAXConsumer parse(InputStream a_Stream) {
+	@Override
+	public synchronized SAXConsumer parse(InputStream a_Stream)
+	{
 		return parse(a_Stream, true);
 	}
 
@@ -169,11 +174,11 @@ public class XMLBootstrapParser extends XmlSAXParser {
 
 		try {
 			XMLReader parser = getXmlReader();
-			// pas de grammaire utilisée pour vérifier la syntaxe du fichier XML
+			// pas de grammaire utilisï¿½e pour vï¿½rifier la syntaxe du fichier XML
 			parser.setFeature("http://xml.org/sax/features/validation",
 					a_Validation);
 			parser.setContentHandler(this);
-			parser.parse(new InputSource(new InputStreamReader(a_Stream)));
+			parser.parse(new InputSource(new InputStreamReader(a_Stream, Global.NEMO_ENCODING)));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

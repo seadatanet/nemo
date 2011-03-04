@@ -4,9 +4,10 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
 import fr.ifremer.nemo.Nemo;
@@ -549,7 +550,9 @@ public class Preformat
 			numLigne = 0;
 			File file = new File(_repEntree + File.separator + ficEntree);
 			lecteurAvecBuffer = new BufferedReader(new FileReader(_repEntree + File.separator + ficEntree));
-			fichPreformat = new PrintWriter(new BufferedWriter(new FileWriter(repSortie + PF + ficEntree)));
+			// fichPreformat = new PrintWriter(new BufferedWriter(new
+			// FileWriter(repSortie + PF + ficEntree)));
+			fichPreformat = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(repSortie + PF + ficEntree), Global.NEMO_ENCODING)));
 
 			lecteurAvecBuffer.mark((int) file.length());
 			// Lecture des lignes d'en-tete

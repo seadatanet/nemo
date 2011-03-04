@@ -1,12 +1,14 @@
-/* ============================================================================
- * Nom du fichier	: AP_date.java
- * Auteur			: sbregent
- * Date				: 26 janv. 11
- * Copyright		: Altran
+/*
+ * ============================================================================
+ * Nom du fichier : AP_date.java
+ * Auteur : sbregent
+ * Date : 26 janv. 11
+ * Copyright : Altran
  * ============================================================================
  */
 package fr.ifremer.nemo.input.parameters.addedParameters;
 
+import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 import java.util.Locale;
@@ -65,7 +67,7 @@ public class AddedParam extends Parameter
 	}
 
 	@SuppressWarnings("nls")
-	public String compute(String fragmnt) throws StringIndexOutOfBoundsException, ParseException
+	public String compute(String fragmnt) throws StringIndexOutOfBoundsException, ParseException, UnsupportedEncodingException
 	{
 
 		String paramValue = null;
@@ -100,7 +102,7 @@ public class AddedParam extends Parameter
 		return flagQc;
 	}
 
-	public String getValue(Station currentStation, String inputLine, long currentDate) throws ParseException
+	public String getValue(Station currentStation, String inputLine, long currentDate) throws ParseException, UnsupportedEncodingException
 	{
 		return value;
 	}
