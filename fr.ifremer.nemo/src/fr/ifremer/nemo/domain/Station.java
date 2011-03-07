@@ -53,7 +53,7 @@ public class Station implements Comparable {
 
 	protected String _fileName;
 
-	public Station(String fileName, String[] inputStationHeader) throws ParseException, GenerationException {
+	public Station(String fileName, String[] inputStationHeader) throws  GenerationException {
 		// TODO BGT supprimer errorMsg
 		String errorMessage = "";
 		try {
@@ -142,8 +142,9 @@ public class Station implements Comparable {
 				_missingValueParams.put(paramModel.getParameter().getCode(), true);
 			}
 
-		} catch (Exception e) {
-			throw new GenerationException(e.getMessage());
+		} catch (Exception e)
+		{
+			throw new GenerationException(errorMessage + " " + e.getMessage());
 		}
 	}
 
