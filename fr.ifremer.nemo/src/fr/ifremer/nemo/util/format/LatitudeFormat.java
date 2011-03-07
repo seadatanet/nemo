@@ -477,7 +477,8 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable
 				}
 				case DEGREES:
 				{
-					String tmp = source;// .replace(' ', '0');
+					// 7369 ajout trim
+					String tmp = source.trim();// .replace(' ', '0');
 					DecimalFormat format = new DecimalFormat(_elements[i]._element);
 					value += ((Number) format.parseObject(tmp, pos)).doubleValue();
 					index = pos.getIndex();
