@@ -186,7 +186,6 @@ public class TableData
 	public void addType(TypeData typeData)
 	{
 		types.add(typeData);
-		System.out.println("add " + typeData.getEntryKey());
 		myGroupVerticalParameters.addTypeData(typeData);
 	}
 
