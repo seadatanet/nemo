@@ -20,7 +20,6 @@ import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.input.parameters.Parameter;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 
 /**
  * Description: description des paramètres ajoutés automatiquement par Nemo.
@@ -33,7 +32,8 @@ public class AddedParam extends Parameter
 {
 
 	@SuppressWarnings("nls")
-	public static enum IdParameter {
+	public static enum IdParameter
+	{
 		generic_depthBSSurf_FromPressure, generic_depthBSSurf_FromSensor, YEAR, MNTH, DAYX, TIME, CJDY, DTUT, LATX, LONX, BATH, PRES, DEPH, DEPHPR01, ADEPZZ01, ;
 	}
 
@@ -61,7 +61,6 @@ public class AddedParam extends Parameter
 		value = null;
 		isMesured = false;
 		hasDefaultValue = false;
-		DataListTypeEnum dataListType = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
 		_P011 = false;
 
 	}
