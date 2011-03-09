@@ -380,21 +380,6 @@ public class EditFileForm extends EditForm
 	}
 
 	@Override
-	protected void createButtonRaz()
-	{
-		super.createButtonRaz();
-
-		buttonRAZ.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter()
-		{
-			@Override
-			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e)
-			{
-				Nemo.getInstance().getViewMain().init();
-			}
-		});
-	}
-
-	@Override
 	public void initSections()
 	{
 		sectionFileHeader = new FileSection(NemoSection.F_FILEHEADER, Messages.getString(NemoSection.F_FILEHEADER), Messages.edit_file_enteteFichier, this);

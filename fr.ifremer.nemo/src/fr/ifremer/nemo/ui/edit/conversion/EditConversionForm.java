@@ -664,7 +664,8 @@ public class EditConversionForm extends EditForm
 
 		EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
 
-		summary += Messages.view_convert_summary_dataTypeLabel + Global.DBL_PT + Global.RN + Nemo.getInstance().getDomain().getData().getModel().getDataListType().toString();
+		summary += Messages.view_convert_summary_dataTypeLabel + Global.DBL_PT + Global.RN 
+		  + Nemo.getInstance().getViewMain().getMyRulesManager().getMyDataListType().toString();
 		summary += Global.RN + Global.RN + Global.RN;
 
 		if (editFileForm.isCruiseIsAFile())

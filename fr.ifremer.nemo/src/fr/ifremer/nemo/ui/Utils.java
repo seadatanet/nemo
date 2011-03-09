@@ -1116,7 +1116,7 @@ public class Utils
 			editFileForm.razText();
 			editCruiseForm.razText();
 			editStationForm.razText();
-			editDataForm.razText();
+			editDataForm.razText(false);
 			editDataForm.getMyTableData().razAndRecreateTable();
 			// --- l'onglet d'erreur
 			Utils.messageErreur(Global.EMPTY_STRING);
