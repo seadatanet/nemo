@@ -116,14 +116,15 @@ public class EditConversionForm extends EditForm
 		Utils.messageErreur(msg.toString());
 
 		// FAE 1143 : déactivation MEDATLAS
-      // adaptation du code suite deplacement conversion dans 1er onglet (FAE 5683)
+		// adaptation du code suite deplacement conversion dans 1er onglet (FAE
+		// 5683)
 		if (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas())
 		{
 			boolean medOK = true;
-            if (!warningFile.equals(Global.EMPTY_STRING)
-                    || !warningCampagne.equals(Global.EMPTY_STRING)
-                    || !warningStation.equals(Global.EMPTY_STRING)
-                    || !warningData.equals(Global.EMPTY_STRING))
+			if (!warningFile.equals(Global.EMPTY_STRING)
+					|| !warningCampagne.equals(Global.EMPTY_STRING)
+					|| !warningStation.equals(Global.EMPTY_STRING)
+					|| !warningData.equals(Global.EMPTY_STRING))
 			{
 				medOK = false;
 			}
@@ -466,8 +467,6 @@ public class EditConversionForm extends EditForm
 			File output = new File(Nemo.getInstance().getDomain().getMedia().getOutputFileName());
 			String cheminComplet = output.getParentFile().getPath();
 
-		
-
 			InputDialog inputPrefixDossier = new InputDialog(Utils.getMainShell(), Messages.InputPrefixDossier_idTitle, Messages.InputPrefixDossier_idMessage, cheminComplet, null);
 			inputPrefixDossier.open();
 			String nomHorsPrefix = Global.EMPTY_STRING;
@@ -491,8 +490,6 @@ public class EditConversionForm extends EditForm
 			Nemo.getInstance().getDomain().getConversion().setNomMappingHorsPrefix(nomHorsPrefix);
 		}
 	}
-
-	
 
 	public boolean checkConfig()
 	{
@@ -660,14 +657,22 @@ public class EditConversionForm extends EditForm
 		RulesManager rm = Nemo.getInstance().getViewMain().getMyRulesManager();
 		String summary = Global.EMPTY_STRING;
 
+		// titre
 		summary += Global.RN + Global.RN + Messages.view_convert_summary_title + Global.RN + Global.RN;
 
 		EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
 
-		summary += Messages.view_convert_summary_dataTypeLabel + Global.DBL_PT + Global.RN 
-		  + Nemo.getInstance().getViewMain().getMyRulesManager().getMyDataListType().toString();
+		// dataType
+		summary += Messages.view_convert_summary_dataTypeLabel + Global.DBL_PT + Global.RN
+				+ Nemo.getInstance().getViewMain().getMyRulesManager().getMyDataListType().toString();
 		summary += Global.RN + Global.RN + Global.RN;
 
+		// inputType
+		summary += Messages.view_file_fileType + Global.DBL_PT + Global.RN
+				+ Nemo.getInstance().getViewMain().getMyRulesManager().getMyFileType().toString();
+		summary += Global.RN + Global.RN + Global.RN;
+
+		// input
 		if (editFileForm.isCruiseIsAFile())
 		{
 			summary += Messages.view_convert_summary_inputFileLabel + Global.DBL_PT + Global.RN + editFileForm.nomFichier;
@@ -677,8 +682,19 @@ public class EditConversionForm extends EditForm
 			summary += Messages.view_convert_summary_inputDirectoryLabel + Global.DBL_PT + Global.RN + editFileForm.nomRepertoireOrigin;
 		}
 		summary += Global.RN + Global.RN + Global.RN;
-		summary += Messages.view_convert_summary_outputFormatLabel + Global.DBL_PT + Global.RN + rm.getMyConversionType();
 
+		// model
+		summary += Messages.view_convert_summary_modelFileLabel + Global.DBL_PT + Global.RN;
+		if (!Nemo.getInstance().getNomModele().equals(Global.EMPTY_STRING))
+		{
+			summary += Nemo.getInstance().getCurrentOpenModelPath() + File.separator + Nemo.getInstance().getNomModele();
+		} else
+		{
+			summary += Messages.view_convert_summary_modelFileNotSaved;
+		}
+		summary += Global.RN + Global.RN + Global.RN;
+		// conversion
+		summary += Messages.view_convert_summary_outputFormatLabel + Global.DBL_PT + Global.RN + rm.getMyConversionType();
 		if (rm.isConversionToODV())
 		{
 			summary += Global.COMMA + Global.SPACE;
@@ -706,7 +722,6 @@ public class EditConversionForm extends EditForm
 	{
 		_totalLigne = ligne;
 	}
-
 
 	/**
 	 * Setter sur warningCampagne.

@@ -75,8 +75,11 @@ public class Messages
 	public static String view_convert_monoStation;
 	public static String view_convert_sort;
 	public static String view_convert_summary_title;
-	public static String view_convert_summary_dataTypeLabel;;
+	public static String view_convert_summary_dataTypeLabel;
+	public static String view_convert_summary_inputTypeLabel;
 	public static String view_convert_summary_inputFileLabel;
+	public static String view_convert_summary_modelFileLabel;
+	public static String view_convert_summary_modelFileNotSaved;
 	public static String view_convert_summary_inputDirectoryLabel;
 	public static String view_convert_summary_outputFormatLabel;
 
