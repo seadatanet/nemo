@@ -147,7 +147,7 @@ public abstract class NemoWriter
 				// pour chaque fichier de ce repertoire d'entree
 				for (String inputFileName : mediaDomain.getInputFilesNames().get(inputFilePath))
 				{
-					Nemo.getInstance().setLog_currentInputFile(inputFilePath + "/" + inputFileName);
+					Nemo.getInstance().setLog_currentInputFile(inputFilePath + File.separator + inputFileName);
 
 					File inputFile = new File(inputFilePath + File.separator + inputFileName);
 
