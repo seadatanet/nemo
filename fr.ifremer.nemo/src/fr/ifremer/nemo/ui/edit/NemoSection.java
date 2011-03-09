@@ -8,6 +8,7 @@ package fr.ifremer.nemo.ui.edit;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -40,7 +41,7 @@ public abstract class NemoSection
 	public static final String C_DATATYPE = "cruiseDatatype"; //$NON-NLS-1$
 	public static final String C_COMMENTS = "cruiseComments"; //$NON-NLS-1$
 	public static final String D_DATATYPE = "dataType"; //$NON-NLS-1$
-
+	public Color DEFAULT_COLOR = null;
 	protected Section section;
 	protected String name; // nom correspondant au tag xml (PropertyModel)
 	protected String title;
@@ -75,7 +76,10 @@ public abstract class NemoSection
 	public void draw(FormToolkit toolkitEdition, final ScrolledForm formEdition, boolean filled)
 	{
 		section = toolkitEdition.createSection(formEdition.getBody(), Section.DESCRIPTION | ExpandableComposite.TITLE_BAR | ExpandableComposite.TWISTIE);
-
+		if (DEFAULT_COLOR == null)
+		{
+			DEFAULT_COLOR = section.getTitleBarForeground();
+		}
 		section.addExpansionListener(new ExpansionAdapter()
 		{
 			@Override
@@ -119,7 +123,7 @@ public abstract class NemoSection
 			section.setTitleBarForeground(Display.getCurrent().getSystemColor(SWT.COLOR_GRAY));
 		} else
 		{
-			section.setTitleBarForeground(Display.getCurrent().getSystemColor(SWT.COLOR_BLACK));
+			section.setTitleBarForeground(DEFAULT_COLOR);
 		}
 	}
 
