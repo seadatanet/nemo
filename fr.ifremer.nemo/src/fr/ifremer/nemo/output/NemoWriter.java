@@ -161,7 +161,7 @@ public abstract class NemoWriter
 						// par stations
 						Station st = null;
 						int nbrecords = 0;
-
+						boolean isRateCalculated = false;
 						while ((readedLine = bufferedReader.readLine()) != null)
 						{
 							incrementLine();
@@ -193,16 +193,6 @@ public abstract class NemoWriter
 									if (stationDomain.isSomeInData())
 									{
 
-										// sampling rate peut etre à calculer
-										if (mediaDomain.getModel().getInputType() != E_InputType.PROFILE)
-											if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData())
-											{
-												if (!isEndData()) // FAE 4673 Pb
-													// si une seule ligne
-													// données et
-													// pas d'entête station
-													st.calculSamplingRate(readedLine);
-											}
 
 									}
 									if (!isEndData()) // FAE 4673 Pb si une
@@ -221,6 +211,15 @@ public abstract class NemoWriter
 								if (mediaDomain.getModel().getInputType() == E_InputType.TRAJECTORY)
 								{
 									st.completeMedatlasTrajectory(readedLine);
+								}
+								// sampling rate peut etre à calculer
+								if (mediaDomain.getModel().getInputType() != E_InputType.PROFILE && !isRateCalculated)
+								{
+									if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData())
+									{
+										st.calculSamplingRate(readedLine);
+										isRateCalculated = true;
+									}
 								}
 								st.updateGlobalParamQc(readedLine);
 								nbrecords++;
