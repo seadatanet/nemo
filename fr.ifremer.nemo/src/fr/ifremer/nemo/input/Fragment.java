@@ -94,9 +94,9 @@ public class Fragment extends AbstractModel
 	/**
 	 * @see AbstractModel.java#fromElement
 	 */
-    public static SAXConsumer fromElement(String a_URI, 
-                                          String a_LocalName,
-                                          String a_QName, 
+	public static SAXConsumer fromElement(String a_URI,
+											String a_LocalName,
+											String a_QName,
                                           Attributes a_Attributes){
 		Fragment el = new Fragment();
 		el.buildFromElement(a_URI, a_LocalName, a_QName, a_Attributes);
@@ -107,9 +107,9 @@ public class Fragment extends AbstractModel
 	 * {@inheritDoc}
 	 */
 	@Override
-    public void buildFromElement(String a_URI, 
-                                 String a_LocalName,
-                                 String a_QName, 
+	public void buildFromElement(String a_URI,
+									String a_LocalName,
+									String a_QName,
                                  Attributes a_Attributes){
 		String tmp;
         if ((tmp = a_Attributes.getValue(ModelDescription.a_singleline)) != null) {
@@ -124,9 +124,9 @@ public class Fragment extends AbstractModel
 	 * {@inheritDoc}
 	 */
 	@Override
-    public SAXConsumer consumeElement(String a_URI, 
-                                      String a_LocalName,
-                                      String a_QName, 
+	public SAXConsumer consumeElement(String a_URI,
+										String a_LocalName,
+										String a_QName,
                                       Attributes a_Attributes){
         if (a_LocalName.equals(ModelDescription.node_firstline)) {            
 			Element2Field setter = new Element2Field(this, ModelDescription.setter_firstline);
@@ -161,10 +161,10 @@ public class Fragment extends AbstractModel
 	 * {@inheritDoc}
 	 */
 	@Override
-    public SAXConsumer handlePathElement(String path, 
-                                         String a_URI,
-                                         String a_LocalName, 
-                                         String a_QName, 
+	public SAXConsumer handlePathElement(String path,
+											String a_URI,
+											String a_LocalName,
+											String a_QName,
                                          Attributes a_Attributes){
 		// non utilisé
 		return null;
@@ -218,8 +218,7 @@ public class Fragment extends AbstractModel
 		}
 
 		String res = "";
-		
-		
+		boolean moreThanOneLine = _firstLine < _lastLine;
 		for (int i = _firstLine - 1; i < _lastLine; i++)
 		{
 			int start = 0;
@@ -236,10 +235,14 @@ public class Fragment extends AbstractModel
 
 			if (end == -1)
 			{
-				res = a_Header[i].substring(start);
+				res += a_Header[i].substring(start);
 			} else
 			{
-				res = a_Header[i].substring(start, end + 1);
+				res += a_Header[i].substring(start, end + 1);
+			}
+			if (moreThanOneLine)
+			{
+				res += Global.RN;
 			}
 		}
 
@@ -298,8 +301,8 @@ public class Fragment extends AbstractModel
 				boolean continueBoucle = true;
                 while (continueBoucle && index < a_Header[i].length()){
 					nextChar = a_Header[i].substring(index, index + 1);
-                    if (index < _lastCharOffset
-                        || nextChar.equals(".")  //$NON-NLS-1$
+					if (index < _lastCharOffset
+							|| nextChar.equals(".") //$NON-NLS-1$
 							|| nextChar.equals(",") //$NON-NLS-1$
                         || fr.ifremer.nemo.util.Utils.isNumeric(nextChar)){
 						index++;
@@ -339,8 +342,8 @@ public class Fragment extends AbstractModel
 		boolean continueBoucle = true;
                 while (continueBoucle && index < a_Line.length()){
 			nextChar = a_Line.substring(index, index + 1);
-                    if (index < _lastCharOffset
-                        || nextChar.equals(".")  //$NON-NLS-1$
+			if (index < _lastCharOffset
+						|| nextChar.equals(".") //$NON-NLS-1$
 					|| nextChar.equals(",") //$NON-NLS-1$
                         || fr.ifremer.nemo.util.Utils.isNumeric(nextChar)){
 				index++;
