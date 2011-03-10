@@ -568,7 +568,7 @@ public class EditConversionForm extends EditForm
 		RulesManager rm = Nemo.getInstance().getViewMain().getMyRulesManager();
 		EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
 		String command = "nemo_batch";
-		command += Global.RN;
+		command += Global.SPACE;
 
 		// input
 		command += Global.MOINS + Global.optInputFile;
@@ -585,7 +585,7 @@ public class EditConversionForm extends EditForm
 		command += "\"";
 
 		// model
-		command += Global.SPACE;// command += Global.RN;
+		command += Global.SPACE;
 		command += Global.MOINS + Global.optModelFile;
 		command += Global.SPACE;
 		command += "\"";
@@ -593,7 +593,7 @@ public class EditConversionForm extends EditForm
 		command += "\"";
 
 		// output
-		command += Global.SPACE;// command += Global.RN;
+		command += Global.SPACE;
 		command += Global.MOINS + Global.optOutputFile;
 		command += Global.SPACE;
 		command += "\"";
@@ -601,7 +601,7 @@ public class EditConversionForm extends EditForm
 		command += "\"";
 
 		// conversion
-		command += Global.SPACE;// command += Global.RN;
+		command += Global.SPACE;
 		command += Global.MOINS + Global.optConv;
 		command += Global.SPACE;
 		if (rm.isConversionToMedatlas())
@@ -615,7 +615,7 @@ public class EditConversionForm extends EditForm
 
 		if (rm.isConversionToODVMultiStation())
 		{
-			command += Global.SPACE;// command += Global.RN;
+			command += Global.SPACE;
 			command += Global.SPACE;
 			command += Global.MOINS + Global.optOdvMulti;
 		}
@@ -624,7 +624,7 @@ public class EditConversionForm extends EditForm
 		String dataSetRef = Nemo.getInstance().getDomain().getCruise().getDataSetRef();
 		if (!dataSetRef.equals(Global.EMPTY_STRING))
 		{
-			command += Global.SPACE;// command += Global.RN;
+			command += Global.SPACE;
 			command += Global.MOINS + Global.optDatasetRef;
 			command += Global.SPACE;
 			command += Nemo.getInstance().getDomain().getCruise().getDataSetRef();
@@ -633,7 +633,7 @@ public class EditConversionForm extends EditForm
 		// cdisummary
 		if (Nemo.getInstance().getConfig().isWriteCdi())
 		{
-			command += Global.SPACE;// command += Global.RN;
+			command += Global.SPACE;
 			command += Global.MOINS + Global.optCdiSummary;
 			command += Global.SPACE;
 			command += "\"";
