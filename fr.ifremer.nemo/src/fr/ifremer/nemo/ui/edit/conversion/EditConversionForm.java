@@ -585,7 +585,7 @@ public class EditConversionForm extends EditForm
 		command += "\"";
 
 		// model
-		command += Global.RN;
+		command += Global.SPACE;// command += Global.RN;
 		command += Global.MOINS + Global.optModelFile;
 		command += Global.SPACE;
 		command += "\"";
@@ -593,7 +593,7 @@ public class EditConversionForm extends EditForm
 		command += "\"";
 
 		// output
-		command += Global.RN;
+		command += Global.SPACE;// command += Global.RN;
 		command += Global.MOINS + Global.optOutputFile;
 		command += Global.SPACE;
 		command += "\"";
@@ -601,7 +601,7 @@ public class EditConversionForm extends EditForm
 		command += "\"";
 
 		// conversion
-		command += Global.RN;
+		command += Global.SPACE;// command += Global.RN;
 		command += Global.MOINS + Global.optConv;
 		command += Global.SPACE;
 		if (rm.isConversionToMedatlas())
@@ -615,7 +615,7 @@ public class EditConversionForm extends EditForm
 
 		if (rm.isConversionToODVMultiStation())
 		{
-			command += Global.RN;
+			command += Global.SPACE;// command += Global.RN;
 			command += Global.SPACE;
 			command += Global.MOINS + Global.optOdvMulti;
 		}
@@ -624,7 +624,7 @@ public class EditConversionForm extends EditForm
 		String dataSetRef = Nemo.getInstance().getDomain().getCruise().getDataSetRef();
 		if (!dataSetRef.equals(Global.EMPTY_STRING))
 		{
-			command += Global.RN;
+			command += Global.SPACE;// command += Global.RN;
 			command += Global.MOINS + Global.optDatasetRef;
 			command += Global.SPACE;
 			command += Nemo.getInstance().getDomain().getCruise().getDataSetRef();
@@ -633,7 +633,7 @@ public class EditConversionForm extends EditForm
 		// cdisummary
 		if (Nemo.getInstance().getConfig().isWriteCdi())
 		{
-			command += Global.RN;
+			command += Global.SPACE;// command += Global.RN;
 			command += Global.MOINS + Global.optCdiSummary;
 			command += Global.SPACE;
 			command += "\"";
@@ -707,8 +707,20 @@ public class EditConversionForm extends EditForm
 				summary += Messages.view_convert_monoFichier;
 			}
 		}
-		summary += Global.RN + Global.RN + Global.RN;
+		summary += Global.RN;
 
+		// CDI summary
+		if (Nemo.getInstance().getConfig().isWriteCdi())
+		{
+			summary += Global.RN + Messages.view_convert_summary_createCDISummaryInfo;
+		}
+
+		// coupling table
+		if (Nemo.getInstance().getConfig().isWriteMapping())
+		{
+			summary += Global.RN + Messages.view_convert_summary_updateCouplingTableInfo;
+		}
+		summary += Global.RN + Global.RN + Global.RN;
 		conversionSummary.setText(summary);
 
 	}

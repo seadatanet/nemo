@@ -82,7 +82,8 @@ public class Messages
 	public static String view_convert_summary_modelFileNotSaved;
 	public static String view_convert_summary_inputDirectoryLabel;
 	public static String view_convert_summary_outputFormatLabel;
-
+	public static String view_convert_summary_createCDISummaryInfo;
+	public static String view_convert_summary_updateCouplingTableInfo;
 	public static String table_label_meta;
 	public static String table_label_code;
 	public static String table_label_testIn;
