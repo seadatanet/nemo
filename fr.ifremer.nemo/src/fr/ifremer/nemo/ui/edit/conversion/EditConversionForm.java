@@ -687,7 +687,7 @@ public class EditConversionForm extends EditForm
 		summary += Messages.view_convert_summary_modelFileLabel + Global.DBL_PT + Global.RN;
 		if (!Nemo.getInstance().getNomModele().equals(Global.EMPTY_STRING))
 		{
-			summary += Nemo.getInstance().getCurrentOpenModelPath() + File.separator + Nemo.getInstance().getNomModele();
+			summary += Nemo.getInstance().getCurrentOpenModelPath();
 		} else
 		{
 			summary += Messages.view_convert_summary_modelFileNotSaved;
