@@ -76,7 +76,6 @@ public class ParameterManager
 	/**
 	 * Informations descrivant l'onglet Data
 	 */
-	// protected DataModel _model;
 
 	public ParameterManager(DataModel model)
 	{
@@ -86,10 +85,7 @@ public class ParameterManager
 
 	private E_TypeConversion getConversionType()
 	{
-		if (conversionType == null)
-		{
-			conversionType = Nemo.getInstance().getDomain().getConversion().getModel().getOutputFormat();
-		}
+		conversionType = Nemo.getInstance().getDomain().getConversion().getModel().getOutputFormat();
 		return conversionType;
 
 	}
@@ -108,20 +104,21 @@ public class ParameterManager
 
 	private VerticalParametersList getVerticalParametersList()
 	{
-		if (verticalParametersList == null)
-		{
-			verticalParametersList = Nemo.getInstance().getDomain().getData().getModel().getVerticalParametersList();
-		}
+		verticalParametersList = Nemo.getInstance().getDomain().getData().getModel().getVerticalParametersList();
 		return verticalParametersList;
 	}
 
 	private E_InputType getInputType()
 	{
-		if (inputType == null)
-		{
-			inputType = Nemo.getInstance().getDomain().getMedia().getModel().getInputType();
-		}
+		inputType = Nemo.getInstance().getDomain().getMedia().getModel().getInputType();
 		return inputType;
+	}
+
+	private E_MesureType getMesureType()
+	{
+
+		mesureType = Nemo.getInstance().getDomain().getData().getModel().getMesureType();
+		return mesureType;
 	}
 
 	private AddedParam createAddedParam(IdParameter code)
@@ -346,7 +343,7 @@ public class ParameterManager
 
 			/** aap_p 1 2 */
 			// Ajout du paramètre DEPH ( = Sensor Depth) pour ODV
-			if (!exist_p_depthBSSurf && mesureType == E_MesureType.BSSURF)
+			if (!exist_p_depthBSSurf && getMesureType() == E_MesureType.BSSURF)
 			{
 				if (isProfile)
 				{
