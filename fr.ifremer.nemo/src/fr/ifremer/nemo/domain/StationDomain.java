@@ -31,6 +31,7 @@ import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_InputType;
+import fr.ifremer.nemo.util.Global.E_MesureType;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 
@@ -341,20 +342,26 @@ public class StationDomain {
 	@SuppressWarnings("nls")
 	private String getTypeBC(String ref) {
 		String typeBC = "*";
-		if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.PROFILE) {
-			DataType dataType = _model.getDataType();
+		if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.PROFILE){
+			if (Nemo.getInstance().getDomain().getData().getModel().getMesureType() == E_MesureType.BSSURF)
+			{
+				DataType dataType = _model.getDataType();
 			if (dataType != null && dataType.getCode() != null && dataType.getCode().equals("H09")) {
-				typeBC = "B";
-			} else if (dataType != null && dataType.getCode() != null && (dataType.getCode().equals("H10") || dataType.getCode().equals("H13"))) {
-				typeBC = "C";
-			} else {
-				int nbRecords = getStationByRef(ref).getNbRecords();
-				if (nbRecords < 250) {
 					typeBC = "B";
-				} else {
+			} else if (dataType != null && dataType.getCode() != null && (dataType.getCode().equals("H10") || dataType.getCode().equals("H13"))) {
 					typeBC = "C";
+			} else {
+					int nbRecords = getStationByRef(ref).getNbRecords();
+				if (nbRecords < 250) {
+						typeBC = "B";
+				} else {
+						typeBC = "C";
+					}
 				}
 			}
+		} else
+		{
+			typeBC = Global.STAR;
 		}
 		return typeBC;
 	}
