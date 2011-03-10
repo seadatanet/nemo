@@ -205,13 +205,6 @@ public class OdvWriter extends NemoWriter
 
 					stationHeader = iDomain.getStation().getHeader(myConversion, currentStation, inputStationHeader);
 
-					if (station.isSomeInData())
-					{
-						// la première ligne des données est déjà "consommée"
-						// dans stationHeaderBuffer
-						writeDataLine(stationHeader, currentStation, inputStationHeader[inputStationHeader.length - 1]);
-						stationHeader = station.getOdvEmptyStationHeader();
-					}
 
 					// FAE 4673 Pb si une seule ligne données et pas d'entête
 					// station
