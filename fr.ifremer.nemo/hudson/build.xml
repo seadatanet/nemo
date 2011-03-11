@@ -66,45 +66,11 @@
 				    <exclude name="CVS/**,Vocab/CVS/**"/>   
 				  </fileset>   
 				</copy> 
-				<!--<copy file="${buildDirectory}/Nemo_Test/eclipse/resources/NemoConfiguration_ini.xml" 
-					  tofile="${buildDirectory}/Nemo_Test/eclipse/resources/NemoConfiguration.xml"
-					  overwrite="true"/>-->
+			
 		<copy file="${buildDirectory}/Nemo_Test/eclipse/nemo.exe" 
 					  tofile="${buildDirectory}/Nemo_Test/eclipse/nemo_batch.exe"
 					  overwrite="true"/>
-		<exec executable="${buildDirectory}/Nemo_Test/eclipse/nemo_batch.exe" dir="${buildDirectory}/Nemo_Test/eclipse" logerror="true" output="${buildDirectory}/Nemo_Test/eclipse/log">
-			<arg value="-i"/>
-			<arg value="${buildDirectory}/diap_hudson/diapalis2_bot.prn"/>
-			<arg value="-m"/>
-			<arg value="${buildDirectory}/diap_hudson/diap_1232_MEDATLAS_P091.xml"/>
-			<arg value="-o"/>
-			<arg value="${buildDirectory}/out"/>
-			<arg value="-c"/>
-			<arg value="MEDATLAS"/>
-		</exec>
-		<delete dir="${buildDirectory}/Nemo_Test"/>
-		<condition property="testok">
-			<filesmatch file1="out" file2=".\diap_hudson\out_diap_MEDATLAS_P091"/>
-		</condition>
-		<fail>
-			 <condition>
-			 	<not>
-			 		<isset property="testok"/>
-			 	</not>
-			 </condition>
-		</fail>
+		
 	</target>
-	<!--<target name="test" depends="init">
-		<junit>
-			<formatter type="xml"/>
-			<classpath>
-				<pathelement path="${buildDirectory}/Nemo_product/lib"/>
-				<pathelement path="${buildDirectory}/Nemo_product/src"/>
-				<pathelement path="${buildDirectory}/Nemo_product/testsrc"/>
-			</classpath>
-			<test name="fr.ifremer.nemo.ui.edit.station.StationSectionTest" outfile="result">
-				<formatter type="xml"/>
-			</test>
-		</junit>
-	</target>-->
+	
 </project>
