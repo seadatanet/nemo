@@ -156,7 +156,8 @@ public class AngleFormatParser extends AbstractParser implements Cloneable
 
 		/*
 		 * spaces(); if (sign()) { spaces(); return valuePart(); } else if
-		 * (hemisphere()) { spaces(); return valuePart(); } else if (degrees()) {
+		 * (hemisphere()) { spaces(); return valuePart(); } else if (degrees())
+		 * {
 		 * spaces(); if (hemisphere()) { spaces(); return valueSubPart(); } }
 		 * else if (valuePart()) { spaces(); return hemisphere(); } return
 		 * false;
@@ -234,7 +235,7 @@ public class AngleFormatParser extends AbstractParser implements Cloneable
 			typeTable['}'] = XLETTER;
 			typeTable['^'] = XLETTER;
 			typeTable['|'] = XLETTER;
-			typeTable['Â°'] = XLETTER;
+			typeTable['°'] = XLETTER;
 
 			typeTable['N'] = XHEMISPHERE;
 			typeTable['D'] = XDEGREE;
