@@ -9,7 +9,8 @@ import java.io.UnsupportedEncodingException;
 
 import fr.ifremer.nemo.util.Global;
 
-public class XMLOutputWriter {
+public class XMLOutputWriter
+{
 
 	protected PrintWriter _writer = null;
 
@@ -19,7 +20,8 @@ public class XMLOutputWriter {
 
 	protected static String _indentElement = "  ";
 
-	protected class Element {
+	protected class Element
+	{
 		/**
 		 * Tag name
 		 */
@@ -45,10 +47,13 @@ public class XMLOutputWriter {
 		 * 
 		 * @param a_Name Element name
 		 */
-		protected Element(String a_Name) {
+		protected Element(String a_Name)
+		{
 			_parent = _currentTag;
-			if (_parent != null) {
-				if (_parent._subElement == null) {
+			if (_parent != null)
+			{
+				if (_parent._subElement == null)
+				{
 					_writer.print('>');
 				}
 				_parent._subElement = this;
@@ -63,10 +68,13 @@ public class XMLOutputWriter {
 			_currentTag = this;
 		}
 
-		protected Element(String a_Name, String a_CData) {
+		protected Element(String a_Name, String a_CData)
+		{
 			_parent = _currentTag;
-			if (_parent != null) {
-				if (_parent._subElement == null) {
+			if (_parent != null)
+			{
+				if (_parent._subElement == null)
+				{
 					_writer.print('>');
 				}
 				_indent = _indent + _indentElement;
@@ -86,11 +94,15 @@ public class XMLOutputWriter {
 			unindent();
 		}
 
-		protected Element(String a_Name, String a_CData, boolean a_IsCDATA) {
-			if (!a_IsCDATA) {
+		protected Element(String a_Name, String a_CData, boolean a_IsCDATA)
+		{
+			if (!a_IsCDATA)
+			{
 				_parent = _currentTag;
-				if (_parent != null) {
-					if (_parent._subElement == null) {
+				if (_parent != null)
+				{
+					if (_parent._subElement == null)
+					{
 						_writer.print('>');
 					}
 					_indent = _indent + _indentElement;
@@ -108,10 +120,13 @@ public class XMLOutputWriter {
 				_writer.print(">");
 				_writer.flush();
 				unindent();
-			} else {
+			} else
+			{
 				_parent = _currentTag;
-				if (_parent != null) {
-					if (_parent._subElement == null) {
+				if (_parent != null)
+				{
+					if (_parent._subElement == null)
+					{
 						_writer.print('>');
 					}
 					_indent = _indent + _indentElement;
@@ -132,14 +147,17 @@ public class XMLOutputWriter {
 			}
 		}
 
-		protected void close() {
-			if (_subElement != null) {
+		protected void close()
+		{
+			if (_subElement != null)
+			{
 				_writer.print('\n');
 				_writer.print(_indent);
 				_writer.print("</");
 				_writer.print(_name);
 				_writer.print('>');
-			} else {
+			} else
+			{
 				_writer.write("/>");
 			}
 			_writer.flush();
@@ -147,8 +165,10 @@ public class XMLOutputWriter {
 			_currentTag = _parent;
 		}
 
-		protected void close(String a_Value) {
-			if (_subElement != null) {
+		protected void close(String a_Value)
+		{
+			if (_subElement != null)
+			{
 				_writer.print('\n');
 				_writer.print(_indent + _indentElement);
 				_writer.print(normalizedString(a_Value));
@@ -157,7 +177,8 @@ public class XMLOutputWriter {
 				_writer.print("</");
 				_writer.print(_name);
 				_writer.print('>');
-			} else {
+			} else
+			{
 				_writer.write(">");
 				_writer.print(normalizedString(a_Value));
 				_writer.print("</");
@@ -169,7 +190,8 @@ public class XMLOutputWriter {
 			_currentTag = _parent;
 		}
 
-		public void putAttribute(String a_Name, String a_Value) {
+		public void putAttribute(String a_Name, String a_Value)
+		{
 			_hasAttributes = true;
 			_writer.print(' ');
 			_writer.print(a_Name);
@@ -182,7 +204,8 @@ public class XMLOutputWriter {
 	/*
 	 * XMLOutputWriter default constructor
 	 */
-	public XMLOutputWriter() {
+	public XMLOutputWriter()
+	{
 	}
 
 	/*
@@ -190,11 +213,14 @@ public class XMLOutputWriter {
 	 * 
 	 * @param a_Stream OutputStream on which to write
 	 */
-	public XMLOutputWriter(FileOutputStream a_Stream) {
+	public XMLOutputWriter(FileOutputStream a_Stream)
+	{
 
-		try {
+		try
+		{
 			_writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(a_Stream, Global.NEMO_ENCODING)));
-		} catch (UnsupportedEncodingException e) {
+		} catch (UnsupportedEncodingException e)
+		{
 			// TODO BGT Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -205,7 +231,8 @@ public class XMLOutputWriter {
 	 * 
 	 * @param a_Stream OutputStream on which to write
 	 */
-	public XMLOutputWriter(PrintWriter a_Writer) {
+	public XMLOutputWriter(PrintWriter a_Writer)
+	{
 		_writer = a_Writer;
 	}
 
@@ -215,11 +242,14 @@ public class XMLOutputWriter {
 	 * @param a_Stream OutputStream on which to write @param a_TagName tag name
 	 * of the root element
 	 */
-	public XMLOutputWriter(OutputStream a_Stream, String a_TagName) {
+	public XMLOutputWriter(OutputStream a_Stream, String a_TagName)
+	{
 
-		try {
+		try
+		{
 			_writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(a_Stream, Global.NEMO_ENCODING)));
-		} catch (UnsupportedEncodingException e) {
+		} catch (UnsupportedEncodingException e)
+		{
 			// BGT TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -233,72 +263,91 @@ public class XMLOutputWriter {
 	 * @param a_Stream OutputStream on which to write @param a_TagName tag name
 	 * of the root element
 	 */
-	public XMLOutputWriter(PrintWriter a_Writer, String a_TagName) {
+	public XMLOutputWriter(PrintWriter a_Writer, String a_TagName)
+	{
 		_writer = a_Writer;
 		openTag(a_TagName);
 	}
 
-	public void setOutputStream(OutputStream a_Stream) {
-		if (_writer != null) {
-			try {
+	public void setOutputStream(OutputStream a_Stream)
+	{
+		if (_writer != null)
+		{
+			try
+			{
 				_writer.close();
-			} catch (Exception e) {
+			} catch (Exception e)
+			{
 				// TODO BGT
 				e.printStackTrace();
 			}
 		}
-		try {
+		try
+		{
 			_writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(a_Stream, Global.NEMO_ENCODING)));
-		} catch (UnsupportedEncodingException e) {
+		} catch (UnsupportedEncodingException e)
+		{
 			// TODO BGT Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public static String normalizedString(String a_String) {
+	public static String normalizedString(String a_String)
+	{
 		StringBuffer str = new StringBuffer();
 
 		int len = (a_String != null) ? a_String.length() : 0;
-		for (int i = 0; i < len; i++) {
+		for (int i = 0; i < len; i++)
+		{
 			char ch = a_String.charAt(i);
-			switch (ch) {
-			case '<': {
+			switch (ch)
+			{
+			case '<':
+			{
 				str.append("&lt;");
 				break;
 			}
-			case '>': {
+			case '>':
+			{
 				str.append("&gt;");
 				break;
 			}
-			case '&': {
+			case '&':
+			{
 				str.append("&amp;");
 				break;
 			}
-			case '"': {
+			case '"':
+			{
 				str.append("&quot;");
 				break;
 			}
-			case 0x00: {
+			case 0x00:
+			{
 				break;
 			}
-			case '°':
+			case '�':
 				str.append("°");
 				break;
 			case '\r':
 			case '\n':
-			case '\t': {
+			case '\t':
+			{
 				str.append("&#");
 				str.append(Integer.toString(ch));
 				str.append(';');
 				break;
 			}
-			default: {
-				if (ch < 0x0020 || ch > 0x007F) {
+			default:
+			{
+				if (ch < 0x0020 || ch > 0x007F)
+				{
 					str.append("&#");
 					str.append(Integer.toString(ch));
 					str.append(';');
 					break;
-				} else {
+				} else
+				{
 					str.append(ch);
 				}
 			}
@@ -307,131 +356,164 @@ public class XMLOutputWriter {
 		return str.toString();
 	}
 
-	public void unindent() {
+	public void unindent()
+	{
 		int index = _indent.lastIndexOf(_indentElement);
-		if (index >= 0) {
+		if (index >= 0)
+		{
 			_indent = _indent.substring(0, index);
 		}
 	}
 
-	public void close() {
+	public void close()
+	{
 		closeTag();
-		try {
+		try
+		{
 			_writer.close();
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 	}
 
-	public void closeTag() {
+	public void closeTag()
+	{
 		_currentTag.close();
 	}
 
-	public void closeTag(String a_Value) {
+	public void closeTag(String a_Value)
+	{
 		_currentTag.close(a_Value);
 	}
 
-	public void closeTag(int a_Value) {
+	public void closeTag(int a_Value)
+	{
 		_currentTag.close(Integer.toString(a_Value));
 	}
 
-	public void closeTag(long a_Value) {
+	public void closeTag(long a_Value)
+	{
 		_currentTag.close(Long.toString(a_Value));
 	}
 
-	public void closeTag(byte a_Value) {
+	public void closeTag(byte a_Value)
+	{
 		_currentTag.close(Byte.toString(a_Value));
 	}
 
-	public void closeTag(char a_Value) {
+	public void closeTag(char a_Value)
+	{
 		_currentTag.close(new Character(a_Value).toString());
 	}
 
-	public void closeTag(float a_Value) {
+	public void closeTag(float a_Value)
+	{
 		_currentTag.close(Float.toString(a_Value));
 	}
 
-	public void closeTag(double a_Value) {
+	public void closeTag(double a_Value)
+	{
 		_currentTag.close(Double.toString(a_Value));
 	}
 
-	public void closeTag(boolean a_Value) {
+	public void closeTag(boolean a_Value)
+	{
 		_currentTag.close(new Boolean(a_Value).toString());
 	}
 
-	public void putAttribute(String a_Name, String a_Value) {
+	public void putAttribute(String a_Name, String a_Value)
+	{
 		_currentTag.putAttribute(a_Name, a_Value);
 	}
 
-	public void putAttribute(String a_Name, int a_Value) {
+	public void putAttribute(String a_Name, int a_Value)
+	{
 		_currentTag.putAttribute(a_Name, Integer.toString(a_Value));
 	}
 
-	public void putAttribute(String a_Name, long a_Value) {
+	public void putAttribute(String a_Name, long a_Value)
+	{
 		_currentTag.putAttribute(a_Name, Long.toString(a_Value));
 	}
 
-	public void putAttribute(String a_Name, byte a_Value) {
+	public void putAttribute(String a_Name, byte a_Value)
+	{
 		_currentTag.putAttribute(a_Name, Byte.toString(a_Value));
 	}
 
-	public void putAttribute(String a_Name, char a_Value) {
+	public void putAttribute(String a_Name, char a_Value)
+	{
 		_currentTag.putAttribute(a_Name, new Character(a_Value).toString());
 	}
 
-	public void putAttribute(String a_Name, float a_Value) {
+	public void putAttribute(String a_Name, float a_Value)
+	{
 		_currentTag.putAttribute(a_Name, Float.toString(a_Value));
 	}
 
-	public void putAttribute(String a_Name, double a_Value) {
+	public void putAttribute(String a_Name, double a_Value)
+	{
 		_currentTag.putAttribute(a_Name, Double.toString(a_Value));
 	}
 
-	public void putAttribute(String a_Name, boolean a_Value) {
+	public void putAttribute(String a_Name, boolean a_Value)
+	{
 		_currentTag.putAttribute(a_Name, new Boolean(a_Value).toString());
 	}
 
-	public void openTag(String a_Name) {
+	public void openTag(String a_Name)
+	{
 		_currentTag = new Element(a_Name);
 	}
 
-	public void putTag(String a_Name, String a_Value) {
+	public void putTag(String a_Name, String a_Value)
+	{
 		new Element(a_Name, a_Value);
 	}
 
-	public void putTag(String a_Name, int a_Value) {
+	public void putTag(String a_Name, int a_Value)
+	{
 		new Element(a_Name, Integer.toString(a_Value));
 	}
 
-	public void putTag(String a_Name, long a_Value) {
+	public void putTag(String a_Name, long a_Value)
+	{
 		new Element(a_Name, Long.toString(a_Value));
 	}
 
-	public void putTag(String a_Name, byte a_Value) {
+	public void putTag(String a_Name, byte a_Value)
+	{
 		new Element(a_Name, Byte.toString(a_Value));
 	}
 
-	public void putTag(String a_Name, char a_Value) {
+	public void putTag(String a_Name, char a_Value)
+	{
 		new Element(a_Name, new Character(a_Value).toString());
 	}
 
-	public void putTag(String a_Name, float a_Value) {
+	public void putTag(String a_Name, float a_Value)
+	{
 		new Element(a_Name, Float.toString(a_Value));
 	}
 
-	public void putTag(String a_Name, double a_Value) {
+	public void putTag(String a_Name, double a_Value)
+	{
 		new Element(a_Name, Double.toString(a_Value));
 	}
 
-	public void putTag(String a_Name, boolean a_Value) {
+	public void putTag(String a_Name, boolean a_Value)
+	{
 		new Element(a_Name, new Boolean(a_Value).toString());
 	}
 
-	public void putCDATATag(String a_Name, String a_Value) {
+	public void putCDATATag(String a_Name, String a_Value)
+	{
 		new Element(a_Name, a_Value, true);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		// XMLOutputWriter writer = new XMLOutputWriter(System.out);
 		// writer.openTag("TEST");
 		// writer.putAttribute("TIMESTAMP", System.currentTimeMillis());

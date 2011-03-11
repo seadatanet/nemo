@@ -13,7 +13,8 @@ import com.ago.model.MessageSend;
  * character ahead. It puts each token found into token and its type into
  * tokenType.
  */
-public class StreamScanner {
+public class StreamScanner
+{
 
 	public static final String DOIT = "doIt".intern();
 
@@ -80,7 +81,8 @@ public class StreamScanner {
 	 */
 	protected Vector reservedWords = new Vector();
 
-	public StreamScanner() {
+	public StreamScanner()
+	{
 		initScanner();
 	}
 
@@ -88,14 +90,17 @@ public class StreamScanner {
 	 * Answer a sequence of String for aString, one substring per token. This is
 	 * for tokenized comparison of code.
 	 */
-	public Vector<String> breakIntoTokens(String aString) throws ParseException {
+	public Vector<String> breakIntoTokens(String aString) throws ParseException
+	{
 		Vector<String> strm = new Vector<String>();
-		if (aString.trim().length() == 0) {
+		if (aString.trim().length() == 0)
+		{
 			/* a common case where we can avoid overhead */
 			return strm;
 		}
 		scan(aString);
-		while (tokenType != DOIT) {
+		while (tokenType != DOIT)
+		{
 			strm.add((String) token);
 			scanToken();
 		}
@@ -108,7 +113,8 @@ public class StreamScanner {
 	 * 
 	 * @return java.lang.String[]
 	 */
-	public Vector getReservedWords() {
+	public Vector getReservedWords()
+	{
 		return reservedWords;
 	}
 
@@ -116,13 +122,16 @@ public class StreamScanner {
 	 * StreamScanner methodsFor: 'initialize-release'
 	 */
 
-	protected void initScanner() {
+	protected void initScanner()
+	{
 		initTypeTable();
 	}
 
-	protected void initTypeTable() {
+	protected void initTypeTable()
+	{
 
-		for (int i = 0; i < typeTable.length; i++) {
+		for (int i = 0; i < typeTable.length; i++)
+		{
 			typeTable[i] = XDEFAULT;
 		}
 
@@ -164,36 +173,46 @@ public class StreamScanner {
 		typeTable['}'] = CHARACTER;
 		typeTable['^'] = CHARACTER;
 		typeTable['|'] = CHARACTER;
-		typeTable['Â°'] = CHARACTER;
+		typeTable['°'] = CHARACTER;
 	}
 
 	/**
 	 * Bind the input stream, fill the character buffer
 	 */
-	public void on(PositionableStream inputStream) throws ParseException {
+	public void on(PositionableStream inputStream) throws ParseException
+	{
 		source = inputStream;
-		try {
+		try
+		{
 			hereChar = source.next();
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			throw new ParseException(e.getMessage(), 0);
 		}
 	}
 
-	protected void perform(String selector) throws ParseException {
+	protected void perform(String selector) throws ParseException
+	{
 		MessageSend m = new MessageSend(selector, this, new Class[0],
 				new Object[0]);
-		try {
+		try
+		{
 			m.perform();
-		} catch (Exception e) {
-			if (e instanceof InvocationTargetException) {
+		} catch (Exception e)
+		{
+			if (e instanceof InvocationTargetException)
+			{
 				InvocationTargetException ex;
 				ex = (InvocationTargetException) e;
-				if (ex.getTargetException() instanceof ParseException) {
+				if (ex.getTargetException() instanceof ParseException)
+				{
 					throw (ParseException) ex.getTargetException();
-				} else {
+				} else
+				{
 					throw new ParseException(e.getMessage(), mark);
 				}
-			} else {
+			} else
+			{
 				throw new ParseException(e.getMessage(), mark);
 			}
 		}
@@ -202,7 +221,8 @@ public class StreamScanner {
 	/**
 	 * Bind the input stream, fill the character buffers and first token buffers
 	 */
-	protected void scan(String aString) throws ParseException {
+	protected void scan(String aString) throws ParseException
+	{
 		this.on(new PositionableByteArrayInputStream(aString.getBytes()));
 		// this.scanToken();
 	}
@@ -210,7 +230,8 @@ public class StreamScanner {
 	/**
 	 * Bind the input stream, fill the character buffers and first token buffers
 	 */
-	protected void scan(PositionableStream inputStream) throws ParseException {
+	protected void scan(PositionableStream inputStream) throws ParseException
+	{
 		this.on(inputStream);
 		this.scanToken();
 	}
@@ -219,15 +240,19 @@ public class StreamScanner {
 	 * Answer with an Array of strings which are the identifiers in the input
 	 * string.
 	 */
-	public String[] scanFieldNames(String aString) throws ParseException {
+	public String[] scanFieldNames(String aString) throws ParseException
+	{
 		Vector<String> strm = new Vector<String>();
-		if (aString.trim().length() == 0) {
+		if (aString.trim().length() == 0)
+		{
 			/* a common case where we can avoid overhead */
 			return new String[0];
 		}
 		scan(aString);
-		while (tokenType != DOIT) {
-			if (tokenType == WORD) {
+		while (tokenType != DOIT)
+		{
+			if (tokenType == WORD)
+			{
 				strm.add((String) token);
 			}
 			scanToken();
@@ -242,11 +267,14 @@ public class StreamScanner {
 	 * word token in aString. Don't count occurrences inside literals
 	 */
 	public int[] scanPositionsFor(String aSymbol, String inString)
-			throws ParseException {
+			throws ParseException
+	{
 		Vector<Integer> positions = new Vector<Integer>();
 		scan(inString);
-		while (tokenType != DOIT) {
-			if ((tokenType == WORD) && (aSymbol.compareTo((String) token) == 0)) {
+		while (tokenType != DOIT)
+		{
+			if ((tokenType == WORD) && (aSymbol.compareTo((String) token) == 0))
+			{
 				positions.add(mark);
 			}
 			scanToken();
@@ -262,43 +290,56 @@ public class StreamScanner {
 	/*
 	 * Scans the stream for the next token
 	 */
-	public Object scanToken() throws ParseException {
-		if (hereChar < 0) {
+	public Object scanToken() throws ParseException
+	{
+		if (hereChar < 0)
+		{
 			tokenType = DOIT;
 			token = null;
 			return token;
 		}
-		while ((tokenType = typeTable[hereChar]) == XDELIMITER) {
+		while ((tokenType = typeTable[hereChar]) == XDELIMITER)
+		{
 			// Skip delimiters fast, there almost always is one.
 			// open code step for speed
-			try {
+			try
+			{
 				hereChar = source.next();
-			} catch (Exception e) {
+			} catch (Exception e)
+			{
 				throw new ParseException(e.getMessage(), mark);
 			}
-			if (hereChar < 0) {
+			if (hereChar < 0)
+			{
 				break;
 			}
 		}
-		try {
+		try
+		{
 			mark = (int) source.getPosition() - 1;
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			throw new ParseException(e.getMessage(), mark);
 		}
-		if (hereChar < 0) {
+		if (hereChar < 0)
+		{
 			tokenType = DOIT;
 			token = null;
 			return token;
 		}
-		if (tokenType.charAt(0) == 'x') {
+		if (tokenType.charAt(0) == 'x')
+		{
 			// x as first letter
 			this.perform(tokenType); // means perform to compute token & type
-		} else {
+		} else
+		{
 			// else just return the character
 			token = new Character((char) hereChar);
-			try {
+			try
+			{
 				hereChar = source.next();
-			} catch (Exception e) {
+			} catch (Exception e)
+			{
 				throw new ParseException(e.getMessage(), mark);
 			}
 		}
@@ -309,17 +350,21 @@ public class StreamScanner {
 	 * Answer with an Array which has been tokenized as though the input text
 	 * had appeared between #( and ) in a Smalltalk literal expression."
 	 */
-	public Object scanTokens(String aString) throws ParseException {
+	public Object scanTokens(String aString) throws ParseException
+	{
 		scan(aString);
 		return token;
 	}
 
-	public int step() throws ParseException {
+	public int step() throws ParseException
+	{
 		int c;
 		c = hereChar;
-		try {
+		try
+		{
 			hereChar = source.next();
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			throw new ParseException(e.getMessage(), mark);
 		}
 		return c;
@@ -329,86 +374,110 @@ public class StreamScanner {
 	 * StreamScanner methodsFor: 'multi-character scans'
 	 */
 
-	public void xBinary() throws ParseException {
+	public void xBinary() throws ParseException
+	{
 		int c;
 		StringBuffer buff = new StringBuffer();
 		tokenType = BINARY;
 		c = hereChar;
-		try {
+		try
+		{
 			hereChar = source.next();
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			throw new ParseException(e.getMessage(), mark);
 		}
-		if (hereChar > 0 && (typeTable[hereChar] == XBINARY) && hereChar != '-') {
+		if (hereChar > 0 && (typeTable[hereChar] == XBINARY) && hereChar != '-')
+		{
 			buff.append((char) c);
 			buff.append((char) this.step());
 			token = buff.toString();
-		} else {
+		} else
+		{
 			buff.append((char) c);
 			token = buff.toString();
 		}
 	}
 
-	public void xDefault() throws ParseException {
+	public void xDefault() throws ParseException
+	{
 		throw new ParseException("Unknown character: " + (char) hereChar
 				+ " ASCII: " + hereChar, 0);
 	}
 
-	public void xDelimiter() throws ParseException {
+	public void xDelimiter() throws ParseException
+	{
 		// ignore blanks etc.
 		scanToken();
 	}
 
-	public void xDigit() throws ParseException {
+	public void xDigit() throws ParseException
+	{
 		// form a number
 
 		StringBuffer buff = new StringBuffer();
 		tokenType = NUMBER;
 		buff.append((char) hereChar);
-		try {
+		try
+		{
 			hereChar = source.next();
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			throw new ParseException(e.getMessage(), mark);
 		}
-		while (hereChar > 0 && (typeTable[hereChar] == XDIGIT)) {
+		while (hereChar > 0 && (typeTable[hereChar] == XDIGIT))
+		{
 			buff.append((char) hereChar);
-			try {
+			try
+			{
 				hereChar = source.next();
-			} catch (Exception e) {
+			} catch (Exception e)
+			{
 				throw new ParseException(e.getMessage(), mark);
 			}
 		}
 		token = buff.toString();
 	}
 
-	public void xDollar() throws ParseException {
+	public void xDollar() throws ParseException
+	{
 		// form a Character literal
 
-		try {
+		try
+		{
 			token = new Character((char) source.next());
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			throw new ParseException(e.getMessage(), mark);
 		}
-		try {
+		try
+		{
 			hereChar = source.next(); // refill buffer
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			throw new ParseException(e.getMessage(), mark);
 		}
 		tokenType = CHARACTER;
 	}
 
-	public void xDoubleQuote() throws ParseException {
+	public void xDoubleQuote() throws ParseException
+	{
 		StringBuffer buffer = new StringBuffer();
-		try {
+		try
+		{
 			hereChar = source.next();
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			throw new ParseException(e.getMessage(), mark);
 		}
-		while (hereChar > 0 && typeTable[hereChar] != XDOUBLEQUOTE) {
+		while (hereChar > 0 && typeTable[hereChar] != XDOUBLEQUOTE)
+		{
 			buffer.append((char) hereChar);
-			try {
+			try
+			{
 				hereChar = source.next();
-			} catch (Exception e) {
+			} catch (Exception e)
+			{
 				throw new ParseException(e.getMessage(), mark);
 			}
 		}
@@ -417,43 +486,57 @@ public class StreamScanner {
 		step();
 	}
 
-	public void xLetter() throws ParseException {
+	public void xLetter() throws ParseException
+	{
 		StringBuffer buffer = new StringBuffer();
 		buffer.append((char) hereChar);
-		try {
+		try
+		{
 			hereChar = source.next();
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			throw new ParseException(e.getMessage(), mark);
 		}
 		while (hereChar > 0
-				&& (typeTable[hereChar] == XLETTER || typeTable[hereChar] == XDIGIT)) {
+				&& (typeTable[hereChar] == XLETTER || typeTable[hereChar] == XDIGIT))
+		{
 			buffer.append((char) hereChar);
-			try {
+			try
+			{
 				hereChar = source.next();
-			} catch (Exception e) {
+			} catch (Exception e)
+			{
 				throw new ParseException(e.getMessage(), mark);
 			}
 		}
 		token = buffer.toString();
-		if (reservedWords.contains(token)) {
+		if (reservedWords.contains(token))
+		{
 			tokenType = ((String) token).intern();
-		} else {
+		} else
+		{
 			tokenType = WORD;
 		}
 	}
 
-	protected void xSingleQuote() throws ParseException {
+	protected void xSingleQuote() throws ParseException
+	{
 		StringBuffer buffer = new StringBuffer();
-		try {
+		try
+		{
 			hereChar = source.next();
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			throw new ParseException(e.getMessage(), mark);
 		}
-		while (hereChar > 0 && typeTable[hereChar] != XSINGLEQUOTE) {
+		while (hereChar > 0 && typeTable[hereChar] != XSINGLEQUOTE)
+		{
 			buffer.append((char) hereChar);
-			try {
+			try
+			{
 				hereChar = source.next();
-			} catch (Exception e) {
+			} catch (Exception e)
+			{
 				throw new ParseException(e.getMessage(), mark);
 			}
 		}
