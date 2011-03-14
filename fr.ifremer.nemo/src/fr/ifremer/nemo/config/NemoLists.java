@@ -1067,8 +1067,6 @@ public class NemoLists implements Cloneable
 			{
 				String listVocab = Intern.dir_resources + File.separator + Intern.dir_vocabLists + File.separator + Global.POURCENT_S + Global.EXT_XML;
 				String fileName = String.format(listVocab, mapName);
-				// TODO BGT debug pour linux redhat
-				System.out.println(listVocab + " ---- " + fileName);
 				File file = new File(fileName);
 				if (file.exists())
 				{
