@@ -87,6 +87,11 @@ public class Nemo
 		nomModele = Global.EMPTY_STRING;
 	}
 
+	public void resetInstance()
+	{
+		instance = null;
+	}
+
 	public void restoreDefaultConfig()
 	{
 		// Restoration de la configuration initiale
@@ -118,14 +123,15 @@ public class Nemo
 		if (Global.EMPTY_STRING.equals(model.getVersion()))
 		{
 			isBeforeP011 = true;
-            // traduction des modèles antérieurs à la version 1.2.20 (P011 introduits en version 1.2.20)
+			// traduction des modèles antérieurs à la version 1.2.20 (P011
+			// introduits en version 1.2.20)
 			model = new InputModel();
 			parser = new XMLBootstrapParser(model);
 
 			StreamSource xmlSource = new StreamSource(new File(pathModel));
-            StreamSource xslSource = new StreamSource(new File(Intern.dir_resources + 
-                                                               File.separator + 
-                                                               Intern.ModelXSL));
+			StreamSource xslSource = new StreamSource(new File(Intern.dir_resources +
+																File.separator +
+																Intern.ModelXSL));
 			Result result = new SAXResult(parser);
 
 			TransformerFactory factory = TransformerFactory.newInstance();
@@ -140,17 +146,22 @@ public class Nemo
 	{
 		DataListTypeEnum dataList = model.getDataModel().getDataListType();
 
-        // balise dataList inconnue -> version <1.2.33 (avant les P021 si on exclue les versions non distribuées de 1.2.29 à 1.2.32)
+		// balise dataList inconnue -> version <1.2.33 (avant les P021 si on
+		// exclue les versions non distribuées de 1.2.29 à 1.2.32)
 		if (dataList == DataListTypeEnum.UNKNOWN)
 		{
-            // si on est avant l'usage des P011 (introduits en 1.2.20), on est forcément en P091
+			// si on est avant l'usage des P011 (introduits en 1.2.20), on est
+			// forcément en P091
 			if (isBeforeP011)
 			{
 				dataList = DataListTypeEnum.P091;
 			}
-           // si on est apres l'introduction des P011 mais qu'on a pas de valeur de dataList, c'est qu'on est dans les version intermédiaires
+			// si on est apres l'introduction des P011 mais qu'on a pas de
+			// valeur de dataList, c'est qu'on est dans les version
+			// intermédiaires
 			// donc les listes possibles sont P091 ou P011viaP091
-           // on détecte le type à partir de l'attribut isP011 du premier paramètre
+			// on détecte le type à partir de l'attribut isP011 du premier
+			// paramètre
 			else
 			{
 				if (model.getDataModel().getParameterModels()[0].getParameter().isP011())
@@ -255,18 +266,19 @@ public class Nemo
 		{
 			// dossier campagne
 			File fich = new File(myViewMain.getEditFileForm().nomRepertoire);
-            if (!Global.EMPTY_STRING.equals(modelName)){
-                ApplicationWorkbenchWindowAdvisor.configurer_titre
-                    .setTitle(Messages.application_directoryTitle
-                            + fich.getAbsolutePath() + Messages.application_modelTitle
-                            + modelName + " ]"); //$NON-NLS-1$
+			if (!Global.EMPTY_STRING.equals(modelName))
+			{
+				ApplicationWorkbenchWindowAdvisor.configurer_titre
+						.setTitle(Messages.application_directoryTitle
+								+ fich.getAbsolutePath() + Messages.application_modelTitle
+								+ modelName + " ]"); //$NON-NLS-1$
 
 			} else
 			{
 				ApplicationWorkbenchWindowAdvisor.configurer_titre.setTitle(
-						Messages.application_directoryTitle 
-						+ fich.getAbsolutePath() 
-						+ " ]"); //$NON-NLS-1$ 
+						Messages.application_directoryTitle
+								+ fich.getAbsolutePath()
+								+ " ]"); //$NON-NLS-1$ 
 			}
 
 		} else
@@ -275,16 +287,17 @@ public class Nemo
 			File fich;
 			fich = new File(myViewMain.getEditFileForm().nomFichier);
 
-            if (!Global.EMPTY_STRING.equals(modelName)){
-                ApplicationWorkbenchWindowAdvisor.configurer_titre
-                    .setTitle(Messages.application_fileTitle + fich.getAbsolutePath()
-                            + Messages.application_modelTitle
-                            + modelName + " ]"); //$NON-NLS-1$
-            }
-            else{
-                ApplicationWorkbenchWindowAdvisor.configurer_titre
-                    .setTitle(Messages.application_fileTitle + fich.getAbsolutePath()
-                            + " ]"); //$NON-NLS-1$ 
+			if (!Global.EMPTY_STRING.equals(modelName))
+			{
+				ApplicationWorkbenchWindowAdvisor.configurer_titre
+						.setTitle(Messages.application_fileTitle + fich.getAbsolutePath()
+								+ Messages.application_modelTitle
+								+ modelName + " ]"); //$NON-NLS-1$
+			} else
+			{
+				ApplicationWorkbenchWindowAdvisor.configurer_titre
+						.setTitle(Messages.application_fileTitle + fich.getAbsolutePath()
+								+ " ]"); //$NON-NLS-1$ 
 			}
 		}
 	}
@@ -341,14 +354,14 @@ public class Nemo
 
 	public String getErrorMessageWithFileAndLineNumber()
 	{
-        return Messages.error_fileName_message
-        +Global.DBL_PT
-        +Global.SPACE
-        + getLog_currentInputFile() 
-           +Global.SPACE
-        + Messages.error_lineNumber_message
-        +Global.DBL_PT
-        +Global.SPACE
-        + getLog_currentInputLine();
+		return Messages.error_fileName_message
+				+ Global.DBL_PT
+				+ Global.SPACE
+				+ getLog_currentInputFile()
+				+ Global.SPACE
+				+ Messages.error_lineNumber_message
+				+ Global.DBL_PT
+				+ Global.SPACE
+				+ getLog_currentInputLine();
 	}
 }
