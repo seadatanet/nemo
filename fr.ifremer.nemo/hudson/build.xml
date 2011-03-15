@@ -1,4 +1,4 @@
-<!-- Generation de l'installeur de la structure d'accueil Daurade -->
+<!-- Generation des installeurs Nemo -->
 <project name="fr.ifremer.nemo.build" default="build">
 	<!--sets the path of the properties file-->
 	<property name="pdeBuildPluginVersion" value="3.6.1.R36x_v20100823" />
@@ -94,7 +94,11 @@
 			 </condition>
 		</fail>
 	</target>
-	<!--<target name="test" depends="init">
+	
+	
+	
+	
+	<target name="testJ" depends="init">
 		<junit>
 			<formatter type="xml"/>
 			<classpath>
@@ -106,5 +110,5 @@
 				<formatter type="xml"/>
 			</test>
 		</junit>
-	</target>-->
+	</target>
 </project>
