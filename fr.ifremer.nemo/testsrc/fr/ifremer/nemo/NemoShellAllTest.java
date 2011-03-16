@@ -70,7 +70,7 @@ import fr.ifremer.nemo.util.Global.E_TypeConversion;
  * @author sbregent
  * 
  */
-public class NemoShellTestauto
+public class NemoShellAllTest
 {
 
 	public String dataRootPath = "C:\\tests_nemo";
@@ -80,10 +80,10 @@ public class NemoShellTestauto
 	// comparer les fichiers manuels (output_eclipse) aux fichiers REFERENCE
 	public static boolean compareManualFiles = true;
 
-	public static String[] testDirAlone =
-		{};
 	// public static String[] testDirAlone =
-	// { "7019", "cruiseDir_profile_diap" };
+	// {};
+	public static String[] testDirAlone =
+		{ "7019" };
 	// public static String[] testDirAlone =
 	// { "cruiseDir_timeseries_jade97" };
 

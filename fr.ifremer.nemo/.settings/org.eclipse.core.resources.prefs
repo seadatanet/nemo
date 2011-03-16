@@ -1,12 +1,7 @@
-<<<<<<< org.eclipse.core.resources.prefs
-#Tue Jan 20 10:37:00 CET 2009
-=======
-#Fri Oct 03 18:00:00 CEST 2008
->>>>>>> 1.4
+#Fri Mar 11 11:45:51 CET 2011
 eclipse.preferences.version=1
-<<<<<<< org.eclipse.core.resources.prefs
+encoding//src/com/ago/parsing/StreamScanner.java=ISO-8859-1
+encoding//src/com/ago/xml/XMLOutputWriter.java=ISO-8859-1
+encoding//src/fr/ifremer/nemo/util/format/AngleFormatParser.java=ISO-8859-1
 encoding//src/fr/ifremer/nemo/util/messages.properties=8859_1
 encoding/<project>=UTF-8
-=======
-encoding/<project>=UTF-8
->>>>>>> 1.4
