@@ -1,7 +1,7 @@
 <!-- Compilation et execution des tests JUnit -->
 <project name="fr.ifremer.nemo.build" default="testJ" basedir="Nemo_product">
 	<!--sets the path of the properties file-->
-	<property name="obj.dir" value="bin" />
+	<property name="obj.dir" value="bin2" />
 	<property name="lib.dir" value="lib" />
 	<property name="buildDirectory" value="" />
 	<property name="eclipse.lib.dir" value="plugins" />
