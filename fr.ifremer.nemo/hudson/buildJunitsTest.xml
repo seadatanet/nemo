@@ -34,6 +34,7 @@
 			<delete dir="${obj.dir}" />
 			<mkdir dir="${obj.dir}" />
 			<javac srcdir="testsrc" classpath="${test.classpath}" destdir="${obj.dir}" source="1.6" fork="true"  />
+			<javac srcdir="src" classpath="${test.classpath}" destdir="${obj.dir}" source="1.6" fork="true"  />
 		</target>
 	
 	<!-- lancement du test global junit-->
