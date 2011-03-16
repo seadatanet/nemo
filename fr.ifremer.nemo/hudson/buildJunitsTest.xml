@@ -14,7 +14,7 @@
 	
 	<!--compilation-->
 	<target name="pde-build" description="Eclipse PDE Build">
-			<java classname="org.eclipse.equinox.launcher.Main"  fork="true" failonerror="true">
+			<java classname="org.eclipse.equinox.launcher.Main"  fork="true" failonerror="false">
 				<arg value="-initialize" />
 				<arg value="-application" />
 				<arg value="org.eclipse.ant.core.antRunner" />
