@@ -29,13 +29,19 @@
 			</java>
 
 	</target>
+	
+		<target name="compile">
+			<delete dir="${obj.dir}" />
+			<mkdir dir="${obj.dir}" />
+			<javac srcdir="testsrc" classpath="${test.classpath}" destdir="${obj.dir}" source="1.6" fork="true"  />
+		</target>
+	
 	<!-- lancement du test global junit-->
-	<target name="testJ" depends="pde-build">
+	<target name="testJ" depends="compile, pde-build">
 		<junit fork="true" dir="${basedir}">
 			<formatter type="xml" />
 			<classpath path="${test.classpath}" />
 			<test name="fr.ifremer.nemo.NemoTest" outfile="result">
-				<formatter type="plain" />
 				<formatter type="xml" />
 			</test>
 		</junit>
