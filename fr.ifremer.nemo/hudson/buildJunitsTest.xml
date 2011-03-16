@@ -12,7 +12,7 @@
 	<property file="build.properties" />
 
 	
-	<!--compilation-->
+	<!--compilation
 	<target name="pde-build" description="Eclipse PDE Build">
 			<java classname="org.eclipse.equinox.launcher.Main"  fork="true" failonerror="false">
 				<arg value="-initialize" />
@@ -28,11 +28,11 @@
 				</classpath>
 			</java>
 
-	</target>
+	</target>-->
 	
 	
 	<!-- lancement du test global junit-->
-	<target name="testJ" depends="pde-build">
+	<target name="testJ">
 		<junit fork="true" dir="${basedir}">
 			<formatter type="xml" />
 			<classpath path="${test.classpath}" />
