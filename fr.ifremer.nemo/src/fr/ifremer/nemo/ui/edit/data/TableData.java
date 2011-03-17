@@ -369,18 +369,18 @@ public class TableData
 		// On ajoute systématiquement le paramètre pression pour les profils en
 		// medatlas
 		// verticaux sauf si la liste de paramètres à utiliser est la P011
-        if (Nemo.getInstance().getViewMain().getMyRulesManager().isProfile()
-                && Nemo.getInstance().getViewMain().getMyRulesManager()
-                    .isConversionToMedatlas()
-                && Nemo.getInstance().getViewMain().getMyRulesManager()
-                    .getMyDataListType() == DataListTypeEnum.P091)
+		if (Nemo.getInstance().getViewMain().getMyRulesManager().isProfile()
+				&& Nemo.getInstance().getViewMain().getMyRulesManager()
+						.isConversionToMedatlas()
+				&& Nemo.getInstance().getViewMain().getMyRulesManager()
+						.getMyDataListType() == DataListTypeEnum.P091)
 		{
 			for (TypeData type : typesWS)
 			{
 				// ajout systematique de PRES
-                if (type.getEntryKey().equals(Intern.paramPRES)
-                        && Nemo.getInstance().getViewMain().getMyRulesManager()
-                            .isProfile())
+				if (type.getEntryKey().equals(Intern.paramPRES)
+						&& Nemo.getInstance().getViewMain().getMyRulesManager()
+								.isProfile())
 				{
 					// on rajoute PRES
 					addType(type);
@@ -473,13 +473,15 @@ public class TableData
 									public void handleEvent(final Event e)
 									{
 
-										switch (e.type) {
+										switch (e.type)
+										{
 										case SWT.FocusOut:
 											itemTmp.setText(column, text.getText());
 											text.dispose();
 											break;
 										case SWT.Traverse:
-											switch (e.detail) {
+											switch (e.detail)
+											{
 											case SWT.TRAVERSE_RETURN:
 												itemTmp.setText(column, text.getText());
 
@@ -746,35 +748,36 @@ public class TableData
 			TableItem item = new TableItem(myTable, SWT.NONE);
 			if (types.get(i).isP011())
 			{
-                item.setText(new String[] {
-                        types.get(i).getEntryKeyP011() + Global.SEP
-                                + types.get(i).getEntryTermP011(),
-                        types.get(i).getUnite(), types.get(i).getConversion(),
-                        types.get(i).getTest(),
-                        String.valueOf(types.get(i).getDebut()),
-                        String.valueOf(types.get(i).getFin()),
-                        types.get(i).getFormat(), types.get(i).getEntree(),
-                        types.get(i).getSortie(), types.get(i).getTestIn(),
-                        types.get(i).getTestOut(), types.get(i).getDebutFlag(),
-                        types.get(i).getFinFlag(),
+				item.setText(new String[]
+				{
+						types.get(i).getEntryKeyP011() + Global.SEP
+								+ types.get(i).getEntryTermP011(),
+						types.get(i).getUnite(), types.get(i).getConversion(),
+						types.get(i).getTest(),
+						String.valueOf(types.get(i).getDebut()),
+						String.valueOf(types.get(i).getFin()),
+						types.get(i).getFormat(), types.get(i).getEntree(),
+						types.get(i).getSortie(), types.get(i).getTestIn(),
+						types.get(i).getTestOut(), types.get(i).getDebutFlag(),
+						types.get(i).getFinFlag(),
 						// FAE 6542
-				types.get(i).getUniteCode() });
-            }
-            else
+						types.get(i).getUniteCode() });
+			} else
 			{
 
-                item.setText(new String[] {
-                        types.get(i).getFormattedCodeAndName(),
-                        types.get(i).getUnite(), types.get(i).getConversion(),
-                        types.get(i).getTest(),
-                        String.valueOf(types.get(i).getDebut()),
-                        String.valueOf(types.get(i).getFin()),
-                        types.get(i).getFormat(), types.get(i).getEntree(),
-                        types.get(i).getSortie(), types.get(i).getTestIn(),
-                        types.get(i).getTestOut(), types.get(i).getDebutFlag(),
-                        types.get(i).getFinFlag(),
+				item.setText(new String[]
+				{
+						types.get(i).getFormattedCodeAndName(),
+						types.get(i).getUnite(), types.get(i).getConversion(),
+						types.get(i).getTest(),
+						String.valueOf(types.get(i).getDebut()),
+						String.valueOf(types.get(i).getFin()),
+						types.get(i).getFormat(), types.get(i).getEntree(),
+						types.get(i).getSortie(), types.get(i).getTestIn(),
+						types.get(i).getTestOut(), types.get(i).getDebutFlag(),
+						types.get(i).getFinFlag(),
 						// FAE 6542
-				types.get(i).getUniteCode() });
+						types.get(i).getUniteCode() });
 			}
 		}
 
@@ -1069,8 +1072,6 @@ public class TableData
 				MediaDomain mediaDomain = Nemo.getInstance().getDomain().getMedia();
 				ligne = Utils.lignesBrutes.get(mediaDomain.getModel().getFileHeader() + mediaDomain.getStationHeaderNumberLines());
 
-				// TODO BGT afficher erreur propre si erreur ici a cause du fait
-				// que start/end n'est pas defini
 				try
 				{
 					selection = ligne.substring(Integer.valueOf(myTable.getItem(i).getText(4)) - 1, Integer.valueOf(myTable.getItem(i).getText(5))).trim();
@@ -1146,7 +1147,7 @@ public class TableData
 
 			if ((!myTable.getItem(i).getText(11).equals(Global.EMPTY_STRING)) && (!myTable.getItem(i).getText(12).equals(Global.EMPTY_STRING)))
 			{
-				
+
 				MediaDomain mediaDomain = Nemo.getInstance().getDomain().getMedia();
 				ligne = Utils.lignesBrutes.get(mediaDomain.getModel().getFileHeader() + mediaDomain.getStationHeaderNumberLines() + 1);
 
