@@ -29,18 +29,6 @@ import fr.ifremer.nemo.util.Global;
  */
 public abstract class NemoSection
 {
-	// constantes des noms possibles
-	public static final String F_FILEHEADER = "enteteFichier"; //$NON-NLS-1$
-	public static final String F_STATIONHEADER = "enteteStation"; //$NON-NLS-1$
-	public static final String F_ENDSTATION = "finStation"; //$NON-NLS-1$
-	public static final String F_ENDDATA = "indicFinDonnees"; //$NON-NLS-1$
-	public static final String C_REFERENCE = "cuiseReference"; //$NON-NLS-1$
-	public static final String C_LOCATION = "cruiseLocation"; //$NON-NLS-1$
-	public static final String C_DATASOURCE = "cruiseDatasource"; //$NON-NLS-1$
-	public static final String C_ARCHIVING = "cruiseArchiving"; //$NON-NLS-1$
-	public static final String C_DATATYPE = "cruiseDatatype"; //$NON-NLS-1$
-	public static final String C_COMMENTS = "cruiseComments"; //$NON-NLS-1$
-	public static final String D_DATATYPE = "dataType"; //$NON-NLS-1$
 	public Color DEFAULT_COLOR = null;
 	protected Section section;
 	protected String name; // nom correspondant au tag xml (PropertyModel)

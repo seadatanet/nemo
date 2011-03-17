@@ -147,14 +147,18 @@ public class Messages
 
 	// FILE
 	public static String edit_file_title;
+	public static String edit_file_enteteFichier_title;
 	public static String edit_file_enteteFichier;
+	public static String edit_file_enteteStation_title;
 	public static String edit_file_enteteStation;
 	public static String edit_file_enteteStation_radNumber;
 	public static String edit_file_enteteStation_setter;
 	public static String edit_file_enteteStation_radIndicator;
 	public static String edit_file_enteteStation_indicator;
 	public static String edit_file_enteteStation_linesBeforeData;
+	public static String edit_file_finStation_title;
 	public static String edit_file_finStation;
+	public static String edit_file_indicFinDonnees_title;
 	public static String edit_file_indicFinDonnees;
 	public static String edit_file_idcEOF;
 	public static String edit_file_idcEmptyLine;
@@ -168,6 +172,7 @@ public class Messages
 
 	// CRUISE
 	public static String edit_cruise_title;
+	public static String edit_cruise_reference_title;
 	public static String edit_cruise_sectionReference;
 	public static String edit_cruise_sectionReference_lib;
 	public static String edit_cruise_cruiseRef;

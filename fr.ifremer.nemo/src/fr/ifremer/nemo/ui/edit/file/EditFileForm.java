@@ -20,7 +20,6 @@ import fr.ifremer.nemo.input.MediaModel;
 import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.EditForm;
-import fr.ifremer.nemo.ui.edit.NemoSection;
 import fr.ifremer.nemo.ui.edit.file.listeners.FileTypeSelectionListener;
 import fr.ifremer.nemo.ui.edit.file.listeners.InputFileBrowseListener;
 import fr.ifremer.nemo.ui.edit.file.listeners.InputFileCheckMultistationsListener;
@@ -237,7 +236,8 @@ public class EditFileForm extends EditForm
 		// output
 		createGroupOutputParameters(formViewFile.getBody());
 
-		((SashForm) parent).setWeights(new int[] { 38, 62 });
+		((SashForm) parent).setWeights(new int[]
+		{ 38, 62 });
 
 	}
 
@@ -382,19 +382,19 @@ public class EditFileForm extends EditForm
 	@Override
 	public void initSections()
 	{
-		sectionFileHeader = new FileSection(NemoSection.F_FILEHEADER, Messages.getString(NemoSection.F_FILEHEADER), Messages.edit_file_enteteFichier, this);
+		sectionFileHeader = new FileSection(Messages.edit_file_enteteFichier_title, Messages.edit_file_enteteFichier_title, Messages.edit_file_enteteFichier, this);
 		sectionFileHeader.addSetter(null, Global.ZERO);
 		listeSections.add(sectionFileHeader);
 
-		sectionStationHeader = new FileStationHeader(NemoSection.F_STATIONHEADER, Messages.getString(NemoSection.F_STATIONHEADER), Messages.edit_file_enteteStation, this);
+		sectionStationHeader = new FileStationHeader(Messages.edit_file_enteteStation_title, Messages.edit_file_enteteStation_title, Messages.edit_file_enteteStation, this);
 		sectionStationHeader.addSetter(Messages.edit_file_enteteStation_setter, Global.ZERO);
 		listeSections.add(sectionStationHeader);
 
-		sectionEndOfStation = new FileSection(NemoSection.F_ENDSTATION, Messages.getString(NemoSection.F_ENDSTATION), Messages.edit_file_finStation, this);
+		sectionEndOfStation = new FileSection(Messages.edit_file_finStation_title, Messages.edit_file_finStation_title, Messages.edit_file_finStation, this);
 		sectionEndOfStation.addSetter(null, Global.ZERO);
 		listeSections.add(sectionEndOfStation);
 
-		sectionDataTerminator = new FileEndData(NemoSection.F_ENDDATA, Messages.getString(NemoSection.F_ENDDATA), Messages.edit_file_indicFinDonnees, this);
+		sectionDataTerminator = new FileEndData(Messages.edit_file_indicFinDonnees_title, Messages.edit_file_indicFinDonnees_title, Messages.edit_file_indicFinDonnees, this);
 		sectionDataTerminator.addSetter(Messages.edit_file_sectionRuptureDonnees_end_with, Global.EMPTY_STRING);
 		listeSections.add(sectionDataTerminator);
 	}
@@ -896,7 +896,8 @@ public class EditFileForm extends EditForm
 	 */
 	public void selectTypeFile(E_InputType typeFile)
 	{
-		switch (typeFile) {
+		switch (typeFile)
+		{
 		case TRAJECTORY:
 			radProfilVertical.setSelection(false);
 			radSerieTempo.setSelection(false);

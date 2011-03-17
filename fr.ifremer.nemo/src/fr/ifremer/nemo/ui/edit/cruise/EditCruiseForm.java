@@ -28,7 +28,6 @@ import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.ComboType;
 import fr.ifremer.nemo.ui.edit.Couple;
 import fr.ifremer.nemo.ui.edit.EditForm;
-import fr.ifremer.nemo.ui.edit.NemoSection;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
@@ -155,8 +154,6 @@ public class EditCruiseForm extends EditForm
 		// remplissage de l'IHM par le modèle chargé
 		fillFromModel();
 		filled = true;
-
-
 
 		final Text textCommentaire = sectionCommentaire.getItem(Global.EMPTY_STRING).getValueText();
 		textCommentaire.addFocusListener(new org.eclipse.swt.events.FocusListener()
@@ -301,8 +298,6 @@ public class EditCruiseForm extends EditForm
 		CruiseModel cruiseModel = importXML(fichier);
 		cruiseDomain.updateCruise(cruiseModel);
 
-		
-
 		// mise à jour de l'onglet courant
 		fillFromModel();
 	}
@@ -347,34 +342,34 @@ public class EditCruiseForm extends EditForm
 	public void initSections()
 	{
 
-		sectionReference = new CruiseSection(NemoSection.C_REFERENCE, Messages.edit_cruise_sectionReference, Messages.edit_cruise_sectionReference_lib, this);
+		sectionReference = new CruiseSection(Messages.edit_cruise_sectionReference, Messages.edit_cruise_sectionReference, Messages.edit_cruise_sectionReference_lib, this);
 		sectionReference.addItem(Messages.edit_cruise_cruiseRef, ComboType.NONE, Global.EMPTY_STRING);
 		sectionReference.addItem(Messages.edit_cruise_cruiseName, ComboType.NONE, Global.EMPTY_STRING);
 		sectionReference.addItem(Messages.edit_cruise_ship, ComboType.SHIP, Global.EMPTY_STRING);
 		listeSections.add(sectionReference);
 
-		sectionLocalisation = new CruiseSection(NemoSection.C_LOCATION, Messages.edit_cruise_sectionLocation, Messages.edit_cruise_sectionLocation_lib, this);
+		sectionLocalisation = new CruiseSection(Messages.edit_cruise_sectionLocation, Messages.edit_cruise_sectionLocation, Messages.edit_cruise_sectionLocation_lib, this);
 		sectionLocalisation.addItem(Messages.edit_cruise_startDate, ComboType.NONE, Global.EMPTY_STRING);
 		sectionLocalisation.addItem(Messages.edit_cruise_endDate, ComboType.NONE, Global.EMPTY_STRING);
 		sectionLocalisation.addItem(Messages.edit_cruise_region, ComboType.REGION, Global.EMPTY_STRING);
 		listeSections.add(sectionLocalisation);
 
-		sectionSource = new CruiseSection(NemoSection.C_DATASOURCE, Messages.edit_cruise_sectionDataSource, Messages.edit_cruise_sectionDataSource_lib, this);
+		sectionSource = new CruiseSection(Messages.edit_cruise_sectionDataSource, Messages.edit_cruise_sectionDataSource, Messages.edit_cruise_sectionDataSource_lib, this);
 		sectionSource.addItem(Messages.edit_cruise_country, ComboType.COUNTRY, Global.EMPTY_STRING);
 		sectionSource.addItem(Messages.edit_cruise_lab, ComboType.NONE, Global.EMPTY_STRING);
 		sectionSource.addItem(Messages.edit_cruise_chief, ComboType.NONE, Global.EMPTY_STRING);
 		sectionSource.addItem(Messages.edit_cruise_project, ComboType.NONE, Global.EMPTY_STRING);
 		listeSections.add(sectionSource);
 
-		sectionCentre = new CruiseSection(NemoSection.C_ARCHIVING, Messages.edit_cruise_sectionArchiving, Messages.edit_cruise_sectionArchiving_lib, this);
+		sectionCentre = new CruiseSection(Messages.edit_cruise_sectionArchiving, Messages.edit_cruise_sectionArchiving, Messages.edit_cruise_sectionArchiving_lib, this);
 		sectionCentre.addItem(Messages.edit_cruise_dataCenter, ComboType.DATACENTER, Nemo.getInstance().getConfig().getDataCenter());
 		sectionCentre.addItem(Messages.edit_cruise_confident, ComboType.CONFIDENT, "P"); //$NON-NLS-1$
 		listeSections.add(sectionCentre);
 
-		sectionType = new CruiseDatatypeSection(NemoSection.C_DATATYPE, Messages.edit_cruise_sectionDataTypes, Messages.edit_cruise_sectionDataTypes_lib, this);
+		sectionType = new CruiseDatatypeSection(Messages.edit_cruise_sectionDataTypes, Messages.edit_cruise_sectionDataTypes, Messages.edit_cruise_sectionDataTypes_lib, this);
 		listeSections.add(sectionType);
 
-		sectionCommentaire = new CruiseSection(NemoSection.C_COMMENTS, Messages.edit_cruise_sectionComments, Messages.edit_cruise_sectionComments_lib, this);
+		sectionCommentaire = new CruiseSection(Messages.edit_cruise_sectionComments, Messages.edit_cruise_sectionComments, Messages.edit_cruise_sectionComments_lib, this);
 		sectionCommentaire.addItem(Global.EMPTY_STRING, ComboType.BLOCK, Global.EMPTY_STRING);
 		listeSections.add(sectionCommentaire);
 
