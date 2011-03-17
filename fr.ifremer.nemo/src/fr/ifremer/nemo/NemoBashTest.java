@@ -74,7 +74,7 @@ public class NemoBashTest
 {
 
 	public String dataRootPath = "C:\\tests_nemo";
-
+	public static String userDir = System.getProperty("user.dir");
 	// générer les fichiers en batch et les comparer aux fichiers REFERENCE
 	public static boolean testBatchs = true;
 	// comparer les fichiers manuels (output_eclipse) aux fichiers REFERENCE
@@ -140,6 +140,8 @@ public class NemoBashTest
 		testLogger.info("\r\n\r\n\r\n\r\n===================================== " + dat + " =========================\r\n\r\n\r\n\r\n");
 		testLogger.info("test batchs : " + testBatchs);
 		testLogger.info("comp manual files : " + compareManualFiles + "(" + outputManualName + ")");
+
+		System.out.println(userDir);
 
 	}
 
