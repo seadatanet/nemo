@@ -72,9 +72,8 @@ import fr.ifremer.nemo.util.Global.E_TypeConversion;
  */
 public class NemoBashTest
 {
-
-	public String dataRootPath = "C:\\tests_nemo";
-	public static String userDir = System.getProperty("user.dir");
+	// racine du repertoire contenant les tests
+	public static String dataRootPath = ".." + File.separator + "ifremer_datatest";
 	// générer les fichiers en batch et les comparer aux fichiers REFERENCE
 	public static boolean testBatchs = true;
 	// comparer les fichiers manuels (output_eclipse) aux fichiers REFERENCE
@@ -82,10 +81,6 @@ public class NemoBashTest
 
 	public static String[] testDirAlone =
 		{};
-	// public static String[] testDirAlone =
-	// { "7019", "cruiseDir_profile_diap" };
-	// public static String[] testDirAlone =
-	// { "cruiseDir_timeseries_jade97" };
 
 	public String inputName = "input";
 	public String outputName = "output_junit";
@@ -96,13 +91,7 @@ public class NemoBashTest
 
 	public NemoShell shell = new NemoShell();
 
-	// public String inputAbsolutePath;
-	// public String outputAbsolutePath;
-
 	public boolean sortDatas = false;
-
-	// public Conversion conv=Conversion.MEDATLAS;
-	// public E_TypeConversion odvConv= E_TypeConversion.MEDATLAS;
 
 	public String datasetRef = Global.EMPTY_STRING;
 	public String cdiSummaryFile = Global.EMPTY_STRING;
@@ -140,8 +129,6 @@ public class NemoBashTest
 		testLogger.info("\r\n\r\n\r\n\r\n===================================== " + dat + " =========================\r\n\r\n\r\n\r\n");
 		testLogger.info("test batchs : " + testBatchs);
 		testLogger.info("comp manual files : " + compareManualFiles + "(" + outputManualName + ")");
-
-		System.out.println(userDir);
 
 	}
 
@@ -311,10 +298,6 @@ public class NemoBashTest
 												comp = compareWithReference(outputAbsolutePath, outputManualName);
 												message.manualCompRes = comp;
 												message.manualCompName = outputManualName;
-												if (!comp)
-												{
-													System.out.println("lllll");
-												}
 												ok = comp && ok;
 											}
 										}
@@ -353,10 +336,6 @@ public class NemoBashTest
 				+ "\r\n"
 				);
 
-		// if (!ok)
-		// {
-		// System.out.println("ici");
-		// }
 		return nbTotalFailed == 0;
 	}
 
@@ -552,8 +531,6 @@ public class NemoBashTest
 		public boolean isManualFound;
 		public boolean atLeastOneTestFound = false;
 
-		// public HashMap<String, Boolean> filesMap = new HashMap<String,
-		// Boolean>();
 		public Message()
 		{
 
