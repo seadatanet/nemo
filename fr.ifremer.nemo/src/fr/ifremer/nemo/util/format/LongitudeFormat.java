@@ -672,16 +672,7 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable
 				case DEGREES_DECIMAL:
 				{
 					int endIndex;
-					// TODO BGT faire une erreur plutot car pas normal?
-					// if (source.length()<
-					// (index+_elements[i]._element.length()))
-					// { // 2967 endIndex can be less than the format length if
-					// leading zeros are not present (ex: 2.5000 is smaller that
-					// the format 00.0000)
-					// endIndex=source.length();
-					// }else{
 					endIndex = index + _elements[i]._element.length();
-					// }
 					String tmp = source.substring(index, endIndex);
 					if (tmp.matches("\\s*\\d+\\.\\d+\\s*")) { //$NON-NLS-1$
 						DecimalFormat format = new DecimalFormat(_elements[i]._element, symbols);
