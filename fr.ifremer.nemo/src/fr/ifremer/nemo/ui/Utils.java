@@ -207,8 +207,6 @@ public class Utils
 
 		if (ligne.getText().equals(Global.EMPTY_STRING))
 		{
-			// TODO verifier correspondance avec
-			// Old_StationModel.getNumberOfLines()
 			lign = Nemo.getInstance().getDomain().getMedia().getModel().getStationHeader() + 1;
 		} else
 		{
@@ -717,7 +715,8 @@ public class Utils
 		EditDataForm editDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
 		EditConversionForm editConversionForm = Nemo.getInstance().getViewMain().getEditConversionForm();
 
-		switch (onglet) {
+		switch (onglet)
+		{
 		case 0:
 			ViewLog.aideFile();
 			if (editFileForm != null)
@@ -809,7 +808,8 @@ public class Utils
 		EditDataForm editDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
 		EditConversionForm editConversionForm = Nemo.getInstance().getViewMain().getEditConversionForm();
 
-		switch (Nemo.getInstance().getViewMain().getAffiche()) {
+		switch (Nemo.getInstance().getViewMain().getAffiche())
+		{
 		case 0:
 			// from FILE
 			if (editFileForm.isLoaded())
