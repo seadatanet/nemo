@@ -1,9 +1,56 @@
-<!-- Generation des installeurs Nemo -->
+<!-- MAIN BUILD Generation des installeurs Nemo -->
 <project name="fr.ifremer.nemo.build" default="build">
 	<!--sets the path of the properties file-->
 	<property name="pdeBuildPluginVersion" value="3.6.1.R36x_v20100823" />
 	<property name="equinoxLauncherPluginVersion" value="1.1.0.v20100507" />
 
+	
+	
+	<target name="clean" description="suppression d'anciens fichiers provenant de build précédent si nécéssaire">
+		 <!-- suppression contenu du nemo_izPack/src -->
+		<delete includeemptydirs="true">
+		    <fileset dir="${buildDirectory}/Nemo_IzPack/src" includes="**/*"/>
+		</delete>
+		 <!-- suppression contenu du nemo_izPack/dist -->
+		<delete includeemptydirs="true">
+			<fileset dir="${buildDirectory}/Nemo_IzPack/dist" excludes="readme.txt"/>
+		</delete>
+		
+		 <!-- suppression contenu fichiers generes dans le workspace -->
+		<delete file="${buildDirectory}/Nemo-win32.win32.x86.zip" />
+		<delete file="${buildDirectory}/Nemo-win32.win32.x86_64.zip"/>
+		<delete file="${buildDirectory}/Nemo-linux.gtk.x86.zip"/>
+		<delete file="${buildDirectory}/Nemo-linux.gtk.x86_64.zip"/>
+		<delete file="${buildDirectory}/Nemo-solaris.gtk.sparc.zip"/>
+		
+		<delete file="${buildDirectory}/assemble.org.eclipse.pde.build.container.feature.all.xml" />
+		<delete file="${buildDirectory}/assemble.org.eclipse.pde.build.container.feature.linux.gtk.x86.xml" />
+		<delete file="${buildDirectory}/assemble.org.eclipse.pde.build.container.feature.linux.gtk.x86_64.xml" />
+		<delete file="${buildDirectory}/assemble.org.eclipse.pde.build.container.feature.solaris.gtk.sparc.xml" />
+		<delete file="${buildDirectory}/assemble.org.eclipse.pde.build.container.feature.win32.win32.x86.xml" />
+		<delete file="${buildDirectory}/assemble.org.eclipse.pde.build.container.feature.win32.win32.x86_64.xml" />
+
+		<delete file="${buildDirectory}/finalFeaturesVersions.linux_gtk_x86.properties" />
+		<delete file="${buildDirectory}/finalFeaturesVersions.linux_gtk_x86_64.properties" />
+		<delete file="${buildDirectory}/finalFeaturesVersions.properties" />
+		<delete file="${buildDirectory}/finalFeaturesVersions.solaris_gtk_sparc.properties" />
+		<delete file="${buildDirectory}/finalFeaturesVersions.win32_win32_x86.properties" />
+		<delete file="${buildDirectory}/finalFeaturesVersions.win32_win32_x86_64.properties" />
+		<delete file="${buildDirectory}/finalPluginsVersions.linux_gtk_x86.properties" />
+		<delete file="${buildDirectory}/finalPluginsVersions.linux_gtk_x86_64.properties" /> 
+		<delete file="${buildDirectory}/finalPluginsVersions.properties" />
+		<delete file="${buildDirectory}/finalPluginsVersions.solaris_gtk_sparc.properties" />
+		<delete file="${buildDirectory}/finalPluginsVersions.win32_win32_x86.properties" />
+		<delete file="${buildDirectory}/finalPluginsVersions.win32_win32_x86_64.properties" />
+		<delete file="${buildDirectory}/package.org.eclipse.pde.build.container.feature.all.xml" />
+		<delete file="${buildDirectory}/package.org.eclipse.pde.build.container.feature.linux.gtk.x86.xml" />
+		<delete file="${buildDirectory}/package.org.eclipse.pde.build.container.feature.linux.gtk.x86_64.xml" />
+		<delete file="${buildDirectory}/package.org.eclipse.pde.build.container.feature.solaris.gtk.sparc.xml" />
+		<delete file="${buildDirectory}/package.org.eclipse.pde.build.container.feature.win32.win32.x86.xml" />
+		<delete file="${buildDirectory}/package.org.eclipse.pde.build.container.feature.win32.win32.x86_64.xml" />
+	</target>
+	
+	
 	<target name="init" description="Copie des sources">
 		<!-- ### Ugly hack pour eviter les antislashs dans repertoire courant ###  -->
 		<path id="pathbuildDirectory">
@@ -55,7 +102,7 @@
 	</target>
 	
 	<!--This target defines the run-order of the targets-->
-	<target name="build" depends="init, pde-build, installer" />
+	<target name="build" depends="clean, init, pde-build, installer" />
 	
 	<target name="test" depends="init">
 		<echo message="${buildDirectory}"/>
