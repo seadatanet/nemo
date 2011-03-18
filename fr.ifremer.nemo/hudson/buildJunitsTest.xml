@@ -12,25 +12,6 @@
 	<property file="build.properties" />
 
 	
-	<!--compilation
-	<target name="pde-build" description="Eclipse PDE Build">
-			<java classname="org.eclipse.equinox.launcher.Main"  fork="true" failonerror="false">
-				<arg value="-initialize" />
-				<arg value="-application" />
-				<arg value="org.eclipse.ant.core.antRunner" />
-				<arg value="-buildfile" />
-				<arg value="${eclipse.lib.dir}/org.eclipse.pde.build_${pdeBuildPluginVersion}/scripts/productBuild/productBuild.xml" />
-				<arg value="-Dtimestamp=${timestamp}" />
-				<arg value="-verbose" />
-				<arg value="-clean" />
-				<classpath>
-					<pathelement location="${eclipse.lib.dir}/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar" />
-				</classpath>
-			</java>
-
-	</target>-->
-	
-	
 	<!-- lancement du test global junit-->
 	<target name="testJ">
 		<junit fork="true" dir="${basedir}">
