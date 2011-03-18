@@ -25,9 +25,9 @@
       </win>
    </launcher>
 
+
    <vm>
    </vm>
-
 
    <plugins>
       <plugin id="com.ibm.icu"/>
@@ -76,6 +76,8 @@
       <plugin id="org.eclipse.ui.cocoa" fragment="true"/>
       <plugin id="org.eclipse.ui.forms"/>
       <plugin id="org.eclipse.ui.workbench"/>
+      <plugin id="org.hamcrest.core"/>
+      <plugin id="org.junit"/>
    </plugins>
 
 
