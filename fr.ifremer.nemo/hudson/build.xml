@@ -6,7 +6,7 @@
 
 	
 	
-	<target name="clean" description="suppression d'anciens fichiers provenant de build précédent si nécéssaire">
+	<target name="clean" description="suppression d'anciens fichiers provenant de build précédent si nécéssaire" depends="init">
 		 <!-- suppression contenu du nemo_izPack/src -->
 		<delete includeemptydirs="true">
 		    <fileset dir="${buildDirectory}/Nemo_IzPack/src" includes="**/*"/>
@@ -102,7 +102,7 @@
 	</target>
 	
 	<!--This target defines the run-order of the targets-->
-	<target name="build" depends="clean, init, pde-build, installer" />
+	<target name="build" depends="clean, pde-build, installer" />
 	
 	<target name="test" depends="init">
 		<echo message="${buildDirectory}"/>
