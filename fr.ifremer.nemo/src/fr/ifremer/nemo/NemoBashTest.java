@@ -142,8 +142,14 @@ public class NemoBashTest
 	{
 		String pwdPath = System.getProperty("user.dir");
 		int index = pwdPath.indexOf("NEMO_product");
-		String path = pwdPath.substring(0, index);
-		dataRootPath = path + "ifremer_datatest";
+		if (index != -1)
+		{
+			String path = pwdPath.substring(0, index);
+			dataRootPath = path + "ifremer_datatest";
+		} else
+		{
+			dataRootPath = pwdPath + File.pathSeparator + "ifremer_datatest" + pwdPath + File.pathSeparator + "trunk";
+		}
 	}
 
 	/**
