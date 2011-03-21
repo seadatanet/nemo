@@ -167,7 +167,9 @@ public class Preformat
 
 			File ficEntree = new File(editFileForm.nomFichier);
 
-			processPreformat(new File[] { ficEntree.getParentFile() }, new String[] { ficEntree.getName() }, ficEntree.getParentFile());
+			processPreformat(new File[]
+			{ ficEntree.getParentFile() }, new String[]
+			{ ficEntree.getName() }, ficEntree.getParentFile());
 
 			editFileForm.nomFichier = ficEntree.getParent() + PF + ficEntree.getName();
 			editFileForm.setFileLoaded(true);
@@ -201,7 +203,8 @@ public class Preformat
 
 			File repertoire = new File(editFileForm.nomRepertoire);
 
-			processPreformat(new File[] { repertoire }, null, repertoire.getParentFile());
+			processPreformat(new File[]
+			{ repertoire }, null, repertoire.getParentFile());
 
 			editFileForm.nomRepertoire = repertoire.getParent() + PF + repertoire.getName();
 			editFileForm.setFileLoaded(true);
@@ -241,11 +244,13 @@ public class Preformat
 		if (inputFile.isFile())
 		{
 
-			processPreformat(new File[] { inputFile.getParentFile() }, new String[] { inputFile.getName() }, inputFile.getParentFile(), true);
+			processPreformat(new File[]
+			{ inputFile.getParentFile() }, new String[]
+			{ inputFile.getName() }, inputFile.getParentFile(), true);
 
 			ficSortie = new File(inputFile.getParent() + PF + inputFile.getName());
 
-		} else if (inputFile.listFiles()[0].isDirectory())
+		} else if (inputFile.listFiles()[0].isDirectory() && (!inputFile.listFiles()[0].toString().endsWith(".svn")))
 		{
 
 			File[] listeRepertoires = inputFile.listFiles();
@@ -261,7 +266,8 @@ public class Preformat
 		} else
 		{
 
-			processPreformat(new File[] { inputFile }, null, inputFile.getParentFile(), true);
+			processPreformat(new File[]
+			{ inputFile }, null, inputFile.getParentFile(), true);
 
 			ficSortie = new File(inputFile.getParent() + PF + inputFile.getName());
 
@@ -283,6 +289,35 @@ public class Preformat
 		Double pourcentEtape2 = 0d;
 		int nbFic = 0;
 
+		// *****************
+		// suppression des repertoires SVN
+		boolean isSVNDirPresent = false;
+		File[] lstRepertoiresWithoutSNV = new
+				File[lstRepertoires.length];
+		for (File rep1 : lstRepertoires)
+		{
+			if (rep1.toString().endsWith(".svn"))
+			{
+				isSVNDirPresent = true;
+				break;
+			}
+		}
+		if (isSVNDirPresent)
+		{
+			lstRepertoiresWithoutSNV = new File[lstRepertoires.length - 1];
+
+			int cpt = 0;
+			for (int i = 0; i < lstRepertoires.length; i++)
+			{
+				if (!lstRepertoires[i].toString().endsWith(".svn"))
+				{
+					lstRepertoiresWithoutSNV[cpt] = lstRepertoires[i];
+					cpt++;
+				}
+			}
+			lstRepertoires = lstRepertoiresWithoutSNV;
+		}
+		// *****************
 		// /////////////////////////////////////////////////
 		// Recuperation du nombres de colonnes //
 		// /////////////////////////////////////////////////
@@ -292,6 +327,22 @@ public class Preformat
 			if (listeFichiers == null)
 			{
 				listeFichiers = new File(_repEntree).list();
+			}
+
+			// on enleve le repertoire .svn s'il existe
+			if (listeFichiers[0].toString().endsWith(".svn"))
+			{
+				String[] listeFichiersWithoutSVN = new String[listeFichiers.length - 1];
+				int cpt = 0;
+				for (int i = 0; i < listeFichiers.length; i++)
+				{
+					if (!listeFichiers[i].endsWith(".svn"))
+					{
+						listeFichiersWithoutSVN[cpt] = listeFichiers[i];
+						cpt++;
+					}
+				}
+				listeFichiers = listeFichiersWithoutSVN;
 			}
 
 			nbFic += listeFichiers.length;
@@ -503,7 +554,8 @@ public class Preformat
 
 					if (!ligneLue.trim().equals(Global.EMPTY_STRING))
 					{
-						switch (endData) {
+						switch (endData)
+						{
 						case EOF:
 						case EMPTY_LINE:
 						case NEXT_START_WITH:

@@ -73,11 +73,16 @@ import fr.ifremer.nemo.util.Global.E_TypeConversion;
 public class NemoBashTest
 {
 	// racine du repertoire contenant les tests
-	public static String dataRootPath = ".." + File.separator + "ifremer_datatest";
+	// public static String dataRootPath = "C:\\Documents" + Global.SPACE +
+	// "and" + Global.SPACE + "Settings" + File.separator + "sbregent" +
+	// File.separator + "Mes" + Global.SPACE + "documents" + File.separator +
+	// "SOPHIE\\NEMO\\NEMO\\workspaceEclipse361\\ifremer_datatest";
+
+	public static String dataRootPath = "";
 	// générer les fichiers en batch et les comparer aux fichiers REFERENCE
 	public static boolean testBatchs = true;
 	// comparer les fichiers manuels (output_eclipse) aux fichiers REFERENCE
-	public static boolean compareManualFiles = true;
+	public static boolean compareManualFiles = false;
 
 	public static String[] testDirAlone =
 		{};
@@ -95,7 +100,7 @@ public class NemoBashTest
 
 	public String datasetRef = Global.EMPTY_STRING;
 	public String cdiSummaryFile = Global.EMPTY_STRING;
-	public boolean couplingTableUpdate = true;
+	public boolean couplingTableUpdate = false;
 	public String couplingTablePrefix = Global.EMPTY_STRING;
 	public static Logger batchLogger;
 	public static Logger testLogger;
@@ -125,11 +130,20 @@ public class NemoBashTest
 		Date actuelle = new Date();
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		String dat = dateFormat.format(actuelle);
+		setDataRootPath();
 
 		testLogger.info("\r\n\r\n\r\n\r\n===================================== " + dat + " =========================\r\n\r\n\r\n\r\n");
 		testLogger.info("test batchs : " + testBatchs);
 		testLogger.info("comp manual files : " + compareManualFiles + "(" + outputManualName + ")");
 
+	}
+
+	public static void setDataRootPath()
+	{
+		String pwdPath = System.getProperty("user.dir");
+		int index = pwdPath.indexOf("NEMO_product");
+		String path = pwdPath.substring(0, index);
+		dataRootPath = path + "ifremer_datatest";
 	}
 
 	/**
@@ -160,7 +174,7 @@ public class NemoBashTest
 		sortDatas = false;
 		datasetRef = Global.EMPTY_STRING;
 		cdiSummaryFile = Global.EMPTY_STRING;
-		couplingTableUpdate = true;
+		couplingTableUpdate = false;
 		couplingTablePrefix = Global.EMPTY_STRING;
 	}
 
@@ -365,7 +379,7 @@ public class NemoBashTest
 		String output = outputAbsolutePath + "\\" + outputName;
 		String model = outputAbsolutePath + "\\" + modelName;
 		couplingTablePrefix = outputAbsolutePath;
-		couplingTableUpdate = true;
+		couplingTableUpdate = false;
 		cdiSummaryFile = outputAbsolutePath + "\\" + "cdiSummary_junit";
 		File mod = new File(model);
 		Nemo.getInstance().resetInstance();
@@ -599,8 +613,8 @@ public class NemoBashTest
 				}
 			} else
 			{
-				// mes += " no test found";
-				// write(mes);
+				mes += " no test found";
+				write(mes);
 			}
 
 		}
