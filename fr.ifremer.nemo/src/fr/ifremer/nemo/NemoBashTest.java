@@ -252,12 +252,13 @@ public class NemoBashTest
 		int cptTests = 0;
 		int cptFail = 0;
 		boolean testFound;
-		System.out.println("dataRootPath" + dataRootPath);
+		System.out.println("dataRootPath" + dataRootPath + "--------");
 		File root = new File(dataRootPath);
 		for (File testDir : root.listFiles())
 		{
 			if (isToTest(testDir.getName()))
 			{
+				System.out.println("testDir: " + testDir.toString());
 				message = new Message();
 				message.dirName = testDir.getName();
 				testFound = false;
