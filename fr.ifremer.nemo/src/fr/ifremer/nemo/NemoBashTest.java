@@ -149,7 +149,7 @@ public class NemoBashTest
 			dataRootPath = path + "ifremer_datatest";
 		} else
 		{
-			dataRootPath = pwdPath + File.pathSeparator + "ifremer_datatest" + pwdPath + File.pathSeparator + "trunk";
+			dataRootPath = pwdPath + File.separator + "ifremer_datatest" + pwdPath + File.separator + "trunk";
 		}
 	}
 
