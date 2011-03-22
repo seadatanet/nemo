@@ -141,7 +141,8 @@ public class NemoBashTest
 	public static void setDataRootPath()
 	{
 		String pwdPath = System.getProperty("user.dir");
-		int index = pwdPath.indexOf("NEMO_product");
+		System.out.println("pwdPath = " + pwdPath + "--------------");
+		int index = pwdPath.indexOf("Nemo_product");
 		if (index != -1)
 		{
 			String path = pwdPath.substring(0, index);
@@ -252,13 +253,13 @@ public class NemoBashTest
 		int cptTests = 0;
 		int cptFail = 0;
 		boolean testFound;
-		System.out.println("dataRootPath" + dataRootPath + "--------");
+		// System.out.println("dataRootPath" + dataRootPath + "--------");
 		File root = new File(dataRootPath);
 		for (File testDir : root.listFiles())
 		{
 			if (isToTest(testDir.getName()))
 			{
-				System.out.println("testDir: " + testDir.toString());
+				// System.out.println("testDir: " + testDir.toString());
 				message = new Message();
 				message.dirName = testDir.getName();
 				testFound = false;
