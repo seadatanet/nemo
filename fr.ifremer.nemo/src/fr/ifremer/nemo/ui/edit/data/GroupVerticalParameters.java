@@ -57,17 +57,16 @@ public class GroupVerticalParameters
 		// Depth below sea surface
 		Label labelDBSSurf = new Label(group, SWT.NO_BACKGROUND);
 		labelDBSSurf.setText(Messages.edit_data_verticalParameters_depthBSSurf);
-		comboDBSSurf = new Combo(group, SWT.BORDER);
-
+		comboDBSSurf = new Combo(group, SWT.BORDER | SWT.READ_ONLY);
 		// Depth below sea bed
 		Label labelDBSBed = new Label(group, SWT.NO_BACKGROUND);
 		labelDBSBed.setText(Messages.edit_data_verticalParameters_depthBSBed);
-		comboDBSBed = new Combo(group, SWT.BORDER);
+		comboDBSBed = new Combo(group, SWT.BORDER | SWT.READ_ONLY);
 
 		// Pressure
 		Label labelP = new Label(group, SWT.NO_BACKGROUND);
 		labelP.setText(Messages.edit_data_verticalParameters_pressure);
-		comboP = new Combo(group, SWT.BORDER);
+		comboP = new Combo(group, SWT.BORDER | SWT.READ_ONLY);
 
 		init();
 	}
