@@ -142,7 +142,7 @@ public class NemoBashTest
 	{
 		String pwdPath = System.getProperty("user.dir");
 		System.out.println("pwdPath = " + pwdPath + "--------------");
-		int index = pwdPath.indexOf("Nemo_product");
+		int index = pwdPath.indexOf("NEMO_product");
 		if (index != -1)
 		{
 			String path = pwdPath.substring(0, index);
