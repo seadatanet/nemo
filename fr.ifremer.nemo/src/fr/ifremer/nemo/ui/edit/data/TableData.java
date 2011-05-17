@@ -20,6 +20,7 @@ import org.eclipse.swt.widgets.Text;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.domain.LabelParameterManager;
 import fr.ifremer.nemo.domain.MediaDomain;
 import fr.ifremer.nemo.ui.FilteredTableFactory;
 import fr.ifremer.nemo.ui.Utils;
@@ -89,13 +90,37 @@ public class TableData
 	private ParameterFilteredTable myParameterFilteredTable;
 
 	/**
-	 * liste des colonnes modifiables
-	 */
-	public ArrayList<Integer> columnsWritable;
-	/**
 	 * liste des titres de colonnes (ordonnée)
 	 */
-	private HashMap<Integer, String> columnsMap;
+	private HashMap<Integer, TableDataColumn> columnsMap;
+	private final HashMap<String, Integer> colNbById = new HashMap<String, Integer>();
+
+	/**
+	 * columns IDs
+	 */
+
+	private static String COL_CODE = "COL_CODE";
+	private static String COL_USERLABEL = "COL_USERLABEL";
+	private static String COL_UNIT = "COL_UNIT";
+	private static String COL_CONVERSION = "COL_CONVERSION";
+	private static String COL_TEST = "COL_TEST";
+	private static String COL_START = "COL_START";
+	private static String COL_END = "COL_END";
+	private static String COL_FORMAT = "COL_FORMAT";
+	private static String COL_VALUE_IN = "COL_VALUE_IN";
+	private static String COL_VALUE_OUT = "COL_VALUE_OUT";
+	private static String COL_TEST_IN = "COL_TEST_IN";
+	private static String COL_TEST_OUT = "COL_TEST_OUT";
+	private static String COL_START_FLAG = "COL_START_FLAG";
+	private static String COL_END_FLAG = "COL_END_FLAG";
+	private static String COL_UNIT_CODE = "COL_UNIT_CODE";
+
+	private final String[] colOrder =
+	{ COL_CODE, COL_USERLABEL, COL_UNIT, COL_CONVERSION, COL_TEST, COL_START, COL_END,
+				COL_FORMAT,
+				COL_VALUE_IN, COL_VALUE_OUT, COL_TEST_IN, COL_TEST_OUT, COL_START_FLAG,
+				COL_END_FLAG, COL_UNIT_CODE };
+
 	/**
 	 * constructeur initialise automatiquement les typesWS
 	 */
@@ -106,35 +131,62 @@ public class TableData
 		initTypesWS();
 		initColumnsMap();
 
-		// definit les colonnes pouvant être modfifiées par l'utilisateur
-		columnsWritable = new ArrayList<Integer>();
-		columnsWritable.add(2); // label_conversion
-		columnsWritable.add(6);// label_format
-		columnsWritable.add(7);// table_label_valueIn
-		columnsWritable.add(8);// table_label_valueOut);
 		myGroupVerticalParameters = Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters();
 	}
 
+	private boolean isLabelWritable()
+	{
+		boolean res = false;
+		return Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToODV() &&
+				!Nemo.getInstance().getViewMain().getMyRulesManager().isDataListTypeP091();
+	}
+
 	/**
-	 * initialise les noms des colonnes
+	 * initialise les colonnes
 	 */
 	private void initColumnsMap()
 	{
-		columnsMap = new HashMap<Integer, String>();
-		columnsMap.put(0, Messages.table_label_code);
-		columnsMap.put(1, Messages.table_label_unit);
-		columnsMap.put(2, Messages.label_conversion);
-		columnsMap.put(3, Messages.label_test);
-		columnsMap.put(4, Messages.label_start);
-		columnsMap.put(5, Messages.label_end);
-		columnsMap.put(6, Messages.label_format);
-		columnsMap.put(7, Messages.table_label_valueIn);
-		columnsMap.put(8, Messages.table_label_valueOut);
-		columnsMap.put(9, Messages.table_label_testIn);
-		columnsMap.put(10, Messages.table_label_testOut);
-		columnsMap.put(11, Messages.table_label_startFlag);
-		columnsMap.put(12, Messages.table_label_endFlag);
-		columnsMap.put(13, Global.EMPTY_STRING);// unite code non visible
+		boolean isLabelWritable = true;
+
+		// init col nb by id
+		for (int i = 0; i < colOrder.length; i++)
+		{
+			colNbById.put(colOrder[i], i);
+		}
+
+		TableDataColumn col;
+		columnsMap = new HashMap<Integer, TableDataColumn>();
+
+		col = new TableDataColumn(COL_CODE, colNbById.get(COL_CODE), Messages.table_label_code, 100, false);
+		columnsMap.put(col.pos, col);
+		col = new TableDataColumn(COL_USERLABEL, colNbById.get(COL_USERLABEL), Messages.table_label_userlabel, 100, isLabelWritable());
+		columnsMap.put(col.pos, col);
+		col = new TableDataColumn(COL_UNIT, colNbById.get(COL_UNIT), Messages.table_label_unit, 90, false);
+		columnsMap.put(col.pos, col);
+		col = new TableDataColumn(COL_CONVERSION, colNbById.get(COL_CONVERSION), Messages.label_conversion, 70, true);
+		columnsMap.put(col.pos, col);
+		col = new TableDataColumn(COL_TEST, colNbById.get(COL_TEST), Messages.label_test, 50, false);
+		columnsMap.put(col.pos, col);
+		col = new TableDataColumn(COL_START, colNbById.get(COL_START), Messages.label_start, 50, false);
+		columnsMap.put(col.pos, col);
+		col = new TableDataColumn(COL_END, colNbById.get(COL_END), Messages.label_end, 50, false);
+		columnsMap.put(col.pos, col);
+		col = new TableDataColumn(COL_FORMAT, colNbById.get(COL_FORMAT), Messages.label_format, 70, true);
+		columnsMap.put(col.pos, col);
+		col = new TableDataColumn(COL_VALUE_IN, colNbById.get(COL_VALUE_IN), Messages.table_label_valueIn, 50, true);
+		columnsMap.put(col.pos, col);
+		col = new TableDataColumn(COL_VALUE_OUT, colNbById.get(COL_VALUE_OUT), Messages.table_label_valueOut, 50, true);
+		columnsMap.put(col.pos, col);
+		col = new TableDataColumn(COL_TEST_IN, colNbById.get(COL_TEST_IN), Messages.table_label_testIn, 50, false);
+		columnsMap.put(col.pos, col);
+		col = new TableDataColumn(COL_TEST_OUT, colNbById.get(COL_TEST_OUT), Messages.table_label_testOut, 50, false);
+		columnsMap.put(col.pos, col);
+		col = new TableDataColumn(COL_START_FLAG, colNbById.get(COL_START_FLAG), Messages.table_label_startFlag, 50, false);
+		columnsMap.put(col.pos, col);
+		col = new TableDataColumn(COL_END_FLAG, colNbById.get(COL_END_FLAG), Messages.table_label_endFlag, 50, false);
+		columnsMap.put(col.pos, col);
+		col = new TableDataColumn(COL_UNIT_CODE, colNbById.get(COL_UNIT_CODE), Global.EMPTY_STRING, 0, false);
+		columnsMap.put(col.pos, col);
 	}
 
 	public void reinitTable()
@@ -198,84 +250,19 @@ public class TableData
 
 		myTable.setHeaderVisible(true);
 		myTable.setLinesVisible(true);
-		TableColumn tableColumn0 = new TableColumn(myTable, SWT.NONE);
-		// tableColumn0.setWidth(110);
-		tableColumn0.setWidth(100);
-		tableColumn0.setText(columnsMap.get(0).toUpperCase());
 
-		TableColumn tableColumn1 = new TableColumn(myTable, SWT.NONE);
-		tableColumn1.setWidth(90);
-		tableColumn1.setText(columnsMap.get(1));
-
-		TableColumn tableColumn2 = new TableColumn(myTable, SWT.NONE);
-		// tableColumn2.setWidth(100);
-		tableColumn2.setWidth(70);
-		tableColumn2.setText(columnsMap.get(2));
-		tableColumn2.setAlignment(SWT.RIGHT);
-
-		TableColumn tableColumn3 = new TableColumn(myTable, SWT.NONE);
-		tableColumn3.setWidth(50);
-		tableColumn3.setText(columnsMap.get(3));
-		tableColumn3.setAlignment(SWT.RIGHT);
-
-		TableColumn tableColumn4 = new TableColumn(myTable, SWT.NONE);
-		// tableColumn4.setWidth(50);
-		tableColumn4.setWidth(45);
-		tableColumn4.setText(columnsMap.get(4));
-		tableColumn4.setAlignment(SWT.RIGHT);
-
-		TableColumn tableColumn5 = new TableColumn(myTable, SWT.NONE);
-		// tableColumn5.setWidth(50);
-		tableColumn5.setWidth(45);
-		tableColumn5.setText(columnsMap.get(5));
-		tableColumn5.setAlignment(SWT.RIGHT);
-
-		TableColumn tableColumn6 = new TableColumn(myTable, SWT.NONE);
-		// tableColumn6.setWidth(100);
-		tableColumn6.setWidth(50);
-		tableColumn6.setText(columnsMap.get(6));
-		tableColumn6.setAlignment(SWT.RIGHT);
-
-		TableColumn tableColumn7 = new TableColumn(myTable, SWT.NONE);
-		// tableColumn7.setWidth(100);
-		tableColumn7.setWidth(90);
-		tableColumn7.setText(columnsMap.get(7));
-		tableColumn7.setAlignment(SWT.RIGHT);
-
-		TableColumn tableColumn8 = new TableColumn(myTable, SWT.NONE);
-		// tableColumn8.setWidth(100);
-		tableColumn8.setWidth(90);
-		tableColumn8.setText(columnsMap.get(8));
-		tableColumn8.setAlignment(SWT.RIGHT);
-
-		TableColumn tableColumn9 = new TableColumn(myTable, SWT.NONE);
-		// tableColumn9.setWidth(65);
-		tableColumn9.setWidth(75);
-		tableColumn9.setText(columnsMap.get(9));
-		tableColumn9.setAlignment(SWT.RIGHT);
-
-		TableColumn tableColumn10 = new TableColumn(myTable, SWT.NONE);
-		// tableColumn10.setWidth(65);
-		tableColumn10.setWidth(75);
-		tableColumn10.setText(columnsMap.get(10));
-		tableColumn10.setAlignment(SWT.RIGHT);
-
-		TableColumn tableColumn11 = new TableColumn(myTable, SWT.NONE);
-		tableColumn11.setWidth(65);
-		tableColumn11.setText(columnsMap.get(11));
-		tableColumn11.setAlignment(SWT.RIGHT);
-
-		TableColumn tableColumn12 = new TableColumn(myTable, SWT.NONE);
-		tableColumn12.setWidth(65);
-		tableColumn12.setText(columnsMap.get(12));
-		tableColumn12.setAlignment(SWT.RIGHT);
-
-		// FAE 6542
-		TableColumn tableColumn13 = new TableColumn(myTable, SWT.NONE);
-		tableColumn13.setWidth(0);
-		tableColumn13.setText(columnsMap.get(13));
-		tableColumn13.setAlignment(SWT.RIGHT);
-
+		for (int i = 0; i < columnsMap.size(); i++)
+		{
+			TableColumn tableColumn = new TableColumn(myTable, SWT.NONE);
+			tableColumn.setWidth(columnsMap.get(i).width);
+			tableColumn.setText(columnsMap.get(i).label.toUpperCase());
+			if (columnsMap.get(i).id.equals(COL_USERLABEL))
+			{
+				// columnsMap.get(i).setWritable(isLabelWritable());
+				columnsMap.get(i).enable(isLabelWritable());
+			}
+			// tableColumn.setAlignment(SWT.RIGHT);
+		}
 		initTable();
 
 		// agrandissement de la table
@@ -453,7 +440,8 @@ public class TableData
 					{
 						// edition des colonnes autorisées en écriture
 						// uniquement
-						if (columnsWritable.contains(colNumber))
+
+						if (columnsMap.get(colNumber).writable)
 						{
 							Rectangle rect = itemTmp.getBounds(colNumber);
 							if (rect.contains(pt))
@@ -534,7 +522,8 @@ public class TableData
 			public void handleEvent(Event e)
 			{
 				// table.forceFocus();
-				Utils.injectData(Nemo.getInstance().getViewMain().getEditDataForm().getTextAreaData(), 4, 5);
+				Utils.injectData(Nemo.getInstance().getViewMain().getEditDataForm().getTextAreaData(),
+						colNbById.get(COL_START), colNbById.get(COL_END));
 				majTypeData();
 				// refresh de la table
 				razAndRecreateTable();
@@ -671,7 +660,7 @@ public class TableData
 			public void handleEvent(Event e)
 			{
 				table.forceFocus();
-				Utils.injectData(Nemo.getInstance().getViewMain().getEditDataForm().getTextAreaData(), 11, 12);
+				Utils.injectData(Nemo.getInstance().getViewMain().getEditDataForm().getTextAreaData(), colNbById.get(COL_TEST_IN), colNbById.get(COL_TEST_OUT));
 
 				Utils.invalidEtapes();
 			}
@@ -684,10 +673,10 @@ public class TableData
 			public void handleEvent(Event e)
 			{
 				table.forceFocus();
-				table.getItems()[table.getSelectionIndex()].setText(9, Global.EMPTY_STRING);
-				table.getItems()[table.getSelectionIndex()].setText(10, Global.EMPTY_STRING);
-				table.getItems()[table.getSelectionIndex()].setText(11, Global.EMPTY_STRING);
-				table.getItems()[table.getSelectionIndex()].setText(12, Global.EMPTY_STRING);
+				table.getItems()[table.getSelectionIndex()].setText(colNbById.get(COL_TEST_IN), Global.EMPTY_STRING);
+				table.getItems()[table.getSelectionIndex()].setText(colNbById.get(COL_TEST_OUT), Global.EMPTY_STRING);
+				table.getItems()[table.getSelectionIndex()].setText(colNbById.get(COL_START_FLAG), Global.EMPTY_STRING);
+				table.getItems()[table.getSelectionIndex()].setText(colNbById.get(COL_END_FLAG), Global.EMPTY_STRING);
 				types.get(table.getSelectionIndex()).setDebutFlag(null);
 				types.get(table.getSelectionIndex()).setFinFlag(null);
 
@@ -746,39 +735,56 @@ public class TableData
 		for (int i = 0; i < types.size(); i++)
 		{
 			TableItem item = new TableItem(myTable, SWT.NONE);
+			String code;
+			String label = "";
+
 			if (types.get(i).isP011())
 			{
-				item.setText(new String[]
-				{
-						types.get(i).getEntryKeyP011() + Global.SEP
-								+ types.get(i).getEntryTermP011(),
-						types.get(i).getUnite(), types.get(i).getConversion(),
-						types.get(i).getTest(),
-						String.valueOf(types.get(i).getDebut()),
-						String.valueOf(types.get(i).getFin()),
-						types.get(i).getFormat(), types.get(i).getEntree(),
-						types.get(i).getSortie(), types.get(i).getTestIn(),
-						types.get(i).getTestOut(), types.get(i).getDebutFlag(),
-						types.get(i).getFinFlag(),
-						// FAE 6542
-						types.get(i).getUniteCode() });
+				code = types.get(i).getEntryKeyP011() + Global.SEP
+						+ types.get(i).getEntryTermP011();
+
 			} else
 			{
-
-				item.setText(new String[]
-				{
-						types.get(i).getFormattedCodeAndName(),
-						types.get(i).getUnite(), types.get(i).getConversion(),
-						types.get(i).getTest(),
-						String.valueOf(types.get(i).getDebut()),
-						String.valueOf(types.get(i).getFin()),
-						types.get(i).getFormat(), types.get(i).getEntree(),
-						types.get(i).getSortie(), types.get(i).getTestIn(),
-						types.get(i).getTestOut(), types.get(i).getDebutFlag(),
-						types.get(i).getFinFlag(),
-						// FAE 6542
-						types.get(i).getUniteCode() });
+				code = types.get(i).getFormattedCodeAndName();
 			}
+
+			if (types.get(i).isP011())
+			{
+				if (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToODV())
+				{
+					String userLabel = LabelParameterManager.getInstance().getUserLabel(types.get(i).getEntryKeyP011());
+					if (userLabel != null)
+					{
+						label = userLabel;
+					} else
+					{
+						// label = types.get(i).getEntryKeyP011();
+					}
+				} else
+				// medatlas
+				{
+					// label = types.get(i).getEntryKeyP011();
+				}
+			} else
+			{
+				// label = types.get(i).getEntryKey();
+			}
+			item.setText(new String[]
+									{
+											code,
+											label,
+											types.get(i).getUnite(),
+											types.get(i).getConversion(),
+											types.get(i).getTest(),
+											String.valueOf(types.get(i).getDebut()),
+											String.valueOf(types.get(i).getFin()),
+											types.get(i).getFormat(), types.get(i).getEntree(),
+											types.get(i).getSortie(), types.get(i).getTestIn(),
+											types.get(i).getTestOut(), types.get(i).getDebutFlag(),
+											types.get(i).getFinFlag(),
+											// FAE 6542
+											types.get(i).getUniteCode() });
+
 		}
 
 	}
@@ -1062,9 +1068,9 @@ public class TableData
 		nbre = myTable.getItemCount();
 		for (int i = 0; i < nbre; i++)
 		{
-			// 4e position = start
-			// 2e position = conversion
-			if ((!myTable.getItem(i).getText(4).equals(Global.EMPTY_STRING)) && (!myTable.getItem(i).getText(2).equals(Global.EMPTY_STRING)))
+
+			if ((!myTable.getItem(i).getText(colNbById.get(COL_START)).equals(Global.EMPTY_STRING))
+					&& (!myTable.getItem(i).getText(colNbById.get(COL_CONVERSION)).equals(Global.EMPTY_STRING)))
 			{
 				// on a selectionne un debut et une fin et il y a une conversion
 				// e faire
@@ -1074,27 +1080,28 @@ public class TableData
 
 				try
 				{
-					selection = ligne.substring(Integer.valueOf(myTable.getItem(i).getText(4)) - 1, Integer.valueOf(myTable.getItem(i).getText(5))).trim();
+					selection = ligne.substring(Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_START))) - 1,
+								Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_END)))).trim();
 				} catch (Exception e)
 				{
-					System.out.println("erreur substring " + myTable.getItem(i).getText(0));
+					System.out.println("erreur substring " + myTable.getItem(i).getText(colNbById.get(COL_CODE)));
 					ok = false;
-					Utils.messageErreurAppend(Messages.Etape_98 + " " + myTable.getItem(i).getText(0));
+					Utils.messageErreurAppend(Messages.Etape_98 + " " + myTable.getItem(i).getText(colNbById.get(COL_CODE)));
 					break;
 				}
 				// on formate puis on reaffiche la liste
 				try
 				{
-					String formatString = myTable.getItem(i).getText(6);
+					String formatString = myTable.getItem(i).getText(colNbById.get(COL_FORMAT));
 					String type = formatString.substring(formatString.length() - 1);
 
-					if (selection.equals(myTable.getItem(i).getText(7)))
+					if (selection.equals(myTable.getItem(i).getText(colNbById.get(COL_VALUE_IN))))
 					{
 
 						// entree par defaut, le test est la valeur de sortie
 						// par defaut formatee
 						String fmOut = Global.EMPTY_STRING;
-						String outputDefaultValue = myTable.getItem(i).getText(8);
+						String outputDefaultValue = myTable.getItem(i).getText(colNbById.get(COL_VALUE_OUT));
 
 						// Float ou Decimal ?
 						if (type.equals("f") || type.equals("F")) { //$NON-NLS-1$//$NON-NLS-2$
@@ -1121,13 +1128,13 @@ public class TableData
 						parser.addStandardFunctions();
 						parser.addStandardConstants();
 						parser.addVariable("x", Float.valueOf(selection)); //$NON-NLS-1$
-						parser.parseExpression(myTable.getItem(i).getText(2));
+						parser.parseExpression(myTable.getItem(i).getText(colNbById.get(COL_CONVERSION)));
 						resultJEP = parser.getValue();
 
 						if (type.equals("f") || type.equals("F")) { //$NON-NLS-1$//$NON-NLS-2$
-							resultat = String.format(myTable.getItem(i).getText(6), new Float(resultJEP));
+							resultat = String.format(myTable.getItem(i).getText(colNbById.get(COL_FORMAT)), new Float(resultJEP));
 						} else if (type.equals("d") || type.equals("D")) { //$NON-NLS-1$ //$NON-NLS-2$
-							resultat = String.format(myTable.getItem(i).getText(6), (Double.valueOf(resultJEP)).intValue());
+							resultat = String.format(myTable.getItem(i).getText(colNbById.get(COL_FORMAT)), (Double.valueOf(resultJEP)).intValue());
 						} else
 						{
 							// error
@@ -1145,13 +1152,15 @@ public class TableData
 				types.get(i).setTest(resultat);
 			}
 
-			if ((!myTable.getItem(i).getText(11).equals(Global.EMPTY_STRING)) && (!myTable.getItem(i).getText(12).equals(Global.EMPTY_STRING)))
+			if ((!myTable.getItem(i).getText(colNbById.get(COL_START_FLAG)).equals(Global.EMPTY_STRING))
+					&& (!myTable.getItem(i).getText(colNbById.get(COL_END_FLAG)).equals(Global.EMPTY_STRING)))
 			{
 
 				MediaDomain mediaDomain = Nemo.getInstance().getDomain().getMedia();
 				ligne = Utils.lignesBrutes.get(mediaDomain.getModel().getFileHeader() + mediaDomain.getStationHeaderNumberLines() + 1);
 
-				selection = ligne.substring(Integer.valueOf(myTable.getItem(i).getText(11)) - 1, Integer.valueOf(myTable.getItem(i).getText(12))).trim();
+				selection = ligne.substring(Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_START_FLAG))) - 1,
+							Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_END_FLAG)))).trim();
 
 				types.get(i).setTestIn(selection);
 
@@ -1193,24 +1202,34 @@ public class TableData
 		{
 			if (!types.get(i).isP011())
 			{
-				types.get(i).setEntryKeyAndEntryTerm(myTable.getItem(i).getText(0));
+				types.get(i).setEntryKeyAndEntryTerm(myTable.getItem(i).getText(colNbById.get(COL_CODE)));
 			}
-			types.get(i).setUnite(myTable.getItem(i).getText(1));
-			types.get(i).setConversion(myTable.getItem(i).getText(2));
-			types.get(i).setTest(myTable.getItem(i).getText(3));
-			types.get(i).setDebut(Integer.valueOf(myTable.getItem(i).getText(4)));
-			types.get(i).setFin(Integer.valueOf(myTable.getItem(i).getText(5)));
-			types.get(i).setFormat(myTable.getItem(i).getText(6));
-			types.get(i).setEntree(myTable.getItem(i).getText(7));
-			types.get(i).setSortie(myTable.getItem(i).getText(8));
+			String userLabel = myTable.getItem(i).getText(colNbById.get(COL_USERLABEL));
 
-			if (!myTable.getItem(i).getText(11).equals(Global.EMPTY_STRING) && !myTable.getItem(i).getText(12).equals(Global.EMPTY_STRING))
+			if (!userLabel.equals(Global.EMPTY_STRING))
 			{
-				types.get(i).setDebutFlag(myTable.getItem(i).getText(11));
-				types.get(i).setFinFlag(myTable.getItem(i).getText(12));
+				System.out.println("p11Label " + types.get(i).getEntryKeyP011() + " userLabel: " + userLabel);
+				LabelParameterManager.getInstance().updateLabel(types.get(i).getEntryKeyP011(), userLabel);
+			}
+			// types.get(i).setUserLabel(myTable.getItem(i).getText(colNbById.get(COL_USERLABEL)));
+
+			types.get(i).setUnite(myTable.getItem(i).getText(colNbById.get(COL_UNIT)));
+			types.get(i).setConversion(myTable.getItem(i).getText(colNbById.get(COL_CONVERSION)));
+			types.get(i).setTest(myTable.getItem(i).getText(colNbById.get(COL_TEST)));
+			types.get(i).setDebut(Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_START))));
+			types.get(i).setFin(Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_END))));
+			types.get(i).setFormat(myTable.getItem(i).getText(colNbById.get(COL_FORMAT)));
+			types.get(i).setEntree(myTable.getItem(i).getText(colNbById.get(COL_VALUE_IN)));
+			types.get(i).setSortie(myTable.getItem(i).getText(colNbById.get(COL_VALUE_OUT)));
+
+			if (!myTable.getItem(i).getText(colNbById.get(COL_START_FLAG)).equals(Global.EMPTY_STRING)
+					&& !myTable.getItem(i).getText(colNbById.get(COL_END_FLAG)).equals(Global.EMPTY_STRING))
+			{
+				types.get(i).setDebutFlag(myTable.getItem(i).getText(colNbById.get(COL_START_FLAG)));
+				types.get(i).setFinFlag(myTable.getItem(i).getText(colNbById.get(COL_END_FLAG)));
 			}
 			// FAE 6542
-			types.get(i).setUniteCode(myTable.getItem(i).getText(13));
+			types.get(i).setUniteCode(myTable.getItem(i).getText(colNbById.get(COL_UNIT_CODE)));
 		}
 	}
 
@@ -1262,9 +1281,9 @@ public class TableData
 		if (selectedRow > -1)
 		{
 			TableItem item = myTable.getItem(selectedRow);
-			item.setText(1, typeUnit.getTerm());
+			item.setText(colNbById.get(COL_UNIT), typeUnit.getTerm());
 			// FAE 6542
-			item.setText(13, typeUnit.getUnitKey());
+			item.setText(colNbById.get(COL_UNIT_CODE), typeUnit.getUnitKey());
 		}
 	}
 
@@ -1274,8 +1293,8 @@ public class TableData
 		if (selectedRow > -1)
 		{
 			TableItem item = myTable.getItem(selectedRow);
-			item.setText(6, typeFormat.getFormat());
-			item.setText(8, typeFormat.getExample());
+			item.setText(colNbById.get(COL_FORMAT), typeFormat.getFormat());
+			item.setText(colNbById.get(COL_VALUE_OUT), typeFormat.getExample());
 		}
 	}
 

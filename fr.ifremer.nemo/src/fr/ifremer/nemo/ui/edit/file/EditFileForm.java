@@ -1107,6 +1107,11 @@ public class EditFileForm extends EditForm
 		return radioFichier.getSelection();
 	}
 
+	public boolean isCruiseIsADir()
+	{
+		return radioDossier.getSelection();
+	}
+
 	public Text getTextSeparateur()
 	{
 		return textSeparateur;

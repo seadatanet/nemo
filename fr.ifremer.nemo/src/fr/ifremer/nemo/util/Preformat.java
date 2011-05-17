@@ -168,8 +168,8 @@ public class Preformat
 			File ficEntree = new File(editFileForm.nomFichier);
 
 			processPreformat(new File[]
-			{ ficEntree.getParentFile() }, new String[]
-			{ ficEntree.getName() }, ficEntree.getParentFile());
+										{ ficEntree.getParentFile() }, new String[]
+																				{ ficEntree.getName() }, ficEntree.getParentFile());
 
 			editFileForm.nomFichier = ficEntree.getParent() + PF + ficEntree.getName();
 			editFileForm.setFileLoaded(true);
@@ -198,13 +198,31 @@ public class Preformat
 			{
 				editFileForm.getTextAreaFile().setText(Utils.texteBrut);
 			}
+		} else if (editFileForm.isCruiseIsADir())
+		{
+			File repertoire = new File(editFileForm.nomRepertoire);
+			repSortie = new File(repertoire.getParent() + PF + repertoire.getName());
+			if (!repSortie.exists())
+			{
+				repSortie.mkdirs();
+			}
+			processPreformat(new File[]
+										{ repertoire }, null, repSortie);
+
+			editFileForm.nomRepertoire = repertoire.getParent() + PF + repertoire.getName();
+			editFileForm.setFileLoaded(true);
+
+			if (Utils.findFiles(editFileForm.nomRepertoire, false))
+			{
+				editFileForm.getTextAreaFile().setText(Utils.texteBrut);
+			}
 		} else
 		{
 
 			File repertoire = new File(editFileForm.nomRepertoire);
 
 			processPreformat(new File[]
-			{ repertoire }, null, repertoire.getParentFile());
+										{ repertoire }, null, repertoire.getParentFile());
 
 			editFileForm.nomRepertoire = repertoire.getParent() + PF + repertoire.getName();
 			editFileForm.setFileLoaded(true);
@@ -250,7 +268,9 @@ public class Preformat
 
 			ficSortie = new File(inputFile.getParent() + PF + inputFile.getName());
 
-		} else if (inputFile.listFiles()[0].isDirectory() && (!inputFile.listFiles()[0].toString().endsWith(".svn")))
+		} else if (inputFile.listFiles()[0].isDirectory() &&
+				(!inputFile.listFiles()[0].toString().endsWith(".svn")))
+
 		{
 
 			File[] listeRepertoires = inputFile.listFiles();
@@ -330,7 +350,7 @@ public class Preformat
 			}
 
 			// on enleve le repertoire .svn s'il existe
-			if (listeFichiers[0].toString().endsWith(".svn"))
+			if (listeFichiers != null && listeFichiers[0].toString().endsWith(".svn"))
 			{
 				String[] listeFichiersWithoutSVN = new String[listeFichiers.length - 1];
 				int cpt = 0;

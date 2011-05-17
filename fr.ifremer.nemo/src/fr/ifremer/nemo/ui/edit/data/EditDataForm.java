@@ -24,6 +24,7 @@ import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_MesureType;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Messages;
 
 public class EditDataForm extends EditForm
@@ -73,7 +74,8 @@ public class EditDataForm extends EditForm
 		// bouton validate
 		createButtonValidate();
 		buttonValidate
-            .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter()
+				{
 					@Override
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e)
@@ -87,7 +89,8 @@ public class EditDataForm extends EditForm
 		// bouton collapse all / expand all
 		createButtonExpand();
 
-        // groupe de selection du dataList (pour selectionner la liste à utiliser: P091, P011viaP091 ou P011viaP021)
+		// groupe de selection du dataList (pour selectionner la liste à
+		// utiliser: P091, P011viaP091 ou P011viaP021)
 		createGroupDataList();
 
 		// groupe de selection du type de mesure (sous l'eau ou dans le sol)
@@ -121,13 +124,14 @@ public class EditDataForm extends EditForm
 		// nom du model
 		String modelName = Nemo.getInstance().getNomModele();
 
-        if (myTableData.getTypes() != null && !myTableData.getTypes().isEmpty()){
+		if (myTableData.getTypes() != null && !myTableData.getTypes().isEmpty())
+		{
 			myTableData.razAndRecreateTable();
-        }
-        else if (!Global.EMPTY_STRING.equals(modelName)){
+		} else if (!Global.EMPTY_STRING.equals(modelName))
+		{
 			fillFromModel();
-        }
-        else{
+		} else
+		{
 			myTableData.fillTypes();
 		}
 	}
@@ -205,22 +209,34 @@ public class EditDataForm extends EditForm
 		// refresh de la table de l'onglet Data
 		myTableData.razAndRecreateTable();
 		// update dataList to use
+
 		DataListTypeEnum dataList = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
+		E_TypeConversion conv = Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType();
+		if (conv == E_TypeConversion.MEDATLAS && dataList == dataList.P011_VIA_P021)
+		{
+			dataList = DataListTypeEnum.UNKNOWN;
+			Nemo.getInstance().getDomain().getData().getModel().setDataListType(dataList);
+
+		}
 		Nemo.getInstance().getViewMain().getMyRulesManager().updateFromModel(dataList);
 		// update mesureType to use
 		E_MesureType mesureType = Nemo.getInstance().getDomain().getData().getModel().getMesureType();
 		Nemo.getInstance().getViewMain().getMyRulesManager().updateFromModel(mesureType);
-		// update vertical params
-		VerticalParametersList verticParams = Nemo.getInstance().getDomain().getData().getModel().getVerticalParametersList();
-		Nemo.getInstance().getViewMain().getMyRulesManager().updateFromModel(verticParams);
 
-		// remplissage des parametres mesures APRES le datatype
-		for (ParameterModel paraCourant : parameterModels)
+		if (dataList != DataListTypeEnum.UNKNOWN)
 		{
-			TypeData typeData = new TypeData(paraCourant);
-			myTableData.addType(typeData);
+			// remplissage des parametres mesures APRES le datatype
+			for (ParameterModel paraCourant : parameterModels)
+			{
+				TypeData typeData = new TypeData(paraCourant);
+				myTableData.addType(typeData);
+			}
 		}
-
+		// BGT: correction bug: update vertical params APRES l'ajout des
+		// parameters a la table
+		VerticalParametersList verticParams =
+				Nemo.getInstance().getDomain().getData().getModel().getVerticalParametersList();
+		Nemo.getInstance().getViewMain().getMyRulesManager().updateFromModel(verticParams);
 	}
 
 	public void enableP011viaP021(boolean enabled)
@@ -230,6 +246,7 @@ public class EditDataForm extends EditForm
 
 	public void selectDataList(DataListTypeEnum theDataList)
 	{
+		RulesManager rulesManager = Nemo.getInstance().getViewMain().getMyRulesManager();
 		button_P091.setSelection(false);
 		button_P011viaP091.setSelection(false);
 		button_P011viaP021.setSelection(false);
@@ -247,8 +264,8 @@ public class EditDataForm extends EditForm
 			button_P011viaP021.setSelection(true);
 		}
 
+	}
 
-    }
 	public void selectMesureType(E_MesureType mesureType)
 	{
 		mesType_belowSeaSurface.setSelection(false);
@@ -257,8 +274,7 @@ public class EditDataForm extends EditForm
 		if (mesureType == E_MesureType.BSBED)
 		{
 			mesType_belowSeaBed.setSelection(true);
-        }
-        else if(mesureType == E_MesureType.BSSURF)
+		} else if (mesureType == E_MesureType.BSSURF)
 		{
 			mesType_belowSeaSurface.setSelection(true);
 		}
@@ -270,12 +286,10 @@ public class EditDataForm extends EditForm
 		if (button_P091.getSelection())
 		{
 			res = DataListTypeEnum.P091;
-        }
-        else if(button_P011viaP091.getSelection())
+		} else if (button_P011viaP091.getSelection())
 		{
 			res = DataListTypeEnum.P011_VIA_P091;
-        }
-        else if(button_P011viaP021.getSelection())
+		} else if (button_P011viaP021.getSelection())
 		{
 			res = DataListTypeEnum.P011_VIA_P021;
 		}

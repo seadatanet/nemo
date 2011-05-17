@@ -86,6 +86,7 @@ public class Messages
 	public static String view_convert_summary_updateCouplingTableInfo;
 	public static String table_label_meta;
 	public static String table_label_code;
+	public static String table_label_userlabel;
 	public static String table_label_testIn;
 	public static String table_label_testOut;
 	public static String table_label_unit;

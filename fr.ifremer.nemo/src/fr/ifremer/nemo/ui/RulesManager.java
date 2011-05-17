@@ -1,8 +1,9 @@
-/* ============================================================================
- * Nom du fichier	: RulesManager.java
- * Auteur			: sbregent
- * Date				: 29 nov. 10
- * Copyright		: Altran
+/*
+ * ============================================================================
+ * Nom du fichier : RulesManager.java
+ * Auteur : sbregent
+ * Date : 29 nov. 10
+ * Copyright : Altran
  * ============================================================================
  */
 package fr.ifremer.nemo.ui;
@@ -24,7 +25,9 @@ import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Messages;
 
 /**
- * Description: cette classe centralise les règles NEMO et leur gestion pour l'IHM (ne concerne pas le mode batch)
+ * Description: cette classe centralise les règles NEMO et leur gestion pour
+ * l'IHM (ne concerne pas le mode batch)
+ * 
  * @author sbregent
  * 
  */
@@ -277,11 +280,16 @@ public class RulesManager
 	public void updateFromIHM(E_TypeConversion convType)
 	{
 		boolean confirm = true;
+		boolean mustReinitDataForm = false;
 		boolean mustChangeDatalist = false;
 		E_TypeConversion tmp = myConversionType;
 		DataListTypeEnum newDataList = myDataListType;
 		if (myConversionType != convType)
 		{
+			if (myDataListType == DataListTypeEnum.UNKNOWN)
+			{
+				mustChangeDatalist = true;
+			}
 			if (myDataListType == DataListTypeEnum.P011_VIA_P021 && convType == E_TypeConversion.MEDATLAS)
 			{
 				confirm = MessageDialog.openConfirm(null,
@@ -289,7 +297,7 @@ public class RulesManager
 						Messages.edit_data_dataListDialogBox_text);
 				myDataListType = DEFAULT_DATALIST;
 				newDataList = myDataListType;
-				mustChangeDatalist = true;
+				mustReinitDataForm = true;
 			}
 			if (confirm)
 			{
@@ -303,7 +311,7 @@ public class RulesManager
 				Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(dataList_P011viaP021_Enabled);
 
 				// ensuite on selectionne si necessaire
-				if (mustChangeDatalist)
+				if (mustReinitDataForm || mustChangeDatalist)
 				{
 					// reinit
 					Nemo.getInstance().getViewMain().getEditDataForm().reinitParameters();
@@ -318,7 +326,8 @@ public class RulesManager
 				}
 
 				ViewLog.styledTextLogErreurs.setText(messageLog);
-           }else{
+			} else
+			{
 				myEditFileForm.selectConversion(tmp);
 			}
 		}
@@ -348,7 +357,6 @@ public class RulesManager
 	public void updateFromModel(VerticalParametersList verticalParametersList)
 	{
 		myVerticalParametersList = verticalParametersList;
-		Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters().removeAllToAllCombos();
 		Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters().select(myVerticalParametersList);
 	}
 
@@ -585,8 +593,7 @@ public class RulesManager
 	// CONVERSION
 	public boolean isConversionToODV()
 	{
-       return (myConversionType == E_TypeConversion.ODV_MONOSTATION 
-               ||myConversionType == E_TypeConversion.ODV_MULTISTATIONS);
+		return (myConversionType == E_TypeConversion.ODV_MONOSTATION || myConversionType == E_TypeConversion.ODV_MULTISTATIONS);
 	}
 
 	public boolean isDataListTypeP011viaP021()
