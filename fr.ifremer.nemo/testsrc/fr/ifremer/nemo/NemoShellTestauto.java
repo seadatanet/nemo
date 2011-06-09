@@ -78,10 +78,11 @@ public class NemoShellTestauto
     // générer les fichiers en batch et les comparer aux fichiers REFERENCE
     public static boolean testBatchs=true;
     // comparer les fichiers manuels (output_eclipse) aux fichiers REFERENCE
-    public static boolean compareManualFiles=true;
+    public static boolean compareManualFiles=false;
     
     
     public static String[] testDirAlone={};
+//  public static String[] testDirAlone={"cruiseDir_profile_mona"}; 
 //   public static String[] testDirAlone={"carotte_sed"};
 //  public static String[] testDirAlone={"smatch_timeseries"}; 
 //  public static String[] testDirAlone={"cruiseDir_profile_diap"}; 
@@ -207,7 +208,7 @@ public class NemoShellTestauto
     
     /**
      * =================================================================
-     * ODV
+     * ODV multi
      * =================================================================
      */
     @Test
@@ -237,6 +238,39 @@ public class NemoShellTestauto
             Conversion.ODV,
             E_TypeConversion.ODV_MULTISTATIONS));
     }
+    /**
+     * =================================================================
+     * ODV mono
+     * =================================================================
+     */
+    @Test
+    public final void test_P091_ODVMONO()
+    {
+        testLogger.info("\r\n\r\n\r\n\r\n____________________________test_P091_ODVMONO____________________________\r\n\r\n\r\n\r\n");
+        Assert.assertTrue(testOneType_ListConv(
+            DataListTypeEnum.P091, 
+            Conversion.ODV, 
+            E_TypeConversion.ODV_MONOSTATION));
+    }
+    @Test
+    public final void test_P011viaP091_ODVMONO()
+    {
+        testLogger.info("\r\n\r\n\r\n\r\n____________________________test_P011viaP091_ODVMONO____________________________\r\n\r\n\r\n\r\n");
+        Assert.assertTrue(testOneType_ListConv(
+            DataListTypeEnum.P011_VIA_P091, 
+            Conversion.ODV, 
+            E_TypeConversion.ODV_MONOSTATION));
+    }
+    @Test
+    public final void test_P011viaP021_ODVMONO()
+    {
+        testLogger.info("\r\n\r\n\r\n\r\n__________________________test_P011viaP021_ODVMONO_____________________________\r\n\r\n\r\n\r\n");
+        Assert.assertTrue(testOneType_ListConv(
+            DataListTypeEnum.P011_VIA_P021,
+            Conversion.ODV,
+            E_TypeConversion.ODV_MONOSTATION));
+    }
+    
     /**
      * =================================================================
      * methodes
@@ -279,26 +313,29 @@ public class NemoShellTestauto
                                         res=false;
                                         comp=false;
                                         message.testName=paramListDir.getName()+" "+convDir.getName()+" "+unitTest.getName();
+//                                        System.out.println(message.testName);
                                         String inputAbsolutePath = testDir.getAbsolutePath()+"\\"+inputName;
                                         String outputAbsolutePath=unitTest.getAbsolutePath();
                                         cptTests++;
-                                        nbTotalTests++;
                                         testFound=true;
                                         message.isTestFound=true;
                                         if (testBatchs)
                                         {
+                                            nbTotalTests++;
                                             message.isReferenceFound=fileExist(outputAbsolutePath, outputReferenceName);
                                             res=convertWithNemoBatch(conversion, odvConv, inputAbsolutePath, outputAbsolutePath);
                                             ok= res && ok;
                                             if (res)
                                             {
-                                                nbTotalSuccess++;
-                                              
                                                 comp = compareWithReference(outputAbsolutePath, outputName);
                                                 message.batchCompRes=comp;
+                                                if (comp)
+                                                {
+                                                    nbTotalSuccess++;
+                                                }
                                                 ok= comp && ok;
                                             }
-                                            if (!res)
+                                            if (!res|| !comp)
                                             {
                                                 cptFail++;
                                                 nbTotalFailed++;
@@ -328,7 +365,7 @@ public class NemoShellTestauto
                                         message.isActivated=false;
                                     }
                                    
-                                    
+                                    message.print();
                                 }
 
                             }
@@ -348,16 +385,13 @@ public class NemoShellTestauto
                 {
                     message.isTestFound=false;
                 }
-              message.print();
+//              message.print();
             }
         }
         testLogger.info("=========================================");
         testLogger.info(cptFail+ " failed /" +cptTests +" tested");
         testLogger.info("=========================================");
         testLogger.info("");
-        if (!ok){
-            System.out.println("ici");
-        }
         return ok;
     }
 
@@ -419,10 +453,41 @@ public class NemoShellTestauto
     public boolean compareWithReference( String outputAbsolutePath, String outputTestName)
     {
         boolean comp = false;
-        comp = compare_____TwoFiles(outputAbsolutePath, outputTestName, outputReferenceName);
+        comp = compare_____TwoResults(outputAbsolutePath, outputTestName, outputReferenceName);
          return comp;
     }
 
+    public boolean compare_____TwoResults(String outputAbsolutePath, String outA, String outB)
+    {
+        boolean identical=true;
+        String outputTest = outputAbsolutePath+"\\"+outA;
+        String output_REFERENCE= outputAbsolutePath+"\\"+outB;
+        
+        
+        File a = new File(outputTest);
+        File b = new File(output_REFERENCE);
+        
+        if (a.isDirectory()
+                && a.listFiles()!=null
+                && b.listFiles()!=null
+                && a.listFiles().length>0
+                && b.listFiles().length>0
+                && a.listFiles().length==b.listFiles().length)
+        {
+            for (int i=0; i<a.listFiles().length; i++)
+            {
+                identical= compare_____TwoFiles(outputAbsolutePath,a.listFiles()[i].getAbsolutePath(), b.listFiles()[i].getAbsolutePath());
+            }
+        }else{
+            identical= compare_____TwoFiles(outputAbsolutePath,outA, outB);
+        }
+        
+        if (!identical)
+        {
+            System.out.println("ici");
+        }
+        return identical;
+    }
     public boolean compare_____TwoFiles(String outputAbsolutePath, String fileA, String fileB){
         
         BufferedReader bufOut = null;
@@ -439,8 +504,6 @@ public class NemoShellTestauto
         }
         catch (FileNotFoundException e1)
         {
-//            testLogger.error(fileA+" file not found");
-//            message.filesMap.put(fileA, false);
             return false;
         }
         try
@@ -449,13 +512,9 @@ public class NemoShellTestauto
         }
         catch (FileNotFoundException e1)
         {
-//            testLogger.error(fileB+" file not found");
-//            message.filesMap.put(fileB, false);
             return false;
         }
 
-//        message.filesMap.put(fileA, true);
-//        message.filesMap.put(fileB, true);
         try
         {
             if (bufOut!=null && bufRef!=null){
