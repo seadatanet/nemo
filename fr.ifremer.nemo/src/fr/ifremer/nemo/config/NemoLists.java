@@ -14,9 +14,11 @@ import java.util.List;
 
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.rpc.ServiceException;
-import javax.xml.rpc.holders.BooleanHolder;
 
-import org.apache.axis.client.Service;
+
+import org.apache.axis2.context.MessageContextConstants;
+import org.apache.axis2.transport.http.HTTPConstants;
+import org.apache.axis2.transport.http.HttpTransportProperties.ProxyProperties;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.widgets.Table;
 
@@ -25,7 +27,6 @@ import fr.ifremer.nemo.config.UpdateBean.EtatUpdate;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webservice;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webserviceLocator;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webserviceSoap;
-import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
@@ -34,11 +35,22 @@ import fr.ifremer.nemo.ws.NemoWSServiceLocator;
 import fr.ifremer.nemo.ws.WSDataType;
 import fr.ifremer.nemo.ws.WSParameter;
 import fr.ifremer.nemo.ws.WSSurveyDescription;
+import fr.ifremer.nemo.wsVocab.VocabStub;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableTypeType;
-import fr.ifremer.nemo.wsVocab.vocab.holders.CodeTableRecordTypeArrayHolder;
-import fr.ifremer.nemo.wsVocab.vocab.holders.CodeTableTypeTypeArrayHolder;
-import fr.ifremer.nemo.wsVocab.vocab_pkg.VocabSoapBindingStub;
+import fr.ifremer.nemo.wsVocab.vocab.GetList;
+import fr.ifremer.nemo.wsVocab.vocab.GetListResponse;
+import fr.ifremer.nemo.wsVocab.vocab.GetListResponseType;
+import fr.ifremer.nemo.wsVocab.vocab.GetListType;
+import fr.ifremer.nemo.wsVocab.vocab.GetMap;
+import fr.ifremer.nemo.wsVocab.vocab.GetMapResponse;
+import fr.ifremer.nemo.wsVocab.vocab.GetMapResponseType;
+import fr.ifremer.nemo.wsVocab.vocab.GetMapType;
+import fr.ifremer.nemo.wsVocab.vocab.WhatLists;
+import fr.ifremer.nemo.wsVocab.vocab.WhatListsResponse;
+import fr.ifremer.nemo.wsVocab.vocab.WhatListsResponseType;
+import fr.ifremer.nemo.wsVocab.vocab.WhatListsType;
+
 
 /**
  * Class NemoLists
@@ -912,36 +924,59 @@ public class NemoLists implements Cloneable {
 		}
 	}
 
-    /**
-     * 
-     */
-    public static void initVocabLists() {
+    public static void initVocabLists()
+    {
         XMLDecoder decoder = null;
         String[] listNames = Intern.vocabLists.split(Global.COMMA);
-        for (String listName : listNames){
-            try {
+        for (String listName : listNames)
+        {
+            try
+            {
                 String listVocab = Intern.dir_resources + File.separator + Intern.dir_vocabLists + File.separator + Global.POURCENT_S + Global.EXT_XML;
                 String fileName = String.format(listVocab, listName);
+
                 File file = new File(fileName);
-                if (file.exists()) {
+                if (file.exists())
+                {
                     decoder = new XMLDecoder(new FileInputStream(file));
+
+                    
+                    try
+                    {
+                        Object toto = decoder.readObject();
+                        _vocabList.put(listName, (CodeTableRecordType[]) toto);
+                    } catch (Exception e)
+                    {
+                        System.out.println("error init vocab list" + fileName);
+                    }
+                } else
+                {
+                    file.createNewFile();
+                    file.setWritable(true);
+                    decoder = new XMLDecoder(new FileInputStream(file));
+                    // TODO BGT
                     _vocabList.put(listName, (CodeTableRecordType[]) decoder
                             .readObject());
+
                 }
-            } catch (Exception e) {
+            } catch (Exception e)
+            {
                 e.printStackTrace();
-            } finally {
-                if (decoder != null) {
-                    try {
+            } finally
+            {
+                if (decoder != null)
+                {
+                    try
+                    {
                         decoder.close();
-                    } catch (Exception ex) {
+                    } catch (Exception ex)
+                    {
                         ex.printStackTrace();
                     }
                 }
             }
         }
     }
-
     /**
      * 
      */
@@ -1252,64 +1287,170 @@ public class NemoLists implements Cloneable {
             updateNemo.setEtat(updateSurveys.getEtat());
         }
 	}
-    
-    public static VocabSoapBindingStub connectVocab(){
+    public static VocabStub connectVocabAxis2()
+    {
 
-        VocabSoapBindingStub vocab = null;
-        try{
-    
-            vocab = new VocabSoapBindingStub(
-                        new java.net.URL(Nemo.getInstance().getConfig().getVocabURL()),
-                        new Service());
-            
-            // récupération des versions serveur des listes
-            CodeTableTypeTypeArrayHolder table = new CodeTableTypeTypeArrayHolder();
-            javax.xml.rpc.holders.BooleanHolder error = new BooleanHolder();
-            vocab.whatLists(Global.EMPTY_STRING, table, error);
-            if (!error.value && table.value != null){
-                for (CodeTableTypeType item : table.value){
-                    String[] itemValue = item.getListKey().split(Global.SLASH);
-                    String listId = itemValue[itemValue.length - 2];
-                    if (Nemo.getInstance().getConfig().getVocabLists().containsKey(listId)){
-                        BODCList list = Nemo.getInstance().getConfig().getVocabLists().get(listId);
-                        list.setServerVersion(String.valueOf(item.getListVersion()));
-                        list.setName(item.getListShortName());
+        VocabStub vocab = null;
+        WhatListsResponse wlResp = null;
+        VocabStub stub = null;
+        try
+        {
+            stub = new VocabStub();
+
+
+           
+            ProxyProperties proxyProperties = new ProxyProperties();
+            proxyProperties.setProxyName(Nemo.getInstance().getConfig().getProxy().address);
+            proxyProperties.setProxyPort(Integer.valueOf(Nemo.getInstance().getConfig().getProxy().port));
+            // in order to makesure that we use HTTP 1.0
+            stub._getServiceClient().getOptions().setProperty(MessageContextConstants.HTTP_PROTOCOL_VERSION, HTTPConstants.HEADER_PROTOCOL_10);
+            stub._getServiceClient().getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.PROXY, proxyProperties);
+
+            // WHATLIST
+            WhatListsType wlt = new WhatListsType();
+            wlt.setCategoryKey("");
+            WhatLists myWL = new WhatLists();
+            myWL.setWhatLists(wlt);
+            // WHATLIST
+            wlResp = stub.whatLists(myWL);
+            WhatListsResponseType wlRespType = wlResp.getWhatListsResponse();
+            for (CodeTableTypeType item : wlRespType.getCodeTableType())
+
+            // for (CodeTableTypeType item : wlResp..value)
+            {
+                String[] itemValue = item.getListKey().split(Global.SLASH);
+                String listId = itemValue[itemValue.length - 2];
+                if (Nemo.getInstance().getConfig().getVocabLists().containsKey(listId))
+                {
+                    BODCList list =
+                            Nemo.getInstance().getConfig().getVocabLists().get(listId);
+                    list.setServerVersion(String.valueOf(item.getListVersion()));
+//                    System.out.println("list " + list.getId() + " server version " + list.getServerVersion());
+                    list.setName(item.getListShortName());
+                }
+            }
+
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+            vocab = null;
+            wlResp = null;
+        }
+        return stub;
+    }
+    private static UpdateBean updateVocabListAxis2(VocabStub vocab, String listId)
+    {
+        BODCList list = Nemo.getInstance().getConfig().getVocabList(listId);
+
+        StringBuffer msg = new StringBuffer();
+        msg.append(listId);
+        msg.append(Global.SEP);
+        msg.append(list.getName());
+
+        UpdateBean updateList = new UpdateBean(listId, msg.toString());
+        updateList.setNbTot(_vocabList.get(listId).length);
+        System.out.println(list.getId());
+        if (list.getLocalVersion().compareTo(list.getServerVersion()) < 0)
+        {
+            FileOutputStream stream = null;
+            XMLEncoder encoder = null;
+            try
+            {
+
+                GetList myGetList = new GetList();
+                GetListType myGetListType = new GetListType();
+                String[] recKey = new String[1];
+                recKey[0] = list.getUrl();
+                myGetListType.setRecordKey(recKey);
+                myGetList.setGetList(myGetListType);
+                // get list
+                GetListResponse glResp = vocab.getList(myGetList);
+                GetListResponseType glRespType = glResp.getGetListResponse();
+                CodeTableRecordType[] ctRecType =
+                        glRespType.getCodeTableRecord();
+
+                if (!glRespType.getError())
+                {
+
+                    _vocabList.put(list.getId(), ctRecType);
+                    File dir = new java.io.File(Intern.dir_resources +
+                            File.separator + Intern.dir_vocabLists);
+                    if (!dir.exists())
+                    {
+                        dir.mkdirs();
+                    }
+                    File file = new java.io.File(dir, list.getId() +
+                            Global.EXT_XML);
+                    stream = new FileOutputStream(file.toString());
+
+                    encoder = new XMLEncoder(stream);
+                    encoder.writeObject(ctRecType);
+
+                    list.setLocalVersion(list.getServerVersion());
+                    Nemo.getInstance().getConfig().getVocabLists().put(list.getId(),
+                            list);
+
+                    updateList.setEtat(EtatUpdate.UPDATED);
+                    updateList.setNbRetrieve(_vocabList.get(listId).length);
+                } else
+                {
+                    updateList.setEtat(EtatUpdate.FAILED);
+                }
+            } catch (Exception e)
+            {
+                updateList.setEtat(EtatUpdate.FAILED);
+                e.printStackTrace();
+            } finally
+            {
+                if (encoder != null)
+                {
+                    try
+                    {
+                        encoder.close();
+                    } catch (Exception ex)
+                    {
+                    }
+                }
+                if (stream != null)
+                {
+                    try
+                    {
+                        stream.close();
+                    } catch (Exception ex)
+                    {
                     }
                 }
             }
+        } else
+        {
+            updateList.setEtat(EtatUpdate.CHECKED);
         }
-        catch (Exception e){
-            e.printStackTrace();
-            vocab = null;
-        }
-        return vocab;
+        return updateList;
     }
-    
-
-    /**
-     * 
-     */
-    public static void updateVocabLists(VocabSoapBindingStub vocabService, IProgressMonitor monitor) {
+    public static void updateVocabListsAxis2(VocabStub vocabService, IProgressMonitor monitor)
+    {
 
         UpdateBean updateLists = getUpdate(Intern.id_lists);
-        
+
         if (vocabService != null)
         {
             int nbRetrieve = 0;
             int idxCurrent = 0;
-            
+
             try
             {
                 String[] listNames = Intern.vocabLists.split(Global.COMMA);
                 int keySetSize = listNames.length;
                 updateLists.setNbTot(keySetSize);
-                
-                for (String listName : listNames){
-                    idxCurrent ++ ;
-                    if (!monitor.isCanceled()){
-                        
+
+                for (String listName : listNames)
+                {
+                    idxCurrent++;
+                    if (!monitor.isCanceled())
+                    {
+
                         StringBuffer msg = new StringBuffer();
-                        msg.append(Messages.getString(Intern.id_lists)); 
+                        msg.append(Messages.getString(Intern.id_lists));
                         msg.append(Global.SPACE);
                         msg.append(listName);
                         msg.append(" [");//$NON-NLS-1$
@@ -1318,124 +1459,58 @@ public class NemoLists implements Cloneable {
                         msg.append(keySetSize);
                         msg.append("]");//$NON-NLS-1$
                         monitor.subTask(msg.toString());
-                        
-                        UpdateBean updateList = updateVocabList(vocabService, listName);
+
+                        UpdateBean updateList = updateVocabListAxis2(vocabService, listName);
                         updateLists.addSubUpdate(updateList);
                         if (updateList.getEtat().compareTo(EtatUpdate.UPDATED) == 0
-                                || updateList.getEtat().compareTo(EtatUpdate.CHECKED) == 0){
-                            nbRetrieve ++;
+                                || updateList.getEtat().compareTo(EtatUpdate.CHECKED) == 0)
+                        {
+                            nbRetrieve++;
                         }
-                        if (updateLists.getEtat().compareTo(updateList.getEtat()) < 0){
+                        if (updateLists.getEtat().compareTo(updateList.getEtat()) < 0)
+                        {
                             updateLists.setEtat(updateList.getEtat());
                         }
-                    }
-                    else{
+                    } else
+                    {
                         updateLists.setEtat(EtatUpdate.INTERRUPTED);
                     }
                 }
-                
+
                 updateLists.setNbRetrieve(nbRetrieve);
-                
-            }
-            catch (Exception e){
+
+            } catch (Exception e)
+            {
                 updateLists.setEtat(EtatUpdate.FAILED);
                 e.printStackTrace();
             }
-        }
-        else{
+        } else
+        {
             updateLists.setEtat(EtatUpdate.FAILED);
         }
     }
-
-	/**
-	 * 
-	 */
-	private static UpdateBean updateVocabList(VocabSoapBindingStub vocab, String listId) 
-    {
-        BODCList list = Nemo.getInstance().getConfig().getVocabList(listId);
-        
-        StringBuffer msg = new StringBuffer();
-        msg.append(listId);
-        msg.append(Global.SEP);
-        msg.append(list.getName());
-        
-        UpdateBean updateList = new UpdateBean(listId, msg.toString()); 
-        updateList.setNbTot(_vocabList.get(listId).length);
-        
-        if (list.getLocalVersion().compareTo(list.getServerVersion()) < 0){
-    		FileOutputStream stream = null;
-    		XMLEncoder encoder = null;
-    		CodeTableRecordTypeArrayHolder table = new CodeTableRecordTypeArrayHolder();
-    		javax.xml.rpc.holders.BooleanHolder error = new BooleanHolder();
-    		try {      
-    			vocab.getList(new String[] { list.getUrl() }, null, table, error);
-    			if (!error.value && table.value != null) {
-					_vocabList.put(list.getId(), table.value);
-
-					File dir = new java.io.File(Intern.dir_resources + File.separator + Intern.dir_vocabLists);
-					if (!dir.exists()) {
-						dir.mkdirs();
-					}
-					File file = new java.io.File(dir, list.getId() + Global.EXT_XML);
-					stream = new FileOutputStream(file.toString());
-
-					encoder = new XMLEncoder(stream);
-					encoder.writeObject(table.value);
-                    
-                    list.setLocalVersion(list.getServerVersion());
-                    Nemo.getInstance().getConfig().getVocabLists().put(list.getId(), list);
-                    
-                    updateList.setEtat(EtatUpdate.UPDATED);
-                    updateList.setNbRetrieve(_vocabList.get(listId).length);
-    			} 
-                else {
-                    updateList.setEtat(EtatUpdate.FAILED);
-    			}
-    		} 
-            catch (Exception e) {
-                updateList.setEtat(EtatUpdate.FAILED);
-    			e.printStackTrace();
-    		} 
-            finally {
-    			if (encoder != null) {
-    				try {
-    					encoder.close();
-    				} catch (Exception ex) {
-    				}
-    			}
-    			if (stream != null) {
-    				try {
-    					stream.close();
-    				} catch (Exception ex) {
-    				}
-    			}
-    		}
-        }
-        else{
-            updateList.setEtat(EtatUpdate.CHECKED);
-        }
-        return updateList;
-	}
-    
-    public static void updateVocabMaps(VocabSoapBindingStub vocabService, IProgressMonitor monitor)
+    public static void updateVocabMaps(VocabStub vocabService, IProgressMonitor monitor)
     {
         UpdateBean updateMaps = getUpdate(Intern.id_maps);
-        
+
         if (vocabService != null)
         {
             int nbRetrieve = 0;
             int idxCurrent = 0;
-            
-            try{
+
+            try
+            {
                 String[] listNames = Intern.vocabMaps.split(Global.COMMA);
                 int keySetSize = listNames.length;
                 updateMaps.setNbTot(keySetSize);
-                
-                for (String listName : listNames) {
-                    idxCurrent ++ ;
-                    if (!monitor.isCanceled()){
+
+                for (String listName : listNames)
+                {
+                    idxCurrent++;
+                    if (!monitor.isCanceled())
+                    {
                         StringBuffer msg = new StringBuffer();
-                        msg.append(Messages.getString(Intern.id_maps)); 
+                        msg.append(Messages.getString(Intern.id_maps));
                         msg.append(Global.SPACE);
                         msg.append(listName);
                         msg.append(" [");//$NON-NLS-1$
@@ -1444,118 +1519,133 @@ public class NemoLists implements Cloneable {
                         msg.append(keySetSize);
                         msg.append("]");//$NON-NLS-1$
                         monitor.subTask(msg.toString());
-                        
+
                         UpdateBean updateMap = updateVocabMap(vocabService, listName);
                         updateMaps.addSubUpdate(updateMap);
                         if (updateMap.getEtat().compareTo(EtatUpdate.UPDATED) == 0
-                                || updateMap.getEtat().compareTo(EtatUpdate.CHECKED) == 0){
-                            nbRetrieve ++;
+                                || updateMap.getEtat().compareTo(EtatUpdate.CHECKED) == 0)
+                        {
+                            nbRetrieve++;
                         }
-                        if (updateMaps.getEtat().compareTo(updateMap.getEtat()) < 0){
+                        if (updateMaps.getEtat().compareTo(updateMap.getEtat()) < 0)
+                        {
                             updateMaps.setEtat(updateMap.getEtat());
                         }
-                    }
-                    else{
+                    } else
+                    {
                         updateMaps.setEtat(EtatUpdate.INTERRUPTED);
                     }
                 }
-                updateMaps.setNbRetrieve(nbRetrieve);   
-            }
-            catch (Exception e){
+                updateMaps.setNbRetrieve(nbRetrieve);
+            } catch (Exception e)
+            {
                 updateMaps.setEtat(EtatUpdate.FAILED);
                 e.printStackTrace();
             }
-        }
-        else{
+        } else
+        {
             updateMaps.setEtat(EtatUpdate.FAILED);
         }
     }
-
-	/**
-	 * 
-	 */
-	private static UpdateBean updateVocabMap(VocabSoapBindingStub vocab, String listName) {
-
+    private static UpdateBean updateVocabMap(VocabStub vocab, String listName)
+    {
         String[] listIds = listName.split(Global.UNDERSCORE);
-        
+
         BODCList list1 = Nemo.getInstance().getConfig().getVocabList(listIds[0]);
         BODCList list2 = Nemo.getInstance().getConfig().getVocabList(listIds[1]);
-        
-        UpdateBean updateMap = new UpdateBean(listName, listName); 
-        
+        UpdateBean updateMap = new UpdateBean(listName, listName);
         if (_vocabMap.get(listName) != null)
             updateMap.setNbTot(_vocabMap.get(listName).length);
         else
             // Cas ou le fichier xml n'est pas présent sur le disque
             updateMap.setNbTot(0);
-        
-        
+
         // check if update is needed
-        // !! cette façon de faire nécessite le chargement et la mise à jour de chacune des listes en individuel :
-        // !! si les listes individuelles sont supprimées, cette vérification ne fonctionnera plus
+        // !! cette façon de faire nécessite le chargement et la mise à jour de
+        // chacune des listes en individuel :
+        // !! si les listes individuelles sont supprimées, cette vérification ne
+        // fonctionnera plus
         UpdateBean updateList1 = getUpdate(Intern.id_lists).getSubUpdate(list1.getId());
         UpdateBean updateList2 = getUpdate(Intern.id_lists).getSubUpdate(list2.getId());
-        
-        if (updateList1.getEtat() != EtatUpdate.CHECKED 
-                || updateList2.getEtat() != EtatUpdate.CHECKED){
 
-    		FileOutputStream stream = null;
-    		XMLEncoder encoder = null;
-    		CodeTableRecordTypeArrayHolder table = new CodeTableRecordTypeArrayHolder();
-    		javax.xml.rpc.holders.BooleanHolder error = new BooleanHolder();
-    		try {
-    			vocab.getMap(new String[] { list1.getUrl() }, 
-                             Nemo.getInstance().getConfig().getPredicate(), 
-                             new String[] { list2.getUrl() }, 
-                             "false", table, error); //$NON-NLS-1$
-                
-    			if (!error.value) {
-    				if (table.value != null) {
-    					_vocabMap.put(listName, table.value);
-    
-    					File dir = new java.io.File(Intern.dir_resources + File.separator + Intern.dir_vocabLists);
-    					if (!dir.exists()) {
-    						dir.mkdirs();
-    					}
-    					File file = new java.io.File(dir, listName + Global.EXT_XML);
-    					stream = new FileOutputStream(file.toString());
-    
-    					encoder = new XMLEncoder(stream);
-    					encoder.writeObject(table.value);
-                        
+        if (updateList1.getEtat() != EtatUpdate.CHECKED
+                || updateList2.getEtat() != EtatUpdate.CHECKED)
+        {
+
+            FileOutputStream stream = null;
+            XMLEncoder encoder = null;
+
+            try
+            {
+
+                GetMap myGetMap = new GetMap();
+                GetMapType myGetMapType = new GetMapType();
+                myGetMapType.setPredicate(Nemo.getInstance().getConfig().getPredicate());
+                myGetMapType.setInference("false");
+                myGetMapType.setObjectList(new String[]
+                    { list2.getUrl() });
+                myGetMapType.setSubjectList(new String[]
+                    { list1.getUrl() });
+                myGetMap.setGetMap(myGetMapType);
+                GetMapResponse resMap = vocab.getMap(myGetMap);
+
+                GetMapResponseType resType = resMap.getGetMapResponse();
+                if (!resType.getError())
+                {
+                    if (resType != null)
+                    {
+                        _vocabMap.put(listName, resType.getCodeTableRecord());
+
+                        File dir = new java.io.File(Intern.dir_resources +
+                                File.separator + Intern.dir_vocabLists);
+                        if (!dir.exists())
+                        {
+                            dir.mkdirs();
+                        }
+                        File file = new java.io.File(dir, listName + Global.EXT_XML);
+                        stream = new FileOutputStream(file.toString());
+
+                        encoder = new XMLEncoder(stream);
+                        encoder.writeObject(resType.getCodeTableRecord());
+
                         updateMap.setEtat(EtatUpdate.UPDATED);
                         updateMap.setNbRetrieve(_vocabMap.get(listName).length);
-    				}
-    			}
-                else{
+                    }
+                } else
+                {
                     updateMap.setEtat(EtatUpdate.FAILED);
                 }
-    		} 
-            catch (Exception e) {
-    			e.printStackTrace();
+            } catch (Exception e)
+            {
+                e.printStackTrace();
                 updateMap.setEtat(EtatUpdate.FAILED);
-    		} 
-            finally {
-    			if (encoder != null) {
-    				try {
-    					encoder.close();
-    				} catch (Exception ex) {
-    				}
-    			}
-    			if (stream != null) {
-    				try {
-    					stream.close();
-    				} catch (Exception ex) {
-    				}
-    			}
-    		}
-        }
-        else{
+            } finally
+            {
+                if (encoder != null)
+                {
+                    try
+                    {
+                        encoder.close();
+                    } catch (Exception ex)
+                    {
+                    }
+                }
+                if (stream != null)
+                {
+                    try
+                    {
+                        stream.close();
+                    } catch (Exception ex)
+                    {
+                    }
+                }
+            }
+        } else
+        {
             updateMap.setEtat(EtatUpdate.CHECKED);
         }
         return updateMap;
-	}
-
+    }
     /**
      * 
      */

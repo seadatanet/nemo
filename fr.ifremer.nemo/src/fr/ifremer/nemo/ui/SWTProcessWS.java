@@ -17,7 +17,7 @@ import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.NemoWS;
-import fr.ifremer.nemo.wsVocab.vocab_pkg.VocabSoapBindingStub;
+import fr.ifremer.nemo.wsVocab.VocabStub;
 
 public class SWTProcessWS implements IRunnableWithProgress {
 
@@ -66,11 +66,11 @@ public class SWTProcessWS implements IRunnableWithProgress {
 
             if (!monitor.isCanceled()){
                 monitor.subTask(Messages.connect_vocab); 
-                VocabSoapBindingStub vocabService = NemoLists.connectVocab();
+                VocabStub vocabService = NemoLists.connectVocabAxis2();
                 
                 if (!monitor.isCanceled()){
                     monitor.subTask(Messages.getString(Intern.id_lists)); 
-                    NemoLists.updateVocabLists(vocabService, monitor);
+                    NemoLists.updateVocabListsAxis2(vocabService, monitor);
                 }
                 
                 if (!monitor.isCanceled()){
