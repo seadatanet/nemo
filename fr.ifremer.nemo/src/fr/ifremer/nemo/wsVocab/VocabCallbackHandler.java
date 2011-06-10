@@ -49,7 +49,7 @@
             * override this method for handling normal response from searchVocab operation
             */
            public void receiveResultsearchVocab(
-                    fr.ifremer.nemo.wsVocab.vocab.SearchVocabResponse result
+                    fr.ifremer.nemo.wsVocab.vocabtoto.SearchVocabResponse result
                         ) {
            }
 
@@ -65,7 +65,7 @@
             * override this method for handling normal response from whatLists operation
             */
            public void receiveResultwhatLists(
-                    fr.ifremer.nemo.wsVocab.vocab.WhatListsResponse result
+                    fr.ifremer.nemo.wsVocab.vocabtoto.WhatListsResponse result
                         ) {
            }
 
@@ -81,7 +81,7 @@
             * override this method for handling normal response from getList operation
             */
            public void receiveResultgetList(
-                    fr.ifremer.nemo.wsVocab.vocab.GetListResponse result
+                    fr.ifremer.nemo.wsVocab.vocabtoto.GetListResponse result
                         ) {
            }
 
@@ -97,7 +97,7 @@
             * override this method for handling normal response from verifyTerm operation
             */
            public void receiveResultverifyTerm(
-                    fr.ifremer.nemo.wsVocab.vocab.VerifyTermResponse result
+                    fr.ifremer.nemo.wsVocab.vocabtoto.VerifyTermResponse result
                         ) {
            }
 
@@ -113,7 +113,7 @@
             * override this method for handling normal response from getMap operation
             */
            public void receiveResultgetMap(
-                    fr.ifremer.nemo.wsVocab.vocab.GetMapResponse result
+                    fr.ifremer.nemo.wsVocab.vocabtoto.GetMapResponse result
                         ) {
            }
 
@@ -129,7 +129,7 @@
             * override this method for handling normal response from getRelatedRecordByCriteria operation
             */
            public void receiveResultgetRelatedRecordByCriteria(
-                    fr.ifremer.nemo.wsVocab.vocab.GetRelatedRecordByCriteriaResponse result
+                    fr.ifremer.nemo.wsVocab.vocabtoto.GetRelatedRecordByCriteriaResponse result
                         ) {
            }
 
@@ -145,7 +145,7 @@
             * override this method for handling normal response from getRelatedRecordByTerm operation
             */
            public void receiveResultgetRelatedRecordByTerm(
-                    fr.ifremer.nemo.wsVocab.vocab.GetRelatedRecordByTermResponse result
+                    fr.ifremer.nemo.wsVocab.vocabtoto.GetRelatedRecordByTermResponse result
                         ) {
            }
 
@@ -161,7 +161,7 @@
             * override this method for handling normal response from whatListsCat operation
             */
            public void receiveResultwhatListsCat(
-                    fr.ifremer.nemo.wsVocab.vocab.WhatListsCatResponse result
+                    fr.ifremer.nemo.wsVocab.vocabtoto.WhatListsCatResponse result
                         ) {
            }
 
