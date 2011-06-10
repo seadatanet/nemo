@@ -24,9 +24,9 @@
          */
 
          
-                     public fr.ifremer.nemo.wsVocab.vocabtoto.SearchVocabResponse searchVocab(
+                     public fr.ifremer.nemo.wsVocab.vocab.SearchVocabResponse searchVocab(
 
-                        fr.ifremer.nemo.wsVocab.vocabtoto.SearchVocab searchVocab0)
+                        fr.ifremer.nemo.wsVocab.vocab.SearchVocab searchVocab0)
                         throws java.rmi.RemoteException
              ;
 
@@ -39,7 +39,7 @@
           */
         public void startsearchVocab(
 
-            fr.ifremer.nemo.wsVocab.vocabtoto.SearchVocab searchVocab0,
+            fr.ifremer.nemo.wsVocab.vocab.SearchVocab searchVocab0,
 
             final fr.ifremer.nemo.wsVocab.VocabCallbackHandler callback)
 
@@ -55,9 +55,9 @@
          */
 
          
-                     public fr.ifremer.nemo.wsVocab.vocabtoto.WhatListsResponse whatLists(
+                     public fr.ifremer.nemo.wsVocab.vocab.WhatListsResponse whatLists(
 
-                        fr.ifremer.nemo.wsVocab.vocabtoto.WhatLists whatLists2)
+                        fr.ifremer.nemo.wsVocab.vocab.WhatLists whatLists2)
                         throws java.rmi.RemoteException
              ;
 
@@ -70,7 +70,7 @@
           */
         public void startwhatLists(
 
-            fr.ifremer.nemo.wsVocab.vocabtoto.WhatLists whatLists2,
+            fr.ifremer.nemo.wsVocab.vocab.WhatLists whatLists2,
 
             final fr.ifremer.nemo.wsVocab.VocabCallbackHandler callback)
 
@@ -86,9 +86,9 @@
          */
 
          
-                     public fr.ifremer.nemo.wsVocab.vocabtoto.GetListResponse getList(
+                     public fr.ifremer.nemo.wsVocab.vocab.GetListResponse getList(
 
-                        fr.ifremer.nemo.wsVocab.vocabtoto.GetList getList4)
+                        fr.ifremer.nemo.wsVocab.vocab.GetList getList4)
                         throws java.rmi.RemoteException
              ;
 
@@ -101,7 +101,7 @@
           */
         public void startgetList(
 
-            fr.ifremer.nemo.wsVocab.vocabtoto.GetList getList4,
+            fr.ifremer.nemo.wsVocab.vocab.GetList getList4,
 
             final fr.ifremer.nemo.wsVocab.VocabCallbackHandler callback)
 
@@ -117,9 +117,9 @@
          */
 
          
-                     public fr.ifremer.nemo.wsVocab.vocabtoto.VerifyTermResponse verifyTerm(
+                     public fr.ifremer.nemo.wsVocab.vocab.VerifyTermResponse verifyTerm(
 
-                        fr.ifremer.nemo.wsVocab.vocabtoto.VerifyTerm verifyTerm6)
+                        fr.ifremer.nemo.wsVocab.vocab.VerifyTerm verifyTerm6)
                         throws java.rmi.RemoteException
              ;
 
@@ -132,7 +132,7 @@
           */
         public void startverifyTerm(
 
-            fr.ifremer.nemo.wsVocab.vocabtoto.VerifyTerm verifyTerm6,
+            fr.ifremer.nemo.wsVocab.vocab.VerifyTerm verifyTerm6,
 
             final fr.ifremer.nemo.wsVocab.VocabCallbackHandler callback)
 
@@ -148,9 +148,9 @@
          */
 
          
-                     public fr.ifremer.nemo.wsVocab.vocabtoto.GetMapResponse getMap(
+                     public fr.ifremer.nemo.wsVocab.vocab.GetMapResponse getMap(
 
-                        fr.ifremer.nemo.wsVocab.vocabtoto.GetMap getMap8)
+                        fr.ifremer.nemo.wsVocab.vocab.GetMap getMap8)
                         throws java.rmi.RemoteException
              ;
 
@@ -163,7 +163,7 @@
           */
         public void startgetMap(
 
-            fr.ifremer.nemo.wsVocab.vocabtoto.GetMap getMap8,
+            fr.ifremer.nemo.wsVocab.vocab.GetMap getMap8,
 
             final fr.ifremer.nemo.wsVocab.VocabCallbackHandler callback)
 
@@ -179,9 +179,9 @@
          */
 
          
-                     public fr.ifremer.nemo.wsVocab.vocabtoto.GetRelatedRecordByCriteriaResponse getRelatedRecordByCriteria(
+                     public fr.ifremer.nemo.wsVocab.vocab.GetRelatedRecordByCriteriaResponse getRelatedRecordByCriteria(
 
-                        fr.ifremer.nemo.wsVocab.vocabtoto.GetRelatedRecordByCriteria getRelatedRecordByCriteria10)
+                        fr.ifremer.nemo.wsVocab.vocab.GetRelatedRecordByCriteria getRelatedRecordByCriteria10)
                         throws java.rmi.RemoteException
              ;
 
@@ -194,7 +194,7 @@
           */
         public void startgetRelatedRecordByCriteria(
 
-            fr.ifremer.nemo.wsVocab.vocabtoto.GetRelatedRecordByCriteria getRelatedRecordByCriteria10,
+            fr.ifremer.nemo.wsVocab.vocab.GetRelatedRecordByCriteria getRelatedRecordByCriteria10,
 
             final fr.ifremer.nemo.wsVocab.VocabCallbackHandler callback)
 
@@ -210,9 +210,9 @@
          */
 
          
-                     public fr.ifremer.nemo.wsVocab.vocabtoto.GetRelatedRecordByTermResponse getRelatedRecordByTerm(
+                     public fr.ifremer.nemo.wsVocab.vocab.GetRelatedRecordByTermResponse getRelatedRecordByTerm(
 
-                        fr.ifremer.nemo.wsVocab.vocabtoto.GetRelatedRecordByTerm getRelatedRecordByTerm12)
+                        fr.ifremer.nemo.wsVocab.vocab.GetRelatedRecordByTerm getRelatedRecordByTerm12)
                         throws java.rmi.RemoteException
              ;
 
@@ -225,7 +225,7 @@
           */
         public void startgetRelatedRecordByTerm(
 
-            fr.ifremer.nemo.wsVocab.vocabtoto.GetRelatedRecordByTerm getRelatedRecordByTerm12,
+            fr.ifremer.nemo.wsVocab.vocab.GetRelatedRecordByTerm getRelatedRecordByTerm12,
 
             final fr.ifremer.nemo.wsVocab.VocabCallbackHandler callback)
 
@@ -241,9 +241,9 @@
          */
 
          
-                     public fr.ifremer.nemo.wsVocab.vocabtoto.WhatListsCatResponse whatListsCat(
+                     public fr.ifremer.nemo.wsVocab.vocab.WhatListsCatResponse whatListsCat(
 
-                        fr.ifremer.nemo.wsVocab.vocabtoto.WhatListsCat whatListsCat14)
+                        fr.ifremer.nemo.wsVocab.vocab.WhatListsCat whatListsCat14)
                         throws java.rmi.RemoteException
              ;
 
@@ -256,7 +256,7 @@
           */
         public void startwhatListsCat(
 
-            fr.ifremer.nemo.wsVocab.vocabtoto.WhatListsCat whatListsCat14,
+            fr.ifremer.nemo.wsVocab.vocab.WhatListsCat whatListsCat14,
 
             final fr.ifremer.nemo.wsVocab.VocabCallbackHandler callback)
 
