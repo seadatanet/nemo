@@ -1297,15 +1297,17 @@ public class NemoLists implements Cloneable {
         {
             stub = new VocabStub();
 
-
-           
             ProxyProperties proxyProperties = new ProxyProperties();
+            boolean useProxy = Nemo.getInstance().getConfig().getProxy().use;
+            if (useProxy){
             proxyProperties.setProxyName(Nemo.getInstance().getConfig().getProxy().address);
             proxyProperties.setProxyPort(Integer.valueOf(Nemo.getInstance().getConfig().getProxy().port));
+            }
             // in order to makesure that we use HTTP 1.0
             stub._getServiceClient().getOptions().setProperty(MessageContextConstants.HTTP_PROTOCOL_VERSION, HTTPConstants.HEADER_PROTOCOL_10);
+            if (useProxy){
             stub._getServiceClient().getOptions().setProperty(org.apache.axis2.transport.http.HTTPConstants.PROXY, proxyProperties);
-
+            }
             // WHATLIST
             WhatListsType wlt = new WhatListsType();
             wlt.setCategoryKey("");
