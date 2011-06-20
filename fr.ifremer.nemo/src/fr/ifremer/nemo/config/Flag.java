@@ -1,12 +1,10 @@
 package fr.ifremer.nemo.config;
 
-import java.util.TreeMap;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
-import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
-import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
 /**
  * Class Flag
@@ -15,7 +13,8 @@ import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
  * 
  * @author Herve Taniou
  */
-public class Flag {
+public class Flag
+{
 	/**
 	 * flag local
 	 */
@@ -29,12 +28,14 @@ public class Flag {
 	/**
 	 * Constructeurs
 	 */
-	public Flag() {
+	public Flag()
+	{
 		_local = Global.EMPTY_STRING;
 		_sdn = Global.EMPTY_STRING;
 	}
 
-	public Flag(String local, String sdn) {
+	public Flag(String local, String sdn)
+	{
 		_local = local;
 		_sdn = sdn;
 	}
@@ -43,19 +44,23 @@ public class Flag {
 	 * Methodes
 	 */
 
-	public String getLocal() {
+	public String getLocal()
+	{
 		return _local;
 	}
 
-	public void setLocal(String _local) {
+	public void setLocal(String _local)
+	{
 		this._local = _local;
 	}
 
-	public String getSdn() {
+	public String getSdn()
+	{
 		return _sdn;
 	}
 
-	public void setSdn(String _sdn) {
+	public void setSdn(String _sdn)
+	{
 		this._sdn = _sdn;
 	}
 
@@ -64,19 +69,22 @@ public class Flag {
 	 * 
 	 * @return String[]
 	 */
-	public static String[] flagSDN() {
-		CodeTableRecordType[] flags = NemoLists.getVocabList(Intern.list_flagsSDN);
+	public static String[] flagSDN()
+	{
+		fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType[] flags = NemoLists.getVocabList(Intern.list_flagsSDN);
 		String[] listFlags = new String[flags.length];
 
 		TreeMap<String, String> treeFlags = new TreeMap<String, String>();
 
-		for (CodeTableRecordType record : flags) {
+		for (fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType record : flags)
+		{
 			treeFlags.put(fr.ifremer.nemo.util.Utils.extraitCodeURN(record.getEntryKey()), record
 					.getEntryTerm());
 		}
 
 		int i = 0;
-		for (Entry<String, String> currentEntry : treeFlags.entrySet()) {
+		for (Entry<String, String> currentEntry : treeFlags.entrySet())
+		{
 			listFlags[i] = currentEntry.getKey() + Global.SEP
 					+ currentEntry.getValue();
 			i++;
