@@ -327,7 +327,7 @@ public class XMLOutputWriter
 				break;
 			}
 			case '°':
-				str.append("Â°");
+				str.append("&#176;");
 				break;
 			case '\r':
 			case '\n':
