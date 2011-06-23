@@ -11,6 +11,7 @@ import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Group;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.Utils;
@@ -29,7 +30,7 @@ public class FileEndData extends FileSection
 	protected Button radEOF, radEmptyLine, radBeginLineChanges, radNextStationBeginsWith, radManuel;
 	protected Button radNextStationIsRegexpCheckbox;
 	protected SetText setterStartStation;
-	protected SetText setterBeginLineChange;
+	protected SetTextLength setterBeginLineChange;
 
 	/**
 	 * @param shell
@@ -41,7 +42,7 @@ public class FileEndData extends FileSection
 	{
 		super(name, title, description, form);
 		setterStartStation = new SetText(Messages.edit_file_termination_start, Global.EMPTY_STRING, true); //$NON-NLS-1$
-		setterBeginLineChange = new SetText(Messages.edit_file_beginLineChange, Global.EMPTY_STRING, true); //$NON-NLS-1$
+		setterBeginLineChange = new SetTextLength(Messages.edit_file_beginLineChange, Global.EMPTY_STRING); //$NON-NLS-1$
 	}
 
 	@Override
@@ -73,27 +74,42 @@ public class FileEndData extends FileSection
 	{
 		compo = new Composite(parent, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compo);
+		GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compo);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(compo);
 
-		radEOF = new Button(compo, SWT.RADIO);
+		// groups
+		Group compoEndCurrent = new Group(compo, SWT.NONE);
+		compoEndCurrent.setText(Messages.edit_file_endstation_group1);
+		GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compoEndCurrent);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(compoEndCurrent);
+
+		Group compoNext = new Group(compo, SWT.NONE);
+		compoNext.setText(Messages.edit_file_endstation_group2);
+		GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compoNext);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(compoNext);
+
+		// fill groups
+		// group1
+		radEOF = new Button(compoEndCurrent, SWT.RADIO);
 		radEOF.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
 		radEOF.setText(Messages.edit_file_idcEOF);
 
-		radEmptyLine = new Button(compo, SWT.RADIO);
+		radEmptyLine = new Button(compoEndCurrent, SWT.RADIO);
 		radEmptyLine.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
 		radEmptyLine.setText(Messages.edit_file_idcEmptyLine);
 
-		radBeginLineChanges = new Button(compo, SWT.RADIO);
-		radBeginLineChanges.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
-		radBeginLineChanges.setText(Messages.edit_file_idcBeginLineChange);
-		setterBeginLineChange.draw(compo, filled);
+		radManuel = new Button(compoEndCurrent, SWT.RADIO);
+		radManuel.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
+		radManuel.setText(Messages.edit_file_idcManual);
+		setter.draw(compoEndCurrent, filled);
 
+		// group2
 
-		radNextStationBeginsWith = new Button(compo, SWT.RADIO);
+		radNextStationBeginsWith = new Button(compoNext, SWT.RADIO);
 		radNextStationBeginsWith.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
 		radNextStationBeginsWith.setText(Messages.edit_file_idcNextStation);
 
-		radNextStationIsRegexpCheckbox = new Button(compo, SWT.CHECK);
+		radNextStationIsRegexpCheckbox = new Button(compoNext, SWT.CHECK);
 		radNextStationIsRegexpCheckbox.setText(Messages.edit_file_idcNextStationRegexp);
 		radNextStationIsRegexpCheckbox.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
 		radNextStationIsRegexpCheckbox.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter()
@@ -104,12 +120,13 @@ public class FileEndData extends FileSection
 				Utils.invalidEtapes();
 			}
 		});
-		setterStartStation.draw(compo, filled);
 
-		radManuel = new Button(compo, SWT.RADIO);
-		radManuel.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
-		radManuel.setText(Messages.edit_file_idcManual);
-		setter.draw(compo, filled);
+		setterStartStation.draw(compoNext, filled);
+
+		radBeginLineChanges = new Button(compoNext, SWT.RADIO);
+		radBeginLineChanges.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
+		radBeginLineChanges.setText(Messages.edit_file_idcBeginLineChange);
+		setterBeginLineChange.draw(compoNext, filled);
 
 		selectEndData(radEOF);
 		addRadListener(radEOF);
@@ -350,7 +367,8 @@ public class FileEndData extends FileSection
 
 	public void setEndData(E_EndData end, String pattern, boolean isPatternRegexp)
 	{
-		switch (end) {
+		switch (end)
+		{
 		case NEXT_START_WITH:
 			selectEndData(getRadNextStation());
 			setStartStationIndicator(pattern);
@@ -365,7 +383,7 @@ public class FileEndData extends FileSection
 			break;
 		case BEGIN_LINE_CHANGES:
 			selectEndData(getRadBeginLineChanges());
-			setBeginLineChangeIndicator(pattern);
+			setBeginLineChangeIndicator(String.valueOf(pattern.length()));
 			break;
 		default:
 			selectEndData(getRadEOF());

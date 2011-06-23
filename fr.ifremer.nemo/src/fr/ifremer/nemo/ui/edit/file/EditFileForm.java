@@ -847,7 +847,16 @@ public class EditFileForm extends EditForm
 			mediaModel.setEndDataPatternIsRegexp(sectionDataTerminator.getStartStationIndicatorRegexpCheckbox());
 		} else if (end == E_EndData.BEGIN_LINE_CHANGES)
 		{
-			mediaModel.setEndDataPattern(sectionDataTerminator.getBeginLineChangeIndicator());
+			// TODO BGT
+			// ici on bricole avec un pattern qui ne sert qu'à donner une taille
+			// de string pour la suite - fonctionne mais moche
+			Character[] tmpChar = new Character[Integer.valueOf(sectionDataTerminator.getBeginLineChangeIndicator())];
+			for (int i = 0; i < tmpChar.length; i++)
+			{
+				tmpChar[i] = 'x';
+			}
+
+			mediaModel.setEndDataPattern(tmpChar.toString());
 			mediaModel.setEndDataPatternIsRegexp(false);
 		}
 		Nemo.getInstance().getDomain().getConversion().setCurrentConversion(Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType());

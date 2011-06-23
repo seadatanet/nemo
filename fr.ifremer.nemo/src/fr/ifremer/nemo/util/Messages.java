@@ -161,6 +161,8 @@ public class Messages
 	public static String edit_file_finStation;
 	public static String edit_file_indicFinDonnees_title;
 	public static String edit_file_indicFinDonnees;
+	public static String edit_file_endstation_group1;
+	public static String edit_file_endstation_group2;
 	public static String edit_file_idcEOF;
 	public static String edit_file_idcEmptyLine;
 	public static String edit_file_idcBeginLineChange;
