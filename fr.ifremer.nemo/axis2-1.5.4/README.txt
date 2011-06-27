@@ -1,7 +1,7 @@
 ======================================================
 Apache Axis2 1.5.4 build (19-12-2010) 
 
-http://axis.apache.org/axis2/java/core/
+http://axis.apache.org/axis2/java/core/ 
 ------------------------------------------------------
 
 Welcome to Axis2!
