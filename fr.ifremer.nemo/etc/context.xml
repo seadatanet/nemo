@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Context>
-  <Resource
-    name="SISMER"
-    type="javax.sql.DataSource"
-    password="tstserveur"
-    driverClassName="oracle.jdbc.driver.OracleDriver"
-    maxIdle="2"
-    maxWait="5000"
-    username="tstserveur"
-    url="jdbc:oracle:thin:@josephine.ifremer.fr:1521:btest920"
-    maxActive="4"/>
+ <Resource
+  name="SISMER"
+   type="javax.sql.DataSource"
+   password="serveur"
+   driverClassName="oracle.jdbc.driver.OracleDriver"
+   maxIdle="2"
+   maxWait="5000"
+   username="serveur"
+   url="jdbc:oracle:thin:@borneo:1521:idm"
+   maxActive="4"/>
   <WatchedResource>WEB-INF/web.xml</WatchedResource>
 </Context>
