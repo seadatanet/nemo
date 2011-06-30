@@ -72,7 +72,7 @@ public class NemoShell
 			nemo.openModel(modelFile);
 			InputDomain inputDomain = Nemo.getInstance().getDomain();
 			if (inputDomain.getMedia().getModel().getSeparator() != Global.EMPTY_STRING)
-				inputFile = Preformat.runBatch(new File(inputFile)).getAbsolutePath();
+				inputFile = Preformat.run(new File(inputFile)).getAbsolutePath();
 
 			nemo.getDomain().getMedia().getModel().setSourcePath(inputFile);
 

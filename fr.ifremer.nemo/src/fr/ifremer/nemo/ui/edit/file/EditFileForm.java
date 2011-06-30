@@ -49,6 +49,7 @@ public class EditFileForm extends EditForm
 	// peut être ecrasé par PF_nomRepertoire,
 	// et on a besoin du vrai nom pour ecrire la commande batch)
 	public String nomRepertoireOrigin;
+	public String nomFichierOrigin;
 
 	// sections
 	private FileSection sectionFileHeader;
@@ -1106,9 +1107,14 @@ public class EditFileForm extends EditForm
 		return sectionEndOfStation;
 	}
 
-	public boolean isGroupedByCruise()
+	public boolean isCollectionGroupedByCruise()
 	{
 		return radioCollectGroupedByCruise.getSelection();
+	}
+
+	public boolean isCollectionNotGroupedByCruise()
+	{
+		return radioCollectNotGroupedByCruise.getSelection();
 	}
 
 	public boolean isCruiseIsAFile()

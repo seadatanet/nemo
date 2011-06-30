@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.domain.MediaDomain;
+import fr.ifremer.nemo.input.MediaModel;
 import fr.ifremer.nemo.ui.Application;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
@@ -68,6 +69,16 @@ public class Preformat
 
 	// Ajout d'un espace en début de ligne de données
 	private static boolean space;
+
+	private static E_EndData _endData;
+	private static String _endDataPattern;
+	private static boolean _endDataPatternIsRegexp;
+
+	protected static String beginningOfPreviousLine = Global.NO_VALUE;
+	protected static String previousReadedLine = Global.NO_VALUE;
+	protected static boolean isBeginningOfStation = false;
+
+	private static boolean isCollectionGroupedByCruise = false;
 
 	// ////////////
 	// Methodes //
@@ -131,163 +142,135 @@ public class Preformat
 
 	}
 
-	public static void run() throws IOException
+	public static void runExGUI() throws IOException
 	{
-
+		isCollectionGroupedByCruise = false;
 		EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
-
-		space = false;
-		_repEntree = Global.EMPTY_STRING;
-		File repSortie;
-
-		Utils.messageOK(Messages.progress_file_preformat);
-
-		_nbColonne = 1;
-		_preformatOK = false;
-
-		_enTeteFichier = Integer.parseInt(editFileForm.getSectionFileHeader().getValue());
-		_isPattern = !editFileForm.getSectionStationHeader().isSelectNumber();
-		_enTeteStation = Integer.parseInt(editFileForm.getSectionStationHeader().getValue());
-		_enTeteStationPattern = editFileForm.getSectionStationHeader().getIndicatorText();
-		_lgBeforeData = Integer.parseInt(editFileForm.getSectionStationHeader().getNbLinesBeforeData());
-
-		String indic = editFileForm.getSectionDataTerminator().getIndicatorValue();
-		if (indic != null)
-		{
-			_indicateur = indic;
-		}
-
-		if (editFileForm.isSeparatorChecked())
-		{
-			_separateur = editFileForm.getSeparatorAsChar();
-		}
 
 		if (editFileForm.isCruiseIsAFile())
 		{
-
 			File ficEntree = new File(editFileForm.nomFichier);
-
-			processPreformat(new File[]
-										{ ficEntree.getParentFile() }, new String[]
-																				{ ficEntree.getName() }, ficEntree.getParentFile());
-
-			editFileForm.nomFichier = ficEntree.getParent() + PF + ficEntree.getName();
+			File ficSortie = run(ficEntree);
+			editFileForm.nomFichier = ficSortie.getAbsolutePath();
 			editFileForm.setFileLoaded(true);
-
 			Utils.insertTextFich(editFileForm.nomFichier, Nemo.getInstance().getViewMain().getEditCruiseForm().getTextAreaCruise(), false);
 			editFileForm.getTextAreaFile().setText(Utils.texteBrut);
 
-		} else if (editFileForm.isGroupedByCruise())
-		{
-
-			File repCollection = new File(editFileForm.nomRepertoire);
-			File[] listeRepertoires = repCollection.listFiles();
-
-			repSortie = new File(repCollection.getParent() + PF + repCollection.getName());
-			if (!repSortie.exists())
-			{
-				repSortie.mkdirs();
-			}
-
-			processPreformat(listeRepertoires, null, repSortie);
-
-			editFileForm.nomRepertoire = repSortie.getAbsolutePath();
-			editFileForm.setFileLoaded(true);
-
-			if (Utils.findFilesCollectCas1(repCollection.getAbsolutePath(), false))
-			{
-				editFileForm.getTextAreaFile().setText(Utils.texteBrut);
-			}
 		} else if (editFileForm.isCruiseIsADir())
 		{
 			File repertoire = new File(editFileForm.nomRepertoire);
-			repSortie = new File(repertoire.getParent() + PF + repertoire.getName());
-			if (!repSortie.exists())
-			{
-				repSortie.mkdirs();
-			}
-			processPreformat(new File[]
-										{ repertoire }, null, repSortie);
-
-			editFileForm.nomRepertoire = repertoire.getParent() + PF + repertoire.getName();
+			File ficSortie = run(repertoire);
+			editFileForm.nomRepertoire = ficSortie.getAbsolutePath();
 			editFileForm.setFileLoaded(true);
-
 			if (Utils.findFiles(editFileForm.nomRepertoire, false))
 			{
 				editFileForm.getTextAreaFile().setText(Utils.texteBrut);
 			}
-		} else
+
+		} else if (editFileForm.isCollectionGroupedByCruise())
+		{
+			isCollectionGroupedByCruise = true;
+			File repCollection = new File(editFileForm.nomRepertoire);
+			File ficSortie = run(repCollection);
+			editFileForm.nomRepertoire = ficSortie.getAbsolutePath();
+			editFileForm.setFileLoaded(true);
+			if (Utils.findFilesCollectCas1(ficSortie.getAbsolutePath(), false))
+			{
+				editFileForm.getTextAreaFile().setText(Utils.texteBrut);
+			}
+		}
+
+		else if (editFileForm.isCollectionNotGroupedByCruise())
 		{
 
 			File repertoire = new File(editFileForm.nomRepertoire);
-
-			processPreformat(new File[]
-										{ repertoire }, null, repertoire.getParentFile());
-
-			editFileForm.nomRepertoire = repertoire.getParent() + PF + repertoire.getName();
+			File ficSortie = run(repertoire);
+			editFileForm.nomRepertoire = ficSortie.getAbsolutePath();
 			editFileForm.setFileLoaded(true);
-
 			if (Utils.findFiles(editFileForm.nomRepertoire, false))
 			{
 				editFileForm.getTextAreaFile().setText(Utils.texteBrut);
 			}
+
+		} else
+		{
+			System.out.println("pb runGUI: on auait du passer dans un des cas precedents");
 		}
 		setPreformat(true);
 	}
 
-	public static File runBatch(File inputFile) throws IOException
+	public static File run(File inputFile) throws IOException
 	{
-
+		isCollectionGroupedByCruise = false;
+		boolean isBatch = Nemo.getInstance().isBatchMode();
 		MediaDomain mediaDom = Nemo.getInstance().getDomain().getMedia();
 		space = false;
 
 		_nbColonne = 1;
 		_preformatOK = false;
-
 		_enTeteFichier = mediaDom.getModel().getFileHeader();
-
 		_isPattern = mediaDom.getModel().getStationHeaderPattern().length() > 0;
-
 		_enTeteStation = mediaDom.getModel().getStationHeader();
-
 		_enTeteStationPattern = mediaDom.getModel().getStationHeaderPattern();
-
 		_lgBeforeData = mediaDom.getModel().getStationHeader();
-
 		_indicateur = mediaDom.getModel().getEndDataPattern();
-
 		_separateur = mediaDom.getModel().getSeparator().toCharArray()[0];
+		_endData = mediaDom.getModel().getEndData();
+		MediaModel mediaModel = Nemo.getInstance().getDomain().getMedia().getModel();
+		_endDataPattern = mediaModel.getEndDataPattern();
+		_endDataPatternIsRegexp = mediaModel.getEndDataPatternIsRegexp();
 
 		File ficSortie = null;
+		// cruise file
 		if (inputFile.isFile())
 		{
-
-			processPreformat(new File[]
-			{ inputFile.getParentFile() }, new String[]
-			{ inputFile.getName() }, inputFile.getParentFile(), true);
-
+			_repEntree = inputFile.getParent();
 			ficSortie = new File(inputFile.getParent() + PF + inputFile.getName());
+			processPreformatFile(inputFile.getParent(),
+					inputFile.getName(), isBatch);
 
-		} else if (inputFile.listFiles()[0].isDirectory() &&
+		}
+		// collect group by cruise
+		else if (inputFile.listFiles()[0].isDirectory() &&
 				(!inputFile.listFiles()[0].toString().endsWith(".svn")))
 
 		{
-
+			isCollectionGroupedByCruise = true;
 			File[] listeRepertoires = inputFile.listFiles();
 
 			ficSortie = new File(inputFile.getParent() + PF + inputFile.getName());
 			if (!ficSortie.exists())
 			{
 				ficSortie.mkdirs();
+			} else
+			{
+				Utils.deleteDir(ficSortie);
+				ficSortie.mkdirs();
 			}
 
-			processPreformat(listeRepertoires, null, ficSortie, true);
+			processPreformat(listeRepertoires, null, ficSortie, isBatch);
+
+		}
+		// cruise directory ou collection not grouped
+		else if (inputFile.isDirectory() && !inputFile.listFiles()[0].isDirectory())
+		{
+			ficSortie = new File(inputFile.getParent() + PF + inputFile.getName());
+			if (!ficSortie.exists())
+			{
+				ficSortie.mkdirs();
+			} else
+			{
+				Utils.deleteDir(ficSortie);
+				ficSortie.mkdirs();
+			}
+			processPreformat(new File[]
+									{ inputFile }, null, ficSortie, isBatch);
 
 		} else
 		{
 
 			processPreformat(new File[]
-			{ inputFile }, null, inputFile.getParentFile(), true);
+			{ inputFile }, null, inputFile.getParentFile(), isBatch);
 
 			ficSortie = new File(inputFile.getParent() + PF + inputFile.getName());
 
@@ -297,9 +280,20 @@ public class Preformat
 
 	}
 
-	private static void processPreformat(File[] lstRepertoires, String[] listeFichiers, File repSortie) throws IOException
+	private static void processPreformatFile(String outputDirectory, String inputFile, boolean batchMode) throws IOException
 	{
-		processPreformat(lstRepertoires, listeFichiers, repSortie, false);
+		nombreColonnes(inputFile);
+		// /////////////////////////////////////////////////
+		// Recuperation des entiers et decimales maximum //
+		// /////////////////////////////////////////////////
+		_maxEntier = new int[_nbColonne];
+		_maxDecimale = new int[_nbColonne];
+		_nbEntier = new int[_nbColonne];
+		_nbDecimale = new int[_nbColonne];
+		_colonne = new String[_nbColonne];
+		getMax(inputFile, batchMode);
+		// ici le repertoire d'entree et celui de sortie sont les memes
+		ecritureFichier(inputFile, outputDirectory, outputDirectory);
 	}
 
 	private static void processPreformat(File[] lstRepertoires, String[] listeFichiers, File repSortie, boolean batchMode) throws IOException
@@ -308,36 +302,8 @@ public class Preformat
 		Double pourcentEtape1 = 0d;
 		Double pourcentEtape2 = 0d;
 		int nbFic = 0;
+		lstRepertoires = fr.ifremer.nemo.util.Utils.getFilesWithoutSVN(lstRepertoires);
 
-		// *****************
-		// suppression des repertoires SVN
-		boolean isSVNDirPresent = false;
-		File[] lstRepertoiresWithoutSNV = new
-				File[lstRepertoires.length];
-		for (File rep1 : lstRepertoires)
-		{
-			if (rep1.toString().endsWith(".svn"))
-			{
-				isSVNDirPresent = true;
-				break;
-			}
-		}
-		if (isSVNDirPresent)
-		{
-			lstRepertoiresWithoutSNV = new File[lstRepertoires.length - 1];
-
-			int cpt = 0;
-			for (int i = 0; i < lstRepertoires.length; i++)
-			{
-				if (!lstRepertoires[i].toString().endsWith(".svn"))
-				{
-					lstRepertoiresWithoutSNV[cpt] = lstRepertoires[i];
-					cpt++;
-				}
-			}
-			lstRepertoires = lstRepertoiresWithoutSNV;
-		}
-		// *****************
 		// /////////////////////////////////////////////////
 		// Recuperation du nombres de colonnes //
 		// /////////////////////////////////////////////////
@@ -348,22 +314,8 @@ public class Preformat
 			{
 				listeFichiers = new File(_repEntree).list();
 			}
-
 			// on enleve le repertoire .svn s'il existe
-			if (listeFichiers != null && listeFichiers[0].toString().endsWith(".svn"))
-			{
-				String[] listeFichiersWithoutSVN = new String[listeFichiers.length - 1];
-				int cpt = 0;
-				for (int i = 0; i < listeFichiers.length; i++)
-				{
-					if (!listeFichiers[i].endsWith(".svn"))
-					{
-						listeFichiersWithoutSVN[cpt] = listeFichiers[i];
-						cpt++;
-					}
-				}
-				listeFichiers = listeFichiersWithoutSVN;
-			}
+			listeFichiers = fr.ifremer.nemo.util.Utils.getFilesWithoutSVN(listeFichiers);
 
 			nbFic += listeFichiers.length;
 
@@ -381,6 +333,7 @@ public class Preformat
 		_nbEntier = new int[_nbColonne];
 		_nbDecimale = new int[_nbColonne];
 		_colonne = new String[_nbColonne];
+
 		for (File repertoire : lstRepertoires)
 		{
 			_repEntree = repertoire.getAbsolutePath();
@@ -407,23 +360,12 @@ public class Preformat
 		for (File repertoire : lstRepertoires)
 		{
 			_repEntree = repertoire.getAbsolutePath();
-			if (listeFichiers == null)
-			{
-				listeFichiers = new File(_repEntree).list();
-			}
+			// if (listeFichiers == null)
+			// {
+			listeFichiers = new File(_repEntree).list();
+			// }
 
-			// Creation du repertoire pour les fichiers preformates
-			String outputDir = repSortie.getAbsolutePath();
-
-			if (Nemo.getInstance().getDomain().getMedia().getModel().getProcessType() != E_ProcessType.CRUISE_FILE)
-			{
-				outputDir += PF + repertoire.getName();
-			}
-			File repPreformat = new File(outputDir);
-			if (!repPreformat.exists())
-			{
-				repPreformat.mkdirs();
-			}
+			File repPreformat = new File(repSortie.getAbsolutePath());
 
 			for (String fichier : listeFichiers)
 			{
@@ -432,7 +374,17 @@ public class Preformat
 					pourcentEtape2 += 100d / nbFic;
 					refreshEtatAvancement(pourcentEtape1, pourcentEtape2);
 				}
-				ecritureFichier(fichier, repPreformat.getAbsolutePath());
+				String sortie;
+				if (isCollectionGroupedByCruise)
+				{
+					File sub = new File(repPreformat.getAbsolutePath() + File.separator + repertoire.getName());
+					sub.mkdir();
+					sortie = repPreformat.getAbsolutePath() + File.separator + repertoire.getName();
+				} else
+				{
+					sortie = repPreformat.getAbsolutePath();
+				}
+				ecritureFichier(fichier, _repEntree, sortie);
 			}
 		}
 		pourcentEtape2 = 100d;
@@ -609,18 +561,156 @@ public class Preformat
 		}
 	}
 
-	private static void ecritureFichier(String ficEntree, String repSortie) throws IOException
+	// ***********************************************************
+
+	protected static boolean isStartStationHeader(int numLine, String readedLine)
 	{
+		boolean start = false;
+		if (numLine == (_enTeteFichier + 1))
+		{
+			start = true;
+		} else if (isMultiStations())
+		{
+			start = isEndData(numLine, readedLine);
+		}
+		if (start)
+		{
+			setBeginningOfPreviousLine(readedLine);
+		}
+		return start;
+	}
+
+	protected static void setBeginningOfPreviousLine(String readedLine)
+	{
+		isBeginningOfStation = !beginningOfPreviousLine.equals(readedLine.substring(0, _endDataPattern.length()));
+		beginningOfPreviousLine = readedLine.substring(0, _endDataPattern.length());
+		previousReadedLine = readedLine;
+	}
+
+	protected static boolean isEndData(int numLine, String readedLine)
+	{
+
+		boolean end = false;
+		switch (_endData)
+		{
+		case NEXT_START_WITH:
+		case END_WITH:
+			if (_endDataPatternIsRegexp)
+			{
+				end = fr.ifremer.nemo.util.Utils.isreadedLineMatchesRegexp(readedLine, _endDataPattern + ".*");
+			} else
+			{
+				end = readedLine.startsWith(_endDataPattern);
+			}
+			break;
+		case EMPTY_LINE:
+			end = readedLine.trim().matches("^$"); //$NON-NLS-1$
+			break;
+		case BEGIN_LINE_CHANGES:
+			if (numLine == (_enTeteFichier + 1))
+			{
+				end = false;
+			} else
+			{
+				end = hasBeginLineChanged(readedLine);
+			}
+
+			break;
+		default:
+			end = false;
+			break;
+		}
+
+		if (end)
+		{
+			// System.out.println("is end = " + end);
+		}
+		return end;
+	}
+
+	// protected static boolean isEndData(int numLine, String readedLine)
+	// {
+	//
+	// boolean end = false;
+	// switch (_endData)
+	// {
+	// case END_WITH:
+	// end = readedLine.startsWith(_endDataPattern);
+	// break;
+	// case EMPTY_LINE:
+	//			end = readedLine.trim().matches("^$"); //$NON-NLS-1$
+	// break;
+	// case NEXT_START_WITH:
+	// if (_endDataPatternIsRegexp)
+	// {
+	// end = fr.ifremer.nemo.util.Utils.isreadedLineMatchesRegexp(readedLine,
+	// _endDataPattern + ".*");
+	// } else
+	// {
+	// end = readedLine.startsWith(_endDataPattern);
+	// }
+	// break;
+	// case BEGIN_LINE_CHANGES:
+	// if (numLine == (_enTeteFichier + 1))
+	// {
+	// end = false;
+	// } else
+	// {
+	// end = hasBeginLineChanged(readedLine);
+	// }
+	//
+	// break;
+	// default:
+	// end = false;
+	// break;
+	// }
+	//
+	// if (end)
+	// {
+	// // System.out.println("is end = " + end);
+	// }
+	// return end;
+	// }
+
+	private static boolean hasBeginLineChanged(String readedLine)
+	{
+		boolean hasChanged = false;
+		String beginningOfCurrentLine = readedLine.substring(0, _endDataPattern.length());
+		hasChanged = !beginningOfCurrentLine.equals(beginningOfPreviousLine);
+		return hasChanged;
+	}
+
+	// **********************************************************
+	private static boolean isMultiStations()
+	{
+		boolean isMS = false;
+		if (Nemo.getInstance().isBatchMode())
+		{
+			MediaDomain mediaDom = Nemo.getInstance().getDomain().getMedia();
+			isMS = mediaDom.getModel().getProcessType() == E_ProcessType.CRUISE_FILE || mediaDom.getModel().isMultiStations();
+		} else
+		{
+			EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
+			isMS = editFileForm.isCruiseIsAFile() || editFileForm.isMultiStationFileChecked();
+		}
+		return isMS;
+	}
+
+	private static void ecritureFichier(String ficEntree, String repEntree, String repSortie) throws IOException
+	{
+
+		// System.out.println("fichier entree " + repEntree + "/" + ficEntree);
+		// System.out.println("repertoire sortie " + repSortie);
 		BufferedReader lecteurAvecBuffer = null;
 		PrintWriter fichPreformat = null;
 		String ligneLue = Global.EMPTY_STRING;
 		int numLigne = 0;
 		int i, j;
-
+		boolean nextLineIsStationHeader = false;
 		try
 		{
 			numLigne = 0;
-			File file = new File(_repEntree + File.separator + ficEntree);
+			File file = new File(repEntree + File.separator + ficEntree);
 			lecteurAvecBuffer = new BufferedReader(new FileReader(_repEntree + File.separator + ficEntree));
 			// fichPreformat = new PrintWriter(new BufferedWriter(new
 			// FileWriter(repSortie + PF + ficEntree)));
@@ -636,56 +726,43 @@ public class Preformat
 				numLigne++;
 				if (numLigne <= lgEnTeteStation)
 				{
-					// Traitement de l'en-tete
+					// Traitement du 1er en-tete
 					fichPreformat.println(ligneLue);
-				} else
+
+				} else if (nextLineIsStationHeader || isStartStationHeader(numLigne, ligneLue))
 				{
-					// Traitement des donnees
-					analyseLigne(ligneLue);
-
-					for (i = 0; i < _nbColonne; i++)
+					// cas ou changment de station indiquee par le type de fin
+					// de donnees
+					if (!nextLineIsStationHeader && (_endData == E_EndData.EOF || _endData == E_EndData.EMPTY_LINE || _endData == E_EndData.END_WITH))
 					{
-						// Ajout des zeros apres
-						if (_maxDecimale[i] > 0)
+						fichPreformat.println(ligneLue);
+						nextLineIsStationHeader = true;
+					}
+					// cas
+					else
+					{
+						for (int nbLine = 0; nbLine < _enTeteStation; nbLine++)
 						{
-							if (_colonne[i].length() > 0)
-							{
-								if (_colonne[i].lastIndexOf(Global.POINT) < 0)
-								{
-									_colonne[i] += Global.POINT;
-								}
-								for (j = 0; j < _maxDecimale[i] - _nbDecimale[i]; j++)
-								{
-									_colonne[i] += Global.ZERO;
-								}
-							} else
-							{
-								// on ajoute des espaces pour eviter le decalage
-								for (j = 0; j < _maxDecimale[i] + 1; j++)
-								{
-									_colonne[i] += Global.SPACE;
-								}
-							}
+							fichPreformat.println(ligneLue);
+							ligneLue = lecteurAvecBuffer.readLine();
+							numLigne++;
 						}
-
-						// Ajout des espaces avant
-						while (_colonne[i].length() < _maxEntier[i] + _maxDecimale[i] + 1)
-						{
-							_colonne[i] = Global.SPACE + _colonne[i];
-							if (i == 0)
-								space = true;
-						}
-
-						fichPreformat.print(_colonne[i] + Global.SPACE);
+						nextLineIsStationHeader = false;
 					}
 
-					fichPreformat.println(Global.EMPTY_STRING);
+				} else
+				{
+					fichPreformat = writeDataLine(ligneLue, fichPreformat);
+
 				}
 			}
 
 		} catch (FileNotFoundException exc)
 		{
-			Utils.messageErreurAppend(Messages.error_file_preformat + Global.SPACE + ficEntree);
+			if (!Nemo.getInstance().isBatchMode())
+			{
+				Utils.messageErreurAppend(Messages.error_file_preformat + Global.SPACE + ficEntree);
+			}
 		} finally
 		{
 			if (lecteurAvecBuffer != null)
@@ -693,6 +770,51 @@ public class Preformat
 			if (fichPreformat != null)
 				fichPreformat.close();
 		}
+	}
+
+	private static PrintWriter writeDataLine(String ligneLue, PrintWriter fichPreformat)
+	{
+		// Traitement des donnees
+		analyseLigne(ligneLue);
+
+		for (int i = 0; i < _nbColonne; i++)
+		{
+			// Ajout des zeros apres
+			if (_maxDecimale[i] > 0)
+			{
+				if (_colonne[i].length() > 0)
+				{
+					if (_colonne[i].lastIndexOf(Global.POINT) < 0)
+					{
+						_colonne[i] += Global.POINT;
+					}
+					for (int j = 0; j < _maxDecimale[i] - _nbDecimale[i]; j++)
+					{
+						_colonne[i] += Global.ZERO;
+					}
+				} else
+				{
+					// on ajoute des espaces pour eviter le decalage
+					for (int j = 0; j < _maxDecimale[i] + 1; j++)
+					{
+						_colonne[i] += Global.SPACE;
+					}
+				}
+			}
+
+			// Ajout des espaces avant
+			while (_colonne[i].length() < _maxEntier[i] + _maxDecimale[i] + 1)
+			{
+				_colonne[i] = Global.SPACE + _colonne[i];
+				if (i == 0)
+					space = true;
+			}
+
+			fichPreformat.print(_colonne[i] + Global.SPACE);
+		}
+
+		fichPreformat.println(Global.EMPTY_STRING);
+		return fichPreformat;
 	}
 
 	private static int consumeStationHeader(BufferedReader lecteurAvecBuffer) throws IOException

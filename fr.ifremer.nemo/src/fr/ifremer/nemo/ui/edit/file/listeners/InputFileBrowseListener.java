@@ -1,4 +1,5 @@
-/* ============================================================================
+/*
+ * ============================================================================
  * Nom du fichier : inputFileBrowseListener.java
  * Auteur : sbregent
  * Date : 22 nov. 10
@@ -26,15 +27,17 @@ import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
 
 /**
- * Description: listener sur le bouton browse de l'onget File (ouverture fichier entree)
+ * Description: listener sur le bouton browse de l'onget File (ouverture fichier
+ * entree)
+ * 
  * @author sbregent
- *
+ * 
  */
 public class InputFileBrowseListener extends SelectionAdapter
 {
 
 	// reference sur l'editeur
-    private EditFileForm myEditFileForm;
+	private final EditFileForm myEditFileForm;
 
 	public InputFileBrowseListener(EditFileForm editFileForm)
 	{
@@ -59,21 +62,19 @@ public class InputFileBrowseListener extends SelectionAdapter
 		{
 			// si fichier campagne
 			browseForCruiseFile();
-        }
-        else if (myEditFileForm.getRadioDossier().getSelection())
+		} else if (myEditFileForm.getRadioDossier().getSelection())
 		{
 			// si dossier campagne
 			browseForCruiseDirectory();
-        }
-        else if (myEditFileForm.getRadioCollectGroupedByCruise().getSelection())
+		} else if (myEditFileForm.getRadioCollectGroupedByCruise().getSelection())
 		{
 			browseForCollectionGroupedByCruise();
-        }
-        else if (myEditFileForm.getRadioCollectNotGroupedByCruise().getSelection())
+		} else if (myEditFileForm.getRadioCollectNotGroupedByCruise().getSelection())
 		{
 			browseForCollectionNotGroupedByCruise();
 		}
 		myEditFileForm.nomRepertoireOrigin = myEditFileForm.nomRepertoire;
+		myEditFileForm.nomFichierOrigin = myEditFileForm.nomFichier;
 		// reinitialisation de la conversion et de l'affichage
 		Nemo.getInstance().getViewMain().getMyRulesManager().updateFromBrowse();
 		Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();
@@ -93,31 +94,30 @@ public class InputFileBrowseListener extends SelectionAdapter
 				myEditFileForm.nomRepertoire = new File(myEditFileForm.nomFichier).getParent() + File.separator;
 
 				// affichage du corps du fichier
-                 Utils.insertTextFich(myEditFileForm.nomFichier,
-                     Nemo.getInstance().getViewMain().getEditCruiseForm().getTextAreaCruise(),
-                     true);
+				Utils.insertTextFich(myEditFileForm.nomFichier,
+						Nemo.getInstance().getViewMain().getEditCruiseForm().getTextAreaCruise(),
+						true);
 				myEditFileForm.getTextAreaFile().setText(Utils.texteBrut);
 				// affichage etape0 dans formulaire d'edition
 				myEditFileForm.afficheEdition();
 
-             }
-             else
+			} else
 			{
-                 ViewLog.styledTextLogErreurs
-                 .setText(Messages.error_file_selectFile);
+				ViewLog.styledTextLogErreurs
+						.setText(Messages.error_file_selectFile);
 			}
-         }
-         catch (IOException e1)
+		} catch (IOException e1)
 		{
-             ViewLog.styledTextLogErreurs
-             .setText(Messages.error);
+			ViewLog.styledTextLogErreurs
+					.setText(Messages.error);
 			e1.printStackTrace();
 		}
 	}
 
 	private void browseForCruiseDirectory()
 	{
-         try{
+		try
+		{
 			DirectoryDialog dialog = getDirectoryDialog();
 			myEditFileForm.nomRepertoire = dialog.open();
 
@@ -132,16 +132,15 @@ public class InputFileBrowseListener extends SelectionAdapter
 					// affichage etape0 dans formulaire d'edition
 					myEditFileForm.afficheEdition();
 				}
-             }
-             else
+			} else
 			{
-                 ViewLog.styledTextLogErreurs
-                 .setText(Messages.error_file_selectDir);
+				ViewLog.styledTextLogErreurs
+						.setText(Messages.error_file_selectDir);
 			}
 		} catch (Exception e)
 		{
-             ViewLog.styledTextLogErreurs
-             .setText(Messages.error_file_selectDir);
+			ViewLog.styledTextLogErreurs
+					.setText(Messages.error_file_selectDir);
 		}
 	}
 
@@ -166,16 +165,15 @@ public class InputFileBrowseListener extends SelectionAdapter
 					// affichage etape0 dans formulaire d'edition
 					myEditFileForm.afficheEdition();
 				}
-             }
-             else
+			} else
 			{
-                 ViewLog.styledTextLogErreurs
-                 .setText(Messages.error_file_selectDir);
+				ViewLog.styledTextLogErreurs
+						.setText(Messages.error_file_selectDir);
 			}
 		} catch (Exception e)
 		{
-             ViewLog.styledTextLogErreurs
-             .setText(Messages.error_file_selectDir);
+			ViewLog.styledTextLogErreurs
+					.setText(Messages.error_file_selectDir);
 		}
 	}
 
@@ -199,16 +197,15 @@ public class InputFileBrowseListener extends SelectionAdapter
 					// affichage etape0 dans formulaire d'edition
 					myEditFileForm.afficheEdition();
 				}
-             }
-             else
+			} else
 			{
-                 ViewLog.styledTextLogErreurs
-                 .setText(Messages.error_file_selectDir);
+				ViewLog.styledTextLogErreurs
+						.setText(Messages.error_file_selectDir);
 			}
 		} catch (Exception e)
 		{
-             ViewLog.styledTextLogErreurs
-             .setText(Messages.error_file_selectDir);
+			ViewLog.styledTextLogErreurs
+					.setText(Messages.error_file_selectDir);
 		}
 	}
 

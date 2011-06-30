@@ -62,16 +62,28 @@ public class FileFormValidator extends FormValidator
 				return;
 			}
 			// Fichier avec séparateur
-			if (editFileForm.isSeparatorChecked() && !Preformat.isPreformat())
+			if (editFileForm.isSeparatorChecked())
 			{
+				// si on a deja preformate une fois, on repart sur les vrais
+				// noms d'origine (et pas les PF_...)
+				// if (Preformat.isPreformat())
+				// {
+				editFileForm.nomRepertoire = editFileForm.nomRepertoireOrigin;
+				editFileForm.nomFichier = editFileForm.nomFichierOrigin;
+				// }
 				try
 				{
-					Preformat.run();
+					// on va avoir besoin de connaitre les modele saisi pour
+					// pouvoir formatter (8847)
+					editFileForm.initFromNewModel();
+					// formatage
+					Preformat.runExGUI();
 
 					// le préformattage a ajouté un espace au début de chaque
 					// ligne
 					// de données
-					if (Preformat.isSpaceAdded() && editFileForm.getSectionDataTerminator().radNextStationSelected())
+					// 8847 BGT modifié si next en si NON next
+					if (Preformat.isSpaceAdded() && !editFileForm.getSectionDataTerminator().radNextStationSelected())
 					{
 						editFileForm.addSpaceBeforeDataTerminator();
 					}
