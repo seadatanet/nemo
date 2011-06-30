@@ -388,7 +388,7 @@ public class RulesManager
 		rule_fileType(true);
 		myConversionType = getDefaultConversionTypeWithRules();
 		rule_conversionType(true);
-
+		myEditFileForm.razText();
 		myEditFileForm.resetDefaultSelectionSeparator();
 		myEditFileForm.selectTypeFile(myFileType);
 		myEditFileForm.updateEnableConversionTypes();
