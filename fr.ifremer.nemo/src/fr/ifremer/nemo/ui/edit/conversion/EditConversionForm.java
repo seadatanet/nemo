@@ -68,6 +68,8 @@ public class EditConversionForm extends EditForm
 	private String warningStation = Global.EMPTY_STRING;
 	private String warningData = Global.EMPTY_STRING;
 
+	private String _mappingTablePrefix = Global.EMPTY_STRING;
+
 	/*
 	 * Methodes de création de l'onglet (héritées de EditForm)
 	 */
@@ -486,6 +488,9 @@ public class EditConversionForm extends EditForm
 			if (!cheminComplet.endsWith(nomHorsPrefix))
 			{
 				definePrefixDossier();
+			} else
+			{
+				_mappingTablePrefix = inputPrefixDossier.getValue();
 			}
 			Nemo.getInstance().getDomain().getConversion().setNomMappingHorsPrefix(nomHorsPrefix);
 		}
@@ -638,6 +643,19 @@ public class EditConversionForm extends EditForm
 			command += Global.SPACE;
 			command += "\"";
 			command += CDIResumeWriter.getInstance().getNomFichierSortie();
+			command += "\"";
+		}
+
+		// couppling Table
+		if (Nemo.getInstance().getConfig().isWriteMapping())
+		{
+			command += Global.SPACE;
+			command += Global.MOINS + Global.optCouplingTableUpdate;
+			command += Global.SPACE;
+			command += Global.MOINS + Global.optCouplingTablePrefix;
+			command += Global.SPACE;
+			command += "\"";
+			command += _mappingTablePrefix;
 			command += "\"";
 		}
 		return command;
