@@ -104,7 +104,8 @@ public class SWTProcessWS implements IRunnableWithProgress
 		} else
 		{
 
-			// mise à jour onglet campagne
+			// mise à jour onglet campagne (si clic sur bouton
+			// "server initialisation" dans l'onglet cruise)
 			try
 			{
 				CruiseModel cruiseModel = new CruiseModel();
