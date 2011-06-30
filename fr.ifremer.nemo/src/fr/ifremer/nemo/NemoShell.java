@@ -11,7 +11,6 @@
 package fr.ifremer.nemo;
 
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.Date;
 
@@ -44,11 +43,11 @@ public class NemoShell
 	/**
 	 * @param args
 	 */
-    public static boolean main(String inputFile, String outputFile,
-            String modelFile, Conversion conv, boolean sortDatas,
-            E_TypeConversion odvConv, String datasetRef, String cdiSummaryFile,
-            boolean couplingTableUpdate, String couplingTablePrefix,
-            Logger logger)
+	public static boolean main(String inputFile, String outputFile,
+			String modelFile, Conversion conv, boolean sortDatas,
+			E_TypeConversion odvConv, String datasetRef, String cdiSummaryFile,
+			boolean couplingTableUpdate, String couplingTablePrefix,
+			Logger logger)
 	{
 
 		try
@@ -95,7 +94,8 @@ public class NemoShell
 			// Argument UNKNOWN Modele NON UNKNOWN
 			else if (convertArgument == E_TypeConversion.UNKNOWN)
 			{
-				switch (convertModel) {
+				switch (convertModel)
+				{
 				case ODV_MONOSTATION:
 				case ODV_MULTISTATIONS:
 					conv = Conversion.ODV;
@@ -141,8 +141,8 @@ public class NemoShell
 				inputDomain.getCruise().setDataSetRef(strDefault);
 
 			// Is a station property in file
-			int nbLignes = inputDomain.getMedia().getModel().getFileHeader() 
-			+ Nemo.getInstance().getDomain().getMedia().getShellStationHeaderNumberLines();
+			int nbLignes = inputDomain.getMedia().getModel().getFileHeader()
+					+ Nemo.getInstance().getDomain().getMedia().getShellStationHeaderNumberLines();
 
 			// FAE 7239
 			PropertyModel prefModel = inputDomain.getStation().getModel().getReferenceProperty();
@@ -207,7 +207,7 @@ public class NemoShell
 			{
 				// update coupling table (FAE 4525)
 				MappingTable mappingTable = new MappingTable();
-				mapping(conv, mappingTable, couplingTablePrefix);
+				mapping(logger, conv, mappingTable, couplingTablePrefix);
 				// mappingTable.exporter(couplingTableFile, logger);
 			}
 
@@ -221,18 +221,32 @@ public class NemoShell
 
 	}
 
-	private static void mapping(Conversion conv, MappingTable mappingTable, String couplingTablePrefix) throws UnsupportedEncodingException
+	private static void mapping(Logger logger, Conversion conv, MappingTable mappingTable, String couplingTablePrefix) throws Exception
 	{
 		Mapping mapping;
 
 		InputDomain inputDomain = Nemo.getInstance().getDomain();
 		CruiseDomain cDomain = inputDomain.getCruise();
 		StationDomain sDomain = inputDomain.getStation();
+		String nomHorsPrefix;
 		try
 		{
 			for (String outputPath : inputDomain.getMedia().getOutputFiles().keySet())
 			{
 				File outputFile = new File(outputPath);
+				if (!outputPath.startsWith(couplingTablePrefix))
+				{
+					logger.error("Error: couplingTablePrefix is not consistent with output path");
+					throw new Exception();
+				}
+				if (couplingTablePrefix.endsWith(File.separator) || couplingTablePrefix.equals(outputPath))
+				{
+					nomHorsPrefix = outputPath.replace(couplingTablePrefix, Global.EMPTY_STRING);
+				} else
+				{
+					nomHorsPrefix = outputPath.replace(couplingTablePrefix + File.separator, Global.EMPTY_STRING);
+				}
+
 				for (String stRef : inputDomain.getMedia().getOutputFiles().get(outputPath))
 				{
 					Station st = sDomain.getStationByRef(stRef);
@@ -245,7 +259,7 @@ public class NemoShell
 					String modus = Mapping.MODUS_MULTISTATIONS;
 
 					StringBuffer filename = new StringBuffer();
-					inputDomain.getConversion().setNomMappingHorsPrefix(couplingTablePrefix);
+					inputDomain.getConversion().setNomMappingHorsPrefix(nomHorsPrefix);
 					filename.append(inputDomain.getConversion().getNomMappingHorsPrefix());
 
 					if (inputDomain.getMedia().getModel().getProcessType() == E_ProcessType.CRUISE_DIR)
