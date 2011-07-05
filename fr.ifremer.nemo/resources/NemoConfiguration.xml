@@ -19,7 +19,7 @@
   <writeMapping>true</writeMapping>
   <fichierMapping>coupling.txt</fichierMapping>
   <dateISO>true</dateISO>
-  <defaultConversionType>MEDATLAS</defaultConversionType>
+  <defaultConversionType>UNKNOWN</defaultConversionType>
   <proxy use="true" address="proxy.ago.fr" port="3128" login="" password=""/>
   <edmoURL>http://seadatanet.maris2.nl/ws/ws_edmo.asmx</edmoURL>
   <vocabURL>http://vocab.ndg.nerc.ac.uk/1.1/VocabServerAPI_dl.wsdl</vocabURL>

@@ -552,7 +552,7 @@ public class RulesManager
 			{
 				messageLog += Messages.edit_file_info_cruiseDisabledBecauseODV + Global.RN;
 			}
-		} else
+		} else if (myConversionType == E_TypeConversion.MEDATLAS)
 		{
 			if (addToLog)
 			{
