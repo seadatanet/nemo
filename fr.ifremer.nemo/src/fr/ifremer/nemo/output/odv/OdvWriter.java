@@ -190,7 +190,7 @@ public class OdvWriter extends NemoWriter
 			}
 			if (isStartStationHeader())
 			{
-				String[] inputStationHeader = consumeStationHeader();
+				String[] inputStationHeader = consumeStationHeader(false);
 
 				String stRef = null;
 				// si inputStationHeader est null, c'est qu'on a terminé la
@@ -204,7 +204,6 @@ public class OdvWriter extends NemoWriter
 				{
 
 					stationHeader = iDomain.getStation().getHeader(myConversion, currentStation, inputStationHeader);
-
 
 					// FAE 4673 Pb si une seule ligne données et pas d'entête
 					// station

@@ -187,7 +187,7 @@ public abstract class NemoWriter
 									{
 										nbrecords = 0;
 										String[] inputStationHeader = null;
-										inputStationHeader = consumeStationHeader();
+										inputStationHeader = consumeStationHeader(mediaModel.getStationHeader() > 0);
 										if (inputStationHeader != null)
 										{
 											st = new Station(inputFile.getName(), inputStationHeader);
@@ -388,15 +388,23 @@ public abstract class NemoWriter
 	 * @return
 	 * @throws IOException
 	 */
-	protected String[] consumeStationHeader() throws IOException
+	protected String[] consumeStationHeader(boolean consume) throws IOException
 	{
 		String[] res = null;
 		StringBuffer stationHeader = new StringBuffer();
 
 		if (mediaModel.getEndData() == E_EndData.BEGIN_LINE_CHANGES)
 		{
-			res = new String[]
-			{ readedLine };
+			//  8909
+			if (consume)
+			{
+				res = consumeLine().toString().split(Global.RN);
+				;
+			} else
+			{
+				res = new String[]
+				{ readedLine };
+			}
 		} else
 		{
 			if (numLine > (mediaModel.getFileHeader() + 1))
