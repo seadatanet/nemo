@@ -190,7 +190,7 @@ public class OdvWriter extends NemoWriter
 			}
 			if (isStartStationHeader())
 			{
-				String[] inputStationHeader = consumeStationHeader(false);
+				String[] inputStationHeader = consumeStationHeader(mediaModel.getStationHeader() > 0);
 
 				String stRef = null;
 				// si inputStationHeader est null, c'est qu'on a terminé la
