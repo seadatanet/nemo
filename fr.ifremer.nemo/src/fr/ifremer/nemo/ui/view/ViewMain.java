@@ -1,8 +1,8 @@
 /* ============================================================================
- * Nom du fichier	: ViewMain.java
- * Auteur			: dboulang
- * Date				: 3 juin 2009
- * Copyright		: Altran
+ * Nom du fichier : ViewMain.java
+ * Auteur : dboulang
+ * Date : 3 juin 2009
+ * Copyright : Altran
  * ============================================================================
  */
 package fr.ifremer.nemo.ui.view;
@@ -39,367 +39,366 @@ import fr.ifremer.nemo.util.Preformat;
  */
 public class ViewMain extends ViewPart
 {
-    public static final String ID = "fr.ifremer.nemo.ui.view.ViewMain"; //$NON-NLS-1$
+	public static final String ID = "fr.ifremer.nemo.ui.view.ViewMain"; //$NON-NLS-1$
 
-    // Formulaires d'édition
+	// Formulaires d'édition
     private  EditFileForm editFileForm;
     private  EditCruiseForm editCruiseForm;
     private  EditStationForm editStationForm;
     private  EditDataForm editDataForm;
-    private  EditConversionForm editConversionForm;
-    
-    // tabs
-    public  TabItem tabFile, tabCruise, tabStation, tabData, tabConversion;
-    
-    // IHM config
-    private Color backgroundEdit;
+	private EditConversionForm editConversionForm;
 
-    private  int etape;
-    private  int  affiche;
+	// tabs
+	public TabItem tabFile, tabCruise, tabStation, tabData, tabConversion;
 
-    private  TabFolder tabFolder;
+	// IHM config
+	private Color backgroundEdit;
+
+	private int etape;
+	private int affiche;
+
+	private TabFolder tabFolder;
 
     private FilteredTableFactory myFilteredTableFactory;
-    
-    // manager pour la gestion de l'IHM en fonction des règles
+
+	// manager pour la gestion de l'IHM en fonction des règles
     private RulesManager myRulesManager;
     
-    
-    public ViewMain()
-    {
-        editCruiseForm = new EditCruiseForm(); 
-        editDataForm = new EditDataForm();
-        editFileForm = new EditFileForm();
-        editStationForm = new EditStationForm();
-        editConversionForm = new EditConversionForm();
-        myFilteredTableFactory = new FilteredTableFactory();
-        Nemo.getInstance().setViewMain(this);
-        myRulesManager = new RulesManager();
 
-    }
-   
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void createPartControl(Composite parent)
-    {
+	public ViewMain()
+	{
+		editCruiseForm = new EditCruiseForm();
+		editDataForm = new EditDataForm();
+		editFileForm = new EditFileForm();
+		editStationForm = new EditStationForm();
+		editConversionForm = new EditConversionForm();
+		myFilteredTableFactory = new FilteredTableFactory();
+		Nemo.getInstance().setViewMain(this);
+		myRulesManager = new RulesManager();
 
-        // etape de depart
-        setEtape(0);
+	}
 
-        // init des flags 
-        myFilteredTableFactory.setListeOuverte(0);
-        setAffiche(0);
-        editFileForm.setFileLoaded(false);
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void createPartControl(Composite parent)
+	{
 
-        backgroundEdit = new Color(parent.getDisplay(), 255, 255, 255);
+		// etape de depart
+		setEtape(0);
 
-        Composite top = new Composite(parent, SWT.NONE);
-        top.setLayout(new FillLayout());
+		// init des flags
+		myFilteredTableFactory.setListeOuverte(0);
+		setAffiche(0);
+		editFileForm.setFileLoaded(false);
 
-        tabFolder = new TabFolder(top, SWT.NONE);
-        tabFolder
+		backgroundEdit = new Color(parent.getDisplay(), 255, 255, 255);
+
+		Composite top = new Composite(parent, SWT.NONE);
+		top.setLayout(new FillLayout());
+
+		tabFolder = new TabFolder(top, SWT.NONE);
+		tabFolder
         .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-            @Override
-            public void widgetSelected(
-                    org.eclipse.swt.events.SelectionEvent e)
-            {
-                int tmp = tabFolder.getSelectionIndex();
+					@Override
+					public void widgetSelected(
+							org.eclipse.swt.events.SelectionEvent e)
+			{
+				int tmp = tabFolder.getSelectionIndex();
 
-                if( ( ! Nemo.getInstance().getViewMain().getMyRulesManager().isCruiseEnabled()) 
-                        && tmp>0)
-                {
-                    tmp++;
-                }
-                Utils.validationEtape(tmp);
-            }
-        });
+				if ((!Nemo.getInstance().getViewMain().getMyRulesManager().isCruiseEnabled())
+						&& tmp > 0)
+				{
+					tmp++;
+				}
+				Utils.validationEtape(tmp);
+			}
+				});
 
-        Composite contentFile = new Composite(tabFolder, SWT.NONE);
-        createContentFile(contentFile);
+		Composite contentFile = new Composite(tabFolder, SWT.NONE);
+		createContentFile(contentFile);
 
-        Composite contentCruise = new Composite(tabFolder, SWT.NONE);
-        createContentCruise(contentCruise);
+		Composite contentCruise = new Composite(tabFolder, SWT.NONE);
+		createContentCruise(contentCruise);
 
-        Composite contentStation = new Composite(tabFolder, SWT.NONE);
-        createContentStation(contentStation);
+		Composite contentStation = new Composite(tabFolder, SWT.NONE);
+		createContentStation(contentStation);
 
-        Composite contentData = new Composite(tabFolder, SWT.NONE);
-        createContentData(contentData);
+		Composite contentData = new Composite(tabFolder, SWT.NONE);
+		createContentData(contentData);
 
-        Composite contentConversion = new Composite(tabFolder, SWT.NONE);
-        createContentConversion(contentConversion);
+		Composite contentConversion = new Composite(tabFolder, SWT.NONE);
+		createContentConversion(contentConversion);
 
-        tabFile = new TabItem(tabFolder, SWT.NONE);
-        tabFile.setText(Messages.onglet_file);
-        tabFile.setControl(contentFile);
+		tabFile = new TabItem(tabFolder, SWT.NONE);
+		tabFile.setText(Messages.onglet_file);
+		tabFile.setControl(contentFile);
 
-        tabCruise = new TabItem(tabFolder, SWT.NONE);
-        tabCruise.setText(Messages.onglet_cruise);
-        tabCruise.setControl(contentCruise);
-       // FAE 6739
-        enableCruiseTab(getMyRulesManager().isCruiseEnabled());
-        
-        tabStation = new TabItem(tabFolder, SWT.NONE);
-        tabStation.setText(Messages.onglet_station);
-        tabStation.setControl(contentStation);
+		tabCruise = new TabItem(tabFolder, SWT.NONE);
+		tabCruise.setText(Messages.onglet_cruise);
+		tabCruise.setControl(contentCruise);
+		// FAE 6739
+		enableCruiseTab(getMyRulesManager().isCruiseEnabled());
 
-        tabData = new TabItem(tabFolder, SWT.NONE);
-        tabData.setText(Messages.onglet_data);
-        tabData.setControl(contentData);
+		tabStation = new TabItem(tabFolder, SWT.NONE);
+		tabStation.setText(Messages.onglet_station);
+		tabStation.setControl(contentStation);
 
-        tabConversion = new TabItem(tabFolder, SWT.NONE);
-        tabConversion.setText(Messages.onglet_convert);
-        tabConversion.setControl(contentConversion);
+		tabData = new TabItem(tabFolder, SWT.NONE);
+		tabData.setText(Messages.onglet_data);
+		tabData.setControl(contentData);
 
-    }
-    
-    
-    private SashForm getNewParentForm(Composite parent)
-    {
-        parent.setLayout(new FillLayout());
-        SashForm parentform = new SashForm(parent, SWT.HORIZONTAL);
-        parentform.setLayout(new FillLayout());
+		tabConversion = new TabItem(tabFolder, SWT.NONE);
+		tabConversion.setText(Messages.onglet_convert);
+		tabConversion.setControl(contentConversion);
 
-        return parentform;
-    }
-    private Composite getNewRightComposite(SashForm parentForm)
-    {
-        //RIGHT PANEL
-        Composite right = new Composite(parentForm, SWT.BORDER);
-        right.setBackground(backgroundEdit);
-        right.setLayout(new FillLayout());
-        
-        return right;
-    }
-    
-    
-    protected void createContentFile(Composite parent)
-    {
-        SashForm parentForm = getNewParentForm(parent);
-        
-        //LEFT PANEL
-        SashForm left = new SashForm(parentForm, SWT.VERTICAL);
-        left.setBackground(parent.getBackground());
-        left.setLayout(new FillLayout(SWT.VERTICAL));
-        
-        editFileForm.createLeftForm(left);
-//        left.setWeights(new int[] {45, 55});
+	}
 
-        //RIGHT PANEL
-        Composite right = getNewRightComposite(parentForm);
-        editFileForm.createEditionForm(right);
-        
-        editFileForm.init();
-        parentForm.setWeights(new int[] {55,45});
-    }
+	private SashForm getNewParentForm(Composite parent)
+	{
+		parent.setLayout(new FillLayout());
+		SashForm parentform = new SashForm(parent, SWT.HORIZONTAL);
+		parentform.setLayout(new FillLayout());
 
-    protected void createContentConversion(Composite parent)
-    {
-        SashForm parentForm = getNewParentForm(parent);
+		return parentform;
+	}
 
-//        Composite left = new Composite(parentForm, SWT.NONE);
-//         left.setBackground(parent.getBackground());
-//        left.setLayout(new FillLayout());
+	private Composite getNewRightComposite(SashForm parentForm)
+	{
+		// RIGHT PANEL
+		Composite right = new Composite(parentForm, SWT.BORDER);
+		right.setBackground(backgroundEdit);
+		right.setLayout(new FillLayout());
 
-        Composite right = new Composite(parentForm, SWT.BORDER);
-        right.setBackground(backgroundEdit);
-        right.setLayout(new FillLayout());
+		return right;
+	}
 
-        editConversionForm = new EditConversionForm();
-        editConversionForm.createEditionForm(right);
+	protected void createContentFile(Composite parent)
+	{
+		SashForm parentForm = getNewParentForm(parent);
 
-//        parentForm.setWeights(new int[] {60, 40});
-    }
-    
-    protected void createContentCruise(Composite parent)
-    {
-        SashForm parentForm = getNewParentForm(parent);
-        
-        //LEFT
-        Composite left = new Composite(parentForm, SWT.NONE);
-        left.setLayout(new FillLayout());
+		// LEFT PANEL
+		SashForm left = new SashForm(parentForm, SWT.VERTICAL);
+		left.setBackground(parent.getBackground());
+		left.setLayout(new FillLayout(SWT.VERTICAL));
 
-        Composite  textFileCruise;
-        textFileCruise = new Composite(left, SWT.NONE);
-        textFileCruise.setLayout(new FillLayout());
-        editCruiseForm.setTextAreaCruise(
-            new StyledText(textFileCruise, SWT.MULTI | SWT.READ_ONLY
-                | SWT.H_SCROLL | SWT.V_SCROLL));
-        editCruiseForm.getTextAreaCruise() .setFont(Utils.fontCourier);
+		editFileForm.createLeftForm(left);
+		// left.setWeights(new int[] {45, 55});
 
-        // RIGHT
-        Composite right = getNewRightComposite(parentForm);
-        editCruiseForm.createEditionForm(right);
+		// RIGHT PANEL
+		Composite right = getNewRightComposite(parentForm);
+		editFileForm.createEditionForm(right);
 
-    }
+		editFileForm.init();
+		// parentForm.setWeights(new int[] {55,45});
+		parentForm.setWeights(new int[]
+		{ 60, 40 });
+	}
 
-    protected void createContentStation(Composite parent)
-    {
-        SashForm parentForm = getNewParentForm(parent);
+	protected void createContentConversion(Composite parent)
+	{
+		SashForm parentForm = getNewParentForm(parent);
 
-        //LEFT
-        Composite left = new Composite(parentForm, SWT.NONE);
-        left.setLayout(new FillLayout());
+		// Composite left = new Composite(parentForm, SWT.NONE);
+		// left.setBackground(parent.getBackground());
+		// left.setLayout(new FillLayout());
 
-        Composite textFile = new Composite(left, SWT.NONE);
-        textFile.setLayout(new FillLayout());
-        editStationForm.setTextAreaStation(
-            new StyledText(textFile, SWT.MULTI | SWT.READ_ONLY | SWT.H_SCROLL
-                | SWT.V_SCROLL));
-        editStationForm.getTextAreaStation().setFont(Utils.fontCourier);
+		Composite right = new Composite(parentForm, SWT.BORDER);
+		right.setBackground(backgroundEdit);
+		right.setLayout(new FillLayout());
 
-        //RIGHT
-        Composite right = getNewRightComposite(parentForm);
-        editStationForm.createEditionForm(right);
+		editConversionForm = new EditConversionForm();
+		editConversionForm.createEditionForm(right);
 
-    }
+		// parentForm.setWeights(new int[] {60, 40});
+	}
 
-    protected void createContentData(Composite parent)
-    {
-        SashForm parentForm = getNewParentForm(parent);
-        
-        //LEFT
-        SashForm left = new SashForm(parentForm, SWT.VERTICAL);
-        editDataForm.createLeft(left);
-        
-        //RIGHT
-        Composite right = getNewRightComposite(parentForm);
-        editDataForm.createEditionForm(right);
-        editDataForm.init();
-        
+	protected void createContentCruise(Composite parent)
+	{
+		SashForm parentForm = getNewParentForm(parent);
+
+		// LEFT
+		Composite left = new Composite(parentForm, SWT.NONE);
+		left.setLayout(new FillLayout());
+
+		Composite textFileCruise;
+		textFileCruise = new Composite(left, SWT.NONE);
+		textFileCruise.setLayout(new FillLayout());
+		editCruiseForm.setTextAreaCruise(
+				new StyledText(textFileCruise, SWT.MULTI | SWT.READ_ONLY
+						| SWT.H_SCROLL | SWT.V_SCROLL));
+		editCruiseForm.getTextAreaCruise().setFont(Utils.fontCourier);
+
+		// RIGHT
+		Composite right = getNewRightComposite(parentForm);
+		editCruiseForm.createEditionForm(right);
+
+	}
+
+	protected void createContentStation(Composite parent)
+	{
+		SashForm parentForm = getNewParentForm(parent);
+
+		// LEFT
+		Composite left = new Composite(parentForm, SWT.NONE);
+		left.setLayout(new FillLayout());
+
+		Composite textFile = new Composite(left, SWT.NONE);
+		textFile.setLayout(new FillLayout());
+		editStationForm.setTextAreaStation(
+				new StyledText(textFile, SWT.MULTI | SWT.READ_ONLY | SWT.H_SCROLL
+						| SWT.V_SCROLL));
+		editStationForm.getTextAreaStation().setFont(Utils.fontCourier);
+
+		// RIGHT
+		Composite right = getNewRightComposite(parentForm);
+		editStationForm.createEditionForm(right);
+
+	}
+
+	protected void createContentData(Composite parent)
+	{
+		SashForm parentForm = getNewParentForm(parent);
+
+		// LEFT
+		SashForm left = new SashForm(parentForm, SWT.VERTICAL);
+		editDataForm.createLeft(left);
+
+		// RIGHT
+		Composite right = getNewRightComposite(parentForm);
+		editDataForm.createEditionForm(right);
+		editDataForm.init();
+
         parentForm.setWeights(new int[] {75, 25});
-    }
+	}
 
-    public void init()
-    {
-        Nemo.getInstance().getViewMain().getMyRulesManager().init();
-        // reinitialisation de la conversion
-        Nemo.getInstance().resetModel();
+	public void init()
+	{
+		Nemo.getInstance().getViewMain().getMyRulesManager().init();
+		// reinitialisation de la conversion
+		Nemo.getInstance().resetModel();
 
-        editFileForm.setFileLoaded(false);
-        Preformat.setPreformat(false);
+		editFileForm.setFileLoaded(false);
+		Preformat.setPreformat(false);
 
-        // reinitialisation de l'affichage
-        // --- les formulaires
-        Utils.razGlobal();
-        editFileForm.setFileLoaded(false);
+		// reinitialisation de l'affichage
+		// --- les formulaires
+		Utils.razGlobal();
+		editFileForm.setFileLoaded(false);
 
-        // --- renitialisation du tableau de paramètres (onglet Data)
-        editDataForm.reinitTableData();
-        editDataForm.reinitParameters();
-        // --- le titre de l'application
-        ApplicationWorkbenchWindowAdvisor.configurer_titre
-        .setTitle(Intern.application_title);
+		// --- renitialisation du tableau de paramètres (onglet Data)
+		editDataForm.reinitTableData();
+		editDataForm.reinitParameters();
+		// --- le titre de l'application
+		ApplicationWorkbenchWindowAdvisor.configurer_titre
+				.setTitle(Intern.application_title);
 
-        // --- l'onglet d'erreur
-        Utils.messageErreur(Global.EMPTY_STRING);
+		// --- l'onglet d'erreur
+		Utils.messageErreur(Global.EMPTY_STRING);
 
+		// init onglet File
+		// --- le contenu du fichier
+		editFileForm.init();
+		editDataForm.init();
 
-        
-        // init onglet File
-        // --- le contenu du fichier
-      editFileForm.init();
-      editDataForm.init();
+	}
 
-    }
+	public void enableCruiseTab(boolean enabled)
+	{
+		if (tabCruise != null)
+		{
+			if (enabled)
+			{
+				if (tabCruise.isDisposed())
+				{
+					Composite contentCruise = new Composite(tabFolder, SWT.NONE);
+					createContentCruise(contentCruise);
 
-    public void enableCruiseTab(boolean enabled)
-    {
-        if (tabCruise != null)
-        {
-            if (enabled)
-            {
-                if (tabCruise.isDisposed())
-                {
-                    Composite contentCruise = new Composite(tabFolder, SWT.NONE);
-                    createContentCruise(contentCruise);
-
-                    tabCruise = new TabItem(tabFolder, SWT.NONE, 1);
-                    tabCruise.setText(Messages.onglet_cruise);
-                    tabCruise.setControl(contentCruise);
-                }
+					tabCruise = new TabItem(tabFolder, SWT.NONE, 1);
+					tabCruise.setText(Messages.onglet_cruise);
+					tabCruise.setControl(contentCruise);
+				}
             }
             else
-            {
-                tabCruise.dispose();
-            }
-        }
-    }
+			{
+				tabCruise.dispose();
+			}
+		}
+	}
 
-   
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setFocus()
+	{
+		// TODO Auto-generated method stub
+	}
 
-   
+	public EditFileForm getEditFileForm()
+	{
+		return editFileForm;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setFocus()
-    {
-        // TODO Auto-generated method stub
-    }
+	public EditConversionForm getEditConversionForm()
+	{
+		return editConversionForm;
+	}
 
-    public EditFileForm getEditFileForm()
-    {
-        return editFileForm;
-    }
-    public EditConversionForm getEditConversionForm()
-    {
-        return editConversionForm;
-    }
-    public EditStationForm getEditStationForm()
-    {
-        return editStationForm;
-    }
-    public EditDataForm getEditDataForm()
-    {
-        return editDataForm;
-    }
-    public EditCruiseForm getEditCruiseForm()
-    {
-        return editCruiseForm;
-    }
+	public EditStationForm getEditStationForm()
+	{
+		return editStationForm;
+	}
 
-    public int getEtape()
-    {
-        return etape;
-    }
+	public EditDataForm getEditDataForm()
+	{
+		return editDataForm;
+	}
 
-    public void setEtape(int etape)
-    {
-        this.etape = etape;
-    }
+	public EditCruiseForm getEditCruiseForm()
+	{
+		return editCruiseForm;
+	}
 
-    public Color getBackgroundEdit()
-    {
-        return backgroundEdit;
-    }
+	public int getEtape()
+	{
+		return etape;
+	}
 
-    public int getAffiche()
-    {
-        return affiche;
-    }
+	public void setEtape(int etape)
+	{
+		this.etape = etape;
+	}
 
-    public void setAffiche(int affiche)
-    {
-        this.affiche = affiche;
-    }
+	public Color getBackgroundEdit()
+	{
+		return backgroundEdit;
+	}
 
-    public void selectTabByIndex(int tabIndex)
-    {
-        tabFolder.setSelection(tabIndex);
-    }
+	public int getAffiche()
+	{
+		return affiche;
+	}
 
-    public FilteredTableFactory getMyFilteredTableFactory()
-    {
-        return myFilteredTableFactory;
-    }
+	public void setAffiche(int affiche)
+	{
+		this.affiche = affiche;
+	}
 
-    public RulesManager getMyRulesManager()
-    {
-        return myRulesManager;
-    }
-   
+	public void selectTabByIndex(int tabIndex)
+	{
+		tabFolder.setSelection(tabIndex);
+	}
+
+	public FilteredTableFactory getMyFilteredTableFactory()
+	{
+		return myFilteredTableFactory;
+	}
+
+	public RulesManager getMyRulesManager()
+	{
+		return myRulesManager;
+	}
+
 }
