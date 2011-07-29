@@ -705,12 +705,13 @@ public class EditFileForm extends EditForm
 		// groupe process
 
 		GridData processGridData = new GridData();
+		processGridData.minimumWidth = 0;
 		processGridData.horizontalAlignment = SWT.FILL;
 		processGridData.verticalAlignment = SWT.FILL;
 		processGridData.grabExcessHorizontalSpace = true;
 
 		GridLayout processLayout = new GridLayout();
-		processLayout.numColumns = 4; // en realite 3 colonnes, mais bug si on
+		processLayout.numColumns = 3; // en realite 3 colonnes, mais bug si on
 										// met 3
 		processLayout.marginHeight = 1;
 
