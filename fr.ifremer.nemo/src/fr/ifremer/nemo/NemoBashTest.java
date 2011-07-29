@@ -143,17 +143,20 @@ public class NemoBashTest
 		String pwdPath = System.getProperty("user.dir");
 		// hudson: C:\Portail\data\jobs\Nemo\workspace\Nemo_product
 		System.out.println("pwdPath = " + pwdPath + "--------------");
+
 		int index = pwdPath.indexOf("NEMO_product");
-		System.out.println("index: " + index);
+		int index2 = pwdPath.indexOf("Nemo_product");
 
 		if (index != -1)
 		{
-			System.out.println("index!=-1");
 			String path = pwdPath.substring(0, index);
+			dataRootPath = path + "ifremer_datatest";
+		} else if (index2 != -1)
+		{
+			String path = pwdPath.substring(0, index2);
 			dataRootPath = path + "ifremer_datatest";
 		} else
 		{
-			System.out.println("else index!=-1");
 			dataRootPath = pwdPath + File.separator + "ifremer_datatest";
 		}
 		System.out.println("dataRootPath = " + dataRootPath + "--------------");
