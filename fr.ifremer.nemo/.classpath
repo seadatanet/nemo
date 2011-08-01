@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry excluding="fr/ifremer/nemo/input/CopyOfFragment.java" kind="src" path="src"/>
 	<classpathentry kind="src" path="testsrc"/>
-	<classpathentry exported="true" kind="lib" path="axis2-1.5.4/lib/axiom-api-1.2.10.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="lib" path="lib/activation.jar"/>
@@ -34,8 +33,6 @@
 	<classpathentry kind="lib" path="lib/junit.jar"/>
 	<classpathentry kind="lib" path="lib/mockito-all-1.8.0.jar"/>
 	<classpathentry kind="lib" path="lib/org.apache.common.cli_1.2.0.jar"/>
-	<classpathentry kind="lib" path="axis2-1.5.4/lib/axis2-transport-http-1.5.4.jar"/>
-	<classpathentry kind="lib" path="axis2-1.5.4/lib/axis2-transport-local-1.5.4.jar"/>
 	<classpathentry kind="lib" path="lib/jsr173_1.0_api.jar"/>
 	<classpathentry kind="lib" path="lib/resolver.jar"/>
 	<classpathentry kind="lib" path="lib/xbean_xpath.jar"/>
@@ -43,13 +40,16 @@
 	<classpathentry kind="lib" path="lib/xmlbeans-qname.jar"/>
 	<classpathentry kind="lib" path="lib/xmlpublic.jar"/>
 	<classpathentry kind="lib" path="lib/axiom_1_2_11.jar"/>
-	<classpathentry kind="lib" path="axis2-1.5.4/lib/axis2-kernel-1.5.4.jar"/>
-	<classpathentry kind="lib" path="axis2-1.5.4/lib/axis2-adb-1.5.4.jar"/>
-	<classpathentry kind="lib" path="axis2-1.5.4/lib/XmlSchema-1.4.3.jar"/>
-	<classpathentry kind="lib" path="axis2-1.5.4/lib/axiom-impl-1.2.10.jar"/>
-	<classpathentry kind="lib" path="axis2-1.5.4/lib/neethi-2.0.4.jar"/>
-	<classpathentry kind="lib" path="axis2-1.5.4/lib/commons-httpclient-3.1.jar"/>
-	<classpathentry kind="lib" path="axis2-1.5.4/lib/httpcore-4.0.jar"/>
-	<classpathentry kind="lib" path="axis2-1.5.4/lib/commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="axis2-1.5.4/axiom-api-1.2.10.jar"/>
+	<classpathentry kind="lib" path="axis2-1.5.4/axiom-impl-1.2.10.jar"/>
+	<classpathentry kind="lib" path="axis2-1.5.4/axis2-adb-1.5.4.jar"/>
+	<classpathentry kind="lib" path="axis2-1.5.4/axis2-kernel-1.5.4.jar"/>
+	<classpathentry kind="lib" path="axis2-1.5.4/axis2-transport-http-1.5.4.jar"/>
+	<classpathentry kind="lib" path="axis2-1.5.4/axis2-transport-local-1.5.4.jar"/>
+	<classpathentry kind="lib" path="axis2-1.5.4/commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="axis2-1.5.4/commons-httpclient-3.1.jar"/>
+	<classpathentry kind="lib" path="axis2-1.5.4/httpcore-4.0.jar"/>
+	<classpathentry kind="lib" path="axis2-1.5.4/neethi-2.0.4.jar"/>
+	<classpathentry kind="lib" path="axis2-1.5.4/XmlSchema-1.4.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
