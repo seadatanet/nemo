@@ -581,7 +581,7 @@ public class EditConversionForm extends EditForm
 		command += "\"";
 		if (editFileForm.isCruiseIsAFile())
 		{
-			command += editFileForm.nomFichier;
+			command += editFileForm.nomFichierOrigin;
 		}
 		if (rm.isCruiseInADirectory())
 		{
