@@ -3253,6 +3253,25 @@
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
     <void property="code"> 
+     <string>MSBO</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>99.999</string> 
+    </void> 
+    <void property="format"> 
+     <string>%6.3f</string> 
+    </void> 
+    <void property="name"> 
+     <string>MESOZOOPLANKTON ASH-FREE DRY W</string> 
+    </void> 
+    <void property="unit"> 
+     <string>milligram/m3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
      <string>MSCS</string> 
     </void> 
     <void property="defaultValue"> 
