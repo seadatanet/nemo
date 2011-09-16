@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.6.0_06" class="java.beans.XMLDecoder"> 
+<java version="1.6.0_21" class="java.beans.XMLDecoder"> 
  <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="12"> 
   <void index="0"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L031/2/5</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L031/3/5</string> 
     </void> 
     <void property="entryTerm"> 
      <string>day to sub-week</string> 
@@ -17,6 +17,9 @@
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
       <void property="time"> 
        <object class="java.util.Date"> 
         <long>1155907982000</long> 
@@ -25,14 +28,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L031/2</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L031/3</string> 
     </void> 
    </object> 
   </void> 
   <void index="1"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L031/2/15</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L031/3/15</string> 
     </void> 
     <void property="entryTerm"> 
      <string>decadal</string> 
@@ -45,6 +48,9 @@
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
       <void property="time"> 
        <object class="java.util.Date"> 
         <long>1155907982000</long> 
@@ -53,14 +59,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L031/2</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L031/3</string> 
     </void> 
    </object> 
   </void> 
   <void index="2"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L031/2/4</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L031/3/4</string> 
     </void> 
     <void property="entryTerm"> 
      <string>hour to sub-day</string> 
@@ -73,6 +79,9 @@
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
       <void property="time"> 
        <object class="java.util.Date"> 
         <long>1155907982000</long> 
@@ -81,14 +90,45 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L031/2</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L031/3</string> 
     </void> 
    </object> 
   </void> 
   <void index="3"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L031/2/0</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L031/3/98</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>inapplicable</string> 
+    </void> 
+    <void property="entryTermAbbr"> 
+     <string>NA</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>There is no meaningful sampling interval either because measurements have not not repreated (e.g. sediment core measurements) or measurements have been averaged along a spatial axis (e.g. binned CTD data).</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1314350867000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L031/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="4"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L031/3/0</string> 
     </void> 
     <void property="entryTerm"> 
      <string>indeterminate</string> 
@@ -101,6 +141,9 @@
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
       <void property="time"> 
        <object class="java.util.Date"> 
         <long>1166613975000</long> 
@@ -109,14 +152,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L031/2</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L031/3</string> 
     </void> 
    </object> 
   </void> 
-  <void index="4"> 
+  <void index="5"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L031/2/3</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L031/3/3</string> 
     </void> 
     <void property="entryTerm"> 
      <string>minute to sub-hour</string> 
@@ -129,6 +172,9 @@
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
       <void property="time"> 
        <object class="java.util.Date"> 
         <long>1155907982000</long> 
@@ -137,14 +183,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L031/2</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L031/3</string> 
     </void> 
    </object> 
   </void> 
-  <void index="5"> 
+  <void index="6"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L031/2/7</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L031/3/7</string> 
     </void> 
     <void property="entryTerm"> 
      <string>month to sub-year</string> 
@@ -157,6 +203,9 @@
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
       <void property="time"> 
        <object class="java.util.Date"> 
         <long>1155907982000</long> 
@@ -165,42 +214,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L031/2</string> 
-    </void> 
-   </object> 
-  </void> 
-  <void index="6"> 
-   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
-    <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L031/2/98</string> 
-    </void> 
-    <void property="entryTerm"> 
-     <string>not applicable</string> 
-    </void> 
-    <void property="entryTermAbbr"> 
-     <string>NA</string> 
-    </void> 
-    <void property="entryTermDef"> 
-     <string>There is no meaningful sampling interval either because measurements have not not repreated (e.g. sediment core measurements) or measurements have been averaged along a spatial axis (e.g. binned CTD data).</string> 
-    </void> 
-    <void property="entryTermLastMod"> 
-     <object class="java.util.GregorianCalendar"> 
-      <void property="time"> 
-       <object class="java.util.Date"> 
-        <long>1166614268000</long> 
-       </object> 
-      </void> 
-     </object> 
-    </void> 
-    <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L031/2</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L031/3</string> 
     </void> 
    </object> 
   </void> 
   <void index="7"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L031/2/2</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L031/3/2</string> 
     </void> 
     <void property="entryTerm"> 
      <string>second to sub-minute</string> 
@@ -213,6 +234,9 @@
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
       <void property="time"> 
        <object class="java.util.Date"> 
         <long>1155907982000</long> 
@@ -221,14 +245,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L031/2</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L031/3</string> 
     </void> 
    </object> 
   </void> 
   <void index="8"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L031/2/1</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L031/3/1</string> 
     </void> 
     <void property="entryTerm"> 
      <string>sub-second</string> 
@@ -241,6 +265,9 @@
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
       <void property="time"> 
        <object class="java.util.Date"> 
         <long>1155907982000</long> 
@@ -249,14 +276,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L031/2</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L031/3</string> 
     </void> 
    </object> 
   </void> 
   <void index="9"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L031/2/99</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L031/3/99</string> 
     </void> 
     <void property="entryTerm"> 
      <string>unknown</string> 
@@ -269,6 +296,9 @@
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
       <void property="time"> 
        <object class="java.util.Date"> 
         <long>1166614192000</long> 
@@ -277,14 +307,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L031/2</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L031/3</string> 
     </void> 
    </object> 
   </void> 
   <void index="10"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L031/2/6</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L031/3/6</string> 
     </void> 
     <void property="entryTerm"> 
      <string>week to sub-month</string> 
@@ -297,6 +327,9 @@
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
       <void property="time"> 
        <object class="java.util.Date"> 
         <long>1155907982000</long> 
@@ -305,14 +338,14 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L031/2</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L031/3</string> 
     </void> 
    </object> 
   </void> 
   <void index="11"> 
    <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
     <void property="entryKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/term/L031/2/13</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/L031/3/13</string> 
     </void> 
     <void property="entryTerm"> 
      <string>year to sub-decade</string> 
@@ -325,6 +358,9 @@
     </void> 
     <void property="entryTermLastMod"> 
      <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
       <void property="time"> 
        <object class="java.util.Date"> 
         <long>1155907982000</long> 
@@ -333,7 +369,7 @@
      </object> 
     </void> 
     <void property="listKey"> 
-     <string>http://vocab.ndg.nerc.ac.uk/list/L031/2</string> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/L031/3</string> 
     </void> 
    </object> 
   </void> 
