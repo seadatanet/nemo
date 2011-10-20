@@ -136,6 +136,13 @@ public class TableData
                 .getMyGroupeVerticalParameters();
     }
 
+    private boolean isValueOutWritable()
+    {
+        boolean res = false;
+        return Nemo.getInstance().getViewMain().getMyRulesManager()
+            .isConversionToODV();
+    }
+
     private boolean isLabelWritable()
     {
         boolean res = false;
@@ -199,7 +206,7 @@ public class TableData
         columnsMap.put(col.pos, col);
         col =
             new TableDataColumn(COL_VALUE_OUT, colNbById.get(COL_VALUE_OUT),
-                Messages.table_label_valueOut, 50, true);
+                Messages.table_label_valueOut, 50, isValueOutWritable());
         columnsMap.put(col.pos, col);
         col =
             new TableDataColumn(COL_TEST_IN, colNbById.get(COL_TEST_IN),
@@ -458,6 +465,18 @@ public class TableData
                 {
                     return;
                 }
+                // FAE 9670 surlignage de la position des paramètres dans le
+// fichier
+                if (event.button == 1)
+                {
+                    int indice = myTable.getSelectionIndex();
+                    selectInViewFile(
+                        Integer.valueOf(myTable.getItem(indice).getText(
+                            colNbById.get(COL_START))),
+                        Integer.valueOf(myTable.getItem(indice).getText(
+                            colNbById.get(COL_END))));
+                }
+
                 // calcul du numero de ligne selectionne
                 Point pt = new Point(event.x, event.y);
                 TableItem item = table.getItem(pt);
@@ -1436,4 +1455,29 @@ public class TableData
     {
         return typesP061;
     }
+
+    // FAE 9670 surlignage de la position des paramètres dans le fichier
+    public void selectInViewFile(int debut, int fin)
+    {
+        int lign = 0;
+        if (!Nemo.getInstance().getViewMain().getMyRulesManager()
+            .isCruiseInADirectory()
+                || Nemo.getInstance().getViewMain().getEditFileForm()
+                    .isMultiStationFileChecked())
+        {
+            // fichier campagne
+            lign =
+                Nemo.getInstance().getDomain().getMedia().getModel()
+                    .getFileHeader();
+        }
+        lign +=
+            Nemo.getInstance().getDomain().getMedia()
+                .getStationHeaderNumberLines() + 1;
+
+        debut += Utils.taillesCumLignes[lign - 1];
+        fin += Utils.taillesCumLignes[lign - 1];
+        Nemo.getInstance().getViewMain().getEditDataForm().getTextAreaData()
+            .setSelection(debut - 1, fin);
+    }
+
 }
