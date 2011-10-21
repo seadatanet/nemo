@@ -79,7 +79,7 @@ public class Application implements IPlatformRunnable
 
             CommandLine cl = p.parse(opt, strArgs);
 
-            // retrieve application path (mantis 9910)
+            // retrieve application path (FAE 9910)
             appDir =
                 Application.class.getProtectionDomain().getCodeSource()
                     .getLocation().getPath();
