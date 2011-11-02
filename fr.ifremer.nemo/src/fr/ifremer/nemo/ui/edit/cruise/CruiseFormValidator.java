@@ -137,6 +137,7 @@ public class CruiseFormValidator extends FormValidator
 			onSuccess();
 		} else
 		{
+		    editCruiseForm.initFromNewModel();
 			if (!Nemo.getInstance().getViewMain().tabCruise.isDisposed())
 			{
 				Nemo.getInstance().getViewMain().tabCruise.setText(Messages.onglet_cruise_error);

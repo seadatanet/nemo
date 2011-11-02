@@ -1066,6 +1066,7 @@ public class StationFormValidator extends FormValidator
             }
             else
             {
+                editStationForm.initFromNewModel();
                 Nemo.getInstance().getViewMain().tabStation.setText(Messages.onglet_station_error);
                 Nemo.getInstance().getViewMain().setEtape(2);
             }

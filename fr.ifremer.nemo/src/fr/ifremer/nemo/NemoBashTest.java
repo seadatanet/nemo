@@ -247,6 +247,31 @@ public class NemoBashTest
 		testLogger.info("\r\n\r\n\r\n\r\n__________________________test_P011viaP021_ODVMULTI_____________________________\r\n\r\n\r\n\r\n");
 		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P021, Conversion.ODV, E_TypeConversion.ODV_MULTISTATIONS));
 	}
+	
+	/**
+     * =================================================================
+     * invalidated model
+     * =================================================================
+     */
+    @Test
+    public final void inValidated_model()
+    {
+        testLogger
+            .info("\r\n\r\n\r\n\r\n_______________________________unValidated_model________________________________\r\n\r\n\r\n\r\n");
+        message = new Message();
+        message.testName = "invalidated model in batch mod";
+        File root = new File(dataRootPath);
+        String inputAbsolutePath =
+            root.getAbsolutePath()
+                    + "\\_9656_collectionGroupByCruise_withSeparator_unvalidated_model\\"
+                    + inputName;
+        String outputAbsolutePath =
+            root.getAbsolutePath()
+                    + "\\_9656_collectionGroupByCruise_withSeparator_unvalidated_model\\P091\\ODV_MULTISTATIONS\\";
+        Assert.assertFalse(convertWithNemoBatch(Conversion.ODV,
+            E_TypeConversion.ODV_MULTISTATIONS, inputAbsolutePath,
+            outputAbsolutePath));
+    }
 
 	/**
 	 * =================================================================

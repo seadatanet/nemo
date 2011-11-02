@@ -6,6 +6,7 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
@@ -66,7 +67,16 @@ public class OpenAction extends Action implements ISelectionListener,
             {
                 try
                 {
-                    Nemo.getInstance().openModel(nomModele);
+                    // FAE 9656 si model non validé affichage d'un warning
+                    if (!Nemo.getInstance().openModel(nomModele))
+                    {
+                        MessageBox mb =
+                            new MessageBox(Utils.getMainShell(),
+                                SWT.ICON_WARNING | SWT.OK
+                                        | SWT.APPLICATION_MODAL);
+                        mb.setMessage(Messages.warning_unvalid_openModel);
+                        mb.open();
+                    }
 
                     // forcage affichage onglet 0
                     Nemo.getInstance().getViewMain().selectTabByIndex(0);
@@ -82,17 +92,19 @@ public class OpenAction extends Action implements ISelectionListener,
                     // effacement preventif
                     // si besoin
                     // fillDesc(true);
-                    Nemo.getInstance().getViewMain().getEditFileForm().afficheEdition();
+                    Nemo.getInstance().getViewMain().getEditFileForm()
+                        .afficheEdition();
 
                     ViewLog.styledTextLogInfos
                         .append(Messages.success_openModel + nomModele);
 
                     // reinitialisation du tableau de paramètres
-                    Nemo.getInstance().getViewMain().getEditDataForm().reinitTableData();
-//                    if (Nemo.getInstance().getViewMain().getEditDataForm().getMyTable() != null)
-//                    {
-//                        Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().go();
-//                    }
+                    Nemo.getInstance().getViewMain().getEditDataForm()
+                        .reinitTableData();
+// if (Nemo.getInstance().getViewMain().getEditDataForm().getMyTable() != null)
+// {
+// Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().go();
+// }
                     // 4063 affectation du nom de modele courant
                     Nemo.getInstance().setCurrentOpenModelPath(nomModele);
                 }

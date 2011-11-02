@@ -29,144 +29,164 @@ import fr.ifremer.nemo.util.Preformat;
  */
 public class FileFormValidator extends FormValidator
 {
-	public FileFormValidator()
-	{
-		super();
-	}
+    public FileFormValidator()
+    {
+        super();
+    }
 
-	@Override
-	public void validate()
-	{
-		try
-		{
-			EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
+    @Override
+    public void validate()
+    {
+        try
+        {
+            EditFileForm editFileForm =
+                Nemo.getInstance().getViewMain().getEditFileForm();
 
-			// retour à l'onglet message d'erreur
-			ViewLog.tabFolderLog.setSelection(0);
+            // retour à l'onglet message d'erreur
+            ViewLog.tabFolderLog.setSelection(0);
 
-			// raz du message d'erreurs
-			Utils.messageErreur(Global.EMPTY_STRING);
+            // raz du message d'erreurs
+            Utils.messageErreur(Global.EMPTY_STRING);
 
-			Boolean ok, resultat;
-			ok = true;
+            Boolean ok, resultat;
+            ok = true;
 
-			// first check if an output format has been set
-			if (Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType() == E_TypeConversion.UNKNOWN)
-			{
-				Utils.messageErreur(Messages.error_file_convertFormatUnknown);
-				return;
-			}
-			if (Nemo.getInstance().getViewMain().getMyRulesManager().getMyFileType() == E_InputType.UNKNOWN)
-			{
-				Utils.messageErreur(Messages.error_file_inputTypeUnknown);
-				return;
-			}
-			// Fichier avec séparateur
-			if (editFileForm.isSeparatorChecked())
-			{
-				// si on a deja preformate une fois, on repart sur les vrais
-				// noms d'origine (et pas les PF_...)
-				// if (Preformat.isPreformat())
-				// {
-				editFileForm.nomRepertoire = editFileForm.nomRepertoireOrigin;
-				editFileForm.nomFichier = editFileForm.nomFichierOrigin;
-				// }
-				try
-				{
-					// on va avoir besoin de connaitre les modele saisi pour
-					// pouvoir formatter (8847)
-					editFileForm.initFromNewModel();
-					// formatage
-					Preformat.runExGUI();
+            // first check if an output format has been set
+            if (Nemo.getInstance().getViewMain().getMyRulesManager()
+                .getMyConversionType() == E_TypeConversion.UNKNOWN)
+            {
+                Utils.messageErreur(Messages.error_file_convertFormatUnknown);
+                return;
+            }
+            if (Nemo.getInstance().getViewMain().getMyRulesManager()
+                .getMyFileType() == E_InputType.UNKNOWN)
+            {
+                Utils.messageErreur(Messages.error_file_inputTypeUnknown);
+                return;
+            }
+            // Fichier avec séparateur
+            if (editFileForm.isSeparatorChecked())
+            {
+                // si on a deja preformate une fois, on repart sur les vrais
+                // noms d'origine (et pas les PF_...)
+                // if (Preformat.isPreformat())
+                // {
+                editFileForm.nomRepertoire = editFileForm.nomRepertoireOrigin;
+                editFileForm.nomFichier = editFileForm.nomFichierOrigin;
+                // }
+                try
+                {
+                    // on va avoir besoin de connaitre les modele saisi pour
+                    // pouvoir formatter (8847)
+                    editFileForm.initFromNewModel();
+                    // formatage
+                    Preformat.runExGUI();
 
-					// le préformattage a ajouté un espace au début de chaque
-					// ligne
-					// de données
-					// 8847 BGT modifié si next en si NON next
-					if (Preformat.isSpaceAdded() && !editFileForm.getSectionDataTerminator().radNextStationSelected())
-					{
-						editFileForm.addSpaceBeforeDataTerminator();
-					}
+                    // le préformattage a ajouté un espace au début de chaque
+                    // ligne
+                    // de données
+                    // 8847 BGT modifié si next en si NON next
+                    if (Preformat.isSpaceAdded()
+                            && !editFileForm.getSectionDataTerminator()
+                                .radNextStationSelected())
+                    {
+                        editFileForm.addSpaceBeforeDataTerminator();
+                    }
 
-				} catch (Exception ex)
-				{
-					ok = ok && false;
-					Utils.messageErreurAppend(Messages.error);
-					ex.printStackTrace();
-				}
-			}
+                }
+                catch (Exception ex)
+                {
+                    ok = ok && false;
+                    Utils.messageErreurAppend(Messages.error);
+                    ex.printStackTrace();
+                }
+            }
 
-			for (NemoSection desc : editFileForm.listeSections)
-			{
-				if (desc.isEnabled())
-				{
-					resultat = ((FileSection) desc).checkMandatory();
-					ok = ok && resultat;
-				} else
-				{
-					desc.razValues();
-				}
-			}
+            for (NemoSection desc : editFileForm.listeSections)
+            {
+                if (desc.isEnabled())
+                {
+                    resultat = ((FileSection) desc).checkMandatory();
+                    ok = ok && resultat;
+                }
+                else
+                {
+                    desc.razValues();
+                }
+            }
 
-			if (ok)
-			{
-				editFileForm.setOkApresReset(true);
-				onSuccess();
-			} else
-			{
-				Nemo.getInstance().getViewMain().tabFile.setText(Messages.onglet_file_error);
-				Nemo.getInstance().getViewMain().setEtape(0);
-			}
+            if (ok)
+            {
+                editFileForm.setOkApresReset(true);
+                onSuccess();
+            }
+            else
+            {
+                Nemo.getInstance().getViewMain().tabFile
+                    .setText(Messages.onglet_file_error);
+                Nemo.getInstance().getViewMain().setEtape(0);
 
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
+                editFileForm.initFromNewModel();
+                Nemo.getInstance().getDomain().getMedia()
+                    .buildInputFilesNames();
+            }
 
-	@Override
-	protected void onSuccess()
-	{
-		EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
-		EditCruiseForm editCruiseForm = Nemo.getInstance().getViewMain().getEditCruiseForm();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
 
-		// envoi des valeurs dans le modele
-		// attention aux boutons radio
+    @Override
+    protected void onSuccess()
+    {
+        EditFileForm editFileForm =
+            Nemo.getInstance().getViewMain().getEditFileForm();
+        EditCruiseForm editCruiseForm =
+            Nemo.getInstance().getViewMain().getEditCruiseForm();
 
-		// puis remplissage du modele avec les valeurs de l'IHM
-		editFileForm.initFromNewModel();
+        // envoi des valeurs dans le modele
+        // attention aux boutons radio
 
-		Nemo.getInstance().getDomain().getMedia().buildInputFilesNames();
+        // puis remplissage du modele avec les valeurs de l'IHM
+        editFileForm.initFromNewModel();
 
-		Utils.messageOK(Messages.success_etape);
+        Nemo.getInstance().getDomain().getMedia().buildInputFilesNames();
 
-		// on rajoute "ok" dans l'onglet description
-		Nemo.getInstance().getViewMain().tabFile.setText(Messages.onglet_file_valid);
+        Utils.messageOK(Messages.success_etape);
 
-		// on valide l'etape 1
-		editFileForm.setValidated(true);
+        // on rajoute "ok" dans l'onglet description
+        Nemo.getInstance().getViewMain().tabFile
+            .setText(Messages.onglet_file_valid);
 
-		// verrouillage de l'option serieTemporelle pour eviter les changements
-		editFileForm.enableSeparatorChoice(false);
-		editFileForm.enableFileTypeChoice(false);
+        // on valide l'etape 1
+        editFileForm.setValidated(true);
 
-		try
-		{
-			// FAE 022
-			if (!Nemo.getInstance().getViewMain().getMyRulesManager().isCruiseEnabled())
-			{
-				editCruiseForm.setOkApresReset(true);
-				editCruiseForm.setValidated(true);
+        // verrouillage de l'option serieTemporelle pour eviter les changements
+        editFileForm.enableSeparatorChoice(false);
+        editFileForm.enableFileTypeChoice(false);
 
-				editCruiseForm.initFromNewModel();
-				Nemo.getInstance().getViewMain().setEtape(2);
-			} else
-			{
-				Nemo.getInstance().getViewMain().setEtape(1);
-			}
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
+        try
+        {
+            // FAE 022
+            if (!Nemo.getInstance().getViewMain().getMyRulesManager()
+                .isCruiseEnabled())
+            {
+                editCruiseForm.setOkApresReset(true);
+                editCruiseForm.setValidated(true);
+
+                editCruiseForm.initFromNewModel();
+                Nemo.getInstance().getViewMain().setEtape(2);
+            }
+            else
+            {
+                Nemo.getInstance().getViewMain().setEtape(1);
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
 }
