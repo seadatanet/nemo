@@ -159,6 +159,7 @@ public class Preformat
 		} else if (editFileForm.isCruiseIsADir())
 		{
 			File repertoire = new File(editFileForm.nomRepertoire);
+
 			File ficSortie = run(repertoire);
 			editFileForm.nomRepertoire = ficSortie.getAbsolutePath();
 			editFileForm.setFileLoaded(true);
@@ -221,6 +222,13 @@ public class Preformat
 		_endDataPatternIsRegexp = mediaModel.getEndDataPatternIsRegexp();
 
 		File ficSortie = null;
+		File[] listRep = null;
+		if (!inputFile.isFile())
+		{
+
+			listRep = fr.ifremer.nemo.util.Utils.getFilesWithoutSVN(inputFile.listFiles());
+		}
+
 		// cruise file
 		if (inputFile.isFile())
 		{
@@ -231,8 +239,7 @@ public class Preformat
 
 		}
 		// collect group by cruise
-		else if (inputFile.listFiles()[0].isDirectory() &&
-				(!inputFile.listFiles()[0].toString().endsWith(".svn")))
+		else if (listRep[0].isDirectory())
 
 		{
 			isCollectionGroupedByCruise = true;
@@ -252,7 +259,7 @@ public class Preformat
 
 		}
 		// cruise directory ou collection not grouped
-		else if (inputFile.isDirectory() && !inputFile.listFiles()[0].isDirectory())
+		else if (inputFile.isDirectory() && !listRep[0].isDirectory())
 		{
 			ficSortie = new File(inputFile.getParent() + PF + inputFile.getName());
 			if (!ficSortie.exists())
@@ -397,7 +404,7 @@ public class Preformat
 	private static void analyseLigne(String ligneLue)
 	{
 		int i;
-
+		System.out.println(ligneLue);
 		int[] indexSeparateur = new int[_nbColonne + 1];
 
 		// Index des separateurs
@@ -516,12 +523,13 @@ public class Preformat
 			lecteurAvecBuffer = new BufferedReader(new FileReader(_repEntree + File.separator + fichier));
 			if (_nbColonne > 0)
 			{
-
+				System.out.println(ligneLue);
 				// Lecture des lignes d'en-tete
 				consumeStationHeader(lecteurAvecBuffer);
 
 				while ((ligneLue = lecteurAvecBuffer.readLine()) != null)
 				{
+					System.out.println(ligneLue);
 					analyseOK = false;
 
 					if (!ligneLue.trim().equals(Global.EMPTY_STRING))
@@ -531,6 +539,17 @@ public class Preformat
 						case EOF:
 						case EMPTY_LINE:
 						case NEXT_START_WITH:
+							// if (_endDataPatternIsRegexp)
+							// {
+							// analyseOK =
+							// !fr.ifremer.nemo.util.Utils.isreadedLineMatchesRegexp(ligneLue,
+							// _endDataPattern + ".*");
+							// } else
+							// {
+							// analyseOK =
+							// !ligneLue.startsWith(_endDataPattern);
+							// }
+							// break;
 						case BEGIN_LINE_CHANGES:
 							analyseOK = true;
 							break;
@@ -723,6 +742,7 @@ public class Preformat
 
 			while ((ligneLue = lecteurAvecBuffer.readLine()) != null)
 			{
+				System.out.println(ligneLue);
 				numLigne++;
 				if (numLigne <= lgEnTeteStation)
 				{
@@ -744,8 +764,8 @@ public class Preformat
 						for (int nbLine = 0; nbLine < _enTeteStation; nbLine++)
 						{
 							fichPreformat.println(ligneLue);
-							ligneLue = lecteurAvecBuffer.readLine();
-							numLigne++;
+							// ligneLue = lecteurAvecBuffer.readLine();
+							// numLigne++;
 						}
 						nextLineIsStationHeader = false;
 					}
