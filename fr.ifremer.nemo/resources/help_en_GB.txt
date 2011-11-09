@@ -2,9 +2,8 @@ For detailed explanation, please see NEMO user manual.
 
 ==MODEL==
 
-1/ Model/Open model: loads a model only if a file or a directory containing data files has previously been opened.
+1/ Model/Open model: loads a model only if a file or a directory containing data files has previously been opened. If the model wasn't validated an information message displayed.
 2/ Model/Save model: creates on the disk a XML-type file corresponding to the values entered in the different steps.
-    It is functional only once the first 4 steps have been validated.
 3/ Quit: shuts down the application after having been asked to confirm.
 
 ==COUPLING TABLE==

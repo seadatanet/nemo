@@ -2,9 +2,8 @@
 
 ==MODELE============================
 
-1/ Modèle/Ouvrir un modèle : charge un modèle existant, seulement si le type de fichier et l'emplacement du ou des fichiers a tété saisi au préalable.
-2/ Modèle/Enregistrer le modèle : sauve le modèle au format XML dans le répertoire par défaut des modèles défini dans la configuration de NEMO
-    Cette fonction n'est possible que si les 4 étapes de description du ou des fichiers ont été réalisées.
+1/ Modèle/Ouvrir un modèle : charge un modèle existant, seulement si le type de fichier et l'emplacement du ou des fichiers a été saisi au préalable. Si le modèle n'a pas été validé lors de l'enregistrement, un message de d'information s'affiche.
+2/ Modèle/Enregistrer le modèle : sauve le modèle au format XML dans le répertoire par défaut des modèles défini dans la configuration de NEMO.
 3/ Quitter : ferme l'application après demande de confirmation.
 
 ==TABLE DE COUPLAGE=================
