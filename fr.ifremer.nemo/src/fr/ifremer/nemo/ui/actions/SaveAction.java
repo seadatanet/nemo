@@ -91,7 +91,7 @@ public class SaveAction extends Action implements ISelectionListener,
         Nemo.getInstance().setNomModele(fichierSortieXML.getName());
 
         Nemo.getInstance().refreshNomNemo();
-
+        Nemo.getInstance().getViewMain().getEditFileForm().actualiseEdition();
         Utils.messageOK(Messages.SaveAction_4);
 
     }
@@ -123,9 +123,7 @@ public class SaveAction extends Action implements ISelectionListener,
             currentModelPath = nomFichierSortieXML;
         }
         // nom connu car le modele est un fichier existant qui a été ouvert
-        else if ((Nemo.getInstance().getCurrentOpenModelPath() != null)
-                && (!Nemo.getInstance().getCurrentOpenModelPath().equals("")) //$NON-NLS-1$
-        )
+        else if ((Nemo.getInstance().getCurrentOpenModelPath() != null) && (!Nemo.getInstance().getCurrentOpenModelPath().equals(""))) //$NON-NLS-1$
         {
             currentModelPath = Nemo.getInstance().getCurrentOpenModelPath();
         }
@@ -175,6 +173,7 @@ public class SaveAction extends Action implements ISelectionListener,
             }
 
             Nemo.getInstance().setCurrentOpenModelPath(nomFichierSortieXML);
+            
         }
     }
 

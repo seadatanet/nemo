@@ -256,7 +256,6 @@ public class Messages
     // MESSAGES D'INFORMATIONS REGLES INPUT/CONV (onglet File)
     public static String edit_file_info_medatlasForbiddenBecauseCollection;
     public static String edit_file_info_cruiseDisabledBecauseODV;
-    public static String edit_file_info_odvMonoForbiddenBecauseTrajectory;
     public static String edit_file_info_conversionNotApplicable;
     public static String edit_file_info_P011viaP021_disabled;
     // RESULTATS
