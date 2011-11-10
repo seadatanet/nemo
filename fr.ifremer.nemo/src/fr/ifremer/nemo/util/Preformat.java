@@ -270,8 +270,7 @@ public class Preformat
 				Utils.deleteDir(ficSortie);
 				ficSortie.mkdirs();
 			}
-			processPreformat(new File[]
-									{ inputFile }, null, ficSortie, isBatch);
+			processPreformat(new File[] { inputFile }, null, ficSortie, isBatch);
 
 		} else
 		{
@@ -291,7 +290,7 @@ public class Preformat
 	{
 		nombreColonnes(inputFile);
 		// /////////////////////////////////////////////////
-		// Recuperation des entiers et decimales maximum //
+		// Recuperation des entiers et decimales maximum  //
 		// /////////////////////////////////////////////////
 		_maxEntier = new int[_nbColonne];
 		_maxDecimale = new int[_nbColonne];
@@ -404,7 +403,6 @@ public class Preformat
 	private static void analyseLigne(String ligneLue)
 	{
 		int i;
-		System.out.println(ligneLue);
 		int[] indexSeparateur = new int[_nbColonne + 1];
 
 		// Index des separateurs
@@ -523,13 +521,11 @@ public class Preformat
 			lecteurAvecBuffer = new BufferedReader(new FileReader(_repEntree + File.separator + fichier));
 			if (_nbColonne > 0)
 			{
-				System.out.println(ligneLue);
 				// Lecture des lignes d'en-tete
 				consumeStationHeader(lecteurAvecBuffer);
 
 				while ((ligneLue = lecteurAvecBuffer.readLine()) != null)
 				{
-					System.out.println(ligneLue);
 					analyseOK = false;
 
 					if (!ligneLue.trim().equals(Global.EMPTY_STRING))
@@ -742,7 +738,6 @@ public class Preformat
 
 			while ((ligneLue = lecteurAvecBuffer.readLine()) != null)
 			{
-				System.out.println(ligneLue);
 				numLigne++;
 				if (numLigne <= lgEnTeteStation)
 				{
@@ -764,10 +759,11 @@ public class Preformat
 						for (int nbLine = 0; nbLine < _enTeteStation; nbLine++)
 						{
 							fichPreformat.println(ligneLue);
-							// ligneLue = lecteurAvecBuffer.readLine();
-							// numLigne++;
+							ligneLue = lecteurAvecBuffer.readLine();
+							numLigne++;
 						}
 						nextLineIsStationHeader = false;
+						fichPreformat = writeDataLine(ligneLue, fichPreformat);
 					}
 
 				} else

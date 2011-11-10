@@ -199,7 +199,9 @@ public class DataFormValidator extends FormValidator
          */
         if (ok)
         {
-            editDataForm.setOkApresReset(true);
+            //FAE 9656 
+            // les données du model doivent etre presente.
+            //editDataForm.setOkApresReset(true);
             onSuccess();
         }
         else
