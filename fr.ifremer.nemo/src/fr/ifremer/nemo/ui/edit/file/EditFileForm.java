@@ -52,10 +52,10 @@ public class EditFileForm extends EditForm
 	public String nomFichierOrigin;
 
 	// sections
-	private FileSection sectionFileHeader;
-	private FileStationHeader sectionStationHeader;
-	private FileSection sectionEndOfStation;
-	private FileEndData sectionDataTerminator;
+	public FileSection sectionFileHeader;
+	public FileStationHeader sectionStationHeader;
+	public FileSection sectionEndOfStation;
+	public FileEndData sectionDataTerminator;
 
 	// zone de texte pour l'affichage des données en entrée
 	private StyledText textAreaFile;

@@ -133,7 +133,8 @@ public class EditStationForm extends EditForm
 				.applyTo(textCommentaire);
 
         // remplissage de l'IHM par le modèle chargé
-		fillFromModel();
+		if (!Nemo.getInstance().getNomModele().isEmpty())
+		    fillFromModel();
 		filled = true;
 
 		actualiseEdition();

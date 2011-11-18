@@ -23,7 +23,7 @@ import fr.ifremer.nemo.util.Global.E_InputType;
 public class FileTypeSelectionListener  implements SelectionListener
 {
     // reference sur l'editeur
-    private EditFileForm myEditFileForm;
+    private final EditFileForm myEditFileForm;
     
     public FileTypeSelectionListener(   EditFileForm editFileForm)
     {
@@ -54,6 +54,7 @@ public class FileTypeSelectionListener  implements SelectionListener
         }
 
         rulesMgr.updateFromIHM(currentFileType);
+        rulesMgr.SectionMandatory();
     }
     
 }

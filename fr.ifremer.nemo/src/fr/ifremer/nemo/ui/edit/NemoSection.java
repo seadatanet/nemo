@@ -19,6 +19,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.util.Global;
 
@@ -36,8 +37,10 @@ public abstract class NemoSection
 	private final String description;
 	// reference sur le formulaire d'edition auquel appartient la section
 	protected EditForm myForm;
+	protected boolean isMandatory = false;
 
-	public NemoSection(String name, String title, String description, EditForm form)
+
+	public NemoSection(String name, String title, String description ,EditForm form)
 	{
 		this(name, title, description, 40);
 		myForm = form;
@@ -46,8 +49,8 @@ public abstract class NemoSection
 	public NemoSection(String name, String title, String description, int padSize)
 	{
 		this.name = name;
-		this.title = /* Formatter.getSingleton().padString( */title/* , padSize) */;
-		this.description = description;
+		this.title = /* Formatter.getSingleton().padString( */title.trim()/* , padSize) */;
+		this.description = description ;
 	}
 
 	/**
@@ -56,6 +59,7 @@ public abstract class NemoSection
 	public void dispose()
 	{
 		section.dispose();
+		
 	}
 
 	/**
@@ -76,8 +80,13 @@ public abstract class NemoSection
 				formEdition.reflow(true);
 			}
 		});
+		Nemo.getInstance().getViewMain().getMyRulesManager().SectionMandatory();
+		if (!isMandatory)
+            section.setText(title);
+        else
+            section.setText(title+" *");
 
-		section.setText(title);
+
 		section.setDescription(description);
 
 		Composite sectionClient = toolkitEdition.createComposite(section);
@@ -90,6 +99,7 @@ public abstract class NemoSection
 		section.setClient(sectionClient);
 
 		section.getParent().layout(true);
+		
 	}
 
 	protected abstract void drawSection(Composite parent, boolean filled);
@@ -124,6 +134,21 @@ public abstract class NemoSection
 	{
 		return section.isEnabled();
 	}
+	
+	public void setMandatory(boolean mandatory)
+	{
+	    isMandatory = mandatory;
+	    if(section !=null)
+    	    if (!isMandatory)
+                section.setText(title);
+            else
+                section.setText(title+" *");
+	}
+	
+	public boolean isMandatory()
+    {
+        return isMandatory;
+    }
 
 	public void initModel(StationModel stationModel)
 	{
@@ -154,5 +179,7 @@ public abstract class NemoSection
 	{
 		return title;
 	}
+	
+	
 
 }

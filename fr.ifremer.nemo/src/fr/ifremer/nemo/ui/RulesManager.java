@@ -12,9 +12,11 @@ import org.eclipse.jface.dialogs.MessageDialog;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.input.parameters.VerticalParametersList;
+import fr.ifremer.nemo.ui.edit.cruise.EditCruiseForm;
 import fr.ifremer.nemo.ui.edit.data.EditDataForm;
 import fr.ifremer.nemo.ui.edit.data.GroupVerticalParameters;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
+import fr.ifremer.nemo.ui.edit.station.EditStationForm;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
@@ -89,6 +91,68 @@ public class RulesManager
     {
         setDefaultValues();
     }
+    
+    public void SectionMandatory()
+    {
+        EditCruiseForm myEditCruiseForm = Nemo.getInstance().getViewMain().getEditCruiseForm();
+        EditStationForm myEditStationForm = Nemo.getInstance().getViewMain().getEditStationForm();
+        
+        //mandatory File Section
+        if( myEditFileForm.sectionFileHeader != null)
+        {
+            myEditFileForm.sectionFileHeader.setMandatory(true);
+            myEditFileForm.sectionStationHeader.setMandatory(true);
+            myEditFileForm.sectionEndOfStation.setMandatory(true);
+            myEditFileForm.sectionDataTerminator.setMandatory(true);
+        }
+
+        //mandatory  Cruise Section
+        if (myEditCruiseForm.sectionReference != null)
+        {
+            myEditCruiseForm.sectionReference.setMandatory(true);
+            myEditCruiseForm.sectionType.setMandatory(true);
+            myEditCruiseForm.sectionCentre.setMandatory(false);
+            myEditCruiseForm.sectionSource.setMandatory(true);
+            myEditCruiseForm.sectionLocalisation.setMandatory(true);
+        }
+        
+        //mandatory Station Section
+        if(myEditStationForm.stationNumber != null)
+        {
+            myEditStationForm.stationNumber.setMandatory(true);
+            /*if(myEditFileForm.getRadMedatlas().getSelection() && myEditFileForm.getRadProfilVertical().getSelection())
+                myEditStationForm.dataType.setMandatory(false);
+            else*/
+            myEditStationForm.dataType.setMandatory(true);
+            myEditStationForm.historique.setMandatory(false); 
+            myEditStationForm.comments.setMandatory(false);
+            myEditStationForm.surfaceSample.setMandatory(false); 
+            myEditStationForm.utConvertion.setMandatory(false); 
+            myEditStationForm.time.setMandatory(true);
+            myEditStationForm.date.setMandatory(true);
+            myEditStationForm.latitude.setMandatory(true);
+            myEditStationForm.longitude.setMandatory(true);
+            myEditStationForm.depth.setMandatory(false);
+            
+            if(myEditStationForm.sensorDepth.getSection()!= null && !myEditStationForm.sensorDepth.getSection().isDisposed())
+            {
+                if(myEditFileForm.getRadSerieTempo().getSelection())
+                    myEditStationForm.sensorDepth.setMandatory(true);
+                else
+                    myEditStationForm.sensorDepth.setMandatory(false);
+            }
+            
+            if(myEditStationForm.samplingRate.getSection() !=null && !myEditStationForm.samplingRate.getSection().isDisposed())
+            {
+                if(myEditFileForm.getRadSerieTempo().getSelection() || myEditFileForm.getRadTrajectoire().getSelection())
+                    myEditStationForm.samplingRate.setMandatory(true);
+                else
+                    myEditStationForm.samplingRate.setMandatory(false);
+            }
+            
+        }
+    }
+    
 
     private void setDefaultValues()
     {
