@@ -132,9 +132,10 @@ public class EditStationForm extends EditForm
 		GridDataFactory.fillDefaults().grab(true, true).hint(Global.SIZE_SECTION, SWT.DEFAULT).minSize(Global.SIZE_SECTION, 200)
 				.applyTo(textCommentaire);
 
-        // remplissage de l'IHM par le modèle chargé
-		if (!Nemo.getInstance().getNomModele().isEmpty())
-		    fillFromModel();
+		// remplissage de l'IHM par le modèle chargé
+		// if (!Nemo.getInstance().getNomModele().isEmpty())
+		// FAE 10632 fill necessaire car appelle le remplissabe du dataType
+		fillFromModel();
 		filled = true;
 
 		actualiseEdition();
