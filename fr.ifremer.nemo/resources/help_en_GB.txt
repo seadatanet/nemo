@@ -4,6 +4,8 @@ For detailed explanation, please see NEMO user manual.
 
 1/ Model/Open model: loads a model only if a file or a directory containing data files has previously been opened. If the model wasn't validated an information message displayed.
 2/ Model/Save model: creates on the disk a XML-type file corresponding to the values entered in the different steps.
+	Since version 1.4.3 it is possible to save a model which is not competely valid (all the steps ane not validated)
+	When a non valid model is opened, the user is informes by a message.
 3/ Quit: shuts down the application after having been asked to confirm.
 
 ==COUPLING TABLE==
@@ -39,6 +41,7 @@ Once the type of file and the input file or directory is chosen, file descriptio
  - Reset button: erase all the values of all the steps.
 
 4 sections are available: Click on each section and modify the values if necessary
+The mandatory sections are highligted by a '*', in this step they are filled by default value and may not be changed.
 
 1/ File header: This field describes the number of lines of the file header. A file header is generally present when it is a multi-station file, 
     and that there are some lines at the beginning of the file which are related to all the stations. These lines are not repeated in the file.
@@ -91,7 +94,7 @@ The information on this screen is necessary for MEDATLAS format, this step is sk
 2/ Ask the web services by clicking on "Server initialisation" (IFREMER only) or 
 3/ Load a XML Cruise Summary Report (CSR) file by clicking on "XML Initialisation".
 
-6 sections are available: Click on each section and modify the values if necessary
+6 sections are available: Click on each section and modify the values if necessary. The mandatory section are highligted by a '*'.
 
 1/ Reference: cruise reference, cruise name and ship (SeaDataNet List C174).
 2/ Location: Start and end date, Sea area (SeaDataNet List C16)
@@ -109,7 +112,7 @@ This step is performed to indicate to NEMO where to find the mandatory or import
 This information is changing as it deals with vertical profiles, time series or trajectories. 
 
 ==For vertical profiles 12 sections are available: Click on each section and modify the values if necessary
-Mandatory fields are: Station number, Data type, Time, Date, Latitude and Longitude. 
+Mandatory fields (highlighted by a '*') are: Station number, Data type, Time, Date, Latitude and Longitude. 
 
 1/ Station number: The station number can be incremental starting at a number given by the user or can be in the station header and input in NEMO using the set and test buttons.
           If station's number is located within the input file(s) filename, use 0 as line number, and give the start and end character in the file name.   
@@ -177,7 +180,7 @@ Mandatory fields are: Station number, Data type, Time, Date, Latitude and Longit
                Header QC flags are only used in MEDATLAS format, they concerns Date/Time, Latitude, Longitude and Bottom depth.
 
 ==For time-series 6 more sections are available :
-Mandatory fields are: Station number, Data type, Time, Date, Latitude, Longitude and Sensor's depth
+Mandatory fields (highlighted by a '*') are: Station number, Data type, Time, Date, Latitude, Longitude and Sensor's depth
 
 13-14/ End Latitude and End Longitude: latitude and longitude of the end time of time series.
           By default, if not input, the values will be the same than "Latitude" and "Longitude" which are the position at the start time of the time series.
@@ -199,7 +202,7 @@ Mandatory fields are: Station number, Data type, Time, Date, Latitude, Longitude
           (example: if the sampling rate is given in Hour in the input file, input *3600 in the formula).
 
 == For trajectories: 14 sections are available already described for Vertical profiles and Time-series.
-Mandatory fields are: Station number, Data type, Time, Date, Latitude and Longitude. 
+Mandatory fields (highlighted by a '*') are: Station number, Data type, Time, Date, Latitude and Longitude. 
 
     Station number: In ODV, a trajectory is considered as a series of stations with one point of measurement 
           at each station, but the LOCAL_CDI_ID is the same for all the stations. 
@@ -214,7 +217,6 @@ For detailed explanation, please see NEMO user manual.
 This step is performed to indicate NEMO where to find the data measurements in input file(s). 
 This information concern the name and unit of the measured parameters, their default values (found in the input file 
 when the parameter is not measured), and the format in which the parameter will be kept in the output file.
-
 
 + First step is to choose the parameters list to use: P091, P011viaP091 or P011viaP021 If output format MEDATLAS has been selected, P011 via P021 can not be chosen.
 + Then choose the measure type: below sea surface or below sea bed.
@@ -298,6 +300,8 @@ when the parameter is not measured), and the format in which the parameter will 
 
 ==The table of measured parameters contains the following columns :
 ===================================================================
+The mandatory fields are highlighted by a '*'.
+
 - Code: MEDATLAS code of the parameter
 
 - Unit: MEDATLAS Unit of the parameter
@@ -353,4 +357,4 @@ Conversion is divided in two steps:
 
 A summary of the user choices is written in NEMO main screen.
 At the end of the file conversion, a green message indicates that conversion is OK.
-The corresponding batch command is given in the log window, it can be copied (removing line feeds) to be used in a batch file.
+The corresponding batch command is given in the log window, it can be copied to be used in a batch file.

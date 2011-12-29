@@ -1,9 +1,11 @@
-﻿Pour plus de détails, se référer au manuel utilisateur de NEMO.
+Pour plus de détails, se référer au manuel utilisateur de NEMO.
 
 ==MODELE============================
 
 1/ Modèle/Ouvrir un modèle : charge un modèle existant, seulement si le type de fichier et l'emplacement du ou des fichiers a été saisi au préalable. Si le modèle n'a pas été validé lors de l'enregistrement, un message de d'information s'affiche.
 2/ Modèle/Enregistrer le modèle : sauve le modèle au format XML dans le répertoire par défaut des modèles défini dans la configuration de NEMO.
+       Depuis la version 1.4.3 de NEMO, il est possible de sauver un modèle en cours de définition (toutes les étapes du modèle ne sont pas validées)
+       Lors de l'ouverture d'un modèle non complètement validé, l'utilisateur est prévenu par un message
 3/ Quitter : ferme l'application après demande de confirmation.
 
 ==TABLE DE COUPLAGE=================
@@ -39,6 +41,7 @@ Une fois que le type de fichier et le fichier ou répertoire ont été choisi, l
  - bouton "Reset" : efface toutes les valeurs de toutes les étapes.
 
 4 parties : Cliquer sur chaque partie pour modifier les valeurs si nécessaire
+Les parties qui doivent être obligatoirement renseignées sont marquées par une '*'. Dans cet onglet, elles sont renseignées par une valeur par défaut
 
 1/ Entête de fichier : Ce champ décrit le nombre de lignes de l'entête de fichier, il n'est accessible que dans le cas d'un fichier multi-stations. 
     L'entête fichier correspond aux lignes relatives à l'ensemble des stations du fichier qui ne sont pas répétées, pour chaque station, dans le reste du fichier.
@@ -89,6 +92,7 @@ Les informations de cet écran sont nécessaires pour le format MEDATLAS. Cette 
 3/ Importer les informations à partir d'un fichier XML de rapport de campagne (CSR de SeaDataNet) en cliquant sur "Initialisation XML".
 
 6 sections : Cliquer sur chaque section pour modifier les valeurs si nécessaire
+Les sections qui doivent être obligatoirement renseignées sont marquées par une '*'.
 
 1/ Référence : référence MEDATLAS de la campagne, nom de la campagne et navire (SeaDataNet Liste C174).
 2/ Localisation : Dates début et fin, Zone océanique (SeaDataNet Liste C16)
@@ -107,7 +111,7 @@ les informations changent selon le type de fichiers en entrée : profils vertica
 
 ==Pour les profils verticaux============
 12 sections sont affichées : Cliquer sur chaque partie pour modifier les valeurs si nécessaire.
-Les champs obligatoires sont : Numéro de station, Type de données, Heure, Date, Latitude et Longitude. 
+Les champs obligatoires (marqués par une '*') sont : Numéro de station, Type de données, Heure, Date, Latitude et Longitude. 
 
 1/ Numéro de station : Le numéro des stations peut être incrémenté à partir d'un nombre donné par l'utilisateur ou il peut être lu dans l'en-tête station et saisi dans NEMO à l'aide des boutons injecter et Test.
           Si le numéro des stations est donné dans le nom des fichiers en entrée, mettre 0 dans champ ligne, et mettre les rangs des premier et dernier caractères du numéro de station dans le nom du fichier.
@@ -180,7 +184,7 @@ Les champs obligatoires sont : Numéro de station, Type de données, Heure, Date
 
 ==Pour les séries temporelles ==========
 6 sections supplémentaires sont affichées (18 sections au total)
-Les champs obligatoires sont : Numéro de station, Type de données, Heure, Date, Latitude, Longitude, et Profondeur du capteur.
+Les champs obligatoires (marqués par une '*') sont : Numéro de station, Type de données, Heure, Date, Latitude, Longitude, et Profondeur du capteur.
 
 13-14/ Latitude de fin et Longitude de fin: latitude et longitude à la date de fin des séries temporelles.
           Si rien n'est saisi, les valeurs sont les mêmes que celles de Latitude et Longitude qui sont les positions à la date de début des séries temporelles.
@@ -203,7 +207,7 @@ Les champs obligatoires sont : Numéro de station, Type de données, Heure, Date
 
 == Pour les trajectoires ==========
 14 sections peuvent être renseignées, elles ont déjà été décrites pour les profils verticaux et les séries temporelles.
-Les champs obligatoires sont : Numéro de station, Type de données, Heure, Date, Latitude et Longitude.
+Les champs obligatoires (marqués par une '*') sont : Numéro de station, Type de données, Heure, Date, Latitude et Longitude.
 
     Numéro de station : dans le format ODV, une trajectoire est considérée comme une série de stations ayant chacune un seul point de mesure, mais
                         ayant toute le même LOCAL_CDI_ID.
@@ -299,6 +303,8 @@ Cette information concerne le nom, l'unité, les valeurs par défaut en entrée 
    
 ==Le tableau des paramètres mesurés contient les colonnes suivantes :
 =====================================================================
+Les colonnes obligatoires sont marquées par une '*'.
+
 - Code : code MEDATLAS du paramètre
 
 - Unité : unité MEDATLAS du paramètre
@@ -349,4 +355,4 @@ La conversion est divisée en 2 étapes:
 
 Un résumé des options choisies est écrit dans l'écran de NEMO.
 A la fin de la conversion, un message vert indique que la conversion s'est bien passée.
-La commande batch correspondante est également écrite, elle peut ainsi être recopiée (en supprimant les retours à la ligne) pour être utilisée dans un batch.
+La commande batch correspondante est également écrite, elle peut ainsi être recopiée pour être utilisée dans un fichier de commande batch.
