@@ -16,7 +16,7 @@
   <cdiMethod>CDIMTH01</cdiMethod>
   <accesDonnees>LS</accesDonnees>
   <typePlateforme>12</typePlateforme>
-  <writeMapping>true</writeMapping>
+  <writeMapping>false</writeMapping>
   <fichierMapping>coupling.txt</fichierMapping>
   <dateISO>true</dateISO>
   <defaultConversionType>UNKNOWN</defaultConversionType>
