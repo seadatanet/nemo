@@ -165,14 +165,16 @@ public class Nemo
             // paramètre
             else
             {
-                if (model.getDataModel().getParameterModels()[0].getParameter()
-                    .isP011())
+                if(model.getDataModel().getParameterModels().length!=0)
                 {
-                    dataList = DataListTypeEnum.P011_VIA_P091;
-                }
-                else
-                {
-                    dataList = DataListTypeEnum.P091;
+                    if (model.getDataModel().getParameterModels()[0].getParameter().isP011())
+                    {
+                        dataList = DataListTypeEnum.P011_VIA_P091;
+                    }
+                    else
+                    {
+                        dataList = DataListTypeEnum.P091;
+                    }
                 }
             }
         }

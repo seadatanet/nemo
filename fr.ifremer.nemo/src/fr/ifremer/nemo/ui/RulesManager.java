@@ -113,6 +113,8 @@ public class RulesManager
             myEditCruiseForm.sectionType.setMandatory(true);
             myEditCruiseForm.sectionCentre.setMandatory(false);
             myEditCruiseForm.sectionSource.setMandatory(true);
+            myEditCruiseForm.sectionSource.getItems().get(0).setMandatory(true);
+            
             myEditCruiseForm.sectionLocalisation.setMandatory(true);
         }
         
@@ -668,7 +670,7 @@ public class RulesManager
     public boolean isCruiseInADirectory()
     {
         return myProcessType == E_ProcessType.COLLECTION_DIR
-                || myProcessType == E_ProcessType.CRUISE_DIR;
+                || myProcessType == E_ProcessType.CRUISE_DIR ||  myProcessType == E_ProcessType.COLLECTION_FILES;
     }
 
     public boolean isProcessCollectionDir()

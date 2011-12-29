@@ -143,6 +143,7 @@ public class EditDataForm extends EditForm
 
 		ViewLog.aideData();
 		Nemo.getInstance().getViewMain().setAffiche(3);
+		
 	}
 
 	@Override
@@ -206,8 +207,7 @@ public class EditDataForm extends EditForm
 		ParameterModel[] parameterModels =
 				Nemo.getInstance().getDomain().getData().getModel().getParameterModels();
 
-		// refresh de la table de l'onglet Data
-		myTableData.razAndRecreateTable();
+		
 		// update dataList to use
 
 		DataListTypeEnum dataList = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
@@ -237,6 +237,8 @@ public class EditDataForm extends EditForm
 		VerticalParametersList verticParams =
 				Nemo.getInstance().getDomain().getData().getModel().getVerticalParametersList();
 		Nemo.getInstance().getViewMain().getMyRulesManager().updateFromModel(verticParams);
+		// refresh de la table de l'onglet Data
+        myTableData.razAndRecreateTable();
 	}
 
 	public void enableP011viaP021(boolean enabled)

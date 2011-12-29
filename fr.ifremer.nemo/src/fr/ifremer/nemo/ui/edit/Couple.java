@@ -21,7 +21,6 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Global;
@@ -43,6 +42,7 @@ public class Couple implements UIobject
     private Text valueText;
     private Combo valueCombo;
     private int textLimit;
+    private boolean isMandatory=false;
 
     public Couple(String groupTitle, String labelText, ComboType type,
             String defaultValue)
@@ -108,7 +108,10 @@ public class Couple implements UIobject
         {
             label = new Label(parent, SWT.NONE);
             label.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
-            label.setText(labelString);
+            if (!isMandatory)
+                label.setText(labelString);
+            else
+                label.setText(labelString+" *");
         }
 
         // Text or Combo
@@ -242,6 +245,22 @@ public class Couple implements UIobject
             Utils.selectComboCode(valueCombo, defaultValue);
             // valueCombo.deselectAll();
         }
+    }
+    
+    public boolean isMandatory(){
+        return isMandatory;
+    }
+    
+    public void setMandatory(boolean mandatory){
+        isMandatory = mandatory;
+        if(label != null)
+        {
+            if (!isMandatory)
+                label.setText(labelString);
+            else
+                label.setText(labelString+" *");
+        }
+        
     }
 
     public boolean isEmpty()

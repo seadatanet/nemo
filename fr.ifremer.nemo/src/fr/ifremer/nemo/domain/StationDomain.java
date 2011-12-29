@@ -32,6 +32,7 @@ import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_MesureType;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 
@@ -231,7 +232,7 @@ public class StationDomain {
 
 	private String getRef(boolean mustIncrement) {
 		// incrementation du numÃ©ro
-		String ref = Integer.toString(_ref);
+	    String ref = Integer.toString(_ref);
 		if (mustIncrement) {
 			_ref++;
 		}
@@ -281,7 +282,8 @@ public class StationDomain {
 			// Station
 			errorMessage = "station reference";
 			if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TRAJECTORY) {
-				_ref = 1;
+				if(Nemo.getInstance().getDomain().getConversion().getCurrent() != E_TypeConversion.ODV_MULTISTATIONS)
+				    _ref = 1;
 				odvStationHeader.append(form.limitString(getRef(true), 20));
 			} else {
 				odvStationHeader.append(form.limitString(stationRef, 20));
@@ -374,15 +376,15 @@ public class StationDomain {
 
 		switch (c) {
 		case ODV:
-			// ODV -> [RÃ©fÃ©rence du jeu de donnÃ©es]
+			// ODV -> [Reference du jeu de donnees]
 			// if
 			// (Nemo.getInstance().getDomain().getMedia().getModel().getProcessType()
 			// == E_ProcessType.COLLECTION_FILES)
 			// cruiseRef = cDomain.getModel().getName();
 			// else
 			cruiseRef = cDomain.getDataSetRef();
-			// [NumÃ©ro station]si < 5 : codÃ© sur 5 caractÃ¨res il est
-			// complÃ©tÃ© Ã 
+			// [Numero station]si < 5 : code sur 5 caracteres il est
+			// complete a 
 			// gauche par des '0'.
 			if (stationReference.length() < 5) {
 				stationReference = form.padZero(stationReference, 5);
@@ -409,7 +411,7 @@ public class StationDomain {
 			temp += Global.UNDERSCORE;
 		temp += stationReference;
 
-		// [Type de donnÃ©es] s'il existe
+		// [Type de donnees] s'il existe
 		DataType dataType = _model.getDataType();
 		if (dataType != null) {
 			if (!dataType.getCode().equals(Global.EMPTY_STRING)) {
@@ -429,10 +431,10 @@ public class StationDomain {
 	public String getAndCheckLocalCDI(CruiseDomain cDomain, Conversion c, String ref) throws ParseException, GenerationException, UnsupportedEncodingException {
 		String localCdi = getLocalCdiId(cDomain, c, ref);
 		if (stationsLocalCDIList.contains(localCdi)) {
-			throw new GenerationException(Messages.error_convert_stationsDoubles + localCdi);
-		} else {
-			stationsLocalCDIList.add(localCdi);
-		}
+			throw new GenerationException(Messages.error_convert_stationsDoubles + " " + localCdi);
+		} 
+		stationsLocalCDIList.add(localCdi);
+		
 		return localCdi;
 	}
 

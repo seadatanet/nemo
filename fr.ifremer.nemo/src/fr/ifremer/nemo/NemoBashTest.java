@@ -28,6 +28,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import fr.ifremer.nemo.config.Configuration;
+import fr.ifremer.nemo.config.Proxy;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
@@ -271,6 +273,21 @@ public class NemoBashTest
         Assert.assertFalse(convertWithNemoBatch(Conversion.ODV,
             E_TypeConversion.ODV_MULTISTATIONS, inputAbsolutePath,
             outputAbsolutePath));
+    }
+    
+    /**
+     * =================================================================
+     * emptyProxy
+     * =================================================================
+     */
+    @Test
+    public final void emptyProxyTest()
+    {
+        testLogger
+            .info("\r\n\r\n\r\n\r\n_______________________________emptyProxyTest________________________________\r\n\r\n\r\n\r\n");
+        message = new Message();
+        message.testName = "empty Proxy test";
+        Assert.assertTrue(EmptyProxy());
     }
 
 	/**
@@ -679,5 +696,18 @@ public class NemoBashTest
 			testLogger.info(mes + "\r\n");
 		}
 	}
-
+	
+	public boolean EmptyProxy(){
+	   Configuration config = new Configuration();;
+	   Proxy proxy =config.getProxy();
+	   if(!proxy.isUse() && proxy.getAdress().isEmpty() && proxy.getLogin().isEmpty() && proxy.getPassword().isEmpty() && proxy.getPort().isEmpty())
+	   {
+	       config.restoreDefault();
+	       proxy =config.getProxy();
+	       if(!proxy.isUse() && proxy.getAdress().isEmpty() && proxy.getLogin().isEmpty() && proxy.getPassword().isEmpty() && proxy.getPort().isEmpty())
+	           return true;
+	   }
+	   
+	   return false;
+	}
 }

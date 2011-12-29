@@ -121,6 +121,11 @@ public class CruiseSection extends NemoSection
 
         return null;
     }
+    
+    public List<Couple> getItems()
+    {
+        return items;
+    }
 
     public boolean checkMandatory(String label)
     {

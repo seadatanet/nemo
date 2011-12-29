@@ -138,9 +138,7 @@ public class TableData
 
     private boolean isValueOutWritable()
     {
-        boolean res = false;
-        return Nemo.getInstance().getViewMain().getMyRulesManager()
-            .isConversionToODV();
+        return !Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToODV();
     }
 
     private boolean isLabelWritable()
@@ -157,8 +155,7 @@ public class TableData
      */
     private void initColumnsMap()
     {
-        boolean isLabelWritable = true;
-
+        
         // init col nb by id
         for (int i = 0; i < colOrder.length; i++)
         {
@@ -170,63 +167,63 @@ public class TableData
 
         col =
             new TableDataColumn(COL_CODE, colNbById.get(COL_CODE),
-                Messages.table_label_code, 100, false);
+                Messages.table_label_code, 100, false, true);
         columnsMap.put(col.pos, col);
         col =
             new TableDataColumn(COL_USERLABEL, colNbById.get(COL_USERLABEL),
-                Messages.table_label_userlabel, 100, isLabelWritable());
+                Messages.table_label_userlabel, 100, isLabelWritable(), false);
         columnsMap.put(col.pos, col);
         col =
             new TableDataColumn(COL_UNIT, colNbById.get(COL_UNIT),
-                Messages.table_label_unit, 90, false);
+                Messages.table_label_unit, 90, false, true);
         columnsMap.put(col.pos, col);
         col =
             new TableDataColumn(COL_CONVERSION, colNbById.get(COL_CONVERSION),
-                Messages.label_conversion, 70, true);
+                Messages.label_conversion, 70, true, false);
         columnsMap.put(col.pos, col);
         col =
             new TableDataColumn(COL_TEST, colNbById.get(COL_TEST),
-                Messages.label_test, 50, false);
+                Messages.label_test, 50, false, false);
         columnsMap.put(col.pos, col);
         col =
             new TableDataColumn(COL_START, colNbById.get(COL_START),
-                Messages.label_start, 50, false);
+                Messages.label_start, 50, false, true);
         columnsMap.put(col.pos, col);
         col =
             new TableDataColumn(COL_END, colNbById.get(COL_END),
-                Messages.label_end, 50, false);
+                Messages.label_end, 50, false, true);
         columnsMap.put(col.pos, col);
         col =
             new TableDataColumn(COL_FORMAT, colNbById.get(COL_FORMAT),
-                Messages.label_format, 70, true);
+                Messages.label_format, 70, true, true);
         columnsMap.put(col.pos, col);
         col =
             new TableDataColumn(COL_VALUE_IN, colNbById.get(COL_VALUE_IN),
-                Messages.table_label_valueIn, 50, true);
+                Messages.table_label_valueIn, 50, true, false);
         columnsMap.put(col.pos, col);
         col =
             new TableDataColumn(COL_VALUE_OUT, colNbById.get(COL_VALUE_OUT),
-                Messages.table_label_valueOut, 50, isValueOutWritable());
+                Messages.table_label_valueOut, 50, isValueOutWritable(), false);
         columnsMap.put(col.pos, col);
         col =
             new TableDataColumn(COL_TEST_IN, colNbById.get(COL_TEST_IN),
-                Messages.table_label_testIn, 50, false);
+                Messages.table_label_testIn, 50, false, false);
         columnsMap.put(col.pos, col);
         col =
             new TableDataColumn(COL_TEST_OUT, colNbById.get(COL_TEST_OUT),
-                Messages.table_label_testOut, 50, false);
+                Messages.table_label_testOut, 50, false, false);
         columnsMap.put(col.pos, col);
         col =
             new TableDataColumn(COL_START_FLAG, colNbById.get(COL_START_FLAG),
-                Messages.table_label_startFlag, 50, false);
+                Messages.table_label_startFlag, 50, false, false);
         columnsMap.put(col.pos, col);
         col =
             new TableDataColumn(COL_END_FLAG, colNbById.get(COL_END_FLAG),
-                Messages.table_label_endFlag, 50, false);
+                Messages.table_label_endFlag, 50, false, false);
         columnsMap.put(col.pos, col);
         col =
             new TableDataColumn(COL_UNIT_CODE, colNbById.get(COL_UNIT_CODE),
-                Global.EMPTY_STRING, 0, false);
+                Global.EMPTY_STRING, 0, false, false);
         columnsMap.put(col.pos, col);
     }
 
@@ -303,6 +300,11 @@ public class TableData
             {
                 // columnsMap.get(i).setWritable(isLabelWritable());
                 columnsMap.get(i).enable(isLabelWritable());
+            }
+            if (columnsMap.get(i).id.equals(COL_VALUE_OUT))
+            {
+                // columnsMap.get(i).setWritable(isLabelWritable());
+                columnsMap.get(i).enable(isValueOutWritable());
             }
             // tableColumn.setAlignment(SWT.RIGHT);
         }
@@ -460,13 +462,15 @@ public class TableData
         table.addListener(SWT.MouseDown, new Listener() {
             public void handleEvent(Event event)
             {
+                
                 // clic 3e bouton (=clic droit): comportement par defaut
-                if (event.button == 3)
+                if (event.button == 3) 
                 {
                     return;
                 }
-                // FAE 9670 surlignage de la position des paramètres dans le
-// fichier
+                
+                
+                // FAE 9670 surlignage de la position des paramètres dans le fichier
                 if (event.button == 1)
                 {
                     int indice = myTable.getSelectionIndex();
@@ -568,7 +572,22 @@ public class TableData
                 }
             }
         });
-
+        
+        table.addListener(SWT.KeyUp, new Listener() {
+            public void handleEvent(Event event)
+            {
+                if (event.keyCode == SWT.ARROW_DOWN || event.keyCode == SWT.ARROW_UP)
+                {
+                    int indice = myTable.getSelectionIndex();
+                    selectInViewFile(
+                        Integer.valueOf(myTable.getItem(indice).getText(
+                            colNbById.get(COL_START))),
+                        Integer.valueOf(myTable.getItem(indice).getText(
+                            colNbById.get(COL_END))));
+                }
+            }
+        });
+        
         /**
          * *********************************************************************
          * ******* creation du menu

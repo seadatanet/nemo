@@ -50,11 +50,8 @@ public class OpenAction extends Action implements ISelectionListener,
         else
         {
             Shell shell = Utils.getMainShell();
-            FileDialog dialog =
-                new FileDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
-            dialog.setFilterPath(Nemo.getInstance().getConfig()
-                .getModelsDirectory()
-                    + File.separator);
+            FileDialog dialog = new FileDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
+            dialog.setFilterPath(Nemo.getInstance().getConfig().getModelsDirectory() + File.separator);
             dialog.setText(Messages.dialog_openModel);
 
             String extensions[] = new String[1];

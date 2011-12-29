@@ -61,6 +61,7 @@ public class OdvWriter extends NemoWriter
 			if (isConversionTo_ODVMonostation)
 			{
 				// Conversion ODV - fichiers monostation => N fichiers de sortie
+			    Integer ref = 0;
 
 				for (Station st : stationDomain.getStations(inputFilePath))
 				{
@@ -69,9 +70,20 @@ public class OdvWriter extends NemoWriter
 					{
 						new File(outputFileName).mkdir();
 					}
+					
+					if (isInputType_Trajectory)
+					{
+					    ref++;
+					    st.setReference(ref.toString());
+					}
 
+					
+					
 					// FAE 6143
 					String localCdiId = stationDomain.getAndCheckLocalCDI(cruiseDomain, Conversion.ODV, st.getReference());
+					
+					
+					
 					String mOutputFileName = outputFileName + File.separator + localCdiId + Conversion.ODV.getExt();
 					// outputFileWriter = new PrintWriter(new BufferedWriter(new
 					// FileWriter(mOutputFileName)));
@@ -197,7 +209,10 @@ public class OdvWriter extends NemoWriter
 				// derniere station
 				if (inputStationHeader != null)
 				{
-					stRef = iDomain.getStation().getReference(currentStation.getFileName(), inputStationHeader, true);
+				    if(isInputType_Trajectory)
+				        stRef = currentStation.getReference();
+				    else
+				        stRef = iDomain.getStation().getReference(currentStation.getFileName(), inputStationHeader, true);
 				}
 
 				if (inputStationHeader != null && currentStation.getReference().equals(stRef))

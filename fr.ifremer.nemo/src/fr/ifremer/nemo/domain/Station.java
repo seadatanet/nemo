@@ -270,7 +270,7 @@ public class Station implements Comparable {
 	public void setReference(String reference) {
 		_reference = reference;
 	}
-
+	
 	/**
 	 * Getter pour _date.
 	 * 
