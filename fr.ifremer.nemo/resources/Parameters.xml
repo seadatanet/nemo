@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?> 
-<java version="1.6.0_21" class="java.beans.XMLDecoder"> 
+<java version="1.6.0_29" class="java.beans.XMLDecoder"> 
  <object class="java.util.ArrayList"> 
   <void method="add"> 
    <object class="fr.ifremer.nemo.ws.WSParameter"> 
@@ -435,6 +435,25 @@
     </void> 
     <void property="unit"> 
      <string>milligram carbon/(m3.day)</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
+     <string>CDOM</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>9999.999</string> 
+    </void> 
+    <void property="format"> 
+     <string>%8.3f</string> 
+    </void> 
+    <void property="name"> 
+     <string>COLORED DISS. ORGANIC MATTER</string> 
+    </void> 
+    <void property="unit"> 
+     <string>ppb</string> 
     </void> 
    </object> 
   </void> 
@@ -5033,6 +5052,25 @@
     </void> 
     <void property="unit"> 
      <string>%</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
+     <string>SECC</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>99.9</string> 
+    </void> 
+    <void property="format"> 
+     <string>%4.1f</string> 
+    </void> 
+    <void property="name"> 
+     <string>SECCHI DISK DEPTH</string> 
+    </void> 
+    <void property="unit"> 
+     <string>meter</string> 
     </void> 
    </object> 
   </void> 
