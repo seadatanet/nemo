@@ -18,6 +18,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
@@ -34,6 +37,7 @@ import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
+import fr.ifremer.nemo.util.Intern;
 
 /**
  * Description: classe de tests
@@ -289,7 +293,20 @@ public class NemoBashTest
         message.testName = "empty Proxy test";
         Assert.assertTrue(EmptyProxy());
     }
-
+    /**
+     * =================================================================
+     * userParemetersLabels Empty
+     * =================================================================
+     */
+    @Test
+    public final void userParemetersLabelsEmpty()
+    {
+        testLogger
+            .info("\r\n\r\n\r\n\r\n__________________________userParemetersLabelsEmpty___________________________\r\n\r\n\r\n\r\n");
+        message = new Message();
+        message.testName = " Empty userParemetersLabels";
+        Assert.assertTrue(userParemetersLabelsTest());
+    }
 	/**
 	 * =================================================================
 	 * methodes
@@ -698,7 +715,7 @@ public class NemoBashTest
 	}
 	
 	public boolean EmptyProxy(){
-	   Configuration config = new Configuration();;
+	   Configuration config = new Configuration();
 	   Proxy proxy =config.getProxy();
 	   if(!proxy.isUse() && proxy.getAdress().isEmpty() && proxy.getLogin().isEmpty() && proxy.getPassword().isEmpty() && proxy.getPort().isEmpty())
 	   {
@@ -709,5 +726,27 @@ public class NemoBashTest
 	   }
 	   
 	   return false;
+	}
+	
+	public boolean  userParemetersLabelsTest()
+	{
+	    org.w3c.dom.Document document;
+	    String userParametersLabels = Intern.dir_resources + File.separator + "userParametersLabels" + Global.EXT_XML;
+	    // création d'une fabrique de documents
+        DocumentBuilderFactory fabrique = DocumentBuilderFactory.newInstance();
+	    // création d'un constructeur de documents
+        DocumentBuilder constructeur;
+        try
+        {
+            constructeur = fabrique.newDocumentBuilder();
+            document = constructeur.parse(userParametersLabels);
+            return document.getFirstChild().getTextContent().trim().isEmpty();
+
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+
 	}
 }
