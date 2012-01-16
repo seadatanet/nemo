@@ -492,6 +492,7 @@ public class EditConversionForm extends EditForm
 			{
 				_mappingTablePrefix = inputPrefixDossier.getValue();
 			}
+			nomHorsPrefix = nomHorsPrefix + File.separator + output.getName();
 			Nemo.getInstance().getDomain().getConversion().setNomMappingHorsPrefix(nomHorsPrefix);
 		}
 	}
