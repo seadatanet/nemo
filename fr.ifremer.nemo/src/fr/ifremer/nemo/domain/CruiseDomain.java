@@ -144,7 +144,8 @@ public class CruiseDomain
 
 		medCruiseHeader.append(Elts.getElt(Elts.cruise_country, _model.getCountryCode()));
 		medCruiseHeader.append(Global.SPACE);
-		medCruiseHeader.append(Elts.getElt(Elts.cruise_labo, _model.getLaboratories()));
+		String cruiseLabo = Elts.getElt(Elts.cruise_labo, _model.getLaboratories());
+		medCruiseHeader.append(cruiseLabo.replaceAll(Global.RN, " "));
 		medCruiseHeader.append(Global.RN);
 
 		medCruiseHeader.append(Elts.getElt(Elts.cruise_chiefscientist, _model.getChiefScientist()));
