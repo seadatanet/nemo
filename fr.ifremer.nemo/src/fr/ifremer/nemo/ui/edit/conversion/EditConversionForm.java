@@ -633,7 +633,7 @@ public class EditConversionForm extends EditForm
 			command += Global.SPACE;
 			command += Global.MOINS + Global.optDatasetRef;
 			command += Global.SPACE;
-			command += Nemo.getInstance().getDomain().getCruise().getDataSetRef();
+			command += "\"" + Nemo.getInstance().getDomain().getCruise().getDataSetRef() + "\"";
 		}
 
 		// cdisummary
