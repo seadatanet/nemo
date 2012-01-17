@@ -80,7 +80,7 @@ public abstract class NemoSection
 				formEdition.reflow(true);
 			}
 		});
-		Nemo.getInstance().getViewMain().getMyRulesManager().SectionMandatory();
+		Nemo.getInstance().getViewMain().getMyRulesManager().defineSectionMandatory();
 		if (!isMandatory)
             section.setText(title);
         else

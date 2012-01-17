@@ -67,7 +67,7 @@ public class OutputFormatRadioSelectionListener implements SelectionListener
             currentConv = E_TypeConversion.ODV_MONOSTATION;
         }
         
-        rulesMgr.SectionMandatory();
+        rulesMgr.defineSectionMandatory();
      
 //        boolean confirm = MessageDialog.openConfirm(null, 
 //            Messages.edit_data_dataListDialogBox_title,
