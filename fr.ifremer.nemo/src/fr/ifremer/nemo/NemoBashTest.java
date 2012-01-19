@@ -16,7 +16,8 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -253,60 +254,62 @@ public class NemoBashTest
 		testLogger.info("\r\n\r\n\r\n\r\n__________________________test_P011viaP021_ODVMULTI_____________________________\r\n\r\n\r\n\r\n");
 		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P021, Conversion.ODV, E_TypeConversion.ODV_MULTISTATIONS));
 	}
-	
+
 	/**
-     * =================================================================
-     * invalidated model
-     * =================================================================
-     */
-    @Test
-    public final void inValidated_model()
-    {
-        testLogger
-            .info("\r\n\r\n\r\n\r\n_______________________________unValidated_model________________________________\r\n\r\n\r\n\r\n");
-        message = new Message();
-        message.testName = "invalidated model in batch mod";
-        File root = new File(dataRootPath);
-        String inputAbsolutePath =
-            root.getAbsolutePath()
-                    + "\\_9656_collectionGroupByCruise_withSeparator_unvalidated_model\\"
-                    + inputName;
-        String outputAbsolutePath =
-            root.getAbsolutePath()
-                    + "\\_9656_collectionGroupByCruise_withSeparator_unvalidated_model\\P091\\ODV_MULTISTATIONS\\";
-        Assert.assertFalse(convertWithNemoBatch(Conversion.ODV,
-            E_TypeConversion.ODV_MULTISTATIONS, inputAbsolutePath,
-            outputAbsolutePath));
-    }
-    
-    /**
-     * =================================================================
-     * emptyProxy
-     * =================================================================
-     */
-    @Test
-    public final void emptyProxyTest()
-    {
-        testLogger
-            .info("\r\n\r\n\r\n\r\n_______________________________emptyProxyTest________________________________\r\n\r\n\r\n\r\n");
-        message = new Message();
-        message.testName = "empty Proxy test";
-        Assert.assertTrue(EmptyProxy());
-    }
-    /**
-     * =================================================================
-     * userParemetersLabels Empty
-     * =================================================================
-     */
-    @Test
-    public final void userParemetersLabelsEmpty()
-    {
-        testLogger
-            .info("\r\n\r\n\r\n\r\n__________________________userParemetersLabelsEmpty___________________________\r\n\r\n\r\n\r\n");
-        message = new Message();
-        message.testName = " Empty userParemetersLabels";
-        Assert.assertTrue(userParemetersLabelsTest());
-    }
+	 * =================================================================
+	 * invalidated model
+	 * =================================================================
+	 */
+	@Test
+	public final void inValidated_model()
+	{
+		testLogger
+				.info("\r\n\r\n\r\n\r\n_______________________________unValidated_model________________________________\r\n\r\n\r\n\r\n");
+		message = new Message();
+		message.testName = "invalidated model in batch mod";
+		File root = new File(dataRootPath);
+		String inputAbsolutePath =
+				root.getAbsolutePath()
+						+ "\\_9656_collectionGroupByCruise_withSeparator_unvalidated_model\\"
+						+ inputName;
+		String outputAbsolutePath =
+				root.getAbsolutePath()
+						+ "\\_9656_collectionGroupByCruise_withSeparator_unvalidated_model\\P091\\ODV_MULTISTATIONS\\";
+		Assert.assertFalse(convertWithNemoBatch(Conversion.ODV,
+				E_TypeConversion.ODV_MULTISTATIONS, inputAbsolutePath,
+				outputAbsolutePath));
+	}
+
+	/**
+	 * =================================================================
+	 * emptyProxy
+	 * =================================================================
+	 */
+	@Test
+	public final void emptyProxyTest()
+	{
+		testLogger
+				.info("\r\n\r\n\r\n\r\n_______________________________emptyProxyTest________________________________\r\n\r\n\r\n\r\n");
+		message = new Message();
+		message.testName = "empty Proxy test";
+		Assert.assertTrue(EmptyProxy());
+	}
+
+	/**
+	 * =================================================================
+	 * userParemetersLabels Empty
+	 * =================================================================
+	 */
+	@Test
+	public final void userParemetersLabelsEmpty()
+	{
+		testLogger
+				.info("\r\n\r\n\r\n\r\n__________________________userParemetersLabelsEmpty___________________________\r\n\r\n\r\n\r\n");
+		message = new Message();
+		message.testName = " Empty userParemetersLabels";
+		Assert.assertTrue(userParemetersLabelsTest());
+	}
+
 	/**
 	 * =================================================================
 	 * methodes
@@ -560,6 +563,7 @@ public class NemoBashTest
 		// message.filesMap.put(fileB, true);
 		try
 		{
+			String newRefLine = "";
 			if (bufOut != null && bufRef != null)
 			{
 				while (bufOut.ready() && identical)
@@ -567,10 +571,21 @@ public class NemoBashTest
 					outputLine = bufOut.readLine();
 					refFileLine = bufRef.readLine();
 					String format = "";
-					;
-					String out = String.format(Locale.FRENCH, format, outputLine);
-					String ref = String.format(Locale.FRENCH, format, refFileLine);
+
+
 					identical = outputLine.equals(refFileLine);
+					// depuis le 17/01/2012, le mapping BODC a changé : PRESPS02
+					// remplace par PRESPR01
+					if (!identical)
+					{
+						Pattern p = Pattern.compile("PRESPS02");
+						Matcher m = p.matcher(refFileLine);
+						if (m.find())
+						{
+							newRefLine = m.replaceAll("PRESPR01");
+							identical = outputLine.equals(newRefLine);
+						}
+					}
 				}
 			}
 			return identical;
@@ -713,40 +728,40 @@ public class NemoBashTest
 			testLogger.info(mes + "\r\n");
 		}
 	}
-	
-	public boolean EmptyProxy(){
-	   Configuration config = new Configuration();
-	   Proxy proxy =config.getProxy();
-	   if(!proxy.isUse() && proxy.getAdress().isEmpty() && proxy.getLogin().isEmpty() && proxy.getPassword().isEmpty() && proxy.getPort().isEmpty())
-	   {
-	       config.restoreDefault();
-	       proxy =config.getProxy();
-	       if(!proxy.isUse() && proxy.getAdress().isEmpty() && proxy.getLogin().isEmpty() && proxy.getPassword().isEmpty() && proxy.getPort().isEmpty())
-	           return true;
-	   }
-	   
-	   return false;
-	}
-	
-	public boolean  userParemetersLabelsTest()
-	{
-	    org.w3c.dom.Document document;
-	    String userParametersLabels = Intern.dir_resources + File.separator + "userParametersLabels" + Global.EXT_XML;
-	    // création d'une fabrique de documents
-        DocumentBuilderFactory fabrique = DocumentBuilderFactory.newInstance();
-	    // création d'un constructeur de documents
-        DocumentBuilder constructeur;
-        try
-        {
-            constructeur = fabrique.newDocumentBuilder();
-            document = constructeur.parse(userParametersLabels);
-            return document.getFirstChild().getTextContent().trim().isEmpty();
 
-        }
-        catch (Exception e)
-        {
-            return false;
-        }
+	public boolean EmptyProxy()
+	{
+		Configuration config = new Configuration();
+		Proxy proxy = config.getProxy();
+		if (!proxy.isUse() && proxy.getAdress().isEmpty() && proxy.getLogin().isEmpty() && proxy.getPassword().isEmpty() && proxy.getPort().isEmpty())
+		{
+			config.restoreDefault();
+			proxy = config.getProxy();
+			if (!proxy.isUse() && proxy.getAdress().isEmpty() && proxy.getLogin().isEmpty() && proxy.getPassword().isEmpty() && proxy.getPort().isEmpty())
+				return true;
+		}
+
+		return false;
+	}
+
+	public boolean userParemetersLabelsTest()
+	{
+		org.w3c.dom.Document document;
+		String userParametersLabels = Intern.dir_resources + File.separator + "userParametersLabels" + Global.EXT_XML;
+		// création d'une fabrique de documents
+		DocumentBuilderFactory fabrique = DocumentBuilderFactory.newInstance();
+		// création d'un constructeur de documents
+		DocumentBuilder constructeur;
+		try
+		{
+			constructeur = fabrique.newDocumentBuilder();
+			document = constructeur.parse(userParametersLabels);
+			return document.getFirstChild().getTextContent().trim().isEmpty();
+
+		} catch (Exception e)
+		{
+			return false;
+		}
 
 	}
 }
