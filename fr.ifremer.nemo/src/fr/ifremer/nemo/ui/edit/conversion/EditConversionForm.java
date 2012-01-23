@@ -213,6 +213,7 @@ public class EditConversionForm extends EditForm
         // FAE45
         if (editFileForm.isCruiseIsAFile())
         {
+            // FAE 11171: setFilterPath attend un nom de repertoire
             dialog.setFilterPath(editFileForm.nomRepertoire);
         }
         else
