@@ -1,4 +1,4 @@
-<NemoConfiguration lang="fr_FR">
+<NemoConfiguration lang="en_GB">
   <dataCenter>FI</dataCenter>
   <nemoWsURL>http://www.ifremer.fr/WSnemo/services/NEMO</nemoWsURL>
   <nautilusWsURL>http://www.ifremer.fr/WSnautilus/services/NAUTILUS</nautilusWsURL>
