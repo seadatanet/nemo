@@ -1,4 +1,16 @@
 <!--
+*****************************************
+BGT - 28/06/2011
+Génération des web services Nemo et Nautilus:
+1/ clean
+2/ compileWS
+3/ genWSDL (génere les WSDL dans le paquet etc)
+4/nemo-war (génere le nemo.war dans ${myenv.CATALINA_HOME})
+5/nautilus-war (génere le nautilus.war dans ${myenv.CATALINA_HOME})
+
+Rq: les deploy ne fonctionnent pas (voir accès au serveur ifremer, droits...)
+*****************************************
+
 Projet: CONVMED
 Code projet: 9064780
 Auteur: ATLANTIDE
@@ -49,6 +61,7 @@ Usage: ant [-f buildWS.xml] option
 
   <!-- AXIS -->
   <property name="axis.home" value="${myenv.AXIS_HOME}"/>
+	 <property name="axis2.home" value="${myenv.AXIS2_HOME}"/>
 
   <!-- TOMCAT -->
   <property name="catalina.home" value="${myenv.CATALINA_HOME}"/>
@@ -61,23 +74,26 @@ Usage: ant [-f buildWS.xml] option
   <property name="javadoc.dir" value="${basedir}/ws-deploy/javadoc"/>
   <property name="output.dir" value="${basedir}/ws-deploy/output"/>
 
-<!-- configuration IFREMER 
+<!-- configuration IFREMER -->
   <property name="the_hostname" value="alboran5.ifremer.fr" />
   <property name="the_portnumber" value="8081" />
   <property name="the_log4jpath" value="/home/alboran/logiciels/apache-tomcat-5.5.17/webapps" />  
--->
+
 	
-<!-- configuration ALTRAN OUEST -->
-   <property name="the_hostname" value="localhost" />
+<!-- configuration ALTRAN OUEST 
+   <property name="the_hostname" value="192.168.22.78" />
    <property name="the_portnumber" value="8080" />
    <property name="the_log4jpath" value="c:/tmp" />
- 
+ -->
 
   <!-- librairies d AXIS -->
   <path id="axis.classpath">
     <fileset dir="${axis.home}/lib">
       <include name="**/*.jar" />
     </fileset>
+  	 <fileset dir="${axis2.home}/lib">
+  	      <include name="**/*.jar" />
+  	    </fileset>
   </path>
 
   <taskdef resource="axis-tasks.properties" classpathref="axis.classpath" />
@@ -86,6 +102,9 @@ Usage: ant [-f buildWS.xml] option
       <pathelement location="${build.classes}"/>
       <fileset dir="${basedir}/lib">
           <include name="**/*.jar" />
+      </fileset>
+  	  <fileset dir="C:\Program Files\eclipseClassic\plugins">
+  		 <include name="**/*.jar" />
       </fileset>
       <path refid="axis.classpath" />
   </path>
@@ -124,6 +143,7 @@ Usage: ant [-f buildWS.xml] option
             excludes="fr/ifremer/nemo/ui/**"
             destdir="${build.classes}"
             classpathref="build.path"
+     		encoding="ISO-8859-15"
             debug="true">
      	<exclude name="${src.dir}/test/nemo/TestNemo.java" />
         <compilerarg value="-Xlint:deprecation"/>
@@ -145,7 +165,7 @@ Usage: ant [-f buildWS.xml] option
            srcdir="${src.dir}"
            destdir="${build.classes}"
            classpathref="build.path"
-           includes="fr/ifremer/nemo/ws/**"
+           includes="fr/ifremer/nemo/ws/**, fr/ifremer/nautilus/metadata/**"
            debug="true">
      </javac>
   </target>
@@ -271,7 +291,7 @@ Usage: ant [-f buildWS.xml] option
   </target>
 
   <!-- target: war de nautilus-war -->
-  <target name="nautilus-war" depends="compile" description="war de nautilus-war">
+  <target name="nautilus-war" depends="compileWS" description="war de nautilus-war">
 
   	<copy file="${etc.dir}/log4j.properties.template" tofile="${etc.dir}/log4j.properties" />
     <replace file="${etc.dir}/log4j.properties" token="###LOGPATTERN###" value="${the_log4jpath}"/>
