@@ -60,8 +60,8 @@ Usage: ant [-f buildWS.xml] option
   <property environment="myenv" />
 
   <!-- AXIS -->
-  <property name="axis.home" value="${myenv.AXIS_HOME}"/>
-	 <property name="axis2.home" value="${myenv.AXIS2_HOME}"/>
+  <property name="axis.lib" value="${basedir}/lib_axis_14"/>
+  <property name="axis2.home" value="${basedir}/axis2-1.5.4"/>
 
   <!-- TOMCAT -->
   <property name="catalina.home" value="${myenv.CATALINA_HOME}"/>
@@ -80,15 +80,15 @@ Usage: ant [-f buildWS.xml] option
   <property name="the_log4jpath" value="/home/alboran/logiciels/apache-tomcat-5.5.17/webapps" />  
 
 	
-<!-- configuration ALTRAN OUEST 
-   <property name="the_hostname" value="192.168.22.78" />
+<!-- configuration ALTRAN OUEST  
+   <property name="the_hostname" value="localhost" />
    <property name="the_portnumber" value="8080" />
    <property name="the_log4jpath" value="c:/tmp" />
- -->
+-->
 
   <!-- librairies d AXIS -->
   <path id="axis.classpath">
-    <fileset dir="${axis.home}/lib">
+    <fileset dir="${axis.lib}">
       <include name="**/*.jar" />
     </fileset>
   	 <fileset dir="${axis2.home}/lib">
@@ -103,7 +103,7 @@ Usage: ant [-f buildWS.xml] option
       <fileset dir="${basedir}/lib">
           <include name="**/*.jar" />
       </fileset>
-  	  <fileset dir="C:\Program Files\eclipseClassic\plugins">
+  	  <fileset dir="${basedir}/plugins">
   		 <include name="**/*.jar" />
       </fileset>
       <path refid="axis.classpath" />
@@ -270,7 +270,7 @@ Usage: ant [-f buildWS.xml] option
         <classes dir="${etc.dir}">
            <include name="log4j.properties"/>
         </classes>
-        <lib dir="${axis.home}/lib">
+        <lib dir="${axis.lib}">
            <include name="axis.jar"/>
            <include name="axis-ant.jar"/>
            <include name="commons-discovery-0.2.jar"/>
@@ -315,7 +315,7 @@ Usage: ant [-f buildWS.xml] option
         <classes dir="${etc.dir}">
            <include name="log4j.properties"/>
         </classes>
-        <lib dir="${axis.home}/lib">
+        <lib dir="${axis.lib}">
            <include name="axis.jar"/>
            <include name="axis-ant.jar"/>
            <include name="commons-discovery-0.2.jar"/>

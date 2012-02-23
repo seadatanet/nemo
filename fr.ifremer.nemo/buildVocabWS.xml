@@ -48,10 +48,7 @@ Usage: ant [-f buildWS.xml] option
   <property environment="myenv" />
 
   <!-- AXIS -->
-  <!-- 
-  <property name="axis.home" value="${myenv.AXIS_HOME}"/> 
-  -->
-	<property name="axis.home" value="C:\Documents and Settings\sbregent\Bureau\AXIS\axis14deNemo"/>
+  <property name="axis.home" value="${basedir}/lib_axis_14"/>
   <!-- TOMCAT -->
   <property name="catalina.home" value="${myenv.CATALINA_HOME}"/>
 
@@ -77,7 +74,7 @@ Usage: ant [-f buildWS.xml] option
 
   <!-- librairies d AXIS -->
   <path id="axis.classpath">
-    <fileset dir="${axis.home}/lib">
+    <fileset dir="${axis.home}">
       <include name="**/*.jar" />
     </fileset>
   </path>
@@ -92,7 +89,7 @@ Usage: ant [-f buildWS.xml] option
   	<fileset dir="${basedir}/axis2-1.5.4/lib">
   	      <include name="**/*.jar" />
   	</fileset>
-  	<fileset dir="C:\Program Files\eclipseClassic\plugins">
+  	<fileset dir="${basedir}/plugins">
   	  	  <include name="**/*.jar" />
   	</fileset>
       <path refid="axis.classpath" />
