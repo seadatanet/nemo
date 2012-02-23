@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.domain.DataDomain;
 import fr.ifremer.nemo.domain.DateTimeUtils;
 import fr.ifremer.nemo.domain.Station;
@@ -18,6 +19,8 @@ import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Global.E_InputType;
+import fr.ifremer.nemo.util.Intern;
 
 /**
  * specific NemoWriter : ODV
@@ -168,7 +171,11 @@ public class OdvWriter extends NemoWriter
 				key = keyParam.getLineValue().getValue();
 			} else
 			{
-				key = Long.valueOf(DateTimeUtils.getCurrentDate(currentStation, indexRecord)).doubleValue();
+			    key = Long.valueOf(DateTimeUtils.getCurrentDate(currentStation, indexRecord)).doubleValue();
+			    //FAE 11356
+			    if(Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TIMESERIES 
+			            && Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData())
+			        key = Long.valueOf(DateTimeUtils.convertTimestamp(line)).doubleValue();
 			}
 
 			stationDatas.put(key, dataLine.toString());

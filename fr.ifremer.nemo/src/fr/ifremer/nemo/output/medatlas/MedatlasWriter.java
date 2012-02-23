@@ -20,6 +20,7 @@ import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_EndData;
 import fr.ifremer.nemo.util.Global.E_InputType;
+import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.presdepth.CalcPres;
 
 /**
@@ -239,6 +240,10 @@ public class MedatlasWriter extends NemoWriter
 			} else
 			{
 				key = Long.valueOf(DateTimeUtils.getCurrentDate(currentStation, indexRecord)).doubleValue();
+				//FAE 11356
+                if(Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TIMESERIES 
+                        && Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData())
+                    key = Long.valueOf(DateTimeUtils.convertTimestamp(inputLine)).doubleValue();
 			}
 
 			stationDatas.put(key, data.getDataLine(myConversion, currentStation, inputLine, indexRecord).toString());

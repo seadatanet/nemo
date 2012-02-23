@@ -374,9 +374,9 @@ public class EditFileForm extends EditForm
 		if (isLoaded())
 		{
 			super.drawingBack();
-			Nemo.getInstance().refreshNomNemo();
 			ViewLog.aideFile();
 			Nemo.getInstance().getViewMain().setAffiche(0);
+	        Nemo.getInstance().refreshNomNemo();
 		}
 	}
 

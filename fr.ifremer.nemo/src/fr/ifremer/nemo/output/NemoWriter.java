@@ -212,7 +212,7 @@ public abstract class NemoWriter
 										{
 											break;
 										}
-									} else if (st != null)
+									} else if (st != null) 
 									{
 										if (mediaDomain.getModel().getInputType() == E_InputType.TRAJECTORY)
 										{

@@ -1264,7 +1264,8 @@ public class TableData
                         parser.addStandardConstants();
                         // FAE 11354
                         // TODO: ne pas mettre 0 ci-dessous, mais la valeur par defaut!!!
-                        Float selectionValue = (float) 0;
+                        String defaultValue = myTable.getItem(i).getText(colNbById.get(COL_VALUE_OUT));
+                        Float selectionValue = Float.valueOf(defaultValue.trim());
                         try
                         {
                             selectionValue = Float.valueOf(selection);
@@ -1272,7 +1273,7 @@ public class TableData
                         catch (Exception e)
                         {
                             // do nothing: selectionValue will be 0 for gui test
-// column
+                            // column
                         }
                         parser.addVariable("x", selectionValue); //$NON-NLS-1$
                         parser.parseExpression(myTable.getItem(i).getText(
