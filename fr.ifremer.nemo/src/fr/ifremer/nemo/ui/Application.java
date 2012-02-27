@@ -213,6 +213,12 @@ public class Application implements IPlatformRunnable
             {
                 Nemo.getInstance().setBatchMode(false);
                 display = PlatformUI.createDisplay();
+                
+                // LOGGER
+                DOMConfigurator.configure(appDir + File.separator
+                        + "resources/log4jBatch.xml"); //$NON-NLS-1$
+                batchLogger = Logger.getLogger("nemoGui");//$NON-NLS-1$
+                batchLogger.setLevel(Level.DEBUG);
                 try
                 {
                     // Utils.initConfig();
@@ -230,6 +236,7 @@ public class Application implements IPlatformRunnable
                 }
                 finally
                 {
+                    batchLogger.info("Gui mode successfully ended.");
                     display.dispose();
                 }
             }
@@ -238,6 +245,7 @@ public class Application implements IPlatformRunnable
         {
             exitPrintingUsage();
             e.printStackTrace();
+            batchLogger.debug("Gui mode ended with errors.", e);
         }
 
         return null;

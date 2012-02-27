@@ -5,9 +5,12 @@ import java.util.HashMap;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TableEditor;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
@@ -83,7 +86,7 @@ public class TableData
      * la table contenant les parametres, affichée dans l'onglet data
      */
     private Table myTable;
-
+    
     /**
      * reference sur le panneau de choix des parametres
      */
@@ -99,7 +102,7 @@ public class TableData
     /**
      * columns IDs
      */
-
+    private static String COL_IS_STRING = "COL_IS_STRING";
     private static String COL_CODE = "COL_CODE";
     private static String COL_USERLABEL = "COL_USERLABEL";
     private static String COL_UNIT = "COL_UNIT";
@@ -117,7 +120,7 @@ public class TableData
     private static String COL_UNIT_CODE = "COL_UNIT_CODE";
 
     private final String[] colOrder =
-    {COL_CODE, COL_USERLABEL, COL_UNIT,
+    {COL_IS_STRING, COL_CODE, COL_USERLABEL, COL_UNIT,
             COL_CONVERSION, COL_TEST, COL_START, COL_END, COL_FORMAT,
             COL_VALUE_IN, COL_VALUE_OUT, COL_TEST_IN, COL_TEST_OUT,
             COL_START_FLAG, COL_END_FLAG, COL_UNIT_CODE};
@@ -148,11 +151,15 @@ public class TableData
 
     private boolean isLabelWritable()
     {
-        boolean res = false;
         return Nemo.getInstance().getViewMain().getMyRulesManager()
                 .isConversionToODV()
                 && !Nemo.getInstance().getViewMain().getMyRulesManager()
                         .isDataListTypeP091();
+    }
+    
+    private boolean isCheckBoxWritable()
+    {
+        return !Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas();
     }
 
     /**
@@ -169,7 +176,13 @@ public class TableData
 
         TableDataColumn col;
         columnsMap = new HashMap<Integer, TableDataColumn>();
+        
+        
+        col =
+            new TableDataColumn(COL_IS_STRING, colNbById.get(COL_IS_STRING),
+                    Messages.table_label_is_string, 30, isCheckBoxWritable(), false);
 
+        columnsMap.put(col.pos, col);
         col =
                 new TableDataColumn(COL_CODE, colNbById.get(COL_CODE),
                         Messages.table_label_code, 100, false, true);
@@ -306,6 +319,13 @@ public class TableData
                 // columnsMap.get(i).setWritable(isLabelWritable());
                 columnsMap.get(i).enable(isLabelWritable());
             }
+            if(columnsMap.get(i).id.equals(COL_IS_STRING))
+            {
+                columnsMap.get(i).enable(isCheckBoxWritable());
+            }
+            
+            
+            
             if (columnsMap.get(i).id.equals(COL_VALUE_OUT))
             {
                 // columnsMap.get(i).setWritable(isLabelWritable());
@@ -868,21 +888,12 @@ public class TableData
                     if (userLabel != null)
                     {
                         label = userLabel;
-					} else
-                    {
-                        // label = types.get(i).getEntryKeyP011();
-                    }
-				} else
-                // medatlas
-                {
-                    // label = types.get(i).getEntryKeyP011();
-                }
-			} else
-            {
-                // label = types.get(i).getEntryKey();
-            }
+					}
+				}
+			} 
+
             item.setText(new String[]
-            {code, label, types.get(i).getUnite(),
+            {null,code, label, types.get(i).getUnite(),
                     types.get(i).getConversion(), types.get(i).getTest(),
                     String.valueOf(types.get(i).getDebut()),
                     String.valueOf(types.get(i).getFin()),
@@ -892,7 +903,22 @@ public class TableData
                     types.get(i).getFinFlag(),
                     // FAE 6542
                     types.get(i).getUniteCode()});
-
+            
+            final TableEditor editorCheck = new TableEditor(myTable);
+            final Button check= new Button (myTable, SWT.CHECK);
+            check.pack();
+            check.addSelectionListener( new SelectionAdapter()
+            {
+                @Override
+                public void widgetSelected(SelectionEvent g)
+                {
+                    Nemo.getInstance().getViewMain().getMyRulesManager().rule_tableDataCheckbox(((Button)g.widget).getSelection());
+                }
+            });
+            editorCheck.minimumWidth = check.getSize().x;
+            editorCheck.horizontalAlignment = SWT.LEFT;
+            editorCheck.setEditor(check,item, colNbById.get(COL_IS_STRING));
+            editorCheck.getEditor().setVisible(isCheckBoxWritable());
         }
 
     }
@@ -1263,14 +1289,13 @@ public class TableData
                         parser.addStandardFunctions();
                         parser.addStandardConstants();
                         // FAE 11354
-                        // TODO: ne pas mettre 0 ci-dessous, mais la valeur par defaut!!!
                         String defaultValue = myTable.getItem(i).getText(colNbById.get(COL_VALUE_OUT));
                         Float selectionValue = Float.valueOf(defaultValue.trim());
                         try
                         {
                             selectionValue = Float.valueOf(selection);
                         }
-                        catch (Exception e)
+                        catch (NumberFormatException e)
                         {
                             // do nothing: selectionValue will be 0 for gui test
                             // column

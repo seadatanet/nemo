@@ -614,6 +614,29 @@ public class RulesManager
 		setP_depthBSSurf_enabled(p_depthBSSurf);
 		setP_pressure_enabled(p_pressure);
 	}
+	
+	/**
+	 * gère l'activation du checkBox de la table de l'onglet Data
+	 * @param selected
+	 */
+	public void rule_tableDataCheckbox(Boolean selected )
+	{
+        
+        if(selected)
+        {
+            //TODO : code à ajouter pour gerer les chaines de caratere
+            
+            System.out.println("est coché");
+        }
+        else
+        {
+            //TODO : code à ajouter pour gerer les chaines de caratere
+            System.out.println("n'est pas coché");
+        }
+	        
+	}
+	
+	
 
 	/******************************************
 	 * REGLES
