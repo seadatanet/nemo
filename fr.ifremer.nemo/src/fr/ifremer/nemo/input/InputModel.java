@@ -345,8 +345,7 @@ public class InputModel extends AbstractModel
     /**
      * Setter pour _isValid.
      * 
-     * @param x
-     *            : nouvelle valeur pour _isValid
+     * @param x : nouvelle valeur pour _isValid
      * @see InputModel.java#_version
      */
     public void setIsValid(Boolean a_String)

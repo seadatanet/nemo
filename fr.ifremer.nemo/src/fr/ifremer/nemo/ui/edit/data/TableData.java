@@ -2,6 +2,8 @@ package fr.ifremer.nemo.ui.edit.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TableEditor;
@@ -9,7 +11,6 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
@@ -102,22 +103,22 @@ public class TableData
     /**
      * columns IDs
      */
-    private static String COL_IS_STRING = "COL_IS_STRING";
-    private static String COL_CODE = "COL_CODE";
-    private static String COL_USERLABEL = "COL_USERLABEL";
-    private static String COL_UNIT = "COL_UNIT";
-    private static String COL_CONVERSION = "COL_CONVERSION";
-    private static String COL_TEST = "COL_TEST";
-    private static String COL_START = "COL_START";
-    private static String COL_END = "COL_END";
-    private static String COL_FORMAT = "COL_FORMAT";
-    private static String COL_VALUE_IN = "COL_VALUE_IN";
-    private static String COL_VALUE_OUT = "COL_VALUE_OUT";
-    private static String COL_TEST_IN = "COL_TEST_IN";
-    private static String COL_TEST_OUT = "COL_TEST_OUT";
-    private static String COL_START_FLAG = "COL_START_FLAG";
-    private static String COL_END_FLAG = "COL_END_FLAG";
-    private static String COL_UNIT_CODE = "COL_UNIT_CODE";
+    private static String COL_IS_STRING = "COL_IS_STRING"; //$NON-NLS-1$
+    private static String COL_CODE = "COL_CODE"; //$NON-NLS-1$
+    private static String COL_USERLABEL = "COL_USERLABEL";  //$NON-NLS-1$
+    private static String COL_UNIT = "COL_UNIT"; //$NON-NLS-1$
+    private static String COL_CONVERSION = "COL_CONVERSION"; //$NON-NLS-1$
+    private static String COL_TEST = "COL_TEST"; //$NON-NLS-1$
+    private static String COL_START = "COL_START"; //$NON-NLS-1$
+    private static String COL_END = "COL_END"; //$NON-NLS-1$
+    private static String COL_FORMAT = "COL_FORMAT"; //$NON-NLS-1$
+    private static String COL_VALUE_IN = "COL_VALUE_IN"; //$NON-NLS-1$
+    private static String COL_VALUE_OUT = "COL_VALUE_OUT"; //$NON-NLS-1$
+    private static String COL_TEST_IN = "COL_TEST_IN"; //$NON-NLS-1$
+    private static String COL_TEST_OUT = "COL_TEST_OUT"; //$NON-NLS-1$
+    private static String COL_START_FLAG = "COL_START_FLAG"; //$NON-NLS-1$
+    private static String COL_END_FLAG = "COL_END_FLAG"; //$NON-NLS-1$
+    private static String COL_UNIT_CODE = "COL_UNIT_CODE"; //$NON-NLS-1$
 
     private final String[] colOrder =
     {COL_IS_STRING, COL_CODE, COL_USERLABEL, COL_UNIT,
@@ -180,8 +181,8 @@ public class TableData
         
         col =
             new TableDataColumn(COL_IS_STRING, colNbById.get(COL_IS_STRING),
-                    Messages.table_label_is_string, 30, isCheckBoxWritable(), false);
-
+                    Messages.table_label_is_string, 25, isCheckBoxWritable(), false);
+        
         columnsMap.put(col.pos, col);
         col =
                 new TableDataColumn(COL_CODE, colNbById.get(COL_CODE),
@@ -304,7 +305,7 @@ public class TableData
     {
         myTable =
                 new Table(Nemo.getInstance().getViewMain().getEditDataForm()
-                        .getCompositeData(), SWT.FULL_SELECTION | SWT.H_SCROLL);
+                        .getCompositeData(), SWT.FULL_SELECTION | SWT.H_SCROLL | SWT.H_SCROLL);
 
         myTable.setHeaderVisible(true);
         myTable.setLinesVisible(true);
@@ -314,6 +315,7 @@ public class TableData
             TableColumn tableColumn = new TableColumn(myTable, SWT.NONE);
             tableColumn.setWidth(columnsMap.get(i).width);
             tableColumn.setText(columnsMap.get(i).label.toUpperCase());
+            
             if (columnsMap.get(i).id.equals(COL_USERLABEL))
             {
                 // columnsMap.get(i).setWritable(isLabelWritable());
@@ -487,6 +489,7 @@ public class TableData
          */
         table.addListener(SWT.MouseDown, new Listener()
         {
+            @Override
             public void handleEvent(Event event)
             {
 
@@ -501,11 +504,14 @@ public class TableData
                 if (event.button == 1)
                 {
                     int indice = myTable.getSelectionIndex();
-                    selectInViewFile(
-                            Integer.valueOf(myTable.getItem(indice).getText(
-                                    colNbById.get(COL_START))),
-                            Integer.valueOf(myTable.getItem(indice).getText(
-                                    colNbById.get(COL_END))));
+                    if(indice>=0)
+                    {
+                        selectInViewFile(
+                                Integer.valueOf(myTable.getItem(indice).getText(
+                                        colNbById.get(COL_START))),
+                                Integer.valueOf(myTable.getItem(indice).getText(
+                                        colNbById.get(COL_END))));
+                    }
                 }
 
                 // calcul du numero de ligne selectionne
@@ -616,7 +622,7 @@ public class TableData
                 }
             }
         });
-
+        
         /**
          * *********************************************************************
          * ******* creation du menu
@@ -825,9 +831,9 @@ public class TableData
         Utils.forceMenu(table, menu);
 
         // agrandissement de la table
-        Nemo.getInstance().getViewMain().getEditDataForm().getCompositeData()
+       Nemo.getInstance().getViewMain().getEditDataForm().getCompositeData()
                 .getParent().layout(true, true);
-        table.setLayout(new FillLayout());
+        /*table.setLayout(new FillLayout());*/
         table.redraw();
     }
 
@@ -862,7 +868,8 @@ public class TableData
         // nouvelle creation des items
         for (int i = 0; i < types.size(); i++)
         {
-            TableItem item = new TableItem(myTable, SWT.NONE);
+            
+            final TableItem item = new TableItem(myTable, SWT.NONE);
             String code;
             String label = "";
 
@@ -904,15 +911,57 @@ public class TableData
                     // FAE 6542
                     types.get(i).getUniteCode()});
             
+            //FAE 10755 ajout d'un check box 
+            //pour definir si le parametre et un chaine ou une valeur numerique
             final TableEditor editorCheck = new TableEditor(myTable);
             final Button check= new Button (myTable, SWT.CHECK);
+            if (types.get(i).isText())
+                check.setToolTipText(Messages.table_tooltip_1);
+            else
+                check.setToolTipText(Messages.table_tooltip_3);
+            check.setSelection(types.get(i).isText());
             check.pack();
+            
+            final int index =i;
             check.addSelectionListener( new SelectionAdapter()
             {
                 @Override
                 public void widgetSelected(SelectionEvent g)
                 {
-                    Nemo.getInstance().getViewMain().getMyRulesManager().rule_tableDataCheckbox(((Button)g.widget).getSelection());
+                    Button checkButton = (Button)g.widget;
+                    if(checkButton.getSelection())
+                    {
+                      checkButton.setToolTipText(Messages.table_tooltip_1);
+                      Utils.messageOK(Messages.table_tooltip_2);
+                      
+                      //TODO : a voir pour desactivation du champs ou autre
+                      item.setText(colNbById.get(COL_UNIT), "");
+                      item.setText(colNbById.get(COL_CONVERSION), "");
+                      item.setText(colNbById.get(COL_FORMAT), "");
+                    }
+                    else
+                    {
+                        checkButton.setToolTipText(Messages.table_tooltip_3);
+                        Utils.messageOK(Messages.table_tooltip_4);
+                        
+                        //TODO : a voir pour activation du champs ou autre
+                        //recuperation du paramatre dans la liste pour restauré les valeurs
+                        for (int i = 0; i < typesWS.size(); i++)
+                        {
+                            
+                            
+                            String regexp = "^.*" + types.get(index).getUniteCode() + ".*$"; //$NON-NLS-1$ //$NON-NLS-2$
+                            Pattern p = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE);
+                            Matcher m = p.matcher(typesWS.get(i).getFormattedCodeAndName());
+                            if (m.matches())
+                            {
+                                item.setText(colNbById.get(COL_UNIT), typesWS.get(i).getUnite());
+                                item.setText(colNbById.get(COL_CONVERSION), typesWS.get(i).getConversion());
+                                item.setText(colNbById.get(COL_FORMAT), typesWS.get(i).getFormat());
+                            }
+                        }
+                    }
+                        
                 }
             });
             editorCheck.minimumWidth = check.getSize().x;
@@ -1207,7 +1256,7 @@ public class TableData
                     .equals(Global.EMPTY_STRING))
                     && (!myTable.getItem(i)
                             .getText(colNbById.get(COL_CONVERSION))
-                            .equals(Global.EMPTY_STRING)))
+                            .equals(Global.EMPTY_STRING)) && !isSelected(i))
             {
                 // on a selectionne un debut et une fin et il y a une conversion
                 // e faire
@@ -1297,8 +1346,14 @@ public class TableData
                         }
                         catch (NumberFormatException e)
                         {
-                            // do nothing: selectionValue will be 0 for gui test
-                            // column
+                            //FAE 10755 - on leve une exception si la chaine n'est pas une valeur ou vide.
+                            if(defaultValue.trim().length()>0)
+                            {
+                                ok = false;
+                                Utils.messageErreur(Messages.Etape_133);
+                                throw new NumberFormatException();
+                            }
+                                
                         }
                         parser.addVariable("x", selectionValue); //$NON-NLS-1$
                         parser.parseExpression(myTable.getItem(i).getText(
@@ -1328,12 +1383,28 @@ public class TableData
                 {
                     ok = false;
                     resultat = Messages.error;
-                    e.printStackTrace();
-                }
-
-                types.get(i).setTest(resultat);
+                    
+                    //e.printStackTrace();
+                } 
             }
-
+            else
+            {
+                //FAE 10755 - gestion de la chaine de charactere
+                MediaDomain mediaDomain =
+                    Nemo.getInstance().getDomain().getMedia();
+                ligne = Utils.lignesBrutes.get(mediaDomain.getModel()
+                            .getFileHeader()
+                            + mediaDomain.getStationHeaderNumberLines());
+                
+                resultat = ligne.substring(
+                    Integer.valueOf(myTable.getItem(i).getText(
+                        colNbById.get(COL_START))) - 1,
+                Integer.valueOf(myTable.getItem(i).getText(
+                        colNbById.get(COL_END)))).trim();
+            }
+            
+            types.get(i).setTest(resultat);
+            
             if ((!myTable.getItem(i).getText(colNbById.get(COL_START_FLAG))
                     .equals(Global.EMPTY_STRING))
                     && (!myTable.getItem(i)
@@ -1447,7 +1518,14 @@ public class TableData
             // FAE 6542
             types.get(i).setUniteCode(
                     myTable.getItem(i).getText(colNbById.get(COL_UNIT_CODE)));
+            
+            types.get(i).setIsText(isSelected(i));
+            
         }
+    }
+    public boolean isSelected(int index)
+    {
+        return ((Button) myTable.getChildren()[index]).getSelection();
     }
 
     public ArrayList<TypeData> getTypesWS()

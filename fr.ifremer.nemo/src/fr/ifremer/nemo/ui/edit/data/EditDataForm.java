@@ -342,6 +342,7 @@ public class EditDataForm extends EditForm
 		getTextAreaData().setFont(Utils.fontCourier);
 		setCompositeData(new Composite(left, SWT.NONE));
 		compositeData.setLayout(new FillLayout());
+
 	}
 
 	public void reinitTableData()

@@ -173,18 +173,31 @@ public class Formatter implements Cloneable
 		return String.format(java.util.Locale.US, format, a_Double);
 	}
 
-	public String formatParameter(String format, Double a_Double)
+	public String formatParameter(String format, String a_Double)
 	{
-		if (Double.isNaN(a_Double))
-		{
-			return String.format(java.util.Locale.US, format, a_Double).replace(NaN, SPACES);
-		}
-		String type = format.substring(format.length() - 1);
-		if (type.equals("d") || type.equals("D")) { //$NON-NLS-1$ //$NON-NLS-2$
-			return String.format(java.util.Locale.US, format, a_Double.intValue());
-		}
+	    
+	    Double value = Double.NaN;
+	    try
+	    {
+	        value = Double.parseDouble(a_Double);
+	        if (Double.isNaN(value))
+	        {
+	            return String.format(java.util.Locale.US, format, value).replace(NaN, SPACES);
+	        }
+	        String type = format.substring(format.length() - 1);
+	        if (type.equals("d") || type.equals("D")) { //$NON-NLS-1$ //$NON-NLS-2$
+	            return String.format(java.util.Locale.US, format, value.intValue());
+	        }
 
-		return String.format(java.util.Locale.US, format, a_Double);
+	        return String.format(java.util.Locale.US, format, value);
+	    }
+	    catch(NumberFormatException e)
+	    {
+	      //FAE 10755 - retourne la chaine texte si impossible de la caster en Double
+	        return a_Double;
+	    }
+	    
+		
 	}
 
 	/**

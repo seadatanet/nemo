@@ -1,7 +1,5 @@
 package fr.ifremer.nemo.input.parameters;
 
-import java.util.regex.Pattern;
-
 import org.nfunk.jep.JEP;
 import org.xml.sax.Attributes;
 
@@ -17,10 +15,9 @@ import fr.ifremer.nemo.input.AbstractModel;
 import fr.ifremer.nemo.input.LineFragment;
 import fr.ifremer.nemo.input.ModelDescription;
 import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam;
+import fr.ifremer.nemo.ui.edit.data.TypeData;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.nemo.ui.actions.OptionsAction;
-import fr.ifremer.nemo.ui.edit.data.TypeData;
 
 /**
  * Class ParameterModel
@@ -36,7 +33,13 @@ public class ParameterModel extends AbstractModel
 	 * mathematiques de base (cos, sin, log, etc...)
 	 */
 	protected String _conversionFormula;
-
+	
+	/**
+     * Definie si la valeur du parametre est du texte ou non.
+     */
+    protected Boolean _isText;
+	
+	
     /**
      * Valeur par défaut dans le fichier
      */
@@ -73,6 +76,7 @@ public class ParameterModel extends AbstractModel
         _tagName = ModelDescription.node_parameterModel;
         Parameter para = new Parameter(typeData);
         this.setParameter(para);
+        _isText= typeData.isText();
 
         // conversion / entree
         this.setConversionFormula(typeData.getConversion());
@@ -106,6 +110,7 @@ public class ParameterModel extends AbstractModel
         _flag = null;
         _parameter = new Parameter();
         _lineValue = null;
+        _isText = false;
     }
 
 
@@ -146,6 +151,10 @@ public class ParameterModel extends AbstractModel
 			Element2Field setter = new Element2Field(this, ModelDescription.setter_formula);
 			return setter;
 		}
+		if (a_LocalName.equals(ModelDescription.node_isText)) {
+            Element2Field setter = new Element2Field(this, ModelDescription.setter_isText);
+            return setter;
+        }
 		if (a_LocalName.equals(ModelDescription.node_indefault)) {
 			Element2Field setter = new Element2Field(this, ModelDescription.setter_indefault);
 			return setter;
@@ -190,6 +199,8 @@ public class ParameterModel extends AbstractModel
     @Override
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
 		a_Writer.putTag(ModelDescription.node_formula, getConversionFormula());
+		if(isText())
+		    a_Writer.putTag(ModelDescription.node_isText,isText());
 		a_Writer.putTag(ModelDescription.node_indefault, getInputDefault());
 		if (getFragment() != null) {
             getFragment().setTagName(ModelDescription.node_dataFragment);
@@ -254,53 +265,61 @@ public class ParameterModel extends AbstractModel
 
         // calcul de la valeur du paramètre
         if (hasNaNValue(inputLine)) {
-            pValue.setValue(Double.NaN);
+            pValue.setValue("");
         } 
         else 
         {
             if (hasDefaultValue(inputLine)) {
-                pValue.setValue(Double.parseDouble(_parameter.getDefault()));
+                pValue.setValue(_parameter.getDefault());
             }
             else 
             {
-                double val;
-                try 
+                //teste sur le parametre est un chaine ou non.
+                if(!isText())
                 {
-                    val = Double.parseDouble(value);
-                } 
-                catch (NumberFormatException e)
-                {
-                    throw new NumberFormatException(Messages
-                        .ParameterModel_1
-                        + e.getMessage().substring(
-                            e.getMessage().indexOf("\""),
-                            e.getMessage().lastIndexOf("\""))
-                            + Messages.ParameterModel_2 + Global.RN);
-                }
-                if (_conversionFormula.trim().length() > 0) 
-                {
-                    if (getJepParser() == null) 
+                    Double val;
+                    try 
                     {
-                        parser = new org.nfunk.jep.JEP();
-                        parser.addStandardFunctions();
-                        parser.addStandardConstants();
-                        parser.addVariable("x", val);
-                        parser.parseExpression(_conversionFormula.trim());
-                        setJepParser(parser);
-                        double result = parser.getValue();
-                        pValue.setValue(result);
+                        val = Double.parseDouble(value);
+                    } 
+                    catch (NumberFormatException e)
+                    {
+                        throw new NumberFormatException(Messages
+                            .ParameterModel_1
+                            + e.getMessage().substring(
+                                e.getMessage().indexOf("\""),
+                                e.getMessage().lastIndexOf("\""))
+                                + Messages.ParameterModel_2 + Global.RN);
                     }
+                    if (_conversionFormula.trim().length() > 0) 
+                    {
+                        if (getJepParser() == null) 
+                        {
+                            parser = new org.nfunk.jep.JEP();
+                            parser.addStandardFunctions();
+                            parser.addStandardConstants();
+                            parser.addVariable("x", val);
+                            parser.parseExpression(_conversionFormula.trim());
+                            setJepParser(parser);
+                            Double result = parser.getValue();
+                            pValue.setValue(result.toString());
+                        }
+                        else 
+                        {
+                            parser = getJepParser();
+                            parser.addVariable("x", val);
+                            Double result = parser.getValue();
+                            pValue.setValue(result.toString());
+                        }
+                    } 
                     else 
                     {
-                        parser = getJepParser();
-                        parser.addVariable("x", val);
-                        double result = parser.getValue();
-                        pValue.setValue(result);
+                        pValue.setValue(val.toString());
                     }
-                } 
-                else 
+                }
+                else
                 {
-                    pValue.setValue(val);
+                    pValue.setValue(value);
                 }
             }
         }
@@ -352,7 +371,7 @@ public class ParameterModel extends AbstractModel
         }
         
         if (stringValue != null){
-            pValue.setStringValue(stringValue);
+            pValue.setValue(stringValue);
             pValue.setQc(((AddedParam)_parameter).getFlag(currentStation, inputLine));
         }
 
@@ -425,6 +444,25 @@ public class ParameterModel extends AbstractModel
     }
 
 
+    
+    /**
+     * Getter pour _isText.
+     * @return boolean
+     * @see ParameterModel.java#_isText
+     */
+    public boolean isText() {
+        return _isText;
+    }
+
+    /**
+     * Setter pour _isText
+     * @param x : nouvelle valeur pour _isText
+     * @see ParameterModel.java#_isText
+     */
+    public void setIsText(String x) {
+        _isText = Boolean.parseBoolean(x);;
+    }
+    
     /**
      * Getter pour _conversionFormula.
      * @return String

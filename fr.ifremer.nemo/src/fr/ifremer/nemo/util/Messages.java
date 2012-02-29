@@ -99,6 +99,10 @@ public class Messages
 	public static String table_label_number;
 	public static String table_label_sensor;
 	public static String table_label_qc;
+    public static String table_tooltip_1;
+    public static String table_tooltip_2;
+    public static String table_tooltip_3;
+    public static String table_tooltip_4;
 
 	public static String unitTable_label_unit;
 	public static String unitTable_label_unitAbbr;
@@ -510,6 +514,7 @@ public class Messages
 	public static String Etape_130;
 	public static String Etape_131;
 	public static String Etape_132;
+	public static String Etape_133;
 
 	public static String SaveAction_1;
 	public static String SaveAction_3;

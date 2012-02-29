@@ -37,7 +37,7 @@ import fr.ifremer.nemo.util.Utils;
 public abstract class NemoWriter
 {
 
-	protected HashMap<Double, String> stationDatas;
+	protected HashMap<String, String> stationDatas;
 
 	/**
 	 * Input File Reader
@@ -94,7 +94,7 @@ public abstract class NemoWriter
 		stationDomain = iDomain.getStation();
 		cruiseDomain = iDomain.getCruise();
 		dataDomain = iDomain.getData();
-		stationDatas = new HashMap<Double, String>();
+		stationDatas = new HashMap<String, String>();
 		isRefIncremented = iDomain.getStation().getModel().getReferenceProperty().isUserProvided();
 		isProcessType_CruiseFile = mediaDomain.getModel().getProcessType() == E_ProcessType.CRUISE_FILE;
 		isProcessType_CollectionDir = mediaDomain.getModel().getProcessType() == E_ProcessType.COLLECTION_DIR;

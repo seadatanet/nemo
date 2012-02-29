@@ -76,6 +76,7 @@ public class ModelDescription extends NLS
     public static String node_lastoffset;
     public static String node_parameterModel;
     public static String node_formula;
+    public static String node_isText;
     public static String node_indefault;
     public static String node_dataFragment;
     public static String node_parameter;
@@ -156,6 +157,7 @@ public class ModelDescription extends NLS
     public static String setter_firstoffset;
     public static String setter_lastoffset;
     public static String setter_formula;
+    public static String setter_isText;
     public static String setter_indefault;
     public static String setter_fullname;
     public static String setter_codeP011;

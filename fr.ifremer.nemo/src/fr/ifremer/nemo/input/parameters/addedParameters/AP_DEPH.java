@@ -97,8 +97,18 @@ public class AP_DEPH extends AddedParam
 			// calculDepth
 			// FAE091 : calcul de la profondeur en fonction de la pression
 			double X, Gr, P, Depth;
-
-			P = valuePRES.getValue();
+			
+			P=Double.NaN;
+			//TODO : voir pour l'ajout de controle.
+			try
+			{
+			    P = Double.parseDouble(valuePRES.getValue());
+			}
+			catch(NumberFormatException e)
+			{
+			    e.printStackTrace();
+			}
+			
 			X = Math.sin(currentStation.getLatitude() / 57.29578);
 			double X2 = X * X;
 

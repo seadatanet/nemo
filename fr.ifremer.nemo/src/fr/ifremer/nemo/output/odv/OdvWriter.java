@@ -163,7 +163,7 @@ public class OdvWriter extends NemoWriter
 		if (iDomain.getConversion().isSortData())
 		{
 			// préparation des données pour le tri
-			Double key = Double.NaN;
+			String key;
 			if (isInputType_Profile)
 			{
 				ParameterModel keyParam = data.getModel().getParameterModels()[0];
@@ -171,11 +171,11 @@ public class OdvWriter extends NemoWriter
 				key = keyParam.getLineValue().getValue();
 			} else
 			{
-			    key = Long.valueOf(DateTimeUtils.getCurrentDate(currentStation, indexRecord)).doubleValue();
+			    key = Long.valueOf(DateTimeUtils.getCurrentDate(currentStation, indexRecord)).toString();
 			    //FAE 11356
 			    if(Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TIMESERIES 
 			            && Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData())
-			        key = Long.valueOf(DateTimeUtils.convertTimestamp(line)).doubleValue();
+			        key = Long.valueOf(DateTimeUtils.convertTimestamp(line)).toString();
 			}
 
 			stationDatas.put(key, dataLine.toString());
@@ -254,10 +254,10 @@ public class OdvWriter extends NemoWriter
 			if (iDomain.getConversion().isSortData())
 			{
 				// écriture des données après tri
-				List<Double> keys = new ArrayList<Double>();
+				List<String> keys = new ArrayList<String>();
 				keys.addAll(stationDatas.keySet());
 				Collections.sort(keys);
-				for (Double key : keys)
+				for (String key : keys)
 				{
 					outputFileWriter.println(stationDatas.get(key));
 				}

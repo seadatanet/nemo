@@ -84,8 +84,22 @@ public class AP_PRES extends AddedParam
 
 			// récupération de la valeur de la latitude
 			double valueLAT = sDomain.getCurrentStation().getLatitude();
+			
+			double PSALValue, DEPTHValue, TEMPValue;
+			PSALValue=DEPTHValue=TEMPValue=Double.NaN;
+			//TODO : voir pour l'ajout de controle.
+			try{
+			    PSALValue = Double.parseDouble(valuePSAL.getValue());
+	            DEPTHValue = Double.parseDouble(valueDEPTH.getValue());
+	            TEMPValue = Double.parseDouble(valueTEMP.getValue());
 
-			double pres = CalcPres.calcPres(valueLAT, valuePSAL.getValue(), valueDEPTH.getValue(), valueTEMP.getValue());
+			}
+			catch(NumberFormatException e)
+            {
+                e.printStackTrace();
+            }
+			
+			double pres = CalcPres.calcPres(valueLAT, PSALValue, DEPTHValue,TEMPValue);
 			stringValue = Formatter.getSingleton().formatDouble(getFormat(), pres);
 		}
 		return stringValue;

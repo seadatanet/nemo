@@ -34,7 +34,6 @@ public class DataFormValidator extends FormValidator
     @Override
     public void validate()
     {
-
         rm = Nemo.getInstance().getViewMain().getMyRulesManager();
         EditDataForm editDataForm =
             Nemo.getInstance().getViewMain().getEditDataForm();
@@ -84,135 +83,139 @@ public class DataFormValidator extends FormValidator
                 debuts[i] = typeCourant.getDebut();
                 fins[i] = typeCourant.getFin();
 
-				/**
-				 * data20 verif presence de l'unité pour chaque paramètre -FAE
-				 * 6538
-				 */
-				ok = ok && checkUniteIsPresent(typeCourant);
+                /**
+                 * data20 verif presence de l'unité pour chaque paramètre -FAE
+                 * 6538
+                 */
+                 //FAE 10755 l'unité n'est pas present pour les chaine de type text.
+                if(!typeCourant.isText())
+                    ok = ok && checkUniteIsPresent(typeCourant);
 
-				/**
-				 * data30 verif compatibilité valeur par defaut et valeur output
-				 * FAE 7241: pas de test pour ODV (outputDef optionelle car ne
-				 * sert pas en ODV)
-				 */
-				if (!rm.isConversionToODV())
-				{
-					ok = ok && checkDefaultAndOutputCompatibility(typeCourant);
-				}
-				/** data40 check des valeurs debut<fin */
-				ok = ok && checkStartAndEnd(typeCourant);
+                /**
+                 * data30 verif compatibilité valeur par defaut et valeur output
+                 * FAE 7241: pas de test pour ODV (outputDef optionelle car ne
+                 * sert pas en ODV)
+                 */
+                if (!rm.isConversionToODV())
+                {
+                    ok = ok && checkDefaultAndOutputCompatibility(typeCourant);
+                }
+                /** data40 check des valeurs debut<fin */
+                ok = ok && checkStartAndEnd(typeCourant);
 
-				/** data45 check des valeurs debut<fin flag */
-				ok = ok && checkStartAndEndFlags(typeCourant);
-			}
+                /** data45 check des valeurs debut<fin flag */
+                ok = ok && checkStartAndEndFlags(typeCourant);
+            }
 
-			/**
-			 * data50 verif que les valeurs de « debut » et « fin » sont
-			 * différentes des valeurs affichées par défaut
-			 **/
-			ok = ok && checkStartAndEndAreFilled(nbreParam, debuts, fins);
+            /**
+             * data50 verif que les valeurs de « debut » et « fin » sont
+             * différentes des valeurs affichées par défaut
+             **/
+            ok = ok && checkStartAndEndAreFilled(nbreParam, debuts, fins);
 
-			// ----------------------------------------------------------
-			// PARAMETRES
-			ok = ok && detectVerticalParameters();
-			if (ok)
-			{
-				/**
-				 * ***************************************************** tests
-				 * sur params (cf. tableau excel doc technique)
-				 * *****************************************************
-				 */
-				editConversionForm.setWarningData(Global.EMPTY_STRING);
+            // ----------------------------------------------------------
+            // PARAMETRES
+            // ----------------------------------------------------------
+            ok = ok && detectVerticalParameters();
+            if (ok)
+            {
+                /**
+                 * ***************************************************** tests
+                 * sur params (cf. tableau excel doc technique)
+                 * *****************************************************
+                 */
+                editConversionForm.setWarningData(Global.EMPTY_STRING);
 
-				if (rm.isProfile())
-				{
-					/**
-					 * data60/data65 profil parametre de reference verticale en
-					 * premiere position
-					 **/
-					boolean verticProfilParamOk;
-					verticProfilParamOk =
-							checkProfilVerticalParameterIsInFirstPosition();
-					ok = ok && verticProfilParamOk;
-					/** data70/75 Medatlas( FAE 3228/7257 ) **/
+                if (rm.isProfile())
+                {
+                    /**
+                     * data60/data65 profil parametre de reference verticale en
+                     * premiere position
+                     **/
+                    boolean verticProfilParamOk;
+                    verticProfilParamOk =
+                            checkProfilVerticalParameterIsInFirstPosition();
+                    ok = ok && verticProfilParamOk;
+                    /** data70/75 Medatlas( FAE 3228/7257 ) **/
 
-					if (ok
-							&& Nemo.getInstance().getViewMain()
-									.getMyRulesManager().isConversionToMedatlas()
-							&& rm.getMyMesureType() == E_MesureType.BSSURF)
-					{
-						// data70 Si on a PRES dans le tableau, il faut qu'il
-						// soit en 1ère position
-						if (rm.getMyVerticalParametersList().getP_pressure() != Global.EMPTY_STRING)
-						{
-							boolean data70 =
-									getFirstParameterCode().equals(
-											rm.getMyVerticalParametersList()
-													.getP_pressure());
-							if (!data70)
-							{
-								Utils.messageErreurAppend(Messages.ViewLog_70
-										+ " (data70)"); //$NON-NLS-1$
-							}
-							ok = ok && data70;
-						}
-						// data75 Si on a DEPH en 1er, il faut TEMP et PSAL
-						// présents
-						else if (getFirstParameterCode()
-								.equals(
-										rm.getMyVerticalParametersList()
-												.getP_depthBSSurf()))
-						{
-							boolean data75 =
-									checkDepthAndSalinityAndTemperature();
-							if (!data75)
-							{
-								Utils.messageErreurAppend(Messages.ViewLog_75
-										+ " (data75)"); //$NON-NLS-1$
-							}
-							ok = ok && data75;
-						}
-					}
+                    if (ok
+                            && Nemo.getInstance().getViewMain()
+                                    .getMyRulesManager().isConversionToMedatlas()
+                            && rm.getMyMesureType() == E_MesureType.BSSURF)
+                    {
+                        // data70 Si on a PRES dans le tableau, il faut qu'il
+                        // soit en 1ère position
+                        if (rm.getMyVerticalParametersList().getP_pressure() != Global.EMPTY_STRING)
+                        {
+                            boolean data70 =
+                                    getFirstParameterCode().equals(
+                                            rm.getMyVerticalParametersList()
+                                                    .getP_pressure());
+                            if (!data70)
+                            {
+                                Utils.messageErreurAppend(Messages.ViewLog_70
+                                        + " (data70)"); //$NON-NLS-1$
+                            }
+                            ok = ok && data70;
+                        }
+                        // data75 Si on a DEPH en 1er, il faut TEMP et PSAL
+                        // présents
+                        else if (getFirstParameterCode()
+                                .equals(
+                                        rm.getMyVerticalParametersList()
+                                                .getP_depthBSSurf()))
+                        {
+                            boolean data75 =
+                                    checkDepthAndSalinityAndTemperature();
+                            if (!data75)
+                            {
+                                Utils.messageErreurAppend(Messages.ViewLog_75
+                                        + " (data75)"); //$NON-NLS-1$
+                            }
+                            ok = ok && data75;
+                        }
+                    }
                 }
                 else if (rm.isTrajectory() && rm.isConversionToODV())
-				{
-					/**
-					 * data80/data85 traj parametre de reference verticale en
-					 * premiere position
-					 **/
-					boolean verticTrajParamOk;
-					verticTrajParamOk =
-							checkTrajectoryVerticalParameterIsInFirstPosition();
-					ok = ok && verticTrajParamOk;
-				}
+                {
+                    /**
+                     * data80/data85 traj parametre de reference verticale en
+                     * premiere position
+                     **/
+                    boolean verticTrajParamOk;
+                    verticTrajParamOk =
+                            checkTrajectoryVerticalParameterIsInFirstPosition();
+                    ok = ok && verticTrajParamOk;
+                }
 
-				/**
-				 * ***************************************************** fin
-				 * tests sur params
-				 * *****************************************************
-				 */
-			}
-		}
+                /**
+                 * ***************************************************** 
+                 * fintests sur params
+                 * *****************************************************
+                 */
+            }
+        }
 
-		/**
+        /**
          * 
          */
-		if (ok)
-		{
-			// FAE 9656
-			// les données du model doivent etre presente.
-			// 10594: on a besoin que le formulaire soit valide pour lancer la
-			// conversion
-			editDataForm.setOkApresReset(true);
-			onSuccess();
+        if (ok)
+        {
+            // FAE 9656
+            // les données du model doivent etre presente.
+            // 10594: on a besoin que le formulaire soit valide pour lancer la
+            // conversion
+            editDataForm.setOkApresReset(true);
+            onSuccess();
         }
         else
-		{
-			editDataForm.initFromNewModel();
-			Nemo.getInstance().getViewMain().tabData
-					.setText(Messages.onglet_data_error);
-			Nemo.getInstance().getViewMain().setEtape(3);
-		}
+        {
+            editDataForm.initFromNewModel();
+            Nemo.getInstance().getViewMain().tabData
+                    .setText(Messages.onglet_data_error);
+            Nemo.getInstance().getViewMain().setEtape(3);
+        }
+        
 	}
 
 	@Override

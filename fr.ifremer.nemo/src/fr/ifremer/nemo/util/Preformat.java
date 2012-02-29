@@ -798,24 +798,40 @@ public class Preformat
             // Ajout des zeros apres
             if (_maxDecimale[i] > 0)
             {
-                if (_colonne[i].length() > 0)
+                
+                Double value = Double.NaN;
+                try
                 {
-                    if (_colonne[i].lastIndexOf(Global.POINT) < 0)
+                    value=Double.parseDouble(_colonne[i]);
+                    if (_colonne[i].length() > 0)
                     {
-                        _colonne[i] += Global.POINT;
-                    }
-                    for (int j = 0; j < _maxDecimale[i] - _nbDecimale[i]; j++)
+                        if (_colonne[i].lastIndexOf(Global.POINT) < 0)
+                        {
+                            _colonne[i] += Global.POINT;
+                        }
+                        for (int j = 0; j < _maxDecimale[i] - _nbDecimale[i]; j++)
+                        {
+                            _colonne[i] += Global.ZERO;
+                        }
+                    } else
                     {
-                        _colonne[i] += Global.ZERO;
-                    }
-				} else
-                {
-                    // on ajoute des espaces pour eviter le decalage
-                    for (int j = 0; j < _maxDecimale[i] + 1; j++)
-                    {
-                        _colonne[i] += Global.SPACE;
+                        // on ajoute des espaces pour eviter le decalage
+                        for (int j = 0; j < _maxDecimale[i] + 1; j++)
+                        {
+                            _colonne[i] += Global.SPACE;
+                        }
                     }
                 }
+                catch(NumberFormatException e)
+                {
+                 // Ajout des espaces apres pour les chaines
+                    while (_colonne[i].length() < _maxEntier[i] + _maxDecimale[i] + 1)
+                    {
+                        _colonne[i] += Global.SPACE;
+                    } 
+                }
+                
+                
             }
 
             // Ajout des espaces avant

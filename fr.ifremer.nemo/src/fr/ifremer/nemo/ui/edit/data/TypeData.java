@@ -32,6 +32,10 @@ public class TypeData extends Object
 	private String debutFlag, finFlag, testIn, testOut;
 
 	private Boolean sensor;
+	/**
+	 * Definie si la valeur du parametre est du texte ou non.
+	 */
+	private Boolean isText;
 
 	public static final String DEFAULT_CONVERT = "x*1"; //$NON-NLS-1$
 
@@ -65,6 +69,7 @@ public class TypeData extends Object
 		this.setEntryKeyP011(typeData.entryKeyP011);
 		this.setEntryTermAbbr(typeData.entryTermAbbr);
 		this.setIsP011(typeData.isP011);
+		this.setIsText(typeData.isText());
 	}
 
 	public TypeData(WSParameter wsParameter)
@@ -76,6 +81,7 @@ public class TypeData extends Object
 		setEntree(Global.EMPTY_STRING);
 		setSortie(wsParameter.getDefaultValue());
 		setConversion(DEFAULT_CONVERT);
+		this.setIsText(false);
 	}
 
 	public TypeData(ParameterModel parameterModel)
@@ -83,7 +89,9 @@ public class TypeData extends Object
 		Parameter parameter = parameterModel.getParameter();
 		LineFragment frag = parameterModel.getFragment();
 		LineFragment flag = parameterModel.getFlag();
-
+		setIsText(parameterModel.isText());
+		
+		
 		setEntryKey(parameter.getCode());
 		setEntryTerm(parameter.getFullName());
 
@@ -113,6 +121,7 @@ public class TypeData extends Object
 		setEntryKeyP011(parameter.getCodeP011());
 		setEntryTermP011(parameter.getNameP011());
 		setIsP011(parameter.isP011());
+		
 	}
 
 	public TypeData()
@@ -132,6 +141,7 @@ public class TypeData extends Object
 		this.setEntryKeyP011(Global.EMPTY_STRING);
 		this.setEntryTermAbbr(Global.EMPTY_STRING);
 		this.setIsP011(false);
+		this.setIsText(false);
 	}
 
 	public TypeData(CodeTableRecordType record)
@@ -152,6 +162,7 @@ public class TypeData extends Object
 		setSortie(Global.EMPTY_STRING);
 		setUnite(Global.EMPTY_STRING);
 		setConversion(DEFAULT_CONVERT);
+		setIsText(false);
 	}
 
 	public String getFormattedCodeAndName()
@@ -373,6 +384,17 @@ public class TypeData extends Object
 	{
 		this.isP011 = isP011;
 	}
+	
+	public boolean isText()
+    {
+        return isText;
+    }
+
+    public void setIsText(boolean isText)
+    {
+        this.isText = isText;
+    }
+	
 
 	// FAE 6542
 	public String getUniteCode()

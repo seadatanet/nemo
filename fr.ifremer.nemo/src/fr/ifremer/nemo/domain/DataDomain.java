@@ -125,7 +125,7 @@ public class DataDomain {
 			pModel.computeAddedParameterValue(currentStation, inputLine, currentDate);
 
 			String defaultValue = pModel.getParameter().getDefault();
-			String stringValue = pModel.getLineValue().getStringValue();
+			String stringValue = pModel.getLineValue().getValue();
 
 			// odvDataLine.append(Global.TAB);
 			if (!stringValue.equals(defaultValue))
@@ -175,7 +175,7 @@ public class DataDomain {
 		for (ParameterModel pModel : myParameterManager.getMedParameterModels()) {
 			pModel.computeAddedParameterValue(currentStation, inputLine, currentDate);
 
-			medatlasDataLine.append(pModel.getLineValue().getStringValue());
+			medatlasDataLine.append(pModel.getLineValue().getValue());
 			medatlasDataLine.append(Global.SPACE);
 		}
 

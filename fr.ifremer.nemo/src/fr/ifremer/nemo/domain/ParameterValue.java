@@ -16,13 +16,9 @@ public class ParameterValue {
 	/**
 	 * Valeur de la mesure
 	 */
-	protected Double _value;
+	protected String _value;
     
-    /**
-     *  
-     */
-    private String _stringValue;
-
+    
 	public ParameterValue() {
         initValues();
 	}
@@ -40,7 +36,6 @@ public class ParameterValue {
     public void release(){
         _qc = null;
         _value = null;
-        _stringValue = null;
     }
 
 	/**
@@ -70,7 +65,7 @@ public class ParameterValue {
 	 * @return float
 	 * @see ParameterValue#_value
 	 */
-	public Double getValue() {
+	public String getValue() {
 		return _value;
 	}
 
@@ -81,41 +76,21 @@ public class ParameterValue {
 	 *            new value for _value
 	 * @see ParameterValue#_value
 	 */
-	public void setValue(Double x) {
+	public void setValue(String x) {
 		_value = x;
 	}
 
-	/**
-	 * Write accessor (setter) for attribute _value
-	 * 
-	 * @param a_String
-	 *            new value for _value as String
-	 * @see ParameterValue#_value
-	 */
-	public void setValue(String a_String) {
-		try {
-			setValue(Double.parseDouble(a_String));
-		} catch (Exception e) {
-            e.printStackTrace();
-		}
-	}
 
     /**
      * Getter sur _stringValue.
      * @return the stringValue
      */
-    public String getStringValue()
+    @Override
+    public String toString()
     {
-        return _stringValue;
+        return _value;
     }
 
-    /**
-     * Setter sur _stringValue.
-     * @param stringValue the stringValue to set
-     */
-    public void setStringValue(String stringValue)
-    {
-        _stringValue = stringValue;
-    }
+
 
 }
