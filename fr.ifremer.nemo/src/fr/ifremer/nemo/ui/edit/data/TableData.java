@@ -82,7 +82,7 @@ public class TableData
      * la table contenant les parametres, affichée dans l'onglet data
      */
     private Table myTable;
-    
+
     /**
      * reference sur le panneau de choix des parametres
      */
@@ -100,7 +100,7 @@ public class TableData
      */
     private static String COL_IS_STRING = "COL_IS_STRING"; //$NON-NLS-1$
     private static String COL_CODE = "COL_CODE"; //$NON-NLS-1$
-    private static String COL_USERLABEL = "COL_USERLABEL";  //$NON-NLS-1$
+    private static String COL_USERLABEL = "COL_USERLABEL"; //$NON-NLS-1$
     private static String COL_UNIT = "COL_UNIT"; //$NON-NLS-1$
     private static String COL_CONVERSION = "COL_CONVERSION"; //$NON-NLS-1$
     private static String COL_TEST = "COL_TEST"; //$NON-NLS-1$
@@ -122,6 +122,26 @@ public class TableData
             COL_START_FLAG, COL_END_FLAG, COL_UNIT_CODE};
 
     /**
+     * Indexes for contextual menu items
+     */
+    int MENU_ITEM_SETVALUE = 0;
+    int MENU_ITEM_UPDATETEST = 1;
+    int MENU_ITEM_PARAMLIST = 2;
+    int MENU_ITEM_SELECTUNIT = 3;
+    int MENU_ITEM_SELECTFORMAT = 4;
+    int MENU_ITEM_UPTOTOPPARAM = 5;
+    int MENU_ITEM_UPPARAM = 6;
+    int MENU_ITEM_DOWNPARAM = 7;
+    int MENU_ITEM_DOWNTOBOTTOMPARAM = 8;
+    int MENU_ITEM_REMOVEPARAM = 9;
+    int MENU_ITEM_SETFLAG = 10;
+    int MENU_ITEM_DELATEFLAG = 11;
+    int MENU_ITEM_DELETEALLPARAMS = 12;
+    /*
+     * map key=menuItem / value=index in menu (can change depending to configuration)
+     */
+    HashMap<Integer, Integer> menuMap = new HashMap<Integer, Integer>();
+    /**
      * constructeur initialise automatiquement les typesWS
      */
     private final GroupVerticalParameters myGroupVerticalParameters;
@@ -137,12 +157,12 @@ public class TableData
     }
 
     /**
-	 * 
      * @return true if conversion is not ODV
      */
     private boolean isValueOutWritable()
     {
-		return !Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToODV();
+        return !Nemo.getInstance().getViewMain().getMyRulesManager()
+            .isConversionToODV();
     }
 
     private boolean isLabelWritable()
@@ -152,10 +172,11 @@ public class TableData
                 && !Nemo.getInstance().getViewMain().getMyRulesManager()
                         .isDataListTypeP091();
     }
-    
+
     private boolean isCheckBoxWritable()
     {
-        return !Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas();
+        return !Nemo.getInstance().getViewMain().getMyRulesManager()
+            .isConversionToMedatlas();
     }
 
     /**
@@ -172,8 +193,7 @@ public class TableData
 
         TableDataColumn col;
         columnsMap = new HashMap<Integer, TableDataColumn>();
-        
-        
+
         col =
             new TableDataColumn(COL_IS_STRING, colNbById.get(COL_IS_STRING),
                 Messages.table_label_is_string, 25, true,
@@ -306,7 +326,7 @@ public class TableData
      */
     public void creationTable()
     {
-        // TODO BGT test check ici
+
         myTable =
                 new Table(Nemo.getInstance().getViewMain().getEditDataForm()
                         .getCompositeData(), SWT.CHECK | SWT.FULL_SELECTION
@@ -492,13 +512,13 @@ public class TableData
         table.addListener(SWT.Selection, new Listener() {
             public void handleEvent(Event event)
             {
-               
+
                 if (event.detail == SWT.CHECK)
                 {
                     if (((TableItem) event.item).getChecked())
                 {
                     Utils.messageOK(Messages.edit_data_parameterIsText);
-                  
+
                     ((TableItem) event.item).setData(COL_CONVERSION,
                         ((TableItem) event.item).getText(colNbById
                             .get(COL_CONVERSION)));
@@ -518,7 +538,7 @@ public class TableData
                 else
                 {
                     Utils.messageOK(Messages.edit_data_parameterIsNumeric);
-                  
+
                     ((TableItem) event.item).setText(colNbById
                         .get(COL_CONVERSION), (String) ((TableItem) event.item)
                         .getData(COL_CONVERSION));
@@ -543,6 +563,15 @@ public class TableData
                 // clic 3e bouton (=clic droit): comportement par defaut
                 if (event.button == 3)
                 {
+                    Point pt = new Point(event.x, event.y);
+                    TableItem itemTmp = table.getItem(pt);
+                    table.getMenu()
+                        .getItem(menuMap.get(MENU_ITEM_SELECTFORMAT))
+                        .setEnabled(
+                            itemTmp.getChecked());
+                    table.getMenu().getItem(
+                        menuMap.get(MENU_ITEM_SELECTUNIT)).setEnabled(
+                            itemTmp.getChecked());
                     return;
                 }
 
@@ -682,10 +711,13 @@ public class TableData
          * *********************************************************************
          * ******* creation du menu
          */
-        Menu menu = new Menu(table.getShell(), SWT.POP_UP);
 
+        Menu menu = new Menu(table.getShell(), SWT.POP_UP);
+        int index = 0;
         // ========= Injecter debut/fin
-        MenuItem itemInject = new MenuItem(menu, SWT.NONE);
+        MenuItem itemInject = new MenuItem(menu, SWT.NONE, index);
+        menuMap.put(MENU_ITEM_SETVALUE, index);
+        index++;
         itemInject.setText(Messages.menu_label_setValue);
         itemInject.addListener(SWT.Selection, new Listener()
         {
@@ -702,7 +734,9 @@ public class TableData
             }
         });
         // ========= Maj champ test
-        MenuItem itemMaj = new MenuItem(menu, SWT.NONE);
+        MenuItem itemMaj = new MenuItem(menu, SWT.NONE, index);
+        menuMap.put(MENU_ITEM_UPDATETEST, index);
+        index++;
         itemMaj.setText(Messages.menu_label_updateTest);
         itemMaj.addListener(SWT.Selection, new Listener()
         {
@@ -712,7 +746,9 @@ public class TableData
             }
         });
         // ========= Liste de paramètres
-        MenuItem itemList = new MenuItem(menu, SWT.NONE);
+        MenuItem itemList = new MenuItem(menu, SWT.NONE, index);
+        menuMap.put(MENU_ITEM_PARAMLIST, index);
+        index++;
         itemList.setText(Messages.menu_label_paramList);
         itemList.addListener(SWT.Selection, new Listener()
         {
@@ -735,7 +771,10 @@ public class TableData
         if (Nemo.getInstance().getViewMain().getMyRulesManager()
                 .getMyDataListType() == DataListTypeEnum.P011_VIA_P021)
         {
-            MenuItem itemAddP061Unit = new MenuItem(menu, SWT.NONE);
+            MenuItem itemAddP061Unit =
+                new MenuItem(menu, SWT.NONE, index);
+            menuMap.put(MENU_ITEM_SELECTUNIT, index);
+            index++;
             itemAddP061Unit.setText(Messages.menu_label_selectP061Unit);
             itemAddP061Unit.addListener(SWT.Selection, new Listener()
             {
@@ -751,7 +790,10 @@ public class TableData
         if (Nemo.getInstance().getViewMain().getMyRulesManager()
                 .getMyDataListType() == DataListTypeEnum.P011_VIA_P021)
         {
-            MenuItem selectFormat = new MenuItem(menu, SWT.NONE);
+            MenuItem selectFormat =
+                new MenuItem(menu, SWT.NONE, index);
+            menuMap.put(MENU_ITEM_SELECTFORMAT, index);
+            index++;
             selectFormat.setText(Messages.menu_label_selectFormat);
             selectFormat.addListener(SWT.Selection, new Listener()
             {
@@ -764,7 +806,10 @@ public class TableData
             });
         }
         // ========= Monter paramètre sélectionné tout en haut de la liste
-        MenuItem itemUpToTop = new MenuItem(menu, SWT.NONE);
+        MenuItem itemUpToTop =
+            new MenuItem(menu, SWT.NONE, index);
+        menuMap.put(MENU_ITEM_UPTOTOPPARAM, index);
+        index++;
         itemUpToTop.setText(Messages.menu_label_upToTopParam);
         itemUpToTop.addListener(SWT.Selection, new Listener()
         {
@@ -776,8 +821,11 @@ public class TableData
                 Utils.invalidEtapes();
             }
         });
+
         // ========= Monter paramètre sélectionné
-        MenuItem itemUp = new MenuItem(menu, SWT.NONE);
+        MenuItem itemUp = new MenuItem(menu, SWT.NONE, index);
+        menuMap.put(MENU_ITEM_UPPARAM, index);
+        index++;
         itemUp.setText(Messages.menu_label_upParam);
         itemUp.addListener(SWT.Selection, new Listener()
         {
@@ -790,7 +838,9 @@ public class TableData
             }
         });
         // ========= descendre paramètres sélectionné
-        MenuItem itemDown = new MenuItem(menu, SWT.NONE);
+        MenuItem itemDown = new MenuItem(menu, SWT.NONE, index);
+        menuMap.put(MENU_ITEM_DOWNPARAM, index);
+        index++;
         itemDown.setText(Messages.menu_label_downParam);
         itemDown.addListener(SWT.Selection, new Listener()
         {
@@ -802,7 +852,10 @@ public class TableData
             }
         });
         // ========= descendre paramètre sélectionné en bas de liste
-        MenuItem itemDownToBottom = new MenuItem(menu, SWT.NONE);
+        MenuItem itemDownToBottom =
+            new MenuItem(menu, SWT.NONE, index);
+        menuMap.put(MENU_ITEM_DOWNTOBOTTOMPARAM, index);
+        index++;
         itemDownToBottom.setText(Messages.menu_label_downToBottomParam);
         itemDownToBottom.addListener(SWT.Selection, new Listener()
         {
@@ -814,7 +867,9 @@ public class TableData
             }
         });
         // ========= supprimer paramètre sélectionné
-        MenuItem itemDel = new MenuItem(menu, SWT.NONE);
+        MenuItem itemDel = new MenuItem(menu, SWT.NONE, index);
+        menuMap.put(MENU_ITEM_REMOVEPARAM, index);
+        index++;
         itemDel.setText(Messages.menu_label_removeParam);
         itemDel.addListener(SWT.Selection, new Listener()
         {
@@ -826,10 +881,14 @@ public class TableData
         });
 
         // separateur
-        new MenuItem(menu, SWT.SEPARATOR);
+        new MenuItem(menu, SWT.SEPARATOR, index);
+        index++;
 
         // ========= Injecter flag
-        MenuItem itemInjectFlag = new MenuItem(menu, SWT.NONE);
+        MenuItem itemInjectFlag =
+            new MenuItem(menu, SWT.NONE, index);
+        menuMap.put(MENU_ITEM_SETFLAG, index);
+        index++;
         itemInjectFlag.setText(Messages.menu_label_setFlag);
         itemInjectFlag.addListener(SWT.Selection, new Listener()
         {
@@ -845,7 +904,10 @@ public class TableData
             }
         });
         // ========= supprimer flag
-        MenuItem itemRemoveFlag = new MenuItem(menu, SWT.NONE);
+        MenuItem itemRemoveFlag =
+            new MenuItem(menu, SWT.NONE, index);
+        menuMap.put(MENU_ITEM_DELATEFLAG, index);
+        index++;
         itemRemoveFlag.setText(Messages.menu_label_deleteFlag);
         itemRemoveFlag.addListener(SWT.Selection, new Listener()
         {
@@ -868,10 +930,14 @@ public class TableData
         });
 
         // separateur
-        new MenuItem(menu, SWT.SEPARATOR);
+        new MenuItem(menu, SWT.SEPARATOR, index);
+        index++;
 
         // ========= Suppression de tous les parametres à la fois
-        MenuItem deleteAll = new MenuItem(menu, SWT.NONE);
+        MenuItem deleteAll =
+            new MenuItem(menu, SWT.NONE, MENU_ITEM_DELETEALLPARAMS);
+        menuMap.put(MENU_ITEM_DELETEALLPARAMS, index);
+        index++;
         deleteAll.setText(Messages.menu_label_deleteAllParameters);
         deleteAll.addListener(SWT.Selection, new Listener()
         {
@@ -1350,8 +1416,9 @@ public class TableData
                         String defaultValue =
                             myTable.getItem(i).getText(
                                 colNbById.get(COL_VALUE_OUT));
-                        Float selectionValue =
-                            Float.valueOf(defaultValue.trim());
+                        Float selectionValue = (float) 0.0;
+// =
+// Float.valueOf(defaultValue.trim());
                         try
                         {
                             selectionValue = Float.valueOf(selection);
@@ -1545,8 +1612,6 @@ public class TableData
                     myTable.getItem(i).getText(colNbById.get(COL_UNIT_CODE)));
 
             types.get(i).setIsText(isSelected(i));
-            System.out.println(types.get(i).getEntryKey() + "set is text: "
-                    + isSelected(i));
 
         }
     }
